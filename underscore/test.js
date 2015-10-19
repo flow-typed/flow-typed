@@ -7,7 +7,9 @@ var _ = require('underscore');
 _.isEqual('a', 'b');
 _.isEqual({x: 1}, {y: 2});
 
-// Flow bug: Flow does not appear to check the number of parameters to declared functions.
+// Flow considers these compatible with isEqual(a: any, b: any).
+// Reasonable people disagree about whether these should be considered legal calls.
+// See https://github.com/splodingsocks/FlowTyped/pull/1#issuecomment-149345275
 _.isEqual(1);
 _.isEqual(1, 2, 3);
 

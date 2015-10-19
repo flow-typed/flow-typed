@@ -5,7 +5,7 @@ declare module "underscore" {
   declare function findWhere<T>(list: Array<T>, properties: {[key:string]: any}): ?T;
   declare function clone<T>(obj: T): T;
 
-  declare function isEqual<S, T>(a: S, b: T): boolean;
+  declare function isEqual(a: any, b: any): boolean;
   declare function range(a: number, b: number): Array<number>;
   declare function extend<S, T>(o1: S, o2: T): S & T;
 
