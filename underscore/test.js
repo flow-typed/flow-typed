@@ -17,7 +17,7 @@ _.isEqual(1, 2, 3);
  * _.any
  */
 _.any([1, 2, 3], x => x == 1);
-// $FlowError number cannot be compared to string.
+// $ExpectError number cannot be compared to string.
 _.any([1, 2, 3], x => x == 'a');
 
 
@@ -25,8 +25,8 @@ _.any([1, 2, 3], x => x == 'a');
  * _.find
  */
 _.find([1, 2, 3], x => x == 1);
-// $FlowError number. This type is incompatible with function type.
+// $ExpectError number. This type is incompatible with function type.
 _.find([1, 2, 3], 1);
-// $FlowError Callable signature not found in object literal
+// $ExpectError Callable signature not found in object literal
 _.find([1, 2, 3], {val: 1});
 

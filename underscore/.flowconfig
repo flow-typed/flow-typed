@@ -2,4 +2,4 @@
 underscore.js
 
 [options]
-suppress_comment=\\(.\\|\n\\)*\\$FlowError
+suppress_comment=\\(.\\|\n\\)*\\$ExpectError
