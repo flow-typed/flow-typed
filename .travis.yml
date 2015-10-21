@@ -1,0 +1,6 @@
+sudo: false  # Use container-based infrastructure
+language: node_js
+node_js:
+  - "0.12"
+
+script: npm run test
