@@ -131,7 +131,6 @@ declare module mori {
   declare function isReduceable(coll: any): boolean
   declare function isSeqable(coll: any): boolean
   declare function isReversible(coll: any): boolean
-  declare function isCollection(coll: any): boolean
   declare function isKeyword(x: any): boolean
   declare function isSymbol(x: any): boolean
 
