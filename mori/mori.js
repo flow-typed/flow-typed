@@ -163,10 +163,10 @@ declare module mori {
                    & (<K,K_,V>(coll: Keyed<K,any>, keys: Seqable<K&K_>) => ?V)
   declare function hasKey<K,V>(coll: Keyed<K,V>, key: K): boolean  // TODO: `hasKey` works on A[]
   declare function find<K,V>(coll: Associative<K,V>, key: K): ?Pair<K,V>
-  declare var nth: (<A>(coll: Indexed<A>, index: number) => ?A)
+  declare var nth: (<A>(coll: Indexed<A>, index: number) => A)
                  & (<K,V>(coll: Pair<K,V>, index: 0) => K)
                  & (<K,V>(coll: Pair<K,V>, index: 1) => V)
-  declare var last: (<A>(coll: Seqable<A>) => ?A)
+  declare var last: (<A>(coll: Seqable<A>) => A)
                   & (<K,V>(coll: Pair<K,V>) => V)
   declare function assocIn<K,V,S:Associative<K,any>>(coll: S, keys: Seqable<K>, val: V): S
   declare function updateIn<K,V,S:Associative<K,any>>(coll: S,
@@ -174,7 +174,7 @@ declare module mori {
                                                       f: (_: V) => V): S
   declare function count<A>(coll: Seqable<A>): number
   declare function isEmpty<A>(coll: Seqable<A>): boolean
-  declare function peek<A>(coll: Stack<A>): ?A
+  declare function peek<A>(coll: Stack<A>): A
   declare function pop<A,S:Stack<A>>(coll: S): S
   declare function zipmap<A,B>(xs: Seqable<A>, ys: Seqable<B>): Map<A,B>
   declare function reverse<A>(coll: Seqable<A>): Seq<A>
@@ -200,9 +200,9 @@ declare module mori {
 
   /* Sequences */
 
-  declare var first: (<A>(coll: Seqable<A>) => ?A)
+  declare var first: (<A>(coll: Seqable<A>) => A)
                    & (<K,V>(coll: Pair<K,V>) => K)
-  declare var second: (<A>(coll: Seqable<A>) => ?A)
+  declare var second: (<A>(coll: Seqable<A>) => A)
                     & (<K,V>(coll: Pair<K,V>) => V)
   declare function rest<A>(coll: Seqable<A>): Seq<A>
   declare function next<A>(coll: Seqable<A>): Seq<A>
