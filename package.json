@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/splodingsocks/FlowTyped#readme",
   "devDependencies": {
-    "flow-bin": "^0.17.0"
+    "flow-bin": "^0.22.0"
   }
 }
