@@ -552,8 +552,9 @@ declare module mori {
   declare var toClj: (<A,B>(x: A[]) => Vector<B>)
                    & (<A,B>(x: { [key: string]: A }) => Map<string,B>)
 
-  declare var toJs: (<A,B>(x: Sequential<A> | Set<A>) => B[])
+  declare var toJs: (<A,B>(x: Sequential<A> | Set<A> | Seq<A>) => B[])
                   & (<K,V,B>(x: Map<K,V>) => { [key: string]: B })
+                  & (<K,V>(x: Pair<K,V>) => [K,V])
 
   /* Configure */
 
