@@ -23,6 +23,7 @@ declare module mori {
    */
   declare class _Collection<A> {}
   declare class _Associative<K,V> {}
+  declare class _Keyed<K,V> {}
   declare class _Seq<A>        extends _Collection<A> {}
   declare class _Sequential<A> extends _Collection<A> {}
   declare class _Stack<A>      extends _Collection<A> {}
@@ -32,6 +33,7 @@ declare module mori {
    */
   declare type Collection<A>    = _Collection<A>
   declare type Associative<K,V> = _Associative<K,V>
+  declare type Keyed<K,V>       = _Keyed<K,V>
   declare type Seq<A>           = _Seq<A>
   declare type Sequential<A>    = _Sequential<A>
   declare type Stack<A>         = _Stack<A>
@@ -46,6 +48,7 @@ declare module mori {
 
   declare type Map<K,V> = Associative<K,V>
                         & Collection<Pair<K,V>>
+                        & Keyed<K,V>
 
   declare type Queue<A> = Collection<A>
                         & Seq<A>
@@ -53,9 +56,11 @@ declare module mori {
                         & Stack<A>
 
   declare type Set<A> = Collection<A>
+                      & Keyed<A,A>
 
   declare type Vector<A> = Associative<number,A>
                          & Collection<A>
+                         & Keyed<number,A>
                          & Sequential<A>
 
   /* Other Types */
@@ -148,13 +153,13 @@ declare module mori {
   declare function dissoc<K,V,S:Map<K,V>>(coll: S, ...keys: K[]): S
   declare function distinct<A,S:Indexed<A>>(coll: S): S
   declare function empty<A,S:Collection<A>>(coll: S): S
-  declare var get: (<K,V,V_>(coll: Associative<K,V>, key: K, notFound: V_) => V|V_)  // TODO: `get` works on A[]
-                 & (<K,V>(coll: Associative<K,V>, key: K) => ?V)
+  declare var get: (<K,V,V_>(coll: Keyed<K,V>, key: K, notFound: V_) => V|V_)  // TODO: `get` works on A[]
+                 & (<K,V>(coll: Keyed<K,V>, key: K) => ?V)
                  & (<K,V>(coll: Pair<K,V>, key: 0) => K)
                  & (<K,V>(coll: Pair<K,V>, key: 1) => V)
-  declare var getIn: (<K,K_,V,V_>(coll: Associative<K,any>, keys: Seqable<K&K_>, notFound: V_) => V|V_)
-                   & (<K,K_,V>(coll: Associative<K,any>, keys: Seqable<K&K_>) => ?V)
-  declare function hasKey<K,V>(coll: Associative<K,V> | Set<K>, key: K): boolean  // TODO: `hasKey` works on A[]
+  declare var getIn: (<K,K_,V,V_>(coll: Keyed<K,any>, keys: Seqable<K&K_>, notFound: V_) => V|V_)
+                   & (<K,K_,V>(coll: Keyed<K,any>, keys: Seqable<K&K_>) => ?V)
+  declare function hasKey<K,V>(coll: Keyed<K,V>, key: K): boolean  // TODO: `hasKey` works on A[]
   declare function find<K,V>(coll: Associative<K,V>, key: K): ?Pair<K,V>
   declare var nth: (<A>(coll: Indexed<A>, index: number) => ?A)
                  & (<K,V>(coll: Pair<K,V>, index: 0) => K)
