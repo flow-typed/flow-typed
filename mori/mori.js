@@ -458,32 +458,7 @@ declare module mori {
                                ...fs: ((_: T) => R)[]
                               ) => R)
 
-  declare var partial: (<T,R>(f: (...args: T[]) => R,
-                              $?: null
-                           ) => (...args: T[]) => R)
-                     & (<A,T,R>(f: (a: A, ...args: T[]) => R,
-                                a: A,
-                                $?: null
-                               ) => (...args: T[]) => R)
-                     & (<A,B,T,R>(f: (a: A, b: B, ...args: T[]) => R,
-                                  a: A,
-                                  b: B,
-                                  $?: null
-                                 ) => (...args: T[]) => R)
-                     & (<A,B,C,T,R>(f: (a: A, b: B, c: C, ...args: T[]) => R,
-                                    a: A,
-                                    b: B,
-                                    c: C,
-                                    $?: null
-                                   ) => (...args: T[]) => R)
-                     & (<A,B,C,D,T,R>(f: (a: A, b: B, c: C, d: D, ...args: T[]) => R,
-                                      a: A,
-                                      b: B,
-                                      c: C,
-                                      d: D,
-                                      $?: null
-                                     ) => (...args: T[]) => R)
-                     & (<A,B,C,D,E,T,R>(f: (a: A, b: B, c: C, d: D, e: E, ...args: T[]) => R,
+  declare var partial: (<A,B,C,D,E,T,R>(f: (a: A, b: B, c: C, d: D, e: E, ...args: T[]) => R,
                                         a: A,
                                         b: B,
                                         c: C,
@@ -491,6 +466,31 @@ declare module mori {
                                         e: E,
                                         $?: null
                                        ) => (...args: T[]) => R)
+                     & (<A,B,C,D,T,R>(f: (a: A, b: B, c: C, d: D, ...args: T[]) => R,
+                                      a: A,
+                                      b: B,
+                                      c: C,
+                                      d: D,
+                                      $?: null
+                     & (<A,B,C,T,R>(f: (a: A, b: B, c: C, ...args: T[]) => R,
+                                    a: A,
+                                    b: B,
+                                    c: C,
+                                    $?: null
+                                   ) => (...args: T[]) => R)
+                     & (<A,B,T,R>(f: (a: A, b: B, ...args: T[]) => R,
+                                  a: A,
+                                  b: B,
+                                  $?: null
+                                 ) => (...args: T[]) => R)
+                                     ) => (...args: T[]) => R)
+                     & (<A,T,R>(f: (a: A, ...args: T[]) => R,
+                                a: A,
+                                $?: null
+                               ) => (...args: T[]) => R)
+                     & (<T,R>(f: (...args: T[]) => R,
+                              $?: null
+                           ) => (...args: T[]) => R)
 
   declare var curry: (<A,R>( f: (a: A) => R
                            , $?: null
