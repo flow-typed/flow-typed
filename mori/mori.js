@@ -86,6 +86,8 @@ declare module mori {
   declare class Keyword {}
   declare class Symbol {}
 
+  declare type booleany = any
+
   /* Collection Constructors */
 
   declare function list<A>(...args: A[]): List<A>
@@ -280,8 +282,8 @@ declare module mori {
                              ...colls: Seqable<T>[]
                              ) => Seq<R>)
 
-  declare function filter<A>(pred: (value: A) => boolean, coll: Seqable<A>): Seq<A>
-  declare function remove<A>(pred: (value: A) => boolean, coll: Seqable<A>): Seq<A>
+  declare function filter<A>(pred: (value: A) => booleany, coll: Seqable<A>): Seq<A>
+  declare function remove<A>(pred: (value: A) => booleany, coll: Seqable<A>): Seq<A>
   declare var reduce: (<A,R>(f: (accum: R, value: A) => R,
                                  initial: R,
                                  coll: Seqable<A>
@@ -294,11 +296,11 @@ declare module mori {
                                    coll: Associative<K,V>
                                   ): R
   declare function take<A>(n: number, coll: Seqable<A>): Seq<A>
-  declare function takeWhile<A>(f: (value: A) => boolean, coll: Seqable<A>): Seq<A>
+  declare function takeWhile<A>(f: (value: A) => booleany, coll: Seqable<A>): Seq<A>
   declare function drop<A>(n: number, coll: Seqable<A>): Seq<A>
-  declare function dropWhile<A>(f: (value: A) => boolean, coll: Seqable<A>): Seq<A>
-  declare function some<A>(f: (value: A) => boolean, coll: Seqable<A>): ?A
-  declare function every<A>(f: (value: A) => boolean, coll: Seqable<A>): boolean
+  declare function dropWhile<A>(f: (value: A) => booleany, coll: Seqable<A>): Seq<A>
+  declare function some<A>(f: (value: A) => booleany, coll: Seqable<A>): ?A
+  declare function every<A>(f: (value: A) => booleany, coll: Seqable<A>): boolean
   declare var sort: (<A>(cmp: (x: A, y: A) => number, coll: Seqable<A>) => Seq<A>)
                   & (<A>(coll: Seqable<A>) => Seq<A>)
   declare var sortBy: (<A,B>(keyfn: (x: A, y: A) => B, cmp: (x: B, y: B) => B, coll: Seqable<A>) => Seq<A>)
