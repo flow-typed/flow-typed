@@ -98,4 +98,3 @@ _.find([1, 2, 3], x => x == 1);
 _.find([1, 2, 3], 1);
 // $ExpectError Callable signature not found in object literal
 _.find([1, 2, 3], {val: 1});
-

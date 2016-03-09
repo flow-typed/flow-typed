@@ -1,9 +1,8 @@
-[ignore]
-.*/flow-bin/.*
-.*[^e].json
-
 [libs]
-kefir.js
+underscore-v1.js
+
+[include]
+../
 
 [options]
 suppress_comment=\\(.\\|\n\\)*\\$ExpectError

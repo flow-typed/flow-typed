@@ -1,5 +1,8 @@
 [libs]
-underscore.js
+verbal-expressions-v0.js
+
+[include]
+../
 
 [options]
 suppress_comment=\\(.\\|\n\\)*\\$ExpectError

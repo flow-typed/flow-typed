@@ -1,5 +1,6 @@
 type Pattern = string | number | VerEx;
 type Modifiers = 'g' | 'm' | 'i' | 'u' | 'y';
+class RegExp {};
 
 declare class VerEx extends RegExp {
   // INTERNAL:
@@ -34,14 +35,14 @@ declare class VerEx extends RegExp {
   withAnyCase(enable?: boolean): VerEx;
   stopAtFirst(enable?: boolean): VerEx;
   searchOneLine(enable?: boolean): VerEx;
-  repeatPrevious(..args: Array<string | number>): VerEx;
+  repeatPrevious(...args: Array<string | number>): VerEx;
   oneOrMore(): VerEx;
   multiple(value: Pattern): VerEx;
   or(value: Pattern): VerEx;
   begincapture(): VerEx;
   endCapture(): VerEx;
 
-  toRegExp(): RexExp;
+  // toRegExp(): RexExp;
   replace(source: any, value: any): string;
 }
 

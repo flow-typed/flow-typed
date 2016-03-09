@@ -3,7 +3,10 @@
 .*[^e].json
 
 [libs]
-mori.js
+kefir-v3.js
+
+[include]
+../
 
 [options]
 suppress_comment=\\(.\\|\n\\)*\\$ExpectError
