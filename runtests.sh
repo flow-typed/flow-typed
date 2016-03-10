@@ -2,10 +2,12 @@
 set -o errexit
 
 for config in $(find . -name '.flowconfig'); do
-  echo $config
   dir=$(dirname $config)
-  echo "Checking $dir..."
-  flow check $dir
+  if [ "$dir" != "./npm" ]; then
+    echo $config
+    echo "Checking $dir..."
+    flow check $dir
+  fi
 done
 
 echo "All tests passed"

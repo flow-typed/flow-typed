@@ -3,4 +3,4 @@ language: node_js
 node_js:
   - "0.12"
 
-script: npm run test
+script: ./runtests.sh; cd npm && npm install && npm run build && node dist/cli.js validate-defs
