@@ -331,7 +331,7 @@ declare module mori {
                        & (<A>(n: number, step: number, coll: Seqable<A>) => Seq<Seq<A>>)
                        & (<A>(n: number, coll: Seqable<A>) => Seq<Seq<A>>)
   declare function partitionBy<K,A>(f: (value: A) => K, coll: Seqable<A>): Seq<Seq<A>>
-  declare function groupBy<K,A>(f: (value: A) => K, coll: Seqable<A>): Map<K,Seq<A>>
+  declare function groupBy<K,A>(f: (value: A) => K, coll: Seqable<A>): Map<K,Vector<A>>
   declare function lazySeq<A>(thunk: () => Seqable<A>): Seq<A>
 
   /* Helpers */
