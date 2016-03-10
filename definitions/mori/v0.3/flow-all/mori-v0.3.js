@@ -290,8 +290,11 @@ declare module mori {
                              ...colls: Seqable<T>[]
                              ) => Seq<R>)
 
+  declare function mapIndexed<A,R>(f: (idx: number, a: A) => R, coll: Seqable<A>): Seq<R>
   declare function filter<A>(pred: (value: A) => booleany, coll: Seqable<A>): Seq<A>
   declare function remove<A>(pred: (value: A) => booleany, coll: Seqable<A>): Seq<A>
+  declare function keep<A,R>(f: (a: A) => ?R, coll: Seqable<A>): Seq<R>
+  declare function keepIndexed<A,R>(f: (idx: number, a: A) => ?R, coll: Seqable<A>): Seq<R>
   declare var reduce: (<A,R>(f: (accum: R, value: A) => R,
                                  initial: R,
                                  coll: Seqable<A>
