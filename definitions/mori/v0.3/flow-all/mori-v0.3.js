@@ -216,7 +216,7 @@ declare module mori {
   declare function next<A>(coll: Seqable<A>): Seq<A>
   declare function seq<A>(coll: Seqable<A>): Seq<A>
   declare function cons<A,B>(value: A, coll: Seqable<B>): List<A|B>
-  declare function concat<A,B>(coll: Seqable<A>, ...colls: Seqable<B>[]): Seq<A|B>
+  declare function concat<A,B>(coll: Seqable<A>, ...colls: (?Seqable<B>)[]): Seq<A|B>
   declare function flatten<A>(coll: Seqable<any>): Seq<A>
   declare var intoArray: (<A>(coll: Seqable<A>) => A[])
                        & (<K,V>(coll: Pair<K,V>) => [K,V])
