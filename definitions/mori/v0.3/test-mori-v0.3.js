@@ -97,9 +97,9 @@ describe("type-checking", function () {
   });
 
   it("partially applies functions", function () {
-    var v/*: Vector<number> */ = mori.vector(1,2,3);
+    var v = mori.vector(1,2,3);
     var f = mori.partial(mori.conj, v);
-    var v_/*: Vector<number> */ = f(4);
+    var v_ = f(4);
 
     // $ExpectError intersection: type application of polymorphic type: type `Associative` & type application of polymorphic type: type `Collection` & type application of polymorphic type: type `Keyed` & type application of polymorphic type: type `Sequential`. This type is incompatible with declare type Vector<A> = Associative<number,A>
     var v__/*: Vector<string> */ = f(4);
