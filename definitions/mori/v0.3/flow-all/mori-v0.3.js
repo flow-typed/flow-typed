@@ -120,8 +120,8 @@ declare module mori {
                                    , key3?: K, val3?: V
                                    , key4?: K, val4?: V
                                    , ...keysAndValues: (K | V)[]): Map<K,V>
-  declare function set<A>(values: Seqable<A>): Set<A>
-  declare function sortedSet<A>(values: Seqable<A>): Set<A>
+  declare function set<A>(values?: Seqable<A>): Set<A>
+  declare function sortedSet<A>(values?: Seqable<A>): Set<A>
   declare function sortedSetBy<A>(cmp: (x: A, b: A) => number, ...values: A[]): Set<A>
   declare function range(start?: number, end?: number, step?: number): Seq<number>
   declare function queue<A>(...args: A[]): Queue<A>
