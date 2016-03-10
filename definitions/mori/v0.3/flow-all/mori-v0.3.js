@@ -314,8 +314,8 @@ declare module mori {
   declare function every<A>(f: (value: A) => booleany, coll: Seqable<A>): boolean
   declare var sort: (<A>(cmp: (x: A, y: A) => number, coll: Seqable<A>) => Seq<A>)
                   & (<A>(coll: Seqable<A>) => Seq<A>)
-  declare var sortBy: (<A,B>(keyfn: (x: A, y: A) => B, cmp: (x: B, y: B) => B, coll: Seqable<A>) => Seq<A>)
-                    & (<A,B>(keyfn: (x: A, y: A) => B, coll: Seqable<A>) => Seq<A>)
+  declare var sortBy: (<A,B>(keyfn: (x: A, y: A) => B, coll: Seqable<A>) => Seq<A>)
+                    & (<A,B>(keyfn: (x: A, y: A) => B, cmp: (x: B, y: B) => B, coll: Seqable<A>) => Seq<A>)
   declare function interpose<A,B>(x: B, coll: Seqable<A>): Seq<A|B>
   declare function interleave<A,B,C,D>(colla: Seqable<A>,
                                        collb: Seqable<B>,
