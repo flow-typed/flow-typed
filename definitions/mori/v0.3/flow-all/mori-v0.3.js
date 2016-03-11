@@ -16,52 +16,60 @@ declare module mori {
   /* Collection Types */
 
   /*
-   * Declarations for classes that do not really exist.
-   * We need types to describe the capabilities of different collections.
-   * Class declarations happen to be a convenient way to make up types that are
-   * unique to this module.
+   * The properties described by these types do not actually exist.
+   * They are a convenience that allows us to describe the capabilities of each
+   * collection type.
    */
-  declare class _Collection<A> {}
-  declare class _Associative<K,V> {}
-  declare class _Keyed<K,V> {}
-  declare class _Seq<A>        extends _Collection<A> {}
-  declare class _Sequential<A> extends _Collection<A> {}
-  declare class _Stack<A>      extends _Collection<A> {}
+  declare type Collection<A>    = { @@ICollection: A }
+  declare type Associative<K,V> = { @@IAssociative: [K,V] }
+  declare type Keyed<K,V>       = { @@keyed: [K,V] }
+  declare type Sequential<A>    = { @@ISequential: A }
+  declare type Stack<A>         = { @@IStack: A }
 
-  /*
-   * Export types, but do not export non-existent class implementations.
-   */
-  declare type Collection<A>    = _Collection<A>
-  declare type Associative<K,V> = _Associative<K,V>
-  declare type Keyed<K,V>       = _Keyed<K,V>
-  declare type Seq<A>           = _Seq<A>
-  declare type Sequential<A>    = _Sequential<A>
-  declare type Stack<A>         = _Stack<A>
+  declare type Indexed<A> = Iterable<A>
+  declare type Seqable<A> = Iterable<A>
 
-  declare type Indexed<A> = Sequential<A> | Iterable<A>
-  declare type Seqable<A> = Collection<A> | Iterable<A>
+  declare type Seq<A> = {
+    @@iterator(): Iterator<A>,
+    @@ICollection: A,
+    @@ISeq: A,
+  }
 
-  declare type List<A> = Collection<A>
-                       & Seq<A>
-                       & Sequential<A>
-                       & Stack<A>
+  declare type List<A> = {
+    @@iterator(): Iterator<A>,
+    @@ICollection: A,
+    @@ISeq: A,
+    @@ISequential: A,
+    @@IStack: A,
+  }
 
-  declare type Map<K,V> = Associative<K,V>
-                        & Collection<Pair<K,V>>
-                        & Keyed<K,V>
+  declare type Map<K,V> = {
+    @@iterator(): Iterator<Pair<K,V>>,
+    @@ICollection: Pair<K,V>,
+    @@IAssociative: [K,V],
+    @@keyed: [K,V],
+  }
 
-  declare type Queue<A> = Collection<A>
-                        & Seq<A>
-                        & Sequential<A>
-                        & Stack<A>
+  declare type Queue<A> = {
+    @@iterator(): Iterator<A>,
+    @@ICollection: A,
+    @@ISequential: A,
+    @@IStack: A,
+  }
 
-  declare type Set<A> = Collection<A>
-                      & Keyed<A,A>
+  declare type Set<A> = {
+    @@iterator(): Iterator<A>,
+    @@ICollection: A,
+    @@keyed: [A,A],
+  }
 
-  declare type Vector<A> = Associative<number,A>
-                         & Collection<A>
-                         & Keyed<number,A>
-                         & Sequential<A>
+  declare type Vector<A> = {
+    @@iterator(): Iterator<A>,
+    @@ICollection: A,
+    @@IAssociative: [number,A],
+    @@keyed: [number,A],
+    @@ISequential: A,
+  }
 
   /* Other Types */
 
@@ -112,8 +120,8 @@ declare module mori {
                                    , key3?: K, val3?: V
                                    , key4?: K, val4?: V
                                    , ...keysAndValues: (K | V)[]): Map<K,V>
-  declare function set<A>(values: Seqable<A>): Set<A>
-  declare function sortedSet<A>(values: Seqable<A>): Set<A>
+  declare function set<A>(values?: Seqable<A>): Set<A>
+  declare function sortedSet<A>(values?: Seqable<A>): Set<A>
   declare function sortedSetBy<A>(cmp: (x: A, b: A) => number, ...values: A[]): Set<A>
   declare function range(start?: number, end?: number, step?: number): Seq<number>
   declare function queue<A>(...args: A[]): Queue<A>
@@ -208,7 +216,7 @@ declare module mori {
   declare function next<A>(coll: Seqable<A>): Seq<A>
   declare function seq<A>(coll: Seqable<A>): Seq<A>
   declare function cons<A,B>(value: A, coll: Seqable<B>): List<A|B>
-  declare function concat<A,B>(coll: Seqable<A>, ...colls: Seqable<B>[]): Seq<A|B>
+  declare function concat<A,B>(coll: Seqable<A>, ...colls: (?Seqable<B>)[]): Seq<A|B>
   declare function flatten<A>(coll: Seqable<any>): Seq<A>
   declare var intoArray: (<A>(coll: Seqable<A>) => A[])
                        & (<K,V>(coll: Pair<K,V>) => [K,V])
@@ -282,8 +290,11 @@ declare module mori {
                              ...colls: Seqable<T>[]
                              ) => Seq<R>)
 
+  declare function mapIndexed<A,R>(f: (idx: number, a: A) => R, coll: Seqable<A>): Seq<R>
   declare function filter<A>(pred: (value: A) => booleany, coll: Seqable<A>): Seq<A>
   declare function remove<A>(pred: (value: A) => booleany, coll: Seqable<A>): Seq<A>
+  declare function keep<A,R>(f: (a: A) => ?R, coll: Seqable<A>): Seq<R>
+  declare function keepIndexed<A,R>(f: (idx: number, a: A) => ?R, coll: Seqable<A>): Seq<R>
   declare var reduce: (<A,R>(f: (accum: R, value: A) => R,
                                  initial: R,
                                  coll: Seqable<A>
@@ -303,8 +314,8 @@ declare module mori {
   declare function every<A>(f: (value: A) => booleany, coll: Seqable<A>): boolean
   declare var sort: (<A>(cmp: (x: A, y: A) => number, coll: Seqable<A>) => Seq<A>)
                   & (<A>(coll: Seqable<A>) => Seq<A>)
-  declare var sortBy: (<A,B>(keyfn: (x: A, y: A) => B, cmp: (x: B, y: B) => B, coll: Seqable<A>) => Seq<A>)
-                    & (<A,B>(keyfn: (x: A, y: A) => B, coll: Seqable<A>) => Seq<A>)
+  declare var sortBy: (<A,B>(keyfn: (x: A, y: A) => B, coll: Seqable<A>) => Seq<A>)
+                    & (<A,B>(keyfn: (x: A, y: A) => B, cmp: (x: B, y: B) => B, coll: Seqable<A>) => Seq<A>)
   declare function interpose<A,B>(x: B, coll: Seqable<A>): Seq<A|B>
   declare function interleave<A,B,C,D>(colla: Seqable<A>,
                                        collb: Seqable<B>,
@@ -320,7 +331,7 @@ declare module mori {
                        & (<A>(n: number, step: number, coll: Seqable<A>) => Seq<Seq<A>>)
                        & (<A>(n: number, coll: Seqable<A>) => Seq<Seq<A>>)
   declare function partitionBy<K,A>(f: (value: A) => K, coll: Seqable<A>): Seq<Seq<A>>
-  declare function groupBy<K,A>(f: (value: A) => K, coll: Seqable<A>): Map<K,Seq<A>>
+  declare function groupBy<K,A>(f: (value: A) => K, coll: Seqable<A>): Map<K,Vector<A>>
   declare function lazySeq<A>(thunk: () => Seqable<A>): Seq<A>
 
   /* Helpers */
