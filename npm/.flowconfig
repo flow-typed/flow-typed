@@ -1,5 +1,7 @@
 [ignore]
 .*/node_modules/y18n/test/locales/bad-locale\.json
+.*/test-dir/.*
+.*/flow-bins/.*
 
 [options]
 experimental.const_params=true

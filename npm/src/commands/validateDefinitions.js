@@ -1,32 +1,36 @@
 // @flow
 
-import typeof * as yargs from "yargs";
+import {fs, path} from "../lib/node.js";
 
 import {
+  DEFINITIONS_DIR,
   getPkgNames,
   getFlowVersionsForPkgVersion,
   getPkgVersions,
+  isTestFileName,
 } from "../lib/definitions.js";
+
+const P = Promise;
 
 const VERSION_PART_IDX_TO_NAME = ['major', 'minor', 'patch'];
 function validatePkgVersion(
   givenVer: string,
   errors = [],
-  offset = 0
+  prefix = ""
 ): Array<string> {
   let ver = givenVer;
 
   // Package version strings start with a 'v'
-  if (ver.substr(offset, 1) !== 'v') {
-    errors.push("'" + givenVer + "': Version must start with a 'v'!");
+  if (ver.substr(0, 1) !== 'v') {
+    errors.push("'" + prefix + givenVer + "': Version must start with a 'v'!");
     ver = 'v' + ver;
   }
 
   // Package versions must always have 3 parts, separated by a '.'
-  const parts = ver.substr(offset + 1).split(/\./g);
+  const parts = ver.substr(1).split(/\./g);
   if (parts.length !== 3) {
     errors.push(
-      "'" + givenVer + "': Versions must be formatted as " +
+      "'" + prefix + givenVer + "': Versions must be formatted as " +
       "'v<MAJOR>.<MINOR>.<PATCH>'. (Use 'x' as a wildcard where necessary)"
     );
     for (let i = 0; i < 3 - parts.length; i++) {
@@ -40,51 +44,104 @@ function validatePkgVersion(
     if (part !== 'x' && (String(parseInt(part, 10)) !== part)) {
       const partName = VERSION_PART_IDX_TO_NAME[idx];
       errors.push(
-        "'" + givenVer + "': '" + part + "' is not a valid " + partName +
-        " version!"
+        "'" + prefix + givenVer + "': '" + part + "' is not a valid " +
+        partName + " version!"
       );
     }
   });
 
+  // The 'major' portion of a version cannot be a wildcard
+  if (parts[0] === 'x') {
+    errors.push(
+      "'" + givenVer + "': The 'major' part of a version cannot be 'x'!"
+    );
+  }
+
   return errors;
-}
-
-function validateFlowVersion(givenVer: string, errors = []): Array<string> {
-  let ver = givenVer;
-
-  // Flow version strings start with a 'flow-'
-  if (ver.substr(0, 'flow-'.length) !== 'flow-') {
-    errors.push("'" + givenVer + "': Flow version must start with a 'flow-'!");
-    ver = 'flow-' + ver;
-  }
-
-  const flowVer = ver.substr('flow-'.length);
-  if (flowVer === 'all') {
-    return errors;
-  } else {
-    return validatePkgVersion(ver, errors, 'flow-'.length);
-  }
 }
 
 async function validateDefinitions(): Promise<Map<string, Array<string>>> {
   const pkgNames = await getPkgNames();
-  const pkgNameVersions = await Promise.all(pkgNames.map(getPkgVersions));
+  const pkgNameVersions = await P.all(pkgNames.map(getPkgVersions));
 
   const results = new Map();
-  await Promise.all(pkgNameVersions.map(async (pkgVersions, idx) => {
+  await P.all(pkgNameVersions.map(async (pkgVersions, idx) => {
     const pkgName = pkgNames[idx];
-    await Promise.all(pkgVersions.map(async (pkgVer, idx) => {
+    await P.all(pkgVersions.map(async (pkgVer, idx) => {
       const pkgNameVer = pkgName + "@" + pkgVer;
       let errs = results.get(pkgNameVer) || [];
 
       // Validate version string
       validatePkgVersion(pkgVer).forEach(err => errs.push(err));
 
+      const pkgVerDir = path.join(DEFINITIONS_DIR, pkgName, pkgVer);
+      const pkgVerDirItems = await fs.readdir(pkgVerDir);
+      const pkgVerDirItemStats = await P.all(pkgVerDirItems.map(
+        itemName => fs.stat(path.join(pkgVerDir, itemName))
+      ));
+      pkgVerDirItems.forEach((itemName, idx) => {
+        const itemStats = pkgVerDirItemStats[idx];
+        if (isTestFileName(itemName, itemStats)) {
+          return;
+        }
+
+        const itemPath = path.join(pkgName, pkgVer, itemName);
+        if (itemStats.isFile()) {
+          errs.push(
+            "'" + itemPath + "': Only 'test-*' files are permitted in this " +
+            "directory!"
+          );
+        }
+      });
+
       // Validate flow-version strings
       const flowVersions = await getFlowVersionsForPkgVersion(pkgName, pkgVer);
-      flowVersions.forEach((flowVersion) => {
-        validateFlowVersion(flowVersion).forEach((err) => errs.push(err));
-      });
+      await P.all(flowVersions.map(async (flowVer) => {
+        if (flowVer !== "all") {
+          const firstTwo = flowVer.substr(0, 2);
+          if (flowVer[0] === "=") {
+            errs.push(
+              "flow-" + flowVer + ": It is not necessary to include a '=' to " +
+              "specify an exact Flow version."
+            );
+          } else if (firstTwo === "<=" || firstTwo === ">=") {
+            validatePkgVersion(flowVer.substr(2), errs, "flow-");
+          } else if (flowVer[0] === "<" || flowVer[0] === ">") {
+            validatePkgVersion(flowVer.substr(1), errs, "flow-");
+          } else {
+            validatePkgVersion(flowVer, errs);
+          }
+        }
+
+        const pkgVerFlowDir = path.join(pkgVerDir, 'flow-' + flowVer);
+        const pkgVerFlowDirItems = await fs.readdir(pkgVerFlowDir);
+        const pkgVerFlowDirItemStats = await P.all(pkgVerFlowDirItems.map(
+          itemName => fs.stat(path.join(pkgVerFlowDir, itemName))
+        ));
+        pkgVerFlowDirItems.forEach((itemName, idx) => {
+          const itemStats = pkgVerFlowDirItemStats[idx];
+          if (isTestFileName(itemName, itemStats)) {
+            return;
+          }
+
+          const libDefFileName = pkgName + '-' + pkgVer + '.js';
+          if (itemStats.isFile()) {
+            if (itemName === '.flowconfig') {
+              return;
+            }
+
+            if (itemName === libDefFileName) {
+              return;
+            }
+          }
+
+          const itemPath = path.join(pkgName, pkgVer, flowVer, itemName);
+          errs.push(
+            "'" + itemPath + "': Only .flowconfig, " + libDefFileName + ", " +
+            "or 'test-*' files are permitted in this directory!"
+          );
+        });
+      }));
 
       if (errs.length > 0) {
         results.set(pkgNameVer, errs);
@@ -97,17 +154,19 @@ async function validateDefinitions(): Promise<Map<string, Array<string>>> {
 export const name = "validate-defs";
 export const description = "Validates the structure of the definitions in the repo.";
 export const options = {};
-export async function run(args: {}): Promise<void> {
+export async function run(args: {}): Promise<number> {
   const validationErrors = await validateDefinitions();
+  console.log(" ");
+
   validationErrors.forEach((errors, pkgNameVersion) => {
     console.log("Found some problems with %s:", pkgNameVersion);
     errors.forEach((err) => console.log("  * " + err));
     console.log("");
   });
 
-  if (validationErrors.size > 0) {
-    process.exit(1);
-  } else {
-    console.log("Everything looks good!");
+  if (validationErrors.size === 0) {
+    console.log("/definitions directory looks valid!");
+    return 0;
   }
+  return 1;
 };

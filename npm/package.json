@@ -33,6 +33,9 @@
     "flow-bin": "^0.22.1"
   },
   "dependencies": {
+    "github": "^0.2.4",
+    "request": "^2.69.0",
+    "semver": "^5.1.0",
     "yargs": "^4.2.0"
   }
 }

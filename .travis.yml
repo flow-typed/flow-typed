@@ -1,6 +1,12 @@
-sudo: false  # Use container-based infrastructure
+sudo: false
 language: node_js
 node_js:
-  - "0.12"
-
-script: ./runtests.sh; cd npm && npm install && npm run build && node dist/cli.js validate-defs
+- '5.1'
+addons:
+  apt:
+    packages:
+    - unzip
+script: cd npm && npm install && npm run build && node dist/cli.js validate-defs && node dist/cli.js run-tests
+cache:
+  directories:
+  - npm/flow-bins
