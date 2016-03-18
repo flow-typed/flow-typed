@@ -5,69 +5,95 @@ import {fs, https, path} from "./node.js";
 export const DEFINITIONS_DIR = path.join(__dirname, '..', '..', '..', 'definitions');
 const P = Promise;
 
-async function getPkgDir(pkgName: string): Promise<string> {
-  const pkgDir = path.join(DEFINITIONS_DIR, pkgName);
-  if (!(await fs.exists(pkgDir))) {
+export type VersionedName = {
+  name: string,
+  version: Version,
+  path: string,
+};
+
+type VersionRange = ">=" | "<=";
+export type Version = {
+  range?: VersionRange,
+  major: number | "x",
+  minor: number | "x",
+  patch: number | "x",
+};
+
+function _validateVersionPartStr(part, prefix, partName): number | "x" {
+  if (part === "x") {
+    return part;
+  }
+  const num = parseInt(part, 10);
+  if (String(num) !== part) {
     throw new Error(
-      "Package(" + pkgName + ") does not exist in the definitions library!"
+      `'${prefix}': Invalid ${partName} number. Expected 'x' or a number.`
     );
   }
-  return pkgDir;
+  return num;
 }
 
-export async function getPkgNames(): Promise<Array<string>> {
-  return fs.readdir(DEFINITIONS_DIR);
-};
-
-export async function getPkgVersions(
-  pkgName: string
-): Promise<Array<string>> {
-  const pkgDir = await getPkgDir(pkgName);
-  const dirItems = await fs.readdir(pkgDir);
-  const dirItemStats = await P.all(
-    dirItems.map(async (item) => fs.stat(path.join(pkgDir, item)))
-  );
-
-  return dirItems.filter((item, idx) => dirItemStats[idx].isDirectory());
-};
-
-export async function getFlowVersionsForPkgVersion(
-  pkgName: string,
-  pkgVer: string
-): Promise<Array<string>> {
-  const pkgDir = await getPkgDir(pkgName);
-  const pkgVerDir = path.join(pkgDir, pkgVer);
-  if (!(await fs.exists(pkgVerDir))) {
+export const VERSIONED_NAME_RE = /^(.*)-([><]?=)?v([0-9]*|x)\.([0-9]*|x)\.([0-9]*|x)$/;
+function dirNameToVersionedName(dirPath): VersionedName {
+  const dirName = path.basename(dirPath);
+  const dirNameParts = dirName.match(VERSIONED_NAME_RE);
+  if (dirNameParts == null) {
     throw new Error(
-      "'" + pkgName + "@" + pkgVer + "' does not exist in the " +
-      "definitions library!"
+      `'${dirName}' has a malformed name. Expected a name formatted as ` +
+      "`<PKGNAME>-v<MAJOR>.<MINOR>.<PATCH>`."
+    );
+  }
+  let [_, name, range, major, minor, patch] = dirNameParts;
+
+  if (range != null && range !== ">=" && range !== "<=") {
+    throw new Error(
+      `'${dirName}': Invalid package version range: ${range}`
     );
   }
 
-  const dirItems = await fs.readdir(pkgVerDir);
-  const dirItemStats = await P.all(
-    dirItems.map(async (item) => fs.stat(path.join(pkgVerDir, item)))
-  );
+  major = _validateVersionPartStr(major, dirName, "major");
+  minor = _validateVersionPartStr(minor, dirName, "minor");
+  patch = _validateVersionPartStr(patch, dirName, "patch");
 
+  return {
+    name,
+    version: {range, major, minor, patch},
+    path: dirPath,
+  };
+};
+
+export async function getFlowVersionsForPackage(
+  pkgVer: VersionedName
+): Promise<Array<VersionedName>> {
+  const dirItems = await fs.readdir(pkgVer.path);
+  const dirItemStats = await P.all(dirItems.map(name => {
+    return fs.stat(path.join(pkgVer.path, name));
+  }));
   return dirItems
     .filter((_, idx) => dirItemStats[idx].isDirectory())
-    .map((itemName) => itemName.substr('flow-'.length));
+    .map(dirName => {
+      const dirPath = path.join(pkgVer.path, dirName);
+      return dirName !== "flow-all" ? dirNameToVersionedName(dirPath) : {
+        name: "flow",
+        version: {major: "x", minor: "x", patch: "x"},
+        path: dirPath
+      };
+    });
 };
 
-export function isTestFileName(
-  itemName: string,
-  itemStats: fs.Stats
-): boolean {
-  return (
-    itemStats.isFile()
-    && itemName.substr(0, 'test-'.length) === 'test-'
-    && path.extname(itemName) === '.js'
+export async function getPackages(): Promise<Array<VersionedName>> {
+  return (await fs.readdir(DEFINITIONS_DIR)).map(
+    dirName => dirNameToVersionedName(path.join(DEFINITIONS_DIR, dirName))
   );
 };
 
-export async function getTestsInPath(dirPath: string): Promise<Array<string>> {
+export function versionToString(ver: Version): string {
+  const rangeStr = ver.range ? ver.range : '';
+  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}`;
+};
+
+export async function getTestFilesInDir(dirPath: string): Promise<Array<string>> {
   if (!(await fs.exists(dirPath))) {
-    throw new Error('Invalid test directory: ' + dirPath);
+    throw new Error(`Invalid test directory: ${dirPath}`);
   }
   const dirItems = await fs.readdir(dirPath);
   const dirItemStats = await P.all(
@@ -77,51 +103,9 @@ export async function getTestsInPath(dirPath: string): Promise<Array<string>> {
   return dirItems.filter((itemName, idx) => {
     const itemStats = dirItemStats[idx];
     return isTestFileName(itemName, itemStats);
-  });
+  }).map(name => path.join(dirPath, name));
 };
 
-export async function getTestsForPkgVersionFlowVersion(
-  pkgName: string,
-  pkgVer: string,
-  flowVer: string
-): Promise<Array<string>> {
-  const pkgDir = await getPkgDir(pkgName);
-  const pkgVerDir = path.join(pkgDir, pkgVer);
-  if (!(await fs.exists(pkgVerDir))) {
-    throw new Error(
-      "'" + pkgName + "@" + pkgVer + "' does not exist in the " +
-      "definitions library!"
-    );
-  }
-  const pkgVerFlowDir = path.join(pkgVerDir, flowVer);
-  if (!(await fs.exists(pkgVerFlowDir))) {
-    throw new Error(
-      "'" + pkgName + "@" + pkgVer + "/flow-" + flowVer + "' does " +
-      "not exist in the definitions library!"
-    );
-  }
-
-  // Get and stat all of the items in the package/version dir as well as the
-  // package/version/flow-version dir
-  const [pkgVerDirItems, pkgVerFlowDirItems] = await P.all([
-    await fs.readdir(pkgVerDir),
-    await fs.readdir(pkgVerFlowDir),
-  ]);
-  const [pkgVerDirItemStats, pkgVerFlowDirItemStats] = await P.all([
-    P.all(pkgVerDirItems.map(
-      item => fs.stat(path.join(pkgVerDir, item))
-    )),
-    P.all(pkgVerFlowDirItems.map(
-      item => fs.stat(path.join(pkgVerFlowDir, item))
-    )),
-  ]);
-
-  const pkgVerDirTests = pkgVerDirItems.filter((itemName, idx) => {
-    return isTestFileName(itemName, pkgVerDirItemStats[idx]);
-  }).map(itemName => path.join('..', itemName));
-  const pkgVerFlowDirTests = pkgVerFlowDirItems.filter((itemName, idx) => {
-    return isTestFileName(itemName, pkgVerFlowDirItemStats[idx]);
-  });
-
-  return pkgVerDirTests.concat(pkgVerFlowDirTests);
+export function isTestFileName(itemName: string): boolean {
+  return /^test-.*\.js$/.test(itemName);
 };

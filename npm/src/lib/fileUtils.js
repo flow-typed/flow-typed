@@ -7,9 +7,9 @@ const P = Promise;
 export function copyFile(srcPath: string, destPath: string): Promise<void> {
   return new Promise((res, rej) => {
     const reader = fs.createReadStream(srcPath);
-    reader.on("error", (err) => {console.log("r %s", srcPath);rej(err)});
+    reader.on("error", err => rej(err));
     const writer = fs.createWriteStream(destPath);
-    writer.on("error", (err) => {console.log("w %s", destPath);rej(err)});
+    writer.on("error", err => rej(err));
     writer.on("close", _ => res());
     reader.pipe(writer);
   });

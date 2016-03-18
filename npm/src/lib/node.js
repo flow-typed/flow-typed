@@ -19,55 +19,35 @@ export const fs = {
   mkdir: function(path: string, mode?: number): Promise<void> {
     return new Promise((res, rej) => {
       node_fs.mkdir(path, mode, (err) => {
-        if (err) {
-          rej(err);
-        } else {
-          res()
-        }
+        if (err) { rej(err); } else { res() }
       });
     });
   },
   readdir: function(path: string): Promise<Array<string>> {
     return new Promise((res, rej) => {
       node_fs.readdir(path, (err, items) => {
-        if (err) {
-          rej(err);
-        } else {
-          res(items);
-        }
+        if (err) { rej(err); } else { res(items); }
       });
     });
   },
   rename: function(oldPath: string, newPath: string): Promise<void> {
     return new Promise((res, rej) => {
       node_fs.rename(oldPath, newPath, function(err) {
-        if (err) {
-          rej(err);
-        } else {
-          res();
-        }
+        if (err) { rej(err); } else { res(); }
       });
     });
   },
   rmdir: function(path: string): Promise<void> {
     return new Promise((res, rej) => {
       node_fs.rmdir(path, (err) => {
-        if (err) {
-          rej(err);
-        } else {
-          res()
-        }
+        if (err) { rej(err); } else { res(); }
       });
     });
   },
   stat: function(path: string): Promise<fs.Stats> {
     return new Promise((res, rej) => {
       node_fs.stat(path, (err, stats) => {
-        if (err) {
-          rej(err);
-        } else {
-          res(stats);
-        }
+        if (err) { rej(err); } else { res(stats); }
       });
     });
   },
@@ -75,22 +55,14 @@ export const fs = {
   unlink: function(path: string): Promise<void> {
     return new Promise((res, rej) => {
       node_fs.unlink(path, (err) => {
-        if (err) {
-          rej(err);
-        } else {
-          res()
-        }
+        if (err) { rej(err); } else { res(); }
       });
     });
   },
   writeFile: function(f: string, data: string, opts?: Object): Promise<void> {
     return new Promise((res, rej) => {
       node_fs.writeFile(f, data, opts, (err) => {
-        if (err) {
-          rej(err);
-        } else {
-          res()
-        }
+        if (err) { rej(err); } else { res(); }
       });
     });
   },

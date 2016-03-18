@@ -4,12 +4,13 @@ import {child_process, fs, os, path} from "../lib/node.js";
 import {copyFile, recursiveRmdir} from "../lib/fileUtils.js";
 import {
   DEFINITIONS_DIR,
-  getPkgNames,
-  getPkgVersions,
-  getFlowVersionsForPkgVersion,
-  getTestsInPath,
-  getTestsForPkgVersionFlowVersion,
+  getFlowVersionsForPackage,
+  getPackages,
+  getTestFilesInDir,
+  versionToString,
 } from "../lib/definitions.js";
+
+import type {VersionedName} from "../lib/definitions.js";
 
 import GitHub from "github";
 import request from "request";
@@ -44,36 +45,31 @@ type TestGroup = {
  * directory.
  */
 async function getTestGroups(): Promise<Array<TestGroup>> {
-  const pkgNames = await getPkgNames();
-  const pkgNameVers = await P.all(pkgNames.map(getPkgVersions));
-
   const testGroups = [];
-  await P.all(pkgNames.map(async (pkgName, idx) => {
-    await P.all(pkgNameVers[idx].map(async (pkgVer) => {
-      const flowVersions = await getFlowVersionsForPkgVersion(pkgName, pkgVer);
-      const pkgVerDirPath = path.join(DEFINITIONS_DIR, pkgName, pkgVer);
 
-      const pkgVerTestPaths = (await getTestsInPath(pkgVerDirPath)).map(
-        fileName => path.join(pkgVerDirPath, fileName)
-      );
+  const pkgVersions = await getPackages();
+  await P.all(pkgVersions.map(async (pkg) => {
+    const pkgVerStr = versionToString(pkg.version);
+    const [pkgTestFiles, flowVersions] = await P.all([
+      getTestFilesInDir(pkg.path),
+      getFlowVersionsForPackage(pkg),
+    ]);
 
-      await P.all(flowVersions.map(async (flowVer) => {
-        const flowVerDirPath = path.join(pkgVerDirPath, "flow-" + flowVer);
+    await P.all(flowVersions.map(async (flowVer) => {
+      const flowVerStr = versionToString(flowVer.version);
+      const flowVerTestFiles = await getTestFilesInDir(flowVer.path);
+      testGroups.push({
+        id: pkg.name + "-" + pkgVerStr + "-flow-" + flowVerStr,
+        testFilePaths: pkgTestFiles.concat(flowVerTestFiles),
+        libDefPath: path.join(
+          flowVer.path,
+          pkg.name + '-' + pkgVerStr + '.js'
+        ),
+        flowVersion: flowVerStr,
+      });
+    }));
+  }));
 
-        const flowVerTestPaths = (await getTestsInPath(flowVerDirPath)).map(
-          fileName => path.join(flowVerDirPath, fileName)
-        );
-        pkgVerTestPaths.forEach(p => flowVerTestPaths.push(p));
-
-        testGroups.push({
-          id: pkgName + "-" + pkgVer + "-flow-" + flowVer,
-          testFilePaths: flowVerTestPaths,
-          libDefPath: path.join(flowVerDirPath, pkgName + "-" + pkgVer + ".js"),
-          flowVersion: flowVer,
-        });
-      }));
-    }))
-  }))
   return testGroups;
 }
 
@@ -227,8 +223,8 @@ async function runTestGroup(
   const testDirPath = path.join(TEST_DIR, testDirName);
   if (await fs.exists(testDirPath)) {
     throw new Error(
-      "Trying to run " + testGroup.id + ", but test dir already exists! I'm " +
-      "confused... Bailing out!"
+      `Trying to run ${testGroup.id}, but test dir already exists! I'm` +
+      `confused... Bailing out!`
     );
   }
 
@@ -336,9 +332,7 @@ async function runTestGroup(
 async function runTests(
   testPatterns: Array<string>
 ): Promise<Map<string, Array<string>>> {
-  const testPatternRes = testPatterns.map(
-    patternStr => new RegExp(patternStr, "g")
-  );
+  const testPatternRes = testPatterns.map(patt => new RegExp(patt, "g"));
   const testGroups = (await getTestGroups()).filter(testGroup => {
     if (testPatternRes.length === 0) {
       return true;
@@ -370,16 +364,6 @@ async function runTests(
         results.set(testGroup.id, errors);
       }
     }
-    /*
-    await P.all(testGroups.map(async (testGroup) => {
-      const testGroupErrors = await runTestGroup(testGroup);
-      if (testGroupErrors.length > 0) {
-        const errors = results.get(testGroup.id) || [];
-        testGroupErrors.forEach(err => errors.push(err));
-        results.set(testGroup.id, errors);
-      }
-    }));
-    */
     return results;
   } finally {
     if (await fs.exists(TEST_DIR)) {

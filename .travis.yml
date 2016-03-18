@@ -6,7 +6,7 @@ addons:
   apt:
     packages:
     - unzip
-script: cd npm && npm install && npm run build && node dist/cli.js validate-defs && node dist/cli.js run-tests
+script: ./runtests.sh
 cache:
   directories:
   - npm/flow-bins
