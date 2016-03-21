@@ -2,13 +2,14 @@
 
 import {child_process, fs, os, path} from "../lib/node.js";
 import {copyFile, recursiveRmdir} from "../lib/fileUtils.js";
+import {gitHubClient} from "../lib/github.js";
 import {
   DEFINITIONS_DIR,
   getFlowVersionsForPackage,
   getPackages,
   getTestFilesInDir,
-  versionToString,
 } from "../lib/definitions.js";
+import {versionToString} from "../lib/semver.js";
 
 import type {VersionedName} from "../lib/definitions.js";
 
@@ -84,13 +85,7 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
     _flowBinVersionPromise = (async function() {
       console.log("Fetching all Flow binaries...");
       const FLOW_BIN_VERSION_ORDER = [];
-      const GH_CLIENT = new GitHub({version: "3.0.0"});
-      if (process.env.GH_TOK) {
-        GH_CLIENT.authenticate({
-          type: "oauth",
-          token: process.env.GH_TOK,
-        });
-      }
+      const GH_CLIENT = gitHubClient();
       const QUERY_PAGE_SIZE = 100;
       const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
 
@@ -380,7 +375,6 @@ async function runTests(
 
 export const name = "run-tests";
 export const description = "Run definition tests";
-export const options = {};
 export async function run(argv: Object): Promise<number> {
   const testPatterns = argv._.slice(1);
   const results = await runTests(testPatterns);

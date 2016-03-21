@@ -1,3 +1,6 @@
+[libs]
+flow-typed
+
 [ignore]
 .*/node_modules/y18n/test/locales/bad-locale\.json
 .*/test-dir/.*
@@ -5,6 +8,7 @@
 
 [options]
 experimental.const_params=true
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 
 [version]
 0.22.1

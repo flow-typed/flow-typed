@@ -1,6 +1,7 @@
 // @flow
 
 import {fs, https, path} from "./node.js";
+import type {Version} from "./semver.js"
 
 export const DEFINITIONS_DIR = path.join(__dirname, '..', '..', '..', 'definitions');
 const P = Promise;
@@ -11,18 +12,7 @@ export type VersionedName = {
   path: string,
 };
 
-type VersionRange = ">=" | "<=";
-export type Version = {
-  range?: VersionRange,
-  major: number | "x",
-  minor: number | "x",
-  patch: number | "x",
-};
-
-function _validateVersionPartStr(part, prefix, partName): number | "x" {
-  if (part === "x") {
-    return part;
-  }
+function _validateVersionNumberPartStr(part, prefix, partName): number {
   const num = parseInt(part, 10);
   if (String(num) !== part) {
     throw new Error(
@@ -32,8 +22,15 @@ function _validateVersionPartStr(part, prefix, partName): number | "x" {
   return num;
 }
 
-export const VERSIONED_NAME_RE = /^(.*)-([><]?=)?v([0-9]*|x)\.([0-9]*|x)\.([0-9]*|x)$/;
-function dirNameToVersionedName(dirPath): VersionedName {
+function _validateVersionPartStr(part, prefix, partName): number | "x" {
+  if (part === "x") {
+    return part;
+  }
+  return _validateVersionNumberPartStr(part, prefix, partName);
+}
+
+export const VERSIONED_NAME_RE = /^(.*)-([><]?=)?v([0-9]*)\.([0-9]*|x)\.([0-9]*|x)$/;
+export function dirNameToVersionedName(dirPath: string): VersionedName {
   const dirName = path.basename(dirPath);
   const dirNameParts = dirName.match(VERSIONED_NAME_RE);
   if (dirNameParts == null) {
@@ -50,7 +47,7 @@ function dirNameToVersionedName(dirPath): VersionedName {
     );
   }
 
-  major = _validateVersionPartStr(major, dirName, "major");
+  major = _validateVersionNumberPartStr(major, dirName, "major");
   minor = _validateVersionPartStr(minor, dirName, "minor");
   patch = _validateVersionPartStr(patch, dirName, "patch");
 

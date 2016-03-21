@@ -4,28 +4,30 @@ import "babel-polyfill";
 
 import * as yargs from "yargs";
 
-import * as ValidateDefs from "./commands/validateDefinitions.js";
+import * as LibdefsForPkg from "./commands/libdefsForPkg.js";
 import * as RunTests from "./commands/runTests.js";
+import * as ValidateDefs from "./commands/validateDefs.js";
 
 type CommandModule = {
   name: string,
   description: string,
-  options: Object,
-  run: (argv: Object) => Promise<number>
+  setup?: (yargs: Object) => Object,
+  run: (argv: Object) => Promise<number>,
 };
 const commands: Array<CommandModule> = [
+  LibdefsForPkg,
   RunTests,
   ValidateDefs,
 ];
 
 commands
-  .reduce((yargs, cmd) => yargs.command(
+  .reduce((cmdYargs, cmd) => cmdYargs.command(
     cmd.name,
     cmd.description,
-    cmd.options,
-    (...args) => cmd.run(...args).catch(err => {
+    typeof cmd.setup === 'function' ? cmd.setup : yargs => yargs,
+    args => cmd.run(args, yargs).catch(err => {
       if (err.stack) {
-        console.log(err.stack);
+        console.log('UNCAUGHT ERROR: %s', err.stack);
       } else if (typeof err === 'object' && err !== null) {
         console.log("UNCAUGHT ERROR: %s", JSON.stringify(err, null, 2));
       } else {
