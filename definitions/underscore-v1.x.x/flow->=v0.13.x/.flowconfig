@@ -1,8 +1,0 @@
-[libs]
-underscore-v1.js
-
-[include]
-../
-
-[options]
-suppress_comment=\\(.\\|\n\\)*\\$ExpectError

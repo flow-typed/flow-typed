@@ -1,3 +1,6 @@
+[libs]
+flow-typed
+
 [ignore]
 .*/node_modules/y18n/test/locales/bad-locale\.json
 .*/test-dir/.*

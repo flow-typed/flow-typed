@@ -2,15 +2,12 @@
 
 import {child_process, fs, os, path} from "../lib/node.js";
 import {copyFile, recursiveRmdir} from "../lib/fileUtils.js";
+import {gitHubClient} from "../lib/github.js";
 import {
-  DEFINITIONS_DIR,
-  getFlowVersionsForPackage,
-  getPackages,
-  getTestFilesInDir,
-  versionToString,
-} from "../lib/definitions.js";
-
-import type {VersionedName} from "../lib/definitions.js";
+  getLocalLibDefs,
+  getLocalLibDefFlowVersions,
+} from "../lib/libDef.js";
+import {versionToString} from "../lib/semver.js";
 
 import GitHub from "github";
 import request from "request";
@@ -45,32 +42,20 @@ type TestGroup = {
  * directory.
  */
 async function getTestGroups(): Promise<Array<TestGroup>> {
-  const testGroups = [];
-
-  const pkgVersions = await getPackages();
-  await P.all(pkgVersions.map(async (pkg) => {
-    const pkgVerStr = versionToString(pkg.version);
-    const [pkgTestFiles, flowVersions] = await P.all([
-      getTestFilesInDir(pkg.path),
-      getFlowVersionsForPackage(pkg),
-    ]);
-
-    await P.all(flowVersions.map(async (flowVer) => {
-      const flowVerStr = versionToString(flowVer.version);
-      const flowVerTestFiles = await getTestFilesInDir(flowVer.path);
-      testGroups.push({
-        id: pkg.name + "-" + pkgVerStr + "-flow-" + flowVerStr,
-        testFilePaths: pkgTestFiles.concat(flowVerTestFiles),
-        libDefPath: path.join(
-          flowVer.path,
-          pkg.name + '-' + pkgVerStr + '.js'
-        ),
-        flowVersion: flowVerStr,
-      });
-    }));
-  }));
-
-  return testGroups;
+  const libDefs = await getLocalLibDefs();
+  const libDefFlowVersions = await getLocalLibDefFlowVersions(libDefs);
+  return libDefFlowVersions.map(libDefFlowVer => {
+    const libDef = libDefFlowVer.libDef;
+    const groupID =
+      `${libDef.pkgName}-${libDef.pkgVersionStr}-flow-` +
+      `${libDefFlowVer.flowVersionStr}`;
+    return {
+      id: groupID,
+      testFilePaths: libDefFlowVer.testFiles,
+      libDefPath: libDefFlowVer.libDefPath,
+      flowVersion: libDefFlowVer.flowVersionStr,
+    };
+  });
 }
 
 /**
@@ -84,13 +69,7 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
     _flowBinVersionPromise = (async function() {
       console.log("Fetching all Flow binaries...");
       const FLOW_BIN_VERSION_ORDER = [];
-      const GH_CLIENT = new GitHub({version: "3.0.0"});
-      if (process.env.GH_TOK) {
-        GH_CLIENT.authenticate({
-          type: "oauth",
-          token: process.env.GH_TOK,
-        });
-      }
+      const GH_CLIENT = gitHubClient();
       const QUERY_PAGE_SIZE = 100;
       const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
 
@@ -380,7 +359,6 @@ async function runTests(
 
 export const name = "run-tests";
 export const description = "Run definition tests";
-export const options = {};
 export async function run(argv: Object): Promise<number> {
   const testPatterns = argv._.slice(1);
   const results = await runTests(testPatterns);
