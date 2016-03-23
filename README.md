@@ -1,6 +1,6 @@
 <img 
   alt="Flow Logo" 
-  src="https://raw.githubusercontent.com/jeffmo/flow-typed/update_readme/flow-typed-logo.png"
+  src="https://raw.githubusercontent.com/flowtype/flow-typed/master/flow-typed-logo.png"
   width="400"
 />
 
