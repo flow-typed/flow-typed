@@ -1,3 +1,5 @@
+_**Notice:** The current [`flow-typed` npm package](https://www.npmjs.com/package/flow-typed) is not up-to-date, nor is it particularly useful. `flow-typed` 2.0.0 is underway and will be published to npm when it's ready._
+
 <img 
   alt="Flow Logo" 
   src="https://raw.githubusercontent.com/flowtype/flow-typed/master/flow-typed-logo.png"
