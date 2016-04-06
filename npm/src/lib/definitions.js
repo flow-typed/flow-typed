@@ -81,9 +81,9 @@ export async function getFlowVersionsForPackage(
 };
 
 export async function getPackages(): Promise<Array<VersionedName>> {
-  return (await fs.readdir(DEFINITIONS_DIR)).map(
-    dirName => dirNameToVersionedName(path.join(DEFINITIONS_DIR, dirName))
-  );
+  return (await fs.readdir(DEFINITIONS_DIR))
+    .filter(item => item != '.cli-metadata.json')
+    .map(item => dirNameToVersionedName(path.join(DEFINITIONS_DIR, item)));
 };
 
 export function versionToString(ver: Version): string {

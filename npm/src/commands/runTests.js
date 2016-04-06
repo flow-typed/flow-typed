@@ -109,9 +109,9 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
         });
 
         apiPayload.forEach(rel => {
-          // Suppression comments (which are needed in order to run tests) were
-          // added in 0.12 -- so we only test against versions since then.
-          if (semver.lt(rel.tag_name, "0.12.0")) {
+          // We only test against versions since 0.15.0 because it has proper
+          // [ignore] fixes (which are necessary to run tests)
+          if (semver.lt(rel.tag_name, "0.15.0")) {
             return;
           }
 
@@ -258,7 +258,13 @@ async function runTestGroup(
       path.basename(testGroup.libDefPath),
       "",
       "[options]",
-      "suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError"
+      "suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError",
+      "",
+
+      // Be sure to ignore stuff in the node_modules directory of the flow-typed
+      // CLI repository!
+      "[ignore]",
+      path.join(testDirPath, "..", "..", "node_modules"),
     ].join("\n");
     await fs.writeFile(destFlowConfigPath, flowConfigData);
 
