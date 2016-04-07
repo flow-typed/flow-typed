@@ -1,6 +1,7 @@
 {
   "plugins": [
     "transform-flow-strip-types",
+    "transform-object-rest-spread",
     "transform-regenerator",
     "syntax-async-functions",
   ],

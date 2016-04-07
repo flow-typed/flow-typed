@@ -7,8 +7,8 @@ import {
   getFlowVersionsForPackage,
   getPackages,
   isTestFileName,
-  versionToString,
 } from "../lib/definitions.js";
+import {versionToString} from "../lib/semver.js";
 
 const P = Promise;
 
@@ -85,7 +85,6 @@ async function validateDefinitions(): Promise<Map<string, Array<string>>> {
 
 export const name = "validate-defs";
 export const description = "Validates the structure of the definitions in the repo.";
-export const options = {};
 export async function run(args: {}): Promise<number> {
   const validationErrors = await validateDefinitions();
   console.log(" ");
@@ -100,5 +99,6 @@ export async function run(args: {}): Promise<number> {
     console.log("All definitions are named and structured correctedly.");
     return 0;
   }
+
   return 1;
 };
