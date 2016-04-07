@@ -3,7 +3,8 @@
 import * as semver from "semver";
 
 import {fs, path} from "../lib/node.js";
-import {gitHubClient, getAllShallowLibDefs} from "../lib/github.js";
+import {gitHubClient} from "../lib/github.js";
+import {getAllShallowLibDefs} from "../lib/libDef.js";
 
 import {
   copyVersion,
@@ -13,7 +14,7 @@ import {
 } from "../lib/semver.js";
 
 import type {Version} from "../lib/semver.js";
-import type {GHLibDef, ShallowGHLibDef} from '../lib/github.js';
+import type {GHLibDef, ShallowGHLibDef} from "../lib/libdef.js";
 
 const P = Promise;
 
