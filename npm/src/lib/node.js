@@ -30,6 +30,13 @@ export const fs = {
       });
     });
   },
+  readFile: function(f: string, opts: Object): Promise<Buffer> {
+    return new Promise((res, rej) => {
+      node_fs.readFile(f, opts, (err, data) => {
+        if (err) { rej(err); } else { res(data); }
+      });
+    });
+  },
   rename: function(oldPath: string, newPath: string): Promise<void> {
     return new Promise((res, rej) => {
       node_fs.rename(oldPath, newPath, function(err) {
@@ -51,6 +58,7 @@ export const fs = {
       });
     });
   },
+  statSync: node_fs.statSync,
   Stats: node_fs.Stats,
   unlink: function(path: string): Promise<void> {
     return new Promise((res, rej) => {

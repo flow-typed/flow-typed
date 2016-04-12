@@ -1,0 +1,9 @@
+declare function beforeEach(cb: () => void): void;
+declare function describe(suiteName: string, cb: () => void): void;
+declare function expect(value: any): Object;
+declare function it(testName: string, cb: (done: () => void) => void): void;
+declare var jest: {
+  disableAutomock: () => void,
+  fn: <T>(impl?: T) => T,
+  mock: (moduleName: string, impl?: () => any) => void,
+};
