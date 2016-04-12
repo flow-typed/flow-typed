@@ -28,6 +28,10 @@
   "jest": {
     "modulePathIgnorePatterns": [
       "<rootDir>/src/.*"
+    ],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/.*",
+      "<rootDir>/dist/.*"
     ]
   },
   "devDependencies": {
