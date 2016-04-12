@@ -6,7 +6,7 @@ import request from "request";
 type VersionRange = ">=" | "<=";
 export type Version = {
   range?: VersionRange,
-  major: number | "x",
+  major: number,
   minor: number | "x",
   patch: number | "x",
 };
