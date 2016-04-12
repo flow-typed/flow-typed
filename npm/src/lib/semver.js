@@ -1,7 +1,6 @@
 // @flow
 
 import * as semver from "semver";
-import request from "request";
 
 type VersionRange = ">=" | "<=";
 export type Version = {
