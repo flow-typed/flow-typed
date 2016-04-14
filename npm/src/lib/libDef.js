@@ -6,7 +6,8 @@ import Rx from "rx-lite";
 
 import {gitHubClient} from "./github.js";
 import {fs, path} from "./node.js";
-import {versionToString, stringToVersion} from "./semver.js";
+import {versionToString, stringToVersion, emptyVersion}
+  from "./semver.js";
 
 import type {Version} from "./semver.js";
 
@@ -412,9 +413,14 @@ function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> 
   .flatMap(identity)
   .map(i => i.name)
   .filter(name => name.indexOf('flow-') == 0)
-  .map(name => {
-    let withoutPrefix = name.match(/flow-(.*)/)[1]
-    return stringToVersion(withoutPrefix)
+  .map((name:string): Version => {
+    let matches = name.match(/flow-(.*)/)
+    if (matches && matches.length > 1) {
+      const withoutPrefix = matches[1]
+      return stringToVersion(withoutPrefix)
+    } else {
+      return emptyVersion()
+    }
   })
   .toArray()
   .toPromise()
@@ -430,7 +436,7 @@ export function getGHLibsAndFlowVersions(
   })
   .flatMap(identity)
   .flatMap(async (def: ShallowGHLibDef) => {
-    let flowVersions = await getGHFlowVersionsForDef(def)
+    const flowVersions = await getGHFlowVersionsForDef(def)
     return flowVersions.map(v => ({
       ...def.libDef,
       flowVersionStr: versionToString(v),
