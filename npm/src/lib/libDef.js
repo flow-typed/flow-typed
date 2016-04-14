@@ -3,6 +3,7 @@
 import * as semver from "semver";
 import request from "request";
 import Rx from "rx-lite";
+import table from 'table';
 
 import {gitHubClient} from "./github.js";
 import {fs, path} from "./node.js";
@@ -446,4 +447,31 @@ export function getGHLibsAndFlowVersions(
   .flatMap(identity)
   .toArray()
   .toPromise()
+}
+
+export function filterDefs(
+  term: string,
+  defs: Array<LibDefWithFlow>,
+  flowVersion?: ?string
+): Array<LibDefWithFlow> {
+  return defs.filter(def => {
+    const containsTerm = def.pkgName.toLowerCase()
+      .indexOf(term.toLowerCase()) != -1;
+    const matchesFlowVersion = flowVersion
+      ? semver.satisfies(flowVersion, def.flowVersionStr)
+      : true;
+    return !!containsTerm && matchesFlowVersion;
+  });
+}
+
+export function formatDefTable(defs: Array<LibDefWithFlow>): string {
+  const formatted = [['Name', 'Package Version', 'Flow Version']]
+  .concat(defs.map(def => {
+    return [def.pkgName, def.pkgVersionStr, def.flowVersionStr];
+  }));
+  if (formatted.length == 1) {
+    return "No definitions found, sorry!";
+  } else {
+    return "\nFound definitions:\n" + table(formatted)
+  }
 }
