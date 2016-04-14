@@ -2,10 +2,11 @@
 
 import * as semver from "semver";
 import request from "request";
+import Rx from "rx-lite";
 
 import {gitHubClient} from "./github.js";
 import {fs, path} from "./node.js";
-import {versionToString} from "./semver.js";
+import {versionToString, stringToVersion} from "./semver.js";
 
 import type {Version} from "./semver.js";
 
@@ -18,9 +19,15 @@ export type LibDef = {
   pkgName: string,
   pkgVersion: Version,
   pkgVersionStr: string,
+  pkgNameVersionStr: string,
 };
 
-export type LibDefFlowVersion = {
+export type LibDefWithFlow = {
+  flowVersion: Version,
+  flowVersionStr: string
+} & LibDef
+
+type LocalLibDefFlowVersion = {
   libDef: LibDef,
   flowVersion: Version,
   flowVersionStr: string,
@@ -51,6 +58,7 @@ function _parseLibDefDirName(libDefDirName, validationErrors?): LibDef {
         pkgName: '',
         pkgVersion: {major: 'x', minor: 'x', patch: 'x'},
         pkgVersionStr: '',
+        pkgNameVersionStr: ''
       };
     } else {
       throw new Error(error);
@@ -154,7 +162,7 @@ const FLOW_DIR_NAME_RE = new RegExp(
 export async function getLocalLibDefFlowVersions(
   libDefs: Array<LibDef>,
   validationErrors?: Map<string, Array<string>>
-): Promise<Array<LibDefFlowVersion>> {
+): Promise<Array<LocalLibDefFlowVersion>> {
   const libDefFlowVersions = [];
   await P.all(libDefs.map(async (libDef) => {
     const libDefPath = _getLibDefPath(libDef);
@@ -170,7 +178,7 @@ export async function getLocalLibDefFlowVersions(
       }
     }
     const localDirItems = await fs.readdir(libDefPath);
-    const flowVersions: Array<LibDefFlowVersion> = [];
+    const flowVersions: Array<LocalLibDefFlowVersion> = [];
     const libDefSharedTests = [];
     await P.all(localDirItems.map(async (localDirItem) => {
       const itemPath = path.join(libDefPath, localDirItem);
@@ -387,4 +395,49 @@ export async function getShallowGHLibDefs(
     _libdefs = await _getShallowGHLibDefs()
   }
   return _libdefs
+}
+
+const identity = i => i
+
+function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> {
+  const getContent = Rx.Observable.fromCallback(gitHubClient().repos.getContent)
+  const notNull = i => i != null
+  return getContent({
+    user: 'flowtype',
+    repo: 'flow-typed',
+    path: `/definitions/${def.libDef.pkgNameVersionStr}`
+  })
+  .flatMap(identity)
+  .filter(notNull)
+  .flatMap(identity)
+  .map(i => i.name)
+  .filter(name => name.indexOf('flow-') == 0)
+  .map(name => {
+    let withoutPrefix = name.match(/flow-(.*)/)[1]
+    return stringToVersion(withoutPrefix)
+  })
+  .toArray()
+  .toPromise()
+}
+
+export function getGHLibsAndFlowVersions(
+  ignoreCache?: boolean = false
+): Promise<Array<LibDefWithFlow>> {
+  return Rx.Observable
+  .fromPromise(getShallowGHLibDefs(ignoreCache))
+  .flatMap(defsMap => {
+    return defsMap.values()
+  })
+  .flatMap(identity)
+  .flatMap(async (def: ShallowGHLibDef) => {
+    let flowVersions = await getGHFlowVersionsForDef(def)
+    return flowVersions.map(v => ({
+      ...def.libDef,
+      flowVersionStr: versionToString(v),
+      flowVersion: v
+    }))
+  })
+  .flatMap(identity)
+  .toArray()
+  .toPromise()
 }
