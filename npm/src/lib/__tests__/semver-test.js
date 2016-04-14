@@ -1,5 +1,4 @@
 // @flow
-jest.disableAutomock();
 
 import {stringToVersion} from '../semver.js';
 
