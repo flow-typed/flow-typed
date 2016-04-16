@@ -8,6 +8,10 @@ export type Version = {
   major: number | "x",
   minor: number | "x",
   patch: number | "x",
+  upRange?: VersionRange,
+  upMajor?: number | "x",
+  upMinor?: number | "x",
+  upPatch?: number | "x",
 };
 
 export function copyVersion(ver: Version): Version {
@@ -52,7 +56,11 @@ export function stringToVersion(verStr: string): Version {
 
 export function versionToString(ver: Version): string {
   const rangeStr = ver.range ? ver.range : '';
-  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}`;
+  const upRangeStr = ver.upRange ? ver.upRange : '';
+  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}` +
+  (ver.upMajor !== undefined
+    ? ` ${upRangeStr}v${ver.upMajor}.${ver.upMinor}.${ver.upPatch}`
+    : '');
 };
 
 function _validateVersionNumberPart(context, partName, part) {
