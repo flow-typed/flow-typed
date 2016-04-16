@@ -148,7 +148,8 @@ export async function getLocalLibDefs(
   return libDefs;
 };
 
-const FLOW_DIR_NAME_RE = /^flow-(all|([><]?=)?v([0-9]+)\.([0-9]+|x)\.([0-9]+|x))$/;
+const FLOW_DIR_NAME_RE =
+  /^flow-(all|([><]?=)?v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(_([><]?=)?v([0-9]+)\.([0-9]+|x)\.([0-9]+|x))?)$/
 export async function getLocalLibDefFlowVersions(
   libDefs: Array<LibDef>,
   validationErrors?: Map<string, Array<string>>
@@ -174,7 +175,9 @@ export async function getLocalLibDefFlowVersions(
         const error =
           `'${itemContext}' is a malformed flow-version directory name! ` +
           `Expected the name to be formatted as 'flow-all' or ` +
-          `'flow-(>=|<=)?v<MAJOR>.<MINOR>.<PATCH>'`;
+          `'flow-(>=|<=)?v<MAJOR>.<MINOR>.<PATCH>' or `;
+          `'flow-(>=|<=)?v<MAJOR>.<MINOR>.<PATCH>_(>=|<=)?v<MAJOR>.<MINOR>.` +
+          `<PATCH> for a range'`;
 
         if (validationErrors) {
           const errors = validationErrors.get(itemPath) || [];
@@ -186,13 +189,23 @@ export async function getLocalLibDefFlowVersions(
         }
       }
 
-      let [_1, _2, range, major, minor, patch] = matches;
+      let [
+        _1, _2, range, major, minor, patch,
+        _3, upRange, upMajor, upMinor, upPatch
+      ] = matches;
       range = _validateVersionRange(range, itemPath, validationErrors);
       major = _validateVersionNumPart(major, "major", itemPath, validationErrors);
       minor = _validateVersionPart(minor, "minor", itemPath, validationErrors);
       patch = _validateVersionPart(patch, "patch", itemPath, validationErrors);
 
-      const flowVersion = {range, major, minor, patch};
+      if (upMajor) {
+        upRange = _validateVersionRange(upRange, itemPath, validationErrors);
+        upMajor = _validateVersionNumPart(upMajor, "major", itemPath, validationErrors);
+        upMinor = _validateVersionPart(upMinor, "minor", itemPath, validationErrors);
+        upPatch = _validateVersionPart(upPatch, "patch", itemPath, validationErrors);
+      }
+
+      const flowVersion = {range, major, minor, patch, upRange, upMajor, upMinor, upPatch};
       const libDefFileName =
         libDef.pkgName + '-' + libDef.pkgVersionStr + '.js';
 
