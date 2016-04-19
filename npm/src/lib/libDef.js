@@ -226,7 +226,7 @@ export async function getLocalLibDefFlowVersions(
 
       // TODO: Validate that the lower bound and upper bound actually make sense
       //       together.
-      //       (i.e. check for `>=v0.1.0_>=v0.1.0`, `>=v0.5.0_<=v0.5.0`, etc)
+      //       (i.e. check for `>=v0.1.0_>=v0.2.0`, `>=v0.5.0_<=v0.5.0`, etc)
 
       const flowVersion = {
         range,
