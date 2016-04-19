@@ -427,10 +427,11 @@ function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> 
   .toPromise()
 }
 
-export function getGHLibsAndFlowVersions(
+export async function getGHLibsAndFlowVersions(
   ignoreCache?: boolean = false
 ): Promise<Array<LibDefWithFlow>> {
-  return Rx.Observable
+  await _verifyCLIVersion()
+  return await Rx.Observable
   .fromPromise(getShallowGHLibDefs(ignoreCache))
   .flatMap(defsMap => {
     return defsMap.values()
