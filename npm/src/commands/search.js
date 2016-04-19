@@ -4,8 +4,6 @@ import {getGHLibsAndFlowVersions, filterDefs, formatDefTable}
 import type {LibDefWithFlow} from "../lib/libDef.js";
 import {child_process, path} from '../lib/node'
 
-const P = Promise;
-
 export const name = "search";
 export const description =
   "Performs a simple search (by name) of available libdefs";
