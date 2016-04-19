@@ -9,7 +9,7 @@ export const description =
   "Performs a simple search (by name) of available libdefs";
 
 export async function run(args: {}): Promise<number> {
-  if (!args._ || !args._.length > 1) {
+  if (!args._ || !(args._.length > 1)) {
     console.error('Please provide a term for which to search!')
     return 1;
   }
