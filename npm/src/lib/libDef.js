@@ -236,7 +236,7 @@ export async function getLocalLibDefFlowVersions(
         upperBound,
       };
       const libDefFileName =
-        libDef.pkgName + '-' + libDef.pkgVersionStr + '.js';
+        libDef.pkgName + '_' + libDef.pkgVersionStr + '.js';
 
       const flowVersionTests = [];
       const flowVersionDirItems = await fs.readdir(itemPath);
