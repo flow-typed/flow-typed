@@ -31,17 +31,17 @@ export type LibDefFlowVersion = {
 function _getLibDefPath(libDef: LibDef): string {
   return path.join(
     LOCAL_DEFINITIONS_DIR,
-    `${libDef.pkgName}-${libDef.pkgVersionStr}`
+    `${libDef.pkgName}_${libDef.pkgVersionStr}`
   );
 }
 
-const LIBDEF_DIR_NAME_RE = /^(.*)-v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)$/;
+const LIBDEF_DIR_NAME_RE = /^(.*)_v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)$/;
 function _parseLibDefDirName(libDefDirName, validationErrors?): LibDef {
   const itemMatches = libDefDirName.match(LIBDEF_DIR_NAME_RE);
   if (itemMatches == null) {
     const error =
       `'${libDefDirName}' is a malformed definitions/ directory name! ` +
-      `Expected the name to be formatted as <PKGNAME>-v<MAJOR>.<MINOR>.<PATCH>`;
+      `Expected the name to be formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>`;
 
     if (validationErrors) {
       const errors = validationErrors.get(libDefDirName) || [];
@@ -71,13 +71,13 @@ function _parseLibDefDirName(libDefDirName, validationErrors?): LibDef {
   };
 }
 
-const TEST_FILE_NAME_RE = /^test-.*\.js$/;
+const TEST_FILE_NAME_RE = /^test_.*\.js$/;
 function _validateTestFile(testFilePath, testFileContext, validationErrors) {
   const testFileName = path.basename(testFilePath);
   if (!TEST_FILE_NAME_RE.test(testFileName)) {
     const error =
       `'${testFileContext}' is a malformed test file name! Expected the name ` +
-      `to be formatted as <PKGNAME>-v<MAJOR>.<MINOR>.<PATCH>.js`;
+      `to be formatted as test_(.*).js`;
     if (validationErrors) {
       const errors = validationErrors.get(testFilePath) || [];
       errors.push(error);
@@ -119,7 +119,6 @@ function _validateVersionRange(range, context, validationErrors?) {
   switch (range) {
     case '>=':
     case '<=':
-    case '=':
       return range;
     default:
       const error =
@@ -148,8 +147,10 @@ export async function getLocalLibDefs(
   return libDefs;
 };
 
-const FLOW_DIR_NAME_RE =
-  /^flow-(all|([><]?=)?v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(_([><]?=)?v([0-9]+)\.([0-9]+|x)\.([0-9]+|x))?)$/
+const FLOW_VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
+const FLOW_DIR_NAME_RE = new RegExp(
+  `^flow_(all|([><]?=)?${FLOW_VER}(_([><]?=)${FLOW_VER})?)$`
+);
 export async function getLocalLibDefFlowVersions(
   libDefs: Array<LibDef>,
   validationErrors?: Map<string, Array<string>>
@@ -157,6 +158,17 @@ export async function getLocalLibDefFlowVersions(
   const libDefFlowVersions = [];
   await P.all(libDefs.map(async (libDef) => {
     const libDefPath = _getLibDefPath(libDef);
+    if (!(await fs.exists(libDefPath))) {
+      const error = `'${libDefPath}' is not a local libdef path!`;
+      if (validationErrors) {
+        const errors = validationErrors.get(libDefPath) || [];
+        errors.push(error);
+        validationErrors.set(libDefPath, errors);
+        return;
+      } else {
+        throw new Error(error);
+      }
+    }
     const localDirItems = await fs.readdir(libDefPath);
     const flowVersions: Array<LibDefFlowVersion> = [];
     const libDefSharedTests = [];
@@ -174,9 +186,9 @@ export async function getLocalLibDefFlowVersions(
       if (matches == null) {
         const error =
           `'${itemContext}' is a malformed flow-version directory name! ` +
-          `Expected the name to be formatted as 'flow-all' or ` +
-          `'flow-(>=|<=)?v<MAJOR>.<MINOR>.<PATCH>' or `;
-          `'flow-(>=|<=)?v<MAJOR>.<MINOR>.<PATCH>_(>=|<=)?v<MAJOR>.<MINOR>.` +
+          `Expected the name to be formatted as 'flow_all' or ` +
+          `'flow_(>=|<=)?v<MAJOR>.<MINOR>.<PATCH>' or `;
+          `'flow_(>=|<=)?v<MAJOR>.<MINOR>.<PATCH>_(>=|<=)v<MAJOR>.<MINOR>.` +
           `<PATCH> for a range'`;
 
         if (validationErrors) {
@@ -198,14 +210,27 @@ export async function getLocalLibDefFlowVersions(
       minor = _validateVersionPart(minor, "minor", itemPath, validationErrors);
       patch = _validateVersionPart(patch, "patch", itemPath, validationErrors);
 
+      let upperBound;
       if (upMajor) {
         upRange = _validateVersionRange(upRange, itemPath, validationErrors);
         upMajor = _validateVersionNumPart(upMajor, "major", itemPath, validationErrors);
         upMinor = _validateVersionPart(upMinor, "minor", itemPath, validationErrors);
         upPatch = _validateVersionPart(upPatch, "patch", itemPath, validationErrors);
+        upperBound = {
+          range: upRange,
+          major: upMajor,
+          minor: upMinor,
+          patch: upPatch,
+        };
       }
 
-      const flowVersion = {range, major, minor, patch, upRange, upMajor, upMinor, upPatch};
+      const flowVersion = {
+        range,
+        major,
+        minor,
+        patch,
+        upperBound,
+      };
       const libDefFileName =
         libDef.pkgName + '-' + libDef.pkgVersionStr + '.js';
 
