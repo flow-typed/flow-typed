@@ -10,6 +10,7 @@
     "flow": "flow; [[ $?=0||$?=2 ]]",
     "prepublish": "mkdir -p dist; babel ./src --out-dir=./dist",
     "test": "npm run clean; npm run build; jest",
+    "test-quick": "jest",
     "watch": "mkdir -p dist; babel --watch=./src --out-dir=./dist"
   },
   "repository": {

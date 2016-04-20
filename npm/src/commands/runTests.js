@@ -13,6 +13,8 @@ import GitHub from "github";
 import request from "request";
 import * as semver from "semver";
 
+import type {Version} from "../lib/semver.js";
+
 // Used to decide which binary to fetch for each version of Flow
 const BIN_PLATFORM = (_ => {
   switch (os.type()) {
@@ -33,7 +35,7 @@ type TestGroup = {
   id: string,
   testFilePaths: Array<string>,
   libDefPath: string,
-  flowVersion: string,
+  flowVersion: Version,
 };
 
 /**
@@ -47,13 +49,13 @@ async function getTestGroups(): Promise<Array<TestGroup>> {
   return libDefFlowVersions.map(libDefFlowVer => {
     const libDef = libDefFlowVer.libDef;
     const groupID =
-      `${libDef.pkgName}-${libDef.pkgVersionStr}-flow-` +
-      `${libDefFlowVer.flowVersionStr}`;
+      `${libDef.pkgName}_${libDef.pkgVersionStr}--flow_` +
+      `${versionToString(libDefFlowVer.flowVersion)}`;
     return {
       id: groupID,
       testFilePaths: libDefFlowVer.testFiles,
       libDefPath: libDefFlowVer.libDefPath,
-      flowVersion: libDefFlowVer.flowVersionStr,
+      flowVersion: libDefFlowVer.flowVersion,
     };
   });
 }
@@ -250,10 +252,27 @@ async function runTestGroup(
     // For each compatible version of Flow, run `flow check` and verify there
     // are no errors.
     const flowVersionsToRun = orderedFlowVersions.filter(flowVer => {
-      return (
-        testGroup.flowVersion === "all"
-        || semver.satisfies(flowVer, testGroup.flowVersion)
-      );
+      if (testGroup.flowVersion === "all") {
+        return true;
+      }
+
+      const testGrpUpperBound = testGroup.flowVersion.upperBound;
+      testGroup.flowVersion.upperBound = undefined;
+      const testGrpLowerBoundStr = versionToString(testGroup.flowVersion);
+      const testGrpUpperBoundStr = testGrpUpperBound
+        ? versionToString(testGrpUpperBound)
+        : undefined;
+      testGroup.flowVersion.upperBound = testGrpUpperBound;
+
+      if (semver.satisfies(flowVer, testGrpLowerBoundStr)) {
+        if (testGrpUpperBoundStr) {
+          return semver.satisfies(flowVer, testGrpUpperBoundStr);
+        } else{
+          return true;
+        }
+      }
+
+      return false;
     });
 
     while (flowVersionsToRun.length > 0) {

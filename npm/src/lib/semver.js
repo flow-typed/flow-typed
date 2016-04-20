@@ -8,6 +8,7 @@ export type Version = {
   major: number | "x",
   minor: number | "x",
   patch: number | "x",
+  upperBound?: Version,
 };
 
 export function copyVersion(ver: Version): Version {
@@ -19,7 +20,12 @@ export function copyVersion(ver: Version): Version {
   };
 }
 
-const VERSION_RE = /^([><]=?)?v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)$/;
+// TODO: This has some egregious duplication with
+//       libDef.getLocalLibDefFlowVersions(). Need to better consolidate logic
+const VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
+const VERSION_RE = new RegExp(
+  `^([><]=?)?${VER}(_([><]=?)${VER})?$`
+);
 export function stringToVersion(verStr: string): Version {
   const versionParts = verStr.match(VERSION_RE);
   if (versionParts == null) {
@@ -28,9 +34,17 @@ export function stringToVersion(verStr: string): Version {
       "as `" + VERSION_RE.toString() + "`"
     );
   }
-  let [_, range, major, minor, patch] = versionParts;
+  let [
+    _1, range, major, minor, patch,
+    _2, upRange, upMajor, upMinor, upPatch,
+  ] = versionParts;
   if (range != null && range !== ">=" && range !== "<=") {
     throw new Error(`'${verStr}': Invalid version range: ${range}`);
+  }
+  if (upRange != null && upRange !== ">=" && upRange !== "<=") {
+    throw new Error(
+      `'${verStr}': Invalid version upper-bound range: ${upRange}`
+    );
   }
 
   major = _validateVersionNumberPart(verStr, "major", major);
@@ -41,18 +55,36 @@ export function stringToVersion(verStr: string): Version {
     patch = _validateVersionNumberPart(verStr, "patch", patch);
   }
 
+  let upperBound;
+  if (upMajor) {
+    upMajor = _validateVersionNumberPart(verStr, "upper-bound major", upMajor);
+    if (upMinor !== "x") {
+      upMinor = _validateVersionNumberPart(verStr, "upper-bound minor", upMinor);
+    }
+    if (upPatch !== "x") {
+      upPatch = _validateVersionNumberPart(verStr, "upper-bound patch", upPatch);
+    }
+    upperBound = {
+      range: upRange,
+      major: upMajor,
+      minor: upMinor,
+      patch: upPatch,
+    };
+  }
+
   if (range === '<=' && major === minor === patch === 0) {
     throw new Error(
       `It doesn't make sense to have a version range of '<=v0.0.0'!`
     );
   }
 
-  return {range, major, minor, patch};
+  return {range, major, minor, patch, upperBound};
 };
 
 export function versionToString(ver: Version): string {
   const rangeStr = ver.range ? ver.range : '';
-  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}`;
+  const upperBoundStr = ver.upperBound ? `_${versionToString(ver.upperBound)}` : '';
+  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${upperBoundStr}`;
 };
 
 function _validateVersionNumberPart(context, partName, part) {

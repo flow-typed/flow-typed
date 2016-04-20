@@ -35,7 +35,7 @@ All definitions sit under the
 [/definitions](https://github.com/flowtype/flow-typed/tree/master/definitions) 
 folder. They all must follow the following naming format:
 
-`<NPM_PACKAGE_NAME>-v<VERSION>`/`flow-v<VERSION>`/`<NPM_PACKAGE>-v<VERSION>.js`
+`<NPM_PACKAGE_NAME>_v<VERSION>`/`flow_v<VERSION>`/`<NPM_PACKAGE>_v<VERSION>.js`
 
 Where `<VERSION>` is a semver version number with all of MAJOR, MINOR, and PATCH
 version numbers included. `x` is an acceptable wildcard in place of any of the 
@@ -44,7 +44,7 @@ the `v` to indicate a range of versions.
 
 Example filename:
 
-`underscore-v1.x.x/flow->=v0.13.x/underscore-v1.x.x.js`
+`underscore_v1.x.x/flow_>=v0.13.x/underscore_v1.x.x.js`
 
 This is a library definition for all "1.x.x" versions of underscore that works
 with any version of Flow >= v0.13.
