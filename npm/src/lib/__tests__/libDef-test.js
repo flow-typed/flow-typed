@@ -29,21 +29,21 @@ describe('libDef helpers', () => {
         { pkgName: 'kefir',
           pkgVersion: { major: 3, minor: 'x', patch: 'x' },
           pkgVersionStr: 'v3.x.x',
-          pkgNameVersionStr: 'kefir-v3.x.x',
+          pkgNameVersionStr: 'kefir_v3.x.x',
           flowVersionStr: '>=v0.20.x',
           flowVersion: { range: '>=', major: 0, minor: 20, patch: 'x' }
         },
         { pkgName: 'mori',
           pkgVersion: { major: 0, minor: 3, patch: 'x' },
           pkgVersionStr: 'v0.3.x',
-          pkgNameVersionStr: 'mori-v0.3.x',
+          pkgNameVersionStr: 'mori_v0.3.x',
           flowVersionStr: '>=v0.22.x',
           flowVersion: { range: '>=', major: 0, minor: 22, patch: 'x' }
         },
         { pkgName: 'mori',
           pkgVersion: { major: 0, minor: 3, patch: 'x' },
           pkgVersionStr: 'v0.3.x',
-          pkgNameVersionStr: 'mori-v0.3.x',
+          pkgNameVersionStr: 'mori_v0.3.x',
           flowVersionStr: '>=v0.18.x',
           flowVersion: { range: '>=', major: 0, minor: 18, patch: 'x' }
         }
@@ -57,14 +57,14 @@ describe('libDef helpers', () => {
         { pkgName: 'mori',
           pkgVersion: { major: 0, minor: 3, patch: 'x' },
           pkgVersionStr: 'v0.3.x',
-          pkgNameVersionStr: 'mori-v0.3.x',
+          pkgNameVersionStr: 'mori_v0.3.x',
           flowVersionStr: '>=v0.22.x',
           flowVersion: { range: '>=', major: 0, minor: 22, patch: 'x' }
         },
         { pkgName: 'mori',
           pkgVersion: { major: 0, minor: 3, patch: 'x' },
           pkgVersionStr: 'v0.3.x',
-          pkgNameVersionStr: 'mori-v0.3.x',
+          pkgNameVersionStr: 'mori_v0.3.x',
           flowVersionStr: '>=v0.18.x',
           flowVersion: { range: '>=', major: 0, minor: 18, patch: 'x' }
         }
@@ -82,14 +82,14 @@ describe('libDef helpers', () => {
         { pkgName: 'mori',
           pkgVersion: { major: 0, minor: 3, patch: 'x' },
           pkgVersionStr: 'v0.3.x',
-          pkgNameVersionStr: 'mori-v0.3.x',
+          pkgNameVersionStr: 'mori_v0.3.x',
           flowVersionStr: '>=v0.22.x',
           flowVersion: { range: '>=', major: 0, minor: 22, patch: 'x' }
         },
         { pkgName: 'mori',
           pkgVersion: { major: 0, minor: 3, patch: 'x' },
           pkgVersionStr: 'v0.3.x',
-          pkgNameVersionStr: 'mori-v0.3.x',
+          pkgNameVersionStr: 'mori_v0.3.x',
           flowVersionStr: '>=v0.18.x',
           flowVersion: { range: '>=', major: 0, minor: 18, patch: 'x' }
         }
