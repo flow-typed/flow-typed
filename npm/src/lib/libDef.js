@@ -3,11 +3,12 @@
 import * as semver from "semver";
 import request from "request";
 import Rx from "rx-lite";
+import _ from 'lodash/fp';
 import table from 'table';
 
 import {gitHubClient} from "./github.js";
 import {fs, path} from "./node.js";
-import {versionToString, stringToVersion, emptyVersion}
+import {versionToString, stringToVersion, emptyVersion, compareRanges}
   from "./semver.js";
 
 import type {Version} from "./semver.js";
@@ -453,16 +454,36 @@ export async function getGHLibsAndFlowVersions(
 export function filterDefs(
   term: string,
   defs: Array<LibDefWithFlow>,
-  flowVersion?: ?string
+  flowVersion?: string,
+  libVersion?: string
 ): Array<LibDefWithFlow> {
-  return defs.filter(def => {
+  const filtered = defs.filter(def => {
     const containsTerm = def.pkgName.toLowerCase()
       .indexOf(term.toLowerCase()) != -1;
     const matchesFlowVersion = flowVersion
       ? semver.satisfies(flowVersion, def.flowVersionStr)
       : true;
-    return !!containsTerm && matchesFlowVersion;
+    const matchesLibVersion = (libVersion && libVersion !== "auto")
+      ? semver.satisfies(libVersion, def.pkgVersionStr)
+      : true;
+    return !!containsTerm && matchesFlowVersion && matchesLibVersion;
   });
+
+  if (libVersion !== "auto") {
+    return filtered
+  }
+
+  // At this point our list can contain libdefs for different libraries
+  // , and different versions for each of those different libraries.
+  // But we want to select only the highest libdef version for each lib.
+  return _.flow(
+    _.groupBy('pgkName'),
+    _.values,
+    _.map((defList: Array<LibDef>) => {
+      const sorted = defList.sort(compareRanges)
+      return sorted[sorted.length - 1]
+    })
+  )(filtered)
 }
 
 export function formatDefTable(defs: Array<LibDefWithFlow>): string {

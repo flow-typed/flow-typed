@@ -1,6 +1,6 @@
 // @flow
 
-import {stringToVersion} from '../semver.js';
+import {stringToVersion, versionToString, compareRanges} from '../semver.js';
 
 describe('semver', () => {
   describe('stringToVersion', () => {
@@ -35,4 +35,23 @@ describe('semver', () => {
       });
     });
   });
+
+  describe('compareRanges', () => {
+    it('sorts ranges correctly', () => {
+      let a = stringToVersion('v2.x.x')
+      let b = stringToVersion('v2.1.x')
+      let res = compareRanges(a, b)
+      expect(res).toEqual(-1)
+
+      a = stringToVersion('v1.x.x')
+      b = stringToVersion('v2.1.x')
+      res = compareRanges(a, b)
+      expect(res).toEqual(-1)
+
+      a = stringToVersion('v1.2.1')
+      b = stringToVersion('v0.2.0')
+      res = compareRanges(a, b)
+      expect(res).toEqual(1)
+    })
+  })
 });

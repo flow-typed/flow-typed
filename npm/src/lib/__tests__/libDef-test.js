@@ -74,6 +74,94 @@ describe('libDef helpers', () => {
       expect(filtered.length).toEqual(1)
       expect(filtered[0].flowVersionStr).toEqual('>=v0.18.x')
     })
+
+    it('filters properly based on libDef version', () => {
+      const fixture = [
+        { pkgName: 'mori',
+          pkgVersion: { major: 0, minor: 4, patch: 'x' },
+          pkgVersionStr: 'v0.4.x',
+          pkgNameVersionStr: 'mori-v0.4.x',
+          flowVersionStr: '>=v0.22.x',
+          flowVersion: { range: '>=', major: 0, minor: 22, patch: 'x' }
+        },
+        { pkgName: 'mori',
+          pkgVersion: { major: 0, minor: 3, patch: 'x' },
+          pkgVersionStr: 'v0.3.x',
+          pkgNameVersionStr: 'mori-v0.3.x',
+          flowVersionStr: '>=v0.18.x',
+          flowVersion: { range: '>=', major: 0, minor: 18, patch: 'x' }
+        }
+      ]
+
+      const filtered = filterDefs('mori', fixture, '0.23.0', '0.4.2')
+      expect(filtered.length).toEqual(1)
+      expect(filtered[0].flowVersionStr).toEqual('>=v0.22.x')
+      expect(filtered[0].pkgVersionStr).toEqual('v0.4.x')
+    })
+
+
+    it('includes all flow and lib versions if those versions are unspecified.',
+    () => {
+      const fixture = [
+        { pkgName: 'mori',
+          pkgVersion: { major: 0, minor: 5, patch: 6 },
+          pkgVersionStr: 'v0.5.6',
+          pkgNameVersionStr: 'mori-v0.5.6',
+          flowVersionStr: '>=v0.22.x',
+          flowVersion: { range: '>=', major: 0, minor: 22, patch: 'x' }
+        },
+        { pkgName: 'mori',
+          pkgVersion: { major: 0, minor: 5, patch: 7 },
+          pkgVersionStr: 'v0.5.7',
+          pkgNameVersionStr: 'mori-v0.5.7',
+          flowVersionStr: '>=v0.20.x',
+          flowVersion: { range: '>=', major: 0, minor: 20, patch: 'x' }
+        },
+        { pkgName: 'lodash',
+          pkgVersion: { major: 0, minor: 4, patch: 'x' },
+          pkgVersionStr: 'v0.4.x',
+          pkgNameVersionStr: 'lodash-v0.4.x',
+          flowVersionStr: '>=v0.18.x',
+          flowVersion: { range: '>=', major: 0, minor: 18, patch: 'x' }
+        }
+      ]
+
+      const filtered = filterDefs('mori', fixture)
+      expect(filtered.length).toEqual(2)
+      expect(filtered.filter(i => i.pkgVersionStr == 'v0.5.7').length)
+      expect(filtered.filter(i => i.pkgVersionStr == 'v0.5.6').length)
+    })
+
+    it('automatically picks the highest comaptible lib version.',
+    () => {
+      const fixture = [
+        { pkgName: 'mori',
+          pkgVersion: { major: 0, minor: 5, patch: 6 },
+          pkgVersionStr: 'v0.5.6',
+          pkgNameVersionStr: 'mori-v0.5.6',
+          flowVersionStr: '>=v0.22.x',
+          flowVersion: { range: '>=', major: 0, minor: 22, patch: 'x' }
+        },
+        { pkgName: 'mori',
+          pkgVersion: { major: 0, minor: 5, patch: 7 },
+          pkgVersionStr: 'v0.5.7',
+          pkgNameVersionStr: 'mori-v0.5.7',
+          flowVersionStr: '>=v0.20.x',
+          flowVersion: { range: '>=', major: 0, minor: 20, patch: 'x' }
+        },
+        { pkgName: 'lodash',
+          pkgVersion: { major: 0, minor: 4, patch: 'x' },
+          pkgVersionStr: 'v0.4.x',
+          pkgNameVersionStr: 'lodash-v0.4.x',
+          flowVersionStr: '>=v0.18.x',
+          flowVersion: { range: '>=', major: 0, minor: 18, patch: 'x' }
+        }
+      ]
+
+      const filtered = filterDefs('mori', fixture, '0.22.0', 'auto')
+      expect(filtered.length).toEqual(1)
+      expect(filtered[0].pkgVersionStr).toEqual('v0.5.7')
+    })
   })
 
   describe('formatDefTable()', () => {
