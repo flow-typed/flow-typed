@@ -413,9 +413,9 @@ function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> 
   .filter(notNull)
   .flatMap(identity)
   .map(i => i.name)
-  .filter(name => name.indexOf('flow-') == 0)
+  .filter(name => name.indexOf('flow_') == 0)
   .map((name:string): Version => {
-    let matches = name.match(/flow-(.*)/)
+    let matches = name.match(/flow_(.*)/)
     if (matches && matches.length > 1) {
       const withoutPrefix = matches[1]
       return stringToVersion(withoutPrefix)
