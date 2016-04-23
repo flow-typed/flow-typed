@@ -1,15 +1,26 @@
+type coreDecorators$GenericDescriptor<V, E, C, W> = {
+  value: V,
+  enumerable: E,
+  configurable: C,
+  writeable: W,
+}
+
+type coreDecorators$Descriptor<T> = coreDecorators$GenericDescriptor<T, bool, bool, bool>
+
 declare module 'core-decorators' {
-  declare function autobind(...args: any): any;
-  declare function debounce(...args: any): any;
-  declare function decorate(...args: any): any;
-  declare function deprecate(...args: any): any;
-  declare function enumerable(...args: any): any;
-  declare function lazyInitialize(...args: any): any;
-  declare function mixin(...args: any): any;
-  declare function nonconfigurable(...args: any): any;
-  declare function override(...args: any): any;
-  declare function readonly(...args: any): any;
-  declare function suppressWarnings(...args: any): any;
-  declare function throttle(...args: any): any;
-  declare function time(...args: any): any;
+  declare function autobind<T: Function>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
+  declare function debounce<T: Function>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
+  declare function decorate(target: mixed): mixed;
+  declare function deprecate<T: Function>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
+  declare function enumerable<T: Function>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
+  declare function extendDescriptor<T>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
+  declare function lazyInitialize<T>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
+  declare function mixin(target: mixed): mixed;
+  declare function nonconfigurable<T>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$GenericDescriptor<T, bool, false, bool>;
+  declare function nonenumerable<T>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$GenericDescriptor<T, false, bool, bool>;
+  declare function override<T: Function>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
+  declare function readonly<T>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$GenericDescriptor<T, bool, bool, false>;
+  declare function suppressWarnings<T: Function>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
+  declare function throttle<T: Function>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
+  declare function time<T: Function>(target: mixed, key: string, descriptor: coreDecorators$Descriptor<T>): coreDecorators$Descriptor<T>;
 }
