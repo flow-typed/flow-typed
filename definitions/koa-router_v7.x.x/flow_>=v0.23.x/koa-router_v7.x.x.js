@@ -1,3 +1,5 @@
+import Koa from 'koa';
+
 declare module 'koa-router' {
   declare class RouterContext extends Koa.Context {
     params: Object;
