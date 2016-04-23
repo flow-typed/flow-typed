@@ -1,50 +1,49 @@
-type Support = {
-  enumErrorProps: bool,
-  enumPrototypes: bool,
-  nonEnumShadows: bool,
-  ownLast: bool,
-  spliceObjects: bool,
-  unindexedChars: bool,
-};
-type TemplateSettings = {
-  escape?: RegExp,
-  evaluate?: RegExp,
-  imports?: Object,
-  interpolate?: RegExp,
-  variable?: string,
-};
-
-type TruncateOptions = {
-  length?: number,
-  omission?: string,
-  separator?: RegExp|string,
-};
-
-type DebounceOptions = {
-  leading?: bool,
-  maxWait?: number,
-  trailing?: bool,
-};
-
-type ThrottleOptions = {
-  leading?: bool,
-  trailing?: bool,
-};
-
-type NestedArray<T> = Array<Array<T>>;
-
-type OPredicate<O> = ((value: any, key: string, object: O) => ?bool)|Object|string;
-type OIterateeWithResult<V, O, R> = ((value: V, key: string, object: O) => R)|Object|string;
-type OIteratee<O> = OIterateeWithResult<any, O, any>;
-
-type Predicate<T> = ((value: T, index: number, array: ?Array<T>) => ?bool)|Object|string;
-type _Iteratee<T> = (item: T, index: number, array: ?Array<T>) => mixed;
-type Iteratee<T> = _Iteratee<T>|Object|string;
-type Iteratee2<T, U> = ((item: T, index: number, array: ?Array<T>) => U)|Object|string;
-type FlatMapIteratee<T, U> = ((item: T, index: number, array: ?Array<T>) => Array<U>)|Object|string;
-type Comparator<T> = (arr: Array<T>, arr2: Array<T>) => bool;
-
 declare module 'lodash' {
+  declare type Support = {
+    enumErrorProps: bool,
+    enumPrototypes: bool,
+    nonEnumShadows: bool,
+    ownLast: bool,
+    spliceObjects: bool,
+    unindexedChars: bool,
+  };
+  declare type TemplateSettings = {
+    escape?: RegExp,
+    evaluate?: RegExp,
+    imports?: Object,
+    interpolate?: RegExp,
+    variable?: string,
+  };
+
+  declare type TruncateOptions = {
+    length?: number,
+    omission?: string,
+    separator?: RegExp|string,
+  };
+
+  declare type DebounceOptions = {
+    leading?: bool,
+    maxWait?: number,
+    trailing?: bool,
+  };
+
+  declare type ThrottleOptions = {
+    leading?: bool,
+    trailing?: bool,
+  };
+
+  declare type NestedArray<T> = Array<Array<T>>;
+
+  declare type OPredicate<O> = ((value: any, key: string, object: O) => ?bool)|Object|string;
+  declare type OIterateeWithResult<V, O, R> = ((value: V, key: string, object: O) => R)|Object|string;
+  declare type OIteratee<O> = OIterateeWithResult<any, O, any>;
+
+  declare type Predicate<T> = ((value: T, index: number, array: ?Array<T>) => ?bool)|Object|string;
+  declare type _Iteratee<T> = (item: T, index: number, array: ?Array<T>) => mixed;
+  declare type Iteratee<T> = _Iteratee<T>|Object|string;
+  declare type Iteratee2<T, U> = ((item: T, index: number, array: ?Array<T>) => U)|Object|string;
+  declare type FlatMapIteratee<T, U> = ((item: T, index: number, array: ?Array<T>) => Array<U>)|Object|string;
+  declare type Comparator<T> = (arr: Array<T>, arr2: Array<T>) => bool;
   declare class Lodash {
     (value: any): any;
 
