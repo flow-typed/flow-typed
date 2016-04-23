@@ -1,4 +1,4 @@
-type FuseOptions = {
+type npm$fuse$FuseOptions = {
   keys?: Array<any>,
   id?: string,
   caseSensitive?: bool,
@@ -11,7 +11,7 @@ type FuseOptions = {
 
 declare module 'fuse.js' {
   declare class Fuse<T> {
-    static (items: Array<T>, options?: FuseOptions): Fuse;
+    static (items: Array<T>, options?: npm$fuse$FuseOptions): Fuse;
     search(pattern: string): Array<T>;
     set<U: Array<T>>(list: U): U;
   }
