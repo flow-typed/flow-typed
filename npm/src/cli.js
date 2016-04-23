@@ -5,7 +5,7 @@
 // since babel-node already includes it.
 // This will make sure it works in the dist file, while
 // making the code executable via babel-node for development
-if (regeneratorRuntime == null) {
+if (global.regeneratorRuntime == null) {
   require("babel-polyfill");
 }
 
