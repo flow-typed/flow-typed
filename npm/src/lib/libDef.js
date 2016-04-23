@@ -6,12 +6,12 @@ import Rx from "rx-lite";
 import _ from 'lodash/fp';
 import table from 'table';
 
-import {gitHubClient} from "./github.js";
-import {fs, path} from "./node.js";
+import {gitHubClient} from "./github";
+import {fs, path} from "./node";
 import {versionToString, stringToVersion, emptyVersion, compareRanges}
-  from "./semver.js";
+  from "./semver";
 
-import type {Version} from "./semver.js";
+import type {Version} from "./semver";
 
 const P = Promise;
 
@@ -414,7 +414,7 @@ function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> 
   .filter(notNull)
   .flatMap(identity)
   .map(i => i.name)
-  .filter(name => name.indexOf('flow_') == 0)
+  .filter(name => name.indexOf('flow_') === 0)
   .map((name:string): Version => {
     let matches = name.match(/flow_(.*)/)
     if (matches && matches.length > 1) {
@@ -459,7 +459,7 @@ export function filterDefs(
 ): Array<LibDefWithFlow> {
   const filtered = defs.filter(def => {
     const containsTerm = def.pkgName.toLowerCase()
-      .indexOf(term.toLowerCase()) != -1;
+      .indexOf(term.toLowerCase()) !== -1;
     const matchesFlowVersion = flowVersion
       ? semver.satisfies(flowVersion, def.flowVersionStr)
       : true;
@@ -491,7 +491,7 @@ export function formatDefTable(defs: Array<LibDefWithFlow>): string {
   .concat(defs.map(def => {
     return [def.pkgName, def.pkgVersionStr, def.flowVersionStr];
   }));
-  if (formatted.length == 1) {
+  if (formatted.length === 1) {
     return "No definitions found, sorry!";
   } else {
     return "\nFound definitions:\n" + table(formatted)
