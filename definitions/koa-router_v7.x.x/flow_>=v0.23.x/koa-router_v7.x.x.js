@@ -1,6 +1,3 @@
-import Koa from 'iflow-koa';
-
-
 declare module 'koa-router' {
   declare class RouterContext extends Koa.Context {
     params: Object;
