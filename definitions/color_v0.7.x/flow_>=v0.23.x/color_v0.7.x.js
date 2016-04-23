@@ -1,28 +1,28 @@
-type RGBObject = {
+type npm$color$RGBObject = {
   r: number,
   g: number,
   b: number,
 };
 
-type HSLObject = {
+type npm$color$HSLObject = {
   h: number,
   s: number,
   l: number,
 };
 
-type HSVObject = {
+type npm$color$HSVObject = {
   h: number,
   s: number,
   v: number,
 };
 
-type HWBObject = {
+type npm$color$HWBObject = {
   h: number,
   w: number,
   b: number,
 };
 
-type CMYKObject = {
+type npm$color$CMYKObject = {
   c: number,
   m: number,
   y: number,
@@ -31,27 +31,27 @@ type CMYKObject = {
 
 declare module 'color' {
   declare class Color {
-    static (value?: string|RGBObject): Color;
-    rgb(): RGBObject;
+    static (value?: string|npm$color$RGBObject): Color;
+    rgb(): npm$color$RGBObject;
     rgbArray(): Array<number>;
     rgb(r: number, g: number, b: number): Color;
     rgb(rgb: Array<number>): Color;
-    hsl(): HSLObject;
+    hsl(): npm$color$HSLObject;
     hslArray(): Array<number>;
     hsl(h: number, s: number, l: number): Color;
-    hsl(hsl: HSLObject): Color;
-    hsv(): HSVObject;
+    hsl(hsl: npm$color$HSLObject): Color;
+    hsv(): npm$color$HSVObject;
     hsvArray(): Array<number>;
     hsv(h: number, s: number, v: number): Color;
-    hsv(hsv: HSVObject): Color;
-    hwb(): HWBObject;
+    hsv(hsv: npm$color$HSVObject): Color;
+    hwb(): npm$color$HWBObject;
     hwbArray(): Array<number>;
     hwb(h: number, w: number, b: number): Color;
-    hwb(hwb: HWBObject): Color;
-    cmyk(): CMYKObject;
+    hwb(hwb: npm$color$HWBObject): Color;
+    cmyk(): npm$color$CMYKObject;
     cmykArray(): Array<number>;
     cmyk(c: number, m: number, y: number, k: number): Color;
-    cmyk(cmyk: CMYKObject): Color;
+    cmyk(cmyk: npm$color$CMYKObject): Color;
     alpha(): number;
     alpha(alpha: number): Color;
     red(): number;
