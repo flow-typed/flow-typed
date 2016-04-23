@@ -36,7 +36,7 @@ type ReactJoyride$Props = {
   completeCallback?: Function,
   debug: bool,
   keyboardNavigation: bool,
-  locale: LocaleOption,
+  locale: ReactJoyride$LocaleOption,
   resizeDebounce: bool,
   resizeDebounceDelay: number,
   scrollOffset: number,
