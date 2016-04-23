@@ -8,10 +8,10 @@ type npm$deepDiff$PrefilterFn = (path: Array<string>, key: string) => bool|void;
 
 declare module 'deep-diff' {
   declare var exports: {
-    (lhs: mixed, rhs: mixed, prefilter?: npm$deepDiff$PrefilterFn, acc?: Array<mixed>),
+    (lhs: mixed, rhs: mixed, prefilter?: npm$deepDiff$PrefilterFn, acc?: Array<mixed>): ?Array<Difference>,
     diff(lhs: mixed, rhs: mixed, prefilter?: npm$deepDiff$PrefilterFn, acc?: Array<mixed>): ?Array<npm$deepDiff$Difference>,
     observableDiff(lhs: mixed, rhs: mixed, observerFn: Function): void,
     applyChange(lhs: mixed, rhs: mixed, difference: npm$deepDiff$Difference): void,
-    revertChange(lhs: mixed, rhs: mixed, difference: npm$deepDiff$Difference): void,
+    revertChange(lhs: mixed, rhs: mixed, difference: npm$deepDiff$Difference): void
   }
 }
