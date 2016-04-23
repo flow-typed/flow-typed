@@ -1,14 +1,14 @@
-type FilesToString = (files: File|Array<File>) => string;
-type DrawImageOptions = {
+type dropzone$FilesToString = (files: File|Array<File>) => string;
+type dropzone$DrawImageOptions = {
   srcX: number,
   srcY: number,
   srcWidth: number,
   srcHeight: number,
 }
 
-type DropzoneOptions = {
-  url: string|FilesToString,
-  method?: 'post'|'put'|FilesToString,
+type dropzone$DropzoneOptions = {
+  url: string|dropzone$FilesToString,
+  method?: 'post'|'put'|dropzone$FilesToString,
   parallelUploads?: number,
   maxFilesize?: number,
   filesizeBase?: number,
@@ -23,7 +23,7 @@ type DropzoneOptions = {
   thumbnailWidth?: number,
   thumbnailHeight?: number,
   maxFiles?: number,
-  resize?: (file: File) => DrawImageOptions,
+  resize?: (file: File) => dropzone$DrawImageOptions,
   init?: Function,
   acceptedFiles?: string,
   autoProcessQueue?: bool,
@@ -44,7 +44,7 @@ type DropzoneOptions = {
 
 declare module 'dropzone' {
   declare class Dropzone {
-    static constructor(selector: string, options: DropzoneOptions): Dropzone;
+    static constructor(selector: string, options: dropzone$DropzoneOptions): Dropzone;
     static autoDiscover: bool;
     static confirm(question: string, accepted: Function, rejected?: Function): void;
     disable(): void;
