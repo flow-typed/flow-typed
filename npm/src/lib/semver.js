@@ -11,6 +11,15 @@ export type Version = {
   upperBound?: Version,
 };
 
+export function emptyVersion(): Version {
+  return {
+    range: '<=',
+    major: 'x',
+    minor: 'x',
+    patch: 'x'
+  }
+}
+
 export function copyVersion(ver: Version): Version {
   return {
     range: ver.range,
@@ -138,3 +147,27 @@ export function wildcardSatisfies(ver: Version, range: string): boolean {
     return semver.satisfies(versionToString(ver), range);
   }
 };
+
+
+// Given two versions (can be ranges), returns < 0 if a's lower
+// bound is less than b's lower bound. When used as a comparator,
+// this should sort a list of ranges in ascending order by lower bound.
+export function compareRanges(a: Version, b: Version): number {
+
+  function replaceX(val : number | 'x'): number {
+    if (typeof val == 'string') {
+      return 0
+    } else {
+      return val
+    }
+  }
+
+  if (a.major != b.major) {
+    return replaceX(a.major) - replaceX(b.major);
+  } else if (a.minor != b.minor) {
+    return replaceX(a.minor) - replaceX(b.minor);
+  } else if (a.minor != b.minor) {
+    return replaceX(a.patch) - replaceX(b.patch);
+  }
+  return 0;
+}

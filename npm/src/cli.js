@@ -6,6 +6,8 @@ import * as yargs from "yargs";
 
 import * as RunTests from "./commands/runTests.js";
 import * as ValidateDefs from "./commands/validateDefs.js";
+import * as Search from "./commands/search.js";
+import * as Install from "./commands/install.js";
 
 type CommandModule = {
   name: string,
@@ -16,6 +18,8 @@ type CommandModule = {
 const commands: Array<CommandModule> = [
   RunTests,
   ValidateDefs,
+  Search,
+  Install
 ];
 
 commands

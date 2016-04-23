@@ -2,10 +2,14 @@
 
 import * as semver from "semver";
 import request from "request";
+import Rx from "rx-lite";
+import _ from 'lodash/fp';
+import table from 'table';
 
 import {gitHubClient} from "./github.js";
 import {fs, path} from "./node.js";
-import {versionToString} from "./semver.js";
+import {versionToString, stringToVersion, emptyVersion, compareRanges}
+  from "./semver.js";
 
 import type {Version} from "./semver.js";
 
@@ -18,9 +22,15 @@ export type LibDef = {
   pkgName: string,
   pkgVersion: Version,
   pkgVersionStr: string,
+  pkgNameVersionStr: string,
 };
 
-export type LibDefFlowVersion = {
+export type LibDefWithFlow = {
+  flowVersion: Version,
+  flowVersionStr: string
+} & LibDef
+
+type LocalLibDefFlowVersion = {
   libDef: LibDef,
   flowVersion: Version,
   flowVersionStr: string,
@@ -51,6 +61,7 @@ function _parseLibDefDirName(libDefDirName, validationErrors?): LibDef {
         pkgName: '',
         pkgVersion: {major: 'x', minor: 'x', patch: 'x'},
         pkgVersionStr: '',
+        pkgNameVersionStr: ''
       };
     } else {
       throw new Error(error);
@@ -154,7 +165,7 @@ const FLOW_DIR_NAME_RE = new RegExp(
 export async function getLocalLibDefFlowVersions(
   libDefs: Array<LibDef>,
   validationErrors?: Map<string, Array<string>>
-): Promise<Array<LibDefFlowVersion>> {
+): Promise<Array<LocalLibDefFlowVersion>> {
   const libDefFlowVersions = [];
   await P.all(libDefs.map(async (libDef) => {
     const libDefPath = _getLibDefPath(libDef);
@@ -170,7 +181,7 @@ export async function getLocalLibDefFlowVersions(
       }
     }
     const localDirItems = await fs.readdir(libDefPath);
-    const flowVersions: Array<LibDefFlowVersion> = [];
+    const flowVersions: Array<LocalLibDefFlowVersion> = [];
     const libDefSharedTests = [];
     await P.all(localDirItems.map(async (localDirItem) => {
       const itemPath = path.join(libDefPath, localDirItem);
@@ -387,4 +398,102 @@ export async function getShallowGHLibDefs(
     _libdefs = await _getShallowGHLibDefs()
   }
   return _libdefs
+}
+
+const identity = i => i
+
+function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> {
+  const getContent = Rx.Observable.fromCallback(gitHubClient().repos.getContent)
+  const notNull = i => i != null
+  return getContent({
+    user: 'flowtype',
+    repo: 'flow-typed',
+    path: `/definitions/${def.libDef.pkgNameVersionStr}`
+  })
+  .flatMap(identity)
+  .filter(notNull)
+  .flatMap(identity)
+  .map(i => i.name)
+  .filter(name => name.indexOf('flow_') == 0)
+  .map((name:string): Version => {
+    let matches = name.match(/flow_(.*)/)
+    if (matches && matches.length > 1) {
+      const withoutPrefix = matches[1]
+      return stringToVersion(withoutPrefix)
+    } else {
+      return emptyVersion()
+    }
+  })
+  .toArray()
+  .toPromise()
+}
+
+export async function getGHLibsAndFlowVersions(
+  ignoreCache?: boolean = false
+): Promise<Array<LibDefWithFlow>> {
+  await _verifyCLIVersion()
+  return await Rx.Observable
+  .fromPromise(getShallowGHLibDefs(ignoreCache))
+  .flatMap(defsMap => {
+    return defsMap.values()
+  })
+  .flatMap(identity)
+  .flatMap(async (def: ShallowGHLibDef) => {
+    const flowVersions = await getGHFlowVersionsForDef(def)
+    return flowVersions.map(v => ({
+      ...def.libDef,
+      flowVersionStr: versionToString(v),
+      flowVersion: v
+    }))
+  })
+  .flatMap(identity)
+  .toArray()
+  .toPromise()
+}
+
+export function filterDefs(
+  term: string,
+  defs: Array<LibDefWithFlow>,
+  flowVersion?: string,
+  libVersion?: string
+): Array<LibDefWithFlow> {
+  const filtered = defs.filter(def => {
+    const containsTerm = def.pkgName.toLowerCase()
+      .indexOf(term.toLowerCase()) != -1;
+    const matchesFlowVersion = flowVersion
+      ? semver.satisfies(flowVersion, def.flowVersionStr)
+      : true;
+    const matchesLibVersion = (libVersion && libVersion !== "auto")
+      ? semver.satisfies(libVersion, def.pkgVersionStr)
+      : true;
+    return !!containsTerm && matchesFlowVersion && matchesLibVersion;
+  });
+
+  if (libVersion !== "auto") {
+    return filtered
+  }
+
+  // At this point our list can contain libdefs for different libraries
+  // , and different versions for each of those different libraries.
+  // But we want to select only the highest libdef version for each lib.
+  return _.flow(
+    _.groupBy('pgkName'),
+    _.values,
+    _.map((defList: Array<LibDef>) => {
+      const sorted = defList.sort(compareRanges)
+      return sorted[sorted.length - 1]
+    })
+  )(filtered)
+}
+
+export function formatDefTable(defs: Array<LibDefWithFlow>): string {
+  const formatted = [['Name', 'Package Version', 'Flow Version']]
+  .concat(defs.map(def => {
+    return [def.pkgName, def.pkgVersionStr, def.flowVersionStr];
+  }));
+  if (formatted.length == 1) {
+    return "No definitions found, sorry!";
+  } else {
+    return "\nFound definitions:\n" + table(formatted)
+  }
 }
