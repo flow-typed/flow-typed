@@ -23,5 +23,5 @@ type ReactModal$Props = {
 type ReactModal$State = void
 
 declare module 'react-modal' {
-  declare var exports: React.Component<DReactModal$efaultProps, ReactModal$Props, ReactModal$State>;
+  declare var exports: React.Component<ReactModal$DefaultProps, ReactModal$Props, ReactModal$State>;
 }
