@@ -1,6 +1,13 @@
 // @flow
 
-import "babel-polyfill";
+// If you import 'babel-polyfill' when using the babel-node
+// binary for development, an error will be thrown,
+// since babel-node already includes it.
+// This will make sure it works in the dist file, while
+// making the code executable via babel-node for development
+if (regeneratorRuntime == null) {
+  require("babel-polyfill");
+}
 
 import * as yargs from "yargs";
 
