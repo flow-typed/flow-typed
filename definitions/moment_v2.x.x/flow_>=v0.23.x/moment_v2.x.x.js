@@ -1,56 +1,55 @@
-type MomentOptions = {
-  y?: number|string,
-  year?: number|string,
-  years?: number|string,
-  M?: number|string,
-  month?: number|string,
-  months?: number|string,
-  d?: number|string,
-  day?: number|string,
-  days?: number|string,
-  date?: number|string,
-  h?: number|string,
-  hour?: number|string,
-  hours?: number|string,
-  m?: number|string,
-  minute?: number|string,
-  minutes?: number|string,
-  s?: number|string,
-  second?: number|string,
-  seconds?: number|string,
-  ms?: number|string,
-  millisecond?: number|string,
-  milliseconds?: number|string,
-};
-
-type MomentObject = {
-  years: number,
-  months: number,
-  date: number,
-  hours: number,
-  minutes: number,
-  seconds: number,
-  milliseconds: number,
-};
-
-type MomentCreationData = {
-  input: string,
-  format: string,
-  locale: Object,
-  isUTC: bool,
-  strict: bool,
-};
-
-type CalendarFormats = {
-  sameDay?: string,
-  nextDay?: string,
-  nextWeek?: string,
-  lastDay?: string,
-  lastWeek?: string,
-  sameElse?: string,
-};
-
 declare module 'moment' {
+  declare type MomentOptions = {
+    y?: number|string,
+    year?: number|string,
+    years?: number|string,
+    M?: number|string,
+    month?: number|string,
+    months?: number|string,
+    d?: number|string,
+    day?: number|string,
+    days?: number|string,
+    date?: number|string,
+    h?: number|string,
+    hour?: number|string,
+    hours?: number|string,
+    m?: number|string,
+    minute?: number|string,
+    minutes?: number|string,
+    s?: number|string,
+    second?: number|string,
+    seconds?: number|string,
+    ms?: number|string,
+    millisecond?: number|string,
+    milliseconds?: number|string,
+  };
+
+  declare type MomentObject = {
+    years: number,
+    months: number,
+    date: number,
+    hours: number,
+    minutes: number,
+    seconds: number,
+    milliseconds: number,
+  };
+
+  declare type MomentCreationData = {
+    input: string,
+    format: string,
+    locale: Object,
+    isUTC: bool,
+    strict: bool,
+  };
+
+  declare type CalendarFormats = {
+    sameDay?: string,
+    nextDay?: string,
+    nextWeek?: string,
+    lastDay?: string,
+    lastWeek?: string,
+    sameElse?: string,
+  };
   declare class LocaleData {
     months(moment: Moment): string;
     monthsShort(moment: Moment): string;
