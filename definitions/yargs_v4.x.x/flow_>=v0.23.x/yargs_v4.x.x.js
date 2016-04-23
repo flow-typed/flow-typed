@@ -1,0 +1,60 @@
+type yargs$DescParseFn = (configPath: string) => Object;
+
+declare module 'yargs' {
+  declare class Yargs {
+    _: string[];
+    alias(toBeAliased: string, alias: string): this;
+    argv: Object;
+    array(key: string): this;
+    boolean(paramter: string|string[]): this;
+    check(fn: (argv: Object, options: any[]) => ?bool): this;
+    choices(key: string, allowed: string[]): this;
+    command(cmd: string, desc: string|false, builder?: Object|(yargsInstance: Yargs) => void, handler?: Function): this;
+    completion(cmd: string, description?: string, fn?: (current: string, argv: Object, done: (competion: string[]) => void) => ?(string[]|Promise<string[]>)): this;
+    config(key: string, description?: string|yargs$DescParseFn, praseFn?: yargs$DescParseFn): this;
+    count(name: string): this;
+    default(defaultObject: { [paramter: string]: any }): this;
+    default(parameter: string, value: any): this;
+    demand(requiredParameter: string[]|number): this;
+    require(requiredParameter: string[]|number): this;
+    describe(key: string, desc: string): this;
+    describe(describeObject: { [key: string]: string }): this;
+    detectLocale(shouldI: bool): this;
+    env(prefix?: string): this;
+    epilog(epi: string): this;
+    epilogue(epi: string): this;
+    example(cmd: string, desc: string): this;
+    exitProcess(enable: bool): this;
+    fail(fn: (failureMessage: string) => void): this;
+    globals(globals: string|string[]): this;
+    group(key: string|string[], groupName: string): this;
+    help(option: string, desc?: string): this;
+    implies(keyA: string, keyB: string): this;
+    implies(keys: { [key: string]: string }): this;
+    locale(): string;
+    locale(locale: string): this;
+    nargs(key: string, count: number): this;
+    normalize(key: string): this;
+    option(key: string, options: Object): this;
+    options(key: string, options: Object): this;
+    option(optionMap: { [key: string]: Object }): this;
+    options(optionMap: { [key: string]: Object }): this;
+    parse(args: string|string[]): Object;
+    pkgConf(key: string, cwd?: string): this;
+    requiresArg(key: string|string[]): this;
+    reset(): this;
+    showCompletionScript(): string;
+    showHelp(consoleLevel: string): this;
+    showHelpOnFail(enable: bool, message?: string): this;
+    strict(): this;
+    string(key: string|string[]): this;
+    number(key?: string|string[]): this;
+    updateLocale(obj: Object): this;
+    updateStrings(obj: Object): this;
+    usage(message: string, opts?: Object): this;
+    usage(howToUse: string): this;
+    version(option?: string|Function, description?: string|Function, version?: string|Function): this;
+    wrap(columns: ?number): this;
+  }
+  declare var exports: Yargs;
+}
