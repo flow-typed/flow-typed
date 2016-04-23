@@ -1,4 +1,4 @@
-type Axis = {
+type npm$chartist$Axis = {
   offset?: number,
   position?: string,
   labelOffset: ?{
@@ -12,9 +12,9 @@ type Axis = {
   onlyInteger?: bool,
 }
 
-type BarOptions = {
-  axisX?: Axis,
-  axiyY?: Axis,
+type npm$chartist$BarOptions = {
+  axisX?: npm$chartist$Axis,
+  axiyY?: npm$chartist$Axis,
   width?: string,
   height?: string,
   high?: any,
@@ -47,7 +47,7 @@ type BarOptions = {
     end?: string,
   },
 }
-type PieOptions = {
+type npm$chartist$PieOptions = {
   width?: string,
   height?: string,
   chartPadding?: number|{
@@ -71,18 +71,18 @@ type PieOptions = {
   showLabel?: bool,
   labelOffset?: number,
   labelPosition?: 'inside'|'outside'|'center',
-  labelInterpolationFunc?: Function,
+  labelInterpolationFnc?: Function,
   labelDirection?: 'neutral'|'explode'|'implose',
   reverseData?: bool,
 }
 
 declare module 'chartist' {
   declare class Bar {
-    static defaultOptions: BarOptions;
-    static (query: string|Node, data: Object, options?: BarOptions, responsiveOptions?: Array<any>): Bar;
+    static defaultOptions: npm$chartist$BarOptions;
+    static (query: string|Node, data: Object, options?: npm$chartist$BarOptions, responsiveOptions?: Array<any>): Bar;
   }
   declare class Pie {
-    static defaultOptions: PieOptions;
-    static (query: string|Node, data: Object, options?: PieOptions, responsiveOptions?: Array<any>): Pie;
+    static defaultOptions: npm$chartist$PieOptions;
+    static (query: string|Node, data: Object, options?: npm$chartist$PieOptions, responsiveOptions?: Array<any>): Pie;
   }
 }
