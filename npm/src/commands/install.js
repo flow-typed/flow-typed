@@ -1,8 +1,9 @@
 // @flow
+import mkdir from 'mkdirp'
 import {getGHLibsAndFlowVersions, filterDefs, formatDefTable}
   from "../lib/libDef.js";
 import type {LibDefWithFlow} from "../lib/libDef.js";
-import {child_process, path} from '../lib/node'
+import {child_process, path, https, fs} from '../lib/node'
 
 export const name = "install";
 export const description =
@@ -17,31 +18,34 @@ export async function run(args: Args): Promise<number> {
   function errorNeedDefName() {
     console.error('Please provide a libdef name ' +
       '(example: lodash, or lodash@4.2.1)')
-    return 1;
   }
 
   function errorNeedFlowVersion() {
     console.error('Please provide a flow version ' +
     '(example: --flow v0.23.0)')
-    return 1;
   }
 
   if (!args._ || !(args._.length > 1)) {
     errorNeedDefName()
+    return 1;
   }
 
-  if (!args.flowVersion) {
+  if (!args.flow) {
     errorNeedFlowVersion()
+    return 1;
   }
 
   const term = args._[1];
 
-  const flowVersion = args.flowVersion
+  const flowVersion = args.flow
   const matches = term.match(/(.*)@?(.*)?/)
   const defName = (matches && matches[1])
   const defVersion = (matches && matches[2]) || 'auto'
 
-  if (!defName) { errorNeedDefName() }
+  if (!defName) {
+    errorNeedDefName()
+    return 1;
+  }
 
   const defs = await getGHLibsAndFlowVersions();
   const filtered = filterDefs(term, defs, flowVersion, defVersion)
@@ -49,14 +53,24 @@ export async function run(args: Args): Promise<number> {
   if (!filtered.length) {
     console.error('Sorry, no libdef found with that name, version, ' +
     'and flow version.')
-    process.exit(1)
+    return 1;
   }
 
   const def = filtered[0]
-  console.log('About to install', def)
 
-  // Get the first item off of the compatible libdefs array,
-  // download it, and put it in the flow-typed directory.
+  console.log('DEBUG: About to install', def.pkgName, def.pkgVersionStr)
 
-  return 0;
+  await new Promise((res, rej) => {
+    const flowTypedFolder = path.resolve('./flow-typed')
+
+    // Here's where I left off, creating the flow-typed folder if it doesn't
+    // exist, and downloading the libdef from github to that location.
+    mkdir.sync(flowTypedFolder)
+
+    https.get(` https://raw.githubusercontent.com/flowtype/flow-typed/master/definitions/${def.pkgName}_${def.pkgVersionStr}/flow_${def.flowVersionStr}/${def.pkgName}_${def.flowVersionStr}.js`, response => {
+      const file = fs.createWriteStream(`${flowTypedFolder}/${def.pkgName}_${def.pkgVersionStr}.js`)
+      response.pipe(file)
+      res(0)
+    })
+  })
 };
