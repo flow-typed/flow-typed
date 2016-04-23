@@ -45,13 +45,14 @@ export async function run(args: Args): Promise<number> {
   }
 
   if (args.flowVersion == null) {
-    return failWithMessage('Please provide a flow version (example: --flow 0.23)');
+    return failWithMessage('Please provide a flow version (example: --flowVersion 0.23.0)');
   }
 
   const term = args._[1];
 
   const flowVersion = args.flowVersion;
-  const matches = term.match(/(.*)@?(.*)?/)
+
+  const matches = term.match(/(\w*)?@?(.*)/)
   const defName = (matches && matches[1])
   const defVersion = (matches && matches[2]) || 'auto'
 
