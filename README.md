@@ -1,4 +1,4 @@
-_**Notice:** Currently the [`flow-typed` npm package](https://www.npmjs.com/package/flow-typed) is not up-to-date, nor is it particularly useful. The CLI is still underway and will be published to npm when it's ready._
+_**Notice:** Currently the [`flow-typed` CLI](https://www.npmjs.com/package/flow-typed) is not up-to-date, nor is it particularly useful. The CLI is still underway and will be published to npm when it's ready._
 
 <img 
   alt="Flow Logo" 
