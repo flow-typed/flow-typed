@@ -1,25 +1,27 @@
 declare module 'axios' {
   declare interface AxiosXHRConfigBase<T> {
-    transformRequest?: <U>(data: T) => U|Array<<U>(data: T) => U>;
-    transformReponse?: <U>(data: T) => U;
     headers?: Object;
+    maxContentLength?: number;
     params?: Object;
-    withCredentials?: boolean;
     responseType?: string;
+    transformReponse?: <U>(data: T) => U;
+    transformRequest?: <U>(data: T) => U|Array<<U>(data: T) => U>;
+    withCredentials?: boolean;
     xsrfCookieName?: string;
     xsrfHeaderName?: string;
   }
   declare interface AxiosXHRConfig<T> extends AxiosXHRConfigBase<T> {
-    url: string;
-    method?: string;
     data?: T;
+    method?: string;
+    url: string;
   }
   declare class AxiosXHR<T> {
+    config: AxiosXHRConfig<T>;
     data: T;
+    headers: Object;
     status: number;
     statusText: string,
-    headers: Object;
-    config: AxiosXHRConfig<T>;
+    request: mixed, //this is the request object, not really typed currently.
   }
   declare class AxiosInterceptorIdent extends String {}
   declare class AxiosRequestInterceptor<T> {
