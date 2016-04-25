@@ -1,18 +1,17 @@
-type npm$i18n$TFunction = (key?: ?string, data?: ?Object) => string;
-type npm$i18n$CallbackFn = (err: any, t: TFunction) => any;
-
 declare module 'i18next' {
+  declare type TFunction = (key?: ?string, data?: ?Object) => string;
+  declare type CallbackFn = (err: any, t: TFunction) => any;
   declare class i18next extends events$EventEmitter {
     t(key?: ?string, data?: ?Object): string;
-    init(options: Object, cb?: npm$i18n$CallbackFn): void;
+    init(options: Object, cb?: CallbackFn): void;
     use(module: any): Class<i18next>;
     exists(key?: string, options: any): bool;
-    getFixedT(lng: string, ns?: string): npm$i18n$TFunction;
-    changeLanguage(lng: string, callback?: npm$i18n$TFunction): void;
+    getFixedT(lng: string, ns?: string): TFunction;
+    changeLanguage(lng: string, callback?: TFunction): void;
     language: string;
     languages: string[];
-    loadNamespaces(ns: string|string[], callback?: npm$i18n$CallbackFn): void;
-    loadLanguages(ns: string|string[], callback?: npm$i18n$CallbackFn): void;
+    loadNamespaces(ns: string|string[], callback?: CallbackFn): void;
+    loadLanguages(ns: string|string[], callback?: CallbackFn): void;
     loadResources(callback: Function): void;
     setDefaultNamespace(ns: string): void;
     dir(lng: string): 'rtl'|'ltr';
