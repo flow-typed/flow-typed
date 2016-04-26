@@ -2,10 +2,13 @@
 
 import * as semver from "semver";
 import request from "request";
+import Rx from "rx-lite";
+import table from 'table';
 
 import {gitHubClient} from "./github.js";
 import {fs, path} from "./node.js";
-import {versionToString} from "./semver.js";
+import {versionToString, stringToVersion, emptyVersion}
+  from "./semver.js";
 
 import type {Version} from "./semver.js";
 
@@ -18,9 +21,15 @@ export type LibDef = {
   pkgName: string,
   pkgVersion: Version,
   pkgVersionStr: string,
+  pkgNameVersionStr: string,
 };
 
-export type LibDefFlowVersion = {
+export type LibDefWithFlow = {
+  flowVersion: Version,
+  flowVersionStr: string
+} & LibDef
+
+type LocalLibDefFlowVersion = {
   libDef: LibDef,
   flowVersion: Version,
   flowVersionStr: string,
@@ -47,10 +56,14 @@ function _parseLibDefDirName(libDefDirName, validationErrors?): LibDef {
       const errors = validationErrors.get(libDefDirName) || [];
       errors.push(error);
       validationErrors.set(libDefDirName, errors);
+      const pkgName = '??error??';
+      const pkgVersion = emptyVersion();
+      const pkgVersionStr = versionToString(pkgVersion);
       return {
-        pkgName: '',
-        pkgVersion: {major: 'x', minor: 'x', patch: 'x'},
-        pkgVersionStr: '',
+        pkgName,
+        pkgVersion,
+        pkgVersionStr,
+        pkgNameVersionStr: `${pkgName}_${pkgVersionStr}`
       };
     } else {
       throw new Error(error);
@@ -68,6 +81,7 @@ function _parseLibDefDirName(libDefDirName, validationErrors?): LibDef {
     pkgName: itemMatches[1],
     pkgVersion: pkgVersion,
     pkgVersionStr: versionToString(pkgVersion),
+    pkgNameVersionStr: libDefDirName,
   };
 }
 
@@ -154,7 +168,7 @@ const FLOW_DIR_NAME_RE = new RegExp(
 export async function getLocalLibDefFlowVersions(
   libDefs: Array<LibDef>,
   validationErrors?: Map<string, Array<string>>
-): Promise<Array<LibDefFlowVersion>> {
+): Promise<Array<LocalLibDefFlowVersion>> {
   const libDefFlowVersions = [];
   await P.all(libDefs.map(async (libDef) => {
     const libDefPath = _getLibDefPath(libDef);
@@ -170,7 +184,7 @@ export async function getLocalLibDefFlowVersions(
       }
     }
     const localDirItems = await fs.readdir(libDefPath);
-    const flowVersions: Array<LibDefFlowVersion> = [];
+    const flowVersions: Array<LocalLibDefFlowVersion> = [];
     const libDefSharedTests = [];
     await P.all(localDirItems.map(async (localDirItem) => {
       const itemPath = path.join(libDefPath, localDirItem);
@@ -301,44 +315,50 @@ export type GHLibDef = ShallowGHLibDef & {url: string};
 const CLI_METADATA_URL =
   'https://raw.githubusercontent.com/flowtype/flow-typed/master/definitions/' +
   '.cli-metadata.json';
-async function _verifyCLIVersion(definitionsDirContent) {
-  const cliMetaDataJSON = await new Promise((res, rej) => {
-    request({
-      url: CLI_METADATA_URL,
-      headers: {
-        "User-Agent": "flow-typed CLI (github.com/flowtype/flow-typed"
-      },
-    }, (error, response, body) => {
-      if (error) {
-        rej(error);
-      } else if (response.statusCode !== 200) {
-        rej(new Error(
-          `Non-200 response code when fetching CLI metadata!: ` +
-          `${response.statusCode}`
-        ));
-      } else {
-        res(body);
+let _cliVersionVerified = null;
+function _verifyCLIVersion(definitionsDirContent) {
+  if (_cliVersionVerified === null) {
+    _cliVersionVerified = (async () => {
+      const cliMetaDataJSON = await new Promise((res, rej) => {
+        request({
+          url: CLI_METADATA_URL,
+          headers: {
+            "User-Agent": "flow-typed CLI (github.com/flowtype/flow-typed"
+          },
+        }, (error, response, body) => {
+          if (error) {
+            rej(error);
+          } else if (response.statusCode !== 200) {
+            rej(new Error(
+              `Non-200 response code when fetching CLI metadata!: ` +
+              `${response.statusCode}`
+            ));
+          } else {
+            res(body);
+          }
+        });
+      });
+
+      let cliMetaData;
+      try {
+        cliMetaData = JSON.parse(cliMetaDataJSON);
+      } catch (e) {
+        e.message =
+          `${e.message}\n\n Unable to parse the CLI metadata! Please open an ` +
+          `issue on https://github.com/flowtype/flow-typed/ and report this!`;
+        throw e;
       }
-    });
-  });
 
-  let cliMetaData;
-  try {
-    cliMetaData = JSON.parse(cliMetaDataJSON);
-  } catch (e) {
-    e.message =
-      `${e.message}\n\n Unable to parse the CLI metadata! Please open an ` +
-      `issue on https://github.com/flowtype/flow-typed/ and report this!`;
-    throw e;
+      const pkgJsonData = require('../../package.json');
+      if (!semver.satisfies(pkgJsonData.version, cliMetaData.minimumCLIVersion)) {
+        throw new Error(
+          "This `flow-typed` CLI is out of date! Please upgrade past version " +
+          cliMetaData.minimumCLIVersion
+        );
+      }
+    })();
   }
-
-  const pkgJsonData = require('../../package.json');
-  if (!semver.satisfies(pkgJsonData.version, cliMetaData.minimumCLIVersion)) {
-    throw new Error(
-      "This `flow-typed` CLI is out of date! Please upgrade past version " +
-      cliMetaData.minimumCLIVersion
-    );
-  }
+  return _cliVersionVerified;
 }
 
 async function _getShallowGHLibDefs(): Promise<Map<string, Array<ShallowGHLibDef>>> {
@@ -388,3 +408,71 @@ export async function getShallowGHLibDefs(
   }
   return _libdefs
 }
+
+const identity = i => i
+
+async function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> {
+  await _verifyCLIVersion();
+  const getContent = Rx.Observable.fromCallback(gitHubClient().repos.getContent)
+  const notNull = i => i != null
+  return getContent({
+    user: 'flowtype',
+    repo: 'flow-typed',
+    path: `/definitions/${def.libDef.pkgNameVersionStr}`
+  })
+  .flatMap(identity)
+  .filter(notNull)
+  .flatMap(identity)
+  .map(i => i.name)
+  .filter((name: string) => name.indexOf('flow_') == 0)
+  .map((name:string): Version => {
+    let matches = name.match(/flow_(.*)/)
+    if (matches && matches.length > 1) {
+      const withoutPrefix = matches[1]
+      return stringToVersion(withoutPrefix)
+    } else {
+      return emptyVersion()
+    }
+  })
+  .toArray()
+  .toPromise()
+}
+
+export async function getGHLibsAndFlowVersions(
+  ignoreCache?: boolean = false
+): Promise<Array<LibDefWithFlow>> {
+  await _verifyCLIVersion()
+  return await Rx.Observable
+  .fromPromise(getShallowGHLibDefs(ignoreCache))
+  .flatMap(defsMap => {
+    return defsMap.values()
+  })
+  .flatMap(identity)
+  .flatMap(async (def: ShallowGHLibDef) => {
+    const flowVersions = await getGHFlowVersionsForDef(def)
+    return flowVersions.map(v => ({
+      ...def.libDef,
+      flowVersionStr: versionToString(v),
+      flowVersion: v
+    }))
+  })
+  .flatMap(identity)
+  .toArray()
+  .toPromise()
+}
+
+export function filterDefs(
+  term: string,
+  defs: Array<LibDefWithFlow>,
+  flowVersion?: string
+): Array<LibDefWithFlow> {
+  return defs.filter(def => {
+    const containsTerm = def.pkgName.toLowerCase()
+      .indexOf(term.toLowerCase()) != -1;
+    const matchesFlowVersion = flowVersion
+      ? semver.satisfies(flowVersion, def.flowVersionStr)
+      : true;
+    return !!containsTerm && matchesFlowVersion;
+  });
+}
+

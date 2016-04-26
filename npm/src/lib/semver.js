@@ -11,6 +11,15 @@ export type Version = {
   upperBound?: Version,
 };
 
+export function emptyVersion(): Version {
+  return {
+    range: '<=',
+    major: 'x',
+    minor: 'x',
+    patch: 'x'
+  }
+}
+
 export function copyVersion(ver: Version): Version {
   return {
     range: ver.range,

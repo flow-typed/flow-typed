@@ -2,6 +2,7 @@
 flow-typed
 
 [ignore]
+.*/node_modules/json5/.*
 .*/node_modules/y18n/test/locales/bad-locale\.json
 .*/test-dir/.*
 .*/flow-bins/.*
