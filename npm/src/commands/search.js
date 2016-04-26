@@ -1,8 +1,26 @@
 // @flow
-import {getGHLibsAndFlowVersions, filterDefs, formatDefTable}
-  from "../lib/libDef.js";
+import {getGHLibsAndFlowVersions, filterDefs} from "../lib/libDef.js";
 import type {LibDefWithFlow} from "../lib/libDef.js";
 import {child_process, path} from '../lib/node'
+
+import table from 'table';
+
+export function _formatDefTable(defs: Array<LibDefWithFlow>): string {
+  const formatted = [
+    ['Name', 'Package Version', 'Flow Version'/*, 'Install Command'*/]
+  ].concat(defs.map(def => {
+    return [
+      def.pkgName,
+      def.pkgVersionStr,
+      def.flowVersionStr,
+    ];
+  }));
+  if (formatted.length == 1) {
+    return "No definitions found, sorry!";
+  } else {
+    return "\nFound definitions:\n" + table(formatted)
+  }
+}
 
 export const name = "search";
 export const description =
@@ -18,6 +36,6 @@ export async function run(args: {}): Promise<number> {
   const term = args._[1];
   const defs = await getGHLibsAndFlowVersions();
   const filtered = filterDefs(term, defs, flowVersion)
-  console.log(formatDefTable(filtered))
+  console.log(_formatDefTable(filtered))
   return 0;
 };

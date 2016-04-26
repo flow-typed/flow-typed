@@ -56,11 +56,14 @@ function _parseLibDefDirName(libDefDirName, validationErrors?): LibDef {
       const errors = validationErrors.get(libDefDirName) || [];
       errors.push(error);
       validationErrors.set(libDefDirName, errors);
+      const pkgName = '??error??';
+      const pkgVersion = emptyVersion();
+      const pkgVersionStr = versionToString(pkgVersion);
       return {
-        pkgName: '',
-        pkgVersion: {major: 'x', minor: 'x', patch: 'x'},
-        pkgVersionStr: '',
-        pkgNameVersionStr: ''
+        pkgName,
+        pkgVersion,
+        pkgVersionStr,
+        pkgNameVersionStr: `${pkgName}_${pkgVersionStr}`
       };
     } else {
       throw new Error(error);
@@ -78,6 +81,7 @@ function _parseLibDefDirName(libDefDirName, validationErrors?): LibDef {
     pkgName: itemMatches[1],
     pkgVersion: pkgVersion,
     pkgVersionStr: versionToString(pkgVersion),
+    pkgNameVersionStr: libDefDirName,
   };
 }
 
@@ -311,44 +315,50 @@ export type GHLibDef = ShallowGHLibDef & {url: string};
 const CLI_METADATA_URL =
   'https://raw.githubusercontent.com/flowtype/flow-typed/master/definitions/' +
   '.cli-metadata.json';
-async function _verifyCLIVersion(definitionsDirContent) {
-  const cliMetaDataJSON = await new Promise((res, rej) => {
-    request({
-      url: CLI_METADATA_URL,
-      headers: {
-        "User-Agent": "flow-typed CLI (github.com/flowtype/flow-typed"
-      },
-    }, (error, response, body) => {
-      if (error) {
-        rej(error);
-      } else if (response.statusCode !== 200) {
-        rej(new Error(
-          `Non-200 response code when fetching CLI metadata!: ` +
-          `${response.statusCode}`
-        ));
-      } else {
-        res(body);
+let _cliVersionVerified = null;
+function _verifyCLIVersion(definitionsDirContent) {
+  if (_cliVersionVerified === null) {
+    _cliVersionVerified = (async () => {
+      const cliMetaDataJSON = await new Promise((res, rej) => {
+        request({
+          url: CLI_METADATA_URL,
+          headers: {
+            "User-Agent": "flow-typed CLI (github.com/flowtype/flow-typed"
+          },
+        }, (error, response, body) => {
+          if (error) {
+            rej(error);
+          } else if (response.statusCode !== 200) {
+            rej(new Error(
+              `Non-200 response code when fetching CLI metadata!: ` +
+              `${response.statusCode}`
+            ));
+          } else {
+            res(body);
+          }
+        });
+      });
+
+      let cliMetaData;
+      try {
+        cliMetaData = JSON.parse(cliMetaDataJSON);
+      } catch (e) {
+        e.message =
+          `${e.message}\n\n Unable to parse the CLI metadata! Please open an ` +
+          `issue on https://github.com/flowtype/flow-typed/ and report this!`;
+        throw e;
       }
-    });
-  });
 
-  let cliMetaData;
-  try {
-    cliMetaData = JSON.parse(cliMetaDataJSON);
-  } catch (e) {
-    e.message =
-      `${e.message}\n\n Unable to parse the CLI metadata! Please open an ` +
-      `issue on https://github.com/flowtype/flow-typed/ and report this!`;
-    throw e;
+      const pkgJsonData = require('../../package.json');
+      if (!semver.satisfies(pkgJsonData.version, cliMetaData.minimumCLIVersion)) {
+        throw new Error(
+          "This `flow-typed` CLI is out of date! Please upgrade past version " +
+          cliMetaData.minimumCLIVersion
+        );
+      }
+    })();
   }
-
-  const pkgJsonData = require('../../package.json');
-  if (!semver.satisfies(pkgJsonData.version, cliMetaData.minimumCLIVersion)) {
-    throw new Error(
-      "This `flow-typed` CLI is out of date! Please upgrade past version " +
-      cliMetaData.minimumCLIVersion
-    );
-  }
+  return _cliVersionVerified;
 }
 
 async function _getShallowGHLibDefs(): Promise<Map<string, Array<ShallowGHLibDef>>> {
@@ -401,7 +411,8 @@ export async function getShallowGHLibDefs(
 
 const identity = i => i
 
-function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> {
+async function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> {
+  await _verifyCLIVersion();
   const getContent = Rx.Observable.fromCallback(gitHubClient().repos.getContent)
   const notNull = i => i != null
   return getContent({
@@ -413,7 +424,7 @@ function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> 
   .filter(notNull)
   .flatMap(identity)
   .map(i => i.name)
-  .filter(name => name.indexOf('flow_') == 0)
+  .filter((name: string) => name.indexOf('flow_') == 0)
   .map((name:string): Version => {
     let matches = name.match(/flow_(.*)/)
     if (matches && matches.length > 1) {
@@ -453,7 +464,7 @@ export async function getGHLibsAndFlowVersions(
 export function filterDefs(
   term: string,
   defs: Array<LibDefWithFlow>,
-  flowVersion?: ?string
+  flowVersion?: string
 ): Array<LibDefWithFlow> {
   return defs.filter(def => {
     const containsTerm = def.pkgName.toLowerCase()
@@ -465,14 +476,3 @@ export function filterDefs(
   });
 }
 
-export function formatDefTable(defs: Array<LibDefWithFlow>): string {
-  const formatted = [['Name', 'Package Version', 'Flow Version']]
-  .concat(defs.map(def => {
-    return [def.pkgName, def.pkgVersionStr, def.flowVersionStr];
-  }));
-  if (formatted.length == 1) {
-    return "No definitions found, sorry!";
-  } else {
-    return "\nFound definitions:\n" + table(formatted)
-  }
-}
