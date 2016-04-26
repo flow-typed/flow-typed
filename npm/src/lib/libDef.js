@@ -190,6 +190,10 @@ export async function getLocalLibDefFlowVersions(
       const itemPath = path.join(libDefPath, localDirItem);
       const itemContext = itemPath.substr(LOCAL_DEFINITIONS_DIR.length + 1);
       if (fs.statSync(itemPath).isFile()) {
+        if (path.extname(itemPath) === '.swp') {
+          return;
+        }
+
         if (_validateTestFile(itemPath, itemContext, validationErrors)) {
           libDefSharedTests.push(itemPath);
         }
@@ -256,6 +260,10 @@ export async function getLocalLibDefFlowVersions(
       const flowVersionDirItems = await fs.readdir(itemPath);
       await P.all(flowVersionDirItems.map(async (flowVerDirItem) => {
         if (flowVerDirItem === libDefFileName) {
+          return;
+        }
+
+        if (path.extname(flowVerDirItem) === '.swp') {
           return;
         }
 

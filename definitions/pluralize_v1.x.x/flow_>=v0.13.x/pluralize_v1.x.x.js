@@ -1,12 +1,12 @@
 declare module 'pluralize' {
-  declare class Pluralize {
+  declare var exports: {
     (word: string, count?: number, inclusive?: boolean): string;
-    plural(word: string): string;
-    singular(word: string): string;
+
+    addIrregularRule(single: string, plural: string): void;
     addPluralRule(rule: string|RegExp, replacemant: string): void;
     addSingularRule(rule: string|RegExp, replacemant: string): void;
-    addIrregularRule(single: string, plural: string): void;
     addUncountableRule(ord: string|RegExp): void;
+    plural(word: string): string;
+    singular(word: string): string;
   }
-  declare var exports: Pluralize;
 }

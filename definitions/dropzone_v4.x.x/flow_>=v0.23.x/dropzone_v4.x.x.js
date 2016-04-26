@@ -1,14 +1,14 @@
-type dropzone$FilesToString = (files: File|Array<File>) => string;
-type dropzone$DrawImageOptions = {
+type $npm$dropzone$FilesToString = (files: File|Array<File>) => string;
+type $npm$dropzone$DrawImageOptions = {
   srcX: number,
   srcY: number,
   srcWidth: number,
   srcHeight: number,
 }
 
-type dropzone$DropzoneOptions = {
-  url: string|dropzone$FilesToString,
-  method?: 'post'|'put'|dropzone$FilesToString,
+type $npm$dropzone$DropzoneOptions = {
+  url: string|$npm$dropzone$FilesToString,
+  method?: 'post'|'put'|$npm$dropzone$FilesToString,
   parallelUploads?: number,
   maxFilesize?: number,
   filesizeBase?: number,
@@ -23,7 +23,7 @@ type dropzone$DropzoneOptions = {
   thumbnailWidth?: number,
   thumbnailHeight?: number,
   maxFiles?: number,
-  resize?: (file: File) => dropzone$DrawImageOptions,
+  resize?: (file: File) => $npm$dropzone$DrawImageOptions,
   init?: () => mixed,
   acceptedFiles?: string,
   autoProcessQueue?: bool,
@@ -44,12 +44,14 @@ type dropzone$DropzoneOptions = {
 
 declare module 'dropzone' {
   declare class Dropzone {
-    static constructor(selector: string, options: dropzone$DropzoneOptions): Dropzone;
+    files: Array<File>;
+
+    static constructor(selector: string, options: $npm$dropzone$DropzoneOptions): Dropzone;
     static autoDiscover: bool;
     static confirm(question: string, accepted: () => mixed, rejected?: () => mixed): void;
+    destroy(): void;
     disable(): void;
     enable(): void;
-    files: Array<File>;
     getAcceptedFiles(): Array<File>;
     getQueuedFiles(): Array<File>;
     getRejectedFiles(): Array<File>;
@@ -59,7 +61,6 @@ declare module 'dropzone' {
     processQueue(): void;
     removeAllFiles(cancel?: bool): void;
     removeFile(file: File): void;
-    destroy(): void;
   }
   declare var exports: Class<Dropzone>;
 }
