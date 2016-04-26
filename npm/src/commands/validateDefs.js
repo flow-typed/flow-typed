@@ -17,6 +17,16 @@ export async function run(args: {}): Promise<number> {
     localLibDefs,
     validationErrors
   );
+
+  localLibDefFlowVersions.forEach(libDefFlowVer => {
+    const libDef = libDefFlowVer.libDef;
+    if (libDefFlowVer.testFiles.length === 0) {
+      const errors = validationErrors.get(libDef.pkgNameVersionStr) || [];
+      errors.push(`Every definition file must have at least one test file!`);
+      validationErrors.set(libDef.pkgNameVersionStr, errors);
+    }
+  });
+
   console.log(" ");
 
   validationErrors.forEach((errors, pkgNameVersion) => {
