@@ -3,9 +3,10 @@ declare module 'axios' {
     headers?: Object;
     maxContentLength?: number;
     params?: Object;
-    responseType?: string;
+    responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream';
     transformReponse?: <U>(data: T) => U;
     transformRequest?: <U>(data: T) => U|Array<<U>(data: T) => U>;
+    validateStatus?: ?(status: number) => bool,
     withCredentials?: boolean;
     xsrfCookieName?: string;
     xsrfHeaderName?: string;
@@ -27,14 +28,14 @@ declare module 'axios' {
   declare class AxiosRequestInterceptor<T> {
     use(
       successHandler: ?(response: AxiosXHRConfig<T>) => Promise<AxiosXHRConfig> | AxiosXHRConfig,
-      errorHandler: ?(error: any) => any,
+      errorHandler: ?(error: mixed) => mixed,
     ): AxiosInterceptorIdent;
     eject(ident: AxiosInterceptorIdent): void;
   }
   declare class AxiosResponseInterceptor<T> {
     use(
-      successHandler: ?(response: AxiosXHR<T>) => any,
-      errorHandler: ?(error: any) => any,
+      successHandler: ?(response: AxiosXHR<T>) => mixed,
+      errorHandler: ?(error: mixed) => mixed,
     ): AxiosInterceptorIdent;
     eject(ident: AxiosInterceptorIdent): void;
   }
@@ -45,11 +46,11 @@ declare module 'axios' {
     get: <T>(url: string, config?: AxiosXHRConfigBase<T>) => Promise<T>;
     delete: <T>(url: string, config?: AxiosXHRConfigBase<T>) => Promise<T>;
     head: <T>(url: string, config?: AxiosXHRConfigBase<T>) => Promise<T>;
-    post: <T>(url: string, data?: any, config?: AxiosXHRConfigBase<T>) => Promise<T>;
-    put: <T>(url: string, data?: any, config?: AxiosXHRConfigBase<T>) => Promise<T>;
+    post: <T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>) => Promise<T>;
+    put: <T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>) => Promise<T>;
     interceptors: {
-      request: AxiosRequestInterceptor<any>,
-      response: AxiosResponseInterceptor<any>,
+      request: AxiosRequestInterceptor<mixed>,
+      response: AxiosResponseInterceptor<mixed>,
     },
   }
   declare var exports: Axios;
