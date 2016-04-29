@@ -1,10 +1,10 @@
 import type React from 'react';
 
 type ReactModal$DefaultProps = {
-  isOpen: false,
-  ariaHideApp: true,
-  closeTimeoutMS: 0,
-  shouldCloseOnOverlayClick: true,
+  isOpen: bool,
+  ariaHideApp: bool,
+  closeTimeoutMS: number,
+  shouldCloseOnOverlayClick: bool,
 }
 
 type ReactModal$Props = {
@@ -23,5 +23,9 @@ type ReactModal$Props = {
 type ReactModal$State = void
 
 declare module 'react-modal' {
-  declare var exports: React.Component<ReactModal$DefaultProps, ReactModal$Props, ReactModal$State>;
+  declare class Modal extends React$Component {
+    static defaultProps: ReactModal$DefaultProps;
+    props: ReactModal$Props;
+  }
+  declare var exports: typeof Modal;
 }
