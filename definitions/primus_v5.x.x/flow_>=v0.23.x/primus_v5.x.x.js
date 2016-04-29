@@ -37,9 +37,9 @@ declare class Primus$Spark {
   id: string;
   query: string;
   request: http.ClientRequest;
-  emits(event: string, parser: (next: any, parser: any) => void): void;
+  emits(event: string, parser: (next: any, parser: any) => mixed): void;
   end(data?: any, options?: Object): void;
-  on(event: string, cb: (data: any) => void): void;
+  on(event: string, cb: (data: any) => mixed): void;
   write(data: any): void;
 
   //primus-room
@@ -69,21 +69,21 @@ declare class Primus$Primus {
   timeout: number;
   options: Primus$Options;
   socket: net.Socket;
-  authorize(req: http.ClientRequest, done: () => void): void;
-  before(event: string, cb: (req: http.ClientRequest, res: http.IncomingMessage, next: any) => void): void;
+  authorize(req: http.ClientRequest, done: () => mixed): void;
+  before(event: string, cb: (req: http.ClientRequest, res: http.IncomingMessage, next: any) => mixed): void;
   destroy(): void;
   disable(name: string): void;
-  emits(events: string, parser: (next: any, parser: any) => void): void;
+  emits(events: string, parser: (next: any, parser: any) => mixed): void;
   enable(name: string): void;
   end(): void;
-  forEach(cb: (spark: Primus$Spark, id: string, connections: any) => void): void;
+  forEach(cb: (spark: Primus$Spark, id: string, connections: any) => mixed): void;
   library(): void;
-  on(event: string, cb: (spark: Primus$Spark) => void): void;
+  on(event: string, cb: (spark: Primus$Spark) => mixed): void;
   remove(name: string): void;
-  transform(event: string, cb: (packet: any) => void): void;
+  transform(event: string, cb: (packet: any) => mixed): void;
   use(name: string, plugin: Object): void;
-  write(data: any): void;
-  save(path: string, cb?: (err: any) => void): void;
+  write(data: mixed): void;
+  save(path: string, cb?: (err: any) => mixed): void;
 
   // primus-room
   join(sparks: Array<Primus$Spark|string>, name: string, fn?: Function): void;
