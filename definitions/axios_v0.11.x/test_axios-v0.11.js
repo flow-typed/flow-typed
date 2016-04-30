@@ -1,11 +1,11 @@
 // @flow
 import axios from 'axios';
-(axios.get('foo'): Promise);
+(axios.get('foo'): Promise<*>);
 (axios.post('bar', {}, {
   headers: {
     foo: '',
   },
   xsrfCookieName: 'cookie',
-}): Promise);
+}): Promise<*>);
 // $ExpectError
-(axios.post(123): Promise)
+(axios.post(123): Promise<*>)
