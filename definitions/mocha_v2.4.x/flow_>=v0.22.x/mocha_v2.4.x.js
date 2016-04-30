@@ -1,17 +1,18 @@
-type TestFunction = (() => void | Promise) | ((done : Function) => void);
+type TestFunction = (() => void | Promise<mixed>) | ((done : () => void) => void);
 
-declare class describe {
-    static (name:string, spec:() => void): void;
-    static only(description:string, spec:() => void): void;
-    static skip(description:string, spec:() => void): void;
-    static timeout(ms:number): void;
-}
-declare class it {
-    static (name:string, spec:TestFunction): void;
-    static only(description:string, spec:TestFunction): void;
-    static skip(description:string, spec:TestFunction): void;
-    static timeout(ms:number): void;
-}
+declare var describe : {
+    (name:string, spec:() => void): void;
+    only(description:string, spec:() => void): void;
+    skip(description:string, spec:() => void): void;
+    timeout(ms:number): void;
+};
+
+declare var it : {
+    (name:string, spec:TestFunction): void;
+    only(description:string, spec:TestFunction): void;
+    skip(description:string, spec:TestFunction): void;
+    timeout(ms:number): void;
+};
 
 declare function before(method : TestFunction):void;
 declare function beforeEach(method : TestFunction):void;
