@@ -1,5 +1,3 @@
-import type React from 'react';
-
 declare module 'react-modal' {
   declare type DefaultProps = {
     isOpen: bool,
@@ -20,7 +18,7 @@ declare module 'react-modal' {
     onRequestClose: (event: Event) => mixed,
     shouldCloseOnOverlayClick: bool,
   }
-  declare class Modal extends React.Component {
+  declare class Modal extends React$Component {
     static defaultProps: DefaultProps;
     props: Props;
   }
