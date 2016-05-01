@@ -20,7 +20,7 @@ declare module 'sanitize-html' {
       lowerCaseAttributeNames: bool,
       recognizeCDATA: bool,
       recognizeSelfClosing: bool,
-    }>;,
+    }>,
   }
   declare function exports(dirty: string, options?: SanitizeOptions): string;
 }
