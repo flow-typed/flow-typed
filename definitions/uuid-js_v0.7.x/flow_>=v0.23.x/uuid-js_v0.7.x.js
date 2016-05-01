@@ -10,8 +10,8 @@ declare module 'uuid-js' {
   declare function create(): UUID<1>;
   declare function create<V: 1|4>(version: V): UUID<V>;
   declare function firstFromTime(time: number): UUID<1>;
-  declare function fromBinary(binary: mixed): UUID;
-  declare function fromBytes(bytes: number[]): UUID;
-  declare function fromURN(string: string): UUID;
+  declare function fromBinary(binary: mixed): UUID<*>;
+  declare function fromBytes(bytes: number[]): UUID<*>;
+  declare function fromURN(string: string): UUID<*>;
   declare function lastFromTime(time: number): UUID<1>;
 }
