@@ -42,7 +42,6 @@ declare module 'axios' {
   declare class Axios {
     constructor<T>(config: AxiosXHRConfigBase<T>): Promise<T>;
     <T>(config: AxiosXHRConfigBase<T>): Promise<T>;
-    [key: $Enum<Axios>]: Function;
     get: <T>(url: string, config?: AxiosXHRConfigBase<T>) => Promise<T>;
     delete: <T>(url: string, config?: AxiosXHRConfigBase<T>) => Promise<T>;
     head: <T>(url: string, config?: AxiosXHRConfigBase<T>) => Promise<T>;
