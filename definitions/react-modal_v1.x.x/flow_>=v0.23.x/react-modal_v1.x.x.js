@@ -15,7 +15,7 @@ declare module 'react-modal' {
     ariaHideApp: bool,
     closeTimeoutMS: number,
     onAfterOpen?: () => mixed,
-    onRequestClose: (event: Event) => mixed,
+    onRequestClose?: (event: Event) => mixed,
     shouldCloseOnOverlayClick: bool,
   }
   declare class Modal extends React$Component {
