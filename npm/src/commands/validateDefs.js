@@ -1,16 +1,11 @@
 // @flow
 
-import {fs, path} from "../lib/node.js";
-
-import {versionToString} from "../lib/semver.js";
 import {getLocalLibDefs, getLocalLibDefFlowVersions} from "../lib/libDef.js";
-
-const P = Promise;
 
 export const name = "validate-defs";
 export const description =
   "Validates the structure of the definitions in the local repo.";
-export async function run(args: {}): Promise<number> {
+export async function run(): Promise<number> {
   const validationErrors = new Map();
   const localLibDefs = await getLocalLibDefs(validationErrors);
   const localLibDefFlowVersions = await getLocalLibDefFlowVersions(

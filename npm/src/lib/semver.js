@@ -17,7 +17,7 @@ export function emptyVersion(): Version {
     major: 'x',
     minor: 'x',
     patch: 'x'
-  }
+  };
 }
 
 export function copyVersion(ver: Version): Version {
@@ -28,6 +28,25 @@ export function copyVersion(ver: Version): Version {
     patch: ver.patch,
   };
 }
+
+/**
+ * Given two versions (can be ranges), returns < 0 if a's lower
+ * bound is less than b's lower bound. When used as a comparator,
+ * his should sort a list of ranges in ascending order by lower bound.
+ */
+function _replaceVersionPart(part) {
+  return typeof part === 'string' ? 0 : part;
+}
+export function sortVersions(a: Version, b: Version): number {
+  if (a.major !== b.major) {
+    return _replaceVersionPart(a.major) - _replaceVersionPart(b.major);
+  } else if (a.minor !== b.minor) {
+    return _replaceVersionPart(a.minor) - _replaceVersionPart(b.minor);
+  } else if (a.patch !== b.patch) {
+    return _replaceVersionPart(a.patch) - _replaceVersionPart(b.patch);
+  }
+  return 0;
+};
 
 // TODO: This has some egregious duplication with
 //       libDef.getLocalLibDefFlowVersions(). Need to better consolidate logic

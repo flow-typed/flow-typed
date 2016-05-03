@@ -8,7 +8,7 @@ export const flowVersionsFixture = {
       { "name": "flow_>=v0.18.x", },
       { "name": "test_mori-v0.3.x.js", }
   ]
-}
+};
 
 export const definitionsFixture = [
   {
@@ -26,4 +26,4 @@ export const definitionsFixture = [
     "path": "definitions/mori_v0.3.x",
     "sha": "99d6bd549a2777ab3e0813649d408126620df546"
   }
-]
+];

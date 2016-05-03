@@ -1,14 +1,17 @@
 // @flow
 
-import * as semver from "semver";
+import semver from "semver";
 import request from "request";
 import Rx from "rx-lite";
-import table from 'table';
+import _ from "lodash/fp";
 
 import {gitHubClient} from "./github.js";
 import {fs, path} from "./node.js";
-import {versionToString, stringToVersion, emptyVersion}
-  from "./semver.js";
+import {
+  emptyVersion,
+  stringToVersion,
+  versionToString,
+} from "./semver.js";
 
 import type {Version} from "./semver.js";
 
@@ -78,7 +81,7 @@ function _parseLibDefDirName(libDefDirName, validationErrors?): LibDef {
   const pkgVersion = {major, minor, patch};
 
   return {
-    pkgName: itemMatches[1],
+    pkgName,
     pkgVersion: pkgVersion,
     pkgVersionStr: versionToString(pkgVersion),
     pkgNameVersionStr: libDefDirName,
@@ -324,7 +327,7 @@ const CLI_METADATA_URL =
   'https://raw.githubusercontent.com/flowtype/flow-typed/master/definitions/' +
   '.cli-metadata.json';
 let _cliVersionVerified = null;
-function _verifyCLIVersion(definitionsDirContent) {
+function _verifyCLIVersion() {
   if (_cliVersionVerified === null) {
     _cliVersionVerified = (async () => {
       const cliMetaDataJSON = await new Promise((res, rej) => {
@@ -409,20 +412,20 @@ async function _getShallowGHLibDefs(): Promise<Map<string, Array<ShallowGHLibDef
  */
 let _libdefs = null;
 export async function getShallowGHLibDefs(
-  ignoreCache?: boolean = false
 ): Promise<Map<string, Array<ShallowGHLibDef>>> {
   if (_libdefs == null) {
-    _libdefs = await _getShallowGHLibDefs()
+    _libdefs = await _getShallowGHLibDefs();
   }
-  return _libdefs
+  return _libdefs;
 }
 
-const identity = i => i
+const identity = i => i;
 
 async function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Version>> {
   await _verifyCLIVersion();
-  const getContent = Rx.Observable.fromCallback(gitHubClient().repos.getContent)
-  const notNull = i => i != null
+  const getContent =
+    Rx.Observable.fromCallback(gitHubClient().repos.getContent);
+  const notNull = i => i != null;
   return getContent({
     user: 'flowtype',
     repo: 'flow-typed',
@@ -432,55 +435,82 @@ async function getGHFlowVersionsForDef(def: ShallowGHLibDef): Promise<Array<Vers
   .filter(notNull)
   .flatMap(identity)
   .map(i => i.name)
-  .filter((name: string) => name.indexOf('flow_') == 0)
+  .filter((name: string) => name.indexOf('flow_') === 0)
   .map((name:string): Version => {
-    let matches = name.match(/flow_(.*)/)
+    let matches = name.match(/flow_(.*)/);
     if (matches && matches.length > 1) {
-      const withoutPrefix = matches[1]
-      return stringToVersion(withoutPrefix)
+      const withoutPrefix = matches[1];
+      return stringToVersion(withoutPrefix);
     } else {
-      return emptyVersion()
+      return emptyVersion();
     }
   })
   .toArray()
-  .toPromise()
+  .toPromise();
 }
 
 export async function getGHLibsAndFlowVersions(
   ignoreCache?: boolean = false
 ): Promise<Array<LibDefWithFlow>> {
-  await _verifyCLIVersion()
+  await _verifyCLIVersion();
   return await Rx.Observable
   .fromPromise(getShallowGHLibDefs(ignoreCache))
   .flatMap(defsMap => {
-    return defsMap.values()
+    return defsMap.values();
   })
   .flatMap(identity)
   .flatMap(async (def: ShallowGHLibDef) => {
-    const flowVersions = await getGHFlowVersionsForDef(def)
+    const flowVersions = await getGHFlowVersionsForDef(def);
     return flowVersions.map(v => ({
       ...def.libDef,
       flowVersionStr: versionToString(v),
       flowVersion: v
-    }))
+    }));
   })
   .flatMap(identity)
   .toArray()
-  .toPromise()
+  .toPromise();
 }
 
+type FilterTerm =
+  | {type: 'fuzzy', term: string}
+  | {type: 'exact', libDef: LibDef}
+;
 export function filterDefs(
-  term: string,
+  filter: FilterTerm,
   defs: Array<LibDefWithFlow>,
-  flowVersion?: string
+  flowVersionStr?: string,
 ): Array<LibDefWithFlow> {
   return defs.filter(def => {
-    const containsTerm = def.pkgName.toLowerCase()
-      .indexOf(term.toLowerCase()) != -1;
-    const matchesFlowVersion = flowVersion
-      ? semver.satisfies(flowVersion, def.flowVersionStr)
-      : true;
-    return !!containsTerm && matchesFlowVersion;
+    const defPkgName = def.pkgName.toLowerCase();
+
+    const passesFilter =
+      filter.type === 'fuzzy'
+      ? defPkgName.indexOf(filter.term.toLowerCase()) !== -1
+      : (defPkgName === filter.libDef.pkgName.toLowerCase()
+         && semver.satisfies(
+           filter.libDef.pkgVersionStr,
+           def.pkgVersionStr,
+         )
+        );
+
+    let matchesFlowVersion = true;
+    if (flowVersionStr) {
+      const bounds = def.flowVersionStr.split('_');
+      if (bounds.length === 1) {
+        matchesFlowVersion = semver.satisfies(flowVersionStr, def.flowVersionStr);
+      } else {
+        matchesFlowVersion =
+          semver.satisfies(flowVersionStr, bounds[0])
+          && semver.satisfies(flowVersionStr, bounds[1]);
+      }
+    }
+
+    return passesFilter && matchesFlowVersion;
+  }).sort((a, b) => {
+    const aZeroed = a.pkgVersionStr.replace(/x/g, '0');
+    const bZeroed = b.pkgVersionStr.replace(/x/g, '0');
+    return semver.lt(aZeroed, bZeroed) ? -1 : 1;
   });
 }
 

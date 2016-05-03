@@ -20,9 +20,9 @@ describe('search command', () => {
           flowVersionStr: '>=v0.18.x',
           flowVersion: { range: '>=', major: 0, minor: 18, patch: 'x' }
         }
-      ]
+      ];
 
-      const formatted = _formatDefTable(fixture)
+      const formatted = _formatDefTable(fixture);
       expect(formatted).toEqual(
         "\nFound definitions:" + "\n" +
         "╔══════╤═════════════════╤══════════════╗" + "\n" +
@@ -32,13 +32,13 @@ describe('search command', () => {
         "╟──────┼─────────────────┼──────────────╢" + "\n" +
         "║ mori │ v0.3.x          │ >=v0.18.x    ║" + "\n" +
         "╚══════╧═════════════════╧══════════════╝" + "\n"
-      )
-    })
+      );
+    });
 
     it('gracefully handles not finding any definitions', () => {
-      const fixture = []
-      const formatted = _formatDefTable(fixture)
-      expect(formatted).toEqual('No definitions found, sorry!')
-    })
-  })
+      const fixture = [];
+      const formatted = _formatDefTable(fixture);
+      expect(formatted).toEqual('No definitions found, sorry!');
+    });
+  });
 });

@@ -31,5 +31,5 @@ node_modules
 
 # CLI dist directory
 npm/dist/*
-npm/test-dir/*
-npm/flow-bins/*
+npm/.test-dir/*
+npm/.flow-bins-cache/*
