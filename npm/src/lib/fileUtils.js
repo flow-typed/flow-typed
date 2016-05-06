@@ -7,10 +7,10 @@ const P = Promise;
 export function copyFile(srcPath: string, destPath: string): Promise<void> {
   return new Promise((res, rej) => {
     const reader = fs.createReadStream(srcPath);
-    reader.on("error", err => rej(err));
+    reader.on("error", rej);
     const writer = fs.createWriteStream(destPath);
-    writer.on("error", err => rej(err));
-    writer.on("close", _ => res());
+    writer.on("error", rej);
+    writer.on("close", res);
     reader.pipe(writer);
   });
 }

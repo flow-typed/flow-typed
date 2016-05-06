@@ -9,7 +9,6 @@ import {
 } from "../lib/libDef.js";
 import {versionToString} from "../lib/semver.js";
 
-import GitHub from "github";
 import request from "request";
 import * as semver from "semver";
 
@@ -27,8 +26,8 @@ const BIN_PLATFORM = (_ => {
   }
 })();
 const PKG_ROOT_DIR = path.join(__dirname, "..", "..");
-const TEST_DIR = path.join(PKG_ROOT_DIR, "test-dir");
-const BIN_DIR = path.join(PKG_ROOT_DIR, "flow-bins");
+const TEST_DIR = path.join(PKG_ROOT_DIR, ".test-dir");
+const BIN_DIR = path.join(PKG_ROOT_DIR, ".flow-bins-cache");
 const P = Promise;
 
 type TestGroup = {
@@ -76,7 +75,6 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
       const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
 
       let binURLs = new Map();
-      let releases = new Map();
       let apiPayload = null;
       let page = 0;
       while (apiPayload === null || apiPayload.length === QUERY_PAGE_SIZE) {
@@ -135,7 +133,7 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
 
         // Download the zip file
         await new Promise((res, rej) => {
-          console.log("  Fetching flow-%s...", version)
+          console.log("  Fetching flow-%s...", version);
           const fileRequest = request({
             url: binURL,
             headers: {
@@ -144,7 +142,7 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
             }
           }).on("error", err => rej(err));;
 
-          fileRequest.pipe(fs.createWriteStream(zipPath).on("close", _ => {
+          fileRequest.pipe(fs.createWriteStream(zipPath).on("close", () => {
             console.log("    flow-%s finished downloading.", version);
             res();
           }));

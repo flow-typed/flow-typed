@@ -3,7 +3,8 @@
     "transform-flow-strip-types",
     "transform-regenerator",
     "syntax-async-functions",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "syntax-trailing-function-commas"
   ],
   "presets": [
     "es2015",

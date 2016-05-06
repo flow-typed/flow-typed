@@ -19,7 +19,7 @@ export const fs = {
   mkdir: function(path: string, mode?: number): Promise<void> {
     return new Promise((res, rej) => {
       node_fs.mkdir(path, mode, (err) => {
-        if (err) { rej(err); } else { res() }
+        if (err) { rej(err); } else { res(); }
       });
     });
   },

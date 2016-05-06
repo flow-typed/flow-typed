@@ -4,9 +4,10 @@ import "babel-polyfill";
 
 import * as yargs from "yargs";
 
+import * as Install from "./commands/install.js";
 import * as RunTests from "./commands/runTests.js";
-import * as ValidateDefs from "./commands/validateDefs.js";
 import * as Search from "./commands/search.js";
+import * as ValidateDefs from "./commands/validateDefs.js";
 
 type CommandModule = {
   name: string,
@@ -15,9 +16,10 @@ type CommandModule = {
   run: (argv: Object) => Promise<number>,
 };
 const commands: Array<CommandModule> = [
+  Install,
   RunTests,
+  Search,
   ValidateDefs,
-  Search
 ];
 
 commands

@@ -83,7 +83,7 @@ declare module 'yargs' {
 
     // Alias of require()!
     demand(key: string, msg: string | boolean): this;
-    demand(count: number, max?: number, msg: string | boolean): this;
+    demand(count: number, max?: number, msg?: string | boolean): this;
 
     describe(key: string, desc: string): this;
     describe(describeObject: { [key: string]: string }): this;
@@ -134,7 +134,7 @@ declare module 'yargs' {
 
     // Alias of demand()!
     require(key: string, msg: string | boolean): this;
-    require(count: number, max?: number, msg: string | boolean): this;
+    require(count: number, max?: number, msg?: string | boolean): this;
 
     requiresArg(key: string | Array<string>): this;
 
