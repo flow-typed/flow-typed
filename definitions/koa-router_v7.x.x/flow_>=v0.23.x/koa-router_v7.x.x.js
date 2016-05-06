@@ -21,8 +21,8 @@ declare module 'koa-router' {
     put(name: string, route: string, handler: (ctx: RouterContext, next: Function) => ?Promise): this;
     put(route: string, handler: (ctx: RouterContext, next: Function) => ?Promise): this;
     routes(): Function;
-    use(...middlewares: ((ctx: Koa.Context, next: Function) => ?Promise)[]): this;
-    use(path: string|string[], ...middlewares: ((ctx: Koa.Context, next: Function) => ?Promise)[]): this;
+    use(...middlewares: ((ctx: Koa$Context, next: Function) => ?Promise)[]): this;
+    use(path: string|string[], ...middlewares: ((ctx: Koa$Context, next: Function) => ?Promise)[]): this;
     allowedMethods(options?: {
       throw?: bool,
       notImplemented?: Function,
