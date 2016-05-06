@@ -9,4 +9,4 @@ addons:
 script: ./runtests.sh
 cache:
   directories:
-  - npm/.flow-bins-cache
+  - cli/.flow-bins-cache
