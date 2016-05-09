@@ -1,25 +1,26 @@
 // @flow
 
 import {_formatDefTable} from "../search.js";
+import {stringToVersion} from "../../lib/semver.js";
 
 describe('search command', () => {
   describe('_formatDefTable()', () => {
+    function _generateFixturePkg(name, verStr, flowVerStr) {
+      return {
+        pkgName: name,
+        pkgVersion: stringToVersion(verStr),
+        pkgVersionStr: verStr,
+        pkgNameVersionStr: `${name}_${verStr}`,
+        flowVersion: stringToVersion(verStr),
+        flowVersionStr: flowVerStr,
+        path: '',
+        testFilePaths: [],
+      };
+    }
     it('beautifully formats a table of libDefs', () => {
       const fixture = [
-        { pkgName: 'mori',
-          pkgVersion: { major: 0, minor: 3, patch: 'x' },
-          pkgVersionStr: 'v0.3.x',
-          pkgNameVersionStr: 'mori_v0.3.x',
-          flowVersionStr: '>=v0.22.x',
-          flowVersion: { range: '>=', major: 0, minor: 22, patch: 'x' }
-        },
-        { pkgName: 'mori',
-          pkgVersion: { major: 0, minor: 3, patch: 'x' },
-          pkgVersionStr: 'v0.3.x',
-          pkgNameVersionStr: 'mori_v0.3.x',
-          flowVersionStr: '>=v0.18.x',
-          flowVersion: { range: '>=', major: 0, minor: 18, patch: 'x' }
-        }
+        _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
+        _generateFixturePkg('mori', 'v0.3.x', '>=v0.18.x'),
       ];
 
       const formatted = _formatDefTable(fixture);

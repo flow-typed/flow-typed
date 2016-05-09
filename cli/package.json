@@ -28,10 +28,10 @@
   },
   "homepage": "https://github.com/splodingsocks/FlowTyped#readme",
   "jest": {
+    "automock": false,
     "modulePathIgnorePatterns": [
       "<rootDir>/src/.*"
-    ],
-    "automock": false
+    ]
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
@@ -52,6 +52,7 @@
   "dependencies": {
     "github": "^0.2.4",
     "lodash": "^4.11.2",
+    "nodegit": "^0.13.0",
     "request": "^2.69.0",
     "rx-lite": "4.0.8",
     "semver": "^5.1.0",

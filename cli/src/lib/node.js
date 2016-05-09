@@ -30,9 +30,9 @@ export const fs = {
       });
     });
   },
-  readFile: function(f: string, opts: Object): Promise<Buffer> {
+  readFile: function(f: string, opts?: Object): Promise<Buffer> {
     return new Promise((res, rej) => {
-      node_fs.readFile(f, opts, (err, data) => {
+      node_fs.readFile(f, opts || {}, (err, data) => {
         if (err) { rej(err); } else { res(data); }
       });
     });

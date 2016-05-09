@@ -5,6 +5,8 @@ declare function it(testName: string, cb: (done: () => void) => void): void;
 declare function pit(testName: string, cb: () => Promise<void>): void;
 declare var jest: {
   disableAutomock: () => void,
+  enableAutomock: () => void,
   fn: <T>(impl?: T) => T,
   mock: (moduleName: string, impl?: () => any) => void,
+  unmock: (moduleName: string) => void,
 };
