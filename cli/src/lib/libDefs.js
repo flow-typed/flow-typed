@@ -420,6 +420,26 @@ export async function getCacheLibDefs(
   return getLibDefs(CACHE_REPO_DEFS_DIR, validationErrs);
 };
 
+export async function getCacheLibDefVersion(libDef: LibDef) {
+  await ensureCacheRepo();
+  await verifyCLIVersion(CACHE_REPO_DEFS_DIR);
+  const repo = await Git.Repository.open(CACHE_REPO_DIR);
+  const revWalk = repo.createRevWalk();
+  revWalk.pushHead();
+  const histEntries = await revWalk.fileHistoryWalk(
+    path.relative(CACHE_REPO_DIR, libDef.path),
+    100000
+  );
+  if (histEntries.length === 0) {
+    throw new Error(
+      `Unable to find version information for `+
+      `'${libDef.pkgName}_${libDef.pkgVersionStr}/` +
+      `flow_${libDef.flowVersionStr}'!`
+    );
+  }
+  return histEntries[0].commit.sha();
+};
+
 /**
  * Filter a given list of LibDefs down using a specified filter.
  */

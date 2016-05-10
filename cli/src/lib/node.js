@@ -3,8 +3,8 @@
 import * as node_child_process from 'child_process';
 import * as node_fs from 'fs';
 import * as node_https from "https";
-import * as node_path from 'path';
 import * as node_os from "os";
+import * as node_path from 'path';
 import * as node_url from "url";
 
 export const child_process = node_child_process;

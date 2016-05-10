@@ -1,8 +1,9 @@
 // @flow
 
+import {signCodeStream} from "../lib/codeSign.js";
 import {copyFile} from "../lib/fileUtils.js";
+import {filterLibDefs, getCacheLibDefs, getCacheLibDefVersion} from "../lib/libDefs.js";
 import {fs, path} from '../lib/node.js';
-import {filterLibDefs, getCacheLibDefs} from "../lib/libDefs.js";
 import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 
 export const name = 'install';
@@ -127,22 +128,10 @@ export async function run(args: Args): Promise<number> {
     return 0;
   }
 
-  await copyFile(def.path, targetFilePath);
+  const libDefVersion = await getCacheLibDefVersion(def);
+  const codeSignPreprocessor = signCodeStream(libDefVersion);
+  await copyFile(def.path, targetFilePath, codeSignPreprocessor);
   console.log(`'${targetFileName}' installed at ${targetFilePath}.`);
-
-  // TODO: Sign the downloaded file with the latest commit number as a version
-  //       reference.
-  //
-  //       1) This will allow us to determine if their libdef is outdated and
-  //          has been improved since they last installed.
-  //
-  //       2) In the future this will help us quickly notice if the user has
-  //          made local changes (so that we might prompt them to contribute
-  //          their improvements upstream).
-  //
-  //       3) This will be handy for troubleshooting (i.e. determining which
-  //          version of the libdef the user has installed, and whether anything
-  //          changed locally since they installed)
 
   return 0;
 };
