@@ -1,5 +1,7 @@
 // @flow
 
+import mkdirpCb from "mkdirp";
+
 import {fs, path} from "./node.js";
 
 const P = Promise;
@@ -12,6 +14,18 @@ export function copyFile(srcPath: string, destPath: string): Promise<void> {
     writer.on("error", rej);
     writer.on("close", res);
     reader.pipe(writer);
+  });
+}
+
+export function mkdirp(path: string) {
+  return new Promise((res, rej) => {
+    mkdirpCb(path, err => {
+      if (err) {
+        rej(err);
+      } else {
+        res();
+      }
+    });
   });
 }
 

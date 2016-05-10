@@ -3,10 +3,7 @@
 import {child_process, fs, os, path} from "../lib/node.js";
 import {copyFile, recursiveRmdir} from "../lib/fileUtils.js";
 import {gitHubClient} from "../lib/github.js";
-import {
-  getLocalLibDefs,
-  getLocalLibDefFlowVersions,
-} from "../lib/libDef.js";
+import {getLocalLibDefs} from "../lib/libDefs.js";
 import {versionToString} from "../lib/semver.js";
 
 import request from "request";
@@ -44,17 +41,15 @@ type TestGroup = {
  */
 async function getTestGroups(): Promise<Array<TestGroup>> {
   const libDefs = await getLocalLibDefs();
-  const libDefFlowVersions = await getLocalLibDefFlowVersions(libDefs);
-  return libDefFlowVersions.map(libDefFlowVer => {
-    const libDef = libDefFlowVer.libDef;
+  return libDefs.map(libDef => {
     const groupID =
       `${libDef.pkgName}_${libDef.pkgVersionStr}--flow_` +
-      `${versionToString(libDefFlowVer.flowVersion)}`;
+      `${libDef.flowVersionStr}`;
     return {
       id: groupID,
-      testFilePaths: libDefFlowVer.testFiles,
-      libDefPath: libDefFlowVer.libDefPath,
-      flowVersion: libDefFlowVer.flowVersion,
+      testFilePaths: libDef.testFilePaths,
+      libDefPath: libDef.path,
+      flowVersion: libDef.flowVersion,
     };
   });
 }

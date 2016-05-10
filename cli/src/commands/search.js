@@ -1,10 +1,11 @@
 // @flow
-import {getGHLibsAndFlowVersions, filterDefs} from "../lib/libDef.js";
-import type {LibDefWithFlow} from "../lib/libDef.js";
+
+import {filterLibDefs, getCacheLibDefs} from "../lib/libDefs.js";
+import type {LibDef} from "../lib/libDefs.js";
 
 import table from 'table';
 
-export function _formatDefTable(defs: Array<LibDefWithFlow>): string {
+export function _formatDefTable(defs: Array<LibDef>): string {
   const formatted = [
     ['Name', 'Package Version', 'Flow Version']
   ].concat(defs.map(def => {
@@ -33,8 +34,8 @@ export async function run(args: {}): Promise<number> {
 
   const flowVersion = args.flowVersion || undefined;
   const term = args._[1];
-  const defs = await getGHLibsAndFlowVersions();
-  const filtered = filterDefs(term, defs, flowVersion);
+  const defs = await getCacheLibDefs(process.stdout);
+  const filtered = filterLibDefs(defs, {type: 'fuzzy', term, flowVersion});
   console.log(_formatDefTable(filtered));
   return 0;
 };

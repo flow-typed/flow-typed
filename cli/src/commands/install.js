@@ -1,12 +1,9 @@
 // @flow
 
-import mkdirp from 'mkdirp';
-import {
-  getGHLibsAndFlowVersions,
-  filterDefs,
-} from '../lib/libDef';
-import {stringToVersion} from "../lib/semver.js";
-import {path, https, fs} from '../lib/node.js';
+import {copyFile} from "../lib/fileUtils.js";
+import {fs, path} from '../lib/node.js';
+import {filterLibDefs, getCacheLibDefs} from "../lib/libDefs.js";
+import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 
 export const name = 'install';
 export const description = 'Installs a libdef to the ./flow-typed directory';
@@ -37,8 +34,9 @@ function failWithMessage(message: string) {
 }
 
 type Args = {
-  _: Array<string>;
-  flowVersion?: string;
+  _: Array<string>,
+  flowVersion?: string,
+  overwrite: bool,
 };
 
 export async function run(args: Args): Promise<number> {
@@ -48,12 +46,17 @@ export async function run(args: Args): Promise<number> {
     );
   }
 
-  const {flowVersion} = args;
-  if (flowVersion == null) {
+  const {flowVersion: flowVersionRaw} = args;
+  if (flowVersionRaw == null) {
     return failWithMessage(
       'Please provide a flow version (example: --flowVersion 0.24.0)'
     );
   }
+  const flowVersionStr =
+    flowVersionRaw[0] === 'v'
+    ? flowVersionRaw
+    : `v${flowVersionRaw}`;
+  const flowVersion = stringToVersion(flowVersionStr);
 
   const term = args._[1];
 
@@ -78,69 +81,54 @@ export async function run(args: Args): Promise<number> {
         pkgName: defName,
         pkgVersion: ver,
         pkgVersionStr: verStr,
-        pkgNameVersionStr: `${defName}_${verStr}`
-      }
+
+        // This is clowny... These probably shouldn't be part of the filter
+        // object...
+        flowVersion: emptyVersion(),
+        flowVersionStr: versionToString(emptyVersion()),
+        path: '',
+        testFilePaths: [],
+      },
+      flowVersion,
     };
   } else {
     filter = {
       type: 'fuzzy',
       term: defName,
+      flowVersion,
     };
   }
 
-  process.stdout.write('Querying github for libdefs...');
-  const defs = await getGHLibsAndFlowVersions();
+  const defs = await getCacheLibDefs();
 
-  const filtered = filterDefs(
-    filter,
-    defs,
-    flowVersion
-  );
-  console.log('found %s matching libdefs.', filtered.length);
+  const filtered = filterLibDefs(defs, filter);
 
   if (filtered.length === 0) {
     return failWithMessage(
       `Sorry, I was unable to find any libdefs for ${term} that work with ` +
-      `flow@${flowVersion}. Consider submitting one! :)\n\n` +
+      `flow@${flowVersionStr}. Consider submitting one! :)\n\n` +
       `https://github.com/flowtype/flow-typed/`
     );
   }
+  console.log('found %s matching libdefs.', filtered.length);
 
   const def = filtered[0];
-  const flowTypedDir = path.join(process.cwd(), 'flow-typed');
-  const targetFile = path.join(
-    flowTypedDir,
-    `${def.pkgName}_${def.pkgVersionStr}.js`
-  );
 
-  const terseTargetFile = path.relative(process.cwd(), targetFile);
-  if ((await fs.exists(targetFile)) && !args.update) {
+  const flowTypedDir = path.join(process.cwd(), 'flow-typed');
+  const targetFileName = `${def.pkgName}_${def.pkgVersionStr}.js`;
+  const targetFilePath = path.join(flowTypedDir, targetFileName);
+
+  const terseTargetFile = path.relative(process.cwd(), targetFilePath);
+  if ((await fs.exists(targetFilePath)) && !args.overwrite) {
     console.log(
-      `${terseTargetFile} already exists! Use --update/-u to overwrite the ` +
+      `${terseTargetFile} already exists! Use --overwrite/-o to overwrite the ` +
       `existing libdef.`
     );
     return 0;
   }
 
-  const url =
-    `https://raw.githubusercontent.com/flowtype/flow-typed/master/` +
-    `definitions/${def.pkgName}_${def.pkgVersionStr}/` +
-    `flow_${def.flowVersionStr}/${def.pkgName}_${def.pkgVersionStr}.js`;
-
-  process.stdout.write(
-    `Downloading flow_${def.flowVersionStr}/${def.pkgNameVersionStr}.js into ` +
-    `'${flowTypedDir}'...`
-  );
-  mkdirp.sync(flowTypedDir);
-
-  await new Promise((resolve, reject) => {
-    https.get(url, response => {
-      const file = fs.createWriteStream(targetFile);
-      file.on('close', () => resolve(0));
-      response.pipe(file);
-    }).on('error', e => reject(e));
-  });
-  console.log('done.');
+  await copyFile(def.path, targetFilePath);
+  console.log(`'${targetFileName}' installed at ${targetFilePath}.`);
 
   // TODO: Sign the downloaded file with the latest commit number as a version
   //       reference.
