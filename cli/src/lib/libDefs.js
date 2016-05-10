@@ -486,7 +486,11 @@ export async function getCacheLibDefVersion(libDef: LibDef) {
       `flow_${libDef.flowVersionStr}'!`
     );
   }
-  return histEntries[0].commit.sha();
+  return (
+    `${histEntries[0].commit.sha().substr(0, 10)}/` +
+    `${libDef.pkgName}_${libDef.pkgVersionStr}/` +
+    `flow_${libDef.flowVersionStr}`
+  );
 };
 
 /**

@@ -1,5 +1,5 @@
-// flow-typed signature: a2ffb656454ea46e2249e12a13672b7a
-// flow-typed version: ef85c464bf6f060419003b2636d6380f4faa0f2e
+// flow-typed signature: b86972b47c44f9bf6772a814f317ca39
+// flow-typed version: ef85c464bf/yargs_v4.x.x/flow_>=v0.23.x
 
 declare module 'yargs' {
   declare type Argv = {_: Array<string>, [key: string]: mixed};
