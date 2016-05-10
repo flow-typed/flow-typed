@@ -6,14 +6,23 @@ import {fs, path} from "./node.js";
 
 const P = Promise;
 
-export function copyFile(srcPath: string, destPath: string): Promise<void> {
+export function copyFile(
+  srcPath: string,
+  destPath: string,
+  preProcessor?: stream$Duplex,
+): Promise<void> {
   return new Promise((res, rej) => {
     const reader = fs.createReadStream(srcPath);
     reader.on("error", rej);
     const writer = fs.createWriteStream(destPath);
     writer.on("error", rej);
     writer.on("close", res);
-    reader.pipe(writer);
+    if (preProcessor) {
+      reader.pipe(preProcessor);
+      preProcessor.pipe(writer);
+    } else {
+      reader.pipe(writer);
+    }
   });
 }
 

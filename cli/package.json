@@ -52,11 +52,13 @@
   "dependencies": {
     "github": "^0.2.4",
     "lodash": "^4.11.2",
+    "md5": "^2.1.0",
     "nodegit": "^0.13.0",
     "request": "^2.69.0",
     "rx-lite": "4.0.8",
     "semver": "^5.1.0",
     "table": "3.7.8",
+    "through": "^2.3.8",
     "yargs": "^4.2.0"
   }
 }

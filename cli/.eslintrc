@@ -15,7 +15,7 @@
     "semi": 2,
     "no-unused-vars": ["error", {
       "varsIgnorePattern": "^_.?.?$",
-      "argsIgnorePattern": "^_.?.?$",
+      "argsIgnorePattern": "^_.*$",
     }],
   }
 }
