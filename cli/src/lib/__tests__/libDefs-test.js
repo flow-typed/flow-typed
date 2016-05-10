@@ -10,6 +10,7 @@ import {fs} from '../node.js';
 import {
   _CACHE_REPO_DIR as CACHE_REPO_DIR,
   _CACHE_REPO_EXPIRY as CACHE_REPO_EXPIRY,
+  _CACHE_REPO_GIT_DIR as CACHE_REPO_GIT_DIR,
   _ensureCacheRepo as ensureCacheRepo,
   _LAST_UPDATED_FILE as LAST_UPDATED_FILE,
   filterLibDefs,
@@ -35,7 +36,9 @@ describe('libDefs', () => {
     });
 
     pit('clones the repo if not present on disk', async () => {
-      _mock(fs.exists).mockReturnValue(false);
+      _mock(fs.exists).mockImplementation(dirPath => {
+        return dirPath !== CACHE_REPO_DIR;
+      });
 
       await ensureCacheRepo();
       expect(_mock(Git.Clone).mock.calls.length).toBe(1);
@@ -44,14 +47,18 @@ describe('libDefs', () => {
     });
 
     pit('does NOT clone the repo if already present on disk', async () => {
-      _mock(fs.exists).mockReturnValue(true);
+      _mock(fs.exists).mockImplementation(dirPath => {
+        return dirPath === CACHE_REPO_DIR;
+      });
 
       await ensureCacheRepo();
       expect(_mock(Git.Clone).mock.calls.length).toBe(0);
     });
 
     pit('rebases if present on disk + lastUpdated is old', async () => {
-      _mock(fs.exists).mockReturnValue(true);
+      _mock(fs.exists).mockImplementation(dirPath => {
+        return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
+      });
       _mock(fs.readFile).mockImplementation((filePath) => {
         if (filePath === LAST_UPDATED_FILE) {
           return String(Date.now() - CACHE_REPO_EXPIRY - 1);
@@ -69,7 +76,9 @@ describe('libDefs', () => {
     });
 
     pit('does NOT rebase if on disk, but lastUpdated is recent', async () => {
-      _mock(fs.exists).mockReturnValue(true);
+      _mock(fs.exists).mockImplementation(dirPath => {
+        return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
+      });
       _mock(fs.readFile).mockImplementation((filePath) => {
         if (filePath === LAST_UPDATED_FILE) {
           return String(Date.now());

@@ -111,7 +111,7 @@ export async function run(args: Args): Promise<number> {
       `https://github.com/flowtype/flow-typed/`
     );
   }
-  console.log('found %s matching libdefs.', filtered.length);
+  console.log(' * found %s matching libdefs.', filtered.length);
 
   const def = filtered[0];
 
