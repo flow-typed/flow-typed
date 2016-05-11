@@ -16,7 +16,7 @@ declare module 'redux-form' {
   };
   declare type FormProps = {
     active: string,
-    asyncValidate: (values: Object, dispatch: Function, props: Object) => Promise<void>.
+    asyncValidate: (values: Object, dispatch: Function, props: Object) => Promise<void>,
     asyncValidating: string | boolean,
     destroyForm: Function,
     dirty: boolean,
@@ -45,7 +45,7 @@ declare module 'redux-form' {
     asyncValidate?: (values: Object, dispatch: Function, props: Object) => Promise<void>,
     destroyOnUnmount?: boolean,
     formKey?: string,
-    getFormState?: (state: Object, reduxMountPoint: string = 'form') => state[reduxMountPoint]),
+    getFormState?: (state: Object, reduxMountPoint: string) => mixed,
     initialValues?: { [field: string]: string },
     onSubmit?: Function,
     onSubmitFail?: Function,
