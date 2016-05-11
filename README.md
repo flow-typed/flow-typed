@@ -6,7 +6,7 @@ _**Notice:** Currently the [`flow-typed` CLI](https://www.npmjs.com/package/flow
   width="400"
 />
 
-`flow-typed` is a repository of third-party 
+`flow-typed` is a [repository](https://github.com/flowtype/flow-typed/tree/master/definitions) of third-party 
 [library interface definitions](http://flowtype.org/docs/third-party.html) 
 for use with [Flow](http://flowtype.org/).
 
