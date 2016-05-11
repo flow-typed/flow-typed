@@ -2,13 +2,13 @@
 
 declare module 'webfontloader' {
   declare type WebFontConfig = {
-    loading?: () => any,
-    active?: () => any,
-    inactive?: () => any,
+    loading?: () => mixed,
+    active?: () => mixed,
+    inactive?: () => mixed,
 
-    fontloading?: (familyName: string, fvd: string) => any,
-    fontactive?: (familyName: string, fvd: string) => any,
-    fontinactive?: (familyName: string, fvd: string) => any,
+    fontloading?: (familyName: string, fvd: string) => mixed,
+    fontactive?: (familyName: string, fvd: string) => mixed,
+    fontinactive?: (familyName: string, fvd: string) => mixed,
 
     classes?: boolean,
     events?: boolean,
