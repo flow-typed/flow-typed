@@ -5,15 +5,15 @@ import WebFont from 'webfontloader';
 WebFont.load({});
 
 WebFont.load({
-  loading: () => null,
-  active: () => null,
-  inactive: () => null,
-  fontloading: (familyName, fvd) => null,
-  fontactive: (familyName, fvd) => null,
-  fontinactive: (familyName, fvd) => null,
+  loading: () => true,
+  active: () => true,
+  inactive: () => true,
+  fontloading: (familyName, fvd) => true,
+  fontactive: (familyName, fvd) => true,
+  fontinactive: (familyName, fvd) => true,
   classes: true,
   events: true,
-  timeouts: number,
+  timeouts: 100,
 
   custom: {
     families: ['foo', 'bar'],
