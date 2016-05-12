@@ -1,5 +1,5 @@
 
-type $npm$classnames$Classes = string | [class: string]: bool } | Array<string>
+type $npm$classnames$Classes = string | {[className: string]: bool } | Array<string>
 
 declare module 'classnames' {
   declare function exports(
