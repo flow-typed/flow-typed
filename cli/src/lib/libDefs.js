@@ -25,35 +25,83 @@ const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
 const GIT_REPO_DIR = path.join(__dirname, '..', '..', '..');
 
 const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
+const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
+
+async function cloneCacheRepo(verbose?: VerboseOutput) {
+  await mkdirp(CACHE_REPO_DIR);
+  try {
+    await Git.Clone(REMOTE_REPO_URL, CACHE_REPO_DIR, {
+      checkoutBranch: 'master'
+    });
+  } catch (e) {
+    writeVerbose(verbose, 'ERROR: Unable to clone the local cache repo.');
+    throw e;
+  }
+  await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
+}
+
+const CACHE_REPO_GIT_DIR = path.join(CACHE_REPO_DIR, '.git');
+async function rebaseCacheRepo(verbose?: VerboseOutput) {
+  if (await fs.exists(CACHE_REPO_DIR) && await fs.exists(CACHE_REPO_GIT_DIR)) {
+    const repo = await Git.Repository.open(CACHE_REPO_DIR);
+    await repo.checkoutBranch('master');
+    try {
+      await repo.fetch('origin');
+      await repo.rebaseBranches('master', 'origin/master');
+    } catch (e) {
+      writeVerbose(
+        verbose,
+        'ERROR: Unable to rebase the local cache repo. ' + e.message
+      );
+      return false;
+    }
+    await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
+    return true;
+  } else {
+    await cloneCacheRepo(verbose);
+    return true;
+  }
+}
 
 /**
  * Ensure that the CACHE_REPO_DIR exists and is recently rebased.
  * (else: create/rebase it)
  */
 const CACHE_REPO_EXPIRY = 1000 * 3600 * 24 * 5; // 5 days
-const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
 async function ensureCacheRepo(verbose?: Object) {
-  if (!await fs.exists(CACHE_REPO_DIR)) {
+  if (!await fs.exists(CACHE_REPO_DIR) || !await fs.exists(CACHE_REPO_GIT_DIR)) {
     writeVerbose(
       verbose,
-      'flow-typed cache not found, fetching from GitHub...',
+      ' * flow-typed cache not found, fetching from GitHub...',
       false
     );
-    await mkdirp(CACHE_REPO_DIR);
-    await Git.Clone(REMOTE_REPO_URL, CACHE_REPO_DIR, {
-      checkoutBranch: 'master'
-    });
-    await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
+    await cloneCacheRepo(verbose);
     writeVerbose(verbose, 'done.');
   } else {
-    const lastUpdated = parseInt(await fs.readFile(LAST_UPDATED_FILE), 10);
+    let lastUpdated = 0;
+    if (await fs.exists(LAST_UPDATED_FILE)) {
+      // If the LAST_UPDATED_FILE has anything other than just a number in it,
+      // just assume we need to update.
+      const lastUpdatedRaw = await fs.readFile(LAST_UPDATED_FILE);
+      const lastUpdatedNum = parseInt(lastUpdatedRaw, 10);
+      if (String(lastUpdatedNum) === String(lastUpdatedRaw)) {
+        lastUpdated = lastUpdatedNum;
+      }
+    }
+
     if ((lastUpdated + CACHE_REPO_EXPIRY) < Date.now()) {
-      writeVerbose(verbose, 'flow-typed cache is old, rebasing...', false);
-      const repo = await Git.Repository.open(CACHE_REPO_DIR);
-      await repo.checkoutBranch('master');
-      await repo.rebaseBranches('master', 'origin/master');
-      await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
-      writeVerbose(verbose, 'done.');
+      writeVerbose(verbose, ' * flow-typed cache is old, rebasing...', false);
+      const rebaseSuccessful = await rebaseCacheRepo(verbose);
+      if (rebaseSuccessful) {
+        writeVerbose(verbose, 'done.');
+      } else {
+        writeVerbose(
+          verbose,
+          '\nNOTE: Unable to rebase local cache! If you don\'t currently ' +
+          'have internet connectivity, no worries -- we\'ll update the local ' +
+          'cache the next time you do.\n'
+        );
+      }
     }
   }
 }
@@ -61,6 +109,7 @@ async function ensureCacheRepo(verbose?: Object) {
 export {
   CACHE_REPO_DIR as _CACHE_REPO_DIR,
   CACHE_REPO_EXPIRY as _CACHE_REPO_EXPIRY,
+  CACHE_REPO_GIT_DIR as _CACHE_REPO_GIT_DIR,
   ensureCacheRepo as _ensureCacheRepo,
   LAST_UPDATED_FILE as _LAST_UPDATED_FILE,
 };
@@ -437,7 +486,11 @@ export async function getCacheLibDefVersion(libDef: LibDef) {
       `flow_${libDef.flowVersionStr}'!`
     );
   }
-  return histEntries[0].commit.sha();
+  return (
+    `${histEntries[0].commit.sha().substr(0, 10)}/` +
+    `${libDef.pkgName}_${libDef.pkgVersionStr}/` +
+    `flow_${libDef.flowVersionStr}`
+  );
 };
 
 /**
