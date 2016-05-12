@@ -1,8 +1,8 @@
 
-type Classes = Array<string | { [class: string]: bool } | Classes>
+type Classes = string | [class: string]: bool } | Array<string>
 
 declare module 'classnames' {
   declare function exports(
-    ...classes: Classes
+    ...classes: Array<Classes>
   ): string;
 }
