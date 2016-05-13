@@ -67,7 +67,6 @@ describe('List', () => {
     const d: Array<number|boolean> = _.adjust(_.T, 2, a)
     const adjustByAdd = _.adjust(_.add(2))
     const adjustSecondElemByAdd = adjustByAdd(2, a)
-    //$ExpectError
     const result: Array<number> = adjustSecondElemByAdd(a)
     const a1: boolean = _.all((x: number) => x < 1, [ 2,3,4 ])
   })
