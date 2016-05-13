@@ -115,7 +115,7 @@ export {
 };
 
 /**
- * Given a 'definitions' dir, return a list of LibDefs that it contains.
+ * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
  */
 async function getLibDefs(defsDir, validationErrs?) {
   const libDefs: Array<LibDef> = [];
@@ -135,7 +135,8 @@ async function getLibDefs(defsDir, validationErrs?) {
         validationErrs
       )).forEach(libDef => libDefs.push(libDef));
     } else {
-      const error = `Expected only directories in the 'definitions' directory!`;
+      const error =
+        `Expected only directories in the 'definitions/npm' directory!`;
       validationError(itemPath, error, validationErrs);
     }
   }));
@@ -144,8 +145,8 @@ async function getLibDefs(defsDir, validationErrs?) {
 
 /**
  * Given the path to a flow directory within a package directory
- * (i.e. definitions/pkgDir/flow_v0.24.0/), parse the flow directory name into a
- * Version.
+ * (i.e. definitions/npm/pkgDir/flow_v0.24.0/), parse the flow directory name
+ * into a Version.
  */
 const FLOW_VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
 const FLOW_DIR_NAME_RE = new RegExp(
@@ -323,7 +324,7 @@ function parseRepoDirItem(dirItemPath, validationErrs) {
   const itemMatches = dirItem.match(REPO_DIR_ITEM_NAME_RE);
   if (itemMatches == null) {
     const error =
-      `'${dirItem}' is a malformed definitions/ directory name! ` +
+      `'${dirItem}' is a malformed definitions/npm/ directory name! ` +
       `Expected the name to be formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>`;
     validationError(dirItem, error, validationErrs);
     const pkgName = 'ERROR';
@@ -447,9 +448,9 @@ function writeVerbose(stream, msg, writeNewline = true) {
  * itself. It is useless when running the npm-install CLI.
  */
 type VErrors = Map<string, Array<string>>;
-const GIT_REPO_DEFS_DIR = path.join(GIT_REPO_DIR, 'definitions');
+const GIT_REPO_DEFS_DIR = path.join(GIT_REPO_DIR, 'definitions', 'npm');
 export async function getLocalLibDefs(validationErrs?: VErrors) {
-  await verifyCLIVersion(GIT_REPO_DEFS_DIR);
+  await verifyCLIVersion(path.join(GIT_REPO_DIR, 'definitions'));
   return getLibDefs(GIT_REPO_DEFS_DIR, validationErrs);
 };
 
@@ -459,19 +460,19 @@ export async function getLocalLibDefs(validationErrs?: VErrors) {
  * If the repo checkout does not exist or is out of date, it will be
  * created/updated automatically first.
  */
-const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions');
+const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'npm');
 export async function getCacheLibDefs(
   verbose?: VerboseOutput = process.stdout,
   validationErrs?: VErrors,
 ) {
   await ensureCacheRepo(verbose);
-  await verifyCLIVersion(CACHE_REPO_DEFS_DIR);
+  await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
   return getLibDefs(CACHE_REPO_DEFS_DIR, validationErrs);
 };
 
 export async function getCacheLibDefVersion(libDef: LibDef) {
   await ensureCacheRepo();
-  await verifyCLIVersion(CACHE_REPO_DEFS_DIR);
+  await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
   const repo = await Git.Repository.open(CACHE_REPO_DIR);
   const revWalk = repo.createRevWalk();
   revWalk.pushHead();
