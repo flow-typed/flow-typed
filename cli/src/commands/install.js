@@ -14,7 +14,7 @@ export function setup(yargs: Object): Object {
     .usage(`$0 ${name} - ${description}`)
     .options({
       flowVersion: {
-        alias: 'v',
+        alias: 'f',
         demand: true,
         describe: 'The version of Flow fetched libdefs must be compatible with',
         type: 'string',
