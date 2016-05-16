@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/splodingsocks/FlowTyped.git"
+    "url": "git+https://github.com/flowtype/flow-typed.git"
   },
   "keywords": [
     "flow",
@@ -24,9 +24,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/splodingsocks/FlowTyped/issues"
+    "url": "https://github.com/flowtype/flow-typed/issues"
   },
-  "homepage": "https://github.com/splodingsocks/FlowTyped#readme",
+  "homepage": "https://github.com/flowtype/flow-typed#readme",
   "jest": {
     "automock": false,
     "modulePathIgnorePatterns": [
