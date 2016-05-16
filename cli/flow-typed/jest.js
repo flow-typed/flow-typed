@@ -7,6 +7,7 @@ declare var jest: {
   disableAutomock: () => void,
   enableAutomock: () => void,
   fn: <T>(impl?: T) => T,
+  genMockFromModule: (moduleName: string) => mixed,
   mock: (moduleName: string, impl?: () => any) => void,
   unmock: (moduleName: string) => void,
 };
