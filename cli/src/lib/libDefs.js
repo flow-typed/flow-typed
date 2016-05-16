@@ -421,8 +421,15 @@ function validationError(errKey, errMsg, validationErrs) {
 async function verifyCLIVersion(defsDirPath) {
   const metadataFilePath = path.join(defsDirPath, '.cli-metadata.json');
   const metadata = JSON.parse(String(await fs.readFile(metadataFilePath)));
-  const minCLIVersion = metadata.minimumCLIVersion;
-  if (semver.lt(require('../../package.json').version, minCLIVersion)) {
+  if (!metadata.compatibleCLIRange) {
+    throw new Error(
+      `Unable to find the 'compatibleCLIRange' property in ` +
+      `${metadataFilePath}. You might need to update to a newer version of ` +
+      `the Flow CLI.`
+    );
+  }
+  const minCLIVersion = metadata.compatibleCLIRange;
+  if (semver.satisfies(require('../../package.json').version, minCLIVersion)) {
     throw new Error(
       `Please upgrade your CLI version! The latest flow-typed definitions ` +
       `repo is only compatible with flow-typed@${minCLIVersion} and later.`
