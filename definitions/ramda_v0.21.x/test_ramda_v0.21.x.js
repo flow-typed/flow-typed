@@ -141,6 +141,21 @@ describe('List', () => {
     const s: Array<[string, number]> = _.xprod([ 's', 'f' ], [ 1, 2 ])
     const s1: Array<[number, Object]> = _.xprod([ 1, 1 ], [ {}, {} ])
   })
+  it('should typecheck map', () => {
+    const ys: Array<string> = _.map((x) => x.toString(), [ 1, 2, 3 ])
+    //$ExpectError
+    const ys1: Array<number> = _.map((x) => x.toString(), [ 1, 2, 3 ])
+    const ys2: Array<string> = _.map((x) => x.toString())([ 1, 2, 3 ])
+  })
+  it('should typecheck reduce', () => {
+    const reduced: Array<number> = _.reduce((acc, x) => [ ...acc, x ], [], [ 1, 2, 3 ])
+    const reducedStr: string = _.reduce((acc, x) => acc + x, '', [ 1, 2, 3 ])
+    const reducedObj: {[key: string]: number} = _.reduce((acc, x) => { return { ...acc, [x]: x } }, {}, [ 1, 2, 3 ])
+    //$ExpectError
+    const reducedErr: Array<string> = _.reduce((acc, x) => [ ...acc, x ], [], [ 1, 2, 3 ])
+    //$ExpectError
+    const reducedStrErr: Array<number> = _.reduce((acc, x) => acc + x, '', [ 1, 2, 3 ])
+  })
 })
 
 describe('String', () => {
@@ -177,6 +192,11 @@ describe('Object', () => {
   it('should typecheck objOf', function () {
     const obj: {[key: string]: number} = _.objOf('key', 1)
     const obj1: {[key: string]: number} = _.objOf('key')(1)
+  })
+  it('should typecheck map', () => {
+    //$ExpectError
+    const ys: {[key: string]: number} = _.map((x) => x.toString(), { a: 1, b: 2, c: 3 })
+    const ys1: {[key: string]: string} = _.map((x) => x.toString())({ a: 1, b: 2, c: 3 })
   })
 })
 

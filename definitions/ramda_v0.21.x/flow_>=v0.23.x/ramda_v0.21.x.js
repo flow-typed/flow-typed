@@ -1,3 +1,6 @@
+/* @flow */
+/* eslint-disable no-unused-vars, no-redeclare */
+
 type UnaryFn<A,R> = (a: A) => R
 type BinaryFn<A,B,R> = ((a: A, b: B) => R) & ((a:A) => (b: B) => R)
 
@@ -7,6 +10,11 @@ type BinarySameTypeFn<T> = BinaryFn<T,T,T>
 interface ObjPredicate {
   (value: any, key: string): boolean;
 }
+
+interface Functor<A> {
+  map<A,B>(fn:(a: A) => B): B;
+}
+
 type UnaryPredicateFn<T> = (x:T) => boolean
 type BinaryPredicateFn<T> = (x:T, y:T) => boolean
 
@@ -142,6 +150,24 @@ declare class Drop {
   dropRepeatsWith<V,T:Array<V>>(fn: BinaryPredicateFn<V>): (xs:T) => T;
 }
 
+declare class RMap {
+  map<T,R>(fn: (x:T) => R, xs: Array<T>): Array<R>;
+  map<T,R>(fn: (x:T) => R): (xs: Array<T>) => Array<R>;
+  map<T,R>(fn: (x:T) => R, xs: Functor<T>): Functor<R>;
+  map<T,R>(fn: (x:T) => R): (xs: Functor<T>) => Functor<R>;
+  map<T,R>(fn: (x:T) => R, xs: {[key: string]: T}): {[key: string]: R};
+  map<T,R>(fn: (x:T) => R): (xs: {[key: string]: T}) => {[key: string]: R};
+}
+
+declare class RReduce {
+  reduce<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult, list: Array<T>): TResult;
+  reduce<T, TResult>(fn: (acc: TResult, elem: T) => TResult): (acc: TResult, list: Array<T>) => TResult;
+  reduce<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult): (list: Array<T>) => TResult;
+  reduceRight<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult, list: Array<T>): TResult;
+  reduceRight<T, TResult>(fn: (acc: TResult, elem: T) => TResult): (acc: TResult, list: Array<T>) => TResult;
+  reduceRight<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult): (list: Array<T>) => TResult;
+}
+
 type NestedArray<T> = Array<T | NestedArray<T>>
 
 declare class RList<T> {
@@ -152,7 +178,6 @@ declare class RList<T> {
     into
     allUniq
     into
-    map
     mapAccum
     mapAccumRight
     mergeAll
@@ -161,7 +186,6 @@ declare class RList<T> {
     partition
     pluck
     range
-    reduce
     reduced
     reduceBy
     reduceRight
@@ -198,9 +222,9 @@ declare class RList<T> {
   contains<T>(x:T, xs: Array<T>): boolean;
   contains<T>(x:T): (xs: Array<T>) => boolean;
   flatten<T>(xs: NestedArray<T>): Array<T>;
-  forEach<T>(fn:(x:T) => ?any, xs: Array<T>): Array<T>;
-  forEach<T>(fn:(x:T) => ?any): (xs: Array<T>) => Array<T>;
-  fromPairs<V>(pair: Array<[any,V]>): {[key: string]:V};
+  forEach<T,V>(fn:(x:T) => ?V, xs: Array<T>): Array<T>;
+  forEach<T,V>(fn:(x:T) => ?V): (xs: Array<T>) => Array<T>;
+  fromPairs<T,V>(pair: Array<[T,V]>): {[key: string]:V};
   groupBy<T>(fn: (x: T) => string, xs: Array<T>): {[key: string]: Array<T>};
   groupBy<T>(fn: (x: T) => string): (xs: Array<T>) => {[key: string]: Array<T>};
   groupWith<T,V:Array<T>|string>(fn: BinaryPredicateFn<T>, xs: V): Array<V>;
@@ -244,8 +268,8 @@ declare class RList<T> {
   sort<V,T:Array<V>>(fn: BinaryPredicateFn<V>): (xs:T) => T;
   tail<T,V:Array<T>|string>(xs: V): V;
   uniq<T>(xs: Array<T>): Array<T>;
-  uniqBy<T>(fn:(x: T) => any, xs: Array<T>): Array<T>;
-  uniqBy<T>(fn:(x: T) => any): (xs: Array<T>) => Array<T>;
+  uniqBy<T,V>(fn:(x: T) => V, xs: Array<T>): Array<T>;
+  uniqBy<T,V>(fn:(x: T) => V): (xs: Array<T>) => Array<T>;
   uniqWith<T>(fn: BinaryPredicateFn<T>, xs: Array<T>): Array<T>;
   uniqWith<T>(fn: BinaryPredicateFn<T>): (xs: Array<T>) => Array<T>;
   update<T>(index: number, ...rest: Array<void>): (elem: T) => (src: Array<T>) => Array<T>;
@@ -500,8 +524,8 @@ declare class RFunction {
   T: (_: any) => boolean;
   F: (_: any) => boolean;
   always<T>(x:T): (x: any) => T;
-  ap<T>(fns: Array<(x:T) => any>, xs: Array<T>): Array<any>;
-  ap<T>(fns: Array<(x:T) => any>): (xs: Array<T>) => Array<any>;
+  ap<T,V>(fns: Array<(x:T) => V>, xs: Array<T>): Array<V>;
+  ap<T,V>(fns: Array<(x:T) => V>): (xs: Array<T>) => Array<V>;
   apply<T,V>(fn: (...args: Array<T>) => V, xs: Array<T>): V;
   apply<T,V>(fn: (...args: Array<T>) => V): (xs: Array<T>) => V;
   applySpec(spec: NestedObject<(x: any) => any>): (...args: Array<any>) => NestedObject<any>;
@@ -554,7 +578,7 @@ declare class RType {
  */
 
 
-declare class R mixins
+declare class Ramda mixins
 RFunction,
 Composition,
 RMath,
@@ -569,9 +593,11 @@ Find,
 RLogic,
 RRelation,
 Curry,
-RType
+RType,
+RMap,
+RReduce
 {}
 
 declare module 'ramda' {
-  declare var exports: R
+  declare var exports: Ramda
 }
