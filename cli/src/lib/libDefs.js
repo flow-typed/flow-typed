@@ -68,7 +68,7 @@ async function rebaseCacheRepo(verbose?: VerboseOutput) {
  * (else: create/rebase it)
  */
 const CACHE_REPO_EXPIRY = 1000 * 3600 * 24 * 5; // 5 days
-async function ensureCacheRepo(verbose?: Object) {
+async function ensureCacheRepo(verbose?: VerboseOutput) {
   if (!await fs.exists(CACHE_REPO_DIR) || !await fs.exists(CACHE_REPO_GIT_DIR)) {
     writeVerbose(
       verbose,
