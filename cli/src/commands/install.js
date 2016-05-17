@@ -1,7 +1,7 @@
 // @flow
 
 import {signCodeStream} from "../lib/codeSign.js";
-import {copyFile, mkdirp} from "../lib/fileUtils.js";
+import {copyFile, mkdirp, searchUpDirPath} from "../lib/fileUtils.js";
 import {filterLibDefs, getCacheLibDefs, getCacheLibDefVersion} from "../lib/libDefs.js";
 import {fs, path} from '../lib/node.js';
 import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
@@ -119,7 +119,24 @@ export async function run(args: Args): Promise<number> {
 
   const def = filtered[0];
 
-  const flowTypedDir = path.join(process.cwd(), 'flow-typed', 'npm');
+  // Find the project root
+  const projectRoot = await searchUpDirPath(process.cwd(), async (dirPath) => {
+    const flowConfigPath = path.join(dirPath, '.flowconfig');
+    try {
+      return fs.statSync(flowConfigPath).isFile();
+    } catch (e) {
+      // Not a file...
+      return false;
+    }
+  });
+  if (projectRoot === null) {
+    return failWithMessage(
+      `\nERROR: Unable to find a flow project in the currend dir or any of ` +
+      `it's parents!\nPlease run this command from within a Flow project.`
+    );
+  }
+
+  const flowTypedDir = path.join(projectRoot, 'flow-typed', 'npm');
   await mkdirp(flowTypedDir);
   const targetFileName = `${def.pkgName}_${def.pkgVersionStr}.js`;
   const targetFilePath = path.join(flowTypedDir, targetFileName);
