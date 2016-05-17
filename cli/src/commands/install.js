@@ -1,7 +1,7 @@
 // @flow
 
 import {signCodeStream} from "../lib/codeSign.js";
-import {copyFile} from "../lib/fileUtils.js";
+import {copyFile, mkdirp} from "../lib/fileUtils.js";
 import {filterLibDefs, getCacheLibDefs, getCacheLibDefVersion} from "../lib/libDefs.js";
 import {fs, path} from '../lib/node.js';
 import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
@@ -115,7 +115,8 @@ export async function run(args: Args): Promise<number> {
 
   const def = filtered[0];
 
-  const flowTypedDir = path.join(process.cwd(), 'flow-typed');
+  const flowTypedDir = path.join(process.cwd(), 'flow-typed', 'npm');
+  await mkdirp(flowTypedDir);
   const targetFileName = `${def.pkgName}_${def.pkgVersionStr}.js`;
   const targetFilePath = path.join(flowTypedDir, targetFileName);
 
