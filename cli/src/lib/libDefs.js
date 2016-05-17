@@ -283,8 +283,6 @@ async function parseLibDefsFromPkgDir(
 
         if (isValidTestFile) {
           testFilePaths.push(flowDirItemPath);
-        } else {
-          console.log('flowDirItem: %s, libDefFileName: %s', flowDirItem, libDefFileName);
         }
       } else {
         const error = 'Unexpected directory item';
@@ -429,7 +427,7 @@ async function verifyCLIVersion(defsDirPath) {
     );
   }
   const minCLIVersion = metadata.compatibleCLIRange;
-  if (semver.satisfies(require('../../package.json').version, minCLIVersion)) {
+  if (!semver.satisfies(require('../../package.json').version, minCLIVersion)) {
     throw new Error(
       `Please upgrade your CLI version! The latest flow-typed definitions ` +
       `repo is only compatible with flow-typed@${minCLIVersion} and later.`

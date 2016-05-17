@@ -53,10 +53,14 @@ export async function run(args: Args): Promise<number> {
       'Please provide a flow version (example: --flowVersion 0.24.0)'
     );
   }
-  const flowVersionStr =
+  let flowVersionStr =
     flowVersionRaw[0] === 'v'
     ? flowVersionRaw
     : `v${flowVersionRaw}`;
+
+  if (/^v[0-9]+\.[0-9]+$/.test(flowVersionStr)) {
+    flowVersionStr = `${flowVersionStr}.0`;
+  }
   const flowVersion = stringToVersion(flowVersionStr);
 
   const term = args._[1];
