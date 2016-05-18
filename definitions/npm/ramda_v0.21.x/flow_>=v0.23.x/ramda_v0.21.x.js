@@ -1,6 +1,12 @@
 /* @flow */
 /* eslint-disable no-unused-vars, no-redeclare */
 
+type Transformer<A,B> = {
+  '@@transducer/step': <I,R>(r: A, a: *) => R,
+  '@@transducer/init': () => A,
+  '@@transducer/result': (result: *) => B
+}
+
 declare module 'ramda' {
   declare type UnaryFn<A,R> = (a: A) => R;
   declare type BinaryFn<A,B,R> = ((a: A, b: B) => R) & ((a:A) => (b: B) => R);
@@ -13,6 +19,8 @@ declare module 'ramda' {
   declare interface ObjPredicate {
     (value: any, key: string): boolean;
   }
+
+  // declare type Transducer = (xf: Transformer)
 
   declare interface Functor<A> {
     map<A,B>(fn:(a: A) => B): B;
@@ -150,6 +158,19 @@ declare module 'ramda' {
     dropRepeatsWith<V,T:Array<V>>(fn: BinaryPredicateFn<V>): (xs:T) => T;
   }
 
+  declare class Take {
+    take<V,T:Array<V>|string>(n: number, xs: T): T;
+    take<V,T:Array<V>|string>(n: number):(xs: T) => T;
+    takeLast<V,T:Array<V>|string>(n: number, xs: T): T;
+    takeLast<V,T:Array<V>|string>(n: number):(xs: T) => T;
+    takeLastWhile<V,T:Array<V>>(fn: UnaryPredicateFn<V>, xs:T): T;
+    takeLastWhile<V,T:Array<V>>(fn: UnaryPredicateFn<V>): (xs:T) => T;
+    takeWhile<V,T:Array<V>>(fn: UnaryPredicateFn<V>, xs:T): T;
+    takeWhile<V,T:Array<V>>(fn: UnaryPredicateFn<V>): (xs:T) => T;
+  }
+
+  declare type AccumIterator<A,B,T> = ((acc: T, x: A, ...args: Array<void>) => [T,B]) | ((acc: T, ...args:Array<void>) => (x: A) => [T,B])
+
   declare class RMap {
     map<T,R>(fn: (x:T) => R, xs: Array<T>): Array<R>;
     map<T,R>(fn: (x:T) => R): (xs: Array<T>) => Array<R>;
@@ -157,6 +178,10 @@ declare module 'ramda' {
     map<T,R>(fn: (x:T) => R): (xs: Functor<T>) => Functor<R>;
     map<T,R>(fn: (x:T) => R, xs: {[key: string]: T}): {[key: string]: R};
     map<T,R>(fn: (x:T) => R): (xs: {[key: string]: T}) => {[key: string]: R};
+    mapAccum<A,B,R>(fn: AccumIterator<A,B,R>, acc: R, xs: Array<A>): [R, Array<B>];
+    mapAccum<A,B,R>(fn: AccumIterator<A,B,R>): (acc: R, xs: Array<A>) => [R, Array<B>];
+    mapAccumRight<A,B,R>(fn: AccumIterator<A,B,R>, acc: R, xs: Array<A>): [R, Array<B>];
+    mapAccumRight<A,B,R>(fn: AccumIterator<A,B,R>): (acc: R, xs: Array<A>) => [R, Array<B>];
   }
 
   declare class RReduce {
@@ -166,47 +191,35 @@ declare module 'ramda' {
     reduceRight<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult, list: Array<T>): TResult;
     reduceRight<T, TResult>(fn: (acc: TResult, elem: T) => TResult): (acc: TResult, list: Array<T>) => TResult;
     reduceRight<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult): (list: Array<T>) => TResult;
+    reduceBy<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult, keyFn:(elem: T) => string, list: Array<T>): {[key: string]: TResult};
+    reduceBy<T, TResult>(fn: (acc: TResult, elem: T) => TResult): (acc: TResult, keyFn:(elem: T) => string, list: Array<T>) => {[key: string]: TResult};
+    reduceBy<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult): (keyFn:(elem: T) => string, list: Array<T>) => {[key: string]: TResult};
+    reduceBy<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult): (keyFn:(elem: T) => string) => (list: Array<T>) => {[key: string]: TResult};
+    reduceBy<T, TResult>(fn: (acc: TResult, elem: T) => TResult): (acc: TResult, keyFn:(elem: T) => string) => (list: Array<T>) => {[key: string]: TResult};
+    reduceBy<T, TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult, keyFn:(elem: T) => string): (list: Array<T>) => {[key: string]: TResult};
+    scan<T,TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult, list: Array<T>): Array<TResult>;
+    scan<T,TResult>(fn: (acc: TResult, elem: T) => TResult): (acc: TResult, list: Array<T>) => Array<TResult>;
+    scan<T,TResult>(fn: (acc: TResult, elem: T) => TResult, acc: TResult): (list: Array<T>) => Array<TResult>;
+    scan<T,TResult>(fn: (acc: TResult, elem: T) => TResult): (acc: TResult) => (list: Array<T>) => Array<TResult>;
+  }
+
+  declare class Split {
+    splitAt<V,T:Array<V>|string>(i: number, xs: T): [T,T];
+    splitAt<V,T:Array<V>|string>(i: number): (xs: T) => [T,T];
+    splitEvery<V,T:Array<V>|string>(i: number, xs: T): Array<T>;
+    splitEvery<V,T:Array<V>|string>(i: number): (xs: T) => Array<T>;
+    splitWhen<V,T:Array<V>>(fn: UnaryPredicateFn<V>, xs:T): [T,T];
+    splitWhen<V,T:Array<V>>(fn: UnaryPredicateFn<V>): (xs:T) => [T,T];
   }
 
   declare type NestedArray<T> = Array<T | NestedArray<T>>
-
   declare class RList<T> {
-    // adjust<T>(fn:(a: T) => T, ...rest: Array<void>): (index: number, src: Array<T>) => Array<T>; THIS MESSES UP THE CHECKER
-    // Technically at this point the return function can be either of these.
     /*
     TODO:
-    into
-    allUniq
-    into
-    mapAccum
-    mapAccumRight
-    mergeAll
-    nth
-    pair
-    partition
-    pluck
-    range
     reduced
-    reduceBy
-    reduceRight
-    scan
     sequence
-    splitAt
-    splitEvery
-    splitWhen
-    take
-    takeLast
-    takeWhile
-    takeLastWhile
-    times
     transduce
-    transpose
     traverse
-    unfold
-    unnest
-    zipObj
-    zipWith
-
     */
     adjust<T>(fn:(a: T) => T, ...rest: Array<void>): (index: number) => (src: Array<T>) => Array<T>;
     adjust<T>(fn:(a: T) => T, index: number, ...rest: Array<void>): (src: Array<T>) => Array<T>;
@@ -231,6 +244,8 @@ declare module 'ramda' {
     groupWith<T,V:Array<T>|string>(fn: BinaryPredicateFn<T>): (xs: V) => Array<V>;
     head<T,V:Array<T>>(xs: V): ?T;
     head<T,V:string>(xs: V): V;
+    into<I,T,A:Array<T>,R:Array<*>|string|Object>(accum: R, xf: (a: A) => I, input: A): R;
+    into<I,T,A:Array<T>,R>(accum: Transformer<I,R>, xf: (a: A) => R, input: A): R;
     indexBy<V,T:{[key: string]:V}>(fn: (x: T) => string, xs: Array<T>): {[key: string]: T};
     indexBy<V,T:{[key: string]:V}>(fn: (x: T) => string): (xs: Array<T>) => {[key: string]: T};
     indexOf<T>(x: T, xs: Array<T>): number;
@@ -253,8 +268,21 @@ declare module 'ramda' {
     length<T>(xs: Array<T>): number;
     none<T>(fn: (a: T) => boolean, xs: Array<T>): boolean;
     none<T>(fn: (a: T) => boolean): (xs: Array<T>) => boolean;
+    nth<V,T:Array<V>>(i: number, xs: T): ?V;
+    nth<V,T:Array<V>>(i: number): (xs: T) => ?V;
+    nth<T:string>(i: number, xs: T): T;
+    nth<T:string>(i: number): (xs: T) => T;
+    mergeAll(objs: Array<{[key: string]: any}>):{[key: string]: any};
+    pair<A,B>(a:A, b:B): [A,B];
+    pair<A,B>(a:A): (b:B) => [A,B];
+    partition<K,V,T:Array<V>|{[key:K]:V}>(fn: UnaryPredicateFn<V>, xs:T): [T,T];
+    partition<K,V,T:Array<V>|{[key:K]:V}>(fn: UnaryPredicateFn<V>): (xs:T) => [T,T];
+    pluck<V,K:string|number,T:Array<Array<V>|{[key:string]:V}>>(k: K, xs: T): Array<V>;
+    pluck<V,K:string|number,T:Array<Array<V>|{[key:string]:V}>>(k: K): (xs: T) => Array<V>;
     prepend<T>(x: T, xs: Array<T>): Array<T>;
     prepend<T>(x: T): (xs: Array<T>) => Array<T>;
+    range(from: number, to: number): Array<number>;
+    range(from: number): (to: number) => Array<number>;
     remove<T>(from: number, ...rest: Array<void>): (to: number) => (src: Array<T>) => Array<T>;
     remove<T>(from: number, to: number, ...rest: Array<void>): (src: Array<T>) => Array<T>;
     remove<T>(from: number, to: number, src: Array<T>, ...rest: Array<void>): Array<T>;
@@ -267,11 +295,17 @@ declare module 'ramda' {
     sort<V,T:Array<V>>(fn: BinaryPredicateFn<V>, xs:T): T;
     sort<V,T:Array<V>>(fn: BinaryPredicateFn<V>): (xs:T) => T;
     tail<T,V:Array<T>|string>(xs: V): V;
+    times<T>(fn:(i?: number) => T, n: number): Array<T>;
+    times<T>(fn:(i?: number) => T): (n: number) => Array<T>;
+    transpose<T>(xs: Array<Array<T>>): Array<Array<T>>;
+    unfold<T, TResult>(fn: (seed: T) => Array<TResult>|boolean, seed: T): Array<TResult>;
+    unfold<T, TResult>(fn: (seed: T) => Array<TResult>|boolean): (seed: T) => Array<TResult>;
     uniq<T>(xs: Array<T>): Array<T>;
     uniqBy<T,V>(fn:(x: T) => V, xs: Array<T>): Array<T>;
     uniqBy<T,V>(fn:(x: T) => V): (xs: Array<T>) => Array<T>;
     uniqWith<T>(fn: BinaryPredicateFn<T>, xs: Array<T>): Array<T>;
     uniqWith<T>(fn: BinaryPredicateFn<T>): (xs: Array<T>) => Array<T>;
+    unnest<T>(xs: NestedArray<T>): NestedArray<T>;
     update<T>(index: number, ...rest: Array<void>): (elem: T) => (src: Array<T>) => Array<T>;
     update<T>(index: number, elem: T, ...rest: Array<void>): (src: Array<T>) => Array<T>;
     update<T>(index: number, elem: T, src: Array<T>, ...rest: Array<void>): Array<T>;
@@ -281,6 +315,12 @@ declare module 'ramda' {
     xprod<T,S>(xs: Array<T>): (ys: Array<S>) => Array<[T,S]>;
     zip<T,S>(xs: Array<T>, ys: Array<S>): Array<[T,S]>;
     zip<T,S>(xs: Array<T>): (ys: Array<S>) => Array<[T,S]>;
+    zipObj<T:string,S>(xs: Array<T>, ys: Array<S>): Array<{[key: string]:S}>;
+    zipObj<T:string,S>(xs: Array<T>): (ys: Array<S>) => Array<{[key: string]:S}>;
+    zipWith<T,S,R>(fn: (a: T, b: S) => R, xs: Array<T>, ys: Array<S>): Array<R>;
+    zipWith<T,S,R>(fn: (a: T, b: S) => R, xs: Array<T>): (ys: Array<S>) => Array<R>;
+    zipWith<T,S,R>(fn: (a: T, b: S) => R): (xs: Array<T>, ys: Array<S>) => Array<R>;
+    zipWith<T,S,R>(fn: (a: T, b: S) => R): (xs: Array<T>) => (ys: Array<S>) => Array<R>;
   }
 
   declare class RObject {
@@ -347,8 +387,10 @@ declare module 'ramda' {
     project(keys: Array<string>): (val: Array<{[key:string]: any}>) => Array<{[key:string]: any}>;
     prop(key: string, o: Object): ?any;
     prop(key: string): (o: Object) => ?any;
-    propOr<T>(v: T, key: string, o: Object): ?any|T;
-    propOr<T>(v: T, key: string): (o: Object) => ?any|T;
+    propOr<T,V>(v: T, key: string, o: {[key:string]:V}): V|T;
+    propOr<T,V>(v: T, key: string): (o: {[key:string]:V}) => V|T;
+    propOr<T,V>(v: T): (key: string, o: {[key:string]:V}) => V|T;
+    propOr<T,V>(v: T): (key: string) => (o: {[key:string]:V}) => V|T;
     props(keys: Array<string>, o: Object): Array<any>;
     props(keys: Array<string>): (o: Object) => Array<any>;
     toPairs(o: Object): Array<[string, any]>;
@@ -586,8 +628,10 @@ declare module 'ramda' {
   Chain,
   Concat,
   Drop,
+  Take,
   Filter,
   Find,
+  Split,
   RLogic,
   RRelation,
   Curry,
