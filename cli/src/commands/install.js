@@ -9,7 +9,7 @@ import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 export const name = 'install';
 export const description = 'Installs a libdef to the ./flow-typed directory';
 
-export function setup(yargs: Object): Object {
+export function setup(yargs: Object) {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .options({

@@ -13,6 +13,7 @@ import * as Install from "./commands/install.js";
 import * as RunTests from "./commands/runTests.js";
 import * as Search from "./commands/search.js";
 import * as ValidateDefs from "./commands/validateDefs.js";
+import * as Version from "./commands/version.js";
 
 export function runCLI() {
   type CommandModule = {
@@ -26,6 +27,7 @@ export function runCLI() {
     RunTests,
     Search,
     ValidateDefs,
+    Version,
   ];
 
   commands
