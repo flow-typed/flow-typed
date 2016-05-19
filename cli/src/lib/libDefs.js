@@ -430,7 +430,7 @@ async function verifyCLIVersion(defsDirPath) {
   if (!semver.satisfies(require('../../package.json').version, minCLIVersion)) {
     throw new Error(
       `Please upgrade your CLI version! The latest flow-typed definitions ` +
-      `repo is only compatible with flow-typed@${minCLIVersion} and later.`
+      `are only compatible with flow-typed@${minCLIVersion}!`
     );
   }
 }
