@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // @flow
 
 if (!global.__flowTypedBabelPolyfill) {
