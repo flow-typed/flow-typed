@@ -143,9 +143,39 @@ describe('List', () => {
   })
   it('should typecheck map', () => {
     const ys: Array<string> = _.map((x) => x.toString(), [ 1, 2, 3 ])
+    const zs: {[key: string]: string} = _.map((x) => x.toString(), { a: 1, b: 2, c: 3 })
     //$ExpectError
     const ys1: Array<number> = _.map((x) => x.toString(), [ 1, 2, 3 ])
     const ys2: Array<string> = _.map((x) => x.toString())([ 1, 2, 3 ])
+  })
+  it('should typecheck mapAccum', () => {
+    let digits = [ '1', '2', '3', '4' ]
+    let appender = (a, b) => [ a + b, a + b ]
+    const res: [string, Array<string>] = _.mapAccum(appender, '0', digits)
+  })
+  it('should typecheck pluck', () => {
+    const res: Array<number> = _.pluck('a')([ { a: 1 }, { a: 2 } ])
+    const res1: Array<number> = _.pluck(0)([ [ 1, 2 ], [ 3, 4 ] ])
+    const res2: Array<number|string> = _.pluck(0)([ [ '1', 2 ], [ 3, 4 ] ])
+  })
+  it('should typecheck splitAt, splitEvery', () => {
+    const res: [Array<number>, Array<number>] = _.splitAt(1, [ 1, 2, 3 ])
+    const res1: [string, string] = _.splitAt(5, 'hello world')
+    const res2: [string, string] = _.splitAt(-1, 'foobar')
+    const res3: Array<Array<number>> = _.splitEvery(3, [ 1, 2, 3, 4, 5, 6, 7 ])
+    const res4: Array<string> = _.splitEvery(3, 'foobarbaz')
+  })
+  it('should typecheck transpose', () => {
+    const res: Array<Array<number|string>> = _.transpose([ [ 1, 'a' ], [ 2, 'b' ], [ 3, 'c' ] ])
+  })
+  it('should typecheck zipWith', () => {
+    const res: Array<string> = _.zipWith((x, y) => x + y, [ 1, 2, 3 ], [ 'a', 'b', 'c' ])
+  })
+  it('should typecheck nth', () => {
+    const ys: ?number = _.nth(2, [ 1, 2, 3 ])
+    const ys1: ?number = _.nth(2)([ 1, 2, 3 ])
+    //$ExpectError
+    const ys2: ?string = _.nth(2, [ 1, 2, 3 ])
   })
   it('should typecheck reduce', () => {
     const reduced: Array<number> = _.reduce((acc, x) => [ ...acc, x ], [], [ 1, 2, 3 ])
@@ -155,6 +185,29 @@ describe('List', () => {
     const reducedErr: Array<string> = _.reduce((acc, x) => [ ...acc, x ], [], [ 1, 2, 3 ])
     //$ExpectError
     const reducedStrErr: Array<number> = _.reduce((acc, x) => acc + x, '', [ 1, 2, 3 ])
+  })
+  it('should typecheck scan', () => {
+    const reduced: Array<number> = _.scan(_.add, 1, [ 1, 2, 3 ])
+    const reduced1: Array<number> = _.scan(_.add, 1)([ 1, 2, 3 ])
+    const reduced2: Array<number> = _.scan(_.add)(1, [ 1, 2, 3 ])
+    //$ExpectError
+    const reduced4: Array<number> = _.scan(_.add, '1', [ 1, 2, 3 ])
+  })
+  it('should typecheck reduceBy', () => {
+    let reduceToNamesBy = _.reduceBy((acc: Array<string>, student: {name: string, score: number}): Array<string> => acc.concat(student.name), [])
+    let namesByGrade = reduceToNamesBy((student) => {
+      let score = student.score
+      return score < 65 ? 'F' :
+      score < 70 ? 'D' :
+      score < 80 ? 'C' :
+      score < 90 ? 'B' : 'A'
+    })
+    let students = [
+      { name: 'Lucy', score: 92 },
+      { name: 'Drew', score: 85 },
+      { name: 'Bart', score: 62 },
+    ]
+    const res: {[key: string]: Array<string>} = namesByGrade(students)
   })
 })
 
@@ -177,6 +230,12 @@ describe('String', () => {
     const s1: string = _.drop(1)('E')
     const s3: string = _.dropLast(1,'EF')
   })
+  it('should typecheck nth', () => {
+    const ys: string = _.nth(2, 'curry')
+    const ys1: string = _.nth(2)('curry')
+    //$ExpectError
+    const ys2: string = _.nth(2, [ 1, 2, 3 ])
+  })
 })
 
 
@@ -192,6 +251,14 @@ describe('Object', () => {
   it('should typecheck objOf', function () {
     const obj: {[key: string]: number} = _.objOf('key', 1)
     const obj1: {[key: string]: number} = _.objOf('key')(1)
+  })
+  it('should typecheck propOr', () => {
+    const x: string | number = _.propOr(2, 'a', { b: 2, c: 'dd' })
+    const x1: string | number = _.propOr(2, 'a')({ b: 2 })
+    const x2: string | number = _.propOr(2)('a', { b: 2 })
+    const x3: string | number = _.propOr(2)('a')({ b: 2, c: 'dd' })
+    //$ExpectError
+    const x4: number = _.propOr('a')('a')({ b: 2 })
   })
   it('should typecheck map', () => {
     //$ExpectError
@@ -221,5 +288,28 @@ describe('Function', function () {
   })
   it('should typecheck is', function () {
     const x = _.is(Number, 1)
+  })
+})
+
+describe('transducers', () => {
+  it('should typecheck into', () => {
+    const transducer: (xs: Array<number>) => Array<number> = _.compose(_.map(_.add(1)), _.tail)
+    const arr: Array<number> = _.into([], transducer, [ 1, 2, 3, 4 ])
+    const transducer2: (xs: Array<string>) => Array<string> = _.compose(_.map(_.toUpper), _.map(_.toLower))
+    const arr2: string = _.into('', transducer2, [ 'a', 'b', 'c' ])
+    const transformer: Transformer<Array<number>, Array<string>> = {
+      '@@transducer/step': (a, e) => {
+        return _.prepend(e, a)
+      },
+      '@@transducer/init': () => {
+        return [ 2 ]
+      },
+      '@@transducer/result': (r) => {
+        return r
+      },
+    }
+    const transducer1= _.compose(_.map(_.toString), _.map(_.toUpper))
+    const arr1 = _.into(transformer, transducer1, [ 1, 2, 3 ])
+
   })
 })
