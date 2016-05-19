@@ -52,7 +52,7 @@ reasonable degree. At minimum your tests should:
    a type error. To indicate that a line in a test file expected to cause an 
    error just put a `// $ExpectError` comment above the error-causing line.
 
-[Here](https://github.com/flowtype/flow-typed/blob/master/definitions/highlight.js_v8.x.x/test_highlight.js-v8.js) 
+[Here](https://github.com/flowtype/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js) 
 is an example of a nice and thorough test file. You don't necessarily have to be
 this thorough, but the more thorough you are the better!
 
