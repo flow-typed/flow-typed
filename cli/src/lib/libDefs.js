@@ -427,10 +427,12 @@ async function verifyCLIVersion(defsDirPath) {
     );
   }
   const minCLIVersion = metadata.compatibleCLIRange;
-  if (!semver.satisfies(require('../../package.json').version, minCLIVersion)) {
+  const thisCLIVersion = require('../../package.json').version;
+  if (!semver.satisfies(thisCLIVersion, minCLIVersion)) {
     throw new Error(
-      `Please upgrade your CLI version! The latest flow-typed definitions ` +
-      `are only compatible with flow-typed@${minCLIVersion}!`
+      `Please upgrade your CLI version! This CLI is version ` +
+      `${thisCLIVersion}, but the latest flow-typed definitions are only ` +
+      `compatible with flow-typed@${minCLIVersion}`
     );
   }
 }
