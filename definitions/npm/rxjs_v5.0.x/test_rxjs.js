@@ -28,3 +28,12 @@ const combinedBad: Observable<{n: number, s: string}> = Observable.combineLatest
 );
 
 (Observable.defer(() => numbers): Observable<number>);
+
+// $ExpectError
+const bogusEmpty: Observable<string> = Observable.empty()
+  .concat(numbers.map(x => x));
+
+// Equivalent to Observable.never()
+const never: Observable<number> = Observable.empty()
+  .concat(Observable.of('').ignoreElements())
+  .concat(Observable.never());
