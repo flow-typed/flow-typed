@@ -1,3 +1,6 @@
+// flow-typed signature: 319bd5ef01f115822a4cf777fdc13a6d
+// flow-typed version: 36632f9295/jest_v12.0.x/flow_>=v0.23.x
+
 type JestMockFn = {
   (...args: Array<any>): any;
   mock: {
@@ -14,6 +17,7 @@ type JestMockFn = {
 
 declare function describe(name: string, fn: Function): void;
 declare function it(name: string, fn: Function): void;
+declare function pit(name: string, fn: Function): Promise<void>;
 declare function beforeEach(fn: Function): void;
 
 type JestExpectType = {
