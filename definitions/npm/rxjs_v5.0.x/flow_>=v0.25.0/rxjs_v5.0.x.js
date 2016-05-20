@@ -65,7 +65,7 @@ declare module 'rxjs' {
 
     static fromPromise(promise: Promise<T>): Observable<T>;
 
-    static empty(): Observable<any>;
+    static empty<U>(): Observable<U>;
 
     static interval(period: number): Observable<number>;
 
@@ -80,7 +80,7 @@ declare module 'rxjs' {
     ): Observable<T | U | V>;
     static merge(...sources: Observable<T>[]): Observable<T>;
 
-    static never(): Observable<void>;
+    static never<U>(): Observable<U>;
 
     static of(...values: T[]): Observable<T>;
 
@@ -145,7 +145,7 @@ declare module 'rxjs' {
       defaultValue: U,
     ): Observable<U>;
 
-    ignoreElements(): Observable<any>;
+    ignoreElements<U>(): Observable<U>;
 
     // Alias for `mergeMap`
     flatMap<U>(
