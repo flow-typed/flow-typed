@@ -37,3 +37,7 @@ const bogusEmpty: Observable<string> = Observable.empty()
 const never: Observable<number> = Observable.empty()
   .concat(Observable.of('').ignoreElements())
   .concat(Observable.never());
+
+(Observable.of(2).startWith(1, 2, 3): Observable<number>);
+// $ExpectError
+(Observable.of(2).startWith(1, '2', 3): Observable<number>);
