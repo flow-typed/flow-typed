@@ -41,3 +41,6 @@ const never: Observable<number> = Observable.empty()
 (Observable.of(2).startWith(1, 2, 3): Observable<number>);
 // $ExpectError
 (Observable.of(2).startWith(1, '2', 3): Observable<number>);
+
+(numbers.cache(): Observable<number>);
+(numbers.cache(1): Observable<number>);
