@@ -192,6 +192,8 @@ declare module 'rxjs' {
 
     publishReplay(): ConnectableObservable<T>;
 
+    cache(bufferSize?: number, windowSize?: number, scheduler?: mixed): Observable<T>;
+
     retry(retryCount: number): Observable<T>;
 
     retryWhen(notifier: (errors: Observable<Error>) => Observable<any>): Observable<T>;
