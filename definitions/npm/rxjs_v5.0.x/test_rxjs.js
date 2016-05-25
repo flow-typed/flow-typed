@@ -44,3 +44,7 @@ const never: Observable<number> = Observable.empty()
 
 (numbers.cache(): Observable<number>);
 (numbers.cache(1): Observable<number>);
+
+(numbers.withLatestFrom(strings): Observable<[number, string]>);
+// $ExpectError
+(numbers.withLatestFrom(numbers): Observable<[number, string]>);
