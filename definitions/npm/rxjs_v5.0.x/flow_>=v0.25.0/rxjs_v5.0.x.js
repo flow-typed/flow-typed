@@ -90,6 +90,8 @@ declare module 'rxjs' {
 
     buffer(bufferBoundaries: Observable<any>): Observable<Array<T>>;
 
+    cache(bufferSize?: number, windowTime?: number): Observable<T>;
+
     catch<U>(selector: (err: any, caught: Observable<T>) => Observable<U>): Observable<U>;
 
     // This is actually variadic, but we only support one or two other observables.
@@ -106,6 +108,8 @@ declare module 'rxjs' {
     ): Observable<W>;
 
     // This is actually variadic, but we only support one or two other observables.
+    withLatestFrom<U>(u: Observable<U>): Observable<[T, U]>;
+    withLatestFrom<U, V>(u: Observable<U>, v: Observable<V>): Observable<[T, U, V]>;
     withLatestFrom<U, V>(
       u: Observable<U>,
       resultSelector: (t: T, u: U) => V,
