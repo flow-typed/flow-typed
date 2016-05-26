@@ -117,7 +117,10 @@ export {
 /**
  * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
  */
-async function getLibDefs(defsDir, validationErrs?) {
+export async function getLibDefs(
+  defsDir: string,
+  validationErrs?: VErrors,
+) {
   const libDefs: Array<LibDef> = [];
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(defsDirItems.map(async (item) => {
