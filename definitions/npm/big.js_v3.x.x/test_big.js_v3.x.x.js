@@ -1,6 +1,5 @@
 // @flow
-
-import Big from "big.js";
+import Big from 'big.js';
 
 // Properties
 (Big.DP: number);
