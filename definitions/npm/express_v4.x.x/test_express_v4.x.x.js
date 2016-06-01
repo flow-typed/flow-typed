@@ -7,6 +7,6 @@ const app = express();
 app.foo();
 
 app.use((req, res, next) => {
-  // $ExpectError 
+  // $ExpectError
   res.shouldNotExist();
 });
