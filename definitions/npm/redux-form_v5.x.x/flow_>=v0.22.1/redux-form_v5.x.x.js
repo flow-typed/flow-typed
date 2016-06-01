@@ -11,8 +11,9 @@ declare module 'redux-form' {
     pristine: boolean,
     active: boolean,
     touched: boolean,
-    viisted: boolean,
-    autofiller: boolean
+    visited: boolean,
+    autofilled: boolean,
+    error?: string
   };
   declare type FormProps = {
     active: string,

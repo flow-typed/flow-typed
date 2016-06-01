@@ -2,6 +2,7 @@
 
 const repo = {
   checkoutBranch: jest.fn(),
+  fetch: jest.fn(),
   rebaseBranches: jest.fn(),
 };
 module.exports = {

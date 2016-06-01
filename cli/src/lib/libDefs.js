@@ -25,35 +25,83 @@ const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
 const GIT_REPO_DIR = path.join(__dirname, '..', '..', '..');
 
 const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
+const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
+
+async function cloneCacheRepo(verbose?: VerboseOutput) {
+  await mkdirp(CACHE_REPO_DIR);
+  try {
+    await Git.Clone(REMOTE_REPO_URL, CACHE_REPO_DIR, {
+      checkoutBranch: 'master'
+    });
+  } catch (e) {
+    writeVerbose(verbose, 'ERROR: Unable to clone the local cache repo.');
+    throw e;
+  }
+  await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
+}
+
+const CACHE_REPO_GIT_DIR = path.join(CACHE_REPO_DIR, '.git');
+async function rebaseCacheRepo(verbose?: VerboseOutput) {
+  if (await fs.exists(CACHE_REPO_DIR) && await fs.exists(CACHE_REPO_GIT_DIR)) {
+    const repo = await Git.Repository.open(CACHE_REPO_DIR);
+    await repo.checkoutBranch('master');
+    try {
+      await repo.fetch('origin');
+      await repo.rebaseBranches('master', 'origin/master');
+    } catch (e) {
+      writeVerbose(
+        verbose,
+        'ERROR: Unable to rebase the local cache repo. ' + e.message
+      );
+      return false;
+    }
+    await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
+    return true;
+  } else {
+    await cloneCacheRepo(verbose);
+    return true;
+  }
+}
 
 /**
  * Ensure that the CACHE_REPO_DIR exists and is recently rebased.
  * (else: create/rebase it)
  */
 const CACHE_REPO_EXPIRY = 1000 * 3600 * 24 * 5; // 5 days
-const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
-async function ensureCacheRepo(verbose?: Object) {
-  if (!await fs.exists(CACHE_REPO_DIR)) {
+async function ensureCacheRepo(verbose?: VerboseOutput) {
+  if (!await fs.exists(CACHE_REPO_DIR) || !await fs.exists(CACHE_REPO_GIT_DIR)) {
     writeVerbose(
       verbose,
-      'flow-typed cache not found, fetching from GitHub...',
+      ' * flow-typed cache not found, fetching from GitHub...',
       false
     );
-    await mkdirp(CACHE_REPO_DIR);
-    await Git.Clone(REMOTE_REPO_URL, CACHE_REPO_DIR, {
-      checkoutBranch: 'master'
-    });
-    await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
+    await cloneCacheRepo(verbose);
     writeVerbose(verbose, 'done.');
   } else {
-    const lastUpdated = parseInt(await fs.readFile(LAST_UPDATED_FILE), 10);
+    let lastUpdated = 0;
+    if (await fs.exists(LAST_UPDATED_FILE)) {
+      // If the LAST_UPDATED_FILE has anything other than just a number in it,
+      // just assume we need to update.
+      const lastUpdatedRaw = await fs.readFile(LAST_UPDATED_FILE);
+      const lastUpdatedNum = parseInt(lastUpdatedRaw, 10);
+      if (String(lastUpdatedNum) === String(lastUpdatedRaw)) {
+        lastUpdated = lastUpdatedNum;
+      }
+    }
+
     if ((lastUpdated + CACHE_REPO_EXPIRY) < Date.now()) {
-      writeVerbose(verbose, 'flow-typed cache is old, rebasing...', false);
-      const repo = await Git.Repository.open(CACHE_REPO_DIR);
-      await repo.checkoutBranch('master');
-      await repo.rebaseBranches('master', 'origin/master');
-      await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
-      writeVerbose(verbose, 'done.');
+      writeVerbose(verbose, ' * flow-typed cache is old, rebasing...', false);
+      const rebaseSuccessful = await rebaseCacheRepo(verbose);
+      if (rebaseSuccessful) {
+        writeVerbose(verbose, 'done.');
+      } else {
+        writeVerbose(
+          verbose,
+          '\nNOTE: Unable to rebase local cache! If you don\'t currently ' +
+          'have internet connectivity, no worries -- we\'ll update the local ' +
+          'cache the next time you do.\n'
+        );
+      }
     }
   }
 }
@@ -61,14 +109,18 @@ async function ensureCacheRepo(verbose?: Object) {
 export {
   CACHE_REPO_DIR as _CACHE_REPO_DIR,
   CACHE_REPO_EXPIRY as _CACHE_REPO_EXPIRY,
+  CACHE_REPO_GIT_DIR as _CACHE_REPO_GIT_DIR,
   ensureCacheRepo as _ensureCacheRepo,
   LAST_UPDATED_FILE as _LAST_UPDATED_FILE,
 };
 
 /**
- * Given a 'definitions' dir, return a list of LibDefs that it contains.
+ * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
  */
-async function getLibDefs(defsDir, validationErrs?) {
+export async function getLibDefs(
+  defsDir: string,
+  validationErrs?: VErrors,
+) {
   const libDefs: Array<LibDef> = [];
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(defsDirItems.map(async (item) => {
@@ -86,7 +138,8 @@ async function getLibDefs(defsDir, validationErrs?) {
         validationErrs
       )).forEach(libDef => libDefs.push(libDef));
     } else {
-      const error = `Expected only directories in the 'definitions' directory!`;
+      const error =
+        `Expected only directories in the 'definitions/npm' directory!`;
       validationError(itemPath, error, validationErrs);
     }
   }));
@@ -95,20 +148,20 @@ async function getLibDefs(defsDir, validationErrs?) {
 
 /**
  * Given the path to a flow directory within a package directory
- * (i.e. definitions/pkgDir/flow_v0.24.0/), parse the flow directory name into a
- * Version.
+ * (i.e. definitions/npm/pkgDir/flow_v0.24.0/), parse the flow directory name
+ * into a Version.
  */
 const FLOW_VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
 const FLOW_DIR_NAME_RE = new RegExp(
-  `^flow_(all|([><]?=)?${FLOW_VER}(_([><]?=)${FLOW_VER})?)$`
+  `^flow_(all|(([><]?=)?${FLOW_VER}(_([><]?=)${FLOW_VER})?))$`
 );
 function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
   const pkgFlowDirName = path.basename(pkgFlowDirPath);
 
   const matches = pkgFlowDirName.match(FLOW_DIR_NAME_RE);
   if (matches == null) {
-    const repoPath = path.relative(pkgFlowDirPath, '..', '..');
-    const pkgFlowDirContext = path.relative(repoPath, pkgFlowDirName);
+    const repoPath = path.resolve(pkgFlowDirPath, '..', '..', '..');
+    const pkgFlowDirContext = path.relative(repoPath, pkgFlowDirPath);
     const error =
       `Malformed flow-version directory name! Expected the name to be ` +
       `formatted as 'flow_all' or ` +
@@ -118,33 +171,41 @@ function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
     return emptyVersion();
   }
 
+  let upperBound;
   let [
-    _1, _2, range, major, minor, patch,
+    _1, isAll, _2, range, major, minor, patch,
     _3, upRange, upMajor, upMinor, upPatch
   ] = matches;
-  range = validateVersionRange(range, pkgFlowDirPath, validationErrs);
-  major =
-    validateVersionNumPart(major, "major", pkgFlowDirPath, validationErrs);
-  minor =
-    validateVersionPart(minor, "minor", pkgFlowDirPath, validationErrs);
-  patch =
-    validateVersionPart(patch, "patch", pkgFlowDirPath, validationErrs);
 
-  let upperBound;
-  if (upMajor) {
-    upRange = validateVersionRange(upRange, pkgFlowDirPath, validationErrs);
-    upMajor =
-      validateVersionNumPart(upMajor, "major", pkgFlowDirPath, validationErrs);
-    upMinor =
-      validateVersionPart(upMinor, "minor", pkgFlowDirPath, validationErrs);
-    upPatch =
-      validateVersionPart(upPatch, "patch", pkgFlowDirPath, validationErrs);
-    upperBound = {
-      range: upRange,
-      major: upMajor,
-      minor: upMinor,
-      patch: upPatch,
-    };
+  if (isAll === 'all') {
+    range = undefined;
+    major = 'x';
+    minor = 'x';
+    patch = 'x';
+  } else {
+    range = validateVersionRange(range, pkgFlowDirPath, validationErrs);
+    major =
+      validateVersionNumPart(major, "major", pkgFlowDirPath, validationErrs);
+    minor =
+      validateVersionPart(minor, "minor", pkgFlowDirPath, validationErrs);
+    patch =
+      validateVersionPart(patch, "patch", pkgFlowDirPath, validationErrs);
+
+    if (upMajor) {
+      upRange = validateVersionRange(upRange, pkgFlowDirPath, validationErrs);
+      upMajor =
+        validateVersionNumPart(upMajor, "major", pkgFlowDirPath, validationErrs);
+      upMinor =
+        validateVersionPart(upMinor, "minor", pkgFlowDirPath, validationErrs);
+      upPatch =
+        validateVersionPart(upPatch, "patch", pkgFlowDirPath, validationErrs);
+      upperBound = {
+        range: upRange,
+        major: upMajor,
+        minor: upMinor,
+        patch: upPatch,
+      };
+    }
   }
 
   return {range, major, minor, patch, upperBound};
@@ -233,8 +294,6 @@ async function parseLibDefsFromPkgDir(
 
         if (isValidTestFile) {
           testFilePaths.push(flowDirItemPath);
-        } else {
-          console.log('flowDirItem: %s, libDefFileName: %s', flowDirItem, libDefFileName);
         }
       } else {
         const error = 'Unexpected directory item';
@@ -274,7 +333,7 @@ function parseRepoDirItem(dirItemPath, validationErrs) {
   const itemMatches = dirItem.match(REPO_DIR_ITEM_NAME_RE);
   if (itemMatches == null) {
     const error =
-      `'${dirItem}' is a malformed definitions/ directory name! ` +
+      `'${dirItem}' is a malformed definitions/npm/ directory name! ` +
       `Expected the name to be formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>`;
     validationError(dirItem, error, validationErrs);
     const pkgName = 'ERROR';
@@ -371,11 +430,20 @@ function validationError(errKey, errMsg, validationErrs) {
 async function verifyCLIVersion(defsDirPath) {
   const metadataFilePath = path.join(defsDirPath, '.cli-metadata.json');
   const metadata = JSON.parse(String(await fs.readFile(metadataFilePath)));
-  const minCLIVersion = metadata.minimumCLIVersion;
-  if (semver.lt(require('../../package.json').version, minCLIVersion)) {
+  if (!metadata.compatibleCLIRange) {
     throw new Error(
-      `Please upgrade your CLI version! The latest flow-typed definitions ` +
-      `repo is only compatible with flow-typed@${minCLIVersion} and later.`
+      `Unable to find the 'compatibleCLIRange' property in ` +
+      `${metadataFilePath}. You might need to update to a newer version of ` +
+      `the Flow CLI.`
+    );
+  }
+  const minCLIVersion = metadata.compatibleCLIRange;
+  const thisCLIVersion = require('../../package.json').version;
+  if (!semver.satisfies(thisCLIVersion, minCLIVersion)) {
+    throw new Error(
+      `Please upgrade your CLI version! This CLI is version ` +
+      `${thisCLIVersion}, but the latest flow-typed definitions are only ` +
+      `compatible with flow-typed@${minCLIVersion}`
     );
   }
 }
@@ -398,9 +466,9 @@ function writeVerbose(stream, msg, writeNewline = true) {
  * itself. It is useless when running the npm-install CLI.
  */
 type VErrors = Map<string, Array<string>>;
-const GIT_REPO_DEFS_DIR = path.join(GIT_REPO_DIR, 'definitions');
+const GIT_REPO_DEFS_DIR = path.join(GIT_REPO_DIR, 'definitions', 'npm');
 export async function getLocalLibDefs(validationErrs?: VErrors) {
-  await verifyCLIVersion(GIT_REPO_DEFS_DIR);
+  await verifyCLIVersion(path.join(GIT_REPO_DIR, 'definitions'));
   return getLibDefs(GIT_REPO_DEFS_DIR, validationErrs);
 };
 
@@ -410,19 +478,19 @@ export async function getLocalLibDefs(validationErrs?: VErrors) {
  * If the repo checkout does not exist or is out of date, it will be
  * created/updated automatically first.
  */
-const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions');
+const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'npm');
 export async function getCacheLibDefs(
   verbose?: VerboseOutput = process.stdout,
   validationErrs?: VErrors,
 ) {
   await ensureCacheRepo(verbose);
-  await verifyCLIVersion(CACHE_REPO_DEFS_DIR);
+  await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
   return getLibDefs(CACHE_REPO_DEFS_DIR, validationErrs);
 };
 
 export async function getCacheLibDefVersion(libDef: LibDef) {
   await ensureCacheRepo();
-  await verifyCLIVersion(CACHE_REPO_DEFS_DIR);
+  await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
   const repo = await Git.Repository.open(CACHE_REPO_DIR);
   const revWalk = repo.createRevWalk();
   revWalk.pushHead();
@@ -437,7 +505,11 @@ export async function getCacheLibDefVersion(libDef: LibDef) {
       `flow_${libDef.flowVersionStr}'!`
     );
   }
-  return histEntries[0].commit.sha();
+  return (
+    `${histEntries[0].commit.sha().substr(0, 10)}/` +
+    `${libDef.pkgName}_${libDef.pkgVersionStr}/` +
+    `flow_${libDef.flowVersionStr}`
+  );
 };
 
 /**

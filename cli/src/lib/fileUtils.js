@@ -24,7 +24,7 @@ export function copyFile(
       reader.pipe(writer);
     }
   });
-}
+};
 
 export function mkdirp(path: string) {
   return new Promise((res, rej) => {
@@ -36,7 +36,7 @@ export function mkdirp(path: string) {
       }
     });
   });
-}
+};
 
 export async function recursiveRmdir(dirPath: string): Promise<void> {
   let dirItems = await fs.readdir(dirPath);
@@ -54,4 +54,20 @@ export async function recursiveRmdir(dirPath: string): Promise<void> {
     }
   }));
   return fs.rmdir(dirPath);
-}
+};
+
+export async function searchUpDirPath(
+  startDir: string,
+  testFn: (path: string) => Promise<bool>,
+) {
+  let currDir = startDir;
+  let lastDir = null;
+  while (currDir !== lastDir) {
+    if (await testFn(currDir)) {
+      return currDir;
+    }
+    lastDir = currDir;
+    currDir = path.resolve(currDir, '..');
+  }
+  return null;
+};

@@ -3,7 +3,7 @@
 import {child_process, fs, os, path} from "../lib/node.js";
 import {copyFile, recursiveRmdir} from "../lib/fileUtils.js";
 import {gitHubClient} from "../lib/github.js";
-import {getLocalLibDefs} from "../lib/libDefs.js";
+import {getLibDefs} from "../lib/libDefs.js";
 import {versionToString} from "../lib/semver.js";
 
 import request from "request";
@@ -39,8 +39,8 @@ type TestGroup = {
  * structs. Each TestGroup represents a Package/PackageVersion/FlowVersion
  * directory.
  */
-async function getTestGroups(): Promise<Array<TestGroup>> {
-  const libDefs = await getLocalLibDefs();
+async function getTestGroups(repoDirPath): Promise<Array<TestGroup>> {
+  const libDefs = await getLibDefs(repoDirPath);
   return libDefs.map(libDef => {
     const groupID =
       `${libDef.pkgName}_${libDef.pkgVersionStr}--flow_` +
@@ -327,10 +327,11 @@ async function runTestGroup(
 }
 
 async function runTests(
+  repoDirPath: string,
   testPatterns: Array<string>
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, "g"));
-  const testGroups = (await getTestGroups()).filter(testGroup => {
+  const testGroups = (await getTestGroups(repoDirPath)).filter(testGroup => {
     if (testPatternRes.length === 0) {
       return true;
     }
@@ -373,7 +374,17 @@ export const name = "run-tests";
 export const description = "Run definition tests";
 export async function run(argv: Object): Promise<number> {
   const testPatterns = argv._.slice(1);
-  const results = await runTests(testPatterns);
+
+  const cwd = process.cwd();
+  const cwdDefsNPMPath = path.join(cwd, 'definitions', 'npm');
+  let repoDirPath =
+    await fs.exists(cwdDefsNPMPath)
+    ? cwdDefsNPMPath
+    : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
+
+  console.log('Running definition tests in %s...\n', repoDirPath);
+
+  const results = await runTests(repoDirPath, testPatterns);
   console.log(" ");
   Array.from(results).forEach(([testGroupName, errors]) => {
     console.log("ERROR: %s", testGroupName);

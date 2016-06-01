@@ -1,7 +1,7 @@
 // @flow
 
 import {signCodeStream} from "../lib/codeSign.js";
-import {copyFile} from "../lib/fileUtils.js";
+import {copyFile, mkdirp, searchUpDirPath} from "../lib/fileUtils.js";
 import {filterLibDefs, getCacheLibDefs, getCacheLibDefVersion} from "../lib/libDefs.js";
 import {fs, path} from '../lib/node.js';
 import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
@@ -9,12 +9,12 @@ import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 export const name = 'install';
 export const description = 'Installs a libdef to the ./flow-typed directory';
 
-export function setup(yargs: Object): Object {
+export function setup(yargs: Object) {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .options({
       flowVersion: {
-        alias: 'v',
+        alias: 'f',
         demand: true,
         describe: 'The version of Flow fetched libdefs must be compatible with',
         type: 'string',
@@ -53,10 +53,14 @@ export async function run(args: Args): Promise<number> {
       'Please provide a flow version (example: --flowVersion 0.24.0)'
     );
   }
-  const flowVersionStr =
+  let flowVersionStr =
     flowVersionRaw[0] === 'v'
     ? flowVersionRaw
     : `v${flowVersionRaw}`;
+
+  if (/^v[0-9]+\.[0-9]+$/.test(flowVersionStr)) {
+    flowVersionStr = `${flowVersionStr}.0`;
+  }
   const flowVersion = stringToVersion(flowVersionStr);
 
   const term = args._[1];
@@ -111,11 +115,29 @@ export async function run(args: Args): Promise<number> {
       `https://github.com/flowtype/flow-typed/`
     );
   }
-  console.log('found %s matching libdefs.', filtered.length);
+  console.log(' * found %s matching libdefs.', filtered.length);
 
   const def = filtered[0];
 
-  const flowTypedDir = path.join(process.cwd(), 'flow-typed');
+  // Find the project root
+  const projectRoot = await searchUpDirPath(process.cwd(), async (dirPath) => {
+    const flowConfigPath = path.join(dirPath, '.flowconfig');
+    try {
+      return fs.statSync(flowConfigPath).isFile();
+    } catch (e) {
+      // Not a file...
+      return false;
+    }
+  });
+  if (projectRoot === null) {
+    return failWithMessage(
+      `\nERROR: Unable to find a flow project in the currend dir or any of ` +
+      `it's parents!\nPlease run this command from within a Flow project.`
+    );
+  }
+
+  const flowTypedDir = path.join(projectRoot, 'flow-typed', 'npm');
+  await mkdirp(flowTypedDir);
   const targetFileName = `${def.pkgName}_${def.pkgVersionStr}.js`;
   const targetFilePath = path.join(flowTypedDir, targetFileName);
 
