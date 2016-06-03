@@ -517,9 +517,9 @@ export async function getCacheLibDefVersion(libDef: LibDef) {
  */
 type LibDefFilter =
   | {type: 'fuzzy', flowVersion?: Version, term: string}
-  | {type: 'fuzzy-install', flowVersion?: Version, term: string}
   //| {type: 'exact', flowVersion?: Version, pkgName: string, pkgVersion: Version}
   | {type: 'exact', flowVersion?: Version, libDef: LibDef}
+  | {type: 'exact-name', flowVersion?: Version, term: string}
 ;
 export function filterLibDefs(
   defs: Array<LibDef>,
@@ -535,7 +535,7 @@ export function filterLibDefs(
         );
         break;
 
-      case 'fuzzy-install':
+      case 'exact-name':
         filterMatch = (
           def.pkgName.toLowerCase() === filter.term.toLowerCase()
         );

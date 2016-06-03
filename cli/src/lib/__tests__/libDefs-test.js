@@ -147,13 +147,13 @@ describe('libDefs', () => {
       });
     });
 
-    describe('fuzzy-install filter', () => {
+    describe('exact-name filter', () => {
       it('filters on exact name', () => {
         const fixture = [
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.18.x'),
         ];
-        const filtered = filterLibDefs(fixture, {type: 'fuzzy-install', term: 'mori'});
+        const filtered = filterLibDefs(fixture, {type: 'exact-name', term: 'mori'});
         expect(filtered).toEqual([fixture[1], fixture[0]]);
       });
 
@@ -162,7 +162,7 @@ describe('libDefs', () => {
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.18.x'),
         ];
-        const filtered = filterLibDefs(fixture, {type: 'fuzzy-install', term: 'Mori'});
+        const filtered = filterLibDefs(fixture, {type: 'exact-name', term: 'Mori'});
         expect(filtered).toEqual([fixture[1], fixture[0]]);
       });
 
@@ -172,7 +172,7 @@ describe('libDefs', () => {
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.18.x'),
           _generateFixturePkg('mo**ri', 'v0.3.x', '>=v0.18.x'),
         ];
-        const filtered = filterLibDefs(fixture, {type: 'fuzzy-install', term: 'mori'});
+        const filtered = filterLibDefs(fixture, {type: 'exact-name', term: 'mori'});
         expect(filtered).toEqual([fixture[1]]);
       });
 
@@ -182,7 +182,7 @@ describe('libDefs', () => {
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.18.x'),
         ];
         const filtered = filterLibDefs(fixture, {
-          type: 'fuzzy-install',
+          type: 'exact-name',
           term: 'mori',
           flowVersion: stringToVersion('v0.19.0')
         });
