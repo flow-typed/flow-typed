@@ -98,7 +98,7 @@ export async function run(args: Args): Promise<number> {
     };
   } else {
     filter = {
-      type: 'fuzzy',
+      type: 'fuzzy-install',
       term: defName,
       flowVersion,
     };
