@@ -8,11 +8,12 @@ env:
 addons:
   apt:
     sources:
-      - llvm-toolchain-precise-3.6
+      #- llvm-toolchain-precise-3.6
       - ubuntu-toolchain-r-test
     packages:
       - unzip
-      - clang-3.6
+      #- clang-3.6
+      - clang
       - g++-4.8
 script: ./travis.sh
 cache:
