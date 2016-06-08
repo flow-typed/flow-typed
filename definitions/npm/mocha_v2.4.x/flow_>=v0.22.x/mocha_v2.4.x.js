@@ -10,7 +10,7 @@ declare var describe : {
 declare var context : typeof describe;
 
 declare var it : {
-    (name:string, spec:TestFunction): void;
+    (name:string, spec?:TestFunction): void;
     only(description:string, spec:TestFunction): void;
     skip(description:string, spec:TestFunction): void;
     timeout(ms:number): void;
