@@ -66,7 +66,7 @@ async function rebaseCacheRepo(verbose?: VerboseOutput) {
 /**
  * Utility wrapper for ensureCacheRepo with an update expiry of 0 hours.
  */
-async function updateCacheRepo(verbose?: VerboseOutput): Promise<boolean>{
+async function updateCacheRepo(verbose?: VerboseOutput) {
   return await ensureCacheRepo(verbose, 0);
 }
 
