@@ -12,7 +12,7 @@ import {
   _CACHE_REPO_EXPIRY as CACHE_REPO_EXPIRY,
   _CACHE_REPO_GIT_DIR as CACHE_REPO_GIT_DIR,
   _ensureCacheRepo as ensureCacheRepo,
-  _updateCacheRepo as updateCacheRepo,
+  updateCacheRepo,
   _LAST_UPDATED_FILE as LAST_UPDATED_FILE,
   filterLibDefs,
 } from '../libDefs.js';

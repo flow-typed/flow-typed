@@ -66,13 +66,8 @@ async function rebaseCacheRepo(verbose?: VerboseOutput) {
 /**
  * Utility wrapper for ensureCacheRepo with an update expiry of 0 hours.
  */
-async function updateCacheRepo(verbose?: VerboseOutput): Promise<boolean> {
-  try {
-    await ensureCacheRepo(verbose, 0);
-    return true;
-  } catch (e) {
-    return false;
-  }
+async function updateCacheRepo(verbose?: VerboseOutput): Promise<boolean>{
+  return await ensureCacheRepo(verbose, 0);
 }
 
 /**
@@ -123,7 +118,7 @@ export {
   CACHE_REPO_EXPIRY as _CACHE_REPO_EXPIRY,
   CACHE_REPO_GIT_DIR as _CACHE_REPO_GIT_DIR,
   ensureCacheRepo as _ensureCacheRepo,
-  updateCacheRepo as _updateCacheRepo,
+  updateCacheRepo,
   LAST_UPDATED_FILE as _LAST_UPDATED_FILE,
 };
 

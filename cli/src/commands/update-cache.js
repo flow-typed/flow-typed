@@ -1,6 +1,6 @@
 // @flow
 
-import { _updateCacheRepo as updateCacheRepo } from '../lib/libDefs';
+import {updateCacheRepo} from '../lib/libDefs';
 
 export const name = 'update-cache';
 export const description = 'Updates the flow-typed definitions cache';
@@ -24,25 +24,25 @@ type Args = {
 }
 
 export async function run(args: Args): Promise<number> {
-  let verbose;
+  try {
+    let verbose;
 
-  if (args.debug) {
-    verbose = process.stdout;
-  }
+    if (args.debug) {
+      verbose = process.stdout;
+    }
 
-  console.log('Updating flow-typed definitions...');
-  const success = await updateCacheRepo(verbose);
+    console.log('Updating flow-typed definitions...');
+    await updateCacheRepo(verbose);
 
-  if (success) {
     console.log('Definitions update successful!');
     return 0;
+  } catch (e) {
+    console.error(`Update failed: ${e.message}`);
+
+    if (args.debug) {
+      console.error(e);
+    }
+
+    return 1;
   }
-
-  console.log('Update failed...');
-
-  if (!args.debug) {
-    console.log('Rerun this command with the --debug for more information!');
-  }
-
-  return 1;
 }
