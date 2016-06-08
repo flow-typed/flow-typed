@@ -13,6 +13,7 @@ import * as Install from "./commands/install.js";
 import * as RunTests from "./commands/runTests.js";
 import * as Search from "./commands/search.js";
 import * as ValidateDefs from "./commands/validateDefs.js";
+import * as UpdateCache from "./commands/update-cache";
 import * as Version from "./commands/version.js";
 
 export function runCLI() {
@@ -28,6 +29,7 @@ export function runCLI() {
     Search,
     ValidateDefs,
     Version,
+    UpdateCache,
   ];
 
   commands

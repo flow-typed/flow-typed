@@ -12,6 +12,7 @@ import {
   _CACHE_REPO_EXPIRY as CACHE_REPO_EXPIRY,
   _CACHE_REPO_GIT_DIR as CACHE_REPO_GIT_DIR,
   _ensureCacheRepo as ensureCacheRepo,
+  updateCacheRepo,
   _LAST_UPDATED_FILE as LAST_UPDATED_FILE,
   filterLibDefs,
 } from '../libDefs.js';
@@ -87,6 +88,37 @@ describe('libDefs', () => {
 
       await ensureCacheRepo();
       expect(_mock(Git.Repository.open).mock.calls.length).toBe(0);
+    });
+  });
+
+  describe('updateCacheRepo', () => {
+    beforeEach(() => {
+      _mock(Git.Clone).mockClear();
+      const repo = _mock(Git.Repository)._mockRepo;
+      repo.checkoutBranch.mockClear();
+      repo.rebaseBranches.mockClear();
+      _mock(Git.Repository.open).mockClear();
+    });
+
+    pit('rebases if present on disk + lastUpdated is old', async () => {
+      _mock(fs.exists).mockImplementation(dirPath => {
+        return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
+      });
+      
+      _mock(fs.readFile).mockImplementation((filePath) => {
+        if (filePath === LAST_UPDATED_FILE) {
+          return String(Date.now() - CACHE_REPO_EXPIRY - 1);
+        }
+      });
+
+      await updateCacheRepo();
+      expect(_mock(Git.Repository.open).mock.calls).toEqual([
+        [CACHE_REPO_DIR],
+      ]);
+      const _mockRepo = _mock(Git.Repository)._mockRepo;
+      expect(_mockRepo.rebaseBranches.mock.calls).toEqual([
+        ['master', 'origin/master'],
+      ]);
     });
   });
 
