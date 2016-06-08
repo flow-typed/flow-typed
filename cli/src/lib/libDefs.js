@@ -64,11 +64,23 @@ async function rebaseCacheRepo(verbose?: VerboseOutput) {
 }
 
 /**
+ * Utility wrapper for ensureCacheRepo with an update expiry of 0 hours.
+ */
+async function updateCacheRepo(verbose?: VerboseOutput): Promise<boolean> {
+  try {
+    await ensureCacheRepo(verbose, 0);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
  * Ensure that the CACHE_REPO_DIR exists and is recently rebased.
  * (else: create/rebase it)
  */
 const CACHE_REPO_EXPIRY = 1000 * 3600 * 24 * 5; // 5 days
-async function ensureCacheRepo(verbose?: VerboseOutput) {
+async function ensureCacheRepo(verbose?: VerboseOutput, cacheRepoExpiry: number = CACHE_REPO_EXPIRY) {
   if (!await fs.exists(CACHE_REPO_DIR) || !await fs.exists(CACHE_REPO_GIT_DIR)) {
     writeVerbose(
       verbose,
@@ -89,7 +101,7 @@ async function ensureCacheRepo(verbose?: VerboseOutput) {
       }
     }
 
-    if ((lastUpdated + CACHE_REPO_EXPIRY) < Date.now()) {
+    if ((lastUpdated + cacheRepoExpiry) < Date.now()) {
       writeVerbose(verbose, ' * flow-typed cache is old, rebasing...', false);
       const rebaseSuccessful = await rebaseCacheRepo(verbose);
       if (rebaseSuccessful) {
@@ -111,6 +123,7 @@ export {
   CACHE_REPO_EXPIRY as _CACHE_REPO_EXPIRY,
   CACHE_REPO_GIT_DIR as _CACHE_REPO_GIT_DIR,
   ensureCacheRepo as _ensureCacheRepo,
+  updateCacheRepo as _updateCacheRepo,
   LAST_UPDATED_FILE as _LAST_UPDATED_FILE,
 };
 
@@ -517,7 +530,7 @@ export async function getCacheLibDefVersion(libDef: LibDef) {
  */
 type LibDefFilter =
   | {type: 'fuzzy', flowVersion?: Version, term: string}
-  //| {type: 'exact', flowVersion?: Version, pkgName: string, pkgVersion: Version}
+  // | {type: 'exact', flowVersion?: Version, pkgName: string, pkgVersion: Version}
   | {type: 'exact', flowVersion?: Version, libDef: LibDef}
   | {type: 'exact-name', flowVersion?: Version, term: string}
 ;
