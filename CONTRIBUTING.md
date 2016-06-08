@@ -1,3 +1,88 @@
+## Library Definition Best Practices
+
+##### Avoid `any` when possible
+
+Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propogating on to other code, the `any` will potentially cause Flow to miss type errors!
+
+In many places it is better (but also stricter) to use the `mixed` type rather than the `any` type. The `mixed` type is safer in that it allows anything to flow in to it, but can never be used downstream without [dynamic type tests](https://flowtype.org/docs/dynamic-type-tests.html#_) that verify the type at runtime.
+
+Consider this code:
+
+```js
+const cache = new Map();
+function setCache(key: string, value: any) {
+  cache.set(key, value);
+}
+function getCache(key: string) {
+  cache.get(key);
+}
+
+setCache('foo', 42);
+var someString = getCache('foo'); // oops, 'foo' isn't a string!
+someString.length; // but because we used `any`, we don't know toerror here!
+```
+
+Because we've typed the values of the map as `any`, we open ourselves up to type errors:
+
+If, however, we had used `mixed` instead of `any`, Flow would ask us to verify that the type we got back from `getCache()` is in fact a `string` before using it as one:
+
+```js
+const cache = new Map();
+function setCache(key: string, value: mixed) {
+  cache.set(key, value);
+}
+function getCache(key: string) {
+  cache.get(key);
+}
+
+setCache('foo', 42);
+var someString = getCache('foo');
+if (typeof someString === 'string') {
+  someString.length;
+} else {
+  throw new Error('`foo` is unexpectedly something other than a string!');
+}
+```
+
+Because we used a dynamic type test in the second example, we've proved to Flow that the `mixed` result must be a string. If we hadn't done this, Flow would have given us an error reminding us that the value could be anything and it isn't safe to assume without checking first.
+
+There is sometimes a trade-off with using `mixed`, though. Using `mixed` means that if your variable ever does flow downstream, you'll always have to prove what kind of type it is (with a type test) before you can use it. Sometimes this is just too annoying and the risk involved with `any` is just worth the trade-off.
+
+In the case of library definitions, it is almost always better to use `mixed` for function and method parameters because the trade-off is hidden from users:
+
+```js
+declare function setCache(key: string, value: mixed): void;
+
+setCache('number', 42); // Ok
+setCache('string', 'asdf'); // Ok
+```
+
+It is also almost always ok to use `mixed` as the return type of a callback:
+
+```js
+declare function getUser(cb: (user: User) => mixed): void;
+getUser((user) => console.log('Got the user!'));
+```
+
+Using `mixed` in place of `any` for the return type of a function or the type of a variable is a judgement call, though. Return types and declared variables flow into users' programs, which means that users will have to prove the type of `mixed` before they can use them.
+
+##### Prefix global variables that aren't really meant to be global
+
+Right now we don't have a good way to write types inside `declare module {}` bodies that *aren't* exported. This problem is being worked on, but in the meantime the best option is to just put a declaration outside the `declare module {}` and reference it.
+
+Because this effectively creates a global type, please be sure to namespace these types with something like `$npm$ModuleName$`:
+
+```js
+type $npm$MyModule$Options = {
+  option1: number,
+  option2: string,
+};
+
+declare module "MyModule" {
+  declare function doStuff(options: $npm$MyModule$Options): void;
+}
+```
+
 ## Contributing to the definitions repository
 
 All definitions are contained in the [definitions/](https://github.com/flowtype/flow-typed/tree/master/definitions) 
