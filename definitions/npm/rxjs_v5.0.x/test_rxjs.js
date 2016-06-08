@@ -1,6 +1,9 @@
 /* @flow */
 
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
+
+type SuperFoo = { x: string };
+type SubFoo = { x: string; y: number };
 
 const numbers: Observable<number> = Observable.of(1, 2, 3);
 const strings: Observable<string> = numbers.map(x => x.toString());
@@ -48,3 +51,28 @@ const never: Observable<number> = Observable.empty()
 (numbers.withLatestFrom(strings): Observable<[number, string]>);
 // $ExpectError
 (numbers.withLatestFrom(numbers): Observable<[number, string]>);
+
+
+// Testing covariance/contravariance/invariance of type parameters
+
+const subObservable: Observable<SubFoo> = new Observable();
+const superObservable: Observable<SuperFoo> = new Observable();
+
+const subSubject: Subject<SubFoo> = new Subject();
+const superSubject: Subject<SuperFoo> = new Subject();
+
+const superObserver: rx$IObserver<SuperFoo> = (null: any);
+const subObserver: rx$IObserver<SubFoo> = (null: any);
+
+(subObservable: Observable<SuperFoo>);
+// $ExpectError -- covariant
+(superObservable: Observable<SubFoo>);
+
+// $ExpectError -- invariant. Subjects have their type parameter both in input and output positions.
+(subSubject: Subject<SuperFoo>);
+// $ExpectError -- invariant
+(superSubject: Subject<SubFoo>);
+
+// $ExpectError -- contravariant. Type parameter is only in input positions.
+(subObserver: rx$IObserver<SuperFoo>);
+(superObserver: rx$IObserver<SubFoo>);
