@@ -50,6 +50,14 @@ declare module 'express' {
         secure?: boolean,
         signed?: boolean
     };
+
+    declare type SendFileOptions = {
+        maxAge?: number,
+        root?: string,
+        lastModified?: boolean,
+        headers?: { [name: string]: string },
+        dotfiles?: 'allow' | 'deny' | 'ignore'
+    };
     declare class Response extends http$ClientRequest mixins RequestResponseBase {
         headersSent: boolean;
         locals: any;
@@ -66,7 +74,7 @@ declare module 'express' {
         redirect(status?: number, path: string): void;
         render(view: string, locals?: any, callback: (err?: ?Error) => any): void;
         send(body?: any): void;
-        sendFile(path: string, options?: Object, callback?: (err?: ?Error) => any): void;
+        sendFile(path: string, options?: SendFileOptions, callback?: (err?: ?Error) => any): void;
         sendStatus(statusCode: number): void;
         set(field: string, value?: string): void;
         status(statusCode: number): void;

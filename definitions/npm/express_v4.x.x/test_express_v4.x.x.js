@@ -22,9 +22,11 @@ const num: number = app.mountpath;
 
 const myRouter = new express.Router();
 
-myRouter.use('/dang', (req, res, next: NextFunction) => {
+myRouter.use('/dang', (req, res: $Response, next: NextFunction) => {
     res.set('My Header', 'Value');
     res.status(200);
+    // $ExpectError
+    res.sendFile('/myfile.txt', { dotfiles: 'none' })
     // $ExpectError
     next('Error');
 });
