@@ -62,7 +62,7 @@ declare module 'express' {
         jsonp(body?: any): void;
         links(links: {[name: string]: string}): void;
         location(path: string): void;
-        redirect(status?: number, path: location): void;
+        redirect(status?: number, path: string): void;
         render(view: string, locals?: any, callback: (err?: ?Error) => any): void;
         send(body?: any): void;
         sendFile(path: string, options?: Object, callback?: (err?: ?Error) => any): void;
@@ -72,25 +72,41 @@ declare module 'express' {
         type(type: string): void;
         vary(field: string): void;
     }
-
+    declare type $Response = Response;
+    declare type $Request = Request;
     declare type NextFunction = (err?: ?Error) => any;
     declare type Middleware =
         (req: Request, res: Response, next: NextFunction) => any |
         (error: ?Error, req: Request, res: Response, next: NextFunction) => any;
     declare class Router {
       constructor(options?: RouterOptions): void;
-      use(path?: string, ...middelware: Array<Middleware>): void;
+      use(middleware: Middleware): void;
       use(...middelware: Array<Middleware>): void;
-      get(path?: string, ...middelware: Array<Middleware>): void;
-      post(path?: string, ...middelware: Array<Middleware>): void;
-      put(path?: string , ...middelware: Array<Middleware>): void;
-      delete(path?: string, ...middelware: Array<Middleware>): void;
+      use(path: string, ...middelware: Array<Middleware>): void;
+
+      get(middleware: Middleware): void;
+      get(...middelware: Array<Middleware>): void;
+      get(path: string, ...middelware: Array<Middleware>): void;
+
+      post(middleware: Middleware): void;
+      post(...middelware: Array<Middleware>): void;
+      post(path: string, ...middelware: Array<Middleware>): void;
+
+      put(middleware: Middleware): void;
+      put(...middelware: Array<Middleware>): void;
+      put(path: string, ...middelware: Array<Middleware>): void;
+
+      delete(middleware: Middleware): void;
+      delete(...middelware: Array<Middleware>): void;
+      delete(path: string, ...middelware: Array<Middleware>): void;
     }
 
     declare function serveStatic(root: string, options?: Object): Middleware;
 
     declare class Application extends Router {
       constructor(): void;
+      locals: {[name: string]: any};
+      mountpath: string;
     }
 
     declare module.exports: {
