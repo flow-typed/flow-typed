@@ -1,4 +1,5 @@
 // @flow
+
 declare module 'express' {
     declare type RouterOptions = {
       caseSensitive?: boolean,
@@ -80,6 +81,7 @@ declare module 'express' {
         (error: ?Error, req: Request, res: Response, next: NextFunction) => any;
     declare class Router {
       constructor(options?: RouterOptions): void;
+
       use(middleware: Middleware): void;
       use(...middelware: Array<Middleware>): void;
       use(path: string, ...middelware: Array<Middleware>): void;
@@ -103,11 +105,12 @@ declare module 'express' {
 
     declare function serveStatic(root: string, options?: Object): Middleware;
 
-    declare class Application extends Router {
+    declare class Application extends Router mixins events$EventEmitter {
       constructor(): void;
       locals: {[name: string]: any};
       mountpath: string;
     }
+    declare type $Application = Application;
 
     declare module.exports: {
         (): Application, // If you try to call like a function, it will use this signature

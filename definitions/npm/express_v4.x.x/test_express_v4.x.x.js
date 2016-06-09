@@ -4,6 +4,7 @@ import type {
     Middleware,
     $Response,
     $Request,
+    $Application
     NextFunction
 } from 'express';
 const app = express();
@@ -21,10 +22,10 @@ const num: number = app.mountpath;
 
 const myRouter = new express.Router();
 
-myRouter.get('/dang', (req, res, next) => {
+myRouter.use('/dang', (req, res, next: NextFunction) => {
     res.set('My Header', 'Value');
     res.status(200);
-    // $ExpectError string This type is incompatible with Error:
+    // $ExpectError
     next('Error');
 });
 
@@ -46,6 +47,12 @@ myRouter.use(handleRequest, (err: ?Error, req: $Request, res: $Response, next: N
     }
     next(err);
 });
+
+app.on('mount', (parent: $Application) => {
+    console.log('Parent Loaded', parent);
+    // $ExpectError
+    parent.fail();
+})
 
 app.use('/foo', (req, res, next) => {
   res.send('should work');
