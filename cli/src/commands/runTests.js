@@ -288,6 +288,7 @@ async function runTestGroup(
             path.join(BIN_DIR, "flow-" + flowVer),
             "check",
             "--strip-root",
+            "--all",
             testDirPath
           ].join(" "));
 

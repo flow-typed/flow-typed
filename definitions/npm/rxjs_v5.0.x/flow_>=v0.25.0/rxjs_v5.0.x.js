@@ -1,14 +1,14 @@
 // FIXME(samgoldman) Remove top-level interface once Babel supports
 // `declare interface` syntax.
 // FIXME(samgoldman) Remove this once Subject<T> can mixin Observer<T>
-interface rx$IObserver<T> {
+interface rx$IObserver<-T> {
   next(value: T): mixed;
   error(error: any): mixed;
   complete(): mixed;
 }
 
 // FIXME: Technically at least one of these is required.
-interface PartialObserver<T> {
+interface PartialObserver<-T> {
   next?: (value: T) => mixed;
   error?: (error: any) => mixed;
   complete?: () => mixed;
@@ -21,7 +21,7 @@ interface rx$ISubscription {
 type TeardownLogic = rx$ISubscription | () => void;
 
 declare module 'rxjs' {
-  declare class Observable<T> {
+  declare class Observable<+T> {
     // This is actually variadic, but we only support one or two other observables.
     static combineLatest<T, U>(t: Observable<T>, u: Observable<U>): Observable<[T, U]>;
     static combineLatest<T, U, V>(
