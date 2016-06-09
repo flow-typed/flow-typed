@@ -90,6 +90,18 @@ Note that this command assumes that the `/definitions/` directory is correctly
 structured. You can always verify the structure with the 
 [`flow-typed validate-defs`](#flow-typed-validate-defs) command.
 
+##### `flow-typed update-cache [--debug]`
+
+By default flow-typed retrieves all available libdefs from its related upstream
+repository. To make this process more efficient, those libdefs will be cached to
+your local filesystem. Usually, the cache will automatically be updated after a
+certain grace period during a libdef installation, but sometimes it is useful to
+do this update manually. Use this command if you want to download the most
+recent definitions yourself.
+
+The debug flag will output additional (error) information, which can be useful for
+bug-reports.
+
 ##### *(...coming soon...)* `flow-typed libdefs-for-pkg /path/to/package.json`
 
 Scans the specified `package.json`, looks for any compatible libdefs in the 
