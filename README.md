@@ -1,4 +1,4 @@
-_**Notice:** The current [`flow-typed` npm package](https://www.npmjs.com/package/flow-typed) is not up-to-date, nor is it particularly useful. `flow-typed` 2.0.0 is underway and will be published to npm when it's ready._
+_**Notice:** Currently the [`flow-typed` CLI](https://www.npmjs.com/package/flow-typed) is not up-to-date, nor is it particularly useful. The CLI is still underway and will be published to npm when it's ready._
 
 <img 
   alt="Flow Logo" 
@@ -6,7 +6,7 @@ _**Notice:** The current [`flow-typed` npm package](https://www.npmjs.com/packag
   width="400"
 />
 
-`flow-typed` is a repository of third-party 
+`flow-typed` is a [repository](https://github.com/flowtype/flow-typed/tree/master/definitions) of third-party 
 [library interface definitions](http://flowtype.org/docs/third-party.html) 
 for use with [Flow](http://flowtype.org/).
 
@@ -89,6 +89,18 @@ it's tests to ensure that the tests pass as expected.
 Note that this command assumes that the `/definitions/` directory is correctly 
 structured. You can always verify the structure with the 
 [`flow-typed validate-defs`](#flow-typed-validate-defs) command.
+
+##### `flow-typed update-cache [--debug]`
+
+By default flow-typed retrieves all available libdefs from its related upstream
+repository. To make this process more efficient, those libdefs will be cached to
+your local filesystem. Usually, the cache will automatically be updated after a
+certain grace period during a libdef installation, but sometimes it is useful to
+do this update manually. Use this command if you want to download the most
+recent definitions yourself.
+
+The debug flag will output additional (error) information, which can be useful for
+bug-reports.
 
 ##### *(...coming soon...)* `flow-typed libdefs-for-pkg /path/to/package.json`
 
