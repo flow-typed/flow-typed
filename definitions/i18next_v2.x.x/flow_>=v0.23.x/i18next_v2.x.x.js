@@ -1,9 +1,57 @@
 declare module 'i18next' {
+  declare type InterpolationOptions = {
+    escapeValue?: bool,
+    prefix?: string,
+    suffix?: string,
+    prefixEscaped?: string,
+    suffixEscaped?: string,
+    unescapeSuffix?: string,
+    unescapePrefix?: string,
+    nestingPrefix?: string,
+    nestingSuffix?: string,
+    nestingPrefixEscaped?: string,
+    nestingSuffixEscaped?: string,
+    defaultVariables?: string,
+  }
+  declare type InitOptions = {
+    debug?: bool,
+    initImmediate?: bool,
+    resources?: mixed[],
+    lng?: string,
+    fallbackLng?: strin,
+    ns?: string,
+    defaultNS?: string,
+    fallbackNS?: string|string[],
+    whitelist?: string[],
+    lowerCaseLng?: string,
+    load?: string,
+    preload?: bool,
+    keySeparator?: string,
+    nsSeparator?: string,
+    pluralSeparator?: string,
+    contextSeparator?: string,
+    saveMissing?: bool,
+    saveMissingTo?: string,
+    missingKeyHandler?: Function,
+    parseMissingKeyHandler?: Function,
+    appendNamespaceToMissingKey?: bool,
+    postProcess?: bool,
+    returnNull?: bool,
+    returnEmptyString?: bool,
+    returnObjects?: bool,
+    returnedObjectHandler?: Function,
+    joinArrays?: bool,
+    overloadTranslationOptionHandler?: Function,
+    interpolation?: InterpolationOptions,
+    detection?: Object,
+    backend?: Object,
+    cache?: Object,
+  }
   declare type TFunction = (key?: ?string, data?: ?Object) => string;
   declare type CallbackFn = (err: any, t: TFunction) => any;
   declare class i18next extends events$EventEmitter {
     t(key?: ?string, data?: ?Object): string;
-    init(options: Object, cb?: CallbackFn): void;
+    init(options: InitOptions, cb?: CallbackFn): void;
     use(module: any): Class<i18next>;
     exists(key?: string, options: any): bool;
     getFixedT(lng: string, ns?: string): TFunction;
