@@ -1,4 +1,4 @@
-_**Notice:** Currently the [`flow-typed` CLI](https://www.npmjs.com/package/flow-typed) is not up-to-date, nor is it particularly useful. The CLI is still underway and will be published to npm when it's ready._
+_**NOTE:** The [`flow-typed` CLI](https://www.npmjs.com/package/flow-typed) is currently in beta mode. Please try it out and report any issues you encounter. Thanks!_
 
 <img 
   alt="Flow Logo" 
@@ -9,6 +9,14 @@ _**Notice:** Currently the [`flow-typed` CLI](https://www.npmjs.com/package/flow
 `flow-typed` is a [repository](https://github.com/flowtype/flow-typed/tree/master/definitions) of third-party 
 [library interface definitions](http://flowtype.org/docs/third-party.html) 
 for use with [Flow](http://flowtype.org/).
+
+You can grab definitions directly from this GitHub repo, or you can use the CLI (currently in beta) to install a libdef for a given library:
+```js
+$ npm install -g flow-typed
+$ cd /path/to/my/project
+$ flow-typed install -f 0.27 rxjs@5.0.0
+'rxjs_v5.0.x.js' installed at /path/to/my/project/flow-typed/npm/rxjs_v5.0.xjs
+```
 
 ## Huh?
 
