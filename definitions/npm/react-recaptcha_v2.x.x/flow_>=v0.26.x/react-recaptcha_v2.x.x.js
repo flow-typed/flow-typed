@@ -31,7 +31,7 @@ declare module 'react-recaptcha' {
   };
 
   declare class Recaptcha extends React$Component {
-    defaultProps: DefaultProps;
+    static defaultProps: DefaultProps;
     props: Props;
     componentDidMount(): void;
     render(): React$Element;
