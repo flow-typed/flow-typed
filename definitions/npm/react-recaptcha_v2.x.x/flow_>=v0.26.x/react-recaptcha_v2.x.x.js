@@ -36,5 +36,5 @@ declare module 'react-recaptcha' {
     componentDidMount(): void;
     render(): React$Element;
   }
-  declare var exports: Class<Recaptcha>;
+  declare module.exports: Class<Recaptcha>;
 }
