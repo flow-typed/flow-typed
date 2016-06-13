@@ -48,8 +48,12 @@ folder. They all must follow the following naming format:
 
 Where `<VERSION>` is a semver version number with all of MAJOR, MINOR, and PATCH
 version numbers included. `x` is an acceptable wildcard in place of any of the 
-three version numbers, and it is also acceptable to put `>=` or `<=` in front of
-the `v` to indicate a range of versions.
+three version numbers. 
+
+For Flow versions it is also acceptable to put `>=` or `<=` in front of
+the `v` to indicate a range of versions. `>=` and `<=` are *not* supported for
+npm package versions, only `x` wildcards. (Library interfaces are rarely
+identical across major versions)
 
 Example filename:
 
