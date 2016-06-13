@@ -11,7 +11,7 @@ _**NOTE:** The [`flow-typed` CLI](https://www.npmjs.com/package/flow-typed) is c
 for use with [Flow](http://flowtype.org/).
 
 You can grab definitions directly from this GitHub repo, or you can use the CLI (currently in beta) to install a libdef for a given library:
-```js
+```bash
 $ npm install -g flow-typed
 $ cd /path/to/my/project
 $ flow-typed install -f 0.27 rxjs@5.0.0 # `-f 0.27` specifies the Flow version we're using for this project
