@@ -1,4 +1,4 @@
-_**NOTE:** The [`flow-typed` CLI](https://www.npmjs.com/package/flow-typed) is currently in beta mode. Please try it out and report any issues you encounter. Thanks!_
+_**NOTE:** The [`flow-typed` CLI](https://www.npmjs.com/package/flow-typed) is currently in beta. Please try it out and report any issues you encounter. Thanks!_
 
 <img 
   alt="Flow Logo" 
