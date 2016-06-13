@@ -14,7 +14,7 @@ You can grab definitions directly from this GitHub repo, or you can use the CLI 
 ```js
 $ npm install -g flow-typed
 $ cd /path/to/my/project
-$ flow-typed install -f 0.27 rxjs@5.0.0
+$ flow-typed install -f 0.27 rxjs@5.0.0 # `-f 0.27` specifies the Flow version we're using for this project
 'rxjs_v5.0.x.js' installed at /path/to/my/project/flow-typed/npm/rxjs_v5.0.xjs
 ```
 
