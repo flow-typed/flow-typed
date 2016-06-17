@@ -11,6 +11,7 @@ declare module 'react-recaptcha' {
     size: string,
     tabindex: string,
   };
+
   declare type Props = {
     className?: string,
     onloadCallbackName?: string,
@@ -28,11 +29,12 @@ declare module 'react-recaptcha' {
     tabindex?: string,
   };
 
-  declare class Recaptcha extends React$Component<DefaultProps, Props, void> {
+  declare class Recaptcha extends React$Component {
     static defaultProps: DefaultProps;
     props: Props;
     componentDidMount(): void;
     render(): React$Element;
   }
+
   declare module.exports: Class<Recaptcha>;
 }
