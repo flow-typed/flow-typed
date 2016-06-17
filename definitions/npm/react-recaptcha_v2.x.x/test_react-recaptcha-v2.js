@@ -1,10 +1,10 @@
 // @flow
 import Recaptcha from 'react-recaptcha';
 
-const success = <Recaptcha sitekey="works" verifyCallback={(res: string) => console.log(res) } />;
+const success = <Recaptcha sitekey="works" verifyCallback={(res: string) => console.log(res) } className="recaptcha" onloadCallbackName="string" theme="dark" elementID="something" size="string" />;
 
 // $ExpectError
-const fail = <Recaptcha siteKey="fails" />;
+const fail = <Recaptcha sitekey={true} />;
 
 function Componet() {
   // $ExpectError

@@ -1,17 +1,15 @@
+// @flow
 declare module 'react-recaptcha' {
   declare type DefaultProps = {
-    elementID: 'g-recaptcha',
-    onloadCallback: void,
-    onloadCallbackName: 'onloadCallback',
-    verifyCallback: void,
-    verifyCallbackName: 'verifyCallback',
-    expiredCallback: void,
-    expiredCallbackName: 'expiredCallback',
-    render: 'onload',
-    theme: 'light',
-    type: 'image',
-    size: 'normal',
-    tabindex: '0',
+    elementID: string,
+    onloadCallbackName: string,
+    verifyCallbackName: string,
+    expiredCallbackName: string,
+    render: string,
+    theme: 'dark' | 'light',
+    type: string,
+    size: string,
+    tabindex: string,
   };
   declare type Props = {
     className?: string,
@@ -30,8 +28,8 @@ declare module 'react-recaptcha' {
     tabindex?: string,
   };
 
-  declare class Recaptcha extends React$Component {
-    defaultProps: DefaultProps;
+  declare class Recaptcha extends React$Component<DefaultProps, Props, void> {
+    static defaultProps: DefaultProps;
     props: Props;
     componentDidMount(): void;
     render(): React$Element;
