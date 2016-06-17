@@ -56,6 +56,8 @@ app.on('mount', (parent: $Application) => {
     parent.fail();
 })
 
-app.use('/foo', (req, res, next) => {
-  res.send('should work');
+app.use('/foo', (req: $Request, res: $Response, next) => {
+    // $ExpectError
+    res.status('400');
+    res.send('should work');
 });
