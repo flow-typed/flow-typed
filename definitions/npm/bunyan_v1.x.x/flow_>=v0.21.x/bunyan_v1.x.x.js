@@ -1,3 +1,4 @@
+// @flow
 declare module 'bunyan' {
     declare var TRACE: 10;
     declare var DEBUG: 20;
@@ -35,8 +36,7 @@ declare module 'bunyan' {
         constructor(options: LoggerOptions): any;
         addStream(stream: Stream): void;
         addSerializers(serializers: Serializers): void;
-        child(options: LoggerOptions, simple?: boolean): Logger;
-        child(obj: Object, simple?: boolean): Logger;
+        child(opts: LoggerOptions, simple?: boolean): Logger;
         reopenFileStreams(): void;
         level(): string | number;
         level(value: number | string): void;
@@ -46,22 +46,27 @@ declare module 'bunyan' {
         trace(buffer: Buffer, format?: any, ...params: Array<any>): void;
         trace(obj: Object, format?: any, ...params: Array<any>): void;
         trace(format: string, ...params: Array<any>): void;
+        debug(...params: Array<void>): boolean;
         debug(error: Error, format?: any, ...params: Array<any>): void;
         debug(buffer: Buffer, format?: any, ...params: Array<any>): void;
         debug(obj: Object, format?: any, ...params: Array<any>): void;
         debug(format: string, ...params: Array<any>): void;
+        info(...params: Array<void>): boolean;
         info(error: Error, format?: any, ...params: Array<any>): void;
         info(buffer: Buffer, format?: any, ...params: Array<any>): void;
         info(obj: Object, format?: any, ...params: Array<any>): void;
         info(format: string, ...params: Array<any>): void;
+        warn(...params: Array<void>): boolean;
         warn(error: Error, format?: any, ...params: Array<any>): void;
         warn(buffer: Buffer, format?: any, ...params: Array<any>): void;
         warn(obj: Object, format?: any, ...params: Array<any>): void;
         warn(format: string, ...params: Array<any>): void;
+        error(...params: Array<void>): boolean;
         error(error: Error, format?: any, ...params: Array<any>): void;
         error(buffer: Buffer, format?: any, ...params: Array<any>): void;
         error(obj: Object, format?: any, ...params: Array<any>): void;
         error(format: string, ...params: Array<any>): void;
+        fatal(...params: Array<void>): boolean;
         fatal(error: Error, format?: any, ...params: Array<any>): void;
         fatal(buffer: Buffer, format?: any, ...params: Array<any>): void;
         fatal(obj: Object, format?: any, ...params: Array<any>): void;
@@ -95,14 +100,14 @@ declare module 'bunyan' {
     declare interface Serializers {
         [key: string]: (input: any) => string;
     }
-    declare interface Stream {
+    declare type Stream = {
         type: string;
-        level: number | string;
-        path: string;
-        stream: stream$Writable | Stream;
-        closeOnExit: boolean;
-        period: string;
-        count: number;
+        level?: number | string;
+        path?: string;
+        stream?: stream$Writable | Stream;
+        closeOnExit?: boolean;
+        period?: string;
+        count?: number;
     }
     declare var stdSerializers: Serializers;
     declare function resolveLevel(value: number | string): number;
@@ -111,7 +116,7 @@ declare module 'bunyan' {
         constructor(options: RingBufferOptions): any;
         writable: boolean;
         records: Array<any>;
-        write(record: any): void;
+        write(record: BunyanRecord): void;
         end(record?: any): void;
         destroy(): void;
         destroySoon(): void;
