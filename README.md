@@ -72,7 +72,7 @@ library definitions.
 **When you contribute a new library definition (or make a change to an existing 
 one), you should include tests with your change.**
 
-Tests are simply `test-*.js` files that sit next to the library definition 
+Tests are simply `test_*.js` files that sit next to the library definition 
 file. Their purpose is to exercise the defined library and ultimately produce
 zero Flow errors for each version of Flow that the libdef is specified as 
 compatible with.
