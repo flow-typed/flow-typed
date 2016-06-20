@@ -76,3 +76,6 @@ const subObserver: rx$IObserver<SubFoo> = (null: any);
 // $ExpectError -- contravariant. Type parameter is only in input positions.
 (subObserver: rx$IObserver<SuperFoo>);
 (superObserver: rx$IObserver<SubFoo>);
+
+const groupedSubObservable: Observable<Observable<SubFoo>> =
+  subObservable.groupBy(subfoo => subfoo.y);
