@@ -149,6 +149,12 @@ declare module 'rxjs' {
       defaultValue: U,
     ): Observable<U>;
 
+    groupBy(
+      keySelector: (value: T) => mixed,
+      elementSelector?: (value: T) => T,
+      compare?: (x: T, y: T) => boolean,
+    ): Observable<Observable<T>>;
+
     ignoreElements<U>(): Observable<U>;
 
     // Alias for `mergeMap`
