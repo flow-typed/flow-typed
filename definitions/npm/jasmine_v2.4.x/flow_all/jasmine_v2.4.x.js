@@ -1,7 +1,7 @@
 type JasmineExpectType = {
   not: JasmineExpectType;
-  toBe(value: any): void;
-  toBeCloseTo(num: number, delta: any): void;
+  toBe(value: mixed): void;
+  toBeCloseTo(num: number, delta: mixed): void;
   toBeDefined(): void;
   toBeFalsy(): void;
   toBeGreaterThan(number: number): void;
@@ -10,12 +10,12 @@ type JasmineExpectType = {
   toBeTruthy(): void;
   toBeUndefined(): void;
   toContain(str: string): void;
-  toEqual(value: any): void;
+  toEqual(value: mixed): void;
   toHaveBeenCalled(): void,
   toHaveBeenCalledWith(...args: Array<any>): void;
   toMatch(regexp: RegExp): void;
   toThrow(message?: string): void;
-  toThrowError(val: any): void;
+  toThrowError(val: mixed): void;
 };
 
 declare function describe(name: string, fn: Function): void;
@@ -31,19 +31,19 @@ declare function it(name: string, fn: Function): void;
 declare function fit(name: string, fn: Function): void;
 declare function xit(name: string, fn: Function): void;
 
-declare function expect(value: any): JasmineExpectType;
+declare function expect(value: mixed): JasmineExpectType;
 
 // TODO handle return type
 // http://jasmine.github.io/2.4/introduction.html#section-Spies
-declare function spyOn(value: any, method: string): Object;
+declare function spyOn(value: mixed, method: string): Object;
 
 type JasmineCallsType = {
-  allArgs(): any;
-  all(): any;
-  mostRecent(): any;
-  first(): any;
-  any(): any;
-  count(): any;
+  allArgs(): mixed;
+  all(): mixed;
+  mostRecent(): mixed;
+  first(): mixed;
+  any(): boolean;
+  count(): number;
   reset(): void;
 }
 
@@ -60,10 +60,10 @@ type JasmineClockType = {
 
 declare var jasmine: {
   createSpy(name: string): JasmineSpyType;
-  any(val: any): void;
+  any(val: mixed): void;
   anything(): void;
   objectContaining(val: Object): void;
-  arrayContaining(val: any[]): void;
+  arrayContaining(val: mixed[]): void;
   stringMatching(val: string): void;
   clock(): JasmineClockType;
 }
