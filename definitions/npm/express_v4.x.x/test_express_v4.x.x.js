@@ -62,3 +62,15 @@ app.use('/foo', (req: $Request, res: $Response, next) => {
     res.send('should work')
         .status(300);
 });
+
+app.listen(9000);
+
+
+app.set('foo');
+
+
+app.get('foo');
+
+app.enable(100);
+
+const f: number = app.enabled('100');
