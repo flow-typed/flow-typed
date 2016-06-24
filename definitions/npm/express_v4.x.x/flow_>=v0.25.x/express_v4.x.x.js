@@ -12,7 +12,7 @@ declare module 'express' {
     }
     declare class Request extends http$IncomingMessage mixins RequestResponseBase {
       baseUrl: string;
-      body: any;
+      body: mixed;
       cookies: { [cookie: string]: string },
       fresh: boolean;
       hostname: boolean;
@@ -60,33 +60,33 @@ declare module 'express' {
     };
     declare class Response extends http$ClientRequest mixins RequestResponseBase {
         headersSent: boolean;
-        locals: any;
-        append(field: string, value?: string): void;
-        attachment(filename?: string): void;
-        cookie(name: string, value: string, options?: CookieOptions): void;
-        clearCookie(name: string, options?: CookieOptions): void;
-        download(path: string, filename?: string, callback?: (err?: ?Error) => void): void;
-        format(typesObject: {[type: string]: Function}): void;
-        json(body?: any): void;
-        jsonp(body?: any): void;
-        links(links: {[name: string]: string}): void;
-        location(path: string): void;
-        redirect(status?: number, path: string): void;
-        render(view: string, locals?: any, callback: (err?: ?Error) => any): void;
-        send(body?: any): void;
-        sendFile(path: string, options?: SendFileOptions, callback?: (err?: ?Error) => any): void;
-        sendStatus(statusCode: number): void;
-        set(field: string, value?: string): void;
-        status(statusCode: number): void;
-        type(type: string): void;
-        vary(field: string): void;
+        locals: mixed;
+        append(field: string, value?: string): this;
+        attachment(filename?: string): this;
+        cookie(name: string, value: string, options?: CookieOptions): this;
+        clearCookie(name: string, options?: CookieOptions): this;
+        download(path: string, filename?: string, callback?: (err?: ?Error) => void): this;
+        format(typesObject: {[type: string]: Function}): this;
+        json(body?: mixed): this;
+        jsonp(body?: mixed): this;
+        links(links: {[name: string]: string}): this;
+        location(path: string): this;
+        redirect(status?: number, path: string): this;
+        render(view: string, locals?: mixed, callback: (err?: ?Error) => mixed): this;
+        send(body?: mixed): this;
+        sendFile(path: string, options?: SendFileOptions, callback?: (err?: ?Error) => mixed): this;
+        sendStatus(statusCode: number): this;
+        set(field: string, value?: string): this;
+        status(statusCode: number): this;
+        type(type: string): this;
+        vary(field: string): this;
     }
     declare type $Response = Response;
     declare type $Request = Request;
-    declare type NextFunction = (err?: ?Error) => any;
+    declare type NextFunction = (err?: ?Error) => mixed;
     declare type Middleware =
-        (req: Request, res: Response, next: NextFunction) => any |
-        (error: ?Error, req: Request, res: Response, next: NextFunction) => any;
+        (req: Request, res: Response, next: NextFunction) => mixed |
+        (error: ?Error, req: Request, res: Response, next: NextFunction) => mixed;
     declare class Router {
       constructor(options?: RouterOptions): void;
 
@@ -115,7 +115,7 @@ declare module 'express' {
 
     declare class Application extends Router mixins events$EventEmitter {
       constructor(): void;
-      locals: {[name: string]: any};
+      locals: {[name: string]: mixed};
       mountpath: string;
     }
     declare type $Application = Application;

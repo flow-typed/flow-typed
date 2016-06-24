@@ -59,5 +59,6 @@ app.on('mount', (parent: $Application) => {
 app.use('/foo', (req: $Request, res: $Response, next) => {
     // $ExpectError
     res.status('400');
-    res.send('should work');
+    res.send('should work')
+        .status(300);
 });
