@@ -16,12 +16,14 @@ declare var it : {
     timeout(ms:number): void;
 };
 
+declare var xit: typeof it;
+
 declare function before(method : TestFunction):void;
 declare function beforeEach(method : TestFunction):void;
 declare function after(method : TestFunction):void;
 declare function afterEach(method : TestFunction):void;
 
-declare function before(description:string, method : TestFunction):void;
-declare function beforeEach(description:string, method : TestFunction):void;
-declare function after(description:string, method : TestFunction):void;
-declare function afterEach(description:string, method : TestFunction):void;
+declare function before(description : string, method : TestFunction):void;
+declare function beforeEach(description : string, method : TestFunction):void;
+declare function after(description : string, method : TestFunction):void;
+declare function afterEach(description : string, method : TestFunction):void;
