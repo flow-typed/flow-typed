@@ -7,6 +7,7 @@
 it('desc', () => {});
 it('desc', (done : Function) => {});
 it('desc', () => new Promise((res, rej) => {}));
+xit('desc', () => {});
 
 // $ExpectError number. This type is incompatible with function type.
 it('desc', (done : number) => {});
@@ -18,7 +19,8 @@ it('desc', 12);
 it('desc', () => 1);
 // $ExpectError number. This type is incompatible with string.
 it(12, () => {});
-
+// $ExpectError number. This type is incompatible with function type.
+xit('desc', (done : number) => {});
 
 /**
  * it.skip
