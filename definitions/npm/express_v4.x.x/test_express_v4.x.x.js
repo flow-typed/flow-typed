@@ -65,12 +65,15 @@ app.use('/foo', (req: $Request, res: $Response, next) => {
 
 app.listen(9000);
 
-
 app.set('foo');
-
 
 app.get('foo');
 
 app.enable(100);
-
+// $ExpectError
 const f: number = app.enabled('100');
+
+app.render('view', { title: 'News Feed' }, (err: ?Error, html: string): void => {
+    if (err) return console.log(err);
+    console.log(html);
+});
