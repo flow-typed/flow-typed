@@ -68,7 +68,7 @@ app.listen(9000);
 app.set('foo');
 
 app.get('foo');
-
+// $ExpectError
 app.enable(100);
 // $ExpectError
 const f: number = app.enabled('100');
