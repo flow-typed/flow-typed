@@ -65,6 +65,18 @@ app.use('/foo', (req: $Request, res: $Response, next) => {
 
 app.listen(9000);
 
+app.listen(9001, '127.0.0.1');
+
+app.listen(9002, '127.0.0.1', 256);
+
+app.listen(9003, '127.0.0.1', 256, () => {
+  console.log('Example app listening on port 9003!');
+});
+
+app.listen(9004, () => {
+  console.log('Example app listening on port 9004!');
+});
+
 app.set('foo');
 
 app.get('foo');
