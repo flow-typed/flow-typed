@@ -1,10 +1,11 @@
 /* @flow */
-import express from 'express';
+import express, { Router } from 'express';
 import type {
-    Middleware,
-    $Response,
-    $Request,
     $Application
+    $Request,
+    $Response,
+    $Router,
+    Middleware,
     NextFunction
 } from 'express';
 const app = express();
@@ -62,6 +63,15 @@ app.use('/foo', (req: $Request, res: $Response, next) => {
     res.send('should work')
         .status(300);
 });
+
+const bar: $Router = new Router();
+
+bar.get('/', (req: $Request, res: $Response): void => {
+  res.send('bar')
+    .status(200);
+});
+
+app.use('/bar', bar)
 
 app.listen(9000);
 

@@ -199,6 +199,7 @@ declare module 'express' {
 
     route(path: string): Route;
   }
+  declare type $Router = Router;
 
   declare function serveStatic(root: string, options?: Object): Middleware;
 
