@@ -18,9 +18,8 @@ declare type $npm$bull$jobOptions = {
 };
 
 declare module 'bull' {
-  declare type jobCallback = (job: Job, done: Function) => void;
-  declare type jobPromise = (job: Job) => Promise<any>;
-  declare type callbackOrPromise = jobCallback | jobPromise;
+  declare type jobCallback = (job: Job, done: Function) => void | Promise<any>;
+  declare type callbackOrPromise = jobCallback;
   declare class Job {
     static (queue: Queue, data: Object, opts: $npm$bull$jobOptions): Job,
     queue: Queue,
