@@ -16,7 +16,7 @@ new Queue(
   'localhost',
   { redisOption: true },
 ).process((job) => {
-  Promise.resolve();
+  return Promise.resolve();
 });
 Queue(
   'my_queue',
