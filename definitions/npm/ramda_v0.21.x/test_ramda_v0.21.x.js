@@ -209,6 +209,17 @@ describe('List', () => {
     ]
     const res: {[key: string]: Array<string>} = namesByGrade(students)
   })
+
+  it('should typecheck sortBy', () => {
+    const list = [ 3, 1, 2 ];
+
+    const negativeComparator = (x: number): number => -x;
+
+    const resA: Array<number> = _.sortBy(negativeComparator, list)
+
+    const curried = _.sortBy(negativeComparator)
+    const resB: Array<number> = curried(list)
+  })
 })
 
 describe('String', () => {

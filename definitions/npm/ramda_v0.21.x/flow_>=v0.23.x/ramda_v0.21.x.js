@@ -516,10 +516,8 @@ declare module 'ramda' {
     propEq(path: string, val: any): (o: Object) => boolean;
     propEq(path: string): (val: any, o: Object) => boolean;
     propEq(path: string): (val: any) => (o: Object) => boolean;
-    sortBy<T,V>(fn: (x:T) => V, x: Array<T>, y: Array<T>): Array<T>;
-    sortBy<T,V>(fn: (x:T) => V): (x: Array<T>, y: Array<T>) => Array<T>;
-    sortBy<T,V>(fn: (x:T) => V): (x: Array<T>) => (y: Array<T>) => Array<T>;
-    sortBy<T,V>(fn: (x:T) => V, x: Array<T>): (y: Array<T>) => Array<T>;
+    sortBy<T,V>(fn: (x:T) => V, x: Array<T>): Array<T>;
+    sortBy<T,V>(fn: (x:T) => V): (x: Array<T>) => Array<T>;
     symmetricDifference<T>(x: Array<T>, y: Array<T>): Array<T>;
     symmetricDifference<T>(x: Array<T>): (y: Array<T>) => Array<T>;
     symmetricDifferenceWith<T>(fn: BinaryPredicateFn<T>, x: Array<T>, y: Array<T>): Array<T>;
