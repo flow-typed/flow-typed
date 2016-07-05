@@ -338,7 +338,8 @@ async function runTests(
     }
 
     for (var i = 0; i < testPatternRes.length; i++) {
-      if (testPatternRes[i].test(testGroup.id)) {
+      const pattern = testPatternRes[i];
+      if (testGroup.id.match(pattern) != null) {
         return true;
       }
     }
