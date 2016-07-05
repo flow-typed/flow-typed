@@ -17,14 +17,14 @@ strings.subscribe((x: string) => {});
 // $ExpectError -- need the typecast or the error appears at the declaration site
 numbers.merge((strings: Observable<string>));
 
-const combined: Observable<{n: number, s: string}> = Observable.combineLatest(
+const combined: Observable<[number, string]> = Observable.combineLatest(
   numbers,
   strings,
   (n, s) => ({n, s})
 );
 
 // $ExpectError
-const combinedBad: Observable<{n: number, s: string}> = Observable.combineLatest(
+const combinedBad: Observable<[number, string]> = Observable.combineLatest(
   numbers,
   numbers,
   (n, s) => ({n, s})
