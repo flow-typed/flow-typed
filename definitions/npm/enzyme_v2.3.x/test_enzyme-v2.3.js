@@ -1,6 +1,4 @@
 // @flow
-import enzyme from 'enzyme';
-
 import {shallow, mount, render, ShallowWrapper, ReactWrapper} from 'enzyme';
 
 // $ExpectError
