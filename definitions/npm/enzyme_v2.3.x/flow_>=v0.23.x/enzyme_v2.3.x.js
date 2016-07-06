@@ -2,6 +2,11 @@ declare module 'enzyme' {
   declare type PredicateFunction<T: Wrapper> = (wrapper: T) => boolean;
   declare type NodeOrNodes = React$Element<any> | Array<React$Element<any>>;
   declare type EnzymeSelector = string | ReactClass<any> | Object;
+
+  // CheerioWrapper is a type alias for an actual cheerio instance
+  // TODO: Reference correct type from cheerio's type declarations
+  declare type CheerioWrapper = any;
+
   declare class Wrapper {
     find(selector: EnzymeSelector): this;
     findWhere(predicate: PredicateFunction<this>): this;
@@ -51,16 +56,18 @@ declare module 'enzyme' {
     every(selector: EnzymeSelector): boolean;
     everyWhere(predicate: PredicateFunction<this>): boolean;
   }
+
   declare class ReactWrapper extends Wrapper {
     mount(): this;
     ref(refName: string): this;
     detach(): void;
   }
+
   declare class ShallowWrapper extends Wrapper {
     equals(node: React$Element<any>): boolean;
     shallow(options?: { context?: Object }): ShallowWrapper;
   }
-  declare class CheerioWrapper extends Wrapper {}
+
   declare function shallow(node: React$Element<any>, options?: { context?: Object }): ShallowWrapper;
   declare function mount(node: React$Element<any>, options?: { context?: Object, attachTo?: HTMLElement, childContextTypes?: Object }): ReactWrapper;
   declare function render(node: React$Element<any>, options?: { context?: Object }): CheerioWrapper;
