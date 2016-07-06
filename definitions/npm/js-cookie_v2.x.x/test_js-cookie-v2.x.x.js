@@ -26,7 +26,7 @@ Cookie.set('data', {
 }, { secure: true });
 
 
-// ExpectError
+// $ExpectError
 Cookie.getJson();
 
 // $ExpectError
