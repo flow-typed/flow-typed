@@ -1,19 +1,19 @@
 declare module 'enzyme' {
-  declare type PredicateFunction = (wrapper: Wrapper<any>) => boolean;
+  declare type PredicateFunction<T: Wrapper> = (wrapper: T) => boolean;
   declare type NodeOrNodes = React$Element<any> | Array<React$Element<any>>;
-  declare class Wrapper<ReturnClass: Wrapper<any>> {
-    find(selector: string): ReturnClass;
-    findWhere(predicate: PredicateFunction): ReturnClass;
-    filter(selector: string): ReturnClass;
-    filterWhere(predicate: PredicateFunction): ReturnClass;
+  declare class Wrapper {
+    find(selector: string): this;
+    findWhere(predicate: PredicateFunction<this>): this;
+    filter(selector: string): this;
+    filterWhere(predicate: PredicateFunction<this>): this;
     contains(nodeOrNodes: NodeOrNodes): boolean;
     equals(node: React$Element<any>): boolean;
     hasClass(className: string): boolean;
     instance(): React$Component<any, any, any>;
     is(selector: string): boolean;
     not(selector: string): boolean;
-    children(): ReturnClass;
-    childAt(index: number): ReturnClass;
+    children(): this;
+    childAt(index: number): this;
     props(): Object;
     name(): string;
     prop(key: string): any;
@@ -22,12 +22,12 @@ declare module 'enzyme' {
     html(): string;
     update(): this;
   }
-  declare class ReactWrapper<ReactWrapper> extends Wrapper<any> {}
-  declare class ShallowWrapper<ShallowWrapper> extends Wrapper<any> {
+  declare class ReactWrapper extends Wrapper {}
+  declare class ShallowWrapper extends Wrapper {
     shallow(options?: { context?: Object }): ShallowWrapper;
   }
-  declare class CheerioWrapper<CheerioWrapper> extends Wrapper<any> {}
-  declare function shallow(node: React$Element<any>, options?: { context?: Object }): ShallowWrapper<any>;
-  declare function mount(node: React$Element<any>, options?: { context?: Object, attachTo?: HTMLElement, childContextTypes?: Object }): ReactWrapper<any>;
-  declare function render(node: React$Element<any>, options?: { context?: Object }): CheerioWrapper<any>;
+  declare class CheerioWrapper extends Wrapper {}
+  declare function shallow(node: React$Element<any>, options?: { context?: Object }): ShallowWrapper;
+  declare function mount(node: React$Element<any>, options?: { context?: Object, attachTo?: HTMLElement, childContextTypes?: Object }): ReactWrapper;
+  declare function render(node: React$Element<any>, options?: { context?: Object }): CheerioWrapper;
 }
