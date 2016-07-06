@@ -1,17 +1,18 @@
 declare module 'enzyme' {
   declare type PredicateFunction<T: Wrapper> = (wrapper: T) => boolean;
   declare type NodeOrNodes = React$Element<any> | Array<React$Element<any>>;
+  declare type EnzymeSelector = string | ReactClass<any> | Object;
   declare class Wrapper {
-    find(selector: string): this;
+    find(selector: EnzymeSelector): this;
     findWhere(predicate: PredicateFunction<this>): this;
-    filter(selector: string): this;
+    filter(selector: EnzymeSelector): this;
     filterWhere(predicate: PredicateFunction<this>): this;
     contains(nodeOrNodes: NodeOrNodes): boolean;
     equals(node: React$Element<any>): boolean;
     hasClass(className: string): boolean;
     instance(): React$Component<any, any, any>;
-    is(selector: string): boolean;
-    not(selector: string): boolean;
+    is(selector: EnzymeSelector): boolean;
+    not(selector: EnzymeSelector): boolean;
     children(): this;
     childAt(index: number): this;
     props(): Object;
