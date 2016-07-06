@@ -23,7 +23,14 @@ type TeardownLogic = rx$ISubscription | () => void;
 declare module 'rxjs' {
   declare class Observable<+T> {
     // This is actually variadic, but we only support one or two other observables.
-    static combineLatest<T, U>(t: Observable<T>, u: Observable<U>): Observable<[T, U]>;
+    static combineLatest<T, U>(
+      t: Observable<T>,
+      u: Observable<U>,
+     // Prevents Flow from picking this case when it should pick the next one.
+     // Necessary with v0.28.0, but maybe not later versions. This can be
+     // removed if the tests pass without it.
+      _: void,
+    ): Observable<[T, U]>;
     static combineLatest<T, U, V>(
       t: Observable<T>,
       u: Observable<U>,
@@ -33,6 +40,7 @@ declare module 'rxjs' {
       t: Observable<T>,
       u: Observable<U>,
       v: Observable<V>,
+      _: void,
     ): Observable<[T, U, V]>;
     static combineLatest<T, U, V, W>(
       t: Observable<T>,
