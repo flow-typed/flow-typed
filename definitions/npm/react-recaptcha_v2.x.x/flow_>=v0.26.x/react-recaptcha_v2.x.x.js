@@ -29,11 +29,11 @@ declare module 'react-recaptcha' {
     tabindex?: string,
   };
 
-  declare class Recaptcha extends React$Component {
+  declare class Recaptcha extends React$Component<DefaultProps, Props, any> {
     static defaultProps: DefaultProps;
     props: Props;
     componentDidMount(): void;
-    render(): React$Element;
+    render(): React$Element<any>;
   }
 
   declare module.exports: Class<Recaptcha>;

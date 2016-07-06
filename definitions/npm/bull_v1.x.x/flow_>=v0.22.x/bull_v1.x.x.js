@@ -18,9 +18,8 @@ declare type $npm$bull$jobOptions = {
 };
 
 declare module 'bull' {
-  declare type jobCallback = (job: Job, done: Function) => void;
-  declare type jobPromise = (job: Job) => Promise;
-  declare type callbackOrPromise = jobCallback | jobPromise;
+  declare type jobCallback = (job: Job, done: Function) => void | Promise<any>;
+  declare type callbackOrPromise = jobCallback;
   declare class Job {
     static (queue: Queue, data: Object, opts: $npm$bull$jobOptions): Job,
     queue: Queue,
@@ -31,8 +30,8 @@ declare module 'bull' {
     stacktrace: Array<string>,
     attempts: number,
     attemptsMade: number,
-    remove(): Promise,
-    retry(): Promise,
+    remove(): Promise<any>,
+    retry(): Promise<any>,
   }
   declare class Queue {
     static (queueName: string, redisPort: number, redisHost: string, redisOptions: Object): Queue,
@@ -41,12 +40,12 @@ declare module 'bull' {
     process(concurrency: number, callback: callbackOrPromise): void,
     add(data: Object, opts: Object): Promise<Job>,
     add(data: Object): Promise<Job>,
-    pause(isLocal: boolean): Promise,
-    pause(): Promise,
-    resume(isLocal: boolean): Promise,
-    resume(): Promise,
+    pause(isLocal: boolean): Promise<any>,
+    pause(): Promise<any>,
+    resume(isLocal: boolean): Promise<any>,
+    resume(): Promise<any>,
     count(): Promise<number>,
-    close(): Promise,
+    close(): Promise<any>,
     getJob(jobId: string): Promise<Job>,
     clean(grace: number, type: $npm$bull$jobType): Promise<Array<Job>>,
     clean(grace: number): Promise<Array<Job>>,

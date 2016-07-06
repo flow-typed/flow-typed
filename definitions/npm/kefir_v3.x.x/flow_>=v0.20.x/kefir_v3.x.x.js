@@ -61,8 +61,8 @@ declare module kefir {
 
     filterBy(obs: Observable<any,any>): this;
     sampledBy<U,R>(obs: Observable<U,any>, combinator?: (a: T, b: U) => R): Stream<T|R,E>;
-    skipUntilBy(obs: Observable): this;
-    takeUntilBy(obs: Observable): this;
+    skipUntilBy(obs: Observable<any, any>): this;
+    takeUntilBy(obs: Observable<any, any>): this;
 
     /* Interoperation with other async abstractions */
 

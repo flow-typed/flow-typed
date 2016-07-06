@@ -533,11 +533,11 @@ declare module 'ramda' {
   }
 
   declare class GenericContructor<T> {
-    constructor(x: T): GenericContructor
+    constructor(x: T): GenericContructor<any>
   }
 
   declare class GenericContructorMulti {
-    constructor(...args: Array<any>): GenericContructor
+    constructor(...args: Array<any>): GenericContructor<any>
   }
 
   declare class RFunction {
@@ -573,7 +573,7 @@ declare module 'ramda' {
     call<T>(fn: (...args: Array<any>) => T, ...args: Array<any>): T;
     comparator<T>(fn: BinaryPredicateFn<T>): (x:T, y:T) => number;
     construct<T>(ctor: Class<GenericContructor<T>>): (x: T) => GenericContructor<T>;
-    constructN<T>(n: number, ctor: Class<GenericContructorMulti>): (...args: any) => GenericContructorMulti;
+    constructN<T>(n: number, ctor: Class<GenericContructorMulti<any>>): (...args: any) => GenericContructorMulti<any>;
     converge(after: Function, fns: Array<Function>): Function;
     empty<T>(x: T): T;
     flip<A,B,TResult>(fn: (arg0: A, arg1: B) => TResult): (arg1: B, arg0?: A) => TResult;
