@@ -18,7 +18,7 @@ declare module 'i18next' {
     initImmediate?: bool,
     resources?: mixed[],
     lng?: string,
-    fallbackLng?: strin,
+    fallbackLng?: string,
     ns?: string,
     defaultNS?: string,
     fallbackNS?: string|string[],
