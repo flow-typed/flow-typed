@@ -55,6 +55,7 @@ declare module 'enzyme' {
     someWhere(predicate: PredicateFunction<this>): boolean;
     every(selector: EnzymeSelector): boolean;
     everyWhere(predicate: PredicateFunction<this>): boolean;
+    length: number;
   }
 
   declare export class ReactWrapper extends Wrapper {
