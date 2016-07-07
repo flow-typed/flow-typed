@@ -5,6 +5,8 @@ import { api, Predicates } from 'prismic.io';
 function geoPointElTest(el) {
   return {
     latitude: (el.latitude : number),
+    // $ExpectError
+    $latitude: (el.latitude : string),
     longitude: (el.longitude : number),
   };
 }
@@ -18,6 +20,8 @@ function linkElTest(el) {
 function imageViewTest(el) {
   return {
     url: (el.url : string),
+    // $ExpectError
+    $url: (el.url : boolean),
     width: (el.width : number),
     height: (el.height : number),
     alt: (el.alt : string),
@@ -29,6 +33,8 @@ function imageElTest(el) {
   return {
     main: imageViewTest(el.main),
     url: (el.url : string),
+    // $ExpectError
+    $url: (el.url : boolean),
     views: imageViewTest(el.views.foo),
   };
 }
@@ -36,6 +42,8 @@ function imageElTest(el) {
 function structuredTextElTest(el) {
   return {
     blocks: (el.blocks : Array<Object>),
+    // $ExpectError
+    $blocks: (el.blocks : Array<string>),
     _getTitle: (() => {
       const x = el.getTitle();
       return !x ? null : (x.blocks : Array<Object>);
@@ -56,6 +64,8 @@ function structuredTextElTest(el) {
 function groupDocTest(el) {
   return {
     data: (el.data : Object),
+    // $ExpectError
+    $data: (el.data : Array<number>),
     fragments: (el.fragments : Array<Object>),
   };
 }
@@ -82,6 +92,8 @@ function groupElTest(el) {
 function sliceTest(el) {
   return {
     sliceType: (el.sliceType : string),
+    // $ExpectError
+    $sliceType: (el.sliceType : Array<boolean>),
     label: (el.label : string),
     value: (el.value : Object),
     _getFirstImage: (() => {
@@ -121,6 +133,8 @@ function sliceZoneElTest(el) {
 function linkedDocumentTest(el) {
   return {
     document: (el.document : Object),
+    // $ExpectError
+    $document: (el.document : Array<string>),
     id: (el.id : string),
     uid: (el.uid : ?string),
     tags: (el.tags : Array<string>),
@@ -134,6 +148,8 @@ function linkedDocumentTest(el) {
 function documentTest(doc) {
   return {
     id: (doc.id : string),
+    // $ExpectError
+    $id: (el.id : Array<Object>),
     uid: (doc.uid : ?string),
     type: (doc.type : string),
     href: (doc.href : string),
@@ -261,6 +277,10 @@ api('http://foo.prismic.com', options).then(_api => {
       Predicates.hourAfter('foo', 1),
       Predicates.near('foo', 1, 1, 1)
     )
+    .query(
+      // $ExpectError
+      Predicates.at('foo', 1)
+    )
     .pageSize(1)
     .fetch('foo')
     .fetch(['foo'])
@@ -271,6 +291,8 @@ api('http://foo.prismic.com', options).then(_api => {
     .then(result => ({
       results: result.results.map(documentTest),
       page: (result.page : number),
+      // $ExpectError
+      $page: (result.page : Object),
       resultsPerPage: (result.results_per_page: number),
       resultsSize: (result.results_size: number),
       totalResultsSize: (result.total_results_size: number),

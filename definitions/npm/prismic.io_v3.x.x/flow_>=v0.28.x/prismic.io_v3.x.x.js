@@ -1,7 +1,8 @@
 declare module 'prismic.io' {
   declare type linkResolver = (...args: any) => any;
 
-  declare type DaysOfWeek = 'Monday'
+  declare type DaysOfWeek =
+    | 'Monday'
     | 'Tuesday'
     | 'Wednesday'
     | 'Thursday'
@@ -9,7 +10,8 @@ declare module 'prismic.io' {
     | 'Saturday'
     | 'Sunday';
 
-  declare type Month = 'January'
+  declare type Month =
+    | 'January'
     | 'February'
     | 'March'
     | 'April'
