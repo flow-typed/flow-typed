@@ -35,6 +35,9 @@ it.skip('desc', () => 1);
 // $ExpectError number. This type is incompatible with string.
 it.skip(12, () => {});
 
+// Can also skip a test by not providing a body
+it('desc');
+
 /**
  * it.only
  */
