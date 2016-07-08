@@ -15,4 +15,10 @@ if (supportsColor) {
   if (supportsColor.has16m) {
     console.log('Terminal supports 16 million colors (truecolor)');
   }
+
+  // $ExpectError
+  supportsColor.nope;
+
+  // $ExpectError
+  (supportsColor.level: string);
 }

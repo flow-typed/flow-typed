@@ -9,3 +9,6 @@ JSON.parse(stripJsonComments(json, {
   whitespace: false
 }));
 //=> {unicorn: 'cake'}
+
+// $ExpectError
+stripJsonComments(42);

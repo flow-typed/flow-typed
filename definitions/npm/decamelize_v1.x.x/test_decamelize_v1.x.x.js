@@ -5,3 +5,9 @@ const a: string = decamelize('unicornRainbow');
 
 const b: string = decamelize('unicornRainbow', '-');
 //=> 'unicorn-rainbow'
+
+// $ExpectError
+decamelize(42);
+
+// $ExpectError
+(decamelize('unicornRainbow'): number);

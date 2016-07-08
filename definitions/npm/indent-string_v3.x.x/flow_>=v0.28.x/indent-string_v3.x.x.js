@@ -1,7 +1,7 @@
 declare module 'indent-string' {
-  declare function exports(
+  declare module.exports: (
     input: string,
     count?: number,
     indent?: string
-  ): string;
+  ) => string;
 }

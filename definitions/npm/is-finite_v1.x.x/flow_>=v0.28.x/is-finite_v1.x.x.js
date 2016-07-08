@@ -1,3 +1,3 @@
 declare module 'is-finite' {
-  declare function exports(value: any): boolean;
+  declare module.exports: (value: mixed) => boolean;
 }

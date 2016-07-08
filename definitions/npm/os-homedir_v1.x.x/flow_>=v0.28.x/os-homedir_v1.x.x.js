@@ -1,3 +1,3 @@
 declare module 'os-homedir' {
-  declare function exports(): string;
+  declare module.exports: () => string;
 }

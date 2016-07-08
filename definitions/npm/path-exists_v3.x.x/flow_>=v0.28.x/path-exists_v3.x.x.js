@@ -1,4 +1,6 @@
 declare module 'path-exists' {
-  declare function exports(filePath: string): Promise<boolean>;
-  declare function sync(filePath: string): boolean; 
+  declare module.exports: {
+    (filePath: string): Promise<boolean>,
+    sync(filePath: string): boolean,
+  };
 }

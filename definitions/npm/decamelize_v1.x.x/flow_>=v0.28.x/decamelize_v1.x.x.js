@@ -1,3 +1,3 @@
 declare module 'decamelize' {
-  declare function exports(input: string, separator?: string): string;
+  declare module.exports: (input: string, separator?: string) => string;
 }

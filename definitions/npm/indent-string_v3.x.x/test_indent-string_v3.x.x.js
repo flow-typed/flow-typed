@@ -7,3 +7,9 @@ const a: string = indentString('Unicorns\nRainbows', 4);
 const b: string = indentString('Unicorns\nRainbows', 4, '♥');
 //=> '♥♥♥♥Unicorns'
 //=> '♥♥♥♥Rainbows'
+
+// $ExpectError
+indentString(42);
+
+// $ExpectError
+(indentString('Unicorns\nRainbows', 4): number);
