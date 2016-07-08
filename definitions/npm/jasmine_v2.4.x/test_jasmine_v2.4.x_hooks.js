@@ -5,12 +5,16 @@
  */
 
 beforeAll(() => {});
+// $ExpectError
+beforeAll();
 
 /**
  * beforeEach
  */
 
 beforeEach(() => {});
+// $ExpectError
+beforeEach();
 
 
 /**
@@ -18,9 +22,13 @@ beforeEach(() => {});
  */
 
 afterAll(() => {});
+// $ExpectError
+afterAll();
 
 /**
  * afterEach
  */
 
 afterEach(() => {});
+// $ExpectError
+afterEach();
