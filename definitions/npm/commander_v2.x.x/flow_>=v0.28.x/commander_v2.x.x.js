@@ -271,7 +271,7 @@ declare module "commander" {
     description: string;
   }
 
-  declare var exports: Command & {
+  declare module.exports: Command & {
     Command: Command,
     Option: Option
   };
