@@ -1,5 +1,5 @@
 declare module 'map-obj' {
-  declare function exports<
+  declare module.exports: <
     TInputValue,
     TOutputValue,
     TObject: { [key: string]: TInputValue }
@@ -10,5 +10,5 @@ declare module 'map-obj' {
       value: TInputValue,
       object: TObject
     ) => [string|number, TOutputValue]
-  ): { [key: string]: TOutputValue }
+  ) => { [key: string]: TOutputValue };
 }

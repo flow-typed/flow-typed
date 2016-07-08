@@ -5,3 +5,9 @@ pathExists('foo.js').then((exists: boolean) => {
 });
 
 const result: boolean = pathExists.sync('bar.js');
+
+// $ExpectError
+(pathExists('foo.js'): boolean);
+
+// $ExpectError
+(pathExists.sync('foo.js'): Promise<boolean>);

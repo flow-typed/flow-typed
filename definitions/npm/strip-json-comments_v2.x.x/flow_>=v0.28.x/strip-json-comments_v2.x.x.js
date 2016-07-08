@@ -1,6 +1,6 @@
 declare module 'strip-json-comments' {
-  declare function exports(
+  declare module.exports: (
     input: string,
     options?: { whitespace: boolean }
-  ): string;
+  ) => string;
 }

@@ -1,3 +1,3 @@
 declare module 'camelcase' {
-  declare function exports(input: string): string;
+  declare module.exports: (input: string) => string;
 }

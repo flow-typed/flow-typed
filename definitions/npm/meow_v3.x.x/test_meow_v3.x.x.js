@@ -23,3 +23,13 @@ if (cli.flags.rainbow) {
 } else {
   cli.showHelp();
 }
+
+// $ExpectError
+meow(42, {
+  alias: {
+    r: 'rainbow'
+  }
+});
+
+// $ExpectError
+meow('asdf', 42);
