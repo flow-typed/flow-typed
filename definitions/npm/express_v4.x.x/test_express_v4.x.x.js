@@ -87,7 +87,7 @@ app.listen(9004, () => {
   console.log('Example app listening on port 9004!');
 });
 
-// $ExpectError backlog should be string
+// $ExpectError backlog should be number
 app.listen(9005, '127.0.0.1', '256', () => {
   console.log('Example app listening on port 9005!');
 })
