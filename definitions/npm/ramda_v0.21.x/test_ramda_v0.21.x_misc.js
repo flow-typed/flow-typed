@@ -14,6 +14,8 @@ const str: string = 'hello world'
 {
   const partDiv: (a: number) => number = _.divide(6)
   const div: number = _.divide(6, 2)
+  //$ExpectError
+  const div2: number = _.divide(6, true)
 }
 
 // String
