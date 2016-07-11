@@ -1,10 +1,10 @@
 /* @flow */
-import express from 'express';
+import express, { Router } from 'express';
 import type {
-    Middleware,
-    $Response,
+    $Application
     $Request,
-    $Application,
+    $Response,
+    Middleware,
     NextFunction
 } from 'express';
 const app = express();
@@ -63,7 +63,33 @@ app.use('/foo', (req: $Request, res: $Response, next) => {
         .status(300);
 });
 
+const bar: Router = new Router();
+
+bar.get('/', (req: $Request, res: $Response): void => {
+  res.send('bar')
+    .status(200);
+});
+
+app.use('/bar', bar)
+
 app.listen(9000);
+
+app.listen(9001, '127.0.0.1');
+
+app.listen(9002, '127.0.0.1', 256);
+
+app.listen(9003, '127.0.0.1', 256, () => {
+  console.log('Example app listening on port 9003!');
+});
+
+app.listen(9004, () => {
+  console.log('Example app listening on port 9004!');
+});
+
+// $ExpectError backlog should be number
+app.listen(9005, '127.0.0.1', '256', () => {
+  console.log('Example app listening on port 9005!');
+})
 
 app.set('foo');
 
