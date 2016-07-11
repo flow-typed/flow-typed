@@ -4,7 +4,7 @@ import type {
     Middleware,
     $Response,
     $Request,
-    $Application
+    $Application,
     NextFunction
 } from 'express';
 const app = express();
