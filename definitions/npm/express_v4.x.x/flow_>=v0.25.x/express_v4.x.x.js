@@ -207,9 +207,9 @@ declare module 'express' {
     constructor(): void;
     locals: {[name: string]: mixed};
     mountpath: string;
-    listen(port: number, hostname ? : string, backlog ? : number, callback ? : (err ? : ? Error) => mixed): Server;
-    listen(port: number, hostname ? : string, callback ? : (err ? : ? Error) => mixed): Server;
-    listen(port: number, callback ? : (err ? : ? Error) => mixed): Server;
+    listen(port: number, hostname?: string, backlog?: number, callback?: (err?: ?Error) => mixed): Server;
+    listen(port: number, hostname?: string, callback?: (err?: ?Error) => mixed): Server;
+    listen(port: number, callback?: (err?: ?Error) => mixed): Server;
     listen(path: string, callback?: (err?: ?Error) => mixed): Server;
     listen(handle: Object, callback?: (err?: ?Error) => mixed): Server;
     disable(name: string): void;
