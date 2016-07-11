@@ -9,3 +9,10 @@ pad(30, "a string", {
   colors: true,
   strip: false
 });
+
+// $ExpectError
+pad(true, 20);
+// $ExpectError
+pad(20, true);
+// $ExpectError
+pad(' a string', 20, false);
