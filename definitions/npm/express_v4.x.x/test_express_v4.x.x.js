@@ -1,7 +1,7 @@
 /* @flow */
 import express, { Router } from 'express';
 import type {
-    $Application
+    $Application,
     $Request,
     $Response,
     Middleware,
