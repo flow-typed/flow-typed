@@ -196,6 +196,7 @@ declare module 'express' {
     use(middleware: Middleware): this;
     use(...middelware: Array<Middleware>): this;
     use(path: string, ...middelware: Array<Middleware>): this;
+    use(path: string, router: Router): this;
 
     route(path: string): Route;
   }
