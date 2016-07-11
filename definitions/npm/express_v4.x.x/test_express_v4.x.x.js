@@ -4,7 +4,6 @@ import type {
     $Application
     $Request,
     $Response,
-    $Router,
     Middleware,
     NextFunction
 } from 'express';
@@ -64,7 +63,7 @@ app.use('/foo', (req: $Request, res: $Response, next) => {
         .status(300);
 });
 
-const bar: $Router = new Router();
+const bar: Router = new Router();
 
 bar.get('/', (req: $Request, res: $Response): void => {
   res.send('bar')
