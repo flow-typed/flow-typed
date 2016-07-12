@@ -47,3 +47,8 @@ shallowWrapper.props().foo;
 
 // Cheerio
 render(<div />).contents();
+
+// not in API docs but in example docs
+// http://airbnb.io/enzyme/docs/api/
+// https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md#shallow-rendering-api
+(shallow(<div />).length: number);
