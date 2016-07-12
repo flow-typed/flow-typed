@@ -336,7 +336,7 @@ async function parseLibDefsFromPkgDir(
  * directory's name into a package name and version.
  */
 const REPO_DIR_ITEM_NAME_RE = /^(.*)_v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)$/;
-export function parseRepoDirItem(dirItemPath: string, validationErrs?: VErrors) {
+function parseRepoDirItem(dirItemPath, validationErrs) {
   const dirItem = path.basename(dirItemPath);
   const itemMatches = dirItem.match(REPO_DIR_ITEM_NAME_RE);
   if (itemMatches == null) {
