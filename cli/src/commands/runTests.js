@@ -171,7 +171,7 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
         console.log("    flow-%s complete!", version);
       }));
 
-      console.log("Finished fetching Flow binaries.\n");
+      console.log("Finished fetching Flow binaries.");
 
       return FLOW_BIN_VERSION_ORDER;
     })();
@@ -186,8 +186,9 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
  */
 async function runTestGroup(
   testGroup: TestGroup,
-  errors = []
+  stopOnFirstError: boolean = false,
 ): Promise<Array<string>> {
+  const errors = [];
   // Some older versions of Flow choke on ">"/"<"/"="
   const testDirName = testGroup.id
     .replace(/>/g, "gt")
@@ -268,7 +269,8 @@ async function runTestGroup(
       return false;
     });
 
-    while (flowVersionsToRun.length > 0) {
+    while (flowVersionsToRun.length > 0
+           && (!stopOnFirstError || errors.length === 0)) {
       // Run tests in batches to avoid saturation
       const testBatch = flowVersionsToRun
         .slice(0, Math.min(flowVersionsToRun.length, 5))
@@ -327,17 +329,20 @@ async function runTestGroup(
   }
 }
 
-async function runTests(
+export async function runTests(
   repoDirPath: string,
-  testPatterns: Array<string>
+  testPatterns: Array<string>,
+  stopOnFirstError: boolean = false,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, "g"));
-  const testGroups = (await getTestGroups(repoDirPath)).filter(testGroup => {
+  const unfilteredTestGroups = await getTestGroups(repoDirPath);
+  const testGroups = unfilteredTestGroups.filter(testGroup => {
     if (testPatternRes.length === 0) {
       return true;
     }
 
     for (var i = 0; i < testPatternRes.length; i++) {
+      // Use .match() because .test() is stateful
       const pattern = testPatternRes[i];
       if (testGroup.id.match(pattern) != null) {
         return true;
@@ -357,11 +362,14 @@ async function runTests(
     const results = new Map();
     while (testGroups.length > 0) {
       const testGroup = testGroups.shift();
-      const testGroupErrors = await runTestGroup(testGroup);
+      const testGroupErrors = await runTestGroup(testGroup, stopOnFirstError);
       if (testGroupErrors.length > 0) {
         const errors = results.get(testGroup.id) || [];
         testGroupErrors.forEach(err => errors.push(err));
         results.set(testGroup.id, errors);
+        if (stopOnFirstError) {
+          break;
+        }
       }
     }
     return results;
@@ -372,9 +380,22 @@ async function runTests(
   }
 }
 
+export function printRunTestsErrorResults(
+  results: Map<string, Array<string>>
+) {
+  Array.from(results).forEach(([testGroupName, errors]) => {
+    console.log("ERROR: %s", testGroupName);
+    errors.forEach(err => console.log(
+      " * %s\n", err.split("\n").map((line, idx) => {
+        return idx === 0 ? line : "   " + line;
+      }).join("\n")
+    ));
+  });
+};
+
 export const name = "run-tests";
 export const description = "Run definition tests";
-export async function run(argv: Object): Promise<number> {
+export async function run(argv: {_: Array<string>}) {
   const testPatterns = argv._.slice(1);
 
   const cwd = process.cwd();
@@ -384,18 +405,10 @@ export async function run(argv: Object): Promise<number> {
     ? cwdDefsNPMPath
     : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
 
-  console.log('Running definition tests in %s...\n', repoDirPath);
+  console.log('Running definition tests in %s...', repoDirPath);
 
   const results = await runTests(repoDirPath, testPatterns);
-  console.log(" ");
-  Array.from(results).forEach(([testGroupName, errors]) => {
-    console.log("ERROR: %s", testGroupName);
-    errors.forEach(err => console.log(
-      " * %s\n", err.split("\n").map((line, idx) => {
-        return idx === 0 ? line : "   " + line;
-      }).join("\n")
-    ));
-  });
+  printRunTestsErrorResults(results);
   if (results.size === 0) {
     console.log("All tests passed!");
     return 0;

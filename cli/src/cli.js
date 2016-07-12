@@ -6,10 +6,11 @@ if (!global.__flowTypedBabelPolyfill) {
   global.__flowTypedBabelPolyfill = true;
 }
 
-import * as yargs from "yargs";
+import yargs from "yargs";
 import {fs, path} from "./lib/node.js";
 
 import * as Install from "./commands/install.js";
+import * as RunCITests from "./commands/runCITests.js";
 import * as RunTests from "./commands/runTests.js";
 import * as Search from "./commands/search.js";
 import * as ValidateDefs from "./commands/validateDefs.js";
@@ -20,11 +21,12 @@ export function runCLI() {
   type CommandModule = {
     name: string,
     description: string,
-    setup?: (yargs: Object) => Object,
+    setup?: (yargs: typeof yargs) => void,
     run: (argv: Object) => Promise<number>,
   };
   const commands: Array<CommandModule> = [
     Install,
+    RunCITests,
     RunTests,
     Search,
     ValidateDefs,
