@@ -52,7 +52,7 @@ declare module 'i18next' {
   declare class i18next extends events$EventEmitter {
     t(key?: ?string, data?: ?Object): string;
     init(options: InitOptions, cb?: CallbackFn): void;
-    use(module: any): Class<i18next>;
+    use(module: any): this;
     exists(key?: string, options: any): bool;
     getFixedT(lng: string, ns?: string): TFunction;
     changeLanguage(lng: string, callback?: TFunction): void;
