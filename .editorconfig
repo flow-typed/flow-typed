@@ -15,5 +15,6 @@ charset = utf-8
 tab_size = 2
 tab_style = space
 
+[*.{js,json}]
 # trim any trailing whitespace
 trim_trailing_whitespace = true
