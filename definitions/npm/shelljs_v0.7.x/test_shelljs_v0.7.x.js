@@ -4,9 +4,33 @@ import type {
   ShellArray,
   ShellAsync,
   ShellFileStats,
+  ShellResult,
   ShellString,
 } from 'shelljs';
 import sh from 'shelljs';
+
+// $ExpectError
+sh.ShellString();
+// $ExpectError
+sh.ShellString({});
+// $ExpectError
+sh.ShellString("foo", {});
+// $ExpectError
+sh.ShellString("foo", "bar", {});
+// Success
+(sh.ShellString("foo", "bar", 0): ShellString);
+// Success
+(sh.ShellString("foo"): ShellString);
+// Sucesss
+(sh.ShellString("foo"): ShellResult);
+// Success
+(sh.ShellString("foo"): String);
+// Success
+(sh.ShellString(["foo", "bar"]): ShellArray<string>);
+// Success
+(sh.ShellString(["foo", "bar"]): ShellResult);
+// Success
+(sh.ShellString(["foo", "bar"]): Array<string>);
 
 // $ExpectError
 sh.cat();
@@ -65,7 +89,7 @@ sh.dirs({ 'nope': true });
 
 // $ExpectError
 sh.echo(new Function());
-// Success 
+// Success
 (sh.echo('foo', 'bar'): ShellString);
 
 // $ExpectError
@@ -101,7 +125,7 @@ sh.find();
 // $ExpectError
 sh.find(0);
 // Success
-(sh.find('~', '/tmp'): ShellArray);
+(sh.find('~', '/tmp'): ShellArray<string>);
 
 // $ExpectError
 sh.grep();
@@ -147,9 +171,13 @@ sh.ls(0);
 // $ExpectError
 sh.ls({ '-x': true }, '~');
 // Success
-(sh.ls({ '-l': true }, '~'): ShellFileStats);
+(sh.ls({ '-l': true }, '~'): ShellArray<ShellFileStats>);
 // Success
-(sh.ls('~'): ShellArray);
+(sh.ls({ '-l': true }, '~').map((item) => item.name): Array<string>);
+// Success
+(sh.ls({ '-l': true }, '~').cat(): ShellString);
+// Success
+(sh.ls('~'): ShellArray<string>);
 
 // $ExpectError
 sh.mkdir();

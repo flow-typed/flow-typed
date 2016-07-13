@@ -1,9 +1,7 @@
-declare class $npm$shelljs$Array<T> extends Array<T> mixins $npm$shelljs$Result, String {}
-declare type  $npm$shelljs$Async = Class<child_process$ChildProcess>;
-declare type  $npm$shelljs$Pattern = RegExp | String | string;
-declare class $npm$shelljs$String mixins $npm$shelljs$Result, String {
-  constructor(stdout: string | string[], stderr?: string, code?: number): this;
-}
+declare type $npm$shelljs$Array<T> = Array<T> & $npm$shelljs$Result;
+declare type $npm$shelljs$Async = Class<child_process$ChildProcess>;
+declare type $npm$shelljs$Pattern = RegExp | String | string;
+declare type $npm$shelljs$String = String & $npm$shelljs$Result;
 
 declare interface $npm$shelljs$Config {
   fatal: boolean;
@@ -39,6 +37,7 @@ declare type $npm$shelljs$TouchOpts = {
 // dupe from flow lib until we can import
 declare interface $npm$shelljs$FileStats {
   atime: Date;
+  birthtime: Date; // FIXME: add to flow lib
   blksize: number;
   blocks: number;
   ctime: Date;
@@ -47,6 +46,7 @@ declare interface $npm$shelljs$FileStats {
   ino: number;
   mode: number;
   mtime: Date;
+  name: string; // NOTE: specific to shelljs
   nlink: number;
   rdev: number;
   size: number;
@@ -60,12 +60,12 @@ declare interface $npm$shelljs$FileStats {
   isSymbolicLink(): boolean;
 }
 
-declare class $npm$shelljs$Result {
+declare interface $npm$shelljs$Result {
   code: number;
   stdout: string;
   stderr: string;
-  to(file: string): this;
-  toEnd(file: string): this;
+  to(file: string): $npm$shelljs$String;
+  toEnd(file: string): $npm$shelljs$String;
   cat:
     ((rest: void) => $npm$shelljs$String);
   exec:
@@ -91,15 +91,18 @@ declare class $npm$shelljs$Result {
 }
 
 declare module 'shelljs' {
+  declare export type ShellArray<T> = $npm$shelljs$Array<T>;
   declare export type ShellAsync = $npm$shelljs$Async;
   declare export type ShellOptionsPoly<Flags: string> = $npm$shelljs$OptionsPoly<Flags>;
   declare export type ShellConfig = $npm$shelljs$Config;
   declare export type ShellEnv = $npm$shelljs$Env;
   declare export type ShellFileStats = $npm$shelljs$FileStats;
   declare export type ShellPattern = $npm$shelljs$Pattern;
+  declare export type ShellResult = $npm$shelljs$Result;
+  declare export type ShellString = $npm$shelljs$String;
 
-  declare export type ChmodOpts = $npm$shelljs$OptionsPoly<'-R' | '-c' | '-v'>;
-  declare export type CpOpts = $npm$shelljs$OptionsPoly<'-P' | '-L' | '-R' | '-f' | '-n'>;
+  declare export type ChmodOpts = ShellOptionsPoly<'-R' | '-c' | '-v'>;
+  declare export type CpOpts = ShellOptionsPoly<'-P' | '-L' | '-R' | '-f' | '-n'>;
   declare export type DirsOpts = '-c';
   declare export type DirsIdx = // FIXME
     | '-0' | '-1' | '-2' | '-3' | '-4' | '-5' | '-6' | '-7' | '-8' | '-9' | '-10' | '-11' | '-12' | '-13' | '-14' | '-15' | '-16' | '-17' | '-18' | '-19' | '-20' | '-21' | '-22' | '-23' | '-24' | '-25' | '-26' | '-27' | '-28' | '-29' | '-30' | '-31'
@@ -108,22 +111,22 @@ declare module 'shelljs' {
   declare export type ExecOptsSync = $npm$shelljs$ExecOptsSync;
   declare export type ExecThen = $npm$shelljs$ExecThen;
   declare export type GrepOpts = $npm$shelljs$GrepOpts;
-  declare export type LnOpts = $npm$shelljs$OptionsPoly<'-f' | '-s'>;
-  declare export type LsOpts = $npm$shelljs$OptionsPoly<'-A' | '-R' | '-d' | '-l'>;
-  declare export type MkdirOpts = $npm$shelljs$OptionsPoly<'-p'>;
-  declare export type MvOpts = $npm$shelljs$OptionsPoly<'-f' | '-n'>;
-  declare export type PopdOpts = $npm$shelljs$OptionsPoly<'-n'>;
-  declare export type PushdOpts = $npm$shelljs$OptionsPoly<'-n'>;
-  declare export type RmOpts = $npm$shelljs$OptionsPoly<'-f' | '-r'>;
+  declare export type LnOpts = ShellOptionsPoly<'-f' | '-s'>;
+  declare export type LsOpts = ShellOptionsPoly<'-A' | '-R' | '-d' | '-l'>;
+  declare export type MkdirOpts = ShellOptionsPoly<'-p'>;
+  declare export type MvOpts = ShellOptionsPoly<'-f' | '-n'>;
+  declare export type PopdOpts = ShellOptionsPoly<'-n'>;
+  declare export type PushdOpts = ShellOptionsPoly<'-n'>;
+  declare export type RmOpts = ShellOptionsPoly<'-f' | '-r'>;
   declare export type SedOpts = $npm$shelljs$SedOpts;
   declare export type SortOpts = $npm$shelljs$SortOpts;
-
-  declare var ShellArray: Class<$npm$shelljs$Array<*>>;
-  declare var ShellString: Class<$npm$shelljs$String>;
+  declare export type TestOpts = $npm$shelljs$TestOpts;
+  declare export type TouchOpts = $npm$shelljs$TouchOpts;
 
   declare module.exports: {
-    ShellArray: Class<ShellArray>;
-    ShellString: Class<ShellString>;
+    ShellString:
+      ((stdout: string, stderr?: string, code?: number) => ShellString) &
+      (<T>(stdout: T[], stderr?: string, code?: number) => ShellArray<T>);
     config: ShellConfig;
     env: ShellEnv;
     cat:
@@ -145,18 +148,18 @@ declare module 'shelljs' {
     error:
       ((rest: void) => ?string);
     exec:
-      ((cmd: string, opts: $npm$shelljs$ExecOpts & { async: true }, then: $npm$shelljs$ExecThen, rest: void) => ShellAsync) &
-      ((cmd: string, opts: $npm$shelljs$ExecOpts & { async: true }, rest: void) => ShellAsync) &
-      ((cmd: string, opts: $npm$shelljs$ExecOptsSync, rest: void) => ShellString) &
+      ((cmd: string, opts: ExecOpts & { async: true }, then: ExecThen, rest: void) => ShellAsync) &
+      ((cmd: string, opts: ExecOpts & { async: true }, rest: void) => ShellAsync) &
+      ((cmd: string, opts: ExecOptsSync, rest: void) => ShellString) &
       ((cmd: string, rest: void) => ShellString) &
-      ((cmd: string, then: $npm$shelljs$ExecThen, rest: void) => ShellAsync);
+      ((cmd: string, then: ExecThen, rest: void) => ShellAsync);
     exit:
       ((code: number, rest: void) => void) &
       ((rest: void) => void);
     find:
-      ((glob: string, ...rest: string[]) => ShellArray);
+      ((glob: string, ...rest: string[]) => ShellArray<string>);
     grep:
-      ((opts: $npm$shelljs$GrepOpts, rx: ShellPattern, glob: string, ...rest: string[]) => ShellString) &
+      ((opts: GrepOpts, rx: ShellPattern, glob: string, ...rest: string[]) => ShellString) &
       ((rx: ShellPattern, glob: string, ...rest: string[]) => ShellString);
     head:
       ((num: number, glob: string, ...rest: string[]) => ShellString) &
@@ -165,9 +168,9 @@ declare module 'shelljs' {
       ((opts: LnOpts, src: string, tgt: string, rest: void) => ShellString) &
       ((src: string, tgt: string, rest: void) => ShellString);
     ls:
-      ((opts: LsOpts & { '-l': true }, glob: string, ...rest: string[]) => $npm$shelljs$FileStats) &
-      ((opts: LsOpts, glob: string, ...rest: string[]) => ShellArray) &
-      ((glob: string, ...rest: string[]) => ShellArray);
+      ((opts: LsOpts & { '-l': true }, glob: string, ...rest: string[]) => ShellArray<ShellFileStats>) &
+      ((opts: LsOpts, glob: string, ...rest: string[]) => ShellArray<string>) &
+      ((glob: string, ...rest: string[]) => ShellArray<string>);
     mkdir:
       ((opts: MkdirOpts, dir: string, ...rest: string[]) => ShellString) &
       ((dir: string, ...rest: string[]) => ShellString);
@@ -188,14 +191,14 @@ declare module 'shelljs' {
       ((opts: RmOpts, glob: string, ...rest: string[]) => ShellString) &
       ((glob: string, ...rest: string[]) => ShellString);
     sed:
-      ((opts: $npm$shelljs$SedOpts, rx: ShellPattern, subst: string, glob: string, ...rest: string[]) => ShellString) &
+      ((opts: SedOpts, rx: ShellPattern, subst: string, glob: string, ...rest: string[]) => ShellString) &
       ((rx: ShellPattern, subst: string, glob: string, ...rest: string[]) => ShellString);
     set:
       ((exitOnError: '-e' | '+e', rest: void) => void) &
       ((verbose: '-v' | '+v', rest: void) => void) &
       ((disableGlobbing: '-f' | '+f', rest: void) => void);
     sort:
-      ((opts: $npm$shelljs$SortOpts, glob: string, ...rest: string[]) => ShellString) &
+      ((opts: SortOpts, glob: string, ...rest: string[]) => ShellString) &
       ((glob: string, ...rest: string[]) => ShellString);
     tail:
       ((num: number, glob: string, ...rest: string[]) => ShellString) &
@@ -203,9 +206,9 @@ declare module 'shelljs' {
     tempdir:
       ((rest: void) => string);
     test:
-      ((mode: $npm$shelljs$TestOpts, path: string, rest: void) => boolean);
+      ((mode: TestOpts, path: string, rest: void) => boolean);
     touch:
-      ((opts: $npm$shelljs$TouchOpts, glob: string, ...rest: string[]) => ShellString) &
+      ((opts: TouchOpts, glob: string, ...rest: string[]) => ShellString) &
       ((glob: string, ...rest: string[]) => ShellString);
     which:
       ((cmd: string, rest: void) => ShellString);
