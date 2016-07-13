@@ -1,0 +1,23 @@
+// @flow
+declare module 'backbone' {
+    declare type eventCallback<E: Event> = (event: E) => any;
+
+    declare class Events {
+        // Not sure the best way of adding these to the declaration files
+        on: (event: string, callback: eventCallback<*>, context?: any) => void,
+        bind: (event: string, callback: eventCallback<*>, context?: any) => void,
+        off: (event: ?string, callback?: ?eventCallback<*>, context?: any) => void,
+        unbind: (event: ?string, callback?: ?eventCallback<*>, context?: any) => void,
+        trigger: (event: string, ...args: Array<any>) => void,
+        listenTo: (other: Class<Events>, event: string, callback: eventCallback<*>) => void,
+        listenTo: (other: Class<Events>, event: string, callback: eventCallback<*>) => void,
+        stopListening: (other?: ?Class<Events>, callback?: ?eventCallback<*>, context?: any) => void
+    }
+
+
+    declare module.exports: {
+        Events: Events
+    };
+
+
+}
