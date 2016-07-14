@@ -1,6 +1,5 @@
 // @flow
 import platform from 'platform';
-import type { $Platform } from 'platform';
 
 // $ExpectError
 (platform.version: string);
@@ -34,12 +33,12 @@ const os = platform.os;
 // $ExpectError
 (os.family:  string);
 
-const other: $Platform = platform.parse('something');
+const other: typeof platform = platform.parse('something');
 
 // $ExpectError
 platform.layoyt
 
-const obj: $Platform = other.parse('foo');
+const obj: typeof platform = other.parse('foo');
 
 platform.hasOwnProperty('version');
 

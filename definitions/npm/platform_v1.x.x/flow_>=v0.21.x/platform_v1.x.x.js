@@ -17,6 +17,5 @@ declare module 'platform' {
       family: ?string
     }
   }
-  declare type $Platform = Platform;
   declare var exports: Platform;
 }
