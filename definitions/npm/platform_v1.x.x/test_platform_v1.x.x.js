@@ -9,7 +9,7 @@ import type { $Platform } from 'platform';
 // $ExpectError
 (platform.description: string);
 // $ExpectError
-(platform.layoyt: string);
+(platform.layot: string);
 // $ExpectError
 (platform.manufacturer: string);
 // $ExpectError
@@ -36,6 +36,8 @@ const os = platform.os;
 
 const other: $Platform = platform.parse('something');
 
+// $ExpectError
+platform.layoyt
 
 const obj: $Platform = other.parse('foo');
 

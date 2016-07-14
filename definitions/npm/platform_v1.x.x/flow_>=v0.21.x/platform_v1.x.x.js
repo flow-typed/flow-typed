@@ -3,7 +3,7 @@ declare module 'platform' {
     toString(): string;
     parse(userAgent: string): Platform;
     description: ?string;
-    layoyt: ?string;
+    layout: ?string;
     manufacturer: ?string;
     name: ?string;
     prerelease: ?string;
