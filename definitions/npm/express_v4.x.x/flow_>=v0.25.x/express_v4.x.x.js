@@ -90,105 +90,105 @@ declare module 'express' {
   declare class Route {
     get(middleware: Middleware): this;
     get(...middelware: Array<Middleware>): this;
-    get(path: string, ...middelware: Array<Middleware>): this;
+    get(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     post(middleware: Middleware): this;
     post(...middelware: Array<Middleware>): this;
-    post(path: string, ...middelware: Array<Middleware>): this;
+    post(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     put(middleware: Middleware): this;
     put(...middelware: Array<Middleware>): this;
-    put(path: string, ...middelware: Array<Middleware>): this;
+    put(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     head(middleware: Middleware): this;
     head(...middelware: Array<Middleware>): this;
-    head(path: string, ...middelware: Array<Middleware>): this;
+    head(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     delete(middleware: Middleware): this;
     delete(...middelware: Array<Middleware>): this;
-    delete(path: string, ...middelware: Array<Middleware>): this;
+    delete(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     options(middleware: Middleware): this;
     options(...middelware: Array<Middleware>): this;
-    options(path: string, ...middelware: Array<Middleware>): this;
+    options(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     trace(middleware: Middleware): this;
     trace(...middelware: Array<Middleware>): this;
-    trace(path: string, ...middelware: Array<Middleware>): this;
+    trace(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     copy(middleware: Middleware): this;
     copy(...middelware: Array<Middleware>): this;
-    copy(path: string, ...middelware: Array<Middleware>): this;
+    copy(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     lock(middleware: Middleware): this;
     lock(...middelware: Array<Middleware>): this;
-    lock(path: string, ...middelware: Array<Middleware>): this;
+    lock(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     mkcol(middleware: Middleware): this;
     mkcol(...middelware: Array<Middleware>): this;
-    mkcol(path: string, ...middelware: Array<Middleware>): this;
+    mkcol(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     move(middleware: Middleware): this;
     move(...middelware: Array<Middleware>): this;
-    move(path: string, ...middelware: Array<Middleware>): this;
+    move(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     purge(middleware: Middleware): this;
     purge(...middelware: Array<Middleware>): this;
-    purge(path: string, ...middelware: Array<Middleware>): this;
+    purge(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     propfind(middleware: Middleware): this;
     propfind(...middelware: Array<Middleware>): this;
-    propfind(path: string, ...middelware: Array<Middleware>): this;
+    propfind(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     proppatch(middleware: Middleware): this;
     proppatch(...middelware: Array<Middleware>): this;
-    proppatch(path: string, ...middelware: Array<Middleware>): this;
+    proppatch(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     unlock(middleware: Middleware): this;
     unlock(...middelware: Array<Middleware>): this;
-    unlock(path: string, ...middelware: Array<Middleware>): this;
+    unlock(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     report(middleware: Middleware): this;
     report(...middelware: Array<Middleware>): this;
-    report(path: string, ...middelware: Array<Middleware>): this;
+    report(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     mkactivity(middleware: Middleware): this;
     mkactivity(...middelware: Array<Middleware>): this;
-    mkactivity(path: string, ...middelware: Array<Middleware>): this;
+    mkactivity(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     checkout(middleware: Middleware): this;
     checkout(...middelware: Array<Middleware>): this;
-    checkout(path: string, ...middelware: Array<Middleware>): this;
+    checkout(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     merge(middleware: Middleware): this;
     merge(...middelware: Array<Middleware>): this;
-    merge(path: string, ...middelware: Array<Middleware>): this;
+    merge(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     // @TODO Missing 'm-search' but get flow illegal name error.
 
     notify(middleware: Middleware): this;
     notify(...middelware: Array<Middleware>): this;
-    notify(path: string, ...middelware: Array<Middleware>): this;
+    notify(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     subscribe(middleware: Middleware): this;
     subscribe(...middelware: Array<Middleware>): this;
-    subscribe(path: string, ...middelware: Array<Middleware>): this;
+    subscribe(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     unsubscribe(middleware: Middleware): this;
     unsubscribe(...middelware: Array<Middleware>): this;
-    unsubscribe(path: string, ...middelware: Array<Middleware>): this;
+    unsubscribe(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     patch(middleware: Middleware): this;
     patch(...middelware: Array<Middleware>): this;
-    patch(path: string, ...middelware: Array<Middleware>): this;
+    patch(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     search(middleware: Middleware): this;
     search(...middelware: Array<Middleware>): this;
-    search(path: string, ...middelware: Array<Middleware>): this;
+    search(path: string|RegExp, ...middelware: Array<Middleware>): this;
 
     connect(middleware: Middleware): this;
     connect(...middelware: Array<Middleware>): this;
-    connect(path: string, ...middelware: Array<Middleware>): this;
+    connect(path: string|RegExp, ...middelware: Array<Middleware>): this;
   }
   declare class Router extends Route {
     constructor(options?: RouterOptions): void;
