@@ -90,106 +90,106 @@ declare module 'express' {
     (error: ?Error, req : Request, res: Response, next: NextFunction) => mixed;
   declare class Route {
     get(middleware: Middleware): this;
-    get(...middelware: Array<Middleware>): this;
-    get(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    get(...middleware: Array<Middleware>): this;
+    get(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     post(middleware: Middleware): this;
-    post(...middelware: Array<Middleware>): this;
-    post(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    post(...middleware: Array<Middleware>): this;
+    post(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     put(middleware: Middleware): this;
-    put(...middelware: Array<Middleware>): this;
-    put(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    put(...middleware: Array<Middleware>): this;
+    put(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     head(middleware: Middleware): this;
-    head(...middelware: Array<Middleware>): this;
-    head(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    head(...middleware: Array<Middleware>): this;
+    head(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     delete(middleware: Middleware): this;
-    delete(...middelware: Array<Middleware>): this;
-    delete(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    delete(...middleware: Array<Middleware>): this;
+    delete(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     options(middleware: Middleware): this;
-    options(...middelware: Array<Middleware>): this;
-    options(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    options(...middleware: Array<Middleware>): this;
+    options(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     trace(middleware: Middleware): this;
-    trace(...middelware: Array<Middleware>): this;
-    trace(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    trace(...middleware: Array<Middleware>): this;
+    trace(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     copy(middleware: Middleware): this;
-    copy(...middelware: Array<Middleware>): this;
-    copy(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    copy(...middleware: Array<Middleware>): this;
+    copy(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     lock(middleware: Middleware): this;
-    lock(...middelware: Array<Middleware>): this;
-    lock(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    lock(...middleware: Array<Middleware>): this;
+    lock(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     mkcol(middleware: Middleware): this;
-    mkcol(...middelware: Array<Middleware>): this;
-    mkcol(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    mkcol(...middleware: Array<Middleware>): this;
+    mkcol(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     move(middleware: Middleware): this;
-    move(...middelware: Array<Middleware>): this;
-    move(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    move(...middleware: Array<Middleware>): this;
+    move(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     purge(middleware: Middleware): this;
-    purge(...middelware: Array<Middleware>): this;
-    purge(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    purge(...middleware: Array<Middleware>): this;
+    purge(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     propfind(middleware: Middleware): this;
-    propfind(...middelware: Array<Middleware>): this;
-    propfind(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    propfind(...middleware: Array<Middleware>): this;
+    propfind(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     proppatch(middleware: Middleware): this;
-    proppatch(...middelware: Array<Middleware>): this;
-    proppatch(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    proppatch(...middleware: Array<Middleware>): this;
+    proppatch(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     unlock(middleware: Middleware): this;
-    unlock(...middelware: Array<Middleware>): this;
-    unlock(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    unlock(...middleware: Array<Middleware>): this;
+    unlock(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     report(middleware: Middleware): this;
-    report(...middelware: Array<Middleware>): this;
-    report(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    report(...middleware: Array<Middleware>): this;
+    report(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     mkactivity(middleware: Middleware): this;
-    mkactivity(...middelware: Array<Middleware>): this;
-    mkactivity(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    mkactivity(...middleware: Array<Middleware>): this;
+    mkactivity(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     checkout(middleware: Middleware): this;
-    checkout(...middelware: Array<Middleware>): this;
-    checkout(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    checkout(...middleware: Array<Middleware>): this;
+    checkout(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     merge(middleware: Middleware): this;
-    merge(...middelware: Array<Middleware>): this;
-    merge(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    merge(...middleware: Array<Middleware>): this;
+    merge(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     // @TODO Missing 'm-search' but get flow illegal name error.
 
     notify(middleware: Middleware): this;
-    notify(...middelware: Array<Middleware>): this;
-    notify(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    notify(...middleware: Array<Middleware>): this;
+    notify(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     subscribe(middleware: Middleware): this;
-    subscribe(...middelware: Array<Middleware>): this;
-    subscribe(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    subscribe(...middleware: Array<Middleware>): this;
+    subscribe(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     unsubscribe(middleware: Middleware): this;
-    unsubscribe(...middelware: Array<Middleware>): this;
-    unsubscribe(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    unsubscribe(...middleware: Array<Middleware>): this;
+    unsubscribe(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     patch(middleware: Middleware): this;
-    patch(...middelware: Array<Middleware>): this;
-    patch(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    patch(...middleware: Array<Middleware>): this;
+    patch(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     search(middleware: Middleware): this;
-    search(...middelware: Array<Middleware>): this;
-    search(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    search(...middleware: Array<Middleware>): this;
+    search(path: string|RegExp, ...middleware: Array<Middleware>): this;
 
     connect(middleware: Middleware): this;
-    connect(...middelware: Array<Middleware>): this;
-    connect(path: string|RegExp, ...middelware: Array<Middleware>): this;
+    connect(...middleware: Array<Middleware>): this;
+    connect(path: string|RegExp, ...middleware: Array<Middleware>): this;
   }
   declare class Router extends Route {
     constructor(options?: RouterOptions): void;
