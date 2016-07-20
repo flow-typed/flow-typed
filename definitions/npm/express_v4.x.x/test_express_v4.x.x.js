@@ -103,3 +103,21 @@ app.render('view', { title: 'News Feed' }, (err: ?Error, html: string): void => 
     if (err) return console.log(err);
     console.log(html);
 });
+
+app.use('/somewhere', (req: $Request, res: $Response) => {
+  res.redirect('/somewhere-else');
+});
+
+app.use('/again', (req: $Request, res: $Response) => {
+  res.redirect(200, '/different');
+});
+
+app.use('/something', (req: $Request, res: $Response) => {
+  // $ExpectError
+  res.redirect('/different', 200);
+});
+
+app.use('/failure', (req: $Request, res: $Response) => {
+  // $ExpectError
+  res.redirect();
+});
