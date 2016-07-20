@@ -60,7 +60,7 @@ declare module 'express' {
   };
   declare class Response extends http$ClientRequest mixins RequestResponseBase {
     headersSent: boolean;
-    locals: mixed;
+    locals: {[name: string]: mixed};
     append(field: string, value?: string): this;
     attachment(filename?: string): this;
     cookie(name: string, value: string, options?: CookieOptions): this;
