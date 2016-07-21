@@ -140,6 +140,8 @@ declare module 'rxjs' {
 
     distinctUntilChanged(compare?: (x: T, y: T) => boolean): Observable<T>;
 
+    elementAt(index: number, defaultValue?: T): Observable<T>;
+
     filter(predicate: (value: T) => boolean): Observable<T>;
 
     finally(f: () => mixed): Observable<T>;

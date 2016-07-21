@@ -14,6 +14,11 @@ const bogusStrings: Observable<string> = numbers.map(x => x);
 numbers.subscribe((x: string) => {});
 strings.subscribe((x: string) => {});
 
+(strings.elementAt(1): Observable<string>);
+(strings.elementAt(1, ''): Observable<string>);
+// $ExpectError
+strings.elementAt(1, 5)
+
 // $ExpectError -- need the typecast or the error appears at the declaration site
 numbers.merge((strings: Observable<string>));
 
