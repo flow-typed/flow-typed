@@ -71,7 +71,8 @@ declare module 'express' {
     jsonp(body?: mixed): this;
     links(links: {[name: string]: string}): this;
     location(path: string): this;
-    redirect(status?: number, path: string): this;
+    redirect(url: string, ...args: Array<void>): this;
+    redirect(status: number, url: string, ...args: Array<void>): this;
     render(view: string, locals?: mixed, callback: (err?: ?Error) => mixed): this;
     send(body?: mixed): this;
     sendFile(path: string, options?: SendFileOptions, callback?: (err?: ?Error) => mixed): this;
