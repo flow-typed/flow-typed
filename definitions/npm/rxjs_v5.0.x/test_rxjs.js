@@ -10,7 +10,7 @@ const strings: Observable<string> = numbers.map(x => x.toString());
 // $ExpectError
 const bogusStrings: Observable<string> = numbers.map(x => x);
 
-// TODO This should be an error but currently subscribe is not typed very well.
+// $ExpectError
 numbers.subscribe((x: string) => {});
 strings.subscribe((x: string) => {});
 
