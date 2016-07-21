@@ -66,6 +66,11 @@ app.use('/foo', (req: $Request, res: $Response, next) => {
 const bar: Router = new Router();
 
 bar.get('/', (req: $Request, res: $Response): void => {
+  // $ExpectError should be of type object
+  const locals: Array<any> = res.locals;
+  res.locals.title = 'Home Page';
+  // $ExpectError should not allow to set keys to non string value.
+  res.locals[0] = 'Fail';
   res.send('bar')
     .status(200);
 });
