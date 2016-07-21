@@ -166,7 +166,9 @@ declare class moment$Moment {
   set(unit: string, value: number): this;
   set(options: { unit: string, value: number }): this;
   static max(...dates: Array<moment$Moment>): moment$Moment;
+  static max(dates: Array<moment$Moment>): moment$Moment;
   static min(...dates: Array<moment$Moment>): moment$Moment;
+  static min(dates: Array<moment$Moment>): moment$Moment;
   add(value: number|moment$MomentDuration|moment$Moment|Object, unit?: string): this;
   subtract(value: number|moment$MomentDuration|moment$Moment|string, unit?: string): this;
   startOf(unit: string): this;
