@@ -127,30 +127,76 @@ declare module 'bitcoinjs-lib' {
         fromBase58Check(address: string): {hash: Buffer, version: number};
         fromOutputScript(script: Buffer, network?: Network): string;
         toBase58Check(hash: Buffer, version: number): string;
+        toOutputScipt(network?: Network): Buffer;
     };
 
     declare var script: {
         fromAddress(address: string, network?: Network): Buffer;
-        pubKeyHashOutput(pkh: Buffer): Buffer;
         scriptHashOutput(sho: Buffer): Buffer;
+
+        compile(chunks: Buffer | Array<Buffer | number>): Buffer;
+        decompile(buffer: Buffer | Array<Buffer | number>): Array<Buffer | number>;
+        fromASM(asm: string): Buffer;
+        toASM(string: Buffer): string;
+        number: {
+          decode: (buf: Buffer, maxLength: number, minimal: boolean) => number;
+          encode: (n: number) => Buffer;
+        };
+        isCanonicalPubKey(buffer: Buffer): boolean;
+        isCanonicalSignature(buffer: Buffer): boolean;
+        isDefinedHashType(type: number): boolean;
+        isPubKeyHashInput(script: Array<Buffer | number> | Buffer): boolean;
+        isPubKeyHashOutput(script: Array<Buffer | number> | Buffer): boolean;
+        isPubKeyInput(script: Array<Buffer | number> | Buffer): boolean;
+        isPubKeyOutput(script: Array<Buffer | number> | Buffer): boolean;
+        isScriptHashInput(script: Array<Buffer | number> | Buffer, allowIncomplete?: boolean): boolean;
+        isScriptHashOutput(script: Array<Buffer | number> | Buffer): boolean;
+        isWitnessPubKeyHashOutput(script: Array<Buffer | number> | Buffer): boolean;
+        isWitnessScriptHashOutput(script: Array<Buffer | number> | Buffer): boolean;
+        isMultisigInput(script: Array<Buffer | number> | Buffer, allowIncomplete?: boolean): boolean;
+        isMultisigOutput(script: Array<Buffer | number> | Buffer): boolean;
+        isNullDataOutput(script: Array<Buffer | number> | Buffer): boolean;
+
+        classifyOutput(script: Array<Buffer | number> | Buffer): string;
+        classifyInput(script: Array<Buffer | number> | Buffer): string;
+        pubKeyOutput(pubKey: Buffer): Buffer;
+        pubKeyHashOutput(pubKeyHash: Buffer): Buffer;
+        scriptHashOutput(scriptHash: Buffer): Buffer;
+        witnessPubKeyHashOutput(pubKeyHash: Buffer): Buffer;
+        witnessScriptHashInput(scriptSig: Array<Buffer | number> | Buffer, scriptPubKey: Array<Buffer | number> | Buffer): Buffer;
+        witnessScriptHashOutput(scriptHash: Buffer): Buffer;
+
+        multisigOutput(m: number, pubKeys: Array<Buffer>): Buffer;
+        pubKeyInput(signature: Buffer): Buffer;
+        pubKeyHashInput(signature: Buffer, pubKey: Buffer): Buffer;
+        scriptHashInput(scriptSig: Array<Buffer | number> | Buffer, scriptPubKey: Array<Buffer | number> | Buffer):Buffer;
+        multisigInput(signatures: Array<Buffer>, scriptPubKey?: Array<Buffer | number> | Buffer): Buffer;
+        nullDataOutput(data: Buffer): Buffer;
     };
 
     declare var crypto: {
+        sha1(buffer: Buffer): Buffer;
         sha256(buffer: Buffer): Buffer;
         hash256(buffer: Buffer): Buffer;
         hash160(buffer: Buffer): Buffer;
+        ripemd160(buffer: Buffer): Buffer;
     }
     
     declare class ECPair {
         d: ?Buffer;
-        Q: ?Buffer;
+        Q: Buffer;
         compressed: boolean;
         network: Network;
+        getNetwork(): Network;
+
         constructor(d: ?Buffer, Q: ?Buffer): void;
+        getAddress(): string;
         getPublicKeyBuffer(): Buffer;
         static fromPublicKeyBuffer(buffer: Buffer): ECPair;
         verify: (hash: Buffer, signature: ECSignature) => boolean;
+        sign(hash: Buffer): Buffer;
         toWIF(): string;
+        static fromWIF(string: string, network: Network): ECPair;
         static makeRandom(): ECPair;
     }
 
@@ -174,6 +220,7 @@ declare module 'bitcoinjs-lib' {
         getNetwork(): Network;
         constructor(keyPair: ECPair, chainCode: Buffer): void;
 
+        static fromBase58(base: string, network?: ?(Network | Array<Network>)): HDNode;
         static fromSeedHex(seed: string, network?: ?Network): HDNode;
         static fromSeedBuffer(seed: Buffer, network?: ?Network): HDNode;
         getPublicKeyBuffer(): Buffer;
@@ -200,16 +247,102 @@ declare module 'bitcoinjs-lib' {
         addOutput(scriptPubKey: Buffer, value: number): void;
         getHash(): Buffer;
         toBuffer(): Buffer;
+        toHex(): string;
         getId(): string;
 
         static isCoinbaseHash(buffer: Buffer): boolean;
+        isCoinbase(): boolean;
+        byteLength(): number;
+        clone(): Transaction;
+        hashForSignature(inIndex: number, prevOutScript: Buffer, hashType: number): Buffer;
+        setInputScript(index: number, scriptSig: Buffer): void;
+    }
+
+    declare class TransactionBuilder {
+        network: Network;
+        inputs: Array<Input>;
+        tx: Transaction;
+
+        setLockTime(locktime: number): void;
+        setVersion(version: number): void;
+        addInput(txhash: string | Transaction | Buffer, vout: number, sequence?: number, prevOutScript?: Buffer): void;
+        addOutput(scriptPubKey: string | Buffer, value: number): void;
+        build(): Transaction;
+        buildIncomplete(): Transaction;
+        sign(index: number, keyPair: ECPair, redeemScript: Buffer, hashType: number): void;
+        
+        static fromTransaction(transaction: Transaction, network: ?Network): TransactionBuilder;
+
     }
 
     declare var networks: {[key: string]: Network}
+    declare var opcodes: {[key: string]: number}
 
     declare class ECSignature {
       r: $npm$bigi$BigInteger;
       s: $npm$bigi$BigInteger;
       constructor(r: $npm$bigi$BigInteger, s: $npm$bigi$BigInteger): void;
+
+      static parseCompact(buffer: Buffer): {
+          compressed: boolean,
+          i: number,
+          signature: Buffer
+      };
+
+      static fromDER(buffer: Buffer): ECSignature;
+      static parseScriptSignature(buffer: Buffer): {
+          signature: ECSignature,
+          hashType: number
+      };
+
+      toCompact(i: number, compressed: boolean): Buffer;
+      toDER(): Buffer;
+      toScriptSignature(hashType: number): Buffer;
+    }
+
+    declare class Block {
+      version: number;
+      prevHash: Buffer;
+      merkleRoot: Buffer;
+      timestamp: number;
+      bits: number;
+      nonce: number;
+
+      getHash(): Buffer;
+      getId(): string;
+      getUTCDate(): Date;
+      toBuffer(headersOnly?: boolean): Buffer;
+      toHex(headersOnly?: boolean): string;
+      calculateTarget(bits: number): Buffer;
+      checkProofOfWork(): boolean;
+      
+      static fromBuffer(buffer: Buffer): Block;
+      static fromHex(hex: string): Block;
+    }
+
+    declare var bufferutils: {
+      equal(a: Buffer, b: Buffer): boolean;
+      pushDataSize(i: number): number;
+      readPushDataInt(buffer: Buffer, offset: number): {
+          opcode: number,
+          number: number,
+          size: number
+      };
+      readUInt64LE(buffer: Buffer, offset: number): number;
+      readVarInt(buffer: Buffer, offset: number): {
+          number: number,
+          size: number
+      };
+      varIntBuffer(i: number): Buffer;
+      varIntSize(i: number): number;
+      writePushDataInt(buffer: Buffer, number: number, offset: number): number;
+      writeUInt64LE(buffer: Buffer, value: number, offset: number): void;
+      writeVarInt(buffer: Buffer, number: number, offset: number): number;
+    }
+
+    declare var message: {
+      magicHash(message: Buffer|string, network: Network): Buffer;
+      sign(pair: ECPair, message: Buffer|string, network: Network): Buffer;
+      verify(address: string, signature: Buffer, message: Buffer|string, network: Network): boolean;
     }
 }
