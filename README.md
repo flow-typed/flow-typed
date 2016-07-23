@@ -22,7 +22,7 @@ $ flow-typed install -f 0.27 rxjs@5.0.0 # `-f 0.27` specifies the Flow version w
 ## Huh?
 
 When you start a project with Flow, **you might want to use some third-party 
-libraries that were *not* written with Flow**. Flow is usually able to work it's 
+libraries that were *not* written with Flow**. Flow is usually able to work its 
 way around this, but at the unfortunate cost of typing those third-party modules 
 as `any`. As a result, Flow can't give errors if you accidentally mis-use the 
 library (nor will it be able to auto-complete the library).
