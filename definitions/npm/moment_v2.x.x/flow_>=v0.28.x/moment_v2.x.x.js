@@ -181,7 +181,7 @@ declare class moment$Moment {
   from(value: moment$Moment|string|number|Date|Array<number>, removePrefix?: bool): string;
   toNow(removePrefix?: bool): string;
   to(value: moment$Moment|string|number|Date|Array<number>, removePrefix?: bool): string;
-  calendar(refTime?: any, formats?: moment$CalendarFormats): void;
+  calendar(refTime?: any, formats?: moment$CalendarFormats): string;
   diff(date: moment$Moment|string|number|Date|Array<number>, format?: string, floating?: bool): number;
   valueOf(): number;
   unix(): number;
