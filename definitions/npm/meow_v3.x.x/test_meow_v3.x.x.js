@@ -1,5 +1,7 @@
 import meow from 'meow';
 
+const cliBasic = meow('Do stuff');
+
 const cli = meow(`
   Usage
       $ foo <input>

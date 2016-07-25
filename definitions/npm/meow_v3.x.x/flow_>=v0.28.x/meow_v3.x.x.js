@@ -21,7 +21,7 @@ declare module 'meow' {
 
   declare module.exports: (
     options: options,
-    minimistOptions: minimistOptions,
+    minimistOptions?: minimistOptions,
   ) => {
     input: Array<string>,
     flags: { [flag: string]: string | boolean },
