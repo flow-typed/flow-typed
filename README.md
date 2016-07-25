@@ -1,4 +1,4 @@
-_**Notice:** The current [`flow-typed` npm package](https://www.npmjs.com/package/flow-typed) is not up-to-date, nor is it particularly useful. `flow-typed` 2.0.0 is underway and will be published to npm when it's ready._
+_**NOTE:** The [`flow-typed` CLI](https://www.npmjs.com/package/flow-typed) is currently in beta. Please try it out and report any issues you encounter. Thanks!_
 
 <img 
   alt="Flow Logo" 
@@ -6,14 +6,23 @@ _**Notice:** The current [`flow-typed` npm package](https://www.npmjs.com/packag
   width="400"
 />
 
-`flow-typed` is a repository of third-party 
+`flow-typed` is a [repository](https://github.com/flowtype/flow-typed/tree/master/definitions) of third-party 
 [library interface definitions](http://flowtype.org/docs/third-party.html) 
 for use with [Flow](http://flowtype.org/).
+
+You can grab definitions directly from this GitHub repo, or you can use the CLI (currently in beta) to install a libdef for a given library:
+```bash
+$ npm install -g flow-typed
+
+$ cd /path/to/my/project
+$ flow-typed install -f 0.27 rxjs@5.0.0 # `-f 0.27` specifies the Flow version we're using for this project
+'rxjs_v5.0.x.js' installed at /path/to/my/project/flow-typed/npm/rxjs_v5.0.xjs
+```
 
 ## Huh?
 
 When you start a project with Flow, **you might want to use some third-party 
-libraries that were *not* written with Flow**. Flow is usually able to work it's 
+libraries that were *not* written with Flow**. Flow is usually able to work its 
 way around this, but at the unfortunate cost of typing those third-party modules 
 as `any`. As a result, Flow can't give errors if you accidentally mis-use the 
 library (nor will it be able to auto-complete the library).
@@ -39,8 +48,12 @@ folder. They all must follow the following naming format:
 
 Where `<VERSION>` is a semver version number with all of MAJOR, MINOR, and PATCH
 version numbers included. `x` is an acceptable wildcard in place of any of the 
-three version numbers, and it is also acceptable to put `>=` or `<=` in front of
-the `v` to indicate a range of versions.
+three version numbers. 
+
+For Flow versions it is also acceptable to put `>=` or `<=` in front of
+the `v` to indicate a range of versions. `>=` and `<=` are *not* supported for
+npm package versions, only `x` wildcards. (Library interfaces are rarely
+identical across major versions)
 
 Example filename:
 
@@ -59,7 +72,7 @@ library definitions.
 **When you contribute a new library definition (or make a change to an existing 
 one), you should include tests with your change.**
 
-Tests are simply `test-*.js` files that sit next to the library definition 
+Tests are simply `test_*.js` files that sit next to the library definition 
 file. Their purpose is to exercise the defined library and ultimately produce
 zero Flow errors for each version of Flow that the libdef is specified as 
 compatible with.
@@ -89,6 +102,18 @@ it's tests to ensure that the tests pass as expected.
 Note that this command assumes that the `/definitions/` directory is correctly 
 structured. You can always verify the structure with the 
 [`flow-typed validate-defs`](#flow-typed-validate-defs) command.
+
+##### `flow-typed update-cache [--debug]`
+
+By default flow-typed retrieves all available libdefs from its related upstream
+repository. To make this process more efficient, those libdefs will be cached to
+your local filesystem. Usually, the cache will automatically be updated after a
+certain grace period during a libdef installation, but sometimes it is useful to
+do this update manually. Use this command if you want to download the most
+recent definitions yourself.
+
+The debug flag will output additional (error) information, which can be useful for
+bug-reports.
 
 ##### *(...coming soon...)* `flow-typed libdefs-for-pkg /path/to/package.json`
 
