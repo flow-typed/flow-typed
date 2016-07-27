@@ -1,15 +1,29 @@
 declare module 'axios' {
   declare interface AxiosXHRConfigBase<T> {
+    adapter?: <T>(config: AxiosXHRConfig<T>) => Promise<AxiosXHR<T>>;
+    auth?: {
+        username: string,
+        password: string
+    };
+    xsrfCookieName?: string;
+    xsrfHeaderName?: string;
+    progress?: (progressEvent: Event) => void | mixed;
+    maxContentLength?: number;
+    maxRedirects?: 5,
     headers?: Object;
     maxContentLength?: number;
     params?: Object;
+    paramsSerializer?: (params: Object) => string;
     responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream';
-    transformReponse?: <U>(data: T) => U;
-    transformRequest?: <U>(data: T) => U|Array<<U>(data: T) => U>;
-    validateStatus?: ?(status: number) => boolean,
+    transformReponse?: Array<<U>(data: T) => U>;
+    transformRequest?: Array<<U>(data: T) => U|Array<<U>(data: T) => U>>;
+    timeout?: number;
+    validateStatus?: (status: number) => boolean,
     withCredentials?: boolean;
     xsrfCookieName?: string;
     xsrfHeaderName?: string;
+    httpAgent?: mixed; // Missing the type in the core flow node libdef
+    httpsAgent?: mixed; // Missing the type in the core flow node libdef
   }
   declare type $AxiosXHRConfigBase<T> = AxiosXHRConfigBase<T>;
   declare interface AxiosXHRConfig<T> extends AxiosXHRConfigBase<T> {
@@ -64,7 +78,6 @@ declare module 'axios' {
   }
 
   declare type $AxiosError<T> = AxiosError<T>;
-
 
   declare class AxiosExport extends Axios {
       Axios: Class<Axios>;
