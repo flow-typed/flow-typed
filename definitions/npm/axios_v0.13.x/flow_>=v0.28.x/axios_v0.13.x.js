@@ -56,15 +56,18 @@ declare module 'axios' {
     ): AxiosInterceptorIdent;
     eject(ident: AxiosInterceptorIdent): void;
   }
+  declare type AxiosPromise<T> = Promise<AxiosXHR<T>>;
   declare class Axios {
-    constructor<T>(config?: AxiosXHRConfigBase<T>): Promise<T>;
-    request<T>(config: AxiosXHRConfig<T>): Promise<T>;
-    delete: <T>(url: string, config?: AxiosXHRConfigBase<T>) => Promise<T>;
-    get: <T>(url: string, config?: AxiosXHRConfigBase<T>) => Promise<T>;
-    head: <T>(url: string, config?: AxiosXHRConfigBase<T>) => Promise<T>;
-    post: <T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>) => Promise<T>;
-    put: <T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>) => Promise<T>;
-    patch: <T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>) => Promise<T>;
+    constructor<T>(config?: AxiosXHRConfigBase<T>): void;
+    <T>(config: AxiosXHRConfig<T>): AxiosPromise<T>;
+    <T>(url: string, config?: AxiosXHRConfig<T>): AxiosPromise<T>;
+    request<T>(config: AxiosXHRConfig<T>): AxiosPromise<T>;
+    delete<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
+    get<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
+    head<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
+    post<T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
+    put<T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
+    patch<T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
     interceptors: {
       request: AxiosRequestInterceptor<mixed>,
       response: AxiosResponseInterceptor<mixed>,
@@ -79,9 +82,9 @@ declare module 'axios' {
 
   declare type $AxiosError<T> = AxiosError<T>;
 
-  declare class AxiosExport extends Axios {
-      Axios: Class<Axios>;
-      create<T>(defaultConfig?: AxiosXHRConfigBase<T>): Axios<T>;
+  declare interface AxiosExport extends Axios {
+      Axios: typeof Axios;
+      create(config?: AxiosXHRConfigBase<any>): Axios;
       all: typeof Promise.all;
       spread(callback: Function): (arr: Array<any>) => Function
   }
