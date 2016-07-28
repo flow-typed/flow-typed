@@ -12,16 +12,16 @@ declare module 'redux' {
     dispatch: Dispatch,
     getState: () => State,
     subscribe: (listener: () => void) => () => void,
-    replaceReducer: (reducer: Reducer) => void
+    replaceReducer: (reducer: Reducer<any, any>) => void
   };
-  declare type StoreCreator = (reducer: Reducer, initialState: ?State) => Store;
+  declare type StoreCreator = (reducer: Reducer<any, any>, initialState: ?State) => Store;
   declare type StoreEnhancer = (next: StoreCreator) => StoreCreator;
   declare type ActionCreatorOrObjectOfACs = ActionCreator | { [key: string]: ActionCreator };
-  declare type Reducers = { [key: string]: Reducer };
+  declare type Reducers = { [key: string]: Reducer<any, any> };
   declare class Redux {
     bindActionCreators<actionCreators: ActionCreatorOrObjectOfACs>(actionCreators: actionCreators, dispatch: Dispatch): actionCreators;
-    combineReducers(reducers: Reducers): Reducer;
-    createStore(reducer: Reducer, initialState?: State, enhancer?: StoreEnhancer): Store;
+    combineReducers(reducers: Reducers): Reducer<any, any>;
+    createStore(reducer: Reducer<any, any>, initialState?: State, enhancer?: StoreEnhancer): Store;
     applyMiddleware(...middlewares: Array<Middleware>): StoreEnhancer;
     compose(...functions: Array<Function | StoreEnhancer>): Function;
   }

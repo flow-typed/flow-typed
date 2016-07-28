@@ -1,5 +1,5 @@
 declare module 'uuid-js' {
-  declare class UUID<V: 1|4> {
+  declare class UUID<V> {
     fromParts(timeLow: mixed, timeMid: mixed, timeHiAndVersion: mixed, clockSeqHiAndReserved: mixed, clockSeqLow: mixed, node: mixed): mixed;
     hex: string;
     toBytes(): Array<mixed>;
@@ -7,8 +7,8 @@ declare module 'uuid-js' {
     toURN(): string;
     version: V;
   }
-  declare function create(): UUID<1>;
-  declare function create<V: 1|4>(version: V): UUID<V>;
+  declare function create(version?: 4): UUID<4>;
+  declare function create(version: 1): UUID<1>;
   declare function firstFromTime(time: number): UUID<1>;
   declare function fromBinary(binary: mixed): UUID<*>;
   declare function fromBytes(bytes: number[]): UUID<*>;

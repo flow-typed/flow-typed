@@ -94,11 +94,13 @@ declare module 'radium' {
     userAgent?: string,
   };
   declare class Radium {
-    <T: ReactClass>(reactClass: T): T;
-    <T: ReactClass>(config: RadiumConfig): (reactClass: T) => T;
+    <T: ReactClass<any>>(reactClass: T): T;
+    <T: ReactClass<any>>(config: RadiumConfig): (reactClass: T) => T;
     keyframes(animationObject: Object, name?: string): string;
-    Style: React$Component<{scopeSelector: string}, {config?: ?RadiumConfig, rules: Object, scopeSelector?: ?string}>;
-    StyleRoot: React$Component;
+    // Style: React$Component<{scopeSelector: string}, {config?: ?RadiumConfig, rules: Object, scopeSelector?: ?string}>;
+    Style: any,
+    // StyleRoot: React$Component<any, any, any>;
+    StyleRoot: any,
     getState(state: Object, componentRef: string, property: ':active' | ':hover' | ':focus'): boolean;
   }
   declare var exports: Radium;

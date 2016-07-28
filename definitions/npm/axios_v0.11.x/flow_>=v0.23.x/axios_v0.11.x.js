@@ -27,7 +27,7 @@ declare module 'axios' {
   declare class AxiosInterceptorIdent extends String {}
   declare class AxiosRequestInterceptor<T> {
     use(
-      successHandler: ?(response: AxiosXHRConfig<T>) => Promise<AxiosXHRConfig> | AxiosXHRConfig,
+      successHandler: ?(response: AxiosXHRConfig<T>) => Promise<AxiosXHRConfig<*>> | AxiosXHRConfig<*>,
       errorHandler: ?(error: mixed) => mixed,
     ): AxiosInterceptorIdent;
     eject(ident: AxiosInterceptorIdent): void;

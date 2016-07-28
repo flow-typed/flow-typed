@@ -1,4 +1,4 @@
-type TestFunction = (() => void | Promise<mixed>) | ((done : () => void) => void);
+type TestFunction = ((done: () => void) => void | Promise<mixed>);
 
 declare var describe : {
     (name:string, spec:() => void): void;
@@ -7,8 +7,10 @@ declare var describe : {
     timeout(ms:number): void;
 };
 
+declare var context : typeof describe;
+
 declare var it : {
-    (name:string, spec:TestFunction): void;
+    (name:string, spec?:TestFunction): void;
     only(description:string, spec:TestFunction): void;
     skip(description:string, spec:TestFunction): void;
     timeout(ms:number): void;

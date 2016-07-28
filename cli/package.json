@@ -1,6 +1,6 @@
 {
   "name": "flow-typed",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.6",
   "description": "A repository of high quality flowtype definitions",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-eslint": "^6.0.4",
-    "babel-jest": "11.0.0",
+    "babel-jest": "^13.2.2",
     "babel-plugin-syntax-async-functions": "^6.5.0",
     "babel-plugin-syntax-trailing-function-commas": "^6.8.0",
     "babel-plugin-transform-flow-strip-types": "^6.7.0",
@@ -46,7 +46,7 @@
     "eslint": "^2.9.0",
     "eslint-plugin-flow-vars": "^0.4.0",
     "flow-bin": "^0.25",
-    "jest-cli": "11.0.0"
+    "jest-cli": "^13.2.3"
   },
   "dependencies": {
     "babel-polyfill": "^6.6.1",
@@ -54,7 +54,7 @@
     "lodash": "^4.11.2",
     "md5": "^2.1.0",
     "mkdirp": "^0.5.1",
-    "nodegit": "^0.13.0",
+    "nodegit": "^0.15.1",
     "request": "^2.69.0",
     "rx-lite": "4.0.8",
     "semver": "^5.1.0",

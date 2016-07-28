@@ -3,7 +3,7 @@ import { reduxForm, reducer } from 'redux-form';
 import React from 'react';
 
 
-const form = (): React$Element => (
+const form = (): React$Element<any> => (
   <form name="name">
     <input name="foobar" />
   </form>
