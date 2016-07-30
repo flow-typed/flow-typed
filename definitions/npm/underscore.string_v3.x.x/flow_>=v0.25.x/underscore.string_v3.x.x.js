@@ -91,7 +91,7 @@ declare module "underscore.string" {
     value(): string;
   }
 
-  declare var exports: {
+  declare module.exports: {
     // If we're called, we're a function that returns an instance of Chain
     (str: string): Chain,
 
