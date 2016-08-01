@@ -16,4 +16,7 @@ primus.forEach((spark: Primus$Spark, id: string, connections: any) => {
 // $ExpectError
 primus.remove(123);
 
-primus.use('testPlugin', {});
+
+primus.plugin('testPlugin', {});
+// $ExpectError Primus 5 syntax
+primus.use('testPliugin', {});
