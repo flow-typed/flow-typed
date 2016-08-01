@@ -2,7 +2,8 @@ declare module 'cache-manager' {
   declare type _CacheOptions = {
     ttl?: number,
   }
-  declare type CacheOptions = $Shape<_CacheOptions> | Object
+  /*declare type CacheOptions = $Shape<_CacheOptions> | Object*/
+  declare type CacheOptions = Object
   declare type CachingOptions = _CacheOptions & {
     ignoreCacheErrors?: bool,
     isCacheableValue?: (value: mixed) => bool,
