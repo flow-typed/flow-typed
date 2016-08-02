@@ -10,21 +10,28 @@ const strings: Observable<string> = numbers.map(x => x.toString());
 // $ExpectError
 const bogusStrings: Observable<string> = numbers.map(x => x);
 
-// TODO This should be an error but currently subscribe is not typed very well.
+// $ExpectError
 numbers.subscribe((x: string) => {});
 strings.subscribe((x: string) => {});
+
+(strings.elementAt(1): Observable<string>);
+(strings.elementAt(1, ''): Observable<string>);
+// $ExpectError
+strings.elementAt(1, 5)
 
 // $ExpectError -- need the typecast or the error appears at the declaration site
 numbers.merge((strings: Observable<string>));
 
-const combined: Observable<[number, string]> = Observable.combineLatest(
+const combined: Observable<{n: number, s: string}> = Observable.combineLatest(
   numbers,
   strings,
   (n, s) => ({n, s})
 );
 
+const combined2: Observable<[number, string]> = Observable.combineLatest(numbers, strings);
+
 // $ExpectError
-const combinedBad: Observable<[number, string]> = Observable.combineLatest(
+const combinedBad: Observable<{n: number, s: string}> = Observable.combineLatest(
   numbers,
   numbers,
   (n, s) => ({n, s})

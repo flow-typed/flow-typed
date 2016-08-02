@@ -36,7 +36,7 @@
   "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-eslint": "^6.0.4",
-    "babel-jest": "11.0.0",
+    "babel-jest": "^13.2.2",
     "babel-plugin-syntax-async-functions": "^6.5.0",
     "babel-plugin-syntax-trailing-function-commas": "^6.8.0",
     "babel-plugin-transform-flow-strip-types": "^6.7.0",
@@ -46,7 +46,7 @@
     "eslint": "^2.9.0",
     "eslint-plugin-flow-vars": "^0.4.0",
     "flow-bin": "^0.25",
-    "jest-cli": "11.0.0"
+    "jest-cli": "^13.2.3"
   },
   "dependencies": {
     "babel-polyfill": "^6.6.1",

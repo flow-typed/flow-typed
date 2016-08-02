@@ -1,7 +1,10 @@
 #!/bin/bash
 #set -o errexit
 
-cd cli && \
+cd definitions && \
+npm install && \
+npm test && \
+cd ../cli && \
 npm install && \
 ./node_modules/.bin/flow && \
 node dist/cli.js validate-defs && \

@@ -15,3 +15,5 @@ primus.forEach((spark: Primus$Spark, id: string, connections: any) => {
 });
 // $ExpectError
 primus.remove(123);
+
+primus.use('testPlugin', {});

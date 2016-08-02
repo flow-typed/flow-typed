@@ -104,7 +104,7 @@ declare module 'bunyan' {
         type: string;
         level?: number | string;
         path?: string;
-        stream?: stream$Writable | Stream;
+        stream?: stream$Writable | tty$WriteStream | Stream;
         closeOnExit?: boolean;
         period?: string;
         count?: number;

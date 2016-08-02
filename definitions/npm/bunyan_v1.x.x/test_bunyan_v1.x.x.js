@@ -6,6 +6,9 @@ const logger = Bunyan.createLogger({
         type: 'rotating-file',
         level: 'error',
         path: './error.log'
+    }, {
+        type: 'stream',
+        stream: process.stdout
     }],
     serializers: {
         ...Bunyan.stdSerializers,
