@@ -1,23 +1,68 @@
 // @flow
+import typeof Underscore from 'underscore';
+
 declare module 'backbone' {
-    declare type eventCallback<E: Event> = (event: E) => any;
+   declare var $: any;
+   declare var _: Underscore;
+   declare var version: string;
+   declare var emulateHTTP: boolean;
+   declare var emulateJSON: boolean;
 
-    declare class Events {
+   declare type eventCallback = (event: Event) => void;
+   declare type Attrs = {[name: string]: mixed};
+   declare type CRUDMethod = 'create' | 'read' | 'update' | 'delete';
+
+   declare class Events {
         // Not sure the best way of adding these to the declaration files
-        on: (event: string, callback: eventCallback<*>, context?: any) => void,
-        bind: (event: string, callback: eventCallback<*>, context?: any) => void,
-        off: (event: ?string, callback?: ?eventCallback<*>, context?: any) => void,
-        unbind: (event: ?string, callback?: ?eventCallback<*>, context?: any) => void,
-        trigger: (event: string, ...args: Array<any>) => void,
-        listenTo: (other: Class<Events>, event: string, callback: eventCallback<*>) => void,
-        listenTo: (other: Class<Events>, event: string, callback: eventCallback<*>) => void,
-        stopListening: (other?: ?Class<Events>, callback?: ?eventCallback<*>, context?: any) => void
-    }
+        on(event: string, callback: eventCallback, context?: Object): void;
+        bind(event: string, callback: eventCallback, context?: Object): void;
+        off(event: ?string, callback?: ?eventCallback, context?: Object): void;
+        unbind(event: ?string, callback?: ?eventCallback, context?: Object): void;
+        trigger(event: string, ...args?: Array<mixed>): void;
+        listenTo(other: Events, event: string, callback: eventCallback): void;
+        stopListening(other: Events, callback?: ?eventCallback, context?: Object): void;
+        static on(event: string, callback: eventCallback, context?: Object): void;
+        static bind(event: string, callback: eventCallback, context?: Object): void;
+        static off(event: ?string, callback?: ?eventCallback, context?: Object): void;
+        static unbind(event: ?string, callback?: ?eventCallback, context?: Object): void;
+        static trigger(event: string, ...args?: Array<mixed>): void;
+        static listenTo(other: Events, event: string, callback: eventCallback): void;
+        static stopListening(other: Events, callback?: ?eventCallback, context?: Object): void;
+   }
 
+   declare class Model mixins Events {
+       static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Model & P> & CP;
+       constructor(attributes?: Attrs, options?: Object): void;
+       attributes: Attrs;
+       cid: string;
+       cidPrefix: string;
+       chagned: ?Object,
+       validationError: ?Object;
+       initialize(): void;
+       toJSON(): Attrs;
+       sync: sync;
+       set(attrs: Attrs, options?: Object): this;
+       set(attr: string, value: mixed, options?: Object): this;
+       has(attr: string): boolean;
+       unset(attr: string, options?: { unset?: boolean }): this;
+       clear(options?: Object): this;
+       escape(attr: string): mixed;
+       previous(attr: string): mixed;
+       previousAttributes(): Attrs;
+       fetch(options?: Object): any;
+   }
+   declare class Collection mixins Events {
+       static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Collection & P> & CP;
+   }
+   declare class View mixins Events {
+       static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<View & P> & CP;
+   }
+   declare class Router mixins Events {
+       static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Router & P> & CP;
+   }
+   declare class History mixins Events {
+       static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<History & P> & CP;
+   }
 
-    declare module.exports: {
-        Events: Events
-    };
-
-
+   declare function sync(method: CRUDMethod, model: Model, options?: Object):  any;
 }
