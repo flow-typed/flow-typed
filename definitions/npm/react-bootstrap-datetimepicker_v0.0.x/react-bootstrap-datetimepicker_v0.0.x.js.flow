@@ -1,0 +1,26 @@
+declare module 'react-bootstrap-datetimepicker' {
+    declare type  DateTimeFieldProps = {
+        dateTime?: string | number,
+        onChange?: (value: string) => void,
+        format?: string,
+        inputProps?: Object,
+        inputFormat?: string,
+        defaultText?: string,
+        mode?: 'date' | 'datetime' | 'time',
+        minDate?: any,
+        maxDate?: any,
+        direction?: string,
+        showToday?: bool,
+        viewMode?: string,
+        size?: 'sm' | 'md' | 'lg',
+        daysOfWeekDisabled?: Array<number>,
+        zIndex?: number
+    };
+
+    declare class DateTimeField extends React$Component {
+        props: DateTimeFieldProps;
+        togglePicker(): void;
+        closePicker(): void;
+    }
+    declare export default Class<DateTimeField>;
+}
