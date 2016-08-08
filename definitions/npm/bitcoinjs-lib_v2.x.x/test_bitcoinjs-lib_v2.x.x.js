@@ -28,6 +28,11 @@ var p: Point = new Curve(pi, a, b, Gx, Gy, n, h).G;
 (new ECPair(null, p): ECPair);
 
 // $ExpectError
+(new ECPair(new Buffer(1)): ECPair);
+// $ExpectError
+(new ECPair(null, new Buffer(1)): ECPair);
+
+// $ExpectError
 (ECPair(new Buffer(1)): ECPair);
 
 (ECPair.fromPublicKeyBuffer(new Buffer(1)): ECPair);
