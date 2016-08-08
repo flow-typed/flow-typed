@@ -164,7 +164,7 @@ declare class moment$Moment {
   isoWeeksInYear(): number;
   get(string: string): number;
   set(unit: string, value: number): this;
-  set(options: { unit: string, value: number }): this;
+  set(options: { [unit: string]: number }): this;
   static max(...dates: Array<moment$Moment>): moment$Moment;
   static max(dates: Array<moment$Moment>): moment$Moment;
   static min(...dates: Array<moment$Moment>): moment$Moment;
@@ -173,9 +173,10 @@ declare class moment$Moment {
   subtract(value: number|moment$MomentDuration|moment$Moment|string, unit?: string): this;
   startOf(unit: string): this;
   endOf(unit: string): this;
-  local(): void;
-  utc(): void;
-  utcOffset(offset?: number|string): void;
+  local(): this;
+  utc(): this;
+  utcOffset(offset: number|string): void;
+  utcOffset(): number|string;
   format(format?: string): string;
   fromNow(removeSuffix?: bool): string;
   from(value: moment$Moment|string|number|Date|Array<number>, removePrefix?: bool): string;
