@@ -14,8 +14,18 @@ var BigInteger = require('bigi');
 // $ExpectError
 (crypto.hash256("hex"): string);
 
-(new ECPair(new Buffer(1)): ECPair);
-(new ECPair(null, new Buffer(1)): ECPair);
+import {Curve, Point} from 'ecurve';
+var pi = new BigInteger('1');
+var a = new BigInteger('1');
+var b = new BigInteger('1');
+var Gx = new BigInteger('1');
+var Gy = new BigInteger('1');
+var n = new BigInteger('1');
+var h = new BigInteger('1');
+var p: Point = new Curve(pi, a, b, Gx, Gy, n, h).G;
+
+(new ECPair(b): ECPair);
+(new ECPair(null, p): ECPair);
 
 // $ExpectError
 (ECPair(new Buffer(1)): ECPair);

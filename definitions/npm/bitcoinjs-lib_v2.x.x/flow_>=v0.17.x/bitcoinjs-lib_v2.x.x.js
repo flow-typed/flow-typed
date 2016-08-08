@@ -97,6 +97,8 @@ declare module 'ecurve' {
 }
 // ---------- copypasta end ---- 
 
+import {Point as ECPoint} from 'ecurve';
+
 declare module 'bitcoinjs-lib' {
 
     declare type Network = {
@@ -183,13 +185,13 @@ declare module 'bitcoinjs-lib' {
     }
     
     declare class ECPair {
-        d: ?Buffer;
-        Q: Buffer;
+        d: ?$npm$bigi$BigInteger;
+        Q: ECPoint;
         compressed: boolean;
         network: Network;
         getNetwork(): Network;
 
-        constructor(d: ?Buffer, Q: ?Buffer): void;
+        constructor(d: ?$npm$bigi$BigInteger, Q: ?ECPoint): void;
         getAddress(): string;
         getPublicKeyBuffer(): Buffer;
         static fromPublicKeyBuffer(buffer: Buffer): ECPair;
