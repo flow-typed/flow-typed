@@ -6,7 +6,7 @@ if (!global.__flowTypedBabelPolyfill) {
   global.__flowTypedBabelPolyfill = true;
 }
 
-import * as yargs from "yargs";
+import yargs from "yargs";
 import {fs, path} from "./lib/node.js";
 
 import * as Install from "./commands/install.js";
@@ -21,7 +21,7 @@ export function runCLI() {
     name: string,
     description: string,
     setup?: (yargs: Object) => Object,
-    run: (argv: Object) => Promise<number>,
+    run: (argv: typeof yargs) => Promise<number>,
   };
   const commands: Array<CommandModule> = [
     Install,
