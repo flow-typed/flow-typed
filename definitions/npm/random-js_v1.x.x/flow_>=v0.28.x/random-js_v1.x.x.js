@@ -3,8 +3,8 @@ declare module 'random-js' {
   }
   declare class MtEngine extends Engine {
     (): number;
-    seed(value?: any): this;
-    seedWithArray(value: any[]): this;
+    seed(value?: mixed): this;
+    seedWithArray(value: mixed[]): this;
     autoSeed(): this;
     discard(count?: number): this;
     getUseCount(): number;
