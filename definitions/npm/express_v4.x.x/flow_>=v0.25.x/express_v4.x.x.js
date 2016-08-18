@@ -60,7 +60,7 @@ declare module 'express' {
   };
   declare class Response extends http$ClientRequest mixins RequestResponseBase {
     headersSent: boolean;
-    locals: mixed;
+    locals: {[name: string]: mixed};
     append(field: string, value?: string): this;
     attachment(filename?: string): this;
     cookie(name: string, value: string, options?: CookieOptions): this;
@@ -71,7 +71,8 @@ declare module 'express' {
     jsonp(body?: mixed): this;
     links(links: {[name: string]: string}): this;
     location(path: string): this;
-    redirect(status?: number, path: string): this;
+    redirect(url: string, ...args: Array<void>): this;
+    redirect(status: number, url: string, ...args: Array<void>): this;
     render(view: string, locals?: mixed, callback: (err?: ?Error) => mixed): this;
     send(body?: mixed): this;
     sendFile(path: string, options?: SendFileOptions, callback?: (err?: ?Error) => mixed): this;
@@ -87,115 +88,51 @@ declare module 'express' {
   declare type Middleware =
     (req: Request, res: Response, next: NextFunction) => mixed |
     (error: ?Error, req : Request, res: Response, next: NextFunction) => mixed;
+  declare interface RouteMethodType<T> {
+    (middleware: Middleware): T;
+    (...middleware: Array<Middleware>): T;
+    (path: string|RegExp, ...middleware: Array<Middleware>): T;
+  }
+  declare interface RouterMethodType<T> {
+    (middleware: Middleware): T;
+    (...middleware: Array<Middleware>): T;
+    (path: string|RegExp, ...middleware: Array<Middleware>): T;
+    (path: string, router: Router): T;
+  }
   declare class Route {
-    get(middleware: Middleware): this;
-    get(...middelware: Array<Middleware>): this;
-    get(path: string, ...middelware: Array<Middleware>): this;
-
-    post(middleware: Middleware): this;
-    post(...middelware: Array<Middleware>): this;
-    post(path: string, ...middelware: Array<Middleware>): this;
-
-    put(middleware: Middleware): this;
-    put(...middelware: Array<Middleware>): this;
-    put(path: string, ...middelware: Array<Middleware>): this;
-
-    head(middleware: Middleware): this;
-    head(...middelware: Array<Middleware>): this;
-    head(path: string, ...middelware: Array<Middleware>): this;
-
-    delete(middleware: Middleware): this;
-    delete(...middelware: Array<Middleware>): this;
-    delete(path: string, ...middelware: Array<Middleware>): this;
-
-    options(middleware: Middleware): this;
-    options(...middelware: Array<Middleware>): this;
-    options(path: string, ...middelware: Array<Middleware>): this;
-
-    trace(middleware: Middleware): this;
-    trace(...middelware: Array<Middleware>): this;
-    trace(path: string, ...middelware: Array<Middleware>): this;
-
-    copy(middleware: Middleware): this;
-    copy(...middelware: Array<Middleware>): this;
-    copy(path: string, ...middelware: Array<Middleware>): this;
-
-    lock(middleware: Middleware): this;
-    lock(...middelware: Array<Middleware>): this;
-    lock(path: string, ...middelware: Array<Middleware>): this;
-
-    mkcol(middleware: Middleware): this;
-    mkcol(...middelware: Array<Middleware>): this;
-    mkcol(path: string, ...middelware: Array<Middleware>): this;
-
-    move(middleware: Middleware): this;
-    move(...middelware: Array<Middleware>): this;
-    move(path: string, ...middelware: Array<Middleware>): this;
-
-    purge(middleware: Middleware): this;
-    purge(...middelware: Array<Middleware>): this;
-    purge(path: string, ...middelware: Array<Middleware>): this;
-
-    propfind(middleware: Middleware): this;
-    propfind(...middelware: Array<Middleware>): this;
-    propfind(path: string, ...middelware: Array<Middleware>): this;
-
-    proppatch(middleware: Middleware): this;
-    proppatch(...middelware: Array<Middleware>): this;
-    proppatch(path: string, ...middelware: Array<Middleware>): this;
-
-    unlock(middleware: Middleware): this;
-    unlock(...middelware: Array<Middleware>): this;
-    unlock(path: string, ...middelware: Array<Middleware>): this;
-
-    report(middleware: Middleware): this;
-    report(...middelware: Array<Middleware>): this;
-    report(path: string, ...middelware: Array<Middleware>): this;
-
-    mkactivity(middleware: Middleware): this;
-    mkactivity(...middelware: Array<Middleware>): this;
-    mkactivity(path: string, ...middelware: Array<Middleware>): this;
-
-    checkout(middleware: Middleware): this;
-    checkout(...middelware: Array<Middleware>): this;
-    checkout(path: string, ...middelware: Array<Middleware>): this;
-
-    merge(middleware: Middleware): this;
-    merge(...middelware: Array<Middleware>): this;
-    merge(path: string, ...middelware: Array<Middleware>): this;
+    get: RouteMethodType<this>;
+    post: RouteMethodType<this>;
+    put: RouteMethodType<this>;
+    head: RouteMethodType<this>;
+    delete: RouteMethodType<this>;
+    options: RouteMethodType<this>;
+    trace: RouteMethodType<this>;
+    copy: RouteMethodType<this>;
+    lock: RouteMethodType<this>;
+    mkcol: RouteMethodType<this>;
+    move: RouteMethodType<this>;
+    purge: RouteMethodType<this>;
+    propfind: RouteMethodType<this>;
+    proppatch: RouteMethodType<this>;
+    unlock: RouteMethodType<this>;
+    report: RouteMethodType<this>;
+    mkactivity: RouteMethodType<this>;
+    checkout: RouteMethodType<this>;
+    merge: RouteMethodType<this>;
 
     // @TODO Missing 'm-search' but get flow illegal name error.
 
-    notify(middleware: Middleware): this;
-    notify(...middelware: Array<Middleware>): this;
-    notify(path: string, ...middelware: Array<Middleware>): this;
-
-    subscribe(middleware: Middleware): this;
-    subscribe(...middelware: Array<Middleware>): this;
-    subscribe(path: string, ...middelware: Array<Middleware>): this;
-
-    unsubscribe(middleware: Middleware): this;
-    unsubscribe(...middelware: Array<Middleware>): this;
-    unsubscribe(path: string, ...middelware: Array<Middleware>): this;
-
-    patch(middleware: Middleware): this;
-    patch(...middelware: Array<Middleware>): this;
-    patch(path: string, ...middelware: Array<Middleware>): this;
-
-    search(middleware: Middleware): this;
-    search(...middelware: Array<Middleware>): this;
-    search(path: string, ...middelware: Array<Middleware>): this;
-
-    connect(middleware: Middleware): this;
-    connect(...middelware: Array<Middleware>): this;
-    connect(path: string, ...middelware: Array<Middleware>): this;
+    notify: RouteMethodType<this>;
+    subscribe: RouteMethodType<this>;
+    unsubscribe: RouteMethodType<this>;
+    patch: RouteMethodType<this>;
+    search: RouteMethodType<this>;
+    connect: RouteMethodType<this>;
   }
   declare class Router extends Route {
     constructor(options?: RouterOptions): void;
 
-    use(middleware: Middleware): this;
-    use(...middelware: Array<Middleware>): this;
-    use(path: string, ...middelware: Array<Middleware>): this;
+    use: RouterMethodType<this>;
 
     route(path: string): Route;
   }
@@ -207,6 +144,8 @@ declare module 'express' {
     locals: {[name: string]: mixed};
     mountpath: string;
     listen(port: number, hostname?: string, backlog?: number, callback?: (err?: ?Error) => mixed): Server;
+    listen(port: number, hostname?: string, callback?: (err?: ?Error) => mixed): Server;
+    listen(port: number, callback?: (err?: ?Error) => mixed): Server;
     listen(path: string, callback?: (err?: ?Error) => mixed): Server;
     listen(handle: Object, callback?: (err?: ?Error) => mixed): Server;
     disable(name: string): void;

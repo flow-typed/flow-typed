@@ -2,12 +2,12 @@ type JestMockFn = {
   (...args: Array<any>): any;
   mock: {
     calls: Array<Array<any>>;
-    instances: any;
+    instances: mixed;
   };
   mockClear(): Function;
   mockImplementation(fn: Function): JestMockFn;
   mockImplementationOnce(fn: Function): JestMockFn;
-  mockReturnThis(): any;
+  mockReturnThis(): mixed;
   mockReturnValue(value: any): JestMockFn;
   mockReturnValueOne(value: any): JestMockFn;
 }
