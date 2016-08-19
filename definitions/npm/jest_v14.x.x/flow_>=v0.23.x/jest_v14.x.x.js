@@ -55,6 +55,8 @@ declare var jest: {
   clearAllTimers(): void;
   currentTestPath(): void;
   disableAutomock(): void;
+  doMock(moduleName: string, moduleFactory?: any): void;
+  dontMock(moduleName: string): void;
   enableAutomock(): void;
   fn(implementation?: Function): JestMockFn;
   genMockFromModule(moduleName: string): any;
@@ -65,6 +67,7 @@ declare var jest: {
   setMock(moduleName: string, moduleExports: any): void;
   unmock(moduleName: string): void;
   useFakeTimers(): void;
+  useRealTimers(): void;
 }
 
 declare var jasmine: {
