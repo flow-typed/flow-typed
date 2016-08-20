@@ -64,6 +64,7 @@ declare var jest: {
   runOnlyPendingTimers(): void;
   setMock(moduleName: string, moduleExports: any): void;
   unmock(moduleName: string): void;
+  useFakeTimers(): void;
 }
 
 declare var jasmine: {
