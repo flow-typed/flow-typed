@@ -12,6 +12,8 @@ type DndOptions<P> = {
   arePropsEqual?: (props: P, otherProps: P) => boolean
 };
 
+type ElementOrNode = React$Element<any> | HTMLElement;
+
 // Decorated Components
 // ----------------------------------------------------------------------
 declare class DndComponent<P> extends React$Component<any, P, any> {
@@ -87,14 +89,14 @@ type DragPreviewOptions = {
 }
 
 type ConnectDragSource = (
-  elementOrNode: React$Element<any>
+  elementOrNode: ElementOrNode
   options?: DragSourceOptions
-) => React$Element<any>;
+) => ElementOrNode;
 
 type ConnectDragPreview = (
-  elementOrNode: React$Element<any>
+  elementOrNode: ElementOrNode
   options?: DragPreviewOptions
-) => React$Element<any>;
+) => ElementOrNode;
 
 type DragSourceCollector = (
   connect: DragSourceConnector,
@@ -153,8 +155,8 @@ type DropTargetConnector = {
 }
 
 type ConnectDropTarget = (
-  elementOrNode: React$Element<any>
-) => React$Element<any>;
+  elementOrNode: ElementOrNode
+) => ElementOrNode;
 
 type DropTarget = <P, C: React$Component<any, P, any>>(
   types: DropTargetTypes<P>,

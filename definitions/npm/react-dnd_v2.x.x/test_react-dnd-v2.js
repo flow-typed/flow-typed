@@ -7,7 +7,7 @@ import { DragSource, DropTarget, DragLayer, DragDropContext } from 'react-dnd';
 // ----------------------------------------------------------------------
 type KnightProps = {
   connectDragSource: (e: React$Element<*>) => React$Element<*>,
-  connectDragPreview: (e: React$Element<*>) => React$Element<*>,
+  connectDragPreview: (e: Image) => Image,
   isDragging: boolean
 }
 
@@ -27,8 +27,8 @@ function knightCollect(connect, monitor) {
 
 class Knight extends React.Component<void, KnightProps, void> {
   componentDidMount() {
-    const img = React.DOM.img();
-    img.onload = () => this.props.connectDragPreview(img);
+    const img = new Image();
+    img.onload = () => { this.props.connectDragPreview(img) };
   }
 
   render() {
@@ -184,6 +184,38 @@ const DndBoard = DragDropContext({})(Board);
 (DndBoard: Class<ContextComponent<Board>>);
 // $ExpectError
 (DndBoard: string);
+
+// Test Functional React Components
+// ----------------------------------------------------------------------
+type TestProps = {
+  connectDragSource: (e: React$Element<*>) => React$Element<*>,
+  isDragging: boolean
+}
+
+const testSource = {
+  beginDrag() {
+    return {};
+  }
+};
+
+function testCollect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  };
+}
+
+const TestFuncComp = (props: TestProps) => {
+  const { connectDragSource, isDragging } = props;
+  return connectDragSource(
+    <div style={{
+      opacity: isDragging ? 0.5 : 1
+    }} />
+  );
+}
+
+const DndTestFuncComp = DragSource('test', testSource, testCollect)(TestFuncComp);
+(DndTestFuncComp: Class<DndComponent<TestFuncComp>>);
 
 // Test Decorated Components
 // ----------------------------------------------------------------------
