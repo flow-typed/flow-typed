@@ -12,7 +12,7 @@ type JestMockFn = {
   mockImplementationOnce(fn: Function): JestMockFn;
   mockReturnThis(): void;
   mockReturnValue(value: any): JestMockFn;
-  mockReturnValueOne(value: any): JestMockFn;
+  mockReturnValueOnce(value: any): JestMockFn;
 }
 
 declare function beforeEach(fn: Function): void;
