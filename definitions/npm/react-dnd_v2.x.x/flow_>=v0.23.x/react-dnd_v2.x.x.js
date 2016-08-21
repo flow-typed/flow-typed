@@ -14,38 +14,23 @@ type DndOptions<P> = {
 
 type ElementOrNode = React$Element<any> | HTMLElement;
 
-// Decorated Components
-// ----------------------------------------------------------------------
-declare class DndComponent<P> extends React$Component<any, P, any> {
-  static DecoratedComponent: Class<this>;
-  getDecoratedComponentInstance(): this;
-  getHandlerId(): Identifier;
-}
-
-declare class ContextComponent<P> extends React$Component<any, P, any> {
-  static DecoratedComponent: Class<this>;
-  getDecoratedComponentInstance(): this;
-  // getManager is not yet documented in ReactDnd Docs
-  getManager(): any;
-}
-
 // Drag Source
 // ----------------------------------------------------------------------
 type DragSourceType<P> =
   Identifier |
   (props: P) => Identifier;
 
-type DragSourceSpec<P> = {
+type DragSourceSpec<D, P, S> = {
   beginDrag: (
     props: P,
     monitor?: DragSourceMonitor,
-    component?: React$Component<any, P, any>
+    component?: React$Component<D, P, S>
   ) => Object,
 
   endDrag?: (
     props: P,
     monitor?: DragSourceMonitor,
-    component?: ?React$Component<any, P, any>
+    component?: ?React$Component<D, P, S>
   ) => void,
 
   canDrag?: (
@@ -103,12 +88,12 @@ type DragSourceCollector = (
   monitor: DragSourceMonitor
 ) => Object;
 
-type DragSource = <P, C: React$Component<any, P, any>>(
+type DragSource = <D, P, S, C: React$Component<D, P, S>>(
   type: DragSourceType<P>,
-  spec: DragSourceSpec<P>,
+  spec: DragSourceSpec<D, P, S>,
   collect: DragSourceCollector,
   options?: DndOptions<P>
-) => (component: Class<C>) => Class<DndComponent<P>>;
+) => (component: Class<C>) => Class<React$Component<D, P, S>>;
 
 // Drop Target
 // ----------------------------------------------------------------------
@@ -117,17 +102,17 @@ type DropTargetTypes<P> =
   Array<Identifier> |
   (props: P) => Identifier | Array<Identifier>;
 
-type DropTargetSpec<P> = {
+type DropTargetSpec<D, P, S> = {
   drop?: (
     props: P,
     monitor?: DropTargetMonitor,
-    component?: React$Component<any, P, any>
+    component?: React$Component<D, P, S>
   ) => ?Object,
 
   hover?: (
     props: P,
     monitor?: DropTargetMonitor,
-    component?: React$Component<any, P, any>
+    component?: React$Component<D, P, S>
   ) => void,
 
   canDrop?: (
@@ -158,15 +143,15 @@ type ConnectDropTarget = <T : ElementOrNode>(
   elementOrNode: T
 ) => ?T;
 
-type DropTarget = <P, C: React$Component<any, P, any>>(
+type DropTarget = <D, P, S, C: React$Component<D, P, S>>(
   types: DropTargetTypes<P>,
-  spec: DropTargetSpec<P>,
+  spec: DropTargetSpec<D, P, S>,
   collect: (
     connect: DropTargetConnector,
     monitor: DropTargetMonitor
   ) => Object,
   options?: DndOptions<P>
-) => (component: Class<C>) => Class<DndComponent<P>>;
+) => (component: Class<C>) => Class<React$Component<D, P, S>>;
 
 // Drag Layer
 // ----------------------------------------------------------------------
@@ -181,16 +166,16 @@ type DragLayerMonitor = {
   getSourceClientOffset: () => ClientOffset;
 }
 
-type DragLayer = <P, C: React$Component<any, P, any>>(
+type DragLayer = <D, P, S, C: React$Component<D, P, S>>(
   collect: (monitor: DragLayerMonitor) => Object,
   options?: DndOptions<P>
-) => (component: Class<C>) => Class<DndComponent<P>>;
+) => (component: Class<C>) => Class<React$Component<D, P, S>>;
 
 // Drag Drop Context
 // ----------------------------------------------------------------------
-type DragDropContext = <P, C: React$Component<any, P, any>>(
+type DragDropContext = <D, P, S, C: React$Component<D, P, S>>(
   backend: mixed
-) => (component: Class<C>) => Class<ContextComponent<P>>;
+) => (component: Class<C>) => Class<React$Component<D, P, S>>;
 
 // Top-level API
 // ----------------------------------------------------------------------

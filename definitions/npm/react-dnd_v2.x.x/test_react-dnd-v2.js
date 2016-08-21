@@ -6,8 +6,8 @@ import { DragSource, DropTarget, DragLayer, DragDropContext } from 'react-dnd';
 // Test Drag Source
 // ----------------------------------------------------------------------
 type KnightProps = {
-  connectDragSource: (e: React$Element<*>) => React$Element<*>,
-  connectDragPreview: (e: Image) => Image,
+  connectDragSource: (e: React$Element<*>) => ?React$Element<*>,
+  connectDragPreview: (e: Image) => ?Image,
   isDragging: boolean
 }
 
@@ -25,7 +25,11 @@ function knightCollect(connect, monitor) {
   };
 }
 
-class Knight extends React.Component<void, KnightProps, void> {
+class Knight extends React.Component {
+  props: KnightProps;
+
+  static defaultProps: KnightProps;
+
   componentDidMount() {
     const img = new Image();
     img.onload = () => { this.props.connectDragPreview(img) };
@@ -45,9 +49,14 @@ class Knight extends React.Component<void, KnightProps, void> {
     );
   }
 }
+Knight.defaultProps = {
+  connectDragSource: () => null,
+  connectDragPreview: () => null,
+  isDragging: false
+};
 
 const DndKnight = DragSource('knight', knightSource, knightCollect)(Knight);
-(DndKnight: Class<DndComponent<KnightProps>>);
+(DndKnight: Class<React$Component<KnightProps, KnightProps, void>>);
 // $ExpectError
 (DndKnight: number);
 
@@ -65,7 +74,7 @@ type BoardSquareProps = {
   y: number,
   isOver: boolean,
   canDrop: boolean,
-  connectDropTarget: (e: React$Element<*>) => React$Element<*>
+  connectDropTarget: (e: React$Element<*>) => ?React$Element<*>
 };
 
 const boardSquareTarget = {
@@ -86,7 +95,15 @@ function boardSquareCollect(connect, monitor) {
   };
 }
 
-class Square extends React.Component<void, { black: boolean }, void> {
+type SquareProps = {
+  black: boolean
+};
+
+class Square extends React.Component {
+  props: SquareProps;
+
+  static defaultProps: SquareProps;
+
   render() {
     const { black } = this.props;
     const fill = black ? 'black' : 'white';
@@ -94,8 +111,15 @@ class Square extends React.Component<void, { black: boolean }, void> {
     return <div style={{ backgroundColor: fill }} />;
   }
 }
+Square.defaultProps = {
+  black: true
+};
 
-class BoardSquare extends React.Component<void, BoardSquareProps, void> {
+class BoardSquare extends React.Component {
+  props: BoardSquareProps;
+
+  static defaultProps: BoardSquareProps;
+
   renderOverlay(color: string) {
     return (
       <div style={{
@@ -129,9 +153,16 @@ class BoardSquare extends React.Component<void, BoardSquareProps, void> {
     );
   }
 }
+BoardSquare.defaultProps = {
+  x: 0,
+  y: 0,
+  isOver: false,
+  canDrop: false,
+  connectDropTarget: () => null
+};
 
 const DndBoardSquare = DropTarget('boardsquare', boardSquareTarget, boardSquareCollect)(BoardSquare);
-(DndBoardSquare: Class<DndComponent<BoardSquareProps>>);
+(DndBoardSquare: Class<React$Component<BoardSquareProps, BoardSquareProps, void>>);
 // $ExpectError
 (DndBoardSquare: string);
 
@@ -149,19 +180,29 @@ function dragLayerCollect(monitor) {
   };
 }
 
-function CustomDragLayer(props: CustomDragLayerProps) {
-  const { title, isDragging } = props;
-  if (!isDragging) {
-    return null;
-  }
+class CustomDragLayer extends React.Component {
+  props: CustomDragLayerProps;
 
-  return (
-    <div>this.props.title</div>
-  );
+  static defaultProps: CustomDragLayerProps;
+
+  render() {
+    const { title, isDragging } = this.props;
+    if (!isDragging) {
+      return null;
+    }
+
+    return (
+      <div>this.props.title</div>
+    );
+  }
 }
+CustomDragLayer.defaultProps = {
+  isDragging: false,
+  title: ''
+};
 
 const DndCustomDragLayer = DragLayer(dragLayerCollect)(CustomDragLayer);
-(DndCustomDragLayer: Class<DndComponent<CustomDragLayer>>);
+(DndCustomDragLayer: Class<React$Component<CustomDragLayerProps, CustomDragLayerProps, void>>);
 // $ExpectError
 (DndCustomDragLayer: number);
 
@@ -172,16 +213,26 @@ type BoardProps = {
   height: number
 };
 
-function Board(props: BoardProps) {
-  const styles = {
-    width: props.width,
-    height: props.height
+class Board extends React.Component {
+  props: BoardProps;
+
+  static defaultProps: BoardProps;
+
+  render() {
+    const styles = {
+      width: this.props.width,
+      height: this.props.height
+    }
+    return <div style={ styles } />;
   }
-  return <div style={ styles } />;
 }
+Board.defaultProps = {
+  width: 400,
+  height: 400
+};
 
 const DndBoard = DragDropContext({})(Board);
-(DndBoard: Class<ContextComponent<Board>>);
+(DndBoard: Class<React$Component<BoardProps, BoardProps, void>>);
 // $ExpectError
 (DndBoard: string);
 
@@ -215,13 +266,4 @@ const TestFuncComp = (props: TestProps) => {
 }
 
 const DndTestFuncComp = DragSource('test', testSource, testCollect)(TestFuncComp);
-(DndTestFuncComp: Class<DndComponent<TestFuncComp>>);
-
-// Test Decorated Components
-// ----------------------------------------------------------------------
-(DndKnight.DecoratedComponent: Class<DndKnight>);
-const dk = <DndKnight />;
-
-// TODO: is it possible to type check the following? type of dk is React$Element<{}>
-// (dk.getDecoratedComponentInstance(): DndKnight);
-// (dk.getHandlerId(): string);
+(DndTestFuncComp: Class<React$Component<void, TestProps, void>>);
