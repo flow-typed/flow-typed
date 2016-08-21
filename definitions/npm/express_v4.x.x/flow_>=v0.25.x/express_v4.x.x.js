@@ -73,7 +73,7 @@ declare module 'express' {
     location(path: string): this;
     redirect(url: string, ...args: Array<void>): this;
     redirect(status: number, url: string, ...args: Array<void>): this;
-    render(view: string, locals?: mixed, callback: (err?: ?Error) => mixed): this;
+    render(view: string, locals?: mixed, callback: (err?: ?Error, html: string) => mixed): this;
     send(body?: mixed): this;
     sendFile(path: string, options?: SendFileOptions, callback?: (err?: ?Error) => mixed): this;
     sendStatus(statusCode: number): this;
