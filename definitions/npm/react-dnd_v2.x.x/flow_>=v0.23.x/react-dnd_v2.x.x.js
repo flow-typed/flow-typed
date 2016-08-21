@@ -88,15 +88,15 @@ type DragPreviewOptions = {
   anchorY?: number
 }
 
-type ConnectDragSource = (
-  elementOrNode: ElementOrNode
+type ConnectDragSource = <T : ElementOrNode>(
+  elementOrNode: T,
   options?: DragSourceOptions
-) => ElementOrNode;
+) => ?T;
 
-type ConnectDragPreview = (
-  elementOrNode: ElementOrNode
+type ConnectDragPreview = <T : ElementOrNode>(
+  elementOrNode: T,
   options?: DragPreviewOptions
-) => ElementOrNode;
+) => ?T;
 
 type DragSourceCollector = (
   connect: DragSourceConnector,
@@ -154,9 +154,9 @@ type DropTargetConnector = {
   dropTarget: () => ConnectDropTarget
 }
 
-type ConnectDropTarget = (
-  elementOrNode: ElementOrNode
-) => ElementOrNode;
+type ConnectDropTarget = <T : ElementOrNode>(
+  elementOrNode: T
+) => ?T;
 
 type DropTarget = <P, C: React$Component<any, P, any>>(
   types: DropTargetTypes<P>,
