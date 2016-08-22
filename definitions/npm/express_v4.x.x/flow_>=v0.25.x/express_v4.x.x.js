@@ -86,8 +86,8 @@ declare module 'express' {
   declare type $Request = Request;
   declare type NextFunction = (err?: ?Error) => mixed;
   declare type Middleware =
-    (req: Request, res: Response, next: NextFunction) => mixed |
-    (error: ?Error, req : Request, res: Response, next: NextFunction) => mixed;
+    ((req: Request, res: Response, next: NextFunction) => mixed) |
+    ((error: ?Error, req : Request, res: Response, next: NextFunction) => mixed);
   declare interface RouteMethodType<T> {
     (middleware: Middleware): T;
     (...middleware: Array<Middleware>): T;
