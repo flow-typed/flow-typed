@@ -4,85 +4,90 @@ import { api, Predicates } from 'prismic.io';
 
 function geoPointElTest(el) {
   return {
-    latitude: (el.latitude : number),
+    test_latitude: (el.latitude : number),
     // $ExpectError
-    $latitude: (el.latitude : string),
-    longitude: (el.longitude : number),
+    test_invalid_latitude: (el.latitude : string),
+    test_longitude: (el.longitude : number),
   };
 }
 
 function linkElTest(el) {
   return {
-    _url: el.url(),
+    test_url: el.url(),
   };
 }
 
 function imageViewTest(el) {
   return {
-    url: (el.url : string),
+    test_url: (el.url : string),
     // $ExpectError
-    $url: (el.url : boolean),
-    width: (el.width : number),
-    height: (el.height : number),
-    alt: (el.alt : string),
-    _ratio: (el.ratio() : number),
+    test_invalid_url: (el.url : boolean),
+    test_width: (el.width : number),
+    test_height: (el.height : number),
+    test_alt: (el.alt : string),
+    test_ratio: (el.ratio() : number),
   };
 }
 
 function imageElTest(el) {
   return {
-    main: imageViewTest(el.main),
-    url: (el.url : string),
+    test_main: imageViewTest(el.main),
+    test_url: (el.url : string),
     // $ExpectError
-    $url: (el.url : boolean),
-    views: imageViewTest(el.views.foo),
+    test_invalid_url: (el.url : boolean),
+    test_views: imageViewTest(el.views.foo),
   };
 }
 
 function structuredTextElTest(el) {
   return {
-    blocks: (el.blocks : Array<Object>),
+    test_blocks: (el.blocks : Array<Object>),
     // $ExpectError
-    $blocks: (el.blocks : Array<string>),
-    _getTitle: (() => {
+    test_invalid_blocks: (el.blocks : Array<string>),
+    test_getTitle: (() => {
       const x = el.getTitle();
       return !x ? null : (x.blocks : Array<Object>);
     })(),
-    _getFirstParagraph: (() => {
+    test_getFirstParagraph: (() => {
       const x = el.getFirstParagraph();
       return !x ? null : (x.blocks : Array<Object>);
     })(),
-    _getParagraphs: (el.getParagraphs().map(p => (p.blocks : Array<Object>))),
-    _getParagraph: (el.getParagraph(1).blocks : Array<Object>),
-    _getFirstImage: (() => {
+    test_getParagraphs: (el.getParagraphs().map(p => (p.blocks : Array<Object>))),
+    test_getParagraph: (el.getParagraph(1).blocks : Array<Object>),
+    test_getFirstImage: (() => {
       const x = el.getFirstImage();
       return !x ? null : imageViewTest(x);
     })(),
+    test_asHtml: (() => {
+      return el.asHtml((doc) => doc.id, (el, content) => content || 'foo')
+    }),
+    // $ExpectError
+    test_invalid_asHtml: (() => el.asHtml((doc) => doc.id, (el, content) => true))
   };
 }
 
 function groupDocTest(el) {
   return {
-    data: (el.data : Object),
+    test_data: (el.data : Object),
     // $ExpectError
-    $data: (el.data : Array<number>),
-    fragments: (el.fragments : Array<Object>),
+    test_invalid_data: (el.data : Array<number>),
+    test_fragments: (el.fragments : Array<Object>),
   };
 }
 
 function groupElTest(el) {
   return {
-    value: el.value.map(groupDocTest),
-    _toArray: el.toArray().map(groupDocTest),
-    _getFirstImage: (() => {
+    test_value: el.value.map(groupDocTest),
+    test_toArray: el.toArray().map(groupDocTest),
+    test_getFirstImage: (() => {
       const imageEl = el.getFirstImage();
       return !imageEl ? null : imageElTest(imageEl);
     })(),
-    _getFirstTitle: (() => {
+    test_getFirstTitle: (() => {
       const structuredTextEl = el.getFirstTitle();
       return !structuredTextEl ? null : structuredTextElTest(structuredTextEl);
     })(),
-    _getFirstParagraph: (() => {
+    test_getFirstParagraph: (() => {
       const structuredTextEl = el.getFirstParagraph();
       return !structuredTextEl ? null : structuredTextElTest(structuredTextEl);
     })(),
@@ -91,20 +96,20 @@ function groupElTest(el) {
 
 function sliceTest(el) {
   return {
-    sliceType: (el.sliceType : string),
+    test_sliceType: (el.sliceType : string),
     // $ExpectError
-    $sliceType: (el.sliceType : Array<boolean>),
-    label: (el.label : string),
-    value: (el.value : Object),
-    _getFirstImage: (() => {
+    test_invalid_sliceType: (el.sliceType : Array<boolean>),
+    test_label: (el.label : string),
+    test_value: (el.value : Object),
+    test_getFirstImage: (() => {
       const imageEl = el.getFirstImage();
       return !imageEl ? null : imageElTest(imageEl);
     })(),
-    _getFirstTitle: (() => {
+    test_getFirstTitle: (() => {
       const structuredTextEl = el.getFirstTitle();
       return !structuredTextEl ? null : structuredTextElTest(structuredTextEl);
     })(),
-    _getFirstParagraph: (() => {
+    test_getFirstParagraph: (() => {
       const structuredTextEl = el.getFirstParagraph();
       return !structuredTextEl ? null : structuredTextElTest(structuredTextEl);
     })(),
@@ -113,17 +118,17 @@ function sliceTest(el) {
 
 function sliceZoneElTest(el) {
   return {
-    values: el.value.map(sliceTest),
-    slices: el.slices.map(sliceTest),
-    _getFirstImage: (() => {
+    test_values: el.value.map(sliceTest),
+    test_slices: el.slices.map(sliceTest),
+    test_getFirstImage: (() => {
       const imageEl = el.getFirstImage();
       return !imageEl ? null : imageElTest(imageEl);
     })(),
-    _getFirstTitle: (() => {
+    test_getFirstTitle: (() => {
       const structuredTextEl = el.getFirstTitle();
       return !structuredTextEl ? null : structuredTextElTest(structuredTextEl);
     })(),
-    _getFirstParagraph: (() => {
+    test_getFirstParagraph: (() => {
       const structuredTextEl = el.getFirstParagraph();
       return !structuredTextEl ? null : structuredTextElTest(structuredTextEl);
     })(),
@@ -132,64 +137,64 @@ function sliceZoneElTest(el) {
 
 function linkedDocumentTest(el) {
   return {
-    document: (el.document : Object),
+    test_document: (el.document : Object),
     // $ExpectError
-    $document: (el.document : Array<string>),
-    id: (el.id : string),
-    uid: (el.uid : ?string),
-    tags: (el.tags : Array<string>),
-    slug: (el.slug : string),
-    type: (el.type : string),
-    fragments: (el.fragments : Array<Object>),
-    isBroken: (el.isBroken : boolean),
+    test_invalid_document: (el.document : Array<string>),
+    test_id: (el.id : string),
+    test_uid: (el.uid : ?string),
+    test_tags: (el.tags : Array<string>),
+    test_slug: (el.slug : string),
+    test_type: (el.type : string),
+    test_fragments: (el.fragments : Array<Object>),
+    test_isBroken: (el.isBroken : boolean),
   };
 }
 
 function documentTest(doc) {
   return {
-    id: (doc.id : string),
+    test_id: (doc.id : string),
     // $ExpectError
-    $id: (el.id : Array<Object>),
-    uid: (doc.uid : ?string),
-    type: (doc.type : string),
-    href: (doc.href : string),
-    tags: (doc.tags : Array<string>),
-    slug: (doc.slug : string),
-    slugs: (doc.tags : Array<string>),
-    data: (doc.data : Object),
-    _get: (doc.get('foo') : ?Object),
-    _getAll: (doc.getAll('foo') : Array<Object>),
-    _getImage: (() => {
+    test_invalid_id: (el.id : Array<Object>),
+    test_uid: (doc.uid : ?string),
+    test_type: (doc.type : string),
+    test_href: (doc.href : string),
+    test_tags: (doc.tags : Array<string>),
+    test_slug: (doc.slug : string),
+    test_slugs: (doc.tags : Array<string>),
+    test_data: (doc.data : Object),
+    test_get: (doc.get('foo') : ?Object),
+    test_getAll: (doc.getAll('foo') : Array<Object>),
+    test_getImage: (() => {
       const imageEl = doc.getImage('foo');
       return !imageEl ? null : imageElTest(imageEl);
     })(),
-    _getAllImages: doc.getAllImages({}).map(imageElTest),
-    _getFirstImage: (() => {
+    test_getAllImages: doc.getAllImages({}).map(imageElTest),
+    test_getFirstImage: (() => {
       const imageEl = doc.getFirstImage();
       return !imageEl ? null : imageElTest(imageEl);
     })(),
-    _getFirstTitle: (() => {
+    test_getFirstTitle: (() => {
       const structuredTextEl = doc.getFirstTitle();
       return !structuredTextEl ? null : structuredTextElTest(structuredTextEl);
     })(),
-    _getFirstParagraph: (() => {
+    test_getFirstParagraph: (() => {
       const structuredTextEl = doc.getFirstParagraph();
       return !structuredTextEl ? null : structuredTextElTest(structuredTextEl);
     })(),
-    _getImageView: (() => {
+    test_getImageView: (() => {
       const imageView = doc.getImageView('foo', 'foo');
       return !imageView ? null : imageViewTest(imageView);
     })(),
-    _getAllImageViews: doc.getAllImageViews('foo', 'foo').map(imageViewTest),
-    _getTimestamp: (() => {
+    test_getAllImageViews: doc.getAllImageViews('foo', 'foo').map(imageViewTest),
+    test_getTimestamp: (() => {
       const timestamp = doc.getTimestamp('foo');
       return !timestamp ? null : (timestamp : Date);
     })(),
-    _getDate: (() => {
+    test_getDate: (() => {
       const date = doc.getDate('foo');
       return !date ? null : (date : Date);
     })(),
-    _getBoolean: (() => {
+    test_getBoolean: (() => {
       const bool = doc.getBoolean('foo');
       return !bool ? null : (bool : boolean);
     })(),
@@ -201,33 +206,33 @@ function documentTest(doc) {
     //   }
     //   return null;
     // })(),
-    _getStructuredText: (() => {
+    test_getStructuredText: (() => {
       const structuredTextEl = doc.getStructuredText('foo');
       return !structuredTextEl ? null : structuredTextElTest(structuredTextEl);
     })(),
-    _getLink: (() => {
+    test_getLink: (() => {
       const linkEl = doc.getLink('foo');
       return !linkEl ? null : linkElTest(linkEl);
     })(),
-    _getNumber: (() => {
+    test_getNumber: (() => {
       const num = doc.getNumber('foo');
       return !num ? null : (num : number);
     })(),
-    _getColor: (() => {
+    test_getColor: (() => {
       const color = doc.getColor('foo');
       return !color ? null : (color : string);
     })(),
-    _getGeoPoint: (() => {
+    test_getGeoPoint: (() => {
       const geoPointEl = doc.getGeoPoint('foo');
       return !geoPointEl ? null : geoPointElTest(geoPointEl);
     })(),
-    _getGroup: (() => {
+    test_getGroup: (() => {
       const groupEl = doc.getGroup('foo');
       return !groupEl ? null : groupElTest(groupEl);
     })(),
-    _getHtml: (doc.getHtml('foo', () => undefined) : string),
-    _linkedDocuments: doc.linkedDocuments().map(linkedDocumentTest),
-    _getSliceZone: (() => {
+    test_getHtml: (doc.getHtml('foo', doc => doc.id) : string),
+    test_linkedDocuments: doc.linkedDocuments().map(linkedDocumentTest),
+    test_getSliceZone: (() => {
       const sliceZoneEl = doc.getSliceZone('foo');
       return !sliceZoneEl ? null : sliceZoneElTest(sliceZoneEl);
     })(),

@@ -1,5 +1,5 @@
 declare module 'prismic.io' {
-  declare type LinkResolver = (...args: any) => any;
+  declare type LinkResolver = (doc: Document) => string;
 
   declare type DaysOfWeek =
     | 'Monday'
@@ -160,6 +160,7 @@ declare module 'prismic.io' {
   }
   declare type $Group = Group;
 
+  declare type HtmlSerializer = (element : Object, content : ?string) => ?string;
   declare class StructuredText mixins Htmlable, Textable {
     constructor(blocks: Array<Object>) : void;
     blocks: Array<Object>;
@@ -168,6 +169,11 @@ declare module 'prismic.io' {
     getParagraphs() : Array<StructuredText>;
     getParagraph(n: number) : StructuredText;
     getFirstImage() : ?ImageView;
+
+    // StructuredText has an extended custom version of asHtml that allows
+    // you to provide an htmlSerializer
+    // @see https://prismic.io/docs/fields/structuredtext#integrate?lang=javascript
+    asHtml(resolver?: LinkResolver, serializer?: HtmlSerializer) : string;
   }
   declare type $StructuredText = StructuredText;
 
