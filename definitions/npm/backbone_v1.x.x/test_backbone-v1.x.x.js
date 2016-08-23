@@ -1,5 +1,6 @@
 // @flow
 import Backbone from 'backbone';
+const { Model } = Backbone;
 
 (Backbone.version: string);
 
@@ -8,7 +9,7 @@ import Backbone from 'backbone';
 (Backbone._: any);
 
 (Backbone.Events.on: Function);
-interface Fooable extends Backbone.Model {
+interface Fooable extends Model {
   foo(): string;
   view: Backbone.View;
 };

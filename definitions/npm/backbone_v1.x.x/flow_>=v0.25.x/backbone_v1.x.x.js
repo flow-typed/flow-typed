@@ -1,4 +1,3 @@
-// @flow
 declare module 'backbone' {
   declare var $: any; // @TODO this is no correct, but it is difficult to require another definition from here.
   declare var _: any; // @TODO this is no correct, but it is difficult to require another definition from here.
@@ -30,6 +29,10 @@ declare module 'backbone' {
   declare type ModelOpts = {
     collection?: Collection,
     parse?: Function
+  };
+  declare type FetchOpts = {
+    success?: Function,
+    error?: Function
   };
   declare class Model mixins Events {
     static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Model & P> & CP;
