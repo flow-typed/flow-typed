@@ -30,10 +30,6 @@ declare module 'backbone' {
     collection?: Collection,
     parse?: Function
   };
-  declare type FetchOpts = {
-    success?: Function,
-    error?: Function
-  };
   declare class Model mixins Events {
     static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Model & P> & CP;
     constructor(attributes?: Attrs, options?: ModelOpts): void;
@@ -48,7 +44,7 @@ declare module 'backbone' {
     initialize(): void;
     toJSON(): Attrs;
     sync: sync;
-    fetch(options: FetchOpts):  XMLHttpRequest;
+    fetch(options: Object):  XMLHttpRequest;
     set(attrs: Attrs, options?: Object): this;
     set(attr: string, value: mixed, options?: Object): this;
     has(attr: string): boolean;
