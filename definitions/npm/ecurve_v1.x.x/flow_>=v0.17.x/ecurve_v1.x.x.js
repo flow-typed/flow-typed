@@ -36,62 +36,66 @@ declare module 'bigi' {
 }
 // ---------- copypasta end ---- 
 
-declare module 'ecurve' {
+declare class $npm$ecurve$Curve {
+  p: $npm$bigi$BigInteger;
+  a: $npm$bigi$BigInteger;
+  b: $npm$bigi$BigInteger;
+  G: $npm$ecurve$Point;
+  n: $npm$bigi$BigInteger;
+  h: $npm$bigi$BigInteger;
 
-  declare class Curve {
-    p: $npm$bigi$BigInteger;
-    a: $npm$bigi$BigInteger;
-    b: $npm$bigi$BigInteger;
-    G: Point;
-    n: $npm$bigi$BigInteger;
-    h: $npm$bigi$BigInteger;
+  constructor(
+    p: $npm$bigi$BigInteger,
+    a: $npm$bigi$BigInteger,
+    b: $npm$bigi$BigInteger,
+    Gx: $npm$bigi$BigInteger,
+    Gy: $npm$bigi$BigInteger,
+    n: $npm$bigi$BigInteger,
+    h: $npm$bigi$BigInteger
+  ): void;
 
-    constructor(
-      p: $npm$bigi$BigInteger,
-      a: $npm$bigi$BigInteger,
-      b: $npm$bigi$BigInteger,
-      Gx: $npm$bigi$BigInteger,
-      Gy: $npm$bigi$BigInteger,
-      n: $npm$bigi$BigInteger,
-      h: $npm$bigi$BigInteger
-    ): void;
+  infinity: $npm$ecurve$Point;
+  isInfinity(point: $npm$ecurve$Point): boolean;
+  validate(a: $npm$ecurve$Point): boolean;
+  isOnCurve(a: $npm$ecurve$Point): boolean;
+  pointFromX(odd: boolean, x: $npm$ecurve$Point): $npm$ecurve$Point;
+}
 
-    infinity: Point;
-    isInfinity(point: Point): boolean;
-    validate(a: Point): boolean;
-    isOnCurve(a: Point): boolean;
-    pointFromX(odd: boolean, x: Point): Point;
-  }
-
-  declare class Point {
-    constructor(
-      curve: Curve,
-      x: $npm$bigi$BigInteger,
-      y: $npm$bigi$BigInteger,
-      z: $npm$bigi$BigInteger
-    ): void;
-    
-    x: $npm$bigi$BigInteger;
-    y: $npm$bigi$BigInteger;
-    z: $npm$bigi$BigInteger;
-
-    zInv: $npm$bigi$BigInteger;
-    affineX: $npm$bigi$BigInteger;
-    affineY: $npm$bigi$BigInteger;
+declare class $npm$ecurve$Point {
+  constructor(
+    curve: $npm$ecurve$Curve,
+    x: $npm$bigi$BigInteger,
+    y: $npm$bigi$BigInteger,
+    z: $npm$bigi$BigInteger
+  ): void;
   
-    static fromAffine(curve: Curve, x: $npm$bigi$BigInteger, y: $npm$bigi$BigInteger): Point;
-    equals(other: Point): boolean;
-    negate(): Point;
-    add(other: Point): Point;
-    twice(): Point;
-    multiply(k: $npm$bigi$BigInteger): Point;
-    multiplyTwo(j: $npm$bigi$BigInteger, x: Point, k: $npm$bigi$BigInteger): Point;
+  x: $npm$bigi$BigInteger;
+  y: $npm$bigi$BigInteger;
+  z: $npm$bigi$BigInteger;
 
-    static decodeFrom(curve: Curve, buffer: Buffer): Point;
-    getEncoded(compressed: boolean): Buffer;
-   
-    toString(): string;
-  }
+  zInv: $npm$bigi$BigInteger;
+  affineX: $npm$bigi$BigInteger;
+  affineY: $npm$bigi$BigInteger;
 
+  static fromAffine(curve: $npm$ecurve$Curve, x: $npm$bigi$BigInteger, y: $npm$bigi$BigInteger): $npm$ecurve$Point;
+  equals(other: $npm$ecurve$Point): boolean;
+  negate(): $npm$ecurve$Point;
+  add(other: $npm$ecurve$Point): $npm$ecurve$Point;
+  twice(): $npm$ecurve$Point;
+  multiply(k: $npm$bigi$BigInteger): $npm$ecurve$Point;
+  multiplyTwo(j: $npm$bigi$BigInteger, x: $npm$ecurve$Point, k: $npm$bigi$BigInteger): $npm$ecurve$Point;
+
+  static decodeFrom(curve: $npm$ecurve$Curve, buffer: Buffer): $npm$ecurve$Point;
+  getEncoded(compressed: boolean): Buffer;
+  
+  toString(): string;
+}
+
+declare module 'ecurve' {
+  
+  declare var Point: typeof $npm$ecurve$Point;
+  
+  declare var Curve: typeof $npm$ecurve$Curve;
+  
   declare function getCurveByName(name: string): ?Curve;
 }

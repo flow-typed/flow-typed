@@ -31,7 +31,7 @@ declare module 'yargs' {
   declare type ModuleObject = {
     command: string,
     describe: string,
-    builder: {[key: string]: Options} | (yargsInstance: Yargs) => void,
+    builder: {[key: string]: Options} | (yargsInstance: Yargs) => mixed,
     handler: (argv: Argv) => void,
   };
 
@@ -46,7 +46,7 @@ declare module 'yargs' {
     command(
       cmd: string,
       desc: string|false,
-      builder?: {[key: string]: Options} | (yargsInstance: Yargs) => void,
+      builder?: {[key: string]: Options} | (yargsInstance: Yargs) => mixed,
       handler?: Function
     ): this;
 

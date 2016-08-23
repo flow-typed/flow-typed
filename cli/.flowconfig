@@ -12,4 +12,4 @@ experimental.const_params=true
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 
 [version]
-^0.25.0
+^0.30.0

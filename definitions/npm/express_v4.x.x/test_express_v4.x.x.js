@@ -126,3 +126,13 @@ app.use('/failure', (req: $Request, res: $Response) => {
   // $ExpectError
   res.redirect();
 });
+
+app.use((err: ?Error, req, res, next) => {
+    // test req
+    req.accepts('accepted/type');
+    // test response
+    res.redirect('/somewhere');
+    // test next
+    next();
+    next(err);
+});

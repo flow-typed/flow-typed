@@ -1,6 +1,8 @@
 declare module 'debug' {
   declare type Debugger = {
-    (formatter: string, ...args: Array<any>): void,
+    (...args: Array<mixed>): void,
+    (formatter: string, ...args: Array<mixed>): void,
+    (err: Error, ...args: Array<mixed>): void,
     enabled: boolean,
     log: () => {},
     namespace: string;

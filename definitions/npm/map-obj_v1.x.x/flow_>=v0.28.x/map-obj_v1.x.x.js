@@ -2,13 +2,15 @@ declare module 'map-obj' {
   declare module.exports: <
     TInputValue,
     TOutputValue,
-    TObject: { [key: string]: TInputValue }
+    TInputKey: string,
+    TOutputKey: string,
+    TObject: { [key: TInputKey]: TInputValue }
   >(
     object: TObject,
     iteratee: (
-      key: string,
+      key: TInputKey,
       value: TInputValue,
       object: TObject
-    ) => [string|number, TOutputValue]
-  ) => { [key: string]: TOutputValue };
+    ) => [TOutputKey, TOutputValue]
+  ) => { [key: TOutputKey]: TOutputValue };
 }
