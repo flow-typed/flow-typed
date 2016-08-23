@@ -1,5 +1,5 @@
-// flow-typed signature: b86972b47c44f9bf6772a814f317ca39
-// flow-typed version: ef85c464bf/yargs_v4.x.x/flow_>=v0.23.x
+// flow-typed signature: 44297a4413328857e4060d81e61e5cfc
+// flow-typed version: 5e1c1576ae/yargs_v4.x.x/flow_>=v0.23.x
 
 declare module 'yargs' {
   declare type Argv = {_: Array<string>, [key: string]: mixed};
@@ -49,7 +49,7 @@ declare module 'yargs' {
     command(
       cmd: string,
       desc: string|false,
-      builder?: {[key: string]: Options} | (yargsInstance: Yargs) => void,
+      builder?: {[key: string]: Options} | (yargsInstance: Yargs) => mixed,
       handler?: Function
     ): this;
 

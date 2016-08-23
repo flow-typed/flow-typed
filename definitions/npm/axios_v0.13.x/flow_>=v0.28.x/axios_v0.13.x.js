@@ -5,17 +5,15 @@ declare module 'axios' {
         username: string,
         password: string
     };
-    xsrfCookieName?: string;
-    xsrfHeaderName?: string;
+    baseURL?: string,
     progress?: (progressEvent: Event) => void | mixed;
     maxContentLength?: number;
     maxRedirects?: 5,
     headers?: Object;
-    maxContentLength?: number;
     params?: Object;
     paramsSerializer?: (params: Object) => string;
     responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream';
-    transformReponse?: Array<<U>(data: T) => U>;
+    transformResponse?: Array<<U>(data: T) => U>;
     transformRequest?: Array<<U>(data: T) => U|Array<<U>(data: T) => U>>;
     timeout?: number;
     validateStatus?: (status: number) => boolean,
