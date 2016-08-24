@@ -91,12 +91,12 @@ declare module 'express' {
   declare interface RouteMethodType<T> {
     (middleware: Middleware): T;
     (...middleware: Array<Middleware>): T;
-    (path: string|RegExp, ...middleware: Array<Middleware>): T;
+    (path: string|RegExp|string[], ...middleware: Array<Middleware>): T;
   }
   declare interface RouterMethodType<T> {
     (middleware: Middleware): T;
     (...middleware: Array<Middleware>): T;
-    (path: string|RegExp, ...middleware: Array<Middleware>): T;
+    (path: string|RegExp|string[], ...middleware: Array<Middleware>): T;
     (path: string, router: Router): T;
   }
   declare class Route {
