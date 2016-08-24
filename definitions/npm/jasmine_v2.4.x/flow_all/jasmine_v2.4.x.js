@@ -32,6 +32,7 @@ declare function fit(name: string, fn: Function): void;
 declare function xit(name: string, fn: Function): void;
 
 declare function expect(value: mixed): JasmineExpectType;
+declare function fail(err?: Error | string): void;
 
 // TODO handle return type
 // http://jasmine.github.io/2.4/introduction.html#section-Spies
