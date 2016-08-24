@@ -56,7 +56,7 @@ Knight.defaultProps = {
 };
 
 const DndKnight = DragSource('knight', knightSource, knightCollect)(Knight);
-(DndKnight: Class<React$Component<KnightProps, KnightProps, void>>);
+(DndKnight: Class<DndComponent<KnightProps, KnightProps, void>>);
 // $ExpectError
 (DndKnight: number);
 
@@ -162,7 +162,7 @@ BoardSquare.defaultProps = {
 };
 
 const DndBoardSquare = DropTarget('boardsquare', boardSquareTarget, boardSquareCollect)(BoardSquare);
-(DndBoardSquare: Class<React$Component<BoardSquareProps, BoardSquareProps, void>>);
+(DndBoardSquare: Class<DndComponent<BoardSquareProps, BoardSquareProps, void>>);
 // $ExpectError
 (DndBoardSquare: string);
 
@@ -202,7 +202,7 @@ CustomDragLayer.defaultProps = {
 };
 
 const DndCustomDragLayer = DragLayer(dragLayerCollect)(CustomDragLayer);
-(DndCustomDragLayer: Class<React$Component<CustomDragLayerProps, CustomDragLayerProps, void>>);
+(DndCustomDragLayer: Class<DndComponent<CustomDragLayerProps, CustomDragLayerProps, void>>);
 // $ExpectError
 (DndCustomDragLayer: number);
 
@@ -232,7 +232,7 @@ Board.defaultProps = {
 };
 
 const DndBoard = DragDropContext({})(Board);
-(DndBoard: Class<React$Component<BoardProps, BoardProps, void>>);
+(DndBoard: Class<ContextComponent<BoardProps, BoardProps, void>>);
 // $ExpectError
 (DndBoard: string);
 
@@ -266,4 +266,4 @@ const TestFuncComp = (props: TestProps) => {
 }
 
 const DndTestFuncComp = DragSource('test', testSource, testCollect)(TestFuncComp);
-(DndTestFuncComp: Class<React$Component<void, TestProps, void>>);
+(DndTestFuncComp: Class<DndComponent<void, TestProps, void>>);
