@@ -51,6 +51,8 @@ declare module 'express' {
     signed?: boolean
   };
 
+  declare type RenderCallback = (err: Error | null, html?: string) => mixed;
+
   declare type SendFileOptions = {
     maxAge?: number,
     root?: string,
@@ -73,7 +75,7 @@ declare module 'express' {
     location(path: string): this;
     redirect(url: string, ...args: Array<void>): this;
     redirect(status: number, url: string, ...args: Array<void>): this;
-    render(view: string, locals?: mixed, callback: (err?: ?Error) => mixed): this;
+    render(view: string, locals?: mixed, callback: RenderCallback): this;
     send(body?: mixed): this;
     sendFile(path: string, options?: SendFileOptions, callback?: (err?: ?Error) => mixed): this;
     sendStatus(statusCode: number): this;
@@ -91,12 +93,12 @@ declare module 'express' {
   declare interface RouteMethodType<T> {
     (middleware: Middleware): T;
     (...middleware: Array<Middleware>): T;
-    (path: string|RegExp, ...middleware: Array<Middleware>): T;
+    (path: string|RegExp|string[], ...middleware: Array<Middleware>): T;
   }
   declare interface RouterMethodType<T> {
     (middleware: Middleware): T;
     (...middleware: Array<Middleware>): T;
-    (path: string|RegExp, ...middleware: Array<Middleware>): T;
+    (path: string|RegExp|string[], ...middleware: Array<Middleware>): T;
     (path: string, router: Router): T;
   }
   declare class Route {
@@ -158,7 +160,7 @@ declare module 'express' {
      */
     //   get(name: string): mixed;
     set(name: string, value: mixed): mixed;
-    render(name: string, optionsOrFunction: {[name: string]: mixed}, callback: (err: ?Error, html: string) => mixed): void;
+    render(name: string, optionsOrFunction: {[name: string]: mixed}, callback: RenderCallback): void;
   }
 
   declare type $Application = Application;
