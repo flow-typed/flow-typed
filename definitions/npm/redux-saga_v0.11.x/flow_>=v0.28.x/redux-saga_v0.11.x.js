@@ -8,6 +8,7 @@
  */
 declare interface $npm$ReduxSaga$Channel {
   take: (cb: (msg: mixed) => void) => void,
+  put: (msg: mixed) => void,
   close: Function,
 }
 
@@ -53,7 +54,7 @@ declare module 'redux-saga' {
       effect: Object,
     }): void;
     effectResolved(effectId: number, result: any): void;
-    effectRejected(effectId: number, err: Error): void;
+    effectRejected(effectId: number, err: any): void;
     effectCancelled(effectId: number): void;
   }
 
