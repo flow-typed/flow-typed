@@ -39,7 +39,7 @@ expect(result).toHaveValue('large');
 expect(result).toMatchSelector('div.clearfix');
 
 // $ExpectError
-expect(result).toBeChecked("this function shouldn't accept a paramter!");
+expect(result).toHaveStyle(0, 'block');
 
 // $ExpectError toHaveText expects a string.
 expect(result).toHaveText();
