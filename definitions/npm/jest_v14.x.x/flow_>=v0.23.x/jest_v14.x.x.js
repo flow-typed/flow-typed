@@ -15,6 +15,10 @@ type JestMockFn = {
   mockReturnValueOnce(value: any): JestMockFn;
 }
 
+type JestAsymmetricEqualityType = {
+  asymmetricMatch(value: mixed): boolean;
+}
+
 type JestCallsType = {
   allArgs(): mixed;
   all(): mixed;
@@ -102,7 +106,7 @@ declare var jest: {
 
 declare var jasmine: {
   DEFAULT_TIMEOUT_INTERVAL: number;
-  any(val: mixed): void;
+  any(val: mixed): JestAsymmetricEqualityType;
   anything(): void;
   arrayContaining(val: mixed[]): void;
   clock(): JestClockType;
