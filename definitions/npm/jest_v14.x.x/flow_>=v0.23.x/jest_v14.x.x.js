@@ -15,15 +15,26 @@ type JestMockFn = {
   mockReturnValueOnce(value: any): JestMockFn;
 }
 
-declare function beforeEach(fn: Function): void;
-declare function describe(name: string, fn: Function): void;
-declare function fdescribe(name: string, fn: Function): void;
-declare function fit(name: string, fn: Function): ?Promise<void>;
-declare function it(name: string, fn: Function): ?Promise<void>;
-declare function pit(name: string, fn: Function): Promise<void>;
-declare function test(name: string, fn: Function): ?Promise<void>;
-declare function xdescribe(name: string, fn: Function): void;
-declare function xit(name: string, fn: Function): ?Promise<void>;
+type JestAsymmetricEqualityType = {
+  asymmetricMatch(value: mixed): boolean;
+}
+
+type JestCallsType = {
+  allArgs(): mixed;
+  all(): mixed;
+  any(): boolean;
+  count(): number;
+  first(): mixed;
+  mostRecent(): mixed;
+  reset(): void;
+}
+
+type JestClockType = {
+  install(): void;
+  mockDate(date: Date): void;
+  tick(): void;
+  uninstall(): void;
+}
 
 type JestExpectType = {
   not: JestExpectType;
@@ -41,13 +52,36 @@ type JestExpectType = {
   toBeUndefined(): void;
   toContain(str: string): void;
   toEqual(value: any): void;
+  toHaveBeenCalled(): void,
+  toHaveBeenCalledWith(...args: Array<any>): void;
   toMatch(regexp: RegExp): void;
   toMatchSnapshot(): void;
   toThrow(message?: string | Error): void;
   toThrowError(message?: string): void;
 }
 
+type JestSpyType = {
+  calls: JestCallsType;
+}
+
+declare function afterAll(fn: Function): void;
+declare function afterEach(fn: Function): void;
+declare function beforeAll(fn: Function): void;
+declare function beforeEach(fn: Function): void;
+declare function describe(name: string, fn: Function): void;
+declare function fdescribe(name: string, fn: Function): void;
+declare function fit(name: string, fn: Function): ?Promise<void>;
+declare function it(name: string, fn: Function): ?Promise<void>;
+declare function pit(name: string, fn: Function): Promise<void>;
+declare function test(name: string, fn: Function): ?Promise<void>;
+declare function xdescribe(name: string, fn: Function): void;
+declare function xit(name: string, fn: Function): ?Promise<void>;
+
 declare function expect(value: any): JestExpectType;
+
+// TODO handle return type
+// http://jasmine.github.io/2.4/introduction.html#section-Spies
+declare function spyOn(value: mixed, method: string): Object;
 
 declare var jest: {
   autoMockOff(): void;
@@ -55,6 +89,8 @@ declare var jest: {
   clearAllTimers(): void;
   currentTestPath(): void;
   disableAutomock(): void;
+  doMock(moduleName: string, moduleFactory?: any): void;
+  dontMock(moduleName: string): void;
   enableAutomock(): void;
   fn(implementation?: Function): JestMockFn;
   genMockFromModule(moduleName: string): any;
@@ -65,8 +101,16 @@ declare var jest: {
   setMock(moduleName: string, moduleExports: any): void;
   unmock(moduleName: string): void;
   useFakeTimers(): void;
+  useRealTimers(): void;
 }
 
 declare var jasmine: {
   DEFAULT_TIMEOUT_INTERVAL: number;
+  any(value: mixed): JestAsymmetricEqualityType;
+  anything(): void;
+  arrayContaining(value: mixed[]): void;
+  clock(): JestClockType;
+  createSpy(name: string): JestSpyType;
+  objectContaining(value: Object): void;
+  stringMatching(value: string): void;
 }
