@@ -15,23 +15,6 @@ type JestMockFn = {
   mockReturnValueOnce(value: any): JestMockFn;
 }
 
-declare function afterAll(fn: Function): void;
-declare function afterEach(fn: Function): void;
-declare function beforeAll(fn: Function): void;
-declare function beforeEach(fn: Function): void;
-declare function describe(name: string, fn: Function): void;
-declare function fdescribe(name: string, fn: Function): void;
-declare function fit(name: string, fn: Function): ?Promise<void>;
-declare function it(name: string, fn: Function): ?Promise<void>;
-declare function pit(name: string, fn: Function): Promise<void>;
-declare function test(name: string, fn: Function): ?Promise<void>;
-declare function xdescribe(name: string, fn: Function): void;
-declare function xit(name: string, fn: Function): ?Promise<void>;
-
-// TODO handle return type
-// http://jasmine.github.io/2.4/introduction.html#section-Spies
-declare function spyOn(value: mixed, method: string): Object;
-
 type JasmineCallsType = {
   allArgs(): mixed;
   all(): mixed;
@@ -77,7 +60,24 @@ type JasmineSpyType = {
   calls: JasmineCallsType;
 }
 
+declare function afterAll(fn: Function): void;
+declare function afterEach(fn: Function): void;
+declare function beforeAll(fn: Function): void;
+declare function beforeEach(fn: Function): void;
+declare function describe(name: string, fn: Function): void;
+declare function fdescribe(name: string, fn: Function): void;
+declare function fit(name: string, fn: Function): ?Promise<void>;
+declare function it(name: string, fn: Function): ?Promise<void>;
+declare function pit(name: string, fn: Function): Promise<void>;
+declare function test(name: string, fn: Function): ?Promise<void>;
+declare function xdescribe(name: string, fn: Function): void;
+declare function xit(name: string, fn: Function): ?Promise<void>;
+
 declare function expect(value: any): JestExpectType;
+
+// TODO handle return type
+// http://jasmine.github.io/2.4/introduction.html#section-Spies
+declare function spyOn(value: mixed, method: string): Object;
 
 declare var jest: {
   autoMockOff(): void;
