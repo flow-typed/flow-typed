@@ -106,11 +106,11 @@ declare var jest: {
 
 declare var jasmine: {
   DEFAULT_TIMEOUT_INTERVAL: number;
-  any(val: mixed): JestAsymmetricEqualityType;
+  any(value: mixed): JestAsymmetricEqualityType;
   anything(): void;
-  arrayContaining(val: mixed[]): void;
+  arrayContaining(value: mixed[]): void;
   clock(): JestClockType;
   createSpy(name: string): JestSpyType;
-  objectContaining(val: Object): void;
-  stringMatching(val: string): void;
+  objectContaining(value: Object): void;
+  stringMatching(value: string): void;
 }
