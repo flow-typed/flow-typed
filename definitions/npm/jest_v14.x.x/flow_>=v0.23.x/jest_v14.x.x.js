@@ -15,7 +15,7 @@ type JestMockFn = {
   mockReturnValueOnce(value: any): JestMockFn;
 }
 
-type JasmineCallsType = {
+type JestCallsType = {
   allArgs(): mixed;
   all(): mixed;
   any(): boolean;
@@ -25,7 +25,7 @@ type JasmineCallsType = {
   reset(): void;
 }
 
-type JasmineClockType = {
+type JestClockType = {
   install(): void;
   mockDate(date: Date): void;
   tick(): void;
@@ -56,8 +56,8 @@ type JestExpectType = {
   toThrowError(message?: string): void;
 }
 
-type JasmineSpyType = {
-  calls: JasmineCallsType;
+type JestSpyType = {
+  calls: JestCallsType;
 }
 
 declare function afterAll(fn: Function): void;
@@ -105,8 +105,8 @@ declare var jasmine: {
   any(val: mixed): void;
   anything(): void;
   arrayContaining(val: mixed[]): void;
-  clock(): JasmineClockType;
-  createSpy(name: string): JasmineSpyType;
+  clock(): JestClockType;
+  createSpy(name: string): JestSpyType;
   objectContaining(val: Object): void;
   stringMatching(val: string): void;
 }
