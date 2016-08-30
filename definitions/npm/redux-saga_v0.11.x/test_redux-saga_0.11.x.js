@@ -628,9 +628,18 @@ function takeEveryTest() {
     yield 'test';
   }
 
+  // $ExpectError: yield should be a yield*
+  function* faulySagaOfSaga(): Generator<IOEffect,*,*> {
+    yield takeEvery('Foo', saga0);
+  }
+
   // This saga should work, since it should yield effects as well
   function* nestedSaga(a: string): Generator<IOEffect,*,*> {
     yield* saga1(a);
+  }
+
+  function* sagaOfSaga(): Generator<IOEffect,*,*> {
+    yield* takeEvery('Foo', saga0);
   }
 
   const e0 = takeEvery('FOO', saga0);
@@ -662,9 +671,18 @@ function takeLatestTest() {
     yield 'test';
   }
 
+  // $ExpectError: yield should be a yield*
+  function* faulySagaOfSaga(): Generator<IOEffect,*,*> {
+    yield takeEvery('Foo', saga0);
+  }
+
   // This saga should work, since it should yield effects as well
   function* nestedSaga(a: string): Generator<IOEffect,*,*> {
     yield* saga1(a);
+  }
+
+  function* sagaOfSaga(): Generator<IOEffect,*,*> {
+    yield* takeLatest('Foo', saga0);
   }
 
   const e0 = takeLatest('FOO', saga0);

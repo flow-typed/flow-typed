@@ -88,6 +88,7 @@ declare module 'redux-saga' {
   declare type Saga6<Y: IOEffect, R, N, T1, T2, T3, T4, T5, T6> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => Generator<Y, R, N>;
 
   declare type TakeXRet = {
+    @@iterator(): $Iterator<*,*,*>,
     name: string,
     next: Function,
     throw: Function,
@@ -137,6 +138,8 @@ declare module 'redux-saga' {
     & (<T, Y, R, N, Fn: SagaSpread<Y, R, N, T>>(saga: Fn, t1: T, t2: T, t3: T, t4: T, t5: T, t6: T, ...rest: Array<void>) => Task)
 
   declare interface SagaMiddleware {
+    // TODO: This should be aligned with the official redux typings sometime
+    (api: any): (next: any) => any;
     run: MiddlewareRunFn;
   }
 
