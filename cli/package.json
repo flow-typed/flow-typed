@@ -12,7 +12,7 @@
     "prepublish": "mkdir -p dist; npm run test",
     "test": "npm run clean; npm run build; npm run test-quick",
     "test-quick": "npm run lint && jest",
-    "watch": "mkdir -p dist; babel --watch=./src --out-dir=./dist"
+    "watch": "mkdir -p dist; babel --source-maps --watch=./src --out-dir=./dist"
   },
   "repository": {
     "type": "git",
