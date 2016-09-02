@@ -129,7 +129,7 @@ describe('libDefs', () => {
         pkgVersion: stringToVersion(verStr),
         pkgVersionStr: verStr,
         pkgNameVersionStr: `${name}_${verStr}`,
-        flowVersion: stringToVersion(verStr),
+        flowVersion: stringToVersion(flowVerStr),
         flowVersionStr: flowVerStr,
         path: '',
         testFilePaths: [],

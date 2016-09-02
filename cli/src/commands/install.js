@@ -9,7 +9,9 @@ import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 export const name = 'install';
 export const description = 'Installs a libdef to the ./flow-typed directory';
 
-export function setup(yargs: Object) {
+import typeof Yargs from "yargs";
+
+export function setup(yargs: Yargs) {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .options({
@@ -23,7 +25,7 @@ export function setup(yargs: Object) {
         alias: 'o',
         describe: 'Overwrite a libdef if it is already present in the ' +
                   '`flow-typed` directory',
-        type: 'bool',
+        type: 'boolean',
         demand: false,
       },
     });

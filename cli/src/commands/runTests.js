@@ -9,6 +9,7 @@ import {versionToString} from "../lib/semver.js";
 import request from "request";
 import * as semver from "semver";
 
+import type {Argv} from "yargs";
 import type {Version} from "../lib/semver.js";
 
 // Used to decide which binary to fetch for each version of Flow
@@ -374,7 +375,7 @@ async function runTests(
 
 export const name = "run-tests";
 export const description = "Run definition tests";
-export async function run(argv: Object): Promise<number> {
+export async function run(argv: Argv): Promise<number> {
   const testPatterns = argv._.slice(1);
 
   const cwd = process.cwd();

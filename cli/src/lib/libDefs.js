@@ -167,8 +167,9 @@ export async function getLibDefs(
  */
 const FLOW_VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
 const FLOW_DIR_NAME_RE = new RegExp(
-  `^flow_(all|(([><]?=)?${FLOW_VER}(_([><]?=)${FLOW_VER})?))$`
+  `^flow_(all|(-)?${FLOW_VER}(-)?(${FLOW_VER}(-)?)?)$`
 );
+
 function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
   const pkgFlowDirName = path.basename(pkgFlowDirPath);
 
