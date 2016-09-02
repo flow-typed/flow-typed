@@ -12,6 +12,7 @@ export const name = "validate-defs";
 export const description =
   "Validates the structure of the definitions in the local repo.";
 export async function run(): Promise<number> {
+
   const validationErrors = new Map();
 
   const localDefs = await getLocalDefs(validationErrors);

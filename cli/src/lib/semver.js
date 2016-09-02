@@ -8,7 +8,7 @@ export type Version = {
   major: number | "x",
   minor: number | "x",
   patch: number | "x",
-  upperBound?: Version,
+  otherBound?: Version,
 };
 
 export function emptyVersion(): Version {
@@ -48,6 +48,78 @@ export function sortVersions(a: Version, b: Version): number {
   return 0;
 };
 
+/**
+ * Given a version range, returns the max version satisfying the range.
+ */
+function maxSat(ver: Version): ?Version {
+  if (ver.range === '>=') {
+    // TODO: ensure that if ver.otherBound exists, it is "greater than" ver
+    return ver.otherBound;
+  };
+  return ver;
+}
+
+/**
+ * Given a version range, returns the min version satisfying the range.
+ */
+function minSat(ver: Version): ?Version {
+  if (ver.range === '<=') {
+    // TODO: ensure that if ver.otherBound exists, it is "lesser than" ver
+    return ver.otherBound;
+  };
+  return ver;
+}
+
+/**
+ * Given two version ranges a and b, determine whether a is strictly before b.
+ */
+function isWildcard(n: number | "x"): boolean {
+  return (typeof n === 'string');
+}
+function strictSort(a: Version, b: Version): boolean {
+  if (isWildcard(a.major) || isWildcard(b.major)) return false;
+  if (a.major < b.major) return true;
+  if (a.major === b.major) {
+    if (isWildcard(a.minor) || isWildcard(b.minor)) return false;
+    if (a.minor < b.minor) return true;
+    if (a.minor === b.minor) {
+      if (isWildcard(a.patch) || isWildcard(b.patch)) return false;
+      if (a.patch < b.patch) return true;
+      return false;
+    };
+    return false;
+  };
+  return false;
+}
+
+/**
+ * Given two versions, returns whether they are disjoint.
+ */
+function _strictSort(a: ?Version, b: ?Version): boolean {
+  // If a is undefined, it denotes the maximum version. If b is undefined, it
+  // denotes the minimum version.
+  if (a === undefined || b === undefined) return false;
+  return strictSort(a, b);
+}
+export function disjointVersions(a: Version, b: Version): boolean {
+  return _strictSort (maxSat(a), minSat(b)) || _strictSort (maxSat(b), minSat(a));
+}
+
+/**
+ * Given an array of versions, returns whether they are mutually disjoint.
+ */
+function _disjointVersionsAll(vers, i) {
+  const n = vers.length;
+  if (i+1 === n) return true;
+  for (var j = i+1; j < n; j++) {
+    if (!disjointVersions(vers[i], vers[j])) return false;
+  }
+  return _disjointVersionsAll(vers, i+1);
+}
+export function disjointVersionsAll(vers: Array<Version>): boolean {
+  return _disjointVersionsAll(vers, 0);
+}
+
 // TODO: This has some egregious duplication with
 //       libDef.getLocalLibDefFlowVersions(). Need to better consolidate logic
 const VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
@@ -64,14 +136,14 @@ export function stringToVersion(verStr: string): Version {
   }
   let [
     _1, range, major, minor, patch,
-    _2, upRange, upMajor, upMinor, upPatch,
+    _2, otherRange, otherMajor, otherMinor, otherPatch,
   ] = versionParts;
   if (range != null && range !== ">=" && range !== "<=") {
     throw new Error(`'${verStr}': Invalid version range: ${range}`);
   }
-  if (upRange != null && upRange !== ">=" && upRange !== "<=") {
+  if (otherRange != null && otherRange !== ">=" && otherRange !== "<=") {
     throw new Error(
-      `'${verStr}': Invalid version upper-bound range: ${upRange}`
+      `'${verStr}': Invalid version other-bound range: ${otherRange}`
     );
   }
 
@@ -83,20 +155,20 @@ export function stringToVersion(verStr: string): Version {
     patch = _validateVersionNumberPart(verStr, "patch", patch);
   }
 
-  let upperBound;
-  if (upMajor) {
-    upMajor = _validateVersionNumberPart(verStr, "upper-bound major", upMajor);
-    if (upMinor !== "x") {
-      upMinor = _validateVersionNumberPart(verStr, "upper-bound minor", upMinor);
+  let otherBound;
+  if (otherMajor) {
+    otherMajor = _validateVersionNumberPart(verStr, "other-bound major", otherMajor);
+    if (otherMinor !== "x") {
+      otherMinor = _validateVersionNumberPart(verStr, "other-bound minor", otherMinor);
     }
-    if (upPatch !== "x") {
-      upPatch = _validateVersionNumberPart(verStr, "upper-bound patch", upPatch);
+    if (otherPatch !== "x") {
+      otherPatch = _validateVersionNumberPart(verStr, "other-bound patch", otherPatch);
     }
-    upperBound = {
-      range: upRange,
-      major: upMajor,
-      minor: upMinor,
-      patch: upPatch,
+    otherBound = {
+      range: otherRange,
+      major: otherMajor,
+      minor: otherMinor,
+      patch: otherPatch,
     };
   }
 
@@ -106,13 +178,13 @@ export function stringToVersion(verStr: string): Version {
     );
   }
 
-  return {range, major, minor, patch, upperBound};
+  return {range, major, minor, patch, otherBound};
 };
 
 export function versionToString(ver: Version): string {
   const rangeStr = ver.range ? ver.range : '';
-  const upperBoundStr = ver.upperBound ? `_${versionToString(ver.upperBound)}` : '';
-  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${upperBoundStr}`;
+  const otherBoundStr = ver.otherBound ? `_${versionToString(ver.otherBound)}` : '';
+  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${otherBoundStr}`;
 };
 
 function _validateVersionNumberPart(context, partName, part) {
