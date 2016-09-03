@@ -269,7 +269,6 @@ async function parseLibDefsFromPkgDir(
     validationError(pkgDirPath, 'Flow versions not disjoint!', validationErrs);
   }
 
-  console.log(pkgName, pkgVersion, flowDirs);
   if (flowDirs.length === 0) {
     validationError(pkgDirPath, 'No libdef files found!', validationErrs);
   }
