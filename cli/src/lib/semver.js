@@ -8,7 +8,7 @@ export type Version = {
   major: number | "x",
   minor: number | "x",
   patch: number | "x",
-  otherBound?: Version,
+  upperBound?: Version, // TODO: rename to otherBound
 };
 
 export function emptyVersion(): Version {
@@ -53,8 +53,8 @@ export function sortVersions(a: Version, b: Version): number {
  */
 function maxSat(ver: Version): ?Version {
   if (ver.range === '>=') {
-    // TODO: ensure that if ver.otherBound exists, it is "greater than" ver
-    return ver.otherBound;
+    // TODO: ensure that if ver.upperBound exists, it is "greater than" ver
+    return ver.upperBound;
   };
   return ver;
 }
@@ -64,45 +64,42 @@ function maxSat(ver: Version): ?Version {
  */
 function minSat(ver: Version): ?Version {
   if (ver.range === '<=') {
-    // TODO: ensure that if ver.otherBound exists, it is "lesser than" ver
-    return ver.otherBound;
+    // TODO: ensure that if ver.upperBound exists, it is "lesser than" ver
+    return ver.upperBound;
   };
   return ver;
 }
 
 /**
- * Given two version ranges a and b, determine whether a is strictly before b.
+ * Given two version ranges a and b, determine whether a is before b.
  */
-function isWildcard(n: number | "x"): boolean {
-  return (typeof n === 'string');
+function lt(n1: number | "x", n2: number | "x"): boolean | "maybe" {
+  if (typeof n1 === 'string' || typeof n2 === 'string') return false;
+  if (n1 < n2) return true;
+  if (n1 > n2) return false;
+  return "maybe";
 }
-function strictSort(a: Version, b: Version): boolean {
-  if (isWildcard(a.major) || isWildcard(b.major)) return false;
-  if (a.major < b.major) return true;
-  if (a.major === b.major) {
-    if (isWildcard(a.minor) || isWildcard(b.minor)) return false;
-    if (a.minor < b.minor) return true;
-    if (a.minor === b.minor) {
-      if (isWildcard(a.patch) || isWildcard(b.patch)) return false;
-      if (a.patch < b.patch) return true;
-      return false;
-    };
-    return false;
-  };
+function before(a: Version, b: Version): boolean {
+  let test = lt(a.major, b.major);
+  if (test !== "maybe") return test;
+  test = lt(a.minor, b.minor);
+  if (test !== "maybe") return test;
+  test = lt(a.patch, b.patch);
+  if (test !== "maybe") return test;
   return false;
 }
 
 /**
  * Given two versions, returns whether they are disjoint.
  */
-function _strictSort(a: ?Version, b: ?Version): boolean {
+function _before(a: ?Version, b: ?Version): boolean {
   // If a is undefined, it denotes the maximum version. If b is undefined, it
   // denotes the minimum version.
-  if (a === undefined || b === undefined) return false;
-  return strictSort(a, b);
+  if (a && b) return before(a, b);
+  return false;
 }
 export function disjointVersions(a: Version, b: Version): boolean {
-  return _strictSort (maxSat(a), minSat(b)) || _strictSort (maxSat(b), minSat(a));
+  return _before (maxSat(a), minSat(b)) || _before (maxSat(b), minSat(a));
 }
 
 /**
@@ -136,14 +133,14 @@ export function stringToVersion(verStr: string): Version {
   }
   let [
     _1, range, major, minor, patch,
-    _2, otherRange, otherMajor, otherMinor, otherPatch,
+    _2, upperRange, upperMajor, upperMinor, upperPatch,
   ] = versionParts;
   if (range != null && range !== ">=" && range !== "<=") {
     throw new Error(`'${verStr}': Invalid version range: ${range}`);
   }
-  if (otherRange != null && otherRange !== ">=" && otherRange !== "<=") {
+  if (upperRange != null && upperRange !== ">=" && upperRange !== "<=") {
     throw new Error(
-      `'${verStr}': Invalid version other-bound range: ${otherRange}`
+      `'${verStr}': Invalid version upper-bound range: ${upperRange}`
     );
   }
 
@@ -155,20 +152,20 @@ export function stringToVersion(verStr: string): Version {
     patch = _validateVersionNumberPart(verStr, "patch", patch);
   }
 
-  let otherBound;
-  if (otherMajor) {
-    otherMajor = _validateVersionNumberPart(verStr, "other-bound major", otherMajor);
-    if (otherMinor !== "x") {
-      otherMinor = _validateVersionNumberPart(verStr, "other-bound minor", otherMinor);
+  let upperBound;
+  if (upperMajor) {
+    upperMajor = _validateVersionNumberPart(verStr, "upper-bound major", upperMajor);
+    if (upperMinor !== "x") {
+      upperMinor = _validateVersionNumberPart(verStr, "upper-bound minor", upperMinor);
     }
-    if (otherPatch !== "x") {
-      otherPatch = _validateVersionNumberPart(verStr, "other-bound patch", otherPatch);
+    if (upperPatch !== "x") {
+      upperPatch = _validateVersionNumberPart(verStr, "upper-bound patch", upperPatch);
     }
-    otherBound = {
-      range: otherRange,
-      major: otherMajor,
-      minor: otherMinor,
-      patch: otherPatch,
+    upperBound = {
+      range: upperRange,
+      major: upperMajor,
+      minor: upperMinor,
+      patch: upperPatch,
     };
   }
 
@@ -178,13 +175,13 @@ export function stringToVersion(verStr: string): Version {
     );
   }
 
-  return {range, major, minor, patch, otherBound};
+  return {range, major, minor, patch, upperBound};
 };
 
 export function versionToString(ver: Version): string {
   const rangeStr = ver.range ? ver.range : '';
-  const otherBoundStr = ver.otherBound ? `_${versionToString(ver.otherBound)}` : '';
-  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${otherBoundStr}`;
+  const upperBoundStr = ver.upperBound ? `_${versionToString(ver.upperBound)}` : '';
+  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${upperBoundStr}`;
 };
 
 function _validateVersionNumberPart(context, partName, part) {
