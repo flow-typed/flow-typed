@@ -1,5 +1,5 @@
 declare module 'prismic.io' {
-  declare type linkResolver = (...args: any) => any;
+  declare type LinkResolver = (doc: Document) => string;
 
   declare type DaysOfWeek =
     | 'Monday'
@@ -25,21 +25,25 @@ declare module 'prismic.io' {
     | 'December';
 
   declare class Htmlable {
-    asHtml(resolver?: linkResolver) : string;
+    asHtml(resolver?: LinkResolver) : string;
   }
+  declare type $Htmlable = Htmlable;
 
   declare class Textable {
-    asText(resolver?: linkResolver) : string;
+    asText(resolver?: LinkResolver) : string;
   }
+  declare type $Textable = Textable;
 
   declare class Urlable {
-    url(resolver?: linkResolver) : string;
+    url(resolver?: LinkResolver) : string;
   }
+  declare type $Urlable = Urlable;
 
   declare class Text mixins Htmlable, Textable {
     constructor(data: string) : void;
     value: string;
   }
+  declare type $Text = Text;
 
   declare class DocumentLink extends WithFragments mixins Urlable {
     constructor(data: Object) : void;
@@ -52,57 +56,68 @@ declare module 'prismic.io' {
     fragments: Array<Object>;
     isBroken: boolean;
   }
+  declare type $DocumentLink = DocumentLink;
 
   declare class WebLink mixins Htmlable, Textable, Urlable {
     constructor(data: Object) : void;
     value: Object;
   }
+  declare type $WebLink = WebLink;
 
   declare class FileLink mixins Htmlable, Textable, Urlable {
     constructor(data: Object) : void;
     value: Object;
   }
+  declare type $FileLink = FileLink;
 
   declare class ImageLink mixins Htmlable, Textable, Urlable {
     constructor(data: Object) : void;
     value: Object;
   }
+  declare type $ImageLink = ImageLink;
 
   declare class Select mixins Htmlable, Textable {
     constructor(data: string) : void;
     value: string;
   }
+  declare type $Select = Select;
 
   declare class Color mixins Htmlable, Textable {
     constructor(data: Object) : void;
     value: Object;
   }
+  declare type $Color = Color;
 
   declare class GeoPoint mixins Htmlable, Textable {
     constructor(data: Object) : void;
     latitude: number;
     longitude: number;
   }
+  declare type $GeoPoint = GeoPoint;
 
   declare class Num mixins Htmlable, Textable {
     constructor(data: number) : void;
     value: number;
   }
+  declare type $Num = Num;
 
   declare class DateFragment mixins Htmlable, Textable {
     constructor(data: string) : void;
     value: Date;
   }
+  declare type $DateFragment = DateFragment;
 
   declare class Timestamp mixins Htmlable, Textable {
     constructor(data: string) : void;
     value: Date;
   }
+  declare type $Timestamp = Timestamp;
 
   declare class Embed mixins Htmlable, Textable {
     constructor(data: Object) : void;
     value: Object;
   }
+  declare type $Embed = Embed;
 
   declare class ImageView mixins Htmlable, Textable {
     constructor(url: string, width: number, height: number, alt: string) : void;
@@ -112,6 +127,7 @@ declare module 'prismic.io' {
     alt: string;
     ratio() : number;
   }
+  declare type $ImageView = ImageView;
 
   declare type ImageViews = { [key: string] : ImageView };
 
@@ -122,14 +138,17 @@ declare module 'prismic.io' {
     views: ImageViews;
     getView(name: string) : ?ImageView;
   }
+  declare type $ImageEl = ImageEl;
 
   declare class Separator mixins Htmlable, Textable { }
+  declare type $Separator = Separator;
 
   declare class GroupDoc extends WithFragments {
     constructor(data: Object) : void;
     data: Object;
     fragments: Array<Object>;
   }
+  declare type $GroupDoc = GroupDoc;
 
   declare class Group mixins Htmlable, Textable {
     constructor(data: Array<Object>) : void;
@@ -139,7 +158,9 @@ declare module 'prismic.io' {
     getFirstTitle() : ?StructuredText;
     getFirstParagraph() : ?StructuredText;
   }
+  declare type $Group = Group;
 
+  declare type HtmlSerializer = (element : Object, content : ?string) => ?string;
   declare class StructuredText mixins Htmlable, Textable {
     constructor(blocks: Array<Object>) : void;
     blocks: Array<Object>;
@@ -148,7 +169,13 @@ declare module 'prismic.io' {
     getParagraphs() : Array<StructuredText>;
     getParagraph(n: number) : StructuredText;
     getFirstImage() : ?ImageView;
+
+    // StructuredText has an extended custom version of asHtml that allows
+    // you to provide an htmlSerializer
+    // @see https://prismic.io/docs/fields/structuredtext#integrate?lang=javascript
+    asHtml(resolver?: LinkResolver, serializer?: HtmlSerializer) : string;
   }
+  declare type $StructuredText = StructuredText;
 
   declare class Slice mixins Htmlable, Textable {
     constructor(sliceType: string, label: string, value: Object) : void;
@@ -159,6 +186,7 @@ declare module 'prismic.io' {
     getFirstTitle() : ?StructuredText;
     getFirstParagraph() : ?StructuredText;
   }
+  declare type $Slice = Slice;
 
   declare class SliceZone mixins Htmlable, Textable {
     constructor(data: Array<Object>) : void;
@@ -168,6 +196,7 @@ declare module 'prismic.io' {
     getFirstTitle() : ?StructuredText;
     getFirstParagraph() : ?StructuredText;
   }
+  declare type $SliceZone = SliceZone;
 
   declare class WithFragments mixins Htmlable, Textable {
     get(name: string) : ?Object;
@@ -182,14 +211,14 @@ declare module 'prismic.io' {
     getTimestamp(name: string) : ?Date;
     getDate(name: string) : ?Date;
     getBoolean(name: string) : boolean;
-    getText(name: string, after: string) : null | StructuredText | Text | Number | Select | Color;
+    getText(name: string, after: ?string) : ?string;
     getStructuredText(name: string) : ?StructuredText;
     getLink(name: string) : null | DocumentLink | WebLink | ImageLink | FileLink;
     getNumber(name: string) : ?number;
     getColor(name: string) : ?string;
     getGeoPoint(name: string) : ?GeoPoint;
     getGroup(name: string) : ?Group;
-    getHtml(name: string, resolver?: linkResolver) : string;
+    getHtml(name: string, resolver?: LinkResolver) : string;
     linkedDocuments() : Array<DocumentLink>;
     getSliceZone(name: string) : ?SliceZone;
   }
@@ -205,6 +234,7 @@ declare module 'prismic.io' {
     slugs: Array<string>;
     data: Object;
   }
+  declare type $Document = Document;
 
   declare type Fragments = {
     Embed: Embed,
@@ -273,6 +303,7 @@ declare module 'prismic.io' {
     prev_page: number;
     results: Array<Document>;
   }
+  declare type $Response = Response;
 
   declare class SearchForm {
     constructor(context: Object, form: Object, data: ?Object) : void;
@@ -286,8 +317,9 @@ declare module 'prismic.io' {
     orderings(p: Array<string>) : this;
     submit() : Promise<Response>;
   }
+  declare type $SearchForm = SearchForm;
 
-  declare type ApiOptions = {
+  declare type APIOptions = {
     accessToken?: string,
     req?: any,
     apiCache?: any,
@@ -295,8 +327,8 @@ declare module 'prismic.io' {
     apiDataTTL?: number
   }
 
-  declare class Api {
-    constructor(url: string, options: ?ApiOptions) : void;
+  declare class API {
+    constructor(url: string, options: ?APIOptions) : void;
     get() : Promise<any>;
     refresh() : Promise<any>;
     form(formId: string) : SearchForm;
@@ -308,15 +340,16 @@ declare module 'prismic.io' {
     getByIDs(ids: Array<string>, options: Object) : Promise<Array<Document>>;
     getByUID(type: string, uid: string, options: Object) : Promise<?Document>;
     getBookmark(bookmark: string, options: Object) : Promise<?Document>;
-    previewSession(token: string, resolver: linkResolver, defaultUrl: string) : Promise<string>;
+    previewSession(token: string, resolver: LinkResolver, defaultUrl: string) : Promise<string>;
     request(url: string, callback: (err: any, resp: Response) => void) : void;
     response(documents: Array<Object>) : Response;
   }
+  declare type $API = API;
 
-  declare type getApi = (url: string, options: ?ApiOptions) => Promise<Api>;
+  declare type getAPI = (url: string, options: ?APIOptions) => Promise<API>;
 
   declare type Prismic = {
-    experimentCookie: 'io.prismic.experiment',
+    experimentCookie: string,
     previewCookie: 'io.prismic.preview',
     Document: Document,
     SearchForm: SearchForm,
@@ -324,8 +357,8 @@ declare module 'prismic.io' {
     Experiments: any, // I think this is for Prismic's internal mainly.
     Predicates: Predicates,
     Fragments: Fragments,
-    api: getApi,
-    Api: getApi,
+    api: getAPI,
+    Api: getAPI,
     parseDoc: (json: Object) => Document
   }
 
