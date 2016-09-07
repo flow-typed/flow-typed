@@ -1,29 +1,29 @@
 // @flow
-
 import {fs, path} from "./node.js";
 
 async function isPackage(dir: string): Promise<boolean> {
   return await fs.exists(path.join(dir, 'package.json'));
 }
 
-async function findRootPackage(startPath : string | Array<string>): Promise<string> {
-  let dirs: Array<string> = [];
-  if (typeof startPath === 'string') {
-    let currentPath = startPath;
-    if (currentPath[currentPath.length-1] !== path.sep) {
-      currentPath+=path.sep;
+async function findRootPackage(startPath : string): Promise<string> {
+  async function _searchDirs(dirs: Array<string>): Promise<string> {
+    if(!dirs.length) {
+      throw new Error(`package.json not found in ${startPath}`);
     }
-    dirs = currentPath.split(path.sep);
+    dirs.pop();
+    var dir = dirs.join(path.sep);
+    if(await isPackage(dir)) {
+      return dir;
+    }
+    return await _searchDirs(dirs);
   }
-  if(!dirs.length) {
-    throw new Error('package.json not found in path');
+
+  let currentPath = startPath;
+  if (currentPath[currentPath.length-1] !== path.sep) {
+    currentPath+=path.sep;
   }
-  dirs.pop();
-  var dir = dirs.join(path.sep);
-  if(await isPackage(dir)) {
-    return dir;
-  }
-  return await findRootPackage(dirs);
+  const dirs: Array<string> = currentPath.split(path.sep);
+  return await _searchDirs(dirs);
 }
 
 async function getPackageData(pkgDir: string): Promise<any> {
@@ -45,20 +45,18 @@ export async function getVersionFromPkg(pkgDir: string): Promise<string> {
 
 export async function mapInstalledVersions(deps: DepsMap, rootDir: string): Promise<DepsMap> { 
   let resolvedDeps: DepsMap = {};
-  
   for (let dep in deps) {
     const depDir = path.join(rootDir, 'node_modules', dep);
     if(await isPackage(depDir)) {
       let version = await getVersionFromPkg(depDir);   
-      console.log(`Found npm dependency: ${dep} v${version}`);
       resolvedDeps[dep] = version;
     }
   }
   return resolvedDeps;
 }
 
-export async function getInstalledPackageDependencies(): Promise<DepsMap> {
-  let packagePath = await findRootPackage(process.cwd());
+export async function getInstalledPackageDependencies(srcPath: string): Promise<DepsMap> {
+  let packagePath = await findRootPackage(srcPath);
   let deps = await getDepsFromPkg(packagePath);
   return await mapInstalledVersions(deps, packagePath);
 }

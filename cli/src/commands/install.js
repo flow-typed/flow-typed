@@ -7,8 +7,8 @@ import type {LibDef} from "../lib/libDefs.js";
 import {fs, path} from '../lib/node.js';
 import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 import type {Version} from "../lib/semver.js";
-import {getInstalledPackageDependencies} from "../lib/npm_helper.js";
-import type {DepsMap} from "../lib/npm_helper.js";
+import {getInstalledPackageDependencies} from "../lib/npmHelper.js";
+import type {DepsMap} from "../lib/npmHelper.js";
 
 export const name = 'install';
 export const description = 'Installs a libdef to the ./flow-typed directory';
@@ -94,7 +94,7 @@ export async function run(args: Args): Promise<number> {
       depsMap[defName] = defVersion;
     }
   } else {
-    depsMap = await getInstalledPackageDependencies();
+    depsMap = await getInstalledPackageDependencies(process.cwd());
   }
 
   if (!Object.keys(depsMap).length === 0) {
@@ -105,7 +105,8 @@ export async function run(args: Args): Promise<number> {
 
   // Get a list of defs to install
   const defs: [LibDef] = [];
-  for(let dep in depsMap) {  
+  for(let dep in depsMap) {
+    console.log(`Found npm dependency: ${dep} v${depsMap[dep]}`);
     let def = await findLibDef(
       dep, 
       depsMap[dep],
@@ -132,7 +133,7 @@ export async function run(args: Args): Promise<number> {
 /** 
  * install a libDef into the given project root directory
  */
-export async function installLibDef(
+async function installLibDef(
   def: LibDef,
   projectRoot: string,
   overwrite: boolean = false): Promise<boolean> {
@@ -165,7 +166,10 @@ export async function installLibDef(
   }
 } 
 
-export async function findLibDef(
+/**
+ * Search flow typed, or the cache, for a matching libdef.
+ */
+async function findLibDef(
   defName: string, 
   defVersion: string, 
   flowVersion: Version): Promise<?LibDef> {
