@@ -57,7 +57,7 @@ declare module 'redux-form' {
     onSubmit?: Function,
     onSubmitFail?: Function,
     onSubmitSuccess?: Function,
-    verwriteOnInitialValuesChange?: boolean,
+    overwriteOnInitialValuesChange?: boolean,
     propNamespace?: string,
     readonly?: boolean,
     reduxMountPoint?: String,
