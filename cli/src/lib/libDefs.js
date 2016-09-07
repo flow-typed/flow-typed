@@ -24,7 +24,7 @@ const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
 const GIT_REPO_DIR = path.join(__dirname, '..', '..', '..');
 
-const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
+const REMOTE_REPO_URL = 'http://github.com/flowtype/flow-typed.git';
 const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
 
 async function cloneCacheRepo(verbose?: VerboseOutput) {
