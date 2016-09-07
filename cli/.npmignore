@@ -1,4 +1,4 @@
-./src
-./.flow-bins-cache
-./.test-dir
-__tests__/.*
+src/
+.flow-bins-cache/
+.test-dir/
+__tests__/
