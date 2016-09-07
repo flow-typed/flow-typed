@@ -7,6 +7,7 @@ import * as node_os from "os";
 import * as node_path from 'path';
 import * as node_url from "url";
 
+export const child_process = node_child_process;
 export const fs = {
   // This is a custom function that our tests can use during setup to specify
 // what the files on the "mock" filesystem should look like when any of the
@@ -19,14 +20,14 @@ export const fs = {
 
   createReadStream: node_fs.createReadStream,
   createWriteStream: node_fs.createWriteStream,
-  exists: async function(dirOrFilePath: string) {
+  exists: jest.fn(async (dirOrFilePath: string) : Promise<boolean> => {
     return new Promise((resolve) => {
       process.nextTick(() => resolve(fs.mockFiles[dirOrFilePath] !== undefined));
     });
-  },
+  }),
   mkdir: node_fs.mkdir,
   readdir: node_fs.readdir,
-  readFile: function readFile(filePath: string): Promise<Buffer> {
+  readFile: jest.fn(async (filePath: string): Promise<Buffer> => {
     return new Promise((resolve, reject) => {
       process.nextTick(()=>{
         if(fs.mockFiles[filePath]) { 
@@ -36,7 +37,7 @@ export const fs = {
         }
       });
     });
-  },
+  }),
   rename: node_fs.rename,
   rmdir: node_fs.rmdir,
   stat: node_fs.stat,
@@ -44,7 +45,7 @@ export const fs = {
   Stats: node_fs.Stats,
   unlink: node_fs.unlink,
   writeFile: node_fs.writeFile,
-}
+};
 
 export const https = node_https;
 export const os = node_os;

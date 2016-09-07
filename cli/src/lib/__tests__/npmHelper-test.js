@@ -1,18 +1,10 @@
-
+// @flow
 // to mock fs calls
 jest.mock('../node.js');
 import {fs} from '../node.js';
 
 jest.unmock('../npmHelper.js');
 import {getInstalledPackageDependencies} from "../npmHelper.js";
-
-/**
- * Jest's process of mocking in place fools Flow, so we use this as an explicit
- * escape hatch when we need to side-step Flow.
- */
-function _mock(mockFn) {
-  return (mockFn: any);
-}
 
 describe('npmHelper', ()=> {
   const MOCK_FILE_INFO = {
@@ -40,7 +32,7 @@ describe('npmHelper', ()=> {
   describe('getInstalledPackageDependencies', async ()=>{
     beforeEach(() => {
       // Set up some mocked out file info before each test
-      fs.__setMockFiles(MOCK_FILE_INFO);
+      (fs:any).__setMockFiles(MOCK_FILE_INFO);
     });
 
     it('throws an error message if package.json is not found', async ()=> {

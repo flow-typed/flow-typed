@@ -7,6 +7,7 @@ jest.unmock('semver');
 import Git from 'nodegit';
 
 import {fs} from '../node.js';
+
 import {
   _CACHE_REPO_DIR as CACHE_REPO_DIR,
   _CACHE_REPO_EXPIRY as CACHE_REPO_EXPIRY,
@@ -37,10 +38,6 @@ describe('libDefs', () => {
     });
 
     pit('clones the repo if not present on disk', async () => {
-      _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath !== CACHE_REPO_DIR;
-      });
-
       await ensureCacheRepo();
       expect(_mock(Git.Clone).mock.calls.length).toBe(1);
       expect(_mock(fs.writeFile).mock.calls.length).toBe(1);
@@ -49,7 +46,7 @@ describe('libDefs', () => {
 
     pit('does NOT clone the repo if already present on disk', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath === CACHE_REPO_DIR;
+        return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
       });
 
       await ensureCacheRepo();
@@ -78,7 +75,9 @@ describe('libDefs', () => {
 
     pit('does NOT rebase if on disk, but lastUpdated is recent', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
+        return dirPath === CACHE_REPO_DIR || 
+               dirPath === CACHE_REPO_GIT_DIR ||
+               dirPath === LAST_UPDATED_FILE;
       });
       _mock(fs.readFile).mockImplementation((filePath) => {
         if (filePath === LAST_UPDATED_FILE) {
