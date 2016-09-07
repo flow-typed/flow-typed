@@ -7,11 +7,24 @@ const Input = (props: InputProps) => {
     (props.onChange: (v: SyntheticEvent) => mixed);
     (props.onUpdate: (v: string) => mixed);
     (props.onUpdate: (v: SyntheticEvent) => mixed);
-
+    (props.onBlur: (v: string) => mixed);
+    (props.onBlur: (v: SyntheticEvent) => mixed);
     // $ExpectError
     (props.onChange: (v: number) => mixed);
     // $ExpectError
     (props.onUpdate: (v: number) => void);
+    // $ExpectError
+    (props.onBlur: (v: number) => void);
+
+    (props.onDragStart: Function);
+    (props.onDrop: Function);
+    (props.onFocus: Function);
+    // $ExpectError
+    (props.onDragStart: void);
+    // $ExpectError
+    (props.onDrop: void);
+    // $ExpectError
+    (props.onFocus: void);
     return (
         <input {...props}/>
     )
