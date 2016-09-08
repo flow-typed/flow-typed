@@ -179,10 +179,10 @@ function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
     return emptyVersion();
   }
 
-  let upperBound;
+  let otherBound;
   let [
     _1, isAll, _2, range, major, minor, patch,
-    _3, upRange, upMajor, upMinor, upPatch
+    _3, otherRange, otherMajor, otherMinor, otherPatch
   ] = matches;
 
   if (isAll === 'all') {
@@ -199,24 +199,24 @@ function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
     patch =
       validateVersionPart(patch, "patch", pkgFlowDirPath, validationErrs);
 
-    if (upMajor) {
-      upRange = validateVersionRange(upRange, pkgFlowDirPath, validationErrs);
-      upMajor =
-        validateVersionNumPart(upMajor, "major", pkgFlowDirPath, validationErrs);
-      upMinor =
-        validateVersionPart(upMinor, "minor", pkgFlowDirPath, validationErrs);
-      upPatch =
-        validateVersionPart(upPatch, "patch", pkgFlowDirPath, validationErrs);
-      upperBound = {
-        range: upRange,
-        major: upMajor,
-        minor: upMinor,
-        patch: upPatch,
+    if (otherMajor) {
+      otherRange = validateVersionRange(otherRange, pkgFlowDirPath, validationErrs);
+      otherMajor =
+        validateVersionNumPart(otherMajor, "major", pkgFlowDirPath, validationErrs);
+      otherMinor =
+        validateVersionPart(otherMinor, "minor", pkgFlowDirPath, validationErrs);
+      otherPatch =
+        validateVersionPart(otherPatch, "patch", pkgFlowDirPath, validationErrs);
+      otherBound = {
+        range: otherRange,
+        major: otherMajor,
+        minor: otherMinor,
+        patch: otherPatch,
       };
     }
   }
 
-  return {range, major, minor, patch, upperBound};
+  return {range, major, minor, patch, otherBound};
 }
 
 /**
@@ -573,13 +573,13 @@ export function filterLibDefs(
     const filterFlowVer = filter.flowVersion;
     if (filterFlowVer) {
       const filterFlowVerStr = versionToString(filterFlowVer);
-      const defUpperFlow = def.flowVersion.upperBound;
-      if (defUpperFlow) {
+      const defOtherFlow = def.flowVersion.otherBound;
+      if (defOtherFlow) {
         const defLowerFlow = copyVersion(def.flowVersion);
-        defLowerFlow.upperBound = undefined;
+        defLowerFlow.otherBound = undefined;
         return (
           semver.satisfies(filterFlowVerStr, versionToString(defLowerFlow))
-          && semver.satisfies(filterFlowVerStr, versionToString(defUpperFlow))
+          && semver.satisfies(filterFlowVerStr, versionToString(defOtherFlow))
         );
       } else {
         return semver.satisfies(filterFlowVerStr, def.flowVersionStr);
