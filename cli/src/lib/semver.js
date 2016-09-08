@@ -8,7 +8,7 @@ export type Version = {
   major: number | "x",
   minor: number | "x",
   patch: number | "x",
-  upperBound?: Version,
+  upperBound?: Version, // TODO: rename to otherBound
 };
 
 export function emptyVersion(): Version {
@@ -48,6 +48,74 @@ export function sortVersions(a: Version, b: Version): number {
   return 0;
 };
 
+/**
+ * Given a version range, returns the max version satisfying the range.
+ */
+function maxSat(ver: Version): ?Version {
+  if (ver.range === '>=') {
+    // TODO: ensure that if ver.upperBound exists, it is "greater than" ver
+    return ver.upperBound;
+  };
+  return ver;
+}
+
+/**
+ * Given a version range, returns the min version satisfying the range.
+ */
+function minSat(ver: Version): ?Version {
+  if (ver.range === '<=') {
+    // TODO: ensure that if ver.upperBound exists, it is "lesser than" ver
+    return ver.upperBound;
+  };
+  return ver;
+}
+
+/**
+ * Given two version ranges a and b, determine whether a is before b.
+ */
+function lt(n1: number | "x", n2: number | "x"): boolean | "maybe" {
+  if (typeof n1 === 'string' || typeof n2 === 'string') return false;
+  if (n1 < n2) return true;
+  if (n1 > n2) return false;
+  return "maybe";
+}
+function before(a: Version, b: Version): boolean {
+  let test = lt(a.major, b.major);
+  if (test !== "maybe") return test;
+  test = lt(a.minor, b.minor);
+  if (test !== "maybe") return test;
+  test = lt(a.patch, b.patch);
+  if (test !== "maybe") return test;
+  return false;
+}
+
+/**
+ * Given two versions, returns whether they are disjoint.
+ */
+function _before(a: ?Version, b: ?Version): boolean {
+  // If a is undefined, it denotes the maximum version. If b is undefined, it
+  // denotes the minimum version.
+  if (a && b) return before(a, b);
+  return false;
+}
+export function disjointVersions(a: Version, b: Version): boolean {
+  return _before (maxSat(a), minSat(b)) || _before (maxSat(b), minSat(a));
+}
+
+/**
+ * Given an array of versions, returns whether they are mutually disjoint.
+ */
+function _disjointVersionsAll(vers, len, i) {
+  if (i+1 >= len) return true;
+  for (let j = i+1; j < len; j++) {
+    if (!disjointVersions(vers[i], vers[j])) return false;
+  }
+  return _disjointVersionsAll(vers, len, i+1);
+}
+export function disjointVersionsAll(vers: Array<Version>): boolean {
+  return _disjointVersionsAll(vers, vers.length, 0);
+}
+
 // TODO: This has some egregious duplication with
 //       libDef.getLocalLibDefFlowVersions(). Need to better consolidate logic
 const VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
@@ -64,14 +132,14 @@ export function stringToVersion(verStr: string): Version {
   }
   let [
     _1, range, major, minor, patch,
-    _2, upRange, upMajor, upMinor, upPatch,
+    _2, upperRange, upperMajor, upperMinor, upperPatch,
   ] = versionParts;
   if (range != null && range !== ">=" && range !== "<=") {
     throw new Error(`'${verStr}': Invalid version range: ${range}`);
   }
-  if (upRange != null && upRange !== ">=" && upRange !== "<=") {
+  if (upperRange != null && upperRange !== ">=" && upperRange !== "<=") {
     throw new Error(
-      `'${verStr}': Invalid version upper-bound range: ${upRange}`
+      `'${verStr}': Invalid version upper-bound range: ${upperRange}`
     );
   }
 
@@ -84,19 +152,19 @@ export function stringToVersion(verStr: string): Version {
   }
 
   let upperBound;
-  if (upMajor) {
-    upMajor = _validateVersionNumberPart(verStr, "upper-bound major", upMajor);
-    if (upMinor !== "x") {
-      upMinor = _validateVersionNumberPart(verStr, "upper-bound minor", upMinor);
+  if (upperMajor) {
+    upperMajor = _validateVersionNumberPart(verStr, "upper-bound major", upperMajor);
+    if (upperMinor !== "x") {
+      upperMinor = _validateVersionNumberPart(verStr, "upper-bound minor", upperMinor);
     }
-    if (upPatch !== "x") {
-      upPatch = _validateVersionNumberPart(verStr, "upper-bound patch", upPatch);
+    if (upperPatch !== "x") {
+      upperPatch = _validateVersionNumberPart(verStr, "upper-bound patch", upperPatch);
     }
     upperBound = {
-      range: upRange,
-      major: upMajor,
-      minor: upMinor,
-      patch: upPatch,
+      range: upperRange,
+      major: upperMajor,
+      minor: upperMinor,
+      patch: upperPatch,
     };
   }
 

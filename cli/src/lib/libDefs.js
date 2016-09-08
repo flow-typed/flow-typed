@@ -5,7 +5,7 @@ import semver from "semver";
 
 import {mkdirp} from "./fileUtils.js";
 import {fs, path, os} from "./node.js";
-import {emptyVersion, copyVersion, versionToString} from "./semver.js";
+import {emptyVersion, copyVersion, versionToString, disjointVersionsAll} from "./semver.js";
 import type {Version} from "./semver.js";
 
 const P = Promise;
@@ -264,6 +264,10 @@ async function parseLibDefsFromPkgDir(
       validationError(pkgDirItemContext, error, validationErrs);
     }
   });
+
+  if (!disjointVersionsAll(flowDirs.map(([_, ver]) => ver))) {
+    validationError(pkgDirPath, 'Flow versions not disjoint!', validationErrs);
+  }
 
   if (flowDirs.length === 0) {
     validationError(pkgDirPath, 'No libdef files found!', validationErrs);
