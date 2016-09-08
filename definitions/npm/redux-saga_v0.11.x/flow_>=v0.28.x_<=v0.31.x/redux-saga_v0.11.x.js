@@ -94,15 +94,15 @@ declare module 'redux-saga' {
     throw: Function,
   };
 
-  declare type TakeXFn = 
-     & (<Y, R, N, Fn: Saga0<Y, R, N>>(pattern: Pattern, saga: Fn, ...rest: Array<void>) => TakeXRet)
-     & (<T1, Y, R, N, Fn: Saga1<Y, R, N, T1>>(pattern: Pattern, saga: Fn, t1: T1, ...rest: Array<void>) => TakeXRet)
-     & (<T1, T2, Y, R, N, Fn: Saga2<Y, R, N, T1, T2>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, ...rest: Array<void>) => TakeXRet)
-     & (<T1, T2, T3, Y, R, N, Fn: Saga3<Y, R, N, T1, T2, T3>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, ...rest: Array<void>) => TakeXRet)
-     & (<T1, T2, T3, T4, Y, R, N, Fn: Saga4<Y, R, N, T1, T2, T3, T4>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, ...rest: Array<void>) => TakeXRet)
-     & (<T1, T2, T3, T4, T5, Y, R, N, Fn: Saga5<Y, R, N, T1, T2, T3, T4, T5>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, ...rest: Array<void>) => TakeXRet)
-     & (<T1, T2, T3, T4, T5, T6, Y, R, N, Fn: Saga6<Y, R, N, T1, T2, T3, T4, T5, T6>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, ...rest: Array<void>) => TakeXRet)
-     & (<T, Y, R, N, Fn: SagaSpread<Y, R, N, T>>(pattern: Pattern, saga: Fn, t1: T, t2: T, t3: T, t4: T, t5: T, t6: T, ...rest: Array<T>) => TakeXRet)
+  declare type TakeXFn =
+     & (<Y, R, N, Fn: Saga0<Y, R, N>>(pattern: Pattern, saga: Fn) => TakeXRet)
+     & (<T1, Y, R, N, Fn: Saga1<Y, R, N, T1>>(pattern: Pattern, saga: Fn, t1: T1) => TakeXRet)
+     & (<T1, T2, Y, R, N, Fn: Saga2<Y, R, N, T1, T2>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2) => TakeXRet)
+     & (<T1, T2, T3, Y, R, N, Fn: Saga3<Y, R, N, T1, T2, T3>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3) => TakeXRet)
+     & (<T1, T2, T3, T4, Y, R, N, Fn: Saga4<Y, R, N, T1, T2, T3, T4>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4) => TakeXRet)
+     & (<T1, T2, T3, T4, T5, Y, R, N, Fn: Saga5<Y, R, N, T1, T2, T3, T4, T5>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => TakeXRet)
+     & (<T1, T2, T3, T4, T5, T6, Y, R, N, Fn: Saga6<Y, R, N, T1, T2, T3, T4, T5, T6>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => TakeXRet)
+     & (<T, Y, R, N, Fn: SagaSpread<Y, R, N, T>>(pattern: Pattern, saga: Fn, ...rest: Array<T>) => TakeXRet)
 
   declare export var takeEvery: TakeXFn;
   declare export var takeLatest: TakeXFn; 
@@ -347,14 +347,14 @@ declare module 'redux-saga/effects' {
 
   declare type CallFn =
     & ContextCallFn
-    & (<R, Fn: Fn0<R>>(fn: Fn, ...rest: Array<void>) => CallEffect0<null, Fn>)
-    & (<T1, R, Fn: Fn1<T1, R>>(fn: Fn, t1: T1, ...rest: Array<void>) => CallEffect1<null, Fn, T1>)
-    & (<T1, T2, R, Fn: Fn2<T1, T2, R>>(fn: Fn, t1: T1, t2: T2, ...rest: Array<void>) => CallEffect2<null, Fn, T1, T2>)
-    & (<T1, T2, T3, R, Fn: Fn3<T1, T2, T3, R>>(fn: Fn, t1: T1, t2: T2, t3: T3, ...rest: Array<void>) => CallEffect3<null, Fn, T1, T2, T3>)
-    & (<T1, T2, T3, T4, R, Fn: Fn4<T1, T2, T3, T4, R>>(fn: Fn, t1: T1, t2: T2, t3: T3, t4: T4, ...rest: Array<void>) => CallEffect4<null, Fn, T1, T2, T3, T4>)
-    & (<T1, T2, T3, T4, T5, R, Fn: Fn5<T1, T2, T3, T4, T5, R>>(fn: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, ...rest: Array<void>) => CallEffect5<null, Fn, T1, T2, T3, T4, T5>)
-    & (<T1, T2, T3, T4, T5, T6, R, Fn: Fn6<T1, T2, T3, T4, T5, T6, R>>(fn: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, ...rest: Array<void>) => CallEffect6<null, Fn, T1, T2, T3, T4, T5, T6>)
-    & (<T, R, Fn: FnSpread<T, R>>(fn: Fn, t1: T, t2: T, t3: T, t4: T, t5: T, t6: T, ...args: Array<T>) => CallEffectSpread<null, Fn, T>);
+    & (<R, Fn: Fn0<R>>(fn: Fn) => CallEffect0<null, Fn>)
+    & (<T1, R, Fn: Fn1<T1, R>>(fn: Fn, t1: T1) => CallEffect1<null, Fn, T1>)
+    & (<T1, T2, R, Fn: Fn2<T1, T2, R>>(fn: Fn, t1: T1, t2: T2) => CallEffect2<null, Fn, T1, T2>)
+    & (<T1, T2, T3, R, Fn: Fn3<T1, T2, T3, R>>(fn: Fn, t1: T1, t2: T2, t3: T3) => CallEffect3<null, Fn, T1, T2, T3>)
+    & (<T1, T2, T3, T4, R, Fn: Fn4<T1, T2, T3, T4, R>>(fn: Fn, t1: T1, t2: T2, t3: T3, t4: T4) => CallEffect4<null, Fn, T1, T2, T3, T4>)
+    & (<T1, T2, T3, T4, T5, R, Fn: Fn5<T1, T2, T3, T4, T5, R>>(fn: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => CallEffect5<null, Fn, T1, T2, T3, T4, T5>)
+    & (<T1, T2, T3, T4, T5, T6, R, Fn: Fn6<T1, T2, T3, T4, T5, T6, R>>(fn: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => CallEffect6<null, Fn, T1, T2, T3, T4, T5, T6>)
+    & (<T, R, Fn: FnSpread<T, R>>(fn: Fn, ...args: Array<T>) => CallEffectSpread<null, Fn, T>);
 
   /**
    * FORK STUFF

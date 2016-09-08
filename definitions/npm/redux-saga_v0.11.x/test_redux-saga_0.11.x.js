@@ -164,9 +164,6 @@ function callTest() {
   (c5.CALL.args: [string, number, string, number, string]);
   (c6.CALL.args: [string, number, string, number, string, number]);
 
-  // NOTE: Would be nice if this cast would fail, but not a dealbreaker now 
-  (c1.CALL.args: [string, number]);
-
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
