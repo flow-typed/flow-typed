@@ -25,7 +25,7 @@ declare type $npm$ReduxSaga$Task = {
 declare interface $npm$ReduxSaga$Buffer {
   isEmpty(): boolean;
   put(msg: any): void;
-  take(): any; 
+  take(): any;
 }
 
 declare type $npm$ReduxSaga$IOEffect = {
@@ -73,7 +73,7 @@ declare module 'redux-saga' {
 
   declare export var channel: (buffer?: Buffer) => Channel;
   declare export var END: { type: '@@redux-saga/CHANNEL_END' };
-  
+
   /**
    * Saga stuff
    */
@@ -105,20 +105,20 @@ declare module 'redux-saga' {
      & (<T, Y, R, N, Fn: SagaSpread<Y, R, N, T>>(pattern: Pattern, saga: Fn, ...rest: Array<T>) => TakeXRet)
 
   declare export var takeEvery: TakeXFn;
-  declare export var takeLatest: TakeXFn; 
+  declare export var takeLatest: TakeXFn;
   declare export var delay: <T>(ms: number, val?: T) => Promise<T>;
 
   declare type RunSagaCb = (input: any) => any;
 
-  // TODO: make this interface less generic,... 
+  // TODO: make this interface less generic,...
   declare export var runSaga: (
-    iterator: Generator<*,*,*>, 
+    iterator: Generator<*,*,*>,
     options?: {
-      subscribe?: (cb: RunSagaCb) => UnsubscribeFn, 
+      subscribe?: (cb: RunSagaCb) => UnsubscribeFn,
       dispatch?: (output: any) => any,
       getState?: () => any,
       sagaMonitor?: SagaMonitor,
-      logger?: Logger, 
+      logger?: Logger,
     }
   ) => Task;
 
@@ -127,7 +127,7 @@ declare module 'redux-saga' {
     createMockTask: () => Task,
   };
 
-  declare type MiddlewareRunFn = 
+  declare type MiddlewareRunFn =
     & (<Y, R, N, Fn: Saga0<Y, R, N>>(saga: Fn, ...rest: Array<void>) => Task)
     & (<T1, Y, R, N, Fn: Saga1<Y, R, N, T1>>(saga: Fn, t1: T1, ...rest: Array<void>) => Task)
     & (<T1, T2, Y, R, N, Fn: Saga2<Y, R, N, T1, T2>>(saga: Fn, t1: T1, t2: T2, ...rest: Array<void>) => Task)
@@ -149,7 +149,7 @@ declare module 'redux-saga' {
       logger?: Logger,
     }
   ) => SagaMiddleware;
-  
+
   declare export default createSagaMiddleware;
 }
 
@@ -236,11 +236,11 @@ declare module 'redux-saga/effects' {
   }
 
   declare type JoinEffect = $npm$ReduxSaga$IOEffect & {
-    JOIN: EffectTask, 
+    JOIN: EffectTask,
   }
 
   declare type CancelEffect = $npm$ReduxSaga$IOEffect & {
-    CANCEL: EffectTask, 
+    CANCEL: EffectTask,
   }
 
   declare type RaceEffect<T> = $npm$ReduxSaga$IOEffect & {
@@ -263,7 +263,7 @@ declare module 'redux-saga/effects' {
   declare type Fn5<T1, T2, T3, T4, T5, R> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => Promise<R> | Generator<*,R,*>;
   declare type Fn6<T1, T2, T3, T4, T5, T6, R> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => Promise<R> | Generator<*,R,*>;
 
-  declare type SelectFnSpread<T> = (state: any, ...args: Array<T>) => any; 
+  declare type SelectFnSpread<T> = (state: any, ...args: Array<T>) => any;
   declare type SelectFn0 = ((state: any) => any) & (() => any);
   declare type SelectFn1<T1> = (state: any, t1: T1) => any;
   declare type SelectFn2<T1, T2> = (state: any, t1: T1, t2: T2) => any;
@@ -460,7 +460,7 @@ declare module 'redux-saga/effects' {
   }
 
   declare type CancelFn = {
-    (task: Task): CancelEffect; 
+    (task: Task): CancelEffect;
   }
 
   declare type RaceFn = {
@@ -475,7 +475,7 @@ declare module 'redux-saga/effects' {
     apply: ApplyFn,
     cps: CpsFn,
     fork: ForkFn,
-    spawn: SpawnFn, 
+    spawn: SpawnFn,
     join: JoinFn,
     cancel: CancelFn,
     select: SelectFn,
