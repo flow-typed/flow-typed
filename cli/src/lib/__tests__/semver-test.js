@@ -1,6 +1,6 @@
 // @flow
 
-import {stringToVersion, sortVersions, disjointVersions} from '../semver.js';
+import {stringToVersion, sortVersions, disjointVersions, disjointVersionsAll} from '../semver.js';
 
 describe('semver', () => {
   describe('stringToVersion', () => {
@@ -111,6 +111,16 @@ describe('semver', () => {
       b = stringToVersion('>=v0.2.x_<=v1.2.0');
       res = disjointVersions(a, b);
       expect(res).toEqual(true);
+    });
+  });
+
+  describe('disjointVersionsAll', () => {
+    it('checks mutual disjointness of versions correctly', () => {
+      let a = stringToVersion('v1.1.x');
+      let b = stringToVersion('v0.1.x');
+      let c = stringToVersion('v1.x.x');
+      let res = disjointVersionsAll([a,b,c]);
+      expect(res).toEqual(false);
     });
   });
 });

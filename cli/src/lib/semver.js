@@ -105,16 +105,15 @@ export function disjointVersions(a: Version, b: Version): boolean {
 /**
  * Given an array of versions, returns whether they are mutually disjoint.
  */
-function _disjointVersionsAll(vers, i) {
-  const n = vers.length;
-  if (i+1 === n) return true;
-  for (var j = i+1; j < n; j++) {
+function _disjointVersionsAll(vers, len, i) {
+  if (i+1 >= len) return true;
+  for (let j = i+1; j < len; j++) {
     if (!disjointVersions(vers[i], vers[j])) return false;
   }
-  return _disjointVersionsAll(vers, i+1);
+  return _disjointVersionsAll(vers, len, i+1);
 }
 export function disjointVersionsAll(vers: Array<Version>): boolean {
-  return _disjointVersionsAll(vers, 0);
+  return _disjointVersionsAll(vers, vers.length, 0);
 }
 
 // TODO: This has some egregious duplication with
