@@ -95,6 +95,7 @@ export async function run(args: Args): Promise<number> {
     }
   } else {
     depsMap = await getInstalledPackageDependencies(process.cwd());
+    Object.keys(depsMap).forEach((dep) => console.log(`Found npm dependency: ${dep} v${depsMap[dep]}`));
   }
 
   if (!Object.keys(depsMap).length === 0) {
@@ -103,10 +104,11 @@ export async function run(args: Args): Promise<number> {
     );
   }
 
-  // Get a list of defs to install
-  const defs: [LibDef] = [];
+  // Get a list of defs to install.
+  // The following is serialized to prevent a  
+  // error caused by rebasing the libdedf cache concurrently.
+  const defs: Array<LibDef> = [];
   for(let dep in depsMap) {
-    console.log(`Found npm dependency: ${dep} v${depsMap[dep]}`);
     let def = await findLibDef(
       dep, 
       depsMap[dep],
@@ -115,7 +117,7 @@ export async function run(args: Args): Promise<number> {
       defs.push(def); 
     }
   }
-
+  
   console.log(`Installing ${defs.length} defs`);
   await Promise.all(
     defs.map((def) => installLibDef(
