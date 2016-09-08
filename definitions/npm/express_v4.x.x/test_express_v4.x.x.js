@@ -26,8 +26,9 @@ myRouter.use('/dang', (req, res: $Response, next: NextFunction) => {
     res.set('My Header', 'Value');
     res.status(200);
     res.render('someTemplate', {}, (err, html: ?string) => null);
-    // $ExpectError
     res.render('someTemplate', (err, html: ?string) => null);
+    // $ExpectError String: This type is incompatible with Function | {[name: string]: mixed}
+    res.render('someTemplate', 'Error');
     // $ExpectError
     res.sendFile('/myfile.txt', { dotfiles: 'none' })
     // $ExpectError
