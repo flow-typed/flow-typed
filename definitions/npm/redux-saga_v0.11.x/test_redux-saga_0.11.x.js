@@ -682,6 +682,10 @@ function takeLatestTest() {
     yield* takeLatest('Foo', saga0);
   }
 
+  function* yieldForkSaga(): Generator<IOEffect,*,*> {
+    yield fork(takeLatest, 'Foo', saga0);
+  }
+
   const e0 = takeLatest('FOO', saga0);
   const e1 = takeLatest('FOO', saga1, '1');
 

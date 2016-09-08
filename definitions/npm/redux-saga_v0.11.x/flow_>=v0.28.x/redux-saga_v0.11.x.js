@@ -87,12 +87,9 @@ declare module 'redux-saga' {
   declare type Saga5<Y: IOEffect, R, N, T1, T2, T3, T4, T5> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => Generator<Y, R, N>;
   declare type Saga6<Y: IOEffect, R, N, T1, T2, T3, T4, T5, T6> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => Generator<Y, R, N>;
 
-  declare type TakeXRet = {
-    @@iterator(): $Iterator<*,*,*>,
+  declare interface TakeXRet extends Generator<*,*,*> {
     name: string,
-    next: Function,
-    throw: Function,
-  };
+  }
 
   declare type TakeXFn =
      & (<Y, R, N, Fn: Saga0<Y, R, N>>(pattern: Pattern, saga: Fn) => TakeXRet)
