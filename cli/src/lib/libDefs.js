@@ -5,7 +5,13 @@ import semver from "semver";
 
 import {mkdirp} from "./fileUtils.js";
 import {fs, path, os} from "./node.js";
-import {emptyVersion, copyVersion, versionToString, disjointVersionsAll} from "./semver.js";
+import {
+  emptyVersion,
+  copyVersion,
+  versionToString,
+  disjointVersionsAll,
+  isSatVersion,
+} from "./semver.js";
 import type {Version} from "./semver.js";
 
 const P = Promise;
@@ -216,7 +222,11 @@ function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
     }
   }
 
-  return {range, major, minor, patch, upperBound};
+  const ver = {range, major, minor, patch, upperBound};
+  if (!isSatVersion(ver)) {
+    validationError(pkgFlowDirPath, 'Flow version is unsatisfiable!', validationErrs);
+  }
+  return ver;
 }
 
 /**
