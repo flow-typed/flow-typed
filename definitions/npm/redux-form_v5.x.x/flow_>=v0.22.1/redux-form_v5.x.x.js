@@ -4,7 +4,7 @@ import React from 'react';
 declare module 'redux-form' {
   declare type InputProps = {
     name: string,
-    value: string | number | boolean,
+    value: string | boolean,
     valid: boolean,
     invalid: boolean,
     dirty: boolean,
@@ -13,7 +13,13 @@ declare module 'redux-form' {
     touched: boolean,
     visited: boolean,
     autofilled: boolean,
-    error?: string
+    error?: string,
+    onChange: (eventOrValue: SyntheticEvent | string | boolean) => mixed,
+    onUpdate: (eventOrValue: SyntheticEvent | string | boolean) => mixed,
+    onBlur: (eventOrValue: SyntheticEvent | string | boolean) => mixed,
+    onDragStart: Function,
+    onDrop: Function,
+    onFocus: Function,
   };
   declare type FormProps = {
     active: string,
@@ -51,7 +57,7 @@ declare module 'redux-form' {
     onSubmit?: Function,
     onSubmitFail?: Function,
     onSubmitSuccess?: Function,
-    verwriteOnInitialValuesChange?: boolean,
+    overwriteOnInitialValuesChange?: boolean,
     propNamespace?: string,
     readonly?: boolean,
     reduxMountPoint?: String,
