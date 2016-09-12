@@ -11,7 +11,7 @@ declare type tape$TestOpts = {
 };
 
 
-declare type tape$TestCb = (t: tape$Context) => void | Promise<mixed>;
+declare type tape$TestCb = (t: tape$Context) => mixed;
 declare type tape$TestFn = (a: string | tape$TestOpts | tape$TestCb, b?: tape$TestOpts | tape$TestCb, c?: tape$TestCb) => void;
 
 declare interface tape$Context {
