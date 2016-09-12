@@ -249,17 +249,17 @@ async function runTestGroup(
         return true;
       }
 
-      const testGrpUpperBound = testGroup.flowVersion.upperBound;
-      testGroup.flowVersion.upperBound = undefined;
+      const testGrpOtherBound = testGroup.flowVersion.otherBound;
+      testGroup.flowVersion.otherBound = undefined;
       const testGrpLowerBoundStr = versionToString(testGroup.flowVersion);
-      const testGrpUpperBoundStr = testGrpUpperBound
-        ? versionToString(testGrpUpperBound)
+      const testGrpOtherBoundStr = testGrpOtherBound
+        ? versionToString(testGrpOtherBound)
         : undefined;
-      testGroup.flowVersion.upperBound = testGrpUpperBound;
+      testGroup.flowVersion.otherBound = testGrpOtherBound;
 
       if (semver.satisfies(flowVer, testGrpLowerBoundStr)) {
-        if (testGrpUpperBoundStr) {
-          return semver.satisfies(flowVer, testGrpUpperBoundStr);
+        if (testGrpOtherBoundStr) {
+          return semver.satisfies(flowVer, testGrpOtherBoundStr);
         } else{
           return true;
         }
