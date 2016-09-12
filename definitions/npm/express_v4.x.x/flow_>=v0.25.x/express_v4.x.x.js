@@ -137,6 +137,8 @@ declare module 'express' {
     use: RouterMethodType<this>;
 
     route(path: string): Route;
+    
+    static (): Router;
   }
 
   declare function serveStatic(root: string, options?: Object): Middleware;
