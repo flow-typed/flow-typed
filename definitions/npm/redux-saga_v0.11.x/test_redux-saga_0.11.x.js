@@ -4,7 +4,7 @@
 
 import createSagaMiddleware from 'redux-saga';
 
-import { 
+import {
   utils,
   delay,
   eventChannel,
@@ -45,7 +45,7 @@ import type {
 /**
  * SOME COMMON TEST INFRASTRUCTURE
  */
-const myChannel = channel(); 
+const myChannel = channel();
 
 function SomeContext() { this.z = 'foo'; }
 
@@ -111,7 +111,7 @@ function takeTest() {
 
   // $ExpectError: Only string patterns for arrays
   take(['FOO', 'BAR', 1]);
-  
+
   // $ExpectError: Only string patterns for arrays
   takem(['FOO', 'BAR', 1]);
 }
@@ -164,9 +164,6 @@ function callTest() {
   (c5.CALL.args: [string, number, string, number, string]);
   (c6.CALL.args: [string, number, string, number, string, number]);
 
-  // NOTE: Would be nice if this cast would fail, but not a dealbreaker now 
-  (c1.CALL.args: [string, number]);
-
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
@@ -184,7 +181,7 @@ function callTest() {
   // $ExpectError: fn returns a Promise<string> not Promise<number>
   (c1.CALL.fn: (a: boolean) => Promise<number>);
 
-  // $ExpectError: 'a' is actually of type string 
+  // $ExpectError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Promise<string>);
 
   // $ExpectError: Less parameter are noticed
@@ -203,13 +200,13 @@ function callTest() {
 }
 
 function contextCallTest() {
-  const c0 = call([context, fn0]); 
-  const c1 = call([context, fn1], '1'); 
-  const c2 = call([context, fn2], '1', 2); 
-  const c3 = call([context, fn3], '1', 2, '3'); 
-  const c4 = call([context, fn3], '1', 2, '3', 4); 
-  const c5 = call([context, fn3], '1', 2, '3', 4, '5'); 
-  const c6 = call([context, fn3], '1', 2, '3', 4, '5', 6); 
+  const c0 = call([context, fn0]);
+  const c1 = call([context, fn1], '1');
+  const c2 = call([context, fn2], '1', 2);
+  const c3 = call([context, fn3], '1', 2, '3');
+  const c4 = call([context, fn3], '1', 2, '3', 4);
+  const c5 = call([context, fn3], '1', 2, '3', 4, '5');
+  const c6 = call([context, fn3], '1', 2, '3', 4, '5', 6);
   const cClass = call([context2, fn1], '1');
 
   // Fn tests
@@ -253,12 +250,12 @@ function contextCallTest() {
 
 function applyTest() {
   const c0 = apply(context, fn0);
-  const c1 = apply(context, fn1, '1'); 
-  const c2 = apply(context, fn2, '1', 2); 
-  const c3 = apply(context, fn3, '1', 2, '3'); 
-  const c4 = apply(context, fn4, '1', 2, '3', 4); 
-  const c5 = apply(context, fn5, '1', 2, '3', 4, '5'); 
-  const c6 = apply(context, fn6, '1', 2, '3', 4, '5', 6); 
+  const c1 = apply(context, fn1, '1');
+  const c2 = apply(context, fn2, '1', 2);
+  const c3 = apply(context, fn3, '1', 2, '3');
+  const c4 = apply(context, fn4, '1', 2, '3', 4);
+  const c5 = apply(context, fn5, '1', 2, '3', 4, '5');
+  const c6 = apply(context, fn6, '1', 2, '3', 4, '5', 6);
   const cClass = apply(context2, fn1, '1');
 
   // Fn tests
@@ -303,12 +300,12 @@ function applyTest() {
 
 function contextForkTest() {
   const e0 = fork([context, fn0]);
-  const e1 = fork([context, fn1], '1'); 
-  const e2 = fork([context, fn2], '1', 2); 
-  const e3 = fork([context, fn3], '1', 2, '3'); 
-  const e4 = fork([context, fn4], '1', 2, '3', 4); 
-  const e5 = fork([context, fn5], '1', 2, '3', 4, '5'); 
-  const e6 = fork([context, fn6], '1', 2, '3', 4, '5', 6); 
+  const e1 = fork([context, fn1], '1');
+  const e2 = fork([context, fn2], '1', 2);
+  const e3 = fork([context, fn3], '1', 2, '3');
+  const e4 = fork([context, fn4], '1', 2, '3', 4);
+  const e5 = fork([context, fn5], '1', 2, '3', 4, '5');
+  const e6 = fork([context, fn6], '1', 2, '3', 4, '5', 6);
   const eClass = fork([context2, fn1], '1');
   const eGen = fork([context, g1], '1');
 
@@ -345,12 +342,12 @@ function contextForkTest() {
 
 function forkTest() {
   const e0 = fork(fn0);
-  const e1 = fork(fn1, '1'); 
-  const e2 = fork(fn2, '1', 2); 
-  const e3 = fork(fn3, '1', 2, '3'); 
-  const e4 = fork(fn4, '1', 2, '3', 4); 
-  const e5 = fork(fn5, '1', 2, '3', 4, '5'); 
-  const e6 = fork(fn6, '1', 2, '3', 4, '5', 6); 
+  const e1 = fork(fn1, '1');
+  const e2 = fork(fn2, '1', 2);
+  const e3 = fork(fn3, '1', 2, '3');
+  const e4 = fork(fn4, '1', 2, '3', 4);
+  const e5 = fork(fn5, '1', 2, '3', 4, '5');
+  const e6 = fork(fn6, '1', 2, '3', 4, '5', 6);
   const eClass = fork(fn1, '1');
   const eGen = fork(g1, '1');
 
@@ -378,12 +375,12 @@ function forkTest() {
 
 function cpsTest() {
   const e0 = cps(fn0);
-  const e1 = cps(fn1, '1'); 
-  const e2 = cps(fn2, '1', 2); 
-  const e3 = cps(fn3, '1', 2, '3'); 
-  const e4 = cps(fn4, '1', 2, '3', 4); 
-  const e5 = cps(fn5, '1', 2, '3', 4, '5'); 
-  const e6 = cps(fn6, '1', 2, '3', 4, '5', 6); 
+  const e1 = cps(fn1, '1');
+  const e2 = cps(fn2, '1', 2);
+  const e3 = cps(fn3, '1', 2, '3');
+  const e4 = cps(fn4, '1', 2, '3', 4);
+  const e5 = cps(fn5, '1', 2, '3', 4, '5');
+  const e6 = cps(fn6, '1', 2, '3', 4, '5', 6);
   const eClass = cps(fn1, '1');
   const eGen = cps(g1, '1');
 
@@ -411,12 +408,12 @@ function cpsTest() {
 
 function contextCpsTest() {
   const e0 = cps([context, fn0]);
-  const e1 = cps([context, fn1], '1'); 
-  const e2 = cps([context, fn2], '1', 2); 
-  const e3 = cps([context, fn3], '1', 2, '3'); 
-  const e4 = cps([context, fn4], '1', 2, '3', 4); 
-  const e5 = cps([context, fn5], '1', 2, '3', 4, '5'); 
-  const e6 = cps([context, fn6], '1', 2, '3', 4, '5', 6); 
+  const e1 = cps([context, fn1], '1');
+  const e2 = cps([context, fn2], '1', 2);
+  const e3 = cps([context, fn3], '1', 2, '3');
+  const e4 = cps([context, fn4], '1', 2, '3', 4);
+  const e5 = cps([context, fn5], '1', 2, '3', 4, '5');
+  const e6 = cps([context, fn6], '1', 2, '3', 4, '5', 6);
   const eClass = cps([context2, fn1], '1');
   const eGen = cps([context, g1], '1');
 
@@ -453,12 +450,12 @@ function contextCpsTest() {
 
 function spawnTest() {
   const e0 = spawn(fn0);
-  const e1 = spawn(fn1, '1'); 
-  const e2 = spawn(fn2, '1', 2); 
-  const e3 = spawn(fn3, '1', 2, '3'); 
-  const e4 = spawn(fn4, '1', 2, '3', 4); 
-  const e5 = spawn(fn5, '1', 2, '3', 4, '5'); 
-  const e6 = spawn(fn6, '1', 2, '3', 4, '5', 6); 
+  const e1 = spawn(fn1, '1');
+  const e2 = spawn(fn2, '1', 2);
+  const e3 = spawn(fn3, '1', 2, '3');
+  const e4 = spawn(fn4, '1', 2, '3', 4);
+  const e5 = spawn(fn5, '1', 2, '3', 4, '5');
+  const e6 = spawn(fn6, '1', 2, '3', 4, '5', 6);
   const eClass = spawn(fn1, '1');
   const eGen = spawn(g1, '1');
 
@@ -486,12 +483,12 @@ function spawnTest() {
 
 function contextSpawnTest() {
   const e0 = spawn([context, fn0]);
-  const e1 = spawn([context, fn1], '1'); 
-  const e2 = spawn([context, fn2], '1', 2); 
-  const e3 = spawn([context, fn3], '1', 2, '3'); 
-  const e4 = spawn([context, fn4], '1', 2, '3', 4); 
-  const e5 = spawn([context, fn5], '1', 2, '3', 4, '5'); 
-  const e6 = spawn([context, fn6], '1', 2, '3', 4, '5', 6); 
+  const e1 = spawn([context, fn1], '1');
+  const e2 = spawn([context, fn2], '1', 2);
+  const e3 = spawn([context, fn3], '1', 2, '3');
+  const e4 = spawn([context, fn4], '1', 2, '3', 4);
+  const e5 = spawn([context, fn5], '1', 2, '3', 4, '5');
+  const e6 = spawn([context, fn6], '1', 2, '3', 4, '5', 6);
   const eClass = spawn([context2, fn1], '1');
   const eGen = spawn([context, g1], '1');
 
@@ -683,6 +680,10 @@ function takeLatestTest() {
 
   function* sagaOfSaga(): Generator<IOEffect,*,*> {
     yield* takeLatest('Foo', saga0);
+  }
+
+  function* yieldForkSaga(): Generator<IOEffect,*,*> {
+    yield fork(takeLatest, 'Foo', saga0);
   }
 
   const e0 = takeLatest('FOO', saga0);
