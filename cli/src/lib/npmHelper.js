@@ -33,30 +33,17 @@ async function getPackageData(pkgDir: string): Promise<any> {
 
 export type DepsMap = { [key: string]: string };
 
-export async function getDepsFromPkg(pkgDir: string): Promise<DepsMap> {
+async function getDepsFromPkg(pkgDir: string): Promise<DepsMap> {
   let data = await getPackageData(pkgDir);
   return data.dependencies;
 }
 
-export async function getVersionFromPkg(pkgDir: string): Promise<string> {
+async function getVersionFromPkg(pkgDir: string): Promise<string> {
   let data = await getPackageData(pkgDir);
   return data.version;
 }
 
-export async function mapInstalledVersions(deps: DepsMap, rootDir: string): Promise<DepsMap> { 
-  let resolvedDeps: DepsMap = {};
-  for (let dep in deps) {
-    const depDir = path.join(rootDir, 'node_modules', dep);
-    if(await isPackage(depDir)) {
-      let version = await getVersionFromPkg(depDir);   
-      resolvedDeps[dep] = version;
-    }
-  }
-  return resolvedDeps;
-}
-
 export async function getInstalledPackageDependencies(srcPath: string): Promise<DepsMap> {
   let packagePath = await findRootPackage(srcPath);
-  let deps = await getDepsFromPkg(packagePath);
-  return await mapInstalledVersions(deps, packagePath);
+  return await getDepsFromPkg(packagePath);
 }
