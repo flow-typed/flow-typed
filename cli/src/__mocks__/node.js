@@ -1,4 +1,5 @@
 // @flow
+
 // Mocks for the node modules
 import * as node_child_process from 'child_process';
 const node_fs = jest.genMockFromModule('fs');
