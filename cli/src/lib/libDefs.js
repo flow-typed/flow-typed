@@ -297,7 +297,11 @@ async function parseLibDefsFromPkgDir(
   const libDefs = [];
   await P.all(flowDirs.map(async ([flowDirPath, flowVersion]) => {
     const testFilePaths = [].concat(commonTestFiles);
-    const libDefFileName = `${pkgName}_${pkgVersionStr}.js`;
+    const basePkgName =
+      pkgName.charAt(0) === '@'
+      ? pkgName.split(path.sep).reverse()[0]
+      : pkgName;
+    const libDefFileName = `${basePkgName}_${pkgVersionStr}.js`;
     let libDefFilePath;
     (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
       const flowDirItemPath = path.join(flowDirPath, flowDirItem);
@@ -375,6 +379,10 @@ function parseRepoDirItem(dirItemPath, validationErrs) {
   }
 
   let [_, pkgName, major, minor, patch] = itemMatches;
+  const item = path.dirname(dirItemPath).split(path.sep).reverse()[0];
+  if (item.charAt(0) === '@') {
+    pkgName = `${item}${path.sep}${pkgName}`;
+  }
   major =
     validateVersionNumPart(major, "major", dirItemPath, validationErrs);
   minor =
