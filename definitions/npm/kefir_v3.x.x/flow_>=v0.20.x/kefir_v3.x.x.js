@@ -141,9 +141,11 @@ declare module kefir {
    * The `Emitter` class is private - but we can export the type.
    */
   declare type Emitter<T,E> = {
+    value(value: T): void,
     emit(value: T): void,
     error(err: E): void,
     end(): void,
+    event(event: Event<T,E>): void,
     emitEvent(event: Event<T,E>): void,
   }
 
