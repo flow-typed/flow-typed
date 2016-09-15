@@ -125,6 +125,14 @@ export {
 /**
  * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
  */
+async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>, validationErrs?: VErrors) {
+  const parsedDirItem = parseRepoDirItem(pkgDirPath, validationErrs);
+  (await parseLibDefsFromPkgDir(
+    parsedDirItem,
+    pkgDirPath,
+    validationErrs
+  )).forEach(libDef => libDefs.push(libDef));
+}
 export async function getLibDefs(
   defsDir: string,
   validationErrs?: VErrors,
@@ -137,14 +145,27 @@ export async function getLibDefs(
     }
     const itemPath = path.join(defsDir, item);
     const itemStat = await fs.stat(itemPath);
-
     if (itemStat.isDirectory()) {
-      const parsedDirItem = parseRepoDirItem(itemPath, validationErrs);
-      (await parseLibDefsFromPkgDir(
-        parsedDirItem,
-        itemPath,
-        validationErrs
-      )).forEach(libDef => libDefs.push(libDef));
+      if (item.charAt(0) === '@') {
+        // directory is of the form '@<scope>', so go one level deeper
+        const scope = item;
+        const defsDirItems = await fs.readdir(itemPath);
+        await P.all(defsDirItems.map(async (item) => {
+          const itemPath = path.join(defsDir, scope, item);
+          const itemStat = await fs.stat(itemPath);
+          if (itemStat.isDirectory()) {
+            // itemPath is a lib dir
+            await addLibDefs(itemPath, libDefs, validationErrs);
+          } else {
+            const error =
+              `Expected only directories in the 'definitions/npm/@<scope>' directory!`;
+            validationError(itemPath, error, validationErrs);
+          }
+        }));
+      } else {
+        // itemPath is a lib dir
+        await addLibDefs(itemPath, libDefs, validationErrs);
+      }
     } else {
       const error =
         `Expected only directories in the 'definitions/npm' directory!`;
