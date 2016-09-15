@@ -45,7 +45,7 @@ async function getTestGroups(repoDirPath): Promise<Array<TestGroup>> {
   const libDefs = await getLibDefs(repoDirPath);
   return libDefs.map(libDef => {
     const groupID =
-      `${libDef.pkgName}_${libDef.pkgVersionStr}--flow_` +
+      `${libDef.pkgName}_${libDef.pkgVersionStr}${path.sep}flow_` +
       `${libDef.flowVersionStr}`;
     return {
       id: groupID,
@@ -191,7 +191,7 @@ async function runTestGroup(
   errors = []
 ): Promise<Array<string>> {
   // Some older versions of Flow choke on ">"/"<"/"="
-  const testDirName = testGroup.id
+  const testDirName = testGroup.id.split(path.sep).join('--')
     .replace(/>/g, "gt")
     .replace(/</g, "lt")
     .replace(/=/g, "eq");

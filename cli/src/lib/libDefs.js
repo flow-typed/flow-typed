@@ -128,6 +128,15 @@ export {
   LAST_UPDATED_FILE as _LAST_UPDATED_FILE,
 };
 
+async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>, validationErrs?: VErrors) {
+  const parsedDirItem = parseRepoDirItem(pkgDirPath, validationErrs);
+  (await parseLibDefsFromPkgDir(
+    parsedDirItem,
+    pkgDirPath,
+    validationErrs
+  )).forEach(libDef => libDefs.push(libDef));
+}
+
 /**
  * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
  */
@@ -143,14 +152,27 @@ export async function getLibDefs(
     }
     const itemPath = path.join(defsDir, item);
     const itemStat = await fs.stat(itemPath);
-
     if (itemStat.isDirectory()) {
-      const parsedDirItem = parseRepoDirItem(itemPath, validationErrs);
-      (await parseLibDefsFromPkgDir(
-        parsedDirItem,
-        itemPath,
-        validationErrs
-      )).forEach(libDef => libDefs.push(libDef));
+      if (item.charAt(0) === '@') {
+        // directory is of the form '@<scope>', so go one level deeper
+        const scope = item;
+        const defsDirItems = await fs.readdir(itemPath);
+        await P.all(defsDirItems.map(async (item) => {
+          const itemPath = path.join(defsDir, scope, item);
+          const itemStat = await fs.stat(itemPath);
+          if (itemStat.isDirectory()) {
+            // itemPath is a lib dir
+            await addLibDefs(itemPath, libDefs, validationErrs);
+          } else {
+            const error =
+              `Expected only directories in the 'definitions/npm/@<scope>' directory!`;
+            validationError(itemPath, error, validationErrs);
+          }
+        }));
+      } else {
+        // itemPath is a lib dir
+        await addLibDefs(itemPath, libDefs, validationErrs);
+      }
     } else {
       const error =
         `Expected only directories in the 'definitions/npm' directory!`;
@@ -305,7 +327,11 @@ async function parseLibDefsFromPkgDir(
   const libDefs = [];
   await P.all(flowDirs.map(async ([flowDirPath, flowVersion]) => {
     const testFilePaths = [].concat(commonTestFiles);
-    const libDefFileName = `${pkgName}_${pkgVersionStr}.js`;
+    const basePkgName =
+      pkgName.charAt(0) === '@'
+      ? pkgName.split(path.sep).pop()
+      : pkgName;
+    const libDefFileName = `${basePkgName}_${pkgVersionStr}.js`;
     let libDefFilePath;
     (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
       const flowDirItemPath = path.join(flowDirPath, flowDirItem);
@@ -383,6 +409,10 @@ function parseRepoDirItem(dirItemPath, validationErrs) {
   }
 
   let [_, pkgName, major, minor, patch] = itemMatches;
+  const item = path.dirname(dirItemPath).split(path.sep).pop();
+  if (item.charAt(0) === '@') {
+    pkgName = `${item}${path.sep}${pkgName}`;
+  }
   major =
     validateVersionNumPart(major, "major", dirItemPath, validationErrs);
   minor =

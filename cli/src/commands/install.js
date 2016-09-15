@@ -67,9 +67,9 @@ export async function run(args: Args): Promise<number> {
 
   const term = args._[1];
 
-  const matches = term.match(/([^@]*)@?(.*)?/);
-  const defName = (matches && matches[1]);
-  const defVersion = (matches && matches[2]) || 'auto';
+  const matches = term.match(/(@[^@\/]+\/)?([^@]*)@?(.*)?/);
+  const defName = (matches && (matches[1] ? matches[1] + matches[2] : matches[2]));
+  const defVersion = (matches && matches[3]) || 'auto';
 
   if (!defName) {
     return failWithMessage(
@@ -140,7 +140,12 @@ export async function run(args: Args): Promise<number> {
 
   const flowTypedDir = path.join(projectRoot, 'flow-typed', 'npm');
   await mkdirp(flowTypedDir);
-  const targetFileName = `${def.pkgName}_${def.pkgVersionStr}.js`;
+  const pkgName = def.pkgName;
+  if (pkgName.charAt(0) === '@') {
+    const scopeDir = path.join(projectRoot, 'flow-typed', 'npm', pkgName.split(path.sep)[0]);
+    await mkdirp(scopeDir);
+  }
+  const targetFileName = `${pkgName}_${def.pkgVersionStr}.js`;
   const targetFilePath = path.join(flowTypedDir, targetFileName);
 
   const terseTargetFile = path.relative(process.cwd(), targetFilePath);
