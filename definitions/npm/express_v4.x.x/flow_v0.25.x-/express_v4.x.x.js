@@ -102,6 +102,7 @@ declare module 'express' {
     (path: string, router: Router): T;
   }
   declare class Route {
+    all: RouteMethodType<this>;
     get: RouteMethodType<this>;
     post: RouteMethodType<this>;
     put: RouteMethodType<this>;
