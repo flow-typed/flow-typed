@@ -167,29 +167,34 @@ export async function getLibDefs(
  */
 const FLOW_VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
 const FLOW_DIR_NAME_RE = new RegExp(
-  `^flow_(all|(-)?${FLOW_VER}(-)?(${FLOW_VER}(-)?)?)$`
+  `^flow_(all|((-)?${FLOW_VER}(-)?(${FLOW_VER})?))$`
 );
 
 function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
   const pkgFlowDirName = path.basename(pkgFlowDirPath);
 
-  const matches = pkgFlowDirName.match(FLOW_DIR_NAME_RE);
-  if (matches == null) {
+  function invalidDirectoryName() {
     const repoPath = path.resolve(pkgFlowDirPath, '..', '..', '..');
     const pkgFlowDirContext = path.relative(repoPath, pkgFlowDirPath);
     const error =
       `Malformed flow-version directory name! Expected the name to be ` +
       `formatted as 'flow_all' or ` +
-      `'flow_(>=|<=)?v<VERSION>' or ` +
-      `'flow_(>=|<=)?v<VERSION>_(>=|<=)v<VERSION>' (for a range).`;
+      `'flow_-?v<VERSION>' or ` +
+      `'flow_v<VERSION>-?' or ` +
+      `'flow_v<VERSION>-v<VERSION>' (for a range).`;
     validationError(pkgFlowDirContext, error, validationErrs);
+  }
+
+  const matches = pkgFlowDirName.match(FLOW_DIR_NAME_RE);
+  if (matches == null) {
+    invalidDirectoryName();
     return emptyVersion();
   }
 
   let upperBound;
   let [
     _1, isAll, _2, range, major, minor, patch,
-    _3, upRange, upMajor, upMinor, upPatch
+    upRange, _3, upMajor, upMinor, upPatch
   ] = matches;
 
   if (isAll === 'all') {
@@ -197,23 +202,32 @@ function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
     major = 'x';
     minor = 'x';
     patch = 'x';
-  } else {
-    range = validateVersionRange(range, pkgFlowDirPath, validationErrs);
-    major =
-      validateVersionNumPart(major, "major", pkgFlowDirPath, validationErrs);
-    minor =
-      validateVersionPart(minor, "minor", pkgFlowDirPath, validationErrs);
-    patch =
-      validateVersionPart(patch, "patch", pkgFlowDirPath, validationErrs);
-
+  } else if (range && upRange) {
+    // flow_-v0.x.x-
+    invalidDirectoryName();
+    return emptyVersion();
+  } else if (range && upMajor) {
+    // flow_-v0.x.xv0.x.x
+    invalidDirectoryName();
+    return emptyVersion();
+  } else if (range) {
+    // flow_-0.x.x
+    range = "<=";
+    major = validateVersionNumPart(major, "major", pkgFlowDirPath, validationErrs);
+    minor = validateVersionPart(minor, "minor", pkgFlowDirPath, validationErrs);
+    patch = validateVersionPart(patch, "patch", pkgFlowDirPath, validationErrs);
+  } else if (upRange) {
+    // flow_0.x.x-
+    // flow_0.x.x-0.x.x (if upMajor)
+    range = ">=";
+    major = validateVersionNumPart(major, "major", pkgFlowDirPath, validationErrs);
+    minor = validateVersionPart(minor, "minor", pkgFlowDirPath, validationErrs);
+    patch = validateVersionPart(patch, "patch", pkgFlowDirPath, validationErrs);
     if (upMajor) {
-      upRange = validateVersionRange(upRange, pkgFlowDirPath, validationErrs);
-      upMajor =
-        validateVersionNumPart(upMajor, "major", pkgFlowDirPath, validationErrs);
-      upMinor =
-        validateVersionPart(upMinor, "minor", pkgFlowDirPath, validationErrs);
-      upPatch =
-        validateVersionPart(upPatch, "patch", pkgFlowDirPath, validationErrs);
+      upRange = "<=";
+      upMajor = validateVersionNumPart(upMajor, "major", pkgFlowDirPath, validationErrs);
+      upMinor = validateVersionPart(upMinor, "minor", pkgFlowDirPath, validationErrs);
+      upPatch = validateVersionPart(upPatch, "patch", pkgFlowDirPath, validationErrs);
       upperBound = {
         range: upRange,
         major: upMajor,
@@ -221,6 +235,10 @@ function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
         patch: upPatch,
       };
     }
+  } else {
+    // shouldn't happen
+    invalidDirectoryName();
+    return emptyVersion();
   }
 
   const ver = {range, major, minor, patch, upperBound};
@@ -413,23 +431,6 @@ function validateVersionPart(part, partName, context, validationErrs?) {
     return part;
   }
   return validateVersionNumPart(part, partName, context, validationErrs);
-}
-
-/**
- * Given a range-part of a version string (i.e. `>=`/`<=`), parse into a range
- * string. This basically just asserts that the range part is valid.
- */
-function validateVersionRange(range, context, validationErrs?) {
-  switch (range) {
-    case undefined:
-    case '>=':
-    case '<=':
-      return range;
-    default:
-      const error = `Invalid range: '${range}'. Expected '>=' or '<='.`;
-      validationError(context, error, validationErrs);
-      return '<=';
-  }
 }
 
 /**
