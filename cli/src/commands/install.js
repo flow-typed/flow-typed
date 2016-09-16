@@ -168,6 +168,11 @@ async function installLibDef(
   }
 } 
 
+const flowBuiltInLibs: Array<string> = [
+  'react',
+  'react-dom',
+];
+
 /**
  * Search flow typed, or the cache, for a matching libdef.
  */
@@ -206,11 +211,19 @@ async function findLibDef(
 
   console.log(`Searching libdefs for ${defName} v${defVersion}...`);
   if (filtered.length === 0) {
-    console.log(
-      `  found no matching libdefs for flow@${versionToString(flowVersion)}. \n` +
-      `  Consider submitting one to https://github.com/flowtype/flow-typed/`);
-    return null;
+    if(flowBuiltInLibs.indexOf[defName.toLowerCase()] === -1) {
+      console.log(
+        `  found no matching libdefs for flow@${versionToString(flowVersion)}. \n` +
+        `  Consider submitting one to https://github.com/flowtype/flow-typed/`);
+      return null;
+  } else {
+      console.log(
+        `  found no matching libdefs for flow@${versionToString(flowVersion)}. \n` +
+        `  will use flow's built-in support.`);
+      return null;
   }
+
+    }
   console.log('  found %s matching libdefs.', filtered.length);
   return filtered[0];
 }
