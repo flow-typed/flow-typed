@@ -225,7 +225,6 @@ describe('libDefs', () => {
       function _generateLibDef(pkgName, pkgVersionStr, flowVersionStr) {
         return {
           pkgName,
-          pkgVersion: stringToVersion(pkgVersionStr),
           pkgVersionStr,
           pkgNameVersionStr: `${pkgName}_${pkgVersionStr}`,
           flowVersion: stringToVersion(flowVersionStr),
@@ -284,6 +283,43 @@ describe('libDefs', () => {
           flowVersion: stringToVersion('v0.19.0')
         });
         expect(filtered).toEqual([fixture[1]]);
+      });
+
+      describe('given a package range', () => {
+        it("DOES NOT match when libdef range does not intersect package range", () => {
+          const fixture = [
+            _generateFixturePkg('mori', 'v0.2.x', '>=v0.22.x'),
+            _generateFixturePkg('mori', 'v0.4.x', '>=v0.22.x'),
+          ];
+          const filtered = filterLibDefs(fixture,{
+            type: 'exact',
+            libDef: _generateLibDef('mori', '^0.3.0', 'v0.x.x'),
+          });
+          expect(filtered).toEqual([]);
+        });
+        
+        it("DOES NOT match when ranges intersect but package supports older versions than libdef", () => {
+          const fixture = [
+            _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
+          ];
+          const filtered = filterLibDefs(fixture,{
+            type: 'exact',
+            libDef: _generateLibDef('mori', '>=0.2.9 <0.3.0', 'v0.x.x'),
+          });
+          expect(filtered).toEqual([]);
+        });
+
+        it("matches when ranges intersect and libdef support older versions", () => {
+          const fixture = [
+            _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
+            _generateFixturePkg('mori', 'v0.3.8', '>=v0.22.x'),
+          ];
+          const filtered = filterLibDefs(fixture,{
+            type: 'exact',
+            libDef: _generateLibDef('mori', '>=0.3.1 <0.4.0', 'v0.x.x'),
+          });
+          expect(filtered).toEqual([fixture[0], fixture[1]]);
+        });
       });
     });
   });

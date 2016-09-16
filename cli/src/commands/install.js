@@ -7,7 +7,7 @@ import type {LibDef} from "../lib/libDefs.js";
 import {fs, path} from '../lib/node.js';
 import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 import type {Version} from "../lib/semver.js";
-import {getInstalledPackageDependencies} from "../lib/npmHelper.js";
+import {getPackageDependencies} from "../lib/npmHelper.js";
 import type {DepsMap} from "../lib/npmHelper.js";
 
 export const name = 'install';
@@ -94,7 +94,7 @@ export async function run(args: Args): Promise<number> {
       depsMap[defName] = defVersion;
     }
   } else {
-    depsMap = await getInstalledPackageDependencies(process.cwd());
+    depsMap = await getPackageDependencies(process.cwd());
     Object.keys(depsMap).forEach((dep) => console.log(`Found npm dependency: ${dep} v${depsMap[dep]}`));
   }
 
@@ -178,14 +178,11 @@ async function findLibDef(
 
   let filter;
   if (defVersion !== 'auto') {
-    const verStr = `v${defVersion}`;
-    const ver = stringToVersion(verStr);
     filter = {
       type: 'exact',
       libDef: {
         pkgName: defName,
-        pkgVersion: ver,
-        pkgVersionStr: verStr,
+        pkgVersionStr: defVersion,
 
         // This is clowny... These probably shouldn't be part of the filter
         // object...

@@ -4,7 +4,7 @@ jest.mock('../node.js');
 import {fs} from '../node.js';
 
 jest.unmock('../npmHelper.js');
-import {getInstalledPackageDependencies} from "../npmHelper.js";
+import {getPackageDependencies} from "../npmHelper.js";
 
 describe('npmHelper', ()=> {
   const MOCK_FILE_INFO = {
@@ -12,8 +12,8 @@ describe('npmHelper', ()=> {
     `{
       "dependencies": 
       {
-        "existing-dependency": "^0.0.1",
-        "missing-dependency": "^0.0.2"
+        "installed-dependency": "^0.0.1",
+        "uninstalled-dependency": "^0.0.2"
       }
     }`,
     '/home/root/node_modules/existing-dependency/package.json': 
@@ -29,7 +29,7 @@ describe('npmHelper', ()=> {
     `                                
   };
 
-  describe('getInstalledPackageDependencies', async ()=>{
+  describe('getPackageDependencies', async ()=>{
     beforeEach(() => {
       // Set up some mocked out file info before each test
       (fs:any).__setMockFiles(MOCK_FILE_INFO);
@@ -37,16 +37,15 @@ describe('npmHelper', ()=> {
 
     it('throws an error message if package.json is not found', async ()=> {
       try {
-        await getInstalledPackageDependencies('/home');
+        await getPackageDependencies('/home');
       } catch(e) {
         expect(e.message).toBeDefined();
       }
     });
     it('return a map of found dependencies: version', async ()=> {
-        let deps = await getInstalledPackageDependencies('/home/root');
-        expect(deps['existing-dependency']).toBeDefined();
-        expect(deps['existing-dependency']).toEqual('1.0.1');
-        expect(deps['missing-dependency']).toBeUndefined();
+        let deps = await getPackageDependencies('/home/root');
+        expect(deps['installed-dependency']).toEqual('^0.0.1');
+        expect(deps['uninstalled-dependency']).toEqual('^0.0.2');
     });
   });
 });

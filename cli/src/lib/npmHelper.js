@@ -38,12 +38,7 @@ async function getDepsFromPkg(pkgDir: string): Promise<DepsMap> {
   return data.dependencies;
 }
 
-async function getVersionFromPkg(pkgDir: string): Promise<string> {
-  let data = await getPackageData(pkgDir);
-  return data.version;
-}
-
-export async function getInstalledPackageDependencies(srcPath: string): Promise<DepsMap> {
+export async function getPackageDependencies(srcPath: string): Promise<DepsMap> {
   let packagePath = await findRootPackage(srcPath);
   return await getDepsFromPkg(packagePath);
 }
