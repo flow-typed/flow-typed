@@ -3,6 +3,8 @@ type AlignFlag = 'left' | 'right' | 'center'
 type NodeCallback<T> = (e: ?Error, d: ?T) => void
 
 class Renderer {
+  constructor: (o?: MarkedOptions) => Renderer
+  options: MarkedOptions;
   code: (c: string, l: string) => string;
   blockquote: (q: string) => string;
   html: (h: string) => string;
@@ -22,6 +24,7 @@ class Renderer {
   del: (t: string) => string;
   link: (h: string, ti: string, te: string) => string;
   image: (h: string, ti: string, te: string) => string;
+  text: (t: string) => string;
 }
 
 type HighlightFunction =
@@ -73,23 +76,57 @@ type Token =
   | Text
 
 type Link = {
-  title: string;
+  title: ?string;
   href: string;
 }
 
-type lex = (t: string) => { links: Array<Link> } & Array<Token>;
+type Tokens = { links: Array<Link> } & Array<Token>;
 
 type NoopRule = {
   (i: mixed): void;
   exec: (i: mixed) => void;
 }
+
 type Rule = RegExp | NoopRule
 
+type lex = (t: string) => Tokens;
+
 class Lexer {
-  // TODO: check if that object actually is the same as markedoptons
+  static lexer: (t: string, o?: MarkedOptions) => Tokens;
+  static rules: { [key: string]: Rule };
+  rules: { [key: string]: Rule };
   constructor: (o?: MarkedOptions) => Lexer;
   lex: lex;
-  rules: { [key: string]: Rule };
+  tokens: Tokens;
+  options: MarkedOptions;
+}
+
+class Parser {
+  static parse: (t: Tokens, o?: MarkedOptions) => string;
+  constructor: (o?: MarkedOptions) => Parser;
+  parse: (t: Tokens) => string;
+  next: () => Token;
+  peek: () => Token;
+  parseText: () => string;
+  tok: () => string;
+  tokens: Tokens;
+  token: ?Token;
+  options: MarkedOptions;
+  renderer: Renderer;
+}
+
+class InlineLexer {
+  static rules: Array<Rule>;
+  static output: (s: string, l: Array<Link>, o?: MarkedOptions) => string;
+  constructor: (l: Array<Link>, o?: MarkedOptions) => InlineLexer;
+  output: (s: string) => string;
+  outputLink: (c: Array<string>, l: Link) => string;
+  smartypants: (t: string) => string;
+  mangle: (t: string) => string;
+  options: MarkedOptions;
+  links: Array<Link>;
+  rules: Array<Rule>;
+  renderer: Renderer;
 }
 
 declare module marked {
@@ -98,10 +135,15 @@ declare module marked {
     (md: string, cb: NodeCallback<string>): void;
     (md: string, o?: MarkedOptions): string;
     setOptions: (o: MarkedOptions) => void;
-    parser: (t: Array<Token>) => string;
-    lexer: lex;
+    defaults: MarkedOptions;
+    Parser: typeof Parser;
+    parser: typeof Parser.parse;
     Lexer: typeof Lexer;
+    lexer: typeof Lexer.lexer;
+    InlineLexer: typeof InlineLexer;
+    inlinelexer: InlineLexer.output;
     Renderer: typeof Renderer;
+    parse: Marked;
   }
 
   declare export default Marked;
