@@ -5,7 +5,13 @@ import semver from "semver";
 
 import {mkdirp} from "./fileUtils.js";
 import {fs, path, os} from "./node.js";
-import {emptyVersion, copyVersion, versionToString} from "./semver.js";
+import {
+  emptyVersion,
+  copyVersion,
+  versionToString,
+  disjointVersionsAll,
+  isSatVersion,
+} from "./semver.js";
 import type {Version} from "./semver.js";
 
 const P = Promise;
@@ -24,7 +30,7 @@ const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
 const GIT_REPO_DIR = path.join(__dirname, '..', '..', '..');
 
-const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
+const REMOTE_REPO_URL = 'http://github.com/flowtype/flow-typed.git';
 const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
 
 async function cloneCacheRepo(verbose?: VerboseOutput) {
@@ -74,7 +80,7 @@ async function updateCacheRepo(verbose?: VerboseOutput) {
  * Ensure that the CACHE_REPO_DIR exists and is recently rebased.
  * (else: create/rebase it)
  */
-const CACHE_REPO_EXPIRY = 1000 * 3600 * 24 * 5; // 5 days
+const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
 async function ensureCacheRepo(verbose?: VerboseOutput, cacheRepoExpiry: number = CACHE_REPO_EXPIRY) {
   if (!await fs.exists(CACHE_REPO_DIR) || !await fs.exists(CACHE_REPO_GIT_DIR)) {
     writeVerbose(
@@ -216,7 +222,11 @@ function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
     }
   }
 
-  return {range, major, minor, patch, upperBound};
+  const ver = {range, major, minor, patch, upperBound};
+  if (!isSatVersion(ver)) {
+    validationError(pkgFlowDirPath, 'Flow version is unsatisfiable!', validationErrs);
+  }
+  return ver;
 }
 
 /**
@@ -264,6 +274,10 @@ async function parseLibDefsFromPkgDir(
       validationError(pkgDirItemContext, error, validationErrs);
     }
   });
+
+  if (!disjointVersionsAll(flowDirs.map(([_, ver]) => ver))) {
+    validationError(pkgDirPath, 'Flow versions not disjoint!', validationErrs);
+  }
 
   if (flowDirs.length === 0) {
     validationError(pkgDirPath, 'No libdef files found!', validationErrs);

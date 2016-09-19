@@ -25,6 +25,9 @@ const myRouter = new express.Router();
 myRouter.use('/dang', (req, res: $Response, next: NextFunction) => {
     res.set('My Header', 'Value');
     res.status(200);
+    res.render('someTemplate', {}, (err, html: ?string) => null);
+    // $ExpectError
+    res.render('someTemplate', (err, html: ?string) => null);
     // $ExpectError
     res.sendFile('/myfile.txt', { dotfiles: 'none' })
     // $ExpectError
@@ -104,7 +107,7 @@ app.enable(100);
 // $ExpectError
 const f: number = app.enabled('100');
 
-app.render('view', { title: 'News Feed' }, (err: ?Error, html: string): void => {
+app.render('view', { title: 'News Feed' }, (err: ?Error, html: ?string): void => {
     if (err) return console.log(err);
     console.log(html);
 });
