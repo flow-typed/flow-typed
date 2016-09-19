@@ -1,7 +1,7 @@
 // @flow
 
 import {signCodeStream} from "../lib/codeSign.js";
-import {copyFile, mkdirp, searchUpDirPath} from "../lib/fileUtils.js";
+import {copyFile, mkdirp} from "../lib/fileUtils.js";
 import {getCacheLibDefVersion, getCacheLibDefs, filterLibDefs} from "../lib/libDefs.js";
 import type {LibDef} from "../lib/libDefs.js";
 import {fs, path} from '../lib/node.js';
@@ -10,6 +10,7 @@ import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 import type {Version} from "../lib/semver.js";
 import {getPackageDependencies, getPackageFlowBinSemver} from "../lib/npmHelper.js";
 import type {DepsMap} from "../lib/npmHelper.js";
+import findFlowRoot from '../lib/findFlowRoot';
 
 export const name = 'install';
 export const description = 'Installs a libdef to the ./flow-typed directory';
@@ -73,7 +74,7 @@ export async function run(args: Args): Promise<number> {
 
 
   // Find the project root
-  const projectRoot = await findFlowProjectRoot(launchDirectory);
+  const projectRoot = await findFlowRoot(launchDirectory);
   if (projectRoot === null) {
     return failWithMessage(
       `\nERROR: Unable to find a flow project in the current dir or any of ` +
@@ -242,18 +243,6 @@ async function findLibDef(
     }
   console.log('  found %s matching libdefs.', filtered.length);
   return filtered[0];
-}
-
-async function findFlowProjectRoot(fromPath: string) {
-  return await searchUpDirPath(fromPath, async (dirPath) => {
-    const flowConfigPath = path.join(dirPath, '.flowconfig');
-    try {
-      return fs.statSync(flowConfigPath).isFile();
-    } catch (e) {
-      // Not a file...
-      return false;
-    }
-  });
 }
 
 async function getFlowVersionString(startPath: string): Promise<string> {
