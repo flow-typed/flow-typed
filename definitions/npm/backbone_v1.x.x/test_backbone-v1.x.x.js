@@ -19,13 +19,15 @@ const FooModel: Class<Fooable> = Backbone.Model.extend({
   }
 });
 
-
-
-
 const instance = new FooModel();
+instance.fetch({});
 
 // $ExpectError
+instance.fetch(null);
+// $ExpectError
 instance.set(10);
+
+instance.toJSON();
 
 // $ExpectError
 (instance.foo(): number);

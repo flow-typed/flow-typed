@@ -44,7 +44,6 @@ declare module 'backbone' {
     initialize(): void;
     toJSON(): Attrs;
     sync: sync;
-    fetch(options: Object):  XMLHttpRequest;
     set(attrs: Attrs, options?: Object): this;
     set(attr: string, value: mixed, options?: Object): this;
     has(attr: string): boolean;
@@ -53,7 +52,7 @@ declare module 'backbone' {
     escape(attr: string): mixed;
     previous(attr: string): mixed;
     previousAttributes(): Attrs;
-    fetch(options?: Object): any;
+    fetch(options?: Object): any; // @TODO should return a jQuery XHR, but I cannot define this without the dependency on jquery lib def.
     keys(): string[];
     values(): mixed[];
     pairs: Function;
@@ -62,9 +61,20 @@ declare module 'backbone' {
     omit: Function;
     chain(): Function;
     isEmpty(): boolean;
+    isValid(): boolean;
+    url(): string;
+    urlRoot: string | () => string,
+    clone: this;
+    isNew: boolean;
+    hasChanged(attribute?: string): boolean;
+    chagnedAttributes(attributes?: {[attr: string]: mixed}): boolean;
+    previous(attribute: string): mixed;
+    previousAttirbutes(): Attrs;
   }
   declare class Collection mixins Events {
     static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Collection & P> & CP;
+    model: Model;
+    modelId(attributes: Attrs): string;
   }
   declare class View mixins Events {
     static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<View & P> & CP;
