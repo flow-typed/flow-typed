@@ -4,7 +4,7 @@ import {signCodeStream} from "../lib/codeSign.js";
 import {copyFile, mkdirp, searchUpDirPath} from "../lib/fileUtils.js";
 import {getCacheLibDefVersion, getCacheLibDefs, filterLibDefs} from "../lib/libDefs.js";
 import type {LibDef} from "../lib/libDefs.js";
-import {fs, path} from '../lib/node.js';
+import {fs, path, child_process} from '../lib/node.js';
 import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 import type {Version} from "../lib/semver.js";
 import {getPackageDependencies} from "../lib/npmHelper.js";
@@ -48,11 +48,18 @@ type Args = {
 
 
 export async function run(args: Args): Promise<number> {
-  const {flowVersion: flowVersionRaw} = args;
+
+  let {flowVersion: flowVersionRaw} = args;
   if (flowVersionRaw == null) {
-    return failWithMessage(
-      'Please provide a flow version (example: --flowVersion 0.24.0)'
-    );
+    try {
+      flowVersionRaw = await getFlowVersionString();
+      console.log(`Found installed flow version: ${flowVersionRaw}`);
+    } catch(err) {
+      return failWithMessage(
+        `Failed to find an installed flow version.  
+         Please provide a flow version (example: --flowVersion 0.24.0)`
+      );
+    }
   }
   let flowVersionStr =
     flowVersionRaw[0] === 'v'
@@ -95,7 +102,7 @@ export async function run(args: Args): Promise<number> {
     }
   } else {
     depsMap = await getPackageDependencies(process.cwd());
-    Object.keys(depsMap).forEach((dep) => console.log(`Found npm dependency: ${dep} v${depsMap[dep]}`));
+    Object.keys(depsMap).forEach((dep) => console.log(`Found npm dependency: ${dep} ${depsMap[dep]}`));
   }
 
   if (!Object.keys(depsMap).length === 0) {
@@ -209,7 +216,7 @@ async function findLibDef(
   const defs = await getCacheLibDefs();
   const filtered = filterLibDefs(defs, filter);
 
-  console.log(`Searching libdefs for ${defName} v${defVersion}...`);
+  console.log(`Searching libdefs for ${defName} ${defVersion}...`);
   if (filtered.length === 0) {
     if(flowBuiltInLibs.indexOf[defName.toLowerCase()] === -1) {
       console.log(
@@ -271,4 +278,21 @@ async function findFlowProjectRoot() {
   console.log(`'${targetFileName}' installed at ${targetFilePath}.`);
 
   return 0;
+}
+
+async function getFlowVersionString(): Promise<string> {
+  function _runExec(): Promise<string> {
+    return new Promise((res, rej) => {
+      child_process.exec("flow version", (err, data) => {
+        if (err) { rej(err); } else {
+          const stringData: string = (typeof data === 'string') ? data : data.toString("utf-8");
+          res( stringData ); 
+        }
+      });
+    });
+  }
+
+  const flowStdout = await _runExec();
+  const versionMatch = flowStdout.match(/(\d+.\d+.\d+)/);
+  return (versionMatch) ? versionMatch[0] : "";
 }
