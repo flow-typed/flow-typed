@@ -32,8 +32,8 @@ instance.fetch({});
 
 
 
-class TasksCollection extends Backbone.Collection<{}> {
-    model = TaskModel;
+class TasksCollection extends Backbone.Collection {
+    model: TaskModel;
 }
 
 const tasks = new TasksCollection();
@@ -46,10 +46,10 @@ tasks.toJSON([]);
 // $ExpectError should not allow to be non number
 tasks.length = false;
 
-(tasks.pluck('name'): Array<{}>);
+(tasks.pluck('name'): Array<any>);
 
 // $ExpectError
-(task.pluck(2): Array<{}>);
+(task.pluck(2): Array<any>);
 
 (tasks.forEach: Function);
 (tasks.sync(): Function)
@@ -65,14 +65,17 @@ instance.toJSON();
 
 
 class TasksRouter extends Backbone.Router {
-    routes = {
-        // $ExpectError
-        '10': false
-    };
+    constructor() {
+        super();
+        this.routes = {
+            // $ExpectError
+            '10': false
+        };
+    }
 };
 
-// $ExpectError should only allow Object
-const router = new TasksRouter(null);
+
+const router = new TasksRouter();
 
 router.route('/create', 'createRoute');
 
