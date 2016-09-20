@@ -52,7 +52,8 @@ declare module 'backbone' {
     escape(attr: string): mixed;
     previous(attr: string): mixed;
     previousAttributes(): Attrs;
-    fetch(options?: Object): any; // @TODO should return a jQuery XHR, but I cannot define this without the dependency on jquery lib def.
+    // @TODO should return a jQuery XHR, but I cannot define this without the dependency on jquery lib def.
+    fetch(options?: Object): any;
     keys(): string[];
     values(): mixed[];
     pairs: Function;
@@ -71,10 +72,37 @@ declare module 'backbone' {
     previous(attribute: string): mixed;
     previousAttirbutes(): Attrs;
   }
-  declare class Collection mixins Events {
+  declare class Collection<TModel> mixins Events {
     static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Collection & P> & CP;
-    model: Model;
-    modelId(attributes: Attrs): string;
+    constructor(models: TModel, options: Object): this;
+    initialize(models: TModel, options: Object): this;
+    model: TModel;
+    modelId(attributes: TModel): string;
+    models: TModel[];
+    toJSON(options?: Object): TModel[];
+    sync: sync;
+    add(models: Array<TModel>, options?: Object): void;
+    remove(models: Array<TModel>, options?: Object): void;
+    reset(models?: Array<TModel>, options?: Object): void;
+    set(models: Array<TModel>, options?: Object): void;
+    get(id: string): ?TModel;
+    at(index: number): ?TModel;
+    push(model: TModel, options?: Object): void;
+    pop(otions?: Object): void;
+    unshift(model: TModel, options?: Object): void;
+    unshift(model: TModel, options?: Object): void;
+    shift(options?: Object): TModel;
+    slice(begin: number, end: number): Array<TModel>;
+    length: number;
+    sort(options?: Object): Array<TModel>;
+    pluck(attribute: string): Array<TModel>;
+    where(attributes: {[attributeName: string]: mixed}): Array<TModel>;
+    findWhere(attributes: {[attributeName: string]: mixed}): TModel;
+    url: () => string | string;
+    parse(response: Object, options: Object): Object;
+    clone(): this;
+    fetch(options?: Object): void;
+    create(attributes: Object, options?: Object): void;
   }
   declare class View mixins Events {
     static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<View & P> & CP;
