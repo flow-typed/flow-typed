@@ -221,7 +221,7 @@ declare module 'backbone' {
   /**
    * Declaring the export for backbone as well.
    */
-  declare interface Backbone {
+  declare class Backbone {
     Events: typeof Events;
     Model: typeof Model;
     Collection: typeof Collection;
@@ -241,7 +241,7 @@ declare module 'backbone' {
     $: typeof $; // @TODO this is no correct, but it is difficult to require another definition from here.
     _: typeof _; // @TODO this is no correct, but it is difficult to require another definition from here.
     version: typeof version;
-    noConflict(): Backbone;
+    noConflict(): this;
   }
 
   declare var exports: Backbone;

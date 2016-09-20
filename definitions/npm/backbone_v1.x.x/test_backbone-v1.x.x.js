@@ -2,11 +2,12 @@
 import Backbone from 'backbone';
 const { Model } = Backbone;
 
-const otherBackbone = Backbone.noConflict();
+const otherBackbone: typeof Backbone = Backbone.noConflict();
 
-(otherBackbone.Model: Backbone.Model);
+(otherBackbone.Model: typeof Backbone.Model);
 
-(otherBackbone.View: Function);
+// $ExpectError
+(otherBackbone.View: void);
 
 
 (Backbone.version: string);
