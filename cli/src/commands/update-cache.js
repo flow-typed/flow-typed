@@ -2,32 +2,30 @@
 
 import {updateCacheRepo} from '../lib/libDefs';
 
+import type {Argv} from "yargs";
+import typeof Yargs from "yargs";
+
 export const name = 'update-cache';
 export const description = 'Updates the flow-typed definitions cache';
 
-export function setup(yargs: Object) {
+export function setup(yargs: Yargs) {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .options({
       debug: {
         describe: 'Enables verbose messages for the update procedure',
         alias: 'd',
-        type: 'bool',
+        type: 'boolean',
         demand: false,
       }
     });
 };
 
-type Args = {
-  _: Array<string>,
-  debug?: boolean,
-}
-
-export async function run(args: Args): Promise<number> {
+export async function run(argv: Argv): Promise<number> {
   try {
     let verbose;
 
-    if (args.debug) {
+    if (argv.debug) {
       verbose = process.stdout;
     }
 
@@ -39,7 +37,7 @@ export async function run(args: Args): Promise<number> {
   } catch (e) {
     console.error(`Update failed: ${e.message}`);
 
-    if (args.debug) {
+    if (argv.debug) {
       console.error(e);
     }
 

@@ -16,12 +16,17 @@ import * as ValidateDefs from "./commands/validateDefs.js";
 import * as UpdateCache from "./commands/update-cache";
 import * as Version from "./commands/version.js";
 
+import type {Argv} from "yargs";
+import typeof Yargs from "yargs";
+
+const identity = <T>(x: T): T => x;
+
 export function runCLI() {
   type CommandModule = {
     name: string,
     description: string,
-    setup?: (yargs: Object) => Object,
-    run: (argv: typeof yargs) => Promise<number>,
+    setup?: (yargs: Yargs) => Yargs,
+    run: (argv: Argv) => Promise<number>,
   };
   const commands: Array<CommandModule> = [
     Install,
@@ -36,7 +41,7 @@ export function runCLI() {
     .reduce((cmdYargs, cmd) => cmdYargs.command(
       cmd.name,
       cmd.description,
-      typeof cmd.setup === 'function' ? cmd.setup : yargs => yargs,
+      cmd.setup || identity,
       args => cmd.run(args, yargs).catch(err => {
         if (err.stack) {
           console.log('UNCAUGHT ERROR: %s', err.stack);
