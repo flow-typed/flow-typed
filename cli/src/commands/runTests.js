@@ -17,6 +17,7 @@ const BIN_PLATFORM = (_ => {
   switch (os.type()) {
     case "Linux": return "linux64";
     case "Darwin": return "osx";
+    case "Windows_NT": return "win64";
 
     default: throw new Error(
       "Unsupported os.type()! " + os.type()
