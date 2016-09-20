@@ -2,6 +2,13 @@
 import Backbone from 'backbone';
 const { Model } = Backbone;
 
+const otherBackbone = Backbone.noConflict();
+
+(otherBackbone.Model: Backbone.Model);
+
+(otherBackbone.View: Function);
+
+
 (Backbone.version: string);
 
 (Backbone.$: any);

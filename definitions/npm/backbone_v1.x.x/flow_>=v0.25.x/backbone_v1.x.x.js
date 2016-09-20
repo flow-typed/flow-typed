@@ -2,11 +2,14 @@ declare module 'backbone' {
   declare var $: any; // @TODO this is no correct, but it is difficult to require another definition from here.
   declare var _: any; // @TODO this is no correct, but it is difficult to require another definition from here.
   declare var version: string;
-  declare function noConflict(): this;
+
   declare type eventCallback = (event: Event) => void | mixed;
   declare type Attrs = {[name: string]: mixed};
   declare type CRUDMethod = 'create' | 'read' | 'update' | 'delete';
 
+  /**
+   * Events Module - http://backbonejs.org/#Events
+   */
   declare class Events {
     // Not sure the best way of adding these to the declaration files
     on(event: string, callback: eventCallback, context?: Object): void;
@@ -24,10 +27,16 @@ declare module 'backbone' {
     static listenTo(other: Events, event: string, callback: eventCallback): void;
     static stopListening(other: Events, callback?: ?eventCallback, context?: Object): void;
   }
+
+  /**
+   * Model Class - http://backbonejs.org/#Model
+   */
   declare type ModelOpts = {
-    collection?: Collection,
-    parse?: Function
+    collection?: Collection<*>,
+    parse?: Function,
+    [optionName: string]: mixed
   };
+
   declare class Model mixins Events {
     static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Model & P> & CP;
     constructor(attributes?: Attrs, options?: ModelOpts): void;
@@ -52,6 +61,7 @@ declare module 'backbone' {
     previousAttributes(): Attrs;
     // @TODO should return a jQuery XHR, but I cannot define this without the dependency on jquery lib def.
     fetch(options?: Object): any;
+    // Start Underscore methods
     // @TODO Underscore Methods should be defined by the library definition
     keys(): string[];
     values(): mixed[];
@@ -77,7 +87,7 @@ declare module 'backbone' {
    * Collection Class - http://backbonejs.org/#Collection
    */
   declare class Collection<TModel> mixins Events {
-    static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Collection & P> & CP;
+    static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Collection<*> & P> & CP;
     constructor(models: TModel, options: Object): this;
     initialize(models: TModel, options: Object): this;
     model: TModel;
@@ -186,9 +196,9 @@ declare module 'backbone' {
    * View -
    */
   declare type AttributesHasMap = {
-      [attribute: string]: mixed,
+      [attribute: string]: mixed
   };
-  declare type EventHash = {
+  declare type EventsHash = {
       [event: string]: string | Function
   };
   declare class View mixins Events {
@@ -207,4 +217,32 @@ declare module 'backbone' {
     delegateEvents(events?: EventsHash): this;
     undelegateEvents(): this;
   }
+
+  /**
+   * Declaring the export for backbone as well.
+   */
+  declare interface Backbone {
+    Events: typeof Events;
+    Model: typeof Model;
+    Collection: typeof Collection;
+    Router: typeof Router;
+    History: typeof History;
+    history: typeof history;
+    View: typeof View;
+
+    // Sync
+    sync: typeof sync;
+    ajax: typeof ajax;
+    emulateHTTP: typeof emulateHTTP;
+    emulateJSON: typeof emulateJSON;
+
+
+    // Utilty
+    $: typeof $; // @TODO this is no correct, but it is difficult to require another definition from here.
+    _: typeof _; // @TODO this is no correct, but it is difficult to require another definition from here.
+    version: typeof version;
+    noConflict(): Backbone;
+  }
+
+  declare var exports: Backbone;
 }
