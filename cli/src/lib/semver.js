@@ -103,6 +103,23 @@ export function disjointVersions(a: Version, b: Version): boolean {
 }
 
 /**
+ * Given a version range, returns if the range is satisfiable.
+ */
+export function isSatVersion(ver: Version): boolean {
+  const upperBound = ver.upperBound;
+  if (upperBound) {
+    if (upperBound.range === '>=' && ver.range !== '>=') {
+      return !(before (ver, upperBound));
+    }
+    if (upperBound.range === '<=' && ver.range !== '<=') {
+      return !(before (upperBound, ver));
+    }
+    return true;
+  }
+  return true;
+}
+
+/**
  * Given an array of versions, returns whether they are mutually disjoint.
  */
 function _disjointVersionsAll(vers, len, i) {
