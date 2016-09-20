@@ -128,9 +128,6 @@ export {
   LAST_UPDATED_FILE as _LAST_UPDATED_FILE,
 };
 
-/**
- * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
- */
 async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>, validationErrs?: VErrors) {
   const parsedDirItem = parseRepoDirItem(pkgDirPath, validationErrs);
   (await parseLibDefsFromPkgDir(
@@ -139,6 +136,10 @@ async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>, validationErrs?: V
     validationErrs
   )).forEach(libDef => libDefs.push(libDef));
 }
+
+/**
+ * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
+ */
 export async function getLibDefs(
   defsDir: string,
   validationErrs?: VErrors,
@@ -328,7 +329,7 @@ async function parseLibDefsFromPkgDir(
     const testFilePaths = [].concat(commonTestFiles);
     const basePkgName =
       pkgName.charAt(0) === '@'
-      ? pkgName.split(path.sep).reverse()[0]
+      ? pkgName.split(path.sep).pop()
       : pkgName;
     const libDefFileName = `${basePkgName}_${pkgVersionStr}.js`;
     let libDefFilePath;
@@ -408,7 +409,7 @@ function parseRepoDirItem(dirItemPath, validationErrs) {
   }
 
   let [_, pkgName, major, minor, patch] = itemMatches;
-  const item = path.dirname(dirItemPath).split(path.sep).reverse()[0];
+  const item = path.dirname(dirItemPath).split(path.sep).pop();
   if (item.charAt(0) === '@') {
     pkgName = `${item}${path.sep}${pkgName}`;
   }
