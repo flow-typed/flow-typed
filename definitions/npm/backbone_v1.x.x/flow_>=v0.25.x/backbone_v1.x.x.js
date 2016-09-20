@@ -2,7 +2,7 @@ declare module 'backbone' {
   declare var $: any; // @TODO this is no correct, but it is difficult to require another definition from here.
   declare var _: any; // @TODO this is no correct, but it is difficult to require another definition from here.
   declare var version: string;
-
+  declare function noConflict(): this;
   declare type eventCallback = (event: Event) => void | mixed;
   declare type Attrs = {[name: string]: mixed};
   declare type CRUDMethod = 'create' | 'read' | 'update' | 'delete';
@@ -185,7 +185,26 @@ declare module 'backbone' {
   /**
    * View -
    */
+  declare type AttributesHasMap = {
+      [attribute: string]: mixed,
+  };
+  declare type EventHash = {
+      [event: string]: string | Function
+  };
   declare class View mixins Events {
     static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<View & P> & CP;
+    constructor(): this;
+    initialize(options?: Object): this;
+    el: HTMLElement | string;
+    $el: any;
+    setElement(el: HTMLElement): this;
+    attributes: AttributesHasMap | () => AttributesHasMap;
+    $: typeof $;
+    template(data: Object): string;
+    render(): this | mixed;
+    remove(): this;
+    events: EventsHash | () => EventsHash;
+    delegateEvents(events?: EventsHash): this;
+    undelegateEvents(): this;
   }
 }
