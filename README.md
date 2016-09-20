@@ -50,14 +50,16 @@ Where `<VERSION>` is a semver version number with all of MAJOR, MINOR, and PATCH
 version numbers included. `x` is an acceptable wildcard in place of any of the 
 three version numbers. 
 
-For Flow versions it is also acceptable to put `>=` or `<=` in front of
-the `v` to indicate a range of versions. `>=` and `<=` are *not* supported for
-npm package versions, only `x` wildcards. (Library interfaces are rarely
-identical across major versions)
+For Flow versions it is also acceptable to put `-` in front of the `<VERSION>`
+to indicate "up to and including this version", or after the `<VERSION>` to 
+indicate "this version and anything after", or you can put two versions with a
+`-` in between to indicate "anything including or between these 2 versions".
+Note that `-` ranges are *not* supported for npm package versions, only `x` 
+wildcards. (Library interfaces are rarely identical across major versions)
 
 Example filename:
 
-`underscore_v1.x.x/flow_>=v0.13.x/underscore_v1.x.x.js`
+`underscore_v1.x.x/flow_v0.13.x-/underscore_v1.x.x.js`
 
 This is a library definition for all "1.x.x" versions of underscore that works
 with any version of Flow >= v0.13.

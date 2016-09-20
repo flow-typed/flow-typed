@@ -1,7 +1,9 @@
 // @flow
 
 import {filterLibDefs, getCacheLibDefs} from "../lib/libDefs.js";
+import {stringToVersion} from "../lib/semver.js";
 import type {LibDef} from "../lib/libDefs.js";
+import type {Argv} from "yargs";
 
 import table from 'table';
 
@@ -26,13 +28,17 @@ export const name = "search";
 export const description =
   "Performs a simple search (by name) of available libdefs";
 
-export async function run(args: {}): Promise<number> {
+export async function run(args: Argv): Promise<number> {
   if (!args._ || !(args._.length > 1)) {
     console.error('Please provide a term for which to search!');
     return 1;
   }
 
-  const flowVersion = args.flowVersion || undefined;
+  let flowVersion;
+  if (typeof args.flowVersion === "string") {
+    flowVersion = stringToVersion(args.flowVersion);
+  }
+
   const term = args._[1];
   const defs = await getCacheLibDefs(process.stdout);
   const filtered = filterLibDefs(defs, {type: 'fuzzy', term, flowVersion});
