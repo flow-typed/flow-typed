@@ -6,7 +6,7 @@ const otherBackbone: typeof Backbone = Backbone.noConflict();
 
 (otherBackbone.Model: typeof Backbone.Model);
 
-// $ExpectError
+// $ExpectError should be a view type
 (otherBackbone.View: void);
 
 
@@ -21,15 +21,38 @@ interface Fooable extends Model {
   foo(): string;
   view: Backbone.View;
 };
-const FooModel: Class<Fooable> = Backbone.Model.extend({
+const TaskModel: Class<Fooable> = Backbone.Model.extend({
   foo(): string {
     return '';
   }
 });
 
-const instance = new FooModel();
+const instance = new TaskModel();
 instance.fetch({});
 
+
+
+class TasksCollection extends Backbone.Collection<{}> {
+    model = TaskModel;
+}
+
+const tasks = new TasksCollection();
+
+// $ExpectError
+tasks.toJSON([]);
+
+(tasks.length: number);
+
+// $ExpectError should not allow to be non number
+tasks.length = false;
+
+(tasks.pluck('name'): Array<{}>);
+
+// $ExpectError
+(task.pluck(2): Array<{}>);
+
+(tasks.forEach: Function);
+(tasks.sync(): Function)
 // $ExpectError
 instance.fetch(null);
 // $ExpectError
@@ -39,3 +62,24 @@ instance.toJSON();
 
 // $ExpectError
 (instance.foo(): number);
+
+
+class TasksRouter extends Backbone.Router {
+    routes = {
+        // $ExpectError
+        '10': false
+    };
+};
+
+// $ExpectError should only allow Object
+const router = new TasksRouter(null);
+
+router.route('/create', 'createRoute');
+
+// $ExpectError
+router.route('/create', 'delete', null);
+
+// $ExpectError
+Backbone.history.start({ root: false });
+
+Backbone.history.start({ pushState: true });
