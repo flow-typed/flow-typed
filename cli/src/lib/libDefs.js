@@ -576,17 +576,17 @@ function satisfiesSemver(pkgSemver: string, defVersion: string): boolean {
   }
 
   if(semver.valid(defVersion)) {
-    // test the single defVersion agains the package range 
+    // test the single defVersion agains the package range
     return semver.satisfies(defVersion, pkgSemver);
-  } 
+  }
 
-  const pkgRange = semver.Range(pkgSemver);
-  const defRange = semver.Range(defVersion);
+  const pkgRange = new semver.Range(pkgSemver);
+  const defRange = new semver.Range(defVersion);
 
   if(defRange.set[0].length !== 2) {
     throw Error("Invalid libDef version, It appears to be a non-contiguous range.");
-  } 
-    
+  }
+
   const defLowerB = defRange.set[0][0].semver.version;
   const defUpperB = defRange.set[0][1].semver.version;
 
@@ -618,7 +618,6 @@ export function filterLibDefs(
         filterMatch = (
           packageNameMatch(def.pkgName, filter.libDef.pkgName)
           && satisfiesSemver(filter.libDef.pkgVersionStr, def.pkgVersionStr)
-          //&& semver.satisfies(filter.libDef.pkgVersionStr, def.pkgVersionStr)
         );
         break;
 

@@ -1,44 +1,43 @@
 // @flow
 import {fs, path} from "./node.js";
+import {searchUpDirPath} from "./fileUtils.js"
 
 async function isPackage(dir: string): Promise<boolean> {
   return await fs.exists(path.join(dir, 'package.json'));
 }
 
 async function findRootPackage(startPath : string): Promise<string> {
-  async function _searchDirs(dirs: Array<string>): Promise<string> {
-    if(!dirs.length) {
-      throw new Error(`package.json not found in ${startPath}`);
+    const packagePath = await searchUpDirPath(
+      startPath,
+      async (p) => await isPackage(p));
+    if(!packagePath) {
+      throw new Error(`Unable to find package.json in ${startPath} or a parent directory.`);
     }
-    dirs.pop();
-    var dir = dirs.join(path.sep);
-    if(await isPackage(dir)) {
-      return dir;
-    }
-    return await _searchDirs(dirs);
-  }
-
-  let currentPath = startPath;
-  if (currentPath[currentPath.length-1] !== path.sep) {
-    currentPath+=path.sep;
-  }
-  const dirs: Array<string> = currentPath.split(path.sep);
-  return await _searchDirs(dirs);
+    return packagePath;
 }
 
 async function getPackageData(pkgDir: string): Promise<any> {
-  let rawBuffer = await fs.readFile(path.join(pkgDir, 'package.json'));
-  return JSON.parse(String(rawBuffer)); 
+  const rawBuffer = await fs.readFile(path.join(pkgDir, 'package.json'));
+  return JSON.parse(String(rawBuffer));
 }
 
 export type DepsMap = { [key: string]: string };
 
 async function getDepsFromPkg(pkgDir: string): Promise<DepsMap> {
-  let data = await getPackageData(pkgDir);
-  return data.dependencies;
+  const data = await getPackageData(pkgDir);
+  return (data.dependencies) ? data.dependencies : {};
 }
 
-export async function getPackageDependencies(srcPath: string): Promise<DepsMap> {
-  let packagePath = await findRootPackage(srcPath);
+export async function getPackageDependencies(startPath: string): Promise<DepsMap> {
+  const packagePath = await findRootPackage(startPath);
   return await getDepsFromPkg(packagePath);
+}
+
+export async function getPackageFlowBinSemver(srcPath: string): Promise<string> {
+  const packagePath = await findRootPackage(srcPath);
+  const data = await getPackageData(packagePath);
+  if (data && data.devDependencies && data.devDependencies['flow-bin']) {
+    return data.devDependencies['flow-bin']
+  }
+  throw new Error("failed to find flow-bin in package dependencies");
 }

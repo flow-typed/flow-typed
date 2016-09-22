@@ -5,9 +5,10 @@ import {copyFile, mkdirp, searchUpDirPath} from "../lib/fileUtils.js";
 import {getCacheLibDefVersion, getCacheLibDefs, filterLibDefs} from "../lib/libDefs.js";
 import type {LibDef} from "../lib/libDefs.js";
 import {fs, path, child_process} from '../lib/node.js';
+import semver from 'semver';
 import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 import type {Version} from "../lib/semver.js";
-import {getPackageDependencies} from "../lib/npmHelper.js";
+import {getPackageDependencies, getPackageFlowBinSemver} from "../lib/npmHelper.js";
 import type {DepsMap} from "../lib/npmHelper.js";
 
 export const name = 'install';
@@ -21,7 +22,6 @@ export function setup(yargs: Yargs) {
     .options({
       flowVersion: {
         alias: 'f',
-        //demand: true,
         describe: 'The version of Flow fetched libdefs must be compatible with',
         type: 'string',
       },
@@ -46,18 +46,18 @@ type Args = {
   overwrite: bool,
 };
 
-
 export async function run(args: Args): Promise<number> {
+  const launchDirectory = process.cwd();
 
   let {flowVersion: flowVersionRaw} = args;
   if (flowVersionRaw == null) {
     try {
-      flowVersionRaw = await getFlowVersionString();
+      flowVersionRaw = await getFlowVersionString(launchDirectory);
       console.log(`Found installed flow version: ${flowVersionRaw}`);
     } catch(err) {
-      return failWithMessage(
-        `Failed to find an installed flow version.  
-         Please provide a flow version (example: --flowVersion 0.24.0)`
+      return failWithMessage(`Failed to find a flow-bin dependency in package.json.
+  Please install flow bin: npm install --save-dev flow-bin
+  or provide a version on the command line: flow-typed install --flowVersion 0.24.0`
       );
     }
   }
@@ -71,11 +71,12 @@ export async function run(args: Args): Promise<number> {
   }
   const flowVersion = stringToVersion(flowVersionStr);
 
+
   // Find the project root
-  const projectRoot = await findFlowProjectRoot();
+  const projectRoot = await findFlowProjectRoot(launchDirectory);
   if (projectRoot === null) {
     return failWithMessage(
-      `\nERROR: Unable to find a flow project in the currend dir or any of ` +
+      `\nERROR: Unable to find a flow project in the current dir or any of ` +
       `it's parents!\nPlease run this command from within a Flow project.`
     );
   }
@@ -83,17 +84,17 @@ export async function run(args: Args): Promise<number> {
 
   // generate a map { dependency: version } for libs to install
   // from command line or package.json.
-  let depsMap: DepsMap = {};  
+  let depsMap: DepsMap = {};
   if(args._[1]) {
     const term = args._[1];
     const matches = term.match(/(@[^@\/]+\/)?([^@]*)@?(.*)?/);
     if(!matches) {
-      console.error(      
+      console.error(
         "Please specify a package name of the format `PackageFoo` or " +
         "PackageFoo@0.2.2"
       );
     }
-    
+
     const defName = (matches && (matches[1] ? matches[1] + matches[2] : matches[2]));
     const defVersion = (matches && matches[3]) || 'auto';
 
@@ -101,35 +102,36 @@ export async function run(args: Args): Promise<number> {
       depsMap[defName] = defVersion;
     }
   } else {
-    depsMap = await getPackageDependencies(process.cwd());
-    Object.keys(depsMap).forEach((dep) => console.log(`Found npm dependency: ${dep} ${depsMap[dep]}`));
+    depsMap = await getPackageDependencies(launchDirectory);
   }
 
-  if (!Object.keys(depsMap).length === 0) {
+  if(Object.keys(depsMap).length === 0) {
     return failWithMessage(
       "No package dependencies were found in package.json or specified on the command line."
     );
   }
+  
+  Object.keys(depsMap).forEach((dep) => console.log(`Found package.json dependency: ${dep} ${depsMap[dep]}`));
 
   // Get a list of defs to install.
-  // The following is serialized to prevent a  
+  // The following is serialized to prevent a
   // error caused by rebasing the libdedf cache concurrently.
   const defs: Array<LibDef> = [];
   for(let dep in depsMap) {
     let def = await findLibDef(
-      dep, 
+      dep,
       depsMap[dep],
       flowVersion);
-    if(def) { 
-      defs.push(def); 
+    if(def) {
+      defs.push(def);
     }
   }
-  
+
   console.log(`Installing ${defs.length} defs`);
   await Promise.all(
     defs.map((def) => installLibDef(
-        def, 
-        projectRoot, 
+        def,
+        projectRoot,
         args.overwrite
       )
     )
@@ -139,7 +141,7 @@ export async function run(args: Args): Promise<number> {
 };
 
 
-/** 
+/**
  * install a libDef into the given project root directory
  */
 async function installLibDef(
@@ -147,12 +149,18 @@ async function installLibDef(
   projectRoot: string,
   overwrite: boolean = false): Promise<boolean> {
 
+  const flowTypedDir = path.join(projectRoot, 'flow-typed', 'npm');
+  const pkgName = def.pkgName;
+  if (pkgName.charAt(0) === '@') {
+    const scopeDir = path.join(projectRoot, 'flow-typed', 'npm', pkgName.split(path.sep)[0]);
+    await mkdirp(scopeDir);
+  }
+  const targetFileName = `${pkgName}_${def.pkgVersionStr}.js`;
+  const targetFilePath = path.join(flowTypedDir, targetFileName);
+
   // Find the libdef
   try {
-    const flowTypedDir = path.join(projectRoot, 'flow-typed', 'npm');
     await mkdirp(flowTypedDir);
-    const targetFileName = `${def.pkgName}_${def.pkgVersionStr}.js`;
-    const targetFilePath = path.join(flowTypedDir, targetFileName);
 
     const terseTargetFile = path.relative(process.cwd(), targetFilePath);
     if ((await fs.exists(targetFilePath)) && !overwrite) {
@@ -167,13 +175,15 @@ async function installLibDef(
     const codeSignPreprocessor = signCodeStream(libDefVersion);
     await copyFile(def.path, targetFilePath, codeSignPreprocessor);
     console.log(`'${targetFileName}' installed at ${targetFilePath}.`);
+
     return true;
 
   } catch(e) {
-    console.log(`Error: ${e.message}`);     
+    console.log(`Failed to install ${def.pkgName} into ${targetFilePath}`)
+    console.log(`ERROR: ${e.message}`);
     return false;
   }
-} 
+}
 
 const flowBuiltInLibs: Array<string> = [
   'react',
@@ -184,8 +194,8 @@ const flowBuiltInLibs: Array<string> = [
  * Search flow typed, or the cache, for a matching libdef.
  */
 async function findLibDef(
-  defName: string, 
-  defVersion: string, 
+  defName: string,
+  defVersion: string,
   flowVersion: Version): Promise<?LibDef> {
 
   let filter;
@@ -225,8 +235,7 @@ async function findLibDef(
       return null;
   } else {
       console.log(
-        `  found no matching libdefs for flow@${versionToString(flowVersion)}. \n` +
-        `  will use flow's built-in support.`);
+        `  found no matching libdefs for flow@${versionToString(flowVersion)}.`);
       return null;
   }
 
@@ -235,8 +244,8 @@ async function findLibDef(
   return filtered[0];
 }
 
-async function findFlowProjectRoot() {
-  return await searchUpDirPath(process.cwd(), async (dirPath) => {
+async function findFlowProjectRoot(fromPath: string) {
+  return await searchUpDirPath(fromPath, async (dirPath) => {
     const flowConfigPath = path.join(dirPath, '.flowconfig');
     try {
       return fs.statSync(flowConfigPath).isFile();
@@ -245,54 +254,10 @@ async function findFlowProjectRoot() {
       return false;
     }
   });
-
-  if (projectRoot === null) {
-    return failWithMessage(
-      `\nERROR: Unable to find a flow project in the currend dir or any of ` +
-      `it's parents!\nPlease run this command from within a Flow project.`
-    );
-  }
-
-  const flowTypedDir = path.join(projectRoot, 'flow-typed', 'npm');
-  await mkdirp(flowTypedDir);
-  const pkgName = def.pkgName;
-  if (pkgName.charAt(0) === '@') {
-    const scopeDir = path.join(projectRoot, 'flow-typed', 'npm', pkgName.split(path.sep)[0]);
-    await mkdirp(scopeDir);
-  }
-  const targetFileName = `${pkgName}_${def.pkgVersionStr}.js`;
-  const targetFilePath = path.join(flowTypedDir, targetFileName);
-
-  const terseTargetFile = path.relative(process.cwd(), targetFilePath);
-  if ((await fs.exists(targetFilePath)) && !args.overwrite) {
-    console.log(
-      `${terseTargetFile} already exists! Use --overwrite/-o to overwrite the ` +
-      `existing libdef.`
-    );
-    return 0;
-  }
-
-  const libDefVersion = await getCacheLibDefVersion(def);
-  const codeSignPreprocessor = signCodeStream(libDefVersion);
-  await copyFile(def.path, targetFilePath, codeSignPreprocessor);
-  console.log(`'${targetFileName}' installed at ${targetFilePath}.`);
-
-  return 0;
 }
 
-async function getFlowVersionString(): Promise<string> {
-  function _runExec(): Promise<string> {
-    return new Promise((res, rej) => {
-      child_process.exec("flow version", (err, data) => {
-        if (err) { rej(err); } else {
-          const stringData: string = (typeof data === 'string') ? data : data.toString("utf-8");
-          res( stringData ); 
-        }
-      });
-    });
-  }
-
-  const flowStdout = await _runExec();
-  const versionMatch = flowStdout.match(/(\d+.\d+.\d+)/);
-  return (versionMatch) ? versionMatch[0] : "";
+async function getFlowVersionString(startPath: string): Promise<string> {
+  const versionString = await getPackageFlowBinSemver(startPath);
+  const verRange = new semver.Range(versionString);
+  return verRange.set[0][0].semver.version;
 }
