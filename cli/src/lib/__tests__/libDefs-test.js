@@ -7,6 +7,7 @@ jest.unmock('semver');
 import Git from 'nodegit';
 
 import {fs} from '../node.js';
+
 import {
   _CACHE_REPO_DIR as CACHE_REPO_DIR,
   _CACHE_REPO_EXPIRY as CACHE_REPO_EXPIRY,
@@ -37,10 +38,6 @@ describe('libDefs', () => {
     });
 
     pit('clones the repo if not present on disk', async () => {
-      _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath !== CACHE_REPO_DIR;
-      });
-
       await ensureCacheRepo();
       expect(_mock(Git.Clone).mock.calls.length).toBe(1);
       expect(_mock(fs.writeFile).mock.calls.length).toBe(1);
@@ -49,7 +46,7 @@ describe('libDefs', () => {
 
     pit('does NOT clone the repo if already present on disk', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath === CACHE_REPO_DIR;
+        return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
       });
 
       await ensureCacheRepo();
@@ -78,7 +75,9 @@ describe('libDefs', () => {
 
     pit('does NOT rebase if on disk, but lastUpdated is recent', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
+        return dirPath === CACHE_REPO_DIR || 
+               dirPath === CACHE_REPO_GIT_DIR ||
+               dirPath === LAST_UPDATED_FILE;
       });
       _mock(fs.readFile).mockImplementation((filePath) => {
         if (filePath === LAST_UPDATED_FILE) {
@@ -226,7 +225,6 @@ describe('libDefs', () => {
       function _generateLibDef(pkgName, pkgVersionStr, flowVersionStr) {
         return {
           pkgName,
-          pkgVersion: stringToVersion(pkgVersionStr),
           pkgVersionStr,
           pkgNameVersionStr: `${pkgName}_${pkgVersionStr}`,
           flowVersion: stringToVersion(flowVersionStr),
@@ -285,6 +283,43 @@ describe('libDefs', () => {
           flowVersion: stringToVersion('v0.19.0')
         });
         expect(filtered).toEqual([fixture[1]]);
+      });
+
+      describe('given a package range', () => {
+        it("DOES NOT match when libdef range does not intersect package range", () => {
+          const fixture = [
+            _generateFixturePkg('mori', 'v0.2.x', '>=v0.22.x'),
+            _generateFixturePkg('mori', 'v0.4.x', '>=v0.22.x'),
+          ];
+          const filtered = filterLibDefs(fixture,{
+            type: 'exact',
+            libDef: _generateLibDef('mori', '^0.3.0', 'v0.x.x'),
+          });
+          expect(filtered).toEqual([]);
+        });
+        
+        it("DOES NOT match when ranges intersect but package supports older versions than libdef", () => {
+          const fixture = [
+            _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
+          ];
+          const filtered = filterLibDefs(fixture,{
+            type: 'exact',
+            libDef: _generateLibDef('mori', '>=0.2.9 <0.3.0', 'v0.x.x'),
+          });
+          expect(filtered).toEqual([]);
+        });
+
+        it("matches when ranges intersect and libdef support older versions", () => {
+          const fixture = [
+            _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
+            _generateFixturePkg('mori', 'v0.3.8', '>=v0.22.x'),
+          ];
+          const filtered = filterLibDefs(fixture,{
+            type: 'exact',
+            libDef: _generateLibDef('mori', '>=0.3.1 <0.4.0', 'v0.x.x'),
+          });
+          expect(filtered).toEqual([fixture[0], fixture[1]]);
+        });
       });
     });
   });

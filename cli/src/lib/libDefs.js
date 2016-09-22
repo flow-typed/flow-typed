@@ -18,7 +18,6 @@ const P = Promise;
 
 export type LibDef = {
   pkgName: string,
-  pkgVersion: Version,
   pkgVersionStr: string,
   flowVersion: Version,
   flowVersionStr: string,
@@ -566,6 +565,39 @@ export async function getCacheLibDefVersion(libDef: LibDef) {
   );
 };
 
+function packageNameMatch(a: string, b: string): boolean {
+  return a.toLowerCase() === b.toLowerCase();
+}
+
+function satisfiesSemver(pkgSemver: string, defVersion: string): boolean {
+  if(semver.valid(pkgSemver)) {
+    // test the single package version against the libdef range
+    return semver.satisfies(pkgSemver, defVersion);
+  }
+
+  if(semver.valid(defVersion)) {
+    // test the single defVersion agains the package range
+    return semver.satisfies(defVersion, pkgSemver);
+  }
+
+  const pkgRange = new semver.Range(pkgSemver);
+  const defRange = new semver.Range(defVersion);
+
+  if(defRange.set[0].length !== 2) {
+    throw Error("Invalid libDef version, It appears to be a non-contiguous range.");
+  }
+
+  const defLowerB = defRange.set[0][0].semver.version;
+  const defUpperB = defRange.set[0][1].semver.version;
+
+  if(semver.gtr(defLowerB, pkgSemver) || semver.ltr(defUpperB, pkgSemver)) {
+    return false;
+  }
+
+  const pkgLowerB = pkgRange.set[0][0].semver.version;
+  return defRange.test(pkgLowerB);
+}
+
 /**
  * Filter a given list of LibDefs down using a specified filter.
  */
@@ -584,14 +616,14 @@ export function filterLibDefs(
     switch (filter.type) {
       case 'exact':
         filterMatch = (
-          def.pkgName.toLowerCase() === filter.libDef.pkgName.toLowerCase()
-          && semver.satisfies(filter.libDef.pkgVersionStr, def.pkgVersionStr)
+          packageNameMatch(def.pkgName, filter.libDef.pkgName)
+          && satisfiesSemver(filter.libDef.pkgVersionStr, def.pkgVersionStr)
         );
         break;
 
       case 'exact-name':
         filterMatch = (
-          def.pkgName.toLowerCase() === filter.term.toLowerCase()
+          packageNameMatch(def.pkgName, filter.term)
         );
         break;
 
