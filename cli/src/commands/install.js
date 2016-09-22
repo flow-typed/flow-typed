@@ -4,7 +4,7 @@ import {signCodeStream} from "../lib/codeSign.js";
 import {copyFile, mkdirp, searchUpDirPath} from "../lib/fileUtils.js";
 import {getCacheLibDefVersion, getCacheLibDefs, filterLibDefs} from "../lib/libDefs.js";
 import type {LibDef} from "../lib/libDefs.js";
-import {fs, path, child_process} from '../lib/node.js';
+import {fs, path} from '../lib/node.js';
 import semver from 'semver';
 import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
 import type {Version} from "../lib/semver.js";
@@ -110,7 +110,7 @@ export async function run(args: Args): Promise<number> {
       "No package dependencies were found in package.json or specified on the command line."
     );
   }
-  
+
   Object.keys(depsMap).forEach((dep) => console.log(`Found package.json dependency: ${dep} ${depsMap[dep]}`));
 
   // Get a list of defs to install.
@@ -179,7 +179,7 @@ async function installLibDef(
     return true;
 
   } catch(e) {
-    console.log(`Failed to install ${def.pkgName} into ${targetFilePath}`)
+    console.log(`Failed to install ${def.pkgName} into ${targetFilePath}`);
     console.log(`ERROR: ${e.message}`);
     return false;
   }
