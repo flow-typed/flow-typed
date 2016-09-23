@@ -60,7 +60,12 @@ async function writeStub(
     );
   }
   output += "\n"; // File should end with a newline
-  const filename = path.join(projectRoot, "flow-typed", packageName + ".js");
+  const filename = path.join(
+    projectRoot,
+    "flow-typed",
+    "npm",
+    format("%s_vx.x.x.js", packageName),
+  );
   await mkdirp(path.dirname(filename));
 
   if (!overwrite) {
