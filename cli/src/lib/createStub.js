@@ -3,6 +3,7 @@
 import {signCode, verifySignedCode} from './codeSign';
 import {mkdirp} from './fileUtils';
 import {fs, path} from "./node";
+import {getPackageDependencies} from "./npmHelper";
 
 import {format} from 'util';
 import globAsync from 'glob';
@@ -132,19 +133,13 @@ export default async function createStub(
         version = (require: any)(path.join(pathToPackage, 'package.json')).version;
       } catch (e) {}
     }
-
-    // If that failed, try looking for a package.json in the root
-    if (version == null) {
-      (require: any)(path.join(projectRoot, 'package.json')).version;
-    }
   }
 
+  // If that failed, try looking for a package.json in the root
   if (version == null) {
     try {
-      const package_json = (require: any)(path.join(projectRoot, 'package.json'));
-      const deps = package_json.dependencies || {};
-      const devDeps = package_json.devDependencies || {};
-      version = deps[packageName] || devDeps[packageName] || null;
+      const rootDependencies = await getPackageDependencies(projectRoot);
+      version = rootDependencies[packageName] || null;
     } catch (e) { }
   }
 
