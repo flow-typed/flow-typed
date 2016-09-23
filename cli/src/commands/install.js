@@ -118,7 +118,7 @@ export async function run(args: Args): Promise<number> {
   // error caused by rebasing the libdedf cache concurrently.
   const defs: Array<LibDef> = [];
   for(let dep in depsMap) {
-    const depVersion = depsMap[dep]; 
+    const depVersion = depsMap[dep];
     let def = await findLibDef(
       dep,
       depVersion,
@@ -126,7 +126,9 @@ export async function run(args: Args): Promise<number> {
     if(def) {
       defs.push(def);
       if(libdefNeedsUpdate(def.pkgVersionStr, depVersion)) {
-        console.log(`${def.pkgName}_${def.pkgVersionStr} may need an update to fully support ${dep} at ${depVersion}.`);
+        console.log(
+`Found ${def.pkgName}_${def.pkgVersionStr}, but you may want to create
+  updated libdef in flow-typed for your version (${depVersion}).`);
       }
     }
   }

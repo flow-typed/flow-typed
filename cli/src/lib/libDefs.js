@@ -569,8 +569,8 @@ function packageNameMatch(a: string, b: string): boolean {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-function satisfiesSemver(pkgSemver: string, defVersion: string): boolean {
-  // the libdef version should treated as a semver prefixed
+function libdefMatchesPackageVersion(pkgSemver: string, defVersion: string): boolean {
+  // the libdef version should be treated as a semver prefixed
   // by a carat (ie. 2.2.x is the same range as ^2.2.x) unless
   // it is prefixed by the equals character (ie. =2.2.x)
   let defSemver = defVersion;
@@ -625,7 +625,7 @@ export function filterLibDefs(
       case 'exact':
         filterMatch = (
           packageNameMatch(def.pkgName, filter.libDef.pkgName)
-          && satisfiesSemver(filter.libDef.pkgVersionStr, def.pkgVersionStr)
+          && libdefMatchesPackageVersion(filter.libDef.pkgVersionStr, def.pkgVersionStr)
         );
         break;
 
