@@ -10,10 +10,11 @@ import yargs from "yargs";
 import {fs, path} from "./lib/node.js";
 
 import * as Install from "./commands/install.js";
+import * as CreateStub from "./commands/create-stub.js";
 import * as RunTests from "./commands/runTests.js";
 import * as Search from "./commands/search.js";
-import * as ValidateDefs from "./commands/validateDefs.js";
 import * as UpdateCache from "./commands/update-cache";
+import * as ValidateDefs from "./commands/validateDefs.js";
 import * as Version from "./commands/version.js";
 
 import type {Argv} from "yargs";
@@ -29,12 +30,13 @@ export function runCLI() {
     run: (argv: Argv) => Promise<number>,
   };
   const commands: Array<CommandModule> = [
+    CreateStub,
     Install,
     RunTests,
     Search,
+    UpdateCache,
     ValidateDefs,
     Version,
-    UpdateCache,
   ];
 
   commands
@@ -55,6 +57,8 @@ export function runCLI() {
     ), yargs)
     .demand(1)
     .strict()
+    .help('h')
+    .alias('h', 'help')
     .argv;
 }
 
