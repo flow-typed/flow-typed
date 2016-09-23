@@ -165,7 +165,10 @@ export default async function createStub(
     console.log(colors.green("✓\t%s@%s -> %s"), packageName, version, filename);
     if (resolutionError) {
       console.log(
-        colors.yellow("\t  Only created generic stub for '%s' (%s)"),
+        colors.yellow(
+          "\t  Unable to stub all files in '%s', " +
+          "so only created a stub for the main module (%s)"
+        ),
         packageName,
         resolutionError.message,
       );
