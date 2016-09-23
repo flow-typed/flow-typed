@@ -6,7 +6,7 @@ import {getCacheLibDefVersion, getCacheLibDefs, filterLibDefs} from "../lib/libD
 import type {LibDef} from "../lib/libDefs.js";
 import {fs, path} from '../lib/node.js';
 import semver from 'semver';
-import {emptyVersion, stringToVersion, versionToString} from "../lib/semver.js";
+import {emptyVersion, stringToVersion, versionToString, getLowerBound} from "../lib/semver.js";
 import type {Version} from "../lib/semver.js";
 import {getPackageDependencies, getPackageFlowBinSemver} from "../lib/npmHelper.js";
 import type {DepsMap} from "../lib/npmHelper.js";
@@ -118,23 +118,24 @@ export async function run(args: Args): Promise<number> {
   // error caused by rebasing the libdedf cache concurrently.
   const defs: Array<LibDef> = [];
   for(let dep in depsMap) {
+    const depVersion = depsMap[dep]; 
     let def = await findLibDef(
       dep,
-      depsMap[dep],
+      depVersion,
       flowVersion);
     if(def) {
       defs.push(def);
+      if(libdefNeedsUpdate(def.pkgVersionStr, depVersion)) {
+        console.log(`${def.pkgName}_${def.pkgVersionStr} may need an update to fully support ${dep} at ${depVersion}.`);
+      }
     }
   }
 
   console.log(`Installing ${defs.length} defs`);
   await Promise.all(
-    defs.map((def) => installLibDef(
-        def,
-        projectRoot,
-        args.overwrite
-      )
-    )
+     defs.map((def) => {
+      return installLibDef(def, projectRoot, args.overwrite);
+    })
   );
 
   return 0;
@@ -258,6 +259,9 @@ async function findFlowProjectRoot(fromPath: string) {
 
 async function getFlowVersionString(startPath: string): Promise<string> {
   const versionString = await getPackageFlowBinSemver(startPath);
-  const verRange = new semver.Range(versionString);
-  return verRange.set[0][0].semver.version;
+  return getLowerBound(versionString);
+}
+
+function libdefNeedsUpdate(defVersion: string, pkgVersion: string): boolean {
+  return semver.lt(getLowerBound(defVersion), getLowerBound(pkgVersion));
 }

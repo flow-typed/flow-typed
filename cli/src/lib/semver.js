@@ -251,3 +251,8 @@ export function wildcardSatisfies(ver: Version, range: string): boolean {
     return semver.satisfies(versionToString(ver), range);
   }
 };
+
+export function getLowerBound(semverOrRange: string) {
+  const r = new semver.Range(semverOrRange);
+  return r.set[0][0].semver.version;
+}
