@@ -570,18 +570,26 @@ function packageNameMatch(a: string, b: string): boolean {
 }
 
 function satisfiesSemver(pkgSemver: string, defVersion: string): boolean {
-  if(semver.valid(pkgSemver)) {
-    // test the single package version against the libdef range
-    return semver.satisfies(pkgSemver, defVersion);
+  // the libdef version should treated as a semver prefixed
+  // by a carat (ie. 2.2.x is the same range as ^2.2.x) unless
+  // it is prefixed by the equals character (ie. =2.2.x)
+  let defSemver = defVersion;
+  if((defVersion.indexOf('=') < 0) && (defVersion.indexOf('^') < 0)) {
+    defSemver = '^' + defSemver;
   }
 
-  if(semver.valid(defVersion)) {
-    // test the single defVersion agains the package range
-    return semver.satisfies(defVersion, pkgSemver);
+  if(semver.valid(pkgSemver)) {
+    // test the single package version against the libdef range
+    return semver.satisfies(pkgSemver, defSemver);
+  }
+
+  if(semver.valid(defSemver)) {
+    // test the single defSemver agains the package range
+    return semver.satisfies(defSemver, pkgSemver);
   }
 
   const pkgRange = new semver.Range(pkgSemver);
-  const defRange = new semver.Range(defVersion);
+  const defRange = new semver.Range(defSemver);
 
   if(defRange.set[0].length !== 2) {
     throw Error("Invalid libDef version, It appears to be a non-contiguous range.");
@@ -664,6 +672,6 @@ export function filterLibDefs(
   }).sort((a, b) => {
     const aZeroed = a.pkgVersionStr.replace(/x/g, '0');
     const bZeroed = b.pkgVersionStr.replace(/x/g, '0');
-    return semver.lt(aZeroed, bZeroed) ? -1 : 1;
+    return semver.gt(aZeroed, bZeroed) ? -1 : 1;
   });
 };
