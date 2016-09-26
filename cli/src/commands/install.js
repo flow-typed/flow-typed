@@ -1,17 +1,20 @@
 // @flow
 
+import colors from "colors/safe";
 import {copyFile} from "../lib/fileUtils.js";
+import {createStub} from "../lib/stubUtils.js";
 import {determineFlowVersion} from "../lib/npmProjectUtils.js";
 import {filterLibDefs} from "../lib/libDefs.js";
 import {findFlowRoot} from '../lib/flowProjectUtils.js';
 import {fs} from '../lib/node.js';
-import {getCacheLibDefVersion} from "../lib/libDefs.js";
 import {getCacheLibDefs} from "../lib/libDefs.js";
+import {getCacheLibDefVersion} from "../lib/libDefs.js";
 import {getPackageJsonData} from "../lib/npmProjectUtils.js";
 import {getPackageJsonDependencies} from "../lib/npmProjectUtils.js";
 import {getRangeLowerBound} from "../lib/semver.js";
 import {mkdirp} from "../lib/fileUtils.js";
 import {path} from '../lib/node.js';
+import {pkgHasFlowFiles} from '../lib/stubUtils.js';
 import semver from "semver";
 import {signCodeStream} from "../lib/codeSign.js";
 import {stringToVersion} from "../lib/semver.js";
@@ -77,7 +80,7 @@ export async function run(args: Args): Promise<number> {
     if (discoveredFlowVer !== null) {
       flowVer = discoveredFlowVer;
       console.log(
-        `* Found flow-bin@${versionToString(flowVer)} installed. Installing ` +
+        `• Found flow-bin@${versionToString(flowVer)} installed. Installing ` +
         `libdefs compatible with this version of Flow...`
       );
     } else {
@@ -144,11 +147,11 @@ export async function run(args: Args): Promise<number> {
 
     if (args.verbose) {
       Object.keys(depsMap).forEach((dep) => {
-        console.log(`* Found package.json dependency: ${dep} ${depsMap[dep]}`);
+        console.log(`• Found package.json dependency: ${dep} ${depsMap[dep]}`);
       });
     } else {
       console.log(
-        `* Found ${String(Object.keys(depsMap).length)} dependencies in ` +
+        `• Found ${String(Object.keys(depsMap).length)} dependencies in ` +
         `package.json. Searching for libdefs...`
       );
     }
@@ -179,7 +182,7 @@ export async function run(args: Args): Promise<number> {
   }));
 
   if (libDefsToInstall.length > 0) {
-    console.log(`* Installing ${libDefsToInstall.length} libdefs...\n`);
+    console.log(`• Installing ${libDefsToInstall.length} libdefs...`);
     const flowTypedDirPathStr = path.join(
       flowProjectRoot,
       'flow-typed',
@@ -191,21 +194,19 @@ export async function run(args: Args): Promise<number> {
         (def) => installLibDef(def, flowTypedDirPathStr, args.overwrite)
       )
     );
-    console.log('');
-  } else {
-    console.log('No libdefs were installed.');
   }
 
   if ((args.verbose || missingLibDefs.length === 0) && libDefNeedsUpdate.length > 0) {
     console.log(
-      `* The following installed libdefs are compatible with your ` +
+      `• The following installed libdefs are compatible with your ` +
       `dependencies, but may not include all minor and patch changes for ` +
       `your specific dependency version:\n`
     );
-    libDefNeedsUpdate.sort().forEach(([libDef, [pkgName, pkgVersionStr]]) => {
+    libDefNeedsUpdate.forEach(([libDef, [pkgName, pkgVersionStr]]) => {
       console.log(
-        `  * ${libDef.pkgName}_${libDef.pkgVersionStr} ` +
-        `(satisfies ${pkgName}@${pkgVersionStr})`
+        '  • libdef: %s (satisfies %s)',
+        colors.yellow(`${libDef.pkgName}_${libDef.pkgVersionStr}`),
+        colors.bold(`${pkgName}@${pkgVersionStr}`)
       );
     });
     const libDefPlural =
@@ -219,24 +220,55 @@ export async function run(args: Args): Promise<number> {
   }
 
   if (missingLibDefs.length > 0) {
-    console.log(
-      `!! No flow@${versionToString(flowVersion)}-compatible libdefs found ` +
-      `in flow-typed for the following dependencies:\n`
-    );
-    missingLibDefs.sort().forEach(([pkgName, pkgVersionStr]) => {
-      if (FLOW_BUILT_IN_LIBS.indexOf(pkgName.toLowerCase()) === -1) {
-        console.log(`  * ${pkgName}@${pkgVersionStr}`);
+    // If the user specific an explicit library to be installed, don't generate
+    // a stub if no libdef exists -- just inform the user that one doesn't exist
+    if (args._[1]) {
+      console.log(
+        colors.red(`!! No libdefs found in flow-typed for ${args._[1]}. !!`) +
+        '\n\nConsider using `%s` to generate an empty libdef that you can fill in.',
+        colors.bold(`flow-typed create-stub ${args._[1]}`)
+      );
+    } else {
+      // If a package that's missing a flow-typed libdef has any .flow files,
+      // we'll skip generating a stub for it.
+      let untypedMissingLibDefs = [];
+      let typedMissingLibDefs = [];
+      await Promise.all(missingLibDefs.map(async ([pkgName, pkgVerStr]) => {
+        const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName);
+        if (hasFlowFiles) {
+          typedMissingLibDefs.push([pkgName, pkgVerStr]);
+        } else {
+          untypedMissingLibDefs.push([pkgName, pkgVerStr]);
+        }
+      }));
+
+      if (untypedMissingLibDefs.length > 0) {
+        console.log('• Generating stubs for untyped dependencies...');
+        await Promise.all(
+          untypedMissingLibDefs.map(async ([pkgName, pkgVerStr]) => {
+            await createStub(
+              flowProjectRoot,
+              pkgName,
+              pkgVerStr,
+              args.overwrite,
+            );
+          })
+        );
+
+        console.log(colors.red(
+          `\n!! No flow@${versionToString(flowVersion)}-compatible libdefs ` +
+          `found in flow-typed for the above untyped dependencies !!`
+        ));
+        const plural =
+          missingLibDefs.length > 1
+          ? ['libdefs', 'these packages', 'them']
+          : ['a libdef', 'this package', 'it'];
+        console.log(`
+   I've generated ${'`'}any${'`'}-typed stubs for ${plural[1]}, but consider submitting
+   ${plural[0]} for ${plural[2]} to ${colors.bold('https://github.com/flowtype/flow-typed/')}\n`
+        );
       }
-    });
-    const libDefPlural =
-      missingLibDefs.length > 1
-      ? ['libdefs', 'these packages']
-      : ['a libdef', 'this package'];
-    console.log(
-      `\n  Consider submitting ${libDefPlural[0]} for ` +
-      `${libDefPlural[1]} to\n` +
-      `  https://github.com/flowtype/flow-typed/\n`
-    );
+    }
   }
 
   return 0;
@@ -266,8 +298,10 @@ async function installLibDef(
     const terseTargetFile = path.relative(process.cwd(), targetFilePath);
     if ((await fs.exists(targetFilePath)) && !overwrite) {
       console.log(
-        `  * ${terseTargetFile} already exists! Use --overwrite/-o to ` +
-        `overwrite the existing libdef.`
+        "  • %s\n" +
+        "    └> %s",
+        colors.bold(colors.red(`${terseTargetFile} already exists!`)),
+        "Use --overwrite to overwrite the existing libdef."
       );
       return false;
     }
@@ -276,7 +310,12 @@ async function installLibDef(
     const codeSignPreprocessor = signCodeStream(libDefVersion);
     await copyFile(def.path, targetFilePath, codeSignPreprocessor);
     console.log(
-      `  * '${targetFileName}' installed at .${path.sep}${terseTargetFile}`
+      colors.bold(
+        "  • %s\n" +
+        "    └> %s"
+      ),
+      targetFileName,
+      colors.green(`.${path.sep}${terseTargetFile}`)
     );
 
     return true;

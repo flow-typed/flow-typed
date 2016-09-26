@@ -102,7 +102,7 @@ async function ensureCacheRepo(
       if (!await repoDirExists || !await repoGitDirExists) {
         writeVerbose(
           verbose,
-          ' * flow-typed cache not found, fetching from GitHub...',
+          '• flow-typed cache not found, fetching from GitHub...',
           false
         );
         await cloneCacheRepo(verbose);
@@ -120,7 +120,7 @@ async function ensureCacheRepo(
         }
 
         if ((lastUpdated + cacheRepoExpiry) < Date.now()) {
-          writeVerbose(verbose, ' * rebasing flow-typed cache...', false);
+          writeVerbose(verbose, '• rebasing flow-typed cache...', false);
           const rebaseSuccessful = await rebaseCacheRepo(verbose);
           if (rebaseSuccessful) {
             writeVerbose(verbose, 'done.');

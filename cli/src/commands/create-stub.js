@@ -3,8 +3,8 @@
 export const name = 'create-stub';
 export const description = 'Creates a libdef stub for an untyped npm package';
 
+import {createStub} from '../lib/stubUtils.js';
 import {findFlowRoot} from '../lib/flowProjectUtils.js';
-import createStub from '../lib/createStub';
 
 export function setup(yargs: Object) {
   return yargs
@@ -46,11 +46,13 @@ export async function run(args: Args): Promise<number> {
   const projectRoot = await findFlowRoot(process.cwd());
   if (projectRoot == null) {
     return failWithMessage(
-      `\nERROR: Unable to find a flow project in the currend dir or any of ` +
+      `\nERROR: Unable to find a flow project in the current dir or any of ` +
       `it's parents!\nPlease run this command from within a Flow project.`
     );
   }
 
+  const plural = packages.length > 1 ? 'stubs' : 'stub';
+  console.log(`• Creating ${packages.length} ${plural}...`);
   const results = await Promise.all(
     packages.map(pkg => {
       let version = null;

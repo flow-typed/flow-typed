@@ -29,7 +29,7 @@ export async function run(): Promise<number> {
 
   validationErrors.forEach((errors, pkgNameVersion) => {
     console.log("Found some problems with %s:", pkgNameVersion);
-    errors.forEach((err) => console.log("  * " + err));
+    errors.forEach((err) => console.log("  • " + err));
     console.log("");
   });
 
