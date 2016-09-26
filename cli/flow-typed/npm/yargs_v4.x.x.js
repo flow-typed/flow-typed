@@ -1,5 +1,5 @@
-// flow-typed signature: 44297a4413328857e4060d81e61e5cfc
-// flow-typed version: 5e1c1576ae/yargs_v4.x.x/flow_>=v0.23.x
+// flow-typed signature: 76936b216986cf1fd8b9574c14300911
+// flow-typed version: 94e9f7e0a4/yargs_v4.x.x/flow_>=v0.23.x
 
 declare module 'yargs' {
   declare type Argv = {_: Array<string>, [key: string]: mixed};
@@ -34,7 +34,7 @@ declare module 'yargs' {
   declare type ModuleObject = {
     command: string,
     describe: string,
-    builder: {[key: string]: Options} | (yargsInstance: Yargs) => void,
+    builder: {[key: string]: Options} | (yargsInstance: Yargs) => mixed,
     handler: (argv: Argv) => void,
   };
 
