@@ -587,7 +587,15 @@ function packageNameMatch(a: string, b: string): boolean {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-function satisfiesSemver(pkgSemver: string, defVersion: string): boolean {
+function libdefMatchesPackageVersion(pkgSemver: string, defVersionRaw: string): boolean {
+  // The libdef version should be treated as a semver prefixed by a carat
+  // (i.e: "foo_v2.2.x" is the same range as "^2.2.x")
+  // UNLESS it is prefixed by the equals character (i.e. "foo_=v2.2.x")
+  let defVersion = defVersionRaw;
+  if (defVersionRaw[0] !== '=' && defVersionRaw[0] !== '^') {
+    defVersion = '^' + defVersionRaw;
+  }
+
   if(semver.valid(pkgSemver)) {
     // test the single package version against the libdef range
     return semver.satisfies(pkgSemver, defVersion);
@@ -634,7 +642,7 @@ export function filterLibDefs(
       case 'exact':
         filterMatch = (
           packageNameMatch(def.pkgName, filter.pkgName)
-          && satisfiesSemver(filter.pkgVersionStr, def.pkgVersionStr)
+          && libdefMatchesPackageVersion(filter.pkgVersionStr, def.pkgVersionStr)
         );
         break;
 
@@ -683,6 +691,6 @@ export function filterLibDefs(
   }).sort((a, b) => {
     const aZeroed = a.pkgVersionStr.replace(/x/g, '0');
     const bZeroed = b.pkgVersionStr.replace(/x/g, '0');
-    return semver.lt(aZeroed, bZeroed) ? -1 : 1;
+    return semver.gt(aZeroed, bZeroed) ? -1 : 1;
   });
 };

@@ -131,7 +131,12 @@ function _disjointVersionsAll(vers, len, i) {
 }
 export function disjointVersionsAll(vers: Array<Version>): boolean {
   return _disjointVersionsAll(vers, vers.length, 0);
-}
+};
+
+export function getRangeLowerBound(rangeStr: string): string {
+  const range = new semver.Range(rangeStr);
+  return range.set[0][0].semver.version;
+};
 
 // TODO: This has some egregious duplication with
 //       libDef.getLocalLibDefFlowVersions(). Need to better consolidate logic

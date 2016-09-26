@@ -9,8 +9,10 @@ import {getCacheLibDefVersion} from "../lib/libDefs.js";
 import {getCacheLibDefs} from "../lib/libDefs.js";
 import {getPackageJsonData} from "../lib/npmProjectUtils.js";
 import {getPackageJsonDependencies} from "../lib/npmProjectUtils.js";
+import {getRangeLowerBound} from "../lib/semver.js";
 import {mkdirp} from "../lib/fileUtils.js";
 import {path} from '../lib/node.js';
+import semver from "semver";
 import {signCodeStream} from "../lib/codeSign.js";
 import {stringToVersion} from "../lib/semver.js";
 import {versionToString} from "../lib/semver.js";
@@ -155,16 +157,22 @@ export async function run(args: Args): Promise<number> {
   // Get a list of defs to install.
   let libDefsToInstall = [];
   let missingLibDefs = [];
+  let libDefNeedsUpdate = [];
   const depNames = Object.keys(depsMap);
   await Promise.all(depNames.map(async (pkgName) => {
     const pkgVersionStr = depsMap[pkgName];
-    let def = await findLibDef(
+    let libDef = await findLibDef(
       pkgName,
       pkgVersionStr,
       flowVersion,
     );
-    if (def) {
-      libDefsToInstall.push(def);
+    if (libDef) {
+      libDefsToInstall.push(libDef);
+      const libDefLowerBound = getRangeLowerBound(libDef.pkgVersionStr);
+      const pkgDepLowerBound = getRangeLowerBound(pkgVersionStr);
+      if (semver.lt(libDefLowerBound, pkgDepLowerBound)) {
+        libDefNeedsUpdate.push([libDef, [pkgName, pkgVersionStr]]);
+      }
     } else {
       missingLibDefs.push([pkgName, pkgVersionStr]);
     }
@@ -188,10 +196,32 @@ export async function run(args: Args): Promise<number> {
     console.log('No libdefs were installed.');
   }
 
+  if ((args.verbose || missingLibDefs.length === 0) && libDefNeedsUpdate.length > 0) {
+    console.log(
+      `* The following installed libdefs are compatible with your ` +
+      `dependencies, but may not include all minor and patch changes for ` +
+      `your specific dependency version:\n`
+    );
+    libDefNeedsUpdate.sort().forEach(([libDef, [pkgName, pkgVersionStr]]) => {
+      console.log(
+        `  * ${libDef.pkgName}_${libDef.pkgVersionStr} ` +
+        `(satisfies ${pkgName}@${pkgVersionStr})`
+      );
+    });
+    const libDefPlural =
+      libDefNeedsUpdate.length > 1
+      ? ['versioned updates', 'these packages']
+      : ['a versioned update', 'this package'];
+    console.log(
+      `\n  Consider submitting ${libDefPlural[0]} for ${libDefPlural[1]} to\n` +
+      `  https://github.com/flowtype/flow-typed/\n`
+    );
+  }
+
   if (missingLibDefs.length > 0) {
     console.log(
-      `!! No flow@${versionToString(flowVersion)}-compatible libdefs were ` +
-      `found in flow-typed for the following dependencies:\n`
+      `!! No flow@${versionToString(flowVersion)}-compatible libdefs found ` +
+      `in flow-typed for the following dependencies:\n`
     );
     missingLibDefs.sort().forEach(([pkgName, pkgVersionStr]) => {
       if (FLOW_BUILT_IN_LIBS.indexOf(pkgName.toLowerCase()) === -1) {
