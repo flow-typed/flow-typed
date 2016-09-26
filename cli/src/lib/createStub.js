@@ -1,14 +1,17 @@
 /* @flow */
 
-import {signCode, verifySignedCode} from './codeSign';
-import {mkdirp} from './fileUtils';
-import {fs, path} from "./node";
-import {getPackageDependencies} from "./npmHelper";
-
-import {format} from 'util';
-import globAsync from 'glob';
 import colors from 'colors/safe';
+import {findPackageJsonPath} from "./npmProjectUtils";
+import {format} from 'util';
+import {fs} from "./node";
+import globAsync from 'glob';
+import {getPackageJsonData} from "./npmProjectUtils";
+import {getPackageJsonDependencies} from "./npmProjectUtils";
+import {mkdirp} from './fileUtils';
+import {path} from "./node";
 import resolveAsync from 'resolve';
+import {signCode} from './codeSign';
+import {verifySignedCode} from './codeSign';
 
 function glob(pattern: string, options: Object): Promise<Array<string>> {
   return new Promise((resolve, reject) =>
@@ -132,7 +135,6 @@ export default async function createStub(
       cwd: pathToPackage,
       ignore: "node_modules/**",
     });
-
   } catch (e) {
     resolutionError = e;
   }
@@ -150,7 +152,9 @@ export default async function createStub(
   // If that failed, try looking for a package.json in the root
   if (version == null) {
     try {
-      const rootDependencies = await getPackageDependencies(projectRoot);
+      const pkgJsonPathStr = await findPackageJsonPath(projectRoot);
+      const pkgJsonData = await getPackageJsonData(pkgJsonPathStr);
+      const rootDependencies = await getPackageJsonDependencies(pkgJsonData);
       version = rootDependencies[packageName] || null;
     } catch (e) { }
   }

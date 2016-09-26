@@ -12,10 +12,11 @@ import {
   _CACHE_REPO_DIR as CACHE_REPO_DIR,
   _CACHE_REPO_EXPIRY as CACHE_REPO_EXPIRY,
   _CACHE_REPO_GIT_DIR as CACHE_REPO_GIT_DIR,
+  _cacheRepoAssure as cacheRepoAssure,
   _ensureCacheRepo as ensureCacheRepo,
-  updateCacheRepo,
   _LAST_UPDATED_FILE as LAST_UPDATED_FILE,
   filterLibDefs,
+  updateCacheRepo,
 } from '../libDefs.js';
 import {stringToVersion} from '../semver.js';
 
@@ -35,6 +36,8 @@ describe('libDefs', () => {
       repo.checkoutBranch.mockClear();
       repo.rebaseBranches.mockClear();
       _mock(Git.Repository.open).mockClear();
+      cacheRepoAssure.lastAssured = 0;
+      cacheRepoAssure.pendingAssure = Promise.resolve();
     });
 
     pit('clones the repo if not present on disk', async () => {
@@ -75,7 +78,7 @@ describe('libDefs', () => {
 
     pit('does NOT rebase if on disk, but lastUpdated is recent', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath === CACHE_REPO_DIR || 
+        return dirPath === CACHE_REPO_DIR ||
                dirPath === CACHE_REPO_GIT_DIR ||
                dirPath === LAST_UPDATED_FILE;
       });
@@ -97,13 +100,15 @@ describe('libDefs', () => {
       repo.checkoutBranch.mockClear();
       repo.rebaseBranches.mockClear();
       _mock(Git.Repository.open).mockClear();
+      cacheRepoAssure.lastAssured = 0;
+      cacheRepoAssure.pendingAssure = Promise.resolve();
     });
 
     pit('rebases if present on disk + lastUpdated is old', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
       });
-      
+
       _mock(fs.readFile).mockImplementation((filePath) => {
         if (filePath === LAST_UPDATED_FILE) {
           return String(Date.now() - CACHE_REPO_EXPIRY - 1);
@@ -125,9 +130,7 @@ describe('libDefs', () => {
     function _generateFixturePkg(name, verStr, flowVerStr) {
       return {
         pkgName: name,
-        pkgVersion: stringToVersion(verStr),
         pkgVersionStr: verStr,
-        pkgNameVersionStr: `${name}_${verStr}`,
         flowVersion: stringToVersion(flowVerStr),
         flowVersionStr: flowVerStr,
         path: '',
@@ -172,7 +175,7 @@ describe('libDefs', () => {
         const filtered = filterLibDefs(fixture, {
           type: 'fuzzy',
           term: 'mori',
-          flowVersion: stringToVersion('v0.19.0')
+          flowVersionStr: 'v0.19.0'
         });
         expect(filtered).toEqual([fixture[1]]);
       });
@@ -215,34 +218,24 @@ describe('libDefs', () => {
         const filtered = filterLibDefs(fixture, {
           type: 'exact-name',
           term: 'mori',
-          flowVersion: stringToVersion('v0.19.0')
+          flowVersionStr: 'v0.19.0',
         });
         expect(filtered).toEqual([fixture[1]]);
       });
     });
 
     describe('exact filter', () => {
-      function _generateLibDef(pkgName, pkgVersionStr, flowVersionStr) {
-        return {
-          pkgName,
-          pkgVersionStr,
-          pkgNameVersionStr: `${pkgName}_${pkgVersionStr}`,
-          flowVersion: stringToVersion(flowVersionStr),
-          flowVersionStr,
-          path: '',
-          testFilePaths: [],
-        };
-      }
-
       it('filters on exact name', () => {
         const fixture = [
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
           _generateFixturePkg('notmori', 'v0.3.x', '>=v0.22.x'),
         ];
-        const filtered = filterLibDefs(
-          fixture,
-          {type: 'exact', libDef: _generateLibDef('mori', 'v0.3.1', 'v0.x.x')},
-        );
+        const filtered = filterLibDefs(fixture, {
+          type: 'exact',
+          flowVersionStr: 'v0.30.0',
+          pkgName: 'mori',
+          pkgVersionStr: 'v0.3.1',
+        });
         expect(filtered).toEqual([fixture[0]]);
       });
 
@@ -251,10 +244,12 @@ describe('libDefs', () => {
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
           _generateFixturePkg('notmori', 'v0.3.x', '>=v0.22.x'),
         ];
-        const filtered = filterLibDefs(
-          fixture,
-          {type: 'exact', libDef: _generateLibDef('Mori', 'v0.3.1', 'v0.x.x')},
-        );
+        const filtered = filterLibDefs(fixture, {
+          type: 'exact',
+          flowVersionStr: 'v0.28.0',
+          pkgName: 'Mori',
+          pkgVersionStr: 'v0.3.x'
+        });
         expect(filtered).toEqual([fixture[0]]);
       });
 
@@ -265,10 +260,12 @@ describe('libDefs', () => {
           _generateFixturePkg('mo**ri', 'v0.3.x', '>=v0.22.x'),
           _generateFixturePkg('mori',   'v0.3.x', '>=v0.22.x'),
         ];
-        const filtered = filterLibDefs(
-          fixture,
-          {type: 'exact', libDef: _generateLibDef('mori', 'v0.3.1', 'v0.x.x')},
-        );
+        const filtered = filterLibDefs(fixture, {
+          type: 'exact',
+          flowVersionStr: 'v0.28.0',
+          pkgName: 'mori',
+          pkgVersionStr: 'v0.3.1',
+        });
         expect(filtered).toEqual([fixture[3]]);
       });
 
@@ -277,10 +274,11 @@ describe('libDefs', () => {
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
           _generateFixturePkg('mori', 'v0.3.x', '>=v0.18.x'),
         ];
-        const filtered = filterLibDefs(fixture,{
+        const filtered = filterLibDefs(fixture, {
           type: 'exact',
-          libDef: _generateLibDef('mori', 'v0.3.1', 'v0.x.x'),
-          flowVersion: stringToVersion('v0.19.0')
+          flowVersionStr: 'v0.19.0',
+          pkgName: 'mori',
+          pkgVersionStr: 'v0.3.x',
         });
         expect(filtered).toEqual([fixture[1]]);
       });
@@ -291,20 +289,24 @@ describe('libDefs', () => {
             _generateFixturePkg('mori', 'v0.2.x', '>=v0.22.x'),
             _generateFixturePkg('mori', 'v0.4.x', '>=v0.22.x'),
           ];
-          const filtered = filterLibDefs(fixture,{
+          const filtered = filterLibDefs(fixture, {
             type: 'exact',
-            libDef: _generateLibDef('mori', '^0.3.0', 'v0.x.x'),
+            flowVersionStr: 'v0.x.x',
+            pkgName: 'mori',
+            pkgVersionStr: '^0.3.0',
           });
           expect(filtered).toEqual([]);
         });
-        
+
         it("DOES NOT match when ranges intersect but package supports older versions than libdef", () => {
           const fixture = [
             _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
           ];
-          const filtered = filterLibDefs(fixture,{
+          const filtered = filterLibDefs(fixture, {
             type: 'exact',
-            libDef: _generateLibDef('mori', '>=0.2.9 <0.3.0', 'v0.x.x'),
+            flowVersionStr: 'v0.22.0',
+            pkgName: 'mori',
+            pkgVersionStr: '>=0.2.9 <0.3.0',
           });
           expect(filtered).toEqual([]);
         });
@@ -314,9 +316,11 @@ describe('libDefs', () => {
             _generateFixturePkg('mori', 'v0.3.x', '>=v0.22.x'),
             _generateFixturePkg('mori', 'v0.3.8', '>=v0.22.x'),
           ];
-          const filtered = filterLibDefs(fixture,{
+          const filtered = filterLibDefs(fixture, {
             type: 'exact',
-            libDef: _generateLibDef('mori', '>=0.3.1 <0.4.0', 'v0.x.x'),
+            flowVersionStr: 'v0.22.0',
+            pkgName: 'mori',
+            pkgVersionStr: '>=0.3.1 <0.4.0',
           });
           expect(filtered).toEqual([fixture[0], fixture[1]]);
         });

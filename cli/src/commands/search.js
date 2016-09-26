@@ -1,7 +1,6 @@
 // @flow
 
 import {filterLibDefs, getCacheLibDefs} from "../lib/libDefs.js";
-import {stringToVersion} from "../lib/semver.js";
 import type {LibDef} from "../lib/libDefs.js";
 import type {Argv} from "yargs";
 
@@ -34,14 +33,18 @@ export async function run(args: Argv): Promise<number> {
     return 1;
   }
 
-  let flowVersion;
+  let flowVersionStr;
   if (typeof args.flowVersion === "string") {
-    flowVersion = stringToVersion(args.flowVersion);
+    flowVersionStr = args.flowVersion;
   }
 
   const term = args._[1];
   const defs = await getCacheLibDefs(process.stdout);
-  const filtered = filterLibDefs(defs, {type: 'fuzzy', term, flowVersion});
+  const filtered = filterLibDefs(defs, {
+    type: 'fuzzy',
+    term,
+    flowVersionStr
+  });
   console.log(_formatDefTable(filtered));
   return 0;
 };

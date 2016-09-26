@@ -16,14 +16,14 @@ import type {Version} from "./semver.js";
 
 const P = Promise;
 
-export type LibDef = {
+export type LibDef = {|
   pkgName: string,
   pkgVersionStr: string,
   flowVersion: Version,
   flowVersionStr: string,
   path: string,
   testFilePaths: Array<string>,
-};
+|};
 
 const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
@@ -80,42 +80,61 @@ async function updateCacheRepo(verbose?: VerboseOutput) {
  * (else: create/rebase it)
  */
 const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
-async function ensureCacheRepo(verbose?: VerboseOutput, cacheRepoExpiry: number = CACHE_REPO_EXPIRY) {
-  if (!await fs.exists(CACHE_REPO_DIR) || !await fs.exists(CACHE_REPO_GIT_DIR)) {
-    writeVerbose(
-      verbose,
-      ' * flow-typed cache not found, fetching from GitHub...',
-      false
-    );
-    await cloneCacheRepo(verbose);
-    writeVerbose(verbose, 'done.');
-  } else {
-    let lastUpdated = 0;
-    if (await fs.exists(LAST_UPDATED_FILE)) {
-      // If the LAST_UPDATED_FILE has anything other than just a number in it,
-      // just assume we need to update.
-      const lastUpdatedRaw = await fs.readFile(LAST_UPDATED_FILE);
-      const lastUpdatedNum = parseInt(lastUpdatedRaw, 10);
-      if (String(lastUpdatedNum) === String(lastUpdatedRaw)) {
-        lastUpdated = lastUpdatedNum;
-      }
-    }
+export const _cacheRepoAssure = {
+  lastAssured: 0,
+  pendingAssure: Promise.resolve(),
+};
+async function ensureCacheRepo(
+  verbose?: VerboseOutput,
+  cacheRepoExpiry: number = CACHE_REPO_EXPIRY
+) {
+  // Only re-run rebase checks if a check hasn't been run in the last 5 minutes
+  if (_cacheRepoAssure.lastAssured + (5 * 1000 * 60) >= Date.now()) {
+    return _cacheRepoAssure.pendingAssure;
+  }
 
-    if ((lastUpdated + cacheRepoExpiry) < Date.now()) {
-      writeVerbose(verbose, ' * flow-typed cache is old, rebasing...', false);
-      const rebaseSuccessful = await rebaseCacheRepo(verbose);
-      if (rebaseSuccessful) {
-        writeVerbose(verbose, 'done.');
-      } else {
+  _cacheRepoAssure.lastAssured = Date.now();
+  const prevAssure = _cacheRepoAssure.pendingAssure;
+  return _cacheRepoAssure.pendingAssure =
+    prevAssure.then(() => (async function() {
+      const repoDirExists = fs.exists(CACHE_REPO_DIR);
+      const repoGitDirExists = fs.exists(CACHE_REPO_GIT_DIR);
+      if (!await repoDirExists || !await repoGitDirExists) {
         writeVerbose(
           verbose,
-          '\nNOTE: Unable to rebase local cache! If you don\'t currently ' +
-          'have internet connectivity, no worries -- we\'ll update the local ' +
-          'cache the next time you do.\n'
+          ' * flow-typed cache not found, fetching from GitHub...',
+          false
         );
+        await cloneCacheRepo(verbose);
+        writeVerbose(verbose, 'done.');
+      } else {
+        let lastUpdated = 0;
+        if (await fs.exists(LAST_UPDATED_FILE)) {
+          // If the LAST_UPDATED_FILE has anything other than just a number in
+          // it, just assume we need to update.
+          const lastUpdatedRaw = await fs.readFile(LAST_UPDATED_FILE);
+          const lastUpdatedNum = parseInt(lastUpdatedRaw, 10);
+          if (String(lastUpdatedNum) === String(lastUpdatedRaw)) {
+            lastUpdated = lastUpdatedNum;
+          }
+        }
+
+        if ((lastUpdated + cacheRepoExpiry) < Date.now()) {
+          writeVerbose(verbose, ' * rebasing flow-typed cache...', false);
+          const rebaseSuccessful = await rebaseCacheRepo(verbose);
+          if (rebaseSuccessful) {
+            writeVerbose(verbose, 'done.');
+          } else {
+            writeVerbose(
+              verbose,
+              '\nNOTE: Unable to rebase local cache! If you don\'t currently ' +
+              'have internet connectivity, no worries -- we\'ll update the ' +
+              'local cache the next time you do.\n'
+            );
+          }
+        }
       }
-    }
-  }
+    })());
 }
 // Exported for tests -- since we really want this part well-tested.
 export {
@@ -378,7 +397,6 @@ async function parseLibDefsFromPkgDir(
 
     libDefs.push({
       pkgName,
-      pkgVersion,
       pkgVersionStr,
       flowVersion,
       flowVersionStr: versionToString(flowVersion),
@@ -602,10 +620,9 @@ function satisfiesSemver(pkgSemver: string, defVersion: string): boolean {
  * Filter a given list of LibDefs down using a specified filter.
  */
 type LibDefFilter =
-  | {type: 'fuzzy', flowVersion?: Version, term: string}
-  // | {type: 'exact', flowVersion?: Version, pkgName: string, pkgVersion: Version}
-  | {type: 'exact', flowVersion?: Version, libDef: LibDef}
-  | {type: 'exact-name', flowVersion?: Version, term: string}
+  | {|type: 'fuzzy', flowVersionStr?: string, term: string|}
+  | {|type: 'exact', flowVersionStr?: string, pkgName: string, pkgVersionStr: string|}
+  | {|type: 'exact-name', flowVersionStr?: string, term: string|}
 ;
 export function filterLibDefs(
   defs: Array<LibDef>,
@@ -616,8 +633,8 @@ export function filterLibDefs(
     switch (filter.type) {
       case 'exact':
         filterMatch = (
-          packageNameMatch(def.pkgName, filter.libDef.pkgName)
-          && satisfiesSemver(filter.libDef.pkgVersionStr, def.pkgVersionStr)
+          packageNameMatch(def.pkgName, filter.pkgName)
+          && satisfiesSemver(filter.pkgVersionStr, def.pkgVersionStr)
         );
         break;
 
@@ -644,9 +661,8 @@ export function filterLibDefs(
       return false;
     }
 
-    const filterFlowVer = filter.flowVersion;
-    if (filterFlowVer) {
-      const filterFlowVerStr = versionToString(filterFlowVer);
+    const filterFlowVerStr = filter.flowVersionStr;
+    if (filterFlowVerStr) {
       const defUpperFlow = def.flowVersion.upperBound;
       if (defUpperFlow) {
         const defLowerFlow = copyVersion(def.flowVersion);
@@ -656,7 +672,10 @@ export function filterLibDefs(
           && semver.satisfies(filterFlowVerStr, versionToString(defUpperFlow))
         );
       } else {
-        return semver.satisfies(filterFlowVerStr, def.flowVersionStr);
+        return semver.satisfies(
+          filterFlowVerStr,
+          def.flowVersionStr
+        );
       }
     }
 

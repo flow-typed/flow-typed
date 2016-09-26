@@ -3,7 +3,7 @@
 export const name = 'create-stub';
 export const description = 'Creates a libdef stub for an untyped npm package';
 
-import findFlowRoot from '../lib/findFlowRoot';
+import {findFlowRoot} from '../lib/flowProjectUtils.js';
 import createStub from '../lib/createStub';
 
 export function setup(yargs: Object) {
