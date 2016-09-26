@@ -65,4 +65,14 @@ declare module 'semver' {
 
   // Not explicitly documented
   declare function parse(version: string): ?SemVer;
+
+  declare class Range {
+    set: Array<Array<{semver: SemVer}>>;
+
+    constructor(range: string, loose?: boolean): Range;
+
+    format(): string;
+    test(version: string): boolean;
+    toString(): string;
+  }
 }
