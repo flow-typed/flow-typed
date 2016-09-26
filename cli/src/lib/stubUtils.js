@@ -81,7 +81,6 @@ async function writeStub(
   output += stubFor(packageName);
 
   if (files.length > 0) {
-    const pkgNameVer = `${packageName}@${packageVersion}`;
     output += `
 
 /**

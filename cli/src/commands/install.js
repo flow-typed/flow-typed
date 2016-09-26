@@ -163,6 +163,10 @@ export async function run(args: Args): Promise<number> {
   let libDefNeedsUpdate = [];
   const depNames = Object.keys(depsMap);
   await Promise.all(depNames.map(async (pkgName) => {
+    if (FLOW_BUILT_IN_LIBS.indexOf(pkgName) > -1) {
+      return;
+    }
+
     const pkgVersionStr = depsMap[pkgName];
     let libDef = await findLibDef(
       pkgName,
