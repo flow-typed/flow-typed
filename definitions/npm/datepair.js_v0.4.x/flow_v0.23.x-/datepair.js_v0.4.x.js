@@ -21,5 +21,5 @@ interface DatepairJQuery {
     datepair(methodName: string): any;
     datepair(methodName: string, methodParameter: any): any;
     datepair(optionLiteral: string, optionName: string): any;
-    datepair(options: DatepairOptions): JQuery;
+    datepair(options: DatepairOptions): any;
 }
