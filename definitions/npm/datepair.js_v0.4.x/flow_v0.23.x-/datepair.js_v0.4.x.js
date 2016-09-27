@@ -14,7 +14,7 @@ interface DatepairOptions {
 }
 
 interface DatepairJQuery {
-    datepair(): JQuery;
+    datepair(): any;
     datepair(methodName: 'getTimeDiff'): any;
     datepair(methodName: 'refresh'): any;
     datepair(methodName: 'remove'): any;
