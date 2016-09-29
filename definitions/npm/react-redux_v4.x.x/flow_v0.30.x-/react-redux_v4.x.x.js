@@ -1,10 +1,19 @@
 /* @flow */
-type ConnectAll = <D, P, S, C: React$Component<D, P, S>, SP, DP, Dispatch: Function, NP:$Diff<P, {dispatch: Dispatch} & SP & D>>(
+
+// Generic type abbreviation key:
+//   D - stands for "Default Props"
+//   P - stands for "(required) Props"
+//   S - stands for "(redux) State"
+//   SP - stands for "(redux) State Props", what you get from mapStateToProps
+//   DP - stands for "Dispatch Props", what you get from mapDispatchToProps
+//   NP - stands for "New Props", the required props of the new component that gets returned
+
+type ConnectAll = <D, P, S, C: React$Component<D, P, S>, SP, DP, Dispatch: Function, NP:$Diff<$Diff<P, DP>, SP>>(
   mapStateToProps: (state: Object, ownProps: NP) => SP,
-  mapDispatchToProps: (dispatch: Dispatch, ownProps: $Diff<$Diff<$Diff<P, DP>, SP>, D>) => DP,
+  mapDispatchToProps: (dispatch: Dispatch, ownProps: NP) => DP,
   mergeProps: null | void,
   options?: {pure?: boolean, withRef?: boolean}
-) => (component: Class<C>) => Class<React$Component<D, $Diff<$Diff<P, DP>, SP>, S>>;
+) => (component: Class<C>) => Class<React$Component<D, NP, S>>;
 
 type ConnectAllStateless = <P, SP, DP, Dispatch: Function>(
   mapStateToProps: (state: Object, ownProps: $Diff<$Diff<P, DP>, SP>) => SP,
