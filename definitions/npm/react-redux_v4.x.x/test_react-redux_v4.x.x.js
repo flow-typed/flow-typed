@@ -49,6 +49,15 @@ const c2 = <ConnectedTestC name='hjh' />; // missing prop: updateTime
 // $ExpectError
 const c3 = <ConnectedTestC name='345' timeOfDay={23443} updateTime={() => undefined} />; // timeOfDay: string
 
+const mapper = (state: Object, props: {name:string}) => ({timeOfDay: 'connectionTime for '+props.name})
+const ConnectedTestCA = connect(
+  (state: Object, props: {name:string}) => ({timeOfDay: 'connectionTime for '+props.name})
+)(Test);
+
+// Works without dispatch OR timeOfDay. Injected implicitly
+const ca1 = <ConnectedTestCA name='hjh' updateTime={() => undefined} />;
+
+
 const ConnectedTestD = connect(
   (state: Object) => ({timeOfDay: 'connectionTime'}),
   (dispatch: Function) => ({
