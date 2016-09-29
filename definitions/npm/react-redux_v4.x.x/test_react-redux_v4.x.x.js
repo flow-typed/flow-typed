@@ -56,7 +56,8 @@ const ConnectedTestCA = connect(
 
 // Works without dispatch OR timeOfDay. Injected implicitly
 const ca1 = <ConnectedTestCA name='hjh' updateTime={() => undefined} />;
-
+// $ExpectError
+const ca2 = <ConnectedTestCA updateTime={() => undefined} />; // missing prop: name
 
 const ConnectedTestD = connect(
   (state: Object) => ({timeOfDay: 'connectionTime'}),

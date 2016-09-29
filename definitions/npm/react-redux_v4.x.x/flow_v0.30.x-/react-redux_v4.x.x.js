@@ -1,6 +1,6 @@
 /* @flow */
-type ConnectAll = <D, P, S, C: React$Component<D, P, S>, SP, DP, Dispatch: Function>(
-  mapStateToProps: (state: Object, ownProps: $Diff<$Diff<$Diff<P, DP>, SP>, D>) => SP,
+type ConnectAll = <D, P, S, C: React$Component<D, P, S>, SP, DP, Dispatch: Function, NP:$Diff<P, {dispatch: Dispatch} & SP & D>>(
+  mapStateToProps: (state: Object, ownProps: NP) => SP,
   mapDispatchToProps: (dispatch: Dispatch, ownProps: $Diff<$Diff<$Diff<P, DP>, SP>, D>) => DP,
   mergeProps: null | void,
   options?: {pure?: boolean, withRef?: boolean}
@@ -41,8 +41,8 @@ type ConnectNoStateStatless = <P, DP, Dispatch: Function>(
     options?: {pure?: boolean, withRef?: boolean}
   ) => (component: (props: P) => any) => Class<React$Component<void, $Diff<P, DP>, void>>;
 
-type ConnectDispatch = <D, P, S, C: React$Component<D, P, S>, SP, Dispatch: Function>(
-  mapStateToProps: (state: Object, ownProps: $Diff<$Diff<$Diff<P, {dispatch: Dispatch}>, SP>, D>) => SP,
+type ConnectDispatch = <D, P, S, C: React$Component<D, P, S>, SP, Dispatch: Function, NP:$Diff<P, {dispatch: Dispatch} & SP & D>>(
+  mapStateToProps: (state: Object, ownProps: NP) => SP,
   mapDispatchToProps: null | void,
   mergeProps: null | void,
   options?: {pure?: boolean, withRef?: boolean}
@@ -53,7 +53,7 @@ type ConnectDispatchStateless = <P, SP, Dispatch: Function>(
   mapDispatchToProps: null | void,
   mergeProps: null | void,
   options?: {pure?: boolean, withRef?: boolean}
-) => (component: (props: P) => any) => Class<React$Component<void, $Diff<$Diff<P, {dispatch: Dispatch}>, SP>, void>>;
+) => (component: (props: P) => any) => Class<React$Component<void, $Diff<P, SP&{dispatch: Dispatch}>, void>>;
 
 type ConnectDefault = <D, P, S, C: React$Component<D, P, S>, Dispatch: Function>() =>
   (component: Class<C>) => Class<React$Component<D, $Diff<P, {dispatch: Dispatch}>, S>>;
