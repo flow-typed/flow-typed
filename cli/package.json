@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "prepublish": "mkdir -p dist; npm run test",
     "test": "npm run clean; npm run build; npm run test-quick",
-    "test-quick": "npm run lint && jest",
+    "test-quick": "jest && npm run lint",
     "watch": "mkdir -p dist; babel --source-maps --watch=./src --out-dir=./dist"
   },
   "repository": {

@@ -10,7 +10,7 @@ import {getPackageJsonData} from './npmProjectUtils';
 import {getPackageJsonDependencies} from './npmProjectUtils';
 import {mkdirp} from './fileUtils';
 import {path} from './node';
-import resolveAsync from 'resolve';
+import {resolve} from "./npmProjectUtils";
 import {signCode} from './codeSign';
 import {verifySignedCode} from './codeSign';
 import {versionToString} from './semver';
@@ -27,16 +27,52 @@ export function glob(pattern: string, options: Object): Promise<Array<string>> {
   );
 }
 
-function resolve(name: string, options: Object): Promise<string> {
-  return new Promise((resolve, reject) =>
-    resolveAsync(name, options, (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result);
+async function resolveToDirPath(
+  name: string,
+  options: Object
+): Promise<string> {
+  let pkgFiles = [];
+  let opts = {
+    ...options,
+    packageFilter: function(pkgJson, pkgFilePath) {
+      if (!pkgJson.main) {
+        pkgFiles.push(path.join(path.dirname(pkgFilePath), 'index.js'));
+        pkgJson.main = "index.js";
       }
-    })
-  );
+      return pkgJson;
+    },
+    isFile: function(filePath, cb) {
+      if (pkgFiles.indexOf(filePath) !== -1) {
+        cb(null, true);
+      } else {
+        fs.stat(filePath)
+          .catch(e => {
+            if (e.code === 'ENOENT') {
+              cb(null, false);
+            } else {
+              cb(e);
+            }
+          })
+          .then(stat => {
+            cb(null, stat.isFile() || stat.isFIFO());
+          });
+      }
+    },
+  };
+  let resolvedPath = await resolve(name, opts);
+
+  let pathToPackage = path.dirname(resolvedPath);
+  let dir = pathToPackage;
+  while (path.basename(dir) !== "node_modules") {
+    pathToPackage = dir;
+    dir = path.dirname(pathToPackage);
+
+    if (dir === pathToPackage) {
+      throw new Error("Failed to find package directory");
+    }
+  }
+
+  return pathToPackage;
 }
 
 const moduleStubTemplate = (`
@@ -92,7 +128,7 @@ async function writeStub(
 
     const [fileDecls, aliases] = files.reduce(([fileDecls, aliases], file) => {
       const ext = path.extname(file);
-      const name = path.basename(file, ext);
+      const name = file.substr(0, file.length - ext.length);
       const moduleName = `${packageName}/${name}`;
       if (name === 'index') {
         aliases.push(format(aliasTemplate, moduleName, '', packageName));
@@ -145,17 +181,10 @@ export async function pkgHasFlowFiles(
   projectRoot: string,
   packageName: string,
 ): Promise<boolean> {
-  let pathToPackage = await resolve(packageName, {basedir: projectRoot});
-
-  let dir = path.dirname(pathToPackage);
-  while (path.basename(dir) !== "node_modules") {
-    pathToPackage = dir;
-    dir = path.dirname(pathToPackage);
-
-    if (dir === pathToPackage) {
-      throw new Error("Failed to find package directory");
-    }
-  }
+  let pathToPackage = await resolveToDirPath(
+    packageName,
+    {basedir: projectRoot},
+  );
 
   const files = await glob("**/*.flow", {
     cwd: pathToPackage,
@@ -183,17 +212,10 @@ export async function createStub(
   let pathToPackage = null;
   let version = explicitVersion || null;
   try {
-    pathToPackage = await resolve(packageName, {basedir: process.cwd()});
-
-    let dir = path.dirname(pathToPackage);
-    while (path.basename(dir) !== "node_modules") {
-      pathToPackage = dir;
-      dir = path.dirname(pathToPackage);
-
-      if (dir === pathToPackage) {
-        throw new Error("Failed to find package directory");
-      }
-    }
+    pathToPackage = await resolveToDirPath(
+      packageName,
+      {basedir: process.cwd()},
+    );
 
     files = await glob("**/*.{js,jsx}", {
       cwd: pathToPackage,

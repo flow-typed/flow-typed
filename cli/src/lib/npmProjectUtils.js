@@ -2,6 +2,7 @@
 
 import {fs} from "./node.js";
 import {path} from "./node.js";
+import resolveAsync from "resolve";
 import {searchUpDirPath} from "./fileUtils.js";
 import semver from "semver";
 import {stringToVersion} from "./semver.js";
@@ -119,4 +120,12 @@ export async function determineFlowVersion(
   }
 
   return null;
+};
+
+export function resolve(name: string, options: Object): Promise<string> {
+  return new Promise((res, rej) =>
+    resolveAsync(name, options, (err, result) => {
+      if (err) { rej(err); } else { res(result); }
+    })
+  );
 };
