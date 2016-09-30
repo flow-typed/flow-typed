@@ -20,7 +20,7 @@ const bookString = bookXml.toString({ preserveWhitespace: true });
 
 const thingsXml: $XmlElement = new xmldoc.XmlDocument('<stuff><thing a="foo"><thing a="bar"><thing a="baz"></stuff>');
 
-thingsXml.eachChild((child, i) => console.log(`${child.attr.a})}: ${i}`));
+thingsXml.eachChild((child, i) => console.log(`${String(child.attr.a)})}: ${i}`));
 
 // $ExpectError requires iterator function
 thingsXml.eachChild();
