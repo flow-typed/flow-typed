@@ -20,21 +20,6 @@ $ flow-typed install
 'rxjs_v5.0.x.js' installed at /path/to/my/project/flow-typed/npm/rxjs_v5.0.xjs
 ```
 
-**We recommend checking installed libdefs in to your project's version control.**
-
-Libdefs in flow-typed are tagged at both Flow and library version when they are
-installed, but libdefs themselves can improve over time. For example, they may
-have a bug or there may be an improvement to their accuracy or completeness.
-
-When a libdef is improved or updated in flow-*typed*, there's some chance that
-the change could introduce new Flow errors into your project. As good as it is
-to find new issues, **we also want to make sure that Flow errors in your project
-are consistent and predictable over time**.
-
-So if/when you wish to upgrade a libdef that you've already checked in to your
-project's version control, you can do so explicitly with the 
-`flow-typed install --overwrite` command.
-
 ## Huh?
 
 When you start a project with Flow, **you likely want to use some third-party 
@@ -56,6 +41,21 @@ All you have to do when you add a one or more new dependencies to your project
 is run `flow-typed install`. This will search the libdef repo and download all
 the libdefs that are relevant for your project and install them for you. After
 that, **simply check them in** and be on your way!
+
+## Why do I need to commit the libdefs that `flow-typed` installs for my project?
+
+Libdefs in flow-typed are tagged at both Flow and library version when they are
+installed, but libdefs themselves can improve over time. For example, they may
+have a bug or there may be an improvement to their accuracy or completeness.
+
+When a libdef is improved or updated in flow-*typed*, there's some chance that
+the change could introduce new Flow errors into your project. As good as it is
+to find new issues, **we also want to make sure that Flow-errors in your project
+are consistent and predictable over time**.
+
+So if/when you wish to upgrade a libdef that you've already checked in to your
+project's version control, you can do so explicitly with the 
+`flow-typed install --overwrite` command.
 
 ## How Do I Contribute Library Definitions?
 
