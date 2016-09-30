@@ -129,13 +129,21 @@ exercising types like the author expects it to be.
 
 ## FAQs
 
-### I get an error that mentions `OpenSSL or Libgcrypt` while installing the `flow-typed` CLI
+### When I install the `flow-typed` CLI, I get an error that mentions `OpenSSL or Libgcrypt` 
 
 You may need to install Libgcrypt. Try setting up 
 [homebrew](http://brew.sh/index.html) and running `brew install libgcrypt`.
 
 This issue was first reported here: 
 [#336](https://github.com/flowtype/flow-typed/issues/336)
+
+### When I install the `flow-typed` CLI, I get an error immediately after `[configuring libssh2]`
+
+You may need to install OpenSSL. Try setting up 
+[homebrew](http://brew.sh/index.html) and running `brew install openssl`.
+
+This issue was first reported here:
+[331](https://github.com/flowtype/flow-typed/issues/331)
 
 ## `flow-typed` CLI
 
