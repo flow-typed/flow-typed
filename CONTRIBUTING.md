@@ -1,5 +1,14 @@
 ## Library Definition Best Practices
 
+This is a set of best practices to keep in mind while writing a libdef. These 
+best practices should also be considered when reviewing new libdefs or changes
+to existing libdefs.
+
+### tldr
+
+* [Avoid `any` when possible](#avoid-any-when-possible)
+* [Always prefix global variables that aren't really meant to be global](prefix-global-variables-that-arent-really-meant-to-be-global)
+
 ##### Avoid `any` when possible
 
 Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propogating on to other code, the `any` will potentially cause Flow to miss type errors!
