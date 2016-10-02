@@ -1,10 +1,10 @@
-type AlignFlag = 'left' | 'right' | 'center'
+type marked$AlignFlag = 'left' | 'right' | 'center'
 
-type NodeCallback<T> = (e: ?Error, d: ?T) => void
+type marked$NodeCallback<T> = (e: ?Error, d: ?T) => void
 
-class Renderer {
-  constructor: (o?: MarkedOptions) => Renderer
-  options: MarkedOptions;
+class marked$Renderer {
+  constructor: (o?: marked$MarkedOptions) => marked$Renderer
+  options: marked$MarkedOptions;
   code: (c: string, l: string) => string;
   blockquote: (q: string) => string;
   html: (h: string) => string;
@@ -15,7 +15,7 @@ class Renderer {
   paragraph: (t: string) => string;
   table: (h: string, b: string) => string;
   tablerow: (c: string) => string;
-  tablecell: (c: string, f: ?AlignFlag) => string;
+  tablecell: (c: string, f: ?marked$AlignFlag) => string;
   heading: (t: string, l: number) => string;
   strong: (t: string) => string;
   em: (t: string) => string;
@@ -27,14 +27,14 @@ class Renderer {
   text: (t: string) => string;
 }
 
-type HighlightFunction =
-  ((c: string, l: string, cb: NodeCallback<string>) => void)
-  | ((c: string, cb: NodeCallback<string>) => void)
+type marked$HighlightFunction =
+  ((c: string, l: string, cb: marked$NodeCallback<string>) => void)
+  | ((c: string, cb: marked$NodeCallback<string>) => void)
   | ((c: string, l?: string) => string)
 
-type MarkedOptions = {
-  highlight?: HighlightFunction;
-  renderer?: Renderer;
+type marked$MarkedOptions = {
+  highlight?: marked$HighlightFunction;
+  renderer?: marked$Renderer;
   gfm?: boolean;
   tables?: boolean;
   breaks?: boolean;
@@ -45,107 +45,108 @@ type MarkedOptions = {
 }
 
 /*
- * Tokens
+ * marked$Tokens
  */
 
-type Space = { type: 'space'; }
-type Code = { type: 'code'; text: string; lang?: string; }
-type Heading = { type: 'heading'; depth: number; text: string; }
-type Table = { type: 'table'; header: string; align: Array<AlignFlag> ; cells: Array<Array<string>> }
-type Hr = { type: 'hr'; }
-type BlockquoteStart = { type: 'blockquote_start' }
-type BlockquoteEnd = { type: 'blockquote_end' }
-type ListStart = { type: 'list_start' }
-type ListEnd = { type: 'list_end' }
-type Paragraph = { type: 'paragraph'; pre: boolean; text: string; }
-type Html = { type: 'paragraph'; pre: boolean; text: string; }
-type Text = { type: 'text'; text: string; }
+type marked$Space = { type: 'space'; }
+type marked$Code = { type: 'code'; text: string; lang?: string; }
+type marked$Heading = { type: 'heading'; depth: number; text: string; }
+type marked$Table = { type: 'table'; header: string; align: Array<marked$AlignFlag> ; cells: Array<Array<string>> }
+type marked$Hr = { type: 'hr'; }
+type marked$BlockquoteStart = { type: 'blockquote_start' }
+type marked$BlockquoteEnd = { type: 'blockquote_end' }
+type marked$ListStart = { type: 'list_start' }
+type marked$ListEnd = { type: 'list_end' }
+type marked$Paragraph = { type: 'paragraph'; pre: boolean; text: string; }
+type marked$Html = { type: 'paragraph'; pre: boolean; text: string; }
+type marked$Text = { type: 'text'; text: string; }
 
-type Token =
-  Space
-  | Code
-  | Heading
-  | Table
-  | Hr
-  | BlockquoteStart
-  | BlockquoteEnd
-  | ListStart
-  | ListEnd
-  | Paragraph
-  | Html
-  | Text
+type marked$Token =
+  marked$Space
+  | marked$Code
+  | marked$Heading
+  | marked$Table
+  | marked$Hr
+  | marked$BlockquoteStart
+  | marked$BlockquoteEnd
+  | marked$ListStart
+  | marked$ListEnd
+  | marked$Paragraph
+  | marked$Html
+  | marked$Text
 
-type Link = {
+type marked$Link = {
   title: ?string;
   href: string;
 }
 
-type Tokens = { links: Array<Link> } & Array<Token>;
+type marked$Tokens = { links: Array<marked$Link> } & Array<marked$Token>;
 
-type NoopRule = {
+type marked$NoopRule = {
   (i: mixed): void;
   exec: (i: mixed) => void;
 }
 
-type Rule = RegExp | NoopRule
+type marked$Rule = RegExp | marked$NoopRule
 
-type lex = (t: string) => Tokens;
+type marked$lex = (t: string) => marked$Tokens;
 
-class Lexer {
-  static lexer: (t: string, o?: MarkedOptions) => Tokens;
-  static rules: { [key: string]: Rule };
-  rules: { [key: string]: Rule };
-  constructor: (o?: MarkedOptions) => Lexer;
-  lex: lex;
-  tokens: Tokens;
-  options: MarkedOptions;
+class marked$Lexer {
+  static lexer: (t: string, o?: marked$MarkedOptions) => marked$Tokens;
+  static rules: { [key: string]: marked$Rule };
+  rules: { [key: string]: marked$Rule };
+  constructor: (o?: marked$MarkedOptions) => marked$Lexer;
+  lex: marked$lex;
+  tokens: marked$Tokens;
+  options: marked$MarkedOptions;
 }
 
-class Parser {
-  static parse: (t: Tokens, o?: MarkedOptions) => string;
-  constructor: (o?: MarkedOptions) => Parser;
-  parse: (t: Tokens) => string;
-  next: () => Token;
-  peek: () => Token;
-  parseText: () => string;
+class marked$Parser {
+  static parse: (t: marked$Tokens, o?: marked$MarkedOptions) => string;
+  constructor: (o?: marked$MarkedOptions) => marked$Parser;
+  parse: (t: marked$Tokens) => string;
+  next: () => marked$Token;
+  peek: () => marked$Token;
+  parsemarked$Text: () => string;
   tok: () => string;
-  tokens: Tokens;
-  token: ?Token;
-  options: MarkedOptions;
-  renderer: Renderer;
+  tokens: marked$Tokens;
+  token: ?marked$Token;
+  options: marked$MarkedOptions;
+  renderer: marked$Renderer;
 }
 
-class InlineLexer {
-  static rules: Array<Rule>;
-  static output: (s: string, l: Array<Link>, o?: MarkedOptions) => string;
-  constructor: (l: Array<Link>, o?: MarkedOptions) => InlineLexer;
+class marked$InlineLexer {
+  static rules: Array<marked$Rule>;
+  static output: (s: string, l: Array<marked$Link>, o?: marked$MarkedOptions) => string;
+  constructor: (l: Array<marked$Link>, o?: marked$MarkedOptions) => marked$InlineLexer;
   output: (s: string) => string;
-  outputLink: (c: Array<string>, l: Link) => string;
+  outputmarked$Link: (c: Array<string>, l: marked$Link) => string;
   smartypants: (t: string) => string;
   mangle: (t: string) => string;
-  options: MarkedOptions;
-  links: Array<Link>;
-  rules: Array<Rule>;
-  renderer: Renderer;
+  options: marked$MarkedOptions;
+  links: Array<marked$Link>;
+  rules: Array<marked$Rule>;
+  renderer: marked$Renderer;
 }
 
-declare module marked {
-  declare type Marked = {
-    (md: string, o: MarkedOptions, cb: NodeCallback<string>): void;
-    (md: string, cb: NodeCallback<string>): void;
-    (md: string, o?: MarkedOptions): string;
-    setOptions: (o: MarkedOptions) => void;
-    defaults: MarkedOptions;
-    Parser: typeof Parser;
-    parser: typeof Parser.parse;
-    Lexer: typeof Lexer;
-    lexer: typeof Lexer.lexer;
-    InlineLexer: typeof InlineLexer;
-    inlinelexer: InlineLexer.output;
-    Renderer: typeof Renderer;
-    parse: Marked;
-  }
+type marked$Marked = {
+  (md: string, o: marked$MarkedOptions, cb: marked$NodeCallback<string>): void;
+  (md: string, cb: marked$NodeCallback<string>): void;
+  (md: string, o?: marked$MarkedOptions): string;
+  setOptions: (o: marked$MarkedOptions) => void;
+  defaults: marked$MarkedOptions;
+  Parser: typeof marked$Parser;
+  parser: typeof marked$Parser.parse;
+  Lexer: typeof marked$Lexer;
+  lexer: typeof marked$Lexer.lexer;
+  InlineLexer: typeof marked$InlineLexer;
+  inlinelexer: marked$InlineLexer.output;
+  Renderer: typeof marked$Renderer;
+  parse: marked$Marked;
+}
 
-  declare export default Marked;
+
+declare module marked {
+  declare export default marked$Marked;
 }
 
