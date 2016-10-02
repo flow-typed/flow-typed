@@ -540,3 +540,8 @@ declare module 'rxjs/Subject' {
   }
 }
 
+declare module 'rxjs/Subscription' {
+  declare module.exports: {
+    Subscription: typeof rxjs$Subscription
+  }
+}
