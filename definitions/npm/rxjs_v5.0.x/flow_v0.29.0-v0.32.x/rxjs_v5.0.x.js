@@ -509,3 +509,10 @@ declare module 'rxjs' {
     Subscription: typeof rxjs$Subscription,
   }
 }
+
+declare module 'rxjs/Observable' {
+  declare module.exports: {
+    Observable: typeof rxjs$Observable
+  }
+}
+
