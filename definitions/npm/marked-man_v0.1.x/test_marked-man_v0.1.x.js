@@ -3,31 +3,16 @@
 import markedMan from 'marked-man'
 
 markedMan.setOptions({
-  highlight: function (code, lang: string, callback) {
-    callback(null, 'TROLOLO');
-  }
-});
-
-markedMan.setOptions({
-  highlight: (code): string => {
-    return 'Stubby stub.';
-  }
-});
-
-markedMan.setOptions({
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  smartLists: true,
-  smartypants: false,
-  format: 'roff',
+  format: 'html',
   name: '',
   date: new Date,
   section: '',
   version: '',
   manual: '',
-  ronn: false
+  gfm: true,
+  breaks: true,
+  sanitize: true,
+  ronn: true
 });
 
 // $ExpectError
@@ -44,15 +29,11 @@ markedMan(24, function (err, content) {
 });
 
 const x: string = markedMan('');
+// $ExpectError
 markedMan('', { tables: false })
 
 // $ExpectError
 markedMan('up', 'top')
 // $ExpectError
 const y: string = markedMan(23);
-
-const renderer = new markedMan.Renderer();
-
-renderer.heading = (text, level) => text + (level * 10).toString()
-renderer.tablecell = (content, alignment) => alignment ? content + alignment : content
 
