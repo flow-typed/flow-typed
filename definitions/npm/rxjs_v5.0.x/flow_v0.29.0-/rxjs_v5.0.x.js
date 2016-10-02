@@ -7,12 +7,22 @@ interface rxjs$IObserver<-T> {
   complete(): mixed;
 }
 
-// FIXME: Technically at least one of these is required.
-interface rxjs$PartialObserver<-T> {
-  next?: (value: T) => mixed;
-  error?: (error: any) => mixed;
-  complete?: () => mixed;
-}
+type rxjs$PartialObserver<-T> =
+  | {
+    next: (value: T) => mixed;
+    error?: (error: any) => mixed;
+    complete?: () => mixed;
+  }
+  | {
+    next?: (value: T) => mixed;
+    error: (error: any) => mixed;
+    complete?: () => mixed;
+  }
+  | {
+    next?: (value: T) => mixed;
+    error?: (error: any) => mixed;
+    complete: () => mixed;
+  }
 
 interface rxjs$ISubscription {
   unsubscribe(): void;
