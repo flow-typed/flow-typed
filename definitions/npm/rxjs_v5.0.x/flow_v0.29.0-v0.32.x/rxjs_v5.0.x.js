@@ -528,3 +528,9 @@ declare module 'rxjs/BehaviorSubject' {
   }
 }
 
+declare module 'rxjs/ReplaySubject' {
+  declare module.exports: {
+    ReplaySubject: typeof rxjs$ReplaySubject
+  }
+}
+
