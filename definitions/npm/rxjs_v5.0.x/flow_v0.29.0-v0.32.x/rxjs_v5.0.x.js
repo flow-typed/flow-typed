@@ -138,7 +138,7 @@ declare class rxjs$Observable<+T> {
   ): rxjs$Observable<U>;
 
   multicast(
-    subjectOrrxjs$SubjectFactory: rxjs$Subject<T> | () => rxjs$Subject<T>,
+    subjectOrSubjectFactory: rxjs$Subject<T> | () => rxjs$Subject<T>,
   ): rxjs$ConnectableObservable<T>;
 
   publish(): rxjs$ConnectableObservable<T>;
@@ -467,7 +467,7 @@ declare class rxjs$Observer<T> {
 // FIXME(samgoldman) should be `mixins rxjs$Observable<T>, rxjs$Observer<T>`
 // once Babel parsing support exists: https://phabricator.babeljs.io/T6821
 declare class rxjs$Subject<T> extends rxjs$Observable<T> {
-  asrxjs$Observable(): rxjs$Observable<T>;
+  asObservable(): rxjs$Observable<T>;
 
   observers: Array<rxjs$Observer<T>>;
 
