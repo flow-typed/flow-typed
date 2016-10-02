@@ -5,6 +5,7 @@ import * as O from 'rxjs/Observable';
 import * as Obs from 'rxjs/Observer';
 import * as BS from 'rxjs/BehaviorSubject';
 import * as RS from 'rxjs/ReplaySubject';
+import * as S from 'rxjs/Subject';
 
 type SuperFoo = { x: string };
 type SubFoo = { x: string; y: number };

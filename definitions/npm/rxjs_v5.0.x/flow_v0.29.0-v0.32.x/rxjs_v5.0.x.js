@@ -534,3 +534,9 @@ declare module 'rxjs/ReplaySubject' {
   }
 }
 
+declare module 'rxjs/Subject' {
+  declare module.exports: {
+    Subject: typeof rxjs$Subject
+  }
+}
+
