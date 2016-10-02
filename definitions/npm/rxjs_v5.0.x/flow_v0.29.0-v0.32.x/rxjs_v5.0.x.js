@@ -516,3 +516,9 @@ declare module 'rxjs/Observable' {
   }
 }
 
+declare module 'rxjs/Observer' {
+  declare module.exports: {
+    Observer: typeof rxjs$Observer
+  }
+}
+
