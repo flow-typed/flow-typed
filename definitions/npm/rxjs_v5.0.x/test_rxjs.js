@@ -68,8 +68,8 @@ const superObservable: Observable<SuperFoo> = new Observable();
 const subSubject: Subject<SubFoo> = new Subject();
 const superSubject: Subject<SuperFoo> = new Subject();
 
-const superObserver: rx$IObserver<SuperFoo> = (null: any);
-const subObserver: rx$IObserver<SubFoo> = (null: any);
+const superObserver: rxjs$IObserver<SuperFoo> = (null: any);
+const subObserver: rxjs$IObserver<SubFoo> = (null: any);
 
 (subObservable: Observable<SuperFoo>);
 // $ExpectError -- covariant
@@ -81,8 +81,8 @@ const subObserver: rx$IObserver<SubFoo> = (null: any);
 (superSubject: Subject<SubFoo>);
 
 // $ExpectError -- contravariant. Type parameter is only in input positions.
-(subObserver: rx$IObserver<SuperFoo>);
-(superObserver: rx$IObserver<SubFoo>);
+(subObserver: rxjs$IObserver<SuperFoo>);
+(superObserver: rxjs$IObserver<SubFoo>);
 
 const groupedSubObservable: Observable<Observable<SubFoo>> =
   subObservable.groupBy(subfoo => subfoo.y);
