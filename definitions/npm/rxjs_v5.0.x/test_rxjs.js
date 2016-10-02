@@ -3,6 +3,7 @@
 import {Observable, Subject} from 'rxjs';
 import * as O from 'rxjs/Observable';
 import * as Obs from 'rxjs/Observer';
+import * as BS from 'rxjs/BehaviorSubject';
 
 type SuperFoo = { x: string };
 type SubFoo = { x: string; y: number };

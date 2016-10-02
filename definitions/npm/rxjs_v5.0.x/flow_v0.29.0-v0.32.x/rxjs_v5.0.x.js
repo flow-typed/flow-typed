@@ -522,3 +522,9 @@ declare module 'rxjs/Observer' {
   }
 }
 
+declare module 'rxjs/BehaviorSubject' {
+  declare module.exports: {
+    BehaviorSubject: typeof rxjs$BehaviorSubject
+  }
+}
+
