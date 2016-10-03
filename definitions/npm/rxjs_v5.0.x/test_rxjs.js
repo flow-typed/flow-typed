@@ -92,3 +92,12 @@ const subObserver: rxjs$IObserver<SubFoo> = (null: any);
 
 const groupedSubObservable: Observable<Observable<SubFoo>> =
   subObservable.groupBy(subfoo => subfoo.y);
+
+// $ExpectError
+numbers.onErrorResumeNext().subscribe((x: string) => {});
+numbers.onErrorResumeNext().subscribe((x: number) => {});
+numbers.onErrorResumeNext(strings).subscribe((x: number | string) => {});
+
+// $ExpectError
+numbers.onErrorResumeNext(strings).subscribe((x: number) => {});
+

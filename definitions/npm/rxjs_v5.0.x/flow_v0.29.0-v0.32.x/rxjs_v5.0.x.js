@@ -69,6 +69,10 @@ declare class rxjs$Observable<+T> {
 
   static throw(error: any): rxjs$Observable<any>;
 
+  static onErrorResumeNext(...sources: Array<rxjs$Observable<T>>): rxjs$Observable<T>;
+
+  onErrorResumeNext<I>(...sources: Array<rxjs$Observable<I>>): rxjs$Observable<T | I>;
+
   race(other: rxjs$Observable<T>): rxjs$Observable<T>;
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>;
