@@ -7,7 +7,44 @@ import * as node_os from "os";
 import * as node_path from 'path';
 import * as node_url from "url";
 
-export const child_process = node_child_process;
+type execP$Result = {stdout: Buffer, stderr: Buffer};
+
+export const child_process = {
+  exec: node_child_process.exec,
+  execP: function(
+    command: string,
+    options?: child_process$execOpts): Promise<execP$Result>
+  {
+    return new Promise((res, rej) => {
+      node_child_process.exec(command, options, (err, stdout, stderr) => {
+        if (err) { rej(err); } else { res( {stdout: stdout, stderr: stderr, } ); }
+      });
+    });
+  },
+  execFileP: function(
+    command: string,
+    argsOrOptions?: Array<string> | child_process$execFileOpts,
+    options?: child_process$execFileOpts): Promise<execP$Result>
+  {
+    let _args: Array<string>;
+    let _opts: child_process$execFileOpts;
+
+    if(Array.isArray(argsOrOptions)) {
+      _args = argsOrOptions;
+      _opts = (options) ? options : {};
+    } else {
+      _args = [];
+      _opts = (argsOrOptions) ? argsOrOptions : {};
+    }
+
+    return new Promise((res, rej) => {
+      node_child_process.execFile(command, _args, _opts, (err, stdout, stderr) => {
+        if (err) { rej(err); } else { res( {stdout: stdout, stderr: stderr, } ); }
+      });
+    });
+  },
+};
+
 export const fs = {
   createReadStream: node_fs.createReadStream,
   createWriteStream: node_fs.createWriteStream,

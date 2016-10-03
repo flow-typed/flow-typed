@@ -16,15 +16,14 @@ import type {Version} from "./semver.js";
 
 const P = Promise;
 
-export type LibDef = {
+export type LibDef = {|
   pkgName: string,
-  pkgVersion: Version,
   pkgVersionStr: string,
   flowVersion: Version,
   flowVersionStr: string,
   path: string,
   testFilePaths: Array<string>,
-};
+|};
 
 const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
@@ -81,42 +80,61 @@ async function updateCacheRepo(verbose?: VerboseOutput) {
  * (else: create/rebase it)
  */
 const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
-async function ensureCacheRepo(verbose?: VerboseOutput, cacheRepoExpiry: number = CACHE_REPO_EXPIRY) {
-  if (!await fs.exists(CACHE_REPO_DIR) || !await fs.exists(CACHE_REPO_GIT_DIR)) {
-    writeVerbose(
-      verbose,
-      ' * flow-typed cache not found, fetching from GitHub...',
-      false
-    );
-    await cloneCacheRepo(verbose);
-    writeVerbose(verbose, 'done.');
-  } else {
-    let lastUpdated = 0;
-    if (await fs.exists(LAST_UPDATED_FILE)) {
-      // If the LAST_UPDATED_FILE has anything other than just a number in it,
-      // just assume we need to update.
-      const lastUpdatedRaw = await fs.readFile(LAST_UPDATED_FILE);
-      const lastUpdatedNum = parseInt(lastUpdatedRaw, 10);
-      if (String(lastUpdatedNum) === String(lastUpdatedRaw)) {
-        lastUpdated = lastUpdatedNum;
-      }
-    }
+export const _cacheRepoAssure = {
+  lastAssured: 0,
+  pendingAssure: Promise.resolve(),
+};
+async function ensureCacheRepo(
+  verbose?: VerboseOutput,
+  cacheRepoExpiry: number = CACHE_REPO_EXPIRY
+) {
+  // Only re-run rebase checks if a check hasn't been run in the last 5 minutes
+  if (_cacheRepoAssure.lastAssured + (5 * 1000 * 60) >= Date.now()) {
+    return _cacheRepoAssure.pendingAssure;
+  }
 
-    if ((lastUpdated + cacheRepoExpiry) < Date.now()) {
-      writeVerbose(verbose, ' * flow-typed cache is old, rebasing...', false);
-      const rebaseSuccessful = await rebaseCacheRepo(verbose);
-      if (rebaseSuccessful) {
-        writeVerbose(verbose, 'done.');
-      } else {
+  _cacheRepoAssure.lastAssured = Date.now();
+  const prevAssure = _cacheRepoAssure.pendingAssure;
+  return _cacheRepoAssure.pendingAssure =
+    prevAssure.then(() => (async function() {
+      const repoDirExists = fs.exists(CACHE_REPO_DIR);
+      const repoGitDirExists = fs.exists(CACHE_REPO_GIT_DIR);
+      if (!await repoDirExists || !await repoGitDirExists) {
         writeVerbose(
           verbose,
-          '\nNOTE: Unable to rebase local cache! If you don\'t currently ' +
-          'have internet connectivity, no worries -- we\'ll update the local ' +
-          'cache the next time you do.\n'
+          '• flow-typed cache not found, fetching from GitHub...',
+          false
         );
+        await cloneCacheRepo(verbose);
+        writeVerbose(verbose, 'done.');
+      } else {
+        let lastUpdated = 0;
+        if (await fs.exists(LAST_UPDATED_FILE)) {
+          // If the LAST_UPDATED_FILE has anything other than just a number in
+          // it, just assume we need to update.
+          const lastUpdatedRaw = await fs.readFile(LAST_UPDATED_FILE);
+          const lastUpdatedNum = parseInt(lastUpdatedRaw, 10);
+          if (String(lastUpdatedNum) === String(lastUpdatedRaw)) {
+            lastUpdated = lastUpdatedNum;
+          }
+        }
+
+        if ((lastUpdated + cacheRepoExpiry) < Date.now()) {
+          writeVerbose(verbose, '• rebasing flow-typed cache...', false);
+          const rebaseSuccessful = await rebaseCacheRepo(verbose);
+          if (rebaseSuccessful) {
+            writeVerbose(verbose, 'done.');
+          } else {
+            writeVerbose(
+              verbose,
+              '\nNOTE: Unable to rebase local cache! If you don\'t currently ' +
+              'have internet connectivity, no worries -- we\'ll update the ' +
+              'local cache the next time you do.\n'
+            );
+          }
+        }
       }
-    }
-  }
+    })());
 }
 // Exported for tests -- since we really want this part well-tested.
 export {
@@ -379,7 +397,6 @@ async function parseLibDefsFromPkgDir(
 
     libDefs.push({
       pkgName,
-      pkgVersion,
       pkgVersionStr,
       flowVersion,
       flowVersionStr: versionToString(flowVersion),
@@ -566,14 +583,54 @@ export async function getCacheLibDefVersion(libDef: LibDef) {
   );
 };
 
+function packageNameMatch(a: string, b: string): boolean {
+  return a.toLowerCase() === b.toLowerCase();
+}
+
+function libdefMatchesPackageVersion(pkgSemver: string, defVersionRaw: string): boolean {
+  // The libdef version should be treated as a semver prefixed by a carat
+  // (i.e: "foo_v2.2.x" is the same range as "^2.2.x")
+  // UNLESS it is prefixed by the equals character (i.e. "foo_=v2.2.x")
+  let defVersion = defVersionRaw;
+  if (defVersionRaw[0] !== '=' && defVersionRaw[0] !== '^') {
+    defVersion = '^' + defVersionRaw;
+  }
+
+  if(semver.valid(pkgSemver)) {
+    // test the single package version against the libdef range
+    return semver.satisfies(pkgSemver, defVersion);
+  }
+
+  if(semver.valid(defVersion)) {
+    // test the single defVersion agains the package range
+    return semver.satisfies(defVersion, pkgSemver);
+  }
+
+  const pkgRange = new semver.Range(pkgSemver);
+  const defRange = new semver.Range(defVersion);
+
+  if(defRange.set[0].length !== 2) {
+    throw Error("Invalid libDef version, It appears to be a non-contiguous range.");
+  }
+
+  const defLowerB = defRange.set[0][0].semver.version;
+  const defUpperB = defRange.set[0][1].semver.version;
+
+  if(semver.gtr(defLowerB, pkgSemver) || semver.ltr(defUpperB, pkgSemver)) {
+    return false;
+  }
+
+  const pkgLowerB = pkgRange.set[0][0].semver.version;
+  return defRange.test(pkgLowerB);
+}
+
 /**
  * Filter a given list of LibDefs down using a specified filter.
  */
 type LibDefFilter =
-  | {type: 'fuzzy', flowVersion?: Version, term: string}
-  // | {type: 'exact', flowVersion?: Version, pkgName: string, pkgVersion: Version}
-  | {type: 'exact', flowVersion?: Version, libDef: LibDef}
-  | {type: 'exact-name', flowVersion?: Version, term: string}
+  | {|type: 'fuzzy', flowVersionStr?: string, term: string|}
+  | {|type: 'exact', flowVersionStr?: string, pkgName: string, pkgVersionStr: string|}
+  | {|type: 'exact-name', flowVersionStr?: string, term: string|}
 ;
 export function filterLibDefs(
   defs: Array<LibDef>,
@@ -584,14 +641,14 @@ export function filterLibDefs(
     switch (filter.type) {
       case 'exact':
         filterMatch = (
-          def.pkgName.toLowerCase() === filter.libDef.pkgName.toLowerCase()
-          && semver.satisfies(filter.libDef.pkgVersionStr, def.pkgVersionStr)
+          packageNameMatch(def.pkgName, filter.pkgName)
+          && libdefMatchesPackageVersion(filter.pkgVersionStr, def.pkgVersionStr)
         );
         break;
 
       case 'exact-name':
         filterMatch = (
-          def.pkgName.toLowerCase() === filter.term.toLowerCase()
+          packageNameMatch(def.pkgName, filter.term)
         );
         break;
 
@@ -612,9 +669,8 @@ export function filterLibDefs(
       return false;
     }
 
-    const filterFlowVer = filter.flowVersion;
-    if (filterFlowVer) {
-      const filterFlowVerStr = versionToString(filterFlowVer);
+    const filterFlowVerStr = filter.flowVersionStr;
+    if (filterFlowVerStr) {
       const defUpperFlow = def.flowVersion.upperBound;
       if (defUpperFlow) {
         const defLowerFlow = copyVersion(def.flowVersion);
@@ -624,7 +680,10 @@ export function filterLibDefs(
           && semver.satisfies(filterFlowVerStr, versionToString(defUpperFlow))
         );
       } else {
-        return semver.satisfies(filterFlowVerStr, def.flowVersionStr);
+        return semver.satisfies(
+          filterFlowVerStr,
+          def.flowVersionStr
+        );
       }
     }
 
@@ -632,6 +691,6 @@ export function filterLibDefs(
   }).sort((a, b) => {
     const aZeroed = a.pkgVersionStr.replace(/x/g, '0');
     const bZeroed = b.pkgVersionStr.replace(/x/g, '0');
-    return semver.lt(aZeroed, bZeroed) ? -1 : 1;
+    return semver.gt(aZeroed, bZeroed) ? -1 : 1;
   });
 };

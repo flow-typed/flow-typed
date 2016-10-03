@@ -8,9 +8,7 @@ describe('search command', () => {
     function _generateFixturePkg(name, verStr, flowVerStr) {
       return {
         pkgName: name,
-        pkgVersion: stringToVersion(verStr),
         pkgVersionStr: verStr,
-        pkgNameVersionStr: `${name}_${verStr}`,
         flowVersion: stringToVersion(verStr),
         flowVersionStr: flowVerStr,
         path: '',

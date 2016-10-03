@@ -49,6 +49,15 @@ const c2 = <ConnectedTestC name='hjh' />; // missing prop: updateTime
 // $ExpectError
 const c3 = <ConnectedTestC name='345' timeOfDay={23443} updateTime={() => undefined} />; // timeOfDay: string
 
+const ConnectedTestCA = connect(
+  (state: Object, props: {name:string}) => ({timeOfDay: 'connectionTime for '+props.name})
+)(Test);
+
+// Works without dispatch OR timeOfDay. Injected implicitly
+const ca1 = <ConnectedTestCA name='hjh' updateTime={() => undefined} />;
+// $ExpectError
+const ca2 = <ConnectedTestCA updateTime={() => undefined} />; // missing prop: name
+
 const ConnectedTestD = connect(
   (state: Object) => ({timeOfDay: 'connectionTime'}),
   (dispatch: Function) => ({
@@ -63,3 +72,19 @@ const d1 = <ConnectedTestD name='hjh' />;
 const d2 = <ConnectedTestD />; // missing prop: name
 // $ExpectError
 const d3 = <ConnectedTestD name='345' timeOfDay={23443} updateTime={() => undefined} />; // timeOfDay: string
+
+
+const ConnectedTestDA = connect(
+  (state: Object, props: {name:string}) => ({timeOfDay: 'connectionTime for '+props.name}),
+  (dispatch: Function, props: {name:string}) => ({
+    updateTime: (time: string) => console.log("Updating time for", props.name),
+    dispatch
+  })
+)(Test);
+
+// Works without dispatch OR timeOfDay OR updateTime. Injected implicitly
+const da1 = <ConnectedTestDA name='hjh' />;
+// $ExpectError
+const da2 = <ConnectedTestDA />; // missing prop: name
+// $ExpectError
+const da3 = <ConnectedTestDA name='345' timeOfDay={23443} updateTime={() => undefined} />; // timeOfDay: string

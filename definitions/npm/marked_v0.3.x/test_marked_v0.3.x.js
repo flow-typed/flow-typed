@@ -28,7 +28,7 @@ marked.setOptions({
 // $ExpectError
 marked.setOptions([ 'yoloism', true ])
 
-marked('', (err, content) => {
+marked('', (err: ?Error, content: ?string): void => {
   if (err) throw err;
 });
 

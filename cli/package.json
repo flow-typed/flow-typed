@@ -1,6 +1,6 @@
 {
   "name": "flow-typed",
-  "version": "2.0.0-beta.8",
+  "version": "2.0.0-beta.9",
   "description": "A repository of high quality flowtype definitions",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
@@ -11,8 +11,8 @@
     "lint": "eslint .",
     "prepublish": "mkdir -p dist; npm run test",
     "test": "npm run clean; npm run build; npm run test-quick",
-    "test-quick": "npm run lint && jest",
-    "watch": "mkdir -p dist; babel --watch=./src --out-dir=./dist"
+    "test-quick": "jest && npm run lint",
+    "watch": "mkdir -p dist; babel --source-maps --watch=./src --out-dir=./dist"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/flowtype/flow-typed#readme",
   "jest": {
-    "automock": false,
     "modulePathIgnorePatterns": [
       "<rootDir>/src/.*"
     ]
@@ -46,16 +45,19 @@
     "eslint": "^2.9.0",
     "eslint-plugin-flow-vars": "^0.4.0",
     "flow-bin": "^0.32",
-    "jest-cli": "^13.2.3"
+    "jest-cli": "^15.1.1"
   },
   "dependencies": {
     "babel-polyfill": "^6.6.1",
+    "colors": "^1.1.2",
     "github": "^0.2.4",
+    "glob": "^7.0.6",
     "lodash": "^4.11.2",
     "md5": "^2.1.0",
     "mkdirp": "^0.5.1",
     "nodegit": "^0.15.1",
     "request": "^2.69.0",
+    "resolve": "^1.1.7",
     "rx-lite": "4.0.8",
     "semver": "^5.1.0",
     "table": "3.7.8",

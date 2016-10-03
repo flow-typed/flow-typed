@@ -1,3 +1,6 @@
+// flow-typed signature: c5f918cd3de18b19a20558e6f3bbcc84
+// flow-typed version: cdd17a64e0/semver_v5.1.x/flow_>=v0.27.0
+
 // List of members taken from here: https://www.npmjs.com/package/semver/#functions
 // TODO support the `loose` parameter
 // TODO support SemVer instances as input parameters
