@@ -1,8 +1,8 @@
 // @flow
 
-import Git from "nodegit";
 import semver from "semver";
 
+import {cloneInto, findLatestFileCommitHash, rebaseRepoMaster} from "./git.js";
 import {mkdirp} from "./fileUtils.js";
 import {fs, path, os} from "./node.js";
 import {
@@ -35,9 +35,7 @@ const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
 async function cloneCacheRepo(verbose?: VerboseOutput) {
   await mkdirp(CACHE_REPO_DIR);
   try {
-    await Git.Clone(REMOTE_REPO_URL, CACHE_REPO_DIR, {
-      checkoutBranch: 'master'
-    });
+    await cloneInto(REMOTE_REPO_URL, CACHE_REPO_DIR);
   } catch (e) {
     writeVerbose(verbose, 'ERROR: Unable to clone the local cache repo.');
     throw e;
@@ -48,11 +46,8 @@ async function cloneCacheRepo(verbose?: VerboseOutput) {
 const CACHE_REPO_GIT_DIR = path.join(CACHE_REPO_DIR, '.git');
 async function rebaseCacheRepo(verbose?: VerboseOutput) {
   if (await fs.exists(CACHE_REPO_DIR) && await fs.exists(CACHE_REPO_GIT_DIR)) {
-    const repo = await Git.Repository.open(CACHE_REPO_DIR);
-    await repo.checkoutBranch('master');
     try {
-      await repo.fetch('origin');
-      await repo.rebaseBranches('master', 'origin/master');
+      await rebaseRepoMaster(CACHE_REPO_DIR);
     } catch (e) {
       writeVerbose(
         verbose,
@@ -144,6 +139,7 @@ export {
   ensureCacheRepo as _ensureCacheRepo,
   updateCacheRepo,
   LAST_UPDATED_FILE as _LAST_UPDATED_FILE,
+  REMOTE_REPO_URL as _REMOTE_REPO_URL,
 };
 
 async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>, validationErrs?: VErrors) {
@@ -562,22 +558,12 @@ export async function getCacheLibDefs(
 export async function getCacheLibDefVersion(libDef: LibDef) {
   await ensureCacheRepo();
   await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
-  const repo = await Git.Repository.open(CACHE_REPO_DIR);
-  const revWalk = repo.createRevWalk();
-  revWalk.pushHead();
-  const histEntries = await revWalk.fileHistoryWalk(
-    path.relative(CACHE_REPO_DIR, libDef.path),
-    100000
+  const latestCommitHash = await findLatestFileCommitHash(
+    CACHE_REPO_DIR,
+    path.relative(CACHE_REPO_DIR, libDef.path)
   );
-  if (histEntries.length === 0) {
-    throw new Error(
-      `Unable to find version information for `+
-      `'${libDef.pkgName}_${libDef.pkgVersionStr}/` +
-      `flow_${libDef.flowVersionStr}'!`
-    );
-  }
   return (
-    `${histEntries[0].commit.sha().substr(0, 10)}/` +
+    `${latestCommitHash.substr(0, 10)}/` +
     `${libDef.pkgName}_${libDef.pkgVersionStr}/` +
     `flow_${libDef.flowVersionStr}`
   );
