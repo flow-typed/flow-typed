@@ -101,3 +101,8 @@ numbers.onErrorResumeNext(strings).subscribe((x: number | string) => {});
 // $ExpectError
 numbers.onErrorResumeNext(strings).subscribe((x: number) => {});
 
+numbers
+  .map(n => Observable.of(n * 2, n * 3))
+  .combineAll()
+  .do(([a: number, b: number, c: number]) => {})
+

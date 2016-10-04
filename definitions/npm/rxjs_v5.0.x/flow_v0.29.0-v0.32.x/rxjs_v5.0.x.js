@@ -445,6 +445,11 @@ declare class rxjs$Observable<+T> {
     g: rxjs$Observable<G>,
     resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H,
   ): rxjs$Observable<H>;
+
+  // FIXME Using any types here. The real type of `any` should be the subtype of `T`.
+  // e.g. in case of `rsjs$Observable<number>` `any` should really be `number`
+  combineAll<A>(project: (i: Array<any>) => A): rxjs$Observable<A>;
+  combineAll(): rxjs$Observable<Array<any>>;
 }
 
 declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
