@@ -8,13 +8,14 @@ import * as node_path from 'path';
 import * as node_url from "url";
 
 type execP$Result = {stdout: Buffer, stderr: Buffer};
+type spawnP$Result = {stdout: string, stderr: string, exitCode: number};
 
 export const child_process = {
   exec: node_child_process.exec,
   execP: function(
     command: string,
-    options?: child_process$execOpts): Promise<execP$Result>
-  {
+    options?: child_process$execOpts
+  ): Promise<execP$Result> {
     return new Promise((res, rej) => {
       node_child_process.exec(command, options, (err, stdout, stderr) => {
         if (err) { rej(err); } else { res( {stdout: stdout, stderr: stderr, } ); }
@@ -24,8 +25,8 @@ export const child_process = {
   execFileP: function(
     command: string,
     argsOrOptions?: Array<string> | child_process$execFileOpts,
-    options?: child_process$execFileOpts): Promise<execP$Result>
-  {
+    options?: child_process$execFileOpts
+  ): Promise<execP$Result> {
     let _args: Array<string>;
     let _opts: child_process$execFileOpts;
 
@@ -43,6 +44,26 @@ export const child_process = {
       });
     });
   },
+  spawnP: function(
+    command: string,
+    args?: Array<string>,
+    options?: child_process$spawnOpts,
+  ): Promise<spawnP$Result> {
+    return new Promise((res, rej) => {
+      const process = node_child_process.spawn(command, args, options);
+      let stderr = '';
+      let stdout = '';
+      process.stdout.on('data', chunk => (stdout += chunk));
+      process.stderr.on('data', chunk => (stderr += chunk));
+      process.on('close', exitCode => {
+        if (exitCode === 0) {
+          res({stderr, stdout, exitCode});
+        } else {
+          rej({stderr, stdout, exitCode});
+        }
+      });
+    });
+  }
 };
 
 export const fs = {

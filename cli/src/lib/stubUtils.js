@@ -46,16 +46,17 @@ async function resolveToDirPath(
         cb(null, true);
       } else {
         fs.stat(filePath)
+          .then(stat => {
+            cb(null, stat.isFile() || stat.isFIFO());
+          })
           .catch(e => {
             if (e.code === 'ENOENT') {
               cb(null, false);
             } else {
               cb(e);
             }
-          })
-          .then(stat => {
-            cb(null, stat.isFile() || stat.isFIFO());
           });
+
       }
     },
   };
