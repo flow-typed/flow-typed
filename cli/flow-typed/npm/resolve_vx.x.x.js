@@ -1,4 +1,4 @@
-// flow-typed signature: e2a4d1dbc32c52c090bf6bb1b0e8af0f
+// flow-typed signature: d869e5d7f5d1f911b3350ddc3b3ac714
 // flow-typed version: <<STUB>>/resolve_v^1.1.7/flow_v0.32.0
 
 /**
@@ -22,195 +22,232 @@ declare module 'resolve' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'resolve/async' {
+declare module 'resolve/example/async' {
   declare module.exports: any;
 }
 
-declare module 'resolve/sync' {
+declare module 'resolve/example/sync' {
   declare module.exports: any;
 }
 
-declare module 'resolve/async' {
+declare module 'resolve/lib/async' {
   declare module.exports: any;
 }
 
-declare module 'resolve/caller' {
+declare module 'resolve/lib/caller' {
   declare module.exports: any;
 }
 
-declare module 'resolve/core' {
+declare module 'resolve/lib/core' {
   declare module.exports: any;
 }
 
-declare module 'resolve/node-modules-paths' {
+declare module 'resolve/lib/node-modules-paths' {
   declare module.exports: any;
 }
 
-declare module 'resolve/sync' {
+declare module 'resolve/lib/sync' {
   declare module.exports: any;
 }
 
-declare module 'resolve/core' {
+declare module 'resolve/test/core' {
   declare module.exports: any;
 }
 
-declare module 'resolve/dotdot' {
+declare module 'resolve/test/dotdot' {
   declare module.exports: any;
 }
 
-declare module 'resolve/faulty_basedir' {
+declare module 'resolve/test/dotdot/abc/index' {
   declare module.exports: any;
 }
 
-declare module 'resolve/filter_sync' {
+declare module 'resolve/test/dotdot/index' {
   declare module.exports: any;
 }
 
-declare module 'resolve/filter' {
+declare module 'resolve/test/faulty_basedir' {
   declare module.exports: any;
 }
 
-declare module 'resolve/mock_sync' {
+declare module 'resolve/test/filter_sync' {
   declare module.exports: any;
 }
 
-declare module 'resolve/mock' {
+declare module 'resolve/test/filter' {
   declare module.exports: any;
 }
 
-declare module 'resolve/module_dir' {
+declare module 'resolve/test/mock_sync' {
   declare module.exports: any;
 }
 
-declare module 'resolve/main' {
+declare module 'resolve/test/mock' {
   declare module.exports: any;
 }
 
-declare module 'resolve/node_path' {
+declare module 'resolve/test/module_dir' {
   declare module.exports: any;
 }
 
-declare module 'resolve/nonstring' {
+declare module 'resolve/test/module_dir/xmodules/aaa/index' {
   declare module.exports: any;
 }
 
-declare module 'resolve/pathfilter' {
+declare module 'resolve/test/module_dir/ymodules/aaa/index' {
   declare module.exports: any;
 }
 
-declare module 'resolve/main' {
+declare module 'resolve/test/module_dir/zmodules/bbb/main' {
   declare module.exports: any;
 }
 
-declare module 'resolve/alt' {
+declare module 'resolve/test/node_path' {
   declare module.exports: any;
 }
 
-declare module 'resolve/ref' {
+declare module 'resolve/test/node_path/x/aaa/index' {
   declare module.exports: any;
 }
 
-declare module 'resolve/ref' {
+declare module 'resolve/test/node_path/x/ccc/index' {
   declare module.exports: any;
 }
 
-declare module 'resolve/precedence' {
+declare module 'resolve/test/node_path/y/bbb/index' {
   declare module.exports: any;
 }
 
-declare module 'resolve/aaa' {
+declare module 'resolve/test/node_path/y/ccc/index' {
   declare module.exports: any;
 }
 
-declare module 'resolve/main' {
+declare module 'resolve/test/nonstring' {
   declare module.exports: any;
 }
 
-declare module 'resolve/bbb' {
+declare module 'resolve/test/pathfilter' {
   declare module.exports: any;
 }
 
-declare module 'resolve/main' {
+declare module 'resolve/test/pathfilter/deep_ref/main' {
   declare module.exports: any;
 }
 
-declare module 'resolve/resolver_sync' {
+declare module 'resolve/test/pathfilter/deep_ref/node_modules/deep/alt' {
   declare module.exports: any;
 }
 
-declare module 'resolve/resolver' {
+declare module 'resolve/test/pathfilter/deep_ref/node_modules/deep/deeper/ref' {
   declare module.exports: any;
 }
 
-declare module 'resolve/doom' {
+declare module 'resolve/test/pathfilter/deep_ref/node_modules/deep/ref' {
   declare module.exports: any;
 }
 
-declare module 'resolve/quux' {
+declare module 'resolve/test/precedence' {
   declare module.exports: any;
 }
 
-declare module 'resolve/foo' {
+declare module 'resolve/test/precedence/aaa' {
   declare module.exports: any;
 }
 
-declare module 'resolve/mug' {
+declare module 'resolve/test/precedence/aaa/index' {
   declare module.exports: any;
 }
 
-declare module 'resolve/other-lib' {
+declare module 'resolve/test/precedence/aaa/main' {
   declare module.exports: any;
 }
 
-declare module 'resolve/root' {
+declare module 'resolve/test/precedence/bbb' {
   declare module.exports: any;
 }
 
-declare module 'resolve/main' {
+declare module 'resolve/test/precedence/bbb/main' {
   declare module.exports: any;
 }
 
-declare module 'resolve/mymodule' {
+declare module 'resolve/test/resolver_sync' {
   declare module.exports: any;
 }
 
-declare module 'resolve/subdirs' {
+declare module 'resolve/test/resolver' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/bar/node_modules/foo/index' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/baz/doom' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/baz/quux' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/biz/node_modules/garply/lib/index' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/biz/node_modules/grux/index' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/biz/node_modules/tiv/index' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/foo' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/incorrect_main/index' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/mug' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/other_path/lib/other-lib' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/other_path/root' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/punycode/node_modules/punycode/index' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/quux/foo/index' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/without_basedir/main' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/resolver/without_basedir/node_modules/mymodule' {
+  declare module.exports: any;
+}
+
+declare module 'resolve/test/subdirs' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'resolve/async.js' {
-  declare module.exports: $Exports<'resolve/async'>;
+declare module 'resolve/example/async.js' {
+  declare module.exports: $Exports<'resolve/example/async'>;
 }
-declare module 'resolve/sync.js' {
-  declare module.exports: $Exports<'resolve/sync'>;
-}
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
-}
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
-}
-declare module 'resolve/async.js' {
-  declare module.exports: $Exports<'resolve/async'>;
-}
-declare module 'resolve/caller.js' {
-  declare module.exports: $Exports<'resolve/caller'>;
-}
-declare module 'resolve/core.js' {
-  declare module.exports: $Exports<'resolve/core'>;
-}
-declare module 'resolve/node-modules-paths.js' {
-  declare module.exports: $Exports<'resolve/node-modules-paths'>;
-}
-declare module 'resolve/sync.js' {
-  declare module.exports: $Exports<'resolve/sync'>;
-}
-declare module 'resolve/core.js' {
-  declare module.exports: $Exports<'resolve/core'>;
-}
-declare module 'resolve/dotdot.js' {
-  declare module.exports: $Exports<'resolve/dotdot'>;
+declare module 'resolve/example/sync.js' {
+  declare module.exports: $Exports<'resolve/example/sync'>;
 }
 declare module 'resolve/index' {
   declare module.exports: $Exports<'resolve'>;
@@ -218,183 +255,162 @@ declare module 'resolve/index' {
 declare module 'resolve/index.js' {
   declare module.exports: $Exports<'resolve'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/lib/async.js' {
+  declare module.exports: $Exports<'resolve/lib/async'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/lib/caller.js' {
+  declare module.exports: $Exports<'resolve/lib/caller'>;
 }
-declare module 'resolve/faulty_basedir.js' {
-  declare module.exports: $Exports<'resolve/faulty_basedir'>;
+declare module 'resolve/lib/core.js' {
+  declare module.exports: $Exports<'resolve/lib/core'>;
 }
-declare module 'resolve/filter_sync.js' {
-  declare module.exports: $Exports<'resolve/filter_sync'>;
+declare module 'resolve/lib/node-modules-paths.js' {
+  declare module.exports: $Exports<'resolve/lib/node-modules-paths'>;
 }
-declare module 'resolve/filter.js' {
-  declare module.exports: $Exports<'resolve/filter'>;
+declare module 'resolve/lib/sync.js' {
+  declare module.exports: $Exports<'resolve/lib/sync'>;
 }
-declare module 'resolve/mock_sync.js' {
-  declare module.exports: $Exports<'resolve/mock_sync'>;
+declare module 'resolve/test/core.js' {
+  declare module.exports: $Exports<'resolve/test/core'>;
 }
-declare module 'resolve/mock.js' {
-  declare module.exports: $Exports<'resolve/mock'>;
+declare module 'resolve/test/dotdot.js' {
+  declare module.exports: $Exports<'resolve/test/dotdot'>;
 }
-declare module 'resolve/module_dir.js' {
-  declare module.exports: $Exports<'resolve/module_dir'>;
+declare module 'resolve/test/dotdot/abc/index.js' {
+  declare module.exports: $Exports<'resolve/test/dotdot/abc/index'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/dotdot/index.js' {
+  declare module.exports: $Exports<'resolve/test/dotdot/index'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/faulty_basedir.js' {
+  declare module.exports: $Exports<'resolve/test/faulty_basedir'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/filter_sync.js' {
+  declare module.exports: $Exports<'resolve/test/filter_sync'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/filter.js' {
+  declare module.exports: $Exports<'resolve/test/filter'>;
 }
-declare module 'resolve/main.js' {
-  declare module.exports: $Exports<'resolve/main'>;
+declare module 'resolve/test/mock_sync.js' {
+  declare module.exports: $Exports<'resolve/test/mock_sync'>;
 }
-declare module 'resolve/node_path.js' {
-  declare module.exports: $Exports<'resolve/node_path'>;
+declare module 'resolve/test/mock.js' {
+  declare module.exports: $Exports<'resolve/test/mock'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/module_dir.js' {
+  declare module.exports: $Exports<'resolve/test/module_dir'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/module_dir/xmodules/aaa/index.js' {
+  declare module.exports: $Exports<'resolve/test/module_dir/xmodules/aaa/index'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/module_dir/ymodules/aaa/index.js' {
+  declare module.exports: $Exports<'resolve/test/module_dir/ymodules/aaa/index'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/module_dir/zmodules/bbb/main.js' {
+  declare module.exports: $Exports<'resolve/test/module_dir/zmodules/bbb/main'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/node_path.js' {
+  declare module.exports: $Exports<'resolve/test/node_path'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/node_path/x/aaa/index.js' {
+  declare module.exports: $Exports<'resolve/test/node_path/x/aaa/index'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/node_path/x/ccc/index.js' {
+  declare module.exports: $Exports<'resolve/test/node_path/x/ccc/index'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/node_path/y/bbb/index.js' {
+  declare module.exports: $Exports<'resolve/test/node_path/y/bbb/index'>;
 }
-declare module 'resolve/nonstring.js' {
-  declare module.exports: $Exports<'resolve/nonstring'>;
+declare module 'resolve/test/node_path/y/ccc/index.js' {
+  declare module.exports: $Exports<'resolve/test/node_path/y/ccc/index'>;
 }
-declare module 'resolve/pathfilter.js' {
-  declare module.exports: $Exports<'resolve/pathfilter'>;
+declare module 'resolve/test/nonstring.js' {
+  declare module.exports: $Exports<'resolve/test/nonstring'>;
 }
-declare module 'resolve/main.js' {
-  declare module.exports: $Exports<'resolve/main'>;
+declare module 'resolve/test/pathfilter.js' {
+  declare module.exports: $Exports<'resolve/test/pathfilter'>;
 }
-declare module 'resolve/alt.js' {
-  declare module.exports: $Exports<'resolve/alt'>;
+declare module 'resolve/test/pathfilter/deep_ref/main.js' {
+  declare module.exports: $Exports<'resolve/test/pathfilter/deep_ref/main'>;
 }
-declare module 'resolve/ref.js' {
-  declare module.exports: $Exports<'resolve/ref'>;
+declare module 'resolve/test/pathfilter/deep_ref/node_modules/deep/alt.js' {
+  declare module.exports: $Exports<'resolve/test/pathfilter/deep_ref/node_modules/deep/alt'>;
 }
-declare module 'resolve/ref.js' {
-  declare module.exports: $Exports<'resolve/ref'>;
+declare module 'resolve/test/pathfilter/deep_ref/node_modules/deep/deeper/ref.js' {
+  declare module.exports: $Exports<'resolve/test/pathfilter/deep_ref/node_modules/deep/deeper/ref'>;
 }
-declare module 'resolve/precedence.js' {
-  declare module.exports: $Exports<'resolve/precedence'>;
+declare module 'resolve/test/pathfilter/deep_ref/node_modules/deep/ref.js' {
+  declare module.exports: $Exports<'resolve/test/pathfilter/deep_ref/node_modules/deep/ref'>;
 }
-declare module 'resolve/aaa.js' {
-  declare module.exports: $Exports<'resolve/aaa'>;
+declare module 'resolve/test/precedence.js' {
+  declare module.exports: $Exports<'resolve/test/precedence'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/precedence/aaa.js' {
+  declare module.exports: $Exports<'resolve/test/precedence/aaa'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/precedence/aaa/index.js' {
+  declare module.exports: $Exports<'resolve/test/precedence/aaa/index'>;
 }
-declare module 'resolve/main.js' {
-  declare module.exports: $Exports<'resolve/main'>;
+declare module 'resolve/test/precedence/aaa/main.js' {
+  declare module.exports: $Exports<'resolve/test/precedence/aaa/main'>;
 }
-declare module 'resolve/bbb.js' {
-  declare module.exports: $Exports<'resolve/bbb'>;
+declare module 'resolve/test/precedence/bbb.js' {
+  declare module.exports: $Exports<'resolve/test/precedence/bbb'>;
 }
-declare module 'resolve/main.js' {
-  declare module.exports: $Exports<'resolve/main'>;
+declare module 'resolve/test/precedence/bbb/main.js' {
+  declare module.exports: $Exports<'resolve/test/precedence/bbb/main'>;
 }
-declare module 'resolve/resolver_sync.js' {
-  declare module.exports: $Exports<'resolve/resolver_sync'>;
+declare module 'resolve/test/resolver_sync.js' {
+  declare module.exports: $Exports<'resolve/test/resolver_sync'>;
 }
-declare module 'resolve/resolver.js' {
-  declare module.exports: $Exports<'resolve/resolver'>;
+declare module 'resolve/test/resolver.js' {
+  declare module.exports: $Exports<'resolve/test/resolver'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/bar/node_modules/foo/index.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/bar/node_modules/foo/index'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/baz/doom.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/baz/doom'>;
 }
-declare module 'resolve/doom.js' {
-  declare module.exports: $Exports<'resolve/doom'>;
+declare module 'resolve/test/resolver/baz/quux.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/baz/quux'>;
 }
-declare module 'resolve/quux.js' {
-  declare module.exports: $Exports<'resolve/quux'>;
+declare module 'resolve/test/resolver/biz/node_modules/garply/lib/index.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/biz/node_modules/garply/lib/index'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/biz/node_modules/grux/index.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/biz/node_modules/grux/index'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/biz/node_modules/tiv/index.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/biz/node_modules/tiv/index'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/foo.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/foo'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/incorrect_main/index.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/incorrect_main/index'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/mug.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/mug'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/other_path/lib/other-lib.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/other_path/lib/other-lib'>;
 }
-declare module 'resolve/foo.js' {
-  declare module.exports: $Exports<'resolve/foo'>;
+declare module 'resolve/test/resolver/other_path/root.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/other_path/root'>;
 }
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/punycode/node_modules/punycode/index.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/punycode/node_modules/punycode/index'>;
 }
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
+declare module 'resolve/test/resolver/quux/foo/index.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/quux/foo/index'>;
 }
-declare module 'resolve/mug.js' {
-  declare module.exports: $Exports<'resolve/mug'>;
+declare module 'resolve/test/resolver/without_basedir/main.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/without_basedir/main'>;
 }
-declare module 'resolve/other-lib.js' {
-  declare module.exports: $Exports<'resolve/other-lib'>;
+declare module 'resolve/test/resolver/without_basedir/node_modules/mymodule.js' {
+  declare module.exports: $Exports<'resolve/test/resolver/without_basedir/node_modules/mymodule'>;
 }
-declare module 'resolve/root.js' {
-  declare module.exports: $Exports<'resolve/root'>;
-}
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
-}
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
-}
-declare module 'resolve/index' {
-  declare module.exports: $Exports<'resolve'>;
-}
-declare module 'resolve/index.js' {
-  declare module.exports: $Exports<'resolve'>;
-}
-declare module 'resolve/main.js' {
-  declare module.exports: $Exports<'resolve/main'>;
-}
-declare module 'resolve/mymodule.js' {
-  declare module.exports: $Exports<'resolve/mymodule'>;
-}
-declare module 'resolve/subdirs.js' {
-  declare module.exports: $Exports<'resolve/subdirs'>;
+declare module 'resolve/test/subdirs.js' {
+  declare module.exports: $Exports<'resolve/test/subdirs'>;
 }

@@ -1,4 +1,4 @@
-// flow-typed signature: 3573a6be0246e4d1b577f206ab6cbcab
+// flow-typed signature: 83f9207a05b330ec8da39054d8b7713a
 // flow-typed version: <<STUB>>/through_v^2.3.8/flow_v0.32.0
 
 /**
@@ -22,19 +22,23 @@ declare module 'through' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'through/async' {
+declare module 'through/test/async' {
   declare module.exports: any;
 }
 
-declare module 'through/auto-destroy' {
+declare module 'through/test/auto-destroy' {
   declare module.exports: any;
 }
 
-declare module 'through/buffering' {
+declare module 'through/test/buffering' {
   declare module.exports: any;
 }
 
-declare module 'through/end' {
+declare module 'through/test/end' {
+  declare module.exports: any;
+}
+
+declare module 'through/test/index' {
   declare module.exports: any;
 }
 
@@ -45,21 +49,18 @@ declare module 'through/index' {
 declare module 'through/index.js' {
   declare module.exports: $Exports<'through'>;
 }
-declare module 'through/async.js' {
-  declare module.exports: $Exports<'through/async'>;
+declare module 'through/test/async.js' {
+  declare module.exports: $Exports<'through/test/async'>;
 }
-declare module 'through/auto-destroy.js' {
-  declare module.exports: $Exports<'through/auto-destroy'>;
+declare module 'through/test/auto-destroy.js' {
+  declare module.exports: $Exports<'through/test/auto-destroy'>;
 }
-declare module 'through/buffering.js' {
-  declare module.exports: $Exports<'through/buffering'>;
+declare module 'through/test/buffering.js' {
+  declare module.exports: $Exports<'through/test/buffering'>;
 }
-declare module 'through/end.js' {
-  declare module.exports: $Exports<'through/end'>;
+declare module 'through/test/end.js' {
+  declare module.exports: $Exports<'through/test/end'>;
 }
-declare module 'through/index' {
-  declare module.exports: $Exports<'through'>;
-}
-declare module 'through/index.js' {
-  declare module.exports: $Exports<'through'>;
+declare module 'through/test/index.js' {
+  declare module.exports: $Exports<'through/test/index'>;
 }

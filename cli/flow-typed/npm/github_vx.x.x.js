@@ -1,4 +1,4 @@
-// flow-typed signature: fd80d1dcf13e7ffdfa68874aaaa474b7
+// flow-typed signature: 6d32b60e3762e3b173b6eae9c3925cf4
 // flow-typed version: <<STUB>>/github_v^0.2.4/flow_v0.32.0
 
 /**
@@ -22,123 +22,127 @@ declare module 'github' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'github/authorization' {
+declare module 'github/api/v3.0.0/authorization' {
   declare module.exports: any;
 }
 
-declare module 'github/authorizationTest' {
+declare module 'github/api/v3.0.0/authorizationTest' {
   declare module.exports: any;
 }
 
-declare module 'github/events' {
+declare module 'github/api/v3.0.0/events' {
   declare module.exports: any;
 }
 
-declare module 'github/eventsTest' {
+declare module 'github/api/v3.0.0/eventsTest' {
   declare module.exports: any;
 }
 
-declare module 'github/gists' {
+declare module 'github/api/v3.0.0/gists' {
   declare module.exports: any;
 }
 
-declare module 'github/gistsTest' {
+declare module 'github/api/v3.0.0/gistsTest' {
   declare module.exports: any;
 }
 
-declare module 'github/gitdata' {
+declare module 'github/api/v3.0.0/gitdata' {
   declare module.exports: any;
 }
 
-declare module 'github/gitdataTest' {
+declare module 'github/api/v3.0.0/gitdataTest' {
   declare module.exports: any;
 }
 
-declare module 'github/gitignore' {
+declare module 'github/api/v3.0.0/gitignore' {
   declare module.exports: any;
 }
 
-declare module 'github/gitignoreTest' {
+declare module 'github/api/v3.0.0/gitignoreTest' {
   declare module.exports: any;
 }
 
-declare module 'github/issues' {
+declare module 'github/api/v3.0.0/index' {
   declare module.exports: any;
 }
 
-declare module 'github/issuesTest' {
+declare module 'github/api/v3.0.0/issues' {
   declare module.exports: any;
 }
 
-declare module 'github/markdown' {
+declare module 'github/api/v3.0.0/issuesTest' {
   declare module.exports: any;
 }
 
-declare module 'github/markdownTest' {
+declare module 'github/api/v3.0.0/markdown' {
   declare module.exports: any;
 }
 
-declare module 'github/misc' {
+declare module 'github/api/v3.0.0/markdownTest' {
   declare module.exports: any;
 }
 
-declare module 'github/miscTest' {
+declare module 'github/api/v3.0.0/misc' {
   declare module.exports: any;
 }
 
-declare module 'github/orgs' {
+declare module 'github/api/v3.0.0/miscTest' {
   declare module.exports: any;
 }
 
-declare module 'github/orgsTest' {
+declare module 'github/api/v3.0.0/orgs' {
   declare module.exports: any;
 }
 
-declare module 'github/pullRequests' {
+declare module 'github/api/v3.0.0/orgsTest' {
   declare module.exports: any;
 }
 
-declare module 'github/pullRequestsTest' {
+declare module 'github/api/v3.0.0/pullRequests' {
   declare module.exports: any;
 }
 
-declare module 'github/releases' {
+declare module 'github/api/v3.0.0/pullRequestsTest' {
   declare module.exports: any;
 }
 
-declare module 'github/releasesTest' {
+declare module 'github/api/v3.0.0/releases' {
   declare module.exports: any;
 }
 
-declare module 'github/repos' {
+declare module 'github/api/v3.0.0/releasesTest' {
   declare module.exports: any;
 }
 
-declare module 'github/reposTest' {
+declare module 'github/api/v3.0.0/repos' {
   declare module.exports: any;
 }
 
-declare module 'github/search' {
+declare module 'github/api/v3.0.0/reposTest' {
   declare module.exports: any;
 }
 
-declare module 'github/searchTest' {
+declare module 'github/api/v3.0.0/search' {
   declare module.exports: any;
 }
 
-declare module 'github/statuses' {
+declare module 'github/api/v3.0.0/searchTest' {
   declare module.exports: any;
 }
 
-declare module 'github/statusesTest' {
+declare module 'github/api/v3.0.0/statuses' {
   declare module.exports: any;
 }
 
-declare module 'github/user' {
+declare module 'github/api/v3.0.0/statusesTest' {
   declare module.exports: any;
 }
 
-declare module 'github/userTest' {
+declare module 'github/api/v3.0.0/user' {
+  declare module.exports: any;
+}
+
+declare module 'github/api/v3.0.0/userTest' {
   declare module.exports: any;
 }
 
@@ -150,19 +154,19 @@ declare module 'github/generate' {
   declare module.exports: any;
 }
 
-declare module 'github/client_test' {
+declare module 'github/test/client_test' {
   declare module.exports: any;
 }
 
-declare module 'github/example' {
+declare module 'github/test/example' {
   declare module.exports: any;
 }
 
-declare module 'github/oauth_server' {
+declare module 'github/test/oauth_server' {
   declare module.exports: any;
 }
 
-declare module 'github/oauth' {
+declare module 'github/test/oauth' {
   declare module.exports: any;
 }
 
@@ -171,101 +175,98 @@ declare module 'github/util' {
 }
 
 // Filename aliases
-declare module 'github/authorization.js' {
-  declare module.exports: $Exports<'github/authorization'>;
+declare module 'github/api/v3.0.0/authorization.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/authorization'>;
 }
-declare module 'github/authorizationTest.js' {
-  declare module.exports: $Exports<'github/authorizationTest'>;
+declare module 'github/api/v3.0.0/authorizationTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/authorizationTest'>;
 }
-declare module 'github/events.js' {
-  declare module.exports: $Exports<'github/events'>;
+declare module 'github/api/v3.0.0/events.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/events'>;
 }
-declare module 'github/eventsTest.js' {
-  declare module.exports: $Exports<'github/eventsTest'>;
+declare module 'github/api/v3.0.0/eventsTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/eventsTest'>;
 }
-declare module 'github/gists.js' {
-  declare module.exports: $Exports<'github/gists'>;
+declare module 'github/api/v3.0.0/gists.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/gists'>;
 }
-declare module 'github/gistsTest.js' {
-  declare module.exports: $Exports<'github/gistsTest'>;
+declare module 'github/api/v3.0.0/gistsTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/gistsTest'>;
 }
-declare module 'github/gitdata.js' {
-  declare module.exports: $Exports<'github/gitdata'>;
+declare module 'github/api/v3.0.0/gitdata.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/gitdata'>;
 }
-declare module 'github/gitdataTest.js' {
-  declare module.exports: $Exports<'github/gitdataTest'>;
+declare module 'github/api/v3.0.0/gitdataTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/gitdataTest'>;
 }
-declare module 'github/gitignore.js' {
-  declare module.exports: $Exports<'github/gitignore'>;
+declare module 'github/api/v3.0.0/gitignore.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/gitignore'>;
 }
-declare module 'github/gitignoreTest.js' {
-  declare module.exports: $Exports<'github/gitignoreTest'>;
+declare module 'github/api/v3.0.0/gitignoreTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/gitignoreTest'>;
 }
-declare module 'github/index' {
-  declare module.exports: $Exports<'github'>;
+declare module 'github/api/v3.0.0/index.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/index'>;
 }
-declare module 'github/index.js' {
-  declare module.exports: $Exports<'github'>;
+declare module 'github/api/v3.0.0/issues.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/issues'>;
 }
-declare module 'github/issues.js' {
-  declare module.exports: $Exports<'github/issues'>;
+declare module 'github/api/v3.0.0/issuesTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/issuesTest'>;
 }
-declare module 'github/issuesTest.js' {
-  declare module.exports: $Exports<'github/issuesTest'>;
+declare module 'github/api/v3.0.0/markdown.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/markdown'>;
 }
-declare module 'github/markdown.js' {
-  declare module.exports: $Exports<'github/markdown'>;
+declare module 'github/api/v3.0.0/markdownTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/markdownTest'>;
 }
-declare module 'github/markdownTest.js' {
-  declare module.exports: $Exports<'github/markdownTest'>;
+declare module 'github/api/v3.0.0/misc.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/misc'>;
 }
-declare module 'github/misc.js' {
-  declare module.exports: $Exports<'github/misc'>;
+declare module 'github/api/v3.0.0/miscTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/miscTest'>;
 }
-declare module 'github/miscTest.js' {
-  declare module.exports: $Exports<'github/miscTest'>;
+declare module 'github/api/v3.0.0/orgs.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/orgs'>;
 }
-declare module 'github/orgs.js' {
-  declare module.exports: $Exports<'github/orgs'>;
+declare module 'github/api/v3.0.0/orgsTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/orgsTest'>;
 }
-declare module 'github/orgsTest.js' {
-  declare module.exports: $Exports<'github/orgsTest'>;
+declare module 'github/api/v3.0.0/pullRequests.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/pullRequests'>;
 }
-declare module 'github/pullRequests.js' {
-  declare module.exports: $Exports<'github/pullRequests'>;
+declare module 'github/api/v3.0.0/pullRequestsTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/pullRequestsTest'>;
 }
-declare module 'github/pullRequestsTest.js' {
-  declare module.exports: $Exports<'github/pullRequestsTest'>;
+declare module 'github/api/v3.0.0/releases.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/releases'>;
 }
-declare module 'github/releases.js' {
-  declare module.exports: $Exports<'github/releases'>;
+declare module 'github/api/v3.0.0/releasesTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/releasesTest'>;
 }
-declare module 'github/releasesTest.js' {
-  declare module.exports: $Exports<'github/releasesTest'>;
+declare module 'github/api/v3.0.0/repos.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/repos'>;
 }
-declare module 'github/repos.js' {
-  declare module.exports: $Exports<'github/repos'>;
+declare module 'github/api/v3.0.0/reposTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/reposTest'>;
 }
-declare module 'github/reposTest.js' {
-  declare module.exports: $Exports<'github/reposTest'>;
+declare module 'github/api/v3.0.0/search.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/search'>;
 }
-declare module 'github/search.js' {
-  declare module.exports: $Exports<'github/search'>;
+declare module 'github/api/v3.0.0/searchTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/searchTest'>;
 }
-declare module 'github/searchTest.js' {
-  declare module.exports: $Exports<'github/searchTest'>;
+declare module 'github/api/v3.0.0/statuses.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/statuses'>;
 }
-declare module 'github/statuses.js' {
-  declare module.exports: $Exports<'github/statuses'>;
+declare module 'github/api/v3.0.0/statusesTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/statusesTest'>;
 }
-declare module 'github/statusesTest.js' {
-  declare module.exports: $Exports<'github/statusesTest'>;
+declare module 'github/api/v3.0.0/user.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/user'>;
 }
-declare module 'github/user.js' {
-  declare module.exports: $Exports<'github/user'>;
-}
-declare module 'github/userTest.js' {
-  declare module.exports: $Exports<'github/userTest'>;
+declare module 'github/api/v3.0.0/userTest.js' {
+  declare module.exports: $Exports<'github/api/v3.0.0/userTest'>;
 }
 declare module 'github/error.js' {
   declare module.exports: $Exports<'github/error'>;
@@ -279,17 +280,17 @@ declare module 'github/index' {
 declare module 'github/index.js' {
   declare module.exports: $Exports<'github'>;
 }
-declare module 'github/client_test.js' {
-  declare module.exports: $Exports<'github/client_test'>;
+declare module 'github/test/client_test.js' {
+  declare module.exports: $Exports<'github/test/client_test'>;
 }
-declare module 'github/example.js' {
-  declare module.exports: $Exports<'github/example'>;
+declare module 'github/test/example.js' {
+  declare module.exports: $Exports<'github/test/example'>;
 }
-declare module 'github/oauth_server.js' {
-  declare module.exports: $Exports<'github/oauth_server'>;
+declare module 'github/test/oauth_server.js' {
+  declare module.exports: $Exports<'github/test/oauth_server'>;
 }
-declare module 'github/oauth.js' {
-  declare module.exports: $Exports<'github/oauth'>;
+declare module 'github/test/oauth.js' {
+  declare module.exports: $Exports<'github/test/oauth'>;
 }
 declare module 'github/util.js' {
   declare module.exports: $Exports<'github/util'>;

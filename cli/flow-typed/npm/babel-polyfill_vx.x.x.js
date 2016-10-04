@@ -1,4 +1,4 @@
-// flow-typed signature: 73d3e04643751facc251222efef1ff2f
+// flow-typed signature: cbd31882f6edff2e4390624598ed8b77
 // flow-typed version: <<STUB>>/babel-polyfill_v^6.6.1/flow_v0.32.0
 
 /**
@@ -26,19 +26,23 @@ declare module 'babel-polyfill/browser' {
   declare module.exports: any;
 }
 
-declare module 'babel-polyfill/polyfill' {
+declare module 'babel-polyfill/dist/polyfill' {
   declare module.exports: any;
 }
 
-declare module 'babel-polyfill/polyfill.min' {
+declare module 'babel-polyfill/dist/polyfill.min' {
   declare module.exports: any;
 }
 
-declare module 'babel-polyfill/postpublish' {
+declare module 'babel-polyfill/lib/index' {
   declare module.exports: any;
 }
 
-declare module 'babel-polyfill/prepublish' {
+declare module 'babel-polyfill/scripts/postpublish' {
+  declare module.exports: any;
+}
+
+declare module 'babel-polyfill/scripts/prepublish' {
   declare module.exports: any;
 }
 
@@ -46,21 +50,18 @@ declare module 'babel-polyfill/prepublish' {
 declare module 'babel-polyfill/browser.js' {
   declare module.exports: $Exports<'babel-polyfill/browser'>;
 }
-declare module 'babel-polyfill/polyfill.js' {
-  declare module.exports: $Exports<'babel-polyfill/polyfill'>;
+declare module 'babel-polyfill/dist/polyfill.js' {
+  declare module.exports: $Exports<'babel-polyfill/dist/polyfill'>;
 }
-declare module 'babel-polyfill/polyfill.min.js' {
-  declare module.exports: $Exports<'babel-polyfill/polyfill.min'>;
+declare module 'babel-polyfill/dist/polyfill.min.js' {
+  declare module.exports: $Exports<'babel-polyfill/dist/polyfill.min'>;
 }
-declare module 'babel-polyfill/index' {
-  declare module.exports: $Exports<'babel-polyfill'>;
+declare module 'babel-polyfill/lib/index.js' {
+  declare module.exports: $Exports<'babel-polyfill/lib/index'>;
 }
-declare module 'babel-polyfill/index.js' {
-  declare module.exports: $Exports<'babel-polyfill'>;
+declare module 'babel-polyfill/scripts/postpublish.js' {
+  declare module.exports: $Exports<'babel-polyfill/scripts/postpublish'>;
 }
-declare module 'babel-polyfill/postpublish.js' {
-  declare module.exports: $Exports<'babel-polyfill/postpublish'>;
-}
-declare module 'babel-polyfill/prepublish.js' {
-  declare module.exports: $Exports<'babel-polyfill/prepublish'>;
+declare module 'babel-polyfill/scripts/prepublish.js' {
+  declare module.exports: $Exports<'babel-polyfill/scripts/prepublish'>;
 }

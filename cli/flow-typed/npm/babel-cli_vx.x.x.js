@@ -1,4 +1,4 @@
-// flow-typed signature: b5a36cd2a2f96db1b090bccbe03536e8
+// flow-typed signature: 4463721a69454529307131afe883190e
 // flow-typed version: <<STUB>>/babel-cli_v^6.6.5/flow_v0.32.0
 
 /**
@@ -22,83 +22,86 @@ declare module 'babel-cli' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'babel-cli/babel-doctor' {
+declare module 'babel-cli/bin/babel-doctor' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/babel-external-helpers' {
+declare module 'babel-cli/bin/babel-external-helpers' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/babel-node' {
+declare module 'babel-cli/bin/babel-node' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/babel' {
+declare module 'babel-cli/bin/babel' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/_babel-node' {
+declare module 'babel-cli/lib/_babel-node' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/deduped' {
+declare module 'babel-cli/lib/babel-doctor/index' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/has-config' {
+declare module 'babel-cli/lib/babel-doctor/rules/deduped' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/latest-packages' {
+declare module 'babel-cli/lib/babel-doctor/rules/has-config' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/npm-3' {
+declare module 'babel-cli/lib/babel-doctor/rules/index' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/babel-external-helpers' {
+declare module 'babel-cli/lib/babel-doctor/rules/latest-packages' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/babel-node' {
+declare module 'babel-cli/lib/babel-doctor/rules/npm-3' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/dir' {
+declare module 'babel-cli/lib/babel-external-helpers' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/file' {
+declare module 'babel-cli/lib/babel-node' {
   declare module.exports: any;
 }
 
-declare module 'babel-cli/util' {
+declare module 'babel-cli/lib/babel/dir' {
+  declare module.exports: any;
+}
+
+declare module 'babel-cli/lib/babel/file' {
+  declare module.exports: any;
+}
+
+declare module 'babel-cli/lib/babel/index' {
+  declare module.exports: any;
+}
+
+declare module 'babel-cli/lib/babel/util' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'babel-cli/babel-doctor.js' {
-  declare module.exports: $Exports<'babel-cli/babel-doctor'>;
+declare module 'babel-cli/bin/babel-doctor.js' {
+  declare module.exports: $Exports<'babel-cli/bin/babel-doctor'>;
 }
-declare module 'babel-cli/babel-external-helpers.js' {
-  declare module.exports: $Exports<'babel-cli/babel-external-helpers'>;
+declare module 'babel-cli/bin/babel-external-helpers.js' {
+  declare module.exports: $Exports<'babel-cli/bin/babel-external-helpers'>;
 }
-declare module 'babel-cli/babel-node.js' {
-  declare module.exports: $Exports<'babel-cli/babel-node'>;
+declare module 'babel-cli/bin/babel-node.js' {
+  declare module.exports: $Exports<'babel-cli/bin/babel-node'>;
 }
-declare module 'babel-cli/babel.js' {
-  declare module.exports: $Exports<'babel-cli/babel'>;
-}
-declare module 'babel-cli/index' {
-  declare module.exports: $Exports<'babel-cli'>;
-}
-declare module 'babel-cli/index.js' {
-  declare module.exports: $Exports<'babel-cli'>;
-}
-declare module 'babel-cli/_babel-node.js' {
-  declare module.exports: $Exports<'babel-cli/_babel-node'>;
+declare module 'babel-cli/bin/babel.js' {
+  declare module.exports: $Exports<'babel-cli/bin/babel'>;
 }
 declare module 'babel-cli/index' {
   declare module.exports: $Exports<'babel-cli'>;
@@ -106,42 +109,42 @@ declare module 'babel-cli/index' {
 declare module 'babel-cli/index.js' {
   declare module.exports: $Exports<'babel-cli'>;
 }
-declare module 'babel-cli/deduped.js' {
-  declare module.exports: $Exports<'babel-cli/deduped'>;
+declare module 'babel-cli/lib/_babel-node.js' {
+  declare module.exports: $Exports<'babel-cli/lib/_babel-node'>;
 }
-declare module 'babel-cli/has-config.js' {
-  declare module.exports: $Exports<'babel-cli/has-config'>;
+declare module 'babel-cli/lib/babel-doctor/index.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel-doctor/index'>;
 }
-declare module 'babel-cli/index' {
-  declare module.exports: $Exports<'babel-cli'>;
+declare module 'babel-cli/lib/babel-doctor/rules/deduped.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel-doctor/rules/deduped'>;
 }
-declare module 'babel-cli/index.js' {
-  declare module.exports: $Exports<'babel-cli'>;
+declare module 'babel-cli/lib/babel-doctor/rules/has-config.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel-doctor/rules/has-config'>;
 }
-declare module 'babel-cli/latest-packages.js' {
-  declare module.exports: $Exports<'babel-cli/latest-packages'>;
+declare module 'babel-cli/lib/babel-doctor/rules/index.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel-doctor/rules/index'>;
 }
-declare module 'babel-cli/npm-3.js' {
-  declare module.exports: $Exports<'babel-cli/npm-3'>;
+declare module 'babel-cli/lib/babel-doctor/rules/latest-packages.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel-doctor/rules/latest-packages'>;
 }
-declare module 'babel-cli/babel-external-helpers.js' {
-  declare module.exports: $Exports<'babel-cli/babel-external-helpers'>;
+declare module 'babel-cli/lib/babel-doctor/rules/npm-3.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel-doctor/rules/npm-3'>;
 }
-declare module 'babel-cli/babel-node.js' {
-  declare module.exports: $Exports<'babel-cli/babel-node'>;
+declare module 'babel-cli/lib/babel-external-helpers.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel-external-helpers'>;
 }
-declare module 'babel-cli/dir.js' {
-  declare module.exports: $Exports<'babel-cli/dir'>;
+declare module 'babel-cli/lib/babel-node.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel-node'>;
 }
-declare module 'babel-cli/file.js' {
-  declare module.exports: $Exports<'babel-cli/file'>;
+declare module 'babel-cli/lib/babel/dir.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel/dir'>;
 }
-declare module 'babel-cli/index' {
-  declare module.exports: $Exports<'babel-cli'>;
+declare module 'babel-cli/lib/babel/file.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel/file'>;
 }
-declare module 'babel-cli/index.js' {
-  declare module.exports: $Exports<'babel-cli'>;
+declare module 'babel-cli/lib/babel/index.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel/index'>;
 }
-declare module 'babel-cli/util.js' {
-  declare module.exports: $Exports<'babel-cli/util'>;
+declare module 'babel-cli/lib/babel/util.js' {
+  declare module.exports: $Exports<'babel-cli/lib/babel/util'>;
 }

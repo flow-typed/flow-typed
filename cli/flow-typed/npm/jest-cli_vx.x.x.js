@@ -1,4 +1,4 @@
-// flow-typed signature: 0dc5dcd950ff47967424fe9258befb8c
+// flow-typed signature: e5f88d088a72abbc606b4cea8667b4df
 // flow-typed version: <<STUB>>/jest-cli_v^15.1.1/flow_v0.32.0
 
 /**
@@ -22,150 +22,151 @@ declare module 'jest-cli' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'jest-cli/jest' {
+declare module 'jest-cli/bin/jest' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/args' {
+declare module 'jest-cli/build/cli/args' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/getJest' {
+declare module 'jest-cli/build/cli/getJest' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/generateEmptyCoverage' {
+declare module 'jest-cli/build/cli/index' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/jest' {
+declare module 'jest-cli/build/generateEmptyCoverage' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/BufferedConsole' {
+declare module 'jest-cli/build/jest' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/formatTestResults' {
+declare module 'jest-cli/build/lib/BufferedConsole' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/promisify' {
+declare module 'jest-cli/build/lib/formatTestResults' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/BaseReporter' {
+declare module 'jest-cli/build/lib/promisify' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/CoverageReporter' {
+declare module 'jest-cli/build/reporters/BaseReporter' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/DefaultReporter' {
+declare module 'jest-cli/build/reporters/CoverageReporter' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/getConsoleOutput' {
+declare module 'jest-cli/build/reporters/DefaultReporter' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/getResultHeader' {
+declare module 'jest-cli/build/reporters/getConsoleOutput' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/NotifyReporter' {
+declare module 'jest-cli/build/reporters/getResultHeader' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/SummaryReporter' {
+declare module 'jest-cli/build/reporters/NotifyReporter' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/VerboseReporter' {
+declare module 'jest-cli/build/reporters/SummaryReporter' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/runTest' {
+declare module 'jest-cli/build/reporters/VerboseReporter' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/SearchSource' {
+declare module 'jest-cli/build/runTest' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/TestRunner' {
+declare module 'jest-cli/build/SearchSource' {
   declare module.exports: any;
 }
 
-declare module 'jest-cli/TestWorker' {
+declare module 'jest-cli/build/TestRunner' {
+  declare module.exports: any;
+}
+
+declare module 'jest-cli/build/TestWorker' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'jest-cli/jest.js' {
-  declare module.exports: $Exports<'jest-cli/jest'>;
+declare module 'jest-cli/bin/jest.js' {
+  declare module.exports: $Exports<'jest-cli/bin/jest'>;
 }
-declare module 'jest-cli/args.js' {
-  declare module.exports: $Exports<'jest-cli/args'>;
+declare module 'jest-cli/build/cli/args.js' {
+  declare module.exports: $Exports<'jest-cli/build/cli/args'>;
 }
-declare module 'jest-cli/getJest.js' {
-  declare module.exports: $Exports<'jest-cli/getJest'>;
+declare module 'jest-cli/build/cli/getJest.js' {
+  declare module.exports: $Exports<'jest-cli/build/cli/getJest'>;
 }
-declare module 'jest-cli/index' {
-  declare module.exports: $Exports<'jest-cli'>;
+declare module 'jest-cli/build/cli/index.js' {
+  declare module.exports: $Exports<'jest-cli/build/cli/index'>;
 }
-declare module 'jest-cli/index.js' {
-  declare module.exports: $Exports<'jest-cli'>;
+declare module 'jest-cli/build/generateEmptyCoverage.js' {
+  declare module.exports: $Exports<'jest-cli/build/generateEmptyCoverage'>;
 }
-declare module 'jest-cli/generateEmptyCoverage.js' {
-  declare module.exports: $Exports<'jest-cli/generateEmptyCoverage'>;
+declare module 'jest-cli/build/jest.js' {
+  declare module.exports: $Exports<'jest-cli/build/jest'>;
 }
-declare module 'jest-cli/jest.js' {
-  declare module.exports: $Exports<'jest-cli/jest'>;
+declare module 'jest-cli/build/lib/BufferedConsole.js' {
+  declare module.exports: $Exports<'jest-cli/build/lib/BufferedConsole'>;
 }
-declare module 'jest-cli/BufferedConsole.js' {
-  declare module.exports: $Exports<'jest-cli/BufferedConsole'>;
+declare module 'jest-cli/build/lib/formatTestResults.js' {
+  declare module.exports: $Exports<'jest-cli/build/lib/formatTestResults'>;
 }
-declare module 'jest-cli/formatTestResults.js' {
-  declare module.exports: $Exports<'jest-cli/formatTestResults'>;
+declare module 'jest-cli/build/lib/promisify.js' {
+  declare module.exports: $Exports<'jest-cli/build/lib/promisify'>;
 }
-declare module 'jest-cli/promisify.js' {
-  declare module.exports: $Exports<'jest-cli/promisify'>;
+declare module 'jest-cli/build/reporters/BaseReporter.js' {
+  declare module.exports: $Exports<'jest-cli/build/reporters/BaseReporter'>;
 }
-declare module 'jest-cli/BaseReporter.js' {
-  declare module.exports: $Exports<'jest-cli/BaseReporter'>;
+declare module 'jest-cli/build/reporters/CoverageReporter.js' {
+  declare module.exports: $Exports<'jest-cli/build/reporters/CoverageReporter'>;
 }
-declare module 'jest-cli/CoverageReporter.js' {
-  declare module.exports: $Exports<'jest-cli/CoverageReporter'>;
+declare module 'jest-cli/build/reporters/DefaultReporter.js' {
+  declare module.exports: $Exports<'jest-cli/build/reporters/DefaultReporter'>;
 }
-declare module 'jest-cli/DefaultReporter.js' {
-  declare module.exports: $Exports<'jest-cli/DefaultReporter'>;
+declare module 'jest-cli/build/reporters/getConsoleOutput.js' {
+  declare module.exports: $Exports<'jest-cli/build/reporters/getConsoleOutput'>;
 }
-declare module 'jest-cli/getConsoleOutput.js' {
-  declare module.exports: $Exports<'jest-cli/getConsoleOutput'>;
+declare module 'jest-cli/build/reporters/getResultHeader.js' {
+  declare module.exports: $Exports<'jest-cli/build/reporters/getResultHeader'>;
 }
-declare module 'jest-cli/getResultHeader.js' {
-  declare module.exports: $Exports<'jest-cli/getResultHeader'>;
+declare module 'jest-cli/build/reporters/NotifyReporter.js' {
+  declare module.exports: $Exports<'jest-cli/build/reporters/NotifyReporter'>;
 }
-declare module 'jest-cli/NotifyReporter.js' {
-  declare module.exports: $Exports<'jest-cli/NotifyReporter'>;
+declare module 'jest-cli/build/reporters/SummaryReporter.js' {
+  declare module.exports: $Exports<'jest-cli/build/reporters/SummaryReporter'>;
 }
-declare module 'jest-cli/SummaryReporter.js' {
-  declare module.exports: $Exports<'jest-cli/SummaryReporter'>;
+declare module 'jest-cli/build/reporters/VerboseReporter.js' {
+  declare module.exports: $Exports<'jest-cli/build/reporters/VerboseReporter'>;
 }
-declare module 'jest-cli/VerboseReporter.js' {
-  declare module.exports: $Exports<'jest-cli/VerboseReporter'>;
+declare module 'jest-cli/build/runTest.js' {
+  declare module.exports: $Exports<'jest-cli/build/runTest'>;
 }
-declare module 'jest-cli/runTest.js' {
-  declare module.exports: $Exports<'jest-cli/runTest'>;
+declare module 'jest-cli/build/SearchSource.js' {
+  declare module.exports: $Exports<'jest-cli/build/SearchSource'>;
 }
-declare module 'jest-cli/SearchSource.js' {
-  declare module.exports: $Exports<'jest-cli/SearchSource'>;
+declare module 'jest-cli/build/TestRunner.js' {
+  declare module.exports: $Exports<'jest-cli/build/TestRunner'>;
 }
-declare module 'jest-cli/TestRunner.js' {
-  declare module.exports: $Exports<'jest-cli/TestRunner'>;
-}
-declare module 'jest-cli/TestWorker.js' {
-  declare module.exports: $Exports<'jest-cli/TestWorker'>;
+declare module 'jest-cli/build/TestWorker.js' {
+  declare module.exports: $Exports<'jest-cli/build/TestWorker'>;
 }

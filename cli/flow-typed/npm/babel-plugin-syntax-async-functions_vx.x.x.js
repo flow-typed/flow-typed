@@ -1,4 +1,4 @@
-// flow-typed signature: 6ae9544c7ef0892f3fc4fc4a3088e09b
+// flow-typed signature: e1f9c37e8468dc96a0f7c4d161e688d3
 // flow-typed version: <<STUB>>/babel-plugin-syntax-async-functions_v^6.5.0/flow_v0.32.0
 
 /**
@@ -22,12 +22,11 @@ declare module 'babel-plugin-syntax-async-functions' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-
+declare module 'babel-plugin-syntax-async-functions/lib/index' {
+  declare module.exports: any;
+}
 
 // Filename aliases
-declare module 'babel-plugin-syntax-async-functions/index' {
-  declare module.exports: $Exports<'babel-plugin-syntax-async-functions'>;
-}
-declare module 'babel-plugin-syntax-async-functions/index.js' {
-  declare module.exports: $Exports<'babel-plugin-syntax-async-functions'>;
+declare module 'babel-plugin-syntax-async-functions/lib/index.js' {
+  declare module.exports: $Exports<'babel-plugin-syntax-async-functions/lib/index'>;
 }

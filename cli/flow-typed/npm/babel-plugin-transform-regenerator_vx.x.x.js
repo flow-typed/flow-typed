@@ -1,4 +1,4 @@
-// flow-typed signature: 5e4fe2084fb32f0d0f488a791754e2fb
+// flow-typed signature: 9b59c9a44d2ab6174a924d7fbf8bd0b2
 // flow-typed version: <<STUB>>/babel-plugin-transform-regenerator_v^6.6.5/flow_v0.32.0
 
 /**
@@ -22,100 +22,102 @@ declare module 'babel-plugin-transform-regenerator' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'babel-plugin-transform-regenerator/emit' {
+declare module 'babel-plugin-transform-regenerator/lib/emit' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/hoist' {
+declare module 'babel-plugin-transform-regenerator/lib/hoist' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/leap' {
+declare module 'babel-plugin-transform-regenerator/lib/index' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/meta' {
+declare module 'babel-plugin-transform-regenerator/lib/leap' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/util' {
+declare module 'babel-plugin-transform-regenerator/lib/meta' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/visit' {
+declare module 'babel-plugin-transform-regenerator/lib/util' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/emit' {
+declare module 'babel-plugin-transform-regenerator/lib/visit' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/hoist' {
+declare module 'babel-plugin-transform-regenerator/src/emit' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/leap' {
+declare module 'babel-plugin-transform-regenerator/src/hoist' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/meta' {
+declare module 'babel-plugin-transform-regenerator/src/index' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/util' {
+declare module 'babel-plugin-transform-regenerator/src/leap' {
   declare module.exports: any;
 }
 
-declare module 'babel-plugin-transform-regenerator/visit' {
+declare module 'babel-plugin-transform-regenerator/src/meta' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-regenerator/src/util' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-transform-regenerator/src/visit' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'babel-plugin-transform-regenerator/emit.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/emit'>;
+declare module 'babel-plugin-transform-regenerator/lib/emit.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/lib/emit'>;
 }
-declare module 'babel-plugin-transform-regenerator/hoist.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/hoist'>;
+declare module 'babel-plugin-transform-regenerator/lib/hoist.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/lib/hoist'>;
 }
-declare module 'babel-plugin-transform-regenerator/index' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator'>;
+declare module 'babel-plugin-transform-regenerator/lib/index.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/lib/index'>;
 }
-declare module 'babel-plugin-transform-regenerator/index.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator'>;
+declare module 'babel-plugin-transform-regenerator/lib/leap.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/lib/leap'>;
 }
-declare module 'babel-plugin-transform-regenerator/leap.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/leap'>;
+declare module 'babel-plugin-transform-regenerator/lib/meta.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/lib/meta'>;
 }
-declare module 'babel-plugin-transform-regenerator/meta.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/meta'>;
+declare module 'babel-plugin-transform-regenerator/lib/util.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/lib/util'>;
 }
-declare module 'babel-plugin-transform-regenerator/util.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/util'>;
+declare module 'babel-plugin-transform-regenerator/lib/visit.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/lib/visit'>;
 }
-declare module 'babel-plugin-transform-regenerator/visit.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/visit'>;
+declare module 'babel-plugin-transform-regenerator/src/emit.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/src/emit'>;
 }
-declare module 'babel-plugin-transform-regenerator/emit.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/emit'>;
+declare module 'babel-plugin-transform-regenerator/src/hoist.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/src/hoist'>;
 }
-declare module 'babel-plugin-transform-regenerator/hoist.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/hoist'>;
+declare module 'babel-plugin-transform-regenerator/src/index.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/src/index'>;
 }
-declare module 'babel-plugin-transform-regenerator/index' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator'>;
+declare module 'babel-plugin-transform-regenerator/src/leap.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/src/leap'>;
 }
-declare module 'babel-plugin-transform-regenerator/index.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator'>;
+declare module 'babel-plugin-transform-regenerator/src/meta.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/src/meta'>;
 }
-declare module 'babel-plugin-transform-regenerator/leap.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/leap'>;
+declare module 'babel-plugin-transform-regenerator/src/util.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/src/util'>;
 }
-declare module 'babel-plugin-transform-regenerator/meta.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/meta'>;
-}
-declare module 'babel-plugin-transform-regenerator/util.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/util'>;
-}
-declare module 'babel-plugin-transform-regenerator/visit.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-regenerator/visit'>;
+declare module 'babel-plugin-transform-regenerator/src/visit.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-regenerator/src/visit'>;
 }

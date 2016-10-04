@@ -1,4 +1,4 @@
-// flow-typed signature: 1f00d7f4b7cc60151984e776161f4644
+// flow-typed signature: d29d2cc4b2b5c468ee76debba6b5e19c
 // flow-typed version: <<STUB>>/babel-preset-es2015_v^6.6.0/flow_v0.32.0
 
 /**
@@ -22,12 +22,11 @@ declare module 'babel-preset-es2015' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-
+declare module 'babel-preset-es2015/lib/index' {
+  declare module.exports: any;
+}
 
 // Filename aliases
-declare module 'babel-preset-es2015/index' {
-  declare module.exports: $Exports<'babel-preset-es2015'>;
-}
-declare module 'babel-preset-es2015/index.js' {
-  declare module.exports: $Exports<'babel-preset-es2015'>;
+declare module 'babel-preset-es2015/lib/index.js' {
+  declare module.exports: $Exports<'babel-preset-es2015/lib/index'>;
 }

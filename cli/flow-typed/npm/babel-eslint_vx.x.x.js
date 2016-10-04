@@ -1,4 +1,4 @@
-// flow-typed signature: 9aa784012f11e7181d1f0cf5d1e6ee93
+// flow-typed signature: e2b55064814878fa8f6e72835c69e887
 // flow-typed version: <<STUB>>/babel-eslint_v^6.0.4/flow_v0.32.0
 
 /**
@@ -22,47 +22,48 @@ declare module 'babel-eslint' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'babel-eslint/attachComments' {
+declare module 'babel-eslint/babylon-to-espree/attachComments' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/convertTemplateType' {
+declare module 'babel-eslint/babylon-to-espree/convertTemplateType' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/toAST' {
+declare module 'babel-eslint/babylon-to-espree/index' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/toToken' {
+declare module 'babel-eslint/babylon-to-espree/toAST' {
   declare module.exports: any;
 }
 
-declare module 'babel-eslint/toTokens' {
+declare module 'babel-eslint/babylon-to-espree/toToken' {
+  declare module.exports: any;
+}
+
+declare module 'babel-eslint/babylon-to-espree/toTokens' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'babel-eslint/attachComments.js' {
-  declare module.exports: $Exports<'babel-eslint/attachComments'>;
+declare module 'babel-eslint/babylon-to-espree/attachComments.js' {
+  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/attachComments'>;
 }
-declare module 'babel-eslint/convertTemplateType.js' {
-  declare module.exports: $Exports<'babel-eslint/convertTemplateType'>;
+declare module 'babel-eslint/babylon-to-espree/convertTemplateType.js' {
+  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/convertTemplateType'>;
 }
-declare module 'babel-eslint/index' {
-  declare module.exports: $Exports<'babel-eslint'>;
+declare module 'babel-eslint/babylon-to-espree/index.js' {
+  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/index'>;
 }
-declare module 'babel-eslint/index.js' {
-  declare module.exports: $Exports<'babel-eslint'>;
+declare module 'babel-eslint/babylon-to-espree/toAST.js' {
+  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/toAST'>;
 }
-declare module 'babel-eslint/toAST.js' {
-  declare module.exports: $Exports<'babel-eslint/toAST'>;
+declare module 'babel-eslint/babylon-to-espree/toToken.js' {
+  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/toToken'>;
 }
-declare module 'babel-eslint/toToken.js' {
-  declare module.exports: $Exports<'babel-eslint/toToken'>;
-}
-declare module 'babel-eslint/toTokens.js' {
-  declare module.exports: $Exports<'babel-eslint/toTokens'>;
+declare module 'babel-eslint/babylon-to-espree/toTokens.js' {
+  declare module.exports: $Exports<'babel-eslint/babylon-to-espree/toTokens'>;
 }
 declare module 'babel-eslint/index' {
   declare module.exports: $Exports<'babel-eslint'>;
