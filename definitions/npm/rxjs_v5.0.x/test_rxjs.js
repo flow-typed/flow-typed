@@ -104,5 +104,43 @@ numbers.onErrorResumeNext(strings).subscribe((x: number) => {});
 numbers
   .map(n => Observable.of(n * 2, n * 3))
   .combineAll()
-  .do(([a: number, b: number, c: number]) => {})
+  .map(([a: number, b: number, c: number]) => {})
+
+// $ExpectError
+numbers.map(n => Observable.of(n * 2, n * 3)).combineAll().map((a: number) => {})
+
+numbers
+  .map(n => Observable.of(n * 2, n * 3))
+  .concatAll()
+  .map((n: number) => {})
+
+Observable.forkJoin(numbers, numbers).do(([n: number]) => {})
+// $ExpectError
+Observable.forkJoin(numbers, numbers).map((n: string) => {})
+
+numbers.map(n => Observable.of(n)).mergeAll(2).map((n: number) => {})
+
+Observable.race([numbers, numbers]).map((n: number) => {})
+numbers.race(numbers, numbers).map((n: number) => {})
+
+// $ExpectError
+Observable.race([numbers, numbers]).map((n: string) => {})
+// $ExpectError
+numbers.race(numbers, numbers).map((n: string) => {})
+
+Observable.zip([numbers, numbers]).map((n: number) => {})
+numbers.zip(numbers, numbers).map((n: number) => {})
+
+// $ExpectError
+Observable.zip([numbers, numbers]).map((n: string) => {})
+// $ExpectError
+numbers.zip(numbers, numbers).map((n: string) => {})
+
+numbers.defaultIfEmpty(2).map((n: number) => {})
+// $ExpectError
+numbers.defaultIfEmpty(false).map((n: number) => {})
+
+numbers.every(x => !!x).map((c: boolean) => {})
+// $ExpectError
+numbers.every(x => !!x).map((c: number) => {})
 
