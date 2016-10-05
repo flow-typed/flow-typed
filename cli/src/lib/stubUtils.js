@@ -27,53 +27,33 @@ export function glob(pattern: string, options: Object): Promise<Array<string>> {
   );
 }
 
-async function resolveToDirPath(
-  name: string,
-  options: Object
-): Promise<string> {
-  let pkgFiles = [];
-  let opts = {
-    ...options,
-    packageFilter: function(pkgJson, pkgFilePath) {
-      if (!pkgJson.main) {
-        pkgFiles.push(path.join(path.dirname(pkgFilePath), 'index.js'));
-        pkgJson.main = "index.js";
-      }
-      return pkgJson;
-    },
-    isFile: function(filePath, cb) {
-      if (pkgFiles.indexOf(filePath) !== -1) {
-        cb(null, true);
-      } else {
-        fs.stat(filePath)
-          .then(stat => {
-            cb(null, stat.isFile() || stat.isFIFO());
-          })
-          .catch(e => {
-            if (e.code === 'ENOENT') {
-              cb(null, false);
-            } else {
-              cb(e);
-            }
-          });
+async function resolvePkgDirPath(
+  pkgName: string,
+  pkgJsonDirPath: string,
+): Promise<null | string> {
+  let prevNodeModulesDirPath;
+  let nodeModulesDirPath = path.resolve(pkgJsonDirPath, 'node_modules');
+  while (true) {
+    const pkgDirPath = path.resolve(nodeModulesDirPath, pkgName);
+    if (await fs.exists(pkgDirPath)) {
+      return pkgDirPath;
+    }
 
-      }
-    },
-  };
-  let resolvedPath = await resolve(name, opts);
-
-  let pathToPackage = path.dirname(resolvedPath);
-  let dir = pathToPackage;
-  while (path.basename(dir) !== "node_modules") {
-    pathToPackage = dir;
-    dir = path.dirname(pathToPackage);
-
-    if (dir === pathToPackage) {
-      throw new Error("Failed to find package directory");
+    prevNodeModulesDirPath = nodeModulesDirPath;
+    nodeModulesDirPath = path.resolve(
+      nodeModulesDirPath,
+      '..',
+      '..',
+      'node_modules',
+    );
+    if (prevNodeModulesDirPath === nodeModulesDirPath) {
+      break;
     }
   }
-
-  return pathToPackage;
+  throw new Error(
+    'Unable to find `node_modules/' + pkgName + '/` install directory! ' +
+    'Did you forget to run `npm install` before running `flow-typed install`?'
+  );
 }
 
 const moduleStubTemplate = (`
@@ -182,9 +162,9 @@ export async function pkgHasFlowFiles(
   projectRoot: string,
   packageName: string,
 ): Promise<boolean> {
-  let pathToPackage = await resolveToDirPath(
+  let pathToPackage = await resolvePkgDirPath(
     packageName,
-    {basedir: projectRoot},
+    projectRoot,
   );
 
   const files = await glob("**/*.flow", {
@@ -213,9 +193,9 @@ export async function createStub(
   let pathToPackage = null;
   let version = explicitVersion || null;
   try {
-    pathToPackage = await resolveToDirPath(
+    pathToPackage = await resolvePkgDirPath(
       packageName,
-      {basedir: process.cwd()},
+      process.cwd(),
     );
 
     files = await glob("**/*.{js,jsx}", {
