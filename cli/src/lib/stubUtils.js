@@ -10,7 +10,6 @@ import {getPackageJsonData} from './npmProjectUtils';
 import {getPackageJsonDependencies} from './npmProjectUtils';
 import {mkdirp} from './fileUtils';
 import {path} from './node';
-import {resolve} from "./npmProjectUtils";
 import {signCode} from './codeSign';
 import {verifySignedCode} from './codeSign';
 import {versionToString} from './semver';
