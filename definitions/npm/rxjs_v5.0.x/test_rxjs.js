@@ -144,3 +144,33 @@ numbers.every(x => !!x).map((c: boolean) => {})
 // $ExpectError
 numbers.every(x => !!x).map((c: number) => {})
 
+numbers.last().map((n: number) => {})
+// $ExpectError
+numbers.last().map((n: string) => {})
+// $ExpectError
+numbers.last((n: number) => true, 'asdf').map((n: number) => {})
+numbers.last((n: number) => true, 1).map((n: string) => {})
+numbers.single((n: number) => false).map((n: number) => {})
+
+numbers.skipWhile((n: number) => false).map((n: number) => {})
+// $ExpectError
+numbers.skipWhile((n: number) => 120).map((n: number) => {})
+
+numbers.throttle((n: number) => Promise.resolve('over 9000!!!')).map((n: number) => {})
+numbers.throttleTime(2).map((n: number) => {})
+// $ExpectError
+numbers.throttle(() => null).map((n: number) => {})
+
+numbers.concatMap((n: number) => Observable.of('test')).map((s: string) => {})
+numbers.concatMap((n: number) => Observable.of('test'), ((n: number, s: string) => false)).map((s: boolean) => {})
+numbers.concatMapTo('yolo', ((n: number, s: string) => false)).map((s: boolean) => {})
+
+numbers.expand((n: number) => Observable.of(n * 2)).map((n: number) => {})
+// $ExpectError
+numbers.expand((n: number) => Observable.of('asdf')).map((n: number) => {})
+
+numbers.mergeMap((n: number) => Observable.of('asdf')).map((n: string) => {})
+numbers.mergeMap((n: number) => Observable.of('asdf'), (n: number, s: string) => false).map((n: boolean) => {})
+// $ExpectError
+numbers.mergeMap((n: number) => Observable.of('asdf')).map((n: number) => {})
+

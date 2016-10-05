@@ -21,7 +21,7 @@ interface rxjs$ISubscription {
   unsubscribe(): void;
 }
 
-type TeardownLogic = rxjs$ISubscription | () => void;
+type rxjs$TeardownLogic = rxjs$ISubscription | () => void;
 
 declare class rxjs$Observable<+T> {
   static concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
@@ -84,6 +84,14 @@ declare class rxjs$Observable<+T> {
   static race(...others: Array<rxjs$Observable<T>>): rxjs$Observable<T>;
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>;
+  bufferCount(s: number, c: number): rxjs$Observable<Array<T>>;
+  // TODO Implement third, scheduler parameter
+  bufferTime(t: number, i: number): rxjs$Observable<Array<T>>;
+  bufferToggle(
+    s: rxjs$Observable<any> | Promise<any>,
+    e: (v: T) => rxjs$Observable<any> | Promise<any>
+  ): rxjs$Observable<Array<T>>;
+  bufferWhen(s: () => rxjs$Observable<any>): rxjs$Observable<Array<T>>;
 
   // TODO Implement a third scheduler parameter
   cache(bufferSize?: number, windowTime?: number): rxjs$Observable<T>;
@@ -93,8 +101,21 @@ declare class rxjs$Observable<+T> {
   concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
 
   concatMap<U>(
-    f: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
+    f: (v: T, i: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    ...rest: Array<void>
   ): rxjs$Observable<U>;
+  concatMap<U, V>(
+    f: (v: T, i: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    r: (o: T, i: U, oi: number, ii: number) => V
+  ): rxjs$Observable<V>;
+  concatMapTo<U>(v: T, ...rest: Array<void>): rxjs$Observable<U>;
+  concatMapTo<U, V>(
+    v: U,
+    r: (o: T, i: U, oi: number, ii: number) => V
+  ): rxjs$Observable<V>;
+
+  // TODO Implement a third scheduler parameter
+  expand(p: (v: T) => rxjs$Observable<T>, c: ?number): rxjs$Observable<T>;
 
   // TODO Implement a third scheduler parameter
   debounce(s: (a: T) => rxjs$Observable<any>): rxjs$Observable<T> | Promise<T>;
@@ -131,11 +152,6 @@ declare class rxjs$Observable<+T> {
 
   ignoreElements<U>(): rxjs$Observable<U>;
 
-  // Alias for `mergeMap`
-  flatMap<U>(
-    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
-  ): rxjs$Observable<U>;
-
   switchMap<U>(
     project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
   ): rxjs$Observable<U>;
@@ -153,8 +169,15 @@ declare class rxjs$Observable<+T> {
   static merge(...others: Array<rxjs$Observable<T>>): rxjs$Observable<T>;
 
   mergeMap<U>(
-    project: (value: T, index?: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    p: (value: T, index?: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    r: (void | null),
+    c: ?number
   ): rxjs$Observable<U>;
+  mergeMap<U, V>(
+    p: (value: T, index?: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    r: (o: T, i: U, oi: number, ii: number) => V,
+    c: ?number
+  ): rxjs$Observable<V>;
 
   multicast(
     subjectOrSubjectFactory: rxjs$Subject<T> | () => rxjs$Subject<T>,
@@ -192,15 +215,13 @@ declare class rxjs$Observable<+T> {
   share(): rxjs$Observable<T>;
 
   skip(count: number): rxjs$Observable<T>;
-
   skipUntil(other: rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
+  skipWhile(p: (v: T) => boolean): rxjs$Observable<T>;
 
   startWith(...values: Array<T>): rxjs$Observable<T>;
 
   take(count: number): rxjs$Observable<T>;
-
   takeUntil(other: rxjs$Observable<any>): rxjs$Observable<T>;
-
   takeWhile(f: (value: T) => boolean): rxjs$Observable<T>;
 
   do:
@@ -225,6 +246,7 @@ declare class rxjs$Observable<+T> {
     complete?: () => mixed;
   }): rxjs$Observable<T>;
 
+  throttle(s: (v: T) => rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
   throttleTime(duration: number): rxjs$Observable<T>;
 
   timeout(due: number | Date, errorToSend?: any): rxjs$Observable<T>;
@@ -594,6 +616,9 @@ declare class rxjs$Observable<+T> {
   defaultIfEmpty(a: T): rxjs$Observable<T>;
   every(p: (v: T) => boolean, t: ?any): rxjs$Observable<boolean>;
 
+  last(p: ?(v: T) => boolean, d: ?T): rxjs$Observable<T>;
+  single(p: ?(v: T) => boolean): rxjs$Observable<T>;
+
   // FIXME Using any types for the values of all these nested observables.
   // The real type of `any` should be the subtype of `T`.
   // e.g. in case of `rsjs$Observable<number>` `any` should really be `number`
@@ -601,6 +626,9 @@ declare class rxjs$Observable<+T> {
   combineAll(): rxjs$Observable<Array<any>>;
   concatAll(): T; // assumption: T is rxjs$Observable
   mergeAll(n: number): T; // assumption: T is rxjs$Observable
+
+  // TODO implement window operators
+  // TODO implement some of the utility operators
 }
 
 declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
@@ -655,7 +683,7 @@ declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {
 
 declare class rxjs$Subscription {
   unsubscribe(): void;
-  add(teardown: TeardownLogic): rxjs$Subscription;
+  add(teardown: rxjs$TeardownLogic): rxjs$Subscription;
 }
 
 /*
