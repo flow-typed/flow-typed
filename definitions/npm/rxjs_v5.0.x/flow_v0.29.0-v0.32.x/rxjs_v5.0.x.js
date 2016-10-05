@@ -21,7 +21,13 @@ interface rxjs$ISubscription {
   unsubscribe(): void;
 }
 
-type TeardownLogic = rxjs$ISubscription | () => void;
+type rxjs$TeardownLogic = rxjs$ISubscription | () => void;
+
+type rxjs$EventListenerOptions = {
+  capture?: boolean;
+  passive?: boolean;
+  once?: boolean;
+} | boolean;
 
 declare class rxjs$Observable<+T> {
   static concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
@@ -34,10 +40,24 @@ declare class rxjs$Observable<+T> {
 
   static from(iterable: Iterable<T>): rxjs$Observable<T>;
 
+  static fromEvent(element: any, eventName: string, ...none: Array<void>): rxjs$Observable<T>;
   static fromEvent(
     element: any,
     eventName: string,
-    selector?: () => T,
+    options: rxjs$EventListenerOptions,
+    ...none: Array<void>
+  ): rxjs$Observable<T>;
+  static fromEvent(
+    element: any,
+    eventName: string,
+    selector: () => T,
+    ...none: Array<void>
+  ): rxjs$Observable<T>;
+  static fromEvent(
+    element: any,
+    eventName: string,
+    options: rxjs$EventListenerOptions,
+    selector: () => T,
   ): rxjs$Observable<T>;
 
   static fromEventPattern(
@@ -69,6 +89,8 @@ declare class rxjs$Observable<+T> {
 
   static throw(error: any): rxjs$Observable<any>;
 
+  audit(durationSelector: (value: T) => rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
+
   race(other: rxjs$Observable<T>): rxjs$Observable<T>;
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>;
@@ -78,6 +100,8 @@ declare class rxjs$Observable<+T> {
   catch<U>(selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
 
   concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
+
+  concatAll<U>(): rxjs$Observable<U>;
 
   concatMap<U>(
     f: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
@@ -131,7 +155,7 @@ declare class rxjs$Observable<+T> {
 
   merge(other: rxjs$Observable<T>): rxjs$Observable<T>;
 
-  mergeAll(): T; // assumption: T is rxjs$Observable
+  mergeAll<U>(): rxjs$Observable<U>;
 
   mergeMap<U>(
     project: (value: T, index?: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
@@ -140,6 +164,10 @@ declare class rxjs$Observable<+T> {
   multicast(
     subjectOrSubjectFactory: rxjs$Subject<T> | () => rxjs$Subject<T>,
   ): rxjs$ConnectableObservable<T>;
+
+  observeOn(scheduler: rxjs$SchedulerClass): rxjs$Observable<T>;
+
+  pairwise(): rxjs$Observable<[T, T]>;
 
   publish(): rxjs$ConnectableObservable<T>;
 
@@ -177,6 +205,8 @@ declare class rxjs$Observable<+T> {
   skipUntil(other: rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
 
   startWith(...values: Array<T>): rxjs$Observable<T>;
+
+  subscribeOn(scheduler: rxjs$SchedulerClass): rxjs$Observable<T>;
 
   take(count: number): rxjs$Observable<T>;
 
@@ -382,6 +412,118 @@ declare class rxjs$Observable<+T> {
     resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H,
   ): rxjs$Observable<H>;
 
+  static forkJoin<A, B>(
+    a: rxjs$Observable<A>,
+    resultSelector: (a: A) => B,
+  ): rxjs$Observable<B>;
+
+  static forkJoin<A, B, C>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    resultSelector: (a: A, b: B) => C,
+  ): rxjs$Observable<C>;
+
+  static forkJoin<A, B, C, D>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    resultSelector: (a: A, b: B, c: C) => D,
+  ): rxjs$Observable<D>;
+
+  static forkJoin<A, B, C, D, E>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    resultSelector: (a: A, b: B, c: C, d: D) => E,
+  ): rxjs$Observable<E>;
+
+  static forkJoin<A, B, C, D, E, F>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    resultSelector: (a: A, b: B, c: C, d: D, e: E) => F,
+  ): rxjs$Observable<F>;
+
+  static forkJoin<A, B, C, D, E, F, G>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    f: rxjs$Observable<F>,
+    resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F) => G,
+  ): rxjs$Observable<G>;
+
+  static forkJoin<A, B, C, D, E, F, G, H>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    f: rxjs$Observable<F>,
+    g: rxjs$Observable<G>,
+    resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H,
+  ): rxjs$Observable<H>;
+
+  static forkJoin<A, B>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+  ): rxjs$Observable<[A, B]>;
+
+  static forkJoin<A, B, C>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+  ): rxjs$Observable<[A, B, C]>;
+
+  static forkJoin<A, B, C, D>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+  ): rxjs$Observable<[A, B, C, D]>;
+
+  static forkJoin<A, B, C, D, E>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+  ): rxjs$Observable<[A, B, C, D, E]>;
+
+  static forkJoin<A, B, C, D, E, F>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    f: rxjs$Observable<F>,
+  ): rxjs$Observable<[A, B, C, D, E, F]>;
+
+  static forkJoin<A, B, C, D, E, F, G>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    f: rxjs$Observable<F>,
+    g: rxjs$Observable<G>,
+  ): rxjs$Observable<[A, B, C, D, E, F, G]>;
+
+  static forkJoin<A, B, C, D, E, F, G, H>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    f: rxjs$Observable<F>,
+    g: rxjs$Observable<G>,
+    h: rxjs$Observable<H>,
+  ): rxjs$Observable<[A, B, C, D, E, F, G, H]>;
+
   withLatestFrom<A>(
     a: rxjs$Observable<A>
   ): rxjs$Observable<[T, A]>;
@@ -495,7 +637,11 @@ declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {
 
 declare class rxjs$Subscription {
   unsubscribe(): void;
-  add(teardown: TeardownLogic): rxjs$Subscription;
+  add(teardown: rxjs$TeardownLogic): rxjs$Subscription;
+}
+
+declare class rxjs$SchedulerClass {
+  schedule<T>(work: (state?: T) => void, delay?: number, state?: T): rxjs$Subscription;
 }
 
 declare module 'rxjs' {
@@ -506,6 +652,12 @@ declare module 'rxjs' {
     Subject: typeof rxjs$Subject,
     BehaviorSubject: typeof rxjs$BehaviorSubject,
     ReplaySubject: typeof rxjs$ReplaySubject,
+    Scheduler: {
+      asap: rxjs$SchedulerClass,
+      queue: rxjs$SchedulerClass,
+      animationFrame: rxjs$SchedulerClass,
+      async: rxjs$SchedulerClass,
+    },
     Subscription: typeof rxjs$Subscription,
   }
 }
