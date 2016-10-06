@@ -178,4 +178,5 @@ numbers.delayWhen((n: number) => Observable.of('stringy').delay(1), Observable.o
 numbers.delayWhen((n: number) => Observable.of('stringy').delay(1)).map((n: number) => {})
 
 Observable.bindCallback((a: number, b: string, c: boolean, cb: (s: string) => void) => { cb('yolo') })(1, '', true).map((s: string) => {})
+Observable.bindNodeCallback((a: number, b: string, c: boolean, cb: (e: Error | null, s: string) => void) => { cb(null, 'yolo') })(1, '', true).map((s: string) => {})
 
