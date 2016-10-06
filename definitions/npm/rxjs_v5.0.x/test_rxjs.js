@@ -174,5 +174,8 @@ numbers.mergeMap((n: number) => Observable.of('asdf'), (n: number, s: string) =>
 // $ExpectError
 numbers.mergeMap((n: number) => Observable.of('asdf')).map((n: number) => {})
 
+numbers.delayWhen((n: number) => Observable.of('stringy').delay(1), Observable.of(2)).map((n: number) => {})
+numbers.delayWhen((n: number) => Observable.of('stringy').delay(1)).map((n: number) => {})
+
 Observable.bindCallback((a: number, b: string, c: boolean, cb: (s: string) => void) => { cb('yolo') })(1, '', true).map((s: string) => {})
 

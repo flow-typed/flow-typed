@@ -139,6 +139,7 @@ declare class rxjs$Observable<+T> {
   debounceTime(duration: number): rxjs$Observable<T>;
 
   delay(dueTime: number): rxjs$Observable<T>;
+  delayWhen(s: (v: T) => rxjs$Observable<any>, s: ?rxjs$Observable<any>): rxjs$Observable<T>;
 
   distinctUntilChanged(compare?: (x: T, y: T) => boolean): rxjs$Observable<T>;
 
@@ -646,6 +647,8 @@ declare class rxjs$Observable<+T> {
 
   // TODO implement window operators
   // TODO implement some of the utility operators
+
+  // TODO implement notifications
 }
 
 declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
