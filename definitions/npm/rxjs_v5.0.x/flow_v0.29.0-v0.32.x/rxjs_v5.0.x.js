@@ -32,6 +32,23 @@ declare class rxjs$Observable<+T> {
 
   static defer(observableFactory: () => rxjs$Observable<T>): rxjs$Observable<T>;
 
+  // TODO implement scheduler arg
+  static bindCallback<A, R>(f: (a: A, cb: (a: R) => any) => any): (a: A) => rxjs$Observable<R>;
+  static bindCallback<A, B, R>(f: (a: A, b: B, cb: (a: R) => any) => any): (a: A, b: B) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, R>(f: (a: A, b: B, c: C, cb: (a: R) => any) => any): (a: A, b: B, c: C) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, D, R>(f: (a: A, b: B, c: C, d: D, cb: (a: R) => any) => any): (a: A, b: B, c: C, d: D) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, D, E, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (a: R) => any) => any): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, D, E, F, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (a: R) => any) => any): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, D, E, F, G, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (a: R) => any) => any): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<R>;
+
+  static bindCallback<A, U, R>(f: (a: A, cb: (a: R) => any) => any, s: (a: R) => U): (a: A) => rxjs$Observable<U>;
+  static bindCallback<A, B, U, R>(f: (a: A, b: B, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, U, R>(f: (a: A, b: B, c: C, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, D, U, R>(f: (a: A, b: B, c: C, d: D, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, D, E, U, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, D, E, F, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, D, E, F, G, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<U>;
+
   static from(iterable: Iterable<T>): rxjs$Observable<T>;
 
   static fromEvent(
