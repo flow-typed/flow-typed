@@ -1,4 +1,4 @@
-// flow-typed signature: 0adb7cc20f858b92780a7bc21c01e5cf
+// flow-typed signature: ebad39a2a9d61faf11dc4f566afda4de
 // flow-typed version: <<STUB>>/babel-jest_v^13.2.2/flow_v0.32.0
 
 /**
@@ -22,18 +22,18 @@ declare module 'babel-jest' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
+declare module 'babel-jest/build/index' {
+  declare module.exports: any;
+}
 
+declare module 'babel-jest/src/index' {
+  declare module.exports: any;
+}
 
 // Filename aliases
-declare module 'babel-jest/index' {
-  declare module.exports: $Exports<'babel-jest'>;
+declare module 'babel-jest/build/index.js' {
+  declare module.exports: $Exports<'babel-jest/build/index'>;
 }
-declare module 'babel-jest/index.js' {
-  declare module.exports: $Exports<'babel-jest'>;
-}
-declare module 'babel-jest/index' {
-  declare module.exports: $Exports<'babel-jest'>;
-}
-declare module 'babel-jest/index.js' {
-  declare module.exports: $Exports<'babel-jest'>;
+declare module 'babel-jest/src/index.js' {
+  declare module.exports: $Exports<'babel-jest/src/index'>;
 }

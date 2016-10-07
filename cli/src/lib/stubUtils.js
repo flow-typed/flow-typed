@@ -10,7 +10,6 @@ import {getPackageJsonData} from './npmProjectUtils';
 import {getPackageJsonDependencies} from './npmProjectUtils';
 import {mkdirp} from './fileUtils';
 import {path} from './node';
-import resolveAsync from 'resolve';
 import {signCode} from './codeSign';
 import {verifySignedCode} from './codeSign';
 import {versionToString} from './semver';
@@ -27,15 +26,32 @@ export function glob(pattern: string, options: Object): Promise<Array<string>> {
   );
 }
 
-function resolve(name: string, options: Object): Promise<string> {
-  return new Promise((resolve, reject) =>
-    resolveAsync(name, options, (err, result) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(result);
-      }
-    })
+async function resolvePkgDirPath(
+  pkgName: string,
+  pkgJsonDirPath: string,
+): Promise<null | string> {
+  let prevNodeModulesDirPath;
+  let nodeModulesDirPath = path.resolve(pkgJsonDirPath, 'node_modules');
+  while (true) {
+    const pkgDirPath = path.resolve(nodeModulesDirPath, pkgName);
+    if (await fs.exists(pkgDirPath)) {
+      return pkgDirPath;
+    }
+
+    prevNodeModulesDirPath = nodeModulesDirPath;
+    nodeModulesDirPath = path.resolve(
+      nodeModulesDirPath,
+      '..',
+      '..',
+      'node_modules',
+    );
+    if (prevNodeModulesDirPath === nodeModulesDirPath) {
+      break;
+    }
+  }
+  throw new Error(
+    'Unable to find `node_modules/' + pkgName + '/` install directory! ' +
+    'Did you forget to run `npm install` before running `flow-typed install`?'
   );
 }
 
@@ -92,7 +108,7 @@ async function writeStub(
 
     const [fileDecls, aliases] = files.reduce(([fileDecls, aliases], file) => {
       const ext = path.extname(file);
-      const name = path.basename(file, ext);
+      const name = file.substr(0, file.length - ext.length);
       const moduleName = `${packageName}/${name}`;
       if (name === 'index') {
         aliases.push(format(aliasTemplate, moduleName, '', packageName));
@@ -145,17 +161,10 @@ export async function pkgHasFlowFiles(
   projectRoot: string,
   packageName: string,
 ): Promise<boolean> {
-  let pathToPackage = await resolve(packageName, {basedir: projectRoot});
-
-  let dir = path.dirname(pathToPackage);
-  while (path.basename(dir) !== "node_modules") {
-    pathToPackage = dir;
-    dir = path.dirname(pathToPackage);
-
-    if (dir === pathToPackage) {
-      throw new Error("Failed to find package directory");
-    }
-  }
+  let pathToPackage = await resolvePkgDirPath(
+    packageName,
+    projectRoot,
+  );
 
   const files = await glob("**/*.flow", {
     cwd: pathToPackage,
@@ -183,17 +192,10 @@ export async function createStub(
   let pathToPackage = null;
   let version = explicitVersion || null;
   try {
-    pathToPackage = await resolve(packageName, {basedir: process.cwd()});
-
-    let dir = path.dirname(pathToPackage);
-    while (path.basename(dir) !== "node_modules") {
-      pathToPackage = dir;
-      dir = path.dirname(pathToPackage);
-
-      if (dir === pathToPackage) {
-        throw new Error("Failed to find package directory");
-      }
-    }
+    pathToPackage = await resolvePkgDirPath(
+      packageName,
+      process.cwd(),
+    );
 
     files = await glob("**/*.{js,jsx}", {
       cwd: pathToPackage,

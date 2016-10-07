@@ -1,4 +1,4 @@
-// flow-typed signature: 7b3d6cf9cf88777a8ee3f2693f43604f
+// flow-typed signature: c8f3294874ed64e170f9ac72ff441a40
 // flow-typed version: <<STUB>>/request_v^2.69.0/flow_v0.32.0
 
 /**
@@ -22,43 +22,43 @@ declare module 'request' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'request/auth' {
+declare module 'request/lib/auth' {
   declare module.exports: any;
 }
 
-declare module 'request/cookies' {
+declare module 'request/lib/cookies' {
   declare module.exports: any;
 }
 
-declare module 'request/getProxyFromURI' {
+declare module 'request/lib/getProxyFromURI' {
   declare module.exports: any;
 }
 
-declare module 'request/har' {
+declare module 'request/lib/har' {
   declare module.exports: any;
 }
 
-declare module 'request/helpers' {
+declare module 'request/lib/helpers' {
   declare module.exports: any;
 }
 
-declare module 'request/multipart' {
+declare module 'request/lib/multipart' {
   declare module.exports: any;
 }
 
-declare module 'request/oauth' {
+declare module 'request/lib/oauth' {
   declare module.exports: any;
 }
 
-declare module 'request/querystring' {
+declare module 'request/lib/querystring' {
   declare module.exports: any;
 }
 
-declare module 'request/redirect' {
+declare module 'request/lib/redirect' {
   declare module.exports: any;
 }
 
-declare module 'request/tunnel' {
+declare module 'request/lib/tunnel' {
   declare module.exports: any;
 }
 
@@ -73,35 +73,35 @@ declare module 'request/index' {
 declare module 'request/index.js' {
   declare module.exports: $Exports<'request'>;
 }
-declare module 'request/auth.js' {
-  declare module.exports: $Exports<'request/auth'>;
+declare module 'request/lib/auth.js' {
+  declare module.exports: $Exports<'request/lib/auth'>;
 }
-declare module 'request/cookies.js' {
-  declare module.exports: $Exports<'request/cookies'>;
+declare module 'request/lib/cookies.js' {
+  declare module.exports: $Exports<'request/lib/cookies'>;
 }
-declare module 'request/getProxyFromURI.js' {
-  declare module.exports: $Exports<'request/getProxyFromURI'>;
+declare module 'request/lib/getProxyFromURI.js' {
+  declare module.exports: $Exports<'request/lib/getProxyFromURI'>;
 }
-declare module 'request/har.js' {
-  declare module.exports: $Exports<'request/har'>;
+declare module 'request/lib/har.js' {
+  declare module.exports: $Exports<'request/lib/har'>;
 }
-declare module 'request/helpers.js' {
-  declare module.exports: $Exports<'request/helpers'>;
+declare module 'request/lib/helpers.js' {
+  declare module.exports: $Exports<'request/lib/helpers'>;
 }
-declare module 'request/multipart.js' {
-  declare module.exports: $Exports<'request/multipart'>;
+declare module 'request/lib/multipart.js' {
+  declare module.exports: $Exports<'request/lib/multipart'>;
 }
-declare module 'request/oauth.js' {
-  declare module.exports: $Exports<'request/oauth'>;
+declare module 'request/lib/oauth.js' {
+  declare module.exports: $Exports<'request/lib/oauth'>;
 }
-declare module 'request/querystring.js' {
-  declare module.exports: $Exports<'request/querystring'>;
+declare module 'request/lib/querystring.js' {
+  declare module.exports: $Exports<'request/lib/querystring'>;
 }
-declare module 'request/redirect.js' {
-  declare module.exports: $Exports<'request/redirect'>;
+declare module 'request/lib/redirect.js' {
+  declare module.exports: $Exports<'request/lib/redirect'>;
 }
-declare module 'request/tunnel.js' {
-  declare module.exports: $Exports<'request/tunnel'>;
+declare module 'request/lib/tunnel.js' {
+  declare module.exports: $Exports<'request/lib/tunnel'>;
 }
 declare module 'request/request.js' {
   declare module.exports: $Exports<'request/request'>;

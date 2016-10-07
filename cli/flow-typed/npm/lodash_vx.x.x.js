@@ -1,4 +1,4 @@
-// flow-typed signature: 1987cf05e15d14d2a21cd553abff77d0
+// flow-typed signature: 1826b995fee7c95da23fbddeb7cba3d1
 // flow-typed version: <<STUB>>/lodash_v^4.11.2/flow_v0.32.0
 
 /**
@@ -726,6 +726,10 @@ declare module 'lodash/_deburrLetter' {
   declare module.exports: any;
 }
 
+declare module 'lodash/_defineProperty' {
+  declare module.exports: any;
+}
+
 declare module 'lodash/_equalArrays' {
   declare module.exports: any;
 }
@@ -1007,10 +1011,6 @@ declare module 'lodash/_metaMap' {
 }
 
 declare module 'lodash/_nativeCreate' {
-  declare module.exports: any;
-}
-
-declare module 'lodash/_nativeDefineProperty' {
   declare module.exports: any;
 }
 
@@ -1570,1663 +1570,1663 @@ declare module 'lodash/fp' {
   declare module.exports: any;
 }
 
-declare module 'lodash/__' {
+declare module 'lodash/fp/__' {
   declare module.exports: any;
 }
 
-declare module 'lodash/_baseConvert' {
+declare module 'lodash/fp/_baseConvert' {
   declare module.exports: any;
 }
 
-declare module 'lodash/_convertBrowser' {
+declare module 'lodash/fp/_convertBrowser' {
   declare module.exports: any;
 }
 
-declare module 'lodash/_falseOptions' {
+declare module 'lodash/fp/_falseOptions' {
   declare module.exports: any;
 }
 
-declare module 'lodash/_mapping' {
+declare module 'lodash/fp/_mapping' {
   declare module.exports: any;
 }
 
-declare module 'lodash/_util' {
+declare module 'lodash/fp/_util' {
   declare module.exports: any;
 }
 
-declare module 'lodash/add' {
+declare module 'lodash/fp/add' {
   declare module.exports: any;
 }
 
-declare module 'lodash/after' {
+declare module 'lodash/fp/after' {
   declare module.exports: any;
 }
 
-declare module 'lodash/all' {
+declare module 'lodash/fp/all' {
   declare module.exports: any;
 }
 
-declare module 'lodash/allPass' {
+declare module 'lodash/fp/allPass' {
   declare module.exports: any;
 }
 
-declare module 'lodash/always' {
+declare module 'lodash/fp/always' {
   declare module.exports: any;
 }
 
-declare module 'lodash/any' {
+declare module 'lodash/fp/any' {
   declare module.exports: any;
 }
 
-declare module 'lodash/anyPass' {
+declare module 'lodash/fp/anyPass' {
   declare module.exports: any;
 }
 
-declare module 'lodash/apply' {
+declare module 'lodash/fp/apply' {
   declare module.exports: any;
 }
 
-declare module 'lodash/array' {
+declare module 'lodash/fp/array' {
   declare module.exports: any;
 }
 
-declare module 'lodash/ary' {
+declare module 'lodash/fp/ary' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assign' {
+declare module 'lodash/fp/assign' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assignAll' {
+declare module 'lodash/fp/assignAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assignAllWith' {
+declare module 'lodash/fp/assignAllWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assignIn' {
+declare module 'lodash/fp/assignIn' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assignInAll' {
+declare module 'lodash/fp/assignInAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assignInAllWith' {
+declare module 'lodash/fp/assignInAllWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assignInWith' {
+declare module 'lodash/fp/assignInWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assignWith' {
+declare module 'lodash/fp/assignWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assoc' {
+declare module 'lodash/fp/assoc' {
   declare module.exports: any;
 }
 
-declare module 'lodash/assocPath' {
+declare module 'lodash/fp/assocPath' {
   declare module.exports: any;
 }
 
-declare module 'lodash/at' {
+declare module 'lodash/fp/at' {
   declare module.exports: any;
 }
 
-declare module 'lodash/attempt' {
+declare module 'lodash/fp/attempt' {
   declare module.exports: any;
 }
 
-declare module 'lodash/before' {
+declare module 'lodash/fp/before' {
   declare module.exports: any;
 }
 
-declare module 'lodash/bind' {
+declare module 'lodash/fp/bind' {
   declare module.exports: any;
 }
 
-declare module 'lodash/bindAll' {
+declare module 'lodash/fp/bindAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/bindKey' {
+declare module 'lodash/fp/bindKey' {
   declare module.exports: any;
 }
 
-declare module 'lodash/camelCase' {
+declare module 'lodash/fp/camelCase' {
   declare module.exports: any;
 }
 
-declare module 'lodash/capitalize' {
+declare module 'lodash/fp/capitalize' {
   declare module.exports: any;
 }
 
-declare module 'lodash/castArray' {
+declare module 'lodash/fp/castArray' {
   declare module.exports: any;
 }
 
-declare module 'lodash/ceil' {
+declare module 'lodash/fp/ceil' {
   declare module.exports: any;
 }
 
-declare module 'lodash/chain' {
+declare module 'lodash/fp/chain' {
   declare module.exports: any;
 }
 
-declare module 'lodash/chunk' {
+declare module 'lodash/fp/chunk' {
   declare module.exports: any;
 }
 
-declare module 'lodash/clamp' {
+declare module 'lodash/fp/clamp' {
   declare module.exports: any;
 }
 
-declare module 'lodash/clone' {
+declare module 'lodash/fp/clone' {
   declare module.exports: any;
 }
 
-declare module 'lodash/cloneDeep' {
+declare module 'lodash/fp/cloneDeep' {
   declare module.exports: any;
 }
 
-declare module 'lodash/cloneDeepWith' {
+declare module 'lodash/fp/cloneDeepWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/cloneWith' {
+declare module 'lodash/fp/cloneWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/collection' {
+declare module 'lodash/fp/collection' {
   declare module.exports: any;
 }
 
-declare module 'lodash/commit' {
+declare module 'lodash/fp/commit' {
   declare module.exports: any;
 }
 
-declare module 'lodash/compact' {
+declare module 'lodash/fp/compact' {
   declare module.exports: any;
 }
 
-declare module 'lodash/complement' {
+declare module 'lodash/fp/complement' {
   declare module.exports: any;
 }
 
-declare module 'lodash/compose' {
+declare module 'lodash/fp/compose' {
   declare module.exports: any;
 }
 
-declare module 'lodash/concat' {
+declare module 'lodash/fp/concat' {
   declare module.exports: any;
 }
 
-declare module 'lodash/cond' {
+declare module 'lodash/fp/cond' {
   declare module.exports: any;
 }
 
-declare module 'lodash/conforms' {
+declare module 'lodash/fp/conforms' {
   declare module.exports: any;
 }
 
-declare module 'lodash/conformsTo' {
+declare module 'lodash/fp/conformsTo' {
   declare module.exports: any;
 }
 
-declare module 'lodash/constant' {
+declare module 'lodash/fp/constant' {
   declare module.exports: any;
 }
 
-declare module 'lodash/contains' {
+declare module 'lodash/fp/contains' {
   declare module.exports: any;
 }
 
-declare module 'lodash/convert' {
+declare module 'lodash/fp/convert' {
   declare module.exports: any;
 }
 
-declare module 'lodash/countBy' {
+declare module 'lodash/fp/countBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/create' {
+declare module 'lodash/fp/create' {
   declare module.exports: any;
 }
 
-declare module 'lodash/curry' {
+declare module 'lodash/fp/curry' {
   declare module.exports: any;
 }
 
-declare module 'lodash/curryN' {
+declare module 'lodash/fp/curryN' {
   declare module.exports: any;
 }
 
-declare module 'lodash/curryRight' {
+declare module 'lodash/fp/curryRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/curryRightN' {
+declare module 'lodash/fp/curryRightN' {
   declare module.exports: any;
 }
 
-declare module 'lodash/date' {
+declare module 'lodash/fp/date' {
   declare module.exports: any;
 }
 
-declare module 'lodash/debounce' {
+declare module 'lodash/fp/debounce' {
   declare module.exports: any;
 }
 
-declare module 'lodash/deburr' {
+declare module 'lodash/fp/deburr' {
   declare module.exports: any;
 }
 
-declare module 'lodash/defaults' {
+declare module 'lodash/fp/defaults' {
   declare module.exports: any;
 }
 
-declare module 'lodash/defaultsAll' {
+declare module 'lodash/fp/defaultsAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/defaultsDeep' {
+declare module 'lodash/fp/defaultsDeep' {
   declare module.exports: any;
 }
 
-declare module 'lodash/defaultsDeepAll' {
+declare module 'lodash/fp/defaultsDeepAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/defaultTo' {
+declare module 'lodash/fp/defaultTo' {
   declare module.exports: any;
 }
 
-declare module 'lodash/defer' {
+declare module 'lodash/fp/defer' {
   declare module.exports: any;
 }
 
-declare module 'lodash/delay' {
+declare module 'lodash/fp/delay' {
   declare module.exports: any;
 }
 
-declare module 'lodash/difference' {
+declare module 'lodash/fp/difference' {
   declare module.exports: any;
 }
 
-declare module 'lodash/differenceBy' {
+declare module 'lodash/fp/differenceBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/differenceWith' {
+declare module 'lodash/fp/differenceWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/dissoc' {
+declare module 'lodash/fp/dissoc' {
   declare module.exports: any;
 }
 
-declare module 'lodash/dissocPath' {
+declare module 'lodash/fp/dissocPath' {
   declare module.exports: any;
 }
 
-declare module 'lodash/divide' {
+declare module 'lodash/fp/divide' {
   declare module.exports: any;
 }
 
-declare module 'lodash/drop' {
+declare module 'lodash/fp/drop' {
   declare module.exports: any;
 }
 
-declare module 'lodash/dropLast' {
+declare module 'lodash/fp/dropLast' {
   declare module.exports: any;
 }
 
-declare module 'lodash/dropLastWhile' {
+declare module 'lodash/fp/dropLastWhile' {
   declare module.exports: any;
 }
 
-declare module 'lodash/dropRight' {
+declare module 'lodash/fp/dropRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/dropRightWhile' {
+declare module 'lodash/fp/dropRightWhile' {
   declare module.exports: any;
 }
 
-declare module 'lodash/dropWhile' {
+declare module 'lodash/fp/dropWhile' {
   declare module.exports: any;
 }
 
-declare module 'lodash/each' {
+declare module 'lodash/fp/each' {
   declare module.exports: any;
 }
 
-declare module 'lodash/eachRight' {
+declare module 'lodash/fp/eachRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/endsWith' {
+declare module 'lodash/fp/endsWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/entries' {
+declare module 'lodash/fp/entries' {
   declare module.exports: any;
 }
 
-declare module 'lodash/entriesIn' {
+declare module 'lodash/fp/entriesIn' {
   declare module.exports: any;
 }
 
-declare module 'lodash/eq' {
+declare module 'lodash/fp/eq' {
   declare module.exports: any;
 }
 
-declare module 'lodash/equals' {
+declare module 'lodash/fp/equals' {
   declare module.exports: any;
 }
 
-declare module 'lodash/escape' {
+declare module 'lodash/fp/escape' {
   declare module.exports: any;
 }
 
-declare module 'lodash/escapeRegExp' {
+declare module 'lodash/fp/escapeRegExp' {
   declare module.exports: any;
 }
 
-declare module 'lodash/every' {
+declare module 'lodash/fp/every' {
   declare module.exports: any;
 }
 
-declare module 'lodash/extend' {
+declare module 'lodash/fp/extend' {
   declare module.exports: any;
 }
 
-declare module 'lodash/extendAll' {
+declare module 'lodash/fp/extendAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/extendAllWith' {
+declare module 'lodash/fp/extendAllWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/extendWith' {
+declare module 'lodash/fp/extendWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/F' {
+declare module 'lodash/fp/F' {
   declare module.exports: any;
 }
 
-declare module 'lodash/fill' {
+declare module 'lodash/fp/fill' {
   declare module.exports: any;
 }
 
-declare module 'lodash/filter' {
+declare module 'lodash/fp/filter' {
   declare module.exports: any;
 }
 
-declare module 'lodash/find' {
+declare module 'lodash/fp/find' {
   declare module.exports: any;
 }
 
-declare module 'lodash/findFrom' {
+declare module 'lodash/fp/findFrom' {
   declare module.exports: any;
 }
 
-declare module 'lodash/findIndex' {
+declare module 'lodash/fp/findIndex' {
   declare module.exports: any;
 }
 
-declare module 'lodash/findIndexFrom' {
+declare module 'lodash/fp/findIndexFrom' {
   declare module.exports: any;
 }
 
-declare module 'lodash/findKey' {
+declare module 'lodash/fp/findKey' {
   declare module.exports: any;
 }
 
-declare module 'lodash/findLast' {
+declare module 'lodash/fp/findLast' {
   declare module.exports: any;
 }
 
-declare module 'lodash/findLastFrom' {
+declare module 'lodash/fp/findLastFrom' {
   declare module.exports: any;
 }
 
-declare module 'lodash/findLastIndex' {
+declare module 'lodash/fp/findLastIndex' {
   declare module.exports: any;
 }
 
-declare module 'lodash/findLastIndexFrom' {
+declare module 'lodash/fp/findLastIndexFrom' {
   declare module.exports: any;
 }
 
-declare module 'lodash/findLastKey' {
+declare module 'lodash/fp/findLastKey' {
   declare module.exports: any;
 }
 
-declare module 'lodash/first' {
+declare module 'lodash/fp/first' {
   declare module.exports: any;
 }
 
-declare module 'lodash/flatMap' {
+declare module 'lodash/fp/flatMap' {
   declare module.exports: any;
 }
 
-declare module 'lodash/flatMapDeep' {
+declare module 'lodash/fp/flatMapDeep' {
   declare module.exports: any;
 }
 
-declare module 'lodash/flatMapDepth' {
+declare module 'lodash/fp/flatMapDepth' {
   declare module.exports: any;
 }
 
-declare module 'lodash/flatten' {
+declare module 'lodash/fp/flatten' {
   declare module.exports: any;
 }
 
-declare module 'lodash/flattenDeep' {
+declare module 'lodash/fp/flattenDeep' {
   declare module.exports: any;
 }
 
-declare module 'lodash/flattenDepth' {
+declare module 'lodash/fp/flattenDepth' {
   declare module.exports: any;
 }
 
-declare module 'lodash/flip' {
+declare module 'lodash/fp/flip' {
   declare module.exports: any;
 }
 
-declare module 'lodash/floor' {
+declare module 'lodash/fp/floor' {
   declare module.exports: any;
 }
 
-declare module 'lodash/flow' {
+declare module 'lodash/fp/flow' {
   declare module.exports: any;
 }
 
-declare module 'lodash/flowRight' {
+declare module 'lodash/fp/flowRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/forEach' {
+declare module 'lodash/fp/forEach' {
   declare module.exports: any;
 }
 
-declare module 'lodash/forEachRight' {
+declare module 'lodash/fp/forEachRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/forIn' {
+declare module 'lodash/fp/forIn' {
   declare module.exports: any;
 }
 
-declare module 'lodash/forInRight' {
+declare module 'lodash/fp/forInRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/forOwn' {
+declare module 'lodash/fp/forOwn' {
   declare module.exports: any;
 }
 
-declare module 'lodash/forOwnRight' {
+declare module 'lodash/fp/forOwnRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/fromPairs' {
+declare module 'lodash/fp/fromPairs' {
   declare module.exports: any;
 }
 
-declare module 'lodash/function' {
+declare module 'lodash/fp/function' {
   declare module.exports: any;
 }
 
-declare module 'lodash/functions' {
+declare module 'lodash/fp/functions' {
   declare module.exports: any;
 }
 
-declare module 'lodash/functionsIn' {
+declare module 'lodash/fp/functionsIn' {
   declare module.exports: any;
 }
 
-declare module 'lodash/get' {
+declare module 'lodash/fp/get' {
   declare module.exports: any;
 }
 
-declare module 'lodash/getOr' {
+declare module 'lodash/fp/getOr' {
   declare module.exports: any;
 }
 
-declare module 'lodash/groupBy' {
+declare module 'lodash/fp/groupBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/gt' {
+declare module 'lodash/fp/gt' {
   declare module.exports: any;
 }
 
-declare module 'lodash/gte' {
+declare module 'lodash/fp/gte' {
   declare module.exports: any;
 }
 
-declare module 'lodash/has' {
+declare module 'lodash/fp/has' {
   declare module.exports: any;
 }
 
-declare module 'lodash/hasIn' {
+declare module 'lodash/fp/hasIn' {
   declare module.exports: any;
 }
 
-declare module 'lodash/head' {
+declare module 'lodash/fp/head' {
   declare module.exports: any;
 }
 
-declare module 'lodash/identical' {
+declare module 'lodash/fp/identical' {
   declare module.exports: any;
 }
 
-declare module 'lodash/identity' {
+declare module 'lodash/fp/identity' {
   declare module.exports: any;
 }
 
-declare module 'lodash/includes' {
+declare module 'lodash/fp/includes' {
   declare module.exports: any;
 }
 
-declare module 'lodash/includesFrom' {
+declare module 'lodash/fp/includesFrom' {
   declare module.exports: any;
 }
 
-declare module 'lodash/indexBy' {
+declare module 'lodash/fp/indexBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/indexOf' {
+declare module 'lodash/fp/indexOf' {
   declare module.exports: any;
 }
 
-declare module 'lodash/indexOfFrom' {
+declare module 'lodash/fp/indexOfFrom' {
   declare module.exports: any;
 }
 
-declare module 'lodash/init' {
+declare module 'lodash/fp/init' {
   declare module.exports: any;
 }
 
-declare module 'lodash/initial' {
+declare module 'lodash/fp/initial' {
   declare module.exports: any;
 }
 
-declare module 'lodash/inRange' {
+declare module 'lodash/fp/inRange' {
   declare module.exports: any;
 }
 
-declare module 'lodash/intersection' {
+declare module 'lodash/fp/intersection' {
   declare module.exports: any;
 }
 
-declare module 'lodash/intersectionBy' {
+declare module 'lodash/fp/intersectionBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/intersectionWith' {
+declare module 'lodash/fp/intersectionWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/invert' {
+declare module 'lodash/fp/invert' {
   declare module.exports: any;
 }
 
-declare module 'lodash/invertBy' {
+declare module 'lodash/fp/invertBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/invertObj' {
+declare module 'lodash/fp/invertObj' {
   declare module.exports: any;
 }
 
-declare module 'lodash/invoke' {
+declare module 'lodash/fp/invoke' {
   declare module.exports: any;
 }
 
-declare module 'lodash/invokeArgs' {
+declare module 'lodash/fp/invokeArgs' {
   declare module.exports: any;
 }
 
-declare module 'lodash/invokeArgsMap' {
+declare module 'lodash/fp/invokeArgsMap' {
   declare module.exports: any;
 }
 
-declare module 'lodash/invokeMap' {
+declare module 'lodash/fp/invokeMap' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isArguments' {
+declare module 'lodash/fp/isArguments' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isArray' {
+declare module 'lodash/fp/isArray' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isArrayBuffer' {
+declare module 'lodash/fp/isArrayBuffer' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isArrayLike' {
+declare module 'lodash/fp/isArrayLike' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isArrayLikeObject' {
+declare module 'lodash/fp/isArrayLikeObject' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isBoolean' {
+declare module 'lodash/fp/isBoolean' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isBuffer' {
+declare module 'lodash/fp/isBuffer' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isDate' {
+declare module 'lodash/fp/isDate' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isElement' {
+declare module 'lodash/fp/isElement' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isEmpty' {
+declare module 'lodash/fp/isEmpty' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isEqual' {
+declare module 'lodash/fp/isEqual' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isEqualWith' {
+declare module 'lodash/fp/isEqualWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isError' {
+declare module 'lodash/fp/isError' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isFinite' {
+declare module 'lodash/fp/isFinite' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isFunction' {
+declare module 'lodash/fp/isFunction' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isInteger' {
+declare module 'lodash/fp/isInteger' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isLength' {
+declare module 'lodash/fp/isLength' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isMap' {
+declare module 'lodash/fp/isMap' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isMatch' {
+declare module 'lodash/fp/isMatch' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isMatchWith' {
+declare module 'lodash/fp/isMatchWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isNaN' {
+declare module 'lodash/fp/isNaN' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isNative' {
+declare module 'lodash/fp/isNative' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isNil' {
+declare module 'lodash/fp/isNil' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isNull' {
+declare module 'lodash/fp/isNull' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isNumber' {
+declare module 'lodash/fp/isNumber' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isObject' {
+declare module 'lodash/fp/isObject' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isObjectLike' {
+declare module 'lodash/fp/isObjectLike' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isPlainObject' {
+declare module 'lodash/fp/isPlainObject' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isRegExp' {
+declare module 'lodash/fp/isRegExp' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isSafeInteger' {
+declare module 'lodash/fp/isSafeInteger' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isSet' {
+declare module 'lodash/fp/isSet' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isString' {
+declare module 'lodash/fp/isString' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isSymbol' {
+declare module 'lodash/fp/isSymbol' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isTypedArray' {
+declare module 'lodash/fp/isTypedArray' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isUndefined' {
+declare module 'lodash/fp/isUndefined' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isWeakMap' {
+declare module 'lodash/fp/isWeakMap' {
   declare module.exports: any;
 }
 
-declare module 'lodash/isWeakSet' {
+declare module 'lodash/fp/isWeakSet' {
   declare module.exports: any;
 }
 
-declare module 'lodash/iteratee' {
+declare module 'lodash/fp/iteratee' {
   declare module.exports: any;
 }
 
-declare module 'lodash/join' {
+declare module 'lodash/fp/join' {
   declare module.exports: any;
 }
 
-declare module 'lodash/juxt' {
+declare module 'lodash/fp/juxt' {
   declare module.exports: any;
 }
 
-declare module 'lodash/kebabCase' {
+declare module 'lodash/fp/kebabCase' {
   declare module.exports: any;
 }
 
-declare module 'lodash/keyBy' {
+declare module 'lodash/fp/keyBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/keys' {
+declare module 'lodash/fp/keys' {
   declare module.exports: any;
 }
 
-declare module 'lodash/keysIn' {
+declare module 'lodash/fp/keysIn' {
   declare module.exports: any;
 }
 
-declare module 'lodash/lang' {
+declare module 'lodash/fp/lang' {
   declare module.exports: any;
 }
 
-declare module 'lodash/last' {
+declare module 'lodash/fp/last' {
   declare module.exports: any;
 }
 
-declare module 'lodash/lastIndexOf' {
+declare module 'lodash/fp/lastIndexOf' {
   declare module.exports: any;
 }
 
-declare module 'lodash/lastIndexOfFrom' {
+declare module 'lodash/fp/lastIndexOfFrom' {
   declare module.exports: any;
 }
 
-declare module 'lodash/lowerCase' {
+declare module 'lodash/fp/lowerCase' {
   declare module.exports: any;
 }
 
-declare module 'lodash/lowerFirst' {
+declare module 'lodash/fp/lowerFirst' {
   declare module.exports: any;
 }
 
-declare module 'lodash/lt' {
+declare module 'lodash/fp/lt' {
   declare module.exports: any;
 }
 
-declare module 'lodash/lte' {
+declare module 'lodash/fp/lte' {
   declare module.exports: any;
 }
 
-declare module 'lodash/map' {
+declare module 'lodash/fp/map' {
   declare module.exports: any;
 }
 
-declare module 'lodash/mapKeys' {
+declare module 'lodash/fp/mapKeys' {
   declare module.exports: any;
 }
 
-declare module 'lodash/mapValues' {
+declare module 'lodash/fp/mapValues' {
   declare module.exports: any;
 }
 
-declare module 'lodash/matches' {
+declare module 'lodash/fp/matches' {
   declare module.exports: any;
 }
 
-declare module 'lodash/matchesProperty' {
+declare module 'lodash/fp/matchesProperty' {
   declare module.exports: any;
 }
 
-declare module 'lodash/math' {
+declare module 'lodash/fp/math' {
   declare module.exports: any;
 }
 
-declare module 'lodash/max' {
+declare module 'lodash/fp/max' {
   declare module.exports: any;
 }
 
-declare module 'lodash/maxBy' {
+declare module 'lodash/fp/maxBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/mean' {
+declare module 'lodash/fp/mean' {
   declare module.exports: any;
 }
 
-declare module 'lodash/meanBy' {
+declare module 'lodash/fp/meanBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/memoize' {
+declare module 'lodash/fp/memoize' {
   declare module.exports: any;
 }
 
-declare module 'lodash/merge' {
+declare module 'lodash/fp/merge' {
   declare module.exports: any;
 }
 
-declare module 'lodash/mergeAll' {
+declare module 'lodash/fp/mergeAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/mergeAllWith' {
+declare module 'lodash/fp/mergeAllWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/mergeWith' {
+declare module 'lodash/fp/mergeWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/method' {
+declare module 'lodash/fp/method' {
   declare module.exports: any;
 }
 
-declare module 'lodash/methodOf' {
+declare module 'lodash/fp/methodOf' {
   declare module.exports: any;
 }
 
-declare module 'lodash/min' {
+declare module 'lodash/fp/min' {
   declare module.exports: any;
 }
 
-declare module 'lodash/minBy' {
+declare module 'lodash/fp/minBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/mixin' {
+declare module 'lodash/fp/mixin' {
   declare module.exports: any;
 }
 
-declare module 'lodash/multiply' {
+declare module 'lodash/fp/multiply' {
   declare module.exports: any;
 }
 
-declare module 'lodash/nAry' {
+declare module 'lodash/fp/nAry' {
   declare module.exports: any;
 }
 
-declare module 'lodash/negate' {
+declare module 'lodash/fp/negate' {
   declare module.exports: any;
 }
 
-declare module 'lodash/next' {
+declare module 'lodash/fp/next' {
   declare module.exports: any;
 }
 
-declare module 'lodash/noop' {
+declare module 'lodash/fp/noop' {
   declare module.exports: any;
 }
 
-declare module 'lodash/now' {
+declare module 'lodash/fp/now' {
   declare module.exports: any;
 }
 
-declare module 'lodash/nth' {
+declare module 'lodash/fp/nth' {
   declare module.exports: any;
 }
 
-declare module 'lodash/nthArg' {
+declare module 'lodash/fp/nthArg' {
   declare module.exports: any;
 }
 
-declare module 'lodash/number' {
+declare module 'lodash/fp/number' {
   declare module.exports: any;
 }
 
-declare module 'lodash/object' {
+declare module 'lodash/fp/object' {
   declare module.exports: any;
 }
 
-declare module 'lodash/omit' {
+declare module 'lodash/fp/omit' {
   declare module.exports: any;
 }
 
-declare module 'lodash/omitAll' {
+declare module 'lodash/fp/omitAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/omitBy' {
+declare module 'lodash/fp/omitBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/once' {
+declare module 'lodash/fp/once' {
   declare module.exports: any;
 }
 
-declare module 'lodash/orderBy' {
+declare module 'lodash/fp/orderBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/over' {
+declare module 'lodash/fp/over' {
   declare module.exports: any;
 }
 
-declare module 'lodash/overArgs' {
+declare module 'lodash/fp/overArgs' {
   declare module.exports: any;
 }
 
-declare module 'lodash/overEvery' {
+declare module 'lodash/fp/overEvery' {
   declare module.exports: any;
 }
 
-declare module 'lodash/overSome' {
+declare module 'lodash/fp/overSome' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pad' {
+declare module 'lodash/fp/pad' {
   declare module.exports: any;
 }
 
-declare module 'lodash/padChars' {
+declare module 'lodash/fp/padChars' {
   declare module.exports: any;
 }
 
-declare module 'lodash/padCharsEnd' {
+declare module 'lodash/fp/padCharsEnd' {
   declare module.exports: any;
 }
 
-declare module 'lodash/padCharsStart' {
+declare module 'lodash/fp/padCharsStart' {
   declare module.exports: any;
 }
 
-declare module 'lodash/padEnd' {
+declare module 'lodash/fp/padEnd' {
   declare module.exports: any;
 }
 
-declare module 'lodash/padStart' {
+declare module 'lodash/fp/padStart' {
   declare module.exports: any;
 }
 
-declare module 'lodash/parseInt' {
+declare module 'lodash/fp/parseInt' {
   declare module.exports: any;
 }
 
-declare module 'lodash/partial' {
+declare module 'lodash/fp/partial' {
   declare module.exports: any;
 }
 
-declare module 'lodash/partialRight' {
+declare module 'lodash/fp/partialRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/partition' {
+declare module 'lodash/fp/partition' {
   declare module.exports: any;
 }
 
-declare module 'lodash/path' {
+declare module 'lodash/fp/path' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pathEq' {
+declare module 'lodash/fp/pathEq' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pathOr' {
+declare module 'lodash/fp/pathOr' {
   declare module.exports: any;
 }
 
-declare module 'lodash/paths' {
+declare module 'lodash/fp/paths' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pick' {
+declare module 'lodash/fp/pick' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pickAll' {
+declare module 'lodash/fp/pickAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pickBy' {
+declare module 'lodash/fp/pickBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pipe' {
+declare module 'lodash/fp/pipe' {
   declare module.exports: any;
 }
 
-declare module 'lodash/placeholder' {
+declare module 'lodash/fp/placeholder' {
   declare module.exports: any;
 }
 
-declare module 'lodash/plant' {
+declare module 'lodash/fp/plant' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pluck' {
+declare module 'lodash/fp/pluck' {
   declare module.exports: any;
 }
 
-declare module 'lodash/prop' {
+declare module 'lodash/fp/prop' {
   declare module.exports: any;
 }
 
-declare module 'lodash/propEq' {
+declare module 'lodash/fp/propEq' {
   declare module.exports: any;
 }
 
-declare module 'lodash/property' {
+declare module 'lodash/fp/property' {
   declare module.exports: any;
 }
 
-declare module 'lodash/propertyOf' {
+declare module 'lodash/fp/propertyOf' {
   declare module.exports: any;
 }
 
-declare module 'lodash/propOr' {
+declare module 'lodash/fp/propOr' {
   declare module.exports: any;
 }
 
-declare module 'lodash/props' {
+declare module 'lodash/fp/props' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pull' {
+declare module 'lodash/fp/pull' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pullAll' {
+declare module 'lodash/fp/pullAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pullAllBy' {
+declare module 'lodash/fp/pullAllBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pullAllWith' {
+declare module 'lodash/fp/pullAllWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/pullAt' {
+declare module 'lodash/fp/pullAt' {
   declare module.exports: any;
 }
 
-declare module 'lodash/random' {
+declare module 'lodash/fp/random' {
   declare module.exports: any;
 }
 
-declare module 'lodash/range' {
+declare module 'lodash/fp/range' {
   declare module.exports: any;
 }
 
-declare module 'lodash/rangeRight' {
+declare module 'lodash/fp/rangeRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/rangeStep' {
+declare module 'lodash/fp/rangeStep' {
   declare module.exports: any;
 }
 
-declare module 'lodash/rangeStepRight' {
+declare module 'lodash/fp/rangeStepRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/rearg' {
+declare module 'lodash/fp/rearg' {
   declare module.exports: any;
 }
 
-declare module 'lodash/reduce' {
+declare module 'lodash/fp/reduce' {
   declare module.exports: any;
 }
 
-declare module 'lodash/reduceRight' {
+declare module 'lodash/fp/reduceRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/reject' {
+declare module 'lodash/fp/reject' {
   declare module.exports: any;
 }
 
-declare module 'lodash/remove' {
+declare module 'lodash/fp/remove' {
   declare module.exports: any;
 }
 
-declare module 'lodash/repeat' {
+declare module 'lodash/fp/repeat' {
   declare module.exports: any;
 }
 
-declare module 'lodash/replace' {
+declare module 'lodash/fp/replace' {
   declare module.exports: any;
 }
 
-declare module 'lodash/rest' {
+declare module 'lodash/fp/rest' {
   declare module.exports: any;
 }
 
-declare module 'lodash/restFrom' {
+declare module 'lodash/fp/restFrom' {
   declare module.exports: any;
 }
 
-declare module 'lodash/result' {
+declare module 'lodash/fp/result' {
   declare module.exports: any;
 }
 
-declare module 'lodash/reverse' {
+declare module 'lodash/fp/reverse' {
   declare module.exports: any;
 }
 
-declare module 'lodash/round' {
+declare module 'lodash/fp/round' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sample' {
+declare module 'lodash/fp/sample' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sampleSize' {
+declare module 'lodash/fp/sampleSize' {
   declare module.exports: any;
 }
 
-declare module 'lodash/seq' {
+declare module 'lodash/fp/seq' {
   declare module.exports: any;
 }
 
-declare module 'lodash/set' {
+declare module 'lodash/fp/set' {
   declare module.exports: any;
 }
 
-declare module 'lodash/setWith' {
+declare module 'lodash/fp/setWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/shuffle' {
+declare module 'lodash/fp/shuffle' {
   declare module.exports: any;
 }
 
-declare module 'lodash/size' {
+declare module 'lodash/fp/size' {
   declare module.exports: any;
 }
 
-declare module 'lodash/slice' {
+declare module 'lodash/fp/slice' {
   declare module.exports: any;
 }
 
-declare module 'lodash/snakeCase' {
+declare module 'lodash/fp/snakeCase' {
   declare module.exports: any;
 }
 
-declare module 'lodash/some' {
+declare module 'lodash/fp/some' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sortBy' {
+declare module 'lodash/fp/sortBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sortedIndex' {
+declare module 'lodash/fp/sortedIndex' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sortedIndexBy' {
+declare module 'lodash/fp/sortedIndexBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sortedIndexOf' {
+declare module 'lodash/fp/sortedIndexOf' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sortedLastIndex' {
+declare module 'lodash/fp/sortedLastIndex' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sortedLastIndexBy' {
+declare module 'lodash/fp/sortedLastIndexBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sortedLastIndexOf' {
+declare module 'lodash/fp/sortedLastIndexOf' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sortedUniq' {
+declare module 'lodash/fp/sortedUniq' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sortedUniqBy' {
+declare module 'lodash/fp/sortedUniqBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/split' {
+declare module 'lodash/fp/split' {
   declare module.exports: any;
 }
 
-declare module 'lodash/spread' {
+declare module 'lodash/fp/spread' {
   declare module.exports: any;
 }
 
-declare module 'lodash/spreadFrom' {
+declare module 'lodash/fp/spreadFrom' {
   declare module.exports: any;
 }
 
-declare module 'lodash/startCase' {
+declare module 'lodash/fp/startCase' {
   declare module.exports: any;
 }
 
-declare module 'lodash/startsWith' {
+declare module 'lodash/fp/startsWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/string' {
+declare module 'lodash/fp/string' {
   declare module.exports: any;
 }
 
-declare module 'lodash/stubArray' {
+declare module 'lodash/fp/stubArray' {
   declare module.exports: any;
 }
 
-declare module 'lodash/stubFalse' {
+declare module 'lodash/fp/stubFalse' {
   declare module.exports: any;
 }
 
-declare module 'lodash/stubObject' {
+declare module 'lodash/fp/stubObject' {
   declare module.exports: any;
 }
 
-declare module 'lodash/stubString' {
+declare module 'lodash/fp/stubString' {
   declare module.exports: any;
 }
 
-declare module 'lodash/stubTrue' {
+declare module 'lodash/fp/stubTrue' {
   declare module.exports: any;
 }
 
-declare module 'lodash/subtract' {
+declare module 'lodash/fp/subtract' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sum' {
+declare module 'lodash/fp/sum' {
   declare module.exports: any;
 }
 
-declare module 'lodash/sumBy' {
+declare module 'lodash/fp/sumBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/symmetricDifference' {
+declare module 'lodash/fp/symmetricDifference' {
   declare module.exports: any;
 }
 
-declare module 'lodash/symmetricDifferenceBy' {
+declare module 'lodash/fp/symmetricDifferenceBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/symmetricDifferenceWith' {
+declare module 'lodash/fp/symmetricDifferenceWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/T' {
+declare module 'lodash/fp/T' {
   declare module.exports: any;
 }
 
-declare module 'lodash/tail' {
+declare module 'lodash/fp/tail' {
   declare module.exports: any;
 }
 
-declare module 'lodash/take' {
+declare module 'lodash/fp/take' {
   declare module.exports: any;
 }
 
-declare module 'lodash/takeLast' {
+declare module 'lodash/fp/takeLast' {
   declare module.exports: any;
 }
 
-declare module 'lodash/takeLastWhile' {
+declare module 'lodash/fp/takeLastWhile' {
   declare module.exports: any;
 }
 
-declare module 'lodash/takeRight' {
+declare module 'lodash/fp/takeRight' {
   declare module.exports: any;
 }
 
-declare module 'lodash/takeRightWhile' {
+declare module 'lodash/fp/takeRightWhile' {
   declare module.exports: any;
 }
 
-declare module 'lodash/takeWhile' {
+declare module 'lodash/fp/takeWhile' {
   declare module.exports: any;
 }
 
-declare module 'lodash/tap' {
+declare module 'lodash/fp/tap' {
   declare module.exports: any;
 }
 
-declare module 'lodash/template' {
+declare module 'lodash/fp/template' {
   declare module.exports: any;
 }
 
-declare module 'lodash/templateSettings' {
+declare module 'lodash/fp/templateSettings' {
   declare module.exports: any;
 }
 
-declare module 'lodash/throttle' {
+declare module 'lodash/fp/throttle' {
   declare module.exports: any;
 }
 
-declare module 'lodash/thru' {
+declare module 'lodash/fp/thru' {
   declare module.exports: any;
 }
 
-declare module 'lodash/times' {
+declare module 'lodash/fp/times' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toArray' {
+declare module 'lodash/fp/toArray' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toFinite' {
+declare module 'lodash/fp/toFinite' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toInteger' {
+declare module 'lodash/fp/toInteger' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toIterator' {
+declare module 'lodash/fp/toIterator' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toJSON' {
+declare module 'lodash/fp/toJSON' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toLength' {
+declare module 'lodash/fp/toLength' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toLower' {
+declare module 'lodash/fp/toLower' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toNumber' {
+declare module 'lodash/fp/toNumber' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toPairs' {
+declare module 'lodash/fp/toPairs' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toPairsIn' {
+declare module 'lodash/fp/toPairsIn' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toPath' {
+declare module 'lodash/fp/toPath' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toPlainObject' {
+declare module 'lodash/fp/toPlainObject' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toSafeInteger' {
+declare module 'lodash/fp/toSafeInteger' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toString' {
+declare module 'lodash/fp/toString' {
   declare module.exports: any;
 }
 
-declare module 'lodash/toUpper' {
+declare module 'lodash/fp/toUpper' {
   declare module.exports: any;
 }
 
-declare module 'lodash/transform' {
+declare module 'lodash/fp/transform' {
   declare module.exports: any;
 }
 
-declare module 'lodash/trim' {
+declare module 'lodash/fp/trim' {
   declare module.exports: any;
 }
 
-declare module 'lodash/trimChars' {
+declare module 'lodash/fp/trimChars' {
   declare module.exports: any;
 }
 
-declare module 'lodash/trimCharsEnd' {
+declare module 'lodash/fp/trimCharsEnd' {
   declare module.exports: any;
 }
 
-declare module 'lodash/trimCharsStart' {
+declare module 'lodash/fp/trimCharsStart' {
   declare module.exports: any;
 }
 
-declare module 'lodash/trimEnd' {
+declare module 'lodash/fp/trimEnd' {
   declare module.exports: any;
 }
 
-declare module 'lodash/trimStart' {
+declare module 'lodash/fp/trimStart' {
   declare module.exports: any;
 }
 
-declare module 'lodash/truncate' {
+declare module 'lodash/fp/truncate' {
   declare module.exports: any;
 }
 
-declare module 'lodash/unapply' {
+declare module 'lodash/fp/unapply' {
   declare module.exports: any;
 }
 
-declare module 'lodash/unary' {
+declare module 'lodash/fp/unary' {
   declare module.exports: any;
 }
 
-declare module 'lodash/unescape' {
+declare module 'lodash/fp/unescape' {
   declare module.exports: any;
 }
 
-declare module 'lodash/union' {
+declare module 'lodash/fp/union' {
   declare module.exports: any;
 }
 
-declare module 'lodash/unionBy' {
+declare module 'lodash/fp/unionBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/unionWith' {
+declare module 'lodash/fp/unionWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/uniq' {
+declare module 'lodash/fp/uniq' {
   declare module.exports: any;
 }
 
-declare module 'lodash/uniqBy' {
+declare module 'lodash/fp/uniqBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/uniqueId' {
+declare module 'lodash/fp/uniqueId' {
   declare module.exports: any;
 }
 
-declare module 'lodash/uniqWith' {
+declare module 'lodash/fp/uniqWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/unnest' {
+declare module 'lodash/fp/unnest' {
   declare module.exports: any;
 }
 
-declare module 'lodash/unset' {
+declare module 'lodash/fp/unset' {
   declare module.exports: any;
 }
 
-declare module 'lodash/unzip' {
+declare module 'lodash/fp/unzip' {
   declare module.exports: any;
 }
 
-declare module 'lodash/unzipWith' {
+declare module 'lodash/fp/unzipWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/update' {
+declare module 'lodash/fp/update' {
   declare module.exports: any;
 }
 
-declare module 'lodash/updateWith' {
+declare module 'lodash/fp/updateWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/upperCase' {
+declare module 'lodash/fp/upperCase' {
   declare module.exports: any;
 }
 
-declare module 'lodash/upperFirst' {
+declare module 'lodash/fp/upperFirst' {
   declare module.exports: any;
 }
 
-declare module 'lodash/useWith' {
+declare module 'lodash/fp/useWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/util' {
+declare module 'lodash/fp/util' {
   declare module.exports: any;
 }
 
-declare module 'lodash/value' {
+declare module 'lodash/fp/value' {
   declare module.exports: any;
 }
 
-declare module 'lodash/valueOf' {
+declare module 'lodash/fp/valueOf' {
   declare module.exports: any;
 }
 
-declare module 'lodash/values' {
+declare module 'lodash/fp/values' {
   declare module.exports: any;
 }
 
-declare module 'lodash/valuesIn' {
+declare module 'lodash/fp/valuesIn' {
   declare module.exports: any;
 }
 
-declare module 'lodash/where' {
+declare module 'lodash/fp/where' {
   declare module.exports: any;
 }
 
-declare module 'lodash/whereEq' {
+declare module 'lodash/fp/whereEq' {
   declare module.exports: any;
 }
 
-declare module 'lodash/without' {
+declare module 'lodash/fp/without' {
   declare module.exports: any;
 }
 
-declare module 'lodash/words' {
+declare module 'lodash/fp/words' {
   declare module.exports: any;
 }
 
-declare module 'lodash/wrap' {
+declare module 'lodash/fp/wrap' {
   declare module.exports: any;
 }
 
-declare module 'lodash/wrapperAt' {
+declare module 'lodash/fp/wrapperAt' {
   declare module.exports: any;
 }
 
-declare module 'lodash/wrapperChain' {
+declare module 'lodash/fp/wrapperChain' {
   declare module.exports: any;
 }
 
-declare module 'lodash/wrapperLodash' {
+declare module 'lodash/fp/wrapperLodash' {
   declare module.exports: any;
 }
 
-declare module 'lodash/wrapperReverse' {
+declare module 'lodash/fp/wrapperReverse' {
   declare module.exports: any;
 }
 
-declare module 'lodash/wrapperValue' {
+declare module 'lodash/fp/wrapperValue' {
   declare module.exports: any;
 }
 
-declare module 'lodash/xor' {
+declare module 'lodash/fp/xor' {
   declare module.exports: any;
 }
 
-declare module 'lodash/xorBy' {
+declare module 'lodash/fp/xorBy' {
   declare module.exports: any;
 }
 
-declare module 'lodash/xorWith' {
+declare module 'lodash/fp/xorWith' {
   declare module.exports: any;
 }
 
-declare module 'lodash/zip' {
+declare module 'lodash/fp/zip' {
   declare module.exports: any;
 }
 
-declare module 'lodash/zipAll' {
+declare module 'lodash/fp/zipAll' {
   declare module.exports: any;
 }
 
-declare module 'lodash/zipObj' {
+declare module 'lodash/fp/zipObj' {
   declare module.exports: any;
 }
 
-declare module 'lodash/zipObject' {
+declare module 'lodash/fp/zipObject' {
   declare module.exports: any;
 }
 
-declare module 'lodash/zipObjectDeep' {
+declare module 'lodash/fp/zipObjectDeep' {
   declare module.exports: any;
 }
 
-declare module 'lodash/zipWith' {
+declare module 'lodash/fp/zipWith' {
   declare module.exports: any;
 }
 
@@ -4719,6 +4719,9 @@ declare module 'lodash/_DataView.js' {
 declare module 'lodash/_deburrLetter.js' {
   declare module.exports: $Exports<'lodash/_deburrLetter'>;
 }
+declare module 'lodash/_defineProperty.js' {
+  declare module.exports: $Exports<'lodash/_defineProperty'>;
+}
 declare module 'lodash/_equalArrays.js' {
   declare module.exports: $Exports<'lodash/_equalArrays'>;
 }
@@ -4931,9 +4934,6 @@ declare module 'lodash/_metaMap.js' {
 }
 declare module 'lodash/_nativeCreate.js' {
   declare module.exports: $Exports<'lodash/_nativeCreate'>;
-}
-declare module 'lodash/_nativeDefineProperty.js' {
-  declare module.exports: $Exports<'lodash/_nativeDefineProperty'>;
 }
 declare module 'lodash/_nativeKeys.js' {
   declare module.exports: $Exports<'lodash/_nativeKeys'>;
@@ -5352,1250 +5352,1250 @@ declare module 'lodash/forOwnRight.js' {
 declare module 'lodash/fp.js' {
   declare module.exports: $Exports<'lodash/fp'>;
 }
-declare module 'lodash/__.js' {
-  declare module.exports: $Exports<'lodash/__'>;
+declare module 'lodash/fp/__.js' {
+  declare module.exports: $Exports<'lodash/fp/__'>;
 }
-declare module 'lodash/_baseConvert.js' {
-  declare module.exports: $Exports<'lodash/_baseConvert'>;
+declare module 'lodash/fp/_baseConvert.js' {
+  declare module.exports: $Exports<'lodash/fp/_baseConvert'>;
 }
-declare module 'lodash/_convertBrowser.js' {
-  declare module.exports: $Exports<'lodash/_convertBrowser'>;
+declare module 'lodash/fp/_convertBrowser.js' {
+  declare module.exports: $Exports<'lodash/fp/_convertBrowser'>;
 }
-declare module 'lodash/_falseOptions.js' {
-  declare module.exports: $Exports<'lodash/_falseOptions'>;
+declare module 'lodash/fp/_falseOptions.js' {
+  declare module.exports: $Exports<'lodash/fp/_falseOptions'>;
 }
-declare module 'lodash/_mapping.js' {
-  declare module.exports: $Exports<'lodash/_mapping'>;
+declare module 'lodash/fp/_mapping.js' {
+  declare module.exports: $Exports<'lodash/fp/_mapping'>;
 }
-declare module 'lodash/_util.js' {
-  declare module.exports: $Exports<'lodash/_util'>;
+declare module 'lodash/fp/_util.js' {
+  declare module.exports: $Exports<'lodash/fp/_util'>;
 }
-declare module 'lodash/add.js' {
-  declare module.exports: $Exports<'lodash/add'>;
+declare module 'lodash/fp/add.js' {
+  declare module.exports: $Exports<'lodash/fp/add'>;
 }
-declare module 'lodash/after.js' {
-  declare module.exports: $Exports<'lodash/after'>;
+declare module 'lodash/fp/after.js' {
+  declare module.exports: $Exports<'lodash/fp/after'>;
 }
-declare module 'lodash/all.js' {
-  declare module.exports: $Exports<'lodash/all'>;
+declare module 'lodash/fp/all.js' {
+  declare module.exports: $Exports<'lodash/fp/all'>;
 }
-declare module 'lodash/allPass.js' {
-  declare module.exports: $Exports<'lodash/allPass'>;
+declare module 'lodash/fp/allPass.js' {
+  declare module.exports: $Exports<'lodash/fp/allPass'>;
 }
-declare module 'lodash/always.js' {
-  declare module.exports: $Exports<'lodash/always'>;
+declare module 'lodash/fp/always.js' {
+  declare module.exports: $Exports<'lodash/fp/always'>;
 }
-declare module 'lodash/any.js' {
-  declare module.exports: $Exports<'lodash/any'>;
+declare module 'lodash/fp/any.js' {
+  declare module.exports: $Exports<'lodash/fp/any'>;
 }
-declare module 'lodash/anyPass.js' {
-  declare module.exports: $Exports<'lodash/anyPass'>;
+declare module 'lodash/fp/anyPass.js' {
+  declare module.exports: $Exports<'lodash/fp/anyPass'>;
 }
-declare module 'lodash/apply.js' {
-  declare module.exports: $Exports<'lodash/apply'>;
+declare module 'lodash/fp/apply.js' {
+  declare module.exports: $Exports<'lodash/fp/apply'>;
 }
-declare module 'lodash/array.js' {
-  declare module.exports: $Exports<'lodash/array'>;
+declare module 'lodash/fp/array.js' {
+  declare module.exports: $Exports<'lodash/fp/array'>;
 }
-declare module 'lodash/ary.js' {
-  declare module.exports: $Exports<'lodash/ary'>;
+declare module 'lodash/fp/ary.js' {
+  declare module.exports: $Exports<'lodash/fp/ary'>;
 }
-declare module 'lodash/assign.js' {
-  declare module.exports: $Exports<'lodash/assign'>;
+declare module 'lodash/fp/assign.js' {
+  declare module.exports: $Exports<'lodash/fp/assign'>;
 }
-declare module 'lodash/assignAll.js' {
-  declare module.exports: $Exports<'lodash/assignAll'>;
+declare module 'lodash/fp/assignAll.js' {
+  declare module.exports: $Exports<'lodash/fp/assignAll'>;
 }
-declare module 'lodash/assignAllWith.js' {
-  declare module.exports: $Exports<'lodash/assignAllWith'>;
+declare module 'lodash/fp/assignAllWith.js' {
+  declare module.exports: $Exports<'lodash/fp/assignAllWith'>;
 }
-declare module 'lodash/assignIn.js' {
-  declare module.exports: $Exports<'lodash/assignIn'>;
+declare module 'lodash/fp/assignIn.js' {
+  declare module.exports: $Exports<'lodash/fp/assignIn'>;
 }
-declare module 'lodash/assignInAll.js' {
-  declare module.exports: $Exports<'lodash/assignInAll'>;
+declare module 'lodash/fp/assignInAll.js' {
+  declare module.exports: $Exports<'lodash/fp/assignInAll'>;
 }
-declare module 'lodash/assignInAllWith.js' {
-  declare module.exports: $Exports<'lodash/assignInAllWith'>;
+declare module 'lodash/fp/assignInAllWith.js' {
+  declare module.exports: $Exports<'lodash/fp/assignInAllWith'>;
 }
-declare module 'lodash/assignInWith.js' {
-  declare module.exports: $Exports<'lodash/assignInWith'>;
+declare module 'lodash/fp/assignInWith.js' {
+  declare module.exports: $Exports<'lodash/fp/assignInWith'>;
 }
-declare module 'lodash/assignWith.js' {
-  declare module.exports: $Exports<'lodash/assignWith'>;
+declare module 'lodash/fp/assignWith.js' {
+  declare module.exports: $Exports<'lodash/fp/assignWith'>;
 }
-declare module 'lodash/assoc.js' {
-  declare module.exports: $Exports<'lodash/assoc'>;
+declare module 'lodash/fp/assoc.js' {
+  declare module.exports: $Exports<'lodash/fp/assoc'>;
 }
-declare module 'lodash/assocPath.js' {
-  declare module.exports: $Exports<'lodash/assocPath'>;
+declare module 'lodash/fp/assocPath.js' {
+  declare module.exports: $Exports<'lodash/fp/assocPath'>;
 }
-declare module 'lodash/at.js' {
-  declare module.exports: $Exports<'lodash/at'>;
+declare module 'lodash/fp/at.js' {
+  declare module.exports: $Exports<'lodash/fp/at'>;
 }
-declare module 'lodash/attempt.js' {
-  declare module.exports: $Exports<'lodash/attempt'>;
+declare module 'lodash/fp/attempt.js' {
+  declare module.exports: $Exports<'lodash/fp/attempt'>;
 }
-declare module 'lodash/before.js' {
-  declare module.exports: $Exports<'lodash/before'>;
+declare module 'lodash/fp/before.js' {
+  declare module.exports: $Exports<'lodash/fp/before'>;
 }
-declare module 'lodash/bind.js' {
-  declare module.exports: $Exports<'lodash/bind'>;
+declare module 'lodash/fp/bind.js' {
+  declare module.exports: $Exports<'lodash/fp/bind'>;
 }
-declare module 'lodash/bindAll.js' {
-  declare module.exports: $Exports<'lodash/bindAll'>;
+declare module 'lodash/fp/bindAll.js' {
+  declare module.exports: $Exports<'lodash/fp/bindAll'>;
 }
-declare module 'lodash/bindKey.js' {
-  declare module.exports: $Exports<'lodash/bindKey'>;
+declare module 'lodash/fp/bindKey.js' {
+  declare module.exports: $Exports<'lodash/fp/bindKey'>;
 }
-declare module 'lodash/camelCase.js' {
-  declare module.exports: $Exports<'lodash/camelCase'>;
+declare module 'lodash/fp/camelCase.js' {
+  declare module.exports: $Exports<'lodash/fp/camelCase'>;
 }
-declare module 'lodash/capitalize.js' {
-  declare module.exports: $Exports<'lodash/capitalize'>;
+declare module 'lodash/fp/capitalize.js' {
+  declare module.exports: $Exports<'lodash/fp/capitalize'>;
 }
-declare module 'lodash/castArray.js' {
-  declare module.exports: $Exports<'lodash/castArray'>;
+declare module 'lodash/fp/castArray.js' {
+  declare module.exports: $Exports<'lodash/fp/castArray'>;
 }
-declare module 'lodash/ceil.js' {
-  declare module.exports: $Exports<'lodash/ceil'>;
+declare module 'lodash/fp/ceil.js' {
+  declare module.exports: $Exports<'lodash/fp/ceil'>;
 }
-declare module 'lodash/chain.js' {
-  declare module.exports: $Exports<'lodash/chain'>;
+declare module 'lodash/fp/chain.js' {
+  declare module.exports: $Exports<'lodash/fp/chain'>;
 }
-declare module 'lodash/chunk.js' {
-  declare module.exports: $Exports<'lodash/chunk'>;
+declare module 'lodash/fp/chunk.js' {
+  declare module.exports: $Exports<'lodash/fp/chunk'>;
 }
-declare module 'lodash/clamp.js' {
-  declare module.exports: $Exports<'lodash/clamp'>;
+declare module 'lodash/fp/clamp.js' {
+  declare module.exports: $Exports<'lodash/fp/clamp'>;
 }
-declare module 'lodash/clone.js' {
-  declare module.exports: $Exports<'lodash/clone'>;
+declare module 'lodash/fp/clone.js' {
+  declare module.exports: $Exports<'lodash/fp/clone'>;
 }
-declare module 'lodash/cloneDeep.js' {
-  declare module.exports: $Exports<'lodash/cloneDeep'>;
+declare module 'lodash/fp/cloneDeep.js' {
+  declare module.exports: $Exports<'lodash/fp/cloneDeep'>;
 }
-declare module 'lodash/cloneDeepWith.js' {
-  declare module.exports: $Exports<'lodash/cloneDeepWith'>;
+declare module 'lodash/fp/cloneDeepWith.js' {
+  declare module.exports: $Exports<'lodash/fp/cloneDeepWith'>;
 }
-declare module 'lodash/cloneWith.js' {
-  declare module.exports: $Exports<'lodash/cloneWith'>;
+declare module 'lodash/fp/cloneWith.js' {
+  declare module.exports: $Exports<'lodash/fp/cloneWith'>;
 }
-declare module 'lodash/collection.js' {
-  declare module.exports: $Exports<'lodash/collection'>;
+declare module 'lodash/fp/collection.js' {
+  declare module.exports: $Exports<'lodash/fp/collection'>;
 }
-declare module 'lodash/commit.js' {
-  declare module.exports: $Exports<'lodash/commit'>;
+declare module 'lodash/fp/commit.js' {
+  declare module.exports: $Exports<'lodash/fp/commit'>;
 }
-declare module 'lodash/compact.js' {
-  declare module.exports: $Exports<'lodash/compact'>;
+declare module 'lodash/fp/compact.js' {
+  declare module.exports: $Exports<'lodash/fp/compact'>;
 }
-declare module 'lodash/complement.js' {
-  declare module.exports: $Exports<'lodash/complement'>;
+declare module 'lodash/fp/complement.js' {
+  declare module.exports: $Exports<'lodash/fp/complement'>;
 }
-declare module 'lodash/compose.js' {
-  declare module.exports: $Exports<'lodash/compose'>;
+declare module 'lodash/fp/compose.js' {
+  declare module.exports: $Exports<'lodash/fp/compose'>;
 }
-declare module 'lodash/concat.js' {
-  declare module.exports: $Exports<'lodash/concat'>;
+declare module 'lodash/fp/concat.js' {
+  declare module.exports: $Exports<'lodash/fp/concat'>;
 }
-declare module 'lodash/cond.js' {
-  declare module.exports: $Exports<'lodash/cond'>;
+declare module 'lodash/fp/cond.js' {
+  declare module.exports: $Exports<'lodash/fp/cond'>;
 }
-declare module 'lodash/conforms.js' {
-  declare module.exports: $Exports<'lodash/conforms'>;
+declare module 'lodash/fp/conforms.js' {
+  declare module.exports: $Exports<'lodash/fp/conforms'>;
 }
-declare module 'lodash/conformsTo.js' {
-  declare module.exports: $Exports<'lodash/conformsTo'>;
+declare module 'lodash/fp/conformsTo.js' {
+  declare module.exports: $Exports<'lodash/fp/conformsTo'>;
 }
-declare module 'lodash/constant.js' {
-  declare module.exports: $Exports<'lodash/constant'>;
+declare module 'lodash/fp/constant.js' {
+  declare module.exports: $Exports<'lodash/fp/constant'>;
 }
-declare module 'lodash/contains.js' {
-  declare module.exports: $Exports<'lodash/contains'>;
+declare module 'lodash/fp/contains.js' {
+  declare module.exports: $Exports<'lodash/fp/contains'>;
 }
-declare module 'lodash/convert.js' {
-  declare module.exports: $Exports<'lodash/convert'>;
+declare module 'lodash/fp/convert.js' {
+  declare module.exports: $Exports<'lodash/fp/convert'>;
 }
-declare module 'lodash/countBy.js' {
-  declare module.exports: $Exports<'lodash/countBy'>;
+declare module 'lodash/fp/countBy.js' {
+  declare module.exports: $Exports<'lodash/fp/countBy'>;
 }
-declare module 'lodash/create.js' {
-  declare module.exports: $Exports<'lodash/create'>;
+declare module 'lodash/fp/create.js' {
+  declare module.exports: $Exports<'lodash/fp/create'>;
 }
-declare module 'lodash/curry.js' {
-  declare module.exports: $Exports<'lodash/curry'>;
+declare module 'lodash/fp/curry.js' {
+  declare module.exports: $Exports<'lodash/fp/curry'>;
 }
-declare module 'lodash/curryN.js' {
-  declare module.exports: $Exports<'lodash/curryN'>;
+declare module 'lodash/fp/curryN.js' {
+  declare module.exports: $Exports<'lodash/fp/curryN'>;
 }
-declare module 'lodash/curryRight.js' {
-  declare module.exports: $Exports<'lodash/curryRight'>;
+declare module 'lodash/fp/curryRight.js' {
+  declare module.exports: $Exports<'lodash/fp/curryRight'>;
 }
-declare module 'lodash/curryRightN.js' {
-  declare module.exports: $Exports<'lodash/curryRightN'>;
+declare module 'lodash/fp/curryRightN.js' {
+  declare module.exports: $Exports<'lodash/fp/curryRightN'>;
 }
-declare module 'lodash/date.js' {
-  declare module.exports: $Exports<'lodash/date'>;
+declare module 'lodash/fp/date.js' {
+  declare module.exports: $Exports<'lodash/fp/date'>;
 }
-declare module 'lodash/debounce.js' {
-  declare module.exports: $Exports<'lodash/debounce'>;
+declare module 'lodash/fp/debounce.js' {
+  declare module.exports: $Exports<'lodash/fp/debounce'>;
 }
-declare module 'lodash/deburr.js' {
-  declare module.exports: $Exports<'lodash/deburr'>;
+declare module 'lodash/fp/deburr.js' {
+  declare module.exports: $Exports<'lodash/fp/deburr'>;
 }
-declare module 'lodash/defaults.js' {
-  declare module.exports: $Exports<'lodash/defaults'>;
+declare module 'lodash/fp/defaults.js' {
+  declare module.exports: $Exports<'lodash/fp/defaults'>;
 }
-declare module 'lodash/defaultsAll.js' {
-  declare module.exports: $Exports<'lodash/defaultsAll'>;
+declare module 'lodash/fp/defaultsAll.js' {
+  declare module.exports: $Exports<'lodash/fp/defaultsAll'>;
 }
-declare module 'lodash/defaultsDeep.js' {
-  declare module.exports: $Exports<'lodash/defaultsDeep'>;
+declare module 'lodash/fp/defaultsDeep.js' {
+  declare module.exports: $Exports<'lodash/fp/defaultsDeep'>;
 }
-declare module 'lodash/defaultsDeepAll.js' {
-  declare module.exports: $Exports<'lodash/defaultsDeepAll'>;
+declare module 'lodash/fp/defaultsDeepAll.js' {
+  declare module.exports: $Exports<'lodash/fp/defaultsDeepAll'>;
 }
-declare module 'lodash/defaultTo.js' {
-  declare module.exports: $Exports<'lodash/defaultTo'>;
+declare module 'lodash/fp/defaultTo.js' {
+  declare module.exports: $Exports<'lodash/fp/defaultTo'>;
 }
-declare module 'lodash/defer.js' {
-  declare module.exports: $Exports<'lodash/defer'>;
+declare module 'lodash/fp/defer.js' {
+  declare module.exports: $Exports<'lodash/fp/defer'>;
 }
-declare module 'lodash/delay.js' {
-  declare module.exports: $Exports<'lodash/delay'>;
+declare module 'lodash/fp/delay.js' {
+  declare module.exports: $Exports<'lodash/fp/delay'>;
 }
-declare module 'lodash/difference.js' {
-  declare module.exports: $Exports<'lodash/difference'>;
+declare module 'lodash/fp/difference.js' {
+  declare module.exports: $Exports<'lodash/fp/difference'>;
 }
-declare module 'lodash/differenceBy.js' {
-  declare module.exports: $Exports<'lodash/differenceBy'>;
+declare module 'lodash/fp/differenceBy.js' {
+  declare module.exports: $Exports<'lodash/fp/differenceBy'>;
 }
-declare module 'lodash/differenceWith.js' {
-  declare module.exports: $Exports<'lodash/differenceWith'>;
+declare module 'lodash/fp/differenceWith.js' {
+  declare module.exports: $Exports<'lodash/fp/differenceWith'>;
 }
-declare module 'lodash/dissoc.js' {
-  declare module.exports: $Exports<'lodash/dissoc'>;
+declare module 'lodash/fp/dissoc.js' {
+  declare module.exports: $Exports<'lodash/fp/dissoc'>;
 }
-declare module 'lodash/dissocPath.js' {
-  declare module.exports: $Exports<'lodash/dissocPath'>;
+declare module 'lodash/fp/dissocPath.js' {
+  declare module.exports: $Exports<'lodash/fp/dissocPath'>;
 }
-declare module 'lodash/divide.js' {
-  declare module.exports: $Exports<'lodash/divide'>;
+declare module 'lodash/fp/divide.js' {
+  declare module.exports: $Exports<'lodash/fp/divide'>;
 }
-declare module 'lodash/drop.js' {
-  declare module.exports: $Exports<'lodash/drop'>;
+declare module 'lodash/fp/drop.js' {
+  declare module.exports: $Exports<'lodash/fp/drop'>;
 }
-declare module 'lodash/dropLast.js' {
-  declare module.exports: $Exports<'lodash/dropLast'>;
+declare module 'lodash/fp/dropLast.js' {
+  declare module.exports: $Exports<'lodash/fp/dropLast'>;
 }
-declare module 'lodash/dropLastWhile.js' {
-  declare module.exports: $Exports<'lodash/dropLastWhile'>;
+declare module 'lodash/fp/dropLastWhile.js' {
+  declare module.exports: $Exports<'lodash/fp/dropLastWhile'>;
 }
-declare module 'lodash/dropRight.js' {
-  declare module.exports: $Exports<'lodash/dropRight'>;
+declare module 'lodash/fp/dropRight.js' {
+  declare module.exports: $Exports<'lodash/fp/dropRight'>;
 }
-declare module 'lodash/dropRightWhile.js' {
-  declare module.exports: $Exports<'lodash/dropRightWhile'>;
+declare module 'lodash/fp/dropRightWhile.js' {
+  declare module.exports: $Exports<'lodash/fp/dropRightWhile'>;
 }
-declare module 'lodash/dropWhile.js' {
-  declare module.exports: $Exports<'lodash/dropWhile'>;
+declare module 'lodash/fp/dropWhile.js' {
+  declare module.exports: $Exports<'lodash/fp/dropWhile'>;
 }
-declare module 'lodash/each.js' {
-  declare module.exports: $Exports<'lodash/each'>;
+declare module 'lodash/fp/each.js' {
+  declare module.exports: $Exports<'lodash/fp/each'>;
 }
-declare module 'lodash/eachRight.js' {
-  declare module.exports: $Exports<'lodash/eachRight'>;
+declare module 'lodash/fp/eachRight.js' {
+  declare module.exports: $Exports<'lodash/fp/eachRight'>;
 }
-declare module 'lodash/endsWith.js' {
-  declare module.exports: $Exports<'lodash/endsWith'>;
+declare module 'lodash/fp/endsWith.js' {
+  declare module.exports: $Exports<'lodash/fp/endsWith'>;
 }
-declare module 'lodash/entries.js' {
-  declare module.exports: $Exports<'lodash/entries'>;
+declare module 'lodash/fp/entries.js' {
+  declare module.exports: $Exports<'lodash/fp/entries'>;
 }
-declare module 'lodash/entriesIn.js' {
-  declare module.exports: $Exports<'lodash/entriesIn'>;
+declare module 'lodash/fp/entriesIn.js' {
+  declare module.exports: $Exports<'lodash/fp/entriesIn'>;
 }
-declare module 'lodash/eq.js' {
-  declare module.exports: $Exports<'lodash/eq'>;
+declare module 'lodash/fp/eq.js' {
+  declare module.exports: $Exports<'lodash/fp/eq'>;
 }
-declare module 'lodash/equals.js' {
-  declare module.exports: $Exports<'lodash/equals'>;
+declare module 'lodash/fp/equals.js' {
+  declare module.exports: $Exports<'lodash/fp/equals'>;
 }
-declare module 'lodash/escape.js' {
-  declare module.exports: $Exports<'lodash/escape'>;
+declare module 'lodash/fp/escape.js' {
+  declare module.exports: $Exports<'lodash/fp/escape'>;
 }
-declare module 'lodash/escapeRegExp.js' {
-  declare module.exports: $Exports<'lodash/escapeRegExp'>;
+declare module 'lodash/fp/escapeRegExp.js' {
+  declare module.exports: $Exports<'lodash/fp/escapeRegExp'>;
 }
-declare module 'lodash/every.js' {
-  declare module.exports: $Exports<'lodash/every'>;
+declare module 'lodash/fp/every.js' {
+  declare module.exports: $Exports<'lodash/fp/every'>;
 }
-declare module 'lodash/extend.js' {
-  declare module.exports: $Exports<'lodash/extend'>;
+declare module 'lodash/fp/extend.js' {
+  declare module.exports: $Exports<'lodash/fp/extend'>;
 }
-declare module 'lodash/extendAll.js' {
-  declare module.exports: $Exports<'lodash/extendAll'>;
+declare module 'lodash/fp/extendAll.js' {
+  declare module.exports: $Exports<'lodash/fp/extendAll'>;
 }
-declare module 'lodash/extendAllWith.js' {
-  declare module.exports: $Exports<'lodash/extendAllWith'>;
+declare module 'lodash/fp/extendAllWith.js' {
+  declare module.exports: $Exports<'lodash/fp/extendAllWith'>;
 }
-declare module 'lodash/extendWith.js' {
-  declare module.exports: $Exports<'lodash/extendWith'>;
+declare module 'lodash/fp/extendWith.js' {
+  declare module.exports: $Exports<'lodash/fp/extendWith'>;
 }
-declare module 'lodash/F.js' {
-  declare module.exports: $Exports<'lodash/F'>;
+declare module 'lodash/fp/F.js' {
+  declare module.exports: $Exports<'lodash/fp/F'>;
 }
-declare module 'lodash/fill.js' {
-  declare module.exports: $Exports<'lodash/fill'>;
+declare module 'lodash/fp/fill.js' {
+  declare module.exports: $Exports<'lodash/fp/fill'>;
 }
-declare module 'lodash/filter.js' {
-  declare module.exports: $Exports<'lodash/filter'>;
+declare module 'lodash/fp/filter.js' {
+  declare module.exports: $Exports<'lodash/fp/filter'>;
 }
-declare module 'lodash/find.js' {
-  declare module.exports: $Exports<'lodash/find'>;
+declare module 'lodash/fp/find.js' {
+  declare module.exports: $Exports<'lodash/fp/find'>;
 }
-declare module 'lodash/findFrom.js' {
-  declare module.exports: $Exports<'lodash/findFrom'>;
+declare module 'lodash/fp/findFrom.js' {
+  declare module.exports: $Exports<'lodash/fp/findFrom'>;
 }
-declare module 'lodash/findIndex.js' {
-  declare module.exports: $Exports<'lodash/findIndex'>;
+declare module 'lodash/fp/findIndex.js' {
+  declare module.exports: $Exports<'lodash/fp/findIndex'>;
 }
-declare module 'lodash/findIndexFrom.js' {
-  declare module.exports: $Exports<'lodash/findIndexFrom'>;
+declare module 'lodash/fp/findIndexFrom.js' {
+  declare module.exports: $Exports<'lodash/fp/findIndexFrom'>;
 }
-declare module 'lodash/findKey.js' {
-  declare module.exports: $Exports<'lodash/findKey'>;
+declare module 'lodash/fp/findKey.js' {
+  declare module.exports: $Exports<'lodash/fp/findKey'>;
 }
-declare module 'lodash/findLast.js' {
-  declare module.exports: $Exports<'lodash/findLast'>;
+declare module 'lodash/fp/findLast.js' {
+  declare module.exports: $Exports<'lodash/fp/findLast'>;
 }
-declare module 'lodash/findLastFrom.js' {
-  declare module.exports: $Exports<'lodash/findLastFrom'>;
+declare module 'lodash/fp/findLastFrom.js' {
+  declare module.exports: $Exports<'lodash/fp/findLastFrom'>;
 }
-declare module 'lodash/findLastIndex.js' {
-  declare module.exports: $Exports<'lodash/findLastIndex'>;
+declare module 'lodash/fp/findLastIndex.js' {
+  declare module.exports: $Exports<'lodash/fp/findLastIndex'>;
 }
-declare module 'lodash/findLastIndexFrom.js' {
-  declare module.exports: $Exports<'lodash/findLastIndexFrom'>;
+declare module 'lodash/fp/findLastIndexFrom.js' {
+  declare module.exports: $Exports<'lodash/fp/findLastIndexFrom'>;
 }
-declare module 'lodash/findLastKey.js' {
-  declare module.exports: $Exports<'lodash/findLastKey'>;
+declare module 'lodash/fp/findLastKey.js' {
+  declare module.exports: $Exports<'lodash/fp/findLastKey'>;
 }
-declare module 'lodash/first.js' {
-  declare module.exports: $Exports<'lodash/first'>;
+declare module 'lodash/fp/first.js' {
+  declare module.exports: $Exports<'lodash/fp/first'>;
 }
-declare module 'lodash/flatMap.js' {
-  declare module.exports: $Exports<'lodash/flatMap'>;
+declare module 'lodash/fp/flatMap.js' {
+  declare module.exports: $Exports<'lodash/fp/flatMap'>;
 }
-declare module 'lodash/flatMapDeep.js' {
-  declare module.exports: $Exports<'lodash/flatMapDeep'>;
+declare module 'lodash/fp/flatMapDeep.js' {
+  declare module.exports: $Exports<'lodash/fp/flatMapDeep'>;
 }
-declare module 'lodash/flatMapDepth.js' {
-  declare module.exports: $Exports<'lodash/flatMapDepth'>;
+declare module 'lodash/fp/flatMapDepth.js' {
+  declare module.exports: $Exports<'lodash/fp/flatMapDepth'>;
 }
-declare module 'lodash/flatten.js' {
-  declare module.exports: $Exports<'lodash/flatten'>;
+declare module 'lodash/fp/flatten.js' {
+  declare module.exports: $Exports<'lodash/fp/flatten'>;
 }
-declare module 'lodash/flattenDeep.js' {
-  declare module.exports: $Exports<'lodash/flattenDeep'>;
+declare module 'lodash/fp/flattenDeep.js' {
+  declare module.exports: $Exports<'lodash/fp/flattenDeep'>;
 }
-declare module 'lodash/flattenDepth.js' {
-  declare module.exports: $Exports<'lodash/flattenDepth'>;
+declare module 'lodash/fp/flattenDepth.js' {
+  declare module.exports: $Exports<'lodash/fp/flattenDepth'>;
 }
-declare module 'lodash/flip.js' {
-  declare module.exports: $Exports<'lodash/flip'>;
+declare module 'lodash/fp/flip.js' {
+  declare module.exports: $Exports<'lodash/fp/flip'>;
 }
-declare module 'lodash/floor.js' {
-  declare module.exports: $Exports<'lodash/floor'>;
+declare module 'lodash/fp/floor.js' {
+  declare module.exports: $Exports<'lodash/fp/floor'>;
 }
-declare module 'lodash/flow.js' {
-  declare module.exports: $Exports<'lodash/flow'>;
+declare module 'lodash/fp/flow.js' {
+  declare module.exports: $Exports<'lodash/fp/flow'>;
 }
-declare module 'lodash/flowRight.js' {
-  declare module.exports: $Exports<'lodash/flowRight'>;
+declare module 'lodash/fp/flowRight.js' {
+  declare module.exports: $Exports<'lodash/fp/flowRight'>;
 }
-declare module 'lodash/forEach.js' {
-  declare module.exports: $Exports<'lodash/forEach'>;
+declare module 'lodash/fp/forEach.js' {
+  declare module.exports: $Exports<'lodash/fp/forEach'>;
 }
-declare module 'lodash/forEachRight.js' {
-  declare module.exports: $Exports<'lodash/forEachRight'>;
+declare module 'lodash/fp/forEachRight.js' {
+  declare module.exports: $Exports<'lodash/fp/forEachRight'>;
 }
-declare module 'lodash/forIn.js' {
-  declare module.exports: $Exports<'lodash/forIn'>;
+declare module 'lodash/fp/forIn.js' {
+  declare module.exports: $Exports<'lodash/fp/forIn'>;
 }
-declare module 'lodash/forInRight.js' {
-  declare module.exports: $Exports<'lodash/forInRight'>;
+declare module 'lodash/fp/forInRight.js' {
+  declare module.exports: $Exports<'lodash/fp/forInRight'>;
 }
-declare module 'lodash/forOwn.js' {
-  declare module.exports: $Exports<'lodash/forOwn'>;
+declare module 'lodash/fp/forOwn.js' {
+  declare module.exports: $Exports<'lodash/fp/forOwn'>;
 }
-declare module 'lodash/forOwnRight.js' {
-  declare module.exports: $Exports<'lodash/forOwnRight'>;
+declare module 'lodash/fp/forOwnRight.js' {
+  declare module.exports: $Exports<'lodash/fp/forOwnRight'>;
 }
-declare module 'lodash/fromPairs.js' {
-  declare module.exports: $Exports<'lodash/fromPairs'>;
+declare module 'lodash/fp/fromPairs.js' {
+  declare module.exports: $Exports<'lodash/fp/fromPairs'>;
 }
-declare module 'lodash/function.js' {
-  declare module.exports: $Exports<'lodash/function'>;
+declare module 'lodash/fp/function.js' {
+  declare module.exports: $Exports<'lodash/fp/function'>;
 }
-declare module 'lodash/functions.js' {
-  declare module.exports: $Exports<'lodash/functions'>;
+declare module 'lodash/fp/functions.js' {
+  declare module.exports: $Exports<'lodash/fp/functions'>;
 }
-declare module 'lodash/functionsIn.js' {
-  declare module.exports: $Exports<'lodash/functionsIn'>;
+declare module 'lodash/fp/functionsIn.js' {
+  declare module.exports: $Exports<'lodash/fp/functionsIn'>;
 }
-declare module 'lodash/get.js' {
-  declare module.exports: $Exports<'lodash/get'>;
+declare module 'lodash/fp/get.js' {
+  declare module.exports: $Exports<'lodash/fp/get'>;
 }
-declare module 'lodash/getOr.js' {
-  declare module.exports: $Exports<'lodash/getOr'>;
+declare module 'lodash/fp/getOr.js' {
+  declare module.exports: $Exports<'lodash/fp/getOr'>;
 }
-declare module 'lodash/groupBy.js' {
-  declare module.exports: $Exports<'lodash/groupBy'>;
+declare module 'lodash/fp/groupBy.js' {
+  declare module.exports: $Exports<'lodash/fp/groupBy'>;
 }
-declare module 'lodash/gt.js' {
-  declare module.exports: $Exports<'lodash/gt'>;
+declare module 'lodash/fp/gt.js' {
+  declare module.exports: $Exports<'lodash/fp/gt'>;
 }
-declare module 'lodash/gte.js' {
-  declare module.exports: $Exports<'lodash/gte'>;
+declare module 'lodash/fp/gte.js' {
+  declare module.exports: $Exports<'lodash/fp/gte'>;
 }
-declare module 'lodash/has.js' {
-  declare module.exports: $Exports<'lodash/has'>;
+declare module 'lodash/fp/has.js' {
+  declare module.exports: $Exports<'lodash/fp/has'>;
 }
-declare module 'lodash/hasIn.js' {
-  declare module.exports: $Exports<'lodash/hasIn'>;
+declare module 'lodash/fp/hasIn.js' {
+  declare module.exports: $Exports<'lodash/fp/hasIn'>;
 }
-declare module 'lodash/head.js' {
-  declare module.exports: $Exports<'lodash/head'>;
+declare module 'lodash/fp/head.js' {
+  declare module.exports: $Exports<'lodash/fp/head'>;
 }
-declare module 'lodash/identical.js' {
-  declare module.exports: $Exports<'lodash/identical'>;
+declare module 'lodash/fp/identical.js' {
+  declare module.exports: $Exports<'lodash/fp/identical'>;
 }
-declare module 'lodash/identity.js' {
-  declare module.exports: $Exports<'lodash/identity'>;
+declare module 'lodash/fp/identity.js' {
+  declare module.exports: $Exports<'lodash/fp/identity'>;
 }
-declare module 'lodash/includes.js' {
-  declare module.exports: $Exports<'lodash/includes'>;
+declare module 'lodash/fp/includes.js' {
+  declare module.exports: $Exports<'lodash/fp/includes'>;
 }
-declare module 'lodash/includesFrom.js' {
-  declare module.exports: $Exports<'lodash/includesFrom'>;
+declare module 'lodash/fp/includesFrom.js' {
+  declare module.exports: $Exports<'lodash/fp/includesFrom'>;
 }
-declare module 'lodash/indexBy.js' {
-  declare module.exports: $Exports<'lodash/indexBy'>;
+declare module 'lodash/fp/indexBy.js' {
+  declare module.exports: $Exports<'lodash/fp/indexBy'>;
 }
-declare module 'lodash/indexOf.js' {
-  declare module.exports: $Exports<'lodash/indexOf'>;
+declare module 'lodash/fp/indexOf.js' {
+  declare module.exports: $Exports<'lodash/fp/indexOf'>;
 }
-declare module 'lodash/indexOfFrom.js' {
-  declare module.exports: $Exports<'lodash/indexOfFrom'>;
+declare module 'lodash/fp/indexOfFrom.js' {
+  declare module.exports: $Exports<'lodash/fp/indexOfFrom'>;
 }
-declare module 'lodash/init.js' {
-  declare module.exports: $Exports<'lodash/init'>;
+declare module 'lodash/fp/init.js' {
+  declare module.exports: $Exports<'lodash/fp/init'>;
 }
-declare module 'lodash/initial.js' {
-  declare module.exports: $Exports<'lodash/initial'>;
+declare module 'lodash/fp/initial.js' {
+  declare module.exports: $Exports<'lodash/fp/initial'>;
 }
-declare module 'lodash/inRange.js' {
-  declare module.exports: $Exports<'lodash/inRange'>;
+declare module 'lodash/fp/inRange.js' {
+  declare module.exports: $Exports<'lodash/fp/inRange'>;
 }
-declare module 'lodash/intersection.js' {
-  declare module.exports: $Exports<'lodash/intersection'>;
+declare module 'lodash/fp/intersection.js' {
+  declare module.exports: $Exports<'lodash/fp/intersection'>;
 }
-declare module 'lodash/intersectionBy.js' {
-  declare module.exports: $Exports<'lodash/intersectionBy'>;
+declare module 'lodash/fp/intersectionBy.js' {
+  declare module.exports: $Exports<'lodash/fp/intersectionBy'>;
 }
-declare module 'lodash/intersectionWith.js' {
-  declare module.exports: $Exports<'lodash/intersectionWith'>;
+declare module 'lodash/fp/intersectionWith.js' {
+  declare module.exports: $Exports<'lodash/fp/intersectionWith'>;
 }
-declare module 'lodash/invert.js' {
-  declare module.exports: $Exports<'lodash/invert'>;
+declare module 'lodash/fp/invert.js' {
+  declare module.exports: $Exports<'lodash/fp/invert'>;
 }
-declare module 'lodash/invertBy.js' {
-  declare module.exports: $Exports<'lodash/invertBy'>;
+declare module 'lodash/fp/invertBy.js' {
+  declare module.exports: $Exports<'lodash/fp/invertBy'>;
 }
-declare module 'lodash/invertObj.js' {
-  declare module.exports: $Exports<'lodash/invertObj'>;
+declare module 'lodash/fp/invertObj.js' {
+  declare module.exports: $Exports<'lodash/fp/invertObj'>;
 }
-declare module 'lodash/invoke.js' {
-  declare module.exports: $Exports<'lodash/invoke'>;
+declare module 'lodash/fp/invoke.js' {
+  declare module.exports: $Exports<'lodash/fp/invoke'>;
 }
-declare module 'lodash/invokeArgs.js' {
-  declare module.exports: $Exports<'lodash/invokeArgs'>;
+declare module 'lodash/fp/invokeArgs.js' {
+  declare module.exports: $Exports<'lodash/fp/invokeArgs'>;
 }
-declare module 'lodash/invokeArgsMap.js' {
-  declare module.exports: $Exports<'lodash/invokeArgsMap'>;
+declare module 'lodash/fp/invokeArgsMap.js' {
+  declare module.exports: $Exports<'lodash/fp/invokeArgsMap'>;
 }
-declare module 'lodash/invokeMap.js' {
-  declare module.exports: $Exports<'lodash/invokeMap'>;
+declare module 'lodash/fp/invokeMap.js' {
+  declare module.exports: $Exports<'lodash/fp/invokeMap'>;
 }
-declare module 'lodash/isArguments.js' {
-  declare module.exports: $Exports<'lodash/isArguments'>;
+declare module 'lodash/fp/isArguments.js' {
+  declare module.exports: $Exports<'lodash/fp/isArguments'>;
 }
-declare module 'lodash/isArray.js' {
-  declare module.exports: $Exports<'lodash/isArray'>;
+declare module 'lodash/fp/isArray.js' {
+  declare module.exports: $Exports<'lodash/fp/isArray'>;
 }
-declare module 'lodash/isArrayBuffer.js' {
-  declare module.exports: $Exports<'lodash/isArrayBuffer'>;
+declare module 'lodash/fp/isArrayBuffer.js' {
+  declare module.exports: $Exports<'lodash/fp/isArrayBuffer'>;
 }
-declare module 'lodash/isArrayLike.js' {
-  declare module.exports: $Exports<'lodash/isArrayLike'>;
+declare module 'lodash/fp/isArrayLike.js' {
+  declare module.exports: $Exports<'lodash/fp/isArrayLike'>;
 }
-declare module 'lodash/isArrayLikeObject.js' {
-  declare module.exports: $Exports<'lodash/isArrayLikeObject'>;
+declare module 'lodash/fp/isArrayLikeObject.js' {
+  declare module.exports: $Exports<'lodash/fp/isArrayLikeObject'>;
 }
-declare module 'lodash/isBoolean.js' {
-  declare module.exports: $Exports<'lodash/isBoolean'>;
+declare module 'lodash/fp/isBoolean.js' {
+  declare module.exports: $Exports<'lodash/fp/isBoolean'>;
 }
-declare module 'lodash/isBuffer.js' {
-  declare module.exports: $Exports<'lodash/isBuffer'>;
+declare module 'lodash/fp/isBuffer.js' {
+  declare module.exports: $Exports<'lodash/fp/isBuffer'>;
 }
-declare module 'lodash/isDate.js' {
-  declare module.exports: $Exports<'lodash/isDate'>;
+declare module 'lodash/fp/isDate.js' {
+  declare module.exports: $Exports<'lodash/fp/isDate'>;
 }
-declare module 'lodash/isElement.js' {
-  declare module.exports: $Exports<'lodash/isElement'>;
+declare module 'lodash/fp/isElement.js' {
+  declare module.exports: $Exports<'lodash/fp/isElement'>;
 }
-declare module 'lodash/isEmpty.js' {
-  declare module.exports: $Exports<'lodash/isEmpty'>;
+declare module 'lodash/fp/isEmpty.js' {
+  declare module.exports: $Exports<'lodash/fp/isEmpty'>;
 }
-declare module 'lodash/isEqual.js' {
-  declare module.exports: $Exports<'lodash/isEqual'>;
+declare module 'lodash/fp/isEqual.js' {
+  declare module.exports: $Exports<'lodash/fp/isEqual'>;
 }
-declare module 'lodash/isEqualWith.js' {
-  declare module.exports: $Exports<'lodash/isEqualWith'>;
+declare module 'lodash/fp/isEqualWith.js' {
+  declare module.exports: $Exports<'lodash/fp/isEqualWith'>;
 }
-declare module 'lodash/isError.js' {
-  declare module.exports: $Exports<'lodash/isError'>;
+declare module 'lodash/fp/isError.js' {
+  declare module.exports: $Exports<'lodash/fp/isError'>;
 }
-declare module 'lodash/isFinite.js' {
-  declare module.exports: $Exports<'lodash/isFinite'>;
+declare module 'lodash/fp/isFinite.js' {
+  declare module.exports: $Exports<'lodash/fp/isFinite'>;
 }
-declare module 'lodash/isFunction.js' {
-  declare module.exports: $Exports<'lodash/isFunction'>;
+declare module 'lodash/fp/isFunction.js' {
+  declare module.exports: $Exports<'lodash/fp/isFunction'>;
 }
-declare module 'lodash/isInteger.js' {
-  declare module.exports: $Exports<'lodash/isInteger'>;
+declare module 'lodash/fp/isInteger.js' {
+  declare module.exports: $Exports<'lodash/fp/isInteger'>;
 }
-declare module 'lodash/isLength.js' {
-  declare module.exports: $Exports<'lodash/isLength'>;
+declare module 'lodash/fp/isLength.js' {
+  declare module.exports: $Exports<'lodash/fp/isLength'>;
 }
-declare module 'lodash/isMap.js' {
-  declare module.exports: $Exports<'lodash/isMap'>;
+declare module 'lodash/fp/isMap.js' {
+  declare module.exports: $Exports<'lodash/fp/isMap'>;
 }
-declare module 'lodash/isMatch.js' {
-  declare module.exports: $Exports<'lodash/isMatch'>;
+declare module 'lodash/fp/isMatch.js' {
+  declare module.exports: $Exports<'lodash/fp/isMatch'>;
 }
-declare module 'lodash/isMatchWith.js' {
-  declare module.exports: $Exports<'lodash/isMatchWith'>;
+declare module 'lodash/fp/isMatchWith.js' {
+  declare module.exports: $Exports<'lodash/fp/isMatchWith'>;
 }
-declare module 'lodash/isNaN.js' {
-  declare module.exports: $Exports<'lodash/isNaN'>;
+declare module 'lodash/fp/isNaN.js' {
+  declare module.exports: $Exports<'lodash/fp/isNaN'>;
 }
-declare module 'lodash/isNative.js' {
-  declare module.exports: $Exports<'lodash/isNative'>;
+declare module 'lodash/fp/isNative.js' {
+  declare module.exports: $Exports<'lodash/fp/isNative'>;
 }
-declare module 'lodash/isNil.js' {
-  declare module.exports: $Exports<'lodash/isNil'>;
+declare module 'lodash/fp/isNil.js' {
+  declare module.exports: $Exports<'lodash/fp/isNil'>;
 }
-declare module 'lodash/isNull.js' {
-  declare module.exports: $Exports<'lodash/isNull'>;
+declare module 'lodash/fp/isNull.js' {
+  declare module.exports: $Exports<'lodash/fp/isNull'>;
 }
-declare module 'lodash/isNumber.js' {
-  declare module.exports: $Exports<'lodash/isNumber'>;
+declare module 'lodash/fp/isNumber.js' {
+  declare module.exports: $Exports<'lodash/fp/isNumber'>;
 }
-declare module 'lodash/isObject.js' {
-  declare module.exports: $Exports<'lodash/isObject'>;
+declare module 'lodash/fp/isObject.js' {
+  declare module.exports: $Exports<'lodash/fp/isObject'>;
 }
-declare module 'lodash/isObjectLike.js' {
-  declare module.exports: $Exports<'lodash/isObjectLike'>;
+declare module 'lodash/fp/isObjectLike.js' {
+  declare module.exports: $Exports<'lodash/fp/isObjectLike'>;
 }
-declare module 'lodash/isPlainObject.js' {
-  declare module.exports: $Exports<'lodash/isPlainObject'>;
+declare module 'lodash/fp/isPlainObject.js' {
+  declare module.exports: $Exports<'lodash/fp/isPlainObject'>;
 }
-declare module 'lodash/isRegExp.js' {
-  declare module.exports: $Exports<'lodash/isRegExp'>;
+declare module 'lodash/fp/isRegExp.js' {
+  declare module.exports: $Exports<'lodash/fp/isRegExp'>;
 }
-declare module 'lodash/isSafeInteger.js' {
-  declare module.exports: $Exports<'lodash/isSafeInteger'>;
+declare module 'lodash/fp/isSafeInteger.js' {
+  declare module.exports: $Exports<'lodash/fp/isSafeInteger'>;
 }
-declare module 'lodash/isSet.js' {
-  declare module.exports: $Exports<'lodash/isSet'>;
+declare module 'lodash/fp/isSet.js' {
+  declare module.exports: $Exports<'lodash/fp/isSet'>;
 }
-declare module 'lodash/isString.js' {
-  declare module.exports: $Exports<'lodash/isString'>;
+declare module 'lodash/fp/isString.js' {
+  declare module.exports: $Exports<'lodash/fp/isString'>;
 }
-declare module 'lodash/isSymbol.js' {
-  declare module.exports: $Exports<'lodash/isSymbol'>;
+declare module 'lodash/fp/isSymbol.js' {
+  declare module.exports: $Exports<'lodash/fp/isSymbol'>;
 }
-declare module 'lodash/isTypedArray.js' {
-  declare module.exports: $Exports<'lodash/isTypedArray'>;
+declare module 'lodash/fp/isTypedArray.js' {
+  declare module.exports: $Exports<'lodash/fp/isTypedArray'>;
 }
-declare module 'lodash/isUndefined.js' {
-  declare module.exports: $Exports<'lodash/isUndefined'>;
+declare module 'lodash/fp/isUndefined.js' {
+  declare module.exports: $Exports<'lodash/fp/isUndefined'>;
 }
-declare module 'lodash/isWeakMap.js' {
-  declare module.exports: $Exports<'lodash/isWeakMap'>;
+declare module 'lodash/fp/isWeakMap.js' {
+  declare module.exports: $Exports<'lodash/fp/isWeakMap'>;
 }
-declare module 'lodash/isWeakSet.js' {
-  declare module.exports: $Exports<'lodash/isWeakSet'>;
+declare module 'lodash/fp/isWeakSet.js' {
+  declare module.exports: $Exports<'lodash/fp/isWeakSet'>;
 }
-declare module 'lodash/iteratee.js' {
-  declare module.exports: $Exports<'lodash/iteratee'>;
+declare module 'lodash/fp/iteratee.js' {
+  declare module.exports: $Exports<'lodash/fp/iteratee'>;
 }
-declare module 'lodash/join.js' {
-  declare module.exports: $Exports<'lodash/join'>;
+declare module 'lodash/fp/join.js' {
+  declare module.exports: $Exports<'lodash/fp/join'>;
 }
-declare module 'lodash/juxt.js' {
-  declare module.exports: $Exports<'lodash/juxt'>;
+declare module 'lodash/fp/juxt.js' {
+  declare module.exports: $Exports<'lodash/fp/juxt'>;
 }
-declare module 'lodash/kebabCase.js' {
-  declare module.exports: $Exports<'lodash/kebabCase'>;
+declare module 'lodash/fp/kebabCase.js' {
+  declare module.exports: $Exports<'lodash/fp/kebabCase'>;
 }
-declare module 'lodash/keyBy.js' {
-  declare module.exports: $Exports<'lodash/keyBy'>;
+declare module 'lodash/fp/keyBy.js' {
+  declare module.exports: $Exports<'lodash/fp/keyBy'>;
 }
-declare module 'lodash/keys.js' {
-  declare module.exports: $Exports<'lodash/keys'>;
+declare module 'lodash/fp/keys.js' {
+  declare module.exports: $Exports<'lodash/fp/keys'>;
 }
-declare module 'lodash/keysIn.js' {
-  declare module.exports: $Exports<'lodash/keysIn'>;
+declare module 'lodash/fp/keysIn.js' {
+  declare module.exports: $Exports<'lodash/fp/keysIn'>;
 }
-declare module 'lodash/lang.js' {
-  declare module.exports: $Exports<'lodash/lang'>;
+declare module 'lodash/fp/lang.js' {
+  declare module.exports: $Exports<'lodash/fp/lang'>;
 }
-declare module 'lodash/last.js' {
-  declare module.exports: $Exports<'lodash/last'>;
+declare module 'lodash/fp/last.js' {
+  declare module.exports: $Exports<'lodash/fp/last'>;
 }
-declare module 'lodash/lastIndexOf.js' {
-  declare module.exports: $Exports<'lodash/lastIndexOf'>;
+declare module 'lodash/fp/lastIndexOf.js' {
+  declare module.exports: $Exports<'lodash/fp/lastIndexOf'>;
 }
-declare module 'lodash/lastIndexOfFrom.js' {
-  declare module.exports: $Exports<'lodash/lastIndexOfFrom'>;
+declare module 'lodash/fp/lastIndexOfFrom.js' {
+  declare module.exports: $Exports<'lodash/fp/lastIndexOfFrom'>;
 }
-declare module 'lodash/lowerCase.js' {
-  declare module.exports: $Exports<'lodash/lowerCase'>;
+declare module 'lodash/fp/lowerCase.js' {
+  declare module.exports: $Exports<'lodash/fp/lowerCase'>;
 }
-declare module 'lodash/lowerFirst.js' {
-  declare module.exports: $Exports<'lodash/lowerFirst'>;
+declare module 'lodash/fp/lowerFirst.js' {
+  declare module.exports: $Exports<'lodash/fp/lowerFirst'>;
 }
-declare module 'lodash/lt.js' {
-  declare module.exports: $Exports<'lodash/lt'>;
+declare module 'lodash/fp/lt.js' {
+  declare module.exports: $Exports<'lodash/fp/lt'>;
 }
-declare module 'lodash/lte.js' {
-  declare module.exports: $Exports<'lodash/lte'>;
+declare module 'lodash/fp/lte.js' {
+  declare module.exports: $Exports<'lodash/fp/lte'>;
 }
-declare module 'lodash/map.js' {
-  declare module.exports: $Exports<'lodash/map'>;
+declare module 'lodash/fp/map.js' {
+  declare module.exports: $Exports<'lodash/fp/map'>;
 }
-declare module 'lodash/mapKeys.js' {
-  declare module.exports: $Exports<'lodash/mapKeys'>;
+declare module 'lodash/fp/mapKeys.js' {
+  declare module.exports: $Exports<'lodash/fp/mapKeys'>;
 }
-declare module 'lodash/mapValues.js' {
-  declare module.exports: $Exports<'lodash/mapValues'>;
+declare module 'lodash/fp/mapValues.js' {
+  declare module.exports: $Exports<'lodash/fp/mapValues'>;
 }
-declare module 'lodash/matches.js' {
-  declare module.exports: $Exports<'lodash/matches'>;
+declare module 'lodash/fp/matches.js' {
+  declare module.exports: $Exports<'lodash/fp/matches'>;
 }
-declare module 'lodash/matchesProperty.js' {
-  declare module.exports: $Exports<'lodash/matchesProperty'>;
+declare module 'lodash/fp/matchesProperty.js' {
+  declare module.exports: $Exports<'lodash/fp/matchesProperty'>;
 }
-declare module 'lodash/math.js' {
-  declare module.exports: $Exports<'lodash/math'>;
+declare module 'lodash/fp/math.js' {
+  declare module.exports: $Exports<'lodash/fp/math'>;
 }
-declare module 'lodash/max.js' {
-  declare module.exports: $Exports<'lodash/max'>;
+declare module 'lodash/fp/max.js' {
+  declare module.exports: $Exports<'lodash/fp/max'>;
 }
-declare module 'lodash/maxBy.js' {
-  declare module.exports: $Exports<'lodash/maxBy'>;
+declare module 'lodash/fp/maxBy.js' {
+  declare module.exports: $Exports<'lodash/fp/maxBy'>;
 }
-declare module 'lodash/mean.js' {
-  declare module.exports: $Exports<'lodash/mean'>;
+declare module 'lodash/fp/mean.js' {
+  declare module.exports: $Exports<'lodash/fp/mean'>;
 }
-declare module 'lodash/meanBy.js' {
-  declare module.exports: $Exports<'lodash/meanBy'>;
+declare module 'lodash/fp/meanBy.js' {
+  declare module.exports: $Exports<'lodash/fp/meanBy'>;
 }
-declare module 'lodash/memoize.js' {
-  declare module.exports: $Exports<'lodash/memoize'>;
+declare module 'lodash/fp/memoize.js' {
+  declare module.exports: $Exports<'lodash/fp/memoize'>;
 }
-declare module 'lodash/merge.js' {
-  declare module.exports: $Exports<'lodash/merge'>;
+declare module 'lodash/fp/merge.js' {
+  declare module.exports: $Exports<'lodash/fp/merge'>;
 }
-declare module 'lodash/mergeAll.js' {
-  declare module.exports: $Exports<'lodash/mergeAll'>;
+declare module 'lodash/fp/mergeAll.js' {
+  declare module.exports: $Exports<'lodash/fp/mergeAll'>;
 }
-declare module 'lodash/mergeAllWith.js' {
-  declare module.exports: $Exports<'lodash/mergeAllWith'>;
+declare module 'lodash/fp/mergeAllWith.js' {
+  declare module.exports: $Exports<'lodash/fp/mergeAllWith'>;
 }
-declare module 'lodash/mergeWith.js' {
-  declare module.exports: $Exports<'lodash/mergeWith'>;
+declare module 'lodash/fp/mergeWith.js' {
+  declare module.exports: $Exports<'lodash/fp/mergeWith'>;
 }
-declare module 'lodash/method.js' {
-  declare module.exports: $Exports<'lodash/method'>;
+declare module 'lodash/fp/method.js' {
+  declare module.exports: $Exports<'lodash/fp/method'>;
 }
-declare module 'lodash/methodOf.js' {
-  declare module.exports: $Exports<'lodash/methodOf'>;
+declare module 'lodash/fp/methodOf.js' {
+  declare module.exports: $Exports<'lodash/fp/methodOf'>;
 }
-declare module 'lodash/min.js' {
-  declare module.exports: $Exports<'lodash/min'>;
+declare module 'lodash/fp/min.js' {
+  declare module.exports: $Exports<'lodash/fp/min'>;
 }
-declare module 'lodash/minBy.js' {
-  declare module.exports: $Exports<'lodash/minBy'>;
+declare module 'lodash/fp/minBy.js' {
+  declare module.exports: $Exports<'lodash/fp/minBy'>;
 }
-declare module 'lodash/mixin.js' {
-  declare module.exports: $Exports<'lodash/mixin'>;
+declare module 'lodash/fp/mixin.js' {
+  declare module.exports: $Exports<'lodash/fp/mixin'>;
 }
-declare module 'lodash/multiply.js' {
-  declare module.exports: $Exports<'lodash/multiply'>;
+declare module 'lodash/fp/multiply.js' {
+  declare module.exports: $Exports<'lodash/fp/multiply'>;
 }
-declare module 'lodash/nAry.js' {
-  declare module.exports: $Exports<'lodash/nAry'>;
+declare module 'lodash/fp/nAry.js' {
+  declare module.exports: $Exports<'lodash/fp/nAry'>;
 }
-declare module 'lodash/negate.js' {
-  declare module.exports: $Exports<'lodash/negate'>;
+declare module 'lodash/fp/negate.js' {
+  declare module.exports: $Exports<'lodash/fp/negate'>;
 }
-declare module 'lodash/next.js' {
-  declare module.exports: $Exports<'lodash/next'>;
+declare module 'lodash/fp/next.js' {
+  declare module.exports: $Exports<'lodash/fp/next'>;
 }
-declare module 'lodash/noop.js' {
-  declare module.exports: $Exports<'lodash/noop'>;
+declare module 'lodash/fp/noop.js' {
+  declare module.exports: $Exports<'lodash/fp/noop'>;
 }
-declare module 'lodash/now.js' {
-  declare module.exports: $Exports<'lodash/now'>;
+declare module 'lodash/fp/now.js' {
+  declare module.exports: $Exports<'lodash/fp/now'>;
 }
-declare module 'lodash/nth.js' {
-  declare module.exports: $Exports<'lodash/nth'>;
+declare module 'lodash/fp/nth.js' {
+  declare module.exports: $Exports<'lodash/fp/nth'>;
 }
-declare module 'lodash/nthArg.js' {
-  declare module.exports: $Exports<'lodash/nthArg'>;
+declare module 'lodash/fp/nthArg.js' {
+  declare module.exports: $Exports<'lodash/fp/nthArg'>;
 }
-declare module 'lodash/number.js' {
-  declare module.exports: $Exports<'lodash/number'>;
+declare module 'lodash/fp/number.js' {
+  declare module.exports: $Exports<'lodash/fp/number'>;
 }
-declare module 'lodash/object.js' {
-  declare module.exports: $Exports<'lodash/object'>;
+declare module 'lodash/fp/object.js' {
+  declare module.exports: $Exports<'lodash/fp/object'>;
 }
-declare module 'lodash/omit.js' {
-  declare module.exports: $Exports<'lodash/omit'>;
+declare module 'lodash/fp/omit.js' {
+  declare module.exports: $Exports<'lodash/fp/omit'>;
 }
-declare module 'lodash/omitAll.js' {
-  declare module.exports: $Exports<'lodash/omitAll'>;
+declare module 'lodash/fp/omitAll.js' {
+  declare module.exports: $Exports<'lodash/fp/omitAll'>;
 }
-declare module 'lodash/omitBy.js' {
-  declare module.exports: $Exports<'lodash/omitBy'>;
+declare module 'lodash/fp/omitBy.js' {
+  declare module.exports: $Exports<'lodash/fp/omitBy'>;
 }
-declare module 'lodash/once.js' {
-  declare module.exports: $Exports<'lodash/once'>;
+declare module 'lodash/fp/once.js' {
+  declare module.exports: $Exports<'lodash/fp/once'>;
 }
-declare module 'lodash/orderBy.js' {
-  declare module.exports: $Exports<'lodash/orderBy'>;
+declare module 'lodash/fp/orderBy.js' {
+  declare module.exports: $Exports<'lodash/fp/orderBy'>;
 }
-declare module 'lodash/over.js' {
-  declare module.exports: $Exports<'lodash/over'>;
+declare module 'lodash/fp/over.js' {
+  declare module.exports: $Exports<'lodash/fp/over'>;
 }
-declare module 'lodash/overArgs.js' {
-  declare module.exports: $Exports<'lodash/overArgs'>;
+declare module 'lodash/fp/overArgs.js' {
+  declare module.exports: $Exports<'lodash/fp/overArgs'>;
 }
-declare module 'lodash/overEvery.js' {
-  declare module.exports: $Exports<'lodash/overEvery'>;
+declare module 'lodash/fp/overEvery.js' {
+  declare module.exports: $Exports<'lodash/fp/overEvery'>;
 }
-declare module 'lodash/overSome.js' {
-  declare module.exports: $Exports<'lodash/overSome'>;
+declare module 'lodash/fp/overSome.js' {
+  declare module.exports: $Exports<'lodash/fp/overSome'>;
 }
-declare module 'lodash/pad.js' {
-  declare module.exports: $Exports<'lodash/pad'>;
+declare module 'lodash/fp/pad.js' {
+  declare module.exports: $Exports<'lodash/fp/pad'>;
 }
-declare module 'lodash/padChars.js' {
-  declare module.exports: $Exports<'lodash/padChars'>;
+declare module 'lodash/fp/padChars.js' {
+  declare module.exports: $Exports<'lodash/fp/padChars'>;
 }
-declare module 'lodash/padCharsEnd.js' {
-  declare module.exports: $Exports<'lodash/padCharsEnd'>;
+declare module 'lodash/fp/padCharsEnd.js' {
+  declare module.exports: $Exports<'lodash/fp/padCharsEnd'>;
 }
-declare module 'lodash/padCharsStart.js' {
-  declare module.exports: $Exports<'lodash/padCharsStart'>;
+declare module 'lodash/fp/padCharsStart.js' {
+  declare module.exports: $Exports<'lodash/fp/padCharsStart'>;
 }
-declare module 'lodash/padEnd.js' {
-  declare module.exports: $Exports<'lodash/padEnd'>;
+declare module 'lodash/fp/padEnd.js' {
+  declare module.exports: $Exports<'lodash/fp/padEnd'>;
 }
-declare module 'lodash/padStart.js' {
-  declare module.exports: $Exports<'lodash/padStart'>;
+declare module 'lodash/fp/padStart.js' {
+  declare module.exports: $Exports<'lodash/fp/padStart'>;
 }
-declare module 'lodash/parseInt.js' {
-  declare module.exports: $Exports<'lodash/parseInt'>;
+declare module 'lodash/fp/parseInt.js' {
+  declare module.exports: $Exports<'lodash/fp/parseInt'>;
 }
-declare module 'lodash/partial.js' {
-  declare module.exports: $Exports<'lodash/partial'>;
+declare module 'lodash/fp/partial.js' {
+  declare module.exports: $Exports<'lodash/fp/partial'>;
 }
-declare module 'lodash/partialRight.js' {
-  declare module.exports: $Exports<'lodash/partialRight'>;
+declare module 'lodash/fp/partialRight.js' {
+  declare module.exports: $Exports<'lodash/fp/partialRight'>;
 }
-declare module 'lodash/partition.js' {
-  declare module.exports: $Exports<'lodash/partition'>;
+declare module 'lodash/fp/partition.js' {
+  declare module.exports: $Exports<'lodash/fp/partition'>;
 }
-declare module 'lodash/path.js' {
-  declare module.exports: $Exports<'lodash/path'>;
+declare module 'lodash/fp/path.js' {
+  declare module.exports: $Exports<'lodash/fp/path'>;
 }
-declare module 'lodash/pathEq.js' {
-  declare module.exports: $Exports<'lodash/pathEq'>;
+declare module 'lodash/fp/pathEq.js' {
+  declare module.exports: $Exports<'lodash/fp/pathEq'>;
 }
-declare module 'lodash/pathOr.js' {
-  declare module.exports: $Exports<'lodash/pathOr'>;
+declare module 'lodash/fp/pathOr.js' {
+  declare module.exports: $Exports<'lodash/fp/pathOr'>;
 }
-declare module 'lodash/paths.js' {
-  declare module.exports: $Exports<'lodash/paths'>;
+declare module 'lodash/fp/paths.js' {
+  declare module.exports: $Exports<'lodash/fp/paths'>;
 }
-declare module 'lodash/pick.js' {
-  declare module.exports: $Exports<'lodash/pick'>;
+declare module 'lodash/fp/pick.js' {
+  declare module.exports: $Exports<'lodash/fp/pick'>;
 }
-declare module 'lodash/pickAll.js' {
-  declare module.exports: $Exports<'lodash/pickAll'>;
+declare module 'lodash/fp/pickAll.js' {
+  declare module.exports: $Exports<'lodash/fp/pickAll'>;
 }
-declare module 'lodash/pickBy.js' {
-  declare module.exports: $Exports<'lodash/pickBy'>;
+declare module 'lodash/fp/pickBy.js' {
+  declare module.exports: $Exports<'lodash/fp/pickBy'>;
 }
-declare module 'lodash/pipe.js' {
-  declare module.exports: $Exports<'lodash/pipe'>;
+declare module 'lodash/fp/pipe.js' {
+  declare module.exports: $Exports<'lodash/fp/pipe'>;
 }
-declare module 'lodash/placeholder.js' {
-  declare module.exports: $Exports<'lodash/placeholder'>;
+declare module 'lodash/fp/placeholder.js' {
+  declare module.exports: $Exports<'lodash/fp/placeholder'>;
 }
-declare module 'lodash/plant.js' {
-  declare module.exports: $Exports<'lodash/plant'>;
+declare module 'lodash/fp/plant.js' {
+  declare module.exports: $Exports<'lodash/fp/plant'>;
 }
-declare module 'lodash/pluck.js' {
-  declare module.exports: $Exports<'lodash/pluck'>;
+declare module 'lodash/fp/pluck.js' {
+  declare module.exports: $Exports<'lodash/fp/pluck'>;
 }
-declare module 'lodash/prop.js' {
-  declare module.exports: $Exports<'lodash/prop'>;
+declare module 'lodash/fp/prop.js' {
+  declare module.exports: $Exports<'lodash/fp/prop'>;
 }
-declare module 'lodash/propEq.js' {
-  declare module.exports: $Exports<'lodash/propEq'>;
+declare module 'lodash/fp/propEq.js' {
+  declare module.exports: $Exports<'lodash/fp/propEq'>;
 }
-declare module 'lodash/property.js' {
-  declare module.exports: $Exports<'lodash/property'>;
+declare module 'lodash/fp/property.js' {
+  declare module.exports: $Exports<'lodash/fp/property'>;
 }
-declare module 'lodash/propertyOf.js' {
-  declare module.exports: $Exports<'lodash/propertyOf'>;
+declare module 'lodash/fp/propertyOf.js' {
+  declare module.exports: $Exports<'lodash/fp/propertyOf'>;
 }
-declare module 'lodash/propOr.js' {
-  declare module.exports: $Exports<'lodash/propOr'>;
+declare module 'lodash/fp/propOr.js' {
+  declare module.exports: $Exports<'lodash/fp/propOr'>;
 }
-declare module 'lodash/props.js' {
-  declare module.exports: $Exports<'lodash/props'>;
+declare module 'lodash/fp/props.js' {
+  declare module.exports: $Exports<'lodash/fp/props'>;
 }
-declare module 'lodash/pull.js' {
-  declare module.exports: $Exports<'lodash/pull'>;
+declare module 'lodash/fp/pull.js' {
+  declare module.exports: $Exports<'lodash/fp/pull'>;
 }
-declare module 'lodash/pullAll.js' {
-  declare module.exports: $Exports<'lodash/pullAll'>;
+declare module 'lodash/fp/pullAll.js' {
+  declare module.exports: $Exports<'lodash/fp/pullAll'>;
 }
-declare module 'lodash/pullAllBy.js' {
-  declare module.exports: $Exports<'lodash/pullAllBy'>;
+declare module 'lodash/fp/pullAllBy.js' {
+  declare module.exports: $Exports<'lodash/fp/pullAllBy'>;
 }
-declare module 'lodash/pullAllWith.js' {
-  declare module.exports: $Exports<'lodash/pullAllWith'>;
+declare module 'lodash/fp/pullAllWith.js' {
+  declare module.exports: $Exports<'lodash/fp/pullAllWith'>;
 }
-declare module 'lodash/pullAt.js' {
-  declare module.exports: $Exports<'lodash/pullAt'>;
+declare module 'lodash/fp/pullAt.js' {
+  declare module.exports: $Exports<'lodash/fp/pullAt'>;
 }
-declare module 'lodash/random.js' {
-  declare module.exports: $Exports<'lodash/random'>;
+declare module 'lodash/fp/random.js' {
+  declare module.exports: $Exports<'lodash/fp/random'>;
 }
-declare module 'lodash/range.js' {
-  declare module.exports: $Exports<'lodash/range'>;
+declare module 'lodash/fp/range.js' {
+  declare module.exports: $Exports<'lodash/fp/range'>;
 }
-declare module 'lodash/rangeRight.js' {
-  declare module.exports: $Exports<'lodash/rangeRight'>;
+declare module 'lodash/fp/rangeRight.js' {
+  declare module.exports: $Exports<'lodash/fp/rangeRight'>;
 }
-declare module 'lodash/rangeStep.js' {
-  declare module.exports: $Exports<'lodash/rangeStep'>;
+declare module 'lodash/fp/rangeStep.js' {
+  declare module.exports: $Exports<'lodash/fp/rangeStep'>;
 }
-declare module 'lodash/rangeStepRight.js' {
-  declare module.exports: $Exports<'lodash/rangeStepRight'>;
+declare module 'lodash/fp/rangeStepRight.js' {
+  declare module.exports: $Exports<'lodash/fp/rangeStepRight'>;
 }
-declare module 'lodash/rearg.js' {
-  declare module.exports: $Exports<'lodash/rearg'>;
+declare module 'lodash/fp/rearg.js' {
+  declare module.exports: $Exports<'lodash/fp/rearg'>;
 }
-declare module 'lodash/reduce.js' {
-  declare module.exports: $Exports<'lodash/reduce'>;
+declare module 'lodash/fp/reduce.js' {
+  declare module.exports: $Exports<'lodash/fp/reduce'>;
 }
-declare module 'lodash/reduceRight.js' {
-  declare module.exports: $Exports<'lodash/reduceRight'>;
+declare module 'lodash/fp/reduceRight.js' {
+  declare module.exports: $Exports<'lodash/fp/reduceRight'>;
 }
-declare module 'lodash/reject.js' {
-  declare module.exports: $Exports<'lodash/reject'>;
+declare module 'lodash/fp/reject.js' {
+  declare module.exports: $Exports<'lodash/fp/reject'>;
 }
-declare module 'lodash/remove.js' {
-  declare module.exports: $Exports<'lodash/remove'>;
+declare module 'lodash/fp/remove.js' {
+  declare module.exports: $Exports<'lodash/fp/remove'>;
 }
-declare module 'lodash/repeat.js' {
-  declare module.exports: $Exports<'lodash/repeat'>;
+declare module 'lodash/fp/repeat.js' {
+  declare module.exports: $Exports<'lodash/fp/repeat'>;
 }
-declare module 'lodash/replace.js' {
-  declare module.exports: $Exports<'lodash/replace'>;
+declare module 'lodash/fp/replace.js' {
+  declare module.exports: $Exports<'lodash/fp/replace'>;
 }
-declare module 'lodash/rest.js' {
-  declare module.exports: $Exports<'lodash/rest'>;
+declare module 'lodash/fp/rest.js' {
+  declare module.exports: $Exports<'lodash/fp/rest'>;
 }
-declare module 'lodash/restFrom.js' {
-  declare module.exports: $Exports<'lodash/restFrom'>;
+declare module 'lodash/fp/restFrom.js' {
+  declare module.exports: $Exports<'lodash/fp/restFrom'>;
 }
-declare module 'lodash/result.js' {
-  declare module.exports: $Exports<'lodash/result'>;
+declare module 'lodash/fp/result.js' {
+  declare module.exports: $Exports<'lodash/fp/result'>;
 }
-declare module 'lodash/reverse.js' {
-  declare module.exports: $Exports<'lodash/reverse'>;
+declare module 'lodash/fp/reverse.js' {
+  declare module.exports: $Exports<'lodash/fp/reverse'>;
 }
-declare module 'lodash/round.js' {
-  declare module.exports: $Exports<'lodash/round'>;
+declare module 'lodash/fp/round.js' {
+  declare module.exports: $Exports<'lodash/fp/round'>;
 }
-declare module 'lodash/sample.js' {
-  declare module.exports: $Exports<'lodash/sample'>;
+declare module 'lodash/fp/sample.js' {
+  declare module.exports: $Exports<'lodash/fp/sample'>;
 }
-declare module 'lodash/sampleSize.js' {
-  declare module.exports: $Exports<'lodash/sampleSize'>;
+declare module 'lodash/fp/sampleSize.js' {
+  declare module.exports: $Exports<'lodash/fp/sampleSize'>;
 }
-declare module 'lodash/seq.js' {
-  declare module.exports: $Exports<'lodash/seq'>;
+declare module 'lodash/fp/seq.js' {
+  declare module.exports: $Exports<'lodash/fp/seq'>;
 }
-declare module 'lodash/set.js' {
-  declare module.exports: $Exports<'lodash/set'>;
+declare module 'lodash/fp/set.js' {
+  declare module.exports: $Exports<'lodash/fp/set'>;
 }
-declare module 'lodash/setWith.js' {
-  declare module.exports: $Exports<'lodash/setWith'>;
+declare module 'lodash/fp/setWith.js' {
+  declare module.exports: $Exports<'lodash/fp/setWith'>;
 }
-declare module 'lodash/shuffle.js' {
-  declare module.exports: $Exports<'lodash/shuffle'>;
+declare module 'lodash/fp/shuffle.js' {
+  declare module.exports: $Exports<'lodash/fp/shuffle'>;
 }
-declare module 'lodash/size.js' {
-  declare module.exports: $Exports<'lodash/size'>;
+declare module 'lodash/fp/size.js' {
+  declare module.exports: $Exports<'lodash/fp/size'>;
 }
-declare module 'lodash/slice.js' {
-  declare module.exports: $Exports<'lodash/slice'>;
+declare module 'lodash/fp/slice.js' {
+  declare module.exports: $Exports<'lodash/fp/slice'>;
 }
-declare module 'lodash/snakeCase.js' {
-  declare module.exports: $Exports<'lodash/snakeCase'>;
+declare module 'lodash/fp/snakeCase.js' {
+  declare module.exports: $Exports<'lodash/fp/snakeCase'>;
 }
-declare module 'lodash/some.js' {
-  declare module.exports: $Exports<'lodash/some'>;
+declare module 'lodash/fp/some.js' {
+  declare module.exports: $Exports<'lodash/fp/some'>;
 }
-declare module 'lodash/sortBy.js' {
-  declare module.exports: $Exports<'lodash/sortBy'>;
+declare module 'lodash/fp/sortBy.js' {
+  declare module.exports: $Exports<'lodash/fp/sortBy'>;
 }
-declare module 'lodash/sortedIndex.js' {
-  declare module.exports: $Exports<'lodash/sortedIndex'>;
+declare module 'lodash/fp/sortedIndex.js' {
+  declare module.exports: $Exports<'lodash/fp/sortedIndex'>;
 }
-declare module 'lodash/sortedIndexBy.js' {
-  declare module.exports: $Exports<'lodash/sortedIndexBy'>;
+declare module 'lodash/fp/sortedIndexBy.js' {
+  declare module.exports: $Exports<'lodash/fp/sortedIndexBy'>;
 }
-declare module 'lodash/sortedIndexOf.js' {
-  declare module.exports: $Exports<'lodash/sortedIndexOf'>;
+declare module 'lodash/fp/sortedIndexOf.js' {
+  declare module.exports: $Exports<'lodash/fp/sortedIndexOf'>;
 }
-declare module 'lodash/sortedLastIndex.js' {
-  declare module.exports: $Exports<'lodash/sortedLastIndex'>;
+declare module 'lodash/fp/sortedLastIndex.js' {
+  declare module.exports: $Exports<'lodash/fp/sortedLastIndex'>;
 }
-declare module 'lodash/sortedLastIndexBy.js' {
-  declare module.exports: $Exports<'lodash/sortedLastIndexBy'>;
+declare module 'lodash/fp/sortedLastIndexBy.js' {
+  declare module.exports: $Exports<'lodash/fp/sortedLastIndexBy'>;
 }
-declare module 'lodash/sortedLastIndexOf.js' {
-  declare module.exports: $Exports<'lodash/sortedLastIndexOf'>;
+declare module 'lodash/fp/sortedLastIndexOf.js' {
+  declare module.exports: $Exports<'lodash/fp/sortedLastIndexOf'>;
 }
-declare module 'lodash/sortedUniq.js' {
-  declare module.exports: $Exports<'lodash/sortedUniq'>;
+declare module 'lodash/fp/sortedUniq.js' {
+  declare module.exports: $Exports<'lodash/fp/sortedUniq'>;
 }
-declare module 'lodash/sortedUniqBy.js' {
-  declare module.exports: $Exports<'lodash/sortedUniqBy'>;
+declare module 'lodash/fp/sortedUniqBy.js' {
+  declare module.exports: $Exports<'lodash/fp/sortedUniqBy'>;
 }
-declare module 'lodash/split.js' {
-  declare module.exports: $Exports<'lodash/split'>;
+declare module 'lodash/fp/split.js' {
+  declare module.exports: $Exports<'lodash/fp/split'>;
 }
-declare module 'lodash/spread.js' {
-  declare module.exports: $Exports<'lodash/spread'>;
+declare module 'lodash/fp/spread.js' {
+  declare module.exports: $Exports<'lodash/fp/spread'>;
 }
-declare module 'lodash/spreadFrom.js' {
-  declare module.exports: $Exports<'lodash/spreadFrom'>;
+declare module 'lodash/fp/spreadFrom.js' {
+  declare module.exports: $Exports<'lodash/fp/spreadFrom'>;
 }
-declare module 'lodash/startCase.js' {
-  declare module.exports: $Exports<'lodash/startCase'>;
+declare module 'lodash/fp/startCase.js' {
+  declare module.exports: $Exports<'lodash/fp/startCase'>;
 }
-declare module 'lodash/startsWith.js' {
-  declare module.exports: $Exports<'lodash/startsWith'>;
+declare module 'lodash/fp/startsWith.js' {
+  declare module.exports: $Exports<'lodash/fp/startsWith'>;
 }
-declare module 'lodash/string.js' {
-  declare module.exports: $Exports<'lodash/string'>;
+declare module 'lodash/fp/string.js' {
+  declare module.exports: $Exports<'lodash/fp/string'>;
 }
-declare module 'lodash/stubArray.js' {
-  declare module.exports: $Exports<'lodash/stubArray'>;
+declare module 'lodash/fp/stubArray.js' {
+  declare module.exports: $Exports<'lodash/fp/stubArray'>;
 }
-declare module 'lodash/stubFalse.js' {
-  declare module.exports: $Exports<'lodash/stubFalse'>;
+declare module 'lodash/fp/stubFalse.js' {
+  declare module.exports: $Exports<'lodash/fp/stubFalse'>;
 }
-declare module 'lodash/stubObject.js' {
-  declare module.exports: $Exports<'lodash/stubObject'>;
+declare module 'lodash/fp/stubObject.js' {
+  declare module.exports: $Exports<'lodash/fp/stubObject'>;
 }
-declare module 'lodash/stubString.js' {
-  declare module.exports: $Exports<'lodash/stubString'>;
+declare module 'lodash/fp/stubString.js' {
+  declare module.exports: $Exports<'lodash/fp/stubString'>;
 }
-declare module 'lodash/stubTrue.js' {
-  declare module.exports: $Exports<'lodash/stubTrue'>;
+declare module 'lodash/fp/stubTrue.js' {
+  declare module.exports: $Exports<'lodash/fp/stubTrue'>;
 }
-declare module 'lodash/subtract.js' {
-  declare module.exports: $Exports<'lodash/subtract'>;
+declare module 'lodash/fp/subtract.js' {
+  declare module.exports: $Exports<'lodash/fp/subtract'>;
 }
-declare module 'lodash/sum.js' {
-  declare module.exports: $Exports<'lodash/sum'>;
+declare module 'lodash/fp/sum.js' {
+  declare module.exports: $Exports<'lodash/fp/sum'>;
 }
-declare module 'lodash/sumBy.js' {
-  declare module.exports: $Exports<'lodash/sumBy'>;
+declare module 'lodash/fp/sumBy.js' {
+  declare module.exports: $Exports<'lodash/fp/sumBy'>;
 }
-declare module 'lodash/symmetricDifference.js' {
-  declare module.exports: $Exports<'lodash/symmetricDifference'>;
+declare module 'lodash/fp/symmetricDifference.js' {
+  declare module.exports: $Exports<'lodash/fp/symmetricDifference'>;
 }
-declare module 'lodash/symmetricDifferenceBy.js' {
-  declare module.exports: $Exports<'lodash/symmetricDifferenceBy'>;
+declare module 'lodash/fp/symmetricDifferenceBy.js' {
+  declare module.exports: $Exports<'lodash/fp/symmetricDifferenceBy'>;
 }
-declare module 'lodash/symmetricDifferenceWith.js' {
-  declare module.exports: $Exports<'lodash/symmetricDifferenceWith'>;
+declare module 'lodash/fp/symmetricDifferenceWith.js' {
+  declare module.exports: $Exports<'lodash/fp/symmetricDifferenceWith'>;
 }
-declare module 'lodash/T.js' {
-  declare module.exports: $Exports<'lodash/T'>;
+declare module 'lodash/fp/T.js' {
+  declare module.exports: $Exports<'lodash/fp/T'>;
 }
-declare module 'lodash/tail.js' {
-  declare module.exports: $Exports<'lodash/tail'>;
+declare module 'lodash/fp/tail.js' {
+  declare module.exports: $Exports<'lodash/fp/tail'>;
 }
-declare module 'lodash/take.js' {
-  declare module.exports: $Exports<'lodash/take'>;
+declare module 'lodash/fp/take.js' {
+  declare module.exports: $Exports<'lodash/fp/take'>;
 }
-declare module 'lodash/takeLast.js' {
-  declare module.exports: $Exports<'lodash/takeLast'>;
+declare module 'lodash/fp/takeLast.js' {
+  declare module.exports: $Exports<'lodash/fp/takeLast'>;
 }
-declare module 'lodash/takeLastWhile.js' {
-  declare module.exports: $Exports<'lodash/takeLastWhile'>;
+declare module 'lodash/fp/takeLastWhile.js' {
+  declare module.exports: $Exports<'lodash/fp/takeLastWhile'>;
 }
-declare module 'lodash/takeRight.js' {
-  declare module.exports: $Exports<'lodash/takeRight'>;
+declare module 'lodash/fp/takeRight.js' {
+  declare module.exports: $Exports<'lodash/fp/takeRight'>;
 }
-declare module 'lodash/takeRightWhile.js' {
-  declare module.exports: $Exports<'lodash/takeRightWhile'>;
+declare module 'lodash/fp/takeRightWhile.js' {
+  declare module.exports: $Exports<'lodash/fp/takeRightWhile'>;
 }
-declare module 'lodash/takeWhile.js' {
-  declare module.exports: $Exports<'lodash/takeWhile'>;
+declare module 'lodash/fp/takeWhile.js' {
+  declare module.exports: $Exports<'lodash/fp/takeWhile'>;
 }
-declare module 'lodash/tap.js' {
-  declare module.exports: $Exports<'lodash/tap'>;
+declare module 'lodash/fp/tap.js' {
+  declare module.exports: $Exports<'lodash/fp/tap'>;
 }
-declare module 'lodash/template.js' {
-  declare module.exports: $Exports<'lodash/template'>;
+declare module 'lodash/fp/template.js' {
+  declare module.exports: $Exports<'lodash/fp/template'>;
 }
-declare module 'lodash/templateSettings.js' {
-  declare module.exports: $Exports<'lodash/templateSettings'>;
+declare module 'lodash/fp/templateSettings.js' {
+  declare module.exports: $Exports<'lodash/fp/templateSettings'>;
 }
-declare module 'lodash/throttle.js' {
-  declare module.exports: $Exports<'lodash/throttle'>;
+declare module 'lodash/fp/throttle.js' {
+  declare module.exports: $Exports<'lodash/fp/throttle'>;
 }
-declare module 'lodash/thru.js' {
-  declare module.exports: $Exports<'lodash/thru'>;
+declare module 'lodash/fp/thru.js' {
+  declare module.exports: $Exports<'lodash/fp/thru'>;
 }
-declare module 'lodash/times.js' {
-  declare module.exports: $Exports<'lodash/times'>;
+declare module 'lodash/fp/times.js' {
+  declare module.exports: $Exports<'lodash/fp/times'>;
 }
-declare module 'lodash/toArray.js' {
-  declare module.exports: $Exports<'lodash/toArray'>;
+declare module 'lodash/fp/toArray.js' {
+  declare module.exports: $Exports<'lodash/fp/toArray'>;
 }
-declare module 'lodash/toFinite.js' {
-  declare module.exports: $Exports<'lodash/toFinite'>;
+declare module 'lodash/fp/toFinite.js' {
+  declare module.exports: $Exports<'lodash/fp/toFinite'>;
 }
-declare module 'lodash/toInteger.js' {
-  declare module.exports: $Exports<'lodash/toInteger'>;
+declare module 'lodash/fp/toInteger.js' {
+  declare module.exports: $Exports<'lodash/fp/toInteger'>;
 }
-declare module 'lodash/toIterator.js' {
-  declare module.exports: $Exports<'lodash/toIterator'>;
+declare module 'lodash/fp/toIterator.js' {
+  declare module.exports: $Exports<'lodash/fp/toIterator'>;
 }
-declare module 'lodash/toJSON.js' {
-  declare module.exports: $Exports<'lodash/toJSON'>;
+declare module 'lodash/fp/toJSON.js' {
+  declare module.exports: $Exports<'lodash/fp/toJSON'>;
 }
-declare module 'lodash/toLength.js' {
-  declare module.exports: $Exports<'lodash/toLength'>;
+declare module 'lodash/fp/toLength.js' {
+  declare module.exports: $Exports<'lodash/fp/toLength'>;
 }
-declare module 'lodash/toLower.js' {
-  declare module.exports: $Exports<'lodash/toLower'>;
+declare module 'lodash/fp/toLower.js' {
+  declare module.exports: $Exports<'lodash/fp/toLower'>;
 }
-declare module 'lodash/toNumber.js' {
-  declare module.exports: $Exports<'lodash/toNumber'>;
+declare module 'lodash/fp/toNumber.js' {
+  declare module.exports: $Exports<'lodash/fp/toNumber'>;
 }
-declare module 'lodash/toPairs.js' {
-  declare module.exports: $Exports<'lodash/toPairs'>;
+declare module 'lodash/fp/toPairs.js' {
+  declare module.exports: $Exports<'lodash/fp/toPairs'>;
 }
-declare module 'lodash/toPairsIn.js' {
-  declare module.exports: $Exports<'lodash/toPairsIn'>;
+declare module 'lodash/fp/toPairsIn.js' {
+  declare module.exports: $Exports<'lodash/fp/toPairsIn'>;
 }
-declare module 'lodash/toPath.js' {
-  declare module.exports: $Exports<'lodash/toPath'>;
+declare module 'lodash/fp/toPath.js' {
+  declare module.exports: $Exports<'lodash/fp/toPath'>;
 }
-declare module 'lodash/toPlainObject.js' {
-  declare module.exports: $Exports<'lodash/toPlainObject'>;
+declare module 'lodash/fp/toPlainObject.js' {
+  declare module.exports: $Exports<'lodash/fp/toPlainObject'>;
 }
-declare module 'lodash/toSafeInteger.js' {
-  declare module.exports: $Exports<'lodash/toSafeInteger'>;
+declare module 'lodash/fp/toSafeInteger.js' {
+  declare module.exports: $Exports<'lodash/fp/toSafeInteger'>;
 }
-declare module 'lodash/toString.js' {
-  declare module.exports: $Exports<'lodash/toString'>;
+declare module 'lodash/fp/toString.js' {
+  declare module.exports: $Exports<'lodash/fp/toString'>;
 }
-declare module 'lodash/toUpper.js' {
-  declare module.exports: $Exports<'lodash/toUpper'>;
+declare module 'lodash/fp/toUpper.js' {
+  declare module.exports: $Exports<'lodash/fp/toUpper'>;
 }
-declare module 'lodash/transform.js' {
-  declare module.exports: $Exports<'lodash/transform'>;
+declare module 'lodash/fp/transform.js' {
+  declare module.exports: $Exports<'lodash/fp/transform'>;
 }
-declare module 'lodash/trim.js' {
-  declare module.exports: $Exports<'lodash/trim'>;
+declare module 'lodash/fp/trim.js' {
+  declare module.exports: $Exports<'lodash/fp/trim'>;
 }
-declare module 'lodash/trimChars.js' {
-  declare module.exports: $Exports<'lodash/trimChars'>;
+declare module 'lodash/fp/trimChars.js' {
+  declare module.exports: $Exports<'lodash/fp/trimChars'>;
 }
-declare module 'lodash/trimCharsEnd.js' {
-  declare module.exports: $Exports<'lodash/trimCharsEnd'>;
+declare module 'lodash/fp/trimCharsEnd.js' {
+  declare module.exports: $Exports<'lodash/fp/trimCharsEnd'>;
 }
-declare module 'lodash/trimCharsStart.js' {
-  declare module.exports: $Exports<'lodash/trimCharsStart'>;
+declare module 'lodash/fp/trimCharsStart.js' {
+  declare module.exports: $Exports<'lodash/fp/trimCharsStart'>;
 }
-declare module 'lodash/trimEnd.js' {
-  declare module.exports: $Exports<'lodash/trimEnd'>;
+declare module 'lodash/fp/trimEnd.js' {
+  declare module.exports: $Exports<'lodash/fp/trimEnd'>;
 }
-declare module 'lodash/trimStart.js' {
-  declare module.exports: $Exports<'lodash/trimStart'>;
+declare module 'lodash/fp/trimStart.js' {
+  declare module.exports: $Exports<'lodash/fp/trimStart'>;
 }
-declare module 'lodash/truncate.js' {
-  declare module.exports: $Exports<'lodash/truncate'>;
+declare module 'lodash/fp/truncate.js' {
+  declare module.exports: $Exports<'lodash/fp/truncate'>;
 }
-declare module 'lodash/unapply.js' {
-  declare module.exports: $Exports<'lodash/unapply'>;
+declare module 'lodash/fp/unapply.js' {
+  declare module.exports: $Exports<'lodash/fp/unapply'>;
 }
-declare module 'lodash/unary.js' {
-  declare module.exports: $Exports<'lodash/unary'>;
+declare module 'lodash/fp/unary.js' {
+  declare module.exports: $Exports<'lodash/fp/unary'>;
 }
-declare module 'lodash/unescape.js' {
-  declare module.exports: $Exports<'lodash/unescape'>;
+declare module 'lodash/fp/unescape.js' {
+  declare module.exports: $Exports<'lodash/fp/unescape'>;
 }
-declare module 'lodash/union.js' {
-  declare module.exports: $Exports<'lodash/union'>;
+declare module 'lodash/fp/union.js' {
+  declare module.exports: $Exports<'lodash/fp/union'>;
 }
-declare module 'lodash/unionBy.js' {
-  declare module.exports: $Exports<'lodash/unionBy'>;
+declare module 'lodash/fp/unionBy.js' {
+  declare module.exports: $Exports<'lodash/fp/unionBy'>;
 }
-declare module 'lodash/unionWith.js' {
-  declare module.exports: $Exports<'lodash/unionWith'>;
+declare module 'lodash/fp/unionWith.js' {
+  declare module.exports: $Exports<'lodash/fp/unionWith'>;
 }
-declare module 'lodash/uniq.js' {
-  declare module.exports: $Exports<'lodash/uniq'>;
+declare module 'lodash/fp/uniq.js' {
+  declare module.exports: $Exports<'lodash/fp/uniq'>;
 }
-declare module 'lodash/uniqBy.js' {
-  declare module.exports: $Exports<'lodash/uniqBy'>;
+declare module 'lodash/fp/uniqBy.js' {
+  declare module.exports: $Exports<'lodash/fp/uniqBy'>;
 }
-declare module 'lodash/uniqueId.js' {
-  declare module.exports: $Exports<'lodash/uniqueId'>;
+declare module 'lodash/fp/uniqueId.js' {
+  declare module.exports: $Exports<'lodash/fp/uniqueId'>;
 }
-declare module 'lodash/uniqWith.js' {
-  declare module.exports: $Exports<'lodash/uniqWith'>;
+declare module 'lodash/fp/uniqWith.js' {
+  declare module.exports: $Exports<'lodash/fp/uniqWith'>;
 }
-declare module 'lodash/unnest.js' {
-  declare module.exports: $Exports<'lodash/unnest'>;
+declare module 'lodash/fp/unnest.js' {
+  declare module.exports: $Exports<'lodash/fp/unnest'>;
 }
-declare module 'lodash/unset.js' {
-  declare module.exports: $Exports<'lodash/unset'>;
+declare module 'lodash/fp/unset.js' {
+  declare module.exports: $Exports<'lodash/fp/unset'>;
 }
-declare module 'lodash/unzip.js' {
-  declare module.exports: $Exports<'lodash/unzip'>;
+declare module 'lodash/fp/unzip.js' {
+  declare module.exports: $Exports<'lodash/fp/unzip'>;
 }
-declare module 'lodash/unzipWith.js' {
-  declare module.exports: $Exports<'lodash/unzipWith'>;
+declare module 'lodash/fp/unzipWith.js' {
+  declare module.exports: $Exports<'lodash/fp/unzipWith'>;
 }
-declare module 'lodash/update.js' {
-  declare module.exports: $Exports<'lodash/update'>;
+declare module 'lodash/fp/update.js' {
+  declare module.exports: $Exports<'lodash/fp/update'>;
 }
-declare module 'lodash/updateWith.js' {
-  declare module.exports: $Exports<'lodash/updateWith'>;
+declare module 'lodash/fp/updateWith.js' {
+  declare module.exports: $Exports<'lodash/fp/updateWith'>;
 }
-declare module 'lodash/upperCase.js' {
-  declare module.exports: $Exports<'lodash/upperCase'>;
+declare module 'lodash/fp/upperCase.js' {
+  declare module.exports: $Exports<'lodash/fp/upperCase'>;
 }
-declare module 'lodash/upperFirst.js' {
-  declare module.exports: $Exports<'lodash/upperFirst'>;
+declare module 'lodash/fp/upperFirst.js' {
+  declare module.exports: $Exports<'lodash/fp/upperFirst'>;
 }
-declare module 'lodash/useWith.js' {
-  declare module.exports: $Exports<'lodash/useWith'>;
+declare module 'lodash/fp/useWith.js' {
+  declare module.exports: $Exports<'lodash/fp/useWith'>;
 }
-declare module 'lodash/util.js' {
-  declare module.exports: $Exports<'lodash/util'>;
+declare module 'lodash/fp/util.js' {
+  declare module.exports: $Exports<'lodash/fp/util'>;
 }
-declare module 'lodash/value.js' {
-  declare module.exports: $Exports<'lodash/value'>;
+declare module 'lodash/fp/value.js' {
+  declare module.exports: $Exports<'lodash/fp/value'>;
 }
-declare module 'lodash/valueOf.js' {
-  declare module.exports: $Exports<'lodash/valueOf'>;
+declare module 'lodash/fp/valueOf.js' {
+  declare module.exports: $Exports<'lodash/fp/valueOf'>;
 }
-declare module 'lodash/values.js' {
-  declare module.exports: $Exports<'lodash/values'>;
+declare module 'lodash/fp/values.js' {
+  declare module.exports: $Exports<'lodash/fp/values'>;
 }
-declare module 'lodash/valuesIn.js' {
-  declare module.exports: $Exports<'lodash/valuesIn'>;
+declare module 'lodash/fp/valuesIn.js' {
+  declare module.exports: $Exports<'lodash/fp/valuesIn'>;
 }
-declare module 'lodash/where.js' {
-  declare module.exports: $Exports<'lodash/where'>;
+declare module 'lodash/fp/where.js' {
+  declare module.exports: $Exports<'lodash/fp/where'>;
 }
-declare module 'lodash/whereEq.js' {
-  declare module.exports: $Exports<'lodash/whereEq'>;
+declare module 'lodash/fp/whereEq.js' {
+  declare module.exports: $Exports<'lodash/fp/whereEq'>;
 }
-declare module 'lodash/without.js' {
-  declare module.exports: $Exports<'lodash/without'>;
+declare module 'lodash/fp/without.js' {
+  declare module.exports: $Exports<'lodash/fp/without'>;
 }
-declare module 'lodash/words.js' {
-  declare module.exports: $Exports<'lodash/words'>;
+declare module 'lodash/fp/words.js' {
+  declare module.exports: $Exports<'lodash/fp/words'>;
 }
-declare module 'lodash/wrap.js' {
-  declare module.exports: $Exports<'lodash/wrap'>;
+declare module 'lodash/fp/wrap.js' {
+  declare module.exports: $Exports<'lodash/fp/wrap'>;
 }
-declare module 'lodash/wrapperAt.js' {
-  declare module.exports: $Exports<'lodash/wrapperAt'>;
+declare module 'lodash/fp/wrapperAt.js' {
+  declare module.exports: $Exports<'lodash/fp/wrapperAt'>;
 }
-declare module 'lodash/wrapperChain.js' {
-  declare module.exports: $Exports<'lodash/wrapperChain'>;
+declare module 'lodash/fp/wrapperChain.js' {
+  declare module.exports: $Exports<'lodash/fp/wrapperChain'>;
 }
-declare module 'lodash/wrapperLodash.js' {
-  declare module.exports: $Exports<'lodash/wrapperLodash'>;
+declare module 'lodash/fp/wrapperLodash.js' {
+  declare module.exports: $Exports<'lodash/fp/wrapperLodash'>;
 }
-declare module 'lodash/wrapperReverse.js' {
-  declare module.exports: $Exports<'lodash/wrapperReverse'>;
+declare module 'lodash/fp/wrapperReverse.js' {
+  declare module.exports: $Exports<'lodash/fp/wrapperReverse'>;
 }
-declare module 'lodash/wrapperValue.js' {
-  declare module.exports: $Exports<'lodash/wrapperValue'>;
+declare module 'lodash/fp/wrapperValue.js' {
+  declare module.exports: $Exports<'lodash/fp/wrapperValue'>;
 }
-declare module 'lodash/xor.js' {
-  declare module.exports: $Exports<'lodash/xor'>;
+declare module 'lodash/fp/xor.js' {
+  declare module.exports: $Exports<'lodash/fp/xor'>;
 }
-declare module 'lodash/xorBy.js' {
-  declare module.exports: $Exports<'lodash/xorBy'>;
+declare module 'lodash/fp/xorBy.js' {
+  declare module.exports: $Exports<'lodash/fp/xorBy'>;
 }
-declare module 'lodash/xorWith.js' {
-  declare module.exports: $Exports<'lodash/xorWith'>;
+declare module 'lodash/fp/xorWith.js' {
+  declare module.exports: $Exports<'lodash/fp/xorWith'>;
 }
-declare module 'lodash/zip.js' {
-  declare module.exports: $Exports<'lodash/zip'>;
+declare module 'lodash/fp/zip.js' {
+  declare module.exports: $Exports<'lodash/fp/zip'>;
 }
-declare module 'lodash/zipAll.js' {
-  declare module.exports: $Exports<'lodash/zipAll'>;
+declare module 'lodash/fp/zipAll.js' {
+  declare module.exports: $Exports<'lodash/fp/zipAll'>;
 }
-declare module 'lodash/zipObj.js' {
-  declare module.exports: $Exports<'lodash/zipObj'>;
+declare module 'lodash/fp/zipObj.js' {
+  declare module.exports: $Exports<'lodash/fp/zipObj'>;
 }
-declare module 'lodash/zipObject.js' {
-  declare module.exports: $Exports<'lodash/zipObject'>;
+declare module 'lodash/fp/zipObject.js' {
+  declare module.exports: $Exports<'lodash/fp/zipObject'>;
 }
-declare module 'lodash/zipObjectDeep.js' {
-  declare module.exports: $Exports<'lodash/zipObjectDeep'>;
+declare module 'lodash/fp/zipObjectDeep.js' {
+  declare module.exports: $Exports<'lodash/fp/zipObjectDeep'>;
 }
-declare module 'lodash/zipWith.js' {
-  declare module.exports: $Exports<'lodash/zipWith'>;
+declare module 'lodash/fp/zipWith.js' {
+  declare module.exports: $Exports<'lodash/fp/zipWith'>;
 }
 declare module 'lodash/fromPairs.js' {
   declare module.exports: $Exports<'lodash/fromPairs'>;

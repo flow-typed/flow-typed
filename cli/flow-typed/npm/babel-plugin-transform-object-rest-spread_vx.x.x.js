@@ -1,4 +1,4 @@
-// flow-typed signature: 4024d1698ace21b0530e20a682483673
+// flow-typed signature: 764e3a9609e44fbc0bfdf96e516b61f3
 // flow-typed version: <<STUB>>/babel-plugin-transform-object-rest-spread_v6.6.5/flow_v0.32.0
 
 /**
@@ -22,12 +22,11 @@ declare module 'babel-plugin-transform-object-rest-spread' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-
+declare module 'babel-plugin-transform-object-rest-spread/lib/index' {
+  declare module.exports: any;
+}
 
 // Filename aliases
-declare module 'babel-plugin-transform-object-rest-spread/index' {
-  declare module.exports: $Exports<'babel-plugin-transform-object-rest-spread'>;
-}
-declare module 'babel-plugin-transform-object-rest-spread/index.js' {
-  declare module.exports: $Exports<'babel-plugin-transform-object-rest-spread'>;
+declare module 'babel-plugin-transform-object-rest-spread/lib/index.js' {
+  declare module.exports: $Exports<'babel-plugin-transform-object-rest-spread/lib/index'>;
 }

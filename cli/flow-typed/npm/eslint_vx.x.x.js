@@ -1,4 +1,4 @@
-// flow-typed signature: 19e4c63d759cedfafeedc60f22b5b7a4
+// flow-typed signature: f42537ee3603b2cfac151284e2d3e8aa
 // flow-typed version: <<STUB>>/eslint_v^2.9.0/flow_v0.32.0
 
 /**
@@ -22,1957 +22,1957 @@ declare module 'eslint' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'eslint/eslint' {
+declare module 'eslint/bin/eslint' {
   declare module.exports: any;
 }
 
-declare module 'eslint/cli-options' {
+declare module 'eslint/conf/cli-options' {
   declare module.exports: any;
 }
 
-declare module 'eslint/environments' {
+declare module 'eslint/conf/environments' {
   declare module.exports: any;
 }
 
-declare module 'eslint/eslint-all' {
+declare module 'eslint/conf/eslint-all' {
   declare module.exports: any;
 }
 
-declare module 'eslint/api' {
+declare module 'eslint/lib/api' {
   declare module.exports: any;
 }
 
-declare module 'eslint/ast-utils' {
+declare module 'eslint/lib/ast-utils' {
   declare module.exports: any;
 }
 
-declare module 'eslint/cli-engine' {
+declare module 'eslint/lib/cli-engine' {
   declare module.exports: any;
 }
 
-declare module 'eslint/cli' {
+declare module 'eslint/lib/cli' {
   declare module.exports: any;
 }
 
-declare module 'eslint/code-path-analyzer' {
+declare module 'eslint/lib/code-path-analysis/code-path-analyzer' {
   declare module.exports: any;
 }
 
-declare module 'eslint/code-path-segment' {
+declare module 'eslint/lib/code-path-analysis/code-path-segment' {
   declare module.exports: any;
 }
 
-declare module 'eslint/code-path-state' {
+declare module 'eslint/lib/code-path-analysis/code-path-state' {
   declare module.exports: any;
 }
 
-declare module 'eslint/code-path' {
+declare module 'eslint/lib/code-path-analysis/code-path' {
   declare module.exports: any;
 }
 
-declare module 'eslint/debug-helpers' {
+declare module 'eslint/lib/code-path-analysis/debug-helpers' {
   declare module.exports: any;
 }
 
-declare module 'eslint/fork-context' {
+declare module 'eslint/lib/code-path-analysis/fork-context' {
   declare module.exports: any;
 }
 
-declare module 'eslint/id-generator' {
+declare module 'eslint/lib/code-path-analysis/id-generator' {
   declare module.exports: any;
 }
 
-declare module 'eslint/config' {
+declare module 'eslint/lib/config' {
   declare module.exports: any;
 }
 
-declare module 'eslint/autoconfig' {
+declare module 'eslint/lib/config/autoconfig' {
   declare module.exports: any;
 }
 
-declare module 'eslint/config-file' {
+declare module 'eslint/lib/config/config-file' {
   declare module.exports: any;
 }
 
-declare module 'eslint/config-initializer' {
+declare module 'eslint/lib/config/config-initializer' {
   declare module.exports: any;
 }
 
-declare module 'eslint/config-ops' {
+declare module 'eslint/lib/config/config-ops' {
   declare module.exports: any;
 }
 
-declare module 'eslint/config-rule' {
+declare module 'eslint/lib/config/config-rule' {
   declare module.exports: any;
 }
 
-declare module 'eslint/config-validator' {
+declare module 'eslint/lib/config/config-validator' {
   declare module.exports: any;
 }
 
-declare module 'eslint/environments' {
+declare module 'eslint/lib/config/environments' {
   declare module.exports: any;
 }
 
-declare module 'eslint/plugins' {
+declare module 'eslint/lib/config/plugins' {
   declare module.exports: any;
 }
 
-declare module 'eslint/eslint' {
+declare module 'eslint/lib/eslint' {
   declare module.exports: any;
 }
 
-declare module 'eslint/file-finder' {
+declare module 'eslint/lib/file-finder' {
   declare module.exports: any;
 }
 
-declare module 'eslint/checkstyle' {
+declare module 'eslint/lib/formatters/checkstyle' {
   declare module.exports: any;
 }
 
-declare module 'eslint/compact' {
+declare module 'eslint/lib/formatters/compact' {
   declare module.exports: any;
 }
 
-declare module 'eslint/html' {
+declare module 'eslint/lib/formatters/html' {
   declare module.exports: any;
 }
 
-declare module 'eslint/jslint-xml' {
+declare module 'eslint/lib/formatters/jslint-xml' {
   declare module.exports: any;
 }
 
-declare module 'eslint/json' {
+declare module 'eslint/lib/formatters/json' {
   declare module.exports: any;
 }
 
-declare module 'eslint/junit' {
+declare module 'eslint/lib/formatters/junit' {
   declare module.exports: any;
 }
 
-declare module 'eslint/stylish' {
+declare module 'eslint/lib/formatters/stylish' {
   declare module.exports: any;
 }
 
-declare module 'eslint/table' {
+declare module 'eslint/lib/formatters/table' {
   declare module.exports: any;
 }
 
-declare module 'eslint/tap' {
+declare module 'eslint/lib/formatters/tap' {
   declare module.exports: any;
 }
 
-declare module 'eslint/unix' {
+declare module 'eslint/lib/formatters/unix' {
   declare module.exports: any;
 }
 
-declare module 'eslint/visualstudio' {
+declare module 'eslint/lib/formatters/visualstudio' {
   declare module.exports: any;
 }
 
-declare module 'eslint/ignored-paths' {
+declare module 'eslint/lib/ignored-paths' {
   declare module.exports: any;
 }
 
-declare module 'eslint/load-rules' {
+declare module 'eslint/lib/load-rules' {
   declare module.exports: any;
 }
 
-declare module 'eslint/logging' {
+declare module 'eslint/lib/logging' {
   declare module.exports: any;
 }
 
-declare module 'eslint/options' {
+declare module 'eslint/lib/options' {
   declare module.exports: any;
 }
 
-declare module 'eslint/rule-context' {
+declare module 'eslint/lib/rule-context' {
   declare module.exports: any;
 }
 
-declare module 'eslint/rules' {
+declare module 'eslint/lib/rules' {
   declare module.exports: any;
 }
 
-declare module 'eslint/accessor-pairs' {
+declare module 'eslint/lib/rules/accessor-pairs' {
   declare module.exports: any;
 }
 
-declare module 'eslint/array-bracket-spacing' {
+declare module 'eslint/lib/rules/array-bracket-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/array-callback-return' {
+declare module 'eslint/lib/rules/array-callback-return' {
   declare module.exports: any;
 }
 
-declare module 'eslint/arrow-body-style' {
+declare module 'eslint/lib/rules/arrow-body-style' {
   declare module.exports: any;
 }
 
-declare module 'eslint/arrow-parens' {
+declare module 'eslint/lib/rules/arrow-parens' {
   declare module.exports: any;
 }
 
-declare module 'eslint/arrow-spacing' {
+declare module 'eslint/lib/rules/arrow-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/block-scoped-var' {
+declare module 'eslint/lib/rules/block-scoped-var' {
   declare module.exports: any;
 }
 
-declare module 'eslint/block-spacing' {
+declare module 'eslint/lib/rules/block-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/brace-style' {
+declare module 'eslint/lib/rules/brace-style' {
   declare module.exports: any;
 }
 
-declare module 'eslint/callback-return' {
+declare module 'eslint/lib/rules/callback-return' {
   declare module.exports: any;
 }
 
-declare module 'eslint/camelcase' {
+declare module 'eslint/lib/rules/camelcase' {
   declare module.exports: any;
 }
 
-declare module 'eslint/comma-dangle' {
+declare module 'eslint/lib/rules/comma-dangle' {
   declare module.exports: any;
 }
 
-declare module 'eslint/comma-spacing' {
+declare module 'eslint/lib/rules/comma-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/comma-style' {
+declare module 'eslint/lib/rules/comma-style' {
   declare module.exports: any;
 }
 
-declare module 'eslint/complexity' {
+declare module 'eslint/lib/rules/complexity' {
   declare module.exports: any;
 }
 
-declare module 'eslint/computed-property-spacing' {
+declare module 'eslint/lib/rules/computed-property-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/consistent-return' {
+declare module 'eslint/lib/rules/consistent-return' {
   declare module.exports: any;
 }
 
-declare module 'eslint/consistent-this' {
+declare module 'eslint/lib/rules/consistent-this' {
   declare module.exports: any;
 }
 
-declare module 'eslint/constructor-super' {
+declare module 'eslint/lib/rules/constructor-super' {
   declare module.exports: any;
 }
 
-declare module 'eslint/curly' {
+declare module 'eslint/lib/rules/curly' {
   declare module.exports: any;
 }
 
-declare module 'eslint/default-case' {
+declare module 'eslint/lib/rules/default-case' {
   declare module.exports: any;
 }
 
-declare module 'eslint/dot-location' {
+declare module 'eslint/lib/rules/dot-location' {
   declare module.exports: any;
 }
 
-declare module 'eslint/dot-notation' {
+declare module 'eslint/lib/rules/dot-notation' {
   declare module.exports: any;
 }
 
-declare module 'eslint/eol-last' {
+declare module 'eslint/lib/rules/eol-last' {
   declare module.exports: any;
 }
 
-declare module 'eslint/eqeqeq' {
+declare module 'eslint/lib/rules/eqeqeq' {
   declare module.exports: any;
 }
 
-declare module 'eslint/func-names' {
+declare module 'eslint/lib/rules/func-names' {
   declare module.exports: any;
 }
 
-declare module 'eslint/func-style' {
+declare module 'eslint/lib/rules/func-style' {
   declare module.exports: any;
 }
 
-declare module 'eslint/generator-star-spacing' {
+declare module 'eslint/lib/rules/generator-star-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/global-require' {
+declare module 'eslint/lib/rules/global-require' {
   declare module.exports: any;
 }
 
-declare module 'eslint/guard-for-in' {
+declare module 'eslint/lib/rules/guard-for-in' {
   declare module.exports: any;
 }
 
-declare module 'eslint/handle-callback-err' {
+declare module 'eslint/lib/rules/handle-callback-err' {
   declare module.exports: any;
 }
 
-declare module 'eslint/id-blacklist' {
+declare module 'eslint/lib/rules/id-blacklist' {
   declare module.exports: any;
 }
 
-declare module 'eslint/id-length' {
+declare module 'eslint/lib/rules/id-length' {
   declare module.exports: any;
 }
 
-declare module 'eslint/id-match' {
+declare module 'eslint/lib/rules/id-match' {
   declare module.exports: any;
 }
 
-declare module 'eslint/indent' {
+declare module 'eslint/lib/rules/indent' {
   declare module.exports: any;
 }
 
-declare module 'eslint/init-declarations' {
+declare module 'eslint/lib/rules/init-declarations' {
   declare module.exports: any;
 }
 
-declare module 'eslint/jsx-quotes' {
+declare module 'eslint/lib/rules/jsx-quotes' {
   declare module.exports: any;
 }
 
-declare module 'eslint/key-spacing' {
+declare module 'eslint/lib/rules/key-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/keyword-spacing' {
+declare module 'eslint/lib/rules/keyword-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/linebreak-style' {
+declare module 'eslint/lib/rules/linebreak-style' {
   declare module.exports: any;
 }
 
-declare module 'eslint/lines-around-comment' {
+declare module 'eslint/lib/rules/lines-around-comment' {
   declare module.exports: any;
 }
 
-declare module 'eslint/max-depth' {
+declare module 'eslint/lib/rules/max-depth' {
   declare module.exports: any;
 }
 
-declare module 'eslint/max-len' {
+declare module 'eslint/lib/rules/max-len' {
   declare module.exports: any;
 }
 
-declare module 'eslint/max-lines' {
+declare module 'eslint/lib/rules/max-lines' {
   declare module.exports: any;
 }
 
-declare module 'eslint/max-nested-callbacks' {
+declare module 'eslint/lib/rules/max-nested-callbacks' {
   declare module.exports: any;
 }
 
-declare module 'eslint/max-params' {
+declare module 'eslint/lib/rules/max-params' {
   declare module.exports: any;
 }
 
-declare module 'eslint/max-statements-per-line' {
+declare module 'eslint/lib/rules/max-statements-per-line' {
   declare module.exports: any;
 }
 
-declare module 'eslint/max-statements' {
+declare module 'eslint/lib/rules/max-statements' {
   declare module.exports: any;
 }
 
-declare module 'eslint/new-cap' {
+declare module 'eslint/lib/rules/new-cap' {
   declare module.exports: any;
 }
 
-declare module 'eslint/new-parens' {
+declare module 'eslint/lib/rules/new-parens' {
   declare module.exports: any;
 }
 
-declare module 'eslint/newline-after-var' {
+declare module 'eslint/lib/rules/newline-after-var' {
   declare module.exports: any;
 }
 
-declare module 'eslint/newline-before-return' {
+declare module 'eslint/lib/rules/newline-before-return' {
   declare module.exports: any;
 }
 
-declare module 'eslint/newline-per-chained-call' {
+declare module 'eslint/lib/rules/newline-per-chained-call' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-alert' {
+declare module 'eslint/lib/rules/no-alert' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-array-constructor' {
+declare module 'eslint/lib/rules/no-array-constructor' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-bitwise' {
+declare module 'eslint/lib/rules/no-bitwise' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-caller' {
+declare module 'eslint/lib/rules/no-caller' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-case-declarations' {
+declare module 'eslint/lib/rules/no-case-declarations' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-catch-shadow' {
+declare module 'eslint/lib/rules/no-catch-shadow' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-class-assign' {
+declare module 'eslint/lib/rules/no-class-assign' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-cond-assign' {
+declare module 'eslint/lib/rules/no-cond-assign' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-confusing-arrow' {
+declare module 'eslint/lib/rules/no-confusing-arrow' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-console' {
+declare module 'eslint/lib/rules/no-console' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-const-assign' {
+declare module 'eslint/lib/rules/no-const-assign' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-constant-condition' {
+declare module 'eslint/lib/rules/no-constant-condition' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-continue' {
+declare module 'eslint/lib/rules/no-continue' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-control-regex' {
+declare module 'eslint/lib/rules/no-control-regex' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-debugger' {
+declare module 'eslint/lib/rules/no-debugger' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-delete-var' {
+declare module 'eslint/lib/rules/no-delete-var' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-div-regex' {
+declare module 'eslint/lib/rules/no-div-regex' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-dupe-args' {
+declare module 'eslint/lib/rules/no-dupe-args' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-dupe-class-members' {
+declare module 'eslint/lib/rules/no-dupe-class-members' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-dupe-keys' {
+declare module 'eslint/lib/rules/no-dupe-keys' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-duplicate-case' {
+declare module 'eslint/lib/rules/no-duplicate-case' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-duplicate-imports' {
+declare module 'eslint/lib/rules/no-duplicate-imports' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-else-return' {
+declare module 'eslint/lib/rules/no-else-return' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-empty-character-class' {
+declare module 'eslint/lib/rules/no-empty-character-class' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-empty-function' {
+declare module 'eslint/lib/rules/no-empty-function' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-empty-pattern' {
+declare module 'eslint/lib/rules/no-empty-pattern' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-empty' {
+declare module 'eslint/lib/rules/no-empty' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-eq-null' {
+declare module 'eslint/lib/rules/no-eq-null' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-eval' {
+declare module 'eslint/lib/rules/no-eval' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-ex-assign' {
+declare module 'eslint/lib/rules/no-ex-assign' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-extend-native' {
+declare module 'eslint/lib/rules/no-extend-native' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-extra-bind' {
+declare module 'eslint/lib/rules/no-extra-bind' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-extra-boolean-cast' {
+declare module 'eslint/lib/rules/no-extra-boolean-cast' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-extra-label' {
+declare module 'eslint/lib/rules/no-extra-label' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-extra-parens' {
+declare module 'eslint/lib/rules/no-extra-parens' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-extra-semi' {
+declare module 'eslint/lib/rules/no-extra-semi' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-fallthrough' {
+declare module 'eslint/lib/rules/no-fallthrough' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-floating-decimal' {
+declare module 'eslint/lib/rules/no-floating-decimal' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-func-assign' {
+declare module 'eslint/lib/rules/no-func-assign' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-implicit-coercion' {
+declare module 'eslint/lib/rules/no-implicit-coercion' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-implicit-globals' {
+declare module 'eslint/lib/rules/no-implicit-globals' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-implied-eval' {
+declare module 'eslint/lib/rules/no-implied-eval' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-inline-comments' {
+declare module 'eslint/lib/rules/no-inline-comments' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-inner-declarations' {
+declare module 'eslint/lib/rules/no-inner-declarations' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-invalid-regexp' {
+declare module 'eslint/lib/rules/no-invalid-regexp' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-invalid-this' {
+declare module 'eslint/lib/rules/no-invalid-this' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-irregular-whitespace' {
+declare module 'eslint/lib/rules/no-irregular-whitespace' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-iterator' {
+declare module 'eslint/lib/rules/no-iterator' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-label-var' {
+declare module 'eslint/lib/rules/no-label-var' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-labels' {
+declare module 'eslint/lib/rules/no-labels' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-lone-blocks' {
+declare module 'eslint/lib/rules/no-lone-blocks' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-lonely-if' {
+declare module 'eslint/lib/rules/no-lonely-if' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-loop-func' {
+declare module 'eslint/lib/rules/no-loop-func' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-magic-numbers' {
+declare module 'eslint/lib/rules/no-magic-numbers' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-mixed-operators' {
+declare module 'eslint/lib/rules/no-mixed-operators' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-mixed-requires' {
+declare module 'eslint/lib/rules/no-mixed-requires' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-mixed-spaces-and-tabs' {
+declare module 'eslint/lib/rules/no-mixed-spaces-and-tabs' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-multi-spaces' {
+declare module 'eslint/lib/rules/no-multi-spaces' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-multi-str' {
+declare module 'eslint/lib/rules/no-multi-str' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-multiple-empty-lines' {
+declare module 'eslint/lib/rules/no-multiple-empty-lines' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-native-reassign' {
+declare module 'eslint/lib/rules/no-native-reassign' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-negated-condition' {
+declare module 'eslint/lib/rules/no-negated-condition' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-negated-in-lhs' {
+declare module 'eslint/lib/rules/no-negated-in-lhs' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-nested-ternary' {
+declare module 'eslint/lib/rules/no-nested-ternary' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-new-func' {
+declare module 'eslint/lib/rules/no-new-func' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-new-object' {
+declare module 'eslint/lib/rules/no-new-object' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-new-require' {
+declare module 'eslint/lib/rules/no-new-require' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-new-symbol' {
+declare module 'eslint/lib/rules/no-new-symbol' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-new-wrappers' {
+declare module 'eslint/lib/rules/no-new-wrappers' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-new' {
+declare module 'eslint/lib/rules/no-new' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-obj-calls' {
+declare module 'eslint/lib/rules/no-obj-calls' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-octal-escape' {
+declare module 'eslint/lib/rules/no-octal-escape' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-octal' {
+declare module 'eslint/lib/rules/no-octal' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-param-reassign' {
+declare module 'eslint/lib/rules/no-param-reassign' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-path-concat' {
+declare module 'eslint/lib/rules/no-path-concat' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-plusplus' {
+declare module 'eslint/lib/rules/no-plusplus' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-process-env' {
+declare module 'eslint/lib/rules/no-process-env' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-process-exit' {
+declare module 'eslint/lib/rules/no-process-exit' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-proto' {
+declare module 'eslint/lib/rules/no-proto' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-prototype-builtins' {
+declare module 'eslint/lib/rules/no-prototype-builtins' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-redeclare' {
+declare module 'eslint/lib/rules/no-redeclare' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-regex-spaces' {
+declare module 'eslint/lib/rules/no-regex-spaces' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-restricted-globals' {
+declare module 'eslint/lib/rules/no-restricted-globals' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-restricted-imports' {
+declare module 'eslint/lib/rules/no-restricted-imports' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-restricted-modules' {
+declare module 'eslint/lib/rules/no-restricted-modules' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-restricted-syntax' {
+declare module 'eslint/lib/rules/no-restricted-syntax' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-return-assign' {
+declare module 'eslint/lib/rules/no-return-assign' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-script-url' {
+declare module 'eslint/lib/rules/no-script-url' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-self-assign' {
+declare module 'eslint/lib/rules/no-self-assign' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-self-compare' {
+declare module 'eslint/lib/rules/no-self-compare' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-sequences' {
+declare module 'eslint/lib/rules/no-sequences' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-shadow-restricted-names' {
+declare module 'eslint/lib/rules/no-shadow-restricted-names' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-shadow' {
+declare module 'eslint/lib/rules/no-shadow' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-spaced-func' {
+declare module 'eslint/lib/rules/no-spaced-func' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-sparse-arrays' {
+declare module 'eslint/lib/rules/no-sparse-arrays' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-sync' {
+declare module 'eslint/lib/rules/no-sync' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-ternary' {
+declare module 'eslint/lib/rules/no-ternary' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-this-before-super' {
+declare module 'eslint/lib/rules/no-this-before-super' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-throw-literal' {
+declare module 'eslint/lib/rules/no-throw-literal' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-trailing-spaces' {
+declare module 'eslint/lib/rules/no-trailing-spaces' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-undef-init' {
+declare module 'eslint/lib/rules/no-undef-init' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-undef' {
+declare module 'eslint/lib/rules/no-undef' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-undefined' {
+declare module 'eslint/lib/rules/no-undefined' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-underscore-dangle' {
+declare module 'eslint/lib/rules/no-underscore-dangle' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-unexpected-multiline' {
+declare module 'eslint/lib/rules/no-unexpected-multiline' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-unmodified-loop-condition' {
+declare module 'eslint/lib/rules/no-unmodified-loop-condition' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-unneeded-ternary' {
+declare module 'eslint/lib/rules/no-unneeded-ternary' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-unreachable' {
+declare module 'eslint/lib/rules/no-unreachable' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-unsafe-finally' {
+declare module 'eslint/lib/rules/no-unsafe-finally' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-unused-expressions' {
+declare module 'eslint/lib/rules/no-unused-expressions' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-unused-labels' {
+declare module 'eslint/lib/rules/no-unused-labels' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-unused-vars' {
+declare module 'eslint/lib/rules/no-unused-vars' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-use-before-define' {
+declare module 'eslint/lib/rules/no-use-before-define' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-useless-call' {
+declare module 'eslint/lib/rules/no-useless-call' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-useless-computed-key' {
+declare module 'eslint/lib/rules/no-useless-computed-key' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-useless-concat' {
+declare module 'eslint/lib/rules/no-useless-concat' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-useless-constructor' {
+declare module 'eslint/lib/rules/no-useless-constructor' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-useless-escape' {
+declare module 'eslint/lib/rules/no-useless-escape' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-useless-rename' {
+declare module 'eslint/lib/rules/no-useless-rename' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-var' {
+declare module 'eslint/lib/rules/no-var' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-void' {
+declare module 'eslint/lib/rules/no-void' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-warning-comments' {
+declare module 'eslint/lib/rules/no-warning-comments' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-whitespace-before-property' {
+declare module 'eslint/lib/rules/no-whitespace-before-property' {
   declare module.exports: any;
 }
 
-declare module 'eslint/no-with' {
+declare module 'eslint/lib/rules/no-with' {
   declare module.exports: any;
 }
 
-declare module 'eslint/object-curly-newline' {
+declare module 'eslint/lib/rules/object-curly-newline' {
   declare module.exports: any;
 }
 
-declare module 'eslint/object-curly-spacing' {
+declare module 'eslint/lib/rules/object-curly-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/object-property-newline' {
+declare module 'eslint/lib/rules/object-property-newline' {
   declare module.exports: any;
 }
 
-declare module 'eslint/object-shorthand' {
+declare module 'eslint/lib/rules/object-shorthand' {
   declare module.exports: any;
 }
 
-declare module 'eslint/one-var-declaration-per-line' {
+declare module 'eslint/lib/rules/one-var-declaration-per-line' {
   declare module.exports: any;
 }
 
-declare module 'eslint/one-var' {
+declare module 'eslint/lib/rules/one-var' {
   declare module.exports: any;
 }
 
-declare module 'eslint/operator-assignment' {
+declare module 'eslint/lib/rules/operator-assignment' {
   declare module.exports: any;
 }
 
-declare module 'eslint/operator-linebreak' {
+declare module 'eslint/lib/rules/operator-linebreak' {
   declare module.exports: any;
 }
 
-declare module 'eslint/padded-blocks' {
+declare module 'eslint/lib/rules/padded-blocks' {
   declare module.exports: any;
 }
 
-declare module 'eslint/prefer-arrow-callback' {
+declare module 'eslint/lib/rules/prefer-arrow-callback' {
   declare module.exports: any;
 }
 
-declare module 'eslint/prefer-const' {
+declare module 'eslint/lib/rules/prefer-const' {
   declare module.exports: any;
 }
 
-declare module 'eslint/prefer-reflect' {
+declare module 'eslint/lib/rules/prefer-reflect' {
   declare module.exports: any;
 }
 
-declare module 'eslint/prefer-rest-params' {
+declare module 'eslint/lib/rules/prefer-rest-params' {
   declare module.exports: any;
 }
 
-declare module 'eslint/prefer-spread' {
+declare module 'eslint/lib/rules/prefer-spread' {
   declare module.exports: any;
 }
 
-declare module 'eslint/prefer-template' {
+declare module 'eslint/lib/rules/prefer-template' {
   declare module.exports: any;
 }
 
-declare module 'eslint/quote-props' {
+declare module 'eslint/lib/rules/quote-props' {
   declare module.exports: any;
 }
 
-declare module 'eslint/quotes' {
+declare module 'eslint/lib/rules/quotes' {
   declare module.exports: any;
 }
 
-declare module 'eslint/radix' {
+declare module 'eslint/lib/rules/radix' {
   declare module.exports: any;
 }
 
-declare module 'eslint/require-jsdoc' {
+declare module 'eslint/lib/rules/require-jsdoc' {
   declare module.exports: any;
 }
 
-declare module 'eslint/require-yield' {
+declare module 'eslint/lib/rules/require-yield' {
   declare module.exports: any;
 }
 
-declare module 'eslint/rest-spread-spacing' {
+declare module 'eslint/lib/rules/rest-spread-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/semi-spacing' {
+declare module 'eslint/lib/rules/semi-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/semi' {
+declare module 'eslint/lib/rules/semi' {
   declare module.exports: any;
 }
 
-declare module 'eslint/sort-imports' {
+declare module 'eslint/lib/rules/sort-imports' {
   declare module.exports: any;
 }
 
-declare module 'eslint/sort-vars' {
+declare module 'eslint/lib/rules/sort-vars' {
   declare module.exports: any;
 }
 
-declare module 'eslint/space-before-blocks' {
+declare module 'eslint/lib/rules/space-before-blocks' {
   declare module.exports: any;
 }
 
-declare module 'eslint/space-before-function-paren' {
+declare module 'eslint/lib/rules/space-before-function-paren' {
   declare module.exports: any;
 }
 
-declare module 'eslint/space-in-parens' {
+declare module 'eslint/lib/rules/space-in-parens' {
   declare module.exports: any;
 }
 
-declare module 'eslint/space-infix-ops' {
+declare module 'eslint/lib/rules/space-infix-ops' {
   declare module.exports: any;
 }
 
-declare module 'eslint/space-unary-ops' {
+declare module 'eslint/lib/rules/space-unary-ops' {
   declare module.exports: any;
 }
 
-declare module 'eslint/spaced-comment' {
+declare module 'eslint/lib/rules/spaced-comment' {
   declare module.exports: any;
 }
 
-declare module 'eslint/strict' {
+declare module 'eslint/lib/rules/strict' {
   declare module.exports: any;
 }
 
-declare module 'eslint/template-curly-spacing' {
+declare module 'eslint/lib/rules/template-curly-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/unicode-bom' {
+declare module 'eslint/lib/rules/unicode-bom' {
   declare module.exports: any;
 }
 
-declare module 'eslint/use-isnan' {
+declare module 'eslint/lib/rules/use-isnan' {
   declare module.exports: any;
 }
 
-declare module 'eslint/valid-jsdoc' {
+declare module 'eslint/lib/rules/valid-jsdoc' {
   declare module.exports: any;
 }
 
-declare module 'eslint/valid-typeof' {
+declare module 'eslint/lib/rules/valid-typeof' {
   declare module.exports: any;
 }
 
-declare module 'eslint/vars-on-top' {
+declare module 'eslint/lib/rules/vars-on-top' {
   declare module.exports: any;
 }
 
-declare module 'eslint/wrap-iife' {
+declare module 'eslint/lib/rules/wrap-iife' {
   declare module.exports: any;
 }
 
-declare module 'eslint/wrap-regex' {
+declare module 'eslint/lib/rules/wrap-regex' {
   declare module.exports: any;
 }
 
-declare module 'eslint/yield-star-spacing' {
+declare module 'eslint/lib/rules/yield-star-spacing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/yoda' {
+declare module 'eslint/lib/rules/yoda' {
   declare module.exports: any;
 }
 
-declare module 'eslint/event-generator-tester' {
+declare module 'eslint/lib/testers/event-generator-tester' {
   declare module.exports: any;
 }
 
-declare module 'eslint/rule-tester' {
+declare module 'eslint/lib/testers/rule-tester' {
   declare module.exports: any;
 }
 
-declare module 'eslint/timing' {
+declare module 'eslint/lib/timing' {
   declare module.exports: any;
 }
 
-declare module 'eslint/token-store' {
+declare module 'eslint/lib/token-store' {
   declare module.exports: any;
 }
 
-declare module 'eslint/comment-event-generator' {
+declare module 'eslint/lib/util/comment-event-generator' {
   declare module.exports: any;
 }
 
-declare module 'eslint/glob-util' {
+declare module 'eslint/lib/util/glob-util' {
   declare module.exports: any;
 }
 
-declare module 'eslint/hash' {
+declare module 'eslint/lib/util/hash' {
   declare module.exports: any;
 }
 
-declare module 'eslint/keywords' {
+declare module 'eslint/lib/util/keywords' {
   declare module.exports: any;
 }
 
-declare module 'eslint/module-resolver' {
+declare module 'eslint/lib/util/module-resolver' {
   declare module.exports: any;
 }
 
-declare module 'eslint/node-event-generator' {
+declare module 'eslint/lib/util/node-event-generator' {
   declare module.exports: any;
 }
 
-declare module 'eslint/npm-util' {
+declare module 'eslint/lib/util/npm-util' {
   declare module.exports: any;
 }
 
-declare module 'eslint/path-util' {
+declare module 'eslint/lib/util/path-util' {
   declare module.exports: any;
 }
 
-declare module 'eslint/rule-fixer' {
+declare module 'eslint/lib/util/rule-fixer' {
   declare module.exports: any;
 }
 
-declare module 'eslint/source-code-fixer' {
+declare module 'eslint/lib/util/source-code-fixer' {
   declare module.exports: any;
 }
 
-declare module 'eslint/source-code-util' {
+declare module 'eslint/lib/util/source-code-util' {
   declare module.exports: any;
 }
 
-declare module 'eslint/source-code' {
+declare module 'eslint/lib/util/source-code' {
   declare module.exports: any;
 }
 
-declare module 'eslint/traverser' {
+declare module 'eslint/lib/util/traverser' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'eslint/eslint.js' {
-  declare module.exports: $Exports<'eslint/eslint'>;
+declare module 'eslint/bin/eslint.js' {
+  declare module.exports: $Exports<'eslint/bin/eslint'>;
 }
-declare module 'eslint/cli-options.js' {
-  declare module.exports: $Exports<'eslint/cli-options'>;
+declare module 'eslint/conf/cli-options.js' {
+  declare module.exports: $Exports<'eslint/conf/cli-options'>;
 }
-declare module 'eslint/environments.js' {
-  declare module.exports: $Exports<'eslint/environments'>;
+declare module 'eslint/conf/environments.js' {
+  declare module.exports: $Exports<'eslint/conf/environments'>;
 }
-declare module 'eslint/eslint-all.js' {
-  declare module.exports: $Exports<'eslint/eslint-all'>;
+declare module 'eslint/conf/eslint-all.js' {
+  declare module.exports: $Exports<'eslint/conf/eslint-all'>;
 }
-declare module 'eslint/api.js' {
-  declare module.exports: $Exports<'eslint/api'>;
+declare module 'eslint/lib/api.js' {
+  declare module.exports: $Exports<'eslint/lib/api'>;
 }
-declare module 'eslint/ast-utils.js' {
-  declare module.exports: $Exports<'eslint/ast-utils'>;
+declare module 'eslint/lib/ast-utils.js' {
+  declare module.exports: $Exports<'eslint/lib/ast-utils'>;
 }
-declare module 'eslint/cli-engine.js' {
-  declare module.exports: $Exports<'eslint/cli-engine'>;
+declare module 'eslint/lib/cli-engine.js' {
+  declare module.exports: $Exports<'eslint/lib/cli-engine'>;
 }
-declare module 'eslint/cli.js' {
-  declare module.exports: $Exports<'eslint/cli'>;
+declare module 'eslint/lib/cli.js' {
+  declare module.exports: $Exports<'eslint/lib/cli'>;
 }
-declare module 'eslint/code-path-analyzer.js' {
-  declare module.exports: $Exports<'eslint/code-path-analyzer'>;
+declare module 'eslint/lib/code-path-analysis/code-path-analyzer.js' {
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path-analyzer'>;
 }
-declare module 'eslint/code-path-segment.js' {
-  declare module.exports: $Exports<'eslint/code-path-segment'>;
+declare module 'eslint/lib/code-path-analysis/code-path-segment.js' {
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path-segment'>;
 }
-declare module 'eslint/code-path-state.js' {
-  declare module.exports: $Exports<'eslint/code-path-state'>;
+declare module 'eslint/lib/code-path-analysis/code-path-state.js' {
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path-state'>;
 }
-declare module 'eslint/code-path.js' {
-  declare module.exports: $Exports<'eslint/code-path'>;
+declare module 'eslint/lib/code-path-analysis/code-path.js' {
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/code-path'>;
 }
-declare module 'eslint/debug-helpers.js' {
-  declare module.exports: $Exports<'eslint/debug-helpers'>;
+declare module 'eslint/lib/code-path-analysis/debug-helpers.js' {
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/debug-helpers'>;
 }
-declare module 'eslint/fork-context.js' {
-  declare module.exports: $Exports<'eslint/fork-context'>;
+declare module 'eslint/lib/code-path-analysis/fork-context.js' {
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/fork-context'>;
 }
-declare module 'eslint/id-generator.js' {
-  declare module.exports: $Exports<'eslint/id-generator'>;
+declare module 'eslint/lib/code-path-analysis/id-generator.js' {
+  declare module.exports: $Exports<'eslint/lib/code-path-analysis/id-generator'>;
 }
-declare module 'eslint/config.js' {
-  declare module.exports: $Exports<'eslint/config'>;
+declare module 'eslint/lib/config.js' {
+  declare module.exports: $Exports<'eslint/lib/config'>;
 }
-declare module 'eslint/autoconfig.js' {
-  declare module.exports: $Exports<'eslint/autoconfig'>;
+declare module 'eslint/lib/config/autoconfig.js' {
+  declare module.exports: $Exports<'eslint/lib/config/autoconfig'>;
 }
-declare module 'eslint/config-file.js' {
-  declare module.exports: $Exports<'eslint/config-file'>;
+declare module 'eslint/lib/config/config-file.js' {
+  declare module.exports: $Exports<'eslint/lib/config/config-file'>;
 }
-declare module 'eslint/config-initializer.js' {
-  declare module.exports: $Exports<'eslint/config-initializer'>;
+declare module 'eslint/lib/config/config-initializer.js' {
+  declare module.exports: $Exports<'eslint/lib/config/config-initializer'>;
 }
-declare module 'eslint/config-ops.js' {
-  declare module.exports: $Exports<'eslint/config-ops'>;
+declare module 'eslint/lib/config/config-ops.js' {
+  declare module.exports: $Exports<'eslint/lib/config/config-ops'>;
 }
-declare module 'eslint/config-rule.js' {
-  declare module.exports: $Exports<'eslint/config-rule'>;
+declare module 'eslint/lib/config/config-rule.js' {
+  declare module.exports: $Exports<'eslint/lib/config/config-rule'>;
 }
-declare module 'eslint/config-validator.js' {
-  declare module.exports: $Exports<'eslint/config-validator'>;
+declare module 'eslint/lib/config/config-validator.js' {
+  declare module.exports: $Exports<'eslint/lib/config/config-validator'>;
 }
-declare module 'eslint/environments.js' {
-  declare module.exports: $Exports<'eslint/environments'>;
+declare module 'eslint/lib/config/environments.js' {
+  declare module.exports: $Exports<'eslint/lib/config/environments'>;
 }
-declare module 'eslint/plugins.js' {
-  declare module.exports: $Exports<'eslint/plugins'>;
+declare module 'eslint/lib/config/plugins.js' {
+  declare module.exports: $Exports<'eslint/lib/config/plugins'>;
 }
-declare module 'eslint/eslint.js' {
-  declare module.exports: $Exports<'eslint/eslint'>;
+declare module 'eslint/lib/eslint.js' {
+  declare module.exports: $Exports<'eslint/lib/eslint'>;
 }
-declare module 'eslint/file-finder.js' {
-  declare module.exports: $Exports<'eslint/file-finder'>;
+declare module 'eslint/lib/file-finder.js' {
+  declare module.exports: $Exports<'eslint/lib/file-finder'>;
 }
-declare module 'eslint/checkstyle.js' {
-  declare module.exports: $Exports<'eslint/checkstyle'>;
+declare module 'eslint/lib/formatters/checkstyle.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/checkstyle'>;
 }
-declare module 'eslint/compact.js' {
-  declare module.exports: $Exports<'eslint/compact'>;
+declare module 'eslint/lib/formatters/compact.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/compact'>;
 }
-declare module 'eslint/html.js' {
-  declare module.exports: $Exports<'eslint/html'>;
+declare module 'eslint/lib/formatters/html.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/html'>;
 }
-declare module 'eslint/jslint-xml.js' {
-  declare module.exports: $Exports<'eslint/jslint-xml'>;
+declare module 'eslint/lib/formatters/jslint-xml.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/jslint-xml'>;
 }
-declare module 'eslint/json.js' {
-  declare module.exports: $Exports<'eslint/json'>;
+declare module 'eslint/lib/formatters/json.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/json'>;
 }
-declare module 'eslint/junit.js' {
-  declare module.exports: $Exports<'eslint/junit'>;
+declare module 'eslint/lib/formatters/junit.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/junit'>;
 }
-declare module 'eslint/stylish.js' {
-  declare module.exports: $Exports<'eslint/stylish'>;
+declare module 'eslint/lib/formatters/stylish.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/stylish'>;
 }
-declare module 'eslint/table.js' {
-  declare module.exports: $Exports<'eslint/table'>;
+declare module 'eslint/lib/formatters/table.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/table'>;
 }
-declare module 'eslint/tap.js' {
-  declare module.exports: $Exports<'eslint/tap'>;
+declare module 'eslint/lib/formatters/tap.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/tap'>;
 }
-declare module 'eslint/unix.js' {
-  declare module.exports: $Exports<'eslint/unix'>;
+declare module 'eslint/lib/formatters/unix.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/unix'>;
 }
-declare module 'eslint/visualstudio.js' {
-  declare module.exports: $Exports<'eslint/visualstudio'>;
+declare module 'eslint/lib/formatters/visualstudio.js' {
+  declare module.exports: $Exports<'eslint/lib/formatters/visualstudio'>;
 }
-declare module 'eslint/ignored-paths.js' {
-  declare module.exports: $Exports<'eslint/ignored-paths'>;
+declare module 'eslint/lib/ignored-paths.js' {
+  declare module.exports: $Exports<'eslint/lib/ignored-paths'>;
 }
-declare module 'eslint/load-rules.js' {
-  declare module.exports: $Exports<'eslint/load-rules'>;
+declare module 'eslint/lib/load-rules.js' {
+  declare module.exports: $Exports<'eslint/lib/load-rules'>;
 }
-declare module 'eslint/logging.js' {
-  declare module.exports: $Exports<'eslint/logging'>;
+declare module 'eslint/lib/logging.js' {
+  declare module.exports: $Exports<'eslint/lib/logging'>;
 }
-declare module 'eslint/options.js' {
-  declare module.exports: $Exports<'eslint/options'>;
+declare module 'eslint/lib/options.js' {
+  declare module.exports: $Exports<'eslint/lib/options'>;
 }
-declare module 'eslint/rule-context.js' {
-  declare module.exports: $Exports<'eslint/rule-context'>;
+declare module 'eslint/lib/rule-context.js' {
+  declare module.exports: $Exports<'eslint/lib/rule-context'>;
 }
-declare module 'eslint/rules.js' {
-  declare module.exports: $Exports<'eslint/rules'>;
+declare module 'eslint/lib/rules.js' {
+  declare module.exports: $Exports<'eslint/lib/rules'>;
 }
-declare module 'eslint/accessor-pairs.js' {
-  declare module.exports: $Exports<'eslint/accessor-pairs'>;
+declare module 'eslint/lib/rules/accessor-pairs.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/accessor-pairs'>;
 }
-declare module 'eslint/array-bracket-spacing.js' {
-  declare module.exports: $Exports<'eslint/array-bracket-spacing'>;
+declare module 'eslint/lib/rules/array-bracket-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/array-bracket-spacing'>;
 }
-declare module 'eslint/array-callback-return.js' {
-  declare module.exports: $Exports<'eslint/array-callback-return'>;
+declare module 'eslint/lib/rules/array-callback-return.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/array-callback-return'>;
 }
-declare module 'eslint/arrow-body-style.js' {
-  declare module.exports: $Exports<'eslint/arrow-body-style'>;
+declare module 'eslint/lib/rules/arrow-body-style.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/arrow-body-style'>;
 }
-declare module 'eslint/arrow-parens.js' {
-  declare module.exports: $Exports<'eslint/arrow-parens'>;
+declare module 'eslint/lib/rules/arrow-parens.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/arrow-parens'>;
 }
-declare module 'eslint/arrow-spacing.js' {
-  declare module.exports: $Exports<'eslint/arrow-spacing'>;
+declare module 'eslint/lib/rules/arrow-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/arrow-spacing'>;
 }
-declare module 'eslint/block-scoped-var.js' {
-  declare module.exports: $Exports<'eslint/block-scoped-var'>;
+declare module 'eslint/lib/rules/block-scoped-var.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/block-scoped-var'>;
 }
-declare module 'eslint/block-spacing.js' {
-  declare module.exports: $Exports<'eslint/block-spacing'>;
+declare module 'eslint/lib/rules/block-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/block-spacing'>;
 }
-declare module 'eslint/brace-style.js' {
-  declare module.exports: $Exports<'eslint/brace-style'>;
+declare module 'eslint/lib/rules/brace-style.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/brace-style'>;
 }
-declare module 'eslint/callback-return.js' {
-  declare module.exports: $Exports<'eslint/callback-return'>;
+declare module 'eslint/lib/rules/callback-return.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/callback-return'>;
 }
-declare module 'eslint/camelcase.js' {
-  declare module.exports: $Exports<'eslint/camelcase'>;
+declare module 'eslint/lib/rules/camelcase.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/camelcase'>;
 }
-declare module 'eslint/comma-dangle.js' {
-  declare module.exports: $Exports<'eslint/comma-dangle'>;
+declare module 'eslint/lib/rules/comma-dangle.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/comma-dangle'>;
 }
-declare module 'eslint/comma-spacing.js' {
-  declare module.exports: $Exports<'eslint/comma-spacing'>;
+declare module 'eslint/lib/rules/comma-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/comma-spacing'>;
 }
-declare module 'eslint/comma-style.js' {
-  declare module.exports: $Exports<'eslint/comma-style'>;
+declare module 'eslint/lib/rules/comma-style.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/comma-style'>;
 }
-declare module 'eslint/complexity.js' {
-  declare module.exports: $Exports<'eslint/complexity'>;
+declare module 'eslint/lib/rules/complexity.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/complexity'>;
 }
-declare module 'eslint/computed-property-spacing.js' {
-  declare module.exports: $Exports<'eslint/computed-property-spacing'>;
+declare module 'eslint/lib/rules/computed-property-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/computed-property-spacing'>;
 }
-declare module 'eslint/consistent-return.js' {
-  declare module.exports: $Exports<'eslint/consistent-return'>;
+declare module 'eslint/lib/rules/consistent-return.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/consistent-return'>;
 }
-declare module 'eslint/consistent-this.js' {
-  declare module.exports: $Exports<'eslint/consistent-this'>;
+declare module 'eslint/lib/rules/consistent-this.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/consistent-this'>;
 }
-declare module 'eslint/constructor-super.js' {
-  declare module.exports: $Exports<'eslint/constructor-super'>;
+declare module 'eslint/lib/rules/constructor-super.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/constructor-super'>;
 }
-declare module 'eslint/curly.js' {
-  declare module.exports: $Exports<'eslint/curly'>;
+declare module 'eslint/lib/rules/curly.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/curly'>;
 }
-declare module 'eslint/default-case.js' {
-  declare module.exports: $Exports<'eslint/default-case'>;
+declare module 'eslint/lib/rules/default-case.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/default-case'>;
 }
-declare module 'eslint/dot-location.js' {
-  declare module.exports: $Exports<'eslint/dot-location'>;
+declare module 'eslint/lib/rules/dot-location.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/dot-location'>;
 }
-declare module 'eslint/dot-notation.js' {
-  declare module.exports: $Exports<'eslint/dot-notation'>;
+declare module 'eslint/lib/rules/dot-notation.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/dot-notation'>;
 }
-declare module 'eslint/eol-last.js' {
-  declare module.exports: $Exports<'eslint/eol-last'>;
+declare module 'eslint/lib/rules/eol-last.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/eol-last'>;
 }
-declare module 'eslint/eqeqeq.js' {
-  declare module.exports: $Exports<'eslint/eqeqeq'>;
+declare module 'eslint/lib/rules/eqeqeq.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/eqeqeq'>;
 }
-declare module 'eslint/func-names.js' {
-  declare module.exports: $Exports<'eslint/func-names'>;
+declare module 'eslint/lib/rules/func-names.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/func-names'>;
 }
-declare module 'eslint/func-style.js' {
-  declare module.exports: $Exports<'eslint/func-style'>;
+declare module 'eslint/lib/rules/func-style.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/func-style'>;
 }
-declare module 'eslint/generator-star-spacing.js' {
-  declare module.exports: $Exports<'eslint/generator-star-spacing'>;
+declare module 'eslint/lib/rules/generator-star-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/generator-star-spacing'>;
 }
-declare module 'eslint/global-require.js' {
-  declare module.exports: $Exports<'eslint/global-require'>;
+declare module 'eslint/lib/rules/global-require.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/global-require'>;
 }
-declare module 'eslint/guard-for-in.js' {
-  declare module.exports: $Exports<'eslint/guard-for-in'>;
+declare module 'eslint/lib/rules/guard-for-in.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/guard-for-in'>;
 }
-declare module 'eslint/handle-callback-err.js' {
-  declare module.exports: $Exports<'eslint/handle-callback-err'>;
+declare module 'eslint/lib/rules/handle-callback-err.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/handle-callback-err'>;
 }
-declare module 'eslint/id-blacklist.js' {
-  declare module.exports: $Exports<'eslint/id-blacklist'>;
+declare module 'eslint/lib/rules/id-blacklist.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/id-blacklist'>;
 }
-declare module 'eslint/id-length.js' {
-  declare module.exports: $Exports<'eslint/id-length'>;
+declare module 'eslint/lib/rules/id-length.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/id-length'>;
 }
-declare module 'eslint/id-match.js' {
-  declare module.exports: $Exports<'eslint/id-match'>;
+declare module 'eslint/lib/rules/id-match.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/id-match'>;
 }
-declare module 'eslint/indent.js' {
-  declare module.exports: $Exports<'eslint/indent'>;
+declare module 'eslint/lib/rules/indent.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/indent'>;
 }
-declare module 'eslint/init-declarations.js' {
-  declare module.exports: $Exports<'eslint/init-declarations'>;
+declare module 'eslint/lib/rules/init-declarations.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/init-declarations'>;
 }
-declare module 'eslint/jsx-quotes.js' {
-  declare module.exports: $Exports<'eslint/jsx-quotes'>;
+declare module 'eslint/lib/rules/jsx-quotes.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/jsx-quotes'>;
 }
-declare module 'eslint/key-spacing.js' {
-  declare module.exports: $Exports<'eslint/key-spacing'>;
+declare module 'eslint/lib/rules/key-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/key-spacing'>;
 }
-declare module 'eslint/keyword-spacing.js' {
-  declare module.exports: $Exports<'eslint/keyword-spacing'>;
+declare module 'eslint/lib/rules/keyword-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/keyword-spacing'>;
 }
-declare module 'eslint/linebreak-style.js' {
-  declare module.exports: $Exports<'eslint/linebreak-style'>;
+declare module 'eslint/lib/rules/linebreak-style.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/linebreak-style'>;
 }
-declare module 'eslint/lines-around-comment.js' {
-  declare module.exports: $Exports<'eslint/lines-around-comment'>;
+declare module 'eslint/lib/rules/lines-around-comment.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/lines-around-comment'>;
 }
-declare module 'eslint/max-depth.js' {
-  declare module.exports: $Exports<'eslint/max-depth'>;
+declare module 'eslint/lib/rules/max-depth.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/max-depth'>;
 }
-declare module 'eslint/max-len.js' {
-  declare module.exports: $Exports<'eslint/max-len'>;
+declare module 'eslint/lib/rules/max-len.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/max-len'>;
 }
-declare module 'eslint/max-lines.js' {
-  declare module.exports: $Exports<'eslint/max-lines'>;
+declare module 'eslint/lib/rules/max-lines.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/max-lines'>;
 }
-declare module 'eslint/max-nested-callbacks.js' {
-  declare module.exports: $Exports<'eslint/max-nested-callbacks'>;
+declare module 'eslint/lib/rules/max-nested-callbacks.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/max-nested-callbacks'>;
 }
-declare module 'eslint/max-params.js' {
-  declare module.exports: $Exports<'eslint/max-params'>;
+declare module 'eslint/lib/rules/max-params.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/max-params'>;
 }
-declare module 'eslint/max-statements-per-line.js' {
-  declare module.exports: $Exports<'eslint/max-statements-per-line'>;
+declare module 'eslint/lib/rules/max-statements-per-line.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/max-statements-per-line'>;
 }
-declare module 'eslint/max-statements.js' {
-  declare module.exports: $Exports<'eslint/max-statements'>;
+declare module 'eslint/lib/rules/max-statements.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/max-statements'>;
 }
-declare module 'eslint/new-cap.js' {
-  declare module.exports: $Exports<'eslint/new-cap'>;
+declare module 'eslint/lib/rules/new-cap.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/new-cap'>;
 }
-declare module 'eslint/new-parens.js' {
-  declare module.exports: $Exports<'eslint/new-parens'>;
+declare module 'eslint/lib/rules/new-parens.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/new-parens'>;
 }
-declare module 'eslint/newline-after-var.js' {
-  declare module.exports: $Exports<'eslint/newline-after-var'>;
+declare module 'eslint/lib/rules/newline-after-var.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/newline-after-var'>;
 }
-declare module 'eslint/newline-before-return.js' {
-  declare module.exports: $Exports<'eslint/newline-before-return'>;
+declare module 'eslint/lib/rules/newline-before-return.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/newline-before-return'>;
 }
-declare module 'eslint/newline-per-chained-call.js' {
-  declare module.exports: $Exports<'eslint/newline-per-chained-call'>;
+declare module 'eslint/lib/rules/newline-per-chained-call.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/newline-per-chained-call'>;
 }
-declare module 'eslint/no-alert.js' {
-  declare module.exports: $Exports<'eslint/no-alert'>;
+declare module 'eslint/lib/rules/no-alert.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-alert'>;
 }
-declare module 'eslint/no-array-constructor.js' {
-  declare module.exports: $Exports<'eslint/no-array-constructor'>;
+declare module 'eslint/lib/rules/no-array-constructor.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-array-constructor'>;
 }
-declare module 'eslint/no-bitwise.js' {
-  declare module.exports: $Exports<'eslint/no-bitwise'>;
+declare module 'eslint/lib/rules/no-bitwise.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-bitwise'>;
 }
-declare module 'eslint/no-caller.js' {
-  declare module.exports: $Exports<'eslint/no-caller'>;
+declare module 'eslint/lib/rules/no-caller.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-caller'>;
 }
-declare module 'eslint/no-case-declarations.js' {
-  declare module.exports: $Exports<'eslint/no-case-declarations'>;
+declare module 'eslint/lib/rules/no-case-declarations.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-case-declarations'>;
 }
-declare module 'eslint/no-catch-shadow.js' {
-  declare module.exports: $Exports<'eslint/no-catch-shadow'>;
+declare module 'eslint/lib/rules/no-catch-shadow.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-catch-shadow'>;
 }
-declare module 'eslint/no-class-assign.js' {
-  declare module.exports: $Exports<'eslint/no-class-assign'>;
+declare module 'eslint/lib/rules/no-class-assign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-class-assign'>;
 }
-declare module 'eslint/no-cond-assign.js' {
-  declare module.exports: $Exports<'eslint/no-cond-assign'>;
+declare module 'eslint/lib/rules/no-cond-assign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-cond-assign'>;
 }
-declare module 'eslint/no-confusing-arrow.js' {
-  declare module.exports: $Exports<'eslint/no-confusing-arrow'>;
+declare module 'eslint/lib/rules/no-confusing-arrow.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-confusing-arrow'>;
 }
-declare module 'eslint/no-console.js' {
-  declare module.exports: $Exports<'eslint/no-console'>;
+declare module 'eslint/lib/rules/no-console.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-console'>;
 }
-declare module 'eslint/no-const-assign.js' {
-  declare module.exports: $Exports<'eslint/no-const-assign'>;
+declare module 'eslint/lib/rules/no-const-assign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-const-assign'>;
 }
-declare module 'eslint/no-constant-condition.js' {
-  declare module.exports: $Exports<'eslint/no-constant-condition'>;
+declare module 'eslint/lib/rules/no-constant-condition.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-constant-condition'>;
 }
-declare module 'eslint/no-continue.js' {
-  declare module.exports: $Exports<'eslint/no-continue'>;
+declare module 'eslint/lib/rules/no-continue.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-continue'>;
 }
-declare module 'eslint/no-control-regex.js' {
-  declare module.exports: $Exports<'eslint/no-control-regex'>;
+declare module 'eslint/lib/rules/no-control-regex.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-control-regex'>;
 }
-declare module 'eslint/no-debugger.js' {
-  declare module.exports: $Exports<'eslint/no-debugger'>;
+declare module 'eslint/lib/rules/no-debugger.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-debugger'>;
 }
-declare module 'eslint/no-delete-var.js' {
-  declare module.exports: $Exports<'eslint/no-delete-var'>;
+declare module 'eslint/lib/rules/no-delete-var.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-delete-var'>;
 }
-declare module 'eslint/no-div-regex.js' {
-  declare module.exports: $Exports<'eslint/no-div-regex'>;
+declare module 'eslint/lib/rules/no-div-regex.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-div-regex'>;
 }
-declare module 'eslint/no-dupe-args.js' {
-  declare module.exports: $Exports<'eslint/no-dupe-args'>;
+declare module 'eslint/lib/rules/no-dupe-args.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-dupe-args'>;
 }
-declare module 'eslint/no-dupe-class-members.js' {
-  declare module.exports: $Exports<'eslint/no-dupe-class-members'>;
+declare module 'eslint/lib/rules/no-dupe-class-members.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-dupe-class-members'>;
 }
-declare module 'eslint/no-dupe-keys.js' {
-  declare module.exports: $Exports<'eslint/no-dupe-keys'>;
+declare module 'eslint/lib/rules/no-dupe-keys.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-dupe-keys'>;
 }
-declare module 'eslint/no-duplicate-case.js' {
-  declare module.exports: $Exports<'eslint/no-duplicate-case'>;
+declare module 'eslint/lib/rules/no-duplicate-case.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-duplicate-case'>;
 }
-declare module 'eslint/no-duplicate-imports.js' {
-  declare module.exports: $Exports<'eslint/no-duplicate-imports'>;
+declare module 'eslint/lib/rules/no-duplicate-imports.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-duplicate-imports'>;
 }
-declare module 'eslint/no-else-return.js' {
-  declare module.exports: $Exports<'eslint/no-else-return'>;
+declare module 'eslint/lib/rules/no-else-return.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-else-return'>;
 }
-declare module 'eslint/no-empty-character-class.js' {
-  declare module.exports: $Exports<'eslint/no-empty-character-class'>;
+declare module 'eslint/lib/rules/no-empty-character-class.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-empty-character-class'>;
 }
-declare module 'eslint/no-empty-function.js' {
-  declare module.exports: $Exports<'eslint/no-empty-function'>;
+declare module 'eslint/lib/rules/no-empty-function.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-empty-function'>;
 }
-declare module 'eslint/no-empty-pattern.js' {
-  declare module.exports: $Exports<'eslint/no-empty-pattern'>;
+declare module 'eslint/lib/rules/no-empty-pattern.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-empty-pattern'>;
 }
-declare module 'eslint/no-empty.js' {
-  declare module.exports: $Exports<'eslint/no-empty'>;
+declare module 'eslint/lib/rules/no-empty.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-empty'>;
 }
-declare module 'eslint/no-eq-null.js' {
-  declare module.exports: $Exports<'eslint/no-eq-null'>;
+declare module 'eslint/lib/rules/no-eq-null.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-eq-null'>;
 }
-declare module 'eslint/no-eval.js' {
-  declare module.exports: $Exports<'eslint/no-eval'>;
+declare module 'eslint/lib/rules/no-eval.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-eval'>;
 }
-declare module 'eslint/no-ex-assign.js' {
-  declare module.exports: $Exports<'eslint/no-ex-assign'>;
+declare module 'eslint/lib/rules/no-ex-assign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-ex-assign'>;
 }
-declare module 'eslint/no-extend-native.js' {
-  declare module.exports: $Exports<'eslint/no-extend-native'>;
+declare module 'eslint/lib/rules/no-extend-native.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-extend-native'>;
 }
-declare module 'eslint/no-extra-bind.js' {
-  declare module.exports: $Exports<'eslint/no-extra-bind'>;
+declare module 'eslint/lib/rules/no-extra-bind.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-extra-bind'>;
 }
-declare module 'eslint/no-extra-boolean-cast.js' {
-  declare module.exports: $Exports<'eslint/no-extra-boolean-cast'>;
+declare module 'eslint/lib/rules/no-extra-boolean-cast.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-extra-boolean-cast'>;
 }
-declare module 'eslint/no-extra-label.js' {
-  declare module.exports: $Exports<'eslint/no-extra-label'>;
+declare module 'eslint/lib/rules/no-extra-label.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-extra-label'>;
 }
-declare module 'eslint/no-extra-parens.js' {
-  declare module.exports: $Exports<'eslint/no-extra-parens'>;
+declare module 'eslint/lib/rules/no-extra-parens.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-extra-parens'>;
 }
-declare module 'eslint/no-extra-semi.js' {
-  declare module.exports: $Exports<'eslint/no-extra-semi'>;
+declare module 'eslint/lib/rules/no-extra-semi.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-extra-semi'>;
 }
-declare module 'eslint/no-fallthrough.js' {
-  declare module.exports: $Exports<'eslint/no-fallthrough'>;
+declare module 'eslint/lib/rules/no-fallthrough.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-fallthrough'>;
 }
-declare module 'eslint/no-floating-decimal.js' {
-  declare module.exports: $Exports<'eslint/no-floating-decimal'>;
+declare module 'eslint/lib/rules/no-floating-decimal.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-floating-decimal'>;
 }
-declare module 'eslint/no-func-assign.js' {
-  declare module.exports: $Exports<'eslint/no-func-assign'>;
+declare module 'eslint/lib/rules/no-func-assign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-func-assign'>;
 }
-declare module 'eslint/no-implicit-coercion.js' {
-  declare module.exports: $Exports<'eslint/no-implicit-coercion'>;
+declare module 'eslint/lib/rules/no-implicit-coercion.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-implicit-coercion'>;
 }
-declare module 'eslint/no-implicit-globals.js' {
-  declare module.exports: $Exports<'eslint/no-implicit-globals'>;
+declare module 'eslint/lib/rules/no-implicit-globals.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-implicit-globals'>;
 }
-declare module 'eslint/no-implied-eval.js' {
-  declare module.exports: $Exports<'eslint/no-implied-eval'>;
+declare module 'eslint/lib/rules/no-implied-eval.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-implied-eval'>;
 }
-declare module 'eslint/no-inline-comments.js' {
-  declare module.exports: $Exports<'eslint/no-inline-comments'>;
+declare module 'eslint/lib/rules/no-inline-comments.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-inline-comments'>;
 }
-declare module 'eslint/no-inner-declarations.js' {
-  declare module.exports: $Exports<'eslint/no-inner-declarations'>;
+declare module 'eslint/lib/rules/no-inner-declarations.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-inner-declarations'>;
 }
-declare module 'eslint/no-invalid-regexp.js' {
-  declare module.exports: $Exports<'eslint/no-invalid-regexp'>;
+declare module 'eslint/lib/rules/no-invalid-regexp.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-invalid-regexp'>;
 }
-declare module 'eslint/no-invalid-this.js' {
-  declare module.exports: $Exports<'eslint/no-invalid-this'>;
+declare module 'eslint/lib/rules/no-invalid-this.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-invalid-this'>;
 }
-declare module 'eslint/no-irregular-whitespace.js' {
-  declare module.exports: $Exports<'eslint/no-irregular-whitespace'>;
+declare module 'eslint/lib/rules/no-irregular-whitespace.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-irregular-whitespace'>;
 }
-declare module 'eslint/no-iterator.js' {
-  declare module.exports: $Exports<'eslint/no-iterator'>;
+declare module 'eslint/lib/rules/no-iterator.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-iterator'>;
 }
-declare module 'eslint/no-label-var.js' {
-  declare module.exports: $Exports<'eslint/no-label-var'>;
+declare module 'eslint/lib/rules/no-label-var.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-label-var'>;
 }
-declare module 'eslint/no-labels.js' {
-  declare module.exports: $Exports<'eslint/no-labels'>;
+declare module 'eslint/lib/rules/no-labels.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-labels'>;
 }
-declare module 'eslint/no-lone-blocks.js' {
-  declare module.exports: $Exports<'eslint/no-lone-blocks'>;
+declare module 'eslint/lib/rules/no-lone-blocks.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-lone-blocks'>;
 }
-declare module 'eslint/no-lonely-if.js' {
-  declare module.exports: $Exports<'eslint/no-lonely-if'>;
+declare module 'eslint/lib/rules/no-lonely-if.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-lonely-if'>;
 }
-declare module 'eslint/no-loop-func.js' {
-  declare module.exports: $Exports<'eslint/no-loop-func'>;
+declare module 'eslint/lib/rules/no-loop-func.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-loop-func'>;
 }
-declare module 'eslint/no-magic-numbers.js' {
-  declare module.exports: $Exports<'eslint/no-magic-numbers'>;
+declare module 'eslint/lib/rules/no-magic-numbers.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-magic-numbers'>;
 }
-declare module 'eslint/no-mixed-operators.js' {
-  declare module.exports: $Exports<'eslint/no-mixed-operators'>;
+declare module 'eslint/lib/rules/no-mixed-operators.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-mixed-operators'>;
 }
-declare module 'eslint/no-mixed-requires.js' {
-  declare module.exports: $Exports<'eslint/no-mixed-requires'>;
+declare module 'eslint/lib/rules/no-mixed-requires.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-mixed-requires'>;
 }
-declare module 'eslint/no-mixed-spaces-and-tabs.js' {
-  declare module.exports: $Exports<'eslint/no-mixed-spaces-and-tabs'>;
+declare module 'eslint/lib/rules/no-mixed-spaces-and-tabs.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-mixed-spaces-and-tabs'>;
 }
-declare module 'eslint/no-multi-spaces.js' {
-  declare module.exports: $Exports<'eslint/no-multi-spaces'>;
+declare module 'eslint/lib/rules/no-multi-spaces.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-multi-spaces'>;
 }
-declare module 'eslint/no-multi-str.js' {
-  declare module.exports: $Exports<'eslint/no-multi-str'>;
+declare module 'eslint/lib/rules/no-multi-str.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-multi-str'>;
 }
-declare module 'eslint/no-multiple-empty-lines.js' {
-  declare module.exports: $Exports<'eslint/no-multiple-empty-lines'>;
+declare module 'eslint/lib/rules/no-multiple-empty-lines.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-multiple-empty-lines'>;
 }
-declare module 'eslint/no-native-reassign.js' {
-  declare module.exports: $Exports<'eslint/no-native-reassign'>;
+declare module 'eslint/lib/rules/no-native-reassign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-native-reassign'>;
 }
-declare module 'eslint/no-negated-condition.js' {
-  declare module.exports: $Exports<'eslint/no-negated-condition'>;
+declare module 'eslint/lib/rules/no-negated-condition.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-negated-condition'>;
 }
-declare module 'eslint/no-negated-in-lhs.js' {
-  declare module.exports: $Exports<'eslint/no-negated-in-lhs'>;
+declare module 'eslint/lib/rules/no-negated-in-lhs.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-negated-in-lhs'>;
 }
-declare module 'eslint/no-nested-ternary.js' {
-  declare module.exports: $Exports<'eslint/no-nested-ternary'>;
+declare module 'eslint/lib/rules/no-nested-ternary.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-nested-ternary'>;
 }
-declare module 'eslint/no-new-func.js' {
-  declare module.exports: $Exports<'eslint/no-new-func'>;
+declare module 'eslint/lib/rules/no-new-func.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-new-func'>;
 }
-declare module 'eslint/no-new-object.js' {
-  declare module.exports: $Exports<'eslint/no-new-object'>;
+declare module 'eslint/lib/rules/no-new-object.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-new-object'>;
 }
-declare module 'eslint/no-new-require.js' {
-  declare module.exports: $Exports<'eslint/no-new-require'>;
+declare module 'eslint/lib/rules/no-new-require.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-new-require'>;
 }
-declare module 'eslint/no-new-symbol.js' {
-  declare module.exports: $Exports<'eslint/no-new-symbol'>;
+declare module 'eslint/lib/rules/no-new-symbol.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-new-symbol'>;
 }
-declare module 'eslint/no-new-wrappers.js' {
-  declare module.exports: $Exports<'eslint/no-new-wrappers'>;
+declare module 'eslint/lib/rules/no-new-wrappers.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-new-wrappers'>;
 }
-declare module 'eslint/no-new.js' {
-  declare module.exports: $Exports<'eslint/no-new'>;
+declare module 'eslint/lib/rules/no-new.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-new'>;
 }
-declare module 'eslint/no-obj-calls.js' {
-  declare module.exports: $Exports<'eslint/no-obj-calls'>;
+declare module 'eslint/lib/rules/no-obj-calls.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-obj-calls'>;
 }
-declare module 'eslint/no-octal-escape.js' {
-  declare module.exports: $Exports<'eslint/no-octal-escape'>;
+declare module 'eslint/lib/rules/no-octal-escape.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-octal-escape'>;
 }
-declare module 'eslint/no-octal.js' {
-  declare module.exports: $Exports<'eslint/no-octal'>;
+declare module 'eslint/lib/rules/no-octal.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-octal'>;
 }
-declare module 'eslint/no-param-reassign.js' {
-  declare module.exports: $Exports<'eslint/no-param-reassign'>;
+declare module 'eslint/lib/rules/no-param-reassign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-param-reassign'>;
 }
-declare module 'eslint/no-path-concat.js' {
-  declare module.exports: $Exports<'eslint/no-path-concat'>;
+declare module 'eslint/lib/rules/no-path-concat.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-path-concat'>;
 }
-declare module 'eslint/no-plusplus.js' {
-  declare module.exports: $Exports<'eslint/no-plusplus'>;
+declare module 'eslint/lib/rules/no-plusplus.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-plusplus'>;
 }
-declare module 'eslint/no-process-env.js' {
-  declare module.exports: $Exports<'eslint/no-process-env'>;
+declare module 'eslint/lib/rules/no-process-env.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-process-env'>;
 }
-declare module 'eslint/no-process-exit.js' {
-  declare module.exports: $Exports<'eslint/no-process-exit'>;
+declare module 'eslint/lib/rules/no-process-exit.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-process-exit'>;
 }
-declare module 'eslint/no-proto.js' {
-  declare module.exports: $Exports<'eslint/no-proto'>;
+declare module 'eslint/lib/rules/no-proto.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-proto'>;
 }
-declare module 'eslint/no-prototype-builtins.js' {
-  declare module.exports: $Exports<'eslint/no-prototype-builtins'>;
+declare module 'eslint/lib/rules/no-prototype-builtins.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-prototype-builtins'>;
 }
-declare module 'eslint/no-redeclare.js' {
-  declare module.exports: $Exports<'eslint/no-redeclare'>;
+declare module 'eslint/lib/rules/no-redeclare.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-redeclare'>;
 }
-declare module 'eslint/no-regex-spaces.js' {
-  declare module.exports: $Exports<'eslint/no-regex-spaces'>;
+declare module 'eslint/lib/rules/no-regex-spaces.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-regex-spaces'>;
 }
-declare module 'eslint/no-restricted-globals.js' {
-  declare module.exports: $Exports<'eslint/no-restricted-globals'>;
+declare module 'eslint/lib/rules/no-restricted-globals.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-restricted-globals'>;
 }
-declare module 'eslint/no-restricted-imports.js' {
-  declare module.exports: $Exports<'eslint/no-restricted-imports'>;
+declare module 'eslint/lib/rules/no-restricted-imports.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-restricted-imports'>;
 }
-declare module 'eslint/no-restricted-modules.js' {
-  declare module.exports: $Exports<'eslint/no-restricted-modules'>;
+declare module 'eslint/lib/rules/no-restricted-modules.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-restricted-modules'>;
 }
-declare module 'eslint/no-restricted-syntax.js' {
-  declare module.exports: $Exports<'eslint/no-restricted-syntax'>;
+declare module 'eslint/lib/rules/no-restricted-syntax.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-restricted-syntax'>;
 }
-declare module 'eslint/no-return-assign.js' {
-  declare module.exports: $Exports<'eslint/no-return-assign'>;
+declare module 'eslint/lib/rules/no-return-assign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-return-assign'>;
 }
-declare module 'eslint/no-script-url.js' {
-  declare module.exports: $Exports<'eslint/no-script-url'>;
+declare module 'eslint/lib/rules/no-script-url.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-script-url'>;
 }
-declare module 'eslint/no-self-assign.js' {
-  declare module.exports: $Exports<'eslint/no-self-assign'>;
+declare module 'eslint/lib/rules/no-self-assign.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-self-assign'>;
 }
-declare module 'eslint/no-self-compare.js' {
-  declare module.exports: $Exports<'eslint/no-self-compare'>;
+declare module 'eslint/lib/rules/no-self-compare.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-self-compare'>;
 }
-declare module 'eslint/no-sequences.js' {
-  declare module.exports: $Exports<'eslint/no-sequences'>;
+declare module 'eslint/lib/rules/no-sequences.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-sequences'>;
 }
-declare module 'eslint/no-shadow-restricted-names.js' {
-  declare module.exports: $Exports<'eslint/no-shadow-restricted-names'>;
+declare module 'eslint/lib/rules/no-shadow-restricted-names.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-shadow-restricted-names'>;
 }
-declare module 'eslint/no-shadow.js' {
-  declare module.exports: $Exports<'eslint/no-shadow'>;
+declare module 'eslint/lib/rules/no-shadow.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-shadow'>;
 }
-declare module 'eslint/no-spaced-func.js' {
-  declare module.exports: $Exports<'eslint/no-spaced-func'>;
+declare module 'eslint/lib/rules/no-spaced-func.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-spaced-func'>;
 }
-declare module 'eslint/no-sparse-arrays.js' {
-  declare module.exports: $Exports<'eslint/no-sparse-arrays'>;
+declare module 'eslint/lib/rules/no-sparse-arrays.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-sparse-arrays'>;
 }
-declare module 'eslint/no-sync.js' {
-  declare module.exports: $Exports<'eslint/no-sync'>;
+declare module 'eslint/lib/rules/no-sync.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-sync'>;
 }
-declare module 'eslint/no-ternary.js' {
-  declare module.exports: $Exports<'eslint/no-ternary'>;
+declare module 'eslint/lib/rules/no-ternary.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-ternary'>;
 }
-declare module 'eslint/no-this-before-super.js' {
-  declare module.exports: $Exports<'eslint/no-this-before-super'>;
+declare module 'eslint/lib/rules/no-this-before-super.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-this-before-super'>;
 }
-declare module 'eslint/no-throw-literal.js' {
-  declare module.exports: $Exports<'eslint/no-throw-literal'>;
+declare module 'eslint/lib/rules/no-throw-literal.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-throw-literal'>;
 }
-declare module 'eslint/no-trailing-spaces.js' {
-  declare module.exports: $Exports<'eslint/no-trailing-spaces'>;
+declare module 'eslint/lib/rules/no-trailing-spaces.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-trailing-spaces'>;
 }
-declare module 'eslint/no-undef-init.js' {
-  declare module.exports: $Exports<'eslint/no-undef-init'>;
+declare module 'eslint/lib/rules/no-undef-init.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-undef-init'>;
 }
-declare module 'eslint/no-undef.js' {
-  declare module.exports: $Exports<'eslint/no-undef'>;
+declare module 'eslint/lib/rules/no-undef.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-undef'>;
 }
-declare module 'eslint/no-undefined.js' {
-  declare module.exports: $Exports<'eslint/no-undefined'>;
+declare module 'eslint/lib/rules/no-undefined.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-undefined'>;
 }
-declare module 'eslint/no-underscore-dangle.js' {
-  declare module.exports: $Exports<'eslint/no-underscore-dangle'>;
+declare module 'eslint/lib/rules/no-underscore-dangle.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-underscore-dangle'>;
 }
-declare module 'eslint/no-unexpected-multiline.js' {
-  declare module.exports: $Exports<'eslint/no-unexpected-multiline'>;
+declare module 'eslint/lib/rules/no-unexpected-multiline.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-unexpected-multiline'>;
 }
-declare module 'eslint/no-unmodified-loop-condition.js' {
-  declare module.exports: $Exports<'eslint/no-unmodified-loop-condition'>;
+declare module 'eslint/lib/rules/no-unmodified-loop-condition.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-unmodified-loop-condition'>;
 }
-declare module 'eslint/no-unneeded-ternary.js' {
-  declare module.exports: $Exports<'eslint/no-unneeded-ternary'>;
+declare module 'eslint/lib/rules/no-unneeded-ternary.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-unneeded-ternary'>;
 }
-declare module 'eslint/no-unreachable.js' {
-  declare module.exports: $Exports<'eslint/no-unreachable'>;
+declare module 'eslint/lib/rules/no-unreachable.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-unreachable'>;
 }
-declare module 'eslint/no-unsafe-finally.js' {
-  declare module.exports: $Exports<'eslint/no-unsafe-finally'>;
+declare module 'eslint/lib/rules/no-unsafe-finally.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-unsafe-finally'>;
 }
-declare module 'eslint/no-unused-expressions.js' {
-  declare module.exports: $Exports<'eslint/no-unused-expressions'>;
+declare module 'eslint/lib/rules/no-unused-expressions.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-unused-expressions'>;
 }
-declare module 'eslint/no-unused-labels.js' {
-  declare module.exports: $Exports<'eslint/no-unused-labels'>;
+declare module 'eslint/lib/rules/no-unused-labels.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-unused-labels'>;
 }
-declare module 'eslint/no-unused-vars.js' {
-  declare module.exports: $Exports<'eslint/no-unused-vars'>;
+declare module 'eslint/lib/rules/no-unused-vars.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-unused-vars'>;
 }
-declare module 'eslint/no-use-before-define.js' {
-  declare module.exports: $Exports<'eslint/no-use-before-define'>;
+declare module 'eslint/lib/rules/no-use-before-define.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-use-before-define'>;
 }
-declare module 'eslint/no-useless-call.js' {
-  declare module.exports: $Exports<'eslint/no-useless-call'>;
+declare module 'eslint/lib/rules/no-useless-call.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-useless-call'>;
 }
-declare module 'eslint/no-useless-computed-key.js' {
-  declare module.exports: $Exports<'eslint/no-useless-computed-key'>;
+declare module 'eslint/lib/rules/no-useless-computed-key.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-useless-computed-key'>;
 }
-declare module 'eslint/no-useless-concat.js' {
-  declare module.exports: $Exports<'eslint/no-useless-concat'>;
+declare module 'eslint/lib/rules/no-useless-concat.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-useless-concat'>;
 }
-declare module 'eslint/no-useless-constructor.js' {
-  declare module.exports: $Exports<'eslint/no-useless-constructor'>;
+declare module 'eslint/lib/rules/no-useless-constructor.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-useless-constructor'>;
 }
-declare module 'eslint/no-useless-escape.js' {
-  declare module.exports: $Exports<'eslint/no-useless-escape'>;
+declare module 'eslint/lib/rules/no-useless-escape.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-useless-escape'>;
 }
-declare module 'eslint/no-useless-rename.js' {
-  declare module.exports: $Exports<'eslint/no-useless-rename'>;
+declare module 'eslint/lib/rules/no-useless-rename.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-useless-rename'>;
 }
-declare module 'eslint/no-var.js' {
-  declare module.exports: $Exports<'eslint/no-var'>;
+declare module 'eslint/lib/rules/no-var.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-var'>;
 }
-declare module 'eslint/no-void.js' {
-  declare module.exports: $Exports<'eslint/no-void'>;
+declare module 'eslint/lib/rules/no-void.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-void'>;
 }
-declare module 'eslint/no-warning-comments.js' {
-  declare module.exports: $Exports<'eslint/no-warning-comments'>;
+declare module 'eslint/lib/rules/no-warning-comments.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-warning-comments'>;
 }
-declare module 'eslint/no-whitespace-before-property.js' {
-  declare module.exports: $Exports<'eslint/no-whitespace-before-property'>;
+declare module 'eslint/lib/rules/no-whitespace-before-property.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-whitespace-before-property'>;
 }
-declare module 'eslint/no-with.js' {
-  declare module.exports: $Exports<'eslint/no-with'>;
+declare module 'eslint/lib/rules/no-with.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/no-with'>;
 }
-declare module 'eslint/object-curly-newline.js' {
-  declare module.exports: $Exports<'eslint/object-curly-newline'>;
+declare module 'eslint/lib/rules/object-curly-newline.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/object-curly-newline'>;
 }
-declare module 'eslint/object-curly-spacing.js' {
-  declare module.exports: $Exports<'eslint/object-curly-spacing'>;
+declare module 'eslint/lib/rules/object-curly-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/object-curly-spacing'>;
 }
-declare module 'eslint/object-property-newline.js' {
-  declare module.exports: $Exports<'eslint/object-property-newline'>;
+declare module 'eslint/lib/rules/object-property-newline.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/object-property-newline'>;
 }
-declare module 'eslint/object-shorthand.js' {
-  declare module.exports: $Exports<'eslint/object-shorthand'>;
+declare module 'eslint/lib/rules/object-shorthand.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/object-shorthand'>;
 }
-declare module 'eslint/one-var-declaration-per-line.js' {
-  declare module.exports: $Exports<'eslint/one-var-declaration-per-line'>;
+declare module 'eslint/lib/rules/one-var-declaration-per-line.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/one-var-declaration-per-line'>;
 }
-declare module 'eslint/one-var.js' {
-  declare module.exports: $Exports<'eslint/one-var'>;
+declare module 'eslint/lib/rules/one-var.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/one-var'>;
 }
-declare module 'eslint/operator-assignment.js' {
-  declare module.exports: $Exports<'eslint/operator-assignment'>;
+declare module 'eslint/lib/rules/operator-assignment.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/operator-assignment'>;
 }
-declare module 'eslint/operator-linebreak.js' {
-  declare module.exports: $Exports<'eslint/operator-linebreak'>;
+declare module 'eslint/lib/rules/operator-linebreak.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/operator-linebreak'>;
 }
-declare module 'eslint/padded-blocks.js' {
-  declare module.exports: $Exports<'eslint/padded-blocks'>;
+declare module 'eslint/lib/rules/padded-blocks.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/padded-blocks'>;
 }
-declare module 'eslint/prefer-arrow-callback.js' {
-  declare module.exports: $Exports<'eslint/prefer-arrow-callback'>;
+declare module 'eslint/lib/rules/prefer-arrow-callback.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/prefer-arrow-callback'>;
 }
-declare module 'eslint/prefer-const.js' {
-  declare module.exports: $Exports<'eslint/prefer-const'>;
+declare module 'eslint/lib/rules/prefer-const.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/prefer-const'>;
 }
-declare module 'eslint/prefer-reflect.js' {
-  declare module.exports: $Exports<'eslint/prefer-reflect'>;
+declare module 'eslint/lib/rules/prefer-reflect.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/prefer-reflect'>;
 }
-declare module 'eslint/prefer-rest-params.js' {
-  declare module.exports: $Exports<'eslint/prefer-rest-params'>;
+declare module 'eslint/lib/rules/prefer-rest-params.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/prefer-rest-params'>;
 }
-declare module 'eslint/prefer-spread.js' {
-  declare module.exports: $Exports<'eslint/prefer-spread'>;
+declare module 'eslint/lib/rules/prefer-spread.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/prefer-spread'>;
 }
-declare module 'eslint/prefer-template.js' {
-  declare module.exports: $Exports<'eslint/prefer-template'>;
+declare module 'eslint/lib/rules/prefer-template.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/prefer-template'>;
 }
-declare module 'eslint/quote-props.js' {
-  declare module.exports: $Exports<'eslint/quote-props'>;
+declare module 'eslint/lib/rules/quote-props.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/quote-props'>;
 }
-declare module 'eslint/quotes.js' {
-  declare module.exports: $Exports<'eslint/quotes'>;
+declare module 'eslint/lib/rules/quotes.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/quotes'>;
 }
-declare module 'eslint/radix.js' {
-  declare module.exports: $Exports<'eslint/radix'>;
+declare module 'eslint/lib/rules/radix.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/radix'>;
 }
-declare module 'eslint/require-jsdoc.js' {
-  declare module.exports: $Exports<'eslint/require-jsdoc'>;
+declare module 'eslint/lib/rules/require-jsdoc.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/require-jsdoc'>;
 }
-declare module 'eslint/require-yield.js' {
-  declare module.exports: $Exports<'eslint/require-yield'>;
+declare module 'eslint/lib/rules/require-yield.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/require-yield'>;
 }
-declare module 'eslint/rest-spread-spacing.js' {
-  declare module.exports: $Exports<'eslint/rest-spread-spacing'>;
+declare module 'eslint/lib/rules/rest-spread-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/rest-spread-spacing'>;
 }
-declare module 'eslint/semi-spacing.js' {
-  declare module.exports: $Exports<'eslint/semi-spacing'>;
+declare module 'eslint/lib/rules/semi-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/semi-spacing'>;
 }
-declare module 'eslint/semi.js' {
-  declare module.exports: $Exports<'eslint/semi'>;
+declare module 'eslint/lib/rules/semi.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/semi'>;
 }
-declare module 'eslint/sort-imports.js' {
-  declare module.exports: $Exports<'eslint/sort-imports'>;
+declare module 'eslint/lib/rules/sort-imports.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/sort-imports'>;
 }
-declare module 'eslint/sort-vars.js' {
-  declare module.exports: $Exports<'eslint/sort-vars'>;
+declare module 'eslint/lib/rules/sort-vars.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/sort-vars'>;
 }
-declare module 'eslint/space-before-blocks.js' {
-  declare module.exports: $Exports<'eslint/space-before-blocks'>;
+declare module 'eslint/lib/rules/space-before-blocks.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/space-before-blocks'>;
 }
-declare module 'eslint/space-before-function-paren.js' {
-  declare module.exports: $Exports<'eslint/space-before-function-paren'>;
+declare module 'eslint/lib/rules/space-before-function-paren.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/space-before-function-paren'>;
 }
-declare module 'eslint/space-in-parens.js' {
-  declare module.exports: $Exports<'eslint/space-in-parens'>;
+declare module 'eslint/lib/rules/space-in-parens.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/space-in-parens'>;
 }
-declare module 'eslint/space-infix-ops.js' {
-  declare module.exports: $Exports<'eslint/space-infix-ops'>;
+declare module 'eslint/lib/rules/space-infix-ops.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/space-infix-ops'>;
 }
-declare module 'eslint/space-unary-ops.js' {
-  declare module.exports: $Exports<'eslint/space-unary-ops'>;
+declare module 'eslint/lib/rules/space-unary-ops.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/space-unary-ops'>;
 }
-declare module 'eslint/spaced-comment.js' {
-  declare module.exports: $Exports<'eslint/spaced-comment'>;
+declare module 'eslint/lib/rules/spaced-comment.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/spaced-comment'>;
 }
-declare module 'eslint/strict.js' {
-  declare module.exports: $Exports<'eslint/strict'>;
+declare module 'eslint/lib/rules/strict.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/strict'>;
 }
-declare module 'eslint/template-curly-spacing.js' {
-  declare module.exports: $Exports<'eslint/template-curly-spacing'>;
+declare module 'eslint/lib/rules/template-curly-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/template-curly-spacing'>;
 }
-declare module 'eslint/unicode-bom.js' {
-  declare module.exports: $Exports<'eslint/unicode-bom'>;
+declare module 'eslint/lib/rules/unicode-bom.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/unicode-bom'>;
 }
-declare module 'eslint/use-isnan.js' {
-  declare module.exports: $Exports<'eslint/use-isnan'>;
+declare module 'eslint/lib/rules/use-isnan.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/use-isnan'>;
 }
-declare module 'eslint/valid-jsdoc.js' {
-  declare module.exports: $Exports<'eslint/valid-jsdoc'>;
+declare module 'eslint/lib/rules/valid-jsdoc.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/valid-jsdoc'>;
 }
-declare module 'eslint/valid-typeof.js' {
-  declare module.exports: $Exports<'eslint/valid-typeof'>;
+declare module 'eslint/lib/rules/valid-typeof.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/valid-typeof'>;
 }
-declare module 'eslint/vars-on-top.js' {
-  declare module.exports: $Exports<'eslint/vars-on-top'>;
+declare module 'eslint/lib/rules/vars-on-top.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/vars-on-top'>;
 }
-declare module 'eslint/wrap-iife.js' {
-  declare module.exports: $Exports<'eslint/wrap-iife'>;
+declare module 'eslint/lib/rules/wrap-iife.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/wrap-iife'>;
 }
-declare module 'eslint/wrap-regex.js' {
-  declare module.exports: $Exports<'eslint/wrap-regex'>;
+declare module 'eslint/lib/rules/wrap-regex.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/wrap-regex'>;
 }
-declare module 'eslint/yield-star-spacing.js' {
-  declare module.exports: $Exports<'eslint/yield-star-spacing'>;
+declare module 'eslint/lib/rules/yield-star-spacing.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/yield-star-spacing'>;
 }
-declare module 'eslint/yoda.js' {
-  declare module.exports: $Exports<'eslint/yoda'>;
+declare module 'eslint/lib/rules/yoda.js' {
+  declare module.exports: $Exports<'eslint/lib/rules/yoda'>;
 }
-declare module 'eslint/event-generator-tester.js' {
-  declare module.exports: $Exports<'eslint/event-generator-tester'>;
+declare module 'eslint/lib/testers/event-generator-tester.js' {
+  declare module.exports: $Exports<'eslint/lib/testers/event-generator-tester'>;
 }
-declare module 'eslint/rule-tester.js' {
-  declare module.exports: $Exports<'eslint/rule-tester'>;
+declare module 'eslint/lib/testers/rule-tester.js' {
+  declare module.exports: $Exports<'eslint/lib/testers/rule-tester'>;
 }
-declare module 'eslint/timing.js' {
-  declare module.exports: $Exports<'eslint/timing'>;
+declare module 'eslint/lib/timing.js' {
+  declare module.exports: $Exports<'eslint/lib/timing'>;
 }
-declare module 'eslint/token-store.js' {
-  declare module.exports: $Exports<'eslint/token-store'>;
+declare module 'eslint/lib/token-store.js' {
+  declare module.exports: $Exports<'eslint/lib/token-store'>;
 }
-declare module 'eslint/comment-event-generator.js' {
-  declare module.exports: $Exports<'eslint/comment-event-generator'>;
+declare module 'eslint/lib/util/comment-event-generator.js' {
+  declare module.exports: $Exports<'eslint/lib/util/comment-event-generator'>;
 }
-declare module 'eslint/glob-util.js' {
-  declare module.exports: $Exports<'eslint/glob-util'>;
+declare module 'eslint/lib/util/glob-util.js' {
+  declare module.exports: $Exports<'eslint/lib/util/glob-util'>;
 }
-declare module 'eslint/hash.js' {
-  declare module.exports: $Exports<'eslint/hash'>;
+declare module 'eslint/lib/util/hash.js' {
+  declare module.exports: $Exports<'eslint/lib/util/hash'>;
 }
-declare module 'eslint/keywords.js' {
-  declare module.exports: $Exports<'eslint/keywords'>;
+declare module 'eslint/lib/util/keywords.js' {
+  declare module.exports: $Exports<'eslint/lib/util/keywords'>;
 }
-declare module 'eslint/module-resolver.js' {
-  declare module.exports: $Exports<'eslint/module-resolver'>;
+declare module 'eslint/lib/util/module-resolver.js' {
+  declare module.exports: $Exports<'eslint/lib/util/module-resolver'>;
 }
-declare module 'eslint/node-event-generator.js' {
-  declare module.exports: $Exports<'eslint/node-event-generator'>;
+declare module 'eslint/lib/util/node-event-generator.js' {
+  declare module.exports: $Exports<'eslint/lib/util/node-event-generator'>;
 }
-declare module 'eslint/npm-util.js' {
-  declare module.exports: $Exports<'eslint/npm-util'>;
+declare module 'eslint/lib/util/npm-util.js' {
+  declare module.exports: $Exports<'eslint/lib/util/npm-util'>;
 }
-declare module 'eslint/path-util.js' {
-  declare module.exports: $Exports<'eslint/path-util'>;
+declare module 'eslint/lib/util/path-util.js' {
+  declare module.exports: $Exports<'eslint/lib/util/path-util'>;
 }
-declare module 'eslint/rule-fixer.js' {
-  declare module.exports: $Exports<'eslint/rule-fixer'>;
+declare module 'eslint/lib/util/rule-fixer.js' {
+  declare module.exports: $Exports<'eslint/lib/util/rule-fixer'>;
 }
-declare module 'eslint/source-code-fixer.js' {
-  declare module.exports: $Exports<'eslint/source-code-fixer'>;
+declare module 'eslint/lib/util/source-code-fixer.js' {
+  declare module.exports: $Exports<'eslint/lib/util/source-code-fixer'>;
 }
-declare module 'eslint/source-code-util.js' {
-  declare module.exports: $Exports<'eslint/source-code-util'>;
+declare module 'eslint/lib/util/source-code-util.js' {
+  declare module.exports: $Exports<'eslint/lib/util/source-code-util'>;
 }
-declare module 'eslint/source-code.js' {
-  declare module.exports: $Exports<'eslint/source-code'>;
+declare module 'eslint/lib/util/source-code.js' {
+  declare module.exports: $Exports<'eslint/lib/util/source-code'>;
 }
-declare module 'eslint/traverser.js' {
-  declare module.exports: $Exports<'eslint/traverser'>;
+declare module 'eslint/lib/util/traverser.js' {
+  declare module.exports: $Exports<'eslint/lib/util/traverser'>;
 }

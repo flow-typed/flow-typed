@@ -1,6 +1,6 @@
 {
   "name": "flow-typed",
-  "version": "2.0.0-beta.9",
+  "version": "2.0.0-beta.11",
   "description": "A repository of high quality flowtype definitions",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "prepublish": "mkdir -p dist; npm run test",
     "test": "npm run clean; npm run build; npm run test-quick",
-    "test-quick": "npm run lint && jest",
+    "test-quick": "jest && npm run lint",
     "watch": "mkdir -p dist; babel --source-maps --watch=./src --out-dir=./dist"
   },
   "repository": {
@@ -55,13 +55,12 @@
     "lodash": "^4.11.2",
     "md5": "^2.1.0",
     "mkdirp": "^0.5.1",
-    "nodegit": "^0.15.1",
     "request": "^2.69.0",
-    "resolve": "^1.1.7",
     "rx-lite": "4.0.8",
     "semver": "^5.1.0",
     "table": "3.7.8",
     "through": "^2.3.8",
+    "which": "^1.2.11",
     "yargs": "^4.2.0"
   }
 }

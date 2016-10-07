@@ -1,4 +1,4 @@
-// flow-typed signature: 04ddde55faf0bfb5d5c1a2b1d238b469
+// flow-typed signature: 49459d0c21e5ea8faa4fe08ce0ed8af4
 // flow-typed version: <<STUB>>/colors_v^1.1.2/flow_v0.32.0
 
 /**
@@ -22,51 +22,55 @@ declare module 'colors' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'colors/normal-usage' {
+declare module 'colors/examples/normal-usage' {
   declare module.exports: any;
 }
 
-declare module 'colors/safe-string' {
+declare module 'colors/examples/safe-string' {
   declare module.exports: any;
 }
 
-declare module 'colors/colors' {
+declare module 'colors/lib/colors' {
   declare module.exports: any;
 }
 
-declare module 'colors/trap' {
+declare module 'colors/lib/custom/trap' {
   declare module.exports: any;
 }
 
-declare module 'colors/zalgo' {
+declare module 'colors/lib/custom/zalgo' {
   declare module.exports: any;
 }
 
-declare module 'colors/extendStringPrototype' {
+declare module 'colors/lib/extendStringPrototype' {
   declare module.exports: any;
 }
 
-declare module 'colors/america' {
+declare module 'colors/lib/index' {
   declare module.exports: any;
 }
 
-declare module 'colors/rainbow' {
+declare module 'colors/lib/maps/america' {
   declare module.exports: any;
 }
 
-declare module 'colors/random' {
+declare module 'colors/lib/maps/rainbow' {
   declare module.exports: any;
 }
 
-declare module 'colors/zebra' {
+declare module 'colors/lib/maps/random' {
   declare module.exports: any;
 }
 
-declare module 'colors/styles' {
+declare module 'colors/lib/maps/zebra' {
   declare module.exports: any;
 }
 
-declare module 'colors/supports-colors' {
+declare module 'colors/lib/styles' {
+  declare module.exports: any;
+}
+
+declare module 'colors/lib/system/supports-colors' {
   declare module.exports: any;
 }
 
@@ -74,56 +78,53 @@ declare module 'colors/safe' {
   declare module.exports: any;
 }
 
-declare module 'colors/generic-logging' {
+declare module 'colors/themes/generic-logging' {
   declare module.exports: any;
 }
 
 // Filename aliases
-declare module 'colors/normal-usage.js' {
-  declare module.exports: $Exports<'colors/normal-usage'>;
+declare module 'colors/examples/normal-usage.js' {
+  declare module.exports: $Exports<'colors/examples/normal-usage'>;
 }
-declare module 'colors/safe-string.js' {
-  declare module.exports: $Exports<'colors/safe-string'>;
+declare module 'colors/examples/safe-string.js' {
+  declare module.exports: $Exports<'colors/examples/safe-string'>;
 }
-declare module 'colors/colors.js' {
-  declare module.exports: $Exports<'colors/colors'>;
+declare module 'colors/lib/colors.js' {
+  declare module.exports: $Exports<'colors/lib/colors'>;
 }
-declare module 'colors/trap.js' {
-  declare module.exports: $Exports<'colors/trap'>;
+declare module 'colors/lib/custom/trap.js' {
+  declare module.exports: $Exports<'colors/lib/custom/trap'>;
 }
-declare module 'colors/zalgo.js' {
-  declare module.exports: $Exports<'colors/zalgo'>;
+declare module 'colors/lib/custom/zalgo.js' {
+  declare module.exports: $Exports<'colors/lib/custom/zalgo'>;
 }
-declare module 'colors/extendStringPrototype.js' {
-  declare module.exports: $Exports<'colors/extendStringPrototype'>;
+declare module 'colors/lib/extendStringPrototype.js' {
+  declare module.exports: $Exports<'colors/lib/extendStringPrototype'>;
 }
-declare module 'colors/index' {
-  declare module.exports: $Exports<'colors'>;
+declare module 'colors/lib/index.js' {
+  declare module.exports: $Exports<'colors/lib/index'>;
 }
-declare module 'colors/index.js' {
-  declare module.exports: $Exports<'colors'>;
+declare module 'colors/lib/maps/america.js' {
+  declare module.exports: $Exports<'colors/lib/maps/america'>;
 }
-declare module 'colors/america.js' {
-  declare module.exports: $Exports<'colors/america'>;
+declare module 'colors/lib/maps/rainbow.js' {
+  declare module.exports: $Exports<'colors/lib/maps/rainbow'>;
 }
-declare module 'colors/rainbow.js' {
-  declare module.exports: $Exports<'colors/rainbow'>;
+declare module 'colors/lib/maps/random.js' {
+  declare module.exports: $Exports<'colors/lib/maps/random'>;
 }
-declare module 'colors/random.js' {
-  declare module.exports: $Exports<'colors/random'>;
+declare module 'colors/lib/maps/zebra.js' {
+  declare module.exports: $Exports<'colors/lib/maps/zebra'>;
 }
-declare module 'colors/zebra.js' {
-  declare module.exports: $Exports<'colors/zebra'>;
+declare module 'colors/lib/styles.js' {
+  declare module.exports: $Exports<'colors/lib/styles'>;
 }
-declare module 'colors/styles.js' {
-  declare module.exports: $Exports<'colors/styles'>;
-}
-declare module 'colors/supports-colors.js' {
-  declare module.exports: $Exports<'colors/supports-colors'>;
+declare module 'colors/lib/system/supports-colors.js' {
+  declare module.exports: $Exports<'colors/lib/system/supports-colors'>;
 }
 declare module 'colors/safe.js' {
   declare module.exports: $Exports<'colors/safe'>;
 }
-declare module 'colors/generic-logging.js' {
-  declare module.exports: $Exports<'colors/generic-logging'>;
+declare module 'colors/themes/generic-logging.js' {
+  declare module.exports: $Exports<'colors/themes/generic-logging'>;
 }

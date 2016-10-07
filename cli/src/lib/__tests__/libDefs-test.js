@@ -4,8 +4,6 @@ jest.unmock('../libDefs.js');
 jest.unmock('../semver.js');
 jest.unmock('semver');
 
-import Git from 'nodegit';
-
 import {fs} from '../node.js';
 
 import {
@@ -15,10 +13,15 @@ import {
   _cacheRepoAssure as cacheRepoAssure,
   _ensureCacheRepo as ensureCacheRepo,
   _LAST_UPDATED_FILE as LAST_UPDATED_FILE,
+  _REMOTE_REPO_URL as REMOTE_REPO_URL,
   filterLibDefs,
   updateCacheRepo,
 } from '../libDefs.js';
 import {stringToVersion} from '../semver.js';
+import {
+  cloneInto,
+  rebaseRepoMaster,
+} from "../git.js";
 
 /**
  * Jest's process of mocking in place fools Flow, so we use this as an explicit
@@ -31,18 +34,17 @@ function _mock(mockFn) {
 describe('libDefs', () => {
   describe('ensureCacheRepo', () => {
     beforeEach(() => {
-      _mock(Git.Clone).mockClear();
-      const repo = _mock(Git.Repository)._mockRepo;
-      repo.checkoutBranch.mockClear();
-      repo.rebaseBranches.mockClear();
-      _mock(Git.Repository.open).mockClear();
+      _mock(cloneInto).mockClear();
+      _mock(rebaseRepoMaster).mockClear();
       cacheRepoAssure.lastAssured = 0;
       cacheRepoAssure.pendingAssure = Promise.resolve();
     });
 
     pit('clones the repo if not present on disk', async () => {
       await ensureCacheRepo();
-      expect(_mock(Git.Clone).mock.calls.length).toBe(1);
+      expect(_mock(cloneInto).mock.calls).toEqual([
+        [REMOTE_REPO_URL, CACHE_REPO_DIR],
+      ]);
       expect(_mock(fs.writeFile).mock.calls.length).toBe(1);
       expect(_mock(fs.writeFile).mock.calls[0][0]).toBe(LAST_UPDATED_FILE);
     });
@@ -53,7 +55,7 @@ describe('libDefs', () => {
       });
 
       await ensureCacheRepo();
-      expect(_mock(Git.Clone).mock.calls.length).toBe(0);
+      expect(_mock(cloneInto).mock.calls).toEqual([]);
     });
 
     pit('rebases if present on disk + lastUpdated is old', async () => {
@@ -67,13 +69,7 @@ describe('libDefs', () => {
       });
 
       await ensureCacheRepo();
-      expect(_mock(Git.Repository.open).mock.calls).toEqual([
-        [CACHE_REPO_DIR],
-      ]);
-      const _mockRepo = _mock(Git.Repository)._mockRepo;
-      expect(_mockRepo.rebaseBranches.mock.calls).toEqual([
-        ['master', 'origin/master'],
-      ]);
+      expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([CACHE_REPO_DIR]);
     });
 
     pit('does NOT rebase if on disk, but lastUpdated is recent', async () => {
@@ -89,17 +85,13 @@ describe('libDefs', () => {
       });
 
       await ensureCacheRepo();
-      expect(_mock(Git.Repository.open).mock.calls.length).toBe(0);
+      expect(_mock(rebaseRepoMaster).mock.calls).toEqual([]);
     });
   });
 
   describe('updateCacheRepo', () => {
     beforeEach(() => {
-      _mock(Git.Clone).mockClear();
-      const repo = _mock(Git.Repository)._mockRepo;
-      repo.checkoutBranch.mockClear();
-      repo.rebaseBranches.mockClear();
-      _mock(Git.Repository.open).mockClear();
+      _mock(rebaseRepoMaster).mockClear();
       cacheRepoAssure.lastAssured = 0;
       cacheRepoAssure.pendingAssure = Promise.resolve();
     });
@@ -116,13 +108,7 @@ describe('libDefs', () => {
       });
 
       await updateCacheRepo();
-      expect(_mock(Git.Repository.open).mock.calls).toEqual([
-        [CACHE_REPO_DIR],
-      ]);
-      const _mockRepo = _mock(Git.Repository)._mockRepo;
-      expect(_mockRepo.rebaseBranches.mock.calls).toEqual([
-        ['master', 'origin/master'],
-      ]);
+      expect(_mock(rebaseRepoMaster).mock.calls).toEqual([[CACHE_REPO_DIR]]);
     });
   });
 
