@@ -1,6 +1,7 @@
 /* @flow */
 
 import {Observable, Scheduler, Subject} from 'rxjs';
+import {Observable as _O} from 'rxjs/Rx';
 import * as O from 'rxjs/Observable';
 import * as Obs from 'rxjs/Observer';
 import * as BS from 'rxjs/BehaviorSubject';

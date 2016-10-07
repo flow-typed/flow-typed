@@ -866,26 +866,32 @@ declare class rxjs$SchedulerClass {
   schedule<T>(work: (state?: T) => void, delay?: number, state?: T): rxjs$Subscription;
 }
 
+declare type rxjs = {
+  Observable: typeof rxjs$Observable,
+  ConnectableObservable: typeof rxjs$ConnectableObservable,
+  Observer: typeof rxjs$Observer,
+  Subject: typeof rxjs$Subject,
+  BehaviorSubject: typeof rxjs$BehaviorSubject,
+  ReplaySubject: typeof rxjs$ReplaySubject,
+  Scheduler: {
+    asap: rxjs$SchedulerClass,
+    queue: rxjs$SchedulerClass,
+    animationFrame: rxjs$SchedulerClass,
+    async: rxjs$SchedulerClass,
+  },
+  Subscription: typeof rxjs$Subscription,
+}
+
 /*
  * Exports
  */
 
 declare module 'rxjs' {
-  declare module.exports: {
-    Observable: typeof rxjs$Observable,
-    ConnectableObservable: typeof rxjs$ConnectableObservable,
-    Observer: typeof rxjs$Observer,
-    Subject: typeof rxjs$Subject,
-    BehaviorSubject: typeof rxjs$BehaviorSubject,
-    ReplaySubject: typeof rxjs$ReplaySubject,
-    Scheduler: {
-      asap: rxjs$SchedulerClass,
-      queue: rxjs$SchedulerClass,
-      animationFrame: rxjs$SchedulerClass,
-      async: rxjs$SchedulerClass,
-    },
-    Subscription: typeof rxjs$Subscription,
-  }
+  declare module.exports: rxjs
+}
+
+declare module 'rxjs/Rx' {
+  declare module.exports: rxjs
 }
 
 declare module 'rxjs/Observable' {
