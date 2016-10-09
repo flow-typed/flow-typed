@@ -46,36 +46,46 @@ type JestExpectType = {
   toBeDefined(): void;
   toBeFalsy(): void;
   toBeGreaterThan(number: number): void;
+  toBeGreaterThanOrEqual(number: number): void;
   toBeLessThan(number: number): void;
+  toBeLessThanOrEqual(number: number): void;
+  toBeInstanceOf(cls: Class<*>): void;
   toBeNull(): void;
   toBeTruthy(): void;
   toBeUndefined(): void;
-  toContain(str: string): void;
+  toContain(item: any): void;
+  toContainEqual(item: any): void;
   toEqual(value: any): void;
-  toHaveBeenCalled(): void,
+  toHaveBeenCalled(): void;
+  toHaveBeenCalledTimes(number: number): void;
   toHaveBeenCalledWith(...args: Array<any>): void;
   toMatch(regexp: RegExp): void;
   toMatchSnapshot(): void;
   toThrow(message?: string | Error): void;
   toThrowError(message?: string): void;
+  toThrowErrorMatchingSnapshot(): void;
 }
 
 type JestSpyType = {
   calls: JestCallsType;
 }
 
-declare function afterAll(fn: Function): void;
 declare function afterEach(fn: Function): void;
-declare function beforeAll(fn: Function): void;
 declare function beforeEach(fn: Function): void;
+declare function afterAll(fn: Function): void;
+declare function beforeAll(fn: Function): void;
 declare function describe(name: string, fn: Function): void;
-declare function fdescribe(name: string, fn: Function): void;
+declare var it: {
+  (name: string, fn: Function): ?Promise<void>;
+  only(name: string, fn: Function): ?Promise<void>;
+  skip(name: string, fn: Function): ?Promise<void>;
+};
 declare function fit(name: string, fn: Function): ?Promise<void>;
-declare function it(name: string, fn: Function): ?Promise<void>;
-declare function pit(name: string, fn: Function): Promise<void>;
-declare function test(name: string, fn: Function): ?Promise<void>;
-declare function xdescribe(name: string, fn: Function): void;
-declare function xit(name: string, fn: Function): ?Promise<void>;
+declare var test: typeof it;
+declare var xdescribe: typeof describe;
+declare var fdescribe: typeof describe;
+declare var xit: typeof it;
+declare var xtest: typeof it;
 
 declare function expect(value: any): JestExpectType;
 
@@ -86,6 +96,7 @@ declare function spyOn(value: mixed, method: string): Object;
 declare var jest: {
   autoMockOff(): void;
   autoMockOn(): void;
+  clearAllMocks(): void;
   clearAllTimers(): void;
   currentTestPath(): void;
   disableAutomock(): void;
@@ -93,10 +104,13 @@ declare var jest: {
   dontMock(moduleName: string): void;
   enableAutomock(): void;
   fn(implementation?: Function): JestMockFn;
+  isMockFunction(fn: Function): boolean;
   genMockFromModule(moduleName: string): any;
   mock(moduleName: string, moduleFactory?: any): void;
+  resetModules(): void;
   runAllTicks(): void;
   runAllTimers(): void;
+  runTimersToTime(msToRun: number): void;
   runOnlyPendingTimers(): void;
   setMock(moduleName: string, moduleExports: any): void;
   unmock(moduleName: string): void;

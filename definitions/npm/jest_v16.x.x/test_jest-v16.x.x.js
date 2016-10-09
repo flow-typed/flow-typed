@@ -25,3 +25,10 @@ expect('someVal').toHaveBeeenCalledWith('a')
 mockFn.mock.calls.fn()
 
 test('test', () => expect('foo').toMatchSnapshot());
+test.only('test', () => expect('foo').toMatchSnapshot());
+test.skip('test', () => expect('foo').toMatchSnapshot());
+
+// $ExpectError property `fonly` not found in object type
+test.fonly('test', () => expect('foo').toMatchSnapshot());
+
+xtest('test', () => {});
