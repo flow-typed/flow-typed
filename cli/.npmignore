@@ -1,0 +1,8 @@
+src/
+.flow-bins-cache/
+.test-dir/
+__tests__/
+dist/**/*.js.map
+flow-typed/
+**/__tests__/
+**/__mocks__/

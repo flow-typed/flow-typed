@@ -1,0 +1,16 @@
+[libs]
+flow-typed
+
+[ignore]
+.*/node_modules/json5/.*
+.*/node_modules/y18n/test/locales/bad-locale\.json
+<PROJECT_ROOT>/.test-dir/.*
+<PROJECT_ROOT>/.flow-bins-cache/.*
+<PROJECT_ROOT>/node_modules/.*config-chain/test/broken.json
+
+[options]
+experimental.const_params=true
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
+
+[version]
+^0.32.0
