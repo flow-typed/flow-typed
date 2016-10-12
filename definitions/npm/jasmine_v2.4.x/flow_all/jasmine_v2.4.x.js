@@ -11,7 +11,8 @@ type JasmineExpectType = {
   toBeUndefined(): void;
   toContain(str: string): void;
   toEqual(value: mixed): void;
-  toHaveBeenCalled(): void,
+  toHaveBeenCalled(): void;
+  toHaveBeenCalledTimes(number: number): void;
   toHaveBeenCalledWith(...args: Array<any>): void;
   toMatch(regexp: RegExp): void;
   toThrow(message?: string): void;
