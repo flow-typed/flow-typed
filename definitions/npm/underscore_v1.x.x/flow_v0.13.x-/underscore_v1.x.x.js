@@ -40,7 +40,8 @@ declare module "underscore" {
   declare function min<T>(a: Array<T>|{[key:any]: T}): T;
   declare function max<T>(a: Array<T>|{[key:any]: T}): T;
 
-  declare function values<T>(o: {[key: any]: T}): T[];
+  declare function keys<K, V>(o: {[key: K]: V}): K[];
+  declare function values<K, V>(o: {[key: K]: V}): V[];
   declare function flatten(a: Array<any>): Array<any>;
 
   // TODO: improve this
