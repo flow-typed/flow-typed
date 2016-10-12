@@ -31,6 +31,7 @@ declare module "underscore" {
   declare function sortBy<T>(a: T[], iteratee: (val: T)=>any): T[];
 
   declare function filter<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): T[];
+  declare function filter<T>(a: T[], pred: (val: T, k: string)=>boolean): T[];
 
   declare function isEmpty(o: any): boolean;
 
