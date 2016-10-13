@@ -22,6 +22,7 @@ declare module "underscore" {
   declare function map<K, T, U>(a: {[key:K]: T}, iteratee: (val: T, k?: K)=>U): U[];
 
   declare function object<T>(a: Array<[string, T]>): {[key:string]: T};
+  declare function pairs<T>(o: {[key:string]: T}): Array<[string, T]>;
 
   declare function every<T>(a: Array<T>, pred: (val: T)=>boolean): boolean;
 
