@@ -1,6 +1,6 @@
 {
   "name": "flow-typed",
-  "version": "2.0.0-beta.11",
+  "version": "2.0.0",
   "description": "A repository of high quality flowtype definitions",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
