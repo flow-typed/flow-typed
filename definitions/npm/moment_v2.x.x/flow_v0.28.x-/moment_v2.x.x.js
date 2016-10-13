@@ -207,7 +207,7 @@ declare class moment$Moment {
   static locale(locale: string, localeData?: Object): string;
   static locale(locales: Array<string>): string;
   locale(locale: string, customization?: Object|null): moment$Moment;
-  locale(): moment$Moment;
+  locale(): string;
   static months(): Array<string>;
   static monthsShort(): Array<string>;
   static weekdays(): Array<string>;
