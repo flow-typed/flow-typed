@@ -13,6 +13,7 @@ import * as Install from "./commands/install.js";
 import * as CreateStub from "./commands/create-stub.js";
 import * as RunTests from "./commands/runTests.js";
 import * as Search from "./commands/search.js";
+import * as Update from "./commands/update.js";
 import * as UpdateCache from "./commands/update-cache";
 import * as ValidateDefs from "./commands/validateDefs.js";
 import * as Version from "./commands/version.js";
@@ -34,6 +35,7 @@ export function runCLI() {
     Install,
     RunTests,
     Search,
+    Update,
     UpdateCache,
     ValidateDefs,
     Version,

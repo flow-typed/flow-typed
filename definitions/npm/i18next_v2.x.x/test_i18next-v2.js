@@ -15,3 +15,20 @@ i18n.use('Some Module').init({});
 // $ExpectError
 const A: bool = i18n.t('foo');
 const B: string = i18n.t('bar');
+
+i18n.init({
+  lng: 'en',
+  resources: {
+    en: {
+      translation: {
+        "key": "hello world"
+      }
+    }
+  }
+});
+
+i18n.init({
+  lng: 'en',
+  // $ExpectError should be string keyed object
+  resources: [false, {}],
+});

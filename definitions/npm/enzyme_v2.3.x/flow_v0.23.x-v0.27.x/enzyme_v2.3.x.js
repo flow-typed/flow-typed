@@ -19,6 +19,7 @@ declare module 'enzyme' {
     matchesElement(node: React$Element<any>): boolean;
     hasClass(className: string): boolean;
     is(selector: EnzymeSelector): boolean;
+    isEmpty(): boolean;
     not(selector: EnzymeSelector): boolean;
     children(selector?: EnzymeSelector): this;
     childAt(index: number): this;
