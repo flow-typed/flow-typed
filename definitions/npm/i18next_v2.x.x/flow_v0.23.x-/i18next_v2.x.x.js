@@ -12,11 +12,14 @@ declare module 'i18next' {
     nestingPrefixEscaped?: string,
     nestingSuffixEscaped?: string,
     defaultVariables?: string,
-  }
+  };
+  declare type ResourceData = {
+    [key: string]: string | ResourceData
+  };
   declare type InitOptions = {
     debug?: bool,
     initImmediate?: bool,
-    resources?: mixed[],
+    resources?: ResourceData,
     lng?: string,
     fallbackLng?: string,
     ns?: string,
