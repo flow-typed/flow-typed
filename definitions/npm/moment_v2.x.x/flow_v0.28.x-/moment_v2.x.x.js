@@ -204,9 +204,9 @@ declare class moment$Moment {
   clone(): moment$Moment;
   static isMoment(obj: any): bool;
   static isDatE(obj: any): bool;
-  static locale(locale: string, localeData?: Object): void;
-  static locale(locales: Array<string>): void;
-  locale(locale: string, customization?: Object|null): void;
+  static locale(locale: string, localeData?: Object): string;
+  static locale(locales: Array<string>): string;
+  locale(locale: string, customization?: Object|null): moment$Moment;
   locale(): string;
   static months(): Array<string>;
   static monthsShort(): Array<string>;
