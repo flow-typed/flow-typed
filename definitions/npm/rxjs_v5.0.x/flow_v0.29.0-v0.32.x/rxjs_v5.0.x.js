@@ -137,6 +137,13 @@ declare class rxjs$Observable<+T> {
 
   ignoreElements<U>(): rxjs$Observable<U>;
 
+  let<U>(project: (self: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
+
+  // Alias for `let`
+  letBind<U>(project: (self: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
+
+  switch(): T; // assumption: T is Observable
+
   // Alias for `mergeMap`
   flatMap<U>(
     project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
