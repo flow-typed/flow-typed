@@ -98,3 +98,45 @@ _.find([1, 2, 3], x => x == 1);
 _.find([1, 2, 3], 1);
 // $ExpectError Callable signature not found in object literal
 _.find([1, 2, 3], {val: 1});
+
+(_.findIndex([1, 2, 3], function(i) { return i % 2 == 0} ): number);
+// $ExpectError number cannot be compared to string.
+(_.findIndex([1, 2, 3], function(i) { return i == '0'} ): number);
+
+(_.indexOf(['a', 'b', 'c'], function(e) { return e == 'b'}): number);
+
+(_.contains(['a', 'b', 'c'], 'b'): boolean);
+
+(_.map(['hello', 'world'], function(e) { return e.length }): Array<number>);
+(_.map({hello: 1, world: 2}, function(v, k) { return k.length }): Array<number>);
+// $ExpectError This type is incompatible with string
+(_.map({hello: 1, world: 2}, function(v, k) { return k * 2 }): Array<number>);
+(_.pluck([{name: 'bob'}, {name: 'jane'}], 'name'): Array<string>);
+(_.reduce([1, 2, 3], function(m, o) { return m + o }, 0): number);
+(_.all([2, 4, 5], function(i) { return i % 2 == 0 }): boolean);
+// $ExpectError Property not found in Number
+(_.all([2, 4, 5], function(i) { return i.length }): boolean);
+(_.some([2, 4, 5], function(i) { return i % 2 == 0 }): boolean);
+(_.intersection(['a', 'b'], ['b']): Array<string>);
+(_.difference(['a', 'b'], ['b']): Array<string>);
+(_.first([1,2,3]): number);
+(_.first([1,2,3], 2): Array<number>);
+(_.last([1,2,3]): number);
+(_.last([1,2,3], 2): Array<number>);
+(_.sample([1,2,3]): number);
+(_.sortBy(['hello', 'world'], function(e) { return e.length }): Array<string>);
+(_.uniq([1,2,2]): Array<number>);
+(_.compact([1, null]): Array<number>);
+(_.select([1,2,3], function(e) { return e % 2 == 0 }): Array<number>);
+(_.reject([1,2,3], function(e) { return e % 2 == 0 }): Array<number>);
+(_.without([1,2,3], 1, 2): Array<number>);
+(_.has({a: 1, b: 2}, 'b'): boolean);
+(_.isArray([1, 2]): boolean);
+(_.isArray(1): boolean);
+(_.pick({a: 1, b: 2}, 'a'): {[key: string]: number});
+(_.omit({a: 1, b: 2}, 'a'): {[key: string]: number});
+
+_.throttle(function(a) {a.length}, 10)('hello');
+_.debounce(function(a) {a.length}, 10)('hello');
+
+_.defer(function(){})
