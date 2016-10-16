@@ -7,7 +7,7 @@ interface rxjs$IObserver<-T> {
   complete(): mixed;
 }
 
-type rxjs$PartialObserver<-T> =
+declare type rxjs$PartialObserver<-T> =
   | {
     next: (value: T) => mixed;
     error?: (error: any) => mixed;
@@ -823,14 +823,16 @@ declare class rxjs$Observable<+T> {
   concatAll(): T; // assumption: T is rxjs$Observable
   mergeAll(n: number): T; // assumption: T is rxjs$Observable
 
-  materialize(): rxjs$Observable<rxjs$Notification<T>>;
-  dematerialize(): rxjs$Observable<any>; // assumption: T is a rxjs$Observable<rxjs$Notification<T>>
+  materialize(): rxjs$Observable<rxjs$Notification<rxjs$NotificationType, T>>;
+  dematerialize(): rxjs$Observable<any>; // assumption: T is a rxjs$Observable<rxjs$Notification<rxjs$NotificationType, T>>
   // TODO implement observeOn (depends on scheduler)
   // TODO implement window operators
   // TODO implement some of the utility operators
 }
 
-declare class rxjs$Notification<T: 'N' | 'E' | 'C', V> {
+declare type rxjs$NotificationType = 'N' | 'E' | 'C'
+
+declare class rxjs$Notification<T: rxjs$NotificationType, V> {
   static createComplete(): rxjs$Notification<'C', void>;
   static createError(e: any): rxjs$Notification<'E', any>;
   static createNext(v: V): rxjs$Notification<'N', V>;
@@ -851,20 +853,12 @@ declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
   refCount(): rxjs$Observable<T>;
 }
 
-declare class rxjs$Observer<T> {
-  static create(
-    onNext?: (value: T) => mixed,
-    onError?: (error: any) => mixed,
-    onCompleted?: () => mixed,
-  ): rxjs$Observer<T>;
-
-  asrxjs$Observer(): rxjs$Observer<T>;
-
+// TODO correct the return types of some prametric functions from void to fixed
+type rxjs$Observer<T> = {
   next(value: T): mixed;
-
   error(error: any): mixed;
-
   complete(): mixed;
+  isUnsubscribed?: () => boolean;
 }
 
 // FIXME(samgoldman) should be `mixins rxjs$Observable<T>, rxjs$Observer<T>`
@@ -908,7 +902,6 @@ declare class rxjs$SchedulerClass {
 declare type rxjs = {
   Observable: typeof rxjs$Observable,
   ConnectableObservable: typeof rxjs$ConnectableObservable,
-  Observer: typeof rxjs$Observer,
   Subject: typeof rxjs$Subject,
   BehaviorSubject: typeof rxjs$BehaviorSubject,
   ReplaySubject: typeof rxjs$ReplaySubject,
@@ -937,12 +930,6 @@ declare module 'rxjs/Rx' {
 declare module 'rxjs/Observable' {
   declare module.exports: {
     Observable: typeof rxjs$Observable
-  }
-}
-
-declare module 'rxjs/Observer' {
-  declare module.exports: {
-    Observer: typeof rxjs$Observer
   }
 }
 

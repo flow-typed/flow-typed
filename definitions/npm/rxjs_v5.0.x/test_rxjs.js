@@ -3,7 +3,6 @@
 import {Observable, Scheduler, Subject} from 'rxjs';
 import {Observable as _O} from 'rxjs/Rx';
 import * as O from 'rxjs/Observable';
-import * as Obs from 'rxjs/Observer';
 import * as BS from 'rxjs/BehaviorSubject';
 import * as RS from 'rxjs/ReplaySubject';
 import * as S from 'rxjs/Subject';
@@ -224,7 +223,7 @@ Observable.bindNodeCallback((a: number, b: string, c: boolean, cb: (e: Error | n
 numbers.materialize().map((x: rxjs$Notification<'E' | 'N' | 'C', number>) => {
   x.accept((n: number) => {}, (e: any) => {}, () => {})
   x.do((n: number) => {}, (e: any) => {}, () => {})
-  x.observe(Observer.create((n: number) => {}, (e: any) => {}, () => {}))
+  x.observe({ next: (n: number) => {}, error: (e: any) => {}, complete: () => {} })
   x.toObservable().map((n: number) => {})
   ; (x.value: number)
   ; (x.type: 'N' | 'E' |'C')
