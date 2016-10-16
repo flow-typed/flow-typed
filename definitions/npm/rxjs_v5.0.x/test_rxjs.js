@@ -8,6 +8,7 @@ import * as BS from 'rxjs/BehaviorSubject';
 import * as RS from 'rxjs/ReplaySubject';
 import * as S from 'rxjs/Subject';
 import * as Sub from 'rxjs/Subscription';
+import {Notification} from 'rxjs/Notification';
 
 type SuperFoo = { x: string };
 type SubFoo = { x: string; y: number };
@@ -219,4 +220,19 @@ numbers.delayWhen((n: number) => Observable.of('stringy').delay(1)).map((n: numb
 
 Observable.bindCallback((a: number, b: string, c: boolean, cb: (s: string) => void) => { cb('yolo') })(1, '', true).map((s: string) => {})
 Observable.bindNodeCallback((a: number, b: string, c: boolean, cb: (e: Error | null, s: string) => void) => { cb(null, 'yolo') })(1, '', true).map((s: string) => {})
+
+numbers.materialize().map((x: rxjs$Notification<'E' | 'N' | 'C', number>) => {
+  x.accept((n: number) => {}, (e: any) => {}, () => {})
+  x.do((n: number) => {}, (e: any) => {}, () => {})
+  x.observe(Observer.create((n: number) => {}, (e: any) => {}, () => {}))
+  x.toObservable().map((n: number) => {})
+  ; (x.value: number)
+  ; (x.type: 'N' | 'E' |'C')
+  ; (x.exception: any)
+  ; (x.hasValue(): boolean)
+})
+numbers.dematerialize().map((x: number) => {})
+Notification.createNext('yolo')
+Notification.createError(new Error('asdf'))
+Notification.createComplete()
 

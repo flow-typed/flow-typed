@@ -823,10 +823,27 @@ declare class rxjs$Observable<+T> {
   concatAll(): T; // assumption: T is rxjs$Observable
   mergeAll(n: number): T; // assumption: T is rxjs$Observable
 
+  materialize(): rxjs$Observable<rxjs$Notification<T>>;
+  dematerialize(): rxjs$Observable<any>; // assumption: T is a rxjs$Observable<rxjs$Notification<T>>
+  // TODO implement observeOn (depends on scheduler)
   // TODO implement window operators
   // TODO implement some of the utility operators
+}
 
-  // TODO implement notifications
+declare class rxjs$Notification<T: 'N' | 'E' | 'C', V> {
+  static createComplete(): rxjs$Notification<'C', void>;
+  static createError(e: any): rxjs$Notification<'E', any>;
+  static createNext(v: V): rxjs$Notification<'N', V>;
+  accept(o: rxjs$Observer<V>): void;
+  accept(n: (v: V) => void, e: (e: any) => void, e: () => void): void;
+  do(n: (v: V) => void, e: (e: any) => void, e: () => void): void;
+  observe(o: rxjs$Observer<V>): void;
+  toObservable(): rxjs$Observable<V>;
+  hasValue(): boolean;
+  value: V;
+  type: T;
+  exception: any;
+
 }
 
 declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
@@ -902,6 +919,7 @@ declare type rxjs = {
     async: rxjs$SchedulerClass,
   },
   Subscription: typeof rxjs$Subscription,
+  Notification: typeof rxjs$Notification,
 }
 
 /*
@@ -951,3 +969,10 @@ declare module 'rxjs/Subscription' {
     Subscription: typeof rxjs$Subscription
   }
 }
+
+declare module 'rxjs/Notification' {
+  declare module.exports: {
+    Notification: typeof rxjs$Notification
+  }
+}
+
