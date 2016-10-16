@@ -41,13 +41,13 @@ declare module 'redux' {
   declare function applyMiddleware<S, A>(...middlewares: Array<Middleware<S, A>>): StoreEnhancer<S, A>;
 
   declare type ActionCreator<A, B> = (...args: Array<B>) => A;
-  declare type ActionCreators<K, A> = { [key: K]: ActionCreator<A, *> };
+  declare type ActionCreators<K, A> = { [key: K]: ActionCreator<A, any> };
 
-  declare function bindActionCreators<A, C: ActionCreator<A, *>>(actionCreator: C, dispatch: Dispatch<A>): C;
+  declare function bindActionCreators<A, C: ActionCreator<A, any>>(actionCreator: C, dispatch: Dispatch<A>): C;
   declare function bindActionCreators<A, K, C: ActionCreators<K, A>>(actionCreators: C, dispatch: Dispatch<A>): C;
 
   // unsafe (you can miss a field and / or assign a wrong reducer to a field)
-  declare function combineReducers<S: Object, A>(reducers: {[key: $Keys<S>]: Reducer<*, A>}): Reducer<S, A>;
+  declare function combineReducers<S: Object, A>(reducers: {[key: $Keys<S>]: Reducer<any, A>}): Reducer<S, A>;
 
   declare function compose<S, A>(...fns: Array<StoreEnhancer<S, A>>): Function;
 
