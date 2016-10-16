@@ -1,3 +1,4 @@
+/* START copied over from marked libdef */
 type marked$AlignFlag = 'left' | 'right' | 'center'
 
 type marked$NodeCallback<T> = (e: ?Error, d: ?T) => void
@@ -144,9 +145,36 @@ type marked$Marked = {
   Renderer: typeof marked$Renderer;
   parse: marked$Marked;
 }
+/* END copied over from marked libdef */
 
+/* FIXME This should be an intersection with marked. Since intersections with objects aren't yet supported,
+ * it would break type checking.
+ */
+declare module 'marked-man' {
+  /* FIXME This should really be an intersect with marked$options, but since intersects aren't yet supported,
+   * it does more harm than good.
+   */
+  declare type MarkedManOptions = {|
+    format?: "html" | "roff";
+    name?: string;
+    date?: Date;
+    section?: string;
+    version?: string;
+    manual?: string;
+    gfm?: boolean;
+    breaks?: boolean;
+    sanitize?: boolean;
+    ronn?: boolean;
+  |}
 
-declare module marked {
-  declare export default marked$Marked;
+  declare type MarkedMan = {
+    (md: string, o: MarkedManOptions, cb: marked$NodeCallback<string>): void;
+    (md: string, cb: marked$NodeCallback<string>): void;
+    (md: string, o?: MarkedManOptions): string;
+    setOptions: (o: MarkedManOptions) => void;
+    defaults: MarkedManOptions;
+  }
+
+  declare export default MarkedMan;
 }
 

@@ -22,6 +22,7 @@ declare module "underscore" {
   declare function map<K, T, U>(a: {[key:K]: T}, iteratee: (val: T, k?: K)=>U): U[];
 
   declare function object<T>(a: Array<[string, T]>): {[key:string]: T};
+  declare function pairs<T>(o: {[key:string]: T}): Array<[string, T]>;
 
   declare function every<T>(a: Array<T>, pred: (val: T)=>boolean): boolean;
 
@@ -31,6 +32,7 @@ declare module "underscore" {
   declare function sortBy<T>(a: T[], iteratee: (val: T)=>any): T[];
 
   declare function filter<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): T[];
+  declare function filter<T>(a: T[], pred: (val: T, k: string)=>boolean): T[];
 
   declare function isEmpty(o: any): boolean;
 
@@ -39,7 +41,8 @@ declare module "underscore" {
   declare function min<T>(a: Array<T>|{[key:any]: T}): T;
   declare function max<T>(a: Array<T>|{[key:any]: T}): T;
 
-  declare function values<T>(o: {[key: any]: T}): T[];
+  declare function keys<K, V>(o: {[key: K]: V}): K[];
+  declare function values<K, V>(o: {[key: K]: V}): V[];
   declare function flatten(a: Array<any>): Array<any>;
 
   // TODO: improve this

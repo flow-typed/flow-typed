@@ -7,12 +7,22 @@ interface rxjs$IObserver<-T> {
   complete(): mixed;
 }
 
-// FIXME: Technically at least one of these is required.
-interface rxjs$PartialObserver<-T> {
-  next?: (value: T) => mixed;
-  error?: (error: any) => mixed;
-  complete?: () => mixed;
-}
+type rxjs$PartialObserver<-T> =
+  | {
+    next: (value: T) => mixed;
+    error?: (error: any) => mixed;
+    complete?: () => mixed;
+  }
+  | {
+    next?: (value: T) => mixed;
+    error: (error: any) => mixed;
+    complete?: () => mixed;
+  }
+  | {
+    next?: (value: T) => mixed;
+    error?: (error: any) => mixed;
+    complete: () => mixed;
+  }
 
 interface rxjs$ISubscription {
   unsubscribe(): void;
@@ -206,6 +216,18 @@ declare class rxjs$Observable<+T> {
   ): rxjs$Observable<rxjs$Observable<T>>;
 
   ignoreElements<U>(): rxjs$Observable<U>;
+
+  let<U>(project: (self: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
+
+  // Alias for `let`
+  letBind<U>(project: (self: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
+
+  switch(): T; // assumption: T is Observable
+
+  // Alias for `mergeMap`
+  flatMap<U>(
+    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
+  ): rxjs$Observable<U>;
 
   switchMap<U>(
     project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>

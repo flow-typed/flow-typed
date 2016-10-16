@@ -63,7 +63,7 @@ function failWithMessage(message: string) {
   return 1;
 }
 
-type Args = {
+export type Args = {
   _: Array<string>,
   flowVersion?: string,
   overwrite: bool,
