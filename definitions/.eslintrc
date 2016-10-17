@@ -1,9 +1,11 @@
 {
   "parser": "babel-eslint",
   "plugins": [
+    "flowtype",
     "flow-typed"
   ],
   "rules": {
+    "flowtype/no-weak-types": 1,
     "flow-typed/negative-tests": [2, 1]
   }
 }
