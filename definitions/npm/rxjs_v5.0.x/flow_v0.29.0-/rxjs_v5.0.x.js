@@ -40,7 +40,7 @@ declare class rxjs$Observable<+T> {
   static concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
 
   static create(
-    subscribe: (observer: rxjs$Observer<T>) => rxjs$ISubscription | Function | void
+    subscribe: (observer: rxjs$PartialObserver<T>) => rxjs$ISubscription | Function | void
   ): rxjs$Observable<T>;
 
   static defer(observableFactory: () => rxjs$Observable<T>): rxjs$Observable<T>;
@@ -311,25 +311,21 @@ declare class rxjs$Observable<+T> {
 
   do:
     (
-      onNext: (value: T) => mixed,
-      onError?: (error: any) => mixed,
-      onCompleted?: () => mixed,
+      next: (value: T) => mixed,
+      error?: (error: any) => mixed,
+      complete?: () => mixed,
     ) => rxjs$Observable<T>
     | (
-      onNext?: (value: T) => mixed,
-      onError: (error: any) => mixed,
-      onCompleted?: () => mixed,
+      next?: (value: T) => mixed,
+      error: (error: any) => mixed,
+      complete?: () => mixed,
     ) => rxjs$Observable<T>
     | (
-      onNext?: (value: T) => mixed,
-      onError?: (error: any) => mixed,
-      onCompleted: () => mixed,
+      next?: (value: T) => mixed,
+      error?: (error: any) => mixed,
+      complete: () => mixed,
     ) => rxjs$Observable<T>;
-  do(observer: {
-    next?: (value: T) => mixed;
-    error?: (error: any) => mixed;
-    complete?: () => mixed;
-  }): rxjs$Observable<T>;
+  do(observer: rxjs$PartialObserver<T>): rxjs$Observable<T>;
 
   throttle(s: (v: T) => rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
   throttleTime(duration: number): rxjs$Observable<T>;
@@ -342,9 +338,9 @@ declare class rxjs$Observable<+T> {
 
   subscribe(observer: rxjs$PartialObserver<T>): rxjs$Subscription;
   subscribe(
-    onNext: ?(value: T) => mixed,
-    onError: ?(error: any) => mixed,
-    onCompleted: ?() => mixed,
+    next: ?(value: T) => mixed,
+    error: ?(error: any) => mixed,
+    complete: ?() => mixed,
   ): rxjs$Subscription;
 
   static combineLatest<A, B>(
@@ -825,9 +821,30 @@ declare class rxjs$Observable<+T> {
 
   materialize(): rxjs$Observable<rxjs$Notification<rxjs$NotificationType, T>>;
   dematerialize(): rxjs$Observable<any>; // assumption: T is a rxjs$Observable<rxjs$Notification<rxjs$NotificationType, T>>
-  // TODO implement observeOn (depends on scheduler)
   // TODO implement window operators
   // TODO implement some of the utility operators
+}
+
+/*
+ * largely internal scheduler type
+ */
+declare type rxjs$SchedulerClass = {
+  actions: Array<(state?: *) => void>;
+  active: boolean;
+  scheduleId: number;
+  flush(): void;
+  now(): number;
+  schedule<T>(work: (state?: T) => void, delay: ?number, state: ?T): rxjs$Subscription;
+}
+
+/*
+ * The exported scheduler object
+ */
+declare type rxjs$Scheduler = {
+  queue: rxjs$SchedulerClass;
+  asap: rxjs$SchedulerClass;
+  async: rxjs$SchedulerClass;
+  animationFrame: rxjs$SchedulerClass;
 }
 
 declare type rxjs$NotificationType = 'N' | 'E' | 'C'
@@ -854,7 +871,7 @@ declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
 }
 
 // TODO correct the return types of some prametric functions from void to fixed
-type rxjs$Observer<T> = {
+declare type rxjs$Observer<-T> = {
   next(value: T): mixed;
   error(error: any): mixed;
   complete(): mixed;
@@ -874,6 +891,7 @@ declare class rxjs$Subject<T> extends rxjs$Observable<T> {
   next(value: T): mixed;
   error(error: any): mixed;
   complete(): mixed;
+  isUnsubscribed?: () => boolean;
 
   // For use in subclasses only:
   _next(value: T): void;
@@ -891,12 +909,16 @@ declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {
 }
 
 declare class rxjs$Subscription {
+  constructor(t: rxjs$TeardownLogic): rxjs$Subscription;
   unsubscribe(): void;
-  add(teardown: rxjs$TeardownLogic): rxjs$Subscription;
+  add(t: rxjs$TeardownLogic): rxjs$Subscription;
+  remove(s: rxjs$Subscription): void;
 }
 
-declare class rxjs$SchedulerClass {
-  schedule<T>(work: (state?: T) => void, delay?: number, state?: T): rxjs$Subscription;
+declare class rxjs$Subscriber<T> {
+  static create(next: ?(v: T) => mixed, error: ?(e: any) => mixed, complete: ?() => mixed): rxjs$PartialObserver<T>;
+  constructor(next: ?(v: T) => mixed, error: ?(e: any) => mixed, complete: ?() => mixed): rxjs$PartialObserver<T>;
+  constructor(o: rxjs$Observer<T>): rxjs$PartialObserver<T>;
 }
 
 declare type rxjs = {
@@ -905,14 +927,10 @@ declare type rxjs = {
   Subject: typeof rxjs$Subject,
   BehaviorSubject: typeof rxjs$BehaviorSubject,
   ReplaySubject: typeof rxjs$ReplaySubject,
-  Scheduler: {
-    asap: rxjs$SchedulerClass,
-    queue: rxjs$SchedulerClass,
-    animationFrame: rxjs$SchedulerClass,
-    async: rxjs$SchedulerClass,
-  },
   Subscription: typeof rxjs$Subscription,
+  Subscriber: typeof rxjs$Subscriber,
   Notification: typeof rxjs$Notification,
+  Scheduler: rxjs$Scheduler,
 }
 
 /*
@@ -954,6 +972,12 @@ declare module 'rxjs/Subject' {
 declare module 'rxjs/Subscription' {
   declare module.exports: {
     Subscription: typeof rxjs$Subscription
+  }
+}
+
+declare module 'rxjs/Subscriber' {
+  declare module.exports: {
+    Subscriber: typeof rxjs$Subscriber
   }
 }
 

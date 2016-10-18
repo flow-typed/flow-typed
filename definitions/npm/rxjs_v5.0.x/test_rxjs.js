@@ -1,12 +1,13 @@
 /* @flow */
 
-import {Observable, Scheduler, Subject} from 'rxjs';
-import {Observable as _O} from 'rxjs/Rx';
-import * as O from 'rxjs/Observable';
-import * as BS from 'rxjs/BehaviorSubject';
-import * as RS from 'rxjs/ReplaySubject';
-import * as S from 'rxjs/Subject';
-import * as Sub from 'rxjs/Subscription';
+import {Observable, Scheduler, Subject, Subscriber} from 'rxjs';
+import {Observable as _Observable} from 'rxjs/Rx';
+import {Observable as _Observable} from 'rxjs/Observable';
+import {BehaviorSubject as _BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {ReplaySubject as _ReplaySubject} from 'rxjs/ReplaySubject';
+import {Subject as _Subject} from 'rxjs/Subject';
+import {Subscription as _Subscription} from 'rxjs/Subscription';
+import {Subscriber as _Subscriber} from 'rxjs/Subscriber';
 import {Notification} from 'rxjs/Notification';
 
 type SuperFoo = { x: string };
@@ -234,4 +235,8 @@ numbers.dematerialize().map((x: number) => {})
 Notification.createNext('yolo')
 Notification.createError(new Error('asdf'))
 Notification.createComplete()
+
+numbers.subscribe(Subscriber.create((n: number) => {}, (err) => {}), () => {})
+// $ExpectError
+numbers.subscribe(Subscriber.create((n: string) => {}))
 
