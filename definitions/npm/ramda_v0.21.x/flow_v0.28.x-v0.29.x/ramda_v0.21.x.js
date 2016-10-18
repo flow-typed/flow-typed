@@ -329,8 +329,8 @@ declare module ramda {
   declare function zip<T,S>(xs: Array<T>, ys: Array<S>): Array<[T,S]>
   declare function zip<T,S>(xs: Array<T>, ...rest: Array<void>): (ys: Array<S>) => Array<[T,S]>
 
-  declare function zipObj<T:string,S>(xs: Array<T>, ys: Array<S>): Array<{[key:T]:S}>
-  declare function zipObj<T:string,S>(xs: Array<T>, ...rest: Array<void>): (ys: Array<S>) => Array<{[key:T]:S}>
+  declare function zipObj<T:string,S>(xs: Array<T>, ys: Array<S>): {[key:T]:S}
+  declare function zipObj<T:string,S>(xs: Array<T>, ...rest: Array<void>): (ys: Array<S>) => {[key:T]:S}
 
   declare type NestedArray<T> = Array<T | NestedArray<T>>
   declare function flatten<T>(xs: NestedArray<T>): Array<T>;
