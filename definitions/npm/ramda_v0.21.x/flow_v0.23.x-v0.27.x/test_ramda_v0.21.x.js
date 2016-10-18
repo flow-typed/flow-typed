@@ -171,6 +171,9 @@ describe('List', () => {
   it('should typecheck zipWith', () => {
     const res: Array<string> = _.zipWith((x, y) => x + y, [ 1, 2, 3 ], [ 'a', 'b', 'c' ])
   })
+  it('should typecheck zipObj', () => {
+    const res: {[key: string]: number} = _.zipObj([ 'a', 'b', 'c' ], [ 1, 2, 3 ])
+  })
   it('should typecheck nth', () => {
     const ys: ?number = _.nth(2, [ 1, 2, 3 ])
     const ys1: ?number = _.nth(2)([ 1, 2, 3 ])

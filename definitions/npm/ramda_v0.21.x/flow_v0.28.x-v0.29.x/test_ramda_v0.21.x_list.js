@@ -221,9 +221,9 @@ const str: string = 'hello world'
   //$ExpectError
   const zipxs1: Array<[ number, string ]> = _.zip([ true, false ])([ 'a', 'b' ])
 
-  const zipos: Array<{[k:string]:number}> = _.zipObj([ 'a', 'b', 'c' ], [ 1, 2, 3 ])
+  const zipos: {[k:string]:number} = _.zipObj([ 'a', 'b', 'c' ], [ 1, 2, 3 ])
 
-  const ys9: Array<{[k:string]: number}> = _.zipObj([ 'me', 'you' ], [ 1, 2 ])
+  const ys9: {[k:string]: number} = _.zipObj([ 'me', 'you' ], [ 1, 2 ])
   const zipped: Array<{s: number, y: string}> = zipWith((a, b) => ({ s: a, y: b }), [ 1, 2, 3 ], [ '1', '2', '3' ])
   const zipped2: Array<{s: number, y: string}> = _.zipWith((a, b) => ({ s: a, y: b }), [ 1, 2, 3 ])([ '1', '2', '3' ])
   const zipped3: Array<{s: number, y: string}> = _.zipWith((a, b) => ({ s: a, y: b }))([ 1, 2, 3 ])([ '1', '2', '3' ])

@@ -315,8 +315,8 @@ declare module 'ramda' {
     xprod<T,S>(xs: Array<T>): (ys: Array<S>) => Array<[T,S]>;
     zip<T,S>(xs: Array<T>, ys: Array<S>): Array<[T,S]>;
     zip<T,S>(xs: Array<T>): (ys: Array<S>) => Array<[T,S]>;
-    zipObj<T:string,S>(xs: Array<T>, ys: Array<S>): Array<{[key: string]:S}>;
-    zipObj<T:string,S>(xs: Array<T>): (ys: Array<S>) => Array<{[key: string]:S}>;
+    zipObj<T:string,S>(xs: Array<T>, ys: Array<S>): {[key: string]:S};
+    zipObj<T:string,S>(xs: Array<T>): (ys: Array<S>) => {[key: string]:S};
     zipWith<T,S,R>(fn: (a: T, b: S) => R, xs: Array<T>, ys: Array<S>): Array<R>;
     zipWith<T,S,R>(fn: (a: T, b: S) => R, xs: Array<T>): (ys: Array<S>) => Array<R>;
     zipWith<T,S,R>(fn: (a: T, b: S) => R): (xs: Array<T>, ys: Array<S>) => Array<R>;
