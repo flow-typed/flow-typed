@@ -19,6 +19,7 @@ declare module 'react-modal' {
     shouldCloseOnOverlayClick: bool,
   }
   declare class Modal extends React$Component {
+    static setAppElement(element: HTMLElement | string): void;
     static defaultProps: DefaultProps;
     props: Props;
   }
