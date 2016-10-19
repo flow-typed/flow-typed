@@ -8,7 +8,8 @@
     "eslint": "^3.0.1"
   },
   "devDependencies": {
-    "eslint-plugin-flow-typed": "^1.0.0"
+    "eslint-plugin-flow-typed": "^1.0.0",
+    "eslint-plugin-flowtype": "^2.19.0"
   },
   "scripts": {
     "test": "eslint npm/**/test*"
