@@ -7,8 +7,8 @@ declare module "paths-js/all" {
     constructor(): Path;
     points(): Array<Point>;
     connect(path: Path): Path;
-    moveto(x: number, y: number): Path;
-    lineto(x: number, y: number): Path;
+    moveto(p: Point): Path;
+    lineto(p: Point): Path;
     hlineto(x: number): Path;
     vlineto(y: number): Path;
     curveto(x1: number, y1: number, x2: number, y2: number, x: number, y: number): Path;
@@ -62,6 +62,15 @@ declare module "paths-js/all" {
         max: number,
         min: number,
         gutter?: number |}): Bar<A>;
+  }
+
+  declare class Pie<A> {
+    constructor(options:
+      {| data: Arrayy<A>,
+        accessor?: (a: A) => number,
+        center: Point,
+        r: number,
+        R: number |}): Pie<A>;
   }
 
   declare module.exports: {

@@ -82,3 +82,15 @@ const bar1: Bar<Country> = new Bar(barOptions1);
 
 // $ExpectError
 const _bar: Bar<number> = new Bar(data, accessor, 2, 4, 1);
+
+const data1: Array<Country> =[
+      { name: 'Italy', population: 59859996 },
+      { name: 'Spain', population: 46704314 },
+      { name: 'France', population: 65806000 },
+      { name: 'Romania', population: 20121641 },
+      { name: 'Greece', population: 10815197 }
+    ];
+
+const pieOptions = { data: data1, accessor: accessor, center: p1, r: 2, R: 4};
+
+const pie: Pie = new Pie(pieOptions);
