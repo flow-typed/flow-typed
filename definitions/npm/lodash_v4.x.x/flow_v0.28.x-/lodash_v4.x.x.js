@@ -26,12 +26,16 @@ declare module 'lodash' {
 
   declare type NestedArray<T> = Array<Array<T>>;
 
-  declare type OPredicate<O> = ((value: any, key: string, object: O) => ?bool)|Object|string;
+  declare type OPredicate<A, O> =
+                    | ((value: A, key: string, object: O) => any)
+                    | Object
+                    | string;
   declare type OIterateeWithResult<V, O, R> = Object|string|((value: V, key: string, object: O) => R);
   declare type OIteratee<O> = OIterateeWithResult<any, O, any>;
 
   declare type Predicate<T> =
-                    | ((value: T, index: number, array: Array<T>) => ?bool)
+                    | ((value: T, index: number, array: Array<T>) => any)
+                    | Object
                     | string;
   declare type _Iteratee<T> = (item: T, index: number, array: ?Array<T>) => mixed;
   declare type Iteratee<T> = _Iteratee<T>|Object|string;
@@ -154,11 +158,11 @@ declare module 'lodash' {
     every<T>(array: ?Array<T>, iteratee?: Iteratee<T>): bool;
     every<T: Object>(object: T, iteratee?: OIteratee<T>): bool;
     filter<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
-    filter<V, T: Object>(object: T, predicate?: OPredicate<T>): Array<any>;
+    filter<A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>): Array<A>;
     find<T>(array: ?Array<T>, predicate?: Predicate<T>): T;
-    find<V, T: Object>(object: T, predicate?: OPredicate<T>): V;
+    find<V, A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>): V;
     findLast<T>(array: ?Array<T>, predicate?: Predicate<T>): T;
-    findLast<V, T>(object: T, predicate?: OPredicate<T>): V;
+    findLast<V, A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>): V;
     flatMap<T, U>(array: ?Array<T>, iteratee?: FlatMapIteratee<T, U>): Array<U>;
     flatMapDeep<T, U>(array: ?Array<T>, iteratee?: FlatMapIteratee<T, U>): Array<U>;
     flatMapDepth<T, U>(array: ?Array<T>, iteratee?: FlatMapIteratee<T, U>, depth?: number): Array<U>;
@@ -181,13 +185,13 @@ declare module 'lodash' {
     orderBy<T>(array: ?Array<T>, iteratees?: Array<Iteratee<T>>|string, orders?: Array<'asc'|'desc'>|string): Array<T>;
     orderBy<V, T: Object>(object: T, iteratees?: Array<OIteratee<*>>|string, orders?: Array<'asc'|'desc'>|string): Array<V>;
     partition<T>(array: ?Array<T>, predicate?: Predicate<T>): NestedArray<T>;
-    partition<V, T: Object>(object: T, predicate?: OPredicate<T>): NestedArray<V>;
+    partition<V, A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>): NestedArray<V>;
     reduce<T, U>(array: ?Array<T>, iteratee?: (accumulator: U, value: T, index: number, array: ?Array<T>) => U, accumulator?: U): U;
     reduce<T: Object, U>(object: T, iteratee?: (accumulator: U, value: any, key: string, object: T) => U, accumulator?: U): U;
     reduceRight<T, U>(array: ?Array<T>, iteratee?: (accumulator: U, value: T, index: number, array: ?Array<T>) => U, accumulator?: U): U;
     reduceRight<T: Object, U>(object: T, iteratee?: (accumulator: U, value: any, key: string, object: T) => U, accumulator?: U): U;
     reject<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
-    reject<V: Object, T>(object: T, predicate?: OPredicate<T>): Array<V>;
+    reject<V: Object, A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>): Array<V>;
     sample<T>(array: ?Array<T>): T;
     sample<V, T: Object>(object: T): V;
     sampleSize<T>(array: ?Array<T>, n?: number): Array<T>;
@@ -196,7 +200,7 @@ declare module 'lodash' {
     shuffle<V, T: Object>(object: T): Array<V>;
     size(collection: Array<any>|Object): number;
     some<T>(array: ?Array<T>, predicate?: Predicate<T>): bool;
-    some<T: Object>(object?: ?Object, predicate?: OPredicate<T>): bool;
+    some<A, T: {[id: string]: A}>(object?: ?T, predicate?: OPredicate<A, T>): bool;
     sortBy<T>(array: ?Array<T>, ...iteratees?: Array<Iteratee<T>>): Array<T>;
     sortBy<T>(array: ?Array<T>, iteratees?: Array<Iteratee<T>>): Array<T>;
     sortBy<V, T: Object>(object: T, ...iteratees?: Array<OIteratee<T>>): Array<V>;
@@ -347,8 +351,8 @@ declare module 'lodash' {
     extendWith<T: Object, A: Object, B: Object>(object: T, s1: A, s2: B, customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A|B) => any|void): Object;
     extendWith<T: Object, A: Object, B: Object, C: Object>(object: T, s1: A, s2: B, s3: C, customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A|B|C) => any|void): Object;
     extendWith<T: Object, A: Object, B: Object, C: Object, D: Object>(object: T, s1: A, s2: B, s3: C, s4: D, customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A|B|C|D) => any|void): Object;
-    findKey(object?: ?Object, predicate?: OPredicate<*>): string|void;
-    findLastKey(object?: ?Object, predicate?: OPredicate<*>): string|void;
+    findKey<A, T: {[id: string]: A}>(object?: ?T, predicate?: OPredicate<A, T>): string|void;
+    findLastKey<A, T: {[id: string]: A}>(object?: ?T, predicate?: OPredicate<A, T>): string|void;
     forIn(object?: ?Object, iteratee?: OIteratee<*>): Object;
     forInRight(object?: ?Object, iteratee?: OIteratee<*>): Object;
     forOwn(object?: ?Object, iteratee?: OIteratee<*>): Object;
@@ -372,10 +376,10 @@ declare module 'lodash' {
     mergeWith<T: Object, A: Object, B: Object, C: Object, D: Object>(object: T, s1: A, s2: B, s3: C, s4: D, customizer?: (objValue: any, srcValue: any, key: string, object: T, source: A|B|C|D) => any|void): Object;
     omit(object?: ?Object, ...props: Array<string>): Object;
     omit(object?: ?Object, props: Array<string>): Object;
-    omitBy(object?: ?Object, predicate?: OPredicate<*>): Object;
+    omitBy<A, T: {[id: string]: A}>(object?: ?T, predicate?: OPredicate<A, T>): Object;
     pick(object?: ?Object, ...props: Array<string>): Object;
     pick(object?: ?Object, props: Array<string>): Object;
-    pickBy(object?: ?Object, predicate?: OPredicate<*>): Object;
+    pickBy<A, T: {[id: string]: A}>(object?: ?T, predicate?: OPredicate<A, T>): Object;
     result(object?: ?Object, path?: ?Array<string>|string, defaultValue?: any): any;
     set(object?: ?Object, path?: ?Array<string>|string, value: any): Object;
     setWith<T>(object: T, path?: ?Array<string>|string, value: any, customizer?: (nsValue: any, key: string, nsObject: T) => any): Object;

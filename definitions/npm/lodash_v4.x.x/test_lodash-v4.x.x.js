@@ -12,6 +12,8 @@ _.find([1, 2, 3], 1);
 // $ExpectError property `y`. Property not found in object literal
 _.find([{x:1}, {x:2}, {x:3}], v => v.y == 3);
 _.find([{x:1}, {x:2}, {x:3}], v => v.x == 3);
+_.find({x: 1, y: 2}, (a: number, b: string) => a);
+_.find({x: 1, y: 2}, { x: 3 });
 
 
 /**
@@ -80,11 +82,9 @@ _.zip([{x:1}], [{x:2,y:1}])[0][2]
 _.find([1, 2, 3], x => x == 1);
 // $ExpectError number. This type is incompatible with function type.
 _.find([1, 2, 3], 1);
-// $ExpectError Callable signature not found in object literal
-_.find([1, 2, 3], {val: 1});
 
 
-// Copy pasted tests from iflow-bluebird
+// Copy pasted tests from iflow-lodash
 var nums : number[] = [1,2,3,4,5,6];
 var num : number;
 var string : string;
