@@ -1,11 +1,10 @@
-interface ErrnoError extends Error {
-  errno?: number;
-  code?: string;
-  path?: string;
-  syscall?: string;
-}
-
 declare module "graceful-fs" {
+  declare interface ErrnoError extends Error {
+    errno?: number;
+    code?: string;
+    path?: string;
+    syscall?: string;
+  }
   declare class Stats {
     dev: number;
     ino: number;
