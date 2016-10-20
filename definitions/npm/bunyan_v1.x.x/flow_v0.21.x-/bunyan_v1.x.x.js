@@ -97,8 +97,8 @@ declare module 'bunyan' {
         serializers?: Serializers;
         src?: boolean;
     }
-    declare interface Serializers {
-        [key: string]: (input: any) => string;
+    declare type Serializers = {
+        [key: string]: (input: any) => mixed;
     }
     declare type Stream = {
         type: string;

@@ -57,3 +57,12 @@ logger.log()
 logger.addSTream();
 
 logger.trace({ err: new Error('foobar') }, 'error');
+
+Bunyan.createLogger({
+    name: 'foo',
+    serializers: {
+        foo(data) {
+            return {baz: data};
+        }
+    }
+}).info({foo: 'baz'});
