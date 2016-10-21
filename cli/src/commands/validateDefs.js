@@ -1,6 +1,7 @@
 // @flow
 
 import {getLocalLibDefs as getLocalDefs} from "../lib/libDefs.js";
+import isInFlowTypedRepo from "../lib/isInFlowTypedRepo";
 
 function validationError(errKey, errMsg, validationErrs) {
   const errors = validationErrs.get(errKey) || [];
@@ -9,9 +10,16 @@ function validationError(errKey, errMsg, validationErrs) {
 }
 
 export const name = "validate-defs";
-export const description =
-  "Validates the structure of the definitions in the local repo.";
+export const description = "Validates the structure of the definitions in the flow-typed project.";
+
 export async function run(): Promise<number> {
+  if (!isInFlowTypedRepo()) {
+    console.log(
+      "This command only works in a clone of flowtype/flow-typed. " +
+      "It is a tool used to validate the library definitions flow-typed project."
+    );
+    return 1;
+  }
   const validationErrors = new Map();
 
   const localDefs = await getLocalDefs(validationErrors);
