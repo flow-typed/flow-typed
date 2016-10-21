@@ -553,8 +553,8 @@ declare module ramda {
 
   // TODO over
 
-  declare function path<V,A:NestedObject<V>>(p: Array<string>, ...rest: Array<void>): (o: A) => ?V;
-  declare function path<V,A:NestedObject<V>>(p: Array<string>, o: A): ?V;
+  declare function path<V,A:?NestedObject<V>>(p: Array<string>, ...rest: Array<void>): (o: A) => ?V;
+  declare function path<V,A:?NestedObject<V>>(p: Array<string>, o: A): ?V;
 
   declare function pathOr<T,V,A:NestedObject<V>>(or: T, ...rest: Array<void>):
   ((p: Array<string>, ...rest: Array<void>) => (o: A) => V|T)
@@ -721,7 +721,7 @@ declare module ramda {
     f2: (...args: Array<any>) => C
   ): (...args: Array<A>) => B|C;
 
-  declare function isEmpty(x:Array<any>|Object|string): boolean;
+  declare function isEmpty(x:?Array<any>|Object|string): boolean;
 
   declare function not(x:boolean): boolean;
 
