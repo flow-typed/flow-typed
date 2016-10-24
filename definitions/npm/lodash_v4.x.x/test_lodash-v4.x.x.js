@@ -32,8 +32,13 @@ cloned.b == 1;
 /**
  * _.create
  */
-var createProto = {a: 1};
-_.create(createProto, {b: 2}).a === 1;
+var createProto: {a: number} = {a: 1};
+var createdObj = _.create(createProto, {b: 2});
+
+createdObj.b == 2;
+
+// $ExpectError property `c`. Property not found in object type
+createdObj.c == 'c';
 
 /**
  * _.isEqual
