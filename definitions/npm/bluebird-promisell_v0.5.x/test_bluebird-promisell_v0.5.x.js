@@ -1,9 +1,7 @@
 // @flow
 
-import type { Bluebird$Promise } from 'bluebird';
-type Promise<R> = Bluebird$Promise<R>
-
 import P from 'bluebird-promisell';
+import type { Bluebird$Promise } from 'bluebird-promisell';
 
 // purep
 var purepOK: Promise<number> = P.purep(2);
@@ -16,7 +14,7 @@ var liftp1OK = P.liftp1(function(a: number): number {
   return a + 1;
 })(P.purep(1));
 
-var liftp1OK2: (pa: Promise<number>) => Promise<number> = P.liftp(function(a: number): number {
+var liftp1OK2: (pa: Promise<number>) => Promise<number> = P.liftp1(function(a: number): number {
   return a + 1;
 });
 

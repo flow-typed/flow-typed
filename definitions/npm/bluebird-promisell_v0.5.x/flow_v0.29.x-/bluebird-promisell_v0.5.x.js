@@ -1,8 +1,9 @@
 import type { Bluebird$Promise } from 'bluebird';
 
-type Promise<R> = Bluebird$Promise<R>
 
 declare module "bluebird-promisell" {
+  declare export type Bluebird$Promise<R> = Bluebird$Promise<R>
+
   declare module.exports: {
     purep <A>(a: A): Promise<A>;
     fmapp <A,B>(fn: (a: A) => B): (pa: Promise<A>) => Promise<B>;
