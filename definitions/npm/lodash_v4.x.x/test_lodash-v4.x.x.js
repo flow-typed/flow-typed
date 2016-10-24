@@ -26,6 +26,12 @@ _.clone({a: 1}).b == 1
 _.clone({a: 1}).a == 'c';
 
 /**
+ * _.create
+ */
+var createProto = {a: 1};
+_.create(createProto, {b: 2}).a === 1;
+
+/**
  * _.isEqual
  */
 _.isEqual('a', 'b');
