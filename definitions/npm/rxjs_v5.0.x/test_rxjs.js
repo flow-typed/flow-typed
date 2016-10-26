@@ -1,6 +1,6 @@
 /* @flow */
 
-import {Observable, Scheduler, Subject, Subscriber} from 'rxjs';
+import Rx, {Observable, Scheduler, Subject, Subscriber} from 'rxjs';
 import {Observable as _Observable} from 'rxjs/Rx';
 import {Observable as _Observable} from 'rxjs/Observable';
 import {BehaviorSubject as _BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -94,6 +94,7 @@ const never: Observable<number> = Observable.empty()
 
 (numbers.cache(): Observable<number>);
 (numbers.cache(1): Observable<number>);
+(numbers.cache(1, null, Rx.Scheduler.asap): Observable<number>);
 
 (numbers.withLatestFrom(strings): Observable<[number, string]>);
 // $ExpectError
@@ -207,8 +208,11 @@ numbers.concatMap((n: number) => Observable.of('test'), ((n: number, s: string) 
 numbers.concatMapTo('yolo', ((n: number, s: string) => false)).map((s: boolean) => {})
 
 numbers.expand((n: number) => Observable.of(n * 2)).map((n: number) => {})
+numbers.expand((n: number) => Observable.of(n), null, Rx.Scheduler.asap).map((n: number) => {})
 // $ExpectError
 numbers.expand((n: number) => Observable.of('asdf')).map((n: number) => {})
+
+numbers.debounce(() => numbers, Rx.Scheduler.asap).map((n: number) => {})
 
 numbers.mergeMap((n: number) => Observable.of('asdf')).map((n: string) => {})
 numbers.mergeMap((n: number) => Observable.of('asdf'), (n: number, s: string) => false).map((n: boolean) => {})
@@ -219,7 +223,14 @@ numbers.delayWhen((n: number) => Observable.of('stringy').delay(1), Observable.o
 numbers.delayWhen((n: number) => Observable.of('stringy').delay(1)).map((n: number) => {})
 
 Observable.bindCallback((a: number, b: string, c: boolean, cb: (s: string) => void) => { cb('yolo') })(1, '', true).map((s: string) => {})
+Observable.bindCallback((a: number, b: string, c: boolean, cb: (s: string) => void) => { cb('yolo') })(1, '', true).map((s: string) => {}, Rx.Scheduler.async)
 Observable.bindNodeCallback((a: number, b: string, c: boolean, cb: (e: Error | null, s: string) => void) => { cb(null, 'yolo') })(1, '', true).map((s: string) => {})
+Observable.bindNodeCallback(
+  (a: number, b: string, c: boolean, cb: (e: Error | null, s: string) => void) => {
+    cb(null, 'yolo')
+  },
+  Rx.Scheduler.asap
+)(1, '', true).map((s: string) => {})
 
 numbers.materialize().map((x: rxjs$Notification<'E' | 'N' | 'C', number>) => {
   x.accept((n: number) => {}, (e: any) => {}, () => {})
@@ -239,4 +250,14 @@ Notification.createComplete()
 numbers.subscribe(Subscriber.create((n: number) => {}, (err) => {}), () => {})
 // $ExpectError
 numbers.subscribe(Subscriber.create((n: string) => {}))
+
+Observable.range(0, 2)
+Observable.range(0, 2, Rx.Scheduler.queue)
+// $ExpectError
+Observable.range(0, 2, () => {})
+
+numbers.bufferTime(12)
+numbers.bufferTime(12, 3)
+numbers.bufferTime(12, 3, 45)
+numbers.bufferTime(12, null, 45, Rx.Scheduler.animationFrame)
 

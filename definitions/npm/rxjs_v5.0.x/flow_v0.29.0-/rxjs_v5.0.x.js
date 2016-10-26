@@ -45,39 +45,37 @@ declare class rxjs$Observable<+T> {
 
   static defer(observableFactory: () => rxjs$Observable<T>): rxjs$Observable<T>;
 
-  // TODO implement scheduler arg
-  static bindCallback<A, R>(f: (a: A, cb: (a: R) => any) => any): (a: A) => rxjs$Observable<R>;
-  static bindCallback<A, B, R>(f: (a: A, b: B, cb: (a: R) => any) => any): (a: A, b: B) => rxjs$Observable<R>;
-  static bindCallback<A, B, C, R>(f: (a: A, b: B, c: C, cb: (a: R) => any) => any): (a: A, b: B, c: C) => rxjs$Observable<R>;
-  static bindCallback<A, B, C, D, R>(f: (a: A, b: B, c: C, d: D, cb: (a: R) => any) => any): (a: A, b: B, c: C, d: D) => rxjs$Observable<R>;
-  static bindCallback<A, B, C, D, E, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (a: R) => any) => any): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<R>;
-  static bindCallback<A, B, C, D, E, F, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (a: R) => any) => any): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<R>;
-  static bindCallback<A, B, C, D, E, F, G, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (a: R) => any) => any): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<R>;
+  static bindCallback<A, R>(f: (a: A, cb: (a: R) => any) => any, c?: rxjs$Scheduler): (a: A) => rxjs$Observable<R>;
+  static bindCallback<A, B, R>(f: (a: A, b: B, cb: (a: R) => any) => any, c?: rxjs$Scheduler): (a: A, b: B) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, R>(f: (a: A, b: B, c: C, cb: (a: R) => any) => any, c?: rxjs$Scheduler): (a: A, b: B, c: C) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, D, R>(f: (a: A, b: B, c: C, d: D, cb: (a: R) => any) => any, c?: rxjs$Scheduler): (a: A, b: B, c: C, d: D) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, D, E, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (a: R) => any) => any, c?: rxjs$Scheduler): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, D, E, F, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (a: R) => any) => any, c?: rxjs$Scheduler): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<R>;
+  static bindCallback<A, B, C, D, E, F, G, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (a: R) => any) => any, c?: rxjs$Scheduler): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<R>;
 
-  static bindCallback<A, U, R>(f: (a: A, cb: (a: R) => any) => any, s: (a: R) => U): (a: A) => rxjs$Observable<U>;
-  static bindCallback<A, B, U, R>(f: (a: A, b: B, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B) => rxjs$Observable<U>;
-  static bindCallback<A, B, C, U, R>(f: (a: A, b: B, c: C, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C) => rxjs$Observable<U>;
-  static bindCallback<A, B, C, D, U, R>(f: (a: A, b: B, c: C, d: D, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D) => rxjs$Observable<U>;
-  static bindCallback<A, B, C, D, E, U, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<U>;
-  static bindCallback<A, B, C, D, E, F, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<U>;
-  static bindCallback<A, B, C, D, E, F, G, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<U>;
+  static bindCallback<A, U, R>(f: (a: A, cb: (a: R) => any, c?: rxjs$Scheduler) => any, s: (a: R) => U): (a: A) => rxjs$Observable<U>;
+  static bindCallback<A, B, U, R>(f: (a: A, b: B, cb: (a: R) => any, c?: rxjs$Scheduler) => any, s: (a: R) => U): (a: A, b: B) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, U, R>(f: (a: A, b: B, c: C, cb: (a: R) => any, c?: rxjs$Scheduler) => any, s: (a: R) => U): (a: A, b: B, c: C) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, D, U, R>(f: (a: A, b: B, c: C, d: D, cb: (a: R) => any, c?: rxjs$Scheduler) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, D, E, U, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (a: R) => any, c?: rxjs$Scheduler) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, D, E, F, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (a: R) => any, c?: rxjs$Scheduler) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<U>;
+  static bindCallback<A, B, C, D, E, F, G, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (a: R) => any, c?: rxjs$Scheduler) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<U>;
 
-  // TODO implement scheduler arg
-  static bindNodeCallback<A, R>(f: (a: A, cb: (e: Error | void | null, a: R) => any) => any): (a: A) => rxjs$Observable<R>;
-  static bindNodeCallback<A, B, R>(f: (a: A, b: B, cb: (e: Error | void | null, a: R) => any) => any): (a: A, b: B) => rxjs$Observable<R>;
-  static bindNodeCallback<A, B, C, R>(f: (a: A, b: B, c: C, cb: (e: Error | void | null, a: R) => any) => any): (a: A, b: B, c: C) => rxjs$Observable<R>;
-  static bindNodeCallback<A, B, C, D, R>(f: (a: A, b: B, c: C, d: D, cb: (e: Error | void | null, a: R) => any) => any): (a: A, b: B, c: C, d: D) => rxjs$Observable<R>;
-  static bindNodeCallback<A, B, C, D, E, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (e: Error | void | null, a: R) => any) => any): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<R>;
-  static bindNodeCallback<A, B, C, D, E, F, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (e: Error | void | null, a: R) => any) => any): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<R>;
-  static bindNodeCallback<A, B, C, D, E, F, G, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (e: Error | void | null, a: R) => any) => any): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<R>;
+  static bindNodeCallback<A, R>(f: (a: A, cb: (e: Error | void | null, a: R) => any, c?: rxjs$Scheduler) => any): (a: A) => rxjs$Observable<R>;
+  static bindNodeCallback<A, B, R>(f: (a: A, b: B, cb: (e: Error | void | null, a: R) => any, c?: rxjs$Scheduler) => any): (a: A, b: B) => rxjs$Observable<R>;
+  static bindNodeCallback<A, B, C, R>(f: (a: A, b: B, c: C, cb: (e: Error | void | null, a: R) => any, c?: rxjs$Scheduler) => any): (a: A, b: B, c: C) => rxjs$Observable<R>;
+  static bindNodeCallback<A, B, C, D, R>(f: (a: A, b: B, c: C, d: D, cb: (e: Error | void | null, a: R) => any, c?: rxjs$Scheduler) => any): (a: A, b: B, c: C, d: D) => rxjs$Observable<R>;
+  static bindNodeCallback<A, B, C, D, E, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (e: Error | void | null, a: R) => any, c?: rxjs$Scheduler) => any): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<R>;
+  static bindNodeCallback<A, B, C, D, E, F, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (e: Error | void | null, a: R) => any, c?: rxjs$Scheduler) => any): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<R>;
+  static bindNodeCallback<A, B, C, D, E, F, G, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (e: Error | void | null, a: R) => any, c?: rxjs$Scheduler) => any): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<R>;
 
-  static bindNodeCallback<A, U, R>(f: (a: A, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U): (a: A) => rxjs$Observable<U>;
-  static bindNodeCallback<A, B, U, R>(f: (a: A, b: B, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U): (a: A, b: B) => rxjs$Observable<U>;
-  static bindNodeCallback<A, B, C, U, R>(f: (a: A, b: B, c: C, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C) => rxjs$Observable<U>;
-  static bindNodeCallback<A, B, C, D, U, R>(f: (a: A, b: B, c: C, d: D, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D) => rxjs$Observable<U>;
-  static bindNodeCallback<A, B, C, D, E, U, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<U>;
-  static bindNodeCallback<A, B, C, D, E, F, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<U>;
-  static bindNodeCallback<A, B, C, D, E, F, G, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<U>;
+  static bindNodeCallback<A, U, R>(f: (a: A, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U, c?: rxjs$Scheduler): (a: A) => rxjs$Observable<U>;
+  static bindNodeCallback<A, B, U, R>(f: (a: A, b: B, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U, c?: rxjs$Scheduler): (a: A, b: B) => rxjs$Observable<U>;
+  static bindNodeCallback<A, B, C, U, R>(f: (a: A, b: B, c: C, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U, c?: rxjs$Scheduler): (a: A, b: B, c: C) => rxjs$Observable<U>;
+  static bindNodeCallback<A, B, C, D, U, R>(f: (a: A, b: B, c: C, d: D, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U, c?: rxjs$Scheduler): (a: A, b: B, c: C, d: D) => rxjs$Observable<U>;
+  static bindNodeCallback<A, B, C, D, E, U, R>(f: (a: A, b: B, c: C, d: D, e: E, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U, c?: rxjs$Scheduler): (a: A, b: B, c: C, d: D, e: E) => rxjs$Observable<U>;
+  static bindNodeCallback<A, B, C, D, E, F, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U, c?: rxjs$Scheduler): (a: A, b: B, c: C, d: D, e: E, f: F) => rxjs$Observable<U>;
+  static bindNodeCallback<A, B, C, D, E, F, G, U, R>(f: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, cb: (e: Error | void | null, a: R) => any) => any, s: (a: R) => U, c?: rxjs$Scheduler): (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => rxjs$Observable<U>;
 
   static from(iterable: Iterable<T>): rxjs$Observable<T>;
 
@@ -117,8 +115,7 @@ declare class rxjs$Observable<+T> {
 
   static of(...values: T[]): rxjs$Observable<T>;
 
-  // TODO implement a third Scheduler parameter
-  static range(a: number, b?: number): rxjs$Observable<number>;
+  static range(a: number, b?: number, b?: rxjs$Scheduler): rxjs$Observable<number>;
 
   // TODO implement static Timer
 
@@ -147,16 +144,14 @@ declare class rxjs$Observable<+T> {
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>;
   bufferCount(s: number, c: number): rxjs$Observable<Array<T>>;
-  // TODO Implement third, scheduler parameter
-  bufferTime(t: number, i: number): rxjs$Observable<Array<T>>;
+  bufferTime(t: number, i: ?number, z: ?number, s?: rxjs$Scheduler): rxjs$Observable<Array<T>>;
   bufferToggle(
     s: rxjs$Observable<any> | Promise<any>,
     e: (v: T) => rxjs$Observable<any> | Promise<any>
   ): rxjs$Observable<Array<T>>;
   bufferWhen(s: () => rxjs$Observable<any>): rxjs$Observable<Array<T>>;
 
-  // TODO Implement a third scheduler parameter
-  cache(bufferSize?: number, windowTime?: number): rxjs$Observable<T>;
+  cache(bufferSize: ?number, windowTime: ?number, scheduler?: rxjs$Scheduler): rxjs$Observable<T>;
 
   catch<U>(selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
 
@@ -178,11 +173,9 @@ declare class rxjs$Observable<+T> {
     r: (o: T, i: U, oi: number, ii: number) => V
   ): rxjs$Observable<V>;
 
-  // TODO Implement a third scheduler parameter
-  expand(p: (v: T) => rxjs$Observable<T>, c: ?number): rxjs$Observable<T>;
+  expand(p: (v: T) => rxjs$Observable<T>, c: ?number, s?: rxjs$Scheduler): rxjs$Observable<T>;
 
-  // TODO Implement a third scheduler parameter
-  debounce(s: (a: T) => rxjs$Observable<any>): rxjs$Observable<T> | Promise<T>;
+  debounce(s: (a: T) => rxjs$Observable<any>, s?: rxjs$Scheduler): rxjs$Observable<T>;
   debounceTime(duration: number): rxjs$Observable<T>;
 
   delay(dueTime: number): rxjs$Observable<T>;
@@ -262,7 +255,8 @@ declare class rxjs$Observable<+T> {
     subjectOrSubjectFactory: rxjs$Subject<T> | () => rxjs$Subject<T>,
   ): rxjs$ConnectableObservable<T>;
 
-  observeOn(scheduler: rxjs$SchedulerClass): rxjs$Observable<T>;
+  // TODO implement undocumented third arg delay
+  observeOn(scheduler: rxjs$Scheduler): rxjs$Observable<T>;
 
   pairwise(): rxjs$Observable<[T, T]>;
 
@@ -303,7 +297,7 @@ declare class rxjs$Observable<+T> {
 
   startWith(...values: Array<T>): rxjs$Observable<T>;
 
-  subscribeOn(scheduler: rxjs$SchedulerClass): rxjs$Observable<T>;
+  subscribeOn(scheduler: rxjs$Scheduler): rxjs$Observable<T>;
 
   take(count: number): rxjs$Observable<T>;
   takeUntil(other: rxjs$Observable<any>): rxjs$Observable<T>;
@@ -828,7 +822,7 @@ declare class rxjs$Observable<+T> {
 /*
  * largely internal scheduler type
  */
-declare type rxjs$SchedulerClass = {
+declare type rxjs$Scheduler = {
   actions: Array<(state?: *) => void>;
   active: boolean;
   scheduleId: number;
@@ -840,11 +834,11 @@ declare type rxjs$SchedulerClass = {
 /*
  * The exported scheduler object
  */
-declare type rxjs$Scheduler = {
-  queue: rxjs$SchedulerClass;
-  asap: rxjs$SchedulerClass;
-  async: rxjs$SchedulerClass;
-  animationFrame: rxjs$SchedulerClass;
+declare type rxjs$SchedulerPublic = {
+  queue: rxjs$Scheduler;
+  asap: rxjs$Scheduler;
+  async: rxjs$Scheduler;
+  animationFrame: rxjs$Scheduler;
 }
 
 declare type rxjs$NotificationType = 'N' | 'E' | 'C'
@@ -870,7 +864,7 @@ declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
   refCount(): rxjs$Observable<T>;
 }
 
-// TODO correct the return types of some prametric functions from void to fixed
+// TODO correct the return types of some prametric functions from void to mixed
 declare type rxjs$Observer<-T> = {
   next(value: T): mixed;
   error(error: any): mixed;
@@ -930,7 +924,7 @@ declare type rxjs = {
   Subscription: typeof rxjs$Subscription,
   Subscriber: typeof rxjs$Subscriber,
   Notification: typeof rxjs$Notification,
-  Scheduler: rxjs$Scheduler,
+  Scheduler: rxjs$SchedulerPublic,
 }
 
 /*
