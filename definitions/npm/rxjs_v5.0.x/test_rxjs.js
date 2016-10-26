@@ -256,8 +256,30 @@ Observable.range(0, 2, Rx.Scheduler.queue)
 // $ExpectError
 Observable.range(0, 2, () => {})
 
+Observable.timer(23, 2, Rx.Scheduler.asap)
+Observable.timer(23, null, Rx.Scheduler.asap)
+Observable.timer(23)
+// $ExpectError
+Observable.timer()
+
 numbers.bufferTime(12)
 numbers.bufferTime(12, 3)
 numbers.bufferTime(12, 3, 45)
 numbers.bufferTime(12, null, 45, Rx.Scheduler.animationFrame)
+
+numbers.window(numbers).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.window(9000).switchMap((o) => o).map((n: number) => {})
+numbers.windowCount(2, 3).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.windowCount(2, numbers).switchMap((o) => o).map((n: number) => {})
+numbers.windowTime(2, 3).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.windowTime('YOLO').switchMap((o) => o).map((n: number) => {})
+numbers.windowToggle(numbers, numbers).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.windowToggle().switchMap((o) => o).map((n: number) => {})
+numbers.windowWhen(numbers).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.windowWhen(1).switchMap((o) => o).map((n: number) => {})
 

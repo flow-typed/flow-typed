@@ -117,7 +117,7 @@ declare class rxjs$Observable<+T> {
 
   static range(a: number, b?: number, b?: rxjs$Scheduler): rxjs$Observable<number>;
 
-  // TODO implement static Timer
+  static timer(initialDelay: number | Date, period: ?number, scheduler?: rxjs$Scheduler): rxjs$Observable<number>;
 
   static throw(error: any): rxjs$Observable<any>;
 
@@ -815,8 +815,12 @@ declare class rxjs$Observable<+T> {
 
   materialize(): rxjs$Observable<rxjs$Notification<rxjs$NotificationType, T>>;
   dematerialize(): rxjs$Observable<any>; // assumption: T is a rxjs$Observable<rxjs$Notification<rxjs$NotificationType, T>>
-  // TODO implement window operators
   // TODO implement some of the utility operators
+  window(windowBoundaries: rxjs$Observable<any>): rxjs$Observable<rxjs$Observable<T>>;
+  windowCount(windowSize: number, startWindowEvery?: number): rxjs$Observable<rxjs$Observable<T>>;
+  windowTime(timeSpan: number, windowCreationInterval?: number): rxjs$Observable<rxjs$Observable<T>>;
+  windowToggle<O>(openings: rxjs$Observable<O>, closingSelector?: (v: O) => rxjs$Observable<any>): rxjs$Observable<rxjs$Observable<T>>;
+  windowWhen(closingSelector: () => rxjs$Observable<any>): rxjs$Observable<rxjs$Observable<T>>;
 }
 
 /*
