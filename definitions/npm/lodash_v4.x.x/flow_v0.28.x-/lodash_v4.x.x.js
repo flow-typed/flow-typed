@@ -109,8 +109,12 @@ declare module 'lodash' {
     takeRight<T>(array: ?Array<T>, n?: number): Array<T>;
     takeRightWhile<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
     takeWhile<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
-    union<T>(array?: Array<T>): Array<T>;
-    unionBy<T>(array?: Array<T>, iteratee?: Iteratee<T>): Array<T>;
+    union<T>(...arrays?: Array<T>): Array<T>;
+    //Workaround until (...parameter: T, parameter2: U) works
+    unionBy<T>(a1: Array<T>, iteratee?: Iteratee<T>): Array<T>;
+    unionBy<T>(a1: Array<T>, a2: Array<T>, iteratee?: Iteratee<T>): Array<T>;
+    unionBy<T>(a1: Array<T>, a2: Array<T>, a3: Array<T>, iteratee?: Iteratee<T>): Array<T>;
+    unionBy<T>(a1: Array<T>, a2: Array<T>, a3: Array<T>, a4: Array<T>, iteratee?: Iteratee<T>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     unionWith<T>(a1: Array<T>, comparator?: Comparator<T>): Array<T>;
     unionWith<T>(a1: Array<T>, a2: Array<T>, comparator?: Comparator<T>): Array<T>;
