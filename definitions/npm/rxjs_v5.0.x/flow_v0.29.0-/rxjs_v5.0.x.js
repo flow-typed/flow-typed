@@ -603,14 +603,6 @@ declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
 }
 
 declare class rxjs$Observer<T> {
-  static create(
-    onNext?: (value: T) => mixed,
-    onError?: (error: any) => mixed,
-    onCompleted?: () => mixed,
-  ): rxjs$Observer<T>;
-
-  asrxjs$Observer(): rxjs$Observer<T>;
-
   next(value: T): mixed;
 
   error(error: any): mixed;
@@ -660,7 +652,6 @@ declare module 'rxjs' {
   declare module.exports: {
     Observable: typeof rxjs$Observable,
     ConnectableObservable: typeof rxjs$ConnectableObservable,
-    Observer: typeof rxjs$Observer,
     Subject: typeof rxjs$Subject,
     BehaviorSubject: typeof rxjs$BehaviorSubject,
     ReplaySubject: typeof rxjs$ReplaySubject,
