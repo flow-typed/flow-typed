@@ -90,9 +90,6 @@ const never: Observable<number> = Observable.empty()
 // $ExpectError
 (Observable.of(2).startWith(1, '2', 3): Observable<number>);
 
-(numbers.cache(): Observable<number>);
-(numbers.cache(1): Observable<number>);
-
 (numbers.withLatestFrom(strings): Observable<[number, string]>);
 // $ExpectError
 (numbers.withLatestFrom(numbers): Observable<[number, string]>);
