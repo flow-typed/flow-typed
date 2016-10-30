@@ -9,6 +9,8 @@ import { Bezier } from 'paths-js/all';
 import { Sector } from 'paths-js/all';
 import { Connector } from 'paths-js/all';
 import { Bar } from 'paths-js/all';
+import { Pie } from 'paths-js/all';
+import { Radar } from 'paths-js/all';
 
 const p1: Point = [2, 3];
 const p2: Point = [2, 6];
@@ -20,7 +22,7 @@ const _p: Point = 0;
 
 const path: Path = new Path();
 
-const path1: Path = path.moveto(1, 2);
+const path1: Path = path.moveto(p1);
 
 const str: string = path1.print();
 
@@ -93,4 +95,21 @@ const data1: Array<Country> =[
 
 const pieOptions = { data: data1, accessor: accessor, center: p1, r: 2, R: 4};
 
-const pie: Pie = new Pie(pieOptions);
+const pie: Pie<Country> = new Pie(pieOptions);
+
+const data2 = [
+  { hp: 45, attack: 49, defense: 49, sp_attack: 65, sp_defense: 65, speed: 45 },
+  { hp: 60, attack: 62, defense: 63, sp_attack: 80, sp_defense: 80, speed: 60 },
+  { hp: 80, attack: 82, defense: 83, sp_attack: 100, sp_defense: 100, speed: 80 },
+  { hp: 45, attack: 25, defense: 50, sp_attack: 25, sp_defense: 25, speed: 35 }
+];
+
+const accessorz = {
+  attack: function(x) { return x.attack; },
+  defense: function(x) { return x.defense; },
+  speed: function(x) { return x.speed; }
+}
+
+const radarOptions = { data: data2, accessor: accessorz, max: 100, center: p1, r: 30, rings: 5};
+
+const radar = new Radar(radarOptions);

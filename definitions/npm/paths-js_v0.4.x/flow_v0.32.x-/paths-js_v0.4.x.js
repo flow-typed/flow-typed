@@ -66,11 +66,83 @@ declare module "paths-js/all" {
 
   declare class Pie<A> {
     constructor(options:
-      {| data: Arrayy<A>,
+      {| data: Array<A>,
         accessor?: (a: A) => number,
         center: Point,
         r: number,
         R: number |}): Pie<A>;
+  }
+
+  declare type RadarOptions<A> = { data: Array<A>,
+    accessor?: { [key: string]: Function },
+    max: number,
+    center: Point,
+    r: number,
+    rings: number
+  };
+
+  declare class Radar<A> { constructor(options: RadarOptions<A>): Radar<A> }
+
+  declare class Stock<A> {
+    constructor(options:
+      {| data: Array<A>,
+        xaccessor: (a: A) => number,
+        yaccessor: (a: A) => number,
+        width: number,
+        height: number,
+        min: number,
+        max: number,
+        close: boolean |}): Stock<A>;
+  }
+
+  declare class SmoothLine<A> {
+    constructor(options:
+      {| data: Array<A>,
+        xaccessor: (a: A) => number,
+        yaccessor: (a: A) => number,
+        width: number,
+        height: number,
+        min: number,
+        max: number,
+        close: boolean |}): SmoothLine<A>;
+  }
+
+  declare class Tree<A> {
+    constructor(options:
+      {| data: A,
+        children: (a: A) => Array<A>,
+        width: number,
+        height: number |}): Tree<A>;
+  }
+
+  declare class Waterfall<A> {
+    constructor(options:
+      {| data: Array<A>,
+        children: (a: A) => Array<A>,
+        width: number,
+        height: number,
+        gutter: number |}): Waterfall<A>;
+  }
+
+  declare class Sankey<A> {
+    constructor(options:
+      {| data: Array<A>,
+        children: (a: A) => Array<A>,
+        width: number,
+        height: number,
+        gutter: number |}): Sankey<A>;
+  }
+
+  declare type Range = [number, number];
+
+  declare class Voronoi<A> {
+    constructor(options:
+      {| data: A,
+        accessor: (a: A) => A,
+        xrange: Range,
+        yrange: Range,
+        width: number,
+        height: number |}): Voronoi<A>;
   }
 
   declare module.exports: {
@@ -84,6 +156,14 @@ declare module "paths-js/all" {
     Connector: typeof Connector,
     SemiRegularPolygon: typeof SemiRegularPolygon,
     Bar: typeof Bar,
+    Pie: typeof Pie,
+    Radar: typeof Radar,
+    Stock: typeof Stock,
+    SmoothLine: typeof SmoothLine,
+    Tree: typeof Tree,
+    Waterfall: typeof Waterfall,
+    Sankey: typeof Sankey,
+    Voronoi: typeof Voronoi
   };
 
 }
