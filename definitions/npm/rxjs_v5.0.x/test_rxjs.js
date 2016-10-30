@@ -1,12 +1,14 @@
 /* @flow */
 
-import {Observable, Scheduler, Subject} from 'rxjs';
-import * as O from 'rxjs/Observable';
-import * as Obs from 'rxjs/Observer';
-import * as BS from 'rxjs/BehaviorSubject';
-import * as RS from 'rxjs/ReplaySubject';
-import * as S from 'rxjs/Subject';
-import * as Sub from 'rxjs/Subscription';
+import Rx, {Observable, Scheduler, Subject, Subscriber} from 'rxjs';
+import {Observable as _Observable} from 'rxjs/Rx';
+import {Observable as _Observable} from 'rxjs/Observable';
+import {BehaviorSubject as _BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {ReplaySubject as _ReplaySubject} from 'rxjs/ReplaySubject';
+import {Subject as _Subject} from 'rxjs/Subject';
+import {Subscription as _Subscription} from 'rxjs/Subscription';
+import {Subscriber as _Subscriber} from 'rxjs/Subscriber';
+import {Notification} from 'rxjs/Notification';
 
 type SuperFoo = { x: string };
 type SubFoo = { x: string; y: number };
@@ -90,6 +92,10 @@ const never: Observable<number> = Observable.empty()
 // $ExpectError
 (Observable.of(2).startWith(1, '2', 3): Observable<number>);
 
+(numbers.cache(): Observable<number>);
+(numbers.cache(1): Observable<number>);
+(numbers.cache(1, null, Rx.Scheduler.asap): Observable<number>);
+
 (numbers.withLatestFrom(strings): Observable<[number, string]>);
 // $ExpectError
 (numbers.withLatestFrom(numbers): Observable<[number, string]>);
@@ -128,3 +134,152 @@ const subObserver: rxjs$IObserver<SubFoo> = (null: any);
 
 const groupedSubObservable: Observable<Observable<SubFoo>> =
   subObservable.groupBy(subfoo => subfoo.y);
+
+// $ExpectError
+numbers.onErrorResumeNext().subscribe((x: string) => {});
+numbers.onErrorResumeNext().subscribe((x: number) => {});
+numbers.onErrorResumeNext(strings).subscribe((x: number | string) => {});
+
+// $ExpectError
+numbers.onErrorResumeNext(strings).subscribe((x: number) => {});
+
+numbers
+  .map(n => Observable.of(n * 2, n * 3))
+  .combineAll()
+  .map(([a: number, b: number, c: number]) => {})
+
+// $ExpectError
+numbers.map(n => Observable.of(n * 2, n * 3)).combineAll().map((a: number) => {})
+
+numbers
+  .map(n => Observable.of(n * 2, n * 3))
+  .concatAll()
+  .map((n: number) => {})
+
+Observable.forkJoin(numbers, numbers).do(([n: number]) => {})
+// $ExpectError
+Observable.forkJoin(numbers, numbers).map((n: string) => {})
+
+numbers.map(n => Observable.of(n)).mergeAll(2).map((n: number) => {})
+
+Observable.race([numbers, numbers]).map((n: number) => {})
+numbers.race(numbers, numbers).map((n: number) => {})
+
+// $ExpectError
+Observable.race([numbers, numbers]).map((n: string) => {})
+// $ExpectError
+numbers.race(numbers, numbers).map((n: string) => {})
+
+Observable.zip([numbers, numbers]).map((n: number) => {})
+numbers.zip(numbers, numbers).map((n: number) => {})
+
+// $ExpectError
+Observable.zip([numbers, numbers]).map((n: string) => {})
+// $ExpectError
+numbers.zip(numbers, numbers).map((n: string) => {})
+
+numbers.defaultIfEmpty(2).map((n: number) => {})
+// $ExpectError
+numbers.defaultIfEmpty(false).map((n: number) => {})
+
+numbers.every(x => !!x).map((c: boolean) => {})
+// $ExpectError
+numbers.every(x => !!x).map((c: number) => {})
+
+numbers.last().map((n: number) => {})
+// $ExpectError
+numbers.last().map((n: string) => {})
+// $ExpectError
+numbers.last((n: number) => true, 'asdf').map((n: number) => {})
+numbers.last((n: number) => true, 1).map((n: string) => {})
+numbers.single((n: number) => false).map((n: number) => {})
+
+numbers.skipWhile((n: number) => false).map((n: number) => {})
+// $ExpectError
+numbers.skipWhile((n: number) => 120).map((n: number) => {})
+
+numbers.throttle((n: number) => Promise.resolve('over 9000!!!')).map((n: number) => {})
+numbers.throttleTime(2).map((n: number) => {})
+// $ExpectError
+numbers.throttle(() => null).map((n: number) => {})
+
+numbers.concatMap((n: number) => Observable.of('test')).map((s: string) => {})
+numbers.concatMap((n: number) => Observable.of('test'), ((n: number, s: string) => false)).map((s: boolean) => {})
+numbers.concatMapTo('yolo', ((n: number, s: string) => false)).map((s: boolean) => {})
+
+numbers.expand((n: number) => Observable.of(n * 2)).map((n: number) => {})
+numbers.expand((n: number) => Observable.of(n), null, Rx.Scheduler.asap).map((n: number) => {})
+// $ExpectError
+numbers.expand((n: number) => Observable.of('asdf')).map((n: number) => {})
+
+numbers.debounce(() => numbers, Rx.Scheduler.asap).map((n: number) => {})
+
+numbers.mergeMap((n: number) => Observable.of('asdf')).map((n: string) => {})
+numbers.mergeMap((n: number) => Observable.of('asdf'), (n: number, s: string) => false).map((n: boolean) => {})
+// $ExpectError
+numbers.mergeMap((n: number) => Observable.of('asdf')).map((n: number) => {})
+
+numbers.delayWhen((n: number) => Observable.of('stringy').delay(1), Observable.of(2)).map((n: number) => {})
+numbers.delayWhen((n: number) => Observable.of('stringy').delay(1)).map((n: number) => {})
+
+Observable.bindCallback((a: number, b: string, c: boolean, cb: (s: string) => void) => { cb('yolo') })(1, '', true).map((s: string) => {})
+Observable.bindCallback((a: number, b: string, c: boolean, cb: (s: string) => void) => { cb('yolo') })(1, '', true).map((s: string) => {}, Rx.Scheduler.async)
+Observable.bindNodeCallback((a: number, b: string, c: boolean, cb: (e: Error | null, s: string) => void) => { cb(null, 'yolo') })(1, '', true).map((s: string) => {})
+Observable.bindNodeCallback(
+  (a: number, b: string, c: boolean, cb: (e: Error | null, s: string) => void) => {
+    cb(null, 'yolo')
+  },
+  Rx.Scheduler.asap
+)(1, '', true).map((s: string) => {})
+
+numbers.materialize().map((x: rxjs$Notification<'E' | 'N' | 'C', number>) => {
+  x.accept((n: number) => {}, (e: any) => {}, () => {})
+  x.do((n: number) => {}, (e: any) => {}, () => {})
+  x.observe({ next: (n: number) => {}, error: (e: any) => {}, complete: () => {} })
+  x.toObservable().map((n: number) => {})
+  ; (x.value: number)
+  ; (x.type: 'N' | 'E' |'C')
+  ; (x.exception: any)
+  ; (x.hasValue(): boolean)
+})
+numbers.dematerialize().map((x: number) => {})
+Notification.createNext('yolo')
+Notification.createError(new Error('asdf'))
+Notification.createComplete()
+
+numbers.subscribe(Subscriber.create((n: number) => {}, (err) => {}), () => {})
+// $ExpectError
+numbers.subscribe(Subscriber.create((n: string) => {}))
+
+Observable.range(0, 2)
+Observable.range(0, 2, Rx.Scheduler.queue)
+// $ExpectError
+Observable.range(0, 2, () => {})
+
+Observable.timer(23, 2, Rx.Scheduler.asap)
+Observable.timer(23, null, Rx.Scheduler.asap)
+Observable.timer(23)
+// $ExpectError
+Observable.timer()
+
+numbers.bufferTime(12)
+numbers.bufferTime(12, 3)
+numbers.bufferTime(12, 3, 45)
+numbers.bufferTime(12, null, 45, Rx.Scheduler.animationFrame)
+
+numbers.window(numbers).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.window(9000).switchMap((o) => o).map((n: number) => {})
+numbers.windowCount(2, 3).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.windowCount(2, numbers).switchMap((o) => o).map((n: number) => {})
+numbers.windowTime(2, 3).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.windowTime('YOLO').switchMap((o) => o).map((n: number) => {})
+numbers.windowToggle(numbers, numbers).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.windowToggle().switchMap((o) => o).map((n: number) => {})
+numbers.windowWhen(numbers).switchMap((o) => o).map((n: number) => {})
+// $ExpectError
+numbers.windowWhen(1).switchMap((o) => o).map((n: number) => {})
+
