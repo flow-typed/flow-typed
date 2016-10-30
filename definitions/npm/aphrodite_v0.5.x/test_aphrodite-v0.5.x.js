@@ -46,3 +46,13 @@ console.log(content.html, content.css);
 
 StyleSheetTestUtils.suppressStyleInjection();
 StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+
+declare var x: number;
+
+css(false);
+// $ExpectError
+css(true);
+css(true && styles.big);
+// $ExpectError
+css(x && styles.big);
+css(Boolean(x) && styles.big);

@@ -9,6 +9,17 @@ const objMixed: {[k:string]:mixed} = { a: 1, c: 'd' }
 const os: Array<{[k:string]: *}> = [ { a: 1, c: 'd' }, { b: 2 } ]
 const str: string = 'hello world'
 
+const g = _.propIs
+const __ = _.__
+const g1: boolean = g(1, '2', {p: 3})
+const g2: boolean = g(__, '2', {p: 3})(1)
+const g3: boolean = g(__, __, {p: 3})(1)('2')
+const g4: boolean = g(__, __, {p: 3})(1, '2')
+const g5: boolean = g(__, '2', __)(1, {p: 3})
+const g6: boolean = g(__, '2')(1)({p: 3})
+const g7: boolean = g(__, '2')(1, {p: 3})
+const g8: boolean = g(__, '2')(__, {p: 3})(1)
+
 type R = {
   sum: number,
   nested: { mul: number },

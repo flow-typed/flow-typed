@@ -18,7 +18,7 @@ declare module 'aphrodite' {
     }
   };
 
-  declare export var css: (...definitions: StyleDefinition[]) => string;
+  declare export var css: (...definitions: Array<StyleDefinition | false>) => string;
 
   declare export var StyleSheetServer :{
     renderStatic(renderFunc: Function): DehydratedServerContent;

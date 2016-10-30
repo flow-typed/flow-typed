@@ -2,6 +2,7 @@ type $npm$classnames$Classes =
   string |
   {[className: string]: ?boolean } |
   Array<string> |
+  false |
   void |
   null
 

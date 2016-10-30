@@ -12,6 +12,7 @@ classnames({a: true}, 'b');
 classnames({a: null, b: undefined});
 classnames(undefined);
 classnames(null);
+classnames('a', false);
 
 // $ExpectError
 classnames(42);
