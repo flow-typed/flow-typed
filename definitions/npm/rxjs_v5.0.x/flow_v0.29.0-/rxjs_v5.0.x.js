@@ -902,9 +902,8 @@ declare class rxjs$BehaviorSubject<T> extends rxjs$Subject<T> {
   getValue(): T;
 }
 
-declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {
-
-}
+declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {}
+declare class rxjs$AsyncSubject<T> extends rxjs$Subject<T> {}
 
 declare class rxjs$Subscription {
   constructor(t: rxjs$TeardownLogic): rxjs$Subscription;
@@ -925,6 +924,7 @@ declare type rxjs = {
   Subject: typeof rxjs$Subject,
   BehaviorSubject: typeof rxjs$BehaviorSubject,
   ReplaySubject: typeof rxjs$ReplaySubject,
+  AsyncSubject: typeof rxjs$AsyncSubject,
   Subscription: typeof rxjs$Subscription,
   Subscriber: typeof rxjs$Subscriber,
   Notification: typeof rxjs$Notification,
@@ -946,6 +946,12 @@ declare module 'rxjs/Rx' {
 declare module 'rxjs/Observable' {
   declare module.exports: {
     Observable: typeof rxjs$Observable
+  }
+}
+
+declare module 'rxjs/AsyncSubject' {
+  declare module.exports: {
+    BehaviorSubject: typeof rxjs$BehaviorSubject
   }
 }
 
