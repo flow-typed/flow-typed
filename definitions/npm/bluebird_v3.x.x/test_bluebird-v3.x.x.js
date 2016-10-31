@@ -40,3 +40,16 @@ Bluebird.all(['hello', Bluebird.resolve('world'), Promise.resolve('!')]).then(fu
 
 // $ExpectError
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<string>) { })
+
+function foo(a: number, b: string) {
+  throw new Error('oh no')
+}
+let fooPromise = Bluebird.method(foo)
+fooPromise(1, 'b').catch(function(e: Error) {
+  let m: string = e.message
+})
+
+// $ExpectError
+fooPromise('a', 1)
+// $ExpectError
+fooPromise()
