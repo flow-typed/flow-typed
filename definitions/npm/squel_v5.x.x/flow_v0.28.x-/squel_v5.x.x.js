@@ -42,7 +42,7 @@ declare class squel$Select {
     union_all(query: any): this;
     with(alias: string, table: any): this;
     updateOptions(options: {}): void;
-    registerValueHandler(type: Class<mixed> | string, handler: squel$FormatterFunction<mixed>): this;
+    registerValueHandler<T>(type: Class<T> | string, handler: squel$FormatterFunction<T>): this;
     clone(): squel$Select;
     toString(): string;
     toParam(): squel$ParameterisedQuery;
@@ -61,7 +61,7 @@ declare class squel$Update {
     returning(str: string): this;
     with(alias: string, table: any): this;
     updateOptions(options: {}): void;
-    registerValueHandler(type: Class<mixed>, handler: squel$FormatterFunction<mixed>): this;
+    registerValueHandler<T>(type: Class<T>, handler: squel$FormatterFunction<T>): this;
     clone(): squel$Select;
     toString(): string;
     toParam(): squel$ParameterisedQuery;
@@ -81,7 +81,7 @@ declare class squel$Delete {
     outputs(fields: {}): this;
     with(alias: string, table: any): this;
     updateOptions(options: {}): void;
-    registerValueHandler(type: Class<mixed> | string, handler: squel$FormatterFunction<mixed>): this;
+    registerValueHandler<T>(type: Class<T> | string, handler: squel$FormatterFunction<T>): this;
     clone(): squel$Select;
     toString(): string;
     toParam(): squel$ParameterisedQuery;
@@ -99,7 +99,7 @@ declare class squel$Insert {
     returning(str: string): this;
     with(alias: string, table: any): this;
     updateOptions(options: {}): void;
-    registerValueHandler(type: Class<mixed> | string, handler: squel$FormatterFunction<mixed>): this;
+    registerValueHandler<T>(type: Class<T> | string, handler: squel$FormatterFunction<T>): this;
     clone(): squel$Select;
     toString(): string;
     toParam(): squel$ParameterisedQuery;
@@ -115,6 +115,8 @@ declare class squel$Squel {
     static insert(): squel$Insert;
     insert(): squel$Insert;
     static useFlavour(flavour: string): this;
+    registerValueHandler<T>(type: Class<T> | string, handler: squel$FormatterFunction<T>): this;
+    static registerValueHandler<T>(type: Class<T> | string, handler: squel$FormatterFunction<T>): this;
 }
 
 declare module 'squel' {
