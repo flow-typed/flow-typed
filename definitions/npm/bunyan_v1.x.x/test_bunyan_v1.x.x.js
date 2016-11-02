@@ -9,6 +9,8 @@ const logger = Bunyan.createLogger({
     }, {
         type: 'stream',
         stream: process.stdout
+    }, {
+      stream: process.stderr,
     }],
     serializers: {
         ...Bunyan.stdSerializers,

@@ -101,7 +101,7 @@ declare module 'bunyan' {
         [key: string]: (input: any) => mixed;
     }
     declare type Stream = {
-        type: string;
+        type?: string;
         level?: number | string;
         path?: string;
         stream?: stream$Writable | tty$WriteStream | Stream;
