@@ -5,6 +5,7 @@ import {copyFile, recursiveRmdir} from "../lib/fileUtils.js";
 import {gitHubClient} from "../lib/github.js";
 import {getLibDefs} from "../lib/libDefs.js";
 import {versionToString} from "../lib/semver.js";
+import isInFlowTypedRepo from "../lib/isInFlowTypedRepo";
 
 import request from "request";
 import * as semver from "semver";
@@ -375,8 +376,15 @@ async function runTests(
 }
 
 export const name = "run-tests";
-export const description = "Run definition tests";
+export const description = "Run definition tests of library definitions in the flow-typed project.";
 export async function run(argv: Argv): Promise<number> {
+  if (!isInFlowTypedRepo()) {
+    console.log(
+      "This command only works in a clone of flowtype/flow-typed. " +
+      "It is a tool used to run tests of the library definitions in the flow-typed project."
+    );
+    return 1;
+  }
   const testPatterns = argv._.slice(1);
 
   const cwd = process.cwd();
