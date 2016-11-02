@@ -161,6 +161,10 @@ declare class rxjs$Observable<+T> {
     project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
   ): rxjs$Observable<U>;
 
+  switchMapTo<U>(
+    innerObservable: rxjs$Observable<U>,
+  ): rxjs$Observable<U>;
+
   map<U>(f: (value: T) => U): rxjs$Observable<U>;
 
   mapTo<U>(value: U): rxjs$Observable<U>;
@@ -595,6 +599,11 @@ declare class rxjs$Observable<+T> {
     g: rxjs$Observable<G>,
     resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H,
   ): rxjs$Observable<H>;
+
+  static using(
+    resourceFactory: () => ?rxjs$Subscription,
+    observableFactory: (resource: rxjs$Subscription) => rxjs$Observable<T> | Promise<T> | void,
+  ): rxjs$Observable<T>;
 }
 
 declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
