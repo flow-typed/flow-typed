@@ -70,7 +70,8 @@ declare module "underscore" {
 
   // TODO: size
 
-  // TODO: partition
+  declare function partition<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): [T[], T[]];
+  declare function partition<T>(o: Array<T>, pred: (val: T)=>boolean): [T[], T[]];
 
   /**
    * Arrays
