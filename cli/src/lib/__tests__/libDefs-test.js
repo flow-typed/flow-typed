@@ -2,8 +2,9 @@
 jest.enableAutomock();
 jest.unmock('../libDefs.js');
 jest.unmock('../semver.js');
-jest.unmock('semver');
 jest.unmock('../flowVersion');
+jest.unmock('semver');
+jest.unmock('colors/safe');
 
 import {fs} from '../node.js';
 
