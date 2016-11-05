@@ -8,6 +8,7 @@ if (!global.__flowTypedBabelPolyfill) {
 
 import yargs from "yargs";
 import {fs, path} from "./lib/node.js";
+import {printCliError} from "./lib/errors";
 
 import * as Install from "./commands/install.js";
 import * as CreateStub from "./commands/create-stub.js";
@@ -47,7 +48,9 @@ export function runCLI() {
       cmd.description,
       cmd.setup || identity,
       args => cmd.run(args, yargs).catch(err => {
-        if (err.stack) {
+        if (err.name === 'CliError') {
+          printCliError(err);
+        } else if (err.stack) {
           console.log('UNCAUGHT ERROR: %s', err.stack);
         } else if (typeof err === 'object' && err !== null) {
           console.log("UNCAUGHT ERROR: %s", JSON.stringify(err, null, 2));
