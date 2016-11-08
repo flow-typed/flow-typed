@@ -33,6 +33,13 @@ type JestClockType = {
   uninstall(): void;
 }
 
+type JestMatcherResult = {
+  message?: string | ()=>string;
+  pass: boolean;
+};
+
+type JestMatcher = (actual: any, expected: any) => JestMatcherResult;
+
 type JestExpectType = {
   not: JestExpectType;
   lastCalledWith(...args: Array<any>): void;
@@ -84,7 +91,10 @@ declare var fdescribe: typeof describe;
 declare var xit: typeof it;
 declare var xtest: typeof it;
 
-declare function expect(value: any): JestExpectType;
+declare var expect: {
+  (value: any): JestExpectType;
+  extend(matchers: {[name:string]: JestMatcher}): void;
+};
 
 // TODO handle return type
 // http://jasmine.github.io/2.4/introduction.html#section-Spies
@@ -93,7 +103,7 @@ declare function spyOn(value: mixed, method: string): Object;
 declare var jest: {
   autoMockOff(): void;
   autoMockOn(): void;
-  clearAllMocks(): void;
+  resetAllMocks(): void;
   clearAllTimers(): void;
   currentTestPath(): void;
   disableAutomock(): void;

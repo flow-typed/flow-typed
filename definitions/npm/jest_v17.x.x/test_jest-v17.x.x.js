@@ -2,6 +2,8 @@
 /* eslint-disable */
 jest.autoMockOff()
 
+jest.resetAllMocks();
+
 // $ExpectError property `atoMockOff` not found in object type
 jest.atoMockOff()
 
@@ -32,3 +34,22 @@ test.skip('test', () => expect('foo').toMatchSnapshot());
 test.fonly('test', () => expect('foo').toMatchSnapshot());
 
 xtest('test', () => {});
+
+// $ExpectError property `bar` not found in object type
+expect.bar();
+
+expect.extend({
+  blah(actual, expected) {
+    return {
+      message: () => 'blah fail',
+      pass: false
+    };
+  }
+});
+
+expect.extend({
+  foo(actual, expected) {
+    // $ExpectError property `pass` not found in object literal
+    return {};
+  }
+});
