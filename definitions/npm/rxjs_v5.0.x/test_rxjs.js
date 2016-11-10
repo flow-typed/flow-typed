@@ -102,6 +102,24 @@ Observable.fromEvent(null, 'click', true);
 // $ExpectError
 Observable.fromEvent(null, 'click', {capture: 1});
 
+Observable.of(1).switchMapTo(Observable.of('test'));
+// $ExpectError
+Observable.of(1).switchMapTo(2);
+
+Observable.using(
+  () => {},
+  () => Observable.of(1),
+);
+Observable.using(
+  () => Observable.of(1).subscribe(() => {}),
+  subscription => new Promise(resolve => {}),
+);
+Observable.using(
+  // $ExpectError
+  () => Observable.of('bad'),
+  subscription => {},
+);
+
 // Testing covariance/contravariance/invariance of type parameters
 
 const subObservable: Observable<SubFoo> = new Observable();
