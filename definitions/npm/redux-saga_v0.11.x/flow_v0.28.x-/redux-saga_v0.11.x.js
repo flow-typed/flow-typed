@@ -79,6 +79,7 @@ declare module 'redux-saga' {
    */
 
   declare type SagaSpread<Y: IOEffect, R, N, T> = (...args: Array<T>) => Generator<Y, R, N>;
+  declare type SagaList<Y: IOEffect[], R, N> = () => Generator<Y, R, N>;
   declare type Saga0<Y: IOEffect, R, N> = () => Generator<Y, R, N>;
   declare type Saga1<Y: IOEffect, R, N, T1> = (t1: T1) => Generator<Y, R, N>;
   declare type Saga2<Y: IOEffect, R, N, T1, T2> = (t1: T1, t2: T2) => Generator<Y, R, N>;
@@ -125,6 +126,7 @@ declare module 'redux-saga' {
   };
 
   declare type MiddlewareRunFn =
+    & (<Y, R, N, Fn: SagaList<Y, R, N>>(saga: Fn) => Task)
     & (<Y, R, N, Fn: Saga0<Y, R, N>>(saga: Fn, ...rest: Array<void>) => Task)
     & (<T1, Y, R, N, Fn: Saga1<Y, R, N, T1>>(saga: Fn, t1: T1, ...rest: Array<void>) => Task)
     & (<T1, T2, Y, R, N, Fn: Saga2<Y, R, N, T1, T2>>(saga: Fn, t1: T1, t2: T2, ...rest: Array<void>) => Task)
