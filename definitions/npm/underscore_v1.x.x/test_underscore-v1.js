@@ -139,4 +139,12 @@ _.find([1, 2, 3], {val: 1});
 _.throttle(function(a) {a.length}, 10)('hello');
 _.debounce(function(a) {a.length}, 10)('hello');
 
-_.defer(function(){})
+_.defer(function(){});
+
+(_.partition([1,5,2,4], function(i: number) { return i<4 }): [Array<number>, Array<number>]);
+(_.partition({x: 'foo', y: 'bar'}, function(v: string, k: string) { return k === 'bar' }): [Array<string>, Array<string>]);
+
+(_.size([1,2]): number);
+(_.size({a: 1, b: 2}): number);
+
+
