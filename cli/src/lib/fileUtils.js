@@ -50,7 +50,15 @@ export async function recursiveRmdir(dirPath: string): Promise<void> {
       await fs.unlink(itemPath);
     } else {
       await recursiveRmdir(itemPath);
-      fs.rmdir(itemPath);
+      await fs.rmdir(itemPath).catch((err) => {
+        if(err.code === 'ENOENT') {
+          // Ignore ENOENT error
+          // it's okay if the files are already removed
+          return;
+        }
+
+        throw err;
+      });
     }
   }));
   return fs.rmdir(dirPath);
