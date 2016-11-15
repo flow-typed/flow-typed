@@ -111,6 +111,13 @@ Observable.using(
   () => Observable.of(1),
 );
 Observable.using(
+  () => ({
+    other: 1,
+    unsubscribe: () => {},
+  }),
+  () => Observable.of(1),
+);
+Observable.using(
   () => Observable.of(1).subscribe(() => {}),
   subscription => new Promise(resolve => {}),
 );
@@ -119,6 +126,9 @@ Observable.using(
   () => Observable.of('bad'),
   subscription => {},
 );
+
+Observable.of({test: 1})
+  .distinctUntilKeyChanged('test', (a, b) => a === b);
 
 // Testing covariance/contravariance/invariance of type parameters
 

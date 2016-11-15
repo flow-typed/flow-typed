@@ -9,19 +9,19 @@ interface rxjs$IObserver<-T> {
 
 type rxjs$PartialObserver<-T> =
   | {
-    next: (value: T) => mixed;
-    error?: (error: any) => mixed;
-    complete?: () => mixed;
+    +next: (value: T) => mixed;
+    +error?: (error: any) => mixed;
+    +complete?: () => mixed;
   }
   | {
-    next?: (value: T) => mixed;
-    error: (error: any) => mixed;
-    complete?: () => mixed;
+    +next?: (value: T) => mixed;
+    +error: (error: any) => mixed;
+    +complete?: () => mixed;
   }
   | {
-    next?: (value: T) => mixed;
-    error?: (error: any) => mixed;
-    complete: () => mixed;
+    +next?: (value: T) => mixed;
+    +error?: (error: any) => mixed;
+    +complete: () => mixed;
   }
 
 interface rxjs$ISubscription {
@@ -117,6 +117,8 @@ declare class rxjs$Observable<+T> {
   delay(dueTime: number): rxjs$Observable<T>;
 
   distinctUntilChanged(compare?: (x: T, y: T) => boolean): rxjs$Observable<T>;
+
+  distinctUntilKeyChanged(key: string, compare?: (x: mixed, y: mixed) => boolean): rxjs$Observable<T>;
 
   elementAt(index: number, defaultValue?: T): rxjs$Observable<T>;
 
@@ -600,9 +602,9 @@ declare class rxjs$Observable<+T> {
     resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H,
   ): rxjs$Observable<H>;
 
-  static using(
-    resourceFactory: () => ?rxjs$Subscription,
-    observableFactory: (resource: rxjs$Subscription) => rxjs$Observable<T> | Promise<T> | void,
+  static using<R: rxjs$ISubscription>(
+    resourceFactory: () => ?R,
+    observableFactory: (resource: R) => rxjs$Observable<T> | Promise<T> | void,
   ): rxjs$Observable<T>;
 }
 
