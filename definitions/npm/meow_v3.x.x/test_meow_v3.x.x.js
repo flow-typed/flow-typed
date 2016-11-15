@@ -18,6 +18,19 @@ const cli = meow(`
   }
 });
 
+meow('Usage...', {
+  alias: {
+    r: 'rainbow'
+  },
+  boolean: ['force', 'dry'],
+  string: ['_'],
+});
+
+meow('Usage...', {
+  boolean: true,
+  string: 'force',
+});
+
 if (cli.flags.rainbow) {
   cli.input.forEach(function(word) {
     console.log(word + '🌈');
