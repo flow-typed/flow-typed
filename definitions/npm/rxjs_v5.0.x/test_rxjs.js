@@ -156,3 +156,11 @@ const subObserver: rxjs$IObserver<SubFoo> = (null: any);
 
 const groupedSubObservable: Observable<Observable<SubFoo>> =
   subObservable.groupBy(subfoo => subfoo.y);
+
+// This causes problems because rxjs$Observer cannot be assigned to
+// rxjs$PartialObserver. Due to unions and intersections the error message is
+// more cryptic than that, but the root of the issue is that
+// rxjs$PartialObserver has optional properties and we don't yet have covariant
+// object props. As soon as Flow v0.34 comes out we should apply covariant props
+// gratuitously and undo this $ExpectError comment.
+Observable.create(observer => numbers.subscribe(observer));
