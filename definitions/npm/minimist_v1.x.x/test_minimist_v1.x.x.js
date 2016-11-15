@@ -7,7 +7,7 @@ minimist([1, 2, 3]);
 
 // Correct:
 minimist(process.argv, {
-  string: true,
+  string: 'baz',
   boolean: true,
   alias: { f: 'foo', b: ['bar', 'baz'] },
   default: { foo: NaN },

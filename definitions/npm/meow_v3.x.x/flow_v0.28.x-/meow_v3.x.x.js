@@ -9,8 +9,8 @@ declare module 'meow' {
   };
 
   declare type minimistOptions = {
-    string?: boolean,
-    boolean?: boolean,
+    string?: string | Array<string>,
+    boolean?: boolean | string | Array<string>,
     alias?: { [arg: string]: string | Array<string> },
     default?: { [arg: string]: any },
     stopEarly?: boolean,
