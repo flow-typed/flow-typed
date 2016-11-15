@@ -66,7 +66,7 @@ type JestExpectType = {
   toMatch(regexp: RegExp): void;
   toMatchSnapshot(): void;
   toThrow(message?: string | Error): void;
-  toThrowError(message?: string): void;
+  toThrowError(message?: string | Error | RegExp): void;
   toThrowErrorMatchingSnapshot(): void;
 }
 

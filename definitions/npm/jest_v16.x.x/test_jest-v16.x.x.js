@@ -32,3 +32,17 @@ test.skip('test', () => expect('foo').toMatchSnapshot());
 test.fonly('test', () => expect('foo').toMatchSnapshot());
 
 xtest('test', () => {});
+
+
+const err = new Error('err');
+expect(() => {
+    throw err;
+}).toThrowError('err');
+
+expect(() => {
+    throw err;
+}).toThrowError(/err/);
+
+expect(() => {
+    throw err;
+}).toThrowError(err);
