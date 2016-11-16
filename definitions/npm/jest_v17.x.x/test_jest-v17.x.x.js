@@ -53,3 +53,16 @@ expect.extend({
     return {};
   }
 });
+
+const err = new Error('err');
+expect(() => {
+    throw err;
+}).toThrowError('err');
+
+expect(() => {
+    throw err;
+}).toThrowError(/err/);
+
+expect(() => {
+    throw err;
+}).toThrowError(err);
