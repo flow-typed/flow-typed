@@ -5,6 +5,7 @@ type JestMockFn = {
     instances: mixed;
   };
   mockClear(): Function;
+  mockReset(): Function;
   mockImplementation(fn: Function): JestMockFn;
   mockImplementationOnce(fn: Function): JestMockFn;
   mockReturnThis(): void;
