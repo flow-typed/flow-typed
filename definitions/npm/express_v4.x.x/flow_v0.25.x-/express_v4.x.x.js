@@ -12,7 +12,7 @@ declare module 'express' {
   }
   declare class Request extends http$IncomingMessage mixins RequestResponseBase {
     baseUrl: string;
-    body: mixed;
+    body: any;
     cookies: {[cookie: string]: string};
     fresh: boolean;
     hostname: boolean;
@@ -138,7 +138,7 @@ declare module 'express' {
     use: RouterMethodType<this>;
 
     route(path: string): Route;
-    
+
     static (): Router;
   }
 
