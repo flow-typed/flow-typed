@@ -557,10 +557,10 @@ declare module ramda {
   declare function path<V,A:?NestedObject<V>>(p: Array<string>, o: A): ?V;
 
   declare function pathOr<T,V,A:NestedObject<V>>(or: T, ...rest: Array<void>):
-  ((p: Array<string>, ...rest: Array<void>) => (o: A) => V|T)
-  & ((p: Array<string>, o: A) => V|T);
-  declare function pathOr<T,V,A:NestedObject<V>>(or: T, p: Array<string>, ...rest: Array<void>): (o: A) => V|T;
-  declare function pathOr<T,V,A:NestedObject<V>>(or: T, p: Array<string>, o: A): V|T;
+  ((p: Array<string>, ...rest: Array<void>) => (o: ?A) => V|T)
+  & ((p: Array<string>, o: ?A) => V|T);
+  declare function pathOr<T,V,A:NestedObject<V>>(or: T, p: Array<string>, ...rest: Array<void>): (o: ?A) => V|T;
+  declare function pathOr<T,V,A:NestedObject<V>>(or: T, p: Array<string>, o: ?A): V|T;
 
   declare function pick<A>(keys: Array<string>, ...rest: Array<void>): (val: {[key:string]: A}) => {[key:string]: A};
   declare function pick<A>(keys: Array<string>, val: {[key:string]: A}): {[key:string]: A};
