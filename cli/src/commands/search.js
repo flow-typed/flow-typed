@@ -3,6 +3,7 @@
 import {filterLibDefs, getCacheLibDefs} from "../lib/libDefs.js";
 import type {LibDef} from "../lib/libDefs.js";
 import type {Argv} from "yargs";
+import {toSemverString as flowVersionToSemver} from "../lib/flowVersion";
 
 import table from 'table';
 
@@ -13,7 +14,7 @@ export function _formatDefTable(defs: Array<LibDef>): string {
     return [
       def.pkgName,
       def.pkgVersionStr,
-      def.flowVersionStr,
+      flowVersionToSemver(def.flowVersion),
     ];
   }));
   if (formatted.length === 1) {

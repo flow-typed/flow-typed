@@ -7,19 +7,25 @@ import {mkdirp} from "./fileUtils.js";
 import {fs, path, os} from "./node.js";
 import {
   emptyVersion,
-  copyVersion,
   versionToString,
-  disjointVersionsAll,
-  isSatVersion,
 } from "./semver.js";
 import type {Version} from "./semver.js";
+import {
+  disjointVersionsAll,
+  parseDirString as parseFlowDirString,
+  toSemverString as flowVerToSemver,
+  toDirString as flowVerToDirString,
+} from "./flowVersion.js";
+import type {FlowVersion} from "./flowVersion.js";
+import type {ValidationErrors as VErrors} from "./validationErrors";
+import {validationError} from "./validationErrors";
 
 const P = Promise;
 
 export type LibDef = {|
   pkgName: string,
   pkgVersionStr: string,
-  flowVersion: Version,
+  flowVersion: FlowVersion,
   flowVersionStr: string,
   path: string,
   testFilePaths: Array<string>,
@@ -196,92 +202,63 @@ export async function getLibDefs(
   return libDefs;
 };
 
-/**
- * Given the path to a flow directory within a package directory
- * (i.e. definitions/npm/pkgDir/flow_v0.24.0/), parse the flow directory name
- * into a Version.
- */
-const FLOW_VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
-const FLOW_DIR_NAME_RE = new RegExp(
-  `^flow_(all|((-)?${FLOW_VER}(-)?(${FLOW_VER})?))$`
-);
+export function _flowVersionToVersion(flow: FlowVersion): Version {
+  const result = (() => {switch (flow.kind) {
+    case 'all': return {
+      range: undefined,
+      major: 'x',
+      minor: 'x',
+      patch: 'x',
+      upperBound: undefined,
+    };
+    case 'specific': return {
+      range: undefined,
+      major: flow.ver.major,
+      minor: flow.ver.minor,
+      patch: flow.ver.patch,
+      upperBound: undefined,
+    };
+    case 'ranged':
+      const {upper, lower} = flow;
+      const [lowerBound, upperBound, range] = (() => {
+        if (lower != null && upper != null) {
+          return [
+            _flowVersionToVersion({kind: 'specific', ver: lower}),
+            _flowVersionToVersion({kind: 'specific', ver: upper}),
+            '>=',
+          ];
+        } else if (lower != null) {
+          return [
+            _flowVersionToVersion({kind: 'specific', ver: lower}),
+            undefined,
+            '>='
+          ];
+        } else if (upper != null) {
+          return [
+            _flowVersionToVersion({kind: 'specific', ver: upper}),
+            undefined,
+            '<='
+          ];
+        } else {
+          (lower: null);
+          (upper: null);
+          throw new Error('wat');
+        }
+      })();
+      if (upperBound) {
+        upperBound.range = "<=";
+      }
+      lowerBound.upperBound = upperBound;
+      lowerBound.range = range;
+      return lowerBound;
+    default: (flow: empty); throw new Error('Unexpected FlowVersion kind!');
+  }})();
+  return result;
+}
 
-function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): Version {
+function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): FlowVersion {
   const pkgFlowDirName = path.basename(pkgFlowDirPath);
-
-  function invalidDirectoryName() {
-    const repoPath = path.resolve(pkgFlowDirPath, '..', '..', '..');
-    const pkgFlowDirContext = path.relative(repoPath, pkgFlowDirPath);
-    const error =
-      `Malformed flow-version directory name! Expected the name to be ` +
-      `formatted as 'flow_all' or ` +
-      `'flow_-?v<VERSION>' or ` +
-      `'flow_v<VERSION>-?' or ` +
-      `'flow_v<VERSION>-v<VERSION>' (for a range).`;
-    validationError(pkgFlowDirContext, error, validationErrs);
-  }
-
-  const matches = pkgFlowDirName.match(FLOW_DIR_NAME_RE);
-  if (matches == null) {
-    invalidDirectoryName();
-    return emptyVersion();
-  }
-
-  let upperBound;
-  let [
-    _1, isAll, _2, range, major, minor, patch,
-    upRange, _3, upMajor, upMinor, upPatch
-  ] = matches;
-
-  if (isAll === 'all') {
-    range = undefined;
-    major = 'x';
-    minor = 'x';
-    patch = 'x';
-  } else if (range && upRange) {
-    // flow_-v0.x.x-
-    invalidDirectoryName();
-    return emptyVersion();
-  } else if (range && upMajor) {
-    // flow_-v0.x.xv0.x.x
-    invalidDirectoryName();
-    return emptyVersion();
-  } else if (range) {
-    // flow_-0.x.x
-    range = "<=";
-    major = validateVersionNumPart(major, "major", pkgFlowDirPath, validationErrs);
-    minor = validateVersionPart(minor, "minor", pkgFlowDirPath, validationErrs);
-    patch = validateVersionPart(patch, "patch", pkgFlowDirPath, validationErrs);
-  } else if (upRange) {
-    // flow_0.x.x-
-    // flow_0.x.x-0.x.x (if upMajor)
-    range = ">=";
-    major = validateVersionNumPart(major, "major", pkgFlowDirPath, validationErrs);
-    minor = validateVersionPart(minor, "minor", pkgFlowDirPath, validationErrs);
-    patch = validateVersionPart(patch, "patch", pkgFlowDirPath, validationErrs);
-    if (upMajor) {
-      upRange = "<=";
-      upMajor = validateVersionNumPart(upMajor, "major", pkgFlowDirPath, validationErrs);
-      upMinor = validateVersionPart(upMinor, "minor", pkgFlowDirPath, validationErrs);
-      upPatch = validateVersionPart(upPatch, "patch", pkgFlowDirPath, validationErrs);
-      upperBound = {
-        range: upRange,
-        major: upMajor,
-        minor: upMinor,
-        patch: upPatch,
-      };
-    }
-  } else {
-    // shouldn't happen
-    invalidDirectoryName();
-    return emptyVersion();
-  }
-
-  const ver = {range, major, minor, patch, upperBound};
-  if (!isSatVersion(ver)) {
-    validationError(pkgFlowDirPath, 'Flow version is unsatisfiable!', validationErrs);
-  }
-  return ver;
+  return parseFlowDirString(pkgFlowDirName, validationErrs);
 }
 
 /**
@@ -394,8 +371,8 @@ async function parseLibDefsFromPkgDir(
     libDefs.push({
       pkgName,
       pkgVersionStr,
-      flowVersion,
-      flowVersionStr: versionToString(flowVersion),
+      flowVersion: flowVersion,
+      flowVersionStr: flowVerToDirString(flowVersion),
       path: libDefFilePath,
       testFilePaths,
     });
@@ -477,20 +454,6 @@ function validateVersionPart(part, partName, context, validationErrs?) {
 }
 
 /**
- * Helper function to extract the error-list from the validationErrs map, append
- * to it, then set it back in the map.
- */
-function validationError(errKey, errMsg, validationErrs) {
-  if (validationErrs) {
-    const errors = validationErrs.get(errKey) || [];
-    errors.push(errMsg);
-    validationErrs.set(errKey, errors);
-  } else {
-    throw new Error(`${errKey}: ${errMsg}`);
-  }
-}
-
-/**
  * Given a path to a 'definitions' dir, assert that the currently-running
  * version of the CLI is compatible with the repo.
  */
@@ -532,7 +495,6 @@ function writeVerbose(stream, msg, writeNewline = true) {
  * Note that this is mainly only useful while working on the flow-typed repo
  * itself. It is useless when running the npm-install CLI.
  */
-type VErrors = Map<string, Array<string>>;
 const GIT_REPO_DEFS_DIR = path.join(GIT_REPO_DIR, 'definitions', 'npm');
 export async function getLocalLibDefs(validationErrs?: VErrors) {
   await verifyCLIVersion(path.join(GIT_REPO_DIR, 'definitions'));
@@ -622,7 +584,7 @@ export function filterLibDefs(
   defs: Array<LibDef>,
   filter: LibDefFilter,
 ): Array<LibDef> {
-  return defs.filter(def => {
+  return defs.filter((def: LibDef) => {
     let filterMatch = false;
     switch (filter.type) {
       case 'exact':
@@ -657,19 +619,43 @@ export function filterLibDefs(
 
     const filterFlowVerStr = filter.flowVersionStr;
     if (filterFlowVerStr) {
-      const defUpperFlow = def.flowVersion.upperBound;
-      if (defUpperFlow) {
-        const defLowerFlow = copyVersion(def.flowVersion);
-        defLowerFlow.upperBound = undefined;
-        return (
-          semver.satisfies(filterFlowVerStr, versionToString(defLowerFlow))
-          && semver.satisfies(filterFlowVerStr, versionToString(defUpperFlow))
-        );
-      } else {
-        return semver.satisfies(
-          filterFlowVerStr,
-          def.flowVersionStr
-        );
+      const {flowVersion} = def;
+      switch (flowVersion.kind) {
+        case 'all':
+          return semver.satisfies(
+            filterFlowVerStr,
+            def.flowVersionStr
+          );
+        case 'specific':
+          return semver.satisfies(
+            filterFlowVerStr,
+            def.flowVersionStr
+          );
+        case 'ranged':
+          const {upper} = flowVersion;
+          if (upper) {
+            const lowerSpecific = {
+              kind: 'ranged',
+              upper: null,
+              lower: flowVersion.lower,
+            };
+            const lowerSpecificSemver = flowVerToSemver(lowerSpecific);
+            const upperSpecificSemver = flowVerToSemver({
+              kind: 'specific',
+              ver: upper,
+            });
+            return (
+              semver.satisfies(filterFlowVerStr, lowerSpecificSemver)
+              && semver.satisfies(filterFlowVerStr, upperSpecificSemver)
+            );
+          } else {
+            return semver.satisfies(
+              filterFlowVerStr,
+              def.flowVersionStr,
+            );
+          }
+
+        default: (flowVersion: empty); throw new Error('Unexpected FlowVersion kind!');
       }
     }
 

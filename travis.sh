@@ -2,8 +2,8 @@
 #set -o errexit
 
 cd definitions && \
-npm install && \
-npm test && \
+#npm install && \
+#npm test && \
 cd ../cli && \
 npm install && \
 ./node_modules/.bin/flow && \

@@ -69,7 +69,7 @@ export function runCLI() {
  * has a flow-typed CLI `npm install`ed, use that version instead of the global
  * version of the CLI.
  */
-// $FlowIssue: Need to teach Flow about `require.main`
+// $FlowFixMe: Need to teach Flow about `require.main`
 if (require.main === module) {
   const CWD = process.cwd();
   let currDir = CWD;
