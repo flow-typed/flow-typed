@@ -10,7 +10,3 @@ flow-typed
 
 [options]
 experimental.const_params=true
-suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
-
-[version]
-^0.32.0

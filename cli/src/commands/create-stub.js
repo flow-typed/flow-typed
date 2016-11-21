@@ -25,6 +25,7 @@ export function setup(yargs: Object) {
 };
 
 type Args = {
+  // $FlowFixMe
   overwrite: boolean,
   _: Array<string>,
 }

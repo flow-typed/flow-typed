@@ -3,6 +3,7 @@ jest.enableAutomock();
 jest.unmock('../libDefs.js');
 jest.unmock('../semver.js');
 jest.unmock('semver');
+jest.unmock('../flowVersion');
 
 import {fs} from '../node.js';
 
@@ -17,7 +18,7 @@ import {
   filterLibDefs,
   updateCacheRepo,
 } from '../libDefs.js';
-import {stringToVersion} from '../semver.js';
+import {parseDirString as parseFlowDirString} from "../flowVersion";
 import {
   cloneInto,
   rebaseRepoMaster,
@@ -117,7 +118,7 @@ describe('libDefs', () => {
       return {
         pkgName: name,
         pkgVersionStr: verStr,
-        flowVersion: stringToVersion(flowVerStr),
+        flowVersion: parseFlowDirString(flowVerStr),
         flowVersionStr: flowVerStr,
         path: '',
         testFilePaths: [],
