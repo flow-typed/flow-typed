@@ -4,6 +4,8 @@
   width="400"
 />
 
+[![Travis](https://img.shields.io/travis/flowtype/flow-typed.svg)](https://travis-ci.org/flowtype/flow-typed) [![npm](https://img.shields.io/npm/dm/flow-typed.svg)](https://www.npmjs.com/package/flow-typed)
+
 `flow-typed` is a [repository](https://github.com/flowtype/flow-typed/tree/master/definitions) of third-party 
 [library interface definitions](http://flowtype.org/docs/third-party.html) 
 for use with [Flow](http://flowtype.org/).
