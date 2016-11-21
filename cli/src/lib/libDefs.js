@@ -9,7 +9,6 @@ import {
   emptyVersion,
   versionToString,
 } from "./semver.js";
-import type {Version} from "./semver.js";
 import {
   disjointVersionsAll,
   parseDirString as parseFlowDirString,
@@ -153,7 +152,7 @@ async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>, validationErrs?: V
   (await parseLibDefsFromPkgDir(
     parsedDirItem,
     pkgDirPath,
-    validationErrs
+    validationErrs,
   )).forEach(libDef => libDefs.push(libDef));
 }
 
@@ -202,60 +201,6 @@ export async function getLibDefs(
   return libDefs;
 };
 
-export function _flowVersionToVersion(flow: FlowVersion): Version {
-  const result = (() => {switch (flow.kind) {
-    case 'all': return {
-      range: undefined,
-      major: 'x',
-      minor: 'x',
-      patch: 'x',
-      upperBound: undefined,
-    };
-    case 'specific': return {
-      range: undefined,
-      major: flow.ver.major,
-      minor: flow.ver.minor,
-      patch: flow.ver.patch,
-      upperBound: undefined,
-    };
-    case 'ranged':
-      const {upper, lower} = flow;
-      const [lowerBound, upperBound, range] = (() => {
-        if (lower != null && upper != null) {
-          return [
-            _flowVersionToVersion({kind: 'specific', ver: lower}),
-            _flowVersionToVersion({kind: 'specific', ver: upper}),
-            '>=',
-          ];
-        } else if (lower != null) {
-          return [
-            _flowVersionToVersion({kind: 'specific', ver: lower}),
-            undefined,
-            '>='
-          ];
-        } else if (upper != null) {
-          return [
-            _flowVersionToVersion({kind: 'specific', ver: upper}),
-            undefined,
-            '<='
-          ];
-        } else {
-          (lower: null);
-          (upper: null);
-          throw new Error('wat');
-        }
-      })();
-      if (upperBound) {
-        upperBound.range = "<=";
-      }
-      lowerBound.upperBound = upperBound;
-      lowerBound.range = range;
-      return lowerBound;
-    default: (flow: empty); throw new Error('Unexpected FlowVersion kind!');
-  }})();
-  return result;
-}
-
 function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): FlowVersion {
   const pkgFlowDirName = path.basename(pkgFlowDirPath);
   return parseFlowDirString(pkgFlowDirName, validationErrs);
@@ -269,7 +214,7 @@ function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): FlowVersion {
 async function parseLibDefsFromPkgDir(
   {pkgName, pkgVersion},
   pkgDirPath,
-  validationErrs
+  validationErrs,
 ): Promise<Array<LibDef>> {
   const repoPath = path.relative(pkgDirPath, '..');
   const pkgVersionStr = versionToString(pkgVersion);
@@ -384,7 +329,7 @@ async function parseLibDefsFromPkgDir(
  * Given the path to a directory item in the 'definitions' directory, parse the
  * directory's name into a package name and version.
  */
-const REPO_DIR_ITEM_NAME_RE = /^(.*)_v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)$/;
+const REPO_DIR_ITEM_NAME_RE = /^(.*)_v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
 function parseRepoDirItem(dirItemPath, validationErrs) {
   const dirItem = path.basename(dirItemPath);
   const itemMatches = dirItem.match(REPO_DIR_ITEM_NAME_RE);
@@ -398,7 +343,7 @@ function parseRepoDirItem(dirItemPath, validationErrs) {
     return {pkgName, pkgVersion};
   }
 
-  let [_, pkgName, major, minor, patch] = itemMatches;
+  let [_, pkgName, major, minor, patch, prerel] = itemMatches;
   const item = path.dirname(dirItemPath).split(path.sep).pop();
   if (item.charAt(0) === '@') {
     pkgName = `${item}${path.sep}${pkgName}`;
@@ -410,7 +355,11 @@ function parseRepoDirItem(dirItemPath, validationErrs) {
   patch =
     validateVersionPart(patch, "patch", dirItemPath, validationErrs);
 
-  return {pkgName, pkgVersion: {major, minor, patch}};
+  if (prerel != null) {
+    prerel = prerel.substr(1);
+  }
+
+  return {pkgName, pkgVersion: {major, minor, patch, prerel}};
 }
 
 /**
@@ -421,7 +370,7 @@ function validateTestFile(testFilePath, context, validationErrs) {
   const testFileName = path.basename(testFilePath);
   if (!TEST_FILE_NAME_RE.test(testFileName)) {
     const error =
-      "Malformed test file name! Test files must be formatted as test_(.*).js";
+      "Malformed test file name! Test files must be formatted as test_(.*).js: " + testFileName;
     validationError(context, error, validationErrs);
     return false;
   }

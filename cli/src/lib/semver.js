@@ -3,20 +3,22 @@
 import * as semver from "semver";
 
 type VersionRange = ">=" | "<=";
-export type Version = {
+export type Version = {|
   range?: VersionRange,
   major: number | "x",
   minor: number | "x",
   patch: number | "x",
+  prerel: null | string,
   upperBound?: Version, // TODO: rename to otherBound
-};
+|};
 
 export function emptyVersion(): Version {
   return {
     range: '<=',
     major: 'x',
     minor: 'x',
-    patch: 'x'
+    patch: 'x',
+    prerel: null,
   };
 }
 
@@ -27,7 +29,7 @@ export function getRangeLowerBound(rangeStr: string): string {
 
 // TODO: This has some egregious duplication with
 //       libDef.getLocalLibDefFlowVersions(). Need to better consolidate logic
-const VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)';
+const VER = 'v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?';
 const VERSION_RE = new RegExp(`^([><]=?)?${VER}(_([><]=?)${VER})?$`);
 export function stringToVersion(verStr: string): Version {
   const versionParts = verStr.match(VERSION_RE);
@@ -38,8 +40,8 @@ export function stringToVersion(verStr: string): Version {
     );
   }
   let [
-    _1, range, major, minor, patch,
-    _2, upperRange, upperMajor, upperMinor, upperPatch,
+    _1, range, major, minor, patch, prerel,
+    _2, upperRange, upperMajor, upperMinor, upperPatch, upperPrerel
   ] = versionParts;
   if (range != null && range !== ">=" && range !== "<=") {
     throw new Error(`'${verStr}': Invalid version range: ${range}`);
@@ -72,6 +74,7 @@ export function stringToVersion(verStr: string): Version {
       major: upperMajor,
       minor: upperMinor,
       patch: upperPatch,
+      prerel: upperPrerel.substr(1),
     };
   }
 
@@ -81,13 +84,20 @@ export function stringToVersion(verStr: string): Version {
     );
   }
 
-  return {range, major, minor, patch, upperBound};
+  if (prerel != null) {
+    prerel = prerel.substr(1);
+  }
+
+  return {range, major, minor, patch, prerel, upperBound};
 };
 
 export function versionToString(ver: Version): string {
   const rangeStr = ver.range ? ver.range : '';
-  const upperBoundStr = ver.upperBound ? `_${versionToString(ver.upperBound)}` : '';
-  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${upperBoundStr}`;
+  const upperStr = ver.upperBound ? `_${versionToString(ver.upperBound)}` : '';
+  const prerel = ver.prerel == null ? '' : `-${ver.prerel}`;
+  return (
+    `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${prerel}${upperStr}`
+  );
 };
 
 function _validateVersionNumberPart(context, partName, part) {

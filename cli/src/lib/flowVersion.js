@@ -263,7 +263,7 @@ function _before(a: ?FlowSpecificVer, b: ?FlowSpecificVer): boolean {
   if (a && b) return before(a, b);
   return false;
 }
-export function disjointVersions(a: FlowVersion, b: FlowVersion): boolean {
+function disjointVersions(a: FlowVersion, b: FlowVersion): boolean {
   return _before (maxSat(a), minSat(b)) || _before (maxSat(b), minSat(a));
 }
 
