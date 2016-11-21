@@ -117,6 +117,8 @@ declare class rxjs$Observable<+T> {
   delay(dueTime: number): rxjs$Observable<T>;
 
   distinctUntilChanged(compare?: (x: T, y: T) => boolean): rxjs$Observable<T>;
+    
+  distinct<U>(keySelector?: (value: T) => U, flushes?: rxjs$Observable<mixed>): rxjs$Observable<T>;
 
   distinctUntilKeyChanged(key: string, compare?: (x: mixed, y: mixed) => boolean): rxjs$Observable<T>;
 
