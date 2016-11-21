@@ -86,6 +86,15 @@ const never: Observable<number> = Observable.empty()
   .concat(Observable.of('').ignoreElements())
   .concat(Observable.never());
 
+// $ExpectError
+const distinct1: Observable<number> = Observable.of(1).distinct(1);
+const distinct2: Observable<number> = Observable.of(1).distinct();
+const distinct3: Observable<{a: string}> = Observable.of({a: 'a'}).distinct(field => field.a);
+const distinct4: Observable<{a: string}> = Observable.of({a: 'a'}).distinct(
+  field => field.a,
+  Observable.never(),
+);
+
 (Observable.of(2).startWith(1, 2, 3): Observable<number>);
 // $ExpectError
 (Observable.of(2).startWith(1, '2', 3): Observable<number>);

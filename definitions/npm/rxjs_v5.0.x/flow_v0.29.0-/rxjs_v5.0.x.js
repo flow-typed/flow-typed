@@ -118,7 +118,7 @@ declare class rxjs$Observable<+T> {
 
   distinctUntilChanged(compare?: (x: T, y: T) => boolean): rxjs$Observable<T>;
 
-  distinct<U>(keySelector?: (value: T) => U): rxjs$Observable<T>;
+  distinct<U>(keySelector?: (value: T) => U, flushes?: rxjs$Observable<mixed>): rxjs$Observable<T>;
 
   elementAt(index: number, defaultValue?: T): rxjs$Observable<T>;
 
