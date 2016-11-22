@@ -104,7 +104,7 @@ declare class rxjs$Observable<+T> {
 
   catch<U>(selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
 
-  concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
+  concat<U>(...sources: rxjs$Observable<U>[]): rxjs$Observable<T | U>;
 
   concatAll<U>(): rxjs$Observable<U>;
 
@@ -117,7 +117,7 @@ declare class rxjs$Observable<+T> {
   delay(dueTime: number): rxjs$Observable<T>;
 
   distinctUntilChanged(compare?: (x: T, y: T) => boolean): rxjs$Observable<T>;
-    
+
   distinct<U>(keySelector?: (value: T) => U, flushes?: rxjs$Observable<mixed>): rxjs$Observable<T>;
 
   distinctUntilKeyChanged(key: string, compare?: (x: mixed, y: mixed) => boolean): rxjs$Observable<T>;
