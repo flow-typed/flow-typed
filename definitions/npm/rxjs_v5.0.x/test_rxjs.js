@@ -86,6 +86,9 @@ const never: Observable<number> = Observable.empty()
   .concat(Observable.of('').ignoreElements())
   .concat(Observable.never());
 
+const numberOrString: Observable<number | string> = numbers
+  .concat(strings);
+
 (Observable.of(2).startWith(1, 2, 3): Observable<number>);
 // $ExpectError
 (Observable.of(2).startWith(1, '2', 3): Observable<number>);

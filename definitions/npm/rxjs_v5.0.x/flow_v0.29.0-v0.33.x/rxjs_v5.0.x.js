@@ -104,7 +104,7 @@ declare class rxjs$Observable<+T> {
 
   catch<U>(selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
 
-  concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
+  concat<U>(...sources: rxjs$Observable<U>[]): rxjs$Observable<T | U>;
 
   concatAll<U>(): rxjs$Observable<U>;
 
