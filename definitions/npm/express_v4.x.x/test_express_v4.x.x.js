@@ -79,6 +79,16 @@ bar.get('/', (req: $Request, res: $Response): void => {
     .status(200);
 });
 
+//body parsed-property access
+bar.post('/', (req: $Request, res: $Response): void => {
+
+  var username: ?string = req.body ? req.body.Username : null;
+  // $ExpectError cannot access properties without a null check first
+  var password: string = req.body.Password;
+  // $ExpectError body key/values should be string
+  var userid: ?number = req.body ? req.body.UserId : null;
+});
+
 app.use('/bar', bar)
 
 app.listen(9000);

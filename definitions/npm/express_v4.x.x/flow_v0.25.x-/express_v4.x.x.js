@@ -14,7 +14,7 @@ declare class express$RequestResponseBase {
 
 declare class express$Request extends http$IncomingMessage mixins express$RequestResponseBase {
   baseUrl: string;
-  body: mixed;
+  body?: {[key: string]: string};
   cookies: {[cookie: string]: string};
   fresh: boolean;
   hostname: boolean;
