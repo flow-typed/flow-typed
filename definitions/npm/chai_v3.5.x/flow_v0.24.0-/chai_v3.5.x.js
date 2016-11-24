@@ -114,7 +114,9 @@ declare module "chai" {
       static notDeepEqual(act: mixed, exp: mixed, msg?: string): void;
 
       static isTrue(val: mixed, msg?: string): void;
+      static isNotTrue(val: mixed), msg?: string): void;
       static isFalse(val: mixed, msg?: string): void;
+      static isNotFalse(val: mixed, msg?: string): void;
 
       static isNull(val: mixed, msg?: string): void;
       static isNotNull(val: mixed, msg?: string): void;
