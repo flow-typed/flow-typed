@@ -13,6 +13,4 @@ mapObj({a: 1}, (key, value, obj) => { obj.b; });
 mapObj({a: 1}, (key, value, obj) => { obj.a = 'asdf'; });
 
 // $ExpectError
-(mapObj({a: 1}, (key, value, obj) => {
-  return {b: 'asdf'};
-}): {[key: string]: number});
+(mapObj({a: 1}, (key, value, obj) => { return {b: 'asdf'}; }): {[key: string]: number});

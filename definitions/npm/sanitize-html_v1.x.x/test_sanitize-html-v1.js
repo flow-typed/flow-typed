@@ -15,8 +15,4 @@ const C: string = sanitize('<foo/>', {
   parser: false,
 })
 // $ExpectError
-const D: string = sanitize('<foo/>', {
-  allowedClasses: {
-    foo: true
-  },
-})
+const D: string = sanitize('<foo/>', { allowedClasses: { foo: true } })

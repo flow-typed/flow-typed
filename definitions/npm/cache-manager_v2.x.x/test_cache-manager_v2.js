@@ -6,10 +6,13 @@ const memoryCache: Cache = new cacheManager.caching({
   store: 'memory', max: 100, ttl: 10
 });
 
-// $ExpectError store missing, max is supposed to be number
+// $ExpectError store missing
 const invalidMemoryCache: Cache = new cacheManager.caching({
-  max: '200'
+  max: 200,
 });
+
+// $ExpectError
+const invalidMemoryCache2: Cache = new cacheManager.caching({ max: '200' });
 
 (memoryCache.set('foo', 'bar', { ttl: 5 }): Promise<void>);
 // $ExpectError Wrong Promise return

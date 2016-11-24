@@ -45,6 +45,4 @@ WebFont.load({
 WebFont.load();
 
 // $ExpectError
-WebFont.load({
-  loading: 'foo'
-});
+WebFont.load({ loading: 'foo' });
