@@ -46,7 +46,7 @@ declare type express$CookieOptions = {
   encode?: (value: string) => string,
   expires?: Date,
   httpOnly?: boolean,
-  maxAge?: string,
+  maxAge?: number,
   path?: string,
   secure?: boolean,
   signed?: boolean
