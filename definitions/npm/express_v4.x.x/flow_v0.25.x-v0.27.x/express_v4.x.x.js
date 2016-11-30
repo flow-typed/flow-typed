@@ -83,6 +83,7 @@ declare class express$Response extends http$ClientRequest mixins express$Request
   sendStatus(statusCode: number): this;
   set(field: string, value?: string): this;
   status(statusCode: number): this;
+  statusCode: number;
   type(type: string): this;
   vary(field: string): this;
 }
