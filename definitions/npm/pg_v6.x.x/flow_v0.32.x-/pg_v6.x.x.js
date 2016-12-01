@@ -259,7 +259,8 @@ declare module pg {
 
     setTypeParser:
       ((oid: number, format?: 'text', parseFn: TypeParserText) => void )&
-      ((oid: number, format: 'binary', parseFn: TypeParserBinary) => void),
+      ((oid: number, format: 'binary', parseFn: TypeParserBinary) => void)&
+      ((oid: number, parseFn: TypeParserText) => void),
   }
 
   /*

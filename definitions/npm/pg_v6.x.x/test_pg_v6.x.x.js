@@ -13,6 +13,14 @@ import type {
   PGType
 } from 'pg';
 
+pg.types.setTypeParser(1184, v => v);
+pg.types.setTypeParser(1184, 'text', (v: string) => v);
+// $ExpectError
+pg.types.setTypeParser(1184, 'binary', (v: string) => v)
+pg.types.setTypeParser(1184, 'binary', (v: Buffer) => v)
+// $ExpectError
+pg.types.setTypeParser(1184, (v: Buffer) => v)
+
 // There are two common ways to use node-postgres.
 function test_pg() {
   // 1. interact with your server via a pool of clients
