@@ -73,9 +73,9 @@ declare function afterAll(fn: Function): void;
 declare function beforeAll(fn: Function): void;
 declare function describe(name: string, fn: Function): void;
 declare var it: {
-  (name: string, fn: Function): ?Promise<void>;
-  only(name: string, fn: Function): ?Promise<void>;
-  skip(name: string, fn: Function): ?Promise<void>;
+  (name: string, fn?: Function): ?Promise<void>;
+  only(name: string, fn?: Function): ?Promise<void>;
+  skip(name: string, fn?: Function): ?Promise<void>;
 };
 declare function fit(name: string, fn: Function): ?Promise<void>;
 declare var test: typeof it;

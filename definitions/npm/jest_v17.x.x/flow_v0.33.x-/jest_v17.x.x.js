@@ -194,21 +194,21 @@ declare var it: {
    * @param {string} Name of Test
    * @param {Function} Test
    */
-  (name: string, fn: Function): ?Promise<void>;
+  (name: string, fn?: Function): ?Promise<void>;
   /**  
    * Only run this test
    * 
    * @param {string} Name of Test
    * @param {Function} Test
    */
-  only(name: string, fn: Function): ?Promise<void>;
+  only(name: string, fn?: Function): ?Promise<void>;
   /**  
    * Skip running this test
    * 
    * @param {string} Name of Test
    * @param {Function} Test
    */
-  skip(name: string, fn: Function): ?Promise<void>;
+  skip(name: string, fn?: Function): ?Promise<void>;
 };
 declare function fit(name: string, fn: Function): ?Promise<void>;
 /** An individual test unit */
