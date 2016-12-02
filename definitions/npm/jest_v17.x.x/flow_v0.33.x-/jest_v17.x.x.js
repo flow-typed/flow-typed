@@ -30,7 +30,7 @@ type JestMockFn = {
   /**
    * Accepts a function that should be used as the implementation of the mock.
    * The mock itself will still record all calls that go into and instances
-   * that come from itself – the only difference is that the implementation
+   * that come from itself -- the only difference is that the implementation
    * will also be executed when the mock is called.
    */
   mockImplementation(fn: Function): JestMockFn,
@@ -270,7 +270,7 @@ type JestObjectType = {
    * The second argument can be used to specify an explicit module factory that
    * is being run instead of using Jest's automocking feature.
    *
-   * The third argument can be used to create virtual mocks – mocks of modules
+   * The third argument can be used to create virtual mocks -- mocks of modules
    * that don't exist anywhere in the system.
    */
   mock(moduleName: string, moduleFactory?: any): JestObjectType,
