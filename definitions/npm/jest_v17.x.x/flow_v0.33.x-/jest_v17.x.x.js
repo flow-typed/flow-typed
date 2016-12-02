@@ -132,9 +132,9 @@ type JestObjectType = {
   /** Removes any pending timers from the timer system. */
   clearAllTimers(): void;
   /** The same as `mock` but not moved to the top of the expectation by babel-jest. */
-  doMock(moduleName: string, moduleFactory?: any): void;
+  doMock(moduleName: string, moduleFactory?: any): JestObjectType,
   /** The same as `unmock` but not moved to the top of the expectation by babel-jest. */
-  dontMock(moduleName: string): void;
+  dontMock(moduleName: string): JestObjectType,
   /** Returns a new, unused mock function. Optionally takes a mock implementation. */
   fn(implementation?: Function): JestMockFn;
   /** Determines if the given function is a mocked function. */
@@ -148,9 +148,9 @@ type JestObjectType = {
    *  
    * The third argument can be used to create virtual mocks – mocks of modules that don't exist anywhere in the system.
    */
-  mock(moduleName: string, moduleFactory?: any): JestMockFn;
+  mock(moduleName: string, moduleFactory?: any): JestObjectType;
   /** Resets the module registry - the cache of all required modules. This is useful to isolate modules where local state might conflict between tests. */
-  resetModules(): void;
+  resetModules(): JestObjectType;
   /** Exhausts the micro-task queue (usually interfaced in node via process.nextTick). */
   runAllTicks(): void;
   /** Exhausts the macro-task queue (i.e., all tasks queued by setTimeout(), setInterval(), and setImmediate()). */
