@@ -402,7 +402,7 @@ declare var jasmine: {
   DEFAULT_TIMEOUT_INTERVAL: number,
   any(value: mixed): JestAsymmetricEqualityType,
   anything(): void,
-  arrayContaining(value: mixed[]): void,
+  arrayContaining(value: Array<mixed>): void,
   clock(): JestClockType,
   createSpy(name: string): JestSpyType,
   objectContaining(value: Object): void,
