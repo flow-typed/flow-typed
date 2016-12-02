@@ -88,60 +88,65 @@ declare class express$Response extends http$ClientRequest mixins express$Request
 }
 
 declare type express$NextFunction = (err?: ?Error) => mixed;
-declare type express$Middleware =
-  ((req: express$Request, res: express$Response, next: express$NextFunction) => mixed) |
-  ((error: ?Error, req: express$Request, res: express$Response, next: express$NextFunction) => mixed);
-declare interface express$RouteMethodType<T> {
-  (middleware: express$Middleware): T;
-  (...middleware: Array<express$Middleware>): T;
-  (path: string|RegExp|string[], ...middleware: Array<express$Middleware>): T;
+declare type express$BaseMiddleware<Req, Res> =
+  ((req: Req, res: Res, next: express$NextFunction) => mixed) |
+  ((error: ?Error, req: Req, res: Res, next: express$NextFunction) => mixed);
+declare type express$Middleware = express$BaseMiddleware<express$Request, express$Response>
+declare interface express$BaseRouteMethodType<Req, Res, T> {
+  (middleware: express$BaseMiddleware<Req, Res>): T;
+  (...middleware: Array<express$BaseMiddleware<Req, Res>>): T;
+  (path: string|RegExp|string[], ...middleware: Array<express$BaseMiddleware<Req, Res>>): T;
 }
-declare interface express$RouterMethodType<T> {
-  (middleware: express$Middleware): T;
-  (...middleware: Array<express$Middleware>): T;
-  (path: string|RegExp|string[], ...middleware: Array<express$Middleware>): T;
-  (path: string, router: express$Router): T;
+declare type express$RouteMethodType<T> = express$BaseRouteMethodType<express$Request, express$Response, T>;
+declare interface express$BaseRouterMethodType<Req, Res, T> {
+  (middleware: express$BaseMiddleware<Req, Res>): T;
+  (...middleware: Array<express$BaseMiddleware<Req, Res>>): T;
+  (path: string|RegExp|string[], ...middleware: Array<express$BaseMiddleware<Req, Res>>): T;
+  (path: string, router: express$BaseRouter<Req, Res>): T;
 }
-declare class express$Route {
-  all: express$RouteMethodType<this>;
-  get: express$RouteMethodType<this>;
-  post: express$RouteMethodType<this>;
-  put: express$RouteMethodType<this>;
-  head: express$RouteMethodType<this>;
-  delete: express$RouteMethodType<this>;
-  options: express$RouteMethodType<this>;
-  trace: express$RouteMethodType<this>;
-  copy: express$RouteMethodType<this>;
-  lock: express$RouteMethodType<this>;
-  mkcol: express$RouteMethodType<this>;
-  move: express$RouteMethodType<this>;
-  purge: express$RouteMethodType<this>;
-  propfind: express$RouteMethodType<this>;
-  proppatch: express$RouteMethodType<this>;
-  unlock: express$RouteMethodType<this>;
-  report: express$RouteMethodType<this>;
-  mkactivity: express$RouteMethodType<this>;
-  checkout: express$RouteMethodType<this>;
-  merge: express$RouteMethodType<this>;
+declare type express$RouterMethodType<T> = express$BaseRouterMethodType<express$Request, express$Response, T>;
+declare class express$BaseRoute<Req, Res> {
+  all: express$BaseRouteMethodType<Req, Res, this>;
+  get: express$BaseRouteMethodType<Req, Res, this>;
+  post: express$BaseRouteMethodType<Req, Res, this>;
+  put: express$BaseRouteMethodType<Req, Res, this>;
+  head: express$BaseRouteMethodType<Req, Res, this>;
+  delete: express$BaseRouteMethodType<Req, Res, this>;
+  options: express$BaseRouteMethodType<Req, Res, this>;
+  trace: express$BaseRouteMethodType<Req, Res, this>;
+  copy: express$BaseRouteMethodType<Req, Res, this>;
+  lock: express$BaseRouteMethodType<Req, Res, this>;
+  mkcol: express$BaseRouteMethodType<Req, Res, this>;
+  move: express$BaseRouteMethodType<Req, Res, this>;
+  purge: express$BaseRouteMethodType<Req, Res, this>;
+  propfind: express$BaseRouteMethodType<Req, Res, this>;
+  proppatch: express$BaseRouteMethodType<Req, Res, this>;
+  unlock: express$BaseRouteMethodType<Req, Res, this>;
+  report: express$BaseRouteMethodType<Req, Res, this>;
+  mkactivity: express$BaseRouteMethodType<Req, Res, this>;
+  checkout: express$BaseRouteMethodType<Req, Res, this>;
+  merge: express$BaseRouteMethodType<Req, Res, this>;
 
   // @TODO Missing 'm-search' but get flow illegal name error.
 
-  notify: express$RouteMethodType<this>;
-  subscribe: express$RouteMethodType<this>;
-  unsubscribe: express$RouteMethodType<this>;
-  patch: express$RouteMethodType<this>;
-  search: express$RouteMethodType<this>;
-  connect: express$RouteMethodType<this>;
+  notify: express$BaseRouteMethodType<Req, Res, this>;
+  subscribe: express$BaseRouteMethodType<Req, Res, this>;
+  unsubscribe: express$BaseRouteMethodType<Req, Res, this>;
+  patch: express$BaseRouteMethodType<Req, Res, this>;
+  search: express$BaseRouteMethodType<Req, Res, this>;
+  connect: express$BaseRouteMethodType<Req, Res, this>;
 }
+declare type express$Route = express$BaseRoute<express$Request, express$Response>;
 
-declare class express$Router extends express$Route {
+declare class express$BaseRouter<Req, Res> extends express$BaseRoute<Req, Res> {
   constructor(options?: express$RouterOptions): void;
-  use: express$RouterMethodType<this>;
-  route(path: string): express$Route;
-  static (): express$Router;
+  use: express$BaseRouterMethodType<Req, Res, this>;
+  route(path: string): express$BaseRoute<Req, Res>;
+  static (): this;
 }
+declare type express$Router = express$BaseRouter<express$Request, express$Response>;
 
-declare class express$Application extends express$Router mixins events$EventEmitter {
+declare class express$BaseApplication<Req, Res> extends express$BaseRouter<Req, Res> mixins events$EventEmitter {
   constructor(): void;
   locals: {[name: string]: mixed};
   mountpath: string;
@@ -162,6 +167,7 @@ declare class express$Application extends express$Router mixins events$EventEmit
   set(name: string, value: mixed): mixed;
   render(name: string, optionsOrFunction: {[name: string]: mixed}, callback: express$RenderCallback): void;
 }
+declare type express$Application = express$BaseApplication<express$Request, express$Response>;
 
 declare module 'express' {
   declare function serveStatic(root: string, options?: Object): express$Middleware;
@@ -175,8 +181,8 @@ declare module 'express' {
   declare type $Application = express$Application;
 
   declare module.exports: {
-    (): express$Application, // If you try to call like a function, it will use this signature
+    (): express$BaseApplication<*, *>, // If you try to call like a function, it will use this signature
     static: serveStatic, // `static` property on the function
-    Router: typeof express$Router, // `Router` property on the function
+    Router: Class<express$Router>, // `Router` property on the function
   };
 }
