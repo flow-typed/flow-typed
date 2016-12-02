@@ -96,12 +96,6 @@ declare interface express$RouteMethodType<T> {
   (...middleware: Array<express$Middleware>): T;
   (path: string|RegExp|string[], ...middleware: Array<express$Middleware>): T;
 }
-declare interface express$RouterMethodType<T> {
-  (middleware: express$Middleware): T;
-  (...middleware: Array<express$Middleware>): T;
-  (path: string|RegExp|string[], ...middleware: Array<express$Middleware>): T;
-  (path: string, router: express$Router): T;
-}
 declare class express$Route {
   all: express$RouteMethodType<this>;
   get: express$RouteMethodType<this>;
@@ -136,9 +130,12 @@ declare class express$Route {
 
 declare class express$Router extends express$Route {
   constructor(options?: express$RouterOptions): void;
-  use: express$RouterMethodType<this>;
   route(path: string): express$Route;
   static (): express$Router;
+  use(middleware: express$Middleware): this;
+  use(...middleware: Array<express$Middleware>): this;
+  use(path: string|RegExp|string[], ...middleware: Array<express$Middleware>): this;
+  use(path: string, router: express$Router): this;
 }
 
 declare class express$Application extends express$Router mixins events$EventEmitter {
