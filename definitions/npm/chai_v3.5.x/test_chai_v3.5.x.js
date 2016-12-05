@@ -1,6 +1,6 @@
 /* @flow */
 
-import {expect} from "chai";
+import {expect, assert} from "chai";
 
 /**
  * Word chains
@@ -75,3 +75,25 @@ expect((x) => x).to.decrease({val: 0}, 'val');
 
 // $ExpectError
 expect(1).to.what("nope");
+
+//
+// assert API (http://chaijs.com/api/assert/)
+//
+
+// expression
+assert("1" === "1", 'with message');
+assert("1" === "1");
+// $ExpectError
+assert("1" === "1", 2);
+
+// test standard assert function with overloaded message
+assert.fail(1, 2, 'numbers are not the same');
+assert.fail("aa", "a");
+
+// test constructor / function checking
+class SampleClass{constructor(){}};
+var instance = new SampleClass();
+assert.instanceOf(instance, SampleClass, "instance check");
+// $ExpectError
+assert.instanceOf(instance, instance);
+assert.notInstanceOf(instance, Array);
