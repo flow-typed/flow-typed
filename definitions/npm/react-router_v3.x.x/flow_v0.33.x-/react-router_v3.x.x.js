@@ -16,8 +16,9 @@ declare module 'react-router' {
     createRoutes: (routes: React$Element<*>) => Array<Object>;
     formatPattern: (pattern: string, params: Object) => string;
     withRouter: (component: React.Component<*, *, *>, options: ?Object) => React.Component<*, *, *>;
-  }
+  };
 }
+
 declare module 'react-router/lib/PropTypes' {
   declare var routerShape: ReactPropsChainableTypeChecker;
   declare var locationShape: ReactPropsChainableTypeChecker;

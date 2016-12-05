@@ -1,5 +1,5 @@
 // @flow
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/lib/createBrowserHistory';
 
 const history = createHistory()
 
