@@ -46,3 +46,12 @@ cpy('foo.js', 'dest', {
 });
 
 cpy('foo.js', 'dest', {});
+
+// $ExpectError
+cpy();
+// $ExpectError
+cpy('foo.js');
+// $ExpectError
+cpy(2, 1);
+// $ExpectError
+(cpy(2, 1): void);
