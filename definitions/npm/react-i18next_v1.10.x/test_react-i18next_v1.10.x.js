@@ -30,7 +30,6 @@ loadNamespaces('');
 // $ExpectError - wrong component type
 loadNamespaces({ components: [{}], i18n });
 
-
 type OwnProps = { s: string };
 type Props = OwnProps & { t: TFunction };
 
@@ -46,6 +45,23 @@ class ClassComp extends React.Component {
   render() {
     const { s, t } = this.props;
     return <div prop={ t('') } />;
+  }
+}
+
+// $ExpectError - wrong argument type
+const Comp = ({ s, t }: Props) => (
+  <div
+    prop1={ t('', '') }
+    prop2={ ' ' + s }
+  />
+);
+
+class FlowErrorComp extends React.Component {
+  props: Props;
+  render() {
+    // $ExpectError - wrong argument type
+    const { s, t } = this.props;
+    return <div prop={ t({}) } />;
   }
 }
 

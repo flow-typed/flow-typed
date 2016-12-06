@@ -1,7 +1,5 @@
-import type { TFunction } from 'i18next'
-
 declare module 'react-i18next' {
-  declare type TFunction = TFunction;
+  declare type TFunction = (key?: ?string, data?: ?Object) => string;
   declare type Locales = string | Array<string>;
 
   declare type StatelessComponent<P> = (props: P) => ?React$Element<any>;
