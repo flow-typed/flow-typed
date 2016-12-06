@@ -54,3 +54,6 @@ customApp.use('/something', (req: test_express$CustomRequest, res: test_express$
   // $ExpectError
   res.notHere;
 });
+
+// $ExpectError
+customApp.use('/something', (req: string, res: string, next: Function) => { next() });
