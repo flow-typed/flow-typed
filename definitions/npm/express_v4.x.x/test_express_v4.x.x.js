@@ -1,12 +1,5 @@
 /* @flow */
 import express, { Router } from 'express';
-import type {
-    $Application,
-    $Request,
-    $Response,
-    Middleware,
-    NextFunction
-} from 'express';
 const app = express();
 
 // $ExpectError property `foo` Property not found in Application:
@@ -22,7 +15,7 @@ const num: number = app.mountpath;
 
 const myRouter = new express.Router();
 
-myRouter.use('/dang', (req, res: $Response, next: NextFunction) => {
+myRouter.use('/dang', (req, res: express$Response, next: express$NextFunction) => {
     res.set('My Header', 'Value');
     res.status(200);
     res.render('someTemplate', {}, (err, html: ?string) => null);
@@ -36,7 +29,7 @@ myRouter.use('/dang', (req, res: $Response, next: NextFunction) => {
 });
 
 
-function handleRequest<MiddleWare>(req: $Request, res: $Response, next: NextFunction): void {
+function handleRequest(req: express$Request, res: express$Response, next: express$NextFunction): void {
     (Math.random() >= 0.5 ? Promise.resolve({ books: ['Catcher and the Rye'] }) :
         Promise.reject(new Error('Something went wrong')))
         .then((data) => {
@@ -47,20 +40,20 @@ function handleRequest<MiddleWare>(req: $Request, res: $Response, next: NextFunc
         });
 }
 
-myRouter.use(handleRequest, (err: ?Error, req: $Request, res: $Response, next: NextFunction): void => {
+myRouter.use(handleRequest, (err: ?Error, req: express$Request, res: express$Response, next: express$NextFunction): void => {
     if (err) {
         console.error(err);
     }
     next(err);
 });
 
-app.on('mount', (parent: $Application) => {
+app.on('mount', (parent: express$Application) => {
     console.log('Parent Loaded', parent);
     // $ExpectError
     parent.fail();
 })
 
-app.use('/foo', (req: $Request, res: $Response, next) => {
+app.use('/foo', (req: express$Request, res: express$Response, next) => {
     // $ExpectError
     res.status('400');
     res.send('should work')
@@ -69,7 +62,7 @@ app.use('/foo', (req: $Request, res: $Response, next) => {
 
 const bar: Router = new Router();
 
-bar.get('/', (req: $Request, res: $Response): void => {
+bar.get('/', (req: express$Request, res: express$Response): void => {
   // $ExpectError should be of type object
   const locals: Array<any> = res.locals;
   res.locals.title = 'Home Page';
@@ -113,25 +106,25 @@ app.render('view', { title: 'News Feed' }, (err: ?Error, html: ?string): void =>
     console.log(html);
 });
 
-app.use('/somewhere', (req: $Request, res: $Response) => {
+app.use('/somewhere', (req: express$Request, res: express$Response) => {
   res.redirect('/somewhere-else');
 });
 
-app.use('/again', (req: $Request, res: $Response) => {
+app.use('/again', (req: express$Request, res: express$Response) => {
   res.redirect(200, '/different');
 });
 
-app.use('/something', (req: $Request, res: $Response) => {
+app.use('/something', (req: express$Request, res: express$Response) => {
   // $ExpectError
   res.redirect('/different', 200);
 });
 
-app.use('/failure', (req: $Request, res: $Response) => {
+app.use('/failure', (req: express$Request, res: express$Response) => {
   // $ExpectError
   res.redirect();
 });
 
-app.use((err: ?Error, req, res, next) => {
+app.use((err: ?Error, req: express$Request, res: express$Response, next: express$NextFunction) => {
     // test req
     req.accepts('accepted/type');
     // test response
