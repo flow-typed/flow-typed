@@ -66,3 +66,16 @@ expect(() => {
 expect(() => {
     throw err;
 }).toThrowError(err);
+
+// Test method chaining fixes
+jest
+  .doMock('testModule1', () => { })
+  .doMock('testModule2', () => { });
+
+jest
+  .dontMock('testModule1')
+  .dontMock('testModule2');
+
+jest
+  .resetModules()
+  .resetModules();
