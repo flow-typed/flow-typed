@@ -79,6 +79,60 @@ bar.get('/', (req: $Request, res: $Response): void => {
     .status(200);
 });
 
+
+//body parsed-property access
+//https://github.com/expressjs/body-parser/blob/master/README.md
+bar.post('/', (req: $Request, res: $Response): void => {
+
+  // json parsing
+  // $ExpectError cannot access properties without a null check first
+  const password: ?mixed = req.body.Password;
+  if (req.body && typeof req.body === 'object') {
+    // simple property value, unknown type or existence
+    const usernameMixed: mixed = req.body.Username;
+    // $ExpectError cannot infer type
+    let usernameString: string = req.body.Username;
+    if (req.body.Username) {
+      const username: mixed = req.body.Username;
+      // $ExpectError still cannot infer type
+      usernameString = req.body.Username;
+      // test type of value
+      if (typeof req.body.Username === 'string') {
+        // now can infer type
+        usernameString = req.body.Username;
+      }
+    }
+    // property value as object
+    // $ExpectError cannot access properties without checking is object first
+    const unknown: mixed = req.body.TestChild.gds;
+    // type check property as object
+    if (req.body.TestChild && typeof req.body.TestChild === 'object') {
+      // allowed to refer to property as object now
+      const asd: Object = req.body.TestChild;
+      // allowed to directly access child property
+      const help: mixed = req.body.TestChild.agdge;
+    }
+  }
+
+  // text parsing
+  // $ExpectError must detect that body was a string
+  let bodyText: string = req.body;
+  // detect if body is string
+  if (typeof req.body === 'string') {
+    // can infer string now
+    bodyText = req.body;
+  }
+
+  // raw parsing
+  // $ExpectError must detect that body is a buffer
+  let bodyRaw: Buffer = req.body;
+  // detect if body is raw Buffer
+  if (req.body instanceof Buffer) {
+    bodyRaw = req.body;
+  }
+});
+
+
 app.use('/bar', bar)
 
 app.listen(9000);
