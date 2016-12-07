@@ -14,3 +14,9 @@ moment.unix('1234');
 moment().millisecond().seconds();
 
 moment().milliseconds(100).seconds();
+
+moment().isBefore();
+moment().isSame();
+moment().isAfter();
+moment().isSameOrBefore();
+moment().isSameOrAfter();
