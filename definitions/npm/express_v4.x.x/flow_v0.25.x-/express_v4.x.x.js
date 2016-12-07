@@ -62,7 +62,7 @@ declare type express$SendFileOptions = {
   dotfiles?: 'allow' | 'deny' | 'ignore'
 };
 
-declare class express$Response extends http$ClientRequest mixins express$RequestResponseBase {
+declare class express$Response extends http$ClientRequest mixins express$RequestResponseBase, http$ServerResponse {
   headersSent: boolean;
   locals: {[name: string]: mixed};
   append(field: string, value?: string): this;
