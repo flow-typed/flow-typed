@@ -9,9 +9,9 @@
     "build": "mkdir -p dist; babel ./src --out-dir=./dist",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "lint": "eslint .",
-    "prepublish": "mkdir -p dist; npm run test",
-    "test": "npm run clean; npm run build; npm run test-quick",
-    "test-quick": "jest && npm run lint",
+    "prepublish": "mkdir -p dist; yarn run test",
+    "test": "yarn run clean; yarn run build; yarn run test-quick",
+    "test-quick": "jest && yarn run lint",
     "watch": "mkdir -p dist; babel --source-maps --watch=./src --out-dir=./dist"
   },
   "repository": {

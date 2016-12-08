@@ -2,9 +2,9 @@
 set -o errexit
 
 cd definitions
-npm install
-npm test
+yarn install
+yarn test
 cd ../cli
-npm install 
-node dist/cli.js validate-defs 
+yarn install
+node dist/cli.js validate-defs
 node dist/cli.js run-tests "$@"
