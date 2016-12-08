@@ -176,7 +176,7 @@ declare class moment$Moment {
   local(): this;
   utc(): this;
   utcOffset(offset: number|string): void;
-  utcOffset(): number;
+  utcOffset(): number|this;
   format(format?: string): string;
   fromNow(removeSuffix?: bool): string;
   from(value: moment$Moment|string|number|Date|Array<number>, removePrefix?: bool): string;
