@@ -59,6 +59,9 @@ expect({a: 1}).to.have.property("a", 1);
 
 expect([1,2,3]).to.have.length.above(2);
 expect([1,2,3]).to.have.lengthOf(3);
+expect([1,2,3]).to.have.length(3);
+// $ExpectError
+expect([1,2,3]).to.have.length('three');
 
 expect("abc").to.match(/[a-z]{3}/);
 expect("abc").to.have.string("b");

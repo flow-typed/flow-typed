@@ -45,7 +45,7 @@ declare module "chai" {
           & (name: string) => ExpectChain<mixed>
         ),
 
-        length: ExpectChain<number>,
+        length: (value: number) => ExpectChain<T> | ExpectChain<number>,
         lengthOf: (value: number) => ExpectChain<T>,
 
         match: (regex: RegExp) => ExpectChain<T>,
