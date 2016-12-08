@@ -183,6 +183,6 @@ declare module "chai" {
     declare var config: {
         includeStack: boolean,
         showDiff: boolean,
-        truncateThreshold: boolean
+        truncateThreshold: number
     };
 }
