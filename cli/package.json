@@ -5,14 +5,14 @@
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "mkdir -p dist; babel ./src --out-dir=./dist",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "clean": "rimraf dist",
+    "build": "mkdirp dist && babel ./src --out-dir=./dist",
+    "flow": "flow && test \"$? -eq 0 -o $? -eq 2\"",
     "lint": "eslint .",
-    "prepublish": "mkdir -p dist; npm run test",
-    "test": "npm run clean; npm run build; npm run test-quick",
+    "prepublish": "mkdirp dist && npm run test",
+    "test": "npm run clean && npm run build && npm run test-quick",
     "test-quick": "jest && npm run lint",
-    "watch": "mkdir -p dist; babel --source-maps --watch=./src --out-dir=./dist"
+    "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
   "repository": {
     "type": "git",
@@ -45,7 +45,8 @@
     "eslint": "^2.9.0",
     "eslint-plugin-flow-vars": "^0.4.0",
     "flow-bin": "^0.32",
-    "jest-cli": "^15.1.1"
+    "jest-cli": "^17.0.3",
+    "rimraf": "^2.5.4"
   },
   "dependencies": {
     "babel-polyfill": "^6.6.1",
