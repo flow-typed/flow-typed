@@ -28,14 +28,12 @@
   },
   "homepage": "https://github.com/flowtype/flow-typed#readme",
   "jest": {
-    "modulePathIgnorePatterns": [
-      "<rootDir>/src/.*"
-    ]
+    "rootDir": "src"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-eslint": "^6.0.4",
-    "babel-jest": "^13.2.2",
+    "babel-jest": "^17.0.2",
     "babel-plugin-syntax-async-functions": "^6.5.0",
     "babel-plugin-syntax-trailing-function-commas": "^6.8.0",
     "babel-plugin-transform-flow-strip-types": "^6.7.0",
