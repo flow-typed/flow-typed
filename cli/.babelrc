@@ -1,8 +1,4 @@
 {
-  "ignore": [
-    "__mocks__",
-    "__tests__"
-  ],
   "plugins": [
     "transform-flow-strip-types",
     "transform-regenerator",
