@@ -5,14 +5,14 @@
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "mkdir -p dist; babel ./src --out-dir=./dist",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "clean": "rimraf dist",
+    "build": "mkdirp dist && babel ./src --out-dir=./dist",
+    "flow": "flow && test \"$? -eq 0 -o $? -eq 2\"",
     "lint": "eslint .",
-    "prepublish": "mkdir -p dist; npm run test",
-    "test": "npm run clean; npm run build; npm run test-quick",
+    "prepublish": "mkdirp dist && npm run test",
+    "test": "npm run clean && npm run build && npm run test-quick",
     "test-quick": "jest && npm run lint",
-    "watch": "mkdir -p dist; babel --source-maps --watch=./src --out-dir=./dist"
+    "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
   "repository": {
     "type": "git",
@@ -28,14 +28,12 @@
   },
   "homepage": "https://github.com/flowtype/flow-typed#readme",
   "jest": {
-    "modulePathIgnorePatterns": [
-      "<rootDir>/src/.*"
-    ]
+    "rootDir": "src"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-eslint": "^6.0.4",
-    "babel-jest": "^13.2.2",
+    "babel-jest": "^17.0.2",
     "babel-plugin-syntax-async-functions": "^6.5.0",
     "babel-plugin-syntax-trailing-function-commas": "^6.8.0",
     "babel-plugin-transform-flow-strip-types": "^6.7.0",
@@ -45,7 +43,9 @@
     "eslint": "^2.9.0",
     "eslint-plugin-flow-vars": "^0.4.0",
     "flow-bin": "^0.32",
-    "jest-cli": "^15.1.1"
+    "jest-cli": "^17.0.3",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.5.4"
   },
   "dependencies": {
     "babel-polyfill": "^6.6.1",
