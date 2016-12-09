@@ -46,7 +46,6 @@
     "eslint-plugin-flow-vars": "^0.4.0",
     "flow-bin": "^0.32",
     "jest-cli": "^17.0.3",
-    "mkdirp": "^0.5.1",
     "rimraf": "^2.5.4"
   },
   "dependencies": {
