@@ -16,6 +16,7 @@ declare type test_express$CustomMiddleware =
   ((error: ?Error, req: test_express$CustomRequest, res: test_express$CustomResponse, next: test_express$CustomNextFunction) => mixed);
 
 declare class test_express$CustomApplication extends express$Application {
+  constructor(expressConstructor: () => express$Application): this;
   use(middleware: test_express$CustomMiddleware): this;
   use(...middleware: Array<test_express$CustomMiddleware>): this;
   use(path: string|RegExp|string[], ...middleware: Array<test_express$CustomMiddleware>): this;
@@ -38,6 +39,9 @@ function test_express$CustomApplication(
 
 // Class Extensions: Test
 const customApp = new test_express$CustomApplication(express);
+
+// $ExpectError
+const customApp_error = new test_express$CustomApplication();
 
 customApp.use('/something', (req: express$Request, res: express$Response, next: express$NextFunction) => {
   // $ExpectError
