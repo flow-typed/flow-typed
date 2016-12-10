@@ -5,21 +5,19 @@
 import createSagaMiddleware from 'redux-saga';
 
 import {
-  utils,
-  delay,
-  eventChannel,
-  buffers,
-  channel,
-  takeEvery,
-  takeLatest,
   runSaga,
-  END,
+  END, eventChannel, channel,
+  buffers,
+  takeEvery, takeLatest, throttle,
+  delay, CANCEL,
+  effects, utils,
 } from 'redux-saga';
 
 import {
   take,
   takem,
   put,
+  race,
   call,
   apply,
   cps,
@@ -29,8 +27,8 @@ import {
   cancel,
   select,
   actionChannel,
-  race,
   cancelled,
+  flush,
 } from 'redux-saga/effects';
 
 import type { Task, Channel, Buffer, SagaMonitor } from 'redux-saga';
@@ -107,6 +105,34 @@ function eventChannelTest() {
 
   // $ExpectError: second parameter needs to be a Buffer
   eventChannel((emitter) => () => {}, '');
+}
+
+function buffersTest() {
+  (buffers.none(): $npm$ReduxSaga$Buffer);
+
+  (buffers.fixed(): $npm$ReduxSaga$Buffer);
+  (buffers.fixed(5): $npm$ReduxSaga$Buffer);
+
+  // $ExpectError: limit parameter must be given as a number
+  (buffers.fixed('five'): $npm$ReduxSaga$Buffer);
+
+  (buffers.dropping(): $npm$ReduxSaga$Buffer);
+  (buffers.dropping(6): $npm$ReduxSaga$Buffer);
+
+  // $ExpectError: limit parameter must be given as a number
+  (buffers.dropping('six'): $npm$ReduxSaga$Buffer);
+
+  (buffers.sliding(): $npm$ReduxSaga$Buffer);
+  (buffers.sliding(7): $npm$ReduxSaga$Buffer);
+
+  // $ExpectError: limit parameter must be given as a number
+  (buffers.sliding('seven'): $npm$ReduxSaga$Buffer);
+
+  (buffers.expanding(): $npm$ReduxSaga$Buffer);
+  (buffers.expanding(8): $npm$ReduxSaga$Buffer);
+
+  // $ExpectError: limit parameter must be given as a number
+  (buffers.expanding('eight'): $npm$ReduxSaga$Buffer);
 }
 
 function takeTest() {
@@ -796,6 +822,17 @@ function cancelledTest() {
   (c.CANCELLED: Object);
 }
 
+function flushTest() {
+  const f = flush(myChannel);
+  (f.FLUSH: $npm$ReduxSaga$Channel);
+
+  // $ExpectError: Too less arguments
+  flush();
+
+  // $ExpectError: Only accept Channel
+  flush(42);
+}
+
 function selectTest() {
   const s0 = (state: Object): Object => ({});
   const s1 = (state: Object, a: string) => ({});
@@ -848,7 +885,6 @@ function takeEveryTest() {
   }
 
   function* saga1(a: string): Generator<IOEffect,*,*>  {
-    // let foo = yield select(getStuff);
     let foo = yield select(getStuff);
     return '';
   }
@@ -891,7 +927,6 @@ function takeLatestTest() {
   }
 
   function* saga1(a: string): Generator<IOEffect,*,*>  {
-    // let foo = yield select(getStuff);
     let foo = yield select(getStuff);
     return '';
   }
@@ -927,6 +962,41 @@ function takeLatestTest() {
   takeLatest('FOO', faultySaga, '1');
 
   takeLatest('FOO', nestedSaga, '1');
+}
+
+function throttleTest() {
+  function* saga0(): Generator<IOEffect, string, boolean> {
+    let foo = yield fork((): Promise<number> => Promise.resolve(1));
+    return '';
+  }
+
+  const getStuff = (state: Object): Object => ({a: ''})
+  function* saga1(a: string): Generator<IOEffect, string , Object> {
+    let foo = yield select(getStuff);
+    return '';
+  }
+
+  const aFunc = (): number => 1;
+  function* saga2(a: string, b: number): Generator<IOEffect, string , number> {
+    let foo = yield call(aFunc);
+    return '';
+  }
+
+  function* faultySaga(a: string): Generator<string,*,*> {
+    yield 'test';
+  }
+
+  const t0 = throttle(500, 'FOO', saga0);
+  const t1 = throttle(500, 'FOO', saga1, '1');
+  const t2 = throttle(500, ['FOO', 'BAR'], saga2, '1', 2);
+
+  (t0.name: string);
+
+  // $ExpectError: faultySaga yields strings, which is not allowed
+  throttle(500, 'FOO', faultySaga, '1');
+
+  // $ExpectError: delay parameter should be a number
+  throttle('one', 'FOO', saga1, '1');
 }
 
 function runSagaTest() {
@@ -998,4 +1068,21 @@ function createSagaMiddlewareTest() {
   middleware.run(g3, true, 2, '3');
 
   (middleware.run(g0): Task);
+
+  createSagaMiddleware({ sagaMonitor });
+
+  // $ExpectError: sagaMonitor parameter should be SagaMonitor
+  createSagaMiddleware({ sagaMonitor: 'monitor' });
+
+  const logger = (level) => {};
+  createSagaMiddleware({ logger });
+
+  // $ExpectError: logger parameter should be Logger
+  createSagaMiddleware({ logger: 'logger' });
+
+  const error = () => {};
+  createSagaMiddleware({ onError: error });
+
+  // $ExpectError: onError parameter should be Logger
+  createSagaMiddleware({ onError: 'error' });
 }
