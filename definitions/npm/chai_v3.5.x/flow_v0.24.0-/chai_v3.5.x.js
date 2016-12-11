@@ -79,6 +79,8 @@ declare module "chai" {
         exist: () => ExpectChain<T>,
         empty: () => ExpectChain<T>,
 
+        extensible: () => ExpectChain<T>,
+
         // chai-immutable
         size: (n: number) => ExpectChain<T>,
 
