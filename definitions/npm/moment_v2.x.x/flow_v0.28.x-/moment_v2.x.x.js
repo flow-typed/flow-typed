@@ -170,7 +170,7 @@ declare class moment$Moment {
   static min(...dates: Array<moment$Moment>): moment$Moment;
   static min(dates: Array<moment$Moment>): moment$Moment;
   add(value: number|moment$MomentDuration|moment$Moment|Object, unit?: string): this;
-  subtract(value: number|moment$MomentDuration|moment$Moment|string, unit?: string): this;
+  subtract(value: number|moment$MomentDuration|moment$Moment|string|Object, unit?: string): this;
   startOf(unit: string): this;
   endOf(unit: string): this;
   local(): this;
