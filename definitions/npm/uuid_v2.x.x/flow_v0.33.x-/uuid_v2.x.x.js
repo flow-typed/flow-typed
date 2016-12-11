@@ -7,7 +7,7 @@ declare module 'uuid' {
   |}, buffer?: number[] | Buffer, offset?: number): string;
   declare function v4(options?: {|
     random?: number[],
-    rng?: Function,
+    rng?: () => number[] | Buffer,
   |}, buffer?: number[] | Buffer, offset?: number): string;
   declare function parse(id: string, buffer?: number[] | Buffer, offset?: number): Buffer;
   declare function unparse(buffer?: number[] | Buffer, offset?: number): string;

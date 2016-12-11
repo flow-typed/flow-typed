@@ -7,6 +7,6 @@ declare module 'uuid' {
   |}, buffer?: number[] | Buffer, offset?: number): string;
   declare function v4(options?: {|
     random?: number[],
-    rng?: Function,
+    rng?: () => number[] | Buffer,
   |}, buffer?: number[] | Buffer, offset?: number): string;
 }
