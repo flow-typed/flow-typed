@@ -81,6 +81,7 @@ declare module "chai" {
 
         extensible: () => ExpectChain<T>,
         sealed: () => ExpectChain<T>,
+        frozen: () => ExpectChain<T>,
 
         // chai-immutable
         size: (n: number) => ExpectChain<T>,
