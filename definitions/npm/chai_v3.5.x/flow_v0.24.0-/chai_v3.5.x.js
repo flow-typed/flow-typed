@@ -80,6 +80,7 @@ declare module "chai" {
         empty: () => ExpectChain<T>,
 
         extensible: () => ExpectChain<T>,
+        sealed: () => ExpectChain<T>,
 
         // chai-immutable
         size: (n: number) => ExpectChain<T>,
