@@ -29,10 +29,10 @@ declare class Bluebird$PromiseInspection<T> {
   value(): T;
 }
 
-type Bluebird$PromisifyOptions = {|
+type Bluebird$PromisifyOptions = {
   multiArgs?: boolean,
   context: any
-|};
+};
 
 declare type Bluebird$PromisifyAllOptions = {
   suffix?: string;
