@@ -1,0 +1,46 @@
+
+
+declare module 'angular-hotkeys' {
+					
+}
+
+declare module 'hotkeys' {
+		declare interface HotkeysProvider {
+		template: string,
+		templateTitle: string,
+		includeCheatSheet: boolean,
+		cheatSheetHotkey: string,
+		cheatSheetDescription: string,
+		add(
+		combo: string | string[], callback: (event: Event, hotkey?: Hotkey) => void, action?: string, allowIn?: Array<string>, persistent?: boolean
+	): ng.hotkeys.Hotkey,
+		add(
+		combo: string | string[], description: string, callback: (event: Event, hotkey?: Hotkey) => void, action?: string, allowIn?: Array<string>, persistent?: boolean
+	): ng.hotkeys.Hotkey,
+		add(hotkeyObj: ng.hotkeys.Hotkey): ng.hotkeys.Hotkey,
+		bindTo(scope: ng.IScope): ng.hotkeys.HotkeysProviderChained,
+		del(combo: string | string[]): void,
+		del(hotkeyObj: ng.hotkeys.Hotkey): void,
+		get(combo: string | string[]): ng.hotkeys.Hotkey,
+		toggleCheatSheet(): void,
+		purgeHotkeys(): void
+	}
+
+	declare interface HotkeysProviderChained {
+		add(
+		combo: string | string[], description: string, callback: (event: Event, hotkeys: ng.hotkeys.Hotkey) => void
+	): HotkeysProviderChained,
+		add(hotkeyObj: ng.hotkeys.Hotkey): HotkeysProviderChained
+	}
+
+	declare interface Hotkey {
+		combo: string | string[],
+		description?: string,
+		callback: (event: Event, hotkey: ng.hotkeys.Hotkey) => void,
+		action?: string,
+		allowIn?: Array<string>,
+		persistent?: boolean
+	}
+
+			
+}

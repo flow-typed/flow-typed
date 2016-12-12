@@ -1,0 +1,77 @@
+
+
+declare module 'podcast' {
+		declare interface PodcastStatic {
+		new (options: IFeedOptions): PodcastStatic,
+		item(options: IItemOptions): void,
+		xml(indent?: string): string
+	}
+
+	declare interface IFeedOptions {
+		title: string,
+		description?: string,
+		generator?: string,
+		feed_url: string,
+		site_url: string,
+		image_url?: string,
+		docs?: string,
+		author: string,
+		managingEditor?: string,
+		webMaster?: string,
+		copyright?: string,
+		language?: string,
+		categories?: string[],
+		pubDate?: Date,
+		ttl?: number,
+		itunesAuthor?: string,
+		itunesSubtitle?: string,
+		itunesSummary?: string,
+		itunesOwner?: IItunesOwner,
+		itunesExplicit?: boolean,
+		itunesCategory?: IItunesCategory,
+		itunesImage?: string
+	}
+
+	declare interface IItunesOwner {
+		name: string,
+		email: string
+	}
+
+	declare interface IItunesCategory {
+		name: string,
+		subcats: IItunesSubCategory[]
+	}
+
+	declare interface IItunesSubCategory {
+		name: string,
+		subcat: string[]
+	}
+
+	declare interface IItemOptions {
+		title: string,
+		description: string,
+		url: string,
+		guid: string,
+		categories?: string[],
+		author?: string,
+		date: Date,
+		lat?: number,
+		long?: number,
+		enclosure?: {
+		url: string,
+		file?: string,
+		size?: number,
+		mime?: string
+	},
+		itunesAuthor?: string,
+		itunesExplicit?: boolean,
+		itunesSubtitle?: string,
+		itunesSummary?: string,
+		itunesDuration?: number,
+		itunesKeywords?: string[]
+	}
+
+			declare module.exports: PodcastStatic
+
+
+}

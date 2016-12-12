@@ -1,0 +1,95 @@
+
+
+declare module 'cli-color' {
+					declare module.exports: Format
+
+
+}
+
+declare module 'm' {
+		declare export interface Format {
+		(...text: any[]): string,
+		bold: Format,
+		italic: Format,
+		underline: Format,
+		blink: Format,
+		inverse: Format,
+		strike: Format,
+		black: Format,
+		red: Format,
+		green: Format,
+		yellow: Format,
+		blue: Format,
+		magenta: Format,
+		cyan: Format,
+		white: Format,
+		bgBlack: Format,
+		bgRed: Format,
+		bgGreen: Format,
+		bgYellow: Format,
+		bgBlue: Format,
+		bgMagenta: Format,
+		bgCyan: Format,
+		bgWhite: Format,
+		blackBright: Format,
+		redBright: Format,
+		greenBright: Format,
+		yellowBright: Format,
+		blueBright: Format,
+		magentaBright: Format,
+		cyanBright: Format,
+		whiteBright: Format,
+		bgBlackBright: Format,
+		bgRedBright: Format,
+		bgGreenBright: Format,
+		bgYellowBright: Format,
+		bgBlueBright: Format,
+		bgMagentaBright: Format,
+		bgCyanBright: Format,
+		bgWhiteBright: Format,
+		xterm(color: number): Format,
+		bgXterm(color: number): Format,
+		move(x: number, y: number): string,
+		moveTo(x: number, y: number): string,
+		bol(n?: number, erase?: boolean): string,
+		up(n: number): string,
+		down(n: number): string,
+		left(n: number): string,
+		right(n: number): string,
+		beep: string,
+		reset: string,
+		width: number,
+		height: number,
+		xtermSupported: boolean
+	}
+
+			
+}
+
+declare module 'cli-color/trim' {
+			declare function ansiTrim(str: string): string
+
+		declare module.exports: undefined
+
+
+}
+
+declare module 'setupThrobber' {
+		declare export interface Throbber {
+		start(): void,
+		stop(): void,
+		restart(): void
+	}
+
+			
+}
+
+declare module 'cli-color/throbber' {
+			declare function setupThrobber(
+		write: (str: string) => any, period: number, format?: clc.Format
+	): setupThrobber.Throbber
+
+		declare module.exports: undefined
+
+
+}

@@ -1,0 +1,35 @@
+
+
+declare module 'knockout.es5' {
+		declare interface KnockoutStatic {
+		track<T>(obj: T, propertyNames?: Array<string>): T,
+		untrack(obj: any, propertyNames?: Array<string>): void,
+		defineProperty<T>(obj: T, propertyName: string, evaluator: Function): T,
+		defineProperty<T>(obj: T, propertyName: string, options: KnockoutDefinePropertyOptions): T,
+		getObservable(obj: any, propertyName: string): KnockoutObservable<any>,
+		valueHasMutated(obj: any, propertyName: string): void,
+		es5: KnockoutEs5
+	}
+
+	declare interface KnockoutEs5 {
+		getAllObservablesForObject<T>(obj: T, createIfNotDefined?: boolean): T,
+		notifyWhenPresentOrFutureArrayValuesMutate<T>(ko: KnockoutStatic, observable: KnockoutObservable<T>): void,
+		isTracked<T>(obj: T, propertyName: string): boolean
+	}
+
+	declare interface KnockoutDefinePropertyOptions {
+		get(): any,
+		set(value: any): void
+	}
+
+	declare interface Array<T> {
+		remove(item: T): T[],
+		removeAll(items: T[]): T[],
+		removeAll(): T[],
+		destroy(item: T): void,
+		destroyAll(items: T[]): void,
+		destroyAll(): void
+	}
+
+			
+}
