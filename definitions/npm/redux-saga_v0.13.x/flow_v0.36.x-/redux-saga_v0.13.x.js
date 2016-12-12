@@ -66,9 +66,10 @@ declare module 'redux-saga' {
 
   declare export var buffers: {
     none: () => Buffer,
-    fixed: (limit: number) => Buffer,
-    dropping: (limit: number) => Buffer,
-    sliding: (limit: number) => Buffer,
+    fixed: (limit: ?number) => Buffer,
+    dropping: (limit: ?number) => Buffer,
+    sliding: (limit: ?number) => Buffer,
+    expanding: (initialSize: ?number) => Buffer,
   }
 
   declare export var channel: (buffer?: Buffer) => Channel;
@@ -88,23 +89,37 @@ declare module 'redux-saga' {
   declare type Saga5<Y: IOEffect, R, N, T1, T2, T3, T4, T5> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => Generator<Y, R, N>;
   declare type Saga6<Y: IOEffect, R, N, T1, T2, T3, T4, T5, T6> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => Generator<Y, R, N>;
 
-  declare interface TakeXRet extends Generator<*,*,*> {
+  declare interface FsmIterator extends Generator<*,*,*> {
     name: string,
   }
 
   declare type TakeXFn =
-     & (<Y, R, N, Fn: Saga0<Y, R, N>>(pattern: Pattern, saga: Fn) => TakeXRet)
-     & (<T1, Y, R, N, Fn: Saga1<Y, R, N, T1>>(pattern: Pattern, saga: Fn, t1: T1) => TakeXRet)
-     & (<T1, T2, Y, R, N, Fn: Saga2<Y, R, N, T1, T2>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2) => TakeXRet)
-     & (<T1, T2, T3, Y, R, N, Fn: Saga3<Y, R, N, T1, T2, T3>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3) => TakeXRet)
-     & (<T1, T2, T3, T4, Y, R, N, Fn: Saga4<Y, R, N, T1, T2, T3, T4>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4) => TakeXRet)
-     & (<T1, T2, T3, T4, T5, Y, R, N, Fn: Saga5<Y, R, N, T1, T2, T3, T4, T5>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => TakeXRet)
-     & (<T1, T2, T3, T4, T5, T6, Y, R, N, Fn: Saga6<Y, R, N, T1, T2, T3, T4, T5, T6>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => TakeXRet)
-     & (<T, Y, R, N, Fn: SagaSpread<Y, R, N, T>>(pattern: Pattern, saga: Fn, ...rest: Array<T>) => TakeXRet)
+     & (<Y, R, N, Fn: Saga0<Y, R, N>>(pattern: Pattern, saga: Fn) => FsmIterator)
+     & (<T1, Y, R, N, Fn: Saga1<Y, R, N, T1>>(pattern: Pattern, saga: Fn, t1: T1) => FsmIterator)
+     & (<T1, T2, Y, R, N, Fn: Saga2<Y, R, N, T1, T2>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2) => FsmIterator)
+     & (<T1, T2, T3, Y, R, N, Fn: Saga3<Y, R, N, T1, T2, T3>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3) => FsmIterator)
+     & (<T1, T2, T3, T4, Y, R, N, Fn: Saga4<Y, R, N, T1, T2, T3, T4>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4) => FsmIterator)
+     & (<T1, T2, T3, T4, T5, Y, R, N, Fn: Saga5<Y, R, N, T1, T2, T3, T4, T5>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => FsmIterator)
+     & (<T1, T2, T3, T4, T5, T6, Y, R, N, Fn: Saga6<Y, R, N, T1, T2, T3, T4, T5, T6>>(pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => FsmIterator)
+     & (<T, Y, R, N, Fn: SagaSpread<Y, R, N, T>>(pattern: Pattern, saga: Fn, ...rest: Array<T>) => FsmIterator);
 
   declare export var takeEvery: TakeXFn;
   declare export var takeLatest: TakeXFn;
+
+  declare type ThrottleFn =
+     & (<Y, R, N, Fn: Saga0<Y, R, N>>(delayLength: number, pattern: Pattern, saga: Fn) => FsmIterator)
+     & (<T1, Y, R, N, Fn: Saga1<Y, R, N, T1>>(delayLength: number, pattern: Pattern, saga: Fn, t1: T1) => FsmIterator)
+     & (<T1, T2, Y, R, N, Fn: Saga2<Y, R, N, T1, T2>>(delayLength: number, pattern: Pattern, saga: Fn, t1: T1, t2: T2) => FsmIterator)
+     & (<T1, T2, T3, Y, R, N, Fn: Saga3<Y, R, N, T1, T2, T3>>(delayLength: number, pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3) => FsmIterator)
+     & (<T1, T2, T3, T4, Y, R, N, Fn: Saga4<Y, R, N, T1, T2, T3, T4>>(delayLength: number, pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4) => FsmIterator)
+     & (<T1, T2, T3, T4, T5, Y, R, N, Fn: Saga5<Y, R, N, T1, T2, T3, T4, T5>>(delayLength: number, pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => FsmIterator)
+     & (<T1, T2, T3, T4, T5, T6, Y, R, N, Fn: Saga6<Y, R, N, T1, T2, T3, T4, T5, T6>>(delayLength: number, pattern: Pattern, saga: Fn, t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => FsmIterator)
+     & (<T, Y, R, N, Fn: SagaSpread<Y, R, N, T>>(delayLength: number, pattern: Pattern, saga: Fn, ...rest: Array<T>) => FsmIterator);
+
+  declare export var throttle: ThrottleFn;
+
   declare export var delay: <T>(ms: number, val?: T) => Promise<T>;
+  declare export var CANCEL: Symbol;
 
   declare type RunSagaCb = (input: any) => any;
 
@@ -124,6 +139,8 @@ declare module 'redux-saga' {
   declare export var utils: {
     createMockTask: () => Task,
   };
+
+  declare export var effects: {};
 
   declare type MiddlewareRunFn =
     & (<Y, R, N, Fn: SagaList<Y, R, N>>(saga: Fn) => Task)
@@ -146,6 +163,7 @@ declare module 'redux-saga' {
     options?: {
       sagaMonitor?: SagaMonitor,
       logger?: Logger,
+      onError?: Function,
     }
   ) => SagaMiddleware;
 
@@ -248,6 +266,10 @@ declare module 'redux-saga/effects' {
 
   declare type CancelledEffect = $npm$ReduxSaga$IOEffect & {
     CANCELLED: Object,
+  }
+
+  declare type FlushEffect = $npm$ReduxSaga$IOEffect & {
+    FLUSH: Channel,
   }
 
   declare type Pattern = string | Array<string> | (action: Object) => boolean;
@@ -466,10 +488,15 @@ declare module 'redux-saga/effects' {
     <T: {[key: string]: IOEffect}>(effects: T): RaceEffect<T>;
   }
 
+  declare type FlushFn = {
+    (channel: Channel): FlushEffect;
+  }
+
   declare module.exports: {
     take: TakeFn,
     takem: TakeFn,
     put: PutFn,
+    race: RaceFn,
     call: CallFn,
     apply: ApplyFn,
     cps: CpsFn,
@@ -479,7 +506,7 @@ declare module 'redux-saga/effects' {
     cancel: CancelFn,
     select: SelectFn,
     actionChannel: ActionChannelFn,
-    race: RaceFn,
     cancelled: () => CancelledEffect,
+    flush: FlushFn,
   }
 }
