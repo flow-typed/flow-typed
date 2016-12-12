@@ -135,6 +135,7 @@ declare class express$Router extends express$Route {
   use(...middleware: Array<express$Middleware>): this;
   use(path: string|RegExp|string[], ...middleware: Array<express$Middleware>): this;
   use(path: string, router: express$Router): this;
+  handle(req: http$IncomingMessage, res: http$ServerResponse, next: express$NextFunction): void;
 }
 
 declare class express$Application extends express$Router mixins events$EventEmitter {
@@ -157,6 +158,10 @@ declare class express$Application extends express$Router mixins events$EventEmit
   //   get(name: string): mixed;
   set(name: string, value: mixed): mixed;
   render(name: string, optionsOrFunction: {[name: string]: mixed}, callback: express$RenderCallback): void;
+  handle(req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
+
+  // Can't use regular callable signature syntax due to https://github.com/facebook/flow/issues/3084
+  $call: (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction) => void;
 }
 
 declare module 'express' {
