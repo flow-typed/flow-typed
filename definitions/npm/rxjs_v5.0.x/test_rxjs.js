@@ -159,3 +159,5 @@ const subObserver: rxjs$IObserver<SubFoo> = (null: any);
 
 const groupedSubObservable: Observable<Observable<SubFoo>> =
   subObservable.groupBy(subfoo => subfoo.y);
+
+((Observable.defer(() => Promise.resolve(1))): Observable<number>);
