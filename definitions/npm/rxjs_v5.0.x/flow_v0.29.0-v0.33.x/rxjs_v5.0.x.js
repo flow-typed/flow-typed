@@ -118,6 +118,8 @@ declare class rxjs$Observable<+T> {
 
   distinctUntilChanged(compare?: (x: T, y: T) => boolean): rxjs$Observable<T>;
 
+  distinct<U>(keySelector?: (value: T) => U, flushes?: rxjs$Observable<mixed>): rxjs$Observable<T>;
+
   distinctUntilKeyChanged(key: string, compare?: (x: mixed, y: mixed) => boolean): rxjs$Observable<T>;
 
   elementAt(index: number, defaultValue?: T): rxjs$Observable<T>;
@@ -489,12 +491,14 @@ declare class rxjs$Observable<+T> {
   static forkJoin<A, B>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
+    _: void,
   ): rxjs$Observable<[A, B]>;
 
   static forkJoin<A, B, C>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
+    _: void,
   ): rxjs$Observable<[A, B, C]>;
 
   static forkJoin<A, B, C, D>(
@@ -502,6 +506,7 @@ declare class rxjs$Observable<+T> {
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
     d: rxjs$Observable<D>,
+    _: void,
   ): rxjs$Observable<[A, B, C, D]>;
 
   static forkJoin<A, B, C, D, E>(
@@ -510,6 +515,7 @@ declare class rxjs$Observable<+T> {
     c: rxjs$Observable<C>,
     d: rxjs$Observable<D>,
     e: rxjs$Observable<E>,
+    _: void,
   ): rxjs$Observable<[A, B, C, D, E]>;
 
   static forkJoin<A, B, C, D, E, F>(
@@ -519,6 +525,7 @@ declare class rxjs$Observable<+T> {
     d: rxjs$Observable<D>,
     e: rxjs$Observable<E>,
     f: rxjs$Observable<F>,
+    _: void,
   ): rxjs$Observable<[A, B, C, D, E, F]>;
 
   static forkJoin<A, B, C, D, E, F, G>(
@@ -529,6 +536,7 @@ declare class rxjs$Observable<+T> {
     e: rxjs$Observable<E>,
     f: rxjs$Observable<F>,
     g: rxjs$Observable<G>,
+    _: void,
   ): rxjs$Observable<[A, B, C, D, E, F, G]>;
 
   static forkJoin<A, B, C, D, E, F, G, H>(
@@ -540,6 +548,7 @@ declare class rxjs$Observable<+T> {
     f: rxjs$Observable<F>,
     g: rxjs$Observable<G>,
     h: rxjs$Observable<H>,
+    _: void,
   ): rxjs$Observable<[A, B, C, D, E, F, G, H]>;
 
   withLatestFrom<A>(
