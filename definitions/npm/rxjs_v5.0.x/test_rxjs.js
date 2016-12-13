@@ -161,3 +161,6 @@ const groupedSubObservable: Observable<Observable<SubFoo>> =
   subObservable.groupBy(subfoo => subfoo.y);
 
 ((Observable.defer(() => Promise.resolve(1))): Observable<number>);
+
+(numbers.repeat(): Observable<number>);
+(numbers.repeat(1): Observable<number>);
