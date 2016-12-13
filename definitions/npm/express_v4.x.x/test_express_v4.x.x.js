@@ -134,3 +134,18 @@ app.use((err: ?Error, req, res, next) => {
     next();
     next(err);
 });
+
+app.use((req: $Request, res: $Response, next) => {
+  next()
+
+  res.on('finish', () => {
+    if (res.statusCode >= 200 && res.statusCode < 400) {
+      console.log('response success')
+    } else {
+      console.log('response error')
+    }
+
+    // $ExpectError
+    res.statusCode.toLowerCase()
+  })
+})
