@@ -46,24 +46,24 @@ type DragSourceType<P> =
 type DragSourceSpec<D, P, S> = {
   beginDrag: (
     props: P,
-    monitor?: DragSourceMonitor,
-    component?: React$Component<D, P, S>
+    monitor: DragSourceMonitor,
+    component: React$Component<D, P, S>
   ) => Object,
 
   endDrag?: (
     props: P,
-    monitor?: DragSourceMonitor,
-    component?: ?React$Component<D, P, S>
+    monitor: DragSourceMonitor,
+    component: ?React$Component<D, P, S>
   ) => void,
 
   canDrag?: (
     props: P,
-    monitor?: DragSourceMonitor
+    monitor: DragSourceMonitor
   ) => boolean,
 
   isDragging?: (
     props: P,
-    monitor?: DragSourceMonitor
+    monitor: DragSourceMonitor
   ) => boolean
 };
 
@@ -128,19 +128,19 @@ type DropTargetTypes<P> =
 type DropTargetSpec<D, P, S> = {
   drop?: (
     props: P,
-    monitor?: DropTargetMonitor,
-    component?: React$Component<D, P, S>
+    monitor: DropTargetMonitor,
+    component: React$Component<D, P, S>
   ) => ?Object,
 
   hover?: (
     props: P,
-    monitor?: DropTargetMonitor,
-    component?: React$Component<D, P, S>
+    monitor: DropTargetMonitor,
+    component: React$Component<D, P, S>
   ) => void,
 
   canDrop?: (
     props: P,
-    monitor?: DropTargetMonitor
+    monitor: DropTargetMonitor
   ) => boolean
 };
 
