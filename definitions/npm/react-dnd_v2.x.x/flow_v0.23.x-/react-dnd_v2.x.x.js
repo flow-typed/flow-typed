@@ -106,17 +106,17 @@ type ConnectDragPreview = <T : ElementOrNode>(
   options?: DragPreviewOptions
 ) => ?T;
 
-type DragSourceCollector = (
+type DragSourceCollector<T> = (
   connect: DragSourceConnector,
   monitor: DragSourceMonitor
-) => Object;
+) => T;
 
-type DragSource = <D, P, S, C: React$Component<D, P, S>>(
+type DragSource = <D, P, S, CP, C: React$Component<D, P, S>>(
   type: DragSourceType<P>,
   spec: DragSourceSpec<D, P, S>,
-  collect: DragSourceCollector,
+  collect: DragSourceCollector<CP>,
   options?: DndOptions<P>
-) => (component: Class<C> | (props: P) => ?React$Element<*>) => Class<DndComponent<C, D, P, S>>;
+) => (component: Class<C> | (props: P) => ?React$Element<*>) => Class<DndComponent<C, D, $Diff<P, CP>, S>>;
 
 // Drop Target
 // ----------------------------------------------------------------------
@@ -166,15 +166,15 @@ type ConnectDropTarget = <T : ElementOrNode>(
   elementOrNode: T
 ) => ?T;
 
-type DropTarget = <D, P, S, C: React$Component<D, P, S>>(
+type DropTarget = <D, P, S, CP, C: React$Component<D, P, S>>(
   types: DropTargetTypes<P>,
   spec: DropTargetSpec<D, P, S>,
   collect: (
     connect: DropTargetConnector,
     monitor: DropTargetMonitor
-  ) => Object,
+  ) => CP,
   options?: DndOptions<P>
-) => (component: Class<C>) => Class<DndComponent<C, D, P, S>>;
+) => (component: Class<C> | (props: P) => ?React$Element<*>) => Class<DndComponent<C, D, $Diff<P, CP>, S>>;
 
 // Drag Layer
 // ----------------------------------------------------------------------
@@ -189,10 +189,10 @@ type DragLayerMonitor = {
   getSourceClientOffset: () => ClientOffset;
 }
 
-type DragLayer = <D, P, S, C: React$Component<D, P, S>>(
-  collect: (monitor: DragLayerMonitor) => Object,
+type DragLayer = <D, P, S, CP, C: React$Component<D, P, S>>(
+  collect: (monitor: DragLayerMonitor) => CP,
   options?: DndOptions<P>
-) => (component: Class<C>) => Class<DndComponent<C, D, P, S>>;
+) => (component: Class<C> | (props: P) => ?React$Element<*>) => Class<DndComponent<C, D, $Diff<P, CP>, S>>;
 
 // Drag Drop Context
 // ----------------------------------------------------------------------
