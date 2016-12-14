@@ -35,6 +35,10 @@ class Knight extends React.Component {
     img.onload = () => { this.props.connectDragPreview(img) };
   }
 
+  foo(): string {
+    return 'foo';
+  }
+
   render() {
     const { connectDragSource, isDragging } = this.props;
     return connectDragSource(
@@ -56,9 +60,17 @@ Knight.defaultProps = {
 };
 
 const DndKnight = DragSource('knight', knightSource, knightCollect)(Knight);
-(DndKnight: Class<DndComponent<KnightProps, KnightProps, void>>);
+(DndKnight: Class<DndComponent<Knight, KnightProps, KnightProps, void>>);
 // $ExpectError
 (DndKnight: number);
+
+const x: DndKnight = ({}:any);
+// $ExpectError
+x.foo();
+
+(x.getDecoratedComponentInstance().foo(): string);
+// $ExpectError
+(x.getDecoratedComponentInstance().foo(): number);
 
 // Test Drop Target
 // ----------------------------------------------------------------------
@@ -162,7 +174,7 @@ BoardSquare.defaultProps = {
 };
 
 const DndBoardSquare = DropTarget('boardsquare', boardSquareTarget, boardSquareCollect)(BoardSquare);
-(DndBoardSquare: Class<DndComponent<BoardSquareProps, BoardSquareProps, void>>);
+(DndBoardSquare: Class<DndComponent<BoardSquare, BoardSquareProps, BoardSquareProps, void>>);
 // $ExpectError
 (DndBoardSquare: string);
 
@@ -202,7 +214,7 @@ CustomDragLayer.defaultProps = {
 };
 
 const DndCustomDragLayer = DragLayer(dragLayerCollect)(CustomDragLayer);
-(DndCustomDragLayer: Class<DndComponent<CustomDragLayerProps, CustomDragLayerProps, void>>);
+(DndCustomDragLayer: Class<DndComponent<CustomDragLayer, CustomDragLayerProps, CustomDragLayerProps, void>>);
 // $ExpectError
 (DndCustomDragLayer: number);
 
@@ -232,7 +244,7 @@ Board.defaultProps = {
 };
 
 const DndBoard = DragDropContext({})(Board);
-(DndBoard: Class<ContextComponent<BoardProps, BoardProps, void>>);
+(DndBoard: Class<ContextComponent<Board, BoardProps, BoardProps, void>>);
 // $ExpectError
 (DndBoard: string);
 
@@ -266,4 +278,4 @@ const TestFuncComp = (props: TestProps) => {
 }
 
 const DndTestFuncComp = DragSource('test', testSource, testCollect)(TestFuncComp);
-(DndTestFuncComp: Class<DndComponent<void, TestProps, void>>);
+(DndTestFuncComp: Class<DndComponent<*, void, TestProps, void>>);

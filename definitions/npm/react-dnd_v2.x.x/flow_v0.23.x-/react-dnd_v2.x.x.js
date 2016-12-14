@@ -16,23 +16,23 @@ type ElementOrNode = React$Element<any> | HTMLElement;
 
 // Decorated Components
 // ----------------------------------------------------------------------
-declare class DndComponent<D, P, S> extends React$Component<D, P, S> {
+declare class DndComponent<C, D, P, S> extends React$Component<D, P, S> {
   static defaultProps: D;
   props: P;
   state: S;
 
-  static DecoratedComponent: Class<this>;
-  getDecoratedComponentInstance(): this;
+  static DecoratedComponent: Class<C>;
+  getDecoratedComponentInstance(): C;
   getHandlerId(): Identifier;
 }
 
-declare class ContextComponent<D, P, S> extends React$Component<D, P, S> {
+declare class ContextComponent<C, D, P, S> extends React$Component<D, P, S> {
   static defaultProps: D;
   props: P;
   state: S;
 
-  static DecoratedComponent: Class<this>;
-  getDecoratedComponentInstance(): this;
+  static DecoratedComponent: Class<C>;
+  getDecoratedComponentInstance(): C;
   // getManager is not yet documented in ReactDnd Docs
   getManager(): any;
 }
@@ -116,7 +116,7 @@ type DragSource = <D, P, S, C: React$Component<D, P, S>>(
   spec: DragSourceSpec<D, P, S>,
   collect: DragSourceCollector,
   options?: DndOptions<P>
-) => (component: Class<C>) => Class<DndComponent<D, P, S>>;
+) => (component: Class<C> | (props: P) => ?React$Element<*>) => Class<DndComponent<C, D, P, S>>;
 
 // Drop Target
 // ----------------------------------------------------------------------
@@ -174,7 +174,7 @@ type DropTarget = <D, P, S, C: React$Component<D, P, S>>(
     monitor: DropTargetMonitor
   ) => Object,
   options?: DndOptions<P>
-) => (component: Class<C>) => Class<DndComponent<D, P, S>>;
+) => (component: Class<C>) => Class<DndComponent<C, D, P, S>>;
 
 // Drag Layer
 // ----------------------------------------------------------------------
@@ -192,13 +192,13 @@ type DragLayerMonitor = {
 type DragLayer = <D, P, S, C: React$Component<D, P, S>>(
   collect: (monitor: DragLayerMonitor) => Object,
   options?: DndOptions<P>
-) => (component: Class<C>) => Class<DndComponent<D, P, S>>;
+) => (component: Class<C>) => Class<DndComponent<C, D, P, S>>;
 
 // Drag Drop Context
 // ----------------------------------------------------------------------
 type DragDropContext = <D, P, S, C: React$Component<D, P, S>>(
   backend: mixed
-) => (component: Class<C>) => Class<ContextComponent<D, P, S>>;
+) => (component: Class<C>) => Class<ContextComponent<C, D, P, S>>;
 
 // Top-level API
 // ----------------------------------------------------------------------
