@@ -111,6 +111,11 @@ _.find([1, 2, 3], {val: 1});
 (_.map({hello: 1, world: 2}, function(v, k) { return k.length }): Array<number>);
 // $ExpectError This type is incompatible with string
 (_.map({hello: 1, world: 2}, function(v, k) { return k * 2 }): Array<number>);
+
+(_.mapObject({foo: 1, bar: 2}, function (v, k) {return (k.length + v).toString()}): {[key: string]: string});
+// $ExpectError This type is incompatible with number
+(_.mapObject({foo: 1, bar: 2}, function (v, k) {return (k.length + v).toString()}): number);
+
 (_.pluck([{name: 'bob'}, {name: 'jane'}], 'name'): Array<string>);
 (_.reduce([1, 2, 3], function(m, o) { return m + o }, 0): number);
 (_.all([2, 4, 5], function(i) { return i % 2 == 0 }): boolean);
