@@ -166,7 +166,7 @@ declare module "underscore" {
 
   declare function values<K, V>(o: {[key: K]: V}): V[];
 
-  // TODO: mapObject
+  declare function mapObject<K, V>(o: {[key: K]: V}): {[key: K]: any};
 
   declare function pairs<T>(o: {[key:string]: T}): Array<[string, T]>;
 
