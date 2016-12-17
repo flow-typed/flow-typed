@@ -1,4 +1,3 @@
-// @flow
 declare module 'react-highlight-words' {
   declare type Props = {
     autoEscape?: bool,

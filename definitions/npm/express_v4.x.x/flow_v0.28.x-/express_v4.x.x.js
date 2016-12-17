@@ -1,4 +1,3 @@
-// @flow
 import type { Server } from 'http';
 
 declare type express$RouterOptions = {

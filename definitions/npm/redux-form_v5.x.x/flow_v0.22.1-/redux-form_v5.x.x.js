@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 
 declare module 'redux-form' {
