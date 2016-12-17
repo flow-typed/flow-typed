@@ -1,4 +1,4 @@
-import type { Dispatch, Store } from 'redux'
+import redux from 'redux'
 
 declare module 'react-redux' {
 
@@ -14,7 +14,7 @@ declare module 'react-redux' {
 
   declare type MapStateToProps<S, OP: Object, SP: Object> = (state: S, ownProps: OP) => SP | MapStateToProps<S, OP, SP>;
 
-  declare type MapDispatchToProps<A, OP: Object, DP: Object> = ((dispatch: Dispatch<A>, ownProps: OP) => DP) | DP;
+  declare type MapDispatchToProps<A, OP: Object, DP: Object> = ((dispatch: redux.Dispatch<A>, ownProps: OP) => DP) | DP;
 
   declare type MergeProps<SP, DP: Object, OP: Object, P: Object> = (stateProps: SP, dispatchProps: DP, ownProps: OP) => P;
 
@@ -35,7 +35,7 @@ declare module 'react-redux' {
     <Def, St>(component: Class<React$Component<Def, P, St>>): ConnectedComponentClass<OP, P, Def, St>;
   };
 
-  declare class Provider<S, A> extends React$Component<void, { store: Store<S, A>, children?: any }, void> { }
+  declare class Provider<S, A> extends React$Component<void, { store: redux.Store<S, A>, children?: any }, void> { }
 
   declare type ConnectOptions = {
     pure?: boolean,
@@ -46,21 +46,21 @@ declare module 'react-redux' {
 
   declare function connect<A, OP>(
     ...rest: Array<void> // <= workaround for https://github.com/facebook/flow/issues/2360
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<{ dispatch: redux.Dispatch<A> } & OP>>;
 
   declare function connect<A, OP>(
     mapStateToProps: Null,
     mapDispatchToProps: Null,
     mergeProps: Null,
     options: ConnectOptions
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<{ dispatch: redux.Dispatch<A> } & OP>>;
 
   declare function connect<S, A, OP, SP>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: Null,
     mergeProps: Null,
     options?: ConnectOptions
-  ): Connector<OP, $Supertype<SP & { dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<SP & { dispatch: redux.Dispatch<A> } & OP>>;
 
   declare function connect<A, OP, DP>(
     mapStateToProps: Null,
