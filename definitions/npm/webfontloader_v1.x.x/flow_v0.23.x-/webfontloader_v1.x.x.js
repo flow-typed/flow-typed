@@ -1,5 +1,3 @@
-// @flow
-
 declare module 'webfontloader' {
   declare type WebFontConfig = {
     loading?: () => mixed,

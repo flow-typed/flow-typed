@@ -1,5 +1,3 @@
-// @flow
-
 declare module 'fetch-ponyfill' {
 
   declare type InitOptions = {

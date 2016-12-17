@@ -1,4 +1,3 @@
-// @flow
 declare module "paths-js/all" {
 
   declare type Point = [number, number];

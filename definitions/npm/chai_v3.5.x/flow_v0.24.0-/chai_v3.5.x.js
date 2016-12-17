@@ -1,4 +1,3 @@
-/* @flow */
 declare module "chai" {
 
     declare type ExpectChain<T> = {
