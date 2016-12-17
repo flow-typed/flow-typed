@@ -187,13 +187,21 @@ type JestExpectType = {
    */
   toHaveBeenCalledWith(...args: Array<any>): void,
   /**
+   *
+   */
+  toHaveProperty(propPath: string, value?: any): void,
+  /**
    * Use .toMatch to check that a string matches a regular expression.
    */
   toMatch(regexp: RegExp): void,
   /**
+   * Use .toMatchObject to check that a javascript object matches a subset of the properties of an object.
+   */
+  toMatchObject(object: Object): void,
+  /**
    * This ensures that a React component matches the most recent snapshot.
    */
-  toMatchSnapshot(): void,
+  toMatchSnapshot(name?: string): void,
   /**
    * Use .toThrow to test that a function throws when it is called.
    */
@@ -385,6 +393,12 @@ declare var expect: {
   (value: any): JestExpectType,
   /** Add additional Jasmine matchers to Jest's roster */
   extend(matchers: {[name:string]: JestMatcher}): void,
+  assertions(expectedAssertions: number): void,
+  any(value: mixed): JestAsymmetricEqualityType,
+  anything(): void,
+  arrayContaining(value: Array<mixed>): void,
+  objectContaining(value: Object): void,
+  stringMatching(value: string): void,
 };
 
 // TODO handle return type

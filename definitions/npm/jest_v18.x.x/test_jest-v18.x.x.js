@@ -15,6 +15,10 @@ expect(true).toBe(true)
 expect(5).toBeGreaterThan(3)
 expect(5).toBeLessThan(8)
 expect('jester').toContain('jest')
+expect({foo: 'bar'}).toHaveProperty('foo');
+expect({foo: 'bar'}).toHaveProperty('foo', 'bar');
+expect('foo').toMatchSnapshot('snapshot name');
+expect({foo: 'bar'}).toMatchObject({baz: 'qux'});
 
 mockFn('a')
 expect('someVal').toBeCalled()
@@ -79,3 +83,13 @@ jest
 jest
   .resetModules()
   .resetModules();
+
+expect.assertions(1);
+
+expect.anything();
+expect.any(Error);
+expect.objectContaining({
+  foo: 'bar'
+});
+expect.arrayContaining(['red', 'blue']);
+expect.stringMatching('*this part*');
