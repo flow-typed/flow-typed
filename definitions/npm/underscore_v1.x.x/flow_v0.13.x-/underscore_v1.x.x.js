@@ -240,7 +240,7 @@ declare module "underscore" {
   // TODO: unescape
   // TODO: result
   // TODO: now
-  // TODO: template
+  declare function template(templateText: string): (values: {[key: string]: string}) => string;
 
   /**
    * Chaining
