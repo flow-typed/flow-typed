@@ -187,6 +187,11 @@ type JestExpectType = {
    */
   toHaveBeenCalledWith(...args: Array<any>): void,
   /**
+   * Check that an object has a .length property and it is set to a certain
+   * numeric value.
+   */
+  toHaveLength(number: number): void,
+  /**
    *
    */
   toHaveProperty(propPath: string, value?: any): void,

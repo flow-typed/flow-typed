@@ -95,3 +95,5 @@ expect.arrayContaining(['red', 'blue']);
 expect.stringMatching('*this part*');
 
 test.concurrent('test', () => {});
+
+expect([1, 2, 3]).toHaveLength(3);
