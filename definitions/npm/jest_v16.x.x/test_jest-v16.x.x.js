@@ -46,3 +46,5 @@ expect(() => {
 expect(() => {
     throw err;
 }).toThrowError(err);
+
+test.concurrent('test', () => {});

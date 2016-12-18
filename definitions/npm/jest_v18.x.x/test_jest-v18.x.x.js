@@ -93,3 +93,5 @@ expect.objectContaining({
 });
 expect.arrayContaining(['red', 'blue']);
 expect.stringMatching('*this part*');
+
+test.concurrent('test', () => {});

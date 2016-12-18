@@ -79,3 +79,5 @@ jest
 jest
   .resetModules()
   .resetModules();
+
+test.concurrent('test', () => {});
