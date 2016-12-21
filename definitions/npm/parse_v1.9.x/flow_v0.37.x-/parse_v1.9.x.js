@@ -22,8 +22,8 @@ declare type $npm$parse$Parse = {
   File: Class<$npm$parse$ParseFile>,
   GeoPoint: Class<$npm$parse$ParseGeoPoint>,
   Installation: any, // TODO
-  LiveQuery: Class<LiveQuery>,
-  LiveQueryClient: Class<LiveQueryClient>,
+  LiveQuery: any,
+  LiveQueryClient: any,
   Object: Class<$npm$parse$ParseObject>,
   Promise: any, // TODO
   Push: any, // TODO
@@ -56,11 +56,6 @@ declare type $npm$parse$Pointer = {
   className: string,
   objectId: string
 }
-
-// =========================
-// Promises results
-// =========================
-declare type $npm$parse$MixedPromiseResult = Promise<$npm$parse$ParseObject | $npm$parse$ParseUser | $npm$parse$ParseRole>
 
 // =========================
 // ParseConfig
@@ -104,6 +99,8 @@ declare class $npm$parse$ParseGeoPoint {
 // =========================
 // ParseQuery
 // =========================
+declare type $npm$parse$ParseEntity = $npm$parse$ParseObject | $npm$parse$ParseUser | $npm$parse$ParseRole
+
 declare type $npm$parse$QueryJSON = {
   where: {
     [attr: string]: mixed;
@@ -121,10 +118,10 @@ declare class $npm$parse$ParseQuery {
   static(objectClass: string | $npm$parse$ParseObject): $npm$parse$ParseQuery,
   className: string,
   toJSON(): $npm$parse$QueryJSON,
-  get(objectId: string, options?: $npm$parse$FullOptions): $npm$parse$MixedPromiseResult,
-  find(options?: $npm$parse$FullOptions): $npm$parse$MixedPromiseResult,
-  count(options?: $npm$parse$FullOptions): $npm$parse$MixedPromiseResult,
-  first(options?: $npm$parse$FullOptions): $npm$parse$MixedPromiseResult,
+  get(objectId: string, options?: $npm$parse$FullOptions): Promise<?$npm$parse$ParseEntity>,
+  find(options?: $npm$parse$FullOptions): Promise<Array<$npm$parse$ParseEntity>>,
+  count(options?: $npm$parse$FullOptions): number,
+  first(options?: $npm$parse$FullOptions): Promise<?$npm$parse$ParseEntity>,
   each(callback: (obj: $npm$parse$ParseObject) => any, options?: $npm$parse$FullOptions & { batchSize?: number }): $npm$parse$MixedPromiseResult,
   equalTo(key: string, value: mixed): $npm$parse$ParseQuery,
   notEqualTo(key: string, value: mixed): $npm$parse$ParseQuery,
@@ -208,7 +205,7 @@ declare class $npm$parse$ParseACL {
 // =========================
 declare class $npm$parse$ParseObject {
   static(className: ?string | { className: string, [attr: string]: mixed }, attributes?: { [attr: string]: mixed }, options?: { ignoreValidation: boolean }): $npm$parse$ParseObject,
-  id: ?string,
+  id: string,
   className: string,
   toJSON(seen: Array<any> | void): $npm$parse$AttributeMap,
   equals(other: mixed): boolean,
@@ -236,7 +233,7 @@ declare class $npm$parse$ParseObject {
   revert(): void,
   clear(): $npm$parse$ParseObject | boolean,
   fetch(options: $npm$parse$RequestOptions): Promise<any>,
-  save(arg1: ?string | { [attr: string]: mixed }, arg2?: $npm$parse$FullOptions | mixed, arg3?: $npm$parse$FullOptions): Promise<$npm$parse$ParseObject>,
+  save(arg1: ?string | { [attr: string]: mixed }, arg2?: $npm$parse$FullOptions, arg3?: $npm$parse$FullOptions): Promise<$npm$parse$ParseObject>,
   destroy(options: $npm$parse$RequestOptions): Promise<any>,
   static fetchAll(list: Array<$npm$parse$ParseObject>, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseObject>,
   static fetchAllIfNeeded(list: Array<$npm$parse$ParseObject>, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseObject>,
@@ -255,15 +252,15 @@ declare class $npm$parse$ParseObject {
 declare class $npm$parse$ParseUser extends $npm$parse$ParseObject {
   static(attributes: ?$npm$parse$AttributeMap): $npm$parse$ParseUser,
   isCurrent(): boolean,
-  getUsername(): ?string,
+  getUsername(): string,
   setUsername(username: string): void,
   setPassword(password: string): void,
   getEmail(): ?string,
   setEmail(email: string): void,
-  getSessionToken(): ?string,
+  getSessionToken(): string,
   authenticated(): boolean,
-  signUp(attrs: $npm$parse$AttributeMap, options?: $npm$parse$FullOptions): Promise<$npm$parse$ParseUser>,
-  logIn(options: $npm$parse$FullOptions): Promise<$npm$parse$ParseUser>,
+  signUp(attrs?: $npm$parse$AttributeMap, options?: $npm$parse$FullOptions): Promise<$npm$parse$ParseUser>,
+  logIn(options?: $npm$parse$FullOptions): Promise<$npm$parse$ParseUser>,
   save(...args: Array<any>): Promise<$npm$parse$ParseUser>,
   destroy(...args: Array<any>): Promise<$npm$parse$ParseUser>,
   fetch(...args: Array<any>): Promise<$npm$parse$ParseUser>,
@@ -271,8 +268,8 @@ declare class $npm$parse$ParseUser extends $npm$parse$ParseObject {
   static extend(protoProps: {[prop: string]: any}, classProps: {[prop: string]: any}): void,
   static current(): ?$npm$parse$ParseUser,
   static currentAsync(): Promise<?$npm$parse$ParseUser>,
-  static signUp(username: string, password: string, attrs?: $npm$parse$AttributeMap, options?: $npm$parse$RequestOptions): void,
-  static logIn(username: string, password: string, options?: $npm$parse$RequestOptions): void,
+  static signUp(username: string, password: string, attrs?: $npm$parse$AttributeMap, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseUser>,
+  static logIn(username: string, password: string, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseUser>,
   static become(sessionToken: string, options?: $npm$parse$RequestOptions): void,
   static logOut(): void,
   static requestPasswordReset(email: string, options?: $npm$parse$RequestOptions): void,
