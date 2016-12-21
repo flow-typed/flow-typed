@@ -366,6 +366,13 @@ declare var it: {
    * @param {Function} Test
    */
   skip(name: string, fn?: Function): ?Promise<void>,
+  /**
+   * Run the test concurrently
+   *
+   * @param {string} Name of Test
+   * @param {Function} Test
+   */
+  concurrent(name: string, fn?: Function): ?Promise<void>,
 };
 declare function fit(name: string, fn: Function): ?Promise<void>;
 /** An individual test unit */
