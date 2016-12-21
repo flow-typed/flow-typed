@@ -142,6 +142,7 @@ declare class Bluebird$Promise<R> {
   each<T, U>(iterator: (item: T, index: number, arrayLength: number) => Bluebird$Promisable<U>): Bluebird$Promise<Array<T>>;
   asCallback<T>(callback: (error: ?any, value?: T) => any, options?: Bluebird$SpreadOption): void;
   return<T>(value: T): Bluebird$Promise<T>;
+  spread<T>(...args: Array<T>): Bluebird$Promise<*>;
 
   reflect(): Bluebird$Promise<Bluebird$PromiseInspection<*>>;
 

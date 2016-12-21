@@ -53,3 +53,7 @@ fooPromise(1, 'b').catch(function(e: Error) {
 fooPromise('a', 1)
 // $ExpectError
 fooPromise()
+
+Bluebird.resolve(['arr', { some: 'value' }, 42])
+  .spread((someString: string, map: Object, answer: number) => answer)
+  .then(answer => answer * 2);
