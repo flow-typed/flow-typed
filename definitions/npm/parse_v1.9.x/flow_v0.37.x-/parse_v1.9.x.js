@@ -1,16 +1,16 @@
 declare module 'parse/node' {
-  declare module.exports: Parse
+  declare module.exports: $npm$parse$Parse
 }
 
 declare module 'parse/react-native' {
-  declare module.exports: Parse
+  declare module.exports: $npm$parse$Parse
 }
 
 declare module 'parse/browser' {
-  declare module.exports: Parse
+  declare module.exports: $npm$parse$Parse
 }
 
-type Parse = {
+type $npm$parse$Parse = {
   initialize(applicationId: string, javaScriptKey: string): void,
   Analytics: any, // TODO
   ACL: Class<ParseACL>,
