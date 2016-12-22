@@ -29,3 +29,4 @@ moment().isSame();
 moment().isAfter();
 moment().isSameOrBefore();
 moment().isSameOrAfter();
+moment.isDate(new Date());
