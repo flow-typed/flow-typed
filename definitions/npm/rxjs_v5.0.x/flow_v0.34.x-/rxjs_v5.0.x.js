@@ -37,6 +37,13 @@ type rxjs$EventListenerOptions = {
 } | boolean;
 
 declare class rxjs$Observable<+T> {
+
+  static bindNodeCallback(
+      func: (e: Error, ...args: any) => void,
+      selector?: () => T,
+      scheduler?: rxjs$SchedulerClass
+  ): (...args: any) => rxjs$Observable<T>;
+
   static concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
 
   static create(
