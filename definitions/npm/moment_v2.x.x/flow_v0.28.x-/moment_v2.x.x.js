@@ -203,7 +203,7 @@ declare class moment$Moment {
   isLeapYear(): bool;
   clone(): moment$Moment;
   static isMoment(obj: any): bool;
-  static isDatE(obj: any): bool;
+  static isDate(obj: any): bool;
   static locale(locale: string, localeData?: Object): string;
   static locale(locales: Array<string>): string;
   locale(locale: string, customization?: Object|null): moment$Moment;
