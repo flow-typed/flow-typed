@@ -25,28 +25,39 @@ declare module 'lodash' {
   };
 
   declare type NestedArray<T> = Array<Array<T>>;
+  
+  declare type matchesIterateeShorthand = Object;
+  declare type matchesPropertyIterateeShorthand = [string, any];
+  declare type propertyIterateeShorthand = string;
 
   declare type OPredicate<A, O> =
-                    | ((value: A, key: string, object: O) => any)
-                    | Object
-                    | string;
+    | ((value: A, key: string, object: O) => any)
+    | matchesIterateeShorthand
+    | matchesPropertyIterateeShorthand
+    | propertyIterateeShorthand;
+  
   declare type OIterateeWithResult<V, O, R> = Object|string|((value: V, key: string, object: O) => R);
   declare type OIteratee<O> = OIterateeWithResult<any, O, any>;
 
   declare type Predicate<T> =
-                    | ((value: T, index: number, array: Array<T>) => any)
-                    | Object
-                    | string;
+    | ((value: T, index: number, array: Array<T>) => any)
+    | matchesIterateeShorthand
+    | matchesPropertyIterateeShorthand
+    | propertyIterateeShorthand;
+  
   declare type _Iteratee<T> = (item: T, index: number, array: ?Array<T>) => mixed;
   declare type Iteratee<T> = _Iteratee<T>|Object|string;
   declare type Iteratee2<T, U> = ((item: T, index: number, array: ?Array<T>) => U)|Object|string;
   declare type FlatMapIteratee<T, U> = ((item: T, index: number, array: ?Array<T>) => Array<U>)|Object|string;
   declare type Comparator<T> = (item: T, item2: T) => bool;
 
-  declare type MapIterator1<T,U> = (item: T) => U;
-  declare type MapIterator2<T,U> = (item: T, index: number) => U;
-  declare type MapIterator3<T,U> = (item: T, index: number, array: Array<T>) => U;
-  declare type MapIterator<T,U> = MapIterator1<T,U>|MapIterator2<T,U>|MapIterator3<T,U>;
+  declare type MapIterator<T,U> =
+    | ((item: T, index: number, array: Array<T>) => U)
+    | propertyIterateeShorthand;
+
+  declare type OMapIterator<T,O,U> =
+    | ((item: T, key: string, object: O) => U)
+    | propertyIterateeShorthand;
 
   declare class Lodash {
     // Array
@@ -184,7 +195,7 @@ declare module 'lodash' {
     keyBy<T, V>(array: ?Array<T>, iteratee?: Iteratee2<T, V>): {[key: V]: T};
     keyBy<V, T: Object>(object: T, iteratee?: OIteratee<T>): Object;
     map<T, U>(array: ?Array<T>, iteratee?: MapIterator<T, U>): Array<U>;
-    map<V, T: Object, U>(object: ?T, iteratee?: OIterateeWithResult<V, T, U>): Array<U>;
+    map<V, T: Object, U>(object: ?T, iteratee?: OMapIterator<V, T, U>): Array<U>;
     map(str: ?string, iteratee?: (char: string, index: number, str: string) => any): string;
     orderBy<T>(array: ?Array<T>, iteratees?: Array<Iteratee<T>>|string, orders?: Array<'asc'|'desc'>|string): Array<T>;
     orderBy<V, T: Object>(object: T, iteratees?: Array<OIteratee<*>>|string, orders?: Array<'asc'|'desc'>|string): Array<V>;

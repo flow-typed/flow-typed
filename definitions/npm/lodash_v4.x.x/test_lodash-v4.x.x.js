@@ -15,6 +15,44 @@ _.find([{x:1}, {x:2}, {x:3}], v => v.x == 3);
 _.find({x: 1, y: 2}, (a: number, b: string) => a);
 _.find({x: 1, y: 2}, { x: 3 });
 
+/**
+ * _.find examples from the official doc
+ */
+var users = [
+  { 'user': 'barney',  'age': 36, 'active': true },
+  { 'user': 'fred',    'age': 40, 'active': false },
+  { 'user': 'pebbles', 'age': 1,  'active': true }
+];
+
+_.find(users, function(o) { return o.age < 40; });
+
+// The `_.matches` iteratee shorthand.
+_.find(users, { 'age': 1, 'active': true });
+
+// The `_.matchesProperty` iteratee shorthand.
+_.find(users, ['active', false]);
+
+// The `_.property` iteratee shorthand.
+_.find(users, 'active');
+
+
+/**
+ * _.map examples from the official doc
+ */
+function square(n) {
+  return n * n;
+}
+
+_.map([4, 8], square);
+_.map({ 'a': 4, 'b': 8 }, square);
+
+var users = [
+  { 'user': 'barney' },
+  { 'user': 'fred' }
+];
+
+// The `_.property` iteratee shorthand.
+_.map(users, 'user');
 
 /**
  * _.clone
