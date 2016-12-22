@@ -152,4 +152,10 @@ _.defer(function(){});
 (_.size([1,2]): number);
 (_.size({a: 1, b: 2}): number);
 
-
+_.template("a<%=b%>c")({b: "_"});
+// $ExpectError `foo` property not found in Function
+_.template(321).foo;
+// $ExpectError This type is incompatible with string
+_.template(321)({b: "_"});
+// $ExpectError This type is incompatible with string
+_.template("a<%=b%>c")({b: 1});
