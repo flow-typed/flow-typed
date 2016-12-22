@@ -99,8 +99,6 @@ declare class $npm$parse$ParseGeoPoint {
 // =========================
 // ParseQuery
 // =========================
-declare type $npm$parse$ParseEntity = $npm$parse$ParseObject | $npm$parse$ParseUser | $npm$parse$ParseRole
-
 declare type $npm$parse$QueryJSON = {
   where: {
     [attr: string]: mixed;
@@ -118,11 +116,11 @@ declare class $npm$parse$ParseQuery {
   static(objectClass: string | $npm$parse$ParseObject): $npm$parse$ParseQuery,
   className: string,
   toJSON(): $npm$parse$QueryJSON,
-  get(objectId: string, options?: $npm$parse$FullOptions): Promise<?$npm$parse$ParseEntity>,
-  find(options?: $npm$parse$FullOptions): Promise<Array<$npm$parse$ParseEntity>>,
+  get(objectId: string, options?: $npm$parse$FullOptions): Promise<?$npm$parse$ParseObject>,
+  find(options?: $npm$parse$FullOptions): Promise<Array<$npm$parse$ParseObject>>,
   count(options?: $npm$parse$FullOptions): number,
-  first(options?: $npm$parse$FullOptions): Promise<?$npm$parse$ParseEntity>,
-  each(callback: (obj: $npm$parse$ParseObject) => any, options?: $npm$parse$FullOptions & { batchSize?: number }): $npm$parse$MixedPromiseResult,
+  first(options?: $npm$parse$FullOptions): Promise<?$npm$parse$ParseObject>,
+  each(callback: (obj: $npm$parse$ParseObject) => any, options?: $npm$parse$FullOptions & { batchSize?: number }): Promise<$npm$parse$ParseObject>,
   equalTo(key: string, value: mixed): $npm$parse$ParseQuery,
   notEqualTo(key: string, value: mixed): $npm$parse$ParseQuery,
   lessThan(key: string, value: mixed): $npm$parse$ParseQuery,
