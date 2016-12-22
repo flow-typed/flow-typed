@@ -81,3 +81,5 @@ jest
   .resetModules();
 
 test.concurrent('test', () => {});
+
+expect([1, 2, 3]).toHaveLength(3);
