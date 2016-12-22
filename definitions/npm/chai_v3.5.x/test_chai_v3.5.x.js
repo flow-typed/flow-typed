@@ -1,6 +1,6 @@
 /* @flow */
 
-import {expect, assert} from "chai";
+import {expect, assert, config} from "chai";
 
 /**
  * Word chains
@@ -9,6 +9,25 @@ expect(true)
   .and.at.be.been.have.has
   .is.of.same.that.to.which
   .with.not.deep.any.all.a.an.eql(false);
+
+// $ExpectError
+expect(1).to.what("nope");
+
+/**
+ * Config
+ */
+config.includeStack = true;
+config.showDiff = true;
+config.truncateThreshold = 200;
+
+// $ExpectError
+config.includeStack = 100;
+
+// $ExpectError
+config.showDiff = 100;
+
+// $ExpectError
+config.truncateThreshold = true;
 
 /**
  * Simple Assertions
@@ -40,6 +59,9 @@ expect({a: 1}).to.have.property("a", 1);
 
 expect([1,2,3]).to.have.length.above(2);
 expect([1,2,3]).to.have.lengthOf(3);
+expect([1,2,3]).to.have.length(3);
+// $ExpectError
+expect([1,2,3]).to.have.length('three');
 
 expect("abc").to.match(/[a-z]{3}/);
 expect("abc").to.have.string("b");
@@ -72,13 +94,9 @@ expect((x) => x).to.change({val: 0}, 'val');
 expect((x) => x).to.increase({val: 0}, 'val');
 expect((x) => x).to.decrease({val: 0}, 'val');
 
-
-// $ExpectError
-expect(1).to.what("nope");
-
-//
-// assert API (http://chaijs.com/api/assert/)
-//
+/**
+ * assert API (http://chaijs.com/api/assert/)
+ */
 
 // expression
 assert("1" === "1", 'with message');
