@@ -103,8 +103,12 @@ declare module 'axios' {
   }
 
   declare type $AxiosError<T> = AxiosError<T>;
-
-  declare interface AxiosExport extends Axios {
+  /**
+   * Note: changed AxiosExport from interface to class address issue with
+   * flow 0.37.x
+   * https://github.com/flowtype/flow-typed/issues/558
+   */
+  declare class AxiosExport mixins Axios {
     Axios: typeof Axios;
     Cancel: Class<Cancel>;
     CancelToken: Class<CancelToken>;
