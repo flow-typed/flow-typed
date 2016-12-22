@@ -491,7 +491,8 @@ declare module 'lodash' {
     stubObject(): {};
     stubString(): '';
     stubTrue(): true;
-    times(n: number, iteratee?: Function): Function;
+    times(n: number, ...rest: Array<void>): Array<number>;
+    times<T>(n: number, iteratee: ((i: number) => T)): Array<T>;
     toPath(value: any): Array<string>;
     uniqueId(prefix?: string): string;
 

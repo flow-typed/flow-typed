@@ -175,3 +175,12 @@ string = _.defaultTo('str', true);
 
 num = _.tap(1, function(n) { return false; });
 bool = _.thru(1, function(n) { return false; });
+
+var timesNums: number[];
+
+timesNums = _.times(5);
+// $ExpectError string. This type is incompatible with number
+var strings : string[] = _.times(5);
+timesNums = _.times(5, function(i: number) { return i + 1; });
+// $ExpectError string. This type is incompatible with number
+timesNums = _.times(5, function(i: number) { return JSON.stringify(i); });
