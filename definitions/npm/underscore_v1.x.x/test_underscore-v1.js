@@ -148,10 +148,14 @@ _.partial(function (a, b) { return a + b }, 1)(2);
 
 _.defer(function(){});
 
-_.compose(
-  function (upper_case:string):string { return upper_case + ', hello!'; },
-  function (name:string):string { return name.toUpperCase(); }
-): (name: string) => string;
+(
+
+  _.compose(
+    function (name:string):string { return name + ', hello!'; },
+    function (user:Object):string { return user.name; }
+  ): (user: Object) => string
+
+)
 
 (_.partition([1,5,2,4], function(i: number) { return i<4 }): [Array<number>, Array<number>]);
 (_.partition({x: 'foo', y: 'bar'}, function(v: string, k: string) { return k === 'bar' }): [Array<string>, Array<string>]);

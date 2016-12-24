@@ -155,7 +155,7 @@ declare module "underscore" {
 
   // TODO: negate
 
-  declare function compose(...functions: Function): Function;
+  declare function compose(...functions: Function[]): Function;
 
   /**
    * Objects
