@@ -155,7 +155,7 @@ _.defer(function(){});
     function (user:Object):string { return user.name; }
   ): (user: Object) => string
 
-)
+);
 
 (_.partition([1,5,2,4], function(i: number) { return i<4 }): [Array<number>, Array<number>]);
 (_.partition({x: 'foo', y: 'bar'}, function(v: string, k: string) { return k === 'bar' }): [Array<string>, Array<string>]);
