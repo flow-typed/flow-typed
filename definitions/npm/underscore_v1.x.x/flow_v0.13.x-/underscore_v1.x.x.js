@@ -99,8 +99,7 @@ declare module "underscore" {
 
   declare function without<T>(a: T[], ...values: T[]): T[];
 
-  // TODO: union
-
+  declare function union<T>(...arrays: Array<Array<T>>): Array<T>;
   declare function intersection<T>(...arrays: Array<Array<T>>): Array<T>;
 
   declare function difference<T>(array: Array<T>, ...others: Array<Array<T>>): Array<T>;

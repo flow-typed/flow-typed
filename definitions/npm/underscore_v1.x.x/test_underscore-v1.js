@@ -122,6 +122,7 @@ _.find([1, 2, 3], {val: 1});
 // $ExpectError Property not found in Number
 (_.all([2, 4, 5], function(i) { return i.length }): boolean);
 (_.some([2, 4, 5], function(i) { return i % 2 == 0 }): boolean);
+(_.union(['a', 'b'], ['b']): Array<string>);
 (_.intersection(['a', 'b'], ['b']): Array<string>);
 (_.difference(['a', 'b'], ['b']): Array<string>);
 (_.first([1,2,3]): number);
