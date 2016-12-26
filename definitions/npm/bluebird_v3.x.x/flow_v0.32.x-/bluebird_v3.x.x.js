@@ -87,7 +87,7 @@ declare class Bluebird$Promise<R> {
   static defer(): Bluebird$Defer;
   static setScheduler(scheduler: (callback: (...args: Array<any>) => void) => void): void;
   static promisify(nodeFunction: Function, receiver?: Bluebird$PromisifyOptions): Function;
-  static promisifyAll(target: Object, options?: Bluebird$PromisifyAllOptions): void;
+  static promisifyAll(target: Object|Array<Object>, options?: Bluebird$PromisifyAllOptions): void;
 
   static coroutine(generatorFunction: Function): Function;
   static spawn<T>(generatorFunction: Function): Promise<T>;
