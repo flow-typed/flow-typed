@@ -9,6 +9,7 @@ type $npm$chalk$Style = {
   // General
   reset: $npm$chalk$Chain;
   bold: $npm$chalk$Chain;
+  dim: $npm$chalk$Chain;
   italic: $npm$chalk$Chain;
   underline: $npm$chalk$Chain;
   inverse: $npm$chalk$Chain;
@@ -41,6 +42,7 @@ type $npm$chalk$StyleMap = {
   // General
   reset: $npm$chalk$StyleElement;
   bold: $npm$chalk$StyleElement;
+  dim: $npm$chalk$StyleElement;
   italic: $npm$chalk$StyleElement;
   underline: $npm$chalk$StyleElement;
   inverse: $npm$chalk$StyleElement;
@@ -79,6 +81,7 @@ declare module "chalk" {
   // General
   declare var reset: $npm$chalk$Chain;
   declare var bold: $npm$chalk$Chain;
+  declare var dim: $npm$chalk$Chain;
   declare var italic: $npm$chalk$Chain;
   declare var underline: $npm$chalk$Chain;
   declare var inverse: $npm$chalk$Chain;
