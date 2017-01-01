@@ -135,6 +135,7 @@ declare class express$Router extends express$Route {
   use(...middleware: Array<express$Middleware>): this;
   use(path: string|RegExp|string[], ...middleware: Array<express$Middleware>): this;
   use(path: string, router: express$Router): this;
+  stack: mixed[];
 }
 
 declare class express$Application extends express$Router mixins events$EventEmitter {
