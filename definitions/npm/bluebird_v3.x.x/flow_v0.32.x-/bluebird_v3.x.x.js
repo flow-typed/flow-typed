@@ -67,7 +67,7 @@ declare class Bluebird$Promise<R> {
   static reduce<T, U, Elem: Bluebird$Promisable<T>>(
     Promises: Array<Elem>,
     reducer: (total: U, current: T, index: number, arrayLength: number) => U,
-    initialValue?: U
+    initialValue?: Bluebird$Promisable<U>
   ): Bluebird$Promise<U>;
   static filter<T, Elem: Bluebird$Promisable<T>>(
     Promises: Array<Elem>,
@@ -136,7 +136,7 @@ declare class Bluebird$Promise<R> {
   mapSeries<T, U>(mapper: (item: T, index: number, arrayLength: number) => Bluebird$Promisable<U>): Bluebird$Promise<Array<U>>;
   reduce<T, U>(
     reducer: (total: T, item: U, index: number, arrayLength: number) => Bluebird$Promisable<T>,
-    initialValue?: T
+    initialValue?: Bluebird$Promisable<T>
   ): Bluebird$Promise<T>;
   filter<T>(filterer: (item: T, index: number, arrayLength: number) => Bluebird$Promisable<bool>, options?: Bluebird$ConcurrencyOption): Bluebird$Promise<Array<T>>;
   each<T, U>(iterator: (item: T, index: number, arrayLength: number) => Bluebird$Promisable<U>): Bluebird$Promise<Array<T>>;
