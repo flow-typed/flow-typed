@@ -134,3 +134,6 @@ app.use((err: ?Error, req, res, next) => {
     next();
     next(err);
 });
+
+const rootRouter = new express.Router();
+app.use(rootRouter);
