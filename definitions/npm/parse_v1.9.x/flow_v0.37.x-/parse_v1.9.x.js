@@ -11,7 +11,7 @@ declare module 'parse/browser' {
 }
 
 declare type $npm$parse$Parse = {
-  initialize(applicationId: string, javaScriptKey: string): void,
+  initialize(applicationId: string, javaScriptKey: ?string): void,
   Analytics: any, // TODO
   ACL: Class<$npm$parse$ParseACL>,
   Cloud: $npm$parse$ParseCloud,
@@ -32,7 +32,9 @@ declare type $npm$parse$Parse = {
   Session: any, // TODO
   Storage: any, // TODO
   Query: Class<$npm$parse$ParseQuery>,
-  User: Class<$npm$parse$ParseUser>
+  User: Class<$npm$parse$ParseUser>,
+  masterKey: ?string,
+  serverURL: ?string,
 }
 
 declare type $npm$parse$AttributeMap = { [attr: string]: any }
@@ -232,13 +234,14 @@ declare class $npm$parse$ParseObject {
   clear(): $npm$parse$ParseObject | boolean,
   fetch(options: $npm$parse$RequestOptions): Promise<any>,
   save(arg1: ?string | { [attr: string]: mixed }, arg2?: $npm$parse$FullOptions, arg3?: $npm$parse$FullOptions): Promise<$npm$parse$ParseObject>,
-  destroy(options: $npm$parse$RequestOptions): Promise<any>,
+  destroy(options: ?$npm$parse$RequestOptions): Promise<any>,
   static fetchAll(list: Array<$npm$parse$ParseObject>, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseObject>,
   static fetchAllIfNeeded(list: Array<$npm$parse$ParseObject>, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseObject>,
   static destroyAll(list: Array<$npm$parse$ParseObject>, options?: $npm$parse$RequestOptions): any,
   static saveAll(list: Array<$npm$parse$ParseObject>, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseObject>,
   static createWithoutData(id: string): $npm$parse$ParseObject,
   static fromJSON(json: Object, override: boolean): $npm$parse$ParseObject,
+  static registerSubclass(className: string, constructor: Class<$npm$parse$ParseObject>): void,
   // static extend(className: any, protoProps: any, classProps: any): Class<$npm$parse$ParseObject>,
   static enableSingleInstance(): void,
   static disableSingleInstance(): void
@@ -268,8 +271,8 @@ declare class $npm$parse$ParseUser extends $npm$parse$ParseObject {
   static currentAsync(): Promise<?$npm$parse$ParseUser>,
   static signUp(username: string, password: string, attrs?: $npm$parse$AttributeMap, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseUser>,
   static logIn(username: string, password: string, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseUser>,
-  static become(sessionToken: string, options?: $npm$parse$RequestOptions): void,
-  static logOut(): void,
+  static become(sessionToken: string, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseUser>,
+  static logOut(): Promise<void>,
   static requestPasswordReset(email: string, options?: $npm$parse$RequestOptions): void,
   static allowCustomUserClass(isAllowed: boolean): void,
   static enableRevocableSession(options?: $npm$parse$RequestOptions): void,
