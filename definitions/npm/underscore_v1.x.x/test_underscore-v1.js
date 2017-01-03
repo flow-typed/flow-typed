@@ -118,6 +118,7 @@ _.find([1, 2, 3], {val: 1});
 
 (_.pluck([{name: 'bob'}, {name: 'jane'}], 'name'): Array<string>);
 (_.reduce([1, 2, 3], function(m, o) { return m + o }, 0): number);
+(_.reduce({"1": 1, "2": 2, c: "3"}, function(m, o, k) { return m + o + parseInt(k)}, 0): number);
 (_.all([2, 4, 5], function(i) { return i % 2 == 0 }): boolean);
 // $ExpectError Property not found in Number
 (_.all([2, 4, 5], function(i) { return i.length }): boolean);

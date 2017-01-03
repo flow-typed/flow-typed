@@ -15,6 +15,7 @@ declare module "underscore" {
   declare function collect<K, T, U>(a: {[key:K]: T}, iteratee: (val: T, k: K)=>U): U[];
 
   declare function reduce<T, MemoT>(a: Array<T>, iterator: (m: MemoT, o: T)=>MemoT, initialMemo?: MemoT): MemoT;
+  declare function reduce<K, T, MemoT>(a: {[key:K]: T}, iterator: (m: MemoT, o: T, k: K)=>MemoT, initialMemo?: MemoT): MemoT;
   declare function inject<T, MemoT>(a: Array<T>, iterator: (m: MemoT, o: T)=>MemoT, initialMemo?: MemoT): MemoT;
   declare function foldl<T, MemoT>(a: Array<T>, iterator: (m: MemoT, o: T)=>MemoT, initialMemo?: MemoT): MemoT;
 
