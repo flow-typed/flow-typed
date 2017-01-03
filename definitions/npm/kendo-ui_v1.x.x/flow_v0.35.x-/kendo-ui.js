@@ -1,18321 +1,14001 @@
-
-
-declare module 'kendo-ui' {
-		declare interface HTMLElement {
-		kendoBindingTarget: kendo.data.BindingTarget
-	}
-
-	declare interface JQueryAjaxSettings {
-		
-	}
-
-	declare interface JQueryXHR {
-		
-	}
-
-	declare interface JQueryEventObject {
-		
-	}
-
-	declare interface JQueryPromise<T> {
-		
-	}
-
-	declare interface JQuery {
-		kendoDraggable(): JQuery,
-		kendoDraggable(options: kendo.ui.DraggableOptions): JQuery,
-		kendoDropTarget(): JQuery,
-		kendoDropTarget(options: kendo.ui.DropTargetOptions): JQuery,
-		kendoDropTargetArea(): JQuery,
-		kendoDropTargetArea(options: kendo.ui.DropTargetAreaOptions): JQuery,
-		data(key: any): any,
-		kendoAlert(): JQuery,
-		kendoAlert(options: kendo.ui.AlertOptions): JQuery,
-		data(key: "kendoAlert"): kendo.ui.Alert,
-		kendoAutoComplete(): JQuery,
-		kendoAutoComplete(options: kendo.ui.AutoCompleteOptions): JQuery,
-		data(key: "kendoAutoComplete"): kendo.ui.AutoComplete,
-		kendoBarcode(): JQuery,
-		kendoBarcode(options: kendo.dataviz.ui.BarcodeOptions): JQuery,
-		data(key: "kendoBarcode"): kendo.dataviz.ui.Barcode,
-		kendoButton(): JQuery,
-		kendoButton(options: kendo.ui.ButtonOptions): JQuery,
-		data(key: "kendoButton"): kendo.ui.Button,
-		kendoCalendar(): JQuery,
-		kendoCalendar(options: kendo.ui.CalendarOptions): JQuery,
-		data(key: "kendoCalendar"): kendo.ui.Calendar,
-		kendoChart(): JQuery,
-		kendoChart(options: kendo.dataviz.ui.ChartOptions): JQuery,
-		data(key: "kendoChart"): kendo.dataviz.ui.Chart,
-		kendoColorPalette(): JQuery,
-		kendoColorPalette(options: kendo.ui.ColorPaletteOptions): JQuery,
-		data(key: "kendoColorPalette"): kendo.ui.ColorPalette,
-		kendoColorPicker(): JQuery,
-		kendoColorPicker(options: kendo.ui.ColorPickerOptions): JQuery,
-		data(key: "kendoColorPicker"): kendo.ui.ColorPicker,
-		kendoComboBox(): JQuery,
-		kendoComboBox(options: kendo.ui.ComboBoxOptions): JQuery,
-		data(key: "kendoComboBox"): kendo.ui.ComboBox,
-		kendoConfirm(): JQuery,
-		kendoConfirm(options: kendo.ui.ConfirmOptions): JQuery,
-		data(key: "kendoConfirm"): kendo.ui.Confirm,
-		kendoContextMenu(): JQuery,
-		kendoContextMenu(options: kendo.ui.ContextMenuOptions): JQuery,
-		data(key: "kendoContextMenu"): kendo.ui.ContextMenu,
-		kendoDatePicker(): JQuery,
-		kendoDatePicker(options: kendo.ui.DatePickerOptions): JQuery,
-		data(key: "kendoDatePicker"): kendo.ui.DatePicker,
-		kendoDateTimePicker(): JQuery,
-		kendoDateTimePicker(options: kendo.ui.DateTimePickerOptions): JQuery,
-		data(key: "kendoDateTimePicker"): kendo.ui.DateTimePicker,
-		kendoDiagram(): JQuery,
-		kendoDiagram(options: kendo.dataviz.ui.DiagramOptions): JQuery,
-		data(key: "kendoDiagram"): kendo.dataviz.ui.Diagram,
-		kendoDialog(): JQuery,
-		kendoDialog(options: kendo.ui.DialogOptions): JQuery,
-		data(key: "kendoDialog"): kendo.ui.Dialog,
-		kendoDropDownList(): JQuery,
-		kendoDropDownList(options: kendo.ui.DropDownListOptions): JQuery,
-		data(key: "kendoDropDownList"): kendo.ui.DropDownList,
-		kendoEditor(): JQuery,
-		kendoEditor(options: kendo.ui.EditorOptions): JQuery,
-		data(key: "kendoEditor"): kendo.ui.Editor,
-		kendoFilterMenu(): JQuery,
-		kendoFilterMenu(options: kendo.ui.FilterMenuOptions): JQuery,
-		data(key: "kendoFilterMenu"): kendo.ui.FilterMenu,
-		kendoFlatColorPicker(): JQuery,
-		kendoFlatColorPicker(options: kendo.ui.FlatColorPickerOptions): JQuery,
-		data(key: "kendoFlatColorPicker"): kendo.ui.FlatColorPicker,
-		kendoGantt(): JQuery,
-		kendoGantt(options: kendo.ui.GanttOptions): JQuery,
-		data(key: "kendoGantt"): kendo.ui.Gantt,
-		kendoGrid(): JQuery,
-		kendoGrid(options: kendo.ui.GridOptions): JQuery,
-		data(key: "kendoGrid"): kendo.ui.Grid,
-		kendoLinearGauge(): JQuery,
-		kendoLinearGauge(options: kendo.dataviz.ui.LinearGaugeOptions): JQuery,
-		data(key: "kendoLinearGauge"): kendo.dataviz.ui.LinearGauge,
-		kendoListView(): JQuery,
-		kendoListView(options: kendo.ui.ListViewOptions): JQuery,
-		data(key: "kendoListView"): kendo.ui.ListView,
-		kendoMap(): JQuery,
-		kendoMap(options: kendo.dataviz.ui.MapOptions): JQuery,
-		data(key: "kendoMap"): kendo.dataviz.ui.Map,
-		kendoMaskedTextBox(): JQuery,
-		kendoMaskedTextBox(options: kendo.ui.MaskedTextBoxOptions): JQuery,
-		data(key: "kendoMaskedTextBox"): kendo.ui.MaskedTextBox,
-		kendoMediaPlayer(): JQuery,
-		kendoMediaPlayer(options: kendo.ui.MediaPlayerOptions): JQuery,
-		data(key: "kendoMediaPlayer"): kendo.ui.MediaPlayer,
-		kendoMenu(): JQuery,
-		kendoMenu(options: kendo.ui.MenuOptions): JQuery,
-		data(key: "kendoMenu"): kendo.ui.Menu,
-		kendoMobileActionSheet(): JQuery,
-		kendoMobileActionSheet(options: kendo.mobile.ui.ActionSheetOptions): JQuery,
-		data(key: "kendoMobileActionSheet"): kendo.mobile.ui.ActionSheet,
-		kendoMobileBackButton(): JQuery,
-		kendoMobileBackButton(options: kendo.mobile.ui.BackButtonOptions): JQuery,
-		data(key: "kendoMobileBackButton"): kendo.mobile.ui.BackButton,
-		kendoMobileButton(): JQuery,
-		kendoMobileButton(options: kendo.mobile.ui.ButtonOptions): JQuery,
-		data(key: "kendoMobileButton"): kendo.mobile.ui.Button,
-		kendoMobileButtonGroup(): JQuery,
-		kendoMobileButtonGroup(options: kendo.mobile.ui.ButtonGroupOptions): JQuery,
-		data(key: "kendoMobileButtonGroup"): kendo.mobile.ui.ButtonGroup,
-		kendoMobileCollapsible(): JQuery,
-		kendoMobileCollapsible(options: kendo.mobile.ui.CollapsibleOptions): JQuery,
-		data(key: "kendoMobileCollapsible"): kendo.mobile.ui.Collapsible,
-		kendoMobileDetailButton(): JQuery,
-		kendoMobileDetailButton(options: kendo.mobile.ui.DetailButtonOptions): JQuery,
-		data(key: "kendoMobileDetailButton"): kendo.mobile.ui.DetailButton,
-		kendoMobileDrawer(): JQuery,
-		kendoMobileDrawer(options: kendo.mobile.ui.DrawerOptions): JQuery,
-		data(key: "kendoMobileDrawer"): kendo.mobile.ui.Drawer,
-		kendoMobileLayout(): JQuery,
-		kendoMobileLayout(options: kendo.mobile.ui.LayoutOptions): JQuery,
-		data(key: "kendoMobileLayout"): kendo.mobile.ui.Layout,
-		kendoMobileListView(): JQuery,
-		kendoMobileListView(options: kendo.mobile.ui.ListViewOptions): JQuery,
-		data(key: "kendoMobileListView"): kendo.mobile.ui.ListView,
-		kendoMobileLoader(): JQuery,
-		kendoMobileLoader(options: kendo.mobile.ui.LoaderOptions): JQuery,
-		data(key: "kendoMobileLoader"): kendo.mobile.ui.Loader,
-		kendoMobileModalView(): JQuery,
-		kendoMobileModalView(options: kendo.mobile.ui.ModalViewOptions): JQuery,
-		data(key: "kendoMobileModalView"): kendo.mobile.ui.ModalView,
-		kendoMobileNavBar(): JQuery,
-		kendoMobileNavBar(options: kendo.mobile.ui.NavBarOptions): JQuery,
-		data(key: "kendoMobileNavBar"): kendo.mobile.ui.NavBar,
-		kendoMobilePane(): JQuery,
-		kendoMobilePane(options: kendo.mobile.ui.PaneOptions): JQuery,
-		data(key: "kendoMobilePane"): kendo.mobile.ui.Pane,
-		kendoMobilePopOver(): JQuery,
-		kendoMobilePopOver(options: kendo.mobile.ui.PopOverOptions): JQuery,
-		data(key: "kendoMobilePopOver"): kendo.mobile.ui.PopOver,
-		kendoMobileScrollView(): JQuery,
-		kendoMobileScrollView(options: kendo.mobile.ui.ScrollViewOptions): JQuery,
-		data(key: "kendoMobileScrollView"): kendo.mobile.ui.ScrollView,
-		kendoMobileScroller(): JQuery,
-		kendoMobileScroller(options: kendo.mobile.ui.ScrollerOptions): JQuery,
-		data(key: "kendoMobileScroller"): kendo.mobile.ui.Scroller,
-		kendoMobileSplitView(): JQuery,
-		kendoMobileSplitView(options: kendo.mobile.ui.SplitViewOptions): JQuery,
-		data(key: "kendoMobileSplitView"): kendo.mobile.ui.SplitView,
-		kendoMobileSwitch(): JQuery,
-		kendoMobileSwitch(options: kendo.mobile.ui.SwitchOptions): JQuery,
-		data(key: "kendoMobileSwitch"): kendo.mobile.ui.Switch,
-		kendoMobileTabStrip(): JQuery,
-		kendoMobileTabStrip(options: kendo.mobile.ui.TabStripOptions): JQuery,
-		data(key: "kendoMobileTabStrip"): kendo.mobile.ui.TabStrip,
-		kendoMobileView(): JQuery,
-		kendoMobileView(options: kendo.mobile.ui.ViewOptions): JQuery,
-		data(key: "kendoMobileView"): kendo.mobile.ui.View,
-		kendoMultiSelect(): JQuery,
-		kendoMultiSelect(options: kendo.ui.MultiSelectOptions): JQuery,
-		data(key: "kendoMultiSelect"): kendo.ui.MultiSelect,
-		kendoNotification(): JQuery,
-		kendoNotification(options: kendo.ui.NotificationOptions): JQuery,
-		data(key: "kendoNotification"): kendo.ui.Notification,
-		kendoNumericTextBox(): JQuery,
-		kendoNumericTextBox(options: kendo.ui.NumericTextBoxOptions): JQuery,
-		data(key: "kendoNumericTextBox"): kendo.ui.NumericTextBox,
-		kendoPager(): JQuery,
-		kendoPager(options: kendo.ui.PagerOptions): JQuery,
-		data(key: "kendoPager"): kendo.ui.Pager,
-		kendoPanelBar(): JQuery,
-		kendoPanelBar(options: kendo.ui.PanelBarOptions): JQuery,
-		data(key: "kendoPanelBar"): kendo.ui.PanelBar,
-		kendoPivotConfigurator(): JQuery,
-		kendoPivotConfigurator(options: kendo.ui.PivotConfiguratorOptions): JQuery,
-		data(key: "kendoPivotConfigurator"): kendo.ui.PivotConfigurator,
-		kendoPivotGrid(): JQuery,
-		kendoPivotGrid(options: kendo.ui.PivotGridOptions): JQuery,
-		data(key: "kendoPivotGrid"): kendo.ui.PivotGrid,
-		kendoPopup(): JQuery,
-		kendoPopup(options: kendo.ui.PopupOptions): JQuery,
-		data(key: "kendoPopup"): kendo.ui.Popup,
-		kendoProgressBar(): JQuery,
-		kendoProgressBar(options: kendo.ui.ProgressBarOptions): JQuery,
-		data(key: "kendoProgressBar"): kendo.ui.ProgressBar,
-		kendoPrompt(): JQuery,
-		kendoPrompt(options: kendo.ui.PromptOptions): JQuery,
-		data(key: "kendoPrompt"): kendo.ui.Prompt,
-		kendoQRCode(): JQuery,
-		kendoQRCode(options: kendo.dataviz.ui.QRCodeOptions): JQuery,
-		data(key: "kendoQRCode"): kendo.dataviz.ui.QRCode,
-		kendoRadialGauge(): JQuery,
-		kendoRadialGauge(options: kendo.dataviz.ui.RadialGaugeOptions): JQuery,
-		data(key: "kendoRadialGauge"): kendo.dataviz.ui.RadialGauge,
-		kendoRangeSlider(): JQuery,
-		kendoRangeSlider(options: kendo.ui.RangeSliderOptions): JQuery,
-		data(key: "kendoRangeSlider"): kendo.ui.RangeSlider,
-		kendoResponsivePanel(): JQuery,
-		kendoResponsivePanel(options: kendo.ui.ResponsivePanelOptions): JQuery,
-		data(key: "kendoResponsivePanel"): kendo.ui.ResponsivePanel,
-		kendoScheduler(): JQuery,
-		kendoScheduler(options: kendo.ui.SchedulerOptions): JQuery,
-		data(key: "kendoScheduler"): kendo.ui.Scheduler,
-		kendoSlider(): JQuery,
-		kendoSlider(options: kendo.ui.SliderOptions): JQuery,
-		data(key: "kendoSlider"): kendo.ui.Slider,
-		kendoSortable(): JQuery,
-		kendoSortable(options: kendo.ui.SortableOptions): JQuery,
-		data(key: "kendoSortable"): kendo.ui.Sortable,
-		kendoSparkline(): JQuery,
-		kendoSparkline(options: kendo.dataviz.ui.SparklineOptions): JQuery,
-		data(key: "kendoSparkline"): kendo.dataviz.ui.Sparkline,
-		kendoSplitter(): JQuery,
-		kendoSplitter(options: kendo.ui.SplitterOptions): JQuery,
-		data(key: "kendoSplitter"): kendo.ui.Splitter,
-		kendoSpreadsheet(): JQuery,
-		kendoSpreadsheet(options: kendo.ui.SpreadsheetOptions): JQuery,
-		data(key: "kendoSpreadsheet"): kendo.ui.Spreadsheet,
-		kendoStockChart(): JQuery,
-		kendoStockChart(options: kendo.dataviz.ui.StockChartOptions): JQuery,
-		data(key: "kendoStockChart"): kendo.dataviz.ui.StockChart,
-		kendoTabStrip(): JQuery,
-		kendoTabStrip(options: kendo.ui.TabStripOptions): JQuery,
-		data(key: "kendoTabStrip"): kendo.ui.TabStrip,
-		kendoTimePicker(): JQuery,
-		kendoTimePicker(options: kendo.ui.TimePickerOptions): JQuery,
-		data(key: "kendoTimePicker"): kendo.ui.TimePicker,
-		kendoToolBar(): JQuery,
-		kendoToolBar(options: kendo.ui.ToolBarOptions): JQuery,
-		data(key: "kendoToolBar"): kendo.ui.ToolBar,
-		kendoTooltip(): JQuery,
-		kendoTooltip(options: kendo.ui.TooltipOptions): JQuery,
-		data(key: "kendoTooltip"): kendo.ui.Tooltip,
-		kendoTouch(): JQuery,
-		kendoTouch(options: kendo.ui.TouchOptions): JQuery,
-		data(key: "kendoTouch"): kendo.ui.Touch,
-		kendoTreeList(): JQuery,
-		kendoTreeList(options: kendo.ui.TreeListOptions): JQuery,
-		data(key: "kendoTreeList"): kendo.ui.TreeList,
-		kendoTreeMap(): JQuery,
-		kendoTreeMap(options: kendo.dataviz.ui.TreeMapOptions): JQuery,
-		data(key: "kendoTreeMap"): kendo.dataviz.ui.TreeMap,
-		kendoTreeView(): JQuery,
-		kendoTreeView(options: kendo.ui.TreeViewOptions): JQuery,
-		data(key: "kendoTreeView"): kendo.ui.TreeView,
-		kendoUpload(): JQuery,
-		kendoUpload(options: kendo.ui.UploadOptions): JQuery,
-		data(key: "kendoUpload"): kendo.ui.Upload,
-		kendoValidator(): JQuery,
-		kendoValidator(options: kendo.ui.ValidatorOptions): JQuery,
-		data(key: "kendoValidator"): kendo.ui.Validator,
-		kendoWindow(): JQuery,
-		kendoWindow(options: kendo.ui.WindowOptions): JQuery,
-		data(key: "kendoWindow"): kendo.ui.Window
-	}
-
-			
-}
-
-declare module 'npm$namespace$kendo' {
-		declare interface TemplateOptions {
-		paramName?: string,
-		useWithBlock?: boolean
-	}
-
-	declare interface ViewOptions {
-		tagName?: string,
-		wrap?: boolean,
-		model?: Object,
-		evalTemplate?: boolean,
-		init?: (e: ViewEvent) => void,
-		show?: (e: ViewEvent) => void,
-		hide?: (e: ViewEvent) => void
-	}
-
-	declare interface ViewEvent {
-		sender: View,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RouterOptions {
-		init?: (e: RouterEvent) => void,
-		pushState?: boolean,
-		hashBang?: boolean,
-		root?: string,
-		ignoreCase?: boolean,
-		change(e: RouterChangeEvent): void,
-		routeMissing(e: RouterRouteMissingEvent): void,
-		same(e: RouterEvent): void
-	}
-
-	declare interface RouterEvent {
-		sender: Router,
-		url: string,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RouterChangeEvent {
-		params: any,
-		backButtonPressed: boolean
-	}
-
-	declare interface RouterRouteMissingEvent {
-		params: any
-	}
-
-	declare interface ColorOptions {
-		name?: string
-	}
-
-	declare interface ColorEvent {
-		sender: Color,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare function culture(
-		
-	): {
-		name: string,
-		calendar: {
-		AM: string[],
-		PM: string[],
-		days: {
-		names: string[],
-		namesAbbr: string[],
-		namesShort: string[],
-		firstDay: number
-	},
-		months: {
-		names: string[],
-		namesAbbr: string[]
-	},
-		patterns: {
-		D: string,
-		F: string,
-		G: string,
-		M: string,
-		T: string,
-		Y: string,
-		d: string,
-		g: string,
-		m: string,
-		s: string,
-		t: string,
-		u: string,
-		y: string
-	},
-		twoDigitYearMax: number
-	},
-		calendars: {
-		standard: {
-		AM: string[],
-		PM: string[],
-		days: {
-		names: string[],
-		namesAbbr: string[],
-		namesShort: string[],
-		firstDay: number
-	},
-		months: {
-		names: string[],
-		namesAbbr: string[]
-	},
-		patterns: {
-		D: string,
-		F: string,
-		G: string,
-		M: string,
-		T: string,
-		Y: string,
-		d: string,
-		g: string,
-		m: string,
-		s: string,
-		t: string,
-		u: string,
-		y: string
-	},
-		twoDigitYearMax: number
-	}
-	},
-		numberFormat: {
-		currency: {
-		decimals: number,
-		groupSize: number[],
-		pattern: string[],
-		symbol: string
-	},
-		decimals: number,
-		groupSize: number[],
-		pattern: string[],
-		percent: {
-		decimals: number,
-		groupSize: number[],
-		pattern: string[],
-		symbol: string
-	}
-	}
-	}
-
-	declare function format(format: string, ...values: any[]): string
-
-	declare function fx(selector: string): effects.Element
-
-	declare function fx(element: Element): effects.Element
-
-	declare function fx(element: JQuery): effects.Element
-
-	declare function init(selector: string, ...namespaces: any[]): void
-
-	declare function init(element: JQuery, ...namespaces: any[]): void
-
-	declare function init(element: Element, ...namespaces: any[]): void
-
-	declare function observable(data: any): kendo.data.ObservableObject
-
-	declare function observableHierarchy(array: any[]): kendo.data.ObservableArray
-
-	declare function render(template: (data: any) => string, data: any[]): string
-
-	declare function template(template: string, options?: TemplateOptions): (data: any) => string
-
-	declare function guid(): string
-
-	declare function widgetInstance(element: JQuery, suite: typeof undefined): kendo.ui.Widget
-
-	declare function widgetInstance(element: JQuery, suite: typeof undefined): kendo.ui.Widget
-
-	declare function widgetInstance(element: JQuery, suite: typeof undefined): kendo.ui.Widget
-
-	declare function alert(text: string): void
-
-	declare function antiForgeryTokens(): any
-
-	declare function bind(element: string, viewModel: any, namespace?: any): void
-
-	declare function bind(element: string, viewModel: kendo.data.ObservableObject, namespace?: any): void
-
-	declare function bind(element: JQuery, viewModel: any, namespace?: any): void
-
-	declare function bind(element: JQuery, viewModel: kendo.data.ObservableObject, namespace?: any): void
-
-	declare function bind(element: Element, viewModel: any, namespace?: any): void
-
-	declare function bind(
-		element: Element, viewModel: kendo.data.ObservableObject, namespace?: any
-	): void
-
-	declare function observableHierarchy(array: any): void
-
-	declare function confirm(text: string): JQueryPromise<any>
-
-	declare function culture(culture: string): void
-
-	declare function destroy(element: string): void
-
-	declare function destroy(element: JQuery): void
-
-	declare function destroy(element: Element): void
-
-	declare function htmlEncode(value: string): string
-
-	declare function parseDate(value: string, formats?: string, culture?: string): Date
-
-	declare function parseDate(value: string, formats?: any, culture?: string): Date
-
-	declare function parseFloat(value: string, culture?: string): number
-
-	declare function parseInt(value: string, culture?: string): number
-
-	declare function parseColor(color: string, noerror: boolean): kendo.Color
-
-	declare function prompt(text: string, defaultValue: string): JQueryPromise<any>
-
-	declare function proxyModelSetters(): void
-
-	declare function proxyModelSetters(data: kendo.data.Model): void
-
-	declare function resize(element: string, force: boolean): void
-
-	declare function resize(element: JQuery, force: boolean): void
-
-	declare function resize(element: Element, force: boolean): void
-
-	declare function saveAs(options: any): void
-
-	declare function stringify(value: any): string
-
-	declare function throttle(fn: Function, timeout: number): Function
-
-	declare function touchScroller(element: string): void
-
-	declare function touchScroller(element: JQuery): void
-
-	declare function touchScroller(element: Element): void
-
-	declare function toString(value: Date, format: string, culture?: string): string
-
-	declare function toString(value: number, format: string, culture?: string): string
-
-	declare function unbind(element: string): void
-
-	declare function unbind(element: JQuery): void
-
-	declare function unbind(element: Element): void
-
-	declare class Class  {
-		fn: Class;
-		extend(prototype: Object): Class
-	}
-
-	declare class Observable extends Class {
-		fn: Observable;
-		extend(prototype: Object): Observable;
-		init(...args: any[]): void;
-		bind(eventName: string, handler: Function): Observable;
-		one(eventName: string, handler: Function): Observable;
-		first(eventName: string, handler: Function): Observable;
-		trigger(eventName: string, e?: any): boolean;
-		unbind(eventName: string, handler?: any): Observable
-	}
-
-	declare class View extends Observable {
-		constructor(element: Element, options?: ViewOptions): this;
-		constructor(element: string, options?: ViewOptions): this;
-		element: JQuery;
-		content: any;
-		tagName: string;
-		model: Object;
-		init(element: Element, options?: ViewOptions): void;
-		init(element: string, options?: ViewOptions): void;
-		render(container?: any): JQuery;
-		destroy(): void
-	}
-
-	declare class ViewContainer extends Observable {
-		view: View
-	}
-
-	declare class Layout extends View {
-		containers: {
-		[selector: string]: ViewContainer
-	};
-		showIn(selector: string, view: View, transitionClass?: string): void
-	}
-
-	declare class History extends Observable {
-		current: string;
-		root: string;
-		start(options: Object): void;
-		stop(): void;
-		change(callback: Function): void;
-		navigate(location: string, silent?: boolean): void
-	}
-
-	declare class Route extends Class {
-		route: RegExp;
-		callback(url: string): void;
-		worksWith(url: string): void
-	}
-
-	declare class Router extends Observable {
-		constructor(options?: RouterOptions): this;
-		routes: Route[];
-		init(options?: RouterOptions): void;
-		start(): void;
-		destroy(): void;
-		route(route: string, callback: Function): void;
-		navigate(location: string, silent?: boolean): void;
-		replace(location: string, silent?: boolean): void
-	}
-
-	declare class Color extends Observable {
-		options: ColorOptions;
-		diff(): number;
-		equals(): boolean;
-		toHSV(): any;
-		toRGB(): any;
-		toBytes(): any;
-		toHex(): string;
-		toCss(): string;
-		toCssRgba(): string;
-		toDisplay(): string
-	}
-
-	
-}
-
-declare module 'effects' {
-		declare interface Element {
-		expand(direction: string): effects.Expand,
-		expandHorizontal(): effects.Expand,
-		expandVertical(): effects.Expand,
-		fade(direction: string): effects.Fade,
-		fadeIn(): effects.Fade,
-		fadeOut(): effects.Fade,
-		flip(axis: string, face: JQuery, back: JQuery): effects.Flip,
-		flipHorizontal(face: JQuery, back: JQuery): effects.Flip,
-		flipVertical(face: JQuery, back: JQuery): effects.Flip,
-		pageturn(axis: string, face: JQuery, back: JQuery): effects.PageTurn,
-		pageturnHorizontal(face: JQuery, back: JQuery): effects.PageTurn,
-		pageturnVertical(face: JQuery, back: JQuery): effects.PageTurn,
-		slideIn(direction: string): effects.SlideIn,
-		slideInDown(): effects.SlideIn,
-		slideInLeft(): effects.SlideIn,
-		slideInRight(): effects.SlideIn,
-		slideInUp(): effects.SlideIn,
-		tile(direction: string, previous: JQuery): effects.Tile,
-		tileDown(previous: JQuery): effects.Tile,
-		tileLeft(previous: JQuery): effects.Tile,
-		tileRight(previous: JQuery): effects.Tile,
-		tileUp(previous: JQuery): effects.Tile,
-		transfer(target: JQuery): effects.Transfer,
-		zoom(direction: string): effects.Zoom,
-		zoomIn(): effects.Zoom,
-		zoomOut(): effects.Zoom
-	}
-
-	declare interface Effect {
-		play(): JQueryPromise<any>,
-		reverse(): JQueryPromise<any>,
-		duration(value: number): Effect,
-		add(effect: Effect): Effect,
-		stop(): Effect
-	}
-
-	declare interface Expand {
-		duration(value: number): Expand,
-		direction(value: string): Expand,
-		stop(): Expand,
-		add(effect: Effect): Expand
-	}
-
-	declare interface Fade {
-		duration(value: number): Fade,
-		direction(value: string): Fade,
-		stop(): Fade,
-		add(effect: Effect): Fade,
-		startValue(value: number): Fade,
-		endValue(value: number): Fade
-	}
-
-	declare interface Flip {
-		duration(value: number): Flip,
-		direction(value: string): Flip,
-		stop(): Flip,
-		add(effect: Effect): Flip
-	}
-
-	declare interface PageTurn {
-		duration(value: number): PageTurn,
-		direction(value: string): PageTurn,
-		stop(): PageTurn,
-		add(effect: Effect): PageTurn
-	}
-
-	declare interface SlideIn {
-		duration(value: number): SlideIn,
-		direction(value: string): SlideIn,
-		stop(): SlideIn,
-		add(effect: Effect): SlideIn
-	}
-
-	declare interface Tile {
-		duration(value: number): Tile,
-		direction(value: string): Tile,
-		stop(): Tile,
-		add(effect: Effect): Tile
-	}
-
-	declare interface Transfer {
-		duration(value: number): Transfer,
-		stop(): Transfer,
-		add(effect: Effect): Transfer
-	}
-
-	declare interface Zoom {
-		duration(value: number): Zoom,
-		direction(value: string): Zoom,
-		stop(): Zoom,
-		add(effect: Effect): Zoom,
-		startValue(value: number): Zoom,
-		endValue(value: number): Zoom
-	}
-
-	declare function enable(): void
-
-	declare function disable(): void
-
-	declare function box(element: HTMLElement): any
-
-	declare function fillScale(firstElement: HTMLElement, secondElement: HTMLElement): number
-
-	declare function fitScale(firstElement: HTMLElement, secondElement: HTMLElement): number
-
-	declare function transformOrigin(firstElement: HTMLElement, secondElement: HTMLElement): any
-
-		
-}
-
-declare module 'data' {
-		declare interface ObservableObjectEvent {
-		sender?: ObservableObject,
-		field?: string
-	}
-
-	declare interface ObservableObjectSetEvent {
-		value?: any,
-		preventDefault?: Function
-	}
-
-	declare interface Bindings {
-		[key: string]: Binding
-	}
-
-	declare interface BinderOptions {
-		
-	}
-
-	declare interface SchedulerEventData {
-		description?: string,
-		end?: Date,
-		endTimezone?: string,
-		isAllDay?: boolean,
-		id?: any,
-		start?: Date,
-		taskId?: number,
-		startTimezone?: string,
-		recurrenceId?: any,
-		recurrenceRule?: string,
-		recurrenceException?: string,
-		title?: string
-	}
-
-	declare interface HierarchicalDataSourceOptions {
-		schema?: HierarchicalDataSourceSchema
-	}
-
-	declare interface HierarchicalDataSourceSchema {
-		model?: HierarchicalDataSourceSchemaModel
-	}
-
-	declare interface HierarchicalDataSourceSchemaModel {
-		hasChildren?: any,
-		children?: any
-	}
-
-	declare interface PivotDiscoverRequestRestrictionOptions {
-		catalogName: string,
-		cubeName: string
-	}
-
-	declare interface PivotDiscoverRequestDataOptions {
-		command: string,
-		restrictions: PivotDiscoverRequestRestrictionOptions
-	}
-
-	declare interface PivotDiscoverRequestOptions {
-		data: PivotDiscoverRequestDataOptions
-	}
-
-	declare interface PivotTransportConnection {
-		catalog?: string,
-		cube?: string
-	}
-
-	declare interface PivotTransportDiscover {
-		cache?: boolean,
-		contentType?: string,
-		data?: any,
-		dataType?: string,
-		type?: string,
-		url?: any
-	}
-
-	declare interface PivotTransport {
-		discover?: any,
-		read?: any
-	}
-
-	declare interface PivotTransportWithObjectOperations {
-		connection: PivotTransportConnection,
-		discover?: PivotTransportDiscover,
-		read?: DataSourceTransportRead
-	}
-
-	declare interface PivotTransportWithFunctionOperations {
-		discover?: (options: DataSourceTransportOptions) => void,
-		read?: (options: DataSourceTransportOptions) => void
-	}
-
-	declare interface PivotDataSourceAxisOptions {
-		name: string,
-		expand?: boolean
-	}
-
-	declare interface PivotDataSourceMeasureOptions {
-		values: string[],
-		axis?: string
-	}
-
-	declare interface PivotDataSourceOptions {
-		columns?: PivotDataSourceAxisOptions[],
-		measures?: PivotDataSourceMeasureOptions[],
-		rows?: PivotDataSourceAxisOptions[],
-		transport?: PivotTransport,
-		schema?: PivotSchema
-	}
-
-	declare interface PivotTupleModel {
-		children: PivotTupleModel[],
-		caption?: string,
-		name: string,
-		levelName?: string,
-		levelNum: number,
-		hasChildren?: boolean,
-		hierarchy?: string
-	}
-
-	declare interface PivotSchemaRowAxis {
-		tuples: PivotTupleModel[]
-	}
-
-	declare interface PivotSchemaColumnAxis {
-		tuples: PivotTupleModel[]
-	}
-
-	declare interface PivotSchemaAxes {
-		rows: PivotSchemaRowAxis,
-		columns: PivotSchemaColumnAxis
-	}
-
-	declare interface PivotSchema {
-		axes?: any,
-		catalogs?: any,
-		cubes?: any,
-		cube?: any,
-		data?: any,
-		dimensions?: any,
-		hierarchies?: any,
-		levels?: any,
-		measures?: any
-	}
-
-	declare interface DataSourceTransport {
-		create?: DataSourceTransportCreate,
-		destroy?: DataSourceTransportDestroy,
-		push?: Function,
-		read?: DataSourceTransportRead,
-		signalr?: DataSourceTransportSignalr,
-		update?: DataSourceTransportUpdate,
-		parameterMap(data: DataSourceTransportParameterMapData, type: string): any
-	}
-
-	declare interface DataSourceTransportSignalrClient {
-		create?: string,
-		destroy?: string,
-		read?: string,
-		update?: string
-	}
-
-	declare interface DataSourceTransportSignalrServer {
-		create?: string,
-		destroy?: string,
-		read?: string,
-		update?: string
-	}
-
-	declare interface DataSourceTransportSignalr {
-		client?: DataSourceTransportSignalrClient,
-		hub?: any,
-		promise?: any,
-		server?: DataSourceTransportSignalrServer
-	}
-
-	declare interface DataSourceParameterMapDataAggregate {
-		field?: string,
-		aggregate?: string
-	}
-
-	declare interface DataSourceParameterMapDataGroup {
-		aggregate?: DataSourceParameterMapDataAggregate[],
-		field?: string,
-		dir?: string
-	}
-
-	declare interface DataSourceParameterMapDataFilter {
-		field?: string,
-		filters?: DataSourceParameterMapDataFilter[],
-		logic?: string,
-		operator?: string,
-		value?: any
-	}
-
-	declare interface DataSourceParameterMapDataSort {
-		field?: string,
-		dir?: string
-	}
-
-	declare interface DataSourceTransportParameterMapData {
-		aggregate?: DataSourceParameterMapDataAggregate[],
-		group?: DataSourceParameterMapDataGroup[],
-		filter?: DataSourceParameterMapDataFilter,
-		models?: Model[],
-		page?: number,
-		pageSize?: number,
-		skip?: number,
-		sort?: DataSourceParameterMapDataSort[],
-		take?: number
-	}
-
-	declare interface DataSourceSchema {
-		model?: any
-	}
-
-	declare interface DataSourceSchemaWithOptionsModel {
-		model?: DataSourceSchemaModel
-	}
-
-	declare interface DataSourceSchemaWithConstructorModel {
-		model?: typeof Model
-	}
-
-	declare interface DataSourceSchemaModel {
-		id?: string,
-		fields?: any,
-		[index: string]: any
-	}
-
-	declare interface DataSourceSchemaModelWithFieldsArray {
-		fields?: DataSourceSchemaModelField[]
-	}
-
-	declare interface DataSourceSchemaModelWithFieldsObject {
-		fields?: DataSourceSchemaModelFields
-	}
-
-	declare interface DataSourceSchemaModelFields {
-		[index: string]: DataSourceSchemaModelField
-	}
-
-	declare interface DataSourceSchemaModelField {
-		field?: string,
-		from?: string,
-		defaultValue?: any,
-		editable?: boolean,
-		nullable?: boolean,
-		parse?: Function,
-		type?: string,
-		validation?: DataSourceSchemaModelFieldValidation
-	}
-
-	declare interface DataSourceSchemaModelFieldValidation {
-		required?: boolean,
-		min?: any,
-		max?: any
-	}
-
-	declare interface ObservableArrayEvent {
-		field?: string,
-		action?: string,
-		index?: number,
-		items?: kendo.data.Model[]
-	}
-
-	declare interface QueryResult {
-		total?: number,
-		data?: any[]
-	}
-
-	declare interface DataSourceAggregateItem {
-		field?: string,
-		aggregate?: string
-	}
-
-	declare interface DataSourceFilter {
-		
-	}
-
-	declare interface DataSourceFilterItem {
-		operator?: string | Function,
-		field?: string,
-		value?: any
-	}
-
-	declare interface DataSourceFilters {
-		logic?: string,
-		filters?: DataSourceFilter[]
-	}
-
-	declare interface DataSourceGroupItemAggregate {
-		field?: string,
-		aggregate?: string
-	}
-
-	declare interface DataSourceGroupItem {
-		field?: string,
-		dir?: string,
-		aggregates?: DataSourceGroupItemAggregate[]
-	}
-
-	declare interface DataSourceSchema {
-		aggregates?: any,
-		data?: any,
-		errors?: any,
-		groups?: any,
-		parse?: Function,
-		total?: any,
-		type?: string
-	}
-
-	declare interface DataSourceSortItem {
-		field?: string,
-		dir?: string
-	}
-
-	declare interface DataSourceTransportCreate {
-		cache?: boolean,
-		contentType?: string,
-		data?: any,
-		dataType?: string,
-		type?: string,
-		url?: any
-	}
-
-	declare interface DataSourceTransportDestroy {
-		cache?: boolean,
-		contentType?: string,
-		data?: any,
-		dataType?: string,
-		type?: string,
-		url?: any
-	}
-
-	declare interface DataSourceTransportRead {
-		cache?: boolean,
-		contentType?: string,
-		data?: any,
-		dataType?: string,
-		type?: string,
-		url?: any
-	}
-
-	declare interface DataSourceTransportUpdate {
-		cache?: boolean,
-		contentType?: string,
-		data?: any,
-		dataType?: string,
-		type?: string,
-		url?: any
-	}
-
-	declare interface DataSourceTransportWithObjectOperations {
-		create?: DataSourceTransportCreate,
-		destroy?: DataSourceTransportDestroy,
-		read?: DataSourceTransportRead,
-		update?: DataSourceTransportUpdate
-	}
-
-	declare interface DataSourceTransportWithFunctionOperations {
-		create?: (options: DataSourceTransportOptions) => void,
-		destroy?: (options: DataSourceTransportOptions) => void,
-		read?: (options: DataSourceTransportReadOptions) => void,
-		update?: (options: DataSourceTransportOptions) => void
-	}
-
-	declare interface DataSourceTransportOptions {
-		success: (data?: any) => void,
-		error: (error?: any) => void,
-		data: any
-	}
-
-	declare interface DataSourceTransportReadOptionsData {
-		sort?: DataSourceSortItem[],
-		filter?: DataSourceFilters,
-		group?: DataSourceGroupItem[],
-		take?: number,
-		skip?: number
-	}
-
-	declare interface DataSourceTransportReadOptions {
-		data: DataSourceTransportReadOptionsData
-	}
-
-	declare interface DataSourceTransportBatchOptionsData {
-		models: any[]
-	}
-
-	declare interface DataSourceTransportBatchOptions {
-		data: DataSourceTransportBatchOptionsData
-	}
-
-	declare interface DataSourceOptions {
-		aggregate?: DataSourceAggregateItem[],
-		autoSync?: boolean,
-		batch?: boolean,
-		data?: any,
-		filter?: any,
-		group?: DataSourceGroupItem[],
-		offlineStorage?: any,
-		page?: number,
-		pageSize?: number,
-		schema?: DataSourceSchema,
-		serverAggregates?: boolean,
-		serverFiltering?: boolean,
-		serverGrouping?: boolean,
-		serverPaging?: boolean,
-		serverSorting?: boolean,
-		sort?: any,
-		transport?: DataSourceTransport,
-		type?: string,
-		change(e: DataSourceChangeEvent): void,
-		error(e: DataSourceErrorEvent): void,
-		push(e: DataSourcePushEvent): void,
-		sync(e: DataSourceEvent): void,
-		requestStart(e: DataSourceRequestStartEvent): void,
-		requestEnd(e: DataSourceRequestEndEvent): void
-	}
-
-	declare interface DataSourceEvent {
-		sender?: DataSource
-	}
-
-	declare interface DataSourceItemOrGroup {
-		
-	}
-
-	declare interface DataSourceGroup {
-		aggregates: any[],
-		field: string,
-		hasSubgroups: boolean,
-		items: DataSourceItemOrGroup[],
-		value: any
-	}
-
-	declare interface DataSourceChangeEvent {
-		field?: string,
-		value?: Model,
-		action?: string,
-		index?: number,
-		items?: DataSourceItemOrGroup[],
-		node?: any
-	}
-
-	declare interface DataSourcePushEvent {
-		items?: DataSourceItemOrGroup[],
-		type?: string
-	}
-
-	declare interface DataSourceErrorEvent {
-		xhr: JQueryXHR,
-		status: string,
-		errorThrown: any,
-		errors?: any
-	}
-
-	declare interface DataSourceRequestStartEvent {
-		type?: string,
-		preventDefault(): void
-	}
-
-	declare interface DataSourceRequestEndEvent {
-		response?: any,
-		type?: string
-	}
-
-		declare class Binding extends Observable {
-		source: any;
-		parents: any[];
-		path: string;
-		observable: boolean;
-		dependencies: {
-		[path: string]: boolean
-	};
-		constructor(parents: any[], path: string): this;
-		change(e: Object): void;
-		start(source: kendo.Observable): void;
-		stop(source: kendo.Observable): void;
-		get(): any;
-		set(value: any): void;
-		destroy(): void
-	}
-
-	declare class BindingTarget  {
-		target: any;
-		options: any;
-		source: any
-	}
-
-	declare class EventBinding extends Binding {
-		get(): void
-	}
-
-	declare class TemplateBinding extends Binding {
-		constructor(source: kendo.Observable, path: string, template: Function): this;
-		render(value: Object): string
-	}
-
-	declare class Binder extends Class {
-		fn: Binder;
-		element: any;
-		bindings: Bindings;
-		options: BinderOptions;
-		constructor(element: any, bindings: Bindings, options?: BinderOptions): this;
-		extend(prototype: Object): Binder;
-		init(element: any, bindings: Bindings, options?: BinderOptions): void;
-		bind(binding: Binding, attribute: string): void;
-		destroy(): void;
-		refresh(): void;
-		refresh(attribute: string): void
-	}
-
-	declare class ObservableObject extends Observable {
-		constructor(value?: any): this;
-		uid: string;
-		init(value?: any): void;
-		get(name: string): any;
-		parent(): ObservableObject;
-		set(name: string, value: any): void;
-		toJSON(): Object
-	}
-
-	declare class Model extends ObservableObject {
-		idField: string;
-		fields: DataSourceSchemaModelFields;
-		idField: string;
-		_defaultId: any;
-		fields: DataSourceSchemaModelFields;
-		defaults: {
-		[field: string]: any
-	};
-		id: any;
-		dirty: boolean;
-		define(options: DataSourceSchemaModelWithFieldsObject): typeof Model;
-		define(options: DataSourceSchemaModelWithFieldsArray): typeof Model;
-		constructor(data?: any): this;
-		init(data?: any): void;
-		accept(data?: any): void;
-		editable(field: string): boolean;
-		isNew(): boolean
-	}
-
-	declare class SchedulerEvent extends Model {
-		idField: string;
-		fields: DataSourceSchemaModelFields;
-		constructor(data?: SchedulerEventData): this;
-		taskId: number;
-		description: string;
-		end: Date;
-		endTimezone: string;
-		isAllDay: boolean;
-		id: any;
-		start: Date;
-		startTimezone: string;
-		recurrenceId: any;
-		recurrenceRule: string;
-		recurrenceException: string;
-		title: string;
-		define(options: DataSourceSchemaModelWithFieldsObject): typeof SchedulerEvent;
-		define(options: DataSourceSchemaModelWithFieldsArray): typeof SchedulerEvent;
-		init(data?: SchedulerEventData): void;
-		clone(options: any, updateUid: boolean): SchedulerEvent;
-		duration(): number;
-		expand(start: Date, end: Date, zone: any): SchedulerEvent[];
-		update(eventInfo: SchedulerEventData): void;
-		isMultiDay(): boolean;
-		isException(): boolean;
-		isOccurrence(): boolean;
-		isRecurring(): boolean;
-		isRecurrenceHead(): boolean;
-		toOccurrence(options: any): SchedulerEvent
-	}
-
-	declare class TreeListModel extends Model {
-		idField: string;
-		fields: DataSourceSchemaModelFields;
-		id: any;
-		parentId: any;
-		define(options: DataSourceSchemaModelWithFieldsObject): typeof TreeListModel;
-		define(options: DataSourceSchemaModelWithFieldsArray): typeof TreeListModel;
-		constructor(data?: any): this;
-		init(data?: any): void;
-		loaded(value: boolean): void;
-		loaded(): boolean
-	}
-
-	declare class TreeListDataSource extends DataSource {
-		load(model: kendo.data.TreeListModel): JQueryPromise<any>;
-		childNodes(model: kendo.data.TreeListModel): kendo.data.TreeListModel[];
-		rootNodes(): kendo.data.TreeListModel[];
-		parentNode(model: kendo.data.TreeListModel): kendo.data.TreeListModel;
-		level(model: kendo.data.TreeListModel): number;
-		level(model: any): number;
-		add(model: Object): kendo.data.TreeListModel;
-		add(model: kendo.data.TreeListModel): kendo.data.TreeListModel;
-		at(index: number): kendo.data.TreeListModel;
-		cancelChanges(model?: kendo.data.TreeListModel): void;
-		get(id: any): kendo.data.TreeListModel;
-		getByUid(uid: string): kendo.data.TreeListModel;
-		indexOf(value: kendo.data.TreeListModel): number;
-		insert(index: number, model: kendo.data.TreeListModel): kendo.data.TreeListModel;
-		insert(index: number, model: Object): kendo.data.TreeListModel;
-		remove(model: kendo.data.TreeListModel): void
-	}
-
-	declare class GanttTask extends Model {
-		idField: string;
-		fields: DataSourceSchemaModelFields;
-		id: any;
-		parentId: number;
-		orderId: number;
-		title: string;
-		start: Date;
-		end: Date;
-		percentComplete: number;
-		summary: boolean;
-		expanded: boolean;
-		define(options: DataSourceSchemaModelWithFieldsObject): typeof GanttTask;
-		define(options: DataSourceSchemaModelWithFieldsArray): typeof GanttTask;
-		constructor(data?: any): this;
-		init(data?: any): void
-	}
-
-	declare class GanttDependency extends Model {
-		idField: string;
-		fields: DataSourceSchemaModelFields;
-		id: any;
-		predecessorId: number;
-		successorId: number;
-		type: number;
-		define(options: DataSourceSchemaModelWithFieldsObject): typeof GanttDependency;
-		define(options: DataSourceSchemaModelWithFieldsArray): typeof GanttDependency;
-		constructor(data?: any): this;
-		init(data?: any): void
-	}
-
-	declare class Node extends Model {
-		children: HierarchicalDataSource;
-		append(model: any): void;
-		level(): number;
-		load(id: any): void;
-		loaded(value: boolean): void;
-		loaded(): boolean;
-		parentNode(): Node
-	}
-
-	declare class SchedulerDataSource extends DataSource {
-		add(model: Object): kendo.data.SchedulerEvent;
-		add(model: kendo.data.SchedulerEvent): kendo.data.SchedulerEvent;
-		at(index: number): kendo.data.SchedulerEvent;
-		cancelChanges(model?: kendo.data.SchedulerEvent): void;
-		get(id: any): kendo.data.SchedulerEvent;
-		getByUid(uid: string): kendo.data.SchedulerEvent;
-		indexOf(value: kendo.data.SchedulerEvent): number;
-		insert(index: number, model: kendo.data.SchedulerEvent): kendo.data.SchedulerEvent;
-		insert(index: number, model: Object): kendo.data.SchedulerEvent;
-		remove(model: kendo.data.SchedulerEvent): void
-	}
-
-	declare class GanttDataSource extends DataSource {
-		add(model: Object): kendo.data.GanttTask;
-		add(model: kendo.data.GanttTask): kendo.data.GanttTask;
-		at(index: number): kendo.data.GanttTask;
-		cancelChanges(model?: kendo.data.GanttTask): void;
-		get(id: any): kendo.data.GanttTask;
-		getByUid(uid: string): kendo.data.GanttTask;
-		indexOf(value: kendo.data.GanttTask): number;
-		insert(index: number, model: Object): kendo.data.GanttTask;
-		insert(index: number, model: kendo.data.GanttTask): kendo.data.GanttTask;
-		remove(model: kendo.data.GanttTask): void
-	}
-
-	declare class GanttDependencyDataSource extends DataSource {
-		add(model: Object): kendo.data.GanttDependency;
-		add(model: kendo.data.GanttDependency): kendo.data.GanttDependency;
-		at(index: number): kendo.data.GanttDependency;
-		cancelChanges(model?: kendo.data.GanttDependency): void;
-		get(id: any): kendo.data.GanttDependency;
-		getByUid(uid: string): kendo.data.GanttDependency;
-		indexOf(value: kendo.data.GanttDependency): number;
-		insert(index: number, model: Object): kendo.data.GanttDependency;
-		insert(index: number, model: kendo.data.GanttDependency): kendo.data.GanttDependency;
-		remove(model: kendo.data.GanttDependency): void
-	}
-
-	declare class HierarchicalDataSource extends DataSource {
-		constructor(options?: HierarchicalDataSourceOptions): this;
-		init(options?: HierarchicalDataSourceOptions): void
-	}
-
-	declare class PivotDataSource extends DataSource {
-		axes(): PivotSchemaAxes;
-		constructor(options?: PivotDataSourceOptions): this;
-		init(options?: PivotDataSourceOptions): void;
-		catalog(val: string): void;
-		columns(val: string[]): string[];
-		cube(val: string): void;
-		discover(options: PivotDiscoverRequestOptions): JQueryPromise<any>;
-		measures(val: string[]): string[];
-		measuresAxis(): string;
-		rows(val: string[]): string[];
-		schemaCatalogs(): JQueryPromise<any>;
-		schemaCubes(): JQueryPromise<any>;
-		schemaDimensions(): JQueryPromise<any>;
-		schemaHierarchies(): JQueryPromise<any>;
-		schemaLevels(): JQueryPromise<any>;
-		schemaMeasures(): JQueryPromise<any>
-	}
-
-	declare class ObservableArray extends Observable {
-		length: number;
-		[index: number]: any;
-		constructor(array: any[]): this;
-		init(array: any[]): void;
-		empty(): void;
-		every(
-		callback: (item: Object, index: number, source: ObservableArray) => boolean
-	): boolean;
-		filter(
-		callback: (item: Object, index: number, source: ObservableArray) => boolean
-	): any[];
-		find(
-		callback: (item: Object, index: number, source: ObservableArray) => boolean
-	): any;
-		forEach(callback: (item: Object, index: number, source: ObservableArray) => void): void;
-		indexOf(item: any): number;
-		join(separator: string): string;
-		map(callback: (item: Object, index: number, source: ObservableArray) => any): any[];
-		parent(): ObservableObject;
-		pop(): ObservableObject;
-		push(...items: any[]): number;
-		remove(item: Object): void;
-		shift(): any;
-		slice(begin: number, end?: number): any[];
-		some(
-		callback: (item: Object, index: number, source: ObservableArray) => boolean
-	): boolean;
-		splice(start: number): any[];
-		splice(start: number, deleteCount: number, ...items: any[]): any[];
-		toJSON(): any[];
-		unshift(...items: any[]): number;
-		wrap(object: Object, parent: Object): any;
-		wrapAll(source: Object, target: Object): any
-	}
-
-	declare class DataSource extends Observable {
-		options: DataSourceOptions;
-		transport: any;
-		create(options?: DataSourceOptions): DataSource;
-		constructor(options?: DataSourceOptions): this;
-		init(options?: DataSourceOptions): void;
-		add(model: Object): kendo.data.Model;
-		add(model: kendo.data.Model): kendo.data.Model;
-		aggregate(val: any): void;
-		aggregate(): any;
-		aggregates(): any;
-		at(index: number): kendo.data.ObservableObject;
-		cancelChanges(model?: kendo.data.Model): void;
-		data(): kendo.data.ObservableArray;
-		data(value: any): void;
-		fetch(callback?: Function): JQueryPromise<any>;
-		filter(filters: DataSourceFilterItem): void;
-		filter(filters: DataSourceFilterItem[]): void;
-		filter(filters: DataSourceFilters): void;
-		filter(): DataSourceFilters;
-		get(id: any): kendo.data.Model;
-		getByUid(uid: string): kendo.data.Model;
-		group(groups: any): void;
-		group(): any;
-		hasChanges(): boolean;
-		indexOf(value: kendo.data.ObservableObject): number;
-		insert(index: number, model: kendo.data.Model): kendo.data.Model;
-		insert(index: number, model: Object): kendo.data.Model;
-		online(value: boolean): void;
-		online(): boolean;
-		offlineData(data: any[]): void;
-		offlineData(): any[];
-		page(): number;
-		page(page: number): void;
-		pageSize(): number;
-		pageSize(size: number): void;
-		pushCreate(model: Object): void;
-		pushCreate(models: any[]): void;
-		pushDestroy(model: Object): void;
-		pushDestroy(models: any[]): void;
-		pushUpdate(model: Object): void;
-		pushUpdate(models: any[]): void;
-		query(options?: any): JQueryPromise<any>;
-		read(data?: any): JQueryPromise<any>;
-		remove(model: kendo.data.ObservableObject): void;
-		sort(sort: DataSourceSortItem): void;
-		sort(sort: DataSourceSortItem[]): void;
-		sort(): DataSourceSortItem[];
-		sync(): JQueryPromise<any>;
-		total(): number;
-		totalPages(): number;
-		view(): kendo.data.ObservableArray
-	}
-
-	declare class Query  {
-		data: any[];
-		process(data: any[], options: DataSourceTransportReadOptionsData): QueryResult;
-		constructor(data: any[]): this;
-		toArray(): any[];
-		range(intex: number, count: number): kendo.data.Query;
-		skip(count: number): kendo.data.Query;
-		take(count: number): kendo.data.Query;
-		select(selector: Function): kendo.data.Query;
-		order(selector: string, dir?: string): kendo.data.Query;
-		order(selector: Function, dir?: string): kendo.data.Query;
-		filter(filters: DataSourceFilterItem): kendo.data.Query;
-		filter(filters: DataSourceFilterItem[]): kendo.data.Query;
-		filter(filters: DataSourceFilters): kendo.data.Query;
-		group(descriptors: DataSourceGroupItem): kendo.data.Query;
-		group(descriptors: DataSourceGroupItem[]): kendo.data.Query
-	}
-
-	
-}
-
-declare module 'transports' {
-					
-}
-
-declare module 'ui' {
-		declare interface DraggableEvent {
-		sender?: Draggable
-	}
-
-	declare interface DropTargetOptions {
-		group?: string,
-		dragenter(e: DropTargetDragenterEvent): void,
-		dragleave(e: DropTargetDragleaveEvent): void,
-		drop(e: DropTargetDropEvent): void
-	}
-
-	declare interface DropTargetEvent {
-		sender?: DropTarget
-	}
-
-	declare interface DropTargetDragenterEvent {
-		draggable?: kendo.ui.Draggable
-	}
-
-	declare interface DropTargetDragleaveEvent {
-		draggable?: kendo.ui.Draggable
-	}
-
-	declare interface DropTargetDropEvent {
-		draggable?: kendo.ui.Draggable
-	}
-
-	declare interface DropTargetAreaOptions {
-		group?: string,
-		filter?: string,
-		dragenter(e: DropTargetAreaDragenterEvent): void,
-		dragleave(e: DropTargetAreaDragleaveEvent): void,
-		drop(e: DropTargetAreaDropEvent): void
-	}
-
-	declare interface DropTargetAreaEvent {
-		sender: DropTargetArea
-	}
-
-	declare interface DropTargetAreaDragenterEvent {
-		draggable?: kendo.ui.Draggable,
-		dropTarget?: JQuery,
-		target?: Element
-	}
-
-	declare interface DropTargetAreaDragleaveEvent {
-		draggable?: kendo.ui.Draggable,
-		dropTarget?: JQuery,
-		target?: Element
-	}
-
-	declare interface DropTargetAreaDropEvent {
-		draggable?: kendo.ui.Draggable,
-		dropTarget?: JQuery,
-		target?: Element
-	}
-
-	declare interface DraggableOptions {
-		axis?: string,
-		autoScroll?: boolean,
-		container?: JQuery,
-		cursorOffset?: any,
-		distance?: number,
-		filter?: string,
-		group?: string,
-		hint?: Function | JQuery,
-		holdToDrag?: boolean,
-		ignore?: string,
-		cancelHold(): void,
-		drag(e: DraggableEvent): void,
-		dragcancel(e: DraggableEvent): void,
-		dragend(e: DraggableEvent): void,
-		dragstart(e: DraggableEvent): void,
-		hold(e: DraggableEvent): void
-	}
-
-	declare interface GridColumnEditorOptions {
-		field?: string,
-		format?: string,
-		model?: kendo.data.Model,
-		values?: any[]
-	}
-
-	declare interface GridColumn {
-		editor(container: JQuery, options: GridColumnEditorOptions): void
-	}
-
-	declare interface TreeListEditorOptions {
-		field?: string,
-		format?: string,
-		model?: kendo.data.Model,
-		values?: any[]
-	}
-
-	declare interface TreeListColumn {
-		editor(container: JQuery, options: TreeListEditorOptions): void
-	}
-
-	declare interface TouchAxis {
-		location?: number,
-		startLocation?: number,
-		client?: number,
-		delta?: number,
-		velocity?: number
-	}
-
-	declare interface TouchEventOptions {
-		target?: JQuery,
-		x?: TouchAxis,
-		y?: TouchAxis
-	}
-
-	declare interface Point {
-		x?: number,
-		y?: number
-	}
-
-	declare interface AlertMessages {
-		okText?: string
-	}
-
-	declare interface AlertOptions {
-		name?: string,
-		messages?: AlertMessages
-	}
-
-	declare interface AlertEvent {
-		sender: Alert,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface AutoCompleteAnimationClose {
-		duration?: number,
-		effects?: string
-	}
-
-	declare interface AutoCompleteAnimationOpen {
-		duration?: number,
-		effects?: string
-	}
-
-	declare interface AutoCompleteAnimation {
-		close?: AutoCompleteAnimationClose,
-		open?: AutoCompleteAnimationOpen
-	}
-
-	declare interface AutoCompleteVirtual {
-		itemHeight?: number,
-		mapValueTo?: string,
-		valueMapper?: Function
-	}
-
-	declare interface AutoCompleteOptions {
-		name?: string,
-		animation?: boolean | AutoCompleteAnimation,
-		dataSource?: any | any | kendo.data.DataSource,
-		clearButton?: boolean,
-		dataTextField?: string,
-		delay?: number,
-		enable?: boolean,
-		enforceMinLength?: boolean,
-		filter?: string,
-		fixedGroupTemplate?: string | Function,
-		footerTemplate?: string | Function,
-		groupTemplate?: string | Function,
-		height?: number,
-		highlightFirst?: boolean,
-		ignoreCase?: boolean,
-		minLength?: number,
-		noDataTemplate?: string | Function,
-		placeholder?: string,
-		popup?: any,
-		separator?: string | any,
-		suggest?: boolean,
-		headerTemplate?: string | Function,
-		template?: string | Function,
-		value?: string,
-		valuePrimitive?: boolean,
-		virtual?: boolean | AutoCompleteVirtual,
-		change(e: AutoCompleteChangeEvent): void,
-		close(e: AutoCompleteCloseEvent): void,
-		dataBound(e: AutoCompleteDataBoundEvent): void,
-		filtering(e: AutoCompleteFilteringEvent): void,
-		open(e: AutoCompleteOpenEvent): void,
-		select(e: AutoCompleteSelectEvent): void
-	}
-
-	declare interface AutoCompleteEvent {
-		sender: AutoComplete,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface AutoCompleteChangeEvent {
-		
-	}
-
-	declare interface AutoCompleteCloseEvent {
-		
-	}
-
-	declare interface AutoCompleteDataBoundEvent {
-		
-	}
-
-	declare interface AutoCompleteFilteringEvent {
-		filter?: any
-	}
-
-	declare interface AutoCompleteOpenEvent {
-		
-	}
-
-	declare interface AutoCompleteSelectEvent {
-		dataItem?: any,
-		item?: JQuery
-	}
-
-	declare interface ButtonOptions {
-		name?: string,
-		enable?: boolean,
-		icon?: string,
-		imageUrl?: string,
-		spriteCssClass?: string,
-		click(e: ButtonClickEvent): void
-	}
-
-	declare interface ButtonEvent {
-		sender: Button,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ButtonClickEvent {
-		event?: any
-	}
-
-	declare interface CalendarMonth {
-		content?: string,
-		empty?: string
-	}
-
-	declare interface CalendarOptions {
-		name?: string,
-		culture?: string,
-		dates?: any,
-		depth?: string,
-		disableDates?: any | Function,
-		footer?: string | Function,
-		format?: string,
-		max?: Date,
-		min?: Date,
-		month?: CalendarMonth,
-		start?: string,
-		value?: Date,
-		change(e: CalendarEvent): void,
-		navigate(e: CalendarEvent): void
-	}
-
-	declare interface CalendarEvent {
-		sender: Calendar,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ColorPaletteTileSize {
-		width?: number,
-		height?: number
-	}
-
-	declare interface ColorPaletteOptions {
-		name?: string,
-		palette?: string | any,
-		columns?: number,
-		tileSize?: ColorPaletteTileSize,
-		value?: string,
-		change(e: ColorPaletteEvent): void
-	}
-
-	declare interface ColorPaletteEvent {
-		sender: ColorPalette,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ColorPickerMessages {
-		apply?: string,
-		cancel?: string
-	}
-
-	declare interface ColorPickerTileSize {
-		width?: number,
-		height?: number
-	}
-
-	declare interface ColorPickerOptions {
-		name?: string,
-		buttons?: boolean,
-		columns?: number,
-		tileSize?: ColorPickerTileSize,
-		messages?: ColorPickerMessages,
-		palette?: string | any,
-		opacity?: boolean,
-		preview?: boolean,
-		toolIcon?: string,
-		value?: string,
-		change(e: ColorPickerChangeEvent): void,
-		select(e: ColorPickerSelectEvent): void,
-		open(e: ColorPickerEvent): void,
-		close(e: ColorPickerEvent): void
-	}
-
-	declare interface ColorPickerEvent {
-		sender: ColorPicker,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ColorPickerChangeEvent {
-		value?: string
-	}
-
-	declare interface ColorPickerSelectEvent {
-		value?: string
-	}
-
-	declare interface ComboBoxAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface ComboBoxAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface ComboBoxAnimation {
-		close?: ComboBoxAnimationClose,
-		open?: ComboBoxAnimationOpen
-	}
-
-	declare interface ComboBoxPopup {
-		appendTo?: string,
-		origin?: string,
-		position?: string
-	}
-
-	declare interface ComboBoxVirtual {
-		itemHeight?: number,
-		mapValueTo?: string,
-		valueMapper?: Function
-	}
-
-	declare interface ComboBoxOptions {
-		name?: string,
-		animation?: ComboBoxAnimation,
-		autoBind?: boolean,
-		cascadeFrom?: string,
-		cascadeFromField?: string,
-		clearButton?: boolean,
-		dataSource?: any | any | kendo.data.DataSource,
-		dataTextField?: string,
-		dataValueField?: string,
-		delay?: number,
-		enable?: boolean,
-		enforceMinLength?: boolean,
-		filter?: string,
-		fixedGroupTemplate?: string | Function,
-		footerTemplate?: string | Function,
-		groupTemplate?: string | Function,
-		height?: number,
-		highlightFirst?: boolean,
-		ignoreCase?: boolean,
-		index?: number,
-		minLength?: number,
-		noDataTemplate?: string | Function,
-		placeholder?: string,
-		popup?: ComboBoxPopup,
-		suggest?: boolean,
-		headerTemplate?: string | Function,
-		template?: string | Function,
-		text?: string,
-		value?: string,
-		valuePrimitive?: boolean,
-		virtual?: boolean | ComboBoxVirtual,
-		change(e: ComboBoxChangeEvent): void,
-		close(e: ComboBoxCloseEvent): void,
-		dataBound(e: ComboBoxDataBoundEvent): void,
-		filtering(e: ComboBoxFilteringEvent): void,
-		open(e: ComboBoxOpenEvent): void,
-		select(e: ComboBoxSelectEvent): void,
-		cascade(e: ComboBoxCascadeEvent): void
-	}
-
-	declare interface ComboBoxEvent {
-		sender: ComboBox,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ComboBoxChangeEvent {
-		
-	}
-
-	declare interface ComboBoxCloseEvent {
-		
-	}
-
-	declare interface ComboBoxDataBoundEvent {
-		
-	}
-
-	declare interface ComboBoxFilteringEvent {
-		filter?: any
-	}
-
-	declare interface ComboBoxOpenEvent {
-		
-	}
-
-	declare interface ComboBoxSelectEvent {
-		dataItem?: any,
-		item?: JQuery
-	}
-
-	declare interface ComboBoxCascadeEvent {
-		
-	}
-
-	declare interface ConfirmMessages {
-		okText?: string,
-		cancel?: string
-	}
-
-	declare interface ConfirmOptions {
-		name?: string,
-		messages?: ConfirmMessages
-	}
-
-	declare interface ConfirmEvent {
-		sender: Confirm,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ContextMenuAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface ContextMenuAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface ContextMenuAnimation {
-		close?: ContextMenuAnimationClose,
-		open?: ContextMenuAnimationOpen
-	}
-
-	declare interface ContextMenuOptions {
-		name?: string,
-		alignToAnchor?: boolean,
-		animation?: boolean | ContextMenuAnimation,
-		closeOnClick?: boolean,
-		dataSource?: any | any,
-		direction?: string,
-		filter?: string,
-		hoverDelay?: number,
-		orientation?: string,
-		popupCollision?: string,
-		showOn?: string,
-		target?: string | JQuery,
-		close(e: ContextMenuCloseEvent): void,
-		open(e: ContextMenuOpenEvent): void,
-		activate(e: ContextMenuActivateEvent): void,
-		deactivate(e: ContextMenuDeactivateEvent): void,
-		select(e: ContextMenuSelectEvent): void
-	}
-
-	declare interface ContextMenuEvent {
-		sender: ContextMenu,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ContextMenuCloseEvent {
-		item?: Element,
-		type?: string,
-		target?: Element,
-		event?: JQueryEventObject
-	}
-
-	declare interface ContextMenuOpenEvent {
-		item?: Element,
-		type?: string,
-		target?: Element,
-		event?: JQueryEventObject
-	}
-
-	declare interface ContextMenuActivateEvent {
-		item?: Element,
-		type?: string,
-		target?: Element
-	}
-
-	declare interface ContextMenuDeactivateEvent {
-		item?: Element,
-		type?: string,
-		target?: Element
-	}
-
-	declare interface ContextMenuSelectEvent {
-		item?: Element,
-		type?: string,
-		target?: Element
-	}
-
-	declare interface DatePickerAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface DatePickerAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface DatePickerAnimation {
-		close?: DatePickerAnimationClose,
-		open?: DatePickerAnimationOpen
-	}
-
-	declare interface DatePickerMonth {
-		content?: string,
-		empty?: string
-	}
-
-	declare interface DatePickerOptions {
-		name?: string,
-		animation?: boolean | DatePickerAnimation,
-		ARIATemplate?: string,
-		culture?: string,
-		dates?: any,
-		depth?: string,
-		disableDates?: any | Function,
-		footer?: string | Function,
-		format?: string,
-		max?: Date,
-		min?: Date,
-		month?: DatePickerMonth,
-		parseFormats?: any,
-		start?: string,
-		value?: Date,
-		change(e: DatePickerChangeEvent): void,
-		close(e: DatePickerCloseEvent): void,
-		open(e: DatePickerOpenEvent): void
-	}
-
-	declare interface DatePickerEvent {
-		sender: DatePicker,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface DatePickerChangeEvent {
-		
-	}
-
-	declare interface DatePickerCloseEvent {
-		
-	}
-
-	declare interface DatePickerOpenEvent {
-		
-	}
-
-	declare interface DateTimePickerAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface DateTimePickerAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface DateTimePickerAnimation {
-		close?: DateTimePickerAnimationClose,
-		open?: DateTimePickerAnimationOpen
-	}
-
-	declare interface DateTimePickerMonth {
-		content?: string,
-		empty?: string
-	}
-
-	declare interface DateTimePickerOptions {
-		name?: string,
-		animation?: boolean | DateTimePickerAnimation,
-		ARIATemplate?: string,
-		culture?: string,
-		dates?: any,
-		depth?: string,
-		disableDates?: any | Function,
-		footer?: string,
-		format?: string,
-		interval?: number,
-		max?: Date,
-		min?: Date,
-		month?: DateTimePickerMonth,
-		parseFormats?: any,
-		start?: string,
-		timeFormat?: string,
-		value?: Date,
-		change(e: DateTimePickerChangeEvent): void,
-		close(e: DateTimePickerCloseEvent): void,
-		open(e: DateTimePickerOpenEvent): void
-	}
-
-	declare interface DateTimePickerEvent {
-		sender: DateTimePicker,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface DateTimePickerChangeEvent {
-		
-	}
-
-	declare interface DateTimePickerCloseEvent {
-		view?: string
-	}
-
-	declare interface DateTimePickerOpenEvent {
-		view?: string
-	}
-
-	declare interface DialogAction {
-		text?: string,
-		action?: Function,
-		primary?: boolean
-	}
-
-	declare interface DialogAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface DialogAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface DialogAnimation {
-		close?: DialogAnimationClose,
-		open?: DialogAnimationOpen
-	}
-
-	declare interface DialogMessages {
-		close?: string
-	}
-
-	declare interface DialogOptions {
-		name?: string,
-		actions?: DialogAction[],
-		animation?: boolean | DialogAnimation,
-		buttonLayout?: string,
-		closable?: boolean,
-		content?: string,
-		height?: number | string,
-		maxHeight?: number,
-		maxWidth?: number,
-		messages?: DialogMessages,
-		minHeight?: number,
-		minWidth?: number,
-		modal?: boolean,
-		title?: string | boolean,
-		visible?: boolean,
-		width?: number | string,
-		close(e: DialogCloseEvent): void,
-		hide(e: DialogEvent): void,
-		initOpen(e: DialogEvent): void,
-		open(e: DialogEvent): void,
-		show(e: DialogEvent): void
-	}
-
-	declare interface DialogEvent {
-		sender: Dialog,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface DialogCloseEvent {
-		userTriggered?: boolean
-	}
-
-	declare interface DropDownListAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface DropDownListAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface DropDownListAnimation {
-		close?: DropDownListAnimationClose,
-		open?: DropDownListAnimationOpen
-	}
-
-	declare interface DropDownListPopup {
-		appendTo?: string,
-		origin?: string,
-		position?: string
-	}
-
-	declare interface DropDownListVirtual {
-		itemHeight?: number,
-		mapValueTo?: string,
-		valueMapper?: Function
-	}
-
-	declare interface DropDownListOptions {
-		name?: string,
-		animation?: boolean | DropDownListAnimation,
-		autoBind?: boolean,
-		cascadeFrom?: string,
-		cascadeFromField?: string,
-		dataSource?: any | any | kendo.data.DataSource,
-		dataTextField?: string,
-		dataValueField?: string,
-		delay?: number,
-		enable?: boolean,
-		enforceMinLength?: boolean,
-		filter?: string,
-		fixedGroupTemplate?: string | Function,
-		footerTemplate?: string | Function,
-		groupTemplate?: string | Function,
-		height?: number,
-		ignoreCase?: boolean,
-		index?: number,
-		minLength?: number,
-		noDataTemplate?: string | Function,
-		popup?: DropDownListPopup,
-		optionLabel?: string | any,
-		optionLabelTemplate?: string | Function,
-		headerTemplate?: string | Function,
-		template?: string | Function,
-		valueTemplate?: string | Function,
-		text?: string,
-		value?: string,
-		valuePrimitive?: boolean,
-		virtual?: boolean | DropDownListVirtual,
-		change(e: DropDownListChangeEvent): void,
-		close(e: DropDownListCloseEvent): void,
-		dataBound(e: DropDownListDataBoundEvent): void,
-		filtering(e: DropDownListFilteringEvent): void,
-		open(e: DropDownListOpenEvent): void,
-		select(e: DropDownListSelectEvent): void,
-		cascade(e: DropDownListCascadeEvent): void
-	}
-
-	declare interface DropDownListEvent {
-		sender: DropDownList,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface DropDownListChangeEvent {
-		
-	}
-
-	declare interface DropDownListCloseEvent {
-		
-	}
-
-	declare interface DropDownListDataBoundEvent {
-		
-	}
-
-	declare interface DropDownListFilteringEvent {
-		filter?: any
-	}
-
-	declare interface DropDownListOpenEvent {
-		
-	}
-
-	declare interface DropDownListSelectEvent {
-		dataItem?: any,
-		item?: JQuery
-	}
-
-	declare interface DropDownListCascadeEvent {
-		
-	}
-
-	declare interface EditorDeserialization {
-		custom?: Function
-	}
-
-	declare interface EditorFileBrowserMessages {
-		uploadFile?: string,
-		orderBy?: string,
-		orderByName?: string,
-		orderBySize?: string,
-		directoryNotFound?: string,
-		emptyFolder?: string,
-		deleteFile?: string,
-		invalidFileType?: string,
-		overwriteFile?: string,
-		search?: string
-	}
-
-	declare interface EditorFileBrowserSchemaModelFieldsName {
-		field?: string,
-		parse?: Function
-	}
-
-	declare interface EditorFileBrowserSchemaModelFieldsSize {
-		field?: string,
-		parse?: Function
-	}
-
-	declare interface EditorFileBrowserSchemaModelFieldsType {
-		parse?: Function,
-		field?: string
-	}
-
-	declare interface EditorFileBrowserSchemaModelFields {
-		name?: EditorFileBrowserSchemaModelFieldsName,
-		type?: EditorFileBrowserSchemaModelFieldsType,
-		size?: EditorFileBrowserSchemaModelFieldsSize
-	}
-
-	declare interface EditorFileBrowserSchemaModel {
-		id?: string,
-		fields?: EditorFileBrowserSchemaModelFields
-	}
-
-	declare interface EditorFileBrowserSchema {
-		
-	}
-
-	declare interface EditorFileBrowserTransportCreate {
-		contentType?: string,
-		data?: any | string | Function,
-		dataType?: string,
-		type?: string,
-		url?: string | Function
-	}
-
-	declare interface EditorFileBrowserTransportDestroy {
-		contentType?: string,
-		data?: any | string | Function,
-		dataType?: string,
-		type?: string,
-		url?: string | Function
-	}
-
-	declare interface EditorFileBrowserTransportRead {
-		contentType?: string,
-		data?: any | string | Function,
-		dataType?: string,
-		type?: string,
-		url?: string | Function
-	}
-
-	declare interface EditorFileBrowserTransport {
-		read?: EditorFileBrowserTransportRead,
-		uploadUrl?: string,
-		fileUrl?: string | Function,
-		destroy?: EditorFileBrowserTransportDestroy,
-		create?: EditorFileBrowserTransportCreate
-	}
-
-	declare interface EditorFileBrowser {
-		fileTypes?: string,
-		path?: string,
-		transport?: EditorFileBrowserTransport,
-		schema?: EditorFileBrowserSchema,
-		messages?: EditorFileBrowserMessages
-	}
-
-	declare interface EditorImageBrowserMessages {
-		uploadFile?: string,
-		orderBy?: string,
-		orderByName?: string,
-		orderBySize?: string,
-		directoryNotFound?: string,
-		emptyFolder?: string,
-		deleteFile?: string,
-		invalidFileType?: string,
-		overwriteFile?: string,
-		search?: string
-	}
-
-	declare interface EditorImageBrowserSchemaModelFieldsName {
-		field?: string,
-		parse?: Function
-	}
-
-	declare interface EditorImageBrowserSchemaModelFieldsSize {
-		field?: string,
-		parse?: Function
-	}
-
-	declare interface EditorImageBrowserSchemaModelFieldsType {
-		parse?: Function,
-		field?: string
-	}
-
-	declare interface EditorImageBrowserSchemaModelFields {
-		name?: EditorImageBrowserSchemaModelFieldsName,
-		type?: EditorImageBrowserSchemaModelFieldsType,
-		size?: EditorImageBrowserSchemaModelFieldsSize
-	}
-
-	declare interface EditorImageBrowserSchemaModel {
-		id?: string,
-		fields?: EditorImageBrowserSchemaModelFields
-	}
-
-	declare interface EditorImageBrowserSchema {
-		
-	}
-
-	declare interface EditorImageBrowserTransportCreate {
-		contentType?: string,
-		data?: any | string | Function,
-		dataType?: string,
-		type?: string,
-		url?: string | Function
-	}
-
-	declare interface EditorImageBrowserTransportDestroy {
-		contentType?: string,
-		data?: any | string | Function,
-		dataType?: string,
-		type?: string,
-		url?: string | Function
-	}
-
-	declare interface EditorImageBrowserTransportRead {
-		contentType?: string,
-		data?: any | string | Function,
-		dataType?: string,
-		type?: string,
-		url?: string | Function
-	}
-
-	declare interface EditorImageBrowserTransport {
-		read?: EditorImageBrowserTransportRead,
-		thumbnailUrl?: string | Function,
-		uploadUrl?: string,
-		imageUrl?: string | Function,
-		destroy?: EditorImageBrowserTransportDestroy,
-		create?: EditorImageBrowserTransportCreate
-	}
-
-	declare interface EditorImageBrowser {
-		fileTypes?: string,
-		path?: string,
-		transport?: EditorImageBrowserTransport,
-		schema?: EditorImageBrowserSchema,
-		messages?: EditorImageBrowserMessages
-	}
-
-	declare interface EditorImmutables {
-		deserialization?: Function,
-		serialization?: string | Function
-	}
-
-	declare interface EditorMessages {
-		accessibilityTab?: string,
-		addColumnLeft?: string,
-		addColumnRight?: string,
-		addRowAbove?: string,
-		addRowBelow?: string,
-		alignCenter?: string,
-		alignCenterBottom?: string,
-		alignCenterMiddle?: string,
-		alignCenterTop?: string,
-		alignLeft?: string,
-		alignLeftBottom?: string,
-		alignLeftMiddle?: string,
-		alignLeftTop?: string,
-		alignRemove?: string,
-		alignRight?: string,
-		alignRightBottom?: string,
-		alignRightMiddle?: string,
-		alignRightTop?: string,
-		alignment?: string,
-		associateCellsWithHeaders?: string,
-		backColor?: string,
-		background?: string,
-		bold?: string,
-		border?: string,
-		style?: string,
-		caption?: string,
-		cellMargin?: string,
-		cellPadding?: string,
-		cellSpacing?: string,
-		cellTab?: string,
-		cleanFormatting?: string,
-		collapseBorders?: string,
-		columns?: string,
-		createLink?: string,
-		createTable?: string,
-		createTableHint?: string,
-		cssClass?: string,
-		deleteColumn?: string,
-		deleteRow?: string,
-		dialogCancel?: string,
-		dialogInsert?: string,
-		dialogOk?: string,
-		dialogUpdate?: string,
-		editAreaTitle?: string,
-		fileTitle?: string,
-		fileWebAddress?: string,
-		fontName?: string,
-		fontNameInherit?: string,
-		fontSize?: string,
-		fontSizeInherit?: string,
-		foreColor?: string,
-		formatBlock?: string,
-		formatting?: string,
-		height?: string,
-		id?: string,
-		imageAltText?: string,
-		imageHeight?: string,
-		imageWebAddress?: string,
-		imageWidth?: string,
-		indent?: string,
-		insertFile?: string,
-		insertHtml?: string,
-		insertImage?: string,
-		insertOrderedList?: string,
-		insertUnorderedList?: string,
-		italic?: string,
-		justifyCenter?: string,
-		justifyFull?: string,
-		justifyLeft?: string,
-		justifyRight?: string,
-		linkOpenInNewWindow?: string,
-		linkText?: string,
-		linkToolTip?: string,
-		linkWebAddress?: string,
-		outdent?: string,
-		print?: string,
-		rows?: string,
-		selectAllCells?: string,
-		strikethrough?: string,
-		subscript?: string,
-		summary?: string,
-		superscript?: string,
-		tableTab?: string,
-		tableWizard?: string,
-		underline?: string,
-		unlink?: string,
-		viewHtml?: string,
-		width?: string,
-		wrapText?: string
-	}
-
-	declare interface EditorPasteCleanup {
-		all?: boolean,
-		css?: boolean,
-		custom?: Function,
-		keepNewLines?: boolean,
-		msAllFormatting?: boolean,
-		msConvertLists?: boolean,
-		msTags?: boolean,
-		none?: boolean,
-		span?: boolean
-	}
-
-	declare interface EditorPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface EditorPdf {
-		author?: string,
-		avoidLinks?: boolean | string,
-		creator?: string,
-		date?: Date,
-		fileName?: string,
-		forceProxy?: boolean,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: EditorPdfMargin,
-		paperSize?: string | any,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface EditorResizable {
-		content?: boolean,
-		min?: number,
-		max?: number,
-		toolbar?: boolean
-	}
-
-	declare interface EditorSerialization {
-		custom?: Function,
-		entities?: boolean,
-		scripts?: boolean,
-		semantic?: boolean
-	}
-
-	declare interface EditorToolItem {
-		text?: string,
-		value?: string,
-		context?: string
-	}
-
-	declare interface EditorTool {
-		name?: string,
-		tooltip?: string,
-		exec?: Function,
-		items?: EditorToolItem[],
-		template?: string
-	}
-
-	declare interface EditorExecParams {
-		value?: any
-	}
-
-	declare interface EditorPasteOptions {
-		split?: boolean
-	}
-
-	declare interface EditorOptions {
-		name?: string,
-		deserialization?: EditorDeserialization,
-		domain?: string,
-		encoded?: boolean,
-		immutables?: boolean | EditorImmutables,
-		messages?: EditorMessages,
-		pasteCleanup?: EditorPasteCleanup,
-		pdf?: EditorPdf,
-		resizable?: boolean | EditorResizable,
-		serialization?: EditorSerialization,
-		stylesheets?: any,
-		tools?: EditorTool[],
-		imageBrowser?: EditorImageBrowser,
-		fileBrowser?: EditorFileBrowser,
-		change(e: EditorEvent): void,
-		execute(e: EditorExecuteEvent): void,
-		keydown(e: EditorEvent): void,
-		keyup(e: EditorEvent): void,
-		paste(e: EditorPasteEvent): void,
-		pdfExport(e: EditorPdfExportEvent): void,
-		select(e: EditorEvent): void
-	}
-
-	declare interface EditorEvent {
-		sender: Editor,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface EditorExecuteEvent {
-		name?: string,
-		command?: any
-	}
-
-	declare interface EditorPasteEvent {
-		html?: any
-	}
-
-	declare interface EditorPdfExportEvent {
-		promise?: JQueryPromise<any>
-	}
-
-	declare interface FilterMenuMessages {
-		and?: string,
-		clear?: string,
-		filter?: string,
-		info?: string,
-		isFalse?: string,
-		isTrue?: string,
-		or?: string,
-		selectValue?: string
-	}
-
-	declare interface FilterMenuOperatorsDate {
-		eq?: string,
-		neq?: string,
-		isnull?: string,
-		isnotnull?: string,
-		gte?: string,
-		gt?: string,
-		lte?: string,
-		lt?: string
-	}
-
-	declare interface FilterMenuOperatorsEnums {
-		eq?: string,
-		neq?: string,
-		isnull?: string,
-		isnotnull?: string
-	}
-
-	declare interface FilterMenuOperatorsNumber {
-		eq?: string,
-		neq?: string,
-		isnull?: string,
-		isnotnull?: string,
-		gte?: string,
-		gt?: string,
-		lte?: string,
-		lt?: string
-	}
-
-	declare interface FilterMenuOperatorsString {
-		eq?: string,
-		neq?: string,
-		isnull?: string,
-		isnotnull?: string,
-		isempty?: string,
-		isnotempty?: string,
-		startswith?: string,
-		contains?: string,
-		doesnotcontain?: string,
-		endswith?: string
-	}
-
-	declare interface FilterMenuOperators {
-		string?: FilterMenuOperatorsString,
-		number?: FilterMenuOperatorsNumber,
-		date?: FilterMenuOperatorsDate,
-		enums?: FilterMenuOperatorsEnums
-	}
-
-	declare interface FilterMenuOptions {
-		name?: string,
-		dataSource?: any | any | kendo.data.DataSource,
-		extra?: boolean,
-		field?: string,
-		messages?: FilterMenuMessages,
-		operators?: FilterMenuOperators
-	}
-
-	declare interface FilterMenuEvent {
-		sender: FilterMenu,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface FlatColorPickerMessages {
-		apply?: string,
-		cancel?: string
-	}
-
-	declare interface FlatColorPickerOptions {
-		name?: string,
-		opacity?: boolean,
-		buttons?: boolean,
-		value?: string,
-		preview?: boolean,
-		autoupdate?: boolean,
-		messages?: FlatColorPickerMessages,
-		change(e: FlatColorPickerChangeEvent): void
-	}
-
-	declare interface FlatColorPickerEvent {
-		sender: FlatColorPicker,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface FlatColorPickerChangeEvent {
-		value?: string
-	}
-
-	declare interface GanttAssignments {
-		dataSource?: any | any | kendo.data.DataSource,
-		dataResourceIdField?: string,
-		dataTaskIdField?: string,
-		dataValueField?: string
-	}
-
-	declare interface GanttColumn {
-		field?: string,
-		title?: string,
-		format?: string,
-		width?: string | number,
-		editable?: boolean,
-		sortable?: boolean
-	}
-
-	declare interface GanttCurrentTimeMarker {
-		updateInterval?: number
-	}
-
-	declare interface GanttEditable {
-		confirmation?: boolean,
-		create?: boolean,
-		dependencyCreate?: boolean,
-		dependencyDestroy?: boolean,
-		dragPercentComplete?: boolean,
-		destroy?: boolean,
-		move?: boolean,
-		reorder?: boolean,
-		resize?: boolean,
-		template?: string | Function,
-		update?: boolean
-	}
-
-	declare interface GanttMessagesActions {
-		addChild?: string,
-		append?: string,
-		insertAfter?: string,
-		insertBefore?: string,
-		pdf?: string
-	}
-
-	declare interface GanttMessagesEditor {
-		assignButton?: string,
-		editorTitle?: string,
-		end?: string,
-		percentComplete?: string,
-		resources?: string,
-		resourcesEditorTitle?: string,
-		resourcesHeader?: string,
-		start?: string,
-		title?: string,
-		unitsHeader?: string
-	}
-
-	declare interface GanttMessagesViews {
-		day?: string,
-		end?: string,
-		month?: string,
-		start?: string,
-		week?: string,
-		year?: string
-	}
-
-	declare interface GanttMessages {
-		actions?: GanttMessagesActions,
-		cancel?: string,
-		deleteDependencyConfirmation?: string,
-		deleteDependencyWindowTitle?: string,
-		deleteTaskConfirmation?: string,
-		deleteTaskWindowTitle?: string,
-		destroy?: string,
-		editor?: GanttMessagesEditor,
-		save?: string,
-		views?: GanttMessagesViews
-	}
-
-	declare interface GanttPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface GanttPdf {
-		author?: string,
-		avoidLinks?: boolean | string,
-		creator?: string,
-		date?: Date,
-		fileName?: string,
-		forceProxy?: boolean,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: GanttPdfMargin,
-		paperSize?: string | any,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface GanttRange {
-		start?: Date,
-		end?: Date
-	}
-
-	declare interface GanttResources {
-		dataFormatField?: string,
-		dataColorField?: string,
-		dataSource?: any | any | kendo.data.DataSource,
-		dataTextField?: string,
-		field?: string
-	}
-
-	declare interface GanttToolbarItem {
-		name?: string,
-		template?: string | Function,
-		text?: string
-	}
-
-	declare interface GanttTooltip {
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface GanttViewRange {
-		start?: Date,
-		end?: Date
-	}
-
-	declare interface GanttView {
-		date?: Date,
-		range?: GanttViewRange,
-		type?: string,
-		selected?: boolean,
-		slotSize?: number | string,
-		timeHeaderTemplate?: string | Function,
-		dayHeaderTemplate?: string | Function,
-		weekHeaderTemplate?: string | Function,
-		monthHeaderTemplate?: string | Function,
-		yearHeaderTemplate?: string | Function,
-		resizeTooltipFormat?: string
-	}
-
-	declare interface GanttOptions {
-		name?: string,
-		assignments?: GanttAssignments,
-		autoBind?: boolean,
-		columnResizeHandleWidth?: number,
-		columns?: GanttColumn[],
-		currentTimeMarker?: boolean | GanttCurrentTimeMarker,
-		dataSource?: any | any | kendo.data.GanttDataSource,
-		date?: Date,
-		dependencies?: any | any | kendo.data.GanttDependencyDataSource,
-		editable?: boolean | GanttEditable,
-		navigatable?: boolean,
-		workDayStart?: Date,
-		workDayEnd?: Date,
-		workWeekStart?: number,
-		workWeekEnd?: number,
-		hourSpan?: number,
-		snap?: boolean,
-		height?: number | string,
-		listWidth?: string | number,
-		messages?: GanttMessages,
-		pdf?: GanttPdf,
-		range?: GanttRange,
-		resizable?: boolean,
-		selectable?: boolean,
-		showWorkDays?: boolean,
-		showWorkHours?: boolean,
-		taskTemplate?: string | Function,
-		toolbar?: GanttToolbarItem[],
-		tooltip?: GanttTooltip,
-		views?: GanttView[],
-		resources?: GanttResources,
-		rowHeight?: number | string,
-		dataBinding(e: GanttDataBindingEvent): void,
-		dataBound(e: GanttDataBoundEvent): void,
-		add(e: GanttAddEvent): void,
-		edit(e: GanttEditEvent): void,
-		remove(e: GanttRemoveEvent): void,
-		cancel(e: GanttCancelEvent): void,
-		save(e: GanttSaveEvent): void,
-		change(e: GanttChangeEvent): void,
-		columnResize(e: GanttColumnResizeEvent): void,
-		navigate(e: GanttNavigateEvent): void,
-		moveStart(e: GanttMoveStartEvent): void,
-		move(e: GanttMoveEvent): void,
-		moveEnd(e: GanttMoveEndEvent): void,
-		pdfExport(e: GanttPdfExportEvent): void,
-		resizeStart(e: GanttResizeStartEvent): void,
-		resize(e: GanttResizeEvent): void,
-		resizeEnd(e: GanttResizeEndEvent): void
-	}
-
-	declare interface GanttEvent {
-		sender: Gantt,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface GanttDataBindingEvent {
-		
-	}
-
-	declare interface GanttDataBoundEvent {
-		
-	}
-
-	declare interface GanttAddEvent {
-		task?: kendo.data.GanttTask,
-		dependency?: kendo.data.GanttDependency
-	}
-
-	declare interface GanttEditEvent {
-		container?: JQuery,
-		task?: kendo.data.GanttTask
-	}
-
-	declare interface GanttRemoveEvent {
-		task?: kendo.data.GanttTask,
-		dependencies?: any
-	}
-
-	declare interface GanttCancelEvent {
-		container?: JQuery,
-		task?: kendo.data.GanttTask
-	}
-
-	declare interface GanttSaveEvent {
-		task?: kendo.data.GanttTask,
-		values?: any
-	}
-
-	declare interface GanttChangeEvent {
-		
-	}
-
-	declare interface GanttColumnResizeEvent {
-		column?: any,
-		newWidth?: number,
-		oldWidth?: number
-	}
-
-	declare interface GanttNavigateEvent {
-		view?: string
-	}
-
-	declare interface GanttMoveStartEvent {
-		task?: kendo.data.GanttTask
-	}
-
-	declare interface GanttMoveEvent {
-		task?: kendo.data.GanttTask,
-		start?: Date,
-		end?: Date
-	}
-
-	declare interface GanttMoveEndEvent {
-		task?: kendo.data.GanttTask,
-		start?: Date,
-		end?: Date
-	}
-
-	declare interface GanttPdfExportEvent {
-		promise?: JQueryPromise<any>
-	}
-
-	declare interface GanttResizeStartEvent {
-		task?: kendo.data.GanttTask
-	}
-
-	declare interface GanttResizeEvent {
-		task?: kendo.data.GanttTask,
-		start?: Date,
-		end?: Date
-	}
-
-	declare interface GanttResizeEndEvent {
-		task?: kendo.data.GanttTask,
-		start?: Date,
-		end?: Date
-	}
-
-	declare interface GridAllowCopy {
-		delimeter?: string | any
-	}
-
-	declare interface GridColumnMenuMessages {
-		columns?: string,
-		filter?: string,
-		sortAscending?: string,
-		sortDescending?: string,
-		settings?: string,
-		done?: string,
-		lock?: string,
-		unlock?: string
-	}
-
-	declare interface GridColumnMenu {
-		columns?: boolean,
-		filterable?: boolean,
-		sortable?: boolean,
-		messages?: GridColumnMenuMessages
-	}
-
-	declare interface GridColumnCommandItemText {
-		edit?: string,
-		cancel?: string,
-		update?: string
-	}
-
-	declare interface GridColumnCommandItem {
-		name?: string,
-		text?: GridColumnCommandItemText,
-		className?: string,
-		click?: Function,
-		template?: string
-	}
-
-	declare interface GridColumnFilterableCell {
-		dataSource?: any | kendo.data.DataSource,
-		dataTextField?: string,
-		delay?: number,
-		inputWidth?: number,
-		suggestionOperator?: string,
-		minLength?: number,
-		enabled?: boolean,
-		operator?: string,
-		showOperators?: boolean,
-		template?: Function
-	}
-
-	declare interface GridColumnFilterable {
-		cell?: GridColumnFilterableCell,
-		multi?: boolean,
-		dataSource?: any | any | kendo.data.DataSource,
-		checkAll?: boolean,
-		itemTemplate?: Function,
-		operators?: any,
-		search?: boolean,
-		ignoreCase?: boolean,
-		ui?: string | Function
-	}
-
-	declare interface GridColumnSortable {
-		compare?: Function
-	}
-
-	declare interface GridColumn {
-		aggregates?: any,
-		attributes?: any,
-		columns?: any,
-		command?: GridColumnCommandItem[],
-		encoded?: boolean,
-		field?: string,
-		filterable?: boolean | GridColumnFilterable,
-		footerAttributes?: any,
-		footerTemplate?: string | Function,
-		format?: string,
-		groupable?: boolean,
-		groupHeaderTemplate?: string | Function,
-		groupFooterTemplate?: string | Function,
-		headerAttributes?: any,
-		headerTemplate?: string | Function,
-		hidden?: boolean,
-		locked?: boolean,
-		lockable?: boolean,
-		minScreenWidth?: number,
-		sortable?: boolean | GridColumnSortable,
-		template?: string | Function,
-		title?: string,
-		width?: string | number,
-		values?: any,
-		menu?: boolean,
-		type?: any
-	}
-
-	declare interface GridEditable {
-		confirmation?: boolean | string | Function,
-		cancelDelete?: string,
-		confirmDelete?: string,
-		createAt?: string,
-		destroy?: boolean,
-		mode?: string,
-		template?: string | Function,
-		update?: boolean,
-		window?: any
-	}
-
-	declare interface GridExcel {
-		allPages?: boolean,
-		fileName?: string,
-		filterable?: boolean,
-		forceProxy?: boolean,
-		proxyURL?: string
-	}
-
-	declare interface GridFilterableMessages {
-		and?: string,
-		clear?: string,
-		filter?: string,
-		info?: string,
-		isFalse?: string,
-		isTrue?: string,
-		or?: string,
-		search?: string,
-		selectValue?: string,
-		cancel?: string,
-		selectedItemsFormat?: string,
-		operator?: string,
-		value?: string,
-		checkAll?: string
-	}
-
-	declare interface GridFilterableOperatorsDate {
-		eq?: string,
-		neq?: string,
-		isnull?: string,
-		isnotnull?: string,
-		gte?: string,
-		gt?: string,
-		lte?: string,
-		lt?: string
-	}
-
-	declare interface GridFilterableOperatorsEnums {
-		eq?: string,
-		neq?: string,
-		isnull?: string,
-		isnotnull?: string
-	}
-
-	declare interface GridFilterableOperatorsNumber {
-		eq?: string,
-		neq?: string,
-		isnull?: string,
-		isnotnull?: string,
-		gte?: string,
-		gt?: string,
-		lte?: string,
-		lt?: string
-	}
-
-	declare interface GridFilterableOperatorsString {
-		eq?: string,
-		neq?: string,
-		isnull?: string,
-		isnotnull?: string,
-		isempty?: string,
-		isnotempty?: string,
-		startswith?: string,
-		contains?: string,
-		doesnotcontain?: string,
-		endswith?: string
-	}
-
-	declare interface GridFilterableOperators {
-		string?: GridFilterableOperatorsString,
-		number?: GridFilterableOperatorsNumber,
-		date?: GridFilterableOperatorsDate,
-		enums?: GridFilterableOperatorsEnums
-	}
-
-	declare interface GridFilterable {
-		extra?: boolean,
-		messages?: GridFilterableMessages,
-		operators?: GridFilterableOperators,
-		mode?: string
-	}
-
-	declare interface GridGroupableMessages {
-		empty?: string
-	}
-
-	declare interface GridGroupable {
-		enabled?: boolean,
-		showFooter?: boolean,
-		messages?: GridGroupableMessages
-	}
-
-	declare interface GridMessagesCommands {
-		cancel?: string,
-		canceledit?: string,
-		create?: string,
-		destroy?: string,
-		edit?: string,
-		excel?: string,
-		save?: string,
-		update?: string
-	}
-
-	declare interface GridMessages {
-		commands?: GridMessagesCommands,
-		noRecords?: string
-	}
-
-	declare interface GridNoRecords {
-		template?: string | Function
-	}
-
-	declare interface GridPageableMessages {
-		display?: string,
-		empty?: string,
-		page?: string,
-		of?: string,
-		itemsPerPage?: string,
-		first?: string,
-		last?: string,
-		next?: string,
-		previous?: string,
-		refresh?: string,
-		morePages?: string
-	}
-
-	declare interface GridPageable {
-		pageSize?: number,
-		previousNext?: boolean,
-		numeric?: boolean,
-		buttonCount?: number,
-		input?: boolean,
-		pageSizes?: boolean | any,
-		refresh?: boolean,
-		info?: boolean,
-		messages?: GridPageableMessages
-	}
-
-	declare interface GridPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface GridPdf {
-		allPages?: boolean,
-		author?: string,
-		avoidLinks?: boolean | string,
-		creator?: string,
-		date?: Date,
-		fileName?: string,
-		forceProxy?: boolean,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: GridPdfMargin,
-		paperSize?: string | any,
-		template?: string,
-		repeatHeaders?: boolean,
-		scale?: number,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface GridScrollable {
-		virtual?: boolean
-	}
-
-	declare interface GridSortable {
-		allowUnsort?: boolean,
-		mode?: string
-	}
-
-	declare interface GridToolbarItem {
-		name?: string,
-		template?: string | Function,
-		text?: string
-	}
-
-	declare interface GridOptions {
-		name?: string,
-		allowCopy?: boolean | GridAllowCopy,
-		altRowTemplate?: string | Function,
-		autoBind?: boolean,
-		columnResizeHandleWidth?: number,
-		columns?: GridColumn[],
-		columnMenu?: boolean | GridColumnMenu,
-		dataSource?: any | any | kendo.data.DataSource,
-		detailTemplate?: string | Function,
-		editable?: boolean | GridEditable,
-		excel?: GridExcel,
-		filterable?: boolean | GridFilterable,
-		groupable?: boolean | GridGroupable,
-		height?: number | string,
-		messages?: GridMessages,
-		mobile?: boolean | string,
-		navigatable?: boolean,
-		noRecords?: boolean | GridNoRecords,
-		pageable?: boolean | GridPageable,
-		pdf?: GridPdf,
-		reorderable?: boolean,
-		resizable?: boolean,
-		rowTemplate?: string | Function,
-		scrollable?: boolean | GridScrollable,
-		selectable?: boolean | string,
-		sortable?: boolean | GridSortable,
-		toolbar?: GridToolbarItem[] | any,
-		cancel(e: GridCancelEvent): void,
-		change(e: GridChangeEvent): void,
-		columnHide(e: GridColumnHideEvent): void,
-		columnMenuInit(e: GridColumnMenuInitEvent): void,
-		columnReorder(e: GridColumnReorderEvent): void,
-		columnResize(e: GridColumnResizeEvent): void,
-		columnShow(e: GridColumnShowEvent): void,
-		dataBinding(e: GridDataBindingEvent): void,
-		dataBound(e: GridDataBoundEvent): void,
-		detailCollapse(e: GridDetailCollapseEvent): void,
-		detailExpand(e: GridDetailExpandEvent): void,
-		detailInit(e: GridDetailInitEvent): void,
-		edit(e: GridEditEvent): void,
-		excelExport(e: GridExcelExportEvent): void,
-		filter(e: GridFilterEvent): void,
-		group(e: GridGroupEvent): void,
-		page(e: GridPageEvent): void,
-		pdfExport(e: GridPdfExportEvent): void,
-		filterMenuInit(e: GridFilterMenuInitEvent): void,
-		remove(e: GridRemoveEvent): void,
-		save(e: GridSaveEvent): void,
-		saveChanges(e: GridSaveChangesEvent): void,
-		sort(e: GridSortEvent): void,
-		columnLock(e: GridColumnLockEvent): void,
-		columnUnlock(e: GridColumnUnlockEvent): void,
-		navigate(e: GridNavigateEvent): void
-	}
-
-	declare interface GridEvent {
-		sender: Grid,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface GridCancelEvent {
-		container?: JQuery,
-		model?: kendo.data.Model
-	}
-
-	declare interface GridChangeEvent {
-		
-	}
-
-	declare interface GridColumnHideEvent {
-		column?: any
-	}
-
-	declare interface GridColumnMenuInitEvent {
-		container?: JQuery,
-		field?: string
-	}
-
-	declare interface GridColumnReorderEvent {
-		column?: any,
-		newIndex?: number,
-		oldIndex?: number
-	}
-
-	declare interface GridColumnResizeEvent {
-		column?: any,
-		newWidth?: number,
-		oldWidth?: number
-	}
-
-	declare interface GridColumnShowEvent {
-		column?: any
-	}
-
-	declare interface GridDataBindingEvent {
-		action?: string,
-		index?: number,
-		items?: any
-	}
-
-	declare interface GridDataBoundEvent {
-		
-	}
-
-	declare interface GridDetailCollapseEvent {
-		detailRow?: JQuery,
-		masterRow?: JQuery
-	}
-
-	declare interface GridDetailExpandEvent {
-		detailRow?: JQuery,
-		masterRow?: JQuery
-	}
-
-	declare interface GridDetailInitEvent {
-		data?: kendo.data.ObservableObject,
-		detailCell?: JQuery,
-		detailRow?: JQuery,
-		masterRow?: JQuery
-	}
-
-	declare interface GridEditEvent {
-		container?: JQuery,
-		model?: kendo.data.Model
-	}
-
-	declare interface GridExcelExportEvent {
-		data?: any,
-		workbook?: kendo.ooxml.Workbook
-	}
-
-	declare interface GridFilterEvent {
-		filter?: any,
-		field?: string
-	}
-
-	declare interface GridGroupEvent {
-		groups?: any
-	}
-
-	declare interface GridPageEvent {
-		page?: number
-	}
-
-	declare interface GridPdfExportEvent {
-		promise?: JQueryPromise<any>
-	}
-
-	declare interface GridFilterMenuInitEvent {
-		container?: JQuery,
-		field?: string
-	}
-
-	declare interface GridRemoveEvent {
-		model?: kendo.data.Model,
-		row?: JQuery
-	}
-
-	declare interface GridSaveEvent {
-		model?: kendo.data.Model,
-		container?: JQuery,
-		values?: any
-	}
-
-	declare interface GridSaveChangesEvent {
-		
-	}
-
-	declare interface GridSortEvent {
-		sort?: any
-	}
-
-	declare interface GridColumnLockEvent {
-		column?: any
-	}
-
-	declare interface GridColumnUnlockEvent {
-		column?: any
-	}
-
-	declare interface GridNavigateEvent {
-		element?: JQuery
-	}
-
-	declare interface ListViewOptions {
-		name?: string,
-		autoBind?: boolean,
-		dataSource?: any | any | kendo.data.DataSource,
-		editTemplate?: Function,
-		navigatable?: boolean,
-		selectable?: boolean | string,
-		template?: Function,
-		altTemplate?: Function,
-		cancel(e: ListViewCancelEvent): void,
-		change(e: ListViewEvent): void,
-		dataBound(e: ListViewEvent): void,
-		dataBinding(e: ListViewEvent): void,
-		edit(e: ListViewEditEvent): void,
-		remove(e: ListViewRemoveEvent): void,
-		save(e: ListViewSaveEvent): void
-	}
-
-	declare interface ListViewEvent {
-		sender: ListView,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ListViewCancelEvent {
-		container?: JQuery,
-		model?: kendo.data.Model
-	}
-
-	declare interface ListViewEditEvent {
-		item?: JQuery,
-		model?: kendo.data.Model
-	}
-
-	declare interface ListViewRemoveEvent {
-		item?: JQuery,
-		model?: kendo.data.Model
-	}
-
-	declare interface ListViewSaveEvent {
-		model?: kendo.data.Model,
-		item?: JQuery
-	}
-
-	declare interface MaskedTextBoxOptions {
-		name?: string,
-		clearPromptChar?: boolean,
-		culture?: string,
-		mask?: string,
-		promptChar?: string,
-		rules?: any,
-		unmaskOnPost?: boolean,
-		value?: string,
-		change(e: MaskedTextBoxChangeEvent): void
-	}
-
-	declare interface MaskedTextBoxEvent {
-		sender: MaskedTextBox,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MaskedTextBoxChangeEvent {
-		
-	}
-
-	declare interface MediaPlayerMedia {
-		source?: string,
-		title?: string
-	}
-
-	declare interface MediaPlayerMessages {
-		pause?: string,
-		play?: string,
-		mute?: string,
-		unmute?: string,
-		quality?: string,
-		fullscreen?: string
-	}
-
-	declare interface MediaPlayerOptions {
-		name?: string,
-		autoPlay?: boolean,
-		autoRepeat?: boolean,
-		forwardSeek?: boolean,
-		fullScreen?: boolean,
-		media?: MediaPlayerMedia,
-		messages?: MediaPlayerMessages,
-		mute?: boolean,
-		navigatable?: boolean,
-		volume?: number,
-		end(e: MediaPlayerEvent): void,
-		pause(e: MediaPlayerEvent): void,
-		play(e: MediaPlayerEvent): void,
-		ready(e: MediaPlayerEvent): void,
-		timeChange(e: MediaPlayerEvent): void,
-		volumeChange(e: MediaPlayerEvent): void
-	}
-
-	declare interface MediaPlayerEvent {
-		sender: MediaPlayer,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MenuAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MenuAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MenuAnimation {
-		close?: MenuAnimationClose,
-		open?: MenuAnimationOpen
-	}
-
-	declare interface MenuOptions {
-		name?: string,
-		animation?: boolean | MenuAnimation,
-		closeOnClick?: boolean,
-		dataSource?: any | any,
-		direction?: string,
-		hoverDelay?: number,
-		openOnClick?: boolean,
-		orientation?: string,
-		popupCollision?: string,
-		close(e: MenuCloseEvent): void,
-		open(e: MenuOpenEvent): void,
-		activate(e: MenuActivateEvent): void,
-		deactivate(e: MenuDeactivateEvent): void,
-		select(e: MenuSelectEvent): void
-	}
-
-	declare interface MenuEvent {
-		sender: Menu,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MenuCloseEvent {
-		item?: HTMLElement
-	}
-
-	declare interface MenuOpenEvent {
-		item?: HTMLElement
-	}
-
-	declare interface MenuActivateEvent {
-		item?: HTMLElement
-	}
-
-	declare interface MenuDeactivateEvent {
-		item?: HTMLElement
-	}
-
-	declare interface MenuSelectEvent {
-		item?: HTMLElement
-	}
-
-	declare interface MultiSelectAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MultiSelectAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MultiSelectAnimation {
-		close?: MultiSelectAnimationClose,
-		open?: MultiSelectAnimationOpen
-	}
-
-	declare interface MultiSelectPopup {
-		appendTo?: string,
-		origin?: string,
-		position?: string
-	}
-
-	declare interface MultiSelectVirtual {
-		itemHeight?: number,
-		mapValueTo?: string,
-		valueMapper?: Function
-	}
-
-	declare interface MultiSelectOptions {
-		name?: string,
-		animation?: boolean | MultiSelectAnimation,
-		autoBind?: boolean,
-		autoClose?: boolean,
-		clearButton?: boolean,
-		dataSource?: any | any | kendo.data.DataSource,
-		dataTextField?: string,
-		dataValueField?: string,
-		delay?: number,
-		enable?: boolean,
-		enforceMinLength?: boolean,
-		filter?: string,
-		fixedGroupTemplate?: string | Function,
-		footerTemplate?: string | Function,
-		groupTemplate?: string | Function,
-		height?: number,
-		highlightFirst?: boolean,
-		ignoreCase?: boolean,
-		minLength?: number,
-		maxSelectedItems?: number,
-		noDataTemplate?: string | Function,
-		placeholder?: string,
-		popup?: MultiSelectPopup,
-		headerTemplate?: string | Function,
-		itemTemplate?: string | Function,
-		tagTemplate?: string,
-		tagMode?: string,
-		value?: any,
-		valuePrimitive?: boolean,
-		virtual?: boolean | MultiSelectVirtual,
-		change(e: MultiSelectChangeEvent): void,
-		close(e: MultiSelectCloseEvent): void,
-		dataBound(e: MultiSelectDataBoundEvent): void,
-		filtering(e: MultiSelectFilteringEvent): void,
-		open(e: MultiSelectOpenEvent): void,
-		select(e: MultiSelectSelectEvent): void,
-		deselect(e: MultiSelectDeselectEvent): void
-	}
-
-	declare interface MultiSelectEvent {
-		sender: MultiSelect,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MultiSelectChangeEvent {
-		
-	}
-
-	declare interface MultiSelectCloseEvent {
-		
-	}
-
-	declare interface MultiSelectDataBoundEvent {
-		
-	}
-
-	declare interface MultiSelectFilteringEvent {
-		filter?: any
-	}
-
-	declare interface MultiSelectOpenEvent {
-		
-	}
-
-	declare interface MultiSelectSelectEvent {
-		dataItem?: any,
-		item?: JQuery
-	}
-
-	declare interface MultiSelectDeselectEvent {
-		dataItem?: any,
-		item?: JQuery
-	}
-
-	declare interface NotificationPosition {
-		bottom?: number,
-		left?: number,
-		pinned?: boolean,
-		right?: number,
-		top?: number
-	}
-
-	declare interface NotificationTemplate {
-		type?: string,
-		template?: string
-	}
-
-	declare interface NotificationOptions {
-		name?: string,
-		allowHideAfter?: number,
-		animation?: any | boolean,
-		appendTo?: string | JQuery,
-		autoHideAfter?: number,
-		button?: boolean,
-		height?: number | string,
-		hideOnClick?: boolean,
-		position?: NotificationPosition,
-		stacking?: string,
-		templates?: NotificationTemplate[],
-		width?: number | string,
-		hide(e: NotificationHideEvent): void,
-		show(e: NotificationShowEvent): void
-	}
-
-	declare interface NotificationEvent {
-		sender: Notification,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface NotificationHideEvent {
-		element?: JQuery
-	}
-
-	declare interface NotificationShowEvent {
-		element?: JQuery
-	}
-
-	declare interface NumericTextBoxOptions {
-		name?: string,
-		culture?: string,
-		decimals?: number,
-		downArrowText?: string,
-		format?: string,
-		max?: number,
-		min?: number,
-		placeholder?: string,
-		restrictDecimals?: boolean,
-		round?: boolean,
-		spinners?: boolean,
-		step?: number,
-		upArrowText?: string,
-		value?: number,
-		change(e: NumericTextBoxChangeEvent): void,
-		spin(e: NumericTextBoxSpinEvent): void
-	}
-
-	declare interface NumericTextBoxEvent {
-		sender: NumericTextBox,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface NumericTextBoxChangeEvent {
-		
-	}
-
-	declare interface NumericTextBoxSpinEvent {
-		
-	}
-
-	declare interface PagerMessages {
-		display?: string,
-		empty?: string,
-		allPages?: string,
-		page?: string,
-		of?: string,
-		itemsPerPage?: string,
-		first?: string,
-		previous?: string,
-		next?: string,
-		last?: string,
-		refresh?: string
-	}
-
-	declare interface PagerOptions {
-		name?: string,
-		autoBind?: boolean,
-		buttonCount?: number,
-		dataSource?: any | kendo.data.DataSource,
-		selectTemplate?: string,
-		linkTemplate?: string,
-		info?: boolean,
-		input?: boolean,
-		numeric?: boolean,
-		pageSizes?: boolean | any,
-		previousNext?: boolean,
-		refresh?: boolean,
-		messages?: PagerMessages,
-		change(e: PagerChangeEvent): void
-	}
-
-	declare interface PagerEvent {
-		sender: Pager,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PagerChangeEvent {
-		
-	}
-
-	declare interface PanelBarAnimationCollapse {
-		duration?: number,
-		effects?: string
-	}
-
-	declare interface PanelBarAnimationExpand {
-		duration?: number,
-		effects?: string
-	}
-
-	declare interface PanelBarAnimation {
-		collapse?: PanelBarAnimationCollapse,
-		expand?: PanelBarAnimationExpand
-	}
-
-	declare interface PanelBarOptions {
-		name?: string,
-		animation?: boolean | PanelBarAnimation,
-		contentUrls?: any,
-		dataSource?: any | any,
-		expandMode?: string,
-		activate(e: PanelBarActivateEvent): void,
-		collapse(e: PanelBarCollapseEvent): void,
-		contentLoad(e: PanelBarContentLoadEvent): void,
-		error(e: PanelBarErrorEvent): void,
-		expand(e: PanelBarExpandEvent): void,
-		select(e: PanelBarSelectEvent): void
-	}
-
-	declare interface PanelBarEvent {
-		sender: PanelBar,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PanelBarActivateEvent {
-		item?: Element
-	}
-
-	declare interface PanelBarCollapseEvent {
-		item?: Element
-	}
-
-	declare interface PanelBarContentLoadEvent {
-		item?: Element,
-		contentElement?: Element
-	}
-
-	declare interface PanelBarErrorEvent {
-		xhr?: JQueryXHR,
-		status?: string
-	}
-
-	declare interface PanelBarExpandEvent {
-		item?: Element
-	}
-
-	declare interface PanelBarSelectEvent {
-		item?: Element
-	}
-
-	declare interface PivotConfiguratorMessagesFieldMenuOperators {
-		contains?: string,
-		doesnotcontain?: string,
-		startswith?: string,
-		endswith?: string,
-		eq?: string,
-		neq?: string
-	}
-
-	declare interface PivotConfiguratorMessagesFieldMenu {
-		info?: string,
-		sortAscending?: string,
-		sortDescending?: string,
-		filterFields?: string,
-		filter?: string,
-		include?: string,
-		title?: string,
-		clear?: string,
-		ok?: string,
-		cancel?: string,
-		operators?: PivotConfiguratorMessagesFieldMenuOperators
-	}
-
-	declare interface PivotConfiguratorMessages {
-		measures?: string,
-		columns?: string,
-		rows?: string,
-		measuresLabel?: string,
-		rowsLabel?: string,
-		columnsLabel?: string,
-		fieldsLabel?: string,
-		fieldMenu?: PivotConfiguratorMessagesFieldMenu
-	}
-
-	declare interface PivotConfiguratorSortable {
-		allowUnsort?: boolean
-	}
-
-	declare interface PivotConfiguratorOptions {
-		name?: string,
-		dataSource?: any | kendo.data.PivotDataSource,
-		filterable?: boolean,
-		sortable?: boolean | PivotConfiguratorSortable,
-		height?: number | string,
-		messages?: PivotConfiguratorMessages
-	}
-
-	declare interface PivotConfiguratorEvent {
-		sender: PivotConfigurator,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PivotGridExcel {
-		fileName?: string,
-		filterable?: boolean,
-		forceProxy?: boolean,
-		proxyURL?: string
-	}
-
-	declare interface PivotGridMessagesFieldMenuOperators {
-		contains?: string,
-		doesnotcontain?: string,
-		startswith?: string,
-		endswith?: string,
-		eq?: string,
-		neq?: string
-	}
-
-	declare interface PivotGridMessagesFieldMenu {
-		info?: string,
-		sortAscending?: string,
-		sortDescending?: string,
-		filterFields?: string,
-		filter?: string,
-		include?: string,
-		title?: string,
-		clear?: string,
-		ok?: string,
-		cancel?: string,
-		operators?: PivotGridMessagesFieldMenuOperators
-	}
-
-	declare interface PivotGridMessages {
-		measureFields?: string,
-		columnFields?: string,
-		rowFields?: string,
-		fieldMenu?: PivotGridMessagesFieldMenu
-	}
-
-	declare interface PivotGridPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface PivotGridPdf {
-		author?: string,
-		avoidLinks?: boolean | string,
-		creator?: string,
-		date?: Date,
-		fileName?: string,
-		forceProxy?: boolean,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: PivotGridPdfMargin,
-		paperSize?: string | any,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface PivotGridSortable {
-		allowUnsort?: boolean
-	}
-
-	declare interface PivotGridOptions {
-		name?: string,
-		dataSource?: any | kendo.data.PivotDataSource,
-		autoBind?: boolean,
-		reorderable?: boolean,
-		excel?: PivotGridExcel,
-		pdf?: PivotGridPdf,
-		filterable?: boolean,
-		sortable?: boolean | PivotGridSortable,
-		columnWidth?: number,
-		height?: number | string,
-		columnHeaderTemplate?: string | Function,
-		dataCellTemplate?: string | Function,
-		kpiStatusTemplate?: string | Function,
-		kpiTrendTemplate?: string | Function,
-		rowHeaderTemplate?: string | Function,
-		messages?: PivotGridMessages,
-		dataBinding(e: PivotGridDataBindingEvent): void,
-		dataBound(e: PivotGridDataBoundEvent): void,
-		expandMember(e: PivotGridExpandMemberEvent): void,
-		collapseMember(e: PivotGridCollapseMemberEvent): void,
-		excelExport(e: PivotGridExcelExportEvent): void,
-		pdfExport(e: PivotGridPdfExportEvent): void
-	}
-
-	declare interface PivotGridEvent {
-		sender: PivotGrid,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PivotGridDataBindingEvent {
-		
-	}
-
-	declare interface PivotGridDataBoundEvent {
-		
-	}
-
-	declare interface PivotGridExpandMemberEvent {
-		axis?: string,
-		path?: string
-	}
-
-	declare interface PivotGridCollapseMemberEvent {
-		axis?: string,
-		path?: string
-	}
-
-	declare interface PivotGridExcelExportEvent {
-		data?: any,
-		workbook?: any
-	}
-
-	declare interface PivotGridPdfExportEvent {
-		promise?: JQueryPromise<any>
-	}
-
-	declare interface PopupAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface PopupAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface PopupAnimation {
-		close?: PopupAnimationClose,
-		open?: PopupAnimationOpen
-	}
-
-	declare interface PopupOptions {
-		name?: string,
-		adjustSize?: any,
-		animation?: boolean | PopupAnimation,
-		anchor?: string | JQuery,
-		appendTo?: string | JQuery,
-		collision?: string,
-		origin?: string,
-		position?: string,
-		activate(e: PopupActivateEvent): void,
-		close(e: PopupCloseEvent): void,
-		deactivate(e: PopupDeactivateEvent): void,
-		open(e: PopupOpenEvent): void
-	}
-
-	declare interface PopupEvent {
-		sender: Popup,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PopupActivateEvent {
-		
-	}
-
-	declare interface PopupCloseEvent {
-		
-	}
-
-	declare interface PopupDeactivateEvent {
-		
-	}
-
-	declare interface PopupOpenEvent {
-		
-	}
-
-	declare interface ProgressBarAnimation {
-		duration?: number
-	}
-
-	declare interface ProgressBarOptions {
-		name?: string,
-		animation?: ProgressBarAnimation,
-		chunkCount?: number,
-		enable?: boolean,
-		max?: number,
-		min?: number,
-		orientation?: string,
-		reverse?: boolean,
-		showStatus?: boolean,
-		type?: string,
-		value?: number,
-		change(e: ProgressBarChangeEvent): void,
-		complete(e: ProgressBarCompleteEvent): void
-	}
-
-	declare interface ProgressBarEvent {
-		sender: ProgressBar,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ProgressBarChangeEvent {
-		value?: number
-	}
-
-	declare interface ProgressBarCompleteEvent {
-		value?: number
-	}
-
-	declare interface PromptMessages {
-		okText?: string,
-		cancel?: string
-	}
-
-	declare interface PromptOptions {
-		name?: string,
-		messages?: PromptMessages
-	}
-
-	declare interface PromptEvent {
-		sender: Prompt,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RangeSliderTooltip {
-		enabled?: boolean,
-		format?: string,
-		template?: string
-	}
-
-	declare interface RangeSliderOptions {
-		name?: string,
-		largeStep?: number,
-		leftDragHandleTitle?: string,
-		max?: number,
-		min?: number,
-		orientation?: string,
-		rightDragHandleTitle?: string,
-		selectionEnd?: number,
-		selectionStart?: number,
-		smallStep?: number,
-		tickPlacement?: string,
-		tooltip?: RangeSliderTooltip,
-		change(e: RangeSliderChangeEvent): void,
-		slide(e: RangeSliderSlideEvent): void
-	}
-
-	declare interface RangeSliderEvent {
-		sender: RangeSlider,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RangeSliderChangeEvent {
-		value?: any
-	}
-
-	declare interface RangeSliderSlideEvent {
-		value?: any
-	}
-
-	declare interface ResponsivePanelOptions {
-		name?: string,
-		autoClose?: boolean,
-		breakpoint?: number,
-		orientation?: string,
-		toggleButton?: string,
-		close(e: ResponsivePanelEvent): void,
-		open(e: ResponsivePanelEvent): void
-	}
-
-	declare interface ResponsivePanelEvent {
-		sender: ResponsivePanel,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SchedulerCurrentTimeMarker {
-		updateInterval?: number,
-		useLocalTimezone?: boolean
-	}
-
-	declare interface SchedulerEditable {
-		confirmation?: boolean | string,
-		create?: boolean,
-		destroy?: boolean,
-		editRecurringMode?: string,
-		move?: boolean,
-		resize?: boolean,
-		template?: string | Function,
-		update?: boolean,
-		window?: any
-	}
-
-	declare interface SchedulerFooter {
-		command?: string | boolean
-	}
-
-	declare interface SchedulerGroup {
-		date?: boolean,
-		resources?: any,
-		orientation?: string
-	}
-
-	declare interface SchedulerMessagesEditable {
-		confirmation?: string
-	}
-
-	declare interface SchedulerMessagesEditor {
-		allDayEvent?: string,
-		description?: string,
-		editorTitle?: string,
-		end?: string,
-		endTimezone?: string,
-		repeat?: string,
-		separateTimezones?: string,
-		start?: string,
-		startTimezone?: string,
-		timezone?: string,
-		timezoneEditorButton?: string,
-		timezoneEditorTitle?: string,
-		title?: string
-	}
-
-	declare interface SchedulerMessagesRecurrenceEditorDaily {
-		interval?: string,
-		repeatEvery?: string
-	}
-
-	declare interface SchedulerMessagesRecurrenceEditorEnd {
-		after?: string,
-		occurrence?: string,
-		label?: string,
-		never?: string,
-		mobileLabel?: string,
-		on?: string
-	}
-
-	declare interface SchedulerMessagesRecurrenceEditorFrequencies {
-		daily?: string,
-		monthly?: string,
-		never?: string,
-		weekly?: string,
-		yearly?: string
-	}
-
-	declare interface SchedulerMessagesRecurrenceEditorMonthly {
-		day?: string,
-		interval?: string,
-		repeatEvery?: string,
-		repeatOn?: string
-	}
-
-	declare interface SchedulerMessagesRecurrenceEditorOffsetPositions {
-		first?: string,
-		second?: string,
-		third?: string,
-		fourth?: string,
-		last?: string
-	}
-
-	declare interface SchedulerMessagesRecurrenceEditorWeekdays {
-		day?: string,
-		weekday?: string,
-		weekend?: string
-	}
-
-	declare interface SchedulerMessagesRecurrenceEditorWeekly {
-		interval?: string,
-		repeatEvery?: string,
-		repeatOn?: string
-	}
-
-	declare interface SchedulerMessagesRecurrenceEditorYearly {
-		of?: string,
-		repeatEvery?: string,
-		repeatOn?: string,
-		interval?: string
-	}
-
-	declare interface SchedulerMessagesRecurrenceEditor {
-		daily?: SchedulerMessagesRecurrenceEditorDaily,
-		end?: SchedulerMessagesRecurrenceEditorEnd,
-		frequencies?: SchedulerMessagesRecurrenceEditorFrequencies,
-		monthly?: SchedulerMessagesRecurrenceEditorMonthly,
-		offsetPositions?: SchedulerMessagesRecurrenceEditorOffsetPositions,
-		weekly?: SchedulerMessagesRecurrenceEditorWeekly,
-		weekdays?: SchedulerMessagesRecurrenceEditorWeekdays,
-		yearly?: SchedulerMessagesRecurrenceEditorYearly
-	}
-
-	declare interface SchedulerMessagesRecurrenceMessages {
-		deleteRecurring?: string,
-		deleteWindowOccurrence?: string,
-		deleteWindowSeries?: string,
-		deleteWindowTitle?: string,
-		editRecurring?: string,
-		editWindowOccurrence?: string,
-		editWindowSeries?: string,
-		editWindowTitle?: string
-	}
-
-	declare interface SchedulerMessagesViews {
-		day?: string,
-		week?: string,
-		month?: string,
-		agenda?: string
-	}
-
-	declare interface SchedulerMessages {
-		allDay?: string,
-		ariaEventLabel?: string,
-		ariaSlotLabel?: string,
-		cancel?: string,
-		date?: string,
-		deleteWindowTitle?: string,
-		destroy?: string,
-		event?: string,
-		defaultRowText?: string,
-		pdf?: string,
-		save?: string,
-		showFullDay?: string,
-		showWorkDay?: string,
-		time?: string,
-		today?: string,
-		editable?: SchedulerMessagesEditable,
-		editor?: SchedulerMessagesEditor,
-		recurrenceEditor?: SchedulerMessagesRecurrenceEditor,
-		recurrenceMessages?: SchedulerMessagesRecurrenceMessages,
-		views?: SchedulerMessagesViews
-	}
-
-	declare interface SchedulerPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface SchedulerPdf {
-		author?: string,
-		avoidLinks?: boolean | string,
-		creator?: string,
-		date?: Date,
-		fileName?: string,
-		forceProxy?: boolean,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: SchedulerPdfMargin,
-		paperSize?: string | any,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface SchedulerResource {
-		dataColorField?: string,
-		dataSource?: any | any | kendo.data.DataSource,
-		dataTextField?: string,
-		dataValueField?: string,
-		field?: string,
-		multiple?: boolean,
-		name?: string,
-		title?: string,
-		valuePrimitive?: boolean
-	}
-
-	declare interface SchedulerToolbarItem {
-		name?: string
-	}
-
-	declare interface SchedulerViewEditable {
-		create?: boolean,
-		destroy?: boolean,
-		update?: boolean
-	}
-
-	declare interface SchedulerViewGroup {
-		date?: boolean,
-		orientation?: string
-	}
-
-	declare interface SchedulerView {
-		allDayEventTemplate?: string | Function,
-		allDaySlot?: boolean,
-		allDaySlotTemplate?: string | Function,
-		columnWidth?: number,
-		dateHeaderTemplate?: string | Function,
-		dayTemplate?: string | Function,
-		editable?: boolean | SchedulerViewEditable,
-		endTime?: Date,
-		eventHeight?: number,
-		eventTemplate?: string | Function,
-		eventTimeTemplate?: string | Function,
-		group?: SchedulerViewGroup,
-		majorTick?: number,
-		majorTimeHeaderTemplate?: string | Function,
-		minorTickCount?: number,
-		minorTimeHeaderTemplate?: string | Function,
-		selected?: boolean,
-		selectedDateFormat?: string,
-		selectedShortDateFormat?: string,
-		showWorkHours?: boolean,
-		slotTemplate?: string | Function,
-		startTime?: Date,
-		title?: string,
-		type?: string,
-		workWeekStart?: number,
-		workWeekEnd?: number
-	}
-
-	declare interface SchedulerSelectOptions {
-		events?: any,
-		resources?: any,
-		start?: Date,
-		end?: Date,
-		isAllDay?: boolean
-	}
-
-	declare interface SchedulerOptions {
-		name?: string,
-		allDayEventTemplate?: string | Function,
-		allDaySlot?: boolean,
-		autoBind?: boolean,
-		currentTimeMarker?: boolean | SchedulerCurrentTimeMarker,
-		dataSource?: any | any | kendo.data.SchedulerDataSource,
-		date?: Date,
-		dateHeaderTemplate?: string | Function,
-		editable?: boolean | SchedulerEditable,
-		endTime?: Date,
-		eventTemplate?: string | Function,
-		footer?: boolean | SchedulerFooter,
-		group?: SchedulerGroup,
-		height?: number | string,
-		majorTick?: number,
-		majorTimeHeaderTemplate?: string | Function,
-		max?: Date,
-		messages?: SchedulerMessages,
-		min?: Date,
-		minorTickCount?: number,
-		minorTimeHeaderTemplate?: string | Function,
-		mobile?: boolean | string,
-		pdf?: SchedulerPdf,
-		resources?: SchedulerResource[],
-		selectable?: boolean,
-		showWorkHours?: boolean,
-		snap?: boolean,
-		startTime?: Date,
-		timezone?: string,
-		toolbar?: SchedulerToolbarItem[],
-		views?: SchedulerView[],
-		groupHeaderTemplate?: string | Function,
-		width?: number | string,
-		workDayStart?: Date,
-		workDayEnd?: Date,
-		workWeekStart?: number,
-		workWeekEnd?: number,
-		add(e: SchedulerAddEvent): void,
-		cancel(e: SchedulerCancelEvent): void,
-		change(e: SchedulerChangeEvent): void,
-		dataBinding(e: SchedulerDataBindingEvent): void,
-		dataBound(e: SchedulerDataBoundEvent): void,
-		edit(e: SchedulerEditEvent): void,
-		moveStart(e: SchedulerMoveStartEvent): void,
-		move(e: SchedulerMoveEvent): void,
-		moveEnd(e: SchedulerMoveEndEvent): void,
-		navigate(e: SchedulerNavigateEvent): void,
-		pdfExport(e: SchedulerPdfExportEvent): void,
-		remove(e: SchedulerRemoveEvent): void,
-		resizeStart(e: SchedulerResizeStartEvent): void,
-		resize(e: SchedulerResizeEvent): void,
-		resizeEnd(e: SchedulerResizeEndEvent): void,
-		save(e: SchedulerSaveEvent): void
-	}
-
-	declare interface SchedulerEvent {
-		sender: Scheduler,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SchedulerAddEvent {
-		event?: any
-	}
-
-	declare interface SchedulerCancelEvent {
-		container?: JQuery,
-		event?: kendo.data.SchedulerEvent
-	}
-
-	declare interface SchedulerChangeEvent {
-		start?: Date,
-		end?: Date,
-		events?: any,
-		slots?: any,
-		resources?: any
-	}
-
-	declare interface SchedulerDataBindingEvent {
-		
-	}
-
-	declare interface SchedulerDataBoundEvent {
-		
-	}
-
-	declare interface SchedulerEditEvent {
-		container?: JQuery,
-		event?: kendo.data.SchedulerEvent
-	}
-
-	declare interface SchedulerMoveStartEvent {
-		event?: kendo.data.SchedulerEvent
-	}
-
-	declare interface SchedulerMoveEvent {
-		event?: kendo.data.SchedulerEvent,
-		slot?: any
-	}
-
-	declare interface SchedulerMoveEndEvent {
-		start?: Date,
-		end?: Date,
-		event?: kendo.data.SchedulerEvent,
-		slot?: any,
-		resources?: any
-	}
-
-	declare interface SchedulerNavigateEvent {
-		action?: string,
-		date?: Date,
-		view?: string
-	}
-
-	declare interface SchedulerPdfExportEvent {
-		promise?: JQueryPromise<any>
-	}
-
-	declare interface SchedulerRemoveEvent {
-		event?: kendo.data.SchedulerEvent
-	}
-
-	declare interface SchedulerResizeStartEvent {
-		event?: kendo.data.SchedulerEvent
-	}
-
-	declare interface SchedulerResizeEvent {
-		event?: kendo.data.SchedulerEvent,
-		slot?: any
-	}
-
-	declare interface SchedulerResizeEndEvent {
-		event?: kendo.data.SchedulerEvent,
-		slot?: any
-	}
-
-	declare interface SchedulerSaveEvent {
-		container?: JQuery,
-		event?: kendo.data.SchedulerEvent
-	}
-
-	declare interface SliderTooltip {
-		enabled?: boolean,
-		format?: string,
-		template?: string
-	}
-
-	declare interface SliderOptions {
-		name?: string,
-		decreaseButtonTitle?: string,
-		dragHandleTitle?: string,
-		increaseButtonTitle?: string,
-		largeStep?: number,
-		max?: number,
-		min?: number,
-		orientation?: string,
-		showButtons?: boolean,
-		smallStep?: number,
-		tickPlacement?: string,
-		tooltip?: SliderTooltip,
-		value?: number,
-		change(e: SliderChangeEvent): void,
-		slide(e: SliderSlideEvent): void
-	}
-
-	declare interface SliderEvent {
-		sender: Slider,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SliderChangeEvent {
-		value?: number
-	}
-
-	declare interface SliderSlideEvent {
-		value?: number
-	}
-
-	declare interface SortableCursorOffset {
-		left?: number,
-		top?: number
-	}
-
-	declare interface SortableOptions {
-		name?: string,
-		axis?: string,
-		autoScroll?: boolean,
-		container?: string | JQuery,
-		connectWith?: string,
-		cursor?: string,
-		cursorOffset?: SortableCursorOffset,
-		disabled?: string,
-		filter?: string,
-		handler?: string,
-		hint?: Function | string | JQuery,
-		holdToDrag?: boolean,
-		ignore?: string,
-		placeholder?: Function | string | JQuery,
-		start(e: SortableStartEvent): void,
-		move(e: SortableMoveEvent): void,
-		end(e: SortableEndEvent): void,
-		change(e: SortableChangeEvent): void,
-		cancel(e: SortableCancelEvent): void
-	}
-
-	declare interface SortableEvent {
-		sender: Sortable,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SortableStartEvent {
-		draggableEvent?: any,
-		item?: JQuery
-	}
-
-	declare interface SortableMoveEvent {
-		item?: JQuery,
-		target?: JQuery,
-		list?: kendo.ui.Sortable,
-		draggableEvent?: any
-	}
-
-	declare interface SortableEndEvent {
-		action?: string,
-		item?: JQuery,
-		oldIndex?: number,
-		newIndex?: number,
-		draggableEvent?: any
-	}
-
-	declare interface SortableChangeEvent {
-		action?: string,
-		item?: JQuery,
-		oldIndex?: number,
-		newIndex?: number,
-		draggableEvent?: any
-	}
-
-	declare interface SortableCancelEvent {
-		item?: JQuery
-	}
-
-	declare interface SplitterPane {
-		collapsed?: boolean,
-		collapsedSize?: string,
-		collapsible?: boolean,
-		contentUrl?: string,
-		max?: string,
-		min?: string,
-		resizable?: boolean,
-		scrollable?: boolean,
-		size?: string
-	}
-
-	declare interface SplitterOptions {
-		name?: string,
-		orientation?: string,
-		panes?: SplitterPane[],
-		collapse(e: SplitterCollapseEvent): void,
-		contentLoad(e: SplitterContentLoadEvent): void,
-		error(e: SplitterErrorEvent): void,
-		expand(e: SplitterExpandEvent): void,
-		layoutChange(e: SplitterEvent): void,
-		resize(e: SplitterEvent): void
-	}
-
-	declare interface SplitterEvent {
-		sender: Splitter,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SplitterCollapseEvent {
-		pane?: Element
-	}
-
-	declare interface SplitterContentLoadEvent {
-		pane?: Element
-	}
-
-	declare interface SplitterErrorEvent {
-		xhr?: JQueryXHR,
-		status?: string
-	}
-
-	declare interface SplitterExpandEvent {
-		pane?: Element
-	}
-
-	declare interface SpreadsheetExcel {
-		fileName?: string,
-		forceProxy?: boolean,
-		proxyURL?: string
-	}
-
-	declare interface SpreadsheetPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface SpreadsheetPdf {
-		area?: string,
-		author?: string,
-		creator?: string,
-		date?: Date,
-		fileName?: string,
-		fitWidth?: boolean,
-		forceProxy?: boolean,
-		guidelines?: boolean,
-		hCenter?: boolean,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: SpreadsheetPdfMargin,
-		paperSize?: string | any,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string,
-		vCenter?: boolean
-	}
-
-	declare interface SpreadsheetSheetColumn {
-		index?: number,
-		width?: number
-	}
-
-	declare interface SpreadsheetSheetFilterColumnCriteriaItem {
-		operator?: string,
-		value?: string
-	}
-
-	declare interface SpreadsheetSheetFilterColumn {
-		criteria?: SpreadsheetSheetFilterColumnCriteriaItem[],
-		filter?: string,
-		index?: number,
-		logic?: string,
-		type?: string,
-		value?: number | string | Date,
-		values?: any
-	}
-
-	declare interface SpreadsheetSheetFilter {
-		columns?: SpreadsheetSheetFilterColumn[],
-		ref?: string
-	}
-
-	declare interface SpreadsheetSheetRowCellBorderBottom {
-		color?: string,
-		size?: string
-	}
-
-	declare interface SpreadsheetSheetRowCellBorderLeft {
-		color?: string,
-		size?: string
-	}
-
-	declare interface SpreadsheetSheetRowCellBorderRight {
-		color?: string,
-		size?: string
-	}
-
-	declare interface SpreadsheetSheetRowCellBorderTop {
-		color?: string,
-		size?: string
-	}
-
-	declare interface SpreadsheetSheetRowCellValidation {
-		type?: string,
-		comparerType?: string,
-		dataType?: string,
-		from?: string,
-		showButton?: boolean,
-		to?: string,
-		allowNulls?: boolean,
-		messageTemplate?: string,
-		titleTemplate?: string
-	}
-
-	declare interface SpreadsheetSheetRowCell {
-		background?: string,
-		borderBottom?: SpreadsheetSheetRowCellBorderBottom,
-		borderLeft?: SpreadsheetSheetRowCellBorderLeft,
-		borderTop?: SpreadsheetSheetRowCellBorderTop,
-		borderRight?: SpreadsheetSheetRowCellBorderRight,
-		color?: string,
-		fontFamily?: string,
-		fontSize?: number,
-		italic?: boolean,
-		bold?: boolean,
-		enable?: boolean,
-		format?: string,
-		formula?: string,
-		index?: number,
-		link?: string,
-		textAlign?: string,
-		underline?: boolean,
-		value?: number | string | boolean | Date,
-		validation?: SpreadsheetSheetRowCellValidation,
-		verticalAlign?: string,
-		wrap?: boolean
-	}
-
-	declare interface SpreadsheetSheetRow {
-		cells?: SpreadsheetSheetRowCell[],
-		height?: number,
-		index?: number,
-		type?: string
-	}
-
-	declare interface SpreadsheetSheetSortColumn {
-		ascending?: boolean,
-		index?: number
-	}
-
-	declare interface SpreadsheetSheetSort {
-		columns?: SpreadsheetSheetSortColumn[],
-		ref?: string
-	}
-
-	declare interface SpreadsheetSheet {
-		activeCell?: string,
-		name?: string,
-		columns?: SpreadsheetSheetColumn[],
-		dataSource?: kendo.data.DataSource,
-		filter?: SpreadsheetSheetFilter,
-		frozenColumns?: number,
-		frozenRows?: number,
-		mergedCells?: any,
-		rows?: SpreadsheetSheetRow[],
-		selection?: string,
-		showGridLines?: boolean,
-		sort?: SpreadsheetSheetSort
-	}
-
-	declare interface SpreadsheetToolbar {
-		home?: boolean | any,
-		insert?: boolean | any,
-		data?: boolean | any
-	}
-
-	declare interface SpreadsheetInsertSheetOptions {
-		rows?: number,
-		columns?: number,
-		rowHeight?: number,
-		columnWidth?: number,
-		headerHeight?: number,
-		headerWidth?: number,
-		dataSource?: kendo.data.DataSource,
-		data?: any
-	}
-
-	declare interface SpreadsheetOptions {
-		name?: string,
-		activeSheet?: string,
-		columnWidth?: number,
-		columns?: number,
-		headerHeight?: number,
-		headerWidth?: number,
-		excel?: SpreadsheetExcel,
-		pdf?: SpreadsheetPdf,
-		rowHeight?: number,
-		rows?: number,
-		sheets?: SpreadsheetSheet[],
-		sheetsbar?: boolean,
-		toolbar?: boolean | SpreadsheetToolbar,
-		change(e: SpreadsheetChangeEvent): void,
-		render(e: SpreadsheetRenderEvent): void,
-		excelExport(e: SpreadsheetExcelExportEvent): void,
-		excelImport(e: SpreadsheetExcelImportEvent): void,
-		pdfExport(e: SpreadsheetPdfExportEvent): void
-	}
-
-	declare interface SpreadsheetEvent {
-		sender: Spreadsheet,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SpreadsheetChangeEvent {
-		range?: kendo.spreadsheet.Range
-	}
-
-	declare interface SpreadsheetRenderEvent {
-		
-	}
-
-	declare interface SpreadsheetExcelExportEvent {
-		data?: any,
-		workbook?: kendo.ooxml.Workbook
-	}
-
-	declare interface SpreadsheetExcelImportEvent {
-		file?: Blob | File,
-		progress?: JQueryPromise<any>
-	}
-
-	declare interface SpreadsheetPdfExportEvent {
-		promise?: JQueryPromise<any>
-	}
-
-	declare interface TabStripAnimationClose {
-		duration?: number,
-		effects?: string
-	}
-
-	declare interface TabStripAnimationOpen {
-		duration?: number,
-		effects?: string
-	}
-
-	declare interface TabStripAnimation {
-		close?: TabStripAnimationClose,
-		open?: TabStripAnimationOpen
-	}
-
-	declare interface TabStripScrollable {
-		distance?: number
-	}
-
-	declare interface TabStripOptions {
-		name?: string,
-		animation?: boolean | TabStripAnimation,
-		collapsible?: boolean,
-		contentUrls?: any,
-		dataContentField?: string,
-		dataContentUrlField?: string,
-		dataImageUrlField?: string,
-		dataSource?: any | any | kendo.data.DataSource,
-		dataSpriteCssClass?: string,
-		dataTextField?: string,
-		dataUrlField?: string,
-		navigatable?: boolean,
-		scrollable?: boolean | TabStripScrollable,
-		tabPosition?: string,
-		value?: string,
-		activate(e: TabStripActivateEvent): void,
-		contentLoad(e: TabStripContentLoadEvent): void,
-		error(e: TabStripErrorEvent): void,
-		select(e: TabStripSelectEvent): void,
-		show(e: TabStripShowEvent): void
-	}
-
-	declare interface TabStripEvent {
-		sender: TabStrip,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TabStripActivateEvent {
-		item?: Element,
-		contentElement?: Element
-	}
-
-	declare interface TabStripContentLoadEvent {
-		item?: Element,
-		contentElement?: Element
-	}
-
-	declare interface TabStripErrorEvent {
-		xhr?: JQueryXHR,
-		status?: string
-	}
-
-	declare interface TabStripSelectEvent {
-		item?: Element,
-		contentElement?: Element
-	}
-
-	declare interface TabStripShowEvent {
-		item?: Element,
-		contentElement?: Element
-	}
-
-	declare interface TimePickerAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface TimePickerAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface TimePickerAnimation {
-		close?: TimePickerAnimationClose,
-		open?: TimePickerAnimationOpen
-	}
-
-	declare interface TimePickerOptions {
-		name?: string,
-		animation?: boolean | TimePickerAnimation,
-		culture?: string,
-		dates?: any,
-		format?: string,
-		interval?: number,
-		max?: Date,
-		min?: Date,
-		parseFormats?: any,
-		value?: Date,
-		change(e: TimePickerChangeEvent): void,
-		close(e: TimePickerCloseEvent): void,
-		open(e: TimePickerOpenEvent): void
-	}
-
-	declare interface TimePickerEvent {
-		sender: TimePicker,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TimePickerChangeEvent {
-		
-	}
-
-	declare interface TimePickerCloseEvent {
-		
-	}
-
-	declare interface TimePickerOpenEvent {
-		
-	}
-
-	declare interface ToolBarItemButton {
-		attributes?: any,
-		click?: Function,
-		enable?: boolean,
-		group?: string,
-		hidden?: boolean,
-		icon?: string,
-		id?: string,
-		imageUrl?: string,
-		selected?: boolean,
-		showIcon?: string,
-		showText?: string,
-		spriteCssClass?: string,
-		toggle?: Function,
-		togglable?: boolean,
-		text?: string,
-		url?: string
-	}
-
-	declare interface ToolBarItemMenuButton {
-		attributes?: any,
-		enable?: boolean,
-		hidden?: boolean,
-		icon?: string,
-		id?: string,
-		imageUrl?: string,
-		spriteCssClass?: string,
-		text?: string,
-		url?: string
-	}
-
-	declare interface ToolBarItem {
-		attributes?: any,
-		buttons?: ToolBarItemButton[],
-		click?: Function,
-		enable?: boolean,
-		group?: string,
-		hidden?: boolean,
-		icon?: string,
-		id?: string,
-		imageUrl?: string,
-		menuButtons?: ToolBarItemMenuButton[],
-		overflow?: string,
-		overflowTemplate?: string | Function,
-		primary?: boolean,
-		selected?: boolean,
-		showIcon?: string,
-		showText?: string,
-		spriteCssClass?: string,
-		template?: string | Function,
-		text?: string,
-		togglable?: boolean,
-		toggle?: Function,
-		type?: string,
-		url?: string
-	}
-
-	declare interface ToolBarOptions {
-		name?: string,
-		resizable?: boolean,
-		items?: ToolBarItem[],
-		click(e: ToolBarClickEvent): void,
-		close(e: ToolBarCloseEvent): void,
-		open(e: ToolBarOpenEvent): void,
-		toggle(e: ToolBarToggleEvent): void,
-		overflowClose(e: ToolBarOverflowCloseEvent): void,
-		overflowOpen(e: ToolBarOverflowOpenEvent): void
-	}
-
-	declare interface ToolBarEvent {
-		sender: ToolBar,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ToolBarClickEvent {
-		target?: JQuery,
-		id?: string
-	}
-
-	declare interface ToolBarCloseEvent {
-		SplitButton?: JQuery
-	}
-
-	declare interface ToolBarOpenEvent {
-		SplitButton?: JQuery
-	}
-
-	declare interface ToolBarToggleEvent {
-		target?: JQuery,
-		checked?: boolean,
-		id?: string
-	}
-
-	declare interface ToolBarOverflowCloseEvent {
-		
-	}
-
-	declare interface ToolBarOverflowOpenEvent {
-		
-	}
-
-	declare interface TooltipAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface TooltipAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface TooltipAnimation {
-		close?: TooltipAnimationClose,
-		open?: TooltipAnimationOpen
-	}
-
-	declare interface TooltipContent {
-		url?: string
-	}
-
-	declare interface TooltipOptions {
-		name?: string,
-		autoHide?: boolean,
-		animation?: boolean | TooltipAnimation,
-		content?: TooltipContent,
-		callout?: boolean,
-		filter?: string,
-		iframe?: boolean,
-		height?: number,
-		width?: number,
-		position?: string,
-		showAfter?: number,
-		showOn?: string,
-		contentLoad(e: TooltipEvent): void,
-		show(e: TooltipEvent): void,
-		hide(e: TooltipEvent): void,
-		requestStart(e: TooltipRequestStartEvent): void,
-		error(e: TooltipErrorEvent): void
-	}
-
-	declare interface TooltipEvent {
-		sender: Tooltip,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TooltipRequestStartEvent {
-		target?: JQuery,
-		options?: any
-	}
-
-	declare interface TooltipErrorEvent {
-		xhr?: JQueryXHR,
-		status?: string
-	}
-
-	declare interface TouchOptions {
-		name?: string,
-		filter?: string,
-		surface?: JQuery,
-		multiTouch?: boolean,
-		enableSwipe?: boolean,
-		minXDelta?: number,
-		maxYDelta?: number,
-		maxDuration?: number,
-		minHold?: number,
-		doubleTapTimeout?: number,
-		touchstart(e: TouchTouchstartEvent): void,
-		dragstart(e: TouchDragstartEvent): void,
-		drag(e: TouchDragEvent): void,
-		dragend(e: TouchDragendEvent): void,
-		tap(e: TouchTapEvent): void,
-		doubletap(e: TouchDoubletapEvent): void,
-		hold(e: TouchHoldEvent): void,
-		swipe(e: TouchSwipeEvent): void,
-		gesturestart(e: TouchGesturestartEvent): void,
-		gesturechange(e: TouchGesturechangeEvent): void,
-		gestureend(e: TouchGestureendEvent): void
-	}
-
-	declare interface TouchEvent {
-		sender: Touch,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TouchTouchstartEvent {
-		touch?: kendo.mobile.ui.TouchEventOptions,
-		event?: JQueryEventObject
-	}
-
-	declare interface TouchDragstartEvent {
-		touch?: kendo.mobile.ui.TouchEventOptions,
-		event?: JQueryEventObject
-	}
-
-	declare interface TouchDragEvent {
-		touch?: kendo.mobile.ui.TouchEventOptions,
-		event?: JQueryEventObject
-	}
-
-	declare interface TouchDragendEvent {
-		touch?: kendo.mobile.ui.TouchEventOptions,
-		event?: JQueryEventObject
-	}
-
-	declare interface TouchTapEvent {
-		touch?: kendo.mobile.ui.TouchEventOptions,
-		event?: JQueryEventObject
-	}
-
-	declare interface TouchDoubletapEvent {
-		touch?: kendo.mobile.ui.TouchEventOptions,
-		event?: JQueryEventObject
-	}
-
-	declare interface TouchHoldEvent {
-		touch?: kendo.mobile.ui.TouchEventOptions,
-		event?: JQueryEventObject
-	}
-
-	declare interface TouchSwipeEvent {
-		touch?: kendo.mobile.ui.TouchEventOptions,
-		event?: JQueryEventObject
-	}
-
-	declare interface TouchGesturestartEvent {
-		touches?: any,
-		event?: JQueryEventObject,
-		distance?: number,
-		center?: kendo.mobile.ui.Point
-	}
-
-	declare interface TouchGesturechangeEvent {
-		touches?: any,
-		event?: JQueryEventObject,
-		distance?: number,
-		center?: kendo.mobile.ui.Point
-	}
-
-	declare interface TouchGestureendEvent {
-		touches?: any,
-		event?: JQueryEventObject,
-		distance?: number,
-		center?: kendo.mobile.ui.Point
-	}
-
-	declare interface TreeListColumnMenuMessages {
-		columns?: string,
-		filter?: string,
-		sortAscending?: string,
-		sortDescending?: string
-	}
-
-	declare interface TreeListColumnMenu {
-		columns?: boolean,
-		filterable?: boolean,
-		sortable?: boolean,
-		messages?: TreeListColumnMenuMessages
-	}
-
-	declare interface TreeListColumnCommandItem {
-		className?: string,
-		click?: Function,
-		name?: string,
-		text?: string
-	}
-
-	declare interface TreeListColumnFilterable {
-		ui?: string | Function
-	}
-
-	declare interface TreeListColumnSortable {
-		compare?: Function
-	}
-
-	declare interface TreeListColumn {
-		attributes?: any,
-		command?: TreeListColumnCommandItem[],
-		encoded?: boolean,
-		expandable?: boolean,
-		field?: string,
-		filterable?: boolean | TreeListColumnFilterable,
-		footerTemplate?: string | Function,
-		format?: string,
-		headerAttributes?: any,
-		headerTemplate?: string | Function,
-		minScreenWidth?: number,
-		sortable?: boolean | TreeListColumnSortable,
-		template?: string | Function,
-		title?: string,
-		width?: string | number,
-		hidden?: boolean,
-		menu?: boolean,
-		locked?: boolean,
-		lockable?: boolean
-	}
-
-	declare interface TreeListEditable {
-		mode?: string,
-		move?: boolean,
-		template?: string | Function,
-		window?: any
-	}
-
-	declare interface TreeListExcel {
-		fileName?: string,
-		filterable?: boolean,
-		forceProxy?: boolean,
-		proxyURL?: string
-	}
-
-	declare interface TreeListFilterableMessages {
-		and?: string,
-		clear?: string,
-		filter?: string,
-		info?: string,
-		isFalse?: string,
-		isTrue?: string,
-		or?: string,
-		selectValue?: string,
-		cancel?: string,
-		operator?: string
-	}
-
-	declare interface TreeListFilterable {
-		extra?: boolean,
-		messages?: TreeListFilterableMessages
-	}
-
-	declare interface TreeListMessagesCommands {
-		canceledit?: string,
-		create?: string,
-		createchild?: string,
-		destroy?: string,
-		edit?: string,
-		excel?: string,
-		pdf?: string,
-		update?: string
-	}
-
-	declare interface TreeListMessages {
-		commands?: TreeListMessagesCommands,
-		loading?: string,
-		noRows?: string,
-		requestFailed?: string,
-		retry?: string
-	}
-
-	declare interface TreeListPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface TreeListPdf {
-		author?: string,
-		avoidLinks?: boolean | string,
-		creator?: string,
-		date?: Date,
-		fileName?: string,
-		forceProxy?: boolean,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: TreeListPdfMargin,
-		paperSize?: string | any,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface TreeListSortable {
-		allowUnsort?: boolean,
-		mode?: string
-	}
-
-	declare interface TreeListToolbarItem {
-		click?: Function,
-		name?: string,
-		text?: string
-	}
-
-	declare interface TreeListOptions {
-		name?: string,
-		autoBind?: boolean,
-		columns?: TreeListColumn[],
-		resizable?: boolean,
-		reorderable?: boolean,
-		columnMenu?: boolean | TreeListColumnMenu,
-		dataSource?: any | any | kendo.data.TreeListDataSource,
-		editable?: boolean | TreeListEditable,
-		excel?: TreeListExcel,
-		filterable?: boolean | TreeListFilterable,
-		height?: number | string,
-		messages?: TreeListMessages,
-		pdf?: TreeListPdf,
-		scrollable?: boolean | any,
-		selectable?: boolean | string,
-		sortable?: boolean | TreeListSortable,
-		toolbar?: TreeListToolbarItem[] | any,
-		cancel(e: TreeListCancelEvent): void,
-		change(e: TreeListChangeEvent): void,
-		collapse(e: TreeListCollapseEvent): void,
-		dataBinding(e: TreeListDataBindingEvent): void,
-		dataBound(e: TreeListDataBoundEvent): void,
-		dragstart(e: TreeListDragstartEvent): void,
-		drag(e: TreeListDragEvent): void,
-		dragend(e: TreeListDragendEvent): void,
-		drop(e: TreeListDropEvent): void,
-		edit(e: TreeListEditEvent): void,
-		excelExport(e: TreeListExcelExportEvent): void,
-		expand(e: TreeListExpandEvent): void,
-		filterMenuInit(e: TreeListFilterMenuInitEvent): void,
-		pdfExport(e: TreeListPdfExportEvent): void,
-		remove(e: TreeListRemoveEvent): void,
-		save(e: TreeListSaveEvent): void,
-		columnShow(e: TreeListColumnShowEvent): void,
-		columnHide(e: TreeListColumnHideEvent): void,
-		columnReorder(e: TreeListColumnReorderEvent): void,
-		columnResize(e: TreeListColumnResizeEvent): void,
-		columnMenuInit(e: TreeListColumnMenuInitEvent): void,
-		columnLock(e: TreeListColumnLockEvent): void,
-		columnUnlock(e: TreeListColumnUnlockEvent): void
-	}
-
-	declare interface TreeListEvent {
-		sender: TreeList,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TreeListCancelEvent {
-		container?: JQuery,
-		model?: kendo.data.TreeListModel
-	}
-
-	declare interface TreeListChangeEvent {
-		
-	}
-
-	declare interface TreeListCollapseEvent {
-		model?: kendo.data.TreeListModel
-	}
-
-	declare interface TreeListDataBindingEvent {
-		
-	}
-
-	declare interface TreeListDataBoundEvent {
-		
-	}
-
-	declare interface TreeListDragstartEvent {
-		source?: kendo.data.TreeListModel
-	}
-
-	declare interface TreeListDragEvent {
-		source?: kendo.data.TreeListModel,
-		target?: JQuery
-	}
-
-	declare interface TreeListDragendEvent {
-		source?: kendo.data.TreeListModel,
-		destination?: kendo.data.TreeListModel
-	}
-
-	declare interface TreeListDropEvent {
-		source?: kendo.data.TreeListModel,
-		destination?: kendo.data.TreeListModel,
-		dropTarget?: Element,
-		valid?: boolean,
-		setValid?: boolean
-	}
-
-	declare interface TreeListEditEvent {
-		container?: JQuery,
-		model?: kendo.data.TreeListModel
-	}
-
-	declare interface TreeListExcelExportEvent {
-		data?: any,
-		workbook?: any
-	}
-
-	declare interface TreeListExpandEvent {
-		model?: kendo.data.TreeListModel
-	}
-
-	declare interface TreeListFilterMenuInitEvent {
-		container?: JQuery,
-		field?: string
-	}
-
-	declare interface TreeListPdfExportEvent {
-		promise?: JQueryPromise<any>
-	}
-
-	declare interface TreeListRemoveEvent {
-		model?: kendo.data.TreeListModel,
-		row?: JQuery
-	}
-
-	declare interface TreeListSaveEvent {
-		model?: kendo.data.TreeListModel,
-		container?: JQuery
-	}
-
-	declare interface TreeListColumnShowEvent {
-		column?: any
-	}
-
-	declare interface TreeListColumnHideEvent {
-		column?: any
-	}
-
-	declare interface TreeListColumnReorderEvent {
-		column?: any,
-		newIndex?: number,
-		oldIndex?: number
-	}
-
-	declare interface TreeListColumnResizeEvent {
-		column?: any,
-		newWidth?: number,
-		oldWidth?: number
-	}
-
-	declare interface TreeListColumnMenuInitEvent {
-		container?: JQuery,
-		field?: string
-	}
-
-	declare interface TreeListColumnLockEvent {
-		column?: any
-	}
-
-	declare interface TreeListColumnUnlockEvent {
-		column?: any
-	}
-
-	declare interface TreeViewAnimationCollapse {
-		duration?: number,
-		effects?: string
-	}
-
-	declare interface TreeViewAnimationExpand {
-		duration?: number,
-		effects?: string
-	}
-
-	declare interface TreeViewAnimation {
-		collapse?: boolean | TreeViewAnimationCollapse,
-		expand?: boolean | TreeViewAnimationExpand
-	}
-
-	declare interface TreeViewCheckboxes {
-		checkChildren?: boolean,
-		name?: string,
-		template?: string | Function
-	}
-
-	declare interface TreeViewMessages {
-		loading?: string,
-		requestFailed?: string,
-		retry?: string
-	}
-
-	declare interface TreeViewOptions {
-		name?: string,
-		animation?: boolean | TreeViewAnimation,
-		autoBind?: boolean,
-		autoScroll?: boolean,
-		checkboxes?: boolean | TreeViewCheckboxes,
-		dataImageUrlField?: string,
-		dataSource?: any | any | kendo.data.HierarchicalDataSource,
-		dataSpriteCssClassField?: string,
-		dataTextField?: string | any,
-		dataUrlField?: string,
-		dragAndDrop?: boolean,
-		loadOnDemand?: boolean,
-		messages?: TreeViewMessages,
-		template?: string | Function,
-		change(e: TreeViewEvent): void,
-		check(e: TreeViewCheckEvent): void,
-		collapse(e: TreeViewCollapseEvent): void,
-		dataBound(e: TreeViewDataBoundEvent): void,
-		drag(e: TreeViewDragEvent): void,
-		dragend(e: TreeViewDragendEvent): void,
-		dragstart(e: TreeViewDragstartEvent): void,
-		drop(e: TreeViewDropEvent): void,
-		expand(e: TreeViewExpandEvent): void,
-		navigate(e: TreeViewNavigateEvent): void,
-		select(e: TreeViewSelectEvent): void
-	}
-
-	declare interface TreeViewEvent {
-		sender: TreeView,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TreeViewCheckEvent {
-		node?: Element
-	}
-
-	declare interface TreeViewCollapseEvent {
-		node?: Element
-	}
-
-	declare interface TreeViewDataBoundEvent {
-		node?: JQuery
-	}
-
-	declare interface TreeViewDragEvent {
-		sourceNode?: Element,
-		dropTarget?: Element,
-		pageX?: number,
-		pageY?: number,
-		statusClass?: string,
-		setStatusClass?: Function
-	}
-
-	declare interface TreeViewDragendEvent {
-		sourceNode?: Element,
-		destinationNode?: Element,
-		dropPosition?: string
-	}
-
-	declare interface TreeViewDragstartEvent {
-		sourceNode?: Element
-	}
-
-	declare interface TreeViewDropEvent {
-		sourceNode?: Element,
-		destinationNode?: Element,
-		valid?: boolean,
-		setValid?: Function,
-		dropTarget?: Element,
-		dropPosition?: string
-	}
-
-	declare interface TreeViewExpandEvent {
-		node?: Element
-	}
-
-	declare interface TreeViewNavigateEvent {
-		node?: Element
-	}
-
-	declare interface TreeViewSelectEvent {
-		node?: Element
-	}
-
-	declare interface UploadAsync {
-		autoUpload?: boolean,
-		batch?: boolean,
-		removeField?: string,
-		removeUrl?: string,
-		removeVerb?: string,
-		saveField?: string,
-		saveUrl?: string,
-		withCredentials?: boolean
-	}
-
-	declare interface UploadFile {
-		extension?: string,
-		name?: string,
-		size?: number
-	}
-
-	declare interface UploadLocalization {
-		cancel?: string,
-		clearSelectedFiles?: string,
-		dropFilesHere?: string,
-		headerStatusUploaded?: string,
-		headerStatusUploading?: string,
-		invalidFileExtension?: string,
-		invalidMaxFileSize?: string,
-		invalidMinFileSize?: string,
-		remove?: string,
-		retry?: string,
-		select?: string,
-		statusFailed?: string,
-		statusUploaded?: string,
-		statusUploading?: string,
-		uploadSelectedFiles?: string
-	}
-
-	declare interface UploadValidation {
-		allowedExtensions?: any,
-		maxFileSize?: number,
-		minFileSize?: number
-	}
-
-	declare interface UploadOptions {
-		name?: string,
-		async?: UploadAsync,
-		dropZone?: string,
-		enabled?: boolean,
-		files?: UploadFile[],
-		localization?: UploadLocalization,
-		multiple?: boolean,
-		showFileList?: boolean,
-		template?: string | Function,
-		validation?: UploadValidation,
-		cancel(e: UploadCancelEvent): void,
-		complete(e: UploadEvent): void,
-		error(e: UploadErrorEvent): void,
-		progress(e: UploadProgressEvent): void,
-		remove(e: UploadRemoveEvent): void,
-		select(e: UploadSelectEvent): void,
-		success(e: UploadSuccessEvent): void,
-		upload(e: UploadUploadEvent): void
-	}
-
-	declare interface UploadEvent {
-		sender: Upload,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface UploadCancelEvent {
-		files?: UploadFile[]
-	}
-
-	declare interface UploadErrorEvent {
-		files?: UploadFile[],
-		operation?: string,
-		XMLHttpRequest?: any
-	}
-
-	declare interface UploadProgressEvent {
-		files?: UploadFile[],
-		percentComplete?: number
-	}
-
-	declare interface UploadRemoveEvent {
-		files?: UploadFile[],
-		data?: any
-	}
-
-	declare interface UploadSelectEvent {
-		e?: any,
-		files?: UploadFile[]
-	}
-
-	declare interface UploadSuccessEvent {
-		files?: UploadFile[],
-		operation?: string,
-		response?: any,
-		XMLHttpRequest?: any
-	}
-
-	declare interface UploadUploadEvent {
-		files?: UploadFile[],
-		data?: any,
-		formData?: any,
-		XMLHttpRequest?: any
-	}
-
-	declare interface ValidatorOptions {
-		name?: string,
-		errorTemplate?: string,
-		messages?: any,
-		rules?: any,
-		validateOnBlur?: boolean,
-		validate(e: ValidatorValidateEvent): void
-	}
-
-	declare interface ValidatorEvent {
-		sender: Validator,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ValidatorValidateEvent {
-		valid?: boolean
-	}
-
-	declare interface WindowAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface WindowAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface WindowAnimation {
-		close?: WindowAnimationClose,
-		open?: WindowAnimationOpen
-	}
-
-	declare interface WindowContent {
-		template?: string
-	}
-
-	declare interface WindowPosition {
-		top?: number | string,
-		left?: number | string
-	}
-
-	declare interface WindowRefreshOptions {
-		url?: string,
-		cache?: boolean,
-		data?: any,
-		type?: string,
-		template?: string,
-		iframe?: boolean
-	}
-
-	declare interface WindowOptions {
-		name?: string,
-		actions?: any,
-		animation?: boolean | WindowAnimation,
-		appendTo?: any | string,
-		autoFocus?: boolean,
-		content?: WindowContent,
-		draggable?: boolean,
-		iframe?: boolean,
-		height?: number | string,
-		maxHeight?: number,
-		maxWidth?: number,
-		minHeight?: number,
-		minWidth?: number,
-		modal?: boolean,
-		pinned?: boolean,
-		position?: WindowPosition,
-		resizable?: boolean,
-		scrollable?: boolean,
-		title?: string | boolean,
-		visible?: boolean,
-		width?: number | string,
-		activate(e: WindowEvent): void,
-		close(e: WindowCloseEvent): void,
-		deactivate(e: WindowEvent): void,
-		dragend(e: WindowEvent): void,
-		dragstart(e: WindowEvent): void,
-		error(e: WindowErrorEvent): void,
-		maximize(e: WindowEvent): void,
-		minimize(e: WindowEvent): void,
-		open(e: WindowEvent): void,
-		refresh(e: WindowEvent): void,
-		resize(e: WindowEvent): void
-	}
-
-	declare interface WindowEvent {
-		sender: Window,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface WindowCloseEvent {
-		userTriggered?: boolean
-	}
-
-	declare interface WindowErrorEvent {
-		xhr?: JQueryXHR,
-		status?: string
-	}
-
-	declare interface BarcodeBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface BarcodePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface BarcodeTextMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface BarcodeText {
-		color?: string,
-		font?: string,
-		margin?: BarcodeTextMargin,
-		visible?: boolean
-	}
-
-	declare interface BarcodeExportImageOptions {
-		width?: string,
-		height?: string
-	}
-
-	declare interface BarcodeExportSVGOptions {
-		raw?: boolean
-	}
-
-	declare interface BarcodeOptions {
-		name?: string,
-		renderAs?: string,
-		background?: string,
-		border?: BarcodeBorder,
-		checksum?: boolean,
-		color?: string,
-		height?: number,
-		padding?: BarcodePadding,
-		text?: BarcodeText,
-		type?: string,
-		value?: string,
-		width?: number
-	}
-
-	declare interface BarcodeEvent {
-		sender: Barcode,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ChartAxisDefaultsCrosshairTooltipBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartAxisDefaultsCrosshairTooltipPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartAxisDefaultsCrosshairTooltip {
-		background?: string,
-		border?: ChartAxisDefaultsCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: ChartAxisDefaultsCrosshairTooltipPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartAxisDefaultsCrosshair {
-		color?: string,
-		dashType?: string,
-		opacity?: number,
-		tooltip?: ChartAxisDefaultsCrosshairTooltip,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartAxisDefaultsLabelsMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartAxisDefaultsLabelsPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartAxisDefaultsLabelsRotation {
-		align?: string,
-		angle?: number | string
-	}
-
-	declare interface ChartAxisDefaultsLabels {
-		font?: string,
-		format?: string,
-		margin?: ChartAxisDefaultsLabelsMargin,
-		mirror?: boolean,
-		padding?: ChartAxisDefaultsLabelsPadding,
-		rotation?: ChartAxisDefaultsLabelsRotation,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartAxisDefaultsLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartAxisDefaultsMajorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartAxisDefaultsMajorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartAxisDefaultsMinorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartAxisDefaultsMinorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartAxisDefaultsPlotBand {
-		color?: string,
-		from?: number,
-		opacity?: number,
-		to?: number
-	}
-
-	declare interface ChartAxisDefaultsTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartAxisDefaultsTitleMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartAxisDefaultsTitlePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartAxisDefaultsTitle {
-		background?: string,
-		border?: ChartAxisDefaultsTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: ChartAxisDefaultsTitleMargin,
-		padding?: ChartAxisDefaultsTitlePadding,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartAxisDefaults {
-		background?: string,
-		color?: string,
-		crosshair?: ChartAxisDefaultsCrosshair,
-		labels?: ChartAxisDefaultsLabels,
-		line?: ChartAxisDefaultsLine,
-		majorGridLines?: ChartAxisDefaultsMajorGridLines,
-		majorTicks?: ChartAxisDefaultsMajorTicks,
-		minorGridLines?: ChartAxisDefaultsMinorGridLines,
-		minorTicks?: ChartAxisDefaultsMinorTicks,
-		narrowRange?: boolean,
-		pane?: string,
-		plotBands?: ChartAxisDefaultsPlotBand[],
-		reverse?: boolean,
-		startAngle?: number,
-		title?: ChartAxisDefaultsTitle,
-		visible?: boolean
-	}
-
-	declare interface ChartCategoryAxisItemAutoBaseUnitSteps {
-		milliseconds?: any,
-		seconds?: any,
-		minutes?: any,
-		hours?: any,
-		days?: any,
-		weeks?: any,
-		months?: any,
-		years?: any
-	}
-
-	declare interface ChartCategoryAxisItemCrosshairTooltipBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartCategoryAxisItemCrosshairTooltipPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartCategoryAxisItemCrosshairTooltip {
-		background?: string,
-		border?: ChartCategoryAxisItemCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: ChartCategoryAxisItemCrosshairTooltipPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartCategoryAxisItemCrosshair {
-		color?: string,
-		dashType?: string,
-		opacity?: number,
-		tooltip?: ChartCategoryAxisItemCrosshairTooltip,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartCategoryAxisItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartCategoryAxisItemLabelsDateFormats {
-		days?: string,
-		hours?: string,
-		months?: string,
-		weeks?: string,
-		years?: string
-	}
-
-	declare interface ChartCategoryAxisItemLabelsMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartCategoryAxisItemLabelsPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartCategoryAxisItemLabelsRotation {
-		align?: string,
-		angle?: number | string
-	}
-
-	declare interface ChartCategoryAxisItemLabels {
-		background?: string,
-		border?: ChartCategoryAxisItemLabelsBorder,
-		color?: string,
-		culture?: string,
-		dateFormats?: ChartCategoryAxisItemLabelsDateFormats,
-		font?: string,
-		format?: string,
-		margin?: ChartCategoryAxisItemLabelsMargin,
-		mirror?: boolean,
-		padding?: ChartCategoryAxisItemLabelsPadding,
-		rotation?: ChartCategoryAxisItemLabelsRotation,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartCategoryAxisItemLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartCategoryAxisItemMajorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartCategoryAxisItemMajorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartCategoryAxisItemMinorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartCategoryAxisItemMinorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartCategoryAxisItemNotesDataItemIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartCategoryAxisItemNotesDataItemIcon {
-		background?: string,
-		border?: ChartCategoryAxisItemNotesDataItemIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartCategoryAxisItemNotesDataItemLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartCategoryAxisItemNotesDataItemLabel {
-		background?: string,
-		border?: ChartCategoryAxisItemNotesDataItemLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		text?: string,
-		position?: string
-	}
-
-	declare interface ChartCategoryAxisItemNotesDataItemLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartCategoryAxisItemNotesDataItem {
-		value?: any,
-		position?: string,
-		icon?: ChartCategoryAxisItemNotesDataItemIcon,
-		label?: ChartCategoryAxisItemNotesDataItemLabel,
-		line?: ChartCategoryAxisItemNotesDataItemLine
-	}
-
-	declare interface ChartCategoryAxisItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartCategoryAxisItemNotesIcon {
-		background?: string,
-		border?: ChartCategoryAxisItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartCategoryAxisItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartCategoryAxisItemNotesLabel {
-		background?: string,
-		border?: ChartCategoryAxisItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface ChartCategoryAxisItemNotesLine {
-		dashType?: string,
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartCategoryAxisItemNotes {
-		position?: string,
-		icon?: ChartCategoryAxisItemNotesIcon,
-		label?: ChartCategoryAxisItemNotesLabel,
-		line?: ChartCategoryAxisItemNotesLine,
-		data?: ChartCategoryAxisItemNotesDataItem[],
-		visual?: Function
-	}
-
-	declare interface ChartCategoryAxisItemPlotBand {
-		color?: string,
-		from?: number,
-		opacity?: number,
-		to?: number
-	}
-
-	declare interface ChartCategoryAxisItemSelectMousewheel {
-		reverse?: boolean,
-		zoom?: string
-	}
-
-	declare interface ChartCategoryAxisItemSelect {
-		from?: any,
-		max?: any,
-		min?: any,
-		mousewheel?: ChartCategoryAxisItemSelectMousewheel,
-		to?: any
-	}
-
-	declare interface ChartCategoryAxisItemTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartCategoryAxisItemTitleMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartCategoryAxisItemTitlePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartCategoryAxisItemTitle {
-		background?: string,
-		border?: ChartCategoryAxisItemTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: ChartCategoryAxisItemTitleMargin,
-		padding?: ChartCategoryAxisItemTitlePadding,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartCategoryAxisItem {
-		autoBaseUnitSteps?: ChartCategoryAxisItemAutoBaseUnitSteps,
-		axisCrossingValue?: any | Date | any,
-		background?: string,
-		baseUnit?: string,
-		baseUnitStep?: any,
-		categories?: any,
-		color?: string,
-		crosshair?: ChartCategoryAxisItemCrosshair,
-		field?: string,
-		justified?: boolean,
-		labels?: ChartCategoryAxisItemLabels,
-		line?: ChartCategoryAxisItemLine,
-		majorGridLines?: ChartCategoryAxisItemMajorGridLines,
-		majorTicks?: ChartCategoryAxisItemMajorTicks,
-		max?: any,
-		maxDateGroups?: number,
-		min?: any,
-		minorGridLines?: ChartCategoryAxisItemMinorGridLines,
-		minorTicks?: ChartCategoryAxisItemMinorTicks,
-		name?: string,
-		pane?: string,
-		plotBands?: ChartCategoryAxisItemPlotBand[],
-		reverse?: boolean,
-		roundToBaseUnit?: boolean,
-		select?: ChartCategoryAxisItemSelect,
-		startAngle?: number,
-		title?: ChartCategoryAxisItemTitle,
-		type?: string,
-		visible?: boolean,
-		weekStartDay?: number,
-		axisCrossingValues?: number[],
-		notes?: ChartCategoryAxisItemNotes
-	}
-
-	declare interface ChartChartAreaBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartChartAreaMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartChartArea {
-		background?: string,
-		border?: ChartChartAreaBorder,
-		height?: number,
-		margin?: ChartChartAreaMargin,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface ChartLegendBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartLegendInactiveItemsLabels {
-		color?: string,
-		font?: string,
-		template?: string | Function
-	}
-
-	declare interface ChartLegendInactiveItems {
-		labels?: ChartLegendInactiveItemsLabels
-	}
-
-	declare interface ChartLegendItem {
-		cursor?: string,
-		visual?: Function
-	}
-
-	declare interface ChartLegendLabelsMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartLegendLabelsPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartLegendLabels {
-		color?: string,
-		font?: string,
-		margin?: ChartLegendLabelsMargin,
-		padding?: ChartLegendLabelsPadding,
-		template?: string | Function
-	}
-
-	declare interface ChartLegendMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartLegendPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartLegend {
-		align?: string,
-		background?: string,
-		border?: ChartLegendBorder,
-		height?: number,
-		inactiveItems?: ChartLegendInactiveItems,
-		item?: ChartLegendItem,
-		labels?: ChartLegendLabels,
-		margin?: ChartLegendMargin,
-		offsetX?: number,
-		offsetY?: number,
-		orientation?: string,
-		padding?: ChartLegendPadding,
-		position?: string,
-		reverse?: boolean,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartPaneBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartPaneMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartPanePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartPaneTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartPaneTitleMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartPaneTitle {
-		background?: string,
-		border?: ChartPaneTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: ChartPaneTitleMargin,
-		position?: string,
-		text?: string,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartPane {
-		background?: string,
-		border?: ChartPaneBorder,
-		clip?: boolean,
-		height?: number,
-		margin?: ChartPaneMargin,
-		name?: string,
-		padding?: ChartPanePadding,
-		title?: ChartPaneTitle
-	}
-
-	declare interface ChartPannable {
-		key?: string,
-		lock?: string
-	}
-
-	declare interface ChartPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface ChartPdf {
-		author?: string,
-		creator?: string,
-		date?: Date,
-		forceProxy?: boolean,
-		fileName?: string,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: ChartPdfMargin,
-		paperSize?: string | any,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface ChartPlotAreaBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartPlotAreaMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartPlotAreaPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartPlotArea {
-		background?: string,
-		border?: ChartPlotAreaBorder,
-		margin?: ChartPlotAreaMargin,
-		opacity?: number,
-		padding?: ChartPlotAreaPadding
-	}
-
-	declare interface ChartSeriesItemBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		opacity?: number | Function,
-		width?: number | Function
-	}
-
-	declare interface ChartSeriesItemConnectors {
-		color?: string | Function,
-		padding?: number,
-		width?: number
-	}
-
-	declare interface ChartSeriesItemErrorBarsLine {
-		width?: number,
-		dashType?: string
-	}
-
-	declare interface ChartSeriesItemErrorBars {
-		value?: string | number | any | Function,
-		visual?: Function,
-		xValue?: string | number | any | Function,
-		yValue?: string | number | any | Function,
-		endCaps?: boolean,
-		color?: string,
-		line?: ChartSeriesItemErrorBarsLine
-	}
-
-	declare interface ChartSeriesItemExtremesBorder {
-		color?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface ChartSeriesItemExtremes {
-		background?: string | Function,
-		border?: ChartSeriesItemExtremesBorder,
-		size?: number | Function,
-		type?: string | Function,
-		rotation?: number | Function
-	}
-
-	declare interface ChartSeriesItemHighlightBorder {
-		color?: string,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface ChartSeriesItemHighlightLine {
-		dashType?: string,
-		color?: string,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface ChartSeriesItemHighlight {
-		border?: ChartSeriesItemHighlightBorder,
-		color?: string,
-		line?: ChartSeriesItemHighlightLine,
-		opacity?: number,
-		toggle?: Function,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartSeriesItemLabelsBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface ChartSeriesItemLabelsFromBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface ChartSeriesItemLabelsFromMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesItemLabelsFromPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesItemLabelsFrom {
-		background?: string | Function,
-		border?: ChartSeriesItemLabelsFromBorder,
-		color?: string | Function,
-		font?: string | Function,
-		format?: string | Function,
-		margin?: ChartSeriesItemLabelsFromMargin,
-		padding?: ChartSeriesItemLabelsFromPadding,
-		position?: string | Function,
-		template?: string | Function,
-		visible?: boolean | Function
-	}
-
-	declare interface ChartSeriesItemLabelsMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesItemLabelsPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesItemLabelsToBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface ChartSeriesItemLabelsToMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesItemLabelsToPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesItemLabelsTo {
-		background?: string | Function,
-		border?: ChartSeriesItemLabelsToBorder,
-		color?: string | Function,
-		font?: string | Function,
-		format?: string | Function,
-		margin?: ChartSeriesItemLabelsToMargin,
-		padding?: ChartSeriesItemLabelsToPadding,
-		position?: string | Function,
-		template?: string | Function,
-		visible?: boolean | Function
-	}
-
-	declare interface ChartSeriesItemLabels {
-		align?: string,
-		background?: string | Function,
-		border?: ChartSeriesItemLabelsBorder,
-		color?: string | Function,
-		distance?: number,
-		font?: string | Function,
-		format?: string | Function,
-		margin?: ChartSeriesItemLabelsMargin,
-		padding?: ChartSeriesItemLabelsPadding,
-		position?: string | Function,
-		template?: string | Function,
-		visible?: boolean | Function,
-		visual?: Function,
-		from?: ChartSeriesItemLabelsFrom,
-		to?: ChartSeriesItemLabelsTo
-	}
-
-	declare interface ChartSeriesItemLine {
-		color?: string,
-		opacity?: number,
-		width?: string,
-		style?: string
-	}
-
-	declare interface ChartSeriesItemMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesItemMarkersBorder {
-		color?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface ChartSeriesItemMarkers {
-		background?: string | Function,
-		border?: ChartSeriesItemMarkersBorder,
-		size?: number | Function,
-		type?: string | Function,
-		visible?: boolean | Function,
-		visual?: Function,
-		rotation?: number | Function
-	}
-
-	declare interface ChartSeriesItemNegativeValues {
-		color?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartSeriesItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesItemNotesIcon {
-		background?: string,
-		border?: ChartSeriesItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartSeriesItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesItemNotesLabel {
-		background?: string,
-		border?: ChartSeriesItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface ChartSeriesItemNotesLine {
-		dashType?: string,
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartSeriesItemNotes {
-		position?: string,
-		icon?: ChartSeriesItemNotesIcon,
-		label?: ChartSeriesItemNotesLabel,
-		line?: ChartSeriesItemNotesLine,
-		visual?: Function
-	}
-
-	declare interface ChartSeriesItemOutliersBorder {
-		color?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface ChartSeriesItemOutliers {
-		background?: string | Function,
-		border?: ChartSeriesItemOutliersBorder,
-		size?: number | Function,
-		type?: string | Function,
-		rotation?: number | Function
-	}
-
-	declare interface ChartSeriesItemOverlay {
-		gradient?: string
-	}
-
-	declare interface ChartSeriesItemStack {
-		type?: string,
-		group?: string
-	}
-
-	declare interface ChartSeriesItemTargetBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface ChartSeriesItemTargetLine {
-		width?: any | Function
-	}
-
-	declare interface ChartSeriesItemTarget {
-		border?: ChartSeriesItemTargetBorder,
-		color?: string | Function,
-		line?: ChartSeriesItemTargetLine
-	}
-
-	declare interface ChartSeriesItemTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesItemTooltipPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesItemTooltip {
-		background?: string,
-		border?: ChartSeriesItemTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: ChartSeriesItemTooltipPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartSeriesItem {
-		aggregate?: string | Function,
-		axis?: string,
-		border?: ChartSeriesItemBorder,
-		categoryField?: string,
-		closeField?: string,
-		color?: string | Function,
-		colorField?: string,
-		connectors?: ChartSeriesItemConnectors,
-		currentField?: string,
-		dashType?: string,
-		data?: any,
-		downColor?: string | Function,
-		downColorField?: string,
-		segmentSpacing?: number,
-		summaryField?: string,
-		neckRatio?: number,
-		dynamicSlope?: boolean,
-		dynamicHeight?: boolean,
-		errorBars?: ChartSeriesItemErrorBars,
-		errorLowField?: string,
-		errorHighField?: string,
-		xErrorLowField?: string,
-		xErrorHighField?: string,
-		yErrorLowField?: string,
-		yErrorHighField?: string,
-		explodeField?: string,
-		field?: string,
-		fromField?: string,
-		toField?: string,
-		noteTextField?: string,
-		lowerField?: string,
-		q1Field?: string,
-		medianField?: string,
-		q3Field?: string,
-		upperField?: string,
-		meanField?: string,
-		outliersField?: string,
-		gap?: number,
-		highField?: string,
-		highlight?: ChartSeriesItemHighlight,
-		holeSize?: number,
-		labels?: ChartSeriesItemLabels,
-		line?: ChartSeriesItemLine,
-		lowField?: string,
-		margin?: ChartSeriesItemMargin,
-		markers?: ChartSeriesItemMarkers,
-		outliers?: ChartSeriesItemOutliers,
-		extremes?: ChartSeriesItemExtremes,
-		maxSize?: number,
-		minSize?: number,
-		missingValues?: string,
-		style?: string,
-		name?: string,
-		negativeColor?: string,
-		negativeValues?: ChartSeriesItemNegativeValues,
-		opacity?: number,
-		openField?: string,
-		overlay?: ChartSeriesItemOverlay,
-		padding?: number,
-		size?: number,
-		sizeField?: string,
-		spacing?: number,
-		stack?: boolean | ChartSeriesItemStack,
-		startAngle?: number,
-		target?: ChartSeriesItemTarget,
-		targetField?: string,
-		tooltip?: ChartSeriesItemTooltip,
-		type?: string,
-		visible?: boolean,
-		visibleInLegend?: boolean,
-		visibleInLegendField?: string,
-		visual?: Function,
-		width?: number,
-		xAxis?: string,
-		xField?: string,
-		yAxis?: string,
-		yField?: string,
-		notes?: ChartSeriesItemNotes,
-		zIndex?: number
-	}
-
-	declare interface ChartSeriesDefaultsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsFromBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsFromMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsFromPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsFrom {
-		background?: string,
-		border?: ChartSeriesDefaultsLabelsFromBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: ChartSeriesDefaultsLabelsFromMargin,
-		padding?: ChartSeriesDefaultsLabelsFromPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartSeriesDefaultsLabelsMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsToBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsToMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsToPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesDefaultsLabelsTo {
-		background?: string,
-		border?: ChartSeriesDefaultsLabelsToBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: ChartSeriesDefaultsLabelsToMargin,
-		padding?: ChartSeriesDefaultsLabelsToPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartSeriesDefaultsLabels {
-		background?: string,
-		border?: ChartSeriesDefaultsLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: ChartSeriesDefaultsLabelsMargin,
-		padding?: ChartSeriesDefaultsLabelsPadding,
-		template?: string | Function,
-		visible?: boolean,
-		visual?: Function,
-		from?: ChartSeriesDefaultsLabelsFrom,
-		to?: ChartSeriesDefaultsLabelsTo
-	}
-
-	declare interface ChartSeriesDefaultsNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesDefaultsNotesIcon {
-		background?: string,
-		border?: ChartSeriesDefaultsNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartSeriesDefaultsNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesDefaultsNotesLabel {
-		background?: string,
-		border?: ChartSeriesDefaultsNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface ChartSeriesDefaultsNotesLine {
-		dashType?: string,
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartSeriesDefaultsNotes {
-		icon?: ChartSeriesDefaultsNotesIcon,
-		label?: ChartSeriesDefaultsNotesLabel,
-		line?: ChartSeriesDefaultsNotesLine,
-		visual?: Function
-	}
-
-	declare interface ChartSeriesDefaultsOverlay {
-		gradient?: string
-	}
-
-	declare interface ChartSeriesDefaultsStack {
-		type?: string
-	}
-
-	declare interface ChartSeriesDefaultsTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartSeriesDefaultsTooltipPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartSeriesDefaultsTooltip {
-		background?: string,
-		border?: ChartSeriesDefaultsTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: ChartSeriesDefaultsTooltipPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartSeriesDefaults {
-		area?: any,
-		bar?: any,
-		border?: ChartSeriesDefaultsBorder,
-		bubble?: any,
-		candlestick?: any,
-		column?: any,
-		donut?: any,
-		gap?: number,
-		labels?: ChartSeriesDefaultsLabels,
-		line?: any,
-		ohlc?: any,
-		overlay?: ChartSeriesDefaultsOverlay,
-		pie?: any,
-		scatter?: any,
-		scatterLine?: any,
-		spacing?: number,
-		stack?: boolean | ChartSeriesDefaultsStack,
-		type?: string,
-		tooltip?: ChartSeriesDefaultsTooltip,
-		verticalArea?: any,
-		verticalLine?: any,
-		visual?: Function,
-		notes?: ChartSeriesDefaultsNotes
-	}
-
-	declare interface ChartTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartTitleMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartTitlePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartTitle {
-		align?: string,
-		background?: string,
-		border?: ChartTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: ChartTitleMargin,
-		padding?: ChartTitlePadding,
-		position?: string,
-		text?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartTooltipPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartTooltip {
-		background?: string,
-		border?: ChartTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		opacity?: number,
-		padding?: ChartTooltipPadding,
-		shared?: boolean,
-		sharedTemplate?: string | Function,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartValueAxisItemCrosshairTooltipBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartValueAxisItemCrosshairTooltipPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartValueAxisItemCrosshairTooltip {
-		background?: string,
-		border?: ChartValueAxisItemCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: ChartValueAxisItemCrosshairTooltipPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartValueAxisItemCrosshair {
-		color?: string,
-		opacity?: number,
-		tooltip?: ChartValueAxisItemCrosshairTooltip,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartValueAxisItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartValueAxisItemLabelsMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartValueAxisItemLabelsPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartValueAxisItemLabelsRotation {
-		align?: string,
-		angle?: number | string
-	}
-
-	declare interface ChartValueAxisItemLabels {
-		background?: string,
-		border?: ChartValueAxisItemLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: ChartValueAxisItemLabelsMargin,
-		mirror?: boolean,
-		padding?: ChartValueAxisItemLabelsPadding,
-		rotation?: ChartValueAxisItemLabelsRotation,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartValueAxisItemLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartValueAxisItemMajorGridLines {
-		color?: string,
-		dashType?: string,
-		type?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartValueAxisItemMajorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartValueAxisItemMinorGridLines {
-		color?: string,
-		dashType?: string,
-		type?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartValueAxisItemMinorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartValueAxisItemNotesDataItemIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartValueAxisItemNotesDataItemIcon {
-		background?: string,
-		border?: ChartValueAxisItemNotesDataItemIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartValueAxisItemNotesDataItemLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartValueAxisItemNotesDataItemLabel {
-		background?: string,
-		border?: ChartValueAxisItemNotesDataItemLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		text?: string,
-		position?: string
-	}
-
-	declare interface ChartValueAxisItemNotesDataItemLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartValueAxisItemNotesDataItem {
-		value?: any,
-		position?: string,
-		icon?: ChartValueAxisItemNotesDataItemIcon,
-		label?: ChartValueAxisItemNotesDataItemLabel,
-		line?: ChartValueAxisItemNotesDataItemLine
-	}
-
-	declare interface ChartValueAxisItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartValueAxisItemNotesIcon {
-		background?: string,
-		border?: ChartValueAxisItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartValueAxisItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartValueAxisItemNotesLabel {
-		background?: string,
-		border?: ChartValueAxisItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface ChartValueAxisItemNotesLine {
-		dashType?: string,
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartValueAxisItemNotes {
-		position?: string,
-		icon?: ChartValueAxisItemNotesIcon,
-		label?: ChartValueAxisItemNotesLabel,
-		line?: ChartValueAxisItemNotesLine,
-		data?: ChartValueAxisItemNotesDataItem[],
-		visual?: Function
-	}
-
-	declare interface ChartValueAxisItemPlotBand {
-		color?: string,
-		from?: number,
-		opacity?: number,
-		to?: number
-	}
-
-	declare interface ChartValueAxisItemTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartValueAxisItemTitleMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartValueAxisItemTitlePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartValueAxisItemTitle {
-		background?: string,
-		border?: ChartValueAxisItemTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: ChartValueAxisItemTitleMargin,
-		padding?: ChartValueAxisItemTitlePadding,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartValueAxisItem {
-		axisCrossingValue?: any | Date | any,
-		background?: string,
-		color?: string,
-		crosshair?: ChartValueAxisItemCrosshair,
-		labels?: ChartValueAxisItemLabels,
-		line?: ChartValueAxisItemLine,
-		majorGridLines?: ChartValueAxisItemMajorGridLines,
-		majorUnit?: number,
-		max?: number,
-		min?: number,
-		minorGridLines?: ChartValueAxisItemMinorGridLines,
-		majorTicks?: ChartValueAxisItemMajorTicks,
-		minorTicks?: ChartValueAxisItemMinorTicks,
-		minorUnit?: number,
-		name?: string,
-		narrowRange?: boolean,
-		pane?: string,
-		plotBands?: ChartValueAxisItemPlotBand[],
-		reverse?: boolean,
-		title?: ChartValueAxisItemTitle,
-		type?: string,
-		visible?: boolean,
-		notes?: ChartValueAxisItemNotes
-	}
-
-	declare interface ChartXAxisItemCrosshairTooltipBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartXAxisItemCrosshairTooltipPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartXAxisItemCrosshairTooltip {
-		background?: string,
-		border?: ChartXAxisItemCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: ChartXAxisItemCrosshairTooltipPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartXAxisItemCrosshair {
-		color?: string,
-		opacity?: number,
-		tooltip?: ChartXAxisItemCrosshairTooltip,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartXAxisItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartXAxisItemLabelsDateFormats {
-		days?: string,
-		hours?: string,
-		months?: string,
-		weeks?: string,
-		years?: string
-	}
-
-	declare interface ChartXAxisItemLabelsMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartXAxisItemLabelsPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartXAxisItemLabelsRotation {
-		align?: string,
-		angle?: number | string
-	}
-
-	declare interface ChartXAxisItemLabels {
-		background?: string,
-		border?: ChartXAxisItemLabelsBorder,
-		color?: string,
-		culture?: string,
-		dateFormats?: ChartXAxisItemLabelsDateFormats,
-		font?: string,
-		format?: string,
-		margin?: ChartXAxisItemLabelsMargin,
-		mirror?: boolean,
-		padding?: ChartXAxisItemLabelsPadding,
-		rotation?: ChartXAxisItemLabelsRotation,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartXAxisItemLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartXAxisItemMajorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartXAxisItemMajorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartXAxisItemMinorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartXAxisItemMinorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartXAxisItemNotesDataItemIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartXAxisItemNotesDataItemIcon {
-		background?: string,
-		border?: ChartXAxisItemNotesDataItemIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartXAxisItemNotesDataItemLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartXAxisItemNotesDataItemLabel {
-		background?: string,
-		border?: ChartXAxisItemNotesDataItemLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		text?: string,
-		position?: string
-	}
-
-	declare interface ChartXAxisItemNotesDataItemLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartXAxisItemNotesDataItem {
-		value?: any,
-		position?: string,
-		icon?: ChartXAxisItemNotesDataItemIcon,
-		label?: ChartXAxisItemNotesDataItemLabel,
-		line?: ChartXAxisItemNotesDataItemLine
-	}
-
-	declare interface ChartXAxisItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartXAxisItemNotesIcon {
-		background?: string,
-		border?: ChartXAxisItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartXAxisItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartXAxisItemNotesLabel {
-		background?: string,
-		border?: ChartXAxisItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface ChartXAxisItemNotesLine {
-		dashType?: string,
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartXAxisItemNotes {
-		position?: string,
-		icon?: ChartXAxisItemNotesIcon,
-		label?: ChartXAxisItemNotesLabel,
-		line?: ChartXAxisItemNotesLine,
-		data?: ChartXAxisItemNotesDataItem[],
-		visual?: Function
-	}
-
-	declare interface ChartXAxisItemPlotBand {
-		color?: string,
-		from?: number,
-		opacity?: number,
-		to?: number
-	}
-
-	declare interface ChartXAxisItemTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartXAxisItemTitleMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartXAxisItemTitlePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartXAxisItemTitle {
-		background?: string,
-		border?: ChartXAxisItemTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: ChartXAxisItemTitleMargin,
-		padding?: ChartXAxisItemTitlePadding,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartXAxisItem {
-		axisCrossingValue?: any | Date | any,
-		background?: string,
-		baseUnit?: string,
-		color?: string,
-		crosshair?: ChartXAxisItemCrosshair,
-		labels?: ChartXAxisItemLabels,
-		line?: ChartXAxisItemLine,
-		majorGridLines?: ChartXAxisItemMajorGridLines,
-		minorGridLines?: ChartXAxisItemMinorGridLines,
-		minorTicks?: ChartXAxisItemMinorTicks,
-		majorTicks?: ChartXAxisItemMajorTicks,
-		majorUnit?: number,
-		max?: any,
-		min?: any,
-		minorUnit?: number,
-		name?: string,
-		narrowRange?: boolean,
-		pane?: string,
-		plotBands?: ChartXAxisItemPlotBand[],
-		reverse?: boolean,
-		startAngle?: number,
-		title?: ChartXAxisItemTitle,
-		type?: string,
-		visible?: boolean,
-		notes?: ChartXAxisItemNotes
-	}
-
-	declare interface ChartYAxisItemCrosshairTooltipBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartYAxisItemCrosshairTooltipPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartYAxisItemCrosshairTooltip {
-		background?: string,
-		border?: ChartYAxisItemCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: ChartYAxisItemCrosshairTooltipPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface ChartYAxisItemCrosshair {
-		color?: string,
-		opacity?: number,
-		tooltip?: ChartYAxisItemCrosshairTooltip,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartYAxisItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartYAxisItemLabelsDateFormats {
-		days?: string,
-		hours?: string,
-		months?: string,
-		weeks?: string,
-		years?: string
-	}
-
-	declare interface ChartYAxisItemLabelsMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartYAxisItemLabelsPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartYAxisItemLabelsRotation {
-		align?: string,
-		angle?: number
-	}
-
-	declare interface ChartYAxisItemLabels {
-		background?: string,
-		border?: ChartYAxisItemLabelsBorder,
-		color?: string,
-		culture?: string,
-		dateFormats?: ChartYAxisItemLabelsDateFormats,
-		font?: string,
-		format?: string,
-		margin?: ChartYAxisItemLabelsMargin,
-		mirror?: boolean,
-		padding?: ChartYAxisItemLabelsPadding,
-		rotation?: ChartYAxisItemLabelsRotation,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartYAxisItemLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface ChartYAxisItemMajorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartYAxisItemMajorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartYAxisItemMinorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartYAxisItemMinorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface ChartYAxisItemNotesDataItemIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartYAxisItemNotesDataItemIcon {
-		background?: string,
-		border?: ChartYAxisItemNotesDataItemIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartYAxisItemNotesDataItemLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartYAxisItemNotesDataItemLabel {
-		background?: string,
-		border?: ChartYAxisItemNotesDataItemLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		text?: string,
-		position?: string
-	}
-
-	declare interface ChartYAxisItemNotesDataItemLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartYAxisItemNotesDataItem {
-		value?: any,
-		position?: string,
-		icon?: ChartYAxisItemNotesDataItemIcon,
-		label?: ChartYAxisItemNotesDataItemLabel,
-		line?: ChartYAxisItemNotesDataItemLine
-	}
-
-	declare interface ChartYAxisItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface ChartYAxisItemNotesIcon {
-		background?: string,
-		border?: ChartYAxisItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface ChartYAxisItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartYAxisItemNotesLabel {
-		background?: string,
-		border?: ChartYAxisItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface ChartYAxisItemNotesLine {
-		dashType?: string,
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface ChartYAxisItemNotes {
-		position?: string,
-		icon?: ChartYAxisItemNotesIcon,
-		label?: ChartYAxisItemNotesLabel,
-		line?: ChartYAxisItemNotesLine,
-		data?: ChartYAxisItemNotesDataItem[],
-		visual?: Function
-	}
-
-	declare interface ChartYAxisItemPlotBand {
-		color?: string,
-		from?: number,
-		opacity?: number,
-		to?: number
-	}
-
-	declare interface ChartYAxisItemTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ChartYAxisItemTitleMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartYAxisItemTitlePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface ChartYAxisItemTitle {
-		background?: string,
-		border?: ChartYAxisItemTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: ChartYAxisItemTitleMargin,
-		padding?: ChartYAxisItemTitlePadding,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean,
-		visual?: Function
-	}
-
-	declare interface ChartYAxisItem {
-		axisCrossingValue?: any | Date | any,
-		background?: string,
-		baseUnit?: string,
-		color?: string,
-		crosshair?: ChartYAxisItemCrosshair,
-		labels?: ChartYAxisItemLabels,
-		line?: ChartYAxisItemLine,
-		majorGridLines?: ChartYAxisItemMajorGridLines,
-		minorGridLines?: ChartYAxisItemMinorGridLines,
-		minorTicks?: ChartYAxisItemMinorTicks,
-		majorTicks?: ChartYAxisItemMajorTicks,
-		majorUnit?: number,
-		max?: any,
-		min?: any,
-		minorUnit?: number,
-		name?: string,
-		narrowRange?: boolean,
-		pane?: string,
-		plotBands?: ChartYAxisItemPlotBand[],
-		reverse?: boolean,
-		title?: ChartYAxisItemTitle,
-		type?: string,
-		visible?: boolean,
-		notes?: ChartYAxisItemNotes
-	}
-
-	declare interface ChartZoomableMousewheel {
-		lock?: string
-	}
-
-	declare interface ChartZoomableSelection {
-		key?: string,
-		lock?: string
-	}
-
-	declare interface ChartZoomable {
-		mousewheel?: boolean | ChartZoomableMousewheel,
-		selection?: boolean | ChartZoomableSelection
-	}
-
-	declare interface ChartExportImageOptions {
-		width?: string,
-		height?: string,
-		cors?: string
-	}
-
-	declare interface ChartExportSVGOptions {
-		raw?: boolean
-	}
-
-	declare interface ChartToggleHighlightOptions {
-		series?: string,
-		category?: string
-	}
-
-	declare interface ChartSeriesClickEventSeries {
-		type?: string,
-		name?: string,
-		data?: any
-	}
-
-	declare interface ChartSeriesHoverEventSeries {
-		type?: string,
-		name?: string,
-		data?: any
-	}
-
-	declare interface ChartOptions {
-		name?: string,
-		autoBind?: boolean,
-		axisDefaults?: ChartAxisDefaults,
-		categoryAxis?: ChartCategoryAxisItem[],
-		chartArea?: ChartChartArea,
-		dataSource?: any | any | kendo.data.DataSource,
-		legend?: ChartLegend,
-		panes?: ChartPane[],
-		pannable?: boolean | ChartPannable,
-		pdf?: ChartPdf,
-		plotArea?: ChartPlotArea,
-		renderAs?: string,
-		series?: ChartSeriesItem[],
-		seriesColors?: any,
-		seriesDefaults?: ChartSeriesDefaults,
-		theme?: string,
-		title?: ChartTitle,
-		tooltip?: ChartTooltip,
-		transitions?: boolean,
-		valueAxis?: ChartValueAxisItem[],
-		xAxis?: ChartXAxisItem[],
-		yAxis?: ChartYAxisItem[],
-		zoomable?: boolean | ChartZoomable,
-		axisLabelClick(e: ChartAxisLabelClickEvent): void,
-		dataBound(e: ChartDataBoundEvent): void,
-		drag(e: ChartDragEvent): void,
-		dragEnd(e: ChartDragEndEvent): void,
-		dragStart(e: ChartDragStartEvent): void,
-		legendItemClick(e: ChartLegendItemClickEvent): void,
-		legendItemHover(e: ChartLegendItemHoverEvent): void,
-		noteClick(e: ChartNoteClickEvent): void,
-		noteHover(e: ChartNoteHoverEvent): void,
-		plotAreaClick(e: ChartPlotAreaClickEvent): void,
-		plotAreaHover(e: ChartPlotAreaHoverEvent): void,
-		render(e: ChartRenderEvent): void,
-		select(e: ChartSelectEvent): void,
-		selectEnd(e: ChartSelectEndEvent): void,
-		selectStart(e: ChartSelectStartEvent): void,
-		seriesClick(e: ChartSeriesClickEvent): void,
-		seriesHover(e: ChartSeriesHoverEvent): void,
-		zoom(e: ChartZoomEvent): void,
-		zoomEnd(e: ChartZoomEndEvent): void,
-		zoomStart(e: ChartZoomStartEvent): void
-	}
-
-	declare interface ChartEvent {
-		sender: Chart,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ChartAxisLabelClickEvent {
-		axis?: any,
-		dataItem?: any,
-		element?: any,
-		index?: any,
-		text?: string,
-		value?: any
-	}
-
-	declare interface ChartDataBoundEvent {
-		
-	}
-
-	declare interface ChartDragEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface ChartDragEndEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface ChartDragStartEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface ChartLegendItemClickEvent {
-		pointIndex?: number,
-		series?: any,
-		seriesIndex?: number,
-		text?: string,
-		element?: any
-	}
-
-	declare interface ChartLegendItemHoverEvent {
-		element?: any,
-		pointIndex?: number,
-		series?: any,
-		seriesIndex?: number,
-		text?: string
-	}
-
-	declare interface ChartNoteClickEvent {
-		category?: any,
-		dataItem?: any,
-		element?: any,
-		series?: any,
-		value?: any,
-		visual?: any
-	}
-
-	declare interface ChartNoteHoverEvent {
-		category?: any,
-		dataItem?: any,
-		element?: any,
-		series?: any,
-		value?: any,
-		visual?: any
-	}
-
-	declare interface ChartPlotAreaClickEvent {
-		category?: any,
-		element?: any,
-		originalEvent?: any,
-		value?: any,
-		x?: any,
-		y?: any
-	}
-
-	declare interface ChartPlotAreaHoverEvent {
-		category?: any,
-		element?: any,
-		originalEvent?: any,
-		value?: any,
-		x?: any,
-		y?: any
-	}
-
-	declare interface ChartRenderEvent {
-		
-	}
-
-	declare interface ChartSelectEvent {
-		axis?: any,
-		from?: any,
-		to?: any
-	}
-
-	declare interface ChartSelectEndEvent {
-		axis?: any,
-		from?: any,
-		to?: any
-	}
-
-	declare interface ChartSelectStartEvent {
-		axis?: any,
-		from?: any,
-		to?: any
-	}
-
-	declare interface ChartSeriesClickEvent {
-		category?: any,
-		dataItem?: any,
-		element?: any,
-		originalEvent?: any,
-		percentage?: any,
-		series?: ChartSeriesClickEventSeries,
-		stackValue?: any,
-		value?: any
-	}
-
-	declare interface ChartSeriesHoverEvent {
-		category?: any,
-		categoryPoints?: any,
-		dataItem?: any,
-		element?: any,
-		originalEvent?: any,
-		percentage?: any,
-		series?: ChartSeriesHoverEventSeries,
-		stackValue?: any,
-		value?: any
-	}
-
-	declare interface ChartZoomEvent {
-		axisRanges?: any,
-		delta?: number,
-		originalEvent?: any
-	}
-
-	declare interface ChartZoomEndEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface ChartZoomStartEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface DiagramConnectionDefaultsContent {
-		color?: string,
-		fontFamily?: string,
-		fontSize?: number,
-		fontStyle?: string,
-		fontWeight?: string,
-		template?: string | Function,
-		text?: string,
-		visual?: Function
-	}
-
-	declare interface DiagramConnectionDefaultsEditableTool {
-		name?: string
-	}
-
-	declare interface DiagramConnectionDefaultsEditable {
-		drag?: boolean,
-		remove?: boolean,
-		tools?: DiagramConnectionDefaultsEditableTool[]
-	}
-
-	declare interface DiagramConnectionDefaultsEndCapFill {
-		color?: string
-	}
-
-	declare interface DiagramConnectionDefaultsEndCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramConnectionDefaultsEndCap {
-		fill?: DiagramConnectionDefaultsEndCapFill,
-		stroke?: DiagramConnectionDefaultsEndCapStroke,
-		type?: string
-	}
-
-	declare interface DiagramConnectionDefaultsHoverStroke {
-		color?: string
-	}
-
-	declare interface DiagramConnectionDefaultsHover {
-		stroke?: DiagramConnectionDefaultsHoverStroke
-	}
-
-	declare interface DiagramConnectionDefaultsSelectionHandlesFill {
-		color?: string
-	}
-
-	declare interface DiagramConnectionDefaultsSelectionHandlesStroke {
-		color?: string
-	}
-
-	declare interface DiagramConnectionDefaultsSelectionHandles {
-		fill?: DiagramConnectionDefaultsSelectionHandlesFill,
-		stroke?: DiagramConnectionDefaultsSelectionHandlesStroke,
-		width?: number,
-		height?: number
-	}
-
-	declare interface DiagramConnectionDefaultsSelection {
-		handles?: DiagramConnectionDefaultsSelectionHandles
-	}
-
-	declare interface DiagramConnectionDefaultsStartCapFill {
-		color?: string
-	}
-
-	declare interface DiagramConnectionDefaultsStartCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramConnectionDefaultsStartCap {
-		fill?: DiagramConnectionDefaultsStartCapFill,
-		stroke?: DiagramConnectionDefaultsStartCapStroke,
-		type?: string
-	}
-
-	declare interface DiagramConnectionDefaultsStroke {
-		color?: string,
-		width?: number
-	}
-
-	declare interface DiagramConnectionDefaults {
-		content?: DiagramConnectionDefaultsContent,
-		editable?: boolean | DiagramConnectionDefaultsEditable,
-		endCap?: DiagramConnectionDefaultsEndCap,
-		fromConnector?: string,
-		hover?: DiagramConnectionDefaultsHover,
-		selectable?: boolean,
-		selection?: DiagramConnectionDefaultsSelection,
-		startCap?: DiagramConnectionDefaultsStartCap,
-		stroke?: DiagramConnectionDefaultsStroke,
-		toConnector?: string,
-		type?: string
-	}
-
-	declare interface DiagramConnectionContent {
-		color?: string,
-		fontFamily?: string,
-		fontSize?: number,
-		fontStyle?: string,
-		fontWeight?: string,
-		template?: string | Function,
-		text?: string,
-		visual?: Function
-	}
-
-	declare interface DiagramConnectionEditableTool {
-		name?: string
-	}
-
-	declare interface DiagramConnectionEditable {
-		tools?: DiagramConnectionEditableTool[]
-	}
-
-	declare interface DiagramConnectionEndCapFill {
-		color?: string
-	}
-
-	declare interface DiagramConnectionEndCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramConnectionEndCap {
-		fill?: DiagramConnectionEndCapFill,
-		stroke?: DiagramConnectionEndCapStroke,
-		type?: string
-	}
-
-	declare interface DiagramConnectionFrom {
-		x?: number,
-		y?: number
-	}
-
-	declare interface DiagramConnectionHoverStroke {
-		color?: string
-	}
-
-	declare interface DiagramConnectionHover {
-		stroke?: DiagramConnectionHoverStroke
-	}
-
-	declare interface DiagramConnectionPoint {
-		x?: number,
-		y?: number
-	}
-
-	declare interface DiagramConnectionSelectionHandlesFill {
-		color?: string
-	}
-
-	declare interface DiagramConnectionSelectionHandlesStroke {
-		color?: string
-	}
-
-	declare interface DiagramConnectionSelectionHandles {
-		fill?: DiagramConnectionSelectionHandlesFill,
-		stroke?: DiagramConnectionSelectionHandlesStroke,
-		width?: number,
-		height?: number
-	}
-
-	declare interface DiagramConnectionSelection {
-		handles?: DiagramConnectionSelectionHandles
-	}
-
-	declare interface DiagramConnectionStartCapFill {
-		color?: string
-	}
-
-	declare interface DiagramConnectionStartCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramConnectionStartCap {
-		fill?: DiagramConnectionStartCapFill,
-		stroke?: DiagramConnectionStartCapStroke,
-		type?: string
-	}
-
-	declare interface DiagramConnectionStroke {
-		color?: string,
-		width?: number
-	}
-
-	declare interface DiagramConnectionTo {
-		x?: number,
-		y?: number
-	}
-
-	declare interface DiagramConnection {
-		content?: DiagramConnectionContent,
-		editable?: boolean | DiagramConnectionEditable,
-		endCap?: DiagramConnectionEndCap,
-		from?: DiagramConnectionFrom,
-		fromConnector?: string,
-		hover?: DiagramConnectionHover,
-		points?: DiagramConnectionPoint[],
-		selection?: DiagramConnectionSelection,
-		startCap?: DiagramConnectionStartCap,
-		stroke?: DiagramConnectionStroke,
-		to?: DiagramConnectionTo,
-		toConnector?: string,
-		type?: string
-	}
-
-	declare interface DiagramEditableDragSnap {
-		size?: number
-	}
-
-	declare interface DiagramEditableDrag {
-		snap?: boolean | DiagramEditableDragSnap
-	}
-
-	declare interface DiagramEditableResizeHandlesFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramEditableResizeHandlesHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramEditableResizeHandlesHoverStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramEditableResizeHandlesHover {
-		fill?: DiagramEditableResizeHandlesHoverFill,
-		stroke?: DiagramEditableResizeHandlesHoverStroke
-	}
-
-	declare interface DiagramEditableResizeHandlesStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramEditableResizeHandles {
-		fill?: DiagramEditableResizeHandlesFill,
-		height?: number,
-		hover?: DiagramEditableResizeHandlesHover,
-		stroke?: DiagramEditableResizeHandlesStroke,
-		width?: number
-	}
-
-	declare interface DiagramEditableResize {
-		handles?: DiagramEditableResizeHandles
-	}
-
-	declare interface DiagramEditableRotateFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramEditableRotateStroke {
-		color?: string,
-		width?: number
-	}
-
-	declare interface DiagramEditableRotate {
-		fill?: DiagramEditableRotateFill,
-		stroke?: DiagramEditableRotateStroke
-	}
-
-	declare interface DiagramEditableTool {
-		name?: string,
-		step?: number
-	}
-
-	declare interface DiagramEditable {
-		connectionTemplate?: string | Function,
-		drag?: boolean | DiagramEditableDrag,
-		remove?: boolean,
-		resize?: boolean | DiagramEditableResize,
-		rotate?: boolean | DiagramEditableRotate,
-		shapeTemplate?: string | Function,
-		tools?: DiagramEditableTool[]
-	}
-
-	declare interface DiagramLayoutGrid {
-		componentSpacingX?: number,
-		componentSpacingY?: number,
-		offsetX?: number,
-		offsetY?: number,
-		width?: number
-	}
-
-	declare interface DiagramLayout {
-		endRadialAngle?: number,
-		grid?: DiagramLayoutGrid,
-		horizontalSeparation?: number,
-		iterations?: number,
-		layerSeparation?: number,
-		nodeDistance?: number,
-		radialFirstLevelSeparation?: number,
-		radialSeparation?: number,
-		startRadialAngle?: number,
-		subtype?: string,
-		tipOverTreeStartLevel?: number,
-		type?: string,
-		underneathHorizontalOffset?: number,
-		underneathVerticalSeparation?: number,
-		underneathVerticalTopOffset?: number,
-		verticalSeparation?: number
-	}
-
-	declare interface DiagramPannable {
-		key?: string
-	}
-
-	declare interface DiagramPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface DiagramPdf {
-		author?: string,
-		creator?: string,
-		date?: Date,
-		fileName?: string,
-		forceProxy?: boolean,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: DiagramPdfMargin,
-		paperSize?: string | any,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface DiagramSelectableStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramSelectable {
-		key?: string,
-		multiple?: boolean,
-		stroke?: DiagramSelectableStroke
-	}
-
-	declare interface DiagramShapeDefaultsConnectorDefaultsFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeDefaultsConnectorDefaultsHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeDefaultsConnectorDefaultsHoverStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShapeDefaultsConnectorDefaultsHover {
-		fill?: DiagramShapeDefaultsConnectorDefaultsHoverFill,
-		stroke?: DiagramShapeDefaultsConnectorDefaultsHoverStroke
-	}
-
-	declare interface DiagramShapeDefaultsConnectorDefaultsStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShapeDefaultsConnectorDefaults {
-		width?: number,
-		height?: number,
-		hover?: DiagramShapeDefaultsConnectorDefaultsHover,
-		fill?: DiagramShapeDefaultsConnectorDefaultsFill,
-		stroke?: DiagramShapeDefaultsConnectorDefaultsStroke
-	}
-
-	declare interface DiagramShapeDefaultsConnectorFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeDefaultsConnectorHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeDefaultsConnectorHoverStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShapeDefaultsConnectorHover {
-		fill?: DiagramShapeDefaultsConnectorHoverFill,
-		stroke?: DiagramShapeDefaultsConnectorHoverStroke
-	}
-
-	declare interface DiagramShapeDefaultsConnectorStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShapeDefaultsConnector {
-		name?: string,
-		position?: Function,
-		width?: number,
-		height?: number,
-		hover?: DiagramShapeDefaultsConnectorHover,
-		fill?: DiagramShapeDefaultsConnectorFill,
-		stroke?: DiagramShapeDefaultsConnectorStroke
-	}
-
-	declare interface DiagramShapeDefaultsContent {
-		align?: string,
-		color?: string,
-		fontFamily?: string,
-		fontSize?: number,
-		fontStyle?: string,
-		fontWeight?: string,
-		template?: string | Function,
-		text?: string
-	}
-
-	declare interface DiagramShapeDefaultsEditableTool {
-		name?: string,
-		step?: number
-	}
-
-	declare interface DiagramShapeDefaultsEditable {
-		connect?: boolean,
-		drag?: boolean,
-		remove?: boolean,
-		tools?: DiagramShapeDefaultsEditableTool[]
-	}
-
-	declare interface DiagramShapeDefaultsFillGradientStop {
-		offset?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeDefaultsFillGradient {
-		type?: string,
-		center?: any,
-		radius?: number,
-		start?: any,
-		end?: any,
-		stops?: DiagramShapeDefaultsFillGradientStop[]
-	}
-
-	declare interface DiagramShapeDefaultsFill {
-		color?: string,
-		opacity?: number,
-		gradient?: DiagramShapeDefaultsFillGradient
-	}
-
-	declare interface DiagramShapeDefaultsHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeDefaultsHover {
-		fill?: DiagramShapeDefaultsHoverFill
-	}
-
-	declare interface DiagramShapeDefaultsRotation {
-		angle?: number
-	}
-
-	declare interface DiagramShapeDefaultsStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShapeDefaults {
-		connectors?: DiagramShapeDefaultsConnector[],
-		connectorDefaults?: DiagramShapeDefaultsConnectorDefaults,
-		content?: DiagramShapeDefaultsContent,
-		editable?: boolean | DiagramShapeDefaultsEditable,
-		fill?: DiagramShapeDefaultsFill,
-		height?: number,
-		hover?: DiagramShapeDefaultsHover,
-		minHeight?: number,
-		minWidth?: number,
-		path?: string,
-		rotation?: DiagramShapeDefaultsRotation,
-		selectable?: boolean,
-		source?: string,
-		stroke?: DiagramShapeDefaultsStroke,
-		type?: string,
-		visual?: Function,
-		width?: number,
-		x?: number,
-		y?: number
-	}
-
-	declare interface DiagramShapeConnectorDefaultsFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeConnectorDefaultsHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeConnectorDefaultsHoverStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShapeConnectorDefaultsHover {
-		fill?: DiagramShapeConnectorDefaultsHoverFill,
-		stroke?: DiagramShapeConnectorDefaultsHoverStroke
-	}
-
-	declare interface DiagramShapeConnectorDefaultsStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShapeConnectorDefaults {
-		width?: number,
-		height?: number,
-		hover?: DiagramShapeConnectorDefaultsHover,
-		fill?: DiagramShapeConnectorDefaultsFill,
-		stroke?: DiagramShapeConnectorDefaultsStroke
-	}
-
-	declare interface DiagramShapeConnectorFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeConnectorHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeConnectorHoverStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShapeConnectorHover {
-		fill?: DiagramShapeConnectorHoverFill,
-		stroke?: DiagramShapeConnectorHoverStroke
-	}
-
-	declare interface DiagramShapeConnectorStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShapeConnector {
-		description?: string,
-		name?: string,
-		position?: Function,
-		width?: number,
-		height?: number,
-		hover?: DiagramShapeConnectorHover,
-		fill?: DiagramShapeConnectorFill,
-		stroke?: DiagramShapeConnectorStroke
-	}
-
-	declare interface DiagramShapeContent {
-		align?: string,
-		color?: string,
-		fontFamily?: string,
-		fontSize?: number,
-		fontStyle?: string,
-		fontWeight?: string,
-		template?: string | Function,
-		text?: string
-	}
-
-	declare interface DiagramShapeEditableTool {
-		name?: string,
-		step?: number
-	}
-
-	declare interface DiagramShapeEditable {
-		connect?: boolean,
-		tools?: DiagramShapeEditableTool[]
-	}
-
-	declare interface DiagramShapeFillGradientStop {
-		offset?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeFillGradient {
-		type?: string,
-		center?: any,
-		radius?: number,
-		start?: any,
-		end?: any,
-		stops?: DiagramShapeFillGradientStop[]
-	}
-
-	declare interface DiagramShapeFill {
-		color?: string,
-		opacity?: number,
-		gradient?: DiagramShapeFillGradient
-	}
-
-	declare interface DiagramShapeHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface DiagramShapeHover {
-		fill?: DiagramShapeHoverFill
-	}
-
-	declare interface DiagramShapeRotation {
-		angle?: number
-	}
-
-	declare interface DiagramShapeStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface DiagramShape {
-		connectors?: DiagramShapeConnector[],
-		connectorDefaults?: DiagramShapeConnectorDefaults,
-		content?: DiagramShapeContent,
-		editable?: boolean | DiagramShapeEditable,
-		fill?: DiagramShapeFill,
-		height?: number,
-		hover?: DiagramShapeHover,
-		id?: string,
-		minHeight?: number,
-		minWidth?: number,
-		path?: string,
-		rotation?: DiagramShapeRotation,
-		source?: string,
-		stroke?: DiagramShapeStroke,
-		type?: string,
-		visual?: Function,
-		width?: number,
-		x?: number,
-		y?: number
-	}
-
-	declare interface DiagramExportImageOptions {
-		width?: string,
-		height?: string,
-		cors?: string
-	}
-
-	declare interface DiagramExportSVGOptions {
-		raw?: boolean
-	}
-
-	declare interface DiagramSelectOptions {
-		addToSelection?: boolean
-	}
-
-	declare interface DiagramOptions {
-		name?: string,
-		autoBind?: boolean,
-		connectionDefaults?: DiagramConnectionDefaults,
-		connections?: DiagramConnection[],
-		connectionsDataSource?: any | any | kendo.data.DataSource,
-		dataSource?: any | any | kendo.data.DataSource,
-		editable?: boolean | DiagramEditable,
-		layout?: DiagramLayout,
-		pannable?: boolean | DiagramPannable,
-		pdf?: DiagramPdf,
-		selectable?: boolean | DiagramSelectable,
-		shapeDefaults?: DiagramShapeDefaults,
-		shapes?: DiagramShape[],
-		template?: string | Function,
-		zoom?: number,
-		zoomMax?: number,
-		zoomMin?: number,
-		zoomRate?: number,
-		add(e: DiagramAddEvent): void,
-		cancel(e: DiagramCancelEvent): void,
-		change(e: DiagramChangeEvent): void,
-		click(e: DiagramClickEvent): void,
-		dataBound(e: DiagramDataBoundEvent): void,
-		drag(e: DiagramDragEvent): void,
-		dragEnd(e: DiagramDragEndEvent): void,
-		dragStart(e: DiagramDragStartEvent): void,
-		edit(e: DiagramEditEvent): void,
-		itemBoundsChange(e: DiagramItemBoundsChangeEvent): void,
-		itemRotate(e: DiagramItemRotateEvent): void,
-		mouseEnter(e: DiagramMouseEnterEvent): void,
-		mouseLeave(e: DiagramMouseLeaveEvent): void,
-		pan(e: DiagramPanEvent): void,
-		remove(e: DiagramRemoveEvent): void,
-		save(e: DiagramSaveEvent): void,
-		select(e: DiagramSelectEvent): void,
-		toolBarClick(e: DiagramToolBarClickEvent): void,
-		zoomEnd(e: DiagramZoomEndEvent): void,
-		zoomStart(e: DiagramZoomStartEvent): void
-	}
-
-	declare interface DiagramEvent {
-		sender: Diagram,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface DiagramAddEvent {
-		connection?: kendo.dataviz.diagram.Connection,
-		shape?: kendo.dataviz.diagram.Shape
-	}
-
-	declare interface DiagramCancelEvent {
-		container?: JQuery,
-		connection?: kendo.data.Model,
-		shape?: kendo.data.Model
-	}
-
-	declare interface DiagramChangeEvent {
-		added?: any,
-		removed?: any
-	}
-
-	declare interface DiagramClickEvent {
-		item?: any,
-		meta?: any,
-		point?: kendo.dataviz.diagram.Point
-	}
-
-	declare interface DiagramDataBoundEvent {
-		
-	}
-
-	declare interface DiagramDragEvent {
-		connectionHandle?: string,
-		connections?: any,
-		shapes?: any
-	}
-
-	declare interface DiagramDragEndEvent {
-		connectionHandle?: string,
-		connections?: any,
-		shapes?: any
-	}
-
-	declare interface DiagramDragStartEvent {
-		connectionHandle?: string,
-		connections?: any,
-		shapes?: any
-	}
-
-	declare interface DiagramEditEvent {
-		container?: JQuery,
-		connection?: kendo.data.Model,
-		shape?: kendo.data.Model
-	}
-
-	declare interface DiagramItemBoundsChangeEvent {
-		bounds?: kendo.dataviz.diagram.Rect,
-		item?: kendo.dataviz.diagram.Shape
-	}
-
-	declare interface DiagramItemRotateEvent {
-		item?: kendo.dataviz.diagram.Shape
-	}
-
-	declare interface DiagramMouseEnterEvent {
-		item?: any
-	}
-
-	declare interface DiagramMouseLeaveEvent {
-		item?: any
-	}
-
-	declare interface DiagramPanEvent {
-		pan?: kendo.dataviz.diagram.Point
-	}
-
-	declare interface DiagramRemoveEvent {
-		connection?: kendo.dataviz.diagram.Connection,
-		shape?: kendo.dataviz.diagram.Shape
-	}
-
-	declare interface DiagramSaveEvent {
-		container?: JQuery,
-		connection?: kendo.data.Model,
-		shape?: kendo.data.Model
-	}
-
-	declare interface DiagramSelectEvent {
-		selected?: any,
-		deselected?: any
-	}
-
-	declare interface DiagramToolBarClickEvent {
-		action?: string,
-		shapes?: any,
-		connections?: any,
-		target?: JQuery
-	}
-
-	declare interface DiagramZoomEndEvent {
-		point?: kendo.dataviz.diagram.Point,
-		zoom?: number
-	}
-
-	declare interface DiagramZoomStartEvent {
-		point?: kendo.dataviz.diagram.Point,
-		zoom?: number
-	}
-
-	declare interface LinearGaugeGaugeAreaBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface LinearGaugeGaugeAreaMargin {
-		top?: number,
-		bottom?: number,
-		left?: number,
-		right?: number
-	}
-
-	declare interface LinearGaugeGaugeArea {
-		background?: any,
-		border?: LinearGaugeGaugeAreaBorder,
-		height?: number,
-		margin?: LinearGaugeGaugeAreaMargin,
-		width?: number
-	}
-
-	declare interface LinearGaugePointerItemBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface LinearGaugePointerItemTrackBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface LinearGaugePointerItemTrack {
-		border?: LinearGaugePointerItemTrackBorder,
-		color?: string,
-		opacity?: number,
-		size?: number,
-		visible?: boolean
-	}
-
-	declare interface LinearGaugePointerItem {
-		border?: LinearGaugePointerItemBorder,
-		color?: string,
-		margin?: number | any,
-		opacity?: number,
-		shape?: string,
-		size?: number,
-		track?: LinearGaugePointerItemTrack,
-		value?: number
-	}
-
-	declare interface LinearGaugeScaleLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface LinearGaugeScaleLabelsMargin {
-		top?: number,
-		bottom?: number,
-		left?: number,
-		right?: number
-	}
-
-	declare interface LinearGaugeScaleLabelsPadding {
-		top?: number,
-		bottom?: number,
-		left?: number,
-		right?: number
-	}
-
-	declare interface LinearGaugeScaleLabels {
-		background?: string,
-		border?: LinearGaugeScaleLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: LinearGaugeScaleLabelsMargin,
-		padding?: LinearGaugeScaleLabelsPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface LinearGaugeScaleLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface LinearGaugeScaleMajorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface LinearGaugeScaleMinorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface LinearGaugeScaleRange {
-		from?: number,
-		to?: number,
-		opacity?: number,
-		color?: string
-	}
-
-	declare interface LinearGaugeScale {
-		line?: LinearGaugeScaleLine,
-		labels?: LinearGaugeScaleLabels,
-		majorTicks?: LinearGaugeScaleMajorTicks,
-		majorUnit?: number,
-		max?: number,
-		min?: number,
-		minorTicks?: LinearGaugeScaleMinorTicks,
-		minorUnit?: number,
-		mirror?: boolean,
-		ranges?: LinearGaugeScaleRange[],
-		rangePlaceholderColor?: string,
-		rangeSize?: number,
-		reverse?: boolean,
-		vertical?: boolean
-	}
-
-	declare interface LinearGaugeExportImageOptions {
-		width?: string,
-		height?: string
-	}
-
-	declare interface LinearGaugeExportSVGOptions {
-		raw?: boolean
-	}
-
-	declare interface LinearGaugeOptions {
-		name?: string,
-		gaugeArea?: LinearGaugeGaugeArea,
-		pointer?: LinearGaugePointerItem[],
-		renderAs?: string,
-		scale?: LinearGaugeScale,
-		transitions?: boolean
-	}
-
-	declare interface LinearGaugeEvent {
-		sender: LinearGauge,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MapControlsAttribution {
-		position?: string
-	}
-
-	declare interface MapControlsNavigator {
-		position?: string
-	}
-
-	declare interface MapControlsZoom {
-		position?: string
-	}
-
-	declare interface MapControls {
-		attribution?: boolean | MapControlsAttribution,
-		navigator?: boolean | MapControlsNavigator,
-		zoom?: boolean | MapControlsZoom
-	}
-
-	declare interface MapLayerDefaultsBing {
-		attribution?: string,
-		opacity?: number,
-		key?: string,
-		imagerySet?: string,
-		culture?: string
-	}
-
-	declare interface MapLayerDefaultsBubbleStyleFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface MapLayerDefaultsBubbleStyleStroke {
-		color?: string,
-		dashType?: string,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface MapLayerDefaultsBubbleStyle {
-		fill?: MapLayerDefaultsBubbleStyleFill,
-		stroke?: MapLayerDefaultsBubbleStyleStroke
-	}
-
-	declare interface MapLayerDefaultsBubble {
-		attribution?: string,
-		opacity?: number,
-		maxSize?: number,
-		minSize?: number,
-		style?: MapLayerDefaultsBubbleStyle,
-		symbol?: string | Function
-	}
-
-	declare interface MapLayerDefaultsMarkerTooltipAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MapLayerDefaultsMarkerTooltipAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MapLayerDefaultsMarkerTooltipAnimation {
-		close?: MapLayerDefaultsMarkerTooltipAnimationClose,
-		open?: MapLayerDefaultsMarkerTooltipAnimationOpen
-	}
-
-	declare interface MapLayerDefaultsMarkerTooltipContent {
-		url?: string
-	}
-
-	declare interface MapLayerDefaultsMarkerTooltip {
-		autoHide?: boolean,
-		animation?: MapLayerDefaultsMarkerTooltipAnimation,
-		content?: MapLayerDefaultsMarkerTooltipContent,
-		template?: string,
-		callout?: boolean,
-		iframe?: boolean,
-		height?: number,
-		width?: number,
-		position?: string,
-		showAfter?: number,
-		showOn?: string
-	}
-
-	declare interface MapLayerDefaultsMarker {
-		shape?: string,
-		tooltip?: MapLayerDefaultsMarkerTooltip,
-		opacity?: number
-	}
-
-	declare interface MapLayerDefaultsShapeStyleFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface MapLayerDefaultsShapeStyleStroke {
-		color?: string,
-		dashType?: string,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface MapLayerDefaultsShapeStyle {
-		fill?: MapLayerDefaultsShapeStyleFill,
-		stroke?: MapLayerDefaultsShapeStyleStroke
-	}
-
-	declare interface MapLayerDefaultsShape {
-		attribution?: string,
-		opacity?: number,
-		style?: MapLayerDefaultsShapeStyle
-	}
-
-	declare interface MapLayerDefaultsTile {
-		urlTemplate?: string,
-		attribution?: string,
-		subdomains?: any,
-		opacity?: number
-	}
-
-	declare interface MapLayerDefaults {
-		marker?: MapLayerDefaultsMarker,
-		shape?: MapLayerDefaultsShape,
-		bubble?: MapLayerDefaultsBubble,
-		tileSize?: number,
-		tile?: MapLayerDefaultsTile,
-		bing?: MapLayerDefaultsBing
-	}
-
-	declare interface MapLayerStyleFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface MapLayerStyleStroke {
-		color?: string,
-		dashType?: number,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface MapLayerStyle {
-		fill?: MapLayerStyleFill,
-		stroke?: MapLayerStyleStroke
-	}
-
-	declare interface MapLayerTooltipAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MapLayerTooltipAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MapLayerTooltipAnimation {
-		close?: MapLayerTooltipAnimationClose,
-		open?: MapLayerTooltipAnimationOpen
-	}
-
-	declare interface MapLayerTooltipContent {
-		url?: string
-	}
-
-	declare interface MapLayerTooltip {
-		autoHide?: boolean,
-		animation?: MapLayerTooltipAnimation,
-		content?: MapLayerTooltipContent,
-		template?: string,
-		callout?: boolean,
-		iframe?: boolean,
-		height?: number,
-		width?: number,
-		position?: string,
-		showAfter?: number,
-		showOn?: string
-	}
-
-	declare interface MapLayer {
-		attribution?: string,
-		autoBind?: boolean,
-		dataSource?: any | any | kendo.data.DataSource,
-		extent?: any | kendo.dataviz.map.Extent,
-		key?: string,
-		imagerySet?: string,
-		culture?: string,
-		locationField?: string,
-		shape?: string,
-		tileSize?: number,
-		titleField?: string,
-		tooltip?: MapLayerTooltip,
-		maxSize?: number,
-		minSize?: number,
-		opacity?: number,
-		subdomains?: any,
-		symbol?: string | Function,
-		type?: string,
-		style?: MapLayerStyle,
-		urlTemplate?: string,
-		valueField?: string,
-		zIndex?: number
-	}
-
-	declare interface MapMarkerDefaultsTooltipAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MapMarkerDefaultsTooltipAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MapMarkerDefaultsTooltipAnimation {
-		close?: MapMarkerDefaultsTooltipAnimationClose,
-		open?: MapMarkerDefaultsTooltipAnimationOpen
-	}
-
-	declare interface MapMarkerDefaultsTooltipContent {
-		url?: string
-	}
-
-	declare interface MapMarkerDefaultsTooltip {
-		autoHide?: boolean,
-		animation?: MapMarkerDefaultsTooltipAnimation,
-		content?: MapMarkerDefaultsTooltipContent,
-		template?: string,
-		callout?: boolean,
-		iframe?: boolean,
-		height?: number,
-		width?: number,
-		position?: string,
-		showAfter?: number,
-		showOn?: string
-	}
-
-	declare interface MapMarkerDefaults {
-		shape?: string,
-		tooltip?: MapMarkerDefaultsTooltip
-	}
-
-	declare interface MapMarkerTooltipAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MapMarkerTooltipAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MapMarkerTooltipAnimation {
-		close?: MapMarkerTooltipAnimationClose,
-		open?: MapMarkerTooltipAnimationOpen
-	}
-
-	declare interface MapMarkerTooltipContent {
-		url?: string
-	}
-
-	declare interface MapMarkerTooltip {
-		autoHide?: boolean,
-		animation?: MapMarkerTooltipAnimation,
-		content?: MapMarkerTooltipContent,
-		template?: string,
-		callout?: boolean,
-		iframe?: boolean,
-		height?: number,
-		width?: number,
-		position?: string,
-		showAfter?: number,
-		showOn?: string
-	}
-
-	declare interface MapMarker {
-		location?: any | kendo.dataviz.map.Location,
-		shape?: string,
-		title?: string,
-		tooltip?: MapMarkerTooltip
-	}
-
-	declare interface MapOptions {
-		name?: string,
-		center?: any | kendo.dataviz.map.Location,
-		controls?: MapControls,
-		layerDefaults?: MapLayerDefaults,
-		layers?: MapLayer[],
-		markerDefaults?: MapMarkerDefaults,
-		markers?: MapMarker[],
-		minZoom?: number,
-		maxZoom?: number,
-		minSize?: number,
-		pannable?: boolean,
-		wraparound?: boolean,
-		zoom?: number,
-		zoomable?: boolean,
-		beforeReset(e: MapBeforeResetEvent): void,
-		click(e: MapClickEvent): void,
-		markerActivate(e: MapMarkerActivateEvent): void,
-		markerCreated(e: MapMarkerCreatedEvent): void,
-		markerClick(e: MapMarkerClickEvent): void,
-		pan(e: MapPanEvent): void,
-		panEnd(e: MapPanEndEvent): void,
-		reset(e: MapResetEvent): void,
-		shapeClick(e: MapShapeClickEvent): void,
-		shapeCreated(e: MapShapeCreatedEvent): void,
-		shapeFeatureCreated(e: MapShapeFeatureCreatedEvent): void,
-		shapeMouseEnter(e: MapShapeMouseEnterEvent): void,
-		shapeMouseLeave(e: MapShapeMouseLeaveEvent): void,
-		zoomStart(e: MapZoomStartEvent): void,
-		zoomEnd(e: MapZoomEndEvent): void
-	}
-
-	declare interface MapEvent {
-		sender: Map,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MapBeforeResetEvent {
-		
-	}
-
-	declare interface MapClickEvent {
-		location?: kendo.dataviz.map.Location,
-		originalEvent?: any
-	}
-
-	declare interface MapMarkerActivateEvent {
-		marker?: kendo.dataviz.map.Marker,
-		layer?: kendo.dataviz.map.Marker
-	}
-
-	declare interface MapMarkerCreatedEvent {
-		marker?: kendo.dataviz.map.Marker,
-		layer?: kendo.dataviz.map.Marker
-	}
-
-	declare interface MapMarkerClickEvent {
-		marker?: kendo.dataviz.map.Marker,
-		layer?: kendo.dataviz.map.Marker
-	}
-
-	declare interface MapPanEvent {
-		origin?: kendo.dataviz.map.Location,
-		center?: kendo.dataviz.map.Location,
-		originalEvent?: any
-	}
-
-	declare interface MapPanEndEvent {
-		origin?: kendo.dataviz.map.Location,
-		center?: kendo.dataviz.map.Location,
-		originalEvent?: any
-	}
-
-	declare interface MapResetEvent {
-		
-	}
-
-	declare interface MapShapeClickEvent {
-		layer?: kendo.dataviz.map.layer.Shape,
-		shape?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface MapShapeCreatedEvent {
-		layer?: kendo.dataviz.map.layer.Shape,
-		shape?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface MapShapeFeatureCreatedEvent {
-		dataItem?: any,
-		layer?: kendo.dataviz.map.layer.Shape,
-		group?: kendo.drawing.Group,
-		properties?: any
-	}
-
-	declare interface MapShapeMouseEnterEvent {
-		layer?: kendo.dataviz.map.layer.Shape,
-		shape?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface MapShapeMouseLeaveEvent {
-		layer?: kendo.dataviz.map.layer.Shape,
-		shape?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface MapZoomStartEvent {
-		originalEvent?: any
-	}
-
-	declare interface MapZoomEndEvent {
-		originalEvent?: any
-	}
-
-	declare interface QRCodeBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface QRCodeExportImageOptions {
-		width?: string,
-		height?: string
-	}
-
-	declare interface QRCodeExportSVGOptions {
-		raw?: boolean
-	}
-
-	declare interface QRCodeOptions {
-		name?: string,
-		background?: string,
-		border?: QRCodeBorder,
-		color?: string,
-		encoding?: string,
-		errorCorrection?: string,
-		padding?: number,
-		renderAs?: string,
-		size?: number | string,
-		value?: number | string
-	}
-
-	declare interface QRCodeEvent {
-		sender: QRCode,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RadialGaugeGaugeAreaBorder {
-		color?: string,
-		dashType?: string,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface RadialGaugeGaugeAreaMargin {
-		top?: number,
-		bottom?: number,
-		left?: number,
-		right?: number
-	}
-
-	declare interface RadialGaugeGaugeArea {
-		background?: any,
-		border?: RadialGaugeGaugeAreaBorder,
-		height?: number,
-		margin?: RadialGaugeGaugeAreaMargin,
-		width?: number
-	}
-
-	declare interface RadialGaugePointerItemCap {
-		color?: string,
-		size?: number
-	}
-
-	declare interface RadialGaugePointerItem {
-		cap?: RadialGaugePointerItemCap,
-		color?: string,
-		value?: number
-	}
-
-	declare interface RadialGaugeScaleLabelsBorder {
-		color?: string,
-		dashType?: string,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface RadialGaugeScaleLabelsMargin {
-		top?: number,
-		bottom?: number,
-		left?: number,
-		right?: number
-	}
-
-	declare interface RadialGaugeScaleLabelsPadding {
-		top?: number,
-		bottom?: number,
-		left?: number,
-		right?: number
-	}
-
-	declare interface RadialGaugeScaleLabels {
-		background?: string,
-		border?: RadialGaugeScaleLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: RadialGaugeScaleLabelsMargin,
-		padding?: RadialGaugeScaleLabelsPadding,
-		position?: string,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface RadialGaugeScaleMajorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface RadialGaugeScaleMinorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface RadialGaugeScaleRange {
-		from?: number,
-		to?: number,
-		opacity?: number,
-		color?: string
-	}
-
-	declare interface RadialGaugeScale {
-		endAngle?: number,
-		labels?: RadialGaugeScaleLabels,
-		majorTicks?: RadialGaugeScaleMajorTicks,
-		majorUnit?: number,
-		max?: number,
-		min?: number,
-		minorTicks?: RadialGaugeScaleMinorTicks,
-		minorUnit?: number,
-		ranges?: RadialGaugeScaleRange[],
-		rangePlaceholderColor?: string,
-		rangeSize?: number,
-		rangeDistance?: number,
-		reverse?: boolean,
-		startAngle?: number
-	}
-
-	declare interface RadialGaugeExportImageOptions {
-		width?: string,
-		height?: string
-	}
-
-	declare interface RadialGaugeExportSVGOptions {
-		raw?: boolean
-	}
-
-	declare interface RadialGaugeOptions {
-		name?: string,
-		gaugeArea?: RadialGaugeGaugeArea,
-		pointer?: RadialGaugePointerItem[],
-		renderAs?: string,
-		scale?: RadialGaugeScale,
-		transitions?: boolean
-	}
-
-	declare interface RadialGaugeEvent {
-		sender: RadialGauge,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SparklineCategoryAxisItemCrosshairTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineCategoryAxisItemCrosshairTooltip {
-		background?: string,
-		border?: SparklineCategoryAxisItemCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface SparklineCategoryAxisItemCrosshair {
-		color?: string,
-		width?: number,
-		opacity?: number,
-		dashType?: number,
-		visible?: boolean,
-		tooltip?: SparklineCategoryAxisItemCrosshairTooltip
-	}
-
-	declare interface SparklineCategoryAxisItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineCategoryAxisItemLabels {
-		background?: string,
-		border?: SparklineCategoryAxisItemLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: number | any,
-		mirror?: boolean,
-		padding?: number | any,
-		rotation?: number,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean,
-		culture?: string,
-		dateFormats?: any
-	}
-
-	declare interface SparklineCategoryAxisItemLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface SparklineCategoryAxisItemMajorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface SparklineCategoryAxisItemMajorTicks {
-		size?: number,
-		visible?: boolean,
-		color?: string,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface SparklineCategoryAxisItemMinorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface SparklineCategoryAxisItemMinorTicks {
-		size?: number,
-		visible?: boolean,
-		color?: string,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface SparklineCategoryAxisItemNotesDataItemIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineCategoryAxisItemNotesDataItemIcon {
-		background?: string,
-		border?: SparklineCategoryAxisItemNotesDataItemIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface SparklineCategoryAxisItemNotesDataItemLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineCategoryAxisItemNotesDataItemLabel {
-		background?: string,
-		border?: SparklineCategoryAxisItemNotesDataItemLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		text?: string,
-		position?: string
-	}
-
-	declare interface SparklineCategoryAxisItemNotesDataItemLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface SparklineCategoryAxisItemNotesDataItem {
-		value?: any,
-		position?: string,
-		icon?: SparklineCategoryAxisItemNotesDataItemIcon,
-		label?: SparklineCategoryAxisItemNotesDataItemLabel,
-		line?: SparklineCategoryAxisItemNotesDataItemLine
-	}
-
-	declare interface SparklineCategoryAxisItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineCategoryAxisItemNotesIcon {
-		background?: string,
-		border?: SparklineCategoryAxisItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface SparklineCategoryAxisItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineCategoryAxisItemNotesLabel {
-		background?: string,
-		border?: SparklineCategoryAxisItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface SparklineCategoryAxisItemNotesLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface SparklineCategoryAxisItemNotes {
-		position?: string,
-		icon?: SparklineCategoryAxisItemNotesIcon,
-		label?: SparklineCategoryAxisItemNotesLabel,
-		line?: SparklineCategoryAxisItemNotesLine,
-		data?: SparklineCategoryAxisItemNotesDataItem[]
-	}
-
-	declare interface SparklineCategoryAxisItemPlotBand {
-		from?: number,
-		to?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface SparklineCategoryAxisItemTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineCategoryAxisItemTitle {
-		background?: string,
-		border?: SparklineCategoryAxisItemTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: number | any,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean
-	}
-
-	declare interface SparklineCategoryAxisItem {
-		axisCrossingValue?: any | Date | any,
-		categories?: any,
-		color?: string,
-		field?: string,
-		justified?: boolean,
-		labels?: SparklineCategoryAxisItemLabels,
-		line?: SparklineCategoryAxisItemLine,
-		majorGridLines?: SparklineCategoryAxisItemMajorGridLines,
-		majorTicks?: SparklineCategoryAxisItemMajorTicks,
-		minorGridLines?: SparklineCategoryAxisItemMinorGridLines,
-		minorTicks?: SparklineCategoryAxisItemMinorTicks,
-		name?: string,
-		plotBands?: SparklineCategoryAxisItemPlotBand[],
-		reverse?: boolean,
-		title?: SparklineCategoryAxisItemTitle,
-		type?: string,
-		autoBaseUnitSteps?: any,
-		baseUnit?: string,
-		baseUnitStep?: any,
-		max?: any,
-		min?: any,
-		roundToBaseUnit?: boolean,
-		weekStartDay?: number,
-		maxDateGroups?: number,
-		visible?: boolean,
-		crosshair?: SparklineCategoryAxisItemCrosshair,
-		notes?: SparklineCategoryAxisItemNotes
-	}
-
-	declare interface SparklineChartAreaBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineChartArea {
-		background?: string,
-		opacity?: number,
-		border?: SparklineChartAreaBorder,
-		height?: number,
-		margin?: number | any,
-		width?: number
-	}
-
-	declare interface SparklinePlotAreaBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklinePlotArea {
-		background?: string,
-		opacity?: number,
-		border?: SparklinePlotAreaBorder,
-		margin?: number | any
-	}
-
-	declare interface SparklineSeriesItemBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		opacity?: number | Function,
-		width?: number | Function
-	}
-
-	declare interface SparklineSeriesItemConnectors {
-		color?: string,
-		padding?: number,
-		width?: number
-	}
-
-	declare interface SparklineSeriesItemHighlightBorder {
-		width?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface SparklineSeriesItemHighlight {
-		border?: SparklineSeriesItemHighlightBorder,
-		color?: string,
-		opacity?: number,
-		visible?: boolean
-	}
-
-	declare interface SparklineSeriesItemLabelsBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface SparklineSeriesItemLabels {
-		align?: string,
-		background?: string | Function,
-		border?: SparklineSeriesItemLabelsBorder,
-		color?: string | Function,
-		distance?: number,
-		font?: string | Function,
-		format?: string | Function,
-		margin?: number | any,
-		padding?: number | any,
-		position?: string | Function,
-		template?: string | Function,
-		visible?: boolean | Function
-	}
-
-	declare interface SparklineSeriesItemLine {
-		color?: string,
-		opacity?: number,
-		width?: string,
-		style?: string
-	}
-
-	declare interface SparklineSeriesItemMarkersBorder {
-		color?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface SparklineSeriesItemMarkers {
-		background?: string | Function,
-		border?: SparklineSeriesItemMarkersBorder,
-		size?: number | Function,
-		type?: string | Function,
-		visible?: boolean | Function,
-		rotation?: number | Function
-	}
-
-	declare interface SparklineSeriesItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineSeriesItemNotesIcon {
-		background?: string,
-		border?: SparklineSeriesItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface SparklineSeriesItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineSeriesItemNotesLabel {
-		background?: string,
-		border?: SparklineSeriesItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface SparklineSeriesItemNotesLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface SparklineSeriesItemNotes {
-		position?: string,
-		icon?: SparklineSeriesItemNotesIcon,
-		label?: SparklineSeriesItemNotesLabel,
-		line?: SparklineSeriesItemNotesLine
-	}
-
-	declare interface SparklineSeriesItemOverlay {
-		gradient?: string
-	}
-
-	declare interface SparklineSeriesItemStack {
-		type?: string,
-		group?: string
-	}
-
-	declare interface SparklineSeriesItemTargetBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		width?: number
-	}
-
-	declare interface SparklineSeriesItemTargetLine {
-		width?: any | Function
-	}
-
-	declare interface SparklineSeriesItemTarget {
-		line?: SparklineSeriesItemTargetLine,
-		color?: string | Function,
-		border?: SparklineSeriesItemTargetBorder
-	}
-
-	declare interface SparklineSeriesItemTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineSeriesItemTooltip {
-		background?: string,
-		border?: SparklineSeriesItemTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface SparklineSeriesItem {
-		type?: string,
-		dashType?: string,
-		data?: any,
-		explodeField?: string,
-		currentField?: string,
-		targetField?: string,
-		field?: string,
-		name?: string,
-		highlight?: SparklineSeriesItemHighlight,
-		aggregate?: string | Function,
-		axis?: string,
-		border?: SparklineSeriesItemBorder,
-		categoryField?: string,
-		color?: string | Function,
-		colorField?: string,
-		connectors?: SparklineSeriesItemConnectors,
-		gap?: number,
-		labels?: SparklineSeriesItemLabels,
-		line?: SparklineSeriesItemLine,
-		markers?: SparklineSeriesItemMarkers,
-		missingValues?: string,
-		style?: string,
-		negativeColor?: string,
-		opacity?: number,
-		overlay?: SparklineSeriesItemOverlay,
-		padding?: number,
-		size?: number,
-		startAngle?: number,
-		spacing?: number,
-		stack?: boolean | SparklineSeriesItemStack,
-		tooltip?: SparklineSeriesItemTooltip,
-		width?: number,
-		target?: SparklineSeriesItemTarget,
-		notes?: SparklineSeriesItemNotes,
-		zIndex?: number
-	}
-
-	declare interface SparklineSeriesDefaultsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineSeriesDefaultsLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineSeriesDefaultsLabels {
-		background?: string,
-		border?: SparklineSeriesDefaultsLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: number | any,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface SparklineSeriesDefaultsStack {
-		type?: string
-	}
-
-	declare interface SparklineSeriesDefaultsTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineSeriesDefaultsTooltip {
-		background?: string,
-		border?: SparklineSeriesDefaultsTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface SparklineSeriesDefaults {
-		area?: any,
-		bar?: any,
-		border?: SparklineSeriesDefaultsBorder,
-		column?: any,
-		gap?: number,
-		labels?: SparklineSeriesDefaultsLabels,
-		line?: any,
-		overlay?: any,
-		pie?: any,
-		spacing?: number,
-		stack?: boolean | SparklineSeriesDefaultsStack,
-		type?: string,
-		tooltip?: SparklineSeriesDefaultsTooltip
-	}
-
-	declare interface SparklineTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineTooltip {
-		background?: string,
-		border?: SparklineTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean,
-		shared?: boolean,
-		sharedTemplate?: string
-	}
-
-	declare interface SparklineValueAxisItemCrosshairTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineValueAxisItemCrosshairTooltip {
-		background?: string,
-		border?: SparklineValueAxisItemCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface SparklineValueAxisItemCrosshair {
-		color?: string,
-		width?: number,
-		opacity?: number,
-		dashType?: number,
-		visible?: boolean,
-		tooltip?: SparklineValueAxisItemCrosshairTooltip
-	}
-
-	declare interface SparklineValueAxisItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineValueAxisItemLabels {
-		background?: string,
-		border?: SparklineValueAxisItemLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: number | any,
-		mirror?: boolean,
-		padding?: number | any,
-		rotation?: number,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface SparklineValueAxisItemLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface SparklineValueAxisItemMajorGridLines {
-		color?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface SparklineValueAxisItemMajorTicks {
-		size?: number,
-		visible?: boolean,
-		color?: string,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface SparklineValueAxisItemMinorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface SparklineValueAxisItemMinorTicks {
-		size?: number,
-		color?: string,
-		width?: number,
-		visible?: boolean,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface SparklineValueAxisItemNotesDataItemIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineValueAxisItemNotesDataItemIcon {
-		background?: string,
-		border?: SparklineValueAxisItemNotesDataItemIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface SparklineValueAxisItemNotesDataItemLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineValueAxisItemNotesDataItemLabel {
-		background?: string,
-		border?: SparklineValueAxisItemNotesDataItemLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		text?: string,
-		position?: string
-	}
-
-	declare interface SparklineValueAxisItemNotesDataItemLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface SparklineValueAxisItemNotesDataItem {
-		value?: any,
-		position?: string,
-		icon?: SparklineValueAxisItemNotesDataItemIcon,
-		label?: SparklineValueAxisItemNotesDataItemLabel,
-		line?: SparklineValueAxisItemNotesDataItemLine
-	}
-
-	declare interface SparklineValueAxisItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface SparklineValueAxisItemNotesIcon {
-		background?: string,
-		border?: SparklineValueAxisItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface SparklineValueAxisItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineValueAxisItemNotesLabel {
-		background?: string,
-		border?: SparklineValueAxisItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface SparklineValueAxisItemNotesLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface SparklineValueAxisItemNotes {
-		position?: string,
-		icon?: SparklineValueAxisItemNotesIcon,
-		label?: SparklineValueAxisItemNotesLabel,
-		line?: SparklineValueAxisItemNotesLine,
-		data?: SparklineValueAxisItemNotesDataItem[]
-	}
-
-	declare interface SparklineValueAxisItemPlotBand {
-		from?: number,
-		to?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface SparklineValueAxisItemTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface SparklineValueAxisItemTitle {
-		background?: string,
-		border?: SparklineValueAxisItemTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: number | any,
-		padding?: number | any,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean
-	}
-
-	declare interface SparklineValueAxisItem {
-		axisCrossingValue?: any | Date | any,
-		color?: string,
-		labels?: SparklineValueAxisItemLabels,
-		line?: SparklineValueAxisItemLine,
-		majorGridLines?: SparklineValueAxisItemMajorGridLines,
-		majorTicks?: SparklineValueAxisItemMajorTicks,
-		majorUnit?: number,
-		max?: number,
-		min?: number,
-		minorGridLines?: SparklineValueAxisItemMinorGridLines,
-		minorTicks?: SparklineValueAxisItemMinorTicks,
-		minorUnit?: number,
-		name?: any,
-		narrowRange?: boolean,
-		plotBands?: SparklineValueAxisItemPlotBand[],
-		reverse?: boolean,
-		title?: SparklineValueAxisItemTitle,
-		visible?: boolean,
-		crosshair?: SparklineValueAxisItemCrosshair,
-		notes?: SparklineValueAxisItemNotes
-	}
-
-	declare interface SparklineExportImageOptions {
-		width?: string,
-		height?: string
-	}
-
-	declare interface SparklineExportSVGOptions {
-		raw?: boolean
-	}
-
-	declare interface SparklineSeriesClickEventSeries {
-		type?: string,
-		name?: string,
-		data?: any
-	}
-
-	declare interface SparklineSeriesHoverEventSeries {
-		type?: string,
-		name?: string,
-		data?: any
-	}
-
-	declare interface SparklineOptions {
-		name?: string,
-		axisDefaults?: any,
-		categoryAxis?: SparklineCategoryAxisItem[],
-		chartArea?: SparklineChartArea,
-		data?: any,
-		dataSource?: any,
-		autoBind?: boolean,
-		plotArea?: SparklinePlotArea,
-		pointWidth?: number,
-		renderAs?: string,
-		series?: SparklineSeriesItem[],
-		seriesColors?: any,
-		seriesDefaults?: SparklineSeriesDefaults,
-		theme?: string,
-		tooltip?: SparklineTooltip,
-		transitions?: boolean,
-		type?: string,
-		valueAxis?: SparklineValueAxisItem[],
-		axisLabelClick(e: SparklineAxisLabelClickEvent): void,
-		dataBound(e: SparklineEvent): void,
-		dragStart(e: SparklineDragStartEvent): void,
-		drag(e: SparklineDragEvent): void,
-		dragEnd(e: SparklineDragEndEvent): void,
-		plotAreaClick(e: SparklinePlotAreaClickEvent): void,
-		seriesClick(e: SparklineSeriesClickEvent): void,
-		seriesHover(e: SparklineSeriesHoverEvent): void,
-		zoomStart(e: SparklineZoomStartEvent): void,
-		zoom(e: SparklineZoomEvent): void,
-		zoomEnd(e: SparklineZoomEndEvent): void
-	}
-
-	declare interface SparklineEvent {
-		sender: Sparkline,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SparklineAxisLabelClickEvent {
-		axis?: any,
-		value?: any,
-		text?: any,
-		index?: any,
-		dataItem?: any,
-		element?: any
-	}
-
-	declare interface SparklineDragStartEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface SparklineDragEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface SparklineDragEndEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface SparklinePlotAreaClickEvent {
-		value?: any,
-		category?: any,
-		element?: any,
-		x?: any,
-		y?: any
-	}
-
-	declare interface SparklineSeriesClickEvent {
-		value?: any,
-		category?: any,
-		series?: SparklineSeriesClickEventSeries,
-		dataItem?: any,
-		element?: any,
-		percentage?: any
-	}
-
-	declare interface SparklineSeriesHoverEvent {
-		value?: any,
-		category?: any,
-		series?: SparklineSeriesHoverEventSeries,
-		dataItem?: any,
-		element?: any,
-		percentage?: any
-	}
-
-	declare interface SparklineZoomStartEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface SparklineZoomEvent {
-		axisRanges?: any,
-		delta?: number,
-		originalEvent?: any
-	}
-
-	declare interface SparklineZoomEndEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface StockChartCategoryAxisItemAutoBaseUnitSteps {
-		days?: any,
-		hours?: any,
-		minutes?: any,
-		months?: any,
-		weeks?: any,
-		years?: any
-	}
-
-	declare interface StockChartCategoryAxisItemCrosshairTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartCategoryAxisItemCrosshairTooltip {
-		background?: string,
-		border?: StockChartCategoryAxisItemCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartCategoryAxisItemCrosshair {
-		color?: string,
-		width?: number,
-		opacity?: number,
-		dashType?: number,
-		visible?: boolean,
-		tooltip?: StockChartCategoryAxisItemCrosshairTooltip
-	}
-
-	declare interface StockChartCategoryAxisItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartCategoryAxisItemLabels {
-		background?: string,
-		border?: StockChartCategoryAxisItemLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: number | any,
-		mirror?: boolean,
-		padding?: number | any,
-		rotation?: number,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean,
-		culture?: string,
-		dateFormats?: any
-	}
-
-	declare interface StockChartCategoryAxisItemLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface StockChartCategoryAxisItemMajorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartCategoryAxisItemMajorTicks {
-		color?: string,
-		size?: number,
-		width?: number,
-		visible?: boolean,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartCategoryAxisItemMinorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartCategoryAxisItemMinorTicks {
-		size?: number,
-		visible?: boolean,
-		color?: string,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartCategoryAxisItemNotesDataItemIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartCategoryAxisItemNotesDataItemIcon {
-		background?: string,
-		border?: StockChartCategoryAxisItemNotesDataItemIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartCategoryAxisItemNotesDataItemLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartCategoryAxisItemNotesDataItemLabel {
-		background?: string,
-		border?: StockChartCategoryAxisItemNotesDataItemLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		text?: string,
-		position?: string
-	}
-
-	declare interface StockChartCategoryAxisItemNotesDataItemLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface StockChartCategoryAxisItemNotesDataItem {
-		value?: any,
-		position?: string,
-		icon?: StockChartCategoryAxisItemNotesDataItemIcon,
-		label?: StockChartCategoryAxisItemNotesDataItemLabel,
-		line?: StockChartCategoryAxisItemNotesDataItemLine
-	}
-
-	declare interface StockChartCategoryAxisItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartCategoryAxisItemNotesIcon {
-		background?: string,
-		border?: StockChartCategoryAxisItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartCategoryAxisItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartCategoryAxisItemNotesLabel {
-		background?: string,
-		border?: StockChartCategoryAxisItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface StockChartCategoryAxisItemNotesLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface StockChartCategoryAxisItemNotes {
-		position?: string,
-		icon?: StockChartCategoryAxisItemNotesIcon,
-		label?: StockChartCategoryAxisItemNotesLabel,
-		line?: StockChartCategoryAxisItemNotesLine,
-		data?: StockChartCategoryAxisItemNotesDataItem[]
-	}
-
-	declare interface StockChartCategoryAxisItemPlotBand {
-		from?: number,
-		to?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface StockChartCategoryAxisItemSelectMousewheel {
-		reverse?: boolean,
-		zoom?: string
-	}
-
-	declare interface StockChartCategoryAxisItemSelect {
-		from?: string | Date,
-		to?: string | Date,
-		min?: any,
-		max?: any,
-		mousewheel?: StockChartCategoryAxisItemSelectMousewheel
-	}
-
-	declare interface StockChartCategoryAxisItemTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartCategoryAxisItemTitle {
-		background?: string,
-		border?: StockChartCategoryAxisItemTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: number | any,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartCategoryAxisItem {
-		axisCrossingValue?: any | Date | any,
-		categories?: any,
-		color?: string,
-		field?: string,
-		justified?: boolean,
-		labels?: StockChartCategoryAxisItemLabels,
-		line?: StockChartCategoryAxisItemLine,
-		majorGridLines?: StockChartCategoryAxisItemMajorGridLines,
-		majorTicks?: StockChartCategoryAxisItemMajorTicks,
-		minorGridLines?: StockChartCategoryAxisItemMinorGridLines,
-		minorTicks?: StockChartCategoryAxisItemMinorTicks,
-		name?: string,
-		pane?: string,
-		plotBands?: StockChartCategoryAxisItemPlotBand[],
-		reverse?: boolean,
-		select?: StockChartCategoryAxisItemSelect,
-		title?: StockChartCategoryAxisItemTitle,
-		type?: string,
-		autoBaseUnitSteps?: StockChartCategoryAxisItemAutoBaseUnitSteps,
-		background?: string,
-		baseUnit?: string,
-		baseUnitStep?: any,
-		max?: any,
-		min?: any,
-		roundToBaseUnit?: boolean,
-		weekStartDay?: number,
-		maxDateGroups?: number,
-		visible?: boolean,
-		crosshair?: StockChartCategoryAxisItemCrosshair,
-		notes?: StockChartCategoryAxisItemNotes
-	}
-
-	declare interface StockChartChartAreaBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartChartArea {
-		background?: string,
-		opacity?: number,
-		border?: StockChartChartAreaBorder,
-		height?: number,
-		margin?: number | any,
-		width?: number
-	}
-
-	declare interface StockChartLegendBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartLegendInactiveItemsLabels {
-		color?: string,
-		font?: string,
-		template?: string
-	}
-
-	declare interface StockChartLegendInactiveItemsMarkers {
-		color?: string
-	}
-
-	declare interface StockChartLegendInactiveItems {
-		labels?: StockChartLegendInactiveItemsLabels,
-		markers?: StockChartLegendInactiveItemsMarkers
-	}
-
-	declare interface StockChartLegendItem {
-		cursor?: string,
-		visual?: Function
-	}
-
-	declare interface StockChartLegendLabels {
-		color?: string,
-		font?: string,
-		template?: string
-	}
-
-	declare interface StockChartLegend {
-		background?: string,
-		border?: StockChartLegendBorder,
-		item?: StockChartLegendItem,
-		labels?: StockChartLegendLabels,
-		margin?: number | any,
-		offsetX?: number,
-		offsetY?: number,
-		padding?: number | any,
-		position?: string,
-		reverse?: boolean,
-		visible?: boolean,
-		inactiveItems?: StockChartLegendInactiveItems
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemAutoBaseUnitSteps {
-		seconds?: any,
-		minutes?: any,
-		hours?: any,
-		days?: any,
-		weeks?: any,
-		months?: any,
-		years?: any
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemCrosshairTooltipBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemCrosshairTooltipPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemCrosshairTooltip {
-		background?: string,
-		border?: StockChartNavigatorCategoryAxisItemCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: StockChartNavigatorCategoryAxisItemCrosshairTooltipPadding,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemCrosshair {
-		color?: string,
-		opacity?: number,
-		tooltip?: StockChartNavigatorCategoryAxisItemCrosshairTooltip,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemLabelsDateFormats {
-		days?: string,
-		hours?: string,
-		months?: string,
-		weeks?: string,
-		years?: string
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemLabelsMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemLabelsPadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemLabels {
-		background?: string,
-		border?: StockChartNavigatorCategoryAxisItemLabelsBorder,
-		color?: string,
-		culture?: string,
-		dateFormats?: StockChartNavigatorCategoryAxisItemLabelsDateFormats,
-		font?: string,
-		format?: string,
-		margin?: StockChartNavigatorCategoryAxisItemLabelsMargin,
-		mirror?: boolean,
-		padding?: StockChartNavigatorCategoryAxisItemLabelsPadding,
-		rotation?: number,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemMajorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemMajorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemMinorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemMinorTicks {
-		color?: string,
-		size?: number,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesDataItemIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesDataItemIcon {
-		background?: string,
-		border?: StockChartNavigatorCategoryAxisItemNotesDataItemIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesDataItemLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesDataItemLabel {
-		background?: string,
-		border?: StockChartNavigatorCategoryAxisItemNotesDataItemLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		text?: string,
-		position?: string
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesDataItemLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesDataItem {
-		value?: any,
-		position?: string,
-		icon?: StockChartNavigatorCategoryAxisItemNotesDataItemIcon,
-		label?: StockChartNavigatorCategoryAxisItemNotesDataItemLabel,
-		line?: StockChartNavigatorCategoryAxisItemNotesDataItemLine
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesIcon {
-		background?: string,
-		border?: StockChartNavigatorCategoryAxisItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesLabel {
-		background?: string,
-		border?: StockChartNavigatorCategoryAxisItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotesLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemNotes {
-		position?: string,
-		icon?: StockChartNavigatorCategoryAxisItemNotesIcon,
-		label?: StockChartNavigatorCategoryAxisItemNotesLabel,
-		line?: StockChartNavigatorCategoryAxisItemNotesLine,
-		data?: StockChartNavigatorCategoryAxisItemNotesDataItem[]
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemPlotBand {
-		color?: string,
-		from?: number,
-		opacity?: number,
-		to?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemTitleMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemTitlePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItemTitle {
-		background?: string,
-		border?: StockChartNavigatorCategoryAxisItemTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: StockChartNavigatorCategoryAxisItemTitleMargin,
-		padding?: StockChartNavigatorCategoryAxisItemTitlePadding,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorCategoryAxisItem {
-		autoBaseUnitSteps?: StockChartNavigatorCategoryAxisItemAutoBaseUnitSteps,
-		axisCrossingValue?: any | Date | any,
-		background?: string,
-		baseUnit?: string,
-		baseUnitStep?: any,
-		categories?: any,
-		color?: string,
-		crosshair?: StockChartNavigatorCategoryAxisItemCrosshair,
-		field?: string,
-		justified?: boolean,
-		labels?: StockChartNavigatorCategoryAxisItemLabels,
-		line?: StockChartNavigatorCategoryAxisItemLine,
-		majorGridLines?: StockChartNavigatorCategoryAxisItemMajorGridLines,
-		majorTicks?: StockChartNavigatorCategoryAxisItemMajorTicks,
-		max?: any,
-		maxDateGroups?: number,
-		min?: any,
-		minorGridLines?: StockChartNavigatorCategoryAxisItemMinorGridLines,
-		minorTicks?: StockChartNavigatorCategoryAxisItemMinorTicks,
-		plotBands?: StockChartNavigatorCategoryAxisItemPlotBand[],
-		reverse?: boolean,
-		roundToBaseUnit?: boolean,
-		title?: StockChartNavigatorCategoryAxisItemTitle,
-		visible?: boolean,
-		weekStartDay?: number,
-		notes?: StockChartNavigatorCategoryAxisItemNotes
-	}
-
-	declare interface StockChartNavigatorHint {
-		visible?: boolean,
-		template?: string | Function,
-		format?: string
-	}
-
-	declare interface StockChartNavigatorPaneBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorPaneMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface StockChartNavigatorPanePadding {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface StockChartNavigatorPaneTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorPaneTitleMargin {
-		bottom?: number,
-		left?: number,
-		right?: number,
-		top?: number
-	}
-
-	declare interface StockChartNavigatorPaneTitle {
-		background?: string,
-		border?: StockChartNavigatorPaneTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: StockChartNavigatorPaneTitleMargin,
-		position?: string,
-		text?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorPane {
-		background?: string,
-		border?: StockChartNavigatorPaneBorder,
-		height?: number,
-		margin?: StockChartNavigatorPaneMargin,
-		name?: string,
-		padding?: StockChartNavigatorPanePadding,
-		title?: StockChartNavigatorPaneTitle
-	}
-
-	declare interface StockChartNavigatorSelectMousewheel {
-		reverse?: boolean,
-		zoom?: string
-	}
-
-	declare interface StockChartNavigatorSelect {
-		from?: Date,
-		mousewheel?: boolean | StockChartNavigatorSelectMousewheel,
-		to?: Date
-	}
-
-	declare interface StockChartNavigatorSeriesItemBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorSeriesItemHighlightBorder {
-		width?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface StockChartNavigatorSeriesItemHighlightLine {
-		width?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface StockChartNavigatorSeriesItemHighlight {
-		border?: StockChartNavigatorSeriesItemHighlightBorder,
-		color?: string,
-		line?: StockChartNavigatorSeriesItemHighlightLine,
-		opacity?: number,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorSeriesItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorSeriesItemLabels {
-		background?: string,
-		border?: StockChartNavigatorSeriesItemLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: number | any,
-		padding?: number | any,
-		position?: string,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorSeriesItemLine {
-		color?: string,
-		opacity?: number,
-		width?: string
-	}
-
-	declare interface StockChartNavigatorSeriesItemMarkersBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorSeriesItemMarkers {
-		background?: string,
-		border?: StockChartNavigatorSeriesItemMarkersBorder,
-		rotation?: number | Function,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorSeriesItemOverlay {
-		gradient?: string
-	}
-
-	declare interface StockChartNavigatorSeriesItemStack {
-		type?: string,
-		group?: string
-	}
-
-	declare interface StockChartNavigatorSeriesItemTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartNavigatorSeriesItemTooltip {
-		background?: string,
-		border?: StockChartNavigatorSeriesItemTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartNavigatorSeriesItem {
-		type?: string,
-		dashType?: string,
-		data?: any,
-		highField?: string,
-		field?: string,
-		categoryField?: string,
-		name?: string,
-		highlight?: StockChartNavigatorSeriesItemHighlight,
-		aggregate?: string | Function,
-		axis?: string,
-		border?: StockChartNavigatorSeriesItemBorder,
-		closeField?: string,
-		color?: string,
-		colorField?: string,
-		downColor?: string,
-		downColorField?: string,
-		gap?: number,
-		labels?: StockChartNavigatorSeriesItemLabels,
-		line?: StockChartNavigatorSeriesItemLine,
-		lowField?: string,
-		markers?: StockChartNavigatorSeriesItemMarkers,
-		missingValues?: string,
-		style?: string,
-		opacity?: number,
-		openField?: string,
-		overlay?: StockChartNavigatorSeriesItemOverlay,
-		spacing?: number,
-		stack?: boolean | StockChartNavigatorSeriesItemStack,
-		tooltip?: StockChartNavigatorSeriesItemTooltip,
-		width?: number
-	}
-
-	declare interface StockChartNavigator {
-		categoryAxis?: StockChartNavigatorCategoryAxisItem[],
-		dataSource?: any,
-		autoBind?: boolean,
-		dateField?: string,
-		pane?: StockChartNavigatorPane,
-		visible?: boolean,
-		series?: StockChartNavigatorSeriesItem[],
-		select?: StockChartNavigatorSelect,
-		hint?: StockChartNavigatorHint
-	}
-
-	declare interface StockChartPaneBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartPaneTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartPaneTitle {
-		background?: string,
-		border?: StockChartPaneTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: number | any,
-		position?: string,
-		text?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartPane {
-		name?: string,
-		margin?: number | any,
-		padding?: number | any,
-		background?: string,
-		border?: StockChartPaneBorder,
-		clip?: boolean,
-		height?: number,
-		title?: StockChartPaneTitle
-	}
-
-	declare interface StockChartPdfMargin {
-		bottom?: number | string,
-		left?: number | string,
-		right?: number | string,
-		top?: number | string
-	}
-
-	declare interface StockChartPdf {
-		author?: string,
-		creator?: string,
-		date?: Date,
-		forceProxy?: boolean,
-		fileName?: string,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: StockChartPdfMargin,
-		paperSize?: string | any,
-		proxyURL?: string,
-		proxyTarget?: string,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface StockChartPlotAreaBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartPlotArea {
-		background?: string,
-		opacity?: number,
-		border?: StockChartPlotAreaBorder,
-		margin?: number | any
-	}
-
-	declare interface StockChartSeriesItemBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		opacity?: number | Function,
-		width?: number | Function
-	}
-
-	declare interface StockChartSeriesItemHighlightBorder {
-		width?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface StockChartSeriesItemHighlightLine {
-		width?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface StockChartSeriesItemHighlight {
-		visible?: boolean,
-		border?: StockChartSeriesItemHighlightBorder,
-		color?: string,
-		line?: StockChartSeriesItemHighlightLine,
-		opacity?: number
-	}
-
-	declare interface StockChartSeriesItemLabelsBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface StockChartSeriesItemLabels {
-		background?: string | Function,
-		border?: StockChartSeriesItemLabelsBorder,
-		color?: string | Function,
-		font?: string | Function,
-		format?: string | Function,
-		margin?: number | any,
-		padding?: number | any,
-		position?: string | Function,
-		template?: string | Function,
-		visible?: boolean | Function
-	}
-
-	declare interface StockChartSeriesItemLine {
-		color?: string,
-		opacity?: number,
-		width?: string,
-		style?: string
-	}
-
-	declare interface StockChartSeriesItemMarkersBorder {
-		color?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface StockChartSeriesItemMarkers {
-		background?: string | Function,
-		border?: StockChartSeriesItemMarkersBorder,
-		size?: number | Function,
-		rotation?: number | Function,
-		type?: string | Function,
-		visible?: boolean | Function
-	}
-
-	declare interface StockChartSeriesItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartSeriesItemNotesIcon {
-		background?: string,
-		border?: StockChartSeriesItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartSeriesItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartSeriesItemNotesLabel {
-		background?: string,
-		border?: StockChartSeriesItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface StockChartSeriesItemNotesLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface StockChartSeriesItemNotes {
-		position?: string,
-		icon?: StockChartSeriesItemNotesIcon,
-		label?: StockChartSeriesItemNotesLabel,
-		line?: StockChartSeriesItemNotesLine
-	}
-
-	declare interface StockChartSeriesItemOverlay {
-		gradient?: string
-	}
-
-	declare interface StockChartSeriesItemStack {
-		type?: string,
-		group?: string
-	}
-
-	declare interface StockChartSeriesItemTargetBorder {
-		color?: string | Function,
-		dashType?: string | Function,
-		width?: number | Function
-	}
-
-	declare interface StockChartSeriesItemTargetLine {
-		width?: any | Function
-	}
-
-	declare interface StockChartSeriesItemTarget {
-		line?: StockChartSeriesItemTargetLine,
-		color?: string | Function,
-		border?: StockChartSeriesItemTargetBorder
-	}
-
-	declare interface StockChartSeriesItemTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartSeriesItemTooltip {
-		background?: string,
-		border?: StockChartSeriesItemTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartSeriesItem {
-		type?: string,
-		dashType?: string,
-		data?: any,
-		highField?: string,
-		field?: string,
-		categoryField?: string,
-		currentField?: string,
-		targetField?: string,
-		name?: string,
-		highlight?: StockChartSeriesItemHighlight,
-		aggregate?: string | Function,
-		axis?: string,
-		border?: StockChartSeriesItemBorder,
-		closeField?: string,
-		color?: string | Function,
-		colorField?: string,
-		downColor?: string | Function,
-		downColorField?: string,
-		gap?: number,
-		labels?: StockChartSeriesItemLabels,
-		line?: StockChartSeriesItemLine,
-		lowField?: string,
-		markers?: StockChartSeriesItemMarkers,
-		missingValues?: string,
-		style?: string,
-		negativeColor?: string,
-		opacity?: number,
-		openField?: string,
-		overlay?: StockChartSeriesItemOverlay,
-		spacing?: number,
-		stack?: boolean | StockChartSeriesItemStack,
-		tooltip?: StockChartSeriesItemTooltip,
-		visibleInLegend?: boolean,
-		width?: number,
-		target?: StockChartSeriesItemTarget,
-		notes?: StockChartSeriesItemNotes,
-		zIndex?: number
-	}
-
-	declare interface StockChartSeriesDefaultsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartSeriesDefaultsLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartSeriesDefaultsLabels {
-		background?: string,
-		border?: StockChartSeriesDefaultsLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: number | any,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartSeriesDefaultsStack {
-		type?: string
-	}
-
-	declare interface StockChartSeriesDefaultsTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartSeriesDefaultsTooltip {
-		background?: string,
-		border?: StockChartSeriesDefaultsTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartSeriesDefaults {
-		area?: any,
-		candlestick?: any,
-		ohlc?: any,
-		border?: StockChartSeriesDefaultsBorder,
-		column?: any,
-		gap?: number,
-		labels?: StockChartSeriesDefaultsLabels,
-		line?: any,
-		overlay?: any,
-		pie?: any,
-		spacing?: number,
-		stack?: boolean | StockChartSeriesDefaultsStack,
-		type?: string,
-		tooltip?: StockChartSeriesDefaultsTooltip
-	}
-
-	declare interface StockChartTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartTitle {
-		align?: string,
-		background?: string,
-		border?: StockChartTitleBorder,
-		font?: string,
-		color?: string,
-		margin?: number | any,
-		padding?: number | any,
-		position?: string,
-		text?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartTooltip {
-		background?: string,
-		border?: StockChartTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean,
-		shared?: boolean,
-		sharedTemplate?: string
-	}
-
-	declare interface StockChartValueAxisItemCrosshairTooltipBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartValueAxisItemCrosshairTooltip {
-		background?: string,
-		border?: StockChartValueAxisItemCrosshairTooltipBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		padding?: number | any,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartValueAxisItemCrosshair {
-		color?: string,
-		width?: number,
-		opacity?: number,
-		dashType?: number,
-		visible?: boolean,
-		tooltip?: StockChartValueAxisItemCrosshairTooltip
-	}
-
-	declare interface StockChartValueAxisItemLabelsBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartValueAxisItemLabels {
-		background?: string,
-		border?: StockChartValueAxisItemLabelsBorder,
-		color?: string,
-		font?: string,
-		format?: string,
-		margin?: number | any,
-		mirror?: boolean,
-		padding?: number | any,
-		rotation?: number,
-		skip?: number,
-		step?: number,
-		template?: string | Function,
-		visible?: boolean
-	}
-
-	declare interface StockChartValueAxisItemLine {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number
-	}
-
-	declare interface StockChartValueAxisItemMajorGridLines {
-		color?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartValueAxisItemMajorTicks {
-		size?: number,
-		visible?: boolean,
-		color?: string,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartValueAxisItemMinorGridLines {
-		color?: string,
-		dashType?: string,
-		visible?: boolean,
-		width?: number,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartValueAxisItemMinorTicks {
-		size?: number,
-		color?: string,
-		width?: number,
-		visible?: boolean,
-		step?: number,
-		skip?: number
-	}
-
-	declare interface StockChartValueAxisItemNotesDataItemIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartValueAxisItemNotesDataItemIcon {
-		background?: string,
-		border?: StockChartValueAxisItemNotesDataItemIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartValueAxisItemNotesDataItemLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartValueAxisItemNotesDataItemLabel {
-		background?: string,
-		border?: StockChartValueAxisItemNotesDataItemLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		text?: string,
-		position?: string
-	}
-
-	declare interface StockChartValueAxisItemNotesDataItemLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface StockChartValueAxisItemNotesDataItem {
-		value?: any,
-		position?: string,
-		icon?: StockChartValueAxisItemNotesDataItemIcon,
-		label?: StockChartValueAxisItemNotesDataItemLabel,
-		line?: StockChartValueAxisItemNotesDataItemLine
-	}
-
-	declare interface StockChartValueAxisItemNotesIconBorder {
-		color?: string,
-		width?: number
-	}
-
-	declare interface StockChartValueAxisItemNotesIcon {
-		background?: string,
-		border?: StockChartValueAxisItemNotesIconBorder,
-		size?: number,
-		type?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartValueAxisItemNotesLabelBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartValueAxisItemNotesLabel {
-		background?: string,
-		border?: StockChartValueAxisItemNotesLabelBorder,
-		color?: string,
-		font?: string,
-		template?: string | Function,
-		visible?: boolean,
-		rotation?: number,
-		format?: string,
-		position?: string
-	}
-
-	declare interface StockChartValueAxisItemNotesLine {
-		width?: number,
-		color?: string,
-		length?: number
-	}
-
-	declare interface StockChartValueAxisItemNotes {
-		position?: string,
-		icon?: StockChartValueAxisItemNotesIcon,
-		label?: StockChartValueAxisItemNotesLabel,
-		line?: StockChartValueAxisItemNotesLine,
-		data?: StockChartValueAxisItemNotesDataItem[]
-	}
-
-	declare interface StockChartValueAxisItemPlotBand {
-		from?: number,
-		to?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface StockChartValueAxisItemTitleBorder {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface StockChartValueAxisItemTitle {
-		background?: string,
-		border?: StockChartValueAxisItemTitleBorder,
-		color?: string,
-		font?: string,
-		margin?: number | any,
-		padding?: number | any,
-		position?: string,
-		rotation?: number,
-		text?: string,
-		visible?: boolean
-	}
-
-	declare interface StockChartValueAxisItem {
-		axisCrossingValue?: any | Date | any,
-		background?: string,
-		color?: string,
-		labels?: StockChartValueAxisItemLabels,
-		line?: StockChartValueAxisItemLine,
-		majorGridLines?: StockChartValueAxisItemMajorGridLines,
-		majorTicks?: StockChartValueAxisItemMajorTicks,
-		majorUnit?: number,
-		max?: number,
-		min?: number,
-		minorGridLines?: StockChartValueAxisItemMinorGridLines,
-		minorTicks?: StockChartValueAxisItemMinorTicks,
-		minorUnit?: number,
-		name?: any,
-		narrowRange?: boolean,
-		pane?: string,
-		plotBands?: StockChartValueAxisItemPlotBand[],
-		reverse?: boolean,
-		title?: StockChartValueAxisItemTitle,
-		visible?: boolean,
-		crosshair?: StockChartValueAxisItemCrosshair,
-		notes?: StockChartValueAxisItemNotes
-	}
-
-	declare interface StockChartExportImageOptions {
-		width?: string,
-		height?: string
-	}
-
-	declare interface StockChartExportSVGOptions {
-		raw?: boolean
-	}
-
-	declare interface StockChartSeriesClickEventSeries {
-		type?: string,
-		name?: string,
-		data?: any
-	}
-
-	declare interface StockChartSeriesHoverEventSeries {
-		type?: string,
-		name?: string,
-		data?: any
-	}
-
-	declare interface StockChartOptions {
-		name?: string,
-		dateField?: string,
-		navigator?: StockChartNavigator,
-		axisDefaults?: any,
-		categoryAxis?: StockChartCategoryAxisItem[],
-		chartArea?: StockChartChartArea,
-		dataSource?: any,
-		autoBind?: boolean,
-		legend?: StockChartLegend,
-		panes?: StockChartPane[],
-		pdf?: StockChartPdf,
-		plotArea?: StockChartPlotArea,
-		renderAs?: string,
-		series?: StockChartSeriesItem[],
-		seriesColors?: any,
-		seriesDefaults?: StockChartSeriesDefaults,
-		theme?: string,
-		title?: StockChartTitle,
-		tooltip?: StockChartTooltip,
-		transitions?: boolean,
-		valueAxis?: StockChartValueAxisItem[],
-		axisLabelClick(e: StockChartAxisLabelClickEvent): void,
-		dataBound(e: StockChartEvent): void,
-		dragStart(e: StockChartDragStartEvent): void,
-		drag(e: StockChartDragEvent): void,
-		dragEnd(e: StockChartDragEndEvent): void,
-		legendItemClick(e: StockChartLegendItemClickEvent): void,
-		legendItemHover(e: StockChartLegendItemHoverEvent): void,
-		noteClick(e: StockChartNoteClickEvent): void,
-		noteHover(e: StockChartNoteHoverEvent): void,
-		plotAreaClick(e: StockChartPlotAreaClickEvent): void,
-		plotAreaHover(e: StockChartPlotAreaHoverEvent): void,
-		render(e: StockChartRenderEvent): void,
-		select(e: StockChartSelectEvent): void,
-		selectEnd(e: StockChartSelectEndEvent): void,
-		selectStart(e: StockChartSelectStartEvent): void,
-		seriesClick(e: StockChartSeriesClickEvent): void,
-		seriesHover(e: StockChartSeriesHoverEvent): void,
-		zoomStart(e: StockChartZoomStartEvent): void,
-		zoom(e: StockChartZoomEvent): void,
-		zoomEnd(e: StockChartZoomEndEvent): void
-	}
-
-	declare interface StockChartEvent {
-		sender: StockChart,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface StockChartAxisLabelClickEvent {
-		axis?: any,
-		value?: any,
-		text?: any,
-		index?: any,
-		dataItem?: any,
-		element?: any
-	}
-
-	declare interface StockChartDragStartEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface StockChartDragEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface StockChartDragEndEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface StockChartLegendItemClickEvent {
-		text?: string,
-		series?: any,
-		seriesIndex?: number,
-		pointIndex?: number,
-		element?: any
-	}
-
-	declare interface StockChartLegendItemHoverEvent {
-		text?: string,
-		series?: any,
-		seriesIndex?: number,
-		pointIndex?: number,
-		element?: any
-	}
-
-	declare interface StockChartNoteClickEvent {
-		category?: any,
-		element?: any,
-		value?: any,
-		series?: any,
-		dataItem?: any
-	}
-
-	declare interface StockChartNoteHoverEvent {
-		category?: any,
-		element?: any,
-		value?: any,
-		series?: any,
-		dataItem?: any
-	}
-
-	declare interface StockChartPlotAreaClickEvent {
-		value?: any,
-		category?: any,
-		element?: any,
-		x?: any,
-		y?: any
-	}
-
-	declare interface StockChartPlotAreaHoverEvent {
-		category?: any,
-		element?: any,
-		originalEvent?: any,
-		value?: any,
-		x?: any,
-		y?: any
-	}
-
-	declare interface StockChartRenderEvent {
-		
-	}
-
-	declare interface StockChartSelectEvent {
-		axis?: any,
-		from?: Date,
-		to?: Date
-	}
-
-	declare interface StockChartSelectEndEvent {
-		axis?: any,
-		from?: Date,
-		to?: Date
-	}
-
-	declare interface StockChartSelectStartEvent {
-		axis?: any,
-		from?: Date,
-		to?: Date
-	}
-
-	declare interface StockChartSeriesClickEvent {
-		value?: any,
-		category?: any,
-		series?: StockChartSeriesClickEventSeries,
-		dataItem?: any,
-		element?: any,
-		percentage?: any
-	}
-
-	declare interface StockChartSeriesHoverEvent {
-		value?: any,
-		category?: any,
-		series?: StockChartSeriesHoverEventSeries,
-		dataItem?: any,
-		element?: any,
-		percentage?: any
-	}
-
-	declare interface StockChartZoomStartEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface StockChartZoomEvent {
-		axisRanges?: any,
-		delta?: number,
-		originalEvent?: any
-	}
-
-	declare interface StockChartZoomEndEvent {
-		axisRanges?: any,
-		originalEvent?: any
-	}
-
-	declare interface TreeMapOptions {
-		name?: string,
-		dataSource?: any | any | kendo.data.HierarchicalDataSource,
-		autoBind?: boolean,
-		type?: string,
-		theme?: string,
-		valueField?: string,
-		colorField?: string,
-		textField?: string,
-		template?: string | Function,
-		colors?: any,
-		itemCreated(e: TreeMapItemCreatedEvent): void,
-		dataBound(e: TreeMapDataBoundEvent): void
-	}
-
-	declare interface TreeMapEvent {
-		sender: TreeMap,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TreeMapItemCreatedEvent {
-		element?: JQuery | Element
-	}
-
-	declare interface TreeMapDataBoundEvent {
-		
-	}
-
-	declare interface ActionSheetPopup {
-		direction?: number | string,
-		height?: number | string,
-		width?: number | string
-	}
-
-	declare interface ActionSheetOptions {
-		name?: string,
-		cancel?: string,
-		popup?: ActionSheetPopup,
-		type?: string,
-		close(e: ActionSheetEvent): void,
-		open(e: ActionSheetOpenEvent): void
-	}
-
-	declare interface ActionSheetEvent {
-		sender: ActionSheet,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ActionSheetOpenEvent {
-		target?: JQuery,
-		context?: JQuery
-	}
-
-	declare interface BackButtonOptions {
-		name?: string,
-		click(e: BackButtonClickEvent): void
-	}
-
-	declare interface BackButtonEvent {
-		sender: BackButton,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface BackButtonClickEvent {
-		target?: JQuery,
-		button?: JQuery
-	}
-
-	declare interface ButtonOptions {
-		name?: string,
-		badge?: string,
-		clickOn?: string,
-		enable?: boolean,
-		icon?: string,
-		click(e: ButtonClickEvent): void
-	}
-
-	declare interface ButtonEvent {
-		sender: Button,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ButtonClickEvent {
-		target?: JQuery,
-		button?: JQuery
-	}
-
-	declare interface ButtonGroupOptions {
-		name?: string,
-		enable?: boolean,
-		index?: number,
-		selectOn?: string,
-		select(e: ButtonGroupSelectEvent): void
-	}
-
-	declare interface ButtonGroupEvent {
-		sender: ButtonGroup,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ButtonGroupSelectEvent {
-		index?: number
-	}
-
-	declare interface CollapsibleOptions {
-		name?: string,
-		animation?: boolean,
-		collapsed?: boolean,
-		expandIcon?: string,
-		iconPosition?: string,
-		inset?: boolean,
-		collapse(e: CollapsibleEvent): void,
-		expand(e: CollapsibleEvent): void
-	}
-
-	declare interface CollapsibleEvent {
-		sender: Collapsible,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface DetailButtonOptions {
-		name?: string,
-		click(e: DetailButtonClickEvent): void
-	}
-
-	declare interface DetailButtonEvent {
-		sender: DetailButton,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface DetailButtonClickEvent {
-		target?: JQuery,
-		button?: JQuery
-	}
-
-	declare interface DrawerOptions {
-		name?: string,
-		container?: JQuery,
-		position?: string,
-		swipeToOpen?: boolean,
-		swipeToOpenViews?: any,
-		title?: string,
-		views?: any,
-		afterHide(e: DrawerAfterHideEvent): void,
-		beforeShow(e: DrawerEvent): void,
-		hide(e: DrawerHideEvent): void,
-		init(e: DrawerInitEvent): void,
-		show(e: DrawerShowEvent): void
-	}
-
-	declare interface DrawerEvent {
-		sender: Drawer,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface DrawerAfterHideEvent {
-		
-	}
-
-	declare interface DrawerHideEvent {
-		
-	}
-
-	declare interface DrawerInitEvent {
-		
-	}
-
-	declare interface DrawerShowEvent {
-		
-	}
-
-	declare interface LayoutOptions {
-		name?: string,
-		id?: string,
-		platform?: string,
-		hide(e: LayoutHideEvent): void,
-		init(e: LayoutInitEvent): void,
-		show(e: LayoutShowEvent): void
-	}
-
-	declare interface LayoutEvent {
-		sender: Layout,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface LayoutHideEvent {
-		layout?: JQuery,
-		view?: JQuery
-	}
-
-	declare interface LayoutInitEvent {
-		layout?: JQuery
-	}
-
-	declare interface LayoutShowEvent {
-		layout?: JQuery,
-		view?: JQuery
-	}
-
-	declare interface ListViewFilterable {
-		placeholder?: string,
-		autoFilter?: boolean,
-		field?: string,
-		ignoreCase?: boolean,
-		operator?: string
-	}
-
-	declare interface ListViewMessages {
-		loadMoreText?: string,
-		pullTemplate?: string,
-		refreshTemplate?: string,
-		releaseTemplate?: string
-	}
-
-	declare interface ListViewOptions {
-		name?: string,
-		appendOnRefresh?: boolean,
-		autoBind?: boolean,
-		dataSource?: kendo.data.DataSource | any,
-		endlessScroll?: boolean,
-		fixedHeaders?: boolean,
-		headerTemplate?: string | Function,
-		loadMore?: boolean,
-		messages?: ListViewMessages,
-		pullToRefresh?: boolean,
-		pullParameters?: Function,
-		style?: string,
-		template?: string | Function,
-		type?: string,
-		filterable?: boolean | ListViewFilterable,
-		virtualViewSize?: number,
-		click(e: ListViewClickEvent): void,
-		dataBound(e: ListViewEvent): void,
-		dataBinding(e: ListViewEvent): void,
-		itemChange(e: ListViewEvent): void
-	}
-
-	declare interface ListViewEvent {
-		sender: ListView,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ListViewClickEvent {
-		item?: JQuery,
-		target?: JQuery,
-		dataItem?: any,
-		button?: kendo.mobile.ui.Button
-	}
-
-	declare interface LoaderOptions {
-		name?: string
-	}
-
-	declare interface LoaderEvent {
-		sender: Loader,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ModalViewOptions {
-		name?: string,
-		height?: number,
-		modal?: boolean,
-		width?: number,
-		beforeOpen(e: ModalViewBeforeOpenEvent): void,
-		close(e: ModalViewCloseEvent): void,
-		init(e: ModalViewInitEvent): void,
-		open(e: ModalViewOpenEvent): void
-	}
-
-	declare interface ModalViewEvent {
-		sender: ModalView,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ModalViewBeforeOpenEvent {
-		target?: JQuery
-	}
-
-	declare interface ModalViewCloseEvent {
-		
-	}
-
-	declare interface ModalViewInitEvent {
-		
-	}
-
-	declare interface ModalViewOpenEvent {
-		target?: JQuery
-	}
-
-	declare interface NavBarOptions {
-		name?: string
-	}
-
-	declare interface NavBarEvent {
-		sender: NavBar,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PaneOptions {
-		name?: string,
-		collapsible?: boolean,
-		initial?: string,
-		layout?: string,
-		loading?: string,
-		portraitWidth?: number,
-		transition?: string,
-		navigate(e: PaneNavigateEvent): void,
-		viewShow(e: PaneViewShowEvent): void
-	}
-
-	declare interface PaneEvent {
-		sender: Pane,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PaneNavigateEvent {
-		url?: JQuery
-	}
-
-	declare interface PaneViewShowEvent {
-		view?: kendo.mobile.ui.View
-	}
-
-	declare interface PopOverPane {
-		initial?: string,
-		layout?: string,
-		loading?: string,
-		transition?: string
-	}
-
-	declare interface PopOverPopup {
-		height?: number | string,
-		width?: number | string
-	}
-
-	declare interface PopOverOptions {
-		name?: string,
-		pane?: PopOverPane,
-		popup?: PopOverPopup,
-		close(e: PopOverCloseEvent): void,
-		open(e: PopOverOpenEvent): void
-	}
-
-	declare interface PopOverEvent {
-		sender: PopOver,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PopOverCloseEvent {
-		
-	}
-
-	declare interface PopOverOpenEvent {
-		target?: JQuery
-	}
-
-	declare interface ScrollViewOptions {
-		name?: string,
-		autoBind?: boolean,
-		bounceVelocityThreshold?: number,
-		contentHeight?: number | string,
-		dataSource?: kendo.data.DataSource | any,
-		duration?: number,
-		emptyTemplate?: string,
-		enablePager?: boolean,
-		itemsPerPage?: number,
-		page?: number,
-		pageSize?: number,
-		template?: string,
-		velocityThreshold?: number,
-		changing(e: ScrollViewChangingEvent): void,
-		change(e: ScrollViewChangeEvent): void,
-		refresh(e: ScrollViewRefreshEvent): void
-	}
-
-	declare interface ScrollViewEvent {
-		sender: ScrollView,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ScrollViewChangingEvent {
-		currentPage?: number,
-		nextPage?: number
-	}
-
-	declare interface ScrollViewChangeEvent {
-		page?: number,
-		element?: JQuery,
-		data?: any
-	}
-
-	declare interface ScrollViewRefreshEvent {
-		pageCount?: number,
-		page?: number
-	}
-
-	declare interface ScrollerMessages {
-		pullTemplate?: string,
-		refreshTemplate?: string,
-		releaseTemplate?: string
-	}
-
-	declare interface ScrollerOptions {
-		name?: string,
-		elastic?: boolean,
-		messages?: ScrollerMessages,
-		pullOffset?: number,
-		pullToRefresh?: boolean,
-		useNative?: boolean,
-		visibleScrollHints?: boolean,
-		zoom?: boolean,
-		pull(e: ScrollerEvent): void,
-		resize(e: ScrollerEvent): void,
-		scroll(e: ScrollerScrollEvent): void
-	}
-
-	declare interface ScrollerEvent {
-		sender: Scroller,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ScrollerScrollEvent {
-		scrollTop?: number,
-		scrollLeft?: number
-	}
-
-	declare interface SplitViewOptions {
-		name?: string,
-		style?: string,
-		init(e: SplitViewInitEvent): void,
-		show(e: SplitViewShowEvent): void
-	}
-
-	declare interface SplitViewEvent {
-		sender: SplitView,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SplitViewInitEvent {
-		view?: JQuery
-	}
-
-	declare interface SplitViewShowEvent {
-		view?: JQuery
-	}
-
-	declare interface SwitchOptions {
-		name?: string,
-		checked?: boolean,
-		enable?: boolean,
-		offLabel?: string,
-		onLabel?: string,
-		change(e: SwitchChangeEvent): void
-	}
-
-	declare interface SwitchEvent {
-		sender: Switch,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SwitchChangeEvent {
-		checked?: any
-	}
-
-	declare interface TabStripOptions {
-		name?: string,
-		selectedIndex?: number,
-		select(e: TabStripSelectEvent): void
-	}
-
-	declare interface TabStripEvent {
-		sender: TabStrip,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TabStripSelectEvent {
-		item?: JQuery
-	}
-
-	declare interface ViewOptions {
-		name?: string,
-		model?: string,
-		reload?: boolean,
-		scroller?: any,
-		stretch?: boolean,
-		title?: string,
-		useNativeScrolling?: boolean,
-		zoom?: boolean,
-		afterShow(e: ViewAfterShowEvent): void,
-		beforeHide(e: ViewBeforeHideEvent): void,
-		beforeShow(e: ViewBeforeShowEvent): void,
-		hide(e: ViewHideEvent): void,
-		init(e: ViewInitEvent): void,
-		show(e: ViewShowEvent): void,
-		transitionStart(e: ViewTransitionStartEvent): void,
-		transitionEnd(e: ViewTransitionEndEvent): void
-	}
-
-	declare interface ViewEvent {
-		sender: View,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ViewAfterShowEvent {
-		view?: kendo.mobile.ui.View
-	}
-
-	declare interface ViewBeforeHideEvent {
-		view?: kendo.mobile.ui.View
-	}
-
-	declare interface ViewBeforeShowEvent {
-		view?: kendo.mobile.ui.View
-	}
-
-	declare interface ViewHideEvent {
-		view?: kendo.mobile.ui.View
-	}
-
-	declare interface ViewInitEvent {
-		view?: kendo.mobile.ui.View
-	}
-
-	declare interface ViewShowEvent {
-		view?: kendo.mobile.ui.View
-	}
-
-	declare interface ViewTransitionStartEvent {
-		type?: string
-	}
-
-	declare interface ViewTransitionEndEvent {
-		type?: string
-	}
-
-	declare function progress(container: JQuery, toggle: boolean): void
-
-	declare function plugin(widget: typeof undefined, register?: typeof undefined, prefix?: String): void
-
-	declare function plugin(widget: any, register?: typeof undefined, prefix?: String): void
-
-	declare function plugin(widget: typeof undefined, register?: typeof undefined, prefix?: String): void
-
-	declare function plugin(widget: any, register?: typeof undefined, prefix?: String): void
-
-	declare function plugin(widget: typeof undefined, register?: typeof undefined, prefix?: String): void
-
-	declare function plugin(widget: any, register?: typeof undefined, prefix?: String): void
-
-	declare function registerTheme(name: string, options: any): void
-
-	declare function plugin(widget: typeof undefined): void
-
-	declare function plugin(widget: any): void
-
-	declare class Widget extends Observable {
-		fn: any;
-		element: JQuery;
-		options: any;
-		events: string[];
-		extend(prototype: Object): Widget;
-		constructor(element: Element, options?: Object): this;
-		constructor(element: JQuery, options?: Object): this;
-		constructor(selector: String, options?: Object): this;
-		init(element: Element, options?: Object): void;
-		init(element: JQuery, options?: Object): void;
-		init(selector: String, options?: Object): void;
-		destroy(): void;
-		setOptions(options: Object): void;
-		resize(force?: boolean): void
-	}
-
-	declare class Draggable extends undefined$Widget {
-		element: JQuery;
-		currentTarget: JQuery;
-		constructor(element: Element, options?: DraggableOptions): this;
-		options: DraggableOptions
-	}
-
-	declare class DropTarget extends undefined$Widget {
-		element: JQuery;
-		constructor(element: Element, options?: DropTargetOptions): this;
-		options: DropTargetOptions;
-		destroyGroup(groupName: string): void
-	}
-
-	declare class DropTargetArea extends undefined$Widget {
-		element: JQuery;
-		constructor(element: Element, options?: DropTargetAreaOptions): this;
-		options: DropTargetAreaOptions
-	}
-
-	declare class Widget extends undefined$Widget {
-		
-	}
-
-	declare class AgendaView extends undefined$SchedulerView {
-		fn: AgendaView;
-		startDate(): Date;
-		endDate(): Date;
-		extend(proto: Object): AgendaView
-	}
-
-	declare class Alert extends undefined$Dialog {
-		fn: Alert;
-		options: AlertOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Alert;
-		constructor(element: Element, options?: AlertOptions): this
-	}
-
-	declare class AutoComplete extends undefined$Widget {
-		fn: AutoComplete;
-		options: AutoCompleteOptions;
-		dataSource: kendo.data.DataSource;
-		list: JQuery;
-		ul: JQuery;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): AutoComplete;
-		constructor(element: Element, options?: AutoCompleteOptions): this;
-		close(): void;
-		dataItem(index: number): any;
-		destroy(): void;
-		enable(enable: boolean): void;
-		focus(): void;
-		items(): any;
-		readonly(readonly: boolean): void;
-		refresh(): void;
-		search(word: string): void;
-		select(item: string): void;
-		select(item: Element): void;
-		select(item: JQuery): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		suggest(value: string): void;
-		value(): string;
-		value(value: string): void
-	}
-
-	declare class Button extends undefined$Widget {
-		fn: Button;
-		options: ButtonOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Button;
-		constructor(element: Element, options?: ButtonOptions): this;
-		enable(toggle: boolean): void
-	}
-
-	declare class Calendar extends undefined$Widget {
-		fn: Calendar;
-		options: CalendarOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Calendar;
-		constructor(element: Element, options?: CalendarOptions): this;
-		current(): Date;
-		destroy(): void;
-		max(): Date;
-		max(value: Date): void;
-		max(value: string): void;
-		min(): Date;
-		min(value: Date): void;
-		min(value: string): void;
-		navigate(value: Date, view: string): void;
-		navigateDown(value: Date): void;
-		navigateToFuture(): void;
-		navigateToPast(): void;
-		navigateUp(): void;
-		value(): Date;
-		value(value: Date): void;
-		value(value: string): void;
-		view(): any
-	}
-
-	declare class ColorPalette extends undefined$Widget {
-		fn: ColorPalette;
-		options: ColorPaletteOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ColorPalette;
-		constructor(element: Element, options?: ColorPaletteOptions): this;
-		value(): string;
-		value(color?: string): void;
-		color(): kendo.Color;
-		color(color?: kendo.Color): void;
-		enable(enable?: boolean): void
-	}
-
-	declare class ColorPicker extends undefined$Widget {
-		fn: ColorPicker;
-		options: ColorPickerOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ColorPicker;
-		constructor(element: Element, options?: ColorPickerOptions): this;
-		close(): void;
-		open(): void;
-		toggle(): void;
-		value(): string;
-		value(color?: string): void;
-		color(): kendo.Color;
-		color(color?: kendo.Color): void;
-		enable(enable?: boolean): void
-	}
-
-	declare class ComboBox extends undefined$Widget {
-		fn: ComboBox;
-		options: ComboBoxOptions;
-		dataSource: kendo.data.DataSource;
-		input: JQuery;
-		list: JQuery;
-		ul: JQuery;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ComboBox;
-		constructor(element: Element, options?: ComboBoxOptions): this;
-		close(): void;
-		dataItem(index?: number): any;
-		destroy(): void;
-		enable(enable: boolean): void;
-		focus(): void;
-		items(): any;
-		open(): void;
-		readonly(readonly: boolean): void;
-		refresh(): void;
-		search(word: string): void;
-		select(): number;
-		select(li: JQuery): void;
-		select(li: number): void;
-		select(li: Function): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		suggest(value: string): void;
-		text(): string;
-		text(text: string): void;
-		toggle(toggle: boolean): void;
-		value(): string;
-		value(value: string): void
-	}
-
-	declare class Confirm extends undefined$Dialog {
-		fn: Confirm;
-		options: ConfirmOptions;
-		result: JQueryPromise<any>;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Confirm;
-		constructor(element: Element, options?: ConfirmOptions): this
-	}
-
-	declare class ContextMenu extends undefined$Widget {
-		fn: ContextMenu;
-		options: ContextMenuOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ContextMenu;
-		constructor(element: Element, options?: ContextMenuOptions): this;
-		append(item: any, referenceItem?: string): kendo.ui.ContextMenu;
-		append(item: any, referenceItem?: JQuery): kendo.ui.ContextMenu;
-		close(element: Element): kendo.ui.ContextMenu;
-		close(element: JQuery): kendo.ui.ContextMenu;
-		destroy(): void;
-		enable(element: string, enable: boolean): kendo.ui.ContextMenu;
-		enable(element: Element, enable: boolean): kendo.ui.ContextMenu;
-		enable(element: JQuery, enable: boolean): kendo.ui.ContextMenu;
-		insertAfter(item: any, referenceItem: string): kendo.ui.ContextMenu;
-		insertAfter(item: any, referenceItem: Element): kendo.ui.ContextMenu;
-		insertAfter(item: any, referenceItem: JQuery): kendo.ui.ContextMenu;
-		insertBefore(item: any, referenceItem: string): kendo.ui.ContextMenu;
-		insertBefore(item: any, referenceItem: Element): kendo.ui.ContextMenu;
-		insertBefore(item: any, referenceItem: JQuery): kendo.ui.ContextMenu;
-		open(x: number, y?: number): kendo.ui.ContextMenu;
-		open(x: Element, y?: number): kendo.ui.ContextMenu;
-		open(x: JQuery, y?: number): kendo.ui.ContextMenu;
-		remove(element: string): kendo.ui.ContextMenu;
-		remove(element: Element): kendo.ui.ContextMenu;
-		remove(element: JQuery): kendo.ui.ContextMenu
-	}
-
-	declare class DatePicker extends undefined$Widget {
-		fn: DatePicker;
-		options: DatePickerOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): DatePicker;
-		constructor(element: Element, options?: DatePickerOptions): this;
-		close(): void;
-		destroy(): void;
-		enable(enable: boolean): void;
-		readonly(readonly: boolean): void;
-		max(): Date;
-		max(value: Date): void;
-		max(value: string): void;
-		min(): Date;
-		min(value: Date): void;
-		min(value: string): void;
-		open(): void;
-		setOptions(options: any): void;
-		value(): Date;
-		value(value: Date): void;
-		value(value: string): void
-	}
-
-	declare class DateTimePicker extends undefined$Widget {
-		fn: DateTimePicker;
-		options: DateTimePickerOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): DateTimePicker;
-		constructor(element: Element, options?: DateTimePickerOptions): this;
-		close(view: string): void;
-		destroy(): void;
-		enable(enable: boolean): void;
-		readonly(readonly: boolean): void;
-		max(): Date;
-		max(value: Date): void;
-		max(value: string): void;
-		min(): Date;
-		min(value: Date): void;
-		min(value: string): void;
-		open(view: string): void;
-		setOptions(options: any): void;
-		toggle(view: string): void;
-		value(): Date;
-		value(value: Date): void;
-		value(value: string): void
-	}
-
-	declare class Dialog extends undefined$Widget {
-		fn: Dialog;
-		options: DialogOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Dialog;
-		constructor(element: Element, options?: DialogOptions): this;
-		close(): kendo.ui.Dialog;
-		content(): string;
-		content(content?: string): kendo.ui.Dialog;
-		content(content?: JQuery): kendo.ui.Dialog;
-		destroy(): void;
-		open(): kendo.ui.Dialog;
-		title(): string;
-		title(text?: string): kendo.ui.Dialog;
-		toFront(): kendo.ui.Dialog
-	}
-
-	declare class DropDownList extends undefined$Widget {
-		fn: DropDownList;
-		options: DropDownListOptions;
-		popup: kendo.ui.Popup;
-		dataSource: kendo.data.DataSource;
-		span: JQuery;
-		filterInput: JQuery;
-		list: JQuery;
-		ul: JQuery;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): DropDownList;
-		constructor(element: Element, options?: DropDownListOptions): this;
-		close(): void;
-		dataItem(index?: JQuery): any;
-		dataItem(index?: number): any;
-		destroy(): void;
-		focus(): void;
-		items(): any;
-		enable(enable: boolean): void;
-		open(): void;
-		readonly(readonly: boolean): void;
-		refresh(): void;
-		search(word: string): void;
-		select(): number;
-		select(li: JQuery): void;
-		select(li: number): void;
-		select(li: Function): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		text(): string;
-		text(text: string): void;
-		toggle(toggle: boolean): void;
-		value(): string;
-		value(value: string): void
-	}
-
-	declare class Editor extends undefined$Widget {
-		fn: Editor;
-		options: EditorOptions;
-		body: Element;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Editor;
-		constructor(element: Element, options?: EditorOptions): this;
-		createRange(document?: Document): Range;
-		destroy(): void;
-		encodedValue(): void;
-		exec(name: string, params: any): void;
-		focus(): void;
-		getRange(): Range;
-		getSelection(): Selection;
-		paste(html: string, options: any): void;
-		selectedHtml(): string;
-		refresh(): void;
-		saveAsPDF(): JQueryPromise<any>;
-		selectRange(range: Range): void;
-		update(): void;
-		state(toolName: string): boolean;
-		value(): string;
-		value(value: string): void
-	}
-
-	declare class FilterMenu extends undefined$Widget {
-		fn: FilterMenu;
-		options: FilterMenuOptions;
-		field: string;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): FilterMenu;
-		constructor(element: Element, options?: FilterMenuOptions): this;
-		clear(): void
-	}
-
-	declare class FlatColorPicker extends undefined$Widget {
-		fn: FlatColorPicker;
-		options: FlatColorPickerOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): FlatColorPicker;
-		constructor(element: Element, options?: FlatColorPickerOptions): this;
-		focus(): void;
-		value(): string;
-		value(color?: string): void;
-		color(): kendo.Color;
-		color(color?: kendo.Color): void;
-		enable(enable?: boolean): void
-	}
-
-	declare class Gantt extends undefined$Widget {
-		fn: Gantt;
-		options: GanttOptions;
-		dataSource: kendo.data.DataSource;
-		dependencies: kendo.data.GanttDependencyDataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Gantt;
-		constructor(element: Element, options?: GanttOptions): this;
-		clearSelection(): void;
-		dataItem(row: string): kendo.data.GanttTask;
-		dataItem(row: Element): kendo.data.GanttTask;
-		dataItem(row: JQuery): kendo.data.GanttTask;
-		date(date?: Date): Date;
-		destroy(): void;
-		range(range?: any): any;
-		refresh(): void;
-		refreshDependencies(): void;
-		removeDependency(dependency: string): void;
-		removeDependency(dependency: kendo.data.GanttDependency): void;
-		removeTask(task: string): void;
-		removeTask(task: kendo.data.GanttTask): void;
-		saveAsPDF(): JQueryPromise<any>;
-		select(): JQuery;
-		select(row: string): void;
-		select(row: Element): void;
-		select(row: JQuery): void;
-		setDataSource(dataSource: kendo.data.GanttDataSource): void;
-		setDependenciesDataSource(dataSource: kendo.data.GanttDependencyDataSource): void;
-		view(): kendo.ui.GanttView;
-		view(type?: string): void
-	}
-
-	declare class Grid extends undefined$Widget {
-		fn: Grid;
-		options: GridOptions;
-		dataSource: kendo.data.DataSource;
-		columns: GridColumn[];
-		footer: JQuery;
-		pager: kendo.ui.Pager;
-		table: JQuery;
-		tbody: JQuery;
-		thead: JQuery;
-		content: JQuery;
-		lockedHeader: JQuery;
-		lockedTable: JQuery;
-		lockedContent: JQuery;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Grid;
-		constructor(element: Element, options?: GridOptions): this;
-		addRow(): void;
-		autoFitColumn(column: number): void;
-		autoFitColumn(column: string): void;
-		autoFitColumn(column: any): void;
-		cancelChanges(): void;
-		cancelRow(): void;
-		cellIndex(cell: string): number;
-		cellIndex(cell: Element): number;
-		cellIndex(cell: JQuery): number;
-		clearSelection(): void;
-		closeCell(isCancel?: boolean): void;
-		collapseGroup(row: string): void;
-		collapseGroup(row: Element): void;
-		collapseGroup(row: JQuery): void;
-		collapseRow(row: string): void;
-		collapseRow(row: Element): void;
-		collapseRow(row: JQuery): void;
-		current(): JQuery;
-		current(cell: JQuery): void;
-		dataItem(row: string): kendo.data.ObservableObject;
-		dataItem(row: Element): kendo.data.ObservableObject;
-		dataItem(row: JQuery): kendo.data.ObservableObject;
-		destroy(): void;
-		editCell(cell: JQuery): void;
-		editRow(row: JQuery): void;
-		expandGroup(row: string): void;
-		expandGroup(row: Element): void;
-		expandGroup(row: JQuery): void;
-		expandRow(row: string): void;
-		expandRow(row: Element): void;
-		expandRow(row: JQuery): void;
-		getOptions(): GridOptions;
-		hideColumn(column: number): void;
-		hideColumn(column: string): void;
-		hideColumn(column: any): void;
-		items(): any;
-		lockColumn(column: number): void;
-		lockColumn(column: string): void;
-		refresh(): void;
-		removeRow(row: string): void;
-		removeRow(row: Element): void;
-		removeRow(row: JQuery): void;
-		reorderColumn(destIndex: number, column: any): void;
-		saveAsExcel(): void;
-		saveAsPDF(): JQueryPromise<any>;
-		saveChanges(): void;
-		saveRow(): void;
-		select(): JQuery;
-		select(rows: string): void;
-		select(rows: Element): void;
-		select(rows: JQuery): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		setOptions(options: any): void;
-		showColumn(column: number): void;
-		showColumn(column: string): void;
-		showColumn(column: any): void;
-		unlockColumn(column: number): void;
-		unlockColumn(column: string): void
-	}
-
-	declare class ListView extends undefined$Widget {
-		fn: ListView;
-		options: ListViewOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ListView;
-		constructor(element: Element, options?: ListViewOptions): this;
-		add(): void;
-		cancel(): void;
-		clearSelection(): void;
-		dataItem(row: string): kendo.data.ObservableObject;
-		dataItem(row: Element): kendo.data.ObservableObject;
-		dataItem(row: JQuery): kendo.data.ObservableObject;
-		dataItems(): void;
-		destroy(): void;
-		edit(item: JQuery): void;
-		items(): any;
-		refresh(): void;
-		remove(item: any): void;
-		save(): void;
-		select(): JQuery;
-		select(items: JQuery): void;
-		select(items: any): void;
-		setDataSource(dataSource: kendo.data.DataSource): void
-	}
-
-	declare class MaskedTextBox extends undefined$Widget {
-		fn: MaskedTextBox;
-		options: MaskedTextBoxOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): MaskedTextBox;
-		constructor(element: Element, options?: MaskedTextBoxOptions): this;
-		destroy(): void;
-		enable(enable: boolean): void;
-		readonly(readonly: boolean): void;
-		raw(): string;
-		value(): string;
-		value(value: string): void
-	}
-
-	declare class MediaPlayer extends undefined$Widget {
-		fn: MediaPlayer;
-		options: MediaPlayerOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): MediaPlayer;
-		constructor(element: Element, options?: MediaPlayerOptions): this;
-		fullScreen(): void;
-		fullScreen(value: boolean): void;
-		volume(): void;
-		volume(value: number): void;
-		mute(value: boolean): void;
-		isEnded(): void;
-		isPaused(): void;
-		isPlaying(): void;
-		pause(): void;
-		play(): void;
-		seek(milliseconds: number): void;
-		stop(): void;
-		titlebar(): void;
-		toolbar(): void
-	}
-
-	declare class Menu extends undefined$Widget {
-		fn: Menu;
-		options: MenuOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Menu;
-		constructor(element: Element, options?: MenuOptions): this;
-		append(item: any, referenceItem?: string): kendo.ui.Menu;
-		append(item: any, referenceItem?: JQuery): kendo.ui.Menu;
-		close(element: string): kendo.ui.Menu;
-		close(element: Element): kendo.ui.Menu;
-		close(element: JQuery): kendo.ui.Menu;
-		destroy(): void;
-		enable(element: string, enable: boolean): kendo.ui.Menu;
-		enable(element: Element, enable: boolean): kendo.ui.Menu;
-		enable(element: JQuery, enable: boolean): kendo.ui.Menu;
-		insertAfter(item: any, referenceItem: string): kendo.ui.Menu;
-		insertAfter(item: any, referenceItem: Element): kendo.ui.Menu;
-		insertAfter(item: any, referenceItem: JQuery): kendo.ui.Menu;
-		insertBefore(item: any, referenceItem: string): kendo.ui.Menu;
-		insertBefore(item: any, referenceItem: Element): kendo.ui.Menu;
-		insertBefore(item: any, referenceItem: JQuery): kendo.ui.Menu;
-		open(element: string): kendo.ui.Menu;
-		open(element: Element): kendo.ui.Menu;
-		open(element: JQuery): kendo.ui.Menu;
-		remove(element: string): kendo.ui.Menu;
-		remove(element: Element): kendo.ui.Menu;
-		remove(element: JQuery): kendo.ui.Menu
-	}
-
-	declare class MultiSelect extends undefined$Widget {
-		fn: MultiSelect;
-		options: MultiSelectOptions;
-		dataSource: kendo.data.DataSource;
-		input: JQuery;
-		list: JQuery;
-		ul: JQuery;
-		tagList: JQuery;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): MultiSelect;
-		constructor(element: Element, options?: MultiSelectOptions): this;
-		close(): void;
-		dataItems(): any;
-		destroy(): void;
-		enable(enable: boolean): void;
-		focus(): void;
-		items(): any;
-		open(): void;
-		readonly(readonly: boolean): void;
-		refresh(): void;
-		search(word: string): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		toggle(toggle?: boolean): void;
-		value(): any;
-		value(value: any): void;
-		value(value: string): void
-	}
-
-	declare class Notification extends undefined$Widget {
-		fn: Notification;
-		options: NotificationOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Notification;
-		constructor(element: Element, options?: NotificationOptions): this;
-		error(data: any): void;
-		error(data: string): void;
-		error(data: Function): void;
-		getNotifications(): JQuery;
-		hide(): void;
-		info(data: any): void;
-		info(data: string): void;
-		info(data: Function): void;
-		show(data: any, type: string): void;
-		show(data: string, type: string): void;
-		show(data: Function, type: string): void;
-		showText(data: any, type: string): void;
-		showText(data: string, type: string): void;
-		showText(data: Function, type: string): void;
-		success(data: any): void;
-		success(data: string): void;
-		success(data: Function): void;
-		warning(data: any): void;
-		warning(data: string): void;
-		warning(data: Function): void
-	}
-
-	declare class NumericTextBox extends undefined$Widget {
-		fn: NumericTextBox;
-		options: NumericTextBoxOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): NumericTextBox;
-		constructor(element: Element, options?: NumericTextBoxOptions): this;
-		destroy(): void;
-		enable(enable: boolean): void;
-		readonly(readonly: boolean): void;
-		focus(): void;
-		max(): number;
-		max(value: number): void;
-		max(value: string): void;
-		min(): number;
-		min(value: number): void;
-		min(value: string): void;
-		step(): number;
-		step(value: number): void;
-		step(value: string): void;
-		value(): number;
-		value(value: number): void;
-		value(value: string): void
-	}
-
-	declare class Pager extends undefined$Widget {
-		fn: Pager;
-		options: PagerOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Pager;
-		constructor(element: Element, options?: PagerOptions): this;
-		totalPages(): number;
-		pageSize(): number;
-		page(): number;
-		page(page: number): void;
-		refresh(): void;
-		destroy(): void
-	}
-
-	declare class PanelBar extends undefined$Widget {
-		fn: PanelBar;
-		options: PanelBarOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): PanelBar;
-		constructor(element: Element, options?: PanelBarOptions): this;
-		append(item: string, referenceItem: string): kendo.ui.PanelBar;
-		append(item: string, referenceItem: Element): kendo.ui.PanelBar;
-		append(item: string, referenceItem: JQuery): kendo.ui.PanelBar;
-		append(item: Element, referenceItem: string): kendo.ui.PanelBar;
-		append(item: Element, referenceItem: Element): kendo.ui.PanelBar;
-		append(item: Element, referenceItem: JQuery): kendo.ui.PanelBar;
-		append(item: JQuery, referenceItem: string): kendo.ui.PanelBar;
-		append(item: JQuery, referenceItem: Element): kendo.ui.PanelBar;
-		append(item: JQuery, referenceItem: JQuery): kendo.ui.PanelBar;
-		append(item: any, referenceItem: string): kendo.ui.PanelBar;
-		append(item: any, referenceItem: Element): kendo.ui.PanelBar;
-		append(item: any, referenceItem: JQuery): kendo.ui.PanelBar;
-		clearSelection(): void;
-		collapse(element: string, useAnimation: boolean): kendo.ui.PanelBar;
-		collapse(element: Element, useAnimation: boolean): kendo.ui.PanelBar;
-		collapse(element: JQuery, useAnimation: boolean): kendo.ui.PanelBar;
-		destroy(): void;
-		enable(element: string, enable: boolean): void;
-		enable(element: Element, enable: boolean): void;
-		enable(element: JQuery, enable: boolean): void;
-		expand(element: string, useAnimation: boolean): kendo.ui.PanelBar;
-		expand(element: Element, useAnimation: boolean): kendo.ui.PanelBar;
-		expand(element: JQuery, useAnimation: boolean): kendo.ui.PanelBar;
-		insertAfter(item: string, referenceItem: string): void;
-		insertAfter(item: string, referenceItem: Element): void;
-		insertAfter(item: string, referenceItem: JQuery): void;
-		insertAfter(item: Element, referenceItem: string): void;
-		insertAfter(item: Element, referenceItem: Element): void;
-		insertAfter(item: Element, referenceItem: JQuery): void;
-		insertAfter(item: JQuery, referenceItem: string): void;
-		insertAfter(item: JQuery, referenceItem: Element): void;
-		insertAfter(item: JQuery, referenceItem: JQuery): void;
-		insertAfter(item: any, referenceItem: string): void;
-		insertAfter(item: any, referenceItem: Element): void;
-		insertAfter(item: any, referenceItem: JQuery): void;
-		insertBefore(item: string, referenceItem: string): kendo.ui.PanelBar;
-		insertBefore(item: string, referenceItem: Element): kendo.ui.PanelBar;
-		insertBefore(item: string, referenceItem: JQuery): kendo.ui.PanelBar;
-		insertBefore(item: Element, referenceItem: string): kendo.ui.PanelBar;
-		insertBefore(item: Element, referenceItem: Element): kendo.ui.PanelBar;
-		insertBefore(item: Element, referenceItem: JQuery): kendo.ui.PanelBar;
-		insertBefore(item: JQuery, referenceItem: string): kendo.ui.PanelBar;
-		insertBefore(item: JQuery, referenceItem: Element): kendo.ui.PanelBar;
-		insertBefore(item: JQuery, referenceItem: JQuery): kendo.ui.PanelBar;
-		insertBefore(item: any, referenceItem: string): kendo.ui.PanelBar;
-		insertBefore(item: any, referenceItem: Element): kendo.ui.PanelBar;
-		insertBefore(item: any, referenceItem: JQuery): kendo.ui.PanelBar;
-		reload(element: string): void;
-		reload(element: Element): void;
-		reload(element: JQuery): void;
-		remove(element: string): void;
-		remove(element: Element): void;
-		remove(element: JQuery): void;
-		select(): JQuery;
-		select(element?: string): void;
-		select(element?: Element): void;
-		select(element?: JQuery): void
-	}
-
-	declare class PivotConfigurator extends undefined$Widget {
-		fn: PivotConfigurator;
-		options: PivotConfiguratorOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): PivotConfigurator;
-		constructor(element: Element, options?: PivotConfiguratorOptions): this;
-		destroy(): void;
-		refresh(): void;
-		setDataSource(dataSource: kendo.data.PivotDataSource): void
-	}
-
-	declare class PivotGrid extends undefined$Widget {
-		fn: PivotGrid;
-		options: PivotGridOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): PivotGrid;
-		constructor(element: Element, options?: PivotGridOptions): this;
-		cellInfo(columnIndex: number, rowIndex: number): any;
-		cellInfoByElement(cell: string): any;
-		cellInfoByElement(cell: Element): any;
-		cellInfoByElement(cell: JQuery): any;
-		destroy(): void;
-		refresh(): void;
-		setDataSource(dataSource: kendo.data.PivotDataSource): void;
-		saveAsExcel(): void;
-		saveAsPDF(): JQueryPromise<any>
-	}
-
-	declare class Popup extends undefined$Widget {
-		fn: Popup;
-		options: PopupOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Popup;
-		constructor(element: Element, options?: PopupOptions): this;
-		close(): void;
-		open(): void;
-		position(): void;
-		setOptions(options: any): void;
-		visible(): boolean
-	}
-
-	declare class ProgressBar extends undefined$Widget {
-		fn: ProgressBar;
-		options: ProgressBarOptions;
-		progressStatus: JQuery;
-		progressWrapper: JQuery;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ProgressBar;
-		constructor(element: Element, options?: ProgressBarOptions): this;
-		enable(enable: boolean): void;
-		value(): number;
-		value(value: number): void
-	}
-
-	declare class Prompt extends undefined$Dialog {
-		fn: Prompt;
-		options: PromptOptions;
-		result: JQueryPromise<any>;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Prompt;
-		constructor(element: Element, options?: PromptOptions): this
-	}
-
-	declare class RangeSlider extends undefined$Widget {
-		fn: RangeSlider;
-		options: RangeSliderOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): RangeSlider;
-		constructor(element: Element, options?: RangeSliderOptions): this;
-		destroy(): void;
-		enable(enable: boolean): void;
-		value(): any;
-		value(selectionStart: number, selectionEnd: number): void;
-		values(): any;
-		resize(): void
-	}
-
-	declare class ResponsivePanel extends undefined$Widget {
-		fn: ResponsivePanel;
-		options: ResponsivePanelOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ResponsivePanel;
-		constructor(element: Element, options?: ResponsivePanelOptions): this;
-		close(): void;
-		destroy(): void;
-		open(): void
-	}
-
-	declare class Scheduler extends undefined$Widget {
-		fn: Scheduler;
-		options: SchedulerOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Scheduler;
-		constructor(element: Element, options?: SchedulerOptions): this;
-		addEvent(data: any): void;
-		cancelEvent(): void;
-		data(): void;
-		date(): Date;
-		date(value?: Date): void;
-		destroy(): void;
-		editEvent(event: string): void;
-		editEvent(event: kendo.data.SchedulerEvent): void;
-		items(): any;
-		occurrenceByUid(uid: string): kendo.data.SchedulerEvent;
-		occurrencesInRange(start: Date, end: Date): any;
-		refresh(): void;
-		removeEvent(event: string): void;
-		removeEvent(event: kendo.data.SchedulerEvent): void;
-		resourcesBySlot(slot: any): any;
-		saveAsPDF(): JQueryPromise<any>;
-		saveEvent(): void;
-		select(): void;
-		select(events: any, options: any): void;
-		setDataSource(dataSource: kendo.data.SchedulerDataSource): void;
-		slotByPosition(xPosition: number, yPosition: number): any;
-		slotByElement(element: Element): any;
-		slotByElement(element: JQuery): any;
-		view(type?: string): void;
-		viewName(): string
-	}
-
-	declare class Slider extends undefined$Widget {
-		fn: Slider;
-		options: SliderOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Slider;
-		constructor(element: Element, options?: SliderOptions): this;
-		destroy(): void;
-		enable(enable: boolean): void;
-		value(): number;
-		value(value: number): void;
-		resize(): void
-	}
-
-	declare class Sortable extends undefined$Widget {
-		fn: Sortable;
-		options: SortableOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Sortable;
-		constructor(element: Element, options?: SortableOptions): this;
-		indexOf(element: JQuery): number;
-		items(): JQuery
-	}
-
-	declare class Splitter extends undefined$Widget {
-		fn: Splitter;
-		options: SplitterOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Splitter;
-		constructor(element: Element, options?: SplitterOptions): this;
-		ajaxRequest(pane: string, url: string, data: any): void;
-		ajaxRequest(pane: string, url: string, data: string): void;
-		ajaxRequest(pane: Element, url: string, data: any): void;
-		ajaxRequest(pane: Element, url: string, data: string): void;
-		ajaxRequest(pane: JQuery, url: string, data: any): void;
-		ajaxRequest(pane: JQuery, url: string, data: string): void;
-		append(config?: any): JQuery;
-		collapse(pane: string): void;
-		collapse(pane: Element): void;
-		collapse(pane: JQuery): void;
-		destroy(): void;
-		expand(pane: string): void;
-		expand(pane: Element): void;
-		expand(pane: JQuery): void;
-		insertAfter(config: any, referencePane: string): JQuery;
-		insertAfter(config: any, referencePane: Element): JQuery;
-		insertAfter(config: any, referencePane: JQuery): JQuery;
-		insertBefore(config: any, referencePane: string): JQuery;
-		insertBefore(config: any, referencePane: Element): JQuery;
-		insertBefore(config: any, referencePane: JQuery): JQuery;
-		max(pane: string, value: string): void;
-		max(pane: Element, value: string): void;
-		max(pane: JQuery, value: string): void;
-		min(pane: string, value: string): void;
-		min(pane: Element, value: string): void;
-		min(pane: JQuery, value: string): void;
-		remove(pane: string): void;
-		remove(pane: Element): void;
-		remove(pane: JQuery): void;
-		size(pane: string): any;
-		size(pane: Element): any;
-		size(pane: JQuery): any;
-		size(pane: string, value?: string): void;
-		size(pane: Element, value?: string): void;
-		size(pane: JQuery, value?: string): void;
-		toggle(pane: string, expand?: boolean): void;
-		toggle(pane: Element, expand?: boolean): void;
-		toggle(pane: JQuery, expand?: boolean): void
-	}
-
-	declare class Spreadsheet extends undefined$Widget {
-		fn: Spreadsheet;
-		options: SpreadsheetOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Spreadsheet;
-		constructor(element: Element, options?: SpreadsheetOptions): this;
-		activeSheet(): kendo.spreadsheet.Sheet;
-		activeSheet(sheet?: kendo.spreadsheet.Sheet): void;
-		sheets(): any;
-		fromFile(blob: Blob): JQueryPromise<any>;
-		fromFile(blob: File): JQueryPromise<any>;
-		saveAsExcel(): void;
-		saveAsPDF(): JQueryPromise<any>;
-		sheetByName(name: string): kendo.spreadsheet.Sheet;
-		sheetIndex(sheet: kendo.spreadsheet.Sheet): number;
-		sheetByIndex(index: number): kendo.spreadsheet.Sheet;
-		insertSheet(options: any): kendo.spreadsheet.Sheet;
-		moveSheetToIndex(sheet: kendo.spreadsheet.Sheet, index: number): void;
-		removeSheet(sheet: kendo.spreadsheet.Sheet): void;
-		renameSheet(sheet: kendo.spreadsheet.Sheet, newSheetName: string): kendo.spreadsheet.Sheet;
-		toJSON(): any;
-		fromJSON(data: any): void;
-		defineName(name: string, value: string, hidden: boolean): void;
-		undefineName(name: string): void
-	}
-
-	declare class TabStrip extends undefined$Widget {
-		fn: TabStrip;
-		options: TabStripOptions;
-		dataSource: kendo.data.DataSource;
-		tabGroup: JQuery;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): TabStrip;
-		constructor(element: Element, options?: TabStripOptions): this;
-		activateTab(item: JQuery): void;
-		append(tab: any): kendo.ui.TabStrip;
-		contentElement(itemIndex: number): Element;
-		contentHolder(itemIndex: number): Element;
-		deactivateTab(item: JQuery): void;
-		destroy(): void;
-		disable(element: string): kendo.ui.TabStrip;
-		disable(element: Element): kendo.ui.TabStrip;
-		disable(element: JQuery): kendo.ui.TabStrip;
-		enable(element: string, enable?: boolean): kendo.ui.TabStrip;
-		enable(element: Element, enable?: boolean): kendo.ui.TabStrip;
-		enable(element: JQuery, enable?: boolean): kendo.ui.TabStrip;
-		insertAfter(item: any, referenceTab: string): kendo.ui.TabStrip;
-		insertAfter(item: any, referenceTab: Element): kendo.ui.TabStrip;
-		insertAfter(item: any, referenceTab: JQuery): kendo.ui.TabStrip;
-		insertAfter(item: string, referenceTab: string): kendo.ui.TabStrip;
-		insertAfter(item: string, referenceTab: Element): kendo.ui.TabStrip;
-		insertAfter(item: string, referenceTab: JQuery): kendo.ui.TabStrip;
-		insertAfter(item: Element, referenceTab: string): kendo.ui.TabStrip;
-		insertAfter(item: Element, referenceTab: Element): kendo.ui.TabStrip;
-		insertAfter(item: Element, referenceTab: JQuery): kendo.ui.TabStrip;
-		insertAfter(item: JQuery, referenceTab: string): kendo.ui.TabStrip;
-		insertAfter(item: JQuery, referenceTab: Element): kendo.ui.TabStrip;
-		insertAfter(item: JQuery, referenceTab: JQuery): kendo.ui.TabStrip;
-		insertBefore(item: any, referenceTab: string): kendo.ui.TabStrip;
-		insertBefore(item: any, referenceTab: Element): kendo.ui.TabStrip;
-		insertBefore(item: any, referenceTab: JQuery): kendo.ui.TabStrip;
-		insertBefore(item: string, referenceTab: string): kendo.ui.TabStrip;
-		insertBefore(item: string, referenceTab: Element): kendo.ui.TabStrip;
-		insertBefore(item: string, referenceTab: JQuery): kendo.ui.TabStrip;
-		insertBefore(item: Element, referenceTab: string): kendo.ui.TabStrip;
-		insertBefore(item: Element, referenceTab: Element): kendo.ui.TabStrip;
-		insertBefore(item: Element, referenceTab: JQuery): kendo.ui.TabStrip;
-		insertBefore(item: JQuery, referenceTab: string): kendo.ui.TabStrip;
-		insertBefore(item: JQuery, referenceTab: Element): kendo.ui.TabStrip;
-		insertBefore(item: JQuery, referenceTab: JQuery): kendo.ui.TabStrip;
-		items(): HTMLCollection;
-		reload(element: string): kendo.ui.TabStrip;
-		reload(element: Element): kendo.ui.TabStrip;
-		reload(element: JQuery): kendo.ui.TabStrip;
-		remove(element: string): kendo.ui.TabStrip;
-		remove(element: number): kendo.ui.TabStrip;
-		remove(element: JQuery): kendo.ui.TabStrip;
-		select(): JQuery;
-		select(element: string): void;
-		select(element: Element): void;
-		select(element: JQuery): void;
-		select(element: number): void;
-		setDataSource(dataSource: any): void;
-		setDataSource(dataSource: kendo.data.DataSource): void
-	}
-
-	declare class TimePicker extends undefined$Widget {
-		fn: TimePicker;
-		options: TimePickerOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): TimePicker;
-		constructor(element: Element, options?: TimePickerOptions): this;
-		close(): void;
-		destroy(): void;
-		enable(enable: boolean): void;
-		readonly(readonly: boolean): void;
-		max(): Date;
-		max(value: Date): void;
-		max(value: string): void;
-		min(): Date;
-		min(value: Date): void;
-		min(value: string): void;
-		open(): void;
-		setOptions(options: any): void;
-		value(): Date;
-		value(value: Date): void;
-		value(value: string): void
-	}
-
-	declare class ToolBar extends undefined$Widget {
-		fn: ToolBar;
-		options: ToolBarOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ToolBar;
-		constructor(element: Element, options?: ToolBarOptions): this;
-		add(command: any): void;
-		destroy(): void;
-		enable(command: string, enable: boolean): void;
-		enable(command: Element, enable: boolean): void;
-		enable(command: JQuery, enable: boolean): void;
-		getSelectedFromGroup(groupName: string): void;
-		hide(command: string): void;
-		hide(command: Element): void;
-		hide(command: JQuery): void;
-		remove(command: string): void;
-		remove(command: Element): void;
-		remove(command: JQuery): void;
-		show(command: string): void;
-		show(command: Element): void;
-		show(command: JQuery): void;
-		toggle(command: string, state: boolean): void;
-		toggle(command: Element, state: boolean): void;
-		toggle(command: JQuery, state: boolean): void
-	}
-
-	declare class Tooltip extends undefined$Widget {
-		fn: Tooltip;
-		options: TooltipOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Tooltip;
-		constructor(element: Element, options?: TooltipOptions): this;
-		show(element: JQuery): void;
-		hide(): void;
-		refresh(): void;
-		target(): JQuery
-	}
-
-	declare class Touch extends undefined$Widget {
-		fn: Touch;
-		options: TouchOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Touch;
-		constructor(element: Element, options?: TouchOptions): this;
-		cancel(): void;
-		destroy(): void
-	}
-
-	declare class TreeList extends undefined$Widget {
-		fn: TreeList;
-		options: TreeListOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): TreeList;
-		constructor(element: Element, options?: TreeListOptions): this;
-		addRow(parentRow: string): void;
-		addRow(parentRow: Element): void;
-		addRow(parentRow: JQuery): void;
-		autoFitColumn(column: number): void;
-		autoFitColumn(column: string): void;
-		autoFitColumn(column: any): void;
-		cancelRow(): void;
-		clearSelection(): void;
-		collapse(): void;
-		dataItem(row: string): kendo.data.TreeListModel;
-		dataItem(row: Element): kendo.data.TreeListModel;
-		dataItem(row: JQuery): kendo.data.TreeListModel;
-		destroy(): void;
-		editRow(row: JQuery): void;
-		expand(row: string): JQueryPromise<any>;
-		expand(row: Element): JQueryPromise<any>;
-		expand(row: JQuery): JQueryPromise<any>;
-		itemFor(model: kendo.data.TreeListModel): JQuery;
-		itemFor(model: any): JQuery;
-		items(): any;
-		refresh(): void;
-		removeRow(row: string): void;
-		removeRow(row: Element): void;
-		removeRow(row: JQuery): void;
-		saveAsExcel(): void;
-		saveAsPDF(): JQueryPromise<any>;
-		saveRow(): void;
-		select(): JQuery;
-		select(rows: Element): void;
-		select(rows: JQuery): void;
-		setDataSource(dataSource: kendo.data.TreeListDataSource): void;
-		showColumn(column: number): void;
-		showColumn(column: string): void;
-		hideColumn(column: number): void;
-		hideColumn(column: string): void;
-		lockColumn(column: number): void;
-		lockColumn(column: string): void;
-		unlockColumn(column: number): void;
-		unlockColumn(column: string): void;
-		reorderColumn(destIndex: number, column: any): void
-	}
-
-	declare class TreeView extends undefined$Widget {
-		fn: TreeView;
-		options: TreeViewOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): TreeView;
-		constructor(element: Element, options?: TreeViewOptions): this;
-		append(nodeData: any, parentNode?: JQuery, success?: Function): JQuery;
-		append(nodeData: JQuery, parentNode?: JQuery, success?: Function): JQuery;
-		collapse(nodes: JQuery): void;
-		collapse(nodes: Element): void;
-		collapse(nodes: string): void;
-		dataItem(node: JQuery): kendo.data.Node;
-		dataItem(node: Element): kendo.data.Node;
-		dataItem(node: string): kendo.data.Node;
-		destroy(): void;
-		detach(node: JQuery): JQuery;
-		detach(node: Element): JQuery;
-		detach(node: string): JQuery;
-		enable(nodes: JQuery, enable?: boolean): void;
-		enable(nodes: Element, enable?: boolean): void;
-		enable(nodes: string, enable?: boolean): void;
-		expand(nodes: JQuery): void;
-		expand(nodes: Element): void;
-		expand(nodes: string): void;
-		expandPath(path: any, complete: Function): void;
-		expandTo(targetNode: kendo.data.Node): void;
-		expandTo(targetNode: any): void;
-		findByText(text: string): JQuery;
-		findByUid(text: string): JQuery;
-		insertAfter(nodeData: any, referenceNode: JQuery): void;
-		insertBefore(nodeData: any, referenceNode: JQuery): void;
-		items(): any;
-		parent(node: JQuery): JQuery;
-		parent(node: Element): JQuery;
-		parent(node: string): JQuery;
-		remove(node: JQuery): void;
-		remove(node: Element): void;
-		remove(node: string): void;
-		select(): JQuery;
-		select(node?: JQuery): void;
-		select(node?: Element): void;
-		select(node?: string): void;
-		setDataSource(dataSource: kendo.data.HierarchicalDataSource): void;
-		text(node: JQuery): string;
-		text(node: Element): string;
-		text(node: string): string;
-		text(node: JQuery, newText: string): void;
-		text(node: Element, newText: string): void;
-		text(node: string, newText: string): void;
-		toggle(node: JQuery): void;
-		toggle(node: Element): void;
-		toggle(node: string): void;
-		updateIndeterminate(node: JQuery): void
-	}
-
-	declare class Upload extends undefined$Widget {
-		fn: Upload;
-		options: UploadOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Upload;
-		constructor(element: Element, options?: UploadOptions): this;
-		clearAllFiles(): void;
-		clearFile(): void;
-		clearFileByUid(): void;
-		destroy(): void;
-		disable(): void;
-		enable(enable?: boolean): void;
-		getFiles(): any;
-		removeAllFiles(): void;
-		removeFile(): void;
-		removeFileByUid(): void;
-		toggle(enable: boolean): void;
-		upload(): void
-	}
-
-	declare class Validator extends undefined$Widget {
-		fn: Validator;
-		options: ValidatorOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Validator;
-		constructor(element: Element, options?: ValidatorOptions): this;
-		errors(): any;
-		hideMessages(): void;
-		validate(): boolean;
-		validateInput(input: Element): boolean;
-		validateInput(input: JQuery): boolean
-	}
-
-	declare class Window extends undefined$Widget {
-		fn: Window;
-		options: WindowOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Window;
-		constructor(element: Element, options?: WindowOptions): this;
-		center(): kendo.ui.Window;
-		close(): kendo.ui.Window;
-		content(): string;
-		content(content?: string): kendo.ui.Window;
-		content(content?: JQuery): kendo.ui.Window;
-		destroy(): void;
-		isMaximized(): boolean;
-		isMinimized(): boolean;
-		maximize(): kendo.ui.Window;
-		minimize(): kendo.ui.Window;
-		open(): kendo.ui.Window;
-		pin(): void;
-		refresh(options: any): kendo.ui.Window;
-		restore(): kendo.ui.Window;
-		setOptions(options: any): void;
-		title(): string;
-		title(text?: string): kendo.ui.Window;
-		toFront(): kendo.ui.Window;
-		toggleMaximization(): kendo.ui.Window;
-		unpin(): void
-	}
-
-	declare class Barcode extends undefined$Widget {
-		fn: Barcode;
-		options: BarcodeOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Barcode;
-		constructor(element: Element, options?: BarcodeOptions): this;
-		exportImage(options: any): JQueryPromise<any>;
-		exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
-		exportSVG(options: any): JQueryPromise<any>;
-		imageDataURL(): string;
-		redraw(): void;
-		resize(force?: boolean): void;
-		svg(): string;
-		value(): string;
-		value(value: number): void;
-		value(value: string): void
-	}
-
-	declare class Chart extends undefined$Widget {
-		fn: Chart;
-		options: ChartOptions;
-		dataSource: kendo.data.DataSource;
-		surface: kendo.drawing.Surface;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Chart;
-		constructor(element: Element, options?: ChartOptions): this;
-		destroy(): void;
-		exportImage(options: any): JQueryPromise<any>;
-		exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
-		exportSVG(options: any): JQueryPromise<any>;
-		findAxisByName(name: string): kendo.dataviz.ChartAxis;
-		findPaneByIndex(index: number): kendo.dataviz.ChartPane;
-		findPaneByName(name: string): kendo.dataviz.ChartPane;
-		findSeries(callback: Function): kendo.dataviz.ChartSeries;
-		findSeriesByIndex(index: number): kendo.dataviz.ChartSeries;
-		findSeriesByName(name: string): kendo.dataviz.ChartSeries;
-		getAxis(name: string): kendo.dataviz.ChartAxis;
-		hideTooltip(): void;
-		plotArea(): void;
-		redraw(): void;
-		refresh(): void;
-		resize(force?: boolean): void;
-		saveAsPDF(): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		setOptions(options: any): void;
-		showTooltip(filter: Function): void;
-		showTooltip(filter: number): void;
-		showTooltip(filter: Date): void;
-		showTooltip(filter: string): void;
-		svg(): string;
-		imageDataURL(): string;
-		toggleHighlight(show: boolean, options: any): void
-	}
-
-	declare class Diagram extends undefined$Widget {
-		fn: Diagram;
-		options: DiagramOptions;
-		dataSource: kendo.data.DataSource;
-		connections: kendo.dataviz.diagram.Connection[];
-		connectionsDataSource: kendo.data.DataSource;
-		shapes: kendo.dataviz.diagram.Shape[];
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Diagram;
-		constructor(element: Element, options?: DiagramOptions): this;
-		addConnection(connection: any, undoable: boolean): void;
-		addShape(obj: any, undoable: boolean): kendo.dataviz.diagram.Shape;
-		alignShapes(direction: string): void;
-		boundingBox(items: any): kendo.dataviz.diagram.Rect;
-		bringIntoView(obj: any, options: any): void;
-		cancelEdit(): void;
-		clear(): void;
-		connect(source: any, target: any, options: any): void;
-		connected(source: any, target: any): void;
-		copy(): void;
-		createConnection(item: any): void;
-		createShape(item: any): void;
-		cut(): void;
-		destroy(): void;
-		documentToModel(point: any): any;
-		documentToView(point: any): any;
-		edit(item: any): void;
-		exportImage(options: any): JQueryPromise<any>;
-		exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
-		exportSVG(options: any): JQueryPromise<any>;
-		focus(): void;
-		getConnectionByModelId(id: string): kendo.dataviz.diagram.Connection;
-		getConnectionByModelId(id: number): kendo.dataviz.diagram.Connection;
-		getConnectionByModelUid(uid: string): kendo.dataviz.diagram.Connection;
-		getShapeById(id: string): any;
-		getShapeByModelId(id: string): kendo.dataviz.diagram.Shape;
-		getShapeByModelId(id: number): kendo.dataviz.diagram.Shape;
-		getShapeByModelUid(uid: string): kendo.dataviz.diagram.Shape;
-		layerToModel(point: any): any;
-		layout(options: any): void;
-		load(json: string): void;
-		modelToDocument(point: any): any;
-		modelToLayer(point: any): any;
-		modelToView(point: any): any;
-		pan(pan: any): void;
-		paste(): void;
-		redo(): void;
-		remove(items: any, undoable: boolean): void;
-		resize(): void;
-		save(): void;
-		saveEdit(): void;
-		select(): any;
-		select(elements: kendo.dataviz.diagram.Connection, options: any): void;
-		select(elements: kendo.dataviz.diagram.Shape, options: any): void;
-		select(elements: any, options: any): void;
-		selectAll(): void;
-		selectArea(rect: kendo.dataviz.diagram.Rect): void;
-		setConnectionsDataSource(dataSource: kendo.data.DataSource): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		toBack(items: any, undoable: boolean): void;
-		toFront(items: any, undoable: boolean): void;
-		transformPoint(p: any): void;
-		transformRect(r: any): void;
-		undo(): void;
-		viewToDocument(point: kendo.dataviz.diagram.Point): kendo.dataviz.diagram.Point;
-		viewToModel(point: kendo.dataviz.diagram.Point): kendo.dataviz.diagram.Point;
-		viewport(): kendo.dataviz.diagram.Rect;
-		zoom(): number;
-		zoom(zoom: number, point: kendo.dataviz.diagram.Point): void
-	}
-
-	declare class LinearGauge extends undefined$Widget {
-		fn: LinearGauge;
-		options: LinearGaugeOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): LinearGauge;
-		constructor(element: Element, options?: LinearGaugeOptions): this;
-		allValues(values: any): any;
-		destroy(): void;
-		exportImage(options: any): JQueryPromise<any>;
-		exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
-		exportSVG(options: any): JQueryPromise<any>;
-		redraw(): void;
-		resize(force?: boolean): void;
-		svg(): void;
-		imageDataURL(): string;
-		value(): void
-	}
-
-	declare class Map extends undefined$Widget {
-		fn: Map;
-		options: MapOptions;
-		layers: any;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Map;
-		constructor(element: Element, options?: MapOptions): this;
-		center(): kendo.dataviz.map.Location;
-		center(center: any): void;
-		center(center: kendo.dataviz.map.Location): void;
-		destroy(): void;
-		eventOffset(e: any): kendo.geometry.Point;
-		eventOffset(e: JQueryEventObject): kendo.geometry.Point;
-		eventToLayer(e: any): kendo.geometry.Point;
-		eventToLayer(e: JQueryEventObject): kendo.geometry.Point;
-		eventToLocation(e: any): kendo.geometry.Point;
-		eventToLocation(e: JQueryEventObject): kendo.geometry.Point;
-		eventToView(e: any): kendo.geometry.Point;
-		eventToView(e: JQueryEventObject): kendo.geometry.Point;
-		extent(): kendo.dataviz.map.Extent;
-		extent(extent: kendo.dataviz.map.Extent): void;
-		layerToLocation(point: any, zoom: number): kendo.dataviz.map.Location;
-		layerToLocation(point: kendo.geometry.Point, zoom: number): kendo.dataviz.map.Location;
-		locationToLayer(location: any, zoom: number): kendo.geometry.Point;
-		locationToLayer(location: kendo.dataviz.map.Location, zoom: number): kendo.geometry.Point;
-		locationToView(location: any): kendo.geometry.Point;
-		locationToView(location: kendo.dataviz.map.Location): kendo.geometry.Point;
-		resize(force?: boolean): void;
-		setOptions(options: any): void;
-		viewSize(): any;
-		viewToLocation(point: any, zoom: number): kendo.dataviz.map.Location;
-		viewToLocation(point: kendo.geometry.Point, zoom: number): kendo.dataviz.map.Location;
-		zoom(): number;
-		zoom(level: number): void
-	}
-
-	declare class QRCode extends undefined$Widget {
-		fn: QRCode;
-		options: QRCodeOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): QRCode;
-		constructor(element: Element, options?: QRCodeOptions): this;
-		destroy(): void;
-		exportImage(options: any): JQueryPromise<any>;
-		exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
-		exportSVG(options: any): JQueryPromise<any>;
-		imageDataURL(): string;
-		redraw(): void;
-		resize(force?: boolean): void;
-		setOptions(options: any): void;
-		svg(): string;
-		value(options: string): void;
-		value(options: number): void
-	}
-
-	declare class RadialGauge extends undefined$Widget {
-		fn: RadialGauge;
-		options: RadialGaugeOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): RadialGauge;
-		constructor(element: Element, options?: RadialGaugeOptions): this;
-		allValues(values?: any): any;
-		destroy(): void;
-		exportImage(options: any): JQueryPromise<any>;
-		exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
-		exportSVG(options: any): JQueryPromise<any>;
-		redraw(): void;
-		resize(force?: boolean): void;
-		svg(): void;
-		imageDataURL(): string;
-		value(): void
-	}
-
-	declare class Sparkline extends undefined$Widget {
-		fn: Sparkline;
-		options: SparklineOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Sparkline;
-		constructor(element: Element, options?: SparklineOptions): this;
-		destroy(): void;
-		exportImage(options: any): JQueryPromise<any>;
-		exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
-		exportSVG(options: any): JQueryPromise<any>;
-		refresh(): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		setOptions(options: any): void;
-		svg(): string;
-		imageDataURL(): string
-	}
-
-	declare class StockChart extends undefined$Widget {
-		fn: StockChart;
-		options: StockChartOptions;
-		dataSource: kendo.data.DataSource;
-		navigator: kendo.dataviz.Navigator;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): StockChart;
-		constructor(element: Element, options?: StockChartOptions): this;
-		destroy(): void;
-		exportImage(options: any): JQueryPromise<any>;
-		exportPDF(options?: kendo.drawing.PDFOptions): JQueryPromise<any>;
-		exportSVG(options: any): JQueryPromise<any>;
-		redraw(): void;
-		refresh(): void;
-		resize(force?: boolean): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		setOptions(options: any): void;
-		svg(): string;
-		imageDataURL(): string
-	}
-
-	declare class TreeMap extends undefined$Widget {
-		fn: TreeMap;
-		options: TreeMapOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): TreeMap;
-		constructor(element: Element, options?: TreeMapOptions): this
-	}
-
-	declare class ActionSheet extends undefined$Widget {
-		fn: ActionSheet;
-		options: ActionSheetOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ActionSheet;
-		constructor(element: Element, options?: ActionSheetOptions): this;
-		close(): void;
-		destroy(): void;
-		open(target: JQuery, context: any): void
-	}
-
-	declare class BackButton extends undefined$Widget {
-		fn: BackButton;
-		options: BackButtonOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): BackButton;
-		constructor(element: Element, options?: BackButtonOptions): this;
-		destroy(): void
-	}
-
-	declare class Button extends undefined$Widget {
-		fn: Button;
-		options: ButtonOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Button;
-		constructor(element: Element, options?: ButtonOptions): this;
-		badge(value: string): string;
-		badge(value: boolean): string;
-		destroy(): void;
-		enable(enable: boolean): void
-	}
-
-	declare class ButtonGroup extends undefined$Widget {
-		fn: ButtonGroup;
-		options: ButtonGroupOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ButtonGroup;
-		constructor(element: Element, options?: ButtonGroupOptions): this;
-		badge(button: string, value: string): string;
-		badge(button: string, value: boolean): string;
-		badge(button: number, value: string): string;
-		badge(button: number, value: boolean): string;
-		current(): JQuery;
-		destroy(): void;
-		enable(enable: boolean): void;
-		select(li: JQuery): void;
-		select(li: number): void
-	}
-
-	declare class Collapsible extends undefined$Widget {
-		fn: Collapsible;
-		options: CollapsibleOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Collapsible;
-		constructor(element: Element, options?: CollapsibleOptions): this;
-		collapse(instant: boolean): void;
-		destroy(): void;
-		expand(instant?: boolean): void;
-		resize(): void;
-		toggle(instant?: boolean): void
-	}
-
-	declare class DetailButton extends undefined$Widget {
-		fn: DetailButton;
-		options: DetailButtonOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): DetailButton;
-		constructor(element: Element, options?: DetailButtonOptions): this;
-		destroy(): void
-	}
-
-	declare class Drawer extends undefined$Widget {
-		fn: Drawer;
-		options: DrawerOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Drawer;
-		constructor(element: Element, options?: DrawerOptions): this;
-		destroy(): void;
-		hide(): void;
-		show(): void
-	}
-
-	declare class Layout extends undefined$Widget {
-		fn: Layout;
-		options: LayoutOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Layout;
-		constructor(element: Element, options?: LayoutOptions): this
-	}
-
-	declare class ListView extends undefined$Widget {
-		fn: ListView;
-		options: ListViewOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ListView;
-		constructor(element: Element, options?: ListViewOptions): this;
-		append(dataItems: any): void;
-		prepend(dataItems: any): void;
-		replace(dataItems: any): void;
-		remove(dataItems: any): void;
-		setDataItem(item: JQuery, dataItem: kendo.data.Model): void;
-		destroy(): void;
-		items(): JQuery;
-		refresh(): void;
-		setDataSource(dataSource: kendo.data.DataSource): void
-	}
-
-	declare class Loader extends undefined$Widget {
-		fn: Loader;
-		options: LoaderOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Loader;
-		constructor(element: Element, options?: LoaderOptions): this;
-		hide(): void;
-		show(): void
-	}
-
-	declare class ModalView extends undefined$Widget {
-		fn: ModalView;
-		options: ModalViewOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ModalView;
-		constructor(element: Element, options?: ModalViewOptions): this;
-		close(): void;
-		destroy(): void;
-		open(target?: JQuery): void
-	}
-
-	declare class NavBar extends undefined$Widget {
-		fn: NavBar;
-		options: NavBarOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): NavBar;
-		constructor(element: Element, options?: NavBarOptions): this;
-		destroy(): void;
-		title(value: string): void
-	}
-
-	declare class Pane extends undefined$Widget {
-		fn: Pane;
-		options: PaneOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Pane;
-		constructor(element: Element, options?: PaneOptions): this;
-		destroy(): void;
-		hideLoading(): void;
-		navigate(url: string, transition: string): void;
-		replace(url: string, transition: string): void;
-		showLoading(): void;
-		view(): kendo.mobile.ui.View
-	}
-
-	declare class PopOver extends undefined$Widget {
-		fn: PopOver;
-		options: PopOverOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): PopOver;
-		constructor(element: Element, options?: PopOverOptions): this;
-		close(): void;
-		destroy(): void;
-		open(target: JQuery): void
-	}
-
-	declare class ScrollView extends undefined$Widget {
-		fn: ScrollView;
-		options: ScrollViewOptions;
-		dataSource: kendo.data.DataSource;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): ScrollView;
-		constructor(element: Element, options?: ScrollViewOptions): this;
-		content(content: string): void;
-		content(content: JQuery): void;
-		destroy(): void;
-		next(): void;
-		prev(): void;
-		refresh(): void;
-		scrollTo(page: number, instant: boolean): void;
-		setDataSource(dataSource: kendo.data.DataSource): void;
-		value(dataItem: any): any
-	}
-
-	declare class Scroller extends undefined$Widget {
-		fn: Scroller;
-		options: ScrollerOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Scroller;
-		constructor(element: Element, options?: ScrollerOptions): this;
-		animatedScrollTo(x: number, y: number): void;
-		contentResized(): void;
-		destroy(): void;
-		disable(): void;
-		enable(): void;
-		height(): number;
-		pullHandled(): void;
-		reset(): void;
-		scrollHeight(): void;
-		scrollTo(x: number, y: number): void;
-		scrollWidth(): void;
-		zoomOut(): void
-	}
-
-	declare class SplitView extends undefined$Widget {
-		fn: SplitView;
-		options: SplitViewOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): SplitView;
-		constructor(element: Element, options?: SplitViewOptions): this;
-		destroy(): void;
-		expandPanes(): void;
-		collapsePanes(): void
-	}
-
-	declare class Switch extends undefined$Widget {
-		fn: Switch;
-		options: SwitchOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): Switch;
-		constructor(element: Element, options?: SwitchOptions): this;
-		check(): boolean;
-		check(check: boolean): void;
-		destroy(): void;
-		enable(enable: boolean): void;
-		refresh(): void;
-		toggle(): void
-	}
-
-	declare class TabStrip extends undefined$Widget {
-		fn: TabStrip;
-		options: TabStripOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): TabStrip;
-		constructor(element: Element, options?: TabStripOptions): this;
-		badge(tab: string, value: string): string;
-		badge(tab: string, value: boolean): string;
-		badge(tab: number, value: string): string;
-		badge(tab: number, value: boolean): string;
-		currentItem(): JQuery;
-		destroy(): void;
-		switchTo(url: string): void;
-		switchTo(url: number): void;
-		switchByFullUrl(url: string): void;
-		clear(): void
-	}
-
-	declare class View extends undefined$Widget {
-		fn: View;
-		options: ViewOptions;
-		element: JQuery;
-		wrapper: JQuery;
-		extend(proto: Object): View;
-		constructor(element: Element, options?: ViewOptions): this;
-		contentElement(): void;
-		destroy(): void;
-		enable(enable: boolean): void
-	}
-
-	
-}
-
-declare module 'mobile' {
-		declare interface ApplicationOptions {
-		browserHistory?: boolean,
-		hideAddressBar?: boolean,
-		updateDocumentTitle?: boolean,
-		initial?: string,
-		layout?: string,
-		loading?: string,
-		modelScope?: Object,
-		platform?: string,
-		retina?: boolean,
-		serverNavigation?: boolean,
-		skin?: string,
-		statusBarStyle?: string,
-		transition?: string,
-		useNativeScrolling?: boolean,
-		init(e: ApplicationEvent): void
-	}
-
-	declare interface ApplicationEvent {
-		sender: Application
-	}
-
-	declare function init(selector: string): void
-
-	declare function init(element: JQuery): void
-
-	declare function init(element: Element): void
-
-	declare class Application extends Observable {
-		options: ApplicationOptions;
-		router: kendo.Router;
-		pane: kendo.mobile.ui.Pane;
-		constructor(element?: any, options?: ApplicationOptions): this;
-		init(element?: any, options?: ApplicationOptions): void;
-		hideLoading(): void;
-		navigate(url: string, transition?: string): void;
-		replace(url: string, transition?: string): void;
-		scroller(): kendo.mobile.ui.Scroller;
-		showLoading(): void;
-		view(): kendo.mobile.ui.View
-	}
-
-	
-}
-
-declare module 'layer' {
-				declare class Shape  {
-		
-	}
-
-	
-}
-
-declare module 'pdf' {
-			declare function saveAs(
-		group: kendo.drawing.Group, fileName: string, proxyUrl?: string, callback?: Function
-	): void
-
-	declare function defineFont(map: any): void
-
-		
-}
-
-declare module 'drawing' {
-		declare interface ArcOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface ArcEvent {
-		sender: Arc,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface CircleOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface CircleEvent {
-		sender: Circle,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ElementOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		opacity?: number,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface ElementEvent {
-		sender: Element,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface FillOptions {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface GradientOptions {
-		name?: string,
-		stops?: any
-	}
-
-	declare interface GradientEvent {
-		sender: Gradient,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface GradientStopOptions {
-		name?: string,
-		offset?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface GradientStopEvent {
-		sender: GradientStop,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface GroupOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		opacity?: number,
-		pdf?: kendo.drawing.PDFOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface GroupEvent {
-		sender: Group,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ImageOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		opacity?: number,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface ImageEvent {
-		sender: Image,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface LayoutOptions {
-		name?: string,
-		alignContent?: string,
-		alignItems?: string,
-		justifyContent?: string,
-		lineSpacing?: number,
-		spacing?: number,
-		orientation?: string,
-		wrap?: boolean
-	}
-
-	declare interface LayoutEvent {
-		sender: Layout,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface LinearGradientOptions {
-		name?: string,
-		stops?: any
-	}
-
-	declare interface LinearGradientEvent {
-		sender: LinearGradient,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MultiPathOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface MultiPathEvent {
-		sender: MultiPath,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface OptionsStoreOptions {
-		name?: string
-	}
-
-	declare interface OptionsStoreEvent {
-		sender: OptionsStore,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PDFOptions {
-		creator?: string,
-		date?: Date,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: any,
-		paperSize?: any,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface PathOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface PathEvent {
-		sender: Path,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RadialGradientOptions {
-		name?: string,
-		center?: any | kendo.geometry.Point,
-		radius?: number,
-		stops?: any
-	}
-
-	declare interface RadialGradientEvent {
-		sender: RadialGradient,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RectOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface RectEvent {
-		sender: Rect,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SegmentOptions {
-		name?: string
-	}
-
-	declare interface SegmentEvent {
-		sender: Segment,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface StrokeOptions {
-		color?: string,
-		dashType?: string,
-		lineCap?: string,
-		lineJoin?: string,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface SurfaceTooltipAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface SurfaceTooltipAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface SurfaceTooltipAnimation {
-		close?: SurfaceTooltipAnimationClose,
-		open?: SurfaceTooltipAnimationOpen
-	}
-
-	declare interface SurfaceTooltip {
-		animation?: boolean | SurfaceTooltipAnimation,
-		appendTo?: string | JQuery
-	}
-
-	declare interface SurfaceOptions {
-		name?: string,
-		type?: string,
-		height?: string,
-		width?: string,
-		tooltip?: SurfaceTooltip,
-		click(e: SurfaceClickEvent): void,
-		mouseenter(e: SurfaceMouseenterEvent): void,
-		mouseleave(e: SurfaceMouseleaveEvent): void,
-		tooltipClose(e: SurfaceTooltipCloseEvent): void,
-		tooltipOpen(e: SurfaceTooltipOpenEvent): void
-	}
-
-	declare interface SurfaceEvent {
-		sender: Surface,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SurfaceClickEvent {
-		element?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface SurfaceMouseenterEvent {
-		element?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface SurfaceMouseleaveEvent {
-		element?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface SurfaceTooltipCloseEvent {
-		element?: kendo.drawing.Element,
-		target?: kendo.drawing.Element
-	}
-
-	declare interface SurfaceTooltipOpenEvent {
-		element?: kendo.drawing.Element,
-		target?: kendo.drawing.Element
-	}
-
-	declare interface TextOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		font?: string,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface TextEvent {
-		sender: Text,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TooltipOptions {
-		autoHide?: boolean,
-		content?: string | Function,
-		position?: string,
-		height?: number | string,
-		hideDelay?: number,
-		offset?: number,
-		shared?: boolean,
-		showAfter?: number,
-		showOn?: string,
-		width?: number | string
-	}
-
-	declare interface ArcOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface ArcEvent {
-		sender: Arc,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface CircleOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface CircleEvent {
-		sender: Circle,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ElementOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		opacity?: number,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface ElementEvent {
-		sender: Element,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface FillOptions {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface GradientOptions {
-		name?: string,
-		stops?: any
-	}
-
-	declare interface GradientEvent {
-		sender: Gradient,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface GradientStopOptions {
-		name?: string,
-		offset?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface GradientStopEvent {
-		sender: GradientStop,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface GroupOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		opacity?: number,
-		pdf?: kendo.drawing.PDFOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface GroupEvent {
-		sender: Group,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ImageOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		opacity?: number,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface ImageEvent {
-		sender: Image,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface LayoutOptions {
-		name?: string,
-		alignContent?: string,
-		alignItems?: string,
-		justifyContent?: string,
-		lineSpacing?: number,
-		spacing?: number,
-		orientation?: string,
-		wrap?: boolean
-	}
-
-	declare interface LayoutEvent {
-		sender: Layout,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface LinearGradientOptions {
-		name?: string,
-		stops?: any
-	}
-
-	declare interface LinearGradientEvent {
-		sender: LinearGradient,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MultiPathOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface MultiPathEvent {
-		sender: MultiPath,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface OptionsStoreOptions {
-		name?: string
-	}
-
-	declare interface OptionsStoreEvent {
-		sender: OptionsStore,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PDFOptions {
-		creator?: string,
-		date?: Date,
-		keywords?: string,
-		landscape?: boolean,
-		margin?: any,
-		paperSize?: any,
-		subject?: string,
-		title?: string
-	}
-
-	declare interface PathOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface PathEvent {
-		sender: Path,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RadialGradientOptions {
-		name?: string,
-		center?: any | kendo.geometry.Point,
-		radius?: number,
-		stops?: any
-	}
-
-	declare interface RadialGradientEvent {
-		sender: RadialGradient,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RectOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface RectEvent {
-		sender: Rect,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SegmentOptions {
-		name?: string
-	}
-
-	declare interface SegmentEvent {
-		sender: Segment,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface StrokeOptions {
-		color?: string,
-		dashType?: string,
-		lineCap?: string,
-		lineJoin?: string,
-		opacity?: number,
-		width?: number
-	}
-
-	declare interface SurfaceTooltipAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface SurfaceTooltipAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface SurfaceTooltipAnimation {
-		close?: SurfaceTooltipAnimationClose,
-		open?: SurfaceTooltipAnimationOpen
-	}
-
-	declare interface SurfaceTooltip {
-		animation?: boolean | SurfaceTooltipAnimation,
-		appendTo?: string | JQuery
-	}
-
-	declare interface SurfaceOptions {
-		name?: string,
-		type?: string,
-		height?: string,
-		width?: string,
-		tooltip?: SurfaceTooltip,
-		click(e: SurfaceClickEvent): void,
-		mouseenter(e: SurfaceMouseenterEvent): void,
-		mouseleave(e: SurfaceMouseleaveEvent): void,
-		tooltipClose(e: SurfaceTooltipCloseEvent): void,
-		tooltipOpen(e: SurfaceTooltipOpenEvent): void
-	}
-
-	declare interface SurfaceEvent {
-		sender: Surface,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SurfaceClickEvent {
-		element?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface SurfaceMouseenterEvent {
-		element?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface SurfaceMouseleaveEvent {
-		element?: kendo.drawing.Element,
-		originalEvent?: any
-	}
-
-	declare interface SurfaceTooltipCloseEvent {
-		element?: kendo.drawing.Element,
-		target?: kendo.drawing.Element
-	}
-
-	declare interface SurfaceTooltipOpenEvent {
-		element?: kendo.drawing.Element,
-		target?: kendo.drawing.Element
-	}
-
-	declare interface TextOptions {
-		name?: string,
-		clip?: kendo.drawing.Path,
-		cursor?: string,
-		fill?: kendo.drawing.FillOptions,
-		font?: string,
-		opacity?: number,
-		stroke?: kendo.drawing.StrokeOptions,
-		tooltip?: kendo.drawing.TooltipOptions,
-		transform?: kendo.geometry.Transformation,
-		visible?: boolean
-	}
-
-	declare interface TextEvent {
-		sender: Text,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TooltipOptions {
-		autoHide?: boolean,
-		content?: string | Function,
-		position?: string,
-		height?: number | string,
-		hideDelay?: number,
-		offset?: number,
-		shared?: boolean,
-		showAfter?: number,
-		showOn?: string,
-		width?: number | string
-	}
-
-	declare function align(elements: any, rect: kendo.geometry.Rect, alignment: string): void
-
-	declare function drawDOM(element: JQuery, options: any): JQueryPromise<any>
-
-	declare function exportImage(group: kendo.drawing.Group, options: any): JQueryPromise<any>
-
-	declare function exportPDF(
-		group: kendo.drawing.Group, options: kendo.drawing.PDFOptions
-	): JQueryPromise<any>
-
-	declare function exportSVG(group: kendo.drawing.Group, options: any): JQueryPromise<any>
-
-	declare function fit(element: kendo.drawing.Element, rect: kendo.geometry.Rect): void
-
-	declare function stack(elements: any): void
-
-	declare function vAlign(elements: any, rect: kendo.geometry.Rect, alignment: string): void
-
-	declare function vStack(elements: any): void
-
-	declare function vWrap(elements: any, rect: kendo.geometry.Rect): any
-
-	declare function wrap(elements: any, rect: kendo.geometry.Rect): any
-
-	declare class Arc extends undefined$Element {
-		options: ArcOptions;
-		constructor(geometry: kendo.geometry.Arc, options?: ArcOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		geometry(): kendo.geometry.Arc;
-		geometry(value: kendo.geometry.Arc): void;
-		fill(color: string, opacity?: number): kendo.drawing.Arc;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Arc;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Circle extends undefined$Element {
-		options: CircleOptions;
-		constructor(geometry: kendo.geometry.Circle, options?: CircleOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		geometry(): kendo.geometry.Circle;
-		geometry(value: kendo.geometry.Circle): void;
-		fill(color: string, opacity?: number): kendo.drawing.Circle;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Circle;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Element extends kendo$Class {
-		options: ElementOptions;
-		parent: kendo.drawing.Group;
-		constructor(options?: ElementOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		opacity(): number;
-		opacity(opacity: number): void;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Gradient extends kendo$Class {
-		options: GradientOptions;
-		stops: any;
-		constructor(options?: GradientOptions): this;
-		addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
-		removeStop(stop: kendo.drawing.GradientStop): void
-	}
-
-	declare class GradientStop extends kendo$Class {
-		options: GradientStopOptions;
-		constructor(options?: GradientStopOptions): this
-	}
-
-	declare class Group extends undefined$Element {
-		options: GroupOptions;
-		children: any;
-		constructor(options?: GroupOptions): this;
-		append(element: kendo.drawing.Element): void;
-		clear(): void;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		insert(position: number, element: kendo.drawing.Element): void;
-		opacity(): number;
-		opacity(opacity: number): void;
-		remove(element: kendo.drawing.Element): void;
-		removeAt(index: number): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Image extends undefined$Element {
-		options: ImageOptions;
-		constructor(src: string, rect: kendo.geometry.Rect): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		opacity(): number;
-		opacity(opacity: number): void;
-		src(): string;
-		src(value: string): void;
-		rect(): kendo.geometry.Rect;
-		rect(value: kendo.geometry.Rect): void;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Layout extends undefined$Group {
-		options: LayoutOptions;
-		constructor(rect: kendo.geometry.Rect, options?: LayoutOptions): this;
-		rect(): kendo.geometry.Rect;
-		rect(rect: kendo.geometry.Rect): void;
-		reflow(): void
-	}
-
-	declare class LinearGradient extends undefined$Gradient {
-		options: LinearGradientOptions;
-		stops: any;
-		constructor(options?: LinearGradientOptions): this;
-		addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
-		end(): kendo.geometry.Point;
-		end(end: any): void;
-		end(end: kendo.geometry.Point): void;
-		start(): kendo.geometry.Point;
-		start(start: any): void;
-		start(start: kendo.geometry.Point): void;
-		removeStop(stop: kendo.drawing.GradientStop): void
-	}
-
-	declare class MultiPath extends undefined$Element {
-		options: MultiPathOptions;
-		paths: any;
-		constructor(options?: MultiPathOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		close(): kendo.drawing.MultiPath;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		curveTo(controlOut: any, controlIn: any, endPoint: any): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: any, controlIn: any, endPoint: kendo.geometry.Point
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: any, controlIn: kendo.geometry.Point, endPoint: any
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: any, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: any, endPoint: any
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: any, endPoint: kendo.geometry.Point
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: any
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point
-	): kendo.drawing.MultiPath;
-		fill(color: string, opacity?: number): kendo.drawing.MultiPath;
-		lineTo(x: number, y?: number): kendo.drawing.MultiPath;
-		lineTo(x: any, y?: number): kendo.drawing.MultiPath;
-		lineTo(x: kendo.geometry.Point, y?: number): kendo.drawing.MultiPath;
-		moveTo(x: number, y?: number): kendo.drawing.MultiPath;
-		moveTo(x: any, y?: number): kendo.drawing.MultiPath;
-		moveTo(x: kendo.geometry.Point, y?: number): kendo.drawing.MultiPath;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.MultiPath;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class OptionsStore extends kendo$Class {
-		options: OptionsStoreOptions;
-		observer: any;
-		constructor(options?: OptionsStoreOptions): this;
-		get(field: string): any;
-		set(field: string, value: any): void
-	}
-
-	declare class Path extends undefined$Element {
-		options: PathOptions;
-		segments: any;
-		constructor(options?: PathOptions): this;
-		fromPoints(points: any): kendo.drawing.Path;
-		fromRect(rect: kendo.geometry.Rect): kendo.drawing.Path;
-		parse(svgPath: string, options?: any): kendo.drawing.Path;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		close(): kendo.drawing.Path;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		curveTo(controlOut: any, controlIn: any, endPoint: any): kendo.drawing.Path;
-		curveTo(
-		controlOut: any, controlIn: any, endPoint: kendo.geometry.Point
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: any, controlIn: kendo.geometry.Point, endPoint: any
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: any, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: any, endPoint: any
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: any, endPoint: kendo.geometry.Point
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: any
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point
-	): kendo.drawing.Path;
-		fill(color: string, opacity?: number): kendo.drawing.Path;
-		lineTo(x: number, y?: number): kendo.drawing.Path;
-		lineTo(x: any, y?: number): kendo.drawing.Path;
-		lineTo(x: kendo.geometry.Point, y?: number): kendo.drawing.Path;
-		moveTo(x: number, y?: number): kendo.drawing.Path;
-		moveTo(x: any, y?: number): kendo.drawing.Path;
-		moveTo(x: kendo.geometry.Point, y?: number): kendo.drawing.Path;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Path;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class RadialGradient extends undefined$Gradient {
-		options: RadialGradientOptions;
-		stops: any;
-		constructor(options?: RadialGradientOptions): this;
-		addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
-		center(): kendo.geometry.Point;
-		center(center: any): void;
-		center(center: kendo.geometry.Point): void;
-		radius(): number;
-		radius(value: number): void;
-		removeStop(stop: kendo.drawing.GradientStop): void
-	}
-
-	declare class Rect extends undefined$Element {
-		options: RectOptions;
-		constructor(geometry: kendo.geometry.Rect, options?: RectOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		geometry(): kendo.geometry.Rect;
-		geometry(value: kendo.geometry.Rect): void;
-		fill(color: string, opacity?: number): kendo.drawing.Rect;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Rect;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Segment extends kendo$Class {
-		options: SegmentOptions;
-		constructor(anchor: kendo.geometry.Point, controlIn: kendo.geometry.Point, controlOut: kendo.geometry.Point): this;
-		anchor(): kendo.geometry.Point;
-		anchor(value: kendo.geometry.Point): void;
-		controlIn(): kendo.geometry.Point;
-		controlIn(value: kendo.geometry.Point): void;
-		controlOut(): kendo.geometry.Point;
-		controlOut(value: kendo.geometry.Point): void
-	}
-
-	declare class Surface extends kendo$Observable {
-		options: SurfaceOptions;
-		constructor(options?: SurfaceOptions): this;
-		create(element: JQuery, options?: any): kendo.drawing.Surface;
-		create(element: Element, options?: any): kendo.drawing.Surface;
-		clear(): void;
-		draw(element: kendo.drawing.Element): void;
-		eventTarget(e: any): kendo.drawing.Element;
-		hideTooltip(): void;
-		resize(force?: boolean): void;
-		showTooltip(element: kendo.drawing.Element, options?: any): void
-	}
-
-	declare class Text extends undefined$Element {
-		options: TextOptions;
-		constructor(content: string, position: kendo.geometry.Point, options?: TextOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		content(): string;
-		content(value: string): void;
-		fill(color: string, opacity?: number): kendo.drawing.Text;
-		opacity(): number;
-		opacity(opacity: number): void;
-		position(): kendo.geometry.Point;
-		position(value: kendo.geometry.Point): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Text;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Arc extends undefined$Element {
-		options: ArcOptions;
-		constructor(geometry: kendo.geometry.Arc, options?: ArcOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		geometry(): kendo.geometry.Arc;
-		geometry(value: kendo.geometry.Arc): void;
-		fill(color: string, opacity?: number): kendo.drawing.Arc;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Arc;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Circle extends undefined$Element {
-		options: CircleOptions;
-		constructor(geometry: kendo.geometry.Circle, options?: CircleOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		geometry(): kendo.geometry.Circle;
-		geometry(value: kendo.geometry.Circle): void;
-		fill(color: string, opacity?: number): kendo.drawing.Circle;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Circle;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Element extends kendo$Class {
-		options: ElementOptions;
-		parent: kendo.drawing.Group;
-		constructor(options?: ElementOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		opacity(): number;
-		opacity(opacity: number): void;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Gradient extends kendo$Class {
-		options: GradientOptions;
-		stops: any;
-		constructor(options?: GradientOptions): this;
-		addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
-		removeStop(stop: kendo.drawing.GradientStop): void
-	}
-
-	declare class GradientStop extends kendo$Class {
-		options: GradientStopOptions;
-		constructor(options?: GradientStopOptions): this
-	}
-
-	declare class Group extends undefined$Element {
-		options: GroupOptions;
-		children: any;
-		constructor(options?: GroupOptions): this;
-		append(element: kendo.drawing.Element): void;
-		clear(): void;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		insert(position: number, element: kendo.drawing.Element): void;
-		opacity(): number;
-		opacity(opacity: number): void;
-		remove(element: kendo.drawing.Element): void;
-		removeAt(index: number): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Image extends undefined$Element {
-		options: ImageOptions;
-		constructor(src: string, rect: kendo.geometry.Rect): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		opacity(): number;
-		opacity(opacity: number): void;
-		src(): string;
-		src(value: string): void;
-		rect(): kendo.geometry.Rect;
-		rect(value: kendo.geometry.Rect): void;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Layout extends undefined$Group {
-		options: LayoutOptions;
-		constructor(rect: kendo.geometry.Rect, options?: LayoutOptions): this;
-		rect(): kendo.geometry.Rect;
-		rect(rect: kendo.geometry.Rect): void;
-		reflow(): void
-	}
-
-	declare class LinearGradient extends undefined$Gradient {
-		options: LinearGradientOptions;
-		stops: any;
-		constructor(options?: LinearGradientOptions): this;
-		addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
-		end(): kendo.geometry.Point;
-		end(end: any): void;
-		end(end: kendo.geometry.Point): void;
-		start(): kendo.geometry.Point;
-		start(start: any): void;
-		start(start: kendo.geometry.Point): void;
-		removeStop(stop: kendo.drawing.GradientStop): void
-	}
-
-	declare class MultiPath extends undefined$Element {
-		options: MultiPathOptions;
-		paths: any;
-		constructor(options?: MultiPathOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		close(): kendo.drawing.MultiPath;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		curveTo(controlOut: any, controlIn: any, endPoint: any): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: any, controlIn: any, endPoint: kendo.geometry.Point
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: any, controlIn: kendo.geometry.Point, endPoint: any
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: any, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: any, endPoint: any
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: any, endPoint: kendo.geometry.Point
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: any
-	): kendo.drawing.MultiPath;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point
-	): kendo.drawing.MultiPath;
-		fill(color: string, opacity?: number): kendo.drawing.MultiPath;
-		lineTo(x: number, y?: number): kendo.drawing.MultiPath;
-		lineTo(x: any, y?: number): kendo.drawing.MultiPath;
-		lineTo(x: kendo.geometry.Point, y?: number): kendo.drawing.MultiPath;
-		moveTo(x: number, y?: number): kendo.drawing.MultiPath;
-		moveTo(x: any, y?: number): kendo.drawing.MultiPath;
-		moveTo(x: kendo.geometry.Point, y?: number): kendo.drawing.MultiPath;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.MultiPath;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class OptionsStore extends kendo$Class {
-		options: OptionsStoreOptions;
-		observer: any;
-		constructor(options?: OptionsStoreOptions): this;
-		get(field: string): any;
-		set(field: string, value: any): void
-	}
-
-	declare class Path extends undefined$Element {
-		options: PathOptions;
-		segments: any;
-		constructor(options?: PathOptions): this;
-		fromPoints(points: any): kendo.drawing.Path;
-		fromRect(rect: kendo.geometry.Rect): kendo.drawing.Path;
-		parse(svgPath: string, options?: any): kendo.drawing.Path;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		close(): kendo.drawing.Path;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		curveTo(controlOut: any, controlIn: any, endPoint: any): kendo.drawing.Path;
-		curveTo(
-		controlOut: any, controlIn: any, endPoint: kendo.geometry.Point
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: any, controlIn: kendo.geometry.Point, endPoint: any
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: any, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: any, endPoint: any
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: any, endPoint: kendo.geometry.Point
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: any
-	): kendo.drawing.Path;
-		curveTo(
-		controlOut: kendo.geometry.Point, controlIn: kendo.geometry.Point, endPoint: kendo.geometry.Point
-	): kendo.drawing.Path;
-		fill(color: string, opacity?: number): kendo.drawing.Path;
-		lineTo(x: number, y?: number): kendo.drawing.Path;
-		lineTo(x: any, y?: number): kendo.drawing.Path;
-		lineTo(x: kendo.geometry.Point, y?: number): kendo.drawing.Path;
-		moveTo(x: number, y?: number): kendo.drawing.Path;
-		moveTo(x: any, y?: number): kendo.drawing.Path;
-		moveTo(x: kendo.geometry.Point, y?: number): kendo.drawing.Path;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Path;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class RadialGradient extends undefined$Gradient {
-		options: RadialGradientOptions;
-		stops: any;
-		constructor(options?: RadialGradientOptions): this;
-		addStop(offset: number, color: string, opacity: number): kendo.drawing.GradientStop;
-		center(): kendo.geometry.Point;
-		center(center: any): void;
-		center(center: kendo.geometry.Point): void;
-		radius(): number;
-		radius(value: number): void;
-		removeStop(stop: kendo.drawing.GradientStop): void
-	}
-
-	declare class Rect extends undefined$Element {
-		options: RectOptions;
-		constructor(geometry: kendo.geometry.Rect, options?: RectOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		geometry(): kendo.geometry.Rect;
-		geometry(value: kendo.geometry.Rect): void;
-		fill(color: string, opacity?: number): kendo.drawing.Rect;
-		opacity(): number;
-		opacity(opacity: number): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Rect;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Segment extends kendo$Class {
-		options: SegmentOptions;
-		constructor(anchor: kendo.geometry.Point, controlIn: kendo.geometry.Point, controlOut: kendo.geometry.Point): this;
-		anchor(): kendo.geometry.Point;
-		anchor(value: kendo.geometry.Point): void;
-		controlIn(): kendo.geometry.Point;
-		controlIn(value: kendo.geometry.Point): void;
-		controlOut(): kendo.geometry.Point;
-		controlOut(value: kendo.geometry.Point): void
-	}
-
-	declare class Surface extends kendo$Observable {
-		options: SurfaceOptions;
-		constructor(options?: SurfaceOptions): this;
-		create(element: JQuery, options?: any): kendo.drawing.Surface;
-		create(element: Element, options?: any): kendo.drawing.Surface;
-		clear(): void;
-		draw(element: kendo.drawing.Element): void;
-		eventTarget(e: any): kendo.drawing.Element;
-		hideTooltip(): void;
-		resize(force?: boolean): void;
-		showTooltip(element: kendo.drawing.Element, options?: any): void
-	}
-
-	declare class Text extends undefined$Element {
-		options: TextOptions;
-		constructor(content: string, position: kendo.geometry.Point, options?: TextOptions): this;
-		bbox(): kendo.geometry.Rect;
-		clip(): kendo.drawing.Path;
-		clip(clip: kendo.drawing.Path): void;
-		clippedBBox(): kendo.geometry.Rect;
-		containsPoint(point: kendo.geometry.Point): boolean;
-		content(): string;
-		content(value: string): void;
-		fill(color: string, opacity?: number): kendo.drawing.Text;
-		opacity(): number;
-		opacity(opacity: number): void;
-		position(): kendo.geometry.Point;
-		position(value: kendo.geometry.Point): void;
-		stroke(color: string, width?: number, opacity?: number): kendo.drawing.Text;
-		transform(): kendo.geometry.Transformation;
-		transform(transform: kendo.geometry.Transformation): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	
-}
-
-declare module 'geometry' {
-		declare interface ArcOptions {
-		name?: string
-	}
-
-	declare interface ArcEvent {
-		sender: Arc,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface CircleOptions {
-		name?: string
-	}
-
-	declare interface CircleEvent {
-		sender: Circle,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MatrixOptions {
-		name?: string
-	}
-
-	declare interface MatrixEvent {
-		sender: Matrix,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PointOptions {
-		name?: string
-	}
-
-	declare interface PointEvent {
-		sender: Point,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RectOptions {
-		name?: string
-	}
-
-	declare interface RectEvent {
-		sender: Rect,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SizeOptions {
-		name?: string
-	}
-
-	declare interface SizeEvent {
-		sender: Size,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TransformationOptions {
-		name?: string
-	}
-
-	declare interface TransformationEvent {
-		sender: Transformation,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ArcOptions {
-		name?: string
-	}
-
-	declare interface ArcEvent {
-		sender: Arc,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface CircleOptions {
-		name?: string
-	}
-
-	declare interface CircleEvent {
-		sender: Circle,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MatrixOptions {
-		name?: string
-	}
-
-	declare interface MatrixEvent {
-		sender: Matrix,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PointOptions {
-		name?: string
-	}
-
-	declare interface PointEvent {
-		sender: Point,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RectOptions {
-		name?: string
-	}
-
-	declare interface RectEvent {
-		sender: Rect,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SizeOptions {
-		name?: string
-	}
-
-	declare interface SizeEvent {
-		sender: Size,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TransformationOptions {
-		name?: string
-	}
-
-	declare interface TransformationEvent {
-		sender: Transformation,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-		declare class Arc extends Observable {
-		options: ArcOptions;
-		anticlockwise: boolean;
-		center: kendo.geometry.Point;
-		endAngle: number;
-		radiusX: number;
-		radiusY: number;
-		startAngle: number;
-		constructor(center: any | kendo.geometry.Point, options?: ArcOptions): this;
-		bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-		getAnticlockwise(): boolean;
-		getCenter(): kendo.geometry.Point;
-		getEndAngle(): number;
-		getRadiusX(): number;
-		getRadiusY(): number;
-		getStartAngle(): number;
-		pointAt(angle: number): kendo.geometry.Point;
-		setAnticlockwise(value: boolean): kendo.geometry.Arc;
-		setCenter(value: kendo.geometry.Point): kendo.geometry.Arc;
-		setEndAngle(value: number): kendo.geometry.Arc;
-		setRadiusX(value: number): kendo.geometry.Arc;
-		setRadiusY(value: number): kendo.geometry.Arc;
-		setStartAngle(value: number): kendo.geometry.Arc
-	}
-
-	declare class Circle extends Observable {
-		options: CircleOptions;
-		center: kendo.geometry.Point;
-		radius: number;
-		constructor(center: any | kendo.geometry.Point, radius: number): this;
-		bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-		clone(): kendo.geometry.Circle;
-		equals(other: kendo.geometry.Circle): boolean;
-		getCenter(): kendo.geometry.Point;
-		getRadius(): number;
-		pointAt(angle: number): kendo.geometry.Point;
-		setCenter(value: kendo.geometry.Point): kendo.geometry.Point;
-		setCenter(value: any): kendo.geometry.Point;
-		setRadius(value: number): kendo.geometry.Circle
-	}
-
-	declare class Matrix extends Observable {
-		options: MatrixOptions;
-		a: number;
-		b: number;
-		c: number;
-		d: number;
-		e: number;
-		f: number;
-		rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
-		scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
-		translate(x: number, y: number): kendo.geometry.Matrix;
-		unit(): kendo.geometry.Matrix;
-		clone(): kendo.geometry.Matrix;
-		equals(other: kendo.geometry.Matrix): boolean;
-		round(digits: number): kendo.geometry.Matrix;
-		multiplyCopy(matrix: kendo.geometry.Matrix): kendo.geometry.Matrix;
-		toArray(digits: number): any;
-		toString(digits: number, separator: string): string
-	}
-
-	declare class Point extends Observable {
-		options: PointOptions;
-		x: number;
-		y: number;
-		constructor(x: number, y: number): this;
-		create(x: number, y: number): kendo.geometry.Point;
-		create(x: any, y: number): kendo.geometry.Point;
-		create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
-		min(): kendo.geometry.Point;
-		max(): kendo.geometry.Point;
-		minPoint(): kendo.geometry.Point;
-		maxPoint(): kendo.geometry.Point;
-		clone(): kendo.geometry.Point;
-		distanceTo(point: kendo.geometry.Point): number;
-		equals(other: kendo.geometry.Point): boolean;
-		getX(): number;
-		getY(): number;
-		move(x: number, y: number): kendo.geometry.Point;
-		rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Point;
-		rotate(angle: number, center: any): kendo.geometry.Point;
-		round(digits: number): kendo.geometry.Point;
-		scale(scaleX: number, scaleY: number): kendo.geometry.Point;
-		scaleCopy(scaleX: number, scaleY: number): kendo.geometry.Point;
-		setX(value: number): kendo.geometry.Point;
-		setY(value: number): kendo.geometry.Point;
-		toArray(digits: number): any;
-		toString(digits: number, separator: string): string;
-		transform(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
-		transformCopy(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
-		translate(dx: number, dy: number): kendo.geometry.Point;
-		translateWith(vector: kendo.geometry.Point): kendo.geometry.Point;
-		translateWith(vector: any): kendo.geometry.Point
-	}
-
-	declare class Rect extends Observable {
-		options: RectOptions;
-		origin: kendo.geometry.Point;
-		size: kendo.geometry.Size;
-		constructor(origin: kendo.geometry.Point | any, size: kendo.geometry.Size | any): this;
-		fromPoints(
-		pointA: kendo.geometry.Point, pointB: kendo.geometry.Point
-	): kendo.geometry.Rect;
-		union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
-		bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-		bottomLeft(): kendo.geometry.Point;
-		bottomRight(): kendo.geometry.Point;
-		center(): kendo.geometry.Point;
-		clone(): kendo.geometry.Rect;
-		equals(other: kendo.geometry.Rect): boolean;
-		getOrigin(): kendo.geometry.Point;
-		getSize(): kendo.geometry.Size;
-		height(): number;
-		setOrigin(value: kendo.geometry.Point): kendo.geometry.Rect;
-		setOrigin(value: any): kendo.geometry.Rect;
-		setSize(value: kendo.geometry.Size): kendo.geometry.Rect;
-		setSize(value: any): kendo.geometry.Rect;
-		topLeft(): kendo.geometry.Point;
-		topRight(): kendo.geometry.Point;
-		width(): number
-	}
-
-	declare class Size extends Observable {
-		options: SizeOptions;
-		width: number;
-		height: number;
-		create(width: number, height: number): kendo.geometry.Size;
-		create(width: any, height: number): kendo.geometry.Size;
-		create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
-		clone(): kendo.geometry.Size;
-		equals(other: kendo.geometry.Size): boolean;
-		getWidth(): number;
-		getHeight(): number;
-		setWidth(value: number): kendo.geometry.Size;
-		setHeight(value: number): kendo.geometry.Size
-	}
-
-	declare class Transformation extends Observable {
-		options: TransformationOptions;
-		clone(): kendo.geometry.Transformation;
-		equals(other: kendo.geometry.Transformation): boolean;
-		matrix(): kendo.geometry.Matrix;
-		multiply(transformation: kendo.geometry.Transformation): kendo.geometry.Transformation;
-		rotate(angle: number, center: any): kendo.geometry.Transformation;
-		rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Transformation;
-		scale(scaleX: number, scaleY: number): kendo.geometry.Transformation;
-		translate(x: number, y: number): kendo.geometry.Transformation
-	}
-
-	declare class Arc extends Observable {
-		options: ArcOptions;
-		anticlockwise: boolean;
-		center: kendo.geometry.Point;
-		endAngle: number;
-		radiusX: number;
-		radiusY: number;
-		startAngle: number;
-		constructor(center: any | kendo.geometry.Point, options?: ArcOptions): this;
-		bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-		getAnticlockwise(): boolean;
-		getCenter(): kendo.geometry.Point;
-		getEndAngle(): number;
-		getRadiusX(): number;
-		getRadiusY(): number;
-		getStartAngle(): number;
-		pointAt(angle: number): kendo.geometry.Point;
-		setAnticlockwise(value: boolean): kendo.geometry.Arc;
-		setCenter(value: kendo.geometry.Point): kendo.geometry.Arc;
-		setEndAngle(value: number): kendo.geometry.Arc;
-		setRadiusX(value: number): kendo.geometry.Arc;
-		setRadiusY(value: number): kendo.geometry.Arc;
-		setStartAngle(value: number): kendo.geometry.Arc
-	}
-
-	declare class Circle extends Observable {
-		options: CircleOptions;
-		center: kendo.geometry.Point;
-		radius: number;
-		constructor(center: any | kendo.geometry.Point, radius: number): this;
-		bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-		clone(): kendo.geometry.Circle;
-		equals(other: kendo.geometry.Circle): boolean;
-		getCenter(): kendo.geometry.Point;
-		getRadius(): number;
-		pointAt(angle: number): kendo.geometry.Point;
-		setCenter(value: kendo.geometry.Point): kendo.geometry.Point;
-		setCenter(value: any): kendo.geometry.Point;
-		setRadius(value: number): kendo.geometry.Circle
-	}
-
-	declare class Matrix extends Observable {
-		options: MatrixOptions;
-		a: number;
-		b: number;
-		c: number;
-		d: number;
-		e: number;
-		f: number;
-		rotate(angle: number, x: number, y: number): kendo.geometry.Matrix;
-		scale(scaleX: number, scaleY: number): kendo.geometry.Matrix;
-		translate(x: number, y: number): kendo.geometry.Matrix;
-		unit(): kendo.geometry.Matrix;
-		clone(): kendo.geometry.Matrix;
-		equals(other: kendo.geometry.Matrix): boolean;
-		round(digits: number): kendo.geometry.Matrix;
-		multiplyCopy(matrix: kendo.geometry.Matrix): kendo.geometry.Matrix;
-		toArray(digits: number): any;
-		toString(digits: number, separator: string): string
-	}
-
-	declare class Point extends Observable {
-		options: PointOptions;
-		x: number;
-		y: number;
-		constructor(x: number, y: number): this;
-		create(x: number, y: number): kendo.geometry.Point;
-		create(x: any, y: number): kendo.geometry.Point;
-		create(x: kendo.geometry.Point, y: number): kendo.geometry.Point;
-		min(): kendo.geometry.Point;
-		max(): kendo.geometry.Point;
-		minPoint(): kendo.geometry.Point;
-		maxPoint(): kendo.geometry.Point;
-		clone(): kendo.geometry.Point;
-		distanceTo(point: kendo.geometry.Point): number;
-		equals(other: kendo.geometry.Point): boolean;
-		getX(): number;
-		getY(): number;
-		move(x: number, y: number): kendo.geometry.Point;
-		rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Point;
-		rotate(angle: number, center: any): kendo.geometry.Point;
-		round(digits: number): kendo.geometry.Point;
-		scale(scaleX: number, scaleY: number): kendo.geometry.Point;
-		scaleCopy(scaleX: number, scaleY: number): kendo.geometry.Point;
-		setX(value: number): kendo.geometry.Point;
-		setY(value: number): kendo.geometry.Point;
-		toArray(digits: number): any;
-		toString(digits: number, separator: string): string;
-		transform(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
-		transformCopy(tansformation: kendo.geometry.Transformation): kendo.geometry.Point;
-		translate(dx: number, dy: number): kendo.geometry.Point;
-		translateWith(vector: kendo.geometry.Point): kendo.geometry.Point;
-		translateWith(vector: any): kendo.geometry.Point
-	}
-
-	declare class Rect extends Observable {
-		options: RectOptions;
-		origin: kendo.geometry.Point;
-		size: kendo.geometry.Size;
-		constructor(origin: kendo.geometry.Point | any, size: kendo.geometry.Size | any): this;
-		fromPoints(
-		pointA: kendo.geometry.Point, pointB: kendo.geometry.Point
-	): kendo.geometry.Rect;
-		union(rectA: kendo.geometry.Rect, rectB: kendo.geometry.Rect): kendo.geometry.Rect;
-		bbox(matrix: kendo.geometry.Matrix): kendo.geometry.Rect;
-		bottomLeft(): kendo.geometry.Point;
-		bottomRight(): kendo.geometry.Point;
-		center(): kendo.geometry.Point;
-		clone(): kendo.geometry.Rect;
-		equals(other: kendo.geometry.Rect): boolean;
-		getOrigin(): kendo.geometry.Point;
-		getSize(): kendo.geometry.Size;
-		height(): number;
-		setOrigin(value: kendo.geometry.Point): kendo.geometry.Rect;
-		setOrigin(value: any): kendo.geometry.Rect;
-		setSize(value: kendo.geometry.Size): kendo.geometry.Rect;
-		setSize(value: any): kendo.geometry.Rect;
-		topLeft(): kendo.geometry.Point;
-		topRight(): kendo.geometry.Point;
-		width(): number
-	}
-
-	declare class Size extends Observable {
-		options: SizeOptions;
-		width: number;
-		height: number;
-		create(width: number, height: number): kendo.geometry.Size;
-		create(width: any, height: number): kendo.geometry.Size;
-		create(width: kendo.geometry.Size, height: number): kendo.geometry.Size;
-		clone(): kendo.geometry.Size;
-		equals(other: kendo.geometry.Size): boolean;
-		getWidth(): number;
-		getHeight(): number;
-		setWidth(value: number): kendo.geometry.Size;
-		setHeight(value: number): kendo.geometry.Size
-	}
-
-	declare class Transformation extends Observable {
-		options: TransformationOptions;
-		clone(): kendo.geometry.Transformation;
-		equals(other: kendo.geometry.Transformation): boolean;
-		matrix(): kendo.geometry.Matrix;
-		multiply(transformation: kendo.geometry.Transformation): kendo.geometry.Transformation;
-		rotate(angle: number, center: any): kendo.geometry.Transformation;
-		rotate(angle: number, center: kendo.geometry.Point): kendo.geometry.Transformation;
-		scale(scaleX: number, scaleY: number): kendo.geometry.Transformation;
-		translate(x: number, y: number): kendo.geometry.Transformation
-	}
-
-	
-}
-
-declare module 'map' {
-		declare interface BingLayerOptions {
-		name?: string,
-		baseUrl?: string,
-		imagerySet?: string
-	}
-
-	declare interface BingLayerEvent {
-		sender: BingLayer,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ExtentOptions {
-		name?: string
-	}
-
-	declare interface ExtentEvent {
-		sender: Extent,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface LayerOptions {
-		name?: string
-	}
-
-	declare interface LayerEvent {
-		sender: Layer,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface LocationOptions {
-		name?: string
-	}
-
-	declare interface LocationEvent {
-		sender: Location,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MarkerTooltipAnimationClose {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MarkerTooltipAnimationOpen {
-		effects?: string,
-		duration?: number
-	}
-
-	declare interface MarkerTooltipAnimation {
-		close?: MarkerTooltipAnimationClose,
-		open?: MarkerTooltipAnimationOpen
-	}
-
-	declare interface MarkerTooltipContent {
-		url?: string
-	}
-
-	declare interface MarkerTooltip {
-		autoHide?: boolean,
-		animation?: MarkerTooltipAnimation,
-		content?: MarkerTooltipContent,
-		template?: string,
-		callout?: boolean,
-		iframe?: boolean,
-		height?: number,
-		width?: number,
-		position?: string,
-		showAfter?: number,
-		showOn?: string
-	}
-
-	declare interface MarkerOptions {
-		name?: string,
-		location?: any | kendo.dataviz.map.Location,
-		shape?: string,
-		title?: string,
-		tooltip?: MarkerTooltip
-	}
-
-	declare interface MarkerEvent {
-		sender: Marker,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface MarkerLayerOptions {
-		name?: string
-	}
-
-	declare interface MarkerLayerEvent {
-		sender: MarkerLayer,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ShapeLayerOptions {
-		name?: string
-	}
-
-	declare interface ShapeLayerEvent {
-		sender: ShapeLayer,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TileLayerOptions {
-		name?: string,
-		urlTemplate?: string,
-		subdomains?: any,
-		tileSize?: number
-	}
-
-	declare interface TileLayerEvent {
-		sender: TileLayer,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-		declare class BingLayer extends undefined$TileLayer {
-		options: BingLayerOptions;
-		map: kendo.dataviz.ui.Map;
-		constructor(map: kendo.dataviz.ui.Map, options?: BingLayerOptions): this;
-		show(): void;
-		hide(): void;
-		imagerySet(): void
-	}
-
-	declare class Extent extends kendo$Class {
-		options: ExtentOptions;
-		nw: kendo.dataviz.map.Location;
-		se: kendo.dataviz.map.Location;
-		constructor(nw: kendo.dataviz.map.Location | any, se: kendo.dataviz.map.Location | any): this;
-		create(
-		a: kendo.dataviz.map.Location, b?: kendo.dataviz.map.Location
-	): kendo.dataviz.map.Extent;
-		create(a: kendo.dataviz.map.Location, b?: any): kendo.dataviz.map.Extent;
-		create(a: any, b?: kendo.dataviz.map.Location): kendo.dataviz.map.Extent;
-		create(a: any, b?: any): kendo.dataviz.map.Extent;
-		contains(location: kendo.dataviz.map.Location): boolean;
-		containsAny(locations: any): boolean;
-		center(): kendo.dataviz.map.Location;
-		include(location: kendo.dataviz.map.Location): void;
-		includeAll(locations: any): void;
-		edges(): any;
-		toArray(): any;
-		overlaps(extent: kendo.dataviz.map.Extent): boolean
-	}
-
-	declare class Layer extends kendo$Class {
-		options: LayerOptions;
-		map: kendo.dataviz.ui.Map;
-		constructor(map: kendo.dataviz.ui.Map, options?: LayerOptions): this;
-		show(): void;
-		hide(): void
-	}
-
-	declare class Location extends kendo$Class {
-		options: LocationOptions;
-		lat: number;
-		lng: number;
-		constructor(lat: number, lng: number): this;
-		create(lat: number, lng?: number): kendo.dataviz.map.Location;
-		create(lat: any, lng?: number): kendo.dataviz.map.Location;
-		create(lat: kendo.dataviz.map.Location, lng?: number): kendo.dataviz.map.Location;
-		fromLngLat(lnglat: any): kendo.dataviz.map.Location;
-		fromLatLng(lnglat: any): kendo.dataviz.map.Location;
-		clone(): kendo.dataviz.map.Location;
-		destination(destination: kendo.dataviz.map.Location, bearing: number): number;
-		distanceTo(distance: number, bearing: number): kendo.dataviz.map.Location;
-		equals(location: kendo.dataviz.map.Location): boolean;
-		round(digits: number): kendo.dataviz.map.Location;
-		toArray(): any;
-		toString(): string;
-		wrap(): kendo.dataviz.map.Location
-	}
-
-	declare class Marker extends Observable {
-		options: MarkerOptions;
-		constructor(options?: MarkerOptions): this;
-		location(): kendo.dataviz.map.Location;
-		location(location: any): void;
-		location(location: kendo.dataviz.map.Location): void
-	}
-
-	declare class MarkerLayer extends undefined$Layer {
-		options: MarkerLayerOptions;
-		map: kendo.dataviz.ui.Map;
-		items: any;
-		constructor(map: kendo.dataviz.ui.Map, options?: MarkerLayerOptions): this;
-		add(marker: kendo.dataviz.map.Marker): void;
-		clear(): void;
-		hide(): void;
-		remove(marker: kendo.dataviz.map.Marker): void;
-		setDataSource(dataSource: any): void;
-		show(): void
-	}
-
-	declare class ShapeLayer extends undefined$Layer {
-		options: ShapeLayerOptions;
-		map: kendo.dataviz.ui.Map;
-		constructor(map: kendo.dataviz.ui.Map, options?: ShapeLayerOptions): this;
-		show(): void;
-		hide(): void;
-		setDataSource(): void
-	}
-
-	declare class TileLayer extends undefined$Layer {
-		options: TileLayerOptions;
-		map: kendo.dataviz.ui.Map;
-		constructor(map: kendo.dataviz.ui.Map, options?: TileLayerOptions): this;
-		show(): void;
-		hide(): void
-	}
-
-	
-}
+// @flow
+/**
+ * Flowtype definitions for kendo-ui
+ * Generated by Flowgen from a Typescript Definition
+ * Flowgen v1.0.0
+ * Author: [Joar Wilk](http://twitter.com/joarwilk)
+ * Repo: http://github.com/joarwilk/flowgen
+ */
 
 declare module 'dataviz' {
-		declare interface ChartAxisOptions {
-		name?: string
-	}
+    declare module 'ui' {
+        declare         function progress(container: JQuery, toggle: boolean): void
+        declare class Widget mixins undefined.Widget {}
+        declare         function plugin(widget: typeof undefined, register?: typeof undefined, prefix?: String): void
+        declare class Draggable mixins undefined.Widget {
+            element: JQuery;
+            currentTarget: JQuery;
+            constructor(element: Element, options?: DraggableOptions): this;
+            options: DraggableOptions
+        }
+        declare interface DraggableEvent {
+            sender?: Draggable
+        }
+        declare class DropTarget mixins undefined.Widget {
+            element: JQuery;
+            constructor(element: Element, options?: DropTargetOptions): this;
+            options: DropTargetOptions;
+            destroyGroup(groupName: string): void
+        }
+        declare interface DropTargetOptions {
+            group?: string,
+                dragenter(e: DropTargetDragenterEvent): void,
+                dragleave(e: DropTargetDragleaveEvent): void,
+                drop(e: DropTargetDropEvent): void
+        }
+        declare interface DropTargetEvent {
+            sender?: DropTarget
+        }
+        declare type DropTargetDragenterEvent = {
+            draggable?: undefined.Draggable
+        } & DropTargetEvent
 
-	declare interface ChartAxisEvent {
-		sender: ChartAxis,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
+        declare type DropTargetDragleaveEvent = {
+            draggable?: undefined.Draggable
+        } & DropTargetEvent
 
-	declare interface ChartPaneOptions {
-		name?: string
-	}
+        declare type DropTargetDropEvent = {
+            draggable?: undefined.Draggable
+        } & DropTargetEvent
 
-	declare interface ChartPaneEvent {
-		sender: ChartPane,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
+        declare class DropTargetArea mixins undefined.Widget {
+            element: JQuery;
+            constructor(element: Element, options?: DropTargetAreaOptions): this;
+            options: DropTargetAreaOptions
+        }
+        declare interface DropTargetAreaOptions {
+            group?: string,
+                filter?: string,
+                dragenter(e: DropTargetAreaDragenterEvent): void,
+                dragleave(e: DropTargetAreaDragleaveEvent): void,
+                drop(e: DropTargetAreaDropEvent): void
+        }
+        declare interface DropTargetAreaEvent {
+            sender: DropTargetArea
+        }
+        declare type DropTargetAreaDragenterEvent = {
+            draggable?: undefined.Draggable,
+            dropTarget?: JQuery,
+            target?: Element
+        } & DropTargetAreaEvent
 
-	declare interface ChartPlotAreaOptions {
-		name?: string
-	}
+        declare type DropTargetAreaDragleaveEvent = {
+            draggable?: undefined.Draggable,
+            dropTarget?: JQuery,
+            target?: Element
+        } & DropTargetAreaEvent
 
-	declare interface ChartPlotAreaEvent {
-		sender: ChartPlotArea,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
+        declare type DropTargetAreaDropEvent = {
+            draggable?: undefined.Draggable,
+            dropTarget?: JQuery,
+            target?: Element
+        } & DropTargetAreaEvent
 
-	declare interface ChartPointOptions {
-		name?: string
-	}
+        declare interface DraggableOptions {
+            axis?: string,
+                autoScroll?: boolean,
+                container?: JQuery,
+                cursorOffset?: any,
+                distance?: number,
+                filter?: string,
+                group?: string,
+                hint?: Function | JQuery,
+                holdToDrag?: boolean,
+                ignore?: string,
+                cancelHold(): void,
+                drag(e: DraggableEvent): void,
+                dragcancel(e: DraggableEvent): void,
+                dragend(e: DraggableEvent): void,
+                dragstart(e: DraggableEvent): void,
+                hold(e: DraggableEvent): void
+        }
+        declare interface GridColumnEditorOptions {
+            field?: string,
+                format?: string,
+                model?: undefined.Model,
+                values?: any[]
+        }
+        declare interface GridColumn {
+            editor(container: JQuery, options: GridColumnEditorOptions): void
+        }
+        declare interface TreeListEditorOptions {
+            field?: string,
+                format?: string,
+                model?: undefined.Model,
+                values?: any[]
+        }
+        declare interface TreeListColumn {
+            editor(container: JQuery, options: TreeListEditorOptions): void
+        }
+        declare interface TouchAxis {
+            location?: number,
+                startLocation?: number,
+                client?: number,
+                delta?: number,
+                velocity?: number
+        }
+        declare interface TouchEventOptions {
+            target?: JQuery,
+                x?: TouchAxis,
+                y?: TouchAxis
+        }
+        declare interface Point {
+            x?: number,
+                y?: number
+        }
+        declare         function registerTheme(name: string, options: any): void
+        declare class AgendaView mixins undefined.SchedulerView {
+            fn: AgendaView;
+            startDate(): Date;
+            endDate(): Date;
+            extend(proto: Object): AgendaView
+        }
+        declare class Alert mixins undefined.Dialog {
+            fn: Alert;
+            options: AlertOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Alert;
+            constructor(element: Element, options?: AlertOptions): this
+        }
+        declare interface AlertMessages {
+            okText?: string
+        }
+        declare interface AlertOptions {
+            name?: string,
+                messages?: AlertMessages
+        }
+        declare interface AlertEvent {
+            sender: Alert,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class AutoComplete mixins undefined.Widget {
+            fn: AutoComplete;
+            options: AutoCompleteOptions;
+            dataSource: undefined.DataSource;
+            list: JQuery;
+            ul: JQuery;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): AutoComplete;
+            constructor(element: Element, options?: AutoCompleteOptions): this;
+            close(): void;
+            dataItem(index: number): any;
+            destroy(): void;
+            enable(enable: boolean): void;
+            focus(): void;
+            items(): any;
+            readonly(readonly: boolean): void;
+            refresh(): void;
+            search(word: string): void;
+            select(item: string): void;
+            select(item: Element): void;
+            select(item: JQuery): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            suggest(value: string): void;
+            value(): string;
+            value(value: string): void
+        }
+        declare interface AutoCompleteAnimationClose {
+            duration?: number,
+                effects?: string
+        }
+        declare interface AutoCompleteAnimationOpen {
+            duration?: number,
+                effects?: string
+        }
+        declare interface AutoCompleteAnimation {
+            close?: AutoCompleteAnimationClose,
+                open?: AutoCompleteAnimationOpen
+        }
+        declare interface AutoCompleteVirtual {
+            itemHeight?: number,
+                mapValueTo?: string,
+                valueMapper?: Function
+        }
+        declare interface AutoCompleteOptions {
+            name?: string,
+                animation?: boolean | AutoCompleteAnimation,
+                dataSource?: any | any | undefined.DataSource,
+                clearButton?: boolean,
+                dataTextField?: string,
+                delay?: number,
+                enable?: boolean,
+                enforceMinLength?: boolean,
+                filter?: string,
+                fixedGroupTemplate?: string | Function,
+                footerTemplate?: string | Function,
+                groupTemplate?: string | Function,
+                height?: number,
+                highlightFirst?: boolean,
+                ignoreCase?: boolean,
+                minLength?: number,
+                noDataTemplate?: string | Function,
+                placeholder?: string,
+                popup?: any,
+                separator?: string | any,
+                suggest?: boolean,
+                headerTemplate?: string | Function,
+                template?: string | Function,
+                value?: string,
+                valuePrimitive?: boolean,
+                virtual?: boolean | AutoCompleteVirtual,
+                change(e: AutoCompleteChangeEvent): void,
+                close(e: AutoCompleteCloseEvent): void,
+                dataBound(e: AutoCompleteDataBoundEvent): void,
+                filtering(e: AutoCompleteFilteringEvent): void,
+                open(e: AutoCompleteOpenEvent): void,
+                select(e: AutoCompleteSelectEvent): void
+        }
+        declare interface AutoCompleteEvent {
+            sender: AutoComplete,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type AutoCompleteChangeEvent = {} & AutoCompleteEvent
 
-	declare interface ChartPointEvent {
-		sender: ChartPoint,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
+        declare type AutoCompleteCloseEvent = {} & AutoCompleteEvent
 
-	declare interface ChartSeriesOptions {
-		name?: string
-	}
+        declare type AutoCompleteDataBoundEvent = {} & AutoCompleteEvent
 
-	declare interface ChartSeriesEvent {
-		sender: ChartSeries,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
+        declare type AutoCompleteFilteringEvent = {
+            filter?: any
+        } & AutoCompleteEvent
 
-	declare interface NavigatorOptions {
-		name?: string
-	}
+        declare type AutoCompleteOpenEvent = {} & AutoCompleteEvent
 
-	declare interface NavigatorEvent {
-		sender: Navigator,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
+        declare type AutoCompleteSelectEvent = {
+            dataItem?: any,
+            item?: JQuery
+        } & AutoCompleteEvent
 
-		declare class ChartAxis extends Observable {
-		options: ChartAxisOptions;
-		range(): any;
-		slot(from: string, to?: string, limit?: boolean): kendo.geometry.Rect;
-		slot(from: string, to?: number, limit?: boolean): kendo.geometry.Rect;
-		slot(from: string, to?: Date, limit?: boolean): kendo.geometry.Rect;
-		slot(from: number, to?: string, limit?: boolean): kendo.geometry.Rect;
-		slot(from: number, to?: number, limit?: boolean): kendo.geometry.Rect;
-		slot(from: number, to?: Date, limit?: boolean): kendo.geometry.Rect;
-		slot(from: Date, to?: string, limit?: boolean): kendo.geometry.Rect;
-		slot(from: Date, to?: number, limit?: boolean): kendo.geometry.Rect;
-		slot(from: Date, to?: Date, limit?: boolean): kendo.geometry.Rect;
-		value(point: kendo.geometry.Point): void;
-		valueRange(): void
-	}
+        declare class Button mixins undefined.Widget {
+            fn: Button;
+            options: ButtonOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Button;
+            constructor(element: Element, options?: ButtonOptions): this;
+            badge(value: string): string;
+            badge(value: boolean): string;
+            destroy(): void;
+            enable(enable: boolean): void
+        }
+        declare interface ButtonOptions {
+            name?: string,
+                enable?: boolean,
+                icon?: string,
+                imageUrl?: string,
+                spriteCssClass?: string,
+                click(e: ButtonClickEvent): void
+        }
+        declare interface ButtonEvent {
+            sender: Button,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ButtonClickEvent = {
+            event?: any
+        } & ButtonEvent
 
-	declare class ChartPane extends Observable {
-		options: ChartPaneOptions;
-		chartsVisual: kendo.drawing.Group;
-		visual: kendo.drawing.Group;
-		series(): any
-	}
+        declare class Calendar mixins undefined.Widget {
+            fn: Calendar;
+            options: CalendarOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Calendar;
+            constructor(element: Element, options?: CalendarOptions): this;
+            current(): Date;
+            destroy(): void;
+            max(): Date;
+            max(value: Date): void;
+            max(value: string): void;
+            min(): Date;
+            min(value: Date): void;
+            min(value: string): void;
+            navigate(value: Date, view: string): void;
+            navigateDown(value: Date): void;
+            navigateToFuture(): void;
+            navigateToPast(): void;
+            navigateUp(): void;
+            value(): Date;
+            value(value: Date): void;
+            value(value: string): void;
+            view(): any
+        }
+        declare interface CalendarMonth {
+            content?: string,
+                empty?: string
+        }
+        declare interface CalendarOptions {
+            name?: string,
+                culture?: string,
+                dates?: any,
+                depth?: string,
+                disableDates?: any | Function,
+                footer?: string | Function,
+                format?: string,
+                max?: Date,
+                min?: Date,
+                month?: CalendarMonth,
+                start?: string,
+                value?: Date,
+                change(e: CalendarEvent): void,
+                navigate(e: CalendarEvent): void
+        }
+        declare interface CalendarEvent {
+            sender: Calendar,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class ColorPalette mixins undefined.Widget {
+            fn: ColorPalette;
+            options: ColorPaletteOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ColorPalette;
+            constructor(element: Element, options?: ColorPaletteOptions): this;
+            value(): string;
+            value(color?: string): void;
+            color(): kendo$Color;
+            color(color?: kendo$Color): void;
+            enable(enable?: boolean): void
+        }
+        declare interface ColorPaletteTileSize {
+            width?: number,
+                height?: number
+        }
+        declare interface ColorPaletteOptions {
+            name?: string,
+                palette?: string | any,
+                columns?: number,
+                tileSize?: ColorPaletteTileSize,
+                value?: string,
+                change(e: ColorPaletteEvent): void
+        }
+        declare interface ColorPaletteEvent {
+            sender: ColorPalette,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class ColorPicker mixins undefined.Widget {
+            fn: ColorPicker;
+            options: ColorPickerOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ColorPicker;
+            constructor(element: Element, options?: ColorPickerOptions): this;
+            close(): void;
+            open(): void;
+            toggle(): void;
+            value(): string;
+            value(color?: string): void;
+            color(): kendo$Color;
+            color(color?: kendo$Color): void;
+            enable(enable?: boolean): void
+        }
+        declare interface ColorPickerMessages {
+            apply?: string,
+                cancel?: string
+        }
+        declare interface ColorPickerTileSize {
+            width?: number,
+                height?: number
+        }
+        declare interface ColorPickerOptions {
+            name?: string,
+                buttons?: boolean,
+                columns?: number,
+                tileSize?: ColorPickerTileSize,
+                messages?: ColorPickerMessages,
+                palette?: string | any,
+                opacity?: boolean,
+                preview?: boolean,
+                toolIcon?: string,
+                value?: string,
+                change(e: ColorPickerChangeEvent): void,
+                select(e: ColorPickerSelectEvent): void,
+                open(e: ColorPickerEvent): void,
+                close(e: ColorPickerEvent): void
+        }
+        declare interface ColorPickerEvent {
+            sender: ColorPicker,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ColorPickerChangeEvent = {
+            value?: string
+        } & ColorPickerEvent
 
-	declare class ChartPlotArea extends Observable {
-		options: ChartPlotAreaOptions;
-		backgroundVisual: kendo.drawing.MultiPath;
-		visual: kendo.drawing.Group
-	}
+        declare type ColorPickerSelectEvent = {
+            value?: string
+        } & ColorPickerEvent
 
-	declare class ChartPoint extends Observable {
-		options: ChartPointOptions;
-		category: string | Date | number;
-		dataItem: any;
-		percentage: number;
-		runningTotal: number;
-		total: number;
-		value: number;
-		visual: kendo.drawing.Element
-	}
+        declare class ComboBox mixins undefined.Widget {
+            fn: ComboBox;
+            options: ComboBoxOptions;
+            dataSource: undefined.DataSource;
+            input: JQuery;
+            list: JQuery;
+            ul: JQuery;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ComboBox;
+            constructor(element: Element, options?: ComboBoxOptions): this;
+            close(): void;
+            dataItem(index?: number): any;
+            destroy(): void;
+            enable(enable: boolean): void;
+            focus(): void;
+            items(): any;
+            open(): void;
+            readonly(readonly: boolean): void;
+            refresh(): void;
+            search(word: string): void;
+            select(): number;
+            select(li: JQuery): void;
+            select(li: number): void;
+            select(li: Function): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            suggest(value: string): void;
+            text(): string;
+            text(text: string): void;
+            toggle(toggle: boolean): void;
+            value(): string;
+            value(value: string): void
+        }
+        declare interface ComboBoxAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface ComboBoxAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface ComboBoxAnimation {
+            close?: ComboBoxAnimationClose,
+                open?: ComboBoxAnimationOpen
+        }
+        declare interface ComboBoxPopup {
+            appendTo?: string,
+                origin?: string,
+                position?: string
+        }
+        declare interface ComboBoxVirtual {
+            itemHeight?: number,
+                mapValueTo?: string,
+                valueMapper?: Function
+        }
+        declare interface ComboBoxOptions {
+            name?: string,
+                animation?: ComboBoxAnimation,
+                autoBind?: boolean,
+                cascadeFrom?: string,
+                cascadeFromField?: string,
+                clearButton?: boolean,
+                dataSource?: any | any | undefined.DataSource,
+                dataTextField?: string,
+                dataValueField?: string,
+                delay?: number,
+                enable?: boolean,
+                enforceMinLength?: boolean,
+                filter?: string,
+                fixedGroupTemplate?: string | Function,
+                footerTemplate?: string | Function,
+                groupTemplate?: string | Function,
+                height?: number,
+                highlightFirst?: boolean,
+                ignoreCase?: boolean,
+                index?: number,
+                minLength?: number,
+                noDataTemplate?: string | Function,
+                placeholder?: string,
+                popup?: ComboBoxPopup,
+                suggest?: boolean,
+                headerTemplate?: string | Function,
+                template?: string | Function,
+                text?: string,
+                value?: string,
+                valuePrimitive?: boolean,
+                virtual?: boolean | ComboBoxVirtual,
+                change(e: ComboBoxChangeEvent): void,
+                close(e: ComboBoxCloseEvent): void,
+                dataBound(e: ComboBoxDataBoundEvent): void,
+                filtering(e: ComboBoxFilteringEvent): void,
+                open(e: ComboBoxOpenEvent): void,
+                select(e: ComboBoxSelectEvent): void,
+                cascade(e: ComboBoxCascadeEvent): void
+        }
+        declare interface ComboBoxEvent {
+            sender: ComboBox,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ComboBoxChangeEvent = {} & ComboBoxEvent
 
-	declare class ChartSeries extends Observable {
-		options: ChartSeriesOptions;
-		data(): any;
-		data(data: any): void;
-		findPoint(callback: Function): kendo.dataviz.ChartPoint;
-		points(): any;
-		points(filter: Function): void;
-		toggleHighlight(show: boolean, filter: Function): void;
-		toggleHighlight(show: boolean, filter: any): void;
-		toggleVisibility(show: boolean, filter: Function): void
-	}
+        declare type ComboBoxCloseEvent = {} & ComboBoxEvent
 
-	declare class Navigator extends kendo$Observable {
-		options: NavigatorOptions;
-		select(): any;
-		select(): void
-	}
+        declare type ComboBoxDataBoundEvent = {} & ComboBoxEvent
 
-	
+        declare type ComboBoxFilteringEvent = {
+            filter?: any
+        } & ComboBoxEvent
+
+        declare type ComboBoxOpenEvent = {} & ComboBoxEvent
+
+        declare type ComboBoxSelectEvent = {
+            dataItem?: any,
+            item?: JQuery
+        } & ComboBoxEvent
+
+        declare type ComboBoxCascadeEvent = {} & ComboBoxEvent
+
+        declare class Confirm mixins undefined.Dialog {
+            fn: Confirm;
+            options: ConfirmOptions;
+            result: JQueryPromise<any>;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Confirm;
+            constructor(element: Element, options?: ConfirmOptions): this
+        }
+        declare interface ConfirmMessages {
+            okText?: string,
+                cancel?: string
+        }
+        declare interface ConfirmOptions {
+            name?: string,
+                messages?: ConfirmMessages
+        }
+        declare interface ConfirmEvent {
+            sender: Confirm,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class ContextMenu mixins undefined.Widget {
+            fn: ContextMenu;
+            options: ContextMenuOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ContextMenu;
+            constructor(element: Element, options?: ContextMenuOptions): this;
+            append(item: any, referenceItem?: string): undefined.ContextMenu;
+            append(item: any, referenceItem?: JQuery): undefined.ContextMenu;
+            close(element: Element): undefined.ContextMenu;
+            close(element: JQuery): undefined.ContextMenu;
+            destroy(): void;
+            enable(element: string, enable: boolean): undefined.ContextMenu;
+            enable(element: Element, enable: boolean): undefined.ContextMenu;
+            enable(element: JQuery, enable: boolean): undefined.ContextMenu;
+            insertAfter(item: any, referenceItem: string): undefined.ContextMenu;
+            insertAfter(item: any, referenceItem: Element): undefined.ContextMenu;
+            insertAfter(item: any, referenceItem: JQuery): undefined.ContextMenu;
+            insertBefore(item: any, referenceItem: string): undefined.ContextMenu;
+            insertBefore(item: any, referenceItem: Element): undefined.ContextMenu;
+            insertBefore(item: any, referenceItem: JQuery): undefined.ContextMenu;
+            open(x: number, y?: number): undefined.ContextMenu;
+            open(x: Element, y?: number): undefined.ContextMenu;
+            open(x: JQuery, y?: number): undefined.ContextMenu;
+            remove(element: string): undefined.ContextMenu;
+            remove(element: Element): undefined.ContextMenu;
+            remove(element: JQuery): undefined.ContextMenu
+        }
+        declare interface ContextMenuAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface ContextMenuAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface ContextMenuAnimation {
+            close?: ContextMenuAnimationClose,
+                open?: ContextMenuAnimationOpen
+        }
+        declare interface ContextMenuOptions {
+            name?: string,
+                alignToAnchor?: boolean,
+                animation?: boolean | ContextMenuAnimation,
+                closeOnClick?: boolean,
+                dataSource?: any | any,
+                direction?: string,
+                filter?: string,
+                hoverDelay?: number,
+                orientation?: string,
+                popupCollision?: string,
+                showOn?: string,
+                target?: string | JQuery,
+                close(e: ContextMenuCloseEvent): void,
+                open(e: ContextMenuOpenEvent): void,
+                activate(e: ContextMenuActivateEvent): void,
+                deactivate(e: ContextMenuDeactivateEvent): void,
+                select(e: ContextMenuSelectEvent): void
+        }
+        declare interface ContextMenuEvent {
+            sender: ContextMenu,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ContextMenuCloseEvent = {
+            item?: Element,
+            type?: string,
+            target?: Element,
+            event?: JQueryEventObject
+        } & ContextMenuEvent
+
+        declare type ContextMenuOpenEvent = {
+            item?: Element,
+            type?: string,
+            target?: Element,
+            event?: JQueryEventObject
+        } & ContextMenuEvent
+
+        declare type ContextMenuActivateEvent = {
+            item?: Element,
+            type?: string,
+            target?: Element
+        } & ContextMenuEvent
+
+        declare type ContextMenuDeactivateEvent = {
+            item?: Element,
+            type?: string,
+            target?: Element
+        } & ContextMenuEvent
+
+        declare type ContextMenuSelectEvent = {
+            item?: Element,
+            type?: string,
+            target?: Element
+        } & ContextMenuEvent
+
+        declare class DatePicker mixins undefined.Widget {
+            fn: DatePicker;
+            options: DatePickerOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): DatePicker;
+            constructor(element: Element, options?: DatePickerOptions): this;
+            close(): void;
+            destroy(): void;
+            enable(enable: boolean): void;
+            readonly(readonly: boolean): void;
+            max(): Date;
+            max(value: Date): void;
+            max(value: string): void;
+            min(): Date;
+            min(value: Date): void;
+            min(value: string): void;
+            open(): void;
+            setOptions(options: any): void;
+            value(): Date;
+            value(value: Date): void;
+            value(value: string): void
+        }
+        declare interface DatePickerAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface DatePickerAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface DatePickerAnimation {
+            close?: DatePickerAnimationClose,
+                open?: DatePickerAnimationOpen
+        }
+        declare interface DatePickerMonth {
+            content?: string,
+                empty?: string
+        }
+        declare interface DatePickerOptions {
+            name?: string,
+                animation?: boolean | DatePickerAnimation,
+                ARIATemplate?: string,
+                culture?: string,
+                dates?: any,
+                depth?: string,
+                disableDates?: any | Function,
+                footer?: string | Function,
+                format?: string,
+                max?: Date,
+                min?: Date,
+                month?: DatePickerMonth,
+                parseFormats?: any,
+                start?: string,
+                value?: Date,
+                change(e: DatePickerChangeEvent): void,
+                close(e: DatePickerCloseEvent): void,
+                open(e: DatePickerOpenEvent): void
+        }
+        declare interface DatePickerEvent {
+            sender: DatePicker,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type DatePickerChangeEvent = {} & DatePickerEvent
+
+        declare type DatePickerCloseEvent = {} & DatePickerEvent
+
+        declare type DatePickerOpenEvent = {} & DatePickerEvent
+
+        declare class DateTimePicker mixins undefined.Widget {
+            fn: DateTimePicker;
+            options: DateTimePickerOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): DateTimePicker;
+            constructor(element: Element, options?: DateTimePickerOptions): this;
+            close(view: string): void;
+            destroy(): void;
+            enable(enable: boolean): void;
+            readonly(readonly: boolean): void;
+            max(): Date;
+            max(value: Date): void;
+            max(value: string): void;
+            min(): Date;
+            min(value: Date): void;
+            min(value: string): void;
+            open(view: string): void;
+            setOptions(options: any): void;
+            toggle(view: string): void;
+            value(): Date;
+            value(value: Date): void;
+            value(value: string): void
+        }
+        declare interface DateTimePickerAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface DateTimePickerAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface DateTimePickerAnimation {
+            close?: DateTimePickerAnimationClose,
+                open?: DateTimePickerAnimationOpen
+        }
+        declare interface DateTimePickerMonth {
+            content?: string,
+                empty?: string
+        }
+        declare interface DateTimePickerOptions {
+            name?: string,
+                animation?: boolean | DateTimePickerAnimation,
+                ARIATemplate?: string,
+                culture?: string,
+                dates?: any,
+                depth?: string,
+                disableDates?: any | Function,
+                footer?: string,
+                format?: string,
+                interval?: number,
+                max?: Date,
+                min?: Date,
+                month?: DateTimePickerMonth,
+                parseFormats?: any,
+                start?: string,
+                timeFormat?: string,
+                value?: Date,
+                change(e: DateTimePickerChangeEvent): void,
+                close(e: DateTimePickerCloseEvent): void,
+                open(e: DateTimePickerOpenEvent): void
+        }
+        declare interface DateTimePickerEvent {
+            sender: DateTimePicker,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type DateTimePickerChangeEvent = {} & DateTimePickerEvent
+
+        declare type DateTimePickerCloseEvent = {
+            view?: string
+        } & DateTimePickerEvent
+
+        declare type DateTimePickerOpenEvent = {
+            view?: string
+        } & DateTimePickerEvent
+
+        declare class Dialog mixins undefined.Widget {
+            fn: Dialog;
+            options: DialogOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Dialog;
+            constructor(element: Element, options?: DialogOptions): this;
+            close(): undefined.Dialog;
+            content(): string;
+            content(content?: string): undefined.Dialog;
+            content(content?: JQuery): undefined.Dialog;
+            destroy(): void;
+            open(): undefined.Dialog;
+            title(): string;
+            title(text?: string): undefined.Dialog;
+            toFront(): undefined.Dialog
+        }
+        declare interface DialogAction {
+            text?: string,
+                action?: Function,
+                primary?: boolean
+        }
+        declare interface DialogAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface DialogAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface DialogAnimation {
+            close?: DialogAnimationClose,
+                open?: DialogAnimationOpen
+        }
+        declare interface DialogMessages {
+            close?: string
+        }
+        declare interface DialogOptions {
+            name?: string,
+                actions?: DialogAction[],
+                animation?: boolean | DialogAnimation,
+                buttonLayout?: string,
+                closable?: boolean,
+                content?: string,
+                height?: number | string,
+                maxHeight?: number,
+                maxWidth?: number,
+                messages?: DialogMessages,
+                minHeight?: number,
+                minWidth?: number,
+                modal?: boolean,
+                title?: string | boolean,
+                visible?: boolean,
+                width?: number | string,
+                close(e: DialogCloseEvent): void,
+                hide(e: DialogEvent): void,
+                initOpen(e: DialogEvent): void,
+                open(e: DialogEvent): void,
+                show(e: DialogEvent): void
+        }
+        declare interface DialogEvent {
+            sender: Dialog,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type DialogCloseEvent = {
+            userTriggered?: boolean
+        } & DialogEvent
+
+        declare class DropDownList mixins undefined.Widget {
+            fn: DropDownList;
+            options: DropDownListOptions;
+            popup: undefined.Popup;
+            dataSource: undefined.DataSource;
+            span: JQuery;
+            filterInput: JQuery;
+            list: JQuery;
+            ul: JQuery;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): DropDownList;
+            constructor(element: Element, options?: DropDownListOptions): this;
+            close(): void;
+            dataItem(index?: JQuery): any;
+            dataItem(index?: number): any;
+            destroy(): void;
+            focus(): void;
+            items(): any;
+            enable(enable: boolean): void;
+            open(): void;
+            readonly(readonly: boolean): void;
+            refresh(): void;
+            search(word: string): void;
+            select(): number;
+            select(li: JQuery): void;
+            select(li: number): void;
+            select(li: Function): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            text(): string;
+            text(text: string): void;
+            toggle(toggle: boolean): void;
+            value(): string;
+            value(value: string): void
+        }
+        declare interface DropDownListAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface DropDownListAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface DropDownListAnimation {
+            close?: DropDownListAnimationClose,
+                open?: DropDownListAnimationOpen
+        }
+        declare interface DropDownListPopup {
+            appendTo?: string,
+                origin?: string,
+                position?: string
+        }
+        declare interface DropDownListVirtual {
+            itemHeight?: number,
+                mapValueTo?: string,
+                valueMapper?: Function
+        }
+        declare interface DropDownListOptions {
+            name?: string,
+                animation?: boolean | DropDownListAnimation,
+                autoBind?: boolean,
+                cascadeFrom?: string,
+                cascadeFromField?: string,
+                dataSource?: any | any | undefined.DataSource,
+                dataTextField?: string,
+                dataValueField?: string,
+                delay?: number,
+                enable?: boolean,
+                enforceMinLength?: boolean,
+                filter?: string,
+                fixedGroupTemplate?: string | Function,
+                footerTemplate?: string | Function,
+                groupTemplate?: string | Function,
+                height?: number,
+                ignoreCase?: boolean,
+                index?: number,
+                minLength?: number,
+                noDataTemplate?: string | Function,
+                popup?: DropDownListPopup,
+                optionLabel?: string | any,
+                optionLabelTemplate?: string | Function,
+                headerTemplate?: string | Function,
+                template?: string | Function,
+                valueTemplate?: string | Function,
+                text?: string,
+                value?: string,
+                valuePrimitive?: boolean,
+                virtual?: boolean | DropDownListVirtual,
+                change(e: DropDownListChangeEvent): void,
+                close(e: DropDownListCloseEvent): void,
+                dataBound(e: DropDownListDataBoundEvent): void,
+                filtering(e: DropDownListFilteringEvent): void,
+                open(e: DropDownListOpenEvent): void,
+                select(e: DropDownListSelectEvent): void,
+                cascade(e: DropDownListCascadeEvent): void
+        }
+        declare interface DropDownListEvent {
+            sender: DropDownList,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type DropDownListChangeEvent = {} & DropDownListEvent
+
+        declare type DropDownListCloseEvent = {} & DropDownListEvent
+
+        declare type DropDownListDataBoundEvent = {} & DropDownListEvent
+
+        declare type DropDownListFilteringEvent = {
+            filter?: any
+        } & DropDownListEvent
+
+        declare type DropDownListOpenEvent = {} & DropDownListEvent
+
+        declare type DropDownListSelectEvent = {
+            dataItem?: any,
+            item?: JQuery
+        } & DropDownListEvent
+
+        declare type DropDownListCascadeEvent = {} & DropDownListEvent
+
+        declare class Editor mixins undefined.Widget {
+            fn: Editor;
+            options: EditorOptions;
+            body: Element;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Editor;
+            constructor(element: Element, options?: EditorOptions): this;
+            createRange(document?: Document): Range;
+            destroy(): void;
+            encodedValue(): void;
+            exec(name: string, params: any): void;
+            focus(): void;
+            getRange(): Range;
+            getSelection(): Selection;
+            paste(html: string, options: any): void;
+            selectedHtml(): string;
+            refresh(): void;
+            saveAsPDF(): JQueryPromise<any>;
+            selectRange(range: Range): void;
+            update(): void;
+            state(toolName: string): boolean;
+            value(): string;
+            value(value: string): void
+        }
+        declare interface EditorDeserialization {
+            custom?: Function
+        }
+        declare interface EditorFileBrowserMessages {
+            uploadFile?: string,
+                orderBy?: string,
+                orderByName?: string,
+                orderBySize?: string,
+                directoryNotFound?: string,
+                emptyFolder?: string,
+                deleteFile?: string,
+                invalidFileType?: string,
+                overwriteFile?: string,
+                search?: string
+        }
+        declare interface EditorFileBrowserSchemaModelFieldsName {
+            field?: string,
+                parse?: Function
+        }
+        declare interface EditorFileBrowserSchemaModelFieldsSize {
+            field?: string,
+                parse?: Function
+        }
+        declare interface EditorFileBrowserSchemaModelFieldsType {
+            parse?: Function,
+                field?: string
+        }
+        declare interface EditorFileBrowserSchemaModelFields {
+            name?: EditorFileBrowserSchemaModelFieldsName,
+                type?: EditorFileBrowserSchemaModelFieldsType,
+                size?: EditorFileBrowserSchemaModelFieldsSize
+        }
+        declare interface EditorFileBrowserSchemaModel {
+            id?: string,
+                fields?: EditorFileBrowserSchemaModelFields
+        }
+        declare interface EditorFileBrowserSchema {}
+        declare interface EditorFileBrowserTransportCreate {
+            contentType?: string,
+                data?: any | string | Function,
+                dataType?: string,
+                type?: string,
+                url?: string | Function
+        }
+        declare interface EditorFileBrowserTransportDestroy {
+            contentType?: string,
+                data?: any | string | Function,
+                dataType?: string,
+                type?: string,
+                url?: string | Function
+        }
+        declare interface EditorFileBrowserTransportRead {
+            contentType?: string,
+                data?: any | string | Function,
+                dataType?: string,
+                type?: string,
+                url?: string | Function
+        }
+        declare interface EditorFileBrowserTransport {
+            read?: EditorFileBrowserTransportRead,
+                uploadUrl?: string,
+                fileUrl?: string | Function,
+                destroy?: EditorFileBrowserTransportDestroy,
+                create?: EditorFileBrowserTransportCreate
+        }
+        declare interface EditorFileBrowser {
+            fileTypes?: string,
+                path?: string,
+                transport?: EditorFileBrowserTransport,
+                schema?: EditorFileBrowserSchema,
+                messages?: EditorFileBrowserMessages
+        }
+        declare interface EditorImageBrowserMessages {
+            uploadFile?: string,
+                orderBy?: string,
+                orderByName?: string,
+                orderBySize?: string,
+                directoryNotFound?: string,
+                emptyFolder?: string,
+                deleteFile?: string,
+                invalidFileType?: string,
+                overwriteFile?: string,
+                search?: string
+        }
+        declare interface EditorImageBrowserSchemaModelFieldsName {
+            field?: string,
+                parse?: Function
+        }
+        declare interface EditorImageBrowserSchemaModelFieldsSize {
+            field?: string,
+                parse?: Function
+        }
+        declare interface EditorImageBrowserSchemaModelFieldsType {
+            parse?: Function,
+                field?: string
+        }
+        declare interface EditorImageBrowserSchemaModelFields {
+            name?: EditorImageBrowserSchemaModelFieldsName,
+                type?: EditorImageBrowserSchemaModelFieldsType,
+                size?: EditorImageBrowserSchemaModelFieldsSize
+        }
+        declare interface EditorImageBrowserSchemaModel {
+            id?: string,
+                fields?: EditorImageBrowserSchemaModelFields
+        }
+        declare interface EditorImageBrowserSchema {}
+        declare interface EditorImageBrowserTransportCreate {
+            contentType?: string,
+                data?: any | string | Function,
+                dataType?: string,
+                type?: string,
+                url?: string | Function
+        }
+        declare interface EditorImageBrowserTransportDestroy {
+            contentType?: string,
+                data?: any | string | Function,
+                dataType?: string,
+                type?: string,
+                url?: string | Function
+        }
+        declare interface EditorImageBrowserTransportRead {
+            contentType?: string,
+                data?: any | string | Function,
+                dataType?: string,
+                type?: string,
+                url?: string | Function
+        }
+        declare interface EditorImageBrowserTransport {
+            read?: EditorImageBrowserTransportRead,
+                thumbnailUrl?: string | Function,
+                uploadUrl?: string,
+                imageUrl?: string | Function,
+                destroy?: EditorImageBrowserTransportDestroy,
+                create?: EditorImageBrowserTransportCreate
+        }
+        declare interface EditorImageBrowser {
+            fileTypes?: string,
+                path?: string,
+                transport?: EditorImageBrowserTransport,
+                schema?: EditorImageBrowserSchema,
+                messages?: EditorImageBrowserMessages
+        }
+        declare interface EditorImmutables {
+            deserialization?: Function,
+                serialization?: string | Function
+        }
+        declare interface EditorMessages {
+            accessibilityTab?: string,
+                addColumnLeft?: string,
+                addColumnRight?: string,
+                addRowAbove?: string,
+                addRowBelow?: string,
+                alignCenter?: string,
+                alignCenterBottom?: string,
+                alignCenterMiddle?: string,
+                alignCenterTop?: string,
+                alignLeft?: string,
+                alignLeftBottom?: string,
+                alignLeftMiddle?: string,
+                alignLeftTop?: string,
+                alignRemove?: string,
+                alignRight?: string,
+                alignRightBottom?: string,
+                alignRightMiddle?: string,
+                alignRightTop?: string,
+                alignment?: string,
+                associateCellsWithHeaders?: string,
+                backColor?: string,
+                background?: string,
+                bold?: string,
+                border?: string,
+                style?: string,
+                caption?: string,
+                cellMargin?: string,
+                cellPadding?: string,
+                cellSpacing?: string,
+                cellTab?: string,
+                cleanFormatting?: string,
+                collapseBorders?: string,
+                columns?: string,
+                createLink?: string,
+                createTable?: string,
+                createTableHint?: string,
+                cssClass?: string,
+                deleteColumn?: string,
+                deleteRow?: string,
+                dialogCancel?: string,
+                dialogInsert?: string,
+                dialogOk?: string,
+                dialogUpdate?: string,
+                editAreaTitle?: string,
+                fileTitle?: string,
+                fileWebAddress?: string,
+                fontName?: string,
+                fontNameInherit?: string,
+                fontSize?: string,
+                fontSizeInherit?: string,
+                foreColor?: string,
+                formatBlock?: string,
+                formatting?: string,
+                height?: string,
+                id?: string,
+                imageAltText?: string,
+                imageHeight?: string,
+                imageWebAddress?: string,
+                imageWidth?: string,
+                indent?: string,
+                insertFile?: string,
+                insertHtml?: string,
+                insertImage?: string,
+                insertOrderedList?: string,
+                insertUnorderedList?: string,
+                italic?: string,
+                justifyCenter?: string,
+                justifyFull?: string,
+                justifyLeft?: string,
+                justifyRight?: string,
+                linkOpenInNewWindow?: string,
+                linkText?: string,
+                linkToolTip?: string,
+                linkWebAddress?: string,
+                outdent?: string,
+                print?: string,
+                rows?: string,
+                selectAllCells?: string,
+                strikethrough?: string,
+                subscript?: string,
+                summary?: string,
+                superscript?: string,
+                tableTab?: string,
+                tableWizard?: string,
+                underline?: string,
+                unlink?: string,
+                viewHtml?: string,
+                width?: string,
+                wrapText?: string
+        }
+        declare interface EditorPasteCleanup {
+            all?: boolean,
+                css?: boolean,
+                custom?: Function,
+                keepNewLines?: boolean,
+                msAllFormatting?: boolean,
+                msConvertLists?: boolean,
+                msTags?: boolean,
+                none?: boolean,
+                span?: boolean
+        }
+        declare interface EditorPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface EditorPdf {
+            author?: string,
+                avoidLinks?: boolean | string,
+                creator?: string,
+                date?: Date,
+                fileName?: string,
+                forceProxy?: boolean,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: EditorPdfMargin,
+                paperSize?: string | any,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string
+        }
+        declare interface EditorResizable {
+            content?: boolean,
+                min?: number,
+                max?: number,
+                toolbar?: boolean
+        }
+        declare interface EditorSerialization {
+            custom?: Function,
+                entities?: boolean,
+                scripts?: boolean,
+                semantic?: boolean
+        }
+        declare interface EditorToolItem {
+            text?: string,
+                value?: string,
+                context?: string
+        }
+        declare interface EditorTool {
+            name?: string,
+                tooltip?: string,
+                exec?: Function,
+                items?: EditorToolItem[],
+                template?: string
+        }
+        declare interface EditorExecParams {
+            value?: any
+        }
+        declare interface EditorPasteOptions {
+            split?: boolean
+        }
+        declare interface EditorOptions {
+            name?: string,
+                deserialization?: EditorDeserialization,
+                domain?: string,
+                encoded?: boolean,
+                immutables?: boolean | EditorImmutables,
+                messages?: EditorMessages,
+                pasteCleanup?: EditorPasteCleanup,
+                pdf?: EditorPdf,
+                resizable?: boolean | EditorResizable,
+                serialization?: EditorSerialization,
+                stylesheets?: any,
+                tools?: EditorTool[],
+                imageBrowser?: EditorImageBrowser,
+                fileBrowser?: EditorFileBrowser,
+                change(e: EditorEvent): void,
+                execute(e: EditorExecuteEvent): void,
+                keydown(e: EditorEvent): void,
+                keyup(e: EditorEvent): void,
+                paste(e: EditorPasteEvent): void,
+                pdfExport(e: EditorPdfExportEvent): void,
+                select(e: EditorEvent): void
+        }
+        declare interface EditorEvent {
+            sender: Editor,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type EditorExecuteEvent = {
+            name?: string,
+            command?: any
+        } & EditorEvent
+
+        declare type EditorPasteEvent = {
+            html?: any
+        } & EditorEvent
+
+        declare type EditorPdfExportEvent = {
+            promise?: JQueryPromise<any >
+        } & EditorEvent
+
+        declare class FilterMenu mixins undefined.Widget {
+            fn: FilterMenu;
+            options: FilterMenuOptions;
+            field: string;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): FilterMenu;
+            constructor(element: Element, options?: FilterMenuOptions): this;
+            clear(): void
+        }
+        declare interface FilterMenuMessages {
+            and?: string,
+                clear?: string,
+                filter?: string,
+                info?: string,
+                isFalse?: string,
+                isTrue?: string,
+                or?: string,
+                selectValue?: string
+        }
+        declare interface FilterMenuOperatorsDate {
+            eq?: string,
+                neq?: string,
+                isnull?: string,
+                isnotnull?: string,
+                gte?: string,
+                gt?: string,
+                lte?: string,
+                lt?: string
+        }
+        declare interface FilterMenuOperatorsEnums {
+            eq?: string,
+                neq?: string,
+                isnull?: string,
+                isnotnull?: string
+        }
+        declare interface FilterMenuOperatorsNumber {
+            eq?: string,
+                neq?: string,
+                isnull?: string,
+                isnotnull?: string,
+                gte?: string,
+                gt?: string,
+                lte?: string,
+                lt?: string
+        }
+        declare interface FilterMenuOperatorsString {
+            eq?: string,
+                neq?: string,
+                isnull?: string,
+                isnotnull?: string,
+                isempty?: string,
+                isnotempty?: string,
+                startswith?: string,
+                contains?: string,
+                doesnotcontain?: string,
+                endswith?: string
+        }
+        declare interface FilterMenuOperators {
+            string?: FilterMenuOperatorsString,
+                number?: FilterMenuOperatorsNumber,
+                date?: FilterMenuOperatorsDate,
+                enums?: FilterMenuOperatorsEnums
+        }
+        declare interface FilterMenuOptions {
+            name?: string,
+                dataSource?: any | any | undefined.DataSource,
+                extra?: boolean,
+                field?: string,
+                messages?: FilterMenuMessages,
+                operators?: FilterMenuOperators
+        }
+        declare interface FilterMenuEvent {
+            sender: FilterMenu,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class FlatColorPicker mixins undefined.Widget {
+            fn: FlatColorPicker;
+            options: FlatColorPickerOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): FlatColorPicker;
+            constructor(element: Element, options?: FlatColorPickerOptions): this;
+            focus(): void;
+            value(): string;
+            value(color?: string): void;
+            color(): kendo$Color;
+            color(color?: kendo$Color): void;
+            enable(enable?: boolean): void
+        }
+        declare interface FlatColorPickerMessages {
+            apply?: string,
+                cancel?: string
+        }
+        declare interface FlatColorPickerOptions {
+            name?: string,
+                opacity?: boolean,
+                buttons?: boolean,
+                value?: string,
+                preview?: boolean,
+                autoupdate?: boolean,
+                messages?: FlatColorPickerMessages,
+                change(e: FlatColorPickerChangeEvent): void
+        }
+        declare interface FlatColorPickerEvent {
+            sender: FlatColorPicker,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type FlatColorPickerChangeEvent = {
+            value?: string
+        } & FlatColorPickerEvent
+
+        declare class Gantt mixins undefined.Widget {
+            fn: Gantt;
+            options: GanttOptions;
+            dataSource: undefined.DataSource;
+            dependencies: undefined.GanttDependencyDataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Gantt;
+            constructor(element: Element, options?: GanttOptions): this;
+            clearSelection(): void;
+            dataItem(row: string): undefined.GanttTask;
+            dataItem(row: Element): undefined.GanttTask;
+            dataItem(row: JQuery): undefined.GanttTask;
+            date(date?: Date): Date;
+            destroy(): void;
+            range(range?: any): any;
+            refresh(): void;
+            refreshDependencies(): void;
+            removeDependency(dependency: string): void;
+            removeDependency(dependency: undefined.GanttDependency): void;
+            removeTask(task: string): void;
+            removeTask(task: undefined.GanttTask): void;
+            saveAsPDF(): JQueryPromise<any>;
+            select(): JQuery;
+            select(row: string): void;
+            select(row: Element): void;
+            select(row: JQuery): void;
+            setDataSource(dataSource: undefined.GanttDataSource): void;
+            setDependenciesDataSource(dataSource: undefined.GanttDependencyDataSource): void;
+            view(): undefined.GanttView;
+            view(type?: string): void
+        }
+        declare interface GanttAssignments {
+            dataSource?: any | any | undefined.DataSource,
+                dataResourceIdField?: string,
+                dataTaskIdField?: string,
+                dataValueField?: string
+        }
+        declare interface GanttColumn {
+            field?: string,
+                title?: string,
+                format?: string,
+                width?: string | number,
+                editable?: boolean,
+                sortable?: boolean
+        }
+        declare interface GanttCurrentTimeMarker {
+            updateInterval?: number
+        }
+        declare interface GanttEditable {
+            confirmation?: boolean,
+                create?: boolean,
+                dependencyCreate?: boolean,
+                dependencyDestroy?: boolean,
+                dragPercentComplete?: boolean,
+                destroy?: boolean,
+                move?: boolean,
+                reorder?: boolean,
+                resize?: boolean,
+                template?: string | Function,
+                update?: boolean
+        }
+        declare interface GanttMessagesActions {
+            addChild?: string,
+                append?: string,
+                insertAfter?: string,
+                insertBefore?: string,
+                pdf?: string
+        }
+        declare interface GanttMessagesEditor {
+            assignButton?: string,
+                editorTitle?: string,
+                end?: string,
+                percentComplete?: string,
+                resources?: string,
+                resourcesEditorTitle?: string,
+                resourcesHeader?: string,
+                start?: string,
+                title?: string,
+                unitsHeader?: string
+        }
+        declare interface GanttMessagesViews {
+            day?: string,
+                end?: string,
+                month?: string,
+                start?: string,
+                week?: string,
+                year?: string
+        }
+        declare interface GanttMessages {
+            actions?: GanttMessagesActions,
+                cancel?: string,
+                deleteDependencyConfirmation?: string,
+                deleteDependencyWindowTitle?: string,
+                deleteTaskConfirmation?: string,
+                deleteTaskWindowTitle?: string,
+                destroy?: string,
+                editor?: GanttMessagesEditor,
+                save?: string,
+                views?: GanttMessagesViews
+        }
+        declare interface GanttPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface GanttPdf {
+            author?: string,
+                avoidLinks?: boolean | string,
+                creator?: string,
+                date?: Date,
+                fileName?: string,
+                forceProxy?: boolean,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: GanttPdfMargin,
+                paperSize?: string | any,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string
+        }
+        declare interface GanttRange {
+            start?: Date,
+                end?: Date
+        }
+        declare interface GanttResources {
+            dataFormatField?: string,
+                dataColorField?: string,
+                dataSource?: any | any | undefined.DataSource,
+                dataTextField?: string,
+                field?: string
+        }
+        declare interface GanttToolbarItem {
+            name?: string,
+                template?: string | Function,
+                text?: string
+        }
+        declare interface GanttTooltip {
+            template?: string | Function,
+                visible?: boolean
+        }
+        declare interface GanttViewRange {
+            start?: Date,
+                end?: Date
+        }
+        declare interface GanttView {
+            date?: Date,
+                range?: GanttViewRange,
+                type?: string,
+                selected?: boolean,
+                slotSize?: number | string,
+                timeHeaderTemplate?: string | Function,
+                dayHeaderTemplate?: string | Function,
+                weekHeaderTemplate?: string | Function,
+                monthHeaderTemplate?: string | Function,
+                yearHeaderTemplate?: string | Function,
+                resizeTooltipFormat?: string
+        }
+        declare interface GanttOptions {
+            name?: string,
+                assignments?: GanttAssignments,
+                autoBind?: boolean,
+                columnResizeHandleWidth?: number,
+                columns?: GanttColumn[],
+                currentTimeMarker?: boolean | GanttCurrentTimeMarker,
+                dataSource?: any | any | undefined.GanttDataSource,
+                date?: Date,
+                dependencies?: any | any | undefined.GanttDependencyDataSource,
+                editable?: boolean | GanttEditable,
+                navigatable?: boolean,
+                workDayStart?: Date,
+                workDayEnd?: Date,
+                workWeekStart?: number,
+                workWeekEnd?: number,
+                hourSpan?: number,
+                snap?: boolean,
+                height?: number | string,
+                listWidth?: string | number,
+                messages?: GanttMessages,
+                pdf?: GanttPdf,
+                range?: GanttRange,
+                resizable?: boolean,
+                selectable?: boolean,
+                showWorkDays?: boolean,
+                showWorkHours?: boolean,
+                taskTemplate?: string | Function,
+                toolbar?: GanttToolbarItem[],
+                tooltip?: GanttTooltip,
+                views?: GanttView[],
+                resources?: GanttResources,
+                rowHeight?: number | string,
+                dataBinding(e: GanttDataBindingEvent): void,
+                dataBound(e: GanttDataBoundEvent): void,
+                add(e: GanttAddEvent): void,
+                edit(e: GanttEditEvent): void,
+                remove(e: GanttRemoveEvent): void,
+                cancel(e: GanttCancelEvent): void,
+                save(e: GanttSaveEvent): void,
+                change(e: GanttChangeEvent): void,
+                columnResize(e: GanttColumnResizeEvent): void,
+                navigate(e: GanttNavigateEvent): void,
+                moveStart(e: GanttMoveStartEvent): void,
+                move(e: GanttMoveEvent): void,
+                moveEnd(e: GanttMoveEndEvent): void,
+                pdfExport(e: GanttPdfExportEvent): void,
+                resizeStart(e: GanttResizeStartEvent): void,
+                resize(e: GanttResizeEvent): void,
+                resizeEnd(e: GanttResizeEndEvent): void
+        }
+        declare interface GanttEvent {
+            sender: Gantt,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type GanttDataBindingEvent = {} & GanttEvent
+
+        declare type GanttDataBoundEvent = {} & GanttEvent
+
+        declare type GanttAddEvent = {
+            task?: undefined.GanttTask,
+            dependency?: undefined.GanttDependency
+        } & GanttEvent
+
+        declare type GanttEditEvent = {
+            container?: JQuery,
+            task?: undefined.GanttTask
+        } & GanttEvent
+
+        declare type GanttRemoveEvent = {
+            task?: undefined.GanttTask,
+            dependencies?: any
+        } & GanttEvent
+
+        declare type GanttCancelEvent = {
+            container?: JQuery,
+            task?: undefined.GanttTask
+        } & GanttEvent
+
+        declare type GanttSaveEvent = {
+            task?: undefined.GanttTask,
+            values?: any
+        } & GanttEvent
+
+        declare type GanttChangeEvent = {} & GanttEvent
+
+        declare type GanttColumnResizeEvent = {
+            column?: any,
+            newWidth?: number,
+            oldWidth?: number
+        } & GanttEvent
+
+        declare type GanttNavigateEvent = {
+            view?: string
+        } & GanttEvent
+
+        declare type GanttMoveStartEvent = {
+            task?: undefined.GanttTask
+        } & GanttEvent
+
+        declare type GanttMoveEvent = {
+            task?: undefined.GanttTask,
+            start?: Date,
+            end?: Date
+        } & GanttEvent
+
+        declare type GanttMoveEndEvent = {
+            task?: undefined.GanttTask,
+            start?: Date,
+            end?: Date
+        } & GanttEvent
+
+        declare type GanttPdfExportEvent = {
+            promise?: JQueryPromise<any >
+        } & GanttEvent
+
+        declare type GanttResizeStartEvent = {
+            task?: undefined.GanttTask
+        } & GanttEvent
+
+        declare type GanttResizeEvent = {
+            task?: undefined.GanttTask,
+            start?: Date,
+            end?: Date
+        } & GanttEvent
+
+        declare type GanttResizeEndEvent = {
+            task?: undefined.GanttTask,
+            start?: Date,
+            end?: Date
+        } & GanttEvent
+
+        declare class Grid mixins undefined.Widget {
+            fn: Grid;
+            options: GridOptions;
+            dataSource: undefined.DataSource;
+            columns: GridColumn[];
+            footer: JQuery;
+            pager: undefined.Pager;
+            table: JQuery;
+            tbody: JQuery;
+            thead: JQuery;
+            content: JQuery;
+            lockedHeader: JQuery;
+            lockedTable: JQuery;
+            lockedContent: JQuery;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Grid;
+            constructor(element: Element, options?: GridOptions): this;
+            addRow(): void;
+            autoFitColumn(column: number): void;
+            autoFitColumn(column: string): void;
+            autoFitColumn(column: any): void;
+            cancelChanges(): void;
+            cancelRow(): void;
+            cellIndex(cell: string): number;
+            cellIndex(cell: Element): number;
+            cellIndex(cell: JQuery): number;
+            clearSelection(): void;
+            closeCell(isCancel?: boolean): void;
+            collapseGroup(row: string): void;
+            collapseGroup(row: Element): void;
+            collapseGroup(row: JQuery): void;
+            collapseRow(row: string): void;
+            collapseRow(row: Element): void;
+            collapseRow(row: JQuery): void;
+            current(): JQuery;
+            current(cell: JQuery): void;
+            dataItem(row: string): undefined.ObservableObject;
+            dataItem(row: Element): undefined.ObservableObject;
+            dataItem(row: JQuery): undefined.ObservableObject;
+            destroy(): void;
+            editCell(cell: JQuery): void;
+            editRow(row: JQuery): void;
+            expandGroup(row: string): void;
+            expandGroup(row: Element): void;
+            expandGroup(row: JQuery): void;
+            expandRow(row: string): void;
+            expandRow(row: Element): void;
+            expandRow(row: JQuery): void;
+            getOptions(): GridOptions;
+            hideColumn(column: number): void;
+            hideColumn(column: string): void;
+            hideColumn(column: any): void;
+            items(): any;
+            lockColumn(column: number): void;
+            lockColumn(column: string): void;
+            refresh(): void;
+            removeRow(row: string): void;
+            removeRow(row: Element): void;
+            removeRow(row: JQuery): void;
+            reorderColumn(destIndex: number, column: any): void;
+            saveAsExcel(): void;
+            saveAsPDF(): JQueryPromise<any>;
+            saveChanges(): void;
+            saveRow(): void;
+            select(): JQuery;
+            select(rows: string): void;
+            select(rows: Element): void;
+            select(rows: JQuery): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            setOptions(options: any): void;
+            showColumn(column: number): void;
+            showColumn(column: string): void;
+            showColumn(column: any): void;
+            unlockColumn(column: number): void;
+            unlockColumn(column: string): void
+        }
+        declare interface GridAllowCopy {
+            delimeter?: string | any
+        }
+        declare interface GridColumnMenuMessages {
+            columns?: string,
+                filter?: string,
+                sortAscending?: string,
+                sortDescending?: string,
+                settings?: string,
+                done?: string,
+                lock?: string,
+                unlock?: string
+        }
+        declare interface GridColumnMenu {
+            columns?: boolean,
+                filterable?: boolean,
+                sortable?: boolean,
+                messages?: GridColumnMenuMessages
+        }
+        declare interface GridColumnCommandItemText {
+            edit?: string,
+                cancel?: string,
+                update?: string
+        }
+        declare interface GridColumnCommandItem {
+            name?: string,
+                text?: GridColumnCommandItemText,
+                className?: string,
+                click?: Function,
+                template?: string
+        }
+        declare interface GridColumnFilterableCell {
+            dataSource?: any | undefined.DataSource,
+                dataTextField?: string,
+                delay?: number,
+                inputWidth?: number,
+                suggestionOperator?: string,
+                minLength?: number,
+                enabled?: boolean,
+                operator?: string,
+                showOperators?: boolean,
+                template?: Function
+        }
+        declare interface GridColumnFilterable {
+            cell?: GridColumnFilterableCell,
+                multi?: boolean,
+                dataSource?: any | any | undefined.DataSource,
+                checkAll?: boolean,
+                itemTemplate?: Function,
+                operators?: any,
+                search?: boolean,
+                ignoreCase?: boolean,
+                ui?: string | Function
+        }
+        declare interface GridColumnSortable {
+            compare?: Function
+        }
+        declare interface GridEditable {
+            confirmation?: boolean | string | Function,
+                cancelDelete?: string,
+                confirmDelete?: string,
+                createAt?: string,
+                destroy?: boolean,
+                mode?: string,
+                template?: string | Function,
+                update?: boolean,
+                window?: any
+        }
+        declare interface GridExcel {
+            allPages?: boolean,
+                fileName?: string,
+                filterable?: boolean,
+                forceProxy?: boolean,
+                proxyURL?: string
+        }
+        declare interface GridFilterableMessages {
+            and?: string,
+                clear?: string,
+                filter?: string,
+                info?: string,
+                isFalse?: string,
+                isTrue?: string,
+                or?: string,
+                search?: string,
+                selectValue?: string,
+                cancel?: string,
+                selectedItemsFormat?: string,
+                operator?: string,
+                value?: string,
+                checkAll?: string
+        }
+        declare interface GridFilterableOperatorsDate {
+            eq?: string,
+                neq?: string,
+                isnull?: string,
+                isnotnull?: string,
+                gte?: string,
+                gt?: string,
+                lte?: string,
+                lt?: string
+        }
+        declare interface GridFilterableOperatorsEnums {
+            eq?: string,
+                neq?: string,
+                isnull?: string,
+                isnotnull?: string
+        }
+        declare interface GridFilterableOperatorsNumber {
+            eq?: string,
+                neq?: string,
+                isnull?: string,
+                isnotnull?: string,
+                gte?: string,
+                gt?: string,
+                lte?: string,
+                lt?: string
+        }
+        declare interface GridFilterableOperatorsString {
+            eq?: string,
+                neq?: string,
+                isnull?: string,
+                isnotnull?: string,
+                isempty?: string,
+                isnotempty?: string,
+                startswith?: string,
+                contains?: string,
+                doesnotcontain?: string,
+                endswith?: string
+        }
+        declare interface GridFilterableOperators {
+            string?: GridFilterableOperatorsString,
+                number?: GridFilterableOperatorsNumber,
+                date?: GridFilterableOperatorsDate,
+                enums?: GridFilterableOperatorsEnums
+        }
+        declare interface GridFilterable {
+            extra?: boolean,
+                messages?: GridFilterableMessages,
+                operators?: GridFilterableOperators,
+                mode?: string
+        }
+        declare interface GridGroupableMessages {
+            empty?: string
+        }
+        declare interface GridGroupable {
+            enabled?: boolean,
+                showFooter?: boolean,
+                messages?: GridGroupableMessages
+        }
+        declare interface GridMessagesCommands {
+            cancel?: string,
+                canceledit?: string,
+                create?: string,
+                destroy?: string,
+                edit?: string,
+                excel?: string,
+                save?: string,
+                update?: string
+        }
+        declare interface GridMessages {
+            commands?: GridMessagesCommands,
+                noRecords?: string
+        }
+        declare interface GridNoRecords {
+            template?: string | Function
+        }
+        declare interface GridPageableMessages {
+            display?: string,
+                empty?: string,
+                page?: string, of?: string,
+                itemsPerPage?: string,
+                first?: string,
+                last?: string,
+                next?: string,
+                previous?: string,
+                refresh?: string,
+                morePages?: string
+        }
+        declare interface GridPageable {
+            pageSize?: number,
+                previousNext?: boolean,
+                numeric?: boolean,
+                buttonCount?: number,
+                input?: boolean,
+                pageSizes?: boolean | any,
+                refresh?: boolean,
+                info?: boolean,
+                messages?: GridPageableMessages
+        }
+        declare interface GridPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface GridPdf {
+            allPages?: boolean,
+                author?: string,
+                avoidLinks?: boolean | string,
+                creator?: string,
+                date?: Date,
+                fileName?: string,
+                forceProxy?: boolean,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: GridPdfMargin,
+                paperSize?: string | any,
+                template?: string,
+                repeatHeaders?: boolean,
+                scale?: number,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string
+        }
+        declare interface GridScrollable {
+            virtual?: boolean
+        }
+        declare interface GridSortable {
+            allowUnsort?: boolean,
+                mode?: string
+        }
+        declare interface GridToolbarItem {
+            name?: string,
+                template?: string | Function,
+                text?: string
+        }
+        declare interface GridOptions {
+            name?: string,
+                allowCopy?: boolean | GridAllowCopy,
+                altRowTemplate?: string | Function,
+                autoBind?: boolean,
+                columnResizeHandleWidth?: number,
+                columns?: GridColumn[],
+                columnMenu?: boolean | GridColumnMenu,
+                dataSource?: any | any | undefined.DataSource,
+                detailTemplate?: string | Function,
+                editable?: boolean | GridEditable,
+                excel?: GridExcel,
+                filterable?: boolean | GridFilterable,
+                groupable?: boolean | GridGroupable,
+                height?: number | string,
+                messages?: GridMessages,
+                mobile?: boolean | string,
+                navigatable?: boolean,
+                noRecords?: boolean | GridNoRecords,
+                pageable?: boolean | GridPageable,
+                pdf?: GridPdf,
+                reorderable?: boolean,
+                resizable?: boolean,
+                rowTemplate?: string | Function,
+                scrollable?: boolean | GridScrollable,
+                selectable?: boolean | string,
+                sortable?: boolean | GridSortable,
+                toolbar?: GridToolbarItem[] | any,
+                cancel(e: GridCancelEvent): void,
+                change(e: GridChangeEvent): void,
+                columnHide(e: GridColumnHideEvent): void,
+                columnMenuInit(e: GridColumnMenuInitEvent): void,
+                columnReorder(e: GridColumnReorderEvent): void,
+                columnResize(e: GridColumnResizeEvent): void,
+                columnShow(e: GridColumnShowEvent): void,
+                dataBinding(e: GridDataBindingEvent): void,
+                dataBound(e: GridDataBoundEvent): void,
+                detailCollapse(e: GridDetailCollapseEvent): void,
+                detailExpand(e: GridDetailExpandEvent): void,
+                detailInit(e: GridDetailInitEvent): void,
+                edit(e: GridEditEvent): void,
+                excelExport(e: GridExcelExportEvent): void,
+                filter(e: GridFilterEvent): void,
+                group(e: GridGroupEvent): void,
+                page(e: GridPageEvent): void,
+                pdfExport(e: GridPdfExportEvent): void,
+                filterMenuInit(e: GridFilterMenuInitEvent): void,
+                remove(e: GridRemoveEvent): void,
+                save(e: GridSaveEvent): void,
+                saveChanges(e: GridSaveChangesEvent): void,
+                sort(e: GridSortEvent): void,
+                columnLock(e: GridColumnLockEvent): void,
+                columnUnlock(e: GridColumnUnlockEvent): void,
+                navigate(e: GridNavigateEvent): void
+        }
+        declare interface GridEvent {
+            sender: Grid,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type GridCancelEvent = {
+            container?: JQuery,
+            model?: undefined.Model
+        } & GridEvent
+
+        declare type GridChangeEvent = {} & GridEvent
+
+        declare type GridColumnHideEvent = {
+            column?: any
+        } & GridEvent
+
+        declare type GridColumnMenuInitEvent = {
+            container?: JQuery,
+            field?: string
+        } & GridEvent
+
+        declare type GridColumnReorderEvent = {
+            column?: any,
+            newIndex?: number,
+            oldIndex?: number
+        } & GridEvent
+
+        declare type GridColumnResizeEvent = {
+            column?: any,
+            newWidth?: number,
+            oldWidth?: number
+        } & GridEvent
+
+        declare type GridColumnShowEvent = {
+            column?: any
+        } & GridEvent
+
+        declare type GridDataBindingEvent = {
+            action?: string,
+            index?: number,
+            items?: any
+        } & GridEvent
+
+        declare type GridDataBoundEvent = {} & GridEvent
+
+        declare type GridDetailCollapseEvent = {
+            detailRow?: JQuery,
+            masterRow?: JQuery
+        } & GridEvent
+
+        declare type GridDetailExpandEvent = {
+            detailRow?: JQuery,
+            masterRow?: JQuery
+        } & GridEvent
+
+        declare type GridDetailInitEvent = {
+            data?: undefined.ObservableObject,
+            detailCell?: JQuery,
+            detailRow?: JQuery,
+            masterRow?: JQuery
+        } & GridEvent
+
+        declare type GridEditEvent = {
+            container?: JQuery,
+            model?: undefined.Model
+        } & GridEvent
+
+        declare type GridExcelExportEvent = {
+            data?: any,
+            workbook?: undefined.Workbook
+        } & GridEvent
+
+        declare type GridFilterEvent = {
+            filter?: any,
+            field?: string
+        } & GridEvent
+
+        declare type GridGroupEvent = {
+            groups?: any
+        } & GridEvent
+
+        declare type GridPageEvent = {
+            page?: number
+        } & GridEvent
+
+        declare type GridPdfExportEvent = {
+            promise?: JQueryPromise<any >
+        } & GridEvent
+
+        declare type GridFilterMenuInitEvent = {
+            container?: JQuery,
+            field?: string
+        } & GridEvent
+
+        declare type GridRemoveEvent = {
+            model?: undefined.Model,
+            row?: JQuery
+        } & GridEvent
+
+        declare type GridSaveEvent = {
+            model?: undefined.Model,
+            container?: JQuery,
+            values?: any
+        } & GridEvent
+
+        declare type GridSaveChangesEvent = {} & GridEvent
+
+        declare type GridSortEvent = {
+            sort?: any
+        } & GridEvent
+
+        declare type GridColumnLockEvent = {
+            column?: any
+        } & GridEvent
+
+        declare type GridColumnUnlockEvent = {
+            column?: any
+        } & GridEvent
+
+        declare type GridNavigateEvent = {
+            element?: JQuery
+        } & GridEvent
+
+        declare class ListView mixins undefined.Widget {
+            fn: ListView;
+            options: ListViewOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ListView;
+            constructor(element: Element, options?: ListViewOptions): this;
+            append(dataItems: any): void;
+            prepend(dataItems: any): void;
+            replace(dataItems: any): void;
+            remove(dataItems: any): void;
+            setDataItem(item: JQuery, dataItem: undefined.Model): void;
+            destroy(): void;
+            items(): JQuery;
+            refresh(): void;
+            setDataSource(dataSource: undefined.DataSource): void
+        }
+        declare interface ListViewOptions {
+            name?: string,
+                autoBind?: boolean,
+                dataSource?: any | any | undefined.DataSource,
+                editTemplate?: Function,
+                navigatable?: boolean,
+                selectable?: boolean | string,
+                template?: Function,
+                altTemplate?: Function,
+                cancel(e: ListViewCancelEvent): void,
+                change(e: ListViewEvent): void,
+                dataBound(e: ListViewEvent): void,
+                dataBinding(e: ListViewEvent): void,
+                edit(e: ListViewEditEvent): void,
+                remove(e: ListViewRemoveEvent): void,
+                save(e: ListViewSaveEvent): void
+        }
+        declare interface ListViewEvent {
+            sender: ListView,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ListViewCancelEvent = {
+            container?: JQuery,
+            model?: undefined.Model
+        } & ListViewEvent
+
+        declare type ListViewEditEvent = {
+            item?: JQuery,
+            model?: undefined.Model
+        } & ListViewEvent
+
+        declare type ListViewRemoveEvent = {
+            item?: JQuery,
+            model?: undefined.Model
+        } & ListViewEvent
+
+        declare type ListViewSaveEvent = {
+            model?: undefined.Model,
+            item?: JQuery
+        } & ListViewEvent
+
+        declare class MaskedTextBox mixins undefined.Widget {
+            fn: MaskedTextBox;
+            options: MaskedTextBoxOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): MaskedTextBox;
+            constructor(element: Element, options?: MaskedTextBoxOptions): this;
+            destroy(): void;
+            enable(enable: boolean): void;
+            readonly(readonly: boolean): void;
+            raw(): string;
+            value(): string;
+            value(value: string): void
+        }
+        declare interface MaskedTextBoxOptions {
+            name?: string,
+                clearPromptChar?: boolean,
+                culture?: string,
+                mask?: string,
+                promptChar?: string,
+                rules?: any,
+                unmaskOnPost?: boolean,
+                value?: string,
+                change(e: MaskedTextBoxChangeEvent): void
+        }
+        declare interface MaskedTextBoxEvent {
+            sender: MaskedTextBox,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type MaskedTextBoxChangeEvent = {} & MaskedTextBoxEvent
+
+        declare class MediaPlayer mixins undefined.Widget {
+            fn: MediaPlayer;
+            options: MediaPlayerOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): MediaPlayer;
+            constructor(element: Element, options?: MediaPlayerOptions): this;
+            fullScreen(): void;
+            fullScreen(value: boolean): void;
+            volume(): void;
+            volume(value: number): void;
+            mute(value: boolean): void;
+            isEnded(): void;
+            isPaused(): void;
+            isPlaying(): void;
+            pause(): void;
+            play(): void;
+            seek(milliseconds: number): void;
+            stop(): void;
+            titlebar(): void;
+            toolbar(): void
+        }
+        declare interface MediaPlayerMedia {
+            source?: string,
+                title?: string
+        }
+        declare interface MediaPlayerMessages {
+            pause?: string,
+                play?: string,
+                mute?: string,
+                unmute?: string,
+                quality?: string,
+                fullscreen?: string
+        }
+        declare interface MediaPlayerOptions {
+            name?: string,
+                autoPlay?: boolean,
+                autoRepeat?: boolean,
+                forwardSeek?: boolean,
+                fullScreen?: boolean,
+                media?: MediaPlayerMedia,
+                messages?: MediaPlayerMessages,
+                mute?: boolean,
+                navigatable?: boolean,
+                volume?: number,
+                end(e: MediaPlayerEvent): void,
+                pause(e: MediaPlayerEvent): void,
+                play(e: MediaPlayerEvent): void,
+                ready(e: MediaPlayerEvent): void,
+                timeChange(e: MediaPlayerEvent): void,
+                volumeChange(e: MediaPlayerEvent): void
+        }
+        declare interface MediaPlayerEvent {
+            sender: MediaPlayer,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Menu mixins undefined.Widget {
+            fn: Menu;
+            options: MenuOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Menu;
+            constructor(element: Element, options?: MenuOptions): this;
+            append(item: any, referenceItem?: string): undefined.Menu;
+            append(item: any, referenceItem?: JQuery): undefined.Menu;
+            close(element: string): undefined.Menu;
+            close(element: Element): undefined.Menu;
+            close(element: JQuery): undefined.Menu;
+            destroy(): void;
+            enable(element: string, enable: boolean): undefined.Menu;
+            enable(element: Element, enable: boolean): undefined.Menu;
+            enable(element: JQuery, enable: boolean): undefined.Menu;
+            insertAfter(item: any, referenceItem: string): undefined.Menu;
+            insertAfter(item: any, referenceItem: Element): undefined.Menu;
+            insertAfter(item: any, referenceItem: JQuery): undefined.Menu;
+            insertBefore(item: any, referenceItem: string): undefined.Menu;
+            insertBefore(item: any, referenceItem: Element): undefined.Menu;
+            insertBefore(item: any, referenceItem: JQuery): undefined.Menu;
+            open(element: string): undefined.Menu;
+            open(element: Element): undefined.Menu;
+            open(element: JQuery): undefined.Menu;
+            remove(element: string): undefined.Menu;
+            remove(element: Element): undefined.Menu;
+            remove(element: JQuery): undefined.Menu
+        }
+        declare interface MenuAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MenuAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MenuAnimation {
+            close?: MenuAnimationClose,
+                open?: MenuAnimationOpen
+        }
+        declare interface MenuOptions {
+            name?: string,
+                animation?: boolean | MenuAnimation,
+                closeOnClick?: boolean,
+                dataSource?: any | any,
+                direction?: string,
+                hoverDelay?: number,
+                openOnClick?: boolean,
+                orientation?: string,
+                popupCollision?: string,
+                close(e: MenuCloseEvent): void,
+                open(e: MenuOpenEvent): void,
+                activate(e: MenuActivateEvent): void,
+                deactivate(e: MenuDeactivateEvent): void,
+                select(e: MenuSelectEvent): void
+        }
+        declare interface MenuEvent {
+            sender: Menu,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type MenuCloseEvent = {
+            item?: HTMLElement
+        } & MenuEvent
+
+        declare type MenuOpenEvent = {
+            item?: HTMLElement
+        } & MenuEvent
+
+        declare type MenuActivateEvent = {
+            item?: HTMLElement
+        } & MenuEvent
+
+        declare type MenuDeactivateEvent = {
+            item?: HTMLElement
+        } & MenuEvent
+
+        declare type MenuSelectEvent = {
+            item?: HTMLElement
+        } & MenuEvent
+
+        declare class MultiSelect mixins undefined.Widget {
+            fn: MultiSelect;
+            options: MultiSelectOptions;
+            dataSource: undefined.DataSource;
+            input: JQuery;
+            list: JQuery;
+            ul: JQuery;
+            tagList: JQuery;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): MultiSelect;
+            constructor(element: Element, options?: MultiSelectOptions): this;
+            close(): void;
+            dataItems(): any;
+            destroy(): void;
+            enable(enable: boolean): void;
+            focus(): void;
+            items(): any;
+            open(): void;
+            readonly(readonly: boolean): void;
+            refresh(): void;
+            search(word: string): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            toggle(toggle?: boolean): void;
+            value(): any;
+            value(value: any): void;
+            value(value: string): void
+        }
+        declare interface MultiSelectAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MultiSelectAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MultiSelectAnimation {
+            close?: MultiSelectAnimationClose,
+                open?: MultiSelectAnimationOpen
+        }
+        declare interface MultiSelectPopup {
+            appendTo?: string,
+                origin?: string,
+                position?: string
+        }
+        declare interface MultiSelectVirtual {
+            itemHeight?: number,
+                mapValueTo?: string,
+                valueMapper?: Function
+        }
+        declare interface MultiSelectOptions {
+            name?: string,
+                animation?: boolean | MultiSelectAnimation,
+                autoBind?: boolean,
+                autoClose?: boolean,
+                clearButton?: boolean,
+                dataSource?: any | any | undefined.DataSource,
+                dataTextField?: string,
+                dataValueField?: string,
+                delay?: number,
+                enable?: boolean,
+                enforceMinLength?: boolean,
+                filter?: string,
+                fixedGroupTemplate?: string | Function,
+                footerTemplate?: string | Function,
+                groupTemplate?: string | Function,
+                height?: number,
+                highlightFirst?: boolean,
+                ignoreCase?: boolean,
+                minLength?: number,
+                maxSelectedItems?: number,
+                noDataTemplate?: string | Function,
+                placeholder?: string,
+                popup?: MultiSelectPopup,
+                headerTemplate?: string | Function,
+                itemTemplate?: string | Function,
+                tagTemplate?: string,
+                tagMode?: string,
+                value?: any,
+                valuePrimitive?: boolean,
+                virtual?: boolean | MultiSelectVirtual,
+                change(e: MultiSelectChangeEvent): void,
+                close(e: MultiSelectCloseEvent): void,
+                dataBound(e: MultiSelectDataBoundEvent): void,
+                filtering(e: MultiSelectFilteringEvent): void,
+                open(e: MultiSelectOpenEvent): void,
+                select(e: MultiSelectSelectEvent): void,
+                deselect(e: MultiSelectDeselectEvent): void
+        }
+        declare interface MultiSelectEvent {
+            sender: MultiSelect,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type MultiSelectChangeEvent = {} & MultiSelectEvent
+
+        declare type MultiSelectCloseEvent = {} & MultiSelectEvent
+
+        declare type MultiSelectDataBoundEvent = {} & MultiSelectEvent
+
+        declare type MultiSelectFilteringEvent = {
+            filter?: any
+        } & MultiSelectEvent
+
+        declare type MultiSelectOpenEvent = {} & MultiSelectEvent
+
+        declare type MultiSelectSelectEvent = {
+            dataItem?: any,
+            item?: JQuery
+        } & MultiSelectEvent
+
+        declare type MultiSelectDeselectEvent = {
+            dataItem?: any,
+            item?: JQuery
+        } & MultiSelectEvent
+
+        declare class Notification mixins undefined.Widget {
+            fn: Notification;
+            options: NotificationOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Notification;
+            constructor(element: Element, options?: NotificationOptions): this;
+            error(data: any): void;
+            error(data: string): void;
+            error(data: Function): void;
+            getNotifications(): JQuery;
+            hide(): void;
+            info(data: any): void;
+            info(data: string): void;
+            info(data: Function): void;
+            show(data: any, type: string): void;
+            show(data: string, type: string): void;
+            show(data: Function, type: string): void;
+            showText(data: any, type: string): void;
+            showText(data: string, type: string): void;
+            showText(data: Function, type: string): void;
+            success(data: any): void;
+            success(data: string): void;
+            success(data: Function): void;
+            warning(data: any): void;
+            warning(data: string): void;
+            warning(data: Function): void
+        }
+        declare interface NotificationPosition {
+            bottom?: number,
+                left?: number,
+                pinned?: boolean,
+                right?: number,
+                top?: number
+        }
+        declare interface NotificationTemplate {
+            type?: string,
+                template?: string
+        }
+        declare interface NotificationOptions {
+            name?: string,
+                allowHideAfter?: number,
+                animation?: any | boolean,
+                appendTo?: string | JQuery,
+                autoHideAfter?: number,
+                button?: boolean,
+                height?: number | string,
+                hideOnClick?: boolean,
+                position?: NotificationPosition,
+                stacking?: string,
+                templates?: NotificationTemplate[],
+                width?: number | string,
+                hide(e: NotificationHideEvent): void,
+                show(e: NotificationShowEvent): void
+        }
+        declare interface NotificationEvent {
+            sender: Notification,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type NotificationHideEvent = {
+            element?: JQuery
+        } & NotificationEvent
+
+        declare type NotificationShowEvent = {
+            element?: JQuery
+        } & NotificationEvent
+
+        declare class NumericTextBox mixins undefined.Widget {
+            fn: NumericTextBox;
+            options: NumericTextBoxOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): NumericTextBox;
+            constructor(element: Element, options?: NumericTextBoxOptions): this;
+            destroy(): void;
+            enable(enable: boolean): void;
+            readonly(readonly: boolean): void;
+            focus(): void;
+            max(): number;
+            max(value: number): void;
+            max(value: string): void;
+            min(): number;
+            min(value: number): void;
+            min(value: string): void;
+            step(): number;
+            step(value: number): void;
+            step(value: string): void;
+            value(): number;
+            value(value: number): void;
+            value(value: string): void
+        }
+        declare interface NumericTextBoxOptions {
+            name?: string,
+                culture?: string,
+                decimals?: number,
+                downArrowText?: string,
+                format?: string,
+                max?: number,
+                min?: number,
+                placeholder?: string,
+                restrictDecimals?: boolean,
+                round?: boolean,
+                spinners?: boolean,
+                step?: number,
+                upArrowText?: string,
+                value?: number,
+                change(e: NumericTextBoxChangeEvent): void,
+                spin(e: NumericTextBoxSpinEvent): void
+        }
+        declare interface NumericTextBoxEvent {
+            sender: NumericTextBox,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type NumericTextBoxChangeEvent = {} & NumericTextBoxEvent
+
+        declare type NumericTextBoxSpinEvent = {} & NumericTextBoxEvent
+
+        declare class Pager mixins undefined.Widget {
+            fn: Pager;
+            options: PagerOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Pager;
+            constructor(element: Element, options?: PagerOptions): this;
+            totalPages(): number;
+            pageSize(): number;
+            page(): number;
+            page(page: number): void;
+            refresh(): void;
+            destroy(): void
+        }
+        declare interface PagerMessages {
+            display?: string,
+                empty?: string,
+                allPages?: string,
+                page?: string, of?: string,
+                itemsPerPage?: string,
+                first?: string,
+                previous?: string,
+                next?: string,
+                last?: string,
+                refresh?: string
+        }
+        declare interface PagerOptions {
+            name?: string,
+                autoBind?: boolean,
+                buttonCount?: number,
+                dataSource?: any | undefined.DataSource,
+                selectTemplate?: string,
+                linkTemplate?: string,
+                info?: boolean,
+                input?: boolean,
+                numeric?: boolean,
+                pageSizes?: boolean | any,
+                previousNext?: boolean,
+                refresh?: boolean,
+                messages?: PagerMessages,
+                change(e: PagerChangeEvent): void
+        }
+        declare interface PagerEvent {
+            sender: Pager,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type PagerChangeEvent = {} & PagerEvent
+
+        declare class PanelBar mixins undefined.Widget {
+            fn: PanelBar;
+            options: PanelBarOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): PanelBar;
+            constructor(element: Element, options?: PanelBarOptions): this;
+            append(item: string, referenceItem: string): undefined.PanelBar;
+            append(item: string, referenceItem: Element): undefined.PanelBar;
+            append(item: string, referenceItem: JQuery): undefined.PanelBar;
+            append(item: Element, referenceItem: string): undefined.PanelBar;
+            append(item: Element, referenceItem: Element): undefined.PanelBar;
+            append(item: Element, referenceItem: JQuery): undefined.PanelBar;
+            append(item: JQuery, referenceItem: string): undefined.PanelBar;
+            append(item: JQuery, referenceItem: Element): undefined.PanelBar;
+            append(item: JQuery, referenceItem: JQuery): undefined.PanelBar;
+            append(item: any, referenceItem: string): undefined.PanelBar;
+            append(item: any, referenceItem: Element): undefined.PanelBar;
+            append(item: any, referenceItem: JQuery): undefined.PanelBar;
+            clearSelection(): void;
+            collapse(element: string, useAnimation: boolean): undefined.PanelBar;
+            collapse(element: Element, useAnimation: boolean): undefined.PanelBar;
+            collapse(element: JQuery, useAnimation: boolean): undefined.PanelBar;
+            destroy(): void;
+            enable(element: string, enable: boolean): void;
+            enable(element: Element, enable: boolean): void;
+            enable(element: JQuery, enable: boolean): void;
+            expand(element: string, useAnimation: boolean): undefined.PanelBar;
+            expand(element: Element, useAnimation: boolean): undefined.PanelBar;
+            expand(element: JQuery, useAnimation: boolean): undefined.PanelBar;
+            insertAfter(item: string, referenceItem: string): void;
+            insertAfter(item: string, referenceItem: Element): void;
+            insertAfter(item: string, referenceItem: JQuery): void;
+            insertAfter(item: Element, referenceItem: string): void;
+            insertAfter(item: Element, referenceItem: Element): void;
+            insertAfter(item: Element, referenceItem: JQuery): void;
+            insertAfter(item: JQuery, referenceItem: string): void;
+            insertAfter(item: JQuery, referenceItem: Element): void;
+            insertAfter(item: JQuery, referenceItem: JQuery): void;
+            insertAfter(item: any, referenceItem: string): void;
+            insertAfter(item: any, referenceItem: Element): void;
+            insertAfter(item: any, referenceItem: JQuery): void;
+            insertBefore(item: string, referenceItem: string): undefined.PanelBar;
+            insertBefore(item: string, referenceItem: Element): undefined.PanelBar;
+            insertBefore(item: string, referenceItem: JQuery): undefined.PanelBar;
+            insertBefore(item: Element, referenceItem: string): undefined.PanelBar;
+            insertBefore(item: Element, referenceItem: Element): undefined.PanelBar;
+            insertBefore(item: Element, referenceItem: JQuery): undefined.PanelBar;
+            insertBefore(item: JQuery, referenceItem: string): undefined.PanelBar;
+            insertBefore(item: JQuery, referenceItem: Element): undefined.PanelBar;
+            insertBefore(item: JQuery, referenceItem: JQuery): undefined.PanelBar;
+            insertBefore(item: any, referenceItem: string): undefined.PanelBar;
+            insertBefore(item: any, referenceItem: Element): undefined.PanelBar;
+            insertBefore(item: any, referenceItem: JQuery): undefined.PanelBar;
+            reload(element: string): void;
+            reload(element: Element): void;
+            reload(element: JQuery): void;
+            remove(element: string): void;
+            remove(element: Element): void;
+            remove(element: JQuery): void;
+            select(): JQuery;
+            select(element?: string): void;
+            select(element?: Element): void;
+            select(element?: JQuery): void
+        }
+        declare interface PanelBarAnimationCollapse {
+            duration?: number,
+                effects?: string
+        }
+        declare interface PanelBarAnimationExpand {
+            duration?: number,
+                effects?: string
+        }
+        declare interface PanelBarAnimation {
+            collapse?: PanelBarAnimationCollapse,
+                expand?: PanelBarAnimationExpand
+        }
+        declare interface PanelBarOptions {
+            name?: string,
+                animation?: boolean | PanelBarAnimation,
+                contentUrls?: any,
+                dataSource?: any | any,
+                expandMode?: string,
+                activate(e: PanelBarActivateEvent): void,
+                collapse(e: PanelBarCollapseEvent): void,
+                contentLoad(e: PanelBarContentLoadEvent): void,
+                error(e: PanelBarErrorEvent): void,
+                expand(e: PanelBarExpandEvent): void,
+                select(e: PanelBarSelectEvent): void
+        }
+        declare interface PanelBarEvent {
+            sender: PanelBar,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type PanelBarActivateEvent = {
+            item?: Element
+        } & PanelBarEvent
+
+        declare type PanelBarCollapseEvent = {
+            item?: Element
+        } & PanelBarEvent
+
+        declare type PanelBarContentLoadEvent = {
+            item?: Element,
+            contentElement?: Element
+        } & PanelBarEvent
+
+        declare type PanelBarErrorEvent = {
+            xhr?: JQueryXHR,
+            status?: string
+        } & PanelBarEvent
+
+        declare type PanelBarExpandEvent = {
+            item?: Element
+        } & PanelBarEvent
+
+        declare type PanelBarSelectEvent = {
+            item?: Element
+        } & PanelBarEvent
+
+        declare class PivotConfigurator mixins undefined.Widget {
+            fn: PivotConfigurator;
+            options: PivotConfiguratorOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): PivotConfigurator;
+            constructor(element: Element, options?: PivotConfiguratorOptions): this;
+            destroy(): void;
+            refresh(): void;
+            setDataSource(dataSource: undefined.PivotDataSource): void
+        }
+        declare interface PivotConfiguratorMessagesFieldMenuOperators {
+            contains?: string,
+                doesnotcontain?: string,
+                startswith?: string,
+                endswith?: string,
+                eq?: string,
+                neq?: string
+        }
+        declare interface PivotConfiguratorMessagesFieldMenu {
+            info?: string,
+                sortAscending?: string,
+                sortDescending?: string,
+                filterFields?: string,
+                filter?: string,
+                include?: string,
+                title?: string,
+                clear?: string,
+                ok?: string,
+                cancel?: string,
+                operators?: PivotConfiguratorMessagesFieldMenuOperators
+        }
+        declare interface PivotConfiguratorMessages {
+            measures?: string,
+                columns?: string,
+                rows?: string,
+                measuresLabel?: string,
+                rowsLabel?: string,
+                columnsLabel?: string,
+                fieldsLabel?: string,
+                fieldMenu?: PivotConfiguratorMessagesFieldMenu
+        }
+        declare interface PivotConfiguratorSortable {
+            allowUnsort?: boolean
+        }
+        declare interface PivotConfiguratorOptions {
+            name?: string,
+                dataSource?: any | undefined.PivotDataSource,
+                filterable?: boolean,
+                sortable?: boolean | PivotConfiguratorSortable,
+                height?: number | string,
+                messages?: PivotConfiguratorMessages
+        }
+        declare interface PivotConfiguratorEvent {
+            sender: PivotConfigurator,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class PivotGrid mixins undefined.Widget {
+            fn: PivotGrid;
+            options: PivotGridOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): PivotGrid;
+            constructor(element: Element, options?: PivotGridOptions): this;
+            cellInfo(columnIndex: number, rowIndex: number): any;
+            cellInfoByElement(cell: string): any;
+            cellInfoByElement(cell: Element): any;
+            cellInfoByElement(cell: JQuery): any;
+            destroy(): void;
+            refresh(): void;
+            setDataSource(dataSource: undefined.PivotDataSource): void;
+            saveAsExcel(): void;
+            saveAsPDF(): JQueryPromise<any >
+        }
+        declare interface PivotGridExcel {
+            fileName?: string,
+                filterable?: boolean,
+                forceProxy?: boolean,
+                proxyURL?: string
+        }
+        declare interface PivotGridMessagesFieldMenuOperators {
+            contains?: string,
+                doesnotcontain?: string,
+                startswith?: string,
+                endswith?: string,
+                eq?: string,
+                neq?: string
+        }
+        declare interface PivotGridMessagesFieldMenu {
+            info?: string,
+                sortAscending?: string,
+                sortDescending?: string,
+                filterFields?: string,
+                filter?: string,
+                include?: string,
+                title?: string,
+                clear?: string,
+                ok?: string,
+                cancel?: string,
+                operators?: PivotGridMessagesFieldMenuOperators
+        }
+        declare interface PivotGridMessages {
+            measureFields?: string,
+                columnFields?: string,
+                rowFields?: string,
+                fieldMenu?: PivotGridMessagesFieldMenu
+        }
+        declare interface PivotGridPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface PivotGridPdf {
+            author?: string,
+                avoidLinks?: boolean | string,
+                creator?: string,
+                date?: Date,
+                fileName?: string,
+                forceProxy?: boolean,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: PivotGridPdfMargin,
+                paperSize?: string | any,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string
+        }
+        declare interface PivotGridSortable {
+            allowUnsort?: boolean
+        }
+        declare interface PivotGridOptions {
+            name?: string,
+                dataSource?: any | undefined.PivotDataSource,
+                autoBind?: boolean,
+                reorderable?: boolean,
+                excel?: PivotGridExcel,
+                pdf?: PivotGridPdf,
+                filterable?: boolean,
+                sortable?: boolean | PivotGridSortable,
+                columnWidth?: number,
+                height?: number | string,
+                columnHeaderTemplate?: string | Function,
+                dataCellTemplate?: string | Function,
+                kpiStatusTemplate?: string | Function,
+                kpiTrendTemplate?: string | Function,
+                rowHeaderTemplate?: string | Function,
+                messages?: PivotGridMessages,
+                dataBinding(e: PivotGridDataBindingEvent): void,
+                dataBound(e: PivotGridDataBoundEvent): void,
+                expandMember(e: PivotGridExpandMemberEvent): void,
+                collapseMember(e: PivotGridCollapseMemberEvent): void,
+                excelExport(e: PivotGridExcelExportEvent): void,
+                pdfExport(e: PivotGridPdfExportEvent): void
+        }
+        declare interface PivotGridEvent {
+            sender: PivotGrid,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type PivotGridDataBindingEvent = {} & PivotGridEvent
+
+        declare type PivotGridDataBoundEvent = {} & PivotGridEvent
+
+        declare type PivotGridExpandMemberEvent = {
+            axis?: string,
+            path?: string
+        } & PivotGridEvent
+
+        declare type PivotGridCollapseMemberEvent = {
+            axis?: string,
+            path?: string
+        } & PivotGridEvent
+
+        declare type PivotGridExcelExportEvent = {
+            data?: any,
+            workbook?: any
+        } & PivotGridEvent
+
+        declare type PivotGridPdfExportEvent = {
+            promise?: JQueryPromise<any >
+        } & PivotGridEvent
+
+        declare class Popup mixins undefined.Widget {
+            fn: Popup;
+            options: PopupOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Popup;
+            constructor(element: Element, options?: PopupOptions): this;
+            close(): void;
+            open(): void;
+            position(): void;
+            setOptions(options: any): void;
+            visible(): boolean
+        }
+        declare interface PopupAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface PopupAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface PopupAnimation {
+            close?: PopupAnimationClose,
+                open?: PopupAnimationOpen
+        }
+        declare interface PopupOptions {
+            name?: string,
+                adjustSize?: any,
+                animation?: boolean | PopupAnimation,
+                anchor?: string | JQuery,
+                appendTo?: string | JQuery,
+                collision?: string,
+                origin?: string,
+                position?: string,
+                activate(e: PopupActivateEvent): void,
+                close(e: PopupCloseEvent): void,
+                deactivate(e: PopupDeactivateEvent): void,
+                open(e: PopupOpenEvent): void
+        }
+        declare interface PopupEvent {
+            sender: Popup,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type PopupActivateEvent = {} & PopupEvent
+
+        declare type PopupCloseEvent = {} & PopupEvent
+
+        declare type PopupDeactivateEvent = {} & PopupEvent
+
+        declare type PopupOpenEvent = {} & PopupEvent
+
+        declare class ProgressBar mixins undefined.Widget {
+            fn: ProgressBar;
+            options: ProgressBarOptions;
+            progressStatus: JQuery;
+            progressWrapper: JQuery;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ProgressBar;
+            constructor(element: Element, options?: ProgressBarOptions): this;
+            enable(enable: boolean): void;
+            value(): number;
+            value(value: number): void
+        }
+        declare interface ProgressBarAnimation {
+            duration?: number
+        }
+        declare interface ProgressBarOptions {
+            name?: string,
+                animation?: ProgressBarAnimation,
+                chunkCount?: number,
+                enable?: boolean,
+                max?: number,
+                min?: number,
+                orientation?: string,
+                reverse?: boolean,
+                showStatus?: boolean,
+                type?: string,
+                value?: number,
+                change(e: ProgressBarChangeEvent): void,
+                complete(e: ProgressBarCompleteEvent): void
+        }
+        declare interface ProgressBarEvent {
+            sender: ProgressBar,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ProgressBarChangeEvent = {
+            value?: number
+        } & ProgressBarEvent
+
+        declare type ProgressBarCompleteEvent = {
+            value?: number
+        } & ProgressBarEvent
+
+        declare class Prompt mixins undefined.Dialog {
+            fn: Prompt;
+            options: PromptOptions;
+            result: JQueryPromise<any>;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Prompt;
+            constructor(element: Element, options?: PromptOptions): this
+        }
+        declare interface PromptMessages {
+            okText?: string,
+                cancel?: string
+        }
+        declare interface PromptOptions {
+            name?: string,
+                messages?: PromptMessages
+        }
+        declare interface PromptEvent {
+            sender: Prompt,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class RangeSlider mixins undefined.Widget {
+            fn: RangeSlider;
+            options: RangeSliderOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): RangeSlider;
+            constructor(element: Element, options?: RangeSliderOptions): this;
+            destroy(): void;
+            enable(enable: boolean): void;
+            value(): any;
+            value(selectionStart: number, selectionEnd: number): void;
+            values(): any;
+            resize(): void
+        }
+        declare interface RangeSliderTooltip {
+            enabled?: boolean,
+                format?: string,
+                template?: string
+        }
+        declare interface RangeSliderOptions {
+            name?: string,
+                largeStep?: number,
+                leftDragHandleTitle?: string,
+                max?: number,
+                min?: number,
+                orientation?: string,
+                rightDragHandleTitle?: string,
+                selectionEnd?: number,
+                selectionStart?: number,
+                smallStep?: number,
+                tickPlacement?: string,
+                tooltip?: RangeSliderTooltip,
+                change(e: RangeSliderChangeEvent): void,
+                slide(e: RangeSliderSlideEvent): void
+        }
+        declare interface RangeSliderEvent {
+            sender: RangeSlider,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type RangeSliderChangeEvent = {
+            value?: any
+        } & RangeSliderEvent
+
+        declare type RangeSliderSlideEvent = {
+            value?: any
+        } & RangeSliderEvent
+
+        declare class ResponsivePanel mixins undefined.Widget {
+            fn: ResponsivePanel;
+            options: ResponsivePanelOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ResponsivePanel;
+            constructor(element: Element, options?: ResponsivePanelOptions): this;
+            close(): void;
+            destroy(): void;
+            open(): void
+        }
+        declare interface ResponsivePanelOptions {
+            name?: string,
+                autoClose?: boolean,
+                breakpoint?: number,
+                orientation?: string,
+                toggleButton?: string,
+                close(e: ResponsivePanelEvent): void,
+                open(e: ResponsivePanelEvent): void
+        }
+        declare interface ResponsivePanelEvent {
+            sender: ResponsivePanel,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Scheduler mixins undefined.Widget {
+            fn: Scheduler;
+            options: SchedulerOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Scheduler;
+            constructor(element: Element, options?: SchedulerOptions): this;
+            addEvent(data: any): void;
+            cancelEvent(): void;
+            data(): void;
+            date(): Date;
+            date(value?: Date): void;
+            destroy(): void;
+            editEvent(event: string): void;
+            editEvent(event: undefined.SchedulerEvent): void;
+            items(): any;
+            occurrenceByUid(uid: string): undefined.SchedulerEvent;
+            occurrencesInRange(start: Date, end: Date): any;
+            refresh(): void;
+            removeEvent(event: string): void;
+            removeEvent(event: undefined.SchedulerEvent): void;
+            resourcesBySlot(slot: any): any;
+            saveAsPDF(): JQueryPromise<any>;
+            saveEvent(): void;
+            select(): void;
+            select(events: any, options: any): void;
+            setDataSource(dataSource: undefined.SchedulerDataSource): void;
+            slotByPosition(xPosition: number, yPosition: number): any;
+            slotByElement(element: Element): any;
+            slotByElement(element: JQuery): any;
+            view(type?: string): void;
+            viewName(): string
+        }
+        declare interface SchedulerCurrentTimeMarker {
+            updateInterval?: number,
+                useLocalTimezone?: boolean
+        }
+        declare interface SchedulerEditable {
+            confirmation?: boolean | string,
+                create?: boolean,
+                destroy?: boolean,
+                editRecurringMode?: string,
+                move?: boolean,
+                resize?: boolean,
+                template?: string | Function,
+                update?: boolean,
+                window?: any
+        }
+        declare interface SchedulerFooter {
+            command?: string | boolean
+        }
+        declare interface SchedulerGroup {
+            date?: boolean,
+                resources?: any,
+                orientation?: string
+        }
+        declare interface SchedulerMessagesEditable {
+            confirmation?: string
+        }
+        declare interface SchedulerMessagesEditor {
+            allDayEvent?: string,
+                description?: string,
+                editorTitle?: string,
+                end?: string,
+                endTimezone?: string,
+                repeat?: string,
+                separateTimezones?: string,
+                start?: string,
+                startTimezone?: string,
+                timezone?: string,
+                timezoneEditorButton?: string,
+                timezoneEditorTitle?: string,
+                title?: string
+        }
+        declare interface SchedulerMessagesRecurrenceEditorDaily {
+            interval?: string,
+                repeatEvery?: string
+        }
+        declare interface SchedulerMessagesRecurrenceEditorEnd {
+            after?: string,
+                occurrence?: string,
+                label?: string,
+                never?: string,
+                mobileLabel?: string,
+                on?: string
+        }
+        declare interface SchedulerMessagesRecurrenceEditorFrequencies {
+            daily?: string,
+                monthly?: string,
+                never?: string,
+                weekly?: string,
+                yearly?: string
+        }
+        declare interface SchedulerMessagesRecurrenceEditorMonthly {
+            day?: string,
+                interval?: string,
+                repeatEvery?: string,
+                repeatOn?: string
+        }
+        declare interface SchedulerMessagesRecurrenceEditorOffsetPositions {
+            first?: string,
+                second?: string,
+                third?: string,
+                fourth?: string,
+                last?: string
+        }
+        declare interface SchedulerMessagesRecurrenceEditorWeekdays {
+            day?: string,
+                weekday?: string,
+                weekend?: string
+        }
+        declare interface SchedulerMessagesRecurrenceEditorWeekly {
+            interval?: string,
+                repeatEvery?: string,
+                repeatOn?: string
+        }
+        declare interface SchedulerMessagesRecurrenceEditorYearly { of?: string,
+            repeatEvery?: string,
+                repeatOn?: string,
+                interval?: string
+        }
+        declare interface SchedulerMessagesRecurrenceEditor {
+            daily?: SchedulerMessagesRecurrenceEditorDaily,
+                end?: SchedulerMessagesRecurrenceEditorEnd,
+                frequencies?: SchedulerMessagesRecurrenceEditorFrequencies,
+                monthly?: SchedulerMessagesRecurrenceEditorMonthly,
+                offsetPositions?: SchedulerMessagesRecurrenceEditorOffsetPositions,
+                weekly?: SchedulerMessagesRecurrenceEditorWeekly,
+                weekdays?: SchedulerMessagesRecurrenceEditorWeekdays,
+                yearly?: SchedulerMessagesRecurrenceEditorYearly
+        }
+        declare interface SchedulerMessagesRecurrenceMessages {
+            deleteRecurring?: string,
+                deleteWindowOccurrence?: string,
+                deleteWindowSeries?: string,
+                deleteWindowTitle?: string,
+                editRecurring?: string,
+                editWindowOccurrence?: string,
+                editWindowSeries?: string,
+                editWindowTitle?: string
+        }
+        declare interface SchedulerMessagesViews {
+            day?: string,
+                week?: string,
+                month?: string,
+                agenda?: string
+        }
+        declare interface SchedulerMessages {
+            allDay?: string,
+                ariaEventLabel?: string,
+                ariaSlotLabel?: string,
+                cancel?: string,
+                date?: string,
+                deleteWindowTitle?: string,
+                destroy?: string,
+                event?: string,
+                defaultRowText?: string,
+                pdf?: string,
+                save?: string,
+                showFullDay?: string,
+                showWorkDay?: string,
+                time?: string,
+                today?: string,
+                editable?: SchedulerMessagesEditable,
+                editor?: SchedulerMessagesEditor,
+                recurrenceEditor?: SchedulerMessagesRecurrenceEditor,
+                recurrenceMessages?: SchedulerMessagesRecurrenceMessages,
+                views?: SchedulerMessagesViews
+        }
+        declare interface SchedulerPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface SchedulerPdf {
+            author?: string,
+                avoidLinks?: boolean | string,
+                creator?: string,
+                date?: Date,
+                fileName?: string,
+                forceProxy?: boolean,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: SchedulerPdfMargin,
+                paperSize?: string | any,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string
+        }
+        declare interface SchedulerResource {
+            dataColorField?: string,
+                dataSource?: any | any | undefined.DataSource,
+                dataTextField?: string,
+                dataValueField?: string,
+                field?: string,
+                multiple?: boolean,
+                name?: string,
+                title?: string,
+                valuePrimitive?: boolean
+        }
+        declare interface SchedulerToolbarItem {
+            name?: string
+        }
+        declare interface SchedulerViewEditable {
+            create?: boolean,
+                destroy?: boolean,
+                update?: boolean
+        }
+        declare interface SchedulerViewGroup {
+            date?: boolean,
+                orientation?: string
+        }
+        declare interface SchedulerView {
+            allDayEventTemplate?: string | Function,
+                allDaySlot?: boolean,
+                allDaySlotTemplate?: string | Function,
+                columnWidth?: number,
+                dateHeaderTemplate?: string | Function,
+                dayTemplate?: string | Function,
+                editable?: boolean | SchedulerViewEditable,
+                endTime?: Date,
+                eventHeight?: number,
+                eventTemplate?: string | Function,
+                eventTimeTemplate?: string | Function,
+                group?: SchedulerViewGroup,
+                majorTick?: number,
+                majorTimeHeaderTemplate?: string | Function,
+                minorTickCount?: number,
+                minorTimeHeaderTemplate?: string | Function,
+                selected?: boolean,
+                selectedDateFormat?: string,
+                selectedShortDateFormat?: string,
+                showWorkHours?: boolean,
+                slotTemplate?: string | Function,
+                startTime?: Date,
+                title?: string,
+                type?: string,
+                workWeekStart?: number,
+                workWeekEnd?: number
+        }
+        declare interface SchedulerSelectOptions {
+            events?: any,
+                resources?: any,
+                start?: Date,
+                end?: Date,
+                isAllDay?: boolean
+        }
+        declare interface SchedulerOptions {
+            name?: string,
+                allDayEventTemplate?: string | Function,
+                allDaySlot?: boolean,
+                autoBind?: boolean,
+                currentTimeMarker?: boolean | SchedulerCurrentTimeMarker,
+                dataSource?: any | any | undefined.SchedulerDataSource,
+                date?: Date,
+                dateHeaderTemplate?: string | Function,
+                editable?: boolean | SchedulerEditable,
+                endTime?: Date,
+                eventTemplate?: string | Function,
+                footer?: boolean | SchedulerFooter,
+                group?: SchedulerGroup,
+                height?: number | string,
+                majorTick?: number,
+                majorTimeHeaderTemplate?: string | Function,
+                max?: Date,
+                messages?: SchedulerMessages,
+                min?: Date,
+                minorTickCount?: number,
+                minorTimeHeaderTemplate?: string | Function,
+                mobile?: boolean | string,
+                pdf?: SchedulerPdf,
+                resources?: SchedulerResource[],
+                selectable?: boolean,
+                showWorkHours?: boolean,
+                snap?: boolean,
+                startTime?: Date,
+                timezone?: string,
+                toolbar?: SchedulerToolbarItem[],
+                views?: SchedulerView[],
+                groupHeaderTemplate?: string | Function,
+                width?: number | string,
+                workDayStart?: Date,
+                workDayEnd?: Date,
+                workWeekStart?: number,
+                workWeekEnd?: number,
+                add(e: SchedulerAddEvent): void,
+                cancel(e: SchedulerCancelEvent): void,
+                change(e: SchedulerChangeEvent): void,
+                dataBinding(e: SchedulerDataBindingEvent): void,
+                dataBound(e: SchedulerDataBoundEvent): void,
+                edit(e: SchedulerEditEvent): void,
+                moveStart(e: SchedulerMoveStartEvent): void,
+                move(e: SchedulerMoveEvent): void,
+                moveEnd(e: SchedulerMoveEndEvent): void,
+                navigate(e: SchedulerNavigateEvent): void,
+                pdfExport(e: SchedulerPdfExportEvent): void,
+                remove(e: SchedulerRemoveEvent): void,
+                resizeStart(e: SchedulerResizeStartEvent): void,
+                resize(e: SchedulerResizeEvent): void,
+                resizeEnd(e: SchedulerResizeEndEvent): void,
+                save(e: SchedulerSaveEvent): void
+        }
+        declare interface SchedulerEvent {
+            sender: Scheduler,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type SchedulerAddEvent = {
+            event?: any
+        } & SchedulerEvent
+
+        declare type SchedulerCancelEvent = {
+            container?: JQuery,
+            event?: undefined.SchedulerEvent
+        } & SchedulerEvent
+
+        declare type SchedulerChangeEvent = {
+            start?: Date,
+            end?: Date,
+            events?: any,
+            slots?: any,
+            resources?: any
+        } & SchedulerEvent
+
+        declare type SchedulerDataBindingEvent = {} & SchedulerEvent
+
+        declare type SchedulerDataBoundEvent = {} & SchedulerEvent
+
+        declare type SchedulerEditEvent = {
+            container?: JQuery,
+            event?: undefined.SchedulerEvent
+        } & SchedulerEvent
+
+        declare type SchedulerMoveStartEvent = {
+            event?: undefined.SchedulerEvent
+        } & SchedulerEvent
+
+        declare type SchedulerMoveEvent = {
+            event?: undefined.SchedulerEvent,
+            slot?: any
+        } & SchedulerEvent
+
+        declare type SchedulerMoveEndEvent = {
+            start?: Date,
+            end?: Date,
+            event?: undefined.SchedulerEvent,
+            slot?: any,
+            resources?: any
+        } & SchedulerEvent
+
+        declare type SchedulerNavigateEvent = {
+            action?: string,
+            date?: Date,
+            view?: string
+        } & SchedulerEvent
+
+        declare type SchedulerPdfExportEvent = {
+            promise?: JQueryPromise<any >
+        } & SchedulerEvent
+
+        declare type SchedulerRemoveEvent = {
+            event?: undefined.SchedulerEvent
+        } & SchedulerEvent
+
+        declare type SchedulerResizeStartEvent = {
+            event?: undefined.SchedulerEvent
+        } & SchedulerEvent
+
+        declare type SchedulerResizeEvent = {
+            event?: undefined.SchedulerEvent,
+            slot?: any
+        } & SchedulerEvent
+
+        declare type SchedulerResizeEndEvent = {
+            event?: undefined.SchedulerEvent,
+            slot?: any
+        } & SchedulerEvent
+
+        declare type SchedulerSaveEvent = {
+            container?: JQuery,
+            event?: undefined.SchedulerEvent
+        } & SchedulerEvent
+
+        declare class Slider mixins undefined.Widget {
+            fn: Slider;
+            options: SliderOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Slider;
+            constructor(element: Element, options?: SliderOptions): this;
+            destroy(): void;
+            enable(enable: boolean): void;
+            value(): number;
+            value(value: number): void;
+            resize(): void
+        }
+        declare interface SliderTooltip {
+            enabled?: boolean,
+                format?: string,
+                template?: string
+        }
+        declare interface SliderOptions {
+            name?: string,
+                decreaseButtonTitle?: string,
+                dragHandleTitle?: string,
+                increaseButtonTitle?: string,
+                largeStep?: number,
+                max?: number,
+                min?: number,
+                orientation?: string,
+                showButtons?: boolean,
+                smallStep?: number,
+                tickPlacement?: string,
+                tooltip?: SliderTooltip,
+                value?: number,
+                change(e: SliderChangeEvent): void,
+                slide(e: SliderSlideEvent): void
+        }
+        declare interface SliderEvent {
+            sender: Slider,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type SliderChangeEvent = {
+            value?: number
+        } & SliderEvent
+
+        declare type SliderSlideEvent = {
+            value?: number
+        } & SliderEvent
+
+        declare class Sortable mixins undefined.Widget {
+            fn: Sortable;
+            options: SortableOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Sortable;
+            constructor(element: Element, options?: SortableOptions): this;
+            indexOf(element: JQuery): number;
+            items(): JQuery
+        }
+        declare interface SortableCursorOffset {
+            left?: number,
+                top?: number
+        }
+        declare interface SortableOptions {
+            name?: string,
+                axis?: string,
+                autoScroll?: boolean,
+                container?: string | JQuery,
+                connectWith?: string,
+                cursor?: string,
+                cursorOffset?: SortableCursorOffset,
+                disabled?: string,
+                filter?: string,
+                handler?: string,
+                hint?: Function | string | JQuery,
+                holdToDrag?: boolean,
+                ignore?: string,
+                placeholder?: Function | string | JQuery,
+                start(e: SortableStartEvent): void,
+                move(e: SortableMoveEvent): void,
+                end(e: SortableEndEvent): void,
+                change(e: SortableChangeEvent): void,
+                cancel(e: SortableCancelEvent): void
+        }
+        declare interface SortableEvent {
+            sender: Sortable,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type SortableStartEvent = {
+            draggableEvent?: any,
+            item?: JQuery
+        } & SortableEvent
+
+        declare type SortableMoveEvent = {
+            item?: JQuery,
+            target?: JQuery,
+            list?: undefined.Sortable,
+            draggableEvent?: any
+        } & SortableEvent
+
+        declare type SortableEndEvent = {
+            action?: string,
+            item?: JQuery,
+            oldIndex?: number,
+            newIndex?: number,
+            draggableEvent?: any
+        } & SortableEvent
+
+        declare type SortableChangeEvent = {
+            action?: string,
+            item?: JQuery,
+            oldIndex?: number,
+            newIndex?: number,
+            draggableEvent?: any
+        } & SortableEvent
+
+        declare type SortableCancelEvent = {
+            item?: JQuery
+        } & SortableEvent
+
+        declare class Splitter mixins undefined.Widget {
+            fn: Splitter;
+            options: SplitterOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Splitter;
+            constructor(element: Element, options?: SplitterOptions): this;
+            ajaxRequest(pane: string, url: string, data: any): void;
+            ajaxRequest(pane: string, url: string, data: string): void;
+            ajaxRequest(pane: Element, url: string, data: any): void;
+            ajaxRequest(pane: Element, url: string, data: string): void;
+            ajaxRequest(pane: JQuery, url: string, data: any): void;
+            ajaxRequest(pane: JQuery, url: string, data: string): void;
+            append(config?: any): JQuery;
+            collapse(pane: string): void;
+            collapse(pane: Element): void;
+            collapse(pane: JQuery): void;
+            destroy(): void;
+            expand(pane: string): void;
+            expand(pane: Element): void;
+            expand(pane: JQuery): void;
+            insertAfter(config: any, referencePane: string): JQuery;
+            insertAfter(config: any, referencePane: Element): JQuery;
+            insertAfter(config: any, referencePane: JQuery): JQuery;
+            insertBefore(config: any, referencePane: string): JQuery;
+            insertBefore(config: any, referencePane: Element): JQuery;
+            insertBefore(config: any, referencePane: JQuery): JQuery;
+            max(pane: string, value: string): void;
+            max(pane: Element, value: string): void;
+            max(pane: JQuery, value: string): void;
+            min(pane: string, value: string): void;
+            min(pane: Element, value: string): void;
+            min(pane: JQuery, value: string): void;
+            remove(pane: string): void;
+            remove(pane: Element): void;
+            remove(pane: JQuery): void;
+            size(pane: string): any;
+            size(pane: Element): any;
+            size(pane: JQuery): any;
+            size(pane: string, value?: string): void;
+            size(pane: Element, value?: string): void;
+            size(pane: JQuery, value?: string): void;
+            toggle(pane: string, expand?: boolean): void;
+            toggle(pane: Element, expand?: boolean): void;
+            toggle(pane: JQuery, expand?: boolean): void
+        }
+        declare interface SplitterPane {
+            collapsed?: boolean,
+                collapsedSize?: string,
+                collapsible?: boolean,
+                contentUrl?: string,
+                max?: string,
+                min?: string,
+                resizable?: boolean,
+                scrollable?: boolean,
+                size?: string
+        }
+        declare interface SplitterOptions {
+            name?: string,
+                orientation?: string,
+                panes?: SplitterPane[],
+                collapse(e: SplitterCollapseEvent): void,
+                contentLoad(e: SplitterContentLoadEvent): void,
+                error(e: SplitterErrorEvent): void,
+                expand(e: SplitterExpandEvent): void,
+                layoutChange(e: SplitterEvent): void,
+                resize(e: SplitterEvent): void
+        }
+        declare interface SplitterEvent {
+            sender: Splitter,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type SplitterCollapseEvent = {
+            pane?: Element
+        } & SplitterEvent
+
+        declare type SplitterContentLoadEvent = {
+            pane?: Element
+        } & SplitterEvent
+
+        declare type SplitterErrorEvent = {
+            xhr?: JQueryXHR,
+            status?: string
+        } & SplitterEvent
+
+        declare type SplitterExpandEvent = {
+            pane?: Element
+        } & SplitterEvent
+
+        declare class Spreadsheet mixins undefined.Widget {
+            fn: Spreadsheet;
+            options: SpreadsheetOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Spreadsheet;
+            constructor(element: Element, options?: SpreadsheetOptions): this;
+            activeSheet(): undefined.Sheet;
+            activeSheet(sheet?: undefined.Sheet): void;
+            sheets(): any;
+            fromFile(blob: Blob): JQueryPromise<any>;
+            fromFile(blob: File): JQueryPromise<any>;
+            saveAsExcel(): void;
+            saveAsPDF(): JQueryPromise<any>;
+            sheetByName(name: string): undefined.Sheet;
+            sheetIndex(sheet: undefined.Sheet): number;
+            sheetByIndex(index: number): undefined.Sheet;
+            insertSheet(options: any): undefined.Sheet;
+            moveSheetToIndex(sheet: undefined.Sheet, index: number): void;
+            removeSheet(sheet: undefined.Sheet): void;
+            renameSheet(sheet: undefined.Sheet, newSheetName: string): undefined.Sheet;
+            toJSON(): any;
+            fromJSON(data: any): void;
+            defineName(name: string, value: string, hidden: boolean): void;
+            undefineName(name: string): void
+        }
+        declare interface SpreadsheetExcel {
+            fileName?: string,
+                forceProxy?: boolean,
+                proxyURL?: string
+        }
+        declare interface SpreadsheetPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface SpreadsheetPdf {
+            area?: string,
+                author?: string,
+                creator?: string,
+                date?: Date,
+                fileName?: string,
+                fitWidth?: boolean,
+                forceProxy?: boolean,
+                guidelines?: boolean,
+                hCenter?: boolean,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: SpreadsheetPdfMargin,
+                paperSize?: string | any,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string,
+                vCenter?: boolean
+        }
+        declare interface SpreadsheetSheetColumn {
+            index?: number,
+                width?: number
+        }
+        declare interface SpreadsheetSheetFilterColumnCriteriaItem {
+            operator?: string,
+                value?: string
+        }
+        declare interface SpreadsheetSheetFilterColumn {
+            criteria?: SpreadsheetSheetFilterColumnCriteriaItem[],
+                filter?: string,
+                index?: number,
+                logic?: string,
+                type?: string,
+                value?: number | string | Date,
+                values?: any
+        }
+        declare interface SpreadsheetSheetFilter {
+            columns?: SpreadsheetSheetFilterColumn[],
+                ref?: string
+        }
+        declare interface SpreadsheetSheetRowCellBorderBottom {
+            color?: string,
+                size?: string
+        }
+        declare interface SpreadsheetSheetRowCellBorderLeft {
+            color?: string,
+                size?: string
+        }
+        declare interface SpreadsheetSheetRowCellBorderRight {
+            color?: string,
+                size?: string
+        }
+        declare interface SpreadsheetSheetRowCellBorderTop {
+            color?: string,
+                size?: string
+        }
+        declare interface SpreadsheetSheetRowCellValidation {
+            type?: string,
+                comparerType?: string,
+                dataType?: string,
+                from?: string,
+                showButton?: boolean,
+                to?: string,
+                allowNulls?: boolean,
+                messageTemplate?: string,
+                titleTemplate?: string
+        }
+        declare interface SpreadsheetSheetRowCell {
+            background?: string,
+                borderBottom?: SpreadsheetSheetRowCellBorderBottom,
+                borderLeft?: SpreadsheetSheetRowCellBorderLeft,
+                borderTop?: SpreadsheetSheetRowCellBorderTop,
+                borderRight?: SpreadsheetSheetRowCellBorderRight,
+                color?: string,
+                fontFamily?: string,
+                fontSize?: number,
+                italic?: boolean,
+                bold?: boolean,
+                enable?: boolean,
+                format?: string,
+                formula?: string,
+                index?: number,
+                link?: string,
+                textAlign?: string,
+                underline?: boolean,
+                value?: number | string | boolean | Date,
+                validation?: SpreadsheetSheetRowCellValidation,
+                verticalAlign?: string,
+                wrap?: boolean
+        }
+        declare interface SpreadsheetSheetRow {
+            cells?: SpreadsheetSheetRowCell[],
+                height?: number,
+                index?: number,
+                type?: string
+        }
+        declare interface SpreadsheetSheetSortColumn {
+            ascending?: boolean,
+                index?: number
+        }
+        declare interface SpreadsheetSheetSort {
+            columns?: SpreadsheetSheetSortColumn[],
+                ref?: string
+        }
+        declare interface SpreadsheetSheet {
+            activeCell?: string,
+                name?: string,
+                columns?: SpreadsheetSheetColumn[],
+                dataSource?: undefined.DataSource,
+                filter?: SpreadsheetSheetFilter,
+                frozenColumns?: number,
+                frozenRows?: number,
+                mergedCells?: any,
+                rows?: SpreadsheetSheetRow[],
+                selection?: string,
+                showGridLines?: boolean,
+                sort?: SpreadsheetSheetSort
+        }
+        declare interface SpreadsheetToolbar {
+            home?: boolean | any,
+                insert?: boolean | any,
+                data?: boolean | any
+        }
+        declare interface SpreadsheetInsertSheetOptions {
+            rows?: number,
+                columns?: number,
+                rowHeight?: number,
+                columnWidth?: number,
+                headerHeight?: number,
+                headerWidth?: number,
+                dataSource?: undefined.DataSource,
+                data?: any
+        }
+        declare interface SpreadsheetOptions {
+            name?: string,
+                activeSheet?: string,
+                columnWidth?: number,
+                columns?: number,
+                headerHeight?: number,
+                headerWidth?: number,
+                excel?: SpreadsheetExcel,
+                pdf?: SpreadsheetPdf,
+                rowHeight?: number,
+                rows?: number,
+                sheets?: SpreadsheetSheet[],
+                sheetsbar?: boolean,
+                toolbar?: boolean | SpreadsheetToolbar,
+                change(e: SpreadsheetChangeEvent): void,
+                render(e: SpreadsheetRenderEvent): void,
+                excelExport(e: SpreadsheetExcelExportEvent): void,
+                excelImport(e: SpreadsheetExcelImportEvent): void,
+                pdfExport(e: SpreadsheetPdfExportEvent): void
+        }
+        declare interface SpreadsheetEvent {
+            sender: Spreadsheet,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type SpreadsheetChangeEvent = {
+            range?: undefined.Range
+        } & SpreadsheetEvent
+
+        declare type SpreadsheetRenderEvent = {} & SpreadsheetEvent
+
+        declare type SpreadsheetExcelExportEvent = {
+            data?: any,
+            workbook?: undefined.Workbook
+        } & SpreadsheetEvent
+
+        declare type SpreadsheetExcelImportEvent = {
+            file?: Blob | File,
+            progress?: JQueryPromise<any >
+        } & SpreadsheetEvent
+
+        declare type SpreadsheetPdfExportEvent = {
+            promise?: JQueryPromise<any >
+        } & SpreadsheetEvent
+
+        declare class TabStrip mixins undefined.Widget {
+            fn: TabStrip;
+            options: TabStripOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): TabStrip;
+            constructor(element: Element, options?: TabStripOptions): this;
+            badge(tab: string, value: string): string;
+            badge(tab: string, value: boolean): string;
+            badge(tab: number, value: string): string;
+            badge(tab: number, value: boolean): string;
+            currentItem(): JQuery;
+            destroy(): void;
+            switchTo(url: string): void;
+            switchTo(url: number): void;
+            switchByFullUrl(url: string): void;
+            clear(): void
+        }
+        declare interface TabStripAnimationClose {
+            duration?: number,
+                effects?: string
+        }
+        declare interface TabStripAnimationOpen {
+            duration?: number,
+                effects?: string
+        }
+        declare interface TabStripAnimation {
+            close?: TabStripAnimationClose,
+                open?: TabStripAnimationOpen
+        }
+        declare interface TabStripScrollable {
+            distance?: number
+        }
+        declare interface TabStripOptions {
+            name?: string,
+                animation?: boolean | TabStripAnimation,
+                collapsible?: boolean,
+                contentUrls?: any,
+                dataContentField?: string,
+                dataContentUrlField?: string,
+                dataImageUrlField?: string,
+                dataSource?: any | any | undefined.DataSource,
+                dataSpriteCssClass?: string,
+                dataTextField?: string,
+                dataUrlField?: string,
+                navigatable?: boolean,
+                scrollable?: boolean | TabStripScrollable,
+                tabPosition?: string,
+                value?: string,
+                activate(e: TabStripActivateEvent): void,
+                contentLoad(e: TabStripContentLoadEvent): void,
+                error(e: TabStripErrorEvent): void,
+                select(e: TabStripSelectEvent): void,
+                show(e: TabStripShowEvent): void
+        }
+        declare interface TabStripEvent {
+            sender: TabStrip,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type TabStripActivateEvent = {
+            item?: Element,
+            contentElement?: Element
+        } & TabStripEvent
+
+        declare type TabStripContentLoadEvent = {
+            item?: Element,
+            contentElement?: Element
+        } & TabStripEvent
+
+        declare type TabStripErrorEvent = {
+            xhr?: JQueryXHR,
+            status?: string
+        } & TabStripEvent
+
+        declare type TabStripSelectEvent = {
+            item?: Element,
+            contentElement?: Element
+        } & TabStripEvent
+
+        declare type TabStripShowEvent = {
+            item?: Element,
+            contentElement?: Element
+        } & TabStripEvent
+
+        declare class TimePicker mixins undefined.Widget {
+            fn: TimePicker;
+            options: TimePickerOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): TimePicker;
+            constructor(element: Element, options?: TimePickerOptions): this;
+            close(): void;
+            destroy(): void;
+            enable(enable: boolean): void;
+            readonly(readonly: boolean): void;
+            max(): Date;
+            max(value: Date): void;
+            max(value: string): void;
+            min(): Date;
+            min(value: Date): void;
+            min(value: string): void;
+            open(): void;
+            setOptions(options: any): void;
+            value(): Date;
+            value(value: Date): void;
+            value(value: string): void
+        }
+        declare interface TimePickerAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface TimePickerAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface TimePickerAnimation {
+            close?: TimePickerAnimationClose,
+                open?: TimePickerAnimationOpen
+        }
+        declare interface TimePickerOptions {
+            name?: string,
+                animation?: boolean | TimePickerAnimation,
+                culture?: string,
+                dates?: any,
+                format?: string,
+                interval?: number,
+                max?: Date,
+                min?: Date,
+                parseFormats?: any,
+                value?: Date,
+                change(e: TimePickerChangeEvent): void,
+                close(e: TimePickerCloseEvent): void,
+                open(e: TimePickerOpenEvent): void
+        }
+        declare interface TimePickerEvent {
+            sender: TimePicker,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type TimePickerChangeEvent = {} & TimePickerEvent
+
+        declare type TimePickerCloseEvent = {} & TimePickerEvent
+
+        declare type TimePickerOpenEvent = {} & TimePickerEvent
+
+        declare class ToolBar mixins undefined.Widget {
+            fn: ToolBar;
+            options: ToolBarOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ToolBar;
+            constructor(element: Element, options?: ToolBarOptions): this;
+            add(command: any): void;
+            destroy(): void;
+            enable(command: string, enable: boolean): void;
+            enable(command: Element, enable: boolean): void;
+            enable(command: JQuery, enable: boolean): void;
+            getSelectedFromGroup(groupName: string): void;
+            hide(command: string): void;
+            hide(command: Element): void;
+            hide(command: JQuery): void;
+            remove(command: string): void;
+            remove(command: Element): void;
+            remove(command: JQuery): void;
+            show(command: string): void;
+            show(command: Element): void;
+            show(command: JQuery): void;
+            toggle(command: string, state: boolean): void;
+            toggle(command: Element, state: boolean): void;
+            toggle(command: JQuery, state: boolean): void
+        }
+        declare interface ToolBarItemButton {
+            attributes?: any,
+                click?: Function,
+                enable?: boolean,
+                group?: string,
+                hidden?: boolean,
+                icon?: string,
+                id?: string,
+                imageUrl?: string,
+                selected?: boolean,
+                showIcon?: string,
+                showText?: string,
+                spriteCssClass?: string,
+                toggle?: Function,
+                togglable?: boolean,
+                text?: string,
+                url?: string
+        }
+        declare interface ToolBarItemMenuButton {
+            attributes?: any,
+                enable?: boolean,
+                hidden?: boolean,
+                icon?: string,
+                id?: string,
+                imageUrl?: string,
+                spriteCssClass?: string,
+                text?: string,
+                url?: string
+        }
+        declare interface ToolBarItem {
+            attributes?: any,
+                buttons?: ToolBarItemButton[],
+                click?: Function,
+                enable?: boolean,
+                group?: string,
+                hidden?: boolean,
+                icon?: string,
+                id?: string,
+                imageUrl?: string,
+                menuButtons?: ToolBarItemMenuButton[],
+                overflow?: string,
+                overflowTemplate?: string | Function,
+                primary?: boolean,
+                selected?: boolean,
+                showIcon?: string,
+                showText?: string,
+                spriteCssClass?: string,
+                template?: string | Function,
+                text?: string,
+                togglable?: boolean,
+                toggle?: Function,
+                type?: string,
+                url?: string
+        }
+        declare interface ToolBarOptions {
+            name?: string,
+                resizable?: boolean,
+                items?: ToolBarItem[],
+                click(e: ToolBarClickEvent): void,
+                close(e: ToolBarCloseEvent): void,
+                open(e: ToolBarOpenEvent): void,
+                toggle(e: ToolBarToggleEvent): void,
+                overflowClose(e: ToolBarOverflowCloseEvent): void,
+                overflowOpen(e: ToolBarOverflowOpenEvent): void
+        }
+        declare interface ToolBarEvent {
+            sender: ToolBar,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ToolBarClickEvent = {
+            target?: JQuery,
+            id?: string
+        } & ToolBarEvent
+
+        declare type ToolBarCloseEvent = {
+            SplitButton?: JQuery
+        } & ToolBarEvent
+
+        declare type ToolBarOpenEvent = {
+            SplitButton?: JQuery
+        } & ToolBarEvent
+
+        declare type ToolBarToggleEvent = {
+            target?: JQuery,
+            checked?: boolean,
+            id?: string
+        } & ToolBarEvent
+
+        declare type ToolBarOverflowCloseEvent = {} & ToolBarEvent
+
+        declare type ToolBarOverflowOpenEvent = {} & ToolBarEvent
+
+        declare class Tooltip mixins undefined.Widget {
+            fn: Tooltip;
+            options: TooltipOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Tooltip;
+            constructor(element: Element, options?: TooltipOptions): this;
+            show(element: JQuery): void;
+            hide(): void;
+            refresh(): void;
+            target(): JQuery
+        }
+        declare interface TooltipAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface TooltipAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface TooltipAnimation {
+            close?: TooltipAnimationClose,
+                open?: TooltipAnimationOpen
+        }
+        declare interface TooltipContent {
+            url?: string
+        }
+        declare interface TooltipOptions {
+            name?: string,
+                autoHide?: boolean,
+                animation?: boolean | TooltipAnimation,
+                content?: TooltipContent,
+                callout?: boolean,
+                filter?: string,
+                iframe?: boolean,
+                height?: number,
+                width?: number,
+                position?: string,
+                showAfter?: number,
+                showOn?: string,
+                contentLoad(e: TooltipEvent): void,
+                show(e: TooltipEvent): void,
+                hide(e: TooltipEvent): void,
+                requestStart(e: TooltipRequestStartEvent): void,
+                error(e: TooltipErrorEvent): void
+        }
+        declare interface TooltipEvent {
+            sender: Tooltip,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type TooltipRequestStartEvent = {
+            target?: JQuery,
+            options?: any
+        } & TooltipEvent
+
+        declare type TooltipErrorEvent = {
+            xhr?: JQueryXHR,
+            status?: string
+        } & TooltipEvent
+
+        declare class Touch mixins undefined.Widget {
+            fn: Touch;
+            options: TouchOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Touch;
+            constructor(element: Element, options?: TouchOptions): this;
+            cancel(): void;
+            destroy(): void
+        }
+        declare interface TouchOptions {
+            name?: string,
+                filter?: string,
+                surface?: JQuery,
+                multiTouch?: boolean,
+                enableSwipe?: boolean,
+                minXDelta?: number,
+                maxYDelta?: number,
+                maxDuration?: number,
+                minHold?: number,
+                doubleTapTimeout?: number,
+                touchstart(e: TouchTouchstartEvent): void,
+                dragstart(e: TouchDragstartEvent): void,
+                drag(e: TouchDragEvent): void,
+                dragend(e: TouchDragendEvent): void,
+                tap(e: TouchTapEvent): void,
+                doubletap(e: TouchDoubletapEvent): void,
+                hold(e: TouchHoldEvent): void,
+                swipe(e: TouchSwipeEvent): void,
+                gesturestart(e: TouchGesturestartEvent): void,
+                gesturechange(e: TouchGesturechangeEvent): void,
+                gestureend(e: TouchGestureendEvent): void
+        }
+        declare interface TouchEvent {
+            sender: Touch,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type TouchTouchstartEvent = {
+            touch?: undefined.TouchEventOptions,
+            event?: JQueryEventObject
+        } & TouchEvent
+
+        declare type TouchDragstartEvent = {
+            touch?: undefined.TouchEventOptions,
+            event?: JQueryEventObject
+        } & TouchEvent
+
+        declare type TouchDragEvent = {
+            touch?: undefined.TouchEventOptions,
+            event?: JQueryEventObject
+        } & TouchEvent
+
+        declare type TouchDragendEvent = {
+            touch?: undefined.TouchEventOptions,
+            event?: JQueryEventObject
+        } & TouchEvent
+
+        declare type TouchTapEvent = {
+            touch?: undefined.TouchEventOptions,
+            event?: JQueryEventObject
+        } & TouchEvent
+
+        declare type TouchDoubletapEvent = {
+            touch?: undefined.TouchEventOptions,
+            event?: JQueryEventObject
+        } & TouchEvent
+
+        declare type TouchHoldEvent = {
+            touch?: undefined.TouchEventOptions,
+            event?: JQueryEventObject
+        } & TouchEvent
+
+        declare type TouchSwipeEvent = {
+            touch?: undefined.TouchEventOptions,
+            event?: JQueryEventObject
+        } & TouchEvent
+
+        declare type TouchGesturestartEvent = {
+            touches?: any,
+            event?: JQueryEventObject,
+            distance?: number,
+            center?: undefined.Point
+        } & TouchEvent
+
+        declare type TouchGesturechangeEvent = {
+            touches?: any,
+            event?: JQueryEventObject,
+            distance?: number,
+            center?: undefined.Point
+        } & TouchEvent
+
+        declare type TouchGestureendEvent = {
+            touches?: any,
+            event?: JQueryEventObject,
+            distance?: number,
+            center?: undefined.Point
+        } & TouchEvent
+
+        declare class TreeList mixins undefined.Widget {
+            fn: TreeList;
+            options: TreeListOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): TreeList;
+            constructor(element: Element, options?: TreeListOptions): this;
+            addRow(parentRow: string): void;
+            addRow(parentRow: Element): void;
+            addRow(parentRow: JQuery): void;
+            autoFitColumn(column: number): void;
+            autoFitColumn(column: string): void;
+            autoFitColumn(column: any): void;
+            cancelRow(): void;
+            clearSelection(): void;
+            collapse(): void;
+            dataItem(row: string): undefined.TreeListModel;
+            dataItem(row: Element): undefined.TreeListModel;
+            dataItem(row: JQuery): undefined.TreeListModel;
+            destroy(): void;
+            editRow(row: JQuery): void;
+            expand(row: string): JQueryPromise<any>;
+            expand(row: Element): JQueryPromise<any>;
+            expand(row: JQuery): JQueryPromise<any>;
+            itemFor(model: undefined.TreeListModel): JQuery;
+            itemFor(model: any): JQuery;
+            items(): any;
+            refresh(): void;
+            removeRow(row: string): void;
+            removeRow(row: Element): void;
+            removeRow(row: JQuery): void;
+            saveAsExcel(): void;
+            saveAsPDF(): JQueryPromise<any>;
+            saveRow(): void;
+            select(): JQuery;
+            select(rows: Element): void;
+            select(rows: JQuery): void;
+            setDataSource(dataSource: undefined.TreeListDataSource): void;
+            showColumn(column: number): void;
+            showColumn(column: string): void;
+            hideColumn(column: number): void;
+            hideColumn(column: string): void;
+            lockColumn(column: number): void;
+            lockColumn(column: string): void;
+            unlockColumn(column: number): void;
+            unlockColumn(column: string): void;
+            reorderColumn(destIndex: number, column: any): void
+        }
+        declare interface TreeListColumnMenuMessages {
+            columns?: string,
+                filter?: string,
+                sortAscending?: string,
+                sortDescending?: string
+        }
+        declare interface TreeListColumnMenu {
+            columns?: boolean,
+                filterable?: boolean,
+                sortable?: boolean,
+                messages?: TreeListColumnMenuMessages
+        }
+        declare interface TreeListColumnCommandItem {
+            className?: string,
+                click?: Function,
+                name?: string,
+                text?: string
+        }
+        declare interface TreeListColumnFilterable {
+            ui?: string | Function
+        }
+        declare interface TreeListColumnSortable {
+            compare?: Function
+        }
+        declare interface TreeListEditable {
+            mode?: string,
+                move?: boolean,
+                template?: string | Function,
+                window?: any
+        }
+        declare interface TreeListExcel {
+            fileName?: string,
+                filterable?: boolean,
+                forceProxy?: boolean,
+                proxyURL?: string
+        }
+        declare interface TreeListFilterableMessages {
+            and?: string,
+                clear?: string,
+                filter?: string,
+                info?: string,
+                isFalse?: string,
+                isTrue?: string,
+                or?: string,
+                selectValue?: string,
+                cancel?: string,
+                operator?: string
+        }
+        declare interface TreeListFilterable {
+            extra?: boolean,
+                messages?: TreeListFilterableMessages
+        }
+        declare interface TreeListMessagesCommands {
+            canceledit?: string,
+                create?: string,
+                createchild?: string,
+                destroy?: string,
+                edit?: string,
+                excel?: string,
+                pdf?: string,
+                update?: string
+        }
+        declare interface TreeListMessages {
+            commands?: TreeListMessagesCommands,
+                loading?: string,
+                noRows?: string,
+                requestFailed?: string,
+                retry?: string
+        }
+        declare interface TreeListPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface TreeListPdf {
+            author?: string,
+                avoidLinks?: boolean | string,
+                creator?: string,
+                date?: Date,
+                fileName?: string,
+                forceProxy?: boolean,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: TreeListPdfMargin,
+                paperSize?: string | any,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string
+        }
+        declare interface TreeListSortable {
+            allowUnsort?: boolean,
+                mode?: string
+        }
+        declare interface TreeListToolbarItem {
+            click?: Function,
+                name?: string,
+                text?: string
+        }
+        declare interface TreeListOptions {
+            name?: string,
+                autoBind?: boolean,
+                columns?: TreeListColumn[],
+                resizable?: boolean,
+                reorderable?: boolean,
+                columnMenu?: boolean | TreeListColumnMenu,
+                dataSource?: any | any | undefined.TreeListDataSource,
+                editable?: boolean | TreeListEditable,
+                excel?: TreeListExcel,
+                filterable?: boolean | TreeListFilterable,
+                height?: number | string,
+                messages?: TreeListMessages,
+                pdf?: TreeListPdf,
+                scrollable?: boolean | any,
+                selectable?: boolean | string,
+                sortable?: boolean | TreeListSortable,
+                toolbar?: TreeListToolbarItem[] | any,
+                cancel(e: TreeListCancelEvent): void,
+                change(e: TreeListChangeEvent): void,
+                collapse(e: TreeListCollapseEvent): void,
+                dataBinding(e: TreeListDataBindingEvent): void,
+                dataBound(e: TreeListDataBoundEvent): void,
+                dragstart(e: TreeListDragstartEvent): void,
+                drag(e: TreeListDragEvent): void,
+                dragend(e: TreeListDragendEvent): void,
+                drop(e: TreeListDropEvent): void,
+                edit(e: TreeListEditEvent): void,
+                excelExport(e: TreeListExcelExportEvent): void,
+                expand(e: TreeListExpandEvent): void,
+                filterMenuInit(e: TreeListFilterMenuInitEvent): void,
+                pdfExport(e: TreeListPdfExportEvent): void,
+                remove(e: TreeListRemoveEvent): void,
+                save(e: TreeListSaveEvent): void,
+                columnShow(e: TreeListColumnShowEvent): void,
+                columnHide(e: TreeListColumnHideEvent): void,
+                columnReorder(e: TreeListColumnReorderEvent): void,
+                columnResize(e: TreeListColumnResizeEvent): void,
+                columnMenuInit(e: TreeListColumnMenuInitEvent): void,
+                columnLock(e: TreeListColumnLockEvent): void,
+                columnUnlock(e: TreeListColumnUnlockEvent): void
+        }
+        declare interface TreeListEvent {
+            sender: TreeList,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type TreeListCancelEvent = {
+            container?: JQuery,
+            model?: undefined.TreeListModel
+        } & TreeListEvent
+
+        declare type TreeListChangeEvent = {} & TreeListEvent
+
+        declare type TreeListCollapseEvent = {
+            model?: undefined.TreeListModel
+        } & TreeListEvent
+
+        declare type TreeListDataBindingEvent = {} & TreeListEvent
+
+        declare type TreeListDataBoundEvent = {} & TreeListEvent
+
+        declare type TreeListDragstartEvent = {
+            source?: undefined.TreeListModel
+        } & TreeListEvent
+
+        declare type TreeListDragEvent = {
+            source?: undefined.TreeListModel,
+            target?: JQuery
+        } & TreeListEvent
+
+        declare type TreeListDragendEvent = {
+            source?: undefined.TreeListModel,
+            destination?: undefined.TreeListModel
+        } & TreeListEvent
+
+        declare type TreeListDropEvent = {
+            source?: undefined.TreeListModel,
+            destination?: undefined.TreeListModel,
+            dropTarget?: Element,
+            valid?: boolean,
+            setValid?: boolean
+        } & TreeListEvent
+
+        declare type TreeListEditEvent = {
+            container?: JQuery,
+            model?: undefined.TreeListModel
+        } & TreeListEvent
+
+        declare type TreeListExcelExportEvent = {
+            data?: any,
+            workbook?: any
+        } & TreeListEvent
+
+        declare type TreeListExpandEvent = {
+            model?: undefined.TreeListModel
+        } & TreeListEvent
+
+        declare type TreeListFilterMenuInitEvent = {
+            container?: JQuery,
+            field?: string
+        } & TreeListEvent
+
+        declare type TreeListPdfExportEvent = {
+            promise?: JQueryPromise<any >
+        } & TreeListEvent
+
+        declare type TreeListRemoveEvent = {
+            model?: undefined.TreeListModel,
+            row?: JQuery
+        } & TreeListEvent
+
+        declare type TreeListSaveEvent = {
+            model?: undefined.TreeListModel,
+            container?: JQuery
+        } & TreeListEvent
+
+        declare type TreeListColumnShowEvent = {
+            column?: any
+        } & TreeListEvent
+
+        declare type TreeListColumnHideEvent = {
+            column?: any
+        } & TreeListEvent
+
+        declare type TreeListColumnReorderEvent = {
+            column?: any,
+            newIndex?: number,
+            oldIndex?: number
+        } & TreeListEvent
+
+        declare type TreeListColumnResizeEvent = {
+            column?: any,
+            newWidth?: number,
+            oldWidth?: number
+        } & TreeListEvent
+
+        declare type TreeListColumnMenuInitEvent = {
+            container?: JQuery,
+            field?: string
+        } & TreeListEvent
+
+        declare type TreeListColumnLockEvent = {
+            column?: any
+        } & TreeListEvent
+
+        declare type TreeListColumnUnlockEvent = {
+            column?: any
+        } & TreeListEvent
+
+        declare class TreeView mixins undefined.Widget {
+            fn: TreeView;
+            options: TreeViewOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): TreeView;
+            constructor(element: Element, options?: TreeViewOptions): this;
+            append(nodeData: any, parentNode?: JQuery, success?: Function): JQuery;
+            append(nodeData: JQuery, parentNode?: JQuery, success?: Function): JQuery;
+            collapse(nodes: JQuery): void;
+            collapse(nodes: Element): void;
+            collapse(nodes: string): void;
+            dataItem(node: JQuery): undefined.Node;
+            dataItem(node: Element): undefined.Node;
+            dataItem(node: string): undefined.Node;
+            destroy(): void;
+            detach(node: JQuery): JQuery;
+            detach(node: Element): JQuery;
+            detach(node: string): JQuery;
+            enable(nodes: JQuery, enable?: boolean): void;
+            enable(nodes: Element, enable?: boolean): void;
+            enable(nodes: string, enable?: boolean): void;
+            expand(nodes: JQuery): void;
+            expand(nodes: Element): void;
+            expand(nodes: string): void;
+            expandPath(path: any, complete: Function): void;
+            expandTo(targetNode: undefined.Node): void;
+            expandTo(targetNode: any): void;
+            findByText(text: string): JQuery;
+            findByUid(text: string): JQuery;
+            insertAfter(nodeData: any, referenceNode: JQuery): void;
+            insertBefore(nodeData: any, referenceNode: JQuery): void;
+            items(): any;
+            parent(node: JQuery): JQuery;
+            parent(node: Element): JQuery;
+            parent(node: string): JQuery;
+            remove(node: JQuery): void;
+            remove(node: Element): void;
+            remove(node: string): void;
+            select(): JQuery;
+            select(node?: JQuery): void;
+            select(node?: Element): void;
+            select(node?: string): void;
+            setDataSource(dataSource: undefined.HierarchicalDataSource): void;
+            text(node: JQuery): string;
+            text(node: Element): string;
+            text(node: string): string;
+            text(node: JQuery, newText: string): void;
+            text(node: Element, newText: string): void;
+            text(node: string, newText: string): void;
+            toggle(node: JQuery): void;
+            toggle(node: Element): void;
+            toggle(node: string): void;
+            updateIndeterminate(node: JQuery): void
+        }
+        declare interface TreeViewAnimationCollapse {
+            duration?: number,
+                effects?: string
+        }
+        declare interface TreeViewAnimationExpand {
+            duration?: number,
+                effects?: string
+        }
+        declare interface TreeViewAnimation {
+            collapse?: boolean | TreeViewAnimationCollapse,
+                expand?: boolean | TreeViewAnimationExpand
+        }
+        declare interface TreeViewCheckboxes {
+            checkChildren?: boolean,
+                name?: string,
+                template?: string | Function
+        }
+        declare interface TreeViewMessages {
+            loading?: string,
+                requestFailed?: string,
+                retry?: string
+        }
+        declare interface TreeViewOptions {
+            name?: string,
+                animation?: boolean | TreeViewAnimation,
+                autoBind?: boolean,
+                autoScroll?: boolean,
+                checkboxes?: boolean | TreeViewCheckboxes,
+                dataImageUrlField?: string,
+                dataSource?: any | any | undefined.HierarchicalDataSource,
+                dataSpriteCssClassField?: string,
+                dataTextField?: string | any,
+                dataUrlField?: string,
+                dragAndDrop?: boolean,
+                loadOnDemand?: boolean,
+                messages?: TreeViewMessages,
+                template?: string | Function,
+                change(e: TreeViewEvent): void,
+                check(e: TreeViewCheckEvent): void,
+                collapse(e: TreeViewCollapseEvent): void,
+                dataBound(e: TreeViewDataBoundEvent): void,
+                drag(e: TreeViewDragEvent): void,
+                dragend(e: TreeViewDragendEvent): void,
+                dragstart(e: TreeViewDragstartEvent): void,
+                drop(e: TreeViewDropEvent): void,
+                expand(e: TreeViewExpandEvent): void,
+                navigate(e: TreeViewNavigateEvent): void,
+                select(e: TreeViewSelectEvent): void
+        }
+        declare interface TreeViewEvent {
+            sender: TreeView,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type TreeViewCheckEvent = {
+            node?: Element
+        } & TreeViewEvent
+
+        declare type TreeViewCollapseEvent = {
+            node?: Element
+        } & TreeViewEvent
+
+        declare type TreeViewDataBoundEvent = {
+            node?: JQuery
+        } & TreeViewEvent
+
+        declare type TreeViewDragEvent = {
+            sourceNode?: Element,
+            dropTarget?: Element,
+            pageX?: number,
+            pageY?: number,
+            statusClass?: string,
+            setStatusClass?: Function
+        } & TreeViewEvent
+
+        declare type TreeViewDragendEvent = {
+            sourceNode?: Element,
+            destinationNode?: Element,
+            dropPosition?: string
+        } & TreeViewEvent
+
+        declare type TreeViewDragstartEvent = {
+            sourceNode?: Element
+        } & TreeViewEvent
+
+        declare type TreeViewDropEvent = {
+            sourceNode?: Element,
+            destinationNode?: Element,
+            valid?: boolean,
+            setValid?: Function,
+            dropTarget?: Element,
+            dropPosition?: string
+        } & TreeViewEvent
+
+        declare type TreeViewExpandEvent = {
+            node?: Element
+        } & TreeViewEvent
+
+        declare type TreeViewNavigateEvent = {
+            node?: Element
+        } & TreeViewEvent
+
+        declare type TreeViewSelectEvent = {
+            node?: Element
+        } & TreeViewEvent
+
+        declare class Upload mixins undefined.Widget {
+            fn: Upload;
+            options: UploadOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Upload;
+            constructor(element: Element, options?: UploadOptions): this;
+            clearAllFiles(): void;
+            clearFile(): void;
+            clearFileByUid(): void;
+            destroy(): void;
+            disable(): void;
+            enable(enable?: boolean): void;
+            getFiles(): any;
+            removeAllFiles(): void;
+            removeFile(): void;
+            removeFileByUid(): void;
+            toggle(enable: boolean): void;
+            upload(): void
+        }
+        declare interface UploadAsync {
+            autoUpload?: boolean,
+                batch?: boolean,
+                removeField?: string,
+                removeUrl?: string,
+                removeVerb?: string,
+                saveField?: string,
+                saveUrl?: string,
+                withCredentials?: boolean
+        }
+        declare interface UploadFile {
+            extension?: string,
+                name?: string,
+                size?: number
+        }
+        declare interface UploadLocalization {
+            cancel?: string,
+                clearSelectedFiles?: string,
+                dropFilesHere?: string,
+                headerStatusUploaded?: string,
+                headerStatusUploading?: string,
+                invalidFileExtension?: string,
+                invalidMaxFileSize?: string,
+                invalidMinFileSize?: string,
+                remove?: string,
+                retry?: string,
+                select?: string,
+                statusFailed?: string,
+                statusUploaded?: string,
+                statusUploading?: string,
+                uploadSelectedFiles?: string
+        }
+        declare interface UploadValidation {
+            allowedExtensions?: any,
+                maxFileSize?: number,
+                minFileSize?: number
+        }
+        declare interface UploadOptions {
+            name?: string,
+                async?: UploadAsync,
+                dropZone?: string,
+                enabled?: boolean,
+                files?: UploadFile[],
+                localization?: UploadLocalization,
+                multiple?: boolean,
+                showFileList?: boolean,
+                template?: string | Function,
+                validation?: UploadValidation,
+                cancel(e: UploadCancelEvent): void,
+                complete(e: UploadEvent): void,
+                error(e: UploadErrorEvent): void,
+                progress(e: UploadProgressEvent): void,
+                remove(e: UploadRemoveEvent): void,
+                select(e: UploadSelectEvent): void,
+                success(e: UploadSuccessEvent): void,
+                upload(e: UploadUploadEvent): void
+        }
+        declare interface UploadEvent {
+            sender: Upload,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type UploadCancelEvent = {
+            files?: UploadFile[]
+        } & UploadEvent
+
+        declare type UploadErrorEvent = {
+            files?: UploadFile[],
+            operation?: string,
+            XMLHttpRequest?: any
+        } & UploadEvent
+
+        declare type UploadProgressEvent = {
+            files?: UploadFile[],
+            percentComplete?: number
+        } & UploadEvent
+
+        declare type UploadRemoveEvent = {
+            files?: UploadFile[],
+            data?: any
+        } & UploadEvent
+
+        declare type UploadSelectEvent = {
+            e?: any,
+            files?: UploadFile[]
+        } & UploadEvent
+
+        declare type UploadSuccessEvent = {
+            files?: UploadFile[],
+            operation?: string,
+            response?: any,
+            XMLHttpRequest?: any
+        } & UploadEvent
+
+        declare type UploadUploadEvent = {
+            files?: UploadFile[],
+            data?: any,
+            formData?: any,
+            XMLHttpRequest?: any
+        } & UploadEvent
+
+        declare class Validator mixins undefined.Widget {
+            fn: Validator;
+            options: ValidatorOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Validator;
+            constructor(element: Element, options?: ValidatorOptions): this;
+            errors(): any;
+            hideMessages(): void;
+            validate(): boolean;
+            validateInput(input: Element): boolean;
+            validateInput(input: JQuery): boolean
+        }
+        declare interface ValidatorOptions {
+            name?: string,
+                errorTemplate?: string,
+                messages?: any,
+                rules?: any,
+                validateOnBlur?: boolean,
+                validate(e: ValidatorValidateEvent): void
+        }
+        declare interface ValidatorEvent {
+            sender: Validator,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ValidatorValidateEvent = {
+            valid?: boolean
+        } & ValidatorEvent
+
+        declare class Window mixins undefined.Widget {
+            fn: Window;
+            options: WindowOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Window;
+            constructor(element: Element, options?: WindowOptions): this;
+            center(): undefined.Window;
+            close(): undefined.Window;
+            content(): string;
+            content(content?: string): undefined.Window;
+            content(content?: JQuery): undefined.Window;
+            destroy(): void;
+            isMaximized(): boolean;
+            isMinimized(): boolean;
+            maximize(): undefined.Window;
+            minimize(): undefined.Window;
+            open(): undefined.Window;
+            pin(): void;
+            refresh(options: any): undefined.Window;
+            restore(): undefined.Window;
+            setOptions(options: any): void;
+            title(): string;
+            title(text?: string): undefined.Window;
+            toFront(): undefined.Window;
+            toggleMaximization(): undefined.Window;
+            unpin(): void
+        }
+        declare interface WindowAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface WindowAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface WindowAnimation {
+            close?: WindowAnimationClose,
+                open?: WindowAnimationOpen
+        }
+        declare interface WindowContent {
+            template?: string
+        }
+        declare interface WindowPosition {
+            top?: number | string,
+                left?: number | string
+        }
+        declare interface WindowRefreshOptions {
+            url?: string,
+                cache?: boolean,
+                data?: any,
+                type?: string,
+                template?: string,
+                iframe?: boolean
+        }
+        declare interface WindowOptions {
+            name?: string,
+                actions?: any,
+                animation?: boolean | WindowAnimation,
+                appendTo?: any | string,
+                autoFocus?: boolean,
+                content?: WindowContent,
+                draggable?: boolean,
+                iframe?: boolean,
+                height?: number | string,
+                maxHeight?: number,
+                maxWidth?: number,
+                minHeight?: number,
+                minWidth?: number,
+                modal?: boolean,
+                pinned?: boolean,
+                position?: WindowPosition,
+                resizable?: boolean,
+                scrollable?: boolean,
+                title?: string | boolean,
+                visible?: boolean,
+                width?: number | string,
+                activate(e: WindowEvent): void,
+                close(e: WindowCloseEvent): void,
+                deactivate(e: WindowEvent): void,
+                dragend(e: WindowEvent): void,
+                dragstart(e: WindowEvent): void,
+                error(e: WindowErrorEvent): void,
+                maximize(e: WindowEvent): void,
+                minimize(e: WindowEvent): void,
+                open(e: WindowEvent): void,
+                refresh(e: WindowEvent): void,
+                resize(e: WindowEvent): void
+        }
+        declare interface WindowEvent {
+            sender: Window,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type WindowCloseEvent = {
+            userTriggered?: boolean
+        } & WindowEvent
+
+        declare type WindowErrorEvent = {
+            xhr?: JQueryXHR,
+            status?: string
+        } & WindowEvent
+
+        declare class Barcode mixins undefined.Widget {
+            fn: Barcode;
+            options: BarcodeOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Barcode;
+            constructor(element: Element, options?: BarcodeOptions): this;
+            exportImage(options: any): JQueryPromise<any>;
+            exportPDF(options?: undefined.PDFOptions): JQueryPromise<any>;
+            exportSVG(options: any): JQueryPromise<any>;
+            imageDataURL(): string;
+            redraw(): void;
+            resize(force?: boolean): void;
+            svg(): string;
+            value(): string;
+            value(value: number): void;
+            value(value: string): void
+        }
+        declare interface BarcodeBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface BarcodePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface BarcodeTextMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface BarcodeText {
+            color?: string,
+                font?: string,
+                margin?: BarcodeTextMargin,
+                visible?: boolean
+        }
+        declare interface BarcodeExportImageOptions {
+            width?: string,
+                height?: string
+        }
+        declare interface BarcodeExportSVGOptions {
+            raw?: boolean
+        }
+        declare interface BarcodeOptions {
+            name?: string,
+                renderAs?: string,
+                background?: string,
+                border?: BarcodeBorder,
+                checksum?: boolean,
+                color?: string,
+                height?: number,
+                padding?: BarcodePadding,
+                text?: BarcodeText,
+                type?: string,
+                value?: string,
+                width?: number
+        }
+        declare interface BarcodeEvent {
+            sender: Barcode,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Chart mixins undefined.Widget {
+            fn: Chart;
+            options: ChartOptions;
+            dataSource: undefined.DataSource;
+            surface: undefined.Surface;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Chart;
+            constructor(element: Element, options?: ChartOptions): this;
+            destroy(): void;
+            exportImage(options: any): JQueryPromise<any>;
+            exportPDF(options?: undefined.PDFOptions): JQueryPromise<any>;
+            exportSVG(options: any): JQueryPromise<any>;
+            findAxisByName(name: string): undefined.ChartAxis;
+            findPaneByIndex(index: number): undefined.ChartPane;
+            findPaneByName(name: string): undefined.ChartPane;
+            findSeries(callback: Function): undefined.ChartSeries;
+            findSeriesByIndex(index: number): undefined.ChartSeries;
+            findSeriesByName(name: string): undefined.ChartSeries;
+            getAxis(name: string): undefined.ChartAxis;
+            hideTooltip(): void;
+            plotArea(): void;
+            redraw(): void;
+            refresh(): void;
+            resize(force?: boolean): void;
+            saveAsPDF(): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            setOptions(options: any): void;
+            showTooltip(filter: Function): void;
+            showTooltip(filter: number): void;
+            showTooltip(filter: Date): void;
+            showTooltip(filter: string): void;
+            svg(): string;
+            imageDataURL(): string;
+            toggleHighlight(show: boolean, options: any): void
+        }
+        declare interface ChartAxisDefaultsCrosshairTooltipBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartAxisDefaultsCrosshairTooltipPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartAxisDefaultsCrosshairTooltip {
+            background?: string,
+                border?: ChartAxisDefaultsCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: ChartAxisDefaultsCrosshairTooltipPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartAxisDefaultsCrosshair {
+            color?: string,
+                dashType?: string,
+                opacity?: number,
+                tooltip?: ChartAxisDefaultsCrosshairTooltip,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartAxisDefaultsLabelsMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartAxisDefaultsLabelsPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartAxisDefaultsLabelsRotation {
+            align?: string,
+                angle?: number | string
+        }
+        declare interface ChartAxisDefaultsLabels {
+            font?: string,
+                format?: string,
+                margin?: ChartAxisDefaultsLabelsMargin,
+                mirror?: boolean,
+                padding?: ChartAxisDefaultsLabelsPadding,
+                rotation?: ChartAxisDefaultsLabelsRotation,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartAxisDefaultsLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartAxisDefaultsMajorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartAxisDefaultsMajorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartAxisDefaultsMinorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartAxisDefaultsMinorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartAxisDefaultsPlotBand {
+            color?: string,
+                from?: number,
+                opacity?: number,
+                to?: number
+        }
+        declare interface ChartAxisDefaultsTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartAxisDefaultsTitleMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartAxisDefaultsTitlePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartAxisDefaultsTitle {
+            background?: string,
+                border?: ChartAxisDefaultsTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: ChartAxisDefaultsTitleMargin,
+                padding?: ChartAxisDefaultsTitlePadding,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartAxisDefaults {
+            background?: string,
+                color?: string,
+                crosshair?: ChartAxisDefaultsCrosshair,
+                labels?: ChartAxisDefaultsLabels,
+                line?: ChartAxisDefaultsLine,
+                majorGridLines?: ChartAxisDefaultsMajorGridLines,
+                majorTicks?: ChartAxisDefaultsMajorTicks,
+                minorGridLines?: ChartAxisDefaultsMinorGridLines,
+                minorTicks?: ChartAxisDefaultsMinorTicks,
+                narrowRange?: boolean,
+                pane?: string,
+                plotBands?: ChartAxisDefaultsPlotBand[],
+                reverse?: boolean,
+                startAngle?: number,
+                title?: ChartAxisDefaultsTitle,
+                visible?: boolean
+        }
+        declare interface ChartCategoryAxisItemAutoBaseUnitSteps {
+            milliseconds?: any,
+                seconds?: any,
+                minutes?: any,
+                hours?: any,
+                days?: any,
+                weeks?: any,
+                months?: any,
+                years?: any
+        }
+        declare interface ChartCategoryAxisItemCrosshairTooltipBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartCategoryAxisItemCrosshairTooltipPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartCategoryAxisItemCrosshairTooltip {
+            background?: string,
+                border?: ChartCategoryAxisItemCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: ChartCategoryAxisItemCrosshairTooltipPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartCategoryAxisItemCrosshair {
+            color?: string,
+                dashType?: string,
+                opacity?: number,
+                tooltip?: ChartCategoryAxisItemCrosshairTooltip,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartCategoryAxisItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartCategoryAxisItemLabelsDateFormats {
+            days?: string,
+                hours?: string,
+                months?: string,
+                weeks?: string,
+                years?: string
+        }
+        declare interface ChartCategoryAxisItemLabelsMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartCategoryAxisItemLabelsPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartCategoryAxisItemLabelsRotation {
+            align?: string,
+                angle?: number | string
+        }
+        declare interface ChartCategoryAxisItemLabels {
+            background?: string,
+                border?: ChartCategoryAxisItemLabelsBorder,
+                color?: string,
+                culture?: string,
+                dateFormats?: ChartCategoryAxisItemLabelsDateFormats,
+                font?: string,
+                format?: string,
+                margin?: ChartCategoryAxisItemLabelsMargin,
+                mirror?: boolean,
+                padding?: ChartCategoryAxisItemLabelsPadding,
+                rotation?: ChartCategoryAxisItemLabelsRotation,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartCategoryAxisItemLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartCategoryAxisItemMajorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartCategoryAxisItemMajorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartCategoryAxisItemMinorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartCategoryAxisItemMinorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartCategoryAxisItemNotesDataItemIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartCategoryAxisItemNotesDataItemIcon {
+            background?: string,
+                border?: ChartCategoryAxisItemNotesDataItemIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartCategoryAxisItemNotesDataItemLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartCategoryAxisItemNotesDataItemLabel {
+            background?: string,
+                border?: ChartCategoryAxisItemNotesDataItemLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                text?: string,
+                position?: string
+        }
+        declare interface ChartCategoryAxisItemNotesDataItemLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartCategoryAxisItemNotesDataItem {
+            value?: any,
+                position?: string,
+                icon?: ChartCategoryAxisItemNotesDataItemIcon,
+                label?: ChartCategoryAxisItemNotesDataItemLabel,
+                line?: ChartCategoryAxisItemNotesDataItemLine
+        }
+        declare interface ChartCategoryAxisItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartCategoryAxisItemNotesIcon {
+            background?: string,
+                border?: ChartCategoryAxisItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartCategoryAxisItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartCategoryAxisItemNotesLabel {
+            background?: string,
+                border?: ChartCategoryAxisItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface ChartCategoryAxisItemNotesLine {
+            dashType?: string,
+                width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartCategoryAxisItemNotes {
+            position?: string,
+                icon?: ChartCategoryAxisItemNotesIcon,
+                label?: ChartCategoryAxisItemNotesLabel,
+                line?: ChartCategoryAxisItemNotesLine,
+                data?: ChartCategoryAxisItemNotesDataItem[],
+                visual?: Function
+        }
+        declare interface ChartCategoryAxisItemPlotBand {
+            color?: string,
+                from?: number,
+                opacity?: number,
+                to?: number
+        }
+        declare interface ChartCategoryAxisItemSelectMousewheel {
+            reverse?: boolean,
+                zoom?: string
+        }
+        declare interface ChartCategoryAxisItemSelect {
+            from?: any,
+                max?: any,
+                min?: any,
+                mousewheel?: ChartCategoryAxisItemSelectMousewheel,
+                to?: any
+        }
+        declare interface ChartCategoryAxisItemTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartCategoryAxisItemTitleMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartCategoryAxisItemTitlePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartCategoryAxisItemTitle {
+            background?: string,
+                border?: ChartCategoryAxisItemTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: ChartCategoryAxisItemTitleMargin,
+                padding?: ChartCategoryAxisItemTitlePadding,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartCategoryAxisItem {
+            autoBaseUnitSteps?: ChartCategoryAxisItemAutoBaseUnitSteps,
+                axisCrossingValue?: any | Date | any,
+                background?: string,
+                baseUnit?: string,
+                baseUnitStep?: any,
+                categories?: any,
+                color?: string,
+                crosshair?: ChartCategoryAxisItemCrosshair,
+                field?: string,
+                justified?: boolean,
+                labels?: ChartCategoryAxisItemLabels,
+                line?: ChartCategoryAxisItemLine,
+                majorGridLines?: ChartCategoryAxisItemMajorGridLines,
+                majorTicks?: ChartCategoryAxisItemMajorTicks,
+                max?: any,
+                maxDateGroups?: number,
+                min?: any,
+                minorGridLines?: ChartCategoryAxisItemMinorGridLines,
+                minorTicks?: ChartCategoryAxisItemMinorTicks,
+                name?: string,
+                pane?: string,
+                plotBands?: ChartCategoryAxisItemPlotBand[],
+                reverse?: boolean,
+                roundToBaseUnit?: boolean,
+                select?: ChartCategoryAxisItemSelect,
+                startAngle?: number,
+                title?: ChartCategoryAxisItemTitle,
+                type?: string,
+                visible?: boolean,
+                weekStartDay?: number,
+                axisCrossingValues?: number[],
+                notes?: ChartCategoryAxisItemNotes
+        }
+        declare interface ChartChartAreaBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartChartAreaMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartChartArea {
+            background?: string,
+                border?: ChartChartAreaBorder,
+                height?: number,
+                margin?: ChartChartAreaMargin,
+                opacity?: number,
+                width?: number
+        }
+        declare interface ChartLegendBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartLegendInactiveItemsLabels {
+            color?: string,
+                font?: string,
+                template?: string | Function
+        }
+        declare interface ChartLegendInactiveItems {
+            labels?: ChartLegendInactiveItemsLabels
+        }
+        declare interface ChartLegendItem {
+            cursor?: string,
+                visual?: Function
+        }
+        declare interface ChartLegendLabelsMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartLegendLabelsPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartLegendLabels {
+            color?: string,
+                font?: string,
+                margin?: ChartLegendLabelsMargin,
+                padding?: ChartLegendLabelsPadding,
+                template?: string | Function
+        }
+        declare interface ChartLegendMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartLegendPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartLegend {
+            align?: string,
+                background?: string,
+                border?: ChartLegendBorder,
+                height?: number,
+                inactiveItems?: ChartLegendInactiveItems,
+                item?: ChartLegendItem,
+                labels?: ChartLegendLabels,
+                margin?: ChartLegendMargin,
+                offsetX?: number,
+                offsetY?: number,
+                orientation?: string,
+                padding?: ChartLegendPadding,
+                position?: string,
+                reverse?: boolean,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartPaneBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartPaneMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartPanePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartPaneTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartPaneTitleMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartPaneTitle {
+            background?: string,
+                border?: ChartPaneTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: ChartPaneTitleMargin,
+                position?: string,
+                text?: string,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartPane {
+            background?: string,
+                border?: ChartPaneBorder,
+                clip?: boolean,
+                height?: number,
+                margin?: ChartPaneMargin,
+                name?: string,
+                padding?: ChartPanePadding,
+                title?: ChartPaneTitle
+        }
+        declare interface ChartPannable {
+            key?: string,
+                lock?: string
+        }
+        declare interface ChartPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface ChartPdf {
+            author?: string,
+                creator?: string,
+                date?: Date,
+                forceProxy?: boolean,
+                fileName?: string,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: ChartPdfMargin,
+                paperSize?: string | any,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string
+        }
+        declare interface ChartPlotAreaBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartPlotAreaMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartPlotAreaPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartPlotArea {
+            background?: string,
+                border?: ChartPlotAreaBorder,
+                margin?: ChartPlotAreaMargin,
+                opacity?: number,
+                padding?: ChartPlotAreaPadding
+        }
+        declare interface ChartSeriesItemBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                opacity?: number | Function,
+                width?: number | Function
+        }
+        declare interface ChartSeriesItemConnectors {
+            color?: string | Function,
+                padding?: number,
+                width?: number
+        }
+        declare interface ChartSeriesItemErrorBarsLine {
+            width?: number,
+                dashType?: string
+        }
+        declare interface ChartSeriesItemErrorBars {
+            value?: string | number | any | Function,
+                visual?: Function,
+                xValue?: string | number | any | Function,
+                yValue?: string | number | any | Function,
+                endCaps?: boolean,
+                color?: string,
+                line?: ChartSeriesItemErrorBarsLine
+        }
+        declare interface ChartSeriesItemExtremesBorder {
+            color?: string | Function,
+                width?: number | Function
+        }
+        declare interface ChartSeriesItemExtremes {
+            background?: string | Function,
+                border?: ChartSeriesItemExtremesBorder,
+                size?: number | Function,
+                type?: string | Function,
+                rotation?: number | Function
+        }
+        declare interface ChartSeriesItemHighlightBorder {
+            color?: string,
+                opacity?: number,
+                width?: number
+        }
+        declare interface ChartSeriesItemHighlightLine {
+            dashType?: string,
+                color?: string,
+                opacity?: number,
+                width?: number
+        }
+        declare interface ChartSeriesItemHighlight {
+            border?: ChartSeriesItemHighlightBorder,
+                color?: string,
+                line?: ChartSeriesItemHighlightLine,
+                opacity?: number,
+                toggle?: Function,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartSeriesItemLabelsBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                width?: number | Function
+        }
+        declare interface ChartSeriesItemLabelsFromBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                width?: number | Function
+        }
+        declare interface ChartSeriesItemLabelsFromMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesItemLabelsFromPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesItemLabelsFrom {
+            background?: string | Function,
+                border?: ChartSeriesItemLabelsFromBorder,
+                color?: string | Function,
+                font?: string | Function,
+                format?: string | Function,
+                margin?: ChartSeriesItemLabelsFromMargin,
+                padding?: ChartSeriesItemLabelsFromPadding,
+                position?: string | Function,
+                template?: string | Function,
+                visible?: boolean | Function
+        }
+        declare interface ChartSeriesItemLabelsMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesItemLabelsPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesItemLabelsToBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                width?: number | Function
+        }
+        declare interface ChartSeriesItemLabelsToMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesItemLabelsToPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesItemLabelsTo {
+            background?: string | Function,
+                border?: ChartSeriesItemLabelsToBorder,
+                color?: string | Function,
+                font?: string | Function,
+                format?: string | Function,
+                margin?: ChartSeriesItemLabelsToMargin,
+                padding?: ChartSeriesItemLabelsToPadding,
+                position?: string | Function,
+                template?: string | Function,
+                visible?: boolean | Function
+        }
+        declare interface ChartSeriesItemLabels {
+            align?: string,
+                background?: string | Function,
+                border?: ChartSeriesItemLabelsBorder,
+                color?: string | Function,
+                distance?: number,
+                font?: string | Function,
+                format?: string | Function,
+                margin?: ChartSeriesItemLabelsMargin,
+                padding?: ChartSeriesItemLabelsPadding,
+                position?: string | Function,
+                template?: string | Function,
+                visible?: boolean | Function,
+                visual?: Function,
+                from?: ChartSeriesItemLabelsFrom,
+                to?: ChartSeriesItemLabelsTo
+        }
+        declare interface ChartSeriesItemLine {
+            color?: string,
+                opacity?: number,
+                width?: string,
+                style?: string
+        }
+        declare interface ChartSeriesItemMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesItemMarkersBorder {
+            color?: string | Function,
+                width?: number | Function
+        }
+        declare interface ChartSeriesItemMarkers {
+            background?: string | Function,
+                border?: ChartSeriesItemMarkersBorder,
+                size?: number | Function,
+                type?: string | Function,
+                visible?: boolean | Function,
+                visual?: Function,
+                rotation?: number | Function
+        }
+        declare interface ChartSeriesItemNegativeValues {
+            color?: string,
+                visible?: boolean
+        }
+        declare interface ChartSeriesItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartSeriesItemNotesIcon {
+            background?: string,
+                border?: ChartSeriesItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartSeriesItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartSeriesItemNotesLabel {
+            background?: string,
+                border?: ChartSeriesItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface ChartSeriesItemNotesLine {
+            dashType?: string,
+                width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartSeriesItemNotes {
+            position?: string,
+                icon?: ChartSeriesItemNotesIcon,
+                label?: ChartSeriesItemNotesLabel,
+                line?: ChartSeriesItemNotesLine,
+                visual?: Function
+        }
+        declare interface ChartSeriesItemOutliersBorder {
+            color?: string | Function,
+                width?: number | Function
+        }
+        declare interface ChartSeriesItemOutliers {
+            background?: string | Function,
+                border?: ChartSeriesItemOutliersBorder,
+                size?: number | Function,
+                type?: string | Function,
+                rotation?: number | Function
+        }
+        declare interface ChartSeriesItemOverlay {
+            gradient?: string
+        }
+        declare interface ChartSeriesItemStack {
+            type?: string,
+                group?: string
+        }
+        declare interface ChartSeriesItemTargetBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                width?: number | Function
+        }
+        declare interface ChartSeriesItemTargetLine {
+            width?: any | Function
+        }
+        declare interface ChartSeriesItemTarget {
+            border?: ChartSeriesItemTargetBorder,
+                color?: string | Function,
+                line?: ChartSeriesItemTargetLine
+        }
+        declare interface ChartSeriesItemTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartSeriesItemTooltipPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesItemTooltip {
+            background?: string,
+                border?: ChartSeriesItemTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: ChartSeriesItemTooltipPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartSeriesItem {
+            aggregate?: string | Function,
+                axis?: string,
+                border?: ChartSeriesItemBorder,
+                categoryField?: string,
+                closeField?: string,
+                color?: string | Function,
+                colorField?: string,
+                connectors?: ChartSeriesItemConnectors,
+                currentField?: string,
+                dashType?: string,
+                data?: any,
+                downColor?: string | Function,
+                downColorField?: string,
+                segmentSpacing?: number,
+                summaryField?: string,
+                neckRatio?: number,
+                dynamicSlope?: boolean,
+                dynamicHeight?: boolean,
+                errorBars?: ChartSeriesItemErrorBars,
+                errorLowField?: string,
+                errorHighField?: string,
+                xErrorLowField?: string,
+                xErrorHighField?: string,
+                yErrorLowField?: string,
+                yErrorHighField?: string,
+                explodeField?: string,
+                field?: string,
+                fromField?: string,
+                toField?: string,
+                noteTextField?: string,
+                lowerField?: string,
+                q1Field?: string,
+                medianField?: string,
+                q3Field?: string,
+                upperField?: string,
+                meanField?: string,
+                outliersField?: string,
+                gap?: number,
+                highField?: string,
+                highlight?: ChartSeriesItemHighlight,
+                holeSize?: number,
+                labels?: ChartSeriesItemLabels,
+                line?: ChartSeriesItemLine,
+                lowField?: string,
+                margin?: ChartSeriesItemMargin,
+                markers?: ChartSeriesItemMarkers,
+                outliers?: ChartSeriesItemOutliers,
+                extremes?: ChartSeriesItemExtremes,
+                maxSize?: number,
+                minSize?: number,
+                missingValues?: string,
+                style?: string,
+                name?: string,
+                negativeColor?: string,
+                negativeValues?: ChartSeriesItemNegativeValues,
+                opacity?: number,
+                openField?: string,
+                overlay?: ChartSeriesItemOverlay,
+                padding?: number,
+                size?: number,
+                sizeField?: string,
+                spacing?: number,
+                stack?: boolean | ChartSeriesItemStack,
+                startAngle?: number,
+                target?: ChartSeriesItemTarget,
+                targetField?: string,
+                tooltip?: ChartSeriesItemTooltip,
+                type?: string,
+                visible?: boolean,
+                visibleInLegend?: boolean,
+                visibleInLegendField?: string,
+                visual?: Function,
+                width?: number,
+                xAxis?: string,
+                xField?: string,
+                yAxis?: string,
+                yField?: string,
+                notes?: ChartSeriesItemNotes,
+                zIndex?: number
+        }
+        declare interface ChartSeriesDefaultsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsFromBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsFromMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsFromPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsFrom {
+            background?: string,
+                border?: ChartSeriesDefaultsLabelsFromBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: ChartSeriesDefaultsLabelsFromMargin,
+                padding?: ChartSeriesDefaultsLabelsFromPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartSeriesDefaultsLabelsMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsToBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsToMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsToPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesDefaultsLabelsTo {
+            background?: string,
+                border?: ChartSeriesDefaultsLabelsToBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: ChartSeriesDefaultsLabelsToMargin,
+                padding?: ChartSeriesDefaultsLabelsToPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartSeriesDefaultsLabels {
+            background?: string,
+                border?: ChartSeriesDefaultsLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: ChartSeriesDefaultsLabelsMargin,
+                padding?: ChartSeriesDefaultsLabelsPadding,
+                template?: string | Function,
+                visible?: boolean,
+                visual?: Function,
+                from?: ChartSeriesDefaultsLabelsFrom,
+                to?: ChartSeriesDefaultsLabelsTo
+        }
+        declare interface ChartSeriesDefaultsNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartSeriesDefaultsNotesIcon {
+            background?: string,
+                border?: ChartSeriesDefaultsNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartSeriesDefaultsNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartSeriesDefaultsNotesLabel {
+            background?: string,
+                border?: ChartSeriesDefaultsNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface ChartSeriesDefaultsNotesLine {
+            dashType?: string,
+                width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartSeriesDefaultsNotes {
+            icon?: ChartSeriesDefaultsNotesIcon,
+                label?: ChartSeriesDefaultsNotesLabel,
+                line?: ChartSeriesDefaultsNotesLine,
+                visual?: Function
+        }
+        declare interface ChartSeriesDefaultsOverlay {
+            gradient?: string
+        }
+        declare interface ChartSeriesDefaultsStack {
+            type?: string
+        }
+        declare interface ChartSeriesDefaultsTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartSeriesDefaultsTooltipPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartSeriesDefaultsTooltip {
+            background?: string,
+                border?: ChartSeriesDefaultsTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: ChartSeriesDefaultsTooltipPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartSeriesDefaults {
+            area?: any,
+                bar?: any,
+                border?: ChartSeriesDefaultsBorder,
+                bubble?: any,
+                candlestick?: any,
+                column?: any,
+                donut?: any,
+                gap?: number,
+                labels?: ChartSeriesDefaultsLabels,
+                line?: any,
+                ohlc?: any,
+                overlay?: ChartSeriesDefaultsOverlay,
+                pie?: any,
+                scatter?: any,
+                scatterLine?: any,
+                spacing?: number,
+                stack?: boolean | ChartSeriesDefaultsStack,
+                type?: string,
+                tooltip?: ChartSeriesDefaultsTooltip,
+                verticalArea?: any,
+                verticalLine?: any,
+                visual?: Function,
+                notes?: ChartSeriesDefaultsNotes
+        }
+        declare interface ChartTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartTitleMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartTitlePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartTitle {
+            align?: string,
+                background?: string,
+                border?: ChartTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: ChartTitleMargin,
+                padding?: ChartTitlePadding,
+                position?: string,
+                text?: string,
+                visible?: boolean
+        }
+        declare interface ChartTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartTooltipPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartTooltip {
+            background?: string,
+                border?: ChartTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                opacity?: number,
+                padding?: ChartTooltipPadding,
+                shared?: boolean,
+                sharedTemplate?: string | Function,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartValueAxisItemCrosshairTooltipBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartValueAxisItemCrosshairTooltipPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartValueAxisItemCrosshairTooltip {
+            background?: string,
+                border?: ChartValueAxisItemCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: ChartValueAxisItemCrosshairTooltipPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartValueAxisItemCrosshair {
+            color?: string,
+                opacity?: number,
+                tooltip?: ChartValueAxisItemCrosshairTooltip,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartValueAxisItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartValueAxisItemLabelsMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartValueAxisItemLabelsPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartValueAxisItemLabelsRotation {
+            align?: string,
+                angle?: number | string
+        }
+        declare interface ChartValueAxisItemLabels {
+            background?: string,
+                border?: ChartValueAxisItemLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: ChartValueAxisItemLabelsMargin,
+                mirror?: boolean,
+                padding?: ChartValueAxisItemLabelsPadding,
+                rotation?: ChartValueAxisItemLabelsRotation,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartValueAxisItemLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartValueAxisItemMajorGridLines {
+            color?: string,
+                dashType?: string,
+                type?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartValueAxisItemMajorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartValueAxisItemMinorGridLines {
+            color?: string,
+                dashType?: string,
+                type?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartValueAxisItemMinorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartValueAxisItemNotesDataItemIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartValueAxisItemNotesDataItemIcon {
+            background?: string,
+                border?: ChartValueAxisItemNotesDataItemIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartValueAxisItemNotesDataItemLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartValueAxisItemNotesDataItemLabel {
+            background?: string,
+                border?: ChartValueAxisItemNotesDataItemLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                text?: string,
+                position?: string
+        }
+        declare interface ChartValueAxisItemNotesDataItemLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartValueAxisItemNotesDataItem {
+            value?: any,
+                position?: string,
+                icon?: ChartValueAxisItemNotesDataItemIcon,
+                label?: ChartValueAxisItemNotesDataItemLabel,
+                line?: ChartValueAxisItemNotesDataItemLine
+        }
+        declare interface ChartValueAxisItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartValueAxisItemNotesIcon {
+            background?: string,
+                border?: ChartValueAxisItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartValueAxisItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartValueAxisItemNotesLabel {
+            background?: string,
+                border?: ChartValueAxisItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface ChartValueAxisItemNotesLine {
+            dashType?: string,
+                width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartValueAxisItemNotes {
+            position?: string,
+                icon?: ChartValueAxisItemNotesIcon,
+                label?: ChartValueAxisItemNotesLabel,
+                line?: ChartValueAxisItemNotesLine,
+                data?: ChartValueAxisItemNotesDataItem[],
+                visual?: Function
+        }
+        declare interface ChartValueAxisItemPlotBand {
+            color?: string,
+                from?: number,
+                opacity?: number,
+                to?: number
+        }
+        declare interface ChartValueAxisItemTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartValueAxisItemTitleMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartValueAxisItemTitlePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartValueAxisItemTitle {
+            background?: string,
+                border?: ChartValueAxisItemTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: ChartValueAxisItemTitleMargin,
+                padding?: ChartValueAxisItemTitlePadding,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartValueAxisItem {
+            axisCrossingValue?: any | Date | any,
+                background?: string,
+                color?: string,
+                crosshair?: ChartValueAxisItemCrosshair,
+                labels?: ChartValueAxisItemLabels,
+                line?: ChartValueAxisItemLine,
+                majorGridLines?: ChartValueAxisItemMajorGridLines,
+                majorUnit?: number,
+                max?: number,
+                min?: number,
+                minorGridLines?: ChartValueAxisItemMinorGridLines,
+                majorTicks?: ChartValueAxisItemMajorTicks,
+                minorTicks?: ChartValueAxisItemMinorTicks,
+                minorUnit?: number,
+                name?: string,
+                narrowRange?: boolean,
+                pane?: string,
+                plotBands?: ChartValueAxisItemPlotBand[],
+                reverse?: boolean,
+                title?: ChartValueAxisItemTitle,
+                type?: string,
+                visible?: boolean,
+                notes?: ChartValueAxisItemNotes
+        }
+        declare interface ChartXAxisItemCrosshairTooltipBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartXAxisItemCrosshairTooltipPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartXAxisItemCrosshairTooltip {
+            background?: string,
+                border?: ChartXAxisItemCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: ChartXAxisItemCrosshairTooltipPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartXAxisItemCrosshair {
+            color?: string,
+                opacity?: number,
+                tooltip?: ChartXAxisItemCrosshairTooltip,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartXAxisItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartXAxisItemLabelsDateFormats {
+            days?: string,
+                hours?: string,
+                months?: string,
+                weeks?: string,
+                years?: string
+        }
+        declare interface ChartXAxisItemLabelsMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartXAxisItemLabelsPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartXAxisItemLabelsRotation {
+            align?: string,
+                angle?: number | string
+        }
+        declare interface ChartXAxisItemLabels {
+            background?: string,
+                border?: ChartXAxisItemLabelsBorder,
+                color?: string,
+                culture?: string,
+                dateFormats?: ChartXAxisItemLabelsDateFormats,
+                font?: string,
+                format?: string,
+                margin?: ChartXAxisItemLabelsMargin,
+                mirror?: boolean,
+                padding?: ChartXAxisItemLabelsPadding,
+                rotation?: ChartXAxisItemLabelsRotation,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartXAxisItemLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartXAxisItemMajorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartXAxisItemMajorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartXAxisItemMinorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartXAxisItemMinorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartXAxisItemNotesDataItemIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartXAxisItemNotesDataItemIcon {
+            background?: string,
+                border?: ChartXAxisItemNotesDataItemIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartXAxisItemNotesDataItemLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartXAxisItemNotesDataItemLabel {
+            background?: string,
+                border?: ChartXAxisItemNotesDataItemLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                text?: string,
+                position?: string
+        }
+        declare interface ChartXAxisItemNotesDataItemLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartXAxisItemNotesDataItem {
+            value?: any,
+                position?: string,
+                icon?: ChartXAxisItemNotesDataItemIcon,
+                label?: ChartXAxisItemNotesDataItemLabel,
+                line?: ChartXAxisItemNotesDataItemLine
+        }
+        declare interface ChartXAxisItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartXAxisItemNotesIcon {
+            background?: string,
+                border?: ChartXAxisItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartXAxisItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartXAxisItemNotesLabel {
+            background?: string,
+                border?: ChartXAxisItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface ChartXAxisItemNotesLine {
+            dashType?: string,
+                width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartXAxisItemNotes {
+            position?: string,
+                icon?: ChartXAxisItemNotesIcon,
+                label?: ChartXAxisItemNotesLabel,
+                line?: ChartXAxisItemNotesLine,
+                data?: ChartXAxisItemNotesDataItem[],
+                visual?: Function
+        }
+        declare interface ChartXAxisItemPlotBand {
+            color?: string,
+                from?: number,
+                opacity?: number,
+                to?: number
+        }
+        declare interface ChartXAxisItemTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartXAxisItemTitleMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartXAxisItemTitlePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartXAxisItemTitle {
+            background?: string,
+                border?: ChartXAxisItemTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: ChartXAxisItemTitleMargin,
+                padding?: ChartXAxisItemTitlePadding,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartXAxisItem {
+            axisCrossingValue?: any | Date | any,
+                background?: string,
+                baseUnit?: string,
+                color?: string,
+                crosshair?: ChartXAxisItemCrosshair,
+                labels?: ChartXAxisItemLabels,
+                line?: ChartXAxisItemLine,
+                majorGridLines?: ChartXAxisItemMajorGridLines,
+                minorGridLines?: ChartXAxisItemMinorGridLines,
+                minorTicks?: ChartXAxisItemMinorTicks,
+                majorTicks?: ChartXAxisItemMajorTicks,
+                majorUnit?: number,
+                max?: any,
+                min?: any,
+                minorUnit?: number,
+                name?: string,
+                narrowRange?: boolean,
+                pane?: string,
+                plotBands?: ChartXAxisItemPlotBand[],
+                reverse?: boolean,
+                startAngle?: number,
+                title?: ChartXAxisItemTitle,
+                type?: string,
+                visible?: boolean,
+                notes?: ChartXAxisItemNotes
+        }
+        declare interface ChartYAxisItemCrosshairTooltipBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartYAxisItemCrosshairTooltipPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartYAxisItemCrosshairTooltip {
+            background?: string,
+                border?: ChartYAxisItemCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: ChartYAxisItemCrosshairTooltipPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface ChartYAxisItemCrosshair {
+            color?: string,
+                opacity?: number,
+                tooltip?: ChartYAxisItemCrosshairTooltip,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartYAxisItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartYAxisItemLabelsDateFormats {
+            days?: string,
+                hours?: string,
+                months?: string,
+                weeks?: string,
+                years?: string
+        }
+        declare interface ChartYAxisItemLabelsMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartYAxisItemLabelsPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartYAxisItemLabelsRotation {
+            align?: string,
+                angle?: number
+        }
+        declare interface ChartYAxisItemLabels {
+            background?: string,
+                border?: ChartYAxisItemLabelsBorder,
+                color?: string,
+                culture?: string,
+                dateFormats?: ChartYAxisItemLabelsDateFormats,
+                font?: string,
+                format?: string,
+                margin?: ChartYAxisItemLabelsMargin,
+                mirror?: boolean,
+                padding?: ChartYAxisItemLabelsPadding,
+                rotation?: ChartYAxisItemLabelsRotation,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartYAxisItemLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface ChartYAxisItemMajorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartYAxisItemMajorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartYAxisItemMinorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartYAxisItemMinorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface ChartYAxisItemNotesDataItemIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartYAxisItemNotesDataItemIcon {
+            background?: string,
+                border?: ChartYAxisItemNotesDataItemIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartYAxisItemNotesDataItemLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartYAxisItemNotesDataItemLabel {
+            background?: string,
+                border?: ChartYAxisItemNotesDataItemLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                text?: string,
+                position?: string
+        }
+        declare interface ChartYAxisItemNotesDataItemLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartYAxisItemNotesDataItem {
+            value?: any,
+                position?: string,
+                icon?: ChartYAxisItemNotesDataItemIcon,
+                label?: ChartYAxisItemNotesDataItemLabel,
+                line?: ChartYAxisItemNotesDataItemLine
+        }
+        declare interface ChartYAxisItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface ChartYAxisItemNotesIcon {
+            background?: string,
+                border?: ChartYAxisItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface ChartYAxisItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartYAxisItemNotesLabel {
+            background?: string,
+                border?: ChartYAxisItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface ChartYAxisItemNotesLine {
+            dashType?: string,
+                width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface ChartYAxisItemNotes {
+            position?: string,
+                icon?: ChartYAxisItemNotesIcon,
+                label?: ChartYAxisItemNotesLabel,
+                line?: ChartYAxisItemNotesLine,
+                data?: ChartYAxisItemNotesDataItem[],
+                visual?: Function
+        }
+        declare interface ChartYAxisItemPlotBand {
+            color?: string,
+                from?: number,
+                opacity?: number,
+                to?: number
+        }
+        declare interface ChartYAxisItemTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ChartYAxisItemTitleMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartYAxisItemTitlePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface ChartYAxisItemTitle {
+            background?: string,
+                border?: ChartYAxisItemTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: ChartYAxisItemTitleMargin,
+                padding?: ChartYAxisItemTitlePadding,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean,
+                visual?: Function
+        }
+        declare interface ChartYAxisItem {
+            axisCrossingValue?: any | Date | any,
+                background?: string,
+                baseUnit?: string,
+                color?: string,
+                crosshair?: ChartYAxisItemCrosshair,
+                labels?: ChartYAxisItemLabels,
+                line?: ChartYAxisItemLine,
+                majorGridLines?: ChartYAxisItemMajorGridLines,
+                minorGridLines?: ChartYAxisItemMinorGridLines,
+                minorTicks?: ChartYAxisItemMinorTicks,
+                majorTicks?: ChartYAxisItemMajorTicks,
+                majorUnit?: number,
+                max?: any,
+                min?: any,
+                minorUnit?: number,
+                name?: string,
+                narrowRange?: boolean,
+                pane?: string,
+                plotBands?: ChartYAxisItemPlotBand[],
+                reverse?: boolean,
+                title?: ChartYAxisItemTitle,
+                type?: string,
+                visible?: boolean,
+                notes?: ChartYAxisItemNotes
+        }
+        declare interface ChartZoomableMousewheel {
+            lock?: string
+        }
+        declare interface ChartZoomableSelection {
+            key?: string,
+                lock?: string
+        }
+        declare interface ChartZoomable {
+            mousewheel?: boolean | ChartZoomableMousewheel,
+                selection?: boolean | ChartZoomableSelection
+        }
+        declare interface ChartExportImageOptions {
+            width?: string,
+                height?: string,
+                cors?: string
+        }
+        declare interface ChartExportSVGOptions {
+            raw?: boolean
+        }
+        declare interface ChartToggleHighlightOptions {
+            series?: string,
+                category?: string
+        }
+        declare interface ChartSeriesClickEventSeries {
+            type?: string,
+                name?: string,
+                data?: any
+        }
+        declare interface ChartSeriesHoverEventSeries {
+            type?: string,
+                name?: string,
+                data?: any
+        }
+        declare interface ChartOptions {
+            name?: string,
+                autoBind?: boolean,
+                axisDefaults?: ChartAxisDefaults,
+                categoryAxis?: ChartCategoryAxisItem[],
+                chartArea?: ChartChartArea,
+                dataSource?: any | any | undefined.DataSource,
+                legend?: ChartLegend,
+                panes?: ChartPane[],
+                pannable?: boolean | ChartPannable,
+                pdf?: ChartPdf,
+                plotArea?: ChartPlotArea,
+                renderAs?: string,
+                series?: ChartSeriesItem[],
+                seriesColors?: any,
+                seriesDefaults?: ChartSeriesDefaults,
+                theme?: string,
+                title?: ChartTitle,
+                tooltip?: ChartTooltip,
+                transitions?: boolean,
+                valueAxis?: ChartValueAxisItem[],
+                xAxis?: ChartXAxisItem[],
+                yAxis?: ChartYAxisItem[],
+                zoomable?: boolean | ChartZoomable,
+                axisLabelClick(e: ChartAxisLabelClickEvent): void,
+                dataBound(e: ChartDataBoundEvent): void,
+                drag(e: ChartDragEvent): void,
+                dragEnd(e: ChartDragEndEvent): void,
+                dragStart(e: ChartDragStartEvent): void,
+                legendItemClick(e: ChartLegendItemClickEvent): void,
+                legendItemHover(e: ChartLegendItemHoverEvent): void,
+                noteClick(e: ChartNoteClickEvent): void,
+                noteHover(e: ChartNoteHoverEvent): void,
+                plotAreaClick(e: ChartPlotAreaClickEvent): void,
+                plotAreaHover(e: ChartPlotAreaHoverEvent): void,
+                render(e: ChartRenderEvent): void,
+                select(e: ChartSelectEvent): void,
+                selectEnd(e: ChartSelectEndEvent): void,
+                selectStart(e: ChartSelectStartEvent): void,
+                seriesClick(e: ChartSeriesClickEvent): void,
+                seriesHover(e: ChartSeriesHoverEvent): void,
+                zoom(e: ChartZoomEvent): void,
+                zoomEnd(e: ChartZoomEndEvent): void,
+                zoomStart(e: ChartZoomStartEvent): void
+        }
+        declare interface ChartEvent {
+            sender: Chart,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ChartAxisLabelClickEvent = {
+            axis?: any,
+            dataItem?: any,
+            element?: any,
+            index?: any,
+            text?: string,
+            value?: any
+        } & ChartEvent
+
+        declare type ChartDataBoundEvent = {} & ChartEvent
+
+        declare type ChartDragEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & ChartEvent
+
+        declare type ChartDragEndEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & ChartEvent
+
+        declare type ChartDragStartEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & ChartEvent
+
+        declare type ChartLegendItemClickEvent = {
+            pointIndex?: number,
+            series?: any,
+            seriesIndex?: number,
+            text?: string,
+            element?: any
+        } & ChartEvent
+
+        declare type ChartLegendItemHoverEvent = {
+            element?: any,
+            pointIndex?: number,
+            series?: any,
+            seriesIndex?: number,
+            text?: string
+        } & ChartEvent
+
+        declare type ChartNoteClickEvent = {
+            category?: any,
+            dataItem?: any,
+            element?: any,
+            series?: any,
+            value?: any,
+            visual?: any
+        } & ChartEvent
+
+        declare type ChartNoteHoverEvent = {
+            category?: any,
+            dataItem?: any,
+            element?: any,
+            series?: any,
+            value?: any,
+            visual?: any
+        } & ChartEvent
+
+        declare type ChartPlotAreaClickEvent = {
+            category?: any,
+            element?: any,
+            originalEvent?: any,
+            value?: any,
+            x?: any,
+            y?: any
+        } & ChartEvent
+
+        declare type ChartPlotAreaHoverEvent = {
+            category?: any,
+            element?: any,
+            originalEvent?: any,
+            value?: any,
+            x?: any,
+            y?: any
+        } & ChartEvent
+
+        declare type ChartRenderEvent = {} & ChartEvent
+
+        declare type ChartSelectEvent = {
+            axis?: any,
+            from?: any,
+            to?: any
+        } & ChartEvent
+
+        declare type ChartSelectEndEvent = {
+            axis?: any,
+            from?: any,
+            to?: any
+        } & ChartEvent
+
+        declare type ChartSelectStartEvent = {
+            axis?: any,
+            from?: any,
+            to?: any
+        } & ChartEvent
+
+        declare type ChartSeriesClickEvent = {
+            category?: any,
+            dataItem?: any,
+            element?: any,
+            originalEvent?: any,
+            percentage?: any,
+            series?: ChartSeriesClickEventSeries,
+            stackValue?: any,
+            value?: any
+        } & ChartEvent
+
+        declare type ChartSeriesHoverEvent = {
+            category?: any,
+            categoryPoints?: any,
+            dataItem?: any,
+            element?: any,
+            originalEvent?: any,
+            percentage?: any,
+            series?: ChartSeriesHoverEventSeries,
+            stackValue?: any,
+            value?: any
+        } & ChartEvent
+
+        declare type ChartZoomEvent = {
+            axisRanges?: any,
+            delta?: number,
+            originalEvent?: any
+        } & ChartEvent
+
+        declare type ChartZoomEndEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & ChartEvent
+
+        declare type ChartZoomStartEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & ChartEvent
+
+        declare class Diagram mixins undefined.Widget {
+            fn: Diagram;
+            options: DiagramOptions;
+            dataSource: undefined.DataSource;
+            connections: undefined.Connection[];
+            connectionsDataSource: undefined.DataSource;
+            shapes: undefined.Shape[];
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Diagram;
+            constructor(element: Element, options?: DiagramOptions): this;
+            addConnection(connection: any, undoable: boolean): void;
+            addShape(obj: any, undoable: boolean): undefined.Shape;
+            alignShapes(direction: string): void;
+            boundingBox(items: any): undefined.Rect;
+            bringIntoView(obj: any, options: any): void;
+            cancelEdit(): void;
+            clear(): void;
+            connect(source: any, target: any, options: any): void;
+            connected(source: any, target: any): void;
+            copy(): void;
+            createConnection(item: any): void;
+            createShape(item: any): void;
+            cut(): void;
+            destroy(): void;
+            documentToModel(point: any): any;
+            documentToView(point: any): any;
+            edit(item: any): void;
+            exportImage(options: any): JQueryPromise<any>;
+            exportPDF(options?: undefined.PDFOptions): JQueryPromise<any>;
+            exportSVG(options: any): JQueryPromise<any>;
+            focus(): void;
+            getConnectionByModelId(id: string): undefined.Connection;
+            getConnectionByModelId(id: number): undefined.Connection;
+            getConnectionByModelUid(uid: string): undefined.Connection;
+            getShapeById(id: string): any;
+            getShapeByModelId(id: string): undefined.Shape;
+            getShapeByModelId(id: number): undefined.Shape;
+            getShapeByModelUid(uid: string): undefined.Shape;
+            layerToModel(point: any): any;
+            layout(options: any): void;
+            load(json: string): void;
+            modelToDocument(point: any): any;
+            modelToLayer(point: any): any;
+            modelToView(point: any): any;
+            pan(pan: any): void;
+            paste(): void;
+            redo(): void;
+            remove(items: any, undoable: boolean): void;
+            resize(): void;
+            save(): void;
+            saveEdit(): void;
+            select(): any;
+            select(elements: undefined.Connection, options: any): void;
+            select(elements: undefined.Shape, options: any): void;
+            select(elements: any, options: any): void;
+            selectAll(): void;
+            selectArea(rect: undefined.Rect): void;
+            setConnectionsDataSource(dataSource: undefined.DataSource): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            toBack(items: any, undoable: boolean): void;
+            toFront(items: any, undoable: boolean): void;
+            transformPoint(p: any): void;
+            transformRect(r: any): void;
+            undo(): void;
+            viewToDocument(point: undefined.Point): undefined.Point;
+            viewToModel(point: undefined.Point): undefined.Point;
+            viewport(): undefined.Rect;
+            zoom(): number;
+            zoom(zoom: number, point: undefined.Point): void
+        }
+        declare interface DiagramConnectionDefaultsContent {
+            color?: string,
+                fontFamily?: string,
+                fontSize?: number,
+                fontStyle?: string,
+                fontWeight?: string,
+                template?: string | Function,
+                text?: string,
+                visual?: Function
+        }
+        declare interface DiagramConnectionDefaultsEditableTool {
+            name?: string
+        }
+        declare interface DiagramConnectionDefaultsEditable {
+            drag?: boolean,
+                remove?: boolean,
+                tools?: DiagramConnectionDefaultsEditableTool[]
+        }
+        declare interface DiagramConnectionDefaultsEndCapFill {
+            color?: string
+        }
+        declare interface DiagramConnectionDefaultsEndCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramConnectionDefaultsEndCap {
+            fill?: DiagramConnectionDefaultsEndCapFill,
+                stroke?: DiagramConnectionDefaultsEndCapStroke,
+                type?: string
+        }
+        declare interface DiagramConnectionDefaultsHoverStroke {
+            color?: string
+        }
+        declare interface DiagramConnectionDefaultsHover {
+            stroke?: DiagramConnectionDefaultsHoverStroke
+        }
+        declare interface DiagramConnectionDefaultsSelectionHandlesFill {
+            color?: string
+        }
+        declare interface DiagramConnectionDefaultsSelectionHandlesStroke {
+            color?: string
+        }
+        declare interface DiagramConnectionDefaultsSelectionHandles {
+            fill?: DiagramConnectionDefaultsSelectionHandlesFill,
+                stroke?: DiagramConnectionDefaultsSelectionHandlesStroke,
+                width?: number,
+                height?: number
+        }
+        declare interface DiagramConnectionDefaultsSelection {
+            handles?: DiagramConnectionDefaultsSelectionHandles
+        }
+        declare interface DiagramConnectionDefaultsStartCapFill {
+            color?: string
+        }
+        declare interface DiagramConnectionDefaultsStartCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramConnectionDefaultsStartCap {
+            fill?: DiagramConnectionDefaultsStartCapFill,
+                stroke?: DiagramConnectionDefaultsStartCapStroke,
+                type?: string
+        }
+        declare interface DiagramConnectionDefaultsStroke {
+            color?: string,
+                width?: number
+        }
+        declare interface DiagramConnectionDefaults {
+            content?: DiagramConnectionDefaultsContent,
+                editable?: boolean | DiagramConnectionDefaultsEditable,
+                endCap?: DiagramConnectionDefaultsEndCap,
+                fromConnector?: string,
+                hover?: DiagramConnectionDefaultsHover,
+                selectable?: boolean,
+                selection?: DiagramConnectionDefaultsSelection,
+                startCap?: DiagramConnectionDefaultsStartCap,
+                stroke?: DiagramConnectionDefaultsStroke,
+                toConnector?: string,
+                type?: string
+        }
+        declare interface DiagramConnectionContent {
+            color?: string,
+                fontFamily?: string,
+                fontSize?: number,
+                fontStyle?: string,
+                fontWeight?: string,
+                template?: string | Function,
+                text?: string,
+                visual?: Function
+        }
+        declare interface DiagramConnectionEditableTool {
+            name?: string
+        }
+        declare interface DiagramConnectionEditable {
+            tools?: DiagramConnectionEditableTool[]
+        }
+        declare interface DiagramConnectionEndCapFill {
+            color?: string
+        }
+        declare interface DiagramConnectionEndCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramConnectionEndCap {
+            fill?: DiagramConnectionEndCapFill,
+                stroke?: DiagramConnectionEndCapStroke,
+                type?: string
+        }
+        declare interface DiagramConnectionFrom {
+            x?: number,
+                y?: number
+        }
+        declare interface DiagramConnectionHoverStroke {
+            color?: string
+        }
+        declare interface DiagramConnectionHover {
+            stroke?: DiagramConnectionHoverStroke
+        }
+        declare interface DiagramConnectionPoint {
+            x?: number,
+                y?: number
+        }
+        declare interface DiagramConnectionSelectionHandlesFill {
+            color?: string
+        }
+        declare interface DiagramConnectionSelectionHandlesStroke {
+            color?: string
+        }
+        declare interface DiagramConnectionSelectionHandles {
+            fill?: DiagramConnectionSelectionHandlesFill,
+                stroke?: DiagramConnectionSelectionHandlesStroke,
+                width?: number,
+                height?: number
+        }
+        declare interface DiagramConnectionSelection {
+            handles?: DiagramConnectionSelectionHandles
+        }
+        declare interface DiagramConnectionStartCapFill {
+            color?: string
+        }
+        declare interface DiagramConnectionStartCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramConnectionStartCap {
+            fill?: DiagramConnectionStartCapFill,
+                stroke?: DiagramConnectionStartCapStroke,
+                type?: string
+        }
+        declare interface DiagramConnectionStroke {
+            color?: string,
+                width?: number
+        }
+        declare interface DiagramConnectionTo {
+            x?: number,
+                y?: number
+        }
+        declare interface DiagramConnection {
+            content?: DiagramConnectionContent,
+                editable?: boolean | DiagramConnectionEditable,
+                endCap?: DiagramConnectionEndCap,
+                from?: DiagramConnectionFrom,
+                fromConnector?: string,
+                hover?: DiagramConnectionHover,
+                points?: DiagramConnectionPoint[],
+                selection?: DiagramConnectionSelection,
+                startCap?: DiagramConnectionStartCap,
+                stroke?: DiagramConnectionStroke,
+                to?: DiagramConnectionTo,
+                toConnector?: string,
+                type?: string
+        }
+        declare interface DiagramEditableDragSnap {
+            size?: number
+        }
+        declare interface DiagramEditableDrag {
+            snap?: boolean | DiagramEditableDragSnap
+        }
+        declare interface DiagramEditableResizeHandlesFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramEditableResizeHandlesHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramEditableResizeHandlesHoverStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramEditableResizeHandlesHover {
+            fill?: DiagramEditableResizeHandlesHoverFill,
+                stroke?: DiagramEditableResizeHandlesHoverStroke
+        }
+        declare interface DiagramEditableResizeHandlesStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramEditableResizeHandles {
+            fill?: DiagramEditableResizeHandlesFill,
+                height?: number,
+                hover?: DiagramEditableResizeHandlesHover,
+                stroke?: DiagramEditableResizeHandlesStroke,
+                width?: number
+        }
+        declare interface DiagramEditableResize {
+            handles?: DiagramEditableResizeHandles
+        }
+        declare interface DiagramEditableRotateFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramEditableRotateStroke {
+            color?: string,
+                width?: number
+        }
+        declare interface DiagramEditableRotate {
+            fill?: DiagramEditableRotateFill,
+                stroke?: DiagramEditableRotateStroke
+        }
+        declare interface DiagramEditableTool {
+            name?: string,
+                step?: number
+        }
+        declare interface DiagramEditable {
+            connectionTemplate?: string | Function,
+                drag?: boolean | DiagramEditableDrag,
+                remove?: boolean,
+                resize?: boolean | DiagramEditableResize,
+                rotate?: boolean | DiagramEditableRotate,
+                shapeTemplate?: string | Function,
+                tools?: DiagramEditableTool[]
+        }
+        declare interface DiagramLayoutGrid {
+            componentSpacingX?: number,
+                componentSpacingY?: number,
+                offsetX?: number,
+                offsetY?: number,
+                width?: number
+        }
+        declare interface DiagramLayout {
+            endRadialAngle?: number,
+                grid?: DiagramLayoutGrid,
+                horizontalSeparation?: number,
+                iterations?: number,
+                layerSeparation?: number,
+                nodeDistance?: number,
+                radialFirstLevelSeparation?: number,
+                radialSeparation?: number,
+                startRadialAngle?: number,
+                subtype?: string,
+                tipOverTreeStartLevel?: number,
+                type?: string,
+                underneathHorizontalOffset?: number,
+                underneathVerticalSeparation?: number,
+                underneathVerticalTopOffset?: number,
+                verticalSeparation?: number
+        }
+        declare interface DiagramPannable {
+            key?: string
+        }
+        declare interface DiagramPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface DiagramPdf {
+            author?: string,
+                creator?: string,
+                date?: Date,
+                fileName?: string,
+                forceProxy?: boolean,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: DiagramPdfMargin,
+                paperSize?: string | any,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string
+        }
+        declare interface DiagramSelectableStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramSelectable {
+            key?: string,
+                multiple?: boolean,
+                stroke?: DiagramSelectableStroke
+        }
+        declare interface DiagramShapeDefaultsConnectorDefaultsFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeDefaultsConnectorDefaultsHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeDefaultsConnectorDefaultsHoverStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShapeDefaultsConnectorDefaultsHover {
+            fill?: DiagramShapeDefaultsConnectorDefaultsHoverFill,
+                stroke?: DiagramShapeDefaultsConnectorDefaultsHoverStroke
+        }
+        declare interface DiagramShapeDefaultsConnectorDefaultsStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShapeDefaultsConnectorDefaults {
+            width?: number,
+                height?: number,
+                hover?: DiagramShapeDefaultsConnectorDefaultsHover,
+                fill?: DiagramShapeDefaultsConnectorDefaultsFill,
+                stroke?: DiagramShapeDefaultsConnectorDefaultsStroke
+        }
+        declare interface DiagramShapeDefaultsConnectorFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeDefaultsConnectorHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeDefaultsConnectorHoverStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShapeDefaultsConnectorHover {
+            fill?: DiagramShapeDefaultsConnectorHoverFill,
+                stroke?: DiagramShapeDefaultsConnectorHoverStroke
+        }
+        declare interface DiagramShapeDefaultsConnectorStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShapeDefaultsConnector {
+            name?: string,
+                position?: Function,
+                width?: number,
+                height?: number,
+                hover?: DiagramShapeDefaultsConnectorHover,
+                fill?: DiagramShapeDefaultsConnectorFill,
+                stroke?: DiagramShapeDefaultsConnectorStroke
+        }
+        declare interface DiagramShapeDefaultsContent {
+            align?: string,
+                color?: string,
+                fontFamily?: string,
+                fontSize?: number,
+                fontStyle?: string,
+                fontWeight?: string,
+                template?: string | Function,
+                text?: string
+        }
+        declare interface DiagramShapeDefaultsEditableTool {
+            name?: string,
+                step?: number
+        }
+        declare interface DiagramShapeDefaultsEditable {
+            connect?: boolean,
+                drag?: boolean,
+                remove?: boolean,
+                tools?: DiagramShapeDefaultsEditableTool[]
+        }
+        declare interface DiagramShapeDefaultsFillGradientStop {
+            offset?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeDefaultsFillGradient {
+            type?: string,
+                center?: any,
+                radius?: number,
+                start?: any,
+                end?: any,
+                stops?: DiagramShapeDefaultsFillGradientStop[]
+        }
+        declare interface DiagramShapeDefaultsFill {
+            color?: string,
+                opacity?: number,
+                gradient?: DiagramShapeDefaultsFillGradient
+        }
+        declare interface DiagramShapeDefaultsHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeDefaultsHover {
+            fill?: DiagramShapeDefaultsHoverFill
+        }
+        declare interface DiagramShapeDefaultsRotation {
+            angle?: number
+        }
+        declare interface DiagramShapeDefaultsStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShapeDefaults {
+            connectors?: DiagramShapeDefaultsConnector[],
+                connectorDefaults?: DiagramShapeDefaultsConnectorDefaults,
+                content?: DiagramShapeDefaultsContent,
+                editable?: boolean | DiagramShapeDefaultsEditable,
+                fill?: DiagramShapeDefaultsFill,
+                height?: number,
+                hover?: DiagramShapeDefaultsHover,
+                minHeight?: number,
+                minWidth?: number,
+                path?: string,
+                rotation?: DiagramShapeDefaultsRotation,
+                selectable?: boolean,
+                source?: string,
+                stroke?: DiagramShapeDefaultsStroke,
+                type?: string,
+                visual?: Function,
+                width?: number,
+                x?: number,
+                y?: number
+        }
+        declare interface DiagramShapeConnectorDefaultsFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeConnectorDefaultsHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeConnectorDefaultsHoverStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShapeConnectorDefaultsHover {
+            fill?: DiagramShapeConnectorDefaultsHoverFill,
+                stroke?: DiagramShapeConnectorDefaultsHoverStroke
+        }
+        declare interface DiagramShapeConnectorDefaultsStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShapeConnectorDefaults {
+            width?: number,
+                height?: number,
+                hover?: DiagramShapeConnectorDefaultsHover,
+                fill?: DiagramShapeConnectorDefaultsFill,
+                stroke?: DiagramShapeConnectorDefaultsStroke
+        }
+        declare interface DiagramShapeConnectorFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeConnectorHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeConnectorHoverStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShapeConnectorHover {
+            fill?: DiagramShapeConnectorHoverFill,
+                stroke?: DiagramShapeConnectorHoverStroke
+        }
+        declare interface DiagramShapeConnectorStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShapeConnector {
+            description?: string,
+                name?: string,
+                position?: Function,
+                width?: number,
+                height?: number,
+                hover?: DiagramShapeConnectorHover,
+                fill?: DiagramShapeConnectorFill,
+                stroke?: DiagramShapeConnectorStroke
+        }
+        declare interface DiagramShapeContent {
+            align?: string,
+                color?: string,
+                fontFamily?: string,
+                fontSize?: number,
+                fontStyle?: string,
+                fontWeight?: string,
+                template?: string | Function,
+                text?: string
+        }
+        declare interface DiagramShapeEditableTool {
+            name?: string,
+                step?: number
+        }
+        declare interface DiagramShapeEditable {
+            connect?: boolean,
+                tools?: DiagramShapeEditableTool[]
+        }
+        declare interface DiagramShapeFillGradientStop {
+            offset?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeFillGradient {
+            type?: string,
+                center?: any,
+                radius?: number,
+                start?: any,
+                end?: any,
+                stops?: DiagramShapeFillGradientStop[]
+        }
+        declare interface DiagramShapeFill {
+            color?: string,
+                opacity?: number,
+                gradient?: DiagramShapeFillGradient
+        }
+        declare interface DiagramShapeHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface DiagramShapeHover {
+            fill?: DiagramShapeHoverFill
+        }
+        declare interface DiagramShapeRotation {
+            angle?: number
+        }
+        declare interface DiagramShapeStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface DiagramShape {
+            connectors?: DiagramShapeConnector[],
+                connectorDefaults?: DiagramShapeConnectorDefaults,
+                content?: DiagramShapeContent,
+                editable?: boolean | DiagramShapeEditable,
+                fill?: DiagramShapeFill,
+                height?: number,
+                hover?: DiagramShapeHover,
+                id?: string,
+                minHeight?: number,
+                minWidth?: number,
+                path?: string,
+                rotation?: DiagramShapeRotation,
+                source?: string,
+                stroke?: DiagramShapeStroke,
+                type?: string,
+                visual?: Function,
+                width?: number,
+                x?: number,
+                y?: number
+        }
+        declare interface DiagramExportImageOptions {
+            width?: string,
+                height?: string,
+                cors?: string
+        }
+        declare interface DiagramExportSVGOptions {
+            raw?: boolean
+        }
+        declare interface DiagramSelectOptions {
+            addToSelection?: boolean
+        }
+        declare interface DiagramOptions {
+            name?: string,
+                autoBind?: boolean,
+                connectionDefaults?: DiagramConnectionDefaults,
+                connections?: DiagramConnection[],
+                connectionsDataSource?: any | any | undefined.DataSource,
+                dataSource?: any | any | undefined.DataSource,
+                editable?: boolean | DiagramEditable,
+                layout?: DiagramLayout,
+                pannable?: boolean | DiagramPannable,
+                pdf?: DiagramPdf,
+                selectable?: boolean | DiagramSelectable,
+                shapeDefaults?: DiagramShapeDefaults,
+                shapes?: DiagramShape[],
+                template?: string | Function,
+                zoom?: number,
+                zoomMax?: number,
+                zoomMin?: number,
+                zoomRate?: number,
+                add(e: DiagramAddEvent): void,
+                cancel(e: DiagramCancelEvent): void,
+                change(e: DiagramChangeEvent): void,
+                click(e: DiagramClickEvent): void,
+                dataBound(e: DiagramDataBoundEvent): void,
+                drag(e: DiagramDragEvent): void,
+                dragEnd(e: DiagramDragEndEvent): void,
+                dragStart(e: DiagramDragStartEvent): void,
+                edit(e: DiagramEditEvent): void,
+                itemBoundsChange(e: DiagramItemBoundsChangeEvent): void,
+                itemRotate(e: DiagramItemRotateEvent): void,
+                mouseEnter(e: DiagramMouseEnterEvent): void,
+                mouseLeave(e: DiagramMouseLeaveEvent): void,
+                pan(e: DiagramPanEvent): void,
+                remove(e: DiagramRemoveEvent): void,
+                save(e: DiagramSaveEvent): void,
+                select(e: DiagramSelectEvent): void,
+                toolBarClick(e: DiagramToolBarClickEvent): void,
+                zoomEnd(e: DiagramZoomEndEvent): void,
+                zoomStart(e: DiagramZoomStartEvent): void
+        }
+        declare interface DiagramEvent {
+            sender: Diagram,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type DiagramAddEvent = {
+            connection?: undefined.Connection,
+            shape?: undefined.Shape
+        } & DiagramEvent
+
+        declare type DiagramCancelEvent = {
+            container?: JQuery,
+            connection?: undefined.Model,
+            shape?: undefined.Model
+        } & DiagramEvent
+
+        declare type DiagramChangeEvent = {
+            added?: any,
+            removed?: any
+        } & DiagramEvent
+
+        declare type DiagramClickEvent = {
+            item?: any,
+            meta?: any,
+            point?: undefined.Point
+        } & DiagramEvent
+
+        declare type DiagramDataBoundEvent = {} & DiagramEvent
+
+        declare type DiagramDragEvent = {
+            connectionHandle?: string,
+            connections?: any,
+            shapes?: any
+        } & DiagramEvent
+
+        declare type DiagramDragEndEvent = {
+            connectionHandle?: string,
+            connections?: any,
+            shapes?: any
+        } & DiagramEvent
+
+        declare type DiagramDragStartEvent = {
+            connectionHandle?: string,
+            connections?: any,
+            shapes?: any
+        } & DiagramEvent
+
+        declare type DiagramEditEvent = {
+            container?: JQuery,
+            connection?: undefined.Model,
+            shape?: undefined.Model
+        } & DiagramEvent
+
+        declare type DiagramItemBoundsChangeEvent = {
+            bounds?: undefined.Rect,
+            item?: undefined.Shape
+        } & DiagramEvent
+
+        declare type DiagramItemRotateEvent = {
+            item?: undefined.Shape
+        } & DiagramEvent
+
+        declare type DiagramMouseEnterEvent = {
+            item?: any
+        } & DiagramEvent
+
+        declare type DiagramMouseLeaveEvent = {
+            item?: any
+        } & DiagramEvent
+
+        declare type DiagramPanEvent = {
+            pan?: undefined.Point
+        } & DiagramEvent
+
+        declare type DiagramRemoveEvent = {
+            connection?: undefined.Connection,
+            shape?: undefined.Shape
+        } & DiagramEvent
+
+        declare type DiagramSaveEvent = {
+            container?: JQuery,
+            connection?: undefined.Model,
+            shape?: undefined.Model
+        } & DiagramEvent
+
+        declare type DiagramSelectEvent = {
+            selected?: any,
+            deselected?: any
+        } & DiagramEvent
+
+        declare type DiagramToolBarClickEvent = {
+            action?: string,
+            shapes?: any,
+            connections?: any,
+            target?: JQuery
+        } & DiagramEvent
+
+        declare type DiagramZoomEndEvent = {
+            point?: undefined.Point,
+            zoom?: number
+        } & DiagramEvent
+
+        declare type DiagramZoomStartEvent = {
+            point?: undefined.Point,
+            zoom?: number
+        } & DiagramEvent
+
+        declare class LinearGauge mixins undefined.Widget {
+            fn: LinearGauge;
+            options: LinearGaugeOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): LinearGauge;
+            constructor(element: Element, options?: LinearGaugeOptions): this;
+            allValues(values: any): any;
+            destroy(): void;
+            exportImage(options: any): JQueryPromise<any>;
+            exportPDF(options?: undefined.PDFOptions): JQueryPromise<any>;
+            exportSVG(options: any): JQueryPromise<any>;
+            redraw(): void;
+            resize(force?: boolean): void;
+            svg(): void;
+            imageDataURL(): string;
+            value(): void
+        }
+        declare interface LinearGaugeGaugeAreaBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface LinearGaugeGaugeAreaMargin {
+            top?: number,
+                bottom?: number,
+                left?: number,
+                right?: number
+        }
+        declare interface LinearGaugeGaugeArea {
+            background?: any,
+                border?: LinearGaugeGaugeAreaBorder,
+                height?: number,
+                margin?: LinearGaugeGaugeAreaMargin,
+                width?: number
+        }
+        declare interface LinearGaugePointerItemBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface LinearGaugePointerItemTrackBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface LinearGaugePointerItemTrack {
+            border?: LinearGaugePointerItemTrackBorder,
+                color?: string,
+                opacity?: number,
+                size?: number,
+                visible?: boolean
+        }
+        declare interface LinearGaugePointerItem {
+            border?: LinearGaugePointerItemBorder,
+                color?: string,
+                margin?: number | any,
+                opacity?: number,
+                shape?: string,
+                size?: number,
+                track?: LinearGaugePointerItemTrack,
+                value?: number
+        }
+        declare interface LinearGaugeScaleLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface LinearGaugeScaleLabelsMargin {
+            top?: number,
+                bottom?: number,
+                left?: number,
+                right?: number
+        }
+        declare interface LinearGaugeScaleLabelsPadding {
+            top?: number,
+                bottom?: number,
+                left?: number,
+                right?: number
+        }
+        declare interface LinearGaugeScaleLabels {
+            background?: string,
+                border?: LinearGaugeScaleLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: LinearGaugeScaleLabelsMargin,
+                padding?: LinearGaugeScaleLabelsPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface LinearGaugeScaleLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface LinearGaugeScaleMajorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface LinearGaugeScaleMinorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface LinearGaugeScaleRange {
+            from?: number,
+                to?: number,
+                opacity?: number,
+                color?: string
+        }
+        declare interface LinearGaugeScale {
+            line?: LinearGaugeScaleLine,
+                labels?: LinearGaugeScaleLabels,
+                majorTicks?: LinearGaugeScaleMajorTicks,
+                majorUnit?: number,
+                max?: number,
+                min?: number,
+                minorTicks?: LinearGaugeScaleMinorTicks,
+                minorUnit?: number,
+                mirror?: boolean,
+                ranges?: LinearGaugeScaleRange[],
+                rangePlaceholderColor?: string,
+                rangeSize?: number,
+                reverse?: boolean,
+                vertical?: boolean
+        }
+        declare interface LinearGaugeExportImageOptions {
+            width?: string,
+                height?: string
+        }
+        declare interface LinearGaugeExportSVGOptions {
+            raw?: boolean
+        }
+        declare interface LinearGaugeOptions {
+            name?: string,
+                gaugeArea?: LinearGaugeGaugeArea,
+                pointer?: LinearGaugePointerItem[],
+                renderAs?: string,
+                scale?: LinearGaugeScale,
+                transitions?: boolean
+        }
+        declare interface LinearGaugeEvent {
+            sender: LinearGauge,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Map mixins undefined.Widget {
+            fn: Map;
+            options: MapOptions;
+            layers: any;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Map;
+            constructor(element: Element, options?: MapOptions): this;
+            center(): undefined.Location;
+            center(center: any): void;
+            center(center: undefined.Location): void;
+            destroy(): void;
+            eventOffset(e: any): undefined.Point;
+            eventOffset(e: JQueryEventObject): undefined.Point;
+            eventToLayer(e: any): undefined.Point;
+            eventToLayer(e: JQueryEventObject): undefined.Point;
+            eventToLocation(e: any): undefined.Point;
+            eventToLocation(e: JQueryEventObject): undefined.Point;
+            eventToView(e: any): undefined.Point;
+            eventToView(e: JQueryEventObject): undefined.Point;
+            extent(): undefined.Extent;
+            extent(extent: undefined.Extent): void;
+            layerToLocation(point: any, zoom: number): undefined.Location;
+            layerToLocation(point: undefined.Point, zoom: number): undefined.Location;
+            locationToLayer(location: any, zoom: number): undefined.Point;
+            locationToLayer(location: undefined.Location, zoom: number): undefined.Point;
+            locationToView(location: any): undefined.Point;
+            locationToView(location: undefined.Location): undefined.Point;
+            resize(force?: boolean): void;
+            setOptions(options: any): void;
+            viewSize(): any;
+            viewToLocation(point: any, zoom: number): undefined.Location;
+            viewToLocation(point: undefined.Point, zoom: number): undefined.Location;
+            zoom(): number;
+            zoom(level: number): void
+        }
+        declare interface MapControlsAttribution {
+            position?: string
+        }
+        declare interface MapControlsNavigator {
+            position?: string
+        }
+        declare interface MapControlsZoom {
+            position?: string
+        }
+        declare interface MapControls {
+            attribution?: boolean | MapControlsAttribution,
+                navigator?: boolean | MapControlsNavigator,
+                zoom?: boolean | MapControlsZoom
+        }
+        declare interface MapLayerDefaultsBing {
+            attribution?: string,
+                opacity?: number,
+                key?: string,
+                imagerySet?: string,
+                culture?: string
+        }
+        declare interface MapLayerDefaultsBubbleStyleFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface MapLayerDefaultsBubbleStyleStroke {
+            color?: string,
+                dashType?: string,
+                opacity?: number,
+                width?: number
+        }
+        declare interface MapLayerDefaultsBubbleStyle {
+            fill?: MapLayerDefaultsBubbleStyleFill,
+                stroke?: MapLayerDefaultsBubbleStyleStroke
+        }
+        declare interface MapLayerDefaultsBubble {
+            attribution?: string,
+                opacity?: number,
+                maxSize?: number,
+                minSize?: number,
+                style?: MapLayerDefaultsBubbleStyle,
+                symbol?: string | Function
+        }
+        declare interface MapLayerDefaultsMarkerTooltipAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MapLayerDefaultsMarkerTooltipAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MapLayerDefaultsMarkerTooltipAnimation {
+            close?: MapLayerDefaultsMarkerTooltipAnimationClose,
+                open?: MapLayerDefaultsMarkerTooltipAnimationOpen
+        }
+        declare interface MapLayerDefaultsMarkerTooltipContent {
+            url?: string
+        }
+        declare interface MapLayerDefaultsMarkerTooltip {
+            autoHide?: boolean,
+                animation?: MapLayerDefaultsMarkerTooltipAnimation,
+                content?: MapLayerDefaultsMarkerTooltipContent,
+                template?: string,
+                callout?: boolean,
+                iframe?: boolean,
+                height?: number,
+                width?: number,
+                position?: string,
+                showAfter?: number,
+                showOn?: string
+        }
+        declare interface MapLayerDefaultsMarker {
+            shape?: string,
+                tooltip?: MapLayerDefaultsMarkerTooltip,
+                opacity?: number
+        }
+        declare interface MapLayerDefaultsShapeStyleFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface MapLayerDefaultsShapeStyleStroke {
+            color?: string,
+                dashType?: string,
+                opacity?: number,
+                width?: number
+        }
+        declare interface MapLayerDefaultsShapeStyle {
+            fill?: MapLayerDefaultsShapeStyleFill,
+                stroke?: MapLayerDefaultsShapeStyleStroke
+        }
+        declare interface MapLayerDefaultsShape {
+            attribution?: string,
+                opacity?: number,
+                style?: MapLayerDefaultsShapeStyle
+        }
+        declare interface MapLayerDefaultsTile {
+            urlTemplate?: string,
+                attribution?: string,
+                subdomains?: any,
+                opacity?: number
+        }
+        declare interface MapLayerDefaults {
+            marker?: MapLayerDefaultsMarker,
+                shape?: MapLayerDefaultsShape,
+                bubble?: MapLayerDefaultsBubble,
+                tileSize?: number,
+                tile?: MapLayerDefaultsTile,
+                bing?: MapLayerDefaultsBing
+        }
+        declare interface MapLayerStyleFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface MapLayerStyleStroke {
+            color?: string,
+                dashType?: number,
+                opacity?: number,
+                width?: number
+        }
+        declare interface MapLayerStyle {
+            fill?: MapLayerStyleFill,
+                stroke?: MapLayerStyleStroke
+        }
+        declare interface MapLayerTooltipAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MapLayerTooltipAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MapLayerTooltipAnimation {
+            close?: MapLayerTooltipAnimationClose,
+                open?: MapLayerTooltipAnimationOpen
+        }
+        declare interface MapLayerTooltipContent {
+            url?: string
+        }
+        declare interface MapLayerTooltip {
+            autoHide?: boolean,
+                animation?: MapLayerTooltipAnimation,
+                content?: MapLayerTooltipContent,
+                template?: string,
+                callout?: boolean,
+                iframe?: boolean,
+                height?: number,
+                width?: number,
+                position?: string,
+                showAfter?: number,
+                showOn?: string
+        }
+        declare interface MapLayer {
+            attribution?: string,
+                autoBind?: boolean,
+                dataSource?: any | any | undefined.DataSource,
+                extent?: any | undefined.Extent,
+                key?: string,
+                imagerySet?: string,
+                culture?: string,
+                locationField?: string,
+                shape?: string,
+                tileSize?: number,
+                titleField?: string,
+                tooltip?: MapLayerTooltip,
+                maxSize?: number,
+                minSize?: number,
+                opacity?: number,
+                subdomains?: any,
+                symbol?: string | Function,
+                type?: string,
+                style?: MapLayerStyle,
+                urlTemplate?: string,
+                valueField?: string,
+                zIndex?: number
+        }
+        declare interface MapMarkerDefaultsTooltipAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MapMarkerDefaultsTooltipAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MapMarkerDefaultsTooltipAnimation {
+            close?: MapMarkerDefaultsTooltipAnimationClose,
+                open?: MapMarkerDefaultsTooltipAnimationOpen
+        }
+        declare interface MapMarkerDefaultsTooltipContent {
+            url?: string
+        }
+        declare interface MapMarkerDefaultsTooltip {
+            autoHide?: boolean,
+                animation?: MapMarkerDefaultsTooltipAnimation,
+                content?: MapMarkerDefaultsTooltipContent,
+                template?: string,
+                callout?: boolean,
+                iframe?: boolean,
+                height?: number,
+                width?: number,
+                position?: string,
+                showAfter?: number,
+                showOn?: string
+        }
+        declare interface MapMarkerDefaults {
+            shape?: string,
+                tooltip?: MapMarkerDefaultsTooltip
+        }
+        declare interface MapMarkerTooltipAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MapMarkerTooltipAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MapMarkerTooltipAnimation {
+            close?: MapMarkerTooltipAnimationClose,
+                open?: MapMarkerTooltipAnimationOpen
+        }
+        declare interface MapMarkerTooltipContent {
+            url?: string
+        }
+        declare interface MapMarkerTooltip {
+            autoHide?: boolean,
+                animation?: MapMarkerTooltipAnimation,
+                content?: MapMarkerTooltipContent,
+                template?: string,
+                callout?: boolean,
+                iframe?: boolean,
+                height?: number,
+                width?: number,
+                position?: string,
+                showAfter?: number,
+                showOn?: string
+        }
+        declare interface MapMarker {
+            location?: any | undefined.Location,
+                shape?: string,
+                title?: string,
+                tooltip?: MapMarkerTooltip
+        }
+        declare interface MapOptions {
+            name?: string,
+                center?: any | undefined.Location,
+                controls?: MapControls,
+                layerDefaults?: MapLayerDefaults,
+                layers?: MapLayer[],
+                markerDefaults?: MapMarkerDefaults,
+                markers?: MapMarker[],
+                minZoom?: number,
+                maxZoom?: number,
+                minSize?: number,
+                pannable?: boolean,
+                wraparound?: boolean,
+                zoom?: number,
+                zoomable?: boolean,
+                beforeReset(e: MapBeforeResetEvent): void,
+                click(e: MapClickEvent): void,
+                markerActivate(e: MapMarkerActivateEvent): void,
+                markerCreated(e: MapMarkerCreatedEvent): void,
+                markerClick(e: MapMarkerClickEvent): void,
+                pan(e: MapPanEvent): void,
+                panEnd(e: MapPanEndEvent): void,
+                reset(e: MapResetEvent): void,
+                shapeClick(e: MapShapeClickEvent): void,
+                shapeCreated(e: MapShapeCreatedEvent): void,
+                shapeFeatureCreated(e: MapShapeFeatureCreatedEvent): void,
+                shapeMouseEnter(e: MapShapeMouseEnterEvent): void,
+                shapeMouseLeave(e: MapShapeMouseLeaveEvent): void,
+                zoomStart(e: MapZoomStartEvent): void,
+                zoomEnd(e: MapZoomEndEvent): void
+        }
+        declare interface MapEvent {
+            sender: Map,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type MapBeforeResetEvent = {} & MapEvent
+
+        declare type MapClickEvent = {
+            location?: undefined.Location,
+            originalEvent?: any
+        } & MapEvent
+
+        declare type MapMarkerActivateEvent = {
+            marker?: undefined.Marker,
+            layer?: undefined.Marker
+        } & MapEvent
+
+        declare type MapMarkerCreatedEvent = {
+            marker?: undefined.Marker,
+            layer?: undefined.Marker
+        } & MapEvent
+
+        declare type MapMarkerClickEvent = {
+            marker?: undefined.Marker,
+            layer?: undefined.Marker
+        } & MapEvent
+
+        declare type MapPanEvent = {
+            origin?: undefined.Location,
+            center?: undefined.Location,
+            originalEvent?: any
+        } & MapEvent
+
+        declare type MapPanEndEvent = {
+            origin?: undefined.Location,
+            center?: undefined.Location,
+            originalEvent?: any
+        } & MapEvent
+
+        declare type MapResetEvent = {} & MapEvent
+
+        declare type MapShapeClickEvent = {
+            layer?: undefined.Shape,
+            shape?: undefined.Element,
+            originalEvent?: any
+        } & MapEvent
+
+        declare type MapShapeCreatedEvent = {
+            layer?: undefined.Shape,
+            shape?: undefined.Element,
+            originalEvent?: any
+        } & MapEvent
+
+        declare type MapShapeFeatureCreatedEvent = {
+            dataItem?: any,
+            layer?: undefined.Shape,
+            group?: undefined.Group,
+            properties?: any
+        } & MapEvent
+
+        declare type MapShapeMouseEnterEvent = {
+            layer?: undefined.Shape,
+            shape?: undefined.Element,
+            originalEvent?: any
+        } & MapEvent
+
+        declare type MapShapeMouseLeaveEvent = {
+            layer?: undefined.Shape,
+            shape?: undefined.Element,
+            originalEvent?: any
+        } & MapEvent
+
+        declare type MapZoomStartEvent = {
+            originalEvent?: any
+        } & MapEvent
+
+        declare type MapZoomEndEvent = {
+            originalEvent?: any
+        } & MapEvent
+
+        declare class QRCode mixins undefined.Widget {
+            fn: QRCode;
+            options: QRCodeOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): QRCode;
+            constructor(element: Element, options?: QRCodeOptions): this;
+            destroy(): void;
+            exportImage(options: any): JQueryPromise<any>;
+            exportPDF(options?: undefined.PDFOptions): JQueryPromise<any>;
+            exportSVG(options: any): JQueryPromise<any>;
+            imageDataURL(): string;
+            redraw(): void;
+            resize(force?: boolean): void;
+            setOptions(options: any): void;
+            svg(): string;
+            value(options: string): void;
+            value(options: number): void
+        }
+        declare interface QRCodeBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface QRCodeExportImageOptions {
+            width?: string,
+                height?: string
+        }
+        declare interface QRCodeExportSVGOptions {
+            raw?: boolean
+        }
+        declare interface QRCodeOptions {
+            name?: string,
+                background?: string,
+                border?: QRCodeBorder,
+                color?: string,
+                encoding?: string,
+                errorCorrection?: string,
+                padding?: number,
+                renderAs?: string,
+                size?: number | string,
+                value?: number | string
+        }
+        declare interface QRCodeEvent {
+            sender: QRCode,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class RadialGauge mixins undefined.Widget {
+            fn: RadialGauge;
+            options: RadialGaugeOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): RadialGauge;
+            constructor(element: Element, options?: RadialGaugeOptions): this;
+            allValues(values?: any): any;
+            destroy(): void;
+            exportImage(options: any): JQueryPromise<any>;
+            exportPDF(options?: undefined.PDFOptions): JQueryPromise<any>;
+            exportSVG(options: any): JQueryPromise<any>;
+            redraw(): void;
+            resize(force?: boolean): void;
+            svg(): void;
+            imageDataURL(): string;
+            value(): void
+        }
+        declare interface RadialGaugeGaugeAreaBorder {
+            color?: string,
+                dashType?: string,
+                opacity?: number,
+                width?: number
+        }
+        declare interface RadialGaugeGaugeAreaMargin {
+            top?: number,
+                bottom?: number,
+                left?: number,
+                right?: number
+        }
+        declare interface RadialGaugeGaugeArea {
+            background?: any,
+                border?: RadialGaugeGaugeAreaBorder,
+                height?: number,
+                margin?: RadialGaugeGaugeAreaMargin,
+                width?: number
+        }
+        declare interface RadialGaugePointerItemCap {
+            color?: string,
+                size?: number
+        }
+        declare interface RadialGaugePointerItem {
+            cap?: RadialGaugePointerItemCap,
+                color?: string,
+                value?: number
+        }
+        declare interface RadialGaugeScaleLabelsBorder {
+            color?: string,
+                dashType?: string,
+                opacity?: number,
+                width?: number
+        }
+        declare interface RadialGaugeScaleLabelsMargin {
+            top?: number,
+                bottom?: number,
+                left?: number,
+                right?: number
+        }
+        declare interface RadialGaugeScaleLabelsPadding {
+            top?: number,
+                bottom?: number,
+                left?: number,
+                right?: number
+        }
+        declare interface RadialGaugeScaleLabels {
+            background?: string,
+                border?: RadialGaugeScaleLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: RadialGaugeScaleLabelsMargin,
+                padding?: RadialGaugeScaleLabelsPadding,
+                position?: string,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface RadialGaugeScaleMajorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface RadialGaugeScaleMinorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface RadialGaugeScaleRange {
+            from?: number,
+                to?: number,
+                opacity?: number,
+                color?: string
+        }
+        declare interface RadialGaugeScale {
+            endAngle?: number,
+                labels?: RadialGaugeScaleLabels,
+                majorTicks?: RadialGaugeScaleMajorTicks,
+                majorUnit?: number,
+                max?: number,
+                min?: number,
+                minorTicks?: RadialGaugeScaleMinorTicks,
+                minorUnit?: number,
+                ranges?: RadialGaugeScaleRange[],
+                rangePlaceholderColor?: string,
+                rangeSize?: number,
+                rangeDistance?: number,
+                reverse?: boolean,
+                startAngle?: number
+        }
+        declare interface RadialGaugeExportImageOptions {
+            width?: string,
+                height?: string
+        }
+        declare interface RadialGaugeExportSVGOptions {
+            raw?: boolean
+        }
+        declare interface RadialGaugeOptions {
+            name?: string,
+                gaugeArea?: RadialGaugeGaugeArea,
+                pointer?: RadialGaugePointerItem[],
+                renderAs?: string,
+                scale?: RadialGaugeScale,
+                transitions?: boolean
+        }
+        declare interface RadialGaugeEvent {
+            sender: RadialGauge,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Sparkline mixins undefined.Widget {
+            fn: Sparkline;
+            options: SparklineOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Sparkline;
+            constructor(element: Element, options?: SparklineOptions): this;
+            destroy(): void;
+            exportImage(options: any): JQueryPromise<any>;
+            exportPDF(options?: undefined.PDFOptions): JQueryPromise<any>;
+            exportSVG(options: any): JQueryPromise<any>;
+            refresh(): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            setOptions(options: any): void;
+            svg(): string;
+            imageDataURL(): string
+        }
+        declare interface SparklineCategoryAxisItemCrosshairTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineCategoryAxisItemCrosshairTooltip {
+            background?: string,
+                border?: SparklineCategoryAxisItemCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface SparklineCategoryAxisItemCrosshair {
+            color?: string,
+                width?: number,
+                opacity?: number,
+                dashType?: number,
+                visible?: boolean,
+                tooltip?: SparklineCategoryAxisItemCrosshairTooltip
+        }
+        declare interface SparklineCategoryAxisItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineCategoryAxisItemLabels {
+            background?: string,
+                border?: SparklineCategoryAxisItemLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: number | any,
+                mirror?: boolean,
+                padding?: number | any,
+                rotation?: number,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean,
+                culture?: string,
+                dateFormats?: any
+        }
+        declare interface SparklineCategoryAxisItemLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface SparklineCategoryAxisItemMajorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface SparklineCategoryAxisItemMajorTicks {
+            size?: number,
+                visible?: boolean,
+                color?: string,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface SparklineCategoryAxisItemMinorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface SparklineCategoryAxisItemMinorTicks {
+            size?: number,
+                visible?: boolean,
+                color?: string,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface SparklineCategoryAxisItemNotesDataItemIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineCategoryAxisItemNotesDataItemIcon {
+            background?: string,
+                border?: SparklineCategoryAxisItemNotesDataItemIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface SparklineCategoryAxisItemNotesDataItemLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineCategoryAxisItemNotesDataItemLabel {
+            background?: string,
+                border?: SparklineCategoryAxisItemNotesDataItemLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                text?: string,
+                position?: string
+        }
+        declare interface SparklineCategoryAxisItemNotesDataItemLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface SparklineCategoryAxisItemNotesDataItem {
+            value?: any,
+                position?: string,
+                icon?: SparklineCategoryAxisItemNotesDataItemIcon,
+                label?: SparklineCategoryAxisItemNotesDataItemLabel,
+                line?: SparklineCategoryAxisItemNotesDataItemLine
+        }
+        declare interface SparklineCategoryAxisItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineCategoryAxisItemNotesIcon {
+            background?: string,
+                border?: SparklineCategoryAxisItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface SparklineCategoryAxisItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineCategoryAxisItemNotesLabel {
+            background?: string,
+                border?: SparklineCategoryAxisItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface SparklineCategoryAxisItemNotesLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface SparklineCategoryAxisItemNotes {
+            position?: string,
+                icon?: SparklineCategoryAxisItemNotesIcon,
+                label?: SparklineCategoryAxisItemNotesLabel,
+                line?: SparklineCategoryAxisItemNotesLine,
+                data?: SparklineCategoryAxisItemNotesDataItem[]
+        }
+        declare interface SparklineCategoryAxisItemPlotBand {
+            from?: number,
+                to?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface SparklineCategoryAxisItemTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineCategoryAxisItemTitle {
+            background?: string,
+                border?: SparklineCategoryAxisItemTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: number | any,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean
+        }
+        declare interface SparklineCategoryAxisItem {
+            axisCrossingValue?: any | Date | any,
+                categories?: any,
+                color?: string,
+                field?: string,
+                justified?: boolean,
+                labels?: SparklineCategoryAxisItemLabels,
+                line?: SparklineCategoryAxisItemLine,
+                majorGridLines?: SparklineCategoryAxisItemMajorGridLines,
+                majorTicks?: SparklineCategoryAxisItemMajorTicks,
+                minorGridLines?: SparklineCategoryAxisItemMinorGridLines,
+                minorTicks?: SparklineCategoryAxisItemMinorTicks,
+                name?: string,
+                plotBands?: SparklineCategoryAxisItemPlotBand[],
+                reverse?: boolean,
+                title?: SparklineCategoryAxisItemTitle,
+                type?: string,
+                autoBaseUnitSteps?: any,
+                baseUnit?: string,
+                baseUnitStep?: any,
+                max?: any,
+                min?: any,
+                roundToBaseUnit?: boolean,
+                weekStartDay?: number,
+                maxDateGroups?: number,
+                visible?: boolean,
+                crosshair?: SparklineCategoryAxisItemCrosshair,
+                notes?: SparklineCategoryAxisItemNotes
+        }
+        declare interface SparklineChartAreaBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineChartArea {
+            background?: string,
+                opacity?: number,
+                border?: SparklineChartAreaBorder,
+                height?: number,
+                margin?: number | any,
+                width?: number
+        }
+        declare interface SparklinePlotAreaBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklinePlotArea {
+            background?: string,
+                opacity?: number,
+                border?: SparklinePlotAreaBorder,
+                margin?: number | any
+        }
+        declare interface SparklineSeriesItemBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                opacity?: number | Function,
+                width?: number | Function
+        }
+        declare interface SparklineSeriesItemConnectors {
+            color?: string,
+                padding?: number,
+                width?: number
+        }
+        declare interface SparklineSeriesItemHighlightBorder {
+            width?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface SparklineSeriesItemHighlight {
+            border?: SparklineSeriesItemHighlightBorder,
+                color?: string,
+                opacity?: number,
+                visible?: boolean
+        }
+        declare interface SparklineSeriesItemLabelsBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                width?: number | Function
+        }
+        declare interface SparklineSeriesItemLabels {
+            align?: string,
+                background?: string | Function,
+                border?: SparklineSeriesItemLabelsBorder,
+                color?: string | Function,
+                distance?: number,
+                font?: string | Function,
+                format?: string | Function,
+                margin?: number | any,
+                padding?: number | any,
+                position?: string | Function,
+                template?: string | Function,
+                visible?: boolean | Function
+        }
+        declare interface SparklineSeriesItemLine {
+            color?: string,
+                opacity?: number,
+                width?: string,
+                style?: string
+        }
+        declare interface SparklineSeriesItemMarkersBorder {
+            color?: string | Function,
+                width?: number | Function
+        }
+        declare interface SparklineSeriesItemMarkers {
+            background?: string | Function,
+                border?: SparklineSeriesItemMarkersBorder,
+                size?: number | Function,
+                type?: string | Function,
+                visible?: boolean | Function,
+                rotation?: number | Function
+        }
+        declare interface SparklineSeriesItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineSeriesItemNotesIcon {
+            background?: string,
+                border?: SparklineSeriesItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface SparklineSeriesItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineSeriesItemNotesLabel {
+            background?: string,
+                border?: SparklineSeriesItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface SparklineSeriesItemNotesLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface SparklineSeriesItemNotes {
+            position?: string,
+                icon?: SparklineSeriesItemNotesIcon,
+                label?: SparklineSeriesItemNotesLabel,
+                line?: SparklineSeriesItemNotesLine
+        }
+        declare interface SparklineSeriesItemOverlay {
+            gradient?: string
+        }
+        declare interface SparklineSeriesItemStack {
+            type?: string,
+                group?: string
+        }
+        declare interface SparklineSeriesItemTargetBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                width?: number
+        }
+        declare interface SparklineSeriesItemTargetLine {
+            width?: any | Function
+        }
+        declare interface SparklineSeriesItemTarget {
+            line?: SparklineSeriesItemTargetLine,
+                color?: string | Function,
+                border?: SparklineSeriesItemTargetBorder
+        }
+        declare interface SparklineSeriesItemTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineSeriesItemTooltip {
+            background?: string,
+                border?: SparklineSeriesItemTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface SparklineSeriesItem {
+            type?: string,
+                dashType?: string,
+                data?: any,
+                explodeField?: string,
+                currentField?: string,
+                targetField?: string,
+                field?: string,
+                name?: string,
+                highlight?: SparklineSeriesItemHighlight,
+                aggregate?: string | Function,
+                axis?: string,
+                border?: SparklineSeriesItemBorder,
+                categoryField?: string,
+                color?: string | Function,
+                colorField?: string,
+                connectors?: SparklineSeriesItemConnectors,
+                gap?: number,
+                labels?: SparklineSeriesItemLabels,
+                line?: SparklineSeriesItemLine,
+                markers?: SparklineSeriesItemMarkers,
+                missingValues?: string,
+                style?: string,
+                negativeColor?: string,
+                opacity?: number,
+                overlay?: SparklineSeriesItemOverlay,
+                padding?: number,
+                size?: number,
+                startAngle?: number,
+                spacing?: number,
+                stack?: boolean | SparklineSeriesItemStack,
+                tooltip?: SparklineSeriesItemTooltip,
+                width?: number,
+                target?: SparklineSeriesItemTarget,
+                notes?: SparklineSeriesItemNotes,
+                zIndex?: number
+        }
+        declare interface SparklineSeriesDefaultsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineSeriesDefaultsLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineSeriesDefaultsLabels {
+            background?: string,
+                border?: SparklineSeriesDefaultsLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: number | any,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface SparklineSeriesDefaultsStack {
+            type?: string
+        }
+        declare interface SparklineSeriesDefaultsTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineSeriesDefaultsTooltip {
+            background?: string,
+                border?: SparklineSeriesDefaultsTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface SparklineSeriesDefaults {
+            area?: any,
+                bar?: any,
+                border?: SparklineSeriesDefaultsBorder,
+                column?: any,
+                gap?: number,
+                labels?: SparklineSeriesDefaultsLabels,
+                line?: any,
+                overlay?: any,
+                pie?: any,
+                spacing?: number,
+                stack?: boolean | SparklineSeriesDefaultsStack,
+                type?: string,
+                tooltip?: SparklineSeriesDefaultsTooltip
+        }
+        declare interface SparklineTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineTooltip {
+            background?: string,
+                border?: SparklineTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean,
+                shared?: boolean,
+                sharedTemplate?: string
+        }
+        declare interface SparklineValueAxisItemCrosshairTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineValueAxisItemCrosshairTooltip {
+            background?: string,
+                border?: SparklineValueAxisItemCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface SparklineValueAxisItemCrosshair {
+            color?: string,
+                width?: number,
+                opacity?: number,
+                dashType?: number,
+                visible?: boolean,
+                tooltip?: SparklineValueAxisItemCrosshairTooltip
+        }
+        declare interface SparklineValueAxisItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineValueAxisItemLabels {
+            background?: string,
+                border?: SparklineValueAxisItemLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: number | any,
+                mirror?: boolean,
+                padding?: number | any,
+                rotation?: number,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface SparklineValueAxisItemLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface SparklineValueAxisItemMajorGridLines {
+            color?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface SparklineValueAxisItemMajorTicks {
+            size?: number,
+                visible?: boolean,
+                color?: string,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface SparklineValueAxisItemMinorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface SparklineValueAxisItemMinorTicks {
+            size?: number,
+                color?: string,
+                width?: number,
+                visible?: boolean,
+                step?: number,
+                skip?: number
+        }
+        declare interface SparklineValueAxisItemNotesDataItemIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineValueAxisItemNotesDataItemIcon {
+            background?: string,
+                border?: SparklineValueAxisItemNotesDataItemIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface SparklineValueAxisItemNotesDataItemLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineValueAxisItemNotesDataItemLabel {
+            background?: string,
+                border?: SparklineValueAxisItemNotesDataItemLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                text?: string,
+                position?: string
+        }
+        declare interface SparklineValueAxisItemNotesDataItemLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface SparklineValueAxisItemNotesDataItem {
+            value?: any,
+                position?: string,
+                icon?: SparklineValueAxisItemNotesDataItemIcon,
+                label?: SparklineValueAxisItemNotesDataItemLabel,
+                line?: SparklineValueAxisItemNotesDataItemLine
+        }
+        declare interface SparklineValueAxisItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface SparklineValueAxisItemNotesIcon {
+            background?: string,
+                border?: SparklineValueAxisItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface SparklineValueAxisItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineValueAxisItemNotesLabel {
+            background?: string,
+                border?: SparklineValueAxisItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface SparklineValueAxisItemNotesLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface SparklineValueAxisItemNotes {
+            position?: string,
+                icon?: SparklineValueAxisItemNotesIcon,
+                label?: SparklineValueAxisItemNotesLabel,
+                line?: SparklineValueAxisItemNotesLine,
+                data?: SparklineValueAxisItemNotesDataItem[]
+        }
+        declare interface SparklineValueAxisItemPlotBand {
+            from?: number,
+                to?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface SparklineValueAxisItemTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface SparklineValueAxisItemTitle {
+            background?: string,
+                border?: SparklineValueAxisItemTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: number | any,
+                padding?: number | any,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean
+        }
+        declare interface SparklineValueAxisItem {
+            axisCrossingValue?: any | Date | any,
+                color?: string,
+                labels?: SparklineValueAxisItemLabels,
+                line?: SparklineValueAxisItemLine,
+                majorGridLines?: SparklineValueAxisItemMajorGridLines,
+                majorTicks?: SparklineValueAxisItemMajorTicks,
+                majorUnit?: number,
+                max?: number,
+                min?: number,
+                minorGridLines?: SparklineValueAxisItemMinorGridLines,
+                minorTicks?: SparklineValueAxisItemMinorTicks,
+                minorUnit?: number,
+                name?: any,
+                narrowRange?: boolean,
+                plotBands?: SparklineValueAxisItemPlotBand[],
+                reverse?: boolean,
+                title?: SparklineValueAxisItemTitle,
+                visible?: boolean,
+                crosshair?: SparklineValueAxisItemCrosshair,
+                notes?: SparklineValueAxisItemNotes
+        }
+        declare interface SparklineExportImageOptions {
+            width?: string,
+                height?: string
+        }
+        declare interface SparklineExportSVGOptions {
+            raw?: boolean
+        }
+        declare interface SparklineSeriesClickEventSeries {
+            type?: string,
+                name?: string,
+                data?: any
+        }
+        declare interface SparklineSeriesHoverEventSeries {
+            type?: string,
+                name?: string,
+                data?: any
+        }
+        declare interface SparklineOptions {
+            name?: string,
+                axisDefaults?: any,
+                categoryAxis?: SparklineCategoryAxisItem[],
+                chartArea?: SparklineChartArea,
+                data?: any,
+                dataSource?: any,
+                autoBind?: boolean,
+                plotArea?: SparklinePlotArea,
+                pointWidth?: number,
+                renderAs?: string,
+                series?: SparklineSeriesItem[],
+                seriesColors?: any,
+                seriesDefaults?: SparklineSeriesDefaults,
+                theme?: string,
+                tooltip?: SparklineTooltip,
+                transitions?: boolean,
+                type?: string,
+                valueAxis?: SparklineValueAxisItem[],
+                axisLabelClick(e: SparklineAxisLabelClickEvent): void,
+                dataBound(e: SparklineEvent): void,
+                dragStart(e: SparklineDragStartEvent): void,
+                drag(e: SparklineDragEvent): void,
+                dragEnd(e: SparklineDragEndEvent): void,
+                plotAreaClick(e: SparklinePlotAreaClickEvent): void,
+                seriesClick(e: SparklineSeriesClickEvent): void,
+                seriesHover(e: SparklineSeriesHoverEvent): void,
+                zoomStart(e: SparklineZoomStartEvent): void,
+                zoom(e: SparklineZoomEvent): void,
+                zoomEnd(e: SparklineZoomEndEvent): void
+        }
+        declare interface SparklineEvent {
+            sender: Sparkline,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type SparklineAxisLabelClickEvent = {
+            axis?: any,
+            value?: any,
+            text?: any,
+            index?: any,
+            dataItem?: any,
+            element?: any
+        } & SparklineEvent
+
+        declare type SparklineDragStartEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & SparklineEvent
+
+        declare type SparklineDragEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & SparklineEvent
+
+        declare type SparklineDragEndEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & SparklineEvent
+
+        declare type SparklinePlotAreaClickEvent = {
+            value?: any,
+            category?: any,
+            element?: any,
+            x?: any,
+            y?: any
+        } & SparklineEvent
+
+        declare type SparklineSeriesClickEvent = {
+            value?: any,
+            category?: any,
+            series?: SparklineSeriesClickEventSeries,
+            dataItem?: any,
+            element?: any,
+            percentage?: any
+        } & SparklineEvent
+
+        declare type SparklineSeriesHoverEvent = {
+            value?: any,
+            category?: any,
+            series?: SparklineSeriesHoverEventSeries,
+            dataItem?: any,
+            element?: any,
+            percentage?: any
+        } & SparklineEvent
+
+        declare type SparklineZoomStartEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & SparklineEvent
+
+        declare type SparklineZoomEvent = {
+            axisRanges?: any,
+            delta?: number,
+            originalEvent?: any
+        } & SparklineEvent
+
+        declare type SparklineZoomEndEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & SparklineEvent
+
+        declare class StockChart mixins undefined.Widget {
+            fn: StockChart;
+            options: StockChartOptions;
+            dataSource: undefined.DataSource;
+            navigator: undefined.Navigator;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): StockChart;
+            constructor(element: Element, options?: StockChartOptions): this;
+            destroy(): void;
+            exportImage(options: any): JQueryPromise<any>;
+            exportPDF(options?: undefined.PDFOptions): JQueryPromise<any>;
+            exportSVG(options: any): JQueryPromise<any>;
+            redraw(): void;
+            refresh(): void;
+            resize(force?: boolean): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            setOptions(options: any): void;
+            svg(): string;
+            imageDataURL(): string
+        }
+        declare interface StockChartCategoryAxisItemAutoBaseUnitSteps {
+            days?: any,
+                hours?: any,
+                minutes?: any,
+                months?: any,
+                weeks?: any,
+                years?: any
+        }
+        declare interface StockChartCategoryAxisItemCrosshairTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartCategoryAxisItemCrosshairTooltip {
+            background?: string,
+                border?: StockChartCategoryAxisItemCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartCategoryAxisItemCrosshair {
+            color?: string,
+                width?: number,
+                opacity?: number,
+                dashType?: number,
+                visible?: boolean,
+                tooltip?: StockChartCategoryAxisItemCrosshairTooltip
+        }
+        declare interface StockChartCategoryAxisItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartCategoryAxisItemLabels {
+            background?: string,
+                border?: StockChartCategoryAxisItemLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: number | any,
+                mirror?: boolean,
+                padding?: number | any,
+                rotation?: number,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean,
+                culture?: string,
+                dateFormats?: any
+        }
+        declare interface StockChartCategoryAxisItemLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface StockChartCategoryAxisItemMajorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartCategoryAxisItemMajorTicks {
+            color?: string,
+                size?: number,
+                width?: number,
+                visible?: boolean,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartCategoryAxisItemMinorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartCategoryAxisItemMinorTicks {
+            size?: number,
+                visible?: boolean,
+                color?: string,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartCategoryAxisItemNotesDataItemIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartCategoryAxisItemNotesDataItemIcon {
+            background?: string,
+                border?: StockChartCategoryAxisItemNotesDataItemIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface StockChartCategoryAxisItemNotesDataItemLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartCategoryAxisItemNotesDataItemLabel {
+            background?: string,
+                border?: StockChartCategoryAxisItemNotesDataItemLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                text?: string,
+                position?: string
+        }
+        declare interface StockChartCategoryAxisItemNotesDataItemLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface StockChartCategoryAxisItemNotesDataItem {
+            value?: any,
+                position?: string,
+                icon?: StockChartCategoryAxisItemNotesDataItemIcon,
+                label?: StockChartCategoryAxisItemNotesDataItemLabel,
+                line?: StockChartCategoryAxisItemNotesDataItemLine
+        }
+        declare interface StockChartCategoryAxisItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartCategoryAxisItemNotesIcon {
+            background?: string,
+                border?: StockChartCategoryAxisItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface StockChartCategoryAxisItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartCategoryAxisItemNotesLabel {
+            background?: string,
+                border?: StockChartCategoryAxisItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface StockChartCategoryAxisItemNotesLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface StockChartCategoryAxisItemNotes {
+            position?: string,
+                icon?: StockChartCategoryAxisItemNotesIcon,
+                label?: StockChartCategoryAxisItemNotesLabel,
+                line?: StockChartCategoryAxisItemNotesLine,
+                data?: StockChartCategoryAxisItemNotesDataItem[]
+        }
+        declare interface StockChartCategoryAxisItemPlotBand {
+            from?: number,
+                to?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface StockChartCategoryAxisItemSelectMousewheel {
+            reverse?: boolean,
+                zoom?: string
+        }
+        declare interface StockChartCategoryAxisItemSelect {
+            from?: string | Date,
+                to?: string | Date,
+                min?: any,
+                max?: any,
+                mousewheel?: StockChartCategoryAxisItemSelectMousewheel
+        }
+        declare interface StockChartCategoryAxisItemTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartCategoryAxisItemTitle {
+            background?: string,
+                border?: StockChartCategoryAxisItemTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: number | any,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean
+        }
+        declare interface StockChartCategoryAxisItem {
+            axisCrossingValue?: any | Date | any,
+                categories?: any,
+                color?: string,
+                field?: string,
+                justified?: boolean,
+                labels?: StockChartCategoryAxisItemLabels,
+                line?: StockChartCategoryAxisItemLine,
+                majorGridLines?: StockChartCategoryAxisItemMajorGridLines,
+                majorTicks?: StockChartCategoryAxisItemMajorTicks,
+                minorGridLines?: StockChartCategoryAxisItemMinorGridLines,
+                minorTicks?: StockChartCategoryAxisItemMinorTicks,
+                name?: string,
+                pane?: string,
+                plotBands?: StockChartCategoryAxisItemPlotBand[],
+                reverse?: boolean,
+                select?: StockChartCategoryAxisItemSelect,
+                title?: StockChartCategoryAxisItemTitle,
+                type?: string,
+                autoBaseUnitSteps?: StockChartCategoryAxisItemAutoBaseUnitSteps,
+                background?: string,
+                baseUnit?: string,
+                baseUnitStep?: any,
+                max?: any,
+                min?: any,
+                roundToBaseUnit?: boolean,
+                weekStartDay?: number,
+                maxDateGroups?: number,
+                visible?: boolean,
+                crosshair?: StockChartCategoryAxisItemCrosshair,
+                notes?: StockChartCategoryAxisItemNotes
+        }
+        declare interface StockChartChartAreaBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartChartArea {
+            background?: string,
+                opacity?: number,
+                border?: StockChartChartAreaBorder,
+                height?: number,
+                margin?: number | any,
+                width?: number
+        }
+        declare interface StockChartLegendBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartLegendInactiveItemsLabels {
+            color?: string,
+                font?: string,
+                template?: string
+        }
+        declare interface StockChartLegendInactiveItemsMarkers {
+            color?: string
+        }
+        declare interface StockChartLegendInactiveItems {
+            labels?: StockChartLegendInactiveItemsLabels,
+                markers?: StockChartLegendInactiveItemsMarkers
+        }
+        declare interface StockChartLegendItem {
+            cursor?: string,
+                visual?: Function
+        }
+        declare interface StockChartLegendLabels {
+            color?: string,
+                font?: string,
+                template?: string
+        }
+        declare interface StockChartLegend {
+            background?: string,
+                border?: StockChartLegendBorder,
+                item?: StockChartLegendItem,
+                labels?: StockChartLegendLabels,
+                margin?: number | any,
+                offsetX?: number,
+                offsetY?: number,
+                padding?: number | any,
+                position?: string,
+                reverse?: boolean,
+                visible?: boolean,
+                inactiveItems?: StockChartLegendInactiveItems
+        }
+        declare interface StockChartNavigatorCategoryAxisItemAutoBaseUnitSteps {
+            seconds?: any,
+                minutes?: any,
+                hours?: any,
+                days?: any,
+                weeks?: any,
+                months?: any,
+                years?: any
+        }
+        declare interface StockChartNavigatorCategoryAxisItemCrosshairTooltipBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemCrosshairTooltipPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemCrosshairTooltip {
+            background?: string,
+                border?: StockChartNavigatorCategoryAxisItemCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: StockChartNavigatorCategoryAxisItemCrosshairTooltipPadding,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorCategoryAxisItemCrosshair {
+            color?: string,
+                opacity?: number,
+                tooltip?: StockChartNavigatorCategoryAxisItemCrosshairTooltip,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemLabelsDateFormats {
+            days?: string,
+                hours?: string,
+                months?: string,
+                weeks?: string,
+                years?: string
+        }
+        declare interface StockChartNavigatorCategoryAxisItemLabelsMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemLabelsPadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemLabels {
+            background?: string,
+                border?: StockChartNavigatorCategoryAxisItemLabelsBorder,
+                color?: string,
+                culture?: string,
+                dateFormats?: StockChartNavigatorCategoryAxisItemLabelsDateFormats,
+                font?: string,
+                format?: string,
+                margin?: StockChartNavigatorCategoryAxisItemLabelsMargin,
+                mirror?: boolean,
+                padding?: StockChartNavigatorCategoryAxisItemLabelsPadding,
+                rotation?: number,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorCategoryAxisItemLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemMajorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemMajorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemMinorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemMinorTicks {
+            color?: string,
+                size?: number,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesDataItemIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesDataItemIcon {
+            background?: string,
+                border?: StockChartNavigatorCategoryAxisItemNotesDataItemIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesDataItemLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesDataItemLabel {
+            background?: string,
+                border?: StockChartNavigatorCategoryAxisItemNotesDataItemLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                text?: string,
+                position?: string
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesDataItemLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesDataItem {
+            value?: any,
+                position?: string,
+                icon?: StockChartNavigatorCategoryAxisItemNotesDataItemIcon,
+                label?: StockChartNavigatorCategoryAxisItemNotesDataItemLabel,
+                line?: StockChartNavigatorCategoryAxisItemNotesDataItemLine
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesIcon {
+            background?: string,
+                border?: StockChartNavigatorCategoryAxisItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesLabel {
+            background?: string,
+                border?: StockChartNavigatorCategoryAxisItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotesLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemNotes {
+            position?: string,
+                icon?: StockChartNavigatorCategoryAxisItemNotesIcon,
+                label?: StockChartNavigatorCategoryAxisItemNotesLabel,
+                line?: StockChartNavigatorCategoryAxisItemNotesLine,
+                data?: StockChartNavigatorCategoryAxisItemNotesDataItem[]
+        }
+        declare interface StockChartNavigatorCategoryAxisItemPlotBand {
+            color?: string,
+                from?: number,
+                opacity?: number,
+                to?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemTitleMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemTitlePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface StockChartNavigatorCategoryAxisItemTitle {
+            background?: string,
+                border?: StockChartNavigatorCategoryAxisItemTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: StockChartNavigatorCategoryAxisItemTitleMargin,
+                padding?: StockChartNavigatorCategoryAxisItemTitlePadding,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorCategoryAxisItem {
+            autoBaseUnitSteps?: StockChartNavigatorCategoryAxisItemAutoBaseUnitSteps,
+                axisCrossingValue?: any | Date | any,
+                background?: string,
+                baseUnit?: string,
+                baseUnitStep?: any,
+                categories?: any,
+                color?: string,
+                crosshair?: StockChartNavigatorCategoryAxisItemCrosshair,
+                field?: string,
+                justified?: boolean,
+                labels?: StockChartNavigatorCategoryAxisItemLabels,
+                line?: StockChartNavigatorCategoryAxisItemLine,
+                majorGridLines?: StockChartNavigatorCategoryAxisItemMajorGridLines,
+                majorTicks?: StockChartNavigatorCategoryAxisItemMajorTicks,
+                max?: any,
+                maxDateGroups?: number,
+                min?: any,
+                minorGridLines?: StockChartNavigatorCategoryAxisItemMinorGridLines,
+                minorTicks?: StockChartNavigatorCategoryAxisItemMinorTicks,
+                plotBands?: StockChartNavigatorCategoryAxisItemPlotBand[],
+                reverse?: boolean,
+                roundToBaseUnit?: boolean,
+                title?: StockChartNavigatorCategoryAxisItemTitle,
+                visible?: boolean,
+                weekStartDay?: number,
+                notes?: StockChartNavigatorCategoryAxisItemNotes
+        }
+        declare interface StockChartNavigatorHint {
+            visible?: boolean,
+                template?: string | Function,
+                format?: string
+        }
+        declare interface StockChartNavigatorPaneBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorPaneMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface StockChartNavigatorPanePadding {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface StockChartNavigatorPaneTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorPaneTitleMargin {
+            bottom?: number,
+                left?: number,
+                right?: number,
+                top?: number
+        }
+        declare interface StockChartNavigatorPaneTitle {
+            background?: string,
+                border?: StockChartNavigatorPaneTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: StockChartNavigatorPaneTitleMargin,
+                position?: string,
+                text?: string,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorPane {
+            background?: string,
+                border?: StockChartNavigatorPaneBorder,
+                height?: number,
+                margin?: StockChartNavigatorPaneMargin,
+                name?: string,
+                padding?: StockChartNavigatorPanePadding,
+                title?: StockChartNavigatorPaneTitle
+        }
+        declare interface StockChartNavigatorSelectMousewheel {
+            reverse?: boolean,
+                zoom?: string
+        }
+        declare interface StockChartNavigatorSelect {
+            from?: Date,
+                mousewheel?: boolean | StockChartNavigatorSelectMousewheel,
+                to?: Date
+        }
+        declare interface StockChartNavigatorSeriesItemBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorSeriesItemHighlightBorder {
+            width?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface StockChartNavigatorSeriesItemHighlightLine {
+            width?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface StockChartNavigatorSeriesItemHighlight {
+            border?: StockChartNavigatorSeriesItemHighlightBorder,
+                color?: string,
+                line?: StockChartNavigatorSeriesItemHighlightLine,
+                opacity?: number,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorSeriesItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorSeriesItemLabels {
+            background?: string,
+                border?: StockChartNavigatorSeriesItemLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: number | any,
+                padding?: number | any,
+                position?: string,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorSeriesItemLine {
+            color?: string,
+                opacity?: number,
+                width?: string
+        }
+        declare interface StockChartNavigatorSeriesItemMarkersBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorSeriesItemMarkers {
+            background?: string,
+                border?: StockChartNavigatorSeriesItemMarkersBorder,
+                rotation?: number | Function,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorSeriesItemOverlay {
+            gradient?: string
+        }
+        declare interface StockChartNavigatorSeriesItemStack {
+            type?: string,
+                group?: string
+        }
+        declare interface StockChartNavigatorSeriesItemTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartNavigatorSeriesItemTooltip {
+            background?: string,
+                border?: StockChartNavigatorSeriesItemTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartNavigatorSeriesItem {
+            type?: string,
+                dashType?: string,
+                data?: any,
+                highField?: string,
+                field?: string,
+                categoryField?: string,
+                name?: string,
+                highlight?: StockChartNavigatorSeriesItemHighlight,
+                aggregate?: string | Function,
+                axis?: string,
+                border?: StockChartNavigatorSeriesItemBorder,
+                closeField?: string,
+                color?: string,
+                colorField?: string,
+                downColor?: string,
+                downColorField?: string,
+                gap?: number,
+                labels?: StockChartNavigatorSeriesItemLabels,
+                line?: StockChartNavigatorSeriesItemLine,
+                lowField?: string,
+                markers?: StockChartNavigatorSeriesItemMarkers,
+                missingValues?: string,
+                style?: string,
+                opacity?: number,
+                openField?: string,
+                overlay?: StockChartNavigatorSeriesItemOverlay,
+                spacing?: number,
+                stack?: boolean | StockChartNavigatorSeriesItemStack,
+                tooltip?: StockChartNavigatorSeriesItemTooltip,
+                width?: number
+        }
+        declare interface StockChartNavigator {
+            categoryAxis?: StockChartNavigatorCategoryAxisItem[],
+                dataSource?: any,
+                autoBind?: boolean,
+                dateField?: string,
+                pane?: StockChartNavigatorPane,
+                visible?: boolean,
+                series?: StockChartNavigatorSeriesItem[],
+                select?: StockChartNavigatorSelect,
+                hint?: StockChartNavigatorHint
+        }
+        declare interface StockChartPaneBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartPaneTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartPaneTitle {
+            background?: string,
+                border?: StockChartPaneTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: number | any,
+                position?: string,
+                text?: string,
+                visible?: boolean
+        }
+        declare interface StockChartPane {
+            name?: string,
+                margin?: number | any,
+                padding?: number | any,
+                background?: string,
+                border?: StockChartPaneBorder,
+                clip?: boolean,
+                height?: number,
+                title?: StockChartPaneTitle
+        }
+        declare interface StockChartPdfMargin {
+            bottom?: number | string,
+                left?: number | string,
+                right?: number | string,
+                top?: number | string
+        }
+        declare interface StockChartPdf {
+            author?: string,
+                creator?: string,
+                date?: Date,
+                forceProxy?: boolean,
+                fileName?: string,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: StockChartPdfMargin,
+                paperSize?: string | any,
+                proxyURL?: string,
+                proxyTarget?: string,
+                subject?: string,
+                title?: string
+        }
+        declare interface StockChartPlotAreaBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartPlotArea {
+            background?: string,
+                opacity?: number,
+                border?: StockChartPlotAreaBorder,
+                margin?: number | any
+        }
+        declare interface StockChartSeriesItemBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                opacity?: number | Function,
+                width?: number | Function
+        }
+        declare interface StockChartSeriesItemHighlightBorder {
+            width?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface StockChartSeriesItemHighlightLine {
+            width?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface StockChartSeriesItemHighlight {
+            visible?: boolean,
+                border?: StockChartSeriesItemHighlightBorder,
+                color?: string,
+                line?: StockChartSeriesItemHighlightLine,
+                opacity?: number
+        }
+        declare interface StockChartSeriesItemLabelsBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                width?: number | Function
+        }
+        declare interface StockChartSeriesItemLabels {
+            background?: string | Function,
+                border?: StockChartSeriesItemLabelsBorder,
+                color?: string | Function,
+                font?: string | Function,
+                format?: string | Function,
+                margin?: number | any,
+                padding?: number | any,
+                position?: string | Function,
+                template?: string | Function,
+                visible?: boolean | Function
+        }
+        declare interface StockChartSeriesItemLine {
+            color?: string,
+                opacity?: number,
+                width?: string,
+                style?: string
+        }
+        declare interface StockChartSeriesItemMarkersBorder {
+            color?: string | Function,
+                width?: number | Function
+        }
+        declare interface StockChartSeriesItemMarkers {
+            background?: string | Function,
+                border?: StockChartSeriesItemMarkersBorder,
+                size?: number | Function,
+                rotation?: number | Function,
+                type?: string | Function,
+                visible?: boolean | Function
+        }
+        declare interface StockChartSeriesItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartSeriesItemNotesIcon {
+            background?: string,
+                border?: StockChartSeriesItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface StockChartSeriesItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartSeriesItemNotesLabel {
+            background?: string,
+                border?: StockChartSeriesItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface StockChartSeriesItemNotesLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface StockChartSeriesItemNotes {
+            position?: string,
+                icon?: StockChartSeriesItemNotesIcon,
+                label?: StockChartSeriesItemNotesLabel,
+                line?: StockChartSeriesItemNotesLine
+        }
+        declare interface StockChartSeriesItemOverlay {
+            gradient?: string
+        }
+        declare interface StockChartSeriesItemStack {
+            type?: string,
+                group?: string
+        }
+        declare interface StockChartSeriesItemTargetBorder {
+            color?: string | Function,
+                dashType?: string | Function,
+                width?: number | Function
+        }
+        declare interface StockChartSeriesItemTargetLine {
+            width?: any | Function
+        }
+        declare interface StockChartSeriesItemTarget {
+            line?: StockChartSeriesItemTargetLine,
+                color?: string | Function,
+                border?: StockChartSeriesItemTargetBorder
+        }
+        declare interface StockChartSeriesItemTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartSeriesItemTooltip {
+            background?: string,
+                border?: StockChartSeriesItemTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartSeriesItem {
+            type?: string,
+                dashType?: string,
+                data?: any,
+                highField?: string,
+                field?: string,
+                categoryField?: string,
+                currentField?: string,
+                targetField?: string,
+                name?: string,
+                highlight?: StockChartSeriesItemHighlight,
+                aggregate?: string | Function,
+                axis?: string,
+                border?: StockChartSeriesItemBorder,
+                closeField?: string,
+                color?: string | Function,
+                colorField?: string,
+                downColor?: string | Function,
+                downColorField?: string,
+                gap?: number,
+                labels?: StockChartSeriesItemLabels,
+                line?: StockChartSeriesItemLine,
+                lowField?: string,
+                markers?: StockChartSeriesItemMarkers,
+                missingValues?: string,
+                style?: string,
+                negativeColor?: string,
+                opacity?: number,
+                openField?: string,
+                overlay?: StockChartSeriesItemOverlay,
+                spacing?: number,
+                stack?: boolean | StockChartSeriesItemStack,
+                tooltip?: StockChartSeriesItemTooltip,
+                visibleInLegend?: boolean,
+                width?: number,
+                target?: StockChartSeriesItemTarget,
+                notes?: StockChartSeriesItemNotes,
+                zIndex?: number
+        }
+        declare interface StockChartSeriesDefaultsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartSeriesDefaultsLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartSeriesDefaultsLabels {
+            background?: string,
+                border?: StockChartSeriesDefaultsLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: number | any,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartSeriesDefaultsStack {
+            type?: string
+        }
+        declare interface StockChartSeriesDefaultsTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartSeriesDefaultsTooltip {
+            background?: string,
+                border?: StockChartSeriesDefaultsTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartSeriesDefaults {
+            area?: any,
+                candlestick?: any,
+                ohlc?: any,
+                border?: StockChartSeriesDefaultsBorder,
+                column?: any,
+                gap?: number,
+                labels?: StockChartSeriesDefaultsLabels,
+                line?: any,
+                overlay?: any,
+                pie?: any,
+                spacing?: number,
+                stack?: boolean | StockChartSeriesDefaultsStack,
+                type?: string,
+                tooltip?: StockChartSeriesDefaultsTooltip
+        }
+        declare interface StockChartTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartTitle {
+            align?: string,
+                background?: string,
+                border?: StockChartTitleBorder,
+                font?: string,
+                color?: string,
+                margin?: number | any,
+                padding?: number | any,
+                position?: string,
+                text?: string,
+                visible?: boolean
+        }
+        declare interface StockChartTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartTooltip {
+            background?: string,
+                border?: StockChartTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean,
+                shared?: boolean,
+                sharedTemplate?: string
+        }
+        declare interface StockChartValueAxisItemCrosshairTooltipBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartValueAxisItemCrosshairTooltip {
+            background?: string,
+                border?: StockChartValueAxisItemCrosshairTooltipBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                padding?: number | any,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartValueAxisItemCrosshair {
+            color?: string,
+                width?: number,
+                opacity?: number,
+                dashType?: number,
+                visible?: boolean,
+                tooltip?: StockChartValueAxisItemCrosshairTooltip
+        }
+        declare interface StockChartValueAxisItemLabelsBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartValueAxisItemLabels {
+            background?: string,
+                border?: StockChartValueAxisItemLabelsBorder,
+                color?: string,
+                font?: string,
+                format?: string,
+                margin?: number | any,
+                mirror?: boolean,
+                padding?: number | any,
+                rotation?: number,
+                skip?: number,
+                step?: number,
+                template?: string | Function,
+                visible?: boolean
+        }
+        declare interface StockChartValueAxisItemLine {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number
+        }
+        declare interface StockChartValueAxisItemMajorGridLines {
+            color?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartValueAxisItemMajorTicks {
+            size?: number,
+                visible?: boolean,
+                color?: string,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartValueAxisItemMinorGridLines {
+            color?: string,
+                dashType?: string,
+                visible?: boolean,
+                width?: number,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartValueAxisItemMinorTicks {
+            size?: number,
+                color?: string,
+                width?: number,
+                visible?: boolean,
+                step?: number,
+                skip?: number
+        }
+        declare interface StockChartValueAxisItemNotesDataItemIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartValueAxisItemNotesDataItemIcon {
+            background?: string,
+                border?: StockChartValueAxisItemNotesDataItemIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface StockChartValueAxisItemNotesDataItemLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartValueAxisItemNotesDataItemLabel {
+            background?: string,
+                border?: StockChartValueAxisItemNotesDataItemLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                text?: string,
+                position?: string
+        }
+        declare interface StockChartValueAxisItemNotesDataItemLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface StockChartValueAxisItemNotesDataItem {
+            value?: any,
+                position?: string,
+                icon?: StockChartValueAxisItemNotesDataItemIcon,
+                label?: StockChartValueAxisItemNotesDataItemLabel,
+                line?: StockChartValueAxisItemNotesDataItemLine
+        }
+        declare interface StockChartValueAxisItemNotesIconBorder {
+            color?: string,
+                width?: number
+        }
+        declare interface StockChartValueAxisItemNotesIcon {
+            background?: string,
+                border?: StockChartValueAxisItemNotesIconBorder,
+                size?: number,
+                type?: string,
+                visible?: boolean
+        }
+        declare interface StockChartValueAxisItemNotesLabelBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartValueAxisItemNotesLabel {
+            background?: string,
+                border?: StockChartValueAxisItemNotesLabelBorder,
+                color?: string,
+                font?: string,
+                template?: string | Function,
+                visible?: boolean,
+                rotation?: number,
+                format?: string,
+                position?: string
+        }
+        declare interface StockChartValueAxisItemNotesLine {
+            width?: number,
+                color?: string,
+                length?: number
+        }
+        declare interface StockChartValueAxisItemNotes {
+            position?: string,
+                icon?: StockChartValueAxisItemNotesIcon,
+                label?: StockChartValueAxisItemNotesLabel,
+                line?: StockChartValueAxisItemNotesLine,
+                data?: StockChartValueAxisItemNotesDataItem[]
+        }
+        declare interface StockChartValueAxisItemPlotBand {
+            from?: number,
+                to?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface StockChartValueAxisItemTitleBorder {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface StockChartValueAxisItemTitle {
+            background?: string,
+                border?: StockChartValueAxisItemTitleBorder,
+                color?: string,
+                font?: string,
+                margin?: number | any,
+                padding?: number | any,
+                position?: string,
+                rotation?: number,
+                text?: string,
+                visible?: boolean
+        }
+        declare interface StockChartValueAxisItem {
+            axisCrossingValue?: any | Date | any,
+                background?: string,
+                color?: string,
+                labels?: StockChartValueAxisItemLabels,
+                line?: StockChartValueAxisItemLine,
+                majorGridLines?: StockChartValueAxisItemMajorGridLines,
+                majorTicks?: StockChartValueAxisItemMajorTicks,
+                majorUnit?: number,
+                max?: number,
+                min?: number,
+                minorGridLines?: StockChartValueAxisItemMinorGridLines,
+                minorTicks?: StockChartValueAxisItemMinorTicks,
+                minorUnit?: number,
+                name?: any,
+                narrowRange?: boolean,
+                pane?: string,
+                plotBands?: StockChartValueAxisItemPlotBand[],
+                reverse?: boolean,
+                title?: StockChartValueAxisItemTitle,
+                visible?: boolean,
+                crosshair?: StockChartValueAxisItemCrosshair,
+                notes?: StockChartValueAxisItemNotes
+        }
+        declare interface StockChartExportImageOptions {
+            width?: string,
+                height?: string
+        }
+        declare interface StockChartExportSVGOptions {
+            raw?: boolean
+        }
+        declare interface StockChartSeriesClickEventSeries {
+            type?: string,
+                name?: string,
+                data?: any
+        }
+        declare interface StockChartSeriesHoverEventSeries {
+            type?: string,
+                name?: string,
+                data?: any
+        }
+        declare interface StockChartOptions {
+            name?: string,
+                dateField?: string,
+                navigator?: StockChartNavigator,
+                axisDefaults?: any,
+                categoryAxis?: StockChartCategoryAxisItem[],
+                chartArea?: StockChartChartArea,
+                dataSource?: any,
+                autoBind?: boolean,
+                legend?: StockChartLegend,
+                panes?: StockChartPane[],
+                pdf?: StockChartPdf,
+                plotArea?: StockChartPlotArea,
+                renderAs?: string,
+                series?: StockChartSeriesItem[],
+                seriesColors?: any,
+                seriesDefaults?: StockChartSeriesDefaults,
+                theme?: string,
+                title?: StockChartTitle,
+                tooltip?: StockChartTooltip,
+                transitions?: boolean,
+                valueAxis?: StockChartValueAxisItem[],
+                axisLabelClick(e: StockChartAxisLabelClickEvent): void,
+                dataBound(e: StockChartEvent): void,
+                dragStart(e: StockChartDragStartEvent): void,
+                drag(e: StockChartDragEvent): void,
+                dragEnd(e: StockChartDragEndEvent): void,
+                legendItemClick(e: StockChartLegendItemClickEvent): void,
+                legendItemHover(e: StockChartLegendItemHoverEvent): void,
+                noteClick(e: StockChartNoteClickEvent): void,
+                noteHover(e: StockChartNoteHoverEvent): void,
+                plotAreaClick(e: StockChartPlotAreaClickEvent): void,
+                plotAreaHover(e: StockChartPlotAreaHoverEvent): void,
+                render(e: StockChartRenderEvent): void,
+                select(e: StockChartSelectEvent): void,
+                selectEnd(e: StockChartSelectEndEvent): void,
+                selectStart(e: StockChartSelectStartEvent): void,
+                seriesClick(e: StockChartSeriesClickEvent): void,
+                seriesHover(e: StockChartSeriesHoverEvent): void,
+                zoomStart(e: StockChartZoomStartEvent): void,
+                zoom(e: StockChartZoomEvent): void,
+                zoomEnd(e: StockChartZoomEndEvent): void
+        }
+        declare interface StockChartEvent {
+            sender: StockChart,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type StockChartAxisLabelClickEvent = {
+            axis?: any,
+            value?: any,
+            text?: any,
+            index?: any,
+            dataItem?: any,
+            element?: any
+        } & StockChartEvent
+
+        declare type StockChartDragStartEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & StockChartEvent
+
+        declare type StockChartDragEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & StockChartEvent
+
+        declare type StockChartDragEndEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & StockChartEvent
+
+        declare type StockChartLegendItemClickEvent = {
+            text?: string,
+            series?: any,
+            seriesIndex?: number,
+            pointIndex?: number,
+            element?: any
+        } & StockChartEvent
+
+        declare type StockChartLegendItemHoverEvent = {
+            text?: string,
+            series?: any,
+            seriesIndex?: number,
+            pointIndex?: number,
+            element?: any
+        } & StockChartEvent
+
+        declare type StockChartNoteClickEvent = {
+            category?: any,
+            element?: any,
+            value?: any,
+            series?: any,
+            dataItem?: any
+        } & StockChartEvent
+
+        declare type StockChartNoteHoverEvent = {
+            category?: any,
+            element?: any,
+            value?: any,
+            series?: any,
+            dataItem?: any
+        } & StockChartEvent
+
+        declare type StockChartPlotAreaClickEvent = {
+            value?: any,
+            category?: any,
+            element?: any,
+            x?: any,
+            y?: any
+        } & StockChartEvent
+
+        declare type StockChartPlotAreaHoverEvent = {
+            category?: any,
+            element?: any,
+            originalEvent?: any,
+            value?: any,
+            x?: any,
+            y?: any
+        } & StockChartEvent
+
+        declare type StockChartRenderEvent = {} & StockChartEvent
+
+        declare type StockChartSelectEvent = {
+            axis?: any,
+            from?: Date,
+            to?: Date
+        } & StockChartEvent
+
+        declare type StockChartSelectEndEvent = {
+            axis?: any,
+            from?: Date,
+            to?: Date
+        } & StockChartEvent
+
+        declare type StockChartSelectStartEvent = {
+            axis?: any,
+            from?: Date,
+            to?: Date
+        } & StockChartEvent
+
+        declare type StockChartSeriesClickEvent = {
+            value?: any,
+            category?: any,
+            series?: StockChartSeriesClickEventSeries,
+            dataItem?: any,
+            element?: any,
+            percentage?: any
+        } & StockChartEvent
+
+        declare type StockChartSeriesHoverEvent = {
+            value?: any,
+            category?: any,
+            series?: StockChartSeriesHoverEventSeries,
+            dataItem?: any,
+            element?: any,
+            percentage?: any
+        } & StockChartEvent
+
+        declare type StockChartZoomStartEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & StockChartEvent
+
+        declare type StockChartZoomEvent = {
+            axisRanges?: any,
+            delta?: number,
+            originalEvent?: any
+        } & StockChartEvent
+
+        declare type StockChartZoomEndEvent = {
+            axisRanges?: any,
+            originalEvent?: any
+        } & StockChartEvent
+
+        declare class TreeMap mixins undefined.Widget {
+            fn: TreeMap;
+            options: TreeMapOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): TreeMap;
+            constructor(element: Element, options?: TreeMapOptions): this
+        }
+        declare interface TreeMapOptions {
+            name?: string,
+                dataSource?: any | any | undefined.HierarchicalDataSource,
+                autoBind?: boolean,
+                type?: string,
+                theme?: string,
+                valueField?: string,
+                colorField?: string,
+                textField?: string,
+                template?: string | Function,
+                colors?: any,
+                itemCreated(e: TreeMapItemCreatedEvent): void,
+                dataBound(e: TreeMapDataBoundEvent): void
+        }
+        declare interface TreeMapEvent {
+            sender: TreeMap,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type TreeMapItemCreatedEvent = {
+            element?: JQuery | Element
+        } & TreeMapEvent
+
+        declare type TreeMapDataBoundEvent = {} & TreeMapEvent
+
+        declare class ActionSheet mixins undefined.Widget {
+            fn: ActionSheet;
+            options: ActionSheetOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ActionSheet;
+            constructor(element: Element, options?: ActionSheetOptions): this;
+            close(): void;
+            destroy(): void;
+            open(target: JQuery, context: any): void
+        }
+        declare interface ActionSheetPopup {
+            direction?: number | string,
+                height?: number | string,
+                width?: number | string
+        }
+        declare interface ActionSheetOptions {
+            name?: string,
+                cancel?: string,
+                popup?: ActionSheetPopup,
+                type?: string,
+                close(e: ActionSheetEvent): void,
+                open(e: ActionSheetOpenEvent): void
+        }
+        declare interface ActionSheetEvent {
+            sender: ActionSheet,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ActionSheetOpenEvent = {
+            target?: JQuery,
+            context?: JQuery
+        } & ActionSheetEvent
+
+        declare class BackButton mixins undefined.Widget {
+            fn: BackButton;
+            options: BackButtonOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): BackButton;
+            constructor(element: Element, options?: BackButtonOptions): this;
+            destroy(): void
+        }
+        declare interface BackButtonOptions {
+            name?: string,
+                click(e: BackButtonClickEvent): void
+        }
+        declare interface BackButtonEvent {
+            sender: BackButton,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type BackButtonClickEvent = {
+            target?: JQuery,
+            button?: JQuery
+        } & BackButtonEvent
+
+        declare class ButtonGroup mixins undefined.Widget {
+            fn: ButtonGroup;
+            options: ButtonGroupOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ButtonGroup;
+            constructor(element: Element, options?: ButtonGroupOptions): this;
+            badge(button: string, value: string): string;
+            badge(button: string, value: boolean): string;
+            badge(button: number, value: string): string;
+            badge(button: number, value: boolean): string;
+            current(): JQuery;
+            destroy(): void;
+            enable(enable: boolean): void;
+            select(li: JQuery): void;
+            select(li: number): void
+        }
+        declare interface ButtonGroupOptions {
+            name?: string,
+                enable?: boolean,
+                index?: number,
+                selectOn?: string,
+                select(e: ButtonGroupSelectEvent): void
+        }
+        declare interface ButtonGroupEvent {
+            sender: ButtonGroup,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ButtonGroupSelectEvent = {
+            index?: number
+        } & ButtonGroupEvent
+
+        declare class Collapsible mixins undefined.Widget {
+            fn: Collapsible;
+            options: CollapsibleOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Collapsible;
+            constructor(element: Element, options?: CollapsibleOptions): this;
+            collapse(instant: boolean): void;
+            destroy(): void;
+            expand(instant?: boolean): void;
+            resize(): void;
+            toggle(instant?: boolean): void
+        }
+        declare interface CollapsibleOptions {
+            name?: string,
+                animation?: boolean,
+                collapsed?: boolean,
+                expandIcon?: string,
+                iconPosition?: string,
+                inset?: boolean,
+                collapse(e: CollapsibleEvent): void,
+                expand(e: CollapsibleEvent): void
+        }
+        declare interface CollapsibleEvent {
+            sender: Collapsible,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class DetailButton mixins undefined.Widget {
+            fn: DetailButton;
+            options: DetailButtonOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): DetailButton;
+            constructor(element: Element, options?: DetailButtonOptions): this;
+            destroy(): void
+        }
+        declare interface DetailButtonOptions {
+            name?: string,
+                click(e: DetailButtonClickEvent): void
+        }
+        declare interface DetailButtonEvent {
+            sender: DetailButton,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type DetailButtonClickEvent = {
+            target?: JQuery,
+            button?: JQuery
+        } & DetailButtonEvent
+
+        declare class Drawer mixins undefined.Widget {
+            fn: Drawer;
+            options: DrawerOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Drawer;
+            constructor(element: Element, options?: DrawerOptions): this;
+            destroy(): void;
+            hide(): void;
+            show(): void
+        }
+        declare interface DrawerOptions {
+            name?: string,
+                container?: JQuery,
+                position?: string,
+                swipeToOpen?: boolean,
+                swipeToOpenViews?: any,
+                title?: string,
+                views?: any,
+                afterHide(e: DrawerAfterHideEvent): void,
+                beforeShow(e: DrawerEvent): void,
+                hide(e: DrawerHideEvent): void,
+                init(e: DrawerInitEvent): void,
+                show(e: DrawerShowEvent): void
+        }
+        declare interface DrawerEvent {
+            sender: Drawer,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type DrawerAfterHideEvent = {} & DrawerEvent
+
+        declare type DrawerHideEvent = {} & DrawerEvent
+
+        declare type DrawerInitEvent = {} & DrawerEvent
+
+        declare type DrawerShowEvent = {} & DrawerEvent
+
+        declare class Layout mixins undefined.Widget {
+            fn: kendo$Layout;
+            options: LayoutOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): kendo$Layout;
+            constructor(element: Element, options?: LayoutOptions): this
+        }
+        declare interface LayoutOptions {
+            name?: string,
+                alignContent?: string,
+                alignItems?: string,
+                justifyContent?: string,
+                lineSpacing?: number,
+                spacing?: number,
+                orientation?: string,
+                wrap?: boolean
+        }
+        declare interface LayoutEvent {
+            sender: kendo$Layout,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type LayoutHideEvent = {
+            layout?: JQuery,
+            view?: JQuery
+        } & LayoutEvent
+
+        declare type LayoutInitEvent = {
+            layout?: JQuery
+        } & LayoutEvent
+
+        declare type LayoutShowEvent = {
+            layout?: JQuery,
+            view?: JQuery
+        } & LayoutEvent
+
+        declare interface ListViewFilterable {
+            placeholder?: string,
+                autoFilter?: boolean,
+                field?: string,
+                ignoreCase?: boolean,
+                operator?: string
+        }
+        declare interface ListViewMessages {
+            loadMoreText?: string,
+                pullTemplate?: string,
+                refreshTemplate?: string,
+                releaseTemplate?: string
+        }
+        declare type ListViewClickEvent = {
+            item?: JQuery,
+            target?: JQuery,
+            dataItem?: any,
+            button?: undefined.Button
+        } & ListViewEvent
+
+        declare class Loader mixins undefined.Widget {
+            fn: Loader;
+            options: LoaderOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Loader;
+            constructor(element: Element, options?: LoaderOptions): this;
+            hide(): void;
+            show(): void
+        }
+        declare interface LoaderOptions {
+            name?: string
+        }
+        declare interface LoaderEvent {
+            sender: Loader,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class ModalView mixins undefined.Widget {
+            fn: ModalView;
+            options: ModalViewOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ModalView;
+            constructor(element: Element, options?: ModalViewOptions): this;
+            close(): void;
+            destroy(): void;
+            open(target?: JQuery): void
+        }
+        declare interface ModalViewOptions {
+            name?: string,
+                height?: number,
+                modal?: boolean,
+                width?: number,
+                beforeOpen(e: ModalViewBeforeOpenEvent): void,
+                close(e: ModalViewCloseEvent): void,
+                init(e: ModalViewInitEvent): void,
+                open(e: ModalViewOpenEvent): void
+        }
+        declare interface ModalViewEvent {
+            sender: ModalView,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ModalViewBeforeOpenEvent = {
+            target?: JQuery
+        } & ModalViewEvent
+
+        declare type ModalViewCloseEvent = {} & ModalViewEvent
+
+        declare type ModalViewInitEvent = {} & ModalViewEvent
+
+        declare type ModalViewOpenEvent = {
+            target?: JQuery
+        } & ModalViewEvent
+
+        declare class NavBar mixins undefined.Widget {
+            fn: NavBar;
+            options: NavBarOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): NavBar;
+            constructor(element: Element, options?: NavBarOptions): this;
+            destroy(): void;
+            title(value: string): void
+        }
+        declare interface NavBarOptions {
+            name?: string
+        }
+        declare interface NavBarEvent {
+            sender: NavBar,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Pane mixins undefined.Widget {
+            fn: Pane;
+            options: PaneOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Pane;
+            constructor(element: Element, options?: PaneOptions): this;
+            destroy(): void;
+            hideLoading(): void;
+            navigate(url: string, transition: string): void;
+            replace(url: string, transition: string): void;
+            showLoading(): void;
+            view(): undefined.View
+        }
+        declare interface PaneOptions {
+            name?: string,
+                collapsible?: boolean,
+                initial?: string,
+                layout?: string,
+                loading?: string,
+                portraitWidth?: number,
+                transition?: string,
+                navigate(e: PaneNavigateEvent): void,
+                viewShow(e: PaneViewShowEvent): void
+        }
+        declare interface PaneEvent {
+            sender: Pane,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type PaneNavigateEvent = {
+            url?: JQuery
+        } & PaneEvent
+
+        declare type PaneViewShowEvent = {
+            view?: undefined.View
+        } & PaneEvent
+
+        declare class PopOver mixins undefined.Widget {
+            fn: PopOver;
+            options: PopOverOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): PopOver;
+            constructor(element: Element, options?: PopOverOptions): this;
+            close(): void;
+            destroy(): void;
+            open(target: JQuery): void
+        }
+        declare interface PopOverPane {
+            initial?: string,
+                layout?: string,
+                loading?: string,
+                transition?: string
+        }
+        declare interface PopOverPopup {
+            height?: number | string,
+                width?: number | string
+        }
+        declare interface PopOverOptions {
+            name?: string,
+                pane?: PopOverPane,
+                popup?: PopOverPopup,
+                close(e: PopOverCloseEvent): void,
+                open(e: PopOverOpenEvent): void
+        }
+        declare interface PopOverEvent {
+            sender: PopOver,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type PopOverCloseEvent = {} & PopOverEvent
+
+        declare type PopOverOpenEvent = {
+            target?: JQuery
+        } & PopOverEvent
+
+        declare class ScrollView mixins undefined.Widget {
+            fn: ScrollView;
+            options: ScrollViewOptions;
+            dataSource: undefined.DataSource;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): ScrollView;
+            constructor(element: Element, options?: ScrollViewOptions): this;
+            content(content: string): void;
+            content(content: JQuery): void;
+            destroy(): void;
+            next(): void;
+            prev(): void;
+            refresh(): void;
+            scrollTo(page: number, instant: boolean): void;
+            setDataSource(dataSource: undefined.DataSource): void;
+            value(dataItem: any): any
+        }
+        declare interface ScrollViewOptions {
+            name?: string,
+                autoBind?: boolean,
+                bounceVelocityThreshold?: number,
+                contentHeight?: number | string,
+                dataSource?: undefined.DataSource | any,
+                duration?: number,
+                emptyTemplate?: string,
+                enablePager?: boolean,
+                itemsPerPage?: number,
+                page?: number,
+                pageSize?: number,
+                template?: string,
+                velocityThreshold?: number,
+                changing(e: ScrollViewChangingEvent): void,
+                change(e: ScrollViewChangeEvent): void,
+                refresh(e: ScrollViewRefreshEvent): void
+        }
+        declare interface ScrollViewEvent {
+            sender: ScrollView,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ScrollViewChangingEvent = {
+            currentPage?: number,
+            nextPage?: number
+        } & ScrollViewEvent
+
+        declare type ScrollViewChangeEvent = {
+            page?: number,
+            element?: JQuery,
+            data?: any
+        } & ScrollViewEvent
+
+        declare type ScrollViewRefreshEvent = {
+            pageCount?: number,
+            page?: number
+        } & ScrollViewEvent
+
+        declare class Scroller mixins undefined.Widget {
+            fn: Scroller;
+            options: ScrollerOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Scroller;
+            constructor(element: Element, options?: ScrollerOptions): this;
+            animatedScrollTo(x: number, y: number): void;
+            contentResized(): void;
+            destroy(): void;
+            disable(): void;
+            enable(): void;
+            height(): number;
+            pullHandled(): void;
+            reset(): void;
+            scrollHeight(): void;
+            scrollTo(x: number, y: number): void;
+            scrollWidth(): void;
+            zoomOut(): void
+        }
+        declare interface ScrollerMessages {
+            pullTemplate?: string,
+                refreshTemplate?: string,
+                releaseTemplate?: string
+        }
+        declare interface ScrollerOptions {
+            name?: string,
+                elastic?: boolean,
+                messages?: ScrollerMessages,
+                pullOffset?: number,
+                pullToRefresh?: boolean,
+                useNative?: boolean,
+                visibleScrollHints?: boolean,
+                zoom?: boolean,
+                pull(e: ScrollerEvent): void,
+                resize(e: ScrollerEvent): void,
+                scroll(e: ScrollerScrollEvent): void
+        }
+        declare interface ScrollerEvent {
+            sender: Scroller,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ScrollerScrollEvent = {
+            scrollTop?: number,
+            scrollLeft?: number
+        } & ScrollerEvent
+
+        declare class SplitView mixins undefined.Widget {
+            fn: SplitView;
+            options: SplitViewOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): SplitView;
+            constructor(element: Element, options?: SplitViewOptions): this;
+            destroy(): void;
+            expandPanes(): void;
+            collapsePanes(): void
+        }
+        declare interface SplitViewOptions {
+            name?: string,
+                style?: string,
+                init(e: SplitViewInitEvent): void,
+                show(e: SplitViewShowEvent): void
+        }
+        declare interface SplitViewEvent {
+            sender: SplitView,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type SplitViewInitEvent = {
+            view?: JQuery
+        } & SplitViewEvent
+
+        declare type SplitViewShowEvent = {
+            view?: JQuery
+        } & SplitViewEvent
+
+        declare class Switch mixins undefined.Widget {
+            fn: Switch;
+            options: SwitchOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): Switch;
+            constructor(element: Element, options?: SwitchOptions): this;
+            check(): boolean;
+            check(check: boolean): void;
+            destroy(): void;
+            enable(enable: boolean): void;
+            refresh(): void;
+            toggle(): void
+        }
+        declare interface SwitchOptions {
+            name?: string,
+                checked?: boolean,
+                enable?: boolean,
+                offLabel?: string,
+                onLabel?: string,
+                change(e: SwitchChangeEvent): void
+        }
+        declare interface SwitchEvent {
+            sender: Switch,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type SwitchChangeEvent = {
+            checked?: any
+        } & SwitchEvent
+
+        declare class View mixins undefined.Widget {
+            fn: kendo$View;
+            options: kendo$ViewOptions;
+            element: JQuery;
+            wrapper: JQuery;
+            extend(proto: Object): kendo$View;
+            constructor(element: Element, options?: kendo$ViewOptions): this;
+            contentElement(): void;
+            destroy(): void;
+            enable(enable: boolean): void
+        }
+        declare interface ViewOptions {
+            tagName?: string,
+                wrap?: boolean,
+                model?: Object,
+                evalTemplate?: boolean,
+                init?: (e: kendo$ViewEvent) => void,
+                show?: (e: kendo$ViewEvent) => void,
+                hide?: (e: kendo$ViewEvent) => void
+        }
+        declare interface ViewEvent {
+            sender: kendo$View,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type ViewAfterShowEvent = {
+            view?: undefined.View
+        } & kendo$ViewEvent
+
+        declare type ViewBeforeHideEvent = {
+            view?: undefined.View
+        } & kendo$ViewEvent
+
+        declare type ViewBeforeShowEvent = {
+            view?: undefined.View
+        } & kendo$ViewEvent
+
+        declare type ViewHideEvent = {
+            view?: undefined.View
+        } & kendo$ViewEvent
+
+        declare type ViewInitEvent = {
+            view?: undefined.View
+        } & kendo$ViewEvent
+
+        declare type ViewShowEvent = {
+            view?: undefined.View
+        } & kendo$ViewEvent
+
+        declare type ViewTransitionStartEvent = {
+            type?: string
+        } & kendo$ViewEvent
+
+        declare type ViewTransitionEndEvent = {
+            type?: string
+        } & kendo$ViewEvent
+
+    }
+
+    declare module 'map' {
+        declare module 'layer' {
+            declare class Shape {}
+        }
+
+        declare class BingLayer mixins undefined.TileLayer {
+            options: BingLayerOptions;
+            map: undefined.Map;
+            constructor(map: undefined.Map, options?: BingLayerOptions): this;
+            show(): void;
+            hide(): void;
+            imagerySet(): void
+        }
+        declare interface BingLayerOptions {
+            name?: string,
+                baseUrl?: string,
+                imagerySet?: string
+        }
+        declare interface BingLayerEvent {
+            sender: BingLayer,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Extent mixins kendo$Class {
+            options: ExtentOptions;
+            nw: undefined.Location;
+            se: undefined.Location;
+            constructor(nw: undefined.Location | any, se: undefined.Location | any): this;
+            create(a: undefined.Location, b?: undefined.Location): undefined.Extent;
+            create(a: undefined.Location, b?: any): undefined.Extent;
+            create(a: any, b?: undefined.Location): undefined.Extent;
+            create(a: any, b?: any): undefined.Extent;
+            contains(location: undefined.Location): boolean;
+            containsAny(locations: any): boolean;
+            center(): undefined.Location;
+            include(location: undefined.Location): void;
+            includeAll(locations: any): void;
+            edges(): any;
+            toArray(): any;
+            overlaps(extent: undefined.Extent): boolean
+        }
+        declare interface ExtentOptions {
+            name?: string
+        }
+        declare interface ExtentEvent {
+            sender: Extent,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Layer mixins kendo$Class {
+            options: LayerOptions;
+            map: undefined.Map;
+            constructor(map: undefined.Map, options?: LayerOptions): this;
+            show(): void;
+            hide(): void
+        }
+        declare interface LayerOptions {
+            name?: string
+        }
+        declare interface LayerEvent {
+            sender: Layer,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Location mixins kendo$Class {
+            options: LocationOptions;
+            lat: number;
+            lng: number;
+            constructor(lat: number, lng: number): this;
+            create(lat: number, lng?: number): undefined.Location;
+            create(lat: any, lng?: number): undefined.Location;
+            create(lat: undefined.Location, lng?: number): undefined.Location;
+            fromLngLat(lnglat: any): undefined.Location;
+            fromLatLng(lnglat: any): undefined.Location;
+            clone(): undefined.Location;
+            destination(destination: undefined.Location, bearing: number): number;
+            distanceTo(distance: number, bearing: number): undefined.Location;
+            equals(location: undefined.Location): boolean;
+            round(digits: number): undefined.Location;
+            toArray(): any;
+            toString(): string;
+            wrap(): undefined.Location
+        }
+        declare interface LocationOptions {
+            name?: string
+        }
+        declare interface LocationEvent {
+            sender: Location,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Marker mixins Observable {
+            options: MarkerOptions;
+            constructor(options?: MarkerOptions): this;
+            location(): undefined.Location;
+            location(location: any): void;
+            location(location: undefined.Location): void
+        }
+        declare interface MarkerTooltipAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MarkerTooltipAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface MarkerTooltipAnimation {
+            close?: MarkerTooltipAnimationClose,
+                open?: MarkerTooltipAnimationOpen
+        }
+        declare interface MarkerTooltipContent {
+            url?: string
+        }
+        declare interface MarkerTooltip {
+            autoHide?: boolean,
+                animation?: MarkerTooltipAnimation,
+                content?: MarkerTooltipContent,
+                template?: string,
+                callout?: boolean,
+                iframe?: boolean,
+                height?: number,
+                width?: number,
+                position?: string,
+                showAfter?: number,
+                showOn?: string
+        }
+        declare interface MarkerOptions {
+            name?: string,
+                location?: any | undefined.Location,
+                shape?: string,
+                title?: string,
+                tooltip?: MarkerTooltip
+        }
+        declare interface MarkerEvent {
+            sender: Marker,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class MarkerLayer mixins undefined.Layer {
+            options: MarkerLayerOptions;
+            map: undefined.Map;
+            items: any;
+            constructor(map: undefined.Map, options?: MarkerLayerOptions): this;
+            add(marker: undefined.Marker): void;
+            clear(): void;
+            hide(): void;
+            remove(marker: undefined.Marker): void;
+            setDataSource(dataSource: any): void;
+            show(): void
+        }
+        declare interface MarkerLayerOptions {
+            name?: string
+        }
+        declare interface MarkerLayerEvent {
+            sender: MarkerLayer,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class ShapeLayer mixins undefined.Layer {
+            options: ShapeLayerOptions;
+            map: undefined.Map;
+            constructor(map: undefined.Map, options?: ShapeLayerOptions): this;
+            show(): void;
+            hide(): void;
+            setDataSource(): void
+        }
+        declare interface ShapeLayerOptions {
+            name?: string
+        }
+        declare interface ShapeLayerEvent {
+            sender: ShapeLayer,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class TileLayer mixins undefined.Layer {
+            options: TileLayerOptions;
+            map: undefined.Map;
+            constructor(map: undefined.Map, options?: TileLayerOptions): this;
+            show(): void;
+            hide(): void
+        }
+        declare interface TileLayerOptions {
+            name?: string,
+                urlTemplate?: string,
+                subdomains?: any,
+                tileSize?: number
+        }
+        declare interface TileLayerEvent {
+            sender: TileLayer,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+    }
+
+    declare class ChartAxis mixins Observable {
+        options: ChartAxisOptions;
+        range(): any;
+        slot(from: string, to?: string, limit?: boolean): undefined.Rect;
+        slot(from: string, to?: number, limit?: boolean): undefined.Rect;
+        slot(from: string, to?: Date, limit?: boolean): undefined.Rect;
+        slot(from: number, to?: string, limit?: boolean): undefined.Rect;
+        slot(from: number, to?: number, limit?: boolean): undefined.Rect;
+        slot(from: number, to?: Date, limit?: boolean): undefined.Rect;
+        slot(from: Date, to?: string, limit?: boolean): undefined.Rect;
+        slot(from: Date, to?: number, limit?: boolean): undefined.Rect;
+        slot(from: Date, to?: Date, limit?: boolean): undefined.Rect;
+        value(point: undefined.Point): void;
+        valueRange(): void
+    }
+    declare interface ChartAxisOptions {
+        name?: string
+    }
+    declare interface ChartAxisEvent {
+        sender: ChartAxis,
+            preventDefault: Function,
+            isDefaultPrevented(): boolean
+    }
+    declare class ChartPane mixins Observable {
+        options: ChartPaneOptions;
+        chartsVisual: undefined.Group;
+        visual: undefined.Group;
+        series(): any
+    }
+    declare interface ChartPaneOptions {
+        name?: string
+    }
+    declare interface ChartPaneEvent {
+        sender: ChartPane,
+            preventDefault: Function,
+            isDefaultPrevented(): boolean
+    }
+    declare class ChartPlotArea mixins Observable {
+        options: ChartPlotAreaOptions;
+        backgroundVisual: undefined.MultiPath;
+        visual: undefined.Group
+    }
+    declare interface ChartPlotAreaOptions {
+        name?: string
+    }
+    declare interface ChartPlotAreaEvent {
+        sender: ChartPlotArea,
+            preventDefault: Function,
+            isDefaultPrevented(): boolean
+    }
+    declare class ChartPoint mixins Observable {
+        options: ChartPointOptions;
+        category: string | Date | number;
+        dataItem: any;
+        percentage: number;
+        runningTotal: number;
+        total: number;
+        value: number;
+        visual: undefined.Element
+    }
+    declare interface ChartPointOptions {
+        name?: string
+    }
+    declare interface ChartPointEvent {
+        sender: ChartPoint,
+            preventDefault: Function,
+            isDefaultPrevented(): boolean
+    }
+    declare class ChartSeries mixins Observable {
+        options: ChartSeriesOptions;
+        data(): any;
+        data(data: any): void;
+        findPoint(callback: Function): undefined.ChartPoint;
+        points(): any;
+        points(filter: Function): void;
+        toggleHighlight(show: boolean, filter: Function): void;
+        toggleHighlight(show: boolean, filter: any): void;
+        toggleVisibility(show: boolean, filter: Function): void
+    }
+    declare interface ChartSeriesOptions {
+        name?: string
+    }
+    declare interface ChartSeriesEvent {
+        sender: ChartSeries,
+            preventDefault: Function,
+            isDefaultPrevented(): boolean
+    }
+    declare class Navigator mixins kendo$Observable {
+        options: NavigatorOptions;
+        select(): any;
+        select(): void
+    }
+    declare interface NavigatorOptions {
+        name?: string
+    }
+    declare interface NavigatorEvent {
+        sender: Navigator,
+            preventDefault: Function,
+            isDefaultPrevented(): boolean
+    }
+    declare module 'diagram' {
+        declare class Circle mixins Observable {
+            options: CircleOptions;
+            drawingElement: undefined.Circle;
+            constructor(options?: CircleOptions): this;
+            position(): void;
+            position(offset: undefined.Point): void;
+            rotate(angle: number, center: undefined.Point): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface CircleFillGradientStop {
+            offset?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface CircleFillGradient {
+            type?: string,
+                center?: any,
+                radius?: number,
+                start?: any,
+                end?: any,
+                stops?: CircleFillGradientStop[]
+        }
+        declare interface CircleFill {
+            color?: string,
+                opacity?: number,
+                gradient?: CircleFillGradient
+        }
+        declare interface CircleStroke {
+            color?: string,
+                width?: number
+        }
+        declare interface CircleOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface CircleEvent {
+            sender: Circle,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Connection mixins Observable {
+            options: ConnectionOptions;
+            dataItem: any;
+            from: undefined.Shape;
+            sourceConnector: undefined.Connector;
+            targetConnector: undefined.Connector;
+            to: undefined.Shape;
+            constructor(options?: ConnectionOptions): this;
+            source(): any;
+            source(source: undefined.Shape): void;
+            source(source: undefined.Point): void;
+            source(source: undefined.Connector): void;
+            sourcePoint(): undefined.Point;
+            target(): any;
+            target(target: undefined.Shape): void;
+            target(target: undefined.Point): void;
+            target(target: undefined.Connector): void;
+            targetPoint(): undefined.Point;
+            select(value: boolean): void;
+            type(): void;
+            type(value: string): void;
+            points(): any;
+            allPoints(): any;
+            redraw(options?: any): void
+        }
+        declare interface ConnectionContent {
+            color?: string,
+                fontFamily?: string,
+                fontSize?: number,
+                fontStyle?: string,
+                fontWeight?: string,
+                template?: string | Function,
+                text?: string,
+                visual?: Function
+        }
+        declare interface ConnectionEndCapFill {
+            color?: string
+        }
+        declare interface ConnectionEndCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ConnectionEndCap {
+            fill?: ConnectionEndCapFill,
+                stroke?: ConnectionEndCapStroke,
+                type?: string
+        }
+        declare interface ConnectionHoverStroke {
+            color?: string
+        }
+        declare interface ConnectionHover {
+            stroke?: ConnectionHoverStroke
+        }
+        declare interface ConnectionPoint {
+            x?: number,
+                y?: number
+        }
+        declare interface ConnectionStartCapFill {
+            color?: string
+        }
+        declare interface ConnectionStartCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ConnectionStartCap {
+            fill?: ConnectionStartCapFill,
+                stroke?: ConnectionStartCapStroke,
+                type?: string
+        }
+        declare interface ConnectionStroke {
+            color?: string
+        }
+        declare interface ConnectionOptions {
+            name?: string,
+                content?: ConnectionContent,
+                fromConnector?: string,
+                fromX?: number,
+                fromY?: number,
+                stroke?: ConnectionStroke,
+                hover?: ConnectionHover,
+                startCap?: ConnectionStartCap,
+                endCap?: ConnectionEndCap,
+                points?: ConnectionPoint[],
+                selectable?: boolean,
+                toConnector?: string,
+                toX?: number,
+                toY?: number,
+                type?: string
+        }
+        declare interface ConnectionEvent {
+            sender: Connection,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Connector mixins Observable {
+            options: ConnectorOptions;
+            connections: any;
+            shape: undefined.Shape;
+            constructor(options?: ConnectorOptions): this;
+            position(): undefined.Point
+        }
+        declare interface ConnectorFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface ConnectorHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface ConnectorHoverStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ConnectorHover {
+            fill?: ConnectorHoverFill,
+                stroke?: ConnectorHoverStroke
+        }
+        declare interface ConnectorStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ConnectorOptions {
+            name?: string,
+                width?: number,
+                height?: number,
+                hover?: ConnectorHover,
+                fill?: ConnectorFill,
+                stroke?: ConnectorStroke
+        }
+        declare interface ConnectorEvent {
+            sender: Connector,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Group mixins Observable {
+            options: GroupOptions;
+            drawingElement: undefined.Group;
+            constructor(options?: GroupOptions): this;
+            append(element: any): void;
+            clear(): void;
+            remove(element: any): void;
+            position(): void;
+            position(offset: undefined.Point): void;
+            rotate(angle: number, center: undefined.Point): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface GroupOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                opacity?: number,
+                pdf?: undefined.PDFOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface GroupEvent {
+            sender: Group,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Image mixins Observable {
+            options: ImageOptions;
+            drawingElement: undefined.Image;
+            constructor(options?: ImageOptions): this;
+            position(): void;
+            position(offset: undefined.Point): void;
+            rotate(angle: number, center: undefined.Point): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface ImageOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                opacity?: number,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface ImageEvent {
+            sender: Image,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Layout mixins Observable {
+            options: LayoutOptions;
+            drawingElement: undefined.Layout;
+            constructor(rect: undefined.Rect, options?: LayoutOptions): this;
+            append(element: any): void;
+            clear(): void;
+            rect(): undefined.Rect;
+            rect(rect: undefined.Rect): void;
+            reflow(): void;
+            remove(element: any): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface LayoutOptions {
+            name?: string,
+                alignContent?: string,
+                alignItems?: string,
+                justifyContent?: string,
+                lineSpacing?: number,
+                spacing?: number,
+                orientation?: string,
+                wrap?: boolean
+        }
+        declare interface LayoutEvent {
+            sender: kendo$Layout,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Line mixins Observable {
+            options: LineOptions;
+            drawingElement: undefined.Path;
+            constructor(options?: LineOptions): this;
+            position(): void;
+            position(offset: undefined.Point): void;
+            rotate(angle: number, center: undefined.Point): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface LineStroke {
+            color?: string,
+                width?: number
+        }
+        declare interface LineOptions {
+            name?: string,
+                stroke?: LineStroke,
+                from?: any,
+                to?: any
+        }
+        declare interface LineEvent {
+            sender: Line,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Path mixins Observable {
+            options: PathOptions;
+            drawingElement: undefined.Path;
+            constructor(options?: PathOptions): this;
+            data(): string;
+            data(path: string): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface PathEndCapFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface PathEndCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface PathEndCap {
+            fill?: PathEndCapFill,
+                stroke?: PathEndCapStroke,
+                type?: string
+        }
+        declare interface PathFillGradientStop {
+            offset?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface PathFillGradient {
+            type?: string,
+                center?: any,
+                radius?: number,
+                start?: any,
+                end?: any,
+                stops?: PathFillGradientStop[]
+        }
+        declare interface PathFill {
+            color?: string,
+                opacity?: number,
+                gradient?: PathFillGradient
+        }
+        declare interface PathStartCapFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface PathStartCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface PathStartCap {
+            fill?: PathStartCapFill,
+                stroke?: PathStartCapStroke,
+                type?: string
+        }
+        declare interface PathStroke {
+            color?: string,
+                width?: number
+        }
+        declare interface PathOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface PathEvent {
+            sender: Path,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Point mixins Observable {
+            options: PointOptions;
+            x: number;
+            y: number;
+            constructor(x: number, y: number): this
+        }
+        declare interface PointOptions {
+            name?: string
+        }
+        declare interface PointEvent {
+            sender: Point,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Polyline mixins Observable {
+            options: PolylineOptions;
+            drawingElement: undefined.Path;
+            constructor(options?: PolylineOptions): this;
+            points(): any;
+            points(points: any): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface PolylineEndCapFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface PolylineEndCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface PolylineEndCap {
+            fill?: PolylineEndCapFill,
+                stroke?: PolylineEndCapStroke,
+                type?: string
+        }
+        declare interface PolylineFillGradientStop {
+            offset?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface PolylineFillGradient {
+            type?: string,
+                center?: any,
+                radius?: number,
+                start?: any,
+                end?: any,
+                stops?: PolylineFillGradientStop[]
+        }
+        declare interface PolylineFill {
+            color?: string,
+                opacity?: number,
+                gradient?: PolylineFillGradient
+        }
+        declare interface PolylineStartCapFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface PolylineStartCapStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface PolylineStartCap {
+            fill?: PolylineStartCapFill,
+                stroke?: PolylineStartCapStroke,
+                type?: string
+        }
+        declare interface PolylineStroke {
+            color?: string,
+                width?: number
+        }
+        declare interface PolylineOptions {
+            name?: string,
+                endCap?: PolylineEndCap,
+                fill?: PolylineFill,
+                startCap?: PolylineStartCap,
+                stroke?: PolylineStroke
+        }
+        declare interface PolylineEvent {
+            sender: Polyline,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Rect mixins Observable {
+            options: RectOptions;
+            constructor(options?: RectOptions): this;
+            position(): void;
+            position(offset: undefined.Point): void;
+            rotate(angle: number, center: undefined.Point): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface RectOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface RectEvent {
+            sender: Rect,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Rectangle mixins Observable {
+            options: RectangleOptions;
+            drawingElement: undefined.Path;
+            constructor(options?: RectangleOptions): this;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface RectangleFillGradientStop {
+            offset?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface RectangleFillGradient {
+            type?: string,
+                center?: any,
+                radius?: number,
+                start?: any,
+                end?: any,
+                stops?: RectangleFillGradientStop[]
+        }
+        declare interface RectangleFill {
+            color?: string,
+                opacity?: number,
+                gradient?: RectangleFillGradient
+        }
+        declare interface RectangleStroke {
+            color?: string,
+                width?: number
+        }
+        declare interface RectangleOptions {
+            name?: string,
+                fill?: RectangleFill,
+                height?: number,
+                stroke?: RectangleStroke,
+                width?: number,
+                x?: number,
+                y?: number
+        }
+        declare interface RectangleEvent {
+            sender: Rectangle,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Shape mixins Observable {
+            options: ShapeOptions;
+            connectors: any;
+            dataItem: any;
+            shapeVisual: any;
+            visual: undefined.Group;
+            constructor(options?: ShapeOptions): this;
+            position(): void;
+            position(point: undefined.Point): void;
+            clone(): undefined.Shape;
+            select(value: boolean): void;
+            connections(type: string): void;
+            getConnector(): void;
+            getPosition(side: string): void;
+            redraw(options: any): void;
+            redrawVisual(): void
+        }
+        declare interface ShapeConnectorDefaultsFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface ShapeConnectorDefaultsHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface ShapeConnectorDefaultsHoverStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ShapeConnectorDefaultsHover {
+            fill?: ShapeConnectorDefaultsHoverFill,
+                stroke?: ShapeConnectorDefaultsHoverStroke
+        }
+        declare interface ShapeConnectorDefaultsStroke {
+            color?: string,
+                dashType?: string,
+                width?: number
+        }
+        declare interface ShapeConnectorDefaults {
+            width?: number,
+                height?: number,
+                hover?: ShapeConnectorDefaultsHover,
+                fill?: ShapeConnectorDefaultsFill,
+                stroke?: ShapeConnectorDefaultsStroke
+        }
+        declare interface ShapeConnector {
+            name?: string,
+                description?: string,
+                position?: Function
+        }
+        declare interface ShapeContent {
+            align?: string,
+                color?: string,
+                fontFamily?: string,
+                fontSize?: number,
+                fontStyle?: string,
+                fontWeight?: string,
+                text?: string
+        }
+        declare interface ShapeEditable {
+            connect?: boolean
+        }
+        declare interface ShapeFillGradientStop {
+            offset?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface ShapeFillGradient {
+            type?: string,
+                center?: any,
+                radius?: number,
+                start?: any,
+                end?: any,
+                stops?: ShapeFillGradientStop[]
+        }
+        declare interface ShapeFill {
+            color?: string,
+                opacity?: number,
+                gradient?: ShapeFillGradient
+        }
+        declare interface ShapeHoverFill {
+            color?: string,
+                opacity?: number
+        }
+        declare interface ShapeHover {
+            fill?: ShapeHoverFill
+        }
+        declare interface ShapeRotation {
+            angle?: number
+        }
+        declare interface ShapeStroke {
+            color?: string,
+                width?: number,
+                dashType?: string
+        }
+        declare interface ShapeOptions {
+            name?: string,
+                id?: string,
+                editable?: boolean | ShapeEditable,
+                path?: string,
+                stroke?: ShapeStroke,
+                type?: string,
+                x?: number,
+                y?: number,
+                minWidth?: number,
+                minHeight?: number,
+                width?: number,
+                height?: number,
+                fill?: ShapeFill,
+                hover?: ShapeHover,
+                connectors?: ShapeConnector[],
+                rotation?: ShapeRotation,
+                content?: ShapeContent,
+                selectable?: boolean,
+                visual?: Function,
+                connectorDefaults?: ShapeConnectorDefaults
+        }
+        declare interface ShapeEvent {
+            sender: Shape,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class TextBlock mixins Observable {
+            options: TextBlockOptions;
+            drawingElement: undefined.Text;
+            constructor(options?: TextBlockOptions): this;
+            content(): string;
+            content(content: string): void;
+            position(): void;
+            position(offset: undefined.Point): void;
+            rotate(angle: number, center: undefined.Point): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface TextBlockOptions {
+            name?: string,
+                color?: string,
+                fontFamily?: string,
+                fontSize?: number,
+                fontStyle?: string,
+                fontWeight?: string,
+                height?: number,
+                text?: string,
+                width?: number,
+                x?: number,
+                y?: number
+        }
+        declare interface TextBlockEvent {
+            sender: TextBlock,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+    }
+
+    declare module 'drawing' {
+        declare module 'pdf' {
+            declare             function saveAs(
+                group: undefined.Group,
+                fileName: string,
+                proxyUrl?: string,
+                callback?: Function): void
+        }
+
+        declare class Arc mixins undefined.Element {
+            options: ArcOptions;
+            constructor(geometry: undefined.Arc, options?: ArcOptions): this;
+            bbox(): undefined.Rect;
+            clip(): undefined.Path;
+            clip(clip: undefined.Path): void;
+            clippedBBox(): undefined.Rect;
+            containsPoint(point: undefined.Point): boolean;
+            geometry(): undefined.Arc;
+            geometry(value: undefined.Arc): void;
+            fill(color: string, opacity?: number): undefined.Arc;
+            opacity(): number;
+            opacity(opacity: number): void;
+            stroke(color: string, width?: number, opacity?: number): undefined.Arc;
+            transform(): undefined.Transformation;
+            transform(transform: undefined.Transformation): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface ArcOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface ArcEvent {
+            sender: Arc,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Circle mixins undefined.Element {
+            options: CircleOptions;
+            constructor(geometry: undefined.Circle, options?: CircleOptions): this;
+            bbox(): undefined.Rect;
+            clip(): undefined.Path;
+            clip(clip: undefined.Path): void;
+            clippedBBox(): undefined.Rect;
+            containsPoint(point: undefined.Point): boolean;
+            geometry(): undefined.Circle;
+            geometry(value: undefined.Circle): void;
+            fill(color: string, opacity?: number): undefined.Circle;
+            opacity(): number;
+            opacity(opacity: number): void;
+            stroke(color: string, width?: number, opacity?: number): undefined.Circle;
+            transform(): undefined.Transformation;
+            transform(transform: undefined.Transformation): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface CircleOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface CircleEvent {
+            sender: Circle,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Element mixins kendo$Class {
+            options: ElementOptions;
+            parent: undefined.Group;
+            constructor(options?: ElementOptions): this;
+            bbox(): undefined.Rect;
+            clip(): undefined.Path;
+            clip(clip: undefined.Path): void;
+            clippedBBox(): undefined.Rect;
+            containsPoint(point: undefined.Point): boolean;
+            opacity(): number;
+            opacity(opacity: number): void;
+            transform(): undefined.Transformation;
+            transform(transform: undefined.Transformation): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface ElementOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                opacity?: number,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface ElementEvent {
+            sender: Element,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare interface FillOptions {
+            color?: string,
+                opacity?: number
+        }
+        declare class Gradient mixins kendo$Class {
+            options: GradientOptions;
+            stops: any;
+            constructor(options?: GradientOptions): this;
+            addStop(offset: number, color: string, opacity: number): undefined.GradientStop;
+            removeStop(stop: undefined.GradientStop): void
+        }
+        declare interface GradientOptions {
+            name?: string,
+                stops?: any
+        }
+        declare interface GradientEvent {
+            sender: Gradient,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class GradientStop mixins kendo$Class {
+            options: GradientStopOptions;
+            constructor(options?: GradientStopOptions): this
+        }
+        declare interface GradientStopOptions {
+            name?: string,
+                offset?: number,
+                color?: string,
+                opacity?: number
+        }
+        declare interface GradientStopEvent {
+            sender: GradientStop,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Group mixins undefined.Element {
+            options: GroupOptions;
+            children: any;
+            constructor(options?: GroupOptions): this;
+            append(element: undefined.Element): void;
+            clear(): void;
+            clip(): undefined.Path;
+            clip(clip: undefined.Path): void;
+            clippedBBox(): undefined.Rect;
+            containsPoint(point: undefined.Point): boolean;
+            insert(position: number, element: undefined.Element): void;
+            opacity(): number;
+            opacity(opacity: number): void;
+            remove(element: undefined.Element): void;
+            removeAt(index: number): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface GroupOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                opacity?: number,
+                pdf?: undefined.PDFOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface GroupEvent {
+            sender: Group,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Image mixins undefined.Element {
+            options: ImageOptions;
+            constructor(src: string, rect: undefined.Rect): this;
+            bbox(): undefined.Rect;
+            clip(): undefined.Path;
+            clip(clip: undefined.Path): void;
+            clippedBBox(): undefined.Rect;
+            containsPoint(point: undefined.Point): boolean;
+            opacity(): number;
+            opacity(opacity: number): void;
+            src(): string;
+            src(value: string): void;
+            rect(): undefined.Rect;
+            rect(value: undefined.Rect): void;
+            transform(): undefined.Transformation;
+            transform(transform: undefined.Transformation): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface ImageOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                opacity?: number,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface ImageEvent {
+            sender: Image,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Layout mixins undefined.Group {
+            options: LayoutOptions;
+            constructor(rect: undefined.Rect, options?: LayoutOptions): this;
+            rect(): undefined.Rect;
+            rect(rect: undefined.Rect): void;
+            reflow(): void
+        }
+        declare interface LayoutOptions {
+            name?: string,
+                alignContent?: string,
+                alignItems?: string,
+                justifyContent?: string,
+                lineSpacing?: number,
+                spacing?: number,
+                orientation?: string,
+                wrap?: boolean
+        }
+        declare interface LayoutEvent {
+            sender: kendo$Layout,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class LinearGradient mixins undefined.Gradient {
+            options: LinearGradientOptions;
+            stops: any;
+            constructor(options?: LinearGradientOptions): this;
+            addStop(offset: number, color: string, opacity: number): undefined.GradientStop;
+            end(): undefined.Point;
+            end(end: any): void;
+            end(end: undefined.Point): void;
+            start(): undefined.Point;
+            start(start: any): void;
+            start(start: undefined.Point): void;
+            removeStop(stop: undefined.GradientStop): void
+        }
+        declare interface LinearGradientOptions {
+            name?: string,
+                stops?: any
+        }
+        declare interface LinearGradientEvent {
+            sender: LinearGradient,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class MultiPath mixins undefined.Element {
+            options: MultiPathOptions;
+            paths: any;
+            constructor(options?: MultiPathOptions): this;
+            bbox(): undefined.Rect;
+            clip(): undefined.Path;
+            clip(clip: undefined.Path): void;
+            clippedBBox(): undefined.Rect;
+            close(): undefined.MultiPath;
+            containsPoint(point: undefined.Point): boolean;
+            curveTo(controlOut: any, controlIn: any, endPoint: any): undefined.MultiPath;
+            curveTo(
+                controlOut: any,
+                controlIn: any,
+                endPoint: undefined.Point): undefined.MultiPath;
+            curveTo(
+                controlOut: any,
+                controlIn: undefined.Point,
+                endPoint: any): undefined.MultiPath;
+            curveTo(
+                controlOut: any,
+                controlIn: undefined.Point,
+                endPoint: undefined.Point): undefined.MultiPath;
+            curveTo(
+                controlOut: undefined.Point,
+                controlIn: any,
+                endPoint: any): undefined.MultiPath;
+            curveTo(
+                controlOut: undefined.Point,
+                controlIn: any,
+                endPoint: undefined.Point): undefined.MultiPath;
+            curveTo(
+                controlOut: undefined.Point,
+                controlIn: undefined.Point,
+                endPoint: any): undefined.MultiPath;
+            curveTo(
+                controlOut: undefined.Point,
+                controlIn: undefined.Point,
+                endPoint: undefined.Point): undefined.MultiPath;
+            fill(color: string, opacity?: number): undefined.MultiPath;
+            lineTo(x: number, y?: number): undefined.MultiPath;
+            lineTo(x: any, y?: number): undefined.MultiPath;
+            lineTo(x: undefined.Point, y?: number): undefined.MultiPath;
+            moveTo(x: number, y?: number): undefined.MultiPath;
+            moveTo(x: any, y?: number): undefined.MultiPath;
+            moveTo(x: undefined.Point, y?: number): undefined.MultiPath;
+            opacity(): number;
+            opacity(opacity: number): void;
+            stroke(color: string, width?: number, opacity?: number): undefined.MultiPath;
+            transform(): undefined.Transformation;
+            transform(transform: undefined.Transformation): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface MultiPathOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface MultiPathEvent {
+            sender: MultiPath,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class OptionsStore mixins kendo$Class {
+            options: OptionsStoreOptions;
+            observer: any;
+            constructor(options?: OptionsStoreOptions): this;
+            get(field: string): any;
+            set(field: string, value: any): void
+        }
+        declare interface OptionsStoreOptions {
+            name?: string
+        }
+        declare interface OptionsStoreEvent {
+            sender: OptionsStore,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare interface PDFOptions {
+            creator?: string,
+                date?: Date,
+                keywords?: string,
+                landscape?: boolean,
+                margin?: any,
+                paperSize?: any,
+                subject?: string,
+                title?: string
+        }
+        declare class Path mixins undefined.Element {
+            options: PathOptions;
+            segments: any;
+            constructor(options?: PathOptions): this;
+            fromPoints(points: any): undefined.Path;
+            fromRect(rect: undefined.Rect): undefined.Path;
+            parse(svgPath: string, options?: any): undefined.Path;
+            bbox(): undefined.Rect;
+            clip(): undefined.Path;
+            clip(clip: undefined.Path): void;
+            clippedBBox(): undefined.Rect;
+            close(): undefined.Path;
+            containsPoint(point: undefined.Point): boolean;
+            curveTo(controlOut: any, controlIn: any, endPoint: any): undefined.Path;
+            curveTo(controlOut: any, controlIn: any, endPoint: undefined.Point): undefined.Path;
+            curveTo(controlOut: any, controlIn: undefined.Point, endPoint: any): undefined.Path;
+            curveTo(
+                controlOut: any,
+                controlIn: undefined.Point,
+                endPoint: undefined.Point): undefined.Path;
+            curveTo(controlOut: undefined.Point, controlIn: any, endPoint: any): undefined.Path;
+            curveTo(
+                controlOut: undefined.Point,
+                controlIn: any,
+                endPoint: undefined.Point): undefined.Path;
+            curveTo(
+                controlOut: undefined.Point,
+                controlIn: undefined.Point,
+                endPoint: any): undefined.Path;
+            curveTo(
+                controlOut: undefined.Point,
+                controlIn: undefined.Point,
+                endPoint: undefined.Point): undefined.Path;
+            fill(color: string, opacity?: number): undefined.Path;
+            lineTo(x: number, y?: number): undefined.Path;
+            lineTo(x: any, y?: number): undefined.Path;
+            lineTo(x: undefined.Point, y?: number): undefined.Path;
+            moveTo(x: number, y?: number): undefined.Path;
+            moveTo(x: any, y?: number): undefined.Path;
+            moveTo(x: undefined.Point, y?: number): undefined.Path;
+            opacity(): number;
+            opacity(opacity: number): void;
+            stroke(color: string, width?: number, opacity?: number): undefined.Path;
+            transform(): undefined.Transformation;
+            transform(transform: undefined.Transformation): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface PathOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface PathEvent {
+            sender: Path,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class RadialGradient mixins undefined.Gradient {
+            options: RadialGradientOptions;
+            stops: any;
+            constructor(options?: RadialGradientOptions): this;
+            addStop(offset: number, color: string, opacity: number): undefined.GradientStop;
+            center(): undefined.Point;
+            center(center: any): void;
+            center(center: undefined.Point): void;
+            radius(): number;
+            radius(value: number): void;
+            removeStop(stop: undefined.GradientStop): void
+        }
+        declare interface RadialGradientOptions {
+            name?: string,
+                center?: any | undefined.Point,
+                radius?: number,
+                stops?: any
+        }
+        declare interface RadialGradientEvent {
+            sender: RadialGradient,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Rect mixins undefined.Element {
+            options: RectOptions;
+            constructor(geometry: undefined.Rect, options?: RectOptions): this;
+            bbox(): undefined.Rect;
+            clip(): undefined.Path;
+            clip(clip: undefined.Path): void;
+            clippedBBox(): undefined.Rect;
+            containsPoint(point: undefined.Point): boolean;
+            geometry(): undefined.Rect;
+            geometry(value: undefined.Rect): void;
+            fill(color: string, opacity?: number): undefined.Rect;
+            opacity(): number;
+            opacity(opacity: number): void;
+            stroke(color: string, width?: number, opacity?: number): undefined.Rect;
+            transform(): undefined.Transformation;
+            transform(transform: undefined.Transformation): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface RectOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface RectEvent {
+            sender: Rect,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Segment mixins kendo$Class {
+            options: SegmentOptions;
+            constructor(anchor: undefined.Point, controlIn: undefined.Point, controlOut: undefined.Point): this;
+            anchor(): undefined.Point;
+            anchor(value: undefined.Point): void;
+            controlIn(): undefined.Point;
+            controlIn(value: undefined.Point): void;
+            controlOut(): undefined.Point;
+            controlOut(value: undefined.Point): void
+        }
+        declare interface SegmentOptions {
+            name?: string
+        }
+        declare interface SegmentEvent {
+            sender: Segment,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare interface StrokeOptions {
+            color?: string,
+                dashType?: string,
+                lineCap?: string,
+                lineJoin?: string,
+                opacity?: number,
+                width?: number
+        }
+        declare class Surface mixins kendo$Observable {
+            options: SurfaceOptions;
+            constructor(options?: SurfaceOptions): this;
+            create(element: JQuery, options?: any): undefined.Surface;
+            create(element: Element, options?: any): undefined.Surface;
+            clear(): void;
+            draw(element: undefined.Element): void;
+            eventTarget(e: any): undefined.Element;
+            hideTooltip(): void;
+            resize(force?: boolean): void;
+            showTooltip(element: undefined.Element, options?: any): void
+        }
+        declare interface SurfaceTooltipAnimationClose {
+            effects?: string,
+                duration?: number
+        }
+        declare interface SurfaceTooltipAnimationOpen {
+            effects?: string,
+                duration?: number
+        }
+        declare interface SurfaceTooltipAnimation {
+            close?: SurfaceTooltipAnimationClose,
+                open?: SurfaceTooltipAnimationOpen
+        }
+        declare interface SurfaceTooltip {
+            animation?: boolean | SurfaceTooltipAnimation,
+                appendTo?: string | JQuery
+        }
+        declare interface SurfaceOptions {
+            name?: string,
+                type?: string,
+                height?: string,
+                width?: string,
+                tooltip?: SurfaceTooltip,
+                click(e: SurfaceClickEvent): void,
+                mouseenter(e: SurfaceMouseenterEvent): void,
+                mouseleave(e: SurfaceMouseleaveEvent): void,
+                tooltipClose(e: SurfaceTooltipCloseEvent): void,
+                tooltipOpen(e: SurfaceTooltipOpenEvent): void
+        }
+        declare interface SurfaceEvent {
+            sender: Surface,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare type SurfaceClickEvent = {
+            element?: undefined.Element,
+            originalEvent?: any
+        } & SurfaceEvent
+
+        declare type SurfaceMouseenterEvent = {
+            element?: undefined.Element,
+            originalEvent?: any
+        } & SurfaceEvent
+
+        declare type SurfaceMouseleaveEvent = {
+            element?: undefined.Element,
+            originalEvent?: any
+        } & SurfaceEvent
+
+        declare type SurfaceTooltipCloseEvent = {
+            element?: undefined.Element,
+            target?: undefined.Element
+        } & SurfaceEvent
+
+        declare type SurfaceTooltipOpenEvent = {
+            element?: undefined.Element,
+            target?: undefined.Element
+        } & SurfaceEvent
+
+        declare class Text mixins undefined.Element {
+            options: TextOptions;
+            constructor(content: string, position: undefined.Point, options?: TextOptions): this;
+            bbox(): undefined.Rect;
+            clip(): undefined.Path;
+            clip(clip: undefined.Path): void;
+            clippedBBox(): undefined.Rect;
+            containsPoint(point: undefined.Point): boolean;
+            content(): string;
+            content(value: string): void;
+            fill(color: string, opacity?: number): undefined.Text;
+            opacity(): number;
+            opacity(opacity: number): void;
+            position(): undefined.Point;
+            position(value: undefined.Point): void;
+            stroke(color: string, width?: number, opacity?: number): undefined.Text;
+            transform(): undefined.Transformation;
+            transform(transform: undefined.Transformation): void;
+            visible(): boolean;
+            visible(visible: boolean): void
+        }
+        declare interface TextOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                font?: string,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface TextEvent {
+            sender: Text,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare interface TooltipOptions {
+            name?: string,
+                autoHide?: boolean,
+                animation?: boolean | TooltipAnimation,
+                content?: TooltipContent,
+                callout?: boolean,
+                filter?: string,
+                iframe?: boolean,
+                height?: number,
+                width?: number,
+                position?: string,
+                showAfter?: number,
+                showOn?: string,
+                contentLoad(e: TooltipEvent): void,
+                show(e: TooltipEvent): void,
+                hide(e: TooltipEvent): void,
+                requestStart(e: TooltipRequestStartEvent): void,
+                error(e: TooltipErrorEvent): void
+        }
+    }
+
+    declare module 'geometry' {
+        declare class Arc mixins Observable {
+            options: ArcOptions;
+            anticlockwise: boolean;
+            center: undefined.Point;
+            endAngle: number;
+            radiusX: number;
+            radiusY: number;
+            startAngle: number;
+            constructor(center: any | undefined.Point, options?: ArcOptions): this;
+            bbox(matrix: undefined.Matrix): undefined.Rect;
+            getAnticlockwise(): boolean;
+            getCenter(): undefined.Point;
+            getEndAngle(): number;
+            getRadiusX(): number;
+            getRadiusY(): number;
+            getStartAngle(): number;
+            pointAt(angle: number): undefined.Point;
+            setAnticlockwise(value: boolean): undefined.Arc;
+            setCenter(value: undefined.Point): undefined.Arc;
+            setEndAngle(value: number): undefined.Arc;
+            setRadiusX(value: number): undefined.Arc;
+            setRadiusY(value: number): undefined.Arc;
+            setStartAngle(value: number): undefined.Arc
+        }
+        declare interface ArcOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface ArcEvent {
+            sender: Arc,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Circle mixins Observable {
+            options: CircleOptions;
+            center: undefined.Point;
+            radius: number;
+            constructor(center: any | undefined.Point, radius: number): this;
+            bbox(matrix: undefined.Matrix): undefined.Rect;
+            clone(): undefined.Circle;
+            equals(other: undefined.Circle): boolean;
+            getCenter(): undefined.Point;
+            getRadius(): number;
+            pointAt(angle: number): undefined.Point;
+            setCenter(value: undefined.Point): undefined.Point;
+            setCenter(value: any): undefined.Point;
+            setRadius(value: number): undefined.Circle
+        }
+        declare interface CircleOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface CircleEvent {
+            sender: Circle,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Matrix mixins Observable {
+            options: MatrixOptions;
+            a: number;
+            b: number;
+            c: number;
+            d: number;
+            e: number;
+            f: number;
+            rotate(angle: number, x: number, y: number): undefined.Matrix;
+            scale(scaleX: number, scaleY: number): undefined.Matrix;
+            translate(x: number, y: number): undefined.Matrix;
+            unit(): undefined.Matrix;
+            clone(): undefined.Matrix;
+            equals(other: undefined.Matrix): boolean;
+            round(digits: number): undefined.Matrix;
+            multiplyCopy(matrix: undefined.Matrix): undefined.Matrix;
+            toArray(digits: number): any;
+            toString(digits: number, separator: string): string
+        }
+        declare interface MatrixOptions {
+            name?: string
+        }
+        declare interface MatrixEvent {
+            sender: Matrix,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Point mixins Observable {
+            options: PointOptions;
+            x: number;
+            y: number;
+            constructor(x: number, y: number): this;
+            create(x: number, y: number): undefined.Point;
+            create(x: any, y: number): undefined.Point;
+            create(x: undefined.Point, y: number): undefined.Point;
+            min(): undefined.Point;
+            max(): undefined.Point;
+            minPoint(): undefined.Point;
+            maxPoint(): undefined.Point;
+            clone(): undefined.Point;
+            distanceTo(point: undefined.Point): number;
+            equals(other: undefined.Point): boolean;
+            getX(): number;
+            getY(): number;
+            move(x: number, y: number): undefined.Point;
+            rotate(angle: number, center: undefined.Point): undefined.Point;
+            rotate(angle: number, center: any): undefined.Point;
+            round(digits: number): undefined.Point;
+            scale(scaleX: number, scaleY: number): undefined.Point;
+            scaleCopy(scaleX: number, scaleY: number): undefined.Point;
+            setX(value: number): undefined.Point;
+            setY(value: number): undefined.Point;
+            toArray(digits: number): any;
+            toString(digits: number, separator: string): string;
+            transform(tansformation: undefined.Transformation): undefined.Point;
+            transformCopy(tansformation: undefined.Transformation): undefined.Point;
+            translate(dx: number, dy: number): undefined.Point;
+            translateWith(vector: undefined.Point): undefined.Point;
+            translateWith(vector: any): undefined.Point
+        }
+        declare interface PointOptions {
+            name?: string
+        }
+        declare interface PointEvent {
+            sender: Point,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Rect mixins Observable {
+            options: RectOptions;
+            origin: undefined.Point;
+            size: undefined.Size;
+            constructor(origin: undefined.Point | any, size: undefined.Size | any): this;
+            fromPoints(pointA: undefined.Point, pointB: undefined.Point): undefined.Rect;
+            union(rectA: undefined.Rect, rectB: undefined.Rect): undefined.Rect;
+            bbox(matrix: undefined.Matrix): undefined.Rect;
+            bottomLeft(): undefined.Point;
+            bottomRight(): undefined.Point;
+            center(): undefined.Point;
+            clone(): undefined.Rect;
+            equals(other: undefined.Rect): boolean;
+            getOrigin(): undefined.Point;
+            getSize(): undefined.Size;
+            height(): number;
+            setOrigin(value: undefined.Point): undefined.Rect;
+            setOrigin(value: any): undefined.Rect;
+            setSize(value: undefined.Size): undefined.Rect;
+            setSize(value: any): undefined.Rect;
+            topLeft(): undefined.Point;
+            topRight(): undefined.Point;
+            width(): number
+        }
+        declare interface RectOptions {
+            name?: string,
+                clip?: undefined.Path,
+                cursor?: string,
+                fill?: undefined.FillOptions,
+                opacity?: number,
+                stroke?: undefined.StrokeOptions,
+                tooltip?: undefined.TooltipOptions,
+                transform?: undefined.Transformation,
+                visible?: boolean
+        }
+        declare interface RectEvent {
+            sender: Rect,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Size mixins Observable {
+            options: SizeOptions;
+            width: number;
+            height: number;
+            create(width: number, height: number): undefined.Size;
+            create(width: any, height: number): undefined.Size;
+            create(width: undefined.Size, height: number): undefined.Size;
+            clone(): undefined.Size;
+            equals(other: undefined.Size): boolean;
+            getWidth(): number;
+            getHeight(): number;
+            setWidth(value: number): undefined.Size;
+            setHeight(value: number): undefined.Size
+        }
+        declare interface SizeOptions {
+            name?: string
+        }
+        declare interface SizeEvent {
+            sender: Size,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+        declare class Transformation mixins Observable {
+            options: TransformationOptions;
+            clone(): undefined.Transformation;
+            equals(other: undefined.Transformation): boolean;
+            matrix(): undefined.Matrix;
+            multiply(transformation: undefined.Transformation): undefined.Transformation;
+            rotate(angle: number, center: any): undefined.Transformation;
+            rotate(angle: number, center: undefined.Point): undefined.Transformation;
+            scale(scaleX: number, scaleY: number): undefined.Transformation;
+            translate(x: number, y: number): undefined.Transformation
+        }
+        declare interface TransformationOptions {
+            name?: string
+        }
+        declare interface TransformationEvent {
+            sender: Transformation,
+                preventDefault: Function,
+                isDefaultPrevented(): boolean
+        }
+    }
+
 }
-
-declare module 'diagram' {
-		declare interface CircleFillGradientStop {
-		offset?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface CircleFillGradient {
-		type?: string,
-		center?: any,
-		radius?: number,
-		start?: any,
-		end?: any,
-		stops?: CircleFillGradientStop[]
-	}
-
-	declare interface CircleFill {
-		color?: string,
-		opacity?: number,
-		gradient?: CircleFillGradient
-	}
-
-	declare interface CircleStroke {
-		color?: string,
-		width?: number
-	}
-
-	declare interface CircleOptions {
-		name?: string,
-		fill?: CircleFill,
-		stroke?: CircleStroke,
-		center?: any,
-		radius?: number
-	}
-
-	declare interface CircleEvent {
-		sender: Circle,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ConnectionContent {
-		color?: string,
-		fontFamily?: string,
-		fontSize?: number,
-		fontStyle?: string,
-		fontWeight?: string,
-		template?: string | Function,
-		text?: string,
-		visual?: Function
-	}
-
-	declare interface ConnectionEndCapFill {
-		color?: string
-	}
-
-	declare interface ConnectionEndCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ConnectionEndCap {
-		fill?: ConnectionEndCapFill,
-		stroke?: ConnectionEndCapStroke,
-		type?: string
-	}
-
-	declare interface ConnectionHoverStroke {
-		color?: string
-	}
-
-	declare interface ConnectionHover {
-		stroke?: ConnectionHoverStroke
-	}
-
-	declare interface ConnectionPoint {
-		x?: number,
-		y?: number
-	}
-
-	declare interface ConnectionStartCapFill {
-		color?: string
-	}
-
-	declare interface ConnectionStartCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ConnectionStartCap {
-		fill?: ConnectionStartCapFill,
-		stroke?: ConnectionStartCapStroke,
-		type?: string
-	}
-
-	declare interface ConnectionStroke {
-		color?: string
-	}
-
-	declare interface ConnectionOptions {
-		name?: string,
-		content?: ConnectionContent,
-		fromConnector?: string,
-		fromX?: number,
-		fromY?: number,
-		stroke?: ConnectionStroke,
-		hover?: ConnectionHover,
-		startCap?: ConnectionStartCap,
-		endCap?: ConnectionEndCap,
-		points?: ConnectionPoint[],
-		selectable?: boolean,
-		toConnector?: string,
-		toX?: number,
-		toY?: number,
-		type?: string
-	}
-
-	declare interface ConnectionEvent {
-		sender: Connection,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ConnectorFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface ConnectorHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface ConnectorHoverStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ConnectorHover {
-		fill?: ConnectorHoverFill,
-		stroke?: ConnectorHoverStroke
-	}
-
-	declare interface ConnectorStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ConnectorOptions {
-		name?: string,
-		width?: number,
-		height?: number,
-		hover?: ConnectorHover,
-		fill?: ConnectorFill,
-		stroke?: ConnectorStroke
-	}
-
-	declare interface ConnectorEvent {
-		sender: Connector,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface GroupOptions {
-		name?: string,
-		x?: number,
-		y?: number
-	}
-
-	declare interface GroupEvent {
-		sender: Group,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ImageOptions {
-		name?: string,
-		height?: number,
-		width?: number,
-		x?: number,
-		y?: number,
-		source?: string
-	}
-
-	declare interface ImageEvent {
-		sender: Image,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface LayoutOptions {
-		name?: string,
-		alignContent?: string,
-		alignItems?: string,
-		justifyContent?: string,
-		lineSpacing?: number,
-		spacing?: number,
-		orientation?: string,
-		wrap?: boolean
-	}
-
-	declare interface LayoutEvent {
-		sender: Layout,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface LineStroke {
-		color?: string,
-		width?: number
-	}
-
-	declare interface LineOptions {
-		name?: string,
-		stroke?: LineStroke,
-		from?: any,
-		to?: any
-	}
-
-	declare interface LineEvent {
-		sender: Line,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PathEndCapFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface PathEndCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface PathEndCap {
-		fill?: PathEndCapFill,
-		stroke?: PathEndCapStroke,
-		type?: string
-	}
-
-	declare interface PathFillGradientStop {
-		offset?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface PathFillGradient {
-		type?: string,
-		center?: any,
-		radius?: number,
-		start?: any,
-		end?: any,
-		stops?: PathFillGradientStop[]
-	}
-
-	declare interface PathFill {
-		color?: string,
-		opacity?: number,
-		gradient?: PathFillGradient
-	}
-
-	declare interface PathStartCapFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface PathStartCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface PathStartCap {
-		fill?: PathStartCapFill,
-		stroke?: PathStartCapStroke,
-		type?: string
-	}
-
-	declare interface PathStroke {
-		color?: string,
-		width?: number
-	}
-
-	declare interface PathOptions {
-		name?: string,
-		data?: string,
-		endCap?: PathEndCap,
-		fill?: PathFill,
-		height?: number,
-		startCap?: PathStartCap,
-		stroke?: PathStroke,
-		width?: number,
-		x?: number,
-		y?: number
-	}
-
-	declare interface PathEvent {
-		sender: Path,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PointOptions {
-		name?: string
-	}
-
-	declare interface PointEvent {
-		sender: Point,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface PolylineEndCapFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface PolylineEndCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface PolylineEndCap {
-		fill?: PolylineEndCapFill,
-		stroke?: PolylineEndCapStroke,
-		type?: string
-	}
-
-	declare interface PolylineFillGradientStop {
-		offset?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface PolylineFillGradient {
-		type?: string,
-		center?: any,
-		radius?: number,
-		start?: any,
-		end?: any,
-		stops?: PolylineFillGradientStop[]
-	}
-
-	declare interface PolylineFill {
-		color?: string,
-		opacity?: number,
-		gradient?: PolylineFillGradient
-	}
-
-	declare interface PolylineStartCapFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface PolylineStartCapStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface PolylineStartCap {
-		fill?: PolylineStartCapFill,
-		stroke?: PolylineStartCapStroke,
-		type?: string
-	}
-
-	declare interface PolylineStroke {
-		color?: string,
-		width?: number
-	}
-
-	declare interface PolylineOptions {
-		name?: string,
-		endCap?: PolylineEndCap,
-		fill?: PolylineFill,
-		startCap?: PolylineStartCap,
-		stroke?: PolylineStroke
-	}
-
-	declare interface PolylineEvent {
-		sender: Polyline,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RectOptions {
-		name?: string,
-		height?: number,
-		width?: number,
-		x?: number,
-		y?: number
-	}
-
-	declare interface RectEvent {
-		sender: Rect,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RectangleFillGradientStop {
-		offset?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface RectangleFillGradient {
-		type?: string,
-		center?: any,
-		radius?: number,
-		start?: any,
-		end?: any,
-		stops?: RectangleFillGradientStop[]
-	}
-
-	declare interface RectangleFill {
-		color?: string,
-		opacity?: number,
-		gradient?: RectangleFillGradient
-	}
-
-	declare interface RectangleStroke {
-		color?: string,
-		width?: number
-	}
-
-	declare interface RectangleOptions {
-		name?: string,
-		fill?: RectangleFill,
-		height?: number,
-		stroke?: RectangleStroke,
-		width?: number,
-		x?: number,
-		y?: number
-	}
-
-	declare interface RectangleEvent {
-		sender: Rectangle,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ShapeConnectorDefaultsFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface ShapeConnectorDefaultsHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface ShapeConnectorDefaultsHoverStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ShapeConnectorDefaultsHover {
-		fill?: ShapeConnectorDefaultsHoverFill,
-		stroke?: ShapeConnectorDefaultsHoverStroke
-	}
-
-	declare interface ShapeConnectorDefaultsStroke {
-		color?: string,
-		dashType?: string,
-		width?: number
-	}
-
-	declare interface ShapeConnectorDefaults {
-		width?: number,
-		height?: number,
-		hover?: ShapeConnectorDefaultsHover,
-		fill?: ShapeConnectorDefaultsFill,
-		stroke?: ShapeConnectorDefaultsStroke
-	}
-
-	declare interface ShapeConnector {
-		name?: string,
-		description?: string,
-		position?: Function
-	}
-
-	declare interface ShapeContent {
-		align?: string,
-		color?: string,
-		fontFamily?: string,
-		fontSize?: number,
-		fontStyle?: string,
-		fontWeight?: string,
-		text?: string
-	}
-
-	declare interface ShapeEditable {
-		connect?: boolean
-	}
-
-	declare interface ShapeFillGradientStop {
-		offset?: number,
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface ShapeFillGradient {
-		type?: string,
-		center?: any,
-		radius?: number,
-		start?: any,
-		end?: any,
-		stops?: ShapeFillGradientStop[]
-	}
-
-	declare interface ShapeFill {
-		color?: string,
-		opacity?: number,
-		gradient?: ShapeFillGradient
-	}
-
-	declare interface ShapeHoverFill {
-		color?: string,
-		opacity?: number
-	}
-
-	declare interface ShapeHover {
-		fill?: ShapeHoverFill
-	}
-
-	declare interface ShapeRotation {
-		angle?: number
-	}
-
-	declare interface ShapeStroke {
-		color?: string,
-		width?: number,
-		dashType?: string
-	}
-
-	declare interface ShapeOptions {
-		name?: string,
-		id?: string,
-		editable?: boolean | ShapeEditable,
-		path?: string,
-		stroke?: ShapeStroke,
-		type?: string,
-		x?: number,
-		y?: number,
-		minWidth?: number,
-		minHeight?: number,
-		width?: number,
-		height?: number,
-		fill?: ShapeFill,
-		hover?: ShapeHover,
-		connectors?: ShapeConnector[],
-		rotation?: ShapeRotation,
-		content?: ShapeContent,
-		selectable?: boolean,
-		visual?: Function,
-		connectorDefaults?: ShapeConnectorDefaults
-	}
-
-	declare interface ShapeEvent {
-		sender: Shape,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface TextBlockOptions {
-		name?: string,
-		color?: string,
-		fontFamily?: string,
-		fontSize?: number,
-		fontStyle?: string,
-		fontWeight?: string,
-		height?: number,
-		text?: string,
-		width?: number,
-		x?: number,
-		y?: number
-	}
-
-	declare interface TextBlockEvent {
-		sender: TextBlock,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-		declare class Circle extends Observable {
-		options: CircleOptions;
-		drawingElement: kendo.drawing.Circle;
-		constructor(options?: CircleOptions): this;
-		position(): void;
-		position(offset: kendo.dataviz.diagram.Point): void;
-		rotate(angle: number, center: kendo.dataviz.diagram.Point): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Connection extends Observable {
-		options: ConnectionOptions;
-		dataItem: any;
-		from: kendo.dataviz.diagram.Shape;
-		sourceConnector: kendo.dataviz.diagram.Connector;
-		targetConnector: kendo.dataviz.diagram.Connector;
-		to: kendo.dataviz.diagram.Shape;
-		constructor(options?: ConnectionOptions): this;
-		source(): any;
-		source(source: kendo.dataviz.diagram.Shape): void;
-		source(source: kendo.dataviz.diagram.Point): void;
-		source(source: kendo.dataviz.diagram.Connector): void;
-		sourcePoint(): kendo.dataviz.diagram.Point;
-		target(): any;
-		target(target: kendo.dataviz.diagram.Shape): void;
-		target(target: kendo.dataviz.diagram.Point): void;
-		target(target: kendo.dataviz.diagram.Connector): void;
-		targetPoint(): kendo.dataviz.diagram.Point;
-		select(value: boolean): void;
-		type(): void;
-		type(value: string): void;
-		points(): any;
-		allPoints(): any;
-		redraw(options?: any): void
-	}
-
-	declare class Connector extends Observable {
-		options: ConnectorOptions;
-		connections: any;
-		shape: kendo.dataviz.diagram.Shape;
-		constructor(options?: ConnectorOptions): this;
-		position(): kendo.dataviz.diagram.Point
-	}
-
-	declare class Group extends Observable {
-		options: GroupOptions;
-		drawingElement: kendo.drawing.Group;
-		constructor(options?: GroupOptions): this;
-		append(element: any): void;
-		clear(): void;
-		remove(element: any): void;
-		position(): void;
-		position(offset: kendo.dataviz.diagram.Point): void;
-		rotate(angle: number, center: kendo.dataviz.diagram.Point): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Image extends Observable {
-		options: ImageOptions;
-		drawingElement: kendo.drawing.Image;
-		constructor(options?: ImageOptions): this;
-		position(): void;
-		position(offset: kendo.dataviz.diagram.Point): void;
-		rotate(angle: number, center: kendo.dataviz.diagram.Point): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Layout extends Observable {
-		options: LayoutOptions;
-		drawingElement: kendo.drawing.Layout;
-		constructor(rect: kendo.dataviz.diagram.Rect, options?: LayoutOptions): this;
-		append(element: any): void;
-		clear(): void;
-		rect(): kendo.dataviz.diagram.Rect;
-		rect(rect: kendo.dataviz.diagram.Rect): void;
-		reflow(): void;
-		remove(element: any): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Line extends Observable {
-		options: LineOptions;
-		drawingElement: kendo.drawing.Path;
-		constructor(options?: LineOptions): this;
-		position(): void;
-		position(offset: kendo.dataviz.diagram.Point): void;
-		rotate(angle: number, center: kendo.dataviz.diagram.Point): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Path extends Observable {
-		options: PathOptions;
-		drawingElement: kendo.drawing.Path;
-		constructor(options?: PathOptions): this;
-		data(): string;
-		data(path: string): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Point extends Observable {
-		options: PointOptions;
-		x: number;
-		y: number;
-		constructor(x: number, y: number): this
-	}
-
-	declare class Polyline extends Observable {
-		options: PolylineOptions;
-		drawingElement: kendo.drawing.Path;
-		constructor(options?: PolylineOptions): this;
-		points(): any;
-		points(points: any): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Rect extends Observable {
-		options: RectOptions;
-		constructor(options?: RectOptions): this;
-		position(): void;
-		position(offset: kendo.dataviz.diagram.Point): void;
-		rotate(angle: number, center: kendo.dataviz.diagram.Point): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Rectangle extends Observable {
-		options: RectangleOptions;
-		drawingElement: kendo.drawing.Path;
-		constructor(options?: RectangleOptions): this;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	declare class Shape extends Observable {
-		options: ShapeOptions;
-		connectors: any;
-		dataItem: any;
-		shapeVisual: any;
-		visual: kendo.dataviz.diagram.Group;
-		constructor(options?: ShapeOptions): this;
-		position(): void;
-		position(point: kendo.dataviz.diagram.Point): void;
-		clone(): kendo.dataviz.diagram.Shape;
-		select(value: boolean): void;
-		connections(type: string): void;
-		getConnector(): void;
-		getPosition(side: string): void;
-		redraw(options: any): void;
-		redrawVisual(): void
-	}
-
-	declare class TextBlock extends Observable {
-		options: TextBlockOptions;
-		drawingElement: kendo.drawing.Text;
-		constructor(options?: TextBlockOptions): this;
-		content(): string;
-		content(content: string): void;
-		position(): void;
-		position(offset: kendo.dataviz.diagram.Point): void;
-		rotate(angle: number, center: kendo.dataviz.diagram.Point): void;
-		visible(): boolean;
-		visible(visible: boolean): void
-	}
-
-	
+declare interface HTMLElement {
+    kendoBindingTarget: undefined.BindingTarget
 }
-
-declare module 'spreadsheet' {
-		declare interface CustomFilterOptions {
-		name?: string
-	}
-
-	declare interface CustomFilterEvent {
-		sender: CustomFilter,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface DynamicFilterOptions {
-		name?: string
-	}
-
-	declare interface DynamicFilterEvent {
-		sender: DynamicFilter,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface RangeOptions {
-		name?: string
-	}
-
-	declare interface RangeEvent {
-		sender: Range,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SheetOptions {
-		name?: string,
-		change(e: SheetChangeEvent): void
-	}
-
-	declare interface SheetEvent {
-		sender: Sheet,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface SheetChangeEvent {
-		
-	}
-
-	declare interface TopFilterOptions {
-		name?: string
-	}
-
-	declare interface TopFilterEvent {
-		sender: TopFilter,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-	declare interface ValueFilterOptions {
-		name?: string
-	}
-
-	declare interface ValueFilterEvent {
-		sender: ValueFilter,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-		declare class CustomFilter extends Observable {
-		options: CustomFilterOptions;
-		init(options: any): void
-	}
-
-	declare class DynamicFilter extends Observable {
-		options: DynamicFilterOptions;
-		init(options: any): void
-	}
-
-	declare class Range extends Observable {
-		options: RangeOptions;
-		background(): string;
-		background(value?: string): void;
-		bold(): boolean;
-		bold(value?: boolean): void;
-		borderBottom(): any;
-		borderBottom(value?: any): void;
-		borderLeft(): any;
-		borderLeft(value?: any): void;
-		borderRight(): any;
-		borderRight(value?: any): void;
-		borderTop(): any;
-		borderTop(value?: any): void;
-		color(): string;
-		color(value?: string): void;
-		clear(options?: any): void;
-		clearFilter(indices: any): void;
-		clearFilter(indices: number): void;
-		editor(): string;
-		editor(value?: string): void;
-		enable(): boolean;
-		enable(value?: boolean): void;
-		fillFrom(srcRange: Range, direction?: number): void;
-		fillFrom(srcRange: string, direction?: number): void;
-		filter(filter: boolean): void;
-		filter(filter: any): void;
-		fontFamily(): string;
-		fontFamily(value?: string): void;
-		fontSize(): number;
-		fontSize(value?: number): void;
-		forEachCell(callback: Function): void;
-		format(): string;
-		format(format?: string): void;
-		formula(): string;
-		formula(formula?: string): void;
-		hasFilter(): boolean;
-		input(): any;
-		input(value?: string): void;
-		input(value?: number): void;
-		input(value?: Date): void;
-		isSortable(): boolean;
-		isFilterable(): boolean;
-		italic(): boolean;
-		italic(value?: boolean): void;
-		link(): string;
-		link(url?: string): void;
-		merge(): void;
-		select(): void;
-		sort(sort: number): void;
-		sort(sort: any): void;
-		textAlign(): string;
-		textAlign(value?: string): void;
-		unmerge(): void;
-		values(values: any): void;
-		validation(): any;
-		validation(value?: any): void;
-		value(): any;
-		value(value?: string): void;
-		value(value?: number): void;
-		value(value?: Date): void;
-		verticalAlign(): string;
-		verticalAlign(value?: string): void;
-		wrap(): boolean;
-		wrap(value?: boolean): void
-	}
-
-	declare class Sheet extends Observable {
-		options: SheetOptions;
-		clearFilter(indexes: number): void;
-		clearFilter(indexes: any): void;
-		columnWidth(): void;
-		columnWidth(index: number, width?: number): void;
-		batch(callback: Function, changeEventArgs: any): void;
-		deleteColumn(index: number): void;
-		fromJSON(data: any): void;
-		frozenColumns(): number;
-		frozenColumns(count?: number): void;
-		frozenRows(): number;
-		frozenRows(count?: number): void;
-		hideColumn(index: number): void;
-		hideRow(index: number): void;
-		insertColumn(index: number): void;
-		insertRow(index: number): void;
-		range(ref: string): kendo.spreadsheet.Range;
-		rowHeight(): void;
-		rowHeight(index: number, width?: number): void;
-		selection(): kendo.spreadsheet.Range;
-		setDataSource(dataSource: kendo.data.DataSource, columns?: any): void;
-		showGridLines(): boolean;
-		showGridLines(showGridLines?: boolean): void;
-		toJSON(): void;
-		unhideColumn(index: number): void;
-		unhideRow(index: number): void
-	}
-
-	declare class TopFilter extends Observable {
-		options: TopFilterOptions;
-		init(options: any): void
-	}
-
-	declare class ValueFilter extends Observable {
-		options: ValueFilterOptions;
-		init(options: any): void
-	}
-
-	
-}
-
-declare module 'ooxml' {
-		declare interface WorkbookSheetColumn {
-		autoWidth?: boolean,
-		index?: number,
-		width?: number
-	}
-
-	declare interface WorkbookSheetFilter {
-		from?: number,
-		to?: number
-	}
-
-	declare interface WorkbookSheetFreezePane {
-		colSplit?: number,
-		rowSplit?: number
-	}
-
-	declare interface WorkbookSheetRowCellBorderBottom {
-		color?: string,
-		size?: number
-	}
-
-	declare interface WorkbookSheetRowCellBorderLeft {
-		color?: string,
-		size?: number
-	}
-
-	declare interface WorkbookSheetRowCellBorderRight {
-		color?: string,
-		size?: number
-	}
-
-	declare interface WorkbookSheetRowCellBorderTop {
-		color?: string,
-		size?: number
-	}
-
-	declare interface WorkbookSheetRowCell {
-		background?: string,
-		borderBottom?: WorkbookSheetRowCellBorderBottom,
-		borderLeft?: WorkbookSheetRowCellBorderLeft,
-		borderTop?: WorkbookSheetRowCellBorderTop,
-		borderRight?: WorkbookSheetRowCellBorderRight,
-		bold?: boolean,
-		color?: string,
-		colSpan?: number,
-		fontFamily?: string,
-		fontName?: string,
-		fontSize?: number,
-		format?: string,
-		formula?: string,
-		hAlign?: string,
-		index?: any,
-		italic?: boolean,
-		rowSpan?: number,
-		textAlign?: string,
-		underline?: boolean,
-		wrap?: boolean,
-		vAlign?: string,
-		verticalAlign?: string,
-		value?: Date | number | string | boolean
-	}
-
-	declare interface WorkbookSheetRow {
-		cells?: WorkbookSheetRowCell[],
-		index?: number,
-		height?: number
-	}
-
-	declare interface WorkbookSheet {
-		columns?: WorkbookSheetColumn[],
-		freezePane?: WorkbookSheetFreezePane,
-		frozenColumns?: number,
-		frozenRows?: number,
-		filter?: WorkbookSheetFilter,
-		name?: string,
-		rows?: WorkbookSheetRow[],
-		showGridLines?: boolean,
-		title?: string
-	}
-
-	declare interface WorkbookOptions {
-		name?: string,
-		creator?: string,
-		date?: Date,
-		sheets?: WorkbookSheet[]
-	}
-
-	declare interface WorkbookEvent {
-		sender: Workbook,
-		preventDefault: Function,
-		isDefaultPrevented(): boolean
-	}
-
-		declare class Workbook extends Observable {
-		options: WorkbookOptions;
-		sheets: WorkbookSheet[];
-		constructor(options?: WorkbookOptions): this;
-		toDataURL(): string
-	}
-
-	
+declare interface JQueryAjaxSettings {}
+declare interface JQueryXHR {}
+declare interface JQueryEventObject {}
+declare interface JQueryPromise<T>{}
+declare interface JQuery {
+    kendoDraggable(): JQuery,
+        kendoDraggable(options: undefined.DraggableOptions): JQuery,
+        kendoDropTarget(): JQuery,
+        kendoDropTarget(options: undefined.DropTargetOptions): JQuery,
+        kendoDropTargetArea(): JQuery,
+        kendoDropTargetArea(options: undefined.DropTargetAreaOptions): JQuery,
+        data(key: any): any,
+        kendoAlert(): JQuery,
+        kendoAlert(options: undefined.AlertOptions): JQuery,
+        data(key: "kendoAlert"): undefined.Alert,
+        kendoAutoComplete(): JQuery,
+        kendoAutoComplete(options: undefined.AutoCompleteOptions): JQuery,
+        data(key: "kendoAutoComplete"): undefined.AutoComplete,
+        kendoBarcode(): JQuery,
+        kendoBarcode(options: undefined.BarcodeOptions): JQuery,
+        data(key: "kendoBarcode"): undefined.Barcode,
+        kendoButton(): JQuery,
+        kendoButton(options: undefined.ButtonOptions): JQuery,
+        data(key: "kendoButton"): undefined.Button,
+        kendoCalendar(): JQuery,
+        kendoCalendar(options: undefined.CalendarOptions): JQuery,
+        data(key: "kendoCalendar"): undefined.Calendar,
+        kendoChart(): JQuery,
+        kendoChart(options: undefined.ChartOptions): JQuery,
+        data(key: "kendoChart"): undefined.Chart,
+        kendoColorPalette(): JQuery,
+        kendoColorPalette(options: undefined.ColorPaletteOptions): JQuery,
+        data(key: "kendoColorPalette"): undefined.ColorPalette,
+        kendoColorPicker(): JQuery,
+        kendoColorPicker(options: undefined.ColorPickerOptions): JQuery,
+        data(key: "kendoColorPicker"): undefined.ColorPicker,
+        kendoComboBox(): JQuery,
+        kendoComboBox(options: undefined.ComboBoxOptions): JQuery,
+        data(key: "kendoComboBox"): undefined.ComboBox,
+        kendoConfirm(): JQuery,
+        kendoConfirm(options: undefined.ConfirmOptions): JQuery,
+        data(key: "kendoConfirm"): undefined.Confirm,
+        kendoContextMenu(): JQuery,
+        kendoContextMenu(options: undefined.ContextMenuOptions): JQuery,
+        data(key: "kendoContextMenu"): undefined.ContextMenu,
+        kendoDatePicker(): JQuery,
+        kendoDatePicker(options: undefined.DatePickerOptions): JQuery,
+        data(key: "kendoDatePicker"): undefined.DatePicker,
+        kendoDateTimePicker(): JQuery,
+        kendoDateTimePicker(options: undefined.DateTimePickerOptions): JQuery,
+        data(key: "kendoDateTimePicker"): undefined.DateTimePicker,
+        kendoDiagram(): JQuery,
+        kendoDiagram(options: undefined.DiagramOptions): JQuery,
+        data(key: "kendoDiagram"): undefined.Diagram,
+        kendoDialog(): JQuery,
+        kendoDialog(options: undefined.DialogOptions): JQuery,
+        data(key: "kendoDialog"): undefined.Dialog,
+        kendoDropDownList(): JQuery,
+        kendoDropDownList(options: undefined.DropDownListOptions): JQuery,
+        data(key: "kendoDropDownList"): undefined.DropDownList,
+        kendoEditor(): JQuery,
+        kendoEditor(options: undefined.EditorOptions): JQuery,
+        data(key: "kendoEditor"): undefined.Editor,
+        kendoFilterMenu(): JQuery,
+        kendoFilterMenu(options: undefined.FilterMenuOptions): JQuery,
+        data(key: "kendoFilterMenu"): undefined.FilterMenu,
+        kendoFlatColorPicker(): JQuery,
+        kendoFlatColorPicker(options: undefined.FlatColorPickerOptions): JQuery,
+        data(key: "kendoFlatColorPicker"): undefined.FlatColorPicker,
+        kendoGantt(): JQuery,
+        kendoGantt(options: undefined.GanttOptions): JQuery,
+        data(key: "kendoGantt"): undefined.Gantt,
+        kendoGrid(): JQuery,
+        kendoGrid(options: undefined.GridOptions): JQuery,
+        data(key: "kendoGrid"): undefined.Grid,
+        kendoLinearGauge(): JQuery,
+        kendoLinearGauge(options: undefined.LinearGaugeOptions): JQuery,
+        data(key: "kendoLinearGauge"): undefined.LinearGauge,
+        kendoListView(): JQuery,
+        kendoListView(options: undefined.ListViewOptions): JQuery,
+        data(key: "kendoListView"): undefined.ListView,
+        kendoMap(): JQuery,
+        kendoMap(options: undefined.MapOptions): JQuery,
+        data(key: "kendoMap"): undefined.Map,
+        kendoMaskedTextBox(): JQuery,
+        kendoMaskedTextBox(options: undefined.MaskedTextBoxOptions): JQuery,
+        data(key: "kendoMaskedTextBox"): undefined.MaskedTextBox,
+        kendoMediaPlayer(): JQuery,
+        kendoMediaPlayer(options: undefined.MediaPlayerOptions): JQuery,
+        data(key: "kendoMediaPlayer"): undefined.MediaPlayer,
+        kendoMenu(): JQuery,
+        kendoMenu(options: undefined.MenuOptions): JQuery,
+        data(key: "kendoMenu"): undefined.Menu,
+        kendoMobileActionSheet(): JQuery,
+        kendoMobileActionSheet(options: undefined.ActionSheetOptions): JQuery,
+        data(key: "kendoMobileActionSheet"): undefined.ActionSheet,
+        kendoMobileBackButton(): JQuery,
+        kendoMobileBackButton(options: undefined.BackButtonOptions): JQuery,
+        data(key: "kendoMobileBackButton"): undefined.BackButton,
+        kendoMobileButton(): JQuery,
+        kendoMobileButton(options: undefined.ButtonOptions): JQuery,
+        data(key: "kendoMobileButton"): undefined.Button,
+        kendoMobileButtonGroup(): JQuery,
+        kendoMobileButtonGroup(options: undefined.ButtonGroupOptions): JQuery,
+        data(key: "kendoMobileButtonGroup"): undefined.ButtonGroup,
+        kendoMobileCollapsible(): JQuery,
+        kendoMobileCollapsible(options: undefined.CollapsibleOptions): JQuery,
+        data(key: "kendoMobileCollapsible"): undefined.Collapsible,
+        kendoMobileDetailButton(): JQuery,
+        kendoMobileDetailButton(options: undefined.DetailButtonOptions): JQuery,
+        data(key: "kendoMobileDetailButton"): undefined.DetailButton,
+        kendoMobileDrawer(): JQuery,
+        kendoMobileDrawer(options: undefined.DrawerOptions): JQuery,
+        data(key: "kendoMobileDrawer"): undefined.Drawer,
+        kendoMobileLayout(): JQuery,
+        kendoMobileLayout(options: undefined.LayoutOptions): JQuery,
+        data(key: "kendoMobileLayout"): undefined.Layout,
+        kendoMobileListView(): JQuery,
+        kendoMobileListView(options: undefined.ListViewOptions): JQuery,
+        data(key: "kendoMobileListView"): undefined.ListView,
+        kendoMobileLoader(): JQuery,
+        kendoMobileLoader(options: undefined.LoaderOptions): JQuery,
+        data(key: "kendoMobileLoader"): undefined.Loader,
+        kendoMobileModalView(): JQuery,
+        kendoMobileModalView(options: undefined.ModalViewOptions): JQuery,
+        data(key: "kendoMobileModalView"): undefined.ModalView,
+        kendoMobileNavBar(): JQuery,
+        kendoMobileNavBar(options: undefined.NavBarOptions): JQuery,
+        data(key: "kendoMobileNavBar"): undefined.NavBar,
+        kendoMobilePane(): JQuery,
+        kendoMobilePane(options: undefined.PaneOptions): JQuery,
+        data(key: "kendoMobilePane"): undefined.Pane,
+        kendoMobilePopOver(): JQuery,
+        kendoMobilePopOver(options: undefined.PopOverOptions): JQuery,
+        data(key: "kendoMobilePopOver"): undefined.PopOver,
+        kendoMobileScrollView(): JQuery,
+        kendoMobileScrollView(options: undefined.ScrollViewOptions): JQuery,
+        data(key: "kendoMobileScrollView"): undefined.ScrollView,
+        kendoMobileScroller(): JQuery,
+        kendoMobileScroller(options: undefined.ScrollerOptions): JQuery,
+        data(key: "kendoMobileScroller"): undefined.Scroller,
+        kendoMobileSplitView(): JQuery,
+        kendoMobileSplitView(options: undefined.SplitViewOptions): JQuery,
+        data(key: "kendoMobileSplitView"): undefined.SplitView,
+        kendoMobileSwitch(): JQuery,
+        kendoMobileSwitch(options: undefined.SwitchOptions): JQuery,
+        data(key: "kendoMobileSwitch"): undefined.Switch,
+        kendoMobileTabStrip(): JQuery,
+        kendoMobileTabStrip(options: undefined.TabStripOptions): JQuery,
+        data(key: "kendoMobileTabStrip"): undefined.TabStrip,
+        kendoMobileView(): JQuery,
+        kendoMobileView(options: undefined.ViewOptions): JQuery,
+        data(key: "kendoMobileView"): undefined.View,
+        kendoMultiSelect(): JQuery,
+        kendoMultiSelect(options: undefined.MultiSelectOptions): JQuery,
+        data(key: "kendoMultiSelect"): undefined.MultiSelect,
+        kendoNotification(): JQuery,
+        kendoNotification(options: undefined.NotificationOptions): JQuery,
+        data(key: "kendoNotification"): undefined.Notification,
+        kendoNumericTextBox(): JQuery,
+        kendoNumericTextBox(options: undefined.NumericTextBoxOptions): JQuery,
+        data(key: "kendoNumericTextBox"): undefined.NumericTextBox,
+        kendoPager(): JQuery,
+        kendoPager(options: undefined.PagerOptions): JQuery,
+        data(key: "kendoPager"): undefined.Pager,
+        kendoPanelBar(): JQuery,
+        kendoPanelBar(options: undefined.PanelBarOptions): JQuery,
+        data(key: "kendoPanelBar"): undefined.PanelBar,
+        kendoPivotConfigurator(): JQuery,
+        kendoPivotConfigurator(options: undefined.PivotConfiguratorOptions): JQuery,
+        data(key: "kendoPivotConfigurator"): undefined.PivotConfigurator,
+        kendoPivotGrid(): JQuery,
+        kendoPivotGrid(options: undefined.PivotGridOptions): JQuery,
+        data(key: "kendoPivotGrid"): undefined.PivotGrid,
+        kendoPopup(): JQuery,
+        kendoPopup(options: undefined.PopupOptions): JQuery,
+        data(key: "kendoPopup"): undefined.Popup,
+        kendoProgressBar(): JQuery,
+        kendoProgressBar(options: undefined.ProgressBarOptions): JQuery,
+        data(key: "kendoProgressBar"): undefined.ProgressBar,
+        kendoPrompt(): JQuery,
+        kendoPrompt(options: undefined.PromptOptions): JQuery,
+        data(key: "kendoPrompt"): undefined.Prompt,
+        kendoQRCode(): JQuery,
+        kendoQRCode(options: undefined.QRCodeOptions): JQuery,
+        data(key: "kendoQRCode"): undefined.QRCode,
+        kendoRadialGauge(): JQuery,
+        kendoRadialGauge(options: undefined.RadialGaugeOptions): JQuery,
+        data(key: "kendoRadialGauge"): undefined.RadialGauge,
+        kendoRangeSlider(): JQuery,
+        kendoRangeSlider(options: undefined.RangeSliderOptions): JQuery,
+        data(key: "kendoRangeSlider"): undefined.RangeSlider,
+        kendoResponsivePanel(): JQuery,
+        kendoResponsivePanel(options: undefined.ResponsivePanelOptions): JQuery,
+        data(key: "kendoResponsivePanel"): undefined.ResponsivePanel,
+        kendoScheduler(): JQuery,
+        kendoScheduler(options: undefined.SchedulerOptions): JQuery,
+        data(key: "kendoScheduler"): undefined.Scheduler,
+        kendoSlider(): JQuery,
+        kendoSlider(options: undefined.SliderOptions): JQuery,
+        data(key: "kendoSlider"): undefined.Slider,
+        kendoSortable(): JQuery,
+        kendoSortable(options: undefined.SortableOptions): JQuery,
+        data(key: "kendoSortable"): undefined.Sortable,
+        kendoSparkline(): JQuery,
+        kendoSparkline(options: undefined.SparklineOptions): JQuery,
+        data(key: "kendoSparkline"): undefined.Sparkline,
+        kendoSplitter(): JQuery,
+        kendoSplitter(options: undefined.SplitterOptions): JQuery,
+        data(key: "kendoSplitter"): undefined.Splitter,
+        kendoSpreadsheet(): JQuery,
+        kendoSpreadsheet(options: undefined.SpreadsheetOptions): JQuery,
+        data(key: "kendoSpreadsheet"): undefined.Spreadsheet,
+        kendoStockChart(): JQuery,
+        kendoStockChart(options: undefined.StockChartOptions): JQuery,
+        data(key: "kendoStockChart"): undefined.StockChart,
+        kendoTabStrip(): JQuery,
+        kendoTabStrip(options: undefined.TabStripOptions): JQuery,
+        data(key: "kendoTabStrip"): undefined.TabStrip,
+        kendoTimePicker(): JQuery,
+        kendoTimePicker(options: undefined.TimePickerOptions): JQuery,
+        data(key: "kendoTimePicker"): undefined.TimePicker,
+        kendoToolBar(): JQuery,
+        kendoToolBar(options: undefined.ToolBarOptions): JQuery,
+        data(key: "kendoToolBar"): undefined.ToolBar,
+        kendoTooltip(): JQuery,
+        kendoTooltip(options: undefined.TooltipOptions): JQuery,
+        data(key: "kendoTooltip"): undefined.Tooltip,
+        kendoTouch(): JQuery,
+        kendoTouch(options: undefined.TouchOptions): JQuery,
+        data(key: "kendoTouch"): undefined.Touch,
+        kendoTreeList(): JQuery,
+        kendoTreeList(options: undefined.TreeListOptions): JQuery,
+        data(key: "kendoTreeList"): undefined.TreeList,
+        kendoTreeMap(): JQuery,
+        kendoTreeMap(options: undefined.TreeMapOptions): JQuery,
+        data(key: "kendoTreeMap"): undefined.TreeMap,
+        kendoTreeView(): JQuery,
+        kendoTreeView(options: undefined.TreeViewOptions): JQuery,
+        data(key: "kendoTreeView"): undefined.TreeView,
+        kendoUpload(): JQuery,
+        kendoUpload(options: undefined.UploadOptions): JQuery,
+        data(key: "kendoUpload"): undefined.Upload,
+        kendoValidator(): JQuery,
+        kendoValidator(options: undefined.ValidatorOptions): JQuery,
+        data(key: "kendoValidator"): undefined.Validator,
+        kendoWindow(): JQuery,
+        kendoWindow(options: undefined.WindowOptions): JQuery,
+        data(key: "kendoWindow"): undefined.Window
 }
