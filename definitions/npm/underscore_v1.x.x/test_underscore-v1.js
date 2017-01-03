@@ -144,6 +144,7 @@ _.find([1, 2, 3], {val: 1});
 _.throttle(function(a) {a.length}, 10)('hello');
 _.debounce(function(a) {a.length}, 10)('hello');
 
+_.memoize(function(){})();
 _.defer(function(){});
 
 (_.partition([1,5,2,4], function(i: number) { return i<4 }): [Array<number>, Array<number>]);

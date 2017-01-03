@@ -135,7 +135,7 @@ declare module "underscore" {
 
   // TODO: partial
 
-  // TODO: memoize
+  declare function memoize(fn: Function): Function;
 
   // TODO: delay
 
