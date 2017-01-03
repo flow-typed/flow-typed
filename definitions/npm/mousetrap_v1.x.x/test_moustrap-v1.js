@@ -1,4 +1,4 @@
-// @flow
+
 
 import mousetrap, { bind, unbind, trigger, reset} from 'mousetrap';
 

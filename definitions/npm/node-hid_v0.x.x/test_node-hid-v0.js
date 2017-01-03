@@ -1,4 +1,4 @@
-// @flow
+
 
 import * as HID from 'node-hid';
 import type {HID as HIDDevice, HIDDeviceDescription} from 'node-hid';

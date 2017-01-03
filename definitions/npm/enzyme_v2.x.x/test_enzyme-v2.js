@@ -1,4 +1,4 @@
-// @flow
+
 import enzyme from 'enzyme';
 
 // $ExpectError

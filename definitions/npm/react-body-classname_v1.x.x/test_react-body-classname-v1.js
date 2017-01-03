@@ -1,4 +1,4 @@
-// @flow
+
 import BodyClassName from 'react-body-classname';
 import React from 'react';
 

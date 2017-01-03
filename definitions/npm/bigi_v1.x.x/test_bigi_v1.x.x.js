@@ -1,4 +1,4 @@
-// @flow
+
 
 var BigInteger = require('bigi');
 

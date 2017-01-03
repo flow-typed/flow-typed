@@ -1,4 +1,4 @@
-// @flow
+
 declare module 'bunyan' {
     declare var TRACE: 10;
     declare var DEBUG: 20;

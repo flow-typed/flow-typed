@@ -1,4 +1,4 @@
-// @flow
+
 import loadScript from 'load-script';
 
 loadScript('/example');

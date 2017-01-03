@@ -1,4 +1,4 @@
-// @flow
+
 import Primus from 'primus';
 import http from 'http';
 

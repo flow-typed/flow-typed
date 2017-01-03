@@ -1,4 +1,4 @@
-// @flow
+
 import PrettyError from 'pretty-error';
 
 (PrettyError.start(): void);

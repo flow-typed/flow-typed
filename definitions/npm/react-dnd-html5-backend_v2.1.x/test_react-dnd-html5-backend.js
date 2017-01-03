@@ -1,4 +1,4 @@
-// @flow
+
 
 import {getEmptyImage} from 'react-dnd-html5-backend';
 

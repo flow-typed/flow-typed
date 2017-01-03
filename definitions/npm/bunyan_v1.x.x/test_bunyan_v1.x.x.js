@@ -1,4 +1,4 @@
-// @flow
+
 import Bunyan from 'bunyan';
 const logger = Bunyan.createLogger({
     name: 'logger',

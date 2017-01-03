@@ -1,4 +1,4 @@
-// @flow
+
 import UUID from 'uuid-js';
 
 (UUID.create().version: 4);

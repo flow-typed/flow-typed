@@ -1,4 +1,4 @@
-// @flow
+
 import Modal from 'react-modal';
 
 const A = <Modal/>;

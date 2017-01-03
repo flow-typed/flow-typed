@@ -1,4 +1,4 @@
-// @flow
+
 import cacheManager from 'cache-manager';
 import type { Cache } from 'cache-manager';
 

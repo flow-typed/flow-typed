@@ -1,4 +1,4 @@
-// @flow
+
 import ReactHighlightWords from 'react-highlight-words';
 
 // $ExpectError

@@ -1,4 +1,4 @@
-// @flow
+
 
 import VerEx from 'verbal-expressions'
 

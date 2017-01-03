@@ -1,4 +1,4 @@
-// @flow
+
 import inRange from 'in-range';
 
 let a: boolean = inRange(2, 3, 4)

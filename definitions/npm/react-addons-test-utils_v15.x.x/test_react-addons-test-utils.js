@@ -1,4 +1,4 @@
-// @flow
+
 
 import {ReactShallowRender, createRenderer} from 'react-addons-test-utils';
 

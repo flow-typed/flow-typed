@@ -1,4 +1,4 @@
-// @flow
+
 import axios from 'axios';
 (axios.get('foo'): Promise<*>);
 (axios.post('bar', {}, {

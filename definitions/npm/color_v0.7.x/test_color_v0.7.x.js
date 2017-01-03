@@ -1,4 +1,4 @@
-// @flow
+
 
 import Color from "color";
 

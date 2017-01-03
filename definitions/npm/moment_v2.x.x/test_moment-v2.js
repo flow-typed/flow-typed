@@ -1,4 +1,4 @@
-// @flow
+
 import moment from 'moment';
 
 const m: moment = moment.utc();

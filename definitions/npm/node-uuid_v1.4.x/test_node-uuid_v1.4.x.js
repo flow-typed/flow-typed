@@ -1,4 +1,4 @@
-// @flow
+
 import uuid from 'node-uuid';
 
 uuid.v1();

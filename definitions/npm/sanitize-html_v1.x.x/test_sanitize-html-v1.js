@@ -1,4 +1,4 @@
-// @flow
+
 import sanitize from 'sanitize-html';
 
 (sanitize('<foo/>'): string)

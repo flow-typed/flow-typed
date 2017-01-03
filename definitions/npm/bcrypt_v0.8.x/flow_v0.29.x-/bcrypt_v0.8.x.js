@@ -1,4 +1,4 @@
-// @flow
+
 
 declare module bcrypt {
   declare function genSaltSync(rounds?: number): string;

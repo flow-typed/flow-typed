@@ -1,4 +1,4 @@
-// @flow
+
 import Notify from 'notifyjs';
 
 (Notify.isSupported(): bool);

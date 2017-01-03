@@ -1,4 +1,4 @@
-// @flow
+
 import s from 'underscore.string';
 
 var string1 = 'hello',

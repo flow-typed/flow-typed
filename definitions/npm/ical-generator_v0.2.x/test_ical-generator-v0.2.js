@@ -1,4 +1,4 @@
-// @flow
+
 import ical from 'ical-generator';
 
 const calendar = ical({
