@@ -3530,5 +3530,4 @@ declare module 'UI' {
             getType(): string
     }
 }
-declare
-var UiApp: undefined.UiApp;
+declare var UiApp: undefined.UiApp;

@@ -796,8 +796,7 @@ declare type Mithril$XHROptions = {
      */
     data?: Object
 } & Mithril$RequestOptions
-declare
-var m: Mithril$Static;
+declare var m: Mithril$Static;
 declare module 'mithril' {
     declare module.exports: typeof m
 }

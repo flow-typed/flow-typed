@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Offline: {
+declare var Offline: {
     options: OfflineOptions,
     check: () => void,
     state: string,

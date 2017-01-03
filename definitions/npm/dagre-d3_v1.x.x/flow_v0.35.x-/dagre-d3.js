@@ -26,8 +26,7 @@ declare interface Dagre$Render {
         new(): Dagre$Render,
         (selection: d3.Selection<any>, g: Dagre$Graph): void
 }
-declare
-var dagreD3: Dagre$DagreD3Factory;
+declare var dagreD3: Dagre$DagreD3Factory;
 declare module 'dagre-d3' {
     declare module.exports: typeof dagreD3
 }

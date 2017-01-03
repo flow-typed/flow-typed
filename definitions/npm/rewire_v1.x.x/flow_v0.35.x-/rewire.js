@@ -37,8 +37,7 @@ declare interface RewireInterfaces$RewiredModule {
          */
         ___with__(obj: Object): (callback: Function) => any
 }
-declare
-var rewire: RewireInterfaces$Rewire;
+declare var rewire: RewireInterfaces$Rewire;
 declare module 'rewire' {
     declare module.exports: typeof rewire
 }

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var CryptoJS: CryptoJS$CryptoJSStatic;
+declare var CryptoJS: CryptoJS$CryptoJSStatic;
 declare interface lib$Base {
     extend(overrides: Object): Object,
         init(...args: any[]): void,

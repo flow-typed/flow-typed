@@ -150,5 +150,4 @@ declare module 'Script' {
             timeBased(): ClockTriggerBuilder
     }
 }
-declare
-var ScriptApp: undefined.ScriptApp;
+declare var ScriptApp: undefined.ScriptApp;

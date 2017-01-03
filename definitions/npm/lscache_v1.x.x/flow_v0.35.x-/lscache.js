@@ -51,8 +51,7 @@ declare interface LSCache {
          */
         resetBucket(): void
 }
-declare
-var lscache: LSCache;
+declare var lscache: LSCache;
 declare module 'lscache' {
     declare var lscache: LSCache;
     declare module.exports: typeof lscache

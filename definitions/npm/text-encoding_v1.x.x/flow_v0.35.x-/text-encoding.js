@@ -53,12 +53,9 @@ declare interface TextEncoding$TextEncodingStatic {
     TextEncoder: TextEncoding$TextEncoderStatic,
         TextDecoder: TextEncoding$TextDecoderStatic
 }
-declare
-var TextDecoder: TextEncoding$TextDecoderStatic;
-declare
-var TextEncoder: TextEncoding$TextEncoderStatic;
-declare
-var TextEncoding: TextEncoding$TextEncodingStatic;
+declare var TextDecoder: TextEncoding$TextDecoderStatic;
+declare var TextEncoder: TextEncoding$TextEncoderStatic;
+declare var TextEncoding: TextEncoding$TextEncodingStatic;
 declare module 'text-encoding' {
     declare module.exports: typeof TextEncoding
 }

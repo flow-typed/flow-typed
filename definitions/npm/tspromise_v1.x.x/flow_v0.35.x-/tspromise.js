@@ -27,5 +27,4 @@ declare interface NodeCallback<T>{
 declare module 'tspromise' {
     declare module.exports: typeof Promise
 }
-declare
-function yield<T>(promise: Thenable<T>): T
+declare function yield<T>(promise: Thenable<T>): T

@@ -6,18 +6,15 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var BetterCurry: BetterCurryModule$BetterCurry;
-declare
-export interface BetterCurryModule$DelegateOptions {
+declare var BetterCurry: BetterCurryModule$BetterCurry;
+declare export interface BetterCurryModule$DelegateOptions {
     as?: string,
         len?: number,
         args?: any[],
         name?: string
 }
 
-declare
-export class Delegate<T>{
+declare export class Delegate<T>{
     proto: T;
     target: string;
     methods: any[];
@@ -36,14 +33,12 @@ export class Delegate<T>{
     constructor(proto: T, target: string): this
 }
 
-declare
-export type BetterCurryModule$OriginalFunctionReminder<T>= {
+declare export type BetterCurryModule$OriginalFunctionReminder<T>= {
     ___length: number
 } & Function
 
 
-declare
-export interface BetterCurryModule$BetterCurry {
+declare export interface BetterCurryModule$BetterCurry {
     predefine:<T>(
             fn: T,
             args: any[],

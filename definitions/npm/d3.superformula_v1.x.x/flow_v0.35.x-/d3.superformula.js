@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$d3: {
+declare var npm$namespace$d3: {
     superformula: typeof d3$superformula,
 }
-declare
-export function d3$superformula<T>(): d3$Superformula<T >
+declare export function d3$superformula<T>(): d3$Superformula<T >
 
     declare interface superformula$Type {
         m: number,
@@ -38,5 +36,4 @@ declare interface d3$Superformula<T>{
     param(name: string, value: number): d3$Superformula<T >
 }
 
-declare
-export var superformulaTypes: string[];
+declare export var superformulaTypes: string[];

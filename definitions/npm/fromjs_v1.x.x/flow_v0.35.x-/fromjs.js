@@ -6,16 +6,13 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function from<T>(results: Array<T>): FromJS$IQueryable<T>declare
-export type FromJS$IOrderedQueryable<T>= {
+declare function from<T>(results: Array<T>): FromJS$IQueryable<T>declare export type FromJS$IOrderedQueryable<T>= {
     thenBy<TResult>(item: (item: T) => TResult): FromJS$IOrderedQueryable<T>,
     thenByDesc<TResult>(item: (item: T) => TResult): FromJS$IOrderedQueryable<T >
 } & FromJS$IQueryable
 
 
-declare
-export interface FromJS$IQueryable<T>{
+declare export interface FromJS$IQueryable<T>{
     where(predicate: (item: T) => boolean): FromJS$IQueryable<T>,
     select<TResult>(item: (item: T) => TResult): FromJS$IQueryable<TResult>,
     orderByDesc<TResult>(item: (item: T) => TResult): FromJS$IOrderedQueryable<T>,

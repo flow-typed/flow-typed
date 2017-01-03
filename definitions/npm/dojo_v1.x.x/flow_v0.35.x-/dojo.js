@@ -6,15 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function define(dependencies: String[], factory: Function): anydeclare
-function require(config?: Object, dependencies?: String[], callback?: Function): anydeclare module 'dtl' {
+declare function define(dependencies: String[], factory: Function): anydeclare function require(config?: Object, dependencies?: String[], callback?: Function): anydeclare module 'dtl' {
     declare interface ___StringArgs {}
     declare interface ___ObjectArgs {}
 }
 
-declare
-var npm$namespace$dojo: {
+declare var npm$namespace$dojo: {
         require: typeof dojo$require,
     }
     /**
@@ -20660,8 +20657,7 @@ declare interface dojo$regexp {
         group(expression: String, nonCapture?: boolean): String
 }
 
-declare
-function dojo$require(config?: Object, dependencies?: String[], callback?: Function): any
+declare function dojo$require(config?: Object, dependencies?: String[], callback?: Function): any
 
 
 /**

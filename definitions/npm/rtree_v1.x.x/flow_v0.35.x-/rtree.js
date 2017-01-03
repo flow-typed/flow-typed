@@ -22,5 +22,4 @@ declare interface RTreeStatic {
 declare interface RTreeFactory {
     (max_node_width?: number): RTreeStatic
 }
-declare
-var RTree: RTreeFactory;
+declare var RTree: RTreeFactory;

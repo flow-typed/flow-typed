@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface IUAParser$IBrowser {
+declare export interface IUAParser$IBrowser {
 
     /**
      * Possible values :
@@ -34,8 +33,7 @@ export interface IUAParser$IBrowser {
         major: string
 }
 
-declare
-export interface IUAParser$IDevice {
+declare export interface IUAParser$IDevice {
 
     /**
      * Determined dynamically
@@ -58,8 +56,7 @@ export interface IUAParser$IDevice {
         vendor: string
 }
 
-declare
-export interface IUAParser$IEngine {
+declare export interface IUAParser$IEngine {
 
     /**
      * Possible name:
@@ -74,8 +71,7 @@ export interface IUAParser$IEngine {
         version: string
 }
 
-declare
-export interface IUAParser$IOS {
+declare export interface IUAParser$IOS {
 
     /**
      * Possible 'os.name'
@@ -94,8 +90,7 @@ export interface IUAParser$IOS {
         version: string
 }
 
-declare
-export interface IUAParser$ICPU {
+declare export interface IUAParser$ICPU {
 
     /**
      * Possible architecture:
@@ -105,8 +100,7 @@ export interface IUAParser$ICPU {
     architecture: string
 }
 
-declare
-export interface IUAParser$IResult {
+declare export interface IUAParser$IResult {
     ua: string,
         browser: IUAParser$IBrowser,
         device: IUAParser$IDevice,
@@ -115,8 +109,7 @@ export interface IUAParser$IResult {
         cpu: IUAParser$ICPU
 }
 
-declare
-export interface IUAParser$BROWSER {
+declare export interface IUAParser$BROWSER {
     NAME: string,
 
         /**
@@ -127,13 +120,11 @@ export interface IUAParser$BROWSER {
         VERSION: string
 }
 
-declare
-export interface IUAParser$CPU {
+declare export interface IUAParser$CPU {
     ARCHITECTURE: string
 }
 
-declare
-export interface IUAParser$DEVICE {
+declare export interface IUAParser$DEVICE {
     MODEL: string,
         VENDOR: string,
         TYPE: string,
@@ -145,14 +136,12 @@ export interface IUAParser$DEVICE {
         EMBEDDED: string
 }
 
-declare
-export interface IUAParser$ENGINE {
+declare export interface IUAParser$ENGINE {
     NAME: string,
         VERSION: string
 }
 
-declare
-export interface IUAParser$OS {
+declare export interface IUAParser$OS {
     NAME: string,
         VERSION: string
 }

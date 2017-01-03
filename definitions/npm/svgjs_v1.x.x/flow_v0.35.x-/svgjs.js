@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type svgjs$LinkedHTMLElement = {
+declare export type svgjs$LinkedHTMLElement = {
     instance: svgjs$Element
 } & HTMLElement
 
 
-declare
-export interface svgjs$Library {
+declare export interface svgjs$Library {
     (selector: string): svgjs$Doc,
     (domElement: HTMLElement): svgjs$Doc,
     create(name: string): any,
@@ -23,8 +21,7 @@ export interface svgjs$Library {
         extend(parent: Object, obj: Object): void
 }
 
-declare
-export type svgjs$Doc = {
+declare export type svgjs$Doc = {
     svg(data: string): any,
     pattern(w: number, h: number, add: (e: svgjs$Element) => void): svgjs$Element,
     defs(): svgjs$Defs,
@@ -33,8 +30,7 @@ export type svgjs$Doc = {
 } & svgjs$Element
 
 
-declare
-export interface svgjs$Filter {
+declare export interface svgjs$Filter {
     gaussianBlur(values: string): svgjs$Filter,
         colorMatrix(name: string, value: number): svgjs$Filter,
         colorMatrix(name: string, matrix: number[]): svgjs$Filter,
@@ -49,11 +45,9 @@ export interface svgjs$Filter {
         source: svgjs$FilterSource
 }
 
-declare
-export interface svgjs$FilterSource {}
+declare export interface svgjs$FilterSource {}
 
-declare
-export interface svgjs$FilterComponentTransfer {
+declare export interface svgjs$FilterComponentTransfer {
     type: string,
         tableValues?: string,
         slope?: number,
@@ -63,8 +57,7 @@ export interface svgjs$FilterComponentTransfer {
         offset: number
 }
 
-declare
-export type svgjs$Element = {
+declare export type svgjs$Element = {
     node: svgjs$LinkedHTMLElement,
     nested(): svgjs$Doc,
     animate(duration?: number, ease?: string, delay?: number): svgjs$Animation,
@@ -152,14 +145,12 @@ export type svgjs$Element = {
 } & svgjs$Text & svgjs$Parent
 
 
-declare
-export type svgjs$Mask = {
+declare export type svgjs$Mask = {
     add(element: svgjs$Element): svgjs$Mask
 } & svgjs$Element
 
 
-declare
-export interface svgjs$Text {
+declare export interface svgjs$Text {
     content: string,
         font(
             font: {
@@ -174,18 +165,15 @@ export interface svgjs$Text {
         track: svgjs$Element
 }
 
-declare
-export type svgjs$ElementStatic = {
+declare export type svgjs$ElementStatic = {
     new(node: any): svgjs$Element
 } & svgjs$Parent
 
 
-declare
-export type svgjs$Defs = {} & svgjs$Element
+declare export type svgjs$Defs = {} & svgjs$Element
 
 
-declare
-export interface svgjs$Animation {
+declare export interface svgjs$Animation {
     stop(): svgjs$Animation,
         attr(name: string, value: any, namespace?: string): svgjs$Animation,
         attr(obj: Object): svgjs$Animation,
@@ -203,8 +191,7 @@ export interface svgjs$Animation {
         after(cb: () => void): svgjs$Animation
 }
 
-declare
-export interface svgjs$Parent {
+declare export interface svgjs$Parent {
     put(element: svgjs$Element, i?: number): svgjs$Element,
         add(element: svgjs$Element, i?: number): svgjs$Element,
         children(): svgjs$Element[],
@@ -224,8 +211,7 @@ export interface svgjs$Parent {
         group(): svgjs$Element
 }
 
-declare
-export interface svgjs$BBox {
+declare export interface svgjs$BBox {
     height: number,
         width: number,
         y: number,
@@ -235,19 +221,16 @@ export interface svgjs$BBox {
         merge(bbox: svgjs$BBox): svgjs$BBox
 }
 
-declare
-export type svgjs$RBox = {} & svgjs$BBox
+declare export type svgjs$RBox = {} & svgjs$BBox
 
 
-declare
-export interface svgjs$Attributes {
+declare export interface svgjs$Attributes {
     (name: string, value: any): void,
     (obj: Object): void,
     (name: string): any
 }
 
-declare
-export interface svgjs$Viewbox {
+declare export interface svgjs$Viewbox {
     x: number,
         y: number,
         width: number,
@@ -255,8 +238,7 @@ export interface svgjs$Viewbox {
         zoom?: number
 }
 
-declare
-export interface svgjs$Transform {
+declare export interface svgjs$Transform {
     x?: number,
         y?: number,
         rotation?: number,
@@ -274,8 +256,7 @@ export interface svgjs$Transform {
         e?: number,
         f?: number
 }
-declare
-var SVG: svgjs$Library;
+declare var SVG: svgjs$Library;
 declare module 'svg.js' {
     declare module.exports: typeof SVG
 }

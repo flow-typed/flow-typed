@@ -311,8 +311,7 @@ declare interface Materialize$Materialize {
          */
         updateTextFields(): void
 }
-declare
-var Materialize: Materialize$Materialize;
+declare var Materialize: Materialize$Materialize;
 declare interface JQuery {
 
     /**

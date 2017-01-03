@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$c3: {
+declare var npm$namespace$c3: {
     generate: typeof c3$generate,
 }
 declare type c3$PrimitiveArray = Array<string | boolean | number>;
@@ -1304,7 +1303,6 @@ declare interface c3$GridOperations {
         }): void
 }
 
-declare
-export function c3$generate(config: c3$ChartConfiguration): c3$ChartAPIdeclare module 'c3' {
+declare export function c3$generate(config: c3$ChartConfiguration): c3$ChartAPIdeclare module 'c3' {
     declare module.exports: typeof c3
 }

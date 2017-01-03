@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var flightplan: FlightplanInterfaces$Flightplan;
+declare var flightplan: FlightplanInterfaces$Flightplan;
 declare interface FlightplanInterfaces$CommandOptions {
     silent?: boolean,
         failsafe?: boolean

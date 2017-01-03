@@ -234,8 +234,7 @@ declare module 'Tests' {
 }
 
 
-declare
-export class PortalElement {
+declare export class PortalElement {
     baseLocator: Locators.Locator;
     parentLocator: Locators.Locator;
     constructor(baseLocator: Locators.Locator, parentLocator?: Locators.Locator): this;
@@ -250,20 +249,17 @@ export class PortalElement {
     getLocator(): Locators.Locator
 }
 
-declare
-export interface MsPortalTestFx$TestExtension {
+declare export interface MsPortalTestFx$TestExtension {
     name: string,
         uri: string
 }
 
-declare
-export interface MsPortalTestFx$Feature {
+declare export interface MsPortalTestFx$Feature {
     name: string,
         value: string
 }
 
-declare
-export interface MsPortalTestFx$PortalContext {
+declare export interface MsPortalTestFx$PortalContext {
     capabilities: {
             browserName: string,
             chromeOptions: {
@@ -279,8 +275,7 @@ export interface MsPortalTestFx$PortalContext {
         testExtensions?: MsPortalTestFx$TestExtension[]
 }
 
-declare
-export class Portal {
+declare export class Portal {
     portalContext: MsPortalTestFx$PortalContext;
     goHome(timeout?: number): Q.Promise<void>;
     openGalleryCreateBlade(
@@ -319,19 +314,16 @@ export class Portal {
     quit(): Q.Promise<any >
 }
 
-declare
-export class SplashScreen mixins PortalElement {
+declare export class SplashScreen mixins PortalElement {
     clickUntrustedExtensionsOkButton(): Q.Promise<void >
 }
 
-declare
-export class StartBoard mixins PortalElement {
+declare export class StartBoard mixins PortalElement {
     constructor(): this;
     getTiles(): Q.Promise<Parts.Tile[] >
 }
 
-declare
-export var portal: MsPortalTestFx$Portal;
+declare export var portal: MsPortalTestFx$Portal;
 declare module 'MsPortalFx-Test' {
     declare module.exports: typeof MsPortalTestFx
 }

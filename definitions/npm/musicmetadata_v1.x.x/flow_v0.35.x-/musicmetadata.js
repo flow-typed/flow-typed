@@ -12,14 +12,12 @@ declare module 'musicmetadata' {
     declare module.exports: typeof mm
 
 }
-declare
-export interface MM$Options {
+declare export interface MM$Options {
     duration?: boolean,
         fileSize?: number
 }
 
-declare
-export interface MM$Metadata {
+declare export interface MM$Metadata {
     artist: string[],
         album: string,
         albumartist: string[],
@@ -32,13 +30,11 @@ export interface MM$Metadata {
         duration: number
 }
 
-declare
-export interface MM$NoOf {
+declare export interface MM$NoOf {
     no: number, of: number
 }
 
-declare
-export interface MM$Picture {
+declare export interface MM$Picture {
     format: string,
         data: Buffer
 }

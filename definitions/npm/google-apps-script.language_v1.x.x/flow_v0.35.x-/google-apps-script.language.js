@@ -24,5 +24,4 @@ declare module 'Language' {
                 advancedArgs: Object): string
     }
 }
-declare
-var LanguageApp: undefined.LanguageApp;
+declare var LanguageApp: undefined.LanguageApp;

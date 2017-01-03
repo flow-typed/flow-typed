@@ -464,8 +464,7 @@ declare interface PayPalConfigurationOptions {
          */
         sandboxUserPin?: string
 }
-declare
-export interface PayPalCordovaPlugin$PayPalClientIds {
+declare export interface PayPalCordovaPlugin$PayPalClientIds {
     PayPalEnvironmentProduction: string,
         PayPalEnvironmentSandbox: string
 }
@@ -474,8 +473,7 @@ export interface PayPalCordovaPlugin$PayPalClientIds {
 /**
  * Represents the portion of an object that is common to all responses.
  */
-declare
-export interface PayPalCordovaPlugin$BaseResult {
+declare export interface PayPalCordovaPlugin$BaseResult {
     client: PayPalCordovaPlugin$Client,
         response_type: string
 }
@@ -484,8 +482,7 @@ export interface PayPalCordovaPlugin$BaseResult {
 /**
  * Represents the client portion of the response.
  */
-declare
-export interface PayPalCordovaPlugin$Client {
+declare export interface PayPalCordovaPlugin$Client {
     paypal_sdk_version: string,
         environment: string,
         platform: string,
@@ -496,8 +493,7 @@ export interface PayPalCordovaPlugin$Client {
 /**
  * Represents the response for a successful callback from renderSinglePaymentUI().
  */
-declare
-export type PayPalCordovaPlugin$SinglePaymentResult = {
+declare export type PayPalCordovaPlugin$SinglePaymentResult = {
     response: {
         intent: string,
         id: string,
@@ -512,16 +508,14 @@ export type PayPalCordovaPlugin$SinglePaymentResult = {
 /**
  * Represents the response for a successful callback from renderFuturePaymentUI().
  */
-declare
-export type PayPalCordovaPlugin$FuturePaymentResult = {
+declare export type PayPalCordovaPlugin$FuturePaymentResult = {
     response: {
         code: string
     }
 } & PayPalCordovaPlugin$BaseResult
 
 
-declare
-export interface PayPalCordovaPlugin$PayPalMobileStatic {
+declare export interface PayPalCordovaPlugin$PayPalMobileStatic {
 
     /**
      * Retrieve the version of the PayPal iOS SDK library. Useful when contacting support.
@@ -621,5 +615,4 @@ export interface PayPalCordovaPlugin$PayPalMobileStatic {
             completionCallback: (result: any) => void,
             cancelCallback: (cancelReason: string) => void): void
 }
-declare
-var PayPalMobile: PayPalCordovaPlugin$PayPalMobileStatic;
+declare var PayPalMobile: PayPalCordovaPlugin$PayPalMobileStatic;

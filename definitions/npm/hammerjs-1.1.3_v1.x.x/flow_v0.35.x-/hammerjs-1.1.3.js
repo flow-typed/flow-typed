@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Hammer: HammerStatic;
+declare var Hammer: HammerStatic;
 declare interface HammerStatic {
     (element: any, options?: HammerOptions): HammerInstance,
     VERSION: number,

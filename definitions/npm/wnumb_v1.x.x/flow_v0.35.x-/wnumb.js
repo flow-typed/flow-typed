@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var wNumb: wNumb;
+declare var wNumb: wNumb;
 declare interface wNumbOptions {
 
     /**

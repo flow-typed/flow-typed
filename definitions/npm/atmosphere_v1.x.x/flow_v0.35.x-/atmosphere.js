@@ -100,8 +100,7 @@ declare interface Atmosphere$Response {
         errorHandled?: boolean,
         closedByClientTimeout?: boolean
 }
-declare
-var atmosphere: Atmosphere$Atmosphere;
+declare var atmosphere: Atmosphere$Atmosphere;
 declare module 'atmosphere' {
     declare module.exports: typeof atmosphere
 }

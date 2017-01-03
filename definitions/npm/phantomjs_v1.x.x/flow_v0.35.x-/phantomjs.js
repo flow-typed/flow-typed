@@ -6,9 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function require(module: string): anydeclare
-var phantom: Phantom;
+declare function require(module: string): anydeclare var phantom: Phantom;
 declare interface Phantom {
     args: string[],
         cookies: Cookie[],

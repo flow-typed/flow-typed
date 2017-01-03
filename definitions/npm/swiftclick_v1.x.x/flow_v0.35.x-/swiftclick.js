@@ -17,5 +17,4 @@ declare interface SwiftClickStatic {
 declare module 'swiftclick' {
     declare module.exports: typeof SwiftClick
 }
-declare
-var SwiftClick: SwiftClickStatic;
+declare var SwiftClick: SwiftClickStatic;

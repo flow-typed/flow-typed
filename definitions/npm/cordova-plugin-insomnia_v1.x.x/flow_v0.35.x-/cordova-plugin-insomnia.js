@@ -9,8 +9,7 @@
 declare interface Plugins {
     insomnia: InsomniaPlugin$Insomnia
 }
-declare
-export interface InsomniaPlugin$Insomnia {
+declare export interface InsomniaPlugin$Insomnia {
 
     /**
      * Prevent the screen of the mobile device from falling asleep.

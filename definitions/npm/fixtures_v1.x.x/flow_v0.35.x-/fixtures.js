@@ -20,5 +20,4 @@ declare interface Fixtures {
         clearCache(): void,
         cleanUp(): void
 }
-declare
-var fixtures: Fixtures;
+declare var fixtures: Fixtures;

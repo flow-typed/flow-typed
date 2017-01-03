@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var notie: {
+declare var notie: {
     alert: (type: number, message: string, seconds: number) => void,
     confirm: (
         title: string,

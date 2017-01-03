@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Handlebars: {
+declare var npm$namespace$Handlebars: {
     registerHelper: typeof Handlebars$registerHelper,
     registerPartial: typeof Handlebars$registerPartial,
     unregisterHelper: typeof Handlebars$unregisterHelper,
@@ -26,71 +25,49 @@ var npm$namespace$Handlebars: {
     unregisterDecorator: typeof Handlebars$unregisterDecorator,
     noConflict: typeof Handlebars$noConflict,
 }
-declare
-export function Handlebars$registerHelper(name: string, fn: Function, inverse?: boolean): void
+declare export function Handlebars$registerHelper(name: string, fn: Function, inverse?: boolean): void
 
-declare
-export function Handlebars$registerPartial(name: string, str: any): void
+declare export function Handlebars$registerPartial(name: string, str: any): void
 
-declare
-export function Handlebars$unregisterHelper(name: string): void
+declare export function Handlebars$unregisterHelper(name: string): void
 
-declare
-export function Handlebars$unregisterPartial(name: string): void
+declare export function Handlebars$unregisterPartial(name: string): void
 
-declare
-export function Handlebars$K(): void
+declare export function Handlebars$K(): void
 
-declare
-export function Handlebars$createFrame(object: any): any
+declare export function Handlebars$createFrame(object: any): any
 
-declare
-export function Handlebars$Exception(message: string): void
+declare export function Handlebars$Exception(message: string): void
 
-declare
-export function Handlebars$log(level: number, obj: any): void
+declare export function Handlebars$log(level: number, obj: any): void
 
-declare
-export function Handlebars$parse(input: string): undefined.Program
+declare export function Handlebars$parse(input: string): undefined.Program
 
-declare
-export function Handlebars$compile(input: any, options?: CompileOptions): HandlebarsTemplateDelegate
+declare export function Handlebars$compile(input: any, options?: CompileOptions): HandlebarsTemplateDelegate
 
-declare
-export function Handlebars$precompile(input: any, options?: PrecompileOptions): TemplateSpecification
+declare export function Handlebars$precompile(input: any, options?: PrecompileOptions): TemplateSpecification
 
-declare
-export function Handlebars$template(precompilation: TemplateSpecification): HandlebarsTemplateDelegate
+declare export function Handlebars$template(precompilation: TemplateSpecification): HandlebarsTemplateDelegate
 
-declare
-export function Handlebars$create(): typeof Handlebars
+declare export function Handlebars$create(): typeof Handlebars
 
-declare
-export var SafeString: typeof undefined;
+declare export var SafeString: typeof undefined;
 
-declare
-export var escapeExpression: typeof undefined;
+declare export var escapeExpression: typeof undefined;
 
-declare
-export var Utils: typeof undefined;
+declare export var Utils: typeof undefined;
 
-declare
-export var logger: Logger;
+declare export var logger: Logger;
 
-declare
-export var templates: HandlebarsTemplates;
+declare export var templates: HandlebarsTemplates;
 
-declare
-export var helpers: any;
+declare export var helpers: any;
 
-declare
-export function Handlebars$registerDecorator(name: string, fn: Function): void
+declare export function Handlebars$registerDecorator(name: string, fn: Function): void
 
-declare
-export function Handlebars$unregisterDecorator(name: string): void
+declare export function Handlebars$unregisterDecorator(name: string): void
 
-declare
-export function Handlebars$noConflict(): typeof Handlebars
+declare export function Handlebars$noConflict(): typeof Handlebars
 
 declare module 'AST' {
     declare export var helpers: undefined.helpers;
@@ -118,8 +95,7 @@ declare interface Handlebars$ICompiler {
         Hash(hash: undefined.Hash): void
 }
 
-declare
-export class Visitor mixins ICompiler {
+declare export class Visitor mixins ICompiler {
     accept(node: undefined.Node): void;
     acceptKey(node: undefined.Node, name: string): void;
     acceptArray(arr: undefined.Expression[]): void;

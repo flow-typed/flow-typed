@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Later$IScheduleData {
+declare export interface Later$IScheduleData {
 
     /**
      * A list of recurrence information as a composite schedule.
@@ -26,8 +25,7 @@ export interface Later$IScheduleData {
         error: number
 }
 
-declare
-export interface Later$IRecurrence {
+declare export interface Later$IRecurrence {
 
     /**
      * Time in seconds from midnight.
@@ -210,8 +208,7 @@ export interface Later$IRecurrence {
         Y_b?: number[], [timeperiodAndModifierName: string]: number[]
 }
 
-declare
-export interface Later$IParseStatic {
+declare export interface Later$IParseStatic {
 
     /**
      * Create a recurrence builder for building schedule data.
@@ -231,8 +228,7 @@ export interface Later$IParseStatic {
         text(input?: string): Later$IScheduleData
 }
 
-declare
-export interface Later$ITimer {
+declare export interface Later$ITimer {
 
     /**
      * Clear the timer and end execution.
@@ -240,8 +236,7 @@ export interface Later$ITimer {
     clear(): void
 }
 
-declare
-export interface Later$ISchedule {
+declare export interface Later$ISchedule {
 
     /**
      * Finds the next valid instance or instances of the current schedule,
@@ -288,8 +283,7 @@ export interface Later$ISchedule {
         prevRange(numberOfInst: number, dateFrom?: Date, dateTo?: Date): Date[]
 }
 
-declare
-export type Later$IRecurrenceBuilder = {
+declare export type Later$IRecurrenceBuilder = {
 
     /**
      * a time period
@@ -483,8 +477,7 @@ export type Later$IRecurrenceBuilder = {
 } & Later$IScheduleData
 
 
-declare
-export interface Later$IDateProvider {
+declare export interface Later$IDateProvider {
 
     /**
      * Set later to use UTC time.
@@ -551,8 +544,7 @@ export interface Later$IDateProvider {
             period: Later$ITimePeriod): Date
 }
 
-declare
-export interface Later$ITimePeriod {
+declare export interface Later$ITimePeriod {
 
     /**
      * The name of the time period information provider.
@@ -616,8 +608,7 @@ export interface Later$ITimePeriod {
         prev(date: Date, value: any): Date
 }
 
-declare
-export type Later$IModifier = {
+declare export type Later$IModifier = {
 
     /**
      * Creates a new modified constraint.
@@ -628,8 +619,7 @@ export type Later$IModifier = {
 } & Later$ITimePeriod
 
 
-declare
-export interface Later$IModifierStatic {
+declare export interface Later$IModifierStatic {
 
     /**
      * After Modifier
@@ -642,8 +632,7 @@ export interface Later$IModifierStatic {
         before: Later$IModifier
 }
 
-declare
-export interface Later$IStatic {
+declare export interface Later$IStatic {
 
     /**
      * Schedule
@@ -748,5 +737,4 @@ export interface Later$IStatic {
         */
         modifier: Later$IModifierStatic
 }
-declare
-var later: Later$IStatic;
+declare var later: Later$IStatic;

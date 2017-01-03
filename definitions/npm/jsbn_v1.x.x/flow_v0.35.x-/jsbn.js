@@ -10,8 +10,7 @@ declare interface jsbn$RandomGenerator {
     nextBytes(bytes: number[]): void
 }
 
-declare
-export class BigInteger {
+declare export class BigInteger {
     constructor(a: number, c: jsbn$RandomGenerator): this;
     constructor(a: number, b: number, c: jsbn$RandomGenerator): this;
     constructor(a: string, b?: number): this;

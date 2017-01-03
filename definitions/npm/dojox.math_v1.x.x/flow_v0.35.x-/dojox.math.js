@@ -93,8 +93,7 @@ declare interface random$prng4 {
     (): void
 }
 
-declare
-var size: number;
+declare var size: number;
 
 
 /**

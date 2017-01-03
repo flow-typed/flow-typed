@@ -6,14 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export var version: string;
+declare export var version: string;
 
-declare
-export var author: string;
+declare export var author: string;
 
-declare
-export class Matrix {
+declare export class Matrix {
     constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number): this;
     a: number;
     b: number;
@@ -23,15 +20,13 @@ export class Matrix {
     ty: number
 }
 
-declare
-export class Point {
+declare export class Point {
     constructor(x?: number, y?: number): this;
     x: number;
     y: number
 }
 
-declare
-export class Point3D {
+declare export class Point3D {
     constructor(x?: number, y?: number, z?: number): this;
     x: number;
     y: number;
@@ -39,14 +34,12 @@ export class Point3D {
     toGlobalCoordinates(offset?: obelisk$Point): obelisk$Point
 }
 
-declare
-export class ColorGeom {
+declare export class ColorGeom {
     get32(color: number): number;
     applyBrightness(color: number, brightness: number, highlight?: boolean): number
 }
 
-declare
-export class ColorPattern {
+declare export class ColorPattern {
     GRASS_GREEN: number;
     YELLOW: number;
     WINE_RED: number;
@@ -59,20 +52,17 @@ export class ColorPattern {
     getRandomComfortableColor(): number
 }
 
-declare
-export class CanvasTool {
+declare export class CanvasTool {
     getPixel(imageData: ImageData, x: number, y: number): number
 }
 
-declare
-export class CanvasManager {
+declare export class CanvasManager {
     defaultCanvas: HTMLCanvasElement;
     getDefaultCanvas(): HTMLCanvasElement;
     getNewCanvas(): HTMLCanvasElement
 }
 
-declare
-export class AbstractColor {
+declare export class AbstractColor {
     constructor(): this;
     inner: number;
     border: number;
@@ -84,36 +74,31 @@ export class AbstractColor {
     rightSlope: number
 }
 
-declare
-export class CubeColor mixins AbstractColor {
+declare export class CubeColor mixins AbstractColor {
     constructor(border?: number, borderHighlight?: number, left?: number, right?: number, horizontal?: number): this;
     BRIGHTNESS_GAIN: number;
     getByHorizontalColor(horizontal: number): obelisk$CubeColor
 }
 
-declare
-export class PyramidColor mixins AbstractColor {
+declare export class PyramidColor mixins AbstractColor {
     constructor(border?: number, borderHighlight?: number, left?: number, right?: number): this;
     BRIGHTNESS_GAIN: number;
     getByRightColor(horizontal: number): obelisk$PyramidColor
 }
 
-declare
-export class SideColor mixins AbstractColor {
+declare export class SideColor mixins AbstractColor {
     constructor(border?: number, inner?: number): this;
     BRIGHTNESS_GAIN: number;
     getByInnerColor(inner: number): obelisk$SideColor
 }
 
-declare
-export class SlopeColor mixins AbstractColor {
+declare export class SlopeColor mixins AbstractColor {
     constructor(border?: number, borderHighlight?: number, left?: number, right?: number, leftSlope?: number, rightSlope?: number): this;
     BRIGHTNESS_GAIN: number;
     getByHorizontalColor(horizontal: number): obelisk$SlopeColor
 }
 
-declare
-export class AbstractDimension {
+declare export class AbstractDimension {
     constructor(): this;
     xAxis: number;
     yAxis: number;
@@ -121,38 +106,31 @@ export class AbstractDimension {
     tall: boolean
 }
 
-declare
-export class BrickDimension mixins AbstractDimension {
+declare export class BrickDimension mixins AbstractDimension {
     constructor(xAxis?: number, yAxis?: number): this
 }
 
-declare
-export class CubeDimension mixins AbstractDimension {
+declare export class CubeDimension mixins AbstractDimension {
     constructor(xAxis?: number, yAxis?: number, zAxis?: number): this
 }
 
-declare
-export class PyramidDimension mixins AbstractDimension {
+declare export class PyramidDimension mixins AbstractDimension {
     constructor(axis?: number, tall?: boolean): this
 }
 
-declare
-export class SideXDimension mixins AbstractDimension {
+declare export class SideXDimension mixins AbstractDimension {
     constructor(xAxis?: number, zAxis?: number): this
 }
 
-declare
-export class SideYDimension mixins AbstractDimension {
+declare export class SideYDimension mixins AbstractDimension {
     constructor(yAxis?: number, zAxis?: number): this
 }
 
-declare
-export class SlopeDimension mixins AbstractDimension {
+declare export class SlopeDimension mixins AbstractDimension {
     constructor(xAxis?: number, yAxis?: number): this
 }
 
-declare
-export class BitmapData {
+declare export class BitmapData {
     constructor(w: number, h: number, useDefaultCanvas?: boolean): this;
     imageData: ImageData;
     canvas: HTMLCanvasElement;
@@ -163,16 +141,14 @@ export class BitmapData {
     floodFill(posX: number, posY: number, color: number): void
 }
 
-declare
-export class PixelObject {
+declare export class PixelObject {
     constructor(primitive: obelisk$AbstractPrimitive, point3D?: obelisk$Point3D): this;
     x: number;
     y: number;
     canvas: HTMLCanvasElement
 }
 
-declare
-export class PixelView {
+declare export class PixelView {
     constructor(canvas: HTMLCanvasElement, point?: obelisk$Point): this;
     canvas: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
@@ -181,8 +157,7 @@ export class PixelView {
     clear(): void
 }
 
-declare
-export class AbstractPrimitive {
+declare export class AbstractPrimitive {
     constructor(): this;
     canvas: HTMLCanvasElement;
     w: number;
@@ -195,47 +170,38 @@ export class AbstractPrimitive {
     matrix: obelisk$Matrix
 }
 
-declare
-export class Brick mixins AbstractPrimitive {
+declare export class Brick mixins AbstractPrimitive {
     constructor(dimension?: obelisk$BrickDimension, color?: obelisk$SideColor, border?: boolean, useDefaultCanvas?: boolean): this
 }
 
-declare
-export class Cube mixins AbstractPrimitive {
+declare export class Cube mixins AbstractPrimitive {
     constructor(dimension?: obelisk$CubeDimension, color?: obelisk$CubeColor, border?: boolean, useDefaultCanvas?: boolean): this
 }
 
-declare
-export class Pyramid mixins AbstractPrimitive {
+declare export class Pyramid mixins AbstractPrimitive {
     constructor(dimension?: obelisk$PyramidDimension, color?: obelisk$PyramidColor, border?: boolean, useDefaultCanvas?: boolean): this
 }
 
-declare
-export class SideX mixins AbstractPrimitive {
+declare export class SideX mixins AbstractPrimitive {
     constructor(dimension?: obelisk$SideXDimension, color?: obelisk$SideColor, border?: boolean, useDefaultCanvas?: boolean): this
 }
 
-declare
-export class SideY mixins AbstractPrimitive {
+declare export class SideY mixins AbstractPrimitive {
     constructor(dimension?: obelisk$SideYDimension, color?: obelisk$SideColor, border?: boolean, useDefaultCanvas?: boolean): this
 }
 
-declare
-export class SlopeEast mixins AbstractPrimitive {
+declare export class SlopeEast mixins AbstractPrimitive {
     constructor(dimension?: obelisk$SlopeDimension, color?: obelisk$SlopeColor, border?: boolean, useDefaultCanvas?: boolean): this
 }
 
-declare
-export class SlopeNorth mixins AbstractPrimitive {
+declare export class SlopeNorth mixins AbstractPrimitive {
     constructor(dimension?: obelisk$SlopeDimension, color?: obelisk$SlopeColor, border?: boolean, useDefaultCanvas?: boolean): this
 }
 
-declare
-export class SlopeSouth mixins AbstractPrimitive {
+declare export class SlopeSouth mixins AbstractPrimitive {
     constructor(dimension?: obelisk$SlopeDimension, color?: obelisk$SlopeColor, border?: boolean, useDefaultCanvas?: boolean): this
 }
 
-declare
-export class SlopeWest mixins AbstractPrimitive {
+declare export class SlopeWest mixins AbstractPrimitive {
     constructor(dimension?: obelisk$SlopeDimension, color?: obelisk$SlopeColor, border?: boolean, useDefaultCanvas?: boolean): this
 }

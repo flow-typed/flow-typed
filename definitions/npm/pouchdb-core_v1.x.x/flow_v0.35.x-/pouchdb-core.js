@@ -281,8 +281,7 @@ declare type Core$InfoOptions = {} & Core$Options
 /**
  * Pass this to `PouchDB.plugin()`.
  */
-declare
-export type PouchDB$Plugin = "This should be passed to PouchDB.plugin()";
+declare export type PouchDB$Plugin = "This should be passed to PouchDB.plugin()";
 
 declare interface Configuration$CommonDatabaseConfiguration {
 
@@ -502,5 +501,4 @@ declare module 'pouchdb-core' {
     declare var PouchDb: PouchDB$Static;
     declare module.exports: typeof PouchDb
 }
-declare
-var PouchDB: PouchDB$Static;
+declare var PouchDB: PouchDB$Static;

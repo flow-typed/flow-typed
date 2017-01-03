@@ -13,8 +13,7 @@ declare class HowlerGlobal {
     codecs(extension: string): boolean;
     iOSAutoEnable: boolean
 }
-declare
-var Howler: HowlerGlobal;
+declare var Howler: HowlerGlobal;
 declare interface IHowlSoundSpriteDefinition {
     [name: string]: number[]
 }
@@ -77,8 +76,7 @@ declare interface Howl {
 declare interface HowlStatic {
     new(properties: IHowlProperties): Howl
 }
-declare
-var Howl: HowlStatic;
+declare var Howl: HowlStatic;
 declare module 'howler' {
     declare export var Howler: HowlerGlobal;
     declare export var Howl: HowlStatic;

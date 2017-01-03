@@ -6,9 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function createStoryJS(config: knightlab$ITimeLineConfiguration): voiddeclare
-export interface knightlab$ITimeLineConfiguration {
+declare function createStoryJS(config: knightlab$ITimeLineConfiguration): voiddeclare export interface knightlab$ITimeLineConfiguration {
     width: string,
         height: string,
         source: any,
@@ -27,13 +25,11 @@ export interface knightlab$ITimeLineConfiguration {
         maptype?: string
 }
 
-declare
-export interface knightlab$ITimelineModel {
+declare export interface knightlab$ITimelineModel {
     timeline: knightlab$ITimeLine
 }
 
-declare
-export interface knightlab$ITimeLine {
+declare export interface knightlab$ITimeLine {
     headline?: string,
         type?: string,
         text?: string,
@@ -42,23 +38,20 @@ export interface knightlab$ITimeLine {
         era?: knightlab$ITimelineEra[]
 }
 
-declare
-export interface knightlab$ITimeLineAsset {
+declare export interface knightlab$ITimeLineAsset {
     media: string,
         thumbnail?: string,
         credit: string,
         caption: string
 }
 
-declare
-export type knightlab$ITimelineDate = {
+declare export type knightlab$ITimelineDate = {
     classname?: string,
     asset?: knightlab$ITimeLineAsset
 } & knightlab$ITimelineEra
 
 
-declare
-export interface knightlab$ITimelineEra {
+declare export interface knightlab$ITimelineEra {
     startDate: string,
         endDate: string,
         headline: string,

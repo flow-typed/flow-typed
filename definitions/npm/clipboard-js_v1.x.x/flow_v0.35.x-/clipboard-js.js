@@ -10,8 +10,7 @@ declare interface clipboard$IClipboardJsStatic {
     copy(val: string | Element): Promise<void>,
         paste(): Promise<string >
 }
-declare
-var clipboard: clipboard$IClipboardJsStatic;
+declare var clipboard: clipboard$IClipboardJsStatic;
 declare module 'clipboard-js' {
     declare module.exports: typeof clipboard
 }

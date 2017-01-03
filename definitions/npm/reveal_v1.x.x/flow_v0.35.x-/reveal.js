@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Reveal: RevealStatic;
+declare var Reveal: RevealStatic;
 declare interface RevealStatic {
     initialize: (config: RevealOptions) => void,
         configure: (diff: RevealOptions) => void,

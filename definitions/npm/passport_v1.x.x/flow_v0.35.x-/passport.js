@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Express$Request {
+declare export interface Express$Request {
     authInfo?: any,
         user?: any,
         login(user: any, done: (err: any) => void): void,

@@ -6,35 +6,25 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Neuron: typeof undefined;
-declare
-var Layer: typeof undefined;
-declare
-var Network: typeof undefined;
-declare
-var Architect: typeof undefined;
-declare
-var Trainer: typeof undefined;
+declare var Neuron: typeof undefined;
+declare var Layer: typeof undefined;
+declare var Network: typeof undefined;
+declare var Architect: typeof undefined;
+declare var Trainer: typeof undefined;
 declare module 'synaptic' {
     declare module.exports: typeof Synaptic
 }
 declare type Neuron$SquashingFunction = (x: number, derivate: boolean) => number;
 
-declare
-var LOGISTIC: Neuron$SquashingFunction;
+declare var LOGISTIC: Neuron$SquashingFunction;
 
-declare
-var TANH: Neuron$SquashingFunction;
+declare var TANH: Neuron$SquashingFunction;
 
-declare
-var IDENTITY: Neuron$SquashingFunction;
+declare var IDENTITY: Neuron$SquashingFunction;
 
-declare
-var HLIM: Neuron$SquashingFunction;
+declare var HLIM: Neuron$SquashingFunction;
 
-declare
-var ReLU: Neuron$SquashingFunction;
+declare var ReLU: Neuron$SquashingFunction;
 
 declare class Connection {
     ID: number;
@@ -47,8 +37,7 @@ declare class Connection {
     uid(): number
 }
 
-declare
-var connection: typeof Connection;
+declare var connection: typeof Connection;
 
 
 /**
@@ -162,8 +151,7 @@ declare class LayerConnection {
     uid(): number
 }
 
-declare
-var connection: typeof LayerConnection;
+declare var connection: typeof LayerConnection;
 
 declare interface Layer$Options {
     label?: any,
@@ -524,14 +512,11 @@ declare interface Trainer$TrainingScheduleOptions {
 
 declare type Trainer$CostFunction = (targetValues: number[], outputValues: number[]) => number;
 
-declare
-var CROSS_ENTROPY: Trainer$CostFunction;
+declare var CROSS_ENTROPY: Trainer$CostFunction;
 
-declare
-var MSE: Trainer$CostFunction;
+declare var MSE: Trainer$CostFunction;
 
-declare
-var BINARY: Trainer$CostFunction;
+declare var BINARY: Trainer$CostFunction;
 
 declare interface Trainer$TrainingResult {
     error: number,

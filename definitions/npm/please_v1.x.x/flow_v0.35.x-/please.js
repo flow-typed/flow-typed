@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Please: PleaseJS$Please;
-declare
-export interface PleaseJS$Please {
+declare var Please: PleaseJS$Please;
+declare export interface PleaseJS$Please {
     make_color(options?: PleaseJS$MakeColorOption): Array<string>,
         make_color(options?: PleaseJS$MakeColorOption): Array<PleaseJS$RGB>,
         make_color(options?: PleaseJS$MakeColorOption): Array<PleaseJS$HSV>,
@@ -31,8 +29,7 @@ export interface PleaseJS$Please {
         HEX_to_HSV(hex: string): PleaseJS$HSV
 }
 
-declare
-export interface PleaseJS$MakeColorOption {
+declare export interface PleaseJS$MakeColorOption {
     hue?: number,
         saturation?: number,
         value?: number,
@@ -45,21 +42,18 @@ export interface PleaseJS$MakeColorOption {
         format?: string
 }
 
-declare
-export interface PleaseJS$MakeSchemeOption {
+declare export interface PleaseJS$MakeSchemeOption {
     scheme_type: string,
         format: string
 }
 
-declare
-export interface PleaseJS$RGB {
+declare export interface PleaseJS$RGB {
     r: number,
         g: number,
         b: number
 }
 
-declare
-export interface PleaseJS$HSV {
+declare export interface PleaseJS$HSV {
     h: number,
         s: number,
         v: number

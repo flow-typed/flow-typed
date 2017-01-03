@@ -45,8 +45,7 @@ declare interface deepDiff$IDeepDiff {
         isConflict(): boolean,
         noConflict(): deepDiff$IDeepDiff
 }
-declare
-var DeepDiff: deepDiff$IDeepDiff;
+declare var DeepDiff: deepDiff$IDeepDiff;
 declare module 'deep-diff' {
     declare var diff: deepDiff$IDeepDiff;
     declare module.exports: typeof diff

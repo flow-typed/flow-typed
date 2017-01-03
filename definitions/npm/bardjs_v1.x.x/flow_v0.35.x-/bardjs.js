@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$bard: {
+declare var npm$namespace$bard: {
         $httpBackend: typeof bard$$httpBackend,
         $q: typeof bard$$q,
         addGlobals: typeof bard$addGlobals,
@@ -38,8 +37,7 @@ var npm$namespace$bard: {
 
     Could restore $q with $qReal in which case don't need to flush.
     */
-declare
-function bard$$httpBackend($provide: undefined.IProvideService): any
+declare function bard$$httpBackend($provide: undefined.IProvideService): any
 
 
 /**
@@ -47,8 +45,7 @@ function bard$$httpBackend($provide: undefined.IProvideService): any
  * obviating the need to flush $http and $q queues
 at the expense of ability to control $q timing.
 */
-declare
-function bard$$q($provide: undefined.IProvideService): any
+declare function bard$$q($provide: undefined.IProvideService): any
 
 
 /**
@@ -57,8 +54,7 @@ function bard$$q($provide: undefined.IProvideService): any
 NB: Turn off browser-sync else mocha detects the browser-sync globals
 like ` ___browserSync___`
 */
-declare
-function bard$addGlobals(...globals: any[]): void
+declare function bard$addGlobals(...globals: any[]): void
 
 
 /**
@@ -71,15 +67,13 @@ Use it as you would the ngMocks#module method
 DO NOT USE IF YOU NEED THE REAL ROUTER SERVICES!
 Fall back to `angular.mock.module(...)` or just `module(...)`
 */
-declare
-function bard$appModule(...fns: (string | Function | Object)[]): () => void
+declare function bard$appModule(...fns: (string | Function | Object)[]): () => void
 
 
 /**
  * Assert a failure in mocha, without condition
  */
-declare
-function bard$assertFail(message: string): Chai.AssertionError
+declare function bard$assertFail(message: string): Chai.AssertionError
 
 
 /**
@@ -87,29 +81,25 @@ function bard$assertFail(message: string): Chai.AssertionError
  * Also adds fakeLogger to the end of the definition
 Use it as you would the ngMocks#module method
 */
-declare
-function bard$asyncModule(...fns: (string | Function | Object)[]): () => void
+declare function bard$asyncModule(...fns: (string | Function | Object)[]): () => void
 
 
 /**
  * Get or set bard debugging flag
  */
-declare
-function bard$debugging(newFlag?: any): boolean
+declare function bard$debugging(newFlag?: any): boolean
 
 
 /**
  * Registers a fake logger service that you can spy on
  */
-declare
-function bard$fakeLogger($provide: undefined.IProvideService): void
+declare function bard$fakeLogger($provide: undefined.IProvideService): void
 
 
 /**
  * Registers a fake route helper provider service that you can spy on
  */
-declare
-function bard$fakeRouteHelperProvider($provide: undefined.IProvideService): void
+declare function bard$fakeRouteHelperProvider($provide: undefined.IProvideService): void
 
 
 /**
@@ -118,8 +108,7 @@ function bard$fakeRouteHelperProvider($provide: undefined.IProvideService): void
 which runs on every test otherwise.
 Make sure this goes before the inject in the spec.
 */
-declare
-function bard$fakeRouteProvider($provide: undefined.IProvideService): void
+declare function bard$fakeRouteProvider($provide: undefined.IProvideService): void
 
 
 /**
@@ -128,15 +117,13 @@ function bard$fakeRouteProvider($provide: undefined.IProvideService): void
 which runs on every test otherwise.
 Make sure this goes before the inject in the spec.
 */
-declare
-function bard$fakeStateProvider($provide: undefined.IProvideService): void
+declare function bard$fakeStateProvider($provide: undefined.IProvideService): void
 
 
 /**
  * Registers a fake toastr service that you can spy on
  */
-declare
-function bard$fakeToastr($provide: undefined.IProvideService): void
+declare function bard$fakeToastr($provide: undefined.IProvideService): void
 
 
 /**
@@ -156,15 +143,13 @@ remaining inject arguments may take one of 3 forms :
     [strings]   - same string array you'd use to set fn.$inject
     (...string) - string arguments turned into a string array
 */
-declare
-function bard$inject(context?: Function, ...args: string[]): void
+declare function bard$inject(context?: Function, ...args: string[]): void
 
 
 /**
  * Write to console if bard debugging flag is on
  */
-declare
-function bard$log(message: any): void
+declare function bard$log(message: any): void
 
 
 /**
@@ -173,8 +158,7 @@ function bard$log(message: any): void
     var runner = mocha.run();
     bard.mochaRunnerListener(runner);
 */
-declare
-function bard$mochaRunnerListener(runner: Mocha.IRunner): void
+declare function bard$mochaRunnerListener(runner: Mocha.IRunner): void
 
 
 /**
@@ -195,8 +179,7 @@ using the config._default value (which is `undefined` if omitted)
 If there is a config entry that is NOT a member of the service
 add mocked function to the service using the config value
 */
-declare
-function bard$mockService(service: any, config: any): any
+declare function bard$mockService(service: any, config: any): any
 
 
 /**
@@ -206,16 +189,14 @@ Matches the default string comparers of most databases.
 Ex: replaceAccentChars(a.Name)<replaceAccentChars(b.Name)
 instead of:            a.Name <                   b.Name
 */
-declare
-function bard$replaceAccentChars(text: string): string
+declare function bard$replaceAccentChars(text: string): string
 
 
 /**
  * Assert that there are no outstanding HTTP requests after test is complete
  * For use with ngMocks; doesn't work for async server integration tests
  */
-declare
-function bard$verifyNoOutstandingHttpRequests(): void
+declare function bard$verifyNoOutstandingHttpRequests(): void
 
 
 /**
@@ -224,5 +205,4 @@ function bard$verifyNoOutstandingHttpRequests(): void
 The try/catch then calls the ambient "done" function
 in the appropriate way for both success and failure
 */
-declare
-function bard$wrapWithDone(callback: Function, done: Function): Function
+declare function bard$wrapWithDone(callback: Function, done: Function): Function

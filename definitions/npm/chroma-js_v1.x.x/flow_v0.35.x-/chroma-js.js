@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Chroma$ChromaStatic {
+declare export interface Chroma$ChromaStatic {
 
     /**
      * Creates a color from a string representation (as supported in CSS).
@@ -159,8 +158,7 @@ export interface Chroma$ChromaStatic {
         css(col: string, mode?: string): string
 }
 
-declare
-export interface Chroma$Color {
+declare export interface Chroma$Color {
     alpha(a?: number): Chroma$Color,
         darken(f?: number): Chroma$Color,
         brighten(f?: number): Chroma$Color,
@@ -193,8 +191,7 @@ export interface Chroma$Color {
         gl(): number[]
 }
 
-declare
-export interface Chroma$Scale {
+declare export interface Chroma$Scale {
     (c: string[]): Chroma$Scale,
     (value: number): any,
     domain(d?: number[], n?: number, mode?: string): Chroma$Scale,
@@ -209,15 +206,13 @@ export interface Chroma$Scale {
         out(mode: string): Chroma$Scale
 }
 
-declare
-export type Chroma$Cubehelix = {
+declare export type Chroma$Cubehelix = {
     start(s: number): Chroma$Cubehelix,
     rotations(r: number): Chroma$Cubehelix,
     gamma(g: number): Chroma$Cubehelix,
     lightness(l: number[]): Chroma$Cubehelix
 } & Chroma$Scale
-declare
-var chroma: Chroma$ChromaStatic;
+declare var chroma: Chroma$ChromaStatic;
 declare module 'chroma-js' {
     declare module.exports: typeof chroma
 }

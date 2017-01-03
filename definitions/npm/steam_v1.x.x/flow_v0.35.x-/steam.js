@@ -6,19 +6,16 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export var servers: any;
+declare export var servers: any;
 
-declare
-export interface Steam$LogonOptions {
+declare export interface Steam$LogonOptions {
     accountName: string,
         password: string,
         shaSentryfile?: string,
         authCode?: string
 }
 
-declare
-export class SteamClient mixins NodeJS.EventEmitter {
+declare export class SteamClient mixins NodeJS.EventEmitter {
     sessionId: string;
     cookie: string[];
     steamID: string;

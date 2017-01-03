@@ -7,13 +7,11 @@
  */
 
 
-declare
-var npm$namespace$microgears: {
+declare var npm$namespace$microgears: {
     addService: typeof microgears$addService,
     addPlugin: typeof microgears$addPlugin,
 }
-declare
-export interface microgears$Service {
+declare export interface microgears$Service {
     name: string,
         async?: boolean,
         pathname?: string,
@@ -33,10 +31,8 @@ declare interface microgears$Plugin {
         afterChain<T>(result: T, metaInfo: microgears$MetaInformation): T
 }
 
-declare
-function microgears$addService(service: microgears$Service): microgears$Service
+declare function microgears$addService(service: microgears$Service): microgears$Service
 
-declare
-function microgears$addPlugin(plugin: microgears$Plugin): voiddeclare module 'microgears' {
+declare function microgears$addPlugin(plugin: microgears$Plugin): voiddeclare module 'microgears' {
     declare module.exports: typeof microgears
 }

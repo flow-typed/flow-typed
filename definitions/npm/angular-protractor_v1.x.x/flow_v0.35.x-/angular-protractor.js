@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$protractor: {
+declare var npm$namespace$protractor: {
     wrapDriver: typeof protractor$wrapDriver,
 }
 declare class ActionSequence mixins webdriver.ActionSequence {}
@@ -29,47 +28,36 @@ declare class WebElement mixins webdriver.WebElement {}
 
 declare class WebElementPromise mixins webdriver.WebElementPromise {}
 
-declare
-var Browser: webdriver.IBrowser;
+declare var Browser: webdriver.IBrowser;
 
-declare
-var Button: webdriver.IButton;
+declare var Button: webdriver.IButton;
 
-declare
-var Capability: webdriver.ICapability;
+declare var Capability: webdriver.ICapability;
 
-declare
-var CommandName: webdriver.ICommandName;
+declare var CommandName: webdriver.ICommandName;
 
-declare
-var Key: webdriver.IKey;
+declare var Key: webdriver.IKey;
 
 declare class Error mixins undefined.Error {}
 
-declare
-var ErrorCode: undefined.IErrorCode;
+declare var ErrorCode: undefined.IErrorCode;
 
 
-declare
-var npm$namespace$logging: {
+declare var npm$namespace$logging: {
     getLevel: typeof logging$getLevel,
 }
 declare class Preferences mixins undefined.Preferences {}
 
 declare class Entry mixins undefined.Entry {}
 
-declare
-var Type: undefined.IType;
+declare var Type: undefined.IType;
 
-declare
-var Level: undefined.ILevelValues;
+declare var Level: undefined.ILevelValues;
 
-declare
-function logging$getLevel(nameOrValue: string): undefined.ILevel
+declare function logging$getLevel(nameOrValue: string): undefined.ILevel
 
 
-declare
-var npm$namespace$promise: {
+declare var npm$namespace$promise: {
     all: typeof promise$all,
     asap: typeof promise$asap,
     controlFlow: typeof promise$controlFlow,
@@ -112,8 +100,7 @@ input array, or rejected with the same reason as the first
 rejected value.
  * @template  
 */
-declare
-function promise$all(arr: undefined.Promise<any>[]): undefined.Promise<any[] >
+declare function promise$all(arr: undefined.Promise<any>[]): undefined.Promise<any[] >
 
 
     /**
@@ -128,16 +115,14 @@ function promise$all(arr: undefined.Promise<any>[]): undefined.Promise<any[] >
      * @param  The function to call when the value is
     rejected.
     */
-    declare
-function promise$asap(value: any, callback: Function, opt_errback?: Function): void
+    declare function promise$asap(value: any, callback: Function, opt_errback?: Function): void
 
 
 /**
  * 
  * @return  The currently active control flow.
  */
-declare
-function promise$controlFlow(): undefined.ControlFlow
+declare function promise$controlFlow(): undefined.ControlFlow
 
 
 /**
@@ -149,8 +134,7 @@ to the newly created flow.
  * @return  A promise that resolves to the callback
 result.
 */
-declare
-function promise$createFlow<R>(callback: (flow: undefined.ControlFlow) => R): undefined.Promise<R >
+declare function promise$createFlow<R>(callback: (flow: undefined.ControlFlow) => R): undefined.Promise<R >
 
 
     /**
@@ -159,8 +143,7 @@ function promise$createFlow<R>(callback: (flow: undefined.ControlFlow) => R): un
      * @param  The value to test.
      * @return  Whether the value is a promise.
      */
-    declare
-function promise$isPromise(value: any): boolean
+    declare function promise$isPromise(value: any): boolean
 
 
 /**
@@ -168,8 +151,7 @@ function promise$isPromise(value: any): boolean
  * @param  The function to test.
  * @return  Whether the function is a generator.
  */
-declare
-function promise$isGenerator(fn: Function): boolean
+declare function promise$isGenerator(fn: Function): boolean
 
 
 /**
@@ -178,8 +160,7 @@ function promise$isGenerator(fn: Function): boolean
 resolving the promise.
  * @return  The promise.
 */
-declare
-function promise$delayed(ms: number): undefined.Promise<void >
+declare function promise$delayed(ms: number): undefined.Promise<void >
 
 
     /**
@@ -203,8 +184,7 @@ function promise$delayed(ms: number): undefined.Promise<void >
      * @code  fn}.
      * @template  
     */
-    declare
-function promise$filter<T>(
+    declare function promise$filter<T>(
         arr: T[],
         fn: (element: T, index: number, array: T[]) => any,
         opt_self?: any): undefined.Promise<T[] >
@@ -214,16 +194,14 @@ function promise$filter<T>(
      * Creates a new deferred object.
      * @return  The new deferred object.
      */
-    declare
-function promise$defer<T>(): undefined.Deferred<T >
+    declare function promise$defer<T>(): undefined.Deferred<T >
 
 
     /**
      * Creates a promise that has been resolved with the given value.*=} opt_value The resolved value.
      * @return  The resolved promise.
      */
-    declare
-function promise$fulfilled<T>(opt_value?: T): undefined.Promise<T >
+    declare function promise$fulfilled<T>(opt_value?: T): undefined.Promise<T >
 
 
     /**
@@ -248,8 +226,7 @@ function promise$fulfilled<T>(opt_value?: T): undefined.Promise<T >
      * @code  fn}.
      * @template  
     */
-    declare
-function promise$map<T>(
+    declare function promise$map<T>(
         arr: T[],
         fn: (element: T, index: number, array: T[]) => any,
         opt_self?: any): undefined.Promise<T[] >
@@ -260,8 +237,7 @@ function promise$map<T>(
      *     usually an Error or a string.
      * @return  The rejected promise.
      */
-    declare
-function promise$rejected(opt_reason?: any): undefined.Promise<void >
+    declare function promise$rejected(opt_reason?: any): undefined.Promise<void >
 
 
     /**
@@ -274,8 +250,7 @@ function promise$rejected(opt_reason?: any): undefined.Promise<void >
      * @return  A promise that will be resolved with the
     result of the provided function's callback.
     */
-    declare
-function promise$checkedNodeCall<T>(fn: Function, ...var_args: any[]): undefined.Promise<T >
+    declare function promise$checkedNodeCall<T>(fn: Function, ...var_args: any[]): undefined.Promise<T >
 
 
     /**
@@ -317,8 +292,7 @@ function promise$checkedNodeCall<T>(fn: Function, ...var_args: any[]): undefined
     generator's final result.
      * @throws  {TypeError} If the given function is not a generator.
     */
-    declare
-function promise$consume<T>(
+    declare function promise$consume<T>(
         generatorFn: Function,
         opt_self?: any,
         ...var_args: any[]): undefined.Promise<T >
@@ -335,8 +309,7 @@ function promise$consume<T>(
     rejected.
      * @return  A new promise.
     */
-    declare
-function promise$when<T, R>(
+    declare function promise$when<T, R>(
         value: T,
         opt_callback?: (value: T) => any,
         opt_errback?: (error: any) => any): undefined.Promise<R >
@@ -360,8 +333,7 @@ function promise$when<T, R>(
      * @return  A promise for a fully resolved version
     of the input value.
     */
-    declare
-function promise$fullyResolved<T>(value: any): undefined.Promise<T >
+    declare function promise$fullyResolved<T>(value: any): undefined.Promise<T >
 
 
     /**
@@ -369,12 +341,10 @@ function promise$fullyResolved<T>(value: any): undefined.Promise<T >
      * @param  The new default flow.
      * @throws  {Error} If the default flow is not currently active.
      */
-    declare
-function promise$setDefaultFlow(flow: undefined.ControlFlow): void
+    declare function promise$setDefaultFlow(flow: undefined.ControlFlow): void
 
 
-declare
-var npm$namespace$stacktrace: {
+declare var npm$namespace$stacktrace: {
     format: typeof stacktrace$format,
     get: typeof stacktrace$get,
 }
@@ -388,8 +358,7 @@ declare class Snapshot mixins undefined.Snapshot {}
  * @param  The error to format.
  * @return  The formatted error.
  */
-declare
-function stacktrace$format(error: any): any
+declare function stacktrace$format(error: any): any
 
 
 /**
@@ -398,15 +367,12 @@ function stacktrace$format(error: any): any
 this function.
  * @return  The frames of the stack trace.
 */
-declare
-function stacktrace$get(): undefined.Frame[]
+declare function stacktrace$get(): undefined.Frame[]
 
-declare
-var BROWSER_SUPPORTED: boolean;
+declare var BROWSER_SUPPORTED: boolean;
 
 
-declare
-var npm$namespace$until: {
+declare var npm$namespace$until: {
     ableToSwitchToFrame: typeof until$ableToSwitchToFrame,
     alertIsPresent: typeof until$alertIsPresent,
     elementIsDisabled: typeof until$elementIsDisabled,
@@ -447,8 +413,7 @@ function(!webdriver.WebDriver): !webdriver.WebElement)} frame
 The frame identifier.
  * @return  A new condition.
 */
-declare
-function until$ableToSwitchToFrame(frame: number): undefined.Condition<boolean >
+declare function until$ableToSwitchToFrame(frame: number): undefined.Condition<boolean >
 
 
     /**
@@ -456,8 +421,7 @@ function until$ableToSwitchToFrame(frame: number): undefined.Condition<boolean >
      * returned promise will be fulfilled with the handle for the opened alert.
      * @return  The new condition.
      */
-    declare
-function until$alertIsPresent(): undefined.Condition<webdriver.Alert >
+    declare function until$alertIsPresent(): undefined.Condition<webdriver.Alert >
 
 
     /**
@@ -466,8 +430,7 @@ function until$alertIsPresent(): undefined.Condition<webdriver.Alert >
      * @return  The new condition.
      * @see  webdriver.WebDriver#isEnabled
      */
-    declare
-function until$elementIsDisabled(element: webdriver.IWebElement): undefined.Condition<boolean >
+    declare function until$elementIsDisabled(element: webdriver.IWebElement): undefined.Condition<boolean >
 
 
     /**
@@ -476,8 +439,7 @@ function until$elementIsDisabled(element: webdriver.IWebElement): undefined.Cond
      * @return  The new condition.
      * @see  webdriver.WebDriver#isEnabled
      */
-    declare
-function until$elementIsEnabled(element: webdriver.IWebElement): undefined.Condition<boolean >
+    declare function until$elementIsEnabled(element: webdriver.IWebElement): undefined.Condition<boolean >
 
 
     /**
@@ -486,8 +448,7 @@ function until$elementIsEnabled(element: webdriver.IWebElement): undefined.Condi
      * @return  The new condition.
      * @see  webdriver.WebDriver#isSelected
      */
-    declare
-function until$elementIsNotSelected(element: webdriver.IWebElement): undefined.Condition<boolean >
+    declare function until$elementIsNotSelected(element: webdriver.IWebElement): undefined.Condition<boolean >
 
 
     /**
@@ -497,8 +458,7 @@ function until$elementIsNotSelected(element: webdriver.IWebElement): undefined.C
      * @return  The new condition.
      * @see  webdriver.WebDriver#isDisplayed
      */
-    declare
-function until$elementIsNotVisible(element: webdriver.IWebElement): undefined.Condition<boolean >
+    declare function until$elementIsNotVisible(element: webdriver.IWebElement): undefined.Condition<boolean >
 
 
     /**
@@ -507,8 +467,7 @@ function until$elementIsNotVisible(element: webdriver.IWebElement): undefined.Co
      * @return  The new condition.
      * @see  webdriver.WebDriver#isSelected
      */
-    declare
-function until$elementIsSelected(element: webdriver.IWebElement): undefined.Condition<boolean >
+    declare function until$elementIsSelected(element: webdriver.IWebElement): undefined.Condition<boolean >
 
 
     /**
@@ -517,8 +476,7 @@ function until$elementIsSelected(element: webdriver.IWebElement): undefined.Cond
      * @return  The new condition.
      * @see  webdriver.WebDriver#isDisplayed
      */
-    declare
-function until$elementIsVisible(element: webdriver.IWebElement): undefined.Condition<boolean >
+    declare function until$elementIsVisible(element: webdriver.IWebElement): undefined.Condition<boolean >
 
 
     /**
@@ -529,8 +487,7 @@ function until$elementIsVisible(element: webdriver.IWebElement): undefined.Condi
     to use.
      * @return  The new condition.
     */
-    declare
-function until$elementLocated(locator: webdriver.Locator): undefined.Condition<webdriver.IWebElement >
+    declare function until$elementLocated(locator: webdriver.Locator): undefined.Condition<webdriver.IWebElement >
 
 
     /**
@@ -543,8 +500,7 @@ function until$elementLocated(locator: webdriver.Locator): undefined.Condition<w
      * @return  The new condition.
      * @see  webdriver.WebDriver#getText
     */
-    declare
-function until$elementTextContains(element: webdriver.IWebElement, substr: string): undefined.Condition<boolean >
+    declare function until$elementTextContains(element: webdriver.IWebElement, substr: string): undefined.Condition<boolean >
 
 
     /**
@@ -558,8 +514,7 @@ function until$elementTextContains(element: webdriver.IWebElement, substr: strin
      * @return  The new condition.
      * @see  webdriver.WebDriver#getText
     */
-    declare
-function until$elementTextIs(element: webdriver.IWebElement, text: string): undefined.Condition<boolean >
+    declare function until$elementTextIs(element: webdriver.IWebElement, text: string): undefined.Condition<boolean >
 
 
     /**
@@ -572,8 +527,7 @@ function until$elementTextIs(element: webdriver.IWebElement, text: string): unde
      * @return  The new condition.
      * @see  webdriver.WebDriver#getText
     */
-    declare
-function until$elementTextMatches(element: webdriver.IWebElement, regex: RegExp): undefined.Condition<boolean >
+    declare function until$elementTextMatches(element: webdriver.IWebElement, regex: RegExp): undefined.Condition<boolean >
 
 
     /**
@@ -585,8 +539,7 @@ function until$elementTextMatches(element: webdriver.IWebElement, regex: RegExp)
      * @return  The new
     condition.
     */
-    declare
-function until$elementsLocated(locator: webdriver.Locator): undefined.Condition<webdriver.IWebElement[] >
+    declare function until$elementsLocated(locator: webdriver.Locator): undefined.Condition<webdriver.IWebElement[] >
 
 
     /**
@@ -596,8 +549,7 @@ function until$elementsLocated(locator: webdriver.Locator): undefined.Condition<
      * @param  The element that should become stale.
      * @return  The new condition.
     */
-    declare
-function until$stalenessOf(element: webdriver.IWebElement): undefined.Condition<boolean >
+    declare function until$stalenessOf(element: webdriver.IWebElement): undefined.Condition<boolean >
 
 
     /**
@@ -607,8 +559,7 @@ function until$stalenessOf(element: webdriver.IWebElement): undefined.Condition<
     title.
      * @return  The new condition.
     */
-    declare
-function until$titleContains(substr: string): undefined.Condition<boolean >
+    declare function until$titleContains(substr: string): undefined.Condition<boolean >
 
 
     /**
@@ -617,8 +568,7 @@ function until$titleContains(substr: string): undefined.Condition<boolean >
      * @param  The expected page title.
      * @return  The new condition.
      */
-    declare
-function until$titleIs(title: string): undefined.Condition<boolean >
+    declare function until$titleIs(title: string): undefined.Condition<boolean >
 
 
     /**
@@ -627,12 +577,10 @@ function until$titleIs(title: string): undefined.Condition<boolean >
      * @param  The regular expression to test against.
      * @return  The new condition.
      */
-    declare
-function until$titleMatches(regex: RegExp): undefined.Condition<boolean >
+    declare function until$titleMatches(regex: RegExp): undefined.Condition<boolean >
 
 
-    declare
-var npm$namespace$ExpectedConditions: {
+    declare var npm$namespace$ExpectedConditions: {
         not: typeof ExpectedConditions$not,
         and: typeof ExpectedConditions$and,
         or: typeof ExpectedConditions$or,
@@ -652,8 +600,7 @@ var npm$namespace$ExpectedConditions: {
      * Negates the result of a promise.<boolean>} expectedCondition
      * @return  <boolean>} An expected condition that returns the negated value.
      */
-declare
-function ExpectedConditions$not<T>(expectedCondition: undefined.Condition<T>): undefined.Condition<T >
+declare function ExpectedConditions$not<T>(expectedCondition: undefined.Condition<T>): undefined.Condition<T >
 
 
     /**
@@ -662,8 +609,7 @@ function ExpectedConditions$not<T>(expectedCondition: undefined.Condition<T>): u
      * @return  <boolean>} An expected condition that returns a promise which evaluates
     to the result of the logical and.
     */
-    declare
-function ExpectedConditions$and<T>(...fns: undefined.Condition<T>[]): undefined.Condition<T >
+    declare function ExpectedConditions$and<T>(...fns: undefined.Condition<T>[]): undefined.Condition<T >
 
 
     /**
@@ -672,8 +618,7 @@ function ExpectedConditions$and<T>(...fns: undefined.Condition<T>[]): undefined.
      * @return  <boolean>} An expected condition that returns a promise which
     evaluates to the result of the logical or.
     */
-    declare
-function ExpectedConditions$or<T>(...fns: undefined.Condition<T>[]): undefined.Condition<T >
+    declare function ExpectedConditions$or<T>(...fns: undefined.Condition<T>[]): undefined.Condition<T >
 
 
     /**
@@ -681,8 +626,7 @@ function ExpectedConditions$or<T>(...fns: undefined.Condition<T>[]): undefined.C
      * returned promise will be fulfilled with the handle for the opened alert.
      * @return  The new condition.
      */
-    declare
-function ExpectedConditions$alertIsPresent(): undefined.Condition<webdriver.Alert >
+    declare function ExpectedConditions$alertIsPresent(): undefined.Condition<webdriver.Alert >
 
 
     /**
@@ -691,8 +635,7 @@ function ExpectedConditions$alertIsPresent(): undefined.Condition<webdriver.Aler
      * @return  <boolean>} An expected condition that returns a promise representing
     whether the element is clickable.
     */
-    declare
-function ExpectedConditions$elementToBeClickable<T>(element: protractor$ElementFinder): undefined.Condition<T >
+    declare function ExpectedConditions$elementToBeClickable<T>(element: protractor$ElementFinder): undefined.Condition<T >
 
 
     /**
@@ -703,8 +646,7 @@ function ExpectedConditions$elementToBeClickable<T>(element: protractor$ElementF
      * @return  <boolean>} An expected condition that returns a promise representing
     whether the text is present in the element.
     */
-    declare
-function ExpectedConditions$textToBePresentInElement<T>(element: protractor$ElementFinder, text: string): undefined.Condition<T >
+    declare function ExpectedConditions$textToBePresentInElement<T>(element: protractor$ElementFinder, text: string): undefined.Condition<T >
 
 
     /**
@@ -715,8 +657,7 @@ function ExpectedConditions$textToBePresentInElement<T>(element: protractor$Elem
      * @return  <boolean>} An expected condition that returns a promise representing
     whether the text is present in the element's value.
     */
-    declare
-function ExpectedConditions$textToBePresentInElementValue<T>(element: protractor$ElementFinder, text: string): undefined.Condition<T >
+    declare function ExpectedConditions$textToBePresentInElementValue<T>(element: protractor$ElementFinder, text: string): undefined.Condition<T >
 
 
     /**
@@ -726,8 +667,7 @@ function ExpectedConditions$textToBePresentInElementValue<T>(element: protractor
     title.
      * @return  The new condition.
     */
-    declare
-function ExpectedConditions$titleContains(substr: string): undefined.Condition<boolean >
+    declare function ExpectedConditions$titleContains(substr: string): undefined.Condition<boolean >
 
 
     /**
@@ -736,8 +676,7 @@ function ExpectedConditions$titleContains(substr: string): undefined.Condition<b
      * @param  The expected page title.
      * @return  The new condition.
      */
-    declare
-function ExpectedConditions$titleIs(title: string): undefined.Condition<boolean >
+    declare function ExpectedConditions$titleIs(title: string): undefined.Condition<boolean >
 
 
     /**
@@ -747,8 +686,7 @@ function ExpectedConditions$titleIs(title: string): undefined.Condition<boolean 
      * @return  <boolean>} An expected condition that returns a promise
     representing whether the element is present.
     */
-    declare
-function ExpectedConditions$presenceOf<T>(element: protractor$ElementFinder): undefined.Condition<T >
+    declare function ExpectedConditions$presenceOf<T>(element: protractor$ElementFinder): undefined.Condition<T >
 
 
     /**
@@ -758,8 +696,7 @@ function ExpectedConditions$presenceOf<T>(element: protractor$ElementFinder): un
      * @param  The element that should become stale.
      * @return  The new condition.
     */
-    declare
-function ExpectedConditions$stalenessOf(element: webdriver.IWebElement): undefined.Condition<boolean >
+    declare function ExpectedConditions$stalenessOf(element: webdriver.IWebElement): undefined.Condition<boolean >
 
 
     /**
@@ -770,8 +707,7 @@ function ExpectedConditions$stalenessOf(element: webdriver.IWebElement): undefin
      * @return  <boolean>} An expected condition that returns a promise representing
     whether the element is visible.
     */
-    declare
-function ExpectedConditions$visibilityOf<T>(element: protractor$ElementFinder): undefined.Condition<T >
+    declare function ExpectedConditions$visibilityOf<T>(element: protractor$ElementFinder): undefined.Condition<T >
 
 
     /**
@@ -781,8 +717,7 @@ function ExpectedConditions$visibilityOf<T>(element: protractor$ElementFinder): 
      * @return  <boolean>} An expected condition that returns a promise representing
     whether the element is invisible.
     */
-    declare
-function ExpectedConditions$invisibilityOf<T>(element: protractor$ElementFinder): undefined.Condition<T >
+    declare function ExpectedConditions$invisibilityOf<T>(element: protractor$ElementFinder): undefined.Condition<T >
 
 
     /**
@@ -791,8 +726,7 @@ function ExpectedConditions$invisibilityOf<T>(element: protractor$ElementFinder)
      * @return  <boolean>} An expected condition that returns a promise representing
     whether the element is selected.
     */
-    declare
-function ExpectedConditions$elementToBeSelected<T>(element: protractor$ElementFinder): undefined.Condition<T >
+    declare function ExpectedConditions$elementToBeSelected<T>(element: protractor$ElementFinder): undefined.Condition<T >
 
 
     /**
@@ -1629,8 +1563,7 @@ declare interface protractor$IProtractorLocatorStrategy {
         options(optionsDescriptor: string): webdriver.Locator
 }
 
-declare
-var By: protractor$IProtractorLocatorStrategy;
+declare var By: protractor$IProtractorLocatorStrategy;
 
 declare type protractor$Protractor = {
 
@@ -1837,8 +1770,7 @@ declare type protractor$IBrowser = {
  * @param  A URL to prepend to relative gets.
  * @return  
  */
-declare
-function protractor$wrapDriver(
+declare function protractor$wrapDriver(
     webdriver: webdriver.WebDriver,
     opt_baseUrl?: string,
     opt_rootElement?: string): protractor$Protractordeclare interface selectorHelper {
@@ -1851,18 +1783,12 @@ function protractor$wrapDriver(
 declare interface cssArraySelectorHelper {
     (cssLocator: string): protractor$ElementArrayFinder
 }
-declare
-var browser: protractor$IBrowser;
-declare
-var by: protractor$IProtractorLocatorStrategy;
-declare
-var By: protractor$IProtractorLocatorStrategy;
-declare
-var element: protractor$Element;
-declare
-var $: selectorHelper;
-declare
-var $$: cssArraySelectorHelper;
+declare var browser: protractor$IBrowser;
+declare var by: protractor$IProtractorLocatorStrategy;
+declare var By: protractor$IProtractorLocatorStrategy;
+declare var element: protractor$Element;
+declare var $: selectorHelper;
+declare var $$: cssArraySelectorHelper;
 declare module 'protractor' {
     declare module.exports: typeof protractor
 }

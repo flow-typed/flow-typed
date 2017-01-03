@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var tinycolor: tinycolor;
+declare var tinycolor: tinycolor;
 declare interface tinycolor {
 
     /**

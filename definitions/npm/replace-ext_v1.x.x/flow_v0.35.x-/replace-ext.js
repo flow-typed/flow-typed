@@ -6,7 +6,6 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function replaceExt(npath: string, ext: string): stringdeclare module 'replace-ext' {
+declare function replaceExt(npath: string, ext: string): stringdeclare module 'replace-ext' {
     declare module.exports: typeof replaceExt
 }

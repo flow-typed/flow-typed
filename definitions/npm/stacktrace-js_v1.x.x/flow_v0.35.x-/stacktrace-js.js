@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$StackTrace: {
+declare var npm$namespace$StackTrace: {
     get: typeof StackTrace$get,
     fromError: typeof StackTrace$fromError,
     generateArtificially: typeof StackTrace$generateArtificially,
@@ -16,8 +15,7 @@ var npm$namespace$StackTrace: {
     deinstrument: typeof StackTrace$deinstrument,
     report: typeof StackTrace$report,
 }
-declare
-export interface StackTrace$SourceCache {
+declare export interface StackTrace$SourceCache {
     [key: string]: string | Promise<string >
 }
 
@@ -28,15 +26,13 @@ export interface StackTrace$SourceCache {
  * @param sourceCache Object (String URL => String Source) - Pre-populate source cache to avoid network requests
  * @param offline Boolean (default: false) - Set to true to prevent all network requests
  */
-declare
-export interface StackTrace$StackTraceOptions {
+declare export interface StackTrace$StackTraceOptions {
     filter?: (stackFrame: StackTrace$StackFrame) => boolean,
         sourceCache?: StackTrace$SourceCache,
         offline?: boolean
 }
 
-declare
-export interface StackTrace$StackFrame {
+declare export interface StackTrace$StackFrame {
     constructor(
             functionName: string,
             args: any,
@@ -60,8 +56,7 @@ export interface StackTrace$StackFrame {
  * @param options Options Object
  * @return  Array[StackFrame]
  */
-declare
-export function StackTrace$get(options?: StackTrace$StackTraceOptions): Promise<StackTrace$StackFrame[] >
+declare export function StackTrace$get(options?: StackTrace$StackTraceOptions): Promise<StackTrace$StackFrame[] >
 
 
     /**
@@ -70,8 +65,7 @@ export function StackTrace$get(options?: StackTrace$StackTraceOptions): Promise<
      * @param options Object for options
      * @return  Array[StackFrame]
      */
-    declare
-export function StackTrace$fromError(
+    declare export function StackTrace$fromError(
     error: Error,
     options?: StackTrace$StackTraceOptions): Promise<StackTrace$StackFrame[] >
 
@@ -81,8 +75,7 @@ export function StackTrace$fromError(
      * @param options Object options
      * @returns  Array[StackFrame]
      */
-    declare
-export function StackTrace$generateArtificially(options?: StackTrace$StackTraceOptions): Promise<StackTrace$StackFrame[] >
+    declare export function StackTrace$generateArtificially(options?: StackTrace$StackTraceOptions): Promise<StackTrace$StackFrame[] >
 
 
     /**
@@ -94,8 +87,7 @@ export function StackTrace$generateArtificially(options?: StackTrace$StackTraceO
      * @param  optional context object (e.g. window)
      * @return  instrumented function
      */
-    declare
-export function StackTrace$instrument<TFunc>(
+    declare export function StackTrace$instrument<TFunc>(
     fn: TFunc,
     callback: (stackFrames: StackTrace$StackFrame[]) => void,
     errback?: (error: Error) => void,
@@ -108,8 +100,7 @@ export function StackTrace$instrument<TFunc>(
  * @param fn * 
  * @return  original function
  */
-declare
-export function StackTrace$deinstrument<TFunc>(fn: TFunc): TFunc
+declare export function StackTrace$deinstrument<TFunc>(fn: TFunc): TFunc
 
 
 /**
@@ -118,7 +109,6 @@ export function StackTrace$deinstrument<TFunc>(fn: TFunc): TFunc
  * @param url - URL as String
  * @return  Promise<string>
  */
-declare
-export function StackTrace$report(stackframes: StackTrace$StackFrame[], url: string): Promise<string>declare module 'stacktrace-js' {
+declare export function StackTrace$report(stackframes: StackTrace$StackFrame[], url: string): Promise<string>declare module 'stacktrace-js' {
     declare module.exports: typeof StackTrace
 }

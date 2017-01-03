@@ -7,30 +7,24 @@
  */
 
 
-declare
-var npm$namespace$ParseMockDB: {
+declare var npm$namespace$ParseMockDB: {
     mockDB: typeof ParseMockDB$mockDB,
     unMockDB: typeof ParseMockDB$unMockDB,
     cleanUp: typeof ParseMockDB$cleanUp,
     promiseResultSync: typeof ParseMockDB$promiseResultSync,
     registerHook: typeof ParseMockDB$registerHook,
 }
-declare
-function ParseMockDB$mockDB(): void
+declare function ParseMockDB$mockDB(): void
 
-declare
-function ParseMockDB$unMockDB(): void
+declare function ParseMockDB$unMockDB(): void
 
-declare
-function ParseMockDB$cleanUp(): void
+declare function ParseMockDB$cleanUp(): void
 
-declare
-function ParseMockDB$promiseResultSync<T>(promise: Parse.IPromise<T>): T
+declare function ParseMockDB$promiseResultSync<T>(promise: Parse.IPromise<T>): T
 
 declare type ParseMockDB$HookType = "beforeSave" | "beforeDelete";
 
-declare
-function ParseMockDB$registerHook(
+declare function ParseMockDB$registerHook(
     className: string,
     hookType: ParseMockDB$HookType,
     hookFn: (request: undefined.BeforeSaveRequest) => Parse.IPromise<any>): voiddeclare module 'parse-mockdb' {

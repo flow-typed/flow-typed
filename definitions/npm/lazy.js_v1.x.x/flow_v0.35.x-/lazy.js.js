@@ -99,12 +99,10 @@ declare interface LazyJS$AsyncHandle<T>{
 }
 
 
-declare
-var npm$namespace$Sequence: {
+declare var npm$namespace$Sequence: {
     define: typeof Sequence$define,
 }
-declare
-function Sequence$define(methodName: string[], overrides: Object): Function
+declare function Sequence$define(methodName: string[], overrides: Object): Function
 
 declare type LazyJS$Sequence<T>= {
     each(eachFn: LazyJS$ValueCallback<T>): LazyJS$Sequence<T >
@@ -172,12 +170,10 @@ declare interface LazyJS$SequenceBaser<T>{
 }
 
 
-declare
-var npm$namespace$ArrayLikeSequence: {
+declare var npm$namespace$ArrayLikeSequence: {
     define: typeof ArrayLikeSequence$define,
 }
-declare
-function ArrayLikeSequence$define(methodName: string[], overrides: Object): Function
+declare function ArrayLikeSequence$define(methodName: string[], overrides: Object): Function
 
 declare type LazyJS$ArrayLikeSequence<T>= {
     concat(var_args: T[]): LazyJS$ArrayLikeSequence<T>,
@@ -194,12 +190,10 @@ declare type LazyJS$ArrayLikeSequence<T>= {
 
 
 
-declare
-var npm$namespace$ObjectLikeSequence: {
+declare var npm$namespace$ObjectLikeSequence: {
     define: typeof ObjectLikeSequence$define,
 }
-declare
-function ObjectLikeSequence$define(methodName: string[], overrides: Object): Function
+declare function ObjectLikeSequence$define(methodName: string[], overrides: Object): Function
 
 declare type LazyJS$ObjectLikeSequence<T>= {
     assign(other: Object): LazyJS$ObjectLikeSequence<T>,
@@ -218,12 +212,10 @@ declare type LazyJS$ObjectLikeSequence<T>= {
 
 
 
-declare
-var npm$namespace$StringLikeSequence: {
+declare var npm$namespace$StringLikeSequence: {
     define: typeof StringLikeSequence$define,
 }
-declare
-function StringLikeSequence$define(methodName: string[], overrides: Object): Function
+declare function StringLikeSequence$define(methodName: string[], overrides: Object): Function
 
 declare type LazyJS$StringLikeSequence = {
     charAt(index: number): string,
@@ -246,8 +238,7 @@ declare type LazyJS$StringLikeSequence = {
     toLowerCase(): LazyJS$StringLikeSequence,
     toUpperCase(): LazyJS$StringLikeSequence
 } & LazyJS$SequenceBaser
-declare
-var Lazy: LazyJS$LazyStatic;
+declare var Lazy: LazyJS$LazyStatic;
 declare module 'lazy.js' {
     declare module.exports: typeof Lazy
 }

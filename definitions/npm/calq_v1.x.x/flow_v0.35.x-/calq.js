@@ -41,5 +41,4 @@ declare interface Calq$User {
             [index: string]: any
         }): void
 }
-declare
-var calq: Calq;
+declare var calq: Calq;

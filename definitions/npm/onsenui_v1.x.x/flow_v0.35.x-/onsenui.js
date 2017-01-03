@@ -1279,5 +1279,4 @@ declare interface onsPlatform {
          */
         isIOS7above(): boolean
 }
-declare
-var ons: onsStatic;
+declare var ons: onsStatic;

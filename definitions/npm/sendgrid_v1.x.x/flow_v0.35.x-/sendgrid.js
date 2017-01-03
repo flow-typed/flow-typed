@@ -6,16 +6,14 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Sendgrid$UriParts {
+declare export interface Sendgrid$UriParts {
     protocol: string,
         host: string,
         port: string,
         endpoint: string
 }
 
-declare
-export interface Sendgrid$Options {
+declare export interface Sendgrid$Options {
     protocol?: string,
         host?: string,
         port?: string,
@@ -27,8 +25,7 @@ export interface Sendgrid$Options {
         }
 }
 
-declare
-export interface Sendgrid$OptionsExport {
+declare export interface Sendgrid$OptionsExport {
     uriParts: Sendgrid$UriParts,
         uri: string,
         proxy?: string,
@@ -37,8 +34,7 @@ export interface Sendgrid$OptionsExport {
         }
 }
 
-declare
-export interface Sendgrid$EmailOptions {
+declare export interface Sendgrid$EmailOptions {
     to?: any,
         toname?: string,
         from?: string,
@@ -56,8 +52,7 @@ export interface Sendgrid$EmailOptions {
         smtpapi?: SmtpApi.Instance
 }
 
-declare
-export class Email {
+declare export class Email {
     to: any;
     toname: string;
     from: string;
@@ -123,8 +118,7 @@ export class Email {
     setASMGroupID(val: number): Sendgrid$Email
 }
 
-declare
-export interface Sendgrid$FileHandlerOptions {
+declare export interface Sendgrid$FileHandlerOptions {
     filename?: string,
         contentType?: string,
         cid?: string,
@@ -133,8 +127,7 @@ export interface Sendgrid$FileHandlerOptions {
         content?: any
 }
 
-declare
-export class FileHandler {
+declare export class FileHandler {
     filename: string;
     contentType: string;
     cid: string;
@@ -152,13 +145,11 @@ export class FileHandler {
     }
 }
 
-declare
-export interface Sendgrid$Handler {
+declare export interface Sendgrid$Handler {
     (file: Sendgrid$FileHandler, callback: Sendgrid$HandlerCallback): void
 }
 
-declare
-export interface Sendgrid$HandlerCallback {
+declare export interface Sendgrid$HandlerCallback {
     (hasError: boolean, error: Error): void,
     (hasError: boolean, error: string): void
 }
@@ -173,8 +164,7 @@ declare interface Sendgrid$Constructor {
     new(api_key: string, options?: Sendgrid$Options): Sendgrid$Instance
 }
 
-declare
-export interface Sendgrid$Instance {
+declare export interface Sendgrid$Instance {
     version: string,
         api_user: string,
         api_key: string,

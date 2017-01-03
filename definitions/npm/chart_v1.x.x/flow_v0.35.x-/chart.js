@@ -183,8 +183,7 @@ declare interface Chart {
         Pie(data: CircularChartData[], options?: PieChartOptions): CircularInstance,
         Doughnut(data: CircularChartData[], options?: PieChartOptions): CircularInstance
 }
-declare
-var Chart: {
+declare var Chart: {
     new(context: CanvasRenderingContext2D): Chart,
     defaults: {
         global: ChartSettings

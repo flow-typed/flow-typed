@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Flight$Base {
+declare export interface Flight$Base {
 
     /**
      * Most Components and Mixins need to define attributes. In Flight,
@@ -141,8 +140,7 @@ export interface Flight$Base {
         teardown(): void
 }
 
-declare
-export type Flight$Advice = {
+declare export type Flight$Advice = {
 
     /**
      * Run the customFunc function after the existingFunc function.
@@ -179,20 +177,17 @@ export type Flight$Advice = {
 } & Flight$Base
 
 
-declare
-export type Flight$Component = {
+declare export type Flight$Component = {
     node: Element,
     $node: JQuery
 } & Flight$Base & Flight$Advice
 
 
-declare
-export interface Flight$AdviceStatic {
+declare export interface Flight$AdviceStatic {
     withAdvice(): Function
 }
 
-declare
-export interface Flight$ComponentStatic {
+declare export interface Flight$ComponentStatic {
     (...fns: Function[]): Flight$ComponentStatic,
     attachTo(selector: string, options?: Object): void,
         attachTo(selector: Element, options?: Object): void,
@@ -200,13 +195,11 @@ export interface Flight$ComponentStatic {
         teardownAll(): void
 }
 
-declare
-export interface Flight$ComposeStatic {
+declare export interface Flight$ComposeStatic {
     mixin(base: Object, mixins: Function[]): void
 }
 
-declare
-export interface Flight$DebugStatic {
+declare export interface Flight$DebugStatic {
     events: {
         logAll(): void,
         logByAction(action: string): void,
@@ -215,8 +208,7 @@ export interface Flight$DebugStatic {
     }
 }
 
-declare
-export interface Flight$UtilsStatic {
+declare export interface Flight$UtilsStatic {
     compose(fn1: Function, fn2: Function, ...fns: Function[]): Function,
         countThen(num: number, base: Function): Function,
         debounce(func: Function, wait: number, immediate: boolean): Function,
@@ -231,19 +223,15 @@ export interface Flight$UtilsStatic {
         uniqueArray(array: any[]): any[]
 }
 
-declare
-export interface Flight$EventData {
+declare export interface Flight$EventData {
     el: HTMLElement
 }
 
-declare
-export interface Flight$FlightStatic {
+declare export interface Flight$FlightStatic {
     advice: Flight$AdviceStatic,
         component: Flight$ComponentStatic,
         compose: Flight$ComposeStatic,
         utils: Flight$UtilsStatic
 }
-declare
-var DEBUG: Flight$DebugStatic;
-declare
-var flight: Flight$FlightStatic;
+declare var DEBUG: Flight$DebugStatic;
+declare var flight: Flight$FlightStatic;

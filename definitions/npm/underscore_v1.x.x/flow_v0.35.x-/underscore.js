@@ -6527,8 +6527,7 @@ declare type _ChainOfArrays<T>= {
     flatten(shallow?: boolean): _Chain<T>,
     mapObject(fn: _.ListIterator<T, any>): _ChainOfArrays<T >
 } & _Chain
-declare
-var _: UnderscoreStatic;
+declare var _: UnderscoreStatic;
 declare module 'underscore' {
     declare module.exports: typeof _
 }

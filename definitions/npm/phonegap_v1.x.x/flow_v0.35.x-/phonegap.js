@@ -16,8 +16,7 @@ declare interface Acceleration {
         z: number,
         timestamp: number
 }
-declare
-var Acceleration: {
+declare var Acceleration: {
     new(): Acceleration
 };
 declare interface AccelerometerOptions {
@@ -40,8 +39,7 @@ declare interface CameraPopoverOptions {
         height?: number,
         arrowDir?: number
 }
-declare
-var CameraPopoverOptions: {
+declare var CameraPopoverOptions: {
     new(
         x: number,
         y: number,
@@ -146,8 +144,7 @@ declare interface Connection {
         CELL_4G: number,
         NONE: number
 }
-declare
-var Connection: Connection;
+declare var Connection: Connection;
 declare interface CompassOptions {
     frequency?: number,
         filter?: number
@@ -161,8 +158,7 @@ declare interface CompassHeading {
 declare interface CompassError {
     code: number
 }
-declare
-var CompassError: {
+declare var CompassError: {
     COMPASS_INTERNAL_ERR: number,
     COMPASS_NOT_SUPPORTED: number
 };
@@ -192,8 +188,7 @@ declare interface ContactField {
         value: string,
         pref: boolean
 }
-declare
-var ContactField: {
+declare var ContactField: {
     new(type: string, calue: string, perf: boolean): ContactField
 };
 declare interface Contact {
@@ -223,8 +218,7 @@ declare interface ContactFindOptions {
     filter?: string,
         multiple?: boolean
 }
-declare
-var ContactFindOptions: {
+declare var ContactFindOptions: {
     new(): ContactFindOptions
 };
 declare interface ContactName {
@@ -235,8 +229,7 @@ declare interface ContactName {
         honorificPrefix: string,
         honorificSuffix: string
 }
-declare
-var ContactName: {
+declare var ContactName: {
     new(): ContactName
 };
 declare interface ContactOrganization {
@@ -249,8 +242,7 @@ declare interface ContactOrganization {
 declare interface ContactError {
     code: number
 }
-declare
-var ContactError: {
+declare var ContactError: {
     UNKNOWN_ERROR: number,
     INVALID_ARGUMENT_ERROR: number,
     TIMEOUT_ERROR: number,
@@ -298,8 +290,7 @@ declare interface FileSystem {
     name: string,
         root: DirectoryEntry
 }
-declare
-var DirectoryEntry: {
+declare var DirectoryEntry: {
     new(name: string, root: DirectoryEntry): DirectoryEntry
 };
 declare interface FileSystemEntry {
@@ -370,8 +361,7 @@ declare interface FileTransfer {
             options?: any): void,
         abort(): void
 }
-declare
-var FileTransfer: {
+declare var FileTransfer: {
     new(): FileTransfer
 };
 declare interface FileUploadOptions {
@@ -382,8 +372,7 @@ declare interface FileUploadOptions {
         chunkedMode?: boolean,
         headers?: any
 }
-declare
-var FileUploadOptions: {
+declare var FileUploadOptions: {
     new(): FileUploadOptions
 };
 declare interface FileUploadResult {
@@ -399,16 +388,14 @@ declare interface LocalFileSystem {
     PERSISTENT: number,
         TEMPORARY: number
 }
-declare
-var LocalFileSystem: LocalFileSystem;
+declare var LocalFileSystem: LocalFileSystem;
 declare interface Metadata {
     modificationTime: Date
 }
 declare interface FileError {
     code: number
 }
-declare
-var FileError: {
+declare var FileError: {
     NOT_FOUND_ERR: number,
     SECURITY_ERR: number,
     ABORT_ERR: number,
@@ -428,8 +415,7 @@ declare interface FileTransferError {
         target: string,
         http_status: number
 }
-declare
-var FileTransferError: {
+declare var FileTransferError: {
     FILE_NOT_FOUND_ERR: number,
     INVALID_URL_ERR: number,
     CONNECTION_ERR: number,
@@ -444,8 +430,7 @@ declare interface GlobalizationError {
     code: number,
         message: string
 }
-declare
-var GlobalizationError: {
+declare var GlobalizationError: {
     UNKNOWN_ERROR: number,
     FORMATTING_ERROR: number,
     PARSING_ERROR: number,
@@ -578,8 +563,7 @@ declare interface Media {
         stopRecord(): void,
         stop(): void
 }
-declare
-var Media: {
+declare var Media: {
     new(src: string, onSuccess: (arg: any) => any, onError: (error: any) => any): Media
 };
 declare interface Notification {
@@ -640,8 +624,7 @@ declare interface StatusBar {
         hide(): void,
         show(): void
 }
-declare
-var StatusBar: StatusBar;
+declare var StatusBar: StatusBar;
 declare interface Keyboard {
     automaticScrollToTopOnHiding: boolean,
         isVisible: boolean,
@@ -653,8 +636,7 @@ declare interface Keyboard {
         hideFormAccessoryBar(hide: boolean): void,
         shrinkView(shrink: boolean): void
 }
-declare
-var Keyboard: Keyboard;
+declare var Keyboard: Keyboard;
 declare interface Navigator {
     accelerometer: Accelerometer,
         camera: Camera,
@@ -675,7 +657,5 @@ declare interface Window {
             database_displayname: string,
             database_size: number): Database
 }
-declare
-var device: Device;
-declare
-var phoneGapNavigator: Navigator;
+declare var device: Device;
+declare var phoneGapNavigator: Navigator;

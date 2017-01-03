@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IAppVersionService {
+declare export interface ngCordova$IAppVersionService {
     getVersionNumber(): ng.IPromise<string>,
         getVersionCode(): ng.IPromise<string >
 }

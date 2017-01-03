@@ -56,8 +56,7 @@ declare interface amplifyStatic {
         store: amplifyStore,
         request: amplifyRequest
 }
-declare
-var amplify: amplifyStatic;
+declare var amplify: amplifyStatic;
 declare module 'amplify' {
     declare module.exports: typeof amplify
 }

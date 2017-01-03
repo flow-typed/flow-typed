@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$JL: {
+declare var npm$namespace$JL: {
     setOptions: typeof JL$setOptions,
     createAjaxAppender: typeof JL$createAjaxAppender,
     createConsoleAppender: typeof JL$createConsoleAppender,
@@ -21,42 +20,28 @@ var npm$namespace$JL: {
     getFatalLevel: typeof JL$getFatalLevel,
     getAllLevel: typeof JL$getAllLevel,
 }
-declare
-export function JL$setOptions(options: JL$JSNLogOptions): void
+declare export function JL$setOptions(options: JL$JSNLogOptions): void
 
-declare
-export function JL$createAjaxAppender(appenderName: string): JL$JSNLogAjaxAppender
+declare export function JL$createAjaxAppender(appenderName: string): JL$JSNLogAjaxAppender
 
-declare
-export function JL$createConsoleAppender(appenderName: string): JL$JSNLogConsoleAppender
+declare export function JL$createConsoleAppender(appenderName: string): JL$JSNLogConsoleAppender
 
-declare
-export class Exception {
+declare export class Exception {
     constructor(data: any, inner?: any): this
 }
 
-declare
-export function JL$getOffLevel(): number
+declare export function JL$getOffLevel(): number
 
-declare
-export function JL$getTraceLevel(): number
+declare export function JL$getTraceLevel(): number
 
-declare
-export function JL$getDebugLevel(): number
+declare export function JL$getDebugLevel(): number
 
-declare
-export function JL$getInfoLevel(): number
+declare export function JL$getInfoLevel(): number
 
-declare
-export function JL$getWarnLevel(): number
+declare export function JL$getWarnLevel(): number
 
-declare
-export function JL$getErrorLevel(): number
+declare export function JL$getErrorLevel(): number
 
-declare
-export function JL$getFatalLevel(): number
+declare export function JL$getFatalLevel(): number
 
-declare
-export function JL$getAllLevel(): numberdeclare
-function ___jsnlog_configure(jsnlog: any): voiddeclare
-function JL(loggerName?: string): JL$JSNLogLogger
+declare export function JL$getAllLevel(): numberdeclare function ___jsnlog_configure(jsnlog: any): voiddeclare function JL(loggerName?: string): JL$JSNLogLogger

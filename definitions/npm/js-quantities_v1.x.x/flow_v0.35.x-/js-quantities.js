@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Qty: QtyModule$QtyStatic;
+declare var Qty: QtyModule$QtyStatic;
 declare interface QtyModule$QtyStatic {
     (value: string): QtyModule$Qty,
     (value: number): QtyModule$Qty,

@@ -30,5 +30,4 @@ declare interface IX2JSOption {
         stripWhitespaces?: boolean,
         datetimeAccessFormPaths?: any[]
 }
-declare
-var X2JS: IX2JS;
+declare var X2JS: IX2JS;

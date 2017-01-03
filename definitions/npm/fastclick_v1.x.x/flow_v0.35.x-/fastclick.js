@@ -36,5 +36,4 @@ declare module 'fastclick' {
     declare module.exports: typeof fastclick
     declare var FastClick: FastClickStatic;
 }
-declare
-var FastClick: FastClickStatic;
+declare var FastClick: FastClickStatic;

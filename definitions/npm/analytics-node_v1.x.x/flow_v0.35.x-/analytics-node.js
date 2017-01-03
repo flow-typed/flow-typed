@@ -10,8 +10,7 @@ declare interface AnalyticsNode$Integrations {
     [index: string]: boolean
 }
 
-declare
-export class Analytics {
+declare export class Analytics {
     constructor(writeKey: string, opts?: {
         flushAt?: number,
         flushAfter?: number

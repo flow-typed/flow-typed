@@ -48,7 +48,5 @@ declare interface Y$IConfig {
         optional: string[],
         use: string[]
 }
-declare
-var Y: YUI;
-declare
-var YUI: YUI;
+declare var Y: YUI;
+declare var YUI: YUI;

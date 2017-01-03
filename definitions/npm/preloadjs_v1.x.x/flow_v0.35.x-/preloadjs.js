@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class AbstractLoader mixins EventDispatcher {
+declare export class AbstractLoader mixins EventDispatcher {
     BINARY: string;
     canceled: boolean;
     CSS: string;
@@ -39,27 +38,23 @@ export class AbstractLoader mixins EventDispatcher {
     toString(): string
 }
 
-declare
-export class AbstractMediaLoader {
+declare export class AbstractMediaLoader {
     constructor(loadItem: Object, preferXHR: boolean, type: string): this
 }
 
-declare
-export class AbstractRequest {
+declare export class AbstractRequest {
     constructor(item: createjs$LoadItem): this;
     cancel(): void;
     destroy(): void;
     load(): void
 }
 
-declare
-export class BinaryLoader {
+declare export class BinaryLoader {
     constructor(loadItem: Object): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class CSSLoader {
+declare export class CSSLoader {
     constructor(loadItem: Object, preferXHR: boolean): this;
     canLoadItem(item: Object): boolean
 }
@@ -70,40 +65,34 @@ declare module 'DataUtils' {
 }
 
 
-declare
-export class ErrorEvent {
+declare export class ErrorEvent {
     constructor(title?: string, message?: string, data?: Object): this;
     data: Object;
     message: string;
     title: string
 }
 
-declare
-export class ImageLoader {
+declare export class ImageLoader {
     constructor(loadItem: Object, preferXHR: boolean): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class JavaScriptLoader {
+declare export class JavaScriptLoader {
     constructor(loadItem: Object, preferXHR: boolean): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class JSONLoader {
+declare export class JSONLoader {
     constructor(loadItem: Object): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class JSONPLoader {
+declare export class JSONPLoader {
     constructor(loadItem: Object): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class LoadItem {
+declare export class LoadItem {
     callback: string;
     crossOrigin: boolean;
     data: Object;
@@ -121,8 +110,7 @@ export class LoadItem {
     set(props: Object): createjs$LoadItem
 }
 
-declare
-export class LoadQueue mixins AbstractLoader {
+declare export class LoadQueue mixins AbstractLoader {
     constructor(preferXHR?: boolean, basePath?: string, crossOrigin?: string | boolean): this;
     maintainScriptOrder: boolean;
     next: createjs$LoadQueue;
@@ -148,25 +136,21 @@ export class LoadQueue mixins AbstractLoader {
     unregisterLoader(loader: createjs$AbstractLoader): void
 }
 
-declare
-export class ManifestLoader {
+declare export class ManifestLoader {
     constructor(loadItem: createjs$LoadItem | Object): this;
     canLoadItem(item: createjs$LoadItem | Object): boolean
 }
 
-declare
-export class MediaTagRequest {
+declare export class MediaTagRequest {
     constructor(loadItem: createjs$LoadItem, tag: HTMLAudioElement | HTMLVideoElement, srcAttribute: string): this
 }
 
-declare
-export class PreloadJS {
+declare export class PreloadJS {
     buildDate: string;
     version: string
 }
 
-declare
-export class ProgressEvent {
+declare export class ProgressEvent {
     constructor(loaded: number, total?: number): this;
     loaded: number;
     progress: number;
@@ -174,8 +158,7 @@ export class ProgressEvent {
     clone(): createjs$ProgressEvent
 }
 
-declare
-export class RequestUtils {
+declare export class RequestUtils {
     ABSOLUTE_PATH: RegExp;
     EXTENSION_PATT: RegExp;
     RELATIVE_PATH: RegExp;
@@ -192,48 +175,40 @@ export class RequestUtils {
     parseURI(path: string): Object
 }
 
-declare
-export class SoundLoader {
+declare export class SoundLoader {
     constructor(loadItem: Object, preferXHR: boolean): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class SpriteSheetLoader {
+declare export class SpriteSheetLoader {
     constructor(loadItem: Object): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class SVGLoader {
+declare export class SVGLoader {
     constructor(loadItem: Object, preferXHR: boolean): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class TagRequest {}
+declare export class TagRequest {}
 
-declare
-export class TextLoader {
+declare export class TextLoader {
     constructor(loadItem: Object): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class VideoLoader {
+declare export class VideoLoader {
     constructor(loadItem: Object, preferXHR: boolean): this;
     canLoadItem(item: Object): boolean
 }
 
-declare
-export class XHRRequest mixins AbstractLoader {
+declare export class XHRRequest mixins AbstractLoader {
     constructor(item: Object): this;
     getAllResponseHeaders(): string;
     getResponseHeader(header: string): string
 }
 
-declare
-export class XMLLoader {
+declare export class XMLLoader {
     constructor(loadItem: Object): this;
     canLoadItem(item: Object): boolean
 }

@@ -47,8 +47,7 @@ declare interface Auth0Options {
         userPwdConnectionName?: string,
         username_style?: string
 }
-declare
-var Auth0Widget: Auth0WidgetStatic;
+declare var Auth0Widget: Auth0WidgetStatic;
 declare module 'Auth0Widget' {
     declare module.exports: typeof Auth0Widget
 }

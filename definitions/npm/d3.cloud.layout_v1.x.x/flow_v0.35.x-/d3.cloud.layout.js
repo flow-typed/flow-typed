@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$layout: {
+declare var npm$namespace$layout: {
     cloud: typeof layout$cloud,
 }
-declare
-export function layout$cloud(): layout$Cloud<cloud$Word >
+declare export function layout$cloud(): layout$Cloud<cloud$Word >
 
     declare interface cloud$Word {
         text?: string,

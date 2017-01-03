@@ -20,8 +20,7 @@ Examples:
      var typedDispatcher = new flux.Dispatcher<MyCustomActionType>()
      class DerivedDispatcher extends flux.Dispatcher<MyCustomActionType> { }
 */
-declare
-export class Dispatcher<TPayload>{
+declare export class Dispatcher<TPayload>{
 
     /**
      * Create an instance of the Dispatcher class to use throughout the application.
@@ -86,8 +85,7 @@ declare interface FluxUtils$RealOptions {
         withProps?: boolean
 }
 
-declare
-export class Container {
+declare export class Container {
     constructor(): this;
 
     /**
@@ -104,8 +102,7 @@ export class Container {
 /**
  * This class extends ReduceStore and defines the state as an immutable map.
  */
-declare
-export class MapStore<K, V, TPayload>mixins ReduceStore<immutable.Map<K, V>, TPayload>{
+declare export class MapStore<K, V, TPayload>mixins ReduceStore<immutable.Map<K, V>, TPayload>{
 
     /**
      * Access the value at the given key.
@@ -133,8 +130,7 @@ export class MapStore<K, V, TPayload>mixins ReduceStore<immutable.Map<K, V>, TPa
     V >
 }
 
-declare
-export class ReduceStore<T, TPayload>mixins Store<TPayload>{
+declare export class ReduceStore<T, TPayload>mixins Store<TPayload>{
 
     /**
      * Getter that exposes the entire state of this store.
@@ -162,8 +158,7 @@ export class ReduceStore<T, TPayload>mixins Store<TPayload>{
     areEqual(one: T, two: T): boolean
 }
 
-declare
-export class Store<TPayload>{
+declare export class Store<TPayload>{
 
     /**
      * Constructs and registers an instance of this store with the given dispatcher.

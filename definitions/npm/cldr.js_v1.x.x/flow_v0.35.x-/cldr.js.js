@@ -232,5 +232,4 @@ declare interface cldr$CldrFactory {
 declare module 'cldr' {
     declare module.exports: typeof cldr
 }
-declare
-var Cldr: cldr$CldrFactory;
+declare var Cldr: cldr$CldrFactory;

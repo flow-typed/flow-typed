@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$jsonpatch: {
+declare var npm$namespace$jsonpatch: {
     apply: typeof jsonpatch$apply,
     compile: typeof jsonpatch$compile,
 }
@@ -58,10 +57,8 @@ declare type jsonpatch$TestPath = {
 } & jsonpatch$Patch
 
 
-declare
-function jsonpatch$apply(document: any, patches: jsonpatch$OpPatch[]): any
+declare function jsonpatch$apply(document: any, patches: jsonpatch$OpPatch[]): any
 
-declare
-function jsonpatch$compile(patches: jsonpatch$OpPatch[]): (document: any) => anydeclare module 'json-patch' {
+declare function jsonpatch$compile(patches: jsonpatch$OpPatch[]): (document: any) => anydeclare module 'json-patch' {
     declare module.exports: typeof jsonpatch
 }

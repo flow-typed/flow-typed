@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var doT: doT$doTStatic;
+declare var doT: doT$doTStatic;
 declare interface doT$doTStatic {
 
     /**

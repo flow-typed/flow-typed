@@ -183,8 +183,7 @@ declare interface AtomKeymap$KeymapManager {
         getPartialMatchTimeout(): number
 }
 
-declare
-var KeymapManager: AtomKeymap$KeymapManagerStatic;
+declare var KeymapManager: AtomKeymap$KeymapManagerStatic;
 declare module 'atom-keymap' {
     declare module.exports: typeof AtomKeymap
 }

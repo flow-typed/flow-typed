@@ -164,5 +164,4 @@ declare interface PrismJS$Token {
             language: PrismJS$LanguageDefinition,
             parent: HTMLPreElement): string
 }
-declare
-var Prism: PrismJS$Prism;
+declare var Prism: PrismJS$Prism;

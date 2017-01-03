@@ -10,8 +10,7 @@
 /**
  * Interface for the client context.
  */
-declare
-export interface Xrm$ClientContext {
+declare export interface Xrm$ClientContext {
 
     /**
      * Returns a value to indicate which client the script is executing in.
@@ -30,8 +29,7 @@ export interface Xrm$ClientContext {
 /**
  * Interface for the xRM application context.
  */
-declare
-export interface Xrm$Context {
+declare export interface Xrm$Context {
 
     /**
      * The client's context instance.
@@ -1985,5 +1983,4 @@ declare module 'Utility' {
  * @remarks  The ClientGlobalContext.js.aspx page will include some global event handlers. These event handlers will
 cancel the onselectstart, contextmenu, and ondragstart events.
 */
-declare
-function GetGlobalContext(): Xrm$Context
+declare function GetGlobalContext(): Xrm$Context

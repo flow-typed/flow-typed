@@ -144,8 +144,7 @@ declare interface Log {
         */
         disableAll(persist?: boolean): void
 }
-declare
-var log: Log;
+declare var log: Log;
 declare module 'loglevel' {
     declare module.exports: typeof log
 }

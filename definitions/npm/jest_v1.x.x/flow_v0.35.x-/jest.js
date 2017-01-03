@@ -6,32 +6,19 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var beforeAll: jest$Lifecycle;
-declare
-var beforeEach: jest$Lifecycle;
-declare
-var afterAll: jest$Lifecycle;
-declare
-var afterEach: jest$Lifecycle;
-declare
-var describe: jest$Describe;
-declare
-var fdescribe: jest$Describe;
-declare
-var xdescribe: jest$Describe;
-declare
-var it: jest$It;
-declare
-var fit: jest$It;
-declare
-var xit: jest$It;
-declare
-var test: jest$It;
-declare
-var xtest: jest$It;
-declare
-function expect(actual: any): jest$Matchersdeclare interface NodeRequire {
+declare var beforeAll: jest$Lifecycle;
+declare var beforeEach: jest$Lifecycle;
+declare var afterAll: jest$Lifecycle;
+declare var afterEach: jest$Lifecycle;
+declare var describe: jest$Describe;
+declare var fdescribe: jest$Describe;
+declare var xdescribe: jest$Describe;
+declare var it: jest$It;
+declare var fit: jest$It;
+declare var xit: jest$It;
+declare var test: jest$It;
+declare var xtest: jest$It;
+declare function expect(actual: any): jest$Matchersdeclare interface NodeRequire {
 
     /**
      * Returns the actual module instead of a mock, bypassing all checks on whether the module should receive a mock implementation or not. 
@@ -43,8 +30,7 @@ function expect(actual: any): jest$Matchersdeclare interface NodeRequire {
          */
         requireMock(moduleName: string): any
 }
-declare
-var npm$namespace$jest: {
+declare var npm$namespace$jest: {
     addMatchers: typeof jest$addMatchers,
     autoMockOff: typeof jest$autoMockOff,
     autoMockOn: typeof jest$autoMockOn,
@@ -71,177 +57,152 @@ var npm$namespace$jest: {
     useFakeTimers: typeof jest$useFakeTimers,
     useRealTimers: typeof jest$useRealTimers,
 }
-declare
-function jest$addMatchers(matchers: jasmine$CustomMatcherFactories): typeof jest
+declare function jest$addMatchers(matchers: jasmine$CustomMatcherFactories): typeof jest
 
 
 /**
  * Disables automatic mocking in the module loader. 
  */
-declare
-function jest$autoMockOff(): typeof jest
+declare function jest$autoMockOff(): typeof jest
 
 
 /**
  * Enables automatic mocking in the module loader. 
  */
-declare
-function jest$autoMockOn(): typeof jest
+declare function jest$autoMockOn(): typeof jest
 
 
 /**
  * Clears the mock.calls and mock.instances properties of all mocks. Equivalent to calling .mockClear() on every mocked function. 
  */
-declare
-function jest$clearAllMocks(): typeof jest
+declare function jest$clearAllMocks(): typeof jest
 
 
 /**
  * Removes any pending timers from the timer system. If any timers have been scheduled, they will be cleared and will never have the opportunity to execute in the future. 
  */
-declare
-function jest$clearAllTimers(): typeof jest
+declare function jest$clearAllTimers(): typeof jest
 
 
 /**
  * Indicates that the module system should never return a mocked version of the specified module, including all of the specificied module's dependencies. 
  */
-declare
-function jest$deepUnmock(moduleName: string): typeof jest
+declare function jest$deepUnmock(moduleName: string): typeof jest
 
 
 /**
  * Disables automatic mocking in the module loader. 
  */
-declare
-function jest$disableAutomock(): typeof jest
+declare function jest$disableAutomock(): typeof jest
 
 
 /**
  * Mocks a module with an auto-mocked version when it is being required. 
  */
-declare
-function jest$doMock(moduleName: string): typeof jest
+declare function jest$doMock(moduleName: string): typeof jest
 
 
 /**
  * Indicates that the module system should never return a mocked version of the specified module from require() (e.g. that it should always return the real module). 
  */
-declare
-function jest$dontMock(moduleName: string): typeof jest
+declare function jest$dontMock(moduleName: string): typeof jest
 
 
 /**
  * Enables automatic mocking in the module loader. 
  */
-declare
-function jest$enableAutomock(): typeof jest
+declare function jest$enableAutomock(): typeof jest
 
 
 /**
  * Creates a mock function. Optionally takes a mock implementation. 
  */
-declare
-function jest$fn<T>(implementation?: Function): jest$Mock<T >
+declare function jest$fn<T>(implementation?: Function): jest$Mock<T >
 
 
     /**
      * Use the automatic mocking system to generate a mocked version of the given module. 
      */
-    declare
-function jest$genMockFromModule<T>(moduleName: string): T
+    declare function jest$genMockFromModule<T>(moduleName: string): T
 
 
 /**
  * Returns whether the given function is a mock function. 
  */
-declare
-function jest$isMockFunction(fn: any): Mock
+declare function jest$isMockFunction(fn: any): Mock
 
 
 /**
  * Mocks a module with an auto-mocked version when it is being required. 
  */
-declare
-function jest$mock(moduleName: string, factory?: any, options?: jest$MockOptions): typeof jest
+declare function jest$mock(moduleName: string, factory?: any, options?: jest$MockOptions): typeof jest
 
 
 /**
  * Resets the module registry - the cache of all required modules. This is useful to isolate modules where local state might conflict between tests. 
  */
-declare
-function jest$resetModuleRegistry(): typeof jest
+declare function jest$resetModuleRegistry(): typeof jest
 
 
 /**
  * Resets the module registry - the cache of all required modules. This is useful to isolate modules where local state might conflict between tests. 
  */
-declare
-function jest$resetModules(): typeof jest
+declare function jest$resetModules(): typeof jest
 
 
 /**
  * Exhausts tasks queued by setImmediate(). 
  */
-declare
-function jest$runAllImmediates(): typeof jest
+declare function jest$runAllImmediates(): typeof jest
 
 
 /**
  * Exhausts the micro-task queue (usually interfaced in node via process.nextTick). 
  */
-declare
-function jest$runAllTicks(): typeof jest
+declare function jest$runAllTicks(): typeof jest
 
 
 /**
  * Exhausts the macro-task queue (i.e., all tasks queued by setTimeout() and setInterval()). 
  */
-declare
-function jest$runAllTimers(): typeof jest
+declare function jest$runAllTimers(): typeof jest
 
 
 /**
  * Executes only the macro-tasks that are currently pending (i.e., only the tasks that have been queued by setTimeout() or setInterval() up to this point).
  * If any of the currently pending macro-tasks schedule new macro-tasks, those new tasks will not be executed by this call. 
  */
-declare
-function jest$runOnlyPendingTimers(): typeof jest
+declare function jest$runOnlyPendingTimers(): typeof jest
 
 
 /**
  * Executes only the macro task queue (i.e. all tasks queued by setTimeout() or setInterval() and setImmediate()). 
  */
-declare
-function jest$runTimersToTime(msToRun: number): typeof jest
+declare function jest$runTimersToTime(msToRun: number): typeof jest
 
 
 /**
  * Explicitly supplies the mock object that the module system should return for the specified module. 
  */
-declare
-function jest$setMock<T>(moduleName: string, moduleExports: T): typeof jest
+declare function jest$setMock<T>(moduleName: string, moduleExports: T): typeof jest
 
 
 /**
  * Indicates that the module system should never return a mocked version of the specified module from require() (e.g. that it should always return the real module). 
  */
-declare
-function jest$unmock(moduleName: string): typeof jest
+declare function jest$unmock(moduleName: string): typeof jest
 
 
 /**
  * Instructs Jest to use fake versions of the standard timer functions. 
  */
-declare
-function jest$useFakeTimers(): typeof jest
+declare function jest$useFakeTimers(): typeof jest
 
 
 /**
  * Instructs Jest to use the real versions of the standard timer functions. 
  */
-declare
-function jest$useRealTimers(): typeof jest
+declare function jest$useRealTimers(): typeof jest
 
 declare interface jest$MockOptions {
     virtual?: boolean
@@ -330,20 +291,16 @@ declare interface jest$MockContext<T>{
     calls: any[][],
     instances: T[]
 }
-declare
-function spyOn(object: any, method: string): jasmine$Spy
+declare function spyOn(object: any, method: string): jasmine$Spy
 /**
  * If you call the function pending anywhere in the spec body, no matter the expectations, the spec will be marked pending. 
  */
-declare
-function pending(reason?: string): void
+declare function pending(reason?: string): void
 /**
  * Fails a test when called within one. 
  */
-declare
-function fail(error?: any): void
-declare
-var npm$namespace$jasmine: {
+declare function fail(error?: any): void
+declare var npm$namespace$jasmine: {
     any: typeof jasmine$any,
     anything: typeof jasmine$anything,
     arrayContaining: typeof jasmine$arrayContaining,
@@ -355,38 +312,27 @@ var npm$namespace$jasmine: {
     addMatchers: typeof jasmine$addMatchers,
     stringMatching: typeof jasmine$stringMatching,
 }
-declare
-var clock: () => jasmine$Clock;
+declare var clock: () => jasmine$Clock;
 
-declare
-function jasmine$any(aclass: any): jasmine$Any
+declare function jasmine$any(aclass: any): jasmine$Any
 
-declare
-function jasmine$anything(): jasmine$Any
+declare function jasmine$anything(): jasmine$Any
 
-declare
-function jasmine$arrayContaining(sample: any[]): jasmine$ArrayContaining
+declare function jasmine$arrayContaining(sample: any[]): jasmine$ArrayContaining
 
-declare
-function jasmine$objectContaining(sample: any): jasmine$ObjectContaining
+declare function jasmine$objectContaining(sample: any): jasmine$ObjectContaining
 
-declare
-function jasmine$createSpy(name: string, originalFn?: Function): jasmine$Spy
+declare function jasmine$createSpy(name: string, originalFn?: Function): jasmine$Spy
 
-declare
-function jasmine$createSpyObj(baseName: string, methodNames: any[]): any
+declare function jasmine$createSpyObj(baseName: string, methodNames: any[]): any
 
-declare
-function jasmine$pp(value: any): string
+declare function jasmine$pp(value: any): string
 
-declare
-function jasmine$addCustomEqualityTester(equalityTester: jasmine$CustomEqualityTester): void
+declare function jasmine$addCustomEqualityTester(equalityTester: jasmine$CustomEqualityTester): void
 
-declare
-function jasmine$addMatchers(matchers: jasmine$CustomMatcherFactories): typeof jest
+declare function jasmine$addMatchers(matchers: jasmine$CustomMatcherFactories): typeof jest
 
-declare
-function jasmine$stringMatching(value: string | RegExp): jasmine$Any
+declare function jasmine$stringMatching(value: string | RegExp): jasmine$Any
 
 declare interface jasmine$Clock {
     install(): void,

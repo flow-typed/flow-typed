@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function BlobStream(): BlobStream$IBlobStreamdeclare type BlobStream$IBlobStream = {
+declare function BlobStream(): BlobStream$IBlobStreamdeclare type BlobStream$IBlobStream = {
     toBlob(type?: string): Blob,
     toBlobURL(type?: string): string
 }

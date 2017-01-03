@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Filesize$SiJedecBits {
+declare export interface Filesize$SiJedecBits {
     b?: string,
         Kb?: string,
         Mb?: string,
@@ -19,8 +18,7 @@ export interface Filesize$SiJedecBits {
         Yb?: string
 }
 
-declare
-export interface Filesize$SiJedecBytes {
+declare export interface Filesize$SiJedecBytes {
     B?: string,
         KB?: string,
         MB?: string,
@@ -36,8 +34,7 @@ declare type Filesize$SiJedec = Filesize$SiJedecBits & Filesize$SiJedecBytes & {
     [name: string]: string
 };
 
-declare
-export interface Filesize$Options {
+declare export interface Filesize$Options {
 
     /**
      * Enables bit sizes, default is false
@@ -86,8 +83,7 @@ export interface Filesize$Options {
         spacer?: string
 }
 
-declare
-export interface Filesize$IFilesize {
+declare export interface Filesize$IFilesize {
     (bytes: number): string,
     (bytes: number, options: Filesize$Options): string
 }

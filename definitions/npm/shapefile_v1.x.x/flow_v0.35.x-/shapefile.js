@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var shapefile: shapefile$ShapefileStatic;
+declare var shapefile: shapefile$ShapefileStatic;
 declare interface shapefile$Options {
     encoding: string,
         highWaterMark: number

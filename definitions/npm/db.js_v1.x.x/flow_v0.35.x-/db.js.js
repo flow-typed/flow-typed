@@ -148,5 +148,4 @@ declare module 'db' {
     declare var db: DbJs.DbJsStatic;
     declare module.exports: typeof db
 }
-declare
-var db: DbJs.DbJsStatic;
+declare var db: DbJs.DbJsStatic;

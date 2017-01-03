@@ -31,8 +31,7 @@ declare type ___ReactFlexr$GridProps = {
     flexCells?: boolean
 }
 
-declare
-export class Grid mixins React.Component<___ReactFlexr$GridProps, {}>{}
+declare export class Grid mixins React.Component<___ReactFlexr$GridProps, {}>{}
 
 declare type ___ReactFlexr$CellProps = {
 
@@ -81,8 +80,7 @@ declare type ___ReactFlexr$CellProps = {
     desk?: string | number
 }
 
-declare
-export class Cell mixins React.Component<___ReactFlexr$CellProps, {}>{}
+declare export class Cell mixins React.Component<___ReactFlexr$CellProps, {}>{}
 
 
 /**
@@ -94,35 +92,25 @@ declare interface ___ReactFlexr$OptimizedResize {
     init: (callback: () => void) => void
 }
 
-declare
-export var optimizedResize: ___ReactFlexr$OptimizedResize;
+declare export var optimizedResize: ___ReactFlexr$OptimizedResize;
 
-declare
-export type ___ReactFlexr$ErgonomicType = "palm" | "lap" | "portable" | "desk";
+declare export type ___ReactFlexr$ErgonomicType = "palm" | "lap" | "portable" | "desk";
 
-declare
-export var findMatch: (...arguments: ___ReactFlexr$ErgonomicType[]) => boolean;
+declare export var findMatch: (...arguments: ___ReactFlexr$ErgonomicType[]) => boolean;
 
-declare
-export var setBreakpoints: (breakpoints: ___ReactFlexr$ErgonomicType[]) => void;
+declare export var setBreakpoints: (breakpoints: ___ReactFlexr$ErgonomicType[]) => void;
 
-declare
-export var findBreakpoints: () => ___ReactFlexr$ErgonomicType[] | boolean;
+declare export var findBreakpoints: () => ___ReactFlexr$ErgonomicType[] | boolean;
 
-declare
-export var getCurrentBreakpoints: () => ___ReactFlexr$ErgonomicType[];
+declare export var getCurrentBreakpoints: () => ___ReactFlexr$ErgonomicType[];
 
-declare
-export var palm: string;
+declare export var palm: string;
 
-declare
-export var lap: string;
+declare export var lap: string;
 
-declare
-export var portable: string;
+declare export var portable: string;
 
-declare
-export var desk: string;
+declare export var desk: string;
 declare module 'react-flexr' {
     declare module.exports: typeof ___ReactFlexr
 }

@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$nunjucks: {
+declare var npm$namespace$nunjucks: {
     render: typeof nunjucks$render,
     renderString: typeof nunjucks$renderString,
     compile: typeof nunjucks$compile,
@@ -17,23 +16,17 @@ var npm$namespace$nunjucks: {
     configure: typeof nunjucks$configure,
     installJinjaCompat: typeof nunjucks$installJinjaCompat,
 }
-declare
-export function nunjucks$render(name: string, context?: Object): string
+declare export function nunjucks$render(name: string, context?: Object): string
 
-declare
-export function nunjucks$renderString(src: string, context: Object): string
+declare export function nunjucks$renderString(src: string, context: Object): string
 
-declare
-export function nunjucks$compile(src: string, env?: nunjucks$Environment): nunjucks$Template
+declare export function nunjucks$compile(src: string, env?: nunjucks$Environment): nunjucks$Template
 
-declare
-export function nunjucks$precompile(path: string, opts?: nunjucks$PrecompileOptions): string
+declare export function nunjucks$precompile(path: string, opts?: nunjucks$PrecompileOptions): string
 
-declare
-export function nunjucks$precompileString(src: string, opts?: nunjucks$PrecompileOptions): string
+declare export function nunjucks$precompileString(src: string, opts?: nunjucks$PrecompileOptions): string
 
-declare
-export interface nunjucks$PrecompileOptions {
+declare export interface nunjucks$PrecompileOptions {
     name?: string,
         asFunction?: boolean,
         force?: boolean,
@@ -48,18 +41,15 @@ export interface nunjucks$PrecompileOptions {
             opts: nunjucks$PrecompileOptions): string
 }
 
-declare
-export class Template {
+declare export class Template {
     constructor(src: string, env?: nunjucks$Environment, eagerCompile?: boolean): this;
     render(context?: Object): string;
     render(context?: Object, callback?: (err: any, res: string) => any): void
 }
 
-declare
-export function nunjucks$configure(options: nunjucks$ConfigureOptions): nunjucks$Environment
+declare export function nunjucks$configure(options: nunjucks$ConfigureOptions): nunjucks$Environment
 
-declare
-export interface nunjucks$ConfigureOptions {
+declare export interface nunjucks$ConfigureOptions {
     autoescape?: boolean,
         throwOnUndefined?: boolean,
         trimBlocks?: boolean,
@@ -81,8 +71,7 @@ export interface nunjucks$ConfigureOptions {
         }
 }
 
-declare
-export class Environment {
+declare export class Environment {
     options: {
         autoescape: boolean
     };
@@ -111,24 +100,20 @@ export class Environment {
     express(app: Object): void
 }
 
-declare
-export interface nunjucks$Extension {
+declare export interface nunjucks$Extension {
     tags: string[],
         parse(parser: any, nodes: any, lexer: any): any
 }
 
-declare
-export function nunjucks$installJinjaCompat(): void
+declare export function nunjucks$installJinjaCompat(): void
 
-declare
-export interface nunjucks$ILoader {
+declare export interface nunjucks$ILoader {
     async?: boolean,
     getSource(name: string): nunjucks$LoaderSource,
         extend(extender: nunjucks$ILoader): nunjucks$ILoader
 }
 
-declare
-export class Loader {
+declare export class Loader {
     on(name: string, func: (...args: any[]) => any): void;
     emit(name: string, ...args: any[]): void;
     resolve(from: string, to: string): string;
@@ -136,27 +121,23 @@ export class Loader {
     extend(toExtend: nunjucks$ILoader): nunjucks$ILoader
 }
 
-declare
-export interface nunjucks$LoaderSource {
+declare export interface nunjucks$LoaderSource {
     src: string,
         path: string,
         noCache: boolean
 }
 
-declare
-export class FileSystemLoader mixins Loader, ILoader {
+declare export class FileSystemLoader mixins Loader, ILoader {
     init(searchPaths: string[], opts: any): void;
     getSource(name: string): nunjucks$LoaderSource
 }
 
-declare
-export class WebLoader mixins ILoader {
+declare export class WebLoader mixins ILoader {
     constructor(baseUrl: string, opts?: any): this;
     getSource(name: string): nunjucks$LoaderSource
 }
 
-declare
-export class PrecompiledLoader mixins Loader, ILoader {
+declare export class PrecompiledLoader mixins Loader, ILoader {
     init(searchPaths: string[], opts: any): void;
     getSource(name: string): nunjucks$LoaderSource
 }

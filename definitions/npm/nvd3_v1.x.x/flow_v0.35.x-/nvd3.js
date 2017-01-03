@@ -2080,8 +2080,7 @@ declare interface nv$Nvd3Static {
         log(topic: string, value?: string): string,
         log(arg: any[]): any
 }
-declare
-var nv: nv$Nvd3Static;
+declare var nv: nv$Nvd3Static;
 declare module 'nvd3' {
     declare module.exports: typeof nv
 }

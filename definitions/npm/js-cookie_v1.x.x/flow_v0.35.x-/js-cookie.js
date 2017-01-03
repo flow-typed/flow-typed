@@ -95,8 +95,7 @@ declare interface Cookies$CookiesStatic {
         */
         withConverter(converter: (value: string, name: string) => string): Cookies$CookiesStatic
 }
-declare
-var Cookies: Cookies$CookiesStatic;
+declare var Cookies: Cookies$CookiesStatic;
 declare module 'js-cookie' {
     declare module.exports: typeof Cookies
 }

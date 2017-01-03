@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Slick$SlickGridCheckBoxSelectColumnOptions = {
+declare export type Slick$SlickGridCheckBoxSelectColumnOptions = {
 
     /**
      * Column to add the checkbox to
@@ -35,8 +34,7 @@ export type Slick$SlickGridCheckBoxSelectColumnOptions = {
 } & PluginOptions
 
 
-declare
-export class CheckboxSelectColumn<T>mixins Plugin<T>{
+declare export class CheckboxSelectColumn<T>mixins Plugin<T>{
     constructor(options?: Slick$SlickGridCheckBoxSelectColumnOptions): this;
     init(grid: Slick$Grid<T>): void;
     destroy(): void;

@@ -185,8 +185,7 @@ declare module 'Revalidator' {
         dependencies?: string
     }
 }
-declare
-var revalidator: Revalidator.RevalidatorStatic;
+declare var revalidator: Revalidator.RevalidatorStatic;
 declare module 'revalidator' {
     declare module.exports: typeof revalidator
 }

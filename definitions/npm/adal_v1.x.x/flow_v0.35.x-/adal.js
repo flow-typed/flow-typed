@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var AuthenticationContext: adal$AuthenticationContextStatic;
-declare
-var Logging: adal$Logging;
+declare var AuthenticationContext: adal$AuthenticationContextStatic;
+declare var Logging: adal$Logging;
 declare module 'adal' {
     declare module.exports: typeof NO PRINT IMPLEMENTED: ObjectLiteralExpression
 }

@@ -123,8 +123,7 @@ declare interface BabyParse$Parser {
         abort(): void,
         getCharIndex(): number
 }
-declare
-var Baby: BabyParse$Static;
+declare var Baby: BabyParse$Static;
 declare module 'babyparse' {
     declare var Baby: BabyParse$Static;
     declare module.exports: typeof Baby

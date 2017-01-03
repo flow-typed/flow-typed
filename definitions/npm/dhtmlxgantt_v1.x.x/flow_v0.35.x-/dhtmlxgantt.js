@@ -1819,7 +1819,5 @@ declare interface GanttStatic {
          */
         updateTask(id: string): void
 }
-declare
-var gantt: GanttStatic;
-declare
-var Gantt: GanttEnterprise;
+declare var gantt: GanttStatic;
+declare var Gantt: GanttEnterprise;

@@ -223,5 +223,4 @@ declare interface LaunchNavigator {
          */
         userSelect: (destination: string | number[], options: LaunchNavigatorOptions) => void
 }
-declare
-var launchnavigator: LaunchNavigator;
+declare var launchnavigator: LaunchNavigator;

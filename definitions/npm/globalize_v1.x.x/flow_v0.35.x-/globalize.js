@@ -336,5 +336,4 @@ declare interface GlobalizeStatic {
          */
         new(cldr: cldr.CldrStatic): GlobalizeStatic
 }
-declare
-var Globalize: GlobalizeStatic;
+declare var Globalize: GlobalizeStatic;

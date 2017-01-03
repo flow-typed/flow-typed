@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var eqjs: eq$EqjsStatic;
+declare var eqjs: eq$EqjsStatic;
 declare module 'eqjs' {
     declare module.exports: typeof eqjs
 }

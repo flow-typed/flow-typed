@@ -6,6 +6,4 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function all(description: string, dataset: any[], assertion: (...args: any[]) => void): voiddeclare
-function xall(description: string, dataset: any[], assertion: (...args: any[]) => void): void
+declare function all(description: string, dataset: any[], assertion: (...args: any[]) => void): voiddeclare function xall(description: string, dataset: any[], assertion: (...args: any[]) => void): void

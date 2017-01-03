@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$riot: {
+declare var npm$namespace$riot: {
     observable: typeof riot$observable,
     mount: typeof riot$mount,
     render: typeof riot$render,
@@ -17,8 +16,7 @@ var npm$namespace$riot: {
     tag: typeof riot$tag,
     compile: typeof riot$compile,
 }
-declare
-var version: string;
+declare var version: string;
 
 
 /**
@@ -32,8 +30,7 @@ declare interface riot$Settings {
     brackets: string
 }
 
-declare
-var settings: riot$Settings;
+declare var settings: riot$Settings;
 
 declare type riot$TemplateError = {
     riotData: {
@@ -48,11 +45,9 @@ declare interface riot$Util {
     }
 }
 
-declare
-var util: riot$Util;
+declare var util: riot$Util;
 
-declare
-var vdom: riot$Tag[];
+declare var vdom: riot$Tag[];
 
 declare interface riot$Observable {
 
@@ -177,11 +172,9 @@ declare interface riot$Route {
  * if the argument is empty a new observable instance is created and returned.
  * @param el Object to become observable
  */
-declare
-function riot$observable(el?: any): riot$Observable
+declare function riot$observable(el?: any): riot$Observable
 
-declare
-var route: riot$Route;
+declare var route: riot$Route;
 
 
 /**
@@ -190,8 +183,7 @@ var route: riot$Route;
 It can be tag name, css selector or special '*' selector that matches all tags on the page.
  * @param opts Optional object passed for the tags to consume.
 */
-declare
-function riot$mount(selector: string, opts?: any): riot$Tag[]
+declare function riot$mount(selector: string, opts?: any): riot$Tag[]
 
 
 /**
@@ -199,24 +191,21 @@ function riot$mount(selector: string, opts?: any): riot$Tag[]
  * @param tagName Custom tag name
  * @param opts Optional object passed for the tag to consume.
  */
-declare
-function riot$render(tagName: string, opts?: any): string
+declare function riot$render(tagName: string, opts?: any): string
 
 
 /**
  * Update all the mounted tags and their expressions on the page.
  * Returns an array of tag instances that are mounted on the page.
  */
-declare
-function riot$update(): riot$Tag[]
+declare function riot$update(): riot$Tag[]
 
 
 /**
  * Register a global mixin and automatically add it to all tag instances.
  * @param mixinObject Mixin object
  */
-declare
-function riot$mixin(mixinObject: riot$TagMixin): void
+declare function riot$mixin(mixinObject: riot$TagMixin): void
 
 
 /**
@@ -228,8 +217,7 @@ function riot$mixin(mixinObject: riot$TagMixin): void
  * @param constructor The initialization function being called before
 the tag expressions are calculated and before the tag is mounted
 */
-declare
-function riot$tag(
+declare function riot$tag(
     tagName: string,
     html: string,
     css?: string,
@@ -429,7 +417,6 @@ declare type riot$TagMixin = {
  * Compile all tags defined with <script type="riot/tag"> to JavaScript.
  * @param callback Function that is called after all scripts are compiled
  */
-declare
-function riot$compile(callback: Function): voiddeclare module 'riot' {
+declare function riot$compile(callback: Function): voiddeclare module 'riot' {
     declare module.exports: typeof riot
 }

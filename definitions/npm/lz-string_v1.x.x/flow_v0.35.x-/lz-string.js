@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var LZString: LZString$LZStringStatic;
+declare var LZString: LZString$LZStringStatic;
 /**
  * LZ-based compression algorithm for JavaScript.
  */

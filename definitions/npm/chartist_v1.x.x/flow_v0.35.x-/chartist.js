@@ -570,8 +570,7 @@ declare type Chartist$IChartistCardinalInterpolationOptions = {
 declare type Chartist$IChartistStepInterpolationOptions = {
     postpone?: boolean
 } & Chartist$IChartistInterpolationOptions
-declare
-var Chartist: Chartist$ChartistStatic;
+declare var Chartist: Chartist$ChartistStatic;
 declare module 'chartist' {
     declare module.exports: typeof Chartist
 }

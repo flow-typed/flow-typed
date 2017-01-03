@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface L$MarkerClusterGroupOptions {
+declare export interface L$MarkerClusterGroupOptions {
     showCoverageOnHover?: boolean,
         zoomToBoundsOnClick?: boolean,
         spiderfyOnMaxZoom?: boolean,
@@ -25,8 +24,7 @@ export interface L$MarkerClusterGroupOptions {
         chunkDelay?: number
 }
 
-declare
-export class MarkerClusterGroup mixins FeatureGroup<ILayer>{
+declare export class MarkerClusterGroup mixins FeatureGroup<ILayer>{
     constructor(): this;
     constructor(options: L$MarkerClusterGroupOptions): this;
     addLayers(layers: ILayer[]): L$MarkerClusterGroup;

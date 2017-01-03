@@ -6,25 +6,21 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface jsSHA$EncodingOptions {
+declare export interface jsSHA$EncodingOptions {
     encoding?: string
 }
 
-declare
-export type jsSHA$Options = {
+declare export type jsSHA$Options = {
     numRounds?: number
 } & jsSHA$EncodingOptions
 
 
-declare
-export interface jsSHA$OutputFormatOptions {
+declare export interface jsSHA$OutputFormatOptions {
     outputUpper?: boolean,
         b64Pad?: string
 }
 
-declare
-export interface jsSHA$jsSHA {
+declare export interface jsSHA$jsSHA {
 
     /**
      * jsSHA is the workhorse of the library.  Instantiate it with the string to
@@ -71,8 +67,7 @@ export interface jsSHA$jsSHA {
         */
         getHMAC(format: string, outputFormatOpts?: jsSHA$OutputFormatOptions): string
 }
-declare
-var jsSHA: jsSHA$jsSHA;
+declare var jsSHA: jsSHA$jsSHA;
 declare module 'jssha' {
     declare module.exports: typeof jsSHA
 }

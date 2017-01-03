@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var invariant: invariant$InvariantStatic;
+declare var invariant: invariant$InvariantStatic;
 declare module 'invariant' {
     declare module.exports: typeof invariant
 }

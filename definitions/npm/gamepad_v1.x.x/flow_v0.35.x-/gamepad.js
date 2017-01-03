@@ -10,8 +10,7 @@
 /**
  * This interface defines an individual gamepad device.
  */
-declare
-export interface Gamepad$Gamepad {
+declare export interface Gamepad$Gamepad {
 
     /**
      * An identification string for the gamepad. This string identifies the brand or style of connected gamepad device. Typically, this will include the USB vendor and a product ID.
@@ -60,8 +59,7 @@ export interface Gamepad$Gamepad {
 /**
  * 
  */
-declare
-export type Gamepad$GamepadEvent = {
+declare export type Gamepad$GamepadEvent = {
 
     /**
      * The single gamepad attribute provides access to the associated gamepad data for this event.
@@ -71,14 +69,12 @@ export type Gamepad$GamepadEvent = {
 } & Event
 
 
-declare
-export interface Gamepad$GamepadList {
+declare export interface Gamepad$GamepadList {
     [index: number]: Gamepad$Gamepad,
     length: number
 }
 
-declare
-export interface Gamepad$GamepadButton {
+declare export interface Gamepad$GamepadButton {
     pressed: boolean,
         value: number
 }

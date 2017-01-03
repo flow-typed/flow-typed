@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Node: {
+declare var Node: {
     new(config: Kinetic$ObjectOptionsConfig): Kinetic$INode
 };
 
@@ -107,8 +106,7 @@ declare interface Kinetic$INode {
         setY(y: number): void
 }
 
-declare
-var Container: {
+declare var Container: {
     new(config: any): Kinetic$IContainer
 };
 
@@ -125,8 +123,7 @@ declare type Kinetic$IContainer = {
 } & Kinetic$INode
 
 
-declare
-var Stage: {
+declare var Stage: {
     new(config: Kinetic$StageConfig): Kinetic$IStage
 };
 
@@ -154,8 +151,7 @@ declare type Kinetic$IStage = {
 } & Kinetic$IContainer
 
 
-declare
-var Layer: {
+declare var Layer: {
     new(config?: Kinetic$LayerConfig): Kinetic$ILayer
 };
 
@@ -180,8 +176,7 @@ declare interface Kinetic$ICanvas {
         width: number
 }
 
-declare
-var Shape: {
+declare var Shape: {
     new(config: any): Kinetic$IShape
 };
 
@@ -211,8 +206,7 @@ declare type Kinetic$IShape = {
 } & Kinetic$INode
 
 
-declare
-var Rect: {
+declare var Rect: {
     new(config: Kinetic$RectConfig): Kinetic$IRect
 };
 
@@ -226,8 +220,7 @@ declare type Kinetic$IRect = {
 } & Kinetic$IShape
 
 
-declare
-var Circle: {
+declare var Circle: {
     new(config: Kinetic$CircleConfig): Kinetic$ICircle
 };
 
@@ -237,8 +230,7 @@ declare type Kinetic$ICircle = {
 } & Kinetic$IShape
 
 
-declare
-var Ellipse: {
+declare var Ellipse: {
     new(config: Kinetic$CircleConfig): Kinetic$IEllipse
 };
 
@@ -248,16 +240,14 @@ declare type Kinetic$IEllipse = {
 } & Kinetic$IShape
 
 
-declare
-var Group: {
+declare var Group: {
     new(config?: Kinetic$ObjectOptionsConfig): Kinetic$IGroup
 };
 
 declare type Kinetic$IGroup = {} & Kinetic$IContainer
 
 
-declare
-var Collection: {
+declare var Collection: {
     new(): Kinetic$ICollection
 };
 
@@ -266,8 +256,7 @@ declare interface Kinetic$ICollection {
         each(func: () => any): any
 }
 
-declare
-var Image: {
+declare var Image: {
     new(config?: Kinetic$ImageConfig): Kinetic$IImage
 };
 
@@ -288,8 +277,7 @@ declare type Kinetic$IImage = {
 } & Kinetic$IShape
 
 
-declare
-var Line: {
+declare var Line: {
     new(config: Kinetic$LineConfig): Kinetic$ILine
 };
 
@@ -303,8 +291,7 @@ declare type Kinetic$ILine = {
 } & Kinetic$IShape
 
 
-declare
-var Path: {
+declare var Path: {
     new(config: Kinetic$PathConfig): Kinetic$IPath,
     parsePathData(data: string): any
 };
@@ -315,8 +302,7 @@ declare type Kinetic$IPath = {
 } & Kinetic$IShape
 
 
-declare
-var RegularPolygon: {
+declare var RegularPolygon: {
     new(config: Kinetic$RegularPolygonConfig): Kinetic$IRegularPolygon
 };
 
@@ -328,8 +314,7 @@ declare type Kinetic$IRegularPolygon = {
 } & Kinetic$IShape
 
 
-declare
-var Sprite: {
+declare var Sprite: {
     new(config: Kinetic$SpriteConfig): Kinetic$ISprite
 };
 
@@ -346,8 +331,7 @@ declare type Kinetic$ISprite = {
 } & Kinetic$IShape
 
 
-declare
-var Star: {
+declare var Star: {
     new(config: Kinetic$StarConfig): Kinetic$IStar
 };
 
@@ -361,8 +345,7 @@ declare type Kinetic$IStar = {
 } & Kinetic$IShape
 
 
-declare
-var Text: {
+declare var Text: {
     new(config: Kinetic$TextConfig): Kinetic$IText
 };
 
@@ -400,8 +383,7 @@ declare type Kinetic$IText = {
 } & Kinetic$IShape
 
 
-declare
-var TextPath: {
+declare var TextPath: {
     new(config: any): Kinetic$ITextPath
 };
 
@@ -425,8 +407,7 @@ declare type Kinetic$ITextPath = {
 } & Kinetic$IShape
 
 
-declare
-var Animation: {
+declare var Animation: {
     new(...args: any[]): Kinetic$IAnimation
 };
 

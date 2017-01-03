@@ -162,8 +162,7 @@ declare interface KiiCloud$KiiMqttEndpoint {
 /**
  * The main SDK class
  */
-declare
-export class Kii {
+declare export class Kii {
 
     /**
      * Kii SDK Build Number
@@ -549,8 +548,7 @@ export class Kii {
 /**
  * Represents a KiiACL object
  */
-declare
-export class KiiACL {
+declare export class KiiACL {
 
     /**
      * Get the list of active ACLs associated with this object from the server
@@ -670,8 +668,7 @@ export class KiiACL {
 /**
  * Represents a KiiACLEntry object
  */
-declare
-export class KiiACLEntry {
+declare export class KiiACLEntry {
 
     /**
      * The action that is being permitted/restricted. Possible values:
@@ -741,8 +738,7 @@ export class KiiACLEntry {
 /**
  * The main SDK class
  */
-declare
-export class KiiAnalytics {
+declare export class KiiAnalytics {
 
     /**
      * Retrieve the current app ID
@@ -909,8 +905,7 @@ export class KiiAnalytics {
  * 
  	When retrieving ACL from an object, test for this class to determine the subject type.
 */
-declare
-export class KiiAnonymousUser {
+declare export class KiiAnonymousUser {
 
     /**
      * Returns the ID of Anonymous user.
@@ -924,8 +919,7 @@ export class KiiAnonymousUser {
  * 
  	When retrieving ACL from an object, test for this class to determine the subject type. Example:
 */
-declare
-export class KiiAnyAuthenticatedUser {
+declare export class KiiAnyAuthenticatedUser {
 
     /**
      * Returns the ID of AuthenticatedUser user.
@@ -944,8 +938,7 @@ Attacker will be act as application admin and all the data in your application w
 </B>
 Application administrator context. Entities obtained from this class will be manipulated by application admin.
 */
-declare
-export class KiiAppAdminContext {
+declare export class KiiAppAdminContext {
 
     /**
      * Creates a reference to a bucket operated by app admin.
@@ -1733,8 +1726,7 @@ export class KiiAppAdminContext {
 /**
  * Represents a KiiBucket object
  */
-declare
-export class KiiBucket {
+declare export class KiiBucket {
 
     /**
      * The name of this bucket
@@ -2061,8 +2053,7 @@ export class KiiBucket {
 /**
  * Represents a KiiClause expression object
  */
-declare
-export class KiiClause {
+declare export class KiiClause {
 
     /**
      * Create a KiiClause with the AND operator concatenating multiple KiiClause objects
@@ -2197,8 +2188,7 @@ export class KiiClause {
 /**
  * Represents Geo Point.
  */
-declare
-export class KiiGeoPoint {
+declare export class KiiGeoPoint {
 
     /**
      * Return the latitide of this point.
@@ -2225,8 +2215,7 @@ export class KiiGeoPoint {
 /**
  * Represents a KiiGroup object
  */
-declare
-export class KiiGroup {
+declare export class KiiGroup {
 
     /**
      * 
@@ -2861,8 +2850,7 @@ export class KiiGroup {
 /**
  * Represents a KiiObject object
  */
-declare
-export class KiiObject {
+declare export class KiiObject {
 
     /**
      * Get the UUID of the given object, assigned by the server
@@ -3621,8 +3609,7 @@ export class KiiObject {
 /**
  * Represents a KiiPushInstallation object
  */
-declare
-export class KiiPushInstallation {
+declare export class KiiPushInstallation {
 
     /**
      * Register the id issued by GCM to the Kii cloud for current logged in user.
@@ -3769,8 +3756,7 @@ export class KiiPushInstallation {
 /**
  * Builder of push message
  */
-declare
-export class KiiPushMessageBuilder {
+declare export class KiiPushMessageBuilder {
 
     /**
      * instantiate builder with push message data.
@@ -3979,8 +3965,7 @@ export class KiiPushMessageBuilder {
 /**
  * Represents a KiiPushSubscription.
  */
-declare
-export class KiiPushSubscription {
+declare export class KiiPushSubscription {
 
     /**
      * Subscribe to bucket or topic.
@@ -4158,8 +4143,7 @@ export class KiiPushSubscription {
 /**
  * Represents a KiiQuery object
  */
-declare
-export class KiiQuery {
+declare export class KiiQuery {
 
     /**
      * Get the limit of the current query
@@ -4203,8 +4187,7 @@ export class KiiQuery {
 /**
  * Represents a server side code entry in KiiCloud.
  */
-declare
-export class KiiServerCodeEntry {
+declare export class KiiServerCodeEntry {
 
     /**
      * Execute this server code entry.<br>
@@ -4293,8 +4276,7 @@ export class KiiServerCodeEntry {
 /**
  * Represents a server side code execution result in KiiCloud.
  */
-declare
-export class KiiServerCodeExecResult {
+declare export class KiiServerCodeExecResult {
 
     /**
      * Get calculated number of executed steps.
@@ -4313,8 +4295,7 @@ export class KiiServerCodeExecResult {
 /**
  * Represents a KiiSocialConnect object
  */
-declare
-export class KiiSocialConnect {
+declare export class KiiSocialConnect {
 
     /**
      * 
@@ -4905,8 +4886,7 @@ export class KiiSocialConnect {
 /**
  * Represents a Thing object
  */
-declare
-export class KiiThing {
+declare export class KiiThing {
 
     /**
      * of this thing.
@@ -5769,8 +5749,7 @@ export class KiiThing {
 /**
  * represents a KiiThingContext object
  */
-declare
-export class KiiThingContext {
+declare export class KiiThingContext {
 
     /**
      * Creates a reference to a bucket in App scope operated by thing.
@@ -5910,8 +5889,7 @@ export class KiiThingContext {
 /**
  * Represents a Topic object.
  */
-declare
-export class KiiTopic {
+declare export class KiiTopic {
 
     /**
      * get name of this topic
@@ -6109,8 +6087,7 @@ export class KiiTopic {
 /**
  * Represents a KiiUser object
  */
-declare
-export class KiiUser {
+declare export class KiiUser {
 
     /**
      * 
@@ -7721,8 +7698,7 @@ export class KiiUser {
 /**
  * Represents a KiiUser builder
  */
-declare
-export class KiiUserBuilder {
+declare export class KiiUserBuilder {
 
     /**
      * Create a KiiUser builder with identifier.

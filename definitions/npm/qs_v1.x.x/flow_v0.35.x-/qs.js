@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$QueryString: {
+declare var npm$namespace$QueryString: {
     stringify: typeof QueryString$stringify,
     parse: typeof QueryString$parse,
 }
@@ -36,10 +35,8 @@ declare interface QueryString$IParseOptions {
         strictNullHandling?: boolean
 }
 
-declare
-function QueryString$stringify(obj: any, options?: QueryString$IStringifyOptions): string
+declare function QueryString$stringify(obj: any, options?: QueryString$IStringifyOptions): string
 
-declare
-function QueryString$parse(str: string, options?: QueryString$IParseOptions): anydeclare module 'qs' {
+declare function QueryString$parse(str: string, options?: QueryString$IParseOptions): anydeclare module 'qs' {
     declare module.exports: typeof QueryString
 }

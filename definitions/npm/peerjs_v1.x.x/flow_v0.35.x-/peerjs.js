@@ -70,8 +70,7 @@ declare interface PeerJs$util {
         supports: PeerJs$utilSupportsObj
 }
 
-declare
-export interface PeerJs$Peer {
+declare export interface PeerJs$Peer {
 
     /**
      * 
@@ -193,8 +192,7 @@ export interface PeerJs$Peer {
          */
         destroyed: boolean
 }
-declare
-var Peer: {
+declare var Peer: {
     prototype: RTCIceServer,
 
     /**

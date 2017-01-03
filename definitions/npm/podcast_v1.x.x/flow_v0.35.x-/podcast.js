@@ -70,8 +70,7 @@ declare interface IItemOptions {
         itunesDuration?: number,
         itunesKeywords?: string[]
 }
-declare
-var Podcast: PodcastStatic;
+declare var Podcast: PodcastStatic;
 declare module 'podcast' {
     declare module.exports: typeof Podcast
 }

@@ -59,8 +59,7 @@ declare interface fastjsonpatch$JsonPatchError {
         operation: any,
         tree: any
 }
-declare
-var jsonpatch: fastjsonpatch$JsonPatch;
+declare var jsonpatch: fastjsonpatch$JsonPatch;
 declare module 'fast-json-patch' {
     declare module.exports: typeof jsonpatch
 }

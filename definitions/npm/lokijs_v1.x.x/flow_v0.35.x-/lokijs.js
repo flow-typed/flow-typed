@@ -1421,22 +1421,19 @@ declare type LokiJquerySyncAdapterError = {
     message: any,
     new(message: any): LokiJquerySyncAdapterError
 } & Error
-declare
-var LokiCryptedFileAdapterConstructor: {
+declare var LokiCryptedFileAdapterConstructor: {
     new(): LokiCryptedFileAdapter
 };
 declare module 'lokiCryptedFileAdapter' {
     declare module.exports: typeof LokiCryptedFileAdapterConstructor
 }
-declare
-var LokiIndexedAdapterConstructor: {
+declare var LokiIndexedAdapterConstructor: {
     new(filename: string): LokiIndexedAdapter
 };
 declare module 'loki-indexed-adapter' {
     declare module.exports: typeof LokiIndexedAdapterConstructor
 }
-declare
-var LokiConstructor: {
+declare var LokiConstructor: {
     new(filename: string, options?: LokiConfigureOptions): Loki,
     LokiOps: LokiOps,
     Collection: LokiCollection<any>,

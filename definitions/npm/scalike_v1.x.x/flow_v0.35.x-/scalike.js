@@ -7,16 +7,14 @@
  */
 
 
-declare
-var npm$namespace$scalike: {
+declare var npm$namespace$scalike: {
     Right: typeof scalike$Right,
     Left: typeof scalike$Left,
     Some: typeof scalike$Some,
     Success: typeof scalike$Success,
     Failure: typeof scalike$Failure,
 }
-declare
-export interface scalike$Either<A, B>{
+declare export interface scalike$Either<A, B>{
     value: A | B,
     isLeft: boolean,
     isRight: boolean,
@@ -29,14 +27,11 @@ export interface scalike$Either<A, B>{
     A >
 }
 
-declare
-export function scalike$Right<A, B>(b: B): scalike$Either<A, B >
+declare export function scalike$Right<A, B>(b: B): scalike$Either<A, B >
 
-    declare
-export function scalike$Left<A, B>(a: A): scalike$Either<A, B >
+    declare export function scalike$Left<A, B>(a: A): scalike$Either<A, B >
 
-    declare
-export class LeftProjection<A, B>{
+    declare export class LeftProjection<A, B>{
     constructor(self: scalike$Either<A, B>): this;
     toString(): string;
     get(): A;
@@ -53,8 +48,7 @@ export class LeftProjection<A, B>{
     toOptional(): scalike$Optional<A >
 }
 
-declare
-export class RightProjection<A, B>{
+declare export class RightProjection<A, B>{
     constructor(self: scalike$Either<A, B>): this;
     toString(): string;
     get(): B;
@@ -71,8 +65,7 @@ export class RightProjection<A, B>{
     toOptional(): scalike$Optional<B >
 }
 
-declare
-export interface scalike$Optional<A>{
+declare export interface scalike$Optional<A>{
     isEmpty: boolean,
     nonEmpty: boolean,
     get(): A,
@@ -99,14 +92,11 @@ export interface scalike$Optional<A>{
     B >
 }
 
-declare
-export var None: scalike$Optional<any>;
+declare export var None: scalike$Optional<any>;
 
-declare
-export function scalike$Some<A>(a: A): scalike$Optional<A >
+declare export function scalike$Some<A>(a: A): scalike$Optional<A >
 
-    declare
-export class OptionalBuilder1<A, B>{
+    declare export class OptionalBuilder1<A, B>{
     constructor(oa: scalike$Optional<A>, ob: scalike$Optional<B>): this;
     run<C>(f: (a: A, b: B) => C): scalike$Optional<C>;
     chain<C>(oc: scalike$Optional<C>): scalike$OptionalBuilder2<A,
@@ -114,8 +104,7 @@ export class OptionalBuilder1<A, B>{
     C >
 }
 
-declare
-export class OptionalBuilder2<A, B, C>{
+declare export class OptionalBuilder2<A, B, C>{
     constructor(oa: scalike$Optional<A>, ob: scalike$Optional<B>, oc: scalike$Optional<C>): this;
     run<D>(f: (a: A, b: B, c: C) => D): scalike$Optional<D>;
     chain<D>(od: scalike$Optional<D>): scalike$OptionalBuilder3<A,
@@ -124,8 +113,7 @@ export class OptionalBuilder2<A, B, C>{
     D >
 }
 
-declare
-export class OptionalBuilder3<A, B, C, D>{
+declare export class OptionalBuilder3<A, B, C, D>{
     constructor(oa: scalike$Optional<A>, ob: scalike$Optional<B>, oc: scalike$Optional<C>, od: scalike$Optional<D>): this;
     run<E>(f: (a: A, b: B, c: C, d: D) => E): scalike$Optional<E>;
     chain<E>(oe: scalike$Optional<E>): scalike$OptionalBuilder4<A,
@@ -135,8 +123,7 @@ export class OptionalBuilder3<A, B, C, D>{
     E >
 }
 
-declare
-export class OptionalBuilder4<A, B, C, D, E>{
+declare export class OptionalBuilder4<A, B, C, D, E>{
     constructor(oa: scalike$Optional<A>, ob: scalike$Optional<B>, oc: scalike$Optional<C>, od: scalike$Optional<D>, oe: scalike$Optional<E>): this;
     run<F>(f: (a: A, b: B, c: C, d: D, e: E) => F): scalike$Optional<F>;
     chain<F>( of: scalike$Optional<F>): scalike$OptionalBuilder5<A,
@@ -147,14 +134,12 @@ export class OptionalBuilder4<A, B, C, D, E>{
     F >
 }
 
-declare
-export class OptionalBuilder5<A, B, C, D, E, F>{
+declare export class OptionalBuilder5<A, B, C, D, E, F>{
     constructor(oa: scalike$Optional<A>, ob: scalike$Optional<B>, oc: scalike$Optional<C>, od: scalike$Optional<D>, oe: scalike$Optional<E>, of: scalike$Optional<F>): this;
     run<G>(f: (a: A, b: B, c: C, d: D, e: E, f: F) => G): scalike$Optional<G >
 }
 
-declare
-export interface scalike$Try<A>{
+declare export interface scalike$Try<A>{
     isSuccess: boolean,
     isFailure: boolean,
     get(): A,
@@ -184,14 +169,11 @@ export interface scalike$Try<A>{
     B >
 }
 
-declare
-export function scalike$Success<A>(a: A): scalike$Try<A >
+declare export function scalike$Success<A>(a: A): scalike$Try<A >
 
-    declare
-export function scalike$Failure<A>(e: Error): scalike$Try<A >
+    declare export function scalike$Failure<A>(e: Error): scalike$Try<A >
 
-    declare
-export class TryBuilder1<A, B>{
+    declare export class TryBuilder1<A, B>{
     constructor(oa: scalike$Try<A>, ob: scalike$Try<B>): this;
     run<C>(f: (a: A, b: B) => C): scalike$Try<C>;
     chain<C>(oc: scalike$Try<C>): scalike$TryBuilder2<A,
@@ -199,8 +181,7 @@ export class TryBuilder1<A, B>{
     C >
 }
 
-declare
-export class TryBuilder2<A, B, C>{
+declare export class TryBuilder2<A, B, C>{
     constructor(oa: scalike$Try<A>, ob: scalike$Try<B>, oc: scalike$Try<C>): this;
     run<D>(f: (a: A, b: B, c: C) => D): scalike$Try<D>;
     chain<D>(od: scalike$Try<D>): scalike$TryBuilder3<A,
@@ -209,8 +190,7 @@ export class TryBuilder2<A, B, C>{
     D >
 }
 
-declare
-export class TryBuilder3<A, B, C, D>{
+declare export class TryBuilder3<A, B, C, D>{
     constructor(oa: scalike$Try<A>, ob: scalike$Try<B>, oc: scalike$Try<C>, od: scalike$Try<D>): this;
     run<E>(f: (a: A, b: B, c: C, d: D) => E): scalike$Try<E>;
     chain<E>(oe: scalike$Try<E>): scalike$TryBuilder4<A,
@@ -220,8 +200,7 @@ export class TryBuilder3<A, B, C, D>{
     E >
 }
 
-declare
-export class TryBuilder4<A, B, C, D, E>{
+declare export class TryBuilder4<A, B, C, D, E>{
     constructor(oa: scalike$Try<A>, ob: scalike$Try<B>, oc: scalike$Try<C>, od: scalike$Try<D>, oe: scalike$Try<E>): this;
     run<F>(f: (a: A, b: B, c: C, d: D, e: E) => F): scalike$Try<F>;
     chain<F>( of: scalike$Try<F>): scalike$TryBuilder5<A,
@@ -232,14 +211,12 @@ export class TryBuilder4<A, B, C, D, E>{
     F >
 }
 
-declare
-export class TryBuilder5<A, B, C, D, E, F>{
+declare export class TryBuilder5<A, B, C, D, E, F>{
     constructor(oa: scalike$Try<A>, ob: scalike$Try<B>, oc: scalike$Try<C>, od: scalike$Try<D>, oe: scalike$Try<E>, of: scalike$Try<F>): this;
     run<G>(f: (a: A, b: B, c: C, d: D, e: E, f: F) => G): scalike$Try<G >
 }
 
-declare
-export interface scalike$Future<A>{
+declare export interface scalike$Future<A>{
     getPromise(): Promise<A>,
     onComplete<B>(f: (t: scalike$Try<A>) => B): void,
     isCompleted(): boolean,
@@ -272,8 +249,7 @@ export interface scalike$Future<A>{
 }
 
 
-declare
-var npm$namespace$Future: {
+declare var npm$namespace$Future: {
     fromPromise: typeof Future$fromPromise,
     unit: typeof Future$unit,
     failed: typeof Future$failed,
@@ -286,46 +262,34 @@ var npm$namespace$Future: {
     reduceLeft: typeof Future$reduceLeft,
     traverse: typeof Future$traverse,
 }
-declare
-function Future$fromPromise<A>(p: Promise<A>): scalike$Future<A >
+declare function Future$fromPromise<A>(p: Promise<A>): scalike$Future<A >
 
-    declare
-function Future$unit(): scalike$Future<void >
+    declare function Future$unit(): scalike$Future<void >
 
-    declare
-function Future$failed<A>(e: Error): scalike$Future<A >
+    declare function Future$failed<A>(e: Error): scalike$Future<A >
 
-    declare
-function Future$successful<A>(a: A): scalike$Future<A >
+    declare function Future$successful<A>(a: A): scalike$Future<A >
 
-    declare
-function Future$fromTry<A>(t: scalike$Try<A>): scalike$Future<A >
+    declare function Future$fromTry<A>(t: scalike$Try<A>): scalike$Future<A >
 
-    declare
-function Future$sequence<A>(fus: Array<scalike$Future<A >> ): scalike$Future<Array<A >>
+    declare function Future$sequence<A>(fus: Array<scalike$Future<A >> ): scalike$Future<Array<A >>
 
-    declare
-function Future$firstCompletedOf<A>(fus: Array<scalike$Future<A >> ): scalike$Future<A >
+    declare function Future$firstCompletedOf<A>(fus: Array<scalike$Future<A >> ): scalike$Future<A >
 
-    declare
-function Future$find<A>(
+    declare function Future$find<A>(
         fus: Array<scalike$Future<A >> ,
         f: (a: A) => boolean): scalike$Future<scalike$Optional<A >>
 
-    declare
-function Future$foldLeft<A, B>(
+    declare function Future$foldLeft<A, B>(
         fu: Array<scalike$Future<A >> ,
         zero: B,
         f: (b: B, a: A) => B): scalike$Future<B >
 
-    declare
-function Future$reduceLeft<A, B>(fu: Array<scalike$Future<A >> , f: (b: B, a: A) => B): scalike$Future<B >
+    declare function Future$reduceLeft<A, B>(fu: Array<scalike$Future<A >> , f: (b: B, a: A) => B): scalike$Future<B >
 
-    declare
-function Future$traverse<A, B>(fu: Array<A>, f: (a: A) => scalike$Future<B>): scalike$Future<Array<B >>
+    declare function Future$traverse<A, B>(fu: Array<A>, f: (a: A) => scalike$Future<B>): scalike$Future<Array<B >>
 
-    declare
-export class FutureBuilder1<A, B>{
+    declare export class FutureBuilder1<A, B>{
     constructor(oa: scalike$Future<A>, ob: scalike$Future<B>): this;
     run<C>(f: (a: A, b: B) => C): scalike$Future<C>;
     chain<C>(oc: scalike$Future<C>): scalike$FutureBuilder2<A,
@@ -333,8 +297,7 @@ export class FutureBuilder1<A, B>{
     C >
 }
 
-declare
-export class FutureBuilder2<A, B, C>{
+declare export class FutureBuilder2<A, B, C>{
     constructor(oa: scalike$Future<A>, ob: scalike$Future<B>, oc: scalike$Future<C>): this;
     run<D>(f: (a: A, b: B, c: C) => D): scalike$Future<D>;
     chain<D>(od: scalike$Future<D>): scalike$FutureBuilder3<A,
@@ -343,8 +306,7 @@ export class FutureBuilder2<A, B, C>{
     D >
 }
 
-declare
-export class FutureBuilder3<A, B, C, D>{
+declare export class FutureBuilder3<A, B, C, D>{
     constructor(oa: scalike$Future<A>, ob: scalike$Future<B>, oc: scalike$Future<C>, od: scalike$Future<D>): this;
     run<E>(f: (a: A, b: B, c: C, d: D) => E): scalike$Future<E>;
     chain<E>(oe: scalike$Future<E>): scalike$FutureBuilder4<A,
@@ -354,8 +316,7 @@ export class FutureBuilder3<A, B, C, D>{
     E >
 }
 
-declare
-export class FutureBuilder4<A, B, C, D, E>{
+declare export class FutureBuilder4<A, B, C, D, E>{
     constructor(oa: scalike$Future<A>, ob: scalike$Future<B>, oc: scalike$Future<C>, od: scalike$Future<D>, oe: scalike$Future<E>): this;
     run<F>(f: (a: A, b: B, c: C, d: D, e: E) => F): scalike$Future<F>;
     chain<F>( of: scalike$Future<F>): scalike$FutureBuilder5<A,
@@ -366,8 +327,7 @@ export class FutureBuilder4<A, B, C, D, E>{
     F >
 }
 
-declare
-export class FutureBuilder5<A, B, C, D, E, F>{
+declare export class FutureBuilder5<A, B, C, D, E, F>{
     constructor(oa: scalike$Future<A>, ob: scalike$Future<B>, oc: scalike$Future<C>, od: scalike$Future<D>, oe: scalike$Future<E>, of: scalike$Future<F>): this;
     run<G>(f: (a: A, b: B, c: C, d: D, e: E, f: F) => G): scalike$Future<G >
 }

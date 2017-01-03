@@ -7,15 +7,13 @@
  */
 
 
-declare
-var npm$namespace$ShopifyBuy: {
+declare var npm$namespace$ShopifyBuy: {
         buildClient: typeof ShopifyBuy$buildClient,
     }
     /**
      * Create a ShopClient. This is the main entry point to the SDK.
      */
-declare
-export function ShopifyBuy$buildClient(configAttrs: Shopify$Config): Shopify$ShopClient
+declare export function ShopifyBuy$buildClient(configAttrs: Shopify$Config): Shopify$ShopClient
 
 
 /**
@@ -55,8 +53,7 @@ declare class BaseModel {
     shopClient: any
 }
 
-declare
-var NO_IMAGE_URI: string;
+declare var NO_IMAGE_URI: string;
 
 
 /**

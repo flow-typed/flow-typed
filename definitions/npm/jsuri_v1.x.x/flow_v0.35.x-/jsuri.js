@@ -8,8 +8,7 @@
 
 declare type jsuri$Primitive = string | number | boolean;
 
-declare
-export class Uri {
+declare export class Uri {
 
     /**
      * Creates a new Uri object

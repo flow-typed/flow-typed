@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var addToHome: {
+declare var addToHome: {
 
     /**
      * Shows the popup.

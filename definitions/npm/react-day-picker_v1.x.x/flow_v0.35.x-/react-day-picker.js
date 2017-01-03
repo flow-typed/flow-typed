@@ -9,8 +9,7 @@
 declare module 'react-day-picker' {
     declare module.exports: typeof DayPicker
 }
-declare
-var DayPicker: typeof undefined;
+declare var DayPicker: typeof undefined;
 declare interface ReactDayPicker$LocaleUtils {
     formatMonthTitle: (month: Date, locale: string) => string,
         formatWeekdayShort: (weekday: number, locale: string) => string,
@@ -110,12 +109,10 @@ declare class DayPicker mixins React.Component<ReactDayPicker$Props, {}>{
     showNextMonth(): void
 }
 
-declare
-var LocaleUtils: ReactDayPicker$LocaleUtils;
+declare var LocaleUtils: ReactDayPicker$LocaleUtils;
 
 
-declare
-var npm$namespace$DateUtils: {
+declare var npm$namespace$DateUtils: {
     addMonths: typeof DateUtils$addMonths,
     clone: typeof DateUtils$clone,
     isSameDay: typeof DateUtils$isSameDay,
@@ -124,23 +121,17 @@ var npm$namespace$DateUtils: {
     addDayToRange: typeof DateUtils$addDayToRange,
     isDayInRange: typeof DateUtils$isDayInRange,
 }
-declare
-function DateUtils$addMonths(d: Date, n: number): Date
+declare function DateUtils$addMonths(d: Date, n: number): Date
 
-declare
-function DateUtils$clone(d: Date): Date
+declare function DateUtils$clone(d: Date): Date
 
-declare
-function DateUtils$isSameDay(d1?: Date, d2?: Date): boolean
+declare function DateUtils$isSameDay(d1?: Date, d2?: Date): boolean
 
-declare
-function DateUtils$isPastDay(d: Date): boolean
+declare function DateUtils$isPastDay(d: Date): boolean
 
-declare
-function DateUtils$isDayBetween(day: Date, startDate: Date, endDate: Date): boolean
+declare function DateUtils$isDayBetween(day: Date, startDate: Date, endDate: Date): boolean
 
-declare
-function DateUtils$addDayToRange(day: Date, range: {
+declare function DateUtils$addDayToRange(day: Date, range: {
     from?: Date,
     to?: Date
 }): {
@@ -148,8 +139,7 @@ function DateUtils$addDayToRange(day: Date, range: {
     to?: Date
 }
 
-declare
-function DateUtils$isDayInRange(day: Date, range: {
+declare function DateUtils$isDayInRange(day: Date, range: {
     from?: Date,
     to?: Date
 }): boolean

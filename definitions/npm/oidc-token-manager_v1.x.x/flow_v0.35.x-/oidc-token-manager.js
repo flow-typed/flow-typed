@@ -125,7 +125,5 @@ declare interface Oidc$OidcTokenManager {
         openPopupForTokenAsync(popupSettings?: Oidc$PopupSettings): Oidc$DefaultPromise,
         processTokenPopup(hash?: string): void
 }
-declare
-var OidcTokenManager: Oidc$OidcTokenManager_Static;
-declare
-var OidcClient: Oidc$OidcClient_Static;
+declare var OidcTokenManager: Oidc$OidcTokenManager_Static;
+declare var OidcClient: Oidc$OidcClient_Static;

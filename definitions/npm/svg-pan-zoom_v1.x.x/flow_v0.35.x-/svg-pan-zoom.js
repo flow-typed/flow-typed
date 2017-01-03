@@ -170,8 +170,7 @@ declare interface SvgPanZoom$Instance {
         updateBBox(): SvgPanZoom$Instance,
         destroy(): void
 }
-declare
-var svgPanZoom: SvgPanZoom$Instance;
+declare var svgPanZoom: SvgPanZoom$Instance;
 declare module 'svg-pan-zoom' {
     declare module.exports: typeof svgPanZoom
 }

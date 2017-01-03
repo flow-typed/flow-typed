@@ -12,8 +12,7 @@ declare type WIA$CommandID = "'{04E725B0-ACAE-11D2-A093-00C04F72DC3C}'" |
     "'{AF933CAC-ACAD-11D2-A093-00C04F72DC3C}'" |
     "'{1F3B3D8E-ACAE-11D2-A093-00C04F72DC3C}'";
 
-declare
-var CommandID: {
+declare var CommandID: {
     wiaCommandChangeDocument: WIA$CommandID,
     wiaCommandDeleteAllItems: WIA$CommandID,
     wiaCommandSynchronize: WIA$CommandID,
@@ -35,8 +34,7 @@ declare type WIA$EventID = "'{A28BBADE-64B6-11D2-A231-00C04FA31809}'" |
     "'{9D095B89-37D6-4877-AFED-62A297DC6DBE}'" |
     "'{B441F425-8C6E-11D2-977A-0000F87A926F}'";
 
-declare
-var EventID: {
+declare var EventID: {
     wiaEventDeviceConnected: WIA$EventID,
     wiaEventDeviceDisconnected: WIA$EventID,
     wiaEventItemCreated: WIA$EventID,
@@ -58,8 +56,7 @@ declare type WIA$FormatID = "'{B96B3CAB-0728-11D3-9D7B-0000F81EF32E}'" |
     "'{B96B3CAF-0728-11D3-9D7B-0000F81EF32E}'" |
     "'{B96B3CB1-0728-11D3-9D7B-0000F81EF32E}'";
 
-declare
-var FormatID: {
+declare var FormatID: {
     wiaFormatBMP: WIA$FormatID,
     wiaFormatGIF: WIA$FormatID,
     wiaFormatJPEG: WIA$FormatID,
@@ -69,8 +66,7 @@ var FormatID: {
 
 declare type WIA$Miscellaneous = "'*'" | "'{00000000-0000-0000-0000-000000000000}'";
 
-declare
-var Miscellaneous: {
+declare var Miscellaneous: {
     wiaAnyDeviceID: WIA$Miscellaneous,
     wiaIDUnknown: WIA$Miscellaneous
 };

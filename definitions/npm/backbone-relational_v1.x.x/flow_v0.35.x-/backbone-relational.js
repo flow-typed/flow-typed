@@ -29,8 +29,7 @@ declare class RelationalModel mixins Model {
     findOrCreate(attributes: any, options?: any): void
 }
 
-declare
-export class Relation mixins Model {
+declare export class Relation mixins Model {
     options: any;
     instance: any;
     key: any;
@@ -46,8 +45,7 @@ export class Relation mixins Model {
     destroy(): void
 }
 
-declare
-export class HasOne mixins Relation {
+declare export class HasOne mixins Relation {
     collectionType: any;
     findRelated(options: any): Model;
     setKeyContents(keyContents: string): void;
@@ -64,8 +62,7 @@ export class HasOne mixins Relation {
     removeRelated(model: Model, coll: any, options: any): void
 }
 
-declare
-export class HasMany mixins Relation {
+declare export class HasMany mixins Relation {
     collectionType: any;
     findRelated(options: any): Model;
     setKeyContents(keyContents: string): void;
@@ -77,8 +74,7 @@ export class HasMany mixins Relation {
     removeRelated(model: Model, coll: any, options: any): void
 }
 
-declare
-export class Store mixins Events {
+declare export class Store mixins Events {
     initializeRelation(
         model: << UNKNOWN PARAM FORMAT >> ,
         relation: << UNKNOWN PARAM FORMAT >> ,

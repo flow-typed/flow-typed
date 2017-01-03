@@ -168,5 +168,4 @@ declare interface OuralabsPlugin$OuralabsStatic {
             successCallback?: () => void,
             failureCallback?: (error: string) => void): void
 }
-declare
-var OuralabsPlugin: OuralabsPlugin$OuralabsStatic;
+declare var OuralabsPlugin: OuralabsPlugin$OuralabsStatic;

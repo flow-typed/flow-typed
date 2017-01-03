@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export var version: string;
+declare export var version: string;
 
 
 /**
@@ -65,8 +64,7 @@ Scrollable Body Columns:
 The body columns that move while scrolling vertically or
 horizontally.
 */
-declare
-export type FixedDataTable$TableProps = {
+declare export type FixedDataTable$TableProps = {
 
     /**
      * Pixel width of table. If all columns do not fit, a
@@ -404,8 +402,7 @@ declare type FixedDataTable$ColumnProps = {
 /**
  * Component that defines the attributes of a table column group.
  */
-declare
-export type FixedDataTable$ColumnGroupProps = {
+declare export type FixedDataTable$ColumnGroupProps = {
 
     /**
      * The horizontal alignment of the table cell content.
@@ -467,8 +464,7 @@ const MyColumn = (
    />
 );
 */
-declare
-export type FixedDataTable$CellProps = {
+declare export type FixedDataTable$CellProps = {
 
     /**
      * The row index of the cell.
@@ -493,17 +489,13 @@ export type FixedDataTable$CellProps = {
     columnKey?: string | number
 }
 
-declare
-export class Table mixins ___React.Component<FixedDataTable$TableProps, {}>{}
+declare export class Table mixins ___React.Component<FixedDataTable$TableProps, {}>{}
 
-declare
-export class Column mixins ___React.Component<FixedDataTable$ColumnProps, {}>{}
+declare export class Column mixins ___React.Component<FixedDataTable$ColumnProps, {}>{}
 
-declare
-export class ColumnGroup mixins ___React.Component<FixedDataTable$ColumnGroupProps, {}>{}
+declare export class ColumnGroup mixins ___React.Component<FixedDataTable$ColumnGroupProps, {}>{}
 
-declare
-export class Cell mixins ___React.Component<FixedDataTable$CellProps, {}>{}
+declare export class Cell mixins ___React.Component<FixedDataTable$CellProps, {}>{}
 declare module 'fixed-data-table' {
     declare module.exports: typeof FixedDataTable
 }

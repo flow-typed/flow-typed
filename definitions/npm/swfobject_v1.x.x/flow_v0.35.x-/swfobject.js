@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var swfobject: swfobject$SwfObject;
-declare
-export interface swfobject$SwfObject {
+declare var swfobject: swfobject$SwfObject;
+declare export interface swfobject$SwfObject {
     ua: {
             w3: boolean,
             pv: number[],
@@ -58,27 +56,23 @@ export interface swfobject$SwfObject {
         getQueryParamValue(param?: string): string
 }
 
-declare
-export interface swfobject$IFlashPlayerVersion {
+declare export interface swfobject$IFlashPlayerVersion {
     major: number,
         minor: number,
         release: number
 }
 
-declare
-export interface swfobject$ISwfObjectAttribute {
+declare export interface swfobject$ISwfObjectAttribute {
     id?: string,
         width?: string,
         height?: string
 }
 
-declare
-export interface swfobject$ISwfObjectParameter {
+declare export interface swfobject$ISwfObjectParameter {
     flashvars?: string
 }
 
-declare
-export interface swfobject$ICallbackObj {
+declare export interface swfobject$ICallbackObj {
     success: boolean,
         id: string,
         ref?: HTMLElement

@@ -7,16 +7,13 @@
  */
 
 
-declare
-var npm$namespace$JasminePromiseMatchers: {
+declare var npm$namespace$JasminePromiseMatchers: {
     install: typeof JasminePromiseMatchers$install,
     uninstall: typeof JasminePromiseMatchers$uninstall,
 }
-declare
-export function JasminePromiseMatchers$install(): void
+declare export function JasminePromiseMatchers$install(): void
 
-declare
-export function JasminePromiseMatchers$uninstall(): voiddeclare interface jasmine$Matchers {
+declare export function JasminePromiseMatchers$uninstall(): voiddeclare interface jasmine$Matchers {
 
     /**
      * Verifies that a Promise is (or has been) rejected.

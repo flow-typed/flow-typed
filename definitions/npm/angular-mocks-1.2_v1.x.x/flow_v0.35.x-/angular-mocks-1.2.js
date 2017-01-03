@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var module: (...modules: any[]) => any;
-declare
-var inject: (...fns: Function[]) => any;
+declare var module: (...modules: any[]) => any;
+declare var inject: (...fns: Function[]) => any;
 declare interface ng$IAngularStatic {
     mock: ng$IMockStatic
 }

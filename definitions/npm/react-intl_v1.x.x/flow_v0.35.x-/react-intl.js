@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$ReactIntl: {
+declare var npm$namespace$ReactIntl: {
     injectIntl: typeof ReactIntl$injectIntl,
     addLocaleData: typeof ReactIntl$addLocaleData,
     hasLocaleData: typeof ReactIntl$hasLocaleData,
@@ -22,26 +21,21 @@ declare interface ReactIntl$Locale {
         pluralRuleFunction?: (n: number, ord: boolean) => string
 }
 
-declare
-function ReactIntl$injectIntl<T>(clazz: T): T
+declare function ReactIntl$injectIntl<T>(clazz: T): T
 
-declare
-function ReactIntl$addLocaleData(data: ReactIntl$Locale[] | ReactIntl$Locale): void
+declare function ReactIntl$addLocaleData(data: ReactIntl$Locale[] | ReactIntl$Locale): void
 
-declare
-function ReactIntl$hasLocaleData(localeName: string): boolean
+declare function ReactIntl$hasLocaleData(localeName: string): boolean
 
 declare interface ReactIntl$Messages {
     [key: string]: FormattedMessage$MessageDescriptor
 }
 
-declare
-function ReactIntl$defineMessages<T>(messages: T): T
+declare function ReactIntl$defineMessages<T>(messages: T): T
 
 declare type ReactIntl$IntlShape = {}
 
-declare
-var intlShape: ReactIntl$IntlShape;
+declare var intlShape: ReactIntl$IntlShape;
 
 declare interface ReactIntl$FormatConfig {
     locale?: string,
@@ -78,54 +72,46 @@ declare interface IntlComponent$DateTimeFormatProps {
         timeZoneName?: string
 }
 
-declare
-export type FormattedDate$PropsBase = {
+declare export type FormattedDate$PropsBase = {
     format?: string
 }
 
-declare
-export type FormattedDate$Props = {
+declare export type FormattedDate$Props = {
     value: Date
 } & FormattedDate$PropsBase
 
 
 declare class FormattedDate mixins React.Component<FormattedDate$Props, any>{}
 
-declare
-export type FormattedTime$PropsBase = {
+declare export type FormattedTime$PropsBase = {
     format?: string
 }
 
-declare
-export type FormattedTime$Props = {
+declare export type FormattedTime$Props = {
     value: Date
 } & FormattedTime$PropsBase
 
 
 declare class FormattedTime mixins React.Component<FormattedTime$Props, any>{}
 
-declare
-export type FormattedRelative$PropsBase = {
+declare export type FormattedRelative$PropsBase = {
     format?: string
 }
 
-declare
-export type FormattedRelative$Props = {
+declare export type FormattedRelative$Props = {
     value: Date
 } & FormattedRelative$PropsBase
 
 
 declare class FormattedRelative mixins React.Component<FormattedRelative$Props, any>{}
 
-declare
-export interface FormattedMessage$MessageDescriptor {
+declare export interface FormattedMessage$MessageDescriptor {
     id: string,
         description?: string,
         defaultMessage?: string
 }
 
-declare
-export type FormattedMessage$Props = {
+declare export type FormattedMessage$Props = {
     value: Date
 } & FormattedRelative$PropsBase
 
@@ -134,34 +120,29 @@ declare class FormattedMessage mixins React.Component<FormattedMessage$Props, an
 
 declare class FormattedHTMLMessage mixins React.Component<FormattedMessage$Props, any>{}
 
-declare
-export type FormattedNumber$PropsBase = {
+declare export type FormattedNumber$PropsBase = {
     format?: string
 }
 
-declare
-export type FormattedNumber$Props = {
+declare export type FormattedNumber$Props = {
     value: Date
 } & FormattedNumber$PropsBase
 
 
 declare class FormattedNumber mixins React.Component<FormattedNumber$Props, any>{}
 
-declare
-export type FormattedPlural$PropsBase = {
+declare export type FormattedPlural$PropsBase = {
     format?: string
 }
 
-declare
-export type FormattedPlural$Props = {
+declare export type FormattedPlural$Props = {
     value: Date
 } & FormattedPlural$PropsBase
 
 
 declare class FormattedPlural mixins React.Component<FormattedPlural$Props, any>{}
 
-declare
-export type IntlProvider$Props = {
+declare export type IntlProvider$Props = {
     value: Date
 } & FormattedPlural$PropsBase
 

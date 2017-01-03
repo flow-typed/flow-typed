@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class Vec3D {
+declare export class Vec3D {
 
     /**
      * 
@@ -42,8 +41,7 @@ export class Vec3D {
     isFloat(): boolean
 }
 
-declare
-export class InvitationReply {
+declare export class InvitationReply {
 
     /**
      * 
@@ -58,8 +56,7 @@ export class InvitationReply {
     REFUSE: number
 }
 
-declare
-export class SFSInvitation {
+declare export class SFSInvitation {
 
     /**
      * 
@@ -101,8 +98,7 @@ export class SFSInvitation {
     constructor(inviter: Entities$SFSUser, invitee: Entities$SFSUser, secondsForAnswer: number, params: Object): this
 }
 
-declare
-export class BoolMatch {
+declare export class BoolMatch {
 
     /**
      * 
@@ -117,8 +113,7 @@ export class BoolMatch {
     NOT_EQUALS: Match$BoolMatch
 }
 
-declare
-export class LogicOperator {
+declare export class LogicOperator {
 
     /**
      * 
@@ -133,8 +128,7 @@ export class LogicOperator {
     OR: Match$LogicOperator
 }
 
-declare
-export class MatchExpression {
+declare export class MatchExpression {
 
     /**
      * 
@@ -245,8 +239,7 @@ export class MatchExpression {
     toString(): string
 }
 
-declare
-export class NumberMatch {
+declare export class NumberMatch {
 
     /**
      * 
@@ -285,8 +278,7 @@ export class NumberMatch {
     NOT_EQUALS: Match$NumberMatch
 }
 
-declare
-export class RoomProperties {
+declare export class RoomProperties {
 
     /**
      * 
@@ -349,8 +341,7 @@ export class RoomProperties {
     USER_COUNT: string
 }
 
-declare
-export class StringMatch {
+declare export class StringMatch {
 
     /**
      * 
@@ -383,8 +374,7 @@ export class StringMatch {
     STARTS_WITH: Match$StringMatch
 }
 
-declare
-export class UserProperties {
+declare export class UserProperties {
 
     /**
      * 
@@ -423,8 +413,7 @@ export class UserProperties {
     PRIVILEGE_ID: string
 }
 
-declare
-export class MMOItem {
+declare export class MMOItem {
 
     /**
      * 
@@ -471,8 +460,7 @@ export class MMOItem {
     toString(): string
 }
 
-declare
-export class MMORoom mixins SFSRoom {
+declare export class MMORoom mixins SFSRoom {
 
     /**
      * 
@@ -514,8 +502,7 @@ export class MMORoom mixins SFSRoom {
     getMMOItems(): Entities$MMOItem[]
 }
 
-declare
-export class SFSBuddy {
+declare export class SFSBuddy {
 
     /**
      * 
@@ -607,8 +594,7 @@ export class SFSBuddy {
     toString(): string
 }
 
-declare
-export class SFSRoom {
+declare export class SFSRoom {
 
     /**
      * 
@@ -768,8 +754,7 @@ export class SFSRoom {
     toString(): string
 }
 
-declare
-export class SFSUser {
+declare export class SFSUser {
 
     /**
      * 
@@ -912,8 +897,7 @@ export class SFSUser {
     toString(): string
 }
 
-declare
-export class UserPrivileges {
+declare export class UserPrivileges {
 
     /**
      * 
@@ -940,8 +924,7 @@ export class UserPrivileges {
     STANDARD: number
 }
 
-declare
-export class MMOItemVariable mixins SFSUserVariable {
+declare export class MMOItemVariable mixins SFSUserVariable {
 
     /**
      * Creates a new MMOItemVariable instance.
@@ -958,8 +941,7 @@ export class MMOItemVariable mixins SFSUserVariable {
     toString(): string
 }
 
-declare
-export class ReservedBuddyVariables {
+declare export class ReservedBuddyVariables {
 
     /**
      * 
@@ -980,8 +962,7 @@ export class ReservedBuddyVariables {
     BV_STATE: string
 }
 
-declare
-export class ReservedRoomVariables {
+declare export class ReservedRoomVariables {
 
     /**
      * 
@@ -990,8 +971,7 @@ export class ReservedRoomVariables {
     RV_GAME_STARTED: string
 }
 
-declare
-export class SFSBuddyVariable mixins SFSUserVariable {
+declare export class SFSBuddyVariable mixins SFSUserVariable {
 
     /**
      * 
@@ -1020,8 +1000,7 @@ export class SFSBuddyVariable mixins SFSUserVariable {
     toString(): string
 }
 
-declare
-export class SFSRoomVariable mixins SFSUserVariable {
+declare export class SFSRoomVariable mixins SFSUserVariable {
 
     /**
      * 
@@ -1050,8 +1029,7 @@ export class SFSRoomVariable mixins SFSUserVariable {
     toString(): string
 }
 
-declare
-export class SFSUserVariable {
+declare export class SFSUserVariable {
 
     /**
      * 
@@ -1093,8 +1071,7 @@ export class SFSUserVariable {
     toString(): string
 }
 
-declare
-export class VariableType {
+declare export class VariableType {
 
     /**
      * 
@@ -1139,8 +1116,7 @@ export class VariableType {
     STRING: number
 }
 
-declare
-export class ErrorCodes {
+declare export class ErrorCodes {
 
     /**
      * Sets the text of the error message corresponding to the passed error code.
@@ -1150,8 +1126,7 @@ export class ErrorCodes {
     setErrorMessage(code: number, message: string): void
 }
 
-declare
-export class Logger {
+declare export class Logger {
 
     /**
      * Sets the current logging level.
@@ -1160,8 +1135,7 @@ export class Logger {
     setLevel(level: number): void
 }
 
-declare
-export class LogLevel {
+declare export class LogLevel {
 
     /**
      * 
@@ -1188,8 +1162,7 @@ export class LogLevel {
     WARN: number
 }
 
-declare
-export class BuddyManager {
+declare export class BuddyManager {
 
     /**
      * Creates a new BuddyManager instance.
@@ -1287,8 +1260,7 @@ export class BuddyManager {
     isInited(): boolean
 }
 
-declare
-export class RoomManager {
+declare export class RoomManager {
 
     /**
      * Creates a new RoomManager instance.
@@ -1371,8 +1343,7 @@ export class RoomManager {
     getUserRooms(user: Entities$SFSUser): Entities$SFSRoom[]
 }
 
-declare
-export class UserManager {
+declare export class UserManager {
 
     /**
      * Creates a new UserManager instance.
@@ -1428,8 +1399,7 @@ export class UserManager {
     getUserList(): Entities$SFSUser[]
 }
 
-declare
-export class BanMode {
+declare export class BanMode {
 
     /**
      * 
@@ -1444,8 +1414,7 @@ export class BanMode {
     BY_NAME: number
 }
 
-declare
-export class AddBuddyRequest {
+declare export class AddBuddyRequest {
 
     /**
      * Creates a new AddBuddyRequest instance.
@@ -1454,8 +1423,7 @@ export class AddBuddyRequest {
     constructor(buddyName: string): this
 }
 
-declare
-export class BlockBuddyRequest {
+declare export class BlockBuddyRequest {
 
     /**
      * Creates a new BlockBuddyRequest instance.
@@ -1465,8 +1433,7 @@ export class BlockBuddyRequest {
     constructor(buddyName: string, blocked: boolean): this
 }
 
-declare
-export class BuddyMessageRequest {
+declare export class BuddyMessageRequest {
 
     /**
      * Creates a new BuddyMessageRequest instance.
@@ -1477,8 +1444,7 @@ export class BuddyMessageRequest {
     constructor(message: string, targetBuddy: Entities$SFSBuddy, parms?: Object): this
 }
 
-declare
-export class GoOnlineRequest {
+declare export class GoOnlineRequest {
 
     /**
      * Creates a new GoOnlineRequest instance.
@@ -1487,8 +1453,7 @@ export class GoOnlineRequest {
     constructor(online: boolean): this
 }
 
-declare
-export class InitBuddyListRequest {
+declare export class InitBuddyListRequest {
 
     /**
      * Creates a new InitBuddyListRequest instance.
@@ -1496,8 +1461,7 @@ export class InitBuddyListRequest {
     constructor(): this
 }
 
-declare
-export class RemoveBuddyRequest {
+declare export class RemoveBuddyRequest {
 
     /**
      * Creates a new RemoveBuddyRequest instance.
@@ -1506,8 +1470,7 @@ export class RemoveBuddyRequest {
     constructor(buddyName: string): this
 }
 
-declare
-export class SetBuddyVariablesRequest {
+declare export class SetBuddyVariablesRequest {
 
     /**
      * Creates a new SetBuddyVariablesRequest instance.
@@ -1516,8 +1479,7 @@ export class SetBuddyVariablesRequest {
     constructor(buddyVariables: undefined.SFSBuddyVariable[]): this
 }
 
-declare
-export class CreateSFSGameRequest {
+declare export class CreateSFSGameRequest {
 
     /**
      * Creates a new CreateSFSGameRequest instance.
@@ -1526,8 +1488,7 @@ export class CreateSFSGameRequest {
     constructor(settings: Game$SFSGameSettings): this
 }
 
-declare
-export class InvitationReplyRequest {
+declare export class InvitationReplyRequest {
 
     /**
      * Creates a new InvitationReplyRequest instance.
@@ -1538,8 +1499,7 @@ export class InvitationReplyRequest {
     constructor(invitation: SFS2X$IINVITATION, invitationReply: number, params?: Object): this
 }
 
-declare
-export class InviteUsersRequest {
+declare export class InviteUsersRequest {
 
     /**
      * Creates a new InviteUsersRequest instance.
@@ -1550,8 +1510,7 @@ export class InviteUsersRequest {
     constructor(invitedUsers: Entities$SFSUser[], secondsForAnswer: number, params?: Object): this
 }
 
-declare
-export class QuickJoinGameRequest {
+declare export class QuickJoinGameRequest {
 
     /**
      * Creates a new QuickJoinGameRequest instance.
@@ -1569,8 +1528,7 @@ export class QuickJoinGameRequest {
     constructor(matchExpression: undefined.MatchExpression, whereToSearch: Entities$SFSRoom[], roomToLeave?: Entities$SFSRoom): this
 }
 
-declare
-export class SFSGameSettings mixins RoomSettings {
+declare export class SFSGameSettings mixins RoomSettings {
 
     /**
      * 
@@ -1639,8 +1597,7 @@ export class SFSGameSettings mixins RoomSettings {
     constructor(name: string): this
 }
 
-declare
-export class MessageRecipientMode {
+declare export class MessageRecipientMode {
 
     /**
      * 
@@ -1686,8 +1643,7 @@ export class MessageRecipientMode {
     constructor(mode: number, target: any): this
 }
 
-declare
-export class MapLimits {
+declare export class MapLimits {
 
     /**
      * 
@@ -1709,8 +1665,7 @@ export class MapLimits {
     constructor(lowerLimit: undefined.Vec3D, higherLimit: undefined.Vec3D): this
 }
 
-declare
-export class MMORoomSettings {
+declare export class MMORoomSettings {
 
     /**
      * 
@@ -1749,8 +1704,7 @@ export class MMORoomSettings {
     constructor(name: string): this
 }
 
-declare
-export class SetUserPositionRequest {
+declare export class SetUserPositionRequest {
 
     /**
      * Creates a new SetUserPositionRequest instance.
@@ -1760,8 +1714,7 @@ export class SetUserPositionRequest {
     constructor(pos: undefined.Vec3D, targetRoom?: Entities$MMORoom): this
 }
 
-declare
-export class RoomEvents {
+declare export class RoomEvents {
 
     /**
      * 
@@ -1793,8 +1746,7 @@ export class RoomEvents {
     constructor(): this
 }
 
-declare
-export class RoomExtension {
+declare export class RoomExtension {
 
     /**
      * 
@@ -1822,8 +1774,7 @@ export class RoomExtension {
     constructor(id: string, className: string): this
 }
 
-declare
-export class RoomPermissions {
+declare export class RoomPermissions {
 
     /**
      * 
@@ -1855,8 +1806,7 @@ export class RoomPermissions {
     constructor(): this
 }
 
-declare
-export class RoomSettings {
+declare export class RoomSettings {
 
     /**
      * 
@@ -1931,8 +1881,7 @@ export class RoomSettings {
     constructor(name: string): this
 }
 
-declare
-export class AdminMessageRequest {
+declare export class AdminMessageRequest {
 
     /**
      * Creates a new AdminMessageRequest instance.
@@ -1943,8 +1892,7 @@ export class AdminMessageRequest {
     constructor(message: string, recipientMode: Requests$MessageRecipientMode, params?: Object): this
 }
 
-declare
-export class BanUserRequest {
+declare export class BanUserRequest {
 
     /**
      * Creates a new BanUserRequest instance.
@@ -1957,8 +1905,7 @@ export class BanUserRequest {
     constructor(userId: number, message?: string, banMode?: Requests$BanMode, delaySeconds?: number, durationHours?: number): this
 }
 
-declare
-export class ChangeRoomCapacityRequest {
+declare export class ChangeRoomCapacityRequest {
 
     /**
      * Creates a new ChangeRoomCapacityRequest instance.
@@ -1969,8 +1916,7 @@ export class ChangeRoomCapacityRequest {
     constructor(room: Entities$SFSRoom, newMaxUsers: number, newMaxSpect: number): this
 }
 
-declare
-export class ChangeRoomNameRequest {
+declare export class ChangeRoomNameRequest {
 
     /**
      * Creates a new ChangeRoomNameRequest instance.
@@ -1980,8 +1926,7 @@ export class ChangeRoomNameRequest {
     constructor(room: Entities$SFSRoom, newName: string): this
 }
 
-declare
-export class ChangeRoomPasswordStateRequest {
+declare export class ChangeRoomPasswordStateRequest {
 
     /**
      * Creates a new ChangeRoomPasswordStateRequest instance.
@@ -1991,8 +1936,7 @@ export class ChangeRoomPasswordStateRequest {
     constructor(room: Entities$SFSRoom, newPass: string): this
 }
 
-declare
-export class CreateRoomRequest {
+declare export class CreateRoomRequest {
 
     /**
      * Creates a new CreateRoomRequest instance.{autoJoin=false}    If true, the Room is joined as soon as it is created.{roomToLeave=null} A SFSRoom object representing the Room that should be left if the new Room is auto-joined.
@@ -2001,8 +1945,7 @@ export class CreateRoomRequest {
     constructor(settings: Requests$RoomSettings, autoJoin?: boolean, roomToLeave?: Entities$SFSRoom): this
 }
 
-declare
-export class ExtensionRequest {
+declare export class ExtensionRequest {
 
     /**
      * Creates a new ExtensionRequest instance.{params=null} An object containing custom data to be sent to the Extension. Can be null if no data needs to be sent.{room=null}   If null, the specified command is sent to the current Zone server-side Extension; if not null, the command is sent to the server-side Extension attached to the passed Room.
@@ -2011,8 +1954,7 @@ export class ExtensionRequest {
     constructor(extCmd: string, params?: Object, room?: Entities$SFSRoom): this
 }
 
-declare
-export class FindRoomsRequest {
+declare export class FindRoomsRequest {
 
     /**
      * Creates a new FindRoomsRequest instance.{groupId=null} The name of the Group where to search for matching Rooms; if null, the search is performed in the whole Zone.
@@ -2022,8 +1964,7 @@ export class FindRoomsRequest {
     constructor(expr: undefined.MatchExpression, groupId?: string, limit?: number): this
 }
 
-declare
-export class FindUsersRequest {
+declare export class FindUsersRequest {
 
     /**
      * Creates a new FindUsersRequest instance.
@@ -2034,8 +1975,7 @@ export class FindUsersRequest {
     constructor(expr: undefined.MatchExpression, target?: any, limit?: number): this
 }
 
-declare
-export class JoinRoomRequest {
+declare export class JoinRoomRequest {
 
     /**
      * Creates a new JoinRoomRequest instance.
@@ -2047,8 +1987,7 @@ export class JoinRoomRequest {
     constructor(room: any, password?: string, roomIdToLeave?: number, asSpect?: boolean): this
 }
 
-declare
-export class KickUserRequest {
+declare export class KickUserRequest {
 
     /**
      * Creates a new KickUserRequest instance.
@@ -2059,8 +1998,7 @@ export class KickUserRequest {
     constructor(userId: number, message?: string, delaySeconds?: number): this
 }
 
-declare
-export class LeaveRoomRequest {
+declare export class LeaveRoomRequest {
 
     /**
      * Creates a new LeaveRoomRequest instance.
@@ -2069,8 +2007,7 @@ export class LeaveRoomRequest {
     constructor(room?: Entities$SFSRoom): this
 }
 
-declare
-export class LoginRequest {
+declare export class LoginRequest {
 
     /**
      * Creates a new LoginRequest instance.
@@ -2082,8 +2019,7 @@ export class LoginRequest {
     constructor(userName: string, password?: string, params?: Object, zoneName?: string): this
 }
 
-declare
-export class LogoutRequest {
+declare export class LogoutRequest {
 
     /**
      * Creates a new LogoutRequest instance.
@@ -2091,8 +2027,7 @@ export class LogoutRequest {
     constructor(): this
 }
 
-declare
-export class ModeratorMessageRequest {
+declare export class ModeratorMessageRequest {
 
     /**
      * Creates a new ModeratorMessageRequest instance.
@@ -2103,8 +2038,7 @@ export class ModeratorMessageRequest {
     constructor(message: string, recipientMode: Requests$MessageRecipientMode, params?: Object): this
 }
 
-declare
-export class ObjectMessageRequest {
+declare export class ObjectMessageRequest {
 
     /**
      * Creates a new ObjectMessageRequest instance.
@@ -2115,8 +2049,7 @@ export class ObjectMessageRequest {
     constructor(obj: Object, targetRoom?: Entities$SFSRoom, recipients?: Entities$SFSUser[]): this
 }
 
-declare
-export class PlayerToSpectatorRequest {
+declare export class PlayerToSpectatorRequest {
 
     /**
      * Creates a new SpectatorToPlayerRequest instance.
@@ -2125,8 +2058,7 @@ export class PlayerToSpectatorRequest {
     constructor(targetRoom?: Entities$SFSRoom): this
 }
 
-declare
-export class PrivateMessageRequest {
+declare export class PrivateMessageRequest {
 
     /**
      * Creates a new PrivateMessageRequest instance.
@@ -2137,8 +2069,7 @@ export class PrivateMessageRequest {
     constructor(message: string, recipientId: number, params?: Object): this
 }
 
-declare
-export class PublicMessageRequest {
+declare export class PublicMessageRequest {
 
     /**
      * Creates a new PublicMessageRequest instance.
@@ -2149,8 +2080,7 @@ export class PublicMessageRequest {
     constructor(message: string, params?: Object, targetRoom?: Entities$SFSRoom): this
 }
 
-declare
-export class SetRoomVariablesRequest {
+declare export class SetRoomVariablesRequest {
 
     /**
      * Creates a new SetRoomVariablesRequest instance.
@@ -2160,8 +2090,7 @@ export class SetRoomVariablesRequest {
     constructor(roomVariables: undefined.SFSRoomVariable[], room: Entities$SFSRoom): this
 }
 
-declare
-export class SetUserVariablesRequest {
+declare export class SetUserVariablesRequest {
 
     /**
      * Creates a new SetUserVariablesRequest instance.
@@ -2170,8 +2099,7 @@ export class SetUserVariablesRequest {
     constructor(userVariables: undefined.SFSUserVariable): this
 }
 
-declare
-export class SpectatorToPlayerRequest {
+declare export class SpectatorToPlayerRequest {
 
     /**
      * Creates a new SpectatorToPlayerRequest instance.
@@ -2180,8 +2108,7 @@ export class SpectatorToPlayerRequest {
     constructor(targetRoom: Entities$SFSRoom): this
 }
 
-declare
-export class SubscribeRoomGroupRequest {
+declare export class SubscribeRoomGroupRequest {
 
     /**
      * Creates a new SubscribeRoomGroupRequest instance.
@@ -2190,8 +2117,7 @@ export class SubscribeRoomGroupRequest {
     constructor(groupId: string): this
 }
 
-declare
-export class UnsubscribeRoomGroupRequest {
+declare export class UnsubscribeRoomGroupRequest {
 
     /**
      * Creates a new UnsubscribeRoomGroupRequest instance.
@@ -2200,8 +2126,7 @@ export class UnsubscribeRoomGroupRequest {
     constructor(groupId: string): this
 }
 
-declare
-export class SFSBuddyEvent {
+declare export class SFSBuddyEvent {
 
     /**
      * 
@@ -2292,8 +2217,7 @@ declare interface SFS2X$IBUDDY_VARIABLES_UPDATE {
         changedVars: string[]
 }
 
-declare
-export class SFSEvent {
+declare export class SFSEvent {
 
     /**
      * 
@@ -2776,8 +2700,7 @@ declare interface SFS2X$IUSER_VARIABLES_UPDATE {
         changedVars: string[]
 }
 
-declare
-export class SmartFox {
+declare export class SmartFox {
 
     /**
      * 
@@ -2976,8 +2899,7 @@ export class SmartFox {
     setClientDetails(platformId: string, version: string): void
 }
 
-declare
-export interface SFS2X$IconfigObj {
+declare export interface SFS2X$IconfigObj {
 
     /**
      * 
@@ -3010,8 +2932,7 @@ export interface SFS2X$IconfigObj {
         debug?: boolean
 }
 
-declare
-export class ClientDisconnectionReason {
+declare export class ClientDisconnectionReason {
 
     /**
      * 

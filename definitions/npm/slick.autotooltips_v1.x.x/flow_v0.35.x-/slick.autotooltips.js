@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Slick$SlickGridAutoTooltipsOption = {
+declare export type Slick$SlickGridAutoTooltipsOption = {
 
     /**
      * Enable tooltip for grid cells
@@ -33,7 +32,6 @@ export type Slick$SlickGridAutoTooltipsOption = {
 /**
  * AutoTooltips plugin to show/hide tooltips when columns are too narrow to fit content.
  */
-declare
-export class AutoTooltips mixins Plugin<Slick$SlickData>{
+declare export class AutoTooltips mixins Plugin<Slick$SlickData>{
     constructor(option?: Slick$SlickGridAutoTooltipsOption): this
 }

@@ -86,5 +86,4 @@ declare interface MsgPackCallbackResult {
     status: number,
         ok: boolean
 }
-declare
-var msgpack: MsgPackStatic;
+declare var msgpack: MsgPackStatic;

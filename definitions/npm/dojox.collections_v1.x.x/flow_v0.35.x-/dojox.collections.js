@@ -103,8 +103,7 @@ declare interface collections$BinaryTree {
     (data: any): void
 }
 
-declare
-var TraversalMethods: Object;
+declare var TraversalMethods: Object;
 
 
 /**

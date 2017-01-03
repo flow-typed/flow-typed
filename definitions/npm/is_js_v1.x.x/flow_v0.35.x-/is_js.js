@@ -1246,8 +1246,7 @@ declare type Is = {
      */
     setNamespace(): Is
 } & IsStatic
-declare
-var is: Is;
+declare var is: Is;
 declare module 'is' {
     declare module.exports: typeof is
 }

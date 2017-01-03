@@ -8,8 +8,7 @@
 
 declare type ___SortableList$DataKey = string | number;
 
-declare
-export type ___SortableList$DataValue = any;
+declare export type ___SortableList$DataValue = any;
 
 declare type ___SortableList$DataByNumber = {
     [key: number]: ___SortableList$DataValue
@@ -19,11 +18,9 @@ declare type ___SortableList$DataByString = {
     [key: string]: ___SortableList$DataValue
 };
 
-declare
-export type ___SortableList$Data = ___SortableList$DataByNumber | ___SortableList$DataByString;
+declare export type ___SortableList$Data = ___SortableList$DataByNumber | ___SortableList$DataByString;
 
-declare
-export interface ___SortableList$RowProps {
+declare export interface ___SortableList$RowProps {
     active: boolean,
         data: ___SortableList$DataValue,
         key?: ___SortableList$DataKey,
@@ -85,14 +82,11 @@ declare interface ___SortableList$SortableListProps {
         onReleaseRow?: (key: ___SortableList$DataKey) => void
 }
 
-declare
-export type ___SortableList$SortableListStatic = {}
+declare export type ___SortableList$SortableListStatic = {}
 
-declare
-export var SortableList: ___SortableList$SortableListStatic;
+declare export var SortableList: ___SortableList$SortableListStatic;
 
-declare
-export type ___SortableList$SortableList = ___SortableList$SortableListStatic;
+declare export type ___SortableList$SortableList = ___SortableList$SortableListStatic;
 declare module 'react-native-sortable-list' {
     declare export interface RowProps {
         active: boolean,

@@ -66,5 +66,4 @@ declare interface RangyStatic {
         initialized: boolean,
         supported: boolean
 }
-declare
-var rangy: RangyStatic;
+declare var rangy: RangyStatic;

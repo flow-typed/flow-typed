@@ -32115,341 +32115,172 @@ declare type ASPxClientWebDocumentViewerStatic = {
      */
     Cast(obj: Object): ASPxClientWebDocumentViewer
 } & ASPxClientControlStatic
-declare
-var MVCxClientDashboardViewer: MVCxClientDashboardViewerStatic;
-declare
-var DashboardDataAxisNames: DashboardDataAxisNamesStatic;
-declare
-var DashboardSpecialValues: DashboardSpecialValuesStatic;
-declare
-var ASPxClientDashboardDesigner: ASPxClientDashboardDesignerStatic;
-declare
-var ASPxClientDashboardViewer: ASPxClientDashboardViewerStatic;
-declare
-var DashboardExportPageLayout: DashboardExportPageLayoutStatic;
-declare
-var DashboardExportPaperKind: DashboardExportPaperKindStatic;
-declare
-var DashboardExportScaleMode: DashboardExportScaleModeStatic;
-declare
-var DashboardExportFilterState: DashboardExportFilterStateStatic;
-declare
-var DashboardExportImageFormat: DashboardExportImageFormatStatic;
-declare
-var DashboardExportExcelFormat: DashboardExportExcelFormatStatic;
-declare
-var ChartExportSizeMode: ChartExportSizeModeStatic;
-declare
-var MapExportSizeMode: MapExportSizeModeStatic;
-declare
-var RangeFilterExportSizeMode: RangeFilterExportSizeModeStatic;
-declare
-var DashboardSelectionMode: DashboardSelectionModeStatic;
-declare
-var ASPxClientEditBase: ASPxClientEditBaseStatic;
-declare
-var ASPxClientEdit: ASPxClientEditStatic;
-declare
-var ASPxClientBinaryImage: ASPxClientBinaryImageStatic;
-declare
-var ASPxClientButton: ASPxClientButtonStatic;
-declare
-var ASPxClientCalendar: ASPxClientCalendarStatic;
-declare
-var ASPxClientCaptcha: ASPxClientCaptchaStatic;
-declare
-var ASPxClientCheckBox: ASPxClientCheckBoxStatic;
-declare
-var ASPxClientRadioButton: ASPxClientRadioButtonStatic;
-declare
-var ASPxClientTextEdit: ASPxClientTextEditStatic;
-declare
-var ASPxClientTextBoxBase: ASPxClientTextBoxBaseStatic;
-declare
-var ASPxClientButtonEditBase: ASPxClientButtonEditBaseStatic;
-declare
-var ASPxClientDropDownEditBase: ASPxClientDropDownEditBaseStatic;
-declare
-var ASPxClientColorEdit: ASPxClientColorEditStatic;
-declare
-var ASPxClientComboBox: ASPxClientComboBoxStatic;
-declare
-var ASPxClientDateEdit: ASPxClientDateEditStatic;
-declare
-var ASPxClientDropDownEdit: ASPxClientDropDownEditStatic;
-declare
-var ASPxClientFilterControl: ASPxClientFilterControlStatic;
-declare
-var ASPxClientListEdit: ASPxClientListEditStatic;
-declare
-var ASPxClientListBox: ASPxClientListBoxStatic;
-declare
-var ASPxClientCheckListBase: ASPxClientCheckListBaseStatic;
-declare
-var ASPxClientRadioButtonList: ASPxClientRadioButtonListStatic;
-declare
-var ASPxClientCheckBoxList: ASPxClientCheckBoxListStatic;
-declare
-var ASPxClientProgressBar: ASPxClientProgressBarStatic;
-declare
-var ASPxClientSpinEditBase: ASPxClientSpinEditBaseStatic;
-declare
-var ASPxClientSpinEdit: ASPxClientSpinEditStatic;
-declare
-var ASPxClientTimeEdit: ASPxClientTimeEditStatic;
-declare
-var ASPxClientStaticEdit: ASPxClientStaticEditStatic;
-declare
-var ASPxClientHyperLink: ASPxClientHyperLinkStatic;
-declare
-var ASPxClientImageBase: ASPxClientImageBaseStatic;
-declare
-var ASPxClientImage: ASPxClientImageStatic;
-declare
-var ASPxClientLabel: ASPxClientLabelStatic;
-declare
-var ASPxClientTextBox: ASPxClientTextBoxStatic;
-declare
-var ASPxClientMemo: ASPxClientMemoStatic;
-declare
-var ASPxClientButtonEdit: ASPxClientButtonEditStatic;
-declare
-var ASPxClientTokenBox: ASPxClientTokenBoxStatic;
-declare
-var ASPxClientTrackBar: ASPxClientTrackBarStatic;
-declare
-var ASPxClientValidationSummary: ASPxClientValidationSummaryStatic;
-declare
-var ASPxClientGaugeControl: ASPxClientGaugeControlStatic;
-declare
-var ASPxClientGridBase: ASPxClientGridBaseStatic;
-declare
-var ASPxClientGridViewCallbackCommand: ASPxClientGridViewCallbackCommandStatic;
-declare
-var ASPxClientGridLookup: ASPxClientGridLookupStatic;
-declare
-var ASPxClientCardView: ASPxClientCardViewStatic;
-declare
-var ASPxClientGridView: ASPxClientGridViewStatic;
-declare
-var ASPxClientVerticalGrid: ASPxClientVerticalGridStatic;
-declare
-var ASPxClientVerticalGridCallbackCommand: ASPxClientVerticalGridCallbackCommandStatic;
-declare
-var ASPxClientCommandConsts: ASPxClientCommandConstsStatic;
-declare
-var ASPxClientHtmlEditor: ASPxClientHtmlEditorStatic;
-declare
-var ASPxClientHtmlEditorMediaPreloadMode: ASPxClientHtmlEditorMediaPreloadModeStatic;
-declare
-var ASPxClientPivotGrid: ASPxClientPivotGridStatic;
-declare
-var ASPxClientPivotCustomization: ASPxClientPivotCustomizationStatic;
-declare
-var ASPxClientRichEdit: ASPxClientRichEditStatic;
-declare
-var ASPxSchedulerDateTimeHelper: ASPxSchedulerDateTimeHelperStatic;
-declare
-var ASPxClientWeekDaysCheckEdit: ASPxClientWeekDaysCheckEditStatic;
-declare
-var ASPxClientRecurrenceRangeControl: ASPxClientRecurrenceRangeControlStatic;
-declare
-var ASPxClientRecurrenceControlBase: ASPxClientRecurrenceControlBaseStatic;
-declare
-var ASPxClientDailyRecurrenceControl: ASPxClientDailyRecurrenceControlStatic;
-declare
-var ASPxClientWeeklyRecurrenceControl: ASPxClientWeeklyRecurrenceControlStatic;
-declare
-var ASPxClientMonthlyRecurrenceControl: ASPxClientMonthlyRecurrenceControlStatic;
-declare
-var ASPxClientYearlyRecurrenceControl: ASPxClientYearlyRecurrenceControlStatic;
-declare
-var ASPxClientRecurrenceTypeEdit: ASPxClientRecurrenceTypeEditStatic;
-declare
-var ASPxClientTimeInterval: ASPxClientTimeIntervalStatic;
-declare
-var ASPxClientScheduler: ASPxClientSchedulerStatic;
-declare
-var ASPxClientSpellChecker: ASPxClientSpellCheckerStatic;
-declare
-var ASPxClientSpreadsheet: ASPxClientSpreadsheetStatic;
-declare
-var ASPxClientTreeList: ASPxClientTreeListStatic;
-declare
-var MVCxClientCalendar: MVCxClientCalendarStatic;
-declare
-var MVCxClientCallbackPanel: MVCxClientCallbackPanelStatic;
-declare
-var MVCxClientCardView: MVCxClientCardViewStatic;
-declare
-var MVCxClientChart: MVCxClientChartStatic;
-declare
-var MVCxClientComboBox: MVCxClientComboBoxStatic;
-declare
-var MVCxClientDataView: MVCxClientDataViewStatic;
-declare
-var MVCxClientDateEdit: MVCxClientDateEditStatic;
-declare
-var MVCxClientDockManager: MVCxClientDockManagerStatic;
-declare
-var MVCxClientDockPanel: MVCxClientDockPanelStatic;
-declare
-var MVCxClientFileManager: MVCxClientFileManagerStatic;
-declare
-var MVCxClientGridView: MVCxClientGridViewStatic;
-declare
-var MVCxClientHtmlEditor: MVCxClientHtmlEditorStatic;
-declare
-var MVCxClientImageGallery: MVCxClientImageGalleryStatic;
-declare
-var MVCxClientListBox: MVCxClientListBoxStatic;
-declare
-var MVCxClientNavBar: MVCxClientNavBarStatic;
-declare
-var MVCxClientPivotGrid: MVCxClientPivotGridStatic;
-declare
-var MVCxClientPopupControl: MVCxClientPopupControlStatic;
-declare
-var MVCxClientDocumentViewer: MVCxClientDocumentViewerStatic;
-declare
-var MVCxClientReportViewer: MVCxClientReportViewerStatic;
-declare
-var MVCxClientReportDesigner: MVCxClientReportDesignerStatic;
-declare
-var MVCxClientRichEdit: MVCxClientRichEditStatic;
-declare
-var MVCxClientRoundPanel: MVCxClientRoundPanelStatic;
-declare
-var MVCxClientScheduler: MVCxClientSchedulerStatic;
-declare
-var MVCxSchedulerToolTipType: MVCxSchedulerToolTipTypeStatic;
-declare
-var MVCxClientSpreadsheet: MVCxClientSpreadsheetStatic;
-declare
-var MVCxClientPageControl: MVCxClientPageControlStatic;
-declare
-var MVCxClientTokenBox: MVCxClientTokenBoxStatic;
-declare
-var MVCxClientTreeList: MVCxClientTreeListStatic;
-declare
-var MVCxClientTreeView: MVCxClientTreeViewStatic;
-declare
-var MVCxClientUploadControl: MVCxClientUploadControlStatic;
-declare
-var MVCxClientUtils: MVCxClientUtilsStatic;
-declare
-var MVCxClientGlobalEvents: MVCxClientGlobalEventsStatic;
-declare
-var MVCxClientVerticalGrid: MVCxClientVerticalGridStatic;
-declare
-var MVCxClientWebDocumentViewer: MVCxClientWebDocumentViewerStatic;
-declare
-var ASPxClientControlBase: ASPxClientControlBaseStatic;
-declare
-var ASPxClientControl: ASPxClientControlStatic;
-declare
-var ASPxClientCallback: ASPxClientCallbackStatic;
-declare
-var ASPxClientCallbackPanel: ASPxClientCallbackPanelStatic;
-declare
-var ASPxClientCloudControl: ASPxClientCloudControlStatic;
-declare
-var ASPxClientDataView: ASPxClientDataViewStatic;
-declare
-var ASPxClientDockManager: ASPxClientDockManagerStatic;
-declare
-var ASPxClientPopupControlBase: ASPxClientPopupControlBaseStatic;
-declare
-var ASPxClientDockPanel: ASPxClientDockPanelStatic;
-declare
-var ASPxClientDockZone: ASPxClientDockZoneStatic;
-declare
-var ASPxClientFileManager: ASPxClientFileManagerStatic;
-declare
-var ASPxClientFileManagerCommandConsts: ASPxClientFileManagerCommandConstsStatic;
-declare
-var ASPxClientFileManagerErrorConsts: ASPxClientFileManagerErrorConstsStatic;
-declare
-var ASPxClientFormLayout: ASPxClientFormLayoutStatic;
-declare
-var ASPxClientHiddenField: ASPxClientHiddenFieldStatic;
-declare
-var ASPxClientImageGallery: ASPxClientImageGalleryStatic;
-declare
-var ASPxClientImageSlider: ASPxClientImageSliderStatic;
-declare
-var ASPxClientImageZoomNavigator: ASPxClientImageZoomNavigatorStatic;
-declare
-var ASPxClientImageZoom: ASPxClientImageZoomStatic;
-declare
-var ASPxClientLoadingPanel: ASPxClientLoadingPanelStatic;
-declare
-var ASPxClientMenuBase: ASPxClientMenuBaseStatic;
-declare
-var ASPxClientMenu: ASPxClientMenuStatic;
-declare
-var ASPxClientTouchUI: ASPxClientTouchUIStatic;
-declare
-var ASPxClientNavBar: ASPxClientNavBarStatic;
-declare
-var ASPxClientNewsControl: ASPxClientNewsControlStatic;
-declare
-var ASPxClientObjectContainer: ASPxClientObjectContainerStatic;
-declare
-var ASPxClientPanelBase: ASPxClientPanelBaseStatic;
-declare
-var ASPxClientPanel: ASPxClientPanelStatic;
-declare
-var ASPxClientPopupControl: ASPxClientPopupControlStatic;
-declare
-var ASPxClientPopupControlResizeState: ASPxClientPopupControlResizeStateStatic;
-declare
-var ASPxClientPopupControlCloseReason: ASPxClientPopupControlCloseReasonStatic;
-declare
-var ASPxClientPopupMenu: ASPxClientPopupMenuStatic;
-declare
-var ASPxClientRatingControl: ASPxClientRatingControlStatic;
-declare
-var ASPxClientRibbon: ASPxClientRibbonStatic;
-declare
-var ASPxClientRibbonState: ASPxClientRibbonStateStatic;
-declare
-var ASPxClientRoundPanel: ASPxClientRoundPanelStatic;
-declare
-var ASPxClientSplitter: ASPxClientSplitterStatic;
-declare
-var ASPxClientTabControlBase: ASPxClientTabControlBaseStatic;
-declare
-var ASPxClientTabControl: ASPxClientTabControlStatic;
-declare
-var ASPxClientPageControl: ASPxClientPageControlStatic;
-declare
-var ASPxClientTimer: ASPxClientTimerStatic;
-declare
-var ASPxClientTitleIndex: ASPxClientTitleIndexStatic;
-declare
-var ASPxClientTreeView: ASPxClientTreeViewStatic;
-declare
-var ASPxClientUploadControl: ASPxClientUploadControlStatic;
-declare
-var ASPxClientUtils: ASPxClientUtilsStatic;
-declare
-var ASPxClientChartDesigner: ASPxClientChartDesignerStatic;
-declare
-var ASPxClientWebChartControl: ASPxClientWebChartControlStatic;
-declare
-var ASPxClientDocumentViewer: ASPxClientDocumentViewerStatic;
-declare
-var ASPxClientQueryBuilder: ASPxClientQueryBuilderStatic;
-declare
-var ASPxClientReportDesigner: ASPxClientReportDesignerStatic;
-declare
-var ASPxClientReportDocumentMap: ASPxClientReportDocumentMapStatic;
-declare
-var ASPxClientReportParametersPanel: ASPxClientReportParametersPanelStatic;
-declare
-var ASPxClientReportToolbar: ASPxClientReportToolbarStatic;
-declare
-var ASPxClientReportViewer: ASPxClientReportViewerStatic;
-declare
-var ASPxClientWebDocumentViewer: ASPxClientWebDocumentViewerStatic;
+declare var MVCxClientDashboardViewer: MVCxClientDashboardViewerStatic;
+declare var DashboardDataAxisNames: DashboardDataAxisNamesStatic;
+declare var DashboardSpecialValues: DashboardSpecialValuesStatic;
+declare var ASPxClientDashboardDesigner: ASPxClientDashboardDesignerStatic;
+declare var ASPxClientDashboardViewer: ASPxClientDashboardViewerStatic;
+declare var DashboardExportPageLayout: DashboardExportPageLayoutStatic;
+declare var DashboardExportPaperKind: DashboardExportPaperKindStatic;
+declare var DashboardExportScaleMode: DashboardExportScaleModeStatic;
+declare var DashboardExportFilterState: DashboardExportFilterStateStatic;
+declare var DashboardExportImageFormat: DashboardExportImageFormatStatic;
+declare var DashboardExportExcelFormat: DashboardExportExcelFormatStatic;
+declare var ChartExportSizeMode: ChartExportSizeModeStatic;
+declare var MapExportSizeMode: MapExportSizeModeStatic;
+declare var RangeFilterExportSizeMode: RangeFilterExportSizeModeStatic;
+declare var DashboardSelectionMode: DashboardSelectionModeStatic;
+declare var ASPxClientEditBase: ASPxClientEditBaseStatic;
+declare var ASPxClientEdit: ASPxClientEditStatic;
+declare var ASPxClientBinaryImage: ASPxClientBinaryImageStatic;
+declare var ASPxClientButton: ASPxClientButtonStatic;
+declare var ASPxClientCalendar: ASPxClientCalendarStatic;
+declare var ASPxClientCaptcha: ASPxClientCaptchaStatic;
+declare var ASPxClientCheckBox: ASPxClientCheckBoxStatic;
+declare var ASPxClientRadioButton: ASPxClientRadioButtonStatic;
+declare var ASPxClientTextEdit: ASPxClientTextEditStatic;
+declare var ASPxClientTextBoxBase: ASPxClientTextBoxBaseStatic;
+declare var ASPxClientButtonEditBase: ASPxClientButtonEditBaseStatic;
+declare var ASPxClientDropDownEditBase: ASPxClientDropDownEditBaseStatic;
+declare var ASPxClientColorEdit: ASPxClientColorEditStatic;
+declare var ASPxClientComboBox: ASPxClientComboBoxStatic;
+declare var ASPxClientDateEdit: ASPxClientDateEditStatic;
+declare var ASPxClientDropDownEdit: ASPxClientDropDownEditStatic;
+declare var ASPxClientFilterControl: ASPxClientFilterControlStatic;
+declare var ASPxClientListEdit: ASPxClientListEditStatic;
+declare var ASPxClientListBox: ASPxClientListBoxStatic;
+declare var ASPxClientCheckListBase: ASPxClientCheckListBaseStatic;
+declare var ASPxClientRadioButtonList: ASPxClientRadioButtonListStatic;
+declare var ASPxClientCheckBoxList: ASPxClientCheckBoxListStatic;
+declare var ASPxClientProgressBar: ASPxClientProgressBarStatic;
+declare var ASPxClientSpinEditBase: ASPxClientSpinEditBaseStatic;
+declare var ASPxClientSpinEdit: ASPxClientSpinEditStatic;
+declare var ASPxClientTimeEdit: ASPxClientTimeEditStatic;
+declare var ASPxClientStaticEdit: ASPxClientStaticEditStatic;
+declare var ASPxClientHyperLink: ASPxClientHyperLinkStatic;
+declare var ASPxClientImageBase: ASPxClientImageBaseStatic;
+declare var ASPxClientImage: ASPxClientImageStatic;
+declare var ASPxClientLabel: ASPxClientLabelStatic;
+declare var ASPxClientTextBox: ASPxClientTextBoxStatic;
+declare var ASPxClientMemo: ASPxClientMemoStatic;
+declare var ASPxClientButtonEdit: ASPxClientButtonEditStatic;
+declare var ASPxClientTokenBox: ASPxClientTokenBoxStatic;
+declare var ASPxClientTrackBar: ASPxClientTrackBarStatic;
+declare var ASPxClientValidationSummary: ASPxClientValidationSummaryStatic;
+declare var ASPxClientGaugeControl: ASPxClientGaugeControlStatic;
+declare var ASPxClientGridBase: ASPxClientGridBaseStatic;
+declare var ASPxClientGridViewCallbackCommand: ASPxClientGridViewCallbackCommandStatic;
+declare var ASPxClientGridLookup: ASPxClientGridLookupStatic;
+declare var ASPxClientCardView: ASPxClientCardViewStatic;
+declare var ASPxClientGridView: ASPxClientGridViewStatic;
+declare var ASPxClientVerticalGrid: ASPxClientVerticalGridStatic;
+declare var ASPxClientVerticalGridCallbackCommand: ASPxClientVerticalGridCallbackCommandStatic;
+declare var ASPxClientCommandConsts: ASPxClientCommandConstsStatic;
+declare var ASPxClientHtmlEditor: ASPxClientHtmlEditorStatic;
+declare var ASPxClientHtmlEditorMediaPreloadMode: ASPxClientHtmlEditorMediaPreloadModeStatic;
+declare var ASPxClientPivotGrid: ASPxClientPivotGridStatic;
+declare var ASPxClientPivotCustomization: ASPxClientPivotCustomizationStatic;
+declare var ASPxClientRichEdit: ASPxClientRichEditStatic;
+declare var ASPxSchedulerDateTimeHelper: ASPxSchedulerDateTimeHelperStatic;
+declare var ASPxClientWeekDaysCheckEdit: ASPxClientWeekDaysCheckEditStatic;
+declare var ASPxClientRecurrenceRangeControl: ASPxClientRecurrenceRangeControlStatic;
+declare var ASPxClientRecurrenceControlBase: ASPxClientRecurrenceControlBaseStatic;
+declare var ASPxClientDailyRecurrenceControl: ASPxClientDailyRecurrenceControlStatic;
+declare var ASPxClientWeeklyRecurrenceControl: ASPxClientWeeklyRecurrenceControlStatic;
+declare var ASPxClientMonthlyRecurrenceControl: ASPxClientMonthlyRecurrenceControlStatic;
+declare var ASPxClientYearlyRecurrenceControl: ASPxClientYearlyRecurrenceControlStatic;
+declare var ASPxClientRecurrenceTypeEdit: ASPxClientRecurrenceTypeEditStatic;
+declare var ASPxClientTimeInterval: ASPxClientTimeIntervalStatic;
+declare var ASPxClientScheduler: ASPxClientSchedulerStatic;
+declare var ASPxClientSpellChecker: ASPxClientSpellCheckerStatic;
+declare var ASPxClientSpreadsheet: ASPxClientSpreadsheetStatic;
+declare var ASPxClientTreeList: ASPxClientTreeListStatic;
+declare var MVCxClientCalendar: MVCxClientCalendarStatic;
+declare var MVCxClientCallbackPanel: MVCxClientCallbackPanelStatic;
+declare var MVCxClientCardView: MVCxClientCardViewStatic;
+declare var MVCxClientChart: MVCxClientChartStatic;
+declare var MVCxClientComboBox: MVCxClientComboBoxStatic;
+declare var MVCxClientDataView: MVCxClientDataViewStatic;
+declare var MVCxClientDateEdit: MVCxClientDateEditStatic;
+declare var MVCxClientDockManager: MVCxClientDockManagerStatic;
+declare var MVCxClientDockPanel: MVCxClientDockPanelStatic;
+declare var MVCxClientFileManager: MVCxClientFileManagerStatic;
+declare var MVCxClientGridView: MVCxClientGridViewStatic;
+declare var MVCxClientHtmlEditor: MVCxClientHtmlEditorStatic;
+declare var MVCxClientImageGallery: MVCxClientImageGalleryStatic;
+declare var MVCxClientListBox: MVCxClientListBoxStatic;
+declare var MVCxClientNavBar: MVCxClientNavBarStatic;
+declare var MVCxClientPivotGrid: MVCxClientPivotGridStatic;
+declare var MVCxClientPopupControl: MVCxClientPopupControlStatic;
+declare var MVCxClientDocumentViewer: MVCxClientDocumentViewerStatic;
+declare var MVCxClientReportViewer: MVCxClientReportViewerStatic;
+declare var MVCxClientReportDesigner: MVCxClientReportDesignerStatic;
+declare var MVCxClientRichEdit: MVCxClientRichEditStatic;
+declare var MVCxClientRoundPanel: MVCxClientRoundPanelStatic;
+declare var MVCxClientScheduler: MVCxClientSchedulerStatic;
+declare var MVCxSchedulerToolTipType: MVCxSchedulerToolTipTypeStatic;
+declare var MVCxClientSpreadsheet: MVCxClientSpreadsheetStatic;
+declare var MVCxClientPageControl: MVCxClientPageControlStatic;
+declare var MVCxClientTokenBox: MVCxClientTokenBoxStatic;
+declare var MVCxClientTreeList: MVCxClientTreeListStatic;
+declare var MVCxClientTreeView: MVCxClientTreeViewStatic;
+declare var MVCxClientUploadControl: MVCxClientUploadControlStatic;
+declare var MVCxClientUtils: MVCxClientUtilsStatic;
+declare var MVCxClientGlobalEvents: MVCxClientGlobalEventsStatic;
+declare var MVCxClientVerticalGrid: MVCxClientVerticalGridStatic;
+declare var MVCxClientWebDocumentViewer: MVCxClientWebDocumentViewerStatic;
+declare var ASPxClientControlBase: ASPxClientControlBaseStatic;
+declare var ASPxClientControl: ASPxClientControlStatic;
+declare var ASPxClientCallback: ASPxClientCallbackStatic;
+declare var ASPxClientCallbackPanel: ASPxClientCallbackPanelStatic;
+declare var ASPxClientCloudControl: ASPxClientCloudControlStatic;
+declare var ASPxClientDataView: ASPxClientDataViewStatic;
+declare var ASPxClientDockManager: ASPxClientDockManagerStatic;
+declare var ASPxClientPopupControlBase: ASPxClientPopupControlBaseStatic;
+declare var ASPxClientDockPanel: ASPxClientDockPanelStatic;
+declare var ASPxClientDockZone: ASPxClientDockZoneStatic;
+declare var ASPxClientFileManager: ASPxClientFileManagerStatic;
+declare var ASPxClientFileManagerCommandConsts: ASPxClientFileManagerCommandConstsStatic;
+declare var ASPxClientFileManagerErrorConsts: ASPxClientFileManagerErrorConstsStatic;
+declare var ASPxClientFormLayout: ASPxClientFormLayoutStatic;
+declare var ASPxClientHiddenField: ASPxClientHiddenFieldStatic;
+declare var ASPxClientImageGallery: ASPxClientImageGalleryStatic;
+declare var ASPxClientImageSlider: ASPxClientImageSliderStatic;
+declare var ASPxClientImageZoomNavigator: ASPxClientImageZoomNavigatorStatic;
+declare var ASPxClientImageZoom: ASPxClientImageZoomStatic;
+declare var ASPxClientLoadingPanel: ASPxClientLoadingPanelStatic;
+declare var ASPxClientMenuBase: ASPxClientMenuBaseStatic;
+declare var ASPxClientMenu: ASPxClientMenuStatic;
+declare var ASPxClientTouchUI: ASPxClientTouchUIStatic;
+declare var ASPxClientNavBar: ASPxClientNavBarStatic;
+declare var ASPxClientNewsControl: ASPxClientNewsControlStatic;
+declare var ASPxClientObjectContainer: ASPxClientObjectContainerStatic;
+declare var ASPxClientPanelBase: ASPxClientPanelBaseStatic;
+declare var ASPxClientPanel: ASPxClientPanelStatic;
+declare var ASPxClientPopupControl: ASPxClientPopupControlStatic;
+declare var ASPxClientPopupControlResizeState: ASPxClientPopupControlResizeStateStatic;
+declare var ASPxClientPopupControlCloseReason: ASPxClientPopupControlCloseReasonStatic;
+declare var ASPxClientPopupMenu: ASPxClientPopupMenuStatic;
+declare var ASPxClientRatingControl: ASPxClientRatingControlStatic;
+declare var ASPxClientRibbon: ASPxClientRibbonStatic;
+declare var ASPxClientRibbonState: ASPxClientRibbonStateStatic;
+declare var ASPxClientRoundPanel: ASPxClientRoundPanelStatic;
+declare var ASPxClientSplitter: ASPxClientSplitterStatic;
+declare var ASPxClientTabControlBase: ASPxClientTabControlBaseStatic;
+declare var ASPxClientTabControl: ASPxClientTabControlStatic;
+declare var ASPxClientPageControl: ASPxClientPageControlStatic;
+declare var ASPxClientTimer: ASPxClientTimerStatic;
+declare var ASPxClientTitleIndex: ASPxClientTitleIndexStatic;
+declare var ASPxClientTreeView: ASPxClientTreeViewStatic;
+declare var ASPxClientUploadControl: ASPxClientUploadControlStatic;
+declare var ASPxClientUtils: ASPxClientUtilsStatic;
+declare var ASPxClientChartDesigner: ASPxClientChartDesignerStatic;
+declare var ASPxClientWebChartControl: ASPxClientWebChartControlStatic;
+declare var ASPxClientDocumentViewer: ASPxClientDocumentViewerStatic;
+declare var ASPxClientQueryBuilder: ASPxClientQueryBuilderStatic;
+declare var ASPxClientReportDesigner: ASPxClientReportDesignerStatic;
+declare var ASPxClientReportDocumentMap: ASPxClientReportDocumentMapStatic;
+declare var ASPxClientReportParametersPanel: ASPxClientReportParametersPanelStatic;
+declare var ASPxClientReportToolbar: ASPxClientReportToolbarStatic;
+declare var ASPxClientReportViewer: ASPxClientReportViewerStatic;
+declare var ASPxClientWebDocumentViewer: ASPxClientWebDocumentViewerStatic;

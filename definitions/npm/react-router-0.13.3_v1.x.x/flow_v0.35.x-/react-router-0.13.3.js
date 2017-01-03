@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$ReactRouter: {
+declare var npm$namespace$ReactRouter: {
     createRoute: typeof ReactRouter$createRoute,
     createDefaultRoute: typeof ReactRouter$createDefaultRoute,
     createNotFoundRoute: typeof ReactRouter$createNotFoundRoute,
@@ -88,17 +87,13 @@ declare type ReactRouter$Route = {}
 
 declare type ReactRouter$RouteClass = {}
 
-declare
-var DefaultRoute: ReactRouter$DefaultRouteClass;
+declare var DefaultRoute: ReactRouter$DefaultRouteClass;
 
-declare
-var NotFoundRoute: ReactRouter$NotFoundRouteClass;
+declare var NotFoundRoute: ReactRouter$NotFoundRouteClass;
 
-declare
-var Redirect: ReactRouter$RedirectClass;
+declare var Redirect: ReactRouter$RedirectClass;
 
-declare
-var Route: ReactRouter$RouteClass;
+declare var Route: ReactRouter$RouteClass;
 
 declare interface ReactRouter$CreateRouteOptions {
     name?: string,
@@ -118,14 +113,11 @@ declare interface ReactRouter$CreateRouteOptions {
 
 declare type ReactRouter$CreateRouteCallback = (route: ReactRouter$Route) => void;
 
-declare
-function ReactRouter$createRoute(callback: ReactRouter$CreateRouteCallback): ReactRouter$Route
+declare function ReactRouter$createRoute(callback: ReactRouter$CreateRouteCallback): ReactRouter$Route
 
-declare
-function ReactRouter$createDefaultRoute(options?: ReactRouter$CreateRouteOptions | string): ReactRouter$Route
+declare function ReactRouter$createDefaultRoute(options?: ReactRouter$CreateRouteOptions | string): ReactRouter$Route
 
-declare
-function ReactRouter$createNotFoundRoute(options?: ReactRouter$CreateRouteOptions | string): ReactRouter$Route
+declare function ReactRouter$createNotFoundRoute(options?: ReactRouter$CreateRouteOptions | string): ReactRouter$Route
 
 declare type ReactRouter$CreateRedirectOptions = {
     path?: string,
@@ -136,11 +128,9 @@ declare type ReactRouter$CreateRedirectOptions = {
 } & ReactRouter$CreateRouteOptions
 
 
-declare
-function ReactRouter$createRedirect(options: ReactRouter$CreateRedirectOptions): ReactRouter$Redirect
+declare function ReactRouter$createRedirect(options: ReactRouter$CreateRedirectOptions): ReactRouter$Redirect
 
-declare
-function ReactRouter$createRoutesFromReactChildren(children: ReactRouter$Route): ReactRouter$Route[]
+declare function ReactRouter$createRoutesFromReactChildren(children: ReactRouter$Route): ReactRouter$Route[]
 
 declare type ReactRouter$LinkProp = {
     activeClassName?: string,
@@ -174,11 +164,9 @@ declare type ReactRouter$RouteHandler = {
 
 declare type ReactRouter$RouteHandlerClass = {}
 
-declare
-var Link: ReactRouter$LinkClass;
+declare var Link: ReactRouter$LinkClass;
 
-declare
-var RouteHandler: ReactRouter$RouteHandlerClass;
+declare var RouteHandler: ReactRouter$RouteHandlerClass;
 
 declare type ReactRouter$Router = {
     run(callback: ReactRouter$RouterRunCallback): void
@@ -203,11 +191,9 @@ declare interface ReactRouter$RouterCreateOption {
 
 declare type ReactRouter$RouterRunCallback = (Handler: ReactRouter$RouteClass, state: ReactRouter$RouterState) => void;
 
-declare
-function ReactRouter$create(options: ReactRouter$RouterCreateOption): ReactRouter$Router
+declare function ReactRouter$create(options: ReactRouter$RouterCreateOption): ReactRouter$Router
 
-declare
-function ReactRouter$run(
+declare function ReactRouter$run(
     routes: ReactRouter$Route,
     callback: ReactRouter$RouterRunCallback): ReactRouter$Router
 
@@ -243,20 +229,15 @@ declare type ReactRouter$StaticLocation = {} & ReactRouter$LocationBase
 declare type ReactRouter$TestLocation = {} & ReactRouter$Location & ReactRouter$LocationListener
 
 
-declare
-var HashLocation: ReactRouter$HashLocation;
+declare var HashLocation: ReactRouter$HashLocation;
 
-declare
-var HistoryLocation: ReactRouter$HistoryLocation;
+declare var HistoryLocation: ReactRouter$HistoryLocation;
 
-declare
-var RefreshLocation: ReactRouter$RefreshLocation;
+declare var RefreshLocation: ReactRouter$RefreshLocation;
 
-declare
-var StaticLocation: ReactRouter$StaticLocation;
+declare var StaticLocation: ReactRouter$StaticLocation;
 
-declare
-var TestLocation: ReactRouter$TestLocation;
+declare var TestLocation: ReactRouter$TestLocation;
 
 declare interface ReactRouter$ScrollBehaviorBase {
     updateScrollPosition(position: {
@@ -271,11 +252,9 @@ declare type ReactRouter$ImitateBrowserBehavior = {} & ReactRouter$ScrollBehavio
 declare type ReactRouter$ScrollToTopBehavior = {} & ReactRouter$ScrollBehaviorBase
 
 
-declare
-var ImitateBrowserBehavior: ReactRouter$ImitateBrowserBehavior;
+declare var ImitateBrowserBehavior: ReactRouter$ImitateBrowserBehavior;
 
-declare
-var ScrollToTopBehavior: ReactRouter$ScrollToTopBehavior;
+declare var ScrollToTopBehavior: ReactRouter$ScrollToTopBehavior;
 
 declare interface ReactRouter$Navigation {
     makePath(to: string, params?: {}, query?: {}): string,
@@ -294,19 +273,16 @@ declare interface ReactRouter$State {
         isActive(to: string, params?: {}, query?: {}): boolean
 }
 
-declare
-var Navigation: ReactRouter$Navigation;
+declare var Navigation: ReactRouter$Navigation;
 
-declare
-var State: ReactRouter$State;
+declare var State: ReactRouter$State;
 
 declare interface ReactRouter$History {
     back(): void,
         length: number
 }
 
-declare
-var History: ReactRouter$History;
+declare var History: ReactRouter$History;
 
 declare interface ReactRouter$Context {
     makePath(to: string, params?: {}, query?: {}): string,

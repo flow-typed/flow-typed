@@ -22,8 +22,7 @@ declare interface embed$Quicktime {
     (kwArgs: Object, node: HTMLElement): void
 }
 
-declare
-var initialized: boolean;
+declare var initialized: boolean;
 
 
 /**
@@ -48,35 +47,25 @@ declare interface embed$Flash {
     (kwArgs: Object, node: HTMLElement): void
 }
 
-declare
-var available: number;
+declare var available: number;
 
-declare
-var domNode: Object;
+declare var domNode: Object;
 
-declare
-var id: Object;
+declare var id: Object;
 
-declare
-var initialized: boolean;
+declare var initialized: boolean;
 
-declare
-var minimumRequired: Object;
+declare var minimumRequired: Object;
 
-declare
-var minimumVersion: number;
+declare var minimumVersion: number;
 
-declare
-var minSupported: number;
+declare var minSupported: number;
 
-declare
-var movie: Object;
+declare var movie: Object;
 
-declare
-var supported: boolean;
+declare var supported: boolean;
 
-declare
-var version: Object;
+declare var version: Object;
 
 
 /**

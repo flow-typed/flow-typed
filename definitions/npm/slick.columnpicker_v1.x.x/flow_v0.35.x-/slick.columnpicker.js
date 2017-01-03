@@ -6,13 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Controls$SlickColumnPickerOptions {
+declare export interface Controls$SlickColumnPickerOptions {
     fadeSpeed?: number
 }
 
-declare
-export class ColumnPicker<T>{
+declare export class ColumnPicker<T>{
     constructor(columns: Slick$Column<T>[], grid: Slick$Grid<T>, options: Controls$SlickColumnPickerOptions): this;
     getAllColumns(): Slick$Column<T>[];
     destroy(): void

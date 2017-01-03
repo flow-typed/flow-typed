@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface inversifyInjectDecorators$InjectDecorators {
+declare export interface inversifyInjectDecorators$InjectDecorators {
     lazyInject: (
             serviceIdentifier: undefined.ServiceIdentifier<any>) => (proto: any, key: string) => void,
         lazyInjectNamed: (

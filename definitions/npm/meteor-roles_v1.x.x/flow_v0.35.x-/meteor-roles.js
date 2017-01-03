@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Roles: {
+declare var npm$namespace$Roles: {
     addUsersToRoles: typeof Roles$addUsersToRoles,
     createRole: typeof Roles$createRole,
     deleteRole: typeof Roles$deleteRole,
@@ -20,11 +19,9 @@ var npm$namespace$Roles: {
     setUserRoles: typeof Roles$setUserRoles,
     userIsInRole: typeof Roles$userIsInRole,
 }
-declare
-var GLOBAL_GROUP: string;
+declare var GLOBAL_GROUP: string;
 
-declare
-var subscription: Subscription;
+declare var subscription: Subscription;
 
 
 /**
@@ -55,8 +52,7 @@ across all groups.  The roles/permissions in the
 Roles.GLOBAL_GROUP group will be automatically
 included in checks for any group.
 */
-declare
-function Roles$addUsersToRoles(
+declare function Roles$addUsersToRoles(
     user: string | string[] | Object | Object[],
     roles: string | string[],
     group?: string): void
@@ -68,8 +64,7 @@ function Roles$addUsersToRoles(
  * @param  Name of role
  * @return  id of new role
  */
-declare
-function Roles$createRole(role: string): string
+declare function Roles$createRole(role: string): string
 
 
 /**
@@ -78,8 +73,7 @@ function Roles$createRole(role: string): string
  * @method  deleteRole
  * @param  Name of role
  */
-declare
-function Roles$deleteRole(role: string): void
+declare function Roles$deleteRole(role: string): void
 
 
 /**
@@ -87,8 +81,7 @@ function Roles$deleteRole(role: string): void
  * @method  getAllRoles
  * @return  cursor of existing roles
  */
-declare
-function Roles$getAllRoles(): Mongo.Cursor<Roles$Role >
+declare function Roles$getAllRoles(): Mongo.Cursor<Roles$Role >
 
 
     /**
@@ -98,8 +91,7 @@ function Roles$getAllRoles(): Mongo.Cursor<Roles$Role >
      * @param  Optional name of roles to restrict groups to.
      * @return  Array of user's groups, unsorted. Roles.GLOBAL_GROUP will be omitted
      */
-    declare
-function Roles$getGroupsForUser(user: string | Object, role?: string): string[]
+    declare function Roles$getGroupsForUser(user: string | Object, role?: string): string[]
 
 
 /**
@@ -110,8 +102,7 @@ function Roles$getGroupsForUser(user: string | Object, role?: string): string[]
 User's Roles.GLOBAL_GROUP will also be included.
  * @return  Array of user's roles, unsorted.
 */
-declare
-function Roles$getRolesForUser(user: string | Object, group?: string): Roles$Role[]
+declare function Roles$getRolesForUser(user: string | Object, group?: string): Roles$Role[]
 
 
 /**
@@ -131,8 +122,7 @@ User's Roles.GLOBAL_GROUP will also be checked.
 through to `Meteor.users.find(query, options)`
  * @return  cursor of users in role
 */
-declare
-function Roles$getUsersInRole(
+declare function Roles$getUsersInRole(
     role: string | string[],
     group?: string,
     options?: {
@@ -157,8 +147,7 @@ function Roles$getUsersInRole(
      * @param  Optional. Group name. If supplied, only that
     group will have roles removed.
     */
-    declare
-function Roles$removeUsersFromRoles(
+    declare function Roles$removeUsersFromRoles(
     user: string | string[] | Object | Object[],
     roles?: string[],
     group?: string): void
@@ -185,8 +174,7 @@ across all groups.  The roles/permissions in the
 Roles.GLOBAL_GROUP group will be automatically
 included in checks for any group.
 */
-declare
-function Roles$setUserRoles(
+declare function Roles$setUserRoles(
     user: string | string[] | Object | Object[],
     roles: string | string[],
     group?: string): void
@@ -218,8 +206,7 @@ The user's Roles.GLOBAL_GROUP will always be checked
 whether group is specified or not.
  * @return  true if user is in _any_ of the target roles
 */
-declare
-function Roles$userIsInRole(
+declare function Roles$userIsInRole(
     user: string | string[] | Object | Object[],
     roles: string | string[],
     group?: string): boolean
@@ -227,5 +214,4 @@ function Roles$userIsInRole(
 declare interface Roles$Role {
     name: string
 }
-declare
-var roles: Mongo.Collection<Roles$Role>;
+declare var roles: Mongo.Collection<Roles$Role>;

@@ -67,8 +67,7 @@ declare interface IBANStatic {
          */
         toBBAN(iban: string, separator: string[]): string
 }
-declare
-var IBAN: IBANStatic;
+declare var IBAN: IBANStatic;
 declare module 'iban' {
     declare module.exports: typeof IBAN
 }

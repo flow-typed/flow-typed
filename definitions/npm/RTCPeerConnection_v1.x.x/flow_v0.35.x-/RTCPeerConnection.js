@@ -21,8 +21,7 @@ declare interface RTCConfiguration {
         certificates?: RTCCertificate[],
         iceCandidatePoolSize?: number
 }
-declare
-var RTCConfiguration: {
+declare var RTCConfiguration: {
     prototype: RTCConfiguration,
     new(): RTCConfiguration
 };
@@ -33,22 +32,19 @@ declare interface RTCIceServer {
         credential?: string,
         credentialType?: RTCIceCredentialType
 }
-declare
-var RTCIceServer: {
+declare var RTCIceServer: {
     prototype: RTCIceServer,
     new(): RTCIceServer
 };
 declare type mozRTCPeerConnection = {} & RTCPeerConnection
-declare
-var mozRTCPeerConnection: {
+declare var mozRTCPeerConnection: {
     prototype: mozRTCPeerConnection,
     new(
         settings?: RTCConfiguration,
         constraints?: RTCMediaConstraints): mozRTCPeerConnection
 };
 declare type webkitRTCPeerConnection = {} & RTCPeerConnection
-declare
-var webkitRTCPeerConnection: {
+declare var webkitRTCPeerConnection: {
     prototype: webkitRTCPeerConnection,
     new(
         settings?: RTCConfiguration,
@@ -74,8 +70,7 @@ declare interface RTCSessionDescription {
     type?: string,
         sdp?: string
 }
-declare
-var RTCSessionDescription: {
+declare var RTCSessionDescription: {
     prototype: RTCSessionDescription,
     new(descriptionInitDict?: RTCSessionDescriptionInit): RTCSessionDescription
 };
@@ -83,8 +78,7 @@ declare type webkitRTCSessionDescription = {
     type?: string,
     sdp?: string
 } & RTCSessionDescription
-declare
-var webkitRTCSessionDescription: {
+declare var webkitRTCSessionDescription: {
     prototype: webkitRTCSessionDescription,
     new(descriptionInitDict?: RTCSessionDescriptionInit): webkitRTCSessionDescription
 };
@@ -92,8 +86,7 @@ declare type mozRTCSessionDescription = {
     type?: string,
     sdp?: string
 } & RTCSessionDescription
-declare
-var mozRTCSessionDescription: {
+declare var mozRTCSessionDescription: {
     prototype: mozRTCSessionDescription,
     new(descriptionInitDict?: RTCSessionDescriptionInit): mozRTCSessionDescription
 };
@@ -124,16 +117,14 @@ declare type RTCDataChannel = {
     send(data: ArrayBufferView): void,
     send(data: Blob): void
 } & EventTarget
-declare
-var RTCDataChannel: {
+declare var RTCDataChannel: {
     prototype: RTCDataChannel,
     new(): RTCDataChannel
 };
 declare type RTCDataChannelEvent = {
     channel: RTCDataChannel
 } & Event
-declare
-var RTCDataChannelEvent: {
+declare var RTCDataChannelEvent: {
     prototype: RTCDataChannelEvent,
     new(eventInitDict: RTCDataChannelEventInit): RTCDataChannelEvent
 };
@@ -224,8 +215,7 @@ declare interface RTCPeerConnection {
             successCallback: RTCStatsCallback,
             failureCallback: RTCPeerConnectionErrorCallback): void
 }
-declare
-var RTCPeerConnection: {
+declare var RTCPeerConnection: {
     prototype: RTCPeerConnection,
     new(
         configuration: RTCConfiguration,
@@ -236,8 +226,7 @@ declare interface RTCIceCandidate {
         sdpMid?: string,
         sdpMLineIndex?: number
 }
-declare
-var RTCIceCandidate: {
+declare var RTCIceCandidate: {
     prototype: RTCIceCandidate,
     new(candidateInitDict?: RTCIceCandidate): RTCIceCandidate
 };
@@ -246,8 +235,7 @@ declare type webkitRTCIceCandidate = {
     sdpMid?: string,
     sdpMLineIndex?: number
 } & RTCIceCandidate
-declare
-var webkitRTCIceCandidate: {
+declare var webkitRTCIceCandidate: {
     prototype: webkitRTCIceCandidate,
     new(candidateInitDict?: webkitRTCIceCandidate): webkitRTCIceCandidate
 };
@@ -256,8 +244,7 @@ declare type mozRTCIceCandidate = {
     sdpMid?: string,
     sdpMLineIndex?: number
 } & RTCIceCandidate
-declare
-var mozRTCIceCandidate: {
+declare var mozRTCIceCandidate: {
     prototype: mozRTCIceCandidate,
     new(candidateInitDict?: mozRTCIceCandidate): mozRTCIceCandidate
 };
@@ -266,8 +253,7 @@ declare interface RTCIceCandidateInit {
         sdpMid?: string,
         sdpMLineIndex?: number
 }
-declare
-var RTCIceCandidateInit: {
+declare var RTCIceCandidateInit: {
     prototype: RTCIceCandidateInit,
     new(): RTCIceCandidateInit
 };
@@ -275,16 +261,14 @@ declare interface PeerConnectionIceEvent {
     peer: RTCPeerConnection,
         candidate: RTCIceCandidate
 }
-declare
-var PeerConnectionIceEvent: {
+declare var PeerConnectionIceEvent: {
     prototype: PeerConnectionIceEvent,
     new(): PeerConnectionIceEvent
 };
 declare interface RTCPeerConnectionConfig {
     iceServers: RTCIceServer[]
 }
-declare
-var RTCPeerConnectionConfig: {
+declare var RTCPeerConnectionConfig: {
     prototype: RTCPeerConnectionConfig,
     new(): RTCPeerConnectionConfig
 };

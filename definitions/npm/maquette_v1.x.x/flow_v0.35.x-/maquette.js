@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$maquette: {
+declare var npm$namespace$maquette: {
     createCache: typeof maquette$createCache,
     createMapping: typeof maquette$createMapping,
     createProjector: typeof maquette$createProjector,
@@ -41,8 +40,7 @@ declare type maquette$TouchEvent = {
 } & UIEvent
 
 
-declare
-export interface maquette$VNodeProperties {
+declare export interface maquette$VNodeProperties {
     enterAnimation?: ((element: Element, properties?: maquette$VNodeProperties) => void) | string,
         exitAnimation?: ((
             element: Element,
@@ -116,8 +114,7 @@ export interface maquette$VNodeProperties {
         srcset?: string, [index: string]: Object
 }
 
-declare
-export interface maquette$ProjectionOptions {
+declare export interface maquette$ProjectionOptions {
     transitions?: {
         enter: (
             element: Element,
@@ -131,15 +128,12 @@ export interface maquette$ProjectionOptions {
     }
 }
 
-declare
-export type maquette$VNodeChildren = {} & Array
+declare export type maquette$VNodeChildren = {} & Array
 
 
-declare
-export type maquette$VNodeChild = string | maquette$VNode | maquette$VNodeChildren;
+declare export type maquette$VNodeChild = string | maquette$VNode | maquette$VNodeChildren;
 
-declare
-export var dom: maquette$MaquetteDom;
+declare export var dom: maquette$MaquetteDom;
 
 
 /**
@@ -147,8 +141,7 @@ export var dom: maquette$MaquetteDom;
  * In practice, caching of {@link VNode} trees is not needed, because achieving 60 frames per second is almost never a problem.
  * @returns  
  */
-declare
-export function maquette$createCache<Result>(): maquette$CalculationCache<Result >
+declare export function maquette$createCache<Result>(): maquette$CalculationCache<Result >
 
 
     /**
@@ -158,8 +151,7 @@ export function maquette$createCache<Result>(): maquette$CalculationCache<Result
      * @param  - `function(source, target, index)` that updates a result to an updated source.
      * @returns  
      */
-    declare
-export function maquette$createMapping<Source, Target>(
+    declare export function maquette$createMapping<Source, Target>(
         getSourceKey: (source: Source) => (string | number),
         createResult: (source: Source, index: number) => Target,
         updateResult: (source: Source, target: Target, index: number) => void): maquette$Mapping<Source, Target >
@@ -174,8 +166,7 @@ export function maquette$createMapping<Source, Target>(
     A transition strategy is not needed when enterAnimation and exitAnimation properties are provided as functions.
      * @returns  
     */
-    declare
-export function maquette$createProjector(projectionOptions?: maquette$ProjectionOptions): maquette$Projector
+    declare export function maquette$createProjector(projectionOptions?: maquette$ProjectionOptions): maquette$Projector
 
 
 /**
@@ -186,8 +177,7 @@ export function maquette$createProjector(projectionOptions?: maquette$Projection
  * @param  - An array of virtual DOM nodes and strings to add as child nodes. May contain nested arrays, null or undefined.
  * @returns  A VNode object, used to render a real DOM later.
  */
-declare
-export function maquette$h(
+declare export function maquette$h(
     selector: string,
     properties: maquette$VNodeProperties,
     children: Array<maquette$VNodeChild>): maquette$VNode
@@ -197,15 +187,13 @@ export function maquette$h(
  * A virtual representation of a DOM Node. Maquette assumes that {@link VNode} objects are never modified externally.
  * Instances of {@link VNode} can be created using {@link module:maquette.h}.
  */
-declare
-export interface maquette$VNode {
+declare export interface maquette$VNode {
     vnodeSelector: string,
         properties: maquette$VNodeProperties,
         children: Array<maquette$VNode >
 }
 
-declare
-export interface maquette$Component {
+declare export interface maquette$Component {
     renderMaquette(): maquette$VNode
 }
 
@@ -216,8 +204,7 @@ export interface maquette$Component {
 This object can be used to bypass both rendering and diffing of a virtual DOM subtree.
 Instances of {@link CalculationCache} can be created using {@link module:maquette.createCache}.
 */
-declare
-export interface maquette$CalculationCache<Result>{
+declare export interface maquette$CalculationCache<Result>{
 
     /**
      * Manually invalidates the cached outcome.
@@ -244,8 +231,7 @@ The {@link Mapping#map} function can be called multiple times and the results wi
 A {@link Mapping} can be used to keep an array of components (objects with a `renderMaquette` method) synchronized with an array of data.
 Instances of {@link Mapping} can be created using {@link module:maquette.createMapping}.
 */
-declare
-export interface maquette$Mapping<Source, Target>{
+declare export interface maquette$Mapping<Source, Target>{
 
     /**
      * The array of results. These results will be synchronized with the latest array of sources that were provided using {@link Mapping#map}.
@@ -264,8 +250,7 @@ export interface maquette$Mapping<Source, Target>{
 /**
  * Contains simple low-level utility functions to manipulate the real DOM. The singleton instance is available under {@link module:maquette.dom}.
  */
-declare
-export interface maquette$MaquetteDom {
+declare export interface maquette$MaquetteDom {
 
     /**
      * Appends a new childnode to the DOM which is generated from a {@link VNode}.
@@ -334,8 +319,7 @@ export interface maquette$MaquetteDom {
 /**
  * Represents a {@link VNode} tree that has been rendered to a real DOM tree.
  */
-declare
-export interface maquette$Projection {
+declare export interface maquette$Projection {
 
     /**
      * Updates the projection with the new virtual DOM tree.
@@ -365,8 +349,7 @@ The projector stops when {@link Projector#stop} is called or when an error is th
 It is possible to use `window.onerror` to handle these errors.
 Instances of {@link Projector} can be created using {@link module:maquette.createProjector}.
 */
-declare
-export interface maquette$Projector {
+declare export interface maquette$Projector {
 
     /**
      * Appends a new childnode to the DOM using the result from the provided `renderMaquetteFunction`.

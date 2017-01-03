@@ -34,16 +34,14 @@ declare interface CryptoJS$Decryptor {
         finalize(): string
 }
 
-declare
-export interface CryptoJS$WordArray {
+declare export interface CryptoJS$WordArray {
     iv: string,
         salt: string,
         ciphertext: string,
         key?: string
 }
 
-declare
-export type CryptoJS$DecryptedMessage = {
+declare export type CryptoJS$DecryptedMessage = {
     toString(encoder?: CryptoJS$Encoder): string
 };
 
@@ -62,8 +60,7 @@ declare interface CryptoJS$Mode {}
 
 declare interface CryptoJS$Padding {}
 
-declare
-export interface CryptoJS$Hashes {
+declare export interface CryptoJS$Hashes {
     MD5: CryptoJS$Hash,
         SHA1: CryptoJS$Hash,
         SHA256: CryptoJS$Hash,
@@ -129,8 +126,7 @@ export interface CryptoJS$Hashes {
         }
 }
 
-declare
-export var hashes: CryptoJS$Hashes;
+declare export var hashes: CryptoJS$Hashes;
 declare module 'crypto-js' {
     declare module.exports: typeof hashes
 }

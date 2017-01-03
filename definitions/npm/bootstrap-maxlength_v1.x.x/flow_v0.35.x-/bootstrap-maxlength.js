@@ -51,8 +51,7 @@ declare interface BootstrapMaxlength$PositionParam {
         height: Number
 }
 
-declare
-export interface BootstrapMaxlength$Options {
+declare export interface BootstrapMaxlength$Options {
 
     /**
      * If true the threshold will be ignored and the remaining length indication will be always showing up while typing or on focus on the input

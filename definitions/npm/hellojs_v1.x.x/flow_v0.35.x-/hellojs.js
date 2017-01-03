@@ -125,8 +125,7 @@ declare interface HelloJSServiceDef {
         form?: (par: any) => void,
         api?: (...par: any[]) => void
 }
-declare
-var hello: HelloJSStatic;
+declare var hello: HelloJSStatic;
 declare module 'hellojs' {
     declare module.exports: typeof hello
 }

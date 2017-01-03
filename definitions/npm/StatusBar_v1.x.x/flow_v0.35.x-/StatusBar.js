@@ -76,5 +76,4 @@ declare interface StatusBar {
          */
         isVisible: boolean
 }
-declare
-var StatusBar: StatusBar;
+declare var StatusBar: StatusBar;

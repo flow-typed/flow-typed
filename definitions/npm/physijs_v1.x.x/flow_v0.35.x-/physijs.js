@@ -7,22 +7,18 @@
  */
 
 
-declare
-var npm$namespace$Physijs: {
+declare var npm$namespace$Physijs: {
     noConflict: typeof Physijs$noConflict,
     createMaterial: typeof Physijs$createMaterial,
 }
-declare
-export function Physijs$noConflict(): Object
+declare export function Physijs$noConflict(): Object
 
-declare
-export function Physijs$createMaterial(
+declare export function Physijs$createMaterial(
     material: THREE.Material,
     friction?: number,
     restitution?: number): Physijs$Material
 
-declare
-export type Physijs$Material = {
+declare export type Physijs$Material = {
     _physijs: {
         id: number,
         friction: number,
@@ -30,13 +26,11 @@ export type Physijs$Material = {
     }
 }
 
-declare
-export interface Physijs$Constraint {
+declare export interface Physijs$Constraint {
     getDefinition(): any
 }
 
-declare
-export interface Physijs$PointConstraintDefinition {
+declare export interface Physijs$PointConstraintDefinition {
     type: string,
         id: number,
         objecta: THREE.Object3D,
@@ -45,14 +39,12 @@ export interface Physijs$PointConstraintDefinition {
         positionb: THREE.Vector3
 }
 
-declare
-export class PointConstraint mixins Constraint {
+declare export class PointConstraint mixins Constraint {
     constructor(objecta: THREE.Object3D, objectb: THREE.Object3D, position?: THREE.Vector3): this;
     getDefinition(): Physijs$PointConstraintDefinition
 }
 
-declare
-export interface Physijs$HingeConstraintDefinition {
+declare export interface Physijs$HingeConstraintDefinition {
     type: string,
         id: number,
         objecta: THREE.Object3D,
@@ -62,8 +54,7 @@ export interface Physijs$HingeConstraintDefinition {
         axis: THREE.Vector3
 }
 
-declare
-export class HingeConstraint mixins Constraint {
+declare export class HingeConstraint mixins Constraint {
     constructor(objecta: THREE.Object3D, objectb: THREE.Object3D, position: THREE.Vector3, axis?: THREE.Vector3): this;
     getDefinition(): Physijs$HingeConstraintDefinition;
     setLimits(
@@ -75,8 +66,7 @@ export class HingeConstraint mixins Constraint {
     disableMotor(): void
 }
 
-declare
-export interface Physijs$SliderConstraintDefinition {
+declare export interface Physijs$SliderConstraintDefinition {
     type: string,
         id: number,
         objecta: THREE.Object3D,
@@ -86,8 +76,7 @@ export interface Physijs$SliderConstraintDefinition {
         axis: THREE.Vector3
 }
 
-declare
-export class SliderConstraint mixins Constraint {
+declare export class SliderConstraint mixins Constraint {
     constructor(objecta: THREE.Object3D, objectb: THREE.Object3D, position: THREE.Vector3, axis?: THREE.Vector3): this;
     getDefinition(): Physijs$SliderConstraintDefinition;
     setLimits(
@@ -102,8 +91,7 @@ export class SliderConstraint mixins Constraint {
     disableAngularMotor(): void
 }
 
-declare
-export interface Physijs$ConeTwistConstraintDefinition {
+declare export interface Physijs$ConeTwistConstraintDefinition {
     type: string,
         id: number,
         objecta: THREE.Object3D,
@@ -114,8 +102,7 @@ export interface Physijs$ConeTwistConstraintDefinition {
         axisb: THREE.Vector3
 }
 
-declare
-export class ConeTwistConstraint mixins Constraint {
+declare export class ConeTwistConstraint mixins Constraint {
     constructor(objecta: THREE.Object3D, objectb: THREE.Object3D, position: THREE.Vector3): this;
     getDefinition(): Physijs$ConeTwistConstraintDefinition;
     setLimit(x: number, y: number, z: number): void;
@@ -127,8 +114,7 @@ export class ConeTwistConstraint mixins Constraint {
     disableMotor(): void
 }
 
-declare
-export interface Physijs$DOFConstraintDefinition {
+declare export interface Physijs$DOFConstraintDefinition {
     type: string,
         id: number,
         objecta: THREE.Object3D,
@@ -139,8 +125,7 @@ export interface Physijs$DOFConstraintDefinition {
         axisb: THREE.Vector3
 }
 
-declare
-export class DOFConstraint mixins Constraint {
+declare export class DOFConstraint mixins Constraint {
     constructor(objecta: THREE.Object3D, objectb: THREE.Object3D, position?: THREE.Vector3): this;
     getDefinition(): Physijs$DOFConstraintDefinition;
     setLinearLowerLimit(limit: THREE.Vector3): void;
@@ -157,21 +142,18 @@ export class DOFConstraint mixins Constraint {
     disableAngularMotor(which: number): void
 }
 
-declare
-export var scripts: {
+declare export var scripts: {
     worker: string,
     ammo: string
 };
 
-declare
-export interface Physijs$SceneParameters {
+declare export interface Physijs$SceneParameters {
     ammo?: string,
         fixedTimeStep?: number,
         rateLimit?: boolean
 }
 
-declare
-export class Scene mixins THREE.Scene {
+declare export class Scene mixins THREE.Scene {
     constructor(param?: Physijs$SceneParameters): this;
     addConstraint(constraint: Physijs$Constraint, show_marker?: boolean): void;
     onSimulationResume(): void;
@@ -191,8 +173,7 @@ export class Scene mixins THREE.Scene {
     }): void
 }
 
-declare
-export class Mesh mixins THREE.Mesh {
+declare export class Mesh mixins THREE.Mesh {
     constructor(geometry: THREE.Geometry, material?: THREE.Material, mass?: number): this;
     applyCentralImpulse(force: THREE.Vector3): void;
     applyImpulse(force: THREE.Vector3, offset: THREE.Vector3): void;
@@ -216,53 +197,43 @@ export class Mesh mixins THREE.Mesh {
     }): void
 }
 
-declare
-export class PlaneMesh mixins Mesh {
+declare export class PlaneMesh mixins Mesh {
     constructor(geometry: THREE.Geometry, material: THREE.Material, mass?: number): this
 }
 
-declare
-export class HeightfieldMesh mixins Mesh {
+declare export class HeightfieldMesh mixins Mesh {
     constructor(geometry: THREE.Geometry, material: THREE.Material, mass?: number, xdiv?: number, ydiv?: number): this
 }
 
-declare
-export class BoxMesh mixins Mesh {
+declare export class BoxMesh mixins Mesh {
     constructor(geometry: THREE.Geometry, material: THREE.Material, mass?: number): this
 }
 
-declare
-export class SphereMesh mixins Mesh {
+declare export class SphereMesh mixins Mesh {
     constructor(geometry: THREE.Geometry, material: THREE.Material, mass?: number): this
 }
 
-declare
-export class CylinderMesh mixins Mesh {
+declare export class CylinderMesh mixins Mesh {
     constructor(geometry: THREE.Geometry, material: THREE.Material, mass?: number): this
 }
 
-declare
-export class CapsuleMesh mixins Mesh {
+declare export class CapsuleMesh mixins Mesh {
     constructor(geometry: THREE.Geometry, material: THREE.Material, mass?: number): this
 }
 
-declare
-export class ConeMesh mixins Mesh {
+declare export class ConeMesh mixins Mesh {
     constructor(geometry: THREE.Geometry, material: THREE.Material, mass?: number): this
 }
 
-declare
-export class ConcaveMesh mixins Mesh {
+declare export class ConcaveMesh mixins Mesh {
     constructor(geometry: THREE.Geometry, material: THREE.Material, mass?: number): this
 }
 
-declare
-export class ConvexMesh mixins Mesh {
+declare export class ConvexMesh mixins Mesh {
     constructor(geometry: THREE.Geometry, material: THREE.Material, mass?: number): this
 }
 
-declare
-export class Vehicle {
+declare export class Vehicle {
     constructor(mesh: Physijs$Mesh, tuning?: Physijs$VehicleTuning): this;
     mesh: THREE.Mesh;
     wheels: THREE.Mesh[];
@@ -281,8 +252,7 @@ export class Vehicle {
     applyEngineForce(amount: number, wheel?: THREE.Mesh): void
 }
 
-declare
-export class VehicleTuning {
+declare export class VehicleTuning {
     constructor(suspension_stiffness?: number, suspension_compression?: number, suspension_damping?: number, max_suspension_travel?: number, friction_slip?: number, max_suspension_force?: number): this;
     suspension_stiffness: number;
     suspension_compression: number;

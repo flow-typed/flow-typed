@@ -26,11 +26,9 @@ declare type ___React$UpdateArraySpec = {
 
 
 
-declare
-var npm$namespace$___Addons: {
+declare var npm$namespace$___Addons: {
     update: typeof ___Addons$update,
 }
-declare
-export function ___Addons$update(value: any[], spec: ___React$UpdateArraySpec): any[] declare module 'react-addons-update' {
+declare export function ___Addons$update(value: any[], spec: ___React$UpdateArraySpec): any[] declare module 'react-addons-update' {
     declare module.exports: typeof undefined.update
 }

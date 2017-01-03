@@ -287,8 +287,7 @@ declare interface DateFormatI18n {
     dayNames: string[],
         monthNames: string[]
 }
-declare
-var dateFormat: {
+declare var dateFormat: {
     (date?: any, mask?: string, utc?: boolean): string,
     masks: DateFormatMasks,
     i18n: DateFormatI18n

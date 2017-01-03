@@ -38,11 +38,9 @@ declare interface oo$Decorator {
     (value: Object, decorator?: Function): void
 }
 
-declare
-var decorator: Function;
+declare var decorator: Function;
 
-declare
-var value: Object;
+declare var value: Object;
 
 
 /**
@@ -60,11 +58,9 @@ declare interface oo$Filter {
     (bag: Object, filter: Function): void
 }
 
-declare
-var bag: Object;
+declare var bag: Object;
 
-declare
-var filter: Function;
+declare var filter: Function;
 
 
 /**

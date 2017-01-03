@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface FullCalendar$Calendar {
+declare export interface FullCalendar$Calendar {
 
     /**
      * Formats a Date object into a string.
@@ -39,21 +38,18 @@ export interface FullCalendar$Calendar {
         version: string
 }
 
-declare
-export interface FullCalendar$BusinessHours {
+declare export interface FullCalendar$BusinessHours {
     start: moment.Duration,
         end: moment.Duration,
         dow: Array<number >
 }
 
-declare
-export interface FullCalendar$Timespan {
+declare export interface FullCalendar$Timespan {
     start: moment.Moment,
         end: moment.Moment
 }
 
-declare
-export type FullCalendar$Options = {
+declare export type FullCalendar$Options = {
     header?: {
         left: string,
         center: string,
@@ -159,8 +155,7 @@ export type FullCalendar$Options = {
 } & FullCalendar$AgendaOptions & FullCalendar$EventDraggingResizingOptions & FullCalendar$DroppingExternalElementsOptions & FullCalendar$SelectionOptions
 
 
-declare
-export interface FullCalendar$ViewOptionHash {
+declare export interface FullCalendar$ViewOptionHash {
     month?: any,
         week?: any,
         day?: any,
@@ -177,8 +172,7 @@ export interface FullCalendar$ViewOptionHash {
 /**
  * Agenda Options - http://arshaw.com/fullcalendar/docs/agenda/
  */
-declare
-export interface FullCalendar$AgendaOptions {
+declare export interface FullCalendar$AgendaOptions {
     allDaySlot?: boolean,
         allDayText?: string,
         slotDuration?: moment.Duration,
@@ -191,8 +185,7 @@ export interface FullCalendar$AgendaOptions {
         slotEventOverlap?: boolean
 }
 
-declare
-export interface FullCalendar$EventDraggingResizingOptions {
+declare export interface FullCalendar$EventDraggingResizingOptions {
     editable?: boolean,
         eventStartEditable?: boolean,
         eventDurationEditable?: boolean,
@@ -239,8 +232,7 @@ export interface FullCalendar$EventDraggingResizingOptions {
             view: FullCalendar$ViewObject) => void
 }
 
-declare
-export interface FullCalendar$SelectionOptions {
+declare export interface FullCalendar$SelectionOptions {
     selectable?: boolean,
         selectHelper?: boolean | ((start: moment.Moment, end: moment.Moment) => HTMLElement),
         unselectAuto?: boolean,
@@ -256,16 +248,14 @@ export interface FullCalendar$SelectionOptions {
         unselect?: (view: FullCalendar$ViewObject, jsEvent: Event) => void
 }
 
-declare
-export interface FullCalendar$DroppingExternalElementsOptions {
+declare export interface FullCalendar$DroppingExternalElementsOptions {
     droppable?: boolean,
         dropAccept?: string | ((draggable: any) => boolean),
         drop?: (date: moment.Moment, jsEvent: MouseEvent, ui: any) => void,
         eventReceive?: (event: FullCalendar$EventObject) => void
 }
 
-declare
-export interface FullCalendar$ButtonTextObject {
+declare export interface FullCalendar$ButtonTextObject {
     prev?: string,
         next?: string,
         prevYear?: string,
@@ -276,8 +266,7 @@ export interface FullCalendar$ButtonTextObject {
         day?: string
 }
 
-declare
-export type FullCalendar$EventObject = {
+declare export type FullCalendar$EventObject = {
     id?: any,
     title: string,
     allDay?: boolean,
@@ -293,8 +282,7 @@ export type FullCalendar$EventObject = {
 } & FullCalendar$Timespan
 
 
-declare
-export type FullCalendar$ViewObject = {
+declare export type FullCalendar$ViewObject = {
     name: string,
     title: string,
     intervalStart: moment.Moment,
@@ -302,8 +290,7 @@ export type FullCalendar$ViewObject = {
 } & FullCalendar$Timespan
 
 
-declare
-export type FullCalendar$EventSource = {
+declare export type FullCalendar$EventSource = {
 
     /**
      * This has one of the following types:

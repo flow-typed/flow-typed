@@ -442,8 +442,7 @@ declare interface BigIntegerStatic {
          */
         (bigInt: BigInteger): BigInteger
 }
-declare
-var bigInt: BigIntegerStatic;
+declare var bigInt: BigIntegerStatic;
 declare module 'big-integer' {
     declare module.exports: typeof bigInt
 }

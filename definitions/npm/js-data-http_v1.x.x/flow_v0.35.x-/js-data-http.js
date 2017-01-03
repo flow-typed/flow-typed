@@ -47,8 +47,7 @@ declare type JSData$DSHttpAdapter = {
         data?: Object,
         options?: Object): JSDataPromise<JSData$DSHttpAdapterPromiseResolveType >
 } & IDSAdapter
-declare
-var DSHttpAdapter: JSData$DSHttpAdapter;
+declare var DSHttpAdapter: JSData$DSHttpAdapter;
 declare module 'js-data-http' {
     declare module.exports: typeof DSHttpAdapter
 }

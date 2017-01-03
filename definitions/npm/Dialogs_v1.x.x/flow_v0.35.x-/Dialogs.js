@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IDialogsPromptResult {
+declare export interface ngCordova$IDialogsPromptResult {
     input1: string,
         buttonIndex: number
 }
 
-declare
-export interface ngCordova$IDialogsService {
+declare export interface ngCordova$IDialogsService {
     alert(message: string, title?: string, buttonName?: string): ng.IPromise<void>,
         confirm(
             message: string,

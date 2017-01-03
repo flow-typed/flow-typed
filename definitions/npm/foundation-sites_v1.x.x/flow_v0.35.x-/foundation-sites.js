@@ -446,8 +446,7 @@ declare interface FoundationSites$FoundationSitesStatic {
 declare interface JQuery {
     foundation(method?: string | Array<any>): JQuery
 }
-declare
-var Foundation: FoundationSites$FoundationSitesStatic;
+declare var Foundation: FoundationSites$FoundationSitesStatic;
 declare module 'Foundation' {
     declare module.exports: typeof Foundation
 }

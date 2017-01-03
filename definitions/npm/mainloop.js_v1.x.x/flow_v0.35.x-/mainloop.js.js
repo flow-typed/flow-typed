@@ -28,5 +28,4 @@ declare interface MainLoop {
         start(): MainLoop,
         stop(): MainLoop
 }
-declare
-var MainLoop: MainLoop;
+declare var MainLoop: MainLoop;

@@ -107,5 +107,4 @@ declare interface SegmentAnalytics$AnalyticsJS {
             }): void,
         timeout(milliseconds: number): void
 }
-declare
-var analytics: SegmentAnalytics$AnalyticsJS;
+declare var analytics: SegmentAnalytics$AnalyticsJS;

@@ -237,5 +237,4 @@ declare interface Knockback$IObservableOptions {
         factory?: any,
         options?: any
 }
-declare
-var kb: Knockback$Static;
+declare var kb: Knockback$Static;

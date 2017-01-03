@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var multiplex: multiplex$MultiplexStatic;
+declare var multiplex: multiplex$MultiplexStatic;
 declare module 'multiplex' {
     declare module.exports: typeof multiplex
 }

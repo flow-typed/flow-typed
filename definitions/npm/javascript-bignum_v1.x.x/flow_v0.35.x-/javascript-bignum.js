@@ -7,11 +7,8 @@
  */
 
 declare type SchemeOperator = (...args: (string | SchemeNumber | number)[]) => SchemeNumber;
-declare
-var VERSION: number[];
-declare
-function raise(conditionType: string, message: string, ...irritants: any[]): voiddeclare
-var maxIntegerDigits: number;
+declare var VERSION: number[];
+declare function raise(conditionType: string, message: string, ...irritants: any[]): voiddeclare var maxIntegerDigits: number;
 declare interface SchemeFn {
     [opname: string]: SchemeOperator,
     inexact: SchemeOperator,
@@ -53,5 +50,4 @@ declare interface SchemeNumber {
         toPrecision(precision: number): string,
         fn: SchemeFn
 }
-declare
-var SchemeNumber: SchemeNumber;
+declare var SchemeNumber: SchemeNumber;

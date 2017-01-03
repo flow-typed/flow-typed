@@ -11,26 +11,22 @@
  * Complets an asynchronous task, allowing Jake's execution to proceed to the next task
  * @param value A value to return from the task.
  */
-declare
-function complete(value?: any): void
+declare function complete(value?: any): void
 /**
  * Creates a description for a Jake Task (or FileTask, DirectoryTask). When invoked, the description that iscreated will be associated with whatever Task is created next.
  * @param description The description for the Task
  */
-declare
-function desc(description: string): void
+declare function desc(description: string): void
 /**
  * Creates a Jake DirectoryTask. Can be used as a prerequisite for FileTasks, or for simply ensuring a directory exists for use with a Task's action.
  * @param name The name of the DiretoryTask
  */
-declare
-function directory(name: string): jake$DirectoryTask
+declare function directory(name: string): jake$DirectoryTask
 /**
  * Causes Jake execution to abort with an error. Allows passing an optional error code, which will be used to set the exit-code of exiting process.
  * @param err The error to thow when aborting execution. If this argument is an Error object, it will simply be thrown. If a String, it will be used as the error-message. (If it is a multi-line String, the first line will be used as the Error message, and the remaining lines will be used as the error-stack.)
  */
-declare
-function fail(...err: string[]): void
+declare function fail(...err: string[]): void
 /**
  * Creates a Jake FileTask.
  * @name  name The name of the Task
@@ -38,8 +34,7 @@ function fail(...err: string[]): void
  * @param action The action to perform for this task
  * @param opts Perform this task asynchronously. If you flag a task with this option, you must call the global `complete` method inside the task's action, for execution to proceed to the next task.
  */
-declare
-function file(
+declare function file(
     name: string,
     prereqs?: string[],
     action?: () => void,
@@ -52,8 +47,7 @@ function file(
  * @param action The action to perform for this task
  * @param opts Perform this task asynchronously. If you flag a task with this option, you must call the global `complete` method inside the task's action, for execution to proceed to the next task.
  */
-declare
-function rule(
+declare function rule(
     pattern: RegExp,
     source: string | {
         (name: string): string
@@ -66,8 +60,7 @@ function rule(
  * @param name The name of the namespace
  * @param scope The enclosing scope for the namespaced tasks
  */
-declare
-function namespace(name: string, scope: () => void): void
+declare function namespace(name: string, scope: () => void): void
 /**
  * 
  * @param name The name of the Task
@@ -75,8 +68,7 @@ function namespace(name: string, scope: () => void): void
  * @param action The action to perform for this task
  * @param opts 
  */
-declare
-function task(
+declare function task(
     name: string,
     prereqs?: string[],
     action?: (...params: any[]) => any,
@@ -87,10 +79,8 @@ function task(
  * @param packageFiles The files to include in the package
  * @param definition A function that creates the package definition
  */
-declare
-function npmPublishTask(name: string, packageFiles: string[]): jake$NpmPublishTask
-declare
-var npm$namespace$jake: {
+declare function npmPublishTask(name: string, packageFiles: string[]): jake$NpmPublishTask
+declare var npm$namespace$jake: {
     mkdirP: typeof jake$mkdirP,
     cpR: typeof jake$cpR,
     readdirR: typeof jake$readdirR,
@@ -115,8 +105,7 @@ declare interface jake$UtilOptions {
  * The jake.mkdirP utility recursively creates a set of nested directories. It will not throw an error if any of the directories already exists.
  * https://github.com/substack/node-mkdirp
  */
-declare
-export function jake$mkdirP(name: string, mode?: string, f?: (er: Error, made: any) => void): void
+declare export function jake$mkdirP(name: string, mode?: string, f?: (er: Error, made: any) => void): void
 
 
 /**
@@ -125,8 +114,7 @@ export function jake$mkdirP(name: string, mode?: string, f?: (er: Error, made: a
  * @param path the file/directory to copy,
  * @param destination the destination.
  */
-declare
-export function jake$cpR(
+declare export function jake$cpR(
     path: string,
     destination: string,
     opts?: jake$UtilOptions,
@@ -137,15 +125,13 @@ export function jake$cpR(
  * The jake.readdirR utility gives you a recursive directory listing, giving you output somewhat similar to the Unix find command. It only works with a directory name, and does not perform filtering or globbing.
  * @return  an array of filepaths for all files in the 'pkg' directory, and all its subdirectories.
  */
-declare
-export function jake$readdirR(name: string, opts?: jake$UtilOptions): string[]
+declare export function jake$readdirR(name: string, opts?: jake$UtilOptions): string[]
 
 
 /**
  * The jake.rmRf utility recursively removes a directory and all its contents.
  */
-declare
-export function jake$rmRf(name: string, opts?: jake$UtilOptions): void
+declare export function jake$rmRf(name: string, opts?: jake$UtilOptions): void
 
 declare interface jake$ExecOptions {
 
@@ -170,8 +156,7 @@ declare interface jake$ExecOptions {
         windowsVerbatimArguments?: boolean
 }
 
-declare
-export function jake$exec(cmds: string[], callback?: () => void, opts?: jake$ExecOptions): void
+declare export function jake$exec(cmds: string[], callback?: () => void, opts?: jake$ExecOptions): void
 
 
 /**
@@ -182,25 +167,21 @@ export function jake$exec(cmds: string[], callback?: () => void, opts?: jake$Exe
  * @event  stderr When the stderr for the child-process recieves data. This streams the stderr data. Passes one arg, the chunk of data.
  * @event  error When a shell-command
  */
-declare
-export type jake$Exec = {
+declare export type jake$Exec = {
     append(cmd: string): void,
     run(): void
 }
 
-declare
-export function jake$createExec(cmds: string[], callback?: () => void, opts?: jake$ExecOptions): jake$Exec
+declare export function jake$createExec(cmds: string[], callback?: () => void, opts?: jake$ExecOptions): jake$Exec
 
 declare interface jake$Logger {
     log(value: any): void,
         error(value: any): void
 }
 
-declare
-export var logger: jake$Logger;
+declare export var logger: jake$Logger;
 
-declare
-export var program: {
+declare export var program: {
     opts: {
         [name: string]: any,
         quiet: boolean
@@ -212,8 +193,7 @@ export var program: {
     }
 };
 
-declare
-export interface jake$TaskOptions {
+declare export interface jake$TaskOptions {
 
     /**
      * Perform this task asynchronously. If you flag a task with this option, you must call the global `complete` method inside the task's action, for execution to proceed to the next task.
@@ -232,8 +212,7 @@ export interface jake$TaskOptions {
  * A Jake Task
  * @event  complete
  */
-declare
-export class Task mixins NodeJS.EventEmitter {
+declare export class Task mixins NodeJS.EventEmitter {
 
     /**
      * 
@@ -266,8 +245,7 @@ export class Task mixins NodeJS.EventEmitter {
     value: any
 }
 
-declare
-export class DirectoryTask {
+declare export class DirectoryTask {
 
     /**
      * 
@@ -276,8 +254,7 @@ export class DirectoryTask {
     constructor(name: string): this
 }
 
-declare
-export interface jake$FileTaskOptions {
+declare export interface jake$FileTaskOptions {
 
     /**
      * Perform this task asynchronously. If you flag a task with this option, you must call the global `complete` method inside the task's action, for execution to proceed to the next task.
@@ -286,8 +263,7 @@ export interface jake$FileTaskOptions {
     async?: boolean
 }
 
-declare
-export class FileTask {
+declare export class FileTask {
 
     /**
      * 
@@ -303,8 +279,7 @@ declare interface jake$FileFilter {
     (filename: string): boolean
 }
 
-declare
-export class FileList {
+declare export class FileList {
     constructor(): this;
 
     /**
@@ -355,8 +330,7 @@ export class FileList {
     clearExclude(): void
 }
 
-declare
-export class PackageTask {
+declare export class PackageTask {
 
     /**
      * Instantiating a PackageTask creates a number of Jake Tasks that make packaging and distributing your software easy.
@@ -434,37 +408,27 @@ export class PackageTask {
     zipCommand: string
 }
 
-declare
-export class TestTask {
+declare export class TestTask {
     constructor(name: string, definition?: () => void): this
 }
 
-declare
-export class NpmPublishTask {
+declare export class NpmPublishTask {
     constructor(name: string, packageFiles: string[]): this;
     constructor(name: string, definition?: () => void): this
 }
 
-declare
-export function jake$addListener(event: string, listener: Function): NodeJS.EventEmitter
+declare export function jake$addListener(event: string, listener: Function): NodeJS.EventEmitter
 
-declare
-export function jake$on(event: string, listener: Function): NodeJS.EventEmitter
+declare export function jake$on(event: string, listener: Function): NodeJS.EventEmitter
 
-declare
-export function jake$once(event: string, listener: Function): NodeJS.EventEmitter
+declare export function jake$once(event: string, listener: Function): NodeJS.EventEmitter
 
-declare
-export function jake$removeListener(event: string, listener: Function): NodeJS.EventEmitter
+declare export function jake$removeListener(event: string, listener: Function): NodeJS.EventEmitter
 
-declare
-export function jake$removeAllListener(event: string): NodeJS.EventEmitter
+declare export function jake$removeAllListener(event: string): NodeJS.EventEmitter
 
-declare
-export function jake$setMaxListeners(n: number): void
+declare export function jake$setMaxListeners(n: number): void
 
-declare
-export function jake$listeners(event: string): Function[]
+declare export function jake$listeners(event: string): Function[]
 
-declare
-export function jake$emit(event: string, ...args: any[]): boolean
+declare export function jake$emit(event: string, ...args: any[]): boolean

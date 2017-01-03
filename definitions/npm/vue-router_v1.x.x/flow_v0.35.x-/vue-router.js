@@ -94,8 +94,7 @@ declare interface vuejs$Vue {
 declare interface vuejs$ComponentOption {
     route?: vuejs$TransitionHook<any, any, any, any, any >
 }
-declare
-var VueRouter: vuejs$RouterStatic;
+declare var VueRouter: vuejs$RouterStatic;
 declare module 'vue-router' {
     declare module.exports: typeof VueRouter
 }

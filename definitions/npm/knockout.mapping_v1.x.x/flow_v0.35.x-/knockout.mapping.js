@@ -67,5 +67,4 @@ declare interface KnockoutStatic {
 declare module 'knockout.mapping' {
     declare module.exports: typeof mapping
 }
-declare
-var mapping: KnockoutMapping;
+declare var mapping: KnockoutMapping;

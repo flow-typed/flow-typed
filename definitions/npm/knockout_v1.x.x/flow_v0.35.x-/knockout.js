@@ -613,8 +613,7 @@ declare interface KnockoutComponents {
         loaders: KnockoutComponentTypes$Loader[],
         getComponentNameForNode(node: Node): string
 }
-declare
-var ko: KnockoutStatic;
+declare var ko: KnockoutStatic;
 declare module 'knockout' {
     declare module.exports: typeof ko
 }

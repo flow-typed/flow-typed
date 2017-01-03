@@ -193,5 +193,4 @@ declare interface BraintreeStatic {
          */
         VERSION: string
 }
-declare
-var braintree: BraintreeStatic;
+declare var braintree: BraintreeStatic;

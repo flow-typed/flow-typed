@@ -32,5 +32,4 @@ declare interface BootboxService {
         removeLocale(name: string): void,
         setLocale(name: string): void
 }
-declare
-var $ngBootbox: BootboxService;
+declare var $ngBootbox: BootboxService;

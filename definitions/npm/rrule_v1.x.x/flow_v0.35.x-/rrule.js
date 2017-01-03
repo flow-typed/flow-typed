@@ -10,16 +10,14 @@ declare module 'rrule' {
     declare module.exports: typeof RRule
 }
 
-declare
-var npm$namespace$RRule: {
+declare var npm$namespace$RRule: {
     parseText: typeof RRule$parseText,
     fromText: typeof RRule$fromText,
     optionsToString: typeof RRule$optionsToString,
     parseString: typeof RRule$parseString,
     fromString: typeof RRule$fromString,
 }
-declare
-var FREQUENCIES: "YEARLY" |
+declare var FREQUENCIES: "YEARLY" |
     "MONTHLY" |
     "WEEKLY" |
     "DAILY" |
@@ -27,65 +25,45 @@ var FREQUENCIES: "YEARLY" |
     "MINUTELY" |
     "SECONDLY";
 
-declare
-var YEARLY: Frequency;
+declare var YEARLY: Frequency;
 
-declare
-var MONTHLY: Frequency;
+declare var MONTHLY: Frequency;
 
-declare
-var WEEKLY: Frequency;
+declare var WEEKLY: Frequency;
 
-declare
-var DAILY: Frequency;
+declare var DAILY: Frequency;
 
-declare
-var HOURLY: Frequency;
+declare var HOURLY: Frequency;
 
-declare
-var MINUTELY: Frequency;
+declare var MINUTELY: Frequency;
 
-declare
-var SECONDLY: Frequency;
+declare var SECONDLY: Frequency;
 
-declare
-var MO: RRule$Weekday;
+declare var MO: RRule$Weekday;
 
-declare
-var TU: RRule$Weekday;
+declare var TU: RRule$Weekday;
 
-declare
-var WE: RRule$Weekday;
+declare var WE: RRule$Weekday;
 
-declare
-var TH: RRule$Weekday;
+declare var TH: RRule$Weekday;
 
-declare
-var FR: RRule$Weekday;
+declare var FR: RRule$Weekday;
 
-declare
-var SA: RRule$Weekday;
+declare var SA: RRule$Weekday;
 
-declare
-var SU: RRule$Weekday;
+declare var SU: RRule$Weekday;
 
-declare
-var DEFAULT_OPTIONS: RRule$Options;
+declare var DEFAULT_OPTIONS: RRule$Options;
 
-declare
-function RRule$parseText(text: string, language?: any): RRule$Options
+declare function RRule$parseText(text: string, language?: any): RRule$Options
 
-declare
-function RRule$fromText(text: string, language?: any): RRule
+declare function RRule$fromText(text: string, language?: any): RRule
 
-declare
-function RRule$optionsToString(options: RRule$Options): string
+declare function RRule$optionsToString(options: RRule$Options): string
 
-declare
-function RRule$parseString(rfcString: string): RRule$Options
+declare function RRule$parseString(rfcString: string): RRule$Options
 
-declare
-function RRule$fromString(value: string): RRule
+declare function RRule$fromString(value: string): RRule
 
 declare class RRuleSet mixins RRule {
 

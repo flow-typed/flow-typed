@@ -110,8 +110,7 @@ declare interface ArgsCheck {
 declare interface UrlUtil {
     makeAbsolute(url: string): string
 }
-declare
-var cordova: Cordova;
+declare var cordova: Cordova;
 declare module 'cordova' {
     declare module.exports: typeof cordova
 }

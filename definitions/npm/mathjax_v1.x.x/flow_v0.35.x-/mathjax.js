@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var MathJax: jax$IMathJax;
-declare
-export interface jax$IMathJax {
+declare var MathJax: jax$IMathJax;
+declare export interface jax$IMathJax {
     Hub?: jax$IMathJaxHub,
         Ajax?: jax$IAjax,
         Message?: jax$IMessage,
@@ -20,8 +18,7 @@ export interface jax$IMathJax {
         OutputJax?: jax$IOutputJax
 }
 
-declare
-export interface jax$ICallback {
+declare export interface jax$ICallback {
     (fn: Function): jax$ICallbackObject,
     (fns: Function[]): jax$ICallbackObject,
     (objs: any[]): jax$ICallbackObject,
@@ -34,15 +31,13 @@ export interface jax$ICallback {
         Hooks(reset: boolean): jax$IHooks
 }
 
-declare
-export interface jax$IHooks {
+declare export interface jax$IHooks {
     Add(hook: any, priority: number): jax$ICallbackObject,
         Remove(hook: jax$ICallbackObject): void,
         Execute(): jax$ICallbackObject
 }
 
-declare
-export interface jax$IQueue {
+declare export interface jax$IQueue {
     pending: number,
         running: number,
         queue: any[],
@@ -54,8 +49,7 @@ export interface jax$IQueue {
         call(): void
 }
 
-declare
-export interface jax$ISignal {
+declare export interface jax$ISignal {
     name: string,
         posted: any[],
         listeners: jax$ICallbackObject[],
@@ -70,8 +64,7 @@ export interface jax$ISignal {
         ExecuteHook(message: string): void
 }
 
-declare
-export interface jax$ICallbackObject {
+declare export interface jax$ICallbackObject {
     hook: number,
         data: any[],
         object: any,
@@ -80,8 +73,7 @@ export interface jax$ICallbackObject {
         reset(): void
 }
 
-declare
-export interface jax$IMathJaxHub {
+declare export interface jax$IMathJaxHub {
     config?: jax$IMathJaxConfig,
         processUpdateTime?: number,
         processUpdateDelay?: number,
@@ -110,16 +102,14 @@ export interface jax$IMathJaxHub {
         formatError(script: any, error: any): void
 }
 
-declare
-export interface jax$IRegister {
+declare export interface jax$IRegister {
     PreProcessor(callBack: any): void,
         MessageHook(type: string, callBack: any): void,
         StartupHook(type: string, callBack: any): void,
         LoadHook(file: string, callBack: Function): void
 }
 
-declare
-export interface jax$IBrowserInfo {
+declare export interface jax$IBrowserInfo {
     version: string,
         isMac?: boolean,
         isPC?: boolean,
@@ -134,8 +124,7 @@ export interface jax$IBrowserInfo {
         Select(choices: any): void
 }
 
-declare
-export interface jax$IAjax {
+declare export interface jax$IAjax {
     timeout?: number,
         STATUS: jax$ISTATUS,
         loaded: any,
@@ -152,14 +141,12 @@ export interface jax$IAjax {
         fileURL(file: string): string
 }
 
-declare
-export interface jax$ISTATUS {
+declare export interface jax$ISTATUS {
     OK: string,
         ERROR: string
 }
 
-declare
-export interface jax$IMessage {
+declare export interface jax$IMessage {
     Set(message: string, n: number, delay: number): number,
         Clear(n: number, delay: number): void,
         Remove(): void,
@@ -168,8 +155,7 @@ export interface jax$IMessage {
         Log(): string
 }
 
-declare
-export interface jax$IHTML {
+declare export interface jax$IHTML {
     Cookie?: jax$ICookie,
         Element(type: string, attributes: any, contents: any): any,
         addElement(parent: any, type: string, attributes: any, content: any): any,
@@ -179,8 +165,7 @@ export interface jax$IHTML {
         getScript(script: string): string
 }
 
-declare
-export interface jax$ICookie {
+declare export interface jax$ICookie {
     prefix?: string,
         expires?: number,
         Set(name: string, data: any): void,
@@ -188,8 +173,7 @@ export interface jax$ICookie {
         Get(name: string, obj: any): any
 }
 
-declare
-export interface jax$IMenuSettings {
+declare export interface jax$IMenuSettings {
     zoom?: string,
         CTRL?: boolean,
         ALT?: boolean,
@@ -202,14 +186,12 @@ export interface jax$IMenuSettings {
         mpMouse?: boolean
 }
 
-declare
-export interface jax$IErrorSettings {
+declare export interface jax$IErrorSettings {
     message?: string[],
         style?: any
 }
 
-declare
-export interface jax$IMathJaxConfig {
+declare export interface jax$IMathJaxConfig {
     MathZoom?: jax$IMathZoom,
         MathMenu?: jax$IMathMenu,
         MathEvents?: jax$IMathEvents,
@@ -251,13 +233,11 @@ export interface jax$IMathJaxConfig {
         v1 .0 - compatible?: boolean
 }
 
-declare
-export interface jax$IMathZoom {
+declare export interface jax$IMathZoom {
     styles: any
 }
 
-declare
-export interface jax$IMathMenu {
+declare export interface jax$IMathMenu {
     delay?: number,
         helpURL?: string,
         showRenderer?: boolean,
@@ -270,14 +250,12 @@ export interface jax$IMathMenu {
         styles?: any
 }
 
-declare
-export interface jax$IMathEvents {
+declare export interface jax$IMathEvents {
     hover?: number,
         styles?: any
 }
 
-declare
-export interface jax$IFontWarnings {
+declare export interface jax$IFontWarnings {
     messageStyle?: any,
         Message?: jax$IHTMLMessages,
         HTML?: jax$IHTMLSnippets,
@@ -286,15 +264,13 @@ export interface jax$IFontWarnings {
         fadeoutTime?: number
 }
 
-declare
-export interface jax$IHTMLMessages {
+declare export interface jax$IHTMLMessages {
     webFont?: any[],
         imageFonts?: any[],
         noFonts?: any[]
 }
 
-declare
-export interface jax$IHTMLSnippets {
+declare export interface jax$IHTMLSnippets {
     closeBox?: string,
         webfonts?: string,
         fonts?: string,
@@ -302,8 +278,7 @@ export interface jax$IHTMLSnippets {
         TeXfonts?: string
 }
 
-declare
-export interface jax$ISafe {
+declare export interface jax$ISafe {
     allow?: jax$ISafeAllow,
         sizeMin?: number,
         sizeMax?: number,
@@ -312,8 +287,7 @@ export interface jax$ISafe {
         safeRequire?: jax$ISafeRequire
 }
 
-declare
-export interface jax$ISafeAllow {
+declare export interface jax$ISafeAllow {
     URLs?: string,
         classes?: string,
         cssIDs?: string,
@@ -322,16 +296,14 @@ export interface jax$ISafeAllow {
         fontsize?: string
 }
 
-declare
-export interface jax$ISafeProtocols {
+declare export interface jax$ISafeProtocols {
     http?: boolean,
         https?: boolean,
         file?: boolean,
         javascript?: boolean
 }
 
-declare
-export interface jax$ISafeStyles {
+declare export interface jax$ISafeStyles {
     color?: boolean,
         backgroundColor?: boolean,
         border?: boolean,
@@ -347,8 +319,7 @@ export interface jax$ISafeStyles {
         outline?: boolean
 }
 
-declare
-export interface jax$ISafeRequire {
+declare export interface jax$ISafeRequire {
     action?: boolean,
         amscd?: boolean,
         amsmath?: boolean,
@@ -372,22 +343,19 @@ export interface jax$ISafeRequire {
         verb?: boolean
 }
 
-declare
-export interface jax$IMatchWebFonts {
+declare export interface jax$IMatchWebFonts {
     matchFor?: jax$IMatchFor,
         fontCheckDelay?: number,
         fontCheckTimeout?: number
 }
 
-declare
-export interface jax$IMatchFor {
+declare export interface jax$IMatchFor {
     HTML - CSS?: boolean,
         NativeMML?: boolean,
         SVG?: boolean
 }
 
-declare
-export interface jax$ISVGOutputProcessor {
+declare export interface jax$ISVGOutputProcessor {
     scale?: number,
         minScaleAdjust?: number,
         font?: string,
@@ -404,27 +372,23 @@ export interface jax$ISVGOutputProcessor {
         tooltip?: jax$IToolTip
 }
 
-declare
-export interface jax$ILineBreaks {
+declare export interface jax$ILineBreaks {
     automatic?: boolean,
         width?: string
 }
 
-declare
-export interface jax$IToolTip {
+declare export interface jax$IToolTip {
     delayPost: number,
         delayClear: number,
         offsetX: number,
         offsetY: number
 }
 
-declare
-export interface jax$IMMLorHTMLConfiguration {
+declare export interface jax$IMMLorHTMLConfiguration {
     prefer?: jax$IBrowserPreference
 }
 
-declare
-export interface jax$IBrowserPreference {
+declare export interface jax$IBrowserPreference {
     MSIE?: string,
         Firefox?: string,
         Safari?: string,
@@ -433,16 +397,14 @@ export interface jax$IBrowserPreference {
         other?: string
 }
 
-declare
-export interface jax$INativeMMLOutputProcessor {
+declare export interface jax$INativeMMLOutputProcessor {
     scale?: number,
         minScaleAdjust?: number,
         matchFontHeight?: boolean,
         styles?: any
 }
 
-declare
-export interface jax$IHTMLCSSOutputProcessor {
+declare export interface jax$IHTMLCSSOutputProcessor {
     scale?: number,
         minScaleAdjust?: number,
         availableFonts?: string[],
@@ -461,27 +423,23 @@ export interface jax$IHTMLCSSOutputProcessor {
         tooltip?: jax$IToolTip
 }
 
-declare
-export interface jax$ICommonHTMLOutputProcessor {
+declare export interface jax$ICommonHTMLOutputProcessor {
     scale?: number,
         minScaleAdjust?: number,
         mtextFontInherit?: boolean,
         linebreaks?: jax$ILineBreaks
 }
 
-declare
-export interface jax$IAsciiMathInputProcessor {
+declare export interface jax$IAsciiMathInputProcessor {
     displaystyle?: boolean,
         decimal?: string
 }
 
-declare
-export interface jax$IMathMLInputProcessor {
+declare export interface jax$IMathMLInputProcessor {
     useMathMLspacing?: boolean
 }
 
-declare
-export interface jax$ITeXInputProcessor {
+declare export interface jax$ITeXInputProcessor {
     TagSide?: string,
         TagIndent?: string,
         MultLineWidth?: string,
@@ -492,8 +450,7 @@ export interface jax$ITeXInputProcessor {
         extensions?: string[]
 }
 
-declare
-export interface jax$IEquationNumbers {
+declare export interface jax$IEquationNumbers {
     autoNumber?: string,
         formatNumber?: (n: number) => string,
         formatTag?: (n: number) => string,
@@ -502,13 +459,11 @@ export interface jax$IEquationNumbers {
         useLabelIds?: boolean
 }
 
-declare
-export interface jax$IJSMath2jaxPreprocessor {
+declare export interface jax$IJSMath2jaxPreprocessor {
     preview: any
 }
 
-declare
-export interface jax$IAsciimath2jaxPreprocessor {
+declare export interface jax$IAsciimath2jaxPreprocessor {
     delimiters?: any,
         preview?: any,
         skipTags?: string[],
@@ -516,13 +471,11 @@ export interface jax$IAsciimath2jaxPreprocessor {
         processClass?: string
 }
 
-declare
-export interface jax$IMML2jaxPreprocessor {
+declare export interface jax$IMML2jaxPreprocessor {
     preview?: any
 }
 
-declare
-export interface jax$ITEX2jaxPreprocessor {
+declare export interface jax$ITEX2jaxPreprocessor {
     inlineMath?: any,
         displayMath?: any,
         balanceBraces?: boolean,
@@ -534,8 +487,7 @@ export interface jax$ITEX2jaxPreprocessor {
         processClass?: string
 }
 
-declare
-export interface jax$ILocalization {
+declare export interface jax$ILocalization {
     locale: string,
         directory: string,
         strings: any,
@@ -552,8 +504,7 @@ export interface jax$ILocalization {
         Try(spec: any): void
 }
 
-declare
-export interface jax$IInputJax {
+declare export interface jax$IInputJax {
     id: string,
         version: string,
         directory: string,
@@ -564,8 +515,7 @@ export interface jax$IInputJax {
         needsUpdate(element: any): boolean
 }
 
-declare
-export interface jax$IOutputJax {
+declare export interface jax$IOutputJax {
     id: string,
         version: string,
         directory: string,
@@ -581,8 +531,7 @@ export interface jax$IOutputJax {
         Zoom(jax: any, span: any, math: any, Mw: number, Mh: number): jax$IZoomStruct
 }
 
-declare
-export interface jax$IZoomStruct {
+declare export interface jax$IZoomStruct {
     Y: number,
         mW: number,
         mH: number,
@@ -590,8 +539,7 @@ export interface jax$IZoomStruct {
         zH: number
 }
 
-declare
-export interface jax$IElementJax {
+declare export interface jax$IElementJax {
     id: string,
         version: string,
         directory: string,

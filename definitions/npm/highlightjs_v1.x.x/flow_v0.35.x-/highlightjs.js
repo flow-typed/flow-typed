@@ -10,8 +10,7 @@ declare module 'highlight.js' {
     declare module.exports: typeof hljs
 }
 
-declare
-var npm$namespace$hljs: {
+declare var npm$namespace$hljs: {
     highlight: typeof hljs$highlight,
     highlightAuto: typeof hljs$highlightAuto,
     fixMarkup: typeof hljs$fixMarkup,
@@ -25,130 +24,94 @@ var npm$namespace$hljs: {
     inherit: typeof hljs$inherit,
     COMMENT: typeof hljs$COMMENT,
 }
-declare
-export function hljs$highlight(
+declare export function hljs$highlight(
     name: string,
     value: string,
     ignore_illegals?: boolean,
     continuation?: boolean): hljs$IHighlightResult
 
-declare
-export function hljs$highlightAuto(value: string, languageSubset?: string[]): hljs$IAutoHighlightResult
+declare export function hljs$highlightAuto(value: string, languageSubset?: string[]): hljs$IAutoHighlightResult
 
-declare
-export function hljs$fixMarkup(value: string): string
+declare export function hljs$fixMarkup(value: string): string
 
-declare
-export function hljs$highlightBlock(block: Node): void
+declare export function hljs$highlightBlock(block: Node): void
 
-declare
-export function hljs$configure(options: hljs$IOptions): void
+declare export function hljs$configure(options: hljs$IOptions): void
 
-declare
-export function hljs$initHighlighting(): void
+declare export function hljs$initHighlighting(): void
 
-declare
-export function hljs$initHighlightingOnLoad(): void
+declare export function hljs$initHighlightingOnLoad(): void
 
-declare
-export function hljs$registerLanguage(name: string, language: (hljs?: hljs$HLJSStatic) => hljs$IModeBase): void
+declare export function hljs$registerLanguage(name: string, language: (hljs?: hljs$HLJSStatic) => hljs$IModeBase): void
 
-declare
-export function hljs$listLanguages(): string[]
+declare export function hljs$listLanguages(): string[]
 
-declare
-export function hljs$getLanguage(name: string): hljs$IMode
+declare export function hljs$getLanguage(name: string): hljs$IMode
 
-declare
-export function hljs$inherit(parent: Object, obj: Object): Object
+declare export function hljs$inherit(parent: Object, obj: Object): Object
 
-declare
-export function hljs$COMMENT(
+declare export function hljs$COMMENT(
     begin: (string | RegExp),
     end: (string | RegExp),
     inherits: hljs$IModeBase): hljs$IMode
 
-declare
-export var IDENT_RE: string;
+declare export var IDENT_RE: string;
 
-declare
-export var UNDERSCORE_IDENT_RE: string;
+declare export var UNDERSCORE_IDENT_RE: string;
 
-declare
-export var NUMBER_RE: string;
+declare export var NUMBER_RE: string;
 
-declare
-export var C_NUMBER_RE: string;
+declare export var C_NUMBER_RE: string;
 
-declare
-export var BINARY_NUMBER_RE: string;
+declare export var BINARY_NUMBER_RE: string;
 
-declare
-export var RE_STARTERS_RE: string;
+declare export var RE_STARTERS_RE: string;
 
-declare
-export var BACKSLASH_ESCAPE: hljs$IMode;
+declare export var BACKSLASH_ESCAPE: hljs$IMode;
 
-declare
-export var APOS_STRING_MODE: hljs$IMode;
+declare export var APOS_STRING_MODE: hljs$IMode;
 
-declare
-export var QUOTE_STRING_MODE: hljs$IMode;
+declare export var QUOTE_STRING_MODE: hljs$IMode;
 
-declare
-export var PHRASAL_WORDS_MODE: hljs$IMode;
+declare export var PHRASAL_WORDS_MODE: hljs$IMode;
 
-declare
-export var C_LINE_COMMENT_MODE: hljs$IMode;
+declare export var C_LINE_COMMENT_MODE: hljs$IMode;
 
-declare
-export var C_BLOCK_COMMENT_MODE: hljs$IMode;
+declare export var C_BLOCK_COMMENT_MODE: hljs$IMode;
 
-declare
-export var HASH_COMMENT_MODE: hljs$IMode;
+declare export var HASH_COMMENT_MODE: hljs$IMode;
 
-declare
-export var NUMBER_MODE: hljs$IMode;
+declare export var NUMBER_MODE: hljs$IMode;
 
-declare
-export var C_NUMBER_MODE: hljs$IMode;
+declare export var C_NUMBER_MODE: hljs$IMode;
 
-declare
-export var BINARY_NUMBER_MODE: hljs$IMode;
+declare export var BINARY_NUMBER_MODE: hljs$IMode;
 
-declare
-export var CSS_NUMBER_MODE: hljs$IMode;
+declare export var CSS_NUMBER_MODE: hljs$IMode;
 
-declare
-export var REGEX_MODE: hljs$IMode;
+declare export var REGEX_MODE: hljs$IMode;
 
-declare
-export var TITLE_MODE: hljs$IMode;
+declare export var TITLE_MODE: hljs$IMode;
 
-declare
-export var UNDERSCORE_TITLE_MODE: hljs$IMode;
+declare export var UNDERSCORE_TITLE_MODE: hljs$IMode;
 
-declare
-export interface hljs$IHighlightResultBase {
+declare export interface hljs$IHighlightResultBase {
     relevance: number,
         language: string,
         value: string
 }
 
-declare
-export type hljs$IAutoHighlightResult = {
+declare export type hljs$IAutoHighlightResult = {
     second_best?: hljs$IAutoHighlightResult
 } & hljs$IHighlightResultBase
 
 
-declare
-export type hljs$IHighlightResult = {
+declare export type hljs$IHighlightResult = {
     top: hljs$ICompiledMode
 } & hljs$IHighlightResultBase
 
 
-declare
-export interface hljs$HLJSStatic {
+declare export interface hljs$HLJSStatic {
     inherit(parent: Object, obj: Object): Object,
         IDENT_RE: string,
         UNDERSCORE_IDENT_RE: string,
@@ -172,8 +135,7 @@ export interface hljs$HLJSStatic {
         UNDERSCORE_TITLE_MODE: hljs$IMode
 }
 
-declare
-export interface hljs$IModeBase {
+declare export interface hljs$IModeBase {
     className?: string,
         aliases?: string[],
         begin?: (string | RegExp),
@@ -194,15 +156,13 @@ export interface hljs$IModeBase {
         variants?: hljs$IMode[]
 }
 
-declare
-export type hljs$IMode = {
+declare export type hljs$IMode = {
     keywords?: any,
     contains?: hljs$IMode[]
 } & hljs$IModeBase
 
 
-declare
-export type hljs$ICompiledMode = {
+declare export type hljs$ICompiledMode = {
     compiled: boolean,
     contains?: hljs$ICompiledMode[],
     keywords?: Object,
@@ -211,8 +171,7 @@ export type hljs$ICompiledMode = {
 } & hljs$IModeBase
 
 
-declare
-export interface hljs$IOptions {
+declare export interface hljs$IOptions {
     classPrefix?: string,
         tabReplace?: string,
         useBR?: boolean,

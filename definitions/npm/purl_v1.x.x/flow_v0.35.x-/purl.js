@@ -10,8 +10,7 @@ declare interface purl$ParameterMap {
     [parameterName: string]: string
 }
 
-declare
-export interface purl$Url {
+declare export interface purl$Url {
 
     /**
      * The .attr() method is used to return information on various parts of the URL.

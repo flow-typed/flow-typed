@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$L: {
+declare var npm$namespace$L: {
         curve: typeof L$curve,
     }
     /**
      * Drawing Bezier curves and other complex shapes.
      */
-declare
-function L$curve(path: any[], options?: L$PathOptions): Path
+declare function L$curve(path: any[], options?: L$PathOptions): Path

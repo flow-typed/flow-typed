@@ -336,10 +336,8 @@ declare type SystemJSLoader$System = {
      */
     loads: SystemJSLoader$PackageList<any >
 } & SystemJSLoader$Config & SystemJSLoader$SystemJSSystemFields
-declare
-var SystemJS: SystemJSLoader$System;
-declare
-var System: SystemJSLoader$System;
+declare var SystemJS: SystemJSLoader$System;
+declare var System: SystemJSLoader$System;
 declare module 'systemjs' {
     declare var system: systemJSLoader.System;
     declare module.exports: typeof system

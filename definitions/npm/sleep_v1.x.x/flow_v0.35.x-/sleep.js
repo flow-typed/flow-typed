@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$___node_sleep: {
+declare var npm$namespace$___node_sleep: {
         sleep: typeof ___node_sleep$sleep,
         usleep: typeof ___node_sleep$usleep,
     }
@@ -16,15 +15,13 @@ var npm$namespace$___node_sleep: {
      * Sleep for <i>n</i> seconds.
      * @param n Number of seconds to sleep.
      */
-declare
-function ___node_sleep$sleep(n: number): void
+declare function ___node_sleep$sleep(n: number): void
 
 
 /**
  * Sleep for n microseconds.
  * @param n Number of microseconds to sleep; 1 second is 1,000,000 microseconds.
  */
-declare
-function ___node_sleep$usleep(n: number): voiddeclare module 'sleep' {
+declare function ___node_sleep$usleep(n: number): voiddeclare module 'sleep' {
     declare module.exports: typeof ___node_sleep
 }

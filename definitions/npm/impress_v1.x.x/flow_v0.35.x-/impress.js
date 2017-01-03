@@ -13,5 +13,4 @@ declare interface Impress {
         prev(): any,
         next(): any
 }
-declare
-function impress(): Impress
+declare function impress(): Impress

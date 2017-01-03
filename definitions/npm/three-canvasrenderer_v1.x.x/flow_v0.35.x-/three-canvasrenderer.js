@@ -6,29 +6,25 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type THREE$SpriteCanvasMaterialParameters = {
+declare export type THREE$SpriteCanvasMaterialParameters = {
     color?: number,
     program?: (context: any, color: Color) => void
 } & MaterialParameters
 
 
-declare
-export class SpriteCanvasMaterial mixins Material {
+declare export class SpriteCanvasMaterial mixins Material {
     constructor(parameters?: THREE$SpriteCanvasMaterialParameters): this;
     color: Color;
     program(context: any, color: Color): void
 }
 
-declare
-export interface THREE$CanvasRendererParameters {
+declare export interface THREE$CanvasRendererParameters {
     canvas?: HTMLCanvasElement,
         devicePixelRatio?: number,
         alpha?: boolean
 }
 
-declare
-export class CanvasRenderer mixins Renderer {
+declare export class CanvasRenderer mixins Renderer {
     constructor(parameters?: THREE$CanvasRendererParameters): this;
     domElement: HTMLCanvasElement;
     autoClear: boolean;

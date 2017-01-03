@@ -89,5 +89,4 @@ declare interface LessStatic {
 declare module 'less' {
     declare module.exports: typeof less
 }
-declare
-var less: LessStatic;
+declare var less: LessStatic;

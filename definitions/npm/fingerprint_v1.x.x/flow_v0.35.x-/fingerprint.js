@@ -98,5 +98,4 @@ declare interface FingerprintJs$FingerprintOption {
          */
         hasher?: (key: string, seed: number) => number
 }
-declare
-var Fingerprint: FingerprintJs$FingerprintStatic;
+declare var Fingerprint: FingerprintJs$FingerprintStatic;

@@ -6,11 +6,9 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface I18next$I18nextStatic {}
+declare export interface I18next$I18nextStatic {}
 
-declare
-export interface I18next$I18nextOptions {}
+declare export interface I18next$I18nextOptions {}
 declare interface IResourceStore {
     [language: string]: IResourceStoreLanguage
 }
@@ -28,10 +26,8 @@ declare type I18nTranslateOptions = {
     count?: any,
     context?: any
 } & I18next$I18nextOptions
-declare
-export interface I18nextOptions {}
-declare
-export interface I18nextStatic {}
+declare export interface I18nextOptions {}
+declare export interface I18nextStatic {}
 declare interface JQueryStatic {
     i18n: I18next$I18nextStatic,
         t: (key: string, options?: any) => string
@@ -39,8 +35,7 @@ declare interface JQueryStatic {
 declare interface JQuery {
     i18n: (options?: I18next$I18nextOptions) => void
 }
-declare
-var i18n: I18next$I18nextStatic;
+declare var i18n: I18next$I18nextStatic;
 declare module 'i18next' {
     declare module.exports: typeof i18n
 }

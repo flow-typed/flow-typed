@@ -11,8 +11,7 @@ declare module 'winston' {
         DynamoDB: DynamoDB
     }
 }
-declare
-export interface DynamoDBTransportOptions {
+declare export interface DynamoDBTransportOptions {
     useEnvironment?: boolean,
         accessKeyId?: string,
         secretAccessKey?: string,
@@ -21,12 +20,10 @@ export interface DynamoDBTransportOptions {
         level: string,
         dynamoDoc?: boolean
 }
-declare
-export type DynamoDBTransportInstance = {
+declare export type DynamoDBTransportInstance = {
     new(options?: DynamoDBTransportOptions): DynamoDBTransportInstance
 } & TransportInstance
-declare
-export class DynamoDB mixins winston.Transport, DynamoDBTransportInstance {
+declare export class DynamoDB mixins winston.Transport, DynamoDBTransportInstance {
     regions: string[];
     name: string;
     level: string;

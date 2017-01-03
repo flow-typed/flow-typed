@@ -1933,44 +1933,31 @@ declare interface ext_dojo$reverse {
     (): void
 }
 
-declare
-var beforeBegin: Object;
+declare var beforeBegin: Object;
 
-declare
-var curve: Object;
+declare var curve: Object;
 
-declare
-var delay: Object;
+declare var delay: Object;
 
-declare
-var duration: number;
+declare var duration: number;
 
-declare
-var easing: Object;
+declare var easing: Object;
 
-declare
-var onAnimate: Object;
+declare var onAnimate: Object;
 
-declare
-var onBegin: Object;
+declare var onBegin: Object;
 
-declare
-var onEnd: Object;
+declare var onEnd: Object;
 
-declare
-var onPause: Object;
+declare var onPause: Object;
 
-declare
-var onPlay: Object;
+declare var onPlay: Object;
 
-declare
-var onStop: Object;
+declare var onStop: Object;
 
-declare
-var rate: Object;
+declare var rate: Object;
 
-declare
-var repeat: Object;
+declare var repeat: Object;
 
 
 /**

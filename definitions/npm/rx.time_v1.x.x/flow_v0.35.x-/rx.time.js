@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Rx$Observable<T>{
+declare export interface Rx$Observable<T>{
     delaySubscription(dueTime: number, scheduler?: IScheduler): Rx$Observable<T>,
     delayWithSelector(delayDurationSelector: (item: T) => number): Rx$Observable<T>,
     delayWithSelector(

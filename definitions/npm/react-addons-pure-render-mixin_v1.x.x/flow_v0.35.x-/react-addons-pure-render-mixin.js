@@ -9,8 +9,7 @@
 declare type ___React$PureRenderMixin = {} & Mixin
 
 
-declare
-export var PureRenderMixin: ___React$PureRenderMixin;
+declare export var PureRenderMixin: ___React$PureRenderMixin;
 declare module 'react-addons-pure-render-mixin' {
     declare var PureRenderMixin: ___React$PureRenderMixin;
     declare module.exports: typeof PureRenderMixin

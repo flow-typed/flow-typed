@@ -9,8 +9,7 @@
 declare module 'react-swf' {
     declare module.exports: typeof ReactSWF
 }
-declare
-var ReactSWF: typeof undefined;
+declare var ReactSWF: typeof undefined;
 declare interface rswf$State {}
 
 declare interface rswf$Props {
@@ -130,8 +129,7 @@ declare interface rswf$Props {
         flashvars?: Object | string
 }
 
-declare
-export class ReactSWF mixins ___React.Component<rswf$Props, rswf$State>{
+declare export class ReactSWF mixins ___React.Component<rswf$Props, rswf$State>{
 
     /**
      * Returns the Flash Player object DOM node.

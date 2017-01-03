@@ -598,5 +598,4 @@ declare interface CalHeatMap$Label {
         */
         height?: number
 }
-declare
-var CalHeatMap: CalHeatMap$CalHeatMapStatic;
+declare var CalHeatMap: CalHeatMap$CalHeatMapStatic;

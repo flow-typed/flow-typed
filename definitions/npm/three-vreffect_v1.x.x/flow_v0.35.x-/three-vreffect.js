@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class VREffect {
+declare export class VREffect {
     constructor(renderer: Renderer, callback?: (params: string) => void): this;
     render(scene: Scene, camera: Camera): void;
     setSize(width: number, height: number): void;
@@ -19,16 +18,14 @@ export class VREffect {
     setVRDisplay(display: VRDisplay): void
 }
 
-declare
-export interface THREE$VRFov {
+declare export interface THREE$VRFov {
     leftTan: number,
         rightTan: number,
         upTan: number,
         downTan: number
 }
 
-declare
-export interface THREE$VREffectOffset {
+declare export interface THREE$VREffectOffset {
     scale: number,
         offset: number
 }

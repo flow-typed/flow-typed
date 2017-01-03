@@ -215,5 +215,4 @@ declare module 'Optimization' {
             isValid(): boolean
     }
 }
-declare
-var LinearOptimizationService: undefined.LinearOptimizationService;
+declare var LinearOptimizationService: undefined.LinearOptimizationService;

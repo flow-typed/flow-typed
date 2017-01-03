@@ -34,5 +34,4 @@ declare interface Rivets$Rivets {
         bind(element: JQuery, models: Object, options?: Object): Rivets$View,
         bind(element: Array<HTMLElement>, models: Object, options?: Object): Rivets$View
 }
-declare
-var rivets: Rivets$Rivets;
+declare var rivets: Rivets$Rivets;

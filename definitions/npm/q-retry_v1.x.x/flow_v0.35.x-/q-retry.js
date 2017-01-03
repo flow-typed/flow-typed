@@ -7,20 +7,17 @@
  */
 
 
-declare
-var npm$namespace$Q: {
+declare var npm$namespace$Q: {
     retry: typeof Q$retry,
 }
-declare
-export interface Q$IRetryOptions {
+declare export interface Q$IRetryOptions {
     limit?: number,
         interval?: number,
         maxInterval?: number,
         intervalMultiplier?: number
 }
 
-declare
-export function Q$retry<U>(
+declare export function Q$retry<U>(
         process: () => IPromise<U>,
         onFail: (reason: any, retries: number) => void,
         limit: number): Q$Promise<U >

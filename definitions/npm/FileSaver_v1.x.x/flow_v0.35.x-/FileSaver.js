@@ -16,8 +16,7 @@
 declare interface FileSaver {
     (data: Blob, filename: string, disableAutoBOM?: boolean): void
 }
-declare
-var saveAs: FileSaver;
+declare var saveAs: FileSaver;
 declare module 'file-saver' {
     declare var fileSaver: {
         saveAs: typeof saveAs

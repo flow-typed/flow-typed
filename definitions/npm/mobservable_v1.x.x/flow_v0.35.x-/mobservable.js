@@ -113,14 +113,12 @@ declare interface Mobservable$IMakeReactiveOptions {
         name?: string
 }
 
-declare
-export interface Mobservable$IContextInfoStruct {
+declare export interface Mobservable$IContextInfoStruct {
     object: Object,
         name: string
 }
 
-declare
-export type Mobservable$IContextInfo = Mobservable$IContextInfoStruct | string;
+declare export type Mobservable$IContextInfo = Mobservable$IContextInfoStruct | string;
 
 declare interface Mobservable$Lambda {
     (): void,

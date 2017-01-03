@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class vec2 mixins Float32Array {
+declare export class vec2 mixins Float32Array {
 
     /**
      * Creates a new, empty vec2
@@ -394,8 +393,7 @@ export class vec2 mixins Float32Array {
      */
     equals(a: vec2 | number[], b: vec2 | number[]): boolean
 }
-declare
-export class vec3 mixins Float32Array {
+declare export class vec3 mixins Float32Array {
 
     /**
      * Creates a new, empty vec3
@@ -848,8 +846,7 @@ export class vec3 mixins Float32Array {
      */
     equals(a: vec3 | number[], b: vec3 | number[]): boolean
 }
-declare
-export class vec4 mixins Float32Array {
+declare export class vec4 mixins Float32Array {
 
     /**
      * Creates a new, empty vec4
@@ -1211,8 +1208,7 @@ export class vec4 mixins Float32Array {
      */
     equals(a: vec4 | number[], b: vec4 | number[]): boolean
 }
-declare
-export class mat2 mixins Float32Array {
+declare export class mat2 mixins Float32Array {
 
     /**
      * Creates a new identity mat2
@@ -1439,8 +1435,7 @@ export class mat2 mixins Float32Array {
      */
     multiplyScalarAndAdd(out: mat2, a: mat2, b: mat2, scale: number): mat2
 }
-declare
-export class mat2d mixins Float32Array {
+declare export class mat2d mixins Float32Array {
 
     /**
      * Creates a new identity mat2d
@@ -1674,8 +1669,7 @@ export class mat2d mixins Float32Array {
      */
     equals(a: mat2d, b: mat2d): boolean
 }
-declare
-export class mat3 mixins Float32Array {
+declare export class mat3 mixins Float32Array {
 
     /**
      * Creates a new identity mat3
@@ -1975,8 +1969,7 @@ export class mat3 mixins Float32Array {
      */
     equals(a: mat3, b: mat3): boolean
 }
-declare
-export class mat4 mixins Float32Array {
+declare export class mat4 mixins Float32Array {
 
     /**
      * Creates a new identity mat4
@@ -2513,8 +2506,7 @@ export class mat4 mixins Float32Array {
      */
     equals(a: mat4, b: mat4): boolean
 }
-declare
-export class quat mixins Float32Array {
+declare export class quat mixins Float32Array {
 
     /**
      * Creates a new identity quat

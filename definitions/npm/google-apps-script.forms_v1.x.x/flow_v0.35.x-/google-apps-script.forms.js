@@ -675,5 +675,4 @@ declare module 'Forms' {
             setWidth(width: Integer): VideoItem
     }
 }
-declare
-var FormApp: undefined.FormApp;
+declare var FormApp: undefined.FormApp;

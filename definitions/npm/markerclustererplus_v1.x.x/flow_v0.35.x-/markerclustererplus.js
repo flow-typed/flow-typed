@@ -839,8 +839,7 @@ declare type MarkerClusterer = {
      */
     IMAGE_SIZES: number[]
 }
-declare
-var MarkerClusterer: MarkerClusterer;
+declare var MarkerClusterer: MarkerClusterer;
 declare interface String {
     trim(): string
 }

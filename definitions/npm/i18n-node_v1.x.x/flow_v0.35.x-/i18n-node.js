@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$i18n: {
+declare var npm$namespace$i18n: {
     configure: typeof i18n$configure,
     init: typeof i18n$init,
     ___: typeof i18n$___,
@@ -18,8 +17,7 @@ var npm$namespace$i18n: {
     getCatalog: typeof i18n$getCatalog,
     overrideLocaleFromQuery: typeof i18n$overrideLocaleFromQuery,
 }
-declare
-export interface i18n$ConfigurationOptions {
+declare export interface i18n$ConfigurationOptions {
 
     /**
      * Setup some locales - other locales default to en silently 
@@ -78,32 +76,27 @@ export interface i18n$ConfigurationOptions {
         register?: any
 }
 
-declare
-export interface i18n$TranslateOptions {
+declare export interface i18n$TranslateOptions {
     phrase: string,
         locale?: string
 }
 
-declare
-export interface i18n$PluralOptions {
+declare export interface i18n$PluralOptions {
     singular: string,
         plural: string,
         count?: number,
         locale?: string
 }
 
-declare
-export interface i18n$Replacements {
+declare export interface i18n$Replacements {
     [key: string]: string
 }
 
-declare
-export interface i18n$LocaleCatalog {
+declare export interface i18n$LocaleCatalog {
     [key: string]: string
 }
 
-declare
-export interface i18n$GlobalCatalog {
+declare export interface i18n$GlobalCatalog {
     [key: string]: i18n$LocaleCatalog
 }
 
@@ -112,8 +105,7 @@ export interface i18n$GlobalCatalog {
  * Configure current i18n instance
  * @param  - configuration options for i18n
  */
-declare
-function i18n$configure(options: i18n$ConfigurationOptions): void
+declare function i18n$configure(options: i18n$ConfigurationOptions): void
 
 
 /**
@@ -122,8 +114,7 @@ function i18n$configure(options: i18n$ConfigurationOptions): void
  * @param  - Current express response
  * @param  - Callback to continue process
  */
-declare
-function i18n$init(request: Express$Request, response: Express$Response, next?: Function): void
+declare function i18n$init(request: Express$Request, response: Express$Response, next?: Function): void
 
 
 /**
@@ -131,8 +122,7 @@ function i18n$init(request: Express$Request, response: Express$Response, next?: 
  * @param  - The phrase to translate
  * @returns  The translated phrase
  */
-declare
-function i18n$___(phrase: string, ...replace: string[]): string
+declare function i18n$___(phrase: string, ...replace: string[]): string
 
 
 /**
@@ -140,43 +130,37 @@ function i18n$___(phrase: string, ...replace: string[]): string
  * @param  - Options for plural translate
  * @returns  The translated phrase
  */
-declare
-function i18n$___n(options: i18n$PluralOptions): string
+declare function i18n$___n(options: i18n$PluralOptions): string
 
 
 /**
  * Change the current active locale
  * @param  - The locale to set as default
  */
-declare
-function i18n$setLocale(locale: string): void
+declare function i18n$setLocale(locale: string): void
 
 
 /**
  * Get the current active locale
  * @returns  The current locale in request
  */
-declare
-function i18n$getLocale(): string
+declare function i18n$getLocale(): string
 
 
 /**
  * Get the current global catalog
  * @returns  The current global catalog
  */
-declare
-function i18n$getCatalog(): i18n$GlobalCatalog
+declare function i18n$getCatalog(): i18n$GlobalCatalog
 
 
 /**
  * Override the current request locale by using the query param (?locale=en)
  * @param  - The request to override locale for
  */
-declare
-function i18n$overrideLocaleFromQuery(request?: Express$Request): void
+declare function i18n$overrideLocaleFromQuery(request?: Express$Request): void
 
-declare
-var version: string;
+declare var version: string;
 declare interface i18nAPI {
     locale: string,
 
@@ -278,8 +262,7 @@ declare interface i18nAPI {
 declare module 'i18n' {
     declare module.exports: typeof i18n
 }
-declare
-export type Express$Request = {
+declare export type Express$Request = {
     languages: string[],
     regions: string[],
     language: string,
@@ -287,7 +270,6 @@ export type Express$Request = {
 } & i18nAPI
 
 
-declare
-export type Express$Response = {
+declare export type Express$Response = {
     locals: i18nAPI
 } & i18nAPI

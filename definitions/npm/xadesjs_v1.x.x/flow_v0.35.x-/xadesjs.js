@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$xadesjs: {
+declare var npm$namespace$xadesjs: {
     IsEqualsEmptyStrings: typeof xadesjs$IsEqualsEmptyStrings,
     CreateDocument: typeof xadesjs$CreateDocument,
     SelectSingleNode: typeof xadesjs$SelectSingleNode,
@@ -21,8 +20,7 @@ var npm$namespace$xadesjs: {
 }
 declare type xadesjs$PromiseType = any;
 
-declare
-var APPLICATION_XML: string;
+declare var APPLICATION_XML: string;
 
 declare class XmlError mixins Error {
     stack: any;
@@ -79,11 +77,9 @@ declare class XmlObject mixins IXmlSerializable {
     getAttribute(xel: Element, attribute: string): string
 }
 
-declare
-var DEFAULT_ROOT_NAME: string;
+declare var DEFAULT_ROOT_NAME: string;
 
-declare
-function xadesjs$IsEqualsEmptyStrings(s1: string, s2: string): boolean
+declare function xadesjs$IsEqualsEmptyStrings(s1: string, s2: string): boolean
 
 
 /**
@@ -93,8 +89,7 @@ function xadesjs$IsEqualsEmptyStrings(s1: string, s2: string): boolean
  * @param  
  * @returns  Document
  */
-declare
-function xadesjs$CreateDocument(root?: string, namespaceUri?: string, prefix?: string): Document
+declare function xadesjs$CreateDocument(root?: string, namespaceUri?: string, prefix?: string): Document
 
 
 /**
@@ -103,30 +98,23 @@ function xadesjs$CreateDocument(root?: string, namespaceUri?: string, prefix?: s
  * @param  
  * @returns  Node
  */
-declare
-function xadesjs$SelectSingleNode(node: Node, path: string): Node
+declare function xadesjs$SelectSingleNode(node: Node, path: string): Node
 
-declare
-function xadesjs$findAttr(node: Node, localName: string, nameSpace?: string): Attr
+declare function xadesjs$findAttr(node: Node, localName: string, nameSpace?: string): Attr
 
-declare
-function xadesjs$findFirst(doc: Node, xpath: string): Node
+declare function xadesjs$findFirst(doc: Node, xpath: string): Node
 
-declare
-function xadesjs$findChilds(node: Node, localName: string, nameSpace?: string): Node[]
+declare function xadesjs$findChilds(node: Node, localName: string, nameSpace?: string): Node[]
 
 declare interface xadesjs$IAssocArray {
     [index: string]: string
 }
 
-declare
-function xadesjs$encodeSpecialCharactersInAttribute(attributeValue: string): string
+declare function xadesjs$encodeSpecialCharactersInAttribute(attributeValue: string): string
 
-declare
-function xadesjs$encodeSpecialCharactersInText(text: string): string
+declare function xadesjs$encodeSpecialCharactersInText(text: string): string
 
-declare
-function xadesjs$SelectNamespaces(node: Element): Node[]
+declare function xadesjs$SelectNamespaces(node: Element): Node[]
 
 declare class Convert {
     ToBase64UrlString(text: string): string;
@@ -204,35 +192,25 @@ declare class SignatureAlgorithm mixins XmlAlgorithm, ISignatureAlgorithm {
         algorithm?: Algorithm): xadesjs$PromiseType
 }
 
-declare
-var SHA1: string;
+declare var SHA1: string;
 
-declare
-var SHA224: string;
+declare var SHA224: string;
 
-declare
-var SHA256: string;
+declare var SHA256: string;
 
-declare
-var SHA384: string;
+declare var SHA384: string;
 
-declare
-var SHA512: string;
+declare var SHA512: string;
 
-declare
-var SHA1_NAMESPACE: string;
+declare var SHA1_NAMESPACE: string;
 
-declare
-var SHA224_NAMESPACE: string;
+declare var SHA224_NAMESPACE: string;
 
-declare
-var SHA256_NAMESPACE: string;
+declare var SHA256_NAMESPACE: string;
 
-declare
-var SHA384_NAMESPACE: string;
+declare var SHA384_NAMESPACE: string;
 
-declare
-var SHA512_NAMESPACE: string;
+declare var SHA512_NAMESPACE: string;
 
 declare class Sha1 mixins HashAlgorithm {
     algorithm: {
@@ -269,23 +247,17 @@ declare class Sha512 mixins HashAlgorithm {
     xmlNamespace: string
 }
 
-declare
-var RSA_PKCS1: string;
+declare var RSA_PKCS1: string;
 
-declare
-var RSA_PKCS1_SHA1_NAMESPACE: string;
+declare var RSA_PKCS1_SHA1_NAMESPACE: string;
 
-declare
-var RSA_PKCS1_SHA224_NAMESPACE: string;
+declare var RSA_PKCS1_SHA224_NAMESPACE: string;
 
-declare
-var RSA_PKCS1_SHA256_NAMESPACE: string;
+declare var RSA_PKCS1_SHA256_NAMESPACE: string;
 
-declare
-var RSA_PKCS1_SHA384_NAMESPACE: string;
+declare var RSA_PKCS1_SHA384_NAMESPACE: string;
 
-declare
-var RSA_PKCS1_SHA512_NAMESPACE: string;
+declare var RSA_PKCS1_SHA512_NAMESPACE: string;
 
 declare class RsaPkcs1Sha1 mixins SignatureAlgorithm {
     algorithm: any;
@@ -312,14 +284,11 @@ declare class RsaPkcs1Sha512 mixins SignatureAlgorithm {
     xmlNamespace: string
 }
 
-declare
-var RSA_PSS: string;
+declare var RSA_PSS: string;
 
-declare
-var RSA_PSS_WITH_PARAMS_NAMESPACE: string;
+declare var RSA_PSS_WITH_PARAMS_NAMESPACE: string;
 
-declare
-var RSA_PSS_WITH_PARAMS_MGF1_NAMESPACE: string;
+declare var RSA_PSS_WITH_PARAMS_MGF1_NAMESPACE: string;
 
 declare class RsaPssSha1 mixins SignatureAlgorithm {
     algorithm: any;
@@ -355,20 +324,15 @@ declare class PssAlgorithmParams mixins XmlObject {
     LoadXml(value: Element): void
 }
 
-declare
-var HMAC_ALGORITHM: string;
+declare var HMAC_ALGORITHM: string;
 
-declare
-var HMAC_SHA1_NAMESPACE: string;
+declare var HMAC_SHA1_NAMESPACE: string;
 
-declare
-var HMAC_SHA256_NAMESPACE: string;
+declare var HMAC_SHA256_NAMESPACE: string;
 
-declare
-var HMAC_SHA384_NAMESPACE: string;
+declare var HMAC_SHA384_NAMESPACE: string;
 
-declare
-var HMAC_SHA512_NAMESPACE: string;
+declare var HMAC_SHA512_NAMESPACE: string;
 
 declare class HmacSha1 mixins SignatureAlgorithm {
     algorithm: any;
@@ -390,23 +354,17 @@ declare class HmacSha512 mixins SignatureAlgorithm {
     xmlNamespace: string
 }
 
-declare
-var ECDSA_SIGN_ALGORITHM: string;
+declare var ECDSA_SIGN_ALGORITHM: string;
 
-declare
-var ECDSA_SHA1_NAMESPACE: string;
+declare var ECDSA_SHA1_NAMESPACE: string;
 
-declare
-var ECDSA_SHA224_NAMESPACE: string;
+declare var ECDSA_SHA224_NAMESPACE: string;
 
-declare
-var ECDSA_SHA256_NAMESPACE: string;
+declare var ECDSA_SHA256_NAMESPACE: string;
 
-declare
-var ECDSA_SHA384_NAMESPACE: string;
+declare var ECDSA_SHA384_NAMESPACE: string;
 
-declare
-var ECDSA_SHA512_NAMESPACE: string;
+declare var ECDSA_SHA512_NAMESPACE: string;
 
 declare class EcdsaSha1 mixins SignatureAlgorithm {
     algorithm: any;
@@ -1009,8 +967,7 @@ declare class Signature mixins XmlObject {
     LoadXml(value: Element): void
 }
 
-declare
-var XmlSignature: {
+declare var XmlSignature: {
     ElementNames: {
         CanonicalizationMethod: string,
         DigestMethod: string,

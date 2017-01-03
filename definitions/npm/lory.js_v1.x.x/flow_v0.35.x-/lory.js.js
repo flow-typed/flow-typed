@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var lory: LoryStatic;
+declare var lory: LoryStatic;
 declare interface LoryStatic {
     (element: Element, options?: LoryOptions): LoryStatic,
 

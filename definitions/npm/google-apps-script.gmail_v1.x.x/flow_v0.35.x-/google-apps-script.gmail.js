@@ -199,5 +199,4 @@ declare module 'Gmail' {
             replyAll(body: string, options: Object): GmailThread
     }
 }
-declare
-var GmailApp: undefined.GmailApp;
+declare var GmailApp: undefined.GmailApp;

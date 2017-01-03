@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class EffectComposer {
+declare export class EffectComposer {
     constructor(renderer: WebGLRenderer, renderTarget?: WebGLRenderTarget): this;
     renderTarget1: WebGLRenderTarget;
     renderTarget2: WebGLRenderTarget;

@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$___Addons: {
+declare var npm$namespace$___Addons: {
     shallowCompare: typeof ___Addons$shallowCompare,
 }
-declare
-export function ___Addons$shallowCompare<P, S>(component: ___React$Component<P, S>, nextProps: P, nextState: S): booleandeclare module 'react-addons-shallow-compare' {
+declare export function ___Addons$shallowCompare<P, S>(component: ___React$Component<P, S>, nextProps: P, nextState: S): booleandeclare module 'react-addons-shallow-compare' {
     declare var shallowCompare: typeof undefined;
     declare module.exports: typeof shallowCompare
 }

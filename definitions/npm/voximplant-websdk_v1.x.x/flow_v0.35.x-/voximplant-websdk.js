@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$VoxImplant: {
+declare var npm$namespace$VoxImplant: {
         getInstance: typeof VoxImplant$getInstance,
         version: typeof VoxImplant$version,
     }
@@ -2147,14 +2146,12 @@ declare interface VoxImplant$RosterItem {
 /**
  * Get Client instance to use platform functions
  */
-declare
-function VoxImplant$getInstance(): VoxImplant$Client
+declare function VoxImplant$getInstance(): VoxImplant$Client
 
 
 /**
  * VoxImplant Web SDK lib version
  */
-declare
-function VoxImplant$version(): Stringdeclare module 'voximplant-websdk' {
+declare function VoxImplant$version(): Stringdeclare module 'voximplant-websdk' {
     declare module.exports: typeof VoxImplant
 }

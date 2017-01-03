@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Media: {
+declare var Media: {
     new(
         src: string,
         mediaSuccess: () => void,

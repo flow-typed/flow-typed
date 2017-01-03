@@ -31,5 +31,4 @@ declare interface StripeCheckoutOptions {
         opened?: () => void,
         closed?: () => void
 }
-declare
-var StripeCheckout: StripeCheckoutStatic;
+declare var StripeCheckout: StripeCheckoutStatic;

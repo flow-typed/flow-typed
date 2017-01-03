@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var LeState: {
+declare var LeState: {
     createState: (
         props?: {
             initialState: {}

@@ -195,8 +195,7 @@ declare class BigNum {
      */
     bitLength(): number
 }
-declare
-var npm$namespace$BigNum: {
+declare var npm$namespace$BigNum: {
         toNumber: typeof BigNum$toNumber,
         toBuffer: typeof BigNum$toBuffer,
         add: typeof BigNum$add,
@@ -231,8 +230,7 @@ var npm$namespace$BigNum: {
      */
 declare type BigNum$BigNumCompatible = BigNum | number | string;
 
-declare
-export interface BigNum$BufferOptions {
+declare export interface BigNum$BufferOptions {
 
     /**
      * Can be either 'big' or 'little'. Also accepts 1 for big and -1 for little. Doesn't matter when size = 1. 
@@ -251,8 +249,7 @@ export interface BigNum$BufferOptions {
  * 
 If the BigNum is too big you'll lose precision or you'll get ±Infinity.
 */
-declare
-export function BigNum$toNumber(n: BigNum$BigNumCompatible): number
+declare export function BigNum$toNumber(n: BigNum$BigNumCompatible): number
 
 
 /**
@@ -260,50 +257,43 @@ export function BigNum$toNumber(n: BigNum$BigNumCompatible): number
  * 
 The default options are: {endian: 'big', size: 1}.
 */
-declare
-export function BigNum$toBuffer(n: BigNum$BigNumCompatible, options?: BigNum$BufferOptions): Buffer
+declare export function BigNum$toBuffer(n: BigNum$BigNumCompatible, options?: BigNum$BufferOptions): Buffer
 
 
 /**
  * Return a new BigNum containing the instance value plus n. 
  */
-declare
-export function BigNum$add(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$add(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum containing the instance value minus n. 
  */
-declare
-export function BigNum$sub(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$sub(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum containing the instance value multiplied by n. 
  */
-declare
-export function BigNum$mul(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$mul(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum containing the instance value integrally divided by n. 
  */
-declare
-export function BigNum$div(dividend: BigNum$BigNumCompatible, divisor: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$div(dividend: BigNum$BigNumCompatible, divisor: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum with the absolute value of the instance. 
  */
-declare
-export function BigNum$abs(n: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$abs(n: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum with the negative of the instance value. 
  */
-declare
-export function BigNum$neg(n: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$neg(n: BigNum$BigNumCompatible): BigNum
 
 
 /**
@@ -311,85 +301,73 @@ export function BigNum$neg(n: BigNum$BigNumCompatible): BigNum
  * 
 Return a positive integer if>n, a negative integer if<n, and 0 if == n.
 */
-declare
-export function BigNum$cmp(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): number
+declare export function BigNum$cmp(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): number
 
 
 /**
  * Return a boolean: whether the instance value is greater than n (> n). 
  */
-declare
-export function BigNum$gt(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
+declare export function BigNum$gt(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
 
 
 /**
  * Return a boolean: whether the instance value is greater than or equal to n (>= n). 
  */
-declare
-export function BigNum$ge(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
+declare export function BigNum$ge(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
 
 
 /**
  * Return a boolean: whether the instance value is equal to n (== n). 
  */
-declare
-export function BigNum$eq(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
+declare export function BigNum$eq(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
 
 
 /**
  * Return a boolean: whether the instance value is less than n (< n). 
  */
-declare
-export function BigNum$lt(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
+declare export function BigNum$lt(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
 
 
 /**
  * Return a boolean: whether the instance value is less than or equal to n (<= n). 
  */
-declare
-export function BigNum$le(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
+declare export function BigNum$le(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): boolean
 
 
 /**
  * Return a new BigNum with the instance value bitwise AND (&)-ed with n. 
  */
-declare
-export function BigNum$and(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$and(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum with the instance value bitwise inclusive-OR (|)-ed with n. 
  */
-declare
-export function BigNum$or(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$or(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum with the instance value bitwise exclusive-OR (^)-ed with n. 
  */
-declare
-export function BigNum$xor(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$xor(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum with the instance value modulo n. 
  */
-declare
-export function BigNum$mod(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$mod(left: BigNum$BigNumCompatible, right: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum with the instance value raised to the nth power. 
  */
-declare
-export function BigNum$pow(base: BigNum$BigNumCompatible, exponent: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$pow(base: BigNum$BigNumCompatible, exponent: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum with the instance value raised to the nth power modulo m. 
  */
-declare
-export function BigNum$powm(
+declare export function BigNum$powm(
     base: BigNum$BigNumCompatible,
     exponent: BigNum$BigNumCompatible,
     m: BigNum$BigNumCompatible): BigNum
@@ -398,16 +376,14 @@ export function BigNum$powm(
 /**
  * Compute the multiplicative inverse modulo m. 
  */
-declare
-export function BigNum$invertm(n: BigNum$BigNumCompatible, m: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$invertm(n: BigNum$BigNumCompatible, m: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * If upperBound is supplied, return a random BigNum between the instance value and upperBound - 1, inclusive.
  * Otherwise, return a random BigNum between 0 and the instance value - 1, inclusive.
  */
-declare
-export function BigNum$rand(n: BigNum$BigNumCompatible, upperBound?: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$rand(n: BigNum$BigNumCompatible, upperBound?: BigNum$BigNumCompatible): BigNum
 
 
 /**
@@ -416,29 +392,25 @@ export function BigNum$rand(n: BigNum$BigNumCompatible, upperBound?: BigNum$BigN
   - probably prime ('maybe')
   - certainly composite (false)
 */
-declare
-export function BigNum$probPrime(n: BigNum$BigNumCompatible): boolean | string
+declare export function BigNum$probPrime(n: BigNum$BigNumCompatible): boolean | string
 
 
 /**
  * Return a new BigNum that is the 2^bits multiple. Equivalent of the << operator. 
  */
-declare
-export function BigNum$shiftLeft(n: BigNum$BigNumCompatible, bits: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$shiftLeft(n: BigNum$BigNumCompatible, bits: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return a new BigNum of the value integer divided by 2^bits. Equivalent of the >> operator. 
  */
-declare
-export function BigNum$shiftRight(n: BigNum$BigNumCompatible, bits: BigNum$BigNumCompatible): BigNum
+declare export function BigNum$shiftRight(n: BigNum$BigNumCompatible, bits: BigNum$BigNumCompatible): BigNum
 
 
 /**
  * Return the greatest common divisor of the current BigNum with n as a new BigNum. 
  */
-declare
-export function BigNum$gcd(left: BigNum$BigNumCompatible, right: BigNum): BigNum
+declare export function BigNum$gcd(left: BigNum$BigNumCompatible, right: BigNum): BigNum
 
 
 /**
@@ -447,14 +419,12 @@ export function BigNum$gcd(left: BigNum$BigNumCompatible, right: BigNum): BigNum
 
 Returns -1 or 1 as an int (NOT a BigNum). Throws an error on failure.
 */
-declare
-export function BigNum$jacobi(a: BigNum$BigNumCompatible, n: BigNum): number
+declare export function BigNum$jacobi(a: BigNum$BigNumCompatible, n: BigNum): number
 
 
 /**
  * Return the number of bits used to represent the current BigNum. 
  */
-declare
-export function BigNum$bitLength(n: BigNum$BigNumCompatible): numberdeclare module 'bignum' {
+declare export function BigNum$bitLength(n: BigNum$BigNumCompatible): numberdeclare module 'bignum' {
     declare module.exports: typeof BigNum
 }

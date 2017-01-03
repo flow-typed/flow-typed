@@ -203,10 +203,8 @@ declare interface Chance$Name {
     name: string,
         abbreviation: string
 }
-declare
-var chance: Chance$Chance;
-declare
-var Chance: Chance$ChanceStatic;
+declare var chance: Chance$Chance;
+declare var Chance: Chance$ChanceStatic;
 declare module 'chance' {
     declare type ExportedChance = {
         Chance: ExportedChance

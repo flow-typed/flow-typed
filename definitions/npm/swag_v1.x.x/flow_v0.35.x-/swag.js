@@ -9,8 +9,7 @@
 declare interface SwagStatic {
     registerHelpers(handlebars: typeof Handlebars): void
 }
-declare
-var Swag: SwagStatic;
+declare var Swag: SwagStatic;
 declare module 'swag' {
     declare module.exports: typeof Swag
 }

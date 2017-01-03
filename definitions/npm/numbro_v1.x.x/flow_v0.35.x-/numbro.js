@@ -41,8 +41,7 @@ declare interface Numbro {
         divide(value: any): Numbro,
         difference(value: any): number
 }
-declare
-var numbro: Numbro;
+declare var numbro: Numbro;
 declare module 'numbro' {
     declare module.exports: typeof numbro
 }

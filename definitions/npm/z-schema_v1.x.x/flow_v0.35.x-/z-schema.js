@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ZSchema$Options {
+declare export interface ZSchema$Options {
     asyncTimeout?: number,
         forceAdditional?: boolean,
         assumeAdditional?: boolean,
@@ -30,8 +29,7 @@ export interface ZSchema$Options {
         ignoreUnknownFormats?: boolean
 }
 
-declare
-export interface ZSchema$SchemaError {
+declare export interface ZSchema$SchemaError {
     code: string,
         description: string,
         message: string,
@@ -39,8 +37,7 @@ export interface ZSchema$SchemaError {
         path: string
 }
 
-declare
-export class Validator {
+declare export class Validator {
 
     /**
      * Register a custom format.

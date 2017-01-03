@@ -332,8 +332,7 @@ declare module 'CacheFactory' {
             isExpired: boolean
     }
 }
-declare
-var CacheFactory: CacheFactory.ICacheFactory;
+declare var CacheFactory: CacheFactory.ICacheFactory;
 declare module 'cachefactory' {
     declare module.exports: typeof CacheFactory
 }

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Lobibox: LobiboxModule$LobiboxStatic;
+declare var Lobibox: LobiboxModule$LobiboxStatic;
 declare module 'Lobibox' {
     declare module.exports: typeof Lobibox
 }

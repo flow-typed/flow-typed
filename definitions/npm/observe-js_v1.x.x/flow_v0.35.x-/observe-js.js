@@ -55,8 +55,7 @@ declare type observejs$PathObserver_instance = {
 } & observejs$Observable
 
 
-declare
-var PathObserver: observejs$PathObserver_static;
+declare var PathObserver: observejs$PathObserver_static;
 
 declare interface observejs$splice {
 
@@ -101,8 +100,7 @@ declare type observejs$ArrayObserver_instance = {
 } & observejs$Observable
 
 
-declare
-var ArrayObserver: observejs$ArrayObserver_static;
+declare var ArrayObserver: observejs$ArrayObserver_static;
 
 declare interface observejs$Properties {
     [key: string]: any
@@ -127,8 +125,7 @@ declare type observejs$ObjectObserver_instance = {
 } & observejs$Observable
 
 
-declare
-var ObjectObserver: observejs$ObjectObserver_static;
+declare var ObjectObserver: observejs$ObjectObserver_static;
 
 declare interface observejs$CompoundObserver_static {
 
@@ -155,8 +152,7 @@ declare type observejs$CompoundObserver_instance = {
 } & observejs$Observable
 
 
-declare
-var CompoundObserver: observejs$CompoundObserver_static;
+declare var CompoundObserver: observejs$CompoundObserver_static;
 
 declare interface observejs$ObserverTransform_static {
 
@@ -191,8 +187,7 @@ declare type observejs$ObserverTransform_instance = {
 } & observejs$Observable
 
 
-declare
-var ObserverTransform: observejs$ObserverTransform_static;
+declare var ObserverTransform: observejs$ObserverTransform_static;
 
 declare interface observejs$Path {
 

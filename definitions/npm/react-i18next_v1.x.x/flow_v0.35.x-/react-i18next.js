@@ -7,16 +7,13 @@
  */
 
 
-declare
-var npm$namespace$ReactI18next: {
+declare var npm$namespace$ReactI18next: {
     translate: typeof ReactI18next$translate,
     loadNamespaces: typeof ReactI18next$loadNamespaces,
 }
-declare
-export type ReactI18next$TranslationFunction = I18next.TranslationFunction;
+declare export type ReactI18next$TranslationFunction = I18next.TranslationFunction;
 
-declare
-export interface ReactI18next$InjectedTranslateProps {
+declare export interface ReactI18next$InjectedTranslateProps {
     t?: ReactI18next$TranslationFunction
 }
 
@@ -25,8 +22,7 @@ declare interface ReactI18next$I18nextProviderProps {
         children?: React.ReactElement<any >
 }
 
-declare
-export class I18nextProvider mixins React.Component<ReactI18next$I18nextProviderProps, {}>{}
+declare export class I18nextProvider mixins React.Component<ReactI18next$I18nextProviderProps, {}>{}
 
 declare type ReactI18next$InterpolateValue = string | JSX.Element;
 
@@ -39,8 +35,7 @@ declare interface ReactI18next$InterpolateProps {
         dangerouslySetInnerHTMLPartElement?: string, [regexKey: string]: ReactI18next$InterpolateValue | RegExp | I18next.TranslationOptions | boolean
 }
 
-declare
-export class Interpolate mixins React.Component<ReactI18next$InterpolateProps, {}>{}
+declare export class Interpolate mixins React.Component<ReactI18next$InterpolateProps, {}>{}
 
 declare interface ReactI18next$TranslateOptions {
     withRef?: boolean,
@@ -48,13 +43,11 @@ declare interface ReactI18next$TranslateOptions {
         translateFuncName?: string
 }
 
-declare
-export function ReactI18next$translate(
+declare export function ReactI18next$translate(
     namespaces?: string[] | string,
     options?: ReactI18next$TranslateOptions):<C>(WrappedComponent: C) => C
 
-declare
-export function ReactI18next$loadNamespaces({
+declare export function ReactI18next$loadNamespaces({
     components,
     i18n
 }: {

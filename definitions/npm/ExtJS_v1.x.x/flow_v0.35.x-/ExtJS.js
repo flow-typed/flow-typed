@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Ext$IWindowGroup = {
+declare export type Ext$IWindowGroup = {
 
     /**
      * [Method] Brings the specified Component to the front of any other active Components in this ZIndexManager

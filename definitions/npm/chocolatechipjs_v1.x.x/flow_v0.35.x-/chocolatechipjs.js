@@ -1213,8 +1213,7 @@ declare interface PromiseConstructor {
          */
         resolve(): Promise<void >
 }
-declare
-var Promise: PromiseConstructor;
+declare var Promise: PromiseConstructor;
 declare type ByteString = string;
 declare type USVString = string;
 declare type DOMString = string;
@@ -1332,9 +1331,6 @@ declare interface Window {
         $: ChocolateChipStatic,
         jsonp: any
 }
-declare
-var $: ChocolateChipStatic;
-declare
-var fetch: fetch;
-declare
-var chocolatechipjs: ChocolateChipStatic;
+declare var $: ChocolateChipStatic;
+declare var fetch: fetch;
+declare var chocolatechipjs: ChocolateChipStatic;

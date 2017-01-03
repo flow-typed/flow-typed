@@ -15,8 +15,7 @@
  * @link  http://www.jstorage.info/|jStorage} never indicated anything if an error occurred.
  * @see  https://github.com/andris9/simpleStorage#usage
  */
-declare
-export interface simplestoragejs$SimpleStorage {
+declare export interface simplestoragejs$SimpleStorage {
     version: string,
 
         /**
@@ -103,8 +102,7 @@ export interface simplestoragejs$SimpleStorage {
  * 
  * @see  https://github.com/andris9/simpleStorage#setkey-value-options
  */
-declare
-export interface simplestoragejs$SetOptions {
+declare export interface simplestoragejs$SetOptions {
 
     /**
      * Sets the time-to-live (TTL) value in milliseconds for the given key/value.
@@ -114,5 +112,4 @@ export interface simplestoragejs$SetOptions {
 declare module 'simplestorage.js' {
     declare module.exports: typeof simpleStorage
 }
-declare
-var simpleStorage: simplestoragejs$SimpleStorage;
+declare var simpleStorage: simplestoragejs$SimpleStorage;

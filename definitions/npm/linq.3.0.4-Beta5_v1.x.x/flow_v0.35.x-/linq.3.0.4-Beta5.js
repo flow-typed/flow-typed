@@ -525,5 +525,4 @@ declare module 'linqjs' {
     declare type IList<T>= {} & Array
 
 }
-declare
-var Enumerable: linqjs.Enumerable;
+declare var Enumerable: linqjs.Enumerable;

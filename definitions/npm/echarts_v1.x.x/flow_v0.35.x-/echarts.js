@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$ECharts: {
+declare var npm$namespace$ECharts: {
     init: typeof ECharts$init,
     connect: typeof ECharts$connect,
     disConnect: typeof ECharts$disConnect,
@@ -17,8 +16,7 @@ var npm$namespace$ECharts: {
     registerMap: typeof ECharts$registerMap,
     registerTheme: typeof ECharts$registerTheme,
 }
-declare
-function ECharts$init(
+declare function ECharts$init(
     dom: HTMLDivElement | HTMLCanvasElement,
     theme?: Object | string,
     opts?: {
@@ -26,23 +24,17 @@ function ECharts$init(
         renderer?: string
     }): ECharts$ECharts
 
-declare
-function ECharts$connect(group: string | Array<string>): void
+declare function ECharts$connect(group: string | Array<string>): void
 
-declare
-function ECharts$disConnect(group: string): void
+declare function ECharts$disConnect(group: string): void
 
-declare
-function ECharts$dispose(target: ECharts$ECharts | HTMLDivElement | HTMLCanvasElement): void
+declare function ECharts$dispose(target: ECharts$ECharts | HTMLDivElement | HTMLCanvasElement): void
 
-declare
-function ECharts$getInstanceByDom(target: HTMLDivElement | HTMLCanvasElement): void
+declare function ECharts$getInstanceByDom(target: HTMLDivElement | HTMLCanvasElement): void
 
-declare
-function ECharts$registerMap(mapName: string, geoJson: Object, specialAreas?: Object): void
+declare function ECharts$registerMap(mapName: string, geoJson: Object, specialAreas?: Object): void
 
-declare
-function ECharts$registerTheme(themeName: string, theme: Object): void
+declare function ECharts$registerTheme(themeName: string, theme: Object): void
 
 declare class ECharts {
     group: string;

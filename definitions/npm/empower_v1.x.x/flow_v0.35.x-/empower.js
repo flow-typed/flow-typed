@@ -9,8 +9,7 @@
 declare module 'empower' {
     declare module.exports: typeof empower
 }
-declare
-export interface empower$Options {
+declare export interface empower$Options {
     destructive?: boolean,
         modifyMessageOnRethrow?: boolean,
         saveContextOnRethrow?: boolean,

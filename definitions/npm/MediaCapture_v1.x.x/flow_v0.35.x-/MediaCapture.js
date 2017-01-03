@@ -161,8 +161,7 @@ declare interface CaptureError {
     code: number,
         message: string
 }
-declare
-var CaptureError: {
+declare var CaptureError: {
 
     /**
      * Constructor for CaptureError  

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Promise: PromiseConstructor;
+declare var Promise: PromiseConstructor;
 declare interface PromiseCancelHandlerSetter {
     (handler: () => void): void
 }
@@ -696,42 +695,33 @@ declare type Promise<T>= {
         U>(
             iterator: (item: T, index: number, arrayLength: number) => U | PromiseLike<U>): Promise<T[] >
     } & PromiseLike &
-    declare
-export type Promise$RangeError = {} & Error
+    declare export type Promise$RangeError = {} & Error
 
 
-declare
-export type Promise$CancellationError = {} & Error
+declare export type Promise$CancellationError = {} & Error
 
 
-declare
-export type Promise$TimeoutError = {} & Error
+declare export type Promise$TimeoutError = {} & Error
 
 
-declare
-export type Promise$TypeError = {} & Error
+declare export type Promise$TypeError = {} & Error
 
 
-declare
-export type Promise$RejectionError = {} & Error
+declare export type Promise$RejectionError = {} & Error
 
 
-declare
-export type Promise$OperationalError = {} & Error
+declare export type Promise$OperationalError = {} & Error
 
 
-declare
-export interface Promise$ConcurrencyOption {
+declare export interface Promise$ConcurrencyOption {
     concurrency: number
 }
 
-declare
-export interface Promise$SpreadOption {
+declare export interface Promise$SpreadOption {
     spread: boolean
 }
 
-declare
-export interface Promise$PromisifyAllOptions {
+declare export interface Promise$PromisifyAllOptions {
     suffix?: string,
         filter?: (
             name: string,
@@ -741,8 +731,7 @@ export interface Promise$PromisifyAllOptions {
         promisifier?: (originalMethod: Function) => () => PromiseLike<any >
 }
 
-declare
-export interface Promise$Resolver<T>{
+declare export interface Promise$Resolver<T>{
 
     /**
      * Returns a reference to the controlled promise that can be passed to clients.
@@ -773,8 +762,7 @@ export interface Promise$Resolver<T>{
     callback: (err: any, value: T, ...values: T[]) => void
 }
 
-declare
-export interface Promise$Inspection<T>{
+declare export interface Promise$Inspection<T>{
 
     /**
      * See if the underlying promise was fulfilled at the creation time of this inspection object.

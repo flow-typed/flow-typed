@@ -70,8 +70,7 @@ declare interface FirebaseClient {
          */
         push<T>(path: string, value: T): Q.Promise<PushResponse >
 }
-declare
-var FirebaseClient: FirebaseClient;
+declare var FirebaseClient: FirebaseClient;
 declare module 'firebase-client' {
     declare module.exports: typeof FirebaseClient
 }

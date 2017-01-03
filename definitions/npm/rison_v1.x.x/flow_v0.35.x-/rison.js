@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var rison: IRison;
+declare var rison: IRison;
 declare interface IRison {
 
     /**

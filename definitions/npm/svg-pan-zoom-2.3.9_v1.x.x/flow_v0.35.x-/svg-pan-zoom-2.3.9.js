@@ -118,5 +118,4 @@ declare interface SvgPanZoom$ISvgPanZoom {
         zoomAtPoint(scale: number, point: SvgPanZoom$IPoint): boolean,
         zoomAtPointBy(scale: number, point: SvgPanZoom$IPoint): boolean
 }
-declare
-var svgPanZoom: SvgPanZoom$ISvgPanZoom;
+declare var svgPanZoom: SvgPanZoom$ISvgPanZoom;

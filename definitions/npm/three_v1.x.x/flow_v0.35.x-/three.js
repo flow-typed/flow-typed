@@ -7,395 +7,266 @@
  */
 
 
-declare
-var npm$namespace$THREE: {
+declare var npm$namespace$THREE: {
     warn: typeof THREE$warn,
     error: typeof THREE$error,
     log: typeof THREE$log,
 }
-declare
-export var REVISION: string;
+declare export var REVISION: string;
 
-declare
-export var CullFaceNone: CullFace;
+declare export var CullFaceNone: CullFace;
 
-declare
-export var CullFaceBack: CullFace;
+declare export var CullFaceBack: CullFace;
 
-declare
-export var CullFaceFront: CullFace;
+declare export var CullFaceFront: CullFace;
 
-declare
-export var CullFaceFrontBack: CullFace;
+declare export var CullFaceFrontBack: CullFace;
 
-declare
-export var FrontFaceDirectionCW: FrontFaceDirection;
+declare export var FrontFaceDirectionCW: FrontFaceDirection;
 
-declare
-export var FrontFaceDirectionCCW: FrontFaceDirection;
+declare export var FrontFaceDirectionCCW: FrontFaceDirection;
 
-declare
-export var BasicShadowMap: ShadowMapType;
+declare export var BasicShadowMap: ShadowMapType;
 
-declare
-export var PCFShadowMap: ShadowMapType;
+declare export var PCFShadowMap: ShadowMapType;
 
-declare
-export var PCFSoftShadowMap: ShadowMapType;
+declare export var PCFSoftShadowMap: ShadowMapType;
 
-declare
-export var FrontSide: Side;
+declare export var FrontSide: Side;
 
-declare
-export var BackSide: Side;
+declare export var BackSide: Side;
 
-declare
-export var DoubleSide: Side;
+declare export var DoubleSide: Side;
 
-declare
-export var FlatShading: Shading;
+declare export var FlatShading: Shading;
 
-declare
-export var SmoothShading: Shading;
+declare export var SmoothShading: Shading;
 
-declare
-export var NoColors: Colors;
+declare export var NoColors: Colors;
 
-declare
-export var FaceColors: Colors;
+declare export var FaceColors: Colors;
 
-declare
-export var VertexColors: Colors;
+declare export var VertexColors: Colors;
 
-declare
-export var NoBlending: Blending;
+declare export var NoBlending: Blending;
 
-declare
-export var NormalBlending: Blending;
+declare export var NormalBlending: Blending;
 
-declare
-export var AdditiveBlending: Blending;
+declare export var AdditiveBlending: Blending;
 
-declare
-export var SubtractiveBlending: Blending;
+declare export var SubtractiveBlending: Blending;
 
-declare
-export var MultiplyBlending: Blending;
+declare export var MultiplyBlending: Blending;
 
-declare
-export var CustomBlending: Blending;
+declare export var CustomBlending: Blending;
 
-declare
-export var AddEquation: BlendingEquation;
+declare export var AddEquation: BlendingEquation;
 
-declare
-export var SubtractEquation: BlendingEquation;
+declare export var SubtractEquation: BlendingEquation;
 
-declare
-export var ReverseSubtractEquation: BlendingEquation;
+declare export var ReverseSubtractEquation: BlendingEquation;
 
-declare
-export var MinEquation: BlendingEquation;
+declare export var MinEquation: BlendingEquation;
 
-declare
-export var MaxEquation: BlendingEquation;
+declare export var MaxEquation: BlendingEquation;
 
-declare
-export var ZeroFactor: BlendingDstFactor;
+declare export var ZeroFactor: BlendingDstFactor;
 
-declare
-export var OneFactor: BlendingDstFactor;
+declare export var OneFactor: BlendingDstFactor;
 
-declare
-export var SrcColorFactor: BlendingDstFactor;
+declare export var SrcColorFactor: BlendingDstFactor;
 
-declare
-export var OneMinusSrcColorFactor: BlendingDstFactor;
+declare export var OneMinusSrcColorFactor: BlendingDstFactor;
 
-declare
-export var SrcAlphaFactor: BlendingDstFactor;
+declare export var SrcAlphaFactor: BlendingDstFactor;
 
-declare
-export var OneMinusSrcAlphaFactor: BlendingDstFactor;
+declare export var OneMinusSrcAlphaFactor: BlendingDstFactor;
 
-declare
-export var DstAlphaFactor: BlendingDstFactor;
+declare export var DstAlphaFactor: BlendingDstFactor;
 
-declare
-export var OneMinusDstAlphaFactor: BlendingDstFactor;
+declare export var OneMinusDstAlphaFactor: BlendingDstFactor;
 
-declare
-export var DstColorFactor: BlendingSrcFactor;
+declare export var DstColorFactor: BlendingSrcFactor;
 
-declare
-export var OneMinusDstColorFactor: BlendingSrcFactor;
+declare export var OneMinusDstColorFactor: BlendingSrcFactor;
 
-declare
-export var SrcAlphaSaturateFactor: BlendingSrcFactor;
+declare export var SrcAlphaSaturateFactor: BlendingSrcFactor;
 
-declare
-export var NeverDepth: DepthModes;
+declare export var NeverDepth: DepthModes;
 
-declare
-export var AlwaysDepth: DepthModes;
+declare export var AlwaysDepth: DepthModes;
 
-declare
-export var LessDepth: DepthModes;
+declare export var LessDepth: DepthModes;
 
-declare
-export var LessEqualDepth: DepthModes;
+declare export var LessEqualDepth: DepthModes;
 
-declare
-export var EqualDepth: DepthModes;
+declare export var EqualDepth: DepthModes;
 
-declare
-export var GreaterEqualDepth: DepthModes;
+declare export var GreaterEqualDepth: DepthModes;
 
-declare
-export var GreaterDepth: DepthModes;
+declare export var GreaterDepth: DepthModes;
 
-declare
-export var NotEqualDepth: DepthModes;
+declare export var NotEqualDepth: DepthModes;
 
-declare
-export var MultiplyOperation: Combine;
+declare export var MultiplyOperation: Combine;
 
-declare
-export var MixOperation: Combine;
+declare export var MixOperation: Combine;
 
-declare
-export var AddOperation: Combine;
+declare export var AddOperation: Combine;
 
-declare
-export var NoToneMapping: ToneMapping;
+declare export var NoToneMapping: ToneMapping;
 
-declare
-export var LinearToneMapping: ToneMapping;
+declare export var LinearToneMapping: ToneMapping;
 
-declare
-export var ReinhardToneMapping: ToneMapping;
+declare export var ReinhardToneMapping: ToneMapping;
 
-declare
-export var Uncharted2ToneMapping: ToneMapping;
+declare export var Uncharted2ToneMapping: ToneMapping;
 
-declare
-export var CineonToneMapping: ToneMapping;
+declare export var CineonToneMapping: ToneMapping;
 
-declare
-export var UVMapping: Mapping;
+declare export var UVMapping: Mapping;
 
-declare
-export var CubeReflectionMapping: Mapping;
+declare export var CubeReflectionMapping: Mapping;
 
-declare
-export var CubeRefractionMapping: Mapping;
+declare export var CubeRefractionMapping: Mapping;
 
-declare
-export var EquirectangularReflectionMapping: Mapping;
+declare export var EquirectangularReflectionMapping: Mapping;
 
-declare
-export var EquirectangularRefractionMapping: Mapping;
+declare export var EquirectangularRefractionMapping: Mapping;
 
-declare
-export var SphericalReflectionMapping: Mapping;
+declare export var SphericalReflectionMapping: Mapping;
 
-declare
-export var CubeUVReflectionMapping: Mapping;
+declare export var CubeUVReflectionMapping: Mapping;
 
-declare
-export var CubeUVRefractionMapping: Mapping;
+declare export var CubeUVRefractionMapping: Mapping;
 
-declare
-export var RepeatWrapping: Wrapping;
+declare export var RepeatWrapping: Wrapping;
 
-declare
-export var ClampToEdgeWrapping: Wrapping;
+declare export var ClampToEdgeWrapping: Wrapping;
 
-declare
-export var MirroredRepeatWrapping: Wrapping;
+declare export var MirroredRepeatWrapping: Wrapping;
 
-declare
-export var NearestFilter: TextureFilter;
+declare export var NearestFilter: TextureFilter;
 
-declare
-export var NearestMipMapNearestFilter: TextureFilter;
+declare export var NearestMipMapNearestFilter: TextureFilter;
 
-declare
-export var NearestMipMapLinearFilter: TextureFilter;
+declare export var NearestMipMapLinearFilter: TextureFilter;
 
-declare
-export var LinearFilter: TextureFilter;
+declare export var LinearFilter: TextureFilter;
 
-declare
-export var LinearMipMapNearestFilter: TextureFilter;
+declare export var LinearMipMapNearestFilter: TextureFilter;
 
-declare
-export var LinearMipMapLinearFilter: TextureFilter;
+declare export var LinearMipMapLinearFilter: TextureFilter;
 
-declare
-export var UnsignedByteType: TextureDataType;
+declare export var UnsignedByteType: TextureDataType;
 
-declare
-export var ByteType: TextureDataType;
+declare export var ByteType: TextureDataType;
 
-declare
-export var ShortType: TextureDataType;
+declare export var ShortType: TextureDataType;
 
-declare
-export var UnsignedShortType: TextureDataType;
+declare export var UnsignedShortType: TextureDataType;
 
-declare
-export var IntType: TextureDataType;
+declare export var IntType: TextureDataType;
 
-declare
-export var UnsignedIntType: TextureDataType;
+declare export var UnsignedIntType: TextureDataType;
 
-declare
-export var FloatType: TextureDataType;
+declare export var FloatType: TextureDataType;
 
-declare
-export var HalfFloatType: TextureDataType;
+declare export var HalfFloatType: TextureDataType;
 
-declare
-export var UnsignedShort4444Type: PixelType;
+declare export var UnsignedShort4444Type: PixelType;
 
-declare
-export var UnsignedShort5551Type: PixelType;
+declare export var UnsignedShort5551Type: PixelType;
 
-declare
-export var UnsignedShort565Type: PixelType;
+declare export var UnsignedShort565Type: PixelType;
 
-declare
-export var UnsignedInt248Type: PixelType;
+declare export var UnsignedInt248Type: PixelType;
 
-declare
-export var AlphaFormat: PixelFormat;
+declare export var AlphaFormat: PixelFormat;
 
-declare
-export var RGBFormat: PixelFormat;
+declare export var RGBFormat: PixelFormat;
 
-declare
-export var RGBAFormat: PixelFormat;
+declare export var RGBAFormat: PixelFormat;
 
-declare
-export var LuminanceFormat: PixelFormat;
+declare export var LuminanceFormat: PixelFormat;
 
-declare
-export var LuminanceAlphaFormat: PixelFormat;
+declare export var LuminanceAlphaFormat: PixelFormat;
 
-declare
-export var RGBEFormat: PixelFormat;
+declare export var RGBEFormat: PixelFormat;
 
-declare
-export var DepthFormat: PixelFormat;
+declare export var DepthFormat: PixelFormat;
 
-declare
-export var DepthStencilFormat: PixelFormat;
+declare export var DepthStencilFormat: PixelFormat;
 
-declare
-export var RGB_S3TC_DXT1_Format: CompressedPixelFormat;
+declare export var RGB_S3TC_DXT1_Format: CompressedPixelFormat;
 
-declare
-export var RGBA_S3TC_DXT1_Format: CompressedPixelFormat;
+declare export var RGBA_S3TC_DXT1_Format: CompressedPixelFormat;
 
-declare
-export var RGBA_S3TC_DXT3_Format: CompressedPixelFormat;
+declare export var RGBA_S3TC_DXT3_Format: CompressedPixelFormat;
 
-declare
-export var RGBA_S3TC_DXT5_Format: CompressedPixelFormat;
+declare export var RGBA_S3TC_DXT5_Format: CompressedPixelFormat;
 
-declare
-export var RGB_PVRTC_4BPPV1_Format: CompressedPixelFormat;
+declare export var RGB_PVRTC_4BPPV1_Format: CompressedPixelFormat;
 
-declare
-export var RGB_PVRTC_2BPPV1_Format: CompressedPixelFormat;
+declare export var RGB_PVRTC_2BPPV1_Format: CompressedPixelFormat;
 
-declare
-export var RGBA_PVRTC_4BPPV1_Format: CompressedPixelFormat;
+declare export var RGBA_PVRTC_4BPPV1_Format: CompressedPixelFormat;
 
-declare
-export var RGBA_PVRTC_2BPPV1_Format: CompressedPixelFormat;
+declare export var RGBA_PVRTC_2BPPV1_Format: CompressedPixelFormat;
 
-declare
-export var RGB_ETC1_Format: CompressedPixelFormat;
+declare export var RGB_ETC1_Format: CompressedPixelFormat;
 
-declare
-export var LoopOnce: AnimationActionLoopStyles;
+declare export var LoopOnce: AnimationActionLoopStyles;
 
-declare
-export var LoopRepeat: AnimationActionLoopStyles;
+declare export var LoopRepeat: AnimationActionLoopStyles;
 
-declare
-export var LoopPingPong: AnimationActionLoopStyles;
+declare export var LoopPingPong: AnimationActionLoopStyles;
 
-declare
-export var InterpolateDiscrete: InterpolationModes;
+declare export var InterpolateDiscrete: InterpolationModes;
 
-declare
-export var InterpolateLinear: InterpolationModes;
+declare export var InterpolateLinear: InterpolationModes;
 
-declare
-export var InterpolateSmooth: InterpolationModes;
+declare export var InterpolateSmooth: InterpolationModes;
 
-declare
-export var ZeroCurvatureEnding: InterpolationEndingModes;
+declare export var ZeroCurvatureEnding: InterpolationEndingModes;
 
-declare
-export var ZeroSlopeEnding: InterpolationEndingModes;
+declare export var ZeroSlopeEnding: InterpolationEndingModes;
 
-declare
-export var WrapAroundEnding: InterpolationEndingModes;
+declare export var WrapAroundEnding: InterpolationEndingModes;
 
-declare
-export var TrianglesDrawModesMode: TrianglesDrawModes;
+declare export var TrianglesDrawModesMode: TrianglesDrawModes;
 
-declare
-export var TriangleStripDrawMode: TrianglesDrawModes;
+declare export var TriangleStripDrawMode: TrianglesDrawModes;
 
-declare
-export var TriangleFanDrawMode: TrianglesDrawModes;
+declare export var TriangleFanDrawMode: TrianglesDrawModes;
 
-declare
-export var LinearEncoding: TextureEncoding;
+declare export var LinearEncoding: TextureEncoding;
 
-declare
-export var sRGBEncoding: TextureEncoding;
+declare export var sRGBEncoding: TextureEncoding;
 
-declare
-export var GammaEncoding: TextureEncoding;
+declare export var GammaEncoding: TextureEncoding;
 
-declare
-export var RGBEEncoding: TextureEncoding;
+declare export var RGBEEncoding: TextureEncoding;
 
-declare
-export var LogLuvEncoding: TextureEncoding;
+declare export var LogLuvEncoding: TextureEncoding;
 
-declare
-export var RGBM7Encoding: TextureEncoding;
+declare export var RGBM7Encoding: TextureEncoding;
 
-declare
-export var RGBM16Encoding: TextureEncoding;
+declare export var RGBM16Encoding: TextureEncoding;
 
-declare
-export var RGBDEncoding: TextureEncoding;
+declare export var RGBDEncoding: TextureEncoding;
 
-declare
-export var BasicDepthPacking: DepthPackingStrategies;
+declare export var BasicDepthPacking: DepthPackingStrategies;
 
-declare
-export var RGBADepthPacking: DepthPackingStrategies;
+declare export var RGBADepthPacking: DepthPackingStrategies;
 
-declare
-export function THREE$warn(message?: any, ...optionalParams: any[]): void
+declare export function THREE$warn(message?: any, ...optionalParams: any[]): void
 
-declare
-export function THREE$error(message?: any, ...optionalParams: any[]): void
+declare export function THREE$error(message?: any, ...optionalParams: any[]): void
 
-declare
-export function THREE$log(message?: any, ...optionalParams: any[]): void
+declare export function THREE$log(message?: any, ...optionalParams: any[]): void
 
-declare
-export class AnimationAction {
+declare export class AnimationAction {
     loop: boolean;
     time: number;
     timeScale: number;
@@ -440,8 +311,7 @@ export class AnimationAction {
     getRoot(): any
 }
 
-declare
-export class AnimationClip {
+declare export class AnimationClip {
     constructor(name?: string, duration?: number, tracks?: THREE$KeyframeTrack[]): this;
     name: string;
     tracks: THREE$KeyframeTrack[];
@@ -466,8 +336,7 @@ export class AnimationClip {
     toJSON(): any
 }
 
-declare
-export class AnimationMixer mixins EventDispatcher {
+declare export class AnimationMixer mixins EventDispatcher {
     constructor(root: any): this;
     time: number;
     timeScale: number;
@@ -481,8 +350,7 @@ export class AnimationMixer mixins EventDispatcher {
     uncacheAction(clip: THREE$AnimationClip, root?: any): void
 }
 
-declare
-export class AnimationObjectGroup {
+declare export class AnimationObjectGroup {
     constructor(...args: any[]): this;
     uuid: string;
     stats: {
@@ -498,8 +366,7 @@ export class AnimationObjectGroup {
 }
 
 
-declare
-var npm$namespace$AnimationUtils: {
+declare var npm$namespace$AnimationUtils: {
     arraySlice: typeof AnimationUtils$arraySlice,
     convertArray: typeof AnimationUtils$convertArray,
     isTypedArray: typeof AnimationUtils$isTypedArray,
@@ -507,30 +374,23 @@ var npm$namespace$AnimationUtils: {
     sortedArray: typeof AnimationUtils$sortedArray,
     flattenJSON: typeof AnimationUtils$flattenJSON,
 }
-declare
-export function AnimationUtils$arraySlice(array: any, from: number, to: number): any
+declare export function AnimationUtils$arraySlice(array: any, from: number, to: number): any
 
-declare
-export function AnimationUtils$convertArray(array: any, type: any, forceClone: boolean): any
+declare export function AnimationUtils$convertArray(array: any, type: any, forceClone: boolean): any
 
-declare
-export function AnimationUtils$isTypedArray(object: any): boolean
+declare export function AnimationUtils$isTypedArray(object: any): boolean
 
-declare
-export function AnimationUtils$getKeyFrameOrder(times: number): number[]
+declare export function AnimationUtils$getKeyFrameOrder(times: number): number[]
 
-declare
-export function AnimationUtils$sortedArray(values: any[], stride: number, order: number[]): any[]
+declare export function AnimationUtils$sortedArray(values: any[], stride: number, order: number[]): any[]
 
-declare
-export function AnimationUtils$flattenJSON(
+declare export function AnimationUtils$flattenJSON(
     jsonKeys: string[],
     times: any[],
     values: any[],
     valuePropertyName: string): void
 
-declare
-export class KeyframeTrack {
+declare export class KeyframeTrack {
     constructor(name: string, times: any[], values: any[], interpolation: InterpolationModes): this;
     name: string;
     times: any[];
@@ -554,8 +414,7 @@ export class KeyframeTrack {
     toJSON(track: THREE$KeyframeTrack): any
 }
 
-declare
-export class PropertyBinding {
+declare export class PropertyBinding {
     constructor(rootNode: any, path: string, parsedPath?: any): this;
     path: string;
     parsedPath: any;
@@ -581,8 +440,7 @@ export class PropertyBinding {
     findNode(root: any, nodeName: string): any
 }
 
-declare
-export class Composite {
+declare export class Composite {
     constructor(targetGroup: any, path: any, parsedPath?: any): this;
     getValue(array: any, offset: number): any;
     setValue(array: any, offset: number): void;
@@ -590,8 +448,7 @@ export class Composite {
     unbind(): void
 }
 
-declare
-export class PropertyMixer {
+declare export class PropertyMixer {
     constructor(binding: any, typeName: string, valueSize: number): this;
     binding: any;
     valueSize: number;
@@ -605,33 +462,27 @@ export class PropertyMixer {
     restoreOriginalState(): void
 }
 
-declare
-export class BooleanKeyframeTrack mixins KeyframeTrack {
+declare export class BooleanKeyframeTrack mixins KeyframeTrack {
     constructor(name: string, times: any[], values: any[]): this
 }
 
-declare
-export class ColorKeyframeTrack mixins KeyframeTrack {
+declare export class ColorKeyframeTrack mixins KeyframeTrack {
     constructor(name: string, times: any[], values: any[], interpolation: InterpolationModes): this
 }
 
-declare
-export class NumberKeyframeTrack mixins KeyframeTrack {
+declare export class NumberKeyframeTrack mixins KeyframeTrack {
     constructor(name: string, times: any[], values: any[], interpolation: InterpolationModes): this
 }
 
-declare
-export class QuaternionKeyframeTrack mixins KeyframeTrack {
+declare export class QuaternionKeyframeTrack mixins KeyframeTrack {
     constructor(name: string, times: any[], values: any[], interpolation: InterpolationModes): this
 }
 
-declare
-export class StringKeyframeTrack mixins KeyframeTrack {
+declare export class StringKeyframeTrack mixins KeyframeTrack {
     constructor(name: string, times: any[], values: any[], interpolation: InterpolationModes): this
 }
 
-declare
-export class VectorKeyframeTrack mixins KeyframeTrack {
+declare export class VectorKeyframeTrack mixins KeyframeTrack {
     constructor(name: string, times: any[], values: any[], interpolation: InterpolationModes): this
 }
 
@@ -639,8 +490,7 @@ export class VectorKeyframeTrack mixins KeyframeTrack {
 /**
  * Abstract base class for cameras. This class should always be inherited when you build a new camera.
  */
-declare
-export class Camera mixins Object3D {
+declare export class Camera mixins Object3D {
 
     /**
      * This constructor sets following properties to the correct type: matrixWorldInverse, projectionMatrix and projectionMatrixInverse.
@@ -665,8 +515,7 @@ export class Camera mixins Object3D {
     lookAt(vector: THREE$Vector3): void
 }
 
-declare
-export class CubeCamera mixins Object3D {
+declare export class CubeCamera mixins Object3D {
     constructor(near?: number, far?: number, cubeResolution?: number): this;
     renderTarget: THREE$WebGLRenderTargetCube;
     updateCubeMap(renderer: THREE$Renderer, scene: THREE$Scene): void
@@ -679,8 +528,7 @@ export class CubeCamera mixins Object3D {
 scene.add( camera );
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/cameras/OrthographicCamera.js">src/cameras/OrthographicCamera.js</a>
 */
-declare
-export class OrthographicCamera mixins Camera {
+declare export class OrthographicCamera mixins Camera {
 
     /**
      * 
@@ -756,8 +604,7 @@ export class OrthographicCamera mixins Camera {
      scene.add( camera );
  * @source  https://github.com/mrdoob/three.js/blob/master/src/cameras/PerspectiveCamera.js
 */
-declare
-export class PerspectiveCamera mixins Camera {
+declare export class PerspectiveCamera mixins Camera {
 
     /**
      * 
@@ -858,8 +705,7 @@ export class PerspectiveCamera mixins Camera {
     setLens(focalLength: number, frameHeight?: number): void
 }
 
-declare
-export class StereoCamera mixins Camera {
+declare export class StereoCamera mixins Camera {
     constructor(): this;
     aspect: number;
     cameraL: THREE$PerspectiveCamera;
@@ -872,8 +718,7 @@ export class StereoCamera mixins Camera {
  * 
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/core/BufferAttribute.js">src/core/BufferAttribute.js</a>
  */
-declare
-export class BufferAttribute {
+declare export class BufferAttribute {
     constructor(array: ArrayLike<number>, itemSize: number, normalized?: boolean): this;
     uuid: string;
     array: ArrayLike<number>;
@@ -941,53 +786,43 @@ export class BufferAttribute {
     length: number
 }
 
-declare
-export class Int8Attribute mixins BufferAttribute {
+declare export class Int8Attribute mixins BufferAttribute {
     constructor(array: any, itemSize: number): this
 }
 
-declare
-export class Uint8Attribute mixins BufferAttribute {
+declare export class Uint8Attribute mixins BufferAttribute {
     constructor(array: any, itemSize: number): this
 }
 
-declare
-export class Uint8ClampedAttribute mixins BufferAttribute {
+declare export class Uint8ClampedAttribute mixins BufferAttribute {
     constructor(array: any, itemSize: number): this
 }
 
-declare
-export class Int16Attribute mixins BufferAttribute {
+declare export class Int16Attribute mixins BufferAttribute {
     constructor(array: any, itemSize: number): this
 }
 
-declare
-export class Uint16Attribute mixins BufferAttribute {
+declare export class Uint16Attribute mixins BufferAttribute {
     constructor(array: any, itemSize: number): this
 }
 
-declare
-export class Int32Attribute mixins BufferAttribute {
+declare export class Int32Attribute mixins BufferAttribute {
     constructor(array: any, itemSize: number): this
 }
 
-declare
-export class Uint32Attribute mixins BufferAttribute {
+declare export class Uint32Attribute mixins BufferAttribute {
     constructor(array: any, itemSize: number): this
 }
 
-declare
-export class Float32Attribute mixins BufferAttribute {
+declare export class Float32Attribute mixins BufferAttribute {
     constructor(array: any, itemSize: number): this
 }
 
-declare
-export class Float64Attribute mixins BufferAttribute {
+declare export class Float64Attribute mixins BufferAttribute {
     constructor(array: any, itemSize: number): this
 }
 
-declare
-export class DynamicBufferAttribute mixins BufferAttribute {}
+declare export class DynamicBufferAttribute mixins BufferAttribute {}
 
 
 /**
@@ -996,8 +831,7 @@ export class DynamicBufferAttribute mixins BufferAttribute {}
 It is mainly interesting when working with static objects.
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/core/BufferGeometry.js">src/core/BufferGeometry.js</a>
 */
-declare
-export class BufferGeometry mixins EventDispatcher {
+declare export class BufferGeometry mixins EventDispatcher {
 
     /**
      * This creates a new BufferGeometry. It also sets several properties to an default value.
@@ -1094,8 +928,7 @@ export class BufferGeometry mixins EventDispatcher {
  * Object for keeping track of time.
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/core/Clock.js">src/core/Clock.js</a>
  */
-declare
-export class Clock {
+declare export class Clock {
 
     /**
      * 
@@ -1157,8 +990,7 @@ export class Clock {
  * 
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/core/DirectGeometry.js">src/core/DirectGeometry.js</a>
  */
-declare
-export class DirectGeometry mixins EventDispatcher {
+declare export class DirectGeometry mixins EventDispatcher {
     constructor(): this;
     id: number;
     uuid: string;
@@ -1223,8 +1055,7 @@ export class DirectGeometry mixins EventDispatcher {
      car.start();
  * @source  src/core/EventDispatcher.js
 */
-declare
-export class EventDispatcher {
+declare export class EventDispatcher {
 
     /**
      * Creates eventDispatcher object. It needs to be call with '.call' to add the functionality to an object.
@@ -1263,8 +1094,7 @@ export class EventDispatcher {
     apply(target: any): void
 }
 
-declare
-export interface THREE$Event {
+declare export interface THREE$Event {
     type: string,
         target: any
 }
@@ -1279,8 +1109,7 @@ export interface THREE$Event {
      var face = new THREE.Face3( 0, 1, 2, normal, color, 0 );
  * @source  https://github.com/mrdoob/three.js/blob/master/src/core/Face3.js
 */
-declare
-export class Face3 {
+declare export class Face3 {
 
     /**
      * 
@@ -1339,29 +1168,24 @@ export class Face3 {
     copy(source: this): this
 }
 
-declare
-export class Face4 mixins Face3 {}
+declare export class Face4 mixins Face3 {}
 
-declare
-export interface THREE$MorphTarget {
+declare export interface THREE$MorphTarget {
     name: string,
         vertices: THREE$Vector3[]
 }
 
-declare
-export interface THREE$MorphColor {
+declare export interface THREE$MorphColor {
     name: string,
         colors: THREE$Color[]
 }
 
-declare
-export interface THREE$MorphNormals {
+declare export interface THREE$MorphNormals {
     name: string,
         normals: THREE$Vector3[]
 }
 
-declare
-export var GeometryIdCount: number;
+declare export var GeometryIdCount: number;
 
 
 /**
@@ -1376,8 +1200,7 @@ export var GeometryIdCount: number;
      geometry.computeBoundingSphere();
  * @see  https://github.com/mrdoob/three.js/blob/master/src/core/Geometry.js
 */
-declare
-export class Geometry mixins EventDispatcher {
+declare export class Geometry mixins EventDispatcher {
     constructor(): this;
 
     /**
@@ -1575,24 +1398,20 @@ export class Geometry mixins EventDispatcher {
 }
 
 
-declare
-var npm$namespace$GeometryUtils: {
+declare var npm$namespace$GeometryUtils: {
     merge: typeof GeometryUtils$merge,
     center: typeof GeometryUtils$center,
 }
-declare
-export function GeometryUtils$merge(geometry1: any, geometry2: any, materialIndexOffset?: any): any
+declare export function GeometryUtils$merge(geometry1: any, geometry2: any, materialIndexOffset?: any): any
 
-declare
-export function GeometryUtils$center(geometry: any): any
+declare export function GeometryUtils$center(geometry: any): any
 
 
 /**
  * 
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/core/InstancedBufferAttribute.js">src/core/InstancedBufferAttribute.js</a>
  */
-declare
-export class InstancedBufferAttribute mixins BufferAttribute {
+declare export class InstancedBufferAttribute mixins BufferAttribute {
     constructor(data: ArrayLike<number>, itemSize: number, meshPerAttribute?: number): this;
     meshPerAttribute: number
 }
@@ -1602,8 +1421,7 @@ export class InstancedBufferAttribute mixins BufferAttribute {
  * 
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/core/InstancedBufferGeometry.js">src/core/InstancedBufferGeometry.js</a>
  */
-declare
-export class InstancedBufferGeometry mixins BufferGeometry {
+declare export class InstancedBufferGeometry mixins BufferGeometry {
     constructor(): this;
     groups: {
         start: number,
@@ -1619,8 +1437,7 @@ export class InstancedBufferGeometry mixins BufferGeometry {
  * 
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBuffer.js">src/core/InterleavedBuffer.js</a>
  */
-declare
-export class InterleavedBuffer {
+declare export class InterleavedBuffer {
     constructor(array: ArrayLike<number>, stride: number): this;
     array: ArrayLike<number>;
     stride: number;
@@ -1649,8 +1466,7 @@ export class InterleavedBuffer {
  * 
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/core/InstancedInterleavedBuffer.js">src/core/InstancedInterleavedBuffer.js</a>
  */
-declare
-export class InstancedInterleavedBuffer mixins InterleavedBuffer {
+declare export class InstancedInterleavedBuffer mixins InterleavedBuffer {
     constructor(array: ArrayLike<number>, stride: number, meshPerAttribute?: number): this;
     meshPerAttribute: number
 }
@@ -1660,8 +1476,7 @@ export class InstancedInterleavedBuffer mixins InterleavedBuffer {
  * 
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/core/InterleavedBufferAttribute.js">src/core/InterleavedBufferAttribute.js</a>
  */
-declare
-export class InterleavedBufferAttribute {
+declare export class InterleavedBufferAttribute {
     constructor(interleavedBuffer: THREE$InterleavedBuffer, itemSize: number, offset: number, normalized: boolean): this;
     uuid: string;
     data: THREE$InterleavedBuffer;
@@ -1693,15 +1508,13 @@ export class InterleavedBufferAttribute {
     length: number
 }
 
-declare
-export var Object3DIdCount: number;
+declare export var Object3DIdCount: number;
 
 
 /**
  * Base class for scene graph objects
  */
-declare
-export class Object3D mixins EventDispatcher {
+declare export class Object3D mixins EventDispatcher {
     constructor(): this;
 
     /**
@@ -1963,8 +1776,7 @@ export class Object3D mixins EventDispatcher {
     translate(distance: number, axis: THREE$Vector3): THREE$Object3D
 }
 
-declare
-export interface THREE$Intersection {
+declare export interface THREE$Intersection {
     distance: number,
         distanceToRay: number,
         point: THREE$Vector3,
@@ -1974,8 +1786,7 @@ export interface THREE$Intersection {
         object: THREE$Object3D
 }
 
-declare
-export interface THREE$RaycasterParameters {
+declare export interface THREE$RaycasterParameters {
     Mesh?: any,
         Line?: any,
         LOD?: any,
@@ -1985,8 +1796,7 @@ export interface THREE$RaycasterParameters {
         Sprite?: any
 }
 
-declare
-export class Raycaster {
+declare export class Raycaster {
     constructor(origin?: THREE$Vector3, direction?: THREE$Vector3, near?: number, far?: number): this;
     ray: THREE$Ray;
     near: number;
@@ -2003,8 +1813,7 @@ export class Raycaster {
     intersectObjects(objects: THREE$Object3D[], recursive?: boolean): THREE$Intersection[]
 }
 
-declare
-export class Layers {
+declare export class Layers {
     constructor(): this;
     mask: number;
     set(channel: number): void;
@@ -2014,8 +1823,7 @@ export class Layers {
     test(layers: THREE$Layers): boolean
 }
 
-declare
-export class Font {
+declare export class Font {
     constructor(jsondata: string): this;
     data: string;
     generateShapes(text: string, size: number, divisions: number): any[]
@@ -2025,8 +1833,7 @@ export class Font {
 /**
  * Abstract base class for lights.
  */
-declare
-export class Light mixins Object3D {
+declare export class Light mixins Object3D {
     constructor(hex?: number | string, intensity?: number): this;
     color: THREE$Color;
     intensity: number;
@@ -2044,8 +1851,7 @@ export class Light mixins Object3D {
     shadowMapHeight: any
 }
 
-declare
-export class LightShadow {
+declare export class LightShadow {
     constructor(camera: THREE$Camera): this;
     camera: THREE$Camera;
     bias: number;
@@ -2067,8 +1873,7 @@ export class LightShadow {
      scene.add( light );
  * @source  https://github.com/mrdoob/three.js/blob/master/src/lights/AmbientLight.js
 */
-declare
-export class AmbientLight mixins Light {
+declare export class AmbientLight mixins Light {
 
     /**
      * This creates a Ambientlight with a color.
@@ -2087,8 +1892,7 @@ directionalLight.position.set( 0, 1, 0 );
 scene.add( directionalLight );
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/lights/DirectionalLight.js">src/lights/DirectionalLight.js</a>
 */
-declare
-export class DirectionalLight mixins Light {
+declare export class DirectionalLight mixins Light {
     constructor(hex?: number | string, intensity?: number): this;
 
     /**
@@ -2104,11 +1908,9 @@ export class DirectionalLight mixins Light {
     shadow: THREE$LightShadow
 }
 
-declare
-export class DirectionalLightShadow mixins LightShadow {}
+declare export class DirectionalLightShadow mixins LightShadow {}
 
-declare
-export class HemisphereLight mixins Light {
+declare export class HemisphereLight mixins Light {
     constructor(skyColorHex?: number | string, groundColorHex?: number | string, intensity?: number): this;
     groundColor: THREE$Color;
     intensity: number
@@ -2121,8 +1923,7 @@ export class HemisphereLight mixins Light {
 light.position.set( 50, 50, 50 );
 scene.add( light );
 */
-declare
-export class PointLight mixins Light {
+declare export class PointLight mixins Light {
     constructor(hex?: number | string, intensity?: number, distance?: number, decay?: number): this;
     intensity: number;
 
@@ -2140,8 +1941,7 @@ export class PointLight mixins Light {
 /**
  * A point light that can cast shadow in one direction.
  */
-declare
-export class SpotLight mixins Light {
+declare export class SpotLight mixins Light {
     constructor(hex?: number | string, intensity?: number, distance?: number, angle?: number, exponent?: number, decay?: number): this;
 
     /**
@@ -2174,8 +1974,7 @@ export class SpotLight mixins Light {
     penumbra: number
 }
 
-declare
-export class SpotLightShadow mixins LightShadow {
+declare export class SpotLightShadow mixins LightShadow {
     update(light: THREE$Light): void
 }
 
@@ -2193,8 +1992,7 @@ Events:
           Dispatched when the image can't be loaded
           message — error message
 */
-declare
-export class Loader {
+declare export class Loader {
     constructor(): this;
 
     /**
@@ -2226,15 +2024,13 @@ export class Loader {
     Handlers: THREE$LoaderHandler
 }
 
-declare
-export interface THREE$LoaderHandler {
+declare export interface THREE$LoaderHandler {
     handlers: (RegExp | THREE$Loader)[],
         add(regex: RegExp, loader: THREE$Loader): void,
         get(file: string): THREE$Loader
 }
 
-declare
-export class XHRLoader {
+declare export class XHRLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     path: string;
@@ -2250,8 +2046,7 @@ export class XHRLoader {
     setWithCredentials(withCredentials: boolean): THREE$XHRLoader
 }
 
-declare
-export class FontLoader {
+declare export class FontLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     load(
@@ -2267,8 +2062,7 @@ export class FontLoader {
  * A loader for loading an image.
  * Unlike other loaders, this one emits events instead of using predefined callbacks. So if you're interested in getting notified when things happen, you need to add listeners to the object.
  */
-declare
-export class ImageLoader {
+declare export class ImageLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     crossOrigin: string;
@@ -2293,8 +2087,7 @@ export class ImageLoader {
 /**
  * A loader for loading objects in JSON format.
  */
-declare
-export class JSONLoader mixins Loader {
+declare export class JSONLoader mixins Loader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     withCredentials: boolean;
@@ -2316,8 +2109,7 @@ export class JSONLoader mixins Loader {
 /**
  * Handles and keeps track of loaded and pending data.
  */
-declare
-export class LoadingManager {
+declare export class LoadingManager {
     constructor(onLoad?: () => void, onProgress?: (url: string, loaded: number, total: number) => void, onError?: () => void): this;
     onStart: () => void;
 
@@ -2343,11 +2135,9 @@ export class LoadingManager {
     itemError(url: string): void
 }
 
-declare
-export var DefaultLoadingManager: THREE$LoadingManager;
+declare export var DefaultLoadingManager: THREE$LoadingManager;
 
-declare
-export class BufferGeometryLoader {
+declare export class BufferGeometryLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     load(
@@ -2358,8 +2148,7 @@ export class BufferGeometryLoader {
     parse(json: any): THREE$BufferGeometry
 }
 
-declare
-export class MaterialLoader {
+declare export class MaterialLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     textures: {
@@ -2373,8 +2162,7 @@ export class MaterialLoader {
     parse(json: any): THREE$Material
 }
 
-declare
-export class ObjectLoader {
+declare export class ObjectLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     texturePass: string;
@@ -2396,8 +2184,7 @@ export class ObjectLoader {
  * Class for loading a texture.
  * Unlike other loaders, this one emits events instead of using predefined callbacks. So if you're interested in getting notified when things happen, you need to add listeners to the object.
  */
-declare
-export class TextureLoader {
+declare export class TextureLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     crossOrigin: string;
@@ -2414,8 +2201,7 @@ export class TextureLoader {
     setPath(path: string): THREE$TextureLoader
 }
 
-declare
-export class CubeTextureLoader {
+declare export class CubeTextureLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     corssOrigin: string;
@@ -2429,8 +2215,7 @@ export class CubeTextureLoader {
     setPath(path: string): THREE$CubeTextureLoader
 }
 
-declare
-export class BinaryTextureLoader {
+declare export class BinaryTextureLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     load(
@@ -2440,11 +2225,9 @@ export class BinaryTextureLoader {
         onError?: (event: any) => void): void
 }
 
-declare
-export class DataTextureLoader mixins BinaryTextureLoader {}
+declare export class DataTextureLoader mixins BinaryTextureLoader {}
 
-declare
-export class CompressedTextureLoader {
+declare export class CompressedTextureLoader {
     constructor(manager?: THREE$LoadingManager): this;
     manager: THREE$LoadingManager;
     path: string;
@@ -2456,43 +2239,33 @@ export class CompressedTextureLoader {
     setPath(path: string): THREE$CompressedTextureLoader
 }
 
-declare
-export class AudioLoader {
+declare export class AudioLoader {
     constructor(manager?: THREE$LoadingManager): this;
     load(url: string, onLoad: Function, onPrgress: Function, onError: Function): void
 }
 
 
-declare
-var npm$namespace$Cache: {
+declare var npm$namespace$Cache: {
     add: typeof Cache$add,
     get: typeof Cache$get,
     remove: typeof Cache$remove,
     clear: typeof Cache$clear,
 }
-declare
-export var enabled: boolean;
+declare export var enabled: boolean;
 
-declare
-export var files: any;
+declare export var files: any;
 
-declare
-export function Cache$add(key: string, file: any): void
+declare export function Cache$add(key: string, file: any): void
 
-declare
-export function Cache$get(key: string): any
+declare export function Cache$get(key: string): any
 
-declare
-export function Cache$remove(key: string): void
+declare export function Cache$remove(key: string): void
 
-declare
-export function Cache$clear(): void
+declare export function Cache$clear(): void
 
-declare
-export var MaterialIdCount: number;
+declare export var MaterialIdCount: number;
 
-declare
-export interface THREE$MaterialParameters {
+declare export interface THREE$MaterialParameters {
     name?: string,
         side?: Side,
         opacity?: number,
@@ -2526,8 +2299,7 @@ export interface THREE$MaterialParameters {
 /**
  * Materials describe the appearance of objects. They are defined in a (mostly) renderer-independent way, so you don't have to rewrite materials if you decide to use a different renderer.
  */
-declare
-export class Material mixins EventDispatcher {
+declare export class Material mixins EventDispatcher {
     constructor(): this;
 
     /**
@@ -2647,8 +2419,7 @@ export class Material mixins EventDispatcher {
     warpRGB: THREE$Color
 }
 
-declare
-export type THREE$LineBasicMaterialParameters = {
+declare export type THREE$LineBasicMaterialParameters = {
     color?: number | string,
     linewidth?: number,
     linecap?: string,
@@ -2656,8 +2427,7 @@ export type THREE$LineBasicMaterialParameters = {
 } & THREE$MaterialParameters
 
 
-declare
-export class LineBasicMaterial mixins Material {
+declare export class LineBasicMaterial mixins Material {
     constructor(parameters?: THREE$LineBasicMaterialParameters): this;
     color: THREE$Color;
     linewidth: number;
@@ -2666,8 +2436,7 @@ export class LineBasicMaterial mixins Material {
     setValues(parameters: THREE$LineBasicMaterialParameters): void
 }
 
-declare
-export type THREE$LineDashedMaterialParameters = {
+declare export type THREE$LineDashedMaterialParameters = {
     color?: number | string,
     linewidth?: number,
     scale?: number,
@@ -2676,8 +2445,7 @@ export type THREE$LineDashedMaterialParameters = {
 } & THREE$MaterialParameters
 
 
-declare
-export class LineDashedMaterial mixins Material {
+declare export class LineDashedMaterial mixins Material {
     constructor(parameters?: THREE$LineDashedMaterialParameters): this;
     color: THREE$Color;
     linewidth: number;
@@ -2691,8 +2459,7 @@ export class LineDashedMaterial mixins Material {
 /**
  * parameters is an object with one or more properties defining the material's appearance.
  */
-declare
-export type THREE$MeshBasicMaterialParameters = {
+declare export type THREE$MeshBasicMaterialParameters = {
     color?: number | string,
     opacity?: number,
     map?: THREE$Texture,
@@ -2714,8 +2481,7 @@ export type THREE$MeshBasicMaterialParameters = {
 } & THREE$MaterialParameters
 
 
-declare
-export class MeshBasicMaterial mixins Material {
+declare export class MeshBasicMaterial mixins Material {
     constructor(parameters?: THREE$MeshBasicMaterialParameters): this;
     color: THREE$Color;
     map: THREE$Texture;
@@ -2737,23 +2503,20 @@ export class MeshBasicMaterial mixins Material {
     setValues(parameters: THREE$MeshBasicMaterialParameters): void
 }
 
-declare
-export type THREE$MeshDepthMaterialParameters = {
+declare export type THREE$MeshDepthMaterialParameters = {
     wireframe?: boolean,
     wireframeLinewidth?: number
 } & THREE$MaterialParameters
 
 
-declare
-export class MeshDepthMaterial mixins Material {
+declare export class MeshDepthMaterial mixins Material {
     constructor(parameters?: THREE$MeshDepthMaterialParameters): this;
     wireframe: boolean;
     wireframeLinewidth: number;
     setValues(parameters: THREE$MeshDepthMaterialParameters): void
 }
 
-declare
-export type THREE$MeshLambertMaterialParameters = {
+declare export type THREE$MeshLambertMaterialParameters = {
     color?: number | string,
     emissive?: number | string,
     emissiveIntensity?: number,
@@ -2779,8 +2542,7 @@ export type THREE$MeshLambertMaterialParameters = {
 } & THREE$MaterialParameters
 
 
-declare
-export class MeshLambertMaterial mixins Material {
+declare export class MeshLambertMaterial mixins Material {
     constructor(parameters?: THREE$MeshLambertMaterialParameters): this;
     color: THREE$Color;
     emissive: number | string;
@@ -2807,8 +2569,7 @@ export class MeshLambertMaterial mixins Material {
     setValues(parameters: THREE$MeshLambertMaterialParameters): void
 }
 
-declare
-export type THREE$MeshStandardMaterialParameters = {
+declare export type THREE$MeshStandardMaterialParameters = {
     color?: number | string,
     roughness?: number,
     metalness?: number,
@@ -2841,8 +2602,7 @@ export type THREE$MeshStandardMaterialParameters = {
 } & THREE$MaterialParameters
 
 
-declare
-export class MeshStandardMaterial mixins Material {
+declare export class MeshStandardMaterial mixins Material {
     constructor(parameters?: THREE$MeshStandardMaterialParameters): this;
     defines: any;
     color: THREE$Color;
@@ -2877,8 +2637,7 @@ export class MeshStandardMaterial mixins Material {
     setValues(parameters: THREE$MeshStandardMaterialParameters): void
 }
 
-declare
-export type THREE$MeshNormalMaterialParameters = {
+declare export type THREE$MeshNormalMaterialParameters = {
 
     /**
      * Render geometry as wireframe. Default is false (i.e. render as smooth shaded). 
@@ -2893,8 +2652,7 @@ export type THREE$MeshNormalMaterialParameters = {
 } & THREE$MaterialParameters
 
 
-declare
-export class MeshNormalMaterial mixins Material {
+declare export class MeshNormalMaterial mixins Material {
     constructor(parameters?: THREE$MeshNormalMaterialParameters): this;
     wireframe: boolean;
     wireframeLinewidth: number;
@@ -2902,8 +2660,7 @@ export class MeshNormalMaterial mixins Material {
     setValues(parameters: THREE$MeshNormalMaterialParameters): void
 }
 
-declare
-export type THREE$MeshPhongMaterialParameters = {
+declare export type THREE$MeshPhongMaterialParameters = {
 
     /**
      * geometry color in hexadecimal. Default is 0xffffff. 
@@ -2943,8 +2700,7 @@ export type THREE$MeshPhongMaterialParameters = {
 } & THREE$MaterialParameters
 
 
-declare
-export class MeshPhongMaterial mixins Material {
+declare export class MeshPhongMaterial mixins Material {
     constructor(parameters?: THREE$MeshPhongMaterialParameters): this;
     color: THREE$Color;
     specular: THREE$Color;
@@ -2981,16 +2737,14 @@ export class MeshPhongMaterial mixins Material {
     setValues(parameters: THREE$MeshPhongMaterialParameters): void
 }
 
-declare
-export type THREE$MeshPhysicalMaterialParameters = {
+declare export type THREE$MeshPhysicalMaterialParameters = {
     reflectivity?: number,
     clearCoat?: number,
     clearCoatRoughness?: number
 } & THREE$MeshStandardMaterialParameters
 
 
-declare
-export class MeshPhysicalMaterial mixins MeshStandardMaterial {
+declare export class MeshPhysicalMaterial mixins MeshStandardMaterial {
     constructor(parameters: THREE$MeshPhysicalMaterialParameters): this;
     defines: any;
     reflectivity: number;
@@ -2998,18 +2752,15 @@ export class MeshPhysicalMaterial mixins MeshStandardMaterial {
     clearCoatRoughness: number
 }
 
-declare
-export class MultiMaterial mixins Material {
+declare export class MultiMaterial mixins Material {
     constructor(materials?: THREE$Material[]): this;
     materials: THREE$Material[];
     toJSON(meta: any): any
 }
 
-declare
-export class MeshFaceMaterial mixins MultiMaterial {}
+declare export class MeshFaceMaterial mixins MultiMaterial {}
 
-declare
-export type THREE$PointsMaterialParameters = {
+declare export type THREE$PointsMaterialParameters = {
     color?: number | string,
     map?: THREE$Texture,
     size?: number,
@@ -3017,8 +2768,7 @@ export type THREE$PointsMaterialParameters = {
 } & THREE$MaterialParameters
 
 
-declare
-export class PointsMaterial mixins Material {
+declare export class PointsMaterial mixins Material {
     constructor(parameters?: THREE$PointsMaterialParameters): this;
     color: THREE$Color;
     map: THREE$Texture;
@@ -3027,17 +2777,13 @@ export class PointsMaterial mixins Material {
     setValues(parameters: THREE$PointsMaterialParameters): void
 }
 
-declare
-export class PointCloudMaterial mixins PointsMaterial {}
+declare export class PointCloudMaterial mixins PointsMaterial {}
 
-declare
-export class ParticleBasicMaterial mixins PointsMaterial {}
+declare export class ParticleBasicMaterial mixins PointsMaterial {}
 
-declare
-export class ParticleSystemMaterial mixins PointsMaterial {}
+declare export class ParticleSystemMaterial mixins PointsMaterial {}
 
-declare
-export type THREE$ShaderMaterialParameters = {
+declare export type THREE$ShaderMaterialParameters = {
     defines?: any,
     uniforms?: any,
     vertexShader?: string,
@@ -3053,8 +2799,7 @@ export type THREE$ShaderMaterialParameters = {
 } & THREE$MaterialParameters
 
 
-declare
-export class ShaderMaterial mixins Material {
+declare export class ShaderMaterial mixins Material {
     constructor(parameters?: THREE$ShaderMaterialParameters): this;
     defines: any;
     uniforms: any;
@@ -3081,21 +2826,18 @@ export class ShaderMaterial mixins Material {
     toJSON(meta: any): any
 }
 
-declare
-export class RawShaderMaterial mixins ShaderMaterial {
+declare export class RawShaderMaterial mixins ShaderMaterial {
     constructor(parameters?: THREE$ShaderMaterialParameters): this
 }
 
-declare
-export type THREE$SpriteMaterialParameters = {
+declare export type THREE$SpriteMaterialParameters = {
     color?: number | string,
     map?: THREE$Texture,
     rotation?: number
 } & THREE$MaterialParameters
 
 
-declare
-export class SpriteMaterial mixins Material {
+declare export class SpriteMaterial mixins Material {
     constructor(parameters?: THREE$SpriteMaterialParameters): this;
     color: THREE$Color;
     map: THREE$Texture;
@@ -3103,13 +2845,11 @@ export class SpriteMaterial mixins Material {
     setValues(parameters: THREE$SpriteMaterialParameters): void
 }
 
-declare
-export class ShadowMaterial mixins ShaderMaterial {
+declare export class ShadowMaterial mixins ShaderMaterial {
     constructor(parameters?: THREE$ShaderMaterialParameters): this
 }
 
-declare
-export class Box2 {
+declare export class Box2 {
     constructor(min?: THREE$Vector2, max?: THREE$Vector2): this;
     max: THREE$Vector2;
     min: THREE$Vector2;
@@ -3139,8 +2879,7 @@ export class Box2 {
     isIntersectionBox(b: any): any
 }
 
-declare
-export class Box3 {
+declare export class Box3 {
     constructor(min?: THREE$Vector3, max?: THREE$Vector3): this;
     max: THREE$Vector3;
     min: THREE$Vector3;
@@ -3177,8 +2916,7 @@ export class Box3 {
     isIntersectionSphere(s: any): any
 }
 
-declare
-export interface THREE$HSL {
+declare export interface THREE$HSL {
     h: number,
         s: number,
         l: number
@@ -3190,8 +2928,7 @@ export interface THREE$HSL {
  * @example  * var color = new THREE.Color( 0xff0000 );
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/math/Color.js">src/math/Color.js</a>
  */
-declare
-export class Color {
+declare export class Color {
     constructor(color?: THREE$Color): this;
     constructor(color?: string): this;
     constructor(color?: number): this;
@@ -3302,449 +3039,301 @@ export class Color {
     toArray(array?: number[], offset?: number): number[]
 }
 
-declare
-export var aliceblue: number;
+declare export var aliceblue: number;
 
-declare
-export var antiquewhite: number;
+declare export var antiquewhite: number;
 
-declare
-export var aqua: number;
+declare export var aqua: number;
 
-declare
-export var aquamarine: number;
+declare export var aquamarine: number;
 
-declare
-export var azure: number;
+declare export var azure: number;
 
-declare
-export var beige: number;
+declare export var beige: number;
 
-declare
-export var bisque: number;
+declare export var bisque: number;
 
-declare
-export var black: number;
+declare export var black: number;
 
-declare
-export var blanchedalmond: number;
+declare export var blanchedalmond: number;
 
-declare
-export var blue: number;
+declare export var blue: number;
 
-declare
-export var blueviolet: number;
+declare export var blueviolet: number;
 
-declare
-export var brown: number;
+declare export var brown: number;
 
-declare
-export var burlywood: number;
+declare export var burlywood: number;
 
-declare
-export var cadetblue: number;
+declare export var cadetblue: number;
 
-declare
-export var chartreuse: number;
+declare export var chartreuse: number;
 
-declare
-export var chocolate: number;
+declare export var chocolate: number;
 
-declare
-export var coral: number;
+declare export var coral: number;
 
-declare
-export var cornflowerblue: number;
+declare export var cornflowerblue: number;
 
-declare
-export var cornsilk: number;
+declare export var cornsilk: number;
 
-declare
-export var crimson: number;
+declare export var crimson: number;
 
-declare
-export var cyan: number;
+declare export var cyan: number;
 
-declare
-export var darkblue: number;
+declare export var darkblue: number;
 
-declare
-export var darkcyan: number;
+declare export var darkcyan: number;
 
-declare
-export var darkgoldenrod: number;
+declare export var darkgoldenrod: number;
 
-declare
-export var darkgray: number;
+declare export var darkgray: number;
 
-declare
-export var darkgreen: number;
+declare export var darkgreen: number;
 
-declare
-export var darkgrey: number;
+declare export var darkgrey: number;
 
-declare
-export var darkkhaki: number;
+declare export var darkkhaki: number;
 
-declare
-export var darkmagenta: number;
+declare export var darkmagenta: number;
 
-declare
-export var darkolivegreen: number;
+declare export var darkolivegreen: number;
 
-declare
-export var darkorange: number;
+declare export var darkorange: number;
 
-declare
-export var darkorchid: number;
+declare export var darkorchid: number;
 
-declare
-export var darkred: number;
+declare export var darkred: number;
 
-declare
-export var darksalmon: number;
+declare export var darksalmon: number;
 
-declare
-export var darkseagreen: number;
+declare export var darkseagreen: number;
 
-declare
-export var darkslateblue: number;
+declare export var darkslateblue: number;
 
-declare
-export var darkslategray: number;
+declare export var darkslategray: number;
 
-declare
-export var darkslategrey: number;
+declare export var darkslategrey: number;
 
-declare
-export var darkturquoise: number;
+declare export var darkturquoise: number;
 
-declare
-export var darkviolet: number;
+declare export var darkviolet: number;
 
-declare
-export var deeppink: number;
+declare export var deeppink: number;
 
-declare
-export var deepskyblue: number;
+declare export var deepskyblue: number;
 
-declare
-export var dimgray: number;
+declare export var dimgray: number;
 
-declare
-export var dimgrey: number;
+declare export var dimgrey: number;
 
-declare
-export var dodgerblue: number;
+declare export var dodgerblue: number;
 
-declare
-export var firebrick: number;
+declare export var firebrick: number;
 
-declare
-export var floralwhite: number;
+declare export var floralwhite: number;
 
-declare
-export var forestgreen: number;
+declare export var forestgreen: number;
 
-declare
-export var fuchsia: number;
+declare export var fuchsia: number;
 
-declare
-export var gainsboro: number;
+declare export var gainsboro: number;
 
-declare
-export var ghostwhite: number;
+declare export var ghostwhite: number;
 
-declare
-export var gold: number;
+declare export var gold: number;
 
-declare
-export var goldenrod: number;
+declare export var goldenrod: number;
 
-declare
-export var gray: number;
+declare export var gray: number;
 
-declare
-export var green: number;
+declare export var green: number;
 
-declare
-export var greenyellow: number;
+declare export var greenyellow: number;
 
-declare
-export var grey: number;
+declare export var grey: number;
 
-declare
-export var honeydew: number;
+declare export var honeydew: number;
 
-declare
-export var hotpink: number;
+declare export var hotpink: number;
 
-declare
-export var indianred: number;
+declare export var indianred: number;
 
-declare
-export var indigo: number;
+declare export var indigo: number;
 
-declare
-export var ivory: number;
+declare export var ivory: number;
 
-declare
-export var khaki: number;
+declare export var khaki: number;
 
-declare
-export var lavender: number;
+declare export var lavender: number;
 
-declare
-export var lavenderblush: number;
+declare export var lavenderblush: number;
 
-declare
-export var lawngreen: number;
+declare export var lawngreen: number;
 
-declare
-export var lemonchiffon: number;
+declare export var lemonchiffon: number;
 
-declare
-export var lightblue: number;
+declare export var lightblue: number;
 
-declare
-export var lightcoral: number;
+declare export var lightcoral: number;
 
-declare
-export var lightcyan: number;
+declare export var lightcyan: number;
 
-declare
-export var lightgoldenrodyellow: number;
+declare export var lightgoldenrodyellow: number;
 
-declare
-export var lightgray: number;
+declare export var lightgray: number;
 
-declare
-export var lightgreen: number;
+declare export var lightgreen: number;
 
-declare
-export var lightgrey: number;
+declare export var lightgrey: number;
 
-declare
-export var lightpink: number;
+declare export var lightpink: number;
 
-declare
-export var lightsalmon: number;
+declare export var lightsalmon: number;
 
-declare
-export var lightseagreen: number;
+declare export var lightseagreen: number;
 
-declare
-export var lightskyblue: number;
+declare export var lightskyblue: number;
 
-declare
-export var lightslategray: number;
+declare export var lightslategray: number;
 
-declare
-export var lightslategrey: number;
+declare export var lightslategrey: number;
 
-declare
-export var lightsteelblue: number;
+declare export var lightsteelblue: number;
 
-declare
-export var lightyellow: number;
+declare export var lightyellow: number;
 
-declare
-export var lime: number;
+declare export var lime: number;
 
-declare
-export var limegreen: number;
+declare export var limegreen: number;
 
-declare
-export var linen: number;
+declare export var linen: number;
 
-declare
-export var magenta: number;
+declare export var magenta: number;
 
-declare
-export var maroon: number;
+declare export var maroon: number;
 
-declare
-export var mediumaquamarine: number;
+declare export var mediumaquamarine: number;
 
-declare
-export var mediumblue: number;
+declare export var mediumblue: number;
 
-declare
-export var mediumorchid: number;
+declare export var mediumorchid: number;
 
-declare
-export var mediumpurple: number;
+declare export var mediumpurple: number;
 
-declare
-export var mediumseagreen: number;
+declare export var mediumseagreen: number;
 
-declare
-export var mediumslateblue: number;
+declare export var mediumslateblue: number;
 
-declare
-export var mediumspringgreen: number;
+declare export var mediumspringgreen: number;
 
-declare
-export var mediumturquoise: number;
+declare export var mediumturquoise: number;
 
-declare
-export var mediumvioletred: number;
+declare export var mediumvioletred: number;
 
-declare
-export var midnightblue: number;
+declare export var midnightblue: number;
 
-declare
-export var mintcream: number;
+declare export var mintcream: number;
 
-declare
-export var mistyrose: number;
+declare export var mistyrose: number;
 
-declare
-export var moccasin: number;
+declare export var moccasin: number;
 
-declare
-export var navajowhite: number;
+declare export var navajowhite: number;
 
-declare
-export var navy: number;
+declare export var navy: number;
 
-declare
-export var oldlace: number;
+declare export var oldlace: number;
 
-declare
-export var olive: number;
+declare export var olive: number;
 
-declare
-export var olivedrab: number;
+declare export var olivedrab: number;
 
-declare
-export var orange: number;
+declare export var orange: number;
 
-declare
-export var orangered: number;
+declare export var orangered: number;
 
-declare
-export var orchid: number;
+declare export var orchid: number;
 
-declare
-export var palegoldenrod: number;
+declare export var palegoldenrod: number;
 
-declare
-export var palegreen: number;
+declare export var palegreen: number;
 
-declare
-export var paleturquoise: number;
+declare export var paleturquoise: number;
 
-declare
-export var palevioletred: number;
+declare export var palevioletred: number;
 
-declare
-export var papayawhip: number;
+declare export var papayawhip: number;
 
-declare
-export var peachpuff: number;
+declare export var peachpuff: number;
 
-declare
-export var peru: number;
+declare export var peru: number;
 
-declare
-export var pink: number;
+declare export var pink: number;
 
-declare
-export var plum: number;
+declare export var plum: number;
 
-declare
-export var powderblue: number;
+declare export var powderblue: number;
 
-declare
-export var purple: number;
+declare export var purple: number;
 
-declare
-export var red: number;
+declare export var red: number;
 
-declare
-export var rosybrown: number;
+declare export var rosybrown: number;
 
-declare
-export var royalblue: number;
+declare export var royalblue: number;
 
-declare
-export var saddlebrown: number;
+declare export var saddlebrown: number;
 
-declare
-export var salmon: number;
+declare export var salmon: number;
 
-declare
-export var sandybrown: number;
+declare export var sandybrown: number;
 
-declare
-export var seagreen: number;
+declare export var seagreen: number;
 
-declare
-export var seashell: number;
+declare export var seashell: number;
 
-declare
-export var sienna: number;
+declare export var sienna: number;
 
-declare
-export var silver: number;
+declare export var silver: number;
 
-declare
-export var skyblue: number;
+declare export var skyblue: number;
 
-declare
-export var slateblue: number;
+declare export var slateblue: number;
 
-declare
-export var slategray: number;
+declare export var slategray: number;
 
-declare
-export var slategrey: number;
+declare export var slategrey: number;
 
-declare
-export var snow: number;
+declare export var snow: number;
 
-declare
-export var springgreen: number;
+declare export var springgreen: number;
 
-declare
-export var steelblue: number;
+declare export var steelblue: number;
 
-declare
-export var tan: number;
+declare export var tan: number;
 
-declare
-export var teal: number;
+declare export var teal: number;
 
-declare
-export var thistle: number;
+declare export var thistle: number;
 
-declare
-export var tomato: number;
+declare export var tomato: number;
 
-declare
-export var turquoise: number;
+declare export var turquoise: number;
 
-declare
-export var violet: number;
+declare export var violet: number;
 
-declare
-export var wheat: number;
+declare export var wheat: number;
 
-declare
-export var white: number;
+declare export var white: number;
 
-declare
-export var whitesmoke: number;
+declare export var whitesmoke: number;
 
-declare
-export var yellow: number;
+declare export var yellow: number;
 
-declare
-export var yellowgreen: number;
+declare export var yellowgreen: number;
 
-declare
-export class Euler {
+declare export class Euler {
     constructor(x?: number, y?: number, z?: number, order?: string): this;
     x: number;
     y: number;
@@ -3771,8 +3360,7 @@ export class Euler {
 /**
  * Frustums are used to determine what is inside the camera's field of view. They help speed up the rendering process.
  */
-declare
-export class Frustum {
+declare export class Frustum {
     constructor(p0?: THREE$Plane, p1?: THREE$Plane, p2?: THREE$Plane, p3?: THREE$Plane, p4?: THREE$Plane, p5?: THREE$Plane): this;
 
     /**
@@ -3796,8 +3384,7 @@ export class Frustum {
     containsPoint(point: THREE$Vector3): boolean
 }
 
-declare
-export class Line3 {
+declare export class Line3 {
     constructor(start?: THREE$Vector3, end?: THREE$Vector3): this;
     start: THREE$Vector3;
     end: THREE$Vector3;
@@ -3819,8 +3406,7 @@ export class Line3 {
 }
 
 
-declare
-var npm$namespace$Math: {
+declare var npm$namespace$Math: {
     generateUUID: typeof Math$generateUUID,
     clamp: typeof Math$clamp,
     euclideanModulo: typeof Math$euclideanModulo,
@@ -3837,14 +3423,11 @@ var npm$namespace$Math: {
     nearestPowerOfTwo: typeof Math$nearestPowerOfTwo,
     nextPowerOfTwo: typeof Math$nextPowerOfTwo,
 }
-declare
-export var DEG2RAD: number;
+declare export var DEG2RAD: number;
 
-declare
-export var RAD2DEG: number;
+declare export var RAD2DEG: number;
 
-declare
-export function Math$generateUUID(): string
+declare export function Math$generateUUID(): string
 
 
 /**
@@ -3853,11 +3436,9 @@ export function Math$generateUUID(): string
  * @param min Minimum value
  * @param max Maximum value.
  */
-declare
-export function Math$clamp(value: number, min: number, max: number): number
+declare export function Math$clamp(value: number, min: number, max: number): number
 
-declare
-export function Math$euclideanModulo(n: number, m: number): number
+declare export function Math$euclideanModulo(n: number, m: number): number
 
 
 /**
@@ -3868,65 +3449,52 @@ export function Math$euclideanModulo(n: number, m: number): number
  * @param b1 Minimum value for range B.
  * @param b2 Maximum value for range B.
  */
-declare
-export function Math$mapLinear(x: number, a1: number, a2: number, b1: number, b2: number): number
+declare export function Math$mapLinear(x: number, a1: number, a2: number, b1: number, b2: number): number
 
-declare
-export function Math$smoothstep(x: number, min: number, max: number): number
+declare export function Math$smoothstep(x: number, min: number, max: number): number
 
-declare
-export function Math$smootherstep(x: number, min: number, max: number): number
+declare export function Math$smootherstep(x: number, min: number, max: number): number
 
 
 /**
  * Random float from 0 to 1 with 16 bits of randomness.
  * Standard Math.random() creates repetitive patterns when applied over larger space.
  */
-declare
-export function Math$random16(): number
+declare export function Math$random16(): number
 
 
 /**
  * Random integer from low to high interval.
  */
-declare
-export function Math$randInt(low: number, high: number): number
+declare export function Math$randInt(low: number, high: number): number
 
 
 /**
  * Random float from low to high interval.
  */
-declare
-export function Math$randFloat(low: number, high: number): number
+declare export function Math$randFloat(low: number, high: number): number
 
 
 /**
  * Random float from - range / 2 to range / 2 interval.
  */
-declare
-export function Math$randFloatSpread(range: number): number
+declare export function Math$randFloatSpread(range: number): number
 
-declare
-export function Math$degToRad(degrees: number): number
+declare export function Math$degToRad(degrees: number): number
 
-declare
-export function Math$radToDeg(radians: number): number
+declare export function Math$radToDeg(radians: number): number
 
-declare
-export function Math$isPowerOfTwo(value: number): boolean
+declare export function Math$isPowerOfTwo(value: number): boolean
 
-declare
-export function Math$nearestPowerOfTwo(value: number): number
+declare export function Math$nearestPowerOfTwo(value: number): number
 
-declare
-export function Math$nextPowerOfTwo(value: number): number
+declare export function Math$nextPowerOfTwo(value: number): number
 
 
 /**
  * ( interface Matrix&lt;T&gt; )
  */
-declare
-export interface THREE$Matrix {
+declare export interface THREE$Matrix {
 
     /**
      * Float32Array with matrix values.
@@ -3969,8 +3537,7 @@ export interface THREE$Matrix {
 /**
  * ( class Matrix3 implements Matrix&lt;Matrix3&gt; )
  */
-declare
-export class Matrix3 mixins Matrix {
+declare export class Matrix3 mixins Matrix {
 
     /**
      * Creates an identity matrix.
@@ -4039,8 +3606,7 @@ m3.makeRotationZ( gamma );
 m.multiplyMatrices( m1, m2 );
 m.multiply( m3 );
 */
-declare
-export class Matrix4 mixins Matrix {
+declare export class Matrix4 mixins Matrix {
     constructor(): this;
 
     /**
@@ -4244,8 +3810,7 @@ export class Matrix4 mixins Matrix {
     flattenToArrayOffset(array: number[], offset: number): number[]
 }
 
-declare
-export class Plane {
+declare export class Plane {
     constructor(normal?: THREE$Vector3, constant?: number): this;
     normal: THREE$Vector3;
     constant: number;
@@ -4271,8 +3836,7 @@ export class Plane {
     isIntersectionLine(l: any): any
 }
 
-declare
-export class Spherical {
+declare export class Spherical {
     constructor(radius?: number, phi?: number, theta?: number): this;
     set(radius: number, phi: number, theta: number): THREE$Spherical;
     clone(): this;
@@ -4289,8 +3853,7 @@ quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
 var vector = new THREE.Vector3( 1, 0, 0 );
 vector.applyQuaternion( quaternion );
 */
-declare
-export class Quaternion {
+declare export class Quaternion {
 
     /**
      * 
@@ -4395,8 +3958,7 @@ export class Quaternion {
     multiplyVector3(v: any): any
 }
 
-declare
-export class Ray {
+declare export class Ray {
     constructor(origin?: THREE$Vector3, direction?: THREE$Vector3): this;
     origin: THREE$Vector3;
     direction: THREE$Vector3;
@@ -4434,8 +3996,7 @@ export class Ray {
     isIntersectionSphere(s: any): any
 }
 
-declare
-export class Sphere {
+declare export class Sphere {
     constructor(center?: THREE$Vector3, radius?: number): this;
     center: THREE$Vector3;
     radius: number;
@@ -4456,8 +4017,7 @@ export class Sphere {
     equals(sphere: THREE$Sphere): boolean
 }
 
-declare
-export interface THREE$SplineControlPoint {
+declare export interface THREE$SplineControlPoint {
     x: number,
         y: number,
         z: number
@@ -4468,8 +4028,7 @@ export interface THREE$SplineControlPoint {
  * Represents a spline.
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/math/Spline.js">src/math/Spline.js</a>
  */
-declare
-export class Spline {
+declare export class Spline {
 
     /**
      * Initialises the spline with points, which are the places through which the spline will go.
@@ -4556,8 +4115,7 @@ Those definitions will be changed when TypeScript innovates Generics to be type 
  * @example  * var v:THREE.Vector = new THREE.Vector3();
 v.addVectors(new THREE.Vector2(0, 1), new THREE.Vector2(2, 3));    // invalid but compiled successfully
 */
-declare
-export interface THREE$Vector {
+declare export interface THREE$Vector {
     setComponent(index: number, value: number): void,
         getComponent(index: number): number,
 
@@ -4662,8 +4220,7 @@ export interface THREE$Vector {
  * 
 ( class Vector2 implements Vector<Vector2> )
 */
-declare
-export class Vector2 mixins Vector {
+declare export class Vector2 mixins Vector {
     constructor(x?: number, y?: number): this;
     x: number;
     y: number;
@@ -4823,8 +4380,7 @@ c.crossVectors( a, b );
 
 ( class Vector3 implements Vector<Vector3> )
 */
-declare
-export class Vector3 mixins Vector {
+declare export class Vector3 mixins Vector {
     constructor(x?: number, y?: number, z?: number): this;
     x: number;
     y: number;
@@ -5004,8 +4560,7 @@ export class Vector3 mixins Vector {
     getColumnFromMatrix(index: number, matrix: THREE$Matrix4): THREE$Vector3
 }
 
-declare
-export class Vertex mixins Vector3 {}
+declare export class Vertex mixins Vector3 {}
 
 
 /**
@@ -5013,8 +4568,7 @@ export class Vertex mixins Vector3 {}
  * 
 ( class Vector4 implements Vector<Vector4> )
 */
-declare
-export class Vector4 mixins Vector {
+declare export class Vector4 mixins Vector {
     constructor(x?: number, y?: number, z?: number, w?: number): this;
     x: number;
     y: number;
@@ -5167,8 +4721,7 @@ export class Vector4 mixins Vector {
         offset?: number): THREE$Vector4
 }
 
-declare
-export class Interpolant {
+declare export class Interpolant {
     constructor(parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
     parameterPositions: any;
     samplesValues: any;
@@ -5177,43 +4730,36 @@ export class Interpolant {
     evaluate(time: number): any
 }
 
-declare
-export class CubicInterpolant mixins Interpolant {
+declare export class CubicInterpolant mixins Interpolant {
     constructor(parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
     interpolate_(i1: number, t0: number, t: number, t1: number): any
 }
 
-declare
-export class DiscreteInterpolant mixins Interpolant {
+declare export class DiscreteInterpolant mixins Interpolant {
     constructor(parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
     interpolate_(i1: number, t0: number, t: number, t1: number): any
 }
 
-declare
-export class LinearInterpolant mixins Interpolant {
+declare export class LinearInterpolant mixins Interpolant {
     constructor(parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
     interpolate_(i1: number, t0: number, t: number, t1: number): any
 }
 
-declare
-export class QuaternionLinearInterpolant mixins Interpolant {
+declare export class QuaternionLinearInterpolant mixins Interpolant {
     constructor(parameterPositions: any, samplesValues: any, sampleSize: number, resultBuffer?: any): this;
     interpolate_(i1: number, t0: number, t: number, t1: number): any
 }
 
-declare
-export class Bone mixins Object3D {
+declare export class Bone mixins Object3D {
     constructor(skin: THREE$SkinnedMesh): this;
     skin: THREE$SkinnedMesh
 }
 
-declare
-export class Group mixins Object3D {
+declare export class Group mixins Object3D {
     constructor(): this
 }
 
-declare
-export class LOD mixins Object3D {
+declare export class LOD mixins Object3D {
     constructor(): this;
     levels: any[];
     addLevel(object: THREE$Object3D, distance?: number): void;
@@ -5224,8 +4770,7 @@ export class LOD mixins Object3D {
     objects: any[]
 }
 
-declare
-export interface THREE$LensFlareProperty {
+declare export interface THREE$LensFlareProperty {
     texture: THREE$Texture,
         size: number,
         distance: number,
@@ -5239,8 +4784,7 @@ export interface THREE$LensFlareProperty {
         blending: Blending
 }
 
-declare
-export class LensFlare mixins Object3D {
+declare export class LensFlare mixins Object3D {
     constructor(texture?: THREE$Texture, size?: number, distance?: number, blending?: Blending, color?: THREE$Color): this;
     lensFlares: THREE$LensFlareProperty[];
     positionScreen: THREE$Vector3;
@@ -5255,27 +4799,22 @@ export class LensFlare mixins Object3D {
     updateLensFlares(): void
 }
 
-declare
-export class Line mixins Object3D {
+declare export class Line mixins Object3D {
     constructor(geometry?: THREE$Geometry | THREE$BufferGeometry, material?: THREE$LineDashedMaterial | THREE$LineBasicMaterial | THREE$ShaderMaterial, mode?: number): this;
     geometry: THREE$Geometry | THREE$BufferGeometry;
     material: THREE$Material;
     raycast(raycaster: THREE$Raycaster, intersects: any): void
 }
 
-declare
-export var LineStrip: number;
+declare export var LineStrip: number;
 
-declare
-export var LinePieces: number;
+declare export var LinePieces: number;
 
-declare
-export class LineSegments mixins Line {
+declare export class LineSegments mixins Line {
     constructor(geometry?: THREE$Geometry | THREE$BufferGeometry, material?: THREE$LineDashedMaterial | THREE$LineBasicMaterial | THREE$ShaderMaterial, mode?: number): this
 }
 
-declare
-export class Mesh mixins Object3D {
+declare export class Mesh mixins Object3D {
     constructor(geometry?: THREE$Geometry, material?: THREE$Material): this;
     constructor(geometry?: THREE$BufferGeometry, material?: THREE$Material): this;
     geometry: THREE$Geometry | THREE$BufferGeometry;
@@ -5292,8 +4831,7 @@ export class Mesh mixins Object3D {
  * A class for displaying particles in the form of variable size points. For example, if using the WebGLRenderer, the particles are displayed using GL_POINTS.
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/objects/ParticleSystem.js">src/objects/ParticleSystem.js</a>
  */
-declare
-export class Points mixins Object3D {
+declare export class Points mixins Object3D {
 
     /**
      * 
@@ -5314,14 +4852,11 @@ export class Points mixins Object3D {
     raycast(raycaster: THREE$Raycaster, intersects: any): void
 }
 
-declare
-export class PointCloud mixins Points {}
+declare export class PointCloud mixins Points {}
 
-declare
-export class ParticleSystem mixins Points {}
+declare export class ParticleSystem mixins Points {}
 
-declare
-export class Skeleton {
+declare export class Skeleton {
     constructor(bones: THREE$Bone[], boneInverses?: THREE$Matrix4[], useVertexTexture?: boolean): this;
     useVertexTexture: boolean;
     identityMatrix: THREE$Matrix4;
@@ -5337,8 +4872,7 @@ export class Skeleton {
     clone(): this
 }
 
-declare
-export class SkinnedMesh mixins Mesh {
+declare export class SkinnedMesh mixins Mesh {
     constructor(geometry?: THREE$Geometry | THREE$BufferGeometry, material?: THREE$MeshBasicMaterial, useVertexTexture?: boolean): this;
     constructor(geometry?: THREE$Geometry | THREE$BufferGeometry, material?: THREE$MeshDepthMaterial, useVertexTexture?: boolean): this;
     constructor(geometry?: THREE$Geometry | THREE$BufferGeometry, material?: THREE$MultiMaterial, useVertexTexture?: boolean): this;
@@ -5356,26 +4890,22 @@ export class SkinnedMesh mixins Mesh {
     updateMatrixWorld(force?: boolean): void
 }
 
-declare
-export class Sprite mixins Object3D {
+declare export class Sprite mixins Object3D {
     constructor(material?: THREE$Material): this;
     geometry: THREE$BufferGeometry;
     material: THREE$SpriteMaterial;
     raycast(raycaster: THREE$Raycaster, intersects: any): void
 }
 
-declare
-export class Particle mixins Sprite {}
+declare export class Particle mixins Sprite {}
 
-declare
-export interface THREE$Renderer {
+declare export interface THREE$Renderer {
     domElement: HTMLCanvasElement,
         render(scene: THREE$Scene, camera: THREE$Camera): void,
         setSize(width: number, height: number, updateStyle?: boolean): void
 }
 
-declare
-export interface THREE$WebGLRendererParameters {
+declare export interface THREE$WebGLRendererParameters {
 
     /**
      * A Canvas where the renderer draws its output.
@@ -5435,8 +4965,7 @@ export interface THREE$WebGLRendererParameters {
  * This renderer has way better performance than CanvasRenderer.
  * @see  <a href="https://github.com/mrdoob/three.js/blob/master/src/renderers/WebGLRenderer.js">src/renderers/WebGLRenderer.js</a>
  */
-declare
-export class WebGLRenderer mixins Renderer {
+declare export class WebGLRenderer mixins Renderer {
 
     /**
      * parameters is an optional object with properties defining the renderer's behaviour. The constructor also accepts no parameters at all. In all cases, it will assume sane defaults when parameters are missing.
@@ -5661,11 +5190,9 @@ export class WebGLRenderer mixins Renderer {
     enableScissorTest(boolean: any): any
 }
 
-declare
-export interface THREE$RenderTarget {}
+declare export interface THREE$RenderTarget {}
 
-declare
-export interface THREE$WebGLRenderTargetOptions {
+declare export interface THREE$WebGLRenderTargetOptions {
     wrapS?: Wrapping,
         wrapT?: Wrapping,
         magFilter?: TextureFilter,
@@ -5677,8 +5204,7 @@ export interface THREE$WebGLRenderTargetOptions {
         stencilBuffer?: boolean
 }
 
-declare
-export class WebGLRenderTarget mixins EventDispatcher {
+declare export class WebGLRenderTarget mixins EventDispatcher {
     constructor(width: number, height: number, options?: THREE$WebGLRenderTargetOptions): this;
     uuid: string;
     width: number;
@@ -5706,15 +5232,13 @@ export class WebGLRenderTarget mixins EventDispatcher {
     dispose(): void
 }
 
-declare
-export class WebGLRenderTargetCube mixins WebGLRenderTarget {
+declare export class WebGLRenderTargetCube mixins WebGLRenderTarget {
     constructor(width: number, height: number, options?: THREE$WebGLRenderTargetOptions): this;
     activeCubeFace: number;
     activeMipMapLevel: number
 }
 
-declare
-export var ShaderChunk: {
+declare export var ShaderChunk: {
     [name: string]: string,
     alphamap_fragment: string,
     alphamap_pars_fragment: string,
@@ -5823,15 +5347,13 @@ export var ShaderChunk: {
     worldpos_vertex: string
 };
 
-declare
-export interface THREE$Shader {
+declare export interface THREE$Shader {
     uniforms: THREE$IUniform,
         vertexShader: string,
         fragmentShader: string
 }
 
-declare
-export var ShaderLib: {
+declare export var ShaderLib: {
     [name: string]: THREE$Shader,
     basic: THREE$Shader,
     lambert: THREE$Shader,
@@ -5848,13 +5370,11 @@ export var ShaderLib: {
     physical: THREE$Shader
 };
 
-declare
-export interface THREE$IUniform {
+declare export interface THREE$IUniform {
     value: any
 }
 
-declare
-export var UniformsLib: {
+declare export var UniformsLib: {
     common: {
         diffuse: THREE$IUniform,
         opacity: THREE$IUniform,
@@ -5971,19 +5491,15 @@ export var UniformsLib: {
 };
 
 
-declare
-var npm$namespace$UniformsUtils: {
+declare var npm$namespace$UniformsUtils: {
     merge: typeof UniformsUtils$merge,
     clone: typeof UniformsUtils$clone,
 }
-declare
-export function UniformsUtils$merge(geometry1: any, geometry2: any, materialIndexOffset?: any): any
+declare export function UniformsUtils$merge(geometry1: any, geometry2: any, materialIndexOffset?: any): any
 
-declare
-export function UniformsUtils$clone(uniforms_src: any): any
+declare export function UniformsUtils$clone(uniforms_src: any): any
 
-declare
-export class Uniform {
+declare export class Uniform {
     constructor(value: any): this;
     constructor(type: string, value: any): this;
     type: string;
@@ -5993,16 +5509,14 @@ export class Uniform {
     onUpdate(callback: Function): THREE$Uniform
 }
 
-declare
-export class WebGLBufferRenderer {
+declare export class WebGLBufferRenderer {
     constructor(_gl: WebGLRenderingContext, extensions: any, _infoRender: any): this;
     setMode(value: any): void;
     render(start: any, count: number): void;
     renderInstances(geometry: any): void
 }
 
-declare
-export class WebGLClipping {
+declare export class WebGLClipping {
     uniform: {
         value: any,
         needsUpdate: boolean
@@ -6019,14 +5533,12 @@ export class WebGLClipping {
         fromCache: boolean): void
 }
 
-declare
-export interface THREE$WebGLCapabilitiesParameters {
+declare export interface THREE$WebGLCapabilitiesParameters {
     precision?: any,
         logarithmicDepthBuffer?: any
 }
 
-declare
-export class WebGLCapabilities {
+declare export class WebGLCapabilities {
     constructor(gl: WebGLRenderingContext, extensions: any, parameters: THREE$WebGLCapabilitiesParameters): this;
     precision: any;
     logarithmicDepthBuffer: any;
@@ -6045,26 +5557,22 @@ export class WebGLCapabilities {
     getMaxPrecision(precision: string): string
 }
 
-declare
-export class WebGLExtensions {
+declare export class WebGLExtensions {
     constructor(gl: WebGLRenderingContext): this;
     get(name: string): any
 }
 
-declare
-export class WebGLGeometries {
+declare export class WebGLGeometries {
     constructor(gl: WebGLRenderingContext, extensions: any, _infoRender: any): this;
     get(object: any): any
 }
 
-declare
-export class WebGLLights {
+declare export class WebGLLights {
     constructor(gl: WebGLRenderingContext, properties: any, info: any): this;
     get(light: any): any
 }
 
-declare
-export class WebGLIndexedBufferRenderer {
+declare export class WebGLIndexedBufferRenderer {
     constructor(gl: WebGLRenderingContext, properties: any, info: any): this;
     setMode(value: any): void;
     setIndex(index: any): void;
@@ -6072,16 +5580,14 @@ export class WebGLIndexedBufferRenderer {
     renderInstances(geometry: any, start: any, count: number): void
 }
 
-declare
-export class WebGLObjects {
+declare export class WebGLObjects {
     constructor(gl: WebGLRenderingContext, properties: any, info: any): this;
     getAttributeBuffer(attribute: any): any;
     getWireframeAttribute(geometry: any): any;
     update(object: any): void
 }
 
-declare
-export class WebGLProgram {
+declare export class WebGLProgram {
     constructor(renderer: THREE$WebGLRenderer, code: string, material: THREE$ShaderMaterial, parameters: THREE$WebGLRendererParameters): this;
     id: number;
     code: string;
@@ -6096,8 +5602,7 @@ export class WebGLProgram {
     destroy(): void
 }
 
-declare
-export class WebGLPrograms {
+declare export class WebGLPrograms {
     constructor(renderer: THREE$WebGLRenderer, capabilities: any): this;
     programs: any[];
     getParameters(
@@ -6114,8 +5619,7 @@ export class WebGLPrograms {
     releaseProgram(program: THREE$WebGLProgram): void
 }
 
-declare
-export class WebGLTextures {
+declare export class WebGLTextures {
     constructor(gl: any, extensions: any, state: any, properties: any, capabilities: any, paramThreeToGL: Function, info: any): this;
     setTexture2D(texture: any, slot: number): void;
     setTextureCube(texture: any, slot: number): void;
@@ -6124,8 +5628,7 @@ export class WebGLTextures {
     updateRenderTargetMipmap(renderTarget: any): void
 }
 
-declare
-export class WebGLUniforms {
+declare export class WebGLUniforms {
     constructor(gl: any, program: THREE$WebGLProgram, renderer: THREE$WebGLRenderer): this;
     renderer: THREE$WebGLRenderer;
     setValue(gl: any, value: any, renderer?: any): void;
@@ -6137,21 +5640,18 @@ export class WebGLUniforms {
     evalDynamic(seq: any, values: any[], object: any, camera: any): any[]
 }
 
-declare
-export class WebGLProperties {
+declare export class WebGLProperties {
     constructor(): this;
     get(object: any): any;
     delete(object: any): void;
     clear(): void
 }
 
-declare
-export class WebGLShader {
+declare export class WebGLShader {
     constructor(gl: any, type: string, string: string): this
 }
 
-declare
-export class WebGLShadowMap {
+declare export class WebGLShadowMap {
     constructor(_renderer: THREE$Renderer, _lights: any[], _objects: any[], capabilities: any): this;
     enabled: boolean;
     autoUpdate: boolean;
@@ -6163,8 +5663,7 @@ export class WebGLShadowMap {
     cullFace: any
 }
 
-declare
-export class WebGLState {
+declare export class WebGLState {
     constructor(gl: any, extensions: any, paramThreeToGL: Function): this;
     buffers: {
         color: THREE$WebGLColorBuffer,
@@ -6213,8 +5712,7 @@ export class WebGLState {
     reset(): void
 }
 
-declare
-export class WebGLColorBuffer {
+declare export class WebGLColorBuffer {
     constructor(gl: any, state: any): this;
     setMask(colorMask: number): void;
     setLocked(lock: boolean): void;
@@ -6222,8 +5720,7 @@ export class WebGLColorBuffer {
     reset(): void
 }
 
-declare
-export class WebGLDepthBuffer {
+declare export class WebGLDepthBuffer {
     constructor(gl: any, state: any): this;
     setTest(depthTest: boolean): void;
     sertMask(depthMask: number): void;
@@ -6233,8 +5730,7 @@ export class WebGLDepthBuffer {
     reset(): void
 }
 
-declare
-export class WebGLStencilBuffer {
+declare export class WebGLStencilBuffer {
     constructor(gl: any, state: any): this;
     setTest(stencilTest: boolean): void;
     sertMask(stencilMask: number): void;
@@ -6245,8 +5741,7 @@ export class WebGLStencilBuffer {
     reset(): void
 }
 
-declare
-export class LensFlarePlugin {
+declare export class LensFlarePlugin {
     constructor(renderer: THREE$WebGLRenderer, flares: any[]): this;
     render(
         scene: THREE$Scene,
@@ -6255,8 +5750,7 @@ export class LensFlarePlugin {
         viewportHeight: number): void
 }
 
-declare
-export class SpritePlugin {
+declare export class SpritePlugin {
     constructor(renderer: THREE$WebGLRenderer, sprites: any[]): this;
     render(
         scene: THREE$Scene,
@@ -6269,8 +5763,7 @@ export class SpritePlugin {
 /**
  * Scenes allow you to set up what and where is to be rendered by three.js. This is where you place objects, lights and cameras.
  */
-declare
-export class Scene mixins Object3D {
+declare export class Scene mixins Object3D {
     constructor(): this;
 
     /**
@@ -6287,8 +5780,7 @@ export class Scene mixins Object3D {
     toJSON(meta?: any): any
 }
 
-declare
-export interface THREE$IFog {
+declare export interface THREE$IFog {
     name: string,
         color: THREE$Color,
         clone(): this,
@@ -6299,8 +5791,7 @@ export interface THREE$IFog {
 /**
  * This class contains the parameters that define linear fog, i.e., that grows linearly denser with the distance.
  */
-declare
-export class Fog mixins IFog {
+declare export class Fog mixins IFog {
     constructor(hex: number, near?: number, far?: number): this;
     name: string;
 
@@ -6327,8 +5818,7 @@ export class Fog mixins IFog {
 /**
  * This class contains the parameters that define linear fog, i.e., that grows exponentially denser with the distance.
  */
-declare
-export class FogExp2 mixins IFog {
+declare export class FogExp2 mixins IFog {
     constructor(hex: number | string, density?: number): this;
     name: string;
     color: THREE$Color;
@@ -6342,11 +5832,9 @@ export class FogExp2 mixins IFog {
     toJSON(): any
 }
 
-declare
-export var TextureIdCount: number;
+declare export var TextureIdCount: number;
 
-declare
-export class Texture mixins EventDispatcher {
+declare export class Texture mixins EventDispatcher {
     constructor(image: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement, mapping?: Mapping, wrapS?: Wrapping, wrapT?: Wrapping, magFilter?: TextureFilter, minFilter?: TextureFilter, format?: PixelFormat, type?: TextureDataType, anisotropy?: number, encoding?: TextureEncoding): this;
     id: number;
     uuid: string;
@@ -6381,8 +5869,7 @@ export class Texture mixins EventDispatcher {
     transformUv(uv: THREE$Vector): void
 }
 
-declare
-export class DepthTexture mixins Texture {
+declare export class DepthTexture mixins Texture {
     constructor(width: number, heighht: number, type?: TextureDataType, mapping?: Mapping, wrapS?: Wrapping, wrapT?: Wrapping, magFilter?: TextureFilter, minFilter?: TextureFilter, anisotropy?: number): this;
     image: {
         width: number,
@@ -6390,19 +5877,16 @@ export class DepthTexture mixins Texture {
     }
 }
 
-declare
-export class CanvasTexture mixins Texture {
+declare export class CanvasTexture mixins Texture {
     constructor(canvas: HTMLImageElement | HTMLCanvasElement | HTMLVideoElement, mapping?: Mapping, wrapS?: Wrapping, wrapT?: Wrapping, magFilter?: TextureFilter, minFilter?: TextureFilter, format?: PixelFormat, type?: TextureDataType, anisotropy?: number): this
 }
 
-declare
-export class CubeTexture mixins Texture {
+declare export class CubeTexture mixins Texture {
     constructor(images?: any[], mapping?: Mapping, wrapS?: Wrapping, wrapT?: Wrapping, magFilter?: TextureFilter, minFilter?: TextureFilter, format?: PixelFormat, type?: TextureDataType, anisotropy?: number, encoding?: TextureEncoding): this;
     images: any
 }
 
-declare
-export class CompressedTexture mixins Texture {
+declare export class CompressedTexture mixins Texture {
     constructor(mipmaps: ImageData[], width: number, height: number, format?: PixelFormat, type?: TextureDataType, mapping?: Mapping, wrapS?: Wrapping, wrapT?: Wrapping, magFilter?: TextureFilter, minFilter?: TextureFilter, anisotropy?: number, encoding?: TextureEncoding): this;
     image: {
         width: number,
@@ -6410,8 +5894,7 @@ export class CompressedTexture mixins Texture {
     }
 }
 
-declare
-export class DataTexture mixins Texture {
+declare export class DataTexture mixins Texture {
     constructor(data: ArrayBuffer |
         Int8Array |
         Uint8Array |
@@ -6429,73 +5912,58 @@ export class DataTexture mixins Texture {
     }
 }
 
-declare
-export class VideoTexture mixins Texture {
+declare export class VideoTexture mixins Texture {
     constructor(video: HTMLVideoElement, mapping?: Mapping, wrapS?: Wrapping, wrapT?: Wrapping, magFilter?: TextureFilter, minFilter?: TextureFilter, format?: PixelFormat, type?: TextureDataType, anisotropy?: number): this
 }
 
 
-declare
-var npm$namespace$CurveUtils: {
+declare var npm$namespace$CurveUtils: {
     tangentQuadraticBezier: typeof CurveUtils$tangentQuadraticBezier,
     tangentCubicBezier: typeof CurveUtils$tangentCubicBezier,
     tangentSpline: typeof CurveUtils$tangentSpline,
     interpolate: typeof CurveUtils$interpolate,
 }
-declare
-export function CurveUtils$tangentQuadraticBezier(t: number, p0: number, p1: number, p2: number): number
+declare export function CurveUtils$tangentQuadraticBezier(t: number, p0: number, p1: number, p2: number): number
 
-declare
-export function CurveUtils$tangentCubicBezier(t: number, p0: number, p1: number, p2: number, p3: number): number
+declare export function CurveUtils$tangentCubicBezier(t: number, p0: number, p1: number, p2: number, p3: number): number
 
-declare
-export function CurveUtils$tangentSpline(t: number, p0: number, p1: number, p2: number, p3: number): number
+declare export function CurveUtils$tangentSpline(t: number, p0: number, p1: number, p2: number, p3: number): number
 
-declare
-export function CurveUtils$interpolate(p0: number, p1: number, p2: number, p3: number, t: number): number
+declare export function CurveUtils$interpolate(p0: number, p1: number, p2: number, p3: number, t: number): number
 
 
-declare
-var npm$namespace$ImageUtils: {
+declare var npm$namespace$ImageUtils: {
     loadTexture: typeof ImageUtils$loadTexture,
     loadTextureCube: typeof ImageUtils$loadTextureCube,
 }
-declare
-export var crossOrigin: string;
+declare export var crossOrigin: string;
 
-declare
-export function ImageUtils$loadTexture(
+declare export function ImageUtils$loadTexture(
     url: string,
     mapping?: Mapping,
     onLoad?: (texture: THREE$Texture) => void,
     onError?: (message: string) => void): THREE$Texture
 
-declare
-export function ImageUtils$loadTextureCube(
+declare export function ImageUtils$loadTextureCube(
     array: string[],
     mapping?: Mapping,
     onLoad?: (texture: THREE$Texture) => void,
     onError?: (message: string) => void): THREE$Texture
 
 
-declare
-var npm$namespace$SceneUtils: {
+declare var npm$namespace$SceneUtils: {
     createMultiMaterialObject: typeof SceneUtils$createMultiMaterialObject,
     detach: typeof SceneUtils$detach,
     attach: typeof SceneUtils$attach,
 }
-declare
-export function SceneUtils$createMultiMaterialObject(geometry: THREE$Geometry, materials: THREE$Material[]): THREE$Object3D
+declare export function SceneUtils$createMultiMaterialObject(geometry: THREE$Geometry, materials: THREE$Material[]): THREE$Object3D
 
-declare
-export function SceneUtils$detach(child: THREE$Object3D, parent: THREE$Object3D, scene: THREE$Scene): void
+declare export function SceneUtils$detach(child: THREE$Object3D, parent: THREE$Object3D, scene: THREE$Scene): void
 
-declare
-export function SceneUtils$attach(child: THREE$Object3D, scene: THREE$Scene, parent: THREE$Object3D): void
+declare export function SceneUtils$attach(child: THREE$Object3D, scene: THREE$Scene, parent: THREE$Object3D): void
 
 
-declare
-var npm$namespace$ShapeUtils: {
+declare var npm$namespace$ShapeUtils: {
     area: typeof ShapeUtils$area,
     triangulate: typeof ShapeUtils$triangulate,
     triangulateShape: typeof ShapeUtils$triangulateShape,
@@ -6503,26 +5971,19 @@ var npm$namespace$ShapeUtils: {
     b2: typeof ShapeUtils$b2,
     b3: typeof ShapeUtils$b3,
 }
-declare
-export function ShapeUtils$area(contour: number[]): number
+declare export function ShapeUtils$area(contour: number[]): number
 
-declare
-export function ShapeUtils$triangulate(contour: number[], indices: boolean): number[]
+declare export function ShapeUtils$triangulate(contour: number[], indices: boolean): number[]
 
-declare
-export function ShapeUtils$triangulateShape(contour: number[], holes: any[]): number[]
+declare export function ShapeUtils$triangulateShape(contour: number[], holes: any[]): number[]
 
-declare
-export function ShapeUtils$isClockWise(pts: number[]): boolean
+declare export function ShapeUtils$isClockWise(pts: number[]): boolean
 
-declare
-export function ShapeUtils$b2(t: number, p0: number, p1: number, p2: number): number
+declare export function ShapeUtils$b2(t: number, p0: number, p1: number, p2: number): number
 
-declare
-export function ShapeUtils$b3(t: number, p0: number, p1: number, p2: number, p3: number): number
+declare export function ShapeUtils$b3(t: number, p0: number, p1: number, p2: number, p3: number): number
 
-declare
-export class Audio mixins Object3D {
+declare export class Audio mixins Object3D {
     constructor(listener: THREE$AudioListener): this;
     type: string;
     context: AudioContext;
@@ -6557,8 +6018,7 @@ export class Audio mixins Object3D {
     load(file: string): THREE$Audio
 }
 
-declare
-export class AudioAnalyser {
+declare export class AudioAnalyser {
     constructor(audio: any, fftSize: number): this;
     analyser: any;
     data: Uint8Array;
@@ -6567,11 +6027,9 @@ export class AudioAnalyser {
     getData(file: any): any
 }
 
-declare
-export var AudioContext: AudioContext;
+declare export var AudioContext: AudioContext;
 
-declare
-export class AudioBuffer {
+declare export class AudioBuffer {
     constructor(context: any): this;
     context: any;
     ready: boolean;
@@ -6580,8 +6038,7 @@ export class AudioBuffer {
     onReady(callback: Function): void
 }
 
-declare
-export class PositionalAudio mixins Audio {
+declare export class PositionalAudio mixins Audio {
     constructor(listener: THREE$AudioListener): this;
     panner: PannerNode;
     setRefDistance(value: number): void;
@@ -6594,8 +6051,7 @@ export class PositionalAudio mixins Audio {
     getMaxDistance(): number
 }
 
-declare
-export class AudioListener mixins Object3D {
+declare export class AudioListener mixins Object3D {
     constructor(): this;
     type: string;
     context: AudioContext;
@@ -6613,8 +6069,7 @@ export class AudioListener mixins Object3D {
  * An extensible curve object which contains methods for interpolation
  * class Curve&lt;T extends Vector&gt;
  */
-declare
-export class Curve<T>{
+declare export class Curve<T>{
 
     /**
      * Returns a vector for point t of the curve where t is between 0 and 1
@@ -6674,8 +6129,7 @@ export class Curve<T>{
     create(constructorFunc: Function, getPointFunc: Function): Function
 }
 
-declare
-export class CurvePath<T>mixins Curve<T>{
+declare export class CurvePath<T>mixins Curve<T>{
     constructor(): this;
     curves: THREE$Curve<T>[];
     autoClose: boolean;
@@ -6693,8 +6147,7 @@ export class CurvePath<T>mixins Curve<T>{
     createGeometry(points: T[]): THREE$Geometry
 }
 
-declare
-export interface THREE$PathAction {
+declare export interface THREE$PathAction {
     action: PathActions,
         args: any
 }
@@ -6703,8 +6156,7 @@ export interface THREE$PathAction {
 /**
  * a 2d path representation, comprising of points, lines, and cubes, similar to the html5 2d canvas api. It extends CurvePath.
  */
-declare
-export class Path mixins CurvePath<THREE$Vector2>{
+declare export class Path mixins CurvePath<THREE$Vector2>{
     constructor(points?: THREE$Vector2[]): this;
     currentPoint: THREE$Vector2;
     fromPoints(vectors: THREE$Vector2[]): void;
@@ -6753,8 +6205,7 @@ export class Path mixins CurvePath<THREE$Vector2>{
         aRotation: number): void
 }
 
-declare
-export class ShapePath {
+declare export class ShapePath {
     constructor(): this;
     subPaths: any[];
     currentPath: any;
@@ -6776,8 +6227,7 @@ export class ShapePath {
 /**
  * Defines a 2d shape plane using paths.
  */
-declare
-export class Shape mixins Path {
+declare export class Shape mixins Path {
     constructor(points?: THREE$Vector2[]): this;
     holes: THREE$Path[];
     extrude(options?: any): THREE$ExtrudeGeometry;
@@ -6790,21 +6240,17 @@ export class Shape mixins Path {
     extractPoints(divisions: number): THREE$Vector2[]
 }
 
-declare
-export class CatmullRomCurve3 mixins Curve<THREE$Vector3>{
+declare export class CatmullRomCurve3 mixins Curve<THREE$Vector3>{
     constructor(points?: THREE$Vector3[]): this;
     points: THREE$Vector3[];
     getPoint(t: number): THREE$Vector3
 }
 
-declare
-export class ClosedSplineCurve3 mixins CatmullRomCurve3 {}
+declare export class ClosedSplineCurve3 mixins CatmullRomCurve3 {}
 
-declare
-export class SplineCurve3 mixins CatmullRomCurve3 {}
+declare export class SplineCurve3 mixins CatmullRomCurve3 {}
 
-declare
-export class CubicBezierCurve mixins Curve<THREE$Vector2>{
+declare export class CubicBezierCurve mixins Curve<THREE$Vector2>{
     constructor(v0: THREE$Vector2, v1: THREE$Vector2, v2: THREE$Vector2, v3: THREE$Vector2): this;
     v0: THREE$Vector2;
     v1: THREE$Vector2;
@@ -6812,8 +6258,7 @@ export class CubicBezierCurve mixins Curve<THREE$Vector2>{
     v3: THREE$Vector2
 }
 
-declare
-export class CubicBezierCurve3 mixins Curve<THREE$Vector3>{
+declare export class CubicBezierCurve3 mixins Curve<THREE$Vector3>{
     constructor(v0: THREE$Vector3, v1: THREE$Vector3, v2: THREE$Vector3, v3: THREE$Vector3): this;
     v0: THREE$Vector3;
     v1: THREE$Vector3;
@@ -6822,8 +6267,7 @@ export class CubicBezierCurve3 mixins Curve<THREE$Vector3>{
     getPoint(t: number): THREE$Vector3
 }
 
-declare
-export class EllipseCurve mixins Curve<THREE$Vector2>{
+declare export class EllipseCurve mixins Curve<THREE$Vector2>{
     constructor(aX: number, aY: number, xRadius: number, yRadius: number, aStartAngle: number, aEndAngle: number, aClockwise: boolean, aRotation: number): this;
     aX: number;
     aY: number;
@@ -6835,36 +6279,31 @@ export class EllipseCurve mixins Curve<THREE$Vector2>{
     aRotation: number
 }
 
-declare
-export class ArcCurve mixins EllipseCurve {
+declare export class ArcCurve mixins EllipseCurve {
     constructor(aX: number, aY: number, aRadius: number, aStartAngle: number, aEndAngle: number, aClockwise: boolean): this
 }
 
-declare
-export class LineCurve mixins Curve<THREE$Vector2>{
+declare export class LineCurve mixins Curve<THREE$Vector2>{
     constructor(v1: THREE$Vector2, v2: THREE$Vector2): this;
     v1: THREE$Vector2;
     v2: THREE$Vector2
 }
 
-declare
-export class LineCurve3 mixins Curve<THREE$Vector3>{
+declare export class LineCurve3 mixins Curve<THREE$Vector3>{
     constructor(v1: THREE$Vector3, v2: THREE$Vector3): this;
     v1: THREE$Vector3;
     v2: THREE$Vector3;
     getPoint(t: number): THREE$Vector3
 }
 
-declare
-export class QuadraticBezierCurve mixins Curve<THREE$Vector2>{
+declare export class QuadraticBezierCurve mixins Curve<THREE$Vector2>{
     constructor(v0: THREE$Vector2, v1: THREE$Vector2, v2: THREE$Vector2): this;
     v0: THREE$Vector2;
     v1: THREE$Vector2;
     v2: THREE$Vector2
 }
 
-declare
-export class QuadraticBezierCurve3 mixins Curve<THREE$Vector3>{
+declare export class QuadraticBezierCurve3 mixins Curve<THREE$Vector3>{
     constructor(v0: THREE$Vector3, v1: THREE$Vector3, v2: THREE$Vector3): this;
     v0: THREE$Vector3;
     v1: THREE$Vector3;
@@ -6872,14 +6311,12 @@ export class QuadraticBezierCurve3 mixins Curve<THREE$Vector3>{
     getPoint(t: number): THREE$Vector3
 }
 
-declare
-export class SplineCurve mixins Curve<THREE$Vector2>{
+declare export class SplineCurve mixins Curve<THREE$Vector2>{
     constructor(points?: THREE$Vector2[]): this;
     points: THREE$Vector2[]
 }
 
-declare
-export class BoxBufferGeometry mixins BufferGeometry {
+declare export class BoxBufferGeometry mixins BufferGeometry {
     constructor(width: number, height: number, depth: number, widthSegments?: number, heightSegments?: number, depthSegments?: number): this;
     parameters: {
         width: number,
@@ -6895,8 +6332,7 @@ export class BoxBufferGeometry mixins BufferGeometry {
 /**
  * BoxGeometry is the quadrilateral primitive geometry class. It is typically used for creating a cube or irregular quadrilateral of the dimensions provided within the (optional) 'width', 'height', & 'depth' constructor arguments.
  */
-declare
-export class BoxGeometry mixins Geometry {
+declare export class BoxGeometry mixins Geometry {
 
     /**
      * 
@@ -6918,11 +6354,9 @@ export class BoxGeometry mixins Geometry {
     }
 }
 
-declare
-export class CubeGeometry mixins BoxGeometry {}
+declare export class CubeGeometry mixins BoxGeometry {}
 
-declare
-export class CircleBufferGeometry mixins BufferGeometry {
+declare export class CircleBufferGeometry mixins BufferGeometry {
     constructor(radius?: number, segments?: number, thetaStart?: number, thetaLength?: number): this;
     parameters: {
         radius: number,
@@ -6932,8 +6366,7 @@ export class CircleBufferGeometry mixins BufferGeometry {
     }
 }
 
-declare
-export class CircleGeometry mixins Geometry {
+declare export class CircleGeometry mixins Geometry {
     constructor(radius?: number, segments?: number, thetaStart?: number, thetaLength?: number): this;
     parameters: {
         radius: number,
@@ -6943,8 +6376,7 @@ export class CircleGeometry mixins Geometry {
     }
 }
 
-declare
-export class CylinderBufferGeometry mixins BufferGeometry {
+declare export class CylinderBufferGeometry mixins BufferGeometry {
     constructor(radiusTop?: number, radiusBottom?: number, height?: number, radialSegments?: number, heightSegments?: number, openEnded?: boolean, thetaStart?: number, thetaLength?: number): this;
     parameters: {
         radiusTop: number,
@@ -6958,8 +6390,7 @@ export class CylinderBufferGeometry mixins BufferGeometry {
     }
 }
 
-declare
-export class CylinderGeometry mixins Geometry {
+declare export class CylinderGeometry mixins Geometry {
 
     /**
      * 
@@ -6983,18 +6414,15 @@ export class CylinderGeometry mixins Geometry {
     }
 }
 
-declare
-export class ConeBufferGeometry mixins BufferGeometry {
+declare export class ConeBufferGeometry mixins BufferGeometry {
     constructor(radius?: number, height?: number, radialSegment?: number, heightSegment?: number, openEnded?: boolean, thetaStart?: number, thetaLength?: number): this
 }
 
-declare
-export class ConeGeometry mixins CylinderGeometry {
+declare export class ConeGeometry mixins CylinderGeometry {
     constructor(radius?: number, height?: number, radialSegment?: number, heightSegment?: number, openEnded?: boolean, thetaStart?: number, thetaLength?: number): this
 }
 
-declare
-export class DodecahedronGeometry mixins Geometry {
+declare export class DodecahedronGeometry mixins Geometry {
     constructor(radius: number, detail: number): this;
     parameters: {
         radius: number,
@@ -7002,13 +6430,11 @@ export class DodecahedronGeometry mixins Geometry {
     }
 }
 
-declare
-export class EdgesGeometry mixins BufferGeometry {
+declare export class EdgesGeometry mixins BufferGeometry {
     constructor(geometry: THREE$BufferGeometry, thresholdAngle: number): this
 }
 
-declare
-export class ExtrudeGeometry mixins Geometry {
+declare export class ExtrudeGeometry mixins Geometry {
     constructor(shape?: THREE$Shape, options?: any): this;
     constructor(shapes?: THREE$Shape[], options?: any): this;
     WorldUVGenerator: {
@@ -7028,13 +6454,11 @@ export class ExtrudeGeometry mixins Geometry {
     addShape(shape: THREE$Shape, options?: any): void
 }
 
-declare
-export class IcosahedronGeometry mixins PolyhedronGeometry {
+declare export class IcosahedronGeometry mixins PolyhedronGeometry {
     constructor(radius: number, detail: number): this
 }
 
-declare
-export class LatheBufferGeometry mixins BufferGeometry {
+declare export class LatheBufferGeometry mixins BufferGeometry {
     constructor(points: THREE$Vector3[], segments?: number, phiStart?: number, phiLength?: number): this;
     parameters: {
         points: THREE$Vector3[],
@@ -7044,8 +6468,7 @@ export class LatheBufferGeometry mixins BufferGeometry {
     }
 }
 
-declare
-export class LatheGeometry mixins Geometry {
+declare export class LatheGeometry mixins Geometry {
     constructor(points: THREE$Vector3[], segments?: number, phiStart?: number, phiLength?: number): this;
     parameters: {
         points: THREE$Vector3[],
@@ -7055,13 +6478,11 @@ export class LatheGeometry mixins Geometry {
     }
 }
 
-declare
-export class OctahedronGeometry mixins PolyhedronGeometry {
+declare export class OctahedronGeometry mixins PolyhedronGeometry {
     constructor(radius: number, detail: number): this
 }
 
-declare
-export class ParametricGeometry mixins Geometry {
+declare export class ParametricGeometry mixins Geometry {
     constructor(func: (u: number, v: number) => THREE$Vector3, slices: number, stacks: number): this;
     parameters: {
         func: (u: number, v: number) => THREE$Vector3,
@@ -7070,8 +6491,7 @@ export class ParametricGeometry mixins Geometry {
     }
 }
 
-declare
-export class PlaneBufferGeometry mixins BufferGeometry {
+declare export class PlaneBufferGeometry mixins BufferGeometry {
     constructor(width: number, height: number, widthSegments?: number, heightSegments?: number): this;
     parameters: {
         width: number,
@@ -7081,8 +6501,7 @@ export class PlaneBufferGeometry mixins BufferGeometry {
     }
 }
 
-declare
-export class PlaneGeometry mixins Geometry {
+declare export class PlaneGeometry mixins Geometry {
     constructor(width: number, height: number, widthSegments?: number, heightSegments?: number): this;
     parameters: {
         width: number,
@@ -7092,8 +6511,7 @@ export class PlaneGeometry mixins Geometry {
     }
 }
 
-declare
-export class PolyhedronGeometry mixins Geometry {
+declare export class PolyhedronGeometry mixins Geometry {
     constructor(vertices: THREE$Vector3[], faces: THREE$Face3[], radius?: number, detail?: number): this;
     parameters: {
         vertices: THREE$Vector3[],
@@ -7104,8 +6522,7 @@ export class PolyhedronGeometry mixins Geometry {
     boundingSphere: THREE$Sphere
 }
 
-declare
-export class RingBufferGeometry mixins BufferGeometry {
+declare export class RingBufferGeometry mixins BufferGeometry {
     constructor(innerRadius?: number, outerRadius?: number, thetaSegments?: number, phiSegments?: number, thetaStart?: number, thetaLength?: number): this;
     parameters: {
         innerRadius: number,
@@ -7117,8 +6534,7 @@ export class RingBufferGeometry mixins BufferGeometry {
     }
 }
 
-declare
-export class RingGeometry mixins Geometry {
+declare export class RingGeometry mixins Geometry {
     constructor(innerRadius?: number, outerRadius?: number, thetaSegments?: number, phiSegments?: number, thetaStart?: number, thetaLength?: number): this;
     parameters: {
         innerRadius: number,
@@ -7130,16 +6546,14 @@ export class RingGeometry mixins Geometry {
     }
 }
 
-declare
-export class ShapeGeometry mixins Geometry {
+declare export class ShapeGeometry mixins Geometry {
     constructor(shape: THREE$Shape, options?: any): this;
     constructor(shapes: THREE$Shape[], options?: any): this;
     addShapeList(shapes: THREE$Shape[], options: any): THREE$ShapeGeometry;
     addShape(shape: THREE$Shape, options?: any): void
 }
 
-declare
-export class SphereBufferGeometry mixins BufferGeometry {
+declare export class SphereBufferGeometry mixins BufferGeometry {
     constructor(radius: number, widthSegments?: number, heightSegments?: number, phiStart?: number, phiLength?: number, thetaStart?: number, thetaLength?: number): this;
     parameters: {
         radius: number,
@@ -7156,8 +6570,7 @@ export class SphereBufferGeometry mixins BufferGeometry {
 /**
  * A class for generating sphere geometries
  */
-declare
-export class SphereGeometry mixins Geometry {
+declare export class SphereGeometry mixins Geometry {
 
     /**
      * The geometry is created by sweeping and calculating vertexes around the Y axis (horizontal sweep) and the Z axis (vertical sweep). Thus, incomplete spheres (akin to 'sphere slices') can be created through the use of different values of phiStart, phiLength, thetaStart and thetaLength, in order to define the points in which we start (or end) calculating those vertices.
@@ -7181,13 +6594,11 @@ export class SphereGeometry mixins Geometry {
     }
 }
 
-declare
-export class TetrahedronGeometry mixins PolyhedronGeometry {
+declare export class TetrahedronGeometry mixins PolyhedronGeometry {
     constructor(radius?: number, detail?: number): this
 }
 
-declare
-export interface THREE$TextGeometryParameters {
+declare export interface THREE$TextGeometryParameters {
     font: THREE$Font,
         size: number,
         height: number,
@@ -7197,8 +6608,7 @@ export interface THREE$TextGeometryParameters {
         bevelSize: number
 }
 
-declare
-export class TextGeometry mixins ExtrudeGeometry {
+declare export class TextGeometry mixins ExtrudeGeometry {
     constructor(text: string, parameters?: THREE$TextGeometryParameters): this;
     parameters: {
         font: THREE$Font,
@@ -7211,8 +6621,7 @@ export class TextGeometry mixins ExtrudeGeometry {
     }
 }
 
-declare
-export class TorusBufferGeometry mixins BufferGeometry {
+declare export class TorusBufferGeometry mixins BufferGeometry {
     constructor(radius?: number, tube?: number, radialSegments?: number, tubularSegments?: number, arc?: number): this;
     parameters: {
         radius: number,
@@ -7223,8 +6632,7 @@ export class TorusBufferGeometry mixins BufferGeometry {
     }
 }
 
-declare
-export class TorusGeometry mixins Geometry {
+declare export class TorusGeometry mixins Geometry {
     constructor(radius?: number, tube?: number, radialSegments?: number, tubularSegments?: number, arc?: number): this;
     parameters: {
         radius: number,
@@ -7235,8 +6643,7 @@ export class TorusGeometry mixins Geometry {
     }
 }
 
-declare
-export class TorusKnotBufferGeometry mixins BufferGeometry {
+declare export class TorusKnotBufferGeometry mixins BufferGeometry {
     constructor(radius?: number, tube?: number, radialSegments?: number, tubularSegments?: number, p?: number, q?: number, heightScale?: number): this;
     parameters: {
         radius: number,
@@ -7249,8 +6656,7 @@ export class TorusKnotBufferGeometry mixins BufferGeometry {
     }
 }
 
-declare
-export class TorusKnotGeometry mixins Geometry {
+declare export class TorusKnotGeometry mixins Geometry {
     constructor(radius?: number, tube?: number, radialSegments?: number, tubularSegments?: number, p?: number, q?: number, heightScale?: number): this;
     parameters: {
         radius: number,
@@ -7263,8 +6669,7 @@ export class TorusKnotGeometry mixins Geometry {
     }
 }
 
-declare
-export class TubeGeometry mixins Geometry {
+declare export class TubeGeometry mixins Geometry {
     constructor(path: THREE$Path, segments?: number, radius?: number, radiusSegments?: number, closed?: boolean, taper?: (u: number) => number): this;
     parameters: {
         path: THREE$Path,
@@ -7282,13 +6687,11 @@ export class TubeGeometry mixins Geometry {
     FrenetFrames(path: THREE$Path, segments: number, closed: boolean): void
 }
 
-declare
-export class WireframeGeometry mixins BufferGeometry {
+declare export class WireframeGeometry mixins BufferGeometry {
     constructor(geometry: THREE$Geometry | THREE$BufferGeometry): this
 }
 
-declare
-export class ArrowHelper mixins Object3D {
+declare export class ArrowHelper mixins Object3D {
     constructor(dir: THREE$Vector3, origin?: THREE$Vector3, length?: number, hex?: number, headLength?: number, headWidth?: number): this;
     line: THREE$Line;
     cone: THREE$Mesh;
@@ -7297,27 +6700,23 @@ export class ArrowHelper mixins Object3D {
     setColor(hex: number): void
 }
 
-declare
-export class AxisHelper mixins LineSegments {
+declare export class AxisHelper mixins LineSegments {
     constructor(size?: number): this
 }
 
-declare
-export class BoundingBoxHelper mixins Mesh {
+declare export class BoundingBoxHelper mixins Mesh {
     constructor(object?: THREE$Object3D, hex?: number): this;
     object: THREE$Object3D;
     box: THREE$Box3;
     update(): void
 }
 
-declare
-export class BoxHelper mixins LineSegments {
+declare export class BoxHelper mixins LineSegments {
     constructor(object?: THREE$Object3D, color?: THREE$Color): this;
     update(object?: THREE$Object3D): void
 }
 
-declare
-export class CameraHelper mixins LineSegments {
+declare export class CameraHelper mixins LineSegments {
     constructor(camera: THREE$Camera): this;
     camera: THREE$Camera;
     pointMap: {
@@ -7326,8 +6725,7 @@ export class CameraHelper mixins LineSegments {
     update(): void
 }
 
-declare
-export class DirectionalLightHelper mixins Object3D {
+declare export class DirectionalLightHelper mixins Object3D {
     constructor(light: THREE$Light, size?: number): this;
     light: THREE$Light;
     lightPlane: THREE$Line;
@@ -7335,27 +6733,23 @@ export class DirectionalLightHelper mixins Object3D {
     update(): void
 }
 
-declare
-export class EdgesHelper mixins LineSegments {
+declare export class EdgesHelper mixins LineSegments {
     constructor(object: THREE$Object3D, hex?: number, thresholdAngle?: number): this
 }
 
-declare
-export class FaceNormalsHelper mixins LineSegments {
+declare export class FaceNormalsHelper mixins LineSegments {
     constructor(object: THREE$Object3D, size?: number, hex?: number, linewidth?: number): this;
     object: THREE$Object3D;
     size: number;
     update(object?: THREE$Object3D): void
 }
 
-declare
-export class GridHelper mixins LineSegments {
+declare export class GridHelper mixins LineSegments {
     constructor(size: number, divisions: number, color1?: THREE$Color | number, color2?: THREE$Color | number): this;
     setColors(color1?: THREE$Color | number, color2?: THREE$Color | number): void
 }
 
-declare
-export class HemisphereLightHelper mixins Object3D {
+declare export class HemisphereLightHelper mixins Object3D {
     constructor(light: THREE$Light, sphereSize: number): this;
     light: THREE$Light;
     colors: THREE$Color[];
@@ -7364,16 +6758,14 @@ export class HemisphereLightHelper mixins Object3D {
     update(): void
 }
 
-declare
-export class PointLightHelper mixins Object3D {
+declare export class PointLightHelper mixins Object3D {
     constructor(light: THREE$Light, sphereSize: number): this;
     light: THREE$Light;
     dispose(): void;
     update(): void
 }
 
-declare
-export class SkeletonHelper mixins LineSegments {
+declare export class SkeletonHelper mixins LineSegments {
     constructor(bone: THREE$Object3D): this;
     bones: THREE$Bone[];
     root: THREE$Object3D;
@@ -7381,36 +6773,31 @@ export class SkeletonHelper mixins LineSegments {
     update(): void
 }
 
-declare
-export class SpotLightHelper mixins Object3D {
+declare export class SpotLightHelper mixins Object3D {
     constructor(light: THREE$Light): this;
     light: THREE$Light;
     dispose(): void;
     update(): void
 }
 
-declare
-export class VertexNormalsHelper mixins LineSegments {
+declare export class VertexNormalsHelper mixins LineSegments {
     constructor(object: THREE$Object3D, size?: number, hex?: number, linewidth?: number): this;
     object: THREE$Object3D;
     size: number;
     update(object?: THREE$Object3D): void
 }
 
-declare
-export class WireframeHelper mixins LineSegments {
+declare export class WireframeHelper mixins LineSegments {
     constructor(object: THREE$Object3D, hex?: number): this
 }
 
-declare
-export class ImmediateRenderObject mixins Object3D {
+declare export class ImmediateRenderObject mixins Object3D {
     constructor(material: THREE$Material): this;
     material: THREE$Material;
     render(renderCallback: Function): void
 }
 
-declare
-export interface THREE$MorphBlendMeshAnimation {
+declare export interface THREE$MorphBlendMeshAnimation {
     start: number,
         end: number,
         length: number,
@@ -7426,8 +6813,7 @@ export interface THREE$MorphBlendMeshAnimation {
         mirroredLoop: boolean
 }
 
-declare
-export class MorphBlendMesh mixins Mesh {
+declare export class MorphBlendMesh mixins Mesh {
     constructor(geometry: THREE$Geometry, material: THREE$Material): this;
     animationsMap: {
         [name: string]: THREE$MorphBlendMeshAnimation

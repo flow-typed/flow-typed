@@ -2679,5 +2679,4 @@ declare module 'Live' {
                 callback?: (response: any) => void): IPromise<T >
     }
 }
-declare
-var WL: undefined.API;
+declare var WL: undefined.API;

@@ -161,5 +161,4 @@ declare interface Keyboard {
         */
         onhiding(): void
 }
-declare
-var Keyboard: Keyboard;
+declare var Keyboard: Keyboard;

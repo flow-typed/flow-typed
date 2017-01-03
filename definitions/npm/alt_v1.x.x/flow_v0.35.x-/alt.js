@@ -11,8 +11,7 @@ declare interface AltJS$StoreReduce {
         data: any
 }
 
-declare
-export interface AltJS$StoreModel<S>{
+declare export interface AltJS$StoreModel<S>{
     bindAction(action: AltJS$Action<any>, handler: AltJS$ActionHandler): void,
     bindActions(actions: AltJS$ActionsClass): void,
     exportPublicMethods(exportConfig: any): void,
@@ -42,13 +41,11 @@ export interface AltJS$StoreModel<S>{
     displayName?: string
 }
 
-declare
-export type AltJS$Source = {
+declare export type AltJS$Source = {
     [name: string]: () => AltJS$SourceModel<any >
 };
 
-declare
-export interface AltJS$SourceModel<S>{
+declare export interface AltJS$SourceModel<S>{
     local(state: any, ...args: any[]): any,
     remote(state: any, ...args: any[]): Promise<S>,
     shouldFetch(fetchFn: (...args: Array<any>) => boolean): void,
@@ -58,27 +55,23 @@ export interface AltJS$SourceModel<S>{
     interceptResponse(response: any, action: AltJS$Action<any>, ...args: Array<any>): any
 }
 
-declare
-export interface AltJS$AltStore<S>{
+declare export interface AltJS$AltStore<S>{
     getState(): S,
     listen(handler: (state: S) => any): () => void,
     unlisten(handler: (state: S) => any): void,
     emitChange(): void
 }
 
-declare
-export type AltJS$Actions = {
+declare export type AltJS$Actions = {
     [action: string]: AltJS$Action<any >
 };
 
-declare
-export interface AltJS$Action<T>{
+declare export interface AltJS$Action<T>{
     (args: T): void,
     defer(data: any): void
 }
 
-declare
-export interface AltJS$ActionsClass {
+declare export interface AltJS$ActionsClass {
     generateActions(...action: Array<string>): void,
         dispatch(...payload: Array<any>): void,
         actions?: AltJS$Actions
@@ -116,8 +109,7 @@ declare class Alt {
     getStore(name: string): AltJS$AltStore<any >
 }
 
-declare
-export interface AltJS$AltFactory {
+declare export interface AltJS$AltFactory {
     new(config?: AltJS$AltConfig): AltJS$Alt
 }
 

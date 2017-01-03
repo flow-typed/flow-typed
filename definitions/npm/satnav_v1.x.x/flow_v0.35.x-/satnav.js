@@ -24,5 +24,4 @@ declare interface ISatnav {
         change(onChange: (hash: string, params: any, old: any) => any): ISatnav,
         go(): ISatnav
 }
-declare
-function Satnav(options?: ISatnavOptions): ISatnav
+declare function Satnav(options?: ISatnavOptions): ISatnav

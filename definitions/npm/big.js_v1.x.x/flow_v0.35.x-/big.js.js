@@ -39,5 +39,4 @@ declare module 'big.js' {
     declare var bigjs: BigJsLibrary$BigJS;
     declare module.exports: typeof bigjs
 }
-declare
-var Big: BigJsLibrary$BigJS;
+declare var Big: BigJsLibrary$BigJS;

@@ -6,16 +6,14 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface rbush$BBox {
+declare export interface rbush$BBox {
     minX: number,
         minY: number,
         maxX: number,
         maxY: number
 }
 
-declare
-export interface rbush$RBush<T>{
+declare export interface rbush$RBush<T>{
 
     /**
      * Insert an item. To insert many items, use load().

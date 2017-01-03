@@ -946,5 +946,4 @@ declare module 'Spreadsheet' {
             setActiveSpreadsheet(newActiveSpreadsheet: GoogleAppsScript$Spreadsheet): void
     }
 }
-declare
-var SpreadsheetApp: undefined.SpreadsheetApp;
+declare var SpreadsheetApp: undefined.SpreadsheetApp;

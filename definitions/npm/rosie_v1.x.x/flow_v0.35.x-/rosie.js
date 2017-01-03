@@ -189,8 +189,7 @@ declare interface rosie$IFactory {
         */
         extend(name: String | rosie$IFactory): rosie$IFactory
 }
-declare
-var rosie: {
+declare var rosie: {
     Factory: rosie$IFactoryStatic
 };
 declare module 'rosie' {

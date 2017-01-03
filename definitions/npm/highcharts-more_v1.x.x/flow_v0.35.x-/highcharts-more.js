@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var HighchartsMore: (H: ___Highcharts.Static) => ___Highcharts.Static;
+declare var HighchartsMore: (H: ___Highcharts.Static) => ___Highcharts.Static;
 declare module 'highcharts/highcharts-more' {
     declare module.exports: typeof HighchartsMore
 }

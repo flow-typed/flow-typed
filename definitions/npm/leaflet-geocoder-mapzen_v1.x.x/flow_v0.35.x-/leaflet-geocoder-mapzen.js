@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Control$GeocoderStatic = {
+declare export type Control$GeocoderStatic = {
 
     /**
      * Creates a geocoder control.
@@ -16,11 +15,9 @@ export type Control$GeocoderStatic = {
 } & ClassStatic
 
 
-declare
-export type Control$Geocoder = {}
+declare export type Control$Geocoder = {}
 
-declare
-export interface Control$GeocoderOptions {
+declare export interface Control$GeocoderOptions {
 
     /**
      * Host endpoint for a Pelias-compatible search API.
@@ -170,12 +167,10 @@ export interface Control$GeocoderOptions {
 }
 
 
-declare
-var npm$namespace$control: {
+declare var npm$namespace$control: {
         geocoder: typeof control$geocoder,
     }
     /**
      * Creates a geocoder control.
      */
-declare
-export function control$geocoder(api_key: string, options?: Control$GeocoderOptions): undefined.Geocoder
+declare export function control$geocoder(api_key: string, options?: Control$GeocoderOptions): undefined.Geocoder

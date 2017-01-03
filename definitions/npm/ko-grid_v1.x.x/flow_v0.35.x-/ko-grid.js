@@ -397,8 +397,7 @@ declare interface IKg {
          */
         defaultHeaderCellTemplate(): string
 }
-declare
-var kg: IKg;
+declare var kg: IKg;
 declare module 'kg' {
     declare module.exports: typeof kg
 }

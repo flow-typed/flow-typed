@@ -172,5 +172,4 @@ declare interface d3pie$ID3PieOptions {
 declare interface d3pie$ID3PieClass {
     new(id: string | HTMLElement, options: d3pie$ID3PieOptions): d3pie$ID3PieChart
 }
-declare
-var d3pie: d3pie$ID3PieClass;
+declare var d3pie: d3pie$ID3PieClass;

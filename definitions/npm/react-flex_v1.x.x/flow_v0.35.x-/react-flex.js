@@ -68,8 +68,7 @@ declare interface ___ReactFlex$CommonFlexProps {
 declare type ___ReactFlex$FlexProps = {} & & ___ReactFlex$CommonFlexProps
 
 
-declare
-export class Flex mixins React.Component<___ReactFlex$FlexProps, {}>{}
+declare export class Flex mixins React.Component<___ReactFlex$FlexProps, {}>{}
 
 declare type ___ReactFlex$ItemProps = {
 
@@ -98,8 +97,7 @@ declare type ___ReactFlex$ItemProps = {
 } & & ___ReactFlex$CommonFlexProps
 
 
-declare
-export class Item mixins React.Component<___ReactFlex$ItemProps, {}>{}
+declare export class Item mixins React.Component<___ReactFlex$ItemProps, {}>{}
 declare module 'react-flex' {
     declare module.exports: typeof ___ReactFlex
 }

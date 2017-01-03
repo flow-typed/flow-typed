@@ -230,8 +230,7 @@ declare interface uri$URIStatic {
 declare interface JQuery {
     uri(): uri$URI
 }
-declare
-var URI: uri$URIStatic;
+declare var URI: uri$URIStatic;
 declare module 'URI' {
     declare module.exports: typeof URI
 }

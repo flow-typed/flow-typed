@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Immutable: {
+declare var npm$namespace$Immutable: {
         fromJS: typeof Immutable$fromJS,
         is: typeof Immutable$is,
         List: typeof Immutable$List,
@@ -76,8 +75,7 @@ var npm$namespace$Immutable: {
     [1]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse#Example.3A_Using_the_reviver_parameter
           "Using the reviver parameter"
     */
-declare
-export function Immutable$fromJS(json: any, reviver?: (k: any, v: Immutable$Iterable<any, any>) => any): any
+declare export function Immutable$fromJS(json: any, reviver?: (k: any, v: Immutable$Iterable<any, any>) => any): any
 
 
 /**
@@ -97,16 +95,14 @@ key equality and `Set` membership.
 Note: Unlike `Object.is`, `Immutable.is` assumes `0` and `-0` are the same
 value, matching the behavior of ES6 Map key equality.
 */
-declare
-export function Immutable$is(first: any, second: any): boolean
+declare export function Immutable$is(first: any, second: any): boolean
 
 
 /**
  * Create a new immutable List containing the values of the provided
  * iterable-like.
  */
-declare
-export function Immutable$List<T>(): Immutable$List<T >
+declare export function Immutable$List<T>(): Immutable$List<T >
 
 
     /**
@@ -137,8 +133,7 @@ export function Immutable$List<T>(): Immutable$List<T >
     but since Immutable Map keys can be of any type the argument to `get()` is
     not altered.
     */
-    declare
-export function Immutable$Map<K, V>(): Immutable$Map<K, V >
+    declare export function Immutable$Map<K, V>(): Immutable$Map<K, V >
 
 
     /**
@@ -153,24 +148,21 @@ export function Immutable$Map<K, V>(): Immutable$Map<K, V >
          var newOrderedMap = OrderedMap({key: "value"});
          var newOrderedMap = OrderedMap([["key", "value"]]);
     */
-    declare
-export function Immutable$OrderedMap<K, V>(): Immutable$OrderedMap<K, V >
+    declare export function Immutable$OrderedMap<K, V>(): Immutable$OrderedMap<K, V >
 
 
     /**
      * Create a new immutable Set containing the values of the provided
      * iterable-like.
      */
-    declare
-export function Immutable$Set<T>(): Immutable$Set<T >
+    declare export function Immutable$Set<T>(): Immutable$Set<T >
 
 
     /**
      * Create a new immutable OrderedSet containing the values of the provided
      * iterable-like.
      */
-    declare
-export function Immutable$OrderedSet<T>(): Immutable$OrderedSet<T >
+    declare export function Immutable$OrderedSet<T>(): Immutable$OrderedSet<T >
 
 
     /**
@@ -180,8 +172,7 @@ export function Immutable$OrderedSet<T>(): Immutable$OrderedSet<T >
     The iteration order of the provided iterable is preserved in the
     resulting `Stack`.
     */
-    declare
-export function Immutable$Stack<T>(): Immutable$Stack<T >
+    declare export function Immutable$Stack<T>(): Immutable$Stack<T >
 
 
     /**
@@ -196,8 +187,7 @@ export function Immutable$Stack<T>(): Immutable$Stack<T >
          Range(30,10,5) // [30,25,20,15]
          Range(30,30,5) // []
     */
-    declare
-export function Immutable$Range(start?: number, end?: number, step?: number): Seq.Indexed<number >
+    declare export function Immutable$Range(start?: number, end?: number, step?: number): Seq.Indexed<number >
 
 
     /**
@@ -207,11 +197,9 @@ export function Immutable$Range(start?: number, end?: number, step?: number): Se
          Repeat('foo') // ['foo','foo','foo',...]
          Repeat('bar',4) // ['bar','bar','bar','bar']
     */
-    declare
-export function Immutable$Repeat<T>(value: T, times?: number): Seq.Indexed<T >
+    declare export function Immutable$Repeat<T>(value: T, times?: number): Seq.Indexed<T >
 
-    declare
-export function Immutable$Record(defaultValues: {
+    declare export function Immutable$Record(defaultValues: {
     [key: string]: any
 }, name?: string): Record.Class
 
@@ -228,8 +216,7 @@ Returns a particular kind of `Seq` based on the input.
    * If an Iterator, an `Seq.Indexed`.
    * If an Object, a `Seq.Keyed`.
 */
-declare
-export function Immutable$Seq<K, V>(): Immutable$Seq<K, V >
+declare export function Immutable$Seq<K, V>(): Immutable$Seq<K, V >
 
 
     /**
@@ -247,11 +234,9 @@ export function Immutable$Seq<K, V>(): Immutable$Seq<K, V >
     If you want to ensure that a Iterable of one item is returned, use
     `Seq.of`.
     */
-    declare
-export function Immutable$Iterable<K, V>(iterable: Immutable$Iterable<K, V>): Immutable$Iterable<K, V >
+    declare export function Immutable$Iterable<K, V>(iterable: Immutable$Iterable<K, V>): Immutable$Iterable<K, V >
 
-    declare
-export type Immutable$Collection<K, V>= {
+    declare export type Immutable$Collection<K, V>= {
 
     /**
      * All collections maintain their current `size` as an integer.
@@ -268,8 +253,7 @@ This is not part of the Immutable library, but a common interface used by
 many types in ES6 JavaScript.
  * @ignore  
 */
-declare
-export interface Immutable$Iterator<T>{
+declare export interface Immutable$Iterator<T>{
     next(): {
         value: T,
         done: boolean

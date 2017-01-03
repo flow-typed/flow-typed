@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$CodeMirror: {
+declare var npm$namespace$CodeMirror: {
         runMode: typeof CodeMirror$runMode,
     }
     /**
@@ -21,8 +20,7 @@ var npm$namespace$CodeMirror: {
     tokens will be converted to span elements as in an editor,
     and inserted into the node (through innerHTML).
     */
-declare
-function CodeMirror$runMode(
+declare function CodeMirror$runMode(
     text: string,
     modespec: any,
     callback: (HTMLElement | ((text: string, style: string) => void)),

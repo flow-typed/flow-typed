@@ -31,8 +31,7 @@ declare interface MousetrapInstance {
         trigger(keys: string, action?: string): void,
         reset(): void
 }
-declare
-var Mousetrap: MousetrapStatic;
+declare var Mousetrap: MousetrapStatic;
 declare module 'mousetrap' {
     declare module.exports: typeof Mousetrap
 }

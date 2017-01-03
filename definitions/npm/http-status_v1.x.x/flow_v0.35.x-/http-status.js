@@ -94,8 +94,7 @@ declare interface HttpStatus {
         GATEWAY_TIMEOUT: number,
         HTTP_VERSION_NOT_SUPPORTED: number
 }
-declare
-var httpStatus: HttpStatus;
+declare var httpStatus: HttpStatus;
 declare module 'http-status' {
     declare module.exports: typeof httpStatus
 }

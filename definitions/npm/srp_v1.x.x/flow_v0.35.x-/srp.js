@@ -7,21 +7,18 @@
  */
 
 
-declare
-var npm$namespace$SRP: {
+declare var npm$namespace$SRP: {
     computeVerifier: typeof SRP$computeVerifier,
     genKey: typeof SRP$genKey,
 }
-declare
-export interface SRP$Params {
+declare export interface SRP$Params {
     N_length_bits: number,
         N: BigNum,
         g: BigNum,
         hash: string
 }
 
-declare
-export var params: {
+declare export var params: {
     [bits: string]: SRP$Params
 };
 
@@ -41,8 +38,7 @@ password (P), and group parameters (N, g).
  * @param  user password
  * @returns  
 */
-declare
-export function SRP$computeVerifier(params: SRP$Params, salt: Buffer, I: Buffer, P: Buffer): Buffer
+declare export function SRP$computeVerifier(params: SRP$Params, salt: Buffer, I: Buffer, P: Buffer): Buffer
 
 
 /**
@@ -50,11 +46,9 @@ export function SRP$computeVerifier(params: SRP$Params, salt: Buffer, I: Buffer,
  * @param  length of key (default=32)
  * @param  function to call with err,key
  */
-declare
-export function SRP$genKey(bytes: number, callback: (error: Error, key: Buffer) => void): void
+declare export function SRP$genKey(bytes: number, callback: (error: Error, key: Buffer) => void): void
 
-declare
-export class Client {
+declare export class Client {
     constructor(params: SRP$Params, salt: Buffer, identity: Buffer, password: Buffer, secret1: Buffer): this;
     computeA(): Buffer;
     setB(B: Buffer): void;
@@ -63,8 +57,7 @@ export class Client {
     computeK(): Buffer
 }
 
-declare
-export class Server {
+declare export class Server {
     constructor(params: SRP$Params, verifier: Buffer, secret2: Buffer): this;
     computeB(): Buffer;
     setA(A: Buffer): void;

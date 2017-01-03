@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$ReactRedux: {
+declare var npm$namespace$ReactRedux: {
     connect: typeof ReactRedux$connect,
 }
 declare type ReactRedux$ComponentClass<P>= ___React.ComponentClass<P>;
@@ -33,8 +32,7 @@ declare interface ReactRedux$ComponentDecorator<TOriginalProps, TOwnProps>{
  * 
 Can't use the above decorator because it would default the type to {}
 */
-declare
-export interface ReactRedux$InferableComponentDecorator {
+declare export interface ReactRedux$InferableComponentDecorator {
     (component: TComponentConstruct): TComponentConstruct
 }
 
@@ -57,8 +55,7 @@ dispatch props or both when applicable
  * @param mergeProps 
  * @param options 
 */
-declare
-export function ReactRedux$connect(): ReactRedux$InferableComponentDecorator
+declare export function ReactRedux$connect(): ReactRedux$InferableComponentDecorator
 
 declare type ReactRedux$FuncOrSelf<T>= T | (() => T);
 
@@ -96,8 +93,7 @@ declare interface ReactRedux$Options {
         withRef?: boolean
 }
 
-declare
-export interface ReactRedux$ProviderProps {
+declare export interface ReactRedux$ProviderProps {
 
     /**
      * The single Redux store in your application.
@@ -110,8 +106,7 @@ export interface ReactRedux$ProviderProps {
 /**
  * Makes the Redux store available to the connect() calls in the component hierarchy below.
  */
-declare
-export class Provider mixins ___React.Component<ReactRedux$ProviderProps, {}>{}
+declare export class Provider mixins ___React.Component<ReactRedux$ProviderProps, {}>{}
 declare module 'react-redux' {
     declare module.exports: typeof ReactRedux
 }

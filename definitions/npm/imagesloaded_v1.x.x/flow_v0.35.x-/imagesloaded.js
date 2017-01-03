@@ -43,8 +43,7 @@ declare interface ImagesLoaded$ImagesLoadedConstructor {
      */
     (elem: ImagesLoaded$ElementSelector, callback?: ImagesLoaded$ImagesLoadedCallback): ImagesLoaded$ImagesLoaded
 }
-declare
-var imagesLoaded: ImagesLoaded$ImagesLoadedConstructor;
+declare var imagesLoaded: ImagesLoaded$ImagesLoadedConstructor;
 declare module 'imagesloaded' {
     declare module.exports: typeof imagesLoaded
 }

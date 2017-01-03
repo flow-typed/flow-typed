@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$DatePickerOptions {
+declare export interface ngCordova$DatePickerOptions {
     mode?: string,
         date?: Date | string | number,
         minDate?: Date | string | number,
@@ -32,7 +31,6 @@ export interface ngCordova$DatePickerOptions {
         locale?: string
 }
 
-declare
-export interface ngCordova$IDatePickerService {
+declare export interface ngCordova$IDatePickerService {
     show(options?: ngCordova$DatePickerOptions): ng.IPromise<Date >
 }

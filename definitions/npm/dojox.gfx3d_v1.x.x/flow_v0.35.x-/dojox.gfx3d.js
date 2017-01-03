@@ -3319,8 +3319,7 @@ declare interface gfx3d$gradient {
     (model: undefined.Model, material: Object, center: Object, radius: number, from: number, to: number, matrix: Object): void
 }
 
-declare
-var tolerance: number;
+declare var tolerance: number;
 declare module 'dojox/gfx3d' {
     declare var exp: dojox$gfx3d;
     declare module.exports: typeof exp

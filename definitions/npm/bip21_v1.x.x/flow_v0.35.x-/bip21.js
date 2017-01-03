@@ -7,18 +7,15 @@
  */
 
 
-declare
-var npm$namespace$bip21: {
+declare var npm$namespace$bip21: {
     decode: typeof bip21$decode,
     encode: typeof bip21$encode,
 }
-declare
-export function bip21$decode(uri: string): {
+declare export function bip21$decode(uri: string): {
     address: string,
     amount?: number
 }
 
-declare
-export function bip21$encode(address: string, options?: any): stringdeclare module 'bip21' {
+declare export function bip21$encode(address: string, options?: any): stringdeclare module 'bip21' {
     declare module.exports: typeof bip21
 }

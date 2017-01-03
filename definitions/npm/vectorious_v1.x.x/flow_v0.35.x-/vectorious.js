@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class Vector {
+declare export class Vector {
 
     /**
      * 
@@ -272,8 +271,7 @@ export class Vector {
      */
     toArray(): number[]
 }
-declare
-export class Matrix {
+declare export class Matrix {
     T: Matrix;
 
     /**
@@ -591,5 +589,4 @@ export class Matrix {
      */
     toArray(): number[][]
 }
-declare
-export class BLAS {}
+declare export class BLAS {}

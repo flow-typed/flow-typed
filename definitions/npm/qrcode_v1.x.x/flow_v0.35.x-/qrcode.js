@@ -47,8 +47,7 @@ declare module 'qrcode' {
     };
     declare module.exports: typeof qrcode
 }
-declare
-var QRCodeLib: {
+declare var QRCodeLib: {
     QRCodeDraw: {
         new(): {
             draw(

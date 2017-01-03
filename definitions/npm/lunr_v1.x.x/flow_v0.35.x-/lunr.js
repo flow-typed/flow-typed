@@ -7,14 +7,12 @@
  */
 
 
-declare
-var npm$namespace$lunr: {
+declare var npm$namespace$lunr: {
     stemmer: typeof lunr$stemmer,
     stopWordFilter: typeof lunr$stopWordFilter,
     trimmer: typeof lunr$trimmer,
 }
-declare
-var version: string;
+declare var version: string;
 
 declare module 'tokenizer' {
     declare var seperator: RegExp | string;
@@ -58,8 +56,7 @@ declare interface lunr$TokenizerFunction {
  * the PorterStemmer taken from http://tartaurs.org/~martin
  * @param token The string to stem
  */
-declare
-function lunr$stemmer(token: string): string
+declare function lunr$stemmer(token: string): string
 
 
 /**
@@ -70,11 +67,9 @@ This is intended to be used in the Pipeline. If the token does not pass the filt
 undefined will be returned.
  * @param token The token to pass through the filter
 */
-declare
-function lunr$stopWordFilter(token: string): string
+declare function lunr$stopWordFilter(token: string): string
 
-declare
-var stopWords: lunr$SortedSet<string>;
+declare var stopWords: lunr$SortedSet<string>;
 
 
 /**
@@ -85,8 +80,7 @@ This implementation may not work correctly for non latin characters and should e
 be removed or adapted for use with languages with non-latin characters.
  * @param token The token to pass through the filter
 */
-declare
-function lunr$trimmer(token: string): string
+declare function lunr$trimmer(token: string): string
 
 
 /**
@@ -805,5 +799,4 @@ var idx = lunr(function () {
 });
 ```
 */
-declare
-function lunr(config: Function): lunr$Index
+declare function lunr(config: Function): lunr$Index

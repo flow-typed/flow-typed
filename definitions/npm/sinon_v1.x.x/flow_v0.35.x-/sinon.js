@@ -394,8 +394,7 @@ declare interface Sinon$SinonTestConfig {
 declare type Sinon$SinonTestWrapper = {
     (...args: any[]): any
 } & Sinon$SinonSandbox
-declare
-var sinon: Sinon$SinonStatic;
+declare var sinon: Sinon$SinonStatic;
 declare module 'sinon' {
     declare module.exports: typeof sinon
 }

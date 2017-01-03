@@ -366,5 +366,4 @@ declare module 'mock' {
             passThrough(): IRequestHandler
     }
 }
-declare
-var inject: angular$IInjectStatic;
+declare var inject: angular$IInjectStatic;

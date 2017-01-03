@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class Ros {
+declare export class Ros {
 
     /**
      * Manages connection to the server and all interactions with ROS.
@@ -179,8 +178,7 @@ export class Ros {
     decodeTypeDefs(defs: any): void
 }
 
-declare
-export class Message {
+declare export class Message {
 
     /**
      * Message objects are used for publishing and subscribing to and from topics.
@@ -190,8 +188,7 @@ export class Message {
     constructor(values: any): this
 }
 
-declare
-export class Param {
+declare export class Param {
 
     /**
      * A ROS parameter.
@@ -226,8 +223,7 @@ export class Param {
     delete(callback: (response: any) => void): void
 }
 
-declare
-export class Service {
+declare export class Service {
 
     /**
      * A ROS service client.
@@ -272,8 +268,7 @@ export class Service {
     unadvertise(): void
 }
 
-declare
-export class ServiceRequest {
+declare export class ServiceRequest {
 
     /**
      * A ServiceRequest is passed into the service call.
@@ -283,8 +278,7 @@ export class ServiceRequest {
     constructor(values?: any): this
 }
 
-declare
-export class ServiceResponse {
+declare export class ServiceResponse {
 
     /**
      * A ServiceResponse is returned from the service call.
@@ -294,8 +288,7 @@ export class ServiceResponse {
     constructor(values?: any): this
 }
 
-declare
-export class Topic {
+declare export class Topic {
 
     /**
      * Publish and/or subscribe to a topic in ROS.

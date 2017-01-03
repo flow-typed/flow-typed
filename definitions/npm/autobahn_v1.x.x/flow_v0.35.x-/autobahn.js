@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class Session {
+declare export class Session {
     id: number;
     realm: string;
     isOpen: boolean;
@@ -168,8 +167,7 @@ declare interface autobahn$IRegisterOptions {
     disclose_caller?: boolean
 }
 
-declare
-export class Connection {
+declare export class Connection {
     constructor(options?: autobahn$IConnectionOptions): this;
     open(): void;
     close(reason?: string, message?: string): void;
@@ -244,17 +242,13 @@ declare interface autobahn$IAuthCra {
         sign(key: string, challenge: string): string
 }
 
-declare
-var util: autobahn$IUtil;
+declare var util: autobahn$IUtil;
 
-declare
-var log: autobahn$ILog;
+declare var log: autobahn$ILog;
 
-declare
-var transports: autobahn$ITransports;
+declare var transports: autobahn$ITransports;
 
-declare
-var auth_cra: autobahn$IAuthCra;
+declare var auth_cra: autobahn$IAuthCra;
 declare module 'autobahn' {
     declare module.exports: typeof autobahn
 }

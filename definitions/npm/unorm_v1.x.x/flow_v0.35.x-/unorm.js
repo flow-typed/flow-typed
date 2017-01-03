@@ -12,8 +12,7 @@ declare interface unorm$Static {
         nfc(str: string): string,
         nfkc(str: string): string
 }
-declare
-var unorm: unorm$Static;
+declare var unorm: unorm$Static;
 declare module 'unorm' {
     declare module.exports: typeof unorm
 }

@@ -1594,65 +1594,45 @@ declare interface UIkit$Upload {
     (element: string | JQuery, options: UIkit$UploadOptions): any
 }
 
-declare
-export var modal: UIkit$Modal;
+declare export var modal: UIkit$Modal;
 
-declare
-export var lightbox: UIkit$LightBox;
+declare export var lightbox: UIkit$LightBox;
 
-declare
-export var offcanvas: UIkit$OffCanvas;
+declare export var offcanvas: UIkit$OffCanvas;
 
-declare
-export var autocomplete: UIkit$AutoComplete;
+declare export var autocomplete: UIkit$AutoComplete;
 
-declare
-export var datepicker: UIkit$DatePicker;
+declare export var datepicker: UIkit$DatePicker;
 
-declare
-export var htmleditor: UIkit$HtmlEditor;
+declare export var htmleditor: UIkit$HtmlEditor;
 
-declare
-export var slider: UIkit$Slider;
+declare export var slider: UIkit$Slider;
 
-declare
-export var slideset: UIkit$SlideSet;
+declare export var slideset: UIkit$SlideSet;
 
-declare
-export var slideshow: UIkit$SlideShow;
+declare export var slideshow: UIkit$SlideShow;
 
-declare
-export var parallax: UIkit$Parallax;
+declare export var parallax: UIkit$Parallax;
 
-declare
-export var accordion: UIkit$Accordion;
+declare export var accordion: UIkit$Accordion;
 
-declare
-export var notify: UIkit$Notify;
+declare export var notify: UIkit$Notify;
 
-declare
-export var search: UIkit$Search;
+declare export var search: UIkit$Search;
 
-declare
-export var nestable: UIkit$Nestable;
+declare export var nestable: UIkit$Nestable;
 
-declare
-export var sortable: UIkit$Sortable;
+declare export var sortable: UIkit$Sortable;
 
-declare
-export var sticky: UIkit$Sticky;
+declare export var sticky: UIkit$Sticky;
 
-declare
-export var timepicker: UIkit$Timepicker;
+declare export var timepicker: UIkit$Timepicker;
 
-declare
-export var tooltip: UIkit$Tooltip;
+declare export var tooltip: UIkit$Tooltip;
 
-declare
-export var uploadSelect: UIkit$Upload;
+declare export var uploadSelect: UIkit$Upload;
 
-declare
-export var uploadDrop: UIkit$Upload;
+declare export var uploadDrop: UIkit$Upload;
 declare module 'uikit' {
     declare module.exports: typeof UIkit
 }

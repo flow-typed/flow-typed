@@ -6,73 +6,62 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface GeoJSON$GeoJsonObject {
+declare export interface GeoJSON$GeoJsonObject {
     type: string,
         bbox?: number[],
         crs?: GeoJSON$CoordinateReferenceSystem
 }
 
-declare
-export type GeoJSON$Position = number[];
+declare export type GeoJSON$Position = number[];
 
-declare
-export type GeoJSON$GeometryObject = {
+declare export type GeoJSON$GeometryObject = {
     coordinates: any
 } & GeoJSON$GeoJsonObject
 
 
-declare
-export type GeoJSON$Point = {
+declare export type GeoJSON$Point = {
     type: "Point",
     coordinates: GeoJSON$Position
 } & GeoJSON$GeometryObject
 
 
-declare
-export type GeoJSON$MultiPoint = {
+declare export type GeoJSON$MultiPoint = {
     type: "MultiPoint",
     coordinates: GeoJSON$Position[]
 } & GeoJSON$GeometryObject
 
 
-declare
-export type GeoJSON$LineString = {
+declare export type GeoJSON$LineString = {
     type: "LineString",
     coordinates: GeoJSON$Position[]
 } & GeoJSON$GeometryObject
 
 
-declare
-export type GeoJSON$MultiLineString = {
+declare export type GeoJSON$MultiLineString = {
     type: "MultiLineString",
     coordinates: GeoJSON$Position[][]
 } & GeoJSON$GeometryObject
 
 
-declare
-export type GeoJSON$Polygon = {
+declare export type GeoJSON$Polygon = {
     type: "Polygon",
     coordinates: GeoJSON$Position[][]
 } & GeoJSON$GeometryObject
 
 
-declare
-export type GeoJSON$MultiPolygon = {
+declare export type GeoJSON$MultiPolygon = {
     type: "MultiPolygon",
     coordinates: GeoJSON$Position[][][]
 } & GeoJSON$GeometryObject
 
 
-declare
-export type GeoJSON$GeometryCollection = {
+declare export type GeoJSON$GeometryCollection = {
     type: "GeometryCollection",
     geometries: GeoJSON$GeometryObject[]
 } & GeoJSON$GeoJsonObject
 
 
-declare
-export type GeoJSON$Feature<T>= {
+declare export type GeoJSON$Feature<T>= {
     type: "Feature",
     geometry: T,
     properties: any,
@@ -80,29 +69,25 @@ export type GeoJSON$Feature<T>= {
 } & GeoJSON$GeoJsonObject
 
 
-declare
-export type GeoJSON$FeatureCollection<T>= {
+declare export type GeoJSON$FeatureCollection<T>= {
     type: "FeatureCollection",
     features: GeoJSON$Feature<T>[]
 } & GeoJSON$GeoJsonObject
 
 
-declare
-export interface GeoJSON$CoordinateReferenceSystem {
+declare export interface GeoJSON$CoordinateReferenceSystem {
     type: string,
         properties: any
 }
 
-declare
-export type GeoJSON$NamedCoordinateReferenceSystem = {
+declare export type GeoJSON$NamedCoordinateReferenceSystem = {
     properties: {
         name: string
     }
 } & GeoJSON$CoordinateReferenceSystem
 
 
-declare
-export type GeoJSON$LinkedCoordinateReferenceSystem = {
+declare export type GeoJSON$LinkedCoordinateReferenceSystem = {
     properties: {
         href: string,
         type: string

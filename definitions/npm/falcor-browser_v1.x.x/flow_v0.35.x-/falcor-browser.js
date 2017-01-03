@@ -15,5 +15,4 @@ declare interface FalcorStatic {
         error: typeof undefined,
         pathValue: typeof undefined
 }
-declare
-var falcor: FalcorStatic;
+declare var falcor: FalcorStatic;

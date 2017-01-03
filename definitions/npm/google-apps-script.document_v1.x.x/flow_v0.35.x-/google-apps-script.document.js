@@ -1336,5 +1336,4 @@ declare module 'Document' {
             setAttributes(attributes: Object): UnsupportedElement
     }
 }
-declare
-var DocumentApp: undefined.DocumentApp;
+declare var DocumentApp: undefined.DocumentApp;

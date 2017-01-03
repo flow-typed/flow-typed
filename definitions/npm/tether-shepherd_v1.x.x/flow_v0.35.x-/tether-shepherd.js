@@ -173,5 +173,4 @@ declare interface TetherShepherd$IShepherdTourAttachProperties {
     element: string,
         on: string
 }
-declare
-var Shepherd: TetherShepherd$ShepherdStatic;
+declare var Shepherd: TetherShepherd$ShepherdStatic;

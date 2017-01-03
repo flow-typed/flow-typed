@@ -26,5 +26,4 @@ declare interface KnockoutStatic {
 declare module 'knockout-amd-helpers' {
     declare module.exports: typeof ko
 }
-declare
-var ko: KnockoutStatic;
+declare var ko: KnockoutStatic;

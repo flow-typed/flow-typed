@@ -10,8 +10,7 @@
 /**
  * Electron-packager Options. 
  */
-declare
-export interface ElectronPackager$Options {
+declare export interface ElectronPackager$Options {
 
     /**
      * The source directory. 
@@ -127,8 +126,7 @@ export interface ElectronPackager$Options {
 /**
  * Object hash of application metadata to embed into the executable (Windows only). 
  */
-declare
-export interface ElectronPackager$VersionString {
+declare export interface ElectronPackager$VersionString {
     CompanyName?: string,
         LegalCopyright?: string,
         FileDescription?: string,
@@ -143,8 +141,7 @@ export interface ElectronPackager$VersionString {
 /**
  * Electron-packager done callback. 
  */
-declare
-export interface ElectronPackager$Callback {
+declare export interface ElectronPackager$Callback {
 
     /**
      * Callback which is called when electron-packager is done.
@@ -158,8 +155,7 @@ export interface ElectronPackager$Callback {
 /**
  * Electron-packager function 
  */
-declare
-export interface ElectronPackager$Packager {
+declare export interface ElectronPackager$Packager {
 
     /**
      * This will:

@@ -29,5 +29,4 @@ declare interface KnockoutStatic {
 declare module 'knockout.punches' {
     declare module.exports: typeof punches
 }
-declare
-var punches: KnockoutPunchesStatic;
+declare var punches: KnockoutPunchesStatic;

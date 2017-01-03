@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface svgjs$Element {
+declare export interface svgjs$Element {
     selectize(): svgjs$Element,
         selectize(obj: Object): svgjs$Element,
         resize(): svgjs$Element,

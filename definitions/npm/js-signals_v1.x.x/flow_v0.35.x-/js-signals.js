@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var signals: SignalWrapper;
+declare var signals: SignalWrapper;
 declare module 'signals' {
     declare module.exports: typeof signals
 }

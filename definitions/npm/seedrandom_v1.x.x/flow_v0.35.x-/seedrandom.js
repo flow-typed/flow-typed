@@ -55,8 +55,7 @@ declare interface seedRandomOptions {
         state?: seedrandomStateType,
         pass?: seedrandomCallback
 }
-declare
-var seedrandom: seedrandom_prng;
+declare var seedrandom: seedrandom_prng;
 declare module 'seedrandom' {
     declare module.exports: typeof seedrandom
 }

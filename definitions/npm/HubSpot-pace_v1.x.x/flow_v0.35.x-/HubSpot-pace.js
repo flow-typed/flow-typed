@@ -123,8 +123,7 @@ declare interface HubSpotPaceInterfaces$Pace {
         off(event: string, handler?: (...args: any[]) => void): void,
         once(event: string, handler: (...args: any[]) => void, context?: any): void
 }
-declare
-var pace: HubSpotPaceInterfaces$Pace;
+declare var pace: HubSpotPaceInterfaces$Pace;
 declare module 'HubSpot-pace' {
     declare module.exports: typeof pace
 }

@@ -9,18 +9,15 @@
 declare interface GLM$IArray {
     [index: number]: number
 }
-declare
-var npm$namespace$glMatrix: {
+declare var npm$namespace$glMatrix: {
         toRadian: typeof glMatrix$toRadian,
     }
     /**
      * Convert Degree To Radian
      * @param a Angle in Degrees
      */
-declare
-export function glMatrix$toRadian(a: number): number
-declare
-var npm$namespace$vec2: {
+declare export function glMatrix$toRadian(a: number): number
+declare var npm$namespace$vec2: {
         create: typeof vec2$create,
         clone: typeof vec2$clone,
         fromValues: typeof vec2$fromValues,
@@ -63,8 +60,7 @@ var npm$namespace$vec2: {
      * Creates a new, empty vec2
      * @returns  a new 2D vector
      */
-declare
-export function vec2$create(): GLM$IArray
+declare export function vec2$create(): GLM$IArray
 
 
 /**
@@ -72,8 +68,7 @@ export function vec2$create(): GLM$IArray
  * @param a a vector to clone
  * @returns  a new 2D vector
  */
-declare
-export function vec2$clone(a: GLM$IArray): GLM$IArray
+declare export function vec2$clone(a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -82,8 +77,7 @@ export function vec2$clone(a: GLM$IArray): GLM$IArray
  * @param y Y component
  * @returns  a new 2D vector
  */
-declare
-export function vec2$fromValues(x: number, y: number): GLM$IArray
+declare export function vec2$fromValues(x: number, y: number): GLM$IArray
 
 
 /**
@@ -92,8 +86,7 @@ export function vec2$fromValues(x: number, y: number): GLM$IArray
  * @param a the source vector
  * @returns  out
  */
-declare
-export function vec2$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec2$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -103,8 +96,7 @@ export function vec2$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param y Y component
  * @returns  out
  */
-declare
-export function vec2$set(out: GLM$IArray, x: number, y: number): GLM$IArray
+declare export function vec2$set(out: GLM$IArray, x: number, y: number): GLM$IArray
 
 
 /**
@@ -114,8 +106,7 @@ export function vec2$set(out: GLM$IArray, x: number, y: number): GLM$IArray
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -125,8 +116,7 @@ export function vec2$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$subtract(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$subtract(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -136,8 +126,7 @@ export function vec2$subtract(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$sub(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$sub(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -147,8 +136,7 @@ export function vec2$sub(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -158,8 +146,7 @@ export function vec2$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -169,8 +156,7 @@ export function vec2$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$divide(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$divide(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -180,8 +166,7 @@ export function vec2$divide(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$div(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$div(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -191,8 +176,7 @@ export function vec2$div(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$min(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$min(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -202,8 +186,7 @@ export function vec2$min(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$max(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$max(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -213,8 +196,7 @@ export function vec2$max(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b amount to scale the vector by
  * @returns  out
  */
-declare
-export function vec2$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
+declare export function vec2$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
 
 
 /**
@@ -225,8 +207,7 @@ export function vec2$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArra
  * @param scale the amount to scale b by before adding
  * @returns  out
  */
-declare
-export function vec2$scaleAndAdd(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, scale: number): GLM$IArray
+declare export function vec2$scaleAndAdd(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, scale: number): GLM$IArray
 
 
 /**
@@ -235,8 +216,7 @@ export function vec2$scaleAndAdd(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, 
  * @param b the second operand
  * @returns  distance between a and b
  */
-declare
-export function vec2$distance(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec2$distance(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -245,8 +225,7 @@ export function vec2$distance(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  distance between a and b
  */
-declare
-export function vec2$dist(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec2$dist(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -255,8 +234,7 @@ export function vec2$dist(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  squared distance between a and b
  */
-declare
-export function vec2$squaredDistance(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec2$squaredDistance(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -265,8 +243,7 @@ export function vec2$squaredDistance(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  squared distance between a and b
  */
-declare
-export function vec2$sqrDist(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec2$sqrDist(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -274,8 +251,7 @@ export function vec2$sqrDist(a: GLM$IArray, b: GLM$IArray): number
  * @param a vector to calculate length of
  * @returns  length of a
  */
-declare
-export function vec2$length(a: GLM$IArray): number
+declare export function vec2$length(a: GLM$IArray): number
 
 
 /**
@@ -283,8 +259,7 @@ export function vec2$length(a: GLM$IArray): number
  * @param a vector to calculate length of
  * @returns  length of a
  */
-declare
-export function vec2$len(a: GLM$IArray): number
+declare export function vec2$len(a: GLM$IArray): number
 
 
 /**
@@ -292,8 +267,7 @@ export function vec2$len(a: GLM$IArray): number
  * @param a vector to calculate squared length of
  * @returns  squared length of a
  */
-declare
-export function vec2$squaredLength(a: GLM$IArray): number
+declare export function vec2$squaredLength(a: GLM$IArray): number
 
 
 /**
@@ -301,8 +275,7 @@ export function vec2$squaredLength(a: GLM$IArray): number
  * @param a vector to calculate squared length of
  * @returns  squared length of a
  */
-declare
-export function vec2$sqrLen(a: GLM$IArray): number
+declare export function vec2$sqrLen(a: GLM$IArray): number
 
 
 /**
@@ -311,8 +284,7 @@ export function vec2$sqrLen(a: GLM$IArray): number
  * @param a vector to negate
  * @returns  out
  */
-declare
-export function vec2$negate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec2$negate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -321,8 +293,7 @@ export function vec2$negate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a vector to invert
  * @returns  out
  */
-declare
-export function vec2$inverse(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec2$inverse(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -331,8 +302,7 @@ export function vec2$inverse(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a vector to normalize
  * @returns  out
  */
-declare
-export function vec2$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec2$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -341,8 +311,7 @@ export function vec2$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param b the second operand
  * @returns  dot product of a and b
  */
-declare
-export function vec2$dot(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec2$dot(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -353,8 +322,7 @@ export function vec2$dot(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec2$cross(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec2$cross(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -365,8 +333,7 @@ export function vec2$cross(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$I
  * @param t interpolation amount between the two inputs
  * @returns  out
  */
-declare
-export function vec2$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
+declare export function vec2$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
 
 
 /**
@@ -374,8 +341,7 @@ export function vec2$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: numb
  * @param out the receiving vector
  * @returns  out
  */
-declare
-export function vec2$random(out: GLM$IArray): GLM$IArray
+declare export function vec2$random(out: GLM$IArray): GLM$IArray
 
 
 /**
@@ -385,8 +351,7 @@ export function vec2$random(out: GLM$IArray): GLM$IArray
  * @param m matrix to transform with
  * @returns  out
  */
-declare
-export function vec2$transformMat2(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
+declare export function vec2$transformMat2(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
 
 
 /**
@@ -396,8 +361,7 @@ export function vec2$transformMat2(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray
  * @param m matrix to transform with
  * @returns  out
  */
-declare
-export function vec2$transformMat2d(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
+declare export function vec2$transformMat2d(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
 
 
 /**
@@ -408,8 +372,7 @@ export function vec2$transformMat2d(out: GLM$IArray, a: GLM$IArray, m: GLM$IArra
  * @param m matrix to transform with
  * @returns  out
  */
-declare
-export function vec2$transformMat3(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
+declare export function vec2$transformMat3(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
 
 
 /**
@@ -421,8 +384,7 @@ export function vec2$transformMat3(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray
  * @param m matrix to transform with
  * @returns  out
 */
-declare
-export function vec2$transformMat4(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
+declare export function vec2$transformMat4(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
 
 
 /**
@@ -435,8 +397,7 @@ export function vec2$transformMat4(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray
  * @param arg additional argument to pass to fn
  * @returns  a
  */
-declare
-export function vec2$forEach(
+declare export function vec2$forEach(
     a: GLM$IArray,
     stride: number,
     offset: number,
@@ -450,10 +411,8 @@ export function vec2$forEach(
  * @param vec vector to represent as a string
  * @returns  string representation of the vector
  */
-declare
-export function vec2$str(a: GLM$IArray): string
-declare
-var npm$namespace$vec3: {
+declare export function vec2$str(a: GLM$IArray): string
+declare var npm$namespace$vec3: {
         create: typeof vec3$create,
         clone: typeof vec3$clone,
         fromValues: typeof vec3$fromValues,
@@ -499,8 +458,7 @@ var npm$namespace$vec3: {
      * Creates a new, empty vec2
      * @returns  a new 2D vector
      */
-declare
-export function vec3$create(): GLM$IArray
+declare export function vec3$create(): GLM$IArray
 
 
 /**
@@ -508,8 +466,7 @@ export function vec3$create(): GLM$IArray
  * @param a a vector to clone
  * @returns  a new 2D vector
  */
-declare
-export function vec3$clone(a: GLM$IArray): GLM$IArray
+declare export function vec3$clone(a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -518,8 +475,7 @@ export function vec3$clone(a: GLM$IArray): GLM$IArray
  * @param y Y component
  * @returns  a new 2D vector
  */
-declare
-export function vec3$fromValues(x: number, y: number): GLM$IArray
+declare export function vec3$fromValues(x: number, y: number): GLM$IArray
 
 
 /**
@@ -528,8 +484,7 @@ export function vec3$fromValues(x: number, y: number): GLM$IArray
  * @param a the source vector
  * @returns  out
  */
-declare
-export function vec3$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec3$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -539,8 +494,7 @@ export function vec3$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param y Y component
  * @returns  out
  */
-declare
-export function vec3$set(out: GLM$IArray, x: number, y: number): GLM$IArray
+declare export function vec3$set(out: GLM$IArray, x: number, y: number): GLM$IArray
 
 
 /**
@@ -550,8 +504,7 @@ export function vec3$set(out: GLM$IArray, x: number, y: number): GLM$IArray
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -561,8 +514,7 @@ export function vec3$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$subtract(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$subtract(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -572,8 +524,7 @@ export function vec3$subtract(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$sub(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$sub(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -583,8 +534,7 @@ export function vec3$sub(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -594,8 +544,7 @@ export function vec3$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -605,8 +554,7 @@ export function vec3$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$divide(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$divide(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -616,8 +564,7 @@ export function vec3$divide(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$div(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$div(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -627,8 +574,7 @@ export function vec3$div(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$min(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$min(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -638,8 +584,7 @@ export function vec3$min(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$max(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$max(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -649,8 +594,7 @@ export function vec3$max(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b amount to scale the vector by
  * @returns  out
  */
-declare
-export function vec3$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
+declare export function vec3$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
 
 
 /**
@@ -661,8 +605,7 @@ export function vec3$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArra
  * @param scale the amount to scale b by before adding
  * @returns  out
  */
-declare
-export function vec3$scaleAndAdd(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, scale: number): GLM$IArray
+declare export function vec3$scaleAndAdd(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, scale: number): GLM$IArray
 
 
 /**
@@ -671,8 +614,7 @@ export function vec3$scaleAndAdd(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, 
  * @param b the second operand
  * @returns  distance between a and b
  */
-declare
-export function vec3$distance(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec3$distance(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -681,8 +623,7 @@ export function vec3$distance(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  distance between a and b
  */
-declare
-export function vec3$dist(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec3$dist(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -691,8 +632,7 @@ export function vec3$dist(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  squared distance between a and b
  */
-declare
-export function vec3$squaredDistance(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec3$squaredDistance(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -701,8 +641,7 @@ export function vec3$squaredDistance(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  squared distance between a and b
  */
-declare
-export function vec3$sqrDist(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec3$sqrDist(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -710,8 +649,7 @@ export function vec3$sqrDist(a: GLM$IArray, b: GLM$IArray): number
  * @param a vector to calculate length of
  * @returns  length of a
  */
-declare
-export function vec3$length(a: GLM$IArray): number
+declare export function vec3$length(a: GLM$IArray): number
 
 
 /**
@@ -719,8 +657,7 @@ export function vec3$length(a: GLM$IArray): number
  * @param a vector to calculate length of
  * @returns  length of a
  */
-declare
-export function vec3$len(a: GLM$IArray): number
+declare export function vec3$len(a: GLM$IArray): number
 
 
 /**
@@ -728,8 +665,7 @@ export function vec3$len(a: GLM$IArray): number
  * @param a vector to calculate squared length of
  * @returns  squared length of a
  */
-declare
-export function vec3$squaredLength(a: GLM$IArray): number
+declare export function vec3$squaredLength(a: GLM$IArray): number
 
 
 /**
@@ -737,8 +673,7 @@ export function vec3$squaredLength(a: GLM$IArray): number
  * @param a vector to calculate squared length of
  * @returns  squared length of a
  */
-declare
-export function vec3$sqrLen(a: GLM$IArray): number
+declare export function vec3$sqrLen(a: GLM$IArray): number
 
 
 /**
@@ -747,8 +682,7 @@ export function vec3$sqrLen(a: GLM$IArray): number
  * @param a vector to negate
  * @returns  out
  */
-declare
-export function vec3$negate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec3$negate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -757,8 +691,7 @@ export function vec3$negate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a vector to invert
  * @returns  out
  */
-declare
-export function vec3$inverse(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec3$inverse(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -767,8 +700,7 @@ export function vec3$inverse(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a vector to normalize
  * @returns  out
  */
-declare
-export function vec3$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec3$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -777,8 +709,7 @@ export function vec3$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param b the second operand
  * @returns  dot product of a and b
  */
-declare
-export function vec3$dot(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec3$dot(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -789,8 +720,7 @@ export function vec3$dot(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec3$cross(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec3$cross(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -801,8 +731,7 @@ export function vec3$cross(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$I
  * @param t interpolation amount between the two inputs
  * @returns  out
  */
-declare
-export function vec3$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
+declare export function vec3$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
 
 
 /**
@@ -810,8 +739,7 @@ export function vec3$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: numb
  * @param out the receiving vector
  * @returns  out
  */
-declare
-export function vec3$random(out: GLM$IArray): GLM$IArray
+declare export function vec3$random(out: GLM$IArray): GLM$IArray
 
 
 /**
@@ -822,8 +750,7 @@ export function vec3$random(out: GLM$IArray): GLM$IArray
  * @param c The angle of rotation
  * @returns  out
  */
-declare
-export function vec3$rotateX(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
+declare export function vec3$rotateX(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
 
 
 /**
@@ -834,8 +761,7 @@ export function vec3$rotateX(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: n
  * @param c The angle of rotation
  * @returns  out
  */
-declare
-export function vec3$rotateY(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
+declare export function vec3$rotateY(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
 
 
 /**
@@ -846,8 +772,7 @@ export function vec3$rotateY(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: n
  * @param c The angle of rotation
  * @returns  out
  */
-declare
-export function vec3$rotateZ(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
+declare export function vec3$rotateZ(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
 
 
 /**
@@ -858,8 +783,7 @@ export function vec3$rotateZ(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: n
  * @param m matrix to transform with
  * @returns  out
  */
-declare
-export function vec3$transformMat3(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
+declare export function vec3$transformMat3(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
 
 
 /**
@@ -871,8 +795,7 @@ export function vec3$transformMat3(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray
  * @param m matrix to transform with
  * @returns  out
 */
-declare
-export function vec3$transformMat4(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
+declare export function vec3$transformMat4(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
 
 
 /**
@@ -882,8 +805,7 @@ export function vec3$transformMat4(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray
  * @param q quaternion to transform with
  * @returns  out
  */
-declare
-export function vec3$transformQuat(out: GLM$IArray, a: GLM$IArray, q: GLM$IArray): GLM$IArray
+declare export function vec3$transformQuat(out: GLM$IArray, a: GLM$IArray, q: GLM$IArray): GLM$IArray
 
 
 /**
@@ -896,8 +818,7 @@ export function vec3$transformQuat(out: GLM$IArray, a: GLM$IArray, q: GLM$IArray
  * @param arg additional argument to pass to fn
  * @returns  a
  */
-declare
-export function vec3$forEach(
+declare export function vec3$forEach(
     a: GLM$IArray,
     stride: number,
     offset: number,
@@ -912,8 +833,7 @@ export function vec3$forEach(
  * @param b The second operand
  * @returns  The angle in radians
  */
-declare
-export function vec3$angle(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec3$angle(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -921,10 +841,8 @@ export function vec3$angle(a: GLM$IArray, b: GLM$IArray): number
  * @param vec vector to represent as a string
  * @returns  string representation of the vector
  */
-declare
-export function vec3$str(a: GLM$IArray): string
-declare
-var npm$namespace$vec4: {
+declare export function vec3$str(a: GLM$IArray): string
+declare var npm$namespace$vec4: {
         create: typeof vec4$create,
         clone: typeof vec4$clone,
         fromValues: typeof vec4$fromValues,
@@ -964,8 +882,7 @@ var npm$namespace$vec4: {
      * Creates a new, empty vec2
      * @returns  a new 2D vector
      */
-declare
-export function vec4$create(): GLM$IArray
+declare export function vec4$create(): GLM$IArray
 
 
 /**
@@ -973,8 +890,7 @@ export function vec4$create(): GLM$IArray
  * @param a a vector to clone
  * @returns  a new 2D vector
  */
-declare
-export function vec4$clone(a: GLM$IArray): GLM$IArray
+declare export function vec4$clone(a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -983,8 +899,7 @@ export function vec4$clone(a: GLM$IArray): GLM$IArray
  * @param y Y component
  * @returns  a new 2D vector
  */
-declare
-export function vec4$fromValues(x: number, y: number): GLM$IArray
+declare export function vec4$fromValues(x: number, y: number): GLM$IArray
 
 
 /**
@@ -993,8 +908,7 @@ export function vec4$fromValues(x: number, y: number): GLM$IArray
  * @param a the source vector
  * @returns  out
  */
-declare
-export function vec4$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec4$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1004,8 +918,7 @@ export function vec4$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param y Y component
  * @returns  out
  */
-declare
-export function vec4$set(out: GLM$IArray, x: number, y: number): GLM$IArray
+declare export function vec4$set(out: GLM$IArray, x: number, y: number): GLM$IArray
 
 
 /**
@@ -1015,8 +928,7 @@ export function vec4$set(out: GLM$IArray, x: number, y: number): GLM$IArray
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec4$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec4$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1026,8 +938,7 @@ export function vec4$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec4$subtract(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec4$subtract(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1037,8 +948,7 @@ export function vec4$subtract(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec4$sub(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec4$sub(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1048,8 +958,7 @@ export function vec4$sub(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec4$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec4$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1059,8 +968,7 @@ export function vec4$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec4$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec4$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1070,8 +978,7 @@ export function vec4$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec4$divide(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec4$divide(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1081,8 +988,7 @@ export function vec4$divide(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec4$div(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec4$div(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1092,8 +998,7 @@ export function vec4$div(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec4$min(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec4$min(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1103,8 +1008,7 @@ export function vec4$min(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function vec4$max(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function vec4$max(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1114,8 +1018,7 @@ export function vec4$max(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b amount to scale the vector by
  * @returns  out
  */
-declare
-export function vec4$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
+declare export function vec4$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
 
 
 /**
@@ -1126,8 +1029,7 @@ export function vec4$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArra
  * @param scale the amount to scale b by before adding
  * @returns  out
  */
-declare
-export function vec4$scaleAndAdd(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, scale: number): GLM$IArray
+declare export function vec4$scaleAndAdd(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, scale: number): GLM$IArray
 
 
 /**
@@ -1136,8 +1038,7 @@ export function vec4$scaleAndAdd(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, 
  * @param b the second operand
  * @returns  distance between a and b
  */
-declare
-export function vec4$distance(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec4$distance(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -1146,8 +1047,7 @@ export function vec4$distance(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  distance between a and b
  */
-declare
-export function vec4$dist(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec4$dist(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -1156,8 +1056,7 @@ export function vec4$dist(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  squared distance between a and b
  */
-declare
-export function vec4$squaredDistance(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec4$squaredDistance(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -1166,8 +1065,7 @@ export function vec4$squaredDistance(a: GLM$IArray, b: GLM$IArray): number
  * @param b the second operand
  * @returns  squared distance between a and b
  */
-declare
-export function vec4$sqrDist(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec4$sqrDist(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -1175,8 +1073,7 @@ export function vec4$sqrDist(a: GLM$IArray, b: GLM$IArray): number
  * @param a vector to calculate length of
  * @returns  length of a
  */
-declare
-export function vec4$length(a: GLM$IArray): number
+declare export function vec4$length(a: GLM$IArray): number
 
 
 /**
@@ -1184,8 +1081,7 @@ export function vec4$length(a: GLM$IArray): number
  * @param a vector to calculate length of
  * @returns  length of a
  */
-declare
-export function vec4$len(a: GLM$IArray): number
+declare export function vec4$len(a: GLM$IArray): number
 
 
 /**
@@ -1193,8 +1089,7 @@ export function vec4$len(a: GLM$IArray): number
  * @param a vector to calculate squared length of
  * @returns  squared length of a
  */
-declare
-export function vec4$squaredLength(a: GLM$IArray): number
+declare export function vec4$squaredLength(a: GLM$IArray): number
 
 
 /**
@@ -1202,8 +1097,7 @@ export function vec4$squaredLength(a: GLM$IArray): number
  * @param a vector to calculate squared length of
  * @returns  squared length of a
  */
-declare
-export function vec4$sqrLen(a: GLM$IArray): number
+declare export function vec4$sqrLen(a: GLM$IArray): number
 
 
 /**
@@ -1212,8 +1106,7 @@ export function vec4$sqrLen(a: GLM$IArray): number
  * @param a vector to negate
  * @returns  out
  */
-declare
-export function vec4$negate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec4$negate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1222,8 +1115,7 @@ export function vec4$negate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a vector to invert
  * @returns  out
  */
-declare
-export function vec4$inverse(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec4$inverse(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1232,8 +1124,7 @@ export function vec4$inverse(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a vector to normalize
  * @returns  out
  */
-declare
-export function vec4$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function vec4$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1242,8 +1133,7 @@ export function vec4$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param b the second operand
  * @returns  dot product of a and b
  */
-declare
-export function vec4$dot(a: GLM$IArray, b: GLM$IArray): number
+declare export function vec4$dot(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -1254,8 +1144,7 @@ export function vec4$dot(a: GLM$IArray, b: GLM$IArray): number
  * @param t interpolation amount between the two inputs
  * @returns  out
  */
-declare
-export function vec4$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
+declare export function vec4$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
 
 
 /**
@@ -1263,8 +1152,7 @@ export function vec4$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: numb
  * @param out the receiving vector
  * @returns  out
  */
-declare
-export function vec4$random(out: GLM$IArray): GLM$IArray
+declare export function vec4$random(out: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1276,8 +1164,7 @@ export function vec4$random(out: GLM$IArray): GLM$IArray
  * @param m matrix to transform with
  * @returns  out
 */
-declare
-export function vec4$transformMat4(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
+declare export function vec4$transformMat4(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1287,8 +1174,7 @@ export function vec4$transformMat4(out: GLM$IArray, a: GLM$IArray, m: GLM$IArray
  * @param q quaternion to transform with
  * @returns  out
  */
-declare
-export function vec4$transformQuat(out: GLM$IArray, a: GLM$IArray, q: GLM$IArray): GLM$IArray
+declare export function vec4$transformQuat(out: GLM$IArray, a: GLM$IArray, q: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1301,8 +1187,7 @@ export function vec4$transformQuat(out: GLM$IArray, a: GLM$IArray, q: GLM$IArray
  * @param arg additional argument to pass to fn
  * @returns  a
  */
-declare
-export function vec4$forEach(
+declare export function vec4$forEach(
     a: GLM$IArray,
     stride: number,
     offset: number,
@@ -1316,10 +1201,8 @@ export function vec4$forEach(
  * @param vec vector to represent as a string
  * @returns  string representation of the vector
  */
-declare
-export function vec4$str(a: GLM$IArray): string
-declare
-var npm$namespace$mat2: {
+declare export function vec4$str(a: GLM$IArray): string
+declare var npm$namespace$mat2: {
         create: typeof mat2$create,
         clone: typeof mat2$clone,
         copy: typeof mat2$copy,
@@ -1340,8 +1223,7 @@ var npm$namespace$mat2: {
      * Creates a new, empty vec2
      * @returns  a new 2D vector
      */
-declare
-export function mat2$create(): GLM$IArray
+declare export function mat2$create(): GLM$IArray
 
 
 /**
@@ -1349,8 +1231,7 @@ export function mat2$create(): GLM$IArray
  * @param a a vector to clone
  * @returns  a new 2D vector
  */
-declare
-export function mat2$clone(a: GLM$IArray): GLM$IArray
+declare export function mat2$clone(a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1359,8 +1240,7 @@ export function mat2$clone(a: GLM$IArray): GLM$IArray
  * @param a the source vector
  * @returns  out
  */
-declare
-export function mat2$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat2$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1368,8 +1248,7 @@ export function mat2$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param out the receiving matrix
  * @returns  out
  */
-declare
-export function mat2$identity(out: GLM$IArray): GLM$IArray
+declare export function mat2$identity(out: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1378,8 +1257,7 @@ export function mat2$identity(out: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat2$transpose(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat2$transpose(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1388,8 +1266,7 @@ export function mat2$transpose(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat2$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat2$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1398,8 +1275,7 @@ export function mat2$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat2$adjoint(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat2$adjoint(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1407,8 +1283,7 @@ export function mat2$adjoint(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  determinant of a
  */
-declare
-export function mat2$determinant(a: GLM$IArray): number
+declare export function mat2$determinant(a: GLM$IArray): number
 
 
 /**
@@ -1418,8 +1293,7 @@ export function mat2$determinant(a: GLM$IArray): number
  * @param b the second operand
  * @returns  out
  */
-declare
-export function mat2$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function mat2$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1429,8 +1303,7 @@ export function mat2$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function mat2$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function mat2$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1440,8 +1313,7 @@ export function mat2$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param rad the angle to rotate the matrix by
  * @returns  out
  */
-declare
-export function mat2$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IArray
+declare export function mat2$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IArray
 
 
 /**
@@ -1451,8 +1323,7 @@ export function mat2$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IA
  * @param b amount to scale the vector by
  * @returns  out
  */
-declare
-export function mat2$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
+declare export function mat2$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
 
 
 /**
@@ -1460,8 +1331,7 @@ export function mat2$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArra
  * @param vec vector to represent as a string
  * @returns  string representation of the vector
  */
-declare
-export function mat2$str(a: GLM$IArray): string
+declare export function mat2$str(a: GLM$IArray): string
 
 
 /**
@@ -1469,8 +1339,7 @@ export function mat2$str(a: GLM$IArray): string
  * @param a the matrix to calculate Frobenius norm of
  * @returns  Frobenius norm
  */
-declare
-export function mat2$frob(a: GLM$IArray): number
+declare export function mat2$frob(a: GLM$IArray): number
 
 
 /**
@@ -1480,10 +1349,8 @@ export function mat2$frob(a: GLM$IArray): number
  * @param U the upper triangular matrix
  * @param a the input matrix to factorize
  */
-declare
-export function mat2$LDU(L: GLM$IArray, D: GLM$IArray, U: GLM$IArray, a: GLM$IArray): GLM$IArray
-declare
-var npm$namespace$mat2d: {
+declare export function mat2$LDU(L: GLM$IArray, D: GLM$IArray, U: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare var npm$namespace$mat2d: {
         create: typeof mat2d$create,
         clone: typeof mat2d$clone,
         copy: typeof mat2d$copy,
@@ -1502,8 +1369,7 @@ var npm$namespace$mat2d: {
      * Creates a new, empty vec2
      * @returns  a new 2D vector
      */
-declare
-export function mat2d$create(): GLM$IArray
+declare export function mat2d$create(): GLM$IArray
 
 
 /**
@@ -1511,8 +1377,7 @@ export function mat2d$create(): GLM$IArray
  * @param a a vector to clone
  * @returns  a new 2D vector
  */
-declare
-export function mat2d$clone(a: GLM$IArray): GLM$IArray
+declare export function mat2d$clone(a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1521,8 +1386,7 @@ export function mat2d$clone(a: GLM$IArray): GLM$IArray
  * @param a the source vector
  * @returns  out
  */
-declare
-export function mat2d$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat2d$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1530,8 +1394,7 @@ export function mat2d$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param out the receiving matrix
  * @returns  out
  */
-declare
-export function mat2d$identity(out: GLM$IArray): GLM$IArray
+declare export function mat2d$identity(out: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1540,8 +1403,7 @@ export function mat2d$identity(out: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat2d$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat2d$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1549,8 +1411,7 @@ export function mat2d$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  determinant of a
  */
-declare
-export function mat2d$determinant(a: GLM$IArray): number
+declare export function mat2d$determinant(a: GLM$IArray): number
 
 
 /**
@@ -1560,8 +1421,7 @@ export function mat2d$determinant(a: GLM$IArray): number
  * @param b the second operand
  * @returns  out
  */
-declare
-export function mat2d$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function mat2d$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1571,8 +1431,7 @@ export function mat2d$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): G
  * @param b the second operand
  * @returns  out
  */
-declare
-export function mat2d$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function mat2d$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1582,8 +1441,7 @@ export function mat2d$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IA
  * @param rad the angle to rotate the matrix by
  * @returns  out
  */
-declare
-export function mat2d$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IArray
+declare export function mat2d$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IArray
 
 
 /**
@@ -1593,8 +1451,7 @@ export function mat2d$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$I
  * @param b amount to scale the vector by
  * @returns  out
  */
-declare
-export function mat2d$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
+declare export function mat2d$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
 
 
 /**
@@ -1604,8 +1461,7 @@ export function mat2d$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArr
  * @param v the vec2 to translate the matrix by
  * @returns  out
  */
-declare
-export function mat2d$translate(out: GLM$IArray, a: GLM$IArray, v: GLM$IArray): GLM$IArray
+declare export function mat2d$translate(out: GLM$IArray, a: GLM$IArray, v: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1613,8 +1469,7 @@ export function mat2d$translate(out: GLM$IArray, a: GLM$IArray, v: GLM$IArray): 
  * @param vec vector to represent as a string
  * @returns  string representation of the vector
  */
-declare
-export function mat2d$str(a: GLM$IArray): string
+declare export function mat2d$str(a: GLM$IArray): string
 
 
 /**
@@ -1622,10 +1477,8 @@ export function mat2d$str(a: GLM$IArray): string
  * @param a the matrix to calculate Frobenius norm of
  * @returns  Frobenius norm
  */
-declare
-export function mat2d$frob(a: GLM$IArray): number
-declare
-var npm$namespace$mat3: {
+declare export function mat2d$frob(a: GLM$IArray): number
+declare var npm$namespace$mat3: {
         create: typeof mat3$create,
         clone: typeof mat3$clone,
         copy: typeof mat3$copy,
@@ -1650,8 +1503,7 @@ var npm$namespace$mat3: {
      * Creates a new, empty vec2
      * @returns  a new 2D vector
      */
-declare
-export function mat3$create(): GLM$IArray
+declare export function mat3$create(): GLM$IArray
 
 
 /**
@@ -1659,8 +1511,7 @@ export function mat3$create(): GLM$IArray
  * @param a a vector to clone
  * @returns  a new 2D vector
  */
-declare
-export function mat3$clone(a: GLM$IArray): GLM$IArray
+declare export function mat3$clone(a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1669,8 +1520,7 @@ export function mat3$clone(a: GLM$IArray): GLM$IArray
  * @param a the source vector
  * @returns  out
  */
-declare
-export function mat3$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat3$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1678,8 +1528,7 @@ export function mat3$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param out the receiving matrix
  * @returns  out
  */
-declare
-export function mat3$identity(out: GLM$IArray): GLM$IArray
+declare export function mat3$identity(out: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1688,8 +1537,7 @@ export function mat3$identity(out: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat3$transpose(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat3$transpose(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1698,8 +1546,7 @@ export function mat3$transpose(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat3$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat3$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1708,8 +1555,7 @@ export function mat3$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat3$adjoint(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat3$adjoint(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1717,8 +1563,7 @@ export function mat3$adjoint(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  determinant of a
  */
-declare
-export function mat3$determinant(a: GLM$IArray): number
+declare export function mat3$determinant(a: GLM$IArray): number
 
 
 /**
@@ -1728,8 +1573,7 @@ export function mat3$determinant(a: GLM$IArray): number
  * @param b the second operand
  * @returns  out
  */
-declare
-export function mat3$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function mat3$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1739,8 +1583,7 @@ export function mat3$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function mat3$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function mat3$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1748,8 +1591,7 @@ export function mat3$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param vec vector to represent as a string
  * @returns  string representation of the vector
  */
-declare
-export function mat3$str(a: GLM$IArray): string
+declare export function mat3$str(a: GLM$IArray): string
 
 
 /**
@@ -1757,8 +1599,7 @@ export function mat3$str(a: GLM$IArray): string
  * @param a the matrix to calculate Frobenius norm of
  * @returns  Frobenius norm
  */
-declare
-export function mat3$frob(a: GLM$IArray): number
+declare export function mat3$frob(a: GLM$IArray): number
 
 
 /**
@@ -1767,8 +1608,7 @@ export function mat3$frob(a: GLM$IArray): number
  * @param a Mat4 to derive the normal matrix from
  * @returns  out
  */
-declare
-export function mat3$normalFromMat4(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat3$normalFromMat4(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1777,8 +1617,7 @@ export function mat3$normalFromMat4(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param q Quaternion to create matrix from
  * @returns  out
  */
-declare
-export function mat3$fromQuat(out: GLM$IArray, q: GLM$IArray): GLM$IArray
+declare export function mat3$fromQuat(out: GLM$IArray, q: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1787,8 +1626,7 @@ export function mat3$fromQuat(out: GLM$IArray, q: GLM$IArray): GLM$IArray
  * @param a the source 4x4 matrix
  * @returns  out
  */
-declare
-export function mat3$fromMat4(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat3$fromMat4(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1798,8 +1636,7 @@ export function mat3$fromMat4(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param b amount to scale the vector by
  * @returns  out
  */
-declare
-export function mat3$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
+declare export function mat3$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
 
 
 /**
@@ -1808,8 +1645,7 @@ export function mat3$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArra
  * @param  the matrix to copy
  * @returns  out
  */
-declare
-export function mat3$fromMat2d(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat3$fromMat2d(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1819,8 +1655,7 @@ export function mat3$fromMat2d(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param v the vec2 to translate the matrix by
  * @returns  out
  */
-declare
-export function mat3$translate(out: GLM$IArray, a: GLM$IArray, v: GLM$IArray): GLM$IArray
+declare export function mat3$translate(out: GLM$IArray, a: GLM$IArray, v: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1830,10 +1665,8 @@ export function mat3$translate(out: GLM$IArray, a: GLM$IArray, v: GLM$IArray): G
  * @param rad the angle to rotate the matrix by
  * @returns  out
  */
-declare
-export function mat3$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IArray
-declare
-var npm$namespace$mat4: {
+declare export function mat3$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IArray
+declare var npm$namespace$mat4: {
         create: typeof mat4$create,
         clone: typeof mat4$clone,
         copy: typeof mat4$copy,
@@ -1864,8 +1697,7 @@ var npm$namespace$mat4: {
      * Creates a new, empty vec2
      * @returns  a new 2D vector
      */
-declare
-export function mat4$create(): GLM$IArray
+declare export function mat4$create(): GLM$IArray
 
 
 /**
@@ -1873,8 +1705,7 @@ export function mat4$create(): GLM$IArray
  * @param a a vector to clone
  * @returns  a new 2D vector
  */
-declare
-export function mat4$clone(a: GLM$IArray): GLM$IArray
+declare export function mat4$clone(a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1883,8 +1714,7 @@ export function mat4$clone(a: GLM$IArray): GLM$IArray
  * @param a the source vector
  * @returns  out
  */
-declare
-export function mat4$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat4$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1892,8 +1722,7 @@ export function mat4$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param out the receiving matrix
  * @returns  out
  */
-declare
-export function mat4$identity(out: GLM$IArray): GLM$IArray
+declare export function mat4$identity(out: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1902,8 +1731,7 @@ export function mat4$identity(out: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat4$transpose(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat4$transpose(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1912,8 +1740,7 @@ export function mat4$transpose(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat4$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat4$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1922,8 +1749,7 @@ export function mat4$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function mat4$adjoint(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function mat4$adjoint(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1931,8 +1757,7 @@ export function mat4$adjoint(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a the source matrix
  * @returns  determinant of a
  */
-declare
-export function mat4$determinant(a: GLM$IArray): number
+declare export function mat4$determinant(a: GLM$IArray): number
 
 
 /**
@@ -1942,8 +1767,7 @@ export function mat4$determinant(a: GLM$IArray): number
  * @param b the second operand
  * @returns  out
  */
-declare
-export function mat4$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function mat4$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1953,8 +1777,7 @@ export function mat4$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function mat4$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function mat4$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1964,8 +1787,7 @@ export function mat4$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param v the vec2 to translate the matrix by
  * @returns  out
  */
-declare
-export function mat4$translate(out: GLM$IArray, a: GLM$IArray, v: GLM$IArray): GLM$IArray
+declare export function mat4$translate(out: GLM$IArray, a: GLM$IArray, v: GLM$IArray): GLM$IArray
 
 
 /**
@@ -1975,8 +1797,7 @@ export function mat4$translate(out: GLM$IArray, a: GLM$IArray, v: GLM$IArray): G
  * @param b amount to scale the vector by
  * @returns  out
  */
-declare
-export function mat4$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
+declare export function mat4$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
 
 
 /**
@@ -1986,8 +1807,7 @@ export function mat4$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArra
  * @param rad the angle to rotate the matrix by
  * @returns  out
  */
-declare
-export function mat4$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IArray
+declare export function mat4$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IArray
 
 
 /**
@@ -1998,8 +1818,7 @@ export function mat4$rotate(out: GLM$IArray, a: GLM$IArray, rad: number): GLM$IA
  * @param c The angle of rotation
  * @returns  out
  */
-declare
-export function mat4$rotateX(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
+declare export function mat4$rotateX(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
 
 
 /**
@@ -2010,8 +1829,7 @@ export function mat4$rotateX(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: n
  * @param c The angle of rotation
  * @returns  out
  */
-declare
-export function mat4$rotateY(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
+declare export function mat4$rotateY(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
 
 
 /**
@@ -2022,8 +1840,7 @@ export function mat4$rotateY(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: n
  * @param c The angle of rotation
  * @returns  out
  */
-declare
-export function mat4$rotateZ(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
+declare export function mat4$rotateZ(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
 
 
 /**
@@ -2037,8 +1854,7 @@ export function mat4$rotateZ(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: n
  * @param far Far bound of the frustum
  * @returns  out
  */
-declare
-export function mat4$frustum(
+declare export function mat4$frustum(
     out: GLM$IArray,
     left: number,
     right: number,
@@ -2057,8 +1873,7 @@ export function mat4$frustum(
  * @param far Far bound of the frustum
  * @returns  out
  */
-declare
-export function mat4$perspective(
+declare export function mat4$perspective(
     out: GLM$IArray,
     fovy: number,
     aspect: number,
@@ -2077,8 +1892,7 @@ export function mat4$perspective(
  * @param far Far bound of the frustum
  * @returns  out
  */
-declare
-export function mat4$ortho(
+declare export function mat4$ortho(
     out: GLM$IArray,
     left: number,
     right: number,
@@ -2096,8 +1910,7 @@ export function mat4$ortho(
  * @param up vec3 pointing up
  * @returns  out
  */
-declare
-export function mat4$lookAt(
+declare export function mat4$lookAt(
     out: GLM$IArray,
     eye: GLM$IArray,
     center: GLM$IArray,
@@ -2109,8 +1922,7 @@ export function mat4$lookAt(
  * @param vec vector to represent as a string
  * @returns  string representation of the vector
  */
-declare
-export function mat4$str(a: GLM$IArray): string
+declare export function mat4$str(a: GLM$IArray): string
 
 
 /**
@@ -2118,8 +1930,7 @@ export function mat4$str(a: GLM$IArray): string
  * @param a the matrix to calculate Frobenius norm of
  * @returns  Frobenius norm
  */
-declare
-export function mat4$frob(a: GLM$IArray): number
+declare export function mat4$frob(a: GLM$IArray): number
 
 
 /**
@@ -2136,8 +1947,7 @@ export function mat4$frob(a: GLM$IArray): number
  * @param v Translation vector
  * @returns  out
 */
-declare
-export function mat4$fromRotationTranslation(out: GLM$IArray, q: GLM$IArray, v: GLM$IArray): GLM$IArray
+declare export function mat4$fromRotationTranslation(out: GLM$IArray, q: GLM$IArray, v: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2157,8 +1967,7 @@ This is equivalent to (but much faster than):
  * @param s Scale vector
  * @returns  out
 */
-declare
-export function mat4$fromRotationTranslationScale(out: GLM$IArray, q: GLM$IArray, v: GLM$IArray, s: GLM$IArray): GLM$IArray
+declare export function mat4$fromRotationTranslationScale(out: GLM$IArray, q: GLM$IArray, v: GLM$IArray, s: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2167,10 +1976,8 @@ export function mat4$fromRotationTranslationScale(out: GLM$IArray, q: GLM$IArray
  * @param q Quaternion to create matrix from
  * @returns  out
  */
-declare
-export function mat4$fromQuat(out: GLM$IArray, q: GLM$IArray): GLM$IArray
-declare
-var npm$namespace$quat: {
+declare export function mat4$fromQuat(out: GLM$IArray, q: GLM$IArray): GLM$IArray
+declare var npm$namespace$quat: {
         create: typeof quat$create,
         clone: typeof quat$clone,
         fromValues: typeof quat$fromValues,
@@ -2205,8 +2012,7 @@ var npm$namespace$quat: {
      * Creates a new, empty vec2
      * @returns  a new 2D vector
      */
-declare
-export function quat$create(): GLM$IArray
+declare export function quat$create(): GLM$IArray
 
 
 /**
@@ -2214,8 +2020,7 @@ export function quat$create(): GLM$IArray
  * @param a a vector to clone
  * @returns  a new 2D vector
  */
-declare
-export function quat$clone(a: GLM$IArray): GLM$IArray
+declare export function quat$clone(a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2224,8 +2029,7 @@ export function quat$clone(a: GLM$IArray): GLM$IArray
  * @param y Y component
  * @returns  a new 2D vector
  */
-declare
-export function quat$fromValues(x: number, y: number): GLM$IArray
+declare export function quat$fromValues(x: number, y: number): GLM$IArray
 
 
 /**
@@ -2234,8 +2038,7 @@ export function quat$fromValues(x: number, y: number): GLM$IArray
  * @param a the source vector
  * @returns  out
  */
-declare
-export function quat$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function quat$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2245,8 +2048,7 @@ export function quat$copy(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param y Y component
  * @returns  out
  */
-declare
-export function quat$set(out: GLM$IArray, x: number, y: number): GLM$IArray
+declare export function quat$set(out: GLM$IArray, x: number, y: number): GLM$IArray
 
 
 /**
@@ -2254,8 +2056,7 @@ export function quat$set(out: GLM$IArray, x: number, y: number): GLM$IArray
  * @param out the receiving matrix
  * @returns  out
  */
-declare
-export function quat$identity(out: GLM$IArray): GLM$IArray
+declare export function quat$identity(out: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2266,8 +2067,7 @@ export function quat$identity(out: GLM$IArray): GLM$IArray
  * @param rad the angle in radians
  * @returns  out
  */
-declare
-export function quat$setAxisAngle(out: GLM$IArray, axis: GLM$IArray, rad: number): GLM$IArray
+declare export function quat$setAxisAngle(out: GLM$IArray, axis: GLM$IArray, rad: number): GLM$IArray
 
 
 /**
@@ -2277,8 +2077,7 @@ export function quat$setAxisAngle(out: GLM$IArray, axis: GLM$IArray, rad: number
  * @param b the second operand
  * @returns  out
  */
-declare
-export function quat$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function quat$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2288,8 +2087,7 @@ export function quat$add(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b the second operand
  * @returns  out
  */
-declare
-export function quat$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function quat$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2299,8 +2097,7 @@ export function quat$multiply(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GL
  * @param b the second operand
  * @returns  out
  */
-declare
-export function quat$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function quat$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2310,8 +2107,7 @@ export function quat$mul(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IAr
  * @param b amount to scale the vector by
  * @returns  out
  */
-declare
-export function quat$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
+declare export function quat$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArray
 
 
 /**
@@ -2319,8 +2115,7 @@ export function quat$scale(out: GLM$IArray, a: GLM$IArray, b: number): GLM$IArra
  * @param a vector to calculate length of
  * @returns  length of a
  */
-declare
-export function quat$length(a: GLM$IArray): number
+declare export function quat$length(a: GLM$IArray): number
 
 
 /**
@@ -2328,8 +2123,7 @@ export function quat$length(a: GLM$IArray): number
  * @param a vector to calculate length of
  * @returns  length of a
  */
-declare
-export function quat$len(a: GLM$IArray): number
+declare export function quat$len(a: GLM$IArray): number
 
 
 /**
@@ -2337,8 +2131,7 @@ export function quat$len(a: GLM$IArray): number
  * @param a vector to calculate squared length of
  * @returns  squared length of a
  */
-declare
-export function quat$squaredLength(a: GLM$IArray): number
+declare export function quat$squaredLength(a: GLM$IArray): number
 
 
 /**
@@ -2346,8 +2139,7 @@ export function quat$squaredLength(a: GLM$IArray): number
  * @param a vector to calculate squared length of
  * @returns  squared length of a
  */
-declare
-export function quat$sqrLen(a: GLM$IArray): number
+declare export function quat$sqrLen(a: GLM$IArray): number
 
 
 /**
@@ -2356,8 +2148,7 @@ export function quat$sqrLen(a: GLM$IArray): number
  * @param a vector to normalize
  * @returns  out
  */
-declare
-export function quat$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function quat$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2366,8 +2157,7 @@ export function quat$normalize(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param b the second operand
  * @returns  dot product of a and b
  */
-declare
-export function quat$dot(a: GLM$IArray, b: GLM$IArray): number
+declare export function quat$dot(a: GLM$IArray, b: GLM$IArray): number
 
 
 /**
@@ -2378,8 +2168,7 @@ export function quat$dot(a: GLM$IArray, b: GLM$IArray): number
  * @param t interpolation amount between the two inputs
  * @returns  out
  */
-declare
-export function quat$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
+declare export function quat$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
 
 
 /**
@@ -2390,8 +2179,7 @@ export function quat$lerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: numb
  * @param t interpolation amount between the two inputs
  * @returns  out
  */
-declare
-export function quat$slerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
+declare export function quat$slerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: number): GLM$IArray
 
 
 /**
@@ -2400,8 +2188,7 @@ export function quat$slerp(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, t: num
  * @param a the source matrix
  * @returns  out
  */
-declare
-export function quat$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function quat$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2411,8 +2198,7 @@ export function quat$invert(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param a quat to calculate conjugate of
  * @returns  out
  */
-declare
-export function quat$conjugate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function quat$conjugate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2420,8 +2206,7 @@ export function quat$conjugate(out: GLM$IArray, a: GLM$IArray): GLM$IArray
  * @param vec vector to represent as a string
  * @returns  string representation of the vector
  */
-declare
-export function quat$str(a: GLM$IArray): string
+declare export function quat$str(a: GLM$IArray): string
 
 
 /**
@@ -2432,8 +2217,7 @@ export function quat$str(a: GLM$IArray): string
  * @param c The angle of rotation
  * @returns  out
  */
-declare
-export function quat$rotateX(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
+declare export function quat$rotateX(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
 
 
 /**
@@ -2444,8 +2228,7 @@ export function quat$rotateX(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: n
  * @param c The angle of rotation
  * @returns  out
  */
-declare
-export function quat$rotateY(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
+declare export function quat$rotateY(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
 
 
 /**
@@ -2456,8 +2239,7 @@ export function quat$rotateY(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: n
  * @param c The angle of rotation
  * @returns  out
  */
-declare
-export function quat$rotateZ(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
+declare export function quat$rotateZ(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray, c: number): GLM$IArray
 
 
 /**
@@ -2470,8 +2252,7 @@ to renormalize the quaternion yourself where necessary.
  * @returns  out
  * @function  
 */
-declare
-export function quat$fromMat3(out: GLM$IArray, m: GLM$IArray): GLM$IArray
+declare export function quat$fromMat3(out: GLM$IArray, m: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2483,8 +2264,7 @@ perpendicular to all other specified axes.
  * @param up the vector representing the local "up" direction
  * @returns  out
 */
-declare
-export function quat$setAxes(
+declare export function quat$setAxes(
     out: GLM$IArray,
     view: GLM$IArray,
     right: GLM$IArray,
@@ -2501,8 +2281,7 @@ Both vectors are assumed to be unit length.
  * @param b the destination vector
  * @returns  out
 */
-declare
-export function quat$rotationTo(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
+declare export function quat$rotationTo(out: GLM$IArray, a: GLM$IArray, b: GLM$IArray): GLM$IArray
 
 
 /**
@@ -2513,5 +2292,4 @@ Any existing W component will be ignored.
  * @param a quat to calculate W component of
  * @returns  out
 */
-declare
-export function quat$calculateW(out: GLM$IArray, a: GLM$IArray): GLM$IArray
+declare export function quat$calculateW(out: GLM$IArray, a: GLM$IArray): GLM$IArray

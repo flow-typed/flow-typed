@@ -117,5 +117,4 @@ declare interface OAuth2Server$OAuth2Server {
         subscribeTo: OAuth2Server$SubscribeTo,
         callMethod: OAuth2Server$CallMethod
 }
-declare
-var oAuth2Server: OAuth2Server$OAuth2Server;
+declare var oAuth2Server: OAuth2Server$OAuth2Server;

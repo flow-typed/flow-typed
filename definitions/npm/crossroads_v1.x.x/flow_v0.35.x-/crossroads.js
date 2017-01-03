@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface CrossroadsJs$Route {
+declare export interface CrossroadsJs$Route {
     matched: Signal,
 
         /**
@@ -49,8 +48,7 @@ export interface CrossroadsJs$Route {
         add(listener: Function, listenerContext?: any, priority?: Number): SignalBinding
 }
 
-declare
-export interface CrossroadsJs$CrossRoadsStatic {
+declare export interface CrossroadsJs$CrossRoadsStatic {
     NORM_AS_ARRAY: Function,
         NORM_AS_OBJECT: Function,
 
@@ -145,8 +143,7 @@ export interface CrossroadsJs$CrossRoadsStatic {
          */
         unpipe(router: CrossroadsJs$CrossRoadsStatic): void
 }
-declare
-var crossroads: CrossroadsJs$CrossRoadsStatic;
+declare var crossroads: CrossroadsJs$CrossRoadsStatic;
 declare module 'crossroads' {
     declare module.exports: typeof crossroads
 }

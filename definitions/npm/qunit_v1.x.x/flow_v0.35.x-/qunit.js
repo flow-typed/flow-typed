@@ -585,5 +585,4 @@ declare interface QUnit {
          */
         version: string
 }
-declare
-var QUnit: QUnit;
+declare var QUnit: QUnit;

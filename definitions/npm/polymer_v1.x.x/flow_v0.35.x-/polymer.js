@@ -197,5 +197,4 @@ declare interface polymer$PolymerStatic {
          */
         ImportStatus: polymer$ImportStatus
 }
-declare
-var Polymer: polymer$PolymerStatic;
+declare var Polymer: polymer$PolymerStatic;

@@ -21,8 +21,7 @@ declare interface ___React$HTMLAttributes {
         valueLink?: ___React$ReactLink<boolean | string | number >
 }
 
-declare
-export var LinkedStateMixin: ___React$LinkedStateMixin;
+declare export var LinkedStateMixin: ___React$LinkedStateMixin;
 declare module 'react-addons-linked-state-mixin' {
     declare var LinkedStateMixin: ___React$LinkedStateMixin;
     declare module.exports: typeof LinkedStateMixin

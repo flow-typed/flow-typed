@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$TsMonad: {
+declare var npm$namespace$TsMonad: {
         writer: typeof TsMonad$writer,
     }
     /**
@@ -41,8 +40,7 @@ declare interface TsMonad$WriterPatterns<S, T, U>{
 and the wrapped value.
  * @see  Writer#
 */
-declare
-function TsMonad$writer<S, T>(story: S[], value: T): TsMonad$Writer<S, T >
+declare function TsMonad$writer<S, T>(story: S[], value: T): TsMonad$Writer<S, T >
 
 
     /**
@@ -210,8 +208,7 @@ function TsMonad$writer<S, T>(story: S[], value: T): TsMonad$Writer<S, T >
         */
         equals(other: TsMonad$Writer<S, T>): boolean
     }
-declare
-var module: {
+declare var module: {
     exports: any,
     require(id: string): any,
     id: string,

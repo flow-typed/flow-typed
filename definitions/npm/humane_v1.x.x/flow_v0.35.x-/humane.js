@@ -34,5 +34,4 @@ declare interface Humane {
         log(message: string, callback: Function, options: HumaneOptions): Humane,
         log(listOfMessages: any[]): Humane
 }
-declare
-var humane: Humane;
+declare var humane: Humane;

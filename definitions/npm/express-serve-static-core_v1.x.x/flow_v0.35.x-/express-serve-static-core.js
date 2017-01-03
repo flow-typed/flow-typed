@@ -6,14 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Express$Request {}
+declare export interface Express$Request {}
 
-declare
-export interface Express$Response {}
+declare export interface Express$Response {}
 
-declare
-export interface Express$Application {}
+declare export interface Express$Application {}
 declare module 'express-serve-static-core' {
 
     declare interface NextFunction {

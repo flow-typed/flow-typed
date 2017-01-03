@@ -6,15 +6,13 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface OpenLayers$MapOptions {
+declare export interface OpenLayers$MapOptions {
     projection?: string,
         maxExtend?: OpenLayers$Bounds,
         center?: OpenLayers$LonLat
 }
 
-declare
-export interface OpenLayers$DistanceOptions {
+declare export interface OpenLayers$DistanceOptions {
 
     /**
      * Return details from the distance calculation.  Default is false.
@@ -27,8 +25,7 @@ export interface OpenLayers$DistanceOptions {
         edge?: boolean
 }
 
-declare
-export interface OpenLayers$BoundsOptions {
+declare export interface OpenLayers$BoundsOptions {
 
     /**
      * Whether or not to include the border. Default is true.
@@ -44,8 +41,7 @@ export interface OpenLayers$BoundsOptions {
         worldBounds?: OpenLayers$Bounds
 }
 
-declare
-export interface OpenLayers$WrapDateLineOptions {
+declare export interface OpenLayers$WrapDateLineOptions {
 
     /**
      * Allow for a margin of error
@@ -64,35 +60,25 @@ export interface OpenLayers$WrapDateLineOptions {
         rightTolerance?: number
 }
 
-declare
-export interface OpenLayers$LayerOptions {}
+declare export interface OpenLayers$LayerOptions {}
 
-declare
-export class Animation {}
+declare export class Animation {}
 
-declare
-export class String {}
+declare export class String {}
 
-declare
-export class Number {}
+declare export class Number {}
 
-declare
-export class Function {}
+declare export class Function {}
 
-declare
-export class Array {}
+declare export class Array {}
 
-declare
-export class Console {}
+declare export class Console {}
 
-declare
-export class Control {}
+declare export class Control {}
 
-declare
-export class Event {}
+declare export class Event {}
 
-declare
-export class Events {
+declare export class Events {
 
     /**
      * Method: attachToElement
@@ -271,29 +257,21 @@ export class Events {
     getMousePosition(evt: OpenLayers$Event): OpenLayers$Pixel
 }
 
-declare
-export class Feature {}
+declare export class Feature {}
 
-declare
-export class Filter {}
+declare export class Filter {}
 
-declare
-export class Format {}
+declare export class Format {}
 
-declare
-export class Handler {}
+declare export class Handler {}
 
-declare
-export class Icon {}
+declare export class Icon {}
 
-declare
-export class Kinetic {}
+declare export class Kinetic {}
 
-declare
-export class Lang {}
+declare export class Lang {}
 
-declare
-export class Layer {
+declare export class Layer {
 
     /**
      * 
@@ -906,65 +884,45 @@ export class Layer {
     CLASS_NAME: string
 }
 
-declare
-export class Marker {}
+declare export class Marker {}
 
-declare
-export class Popup {}
+declare export class Popup {}
 
-declare
-export class Protocol {}
+declare export class Protocol {}
 
-declare
-export class Renderer {}
+declare export class Renderer {}
 
-declare
-export class Request {}
+declare export class Request {}
 
-declare
-export class Rule {}
+declare export class Rule {}
 
-declare
-export class SingleFile {}
+declare export class SingleFile {}
 
-declare
-export class Spherical {}
+declare export class Spherical {}
 
-declare
-export class Strategy {}
+declare export class Strategy {}
 
-declare
-export class Style {}
+declare export class Style {}
 
-declare
-export class Style2 {}
+declare export class Style2 {}
 
-declare
-export class StyleMap {}
+declare export class StyleMap {}
 
-declare
-export class Symbolizer {}
+declare export class Symbolizer {}
 
-declare
-export class Tile {}
+declare export class Tile {}
 
-declare
-export class TileManager {}
+declare export class TileManager {}
 
-declare
-export class Tween {}
+declare export class Tween {}
 
-declare
-export class Util {}
+declare export class Util {}
 
-declare
-export class WPSClient {}
+declare export class WPSClient {}
 
-declare
-export class WPSProcess {}
+declare export class WPSProcess {}
 
-declare
-export class Geometry {
+declare export class Geometry {
 
     /**
      * A unique identifier for this geometry.
@@ -1060,8 +1018,7 @@ export class Geometry {
     CLASS_NAME: string
 }
 
-declare
-export class Projection {
+declare export class Projection {
 
     /**
      * This class offers several methods for interacting with a wrapped pro4js projection object.
@@ -1105,8 +1062,7 @@ export class Projection {
     nullTransform(point: Object): OpenLayers$Function
 }
 
-declare
-export class Bounds {
+declare export class Bounds {
 
     /**
      * Minimum horizontal coordinate.
@@ -1308,8 +1264,7 @@ export class Bounds {
     oppositeQuadrant(quadrant: string): string
 }
 
-declare
-export class LonLat {
+declare export class LonLat {
 
     /**
      * Create a new map location.  Coordinates can be passed either as two arguments, or as a single argument.
@@ -1352,8 +1307,7 @@ export class LonLat {
     wrapDateLine(maxExtend: OpenLayers$Bounds): OpenLayers$LonLat
 }
 
-declare
-export class Map {
+declare export class Map {
 
     /**
      * Unique identifier for the map
@@ -2505,11 +2459,9 @@ export class Map {
     TILE_HEIGHT: string
 }
 
-declare
-export class Class {}
+declare export class Class {}
 
-declare
-export class Date {
+declare export class Date {
 
     /**
      * APIProperty: dateRegEx
@@ -2563,8 +2515,7 @@ export class Date {
     parse(str: string): OpenLayers$Date
 }
 
-declare
-export class Element {
+declare export class Element {
 
     /**
      * APIFunction: visible
@@ -2674,8 +2625,7 @@ export class Element {
     getStyle(element: HTMLElement, style: any): any
 }
 
-declare
-export class Pixel {
+declare export class Pixel {
 
     /**
      * APIProperty: x
@@ -2774,8 +2724,7 @@ export class Pixel {
     CLASS_NAME: string
 }
 
-declare
-export class Size {
+declare export class Size {
 
     /**
      * APIProperty: w
@@ -2835,8 +2784,7 @@ export class Size {
     CLASS_NAME: string
 }
 
-declare
-export class Collection mixins Geometry {
+declare export class Collection mixins Geometry {
 
     /**
      * The component parts of this geometry
@@ -2973,8 +2921,7 @@ export class Collection mixins Geometry {
     CLASS_NAME: string
 }
 
-declare
-export class Point mixins Geometry {
+declare export class Point mixins Geometry {
     x: number;
     y: number;
 
@@ -3036,328 +2983,221 @@ export class Point mixins Geometry {
     getVertices(nodes: boolean): any[]
 }
 
-declare
-export class Curve mixins Geometry$MultiPoint {}
+declare export class Curve mixins Geometry$MultiPoint {}
 
-declare
-export class LineString mixins Geometry$Curve {}
+declare export class LineString mixins Geometry$Curve {}
 
-declare
-export class LinearRing mixins Geometry$LineString {}
+declare export class LinearRing mixins Geometry$LineString {}
 
-declare
-export class MultiLineString mixins Geometry$Collection {}
+declare export class MultiLineString mixins Geometry$Collection {}
 
-declare
-export class MultiPoint mixins Geometry$Collection {}
+declare export class MultiPoint mixins Geometry$Collection {}
 
-declare
-export class MultiPolygon mixins Geometry$Collection {}
+declare export class MultiPolygon mixins Geometry$Collection {}
 
-declare
-export class Polygon mixins Geometry$Collection {}
+declare export class Polygon mixins Geometry$Collection {}
 
-declare
-export class ArgParser {}
+declare export class ArgParser {}
 
-declare
-export class Attribution {}
+declare export class Attribution {}
 
-declare
-export class Button {}
+declare export class Button {}
 
-declare
-export class CacheRead {}
+declare export class CacheRead {}
 
-declare
-export class CacheWrite {}
+declare export class CacheWrite {}
 
-declare
-export class DragFeature {}
+declare export class DragFeature {}
 
-declare
-export class DragPan {}
+declare export class DragPan {}
 
-declare
-export class DrawFeature {}
+declare export class DrawFeature {}
 
-declare
-export class EditingToolbar {}
+declare export class EditingToolbar {}
 
-declare
-export class Geolocate {}
+declare export class Geolocate {}
 
-declare
-export class GetFeature {}
+declare export class GetFeature {}
 
-declare
-export class Graticule {}
+declare export class Graticule {}
 
-declare
-export class KeyboardDefaults {}
+declare export class KeyboardDefaults {}
 
-declare
-export class LayerSwitcher {}
+declare export class LayerSwitcher {}
 
-declare
-export class Measure {}
+declare export class Measure {}
 
-declare
-export class ModifyFeature {}
+declare export class ModifyFeature {}
 
-declare
-export class MousePosition {}
+declare export class MousePosition {}
 
-declare
-export class NavToolbar {}
+declare export class NavToolbar {}
 
-declare
-export class Navigation {}
+declare export class Navigation {}
 
-declare
-export class NavigationHistory {}
+declare export class NavigationHistory {}
 
-declare
-export class OverviewMap {}
+declare export class OverviewMap {}
 
-declare
-export class Pan {}
+declare export class Pan {}
 
-declare
-export class PanPanel {}
+declare export class PanPanel {}
 
-declare
-export class PanZoom {}
+declare export class PanZoom {}
 
-declare
-export class PanZoomBar {}
+declare export class PanZoomBar {}
 
-declare
-export class Panel {}
+declare export class Panel {}
 
-declare
-export class Permalink {}
+declare export class Permalink {}
 
-declare
-export class PinchZoom {}
+declare export class PinchZoom {}
 
-declare
-export class SLDSelect {}
+declare export class SLDSelect {}
 
-declare
-export class Scale {}
+declare export class Scale {}
 
-declare
-export class ScaleLine {}
+declare export class ScaleLine {}
 
-declare
-export class SelectFeature {}
+declare export class SelectFeature {}
 
-declare
-export class Snapping {}
+declare export class Snapping {}
 
-declare
-export class Split {}
+declare export class Split {}
 
-declare
-export class TextButtonPanel {}
+declare export class TextButtonPanel {}
 
-declare
-export class TouchNavigation {}
+declare export class TouchNavigation {}
 
-declare
-export class TransformFeature {}
+declare export class TransformFeature {}
 
-declare
-export class UTFGrid {}
+declare export class UTFGrid {}
 
-declare
-export class WMSGetFeatureInfo {}
+declare export class WMSGetFeatureInfo {}
 
-declare
-export class WMTSGetFeatureInfo {}
+declare export class WMTSGetFeatureInfo {}
 
-declare
-export class Zoom {}
+declare export class Zoom {}
 
-declare
-export class ZoomBox {}
+declare export class ZoomBox {}
 
-declare
-export class ZoomIn {}
+declare export class ZoomIn {}
 
-declare
-export class ZoomOut {}
+declare export class ZoomOut {}
 
-declare
-export class ZoomPanel {}
+declare export class ZoomPanel {}
 
-declare
-export class ZoomToMaxExtent {}
+declare export class ZoomToMaxExtent {}
 
-declare
-export class buttonclick mixins OpenLayers$Class {}
+declare export class buttonclick mixins OpenLayers$Class {}
 
-declare
-export class featureclick mixins OpenLayers$Class {}
+declare export class featureclick mixins OpenLayers$Class {}
 
-declare
-export class Vector {}
+declare export class Vector {}
 
-declare
-export class Comparison {}
+declare export class Comparison {}
 
-declare
-export class FeatureId {}
+declare export class FeatureId {}
 
-declare
-export class Function {}
+declare export class Function {}
 
-declare
-export class Logical {}
+declare export class Logical {}
 
-declare
-export class Spatial {}
+declare export class Spatial {}
 
-declare
-export class ArcXML {
+declare export class ArcXML {
     constructor(): this
 }
 
-declare
-export class Atom {}
+declare export class Atom {}
 
-declare
-export class CQL {}
+declare export class CQL {}
 
-declare
-export class CSWGetDomain {}
+declare export class CSWGetDomain {}
 
-declare
-export class CSWGetRecords {}
+declare export class CSWGetRecords {}
 
-declare
-export class Context {}
+declare export class Context {}
 
-declare
-export class EncodedPolyline {}
+declare export class EncodedPolyline {}
 
-declare
-export class Filter {}
+declare export class Filter {}
 
-declare
-export class GML {}
+declare export class GML {}
 
-declare
-export class GPX {}
+declare export class GPX {}
 
-declare
-export class GeoJSON {}
+declare export class GeoJSON {}
 
-declare
-export class GeoRSS {}
+declare export class GeoRSS {}
 
-declare
-export class JSON {}
+declare export class JSON {}
 
-declare
-export class KML {}
+declare export class KML {}
 
-declare
-export class OGCExceptionReport {}
+declare export class OGCExceptionReport {}
 
-declare
-export class OSM {}
+declare export class OSM {}
 
-declare
-export class OWSCommon {}
+declare export class OWSCommon {}
 
-declare
-export class OWSContext {}
+declare export class OWSContext {}
 
-declare
-export class QueryStringFilter {}
+declare export class QueryStringFilter {}
 
-declare
-export class SLD {}
+declare export class SLD {}
 
-declare
-export class SOSCapabilities {}
+declare export class SOSCapabilities {}
 
-declare
-export class SOSGetFeatureOfInterest {}
+declare export class SOSGetFeatureOfInterest {}
 
-declare
-export class SOSGetObservation {}
+declare export class SOSGetObservation {}
 
-declare
-export class TMSCapabilities {}
+declare export class TMSCapabilities {}
 
-declare
-export class Text {}
+declare export class Text {}
 
-declare
-export class WCSCapabilities {}
+declare export class WCSCapabilities {}
 
-declare
-export class WCSDescribeCoverage {}
+declare export class WCSDescribeCoverage {}
 
-declare
-export class WCSGetCoverage {}
+declare export class WCSGetCoverage {}
 
-declare
-export class WFS {}
+declare export class WFS {}
 
-declare
-export class WFSCapabilities {}
+declare export class WFSCapabilities {}
 
-declare
-export class WFSDescribeFeatureType {}
+declare export class WFSDescribeFeatureType {}
 
-declare
-export class WFST {}
+declare export class WFST {}
 
-declare
-export class WKT {}
+declare export class WKT {}
 
-declare
-export class WMC {}
+declare export class WMC {}
 
-declare
-export class WMSCapabilities {}
+declare export class WMSCapabilities {}
 
-declare
-export class WMSDescribeLayer {}
+declare export class WMSDescribeLayer {}
 
-declare
-export class WMSGetFeatureInfo {}
+declare export class WMSGetFeatureInfo {}
 
-declare
-export class WMTSCapabilities {}
+declare export class WMTSCapabilities {}
 
-declare
-export class WPSCapabilities {}
+declare export class WPSCapabilities {}
 
-declare
-export class WPSDescribeProcess {}
+declare export class WPSDescribeProcess {}
 
-declare
-export class WPSExecute {}
+declare export class WPSExecute {}
 
-declare
-export class XLS {}
+declare export class XLS {}
 
-declare
-export class XML {}
+declare export class XML {}
 
-declare
-export class Features mixins OpenLayers$Class {}
+declare export class Features mixins OpenLayers$Class {}
 
-declare
-export class v2_0_2 {}
+declare export class v2_0_2 {}
 
-declare
-export class v2_0_2 {}
+declare export class v2_0_2 {}
 
 
 
@@ -3393,46 +3233,33 @@ export class v2_0_2 {}
 
 
 
-declare
-export class Box {}
+declare export class Box {}
 
-declare
-export class Click {}
+declare export class Click {}
 
-declare
-export class Drag {}
+declare export class Drag {}
 
-declare
-export class Feature {}
+declare export class Feature {}
 
-declare
-export class Hover {}
+declare export class Hover {}
 
-declare
-export class Keyboard {}
+declare export class Keyboard {}
 
-declare
-export class MouseWheel {}
+declare export class MouseWheel {}
 
-declare
-export class Path {}
+declare export class Path {}
 
-declare
-export class Pinch {}
+declare export class Pinch {}
 
-declare
-export class Point {}
+declare export class Point {}
 
-declare
-export class Polygon {}
+declare export class Polygon {}
 
-declare
-export class RegularPolygon {}
+declare export class RegularPolygon {}
 
 
 
-declare
-export interface Layer$WMSGetMapParams {
+declare export interface Layer$WMSGetMapParams {
     version?: string,
         exceptions?: string,
         transparent?: string,
@@ -3442,8 +3269,7 @@ export interface Layer$WMSGetMapParams {
         service?: string
 }
 
-declare
-export interface Layer$WMSOptions {
+declare export interface Layer$WMSOptions {
     opacity?: number,
         singleTile?: boolean,
         isBaseLayer?: boolean,
@@ -3452,40 +3278,29 @@ export interface Layer$WMSOptions {
         yx?: Object
 }
 
-declare
-export interface Layer$TileOptions {
+declare export interface Layer$TileOptions {
     crossOriginKeyword?: string
 }
 
-declare
-export class ArcGIS93Rest {}
+declare export class ArcGIS93Rest {}
 
-declare
-export class ArcGISCache {}
+declare export class ArcGISCache {}
 
-declare
-export class ArcIMS {}
+declare export class ArcIMS {}
 
-declare
-export class Bing {}
+declare export class Bing {}
 
-declare
-export class Boxes {}
+declare export class Boxes {}
 
-declare
-export class EventPane {}
+declare export class EventPane {}
 
-declare
-export class FixedZoomLevels {}
+declare export class FixedZoomLevels {}
 
-declare
-export class GeoRSS {}
+declare export class GeoRSS {}
 
-declare
-export class Google {}
+declare export class Google {}
 
-declare
-export class Grid mixins HTTPRequest {
+declare export class Grid mixins HTTPRequest {
 
     /**
      * APIProperty: tileSize
@@ -3848,8 +3663,7 @@ export class Grid mixins HTTPRequest {
     getTileBounds(viewPortPx: OpenLayers$Pixel): OpenLayers$Bounds
 }
 
-declare
-export class HTTPRequest mixins Layer {
+declare export class HTTPRequest mixins Layer {
 
     /**
      * Constant: URL_HASH_FACTOR
@@ -3964,8 +3778,7 @@ export class HTTPRequest mixins Layer {
     getFullRequestString(newParams: Object, altUrl: string): string
 }
 
-declare
-export class Image mixins Layer {
+declare export class Image mixins Layer {
 
     /**
      * Property: isBaseLayer
@@ -4104,23 +3917,17 @@ export class Image mixins Layer {
     CLASS_NAME: string
 }
 
-declare
-export class KaMap {}
+declare export class KaMap {}
 
-declare
-export class KaMapCache {}
+declare export class KaMapCache {}
 
-declare
-export class MapGuide {}
+declare export class MapGuide {}
 
-declare
-export class MapServer {}
+declare export class MapServer {}
 
-declare
-export class Markers {}
+declare export class Markers {}
 
-declare
-export class OSM mixins Layer$XYZ {
+declare export class OSM mixins Layer$XYZ {
 
     /**
      * The layer name. Defaults to "OpenStreetMap" if the first
@@ -4163,32 +3970,23 @@ export class OSM mixins Layer$XYZ {
     CLASS_NAME: string
 }
 
-declare
-export class PointGrid {}
+declare export class PointGrid {}
 
-declare
-export class PointTrack {}
+declare export class PointTrack {}
 
-declare
-export class SphericalMercator {}
+declare export class SphericalMercator {}
 
-declare
-export class TMS {}
+declare export class TMS {}
 
-declare
-export class Text {}
+declare export class Text {}
 
-declare
-export class TileCache {}
+declare export class TileCache {}
 
-declare
-export class UTFGrid {}
+declare export class UTFGrid {}
 
-declare
-export class Vector {}
+declare export class Vector {}
 
-declare
-export class WMS mixins Layer$Grid {
+declare export class WMS mixins Layer$Grid {
 
     /**
      * Default is true for WMS layer
@@ -4301,14 +4099,11 @@ export class WMS mixins Layer$Grid {
     CLASS_NAME: string
 }
 
-declare
-export class WMTS {}
+declare export class WMTS {}
 
-declare
-export class WorldWind {}
+declare export class WorldWind {}
 
-declare
-export class XYZ mixins Layer$Grid {
+declare export class XYZ mixins Layer$Grid {
 
     /**
      * APIProperty: isBaseLayer
@@ -4378,110 +4173,74 @@ export class XYZ mixins Layer$Grid {
     setMap(map: OpenLayers$Map): void
 }
 
-declare
-export class Zoomify {}
+declare export class Zoomify {}
 
-declare
-export class v3 {}
+declare export class v3 {}
 
-declare
-export class RootContainer {}
+declare export class RootContainer {}
 
-declare
-export class Box {}
+declare export class Box {}
 
-declare
-export class Anchored {}
+declare export class Anchored {}
 
-declare
-export class Framed {}
+declare export class Framed {}
 
-declare
-export class FramedCloud {}
+declare export class FramedCloud {}
 
-declare
-export class CSW {}
+declare export class CSW {}
 
-declare
-export class HTTP {}
+declare export class HTTP {}
 
-declare
-export class SOS {}
+declare export class SOS {}
 
-declare
-export class Script {}
+declare export class Script {}
 
-declare
-export class WFS {}
+declare export class WFS {}
 
-declare
-export class v2_0_2 {}
+declare export class v2_0_2 {}
 
-declare
-export class v1_0_0 {}
+declare export class v1_0_0 {}
 
-declare
-export class v2_0_0 {}
+declare export class v2_0_0 {}
 
-declare
-export class Canvas {}
+declare export class Canvas {}
 
-declare
-export class Elements {}
+declare export class Elements {}
 
-declare
-export class SVG {}
+declare export class SVG {}
 
-declare
-export class VML {}
+declare export class VML {}
 
-declare
-export class XMLHttpRequest {}
+declare export class XMLHttpRequest {}
 
-declare
-export class BBOX {}
+declare export class BBOX {}
 
-declare
-export class Cluster {}
+declare export class Cluster {}
 
-declare
-export class Filter {}
+declare export class Filter {}
 
-declare
-export class Fixed {}
+declare export class Fixed {}
 
-declare
-export class Paging {}
+declare export class Paging {}
 
-declare
-export class Refresh {}
+declare export class Refresh {}
 
-declare
-export class Save {}
+declare export class Save {}
 
-declare
-export class Line {}
+declare export class Line {}
 
-declare
-export class Point {}
+declare export class Point {}
 
-declare
-export class Polygon {}
+declare export class Polygon {}
 
-declare
-export class Raster {}
+declare export class Raster {}
 
-declare
-export class Text {}
+declare export class Text {}
 
-declare
-export class Image {}
+declare export class Image {}
 
-declare
-export class UTFGrid {}
+declare export class UTFGrid {}
 
-declare
-export class IFrame {}
+declare export class IFrame {}
 
-declare
-export class vendorPrefix {}
+declare export class vendorPrefix {}

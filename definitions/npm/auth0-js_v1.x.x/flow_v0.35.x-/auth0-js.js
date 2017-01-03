@@ -185,8 +185,7 @@ declare interface Auth0DelegationToken {
          */
         token_type: string
 }
-declare
-var Auth0: Auth0Static;
+declare var Auth0: Auth0Static;
 declare module 'auth0-js' {
     declare module.exports: typeof Auth0
 }

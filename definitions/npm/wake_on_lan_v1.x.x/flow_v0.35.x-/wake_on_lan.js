@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface wol$WakeOptions {
+declare export interface wol$WakeOptions {
 
     /**
      * The ip address to which the packet is send  (default: 255.255.255.255)
@@ -32,8 +31,7 @@ export interface wol$WakeOptions {
 
 declare type wol$ErrorCallback = (Error: any) => void;
 
-declare
-export interface wol$Wol {
+declare export interface wol$Wol {
 
     /**
      * Send a sequence of Wake-on-LAN magic packets to the given MAC address.

@@ -7,13 +7,11 @@
  */
 
 
-declare
-var npm$namespace$SassGraph: {
+declare var npm$namespace$SassGraph: {
     parseFile: typeof SassGraph$parseFile,
     parseDir: typeof SassGraph$parseDir,
 }
-declare
-export interface SassGraph$Options {
+declare export interface SassGraph$Options {
     loadPath?: string[],
         extensions?: string[]
 }
@@ -31,8 +29,7 @@ declare type SassGraph$Node = {
  * 
  * @class  Graph
  */
-declare
-export interface SassGraph$Graph {
+declare export interface SassGraph$Graph {
     dir: string,
         loadPaths: string[],
         extensions: string[],
@@ -82,8 +79,7 @@ export interface SassGraph$Graph {
  * @param  Parsing options
  * @return  
  */
-declare
-export function SassGraph$parseFile(filepath: string, options?: SassGraph$Options): SassGraph$Graph
+declare export function SassGraph$parseFile(filepath: string, options?: SassGraph$Options): SassGraph$Graph
 
 
 /**
@@ -93,7 +89,6 @@ export function SassGraph$parseFile(filepath: string, options?: SassGraph$Option
  * @param  Parsing options
  * @return  
  */
-declare
-export function SassGraph$parseDir(dirpath: string, options?: SassGraph$Options): SassGraph$Graphdeclare module 'sass-graph' {
+declare export function SassGraph$parseDir(dirpath: string, options?: SassGraph$Options): SassGraph$Graphdeclare module 'sass-graph' {
     declare module.exports: typeof SassGraph
 }

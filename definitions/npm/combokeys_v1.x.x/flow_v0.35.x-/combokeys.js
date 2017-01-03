@@ -92,8 +92,7 @@ declare interface Combokeys$Combokeys {
          */
         detach(): void
 }
-declare
-var combokeys: Combokeys$CombokeysStatic;
+declare var combokeys: Combokeys$CombokeysStatic;
 declare module 'combokeys' {
     declare module.exports: typeof combokeys
 }

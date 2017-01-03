@@ -46,5 +46,4 @@ declare interface MustacheStatic {
         render(template: string, view: any, partials?: any): string,
         to_html(template: string, view: any, partials?: any, send?: any): string
 }
-declare
-var Mustache: MustacheStatic;
+declare var Mustache: MustacheStatic;

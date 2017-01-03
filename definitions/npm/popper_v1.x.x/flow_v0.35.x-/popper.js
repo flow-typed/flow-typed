@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Popper$PopperOptions {
+declare export interface Popper$PopperOptions {
     placement?: string,
         gpuAcceleration?: boolean,
         offset?: number,
@@ -21,8 +20,7 @@ export interface Popper$PopperOptions {
         arrowElement?: string | Element
 }
 
-declare
-export class Modifiers {
+declare export class Modifiers {
     applyStyle(data: Object): Object;
     shift(data: Object): Object;
     preventOverflow(data: Object): Object;
@@ -32,8 +30,7 @@ export class Modifiers {
     arrow(data: Object): Object
 }
 
-declare
-export interface Popper$Data {
+declare export interface Popper$Data {
     placement: string,
         offsets: {
             popper: {

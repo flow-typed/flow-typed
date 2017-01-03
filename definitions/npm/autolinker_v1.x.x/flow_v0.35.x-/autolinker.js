@@ -48,8 +48,7 @@ declare interface ___Autolinker$Static {
      */
     link(textOrHtml: string, options?: ___Autolinker$ConfigOptions): string
 }
-declare
-var Autolinker: ___Autolinker$Static;
+declare var Autolinker: ___Autolinker$Static;
 declare module 'autolinker' {
     declare module.exports: typeof Autolinker
 }

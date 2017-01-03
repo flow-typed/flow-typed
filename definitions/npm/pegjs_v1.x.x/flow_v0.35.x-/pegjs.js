@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$PEG: {
+declare var npm$namespace$PEG: {
     parse: typeof PEG$parse,
 }
-declare
-function PEG$parse(input: string): any
+declare function PEG$parse(input: string): any
 
 declare interface PEG$Location {
     line: number,

@@ -6,18 +6,15 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Slick$Column<T>{
+declare export interface Slick$Column<T>{
     header?: Slick$Header
 }
 
-declare
-export interface Slick$Header {
+declare export interface Slick$Header {
     buttons: Slick$HeaderButton[]
 }
 
-declare
-export interface Slick$HeaderButton {
+declare export interface Slick$HeaderButton {
     command?: string,
         cssClass?: string,
         handler?: Function,
@@ -26,8 +23,7 @@ export interface Slick$HeaderButton {
         tooltip?: string
 }
 
-declare
-export interface Slick$OnCommandEventArgs<T>{
+declare export interface Slick$OnCommandEventArgs<T>{
     grid: Grid<T>,
     column: Slick$Column<T>,
     command: string,

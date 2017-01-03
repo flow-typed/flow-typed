@@ -26,7 +26,6 @@ declare type ReactInfinite$InfiniteProps = {
     displayBottomUpwards?: boolean
 }
 
-declare
-export class Infinite mixins React.Component<ReactInfinite$InfiniteProps, {}>{
+declare export class Infinite mixins React.Component<ReactInfinite$InfiniteProps, {}>{
     containerHeightScaleFactor(n: number): any
 }

@@ -255,8 +255,7 @@ declare interface ValidatorJS$NormalizeEmailOptions {
         remove_dots?: boolean,
         remove_extension?: boolean
 }
-declare
-var validator: ValidatorJS$ValidatorStatic;
+declare var validator: ValidatorJS$ValidatorStatic;
 declare module 'validator' {
     declare module.exports: typeof validator
 }

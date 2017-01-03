@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface commonmark$NodeWalkingStep {
+declare export interface commonmark$NodeWalkingStep {
 
     /**
      * a boolean, which is true when we enter a Node from a parent or sibling, and false when we reenter it from a child
@@ -20,8 +19,7 @@ export interface commonmark$NodeWalkingStep {
         node: commonmark$Node
 }
 
-declare
-export interface commonmark$NodeWalker {
+declare export interface commonmark$NodeWalker {
 
     /**
      * Returns an object with properties entering and node. Returns null when we have finished walking the tree.
@@ -34,20 +32,17 @@ export interface commonmark$NodeWalker {
         resumeAt(node: commonmark$Node, entering?: boolean): void
 }
 
-declare
-export type commonmark$Position = {} & Array
+declare export type commonmark$Position = {} & Array
 
 
-declare
-export interface commonmark$ListData {
+declare export interface commonmark$ListData {
     type?: string,
         tight?: boolean,
         delimiter?: string,
         bulletChar?: string
 }
 
-declare
-export class Node {
+declare export class Node {
     constructor(nodeType: string, sourcepos?: commonmark$Position): this;
     isContainer: boolean;
 
@@ -184,8 +179,7 @@ export class Node {
  * Instead of converting Markdown directly to HTML, as most converters do, commonmark.js parses Markdown to an AST (abstract syntax tree), and then renders this AST as HTML.
  * This opens up the possibility of manipulating the AST between parsing and rendering. For example, one could transform emphasis into ALL CAPS.
  */
-declare
-export class Parser {
+declare export class Parser {
 
     /**
      * Constructs a new Parser
@@ -194,8 +188,7 @@ export class Parser {
     parse(input: string): commonmark$Node
 }
 
-declare
-export interface commonmark$ParserOptions {
+declare export interface commonmark$ParserOptions {
 
     /**
      * if true, straight quotes will be made curly, -- will be changed to an en dash, --- will be changed to an em dash, and ... will be changed to ellipses.
@@ -204,8 +197,7 @@ export interface commonmark$ParserOptions {
         time?: boolean
 }
 
-declare
-export type commonmark$HtmlRenderingOptions = {
+declare export type commonmark$HtmlRenderingOptions = {
 
     /**
      * if true, raw HTML will not be passed through to HTML output (it will be replaced by comments), and potentially unsafe URLs in links and images (those beginning with javascript:, vbscript:, file:, and with a few exceptions data:) will be replaced with empty strings.
@@ -224,8 +216,7 @@ export type commonmark$HtmlRenderingOptions = {
 } & commonmark$XmlRenderingOptions
 
 
-declare
-export class HtmlRenderer {
+declare export class HtmlRenderer {
     constructor(options?: commonmark$HtmlRenderingOptions): this;
     render(root: commonmark$Node): string;
 
@@ -243,14 +234,12 @@ export class HtmlRenderer {
     escape: (input: string, isAttributeValue: boolean) => string
 }
 
-declare
-export interface commonmark$XmlRenderingOptions {
+declare export interface commonmark$XmlRenderingOptions {
     time?: boolean,
         sourcepos?: boolean
 }
 
-declare
-export class XmlRenderer {
+declare export class XmlRenderer {
     constructor(options?: commonmark$XmlRenderingOptions): this;
     render(root: commonmark$Node): string
 }

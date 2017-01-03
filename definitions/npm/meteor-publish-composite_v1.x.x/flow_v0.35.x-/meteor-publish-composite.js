@@ -44,12 +44,10 @@ declare interface PublishCompositeConfig<OutLevel>{
     any>[],
     find(): Mongo.Cursor<OutLevel >
 }
-declare
-var npm$namespace$Meteor: {
+declare var npm$namespace$Meteor: {
     publishComposite: typeof Meteor$publishComposite,
 }
-declare
-function Meteor$publishComposite(
+declare function Meteor$publishComposite(
     name: string,
     config: PublishCompositeConfig<any>| PublishCompositeConfig<any>[]): voiddeclare module 'meteor/meteor' {
 

@@ -6,16 +6,14 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class RenderableObject {
+declare export class RenderableObject {
     constructor(): this;
     id: number;
     object: Object;
     z: number
 }
 
-declare
-export class RenderableFace {
+declare export class RenderableFace {
     constructor(): this;
     id: number;
     v1: THREE$RenderableVertex;
@@ -30,8 +28,7 @@ export class RenderableFace {
     z: number
 }
 
-declare
-export class RenderableVertex {
+declare export class RenderableVertex {
     constructor(): this;
     position: Vector3;
     positionWorld: Vector3;
@@ -40,8 +37,7 @@ export class RenderableVertex {
     copy(vertex: THREE$RenderableVertex): void
 }
 
-declare
-export class RenderableLine {
+declare export class RenderableLine {
     constructor(): this;
     id: number;
     v1: THREE$RenderableVertex;
@@ -51,8 +47,7 @@ export class RenderableLine {
     z: number
 }
 
-declare
-export class RenderableSprite {
+declare export class RenderableSprite {
     constructor(): this;
     id: number;
     object: Object;
@@ -68,8 +63,7 @@ export class RenderableSprite {
 /**
  * Projects points between spaces.
  */
-declare
-export class Projector {
+declare export class Projector {
     constructor(): this;
     projectVector(vector: Vector3, camera: Camera): Vector3;
     unprojectVector(vector: Vector3, camera: Camera): Vector3;

@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface jsSHA$OutputFormatOptions {
+declare export interface jsSHA$OutputFormatOptions {
     outputUpper?: boolean,
         b64Pad?: string
 }
 
-declare
-export interface jsSHA$jsSHA {
+declare export interface jsSHA$jsSHA {
 
     /**
      * jsSHA is the workhorse of the library.  Instantiate it with the string to
@@ -65,8 +63,7 @@ export interface jsSHA$jsSHA {
             outputFormat: string,
             outputFormatOpts?: jsSHA$OutputFormatOptions): string
 }
-declare
-var jsSHA: jsSHA$jsSHA;
+declare var jsSHA: jsSHA$jsSHA;
 declare module 'jssha' {
     declare module.exports: typeof jsSHA
 }

@@ -6,23 +6,19 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface L$IconOptions {
+declare export interface L$IconOptions {
     labelAnchor?: Point
 }
 
-declare
-export interface L$PathOptions {
+declare export interface L$PathOptions {
     labelAnchor?: Point
 }
 
-declare
-export interface L$CircleMarkerOptions {
+declare export interface L$CircleMarkerOptions {
     labelAnchor?: Point
 }
 
-declare
-export interface L$Marker {
+declare export interface L$Marker {
     showLabel(): L$Marker,
         hideLabel(): L$Marker,
         setLabelNoHide(noHide: boolean): void,
@@ -33,8 +29,7 @@ export interface L$Marker {
         setOpacity(opacity: number, labelHasSemiTransparency: boolean): void
 }
 
-declare
-export interface L$CircleMarker {
+declare export interface L$CircleMarker {
     showLabel(): L$CircleMarker,
         hideLabel(): L$CircleMarker,
         setLabelNoHide(noHide: boolean): void,
@@ -44,23 +39,20 @@ export interface L$CircleMarker {
         getLabel(): L$Label
 }
 
-declare
-export interface L$FeatureGroup<T>{
+declare export interface L$FeatureGroup<T>{
     clearLayers(): L$FeatureGroup<T>,
     bindLabel(content: string, options?: L$LabelOptions): L$FeatureGroup<T>,
     unbindLabel(): L$FeatureGroup<T>,
     updateLabelContent(content: string): L$FeatureGroup<T >
 }
 
-declare
-export interface L$Path {
+declare export interface L$Path {
     bindLabel(content: string, options?: L$LabelOptions): L$Path,
         unbindLabel(): L$Path,
         updateLabelContent(content: string): void
 }
 
-declare
-export interface L$LabelOptions {
+declare export interface L$LabelOptions {
     className?: string,
         clickable?: boolean,
         direction?: string,
@@ -71,17 +63,14 @@ export interface L$LabelOptions {
         zoomAnimation?: boolean
 }
 
-declare
-export type L$LabelStatic = {
+declare export type L$LabelStatic = {
     new(options?: L$LabelOptions): L$Label
 } & ClassStatic
 
 
-declare
-export var Label: L$LabelStatic;
+declare export var Label: L$LabelStatic;
 
-declare
-export type L$Label = {
+declare export type L$Label = {
     onAdd(map: Map): void,
     onRemove(map: Map): void,
     setLatLng(latlng: LatLng): L$Label,

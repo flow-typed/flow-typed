@@ -7,28 +7,24 @@
  */
 
 
-declare
-var npm$namespace$inversifyLoggerMiddleware: {
+declare var npm$namespace$inversifyLoggerMiddleware: {
     makeLoggerMiddleware: typeof inversifyLoggerMiddleware$makeLoggerMiddleware,
     textSerializer: typeof inversifyLoggerMiddleware$textSerializer,
     bindingTypeFormatter: typeof inversifyLoggerMiddleware$bindingTypeFormatter,
     scopeFormatter: typeof inversifyLoggerMiddleware$scopeFormatter,
 }
-declare
-export interface interfaces$LoggerSettings {
+declare export interface interfaces$LoggerSettings {
     request?: interfaces$RequestLoggerSettings,
         time?: boolean
 }
 
-declare
-export interface interfaces$RequestLoggerSettings {
+declare export interface interfaces$RequestLoggerSettings {
     serviceIdentifier?: boolean,
         bindings?: interfaces$BindingLoggerSettings,
         target?: interfaces$TargetLoggerSettings
 }
 
-declare
-export interface interfaces$BindingLoggerSettings {
+declare export interface interfaces$BindingLoggerSettings {
     activated?: boolean,
         serviceIdentifier?: boolean,
         implementationType?: boolean,
@@ -42,15 +38,13 @@ export interface interfaces$BindingLoggerSettings {
         type?: boolean
 }
 
-declare
-export interface interfaces$TargetLoggerSettings {
+declare export interface interfaces$TargetLoggerSettings {
     serviceIdentifier?: boolean,
         name?: boolean,
         metadata?: boolean
 }
 
-declare
-export interface interfaces$LogEntry {
+declare export interface interfaces$LogEntry {
     error: boolean,
         exception: any,
         guid: string,
@@ -62,18 +56,14 @@ export interface interfaces$LogEntry {
         time: string
 }
 
-declare
-export function inversifyLoggerMiddleware$makeLoggerMiddleware(
+declare export function inversifyLoggerMiddleware$makeLoggerMiddleware(
     settings?: interfaces$LoggerSettings,
     renderer?: (out: interfaces$LogEntry) => void): undefined.Middleware
 
-declare
-export function inversifyLoggerMiddleware$textSerializer(entry: interfaces$LogEntry): string
+declare export function inversifyLoggerMiddleware$textSerializer(entry: interfaces$LogEntry): string
 
-declare
-export function inversifyLoggerMiddleware$bindingTypeFormatter(type: number): string
+declare export function inversifyLoggerMiddleware$bindingTypeFormatter(type: number): string
 
-declare
-export function inversifyLoggerMiddleware$scopeFormatter(scope: number): stringdeclare module 'inversify-logger-middleware' {
+declare export function inversifyLoggerMiddleware$scopeFormatter(scope: number): stringdeclare module 'inversify-logger-middleware' {
     declare module.exports: typeof inversifyLoggerMiddleware
 }

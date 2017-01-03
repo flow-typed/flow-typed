@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface sugarpak$IAddOrientation {
+declare export interface sugarpak$IAddOrientation {
     millisecond(): Date,
         second(): Date,
         minute(): Date,
@@ -26,8 +25,7 @@ export interface sugarpak$IAddOrientation {
         years(): Date
 }
 
-declare
-export type sugarpak$IOrientation = {
+declare export type sugarpak$IOrientation = {
     monday(): Date,
     tuesday(): Date,
     wednesday(): Date,
@@ -68,8 +66,7 @@ export type sugarpak$IOrientation = {
 } & sugarpak$IAddOrientation
 
 
-declare
-export interface sugarpak$IPredicate {
+declare export interface sugarpak$IPredicate {
     today(): boolean,
         monday(): boolean,
         tuesday(): boolean,
@@ -115,8 +112,7 @@ export interface sugarpak$IPredicate {
         year(date?: Date): boolean
 }
 
-declare
-export interface sugarpak$IDatePartComparer {
+declare export interface sugarpak$IDatePartComparer {
     millisecond(date?: Date): boolean,
         second(date?: Date): boolean,
         minute(date?: Date): boolean,
@@ -127,16 +123,14 @@ export interface sugarpak$IDatePartComparer {
         year(date?: Date): boolean
 }
 
-declare
-export interface sugarpak$IDateElementEvaluator {
+declare export interface sugarpak$IDateElementEvaluator {
     ago(): Date,
         before(): Date,
         fromNow(): Date,
         after(): Date
 }
 
-declare
-export interface sugarpak$IDateElement {
+declare export interface sugarpak$IDateElement {
     millisecond(): sugarpak$IDateElementEvaluator,
         second(): sugarpak$IDateElementEvaluator,
         minute(): sugarpak$IDateElementEvaluator,
@@ -155,8 +149,7 @@ export interface sugarpak$IDateElement {
         years(): sugarpak$IDateElementEvaluator
 }
 
-declare
-export type sugarpak$IDateLiteral = {
+declare export type sugarpak$IDateLiteral = {
     day: number,
     week: number,
     month: number,
@@ -164,8 +157,7 @@ export type sugarpak$IDateLiteral = {
 } & sugarpak$ITimeLiteral
 
 
-declare
-export interface sugarpak$ITimeLiteral {
+declare export interface sugarpak$ITimeLiteral {
     millisecond: number,
         second: number,
         minute: number,

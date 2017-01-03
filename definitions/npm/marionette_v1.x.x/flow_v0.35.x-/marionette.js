@@ -53,12 +53,10 @@ declare class ChildViewContainer<TView>{
 }
 
 
-declare
-var npm$namespace$radio: {
+declare var npm$namespace$radio: {
     channel: typeof radio$channel,
 }
-declare
-function radio$channel(channelName: string): Wreqr$Channel
+declare function radio$channel(channelName: string): Wreqr$Channel
 
 declare class Channel {
     constructor(channelName: string): this;
@@ -103,8 +101,7 @@ declare class RequestResponse mixins Handlers {
 declare class EventAggregator mixins Backbone$Events {
     constructor(options?: any): this
 }
-declare
-var npm$namespace$Marionette: {
+declare var npm$namespace$Marionette: {
         getOption: typeof Marionette$getOption,
         triggerMethod: typeof Marionette$triggerMethod,
         triggerMethodOn: typeof Marionette$triggerMethodOn,
@@ -116,8 +113,7 @@ var npm$namespace$Marionette: {
      * Retrieve an object's attribute either directly from the object, or
      * from the object's this.options, with this.options taking precedence.
      */
-declare
-function Marionette$getOption(target: any, optionName: string): any
+declare function Marionette$getOption(target: any, optionName: string): any
 
 
 /**
@@ -126,24 +122,21 @@ function Marionette$getOption(target: any, optionName: string): any
 to both the event and the method, with the exception of the event name not
 being passed to the corresponding method.
 */
-declare
-function Marionette$triggerMethod(name: string, ...args: any[]): any
+declare function Marionette$triggerMethod(name: string, ...args: any[]): any
 
 
 /**
  * Invoke triggerMethod on a specific context.
  * This is useful when it's not clear that the object has triggerMethod defined.
  */
-declare
-function Marionette$triggerMethodOn(ctx: any, name: string, ...args: any[]): any
+declare function Marionette$triggerMethodOn(ctx: any, name: string, ...args: any[]): any
 
 
 /**
  * Monitor a view's state, and after it has been rendered and shown in the DOM,
  * trigger a "dom:refresh" event every time it is re-rendered.
  */
-declare
-function Marionette$MonitorDOMRefresh(view: Backbone$View<Backbone$Model>): void
+declare function Marionette$MonitorDOMRefresh(view: Backbone$View<Backbone$Model>): void
 
 
 /**
@@ -152,8 +145,7 @@ function Marionette$MonitorDOMRefresh(view: Backbone$View<Backbone$Model>): void
  * @param entity The entity (Backbone.Model or Backbone.Collection) to bind the events from.
  * @param bindings a hash of { "event:name": "eventHandler" } configuration. Multiple handlers can be separated by a space. A function can be supplied instead of a string handler name.
  */
-declare
-function Marionette$bindEntityEvents(target: any, entity: any, bindings: any): void
+declare function Marionette$bindEntityEvents(target: any, entity: any, bindings: any): void
 
 
 /**
@@ -162,8 +154,7 @@ function Marionette$bindEntityEvents(target: any, entity: any, bindings: any): v
  * @param entity The entity (Backbone.Model or Backbone.Collection) to bind the events from.
  * @param bindings a hash of { "event:name": "eventHandler" } configuration. Multiple handlers can be separated by a space. A function can be supplied instead of a string handler name.
  */
-declare
-function Marionette$unbindEntityEvents(target: any, entity: any, bindings: any): void
+declare function Marionette$unbindEntityEvents(target: any, entity: any, bindings: any): void
 
 declare class Callbacks {
     add(callback: Function, contextOverride: any): void;

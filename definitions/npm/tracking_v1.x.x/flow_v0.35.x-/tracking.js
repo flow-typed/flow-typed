@@ -7,18 +7,15 @@
  */
 
 
-declare
-var npm$namespace$tracking: {
+declare var npm$namespace$tracking: {
     track: typeof tracking$track,
 }
-declare
-export class ColorTracker mixins Tracker {
+declare export class ColorTracker mixins Tracker {
     constructor(colours: string[]): this;
     registerColor(name: string, predicate: (r: number, g: number, b: number) => boolean): void
 }
 
-declare
-export class ObjectTracker mixins Tracker {
+declare export class ObjectTracker mixins Tracker {
     constructor(objects: string[]): this
 }
 
@@ -44,5 +41,4 @@ declare interface tracking$TrackerTask {
         run(): void
 }
 
-declare
-export function tracking$track(selector: string, tracker: tracking$Tracker): tracking$TrackerTask
+declare export function tracking$track(selector: string, tracker: tracking$Tracker): tracking$TrackerTask

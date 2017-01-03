@@ -36,32 +36,23 @@ declare interface css3$transition {
     (args?: Object): void
 }
 
-declare
-var autoClear: boolean;
+declare var autoClear: boolean;
 
-declare
-var deferred: Object;
+declare var deferred: Object;
 
-declare
-var direction: number;
+declare var direction: number;
 
-declare
-var duration: number;
+declare var duration: number;
 
-declare
-var endState: Object;
+declare var endState: Object;
 
-declare
-var in_: boolean;
+declare var in_: boolean;
 
-declare
-var node: Object;
+declare var node: Object;
 
-declare
-var playing: Object;
+declare var playing: Object;
 
-declare
-var startState: Object;
+declare var startState: Object;
 
 
 /**

@@ -86,8 +86,7 @@ declare type Base$DraftTextAlignment = "left" | "center" | "right";
 declare class DraftEditorBlock mixins React.Component<any, any>{}
 
 
-declare
-var npm$namespace$Selection: {
+declare var npm$namespace$Selection: {
     getVisibleSelectionRect: typeof Selection$getVisibleSelectionRect,
 }
 declare interface Selection$FakeClientRect {
@@ -105,12 +104,10 @@ declare interface Selection$FakeClientRect {
  * In cases where there are no selected ranges or the bounding rect is
 temporarily invalid, return null.
 */
-declare
-function Selection$getVisibleSelectionRect(global: any): Selection$FakeClientRect
+declare function Selection$getVisibleSelectionRect(global: any): Selection$FakeClientRect
 
 
-declare
-var npm$namespace$Utils: {
+declare var npm$namespace$Utils: {
     getDefaultKeyBinding: typeof Utils$getDefaultKeyBinding,
 }
 declare class KeyBindingUtil {
@@ -129,8 +126,7 @@ declare class KeyBindingUtil {
 /**
  * Retrieve a bound key command for the given event.
  */
-declare
-function Utils$getDefaultKeyBinding(e: SyntheticKeyboardEvent): Constants$DraftEditorCommand
+declare function Utils$getDefaultKeyBinding(e: SyntheticKeyboardEvent): Constants$DraftEditorCommand
 
 
 /**
@@ -267,8 +263,7 @@ declare class CompositeDraftDecorator {
 }
 
 
-declare
-var npm$namespace$Encoding: {
+declare var npm$namespace$Encoding: {
         convertFromHTMLtoContentBlocks: typeof Encoding$convertFromHTMLtoContentBlocks,
         convertFromRawToDraftState: typeof Encoding$convertFromRawToDraftState,
         convertFromDraftStateToRaw: typeof Encoding$convertFromDraftStateToRaw,
@@ -339,17 +334,14 @@ declare interface Encoding$RawDraftContentState {
         }
 }
 
-declare
-function Encoding$convertFromHTMLtoContentBlocks(
+declare function Encoding$convertFromHTMLtoContentBlocks(
     html: string,
     DOMBuilder: Function,
     blockRenderMap?: Base$DraftBlockRenderMap): Array<ImmutableData$ContentBlock >
 
-    declare
-function Encoding$convertFromRawToDraftState(rawState: Encoding$RawDraftContentState): ImmutableData$ContentState
+    declare function Encoding$convertFromRawToDraftState(rawState: Encoding$RawDraftContentState): ImmutableData$ContentState
 
-declare
-function Encoding$convertFromDraftStateToRaw(contentState: ImmutableData$ContentState): Encoding$RawDraftContentState
+declare function Encoding$convertFromDraftStateToRaw(contentState: ImmutableData$ContentState): Encoding$RawDraftContentState
 
 declare type Entity$ComposedEntityType = "LINK" | "TOKEN" | "PHOTO";
 
@@ -462,8 +454,7 @@ declare type ImmutableData$DraftInlineStyle = Immutable.OrderedSet<string>;
 
 declare type ImmutableData$BlockMap = Immutable.OrderedMap<string, undefined.ContentBlock>;
 
-declare
-var Record: undefined.Class;
+declare var Record: undefined.Class;
 
 declare interface ImmutableData$DraftBlockRenderConfig {
     element: string,
@@ -693,19 +684,15 @@ declare interface ImmutableData$BlockMapBuilder {
     createFromArray(blocks: Array<ImmutableData$ContentBlock>): ImmutableData$BlockMap
 }
 
-declare
-var DefaultDraftBlockRenderMap: Immutable.Map<any, any>;
+declare var DefaultDraftBlockRenderMap: Immutable.Map<any, any>;
 
-declare
-var DefaultDraftInlineStyle: Immutable.Map<any, any>;
+declare var DefaultDraftInlineStyle: Immutable.Map<any, any>;
 
 
-declare
-var npm$namespace$Keys: {
+declare var npm$namespace$Keys: {
     generateRandomKey: typeof Keys$generateRandomKey,
 }
-declare
-function Keys$generateRandomKey(): string
+declare function Keys$generateRandomKey(): string
 
 declare type Modifier$URI = any;
 

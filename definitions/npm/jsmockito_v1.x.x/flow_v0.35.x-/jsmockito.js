@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$JsMockito: {
+declare var npm$namespace$JsMockito: {
     isMock: typeof JsMockito$isMock,
     when: typeof JsMockito$when,
     verify: typeof JsMockito$verify,
@@ -18,15 +17,13 @@ var npm$namespace$JsMockito: {
     mockFunction: typeof JsMockito$mockFunction,
     mock: typeof JsMockito$mock,
 }
-declare
-export var version: string;
+declare export var version: string;
 
 
 /**
  * Builder for a textual description.
  */
-declare
-export class JsMockitoStubBuilder {
+declare export class JsMockitoStubBuilder {
 
     /**
      * Provide functions to be run in place of the mocked method.
@@ -54,8 +51,7 @@ export class JsMockitoStubBuilder {
 /**
  * Used to verify how many times a function of method is called.
  */
-declare
-export interface JsMockito$Verifier {}
+declare export interface JsMockito$Verifier {}
 
 
 /**
@@ -63,8 +59,7 @@ export interface JsMockito$Verifier {}
  * @param maybeMock An object
  * @return  true if the variable is a mock
  */
-declare
-export function JsMockito$isMock(maybeMock: any): boolean
+declare export function JsMockito$isMock(maybeMock: any): boolean
 
 
 /**
@@ -72,8 +67,7 @@ export function JsMockito$isMock(maybeMock: any): boolean
  * @param mock A mock object or mock anonymous function
  * @return  A stub builder on which the method or function to be stubbed can be invoked
  */
-declare
-export function JsMockito$when<T>(mock: T): T
+declare export function JsMockito$when<T>(mock: T): T
 
 
 /**
@@ -82,16 +76,14 @@ export function JsMockito$when<T>(mock: T): T
  * @param verifier Optional JsMockito.Verifier instance (default: JsMockito.Verifiers.once())
  * @return  A verifier on which the method or function to be verified can be invoked
  */
-declare
-export function JsMockito$verify<T>(mock: T): T
+declare export function JsMockito$verify<T>(mock: T): T
 
 
 /**
  * Verify that no mock object methods or the mock function were ever invoked
  * @param mock A mock object or mock anonymous function (multiple accepted)
  */
-declare
-export function JsMockito$verifyZeroInteractions(...mock: any[]): void
+declare export function JsMockito$verifyZeroInteractions(...mock: any[]): void
 
 
 /**
@@ -99,8 +91,7 @@ export function JsMockito$verifyZeroInteractions(...mock: any[]): void
  * unverified
  * @param mock A mock object or mock anonymous function (multiple accepted)
  */
-declare
-export function JsMockito$verifyNoMoreInteractions(...mock: any[]): void
+declare export function JsMockito$verifyNoMoreInteractions(...mock: any[]): void
 
 
 /**
@@ -110,8 +101,7 @@ still be verified.
  * @param delegate A 'real' (concrete) object or function that the mock will delegate unstubbed invocations to
  * @return  A mock object (as per mock) or mock function (as per mockFunction)
 */
-declare
-export function JsMockito$spy<T>(delegate: T): T
+declare export function JsMockito$spy<T>(delegate: T): T
 
 
 /**
@@ -130,8 +120,7 @@ JsMockito.verify(mockFunc)(1, greaterThan(2));
  * @param delegate The function to delegate unstubbed calls to (optional)
  * @return  an anonymous function
 */
-declare
-export function JsMockito$mockFunction(): Function
+declare export function JsMockito$mockFunction(): Function
 
 
 /**
@@ -162,14 +151,12 @@ JsMockito.verify(mockObj).add(1, 4); // will throw an exception
  * @param Obj the constructor for the object to be mocked
  * @return  a mock object
 */
-declare
-export function JsMockito$mock<T>(Obj: {
+declare export function JsMockito$mock<T>(Obj: {
     new(): T
 }): T
 
 
-declare
-var npm$namespace$Verifiers: {
+declare var npm$namespace$Verifiers: {
         never: typeof Verifiers$never,
         zeroInteractions: typeof Verifiers$zeroInteractions,
         noMoreInteractions: typeof Verifiers$noMoreInteractions,
@@ -183,8 +170,7 @@ var npm$namespace$Verifiers: {
     </pre>
      * @see  JsMockito.Verifiers.times(0)
     */
-declare
-export function Verifiers$never(): JsMockito$Verifier
+declare export function Verifiers$never(): JsMockito$Verifier
 
 
 /**
@@ -194,8 +180,7 @@ verify(mock, zeroInteractions());
 </pre>
  * @see  JsMockito.verifyZeroInteractions()
 */
-declare
-export function Verifiers$zeroInteractions(): JsMockito$Verifier
+declare export function Verifiers$zeroInteractions(): JsMockito$Verifier
 
 
 /**
@@ -206,8 +191,7 @@ verify(mock, noMoreInteractions());
 </pre>
  * @see  JsMockito.verifyNoMoreInteractions()
 */
-declare
-export function Verifiers$noMoreInteractions(): JsMockito$Verifier
+declare export function Verifiers$noMoreInteractions(): JsMockito$Verifier
 
 
 /**
@@ -217,8 +201,7 @@ verify(mock, times(2)).method();
 </pre>
  * @param wanted The number of desired invocations
 */
-declare
-export function Verifiers$times(wanted: number): JsMockito$Verifier
+declare export function Verifiers$times(wanted: number): JsMockito$Verifier
 
 
 /**
@@ -229,12 +212,10 @@ verify(mock, once()).method();
 This is the default verifier.
  * @see  JsMockito.Verifiers.times(1)
 */
-declare
-export function Verifiers$once(): JsMockito$Verifier
+declare export function Verifiers$once(): JsMockito$Verifier
 
 
-declare
-var npm$namespace$Integration: {
+declare var npm$namespace$Integration: {
         importTo: typeof Integration$importTo,
         screwunit: typeof Integration$screwunit,
         JsTestDriver: typeof Integration$JsTestDriver,
@@ -249,99 +230,86 @@ var npm$namespace$Integration: {
      * @param  An object (namespace) that will be populated with
     the functions from the public JsMockito API
     */
-declare
-export function Integration$importTo(target: any): void
+declare export function Integration$importTo(target: any): void
 
 
 /**
  * Make the public JsMockito API available in Screw.Unit
  * @see  JsMockito.Integration.importTo(Screw.Matchers)
  */
-declare
-export function Integration$screwunit(): void
+declare export function Integration$screwunit(): void
 
 
 /**
  * Make the public JsMockito API available to JsTestDriver
  * @see  JsMockito.Integration.importTo(window)
  */
-declare
-export function Integration$JsTestDriver(): void
+declare export function Integration$JsTestDriver(): void
 
 
 /**
  * Make the public JsMockito API available to JsUnitTest
  * @see  JsMockito.Integration.importTo(JsUnitTest.Unit.Testcase.prototype)
  */
-declare
-export function Integration$JsUnitTest(): void
+declare export function Integration$JsUnitTest(): void
 
 
 /**
  * Make the public JsMockito API available to YUITest
  * @see  JsMockito.Integration.importTo(window)
  */
-declare
-export function Integration$YUITest(): void
+declare export function Integration$YUITest(): void
 
 
 /**
  * Make the public JsMockito API available to QUnit
  * @see  JsMockito.Integration.importTo(window)
  */
-declare
-export function Integration$QUnit(): void
+declare export function Integration$QUnit(): void
 
 
 /**
  * Make the public JsMockito API available to jsUnity
  * @see  JsMockito.Integration.importTo(jsUnity.env.defaultScope)
  */
-declare
-export function Integration$jsUnity(): void
+declare export function Integration$jsUnity(): void
 
 
 /**
  * Make the public JsMockito API available to jSpec
  * @see  JsMockito.Integration.importTo(jSpec.defaultContext)
  */
-declare
-export function Integration$jSpec(): void
+declare export function Integration$jSpec(): void
 /**
  * Test if a given variable is a mock
  * @param maybeMock An object
  * @return  true if the variable is a mock
  */
-declare
-export function isMock(maybeMock: any): boolean
+declare export function isMock(maybeMock: any): boolean
 /**
  * Add a stub for a mock object method or mock function
  * @param mock A mock object or mock anonymous function
  * @return  A stub builder on which the method or function to be stubbed can be invoked
  */
-declare
-export function when<T>(mock: T): T
+declare export function when<T>(mock: T): T
     /**
      * Verify that a mock object method or mock function was invoked
      * @param mock A mock object or mock anonymous function
      * @param verifier Optional JsMockito.Verifier instance (default: JsMockito.Verifiers.once())
      * @return  A verifier on which the method or function to be verified can be invoked
      */
-declare
-export function verify<T>(mock: T): T
+declare export function verify<T>(mock: T): T
     /**
      * Verify that no mock object methods or the mock function were ever invoked
      * @param mock A mock object or mock anonymous function (multiple accepted)
      */
-declare
-export function verifyZeroInteractions(...mock: any[]): void
+declare export function verifyZeroInteractions(...mock: any[]): void
 /**
  * Verify that no mock object method or mock function invocations remain
  * unverified
  * @param mock A mock object or mock anonymous function (multiple accepted)
  */
-declare
-export function verifyNoMoreInteractions(...mock: any[]): void
+declare export function verifyNoMoreInteractions(...mock: any[]): void
 /**
  * Create a mock that proxies a real function or object.  All un-stubbed
  * invocations will be passed through to the real implementation, but can
@@ -349,8 +317,7 @@ still be verified.
  * @param delegate A 'real' (concrete) object or function that the mock will delegate unstubbed invocations to
  * @return  A mock object (as per mock) or mock function (as per mockFunction)
 */
-declare
-export function spy<T>(delegate: T): T
+declare export function spy<T>(delegate: T): T
     /**
      * Create a mockable and stubbable anonymous function.
      * 
@@ -367,8 +334,7 @@ export function spy<T>(delegate: T): T
      * @param delegate The function to delegate unstubbed calls to (optional)
      * @return  an anonymous function
     */
-declare
-export function mockFunction(): Function
+declare export function mockFunction(): Function
 /**
  * Create a mockable and stubbable objects.
  * 
@@ -397,8 +363,7 @@ JsMockito.verify(mockObj).add(1, 4); // will throw an exception
  * @param Obj the constructor for the object to be mocked
  * @return  a mock object
 */
-declare
-export function mock<T>(Obj: {
+declare export function mock<T>(Obj: {
         new(): T
     }): T
     /**
@@ -408,8 +373,7 @@ export function mock<T>(Obj: {
     </pre>
      * @see  JsMockito.Verifiers.times(0)
     */
-declare
-export function never(): JsMockito$Verifier
+declare export function never(): JsMockito$Verifier
 /**
  * Test that no interaction were made on the mock.  For example:
  * <pre>
@@ -417,8 +381,7 @@ verify(mock, zeroInteractions());
 </pre>
  * @see  JsMockito.verifyZeroInteractions()
 */
-declare
-export function zeroInteractions(): JsMockito$Verifier
+declare export function zeroInteractions(): JsMockito$Verifier
 /**
  * Test that no further interactions remain unverified on the mock.  For
  * example:
@@ -427,8 +390,7 @@ verify(mock, noMoreInteractions());
 </pre>
  * @see  JsMockito.verifyNoMoreInteractions()
 */
-declare
-export function noMoreInteractions(): JsMockito$Verifier
+declare export function noMoreInteractions(): JsMockito$Verifier
 /**
  * Test that an invocation occurred a specific number of times. For example:
  * <pre>
@@ -436,8 +398,7 @@ verify(mock, times(2)).method();
 </pre>
  * @param wanted The number of desired invocations
 */
-declare
-export function times(wanted: number): JsMockito$Verifier
+declare export function times(wanted: number): JsMockito$Verifier
 /**
  * Test that an invocation occurred exactly once. For example:
  * <pre>
@@ -446,5 +407,4 @@ verify(mock, once()).method();
 This is the default verifier.
  * @see  JsMockito.Verifiers.times(1)
 */
-declare
-export function once(): JsMockito$Verifier
+declare export function once(): JsMockito$Verifier

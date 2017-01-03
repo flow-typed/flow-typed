@@ -822,8 +822,5 @@ declare interface IErrorCodes {
          */
         InternalServerError: number
 }
-declare
-function getContext(): IContextdeclare
-var ___: I__Object;
-declare
-var ErrorCodes: IErrorCodes;
+declare function getContext(): IContextdeclare var ___: I__Object;
+declare var ErrorCodes: IErrorCodes;

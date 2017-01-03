@@ -298,8 +298,7 @@ declare module 'cast' {
 }
 
 
-declare
-export interface Office$AttachmentDetails {
+declare export interface Office$AttachmentDetails {
     attachmentType: undefined.AttachmentType,
         contentType: string,
         id: string,
@@ -308,8 +307,7 @@ export interface Office$AttachmentDetails {
         size: number
 }
 
-declare
-export interface Office$Contact {
+declare export interface Office$Contact {
     personName: string,
         businessName: string,
         phoneNumbers: Office$PhoneNumber[],
@@ -319,8 +317,7 @@ export interface Office$Contact {
         contactString: string
 }
 
-declare
-export interface Office$Context {
+declare export interface Office$Context {
     contentLanguage: string,
         displayLanguage: string,
         license: string,
@@ -337,8 +334,7 @@ export interface Office$Context {
         }
 }
 
-declare
-export interface Office$CustomProperties {
+declare export interface Office$CustomProperties {
 
     /**
      * Returns the value of the specified custom property
@@ -367,22 +363,19 @@ export interface Office$CustomProperties {
         saveAsync(callback?: (result: Office$AsyncResult) => void, userContext?: any): void
 }
 
-declare
-export interface Office$EmailAddressDetails {
+declare export interface Office$EmailAddressDetails {
     emailAddress: string,
         displayName: string,
         appointmentResponse: undefined.ResponseType,
         recipientType: undefined.RecipientType
 }
 
-declare
-export interface Office$EmailUser {
+declare export interface Office$EmailUser {
     name: string,
         userId: string
 }
 
-declare
-export interface Office$Entities {
+declare export interface Office$Entities {
     addresses: string[],
         taskSuggestions: string[],
         meetingSuggestions: Office$MeetingSuggestion[],
@@ -392,8 +385,7 @@ export interface Office$Entities {
         contacts: Office$Contact[]
 }
 
-declare
-export interface Office$Item {
+declare export interface Office$Item {
     dateTimeCreated: Date,
         dateTimeModified: Date,
         itemClass: string,
@@ -408,12 +400,10 @@ export interface Office$Item {
         loadCustomPropertiesAsync(callback?: (result: Office$AsyncResult) => void, userContext?: any): void
 }
 
-declare
-export type Office$Appointment = {} & Office$Item
+declare export type Office$Appointment = {} & Office$Item
 
 
-declare
-export interface Office$Body {
+declare export interface Office$Body {
 
     /**
      * Gets a value that indicates whether the content is in HTML or text format
@@ -446,8 +436,7 @@ export interface Office$Body {
             callback?: (result: Office$AsyncResult) => void): void
 }
 
-declare
-export interface Office$Location {
+declare export interface Office$Location {
 
     /**
      * Begins an asynchronous request for the location of an appointment
@@ -468,8 +457,7 @@ export interface Office$Location {
             callback?: (result: Office$AsyncResult) => void): void
 }
 
-declare
-export interface Office$Mailbox {
+declare export interface Office$Mailbox {
     item: Office$Item,
         userProfile: Office$UserProfile,
 
@@ -544,14 +532,12 @@ export interface Office$Mailbox {
             userContext?: any): void
 }
 
-declare
-export type Office$Message = {
+declare export type Office$Message = {
     conversationId: string
 } & Office$Item
 
 
-declare
-export type Office$MeetingRequest = {
+declare export type Office$MeetingRequest = {
     start: Date,
     end: Date,
     location: string,
@@ -560,8 +546,7 @@ export type Office$MeetingRequest = {
 } & Office$Message
 
 
-declare
-export interface Office$MeetingSuggestion {
+declare export interface Office$MeetingSuggestion {
     meetingString: string,
         attendees: Office$EmailAddressDetails[],
         location: string,
@@ -570,15 +555,13 @@ export interface Office$MeetingSuggestion {
         end: Date
 }
 
-declare
-export interface Office$PhoneNumber {
+declare export interface Office$PhoneNumber {
     phoneString: string,
         originalPhoneString: string,
         type: string
 }
 
-declare
-export interface Office$Recipients {
+declare export interface Office$Recipients {
 
     /**
      * Begins an asynchronous request to add a recipient list to an appointment or message
@@ -610,8 +593,7 @@ export interface Office$Recipients {
             callback?: (result: Office$AsyncResult) => void): void
 }
 
-declare
-export interface Office$RoamingSettings {
+declare export interface Office$RoamingSettings {
 
     /**
      * Retrieves the specified setting
@@ -639,8 +621,7 @@ export interface Office$RoamingSettings {
         set(name: string, value: any): void
 }
 
-declare
-export interface Office$Subject {
+declare export interface Office$Subject {
 
     /**
      * Begins an asynchronous request to get the subject of an appointment or message
@@ -661,14 +642,12 @@ export interface Office$Subject {
             callback?: (result: Office$AsyncResult) => void): void
 }
 
-declare
-export interface Office$TaskSuggestion {
+declare export interface Office$TaskSuggestion {
     assignees: Office$EmailUser[],
         taskString: string
 }
 
-declare
-export interface Office$Time {
+declare export interface Office$Time {
 
     /**
      * Begins an asynchronous request to get the start or end time
@@ -689,8 +668,7 @@ export interface Office$Time {
             callback?: (result: Office$AsyncResult) => void): void
 }
 
-declare
-export interface Office$UserProfile {
+declare export interface Office$UserProfile {
     displayName: string,
         emailAddress: string,
         timeZone: string
@@ -11124,8 +11102,7 @@ declare module 'Excel' {
         batch: (context: Excel.RequestContext) => OfficeExtension.IPromise<T>): OfficeExtension.IPromise<T >
 }
 
-declare
-var npm$namespace$Word: {
+declare var npm$namespace$Word: {
         run: typeof Word$run,
     }
     /**
@@ -11141,11 +11118,9 @@ declare class RequestContext mixins OfficeExtension.ClientRequestContext {
  * Executes a batch script that performs actions on the Excel object model, using a new RequestContext. When the promise is resolved, any tracked objects that were automatically allocated during execution will be released.
  * @param batch - A function that takes in a RequestContext and returns a promise (typically, just the result of "context.sync()"). The context parameter facilitates requests to the Excel application. Since the Office add-in and the Excel application run in two different processes, the RequestContext is required to get access to the Excel object model from the add-in.
  */
-declare
-function Word$run<T>(
+declare function Word$run<T>(
         batch: (context: Excel.RequestContext) => OfficeExtension.IPromise<T>): OfficeExtension.IPromise<T >
-    declare
-var npm$namespace$OneNote: {
+    declare var npm$namespace$OneNote: {
     run: typeof OneNote$run,
 }
 declare class RequestContext mixins OfficeExtension.ClientRequestContext {
@@ -11158,6 +11133,5 @@ declare class RequestContext mixins OfficeExtension.ClientRequestContext {
  * Executes a batch script that performs actions on the Excel object model, using a new RequestContext. When the promise is resolved, any tracked objects that were automatically allocated during execution will be released.
  * @param batch - A function that takes in a RequestContext and returns a promise (typically, just the result of "context.sync()"). The context parameter facilitates requests to the Excel application. Since the Office add-in and the Excel application run in two different processes, the RequestContext is required to get access to the Excel object model from the add-in.
  */
-declare
-function OneNote$run<T>(
+declare function OneNote$run<T>(
     batch: (context: Excel.RequestContext) => OfficeExtension.IPromise<T>): OfficeExtension.IPromise<T >

@@ -203,9 +203,6 @@ declare module 'Base' {
             getUserLoginId(): string
     }
 }
-declare
-var Browser: undefined.Browser;
-declare
-var Logger: undefined.Logger;
-declare
-var Session: undefined.Session;
+declare var Browser: undefined.Browser;
+declare var Logger: undefined.Logger;
+declare var Session: undefined.Session;

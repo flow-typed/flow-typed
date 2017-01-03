@@ -13,5 +13,4 @@ declare interface UrlStatic {
     (pattern: string, url: string): string,
     (pattern: number, url: string): string
 }
-declare
-var url: UrlStatic;
+declare var url: UrlStatic;

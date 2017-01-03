@@ -6,7 +6,6 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function typeName(anyVar: any): stringdeclare module 'type-name' {
+declare function typeName(anyVar: any): stringdeclare module 'type-name' {
     declare module.exports: typeof typeName
 }

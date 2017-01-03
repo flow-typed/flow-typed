@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Handlebars: HandlebarsStatic;
+declare var Handlebars: HandlebarsStatic;
 /**
  * Implement this interface on your MVW/MVVM/MVC views such as Backbone.View
  */

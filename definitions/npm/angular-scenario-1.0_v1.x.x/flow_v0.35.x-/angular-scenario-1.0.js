@@ -6,52 +6,43 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface angularScenario$AngularModel {
+declare export interface angularScenario$AngularModel {
     scenario: any
 }
 
-declare
-export interface angularScenario$RunFunction {
+declare export interface angularScenario$RunFunction {
     (functionToRun: any): any
 }
 
-declare
-export interface angularScenario$RunFunctionWithDescription {
+declare export interface angularScenario$RunFunctionWithDescription {
     (description: string, functionToRun: any): any
 }
 
-declare
-export interface angularScenario$PauseFunction {
+declare export interface angularScenario$PauseFunction {
     (): any
 }
 
-declare
-export interface angularScenario$SleepFunction {
+declare export interface angularScenario$SleepFunction {
     (seconds: number): any
 }
 
-declare
-export interface angularScenario$Future {}
+declare export interface angularScenario$Future {}
 
-declare
-export interface angularScenario$testWindow {
+declare export interface angularScenario$testWindow {
     href(): angularScenario$Future,
         path(): angularScenario$Future,
         search(): angularScenario$Future,
         hash(): angularScenario$Future
 }
 
-declare
-export interface angularScenario$testLocation {
+declare export interface angularScenario$testLocation {
     url(): angularScenario$Future,
         path(): angularScenario$Future,
         search(): angularScenario$Future,
         hash(): angularScenario$Future
 }
 
-declare
-export interface angularScenario$Browser {
+declare export interface angularScenario$Browser {
     navigateTo(url: string): void,
         navigateTo(urlDescription: string, urlFunction: () => string): void,
         reload(): void,
@@ -59,8 +50,7 @@ export interface angularScenario$Browser {
         location(): angularScenario$testLocation
 }
 
-declare
-export interface angularScenario$Matchers {
+declare export interface angularScenario$Matchers {
     toEqual(value: any): void,
         toBe(value: any): void,
         toBeDefined(): void,
@@ -73,49 +63,41 @@ export interface angularScenario$Matchers {
         toBeGreaterThan(value: any): void
 }
 
-declare
-export type angularScenario$CustomMatchers = {} & angularScenario$Matchers
+declare export type angularScenario$CustomMatchers = {} & angularScenario$Matchers
 
 
-declare
-export type angularScenario$Expect = {
+declare export type angularScenario$Expect = {
     not(): angularScenario$CustomMatchers
 } & angularScenario$CustomMatchers
 
 
-declare
-export interface angularScenario$UsingFunction {
+declare export interface angularScenario$UsingFunction {
     (selector: string, selectorDescription?: string): void
 }
 
-declare
-export interface angularScenario$BindingFunction {
+declare export interface angularScenario$BindingFunction {
     (bracketBindingExpression: string): angularScenario$Future
 }
 
-declare
-export interface angularScenario$Input {
+declare export interface angularScenario$Input {
     enter(value: any): void,
         check(): any,
         select(radioButtonValue: any): any,
         val(): angularScenario$Future
 }
 
-declare
-export interface angularScenario$Repeater {
+declare export interface angularScenario$Repeater {
     count(): angularScenario$Future,
         row(index: number): angularScenario$Future,
         column(ngBindingExpression: string): angularScenario$Future
 }
 
-declare
-export interface angularScenario$Select {
+declare export interface angularScenario$Select {
     option(value: any): any,
         option(...listOfValues: any[]): any
 }
 
-declare
-export interface angularScenario$Element {
+declare export interface angularScenario$Element {
     count(): angularScenario$Future,
         click(): any,
         query(
@@ -155,31 +137,14 @@ export interface angularScenario$Element {
         prop(key: any, value: any): void,
         css(key: any, value: any): void
 }
-declare
-var describe: angularScenario$RunFunctionWithDescription;
-declare
-var xdescribe: angularScenario$RunFunctionWithDescription;
-declare
-var beforeEach: angularScenario$RunFunction;
-declare
-var afterEach: angularScenario$RunFunction;
-declare
-var it: angularScenario$RunFunctionWithDescription;
-declare
-var xit: angularScenario$RunFunctionWithDescription;
-declare
-var pause: angularScenario$PauseFunction;
-declare
-var sleep: angularScenario$SleepFunction;
-declare
-function browser(): angularScenario$Browserdeclare
-function expect(expectation: angularScenario$Future): angularScenario$Expectdeclare
-var using: angularScenario$UsingFunction;
-declare
-var binding: angularScenario$BindingFunction;
-declare
-function input(ngModelBinding: string): angularScenario$Inputdeclare
-function repeater(selector: string, repeaterDescription?: string): angularScenario$Repeaterdeclare
-function select(ngModelBinding: string): angularScenario$Selectdeclare
-function element(selector: string, elementDescription?: string): angularScenario$Elementdeclare
-var angular: angularScenario$AngularModel;
+declare var describe: angularScenario$RunFunctionWithDescription;
+declare var xdescribe: angularScenario$RunFunctionWithDescription;
+declare var beforeEach: angularScenario$RunFunction;
+declare var afterEach: angularScenario$RunFunction;
+declare var it: angularScenario$RunFunctionWithDescription;
+declare var xit: angularScenario$RunFunctionWithDescription;
+declare var pause: angularScenario$PauseFunction;
+declare var sleep: angularScenario$SleepFunction;
+declare function browser(): angularScenario$Browserdeclare function expect(expectation: angularScenario$Future): angularScenario$Expectdeclare var using: angularScenario$UsingFunction;
+declare var binding: angularScenario$BindingFunction;
+declare function input(ngModelBinding: string): angularScenario$Inputdeclare function repeater(selector: string, repeaterDescription?: string): angularScenario$Repeaterdeclare function select(ngModelBinding: string): angularScenario$Selectdeclare function element(selector: string, elementDescription?: string): angularScenario$Elementdeclare var angular: angularScenario$AngularModel;

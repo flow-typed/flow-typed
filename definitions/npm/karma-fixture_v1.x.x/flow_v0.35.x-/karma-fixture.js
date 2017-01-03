@@ -7,27 +7,20 @@
  */
 
 
-declare
-var npm$namespace$fixture: {
+declare var npm$namespace$fixture: {
     load: typeof fixture$load,
     set: typeof fixture$set,
     cleanup: typeof fixture$cleanup,
     setBase: typeof fixture$setBase,
 }
-declare
-export var el: HTMLElement;
+declare export var el: HTMLElement;
 
-declare
-export var json: any[];
+declare export var json: any[];
 
-declare
-export function fixture$load(...files: string[]): any
+declare export function fixture$load(...files: string[]): any
 
-declare
-export function fixture$set(...htmlStrs: string[]): HTMLElement | HTMLElement[]
+declare export function fixture$set(...htmlStrs: string[]): HTMLElement | HTMLElement[]
 
-declare
-export function fixture$cleanup(): void
+declare export function fixture$cleanup(): void
 
-declare
-export function fixture$setBase(fixtureBasePath: string): void
+declare export function fixture$setBase(fixtureBasePath: string): void

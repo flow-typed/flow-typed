@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ValidateJS$Validator {
+declare export interface ValidateJS$Validator {
     message?: string | ((
         value: any,
         attribute: any,
@@ -16,8 +15,7 @@ export interface ValidateJS$Validator {
         globalOptions: any) => string)
 }
 
-declare
-export type Validator$Date = {
+declare export type Validator$Date = {
     earliest?: string,
     latest?: string,
     notValid?: string,
@@ -26,48 +24,41 @@ export type Validator$Date = {
 } & ValidateJS$Validator
 
 
-declare
-export type Validator$DateTime = {
+declare export type Validator$DateTime = {
     dateOnly?: boolean
 } & Validator$Date
 
 
-declare
-export type Validator$Email = {} & ValidateJS$Validator
+declare export type Validator$Email = {} & ValidateJS$Validator
 
 
-declare
-export type Validator$Equality = {
+declare export type Validator$Equality = {
     attribute?: string,
     comparator?: (v1: any, v2: any) => boolean
 } & ValidateJS$Validator
 
 
-declare
-export type Validator$Exclusion = {
+declare export type Validator$Exclusion = {
     within: any[] | {
         [key: string]: any
     }
 } & ValidateJS$Validator
 
 
-declare
-export type Validator$Format = {
+declare export type Validator$Format = {
     pattern: string | RegExp,
     flags?: string
 } & ValidateJS$Validator
 
 
-declare
-export type Validator$Inclusion = {
+declare export type Validator$Inclusion = {
     within: any[] | {
         [key: string]: any
     }
 } & ValidateJS$Validator
 
 
-declare
-export type Validator$Length = {
+declare export type Validator$Length = {
     is?: number,
     minimum?: number,
     maximum?: number,
@@ -79,8 +70,7 @@ export type Validator$Length = {
 } & ValidateJS$Validator
 
 
-declare
-export type Validator$Numericality = {
+declare export type Validator$Numericality = {
     onlyInteger?: boolean,
     strict?: boolean,
     greaterThan?: number,
@@ -104,19 +94,16 @@ export type Validator$Numericality = {
 } & ValidateJS$Validator
 
 
-declare
-export type Validator$Presence = {} & ValidateJS$Validator
+declare export type Validator$Presence = {} & ValidateJS$Validator
 
 
-declare
-export type Validator$Url = {
+declare export type Validator$Url = {
     schemes?: [string | RegExp],
     allowLocal?: boolean
 } & ValidateJS$Validator
 
 
-declare
-export interface ValidateJS$Field {
+declare export interface ValidateJS$Field {
     date?: Validator$Date | boolean | ((
             value: any,
             attributes: any,
@@ -189,8 +176,7 @@ export interface ValidateJS$Field {
             constraints: any) => Validator$Url)
 }
 
-declare
-export interface ValidateJS$Constraints {
+declare export interface ValidateJS$Constraints {
     [attribute: string]: ValidateJS$Field | ((
         value: any,
         attributes: any,

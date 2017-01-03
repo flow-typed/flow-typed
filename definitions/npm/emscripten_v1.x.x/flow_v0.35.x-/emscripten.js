@@ -7,8 +7,7 @@
  */
 
 declare interface Emscripten$FileSystemType {}
-declare
-var npm$namespace$Module: {
+declare var npm$namespace$Module: {
     print: typeof Module$print,
     printErr: typeof Module$printErr,
     ccall: typeof Module$ccall,
@@ -36,172 +35,118 @@ var npm$namespace$Module: {
     _malloc: typeof Module$_malloc,
     _free: typeof Module$_free,
 }
-declare
-function Module$print(str: string): void
+declare function Module$print(str: string): void
 
-declare
-function Module$printErr(str: string): void
+declare function Module$printErr(str: string): void
 
-declare
-var arguments: string[];
+declare var arguments: string[];
 
-declare
-var preInit: {
+declare var preInit: {
     (): void
 }[];
 
-declare
-var preRun: {
+declare var preRun: {
     (): void
 }[];
 
-declare
-var postRun: {
+declare var postRun: {
     (): void
 }[];
 
-declare
-var noExitRuntime: boolean;
+declare var noExitRuntime: boolean;
 
-declare
-var Runtime: any;
+declare var Runtime: any;
 
-declare
-function Module$ccall(ident: string, returnType: string, argTypes: string[], args: any[]): any
+declare function Module$ccall(ident: string, returnType: string, argTypes: string[], args: any[]): any
 
-declare
-function Module$cwrap(ident: string, returnType: string, argTypes: string[]): any
+declare function Module$cwrap(ident: string, returnType: string, argTypes: string[]): any
 
-declare
-function Module$setValue(ptr: number, value: any, type: string, noSafe?: boolean): void
+declare function Module$setValue(ptr: number, value: any, type: string, noSafe?: boolean): void
 
-declare
-function Module$getValue(ptr: number, type: string, noSafe?: boolean): number
+declare function Module$getValue(ptr: number, type: string, noSafe?: boolean): number
 
-declare
-var ALLOC_NORMAL: number;
+declare var ALLOC_NORMAL: number;
 
-declare
-var ALLOC_STACK: number;
+declare var ALLOC_STACK: number;
 
-declare
-var ALLOC_STATIC: number;
+declare var ALLOC_STATIC: number;
 
-declare
-var ALLOC_DYNAMIC: number;
+declare var ALLOC_DYNAMIC: number;
 
-declare
-var ALLOC_NONE: number;
+declare var ALLOC_NONE: number;
 
-declare
-function Module$allocate(slab: any, types: string, allocator: number, ptr: number): number
+declare function Module$allocate(slab: any, types: string, allocator: number, ptr: number): number
 
-declare
-function Module$Pointer_stringify(ptr: number, length?: number): string
+declare function Module$Pointer_stringify(ptr: number, length?: number): string
 
-declare
-function Module$UTF16ToString(ptr: number): string
+declare function Module$UTF16ToString(ptr: number): string
 
-declare
-function Module$stringToUTF16(str: string, outPtr: number): void
+declare function Module$stringToUTF16(str: string, outPtr: number): void
 
-declare
-function Module$UTF32ToString(ptr: number): string
+declare function Module$UTF32ToString(ptr: number): string
 
-declare
-function Module$stringToUTF32(str: string, outPtr: number): void
+declare function Module$stringToUTF32(str: string, outPtr: number): void
 
-declare
-var HEAP: Int32Array;
+declare var HEAP: Int32Array;
 
-declare
-var IHEAP: Int32Array;
+declare var IHEAP: Int32Array;
 
-declare
-var FHEAP: Float64Array;
+declare var FHEAP: Float64Array;
 
-declare
-var HEAP8: Int8Array;
+declare var HEAP8: Int8Array;
 
-declare
-var HEAP16: Int16Array;
+declare var HEAP16: Int16Array;
 
-declare
-var HEAP32: Int32Array;
+declare var HEAP32: Int32Array;
 
-declare
-var HEAPU8: Uint8Array;
+declare var HEAPU8: Uint8Array;
 
-declare
-var HEAPU16: Uint16Array;
+declare var HEAPU16: Uint16Array;
 
-declare
-var HEAPU32: Uint32Array;
+declare var HEAPU32: Uint32Array;
 
-declare
-var HEAPF32: Float32Array;
+declare var HEAPF32: Float32Array;
 
-declare
-var HEAPF64: Float64Array;
+declare var HEAPF64: Float64Array;
 
-declare
-var TOTAL_STACK: number;
+declare var TOTAL_STACK: number;
 
-declare
-var TOTAL_MEMORY: number;
+declare var TOTAL_MEMORY: number;
 
-declare
-var FAST_MEMORY: number;
+declare var FAST_MEMORY: number;
 
-declare
-function Module$addOnPreRun(cb: () => any): void
+declare function Module$addOnPreRun(cb: () => any): void
 
-declare
-function Module$addOnInit(cb: () => any): void
+declare function Module$addOnInit(cb: () => any): void
 
-declare
-function Module$addOnPreMain(cb: () => any): void
+declare function Module$addOnPreMain(cb: () => any): void
 
-declare
-function Module$addOnExit(cb: () => any): void
+declare function Module$addOnExit(cb: () => any): void
 
-declare
-function Module$addOnPostRun(cb: () => any): void
+declare function Module$addOnPostRun(cb: () => any): void
 
-declare
-function Module$intArrayFromString(stringy: string, dontAddNull?: boolean, length?: number): number[]
+declare function Module$intArrayFromString(stringy: string, dontAddNull?: boolean, length?: number): number[]
 
-declare
-function Module$intArrayToString(array: number[]): string
+declare function Module$intArrayToString(array: number[]): string
 
-declare
-function Module$writeStringToMemory(str: string, buffer: number, dontAddNull: boolean): void
+declare function Module$writeStringToMemory(str: string, buffer: number, dontAddNull: boolean): void
 
-declare
-function Module$writeArrayToMemory(array: number[], buffer: number): void
+declare function Module$writeArrayToMemory(array: number[], buffer: number): void
 
-declare
-function Module$writeAsciiToMemory(str: string, buffer: number, dontAddNull: boolean): void
+declare function Module$writeAsciiToMemory(str: string, buffer: number, dontAddNull: boolean): void
 
-declare
-function Module$addRunDependency(id: any): void
+declare function Module$addRunDependency(id: any): void
 
-declare
-function Module$removeRunDependency(id: any): void
+declare function Module$removeRunDependency(id: any): void
 
-declare
-var preloadedImages: any;
+declare var preloadedImages: any;
 
-declare
-var preloadedAudios: any;
+declare var preloadedAudios: any;
 
-declare
-function Module$_malloc(size: number): number
+declare function Module$_malloc(size: number): number
 
-declare
-function Module$_free(ptr: number): void
-declare
-var npm$namespace$FS: {
+declare function Module$_free(ptr: number): void
+declare var npm$namespace$FS: {
     lookupPath: typeof FS$lookupPath,
     getPath: typeof FS$getPath,
     isFile: typeof FS$isFile,
@@ -264,147 +209,103 @@ declare interface FS$FSNode {}
 
 declare interface FS$ErrnoError {}
 
-declare
-var ignorePermissions: boolean;
+declare var ignorePermissions: boolean;
 
-declare
-var trackingDelegate: any;
+declare var trackingDelegate: any;
 
-declare
-var tracking: any;
+declare var tracking: any;
 
-declare
-var genericErrors: any;
+declare var genericErrors: any;
 
-declare
-function FS$lookupPath(path: string, opts: any): FS$Lookup
+declare function FS$lookupPath(path: string, opts: any): FS$Lookup
 
-declare
-function FS$getPath(node: FS$FSNode): string
+declare function FS$getPath(node: FS$FSNode): string
 
-declare
-function FS$isFile(mode: number): boolean
+declare function FS$isFile(mode: number): boolean
 
-declare
-function FS$isDir(mode: number): boolean
+declare function FS$isDir(mode: number): boolean
 
-declare
-function FS$isLink(mode: number): boolean
+declare function FS$isLink(mode: number): boolean
 
-declare
-function FS$isChrdev(mode: number): boolean
+declare function FS$isChrdev(mode: number): boolean
 
-declare
-function FS$isBlkdev(mode: number): boolean
+declare function FS$isBlkdev(mode: number): boolean
 
-declare
-function FS$isFIFO(mode: number): boolean
+declare function FS$isFIFO(mode: number): boolean
 
-declare
-function FS$isSocket(mode: number): boolean
+declare function FS$isSocket(mode: number): boolean
 
-declare
-function FS$major(dev: number): number
+declare function FS$major(dev: number): number
 
-declare
-function FS$minor(dev: number): number
+declare function FS$minor(dev: number): number
 
-declare
-function FS$makedev(ma: number, mi: number): number
+declare function FS$makedev(ma: number, mi: number): number
 
-declare
-function FS$registerDevice(dev: number, ops: any): void
+declare function FS$registerDevice(dev: number, ops: any): void
 
-declare
-function FS$syncfs(populate: boolean, callback: (e: any) => any): void
+declare function FS$syncfs(populate: boolean, callback: (e: any) => any): void
 
-declare
-function FS$mount(type: Emscripten$FileSystemType, opts: any, mountpoint: string): any
+declare function FS$mount(type: Emscripten$FileSystemType, opts: any, mountpoint: string): any
 
-declare
-function FS$unmount(mountpoint: string): void
+declare function FS$unmount(mountpoint: string): void
 
-declare
-function FS$mkdir(path: string, mode?: number): any
+declare function FS$mkdir(path: string, mode?: number): any
 
-declare
-function FS$mkdev(path: string, mode?: number, dev?: number): any
+declare function FS$mkdev(path: string, mode?: number, dev?: number): any
 
-declare
-function FS$symlink(oldpath: string, newpath: string): any
+declare function FS$symlink(oldpath: string, newpath: string): any
 
-declare
-function FS$rename(old_path: string, new_path: string): void
+declare function FS$rename(old_path: string, new_path: string): void
 
-declare
-function FS$rmdir(path: string): void
+declare function FS$rmdir(path: string): void
 
-declare
-function FS$readdir(path: string): any
+declare function FS$readdir(path: string): any
 
-declare
-function FS$unlink(path: string): void
+declare function FS$unlink(path: string): void
 
-declare
-function FS$readlink(path: string): string
+declare function FS$readlink(path: string): string
 
-declare
-function FS$stat(path: string, dontFollow?: boolean): any
+declare function FS$stat(path: string, dontFollow?: boolean): any
 
-declare
-function FS$lstat(path: string): any
+declare function FS$lstat(path: string): any
 
-declare
-function FS$chmod(path: string, mode: number, dontFollow?: boolean): void
+declare function FS$chmod(path: string, mode: number, dontFollow?: boolean): void
 
-declare
-function FS$lchmod(path: string, mode: number): void
+declare function FS$lchmod(path: string, mode: number): void
 
-declare
-function FS$fchmod(fd: number, mode: number): void
+declare function FS$fchmod(fd: number, mode: number): void
 
-declare
-function FS$chown(path: string, uid: number, gid: number, dontFollow?: boolean): void
+declare function FS$chown(path: string, uid: number, gid: number, dontFollow?: boolean): void
 
-declare
-function FS$lchown(path: string, uid: number, gid: number): void
+declare function FS$lchown(path: string, uid: number, gid: number): void
 
-declare
-function FS$fchown(fd: number, uid: number, gid: number): void
+declare function FS$fchown(fd: number, uid: number, gid: number): void
 
-declare
-function FS$truncate(path: string, len: number): void
+declare function FS$truncate(path: string, len: number): void
 
-declare
-function FS$ftruncate(fd: number, len: number): void
+declare function FS$ftruncate(fd: number, len: number): void
 
-declare
-function FS$utime(path: string, atime: number, mtime: number): void
+declare function FS$utime(path: string, atime: number, mtime: number): void
 
-declare
-function FS$open(
+declare function FS$open(
     path: string,
     flags: string,
     mode?: number,
     fd_start?: number,
     fd_end?: number): FS$FSStream
 
-declare
-function FS$close(stream: FS$FSStream): void
+declare function FS$close(stream: FS$FSStream): void
 
-declare
-function FS$llseek(stream: FS$FSStream, offset: number, whence: number): any
+declare function FS$llseek(stream: FS$FSStream, offset: number, whence: number): any
 
-declare
-function FS$read(
+declare function FS$read(
     stream: FS$FSStream,
     buffer: ArrayBufferView,
     offset: number,
     length: number,
     position?: number): number
 
-declare
-function FS$write(
+declare function FS$write(
     stream: FS$FSStream,
     buffer: ArrayBufferView,
     offset: number,
@@ -412,11 +313,9 @@ function FS$write(
     position?: number,
     canOwn?: boolean): number
 
-declare
-function FS$allocate(slab: any, types: string, allocator: number, ptr: number): number
+declare function FS$allocate(slab: any, types: string, allocator: number, ptr: number): number
 
-declare
-function FS$mmap(
+declare function FS$mmap(
     stream: FS$FSStream,
     buffer: ArrayBufferView,
     offset: number,
@@ -425,17 +324,14 @@ function FS$mmap(
     prot: number,
     flags: number): any
 
-declare
-function FS$ioctl(stream: FS$FSStream, cmd: any, arg: any): any
+declare function FS$ioctl(stream: FS$FSStream, cmd: any, arg: any): any
 
-declare
-function FS$readFile(path: string, opts?: {
+declare function FS$readFile(path: string, opts?: {
     encoding: string,
     flags: string
 }): any
 
-declare
-function FS$writeFile(
+declare function FS$writeFile(
     path: string,
     data: ArrayBufferView,
     opts?: {
@@ -443,28 +339,23 @@ function FS$writeFile(
         flags: string
     }): void
 
-declare
-function FS$cwd(): string
+declare function FS$cwd(): string
 
-declare
-function FS$chdir(path: string): void
+declare function FS$chdir(path: string): void
 
-declare
-function FS$init(
+declare function FS$init(
     input: () => number,
     output: (c: number) => any,
     error: (c: number) => any): void
 
-declare
-function FS$createLazyFile(
+declare function FS$createLazyFile(
     parent: string,
     name: string,
     url: string,
     canRead: boolean,
     canWrite: boolean): FS$FSNode
 
-declare
-function FS$createPreloadedFile(
+declare function FS$createPreloadedFile(
     parent: string,
     name: string,
     url: string,
@@ -473,12 +364,9 @@ function FS$createPreloadedFile(
     onload?: () => void,
     onerror?: () => void,
     dontCreateFile?: boolean,
-    canOwn?: boolean): voiddeclare
-var MEMFS: Emscripten$FileSystemType;
-declare
-var NODEFS: Emscripten$FileSystemType;
-declare
-var IDBFS: Emscripten$FileSystemType;
+    canOwn?: boolean): voiddeclare var MEMFS: Emscripten$FileSystemType;
+declare var NODEFS: Emscripten$FileSystemType;
+declare var IDBFS: Emscripten$FileSystemType;
 declare interface Math {
     imul(a: number, b: number): number
 }

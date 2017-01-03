@@ -6,5 +6,4 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export var CopyShader: Shader;
+declare export var CopyShader: Shader;

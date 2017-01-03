@@ -6,24 +6,21 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class EventDispatcher {
+declare export class EventDispatcher {
     constructor(): this;
     hasEventListener(type: string, listener: Function): boolean;
     addEventListener(typeStr: string, listenerFunc: Function): void;
     removeEventListener(typeStr: string, listenerFunc: Function): void;
     dispatchEvent(evt: LeapEvent): void
 }
-declare
-export interface Listener {
+declare export interface Listener {
     onConnect(controller: Controller): void,
         onDisconnect(controller: Controller): void,
         onExit(controller: Controller): void,
         onFrame(controller: Controller, frame: Frame): void,
         onInit(controller: Controller): void
 }
-declare
-export class DefaultListener mixins EventDispatcher, Listener {
+declare export class DefaultListener mixins EventDispatcher, Listener {
     constructor(): this;
     onConnect(controller: Controller): void;
     onDisconnect(controller: Controller): void;
@@ -31,8 +28,7 @@ export class DefaultListener mixins EventDispatcher, Listener {
     onFrame(controller: Controller, frame: Frame): void;
     onInit(controller: Controller): void
 }
-declare
-export class LeapEvent {
+declare export class LeapEvent {
     LEAPMOTION_INIT: string;
     LEAPMOTION_CONNECTED: string;
     LEAPMOTION_DISCONNECTED: string;
@@ -43,8 +39,7 @@ export class LeapEvent {
     getTarget(): any;
     getType(): string
 }
-declare
-export class LeapUtil {
+declare export class LeapUtil {
     PI: number;
     DEG_TO_RAD: number;
     RAD_TO_DEG: number;
@@ -73,8 +68,7 @@ export class LeapUtil {
     lerp(a: number, b: number, coefficient: number): number;
     lerpVector(vec1: Vector3, vec2: Vector3, coefficient: number): Vector3
 }
-declare
-export class Controller mixins EventDispatcher {
+declare export class Controller mixins EventDispatcher {
     frameHistory: Frame[];
     connection: WebSocket;
     _isConnected: boolean;
@@ -86,8 +80,7 @@ export class Controller mixins EventDispatcher {
     isGestureEnabled(type: number): boolean;
     isConnected(): boolean
 }
-declare
-export class Pointable {
+declare export class Pointable {
     direction: Vector3;
     frame: Frame;
     hand: Hand;
@@ -104,8 +97,7 @@ export class Pointable {
     invalid(): Pointable;
     toString(): string
 }
-declare
-export class Gesture {
+declare export class Gesture {
     STATE_INVALID: number;
     STATE_START: number;
     STATE_UPDATE: number;
@@ -129,18 +121,15 @@ export class Gesture {
     invalid(): Gesture;
     toString(): string
 }
-declare
-export class Finger mixins Pointable {
+declare export class Finger mixins Pointable {
     constructor(): this;
     invalid(): Finger
 }
-declare
-export class Tool mixins Pointable {
+declare export class Tool mixins Pointable {
     constructor(): this;
     invalid(): Tool
 }
-declare
-export class Hand {
+declare export class Hand {
     direction: Vector3;
     fingers: Finger[];
     frame: Frame;
@@ -168,8 +157,7 @@ export class Hand {
     translation(sinceFrame: Frame): Vector3;
     invalid(): Hand
 }
-declare
-export class Frame {
+declare export class Frame {
     fingers: Finger[];
     hands: Hand[];
     pointables: Pointable[];
@@ -197,8 +185,7 @@ export class Frame {
     isValid(): boolean;
     invalid(): Frame
 }
-declare
-export class Matrix {
+declare export class Matrix {
     origin: Vector3;
     xBasis: Vector3;
     yBasis: Vector3;
@@ -214,8 +201,7 @@ export class Matrix {
     identity(): Matrix;
     toString(): string
 }
-declare
-export class CircleGesture mixins Gesture {
+declare export class CircleGesture mixins Gesture {
     classType: number;
     center: Vector3;
     normal: Vector3;
@@ -224,8 +210,7 @@ export class CircleGesture mixins Gesture {
     radius: number;
     constructor(): this
 }
-declare
-export class KeyTapGesture mixins Gesture {
+declare export class KeyTapGesture mixins Gesture {
     classType: number;
     direction: Vector3;
     pointable: Pointable;
@@ -233,8 +218,7 @@ export class KeyTapGesture mixins Gesture {
     progress: number;
     constructor(): this
 }
-declare
-export class ScreenTapGesture mixins Gesture {
+declare export class ScreenTapGesture mixins Gesture {
     classType: number;
     direction: Vector3;
     pointable: Pointable;
@@ -242,8 +226,7 @@ export class ScreenTapGesture mixins Gesture {
     progress: number;
     constructor(): this
 }
-declare
-export class SwipeGesture mixins Gesture {
+declare export class SwipeGesture mixins Gesture {
     classType: number;
     direction: Vector3;
     pointable: Pointable;
@@ -252,8 +235,7 @@ export class SwipeGesture mixins Gesture {
     startPosition: Vector3;
     constructor(): this
 }
-declare
-export class Vector3 {
+declare export class Vector3 {
     x: number;
     y: number;
     z: number;

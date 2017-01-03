@@ -1279,7 +1279,5 @@ declare interface appFrameworkCssMatrix {
         e: number,
         f: number
 }
-declare
-var af: (fn: ($: appFrameworkStatic) => void) => void;
-declare
-var $: appFrameworkStatic;
+declare var af: (fn: ($: appFrameworkStatic) => void) => void;
+declare var $: appFrameworkStatic;

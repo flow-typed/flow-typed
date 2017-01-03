@@ -49,34 +49,26 @@ declare module.exports: typeof Dexiedeclare class Promise<R>mixins Thenable<R>{
 }
 
 
-declare
-var npm$namespace$Promise: {
+declare var npm$namespace$Promise: {
     resolve: typeof Promise$resolve,
     reject: typeof Promise$reject,
     all: typeof Promise$all,
     race: typeof Promise$race,
     newPSD: typeof Promise$newPSD,
 }
-declare
-function Promise$resolve<R>(value?: Thenable<R>): Dexie$Promise<R >
+declare function Promise$resolve<R>(value?: Thenable<R>): Dexie$Promise<R >
 
-    declare
-function Promise$reject(error: any): Dexie$Promise<any >
+    declare function Promise$reject(error: any): Dexie$Promise<any >
 
-    declare
-function Promise$all<R>(promises: Thenable<R>[]): Dexie$Promise<R[] >
+    declare function Promise$all<R>(promises: Thenable<R>[]): Dexie$Promise<R[] >
 
-    declare
-function Promise$race<R>(promises: Thenable<R>[]): Dexie$Promise<R >
+    declare function Promise$race<R>(promises: Thenable<R>[]): Dexie$Promise<R >
 
-    declare
-function Promise$newPSD<R>(scope: () => R): R
+    declare function Promise$newPSD<R>(scope: () => R): R
 
-declare
-var PSD: any;
+declare var PSD: any;
 
-declare
-var on: {
+declare var on: {
     (eventName: string, subscriber: (...args: any[]) => any): void,
     error: Dexie$DexieErrorEvent
 };

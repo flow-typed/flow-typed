@@ -6,16 +6,14 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Express$Request {
+declare export interface Express$Request {
     file: Multer$File,
         files: {
             [fieldname: string]: Multer$File[]
         }
 }
 
-declare
-export interface Multer$File {
+declare export interface Multer$File {
 
     /**
      * Field name specified in the form 

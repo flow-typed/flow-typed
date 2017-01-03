@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function randomColor(options?: RandomColorOptions): stringdeclare interface RandomColorOptions {
+declare function randomColor(options?: RandomColorOptions): stringdeclare interface RandomColorOptions {
     hue?: number |
         "red" |
         "orange" |

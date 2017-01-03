@@ -11,8 +11,7 @@ declare type Redux$PromiseAction<S>= (dispatch: Redux$Dispatch<S>, getState?: ()
 declare interface Redux$Dispatch<S>{
     (asyncAction: Redux$PromiseAction<S>): R
 }
-declare
-export type ReduxPromise$Promise = {}
+declare export type ReduxPromise$Promise = {}
 declare module 'redux-promise' {
     declare var promise: ReduxPromise$Promise;
     declare module.exports: typeof promise

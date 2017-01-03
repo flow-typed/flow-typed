@@ -10,8 +10,7 @@
 /**
  * Tooltipster options @see http://iamceege.github.io/tooltipster/
  */
-declare
-export interface JQueryTooltipster$ITooltipsterOptions {
+declare export interface JQueryTooltipster$ITooltipsterOptions {
 
     /**
      * Determines how the tooltip will animate in and out. Feel free to modify or create custom transitions in the tooltipster.css file.
@@ -222,8 +221,7 @@ export interface JQueryTooltipster$ITooltipsterOptions {
 /**
  * Tooltipster tooltip instance object.
  */
-declare
-export interface JQueryTooltipster$ITooltipsterInstance {
+declare export interface JQueryTooltipster$ITooltipsterInstance {
 
     /**
      * Updates the content of the tooltip.

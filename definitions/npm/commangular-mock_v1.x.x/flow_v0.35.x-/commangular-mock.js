@@ -65,5 +65,4 @@ declare module 'commangular' {
  * @param callback The function that will be called upon the completion of the command
 function should expecte an ICommandInfo paramter.
 */
-declare
-function dispatch(ec: commangular.ICommandCall, callback: Function): void
+declare function dispatch(ec: commangular.ICommandCall, callback: Function): void

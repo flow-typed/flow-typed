@@ -76,5 +76,4 @@ declare class MockAjax {
     requests: JasmineAjaxRequestTracker;
     stubs: JasmineAjaxStubTracker
 }
-declare
-export var Ajax: MockAjax;
+declare export var Ajax: MockAjax;

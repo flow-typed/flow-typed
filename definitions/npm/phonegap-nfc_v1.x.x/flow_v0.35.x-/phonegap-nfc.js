@@ -471,12 +471,9 @@ declare type PhoneGapNfc$Nfc = {
      */
     showSettings(win?: () => void, fail?: () => void): void
 } & PhoneGapNfc$Util
-declare
-var nfc: PhoneGapNfc$Nfc;
-declare
-var ndef: PhoneGapNfc$Ndef;
-declare
-var util: PhoneGapNfc$Util;
+declare var nfc: PhoneGapNfc$Nfc;
+declare var ndef: PhoneGapNfc$Ndef;
+declare var util: PhoneGapNfc$Util;
 declare module 'nfc' {
     declare module.exports: typeof nfc
 }

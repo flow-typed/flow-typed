@@ -17,8 +17,7 @@ declare type Quill$Formats = {
     [key: string]: any
 };
 
-declare
-export interface Quill$KeyboardStatic {
+declare export interface Quill$KeyboardStatic {
     addBinding(
             key: Quill$Key,
             callback: (range: Quill$RangeStatic, context: any) => void): void,
@@ -28,8 +27,7 @@ export interface Quill$KeyboardStatic {
             callback: (range: Quill$RangeStatic, context: any) => void): void
 }
 
-declare
-export interface Quill$ClipboardStatic {
+declare export interface Quill$ClipboardStatic {
     addMatcher(
             selector: string,
             callback: (node: any, delta: Quill$DeltaStatic) => Quill$DeltaStatic): void,
@@ -40,8 +38,7 @@ export interface Quill$ClipboardStatic {
         dangerouslyPasteHTML(index: number, html: string, source?: Quill$Sources): void
 }
 
-declare
-export interface Quill$QuillOptionsStatic {
+declare export interface Quill$QuillOptionsStatic {
     debug?: string,
         modules?: Quill$Formats,
         placeholder?: string,
@@ -50,16 +47,14 @@ export interface Quill$QuillOptionsStatic {
         formats?: string[]
 }
 
-declare
-export interface Quill$BoundsStatic {
+declare export interface Quill$BoundsStatic {
     left: number,
         top: number,
         height: number,
         width: number
 }
 
-declare
-export interface Quill$DeltaStatic {
+declare export interface Quill$DeltaStatic {
     new(ops: Array<any>): Quill$DeltaStatic,
     new(ops: any): Quill$DeltaStatic,
     ops?: Array<any>,
@@ -82,15 +77,13 @@ export interface Quill$DeltaStatic {
         transformPosition(index: number, priority: any): Quill$DeltaStatic
 }
 
-declare
-export interface Quill$RangeStatic {
+declare export interface Quill$RangeStatic {
     new(): Quill$RangeStatic,
     index: number,
         length: number
 }
 
-declare
-export interface Quill$Quill {
+declare export interface Quill$Quill {
     new(container: string | Element, options?: Quill$QuillOptionsStatic): Quill$Quill,
     deleteText(index: number, length: number, source?: Quill$Sources): void,
         disable(): void,
@@ -180,10 +173,8 @@ export interface Quill$Quill {
         getModule(name: string): any,
         clipboard: Quill$ClipboardStatic
 }
-declare
-var Quill: Quill$Quill;
-declare
-var Delta: Quill$DeltaStatic;
+declare var Quill: Quill$Quill;
+declare var Delta: Quill$DeltaStatic;
 declare module 'quill' {
     declare module.exports: typeof Quill
 }

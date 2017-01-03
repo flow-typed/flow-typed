@@ -6,13 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var debug: debug$IDebug;
+declare var debug: debug$IDebug;
 declare module 'debug' {
     declare module.exports: typeof debug
 }
-declare
-export interface debug$IDebug {
+declare export interface debug$IDebug {
     (namespace: string): debug$IDebugger,
     coerce: (val: any) => any,
         disable: () => void,
@@ -23,13 +21,11 @@ export interface debug$IDebug {
         formatters: debug$IFormatters
 }
 
-declare
-export interface debug$IFormatters {
+declare export interface debug$IFormatters {
     [formatter: string]: Function
 }
 
-declare
-export interface debug$IDebugger {
+declare export interface debug$IDebugger {
     (formatter: any, ...args: any[]): void,
     enabled: boolean,
         log: Function,

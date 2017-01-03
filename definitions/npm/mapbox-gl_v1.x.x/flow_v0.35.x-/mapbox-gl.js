@@ -7,18 +7,14 @@
  */
 
 
-declare
-var npm$namespace$mapboxgl: {
+declare var npm$namespace$mapboxgl: {
     supported: typeof mapboxgl$supported,
 }
-declare
-var accessToken: string;
+declare var accessToken: string;
 
-declare
-var version: string;
+declare var version: string;
 
-declare
-export function mapboxgl$supported(options?: {
+declare export function mapboxgl$supported(options?: {
     failIfMajorPerformanceCaveat?: boolean
 }): boolean
 
@@ -26,8 +22,7 @@ export function mapboxgl$supported(options?: {
 /**
  * Map
  */
-declare
-export class Map mixins Evented {
+declare export class Map mixins Evented {
     constructor(options?: mapboxgl$MapboxOptions): this;
     addControl(control: mapboxgl$Control): this;
     addClass(klass: string, options?: mapboxgl$StyleOptions): this;
@@ -142,8 +137,7 @@ export class Map mixins Evented {
     touchZoomRotate: mapboxgl$TouchZoomRotateHandler
 }
 
-declare
-export interface mapboxgl$MapboxOptions {
+declare export interface mapboxgl$MapboxOptions {
 
     /**
      * If true, an attribution control will be added to the map. 
@@ -262,8 +256,7 @@ export interface mapboxgl$MapboxOptions {
 /**
  * BoxZoomHandler
  */
-declare
-export class BoxZoomHandler {
+declare export class BoxZoomHandler {
     constructor(map: mapboxgl$Map): this;
     isEnabled(): boolean;
     isActive(): boolean;
@@ -275,8 +268,7 @@ export class BoxZoomHandler {
 /**
  * ScrollZoomHandler
  */
-declare
-export class ScrollZoomHandler {
+declare export class ScrollZoomHandler {
     constructor(map: mapboxgl$Map): this;
     isEnabled(): boolean;
     enable(): void;
@@ -287,8 +279,7 @@ export class ScrollZoomHandler {
 /**
  * DragPenHandler
  */
-declare
-export class DragPanHandler {
+declare export class DragPanHandler {
     constructor(map: mapboxgl$Map): this;
     isEnabled(): boolean;
     isActive(): boolean;
@@ -300,8 +291,7 @@ export class DragPanHandler {
 /**
  * DragRotateHandler
  */
-declare
-export class DragRotateHandler {
+declare export class DragRotateHandler {
     constructor(map: mapboxgl$Map, options?: {
         bearingSnap?: number,
         pitchWithRotate?: boolean
@@ -316,8 +306,7 @@ export class DragRotateHandler {
 /**
  * KeyboardHandler
  */
-declare
-export class KeyboardHandler {
+declare export class KeyboardHandler {
     constructor(map: mapboxgl$Map): this;
     isEnabled(): boolean;
     enable(): void;
@@ -328,8 +317,7 @@ export class KeyboardHandler {
 /**
  * DoubleClickZoomHandler
  */
-declare
-export class DoubleClickZoomHandler {
+declare export class DoubleClickZoomHandler {
     constructor(map: mapboxgl$Map): this;
     isEnabled(): boolean;
     enable(): void;
@@ -340,8 +328,7 @@ export class DoubleClickZoomHandler {
 /**
  * TouchZoomRotateHandler
  */
-declare
-export class TouchZoomRotateHandler {
+declare export class TouchZoomRotateHandler {
     constructor(map: mapboxgl$Map): this;
     isEnabled(): boolean;
     enable(): void;
@@ -354,8 +341,7 @@ export class TouchZoomRotateHandler {
 /**
  * Control
  */
-declare
-export class Control mixins Evented {
+declare export class Control mixins Evented {
     addTo(map: mapboxgl$Map): this;
     remove(): this
 }
@@ -364,8 +350,7 @@ export class Control mixins Evented {
 /**
  * ControlOptions
  */
-declare
-export interface mapboxgl$ControlOptions {
+declare export interface mapboxgl$ControlOptions {
     position?: "top-right" | "top-left" | "bottom-right" | "bottom-left"
 }
 
@@ -373,8 +358,7 @@ export interface mapboxgl$ControlOptions {
 /**
  * Navigation
  */
-declare
-export class NavigationControl mixins Control {
+declare export class NavigationControl mixins Control {
     constructor(options?: mapboxgl$ControlOptions): this
 }
 
@@ -382,8 +366,7 @@ export class NavigationControl mixins Control {
 /**
  * Geolocate
  */
-declare
-export class GeolocateControl mixins Control {
+declare export class GeolocateControl mixins Control {
     constructor(options?: mapboxgl$ControlOptions): this
 }
 
@@ -391,8 +374,7 @@ export class GeolocateControl mixins Control {
 /**
  * Attribution
  */
-declare
-export class AttributionControl mixins Control {
+declare export class AttributionControl mixins Control {
     constructor(options?: mapboxgl$ControlOptions): this
 }
 
@@ -400,8 +382,7 @@ export class AttributionControl mixins Control {
 /**
  * Scale
  */
-declare
-export class ScaleControl mixins Control {
+declare export class ScaleControl mixins Control {
     constructor(options?: {
         position?: "top-right" | "top-left" | "bottom-right" | "bottom-left",
         maxWidth?: number,
@@ -413,8 +394,7 @@ export class ScaleControl mixins Control {
 /**
  * Popup
  */
-declare
-export class Popup mixins Evented {
+declare export class Popup mixins Evented {
     constructor(options?: mapboxgl$PopupOptions): this;
     addTo(map: mapboxgl$Map): this;
     isOpen(): boolean;
@@ -426,8 +406,7 @@ export class Popup mixins Evented {
     setDOMContent(htmlNode: Node): this
 }
 
-declare
-export interface mapboxgl$PopupOptions {
+declare export interface mapboxgl$PopupOptions {
     closeButton?: boolean,
         closeOnClick?: boolean,
         anchor?: "top" |
@@ -443,8 +422,7 @@ export interface mapboxgl$PopupOptions {
         }
 }
 
-declare
-export interface mapboxgl$Style {
+declare export interface mapboxgl$Style {
     bearing?: number,
         center?: number[],
         glyphs?: string,
@@ -459,14 +437,12 @@ export interface mapboxgl$Style {
         zoom?: number
 }
 
-declare
-export interface mapboxgl$Transition {
+declare export interface mapboxgl$Transition {
     delay?: number,
         duration?: number
 }
 
-declare
-export interface mapboxgl$Source {
+declare export interface mapboxgl$Source {
     type: "vector" |
         "raster" |
         "geojson" |
@@ -478,22 +454,19 @@ export interface mapboxgl$Source {
 /**
  * GeoJSONSource
  */
-declare
-export type mapboxgl$GeoJSONSourceRaw = {
+declare export type mapboxgl$GeoJSONSourceRaw = {
     type: "geojson"
 } & mapboxgl$Source & mapboxgl$GeoJSONSourceOptions
 
 
-declare
-export class GeoJSONSource mixins GeoJSONSourceRaw {
+declare export class GeoJSONSource mixins GeoJSONSourceRaw {
     type: "geojson";
     constructor(options?: mapboxgl$GeoJSONSourceOptions): this;
     setData(
         data: GeoJSON.Feature<GeoJSON.GeometryObject>| GeoJSON.FeatureCollection<GeoJSON.GeometryObject>| String): this
 }
 
-declare
-export interface mapboxgl$GeoJSONSourceOptions {
+declare export interface mapboxgl$GeoJSONSourceOptions {
     data?: GeoJSON.Feature<GeoJSON.GeometryObject>| GeoJSON.FeatureCollection<GeoJSON.GeometryObject>| string,
         maxzoom?: number,
         buffer?: number,
@@ -507,16 +480,14 @@ export interface mapboxgl$GeoJSONSourceOptions {
 /**
  * VideoSource
  */
-declare
-export class VideoSource mixins Source, VideoSourceOptions {
+declare export class VideoSource mixins Source, VideoSourceOptions {
     type: "video";
     constructor(options?: mapboxgl$VideoSourceOptions): this;
     getVideo(): HTMLVideoElement;
     setCoordinates(coordinates: number[][]): this
 }
 
-declare
-export interface mapboxgl$VideoSourceOptions {
+declare export interface mapboxgl$VideoSourceOptions {
     urls?: string[],
         coordinates?: number[][]
 }
@@ -525,15 +496,13 @@ export interface mapboxgl$VideoSourceOptions {
 /**
  * ImageSource
  */
-declare
-export class ImageSource mixins Source, ImageSourceOptions {
+declare export class ImageSource mixins Source, ImageSourceOptions {
     type: "image";
     constructor(options?: mapboxgl$ImageSourceOptions): this;
     setCoordinates(coordinates: number[][]): this
 }
 
-declare
-export interface mapboxgl$ImageSourceOptions {
+declare export interface mapboxgl$ImageSourceOptions {
     url?: string,
         coordinates?: number[][]
 }
@@ -561,8 +530,7 @@ declare type mapboxgl$RasterSource = {
 /**
  * LngLat
  */
-declare
-export class LngLat {
+declare export class LngLat {
     lng: number;
     lat: number;
     constructor(lng: number, lat: number): this;
@@ -588,8 +556,7 @@ export class LngLat {
 /**
  * LngLatBounds
  */
-declare
-export class LngLatBounds {
+declare export class LngLatBounds {
     sw: mapboxgl$LngLat | number[];
     ne: mapboxgl$LngLat | number[];
     constructor(sw?: mapboxgl$LngLat, ne?: mapboxgl$LngLat): this;
@@ -664,8 +631,7 @@ export class LngLatBounds {
 /**
  * Point
  */
-declare
-export class Point {
+declare export class Point {
     constructor(options?: Object): this;
     clone(): mapboxgl$Point;
     add(p: number): mapboxgl$Point;
@@ -687,8 +653,7 @@ export class Point {
     angleWidthSep(): number
 }
 
-declare
-export class Marker {
+declare export class Marker {
     constructor(element?: HTMLElement, options?: {
         offset?: mapboxgl$Point | number[]
     }): this;
@@ -705,8 +670,7 @@ export class Marker {
 /**
  * Evented
  */
-declare
-export class Evented {
+declare export class Evented {
     on(type: string, listener: Function): this;
     off(type?: string | any, listener?: Function): this;
     once(type: string, listener: Function): this;
@@ -718,8 +682,7 @@ export class Evented {
 /**
  * StyleOptions
  */
-declare
-export interface mapboxgl$StyleOptions {
+declare export interface mapboxgl$StyleOptions {
     transition?: boolean
 }
 
@@ -727,8 +690,7 @@ export interface mapboxgl$StyleOptions {
 /**
  * EventData
  */
-declare
-export class EventData {
+declare export class EventData {
     type: string;
     target: mapboxgl$Map;
     originalEvent: Event;
@@ -736,8 +698,7 @@ export class EventData {
     lngLat: mapboxgl$LngLat
 }
 
-declare
-export class MapMouseEvent {
+declare export class MapMouseEvent {
     type: string;
     target: mapboxgl$Map;
     originalEvent: MouseEvent;
@@ -745,8 +706,7 @@ export class MapMouseEvent {
     lngLat: mapboxgl$LngLat
 }
 
-declare
-export class MapTouchEvent {
+declare export class MapTouchEvent {
     type: string;
     target: mapboxgl$Map;
     originalEvent: TouchEvent;
@@ -756,14 +716,12 @@ export class MapTouchEvent {
     lngLats: mapboxgl$LngLat[]
 }
 
-declare
-export class MapBoxZoomEvent {
+declare export class MapBoxZoomEvent {
     originalEvent: MouseEvent;
     boxZoomBounds: mapboxgl$LngLatBounds
 }
 
-declare
-export class MapDataEvent {
+declare export class MapDataEvent {
     type: string;
     dataType: "source" | "style" | "tile"
 }
@@ -772,8 +730,7 @@ export class MapDataEvent {
 /**
  * AnimationOptions
  */
-declare
-export interface mapboxgl$AnimationOptions {
+declare export interface mapboxgl$AnimationOptions {
 
     /**
      * Number in milliseconds 
@@ -796,8 +753,7 @@ export interface mapboxgl$AnimationOptions {
 /**
  * CameraOptions
  */
-declare
-export interface mapboxgl$CameraOptions {
+declare export interface mapboxgl$CameraOptions {
 
     /**
      * Map center 
@@ -829,8 +785,7 @@ export interface mapboxgl$CameraOptions {
 /**
  * FlyToOptions
  */
-declare
-export type mapboxgl$FlyToOptions = {
+declare export type mapboxgl$FlyToOptions = {
     curve?: number,
     minZoom?: number,
     speed?: number,
@@ -843,8 +798,7 @@ export type mapboxgl$FlyToOptions = {
 /**
  * MapEvent
  */
-declare
-export interface mapboxgl$MapEvent {
+declare export interface mapboxgl$MapEvent {
     resize?: void,
         webglcontextlost?: {
             originalEvent: WebGLContextEvent
@@ -941,8 +895,7 @@ export interface mapboxgl$MapEvent {
         }
 }
 
-declare
-export interface mapboxgl$Layer {
+declare export interface mapboxgl$Layer {
     id: string,
         type?: "fill" |
         "line" |
@@ -973,8 +926,7 @@ export interface mapboxgl$Layer {
         mapboxgl$CirclePaint
 }
 
-declare
-export interface mapboxgl$StyleFunction {
+declare export interface mapboxgl$StyleFunction {
     stops: any[][],
         property?: string,
         base?: number,
@@ -982,25 +934,21 @@ export interface mapboxgl$StyleFunction {
         colorSpace?: "rgb" | "lab" | "interval"
 }
 
-declare
-export interface mapboxgl$BackgroundLayout {
+declare export interface mapboxgl$BackgroundLayout {
     visibility?: "visible" | "none"
 }
 
-declare
-export interface mapboxgl$BackgroundPaint {
+declare export interface mapboxgl$BackgroundPaint {
     background - color?: string,
         background - pattern?: string,
         background - opacity?: number
 }
 
-declare
-export interface mapboxgl$FillLayout {
+declare export interface mapboxgl$FillLayout {
     visibility?: "visible" | "none"
 }
 
-declare
-export interface mapboxgl$FillPaint {
+declare export interface mapboxgl$FillPaint {
     fill - antialias?: boolean,
         fill - opacity?: number | mapboxgl$StyleFunction,
         fill - color?: string | mapboxgl$StyleFunction,
@@ -1012,8 +960,7 @@ export interface mapboxgl$FillPaint {
         fill - extrude - base?: number
 }
 
-declare
-export interface mapboxgl$LineLayout {
+declare export interface mapboxgl$LineLayout {
     visibility?: "visible" | "none",
         line - cap?: "butt" | "round" | "square",
         line - join?: "bevel" | "round" | "miter",
@@ -1021,8 +968,7 @@ export interface mapboxgl$LineLayout {
         line - round - limit?: number
 }
 
-declare
-export interface mapboxgl$LinePaint {
+declare export interface mapboxgl$LinePaint {
     line - opacity?: number,
         line - color?: string | mapboxgl$StyleFunction,
         line - translate?: number[],
@@ -1036,8 +982,7 @@ export interface mapboxgl$LinePaint {
         line - pattern?: string
 }
 
-declare
-export interface mapboxgl$SymbolLayout {
+declare export interface mapboxgl$SymbolLayout {
     visibility?: "visible" | "none",
         symbol - placement?: "point" | "line",
         symbol - spacing?: number,
@@ -1083,8 +1028,7 @@ export interface mapboxgl$SymbolLayout {
         text - optional?: boolean
 }
 
-declare
-export interface mapboxgl$SymbolPaint {
+declare export interface mapboxgl$SymbolPaint {
     icon - opacity?: number,
         icon - color?: string,
         icon - halo - color?: string,
@@ -1101,13 +1045,11 @@ export interface mapboxgl$SymbolPaint {
         text - translate - anchor?: "map" | "viewport"
 }
 
-declare
-export interface mapboxgl$RasterLayout {
+declare export interface mapboxgl$RasterLayout {
     visibility?: "visible" | "none"
 }
 
-declare
-export interface mapboxgl$RasterPaint {
+declare export interface mapboxgl$RasterPaint {
     raster - opacity?: number,
         raster - hue - rotate?: number,
         raster - brightness - min?: number,
@@ -1117,13 +1059,11 @@ export interface mapboxgl$RasterPaint {
         raster - fade - duration?: number
 }
 
-declare
-export interface mapboxgl$CircleLayout {
+declare export interface mapboxgl$CircleLayout {
     visibility?: "visible" | "none"
 }
 
-declare
-export interface mapboxgl$CirclePaint {
+declare export interface mapboxgl$CirclePaint {
     circle - radius?: number | mapboxgl$StyleFunction,
         circle - radius - transition?: mapboxgl$Transition,
         circle - color?: number | mapboxgl$StyleFunction,

@@ -69,5 +69,4 @@ declare module 'HTML' {
             getRawContent(): string
     }
 }
-declare
-var HtmlService: undefined.HtmlService;
+declare var HtmlService: undefined.HtmlService;

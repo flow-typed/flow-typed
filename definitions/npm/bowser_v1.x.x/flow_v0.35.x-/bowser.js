@@ -6,13 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var bowser: BowserModule$IBowser;
+declare var bowser: BowserModule$IBowser;
 declare module 'bowser' {
     declare module.exports: typeof bowser
 }
-declare
-export interface BowserModule$IBowserOS {
+declare export interface BowserModule$IBowserOS {
     mac: boolean,
 
         /**
@@ -44,8 +42,7 @@ export interface BowserModule$IBowserOS {
         sailfish: boolean
 }
 
-declare
-export interface BowserModule$IBowserVersions {
+declare export interface BowserModule$IBowserVersions {
     chrome: boolean,
         firefox: boolean,
         msie: boolean,
@@ -69,8 +66,7 @@ export interface BowserModule$IBowserVersions {
         kMeleon: boolean
 }
 
-declare
-export interface BowserModule$IBowserEngines {
+declare export interface BowserModule$IBowserEngines {
 
     /**
      * IE <= 11 
@@ -108,8 +104,7 @@ export interface BowserModule$IBowserEngines {
         mobile: boolean
 }
 
-declare
-export interface BowserModule$IBowserGrade {
+declare export interface BowserModule$IBowserGrade {
 
     /**
      * Grade A browser 
@@ -138,17 +133,14 @@ export interface BowserModule$IBowserGrade {
         osversion: string | number
 }
 
-declare
-export type BowserModule$IBowserDetection = {} & BowserModule$IBowserGrade & BowserModule$IBowserEngines & BowserModule$IBowserOS & BowserModule$IBowserVersions
+declare export type BowserModule$IBowserDetection = {} & BowserModule$IBowserGrade & BowserModule$IBowserEngines & BowserModule$IBowserOS & BowserModule$IBowserVersions
 
 
-declare
-export interface BowserModule$IBowserMinVersions {
+declare export interface BowserModule$IBowserMinVersions {
     [index: string]: string
 }
 
-declare
-export type BowserModule$IBowser = {
+declare export type BowserModule$IBowser = {
     (): BowserModule$IBowserDetection,
     test(browserList: string[]): boolean,
     _detect(ua: string): BowserModule$IBowser,

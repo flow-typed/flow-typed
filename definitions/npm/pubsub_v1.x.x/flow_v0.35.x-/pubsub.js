@@ -29,8 +29,7 @@ declare interface PubSubJS$Unsubscribe {
 declare interface PubSubJS$ClearAllSubscriptions {
     clearAllSubscriptions(): any
 }
-declare
-var PubSub: PubSubJS$Base;
+declare var PubSub: PubSubJS$Base;
 declare module 'pubsub-js' {
     declare module.exports: typeof PubSub
 }

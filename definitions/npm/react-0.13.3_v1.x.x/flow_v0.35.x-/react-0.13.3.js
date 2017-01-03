@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$___React: {
+declare var npm$namespace$___React: {
     createClass: typeof ___React$createClass,
     createFactory: typeof ___React$createFactory,
     createElement: typeof ___React$createElement,
@@ -74,57 +73,43 @@ declare type ___React$ReactFragment = {} | Array<___React$ReactChild | any[] | b
 
 declare type ___React$ReactNode = ___React$ReactChild | ___React$ReactFragment | boolean;
 
-declare
-function ___React$createClass<P, S>(spec: ___React$ComponentSpec<P, S>): ___React$ClassicComponentClass<P >
+declare function ___React$createClass<P, S>(spec: ___React$ComponentSpec<P, S>): ___React$ClassicComponentClass<P >
 
-    declare
-function ___React$createFactory<P>(type: string): ___React$DOMFactory<P >
+    declare function ___React$createFactory<P>(type: string): ___React$DOMFactory<P >
 
-    declare
-function ___React$createElement<P>(
+    declare function ___React$createElement<P>(
         type: string,
         props?: P,
         ...children: ___React$ReactNode[]): ___React$DOMElement<P >
 
-    declare
-function ___React$cloneElement<P>(
+    declare function ___React$cloneElement<P>(
         element: ___React$DOMElement<P>,
         props?: P,
         ...children: ___React$ReactNode[]): ___React$DOMElement<P >
 
-    declare
-function ___React$render<P>(
+    declare function ___React$render<P>(
         element: ___React$DOMElement<P>,
         container: JSX$Element,
         callback?: () => any): ___React$DOMComponent<P >
 
-    declare
-function ___React$unmountComponentAtNode(container: JSX$Element): boolean
+    declare function ___React$unmountComponentAtNode(container: JSX$Element): boolean
 
-declare
-function ___React$renderToString(element: ___React$ReactElement<any>): string
+declare function ___React$renderToString(element: ___React$ReactElement<any>): string
 
-declare
-function ___React$renderToStaticMarkup(element: ___React$ReactElement<any>): string
+declare function ___React$renderToStaticMarkup(element: ___React$ReactElement<any>): string
 
-declare
-function ___React$isValidElement(object: {}): boolean
+declare function ___React$isValidElement(object: {}): boolean
 
-declare
-function ___React$initializeTouchEvents(shouldUseTouch: boolean): void
+declare function ___React$initializeTouchEvents(shouldUseTouch: boolean): void
 
-declare
-function ___React$findDOMNode<TElement>(
+declare function ___React$findDOMNode<TElement>(
     componentOrElement: ___React$Component<any, any>| JSX$Element): TElement
 
-declare
-var DOM: ___React$ReactDOM;
+declare var DOM: ___React$ReactDOM;
 
-declare
-var PropTypes: ___React$ReactPropTypes;
+declare var PropTypes: ___React$ReactPropTypes;
 
-declare
-var Children: ___React$ReactChildren;
+declare var Children: ___React$ReactChildren;
 
 declare class Component<P, S>mixins ComponentLifecycle<P, S>{
     propTypes: ___React$ValidationMap<any>;

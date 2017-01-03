@@ -7,34 +7,26 @@
  */
 
 
-declare
-var npm$namespace$TWEEN: {
+declare var npm$namespace$TWEEN: {
     getAll: typeof TWEEN$getAll,
     removeAll: typeof TWEEN$removeAll,
     add: typeof TWEEN$add,
     remove: typeof TWEEN$remove,
     update: typeof TWEEN$update,
 }
-declare
-export var REVISION: string;
+declare export var REVISION: string;
 
-declare
-export function TWEEN$getAll(): TWEEN$Tween[]
+declare export function TWEEN$getAll(): TWEEN$Tween[]
 
-declare
-export function TWEEN$removeAll(): void
+declare export function TWEEN$removeAll(): void
 
-declare
-export function TWEEN$add(tween: TWEEN$Tween): void
+declare export function TWEEN$add(tween: TWEEN$Tween): void
 
-declare
-export function TWEEN$remove(tween: TWEEN$Tween): void
+declare export function TWEEN$remove(tween: TWEEN$Tween): void
 
-declare
-export function TWEEN$update(time?: number): boolean
+declare export function TWEEN$update(time?: number): boolean
 
-declare
-export class Tween {
+declare export class Tween {
     constructor(object?: any): this;
     to(properties: any, duration: number): TWEEN$Tween;
     start(time?: number): TWEEN$Tween;
@@ -51,11 +43,9 @@ export class Tween {
     yoyo(enable: boolean): TWEEN$Tween
 }
 
-declare
-export var Easing: TweenEasing;
+declare export var Easing: TweenEasing;
 
-declare
-export var Interpolation: TweenInterpolation;
+declare export var Interpolation: TweenInterpolation;
 declare interface TweenEasing {
     Linear: {
             None(k: number): number

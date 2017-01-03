@@ -6,59 +6,50 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface aa$ILabelStrategies {
+declare export interface aa$ILabelStrategies {
     [strategyName: string]: (
         element: ng.IAugmentedJQueryStatic,
         labelText: string,
         isRequired: boolean) => void
 }
 
-declare
-export interface aa$IFieldGroupStrategies {
+declare export interface aa$IFieldGroupStrategies {
     [strategyName: string]: (element: ng.IAugmentedJQueryStatic) => void
 }
 
-declare
-export interface aa$IValMsgPlacementStrategies {
+declare export interface aa$IValMsgPlacementStrategies {
     [strategyName: string]: (
         formFieldElement: ng.IAugmentedJQueryStatic,
         formName: string,
         formFieldName: string) => void
 }
 
-declare
-export interface aa$IValidIconStrategy {
+declare export interface aa$IValidIconStrategy {
     validIcon: string,
         invalidIcon: string,
         getContainer(element: ng.IAugmentedJQueryStatic): void
 }
 
-declare
-export interface aa$ISpinnerClickStrategies {
+declare export interface aa$ISpinnerClickStrategies {
     [strategyName: string]: (element: ng.IAugmentedJQueryStatic) => void
 }
 
-declare
-export interface aa$IOnNavigateAwayStrategies {
+declare export interface aa$IOnNavigateAwayStrategies {
     [strategyName: string]: (
         rootFormScope: ng.IScope,
         rootForm: ng.IAugmentedJQueryStatic,
         $injector: undefined.IInjectorService) => void
 }
 
-declare
-export interface aa$IValidationMessages {
+declare export interface aa$IValidationMessages {
     [validationKey: string]: string
 }
 
-declare
-export interface aa$IGlobalSettings {
+declare export interface aa$IGlobalSettings {
     [settingName: string]: any
 }
 
-declare
-export type aa$IFormExtensionsProvider = {
+declare export type aa$IFormExtensionsProvider = {
     defaultLabelStrategy: string,
     defaultFieldGroupStrategy: string,
     defaultValMsgPlacementStrategy: string,
@@ -77,13 +68,11 @@ export type aa$IFormExtensionsProvider = {
     onNavigateAwayStrategies: aa$IOnNavigateAwayStrategies
 }
 
-declare
-export interface aa$INotifyPredicate {
+declare export interface aa$INotifyPredicate {
     (message: string, options: any, notifier: any): any
 }
 
-declare
-export interface aa$INotifyDefaults {
+declare export interface aa$INotifyDefaults {
     success: aa$INotifyPredicate,
         info: aa$INotifyPredicate,
         warning: aa$INotifyPredicate,
@@ -91,8 +80,7 @@ export interface aa$INotifyDefaults {
         error: aa$INotifyPredicate
 }
 
-declare
-export interface aa$INotifyConfig {
+declare export interface aa$INotifyConfig {
     name: string,
         template?: string,
         templateName?: string,
@@ -100,16 +88,14 @@ export interface aa$INotifyConfig {
         namedDefaults: aa$INotifyDefaults
 }
 
-declare
-export interface aa$INotifyOptions {
+declare export interface aa$INotifyOptions {
     cssClasses?: string,
         messageType: string,
         allowHtml: boolean,
         message: string
 }
 
-declare
-export type aa$INotifyConfigProvider = {
+declare export type aa$INotifyConfigProvider = {
     notifyConfigs: any,
     defaultTargetContainerName: string,
     defaultNotifyConfig: string,
@@ -117,8 +103,7 @@ export type aa$INotifyConfigProvider = {
     optionsTransformer(options: aa$INotifyOptions, $sce: ng.ISCEService): void
 }
 
-declare
-export interface aa$IExternalFormValidationConfig {
+declare export interface aa$IExternalFormValidationConfig {
     validations: any,
         ignore?: any,
         globals?: any,

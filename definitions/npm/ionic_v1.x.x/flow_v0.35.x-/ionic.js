@@ -114,8 +114,7 @@ declare interface IonicStatic {
             grade: string
         }
 }
-declare
-var ionic: IonicStatic;
+declare var ionic: IonicStatic;
 declare module 'ionic' {
     declare module.exports: typeof ionic
 }

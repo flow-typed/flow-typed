@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface JQueryFinger$JQueryFingerOptions {
+declare export interface JQueryFinger$JQueryFingerOptions {
 
     /**
      * The time the user must hold in order to fire a press event. If this

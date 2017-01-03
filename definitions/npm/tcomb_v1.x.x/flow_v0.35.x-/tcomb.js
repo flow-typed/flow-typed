@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$TComb: {
+declare var npm$namespace$TComb: {
     list: typeof TComb$list,
 }
-declare
-export interface TComb$tcomb {
+declare export interface TComb$tcomb {
     format: (format: string, ...values: any[]) => string,
         getFunctionName: (fn: Function) => string,
         getTypeName: (type: TComb$TCombBase) => string,
@@ -61,8 +59,7 @@ export interface TComb$tcomb {
             name?: string): TComb$Subtype_Static
 }
 
-declare
-export interface TComb$TCombBase {
+declare export interface TComb$TCombBase {
     meta: {
 
             /**
@@ -80,37 +77,30 @@ export interface TComb$TCombBase {
         update(instance: any, spec: {}): TComb$TCombBase
 }
 
-declare
-export interface TComb$TypePredicate {
+declare export interface TComb$TypePredicate {
     (x: any): TComb$Bool_Instance
 }
 
-declare
-export interface TComb$Any_Instance {}
+declare export interface TComb$Any_Instance {}
 
-declare
-export type TComb$Any_Static = {
+declare export type TComb$Any_Static = {
     new(value: any): TComb$Any_Instance,
     (value: any): TComb$Any_Instance
 } & TComb$TCombBase
 
 
-declare
-export interface TComb$Nil_Instance {}
+declare export interface TComb$Nil_Instance {}
 
-declare
-export type TComb$Nil_Static = {
+declare export type TComb$Nil_Static = {
     new(value: any): TComb$Nil_Instance,
     (value: any): TComb$Nil_Instance
 } & TComb$TCombBase
 
 
-declare
-export type TComb$Str_Instance = {} & String
+declare export type TComb$Str_Instance = {} & String
 
 
-declare
-export type TComb$Str_Static = {
+declare export type TComb$Str_Static = {
     new(value: string): TComb$Str_Instance,
     (value: string): TComb$Str_Instance,
     meta: {
@@ -133,99 +123,81 @@ export type TComb$Str_Static = {
 } & TComb$TCombBase
 
 
-declare
-export type TComb$Num_Instance = {} & Number
+declare export type TComb$Num_Instance = {} & Number
 
 
-declare
-export type TComb$Num_Static = {
+declare export type TComb$Num_Static = {
     new(value: number): TComb$Num_Instance,
     (value: number): TComb$Num_Instance
 } & TComb$TCombBase
 
 
-declare
-export type TComb$Bool_Instance = {} & Boolean
+declare export type TComb$Bool_Instance = {} & Boolean
 
 
-declare
-export type TComb$Bool_Static = {
+declare export type TComb$Bool_Static = {
     new(value: boolean): TComb$Bool_Instance,
     (value: boolean): TComb$Bool_Instance
 } & TComb$TCombBase
 
 
-declare
-export type TComb$Arr_Instance = {} & Array
+declare export type TComb$Arr_Instance = {} & Array
 
 
-declare
-export type TComb$Arr_Static = {
+declare export type TComb$Arr_Static = {
     new(value: any[]): TComb$Arr_Instance,
     (value: any[]): TComb$Arr_Instance
 } & TComb$TCombBase
 
 
-declare
-export type TComb$Obj_Instance = {} & Object
+declare export type TComb$Obj_Instance = {} & Object
 
 
-declare
-export type TComb$Obj_Static = {
+declare export type TComb$Obj_Static = {
     new(value: Object): TComb$Obj_Instance,
     (value: Object): TComb$Obj_Instance
 } & TComb$TCombBase
 
 
-declare
-export type TComb$Func_Instance = {} & Function
+declare export type TComb$Func_Instance = {} & Function
 
 
-declare
-export type TComb$Func_Static = {
+declare export type TComb$Func_Static = {
     new(value: Function): TComb$Func_Instance,
     (value: Function): TComb$Func_Instance
 } & TComb$TCombBase
 
 
-declare
-export type TComb$Err_Instance = {} & Error
+declare export type TComb$Err_Instance = {} & Error
 
 
-declare
-export type TComb$Err_Static = {
+declare export type TComb$Err_Static = {
     new(value: Error): TComb$Err_Instance,
     (value: Error): TComb$Err_Instance
 } & TComb$TCombBase
 
 
-declare
-export type TComb$Re_Instance = {} & RegExp
+declare export type TComb$Re_Instance = {} & RegExp
 
 
-declare
-export type TComb$Re_Static = {
+declare export type TComb$Re_Static = {
     new(value: RegExp): TComb$Re_Instance,
     (value: RegExp): TComb$Re_Instance
 } & TComb$TCombBase
 
 
-declare
-export type TComb$Dat_Instance = {} & Date
+declare export type TComb$Dat_Instance = {} & Date
 
 
-declare
-export type TComb$Dat_Static = {
+declare export type TComb$Dat_Static = {
     new(value: Date): TComb$Dat_Instance,
     (value: Date): TComb$Dat_Instance
 } & TComb$TCombBase
 
 
-declare
-export interface TComb$Type_Instance {}
+declare export interface TComb$Type_Instance {}
 
-declare
-export type TComb$Type_Static = {
+declare export type TComb$Type_Static = {
     new(value: any): TComb$Type_Instance,
     (value: any): TComb$Type_Instance
 } & TComb$TCombBase
@@ -239,8 +211,7 @@ export type TComb$Type_Static = {
  * @param props - A hash whose keys are the field names and the values are the fields types.
  * @param name - Useful for debugging purposes.
  */
-declare
-export type TComb$Struct_Static = {
+declare export type TComb$Struct_Static = {
     new(value: any, mutable?: boolean): TComb$Struct_Instance,
     (value: any, mutable?: boolean): TComb$Struct_Instance,
     meta: {
@@ -297,8 +268,7 @@ declare module 'enums' {
  * 
  * @param name - Useful for debugging purposes.
  */
-declare
-export type TComb$Union_Static = {
+declare export type TComb$Union_Static = {
     new(value: any, mutable?: boolean): TComb$Union_Instance,
     (value: any, mutable?: boolean): TComb$Union_Instance,
     meta: {
@@ -310,8 +280,7 @@ export type TComb$Union_Static = {
 } & TComb$TCombBase
 
 
-declare
-export interface TComb$Union_Instance {}
+declare export interface TComb$Union_Instance {}
 
 
 /**
@@ -319,8 +288,7 @@ export interface TComb$Union_Instance {}
  * @param type - The wrapped type.
  * @param name - Useful for debugging purposes.
  */
-declare
-export type TComb$Maybe_Static = {
+declare export type TComb$Maybe_Static = {
     new(value: any, mutable?: boolean): TComb$Maybe_Instance,
     (value: any, mutable?: boolean): TComb$Maybe_Instance,
     meta: {
@@ -357,8 +325,7 @@ declare interface TComb$Tuple_Instance {}
  * @param type - A type already defined.
  * @param name - Useful for debugging purposes.
  */
-declare
-export type TComb$Subtype_Static = {
+declare export type TComb$Subtype_Static = {
     new(value: any, mutable?: boolean): TComb$Subtype_Instance,
     (value: any, mutable?: boolean): TComb$Subtype_Instance,
     meta: {
@@ -378,8 +345,7 @@ declare interface TComb$Subtype_Instance {}
  * @param type - The type of list items.
  * @param name - Useful for debugging purposes.
  */
-declare
-export function TComb$list(type: TComb$TCombBase, name?: string): TComb$List_Static
+declare export function TComb$list(type: TComb$TCombBase, name?: string): TComb$List_Static
 
 declare type TComb$List_Static = {
     new(value: any, mutable?: boolean): TComb$List_Instance,
@@ -414,8 +380,7 @@ declare type TComb$Dict_Static = {
 
 
 declare interface TComb$Dict_Instance {}
-declare
-var t: TComb$tcomb;
+declare var t: TComb$tcomb;
 declare module 'tcomb' {
     declare module.exports: typeof t
 }

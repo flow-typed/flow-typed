@@ -39,8 +39,7 @@ declare interface IHashtableStatic {
             hashCode?: (value: TValue) => any,
             equals?: (value1: TValue, value2: TValue) => boolean): IHashtable<TKey, TValue >
 }
-declare
-var Hashtable: IHashtableStatic;
+declare var Hashtable: IHashtableStatic;
 declare module 'hashtable' {
     declare module.exports: typeof Hashtable
 }

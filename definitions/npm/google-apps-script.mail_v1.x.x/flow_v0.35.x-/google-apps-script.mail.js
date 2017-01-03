@@ -26,5 +26,4 @@ declare module 'Mail' {
             sendEmail(to: string, replyTo: string, subject: string, body: string): void
     }
 }
-declare
-var MailApp: undefined.MailApp;
+declare var MailApp: undefined.MailApp;

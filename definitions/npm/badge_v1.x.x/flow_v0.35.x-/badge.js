@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IBadgeService {
+declare export interface ngCordova$IBadgeService {
     hasPermission(): ng.IPromise<boolean>,
         promptForPermission(): ng.IPromise<any>,
         set(badge: number, callback?: Function, scope?: {}): ng.IPromise<any>,

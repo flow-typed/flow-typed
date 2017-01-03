@@ -10,20 +10,17 @@ declare interface Rx$IObservable<T>{
     safeApply($scope: ng.IScope, callback: (data: T) => void): Rx$Observable<T >
 }
 
-declare
-export type Rx$ScopeScheduler = {
+declare export type Rx$ScopeScheduler = {
     constructor(scope: ng.IScope): Rx$ScopeScheduler
 } & IScheduler
 
 
-declare
-export type Rx$ScopeSchedulerStatic = {
+declare export type Rx$ScopeSchedulerStatic = {
     new($scope: angular.IScope): Rx$ScopeScheduler
 } & SchedulerStatic
 
 
-declare
-export var ScopeScheduler: Rx$ScopeSchedulerStatic;
+declare export var ScopeScheduler: Rx$ScopeSchedulerStatic;
 declare module 'angular' {
     declare export type IRxScope = {
         $toObservable(property: string): Rx$Observable<any >

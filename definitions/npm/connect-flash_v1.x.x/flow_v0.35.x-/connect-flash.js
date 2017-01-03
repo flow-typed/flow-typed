@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Express$Request {
+declare export interface Express$Request {
     flash(message: string): any,
         flash(event: string, message: string): any
 }

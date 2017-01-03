@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var FB: fb.FacebookStatic;
+declare var FB: fb.FacebookStatic;
 declare interface facebook$FacebookStatic {
     api: any,
         AppEvents: any,

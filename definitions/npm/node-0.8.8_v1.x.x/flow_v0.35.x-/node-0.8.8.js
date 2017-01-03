@@ -6,27 +6,17 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var process: NodeProcess;
-declare
-var global: any;
-declare
-var ___filename: string;
-declare
-var ___dirname: string;
-declare
-function setTimeout(callback: () => void, ms: number): anydeclare
-function clearTimeout(timeoutId: any): voiddeclare
-function setInterval(callback: () => void, ms: number): anydeclare
-function clearInterval(intervalId: any): voiddeclare
-var require: {
+declare var process: NodeProcess;
+declare var global: any;
+declare var ___filename: string;
+declare var ___dirname: string;
+declare function setTimeout(callback: () => void, ms: number): anydeclare function clearTimeout(timeoutId: any): voiddeclare function setInterval(callback: () => void, ms: number): anydeclare function clearInterval(intervalId: any): voiddeclare var require: {
     (id: string): any,
     resolve(): string,
     cache: any,
     extensions: any
 };
-declare
-var module: {
+declare var module: {
     exports: any,
     require(id: string): any,
     id: string,
@@ -35,10 +25,8 @@ var module: {
     parent: any,
     children: any[]
 };
-declare
-var exports: any;
-declare
-var SlowBuffer: {
+declare var exports: any;
+declare var SlowBuffer: {
     new(str: string, encoding?: string): Buffer,
     new(size: number): Buffer,
     new(array: any[]): Buffer,
@@ -47,8 +35,7 @@ var SlowBuffer: {
     byteLength(string: string, encoding?: string): number,
     concat(list: Buffer[], totalLength?: number): Buffer
 };
-declare
-var Buffer: {
+declare var Buffer: {
     new(str: string, encoding?: string): Buffer,
     new(size: number): Buffer,
     new(array: any[]): Buffer,

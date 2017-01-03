@@ -19,18 +19,15 @@ declare interface Chai$ChaiStatic {
         AssertionError: typeof AssertionError
 }
 
-declare
-export type Chai$ExpectStatic = {
+declare export type Chai$ExpectStatic = {
     fail(actual?: any, expected?: any, message?: string, operator?: string): void
 } & Chai$AssertionStatic
 
 
-declare
-export type Chai$AssertStatic = {} & Chai$Assert
+declare export type Chai$AssertStatic = {} & Chai$Assert
 
 
-declare
-export interface Chai$AssertionStatic {
+declare export interface Chai$AssertionStatic {
     (target: any, message?: string): Chai$Assertion
 }
 
@@ -241,8 +238,7 @@ declare interface Chai$PropertyChange {
     (object: Object, prop: string, msg?: string): Chai$Assertion
 }
 
-declare
-export interface Chai$Assert {
+declare export interface Chai$Assert {
 
     /**
      * 
@@ -344,8 +340,7 @@ export interface Chai$Assert {
                         oneOf(inList: any, list: any[], msg?: string): void
 }
 
-declare
-export interface Chai$Config {
+declare export interface Chai$Config {
 
     /**
      * Default: false
@@ -363,16 +358,14 @@ export interface Chai$Config {
         truncateThreshold: number
 }
 
-declare
-export class AssertionError {
+declare export class AssertionError {
     constructor(message: string, _props?: any, ssf?: Function): this;
     name: string;
     message: string;
     showDiff: boolean;
     stack: string
 }
-declare
-var chai: Chai$ChaiStatic;
+declare var chai: Chai$ChaiStatic;
 declare module 'chai' {
     declare module.exports: typeof chai
 }

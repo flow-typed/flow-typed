@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IActionSheetService {
+declare export interface ngCordova$IActionSheetService {
     show(options: ngCordova$ShowOptions): ng.IPromise<number>,
         hide(): ng.IPromise<void >
 }
 
-declare
-export interface ngCordova$ShowOptions {
+declare export interface ngCordova$ShowOptions {
     title?: string,
         buttonLabels?: string[],
         addCancelButtonWithLabel?: string,

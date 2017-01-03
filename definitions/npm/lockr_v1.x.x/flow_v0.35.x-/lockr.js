@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Lockr: lockr.LockrStatic;
+declare var Lockr: lockr.LockrStatic;
 declare module 'lockr' {
     declare interface LockrStatic {
 

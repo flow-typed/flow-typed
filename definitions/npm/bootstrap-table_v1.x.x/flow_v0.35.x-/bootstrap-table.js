@@ -9,5 +9,4 @@
 declare interface JQuery {
     bootstrapTable(options?: any): JQuery
 }
-declare
-var bootstrapTable: JQueryStatic;
+declare var bootstrapTable: JQueryStatic;

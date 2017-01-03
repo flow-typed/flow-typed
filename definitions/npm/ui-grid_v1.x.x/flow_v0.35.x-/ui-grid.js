@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface uiGrid$IUiGridConstants {
+declare export interface uiGrid$IUiGridConstants {
     LOG_DEBUG_MESSAGES: boolean,
         LOG_WARN_MESSAGES: boolean,
         LOG_ERROR_MESSAGES: boolean,
@@ -111,11 +110,9 @@ export interface uiGrid$IUiGridConstants {
         }
 }
 
-declare
-export type uiGrid$IGridInstance = uiGrid$IGridInstanceOf<any>;
+declare export type uiGrid$IGridInstance = uiGrid$IGridInstanceOf<any>;
 
-declare
-export interface uiGrid$IGridInstanceOf<TEntity>{
+declare export interface uiGrid$IGridInstanceOf<TEntity>{
 
     /**
      * adds a row header column to the grid
@@ -574,41 +571,33 @@ export interface uiGrid$IGridInstanceOf<TEntity>{
     scrollDirection?: number
 }
 
-declare
-export interface uiGrid$IBuildColumnsOptions {
+declare export interface uiGrid$IBuildColumnsOptions {
     orderByColumnDefs?: boolean
 }
 
-declare
-export interface uiGrid$IStyleComputation {
+declare export interface uiGrid$IStyleComputation {
     ($scope: ng.IScope): string
 }
 
-declare
-export interface uiGrid$IColumnBuilder<TEntity>{
+declare export interface uiGrid$IColumnBuilder<TEntity>{
     (colDef: uiGrid$IColumnDefOf<TEntity>, col: uiGrid$IGridColumnOf<TEntity>, gridOptions: uiGrid$IGridOptionsOf<TEntity>): void
 }
 
-declare
-export interface uiGrid$IRowBuilder<TEntity>{
+declare export interface uiGrid$IRowBuilder<TEntity>{
     (row: uiGrid$IGridRowOf<TEntity>, gridOptions: uiGrid$IGridOptionsOf<TEntity>): void
 }
 
-declare
-export interface uiGrid$IRowProcessor<TEntity>{
+declare export interface uiGrid$IRowProcessor<TEntity>{
     (renderedRowsToProcess: Array<uiGrid$IGridRowOf<TEntity >> , columns: Array<uiGrid$IGridColumnOf<TEntity >> ): Array<uiGrid$IGridRowOf<TEntity >>
 }
 
-declare
-export interface uiGrid$IColumnProcessor<TEntity>{
+declare export interface uiGrid$IColumnProcessor<TEntity>{
     (renderedColumnsToProcess: Array<uiGrid$IGridColumnOf<TEntity >> , rows: Array<uiGrid$IGridRowOf<TEntity >> ): Array<uiGrid$IGridColumnOf<TEntity >>
 }
 
-declare
-export type uiGrid$IGridOptions = uiGrid$IGridOptionsOf<any>;
+declare export type uiGrid$IGridOptions = uiGrid$IGridOptionsOf<any>;
 
-declare
-export type uiGrid$IGridOptionsOf<TEntity>= {
+declare export type uiGrid$IGridOptionsOf<TEntity>= {
 
         /**
          * Default time in milliseconds to throttle aggregation calcuations, defaults to 500ms
@@ -983,8 +972,7 @@ export type uiGrid$IGridOptionsOf<TEntity>= {
     } & & & & & & & & & & & & & & & &
 
 
-    declare
-export interface uiGrid$IGridCoreApi<TEntity>{
+    declare export interface uiGrid$IGridCoreApi<TEntity>{
 
     /**
      * adds a row header column to the grid
@@ -1210,8 +1198,7 @@ export interface uiGrid$IGridCoreApi<TEntity>{
     }
 }
 
-declare
-export interface uiGrid$columnVisibilityChangedHandler<TEntity>{
+declare export interface uiGrid$columnVisibilityChangedHandler<TEntity>{
 
     /**
      * Column visibility changed event handler
@@ -1220,8 +1207,7 @@ export interface uiGrid$columnVisibilityChangedHandler<TEntity>{
     (column: uiGrid$IGridColumnOf<TEntity>): void
 }
 
-declare
-export interface uiGrid$canvasHeightChangedHandler {
+declare export interface uiGrid$canvasHeightChangedHandler {
 
     /**
      * Canvas height changed callback
@@ -1231,8 +1217,7 @@ export interface uiGrid$canvasHeightChangedHandler {
     (oldHeight: number, newHeight: number): void
 }
 
-declare
-export interface uiGrid$filterChangedHandler<TEntity>{
+declare export interface uiGrid$filterChangedHandler<TEntity>{
 
     /**
      * Filter changed event callback
@@ -1241,8 +1226,7 @@ export interface uiGrid$filterChangedHandler<TEntity>{
     (gridApi: uiGrid$IGridApiOf<TEntity>): void
 }
 
-declare
-export interface uiGrid$rowsRenderedHandler<TEntity>{
+declare export interface uiGrid$rowsRenderedHandler<TEntity>{
 
     /**
      * Rows rendered event callback
@@ -1251,8 +1235,7 @@ export interface uiGrid$rowsRenderedHandler<TEntity>{
     (gridApi: uiGrid$IGridApiOf<TEntity>): void
 }
 
-declare
-export interface uiGrid$rowsVisibleChangedHandler<TEntity>{
+declare export interface uiGrid$rowsVisibleChangedHandler<TEntity>{
 
     /**
      * Rows visible changed event callback
@@ -1261,8 +1244,7 @@ export interface uiGrid$rowsVisibleChangedHandler<TEntity>{
     (gridApi: uiGrid$IGridApiOf<TEntity>): void
 }
 
-declare
-export interface uiGrid$scrollBeginHandler {
+declare export interface uiGrid$scrollBeginHandler {
 
     /**
      * Scroll begin event callback
@@ -1271,8 +1253,7 @@ export interface uiGrid$scrollBeginHandler {
     (scrollEvent: JQueryMouseEventObject): void
 }
 
-declare
-export interface uiGrid$scrollEndHandler {
+declare export interface uiGrid$scrollEndHandler {
 
     /**
      * Scroll end event callback
@@ -1281,8 +1262,7 @@ export interface uiGrid$scrollEndHandler {
     (scrollEvent: JQueryMouseEventObject): void
 }
 
-declare
-export interface uiGrid$sortChangedHandler<TEntity>{
+declare export interface uiGrid$sortChangedHandler<TEntity>{
 
     /**
      * Sort change event callback
@@ -2615,8 +2595,7 @@ declare module 'treeView' {
 }
 
 
-declare
-export interface uiGrid$ISharedTreeConstants {
+declare export interface uiGrid$ISharedTreeConstants {
     rowHeaderColName: string,
         EXPANDED: string,
         COLLAPSED: string,
@@ -2629,16 +2608,13 @@ export interface uiGrid$ISharedTreeConstants {
         }
 }
 
-declare
-export interface uiGrid$IGridApiConstructor<TEntity>{
+declare export interface uiGrid$IGridApiConstructor<TEntity>{
     new(grid: uiGrid$IGridInstanceOf<TEntity>): uiGrid$IGridApiOf<TEntity >
 }
 
-declare
-export type uiGrid$IGridApi = uiGrid$IGridApiOf<any>;
+declare export type uiGrid$IGridApi = uiGrid$IGridApiOf<any>;
 
-declare
-export interface uiGrid$IGridApiOf<TEntity>{
+declare export interface uiGrid$IGridApiOf<TEntity>{
 
     /**
      * Registers a new event for the given feature. The event will get a .raise and .on prepended to it
@@ -2783,8 +2759,7 @@ export interface uiGrid$IGridApiOf<TEntity>{
     grid: uiGrid$IGridInstanceOf<TEntity >
 }
 
-declare
-export interface uiGrid$IGridRowConstructor<TEntity>{
+declare export interface uiGrid$IGridRowConstructor<TEntity>{
 
     /**
      * GridRow is the viewModel for one logical row on the grid.
@@ -2803,8 +2778,7 @@ export interface uiGrid$IGridRowConstructor<TEntity>{
 /**
  * Cell Nav related grid row
  */
-declare
-export interface uiGrid$IGridRow {
+declare export interface uiGrid$IGridRow {
 
     /**
      * Enable focus on a cell within this row. If set to false then no cells in this row can be focused
@@ -2814,8 +2788,7 @@ export interface uiGrid$IGridRow {
     allowCellFocus?: boolean
 }
 
-declare
-export type uiGrid$IGridRowOf<TEntity>= {
+declare export type uiGrid$IGridRowOf<TEntity>= {
 
         /**
          * A reference to an item in gridOptions.data[] 
@@ -2914,8 +2887,7 @@ export type uiGrid$IGridRowOf<TEntity>= {
     } & & & & &
 
 
-    declare
-export interface uiGrid$IGridColumnConstructor<TEntity>{
+    declare export interface uiGrid$IGridColumnConstructor<TEntity>{
 
     /**
      * Represents the viewModel for each column.
@@ -2930,11 +2902,9 @@ export interface uiGrid$IGridColumnConstructor<TEntity>{
         grid: uiGrid$IGridInstanceOf<TEntity>): uiGrid$IGridColumnOf<TEntity >
 }
 
-declare
-export type uiGrid$IGridColumn = uiGrid$IGridColumnOf<any>;
+declare export type uiGrid$IGridColumn = uiGrid$IGridColumnOf<any>;
 
-declare
-export interface uiGrid$IGridColumnOf<TEntity>{
+declare export interface uiGrid$IGridColumnOf<TEntity>{
 
     /**
      * Column definition 
@@ -3082,8 +3052,7 @@ export interface uiGrid$IGridColumnOf<TEntity>{
  * Column Definitions for cellNav feature, these are available to be set using the ui-grid
  * gridOptions.columnDefs
  */
-declare
-export interface uiGrid$IColumnDef {
+declare export interface uiGrid$IColumnDef {
 
     /**
      * Enable focus on a cell within this column.
@@ -3093,8 +3062,7 @@ export interface uiGrid$IColumnDef {
     allowCellFocus?: boolean
 }
 
-declare
-export type uiGrid$IColumnDefOf<TEntity>= {
+declare export type uiGrid$IColumnDefOf<TEntity>= {
 
         /**
          * defaults to false
@@ -3354,28 +3322,23 @@ export type uiGrid$IColumnDefOf<TEntity>= {
     } & & & & & & & &
 
 
-    declare
-export interface uiGrid$ICellClassGetter<TEntity>{
+    declare export interface uiGrid$ICellClassGetter<TEntity>{
     (grid?: uiGrid$IGridInstanceOf<TEntity>, gridRow?: uiGrid$IGridRowOf<TEntity>, gridCol?: uiGrid$IGridColumnOf<TEntity>, rowRenderIndex?: number, colRenderIndex?: number): string
 }
 
-declare
-export interface uiGrid$ICellTooltipGetter<TEntity>{
+declare export interface uiGrid$ICellTooltipGetter<TEntity>{
     (gridRow: uiGrid$IGridRowOf<TEntity>, gridCol: uiGrid$IGridColumnOf<TEntity>): string
 }
 
-declare
-export interface uiGrid$IHeaderTooltipGetter<TEntity>{
+declare export interface uiGrid$IHeaderTooltipGetter<TEntity>{
     (gridCol: uiGrid$IGridColumnOf<TEntity>): string
 }
 
-declare
-export interface uiGrid$IHeaderFooterCellClassGetter<TEntity>{
+declare export interface uiGrid$IHeaderFooterCellClassGetter<TEntity>{
     (grid: uiGrid$IGridInstanceOf<TEntity>, gridRow: uiGrid$IGridRowOf<TEntity>, gridCol: uiGrid$IGridColumnOf<TEntity>, rowRenderIndex: number, colRenderIndex: number): string
 }
 
-declare
-export interface uiGrid$IMenuItem {
+declare export interface uiGrid$IMenuItem {
 
     /**
      * controls the title that is displayed in the menu 
@@ -3413,15 +3376,13 @@ export interface uiGrid$IMenuItem {
         leaveOpen?: boolean
 }
 
-declare
-export interface uiGrid$ISortInfo {
+declare export interface uiGrid$ISortInfo {
     direction?: string,
         ignoreSort?: boolean,
         priority?: number
 }
 
-declare
-export interface uiGrid$IFilterOptions {
+declare export interface uiGrid$IFilterOptions {
 
     /**
      * condition defines how rows are chosen as matching the filter term.
@@ -3481,14 +3442,12 @@ export interface uiGrid$IFilterOptions {
         disableCancelFilterButton?: boolean
 }
 
-declare
-export interface uiGrid$ISelectOption {
+declare export interface uiGrid$ISelectOption {
     value: number | string,
         label: string
 }
 
-declare
-export interface uiGrid$IFilterFlags {
+declare export interface uiGrid$IFilterFlags {
     caseSensitive?: boolean
 }
 declare module 'angular-ui-grid' {

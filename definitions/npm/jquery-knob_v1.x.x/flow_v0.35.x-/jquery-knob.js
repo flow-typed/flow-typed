@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface JQueryKnob$JQueryKnobOptions {
+declare export interface JQueryKnob$JQueryKnobOptions {
 
     /**
      * min value | default=0

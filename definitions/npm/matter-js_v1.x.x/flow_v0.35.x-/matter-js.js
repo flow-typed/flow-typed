@@ -14,8 +14,7 @@ declare module 'matter-js' {
  * The `Matter.Axes` module contains methods for creating and manipulating sets of axes.
  * @class  Axes
  */
-declare
-export class Axes {
+declare export class Axes {
 
     /**
      * Creates a new set of axes from the given vertices.
@@ -54,8 +53,7 @@ declare type Matter$IChamferableBodyDefinition = {
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Bodies
 */
-declare
-export class Bodies {
+declare export class Bodies {
 
     /**
      * Creates a new rigid body model with a circle hull.
@@ -164,8 +162,7 @@ export class Bodies {
         minimumArea?: number): Matter$Body
 }
 
-declare
-export interface Matter$IBodyDefinition {
+declare export interface Matter$IBodyDefinition {
 
     /**
      * A `Number` specifying the angle of the body, in radians.
@@ -513,8 +510,7 @@ export interface Matter$IBodyDefinition {
         collisionFilter?: Matter$ICollisionFilter
 }
 
-declare
-export interface Matter$IBodyRenderOptions {
+declare export interface Matter$IBodyRenderOptions {
 
     /**
      * A flag that indicates if the body should be rendered.
@@ -551,8 +547,7 @@ export interface Matter$IBodyRenderOptions {
         opacity?: number
 }
 
-declare
-export interface Matter$IBodyRenderOptionsSprite {
+declare export interface Matter$IBodyRenderOptionsSprite {
 
     /**
      * An `String` that defines the path to the image to use as the sprite texture, if any.
@@ -587,8 +582,7 @@ Factories for commonly used body configurations (such as rectangles, circles and
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Body
 */
-declare
-export class Body {
+declare export class Body {
 
     /**
      * Applies a force to a body from a given world-space position, including resulting torque.
@@ -1105,8 +1099,7 @@ export class Body {
     collisionFilter: Matter$ICollisionFilter
 }
 
-declare
-export interface Matter$IBound {
+declare export interface Matter$IBound {
     min: {
             x: number,
             y: number
@@ -1122,8 +1115,7 @@ export interface Matter$IBound {
  * The `Matter.Bounds` module contains methods for creating and manipulating axis-aligned bounding boxes (AABB).
  * @class  Bounds
  */
-declare
-export class Bounds {
+declare export class Bounds {
 
     /**
      * Creates a new axis-aligned bounding box (AABB) for the given vertices.
@@ -1180,8 +1172,7 @@ export class Bounds {
     shift(bounds: Matter$Bounds, position: Matter$Vector): void
 }
 
-declare
-export interface Matter$ICompositeDefinition {
+declare export interface Matter$ICompositeDefinition {
 
     /**
      * An array of `Body` that are _direct_ children of this composite.
@@ -1265,8 +1256,7 @@ Note that the `Matter.World` object is also a type of `Matter.Composite` and as 
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Composite
 */
-declare
-export class Composite {
+declare export class Composite {
 
     /**
      * Generic add function. Adds one or many body(s), constraint(s) or a composite(s) to the given composite.
@@ -1511,8 +1501,7 @@ export class Composite {
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Composites
 */
-declare
-export class Composites {
+declare export class Composites {
 
     /**
      * Creates a composite with simple car setup of bodies and constraints.
@@ -1656,8 +1645,7 @@ export class Composites {
         callback: Function): Matter$Composite
 }
 
-declare
-export interface Matter$IConstraintDefinition {
+declare export interface Matter$IConstraintDefinition {
 
     /**
      * The first possible `Body` that this constraint is attached to.
@@ -1740,8 +1728,7 @@ export interface Matter$IConstraintDefinition {
         type?: string
 }
 
-declare
-export interface Matter$IConstraintRenderDefinition {
+declare export interface Matter$IConstraintRenderDefinition {
 
     /**
      * A `Number` that defines the line width to use when rendering the constraint outline.
@@ -1779,8 +1766,7 @@ The stiffness of constraints can be modified to create springs or elastic.
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Constraint
 */
-declare
-export class Constraint {
+declare export class Constraint {
 
     /**
      * Creates a new constraint.
@@ -1873,8 +1859,7 @@ export class Constraint {
     type: string
 }
 
-declare
-export interface Matter$IEngineDefinition {
+declare export interface Matter$IEngineDefinition {
 
     /**
      * An integer `Number` that specifies the number of position iterations to perform each update.
@@ -1937,8 +1922,7 @@ export interface Matter$IEngineDefinition {
         world?: Matter$World
 }
 
-declare
-export interface Matter$IEngineTimingOptions {
+declare export interface Matter$IEngineTimingOptions {
 
     /**
      * A `Number` that specifies the global scaling factor of time for all bodies.
@@ -1970,8 +1954,7 @@ See `Matter.Runner` for an optional game loop utility.
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Engine
 */
-declare
-export class Engine {
+declare export class Engine {
 
     /**
      * Clears the engine including the world, pairs and broadphase.
@@ -2120,16 +2103,14 @@ export class Engine {
     world: Matter$World
 }
 
-declare
-export interface Matter$IGridDefinition {}
+declare export interface Matter$IGridDefinition {}
 
 
 /**
  * The `Matter.Grid` module contains methods for creating and manipulating collision broadphase grid structures.
  * @class  Grid
  */
-declare
-export class Grid {
+declare export class Grid {
 
     /**
      * Creates a new grid.
@@ -2161,8 +2142,7 @@ export class Grid {
     clear(grid: Matter$Grid): void
 }
 
-declare
-export interface Matter$IMouseConstraintDefinition {
+declare export interface Matter$IMouseConstraintDefinition {
 
     /**
      * The `Constraint` object that is used to move the body during interaction.
@@ -2213,8 +2193,7 @@ export interface Matter$IMouseConstraintDefinition {
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  MouseConstraint
 */
-declare
-export class MouseConstraint {
+declare export class MouseConstraint {
 
     /**
      * Creates a new mouse constraint.
@@ -2275,8 +2254,7 @@ export class MouseConstraint {
  * The `Matter.Pairs` module contains methods for creating and manipulating collision pair sets.
  * @class  Pairs
  */
-declare
-export class Pairs {
+declare export class Pairs {
 
     /**
      * Clears the given pairs structure.
@@ -2287,8 +2265,7 @@ export class Pairs {
     clear(pairs: any): any
 }
 
-declare
-export interface Matter$IPair {
+declare export interface Matter$IPair {
     id: number,
         bodyA: Matter$Body,
         bodyB: Matter$Body,
@@ -2312,8 +2289,7 @@ export interface Matter$IPair {
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Query
 */
-declare
-export class Query {
+declare export class Query {
 
     /**
      * Casts a ray segment against a set of bodies and returns all collisions, ray width is optional. Intersection points are not provided.
@@ -2353,8 +2329,7 @@ export class Query {
     point(bodies: Array<Matter$Body>, point: Matter$Vector): Array<Matter$Body >
 }
 
-declare
-export interface Matter$IRenderDefinition {
+declare export interface Matter$IRenderDefinition {
 
     /**
      * A back-reference to the `Matter.Render` module.
@@ -2419,8 +2394,7 @@ export interface Matter$IRenderDefinition {
         textures?: any
 }
 
-declare
-export interface Matter$IRendererOptions {
+declare export interface Matter$IRendererOptions {
 
     /**
      * The target width in pixels of the `render.canvas` to be created.
@@ -2461,8 +2435,7 @@ export interface Matter$IRendererOptions {
 It includes a number of drawing options including wireframe, vector with support for sprites and viewports.
  * @class  Render
 */
-declare
-export class Render {
+declare export class Render {
 
     /**
      * Creates a new renderer. The options parameter is an object that specifies any properties you wish to override the defaults.
@@ -2560,8 +2533,7 @@ export class Render {
     textures: any
 }
 
-declare
-export interface Matter$IRunnerOptions {
+declare export interface Matter$IRunnerOptions {
 
     /**
      * A `Boolean` that specifies if the runner should use a fixed timestep (otherwise it is variable).
@@ -2596,8 +2568,7 @@ Note that the method `Engine.run` is an alias for `Runner.run`.
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Runner
 */
-declare
-export class Runner {
+declare export class Runner {
 
     /**
      * Creates a new Runner. The options parameter is an object that specifies any properties you wish to override the defaults.
@@ -2682,8 +2653,7 @@ export class Runner {
  * The `Matter.Sleeping` module contains methods to manage the sleeping state of bodies.
  * @class  Sleeping
  */
-declare
-export class Sleeping {
+declare export class Sleeping {
     set(body: Matter$Body, isSleeping: boolean): void
 }
 
@@ -2694,8 +2664,7 @@ export class Sleeping {
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Svg
 */
-declare
-export class Svg {
+declare export class Svg {
 
     /**
      * Converts an SVG path into an array of vector points.
@@ -2719,8 +2688,7 @@ A `Matter.Vector` object is of the form `{ x: 0, y: 0 }`.
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Vector
 */
-declare
-export class Vector {
+declare export class Vector {
     x: number;
     y: number;
 
@@ -2897,8 +2865,7 @@ A `Matter.Body` maintains a set of vertices to represent the shape of the object
 See the included usage [examples](https://github.com/liabru/matter-js/tree/master/examples).
  * @class  Vertices
 */
-declare
-export class Vertices {
+declare export class Vertices {
 
     /**
      * Returns the average (mean) of the set of vertices.
@@ -3062,8 +3029,7 @@ See the included usage [examples](https://github.com/liabru/matter-js/tree/maste
  * @class  World
  * @extends  Composite
 */
-declare
-export class World mixins Composite {
+declare export class World mixins Composite {
 
     /**
      * Add objects or arrays of objects of types: Body, Constraint, Composite
@@ -3132,21 +3098,18 @@ export class World mixins Composite {
     bounds: Matter$Bounds
 }
 
-declare
-export interface Matter$ICollisionFilter {
+declare export interface Matter$ICollisionFilter {
     category: number,
         mask: number,
         group: number
 }
 
-declare
-export interface Matter$IMousePoint {
+declare export interface Matter$IMousePoint {
     x: number,
         y: number
 }
 
-declare
-export class Mouse {
+declare export class Mouse {
     create(element: HTMLElement): Matter$Mouse;
     setElement(mouse: Matter$Mouse, element: HTMLElement): void;
     clearSourceEvents(mouse: Matter$Mouse): void;
@@ -3164,8 +3127,7 @@ export class Mouse {
     pixelRatio: number
 }
 
-declare
-export interface Matter$IEvent<T>{
+declare export interface Matter$IEvent<T>{
 
     /**
      * The name of the event
@@ -3178,8 +3140,7 @@ export interface Matter$IEvent<T>{
     source: T
 }
 
-declare
-export type Matter$IEventComposite<T>= {
+declare export type Matter$IEventComposite<T>= {
 
     /**
      * EventObjects (may be a single body, constraint, composite or a mixed array of these)
@@ -3188,8 +3149,7 @@ export type Matter$IEventComposite<T>= {
 } & Matter$IEvent
 
 
-declare
-export type Matter$IEventTimestamped<T>= {
+declare export type Matter$IEventTimestamped<T>= {
 
     /**
      * The engine.timing.timestamp of the event
@@ -3198,8 +3158,7 @@ export type Matter$IEventTimestamped<T>= {
 } & Matter$IEvent
 
 
-declare
-export type Matter$IEventCollision<T>= {
+declare export type Matter$IEventCollision<T>= {
 
     /**
      * The collision pair
@@ -3208,8 +3167,7 @@ export type Matter$IEventCollision<T>= {
 } & Matter$IEventTimestamped
 
 
-declare
-export class Events {
+declare export class Events {
 
     /**
      * Fired when a body starts sleeping (where `this` is the body).

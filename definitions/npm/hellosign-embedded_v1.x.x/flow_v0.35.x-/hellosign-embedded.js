@@ -183,5 +183,4 @@ declare module 'HelloSign' {
             close(): void
     }
 }
-declare
-var HelloSign: HelloSign.HelloSignStatic;
+declare var HelloSign: HelloSign.HelloSignStatic;

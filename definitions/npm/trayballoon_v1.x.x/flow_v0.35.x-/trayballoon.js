@@ -13,7 +13,6 @@ declare interface TrayballoonOptions {
         timeout?: number,
         wait?: boolean
 }
-declare
-function trayballoonFn(opts: TrayballoonOptions, fn: Function): voiddeclare module 'trayballoon' {
+declare function trayballoonFn(opts: TrayballoonOptions, fn: Function): voiddeclare module 'trayballoon' {
     declare module.exports: typeof trayballoonFn
 }

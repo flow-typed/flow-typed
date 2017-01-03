@@ -196,8 +196,7 @@ declare interface Chai$Assert {
         notify(fn: Function): PromisesAPlus.Thenable<void >
 }
 
-declare
-export interface Chai$PromisedAssert {
+declare export interface Chai$PromisedAssert {
     fail(
             actual?: any,
             expected?: any,

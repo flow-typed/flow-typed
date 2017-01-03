@@ -35,5 +35,4 @@ declare interface routie$RoutieStatic {
 declare interface routie$RouteOptions {
     silent?: boolean
 }
-declare
-var routie: routie$Routie;
+declare var routie: routie$Routie;

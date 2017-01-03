@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$RxNode: {
+declare var npm$namespace$RxNode: {
     toEventEmitter: typeof RxNode$toEventEmitter,
     fromStream: typeof RxNode$fromStream,
     fromReadableStream: typeof RxNode$fromReadableStream,
@@ -17,8 +16,7 @@ var npm$namespace$RxNode: {
     fromTransformStream: typeof RxNode$fromTransformStream,
     writeToStream: typeof RxNode$writeToStream,
 }
-declare
-export type RxNode$PublishableEventEmitter = {
+declare export type RxNode$PublishableEventEmitter = {
     publish(): void
 }
 
@@ -31,8 +29,7 @@ You must call publish in order to invoke the subscription on the Observable sequ
  * @param  The event name to emit onNext calls.
  * @returns  An EventEmitter which emits the given eventName for each onNext call in addition to 'error' and 'end' events.
 */
-declare
-function RxNode$toEventEmitter<T>(
+declare function RxNode$toEventEmitter<T>(
     observable: Rx.Observable<T>,
     eventName: string): RxNode$PublishableEventEmitter
 
@@ -44,8 +41,7 @@ function RxNode$toEventEmitter<T>(
  * @param  Event that notifies about incoming data. ("data" by default)
  * @returns  An observable sequence which fires on each 'data' event as well as handling 'error' and finish events like `end` or `finish`.
  */
-declare
-function RxNode$fromStream<T>(
+declare function RxNode$fromStream<T>(
         stream: NodeJS.ReadableStream,
         finishEventName?: string,
         dataEventName?: string): Rx.Observable<T >
@@ -57,8 +53,7 @@ function RxNode$fromStream<T>(
      * @param  Event that notifies about incoming data. ("data" by default)
      * @returns  An observable sequence which fires on each 'data' event as well as handling 'error' and 'end' events.
      */
-    declare
-function RxNode$fromReadableStream<T>(stream: NodeJS.ReadableStream, dataEventName?: string): Rx.Observable<T >
+    declare function RxNode$fromReadableStream<T>(stream: NodeJS.ReadableStream, dataEventName?: string): Rx.Observable<T >
 
 
     /**
@@ -66,8 +61,7 @@ function RxNode$fromReadableStream<T>(stream: NodeJS.ReadableStream, dataEventNa
      * @param  A stream to convert to a observable sequence.
      * @returns  An observable sequence which fires on each 'data' event as well as handling 'error' and 'end' events.
      */
-    declare
-function RxNode$fromReadLineStream<T>(stream: NodeJS.ReadableStream): Rx.Observable<T >
+    declare function RxNode$fromReadLineStream<T>(stream: NodeJS.ReadableStream): Rx.Observable<T >
 
 
     /**
@@ -75,8 +69,7 @@ function RxNode$fromReadLineStream<T>(stream: NodeJS.ReadableStream): Rx.Observa
      * @param  A stream to convert to a observable sequence.
      * @returns  An observable sequence which fires on each 'data' event as well as handling 'error' and 'finish' events.
      */
-    declare
-function RxNode$fromWritableStream<T>(stream: NodeJS.WritableStream): Rx.Observable<T >
+    declare function RxNode$fromWritableStream<T>(stream: NodeJS.WritableStream): Rx.Observable<T >
 
 
     /**
@@ -85,8 +78,7 @@ function RxNode$fromWritableStream<T>(stream: NodeJS.WritableStream): Rx.Observa
      * @param  Event that notifies about incoming data. ("data" by default)
      * @returns  An observable sequence which fires on each 'data' event as well as handling 'error' and 'finish' events.
      */
-    declare
-function RxNode$fromTransformStream<T>(stream: NodeJS.ReadWriteStream, dataEventName?: string): Rx.Observable<T >
+    declare function RxNode$fromTransformStream<T>(stream: NodeJS.ReadWriteStream, dataEventName?: string): Rx.Observable<T >
 
 
     /**
@@ -96,8 +88,7 @@ function RxNode$fromTransformStream<T>(stream: NodeJS.ReadWriteStream, dataEvent
      * @param  The encoding of the item to write.
      * @returns  The subscription handle.
      */
-    declare
-function RxNode$writeToStream<T>(
+    declare function RxNode$writeToStream<T>(
     observable: Rx.Observable<T>,
     stream: NodeJS.WritableStream,
     encoding: string): Rx.Disposabledeclare module 'rx-node' {

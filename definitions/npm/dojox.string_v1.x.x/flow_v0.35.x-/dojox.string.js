@@ -36,8 +36,7 @@ declare interface string_$Builder {
     (str?: String): void
 }
 
-declare
-var length: number;
+declare var length: number;
 
 
 /**

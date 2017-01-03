@@ -29,8 +29,7 @@ declare interface ReactDropzone$DropzoneProps {
         minSize?: number
 }
 
-declare
-export class Dropzone mixins React.Component<ReactDropzone$DropzoneProps, {}>{}
+declare export class Dropzone mixins React.Component<ReactDropzone$DropzoneProps, {}>{}
 declare module 'react-dropzone' {
     declare var Dropzone: typeof undefined;
     declare module.exports: typeof Dropzone

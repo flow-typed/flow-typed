@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface JQueryTinyCarousel$JQueryTinyCarouselOptions {
+declare export interface JQueryTinyCarousel$JQueryTinyCarouselOptions {
 
     /**
      * Start block of the carousel. (default: 1)

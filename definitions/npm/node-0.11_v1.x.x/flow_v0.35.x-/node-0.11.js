@@ -6,30 +6,18 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var process: NodeJS$Process;
-declare
-var global: any;
-declare
-var ___filename: string;
-declare
-var ___dirname: string;
-declare
-function setTimeout(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS$Timerdeclare
-function clearTimeout(timeoutId: NodeJS$Timer): voiddeclare
-function setInterval(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS$Timerdeclare
-function clearInterval(intervalId: NodeJS$Timer): voiddeclare
-function setImmediate(callback: (...args: any[]) => void, ...args: any[]): anydeclare
-function clearImmediate(immediateId: any): voiddeclare
-var require: {
+declare var process: NodeJS$Process;
+declare var global: any;
+declare var ___filename: string;
+declare var ___dirname: string;
+declare function setTimeout(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS$Timerdeclare function clearTimeout(timeoutId: NodeJS$Timer): voiddeclare function setInterval(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS$Timerdeclare function clearInterval(intervalId: NodeJS$Timer): voiddeclare function setImmediate(callback: (...args: any[]) => void, ...args: any[]): anydeclare function clearImmediate(immediateId: any): voiddeclare var require: {
     (id: string): any,
     resolve(id: string): string,
     cache: any,
     extensions: any,
     main: any
 };
-declare
-var module: {
+declare var module: {
     exports: any,
     require(id: string): any,
     id: string,
@@ -38,10 +26,8 @@ var module: {
     parent: any,
     children: any[]
 };
-declare
-var exports: any;
-declare
-var SlowBuffer: {
+declare var exports: any;
+declare var SlowBuffer: {
     new(str: string, encoding?: string): Buffer,
     new(size: number): Buffer,
     new(size: Uint8Array): Buffer,
@@ -52,8 +38,7 @@ var SlowBuffer: {
     concat(list: Buffer[], totalLength?: number): Buffer
 };
 declare type Buffer = {} & NodeBuffer
-declare
-var Buffer: {
+declare var Buffer: {
     new(str: string, encoding?: string): Buffer,
     new(size: number): Buffer,
     new(size: Uint8Array): Buffer,
@@ -63,8 +48,7 @@ var Buffer: {
     byteLength(string: string, encoding?: string): number,
     concat(list: Buffer[], totalLength?: number): Buffer
 };
-declare
-export type NodeJS$ErrnoException = {
+declare export type NodeJS$ErrnoException = {
     errno?: number,
     code?: string,
     path?: string,
@@ -73,8 +57,7 @@ export type NodeJS$ErrnoException = {
 } & Error
 
 
-declare
-export interface NodeJS$EventEmitter {
+declare export interface NodeJS$EventEmitter {
     addListener(event: string, listener: Function): this,
         on(event: string, listener: Function): this,
         once(event: string, listener: Function): this,
@@ -85,8 +68,7 @@ export interface NodeJS$EventEmitter {
         emit(event: string, ...args: any[]): boolean
 }
 
-declare
-export type NodeJS$ReadableStream = {
+declare export type NodeJS$ReadableStream = {
     readable: boolean,
     read(size?: number): any,
     setEncoding(encoding: string): void,
@@ -102,8 +84,7 @@ export type NodeJS$ReadableStream = {
 } & NodeJS$EventEmitter
 
 
-declare
-export type NodeJS$WritableStream = {
+declare export type NodeJS$WritableStream = {
     writable: boolean,
     write(buffer: Buffer, cb?: Function): boolean,
     write(str: string, cb?: Function): boolean,
@@ -115,12 +96,10 @@ export type NodeJS$WritableStream = {
 } & NodeJS$EventEmitter
 
 
-declare
-export type NodeJS$ReadWriteStream = {} & NodeJS$ReadableStream & NodeJS$WritableStream
+declare export type NodeJS$ReadWriteStream = {} & NodeJS$ReadableStream & NodeJS$WritableStream
 
 
-declare
-export type NodeJS$Process = {
+declare export type NodeJS$Process = {
     stdout: NodeJS$WritableStream,
     stderr: NodeJS$WritableStream,
     stdin: NodeJS$ReadableStream,
@@ -191,8 +170,7 @@ export type NodeJS$Process = {
 } & NodeJS$EventEmitter
 
 
-declare
-export interface NodeJS$Timer {
+declare export interface NodeJS$Timer {
     ref(): void,
         unref(): void
 }

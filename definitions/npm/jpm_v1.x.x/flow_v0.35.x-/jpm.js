@@ -775,8 +775,7 @@ declare module 'sdk/windows' {
 
 }
 
-declare
-var npm$namespace$FFAddonSDK: {
+declare var npm$namespace$FFAddonSDK: {
     Frame: typeof FFAddonSDK$Frame,
     ToggleButton: typeof FFAddonSDK$ToggleButton,
     ActionButton: typeof FFAddonSDK$ActionButton,
@@ -833,8 +832,7 @@ closes a browser window, if that window has a toolbar containing this frame.
 After receiving this message, you ahould not attempt to communicate with the frame scripts
  * @constructor  
 */
-declare
-export function FFAddonSDK$Frame(
+declare export function FFAddonSDK$Frame(
     options: {
         url: string,
         name?: string,
@@ -870,8 +868,7 @@ declare interface FFAddonSDK$ToggleButtonState {
       it appears underneath the button as a legend
  * @param options .icon One or more icons for the button
 */
-declare
-export function FFAddonSDK$ToggleButton(
+declare export function FFAddonSDK$ToggleButton(
     options: {
         id: string,
         label: string,
@@ -904,8 +901,7 @@ declare interface FFAddonSDK$ActionButtonState {
       it appears underneath the button as a legend
  * @param options .icon One or more icons for the button
 */
-declare
-export function FFAddonSDK$ActionButton(
+declare export function FFAddonSDK$ActionButton(
     options: {
         id: string,
         label: string,

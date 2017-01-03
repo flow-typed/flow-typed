@@ -362,7 +362,5 @@ declare interface ___Modernizr$ModernizrAPI {
             testnames?: string[]): boolean
 }
 
-declare
-export type ___Modernizr$ModernizrStatic = {} & ___Modernizr$ModernizrAPI & ___Modernizr$FeatureDetects
-declare
-var Modernizr: ___Modernizr$ModernizrStatic;
+declare export type ___Modernizr$ModernizrStatic = {} & ___Modernizr$ModernizrAPI & ___Modernizr$FeatureDetects
+declare var Modernizr: ___Modernizr$ModernizrStatic;

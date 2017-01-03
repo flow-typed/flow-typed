@@ -527,92 +527,77 @@ declare class Chart mixins IChart {
     toImage(image: HTMLImageElement, format: string, quality: number): void
 }
 
-declare
-var Line: {
+declare var Line: {
     prototype: Tee$ILine,
     new(values?: number[]): Tee$ILine
 };
 
-declare
-var PointXY: {
+declare var PointXY: {
     prototype: Tee$ICustomSeries,
     new(values?: number[]): Tee$ICustomSeries
 };
 
-declare
-var Area: {
+declare var Area: {
     prototype: Tee$IArea,
     new(values?: number[]): Tee$IArea
 };
 
-declare
-var HorizArea: {
+declare var HorizArea: {
     prototype: Tee$IArea,
     new(values?: number[]): Tee$IArea
 };
 
-declare
-var Bar: {
+declare var Bar: {
     prototype: Tee$ICustomBar,
     new(values?: number[]): Tee$ICustomBar
 };
 
-declare
-var HorizBar: {
+declare var HorizBar: {
     prototype: Tee$ICustomBar,
     new(values?: number[]): Tee$ICustomBar
 };
 
-declare
-var Pie: {
+declare var Pie: {
     prototype: Tee$IPie,
     new(values?: number[]): Tee$IPie
 };
 
-declare
-var Donut: {
+declare var Donut: {
     prototype: Tee$IPie,
     new(values?: number[]): Tee$IPie
 };
 
-declare
-var Bubble: {
+declare var Bubble: {
     prototype: Tee$IBubble,
     new(values?: number[]): Tee$IBubble
 };
 
-declare
-var Gantt: {
+declare var Gantt: {
     prototype: Tee$IGantt,
     new(values?: number[]): Tee$IGantt
 };
 
-declare
-var Volume: {
+declare var Volume: {
     prototype: Tee$ICustomBar,
     new(values?: number[]): Tee$ICustomBar
 };
 
-declare
-var Candle: {
+declare var Candle: {
     prototype: Tee$ICandle,
     new(values?: number[]): Tee$ICandle
 };
 
-declare
-var CursorTool: {
+declare var CursorTool: {
     prototype: Tee$ICursorTool,
     new(chart?: Tee$Chart): Tee$ICursorTool
 };
 
-declare
-var DragTool: {
+declare var DragTool: {
     prototype: Tee$IDragTool,
     new(chart?: Tee$Chart): Tee$IDragTool
 };
 
-declare
-var ToolTip: {
+declare var ToolTip: {
     prototype: Tee$IToolTip,
     new(chart?: Tee$Chart): Tee$IToolTip
 };

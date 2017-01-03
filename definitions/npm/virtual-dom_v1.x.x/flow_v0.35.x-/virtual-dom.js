@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$VirtualDOM: {
+declare var npm$namespace$VirtualDOM: {
     create: typeof VirtualDOM$create,
     h: typeof VirtualDOM$h,
     diff: typeof VirtualDOM$diff,
@@ -106,28 +105,24 @@ declare type VirtualDOM$VChild = VirtualDOM$VTree[] | VirtualDOM$VTree | string[
  * create() calls either document.createElement() or document.createElementNS(),
  * for which the common denominator is Element (not HTMLElement).
  */
-declare
-function VirtualDOM$create(vnode: VirtualDOM$VText, opts?: {
+declare function VirtualDOM$create(vnode: VirtualDOM$VText, opts?: {
     document?: Document,
     warn?: boolean
 }): Text
 
-declare
-function VirtualDOM$h(
+declare function VirtualDOM$h(
     tagName: string,
     properties: VirtualDOM$createProperties,
     children: string | VirtualDOM$VChild[]): VirtualDOM$VNode
 
-declare
-function VirtualDOM$diff(left: VirtualDOM$VTree, right: VirtualDOM$VTree): VirtualDOM$VPatch[]
+declare function VirtualDOM$diff(left: VirtualDOM$VTree, right: VirtualDOM$VTree): VirtualDOM$VPatch[]
 
 
 /**
  * patch() usually just returns rootNode after doing stuff to it, so we want
  * to preserve that type (though it will usually be just Element).
  */
-declare
-function VirtualDOM$patch<T>(rootNode: T, patches: VirtualDOM$VPatch[], renderOptions?: any): Tdeclare module 'virtual-dom/h' {
+declare function VirtualDOM$patch<T>(rootNode: T, patches: VirtualDOM$VPatch[], renderOptions?: any): Tdeclare module 'virtual-dom/h' {
     declare module.exports: typeof h
 }
 declare module 'virtual-dom/create-element' {

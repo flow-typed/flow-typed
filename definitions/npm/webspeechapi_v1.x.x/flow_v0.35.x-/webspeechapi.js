@@ -31,10 +31,8 @@ declare interface SpeechRecognitionStatic {
     prototype: SpeechRecognition,
         new(): SpeechRecognition
 }
-declare
-var SpeechRecognition: SpeechRecognitionStatic;
-declare
-var webkitSpeechRecognition: SpeechRecognitionStatic;
+declare var SpeechRecognition: SpeechRecognitionStatic;
+declare var webkitSpeechRecognition: SpeechRecognitionStatic;
 declare type SpeechRecognitionError = {
     error: string,
     message: string
@@ -66,10 +64,8 @@ declare interface SpeechGrammarStatic {
     prototype: SpeechGrammar,
         new(): SpeechGrammar
 }
-declare
-var SpeechGrammar: SpeechGrammarStatic;
-declare
-var webkitSpeechGrammar: SpeechGrammarStatic;
+declare var SpeechGrammar: SpeechGrammarStatic;
+declare var webkitSpeechGrammar: SpeechGrammarStatic;
 declare interface SpeechGrammarList {
     length: number,
         item(index: number): SpeechGrammar, [index: number]: SpeechGrammar,
@@ -80,10 +76,8 @@ declare interface SpeechGrammarListStatic {
     prototype: SpeechGrammarList,
         new(): SpeechGrammarList
 }
-declare
-var SpeechGrammarList: SpeechGrammarListStatic;
-declare
-var webkitSpeechGrammarList: SpeechGrammarListStatic;
+declare var SpeechGrammarList: SpeechGrammarListStatic;
+declare var webkitSpeechGrammarList: SpeechGrammarListStatic;
 declare type SpeechSynthesis = {
     pending: boolean,
     speaking: boolean,
@@ -99,8 +93,7 @@ declare interface SpeechSynthesisGetter {
     speechSynthesis: SpeechSynthesis
 }
 declare type Window = {} & SpeechSynthesisGetter
-declare
-var speechSynthesis: SpeechSynthesis;
+declare var speechSynthesis: SpeechSynthesis;
 declare type SpeechSynthesisUtterance = {
     text: string,
     lang: string,
@@ -121,8 +114,7 @@ declare interface SpeechSynthesisUtteranceStatic {
         new(): SpeechSynthesisUtterance,
         new(text: string): SpeechSynthesisUtterance
 }
-declare
-var SpeechSynthesisUtterance: SpeechSynthesisUtteranceStatic;
+declare var SpeechSynthesisUtterance: SpeechSynthesisUtteranceStatic;
 declare type SpeechSynthesisEvent = {
     utterance: SpeechSynthesisUtterance,
     charIndex: number,

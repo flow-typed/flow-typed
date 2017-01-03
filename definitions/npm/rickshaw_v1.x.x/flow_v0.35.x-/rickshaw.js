@@ -6,5 +6,4 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Rickshaw: any;
+declare var Rickshaw: any;

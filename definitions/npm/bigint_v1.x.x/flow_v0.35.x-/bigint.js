@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$BigInt: {
+declare var npm$namespace$BigInt: {
     setRandom: typeof BigInt$setRandom,
     add: typeof BigInt$add,
     addInt: typeof BigInt$addInt,
@@ -68,12 +67,10 @@ var npm$namespace$BigInt: {
     squareMod_: typeof BigInt$squareMod_,
     subShift_: typeof BigInt$subShift_,
 }
-declare
-export type BigInt$BigInt = {} & Array
+declare export type BigInt$BigInt = {} & Array
 
 
-declare
-export interface BigInt$IRandom {
+declare export interface BigInt$IRandom {
     (): number
 }
 
@@ -82,8 +79,7 @@ export interface BigInt$IRandom {
  * Sets a random number generator.
  * @param  function that returns random number.
  */
-declare
-export function BigInt$setRandom(random: BigInt$IRandom): void
+declare export function BigInt$setRandom(random: BigInt$IRandom): void
 
 
 /**
@@ -92,8 +88,7 @@ export function BigInt$setRandom(random: BigInt$IRandom): void
  * @param  The BigInt addend.
  * @return  A sum as BigInt.
  */
-declare
-export function BigInt$add(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
+declare export function BigInt$add(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
 
 
 /**
@@ -102,8 +97,7 @@ export function BigInt$add(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
  * @param  The number addend.
  * @return  A sum as BigInt.
  */
-declare
-export function BigInt$addInt(x: BigInt$BigInt, n: number): BigInt$BigInt
+declare export function BigInt$addInt(x: BigInt$BigInt, n: number): BigInt$BigInt
 
 
 /**
@@ -112,8 +106,7 @@ export function BigInt$addInt(x: BigInt$BigInt, n: number): BigInt$BigInt
  * @param  The base as radix number.
  * @return  A string representation of given BigInt.
  */
-declare
-export function BigInt$bigInt2str(x: BigInt$BigInt, base: number): string
+declare export function BigInt$bigInt2str(x: BigInt$BigInt, base: number): string
 
 
 /**
@@ -121,8 +114,7 @@ export function BigInt$bigInt2str(x: BigInt$BigInt, base: number): string
  * @param  The BigInt to process.
  * @return  A size in BigInt as number.
  */
-declare
-export function BigInt$bitSize(x: BigInt$BigInt): number
+declare export function BigInt$bitSize(x: BigInt$BigInt): number
 
 
 /**
@@ -130,8 +122,7 @@ export function BigInt$bitSize(x: BigInt$BigInt): number
  * @param  Source BigInt to be copied.
  * @return  A copy of this object.
  */
-declare
-export function BigInt$dup(x: BigInt$BigInt): BigInt$BigInt
+declare export function BigInt$dup(x: BigInt$BigInt): BigInt$BigInt
 
 
 /**
@@ -140,8 +131,7 @@ export function BigInt$dup(x: BigInt$BigInt): BigInt$BigInt
  * @param  BigInt to be compared.
  * @return  true if the objects are considered equal, false if they are not.
  */
-declare
-export function BigInt$equals(x: BigInt$BigInt, y: BigInt$BigInt): boolean
+declare export function BigInt$equals(x: BigInt$BigInt, y: BigInt$BigInt): boolean
 
 
 /**
@@ -150,8 +140,7 @@ export function BigInt$equals(x: BigInt$BigInt, y: BigInt$BigInt): boolean
  * @param  BigInt to be compared.
  * @return  true if the objects are considered equal, false if not.
  */
-declare
-export function BigInt$equalsInt(x: BigInt$BigInt, y: number): boolean
+declare export function BigInt$equalsInt(x: BigInt$BigInt, y: number): boolean
 
 
 /**
@@ -160,8 +149,7 @@ export function BigInt$equalsInt(x: BigInt$BigInt, y: number): boolean
  * @param  The minimal number of elements.
  * @return  A copy of given BigInt.
  */
-declare
-export function BigInt$expand(value: BigInt$BigInt, n: number): BigInt$BigInt
+declare export function BigInt$expand(value: BigInt$BigInt, n: number): BigInt$BigInt
 
 
 /**
@@ -169,8 +157,7 @@ export function BigInt$expand(value: BigInt$BigInt, n: number): BigInt$BigInt
  * @param  Upper limit of search.
  * @return  The found primes as Array.
  */
-declare
-export function BigInt$findPrimes(n: number): number[]
+declare export function BigInt$findPrimes(n: number): number[]
 
 
 /**
@@ -179,8 +166,7 @@ export function BigInt$findPrimes(n: number): number[]
  * @param  The BigInt to process.
  * @return  A greatest common divisor as BigInt.
  */
-declare
-export function BigInt$GCD(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
+declare export function BigInt$GCD(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
 
 
 /**
@@ -189,8 +175,7 @@ export function BigInt$GCD(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
  * @param  BigInt to be compared.
  * @return  true if x is greater, false if it's not.
  */
-declare
-export function BigInt$greater(x: BigInt$BigInt, y: BigInt$BigInt): boolean
+declare export function BigInt$greater(x: BigInt$BigInt, y: BigInt$BigInt): boolean
 
 
 /**
@@ -200,8 +185,7 @@ export function BigInt$greater(x: BigInt$BigInt, y: BigInt$BigInt): boolean
  * @param  The shift amount in bits.
  * @return  true if x is greater, false if it's not.
  */
-declare
-export function BigInt$greaterShift(x: BigInt$BigInt, y: BigInt$BigInt, shift: number): boolean
+declare export function BigInt$greaterShift(x: BigInt$BigInt, y: BigInt$BigInt, shift: number): boolean
 
 
 /**
@@ -211,8 +195,7 @@ export function BigInt$greaterShift(x: BigInt$BigInt, y: BigInt$BigInt, shift: n
  * @param  (Optional) the number to process.
  * @return  A BigInt equivalent of given number.
  */
-declare
-export function BigInt$int2bigInt(t: number, n?: number, m?: number): BigInt$BigInt
+declare export function BigInt$int2bigInt(t: number, n?: number, m?: number): BigInt$BigInt
 
 
 /**
@@ -221,8 +204,7 @@ export function BigInt$int2bigInt(t: number, n?: number, m?: number): BigInt$Big
  * @param  The BigInt divisor.
  * @return  A BigInt remainder.
  */
-declare
-export function BigInt$inverseMod(x: BigInt$BigInt, n: BigInt$BigInt): BigInt$BigInt
+declare export function BigInt$inverseMod(x: BigInt$BigInt, n: BigInt$BigInt): BigInt$BigInt
 
 
 /**
@@ -232,8 +214,7 @@ export function BigInt$inverseMod(x: BigInt$BigInt, n: BigInt$BigInt): BigInt$Bi
  * @param  The BigInt divisor.
  * @return  A BigInt remainder.
  */
-declare
-export function BigInt$inverseModInt(x: number, n: number): BigInt$BigInt
+declare export function BigInt$inverseModInt(x: number, n: number): BigInt$BigInt
 
 
 /**
@@ -241,8 +222,7 @@ export function BigInt$inverseModInt(x: number, n: number): BigInt$BigInt
  * @param  BigInt to be compared.
  * @return  true if zero, false if not.
  */
-declare
-export function BigInt$isZero(x: BigInt$BigInt): boolean
+declare export function BigInt$isZero(x: BigInt$BigInt): boolean
 
 
 /**
@@ -251,8 +231,7 @@ export function BigInt$isZero(x: BigInt$BigInt): boolean
  * @param  The BigInt to process. (b is bigInt, 1<b<x)
  * @return  true if it is prime, false if it is not.
  */
-declare
-export function BigInt$millerRabin(x: BigInt$BigInt, b: BigInt$BigInt): boolean
+declare export function BigInt$millerRabin(x: BigInt$BigInt, b: BigInt$BigInt): boolean
 
 
 /**
@@ -261,8 +240,7 @@ export function BigInt$millerRabin(x: BigInt$BigInt, b: BigInt$BigInt): boolean
  * @param  The number to process. (b is int, 1<b<x)
  * @return  true if it is prime, false if it is not.
  */
-declare
-export function BigInt$millerRabinInt(x: number, b: number): boolean
+declare export function BigInt$millerRabinInt(x: number, b: number): boolean
 
 
 /**
@@ -271,8 +249,7 @@ export function BigInt$millerRabinInt(x: number, b: number): boolean
  * @param  The divisor.
  * @return  A remainder as BigInt.
  */
-declare
-export function BigInt$mod(x: BigInt$BigInt, n: BigInt$BigInt): BigInt$BigInt
+declare export function BigInt$mod(x: BigInt$BigInt, n: BigInt$BigInt): BigInt$BigInt
 
 
 /**
@@ -281,8 +258,7 @@ export function BigInt$mod(x: BigInt$BigInt, n: BigInt$BigInt): BigInt$BigInt
  * @param  The divisor.
  * @return  A remainder as number.
  */
-declare
-export function BigInt$modInt(x: BigInt$BigInt, n: number): number
+declare export function BigInt$modInt(x: BigInt$BigInt, n: number): number
 
 
 /**
@@ -291,8 +267,7 @@ export function BigInt$modInt(x: BigInt$BigInt, n: number): number
  * @param  The multiplier.
  * @return  A product as BigInt.
  */
-declare
-export function BigInt$mult(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
+declare export function BigInt$mult(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
 
 
 /**
@@ -302,8 +277,7 @@ export function BigInt$mult(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
  * @param  The divisor.
  * @return  A remainder as BigInt.
  */
-declare
-export function BigInt$multMod(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt): BigInt$BigInt
+declare export function BigInt$multMod(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt): BigInt$BigInt
 
 
 /**
@@ -311,8 +285,7 @@ export function BigInt$multMod(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$Big
  * @param  BigInt to be compared.
  * @return  true if x is negative, false if x is positive.
  */
-declare
-export function BigInt$negative(x: BigInt$BigInt): boolean
+declare export function BigInt$negative(x: BigInt$BigInt): boolean
 
 
 /**
@@ -323,8 +296,7 @@ export function BigInt$negative(x: BigInt$BigInt): boolean
  * @param  The BigInt divisor.
  * @return  A remainder as BigInt.
  */
-declare
-export function BigInt$powMod(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt): BigInt$BigInt
+declare export function BigInt$powMod(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt): BigInt$BigInt
 
 
 /**
@@ -334,8 +306,7 @@ export function BigInt$powMod(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigI
  * @param  The sign bit.
  * @return  A new random BigInt.
  */
-declare
-export function BigInt$randBigInt(n: number, s: number): BigInt$BigInt
+declare export function BigInt$randBigInt(n: number, s: number): BigInt$BigInt
 
 
 /**
@@ -343,8 +314,7 @@ export function BigInt$randBigInt(n: number, s: number): BigInt$BigInt
  * @param  The number of bits.
  * @return  A new random BigInt.
  */
-declare
-export function BigInt$randTruePrime(k: number): BigInt$BigInt
+declare export function BigInt$randTruePrime(k: number): BigInt$BigInt
 
 
 /**
@@ -353,8 +323,7 @@ export function BigInt$randTruePrime(k: number): BigInt$BigInt
  * @param  The number of bits.
  * @return  A new probably random BigInt.
  */
-declare
-export function BigInt$randProbPrime(k: number): BigInt$BigInt
+declare export function BigInt$randProbPrime(k: number): BigInt$BigInt
 
 
 /**
@@ -366,8 +335,7 @@ export function BigInt$randProbPrime(k: number): BigInt$BigInt
  * @param  (Optional) the number of array elements as number.
  * @return  A parsed BigInt.
  */
-declare
-export function BigInt$str2bigInt(s: string, b: number, n?: number, m?: number): BigInt$BigInt
+declare export function BigInt$str2bigInt(s: string, b: number, n?: number, m?: number): BigInt$BigInt
 
 
 /**
@@ -377,8 +345,7 @@ export function BigInt$str2bigInt(s: string, b: number, n?: number, m?: number):
  * @param  The subtrahend as BigInt.
  * @return  A difference BigInt.
  */
-declare
-export function BigInt$sub(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
+declare export function BigInt$sub(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
 
 
 /**
@@ -387,8 +354,7 @@ export function BigInt$sub(x: BigInt$BigInt, y: BigInt$BigInt): BigInt$BigInt
  * @param  The number of zeroes.
  * @return  A copy BigInt.
  */
-declare
-export function BigInt$trim(x: BigInt$BigInt, k: number): BigInt$BigInt
+declare export function BigInt$trim(x: BigInt$BigInt, k: number): BigInt$BigInt
 
 
 /**
@@ -397,8 +363,7 @@ export function BigInt$trim(x: BigInt$BigInt, k: number): BigInt$BigInt
  * @param  The BigInt accumulator.
  * @param  The number addend.
  */
-declare
-export function BigInt$addInt_(x: BigInt$BigInt, n: number): void
+declare export function BigInt$addInt_(x: BigInt$BigInt, n: number): void
 
 
 /**
@@ -407,8 +372,7 @@ export function BigInt$addInt_(x: BigInt$BigInt, n: number): void
  * @param  The BigInt accumulator.
  * @param  The BigInt addend.
  */
-declare
-export function BigInt$add_(x: BigInt$BigInt, y: BigInt$BigInt): void
+declare export function BigInt$add_(x: BigInt$BigInt, y: BigInt$BigInt): void
 
 
 /**
@@ -417,8 +381,7 @@ export function BigInt$add_(x: BigInt$BigInt, y: BigInt$BigInt): void
  * @param  The BigInt destination.
  * @param  The BigInt source.
  */
-declare
-export function BigInt$copy_(x: BigInt$BigInt, y: BigInt$BigInt): void
+declare export function BigInt$copy_(x: BigInt$BigInt, y: BigInt$BigInt): void
 
 
 /**
@@ -427,8 +390,7 @@ export function BigInt$copy_(x: BigInt$BigInt, y: BigInt$BigInt): void
  * @param  The BigInt destination.
  * @param  The number source.
  */
-declare
-export function BigInt$copyInt_(x: BigInt$BigInt, n: number): void
+declare export function BigInt$copyInt_(x: BigInt$BigInt, n: number): void
 
 
 /**
@@ -438,8 +400,7 @@ export function BigInt$copyInt_(x: BigInt$BigInt, n: number): void
  * @param  The BigInt first dividend.
  * @param  The BigInt second dividend.
  */
-declare
-export function BigInt$GCD_(x: BigInt$BigInt, y: BigInt$BigInt): void
+declare export function BigInt$GCD_(x: BigInt$BigInt, y: BigInt$BigInt): void
 
 
 /**
@@ -449,8 +410,7 @@ export function BigInt$GCD_(x: BigInt$BigInt, y: BigInt$BigInt): void
  * @param  The BigInt divisor.
  * @return  true if inverse does exist, false if doesn't.
  */
-declare
-export function BigInt$inverseMod_(x: BigInt$BigInt, n: BigInt$BigInt): boolean
+declare export function BigInt$inverseMod_(x: BigInt$BigInt, n: BigInt$BigInt): boolean
 
 
 /**
@@ -459,8 +419,7 @@ export function BigInt$inverseMod_(x: BigInt$BigInt, n: BigInt$BigInt): boolean
  * @param  The BigInt dividend and the remainder result.
  * @param  The BigInt divisor.
  */
-declare
-export function BigInt$mod_(x: BigInt$BigInt, n: BigInt$BigInt): void
+declare export function BigInt$mod_(x: BigInt$BigInt, n: BigInt$BigInt): void
 
 
 /**
@@ -469,8 +428,7 @@ export function BigInt$mod_(x: BigInt$BigInt, n: BigInt$BigInt): void
  * @param  The BigInt multiplicand and the product result.
  * @param  The BigInt multiplier.
  */
-declare
-export function BigInt$mult_(x: BigInt$BigInt, y: BigInt$BigInt): void
+declare export function BigInt$mult_(x: BigInt$BigInt, y: BigInt$BigInt): void
 
 
 /**
@@ -480,8 +438,7 @@ export function BigInt$mult_(x: BigInt$BigInt, y: BigInt$BigInt): void
  * @param  The BigInt multiplier.
  * @param  The BigInt divisor.
  */
-declare
-export function BigInt$multMod_(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt): void
+declare export function BigInt$multMod_(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt): void
 
 
 /**
@@ -492,8 +449,7 @@ export function BigInt$multMod_(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$Bi
  * @param  The BigInt exponent.
  * @param  The BigInt divisor.
  */
-declare
-export function BigInt$powMod_(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt): void
+declare export function BigInt$powMod_(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt): void
 
 
 /**
@@ -504,8 +460,7 @@ export function BigInt$powMod_(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$Big
  * @param  The number of bits.
  * @param  The sign bit number.
  */
-declare
-export function BigInt$randBigInt_(b: BigInt$BigInt, n: number, s: number): void
+declare export function BigInt$randBigInt_(b: BigInt$BigInt, n: number, s: number): void
 
 
 /**
@@ -514,8 +469,7 @@ export function BigInt$randBigInt_(b: BigInt$BigInt, n: number, s: number): void
  * @param  The destination.
  * @param  The number of bits.
  */
-declare
-export function BigInt$randTruePrime_(ans: BigInt$BigInt, k: number): void
+declare export function BigInt$randTruePrime_(ans: BigInt$BigInt, k: number): void
 
 
 /**
@@ -524,8 +478,7 @@ export function BigInt$randTruePrime_(ans: BigInt$BigInt, k: number): void
  * @param  The BigInt minuend and the result difference.
  * @param  The BigInt subtrahend .
  */
-declare
-export function BigInt$sub_(x: BigInt$BigInt, y: BigInt$BigInt): void
+declare export function BigInt$sub_(x: BigInt$BigInt, y: BigInt$BigInt): void
 
 
 /**
@@ -535,8 +488,7 @@ export function BigInt$sub_(x: BigInt$BigInt, y: BigInt$BigInt): void
  * @param  The BigInt addend to be shifted.
  * @param  The number of shift amount.
  */
-declare
-export function BigInt$addShift_(x: BigInt$BigInt, y: BigInt$BigInt, ys: number): void
+declare export function BigInt$addShift_(x: BigInt$BigInt, y: BigInt$BigInt, ys: number): void
 
 
 /**
@@ -544,8 +496,7 @@ export function BigInt$addShift_(x: BigInt$BigInt, y: BigInt$BigInt, ys: number)
  * @private  Intend to be internal function.
  * @param  The BigInt to process.
  */
-declare
-export function BigInt$carry_(x: BigInt$BigInt): void
+declare export function BigInt$carry_(x: BigInt$BigInt): void
 
 
 /**
@@ -556,8 +507,7 @@ export function BigInt$carry_(x: BigInt$BigInt): void
  * @param  The BigInt quotient.
  * @param  The BigInt remainder.
  */
-declare
-export function BigInt$divide_(x: BigInt$BigInt, y: BigInt$BigInt, q: BigInt$BigInt, r: BigInt$BigInt): void
+declare export function BigInt$divide_(x: BigInt$BigInt, y: BigInt$BigInt, q: BigInt$BigInt, r: BigInt$BigInt): void
 
 
 /**
@@ -568,8 +518,7 @@ export function BigInt$divide_(x: BigInt$BigInt, y: BigInt$BigInt, q: BigInt$Big
  * @param  The number divisor.
  * @return  A number remainder.
  */
-declare
-export function BigInt$divInt_(x: BigInt$BigInt, n: number): number
+declare export function BigInt$divInt_(x: BigInt$BigInt, n: number): number
 
 
 /**
@@ -581,8 +530,7 @@ export function BigInt$divInt_(x: BigInt$BigInt, n: number): number
  * @param  The BigInt to process.
  * @param  The BigInt to process.
  */
-declare
-export function BigInt$eGCD_(
+declare export function BigInt$eGCD_(
     x: BigInt$BigInt,
     y: BigInt$BigInt,
     d: BigInt$BigInt,
@@ -596,8 +544,7 @@ export function BigInt$eGCD_(
  * @private  Intend to be internal function.
  * @param  The BigInt to process.
  */
-declare
-export function BigInt$halve_(x: BigInt$BigInt): void
+declare export function BigInt$halve_(x: BigInt$BigInt): void
 
 
 /**
@@ -606,8 +553,7 @@ export function BigInt$halve_(x: BigInt$BigInt): void
  * @param  The BigInt to process.
  * @param  The number of bits.
  */
-declare
-export function BigInt$leftShift_(x: BigInt$BigInt, n: number): void
+declare export function BigInt$leftShift_(x: BigInt$BigInt, n: number): void
 
 
 /**
@@ -618,8 +564,7 @@ export function BigInt$leftShift_(x: BigInt$BigInt, n: number): void
  * @param  The number first multiplier.
  * @param  The number second multiplier.
  */
-declare
-export function BigInt$linComb_(x: BigInt$BigInt, y: BigInt$BigInt, a: number, b: number): void
+declare export function BigInt$linComb_(x: BigInt$BigInt, y: BigInt$BigInt, a: number, b: number): void
 
 
 /**
@@ -630,8 +575,7 @@ export function BigInt$linComb_(x: BigInt$BigInt, y: BigInt$BigInt, a: number, b
  * @param  The number to process.
  * @param  The number shift.
  */
-declare
-export function BigInt$linCombShift_(x: BigInt$BigInt, y: BigInt$BigInt, b: number, ys: number): void
+declare export function BigInt$linCombShift_(x: BigInt$BigInt, y: BigInt$BigInt, b: number, ys: number): void
 
 
 /**
@@ -642,8 +586,7 @@ export function BigInt$linCombShift_(x: BigInt$BigInt, y: BigInt$BigInt, b: numb
  * @param  The BigInt to process.
  * @param  The np.
  */
-declare
-export function BigInt$mont_(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt, np: number): void
+declare export function BigInt$mont_(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigInt, np: number): void
 
 
 /**
@@ -652,8 +595,7 @@ export function BigInt$mont_(x: BigInt$BigInt, y: BigInt$BigInt, n: BigInt$BigIn
  * @param  The BigInt multiplicand and the result product.
  * @param  The number multiplier.
  */
-declare
-export function BigInt$multInt_(x: BigInt$BigInt, n: number): void
+declare export function BigInt$multInt_(x: BigInt$BigInt, n: number): void
 
 
 /**
@@ -663,8 +605,7 @@ export function BigInt$multInt_(x: BigInt$BigInt, n: number): void
  * @param  The BigInt to process.
  * @param  The number to process.
  */
-declare
-export function BigInt$rightShift_(x: BigInt$BigInt, n: number): void
+declare export function BigInt$rightShift_(x: BigInt$BigInt, n: number): void
 
 
 /**
@@ -673,8 +614,7 @@ export function BigInt$rightShift_(x: BigInt$BigInt, n: number): void
  * @param  The BigInt base and the result remainder.
  * @param  The BigInt divisor.
  */
-declare
-export function BigInt$squareMod_(x: BigInt$BigInt, n: BigInt$BigInt): void
+declare export function BigInt$squareMod_(x: BigInt$BigInt, n: BigInt$BigInt): void
 
 
 /**
@@ -684,5 +624,4 @@ export function BigInt$squareMod_(x: BigInt$BigInt, n: BigInt$BigInt): void
  * @param  The BigInt shifted subtrahend .
  * @param  The number shift amount.
  */
-declare
-export function BigInt$subShift_(x: BigInt$BigInt, y: BigInt$BigInt, ys: number): void
+declare export function BigInt$subShift_(x: BigInt$BigInt, y: BigInt$BigInt, ys: number): void

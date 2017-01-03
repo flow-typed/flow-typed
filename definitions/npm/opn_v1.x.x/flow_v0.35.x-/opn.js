@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Opn$Options {
+declare export interface Opn$Options {
 
     /**
      * Wait for the opened app to exit before calling the `callback`. 

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface HasherJs$HasherStatic {
+declare export interface HasherJs$HasherStatic {
     appendHash(): string,
         changed: Signal,
         initialized: Signal,
@@ -27,8 +26,7 @@ export interface HasherJs$HasherStatic {
         stop(): void,
         toString(): string
 }
-declare
-var hasher: HasherJs$HasherStatic;
+declare var hasher: HasherJs$HasherStatic;
 declare module 'hasher' {
     declare module.exports: typeof hasher
 }

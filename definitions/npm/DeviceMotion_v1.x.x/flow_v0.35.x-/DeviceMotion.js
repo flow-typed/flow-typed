@@ -6,28 +6,24 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IDeviceMotionAcceleration {
+declare export interface ngCordova$IDeviceMotionAcceleration {
     x: number,
         y: number,
         z: number,
         timestamp: number
 }
 
-declare
-export interface ngCordova$IDeviceMotionAccelerometerOptions {
+declare export interface ngCordova$IDeviceMotionAccelerometerOptions {
     frequency: number
 }
 
-declare
-export type ngCordova$IDeviceMotionWatchPromise = {
+declare export type ngCordova$IDeviceMotionWatchPromise = {
     watchID: number,
     cancel: () => void,
     clearWatch: (watchId?: number) => void
 }
 
-declare
-export interface ngCordova$IDeviceMotionService {
+declare export interface ngCordova$IDeviceMotionService {
     getCurrentAcceleration(): ng.IPromise<ngCordova$IDeviceMotionAcceleration>,
         watchAcceleration(
             options: ngCordova$IDeviceMotionAccelerometerOptions): ngCordova$IDeviceMotionWatchPromise,

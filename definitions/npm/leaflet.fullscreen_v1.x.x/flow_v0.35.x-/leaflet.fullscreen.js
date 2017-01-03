@@ -6,11 +6,9 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Control$Fullscreen = {}
+declare export type Control$Fullscreen = {}
 
-declare
-export interface Control$FullscreenOptions {
+declare export interface Control$FullscreenOptions {
     content?: string,
         position?: string,
         title?: string,
@@ -20,12 +18,10 @@ export interface Control$FullscreenOptions {
 }
 
 
-declare
-var npm$namespace$control: {
+declare var npm$namespace$control: {
         fullscreen: typeof control$fullscreen,
     }
     /**
      * Creates a fullscreen control.
      */
-declare
-export function control$fullscreen(options?: Control$FullscreenOptions): undefined.Fullscreen
+declare export function control$fullscreen(options?: Control$FullscreenOptions): undefined.Fullscreen

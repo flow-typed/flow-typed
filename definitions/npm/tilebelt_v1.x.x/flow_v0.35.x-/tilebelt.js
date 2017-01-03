@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var tilebelt: tilebelt$TilebeltStatic;
+declare var tilebelt: tilebelt$TilebeltStatic;
 declare interface tilebelt$TilebeltStatic {
 
     /**

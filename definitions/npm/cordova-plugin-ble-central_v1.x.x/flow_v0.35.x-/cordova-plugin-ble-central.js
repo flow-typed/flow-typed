@@ -30,8 +30,7 @@ declare interface BLECentralPlugin$StartScanOptions {
     reportDuplicates?: boolean
 }
 
-declare
-export interface BLECentralPlugin$BLECentralPluginStatic {
+declare export interface BLECentralPlugin$BLECentralPluginStatic {
     scan(
             services: string[],
             seconds: number,
@@ -153,5 +152,4 @@ export interface BLECentralPlugin$BLECentralPluginStatic {
         readRSSI(device_id: string, success: (rssi: number) => any): void,
         readRSSI(device_id: string, success: (rssi: number) => any, failure: () => any): void
 }
-declare
-var ble: BLECentralPlugin$BLECentralPluginStatic;
+declare var ble: BLECentralPlugin$BLECentralPluginStatic;

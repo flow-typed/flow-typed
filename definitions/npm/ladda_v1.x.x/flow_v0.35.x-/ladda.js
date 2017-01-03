@@ -27,8 +27,7 @@ declare interface ILadda {
         create(button: Element): ILaddaButton,
         stopAll(): void
 }
-declare
-var Ladda: ILadda;
+declare var Ladda: ILadda;
 declare module 'ladda' {
     declare module.exports: typeof Ladda
 }

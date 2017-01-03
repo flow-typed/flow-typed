@@ -11,8 +11,7 @@ declare interface JsTimezoneDetect {
         name: () => string
     }
 }
-declare
-var jstimezonedetect: JsTimezoneDetect;
+declare var jstimezonedetect: JsTimezoneDetect;
 declare module 'jstimezonedetect' {
     declare module.exports: typeof jstimezonedetect
 }

@@ -137,5 +137,4 @@ declare module 'WindowsAzure' {
 declare module 'azure-mobile-apps-client' {
     declare module.exports: typeof WindowsAzure
 }
-declare
-var WindowsAzure: undefined.WindowsAzureStatic;
+declare var WindowsAzure: undefined.WindowsAzureStatic;

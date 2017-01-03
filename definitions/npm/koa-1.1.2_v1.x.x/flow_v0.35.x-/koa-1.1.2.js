@@ -6,14 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Koa$Request {}
+declare export interface Koa$Request {}
 
-declare
-export interface Koa$Response {}
+declare export interface Koa$Response {}
 
-declare
-export interface Koa$Application {}
+declare export interface Koa$Application {}
 declare module 'koa' {
 
 

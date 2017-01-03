@@ -37,5 +37,4 @@ declare interface vex$Vex {
 declare module 'vex' {
     declare module.exports: typeof vex
 }
-declare
-var vex: vex$Vex;
+declare var vex: vex$Vex;

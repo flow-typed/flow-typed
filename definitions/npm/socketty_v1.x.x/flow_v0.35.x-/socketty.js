@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var socketty: Socketty;
+declare var socketty: Socketty;
 declare module 'socketty' {
     declare module.exports: typeof socketty
 }

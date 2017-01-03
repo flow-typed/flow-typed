@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$wrapper: {
+declare var npm$namespace$wrapper: {
         $build: typeof wrapper$$build,
         $msg: typeof wrapper$$msg,
         $iq: typeof wrapper$$iq,
@@ -26,8 +25,7 @@ var npm$namespace$wrapper: {
     Returns:
       A new Strophe.Builder object.
     */
-declare
-function wrapper$$build(name: string, attrs?: any): Strophe$Builder
+declare function wrapper$$build(name: string, attrs?: any): Strophe$Builder
 
 
 /**
@@ -40,8 +38,7 @@ Parmaeters:
 Returns:
   A new Strophe.Builder object.
 */
-declare
-function wrapper$$msg(attrs?: any): Strophe$Builder
+declare function wrapper$$msg(attrs?: any): Strophe$Builder
 
 
 /**
@@ -54,8 +51,7 @@ Parameters:
 Returns:
   A new Strophe.Builder object.
 */
-declare
-function wrapper$$iq(attrs?: any): Strophe$Builder
+declare function wrapper$$iq(attrs?: any): Strophe$Builder
 
 
 /**
@@ -68,12 +64,10 @@ Parameters:
 Returns:
   A new Strophe.Builder object.
 */
-declare
-function wrapper$$pres(attrs?: any): Strophe$Builder
+declare function wrapper$$pres(attrs?: any): Strophe$Builder
 
 
-declare
-var npm$namespace$Strophe: {
+declare var npm$namespace$Strophe: {
     addNamespace: typeof Strophe$addNamespace,
     forEachChild: typeof Strophe$forEachChild,
     isTagEqual: typeof Strophe$isTagEqual,
@@ -101,11 +95,9 @@ var npm$namespace$Strophe: {
     serialize: typeof Strophe$serialize,
     addConnectionPlugin: typeof Strophe$addConnectionPlugin,
 }
-declare
-var VERSION: string;
+declare var VERSION: string;
 
-declare
-var NS: {
+declare var NS: {
     HTTPBIND: string,
     BOSH: string,
     CLIENT: string,
@@ -140,8 +132,7 @@ Parameters:
     referenced under Strophe.NS
   (String) value - The actual namespace.
 */
-declare
-function Strophe$addNamespace(name: string, value: string): void
+declare function Strophe$addNamespace(name: string, value: string): void
 
 
 /**
@@ -159,8 +150,7 @@ Parameters:
   (Function) func - The function to apply to each child.  This
     function should take a single argument, a DOM element.
 */
-declare
-function Strophe$forEachChild(elem: Element, elemName: string, func: (child: Element) => any): void
+declare function Strophe$forEachChild(elem: Element, elemName: string, func: (child: Element) => any): void
 
 
 /**
@@ -177,8 +167,7 @@ Returns:
   true if the element's tag name matches _el_, and false
   otherwise.
 */
-declare
-function Strophe$isTagEqual(el: Element, name: string): boolean
+declare function Strophe$isTagEqual(el: Element, name: string): boolean
 
 
 /**
@@ -188,8 +177,7 @@ function Strophe$isTagEqual(el: Element, name: string): boolean
 Returns:
   The currently used DOM document.
 */
-declare
-function Strophe$xmlGenerator(): Document
+declare function Strophe$xmlGenerator(): Document
 
 
 /**
@@ -211,14 +199,11 @@ Parameters:
 Returns:
   A new XML DOM element.
 */
-declare
-function Strophe$xmlElement(name: string, attrs?: any, text?: string): Element
+declare function Strophe$xmlElement(name: string, attrs?: any, text?: string): Element
 
-declare
-function Strophe$xmlescape(text: string): string
+declare function Strophe$xmlescape(text: string): string
 
-declare
-function Strophe$xmlunescape(text: string): string
+declare function Strophe$xmlunescape(text: string): string
 
 
 /**
@@ -233,8 +218,7 @@ Parameters:
 Returns:
   A new XML DOM text node.
 */
-declare
-function Strophe$xmlTextNode(text: string): Text
+declare function Strophe$xmlTextNode(text: string): Text
 
 
 /**
@@ -247,8 +231,7 @@ Parameters:
 Returns:
   A new XML DOM text node.
 */
-declare
-function Strophe$xmlHtmlNode(html: string): Document
+declare function Strophe$xmlHtmlNode(html: string): Document
 
 
 /**
@@ -261,8 +244,7 @@ function Strophe$xmlHtmlNode(html: string): Document
   Returns:
   A String with the concatenated text of all text element children.
 */
-declare
-function Strophe$getText(elem: Element): string
+declare function Strophe$getText(elem: Element): string
 
 
 /**
@@ -278,8 +260,7 @@ Parameters:
 Returns:
   A new, copied DOM element tree.
 */
-declare
-function Strophe$copyElement(elem: Element): Element
+declare function Strophe$copyElement(elem: Element): Element
 
 
 /**
@@ -295,8 +276,7 @@ Parameters:
 Returns:
   A new, copied DOM element tree.
 */
-declare
-function Strophe$createHtml(elem: Element): Element
+declare function Strophe$createHtml(elem: Element): Element
 
 
 /**
@@ -309,8 +289,7 @@ Parameters:
 Returns:
   An escaped node (or local part).
 */
-declare
-function Strophe$escapeNode(node: string): string
+declare function Strophe$escapeNode(node: string): string
 
 
 /**
@@ -323,8 +302,7 @@ Parameters:
 Returns:
   An unescaped node (or local part).
 */
-declare
-function Strophe$unescapeNode(node: string): string
+declare function Strophe$unescapeNode(node: string): string
 
 
 /**
@@ -337,8 +315,7 @@ Parameters:
 Returns:
   A String containing the node.
 */
-declare
-function Strophe$getNodeFromJid(jid: string): string
+declare function Strophe$getNodeFromJid(jid: string): string
 
 
 /**
@@ -351,8 +328,7 @@ Parameters:
 Returns:
   A String containing the domain.
 */
-declare
-function Strophe$getDomainFromJid(jid: string): string
+declare function Strophe$getDomainFromJid(jid: string): string
 
 
 /**
@@ -365,8 +341,7 @@ Parameters:
 Returns:
   A String containing the resource.
 */
-declare
-function Strophe$getResourceFromJid(jid: string): string
+declare function Strophe$getResourceFromJid(jid: string): string
 
 
 /**
@@ -379,8 +354,7 @@ Parameters:
 Returns:
   A String containing the bare JID.
 */
-declare
-function Strophe$getBareJidFromJid(jid: string): string
+declare function Strophe$getBareJidFromJid(jid: string): string
 
 
 /**
@@ -413,8 +387,7 @@ Parameters:
     be one of the values in Strophe.LogLevel.
   (String) msg - The log message.
 */
-declare
-function Strophe$log(level: LogLevel, msg: string): void
+declare function Strophe$log(level: LogLevel, msg: string): void
 
 
 /**
@@ -424,20 +397,15 @@ function Strophe$log(level: LogLevel, msg: string): void
 Parameters:
   (String) msg - The log message.
 */
-declare
-function Strophe$debug(msg: string): void
+declare function Strophe$debug(msg: string): void
 
-declare
-function Strophe$info(msg: string): void
+declare function Strophe$info(msg: string): void
 
-declare
-function Strophe$warn(msg: string): void
+declare function Strophe$warn(msg: string): void
 
-declare
-function Strophe$error(msg: string): void
+declare function Strophe$error(msg: string): void
 
-declare
-function Strophe$fatal(msg: string): void
+declare function Strophe$fatal(msg: string): void
 
 
 /**
@@ -450,8 +418,7 @@ Parameters:
 Returns:
   The serialized element tree as a String.
 */
-declare
-function Strophe$serialize(elem: Element | Strophe$Builder): string
+declare function Strophe$serialize(elem: Element | Strophe$Builder): string
 
 
 /**
@@ -462,11 +429,9 @@ Parameters:
   (String) name - The name of the extension.
   (Object) ptype - The plugin's prototype.
 */
-declare
-function Strophe$addConnectionPlugin(name: string, ptype: any): void
+declare function Strophe$addConnectionPlugin(name: string, ptype: any): void
 
-declare
-var Builder: {
+declare var Builder: {
 
     /**
      * Constructor: Strophe.Builder
@@ -641,8 +606,7 @@ declare interface Strophe$ConnectionOptions {
         sync?: boolean
 }
 
-declare
-var Connection: {
+declare var Connection: {
 
     /**
      * Constructor: Strophe.Connection
@@ -1152,17 +1116,13 @@ declare interface Strophe$SASLMechanism {
         priority: number
 }
 
-declare
-var SASLAnonymous: Strophe$SASLMechanism;
+declare var SASLAnonymous: Strophe$SASLMechanism;
 
-declare
-var SASLPlain: Strophe$SASLMechanism;
+declare var SASLPlain: Strophe$SASLMechanism;
 
-declare
-var SASLSHA1: Strophe$SASLMechanism;
+declare var SASLSHA1: Strophe$SASLMechanism;
 
-declare
-var SASLMD5: Strophe$SASLMechanism;
+declare var SASLMD5: Strophe$SASLMechanism;
 declare module '$build' {
     declare module.exports: typeof wrapper$$build
 }

@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$d3: {
+declare var npm$namespace$d3: {
     box: typeof d3$box,
 }
-declare
-export function d3$box(): d3$Box
+declare export function d3$box(): d3$Box
 
 declare interface d3$Box {
     (sel: d3$Selection<any>): void,

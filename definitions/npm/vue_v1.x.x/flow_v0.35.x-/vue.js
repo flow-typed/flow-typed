@@ -298,8 +298,7 @@ declare interface vuejs$VueStatic {
         partial(id: string, partial: string): string,
         partial(id: string): string
 }
-declare
-var Vue: vuejs$VueStatic;
+declare var Vue: vuejs$VueStatic;
 declare module 'vue' {
     declare module.exports: typeof Vue
 }

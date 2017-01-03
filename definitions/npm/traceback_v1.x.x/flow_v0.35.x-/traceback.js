@@ -26,8 +26,7 @@ declare interface Traceback {
 declare interface TracebackStatic {
     (): Traceback[]
 }
-declare
-var traceback: TracebackStatic;
+declare var traceback: TracebackStatic;
 declare module 'traceback' {
     declare module.exports: typeof traceback
 }

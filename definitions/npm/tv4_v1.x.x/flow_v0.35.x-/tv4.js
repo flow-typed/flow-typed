@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface tv4$JsonSchema {
+declare export interface tv4$JsonSchema {
     [key: string]: any,
     title?: string,
         description?: string,
@@ -23,23 +22,19 @@ export interface tv4$JsonSchema {
         default?: any
 }
 
-declare
-export type tv4$SchemaMap = {
+declare export type tv4$SchemaMap = {
     [uri: string]: tv4$JsonSchema
 };
 
-declare
-export type tv4$ErrorMap = {
+declare export type tv4$ErrorMap = {
     [errorCode: string]: string
 };
 
-declare
-export interface tv4$ErrorCodes {
+declare export interface tv4$ErrorCodes {
     [key: string]: number
 }
 
-declare
-export interface tv4$ValidationError {
+declare export interface tv4$ValidationError {
     code: number,
         message: any,
         dataPath?: string,
@@ -47,47 +42,39 @@ export interface tv4$ValidationError {
         subErrors?: tv4$ValidationError[]
 }
 
-declare
-export type tv4$ErrorVar = {
+declare export type tv4$ErrorVar = {
     params: any,
     subErrors: any,
     stack: string
 } & tv4$ValidationError
 
 
-declare
-export interface tv4$BaseResult {
+declare export interface tv4$BaseResult {
     missing: string[],
         valid: boolean
 }
 
-declare
-export type tv4$SingleResult = {
+declare export type tv4$SingleResult = {
     error: tv4$ValidationError
 } & tv4$BaseResult
 
 
-declare
-export type tv4$MultiResult = {
+declare export type tv4$MultiResult = {
     errors: tv4$ValidationError[]
 } & tv4$BaseResult
 
 
-declare
-export type tv4$FormatValidationFunction = (data: any, schema: tv4$JsonSchema) => string;
+declare export type tv4$FormatValidationFunction = (data: any, schema: tv4$JsonSchema) => string;
 
-declare
-export type tv4$KeywordValidationFunction = (
+declare export type tv4$KeywordValidationFunction = (
     data: any,
     value: any,
     schema: tv4$JsonSchema,
     dataPointerPath: string) => string | tv4$ValidationError;
 
-declare
-export type tv4$AsyncValidationCallback = (isValid: boolean, error: tv4$ValidationError) => void;
+declare export type tv4$AsyncValidationCallback = (isValid: boolean, error: tv4$ValidationError) => void;
 
-declare
-export interface tv4$TV4 {
+declare export interface tv4$TV4 {
     error: tv4$ErrorVar,
         missing: string[],
         validate(data: any, schema: tv4$JsonSchema, checkRecursive?: boolean): boolean,

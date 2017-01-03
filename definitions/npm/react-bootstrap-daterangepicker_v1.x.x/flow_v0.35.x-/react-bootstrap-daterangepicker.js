@@ -26,8 +26,7 @@ declare type ReactBootstrapDaterangepicker$Props = {
     } & &
 
 
-    declare
-export class DateRangePicker mixins React.Component<ReactBootstrapDaterangepicker$Props, {}>{}
+    declare export class DateRangePicker mixins React.Component<ReactBootstrapDaterangepicker$Props, {}>{}
 declare module 'react-bootstrap-daterangepicker' {
     declare module.exports: typeof DateRangePicker
 }

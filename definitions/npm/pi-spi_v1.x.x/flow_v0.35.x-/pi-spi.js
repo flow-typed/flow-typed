@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$___PI_SPI: {
+declare var npm$namespace$___PI_SPI: {
     initialize: typeof ___PI_SPI$initialize,
 }
-declare
-function ___PI_SPI$initialize(device: string): ___PI_SPI$SPI
+declare function ___PI_SPI$initialize(device: string): ___PI_SPI$SPI
 
 declare class SPI {
     clockSpeed(): number;

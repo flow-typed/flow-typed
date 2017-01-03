@@ -15,8 +15,7 @@ declare module 'draggable' {
 }
 
 
-declare
-export interface svgjs$Element {
+declare export interface svgjs$Element {
     draggable(): this,
         draggable(obj: Object): this,
         fixed(): this,

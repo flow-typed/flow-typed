@@ -96,11 +96,7 @@ declare interface UniversalAnalytics$Tracker {
         set(fieldName: string, value: number): void,
         set(fieldName: string, value: boolean): void
 }
-declare
-var gaClassic: GoogleAnalytics;
-declare
-var ga: UniversalAnalytics$ga;
-declare
-var _gaq: GoogleAnalyticsCode;
-declare
-var _gat: GoogleAnalyticsTracker;
+declare var gaClassic: GoogleAnalytics;
+declare var ga: UniversalAnalytics$ga;
+declare var _gaq: GoogleAnalyticsCode;
+declare var _gat: GoogleAnalyticsTracker;

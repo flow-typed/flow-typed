@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$SAT: {
+declare var npm$namespace$SAT: {
         pointInCircle: typeof SAT$pointInCircle,
         pointInPolygon: typeof SAT$pointInPolygon,
         testCircleCircle: typeof SAT$testCircleCircle,
@@ -19,8 +18,7 @@ var npm$namespace$SAT: {
     /**
      * This is a simple 2D vector/point class,Vector has two parameters {x},{y}.
      */
-declare
-export class Vector {
+declare export class Vector {
 
     /**
      * 
@@ -53,15 +51,13 @@ export class Vector {
 /**
  * This is simple circle with a center {pos} position and radius {r}.
  */
-declare
-export class Circle {
+declare export class Circle {
     constructor(pos: SAT$Vector, r: number): this;
     pos: SAT$Vector;
     r: number
 }
 
-declare
-export class Polygon {
+declare export class Polygon {
     constructor(pos: SAT$Vector, points: SAT$Vector[]): this;
     pos: SAT$Vector;
     points: SAT$Vector[];
@@ -79,8 +75,7 @@ export class Polygon {
     getAABB(): SAT$Polygon
 }
 
-declare
-export class Box {
+declare export class Box {
     constructor(pos: SAT$Vector, width: number, height: number): this;
     pos: SAT$Vector;
     w: number;
@@ -88,8 +83,7 @@ export class Box {
     toPolygon(): SAT$Polygon
 }
 
-declare
-export class Response {
+declare export class Response {
     constructor(): this;
     a: any;
     b: any;
@@ -109,8 +103,7 @@ export class Response {
  * @param  check with a specified circle
  * @return  return {true} if there is a collision. {false} otherwise.
  */
-declare
-export function SAT$pointInCircle(p: SAT$Vector, c: SAT$Circle): boolean
+declare export function SAT$pointInCircle(p: SAT$Vector, c: SAT$Circle): boolean
 
 
 /**
@@ -120,8 +113,7 @@ export function SAT$pointInCircle(p: SAT$Vector, c: SAT$Circle): boolean
  * @param  check with a spcified convex polygon.
  * @return  return {true} if there is a collision. {false} otherwise.
  */
-declare
-export function SAT$pointInPolygon(p: SAT$Vector, poly: SAT$Polygon): boolean
+declare export function SAT$pointInPolygon(p: SAT$Vector, poly: SAT$Polygon): boolean
 
 
 /**
@@ -133,8 +125,7 @@ if a {response} is to be calculated in the event of a collision, pass in a clear
  * @param  specified the result of a collision between two circle.
  * @return  return {true} if there is a collision. {false} otherwise.
 */
-declare
-export function SAT$testCircleCircle(a: SAT$Circle, b: SAT$Circle, response?: SAT$Response): boolean
+declare export function SAT$testCircleCircle(a: SAT$Circle, b: SAT$Circle, response?: SAT$Response): boolean
 
 
 /**
@@ -146,8 +137,7 @@ be calculated in the event of a collision, pass in a cleared {Response} object.
  * @param  specified the result of a collision between a {Polygon} and a {Circle}.
  * @return  return {true} if there is a collision. {false} otherwise.
 */
-declare
-export function SAT$testPolygonCircle(polygon: SAT$Polygon, circle: SAT$Circle, response?: SAT$Response): boolean
+declare export function SAT$testPolygonCircle(polygon: SAT$Polygon, circle: SAT$Circle, response?: SAT$Response): boolean
 
 
 /**
@@ -159,8 +149,7 @@ be calculated in the event of a collision, pass in a cleared {Response} object.
  * @param  specified the result of a collision between a {Circle} and a {Polygon}.
  * @return  return {true} if there is a collision. {false} otherwise.
 */
-declare
-export function SAT$testCirclePolygon(circle: SAT$Circle, polygon: SAT$Polygon, response?: SAT$Response): boolean
+declare export function SAT$testCirclePolygon(circle: SAT$Circle, polygon: SAT$Polygon, response?: SAT$Response): boolean
 
 
 /**
@@ -172,7 +161,6 @@ if a response is to be calculated in the event of a collision, pass in a cleared
  * @param  specified the result of a collision between two {Polygon}s.
  * @return  return {true} if there is a collision. {false} otherwise.
 */
-declare
-export function SAT$testPolygonPolygon(a: SAT$Polygon, b: SAT$Polygon, response?: SAT$Response): booleandeclare module 'sat' {
+declare export function SAT$testPolygonPolygon(a: SAT$Polygon, b: SAT$Polygon, response?: SAT$Response): booleandeclare module 'sat' {
     declare module.exports: typeof SAT
 }

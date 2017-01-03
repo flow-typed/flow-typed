@@ -10,8 +10,7 @@
 /**
  * A command-line option.
  */
-declare
-export interface Parser$Option {
+declare export interface Parser$Option {
 
     /**
      * The abbreviated name of the option.
@@ -88,8 +87,7 @@ export interface Parser$Option {
 /**
  * A command-line command specification.
  */
-declare
-export interface Parser$Command {
+declare export interface Parser$Command {
 
     /**
      * The name of the command.
@@ -139,8 +137,7 @@ export interface Parser$Command {
 /**
  * The command-line parser.
  */
-declare
-export interface NomnomInternal$Parser {
+declare export interface NomnomInternal$Parser {
 
     /**
      * Returns the parser.
@@ -225,8 +222,7 @@ export interface NomnomInternal$Parser {
          */
         parse(argv?: string[]): any
 }
-declare
-var _nomnom: NomnomInternal$Parser;
+declare var _nomnom: NomnomInternal$Parser;
 declare module 'nomnom' {
     declare module.exports: typeof _nomnom
 }

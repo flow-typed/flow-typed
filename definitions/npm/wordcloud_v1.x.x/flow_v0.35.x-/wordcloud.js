@@ -6,12 +6,9 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function WordCloud(elements: HTMLElement | HTMLElement[], options: WordCloud$Options): voiddeclare
-var isSupported: boolean;
+declare function WordCloud(elements: HTMLElement | HTMLElement[], options: WordCloud$Options): voiddeclare var isSupported: boolean;
 
-declare
-var miniumFontSize: number;
+declare var miniumFontSize: number;
 
 declare interface WordCloud$Options {
 

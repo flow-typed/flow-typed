@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Sinon$SinonStub {
+declare export interface Sinon$SinonStub {
 
     /**
      * When called, the stub will create a new stub to represent a mongoose chained function.

@@ -315,5 +315,4 @@ declare interface PhonegapPluginPush$PushNotificationStatic {
 declare interface Window {
     PushNotification: PhonegapPluginPush$PushNotificationStatic
 }
-declare
-var PushNotification: PhonegapPluginPush$PushNotificationStatic;
+declare var PushNotification: PhonegapPluginPush$PushNotificationStatic;

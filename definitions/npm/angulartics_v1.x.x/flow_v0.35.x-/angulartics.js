@@ -47,5 +47,4 @@ declare type angulartics$IAnalyticsServiceProvider = {
         developerMode: boolean
     }
 }
-declare
-var angulartics: angulartics$IAngularticsStatic;
+declare var angulartics: angulartics$IAngularticsStatic;

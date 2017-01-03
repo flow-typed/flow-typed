@@ -9,8 +9,7 @@
 declare interface Window {
     mapsforge: MapsforgePlugin
 }
-declare
-var mapsforge: MapsforgePlugin;
+declare var mapsforge: MapsforgePlugin;
 declare interface MapsforgePlugin {
     embedded: MapsforgeEmbeddedPlugin,
         cache: MapsforgeCachePlugin

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface RoyalSlider$RoyalSliderThumbsOptions {
+declare export interface RoyalSlider$RoyalSliderThumbsOptions {
 
     /**
      * Thumbnails mouse drag. (default: true)
@@ -75,8 +74,7 @@ export interface RoyalSlider$RoyalSliderThumbsOptions {
         appendSpan?: boolean
 }
 
-declare
-export interface RoyalSlider$RoyalSliderFullscreenOptions {
+declare export interface RoyalSlider$RoyalSliderFullscreenOptions {
 
     /**
      * Fullscreen functions enabled. (default: false)
@@ -99,8 +97,7 @@ export interface RoyalSlider$RoyalSliderFullscreenOptions {
         nativeFS?: boolean
 }
 
-declare
-export interface RoyalSlider$RoyalSliderDeeplinkingOptions {
+declare export interface RoyalSlider$RoyalSliderDeeplinkingOptions {
 
     /**
      * Linking to slides by appending #SLIDE_INDEX to url.Slides count starts from 1. If change is set to false hash is only read once, after page load. (default: false)
@@ -118,8 +115,7 @@ export interface RoyalSlider$RoyalSliderDeeplinkingOptions {
         prefix?: string
 }
 
-declare
-export interface RoyalSlider$RoyalSliderAutoplayOptions {
+declare export interface RoyalSlider$RoyalSliderAutoplayOptions {
 
     /**
      * Enable autoplay or not. (default: false)
@@ -142,8 +138,7 @@ export interface RoyalSlider$RoyalSliderAutoplayOptions {
         delay?: number
 }
 
-declare
-export interface RoyalSlider$RoyalSliderVideoOptions {
+declare export interface RoyalSlider$RoyalSliderVideoOptions {
 
     /**
      * Auto hide arrows when video is playing  (default: true)
@@ -171,8 +166,7 @@ export interface RoyalSlider$RoyalSliderVideoOptions {
         vimeoCode?: string
 }
 
-declare
-export interface RoyalSlider$RoyalSliderBlockOptions {
+declare export interface RoyalSlider$RoyalSliderBlockOptions {
 
     /**
      * true or false  (default: true)
@@ -205,8 +199,7 @@ export interface RoyalSlider$RoyalSliderBlockOptions {
         delay?: number
 }
 
-declare
-export interface RoyalSlider$RoyalSliderVisibleOptions {
+declare export interface RoyalSlider$RoyalSliderVisibleOptions {
 
     /**
      * Enable visible-nearby. (default: true)
@@ -239,8 +232,7 @@ export interface RoyalSlider$RoyalSliderVisibleOptions {
         breakpointCenterArea?: number
 }
 
-declare
-export interface RoyalSlider$RoyalSliderOptions {
+declare export interface RoyalSlider$RoyalSliderOptions {
 
     /**
      * Automatically updates slider height based on base width. (default: false)
@@ -458,8 +450,7 @@ export interface RoyalSlider$RoyalSliderOptions {
         visibleNearby?: RoyalSlider$RoyalSliderVisibleOptions
 }
 
-declare
-export interface RoyalSlider$RoyalSlider {
+declare export interface RoyalSlider$RoyalSlider {
 
     /**
      * go to slide with id

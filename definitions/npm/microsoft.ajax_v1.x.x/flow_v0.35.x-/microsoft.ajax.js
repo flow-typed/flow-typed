@@ -526,8 +526,7 @@ declare class Type {
  * @param element (Optional) The DOM element that the component should be attached to.
  * @returns  A new instance of a component that uses the specified parameters.
  */
-declare
-function $create(
+declare function $create(
     type: Type,
     properties?: any,
     events?: any,
@@ -541,9 +540,7 @@ function $create(
  * @param parent (Optional) The component or element that contains the component to find.
  * @return  A Component object that contains the component requested by ID, if found; otherwise, null.
  */
-declare
-function $find(id: string, parent?: Sys$Component): Sys$Componentdeclare
-function $addHandler(
+declare function $find(id: string, parent?: Sys$Component): Sys$Componentdeclare function $addHandler(
     element: HTMLElement,
     eventName: string,
     handler: (e: undefined.DomEvent) => void,
@@ -557,8 +554,7 @@ function $addHandler(
  * @param handlerOwner (Optional) The object instance that is the context for the delegates that should be created from the handlers.
  * @param autoRemove (Optional) A boolean value that determines whether the handler should be removed automatically when the element is disposed.
  */
-declare
-function $addHandlers(
+declare function $addHandlers(
     element: HTMLElement,
     events: {
         [event: string]: (e: undefined.DomEvent) => void
@@ -572,8 +568,7 @@ function $addHandlers(
  * @link  http://msdn.microsoft.com/en-us/library/bb310959(v=vs.100).aspx}
  * @param The DOM element that exposes the events.
  */
-declare
-function $clearHandlers(element: HTMLElement): void
+declare function $clearHandlers(element: HTMLElement): void
 /**
  * Provides a shortcut to the getElementById method of the HTMLElement class. This member is static and can be invoked without creating an instance of the class.
  * @see  {
@@ -582,8 +577,7 @@ function $clearHandlers(element: HTMLElement): void
  * @param element The parent element to search. The default is the document element.
  * @return  *   The  HTMLElement
  */
-declare
-function $get(id: string, element?: HTMLElement): HTMLElement
+declare function $get(id: string, element?: HTMLElement): HTMLElement
 /**
  * Provides a shortcut to the removeHandler method of the Sys.UI.DomEvent class. This member is static and can be invoked without creating an instance of the class.
  * @see  {
@@ -592,8 +586,7 @@ function $get(id: string, element?: HTMLElement): HTMLElement
  * @param eventName The name of the DOM event.
  * @param handler The event handler to remove.
  */
-declare
-function $removeHandler(
+declare function $removeHandler(
     element: HTMLElement,
     eventName: string,
     handler: (e: undefined.DomEvent) => void): void
@@ -773,8 +766,7 @@ declare type Sys$Application = {
 } & Sys$Component & Sys$IContainer
 
 
-declare
-var Application: Sys$Application;
+declare var Application: Sys$Application;
 
 
 /**
@@ -2043,8 +2035,7 @@ declare class IWebRequestManager {
     set_defaultTimeout(value: number): void
 }
 
-declare
-export var WebRequestManager: Net$IWebRequestManager;
+declare export var WebRequestManager: Net$IWebRequestManager;
 
 
 /**
@@ -2676,8 +2667,7 @@ declare interface UI$DomElement {
         toggleCssClass(element: HTMLElement, className: string): void
 }
 
-declare
-var DomElement: UI$DomElement;
+declare var DomElement: UI$DomElement;
 
 
 /**

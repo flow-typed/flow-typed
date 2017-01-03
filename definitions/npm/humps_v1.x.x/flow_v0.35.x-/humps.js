@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$humps: {
+declare var npm$namespace$humps: {
     camelize: typeof humps$camelize,
     pascalize: typeof humps$pascalize,
     decamelize: typeof humps$decamelize,
@@ -18,29 +17,21 @@ var npm$namespace$humps: {
     decamelizeKeys: typeof humps$decamelizeKeys,
     depascalizeKeys: typeof humps$depascalizeKeys,
 }
-declare
-function humps$camelize(value: string): string
+declare function humps$camelize(value: string): string
 
-declare
-function humps$pascalize(value: string): string
+declare function humps$pascalize(value: string): string
 
-declare
-function humps$decamelize(value: string, optionsOrProcessor?: humps$OptionOrProcessor): string
+declare function humps$decamelize(value: string, optionsOrProcessor?: humps$OptionOrProcessor): string
 
-declare
-function humps$depascalize(value: string, optionsOrProcessor?: humps$OptionOrProcessor): string
+declare function humps$depascalize(value: string, optionsOrProcessor?: humps$OptionOrProcessor): string
 
-declare
-function humps$camelizeKeys(str: Object, optionsOrProcessor?: humps$OptionOrProcessor): Object
+declare function humps$camelizeKeys(str: Object, optionsOrProcessor?: humps$OptionOrProcessor): Object
 
-declare
-function humps$pascalizeKeys(str: Object, optionsOrProcessor?: humps$OptionOrProcessor): Object
+declare function humps$pascalizeKeys(str: Object, optionsOrProcessor?: humps$OptionOrProcessor): Object
 
-declare
-function humps$decamelizeKeys(str: Object, optionsOrProcessor?: humps$OptionOrProcessor): Object
+declare function humps$decamelizeKeys(str: Object, optionsOrProcessor?: humps$OptionOrProcessor): Object
 
-declare
-function humps$depascalizeKeys(str: Object, optionsOrProcessor?: humps$OptionOrProcessor): Object
+declare function humps$depascalizeKeys(str: Object, optionsOrProcessor?: humps$OptionOrProcessor): Object
 
 declare interface humps$HumpsOptions {
     separator?: string,

@@ -74,22 +74,18 @@ declare class PIXI {
     };
     SPRITE_BATCH_SIZE: number
 }
-declare
-var npm$namespace$PIXI: {
+declare var npm$namespace$PIXI: {
     autoDetectRenderer: typeof PIXI$autoDetectRenderer,
 }
-declare
-export function PIXI$autoDetectRenderer(
+declare export function PIXI$autoDetectRenderer(
     width: number,
     height: number,
     options?: PIXI$RendererOptions,
     noWebGL?: boolean): PIXI$WebGLRenderer | PIXI$CanvasRenderer
 
-declare
-export var loader: undefined.Loader;
+declare export var loader: undefined.Loader;
 
-declare
-export class EventEmitter {
+declare export class EventEmitter {
     listeners(event: string): Function[];
     emit(event: string, ...args: any[]): boolean;
     on(event: string, fn: Function, context?: any): PIXI$EventEmitter;
@@ -100,8 +96,7 @@ export class EventEmitter {
     addListener(event: string, fn: Function, context?: any): PIXI$EventEmitter
 }
 
-declare
-export class DisplayObject mixins EventEmitter, interaction.InteractiveTarget {
+declare export class DisplayObject mixins EventEmitter, interaction.InteractiveTarget {
     _originalRenderWebGL: PIXI$WebGLRenderer;
     _originalRenderCanvas: PIXI$CanvasRenderer;
     _originalUpdateTransform: boolean;
@@ -299,8 +294,7 @@ export class DisplayObject mixins EventEmitter, interaction.InteractiveTarget {
     once(event: string, fn: Function, context?: any): PIXI$EventEmitter
 }
 
-declare
-export class Container mixins DisplayObject {
+declare export class Container mixins DisplayObject {
     _renderWebGL(renderer: PIXI$WebGLRenderer): void;
     _renderCanvas(renderer: PIXI$CanvasRenderer): void;
     onChildrenChange: () => void;
@@ -345,8 +339,7 @@ export class Container mixins DisplayObject {
     on(event: string, fn: Function, context?: any): PIXI$EventEmitter
 }
 
-declare
-export class GraphicsData {
+declare export class GraphicsData {
     constructor(lineWidth: number, lineColor: number, lineAlpha: number, fillColor: number, fillAlpha: number, fill: boolean, shape: PIXI$Circle | PIXI$Rectangle | PIXI$Ellipse | PIXI$Polygon): this;
     lineWidth: number;
     lineColor: number;
@@ -361,8 +354,7 @@ export class GraphicsData {
     _fillTint: number
 }
 
-declare
-export class Graphics mixins Container {
+declare export class Graphics mixins Container {
     boundsDirty: boolean;
     dirty: boolean;
     glDirty: boolean;
@@ -417,15 +409,12 @@ export class Graphics mixins Container {
         shape: PIXI$Circle | PIXI$Rectangle | PIXI$Ellipse | PIXI$Polygon): PIXI$GraphicsData
 }
 
-declare
-export type PIXI$GraphicsRenderer = {} & PIXI$ObjectRenderer
+declare export type PIXI$GraphicsRenderer = {} & PIXI$ObjectRenderer
 
 
-declare
-export interface PIXI$WebGLGraphicsData {}
+declare export interface PIXI$WebGLGraphicsData {}
 
-declare
-export class Point {
+declare export class Point {
     x: number;
     y: number;
     constructor(x?: number, y?: number): this;
@@ -435,8 +424,7 @@ export class Point {
     set(x?: number, y?: number): void
 }
 
-declare
-export class Matrix {
+declare export class Matrix {
     a: number;
     b: number;
     c: number;
@@ -478,13 +466,11 @@ export class Matrix {
     TEMP_MATRIX: PIXI$Matrix
 }
 
-declare
-export interface PIXI$HitArea {
+declare export interface PIXI$HitArea {
     contains(x: number, y: number): boolean
 }
 
-declare
-export class Circle mixins HitArea {
+declare export class Circle mixins HitArea {
     constructor(x?: number, y?: number, radius?: number): this;
     x: number;
     y: number;
@@ -495,8 +481,7 @@ export class Circle mixins HitArea {
     getBounds(): PIXI$Rectangle
 }
 
-declare
-export class Ellipse mixins HitArea {
+declare export class Ellipse mixins HitArea {
     constructor(x?: number, y?: number, width?: number, height?: number): this;
     x: number;
     y: number;
@@ -508,8 +493,7 @@ export class Ellipse mixins HitArea {
     getBounds(): PIXI$Rectangle
 }
 
-declare
-export class Polygon mixins HitArea {
+declare export class Polygon mixins HitArea {
     constructor(points: PIXI$Point[]): this;
     constructor(points: number[]): this;
     constructor(...points: PIXI$Point[]): this;
@@ -521,8 +505,7 @@ export class Polygon mixins HitArea {
     contains(x: number, y: number): boolean
 }
 
-declare
-export class Rectangle mixins HitArea {
+declare export class Rectangle mixins HitArea {
     constructor(x?: number, y?: number, width?: number, height?: number): this;
     x: number;
     y: number;
@@ -534,8 +517,7 @@ export class Rectangle mixins HitArea {
     contains(x: number, y: number): boolean
 }
 
-declare
-export class RoundedRectangle mixins HitArea {
+declare export class RoundedRectangle mixins HitArea {
     constructor(x?: number, y?: number, width?: number, height?: number, radius?: number): this;
     x: number;
     y: number;
@@ -548,8 +530,7 @@ export class RoundedRectangle mixins HitArea {
     contains(x: number, y: number): boolean
 }
 
-declare
-export interface PIXI$ParticleContainerProperties {
+declare export interface PIXI$ParticleContainerProperties {
     scale?: boolean,
         position?: boolean,
         rotation?: boolean,
@@ -557,8 +538,7 @@ export interface PIXI$ParticleContainerProperties {
         alpha?: boolean
 }
 
-declare
-export class ParticleContainer mixins Container {
+declare export class ParticleContainer mixins Container {
     constructor(size?: number, properties?: PIXI$ParticleContainerProperties, batchSize?: number): this;
     _maxSize: number;
     _batchSize: number;
@@ -572,8 +552,7 @@ export class ParticleContainer mixins Container {
     setProperties(properties: PIXI$ParticleContainerProperties): void
 }
 
-declare
-export interface PIXI$ParticleBuffer {
+declare export interface PIXI$ParticleBuffer {
     gl: WebGLRenderingContext,
         vertSize: number,
         vertByteSize: number,
@@ -591,14 +570,11 @@ export interface PIXI$ParticleBuffer {
         destroy(): void
 }
 
-declare
-export interface PIXI$ParticleRenderer {}
+declare export interface PIXI$ParticleRenderer {}
 
-declare
-export interface PIXI$ParticleShader {}
+declare export interface PIXI$ParticleShader {}
 
-declare
-export interface PIXI$RendererOptions {
+declare export interface PIXI$RendererOptions {
     view?: HTMLCanvasElement,
         transparent?: boolean,
         antialias?: boolean,
@@ -611,8 +587,7 @@ export interface PIXI$RendererOptions {
         backgroundColor?: number
 }
 
-declare
-export class SystemRenderer mixins EventEmitter {
+declare export class SystemRenderer mixins EventEmitter {
     _backgroundColor: number;
     _backgroundColorRgb: number[];
     _backgroundColorString: string;
@@ -636,8 +611,7 @@ export class SystemRenderer mixins EventEmitter {
     destroy(removeView?: boolean): void
 }
 
-declare
-export class CanvasRenderer mixins SystemRenderer {
+declare export class CanvasRenderer mixins SystemRenderer {
     renderDisplayObject(displayObject: PIXI$DisplayObject, context: CanvasRenderingContext2D): void;
     _mapBlendModes(): void;
     constructor(width?: number, height?: number, options?: PIXI$RendererOptions): this;
@@ -650,8 +624,7 @@ export class CanvasRenderer mixins SystemRenderer {
     resize(w: number, h: number): void
 }
 
-declare
-export class CanvasBuffer {
+declare export class CanvasBuffer {
     clear(): void;
     constructor(width: number, height: number): this;
     canvas: HTMLCanvasElement;
@@ -662,22 +635,19 @@ export class CanvasBuffer {
     destroy(): void
 }
 
-declare
-export class CanvasGraphics {
+declare export class CanvasGraphics {
     renderGraphicsMask(graphics: PIXI$Graphics, context: CanvasRenderingContext2D): void;
     updateGraphicsTint(graphics: PIXI$Graphics): void;
     renderGraphics(graphics: PIXI$Graphics, context: CanvasRenderingContext2D): void
 }
 
-declare
-export class CanvasMaskManager {
+declare export class CanvasMaskManager {
     pushMask(maskData: any, renderer: PIXI$WebGLRenderer | PIXI$CanvasRenderer): void;
     popMask(renderer: PIXI$WebGLRenderer | PIXI$CanvasRenderer): void;
     destroy(): void
 }
 
-declare
-export class CanvasTinter {
+declare export class CanvasTinter {
     getTintedTexture(sprite: PIXI$DisplayObject, color: number): HTMLCanvasElement;
     tintWithMultiply(texture: PIXI$Texture, color: number, canvas: HTMLDivElement): void;
     tintWithOverlay(texture: PIXI$Texture, color: number, canvas: HTMLCanvasElement): void;
@@ -689,8 +659,7 @@ export class CanvasTinter {
     tintMethod: Function
 }
 
-declare
-export class WebGLRenderer mixins SystemRenderer {
+declare export class WebGLRenderer mixins SystemRenderer {
     _useFXAA: boolean;
     _FXAAFilter: filters$FXAAFilter;
     _contextOptions: {
@@ -726,8 +695,7 @@ export class WebGLRenderer mixins SystemRenderer {
     destroyTexture(texture: PIXI$BaseTexture | PIXI$Texture, _skipRemove?: boolean): void
 }
 
-declare
-export class AbstractFilter {
+declare export class AbstractFilter {
     vertexSrc: string[];
     fragmentSrc: string[];
     constructor(vertexSrc?: string | string[], fragmentSrc?: string | string[], uniforms?: any): this;
@@ -742,8 +710,7 @@ export class AbstractFilter {
     syncUniform(uniform: WebGLUniformLocation): void
 }
 
-declare
-export class SpriteMaskFilter mixins AbstractFilter {
+declare export class SpriteMaskFilter mixins AbstractFilter {
     constructor(sprite: PIXI$Sprite): this;
     maskSprite: PIXI$Sprite;
     maskMatrix: PIXI$Matrix;
@@ -755,14 +722,12 @@ export class SpriteMaskFilter mixins AbstractFilter {
     offset: PIXI$Point
 }
 
-declare
-export class BlendModeManager mixins WebGLManager {
+declare export class BlendModeManager mixins WebGLManager {
     constructor(renderer: PIXI$WebGLRenderer): this;
     setBlendMode(blendMode: number): boolean
 }
 
-declare
-export class FilterManager mixins WebGLManager {
+declare export class FilterManager mixins WebGLManager {
     constructor(renderer: PIXI$WebGLRenderer): this;
     filterStack: any[];
     renderer: PIXI$WebGLRenderer;
@@ -787,8 +752,7 @@ export class FilterManager mixins WebGLManager {
     destroy(): void
 }
 
-declare
-export class MaskManager mixins WebGLManager {
+declare export class MaskManager mixins WebGLManager {
     stencilStack: PIXI$StencilMaskStack;
     reverse: boolean;
     count: number;
@@ -801,8 +765,7 @@ export class MaskManager mixins WebGLManager {
     popStencilMask(target: PIXI$RenderTarget, maskData: any): void
 }
 
-declare
-export class ShaderManager mixins WebGLManager {
+declare export class ShaderManager mixins WebGLManager {
     _currentId: number;
     currentShader: PIXI$Shader;
     constructor(renderer: PIXI$WebGLRenderer): this;
@@ -815,8 +778,7 @@ export class ShaderManager mixins WebGLManager {
     destroy(): void
 }
 
-declare
-export class StencilManager mixins WebGLManager {
+declare export class StencilManager mixins WebGLManager {
     constructor(renderer: PIXI$WebGLRenderer): this;
     setMaskStack(stencilMaskStack: PIXI$StencilMaskStack): void;
     pushStencil(graphics: PIXI$Graphics, webGLData: PIXI$WebGLGraphicsData): void;
@@ -827,16 +789,14 @@ export class StencilManager mixins WebGLManager {
     popMask(maskData: any[]): void
 }
 
-declare
-export class WebGLManager {
+declare export class WebGLManager {
     onContextChange: () => void;
     constructor(renderer: PIXI$WebGLRenderer): this;
     renderer: PIXI$WebGLRenderer;
     destroy(): void
 }
 
-declare
-export class Shader {
+declare export class Shader {
     attributes: any;
     textureCount: number;
     uniforms: any;
@@ -858,38 +818,32 @@ export class Shader {
     destroy(): void
 }
 
-declare
-export class ComplexPrimitiveShader mixins Shader {
+declare export class ComplexPrimitiveShader mixins Shader {
     constructor(shaderManager: PIXI$ShaderManager): this
 }
 
-declare
-export class PrimitiveShader mixins Shader {
+declare export class PrimitiveShader mixins Shader {
     constructor(shaderManager: PIXI$ShaderManager): this
 }
 
-declare
-export class TextureShader mixins Shader {
+declare export class TextureShader mixins Shader {
     constructor(shaderManager: PIXI$ShaderManager, vertexSrc?: string, fragmentSrc?: string, customUniforms?: any, customAttributes?: any): this
 }
 
-declare
-export interface PIXI$StencilMaskStack {
+declare export interface PIXI$StencilMaskStack {
     stencilStack: any[],
         reverse: boolean,
         count: number
 }
 
-declare
-export class ObjectRenderer mixins WebGLManager {
+declare export class ObjectRenderer mixins WebGLManager {
     start(): void;
     stop(): void;
     flush(): void;
     render(object?: any): void
 }
 
-declare
-export class RenderTarget {
+declare export class RenderTarget {
     constructor(gl: WebGLRenderingContext, width: number, height: number, scaleMode: number, resolution: number, root: boolean): this;
     gl: WebGLRenderingContext;
     frameBuffer: WebGLFramebuffer;
@@ -912,8 +866,7 @@ export class RenderTarget {
     destroy(): void
 }
 
-declare
-export interface PIXI$Quad {
+declare export interface PIXI$Quad {
     gl: WebGLRenderingContext,
         vertices: number[],
         uvs: number[],
@@ -926,8 +879,7 @@ export interface PIXI$Quad {
         destroy(): void
 }
 
-declare
-export class Sprite mixins Container {
+declare export class Sprite mixins Container {
     fromFrame(frameId: string): PIXI$Sprite;
     fromImage(imageId: string, crossorigin?: boolean, scaleMode?: number): PIXI$Sprite;
     _texture: PIXI$Texture;
@@ -949,8 +901,7 @@ export class Sprite mixins Container {
     destroy(destroyTexture?: boolean, destroyBaseTexture?: boolean): void
 }
 
-declare
-export class SpriteRenderer mixins ObjectRenderer {
+declare export class SpriteRenderer mixins ObjectRenderer {
     renderBatch(texture: PIXI$Texture, size: number, startIndex: number): void;
     vertSize: number;
     vertByteSize: number;
@@ -968,8 +919,7 @@ export class SpriteRenderer mixins ObjectRenderer {
     destroy(): void
 }
 
-declare
-export interface PIXI$TextStyle {
+declare export interface PIXI$TextStyle {
     font?: string,
         fill?: string | number,
         align?: string,
@@ -988,8 +938,7 @@ export interface PIXI$TextStyle {
         miterLimit?: number
 }
 
-declare
-export class Text mixins Sprite {
+declare export class Text mixins Sprite {
     fontPropertiesCache: any;
     fontPropertiesCanvas: HTMLCanvasElement;
     fontPropertiesContext: CanvasRenderingContext2D;
@@ -1010,8 +959,7 @@ export class Text mixins Sprite {
     height: number
 }
 
-declare
-export class BaseTexture mixins EventEmitter {
+declare export class BaseTexture mixins EventEmitter {
     fromImage(imageUrl: string, crossorigin?: boolean, scaleMode?: number): PIXI$BaseTexture;
     fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number): PIXI$BaseTexture;
     _glTextures: any;
@@ -1072,8 +1020,7 @@ export class BaseTexture mixins EventEmitter {
     once(event: string, fn: Function, context?: any): PIXI$EventEmitter
 }
 
-declare
-export class RenderTexture mixins Texture {
+declare export class RenderTexture mixins Texture {
     renderWebGL(
         displayObject: PIXI$DisplayObject,
         matrix?: PIXI$Matrix,
@@ -1105,8 +1052,7 @@ export class RenderTexture mixins Texture {
     getCanvas(): HTMLCanvasElement
 }
 
-declare
-export class Texture mixins BaseTexture {
+declare export class Texture mixins BaseTexture {
     fromImage(imageUrl: string, crossOrigin?: boolean, scaleMode?: number): PIXI$Texture;
     fromFrame(frameId: string): PIXI$Texture;
     fromCanvas(canvas: HTMLCanvasElement, scaleMode?: number): PIXI$Texture;
@@ -1136,8 +1082,7 @@ export class Texture mixins BaseTexture {
     clone(): PIXI$Texture
 }
 
-declare
-export class TextureUvs {
+declare export class TextureUvs {
     x0: number;
     y0: number;
     x1: number;
@@ -1149,8 +1094,7 @@ export class TextureUvs {
     set(frame: PIXI$Rectangle, baseFrame: PIXI$Rectangle, rotate: boolean): void
 }
 
-declare
-export class VideoBaseTexture mixins BaseTexture {
+declare export class VideoBaseTexture mixins BaseTexture {
     fromVideo(video: HTMLVideoElement, scaleMode?: number): PIXI$VideoBaseTexture;
     fromUrl(videoSrc: string | any | string[] | any[]): PIXI$VideoBaseTexture;
     _loaded: boolean;
@@ -1163,8 +1107,7 @@ export class VideoBaseTexture mixins BaseTexture {
     destroy(): void
 }
 
-declare
-export class utils {
+declare export class utils {
     uuid(): number;
     hex2rgb(hex: number, out?: number[]): number[];
     hex2string(hex: number): string;
@@ -1268,20 +1211,17 @@ declare module 'extras' {
 }
 
 
-declare
-export class AsciiFilter mixins AbstractFilter {
+declare export class AsciiFilter mixins AbstractFilter {
     size: number
 }
 
-declare
-export class BloomFilter mixins AbstractFilter {
+declare export class BloomFilter mixins AbstractFilter {
     blur: number;
     blurX: number;
     blurY: number
 }
 
-declare
-export class BlurFilter mixins AbstractFilter {
+declare export class BlurFilter mixins AbstractFilter {
     blurXFilter: filters$BlurXFilter;
     blurYFilter: filters$BlurYFilter;
     blur: number;
@@ -1290,25 +1230,21 @@ export class BlurFilter mixins AbstractFilter {
     blurY: number
 }
 
-declare
-export class BlurXFilter mixins AbstractFilter {
+declare export class BlurXFilter mixins AbstractFilter {
     passes: number;
     strength: number;
     blur: number
 }
 
-declare
-export class BlurYFilter mixins AbstractFilter {
+declare export class BlurYFilter mixins AbstractFilter {
     passes: number;
     strength: number;
     blur: number
 }
 
-declare
-export class SmartBlurFilter mixins AbstractFilter {}
+declare export class SmartBlurFilter mixins AbstractFilter {}
 
-declare
-export class ColorMatrixFilter mixins AbstractFilter {
+declare export class ColorMatrixFilter mixins AbstractFilter {
     _loadMatrix(matrix: number[], multiply: boolean): void;
     _multiply(out: number[], a: number[], b: number[]): void;
     _colorMatrix(matrix: number[]): void;
@@ -1340,42 +1276,35 @@ export class ColorMatrixFilter mixins AbstractFilter {
     reset(): void
 }
 
-declare
-export class ColorStepFilter mixins AbstractFilter {
+declare export class ColorStepFilter mixins AbstractFilter {
     step: number
 }
 
-declare
-export class ConvolutionFilter mixins AbstractFilter {
+declare export class ConvolutionFilter mixins AbstractFilter {
     constructor(matrix: number[], width: number, height: number): this;
     matrix: number[];
     width: number;
     height: number
 }
 
-declare
-export class CrossHatchFilter mixins AbstractFilter {}
+declare export class CrossHatchFilter mixins AbstractFilter {}
 
-declare
-export class DisplacementFilter mixins AbstractFilter {
+declare export class DisplacementFilter mixins AbstractFilter {
     constructor(sprite: PIXI$Sprite, scale?: number): this;
     map: PIXI$Texture;
     scale: PIXI$Point
 }
 
-declare
-export class DotScreenFilter mixins AbstractFilter {
+declare export class DotScreenFilter mixins AbstractFilter {
     scale: number;
     angle: number
 }
 
-declare
-export class BlurYTintFilter mixins AbstractFilter {
+declare export class BlurYTintFilter mixins AbstractFilter {
     blur: number
 }
 
-declare
-export class DropShadowFilter mixins AbstractFilter {
+declare export class DropShadowFilter mixins AbstractFilter {
     blur: number;
     blurX: number;
     blurY: number;
@@ -1385,47 +1314,39 @@ export class DropShadowFilter mixins AbstractFilter {
     angle: number
 }
 
-declare
-export class GrayFilter mixins AbstractFilter {
+declare export class GrayFilter mixins AbstractFilter {
     gray: number
 }
 
-declare
-export class InvertFilter mixins AbstractFilter {
+declare export class InvertFilter mixins AbstractFilter {
     invert: number
 }
 
-declare
-export class NoiseFilter mixins AbstractFilter {
+declare export class NoiseFilter mixins AbstractFilter {
     noise: number
 }
 
-declare
-export class PixelateFilter mixins AbstractFilter {
+declare export class PixelateFilter mixins AbstractFilter {
     size: PIXI$Point
 }
 
-declare
-export class RGBSplitFilter mixins AbstractFilter {
+declare export class RGBSplitFilter mixins AbstractFilter {
     red: number;
     green: number;
     blue: number
 }
 
-declare
-export class SepiaFilter mixins AbstractFilter {
+declare export class SepiaFilter mixins AbstractFilter {
     sepia: number
 }
 
-declare
-export class ShockwaveFilter mixins AbstractFilter {
+declare export class ShockwaveFilter mixins AbstractFilter {
     center: number[];
     params: any;
     time: number
 }
 
-declare
-export class TiltShiftAxisFilter mixins AbstractFilter {
+declare export class TiltShiftAxisFilter mixins AbstractFilter {
     blur: number;
     gradientBlur: number;
     start: number;
@@ -1433,33 +1354,28 @@ export class TiltShiftAxisFilter mixins AbstractFilter {
     updateDelta(): void
 }
 
-declare
-export class TiltShiftFilter mixins AbstractFilter {
+declare export class TiltShiftFilter mixins AbstractFilter {
     blur: number;
     gradientBlur: number;
     start: number;
     end: number
 }
 
-declare
-export class TiltShiftXFilter mixins AbstractFilter {
+declare export class TiltShiftXFilter mixins AbstractFilter {
     updateDelta(): void
 }
 
-declare
-export class TiltShiftYFilter mixins AbstractFilter {
+declare export class TiltShiftYFilter mixins AbstractFilter {
     updateDelta(): void
 }
 
-declare
-export class TwistFilter mixins AbstractFilter {
+declare export class TwistFilter mixins AbstractFilter {
     offset: PIXI$Point;
     radius: number;
     angle: number
 }
 
-declare
-export class FXAAFilter mixins AbstractFilter {
+declare export class FXAAFilter mixins AbstractFilter {
     applyFilter(
         renderer: PIXI$WebGLRenderer,
         input: PIXI$RenderTarget,
@@ -1710,11 +1626,9 @@ declare module 'mesh' {
 }
 
 
-declare
-export var shared: ticker$Ticker;
+declare export var shared: ticker$Ticker;
 
-declare
-export class Ticker {
+declare export class Ticker {
     _tick(time: number): void;
     _emitter: PIXI$EventEmitter;
     _requestId: number;

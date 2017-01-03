@@ -42,8 +42,7 @@ declare interface RcSelect$SelectProps {
         getPopupContainer?: (trigger: Node) => Node
 }
 
-declare
-export class Select mixins React.Component<RcSelect$SelectProps, any>{}
+declare export class Select mixins React.Component<RcSelect$SelectProps, any>{}
 
 declare interface RcSelect$OptionProps {
     className?: string,
@@ -52,8 +51,7 @@ declare interface RcSelect$OptionProps {
         value?: string
 }
 
-declare
-export class Option mixins React.Component<RcSelect$OptionProps, any>{}
+declare export class Option mixins React.Component<RcSelect$OptionProps, any>{}
 
 declare interface RcSelect$OptGroupProps {
     label?: string | React.ReactElement<any>,
@@ -61,8 +59,7 @@ declare interface RcSelect$OptGroupProps {
         value?: string
 }
 
-declare
-export class OptGroup mixins React.Component<RcSelect$OptGroupProps, any>{}
+declare export class OptGroup mixins React.Component<RcSelect$OptGroupProps, any>{}
 declare module 'rc-select' {
     declare module.exports: typeof Select
 }

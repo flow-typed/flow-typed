@@ -198,8 +198,7 @@ declare interface KnockoutBindingHandlers {
          */
         visibleWhenValid: KnockoutBindingHandler
 }
-declare
-var valerie: Valerie$Static;
+declare var valerie: Valerie$Static;
 declare module 'Rules' {
 
 }

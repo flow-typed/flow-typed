@@ -1615,8 +1615,7 @@ declare interface AtomCore$ITaskStatic {
 }
 
 declare interface AtomCore$ITask {}
-declare
-var atom: AtomCore$IAtom;
+declare var atom: AtomCore$IAtom;
 declare module 'atom' {
     declare var $: typeof undefined;
     declare var $$: typeof undefined;

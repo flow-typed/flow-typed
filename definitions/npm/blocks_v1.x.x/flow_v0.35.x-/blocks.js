@@ -692,8 +692,7 @@ declare interface Server {
          */
         use?: any
 }
-declare
-var blocks: BlocksStatic;
+declare var blocks: BlocksStatic;
 declare module 'blocks' {
     declare module.exports: typeof blocks
 }

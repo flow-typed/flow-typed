@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$___Addons: {
+declare var npm$namespace$___Addons: {
     createFragment: typeof ___Addons$createFragment,
 }
-declare
-export function ___Addons$createFragment(object: {
+declare export function ___Addons$createFragment(object: {
     [key: string]: ReactNode
 }): ReactFragmentdeclare module 'react-addons-create-fragment' {
     declare var createFragment: typeof undefined;

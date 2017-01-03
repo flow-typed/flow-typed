@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class EventSubscription {
+declare export class EventSubscription {
     listener: Function;
     context: any;
 
@@ -17,8 +16,7 @@ export class EventSubscription {
     remove(): void
 }
 
-declare
-export class EventEmitter {
+declare export class EventEmitter {
     constructor(): this;
 
     /**

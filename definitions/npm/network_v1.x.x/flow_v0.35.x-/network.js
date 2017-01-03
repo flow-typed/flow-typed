@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$INetworkInformationService {
+declare export interface ngCordova$INetworkInformationService {
     getNetwork(): string,
         isOnline(): boolean,
         isOffline(): boolean,

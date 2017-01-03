@@ -24,5 +24,4 @@ declare interface GlobalizeStatic {
         parseFloat(value: any, radix: number, cultureSelector: string): number,
         culture(cultureSelector: string): any
 }
-declare
-var Globalize: GlobalizeStatic;
+declare var Globalize: GlobalizeStatic;

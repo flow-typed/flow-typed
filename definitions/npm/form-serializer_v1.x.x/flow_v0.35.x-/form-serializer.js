@@ -14,8 +14,7 @@ declare interface FormSerializer$FormSerializerPatterns {
         named: RegExp
 }
 
-declare
-export var patterns: FormSerializer$FormSerializerPatterns;
+declare export var patterns: FormSerializer$FormSerializerPatterns;
 declare module 'jquery-serialize-object' {
     declare module.exports: typeof FormSerializer
 }

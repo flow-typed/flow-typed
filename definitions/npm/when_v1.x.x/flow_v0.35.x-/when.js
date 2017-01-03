@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function When<T>(value: When$Promise<T>): When$Promise<T >
-    declare
-var npm$namespace$When: {
+declare function When<T>(value: When$Promise<T>): When$Promise<T >
+    declare var npm$namespace$When: {
     attempt: typeof When$attempt,
     lift: typeof When$lift,
     promise: typeof When$promise,
@@ -71,18 +69,14 @@ declare module '_' {
 }
 
 
-declare
-function When$attempt<T>(f: _.Fn0<T>): When$Promise<T >
+declare function When$attempt<T>(f: _.Fn0<T>): When$Promise<T >
 
-    declare
-function When$lift<T>(f: _.Fn0<T>): _.LiftedFn0<T >
+    declare function When$lift<T>(f: _.Fn0<T>): _.LiftedFn0<T >
 
-    declare
-function When$promise<T>(
+    declare function When$promise<T>(
         resolver: (resolve: (value: T) => void, reject: (reason: any) => void) => void): When$Promise<T >
 
-    declare
-function When$reject<T>(reason: any): When$Promise<T >
+    declare function When$reject<T>(reason: any): When$Promise<T >
 
 
     /**
@@ -94,8 +88,7 @@ function When$reject<T>(reason: any): When$Promise<T >
     of {
      * @link  Promise}s and values
     */
-    declare
-function When$all<T>(promisesOrValues: any[]): When$Promise<T >
+    declare function When$all<T>(promisesOrValues: any[]): When$Promise<T >
 
 
     /**
@@ -107,8 +100,7 @@ function When$all<T>(promisesOrValues: any[]): When$Promise<T >
      * @returns  a promise that will fulfill with an array of mapped values
     or reject if any input promise rejects.
     */
-    declare
-function When$map<T>(
+    declare function When$map<T>(
         promisesOrValues: any[],
         mapFunc: (value: any, index?: Number) => any): When$Promise<T >
 
@@ -123,8 +115,7 @@ function When$map<T>(
      * @param reduceFunc function(accumulated:*, x:*, index:Number):*} f reduce function
      * @returns  a promise that will resolve to the final reduced value
     */
-    declare
-function When$reduce<T>(
+    declare function When$reduce<T>(
         promisesOrValues: any[],
         reduceFunc: (reduction: T, value: any, index?: Number) => T | When$Promise<T>,
         initialValue: T): When$Promise<T >
@@ -140,8 +131,7 @@ function When$reduce<T>(
      * @param reduceFunc function(accumulated:*, x:*, index:Number):*} f reduce function
      * @returns  a promise that will resolve to the final reduced value
     */
-    declare
-function When$reduceRight<T>(
+    declare function When$reduceRight<T>(
         promisesOrValues: any[],
         reduceFunc: (reduction: T, value: any, index?: Number) => T | When$Promise<T>,
         initialValue: T): When$Promise<T >
@@ -172,8 +162,7 @@ which will reject if any element of array rejects.
 of {
  * @link  Promise}s and values
 */
-declare
-function When$settle<T>(promisesOrValues: any[]): When$Promise<When$Descriptor<T>[] >
+declare function When$settle<T>(promisesOrValues: any[]): When$Promise<When$Descriptor<T>[] >
 
 
     /**
@@ -184,8 +173,7 @@ function When$settle<T>(promisesOrValues: any[]): When$Promise<When$Descriptor<T
      * @param handler function that receives each value as it is produced by f. It may return a promise to delay the next iteration.
      * @param seed initial value provided to the handler, and first f invocation. May be a promise.
      */
-    declare
-function When$iterate<U>(
+    declare function When$iterate<U>(
         f: (seed: U) => U | When$Promise<U>,
         predicate: (value: U) => boolean,
         handler: (value: U) => When$Promise<any>| void,
@@ -204,8 +192,7 @@ function When$iterate<U>(
     It may return a promise to delay the next iteration of the unfold.
      * @param seed initial value provided to the first unspool invocation. May be a promise.
     */
-    declare
-function When$unfold<T, U>(
+    declare function When$unfold<T, U>(
         unspool: (
             seed: U) => [T | When$Promise<T>, U | When$Promise<U>] | When$Promise<[T | When$Promise<T>, U | When$Promise<U>]>,
         predicate: (value: U) => boolean | When$Promise<boolean>,
@@ -219,8 +206,7 @@ function When$unfold<T, U>(
     The resolver has resolve, reject, and progress.  The promise
     has then plus extended promise API.
     */
-    declare
-function When$defer<T>(): When$Deferred<T >
+    declare function When$defer<T>(): When$Deferred<T >
 
 
     /**
@@ -228,8 +214,7 @@ function When$defer<T>(): When$Deferred<T >
      * @return  a promise that will fulfill when *all* the input promises
     have fulfilled, or will reject when *any one* of the input promises rejects.
     */
-    declare
-function When$join<T>(...promises: When$Promise<T>[]): When$Promise<T[] >
+    declare function When$join<T>(...promises: When$Promise<T>[]): When$Promise<T[] >
 
 
     /**
@@ -239,8 +224,7 @@ function When$join<T>(...promises: When$Promise<T>[]): When$Promise<T[] >
         - fulfilled with promiseOrValue's value after it is fulfilled
         - rejected with promiseOrValue's reason after it is rejected
     */
-    declare
-function When$resolve<T>(promise: When$Promise<T>): When$Promise<T >
+    declare function When$resolve<T>(promise: When$Promise<T>): When$Promise<T >
 
     declare interface When$Deferred<T>{
         notify(update: any): void,

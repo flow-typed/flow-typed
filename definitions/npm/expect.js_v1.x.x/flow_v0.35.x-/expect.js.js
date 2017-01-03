@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function expect(target?: any): Expect$Rootdeclare interface Expect$Assertion {
+declare function expect(target?: any): Expect$Rootdeclare interface Expect$Assertion {
 
     /**
      * Check if the value is truthy

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Httpi$HttpiPayload = {
+declare export type Httpi$HttpiPayload = {
     method?: string,
     url?: string,
     params?: {},
@@ -15,14 +14,12 @@ export type Httpi$HttpiPayload = {
     keepTrailingSlash?: boolean
 }
 
-declare
-export interface Httpi$HttpiFactory {
+declare export interface Httpi$HttpiFactory {
     (config: Httpi$HttpiPayload): ng.IHttpPromise<{}>,
         resource(url: string): Httpi$HttpiResource
 }
 
-declare
-export class HttpiResource {
+declare export class HttpiResource {
     constructor(http: ng.IHttpService, url: string): this;
     delete<T>(config: Httpi$HttpiPayload): ng.IHttpPromise<T>;
     get<T>(config: Httpi$HttpiPayload): ng.IHttpPromise<T>;

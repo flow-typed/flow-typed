@@ -7,63 +7,50 @@
  */
 
 
-declare
-var npm$namespace$ProtoBuf: {
+declare var npm$namespace$ProtoBuf: {
     loadJson: typeof ProtoBuf$loadJson,
     loadJsonFile: typeof ProtoBuf$loadJsonFile,
     loadProto: typeof ProtoBuf$loadProto,
     loadProtoFile: typeof ProtoBuf$loadProtoFile,
     newBuilder: typeof ProtoBuf$newBuilder,
 }
-declare
-var Builder: ProtoBuf$Builder;
+declare var Builder: ProtoBuf$Builder;
 
-declare
-var Long: ProtoBuf$LongStatic;
+declare var Long: ProtoBuf$LongStatic;
 
-declare
-var DotProto: ProtoBuf$DotProto;
+declare var DotProto: ProtoBuf$DotProto;
 
-declare
-var Reflect: ProtoBuf$Reflect;
+declare var Reflect: ProtoBuf$Reflect;
 
-declare
-var Util: ProtoBuf$Util;
+declare var Util: ProtoBuf$Util;
 
-declare
-var convertFieldsToCamelCase: boolean;
+declare var convertFieldsToCamelCase: boolean;
 
-declare
-export function ProtoBuf$loadJson(
+declare export function ProtoBuf$loadJson(
     json: string,
     builder?: ProtoBuf$ProtoBuilder | string | {},
     filename?: string | {}): ProtoBuf$ProtoBuilder
 
-declare
-export function ProtoBuf$loadJsonFile(
+declare export function ProtoBuf$loadJsonFile(
     filename: string | {},
     callback?: (error: any, builder: ProtoBuf$ProtoBuilder) => void,
     builder?: ProtoBuf$ProtoBuilder): ProtoBuf$ProtoBuilder
 
-declare
-export function ProtoBuf$loadProto(
+declare export function ProtoBuf$loadProto(
     proto: string,
     builder?: ProtoBuf$ProtoBuilder | string | {},
     filename?: string | {}): ProtoBuf$ProtoBuilder
 
-declare
-export function ProtoBuf$loadProtoFile(
+declare export function ProtoBuf$loadProtoFile(
     filePath: string | {},
     callback?: (error: any, builder: ProtoBuf$ProtoBuilder) => void,
     builder?: ProtoBuf$ProtoBuilder): ProtoBuf$ProtoBuilder
 
-declare
-export function ProtoBuf$newBuilder(options?: {
+declare export function ProtoBuf$newBuilder(options?: {
     [key: string]: any
 }): ProtoBuf$ProtoBuilder
 
-declare
-export interface ProtoBuf$LongStatic {
+declare export interface ProtoBuf$LongStatic {
     new(low?: number, high?: number, unsigned?: boolean): ProtoBuf$Long,
     MAX_UNSIGNED_VALUE: ProtoBuf$Long,
         MAX_VALUE: ProtoBuf$Long,
@@ -81,8 +68,7 @@ export interface ProtoBuf$LongStatic {
         isLong(obj: any): boolean
 }
 
-declare
-export interface ProtoBuf$Long {
+declare export interface ProtoBuf$Long {
     high: number,
         low: number,
         unsigned: boolean,
@@ -123,8 +109,7 @@ export interface ProtoBuf$Long {
         xor(other: ProtoBuf$Long | number | string): ProtoBuf$Long
 }
 
-declare
-export interface ProtoBuf$Builder {
+declare export interface ProtoBuf$Builder {
     new(options?: {
         [key: string]: any
     }): ProtoBuf$ProtoBuilder,
@@ -151,8 +136,7 @@ export interface ProtoBuf$Builder {
 /**
  * TODO: Confirm that message needs no further implementation
  */
-declare
-export interface ProtoBuf$Message {
+declare export interface ProtoBuf$Message {
     new(values?: {
         [key: string]: any
     }, var_args?: string[]): ProtoBuf$Message,
@@ -194,13 +178,11 @@ export interface ProtoBuf$Message {
 /**
  * TODO: Implement service interface
  */
-declare
-export interface ProtoBuf$Service {
+declare export interface ProtoBuf$Service {
     new(rpcImpl?: Function): ProtoBuf$Service
 }
 
-declare
-export interface ProtoBuf$ProtoBuilder {
+declare export interface ProtoBuf$ProtoBuilder {
     ns: ProtoBuf$ReflectNamespace,
         ptr: ProtoBuf$ReflectNamespace,
         resolved: boolean,
@@ -224,15 +206,13 @@ export interface ProtoBuf$ProtoBuilder {
         lookup(path?: string): ProtoBuf$ReflectT
 }
 
-declare
-export interface ProtoBuf$ProtoBuf {
+declare export interface ProtoBuf$ProtoBuf {
     [package: string]: {
         [key: string]: ProtoBuf$MetaMessage<ProtoBuf$Message>| any
     }
 }
 
-declare
-export interface ProtoBuf$MetaMessage<T>{
+declare export interface ProtoBuf$MetaMessage<T>{
     new(values?: {
         [key: string]: any
     }, var_args?: string[]): T & ProtoBuf$Message,
@@ -248,22 +228,19 @@ export interface ProtoBuf$MetaMessage<T>{
     decodeJSON(str: string): T & ProtoBuf$Message
 }
 
-declare
-export interface ProtoBuf$DotProto {
+declare export interface ProtoBuf$DotProto {
     Parser: ProtoBuf$Parser,
         Tokenizer: ProtoBuf$Tokenizer
 }
 
-declare
-export interface ProtoBuf$Parser {
+declare export interface ProtoBuf$Parser {
     new(proto: string): ProtoBuf$Parser,
     tn: ProtoBuf$Tokenizer,
         parse(): ProtoBuf$MetaProto,
         toString(): string
 }
 
-declare
-export interface ProtoBuf$Tokenizer {
+declare export interface ProtoBuf$Tokenizer {
     new(proto: string): ProtoBuf$Tokenizer,
     source: string,
         index: number,
@@ -276,8 +253,7 @@ export interface ProtoBuf$Tokenizer {
         toString(): string
 }
 
-declare
-export interface ProtoBuf$MetaProto {
+declare export interface ProtoBuf$MetaProto {
     package: string,
         messages: ProtoBuf$ProtoMessage[],
         enums: ProtoBuf$ProtoEnum[],
@@ -288,8 +264,7 @@ export interface ProtoBuf$MetaProto {
         services: ProtoBuf$ProtoService[]
 }
 
-declare
-export interface ProtoBuf$ProtoEnum {
+declare export interface ProtoBuf$ProtoEnum {
     name: string,
         values: ProtoBuf$ProtoEnumValue[],
         options: {
@@ -297,14 +272,12 @@ export interface ProtoBuf$ProtoEnum {
         }
 }
 
-declare
-export interface ProtoBuf$ProtoEnumValue {
+declare export interface ProtoBuf$ProtoEnumValue {
     name: string,
         id: string
 }
 
-declare
-export interface ProtoBuf$ProtoField {
+declare export interface ProtoBuf$ProtoField {
     rule: string,
         options: {
             [key: string]: any
@@ -315,8 +288,7 @@ export interface ProtoBuf$ProtoField {
         oneof?: string
 }
 
-declare
-export interface ProtoBuf$ProtoMessage {
+declare export interface ProtoBuf$ProtoMessage {
     name: string,
         isGroup?: boolean,
         fields: ProtoBuf$ProtoField[],
@@ -330,8 +302,7 @@ export interface ProtoBuf$ProtoMessage {
         }
 }
 
-declare
-export interface ProtoBuf$ProtoRpcService {
+declare export interface ProtoBuf$ProtoRpcService {
     request: string,
         response: string,
         options: {
@@ -339,8 +310,7 @@ export interface ProtoBuf$ProtoRpcService {
         }
 }
 
-declare
-export interface ProtoBuf$ProtoService {
+declare export interface ProtoBuf$ProtoService {
     name: string,
         rpc: {
             [key: string]: ProtoBuf$ProtoRpcService
@@ -350,16 +320,14 @@ export interface ProtoBuf$ProtoService {
         }
 }
 
-declare
-export interface ProtoBuf$Util {
+declare export interface ProtoBuf$Util {
     IS_NODE: boolean,
         fetch(path: string, callback?: (data: string) => any): string,
         toCamelCase(str: string): string,
         XHR(): XMLHttpRequest
 }
 
-declare
-export interface ProtoBuf$Reflect {
+declare export interface ProtoBuf$Reflect {
     T: ProtoBuf$ReflectT,
         Namespace: ProtoBuf$ReflectNamespace,
         Message: ProtoBuf$ReflectMessage,
@@ -368,8 +336,7 @@ export interface ProtoBuf$Reflect {
         Service: ProtoBuf$ReflectService
 }
 
-declare
-export interface ProtoBuf$ReflectT {
+declare export interface ProtoBuf$ReflectT {
     new(
         builder?: ProtoBuf$ProtoBuilder,
         parent?: ProtoBuf$ReflectT,
@@ -381,8 +348,7 @@ export interface ProtoBuf$ReflectT {
         toString(includeClass?: boolean): string
 }
 
-declare
-export type ProtoBuf$ReflectNamespace = {
+declare export type ProtoBuf$ReflectNamespace = {
     new(
         builder?: ProtoBuf$ProtoBuilder,
         parent?: ProtoBuf$ReflectNamespace,
@@ -408,8 +374,7 @@ export type ProtoBuf$ReflectNamespace = {
 } & ProtoBuf$ReflectT
 
 
-declare
-export type ProtoBuf$ReflectMessage = {
+declare export type ProtoBuf$ReflectMessage = {
     new(
         builder?: ProtoBuf$ProtoBuilder,
         parent?: ProtoBuf$ReflectNamespace,
@@ -432,8 +397,7 @@ export type ProtoBuf$ReflectMessage = {
 } & ProtoBuf$ReflectNamespace
 
 
-declare
-export type ProtoBuf$ReflectEnum = {
+declare export type ProtoBuf$ReflectEnum = {
     new(
         builder?: ProtoBuf$ProtoBuilder,
         parent?: ProtoBuf$ReflectT,
@@ -451,8 +415,7 @@ export type ProtoBuf$ReflectEnum = {
 } & ProtoBuf$ReflectNamespace
 
 
-declare
-export type ProtoBuf$ReflectExtension = {
+declare export type ProtoBuf$ReflectExtension = {
     new(
         builder?: ProtoBuf$ProtoBuilder,
         parent?: ProtoBuf$ReflectT,
@@ -462,8 +425,7 @@ export type ProtoBuf$ReflectExtension = {
 } & ProtoBuf$ReflectT
 
 
-declare
-export type ProtoBuf$ReflectService = {
+declare export type ProtoBuf$ReflectService = {
     new(): ProtoBuf$ReflectService,
     Method: ProtoBuf$ReflectMethod,
     RPCMethod: ProtoBuf$ReflectRPCMethod,
@@ -472,8 +434,7 @@ export type ProtoBuf$ReflectService = {
 } & ProtoBuf$ReflectNamespace
 
 
-declare
-export type ProtoBuf$ReflectField = {
+declare export type ProtoBuf$ReflectField = {
     new(
         builder: ProtoBuf$ProtoBuilder,
         message: ProtoBuf$ReflectMessage,
@@ -510,14 +471,12 @@ export type ProtoBuf$ReflectField = {
 } & ProtoBuf$ReflectT
 
 
-declare
-export interface ProtoBuf$WireTuple {
+declare export interface ProtoBuf$WireTuple {
     name: string,
         wireType: number
 }
 
-declare
-export type ProtoBuf$ReflectExtensionField = {
+declare export type ProtoBuf$ReflectExtensionField = {
     new(
         builder: ProtoBuf$ProtoBuilder,
         message: ProtoBuf$ReflectMessage,
@@ -532,8 +491,7 @@ export type ProtoBuf$ReflectExtensionField = {
 } & ProtoBuf$ReflectField
 
 
-declare
-export type ProtoBuf$ReflectOneOf = {
+declare export type ProtoBuf$ReflectOneOf = {
     new(
         builder?: ProtoBuf$ProtoBuilder,
         message?: ProtoBuf$ReflectMessage,
@@ -542,8 +500,7 @@ export type ProtoBuf$ReflectOneOf = {
 } & ProtoBuf$ReflectT
 
 
-declare
-export type ProtoBuf$ReflectValue = {
+declare export type ProtoBuf$ReflectValue = {
     new(
         builder?: ProtoBuf$ProtoBuilder,
         enm?: ProtoBuf$ReflectEnum,
@@ -554,8 +511,7 @@ export type ProtoBuf$ReflectValue = {
 } & ProtoBuf$ReflectT
 
 
-declare
-export type ProtoBuf$ReflectMethod = {
+declare export type ProtoBuf$ReflectMethod = {
     new(
         builder?: ProtoBuf$ProtoBuilder,
         svc?: ProtoBuf$ReflectService,
@@ -573,8 +529,7 @@ export type ProtoBuf$ReflectMethod = {
 } & ProtoBuf$ReflectT
 
 
-declare
-export type ProtoBuf$ReflectRPCMethod = {
+declare export type ProtoBuf$ReflectRPCMethod = {
     new(
         builder?: ProtoBuf$ProtoBuilder,
         svc?: ProtoBuf$ReflectService,

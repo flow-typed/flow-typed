@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var turf: turf.TurfStatic;
-declare
-var TemplateUnits: "miles" |
+declare var turf: turf.TurfStatic;
+declare var TemplateUnits: "miles" |
     "nauticalmiles" |
     "degrees" |
     "radians" |
@@ -19,8 +17,7 @@ var TemplateUnits: "miles" |
     "metres" |
     "kilometers" |
     "kilometres";
-declare
-var TemplateType: "point" | "points" | "polygon" | "polygons";
+declare var TemplateType: "point" | "points" | "polygon" | "polygons";
 declare interface OptionsRandom {
     bbox?: Array<number>,
         num_vertices?: number,

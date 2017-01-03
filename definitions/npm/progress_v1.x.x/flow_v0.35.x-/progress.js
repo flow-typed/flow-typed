@@ -94,5 +94,4 @@ declare interface ProgressJsOptions {
          */
         considerTransition?: boolean
 }
-declare
-var progressJs: ProgressJsStatic;
+declare var progressJs: ProgressJsStatic;

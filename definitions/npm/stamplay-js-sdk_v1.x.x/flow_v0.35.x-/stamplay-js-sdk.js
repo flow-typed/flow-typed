@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Stamplay$IStamplayModel {
+declare export interface Stamplay$IStamplayModel {
     signup({}: << UNKNOWN PARAM FORMAT >> ): PromisesAPlus.Thenable<any>,
         new(): Stamplay$IStamplayModel,
         get(property: string): any,
@@ -19,20 +18,17 @@ export interface Stamplay$IStamplayModel {
         upVote(): PromisesAPlus.Thenable<any >
 }
 
-declare
-export interface Stamplay$IStamplayObject {
+declare export interface Stamplay$IStamplayObject {
     Model: Stamplay$IStamplayModel,
         Collection: any
 }
 
-declare
-export interface Stamplay$StamplayStatic {
+declare export interface Stamplay$StamplayStatic {
     init(appId: string): void,
         User(): Stamplay$IStamplayObject,
         Cobject(object: string): Stamplay$IStamplayObject
 }
-declare
-var Stamplay: Stamplay$StamplayStatic;
+declare var Stamplay: Stamplay$StamplayStatic;
 declare module 'Stamplay' {
     declare module.exports: typeof Stamplay
 }

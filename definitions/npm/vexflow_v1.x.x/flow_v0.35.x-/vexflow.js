@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function sanitizeDuration(duration: string): string
-declare
-var npm$namespace$Vex: {
+declare function sanitizeDuration(duration: string): string
+declare var npm$namespace$Vex: {
     L: typeof Vex$L,
     Merge: typeof Vex$Merge,
     Min: typeof Vex$Min,
@@ -23,41 +21,29 @@ var npm$namespace$Vex: {
     BM: typeof Vex$BM,
     Inherit: typeof Vex$Inherit,
 }
-declare
-function Vex$L(block: string, args: any[]): void
+declare function Vex$L(block: string, args: any[]): void
 
-declare
-function Vex$Merge<T>(destination: T, source: Object): T
+declare function Vex$Merge<T>(destination: T, source: Object): T
 
-declare
-function Vex$Min(a: number, b: number): number
+declare function Vex$Min(a: number, b: number): number
 
-declare
-function Vex$Max(a: number, b: number): number
+declare function Vex$Max(a: number, b: number): number
 
-declare
-function Vex$RoundN(x: number, n: number): number
+declare function Vex$RoundN(x: number, n: number): number
 
-declare
-function Vex$MidLine(a: number, b: number): number
+declare function Vex$MidLine(a: number, b: number): number
 
-declare
-function Vex$SortAndUnique<T>(arr: T, cmp: Function, eq: Function): T
+declare function Vex$SortAndUnique<T>(arr: T, cmp: Function, eq: Function): T
 
-declare
-function Vex$Contains(a: any[], obj: any): boolean
+declare function Vex$Contains(a: any[], obj: any): boolean
 
-declare
-function Vex$getCanvasContext(canvas_sel: string): CanvasRenderingContext2D
+declare function Vex$getCanvasContext(canvas_sel: string): CanvasRenderingContext2D
 
-declare
-function Vex$drawDot(ctx: Vex$IRenderContext, x: number, y: number, color?: string): void
+declare function Vex$drawDot(ctx: Vex$IRenderContext, x: number, y: number, color?: string): void
 
-declare
-function Vex$BM(s: number, f: Function): void
+declare function Vex$BM(s: number, f: Function): void
 
-declare
-function Vex$Inherit<T>(child: T, parent: Object, object: Object): T
+declare function Vex$Inherit<T>(child: T, parent: Object, object: Object): T
 
 declare class RuntimeError {
     constructor(code: string, message: string): this
@@ -171,8 +157,7 @@ declare interface Vex$IFont {
 }
 
 
-declare
-var npm$namespace$Flow: {
+declare var npm$namespace$Flow: {
     clefProperties: typeof Flow$clefProperties,
     keyProperties: typeof Flow$keyProperties,
     integerToNote: typeof Flow$integerToNote,
@@ -190,37 +175,29 @@ var npm$namespace$Flow: {
     durationToGlyph: typeof Flow$durationToGlyph,
     renderGlyph: typeof Flow$renderGlyph,
 }
-declare
-var RESOLUTION: number;
+declare var RESOLUTION: number;
 
-declare
-var STEM_WIDTH: number;
+declare var STEM_WIDTH: number;
 
-declare
-var STEM_HEIGHT: number;
+declare var STEM_HEIGHT: number;
 
-declare
-var STAVE_LINE_THICKNESS: number;
+declare var STAVE_LINE_THICKNESS: number;
 
-declare
-var TIME4_4: {
+declare var TIME4_4: {
     num_beats: number,
     beat_value: number,
     resolution: number
 };
 
-declare
-var unicode: {
+declare var unicode: {
     [name: string]: string
 };
 
-declare
-function Flow$clefProperties(clef: string): {
+declare function Flow$clefProperties(clef: string): {
     line_shift: number
 }
 
-declare
-function Flow$keyProperties(
+declare function Flow$keyProperties(
     key: string,
     clef: string,
     params: {
@@ -237,22 +214,18 @@ function Flow$keyProperties(
     displaced: boolean
 }
 
-declare
-function Flow$integerToNote(integer: number): string
+declare function Flow$integerToNote(integer: number): string
 
-declare
-function Flow$tabToGlyph(fret: string): {
+declare function Flow$tabToGlyph(fret: string): {
     text: string,
     code: number,
     width: number,
     shift_y: number
 }
 
-declare
-function Flow$textWidth(text: string): number
+declare function Flow$textWidth(text: string): number
 
-declare
-function Flow$articulationCodes(
+declare function Flow$articulationCodes(
     artic: string): {
     code: string,
     width: number,
@@ -262,8 +235,7 @@ function Flow$articulationCodes(
     between_lines: boolean
 }
 
-declare
-function Flow$accidentalCodes(
+declare function Flow$accidentalCodes(
     acc: string): {
     code: string,
     width: number,
@@ -272,8 +244,7 @@ function Flow$accidentalCodes(
     shift_down: number
 }
 
-declare
-function Flow$ornamentCodes(
+declare function Flow$ornamentCodes(
     acc: string): {
     code: string,
     shift_right: number,
@@ -282,21 +253,18 @@ function Flow$ornamentCodes(
     width: number
 }
 
-declare
-function Flow$keySignature(spec: string): {
+declare function Flow$keySignature(spec: string): {
     type: string,
     line: number
 }[]
 
-declare
-function Flow$parseNoteDurationString(durationString: string): {
+declare function Flow$parseNoteDurationString(durationString: string): {
     duration: string,
     dots: number,
     type: string
 }
 
-declare
-function Flow$parseNoteData(
+declare function Flow$parseNoteData(
     noteData: {
         duration: string,
         dots: number,
@@ -308,17 +276,13 @@ function Flow$parseNoteData(
     ticks: number
 }
 
-declare
-function Flow$durationToFraction(duration: string): Flow$Fraction
+declare function Flow$durationToFraction(duration: string): Flow$Fraction
 
-declare
-function Flow$durationToNumber(duration: string): number
+declare function Flow$durationToNumber(duration: string): number
 
-declare
-function Flow$durationToTicks(duration: string): number
+declare function Flow$durationToTicks(duration: string): number
 
-declare
-function Flow$durationToGlyph(
+declare function Flow$durationToGlyph(
     duration: string,
     type: string): {
     head_width: number,
@@ -339,8 +303,7 @@ function Flow$durationToGlyph(
     position?: string
 }
 
-declare
-function Flow$renderGlyph(
+declare function Flow$renderGlyph(
     ctx: Vex$IRenderContext,
     x_pos: number,
     y_pos: number,
@@ -348,8 +311,7 @@ function Flow$renderGlyph(
     val: string,
     nocache: boolean): void
 
-declare
-var Font: {
+declare var Font: {
     glyphs: {
         x_min: number,
         x_max: number,
@@ -407,8 +369,7 @@ declare class Accidental mixins Modifier {
     applyAccidentals(voices: Flow$Voice[], keySignature?: string): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class Annotation mixins Modifier {
     constructor(text: string): this;
@@ -428,8 +389,7 @@ declare class Annotation mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class Articulation mixins Modifier {
     constructor(type: string): this;
@@ -444,8 +404,7 @@ declare class Articulation mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class BarNote mixins Note {
     DEBUG: boolean;
@@ -527,8 +486,7 @@ declare class Bend mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class BoundingBox {
     constructor(x: number, y: number, w: number, h: number): this;
@@ -697,8 +655,7 @@ declare class Dot mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class Formatter {
     DEBUG: boolean;
@@ -819,8 +776,7 @@ declare class FretHandFinger mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class GhostNote mixins StemmableNote {
     setStave(stave: Flow$Stave): Flow$Note;
@@ -916,8 +872,7 @@ declare class GraceNoteGroup mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class KeyManager {
     constructor(key: string): this;
@@ -975,8 +930,7 @@ declare class Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class ModifierContext {
     DEBUG: boolean;
@@ -1025,49 +979,38 @@ declare class Music {
     }
 }
 
-declare
-var NUM_TONES: number;
+declare var NUM_TONES: number;
 
-declare
-var roots: string[];
+declare var roots: string[];
 
-declare
-var root_values: number[];
+declare var root_values: number[];
 
-declare
-var root_indices: {
+declare var root_indices: {
     [root: string]: number
 };
 
-declare
-var canonical_notes: string[];
+declare var canonical_notes: string[];
 
-declare
-var diatonic_intervals: string[];
+declare var diatonic_intervals: string[];
 
-declare
-var diatonic_accidentals: {
+declare var diatonic_accidentals: {
     [diatonic_interval: string]: {
         note: number,
         accidental: number
     }
 };
 
-declare
-var intervals: {
+declare var intervals: {
     [interval: string]: number
 };
 
-declare
-var scales: {
+declare var scales: {
     [scale: string]: number[]
 };
 
-declare
-var accidentals: string[];
+declare var accidentals: string[];
 
-declare
-var noteValues: {
+declare var noteValues: {
     [value: string]: {
         root_index: number,
         int_val: number
@@ -1147,8 +1090,7 @@ declare class Note mixins Tickable {
     setPreFormatted(value: boolean): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class NoteHead mixins Note {
     constructor(head_options: {
@@ -1213,8 +1155,7 @@ declare class Ornament mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class PedalMarking {
     constructor(notes: Flow$Note[]): this;
@@ -1231,8 +1172,7 @@ declare class PedalMarking {
     draw(): void
 }
 
-declare
-var GLYPHS: {
+declare var GLYPHS: {
     [name: string]: {
         code: string,
         x_shift: number,
@@ -1694,14 +1634,11 @@ declare class StaveNote mixins StemmableNote {
     draw(): void
 }
 
-declare
-var STEM_UP: number;
+declare var STEM_UP: number;
 
-declare
-var STEM_DOWN: number;
+declare var STEM_DOWN: number;
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class StaveSection mixins Modifier {
     draw(): void;
@@ -1827,11 +1764,9 @@ declare class Stem {
     hide: boolean
 }
 
-declare
-var UP: number;
+declare var UP: number;
 
-declare
-var DOWN: number;
+declare var DOWN: number;
 
 declare class StemmableNote mixins Note {
     setBeam(): Flow$Note;
@@ -1898,8 +1833,7 @@ declare class StringNumber mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class Stroke mixins Modifier {
     constructor(type: Stroke$Type, options: {
@@ -1917,8 +1851,7 @@ declare class Stroke mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class SVGContext mixins IRenderContext {
     constructor(element: HTMLElement): this;
@@ -2055,11 +1988,9 @@ declare class TabSlide mixins TabTie {
         }): void
 }
 
-declare
-var SLIDE_UP: number;
+declare var SLIDE_UP: number;
 
-declare
-var SLIDE_DOWN: number;
+declare var SLIDE_DOWN: number;
 
 declare class TabStave mixins Stave {
     constructor(x: number, y: number, width: number, options?: {
@@ -2157,8 +2088,7 @@ declare class TextNote mixins Note {
     draw(): void
 }
 
-declare
-var GLYPHS: {
+declare var GLYPHS: {
     [name: string]: {
         code: string,
         point: number,
@@ -2244,8 +2174,7 @@ declare class TimeSignature mixins StaveModifier {
     addEndModifier(stave: Flow$Stave): void
 }
 
-declare
-var glyphs: {
+declare var glyphs: {
     [name: string]: {
         code: string,
         point: number,
@@ -2278,8 +2207,7 @@ declare class Tuning {
     getNoteForFret(fretNum: string, stringNum: string): string
 }
 
-declare
-var names: {
+declare var names: {
     [name: string]: string
 };
 
@@ -2302,11 +2230,9 @@ declare class Tuplet {
     draw(): void
 }
 
-declare
-var LOCATION_TOP: number;
+declare var LOCATION_TOP: number;
 
-declare
-var LOCATION_BOTTOM: number;
+declare var LOCATION_BOTTOM: number;
 
 declare class Vibrato mixins Modifier {
     format(
@@ -2322,8 +2248,7 @@ declare class Vibrato mixins Modifier {
     draw(): void
 }
 
-declare
-var CATEGORY: string;
+declare var CATEGORY: string;
 
 declare class Voice {
     constructor(time: {

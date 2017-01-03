@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type ReactSwipeableViews$SwipeableViewsProps = {
+declare export type ReactSwipeableViews$SwipeableViewsProps = {
     containerStyle?: React.CSSProperties,
     disabled?: boolean,
     index?: number,
@@ -27,8 +26,7 @@ declare interface ReactSwipeableViews$SwipeableViewsState {
         heightLatest?: number
 }
 
-declare
-export class SwipeableViews mixins React.Component<ReactSwipeableViews$SwipeableViewsProps, ReactSwipeableViews$SwipeableViewsState>{}
+declare export class SwipeableViews mixins React.Component<ReactSwipeableViews$SwipeableViewsProps, ReactSwipeableViews$SwipeableViewsState>{}
 declare module 'react-swipeable-views' {
     declare module.exports: typeof ReactSwipeableViews$SwipeableViews
 }

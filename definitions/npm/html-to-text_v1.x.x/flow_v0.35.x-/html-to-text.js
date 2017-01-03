@@ -77,5 +77,4 @@ declare interface HtmlToTextOptions {
 declare module 'html-to-text' {
     declare module.exports: typeof htmlToText
 }
-declare
-var htmlToText: HtmlToTextStatic;
+declare var htmlToText: HtmlToTextStatic;

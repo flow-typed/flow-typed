@@ -117,5 +117,4 @@ declare interface MessengerOptions {
          */
         theme?: string
 }
-declare
-var Messenger: IMessenger;
+declare var Messenger: IMessenger;

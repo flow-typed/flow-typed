@@ -6,61 +6,50 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface mariasql$MariaCallBackError {
+declare export interface mariasql$MariaCallBackError {
     (error: Error): void
 }
 
-declare
-export interface mariasql$MariaCallBackResult {
+declare export interface mariasql$MariaCallBackResult {
     (result: mariasql$MariaResult): void
 }
 
-declare
-export interface mariasql$MariaCallBackRow {
+declare export interface mariasql$MariaCallBackRow {
     (result: Array<any>): void
 }
 
-declare
-export interface mariasql$MariaCallBackBoolean {
+declare export interface mariasql$MariaCallBackBoolean {
     (result: boolean): void
 }
 
-declare
-export interface mariasql$MariaCallBackObject {
+declare export interface mariasql$MariaCallBackObject {
     (result: Object): void
 }
 
-declare
-export interface mariasql$MariaCallBackInfo {
+declare export interface mariasql$MariaCallBackInfo {
     (result: mariasql$MariaInfo): void
 }
 
-declare
-export interface mariasql$MariaCallBackVoid {
+declare export interface mariasql$MariaCallBackVoid {
     (): void
 }
 
-declare
-export interface mariasql$Dictionary {
+declare export interface mariasql$Dictionary {
     [index: string]: any
 }
 
-declare
-export interface mariasql$MariaInfo {
+declare export interface mariasql$MariaInfo {
     affectedRows: number,
         insertId: number,
         numRows: number
 }
 
-declare
-export interface mariasql$MariaPreparedQuery {
+declare export interface mariasql$MariaPreparedQuery {
     (values: mariasql$Dictionary): string,
     (values: Array<any>): string
 }
 
-declare
-export interface mariasql$ClientConfig {
+declare export interface mariasql$ClientConfig {
     host: string,
         user: string,
         password: string,
@@ -79,8 +68,7 @@ export interface mariasql$ClientConfig {
         charset?: string
 }
 
-declare
-export interface mariasql$MariaResult {
+declare export interface mariasql$MariaResult {
     on(signal: "end", cb: mariasql$MariaCallBackInfo): mariasql$MariaResult,
         on(signal: "error", cb: mariasql$MariaCallBackError): mariasql$MariaResult,
         on(signal: "row", cb: mariasql$MariaCallBackRow): mariasql$MariaResult,
@@ -89,8 +77,7 @@ export interface mariasql$MariaResult {
         abort(): void
 }
 
-declare
-export interface mariasql$MariaQuery {
+declare export interface mariasql$MariaQuery {
     on(signal: "result", cb: mariasql$MariaCallBackResult): mariasql$MariaQuery,
         on(signal: "end", cb: mariasql$MariaCallBackVoid): mariasql$MariaQuery,
         on(signal: "abort", cb: mariasql$MariaCallBackVoid): mariasql$MariaQuery,
@@ -99,8 +86,7 @@ export interface mariasql$MariaQuery {
         abort(): void
 }
 
-declare
-export interface mariasql$MariaClient {
+declare export interface mariasql$MariaClient {
     connect(config: mariasql$ClientConfig): void,
         end(): void,
         destroy(): void,
@@ -121,8 +107,7 @@ export interface mariasql$MariaClient {
         threadId: string
 }
 
-declare
-export interface mariasql$Client {
+declare export interface mariasql$Client {
     new(): mariasql$MariaClient,
     (): mariasql$MariaClient,
     prototype: mariasql$MariaClient

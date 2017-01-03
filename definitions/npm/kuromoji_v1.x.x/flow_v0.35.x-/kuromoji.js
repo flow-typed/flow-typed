@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$kuromoji: {
+declare var npm$namespace$kuromoji: {
     builder: typeof kuromoji$builder,
     dictionaryBuilder: typeof kuromoji$dictionaryBuilder,
 }
@@ -92,8 +91,7 @@ declare interface kuromoji$Formatter<T>{
 declare type kuromoji$IpadicFormatter = {} & kuromoji$Formatter
 
 
-declare
-export interface kuromoji$IpadicFeatures {
+declare export interface kuromoji$IpadicFeatures {
     word_id: number,
         word_type: string,
         word_position: number,
@@ -163,9 +161,7 @@ declare interface kuromoji$TokenizerBuilderOption {
     dicPath?: string
 }
 
-declare
-export function kuromoji$builder(
+declare export function kuromoji$builder(
     option: kuromoji$TokenizerBuilderOption): kuromoji$TokenizerBuilder<kuromoji$IpadicFeatures >
 
-    declare
-export function kuromoji$dictionaryBuilder(): kuromoji$DictionaryBuilder
+    declare export function kuromoji$dictionaryBuilder(): kuromoji$DictionaryBuilder

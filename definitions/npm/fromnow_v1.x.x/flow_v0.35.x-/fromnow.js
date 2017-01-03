@@ -12,8 +12,7 @@ declare interface FromNow$FromNowOpts {
         useAnd?: boolean
 }
 
-declare
-export interface FromNow$FromNowStatic {
+declare export interface FromNow$FromNowStatic {
 
     /**
      * Get readable time differences from now vs past or future dates.

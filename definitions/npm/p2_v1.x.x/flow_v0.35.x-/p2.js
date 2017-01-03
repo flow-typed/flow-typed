@@ -9,8 +9,7 @@
 declare module 'p2' {
     declare module.exports: typeof p2
 }
-declare
-export class AABB {
+declare export class AABB {
     constructor(options?: {
         upperBound?: number[],
         lowerBound?: number[]
@@ -21,8 +20,7 @@ export class AABB {
     overlaps(aabb: p2$AABB): boolean
 }
 
-declare
-export class Broadphase {
+declare export class Broadphase {
     AABB: number;
     BOUNDING_CIRCLE: number;
     NAIVE: number;
@@ -40,8 +38,7 @@ export class Broadphase {
     boundingVolumeCheck(bodyA: p2$Body, bodyB: p2$Body): boolean
 }
 
-declare
-export class GridBroadphase mixins Broadphase {
+declare export class GridBroadphase mixins Broadphase {
     constructor(options?: {
         xmin?: number,
         xmax?: number,
@@ -60,11 +57,9 @@ export class GridBroadphase mixins Broadphase {
     binsizeY: number
 }
 
-declare
-export class NativeBroadphase mixins Broadphase {}
+declare export class NativeBroadphase mixins Broadphase {}
 
-declare
-export class Narrowphase {
+declare export class Narrowphase {
     contactEquations: p2$ContactEquation[];
     frictionEquations: p2$FrictionEquation[];
     enableFriction: boolean;
@@ -92,14 +87,12 @@ export class Narrowphase {
     createFrictionFromContact(c: p2$ContactEquation): p2$FrictionEquation
 }
 
-declare
-export class SAPBroadphase mixins Broadphase {
+declare export class SAPBroadphase mixins Broadphase {
     axisList: p2$Body[];
     axisIndex: number
 }
 
-declare
-export class Constraint {
+declare export class Constraint {
     DISTANCE: number;
     GEAR: number;
     LOCK: number;
@@ -118,8 +111,7 @@ export class Constraint {
     setRelaxation(relaxation: number): void
 }
 
-declare
-export class DistanceConstraint mixins Constraint {
+declare export class DistanceConstraint mixins Constraint {
     constructor(bodyA: p2$Body, bodyB: p2$Body, options?: {
         distance?: number,
         localAnchorA?: number[],
@@ -139,8 +131,7 @@ export class DistanceConstraint mixins Constraint {
     getMaxForce(): number
 }
 
-declare
-export class GearConstraint mixins Constraint {
+declare export class GearConstraint mixins Constraint {
     constructor(bodyA: p2$Body, bodyB: p2$Body, options?: {
         angle?: number,
         ratio?: number,
@@ -152,8 +143,7 @@ export class GearConstraint mixins Constraint {
     getMaxTorque(): number
 }
 
-declare
-export class LockConstraint mixins Constraint {
+declare export class LockConstraint mixins Constraint {
     constructor(bodyA: p2$Body, bodyB: p2$Body, options?: {
         localOffsetB?: number[],
         localAngleB?: number,
@@ -163,8 +153,7 @@ export class LockConstraint mixins Constraint {
     getMaxForce(): number
 }
 
-declare
-export class PrismaticConstraint mixins Constraint {
+declare export class PrismaticConstraint mixins Constraint {
     constructor(bodyA: p2$Body, bodyB: p2$Body, options?: {
         maxForce?: number,
         localAnchorA?: number[],
@@ -193,8 +182,7 @@ export class PrismaticConstraint mixins Constraint {
     setLimits(lower: number, upper: number): void
 }
 
-declare
-export class RevoluteConstraint mixins Constraint {
+declare export class RevoluteConstraint mixins Constraint {
     constructor(bodyA: p2$Body, bodyB: p2$Body, options?: {
         worldPivot?: number[],
         localPivotA?: number[],
@@ -220,8 +208,7 @@ export class RevoluteConstraint mixins Constraint {
     getMotorSpeed(): number
 }
 
-declare
-export class AngleLockEquation mixins Equation {
+declare export class AngleLockEquation mixins Equation {
     constructor(bodyA: p2$Body, bodyB: p2$Body, options?: {
         angle?: number,
         ratio?: number
@@ -231,8 +218,7 @@ export class AngleLockEquation mixins Equation {
     setMaxTorque(torque: number): number
 }
 
-declare
-export class ContactEquation mixins Equation {
+declare export class ContactEquation mixins Equation {
     constructor(bodyA: p2$Body, bodyB: p2$Body): this;
     contactPointA: number[];
     penetrationVec: number[];
@@ -245,8 +231,7 @@ export class ContactEquation mixins Equation {
     computeB(a: number, b: number, h: number): number
 }
 
-declare
-export class Equation {
+declare export class Equation {
     DEFAULT_STIFFNESS: number;
     DEFAULT_RELAXATION: number;
     constructor(bodyA: p2$Body, bodyB: p2$Body, minForce?: number, maxForce?: number): this;
@@ -277,8 +262,7 @@ export class Equation {
     computeInvC(eps: number): number
 }
 
-declare
-export class FrictionEquation mixins Equation {
+declare export class FrictionEquation mixins Equation {
     constructor(bodyA: p2$Body, bodyB: p2$Body, slipForce: number): this;
     contactPointA: number[];
     contactPointB: number[];
@@ -291,8 +275,7 @@ export class FrictionEquation mixins Equation {
     computeB(a: number, b: number, h: number): number
 }
 
-declare
-export class RotationalLockEquation mixins Equation {
+declare export class RotationalLockEquation mixins Equation {
     constructor(bodyA: p2$Body, bodyB: p2$Body, options?: {
         angle?: number
     }): this;
@@ -300,22 +283,19 @@ export class RotationalLockEquation mixins Equation {
     computeGq(): number
 }
 
-declare
-export class RotationalVelocityEquation mixins Equation {
+declare export class RotationalVelocityEquation mixins Equation {
     constructor(bodyA: p2$Body, bodyB: p2$Body): this;
     computeB(a: number, b: number, h: number): number
 }
 
-declare
-export class EventEmitter {
+declare export class EventEmitter {
     on(type: string, listener: Function, context: any): p2$EventEmitter;
     has(type: string, listener: Function): boolean;
     off(type: string, listener: Function): p2$EventEmitter;
     emit(event: any): p2$EventEmitter
 }
 
-declare
-export class ContactMaterialOptions {
+declare export class ContactMaterialOptions {
     friction: number;
     restitution: number;
     stiffness: number;
@@ -325,8 +305,7 @@ export class ContactMaterialOptions {
     surfaceVelocity: number
 }
 
-declare
-export class ContactMaterial {
+declare export class ContactMaterial {
     idCounter: number;
     constructor(materialA: p2$Material, materialB: p2$Material, options?: p2$ContactMaterialOptions): this;
     id: number;
@@ -342,15 +321,13 @@ export class ContactMaterial {
     contactSkinSize: number
 }
 
-declare
-export class Material {
+declare export class Material {
     idCounter: number;
     constructor(id: number): this;
     id: number
 }
 
-declare
-export class vec2 {
+declare export class vec2 {
     crossLength(a: number[], b: number[]): number;
     crossVZ(out: number[], vec: number[], zcomp: number): number;
     crossZV(out: number[], zcomp: number, vec: number[]): number;
@@ -394,8 +371,7 @@ export class vec2 {
     str(a: number[]): string
 }
 
-declare
-export interface p2$BodyOptions {
+declare export interface p2$BodyOptions {
     mass?: number,
         position?: number[],
         velocity?: number[],
@@ -406,8 +382,7 @@ export interface p2$BodyOptions {
         fixedRotation?: boolean
 }
 
-declare
-export class Body mixins EventEmitter {
+declare export class Body mixins EventEmitter {
     sleepyEvent: {
         type: string
     };
@@ -490,8 +465,7 @@ export class Body mixins EventEmitter {
     overlaps(body: p2$Body): boolean
 }
 
-declare
-export class Spring {
+declare export class Spring {
     constructor(bodyA: p2$Body, bodyB: p2$Body, options?: {
         stiffness?: number,
         damping?: number,
@@ -507,8 +481,7 @@ export class Spring {
     applyForce(): void
 }
 
-declare
-export class LinearSpring mixins Spring {
+declare export class LinearSpring mixins Spring {
     localAnchorA: number[];
     localAnchorB: number[];
     restLength: number;
@@ -519,8 +492,7 @@ export class LinearSpring mixins Spring {
     applyForce(): void
 }
 
-declare
-export class RotationalSpring mixins Spring {
+declare export class RotationalSpring mixins Spring {
     constructor(bodyA: p2$Body, bodyB: p2$Body, options?: {
         restAngle?: number,
         stiffness?: number,
@@ -529,41 +501,35 @@ export class RotationalSpring mixins Spring {
     restAngle: number
 }
 
-declare
-export type p2$CapsuleOptions = {
+declare export type p2$CapsuleOptions = {
     length?: number,
     radius?: number
 } & p2$SharedShapeOptions
 
 
-declare
-export class Capsule mixins Shape {
+declare export class Capsule mixins Shape {
     constructor(options?: p2$CapsuleOptions): this;
     length: number;
     radius: number
 }
 
-declare
-export type p2$CircleOptions = {
+declare export type p2$CircleOptions = {
     radius?: number
 } & p2$SharedShapeOptions
 
 
-declare
-export class Circle mixins Shape {
+declare export class Circle mixins Shape {
     constructor(options?: p2$CircleOptions): this;
     radius: number
 }
 
-declare
-export type p2$ConvexOptions = {
+declare export type p2$ConvexOptions = {
     length?: number,
     radius?: number
 } & p2$SharedShapeOptions
 
 
-declare
-export class Convex mixins Shape {
+declare export class Convex mixins Shape {
     triangleArea(a: number[], b: number[], c: number[]): number;
     constructor(options?: p2$ConvexOptions): this;
     vertices: number[][];
@@ -580,8 +546,7 @@ export class Convex mixins Shape {
     updateCenterOfMass(): void
 }
 
-declare
-export type p2$HeightfieldOptions = {
+declare export type p2$HeightfieldOptions = {
     heights?: number[],
     minValue?: number,
     maxValue?: number,
@@ -589,8 +554,7 @@ export type p2$HeightfieldOptions = {
 } & p2$SharedShapeOptions
 
 
-declare
-export class Heightfield mixins Shape {
+declare export class Heightfield mixins Shape {
     constructor(options?: p2$HeightfieldOptions): this;
     data: number[];
     maxValue: number;
@@ -598,8 +562,7 @@ export class Heightfield mixins Shape {
     elementWidth: number
 }
 
-declare
-export interface p2$SharedShapeOptions {
+declare export interface p2$SharedShapeOptions {
     position?: number[],
         angle?: number,
         collisionGroup?: number,
@@ -608,14 +571,12 @@ export interface p2$SharedShapeOptions {
         sensor?: boolean
 }
 
-declare
-export type p2$ShapeOptions = {
+declare export type p2$ShapeOptions = {
     type?: number
 } & p2$SharedShapeOptions
 
 
-declare
-export class Shape {
+declare export class Shape {
     idCounter: number;
     CIRCLE: number;
     PARTICLE: number;
@@ -643,43 +604,36 @@ export class Shape {
     computeAABB(out: p2$AABB, position: number[], angle: number): void
 }
 
-declare
-export type p2$LineOptions = {
+declare export type p2$LineOptions = {
     length?: number
 } & p2$SharedShapeOptions
 
 
-declare
-export class Line mixins Shape {
+declare export class Line mixins Shape {
     constructor(options?: p2$LineOptions): this;
     length: number
 }
 
-declare
-export class Particle mixins Shape {
+declare export class Particle mixins Shape {
     constructor(options?: p2$SharedShapeOptions): this
 }
 
-declare
-export class Plane mixins Shape {
+declare export class Plane mixins Shape {
     constructor(options?: p2$SharedShapeOptions): this
 }
 
-declare
-export interface p2$BoxOptions {
+declare export interface p2$BoxOptions {
     width?: number,
         height?: number
 }
 
-declare
-export class Box mixins Shape {
+declare export class Box mixins Shape {
     constructor(options?: p2$BoxOptions): this;
     width: number;
     height: number
 }
 
-declare
-export class Solver mixins EventEmitter {
+declare export class Solver mixins EventEmitter {
     GS: number;
     ISLAND: number;
     constructor(options?: {}, type?: number): this;
@@ -695,8 +649,7 @@ export class Solver mixins EventEmitter {
     removeAllEquations(): void
 }
 
-declare
-export class GSSolver mixins Solver {
+declare export class GSSolver mixins Solver {
     constructor(options?: {
         iterations?: number,
         tolerance?: number
@@ -709,8 +662,7 @@ export class GSSolver mixins Solver {
     solve(h: number, world: p2$World): void
 }
 
-declare
-export class OverlapKeeper {
+declare export class OverlapKeeper {
     constructor(bodyA: p2$Body, shapeA: p2$Shape, bodyB: p2$Body, shapeB: p2$Shape): this;
     shapeA: p2$Shape;
     shapeB: p2$Shape;
@@ -722,8 +674,7 @@ export class OverlapKeeper {
     set(bodyA: p2$Body, shapeA: p2$Shape, bodyB: p2$Body, shapeB: p2$Shape): void
 }
 
-declare
-export class TupleDictionary {
+declare export class TupleDictionary {
     data: number[];
     keys: number[];
     getKey(id1: number, id2: number): string;
@@ -734,16 +685,14 @@ export class TupleDictionary {
     copy(dict: p2$TupleDictionary): void
 }
 
-declare
-export class Utils {
+declare export class Utils {
     appendArray<T>(a: Array<T>, b: Array<T>): Array<T>;
     splice<T>(array: Array<T>, index: number, howMany: number): void;
     extend(a: any, b: any): void;
     defaults(options: any, defaults: any): any
 }
 
-declare
-export class Island {
+declare export class Island {
     equations: p2$Equation[];
     bodies: p2$Body[];
     reset(): void;
@@ -752,8 +701,7 @@ export class Island {
     sleep(): boolean
 }
 
-declare
-export class IslandManager mixins Solver {
+declare export class IslandManager mixins Solver {
     getUnvisitedNode(nodes: p2$IslandNode[]): p2$IslandNode;
     equations: p2$Equation[];
     islands: p2$Island[];
@@ -763,8 +711,7 @@ export class IslandManager mixins Solver {
     split(world: p2$World): p2$Island[]
 }
 
-declare
-export class IslandNode {
+declare export class IslandNode {
     constructor(body: p2$Body): this;
     body: p2$Body;
     neighbors: p2$IslandNode[];
@@ -773,8 +720,7 @@ export class IslandNode {
     reset(): void
 }
 
-declare
-export class World mixins EventEmitter {
+declare export class World mixins EventEmitter {
     postStepEvent: {
         type: string
     };

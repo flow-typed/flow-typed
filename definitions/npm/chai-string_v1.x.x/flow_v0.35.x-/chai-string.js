@@ -20,8 +20,7 @@ declare type Chai$Assertion = {
 } & LanguageChains & NumericComparison & TypeComparison
 
 
-declare
-export interface Chai$Assert {
+declare export interface Chai$Assert {
     startsWith(val: string, exp: string, msg?: string): void,
         notStartsWith(val: string, exp: string, msg?: string): void,
         endsWith(val: string, exp: string, msg?: string): void,

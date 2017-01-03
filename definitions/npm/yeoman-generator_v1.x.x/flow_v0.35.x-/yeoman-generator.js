@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface yo$IYeomanGenerator {
+declare export interface yo$IYeomanGenerator {
     argument(name: string, config: yo$IArgumentConfig): void,
         composeWith(
             namespace: string,
@@ -40,8 +39,7 @@ export interface yo$IYeomanGenerator {
         fs: yo$IMemFsEditor
 }
 
-declare
-export class YeomanGeneratorBase mixins NodeJS.EventEmitter, IYeomanGenerator {
+declare export class YeomanGeneratorBase mixins NodeJS.EventEmitter, IYeomanGenerator {
     argument(name: string, config: yo$IArgumentConfig): void;
     composeWith(
         namespace: string,
@@ -88,8 +86,7 @@ export class YeomanGeneratorBase mixins NodeJS.EventEmitter, IYeomanGenerator {
     fs: yo$IMemFsEditor
 }
 
-declare
-export interface yo$IMemFsEditor {
+declare export interface yo$IMemFsEditor {
     read(filepath: string, options?: Object): string,
         readJSON(filepath: string, defaults?: Object): Object,
         write(filepath: string, contents: string): void,
@@ -103,23 +100,20 @@ export interface yo$IMemFsEditor {
         commit(filters: any[], callback: Function): void
 }
 
-declare
-export interface yo$IInstallDependencyOptions {
+declare export interface yo$IInstallDependencyOptions {
     npm?: boolean,
         bower?: boolean,
         skipMessage?: boolean,
         callback?: Function
 }
 
-declare
-export interface yo$IChoice {
+declare export interface yo$IChoice {
     name: string,
         value: string,
         short?: string
 }
 
-declare
-export interface yo$IPromptOptions {
+declare export interface yo$IPromptOptions {
     type?: string,
         name: string,
         message: string | ((answers: Object) => string),
@@ -135,8 +129,7 @@ export interface yo$IPromptOptions {
         store?: boolean
 }
 
-declare
-export interface yo$IGruntFileStatic {
+declare export interface yo$IGruntFileStatic {
     loadNpmTasks(pluginName: string): void,
         insertConfig(name: string, config: any): void,
         registerTask(name: string, tasks: any): void,
@@ -144,8 +137,7 @@ export interface yo$IGruntFileStatic {
         prependJavaScript(code: string): void
 }
 
-declare
-export interface yo$IArgumentConfig {
+declare export interface yo$IArgumentConfig {
     desc: string,
         required?: boolean,
         optional?: boolean,
@@ -153,21 +145,18 @@ export interface yo$IArgumentConfig {
         defaults?: any
 }
 
-declare
-export interface yo$IComposeSetting {
+declare export interface yo$IComposeSetting {
     local?: string,
         link?: string
 }
 
-declare
-export interface yo$IHookConfig {
+declare export interface yo$IHookConfig {
     as: string,
         args: any,
         options: any
 }
 
-declare
-export interface yo$IYeomanGeneratorOption {
+declare export interface yo$IYeomanGeneratorOption {
     alias?: string,
         defaults?: any,
         desc?: string,
@@ -175,8 +164,7 @@ export interface yo$IYeomanGeneratorOption {
         type?: any
 }
 
-declare
-export interface yo$IQueueProps {
+declare export interface yo$IQueueProps {
     initializing: () => void,
         prompting?: () => void,
         configuring?: () => void,
@@ -189,16 +177,13 @@ export interface yo$IQueueProps {
         end: () => void
 }
 
-declare
-export type yo$INamedBase = {} & yo$IYeomanGenerator
+declare export type yo$INamedBase = {} & yo$IYeomanGenerator
 
 
-declare
-export type yo$IBase = {} & yo$INamedBase
+declare export type yo$IBase = {} & yo$INamedBase
 
 
-declare
-export interface yo$IAssert {
+declare export interface yo$IAssert {
     file(path: string): void,
         file(paths: string[]): void,
         fileContent(file: string, reg: RegExp): void,
@@ -239,8 +224,7 @@ export interface yo$IAssert {
         textEqual(value: string, expected: string): void
 }
 
-declare
-export interface yo$ITestHelper {
+declare export interface yo$ITestHelper {
     createDummyGenerator(): yo$IYeomanGenerator,
         createGenerator(
             name: string,
@@ -260,8 +244,7 @@ export interface yo$ITestHelper {
         run(generator: any): yo$IRunContext
 }
 
-declare
-export interface yo$IRunContext {
+declare export interface yo$IRunContext {
     async(): Function,
     inDir(dirPath: string): yo$IRunContext,
 
@@ -275,32 +258,25 @@ export interface yo$IRunContext {
         withPrompts(answers: any): yo$IRunContext
 }
 
-declare
-var file: any;
+declare var file: any;
 
-declare
-var assert: yo$IAssert;
+declare var assert: yo$IAssert;
 
-declare
-var test: yo$ITestHelper;
+declare var test: yo$ITestHelper;
 
-declare
-export class NamedBase mixins YeomanGeneratorBase, INamedBase {
+declare export class NamedBase mixins YeomanGeneratorBase, INamedBase {
     constructor(args: string | string[], options: any): this
 }
 
-declare
-export class Base mixins NamedBase, IBase {
+declare export class Base mixins NamedBase, IBase {
     extend(protoProps: yo$IQueueProps, staticProps?: any): yo$IYeomanGenerator
 }
 
-declare
-export class NamedBase mixins YeomanGeneratorBase, INamedBase {
+declare export class NamedBase mixins YeomanGeneratorBase, INamedBase {
     constructor(args: string | string[], options: any): this
 }
 
-declare
-export class Base mixins NamedBase, IBase {
+declare export class Base mixins NamedBase, IBase {
     extend(protoProps: yo$IQueueProps, staticProps?: any): yo$IYeomanGenerator
 }
 declare module 'yeoman-generator' {

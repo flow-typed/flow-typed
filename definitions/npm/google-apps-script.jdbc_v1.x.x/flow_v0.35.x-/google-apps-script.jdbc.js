@@ -1033,5 +1033,4 @@ declare module 'JDBC' {
             setYear(year: Integer): void
     }
 }
-declare
-var Jdbc: undefined.Jdbc;
+declare var Jdbc: undefined.Jdbc;

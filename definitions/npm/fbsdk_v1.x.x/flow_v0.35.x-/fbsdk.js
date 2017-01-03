@@ -178,10 +178,8 @@ declare interface Window {
 declare module 'FB' {
     declare module.exports: typeof FB
 }
-declare
-export interface FB$LoginStatusResponse {
+declare export interface FB$LoginStatusResponse {
     authResponse?: AuthResponse,
         status: LoginStatus
 }
-declare
-var FB: FBSDK;
+declare var FB: FBSDK;

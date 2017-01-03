@@ -10,5 +10,4 @@ declare interface AnimationFrame {
     new(): AnimationFrame,
     request(callback: () => void): void
 }
-declare
-var AnimationFrame: AnimationFrame;
+declare var AnimationFrame: AnimationFrame;

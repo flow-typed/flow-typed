@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface PouchDB$Database<Content>{
+declare export interface PouchDB$Database<Content>{
 
     /**
      * Cleans up any stale map/reduce indexes.

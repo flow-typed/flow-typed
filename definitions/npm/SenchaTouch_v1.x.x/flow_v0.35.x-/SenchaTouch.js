@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Ext$IXTemplateParser = {
+declare export type Ext$IXTemplateParser = {
 
     /**
      * [Property] (Number) 

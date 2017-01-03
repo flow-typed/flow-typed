@@ -503,8 +503,7 @@ identity will be disregarded by deepEqual.
  * @param expected Known comparison value
  * @param message A short description of the assertion
 */
-declare
-function deepEqual(actual: any, expected: any, message?: string): any
+declare function deepEqual(actual: any, expected: any, message?: string): any
 /**
  * A non-strict comparison assertion, roughly equivalent to JUnit assertEquals.
  * 
@@ -516,8 +515,7 @@ in addition to a given message.
  * @param expected Known comparison value
  * @param message A short description of the assertion
 */
-declare
-function equal(actual: any, expected: any, message?: string): any
+declare function equal(actual: any, expected: any, message?: string): any
 /**
  * An inverted deep recursive comparison assertion, working on primitive types, 
  * arrays, objects, regular expressions, dates and functions.
@@ -529,8 +527,7 @@ values, identity will be disregarded by notDeepEqual.
  * @param expected Known comparison value
  * @param message A short description of the assertion
 */
-declare
-function notDeepEqual(actual: any, expected: any, message?: string): any
+declare function notDeepEqual(actual: any, expected: any, message?: string): any
 /**
  * A non-strict comparison assertion, checking for inequality.
  * 
@@ -542,8 +539,7 @@ in the test result, in addition to a given message.
  * @param expected Known comparison value
  * @param message A short description of the assertion
 */
-declare
-function notEqual(actual: any, expected: any, message?: string): any
+declare function notEqual(actual: any, expected: any, message?: string): any
 /**
  * A non-strict comparison assertion, checking for inequality.
  * 
@@ -555,8 +551,7 @@ displayed in the test result, in addition to a given message.
  * @param expected Known comparison value
  * @param message A short description of the assertion
 */
-declare
-function notStrictEqual(actual: any, expected: any, message?: string): any
+declare function notStrictEqual(actual: any, expected: any, message?: string): any
 /**
  * A boolean assertion, equivalent to CommonJS’s assert.ok() and JUnit’s assertTrue(). 
  * Passes if the first argument is truthy.
@@ -567,8 +562,7 @@ argument is provided, it will be displayed in place of the result.
  * @param state Expression being tested
  * @param message A short description of the assertion
 */
-declare
-function ok(state: any, message?: string): any
+declare function ok(state: any, message?: string): any
 /**
  * A strict type and value comparison assertion.
  * 
@@ -578,8 +572,7 @@ the strict equality operator (===)
  * @param expected Known comparison value
  * @param message A short description of the assertion
 */
-declare
-function strictEqual(actual: any, expected: any, message?: string): any
+declare function strictEqual(actual: any, expected: any, message?: string): any
 /**
  * Assertion to test if a callback throws an exception when run.
  * 
@@ -589,16 +582,14 @@ circumstances, use throws() to catch the error object for testing and comparison
  * @param expected Error Object to compare
  * @param message A short description of the assertion
 */
-declare
-function throws(block: () => any, expected: any, message?: string): any
+declare function throws(block: () => any, expected: any, message?: string): any
 /**
  * Start running tests again after the testrunner was stopped. See stop().
  * 
 When your async test has multiple exit points, call start() for the corresponding number of stop() increments.
  * @param decrement Optional argument to merge multiple start() calls into one. Use with multiple corrsponding stop() calls.
 */
-declare
-function start(decrement?: number): any
+declare function start(decrement?: number): any
 /**
  * Stop the testrunner to wait for async tests to run. Call start() to continue.
  * 
@@ -607,8 +598,7 @@ When your async test has multiple exit points, call stop() with the increment ar
 On Blackberry 5.0, window.stop is a native read-only function. If you deal with that browser, use QUnit.stop() instead, which will work anywhere.
  * @param decrement Optional argument to merge multiple stop() calls into one. Use with multiple corrsponding start() calls.
 */
-declare
-function stop(increment?: number): any
+declare function stop(increment?: number): any
 /**
  * Register a callback to fire whenever the test suite begins.
  * 
@@ -616,14 +606,12 @@ QUnit.begin() is called once before running any tests. (a better would've been Q
 but thats already in use elsewhere and can't be changed.)
  * @param callback Callback to execute
 */
-declare
-function begin(callback: () => any): any
+declare function begin(callback: () => any): any
 /**
  * Register a callback to fire whenever the test suite ends.
  * @param callback Callback to execute.
  */
-declare
-function done(callback: (details: DoneCallbackObject) => any): any
+declare function done(callback: (details: DoneCallbackObject) => any): any
 /**
  * Register a callback to fire whenever an assertion completes.
  * 
@@ -631,32 +619,27 @@ This is one of several callbacks QUnit provides. Its intended for integration sc
 PhantomJS or Jenkins. The properties of the details argument are listed below as options.
  * @param callback Callback to execute.
 */
-declare
-function log(callback: (details: LogCallbackObject) => any): any
+declare function log(callback: (details: LogCallbackObject) => any): any
 /**
  * Register a callback to fire whenever a module ends.
  * @param callback Callback to execute.
  */
-declare
-function moduleDone(callback: (details: ModuleDoneCallbackObject) => any): any
+declare function moduleDone(callback: (details: ModuleDoneCallbackObject) => any): any
 /**
  * Register a callback to fire whenever a module begins.
  * @param callback Callback to execute.
  */
-declare
-function moduleStart(callback: (name: string) => any): any
+declare function moduleStart(callback: (name: string) => any): any
 /**
  * Register a callback to fire whenever a test ends.
  * @param callback Callback to execute.
  */
-declare
-function testDone(callback: (details: TestDoneCallbackObject) => any): any
+declare function testDone(callback: (details: TestDoneCallbackObject) => any): any
 /**
  * Register a callback to fire whenever a test begins.
  * @param callback Callback to execute.
  */
-declare
-function testStart(callback: (details: TestStartCallbackObject) => any): any
+declare function testStart(callback: (details: TestStartCallbackObject) => any): any
 /**
  * Add an asynchronous test to run. The test must include a call to start().
  * 
@@ -666,8 +649,7 @@ and wait for your code to call start() to continue.
  * @param expected Number of assertions in this test
  * @param test Function to close over assertions
 */
-declare
-function asyncTest(name: string, expected?: any, test?: (assert: QUnitAssert) => any): any
+declare function asyncTest(name: string, expected?: any, test?: (assert: QUnitAssert) => any): any
 /**
  * Specify how many assertions are expected to run within a test.
  * 
@@ -677,8 +659,7 @@ run does not match the expected count, the test will fail.
  * @param amount Number of assertions in this test.
  * @depricated  since version 1.16
 */
-declare
-function expect(amount: number): any
+declare function expect(amount: number): any
 /**
  * Add a test to run.
  * 
@@ -690,11 +671,5 @@ argument instead.
  * @param expected Number of assertions in this test
  * @param test Function to close over assertions
 */
-declare
-function test(title: string, expected: number, test: (assert?: QUnitAssert) => any): anydeclare
-function notPropEqual(actual: any, expected: any, message?: string): anydeclare
-function propEqual(actual: any, expected: any, message?: string): anydeclare
-function equiv(a: any, b: any): anydeclare
-var raises: any;
-declare
-var QUnit: QUnitStatic;
+declare function test(title: string, expected: number, test: (assert?: QUnitAssert) => any): anydeclare function notPropEqual(actual: any, expected: any, message?: string): anydeclare function propEqual(actual: any, expected: any, message?: string): anydeclare function equiv(a: any, b: any): anydeclare var raises: any;
+declare var QUnit: QUnitStatic;

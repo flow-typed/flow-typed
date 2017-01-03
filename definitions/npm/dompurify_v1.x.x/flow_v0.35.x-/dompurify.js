@@ -29,8 +29,7 @@ declare interface IDOMPurifyConfig {
         SANITIZE_DOM?: boolean,
         WHOLE_DOCUMENT?: boolean
 }
-declare
-var DOMPurify: IDOMPurify;
+declare var DOMPurify: IDOMPurify;
 declare module 'dompurify' {
     declare module.exports: typeof DOMPurify
 }

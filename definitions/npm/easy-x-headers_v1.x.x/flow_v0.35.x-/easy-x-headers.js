@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Express$Request {
+declare export interface Express$Request {
     info: any
 }
 declare module 'easy-x-headers' {

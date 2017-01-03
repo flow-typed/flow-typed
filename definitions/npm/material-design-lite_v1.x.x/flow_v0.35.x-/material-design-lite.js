@@ -119,5 +119,4 @@ declare module 'MaterialDesignLite' {
             widget?: string | boolean
     }
 }
-declare
-var componentHandler: MaterialDesignLite.ComponentHandler;
+declare var componentHandler: MaterialDesignLite.ComponentHandler;

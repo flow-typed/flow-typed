@@ -35,21 +35,18 @@ declare interface Unist$Location {
         indent?: Array<number >
 }
 
-declare
-export interface Unist$Node {
+declare export interface Unist$Node {
     type: string,
         data?: Unist$Data,
         position?: Unist$Location
 }
 
-declare
-export type Unist$Parent = {
+declare export type Unist$Parent = {
     children: Array<Unist$Node >
 } & Unist$Node
 
 
-declare
-export type Unist$Text = {
+declare export type Unist$Text = {
     value: string
 } & Unist$Node
 
@@ -58,33 +55,28 @@ declare interface AST$Properties {
     [index: string]: any
 }
 
-declare
-export type AST$Root = {
+declare export type AST$Root = {
     type: "root"
 }
 
-declare
-export type AST$Element = {
+declare export type AST$Element = {
     type: "element",
     tagName: string,
     properties: AST$Properties
 }
 
-declare
-export type AST$Doctype = {
+declare export type AST$Doctype = {
     type: "doctype",
     name: string,
     public?: string,
     system?: string
 }
 
-declare
-export type AST$Comment = {
+declare export type AST$Comment = {
     type: "comment"
 }
 
-declare
-export type AST$Text = {
+declare export type AST$Text = {
     value: string
 } & Unist$Node
 

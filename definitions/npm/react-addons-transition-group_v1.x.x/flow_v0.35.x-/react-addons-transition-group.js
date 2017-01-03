@@ -15,8 +15,7 @@ declare type ___React$TransitionGroupProps = {
 
 declare type ___React$TransitionGroup = ComponentClass<___React$TransitionGroupProps>;
 
-declare
-export var TransitionGroup: ___React$TransitionGroup;
+declare export var TransitionGroup: ___React$TransitionGroup;
 declare module 'react-addons-transition-group' {
     declare var TransitionGroup: ___React$TransitionGroup;
     declare module.exports: typeof TransitionGroup

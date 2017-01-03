@@ -122,8 +122,7 @@ declare interface BugsnagStatic {
          */
         notify(name: string, message: string, metaData?: any, severity?: string): void
 }
-declare
-var Bugsnag: BugsnagStatic;
+declare var Bugsnag: BugsnagStatic;
 declare module 'Bugsnag' {
     declare module.exports: typeof Bugsnag
 }

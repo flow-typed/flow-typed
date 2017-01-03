@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Rx$Observable<T>{
+declare export interface Rx$Observable<T>{
     finalValue(): Rx$Observable<T>,
     aggregate(accumulator: (acc: T, value: T) => T): Rx$Observable<T>,
     aggregate<TAcc>(

@@ -18,5 +18,4 @@ declare interface StoreJSStatic {
         serialize(value: any): string,
         deserialize(value: string): any
 }
-declare
-var store: StoreJSStatic;
+declare var store: StoreJSStatic;

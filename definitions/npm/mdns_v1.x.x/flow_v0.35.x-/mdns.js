@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$MDNS: {
+declare var npm$namespace$MDNS: {
     tcp: typeof MDNS$tcp,
     udp: typeof MDNS$udp,
     makeServiceType: typeof MDNS$makeServiceType,
@@ -125,450 +124,304 @@ declare type MDNS$DefaultResolverSequenceTasks = {
 } & MDNS$MDNSResolverSequenceTasks
 
 
-declare
-var Advertisement: MDNS$AdvertisementCreatable;
+declare var Advertisement: MDNS$AdvertisementCreatable;
 
-declare
-var Browser: MDNS$BrowserStatic;
+declare var Browser: MDNS$BrowserStatic;
 
-declare
-var ServiceType: MDNS$ServiceType;
+declare var ServiceType: MDNS$ServiceType;
 
-declare
-var rst: MDNS$DefaultResolverSequenceTasks;
+declare var rst: MDNS$DefaultResolverSequenceTasks;
 
-declare
-function MDNS$tcp(name: string, ...subtypes: string[]): MDNS$ServiceType
+declare function MDNS$tcp(name: string, ...subtypes: string[]): MDNS$ServiceType
 
-declare
-function MDNS$udp(name: string, ...subtypes: string[]): MDNS$ServiceType
+declare function MDNS$udp(name: string, ...subtypes: string[]): MDNS$ServiceType
 
-declare
-function MDNS$makeServiceType(name: string, protocol: string, ...subtypes: string[]): MDNS$ServiceType
+declare function MDNS$makeServiceType(name: string, protocol: string, ...subtypes: string[]): MDNS$ServiceType
 
-declare
-function MDNS$createBrowser(serviceType: MDNS$ServiceType, options?: MDNS$BrowserOptions): MDNS$Browser
+declare function MDNS$createBrowser(serviceType: MDNS$ServiceType, options?: MDNS$BrowserOptions): MDNS$Browser
 
-declare
-function MDNS$createAdvertisement(
+declare function MDNS$createAdvertisement(
     serviceType: MDNS$ServiceType,
     port: number,
     options?: MDNS$AdvertisementOptions,
     callback?: (error: MDNS$DnsSdError, service: MDNS$Service) => void): MDNS$Advertisement
 
-declare
-function MDNS$resolve(
+declare function MDNS$resolve(
     service: MDNS$Service,
     sequence?: Array<(service: MDNS$Service, next: () => void) => boolean>,
     callback?: (error: MDNS$DnsSdError, service: MDNS$Service) => void): void
 
-declare
-function MDNS$browseThemAll(options: MDNS$BrowserOptions): MDNS$Browser
+declare function MDNS$browseThemAll(options: MDNS$BrowserOptions): MDNS$Browser
 
-declare
-function MDNS$loopbackInterface(): any
+declare function MDNS$loopbackInterface(): any
 
-declare
-var isAvahi: boolean;
+declare var isAvahi: boolean;
 
-declare
-var _DNS_SD_H: number;
+declare var _DNS_SD_H: number;
 
-declare
-var kDNSServiceMaxDomainName: string;
+declare var kDNSServiceMaxDomainName: string;
 
-declare
-var kDNSServiceMaxServiceName: number;
+declare var kDNSServiceMaxServiceName: number;
 
-declare
-var kDNSServiceOutputFlags: any;
+declare var kDNSServiceOutputFlags: any;
 
-declare
-var kDNSServiceProperty_DaemonVersion: number;
+declare var kDNSServiceProperty_DaemonVersion: number;
 
-declare
-var kDNSServiceClass_IN: number;
+declare var kDNSServiceClass_IN: number;
 
-declare
-var kDNSServiceErr_NoError: number;
+declare var kDNSServiceErr_NoError: number;
 
-declare
-var kDNSServiceErr_Unknown: number;
+declare var kDNSServiceErr_Unknown: number;
 
-declare
-var kDNSServiceErr_NoSuchName: number;
+declare var kDNSServiceErr_NoSuchName: number;
 
-declare
-var kDNSServiceErr_NoMemory: number;
+declare var kDNSServiceErr_NoMemory: number;
 
-declare
-var kDNSServiceErr_BadParam: number;
+declare var kDNSServiceErr_BadParam: number;
 
-declare
-var kDNSServiceErr_BadReference: number;
+declare var kDNSServiceErr_BadReference: number;
 
-declare
-var kDNSServiceErr_BadState: number;
+declare var kDNSServiceErr_BadState: number;
 
-declare
-var kDNSServiceErr_BadFlags: number;
+declare var kDNSServiceErr_BadFlags: number;
 
-declare
-var kDNSServiceErr_Unsupported: number;
+declare var kDNSServiceErr_Unsupported: number;
 
-declare
-var kDNSServiceErr_NotInitialized: number;
+declare var kDNSServiceErr_NotInitialized: number;
 
-declare
-var kDNSServiceErr_AlreadyRegistered: number;
+declare var kDNSServiceErr_AlreadyRegistered: number;
 
-declare
-var kDNSServiceErr_NameConflict: number;
+declare var kDNSServiceErr_NameConflict: number;
 
-declare
-var kDNSServiceErr_Invalid: number;
+declare var kDNSServiceErr_Invalid: number;
 
-declare
-var kDNSServiceErr_Firewall: number;
+declare var kDNSServiceErr_Firewall: number;
 
-declare
-var kDNSServiceErr_Incompatible: number;
+declare var kDNSServiceErr_Incompatible: number;
 
-declare
-var kDNSServiceErr_BadInterfaceIndex: number;
+declare var kDNSServiceErr_BadInterfaceIndex: number;
 
-declare
-var kDNSServiceErr_Refused: number;
+declare var kDNSServiceErr_Refused: number;
 
-declare
-var kDNSServiceErr_NoSuchRecord: number;
+declare var kDNSServiceErr_NoSuchRecord: number;
 
-declare
-var kDNSServiceErr_NoAuth: number;
+declare var kDNSServiceErr_NoAuth: number;
 
-declare
-var kDNSServiceErr_NoSuchKey: number;
+declare var kDNSServiceErr_NoSuchKey: number;
 
-declare
-var kDNSServiceErr_NATTraversal: number;
+declare var kDNSServiceErr_NATTraversal: number;
 
-declare
-var kDNSServiceErr_DoubleNAT: number;
+declare var kDNSServiceErr_DoubleNAT: number;
 
-declare
-var kDNSServiceErr_BadTime: number;
+declare var kDNSServiceErr_BadTime: number;
 
-declare
-var kDNSServiceErr_BadSig: number;
+declare var kDNSServiceErr_BadSig: number;
 
-declare
-var kDNSServiceErr_BadKey: number;
+declare var kDNSServiceErr_BadKey: number;
 
-declare
-var kDNSServiceErr_Transient: number;
+declare var kDNSServiceErr_Transient: number;
 
-declare
-var kDNSServiceErr_ServiceNotRunning: number;
+declare var kDNSServiceErr_ServiceNotRunning: number;
 
-declare
-var kDNSServiceErr_NATPortMappingUnsupported: number;
+declare var kDNSServiceErr_NATPortMappingUnsupported: number;
 
-declare
-var kDNSServiceErr_NATPortMappingDisabled: number;
+declare var kDNSServiceErr_NATPortMappingDisabled: number;
 
-declare
-var kDNSServiceErr_NoRouter: number;
+declare var kDNSServiceErr_NoRouter: number;
 
-declare
-var kDNSServiceErr_PollingMode: number;
+declare var kDNSServiceErr_PollingMode: number;
 
-declare
-var kDNSServiceErr_Timeout: number;
+declare var kDNSServiceErr_Timeout: number;
 
-declare
-var kDNSServiceType_A: number;
+declare var kDNSServiceType_A: number;
 
-declare
-var kDNSServiceType_NS: number;
+declare var kDNSServiceType_NS: number;
 
-declare
-var kDNSServiceType_MD: number;
+declare var kDNSServiceType_MD: number;
 
-declare
-var kDNSServiceType_MF: number;
+declare var kDNSServiceType_MF: number;
 
-declare
-var kDNSServiceType_CNAME: number;
+declare var kDNSServiceType_CNAME: number;
 
-declare
-var kDNSServiceType_SOA: number;
+declare var kDNSServiceType_SOA: number;
 
-declare
-var kDNSServiceType_MB: number;
+declare var kDNSServiceType_MB: number;
 
-declare
-var kDNSServiceType_MG: number;
+declare var kDNSServiceType_MG: number;
 
-declare
-var kDNSServiceType_MR: number;
+declare var kDNSServiceType_MR: number;
 
-declare
-var kDNSServiceType_NULL: number;
+declare var kDNSServiceType_NULL: number;
 
-declare
-var kDNSServiceType_WKS: number;
+declare var kDNSServiceType_WKS: number;
 
-declare
-var kDNSServiceType_PTR: number;
+declare var kDNSServiceType_PTR: number;
 
-declare
-var kDNSServiceType_HINFO: number;
+declare var kDNSServiceType_HINFO: number;
 
-declare
-var kDNSServiceType_MINFO: number;
+declare var kDNSServiceType_MINFO: number;
 
-declare
-var kDNSServiceType_MX: number;
+declare var kDNSServiceType_MX: number;
 
-declare
-var kDNSServiceType_TXT: number;
+declare var kDNSServiceType_TXT: number;
 
-declare
-var kDNSServiceType_RP: number;
+declare var kDNSServiceType_RP: number;
 
-declare
-var kDNSServiceType_AFSDB: number;
+declare var kDNSServiceType_AFSDB: number;
 
-declare
-var kDNSServiceType_X25: number;
+declare var kDNSServiceType_X25: number;
 
-declare
-var kDNSServiceType_ISDN: number;
+declare var kDNSServiceType_ISDN: number;
 
-declare
-var kDNSServiceType_RT: number;
+declare var kDNSServiceType_RT: number;
 
-declare
-var kDNSServiceType_NSAP: number;
+declare var kDNSServiceType_NSAP: number;
 
-declare
-var kDNSServiceType_NSAP_PTR: number;
+declare var kDNSServiceType_NSAP_PTR: number;
 
-declare
-var kDNSServiceType_SIG: number;
+declare var kDNSServiceType_SIG: number;
 
-declare
-var kDNSServiceType_KEY: number;
+declare var kDNSServiceType_KEY: number;
 
-declare
-var kDNSServiceType_PX: number;
+declare var kDNSServiceType_PX: number;
 
-declare
-var kDNSServiceType_GPOS: number;
+declare var kDNSServiceType_GPOS: number;
 
-declare
-var kDNSServiceType_AAAA: number;
+declare var kDNSServiceType_AAAA: number;
 
-declare
-var kDNSServiceType_LOC: number;
+declare var kDNSServiceType_LOC: number;
 
-declare
-var kDNSServiceType_NXT: number;
+declare var kDNSServiceType_NXT: number;
 
-declare
-var kDNSServiceType_EID: number;
+declare var kDNSServiceType_EID: number;
 
-declare
-var kDNSServiceType_NIMLOC: number;
+declare var kDNSServiceType_NIMLOC: number;
 
-declare
-var kDNSServiceType_SRV: number;
+declare var kDNSServiceType_SRV: number;
 
-declare
-var kDNSServiceType_ATMA: number;
+declare var kDNSServiceType_ATMA: number;
 
-declare
-var kDNSServiceType_NAPTR: number;
+declare var kDNSServiceType_NAPTR: number;
 
-declare
-var kDNSServiceType_KX: number;
+declare var kDNSServiceType_KX: number;
 
-declare
-var kDNSServiceType_CERT: number;
+declare var kDNSServiceType_CERT: number;
 
-declare
-var kDNSServiceType_A6: number;
+declare var kDNSServiceType_A6: number;
 
-declare
-var kDNSServiceType_DNAME: number;
+declare var kDNSServiceType_DNAME: number;
 
-declare
-var kDNSServiceType_SINK: number;
+declare var kDNSServiceType_SINK: number;
 
-declare
-var kDNSServiceType_OPT: number;
+declare var kDNSServiceType_OPT: number;
 
-declare
-var kDNSServiceType_APL: number;
+declare var kDNSServiceType_APL: number;
 
-declare
-var kDNSServiceType_DS: number;
+declare var kDNSServiceType_DS: number;
 
-declare
-var kDNSServiceType_SSHFP: number;
+declare var kDNSServiceType_SSHFP: number;
 
-declare
-var kDNSServiceType_IPSECKEY: number;
+declare var kDNSServiceType_IPSECKEY: number;
 
-declare
-var kDNSServiceType_RRSIG: number;
+declare var kDNSServiceType_RRSIG: number;
 
-declare
-var kDNSServiceType_NSEC: number;
+declare var kDNSServiceType_NSEC: number;
 
-declare
-var kDNSServiceType_DNSKEY: number;
+declare var kDNSServiceType_DNSKEY: number;
 
-declare
-var kDNSServiceType_DHCID: number;
+declare var kDNSServiceType_DHCID: number;
 
-declare
-var kDNSServiceType_NSEC3: number;
+declare var kDNSServiceType_NSEC3: number;
 
-declare
-var kDNSServiceType_NSEC3PARAM: number;
+declare var kDNSServiceType_NSEC3PARAM: number;
 
-declare
-var kDNSServiceType_HIP: number;
+declare var kDNSServiceType_HIP: number;
 
-declare
-var kDNSServiceType_SPF: number;
+declare var kDNSServiceType_SPF: number;
 
-declare
-var kDNSServiceType_UINFO: number;
+declare var kDNSServiceType_UINFO: number;
 
-declare
-var kDNSServiceType_UID: number;
+declare var kDNSServiceType_UID: number;
 
-declare
-var kDNSServiceType_GID: number;
+declare var kDNSServiceType_GID: number;
 
-declare
-var kDNSServiceType_UNSPEC: number;
+declare var kDNSServiceType_UNSPEC: number;
 
-declare
-var kDNSServiceType_TKEY: number;
+declare var kDNSServiceType_TKEY: number;
 
-declare
-var kDNSServiceType_TSIG: number;
+declare var kDNSServiceType_TSIG: number;
 
-declare
-var kDNSServiceType_IXFR: number;
+declare var kDNSServiceType_IXFR: number;
 
-declare
-var kDNSServiceType_AXFR: number;
+declare var kDNSServiceType_AXFR: number;
 
-declare
-var kDNSServiceType_MAILB: number;
+declare var kDNSServiceType_MAILB: number;
 
-declare
-var kDNSServiceType_MAILA: number;
+declare var kDNSServiceType_MAILA: number;
 
-declare
-var kDNSServiceType_ANY: number;
+declare var kDNSServiceType_ANY: number;
 
-declare
-var kDNSServiceFlagsMoreComing: number;
+declare var kDNSServiceFlagsMoreComing: number;
 
-declare
-var kDNSServiceFlagsAdd: number;
+declare var kDNSServiceFlagsAdd: number;
 
-declare
-var kDNSServiceFlagsDefault: number;
+declare var kDNSServiceFlagsDefault: number;
 
-declare
-var kDNSServiceFlagsNoAutoRename: number;
+declare var kDNSServiceFlagsNoAutoRename: number;
 
-declare
-var kDNSServiceFlagsShared: number;
+declare var kDNSServiceFlagsShared: number;
 
-declare
-var kDNSServiceFlagsUnique: number;
+declare var kDNSServiceFlagsUnique: number;
 
-declare
-var kDNSServiceFlagsBrowseDomains: number;
+declare var kDNSServiceFlagsBrowseDomains: number;
 
-declare
-var kDNSServiceFlagsRegistrationDomains: number;
+declare var kDNSServiceFlagsRegistrationDomains: number;
 
-declare
-var kDNSServiceFlagsLongLivedQuery: number;
+declare var kDNSServiceFlagsLongLivedQuery: number;
 
-declare
-var kDNSServiceFlagsAllowRemoteQuery: number;
+declare var kDNSServiceFlagsAllowRemoteQuery: number;
 
-declare
-var kDNSServiceFlagsForceMulticast: number;
+declare var kDNSServiceFlagsForceMulticast: number;
 
-declare
-var kDNSServiceFlagsKnownUnique: number;
+declare var kDNSServiceFlagsKnownUnique: number;
 
-declare
-var kDNSServiceFlagsReturnIntermediates: number;
+declare var kDNSServiceFlagsReturnIntermediates: number;
 
-declare
-var kDNSServiceFlagsNonBrowsable: number;
+declare var kDNSServiceFlagsNonBrowsable: number;
 
-declare
-var kDNSServiceFlagsShareConnection: number;
+declare var kDNSServiceFlagsShareConnection: number;
 
-declare
-var kDNSServiceFlagsSuppressUnusable: number;
+declare var kDNSServiceFlagsSuppressUnusable: number;
 
-declare
-var kDNSServiceFlagsWakeOnResolve: number;
+declare var kDNSServiceFlagsWakeOnResolve: number;
 
-declare
-var kDNSServiceFlagsBackgroundTrafficClass: number;
+declare var kDNSServiceFlagsBackgroundTrafficClass: number;
 
-declare
-var kDNSServiceFlagsIncludeAWDL: number;
+declare var kDNSServiceFlagsIncludeAWDL: number;
 
-declare
-var kDNSServiceFlagsValidate: number;
+declare var kDNSServiceFlagsValidate: number;
 
-declare
-var kDNSServiceFlagsSecure: number;
+declare var kDNSServiceFlagsSecure: number;
 
-declare
-var kDNSServiceFlagsInsecure: number;
+declare var kDNSServiceFlagsInsecure: number;
 
-declare
-var kDNSServiceFlagsBogus: number;
+declare var kDNSServiceFlagsBogus: number;
 
-declare
-var kDNSServiceFlagsIndeterminate: number;
+declare var kDNSServiceFlagsIndeterminate: number;
 
-declare
-var kDNSServiceFlagsUnicastResponse: number;
+declare var kDNSServiceFlagsUnicastResponse: number;
 
-declare
-var kDNSServiceFlagsValidateOptional: number;
+declare var kDNSServiceFlagsValidateOptional: number;
 
-declare
-var kDNSServiceFlagsWakeOnlyService: number;
+declare var kDNSServiceFlagsWakeOnlyService: number;
 
-declare
-var kDNSServiceProtocol_IPv4: number;
+declare var kDNSServiceProtocol_IPv4: number;
 
-declare
-var kDNSServiceProtocol_IPv6: number;
+declare var kDNSServiceProtocol_IPv6: number;
 
-declare
-var kDNSServiceProtocol_UDP: number;
+declare var kDNSServiceProtocol_UDP: number;
 
-declare
-var kDNSServiceProtocol_TCP: number;
+declare var kDNSServiceProtocol_TCP: number;
 declare module 'mdns' {
     declare module.exports: typeof MDNS
 }

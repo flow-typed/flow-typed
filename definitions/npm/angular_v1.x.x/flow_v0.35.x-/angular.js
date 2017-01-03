@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var angular: angular$IAngularStatic;
+declare var angular: angular$IAngularStatic;
 declare interface Function {
     $inject?: string[]
 }

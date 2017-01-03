@@ -14,8 +14,7 @@ declare type DOMEvent = {} & Slick$Event
  * @class  EventData
  * @constructor  *
  */
-declare
-export class EventData {
+declare export class EventData {
     constructor(): this;
     stopPropagation(): void;
     isPropagationStopped(): boolean;
@@ -23,8 +22,7 @@ export class EventData {
     isImmediatePropagationStopped(): boolean
 }
 
-declare
-export class Event<T>{
+declare export class Event<T>{
     constructor(): this;
     subscribe(fn: (e: Slick$EventData, data: T) => any): void;
     subscribe(fn: (e: DOMEvent, data: T) => any): void;
@@ -34,16 +32,14 @@ export class Event<T>{
     notify(args?: T, e?: DOMEvent, scope?: any): any
 }
 
-declare
-export class EventHandler {
+declare export class EventHandler {
     constructor(): this;
     subscribe(event: Slick$EventData, handler: Function): Slick$EventHandler;
     unsubscribe(event: Slick$EventData, handler: Function): Slick$EventHandler;
     unsubscribeAll(): Slick$EventHandler
 }
 
-declare
-export class Range {
+declare export class Range {
 
     /**
      * A structure containing a range of cells.
@@ -64,11 +60,9 @@ export class Range {
     toString(): string
 }
 
-declare
-export class NonDataRow {}
+declare export class NonDataRow {}
 
-declare
-export class Group<T>mixins NonDataRow {
+declare export class Group<T>mixins NonDataRow {
     constructor(): this;
 
     /**
@@ -107,14 +101,12 @@ export class Group<T>mixins NonDataRow {
     equals(group: Slick$Group<T>): boolean
 }
 
-declare
-export class GroupTotals<T>mixins NonDataRow {
+declare export class GroupTotals<T>mixins NonDataRow {
     constructor(): this;
     group: Slick$Group<T >
 }
 
-declare
-export class EditorLock<T>{
+declare export class EditorLock<T>{
     constructor(): this;
     isActive(editController: Editors.Editor<T>): boolean;
     activate(editController: Editors.Editor<T>): void;
@@ -123,15 +115,13 @@ export class EditorLock<T>{
     cancelCurrentEdit(): boolean
 }
 
-declare
-export var GlobalEditorLock: Slick$EditorLock<Slick$SlickData>;
+declare export var GlobalEditorLock: Slick$EditorLock<Slick$SlickData>;
 
 
 /**
  * slick.grid.jsOptions which you can apply to the columns objects.
  */
-declare
-export interface Slick$Column<T>{
+declare export interface Slick$Column<T>{
 
     /**
      * This accepts a function of the form function(cellNode, row, dataContext, colDef) and is used to post-process the cell's DOM node / nodes
@@ -245,18 +235,15 @@ export interface Slick$Column<T>{
     width?: number
 }
 
-declare
-export interface Slick$EditorFactory {
+declare export interface Slick$EditorFactory {
     getEditor<T>(column: Slick$Column<T>): Editors.Editor<T >
 }
 
-declare
-export interface Slick$FormatterFactory<T>{
+declare export interface Slick$FormatterFactory<T>{
     getFormatter(column: Slick$Column<T>): Slick$Formatter<any >
 }
 
-declare
-export interface Slick$GridOptions<T>{
+declare export interface Slick$GridOptions<T>{
 
     /**
      * Makes cell editors load asynchronously after a small delay. This greatly increases keyboard navigation speed.
@@ -436,8 +423,7 @@ export interface Slick$GridOptions<T>{
     topPanelHeight?: number
 }
 
-declare
-export interface Slick$DataProvider<T>{
+declare export interface Slick$DataProvider<T>{
 
     /**
      * Returns the number of data items in the set.
@@ -457,11 +443,9 @@ export interface Slick$DataProvider<T>{
     getItemMetadata(index: number): Slick$RowMetadata<T >
 }
 
-declare
-export interface Slick$SlickData {}
+declare export interface Slick$SlickData {}
 
-declare
-export interface Slick$RowMetadata<T>{
+declare export interface Slick$RowMetadata<T>{
 
     /**
      * One or more (space-separated) CSS classes to be added to the entire row.
@@ -487,8 +471,7 @@ export interface Slick$RowMetadata<T>{
     }
 }
 
-declare
-export interface Slick$ColumnMetadata<T>{
+declare export interface Slick$ColumnMetadata<T>{
 
     /**
      * Whether or not a cell can be set as "active".
@@ -524,8 +507,7 @@ You can get the current selection model from the grid by calling getSelectionMod
 The grid also provides two helper methods to simplify development - getSelectedRows() and setSelectedRows(rowsArray), as well as an onSelectedRowsChanged event.
 SlickGrid includes two pre-made selection models - Slick.CellSelectionModel and Slick.RowSelectionModel, but you can easily write a custom one.
 */
-declare
-export class SelectionModel<T, E>{
+declare export class SelectionModel<T, E>{
 
     /**
      * An initializer function that will be called with an instance of the grid whenever a selection model is registered with setSelectionModel. The selection model can use this to initialize its state and subscribe to grid events.
@@ -539,8 +521,7 @@ export class SelectionModel<T, E>{
     onSelectedRangesChanged: Slick$Event<E >
 }
 
-declare
-export class Grid<T>{
+declare export class Grid<T>{
 
     /**
      * Create an instance of the grid.
@@ -968,63 +949,51 @@ export class Grid<T>{
     }
 }
 
-declare
-export interface Slick$GridEventArgs<T>{
+declare export interface Slick$GridEventArgs<T>{
     grid: Slick$Grid<T >
 }
 
-declare
-export type Slick$OnCellCssStylesChangedEventArgs<T>= {
+declare export type Slick$OnCellCssStylesChangedEventArgs<T>= {
     key: string,
     hash: Slick$CellCssStylesHash
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnSelectedRowsChangedEventArgs<T>= {
+declare export type Slick$OnSelectedRowsChangedEventArgs<T>= {
     rows: number[]
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnDragEndEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnDragEndEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnDragEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnDragEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnDragStartEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnDragStartEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnDragInitEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnDragInitEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnActiveCellPositionChangedEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnActiveCellPositionChangedEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnActiveCellChangedEventArgs<T>= {
+declare export type Slick$OnActiveCellChangedEventArgs<T>= {
     row: number,
     cell: number
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnBeforeDestroyEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnBeforeDestroyEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnBeforeCellEditorDestroyEventArgs<T>= {
+declare export type Slick$OnBeforeCellEditorDestroyEventArgs<T>= {
     editor: Editors.Editor<T >
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnBeforeEditCellEventArgs<T>= {
+declare export type Slick$OnBeforeEditCellEventArgs<T>= {
     row: number,
     cell: number,
     item: T,
@@ -1032,24 +1001,20 @@ export type Slick$OnBeforeEditCellEventArgs<T>= {
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnCellChangeEventArgs<T>= {
+declare export type Slick$OnCellChangeEventArgs<T>= {
     row: number,
     cell: number,
     item: T
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnColumnsResizedEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnColumnsResizedEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnColumnsReorderedEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnColumnsReorderedEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnValidationErrorEventArgs<T>= {
+declare export type Slick$OnValidationErrorEventArgs<T>= {
     editor: Editors.Editor<T>,
     cellNode: HTMLElement,
     validationResults: Slick$ValidateResults,
@@ -1059,94 +1024,79 @@ export type Slick$OnValidationErrorEventArgs<T>= {
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnAddNewRowEventArgs<T>= {
+declare export type Slick$OnAddNewRowEventArgs<T>= {
     item: T,
     column: Slick$Column<T >
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnKeyDownEventArgs<T>= {
+declare export type Slick$OnKeyDownEventArgs<T>= {
     row: number,
     cell: number
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnContextMenuEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnContextMenuEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnDblClickEventArgs<T>= {
+declare export type Slick$OnDblClickEventArgs<T>= {
     row: number,
     cell: number
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnClickEventArgs<T>= {
+declare export type Slick$OnClickEventArgs<T>= {
     row: number,
     cell: number
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnMouseLeaveEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnMouseLeaveEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnMouseEnterEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnMouseEnterEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnBeforeHeaderRowCellDestroyEventArgs<T>= {
+declare export type Slick$OnBeforeHeaderRowCellDestroyEventArgs<T>= {
     node: HTMLElement,
     column: Slick$Column<T >
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnHeaderRowCellRenderedEventArgs<T>= {
+declare export type Slick$OnHeaderRowCellRenderedEventArgs<T>= {
     node: HTMLElement,
     column: Slick$Column<T >
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnBeforeHeaderCellDestroyEventArgs<T>= {
+declare export type Slick$OnBeforeHeaderCellDestroyEventArgs<T>= {
     node: HTMLElement,
     column: Slick$Column<T >
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnHeaderCellRenderedEventArgs<T>= {
+declare export type Slick$OnHeaderCellRenderedEventArgs<T>= {
     node: HTMLElement,
     column: Slick$Column<T >
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnHeaderClickEventArgs<T>= {
+declare export type Slick$OnHeaderClickEventArgs<T>= {
     column: Slick$Column<T >
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnHeaderContextMenuEventArgs<T>= {
+declare export type Slick$OnHeaderContextMenuEventArgs<T>= {
     column: Slick$Column<T >
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnHeaderMouseEventArgs<T>= {
+declare export type Slick$OnHeaderMouseEventArgs<T>= {
     column: Slick$Column<T >
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnSortEventArgs<T>= {
+declare export type Slick$OnSortEventArgs<T>= {
     multiColumnSort: boolean,
     sortCol?: Slick$Column<T>,
     sortAsc: boolean,
@@ -1154,31 +1104,26 @@ export type Slick$OnSortEventArgs<T>= {
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnScrollEventArgs<T>= {
+declare export type Slick$OnScrollEventArgs<T>= {
     scrollLeft: number,
     scrollTop: number
 } & Slick$GridEventArgs
 
 
-declare
-export type Slick$OnViewportChangedEventArgs<T>= {} & Slick$GridEventArgs
+declare export type Slick$OnViewportChangedEventArgs<T>= {} & Slick$GridEventArgs
 
 
-declare
-export interface Slick$SortColumn<T>{
+declare export interface Slick$SortColumn<T>{
     sortCol: Slick$Column<T>,
     sortAsc: boolean
 }
 
-declare
-export interface Slick$Cell {
+declare export interface Slick$Cell {
     row: number,
         cell: number
 }
 
-declare
-export type Slick$CellPosition = {
+declare export type Slick$CellPosition = {
     bottom: number,
     height: number,
     right: number,
@@ -1187,29 +1132,25 @@ export type Slick$CellPosition = {
 } & Slick$Position
 
 
-declare
-export interface Slick$Position {
+declare export interface Slick$Position {
     top: number,
         left: number
 }
 
-declare
-export interface Slick$CellCssStylesHash {
+declare export interface Slick$CellCssStylesHash {
     [index: number]: {
         [id: string]: string
     }
 }
 
-declare
-export interface Slick$Viewport {
+declare export interface Slick$Viewport {
     top: number,
         bottom: number,
         leftPx: number,
         rightPx: number
 }
 
-declare
-export interface Slick$ValidateResults {
+declare export interface Slick$ValidateResults {
     valid: boolean,
         msg: string
 }
@@ -1273,8 +1214,7 @@ declare module 'Editors' {
 }
 
 
-declare
-export interface Slick$Formatter<T>{
+declare export interface Slick$Formatter<T>{
     (row: number, cell: number, value: any, columnDef: Slick$Column<T>, dataContext: Slick$SlickData): string
 }
 
@@ -1439,12 +1379,10 @@ declare module 'Data' {
 }
 
 
-declare
-export class Plugin<T>{
+declare export class Plugin<T>{
     constructor(options?: Slick$PluginOptions): this;
     init(grid: Slick$Grid<T>): void;
     destroy(): void
 }
 
-declare
-export interface Slick$PluginOptions {}
+declare export interface Slick$PluginOptions {}

@@ -49,5 +49,4 @@ declare module 'Content' {
             setMimeType(mimeType: MimeType): TextOutput
     }
 }
-declare
-var ContentService: undefined.ContentService;
+declare var ContentService: undefined.ContentService;

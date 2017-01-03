@@ -6,13 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface CrossFilter$Selector<T>{
+declare export interface CrossFilter$Selector<T>{
     (value: T): any
 }
 
-declare
-export interface CrossFilter$CrossFilterStatic {
+declare export interface CrossFilter$CrossFilterStatic {
     (data: T[]): CrossFilter$CrossFilter<T>,
         version: string,
         permute<T>(array: T[], index: number[]): T[],
@@ -38,36 +36,30 @@ export interface CrossFilter$CrossFilterStatic {
         }
 }
 
-declare
-export interface CrossFilter$Bisection<T>{
+declare export interface CrossFilter$Bisection<T>{
     (array: T[], value: T, lo: number, hi: number): number
 }
 
-declare
-export type CrossFilter$Bisector<T>= {
+declare export type CrossFilter$Bisector<T>= {
     left: CrossFilter$Bisection<T>,
     right: CrossFilter$Bisection<T >
 } & CrossFilter$Bisection
 
 
-declare
-export interface CrossFilter$Heap<T>{
+declare export interface CrossFilter$Heap<T>{
     (array: T[], lo: number, hi: number): T[],
     sort(array: T[], lo: number, hi: number): T[]
 }
 
-declare
-export interface CrossFilter$HeapSelect<T>{
+declare export interface CrossFilter$HeapSelect<T>{
     (array: T[], lo: number, hi: number, k: number): T[]
 }
 
-declare
-export interface CrossFilter$Sort<T>{
+declare export interface CrossFilter$Sort<T>{
     (array: T[], lo: number, hi: number): T[]
 }
 
-declare
-export interface CrossFilter$GroupAll<T, TValue>{
+declare export interface CrossFilter$GroupAll<T, TValue>{
     reduce<TValue>(
         add: (p: TValue, v: T) => TValue,
         remove: (p: TValue, v: T) => TValue,
@@ -82,14 +74,12 @@ export interface CrossFilter$GroupAll<T, TValue>{
     value(): TValue
 }
 
-declare
-export interface CrossFilter$Grouping<TKey, TValue>{
+declare export interface CrossFilter$Grouping<TKey, TValue>{
     key: TKey,
     value: TValue
 }
 
-declare
-export interface CrossFilter$Group<T, TKey, TValue>{
+declare export interface CrossFilter$Group<T, TKey, TValue>{
     top(k: number): CrossFilter$Grouping<TKey,
     TValue>[],
     all(): CrossFilter$Grouping<TKey,
@@ -118,8 +108,7 @@ export interface CrossFilter$Group<T, TKey, TValue>{
     TValue >
 }
 
-declare
-export interface CrossFilter$CrossFilter<T>{
+declare export interface CrossFilter$CrossFilter<T>{
     add(records: T[]): CrossFilter$CrossFilter<T>,
     remove(): CrossFilter$CrossFilter<T>,
     size(): number,
@@ -132,8 +121,7 @@ export interface CrossFilter$CrossFilter<T>{
     TDimension >
 }
 
-declare
-export interface CrossFilter$Dimension<T, TDimension>{
+declare export interface CrossFilter$Dimension<T, TDimension>{
     filter(value: TDimension[]): CrossFilter$Dimension<T,
     TDimension>,
     filter(value: TDimension): CrossFilter$Dimension<T,
@@ -163,8 +151,7 @@ export interface CrossFilter$Dimension<T, TDimension>{
     groupAll<TValue>(): CrossFilter$GroupAll<T,
     TValue >
 }
-declare
-var crossfilter: CrossFilter$CrossFilterStatic;
+declare var crossfilter: CrossFilter$CrossFilterStatic;
 declare module 'crossfilter' {
     declare var crossfilter: CrossFilter$CrossFilterStatic;
     declare module.exports: typeof crossfilter

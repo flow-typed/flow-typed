@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface GeometryDom$DOMPointReadOnly {
+declare export interface GeometryDom$DOMPointReadOnly {
 
     /**
      * x coordinate / readonly
@@ -275,13 +274,11 @@ declare type GeometryDom$DOMMatrix = {
     invertSelf(): GeometryDom$DOMMatrix,
     setMatrixValue(transformList: GeometryDom$DOMMatrix): GeometryDom$DOMMatrix
 } & GeometryDom$DOMMatrixReadOnly
-declare
-var DOMPointReadOnly: {
+declare var DOMPointReadOnly: {
     prototype: GeometryDom$DOMPointReadOnly,
     new(x: number, y: number, z: number, w: number): GeometryDom$DOMPointReadOnly
 };
-declare
-var DOMPoint: {
+declare var DOMPoint: {
     prototype: GeometryDom$DOMPoint,
     new(x?: number, y?: number, z?: number, w?: number): GeometryDom$DOMPoint
 };
@@ -307,13 +304,11 @@ declare interface DOMPointInit {
          */
         w?: number
 }
-declare
-var DOMRect: {
+declare var DOMRect: {
     prototype: GeometryDom$DOMRect,
     new(x: number, y: number, width: number, height: number): GeometryDom$DOMRect
 };
-declare
-var DOMRectReadOnly: {
+declare var DOMRectReadOnly: {
     prototype: GeometryDom$DOMRectReadOnly,
     new(
         x: number,
@@ -357,8 +352,7 @@ declare interface DOMRectList {
          */
         item(index: number): GeometryDom$DOMRect
 }
-declare
-var DOMQuad: {
+declare var DOMQuad: {
     prototype: GeometryDom$DOMQuad,
     new(rect?: DOMRectInit): GeometryDom$DOMQuad,
     new(
@@ -367,13 +361,11 @@ var DOMQuad: {
         p3?: DOMPointInit,
         p4?: DOMPointInit): GeometryDom$DOMQuad
 };
-declare
-var DOMMatrixReadOnly: {
+declare var DOMMatrixReadOnly: {
     prototype: GeometryDom$DOMMatrixReadOnly,
     new(numberSequence: Array<number>): GeometryDom$DOMMatrixReadOnly
 };
-declare
-var DOMMatrix: {
+declare var DOMMatrix: {
     prototype: GeometryDom$DOMMatrix,
     new(): GeometryDom$DOMMatrix,
     new(transformList: string): GeometryDom$DOMMatrix,

@@ -22,8 +22,7 @@ declare interface ObloUtilStatic {
         readDate(dateStr: string): Date,
         setAttr($elt: JQuery, attrName: string, isSet: boolean): void
 }
-declare
-var util: ObloUtilStatic;
+declare var util: ObloUtilStatic;
 declare module 'oblo-util' {
     declare module.exports: typeof util
 }

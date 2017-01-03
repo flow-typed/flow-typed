@@ -52,8 +52,7 @@ declare interface IPostal {
         utils: IPostalUtils,
         configuration: IConfiguration
 }
-declare
-var postal: IPostal;
+declare var postal: IPostal;
 declare module 'postal' {
     declare var postal: IPostal;
     declare module.exports: typeof postal

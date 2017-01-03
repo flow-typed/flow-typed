@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var fakerStatic: Faker$FakerStatic;
+declare var fakerStatic: Faker$FakerStatic;
 declare interface Faker$FakerStatic {
     locale: string,
         address: {

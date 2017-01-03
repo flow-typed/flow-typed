@@ -182,8 +182,7 @@ declare type Contact = {
      */
     save(onSuccess: (contact: Contact) => void, onError: (error: Error) => void): void
 } & ContactProperties
-declare
-var Contact: {
+declare var Contact: {
 
     /**
      * Constructor of Contact object 
@@ -219,8 +218,7 @@ declare interface ContactError {
          */
         message: string
 }
-declare
-var ContactError: {
+declare var ContactError: {
     new(code: number): ContactError,
     UNKNOWN_ERROR: number,
     INVALID_ARGUMENT_ERROR: number,
@@ -265,8 +263,7 @@ declare interface ContactName {
          */
         honorificSuffix?: string
 }
-declare
-var ContactName: {
+declare var ContactName: {
 
     /**
      * Constructor for ContactName object 
@@ -308,8 +305,7 @@ declare interface ContactField {
          */
         pref: boolean
 }
-declare
-var ContactField: {
+declare var ContactField: {
 
     /**
      * Constructor for ContactField object 
@@ -362,8 +358,7 @@ declare interface ContactAddress {
          */
         country?: string
 }
-declare
-var ContactAddress: {
+declare var ContactAddress: {
 
     /**
      * Constructor of ContactAddress object 
@@ -409,8 +404,7 @@ declare interface ContactOrganization {
          */
         title?: string
 }
-declare
-var ContactOrganization: {
+declare var ContactOrganization: {
 
     /**
      * Constructor for ContactOrganization object 
@@ -468,8 +462,7 @@ declare type ContactFieldType = "addresses" |
     "streetAddress" |
     "title" |
     "urls";
-declare
-var ContactFindOptions: {
+declare var ContactFindOptions: {
 
     /**
      * Constructor for ContactFindOptions object 

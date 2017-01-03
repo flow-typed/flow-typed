@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var _: _.LoDashStatic;
+declare var _: _.LoDashStatic;
 declare module '_' {
     declare interface LoDashStatic {
 

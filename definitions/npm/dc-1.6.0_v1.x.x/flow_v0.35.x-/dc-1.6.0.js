@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$dc: {
+declare var npm$namespace$dc: {
     filterAll: typeof dc$filterAll,
     renderAll: typeof dc$renderAll,
     redrawAll: typeof dc$redrawAll,
@@ -24,8 +23,7 @@ declare interface dc$IGetSet<T, V>{
     (t: T): V
 }
 
-declare
-export interface dc$ILegendwidget {
+declare export interface dc$ILegendwidget {
     x: dc$IGetSet<number, number>,
         y: dc$IGetSet<number, number>,
         gap: dc$IGetSet<number, number>,
@@ -35,8 +33,7 @@ export interface dc$ILegendwidget {
         itemWidth: dc$IGetSet<number, number >
 }
 
-declare
-export interface dc$IBaseChart<T>{
+declare export interface dc$IBaseChart<T>{
     width: dc$IGetSet<number,
     T>,
     height: dc$IGetSet<number,
@@ -75,16 +72,13 @@ export interface dc$IBaseChart<T>{
     selectAll: (selector: d3.Selection<any>) => d3.Selection<any >
 }
 
-declare
-export interface dc$IEvents {
+declare export interface dc$IEvents {
     trigger(fnctn: () => void, delay?: number): void
 }
 
-declare
-export var events: dc$IEvents;
+declare export var events: dc$IEvents;
 
-declare
-export interface dc$IListener<T>{
+declare export interface dc$IListener<T>{
     on: {
         (event: "preRender", fnctn: (c: T) => any): T,
         (event: "postRender", fnctn: (c: T) => any): T,
@@ -96,33 +90,28 @@ export interface dc$IListener<T>{
     }
 }
 
-declare
-export interface dc$ImarginObj {
+declare export interface dc$ImarginObj {
     top: number,
         right: number,
         bottom: number,
         left: number
 }
 
-declare
-export interface dc$IMarginable<T>{
+declare export interface dc$IMarginable<T>{
     margins: dc$IGetSet<dc$ImarginObj,
     T >
 }
 
-declare
-export interface dc$IAbstractColorChart<T>{
+declare export interface dc$IAbstractColorChart<T>{
     colorDomain: dc$IGetSet<number[],
     T >
 }
 
-declare
-export interface dc$IAbstractStackableChart<T>{
+declare export interface dc$IAbstractStackableChart<T>{
     stack: (group: dc$IChartGroup, name?: string, retriever?: (d: Object) => number) => T
 }
 
-declare
-export interface dc$IAbstractCoordinateGridChart<T>{
+declare export interface dc$IAbstractCoordinateGridChart<T>{
     x: dc$IGetSet<any,
     T>,
     y: dc$IGetSet<any,
@@ -141,35 +130,29 @@ export interface dc$IAbstractCoordinateGridChart<T>{
     T >
 }
 
-declare
-export interface dc$IAbstractBubblechart<T>{
+declare export interface dc$IAbstractBubblechart<T>{
     r: dc$IGetSet<any,
     T>,
     radiusValueAccessor: dc$IGetSet<(d: any) => number,
     T >
 }
 
-declare
-export interface dc$columnFunction {
+declare export interface dc$columnFunction {
     (rowinfo: any): string
 }
 
-declare
-export interface dc$sortbyFunction {
+declare export interface dc$sortbyFunction {
     (rowinfo: any): any
 }
 
-declare
-export interface dc$orderFunction {
+declare export interface dc$orderFunction {
     (a: T, b: T): number
 }
 
-declare
-export type dc$IBubblechart = {} & dc$IBaseChart & dc$IAbstractColorChart & dc$IAbstractBubblechart & dc$IAbstractCoordinateGridChart & dc$IMarginable & dc$IListener
+declare export type dc$IBubblechart = {} & dc$IBaseChart & dc$IAbstractColorChart & dc$IAbstractBubblechart & dc$IAbstractCoordinateGridChart & dc$IMarginable & dc$IListener
 
 
-declare
-export type dc$IPiechart = {
+declare export type dc$IPiechart = {
     radius: dc$IGetSet<number,
     dc$IPiechart>,
     minAngleForLabel: dc$IGetSet<number,
@@ -177,19 +160,16 @@ export type dc$IPiechart = {
 } & dc$IBaseChart & dc$IAbstractColorChart & dc$IAbstractBubblechart & dc$IAbstractCoordinateGridChart & dc$IMarginable & dc$IListener
 
 
-declare
-export type dc$IBarchart = {
+declare export type dc$IBarchart = {
     centerBar: (b: boolean) => dc$IBarchart,
     gap: (gapBetweenBars: number) => dc$IBarchart
 } & dc$IBaseChart & dc$IAbstractStackableChart & dc$IAbstractCoordinateGridChart & dc$IMarginable & dc$IListener
 
 
-declare
-export type dc$ILinechart = {} & dc$IBaseChart & dc$IAbstractStackableChart & dc$IAbstractCoordinateGridChart & dc$IMarginable & dc$IListener
+declare export type dc$ILinechart = {} & dc$IBaseChart & dc$IAbstractStackableChart & dc$IAbstractCoordinateGridChart & dc$IMarginable & dc$IListener
 
 
-declare
-export type dc$IDatachart = {
+declare export type dc$IDatachart = {
     size: dc$IGetSet<number,
     dc$IDatachart>,
     columns: dc$IGetSet<dc$columnFunction[],
@@ -201,36 +181,25 @@ export type dc$IDatachart = {
 } & dc$IBaseChart & dc$IAbstractStackableChart & dc$IAbstractCoordinateGridChart & dc$IMarginable & dc$IListener
 
 
-declare
-export type dc$IRowchart = {} & dc$IBaseChart & dc$IAbstractColorChart & dc$IAbstractStackableChart & dc$IAbstractCoordinateGridChart & dc$IMarginable & dc$IListener
+declare export type dc$IRowchart = {} & dc$IBaseChart & dc$IAbstractColorChart & dc$IAbstractStackableChart & dc$IAbstractCoordinateGridChart & dc$IMarginable & dc$IListener
 
 
-declare
-export interface dc$IChartGroup {}
+declare export interface dc$IChartGroup {}
 
-declare
-export function dc$filterAll(chartGroup?: dc$IChartGroup): void
+declare export function dc$filterAll(chartGroup?: dc$IChartGroup): void
 
-declare
-export function dc$renderAll(chartGroup?: dc$IChartGroup): void
+declare export function dc$renderAll(chartGroup?: dc$IChartGroup): void
 
-declare
-export function dc$redrawAll(chartGroup?: dc$IChartGroup): void
+declare export function dc$redrawAll(chartGroup?: dc$IChartGroup): void
 
-declare
-export function dc$bubbleChart(cssSel: string): dc$IBubblechart
+declare export function dc$bubbleChart(cssSel: string): dc$IBubblechart
 
-declare
-export function dc$pieChart(cssSel: string): dc$IPiechart
+declare export function dc$pieChart(cssSel: string): dc$IPiechart
 
-declare
-export function dc$barChart(cssSel: string): dc$IBarchart
+declare export function dc$barChart(cssSel: string): dc$IBarchart
 
-declare
-export function dc$lineChart(cssSel: string): dc$ILinechart
+declare export function dc$lineChart(cssSel: string): dc$ILinechart
 
-declare
-export function dc$dataTable(cssSel: string): dc$IDatachart
+declare export function dc$dataTable(cssSel: string): dc$IDatachart
 
-declare
-export function dc$rowChart(cssSel: string): dc$IRowchart
+declare export function dc$rowChart(cssSel: string): dc$IRowchart

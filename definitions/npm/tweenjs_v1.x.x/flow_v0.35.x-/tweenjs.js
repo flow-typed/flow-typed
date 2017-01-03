@@ -6,15 +6,13 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class CSSPlugin {
+declare export class CSSPlugin {
     constructor(): this;
     cssSuffixMap: Object;
     install(): void
 }
 
-declare
-export class Ease {
+declare export class Ease {
     backIn: (amount: number) => number;
     backInOut: (amount: number) => number;
     backOut: (amount: number) => number;
@@ -56,14 +54,12 @@ export class Ease {
     sineOut: (amount: number) => number
 }
 
-declare
-export class MotionGuidePlugin {
+declare export class MotionGuidePlugin {
     constructor(): this;
     install(): Object
 }
 
-declare
-export class Timeline mixins EventDispatcher {
+declare export class Timeline mixins EventDispatcher {
     constructor(tweens: createjs$Tween[], labels: Object, props: Object): this;
     duration: number;
     ignoreGlobalPause: boolean;
@@ -84,8 +80,7 @@ export class Timeline mixins EventDispatcher {
     updateDuration(): void
 }
 
-declare
-export class Tween mixins EventDispatcher {
+declare export class Tween mixins EventDispatcher {
     constructor(target: Object, props?: Object, pluginData?: Object): this;
     duration: number;
     IGNORE: Object;
@@ -127,8 +122,7 @@ export class Tween mixins EventDispatcher {
     wait(duration: number, passive?: boolean): createjs$Tween
 }
 
-declare
-export class TweenJS {
+declare export class TweenJS {
     buildDate: string;
     version: string
 }

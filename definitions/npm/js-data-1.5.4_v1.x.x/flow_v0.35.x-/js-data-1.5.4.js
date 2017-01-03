@@ -285,8 +285,7 @@ declare type JSData$DSResourceDefinition<T>= {
 } & JSData$DSResourceDefinitionConfiguration
 
 
-declare
-export interface JSData$DSInstanceShorthands<T>{
+declare export interface JSData$DSInstanceShorthands<T>{
     DSCompute(): void,
     DSRefresh(
         options?: JSData$DSAdapterOperationConfiguration): JSData$JSDataPromise<T & JSData$DSInstanceShorthands<T >> ,
@@ -425,8 +424,7 @@ declare interface JSData$DSActionConfig {
 declare interface JSData$DSActionFn {
     (id: string | number, options?: Object): JSData$JSDataPromise<T >
 }
-declare
-var JSData: {
+declare var JSData: {
     DS: JSData$DS,
     DSErrors: JSData$DSErrors
 };

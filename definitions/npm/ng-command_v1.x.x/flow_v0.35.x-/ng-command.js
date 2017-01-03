@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var ModuleName: string;
+declare var ModuleName: string;
 
 
 /**

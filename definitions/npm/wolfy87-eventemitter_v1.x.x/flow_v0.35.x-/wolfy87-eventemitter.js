@@ -20,8 +20,7 @@ declare interface Wolfy87EventEmitter$MultipleEvents {
  * Can be extended to provide event functionality in other classes.
  * @class  EventEmitter Manages event registering and emitting.
  */
-declare
-export class EventEmitter {
+declare export class EventEmitter {
 
     /**
      * Reverts the global {@link EventEmitter} to its previous value and returns a reference to this version.

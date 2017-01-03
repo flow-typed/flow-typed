@@ -10,10 +10,8 @@
 /**
  * Shortcut for cookie.get()
  */
-declare
-function cookie(key: string, fallback?: string): string
-declare
-var npm$namespace$cookie: {
+declare function cookie(key: string, fallback?: string): string
+declare var npm$namespace$cookie: {
         set: typeof cookie$set,
         remove: typeof cookie$remove,
         empty: typeof cookie$empty,
@@ -24,42 +22,36 @@ var npm$namespace$cookie: {
     /**
      * Create a cookie. The value will automatically be escaped.
      */
-declare
-export function cookie$set(key: string, value: string, options?: any): void
+declare export function cookie$set(key: string, value: string, options?: any): void
 
 
 /**
  * Remove cookies
  */
-declare
-export function cookie$remove(key: string): void
+declare export function cookie$remove(key: string): void
 
 
 /**
  * Remove all cookies
  */
-declare
-export function cookie$empty(): void
+declare export function cookie$empty(): void
 
 
 /**
  * Retrieve the value of the cookie
  */
-declare
-export function cookie$get(key: string, fallback?: string): string
+declare export function cookie$get(key: string, fallback?: string): string
 
 
 /**
  * Get all currently saved cookies
  */
-declare
-export function cookie$all(): any
+declare export function cookie$all(): any
 
 
 /**
  * Test if cookies are enabled
  */
-declare
-export function cookie$enabled(): booleandeclare module 'cookiejs' {
+declare export function cookie$enabled(): booleandeclare module 'cookiejs' {
     declare module.exports: typeof cookie
 }

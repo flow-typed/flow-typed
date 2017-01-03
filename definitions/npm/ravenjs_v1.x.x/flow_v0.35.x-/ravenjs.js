@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Raven: RavenStatic;
+declare var Raven: RavenStatic;
 declare module 'raven-js' {
     declare module.exports: typeof Raven
 }

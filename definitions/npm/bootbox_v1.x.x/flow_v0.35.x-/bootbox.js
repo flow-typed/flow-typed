@@ -109,8 +109,7 @@ declare interface BootboxStatic {
         removeLocale(name: string): void,
         setLocale(name: string): void
 }
-declare
-var bootbox: BootboxStatic;
+declare var bootbox: BootboxStatic;
 declare module 'bootbox' {
     declare module.exports: typeof bootbox
 }

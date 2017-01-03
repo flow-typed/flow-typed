@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Rx$TestScheduler = {
+declare export type Rx$TestScheduler = {
     createColdObservable<T>(...records: Rx$Recorded[]): Observable<T>,
     createHotObservable<T>(...records: Rx$Recorded[]): Observable<T>,
     createObserver<T>(): Rx$MockObserver<T>,
@@ -21,13 +20,11 @@ export type Rx$TestScheduler = {
 } & VirtualTimeScheduler
 
 
-declare
-export var TestScheduler: {
+declare export var TestScheduler: {
     new(): Rx$TestScheduler
 };
 
-declare
-export class Recorded {
+declare export class Recorded {
     constructor(time: number, value: any, equalityComparer?: (x: any, y: any) => boolean): this;
     equals(other: Rx$Recorded): boolean;
     toString(): string;
@@ -35,8 +32,7 @@ export class Recorded {
     value: any
 }
 
-declare
-export var ReactiveTest: {
+declare export var ReactiveTest: {
     created: number,
     subscribed: number,
     disposed: number,
@@ -48,14 +44,12 @@ export var ReactiveTest: {
     subscribe(subscribeAt: number, unsubscribeAt?: number): Rx$Subscription
 };
 
-declare
-export class Subscription {
+declare export class Subscription {
     constructor(subscribeAt: number, unsubscribeAt?: number): this;
     equals(other: Rx$Subscription): boolean
 }
 
-declare
-export type Rx$MockObserver<T>= {
+declare export type Rx$MockObserver<T>= {
     messages: Rx$Recorded[]
 } & Observer
 
@@ -65,8 +59,7 @@ declare type Rx$MockObserverStatic = {
 } & ObserverStatic
 
 
-declare
-export var MockObserver: Rx$MockObserverStatic;
+declare export var MockObserver: Rx$MockObserverStatic;
 declare module 'rx.testing' {
     declare module.exports: typeof Rx
 }

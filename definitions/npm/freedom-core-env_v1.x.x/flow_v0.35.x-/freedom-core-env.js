@@ -6,5 +6,4 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var freedom: freedom.FreedomInCoreEnv;
+declare var freedom: freedom.FreedomInCoreEnv;

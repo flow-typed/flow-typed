@@ -8,8 +8,7 @@
 
 declare interface libphonenumber$PhoneNumber {}
 
-declare
-export class PhoneNumberUtil {
+declare export class PhoneNumberUtil {
     getInstance(): libphonenumber$PhoneNumberUtil;
     parse(number: string, region: string): libphonenumber$PhoneNumber;
     isValidNumber(phoneNumber: libphonenumber$PhoneNumber): boolean;
@@ -20,8 +19,7 @@ export class PhoneNumberUtil {
     format(phoneNumber: libphonenumber$PhoneNumber, format: PhoneNumberFormat): string
 }
 
-declare
-export class AsYouTypeFormatter {
+declare export class AsYouTypeFormatter {
     constructor(region: string): this;
     inputDigit(digit: string): string;
     clear(): void

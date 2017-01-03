@@ -308,5 +308,4 @@ declare interface ReactDataGrid$PaginationToolbarProps {
         }
 }
 
-declare
-export class DataGrid mixins ___React.Component<ReactDataGrid$DataGridProps, {}>{}
+declare export class DataGrid mixins ___React.Component<ReactDataGrid$DataGridProps, {}>{}

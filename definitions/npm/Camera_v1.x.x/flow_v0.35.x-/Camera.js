@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$ICameraService {
+declare export interface ngCordova$ICameraService {
     getPicture(options?: CameraOptions): ng.IPromise<string>,
         cleanup(): ng.IPromise<void >
 }

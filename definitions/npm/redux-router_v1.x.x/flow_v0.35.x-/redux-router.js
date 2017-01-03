@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$___ReduxRouter: {
+declare var npm$namespace$___ReduxRouter: {
         isActive: typeof ___ReduxRouter$isActive,
         routerStateReducer: typeof ___ReduxRouter$routerStateReducer,
         routerDidChange: typeof ___ReduxRouter$routerDidChange,
@@ -19,39 +18,30 @@ var npm$namespace$___ReduxRouter: {
     /**
      * A component that renders a React Router app using router state from a Redux store.
      */
-declare
-export class ReduxRouter mixins React.Component<any, any>{}
+declare export class ReduxRouter mixins React.Component<any, any>{}
 
-declare
-export var reduxReactRouter: any;
+declare export var reduxReactRouter: any;
 
-declare
-export function ___ReduxRouter$isActive(pathname: H.Pathname, query?: H.Query, indexOnly?: boolean): boolean
+declare export function ___ReduxRouter$isActive(pathname: H.Pathname, query?: H.Query, indexOnly?: boolean): boolean
 
 
 /**
  * A reducer that keeps track of Router state.
  */
-declare
-export function ___ReduxRouter$routerStateReducer(state: any, action: any): any
+declare export function ___ReduxRouter$routerStateReducer(state: any, action: any): any
 
-declare
-export interface ___ReduxRouter$ReduxRouterAction {
+declare export interface ___ReduxRouter$ReduxRouterAction {
     type: string,
         payload: any
 }
 
-declare
-export function ___ReduxRouter$routerDidChange(state: any): ___ReduxRouter$ReduxRouterAction
+declare export function ___ReduxRouter$routerDidChange(state: any): ___ReduxRouter$ReduxRouterAction
 
-declare
-export function ___ReduxRouter$initRoutes(routes: any): ___ReduxRouter$ReduxRouterAction
+declare export function ___ReduxRouter$initRoutes(routes: any): ___ReduxRouter$ReduxRouterAction
 
-declare
-export function ___ReduxRouter$replaceRoutes(routes: any): ___ReduxRouter$ReduxRouterAction
+declare export function ___ReduxRouter$replaceRoutes(routes: any): ___ReduxRouter$ReduxRouterAction
 
-declare
-export function ___ReduxRouter$historyAPI(method: any): (...args: Object[]) => ___ReduxRouter$ReduxRouterActiondeclare module 'redux-router/lib/routerStateReducer' {
+declare export function ___ReduxRouter$historyAPI(method: any): (...args: Object[]) => ___ReduxRouter$ReduxRouterActiondeclare module 'redux-router/lib/routerStateReducer' {
     declare module.exports: typeof ___ReduxRouter$routerStateReducer
 }
 declare module 'redux-router/lib/ReduxRouter' {

@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface GridFSStream$Range {
+declare export interface GridFSStream$Range {
     startPos: number,
         endPos: number
 }
 
-declare
-export interface GridFSStream$Options {
+declare export interface GridFSStream$Options {
     _id?: string,
         filename?: string,
         mode?: string,
@@ -24,8 +22,7 @@ export interface GridFSStream$Options {
         metadata?: any
 }
 
-declare
-export type GridFSStream$WriteStream = {
+declare export type GridFSStream$WriteStream = {
     writable: boolean,
     name: string,
     id: string,
@@ -33,8 +30,7 @@ export type GridFSStream$WriteStream = {
     mode: string
 }
 
-declare
-export type GridFSStream$ReadStream = {
+declare export type GridFSStream$ReadStream = {
     readable: boolean,
     paused: boolean
 }

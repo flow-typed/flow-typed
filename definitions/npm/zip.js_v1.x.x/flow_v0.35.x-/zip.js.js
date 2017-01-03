@@ -7,25 +7,20 @@
  */
 
 declare interface FileEntry {}
-declare
-var npm$namespace$zip: {
+declare var npm$namespace$zip: {
     createReader: typeof zip$createReader,
     createWriter: typeof zip$createWriter,
 }
-declare
-export var useWebWorkers: boolean;
+declare export var useWebWorkers: boolean;
 
-declare
-export var workerScriptsPath: string;
+declare export var workerScriptsPath: string;
 
-declare
-export var workerScripts: {
+declare export var workerScripts: {
     deflater?: string[],
     inflater?: string[]
 };
 
-declare
-export class Reader {
+declare export class Reader {
     size: number;
     init(callback: () => void, onerror: (error: any) => void): void;
     readUint8Array(
@@ -35,40 +30,33 @@ export class Reader {
         onerror?: (error: any) => void): void
 }
 
-declare
-export class TextReader mixins Reader {
+declare export class TextReader mixins Reader {
     constructor(text: string): this
 }
 
-declare
-export class BlobReader mixins Reader {
+declare export class BlobReader mixins Reader {
     constructor(blob: Blob): this
 }
 
-declare
-export class Data64URIReader mixins Reader {
+declare export class Data64URIReader mixins Reader {
     constructor(dataURI: string): this
 }
 
-declare
-export class HttpReader mixins Reader {
+declare export class HttpReader mixins Reader {
     constructor(url: string): this
 }
 
-declare
-export function zip$createReader(
+declare export function zip$createReader(
     reader: zip$Reader,
     callback: (zipReader: zip$ZipReader) => void,
     onerror?: (error: any) => void): void
 
-declare
-export class ZipReader {
+declare export class ZipReader {
     getEntries(callback: (entries: zip$Entry[]) => void): void;
     close(callback?: () => void): void
 }
 
-declare
-export interface zip$Entry {
+declare export interface zip$Entry {
     filename: string,
         directory: boolean,
         compressedSize: number,
@@ -84,42 +72,35 @@ export interface zip$Entry {
             checkCrc32?: boolean): void
 }
 
-declare
-export class Writer {
+declare export class Writer {
     init(callback: () => void, onerror?: (error: any) => void): void;
     writeUint8Array(array: Uint8Array, callback: () => void, onerror?: (error: any) => void): void;
     getData(callback: (data: any) => void, onerror?: (error: any) => void): void
 }
 
-declare
-export class TextWriter mixins Writer {
+declare export class TextWriter mixins Writer {
     constructor(encoding: string): this
 }
 
-declare
-export class BlobWriter mixins Writer {
+declare export class BlobWriter mixins Writer {
     constructor(contentType: string): this
 }
 
-declare
-export class FileWriter mixins Writer {
+declare export class FileWriter mixins Writer {
     constructor(fileEntry: FileEntry): this
 }
 
-declare
-export class Data64URIWriter mixins Writer {
+declare export class Data64URIWriter mixins Writer {
     constructor(mimeString?: string): this
 }
 
-declare
-export function zip$createWriter(
+declare export function zip$createWriter(
     writer: zip$Writer,
     callback: (zipWriter: zip$ZipWriter) => void,
     onerror?: (error: any) => void,
     dontDeflate?: boolean): void
 
-declare
-export interface zip$WriteOptions {
+declare export interface zip$WriteOptions {
     directory?: boolean,
         level?: number,
         comment?: string,
@@ -127,8 +108,7 @@ export interface zip$WriteOptions {
         version?: number
 }
 
-declare
-export class ZipWriter {
+declare export class ZipWriter {
     add(
         name: string,
         reader: zip$Reader,

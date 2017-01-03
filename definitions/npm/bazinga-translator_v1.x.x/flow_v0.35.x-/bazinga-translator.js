@@ -88,5 +88,4 @@ declare interface BazingaTranslator {
         fromJSON(data: string): BazingaTranslator,
         reset(): void
 }
-declare
-var Translator: BazingaTranslator;
+declare var Translator: BazingaTranslator;

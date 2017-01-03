@@ -181,8 +181,7 @@ declare interface DotObject$Dot {
             obj: any,
             mods?: DotObject$ModifierFunctionWrapper | Array<DotObject$ModifierFunctionWrapper>): void
 }
-declare
-var dot: DotObject$DotConstructor;
+declare var dot: DotObject$DotConstructor;
 declare module 'dot-object' {
     declare module.exports: typeof dot
 }

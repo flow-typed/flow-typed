@@ -10,8 +10,7 @@ declare module 'assert' {
     declare module.exports: typeof assert
 }
 
-declare
-var npm$namespace$assert: {
+declare var npm$namespace$assert: {
     fail: typeof assert$fail,
     ok: typeof assert$ok,
     equal: typeof assert$equal,
@@ -22,8 +21,7 @@ var npm$namespace$assert: {
     notStrictEqual: typeof assert$notStrictEqual,
     ifError: typeof assert$ifError,
 }
-declare
-export class AssertionError mixins Error {
+declare export class AssertionError mixins Error {
     name: string;
     message: string;
     actual: any;
@@ -39,45 +37,34 @@ export class AssertionError mixins Error {
     }): this
 }
 
-declare
-export function assert$fail(actual?: any, expected?: any, message?: string, operator?: string): void
+declare export function assert$fail(actual?: any, expected?: any, message?: string, operator?: string): void
 
-declare
-export function assert$ok(value: any, message?: string): void
+declare export function assert$ok(value: any, message?: string): void
 
-declare
-export function assert$equal(actual: any, expected: any, message?: string): void
+declare export function assert$equal(actual: any, expected: any, message?: string): void
 
-declare
-export function assert$notEqual(actual: any, expected: any, message?: string): void
+declare export function assert$notEqual(actual: any, expected: any, message?: string): void
 
-declare
-export function assert$deepEqual(actual: any, expected: any, message?: string): void
+declare export function assert$deepEqual(actual: any, expected: any, message?: string): void
 
-declare
-export function assert$notDeepEqual(acutal: any, expected: any, message?: string): void
+declare export function assert$notDeepEqual(acutal: any, expected: any, message?: string): void
 
-declare
-export function assert$strictEqual(actual: any, expected: any, message?: string): void
+declare export function assert$strictEqual(actual: any, expected: any, message?: string): void
 
-declare
-export function assert$notStrictEqual(actual: any, expected: any, message?: string): void
+declare export function assert$notStrictEqual(actual: any, expected: any, message?: string): void
 
-declare
-export var throws: {
+declare export var throws: {
     (block: Function, message?: string): void,
     (block: Function, error: Function, message?: string): void,
     (block: Function, error: RegExp, message?: string): void,
     (block: Function, error: (err: any) => boolean, message?: string): void
 };
 
-declare
-export var doesNotThrow: {
+declare export var doesNotThrow: {
     (block: Function, message?: string): void,
     (block: Function, error: Function, message?: string): void,
     (block: Function, error: RegExp, message?: string): void,
     (block: Function, error: (err: any) => boolean, message?: string): void
 };
 
-declare
-export function assert$ifError(value: any): void
+declare export function assert$ifError(value: any): void

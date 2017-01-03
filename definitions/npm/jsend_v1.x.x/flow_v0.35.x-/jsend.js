@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Express$Response {
+declare export interface Express$Response {
     jsend: jsend$jsendExpress
 }
 declare interface jsend$JSendObject {
@@ -48,8 +47,7 @@ declare type jsend$jsendExport = {
 } & jsend$jsend
 
 
-declare
-var jsend: jsend$jsendExport;
+declare var jsend: jsend$jsendExport;
 declare module 'jsend' {
     declare module.exports: typeof jsend$jsend
 }

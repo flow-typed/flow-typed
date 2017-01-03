@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$webix: {
+declare var npm$namespace$webix: {
     ajax: typeof webix$ajax,
     $$: typeof webix$$$,
     alert: typeof webix$alert,
@@ -67,11 +66,9 @@ declare interface webix$PromisedData {
         fail(handler: (error: any) => any): webix$PromisedData
 }
 
-declare
-function webix$ajax(): webix$_ajax
+declare function webix$ajax(): webix$_ajax
 
-declare
-function webix$$$(id: string | Event | HTMLElement): undefined.baseview
+declare function webix$$$(id: string | Event | HTMLElement): undefined.baseview
 
 declare interface webix$_ajax {
     bind(master: any): webix$_ajax,
@@ -256,229 +253,162 @@ declare interface webix$storage {
         session: webix$session
 }
 
-declare
-function webix$alert(text: string, callback: webix$WebixCallback): HTMLElement
+declare function webix$alert(text: string, callback: webix$WebixCallback): HTMLElement
 
-declare
-function webix$animate(html_element: HTMLElement, animation: any): void
+declare function webix$animate(html_element: HTMLElement, animation: any): void
 
-declare
-function webix$attachEvent(type: string, functor: webix$WebixCallback, id?: string): string | number
+declare function webix$attachEvent(type: string, functor: webix$WebixCallback, id?: string): string | number
 
-declare
-function webix$bind(code: webix$WebixCallback, master: any): webix$WebixCallback
+declare function webix$bind(code: webix$WebixCallback, master: any): webix$WebixCallback
 
-declare
-function webix$blockEvent(): void
+declare function webix$blockEvent(): void
 
-declare
-function webix$callEvent(name: string, params: any[]): boolean
+declare function webix$callEvent(name: string, params: any[]): boolean
 
-declare
-function webix$clone(source: any): any
+declare function webix$clone(source: any): any
 
-declare
-function webix$confirm(text: string, callback: webix$WebixCallback): HTMLElement
+declare function webix$confirm(text: string, callback: webix$WebixCallback): HTMLElement
 
-declare
-function webix$copy(source: any): any
+declare function webix$copy(source: any): any
 
-declare
-function webix$delay(code: webix$WebixCallback, owner?: any, params?: any[], delay?: number): number
+declare function webix$delay(code: webix$WebixCallback, owner?: any, params?: any[], delay?: number): number
 
-declare
-function webix$detachEvent(id: string): void
+declare function webix$detachEvent(id: string): void
 
-declare
-function webix$dp(name: string): any
+declare function webix$dp(name: string): any
 
-declare
-function webix$editStop(): void
+declare function webix$editStop(): void
 
-declare
-function webix$event(
+declare function webix$event(
     node: HTMLElement | string,
     event: string,
     handler: webix$WebixCallback,
     context?: any): string | number
 
-declare
-function webix$eventRemove(id: string | number): void
+declare function webix$eventRemove(id: string | number): void
 
-declare
-function webix$exec(code: string): void
+declare function webix$exec(code: string): void
 
-declare
-function webix$extend(target: any, source: any, overwrite: boolean): any
+declare function webix$extend(target: any, source: any, overwrite: boolean): any
 
-declare
-function webix$hasEvent(name: string): boolean
+declare function webix$hasEvent(name: string): boolean
 
-declare
-function webix$isArray(check: any): boolean
+declare function webix$isArray(check: any): boolean
 
-declare
-function webix$isDate(check: any): boolean
+declare function webix$isDate(check: any): boolean
 
-declare
-function webix$isUndefined(check: any): boolean
+declare function webix$isUndefined(check: any): boolean
 
-declare
-function webix$jsonp(url: string, params?: any, callback?: webix$WebixCallback, master?: any): void
+declare function webix$jsonp(url: string, params?: any, callback?: webix$WebixCallback, master?: any): void
 
-declare
-function webix$mapEvent(map: any): void
+declare function webix$mapEvent(map: any): void
 
-declare
-function webix$message(text: string): void
+declare function webix$message(text: string): void
 
-declare
-function webix$modalbox(text: string, callback: webix$WebixCallback): HTMLElement
+declare function webix$modalbox(text: string, callback: webix$WebixCallback): HTMLElement
 
-declare
-function webix$once(code: webix$WebixCallback): void
+declare function webix$once(code: webix$WebixCallback): void
 
-declare
-function webix$proto(target: any, mixin1?: any, mixinN?: any): any
+declare function webix$proto(target: any, mixin1?: any, mixinN?: any): any
 
-declare
-function webix$protoUI(target: any, view: any, mixin1: any, mixinN: any): any
+declare function webix$protoUI(target: any, view: any, mixin1: any, mixinN: any): any
 
-declare
-function webix$proxy(type: string, source: string): any
+declare function webix$proxy(type: string, source: string): any
 
-declare
-function webix$ready(code: webix$WebixCallback): void
+declare function webix$ready(code: webix$WebixCallback): void
 
-declare
-function webix$remote(): void
+declare function webix$remote(): void
 
-declare
-function webix$require(url: string): void
+declare function webix$require(url: string): void
 
-declare
-function webix$send(url: string, values: any, method: string, target: string): void
+declare function webix$send(url: string, values: any, method: string, target: string): void
 
-declare
-function webix$single(source: webix$WebixCallback): webix$WebixCallback
+declare function webix$single(source: webix$WebixCallback): webix$WebixCallback
 
-declare
-function webix$template(template: string): webix$WebixCallback
+declare function webix$template(template: string): webix$WebixCallback
 
-declare
-function webix$toArray(array: any[]): any[]
+declare function webix$toArray(array: any[]): any[]
 
-declare
-function webix$toExcel(id: any, options: any): void
+declare function webix$toExcel(id: any, options: any): void
 
-declare
-function webix$toFunctor(name: string): webix$WebixCallback
+declare function webix$toFunctor(name: string): webix$WebixCallback
 
-declare
-function webix$toNode(id: string): HTMLElement
+declare function webix$toNode(id: string): HTMLElement
 
-declare
-function webix$toPDF(id: string, name: string): void
+declare function webix$toPDF(id: string, name: string): void
 
-declare
-function webix$toPNG(id: string, name: string): void
+declare function webix$toPNG(id: string, name: string): void
 
-declare
-function webix$type(config: any): void
+declare function webix$type(config: any): void
 
-declare
-function webix$ui(config: any, parent?: any, replacement?: any): undefined.baseview
+declare function webix$ui(config: any, parent?: any, replacement?: any): undefined.baseview
 
-declare
-function webix$uid(): number
+declare function webix$uid(): number
 
-declare
-function webix$unblockEvent(): void
+declare function webix$unblockEvent(): void
 
-declare
-function webix$wrap(target: webix$WebixCallback, source: webix$WebixCallback): webix$WebixCallback
+declare function webix$wrap(target: webix$WebixCallback, source: webix$WebixCallback): webix$WebixCallback
 
-declare
-var codebase: string;
+declare var codebase: string;
 
-declare
-var name: string;
+declare var name: string;
 
-declare
-var version: string;
+declare var version: string;
 
-declare
-var clipbuffer: webix$clipbuffer;
+declare var clipbuffer: webix$clipbuffer;
 
-declare
-var color: webix$color;
+declare var color: webix$color;
 
-declare
-var csv: webix$csv;
+declare var csv: webix$csv;
 
-declare
-var editors: webix$editors;
+declare var editors: webix$editors;
 
-declare
-var env: webix$env;
+declare var env: webix$env;
 
-declare
-var history: webix$history;
+declare var history: webix$history;
 
-declare
-var html: webix$html;
+declare var html: webix$html;
 
-declare
-var i18n: webix$i18n;
+declare var i18n: webix$i18n;
 
-declare
-var locale: webix$locale;
+declare var locale: webix$locale;
 
-declare
-var markup: webix$markup;
+declare var markup: webix$markup;
 
-declare
-var promise: webix$promise;
+declare var promise: webix$promise;
 
-declare
-var rules: webix$rules;
+declare var rules: webix$rules;
 
-declare
-var storage: webix$storage;
+declare var storage: webix$storage;
 
 declare interface webix$ActiveContent {}
 
-declare
-var ActiveContent: webix$ActiveContent;
+declare var ActiveContent: webix$ActiveContent;
 
 declare interface webix$AtomDataLoader {
     load(url: string, type?: string, callback?: webix$WebixCallback): webix$promise,
         parse(data: any, type: string): void
 }
 
-declare
-var AtomDataLoader: webix$AtomDataLoader;
+declare var AtomDataLoader: webix$AtomDataLoader;
 
 declare interface webix$AtomRender {
     render(id: string | number, data: any, type: string): void,
         sync(source: any, filter: webix$WebixCallback, silent: boolean): void
 }
 
-declare
-var AtomRender: webix$AtomRender;
+declare var AtomRender: webix$AtomRender;
 
 declare interface webix$AutoTooltip {}
 
-declare
-var AutoTooltip: webix$AutoTooltip;
+declare var AutoTooltip: webix$AutoTooltip;
 
 declare interface webix$BaseBind {
     bind(target: any, rule?: webix$WebixCallback, format?: string): void,
         unbind(): void
 }
 
-declare
-var BaseBind: webix$BaseBind;
+declare var BaseBind: webix$BaseBind;
 
 declare interface webix$BindSource {
     addBind(source: any, rule: string, format: string): void,
@@ -488,8 +418,7 @@ declare interface webix$BindSource {
         setBindData(data: any, key: string | number): void
 }
 
-declare
-var BindSource: webix$BindSource;
+declare var BindSource: webix$BindSource;
 
 declare interface webix$Canvas {
     clearCanvas(): void,
@@ -508,8 +437,7 @@ declare interface webix$Canvas {
         toggleCanvas(): void
 }
 
-declare
-var Canvas: webix$Canvas;
+declare var Canvas: webix$Canvas;
 
 declare interface webix$CodeParser {
     collapseNames(obj: any): {
@@ -520,8 +448,7 @@ declare interface webix$CodeParser {
         }): any
 }
 
-declare
-var CodeParser: webix$CodeParser;
+declare var CodeParser: webix$CodeParser;
 
 declare interface webix$CollectionBind {
     getCursor(): number,
@@ -529,8 +456,7 @@ declare interface webix$CollectionBind {
         setCursor(cursor: string | number): void
 }
 
-declare
-var CollectionBind: webix$CollectionBind;
+declare var CollectionBind: webix$CollectionBind;
 
 declare interface webix$ContextHelper {
     attachTo(view: any): void,
@@ -538,13 +464,11 @@ declare interface webix$ContextHelper {
         setContext(context: any): void
 }
 
-declare
-var ContextHelper: webix$ContextHelper;
+declare var ContextHelper: webix$ContextHelper;
 
 declare interface webix$CopyPaste {}
 
-declare
-var CopyPaste: webix$CopyPaste;
+declare var CopyPaste: webix$CopyPaste;
 
 declare interface webix$CustomScroll {
     enable(html_node: HTMLElement | undefined.baseview): void,
@@ -553,8 +477,7 @@ declare interface webix$CustomScroll {
         scrollStep: number
 }
 
-declare
-var CustomScroll: webix$CustomScroll;
+declare var CustomScroll: webix$CustomScroll;
 
 declare interface webix$DataCollection {
     add(obj: any, index?: number): string | number,
@@ -631,8 +554,7 @@ declare interface webix$DataDriver {
         xml: any
 }
 
-declare
-var DataDriver: webix$DataDriver;
+declare var DataDriver: webix$DataDriver;
 
 declare interface webix$DataLoader {
     add(obj: any, index?: number): string | number,
@@ -667,8 +589,7 @@ declare interface webix$DataLoader {
         updateItem(id: string | number, data: any): void
 }
 
-declare
-var DataLoader: webix$DataLoader;
+declare var DataLoader: webix$DataLoader;
 
 declare interface webix$DataMarks {
     addCss(id: string | number, css: string, silent?: boolean): void,
@@ -677,8 +598,7 @@ declare interface webix$DataMarks {
         removeCss(id: string | number, css: string, silent?: boolean): void
 }
 
-declare
-var DataMarks: webix$DataMarks;
+declare var DataMarks: webix$DataMarks;
 
 declare interface webix$DataMove {
     copy(sid: string | number, tindex: number, tobj?: any, details?: any): void,
@@ -689,8 +609,7 @@ declare interface webix$DataMove {
         moveUp(id: string | number, step: number): void
 }
 
-declare
-var DataMove: webix$DataMove;
+declare var DataMove: webix$DataMove;
 
 declare interface webix$DataProcessor {
     attachEvent(type: string, functor: webix$WebixCallback, id?: string): string | number,
@@ -724,8 +643,7 @@ declare interface webix$DataProcessor {
         name: string
 }
 
-declare
-var DataProcessor: webix$DataProcessor;
+declare var DataProcessor: webix$DataProcessor;
 
 declare interface webix$DataRecord {
     attachEvent(type: string, functor: webix$WebixCallback, id?: string): string | number,
@@ -750,16 +668,14 @@ declare interface webix$DataRecord {
         name: string
 }
 
-declare
-var DataRecord: webix$DataRecord;
+declare var DataRecord: webix$DataRecord;
 
 declare interface webix$DataState {
     getState(): any,
         setState(state: any): void
 }
 
-declare
-var DataState: webix$DataState;
+declare var DataState: webix$DataState;
 
 declare interface webix$DataStore {
     add(obj: any, index?: number): string | number,
@@ -814,8 +730,7 @@ declare interface webix$DataStore {
         pull: any
 }
 
-declare
-var DataStore: webix$DataStore;
+declare var DataStore: webix$DataStore;
 
 declare interface webix$DataValue {
     attachEvent(type: string, functor: webix$WebixCallback, id?: string): string | number,
@@ -834,8 +749,7 @@ declare interface webix$DataValue {
         name: string
 }
 
-declare
-var DataValue: webix$DataValue;
+declare var DataValue: webix$DataValue;
 
 declare interface webix$Date {
     add(date: any, inc: number, mode: string): any,
@@ -856,15 +770,13 @@ declare interface webix$Date {
         startOnMonday: boolean
 }
 
-declare
-var Date: webix$Date;
+declare var Date: webix$Date;
 
 declare interface webix$Destruction {
     destructor(): void
 }
 
-declare
-var Destruction: webix$Destruction;
+declare var Destruction: webix$Destruction;
 
 declare interface webix$DragControl {
     addDrag(node: string | number | HTMLElement, ctrl: any): void,
@@ -884,8 +796,7 @@ declare interface webix$DragControl {
         top: number
 }
 
-declare
-var DragControl: webix$DragControl;
+declare var DragControl: webix$DragControl;
 
 declare interface webix$DragItem {
     $drag(source: HTMLElement, ev: Event): string,
@@ -901,8 +812,7 @@ declare interface webix$DragItem {
         $dropAllow: webix$WebixCallback
 }
 
-declare
-var DragItem: webix$DragItem;
+declare var DragItem: webix$DragItem;
 
 declare interface webix$DragOrder {
     $drag(source: HTMLElement, ev: Event): string,
@@ -911,8 +821,7 @@ declare interface webix$DragOrder {
         $drop(source: HTMLElement, target: HTMLElement, ev: Event): void
 }
 
-declare
-var DragOrder: webix$DragOrder;
+declare var DragOrder: webix$DragOrder;
 
 declare interface webix$EditAbility {
     edit(id: any): void,
@@ -926,8 +835,7 @@ declare interface webix$EditAbility {
         validateEditor(id?: string | number): boolean
 }
 
-declare
-var EditAbility: webix$EditAbility;
+declare var EditAbility: webix$EditAbility;
 
 declare interface webix$EventSystem {
     attachEvent(type: string, functor: webix$WebixCallback, id?: string): string | number,
@@ -939,16 +847,14 @@ declare interface webix$EventSystem {
         unblockEvent(): void
 }
 
-declare
-var EventSystem: webix$EventSystem;
+declare var EventSystem: webix$EventSystem;
 
 declare interface webix$Group {
     group(config: any, mode: boolean): void,
         ungroup(mode: boolean): void
 }
 
-declare
-var Group: webix$Group;
+declare var Group: webix$Group;
 
 declare interface webix$GroupMethods {
     any(property: string, data: any): void,
@@ -959,16 +865,14 @@ declare interface webix$GroupMethods {
         sum(property: string, data: any): void
 }
 
-declare
-var GroupMethods: webix$GroupMethods;
+declare var GroupMethods: webix$GroupMethods;
 
 declare interface webix$GroupStore {
     group(stats: any): void,
         ungroup(): void
 }
 
-declare
-var GroupStore: webix$GroupStore;
+declare var GroupStore: webix$GroupStore;
 
 declare interface webix$HtmlMap {
     addPoly(id: string | number, points: any[]): void,
@@ -984,8 +888,7 @@ declare interface webix$HtmlMap {
         render(html: HTMLElement): void
 }
 
-declare
-var HtmlMap: webix$HtmlMap;
+declare var HtmlMap: webix$HtmlMap;
 
 declare interface webix$IdSpace {
     innerId(id: string | number): string | number,
@@ -993,25 +896,21 @@ declare interface webix$IdSpace {
         $$: any
 }
 
-declare
-var IdSpace: webix$IdSpace;
+declare var IdSpace: webix$IdSpace;
 
 declare interface webix$KeysNavigation {
     moveSelection(direction: string): void
 }
 
-declare
-var KeysNavigation: webix$KeysNavigation;
+declare var KeysNavigation: webix$KeysNavigation;
 
 declare interface webix$MapCollection {}
 
-declare
-var MapCollection: webix$MapCollection;
+declare var MapCollection: webix$MapCollection;
 
 declare interface webix$Modality {}
 
-declare
-var Modality: webix$Modality;
+declare var Modality: webix$Modality;
 
 declare interface webix$MouseEvents {
     on_click: webix$WebixCallback,
@@ -1022,34 +921,29 @@ declare interface webix$MouseEvents {
         on_mouse_move: webix$WebixCallback
 }
 
-declare
-var MouseEvents: webix$MouseEvents;
+declare var MouseEvents: webix$MouseEvents;
 
 declare interface webix$Movable {}
 
-declare
-var Movable: webix$Movable;
+declare var Movable: webix$Movable;
 
 declare interface webix$NavigationButtons {}
 
-declare
-var NavigationButtons: webix$NavigationButtons;
+declare var NavigationButtons: webix$NavigationButtons;
 
 declare interface webix$Number {
     format(value: number, config: any): string,
         numToStr(config: any): webix$WebixCallback
 }
 
-declare
-var Number: webix$Number;
+declare var Number: webix$Number;
 
 declare interface webix$OverlayBox {
     hideOverlay(): void,
         showOverlay(): void
 }
 
-declare
-var OverlayBox: webix$OverlayBox;
+declare var OverlayBox: webix$OverlayBox;
 
 declare interface webix$PagingAbility {
     getPage(): number,
@@ -1057,8 +951,7 @@ declare interface webix$PagingAbility {
         setPage(page: number): void
 }
 
-declare
-var PagingAbility: webix$PagingAbility;
+declare var PagingAbility: webix$PagingAbility;
 
 declare interface webix$PowerArray {
     each(functor: webix$WebixCallback, master: any): void,
@@ -1070,21 +963,18 @@ declare interface webix$PowerArray {
         removeAt(pos: number, len: number): void
 }
 
-declare
-var PowerArray: webix$PowerArray;
+declare var PowerArray: webix$PowerArray;
 
 declare interface webix$ProgressBar {
     hideProgress(): void,
         showProgress(config?: any): void
 }
 
-declare
-var ProgressBar: webix$ProgressBar;
+declare var ProgressBar: webix$ProgressBar;
 
 declare interface webix$RecordBind {}
 
-declare
-var RecordBind: webix$RecordBind;
+declare var RecordBind: webix$RecordBind;
 
 declare interface webix$RenderStack {
     customize(obj: any): void,
@@ -1100,16 +990,14 @@ declare interface webix$RenderStack {
         }
 }
 
-declare
-var RenderStack: webix$RenderStack;
+declare var RenderStack: webix$RenderStack;
 
 declare interface webix$Scrollable {
     getScrollState(): any,
         scrollTo(x: number, y: number): void
 }
 
-declare
-var Scrollable: webix$Scrollable;
+declare var Scrollable: webix$Scrollable;
 
 declare interface webix$SelectionModel {
     getSelectedId(as_array: boolean): string | any[],
@@ -1121,8 +1009,7 @@ declare interface webix$SelectionModel {
         unselectAll(): void
 }
 
-declare
-var SelectionModel: webix$SelectionModel;
+declare var SelectionModel: webix$SelectionModel;
 
 declare interface webix$Settings {
     define(property: string, value: any): void,
@@ -1132,8 +1019,7 @@ declare interface webix$Settings {
         name: string
 }
 
-declare
-var Settings: webix$Settings;
+declare var Settings: webix$Settings;
 
 declare interface webix$SingleRender {
     customize(obj: any): void,
@@ -1144,8 +1030,7 @@ declare interface webix$SingleRender {
         }
 }
 
-declare
-var SingleRender: webix$SingleRender;
+declare var SingleRender: webix$SingleRender;
 
 declare interface webix$Sparklines {
     template(item: any, common: string, data: any[], column: any, index: number): string,
@@ -1154,13 +1039,11 @@ declare interface webix$Sparklines {
         radius: number
 }
 
-declare
-var Sparklines: webix$Sparklines;
+declare var Sparklines: webix$Sparklines;
 
 declare interface webix$TablePaste {}
 
-declare
-var TablePaste: webix$TablePaste;
+declare var TablePaste: webix$TablePaste;
 
 declare interface webix$Touch {
     disable(): void,
@@ -1170,8 +1053,7 @@ declare interface webix$Touch {
         config: any
 }
 
-declare
-var Touch: webix$Touch;
+declare var Touch: webix$Touch;
 
 declare interface webix$TreeAPI {
     close(id: string | number): void,
@@ -1184,8 +1066,7 @@ declare interface webix$TreeAPI {
         setState(state: any): void
 }
 
-declare
-var TreeAPI: webix$TreeAPI;
+declare var TreeAPI: webix$TreeAPI;
 
 declare interface webix$TreeClick {
     webix_tree_checkbox(obj: any, common: {
@@ -1199,8 +1080,7 @@ declare interface webix$TreeClick {
         }): string
 }
 
-declare
-var TreeClick: webix$TreeClick;
+declare var TreeClick: webix$TreeClick;
 
 declare interface webix$TreeCollection {
     add(obj: any, index?: number, parentId?: string): string,
@@ -1274,15 +1154,13 @@ declare interface webix$TreeCollection {
         name: string
 }
 
-declare
-var TreeCollection: webix$TreeCollection;
+declare var TreeCollection: webix$TreeCollection;
 
 declare interface webix$TreeDataLoader {
     loadBranch(id: string | number, callback: webix$WebixCallback, url: string): void
 }
 
-declare
-var TreeDataLoader: webix$TreeDataLoader;
+declare var TreeDataLoader: webix$TreeDataLoader;
 
 declare interface webix$TreeDataMove {
     copy(
@@ -1298,16 +1176,14 @@ declare interface webix$TreeDataMove {
         $dropAllow: webix$WebixCallback
 }
 
-declare
-var TreeDataMove: webix$TreeDataMove;
+declare var TreeDataMove: webix$TreeDataMove;
 
 declare interface webix$TreeRenderStack {
     getItemNode(id: string | number): void,
         render(id: string | number, data: any, type: string): void
 }
 
-declare
-var TreeRenderStack: webix$TreeRenderStack;
+declare var TreeRenderStack: webix$TreeRenderStack;
 
 declare interface webix$TreeStateCheckbox {
     checkAll(id?: string | number): void,
@@ -1318,8 +1194,7 @@ declare interface webix$TreeStateCheckbox {
         uncheckItem(id: string): void
 }
 
-declare
-var TreeStateCheckbox: webix$TreeStateCheckbox;
+declare var TreeStateCheckbox: webix$TreeStateCheckbox;
 
 declare interface webix$TreeStore {
     add(obj: any, index?: number, parentId?: string): string,
@@ -1345,20 +1220,17 @@ declare interface webix$TreeStore {
         name: string
 }
 
-declare
-var TreeStore: webix$TreeStore;
+declare var TreeStore: webix$TreeStore;
 
 declare interface webix$TreeTableClick {}
 
-declare
-var TreeTableClick: webix$TreeTableClick;
+declare var TreeTableClick: webix$TreeTableClick;
 
 declare interface webix$TreeTablePaste {
     insert(data: any[]): void
 }
 
-declare
-var TreeTablePaste: webix$TreeTablePaste;
+declare var TreeTablePaste: webix$TreeTablePaste;
 
 declare interface webix$TreeType {
     checkbox(obj: any, common: any): string,
@@ -1367,13 +1239,11 @@ declare interface webix$TreeType {
         space(obj: any, common: any): string
 }
 
-declare
-var TreeType: webix$TreeType;
+declare var TreeType: webix$TreeType;
 
 declare interface webix$UIExtension {}
 
-declare
-var UIExtension: webix$UIExtension;
+declare var UIExtension: webix$UIExtension;
 
 declare interface webix$UIManager {
     addHotKey(key: string, handler: webix$WebixCallback, obj?: any): void,
@@ -1391,8 +1261,7 @@ declare interface webix$UIManager {
         setState(state: any): void
 }
 
-declare
-var UIManager: webix$UIManager;
+declare var UIManager: webix$UIManager;
 
 declare interface webix$Undo {
     ignoreUndo(functor: webix$WebixCallback): void,
@@ -1400,37 +1269,32 @@ declare interface webix$Undo {
         undo(id: string): void
 }
 
-declare
-var Undo: webix$Undo;
+declare var Undo: webix$Undo;
 
 declare interface webix$UploadDriver {
     flash: any,
         html5: any
 }
 
-declare
-var UploadDriver: webix$UploadDriver;
+declare var UploadDriver: webix$UploadDriver;
 
 declare interface webix$ValidateCollection {
     clearValidation(): void,
         validate(id?: string): boolean
 }
 
-declare
-var ValidateCollection: webix$ValidateCollection;
+declare var ValidateCollection: webix$ValidateCollection;
 
 declare interface webix$ValidateData {
     clearValidation(): void,
         validate(mode?: any): boolean
 }
 
-declare
-var ValidateData: webix$ValidateData;
+declare var ValidateData: webix$ValidateData;
 
 declare interface webix$ValueBind {}
 
-declare
-var ValueBind: webix$ValueBind;
+declare var ValueBind: webix$ValueBind;
 
 declare interface webix$Values {
     clear(): void,
@@ -1446,8 +1310,7 @@ declare interface webix$Values {
         setValues(values: any, update?: boolean): void
 }
 
-declare
-var Values: webix$Values;
+declare var Values: webix$Values;
 
 declare interface webix$VirtualRenderStack {
     getItemNode(id: string | number): void,
@@ -1455,19 +1318,16 @@ declare interface webix$VirtualRenderStack {
         showItem(id: string | number): void
 }
 
-declare
-var VirtualRenderStack: webix$VirtualRenderStack;
+declare var VirtualRenderStack: webix$VirtualRenderStack;
 
 declare interface webix$DataCollectionFactory {
     new(): webix$DataCollection
 }
 
-declare
-var DataCollection: webix$DataCollectionFactory;
+declare var DataCollection: webix$DataCollectionFactory;
 
 
-declare
-var npm$namespace$ui: {
+declare var npm$namespace$ui: {
     delay: typeof ui$delay,
     fullScreen: typeof ui$fullScreen,
     hasMethod: typeof ui$hasMethod,
@@ -1476,26 +1336,19 @@ var npm$namespace$ui: {
     proto: typeof ui$proto,
     template: typeof ui$template,
 }
-declare
-function ui$delay(code: webix$WebixCallback, owner?: any, params?: any[], delay?: number): number
+declare function ui$delay(code: webix$WebixCallback, owner?: any, params?: any[], delay?: number): number
 
-declare
-function ui$fullScreen(): void
+declare function ui$fullScreen(): void
 
-declare
-function ui$hasMethod(name: string, method_name: string): boolean
+declare function ui$hasMethod(name: string, method_name: string): boolean
 
-declare
-function ui$resize(): void
+declare function ui$resize(): void
 
-declare
-function ui$zIndex(): number
+declare function ui$zIndex(): number
 
-declare
-var scrollSize: number;
+declare var scrollSize: number;
 
-declare
-var zIndexBase: number;
+declare var zIndexBase: number;
 
 declare interface ui$baselayoutConfig {
     animate?: any,
@@ -1794,8 +1647,7 @@ declare type ui$protoEventName = "onAfterAdd" |
     "onValidationSuccess" |
     "onViewResize";
 
-declare
-function ui$proto(target: any, mixin1?: any, mixinN?: any): any
+declare function ui$proto(target: any, mixin1?: any, mixinN?: any): any
 
 declare interface ui$resizeareaConfig {
     border?: boolean,
@@ -9487,8 +9339,7 @@ declare type ui$templateEventName = "onAfterLoad" |
     "onTouchStart" |
     "onViewResize";
 
-declare
-function ui$template(template: string): webix$WebixCallback
+declare function ui$template(template: string): webix$WebixCallback
 
 declare interface ui$textConfig {
     align?: string,
@@ -11412,5 +11263,4 @@ declare type ui$window = {
     config: ui$windowConfig,
     name: string
 }
-declare
-function $$(id: string | Event | HTMLElement): undefined.baseview
+declare function $$(id: string | Event | HTMLElement): undefined.baseview

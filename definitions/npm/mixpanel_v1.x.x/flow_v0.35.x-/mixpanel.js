@@ -76,5 +76,4 @@ declare interface Mixpanel$People {
         clear_charges(): void,
         delete_user(): void
 }
-declare
-var mixpanel: Mixpanel;
+declare var mixpanel: Mixpanel;

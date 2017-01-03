@@ -7,31 +7,25 @@
  */
 
 
-declare
-var npm$namespace$SMS: {
+declare var npm$namespace$SMS: {
     send: typeof SMS$send,
 }
-declare
-var twilio: {
+declare var twilio: {
     FROM?: string,
     ACCOUNT_SID?: string,
     AUTH_TOKEN?: string
 };
 
-declare
-var phoneTemplate: {
+declare var phoneTemplate: {
     from: string,
     text: Function
 };
 
-declare
-function SMS$send(options: Object, callback?: Function): void
-declare
-var npm$namespace$Meteor: {
+declare function SMS$send(options: Object, callback?: Function): void
+declare var npm$namespace$Meteor: {
     loginWithPhoneAndPassword: typeof Meteor$loginWithPhoneAndPassword,
 }
-declare
-function Meteor$loginWithPhoneAndPassword(selector: Object | String, password: String, callback?: Function): voiddeclare module 'meteor/meteor' {
+declare function Meteor$loginWithPhoneAndPassword(selector: Object | String, password: String, callback?: Function): voiddeclare module 'meteor/meteor' {
 
     declare var npm$namespace$Meteor: {
         loginWithPhoneAndPassword: typeof Meteor$loginWithPhoneAndPassword,
@@ -39,16 +33,14 @@ function Meteor$loginWithPhoneAndPassword(selector: Object | String, password: S
     declare function Meteor$loginWithPhoneAndPassword(selector: Object | String, password: String, callback?: Function): void
 }
 
-declare
-var npm$namespace$Accounts: {
+declare var npm$namespace$Accounts: {
     createUserWithPhone: typeof Accounts$createUserWithPhone,
     requestPhoneVerification: typeof Accounts$requestPhoneVerification,
     verifyPhone: typeof Accounts$verifyPhone,
     isPhoneVerified: typeof Accounts$isPhoneVerified,
     onPhoneVerification: typeof Accounts$onPhoneVerification,
 }
-declare
-var _options: {
+declare var _options: {
     verificationCodeLength?: number,
     verificationMaxRetries?: number,
     verificationRetriesWaitTime?: number,
@@ -59,24 +51,19 @@ var _options: {
     adminPhoneNumbers?: Array<string >
 };
 
-declare
-function Accounts$createUserWithPhone(options: Object, callback?: Function): void
+declare function Accounts$createUserWithPhone(options: Object, callback?: Function): void
 
-declare
-function Accounts$requestPhoneVerification(phone: string, callback?: Function): void
+declare function Accounts$requestPhoneVerification(phone: string, callback?: Function): void
 
-declare
-function Accounts$verifyPhone(
+declare function Accounts$verifyPhone(
     phone: string,
     code: string,
     newPassword?: string | Function,
     callback?: Function): void
 
-declare
-function Accounts$isPhoneVerified(): boolean
+declare function Accounts$isPhoneVerified(): boolean
 
-declare
-function Accounts$onPhoneVerification(func: Function): voiddeclare module 'meteor/accounts-base' {
+declare function Accounts$onPhoneVerification(func: Function): voiddeclare module 'meteor/accounts-base' {
 
     declare var npm$namespace$Accounts: {
         createUserWithPhone: typeof Accounts$createUserWithPhone,

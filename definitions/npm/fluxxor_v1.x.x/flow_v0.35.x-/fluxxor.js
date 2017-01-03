@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Fluxxor: {
+declare var npm$namespace$Fluxxor: {
     createStore: typeof Fluxxor$createStore,
 }
 declare class Dispatcher {
@@ -62,11 +61,9 @@ declare interface Fluxxor$StoreWatchMixin<StoreState>{
     getStateFromFlux(): StoreState
 }
 
-declare
-function Fluxxor$createStore(spec: Fluxxor$StoreSpec): Fluxxor$StoreClass
+declare function Fluxxor$createStore(spec: Fluxxor$StoreSpec): Fluxxor$StoreClass
 
-declare
-var version: string;
+declare var version: string;
 declare module 'fluxxor' {
     declare module.exports: typeof Fluxxor
 }

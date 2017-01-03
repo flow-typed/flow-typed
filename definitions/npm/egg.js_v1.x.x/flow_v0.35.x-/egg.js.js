@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var egg: Egg;
+declare var egg: Egg;
 declare module 'egg' {
     declare module.exports: typeof egg
 }

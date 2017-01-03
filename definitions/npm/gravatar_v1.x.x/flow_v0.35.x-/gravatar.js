@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$GravatarModule: {
+declare var npm$namespace$GravatarModule: {
     url: typeof GravatarModule$url,
 }
 declare type GravatarModule$Options = {
@@ -22,8 +21,7 @@ declare type GravatarModule$Options = {
     size?: string
 };
 
-declare
-function GravatarModule$url(
+declare function GravatarModule$url(
     email: string,
     options?: GravatarModule$Options,
     forceProtocol?: boolean): stringdeclare module 'gravatar' {

@@ -380,9 +380,6 @@ declare interface RequireDefine {
     */
     amd: Object
 }
-declare
-var requirejs: Require;
-declare
-var require: Require;
-declare
-var define: RequireDefine;
+declare var requirejs: Require;
+declare var require: Require;
+declare var define: RequireDefine;

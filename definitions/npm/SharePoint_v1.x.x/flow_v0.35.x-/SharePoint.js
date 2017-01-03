@@ -6,19 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var _spBodyOnLoadFunctions: Function[];
-declare
-var _spBodyOnLoadFunctionNames: string[];
-declare
-var _spBodyOnLoadCalled: boolean;
-declare
-function ExecuteOrDelayUntilBodyLoaded(initFunc: () => void): voiddeclare
-function ExecuteOrDelayUntilScriptLoaded(func: () => void, depScriptFileName: string): booleandeclare
-function ExecuteOrDelayUntilEventNotified(func: Function, eventName: string): booleandeclare
-var Strings: any;
-declare
-export class GanttControl {
+declare var _spBodyOnLoadFunctions: Function[];
+declare var _spBodyOnLoadFunctionNames: string[];
+declare var _spBodyOnLoadCalled: boolean;
+declare function ExecuteOrDelayUntilBodyLoaded(initFunc: () => void): voiddeclare function ExecuteOrDelayUntilScriptLoaded(func: () => void, depScriptFileName: string): booleandeclare function ExecuteOrDelayUntilEventNotified(func: Function, eventName: string): booleandeclare var Strings: any;
+declare export class GanttControl {
     WaitForGanttCreation(callack: (control: SP$GanttControl) => void): void;
     Instances: SP$GanttControl[];
     FnGanttCreationCallback: {
@@ -29,8 +21,7 @@ export class GanttControl {
 /**
  * Register function to rerun on partial update in MDS-enabled site.
  */
-declare
-function RegisterModuleInit(scriptFileName: string, initFunc: () => void): void
+declare function RegisterModuleInit(scriptFileName: string, initFunc: () => void): void
 /**
  * Provides access to url and query string parts.
  */
@@ -89,15 +80,11 @@ declare class _spPageContextInfo {
     webTitle: string;
     webUIVersion: number
 }
-declare
-function STSHtmlEncode(value: string): stringdeclare
-function STSHtmlDecode(value: string): stringdeclare
-function AddEvtHandler(element: HTMLElement, event: string, func: EventListener): void
+declare function STSHtmlEncode(value: string): stringdeclare function STSHtmlDecode(value: string): stringdeclare function AddEvtHandler(element: HTMLElement, event: string, func: EventListener): void
 /**
  * Gets query string parameter 
  */
-declare
-function GetUrlKeyValue(key: string): stringdeclare class AjaxNavigate {
+declare function GetUrlKeyValue(key: string): stringdeclare class AjaxNavigate {
     update(
         url: string,
         updateParts: SPAnimation$Object,
@@ -113,8 +100,7 @@ function GetUrlKeyValue(key: string): stringdeclare class AjaxNavigate {
     get_search(): string;
     convertMDSURLtoRegularURL(mdsPath: string): string
 }
-declare
-var ajaxNavigate: AjaxNavigate;
+declare var ajaxNavigate: AjaxNavigate;
 declare class Browseris {
     firefox: boolean;
     firefox36up: boolean;
@@ -158,8 +144,7 @@ declare class Browseris {
     winnt: boolean;
     armProcessor: boolean
 }
-declare
-var browseris: Browseris;
+declare var browseris: Browseris;
 declare type ContextInfo = {
     AllowGridMode: boolean,
     BasePermissions: any,
@@ -232,9 +217,7 @@ declare type ContextInfo = {
     SiteTemplateId: number,
     ExcludeFromOfflineClient: boolean
 }
-declare
-function GetCurrentCtx(): ContextInfodeclare
-function SetFullScreenMode(fullscreen: boolean): voiddeclare interface MQuery {
+declare function GetCurrentCtx(): ContextInfodeclare function SetFullScreenMode(fullscreen: boolean): voiddeclare interface MQuery {
     (selector: string, context?: any): MQueryResultSetElements,
     (element: HTMLElement): MQueryResultSetElements,
     (object: MQueryResultSetElements): MQueryResultSetElements,
@@ -497,8 +480,7 @@ declare type MQueryEvent = {
     shiftKey: boolean,
     view: any
 } & Event
-declare
-var m$: MQuery;
+declare var m$: MQuery;
 declare class CalloutActionOptions {
 
     /**
@@ -842,8 +824,7 @@ declare class CalloutManager {
 /**
  * Represents schema for a Choice field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_Choice = {
+declare export type SPClientTemplates$FieldSchema_InForm_Choice = {
 
     /**
      * List of choices for this field. 
@@ -861,8 +842,7 @@ export type SPClientTemplates$FieldSchema_InForm_Choice = {
 /**
  * Represents schema for a Lookup field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_Lookup = {
+declare export type SPClientTemplates$FieldSchema_InForm_Lookup = {
 
     /**
      * Specifies if the field allows multiple values 
@@ -911,8 +891,7 @@ export type SPClientTemplates$FieldSchema_InForm_Lookup = {
 /**
  * Represents schema for a DateTime field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_DateTime = {
+declare export type SPClientTemplates$FieldSchema_InForm_DateTime = {
 
     /**
      * Type of calendar to use 
@@ -948,8 +927,7 @@ export type SPClientTemplates$FieldSchema_InForm_DateTime = {
 /**
  * Represents schema for a DateTime field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_Geolocation = {
+declare export type SPClientTemplates$FieldSchema_InForm_Geolocation = {
     BingMapsKey: string,
     IsBingMapBlockedInCurrentRegion: boolean
 } & SPClientTemplates$FieldSchema_InForm
@@ -959,8 +937,7 @@ export type SPClientTemplates$FieldSchema_InForm_Geolocation = {
 /**
  * Represents schema for a Choice field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_MultiChoice = {
+declare export type SPClientTemplates$FieldSchema_InForm_MultiChoice = {
 
     /**
      * List of choices for this field. 
@@ -978,8 +955,7 @@ export type SPClientTemplates$FieldSchema_InForm_MultiChoice = {
 /**
  * Represents schema for a Choice field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_MultiLineText = {
+declare export type SPClientTemplates$FieldSchema_InForm_MultiLineText = {
 
     /**
      * Specifies whether rich text formatting can be used in the field 
@@ -1017,8 +993,7 @@ export type SPClientTemplates$FieldSchema_InForm_MultiLineText = {
 /**
  * Represents schema for a Number field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_Number = {
+declare export type SPClientTemplates$FieldSchema_InForm_Number = {
     ShowAsPercentage: boolean
 } & SPClientTemplates$FieldSchema_InForm
 
@@ -1027,8 +1002,7 @@ export type SPClientTemplates$FieldSchema_InForm_Number = {
 /**
  * Represents schema for a Number field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_Text = {
+declare export type SPClientTemplates$FieldSchema_InForm_Text = {
     MaxLength: number
 } & SPClientTemplates$FieldSchema_InForm
 
@@ -1037,8 +1011,7 @@ export type SPClientTemplates$FieldSchema_InForm_Text = {
 /**
  * Represents schema for a Number field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_Url = {
+declare export type SPClientTemplates$FieldSchema_InForm_Url = {
     DisplayFormat: UrlFormatType
 } & SPClientTemplates$FieldSchema_InForm
 
@@ -1047,8 +1020,7 @@ export type SPClientTemplates$FieldSchema_InForm_Url = {
 /**
  * Represents schema for a Number field in list form or in list view in grid mode 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm_User = {
+declare export type SPClientTemplates$FieldSchema_InForm_User = {
     Presence: boolean,
     WithPicture: boolean,
     DefaultRender: boolean,
@@ -1069,8 +1041,7 @@ export type SPClientTemplates$FieldSchema_InForm_User = {
 } & SPClientTemplates$FieldSchema_InForm
 
 
-declare
-export interface SPClientTemplates$FieldSchema {
+declare export interface SPClientTemplates$FieldSchema {
 
     /**
      * Specifies if the field can be edited while list view is in the Grid mode 
@@ -1099,8 +1070,7 @@ export interface SPClientTemplates$FieldSchema {
  * Represents field schema in Grid mode and on list forms.
  *     Consider casting objects of this type to more specific field types, e.g. FieldSchemaInForm_Lookup 
  */
-declare
-export type SPClientTemplates$FieldSchema_InForm = {
+declare export type SPClientTemplates$FieldSchema_InForm = {
 
     /**
      * Description for this field. 
@@ -1151,24 +1121,20 @@ export type SPClientTemplates$FieldSchema_InForm = {
 } & SPClientTemplates$FieldSchema
 
 
-declare
-export interface SPClientTemplates$ListSchema {
+declare export interface SPClientTemplates$ListSchema {
     Field: SPClientTemplates$FieldSchema[]
 }
 
-declare
-export type SPClientTemplates$ListSchema_InForm = {
+declare export type SPClientTemplates$ListSchema_InForm = {
     Field: SPClientTemplates$FieldSchema_InForm[]
 } & SPClientTemplates$ListSchema
 
 
-declare
-export interface SPClientTemplates$ListData_InForm {
+declare export interface SPClientTemplates$ListData_InForm {
     Items: SPClientTemplates$Item[]
 }
 
-declare
-export type SPClientTemplates$RenderContext_FieldInForm = {
+declare export type SPClientTemplates$RenderContext_FieldInForm = {
     CurrentGroupIdx: number,
     CurrentGroup: SP$Group,
     CurrentItems: SPClientTemplates$Item[],
@@ -1177,8 +1143,7 @@ export type SPClientTemplates$RenderContext_FieldInForm = {
 } & SPClientTemplates$RenderContext_Form
 
 
-declare
-export type SPClientTemplates$RenderContext_Form = {
+declare export type SPClientTemplates$RenderContext_Form = {
     CurrentItem: SPClientTemplates$Item,
     FieldControlModes: {
         [fieldInternalName: string]: ClientControlMode
@@ -1191,8 +1156,7 @@ export type SPClientTemplates$RenderContext_Form = {
 } & SPClientTemplates$RenderContext
 
 
-declare
-export type SPClientTemplates$FieldSchema_InView_LookupField = {
+declare export type SPClientTemplates$FieldSchema_InView_LookupField = {
 
     /**
      * Either "TRUE" or "FALSE" 
@@ -1211,8 +1175,7 @@ export type SPClientTemplates$FieldSchema_InView_LookupField = {
 } & SPClientTemplates$FieldSchema_InView
 
 
-declare
-export type SPClientTemplates$FieldSchema_InView_UserField = {
+declare export type SPClientTemplates$FieldSchema_InView_UserField = {
 
     /**
      * Either "TRUE" or "FALSE" 
@@ -1245,8 +1208,7 @@ export type SPClientTemplates$FieldSchema_InView_UserField = {
 /**
  * Represents field schema in a list view. 
  */
-declare
-export type SPClientTemplates$FieldSchema_InView = {
+declare export type SPClientTemplates$FieldSchema_InView = {
 
     /**
      * Either "TRUE" or "FALSE" 
@@ -1304,8 +1266,7 @@ export type SPClientTemplates$FieldSchema_InView = {
 } & SPClientTemplates$FieldSchema
 
 
-declare
-export type SPClientTemplates$ListSchema_InView = {
+declare export type SPClientTemplates$ListSchema_InView = {
 
     /**
      * Key-value object that represents all aggregations defined for the view.
@@ -1461,8 +1422,7 @@ export type SPClientTemplates$ListSchema_InView = {
 } & SPClientTemplates$ListSchema
 
 
-declare
-export interface SPClientTemplates$ListData_InView {
+declare export interface SPClientTemplates$ListData_InView {
     FilterLink: string,
         FilterFields: string,
         FirstRow: number,
@@ -1488,16 +1448,14 @@ export interface SPClientTemplates$ListData_InView {
         Row: SPClientTemplates$Item[]
 }
 
-declare
-export type SPClientTemplates$RenderContext_GroupInView = {
+declare export type SPClientTemplates$RenderContext_GroupInView = {
     CurrentGroupIdx: number,
     CurrentGroup: SP$Group,
     CurrentItems: SPClientTemplates$Item[]
 } & SPClientTemplates$RenderContext_InView
 
 
-declare
-export type SPClientTemplates$RenderContext_InView = {
+declare export type SPClientTemplates$RenderContext_InView = {
     AllowCreateFolder: boolean,
     AllowGridMode: boolean,
     BasePermissions: {
@@ -1607,15 +1565,13 @@ export type SPClientTemplates$RenderContext_InView = {
 } & SPClientTemplates$RenderContext
 
 
-declare
-export type SPClientTemplates$RenderContext_ItemInView = {
+declare export type SPClientTemplates$RenderContext_ItemInView = {
     CurrentItem: SPClientTemplates$Item,
     CurrentItemIdx: number
 } & SPClientTemplates$RenderContext_InView
 
 
-declare
-export type SPClientTemplates$RenderContext_FieldInView = {
+declare export type SPClientTemplates$RenderContext_FieldInView = {
 
     /**
      * If in grid mode (context.inGridMode == true), cast to FieldSchema_InForm, otherwise cast to FieldSchema_InView 
@@ -1630,20 +1586,17 @@ export type SPClientTemplates$RenderContext_FieldInView = {
 } & SPClientTemplates$RenderContext_ItemInView
 
 
-declare
-export interface SPClientTemplates$Item {
+declare export interface SPClientTemplates$Item {
     [fieldInternalName: string]: any
 }
 
-declare
-export interface SPClientTemplates$Group {
+declare export interface SPClientTemplates$Group {
     Items: SPClientTemplates$Item[]
 }
 
 declare type SPClientTemplates$RenderCallback = (ctx: SPClientTemplates$RenderContext) => void;
 
-declare
-export interface SPClientTemplates$RenderContext {
+declare export interface SPClientTemplates$RenderContext {
     BaseViewID?: number,
         ControlMode?: ClientControlMode,
         CurrentCultureName?: string,
@@ -1666,8 +1619,7 @@ export interface SPClientTemplates$RenderContext {
         Templates?: SPClientTemplates$Templates
 }
 
-declare
-export interface SPClientTemplates$SingleTemplateCallback {
+declare export interface SPClientTemplates$SingleTemplateCallback {
 
     /**
      * Must return null in order to fall back to a more common template or to a system default template 
@@ -1675,8 +1627,7 @@ export interface SPClientTemplates$SingleTemplateCallback {
     (renderContext: SPClientTemplates$RenderContext_InView): string
 }
 
-declare
-export interface SPClientTemplates$GroupCallback {
+declare export interface SPClientTemplates$GroupCallback {
 
     /**
      * Must return null in order to fall back to a more common template or to a system default template 
@@ -1684,8 +1635,7 @@ export interface SPClientTemplates$GroupCallback {
     (renderContext: SPClientTemplates$RenderContext_GroupInView): string
 }
 
-declare
-export interface SPClientTemplates$ItemCallback {
+declare export interface SPClientTemplates$ItemCallback {
 
     /**
      * Must return null in order to fall back to a more common template or to a system default template 
@@ -1693,8 +1643,7 @@ export interface SPClientTemplates$ItemCallback {
     (renderContext: SPClientTemplates$RenderContext): string
 }
 
-declare
-export interface SPClientTemplates$FieldCallback {
+declare export interface SPClientTemplates$FieldCallback {
 
     /**
      * Must return null in order to fall back to a more common template or to a system default template 
@@ -1702,8 +1651,7 @@ export interface SPClientTemplates$FieldCallback {
     (renderContext: SPClientTemplates$RenderContext): string
 }
 
-declare
-export interface SPClientTemplates$FieldInFormCallback {
+declare export interface SPClientTemplates$FieldInFormCallback {
 
     /**
      * Must return null in order to fall back to a more common template or to a system default template 
@@ -1711,8 +1659,7 @@ export interface SPClientTemplates$FieldInFormCallback {
     (renderContext: SPClientTemplates$RenderContext_FieldInForm): string
 }
 
-declare
-export interface SPClientTemplates$FieldInViewCallback {
+declare export interface SPClientTemplates$FieldInViewCallback {
 
     /**
      * Must return null in order to fall back to a more common template or to a system default template 
@@ -1720,8 +1667,7 @@ export interface SPClientTemplates$FieldInViewCallback {
     (renderContext: SPClientTemplates$RenderContext_FieldInView): string
 }
 
-declare
-export interface SPClientTemplates$FieldTemplateOverrides {
+declare export interface SPClientTemplates$FieldTemplateOverrides {
 
     /**
      * Defines templates for rendering the field on a display form. 
@@ -1744,13 +1690,11 @@ export interface SPClientTemplates$FieldTemplateOverrides {
         View?: SPClientTemplates$FieldInViewCallback
 }
 
-declare
-export interface SPClientTemplates$FieldTemplates {
+declare export interface SPClientTemplates$FieldTemplates {
     [fieldInternalName: string]: SPClientTemplates$FieldCallback
 }
 
-declare
-export interface SPClientTemplates$Templates {
+declare export interface SPClientTemplates$Templates {
     View?: SPClientTemplates$RenderCallback | string,
         Body?: SPClientTemplates$RenderCallback | string,
 
@@ -1782,13 +1726,11 @@ export interface SPClientTemplates$Templates {
         Fields?: SPClientTemplates$FieldTemplates
 }
 
-declare
-export interface SPClientTemplates$FieldTemplateMap {
+declare export interface SPClientTemplates$FieldTemplateMap {
     [fieldInternalName: string]: SPClientTemplates$FieldTemplateOverrides
 }
 
-declare
-export interface SPClientTemplates$TemplateOverrides {
+declare export interface SPClientTemplates$TemplateOverrides {
     View?: SPClientTemplates$RenderCallback | string,
         Body?: SPClientTemplates$RenderCallback | string,
 
@@ -1820,8 +1762,7 @@ export interface SPClientTemplates$TemplateOverrides {
         Fields?: SPClientTemplates$FieldTemplateMap
 }
 
-declare
-export interface SPClientTemplates$TemplateOverridesOptions {
+declare export interface SPClientTemplates$TemplateOverridesOptions {
 
     /**
      * Template overrides 
@@ -1857,14 +1798,12 @@ export interface SPClientTemplates$TemplateOverridesOptions {
         BaseViewID?: number | string
 }
 
-declare
-export class TemplateManager {
+declare export class TemplateManager {
     RegisterTemplateOverrides(renderCtx: SPClientTemplates$TemplateOverridesOptions): void;
     GetTemplates(renderCtx: SPClientTemplates$RenderContext): SPClientTemplates$Templates
 }
 
-declare
-export interface SPClientTemplates$ClientUserValue {
+declare export interface SPClientTemplates$ClientUserValue {
     lookupId: number,
         lookupValue: string,
         displayStr: string,
@@ -1876,20 +1815,17 @@ export interface SPClientTemplates$ClientUserValue {
         jobTitle: string
 }
 
-declare
-export interface SPClientTemplates$ClientLookupValue {
+declare export interface SPClientTemplates$ClientLookupValue {
     LookupId: number,
         LookupValue: string
 }
 
-declare
-export interface SPClientTemplates$ClientUrlValue {
+declare export interface SPClientTemplates$ClientUrlValue {
     URL: string,
         Description: string
 }
 
-declare
-export class Utility {
+declare export class Utility {
     ComputeRegisterTypeInfo(renderCtx: SPClientTemplates$TemplateOverridesOptions): any;
     ControlModeToString(mode: SPClientTemplates$ClientControlMode): string;
     FileSystemObjectTypeToString(fileSystemObjectType: SPClientTemplates$FileSystemObjectType): string;
@@ -1944,8 +1880,7 @@ export class Utility {
     UserMultiValueDelimitString: string
 }
 
-declare
-export class ClientFormContext {
+declare export class ClientFormContext {
     fieldValue: any;
     fieldSchema: SPClientTemplates$FieldSchema_InForm;
     fieldName: string;
@@ -1979,57 +1914,44 @@ export class ClientFormContext {
     registerClientValidator(fieldname: string, validator: undefined.ValidatorSet): void;
     registerHasValueChangedCallback(fieldname: string, callback: (eventArg?: any) => void): void
 }
-declare
-function GenerateIID(renderCtx: SPClientTemplates$RenderContext_ItemInView): stringdeclare
-function GenerateIIDForListItem(
+declare function GenerateIID(renderCtx: SPClientTemplates$RenderContext_ItemInView): stringdeclare function GenerateIIDForListItem(
     renderCtx: SPClientTemplates$RenderContext_InView,
-    listItem: SPClientTemplates$Item): stringdeclare
-function SPFormControl_AppendValidationErrorMessage(nodeId: string, errorResult: any): voiddeclare
-function CoreRender(template: any, context: any): stringdeclare
-export class ValidationResult {
+    listItem: SPClientTemplates$Item): stringdeclare function SPFormControl_AppendValidationErrorMessage(nodeId: string, errorResult: any): voiddeclare function CoreRender(template: any, context: any): stringdeclare export class ValidationResult {
     constructor(hasErrors: boolean, errorMsg: string): this
 }
 
-declare
-export class ValidatorSet {
+declare export class ValidatorSet {
     RegisterValidator(validator: ClientValidation$IValidator): void
 }
 
-declare
-export interface ClientValidation$IValidator {
+declare export interface ClientValidation$IValidator {
     Validate(value: any): ClientValidation$ValidationResult
 }
 
-declare
-export class RequiredValidator mixins IValidator {
+declare export class RequiredValidator mixins IValidator {
     Validate(value: any): ClientValidation$ValidationResult
 }
 
-declare
-export class RequiredFileValidator mixins IValidator {
+declare export class RequiredFileValidator mixins IValidator {
     Validate(value: any): ClientValidation$ValidationResult
 }
 
-declare
-export class RequiredRichTextValidator mixins IValidator {
+declare export class RequiredRichTextValidator mixins IValidator {
     Validate(value: any): ClientValidation$ValidationResult
 }
 
-declare
-export class MaxLengthUrlValidator mixins IValidator {
+declare export class MaxLengthUrlValidator mixins IValidator {
     Validate(value: any): ClientValidation$ValidationResult
 }
 
-declare
-export class ClientForm {
+declare export class ClientForm {
     constructor(qualifier: string): this;
     RenderClientForm(): void;
     SubmitClientForm(): boolean;
     NotifyControlEvent(eventName: FormManagerEvents, fldName: string, eventArg: any): void
 }
 
-declare
-export class ClientFormManager {
+declare export class ClientFormManager {
     GetClientForm(qualifier: string): SPClientForms$ClientForm;
     RegisterClientForm(qualifier: string): void;
     SubmitClientForm(qualifier: string): boolean
@@ -2050,55 +1972,25 @@ declare class SPMgr {
         listItem: SPAnimation$Object,
         listSchema: SPClientTemplates$ListSchema): string
 }
-declare
-var spMgr: SPMgr;
-declare
-function SPField_FormDisplay_Default(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPField_FormDisplay_DefaultNoEncode(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPField_FormDisplay_Empty(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldText_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldNumber_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldBoolean_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldNote_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldNote_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldFile_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldFile_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldChoice_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldChoice_Dropdown_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldChoice_Radio_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldMultiChoice_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldDateTime_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldDateTime_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldUrl_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldUrl_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldUser_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldUserMulti_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPClientPeoplePickerCSRTemplate(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldLookup_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldLookup_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldLookupMulti_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-function SPFieldAttachments_Default(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare
-export class Settings {
+declare var spMgr: SPMgr;
+declare function SPField_FormDisplay_Default(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPField_FormDisplay_DefaultNoEncode(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPField_FormDisplay_Empty(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldText_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldNumber_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldBoolean_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldNote_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldNote_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldFile_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldFile_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldChoice_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldChoice_Dropdown_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldChoice_Radio_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldMultiChoice_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldDateTime_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldDateTime_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldUrl_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldUrl_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldUser_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldUserMulti_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPClientPeoplePickerCSRTemplate(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldLookup_Display(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldLookup_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldLookupMulti_Edit(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare function SPFieldAttachments_Default(ctx: SPClientTemplates$RenderContext_FieldInForm): stringdeclare export class Settings {
     DisableAnimation(): void;
     DisableSessionAnimation(): void;
     IsAnimationEnabled(): boolean
 }
 
-declare
-export class State {
+declare export class State {
     SetAttribute(attributeId: Attribute, value: number): void;
     GetAttribute(attributeId: Attribute): number;
     GetDataIndex(attributeId: Attribute): number
 }
 
-declare
-export class Object {
+declare export class Object {
     constructor(animationID: ID, delay: number, element: HTMLElement, finalState: SPAnimation$State, finishFunc?: (data: any) => void, data?: any): this;
     constructor(animationID: ID, delay: number, element: HTMLElement[], finalState: SPAnimation$State, finishFunc?: (data: any) => void, data?: any): this;
     RunAnimation(): void
 }
-declare
-export class BasicAnimator {
+declare export class BasicAnimator {
     FadeIn(element: HTMLElement, finishFunc?: (data: any) => void, data?: any): void;
     FadeOut(element: HTMLElement, finishFunc?: (data: any) => void, data?: any): void;
     Move(
@@ -2194,8 +2086,7 @@ declare module 'Office' {
 declare class SPStatusNotificationData {
     constructor(text: string, subText: string, imageUrl: string, sip: string): this
 }
-declare
-function RefreshCommandUI(): voiddeclare class SPClientAutoFill {
+declare function RefreshCommandUI(): voiddeclare class SPClientAutoFill {
     MenuOptionType: {
         Option: number,
         Footer: number,
@@ -2476,34 +2367,26 @@ declare class SPClientPeoplePickerProcessedUser {
     HandleDeleteProcessedUserKey(e: Event): void;
     HandleResolveProcessedUserKey(e: Event): void
 }
-declare
-var npm$namespace$Define: {
+declare var npm$namespace$Define: {
     loadScript: typeof Define$loadScript,
     require: typeof Define$require,
     define: typeof Define$define,
 }
-declare
-export function Define$loadScript(url: string, successCallback: () => void, errCallback: () => void): void
+declare export function Define$loadScript(url: string, successCallback: () => void, errCallback: () => void): void
 
 
 /**
  * Loads script from _layouts/15/[req].js 
  */
-declare
-export function Define$require(req: string, callback: Function): void
+declare export function Define$require(req: string, callback: Function): void
 
-declare
-export function Define$define(name: string, deps: string[], def: Function): void
-declare
-var npm$namespace$Verify: {
+declare export function Define$define(name: string, deps: string[], def: Function): void
+declare var npm$namespace$Verify: {
     ArgumentType: typeof Verify$ArgumentType,
 }
-declare
-export function Verify$ArgumentType(arg: string, expected: any): voiddeclare
-export var local: BrowserStorage$CachedStorage;
+declare export function Verify$ArgumentType(arg: string, expected: any): voiddeclare export var local: BrowserStorage$CachedStorage;
 
-declare
-export var session: BrowserStorage$CachedStorage;
+declare export var session: BrowserStorage$CachedStorage;
 
 
 /**
@@ -2516,10 +2399,8 @@ declare interface BrowserStorage$CachedStorage {
         clead(): void,
         length: number
 }
-declare
-export var browseris: Browseris;
-declare
-var npm$namespace$CSSUtil: {
+declare export var browseris: Browseris;
+declare var npm$namespace$CSSUtil: {
     HasClass: typeof CSSUtil$HasClass,
     AddClass: typeof CSSUtil$AddClass,
     RemoveClass: typeof CSSUtil$RemoveClass,
@@ -2532,40 +2413,28 @@ var npm$namespace$CSSUtil: {
     getOpacity: typeof CSSUtil$getOpacity,
     setOpacity: typeof CSSUtil$setOpacity,
 }
-declare
-export function CSSUtil$HasClass(elem: HTMLElement, className: string): boolean
+declare export function CSSUtil$HasClass(elem: HTMLElement, className: string): boolean
 
-declare
-export function CSSUtil$AddClass(elem: HTMLElement, className: string): void
+declare export function CSSUtil$AddClass(elem: HTMLElement, className: string): void
 
-declare
-export function CSSUtil$RemoveClass(elem: HTMLElement, className: string): void
+declare export function CSSUtil$RemoveClass(elem: HTMLElement, className: string): void
 
-declare
-export function CSSUtil$pxToFloat(pxString: string): number
+declare export function CSSUtil$pxToFloat(pxString: string): number
 
-declare
-export function CSSUtil$pxToNum(px: string): number
+declare export function CSSUtil$pxToNum(px: string): number
 
-declare
-export function CSSUtil$numToPx(n: number): string
+declare export function CSSUtil$numToPx(n: number): string
 
-declare
-export function CSSUtil$getCurrentEltStyleByNames(elem: HTMLElement, styleNames: string[]): string
+declare export function CSSUtil$getCurrentEltStyleByNames(elem: HTMLElement, styleNames: string[]): string
 
-declare
-export function CSSUtil$getCurrentStyle(elem: HTMLElement, cssStyle: string): string
+declare export function CSSUtil$getCurrentStyle(elem: HTMLElement, cssStyle: string): string
 
-declare
-export function CSSUtil$getCurrentStyleCorrect(element: HTMLElement, camelStyleName: string, dashStyleName: string): string
+declare export function CSSUtil$getCurrentStyleCorrect(element: HTMLElement, camelStyleName: string, dashStyleName: string): string
 
-declare
-export function CSSUtil$getOpacity(element: HTMLElement): number
+declare export function CSSUtil$getOpacity(element: HTMLElement): number
 
-declare
-export function CSSUtil$setOpacity(element: HTMLElement, value: number): void
-declare
-var npm$namespace$DOM: {
+declare export function CSSUtil$setOpacity(element: HTMLElement, value: number): void
+declare var npm$namespace$DOM: {
     cancelDefault: typeof DOM$cancelDefault,
     AbsLeft: typeof DOM$AbsLeft,
     AbsTop: typeof DOM$AbsTop,
@@ -2577,43 +2446,31 @@ var npm$namespace$DOM: {
     PreventDefaultNavigation: typeof DOM$PreventDefaultNavigation,
     SetEvent: typeof DOM$SetEvent,
 }
-declare
-export var rightToLeft: boolean;
+declare export var rightToLeft: boolean;
 
-declare
-export function DOM$cancelDefault(evt: Event): void
+declare export function DOM$cancelDefault(evt: Event): void
 
-declare
-export function DOM$AbsLeft(el: HTMLElement): number
+declare export function DOM$AbsLeft(el: HTMLElement): number
 
-declare
-export function DOM$AbsTop(el: HTMLElement): number
+declare export function DOM$AbsTop(el: HTMLElement): number
 
-declare
-export function DOM$CancelEvent(evt: Event): void
+declare export function DOM$CancelEvent(evt: Event): void
 
-declare
-export function DOM$GetElementsByName(nae: string): NodeList
+declare export function DOM$GetElementsByName(nae: string): NodeList
 
-declare
-export function DOM$GetEventCoords(evt: Event): {
+declare export function DOM$GetEventCoords(evt: Event): {
     x: number,
     y: number
 }
 
-declare
-export function DOM$GetEventSrcElement(evt: Event): HTMLElement
+declare export function DOM$GetEventSrcElement(evt: Event): HTMLElement
 
-declare
-export function DOM$GetInnerText(el: HTMLElement): string
+declare export function DOM$GetInnerText(el: HTMLElement): string
 
-declare
-export function DOM$PreventDefaultNavigation(evt: Event): void
+declare export function DOM$PreventDefaultNavigation(evt: Event): void
 
-declare
-export function DOM$SetEvent(eventName: string, eventFunc: Function, el: HTMLElement): void
-declare
-var npm$namespace$Encoding: {
+declare export function DOM$SetEvent(eventName: string, eventFunc: Function, el: HTMLElement): void
+declare var npm$namespace$Encoding: {
     EncodeScriptQuote: typeof Encoding$EncodeScriptQuote,
     HtmlEncode: typeof Encoding$HtmlEncode,
     HtmlDecode: typeof Encoding$HtmlDecode,
@@ -2622,66 +2479,47 @@ var npm$namespace$Encoding: {
     ScriptEncodeWithQuote: typeof Encoding$ScriptEncodeWithQuote,
     CanonicalizeUrlEncodingCase: typeof Encoding$CanonicalizeUrlEncodingCase,
 }
-declare
-export function Encoding$EncodeScriptQuote(str: string): string
+declare export function Encoding$EncodeScriptQuote(str: string): string
 
-declare
-export function Encoding$HtmlEncode(str: string): string
+declare export function Encoding$HtmlEncode(str: string): string
 
-declare
-export function Encoding$HtmlDecode(str: string): string
+declare export function Encoding$HtmlDecode(str: string): string
 
-declare
-export function Encoding$AttrQuote(str: string): string
+declare export function Encoding$AttrQuote(str: string): string
 
-declare
-export function Encoding$ScriptEncode(str: string): string
+declare export function Encoding$ScriptEncode(str: string): string
 
-declare
-export function Encoding$ScriptEncodeWithQuote(str: string): string
+declare export function Encoding$ScriptEncodeWithQuote(str: string): string
 
-declare
-export function Encoding$CanonicalizeUrlEncodingCase(str: string): string
-declare
-var npm$namespace$IE8Support: {
+declare export function Encoding$CanonicalizeUrlEncodingCase(str: string): string
+declare var npm$namespace$IE8Support: {
     arrayIndexOf: typeof IE8Support$arrayIndexOf,
     attachDOMContentLoaded: typeof IE8Support$attachDOMContentLoaded,
     getComputedStyle: typeof IE8Support$getComputedStyle,
     stopPropagation: typeof IE8Support$stopPropagation,
 }
-declare
-export function IE8Support$arrayIndexOf<T>(array: T[], item: T, startIdx?: number): number
+declare export function IE8Support$arrayIndexOf<T>(array: T[], item: T, startIdx?: number): number
 
-declare
-export function IE8Support$attachDOMContentLoaded(handler: Function): void
+declare export function IE8Support$attachDOMContentLoaded(handler: Function): void
 
-declare
-export function IE8Support$getComputedStyle(domObj: HTMLElement, camelStyleName: string, dashStyleName: string): string
+declare export function IE8Support$getComputedStyle(domObj: HTMLElement, camelStyleName: string, dashStyleName: string): string
 
-declare
-export function IE8Support$stopPropagation(evt: Event): void
-declare
-var npm$namespace$StringUtil: {
+declare export function IE8Support$stopPropagation(evt: Event): void
+declare var npm$namespace$StringUtil: {
     BuildParam: typeof StringUtil$BuildParam,
     ApplyStringTemplate: typeof StringUtil$ApplyStringTemplate,
 }
-declare
-export function StringUtil$BuildParam(stPattern: string, ...params: any[]): string
+declare export function StringUtil$BuildParam(stPattern: string, ...params: any[]): string
 
-declare
-export function StringUtil$ApplyStringTemplate(str: string, ...params: any[]): string
-declare
-var npm$namespace$TypeUtil: {
+declare export function StringUtil$ApplyStringTemplate(str: string, ...params: any[]): string
+declare var npm$namespace$TypeUtil: {
     IsArray: typeof TypeUtil$IsArray,
     IsNullOrUndefined: typeof TypeUtil$IsNullOrUndefined,
 }
-declare
-export function TypeUtil$IsArray(value: any): boolean
+declare export function TypeUtil$IsArray(value: any): boolean
 
-declare
-export function TypeUtil$IsNullOrUndefined(value: any): boolean
-declare
-var npm$namespace$Nav: {
+declare export function TypeUtil$IsNullOrUndefined(value: any): boolean
+declare var npm$namespace$Nav: {
     convertRegularURLtoMDSURL: typeof Nav$convertRegularURLtoMDSURL,
     isMDSUrl: typeof Nav$isMDSUrl,
     isPageUrlValid: typeof Nav$isPageUrlValid,
@@ -2703,86 +2541,62 @@ var npm$namespace$Nav: {
     urlFromHashBag: typeof Nav$urlFromHashBag,
     wantsNewTab: typeof Nav$wantsNewTab,
 }
-declare
-export var ajaxNavigate: AjaxNavigate;
+declare export var ajaxNavigate: AjaxNavigate;
 
-declare
-export function Nav$convertRegularURLtoMDSURL(webUrl: string, fullPath: string): string
+declare export function Nav$convertRegularURLtoMDSURL(webUrl: string, fullPath: string): string
 
-declare
-export function Nav$isMDSUrl(url: string): boolean
+declare export function Nav$isMDSUrl(url: string): boolean
 
-declare
-export function Nav$isPageUrlValid(url: string): boolean
+declare export function Nav$isPageUrlValid(url: string): boolean
 
-declare
-export function Nav$isPortalTemplatePage(url: string): boolean
+declare export function Nav$isPortalTemplatePage(url: string): boolean
 
-declare
-export function Nav$getAjaxLocationWindow(): string
+declare export function Nav$getAjaxLocationWindow(): string
 
-declare
-export function Nav$getSource(defaultSource?: string): string
+declare export function Nav$getSource(defaultSource?: string): string
 
-declare
-export function Nav$getUrlKeyValue(
+declare export function Nav$getUrlKeyValue(
     keyName: string,
     bNoDecode: boolean,
     url: string,
     bCaseInsensitive: boolean): string
 
-declare
-export function Nav$getWindowLocationNoHash(hre: string): string
+declare export function Nav$getWindowLocationNoHash(hre: string): string
 
-declare
-export function Nav$goToHistoryLink(el: HTMLAnchorElement, strVersion: string): void
+declare export function Nav$goToHistoryLink(el: HTMLAnchorElement, strVersion: string): void
 
-declare
-export function Nav$getGoToLinkUrl(el: HTMLAnchorElement): string
+declare export function Nav$getGoToLinkUrl(el: HTMLAnchorElement): string
 
-declare
-export function Nav$goToLink(el: HTMLAnchorElement): void
+declare export function Nav$goToLink(el: HTMLAnchorElement): void
 
-declare
-export function Nav$goToLinkOrDialogNewWindow(el: HTMLAnchorElement): void
+declare export function Nav$goToLinkOrDialogNewWindow(el: HTMLAnchorElement): void
 
-declare
-export function Nav$goToDiscussion(url: string): void
+declare export function Nav$goToDiscussion(url: string): void
 
-declare
-export function Nav$onClickHook(evt: Event, topElm: HTMLElement): void
+declare export function Nav$onClickHook(evt: Event, topElm: HTMLElement): void
 
-declare
-export function Nav$pageUrlValidation(url: string, alertString: string): string
+declare export function Nav$pageUrlValidation(url: string, alertString: string): string
 
-declare
-export function Nav$parseHash(hash: string): SPAnimation$Object
+declare export function Nav$parseHash(hash: string): SPAnimation$Object
 
-declare
-export function Nav$navigate(url: string): void
+declare export function Nav$navigate(url: string): void
 
-declare
-export function Nav$removeMDSQueryParametersFromUrl(url: string): string
+declare export function Nav$removeMDSQueryParametersFromUrl(url: string): string
 
-declare
-export function Nav$urlFromHashBag(hashObject: SPAnimation$Object): string
+declare export function Nav$urlFromHashBag(hashObject: SPAnimation$Object): string
 
-declare
-export function Nav$wantsNewTab(evt: Event): boolean
-declare
-var npm$namespace$URI_Encoding: {
+declare export function Nav$wantsNewTab(evt: Event): boolean
+declare var npm$namespace$URI_Encoding: {
     encodeURIComponent: typeof URI_Encoding$encodeURIComponent,
     escapeUrlForCallback: typeof URI_Encoding$escapeUrlForCallback,
 }
-declare
-export function URI_Encoding$encodeURIComponent(
+declare export function URI_Encoding$encodeURIComponent(
     str: string,
     bAsUrl?: boolean,
     bForFilterQuery?: boolean,
     bForCallback?: boolean): string
 
-declare
-export function URI_Encoding$escapeUrlForCallback(str: string): stringdeclare interface IListItem {
+declare export function URI_Encoding$escapeUrlForCallback(str: string): stringdeclare interface IListItem {
     ID: number,
         ContentTypeId: string
 }
@@ -2805,25 +2619,19 @@ declare module 'Util' {
     declare export function showAttachmentRows(): void
 }
 
-declare
-var npm$namespace$SPThemeUtils: {
+declare var npm$namespace$SPThemeUtils: {
     ApplyCurrentTheme: typeof SPThemeUtils$ApplyCurrentTheme,
     WithCurrentTheme: typeof SPThemeUtils$WithCurrentTheme,
     UseClientSideTheming: typeof SPThemeUtils$UseClientSideTheming,
     Suspend: typeof SPThemeUtils$Suspend,
 }
-declare
-export function SPThemeUtils$ApplyCurrentTheme(): void
+declare export function SPThemeUtils$ApplyCurrentTheme(): void
 
-declare
-export function SPThemeUtils$WithCurrentTheme(resultCallback: Function): void
+declare export function SPThemeUtils$WithCurrentTheme(resultCallback: Function): void
 
-declare
-export function SPThemeUtils$UseClientSideTheming(): boolean
+declare export function SPThemeUtils$UseClientSideTheming(): boolean
 
-declare
-export function SPThemeUtils$Suspend(): voiddeclare
-export class ClientControl mixins undefined.Control {
+declare export function SPThemeUtils$Suspend(): voiddeclare export class ClientControl mixins undefined.Control {
     constructor(elem: Element): this;
 
     /**
@@ -2902,8 +2710,7 @@ export class ClientControl mixins undefined.Control {
     clickHandler(e: Event): any
 }
 
-declare
-export class DataProvider mixins ClientControl {
+declare export class DataProvider mixins ClientControl {
     constructor(elem: Element): this;
     get_currentQueryState(): any;
     get_sourceID(): string;
@@ -3039,8 +2846,7 @@ export class DataProvider mixins ClientControl {
     getSortName(): string
 }
 
-declare
-export class DisplayControl mixins ClientControl {
+declare export class DisplayControl mixins ClientControl {
     get_queryGroupName(): string;
     set_queryGroupName(value: string): string;
     get_dataProvider(): Srch$DataProvider;
@@ -3072,8 +2878,7 @@ export class DisplayControl mixins ClientControl {
     render(): void
 }
 
-declare
-export class Refinement mixins DisplayControl {
+declare export class Refinement mixins DisplayControl {
     createRefinementTextbox(name: string): Element;
     submitMultiRefinement(
         name: string,
@@ -3149,8 +2954,7 @@ export class Refinement mixins DisplayControl {
     updateRefinementControls(newControls: Srch$RefinementControl[]): void
 }
 
-declare
-export class RefinementControl {
+declare export class RefinementControl {
     constructor(propertyName: string, spec: string, renderTemplateId: string): this;
     propertyName: string;
     spec: string;
@@ -3164,8 +2968,7 @@ export class RefinementControl {
     deepHits: number
 }
 
-declare
-export class Result mixins DisplayControl {
+declare export class Result mixins DisplayControl {
     parsePropertyMappingWithSlotDisplayNames(mappings: any): {
         [key: string]: any
     };
@@ -3246,8 +3049,7 @@ export class Result mixins DisplayControl {
 /**
  * Represents the search box control 
  */
-declare
-export class SearchBox mixins ClientControl {
+declare export class SearchBox mixins ClientControl {
     constructor(elem: Element): this;
 
     /**
@@ -3470,8 +3272,7 @@ declare module 'U' {
 }
 
 
-declare
-export class ScriptApplicationManager {
+declare export class ScriptApplicationManager {
     get_current(): Srch$ScriptApplicationManager;
     get_clientRuntimeContext(): SP$ClientRuntimeContext;
 
@@ -3570,8 +3371,7 @@ export class ScriptApplicationManager {
     get_searchSessionID(): void
 }
 
-declare
-export class Res {
+declare export class Res {
     sb_ResultsPageTitle: string;
     sb_EmptyQueryWarning: string;
     sb_InvalidResultPageURL: string;
@@ -4209,105 +4009,79 @@ export class Res {
 /**
  * Returns true if the value parameter is null or empty string 
  */
-declare
-function $isEmptyString(value: string): boolean
+declare function $isEmptyString(value: string): boolean
 /**
  * Returns true if the value parameter is null or undefined 
  */
-declare
-function $isNull(value: any): boolean
+declare function $isNull(value: any): boolean
 /**
  * Returns true if the specified item is found in the specified array (uses '===' for comparing) 
  */
-declare
-function $isInArray(array: any[], item: any): boolean
+declare function $isInArray(array: any[], item: any): boolean
 /**
  * Returns true if the specified array is null or empty 
  */
-declare
-function $isEmptyArray(array: any[]): boolean
+declare function $isEmptyArray(array: any[]): boolean
 /**
  * (alias for SP.Utilities.HttpUtility.htmlEncode) 
  */
-declare
-function $htmlEncode(s: string): string
+declare function $htmlEncode(s: string): string
 /**
  * (alias for SP.Utilities.HttpUtility.ecmaScriptStringLiteralEncode) 
  */
-declare
-function $scriptEncode(s: string): string
+declare function $scriptEncode(s: string): string
 /**
  * (alias for SP.Utilities.HttpUtility.urlKeyValueEncode) 
  */
-declare
-function $urlKeyValueEncode(s: string): string
+declare function $urlKeyValueEncode(s: string): string
 /**
  * (alias for SP.Utilities.HttpUtility.urlPathEncode) 
  */
-declare
-function $urlPathEncode(s: string): string
+declare function $urlPathEncode(s: string): string
 /**
  * Ensures that url has correct protocol or is a relative URL, and html-encodes it.
  * If URL is incorrect, returns empty string. 
  */
-declare
-function $urlHtmlEncode(s: string): stringdeclare
-function $imgSrcUrl(p: any): stringdeclare
-function $contentLineText(p: any): any
+declare function $urlHtmlEncode(s: string): stringdeclare function $imgSrcUrl(p: any): stringdeclare function $contentLineText(p: any): any
 /**
  * Returns the ClientControl associated with specified DOM element (alias for Srch.U.getClientComponent) 
  */
-declare
-function $getClientControl(e: Element): Srch$ClientControl
+declare function $getClientControl(e: Element): Srch$ClientControl
 /**
  * (alias for Srch.U.getResultObject) 
  */
-declare
-function $getResultItem(id: string): any
+declare function $getResultItem(id: string): any
 /**
  * (alias for Srch.U.setResultObject) 
  */
-declare
-function $setResultItem(id: string, resultObject: any): void
+declare function $setResultItem(id: string, resultObject: any): void
 /**
  * (alias for Srch.U.getResultObject) 
  */
-declare
-function $getResultObject(id: string): any
+declare function $getResultObject(id: string): any
 /**
  * (alias for Srch.U.setResultObject) 
  */
-declare
-function $setResultObject(id: string, resultObject: any): void
+declare function $setResultObject(id: string, resultObject: any): void
 /**
  * (alias for Srch.U.findResultObjectFromDOM) 
  */
-declare
-function $findResultObjectFromDOM(e: Element, type: string): voiddeclare
-function $getItemValue(ctx: any, nameToLookup: string): anydeclare
-function $getCachedItemValue(ctx: any, nameToLookup: string): anydeclare
-function $includeScript(templateLink: string, relativeLink: string): voiddeclare
-function $includeCSS(templateLink: string, scriptLink: string): voiddeclare
-function $includeLanguageScript(templateLink: string, scriptLink: string): any
+declare function $findResultObjectFromDOM(e: Element, type: string): voiddeclare function $getItemValue(ctx: any, nameToLookup: string): anydeclare function $getCachedItemValue(ctx: any, nameToLookup: string): anydeclare function $includeScript(templateLink: string, relativeLink: string): voiddeclare function $includeCSS(templateLink: string, scriptLink: string): voiddeclare function $includeLanguageScript(templateLink: string, scriptLink: string): any
 /**
  * Registers in system resources defined by the dictionary object (alias for Srch.U.registerResourceDictionary) 
  */
-declare
-function $registerResourceDictionary(locale: string, dict: {
+declare function $registerResourceDictionary(locale: string, dict: {
     [key: string]: string
 }): void
 /**
  * Retrieves localized string with the specified id 
  */
-declare
-function $resource(id: string): string
+declare function $resource(id: string): string
 /**
  * (calls Srch.U.setItemRenderWrapper) 
  */
-declare
-function $setItemWrapperCallback(renderCtx: any, itemWrapperFunction: any): void
+declare function $setItemWrapperCallback(renderCtx: any, itemWrapperFunction: any): void
 /**
  * (calls Srch.U.addRenderContextCallback) 
  */
-declare
-function $addRenderContextCallback(renderCtx: any, itemWrapperFunction: any): void
+declare function $addRenderContextCallback(renderCtx: any, itemWrapperFunction: any): void

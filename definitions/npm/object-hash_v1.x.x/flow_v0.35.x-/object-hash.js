@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ObjectHash$IOptions {
+declare export interface ObjectHash$IOptions {
     algorithm?: string,
         encoding?: string,
         excludeValues?: boolean
@@ -23,8 +22,7 @@ declare type ObjectHash$HashTableItemWithKey = {
 } & ObjectHash$HashTableItem
 
 
-declare
-export interface ObjectHash$HashTable {
+declare export interface ObjectHash$HashTable {
     add(...values: any[]): ObjectHash$HashTable,
         remove(...values: any[]): ObjectHash$HashTable,
         hasKey(key: string): boolean,
@@ -37,13 +35,11 @@ export interface ObjectHash$HashTable {
         reset(): ObjectHash$HashTable
 }
 
-declare
-export interface ObjectHash$HashTableStatic {
+declare export interface ObjectHash$HashTableStatic {
     (options?: ObjectHash$IOptions): ObjectHash$HashTable
 }
 
-declare
-export interface ObjectHash$Hash {
+declare export interface ObjectHash$Hash {
     (object: any, options?: ObjectHash$IOptions): string,
     sha1(object: any): string,
         keys(object: any): string,
@@ -52,8 +48,7 @@ export interface ObjectHash$Hash {
         HashTable: ObjectHash$HashTableStatic
 }
 
-declare
-export var HashStatic: ObjectHash$Hash;
+declare export var HashStatic: ObjectHash$Hash;
 declare module 'object-hash' {
     declare module.exports: typeof HashStatic
 }

@@ -11,8 +11,7 @@ declare type SharedWorker$AbstractWorker = {
 } & EventTarget
 
 
-declare
-export type SharedWorker$SharedWorker = {
+declare export type SharedWorker$SharedWorker = {
 
     /**
      * the value it was assigned by the object's constructor.
@@ -21,8 +20,7 @@ export type SharedWorker$SharedWorker = {
      */
     port: MessagePort
 } & SharedWorker$AbstractWorker
-declare
-var SharedWorker: {
+declare var SharedWorker: {
     prototype: SharedWorker$SharedWorker,
     new(stringUrl: string, name?: string): SharedWorker$SharedWorker
 };

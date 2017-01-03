@@ -16,5 +16,4 @@ declare interface Viewporter {
         change(callback: EventListener): void,
         refresh(): void
 }
-declare
-var viewporter: Viewporter;
+declare var viewporter: Viewporter;

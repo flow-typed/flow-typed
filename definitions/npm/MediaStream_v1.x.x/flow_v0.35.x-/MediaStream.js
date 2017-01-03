@@ -144,8 +144,7 @@ declare interface MediaStreamError {
 declare interface NavigatorGetUserMedia {
     (constraints: MediaStreamConstraints, successCallback: (stream: MediaStream) => void, errorCallback: (error: MediaStreamError) => void): void
 }
-declare
-var getUserMedia: NavigatorGetUserMedia;
+declare var getUserMedia: NavigatorGetUserMedia;
 declare interface Navigator {
     getUserMedia: NavigatorGetUserMedia,
         webkitGetUserMedia: NavigatorGetUserMedia,

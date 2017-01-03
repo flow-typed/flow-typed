@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Collection: Mongo$CollectionStatic;
+declare var Collection: Mongo$CollectionStatic;
 
 declare interface Mongo$CollectionStatic {
     new<T>(
@@ -82,8 +81,7 @@ declare interface Mongo$Collection<T>{
     }): void
 }
 
-declare
-var Cursor: Mongo$CursorStatic;
+declare var Cursor: Mongo$CursorStatic;
 
 declare interface Mongo$CursorStatic {
     new<T>(): Mongo$Cursor<T >
@@ -102,16 +100,13 @@ declare interface Mongo$Cursor<T>{
     observeChanges(callbacks: Object): any
 }
 
-declare
-var ObjectID: Mongo$ObjectIDStatic;
+declare var ObjectID: Mongo$ObjectIDStatic;
 
 declare interface Mongo$ObjectIDStatic {
     new(hexString: string): Mongo$ObjectID
 }
 
 declare interface Mongo$ObjectID {}
-declare
-var isServer: boolean;
+declare var isServer: boolean;
 
-declare
-var isClient: boolean;
+declare var isClient: boolean;

@@ -285,8 +285,7 @@ declare interface requests$Jsonp<TResponse>{
         data: TResponse
     }
 }
-declare
-var mock: mock$ProtractorHttpMock;
+declare var mock: mock$ProtractorHttpMock;
 declare module 'protractor-http-mock' {
     declare module.exports: typeof mock
 }

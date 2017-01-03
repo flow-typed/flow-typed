@@ -1121,8 +1121,7 @@ declare interface format$WriteOptions {
          */
         rightHanded?: boolean
 }
-declare
-var npm$namespace$ol: {
+declare var npm$namespace$ol: {
     CanvasFunctionType: typeof ol$CanvasFunctionType,
 }
 declare interface ol$TileLoadFunctionType {
@@ -2416,8 +2415,7 @@ declare class View mixins ol$Object {
 }
 
 
-declare
-var npm$namespace$animation: {
+declare var npm$namespace$animation: {
         bounce: typeof animation$bounce,
         pan: typeof animation$pan,
         rotate: typeof animation$rotate,
@@ -2427,36 +2425,31 @@ var npm$namespace$animation: {
      * Generate an animated transition that will "bounce" the resolution as it approaches the final value.
      * @param options Bounce options.
      */
-declare
-function animation$bounce(options: undefined.BounceOptions): ol$PreRenderFunction
+declare function animation$bounce(options: undefined.BounceOptions): ol$PreRenderFunction
 
 
 /**
  * Generate an animated transition while updating the view center.
  * @param options Pan options.
  */
-declare
-function animation$pan(options: undefined.PanOptions): ol$PreRenderFunction
+declare function animation$pan(options: undefined.PanOptions): ol$PreRenderFunction
 
 
 /**
  * Generate an animated transition while updating the view rotation.
  * @param options Rotate options.
  */
-declare
-function animation$rotate(options: undefined.RotateOptions): ol$PreRenderFunction
+declare function animation$rotate(options: undefined.RotateOptions): ol$PreRenderFunction
 
 
 /**
  * Generate an animated transition while updating the view resolution.
  * @param options Zoom options.
  */
-declare
-function animation$zoom(options: undefined.ZoomOptions): ol$PreRenderFunction
+declare function animation$zoom(options: undefined.ZoomOptions): ol$PreRenderFunction
 
 
-declare
-var npm$namespace$color: {
+declare var npm$namespace$color: {
         asArray: typeof color$asArray,
         asString: typeof color$asString,
     }
@@ -2464,20 +2457,17 @@ var npm$namespace$color: {
      * Return the color as an array. This function maintains a cache of calculated arrays which means the result should not be modified.
      * @param color Color.
      */
-declare
-function color$asArray(color: ol$Color): ol$Color
+declare function color$asArray(color: ol$Color): ol$Color
 
 
 /**
  * Return the color as an rgba string.
  * @param color Color.
  */
-declare
-function color$asString(color: ol$Color): string
+declare function color$asString(color: ol$Color): string
 
 
-declare
-var npm$namespace$control: {
+declare var npm$namespace$control: {
         defaults: typeof control$defaults,
     }
     /**
@@ -2485,8 +2475,7 @@ var npm$namespace$control: {
      * @param options Defaults options
      * @returns  Control.s
      */
-declare
-function control$defaults(options?: undefined.DefaultsOptions): ol$Collection<undefined.Control >
+declare function control$defaults(options?: undefined.DefaultsOptions): ol$Collection<undefined.Control >
 
 
     /**
@@ -2518,8 +2507,7 @@ declare class ZoomSlider {}
 declare class ZoomToExtent {}
 
 
-declare
-var npm$namespace$coordinate: {
+declare var npm$namespace$coordinate: {
         add: typeof coordinate$add,
         createStringXY: typeof coordinate$createStringXY,
         format: typeof coordinate$format,
@@ -2533,8 +2521,7 @@ var npm$namespace$coordinate: {
      * @param delta Delta
      * @returns  The input coordinate adjusted by the given delta.
      */
-declare
-function coordinate$add(coordinate: ol$Coordinate, delta: ol$Coordinate): ol$Coordinate
+declare function coordinate$add(coordinate: ol$Coordinate, delta: ol$Coordinate): ol$Coordinate
 
 
 /**
@@ -2542,8 +2529,7 @@ function coordinate$add(coordinate: ol$Coordinate, delta: ol$Coordinate): ol$Coo
  * @param fractionDigits The number of digits to include after the decimal point. Default is 0.
  * @returns  Coordinate format
  */
-declare
-function coordinate$createStringXY(fractionDigits?: number): ol$CoordinateFormatType
+declare function coordinate$createStringXY(fractionDigits?: number): ol$CoordinateFormatType
 
 
 /**
@@ -2553,16 +2539,14 @@ function coordinate$createStringXY(fractionDigits?: number): ol$CoordinateFormat
  * @param fractionDigits The number of digits to include after the decimal point. Default is 0.
  * @returns  Formatted coordinate
  */
-declare
-function coordinate$format(coordinate: ol$Coordinate, template: string, fractionDigits?: number): string
+declare function coordinate$format(coordinate: ol$Coordinate, template: string, fractionDigits?: number): string
 
 
 /**
  * Generate an animated transition while updating the view rotation.
  * @param options Rotate options.
  */
-declare
-function coordinate$rotate(options: undefined.RotateOptions): ol$PreRenderFunction
+declare function coordinate$rotate(options: undefined.RotateOptions): ol$PreRenderFunction
 
 
 /**
@@ -2570,8 +2554,7 @@ function coordinate$rotate(options: undefined.RotateOptions): ol$PreRenderFuncti
  * @param coordinate COordinate
  * @returns  Hemisphere, degrees, minutes and seconds.
  */
-declare
-function coordinate$toStringHDMS(coordinate?: ol$Coordinate): string
+declare function coordinate$toStringHDMS(coordinate?: ol$Coordinate): string
 
 
 /**
@@ -2580,12 +2563,10 @@ function coordinate$toStringHDMS(coordinate?: ol$Coordinate): string
  * @param fractionDigits The number of digits to include after the decimal point. Default is 0.
  * @returns  XY
  */
-declare
-function coordinate$toStringXY(coordinate?: ol$Coordinate, fractionDigits?: number): string
+declare function coordinate$toStringXY(coordinate?: ol$Coordinate, fractionDigits?: number): string
 
 
-declare
-var npm$namespace$easing: {
+declare var npm$namespace$easing: {
         easeIn: typeof easing$easeIn,
         easeOut: typeof easing$easeOut,
         inAndOut: typeof easing$inAndOut,
@@ -2597,8 +2578,7 @@ var npm$namespace$easing: {
      * @param t Input between 0 and 1
      * @returns  Output between 0 and 1
      */
-declare
-function easing$easeIn(t: number): number
+declare function easing$easeIn(t: number): number
 
 
 /**
@@ -2606,8 +2586,7 @@ function easing$easeIn(t: number): number
  * @param t Input between 0 and 1
  * @returns  Output between 0 and 1
  */
-declare
-function easing$easeOut(t: number): number
+declare function easing$easeOut(t: number): number
 
 
 /**
@@ -2615,8 +2594,7 @@ function easing$easeOut(t: number): number
  * @param t Input between 0 and 1
  * @returns  Output between 0 and 1
  */
-declare
-function easing$inAndOut(t: number): number
+declare function easing$inAndOut(t: number): number
 
 
 /**
@@ -2624,8 +2602,7 @@ function easing$inAndOut(t: number): number
  * @param t Input between 0 and 1
  * @returns  Output between 0 and 1
  */
-declare
-function easing$linear(t: number): number
+declare function easing$linear(t: number): number
 
 
 /**
@@ -2633,8 +2610,7 @@ function easing$linear(t: number): number
  * @param t Input between 0 and 1
  * @returns  Output between 0 and 1
  */
-declare
-function easing$upAndDown(t: number): number
+declare function easing$upAndDown(t: number): number
 
 declare type ol$ModifyEventType = {
     MODIFYSTART: any,
@@ -2643,8 +2619,7 @@ declare type ol$ModifyEventType = {
 
 
 
-declare
-var npm$namespace$condition: {
+declare var npm$namespace$condition: {
     altKeyOnly: typeof condition$altKeyOnly,
     altShiftKeyOnly: typeof condition$altShiftKeyOnly,
     always: typeof condition$always,
@@ -2659,44 +2634,31 @@ var npm$namespace$condition: {
     singleClick: typeof condition$singleClick,
     targetNotEditable: typeof condition$targetNotEditable,
 }
-declare
-function condition$altKeyOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$altKeyOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$altShiftKeyOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$altShiftKeyOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$always(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$always(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$click(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$click(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$doubleClick(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$doubleClick(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$mouseOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$mouseOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$never(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$never(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$noModifierKeys(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$noModifierKeys(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$platformModifierKeyOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$platformModifierKeyOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$pointerMove(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$pointerMove(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$shiftKeyOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$shiftKeyOnly(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$singleClick(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$singleClick(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
-declare
-function condition$targetNotEditable(mapBrowserEvent: ol$MapBrowserEvent): boolean
+declare function condition$targetNotEditable(mapBrowserEvent: ol$MapBrowserEvent): boolean
 
 declare interface events$ConditionType {
     (mapBrowseEvent: ol$MapBrowserEvent): boolean
@@ -2734,8 +2696,7 @@ declare type events$Key = {} & GlobalObject
 
 
 
-declare
-var npm$namespace$extent: {
+declare var npm$namespace$extent: {
         applyTransform: typeof extent$applyTransform,
         boundingExtent: typeof extent$boundingExtent,
         buffer: typeof extent$buffer,
@@ -2764,8 +2725,7 @@ var npm$namespace$extent: {
      * @param destinationExtent Destination Extent
      * @returns  Extent
      */
-declare
-function extent$applyTransform(
+declare function extent$applyTransform(
     extent: ol$Extent,
     transformFn: ol$TransformFunction,
     destinationExtent?: ol$Extent): ol$Extent
@@ -2776,8 +2736,7 @@ function extent$applyTransform(
  * @param coordinates Coordinates
  * @returns  Bounding extent
  */
-declare
-function extent$boundingExtent(coordinates: Array<ol$Coordinate>): ol$Extent
+declare function extent$boundingExtent(coordinates: Array<ol$Coordinate>): ol$Extent
 
 
 /**
@@ -2787,8 +2746,7 @@ function extent$boundingExtent(coordinates: Array<ol$Coordinate>): ol$Extent
  * @param destinationExtent Destination Extent
  * @returns  Extent
  */
-declare
-function extent$buffer(extent: ol$Extent, value: number, destinationExtent?: ol$Extent): ol$Extent
+declare function extent$buffer(extent: ol$Extent, value: number, destinationExtent?: ol$Extent): ol$Extent
 
 
 /**
@@ -2797,8 +2755,7 @@ function extent$buffer(extent: ol$Extent, value: number, destinationExtent?: ol$
  * @param coordinate Coordinate
  * @returns  The coordinate is contained in the extent
  */
-declare
-function extent$containsCoordinate(extent: ol$Extent, coordinate: ol$Coordinate): boolean
+declare function extent$containsCoordinate(extent: ol$Extent, coordinate: ol$Coordinate): boolean
 
 
 /**
@@ -2807,8 +2764,7 @@ function extent$containsCoordinate(extent: ol$Extent, coordinate: ol$Coordinate)
  * @param extent2 Extent 2
  * @returns  The second extent is contained by or on the edge of the first
  */
-declare
-function extent$containsExtent(extent1: ol$Extent, extent2: ol$Extent): boolean
+declare function extent$containsExtent(extent1: ol$Extent, extent2: ol$Extent): boolean
 
 
 /**
@@ -2818,16 +2774,14 @@ function extent$containsExtent(extent1: ol$Extent, extent2: ol$Extent): boolean
  * @param y Y coordinate
  * @returns  The x, y values are contained in the extent.
  */
-declare
-function extent$containsXY(extent: ol$Extent, x: number, y: number): boolean
+declare function extent$containsXY(extent: ol$Extent, x: number, y: number): boolean
 
 
 /**
  * Create an empty extent.
  * @returns  Empty extent
  */
-declare
-function extent$createEmpty(): ol$Extent
+declare function extent$createEmpty(): ol$Extent
 
 
 /**
@@ -2836,8 +2790,7 @@ function extent$createEmpty(): ol$Extent
  * @param extent2 Extent 2
  * @returns  The two extents are equivalent
  */
-declare
-function extent$equals(extent1: ol$Extent, extent2: ol$Extent): boolean
+declare function extent$equals(extent1: ol$Extent, extent2: ol$Extent): boolean
 
 
 /**
@@ -2846,8 +2799,7 @@ function extent$equals(extent1: ol$Extent, extent2: ol$Extent): boolean
  * @param extent2 The extent that will be included in the first.
  * @returns  A reference to the first (extended) extent.
  */
-declare
-function extent$extend(extent1: ol$Extent, extent2: ol$Extent): ol$Extent
+declare function extent$extend(extent1: ol$Extent, extent2: ol$Extent): ol$Extent
 
 
 /**
@@ -2855,8 +2807,7 @@ function extent$extend(extent1: ol$Extent, extent2: ol$Extent): ol$Extent
  * @param extent Extent
  * @returns  Bottom left coordinate
  */
-declare
-function extent$getBottomLeft(extent: ol$Extent): ol$Coordinate
+declare function extent$getBottomLeft(extent: ol$Extent): ol$Coordinate
 
 
 /**
@@ -2864,8 +2815,7 @@ function extent$getBottomLeft(extent: ol$Extent): ol$Coordinate
  * @param extent Extent
  * @returns  Bottom right coordinate
  */
-declare
-function extent$getBottomRight(extent: ol$Extent): ol$Coordinate
+declare function extent$getBottomRight(extent: ol$Extent): ol$Coordinate
 
 
 /**
@@ -2873,8 +2823,7 @@ function extent$getBottomRight(extent: ol$Extent): ol$Coordinate
  * @param extent Extent
  * @returns  Center
  */
-declare
-function extent$getCenter(extent: ol$Extent): ol$Coordinate
+declare function extent$getCenter(extent: ol$Extent): ol$Coordinate
 
 
 /**
@@ -2882,8 +2831,7 @@ function extent$getCenter(extent: ol$Extent): ol$Coordinate
  * @param extent Extent
  * @returns  Height
  */
-declare
-function extent$getHeight(extent: ol$Extent): number
+declare function extent$getHeight(extent: ol$Extent): number
 
 
 /**
@@ -2893,8 +2841,7 @@ function extent$getHeight(extent: ol$Extent): number
  * @param extent Optional extent to populate with intersection.
  * @returns  Intersecting extent
  */
-declare
-function extent$getIntersection(extent1: ol$Extent, extent2: ol$Extent, extent?: ol$Extent): ol$Extent
+declare function extent$getIntersection(extent1: ol$Extent, extent2: ol$Extent, extent?: ol$Extent): ol$Extent
 
 
 /**
@@ -2902,8 +2849,7 @@ function extent$getIntersection(extent1: ol$Extent, extent2: ol$Extent, extent?:
  * @param extent Extent
  * @returns  The extent size
  */
-declare
-function extent$getSize(extent: ol$Extent): ol$Size
+declare function extent$getSize(extent: ol$Extent): ol$Size
 
 
 /**
@@ -2911,8 +2857,7 @@ function extent$getSize(extent: ol$Extent): ol$Size
  * @param extent Extent
  * @returns  Top left coordinate
  */
-declare
-function extent$getTopLeft(extent: ol$Extent): ol$Coordinate
+declare function extent$getTopLeft(extent: ol$Extent): ol$Coordinate
 
 
 /**
@@ -2920,8 +2865,7 @@ function extent$getTopLeft(extent: ol$Extent): ol$Coordinate
  * @param extent Extent
  * @returns  Top right coordinate
  */
-declare
-function extent$getTopRight(extent: ol$Extent): ol$Coordinate
+declare function extent$getTopRight(extent: ol$Extent): ol$Coordinate
 
 
 /**
@@ -2929,8 +2873,7 @@ function extent$getTopRight(extent: ol$Extent): ol$Coordinate
  * @param extent Extent
  * @returns  Width
  */
-declare
-function extent$getWidth(extent: ol$Extent): number
+declare function extent$getWidth(extent: ol$Extent): number
 
 
 /**
@@ -2939,8 +2882,7 @@ function extent$getWidth(extent: ol$Extent): number
  * @param extent2 Extent 2
  * @returns  The two extents intersects
  */
-declare
-function extent$intersects(extent1: ol$Extent, extent2: ol$Extent): boolean
+declare function extent$intersects(extent1: ol$Extent, extent2: ol$Extent): boolean
 
 
 /**
@@ -2948,12 +2890,10 @@ function extent$intersects(extent1: ol$Extent, extent2: ol$Extent): boolean
  * @param extent Extent
  * @returns  Is empty
  */
-declare
-function extent$isEmpty(extent: ol$Extent): boolean
+declare function extent$isEmpty(extent: ol$Extent): boolean
 
 
-declare
-var npm$namespace$featureloader: {
+declare var npm$namespace$featureloader: {
         xhr: typeof featureloader$xhr,
     }
     /**
@@ -2962,8 +2902,7 @@ var npm$namespace$featureloader: {
      * @param format Feature format
      * @returns  The feature loader
      */
-declare
-function featureloader$xhr(url: string, format: undefined.Feature): ol$FeatureLoader
+declare function featureloader$xhr(url: string, format: undefined.Feature): ol$FeatureLoader
 
 declare type format$IGCZ = {} & String
 
@@ -3870,8 +3809,7 @@ declare class SimpleGeometry mixins undefined.Geometry {
 
 
 
-declare
-var npm$namespace$interaction: {
+declare var npm$namespace$interaction: {
     defaults: typeof interaction$defaults,
 }
 declare class DoubleClickZoom mixins undefined.Interaction {}
@@ -3953,8 +3891,7 @@ declare class TranslateEvent mixins undefined.Event {}
  * @param options Defaults options
  * @returns  Control.s
  */
-declare
-function interaction$defaults(options?: undefined.DefaultsOptions): ol$Collection<undefined.Control >
+declare function interaction$defaults(options?: undefined.DefaultsOptions): ol$Collection<undefined.Control >
 
     declare interface interaction$DragBoxEndConditionType {
         (evt: ol$MapBrowserEvent, startPixel: ol$Pixel, endPixel: ol$Pixel): boolean
@@ -4326,8 +4263,7 @@ declare class Vector mixins undefined.Layer {
 }
 
 
-declare
-var npm$namespace$loadingstrategy: {
+declare var npm$namespace$loadingstrategy: {
         all: typeof loadingstrategy$all,
         bbox: typeof loadingstrategy$bbox,
         tile: typeof loadingstrategy$tile,
@@ -4338,8 +4274,7 @@ var npm$namespace$loadingstrategy: {
      * @param resolution Resolution
      * @returns  Extents
      */
-declare
-function loadingstrategy$all(extent: ol$Extent, resolution: number): Array<ol$Extent >
+declare function loadingstrategy$all(extent: ol$Extent, resolution: number): Array<ol$Extent >
 
 
     /**
@@ -4348,8 +4283,7 @@ function loadingstrategy$all(extent: ol$Extent, resolution: number): Array<ol$Ex
      * @param resolution Resolution
      * @returns  Extents
      */
-    declare
-function loadingstrategy$bbox(extent: ol$Extent, resolution: number): Array<ol$Extent >
+    declare function loadingstrategy$bbox(extent: ol$Extent, resolution: number): Array<ol$Extent >
 
 
     /**
@@ -4357,8 +4291,7 @@ function loadingstrategy$bbox(extent: ol$Extent, resolution: number): Array<ol$E
      * @param tileGrid Tile grid
      * @returns  Loading strategy
      */
-    declare
-function loadingstrategy$tile(tileGrid: undefined.TileGrid): ol$LoadingStrategy
+    declare function loadingstrategy$tile(tileGrid: undefined.TileGrid): ol$LoadingStrategy
 
 declare class PointerEvent {
     constructor(type: string, originalEvent: events$Event, opt_eventDict?: {
@@ -4393,8 +4326,7 @@ declare class PointerEvent {
 }
 
 
-declare
-var npm$namespace$proj: {
+declare var npm$namespace$proj: {
     addCoordinateTransforms: typeof proj$addCoordinateTransforms,
     addEquivalentProjections: typeof proj$addEquivalentProjections,
     addProjection: typeof proj$addProjection,
@@ -4411,8 +4343,7 @@ declare type proj$ProjectionLike = {} & String
 declare type proj$Units = {} & String
 
 
-declare
-var METERS_PER_UNIT: GlobalObject;
+declare var METERS_PER_UNIT: GlobalObject;
 
 
 /**
@@ -4422,8 +4353,7 @@ var METERS_PER_UNIT: GlobalObject;
  * @param forward The forward transform function (that is, from the source projection to the destination projection) that takes a ol.Coordinate as argument and returns the transformed ol.Coordinate.
  * @param inverse The inverse transform function (that is, from the destination projection to the source projection) that takes a ol.Coordinate as argument and returns the transformed ol.Coordinate.
  */
-declare
-function proj$addCoordinateTransforms(
+declare function proj$addCoordinateTransforms(
     source: proj$ProjectionLike,
     destination: proj$ProjectionLike,
     forward: (coordinate: ol$Coordinate) => ol$Coordinate,
@@ -4434,16 +4364,14 @@ function proj$addCoordinateTransforms(
  * Registers transformation functions that don't alter coordinates. Those allow to transform between projections with equal meaning.
  * @param projections Projections.
  */
-declare
-function proj$addEquivalentProjections(projections: Array<olx$Projection>): void
+declare function proj$addEquivalentProjections(projections: Array<olx$Projection>): void
 
 
 /**
  * Add a Projection object to the list of supported projections that can be looked up by their code.
  * @param projection Projection instance.
  */
-declare
-function proj$addProjection(projection: olx$Projection): void
+declare function proj$addProjection(projection: olx$Projection): void
 
 
 /**
@@ -4451,8 +4379,7 @@ function proj$addProjection(projection: olx$Projection): void
  * @param coordinate Coordinate as longitude and latitude, i.e. an array with longitude as 1st and latitude as 2nd element.
  * @param opt_projection Target projection. The default is Web Mercator, i.e. 'EPSG:3857'.
  */
-declare
-function proj$fromLonLat(coordinate: ol$Coordinate, opt_projection: proj$ProjectionLike): ol$Coordinate
+declare function proj$fromLonLat(coordinate: ol$Coordinate, opt_projection: proj$ProjectionLike): ol$Coordinate
 
 
 /**
@@ -4460,8 +4387,7 @@ function proj$fromLonLat(coordinate: ol$Coordinate, opt_projection: proj$Project
  * @param projectionLike Either a code string which is a combination of authority and identifier such as "EPSG:4326", or an existing projection object, or undefined.
  * @returns  Projection object, or null if not in list.
  */
-declare
-function proj$get(projectionLike: proj$ProjectionLike): olx$Projection
+declare function proj$get(projectionLike: proj$ProjectionLike): olx$Projection
 
 
 /**
@@ -4470,8 +4396,7 @@ function proj$get(projectionLike: proj$ProjectionLike): olx$Projection
  * @param destination Destination.
  * @returns  Transform function.
  */
-declare
-function proj$getTransform(
+declare function proj$getTransform(
     source: proj$ProjectionLike,
     destination: proj$ProjectionLike): ol$TransformFunction
 
@@ -4482,8 +4407,7 @@ function proj$getTransform(
  * @param projection Projection of the coordinate. The default is Web Mercator, i.e. 'EPSG:3857'.
  * @returns  Coordinate as longitude and latitude, i.e. an array with longitude as 1st and latitude as 2nd element.
  */
-declare
-function proj$toLonLat(coordinate: ol$Coordinate, projection: proj$ProjectionLike): ol$Coordinate
+declare function proj$toLonLat(coordinate: ol$Coordinate, projection: proj$ProjectionLike): ol$Coordinate
 
 
 /**
@@ -4493,8 +4417,7 @@ function proj$toLonLat(coordinate: ol$Coordinate, projection: proj$ProjectionLik
  * @param destination Destination projection-like.
  * @returns  Coordinate.
  */
-declare
-function proj$transform(
+declare function proj$transform(
     coordinate: ol$Coordinate,
     source: proj$ProjectionLike,
     destination: proj$ProjectionLike): ol$Coordinate
@@ -4507,8 +4430,7 @@ function proj$transform(
  * @param destination Destination projection-like.
  * @returns  The transformed extent.
  */
-declare
-function proj$transformExtent(
+declare function proj$transformExtent(
     extent: ol$Extent,
     source: proj$ProjectionLike,
     destination: proj$ProjectionLike): ol$Extent
@@ -4866,8 +4788,7 @@ declare interface style$StyleFunction {
 }
 
 
-declare
-var npm$namespace$tilegrid: {
+declare var npm$namespace$tilegrid: {
         createXYZ: typeof tilegrid$createXYZ,
     }
     /**
@@ -4998,8 +4919,7 @@ declare class Zoomify mixins TileGrid {
  * @param options Tile grid options.
  * @returns  The grid instance
  */
-declare
-function tilegrid$createXYZ(options?: undefined.XYZOptions): undefined.TileGrid
+declare function tilegrid$createXYZ(options?: undefined.XYZOptions): undefined.TileGrid
 
 declare class Context {
 
@@ -5035,8 +4955,7 @@ declare class Context {
 /**
  * A function returning the canvas element ({HTMLCanvasElement}) used by the source as an image. The arguments passed to the function are: ol.Extent the image extent, {number} the image resolution, {number} the device pixel ratio, ol.Size the image size, and ol.proj.Projection the image projection. The canvas returned by this function is cached by the source. The this keyword inside the function references the ol.source.ImageCanvas.
  */
-declare
-function ol$CanvasFunctionType(
+declare function ol$CanvasFunctionType(
     extent: ol$Extent,
     resolution: number,
     pixelRatio: number,

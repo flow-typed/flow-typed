@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$d3: {
+declare var npm$namespace$d3: {
     slider: typeof d3$slider,
 }
-declare
-export function d3$slider(): d3$Slider
+declare export function d3$slider(): d3$Slider
 
 declare interface d3$Slider {
     (sel: d3$Selection<any>): void,

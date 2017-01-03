@@ -50,14 +50,11 @@ declare interface wiiu$ImageView {
         getErrorCode(): number
 }
 
-declare
-var gamepad: wiiu$WiiuGamePad;
+declare var gamepad: wiiu$WiiuGamePad;
 
-declare
-var videoplayer: wiiu$VideoPlayer;
+declare var videoplayer: wiiu$VideoPlayer;
 
-declare
-var imageview: wiiu$ImageView;
+declare var imageview: wiiu$ImageView;
 declare interface HTMLElement {
     addEventListener(
         type: "wiiu_videoplayer_end",

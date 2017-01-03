@@ -324,5 +324,4 @@ declare interface PNotifyConstructor {
     new(options?: PNotifyOptions): PNotify,
     removeAll(): void
 }
-declare
-var PNotify: PNotifyConstructor;
+declare var PNotify: PNotifyConstructor;

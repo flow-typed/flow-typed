@@ -10,8 +10,7 @@ declare type Wu$Consumer<T>= (t: T) => void;
 
 declare type Wu$Filter<T>= (t: T) => boolean;
 
-declare
-export interface Wu$WuStatic {
+declare export interface Wu$WuStatic {
     (iterable: Iterable<T>): Wu$WuIterable<T>,
         chain<T>(...iters: Iterable<T>[]): Wu$WuIterable<T>,
         count(start?: number, step?: number): Wu$WuIterable<number>,
@@ -70,8 +69,7 @@ export interface Wu$WuStatic {
         tee<T>(n: number, iter: Iterable<T>): Wu$WuIterable<T>[]
 }
 
-declare
-export type Wu$WuIterable<T>= {
+declare export type Wu$WuIterable<T>= {
     asyncEach<T>(fn: Wu$Consumer<T>, maxBlock?: number, timeout?: number): any,
     drop(n: number): Wu$WuIterable<T>,
     dropWhile(fn: Wu$Filter<T>): Wu$WuIterable<T>,
@@ -115,5 +113,4 @@ export type Wu$WuIterable<T>= {
     tee(): Wu$WuIterable<T>[],
     tee(n: number): Wu$WuIterable<T>[]
 } & IterableIterator
-declare
-var wu: Wu$WuStatic;
+declare var wu: Wu$WuStatic;

@@ -210,8 +210,7 @@ declare interface JSZipSupport {
         blob: boolean,
         nodebuffer: boolean
 }
-declare
-var JSZip: {
+declare var JSZip: {
 
     /**
      * Create JSZip instance

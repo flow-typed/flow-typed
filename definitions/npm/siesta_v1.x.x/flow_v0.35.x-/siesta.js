@@ -140,11 +140,9 @@ declare type Harness$IBrowserSingleton = {
 declare type Harness$IHarnessNodeJS = {} & Siesta$IHarness
 
 
-declare
-var Browser: Harness$IBrowserSingleton;
+declare var Browser: Harness$IBrowserSingleton;
 
-declare
-var NodeJS: Harness$IHarnessNodeJS;
+declare var NodeJS: Harness$IHarnessNodeJS;
 
 
 /**
@@ -625,8 +623,7 @@ declare interface Simulate$IKeyboard {
         type(el: any, text: string, callback?: Function, scope?: any, options?: any): void
 }
 
-declare
-var KeyCodes: {: number,
+declare var KeyCodes: {: number,
         BACKSPACE: number,
         : number,
         TAB: number,

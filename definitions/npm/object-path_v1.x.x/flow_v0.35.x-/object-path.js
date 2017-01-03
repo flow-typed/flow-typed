@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var objectPath: ObjectPathGlobal$IObjectPathStatic;
+declare var objectPath: ObjectPathGlobal$IObjectPathStatic;
 declare type ObjectPathGlobal$IPath = Array<number | string>| number | string;
 
 declare type ObjectPathGlobal$IMultiArray = Array<ObjectPathGlobal$IPath>;

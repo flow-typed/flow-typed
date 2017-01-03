@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Boom: {
+declare var npm$namespace$Boom: {
     wrap: typeof Boom$wrap,
     create: typeof Boom$create,
     badRequest: typeof Boom$badRequest,
@@ -39,8 +38,7 @@ var npm$namespace$Boom: {
     serverUnavailable: typeof Boom$serverUnavailable,
     gatewayTimeout: typeof Boom$gatewayTimeout,
 }
-declare
-export interface Boom$BoomError {
+declare export interface Boom$BoomError {
     data: any,
         reformat: () => void,
         isBoom: boolean,
@@ -49,98 +47,68 @@ export interface Boom$BoomError {
         output: Boom$Output
 }
 
-declare
-export interface Boom$Output {
+declare export interface Boom$Output {
     statusCode: number,
         headers: any,
         payload: any
 }
 
-declare
-export function Boom$wrap(error: Error, statusCode?: number, message?: string): Boom$BoomError
+declare export function Boom$wrap(error: Error, statusCode?: number, message?: string): Boom$BoomError
 
-declare
-export function Boom$create(statusCode: number, message?: string, data?: any): Boom$BoomError
+declare export function Boom$create(statusCode: number, message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$badRequest(message?: string, data?: any): Boom$BoomError
+declare export function Boom$badRequest(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$unauthorized(message?: string, scheme?: any, attributes?: any): Boom$BoomError
+declare export function Boom$unauthorized(message?: string, scheme?: any, attributes?: any): Boom$BoomError
 
-declare
-export function Boom$forbidden(message?: string, data?: any): Boom$BoomError
+declare export function Boom$forbidden(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$notFound(message?: string, data?: any): Boom$BoomError
+declare export function Boom$notFound(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$methodNotAllowed(message?: string, data?: any): Boom$BoomError
+declare export function Boom$methodNotAllowed(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$notAcceptable(message?: string, data?: any): Boom$BoomError
+declare export function Boom$notAcceptable(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$proxyAuthRequired(message?: string, data?: any): Boom$BoomError
+declare export function Boom$proxyAuthRequired(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$clientTimeout(message?: string, data?: any): Boom$BoomError
+declare export function Boom$clientTimeout(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$conflict(message?: string, data?: any): Boom$BoomError
+declare export function Boom$conflict(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$resourceGone(message?: string, data?: any): Boom$BoomError
+declare export function Boom$resourceGone(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$lengthRequired(message?: string, data?: any): Boom$BoomError
+declare export function Boom$lengthRequired(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$preconditionFailed(message?: string, data?: any): Boom$BoomError
+declare export function Boom$preconditionFailed(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$entityTooLarge(message?: string, data?: any): Boom$BoomError
+declare export function Boom$entityTooLarge(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$uriTooLong(message?: string, data?: any): Boom$BoomError
+declare export function Boom$uriTooLong(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$unsupportedMediaType(message?: string, data?: any): Boom$BoomError
+declare export function Boom$unsupportedMediaType(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$rangeNotSatisfiable(message?: string, data?: any): Boom$BoomError
+declare export function Boom$rangeNotSatisfiable(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$expectationFailed(message?: string, data?: any): Boom$BoomError
+declare export function Boom$expectationFailed(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$badData(message?: string, data?: any): Boom$BoomError
+declare export function Boom$badData(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$locked(message?: string, data?: any): Boom$BoomError
+declare export function Boom$locked(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$preconditionRequired(message?: string, data?: any): Boom$BoomError
+declare export function Boom$preconditionRequired(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$tooManyRequests(message?: string, data?: any): Boom$BoomError
+declare export function Boom$tooManyRequests(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$illegal(message?: string, data?: any): Boom$BoomError
+declare export function Boom$illegal(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$badImplementation(message?: string, data?: any): Boom$BoomError
+declare export function Boom$badImplementation(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$notImplemented(message?: string, data?: any): Boom$BoomError
+declare export function Boom$notImplemented(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$badGateway(message?: string, data?: any): Boom$BoomError
+declare export function Boom$badGateway(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$serverUnavailable(message?: string, data?: any): Boom$BoomError
+declare export function Boom$serverUnavailable(message?: string, data?: any): Boom$BoomError
 
-declare
-export function Boom$gatewayTimeout(message?: string, data?: any): Boom$BoomErrordeclare module 'boom' {
+declare export function Boom$gatewayTimeout(message?: string, data?: any): Boom$BoomErrordeclare module 'boom' {
     declare module.exports: typeof Boom
 }

@@ -642,5 +642,4 @@ declare module 'AutoMapperJs' {
             sourceMapping: boolean
     }
 }
-declare
-var automapper: AutoMapperJs.AutoMapper;
+declare var automapper: AutoMapperJs.AutoMapper;

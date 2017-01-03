@@ -22,26 +22,22 @@ declare interface angularModal$AngularModalSettings {
         container?: angularModal$AngularModalJQuerySelector
 }
 
-declare
-export type angularModal$AngularModalSettingsWithTemplate = {
+declare export type angularModal$AngularModalSettingsWithTemplate = {
     template: any
 } & angularModal$AngularModalSettings
 
 
-declare
-export type angularModal$AngularModalSettingsWithTemplateUrl = {
+declare export type angularModal$AngularModalSettingsWithTemplateUrl = {
     templateUrl: string
 } & angularModal$AngularModalSettings
 
 
-declare
-export interface angularModal$AngularModal {
+declare export interface angularModal$AngularModal {
     activate(): angular.IPromise<void>,
         deactivate(): angular.IPromise<void>,
         active(): boolean
 }
 
-declare
-export interface angularModal$AngularModalFactory {
+declare export interface angularModal$AngularModalFactory {
     (settings: angularModal$AngularModalSettingsWithTemplate | angularModal$AngularModalSettingsWithTemplateUrl): angularModal$AngularModal
 }

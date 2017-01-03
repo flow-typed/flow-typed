@@ -454,8 +454,7 @@ declare interface Async {
         log(fn: Function, ...arguments: any[]): void,
         dir(fn: Function, ...arguments: any[]): void
 }
-declare
-var async: Async;
+declare var async: Async;
 declare module 'async' {
     declare module.exports: typeof async
 }

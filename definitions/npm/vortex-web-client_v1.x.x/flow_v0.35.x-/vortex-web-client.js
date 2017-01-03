@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$DDS: {
+declare var npm$namespace$DDS: {
         Partition: typeof DDS$Partition,
         ContentFilter: typeof DDS$ContentFilter,
         TimeFilter: typeof DDS$TimeFilter,
@@ -22,8 +21,7 @@ declare interface DDS$Policy {}
 /**
  * History policy
  */
-declare
-export class History mixins Policy {
+declare export class History mixins Policy {
 
     /**
      * KeepAll - KEEP_ALL qos policy
@@ -40,8 +38,7 @@ export class History mixins Policy {
 /**
  * History policy
  */
-declare
-export class Reliability mixins Policy {
+declare export class Reliability mixins Policy {
 
     /**
      * Reliable - 'Reliable' reliability policy
@@ -60,8 +57,7 @@ export class Reliability mixins Policy {
  * @param policies - partition names
  * @example  var qos = Partition('p1', 'p2')
  */
-declare
-export function DDS$Partition(...policies: string[]): DDS$Policy
+declare export function DDS$Partition(...policies: string[]): DDS$Policy
 
 
 /**
@@ -69,8 +65,7 @@ export function DDS$Partition(...policies: string[]): DDS$Policy
  * @param expr - filter expression
  * @example  var filter = ContentFilter("x>10 AND y<50")
  */
-declare
-export function DDS$ContentFilter(expr: string): DDS$Policy
+declare export function DDS$ContentFilter(expr: string): DDS$Policy
 
 
 /**
@@ -78,15 +73,13 @@ export function DDS$ContentFilter(expr: string): DDS$Policy
  * @param period - time duration (unit ?)
  * @example  var filter = TimeFilter(100)
  */
-declare
-export function DDS$TimeFilter(period: number): DDS$Policy
+declare export function DDS$TimeFilter(period: number): DDS$Policy
 
 
 /**
  * Durability Qos Policy
  */
-declare
-export class Durability mixins Policy {
+declare export class Durability mixins Policy {
 
     /**
      * Volatile - Volatile durability policy
@@ -125,17 +118,13 @@ declare interface DDS$EntityQos {
     add(policy: DDS$Policy): DDS$EntityQos
 }
 
-declare
-export var TopicQos: DDS$EntityQos;
+declare export var TopicQos: DDS$EntityQos;
 
-declare
-export var DataReaderQos: DDS$EntityQos;
+declare export var DataReaderQos: DDS$EntityQos;
 
-declare
-export var DataWriterQos: DDS$EntityQos;
+declare export var DataWriterQos: DDS$EntityQos;
 
-declare
-export class Topic {
+declare export class Topic {
 
     /**
      * Creates a `Topic` in the domain `did`, named `tname`, having `qos` Qos,
@@ -159,8 +148,7 @@ export class Topic {
     onunregistered(): void
 }
 
-declare
-export class DataReader {
+declare export class DataReader {
 
     /**
      * Creates a `DataReader` for a given topic and a specific in a specific DDS runtime.
@@ -197,8 +185,7 @@ export class DataReader {
     close(): void
 }
 
-declare
-export class DataWriter {
+declare export class DataWriter {
 
     /**
      * Creates a `DataWriter` for a given topic and a specific in a specific DDS runtime
@@ -228,8 +215,7 @@ export class DataWriter {
     close(): void
 }
 
-declare
-export class DataCache {
+declare export class DataCache {
 
     /**
      * Constructs a `DataCache` with a given `depth`. If the `cache` parameter
@@ -415,12 +401,9 @@ declare interface DDS$Runtime {
         isClosed(): boolean
 }
 
-declare
-export var runtime: {
+declare export var runtime: {
     Runtime: DDS$Runtime
 };
 
-declare
-export var VERSION: string;
-declare
-var dds: typeof DDS;
+declare export var VERSION: string;
+declare var dds: typeof DDS;

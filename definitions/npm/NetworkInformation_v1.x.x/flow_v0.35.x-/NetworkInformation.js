@@ -57,8 +57,7 @@ declare interface Connection {
             listener: EventListenerOrEventListenerObject,
             useCapture?: boolean): void
 }
-declare
-var Connection: {
+declare var Connection: {
     UNKNOWN: string,
     ETHERNET: string,
     WIFI: string,

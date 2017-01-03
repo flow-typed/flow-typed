@@ -28,8 +28,7 @@ declare interface AppInterface {
     cable?: ActionCable.Cable,
         network?: ActionCable.Channel
 }
-declare
-var App: AppInterface;
+declare var App: AppInterface;
 declare module 'actioncable' {
     declare module.exports: typeof ActionCable
 }

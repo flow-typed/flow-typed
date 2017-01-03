@@ -12,11 +12,9 @@ declare interface Element {
 declare interface Array<T>{
     _: BlissNS$BlissBindedArray<T>& BlissNS$BlissCollectionArray<T >
 }
-declare
-export type BlissNS$BlissDecoratedElement<T>= Element & T;
+declare export type BlissNS$BlissDecoratedElement<T>= Element & T;
 
-declare
-export type BlissNS$BlissDecoratedArrayElement<T>= Array<T>& BlissNS$BlissCollectionArray<T>;
+declare export type BlissNS$BlissDecoratedArrayElement<T>= Array<T>& BlissNS$BlissCollectionArray<T>;
 
 declare interface BlissNS$BlissStatic {
     (selector: string, context?: Element): BlissNS$BlissDecoratedElement<T>,
@@ -1041,9 +1039,6 @@ declare interface BlissNS$BlissCollectionArray<T>{
         useCapture?: boolean): BlissNS$BlissCollectionArray<T>,
     remove(): BlissNS$BlissCollectionArray<T >
 }
-declare
-var Bliss: BlissNS$BlissStatic;
-declare
-var $: BlissNS$BlissStatic;
-declare
-var $$: BlissNS$BlissStaticCollection;
+declare var Bliss: BlissNS$BlissStatic;
+declare var $: BlissNS$BlissStatic;
+declare var $$: BlissNS$BlissStaticCollection;

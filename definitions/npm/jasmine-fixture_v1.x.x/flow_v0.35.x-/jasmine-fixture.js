@@ -11,8 +11,7 @@
  * Affixes the given jquery selectors into the body and will be removed after each spec
  * @param  The JQuery selector to be added to the dom
  */
-declare
-function affix(selector: string): JQuerydeclare interface JQuery {
+declare function affix(selector: string): JQuerydeclare interface JQuery {
 
     /**
      * Affixes the given jquery selectors into the element and will be removed after each spec

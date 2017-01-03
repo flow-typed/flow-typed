@@ -156,5 +156,4 @@ declare interface MarkedOptions {
 declare module 'marked' {
     declare module.exports: typeof marked
 }
-declare
-var marked: MarkedStatic;
+declare var marked: MarkedStatic;

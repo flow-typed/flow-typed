@@ -10,8 +10,7 @@ declare interface autosize$AutosizeStatic {
     (el: Element): void,
     (el: NodeList): void
 }
-declare
-var autosize: autosize$AutosizeStatic;
+declare var autosize: autosize$AutosizeStatic;
 declare module 'autosize' {
     declare module.exports: typeof autosize
 }

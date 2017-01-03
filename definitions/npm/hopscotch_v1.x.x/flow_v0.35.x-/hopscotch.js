@@ -145,8 +145,7 @@ declare interface HopscotchStatic {
          */
         resetDefaultOptions(): void
 }
-declare
-var hopscotch: HopscotchStatic;
+declare var hopscotch: HopscotchStatic;
 declare module 'hopscotch' {
     declare module.exports: typeof hopscotch
 }

@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var unsafeWindow: Window;
-declare
-var GM_info: {
+declare var unsafeWindow: Window;
+declare var GM_info: {
     script: {
         description: string,
         excludes: string[],
@@ -32,8 +30,7 @@ var GM_info: {
  * @see  {
  * @link  http://wiki.greasespot.net/GM_deleteValue}
  */
-declare
-function GM_deleteValue(name: string): void
+declare function GM_deleteValue(name: string): void
 /**
  * Retrieves a value from the script storage.
  * @param name a name to retrieve.
@@ -42,16 +39,14 @@ function GM_deleteValue(name: string): void
  * @see  {
  * @link  http://wiki.greasespot.net/GM_getValue}
  */
-declare
-function GM_getValue(name: string, defaultValue?: any): any
+declare function GM_getValue(name: string, defaultValue?: any): any
 /**
  * Retrieves an array of names stored in the script storage.
  * @returns  an array of names in the storage.
  * @see  {
  * @link  http://wiki.greasespot.net/GM_listValues}
  */
-declare
-function GM_listValues(): string[]
+declare function GM_listValues(): string[]
     /**
      * Stores a name / value pair to the script storage.
      * @param name a name of the pair.
@@ -59,8 +54,7 @@ function GM_listValues(): string[]
      * @see  {
      * @link  http://wiki.greasespot.net/GM_setValue}
      */
-declare
-function GM_setValue(name: string, value: string): void
+declare function GM_setValue(name: string, value: string): void
 /**
  * Gets a content of a resouce defined by {@link http://wiki.greasespot.net/Metadata_Block#.40resource|@resource}.
  * @param resourceName a name of the resource to get.
@@ -68,8 +62,7 @@ function GM_setValue(name: string, value: string): void
  * @see  {
  * @link  http://wiki.greasespot.net/GM_getResourceText}
  */
-declare
-function GM_getResourceText(resourceName: string): string
+declare function GM_getResourceText(resourceName: string): string
 /**
  * Gets a URL of a resource defined by {@link http://wiki.greasespot.net/Metadata_Block#.40resource|@resource}.
  * @param resourceName a name of the resource.
@@ -77,24 +70,21 @@ function GM_getResourceText(resourceName: string): string
  * @see  {
  * @link  http://wiki.greasespot.net/GM_getResourceURL}
  */
-declare
-function GM_getResourceURL(resourceName: string): string
+declare function GM_getResourceURL(resourceName: string): string
 /**
  * Adds CSS to the content page.
  * @param css a CSS string. It can have multiple style definitions.
  * @see  {
  * @link  http://wiki.greasespot.net/GM_addStyle}
  */
-declare
-function GM_addStyle(css: string): void
+declare function GM_addStyle(css: string): void
 /**
  * Writes a message as a log to the console with the script identifier.
  * @param message a message to be written.
  * @see  {
  * @link  http://wiki.greasespot.net/GM_log}
  */
-declare
-function GM_log(message: any): void
+declare function GM_log(message: any): void
 /**
  * Opens a URL in a new tab.
  * @param url a URL to open.
@@ -102,8 +92,7 @@ function GM_log(message: any): void
  * @see  {
  * @link  http://wiki.greasespot.net/GM_openInTab}
  */
-declare
-function GM_openInTab(url: string): Window
+declare function GM_openInTab(url: string): Window
 /**
  * Registers an item as a submenu of User Script Commands.
  * @param caption a caption of the menu item.
@@ -113,16 +102,14 @@ It should be a letter in the caption.
  * @see  {
  * @link  http://wiki.greasespot.net/GM_registerMenuCommand}
 */
-declare
-function GM_registerMenuCommand(caption: string, commandFunc: Function, accessKey?: string): void
+declare function GM_registerMenuCommand(caption: string, commandFunc: Function, accessKey?: string): void
 /**
  * Sets a text to the clipboard of the opeating system.
  * @param text a text to be set to the clipboard.
  * @see  {
  * @link  http://wiki.greasespot.net/GM_setClipboard}
  */
-declare
-function GM_setClipboard(text: string): void
+declare function GM_setClipboard(text: string): void
 /**
  * Request options for {@link GM_xmlhttpRequest}.
  * @see  {
@@ -209,5 +196,4 @@ If the request is sent in the synchronous mode, it also contains the response in
  * @see  {
  * @link  http://wiki.greasespot.net/GM_setClipboard}
 */
-declare
-function GM_xmlhttpRequest(options: GMXMLHttpRequestOptions): GMXMLHttpRequestResult
+declare function GM_xmlhttpRequest(options: GMXMLHttpRequestOptions): GMXMLHttpRequestResult

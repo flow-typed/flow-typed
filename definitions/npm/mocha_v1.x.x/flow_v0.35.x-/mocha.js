@@ -16,40 +16,22 @@ declare interface MochaSetupOptions {
         ignoreLeaks?: boolean,
         grep?: any
 }
-declare
-var mocha: Mocha;
-declare
-var describe: Mocha$IContextDefinition;
-declare
-var xdescribe: Mocha$IContextDefinition;
-declare
-var context: Mocha$IContextDefinition;
-declare
-var suite: Mocha$IContextDefinition;
-declare
-var it: Mocha$ITestDefinition;
-declare
-var xit: Mocha$ITestDefinition;
-declare
-var test: Mocha$ITestDefinition;
-declare
-var specify: Mocha$ITestDefinition;
-declare
-function run(): voiddeclare interface MochaDone {
+declare var mocha: Mocha;
+declare var describe: Mocha$IContextDefinition;
+declare var xdescribe: Mocha$IContextDefinition;
+declare var context: Mocha$IContextDefinition;
+declare var suite: Mocha$IContextDefinition;
+declare var it: Mocha$ITestDefinition;
+declare var xit: Mocha$ITestDefinition;
+declare var test: Mocha$ITestDefinition;
+declare var specify: Mocha$ITestDefinition;
+declare function run(): voiddeclare interface MochaDone {
     (error?: any): any
 }
 declare interface ActionFunction {
     (done: MochaDone): any | PromiseLike<any >
 }
-declare
-function setup(action: ActionFunction): voiddeclare
-function teardown(action: ActionFunction): voiddeclare
-function suiteSetup(action: ActionFunction): voiddeclare
-function suiteTeardown(action: ActionFunction): voiddeclare
-function before(action: ActionFunction): voiddeclare
-function after(action: ActionFunction): voiddeclare
-function beforeEach(action: ActionFunction): voiddeclare
-function afterEach(action: ActionFunction): voiddeclare class Mocha {
+declare function setup(action: ActionFunction): voiddeclare function teardown(action: ActionFunction): voiddeclare function suiteSetup(action: ActionFunction): voiddeclare function suiteTeardown(action: ActionFunction): voiddeclare function before(action: ActionFunction): voiddeclare function after(action: ActionFunction): voiddeclare function beforeEach(action: ActionFunction): voiddeclare function afterEach(action: ActionFunction): voiddeclare class Mocha {
     currentTest: Mocha$ITestDefinition;
     constructor(options?: {
         grep?: RegExp,

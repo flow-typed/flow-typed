@@ -82,9 +82,6 @@ declare module 'Properties' {
             setProperty(key: string, value: string): UserProperties
     }
 }
-declare
-var PropertiesService: undefined.PropertiesService;
-declare
-var ScriptProperties: undefined.ScriptProperties;
-declare
-var UserProperties: undefined.UserProperties;
+declare var PropertiesService: undefined.PropertiesService;
+declare var ScriptProperties: undefined.ScriptProperties;
+declare var UserProperties: undefined.UserProperties;

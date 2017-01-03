@@ -25,8 +25,7 @@ declare interface ZC$EventListenerObject<T>{
 
 declare type ZC$EventListenerOrEventListenerObject<T>= ZC$EventListener<T>| ZC$EventListenerObject<T>;
 
-declare
-export type ZC$ZeroClipboardStatic = {
+declare export type ZC$ZeroClipboardStatic = {
     new(elements?: Element | ZC$List<Element>): ZC$ZeroClipboardClient,
 
     /**
@@ -605,8 +604,7 @@ declare interface ZC$ZeroClipboardConfig {
         */
         zIndex?: number
 }
-declare
-var ZeroClipboard: ZC$ZeroClipboardStatic;
+declare var ZeroClipboard: ZC$ZeroClipboardStatic;
 declare module 'zeroclipboard' {
     declare module.exports: typeof ZeroClipboard
 }

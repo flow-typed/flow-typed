@@ -132,7 +132,5 @@ declare interface Screen {
 declare interface HTMLMediaElement {
     crossOrigin: string
 }
-declare
-var HMDVRDevice: any;
-declare
-var PositionSensorVRDevice: any;
+declare var HMDVRDevice: any;
+declare var PositionSensorVRDevice: any;

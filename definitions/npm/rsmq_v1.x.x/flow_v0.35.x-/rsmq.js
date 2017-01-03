@@ -50,8 +50,7 @@ declare type RedisSMQ$VisibilityOptions = {
 } & RedisSMQ$MessageIdentifier
 
 
-declare
-export type RedisSMQ$QueueAttributes = {
+declare export type RedisSMQ$QueueAttributes = {
     vt: number,
     delay: number,
     maxsize: number,
@@ -69,8 +68,7 @@ declare type RedisSMQ$ReceiveOptions = {
 } & RedisSMQ$QueueIdentifier
 
 
-declare
-export type RedisSMQ$Message = {
+declare export type RedisSMQ$Message = {
     message: string,
     sent: number,
     fr: number,

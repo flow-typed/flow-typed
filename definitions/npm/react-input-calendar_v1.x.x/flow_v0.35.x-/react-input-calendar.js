@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface reactInputCalendar$ReactInputCalendarProps {
+declare export interface reactInputCalendar$ReactInputCalendarProps {
 
     /**
      * Format of date, which display in input and set in date property.
@@ -98,10 +97,8 @@ export interface reactInputCalendar$ReactInputCalendarProps {
 
 declare interface reactInputCalendar$ReactInputCalendarState {}
 
-declare
-export class ReactInputCalendar mixins ___React.Component<reactInputCalendar$ReactInputCalendarProps, reactInputCalendar$ReactInputCalendarState>{}
-declare
-var ReactInputCalendar: typeof undefined;
+declare export class ReactInputCalendar mixins ___React.Component<reactInputCalendar$ReactInputCalendarProps, reactInputCalendar$ReactInputCalendarState>{}
+declare var ReactInputCalendar: typeof undefined;
 declare module 'react-input-calendar' {
     declare module.exports: typeof ReactInputCalendar
 }

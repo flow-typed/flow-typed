@@ -141,5 +141,4 @@ declare interface Qwest$Options {
 declare module 'qwest' {
     declare module.exports: typeof qwest
 }
-declare
-var qwest: Qwest$Static;
+declare var qwest: Qwest$Static;

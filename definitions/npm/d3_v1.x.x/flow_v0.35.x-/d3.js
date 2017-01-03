@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$d3: {
+declare var npm$namespace$d3: {
     select: typeof d3$select,
     selectAll: typeof d3$selectAll,
     selection: typeof d3$selection,
@@ -73,32 +72,27 @@ var npm$namespace$d3: {
     dsv: typeof d3$dsv,
     locale: typeof d3$locale,
 }
-declare
-export var version: string;
+declare export var version: string;
 
 
 /**
  * Find the first element that matches the given selector string.
  */
-declare
-export function d3$select(selector: string): d3$Selection<any >
+declare export function d3$select(selector: string): d3$Selection<any >
 
 
     /**
      * Find all elements that match the given selector string.
      */
-    declare
-export function d3$selectAll(selector: string): d3$Selection<any >
+    declare export function d3$selectAll(selector: string): d3$Selection<any >
 
 
     /**
      * Returns the root selection (as if by d3.select(document.documentElement)). This function may be used for 'instanceof' tests, and extending its prototype will add properties to all selections.
      */
-    declare
-export function d3$selection(): d3$Selection<any >
+    declare export function d3$selection(): d3$Selection<any >
 
-    declare
-export var prototype: d3$Selection<any>;
+    declare export var prototype: d3$Selection<any>;
 
 
 /**
@@ -526,8 +520,7 @@ declare interface selection$Enter<Datum>{
 /**
  * Administrivia: JavaScript primitive types, or "things that toString() predictably".
  */
-declare
-export type d3$Primitive = number | string | boolean;
+declare export type d3$Primitive = number | string | boolean;
 
 
 /**
@@ -941,11 +934,9 @@ declare interface d3$Selection<Datum>{
     size(): number
 }
 
-declare
-export function d3$transition(): d3$Transition<any >
+declare export function d3$transition(): d3$Transition<any >
 
-    declare
-export var prototype: d3$Transition<any>;
+    declare export var prototype: d3$Transition<any>;
 
 declare interface d3$Transition<Datum>{
     transition(): d3$Transition<Datum>,
@@ -1006,19 +997,15 @@ declare interface d3$Transition<Datum>{
     size(): number
 }
 
-declare
-export function d3$ease(type: "linear"): (t: number) => number
+declare export function d3$ease(type: "linear"): (t: number) => number
 
-declare
-export function d3$timer(func: () => any, delay?: number, time?: number): void
+declare export function d3$timer(func: () => any, delay?: number, time?: number): void
 
 
-declare
-var npm$namespace$timer: {
+declare var npm$namespace$timer: {
     flush: typeof timer$flush,
 }
-declare
-export function timer$flush(): void
+declare export function timer$flush(): void
 
 declare interface d3$BaseEvent {
     type: string,
@@ -1047,16 +1034,14 @@ declare type d3$DragEvent = {
 } & d3$BaseEvent
 
 
-declare
-export var event: force$Event | d3$BaseEvent;
+declare export var event: force$Event | d3$BaseEvent;
 
 
 /**
  * Returns the x and y coordinates of the mouse relative to the provided container element, using d3.event for the mouse's position on the page.
  * @param container the container element (e.g. an SVG <g> element)
  */
-declare
-export function d3$mouse(container: EventTarget): [number, number]
+declare export function d3$mouse(container: EventTarget): [number, number]
 
 
 /**
@@ -1064,8 +1049,7 @@ export function d3$mouse(container: EventTarget): [number, number]
  * @param container the container element (e.g., an SVG <svg> element)
  * @param identifier the given touch identifier
  */
-declare
-export function d3$touch(container: EventTarget, identifer: number): [number, number]
+declare export function d3$touch(container: EventTarget, identifer: number): [number, number]
 
 
 /**
@@ -1073,103 +1057,84 @@ export function d3$touch(container: EventTarget, identifer: number): [number, nu
  * @param container the container element
  * @param touches an optional list of touches (defaults to d3.event.touches)
  */
-declare
-export function d3$touches(container: EventTarget, touches?: TouchList): Array<[number, number] >
+declare export function d3$touches(container: EventTarget, touches?: TouchList): Array<[number, number] >
 
 
     /**
      * Compares two primitive values for sorting (in ascending order).
      */
-    declare
-export function d3$ascending(a: d3$Primitive, b: d3$Primitive): number
+    declare export function d3$ascending(a: d3$Primitive, b: d3$Primitive): number
 
 
 /**
  * Compares two primitive values for sorting (in ascending order).
  */
-declare
-export function d3$descending(a: d3$Primitive, b: d3$Primitive): number
+declare export function d3$descending(a: d3$Primitive, b: d3$Primitive): number
 
 
 /**
  * Return the minimum value in the array using natural order.
  */
-declare
-export function d3$min(array: number[]): number
+declare export function d3$min(array: number[]): number
 
 
 /**
  * Return the maximum value in the array of numbers using natural order.
  */
-declare
-export function d3$max(array: number[]): number
+declare export function d3$max(array: number[]): number
 
 
 /**
  * Return the min and max simultaneously.
  */
-declare
-export function d3$extent(array: number[]): [number, number]
+declare export function d3$extent(array: number[]): [number, number]
 
 
 /**
  * Compute the sum of an array of numbers.
  */
-declare
-export function d3$sum(array: number[]): number
+declare export function d3$sum(array: number[]): number
 
-declare
-export function d3$mean(array: number[]): number
+declare export function d3$mean(array: number[]): number
 
 
 /**
  * Compute the median of an array of numbers (the 0.5-quantile).
  */
-declare
-export function d3$median(array: number[]): number
+declare export function d3$median(array: number[]): number
 
-declare
-export function d3$quantile(array: number[], p: number): number
+declare export function d3$quantile(array: number[], p: number): number
 
-declare
-export function d3$variance(array: number[]): number
+declare export function d3$variance(array: number[]): number
 
-declare
-export function d3$deviation(array: number[]): number
+declare export function d3$deviation(array: number[]): number
 
-declare
-export function d3$bisectLeft<T>(array: T[], x: T, lo?: number, hi?: number): number
+declare export function d3$bisectLeft<T>(array: T[], x: T, lo?: number, hi?: number): number
 
-declare
-export var bisect: typeof bisectRight;
+declare export var bisect: typeof bisectRight;
 
-declare
-export function d3$bisectRight<T>(array: T[], x: T, lo?: number, hi?: number): number
+declare export function d3$bisectRight<T>(array: T[], x: T, lo?: number, hi?: number): number
 
-declare
-export function d3$bisector<T, U>(
+declare export function d3$bisector<T, U>(
     accessor: (x: T) => U): {
     left: (array: T[], x: U, lo?: number, hi?: number) => number,
     right: (array: T[], x: U, lo?: number, hi?: number) => number
 }
 
-declare
-export function d3$shuffle<T>(array: T[], lo?: number, hi?: number): T[]
+declare export function d3$shuffle<T>(array: T[], lo?: number, hi?: number): T[]
 
 
 /**
  * Returns the enumerable property names of the specified object.
  * @param object a JavaScript object
  */
-declare
-export function d3$keys(object: Object): string[]
+declare export function d3$keys(object: Object): string[]
 
 
 /**
  * Returns an array containing the property values of the specified object.
  */
-declare
-export function d3$values<T>(object: {
+declare export function d3$values<T>(object: {
     [key: string]: T
 }): T[]
 
@@ -1177,8 +1142,7 @@ export function d3$values<T>(object: {
 /**
  * Returns an array of key-value pairs containing the property values of the specified object.
  */
-declare
-export function d3$entries<T>(object: {
+declare export function d3$entries<T>(object: {
     [key: string]: T
 }): {
     key: string,
@@ -1249,8 +1213,7 @@ declare interface d3$Map<T>{
 /**
  * Constructs an initially empty map.
  */
-declare
-export function d3$map<T>(): d3$Map<T >
+declare export function d3$map<T>(): d3$Map<T >
 
 
     /**
@@ -1298,45 +1261,38 @@ export function d3$map<T>(): d3$Map<T >
 /**
  * Creates an initially-empty set.
  */
-declare
-export function d3$set(): d3$Set
+declare export function d3$set(): d3$Set
 
 
 /**
  * Merges the specified arrays into a single array.
  */
-declare
-export function d3$merge<T>(arrays: T[][]): T[]
+declare export function d3$merge<T>(arrays: T[][]): T[]
 
 
 /**
  * Generates a 0-based numeric sequence. The output range does not include 'stop'.
  */
-declare
-export function d3$range(stop: number): number[]
+declare export function d3$range(stop: number): number[]
 
 
 /**
  * Given the specified array, return an array corresponding to the list of indices in 'keys'.
  */
-declare
-export function d3$permute<T>(array: {
+declare export function d3$permute<T>(array: {
     [key: number]: T
 }, keys: number[]): T[]
 
-declare
-export function d3$zip<T>(...arrays: T[][]): T[][]
+declare export function d3$zip<T>(...arrays: T[][]): T[][]
 
-declare
-export function d3$transpose<T>(matrix: T[][]): T[][]
+declare export function d3$transpose<T>(matrix: T[][]): T[][]
 
 
 /**
  * For each adjacent pair of elements in the specified array, returns a new array of tuples of elements i and i - 1.
  * Returns the empty array if the input array has fewer than two elements.
  */
-declare
-export function d3$pairs<T>(array: T[]): Array<[T, T] >
+declare export function d3$pairs<T>(array: T[]): Array<[T, T] >
 
     declare interface d3$Nest<T>{
         key(func: (datum: T) => string): d3$Nest<T>,
@@ -1353,8 +1309,7 @@ export function d3$pairs<T>(array: T[]): Array<[T, T] >
         }[]
     }
 
-declare
-export function d3$nest<T>(): d3$Nest<T >
+declare export function d3$nest<T>(): d3$Nest<T >
 
     declare module 'random' {
         declare     export function normal(mean?: number, deviation?: number): () => number
@@ -1372,28 +1327,22 @@ declare interface d3$Transform {
         toString(): string
 }
 
-declare
-export function d3$transform(transform: string): d3$Transform
+declare export function d3$transform(transform: string): d3$Transform
 
-declare
-export function d3$format(specifier: string): (n: number) => string
+declare export function d3$format(specifier: string): (n: number) => string
 
 declare interface d3$FormatPrefix {
     symbol: string,
         scale(n: number): number
 }
 
-declare
-export function d3$formatPrefix(value: number, precision?: number): d3$FormatPrefix
+declare export function d3$formatPrefix(value: number, precision?: number): d3$FormatPrefix
 
-declare
-export function d3$round(x: number, n?: number): number
+declare export function d3$round(x: number, n?: number): number
 
-declare
-export function d3$requote(string: string): string
+declare export function d3$requote(string: string): string
 
-declare
-export var rgb: {
+declare export var rgb: {
     new(r: number, g: number, b: number): d3$Rgb,
     new(color: string): d3$Rgb,
     (r: number, g: number, b: number): d3$Rgb,
@@ -1411,8 +1360,7 @@ declare type d3$Rgb = {
 } & d3$Color
 
 
-declare
-export var hsl: {
+declare export var hsl: {
     new(h: number, s: number, l: number): d3$Hsl,
     new(color: string): d3$Hsl,
     (h: number, s: number, l: number): d3$Hsl,
@@ -1430,8 +1378,7 @@ declare type d3$Hsl = {
 } & d3$Color
 
 
-declare
-export var hcl: {
+declare export var hcl: {
     new(h: number, c: number, l: number): d3$Hcl,
     new(color: string): d3$Hcl,
     (h: number, c: number, l: number): d3$Hcl,
@@ -1447,8 +1394,7 @@ declare type d3$Hcl = {
 } & d3$Color
 
 
-declare
-export var lab: {
+declare export var lab: {
     new(l: number, a: number, b: number): d3$Lab,
     new(color: string): d3$Lab,
     (l: number, a: number, b: number): d3$Lab,
@@ -1466,8 +1412,7 @@ declare type d3$Lab = {
 } & d3$Color
 
 
-declare
-export var color: {
+declare export var color: {
     (): d3$Color,
     new(): d3$Color
 };
@@ -1488,14 +1433,11 @@ declare module 'ns' {
 }
 
 
-declare
-export function d3$functor<T>(value: T): T
+declare export function d3$functor<T>(value: T): T
 
-declare
-export function d3$rebind(target: {}, source: {}, ...names: string[]): any
+declare export function d3$rebind(target: {}, source: {}, ...names: string[]): any
 
-declare
-export function d3$dispatch(...names: string[]): d3$Dispatch
+declare export function d3$dispatch(...names: string[]): d3$Dispatch
 
 declare interface d3$Dispatch {
     on(type: string): (...args: any[]) => void,
@@ -1667,35 +1609,25 @@ declare module 'scale' {
 }
 
 
-declare
-export function d3$interpolate(a: number, b: number): (t: number) => number
+declare export function d3$interpolate(a: number, b: number): (t: number) => number
 
-declare
-export function d3$interpolateNumber(a: number, b: number): (t: number) => number
+declare export function d3$interpolateNumber(a: number, b: number): (t: number) => number
 
-declare
-export function d3$interpolateRound(a: number, b: number): (t: number) => number
+declare export function d3$interpolateRound(a: number, b: number): (t: number) => number
 
-declare
-export function d3$interpolateString(a: string, b: string): (t: number) => string
+declare export function d3$interpolateString(a: string, b: string): (t: number) => string
 
-declare
-export function d3$interpolateRgb(a: string | d3$Color, b: string | d3$Color): (t: number) => string
+declare export function d3$interpolateRgb(a: string | d3$Color, b: string | d3$Color): (t: number) => string
 
-declare
-export function d3$interpolateHsl(a: string | d3$Color, b: string | d3$Color): (t: number) => string
+declare export function d3$interpolateHsl(a: string | d3$Color, b: string | d3$Color): (t: number) => string
 
-declare
-export function d3$interpolateLab(a: string | d3$Color, b: string | d3$Color): (t: number) => string
+declare export function d3$interpolateLab(a: string | d3$Color, b: string | d3$Color): (t: number) => string
 
-declare
-export function d3$interpolateHcl(a: string | d3$Color, b: string | d3$Color): (t: number) => string
+declare export function d3$interpolateHcl(a: string | d3$Color, b: string | d3$Color): (t: number) => string
 
-declare
-export function d3$interpolateArray(a: Array<string | d3$Color>, b: d3$Color[]): (t: number) => string[]
+declare export function d3$interpolateArray(a: Array<string | d3$Color>, b: d3$Color[]): (t: number) => string[]
 
-declare
-export function d3$interpolateObject(
+declare export function d3$interpolateObject(
     a: {
         [key: string]: string | d3$Color
     },
@@ -1705,19 +1637,16 @@ export function d3$interpolateObject(
     [key: string]: string
 }
 
-declare
-export function d3$interpolateTransform(a: string | d3$Transform, b: string | d3$Transform): (t: number) => string
+declare export function d3$interpolateTransform(a: string | d3$Transform, b: string | d3$Transform): (t: number) => string
 
-declare
-export function d3$interpolateZoom(
+declare export function d3$interpolateZoom(
     a: [number, number, number],
     b: [number, number, number]): {
     (t: number): [number, number, number],
     duration: number
 }
 
-declare
-export var interpolators: Array<(a: any, b: any) => (t: number) => any>;
+declare export var interpolators: Array<(a: any, b: any) => (t: number) => any>;
 
 declare module 'time' {
     declare export var second: Interval;
@@ -2358,8 +2287,7 @@ declare module 'geo' {
 
 
 
-declare
-var npm$namespace$svg: {
+declare var npm$namespace$svg: {
     line: typeof svg$line,
     area: typeof svg$area,
     arc: typeof svg$arc,
@@ -2369,8 +2297,7 @@ var npm$namespace$svg: {
     axis: typeof svg$axis,
     brush: typeof svg$brush,
 }
-declare
-export function svg$line(): svg$Line<[number, number] >
+declare export function svg$line(): svg$Line<[number, number] >
 
     declare interface svg$Line<T>{
         (data: T[]): string,
@@ -2403,12 +2330,10 @@ export function svg$line(): svg$Line<[number, number] >
     }
 
 
-declare
-var npm$namespace$line: {
+declare var npm$namespace$line: {
     radial: typeof line$radial,
 }
-declare
-export function line$radial(): diagonal$Radial<[number, number] >
+declare export function line$radial(): diagonal$Radial<[number, number] >
 
     declare interface line$Radial<T>{
         (data: T[]): string,
@@ -2440,8 +2365,7 @@ export function line$radial(): diagonal$Radial<[number, number] >
         defined(defined: (d: T, i: number) => boolean): line$Radial<T >
     }
 
-declare
-export function svg$area(feature: any): number
+declare export function svg$area(feature: any): number
 
 declare interface svg$Area<T>{
     (data: T[]): string,
@@ -2482,12 +2406,10 @@ declare interface svg$Area<T>{
 }
 
 
-declare
-var npm$namespace$area: {
+declare var npm$namespace$area: {
     radial: typeof area$radial,
 }
-declare
-export function area$radial(): line$Radial<[number, number] >
+declare export function area$radial(): line$Radial<[number, number] >
 
     declare interface area$Radial<T>{
         (data: T[]): string,
@@ -2519,8 +2441,7 @@ export function area$radial(): line$Radial<[number, number] >
         defined(defined: (d: T, i: number) => boolean): area$Radial<T >
     }
 
-declare
-export function svg$arc(): pie$Arc<arc$Arc >
+declare export function svg$arc(): pie$Arc<arc$Arc >
 
     declare interface arc$Arc {
         innerRadius: number,
@@ -2538,8 +2459,7 @@ declare interface svg$Arc {
         padAngle: number
 }
 
-declare
-export function svg$symbol(): svg$Symbol<{} >
+declare export function svg$symbol(): svg$Symbol<{} >
 
     declare interface svg$Symbol<T>{
         (d: T, i?: number): string,
@@ -2551,11 +2471,9 @@ export function svg$symbol(): svg$Symbol<{} >
         size(size: (d: T, i: number) => number): svg$Symbol<T >
     }
 
-declare
-export var symbolTypes: string[];
+declare export var symbolTypes: string[];
 
-declare
-export function svg$chord(): layout$Chord<chord$Link<chord$Node>, chord$Node >
+declare export function svg$chord(): layout$Chord<chord$Link<chord$Node>, chord$Node >
 
     declare interface chord$Link<Node>{
         source: quadtree$Node,
@@ -2600,16 +2518,13 @@ declare interface svg$Chord<Link, Node>{
     chord$Node >
 }
 
-declare
-export function svg$diagonal(): svg$Diagonal<diagonal$Link<diagonal$Node>, diagonal$Node >
+declare export function svg$diagonal(): svg$Diagonal<diagonal$Link<diagonal$Node>, diagonal$Node >
 
 
-    declare
-var npm$namespace$diagonal: {
+    declare var npm$namespace$diagonal: {
     radial: typeof diagonal$radial,
 }
-declare
-export function diagonal$radial(): area$Radial<[number, number] >
+declare export function diagonal$radial(): area$Radial<[number, number] >
 
     declare interface diagonal$Radial<T>{
         (data: T[]): string,
@@ -2667,8 +2582,7 @@ declare interface svg$Diagonal<Link, Node>{
     chord$Node >
 }
 
-declare
-export function svg$axis(): svg$Axis
+declare export function svg$axis(): svg$Axis
 
 declare interface svg$Axis {
     (selection: d3$Selection<any>): void,
@@ -2695,8 +2609,7 @@ declare interface svg$Axis {
         tickFormat(format: string): svg$Axis
 }
 
-declare
-export function svg$brush(): svg$Brush<any >
+declare export function svg$brush(): svg$Brush<any >
 
     declare interface brush$Scale<Range, Output>{
         (x: Date): Output,
@@ -2761,8 +2674,7 @@ declare interface svg$Brush<T>{
     on(type: string, listener: (datum: T, index: number) => void): svg$Brush<T >
 }
 
-declare
-export function d3$xhr(
+declare export function d3$xhr(
     url: string,
     mimeType?: string,
     callback?: (err: any, data: any) => void): d3$Xhr
@@ -2794,32 +2706,25 @@ declare interface d3$Xhr {
         on(type: string, listener: (...args: any[]) => void): d3$Xhr
 }
 
-declare
-export function d3$text(
+declare export function d3$text(
     url: string,
     mimeType?: string,
     callback?: (err: any, data: string) => void): d3$Xhr
 
-declare
-export function d3$json(url: string, callback?: (err: any, data: any) => void): d3$Xhr
+declare export function d3$json(url: string, callback?: (err: any, data: any) => void): d3$Xhr
 
-declare
-export function d3$xml(
+declare export function d3$xml(
     url: string,
     mimeType?: string,
     callback?: (err: any, data: any) => void): d3$Xhr
 
-declare
-export function d3$html(url: string, callback?: (err: any, data: DocumentFragment) => void): d3$Xhr
+declare export function d3$html(url: string, callback?: (err: any, data: DocumentFragment) => void): d3$Xhr
 
-declare
-export var csv: d3$Dsv;
+declare export var csv: d3$Dsv;
 
-declare
-export var tsv: d3$Dsv;
+declare export var tsv: d3$Dsv;
 
-declare
-export function d3$dsv(delimiter: string, mimeType: string): d3$Dsv
+declare export function d3$dsv(delimiter: string, mimeType: string): d3$Dsv
 
 declare interface d3$Dsv {
     (url: string, callback: (rows: {
@@ -2897,8 +2802,7 @@ declare type d3$DsvXhr<T>= {
 } & d3$Xhr
 
 
-declare
-export function d3$locale(definition: d3$LocaleDefinition): d3$Locale
+declare export function d3$locale(definition: d3$LocaleDefinition): d3$Locale
 
 declare interface d3$LocaleDefinition {
     decimal: string,
@@ -2925,8 +2829,7 @@ declare interface d3$Locale {
 }
 
 
-declare
-var npm$namespace$layout: {
+declare var npm$namespace$layout: {
     bundle: typeof layout$bundle,
     chord: typeof layout$chord,
     cluster: typeof layout$cluster,
@@ -2940,8 +2843,7 @@ var npm$namespace$layout: {
     tree: typeof layout$tree,
     treemap: typeof layout$treemap,
 }
-declare
-export function layout$bundle(): layout$Bundle<bundle$Node >
+declare export function layout$bundle(): layout$Bundle<bundle$Node >
 
     declare interface bundle$Node {
         radius: number,
@@ -2958,8 +2860,7 @@ declare interface layout$Bundle<T>{
     (links: bundle$Link<T>[]): T[][]
 }
 
-declare
-export function layout$chord(): svg$Chord<chord$Link<chord$Node>, chord$Node >
+declare export function layout$chord(): svg$Chord<chord$Link<chord$Node>, chord$Node >
 
     declare interface chord$Link<Node>{
         source: bundle$Node,
@@ -3015,8 +2916,7 @@ declare interface layout$Chord<Link, Node>{
     chord$Node >
 }
 
-declare
-export function layout$cluster(): layout$Cluster<cluster$Result >
+declare export function layout$cluster(): layout$Cluster<cluster$Result >
 
     declare interface cluster$Result {
         parent?: cluster$Result,
@@ -3049,8 +2949,7 @@ declare interface layout$Cluster<T>{
     value(value: (a: T) => number): layout$Cluster<T >
 }
 
-declare
-export function layout$force(): layout$Force<force$Link<force$Node>, force$Node >
+declare export function layout$force(): layout$Force<force$Link<force$Node>, force$Node >
 
     declare interface force$Link<Node>{
         source: chord$Node,
@@ -3134,8 +3033,7 @@ declare interface layout$Force<Link, Node>{
     drag(selection: d3$Selection<force$Node>): void
 }
 
-declare
-export function layout$hierarchy(): layout$Hierarchy<hierarchy$Result >
+declare export function layout$hierarchy(): layout$Hierarchy<hierarchy$Result >
 
     declare interface hierarchy$Result {
         parent?: hierarchy$Result,
@@ -3156,8 +3054,7 @@ declare interface layout$Hierarchy<T>{
     revalue(root: T): T[]
 }
 
-declare
-export function layout$histogram(): layout$Histogram<number >
+declare export function layout$histogram(): layout$Histogram<number >
 
     declare type histogram$Bin<T>= {
         x: number,
@@ -3182,8 +3079,7 @@ declare interface layout$Histogram<T>{
     frequency(frequency: boolean): layout$Histogram<T >
 }
 
-declare
-export function layout$pack(): layout$Pack<pack$Node >
+declare export function layout$pack(): layout$Pack<pack$Node >
 
     declare interface pack$Node {
         radius: number,
@@ -3215,8 +3111,7 @@ declare interface layout$Pack<T>{
     padding(padding: number): layout$Pack<T >
 }
 
-declare
-export function layout$partition(): layout$Partition<partition$Node >
+declare export function layout$partition(): layout$Partition<partition$Node >
 
     declare interface partition$Link<Node>{
         source: pack$Node,
@@ -3229,8 +3124,7 @@ declare interface partition$Node {
         endAngle: number
 }
 
-declare
-export interface layout$Partition<T>{
+declare export interface layout$Partition<T>{
     (root: T): T[],
     nodes(root: T): T[],
     links(nodes: T[]): partition$Link<T>[],
@@ -3244,8 +3138,7 @@ export interface layout$Partition<T>{
     size(size: [number, number]): layout$Partition<T >
 }
 
-declare
-export function layout$pie(): layout$Pie<number >
+declare export function layout$pie(): layout$Pie<number >
 
     declare interface pie$Arc {
         innerRadius: number,
@@ -3272,8 +3165,7 @@ declare interface layout$Pie<T>{
     padAngle(angle: (data: T[], index: number) => number): layout$Pie<T >
 }
 
-declare
-export function layout$stack(): layout$Stack<stack$Value[], stack$Value >
+declare export function layout$stack(): layout$Stack<stack$Value[], stack$Value >
 
     declare interface stack$Value {
         x: number,
@@ -3327,8 +3219,7 @@ declare interface layout$Stack<Series, Value>{
     stack$Value >
 }
 
-declare
-export function layout$tree(): layout$Tree<tree$Node >
+declare export function layout$tree(): layout$Tree<tree$Node >
 
     declare interface tree$Link<Node>{
         source: partition$Node,
@@ -3359,8 +3250,7 @@ declare interface layout$Tree<T>{
     value(value: (datum: T, index: number) => number): layout$Tree<T >
 }
 
-declare
-export function layout$treemap(): layout$Treemap<treemap$Node >
+declare export function layout$treemap(): layout$Treemap<treemap$Node >
 
     declare interface treemap$Node {
         radius: number,
@@ -3405,16 +3295,14 @@ declare interface layout$Treemap<T>{
 }
 
 
-declare
-var npm$namespace$geom: {
+declare var npm$namespace$geom: {
     voronoi: typeof geom$voronoi,
     delaunay: typeof geom$delaunay,
     quadtree: typeof geom$quadtree,
     hull: typeof geom$hull,
     polygon: typeof geom$polygon,
 }
-declare
-export function geom$voronoi(): geom$Voronoi<[number, number] >
+declare export function geom$voronoi(): geom$Voronoi<[number, number] >
 
     declare interface voronoi$Link<Node>{
         source: treemap$Node,
@@ -3444,16 +3332,14 @@ declare interface geom$Voronoi<T>{
  * 
  * @deprecated  use d3.geom.voronoi().triangles() instead
  */
-declare
-export function geom$delaunay(
+declare export function geom$delaunay(
     vertices: Array<[number, number]>): Array<[
         [number, number],
         [number, number],
         [number, number]
     ] >
 
-    declare
-export function geom$quadtree(): geom$Quadtree<[number, number] >
+    declare export function geom$quadtree(): geom$Quadtree<[number, number] >
 
     declare interface quadtree$Node {
         radius: number,
@@ -3487,8 +3373,7 @@ declare type geom$Quadtree<T>= {
 } & quadtree$Node
 
 
-declare
-export function geom$hull(vertices: Array<[number, number]>): Array<[number, number] >
+declare export function geom$hull(vertices: Array<[number, number]>): Array<[number, number] >
 
     declare interface geom$Hull<T>{
         (vertices: T[]): Array<[number, number]>,
@@ -3498,8 +3383,7 @@ export function geom$hull(vertices: Array<[number, number]>): Array<[number, num
         y(y: (datum: T) => number): geom$Hull<T >
     }
 
-declare
-export function geom$polygon(vertices: Array<[number, number]>): geom$Polygon
+declare export function geom$polygon(vertices: Array<[number, number]>): geom$Polygon
 
 declare interface geom$Polygon {
     area(): number,

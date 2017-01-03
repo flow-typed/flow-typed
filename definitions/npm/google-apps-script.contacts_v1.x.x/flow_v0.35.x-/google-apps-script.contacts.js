@@ -268,5 +268,4 @@ declare module 'Contacts' {
             setLabel(label: string): UrlField
     }
 }
-declare
-var ContactsApp: undefined.ContactsApp;
+declare var ContactsApp: undefined.ContactsApp;

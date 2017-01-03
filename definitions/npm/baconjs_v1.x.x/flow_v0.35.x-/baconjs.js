@@ -69,8 +69,7 @@ declare interface JQuery {
             selector: string,
             f: (event: JQueryEventObject, args: any[]) => A): Bacon$EventStream<ErrorEvent, A >
 }
-declare
-var npm$namespace$Bacon: {
+declare var npm$namespace$Bacon: {
         fromPromise: typeof Bacon$fromPromise,
         fromEvent: typeof Bacon$fromEvent,
         fromCallback: typeof Bacon$fromCallback,
@@ -110,8 +109,7 @@ var npm$namespace$Bacon: {
     Bacon.fromPromise($.ajax("https://baconjs.github.io/"), true);
     Bacon.fromPromise(Promise.resolve(1), false);
     */
-declare
-function Bacon$fromPromise<E, A>(
+declare function Bacon$fromPromise<E, A>(
         promise: Promise<A>| JQueryXHR,
         abort?: boolean): Bacon$EventStream<E, A >
 
@@ -134,8 +132,7 @@ function Bacon$fromPromise<E, A>(
     alert("Bacon!");
     });
     */
-    declare
-function Bacon$fromEvent<E, A>(
+    declare function Bacon$fromEvent<E, A>(
         target: EventTarget | NodeJS.EventEmitter | JQuery,
         eventName: string): Bacon$EventStream<E, A >
 
@@ -158,8 +155,7 @@ function Bacon$fromEvent<E, A>(
     }, 1000);
     });
     */
-    declare
-function Bacon$fromCallback<E, A>(f: (callback: (...args: any[]) => void) => void): Bacon$EventStream<E, A >
+    declare function Bacon$fromCallback<E, A>(f: (callback: (...args: any[]) => void) => void): Bacon$EventStream<E, A >
 
 
     /**
@@ -186,8 +182,7 @@ function Bacon$fromCallback<E, A>(f: (callback: (...args: any[]) => void) => voi
     });
     }
     */
-    declare
-function Bacon$fromNodeCallback<E, A>(
+    declare function Bacon$fromNodeCallback<E, A>(
         f: (callback: (error: E, data: A) => void) => void,
         ...args: any[]): Bacon$EventStream<E, A >
 
@@ -204,8 +199,7 @@ function Bacon$fromNodeCallback<E, A>(
      * @param  
      * @returns  
      */
-    declare
-function Bacon$fromPoll<E, A>(
+    declare function Bacon$fromPoll<E, A>(
         interval: number,
         f: () => Bacon$Next<A>| Bacon$End<A>): Bacon$EventStream<E, A >
 
@@ -220,8 +214,7 @@ function Bacon$fromPoll<E, A>(
      * @returns  * 
      * @example  * Bacon.once(new Bacon.Error("fail"));
      */
-    declare
-function Bacon$once<E, A>(value: A | Bacon$Error<E>): Bacon$EventStream<E, A >
+    declare function Bacon$once<E, A>(value: A | Bacon$Error<E>): Bacon$EventStream<E, A >
 
 
     /**
@@ -234,8 +227,7 @@ function Bacon$once<E, A>(value: A | Bacon$Error<E>): Bacon$EventStream<E, A >
      * @returns  * 
      * @example  * Bacon.fromArray([1, new Bacon.Error("")]);
      */
-    declare
-function Bacon$fromArray<E, A>(values: (A | Bacon$Error<E>)[]): Bacon$EventStream<E, A >
+    declare function Bacon$fromArray<E, A>(values: (A | Bacon$Error<E>)[]): Bacon$EventStream<E, A >
 
 
     /**
@@ -246,8 +238,7 @@ function Bacon$fromArray<E, A>(values: (A | Bacon$Error<E>)[]): Bacon$EventStrea
      * @param  
      * @returns  
      */
-    declare
-function Bacon$interval<E, A>(interval: number, value: A): Bacon$EventStream<E, A >
+    declare function Bacon$interval<E, A>(interval: number, value: A): Bacon$EventStream<E, A >
 
 
     /**
@@ -259,8 +250,7 @@ function Bacon$interval<E, A>(interval: number, value: A): Bacon$EventStream<E, 
      * @param  
      * @returns  
      */
-    declare
-function Bacon$sequentially<E, A>(interval: number, values: A[]): Bacon$EventStream<E, A >
+    declare function Bacon$sequentially<E, A>(interval: number, values: A[]): Bacon$EventStream<E, A >
 
 
     /**
@@ -273,8 +263,7 @@ function Bacon$sequentially<E, A>(interval: number, values: A[]): Bacon$EventStr
      * @example  * // The following would lead to `1,2,3,1,2,3...` to be repeated indefinitely:
     Bacon.fromArray([1, new Bacon.Error("")]);
     */
-    declare
-function Bacon$repeatedly<E, A>(interval: number, values: A[]): Bacon$EventStream<E, A >
+    declare function Bacon$repeatedly<E, A>(interval: number, values: A[]): Bacon$EventStream<E, A >
 
 
     /**
@@ -296,8 +285,7 @@ function Bacon$repeatedly<E, A>(interval: number, values: A[]): Bacon$EventStrea
     }
     }).log();
     */
-    declare
-function Bacon$repeat<E, A>(
+    declare function Bacon$repeat<E, A>(
         f: (iteration: number) => boolean | Bacon$Observable<E, A>): Bacon$EventStream<E, A >
 
 
@@ -308,8 +296,7 @@ function Bacon$repeat<E, A>(
      * @link  Bacon.EventStream} that immediately ends.
      * @returns  
      */
-    declare
-function Bacon$never<E, A>(): Bacon$EventStream<E, A >
+    declare function Bacon$never<E, A>(): Bacon$EventStream<E, A >
 
 
     /**
@@ -321,8 +308,7 @@ function Bacon$never<E, A>(): Bacon$EventStream<E, A >
      * @param  
      * @returns  
      */
-    declare
-function Bacon$later<E, A>(delay: number, value: A): Bacon$EventStream<E, A >
+    declare function Bacon$later<E, A>(delay: number, value: A): Bacon$EventStream<E, A >
 
 
     /**
@@ -333,8 +319,7 @@ function Bacon$later<E, A>(delay: number, value: A): Bacon$EventStream<E, A >
      * @param  
      * @returns  
      */
-    declare
-function Bacon$constant<E, A>(x: A): Bacon$Property<E, A >
+    declare function Bacon$constant<E, A>(x: A): Bacon$Property<E, A >
 
 
     /**
@@ -372,8 +357,7 @@ function Bacon$constant<E, A>(x: A): Bacon$Property<E, A >
     });
     stream.log();
     */
-    declare
-function Bacon$fromBinder<E, A>(
+    declare function Bacon$fromBinder<E, A>(
         subscribe: (
             sink: (
                 value: Bacon$More | Bacon$NoMore | (A |
@@ -400,8 +384,7 @@ function Bacon$fromBinder<E, A>(
      */
     declare interface Bacon$More {}
 
-declare
-var more: Bacon$More;
+declare var more: Bacon$More;
 
 
 /**
@@ -411,8 +394,7 @@ var more: Bacon$More;
  */
 declare interface Bacon$NoMore {}
 
-declare
-var noMore: Bacon$NoMore;
+declare var noMore: Bacon$NoMore;
 
 
 /**
@@ -1584,8 +1566,7 @@ declare type Bacon$EventStream<E, A>= {
 } & Bacon$Observable
 
 
-declare
-var EventStream: {
+declare var EventStream: {
 
     /**
      * #new~sink} sink
@@ -2264,8 +2245,7 @@ declare type Bacon$Property<E, A>= {
  * @param  
  * @returns  
  */
-declare
-function Bacon$combineAsArray<E, A>(streams: (A | Bacon$Observable<E, A>)[]): Bacon$Property<E, A[] >
+declare function Bacon$combineAsArray<E, A>(streams: (A | Bacon$Observable<E, A>)[]): Bacon$Property<E, A[] >
 
 
     /**
@@ -2280,8 +2260,7 @@ function Bacon$combineAsArray<E, A>(streams: (A | Bacon$Observable<E, A>)[]): Ba
      * @param  
      * @returns  
      */
-    declare
-function Bacon$combineWith<A, B>(
+    declare function Bacon$combineWith<A, B>(
         f: (...args: A[]) => B,
         ...streams: (A | Bacon$Observable<ErrorEvent, A>)[]): Bacon$Property<ErrorEvent, B >
 
@@ -2294,8 +2273,7 @@ function Bacon$combineWith<A, B>(
      * @link  Bacon.EventStream}s and constant values using a `template` object.
      * @returns  
      */
-    declare
-function Bacon$combineTemplate<E, A>(
+    declare function Bacon$combineTemplate<E, A>(
         template: {
             [label: string]: number |
                 boolean |
@@ -2314,8 +2292,7 @@ function Bacon$combineTemplate<E, A>(
      * @param  
      * @returns  
      */
-    declare
-function Bacon$mergeAll<E, A>(streams: Bacon$EventStream<E, A>[]): Bacon$EventStream<E, A >
+    declare function Bacon$mergeAll<E, A>(streams: Bacon$EventStream<E, A>[]): Bacon$EventStream<E, A >
 
 
     /**
@@ -2327,8 +2304,7 @@ function Bacon$mergeAll<E, A>(streams: Bacon$EventStream<E, A>[]): Bacon$EventSt
      * @param  
      * @returns  
      */
-    declare
-function Bacon$zipAsArray<E, A>(streams: Bacon$EventStream<E, A>[]): Bacon$EventStream<E, A[] >
+    declare function Bacon$zipAsArray<E, A>(streams: Bacon$EventStream<E, A>[]): Bacon$EventStream<E, A[] >
 
 
     /**
@@ -2343,8 +2319,7 @@ function Bacon$zipAsArray<E, A>(streams: Bacon$EventStream<E, A>[]): Bacon$Event
      * @param  
      * @returns  
      */
-    declare
-function Bacon$zipWith<E, A, B>(
+    declare function Bacon$zipWith<E, A, B>(
         streams: Bacon$EventStream<E, A>[],
         f: (...args: A[]) => B): Bacon$EventStream<E, B >
 
@@ -2358,8 +2333,7 @@ function Bacon$zipWith<E, A, B>(
      * @param  
      * @returns  
      */
-    declare
-function Bacon$onValues(...args: any[]): void
+    declare function Bacon$onValues(...args: any[]): void
 
 
 /**
@@ -2422,8 +2396,7 @@ declare type Bacon$Bus<E, A>= {
 } & Bacon$EventStream
 
 
-declare
-var Bus: {
+declare var Bus: {
 
     /**
      * 
@@ -2677,8 +2650,7 @@ declare class Next<A>mixins Event<A>{
  * @param  .retries number of times to retry the `source` function in addition to the initial attempt
  * @returns  
  */
-declare
-function Bacon$retry<E, A>(
+declare function Bacon$retry<E, A>(
         options: {
             source: () => Bacon$EventStream<E,
             A>,
@@ -2795,8 +2767,7 @@ function Bacon$retry<E, A>(
     }
     }
     */
-    declare
-function Bacon$when<E, A1, B>(
+    declare function Bacon$when<E, A1, B>(
         pattern1: Bacon$Observable<E, A1>[],
         f1: (...args: A1[]) => B): Bacon$EventStream<E, B >
 
@@ -2839,8 +2810,7 @@ function Bacon$when<E, A1, B>(
     // In the example, the `score` property is updated when either `hitUfo` or `hitMotherShip` occur. The `scoreMultiplier` Property is sampled to take multiplier into account when `hitUfo` occurs.
     }
     */
-    declare
-function Bacon$update<E, A1, B>(
+    declare function Bacon$update<E, A1, B>(
     initial: B,
     pattern1: Bacon$Observable<E, A1>[],
     f1: (initial: B, ...args: A1[]) => B): Bacon$Property<E, B>declare module 'baconjs' {

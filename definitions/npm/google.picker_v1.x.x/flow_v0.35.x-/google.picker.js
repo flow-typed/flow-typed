@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class PickerBuilder {
+declare export class PickerBuilder {
     constructor(): this;
     addView(viewOrId: any): picker$PickerBuilder;
     addViewGroup(viewGroup: any): picker$PickerBuilder;
@@ -37,8 +36,7 @@ export class PickerBuilder {
 /**
  * Picker is the top level object representing the UI action with the user. These objects are not created directly, but instead use the PickerBuilder object.
  */
-declare
-export interface picker$Picker {
+declare export interface picker$Picker {
     isVisible(): boolean,
         setCallback(): picker$Picker,
         setRelayUrl(url: string): picker$Picker,
@@ -49,8 +47,7 @@ export interface picker$Picker {
 /**
  * Use DocsUploadView to upload documents to Google Drive.
  */
-declare
-export class DocsUploadView {
+declare export class DocsUploadView {
     constructor(): this;
     setIncludeFolders(included: boolean): picker$DocsUploadView;
     setParent(parentId: string): picker$DocsUploadView
@@ -60,8 +57,7 @@ export class DocsUploadView {
 /**
  * DocsView is a subclass of View that can be used for Google Drive views.
  */
-declare
-export class DocsView {
+declare export class DocsView {
     constructor(viewId?: string): this;
     setIncludeFolders(included: boolean): picker$DocsView;
     setSelectFolderEnabled(enabled: boolean): picker$DocsView;
@@ -71,22 +67,19 @@ export class DocsView {
     setStarred(starred: boolean): picker$DocsView
 }
 
-declare
-export var DocsViewMode: {
+declare export var DocsViewMode: {
     GRID: string,
     LIST: string
 };
 
-declare
-export var Feature: {
+declare export var Feature: {
     MINE_ONLY: string,
     MULTISELECT_ENABLED: string,
     NAV_HIDDEN: string,
     SIMPLE_UPLOAD_ENABLED: string
 };
 
-declare
-export var ViewId: {
+declare export var ViewId: {
     DOCS: string,
     DOCS_IMAGES: string,
     DOCS_IMAGES_AND_VIDEOS: string,
@@ -109,14 +102,12 @@ export var ViewId: {
     YOUTUBE: string
 };
 
-declare
-export var Action: {
+declare export var Action: {
     CANCEL: string,
     PICKED: string
 };
 
-declare
-export var Document: {
+declare export var Document: {
     ADDRESS_LINES: string,
     AUDIENCE: string,
     DESCRIPTION: string,
@@ -139,16 +130,14 @@ export var Document: {
     URL: string
 };
 
-declare
-export var Response: {
+declare export var Response: {
     ACTION: string,
     DOCUMENTS: string,
     PARENTS: string,
     VIEW: string
 };
 
-declare
-export var Type: {
+declare export var Type: {
     ALBUM: string,
     DOCUMENT: string,
     LOCATION: string,

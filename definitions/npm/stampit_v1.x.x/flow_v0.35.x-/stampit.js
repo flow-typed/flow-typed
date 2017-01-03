@@ -199,8 +199,7 @@ declare module 'stampit' {
     declare module.exports: typeof stampit
 }
 
-declare
-var npm$namespace$stampit: {
+declare var npm$namespace$stampit: {
         methods: typeof stampit$methods,
         refs: typeof stampit$refs,
         props: typeof stampit$props,
@@ -219,8 +218,7 @@ var npm$namespace$stampit: {
      * @param methods Object(s) containing map of method names and bodies for delegation.
      * @return  A new Stamp.
      */
-declare
-export function stampit$methods(...methods: {}[]): Stamp
+declare export function stampit$methods(...methods: {}[]): Stamp
 
 
 /**
@@ -228,8 +226,7 @@ export function stampit$methods(...methods: {}[]): Stamp
  * @param states Object(s) containing map of property names and values to clone for each new object.
  * @return  A new Stamp.
  */
-declare
-export function stampit$refs(...states: {}[]): Stamp
+declare export function stampit$refs(...states: {}[]): Stamp
 
 
 /**
@@ -237,8 +234,7 @@ export function stampit$refs(...states: {}[]): Stamp
  * @param states Object(s) to merge for each new object.
  * @return  A new Stamp.
  */
-declare
-export function stampit$props(...states: {}[]): Stamp
+declare export function stampit$props(...states: {}[]): Stamp
 
 
 /**
@@ -246,8 +242,7 @@ export function stampit$props(...states: {}[]): Stamp
  * @param functions Closures (functions) used to create private data and privileged methods.
  * @return  A new Stamp.
  */
-declare
-export function stampit$init(...functions: Init[]): Stamp
+declare export function stampit$init(...functions: Init[]): Stamp
 
 
 /**
@@ -255,8 +250,7 @@ export function stampit$init(...functions: Init[]): Stamp
  * @param statics Object(s) containing map of property names and values to mixin into each new stamp (NOT OBJECT).
  * @return  A new Stamp.
  */
-declare
-export function stampit$static(...statics: {}[]): Stamp
+declare export function stampit$static(...statics: {}[]): Stamp
 
 
 /**
@@ -265,8 +259,7 @@ export function stampit$static(...statics: {}[]): Stamp
  * @param stamps Stamps produced by stampit.
  * @return  A new Stamp made of all the given.
  */
-declare
-export function stampit$compose(...stamps: Stamp[]): Stamp
+declare export function stampit$compose(...stamps: Stamp[]): Stamp
 
 
 /**
@@ -277,29 +270,25 @@ with last in priority overrides.
  * @param source Objects to copy properties from.
  * @return  The destination object.
 */
-declare
-export function stampit$mixin(destination: any, ...source: any[]): any
+declare export function stampit$mixin(destination: any, ...source: any[]): any
 
 
 /**
  * Alias for mixin()
  */
-declare
-export function stampit$mixIn(destination: any, ...source: any[]): any
+declare export function stampit$mixIn(destination: any, ...source: any[]): any
 
 
 /**
  * Alias for mixin()
  */
-declare
-export function stampit$extend(destination: any, ...source: any[]): any
+declare export function stampit$extend(destination: any, ...source: any[]): any
 
 
 /**
  * Alias for mixin()
  */
-declare
-export function stampit$assign(destination: any, ...source: any[]): any
+declare export function stampit$assign(destination: any, ...source: any[]): any
 
 
 /**
@@ -307,8 +296,7 @@ export function stampit$assign(destination: any, ...source: any[]): any
  * @param obj An object to check.
  * @return  true if the object is a Stamp; otherwise - false.
  */
-declare
-export function stampit$isStamp(obj: any): boolean
+declare export function stampit$isStamp(obj: any): boolean
 
 
 /**
@@ -317,5 +305,4 @@ export function stampit$isStamp(obj: any): boolean
  * @param Constructor Old-fashioned constructor function.
  * @return  A new Stamp based on the given constructor.
  */
-declare
-export function stampit$convertConstructor(Constructor: any): Stamp
+declare export function stampit$convertConstructor(Constructor: any): Stamp

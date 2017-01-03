@@ -21,7 +21,5 @@ declare interface VimeoPlayer {
         addEvent(eventName: string, callback: (e: any) => void): any,
         removeEvent(eventName: string): void
 }
-declare
-var $f: VimeoPlayerAPI;
-declare
-var Froogaloop: VimeoPlayerAPI;
+declare var $f: VimeoPlayerAPI;
+declare var Froogaloop: VimeoPlayerAPI;

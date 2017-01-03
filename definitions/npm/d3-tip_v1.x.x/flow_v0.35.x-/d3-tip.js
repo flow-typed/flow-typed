@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$d3: {
+declare var npm$namespace$d3: {
     tip: typeof d3$tip,
 }
 declare type d3$TooltipDirection = ("n" |
@@ -65,5 +64,4 @@ declare interface d3$Tooltip {
         destroy(): d3$Tooltip
 }
 
-declare
-export function d3$tip(): d3$Tooltip
+declare export function d3$tip(): d3$Tooltip

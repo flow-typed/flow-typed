@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Blazy: Blazy;
+declare var Blazy: Blazy;
 declare module 'Blazy' {
     declare module.exports: typeof Blazy
 }

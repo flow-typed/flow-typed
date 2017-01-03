@@ -315,9 +315,6 @@ declare interface SigmaJs$SVGObject<T>{
     create: (object: T, ...a: any[]) => Element,
     update: (object: T, ...a: any[]) => void
 }
-declare
-var sigma: SigmaJs$SigmaFactory;
-declare
-var CustomShapes: SigmaJs$CustomShapes;
-declare
-var ShapeLibrary: SigmaJs$CustomShapes;
+declare var sigma: SigmaJs$SigmaFactory;
+declare var CustomShapes: SigmaJs$CustomShapes;
+declare var ShapeLibrary: SigmaJs$CustomShapes;

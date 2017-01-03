@@ -36,8 +36,7 @@ declare interface FinchStatic {
         abort(): void,
         options(options: FinchOptions): void
 }
-declare
-var Finch: FinchStatic;
+declare var Finch: FinchStatic;
 declare module 'finch' {
     declare module.exports: typeof Finch
 }

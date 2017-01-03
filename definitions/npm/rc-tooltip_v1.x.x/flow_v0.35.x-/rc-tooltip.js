@@ -6,11 +6,9 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Tooltip$Trigger = "hover" | "click" | "focus";
+declare export type Tooltip$Trigger = "hover" | "click" | "focus";
 
-declare
-export type Tooltip$Placement = "left" |
+declare export type Tooltip$Placement = "left" |
     "right" |
     "top" |
     "bottom" |
@@ -19,8 +17,7 @@ export type Tooltip$Placement = "left" |
     "bottomLeft" |
     "bottomRight";
 
-declare
-export type Tooltip$Props = {
+declare export type Tooltip$Props = {
     overlayClassName?: string,
     trigger?: Tooltip$Trigger[],
     mouseEnterDelay?: number,

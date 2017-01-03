@@ -517,8 +517,7 @@ declare interface RaphaelStatic {
         type: string,
         vml: boolean
 }
-declare
-var Raphael: RaphaelStatic;
+declare var Raphael: RaphaelStatic;
 declare module 'raphael' {
     declare module.exports: typeof Raphael
 }

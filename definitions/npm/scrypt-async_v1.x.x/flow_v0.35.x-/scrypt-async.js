@@ -29,8 +29,7 @@ declare interface ScryptAsync$ScryptStatic {
     (password: number[], salt: string, logN: number, r: number, dkLen: number, callback: ScryptAsync$CallbackFunc): void,
     (password: number[], salt: number[], logN: number, r: number, dkLen: number, callback: ScryptAsync$CallbackFunc): void
 }
-declare
-var scrypt: ScryptAsync$ScryptStatic;
+declare var scrypt: ScryptAsync$ScryptStatic;
 declare module 'scrypt-async' {
     declare module.exports: typeof scrypt
 }

@@ -307,5 +307,4 @@ declare type PhonegapFacebookPlugin$ShareDialogResult = {
      */
     post_id: string
 } & PhonegapFacebookPlugin$BaseDialogResult
-declare
-var facebookConnectPlugin: PhonegapFacebookPlugin$FacebookConnectPluginStatic;
+declare var facebookConnectPlugin: PhonegapFacebookPlugin$FacebookConnectPluginStatic;

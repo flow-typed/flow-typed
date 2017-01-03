@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface IMAPS$ImapSimpleOptions {
+declare export interface IMAPS$ImapSimpleOptions {
 
     /**
      * Options to pass to node-imap constructor. 
@@ -20,8 +19,7 @@ export interface IMAPS$ImapSimpleOptions {
         connectTimeout?: number
 }
 
-declare
-export type IMAPS$MessageBodyPart = {
+declare export type IMAPS$MessageBodyPart = {
 
     /**
      * string type where which=='TEXT', complex Object where which=='HEADER' 
@@ -29,14 +27,12 @@ export type IMAPS$MessageBodyPart = {
     body: any
 }
 
-declare
-export interface IMAPS$Message {
+declare export interface IMAPS$Message {
     attributes: IMAP.ImapMessageAttributes,
         parts: IMAPS$MessageBodyPart[]
 }
 
-declare
-export class ImapSimple {
+declare export class ImapSimple {
     constructor(imap: IMAP.Connection): this;
 
     /**
@@ -93,8 +89,7 @@ export class ImapSimple {
 /**
  * Error thrown when a connection attempt has timed out. 
  */
-declare
-export class ConnectionTimeoutError mixins Error {
+declare export class ConnectionTimeoutError mixins Error {
     timeout: number;
     constructor(timeout: number): this
 }

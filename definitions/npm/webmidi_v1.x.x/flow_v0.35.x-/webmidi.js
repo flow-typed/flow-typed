@@ -14,8 +14,7 @@ declare interface Navigator {
      */
     requestMIDIAccess(options?: WebMidi$MIDIOptions): Promise<WebMidi$MIDIAccess >
 }
-declare
-export interface WebMidi$MIDIOptions {
+declare export interface WebMidi$MIDIOptions {
 
     /**
      * This member informs the system whether the ability to send and receive system
@@ -29,19 +28,16 @@ export interface WebMidi$MIDIOptions {
  * This is a maplike interface whose value is a MIDIInput instance and key is its
  * ID.
  */
-declare
-export type WebMidi$MIDIInputMap = Map<string, WebMidi$MIDIInput>;
+declare export type WebMidi$MIDIInputMap = Map<string, WebMidi$MIDIInput>;
 
 
 /**
  * This is a maplike interface whose value is a MIDIOutput instance and key is its
  * ID.
  */
-declare
-export type WebMidi$MIDIOutputMap = Map<string, WebMidi$MIDIOutput>;
+declare export type WebMidi$MIDIOutputMap = Map<string, WebMidi$MIDIOutput>;
 
-declare
-export type WebMidi$MIDIAccess = {
+declare export type WebMidi$MIDIAccess = {
 
     /**
      * The MIDI input ports available to the system.
@@ -67,17 +63,13 @@ export type WebMidi$MIDIAccess = {
 } & EventTarget
 
 
-declare
-export type WebMidi$MIDIPortType = "input" | "output";
+declare export type WebMidi$MIDIPortType = "input" | "output";
 
-declare
-export type WebMidi$MIDIPortDeviceState = "disconnected" | "connected";
+declare export type WebMidi$MIDIPortDeviceState = "disconnected" | "connected";
 
-declare
-export type WebMidi$MIDIPortConnectionState = "open" | "closed" | "pending";
+declare export type WebMidi$MIDIPortConnectionState = "open" | "closed" | "pending";
 
-declare
-export type WebMidi$MIDIPort = {
+declare export type WebMidi$MIDIPort = {
 
     /**
      * A unique ID of the port. This can be used by developers to remember ports the
@@ -150,14 +142,12 @@ export type WebMidi$MIDIPort = {
 } & EventTarget
 
 
-declare
-export type WebMidi$MIDIInput = {
+declare export type WebMidi$MIDIInput = {
     onmidimessage: (e: WebMidi$MIDIMessageEvent) => void
 } & WebMidi$MIDIPort
 
 
-declare
-export type WebMidi$MIDIOutput = {
+declare export type WebMidi$MIDIOutput = {
 
     /**
      * Enqueues the message to be sent to the corresponding MIDI port.
@@ -178,8 +168,7 @@ export type WebMidi$MIDIOutput = {
 } & WebMidi$MIDIPort
 
 
-declare
-export type WebMidi$MIDIMessageEvent = {
+declare export type WebMidi$MIDIMessageEvent = {
 
     /**
      * A timestamp specifying when the event occurred.
@@ -193,8 +182,7 @@ export type WebMidi$MIDIMessageEvent = {
 } & Event
 
 
-declare
-export type WebMidi$MIDIMessageEventInit = {
+declare export type WebMidi$MIDIMessageEventInit = {
 
     /**
      * A timestamp specifying when the event occurred.
@@ -208,8 +196,7 @@ export type WebMidi$MIDIMessageEventInit = {
 } & EventInit
 
 
-declare
-export type WebMidi$MIDIConnectionEvent = {
+declare export type WebMidi$MIDIConnectionEvent = {
 
     /**
      * The port that has been connected or disconnected.
@@ -218,8 +205,7 @@ export type WebMidi$MIDIConnectionEvent = {
 } & Event
 
 
-declare
-export type WebMidi$MIDIConnectionEventInit = {
+declare export type WebMidi$MIDIConnectionEventInit = {
 
     /**
      * The port that has been connected or disconnected.

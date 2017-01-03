@@ -202,5 +202,4 @@ declare interface PebbleKit$Pebble {
          */
         openURL(url: string): void
 }
-declare
-var Pebble: PebbleKit$Pebble;
+declare var Pebble: PebbleKit$Pebble;

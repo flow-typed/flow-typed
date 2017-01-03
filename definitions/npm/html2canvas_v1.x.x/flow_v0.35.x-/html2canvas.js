@@ -96,5 +96,4 @@ declare type Html2CanvasPromise<R>= {
 declare module 'html2canvas' {
     declare module.exports: typeof html2canvas
 }
-declare
-var html2canvas: Html2CanvasStatic;
+declare var html2canvas: Html2CanvasStatic;

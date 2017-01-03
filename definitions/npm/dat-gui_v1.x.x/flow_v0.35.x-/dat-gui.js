@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class GUI {
+declare export class GUI {
     constructor(option?: dat$GUIParams): this;
     ___controllers: dat$GUIController[];
     ___folders: dat$GUI[];
@@ -35,8 +34,7 @@ export class GUI {
     remember(target: Object): void
 }
 
-declare
-export interface dat$GUIParams {
+declare export interface dat$GUIParams {
     autoPlace?: boolean,
         closed?: boolean,
         load?: any,
@@ -45,8 +43,7 @@ export interface dat$GUIParams {
         width?: number
 }
 
-declare
-export class GUIController {
+declare export class GUIController {
     destroy(): void;
     fire(): dat$GUIController;
     getValue(): any;

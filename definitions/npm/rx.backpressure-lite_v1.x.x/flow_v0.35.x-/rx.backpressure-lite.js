@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Rx$Observable<T>{
+declare export interface Rx$Observable<T>{
 
     /**
      * Pauses the underlying observable sequence based upon the observable sequence which yields true/false.
@@ -36,14 +35,12 @@ export interface Rx$Observable<T>{
     controlled(enableQueue?: boolean): Rx$ControlledObservable<T >
 }
 
-declare
-export type Rx$ControlledObservable<T>= {
+declare export type Rx$ControlledObservable<T>= {
     request(numberOfItems?: number): IDisposable
 } & Rx$Observable
 
 
-declare
-export type Rx$PausableObservable<T>= {
+declare export type Rx$PausableObservable<T>= {
     pause(): void,
     resume(): void
 } & Rx$Observable

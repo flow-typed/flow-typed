@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngWYSIWYG$Toolbar {
+declare export interface ngWYSIWYG$Toolbar {
     name: string,
         items: string[]
 }
 
-declare
-export interface ngWYSIWYG$Config {
+declare export interface ngWYSIWYG$Config {
     sanitize: boolean,
         toolbar?: ngWYSIWYG$Toolbar[]
 }

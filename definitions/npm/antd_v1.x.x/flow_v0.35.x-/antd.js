@@ -22,8 +22,7 @@ declare interface Antd$AffixProps {
 当内容区域比较长，需要滚动页面时，这部分内容对应的操作或者导航需要在滚动范围内始终展现。常用于侧边菜单和按钮组合。
 页面可视范围过小时，慎用此功能以免遮挡页面内容。
 */
-declare
-export class Affix mixins React.Component<Antd$AffixProps, {}>{
+declare export class Affix mixins React.Component<Antd$AffixProps, {}>{
     render(): JSX.Element
 }
 
@@ -75,8 +74,7 @@ declare interface Antd$AlertProps {
 - 当某个页面需要向用户显示警告的信息时。
 - 非浮层的静态展现形式，始终展现，不会自动消失，用户可以点击关闭。
 */
-declare
-export class Alert mixins React.Component<Antd$AlertProps, {}>{
+declare export class Alert mixins React.Component<Antd$AlertProps, {}>{
     render(): JSX.Element
 }
 
@@ -90,8 +88,7 @@ export class Alert mixins React.Component<Antd$AlertProps, {}>{
 
 一般出现在通知图标或头像的右上角，用于显示需要处理的消息条数，通过醒目视觉形式吸引用户处理。
 */
-declare
-export class Badge mixins React.Component<Antd$BadgeProps, {}>{
+declare export class Badge mixins React.Component<Antd$BadgeProps, {}>{
     render(): JSX.Element
 }
 
@@ -178,8 +175,7 @@ declare class ButtonGroup mixins React.Component<Antd$ButtonGroupProps, {}>{
 
 标记了一个（或封装一组）操作命令，响应用户点击行为，触发相应的业务逻辑。
 */
-declare
-export class Button mixins React.Component<Antd$ButtonProps, {}>{
+declare export class Button mixins React.Component<Antd$ButtonProps, {}>{
     Group: typeof ButtonGroup;
     render(): JSX.Element
 }
@@ -192,8 +188,7 @@ declare interface Antd$BreadcrumbItemProps {
     href?: string
 }
 
-declare
-export class BreadcrumbItem mixins React.Component<Antd$BreadcrumbItemProps, {}>{
+declare export class BreadcrumbItem mixins React.Component<Antd$BreadcrumbItemProps, {}>{
     render(): JSX.Element
 }
 
@@ -226,8 +221,7 @@ declare interface Antd$BreadcrumbProps {
 -当需要告知用户“你在哪里”时；
 -当需要向上导航的功能时。
 */
-declare
-export class Breadcrumb mixins React.Component<Antd$BreadcrumbProps, {}>{
+declare export class Breadcrumb mixins React.Component<Antd$BreadcrumbProps, {}>{
     Item: typeof BreadcrumbItem;
     render(): JSX.Element
 }
@@ -287,8 +281,7 @@ declare interface Antd$CalendarProps {
 
 当数据是日期或按照日期划分时，例如日程、课表、价格日历等，农历等。目前支持年/月切换。
 */
-declare
-export class Calendar mixins React.Component<Antd$CalendarProps, {}>{
+declare export class Calendar mixins React.Component<Antd$CalendarProps, {}>{
     render(): JSX.Element
 }
 
@@ -341,8 +334,7 @@ declare interface Antd$CarouselProps {
 -当内容空间不足时，可以用走马灯的形式进行收纳，进行轮播展现。
 -常用于一组图片或卡片轮播。
 */
-declare
-export class Carousel mixins React.Component<Antd$CarouselProps, {}>{
+declare export class Carousel mixins React.Component<Antd$CarouselProps, {}>{
     render(): JSX.Element
 }
 
@@ -426,8 +418,7 @@ declare interface Antd$CascaderProps {
 -从一个较大的数据集合中进行选择时，用多级分类进行分隔，方便选择。
 -比起 Select 组件，可以在同一个浮层中完成选择，有较好的体验。
 */
-declare
-export class Cascader mixins React.Component<Antd$CascaderProps, {}>{
+declare export class Cascader mixins React.Component<Antd$CascaderProps, {}>{
     render(): JSX.Element
 }
 
@@ -490,8 +481,7 @@ declare class CheckboxGroup mixins React.Component<Antd$CheckboxGroupProps, {}>{
 -在一组可选项中进行多项选择时；
 -单独使用可以表示两种状态之间的切换，和 `switch` 类似。区别在于切换 `switch` 会直接触发状态改变，而 `checkbox` 一般用于状态标记，需要和提交操作配合。
 */
-declare
-export class Checkbox mixins React.Component<Antd$CheckboxProps, {}>{
+declare export class Checkbox mixins React.Component<Antd$CheckboxProps, {}>{
     Group: typeof CheckboxGroup;
     render(): JSX.Element
 }
@@ -539,8 +529,7 @@ declare class CollapsePanel mixins React.Component<{
 -对复杂区域进行分组和隐藏，保持页面的整洁。
 -`手风琴` 是一种特殊的折叠面板，只允许单个内容区域展开。
 */
-declare
-export class Collapse mixins React.Component<Antd$CollapseProps, {}>{
+declare export class Collapse mixins React.Component<Antd$CollapseProps, {}>{
     Panel: typeof CollapsePanel;
     render(): JSX.Element
 }
@@ -621,8 +610,7 @@ declare class MonthPicker mixins React.Component<Antd$RangePickProps, {}>{
 
 当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。
 */
-declare
-export class DatePicker mixins React.Component<Antd$DatePickerProps<any>, {}>{
+declare export class DatePicker mixins React.Component<Antd$DatePickerProps<any>, {}>{
     RangePicker: typeof RangePicker;
     MonthPicker: typeof MonthPicker;
     render(): JSX.Element
@@ -675,8 +663,7 @@ declare class DropdownButton mixins React.Component<{
 
 当页面上的操作命令过多时，用此组件可以收纳操作元素。点击或移入触点，会出现一个下拉菜单。可在列表中进行选择，并执行相应的命令。
 */
-declare
-export class Dropdown mixins React.Component<Antd$DropdownProps, {}>{
+declare export class Dropdown mixins React.Component<Antd$DropdownProps, {}>{
     Button: typeof DropdownButton;
     render(): JSX.Element
 }
@@ -729,8 +716,7 @@ declare interface Antd$FormItemProps {
  * 
 这里我们分别封装了表单域 `<Form.Item />` 和输入控件 `<Input />`。
 */
-declare
-export class FormItem mixins React.Component<Antd$FormItemProps, {}>{
+declare export class FormItem mixins React.Component<Antd$FormItemProps, {}>{
     render(): JSX.Element
 }
 
@@ -738,8 +724,7 @@ declare interface Antd$FormComponentProps {
     form: Antd$CreateFormOptions
 }
 
-declare
-export class FormComponent mixins React.Component<Antd$FormComponentProps, {}>{
+declare export class FormComponent mixins React.Component<Antd$FormComponentProps, {}>{
     render(): JSX.Element
 }
 
@@ -871,8 +856,7 @@ declare interface Antd$FormProps {
 -水平排列：可以实现 `label` 标签和表单控件的水平排列;
 -行内排列：使其表现为 `inline-block` 级别的控件。
 */
-declare
-export class Form mixins React.Component<Antd$FormProps, {}>{
+declare export class Form mixins React.Component<Antd$FormProps, {}>{
     Item: typeof FormItem;
     create(
         options?: {
@@ -925,8 +909,7 @@ declare interface Antd$IconProps {
 <i class="anticon anticon-${type}"></i>
 ```
 */
-declare
-export class Icon mixins React.Component<Antd$IconProps, {}>{
+declare export class Icon mixins React.Component<Antd$IconProps, {}>{
     render(): JSX.Element
 }
 
@@ -968,8 +951,7 @@ declare interface Antd$InputProps {
         placeholder?: string
 }
 
-declare
-export class Input mixins React.Component<Antd$InputProps, {}>{
+declare export class Input mixins React.Component<Antd$InputProps, {}>{
     render(): JSX.Element
 }
 
@@ -1025,8 +1007,7 @@ declare interface Antd$InputNumberProps {
 
 当需要获取标准数值时。
 */
-declare
-export class InputNumber mixins React.Component<Antd$InputNumberProps, {}>{
+declare export class InputNumber mixins React.Component<Antd$InputNumberProps, {}>{
     render(): JSX.Element
 }
 
@@ -1037,8 +1018,7 @@ declare interface Antd$RowProps {
         className?: string
 }
 
-declare
-export class Row mixins React.Component<Antd$RowProps, {}>{
+declare export class Row mixins React.Component<Antd$RowProps, {}>{
     render(): JSX.Element
 }
 
@@ -1072,8 +1052,7 @@ declare interface Antd$ColProps {
 
 Flex 布局是基于 24 栅格来定义每一个“盒子”的宽度，但排版则不拘泥于栅格。
 */
-declare
-export class Col mixins React.Component<Antd$ColProps, {}>{
+declare export class Col mixins React.Component<Antd$ColProps, {}>{
     render(): JSX.Element
 }
 
@@ -1087,8 +1066,7 @@ declare interface Antd$MenuItemProps {
         key: string
 }
 
-declare
-export class MenuItem mixins React.Component<Antd$MenuItemProps, {}>{
+declare export class MenuItem mixins React.Component<Antd$MenuItemProps, {}>{
     render(): JSX.Element
 }
 
@@ -1107,8 +1085,7 @@ declare interface Antd$MenuSubMenuProps {
         children?: JSX.Element[]
 }
 
-declare
-export class MenuSubMenu mixins React.Component<Antd$MenuSubMenuProps, {}>{
+declare export class MenuSubMenu mixins React.Component<Antd$MenuSubMenuProps, {}>{
     render(): JSX.Element
 }
 
@@ -1127,8 +1104,7 @@ declare interface Antd$MenuItemGroupProps {
         children?: JSX.Element[]
 }
 
-declare
-export class MenuItemGroup mixins React.Component<Antd$MenuItemGroupProps, {}>{
+declare export class MenuItemGroup mixins React.Component<Antd$MenuItemGroupProps, {}>{
     render(): JSX.Element
 }
 
@@ -1197,8 +1173,7 @@ declare interface Antd$MenuProps {
 
 更多布局和导航的范例可以参考：[常用布局](/spec/layout)。
 */
-declare
-export class Menu mixins React.Component<Antd$MenuProps, {}>{
+declare export class Menu mixins React.Component<Antd$MenuProps, {}>{
     Item: typeof MenuItem;
     SubMenu: typeof MenuSubMenu;
     ItemGroup: typeof MenuItemGroup;
@@ -1208,8 +1183,7 @@ export class Menu mixins React.Component<Antd$MenuProps, {}>{
 
 declare type Antd$MessageFunc = (content: string, duration?: number) => void;
 
-declare
-export var message: {
+declare export var message: {
     success: Antd$MessageFunc,
     error: Antd$MessageFunc,
     info: Antd$MessageFunc,
@@ -1306,8 +1280,7 @@ declare interface Antd$ModalProps {
 
 另外当需要一个简洁的确认框询问用户时，可以使用精心封装好的 `ant.Modal.confirm()` 等方法。
 */
-declare
-export class Modal mixins React.Component<Antd$ModalProps, {}>{
+declare export class Modal mixins React.Component<Antd$ModalProps, {}>{
     info: Antd$ModalFunc;
     success: Antd$ModalFunc;
     error: Antd$ModalFunc;
@@ -1349,8 +1322,7 @@ declare type Antd$NotificationFunc = (
         duration?: number
     }) => void;
 
-declare
-export var notification: {
+declare export var notification: {
     success: Antd$NotificationFunc,
     error: Antd$NotificationFunc,
     info: Antd$NotificationFunc,
@@ -1444,8 +1416,7 @@ declare interface Antd$PaginationProps {
 -当加载/渲染所有数据将花费很多时间时；
 -可切换页码浏览数据。
 */
-declare
-export class Pagination mixins React.Component<Antd$PaginationProps, {}>{
+declare export class Pagination mixins React.Component<Antd$PaginationProps, {}>{
     render(): JSX.Element
 }
 
@@ -1495,8 +1466,7 @@ declare interface Antd$PopconfirmProps {
 
 和`confirm` 弹出的全屏居中模态对话框相比，交互形式更轻量。
 */
-declare
-export class Popconfirm mixins React.Component<Antd$PopconfirmProps, {}>{
+declare export class Popconfirm mixins React.Component<Antd$PopconfirmProps, {}>{
     render(): JSX.Element
 }
 
@@ -1545,8 +1515,7 @@ declare interface Antd$PopoverProps {
 
 和`Tooltip` 的区别是，用户可以对浮层上的元素进行操作，因此它可以承载更复杂的内容，比如链接或按钮等。
 */
-declare
-export class Popover mixins React.Component<Antd$PopoverProps, {}>{
+declare export class Popover mixins React.Component<Antd$PopoverProps, {}>{
     render(): JSX.Element
 }
 
@@ -1578,8 +1547,7 @@ declare interface Antd$LineProps {
         showInfo?: boolean
 }
 
-declare
-export class Line mixins React.Component<Antd$LineProps, {}>{
+declare export class Line mixins React.Component<Antd$LineProps, {}>{
     render(): JSX.Element
 }
 
@@ -1611,13 +1579,11 @@ declare interface Antd$CircleProps {
         width?: number
 }
 
-declare
-export class Circle mixins React.Component<Antd$CircleProps, {}>{
+declare export class Circle mixins React.Component<Antd$CircleProps, {}>{
     render(): JSX.Element
 }
 
-declare
-export var Progress: {
+declare export var Progress: {
     Line: typeof Line,
     Circle: typeof Circle
 };
@@ -1683,8 +1649,7 @@ declare interface Antd$QueueAnimProps {
 
 -特别适合首页和需要视觉展示效果的宣传页，以及单页应用的切换页面动效。
 */
-declare
-export class QueueAnim mixins React.Component<Antd$QueueAnimProps, {}>{
+declare export class QueueAnim mixins React.Component<Antd$QueueAnimProps, {}>{
     render(): JSX.Element
 }
 
@@ -1711,8 +1676,7 @@ declare interface Antd$RadioGroupProps {
         size?: RadioGroupSize | string
 }
 
-declare
-export class RadioGroup mixins React.Component<Antd$RadioGroupProps, {}>{
+declare export class RadioGroup mixins React.Component<Antd$RadioGroupProps, {}>{
     render(): JSX.Element
 }
 
@@ -1744,8 +1708,7 @@ declare interface Antd$RadioProps {
 -用于在多个备选项中选中单个状态。
 -和 Select 的区别是，Radio 所有选项默认可见，方便用户在比较中选择，因此选项不宜过多。
 */
-declare
-export class Radio mixins React.Component<Antd$RadioProps, {}>{
+declare export class Radio mixins React.Component<Antd$RadioProps, {}>{
     Group: typeof RadioGroup;
     Button: typeof Button;
     render(): JSX.Element
@@ -1769,8 +1732,7 @@ declare interface Antd$SelectOptionProps {
         value: string
 }
 
-declare
-export class SelectOption mixins React.Component<Antd$SelectOptionProps, {}>{
+declare export class SelectOption mixins React.Component<Antd$SelectOptionProps, {}>{
     render(): JSX.Element
 }
 
@@ -1783,8 +1745,7 @@ declare interface Antd$SelectOptGroupProps {
         key?: string
 }
 
-declare
-export class SelectOptGroup mixins React.Component<Antd$SelectOptGroupProps, {}>{
+declare export class SelectOptGroup mixins React.Component<Antd$SelectOptGroupProps, {}>{
     render(): JSX.Element
 }
 
@@ -1896,8 +1857,7 @@ declare interface Antd$SelectProps {
 
 弹出一个下拉菜单给用户选择操作，用于代替原生的选择器，或者需要一个更优雅的多选器时。
 */
-declare
-export class Select mixins React.Component<Antd$SelectProps, {}>{
+declare export class Select mixins React.Component<Antd$SelectProps, {}>{
     Option: typeof SelectOption;
     OptGroup: typeof SelectOptGroup;
     render(): JSX.Element
@@ -1979,8 +1939,7 @@ declare interface Antd$SliderProps {
 
 当用户需要在数值区间/自定义区间内进行选择时，可为连续或离散值。
 */
-declare
-export class Slider mixins React.Component<Antd$SliderProps, {}>{
+declare export class Slider mixins React.Component<Antd$SliderProps, {}>{
     render(): JSX.Element
 }
 
@@ -2006,8 +1965,7 @@ declare interface Antd$SpinProps {
 
 页面局部处于等待异步数据或正在渲染过程时，合适的加载动效会有效缓解用户的焦虑。
 */
-declare
-export class Spin mixins React.Component<Antd$SpinProps, {}>{
+declare export class Spin mixins React.Component<Antd$SpinProps, {}>{
     render(): JSX.Element
 }
 
@@ -2034,8 +1992,7 @@ declare interface Antd$StepProps {
         icon?: string | React.ReactNode
 }
 
-declare
-export class Step mixins React.Component<Antd$StepProps, {}>{
+declare export class Step mixins React.Component<Antd$StepProps, {}>{
     render(): JSX.Element
 }
 
@@ -2071,8 +2028,7 @@ declare interface Antd$StepsProps {
 
 当任务复杂或者存在先后关系时，将其分解成一系列步骤，从而简化任务。
 */
-declare
-export class Steps mixins React.Component<Antd$StepsProps, {}>{
+declare export class Steps mixins React.Component<Antd$StepsProps, {}>{
     Step: typeof Step;
     render(): JSX.Element
 }
@@ -2120,8 +2076,7 @@ declare interface Antd$SwitchProps {
 -需要表示开关状态/两种状态之间的切换时；
 -和 `checkbox `的区别是，切换 `switch` 会直接触发状态改变，而 `checkbox` 一般用于状态标记，需要和提交操作配合。
 */
-declare
-export class Switch mixins React.Component<Antd$SwitchProps, {}>{
+declare export class Switch mixins React.Component<Antd$SwitchProps, {}>{
     render(): JSX.Element
 }
 
@@ -2292,8 +2247,7 @@ declare interface Antd$TableProps {
 -当有大量结构化的数据需要展现时；
 -当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时。
 */
-declare
-export class Table mixins React.Component<Antd$TableProps, {}>{
+declare export class Table mixins React.Component<Antd$TableProps, {}>{
     render(): JSX.Element
 }
 
@@ -2305,8 +2259,7 @@ declare interface Antd$TabPaneProps {
     tab: React.ReactNode | string
 }
 
-declare
-export class TabPane mixins React.Component<Antd$TabPaneProps, {}>{
+declare export class TabPane mixins React.Component<Antd$TabPaneProps, {}>{
     render(): JSX.Element
 }
 
@@ -2368,8 +2321,7 @@ Ant Design 依次提供了三级选项卡，分别用于不同的场景。
 -标准线条式页签，用于容器内部的主功能切换，这是最常用的 Tabs。
 -[RadioButton](/components/radio/#demo-radiobutton) 可作为更次级的页签来使用。
 */
-declare
-export class Tabs mixins React.Component<Antd$TabsProps, {}>{
+declare export class Tabs mixins React.Component<Antd$TabsProps, {}>{
     TabPane: typeof TabPane;
     render(): JSX.Element
 }
@@ -2407,8 +2359,7 @@ declare interface Antd$TagProps {
 -用于标记事物的属性和维度。
 -进行分类。
 */
-declare
-export class Tag mixins React.Component<Antd$TagProps, {}>{
+declare export class Tag mixins React.Component<Antd$TagProps, {}>{
     render(): JSX.Element
 }
 
@@ -2480,8 +2431,7 @@ declare interface Antd$TimePickerProps {
 
 当用户需要输入一个时间，可以点击标准输入框，弹出时间面板进行选择。
 */
-declare
-export class TimePicker mixins React.Component<Antd$TimePickerProps, {}>{
+declare export class TimePicker mixins React.Component<Antd$TimePickerProps, {}>{
     render(): JSX.Element
 }
 
@@ -2493,8 +2443,7 @@ declare interface Antd$TimeLineItemProps {
     color?: string
 }
 
-declare
-export class TimeLineItem mixins React.Component<Antd$TimeLineItemProps, {}>{
+declare export class TimeLineItem mixins React.Component<Antd$TimeLineItemProps, {}>{
     render(): JSX.Element
 }
 
@@ -2516,8 +2465,7 @@ declare interface Antd$TimelineProps {
 -当有一系列信息需要从上至下按时间排列时；
 -需要有一条时间轴进行视觉上的串联时；
 */
-declare
-export class Timeline mixins React.Component<Antd$TimelineProps, {}>{
+declare export class Timeline mixins React.Component<Antd$TimelineProps, {}>{
     Item: typeof TimeLineItem;
     render(): JSX.Element
 }
@@ -2546,8 +2494,7 @@ declare interface Antd$TooltipProps {
 
 可用来代替系统默认的 `title` 提示，提供一个`按钮/文字/操作`的文案解释。
 */
-declare
-export class Tooltip mixins React.Component<Antd$TooltipProps, {}>{
+declare export class Tooltip mixins React.Component<Antd$TooltipProps, {}>{
     render(): JSX.Element
 }
 
@@ -2623,8 +2570,7 @@ declare interface Antd$TransferProps {
 
 用直观的方式在两栏中移动元素，完成选择行为。
 */
-declare
-export class Transfer mixins React.Component<Antd$TransferProps, {}>{
+declare export class Transfer mixins React.Component<Antd$TransferProps, {}>{
     render(): JSX.Element
 }
 
@@ -2636,8 +2582,7 @@ declare interface Antd$TreeNodeProps {
         isLeaf?: boolean
 }
 
-declare
-export class TreeNode mixins React.Component<Antd$TreeNodeProps, {}>{
+declare export class TreeNode mixins React.Component<Antd$TreeNodeProps, {}>{
     render(): JSX.Element
 }
 
@@ -2792,8 +2737,7 @@ declare interface Antd$TreeProps {
  * #Tree
  * 文件夹、组织架构、生物分类、国家地区等等，世间万物的大多数结构都是树形结构。使用`树控件`可以完整展现其中的层级关系，并具有展开收起选择等交互功能。
  */
-declare
-export class Tree mixins React.Component<Antd$TreeProps, {}>{
+declare export class Tree mixins React.Component<Antd$TreeProps, {}>{
     TreeNode: typeof TreeNode;
     render(): JSX.Element
 }
@@ -2822,8 +2766,7 @@ declare interface Antd$TreeSelectTreeNodeProps {
         isLeaf?: boolean
 }
 
-declare
-export class TreeSelectTreeNode mixins React.Component<Antd$TreeSelectTreeNodeProps, {}>{
+declare export class TreeSelectTreeNode mixins React.Component<Antd$TreeSelectTreeNodeProps, {}>{
     render(): JSX.Element
 }
 
@@ -2961,8 +2904,7 @@ declare interface Antd$TreeSelectProps {
 
 类似 Select 的选择控件，可选择的数据结构是一个树形结构时，可以使用 TreeSelect，例如公司层级、学科系统、分类目录等等。
 */
-declare
-export class TreeSelect mixins React.Component<Antd$TreeSelectProps, {}>{
+declare export class TreeSelect mixins React.Component<Antd$TreeSelectProps, {}>{
     TreeNode: typeof TreeSelectTreeNode;
     render(): JSX.Element
 }
@@ -3038,8 +2980,7 @@ declare interface Antd$UploadProps {
 -当需要展现上传的进度时。
 -当需要使用拖拽交互时。
 */
-declare
-export class Upload mixins React.Component<Antd$UploadProps, {}>{
+declare export class Upload mixins React.Component<Antd$UploadProps, {}>{
     render(): JSX.Element
 }
 declare module 'antd' {

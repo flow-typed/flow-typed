@@ -44,8 +44,7 @@ declare interface MustacheStatic {
         render(template: string, view: any, partials?: any): string,
         to_html(template: string, view: any, partials?: any, send?: any): any
 }
-declare
-var Mustache: MustacheStatic;
+declare var Mustache: MustacheStatic;
 declare module 'mustache' {
     declare module.exports: typeof Mustache
 }

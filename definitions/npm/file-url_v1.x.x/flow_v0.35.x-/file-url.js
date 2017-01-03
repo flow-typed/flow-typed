@@ -10,7 +10,6 @@
 /**
  * Convert a path to a file URL.
  */
-declare
-function fileUrl(path: string): stringdeclare module 'file-url' {
+declare function fileUrl(path: string): stringdeclare module 'file-url' {
     declare module.exports: typeof fileUrl
 }

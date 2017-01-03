@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var sweetAlert: SweetAlert$SweetAlertStatic;
-declare
-var swal: SweetAlert$SweetAlertStatic;
+declare var sweetAlert: SweetAlert$SweetAlertStatic;
+declare var swal: SweetAlert$SweetAlertStatic;
 declare module 'sweetalert' {
     declare module.exports: typeof swal
 }

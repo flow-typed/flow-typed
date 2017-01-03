@@ -355,8 +355,7 @@ declare type Axios$AxiosStatic = {
      */
     create<T>(config: Axios$AxiosXHRConfigBase<T>): Axios$AxiosInstance
 } & Axios$AxiosInstance
-declare
-var axios: Axios$AxiosStatic;
+declare var axios: Axios$AxiosStatic;
 declare module 'axios' {
     declare module.exports: typeof axios
 }

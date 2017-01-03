@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$ReactRouter: {
+declare var npm$namespace$ReactRouter: {
     createMemoryHistory: typeof ReactRouter$createMemoryHistory,
     applyRouterMiddleware: typeof ReactRouter$applyRouterMiddleware,
     withRouter: typeof ReactRouter$withRouter,
@@ -88,22 +87,18 @@ declare type ReactRouter$HistoryBase = {
 
 declare type ReactRouter$History = ReactRouter$HistoryBase & H.HistoryQueries & ReactRouter$HistoryRoutes;
 
-declare
-var browserHistory: ReactRouter$History;
+declare var browserHistory: ReactRouter$History;
 
-declare
-var hashHistory: ReactRouter$History;
+declare var hashHistory: ReactRouter$History;
 
-declare
-function ReactRouter$createMemoryHistory(options?: H.HistoryOptions): H.History
+declare function ReactRouter$createMemoryHistory(options?: H.HistoryOptions): H.History
 
 declare interface ReactRouter$Middleware {
     renderRouterContext: (previous: React.Props<{}>[], props: React.Props<{}>) => React.Props<{}>[],
         renderRouteComponent: (previous: React.Props<{}>[], props: React.Props<{}>) => React.Props<{}>[]
 }
 
-declare
-function ReactRouter$applyRouterMiddleware(
+declare function ReactRouter$applyRouterMiddleware(
     ...middlewares: ReactRouter$Middleware[]): (renderProps: React.Props<{}>) => React.Props<{}>[]
 
 declare type ReactRouter$RouterProps = {
@@ -121,8 +116,7 @@ declare type ReactRouter$Router = {}
 
 declare type ReactRouter$RouterElement = {}
 
-declare
-var Router: ReactRouter$Router;
+declare var Router: ReactRouter$Router;
 
 declare type ReactRouter$LinkProps = {
         activeStyle?: React.CSSProperties,
@@ -138,11 +132,9 @@ declare type ReactRouter$LinkProps = {
 
 declare type ReactRouter$LinkElement = {}
 
-declare
-var Link: ReactRouter$Link;
+declare var Link: ReactRouter$Link;
 
-declare
-var IndexLink: ReactRouter$Link;
+declare var IndexLink: ReactRouter$Link;
 
 declare type ReactRouter$RouterContextProps = {
     history?: H.History,
@@ -162,8 +154,7 @@ declare type ReactRouter$RouterContextElement = {
     router?: ReactRouter$Router
 }
 
-declare
-var RouterContext: ReactRouter$RouterContext;
+declare var RouterContext: ReactRouter$RouterContext;
 
 declare type ReactRouter$RouteProps = {
     path?: ReactRouter$RoutePattern,
@@ -190,8 +181,7 @@ declare type ReactRouter$Route = {}
 
 declare type ReactRouter$RouteElement = {}
 
-declare
-var Route: ReactRouter$Route;
+declare var Route: ReactRouter$Route;
 
 declare interface ReactRouter$PlainRoute {
     path?: ReactRouter$RoutePattern,
@@ -227,8 +217,7 @@ declare type ReactRouter$Redirect = {}
 
 declare type ReactRouter$RedirectElement = {}
 
-declare
-var Redirect: ReactRouter$Redirect;
+declare var Redirect: ReactRouter$Redirect;
 
 declare type ReactRouter$IndexRouteProps = {
     component?: ReactRouter$RouteComponent,
@@ -247,8 +236,7 @@ declare type ReactRouter$IndexRoute = {}
 
 declare type ReactRouter$IndexRouteElement = {}
 
-declare
-var IndexRoute: ReactRouter$IndexRoute;
+declare var IndexRoute: ReactRouter$IndexRoute;
 
 declare type ReactRouter$IndexRedirectProps = {
     to: ReactRouter$RoutePattern,
@@ -260,8 +248,7 @@ declare type ReactRouter$IndexRedirect = {}
 
 declare type ReactRouter$IndexRedirectElement = {}
 
-declare
-var IndexRedirect: ReactRouter$IndexRedirect;
+declare var IndexRedirect: ReactRouter$IndexRedirect;
 
 declare type ReactRouter$RouterOnContext = {
     setRouteLeaveHook(route: ReactRouter$PlainRoute, hook?: ReactRouter$RouteHook): () => void,
@@ -272,18 +259,15 @@ declare interface ReactRouter$HistoryMixin {
     history: ReactRouter$History
 }
 
-declare
-var History: React.Mixin<any, any>;
+declare var History: React.Mixin<any, any>;
 
 declare interface ReactRouter$LifecycleMixin {
     routerWillLeave(nextLocation: H.Location): string | boolean
 }
 
-declare
-var Lifecycle: React.Mixin<any, any>;
+declare var Lifecycle: React.Mixin<any, any>;
 
-declare
-var RouteContext: React.Mixin<any, any>;
+declare var RouteContext: React.Mixin<any, any>;
 
 declare interface ReactRouter$InjectedRouter {
     push: (pathOrLoc: H.LocationDescriptor) => void,
@@ -297,8 +281,7 @@ declare interface ReactRouter$InjectedRouter {
         isActive: (pathOrLoc: H.LocationDescriptor, indexOnly?: boolean) => boolean
 }
 
-declare
-function ReactRouter$withRouter<C>(component: C): C
+declare function ReactRouter$withRouter<C>(component: C): C
 
 declare interface ReactRouter$HistoryRoutes {
     listen(listener: ReactRouter$RouterListener): Function,
@@ -313,12 +296,10 @@ declare interface ReactRouter$HistoryRoutes {
         setRouteLeaveHook(route: ReactRouter$PlainRoute, callback: ReactRouter$RouteHook): void
 }
 
-declare
-function ReactRouter$useRoutes<T>(
+declare function ReactRouter$useRoutes<T>(
         createHistory: HistoryModule.CreateHistory<T>): HistoryModule.CreateHistory<T & ReactRouter$HistoryRoutes >
 
-    declare
-function ReactRouter$createRoutes(routes: ReactRouter$RouteConfig): ReactRouter$PlainRoute[]
+    declare function ReactRouter$createRoutes(routes: ReactRouter$RouteConfig): ReactRouter$PlainRoute[]
 
 declare interface ReactRouter$MatchArgs {
     routes?: ReactRouter$RouteConfig,
@@ -336,8 +317,7 @@ declare type ReactRouter$MatchState = {
 } & ReactRouter$RouterState
 
 
-declare
-function ReactRouter$match(
+declare function ReactRouter$match(
     args: ReactRouter$MatchArgs,
     cb: (
         error: any,

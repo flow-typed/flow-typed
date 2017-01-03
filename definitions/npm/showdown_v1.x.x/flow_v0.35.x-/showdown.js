@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Showdown: {
+declare var npm$namespace$Showdown: {
     setOption: typeof Showdown$setOption,
     getOption: typeof Showdown$getOption,
     getOptions: typeof Showdown$getOptions,
@@ -271,44 +270,38 @@ declare interface Showdown$ConverterStatic {
     new(converterOptions?: Showdown$ConverterOptions): Showdown$Converter
 }
 
-declare
-var Converter: Showdown$ConverterStatic;
+declare var Converter: Showdown$ConverterStatic;
 
 
 /**
  * Setting a "global" option affects all instances of showdown
  */
-declare
-function Showdown$setOption(optionKey: string, value: string): void
+declare function Showdown$setOption(optionKey: string, value: string): void
 
 
 /**
  * Retrieve previous set global option.
  * @param optionKey 
  */
-declare
-function Showdown$getOption(optionKey: string): any
+declare function Showdown$getOption(optionKey: string): any
 
 
 /**
  * Retrieve previous set global options.
  */
-declare
-function Showdown$getOptions(): Showdown$ShowdownOptions
+declare function Showdown$getOptions(): Showdown$ShowdownOptions
 
 
 /**
  * Reset options.
  */
-declare
-function Showdown$resetOptions(): void
+declare function Showdown$resetOptions(): void
 
 
 /**
  * Retrieve the default options.
  */
-declare
-function Showdown$getDefaultOptions(): Showdown$ShowdownOptions
+declare function Showdown$getDefaultOptions(): Showdown$ShowdownOptions
 
 
 /**
@@ -316,8 +309,7 @@ function Showdown$getDefaultOptions(): Showdown$ShowdownOptions
  * @prarm  name
  * @param extenstion 
  */
-declare
-function Showdown$extension(
+declare function Showdown$extension(
     name: string,
     extension: (() => Showdown$ShowdownExtension) | (() => Showdown$ShowdownExtension[]) | Showdown$ShowdownExtension): void
 
@@ -326,8 +318,7 @@ function Showdown$extension(
  * Get all extensions.
  * @return  all extensions.
  */
-declare
-function Showdown$getAllExtensions(): {
+declare function Showdown$getAllExtensions(): {
     [name: string]: Showdown$ShowdownExtension[]
 }
 
@@ -336,14 +327,12 @@ function Showdown$getAllExtensions(): {
  * Remove an extension.
  * @param name 
  */
-declare
-function Showdown$removeExtension(name: string): void
+declare function Showdown$removeExtension(name: string): void
 
 
 /**
  * Reset extensions.
  */
-declare
-function Showdown$resetExtensions(): voiddeclare module 'showdown' {
+declare function Showdown$resetExtensions(): voiddeclare module 'showdown' {
     declare module.exports: typeof Showdown
 }

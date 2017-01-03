@@ -309,5 +309,4 @@ declare module 'page' {
     declare var page: PageJS$Static;
     declare module.exports: typeof page
 }
-declare
-var page: PageJS$Static;
+declare var page: PageJS$Static;

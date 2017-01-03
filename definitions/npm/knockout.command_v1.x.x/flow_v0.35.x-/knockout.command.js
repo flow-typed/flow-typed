@@ -31,8 +31,7 @@ declare interface KnockoutUtils {
 declare interface KnockoutBindingHandlers {
     command: KnockoutBindingHandler
 }
-declare
-var kocommand: KnockoutCommandStatic;
+declare var kocommand: KnockoutCommandStatic;
 declare module 'kocommand' {
     declare module.exports: typeof kocommand
 }

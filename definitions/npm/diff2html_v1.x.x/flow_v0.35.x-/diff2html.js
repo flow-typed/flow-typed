@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Diff2Html$Options {
+declare export interface Diff2Html$Options {
     inputFormat?: string,
         outputFormat?: string,
         showFiles?: boolean,
@@ -17,16 +16,14 @@ export interface Diff2Html$Options {
         matchingMaxComparisons?: number
 }
 
-declare
-export interface Diff2Html$Line {
+declare export interface Diff2Html$Line {
     content: string,
         type: string,
         oldNumber: number,
         newNumber: number
 }
 
-declare
-export interface Diff2Html$Block {
+declare export interface Diff2Html$Block {
     oldStartLine: number,
         oldStartLine2?: number,
         newStartLine: number,
@@ -34,8 +31,7 @@ export interface Diff2Html$Block {
         lines: Diff2Html$Line[]
 }
 
-declare
-export interface Diff2Html$Result {
+declare export interface Diff2Html$Result {
     addedLines: number,
         deletedLines: number,
         isCombined: boolean,
@@ -59,8 +55,7 @@ export interface Diff2Html$Result {
         mode?: string
 }
 
-declare
-export interface Diff2Html$Diff2Html {
+declare export interface Diff2Html$Diff2Html {
     getJsonFromDiff(input: string, configuration?: Diff2Html$Options): Diff2Html$Result,
         getPrettyHtml(input: any, configuration?: Diff2Html$Options): string
 }

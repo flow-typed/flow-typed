@@ -101,8 +101,7 @@ declare interface IAccountingStatic {
         unformat(string: string, decimal?: string): number,
         settings: IAccountingSettings
 }
-declare
-var accounting: IAccountingStatic;
+declare var accounting: IAccountingStatic;
 declare module 'accounting' {
     declare module.exports: typeof accounting
 }

@@ -6,16 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var App: AppleTVJS$App;
-declare
-var Device: AppleTVJS$Device;
-declare
-var navigationDocument: AppleTVJS$NavigationDocument;
-declare
-var Settings: AppleTVJS$Settings;
-declare
-function evaluateScripts(scripts: string[], complete: (success: boolean) => void): voiddeclare interface AppleTVJS$App {
+declare var App: AppleTVJS$App;
+declare var Device: AppleTVJS$Device;
+declare var navigationDocument: AppleTVJS$NavigationDocument;
+declare var Settings: AppleTVJS$Settings;
+declare function evaluateScripts(scripts: string[], complete: (success: boolean) => void): voiddeclare interface AppleTVJS$App {
 
     /**
      * The onError attribute is used to handle any errors sent from the device.

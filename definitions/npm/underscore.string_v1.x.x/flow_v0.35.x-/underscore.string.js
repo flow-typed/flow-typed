@@ -10,8 +10,7 @@ declare interface UnderscoreStatic {
     str: UnderscoreStringStatic,
         string: UnderscoreStringStatic
 }
-declare
-var s: UnderscoreStringStatic;
+declare var s: UnderscoreStringStatic;
 declare type UnderscoreStringStatic = {
 
     /**

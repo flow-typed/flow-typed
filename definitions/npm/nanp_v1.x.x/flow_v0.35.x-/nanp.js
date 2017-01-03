@@ -23,8 +23,7 @@ declare interface Nanp {
      */
     strip(phoneNumber: string): string
 }
-declare
-var nanp: Nanp;
+declare var nanp: Nanp;
 declare module 'nanp' {
     declare module.exports: typeof nanp
 }

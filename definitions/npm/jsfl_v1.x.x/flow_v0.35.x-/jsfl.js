@@ -1757,11 +1757,6 @@ declare interface FlashFL {
         version: string,
         xmlui: FlashXMLUI
 }
-declare
-var fl: FlashFL;
-declare
-var FLfile: FlashFLfile;
-declare
-function alert(alertText: string): voiddeclare
-function confirm(strAlert: string): booleandeclare
-function prompt(promptMsg: string, text?: string): string
+declare var fl: FlashFL;
+declare var FLfile: FlashFLfile;
+declare function alert(alertText: string): voiddeclare function confirm(strAlert: string): booleandeclare function prompt(promptMsg: string, text?: string): string

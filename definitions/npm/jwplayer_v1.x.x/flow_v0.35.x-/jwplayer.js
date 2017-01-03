@@ -72,5 +72,4 @@ declare interface JWPlayer {
 declare interface JWPlayerStatic {
     (id: string): JWPlayer
 }
-declare
-var jwplayer: JWPlayerStatic;
+declare var jwplayer: JWPlayerStatic;

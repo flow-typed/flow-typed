@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Popcorn: PopcornStatic;
+declare var Popcorn: PopcornStatic;
 declare interface PopcornStatic {
     (callback: Function): PopcornImpl,
     (selector: string, options?: any): PopcornImpl,

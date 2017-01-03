@@ -25027,17 +25027,13 @@ declare interface mvc$at {
     (target: dojo.Stateful, targetProp: String): void
 }
 
-declare
-var both: number;
+declare var both: number;
 
-declare
-var from: number;
+declare var from: number;
 
-declare
-var handle: Object;
+declare var handle: Object;
 
-declare
-var to: number;
+declare var to: number;
 
 
 /**
@@ -25319,14 +25315,11 @@ declare interface mvc$sync {
     (source: dojo.Stateful, sourceProp: String, target: dojo.Stateful, targetProp: String, options: Object): void
 }
 
-declare
-var both: number;
+declare var both: number;
 
-declare
-var from: number;
+declare var from: number;
 
-declare
-var to: number;
+declare var to: number;
 
 
 /**

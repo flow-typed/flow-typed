@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class WebSocket {
+declare export class WebSocket {
     id: string;
     constructor(url: string, subprotocol?: string, settings?: any): this;
     on(
@@ -27,8 +26,7 @@ export class WebSocket {
     publish(topic: string, data: any): void
 }
 
-declare
-export interface XSockets$ConfirmationArgument {
+declare export interface XSockets$ConfirmationArgument {
     event: string
 }
 

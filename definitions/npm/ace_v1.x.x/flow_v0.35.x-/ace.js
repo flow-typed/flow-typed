@@ -6,24 +6,21 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface AceAjax$Delta {
+declare export interface AceAjax$Delta {
     action: string,
         range: AceAjax$Range,
         text: string,
         lines: string[]
 }
 
-declare
-export interface AceAjax$EditorCommand {
+declare export interface AceAjax$EditorCommand {
     name: string,
         bindKey: any,
         exec: Function,
         readOnly?: boolean
 }
 
-declare
-export interface AceAjax$CommandManager {
+declare export interface AceAjax$CommandManager {
     byName: any,
         commands: any,
         platform: string,
@@ -32,27 +29,23 @@ export interface AceAjax$CommandManager {
         exec(name: string, editor: AceAjax$Editor, args: any): void
 }
 
-declare
-export interface AceAjax$Annotation {
+declare export interface AceAjax$Annotation {
     row: number,
         column: number,
         text: string,
         type: string
 }
 
-declare
-export interface AceAjax$TokenInfo {
+declare export interface AceAjax$TokenInfo {
     value: string
 }
 
-declare
-export interface AceAjax$Position {
+declare export interface AceAjax$Position {
     row: number,
         column: number
 }
 
-declare
-export interface AceAjax$KeyBinding {
+declare export interface AceAjax$KeyBinding {
     setDefaultHandler(kb: any): void,
         setKeyboardHandler(kb: any): void,
         addKeyboardHandler(kb: any, pos: any): void,
@@ -62,8 +55,7 @@ export interface AceAjax$KeyBinding {
         onTextInput(text: any): void
 }
 
-declare
-export interface AceAjax$TextMode {
+declare export interface AceAjax$TextMode {
     getTokenizer(): any,
         toggleCommentLines(state: any, doc: any, startRow: any, endRow: any): void,
         getNextLineIndent(state: any, line: any, tab: any): string,
@@ -78,8 +70,7 @@ export interface AceAjax$TextMode {
 /**
  * The main class required to set up an Ace instance in the browser.
  */
-declare
-export interface AceAjax$Ace {
+declare export interface AceAjax$Ace {
 
     /**
      * Provides access to require in packed noconflict mode
@@ -118,8 +109,7 @@ export interface AceAjax$Ace {
 /**
  * Defines the floating pointer in the document. Whenever text is inserted or deleted before the cursor, the position of the cursor is updated.
  */
-declare
-export interface AceAjax$Anchor {
+declare export interface AceAjax$Anchor {
     on(event: string, fn: (e: any) => any): void,
 
         /**
@@ -156,8 +146,7 @@ export interface AceAjax$Anchor {
         detach(): void
 }
 
-declare
-var Anchor: {
+declare var Anchor: {
 
     /**
      * Creates a new `Anchor` and associates it with a document.
@@ -173,8 +162,7 @@ var Anchor: {
  * Tokenizes the current [[Document `Document`]] in the background, and caches the tokenized rows for future use.
  * If a certain row is changed, everything below that row is re-tokenized.
  */
-declare
-export interface AceAjax$BackgroundTokenizer {
+declare export interface AceAjax$BackgroundTokenizer {
     states: any[],
 
         /**
@@ -220,8 +208,7 @@ export interface AceAjax$BackgroundTokenizer {
         getState(row: number): string
 }
 
-declare
-var BackgroundTokenizer: {
+declare var BackgroundTokenizer: {
 
     /**
      * Creates a new `BackgroundTokenizer` object.
@@ -238,8 +225,7 @@ var BackgroundTokenizer: {
  * Contains the text of the document. Document can be attached to several [[EditSession `EditSession`]]s.
  * At its core, `Document`s are just an array of strings, with each row in the document matching up to the array index.
  */
-declare
-export interface AceAjax$Document {
+declare export interface AceAjax$Document {
     on(event: string, fn: (e: any) => any): void,
 
         /**
@@ -409,8 +395,7 @@ export interface AceAjax$Document {
         positionToIndex(pos: AceAjax$Position, startRow: number): number
 }
 
-declare
-var Document: {
+declare var Document: {
 
     /**
      * Creates a new `Document`. If `text` is included, the `Document` contains those strings; otherwise, it's empty.
@@ -430,8 +415,7 @@ var Document: {
  * Stores all the data about [[Editor `Editor`]] state providing easy way to change editors state.
  * `EditSession` can be attached to only one [[Document `Document`]]. Same `Document` can be attached to several `EditSession`s.
  */
-declare
-export interface AceAjax$IEditSession {
+declare export interface AceAjax$IEditSession {
     selection: AceAjax$Selection,
         bgTokenizer: AceAjax$BackgroundTokenizer,
         doc: AceAjax$Document,
@@ -972,8 +956,7 @@ export interface AceAjax$IEditSession {
         getScreenLength(): number
 }
 
-declare
-var EditSession: {
+declare var EditSession: {
 
     /**
      * Sets up a new `EditSession` and associates it with the given `Document` and `TextMode`.
@@ -991,8 +974,7 @@ var EditSession: {
  * The `Editor` manages the [[EditSession]] (which manages [[Document]]s), as well as the [[VirtualRenderer]], which draws everything to the screen.
 Event sessions dealing with the mouse and keyboard are bubbled up from `Document` to the `Editor`, which decides what to do with them.
 */
-declare
-export interface AceAjax$Editor {
+declare export interface AceAjax$Editor {
     on(ev: string, callback: (e: any) => any): void,
         addEventListener(ev: "change", callback: (ev: AceAjax$EditorChangeEvent) => any): void,
         addEventListener(ev: string, callback: Function): void,
@@ -1675,8 +1657,7 @@ export interface AceAjax$Editor {
         destroy(): void
 }
 
-declare
-var Editor: {
+declare var Editor: {
 
     /**
      * Creates a new `Editor` object.
@@ -1695,8 +1676,7 @@ declare interface AceAjax$EditorChangeEvent {
         lines: any[]
 }
 
-declare
-export interface AceAjax$PlaceHolder {
+declare export interface AceAjax$PlaceHolder {
     on(event: string, fn: (e: any) => any): void,
 
         /**
@@ -1742,8 +1722,7 @@ export interface AceAjax$PlaceHolder {
         cancel(): void
 }
 
-declare
-var PlaceHolder: {
+declare var PlaceHolder: {
 
     /**
      * - 
@@ -1773,8 +1752,7 @@ var PlaceHolder: {
         positions: AceAjax$Position[]): AceAjax$PlaceHolder
 };
 
-declare
-export interface AceAjax$IRangeList {
+declare export interface AceAjax$IRangeList {
     ranges: AceAjax$Range[],
         pointIndex(pos: AceAjax$Position, startIndex?: number): void,
         addList(ranges: AceAjax$Range[]): void,
@@ -1783,8 +1761,7 @@ export interface AceAjax$IRangeList {
         substractPoint(pos: AceAjax$Position): void
 }
 
-declare
-export var RangeList: {
+declare export var RangeList: {
     new(): AceAjax$IRangeList
 };
 
@@ -1792,8 +1769,7 @@ export var RangeList: {
 /**
  * This object is used in various places to indicate a region within the editor. To better visualize how this works, imagine a rectangle. Each quadrant of the rectangle is analogus to a range, as ranges contain a starting row and starting column, and an ending row, and ending column.
  */
-declare
-export interface AceAjax$Range {
+declare export interface AceAjax$Range {
     startRow: number,
         startColumn: number,
         endRow: number,
@@ -1971,8 +1947,7 @@ export interface AceAjax$Range {
         fromPoints(start: AceAjax$Range, end: AceAjax$Range): AceAjax$Range
 }
 
-declare
-var Range: {
+declare var Range: {
     fromPoints(pos1: AceAjax$Position, pos2: AceAjax$Position): AceAjax$Range,
     new(
         startRow: number,
@@ -1981,11 +1956,9 @@ var Range: {
         endColumn: number): AceAjax$Range
 };
 
-declare
-export interface AceAjax$RenderLoop {}
+declare export interface AceAjax$RenderLoop {}
 
-declare
-var RenderLoop: {
+declare var RenderLoop: {
     new(): AceAjax$RenderLoop
 };
 
@@ -1993,8 +1966,7 @@ var RenderLoop: {
 /**
  * A set of methods for setting and retrieving the editor's scrollbar.
  */
-declare
-export interface AceAjax$ScrollBar {
+declare export interface AceAjax$ScrollBar {
 
     /**
      * Emitted when the scroll bar, well, scrolls.
@@ -2026,8 +1998,7 @@ export interface AceAjax$ScrollBar {
         setScrollTop(scrollTop: number): void
 }
 
-declare
-var ScrollBar: {
+declare var ScrollBar: {
 
     /**
      * Creates a new `ScrollBar`. `parent` is the owner of the scroll bar.
@@ -2040,8 +2011,7 @@ var ScrollBar: {
 /**
  * A class designed to handle all sorts of text searches within a [[Document `Document`]].
  */
-declare
-export interface AceAjax$Search {
+declare export interface AceAjax$Search {
 
     /**
      * Sets the search options via the `options` parameter.
@@ -2082,8 +2052,7 @@ export interface AceAjax$Search {
         replace(input: string, replacement: string): string
 }
 
-declare
-var Search: {
+declare var Search: {
 
     /**
      * Creates a new `Search` object. The following search options are avaliable:
@@ -2105,8 +2074,7 @@ var Search: {
  * Contains the cursor position and the text selection of an edit session.
  * The row/columns used in the selection are in document coordinates representing ths coordinates as thez appear in the document before applying soft wrap and folding.
  */
-declare
-export interface AceAjax$Selection {
+declare export interface AceAjax$Selection {
     addEventListener(ev: string, callback: Function): void,
         moveCursorWordLeft(): void,
         moveCursorWordRight(): void,
@@ -2344,8 +2312,7 @@ export interface AceAjax$Selection {
         moveCursorToScreen(row: number, column: number, keepDesiredColumn: boolean): void
 }
 
-declare
-var Selection: {
+declare var Selection: {
 
     /**
      * Creates a new `Selection` object.
@@ -2354,8 +2321,7 @@ var Selection: {
     new(session: AceAjax$IEditSession): AceAjax$Selection
 };
 
-declare
-export interface AceAjax$Split {
+declare export interface AceAjax$Split {
 
     /**
      * Returns the number of splits.
@@ -2432,8 +2398,7 @@ export interface AceAjax$Split {
         resize(): void
 }
 
-declare
-var Split: {
+declare var Split: {
     new(): AceAjax$Split
 };
 
@@ -2441,8 +2406,7 @@ var Split: {
 /**
  * This class provides an essay way to treat the document as a stream of tokens, and provides methods to iterate over these tokens.
  */
-declare
-export interface AceAjax$TokenIterator {
+declare export interface AceAjax$TokenIterator {
 
     /**
      * Tokenizes all the items from the current point to the row prior in the document.
@@ -2470,8 +2434,7 @@ export interface AceAjax$TokenIterator {
         getCurrentTokenColumn(): number
 }
 
-declare
-var TokenIterator: {
+declare var TokenIterator: {
 
     /**
      * Creates a new token iterator object. The inital token index is set to the provided row and column coordinates.
@@ -2489,8 +2452,7 @@ var TokenIterator: {
 /**
  * This class takes a set of highlighting rules, and creates a tokenizer out of them. For more information, see [the wiki on extending highlighters](https://github.com/ajaxorg/ace/wiki/Creating-or-Extending-an-Edit-Mode#wiki-extendingTheHighlighter).
  */
-declare
-export interface AceAjax$Tokenizer {
+declare export interface AceAjax$Tokenizer {
 
     /**
      * Returns an object containing two properties: `tokens`, which contains all the tokens; and `state`, the current state.
@@ -2498,8 +2460,7 @@ export interface AceAjax$Tokenizer {
     getLineTokens(): any
 }
 
-declare
-var Tokenizer: {
+declare var Tokenizer: {
 
     /**
      * Constructs a new tokenizer based on the given rules and flags.
@@ -2513,8 +2474,7 @@ var Tokenizer: {
 /**
  * This object maintains the undo stack for an [[EditSession `EditSession`]].
  */
-declare
-export interface AceAjax$UndoManager {
+declare export interface AceAjax$UndoManager {
 
     /**
      * Provides a means for implementing your own undo manager. `options` has one property, `args`, an [[Array `Array`]], with two elements:
@@ -2562,8 +2522,7 @@ export interface AceAjax$UndoManager {
         markClean(): void
 }
 
-declare
-var UndoManager: {
+declare var UndoManager: {
 
     /**
      * Resets the current undo state and creates a new `UndoManager`.
@@ -2575,8 +2534,7 @@ var UndoManager: {
 /**
  * The class that is responsible for drawing everything you see on the screen!
  */
-declare
-export interface AceAjax$VirtualRenderer {
+declare export interface AceAjax$VirtualRenderer {
     scroller: any,
         characterWidth: number,
         lineHeight: number,
@@ -2906,8 +2864,7 @@ export interface AceAjax$VirtualRenderer {
         destroy(): void
 }
 
-declare
-var VirtualRenderer: {
+declare var VirtualRenderer: {
 
     /**
      * Constructs a new `VirtualRenderer` within the `container` specified, applying the given `theme`.
@@ -2916,5 +2873,4 @@ var VirtualRenderer: {
      */
     new(container: HTMLElement, theme?: string): AceAjax$VirtualRenderer
 };
-declare
-var ace: AceAjax$Ace;
+declare var ace: AceAjax$Ace;

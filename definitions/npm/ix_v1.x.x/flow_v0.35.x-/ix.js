@@ -6,15 +6,13 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Ix$Observer<T>{
+declare export interface Ix$Observer<T>{
     onNext(value: T): void,
     onError(error: Error): void,
     onCompleted(): void
 }
 
-declare
-export interface Ix$Enumerable<T>{
+declare export interface Ix$Enumerable<T>{
     isEmpty(): boolean,
     minBy<TKey>(
         keySelector: (item: T) => TKey,
@@ -70,8 +68,7 @@ export interface Ix$Enumerable<T>{
     retry(retryCount?: number): Ix$Enumerable<T >
 }
 
-declare
-export interface Ix$EnumerableStatic {
+declare export interface Ix$EnumerableStatic {
     throw <T>(error: Error): Ix$Enumerable<T>,
         throwException<T>(error: Error): Ix$Enumerable<T>,
         defer<T>(enumerableFactory: () => Ix$Enumerable<T>): Ix$Enumerable<T>,

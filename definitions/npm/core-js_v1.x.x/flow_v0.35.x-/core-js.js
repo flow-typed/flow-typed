@@ -526,8 +526,7 @@ declare interface SymbolConstructor {
              */
             userSetter(): void
 }
-declare
-var Symbol: SymbolConstructor;
+declare var Symbol: SymbolConstructor;
 declare interface Object {
 
     /**
@@ -560,8 +559,7 @@ declare interface MapConstructor {
         new<K, V>(iterable: Iterable<[K, V]>): Map<K, V>,
         prototype: Map<any, any >
 }
-declare
-var Map: MapConstructor;
+declare var Map: MapConstructor;
 declare interface Set<T>{
     add(value: T): Set<T>,
     clear(): void,
@@ -575,8 +573,7 @@ declare interface SetConstructor {
         new<T>(iterable: Iterable<T>): Set<T>,
         prototype: Set<any >
 }
-declare
-var Set: SetConstructor;
+declare var Set: SetConstructor;
 declare interface WeakMap<K, V>{
     delete(key: K): boolean,
     get(key: K): V,
@@ -589,8 +586,7 @@ declare interface WeakMapConstructor {
         new<K, V>(iterable: Iterable<[K, V]>): WeakMap<K, V>,
         prototype: WeakMap<any, any >
 }
-declare
-var WeakMap: WeakMapConstructor;
+declare var WeakMap: WeakMapConstructor;
 declare interface WeakSet<T>{
     add(value: T): WeakSet<T>,
     delete(value: T): boolean,
@@ -601,8 +597,7 @@ declare interface WeakSetConstructor {
         new<T>(iterable: Iterable<T>): WeakSet<T>,
         prototype: WeakSet<any >
 }
-declare
-var WeakSet: WeakSetConstructor;
+declare var WeakSet: WeakSetConstructor;
 declare interface IteratorResult<T>{
     done: boolean,
     value?: T
@@ -747,10 +742,8 @@ declare interface PromiseConstructor {
          */
         resolve(): Promise<void >
 }
-declare
-var Promise: PromiseConstructor;
-declare
-var npm$namespace$Reflect: {
+declare var Promise: PromiseConstructor;
+declare var npm$namespace$Reflect: {
     apply: typeof Reflect$apply,
     construct: typeof Reflect$construct,
     defineProperty: typeof Reflect$defineProperty,
@@ -766,47 +759,33 @@ var npm$namespace$Reflect: {
     set: typeof Reflect$set,
     setPrototypeOf: typeof Reflect$setPrototypeOf,
 }
-declare
-function Reflect$apply(target: Function, thisArgument: any, argumentsList: ArrayLike<any>): any
+declare function Reflect$apply(target: Function, thisArgument: any, argumentsList: ArrayLike<any>): any
 
-declare
-function Reflect$construct(target: Function, argumentsList: ArrayLike<any>, newTarget?: any): any
+declare function Reflect$construct(target: Function, argumentsList: ArrayLike<any>, newTarget?: any): any
 
-declare
-function Reflect$defineProperty(target: any, propertyKey: PropertyKey, attributes: PropertyDescriptor): boolean
+declare function Reflect$defineProperty(target: any, propertyKey: PropertyKey, attributes: PropertyDescriptor): boolean
 
-declare
-function Reflect$deleteProperty(target: any, propertyKey: PropertyKey): boolean
+declare function Reflect$deleteProperty(target: any, propertyKey: PropertyKey): boolean
 
-declare
-function Reflect$enumerate(target: any): IterableIterator<any >
+declare function Reflect$enumerate(target: any): IterableIterator<any >
 
-    declare
-function Reflect$get(target: any, propertyKey: PropertyKey, receiver?: any): any
+    declare function Reflect$get(target: any, propertyKey: PropertyKey, receiver?: any): any
 
-declare
-function Reflect$getOwnPropertyDescriptor(target: any, propertyKey: PropertyKey): PropertyDescriptor
+declare function Reflect$getOwnPropertyDescriptor(target: any, propertyKey: PropertyKey): PropertyDescriptor
 
-declare
-function Reflect$getPrototypeOf(target: any): any
+declare function Reflect$getPrototypeOf(target: any): any
 
-declare
-function Reflect$has(target: any, propertyKey: PropertyKey): boolean
+declare function Reflect$has(target: any, propertyKey: PropertyKey): boolean
 
-declare
-function Reflect$isExtensible(target: any): boolean
+declare function Reflect$isExtensible(target: any): boolean
 
-declare
-function Reflect$ownKeys(target: any): Array<PropertyKey >
+declare function Reflect$ownKeys(target: any): Array<PropertyKey >
 
-    declare
-function Reflect$preventExtensions(target: any): boolean
+    declare function Reflect$preventExtensions(target: any): boolean
 
-declare
-function Reflect$set(target: any, propertyKey: PropertyKey, value: any, receiver?: any): boolean
+declare function Reflect$set(target: any, propertyKey: PropertyKey, value: any, receiver?: any): boolean
 
-declare
-function Reflect$setPrototypeOf(target: any, proto: any): booleandeclare interface RegExpConstructor {
+declare function Reflect$setPrototypeOf(target: any, proto: any): booleandeclare interface RegExpConstructor {
     escape(str: string): string
 }
 declare type Log = {
@@ -814,8 +793,7 @@ declare type Log = {
     enable(): void,
     disable(): void
 } & Console
-declare
-var log: Log;
+declare var log: Log;
 declare interface Dict<T>{
     [key: string]: T,
     [key: number]: T
@@ -884,8 +862,7 @@ declare interface DictConstructor {
             callbackfn: (memo: Dict<T>, value: T, key: PropertyKey, dict: Dict<T>) => void,
             memo?: Dict<T>): Dict<T >
 }
-declare
-var Dict: DictConstructor;
+declare var Dict: DictConstructor;
 declare interface Date {
 
     /**
@@ -905,10 +882,8 @@ declare interface Number {
      */
     undefined(): IterableIterator<number >
 }
-declare
-function delay(msec: number): Promise<void >
-    declare
-var npm$namespace$core: {
+declare function delay(msec: number): Promise<void >
+    declare var npm$namespace$core: {
     setTimeout: typeof core$setTimeout,
     setInterval: typeof core$setInterval,
     setImmediate: typeof core$setImmediate,
@@ -919,12 +894,10 @@ var npm$namespace$core: {
     locale: typeof core$locale,
     delay: typeof core$delay,
 }
-declare
-var version: string;
+declare var version: string;
 
 
-declare
-var npm$namespace$Reflect: {
+declare var npm$namespace$Reflect: {
     apply: typeof Reflect$apply,
     construct: typeof Reflect$construct,
     defineProperty: typeof Reflect$defineProperty,
@@ -940,50 +913,35 @@ var npm$namespace$Reflect: {
     set: typeof Reflect$set,
     setPrototypeOf: typeof Reflect$setPrototypeOf,
 }
-declare
-function Reflect$apply(target: Function, thisArgument: any, argumentsList: ArrayLike<any>): any
+declare function Reflect$apply(target: Function, thisArgument: any, argumentsList: ArrayLike<any>): any
 
-declare
-function Reflect$construct(target: Function, argumentsList: ArrayLike<any>, newTarget?: any): any
+declare function Reflect$construct(target: Function, argumentsList: ArrayLike<any>, newTarget?: any): any
 
-declare
-function Reflect$defineProperty(target: any, propertyKey: PropertyKey, attributes: PropertyDescriptor): boolean
+declare function Reflect$defineProperty(target: any, propertyKey: PropertyKey, attributes: PropertyDescriptor): boolean
 
-declare
-function Reflect$deleteProperty(target: any, propertyKey: PropertyKey): boolean
+declare function Reflect$deleteProperty(target: any, propertyKey: PropertyKey): boolean
 
-declare
-function Reflect$enumerate(target: any): IterableIterator<any >
+declare function Reflect$enumerate(target: any): IterableIterator<any >
 
-    declare
-function Reflect$get(target: any, propertyKey: PropertyKey, receiver?: any): any
+    declare function Reflect$get(target: any, propertyKey: PropertyKey, receiver?: any): any
 
-declare
-function Reflect$getOwnPropertyDescriptor(target: any, propertyKey: PropertyKey): PropertyDescriptor
+declare function Reflect$getOwnPropertyDescriptor(target: any, propertyKey: PropertyKey): PropertyDescriptor
 
-declare
-function Reflect$getPrototypeOf(target: any): any
+declare function Reflect$getPrototypeOf(target: any): any
 
-declare
-function Reflect$has(target: any, propertyKey: PropertyKey): boolean
+declare function Reflect$has(target: any, propertyKey: PropertyKey): boolean
 
-declare
-function Reflect$isExtensible(target: any): boolean
+declare function Reflect$isExtensible(target: any): boolean
 
-declare
-function Reflect$ownKeys(target: any): Array<PropertyKey >
+declare function Reflect$ownKeys(target: any): Array<PropertyKey >
 
-    declare
-function Reflect$preventExtensions(target: any): boolean
+    declare function Reflect$preventExtensions(target: any): boolean
 
-declare
-function Reflect$set(target: any, propertyKey: PropertyKey, value: any, receiver?: any): boolean
+declare function Reflect$set(target: any, propertyKey: PropertyKey, value: any, receiver?: any): boolean
 
-declare
-function Reflect$setPrototypeOf(target: any, proto: any): boolean
+declare function Reflect$setPrototypeOf(target: any, proto: any): boolean
 
-declare
-var Object: {
+declare var Object: {
     getPrototypeOf(o: any): any,
     getOwnPropertyDescriptor(o: any, p: string): PropertyDescriptor,
     getOwnPropertyNames(o: any): string[],
@@ -1012,14 +970,12 @@ var Object: {
     make<T>(proto: T, mixin?: any): T
 };
 
-declare
-var Function: {
+declare var Function: {
     bind(target: Function, thisArg: any, ...argArray: any[]): any,
     part(target: Function, ...args: any[]): any
 };
 
-declare
-var Array: {
+declare var Array: {
     from<T,
     U>(
         arrayLike: ArrayLike<T>,
@@ -1110,8 +1066,7 @@ var Array: {
         memo?: U): U
 };
 
-declare
-var String: {
+declare var String: {
     codePointAt(text: string, pos: number): number,
     includes(text: string, searchString: string, position?: number): boolean,
     endsWith(text: string, searchString: string, endPosition?: number): boolean,
@@ -1126,16 +1081,14 @@ var String: {
     unescapeHTML(text: string): string
 };
 
-declare
-var Date: {
+declare var Date: {
     now(): number,
     toISOString(date: Date): string,
     format(date: Date, template: string, locale?: string): string,
     formatUTC(date: Date, template: string, locale?: string): string
 };
 
-declare
-var Number: {
+declare var Number: {
     EPSILON: number,
     isFinite(number: number): boolean,
     isInteger(number: number): boolean,
@@ -1165,8 +1118,7 @@ var Number: {
     random(lim?: number): number
 };
 
-declare
-var Math: {
+declare var Math: {
     clz32(x: number): number,
     imul(x: number, y: number): number,
     sign(x: number): number,
@@ -1186,52 +1138,37 @@ var Math: {
     cbrt(x: number): number
 };
 
-declare
-var RegExp: {
+declare var RegExp: {
     escape(str: string): string
 };
 
-declare
-var Map: MapConstructor;
+declare var Map: MapConstructor;
 
-declare
-var Set: SetConstructor;
+declare var Set: SetConstructor;
 
-declare
-var WeakMap: WeakMapConstructor;
+declare var WeakMap: WeakMapConstructor;
 
-declare
-var WeakSet: WeakSetConstructor;
+declare var WeakSet: WeakSetConstructor;
 
-declare
-var Promise: PromiseConstructor;
+declare var Promise: PromiseConstructor;
 
-declare
-var Symbol: SymbolConstructor;
+declare var Symbol: SymbolConstructor;
 
-declare
-var Dict: DictConstructor;
+declare var Dict: DictConstructor;
 
-declare
-var global: any;
+declare var global: any;
 
-declare
-var log: Log;
+declare var log: Log;
 
-declare
-var _: boolean;
+declare var _: boolean;
 
-declare
-function core$setTimeout(handler: any, timeout?: any, ...args: any[]): number
+declare function core$setTimeout(handler: any, timeout?: any, ...args: any[]): number
 
-declare
-function core$setInterval(handler: any, timeout?: any, ...args: any[]): number
+declare function core$setInterval(handler: any, timeout?: any, ...args: any[]): number
 
-declare
-function core$setImmediate(expression: any, ...args: any[]): number
+declare function core$setImmediate(expression: any, ...args: any[]): number
 
-declare
-function core$clearImmediate(handle: number): void
+declare function core$clearImmediate(handle: number): void
 
 declare type core$$for<T>= { of (callbackfn: (value: T, key: any) => void, thisArg?: any): void,
     array(): T[],
@@ -1241,25 +1178,20 @@ declare type core$$for<T>= { of (callbackfn: (value: T, key: any) => void, thisA
 } & IterableIterator
 
 
-declare
-function core$isIterable(value: any): boolean
+declare function core$isIterable(value: any): boolean
 
-declare
-function core$getIterator<T>(iterable: Iterable<T>): Iterator<T >
+declare function core$getIterator<T>(iterable: Iterable<T>): Iterator<T >
 
     declare interface core$Locale {
         weekdays: string,
             months: string
     }
 
-declare
-function core$addLocale(lang: string, locale: core$Locale): typeof core
+declare function core$addLocale(lang: string, locale: core$Locale): typeof core
 
-declare
-function core$locale(lang?: string): string
+declare function core$locale(lang?: string): string
 
-declare
-function core$delay(msec: number): Promise<void>declare module 'core-js' {
+declare function core$delay(msec: number): Promise<void>declare module 'core-js' {
     declare module.exports: typeof core
 }
 declare module 'core-js/shim' {

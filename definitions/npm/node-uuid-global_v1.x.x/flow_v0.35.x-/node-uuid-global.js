@@ -6,5 +6,4 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var uuid: ___NodeUUID.UUID;
+declare var uuid: ___NodeUUID.UUID;

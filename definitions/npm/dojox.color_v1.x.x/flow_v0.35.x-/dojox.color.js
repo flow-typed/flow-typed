@@ -149,8 +149,7 @@ declare interface color$Palette {
     (base: String): void
 }
 
-declare
-var generators: Object;
+declare var generators: Object;
 
 
 /**

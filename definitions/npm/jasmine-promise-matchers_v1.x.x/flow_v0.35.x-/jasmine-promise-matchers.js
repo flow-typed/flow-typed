@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function installPromiseMatchers(): voiddeclare interface jasmine$Matchers {
+declare function installPromiseMatchers(): voiddeclare interface jasmine$Matchers {
 
     /**
      * Verifies that a Promise is (or has been) rejected.

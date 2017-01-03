@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Rx$IScheduler {
+declare export interface Rx$IScheduler {
     catch (handler: (exception: any) => boolean): Rx$IScheduler,
     catchException(handler: (exception: any) => boolean): Rx$IScheduler
 }
 
-declare
-export interface Rx$Observer<T>{
+declare export interface Rx$Observer<T>{
     checked(): Rx$Observer<any >
 }
 
@@ -27,8 +25,7 @@ declare interface Rx$ObserverStatic {
     notifyOn<T>(scheduler: Rx$IScheduler): Rx$Observer<T >
 }
 
-declare
-export interface Rx$Observable<T>{
+declare export interface Rx$Observable<T>{
     observeOn(scheduler: Rx$IScheduler): Rx$Observable<T>,
     subscribeOn(scheduler: Rx$IScheduler): Rx$Observable<T>,
     amb(rightSource: Rx$Observable<T>): Rx$Observable<T>,

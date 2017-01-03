@@ -13,35 +13,26 @@ declare interface Minilog {
         warn(...msg: any[]): Minilog,
         error(...msg: any[]): Minilog
 }
-declare
-var npm$namespace$Minilog: {
+declare var npm$namespace$Minilog: {
     enable: typeof Minilog$enable,
     disable: typeof Minilog$disable,
     pipe: typeof Minilog$pipe,
 }
-declare
-export function Minilog$enable(): Minilog
+declare export function Minilog$enable(): Minilog
 
-declare
-export function Minilog$disable(): Minilog
+declare export function Minilog$disable(): Minilog
 
-declare
-export function Minilog$pipe(dest: any): Minilog$Transform
+declare export function Minilog$pipe(dest: any): Minilog$Transform
 
-declare
-export var suggest: Minilog$Filter;
+declare export var suggest: Minilog$Filter;
 
-declare
-export var backends: Minilog$MinilogBackends;
+declare export var backends: Minilog$MinilogBackends;
 
-declare
-export var defaultBackend: any;
+declare export var defaultBackend: any;
 
-declare
-export var defaultFormatter: string;
+declare export var defaultFormatter: string;
 
-declare
-export class Filter mixins Transform {
+declare export class Filter mixins Transform {
 
     /**
      * Adds an entry to the whitelist
@@ -75,8 +66,7 @@ export class Filter mixins Transform {
     enabled: boolean
 }
 
-declare
-export interface Minilog$MinilogBackends {
+declare export interface Minilog$MinilogBackends {
     array: any,
         browser: any,
         console: Minilog$Console,
@@ -84,8 +74,7 @@ export interface Minilog$MinilogBackends {
         jQuery: any
 }
 
-declare
-export class Console mixins Transform {
+declare export class Console mixins Transform {
 
     /**
      * List of available formatters
@@ -101,8 +90,7 @@ export class Console mixins Transform {
     formatWithStack: Minilog$Transform
 }
 
-declare
-export class Transform {
+declare export class Transform {
     write(name: any, level: any, args: any): void;
     pipe(dest: any): any;
     unpipe(from: any): Minilog$Transform;

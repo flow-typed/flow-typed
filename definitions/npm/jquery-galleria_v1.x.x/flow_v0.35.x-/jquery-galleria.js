@@ -33,5 +33,4 @@ declare interface GalleriaJS$GalleriaFactory {
         load(data: GalleriaJS$GalleriaEntry[]): GalleriaJS$GalleriaFactory,
         setOptions(options: GalleriaJS$GalleriaOptions): GalleriaJS$GalleriaFactory
 }
-declare
-var Galleria: GalleriaJS$GalleriaFactory;
+declare var Galleria: GalleriaJS$GalleriaFactory;

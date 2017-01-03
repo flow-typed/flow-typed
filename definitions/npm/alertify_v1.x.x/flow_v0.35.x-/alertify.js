@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var alertify: alertify$IAlertifyStatic;
+declare var alertify: alertify$IAlertifyStatic;
 declare interface alertify$IAlertifyStatic {
 
     /**

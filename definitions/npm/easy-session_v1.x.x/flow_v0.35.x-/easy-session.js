@@ -10,8 +10,7 @@ declare interface Express$ErrorCallback {
     (err?: any): void
 }
 
-declare
-export interface Express$Session {
+declare export interface Express$Session {
     login(callback: Function): void,
         login(extend: Object, callback: Express$ErrorCallback): void,
         login(role: string, callback: Express$ErrorCallback): void,

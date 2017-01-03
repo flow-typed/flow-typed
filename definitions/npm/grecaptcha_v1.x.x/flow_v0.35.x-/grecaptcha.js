@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var grecaptcha: ReCaptchaV2$ReCaptcha;
+declare var grecaptcha: ReCaptchaV2$ReCaptcha;
 declare class ReCaptcha {
 
     /**

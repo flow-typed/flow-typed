@@ -119,8 +119,7 @@ declare interface PapaParse$Parser {
         abort(): void,
         getCharIndex(): number
 }
-declare
-var Papa: PapaParse$Static;
+declare var Papa: PapaParse$Static;
 declare module 'papaparse' {
     declare var Papa: PapaParse$Static;
     declare module.exports: typeof Papa

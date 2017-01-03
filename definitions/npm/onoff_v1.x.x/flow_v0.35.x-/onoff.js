@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var version: string;
+declare var version: string;
 
 declare interface ___ONOFF$GpioOptions {
     debounceTimeout: number

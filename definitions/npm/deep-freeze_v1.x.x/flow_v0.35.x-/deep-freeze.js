@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface DeepFreeze$DeepFreezeInterface {
+declare export interface DeepFreeze$DeepFreezeInterface {
     (obj: T): T
 }
 declare module 'deep-freeze' {

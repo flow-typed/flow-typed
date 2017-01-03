@@ -398,5 +398,4 @@ declare interface TwitterIntentEventData {
          */
         user_id?: string
 }
-declare
-var twttr: Twitter;
+declare var twttr: Twitter;

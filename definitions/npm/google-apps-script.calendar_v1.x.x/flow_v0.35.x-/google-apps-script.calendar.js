@@ -308,5 +308,4 @@ declare module 'Calendar' {
             weekStartsOn(day: Base.Weekday): RecurrenceRule
     }
 }
-declare
-var CalendarApp: undefined.CalendarApp;
+declare var CalendarApp: undefined.CalendarApp;

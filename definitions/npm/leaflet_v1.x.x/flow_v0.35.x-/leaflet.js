@@ -7,8 +7,7 @@
  */
 
 declare type NativeMouseEvent = L$MouseEvent;
-declare
-var npm$namespace$L: {
+declare var npm$namespace$L: {
     latLng: typeof L$latLng,
     latLngBounds: typeof L$latLngBounds,
     point: typeof L$point,
@@ -33,16 +32,14 @@ var npm$namespace$L: {
     divIcon: typeof L$divIcon,
     marker: typeof L$marker,
 }
-declare
-export class Class {
+declare export class Class {
     extend(props: any): any;
     include(props: any): any;
     mergeOptions(props: any): any;
     addInitHook(initHookFn: () => void): any
 }
 
-declare
-export class DomUtil {
+declare export class DomUtil {
     get(id: string): HTMLElement;
     get(id: HTMLElement): HTMLElement;
     getStyle(el: HTMLElement, styleAttrib: string): string;
@@ -69,8 +66,7 @@ export class DomUtil {
     restoreOutline(): void
 }
 
-declare
-export interface L$CRS {
+declare export interface L$CRS {
     latLngToPoint(latlng: L$LatLng, zoom: number): L$Point,
         latLngToPoint(latlng: L$LatLngLiteral, zoom: number): L$Point,
         latLngToPoint(latlng: L$LatLngTuple, zoom: number): L$Point,
@@ -96,23 +92,17 @@ export interface L$CRS {
         infinite: boolean
 }
 
-declare
-export var EPSG3395: L$CRS;
+declare export var EPSG3395: L$CRS;
 
-declare
-export var EPSG3857: L$CRS;
+declare export var EPSG3857: L$CRS;
 
-declare
-export var EPSG4326: L$CRS;
+declare export var EPSG4326: L$CRS;
 
-declare
-export var Earth: L$CRS;
+declare export var Earth: L$CRS;
 
-declare
-export var Simple: L$CRS;
+declare export var Simple: L$CRS;
 
-declare
-export interface L$Projection {
+declare export interface L$Projection {
     project(latlng: L$LatLng): L$Point,
         project(latlng: L$LatLngLiteral): L$Point,
         project(latlng: L$LatLngTuple): L$Point,
@@ -121,17 +111,13 @@ export interface L$Projection {
         bounds: L$LatLngBounds
 }
 
-declare
-export var LonLat: L$Projection;
+declare export var LonLat: L$Projection;
 
-declare
-export var Mercator: L$Projection;
+declare export var Mercator: L$Projection;
 
-declare
-export var SphericalMercator: L$Projection;
+declare export var SphericalMercator: L$Projection;
 
-declare
-export interface L$LatLng {
+declare export interface L$LatLng {
     equals(otherLatLng: L$LatLng, maxMargin?: number): boolean,
         equals(otherLatLng: L$LatLngLiteral, maxMargin?: number): boolean,
         equals(otherLatLng: L$LatLngTuple, maxMargin?: number): boolean,
@@ -146,22 +132,18 @@ export interface L$LatLng {
         alt: number
 }
 
-declare
-export interface L$LatLngLiteral {
+declare export interface L$LatLngLiteral {
     lat: number,
         lng: number
 }
 
-declare
-export type L$LatLngTuple = [number, number];
+declare export type L$LatLngTuple = [number, number];
 
 declare type L$LatLngExpression = L$LatLng | L$LatLngLiteral | L$LatLngTuple;
 
-declare
-export function L$latLng(latitude: number, longitude: number, altitude?: number): L$LatLng
+declare export function L$latLng(latitude: number, longitude: number, altitude?: number): L$LatLng
 
-declare
-export interface L$LatLngBounds {
+declare export interface L$LatLngBounds {
     extend(latlng: L$LatLng): this,
         extend(latlng: L$LatLngLiteral): this,
         extend(latlng: L$LatLngTuple): this,
@@ -192,19 +174,15 @@ export interface L$LatLngBounds {
         isValid(): boolean
 }
 
-declare
-export type L$LatLngBoundsLiteral = Array<L$LatLngTuple>;
+declare export type L$LatLngBoundsLiteral = Array<L$LatLngTuple>;
 
 declare type L$LatLngBoundsExpression = L$LatLngBounds | L$LatLngBoundsLiteral;
 
-declare
-export function L$latLngBounds(southWest: L$LatLng, northEast: L$LatLng): L$LatLngBounds
+declare export function L$latLngBounds(southWest: L$LatLng, northEast: L$LatLng): L$LatLngBounds
 
-declare
-export type L$PointTuple = [number, number];
+declare export type L$PointTuple = [number, number];
 
-declare
-export interface L$Point {
+declare export interface L$Point {
     clone(): L$Point,
         add(otherPoint: L$Point): L$Point,
         add(otherPoint: L$PointTuple): L$Point,
@@ -230,14 +208,11 @@ export interface L$Point {
 
 declare type L$PointExpression = L$Point | L$PointTuple;
 
-declare
-export function L$point(x: number, y: number, round?: boolean): L$Point
+declare export function L$point(x: number, y: number, round?: boolean): L$Point
 
-declare
-export type L$BoundsLiteral = Array<L$PointTuple>;
+declare export type L$BoundsLiteral = Array<L$PointTuple>;
 
-declare
-export interface L$Bounds {
+declare export interface L$Bounds {
     extend(point: L$Point): this,
         extend(point: L$PointTuple): this,
         getCenter(round?: boolean): L$Point,
@@ -258,14 +233,11 @@ export interface L$Bounds {
 
 declare type L$BoundsExpression = L$Bounds | L$BoundsLiteral;
 
-declare
-export function L$bounds(topLeft: L$Point, bottomRight: L$Point): L$Bounds
+declare export function L$bounds(topLeft: L$Point, bottomRight: L$Point): L$Bounds
 
-declare
-export type L$EventHandlerFn = (event: L$Event) => void;
+declare export type L$EventHandlerFn = (event: L$Event) => void;
 
-declare
-export type L$EventHandlerFnMap = {
+declare export type L$EventHandlerFnMap = {
     [type: string]: L$EventHandlerFn
 };
 
@@ -276,8 +248,7 @@ export type L$EventHandlerFnMap = {
 with an object (e.g. the user clicks on the map, causing the map to fire
 'click' event).
 */
-declare
-export type L$Evented = {
+declare export type L$Evented = {
 
     /**
      * Adds a listener function (fn) to a particular event type of the object.
@@ -424,8 +395,7 @@ declare type L$InteractiveLayerOptions = {
 } & L$LayerOptions
 
 
-declare
-export type L$Layer = {
+declare export type L$Layer = {
     addTo(map: L$Map): this,
     remove(): this,
     removeFrom(map: L$Map): this,
@@ -472,8 +442,7 @@ export type L$Layer = {
 } & L$Evented
 
 
-declare
-export interface L$GridLayerOptions {
+declare export interface L$GridLayerOptions {
     tileSize?: number | L$Point,
         opacity?: number,
         updateWhenIdle?: boolean,
@@ -490,8 +459,7 @@ export interface L$GridLayerOptions {
         keepBuffer?: number
 }
 
-declare
-export type L$GridLayer = {
+declare export type L$GridLayer = {
     bringToFront(): this,
     bringToBack(): this,
     getAttribution(): string,
@@ -504,11 +472,9 @@ export type L$GridLayer = {
 } & L$Layer
 
 
-declare
-export function L$gridLayer(options?: L$GridLayerOptions): L$GridLayer
+declare export function L$gridLayer(options?: L$GridLayerOptions): L$GridLayer
 
-declare
-export type L$TileLayerOptions = {
+declare export type L$TileLayerOptions = {
     minZoom?: number,
     maxZoom?: number,
     maxNativeZoom?: number,
@@ -523,17 +489,14 @@ export type L$TileLayerOptions = {
 } & L$GridLayerOptions
 
 
-declare
-export type L$TileLayer = {
+declare export type L$TileLayer = {
     setUrl(url: string, noRedraw?: boolean): this
 } & L$GridLayer
 
 
-declare
-export function L$tileLayer(urlTemplate: string, options?: L$TileLayerOptions): L$TileLayer
+declare export function L$tileLayer(urlTemplate: string, options?: L$TileLayerOptions): L$TileLayer
 
-declare
-export type L$WMSOptions = {
+declare export type L$WMSOptions = {
     layers: string,
     styles?: string,
     format?: string,
@@ -544,22 +507,18 @@ export type L$WMSOptions = {
 } & L$TileLayerOptions
 
 
-declare
-export type L$WMS = {
+declare export type L$WMS = {
     setParams(params: Object, noRedraw?: boolean): this
 } & L$TileLayer
 
 
 
-declare
-var npm$namespace$tileLayer: {
+declare var npm$namespace$tileLayer: {
     wms: typeof tileLayer$wms,
 }
-declare
-export function tileLayer$wms(baseUrl: string, options: L$WMSOptions): L$WMS
+declare export function tileLayer$wms(baseUrl: string, options: L$WMSOptions): L$WMS
 
-declare
-export type L$ImageOverlayOptions = {
+declare export type L$ImageOverlayOptions = {
     opacity?: number,
     alt?: string,
     interactive?: boolean,
@@ -568,8 +527,7 @@ export type L$ImageOverlayOptions = {
 } & L$LayerOptions
 
 
-declare
-export type L$ImageOverlay = {
+declare export type L$ImageOverlay = {
     setOpacity(opacity: number): this,
     bringToFront(): this,
     bringToBack(): this,
@@ -577,23 +535,18 @@ export type L$ImageOverlay = {
 } & L$Layer
 
 
-declare
-export function L$imageOverlay(
+declare export function L$imageOverlay(
     imageUrl: string,
     bounds: L$LatLngBoundsExpression,
     options?: L$ImageOverlayOptions): L$ImageOverlay
 
-declare
-export type L$LineCapShape = "butt" | "round" | "square" | "inherit";
+declare export type L$LineCapShape = "butt" | "round" | "square" | "inherit";
 
-declare
-export type L$LineJoinShape = "miter" | "round" | "bevel" | "inherit";
+declare export type L$LineJoinShape = "miter" | "round" | "bevel" | "inherit";
 
-declare
-export type L$FillRule = "nonzero" | "evenodd" | "inherit";
+declare export type L$FillRule = "nonzero" | "evenodd" | "inherit";
 
-declare
-export type L$PathOptions = {
+declare export type L$PathOptions = {
     stroke?: boolean,
     color?: string,
     weight?: number,
@@ -611,8 +564,7 @@ export type L$PathOptions = {
 } & L$InteractiveLayerOptions
 
 
-declare
-export type L$Path = {
+declare export type L$Path = {
     redraw(): this,
     setStyle(style: L$PathOptions): this,
     bringToFront(): this,
@@ -620,8 +572,7 @@ export type L$Path = {
 } & L$Layer
 
 
-declare
-export type L$PolylineOptions = {
+declare export type L$PolylineOptions = {
     smoothFactor?: number,
     noClip?: boolean
 } & L$PathOptions
@@ -644,42 +595,34 @@ declare type L$InternalPolyline = {
 } & L$Path
 
 
-declare
-export type L$Polyline = {
+declare export type L$Polyline = {
     toGeoJSON(): GeoJSON.LineString | GeoJSON.MultiLineString
 } & L$InternalPolyline
 
 
-declare
-export function L$polyline(latlngs: Array<L$LatLng>, options?: L$PolylineOptions): L$Polyline
+declare export function L$polyline(latlngs: Array<L$LatLng>, options?: L$PolylineOptions): L$Polyline
 
-declare
-export type L$Polygon = {
+declare export type L$Polygon = {
     toGeoJSON(): GeoJSON.Polygon | GeoJSON.MultiPolygon
 } & L$InternalPolyline
 
 
-declare
-export function L$polygon(latlngs: Array<L$LatLng>, options?: L$PolylineOptions): L$Polygon
+declare export function L$polygon(latlngs: Array<L$LatLng>, options?: L$PolylineOptions): L$Polygon
 
-declare
-export type L$Rectangle = {
+declare export type L$Rectangle = {
     setBounds(latLngBounds: L$LatLngBounds): this,
     setBounds(latLngBounds: L$LatLngBoundsLiteral): this
 } & L$Polygon
 
 
-declare
-export function L$rectangle(latLngBounds: L$LatLngBounds, options?: L$PolylineOptions): L$Rectangle
+declare export function L$rectangle(latLngBounds: L$LatLngBounds, options?: L$PolylineOptions): L$Rectangle
 
-declare
-export type L$CircleMarkerOptions = {
+declare export type L$CircleMarkerOptions = {
     radius?: number
 } & L$PathOptions
 
 
-declare
-export type L$CircleMarker = {
+declare export type L$CircleMarker = {
     toGeoJSON(): GeoJSON.Point,
     setLatLng(latLng: L$LatLng): this,
     setLatLng(latLng: L$LatLngLiteral): this,
@@ -690,61 +633,48 @@ export type L$CircleMarker = {
 } & L$Path
 
 
-declare
-export function L$circleMarker(latlng: L$LatLng, options?: L$CircleMarkerOptions): L$CircleMarker
+declare export function L$circleMarker(latlng: L$LatLng, options?: L$CircleMarkerOptions): L$CircleMarker
 
-declare
-export type L$CircleOptions = {
+declare export type L$CircleOptions = {
     radius?: number
 } & L$PathOptions
 
 
-declare
-export type L$Circle = {
+declare export type L$Circle = {
     setRadius(radius: number): this,
     getRadius(): number,
     getBounds(): L$LatLngBounds
 } & L$CircleMarker
 
 
-declare
-export function L$circle(latlng: L$LatLng, options?: L$CircleOptions): L$Circle
+declare export function L$circle(latlng: L$LatLng, options?: L$CircleOptions): L$Circle
 
-declare
-export type L$RendererOptions = {
+declare export type L$RendererOptions = {
     padding?: number
 } & L$LayerOptions
 
 
-declare
-export type L$Renderer = {} & L$Layer
+declare export type L$Renderer = {} & L$Layer
 
 
-declare
-export type L$SVG = {} & L$Renderer
+declare export type L$SVG = {} & L$Renderer
 
 
 
-declare
-var npm$namespace$SVG: {
+declare var npm$namespace$SVG: {
     create: typeof SVG$create,
     pointsToPath: typeof SVG$pointsToPath,
 }
-declare
-export function SVG$create(name: string): SVGElement
+declare export function SVG$create(name: string): SVGElement
 
-declare
-export function SVG$pointsToPath(rings: Array<L$Point>, close: boolean): string
+declare export function SVG$pointsToPath(rings: Array<L$Point>, close: boolean): string
 
-declare
-export function L$svg(options?: L$RendererOptions): L$SVG
+declare export function L$svg(options?: L$RendererOptions): L$SVG
 
-declare
-export type L$Canvas = {} & L$Renderer
+declare export type L$Canvas = {} & L$Renderer
 
 
-declare
-export function L$canvas(options?: L$RendererOptions): L$Canvas
+declare export function L$canvas(options?: L$RendererOptions): L$Canvas
 
 
 /**
@@ -752,8 +682,7 @@ export function L$canvas(options?: L$RendererOptions): L$Canvas
  * If you add it to the map, any layers added or removed from the group will be
 added/removed on the map as well. Extends Layer.
 */
-declare
-export type L$LayerGroup = {
+declare export type L$LayerGroup = {
 
     /**
      * Returns a GeoJSON representation of the layer group (as a GeoJSON GeometryCollection).
@@ -823,16 +752,14 @@ export type L$LayerGroup = {
 /**
  * Create a layer group, optionally given an initial set of layers.
  */
-declare
-export function L$layerGroup(layers: Array<L$Layer>): L$LayerGroup
+declare export function L$layerGroup(layers: Array<L$Layer>): L$LayerGroup
 
 
 /**
  * Extended LayerGroup that also has mouse events (propagated from
  * members of the group) and a shared bindPopup method.
  */
-declare
-export type L$FeatureGroup = {
+declare export type L$FeatureGroup = {
 
     /**
      * Sets the given path options to each layer of the group that has a setStyle method.
@@ -861,13 +788,11 @@ export type L$FeatureGroup = {
 /**
  * Create a feature group, optionally given an initial set of layers.
  */
-declare
-export function L$featureGroup(layers?: Array<L$Layer>): L$FeatureGroup
+declare export function L$featureGroup(layers?: Array<L$Layer>): L$FeatureGroup
 
 declare type L$StyleFunction = (feature: GeoJSON.Feature<GeoJSON.GeometryObject>) => L$PathOptions;
 
-declare
-export type L$GeoJSONOptions = {
+declare export type L$GeoJSONOptions = {
 
     /**
      * A Function defining how GeoJSON points spawn Leaflet layers.
@@ -936,8 +861,7 @@ export type L$GeoJSONOptions = {
  * Represents a GeoJSON object or an array of GeoJSON objects.
  * Allows you to parse GeoJSON data and display it on the map. Extends FeatureGroup.
  */
-declare
-export type L$GeoJSON = {
+declare export type L$GeoJSON = {
 
     /**
      * Adds a GeoJSON object to the layer.
@@ -1013,13 +937,11 @@ Optionally accepts an object in GeoJSON format to display on the
 map (you can alternatively add it later with addData method) and
 an options object.
 */
-declare
-export function L$geoJSON(geojson?: GeoJSON.GeoJsonObject, options?: L$GeoJSONOptions): L$GeoJSON
+declare export function L$geoJSON(geojson?: GeoJSON.GeoJsonObject, options?: L$GeoJSONOptions): L$GeoJSON
 
 declare type L$Zoom = boolean | "center";
 
-declare
-export interface L$MapOptions {
+declare export interface L$MapOptions {
     preferCanvas?: boolean,
         attributionControl?: boolean,
         zoomControl?: boolean,
@@ -1060,16 +982,13 @@ export interface L$MapOptions {
         bounceAtZoomLimits?: boolean
 }
 
-declare
-export type L$ControlPosition = "topleft" | "topright" | "bottomleft" | "bottomright";
+declare export type L$ControlPosition = "topleft" | "topright" | "bottomleft" | "bottomright";
 
-declare
-export interface L$ControlOptions {
+declare export interface L$ControlOptions {
     position?: L$ControlPosition
 }
 
-declare
-export interface L$Control {
+declare export interface L$Control {
     getPosition(): L$ControlPosition,
         setPosition(position: L$ControlPosition): this,
         getContainer(): HTMLElement,
@@ -1079,8 +998,7 @@ export interface L$Control {
         onRemove(map: L$Map): void
 }
 
-declare
-export type Control$ZoomOptions = {
+declare export type Control$ZoomOptions = {
     zoomInText?: string,
     zoomInTitle?: string,
     zoomOutText?: string,
@@ -1090,30 +1008,26 @@ export type Control$ZoomOptions = {
 
 declare type Control$Zoom = boolean | "center";
 
-declare
-export type Control$AttributionOptions = {
+declare export type Control$AttributionOptions = {
     prefix?: string | boolean
 } & L$ControlOptions
 
 
-declare
-export type Control$Attribution = {
+declare export type Control$Attribution = {
     setPrefix(prefix: string): this,
     addAttribution(text: string): this,
     removeAttribution(text: string): this
 } & L$Control
 
 
-declare
-export type Control$LayersOptions = {
+declare export type Control$LayersOptions = {
     collapsed?: boolean,
     autoZIndex?: boolean,
     hideSingleBase?: boolean
 } & L$ControlOptions
 
 
-declare
-export type Control$Layers = {
+declare export type Control$Layers = {
     addBaseLayer(layer: L$Layer, name: string): this,
     addOverlay(layer: L$Layer, name: string): this,
     removeLayer(layer: L$Layer): this,
@@ -1122,8 +1036,7 @@ export type Control$Layers = {
 } & L$Control
 
 
-declare
-export type Control$ScaleOptions = {
+declare export type Control$ScaleOptions = {
     maxWidth?: number,
     metric?: boolean,
     imperial?: boolean,
@@ -1131,36 +1044,30 @@ export type Control$ScaleOptions = {
 } & L$ControlOptions
 
 
-declare
-export type Control$Scale = {} & L$Control
+declare export type Control$Scale = {} & L$Control
 
 
 
-declare
-var npm$namespace$control: {
+declare var npm$namespace$control: {
     zoom: typeof control$zoom,
     attribution: typeof control$attribution,
     layers: typeof control$layers,
     scale: typeof control$scale,
 }
-declare
-export function control$zoom(options: Control$ZoomOptions): Control$Zoom
+declare export function control$zoom(options: Control$ZoomOptions): Control$Zoom
 
-declare
-export function control$attribution(options: Control$AttributionOptions): Control$Attribution
+declare export function control$attribution(options: Control$AttributionOptions): Control$Attribution
 
 declare type control$LayersObject = {
     [name: string]: L$Layer
 };
 
-declare
-export function control$layers(
+declare export function control$layers(
     baseLayers?: control$LayersObject,
     overlays?: control$LayersObject,
     options?: Control$LayersOptions): Control$Layers
 
-declare
-export function control$scale(options?: Control$ScaleOptions): Control$Scale
+declare export function control$scale(options?: Control$ScaleOptions): Control$Scale
 
 declare interface L$DivOverlayOptions {
     offset?: L$PointExpression,
@@ -1169,8 +1076,7 @@ declare interface L$DivOverlayOptions {
         pane?: string
 }
 
-declare
-export type L$PopupOptions = {
+declare export type L$PopupOptions = {
     maxWidth?: number,
     minWidth?: number,
     maxHeight?: number,
@@ -1186,8 +1092,7 @@ export type L$PopupOptions = {
 
 declare type L$Content = string | HTMLElement;
 
-declare
-export type L$Popup = {
+declare export type L$Popup = {
     getLatLng(): L$LatLng,
     setLatLng(latlng: L$LatLngExpression): this,
     getContent(): L$Content,
@@ -1203,19 +1108,16 @@ export type L$Popup = {
 } & L$Layer
 
 
-declare
-export function L$popup(options?: L$PopupOptions, source?: L$Layer): L$Popup
+declare export function L$popup(options?: L$PopupOptions, source?: L$Layer): L$Popup
 
-declare
-export type L$Direction = "right" |
+declare export type L$Direction = "right" |
     "left" |
     "top" |
     "bottom" |
     "center" |
     "auto";
 
-declare
-export type L$TooltipOptions = {
+declare export type L$TooltipOptions = {
     pane?: string,
     offset?: L$PointExpression,
     direction?: L$Direction,
@@ -1226,15 +1128,12 @@ export type L$TooltipOptions = {
 } & L$DivOverlayOptions
 
 
-declare
-export type L$Tooltip = {} & L$Layer
+declare export type L$Tooltip = {} & L$Layer
 
 
-declare
-export function L$tooltip(options?: L$TooltipOptions, source?: L$Layer): L$Tooltip
+declare export function L$tooltip(options?: L$TooltipOptions, source?: L$Layer): L$Tooltip
 
-declare
-export type L$ZoomOptions = {
+declare export type L$ZoomOptions = {
     zoomInText?: string,
     zoomInTitle?: string,
     zoomOutText?: string,
@@ -1242,20 +1141,17 @@ export type L$ZoomOptions = {
 } & L$ControlOptions
 
 
-declare
-export interface L$PanOptions {
+declare export interface L$PanOptions {
     animate?: boolean,
         duration?: number,
         easeLinearity?: number,
         noMoveStart?: boolean
 }
 
-declare
-export type L$ZoomPanOptions = {} & L$ZoomOptions & L$PanOptions
+declare export type L$ZoomPanOptions = {} & L$ZoomOptions & L$PanOptions
 
 
-declare
-export type L$FitBoundsOptions = {
+declare export type L$FitBoundsOptions = {
     paddingTopLeft?: L$PointExpression,
     paddingBottomRight?: L$PointExpression,
     padding?: L$PointExpression,
@@ -1263,8 +1159,7 @@ export type L$FitBoundsOptions = {
 } & L$ZoomOptions & L$PanOptions
 
 
-declare
-export interface L$LocateOptions {
+declare export interface L$LocateOptions {
     watch?: boolean,
         setView?: boolean,
         maxZoom?: number,
@@ -1273,8 +1168,7 @@ export interface L$LocateOptions {
         enableHighAccuracy?: boolean
 }
 
-declare
-export interface L$Handler {
+declare export interface L$Handler {
     enable(): this,
         disable(): this,
         enabled(): boolean,
@@ -1282,14 +1176,12 @@ export interface L$Handler {
         removeHooks(): void
 }
 
-declare
-export interface L$Event {
+declare export interface L$Event {
     type: string,
         target: any
 }
 
-declare
-export type L$MouseEvent = {
+declare export type L$MouseEvent = {
     latlng: L$LatLng,
     layerPoint: L$Point,
     containerPoint: L$Point,
@@ -1297,8 +1189,7 @@ export type L$MouseEvent = {
 } & L$Event
 
 
-declare
-export type L$LocationEvent = {
+declare export type L$LocationEvent = {
     latlng: L$LatLng,
     bounds: L$LatLngBounds,
     accuracy: number,
@@ -1310,47 +1201,40 @@ export type L$LocationEvent = {
 } & L$Event
 
 
-declare
-export type L$ErrorEvent = {
+declare export type L$ErrorEvent = {
     message: string,
     code: number
 } & L$Event
 
 
-declare
-export type L$LayerEvent = {
+declare export type L$LayerEvent = {
     layer: L$Layer
 } & L$Event
 
 
-declare
-export type L$LayersControlEvent = {
+declare export type L$LayersControlEvent = {
     name: string
 } & L$LayerEvent
 
 
-declare
-export type L$TileEvent = {
+declare export type L$TileEvent = {
     tile: HTMLImageElement,
     coords: L$Point
 } & L$Event
 
 
-declare
-export type L$TileErrorEvent = {
+declare export type L$TileErrorEvent = {
     error: Error
 } & L$TileEvent
 
 
-declare
-export type L$ResizeEvent = {
+declare export type L$ResizeEvent = {
     oldSize: L$Point,
     newSize: L$Point
 } & L$Event
 
 
-declare
-export type L$GeoJSONEvent = {
+declare export type L$GeoJSONEvent = {
     layer: L$Layer,
     properties: any,
     geometryType: string,
@@ -1358,27 +1242,23 @@ export type L$GeoJSONEvent = {
 } & L$Event
 
 
-declare
-export type L$PopupEvent = {
+declare export type L$PopupEvent = {
     popup: L$Popup
 } & L$Event
 
 
-declare
-export type L$TooltipEvent = {
+declare export type L$TooltipEvent = {
     tooltip: L$Tooltip
 } & L$Event
 
 
-declare
-export type L$DragEndEvent = {
+declare export type L$DragEndEvent = {
     distance: number
 } & L$Event
 
 
 
-declare
-var npm$namespace$DomEvent: {
+declare var npm$namespace$DomEvent: {
     on: typeof DomEvent$on,
     off: typeof DomEvent$off,
     stopPropagation: typeof DomEvent$stopPropagation,
@@ -1391,50 +1271,39 @@ var npm$namespace$DomEvent: {
     addListener: typeof DomEvent$addListener,
     removeListener: typeof DomEvent$removeListener,
 }
-declare
-export function DomEvent$on(
+declare export function DomEvent$on(
     el: HTMLElement,
     types: string,
     fn: (ev: L$Event) => any,
     context?: Object): typeof DomEvent
 
-declare
-export function DomEvent$off(
+declare export function DomEvent$off(
     el: HTMLElement,
     types: string,
     fn: (ev: L$Event) => any,
     context?: Object): typeof DomEvent
 
-declare
-export function DomEvent$stopPropagation(ev: L$Event): typeof DomEvent
+declare export function DomEvent$stopPropagation(ev: L$Event): typeof DomEvent
 
-declare
-export function DomEvent$disableScrollPropagation(el: HTMLElement): typeof DomEvent
+declare export function DomEvent$disableScrollPropagation(el: HTMLElement): typeof DomEvent
 
-declare
-export function DomEvent$disableClickPropagation(el: HTMLElement): typeof DomEvent
+declare export function DomEvent$disableClickPropagation(el: HTMLElement): typeof DomEvent
 
-declare
-export function DomEvent$preventDefault(ev: L$Event): typeof DomEvent
+declare export function DomEvent$preventDefault(ev: L$Event): typeof DomEvent
 
-declare
-export function DomEvent$stop(ev: L$Event): typeof DomEvent
+declare export function DomEvent$stop(ev: L$Event): typeof DomEvent
 
-declare
-export function DomEvent$getMousePosition(ev: L$Event, container?: HTMLElement): L$Point
+declare export function DomEvent$getMousePosition(ev: L$Event, container?: HTMLElement): L$Point
 
-declare
-export function DomEvent$getWheelDelta(ev: L$Event): number
+declare export function DomEvent$getWheelDelta(ev: L$Event): number
 
-declare
-export function DomEvent$addListener(
+declare export function DomEvent$addListener(
     el: HTMLElement,
     types: string,
     fn: (ev: L$Event) => any,
     context?: Object): typeof DomEvent
 
-declare
-export function DomEvent$removeListener(
+declare export function DomEvent$removeListener(
     el: HTMLElement,
     types: string,
     fn: (ev: L$Event) => any,
@@ -1450,8 +1319,7 @@ declare interface L$DefaultMapPanes {
         popupPane: HTMLElement
 }
 
-declare
-export type L$Map = {
+declare export type L$Map = {
     getRenderer(layer: L$Path): L$Renderer,
     addControl(control: L$Control): this,
     removeControl(control: L$Control): this,
@@ -1571,11 +1439,9 @@ export type L$Map = {
 } & L$Evented
 
 
-declare
-export function L$map(id: string, options?: L$MapOptions): L$Map
+declare export function L$map(id: string, options?: L$MapOptions): L$Map
 
-declare
-export type L$IconOptions = {
+declare export type L$IconOptions = {
     iconUrl: string,
     iconRetinaUrl?: string,
     iconSize?: L$PointExpression,
@@ -1589,27 +1455,22 @@ export type L$IconOptions = {
 } & L$LayerOptions
 
 
-declare
-export type L$Icon = {
+declare export type L$Icon = {
     createIcon(oldIcon?: HTMLElement): HTMLElement,
     createShadow(oldIcon?: HTMLElement): HTMLElement
 } & L$Layer
 
 
-declare
-export type L$IconDefault = {
+declare export type L$IconDefault = {
     imagePath: string
 } & L$Icon
 
 
-declare
-export var Default: L$IconDefault;
+declare export var Default: L$IconDefault;
 
-declare
-export function L$icon(options: L$IconOptions): L$Icon
+declare export function L$icon(options: L$IconOptions): L$Icon
 
-declare
-export type L$DivIconOptions = {
+declare export type L$DivIconOptions = {
     html?: string,
     bgPos?: L$PointExpression,
     iconSize?: L$PointExpression,
@@ -1619,15 +1480,12 @@ export type L$DivIconOptions = {
 } & L$LayerOptions
 
 
-declare
-export type L$DivIcon = {} & L$Icon
+declare export type L$DivIcon = {} & L$Icon
 
 
-declare
-export function L$divIcon(options: L$DivIconOptions): L$DivIcon
+declare export function L$divIcon(options: L$DivIconOptions): L$DivIcon
 
-declare
-export type L$MarkerOptions = {
+declare export type L$MarkerOptions = {
     icon?: L$Icon,
     draggable?: boolean,
     keyboard?: boolean,
@@ -1640,8 +1498,7 @@ export type L$MarkerOptions = {
 } & L$InteractiveLayerOptions
 
 
-declare
-export type L$Marker = {
+declare export type L$Marker = {
     getLatLng(): L$LatLng,
     setLatLng(latlng: L$LatLng): this,
     setLatLng(latlng: L$LatLngLiteral): this,
@@ -1653,89 +1510,61 @@ export type L$Marker = {
 } & L$Layer
 
 
-declare
-export function L$marker(latlng: L$LatLng, options?: L$MarkerOptions): L$Marker
+declare export function L$marker(latlng: L$LatLng, options?: L$MarkerOptions): L$Marker
 
-declare
-export var ie: boolean;
+declare export var ie: boolean;
 
-declare
-export var ielt9: boolean;
+declare export var ielt9: boolean;
 
-declare
-export var edge: boolean;
+declare export var edge: boolean;
 
-declare
-export var webkit: boolean;
+declare export var webkit: boolean;
 
-declare
-export var gecko: boolean;
+declare export var gecko: boolean;
 
-declare
-export var android: boolean;
+declare export var android: boolean;
 
-declare
-export var android23: boolean;
+declare export var android23: boolean;
 
-declare
-export var chrome: boolean;
+declare export var chrome: boolean;
 
-declare
-export var safari: boolean;
+declare export var safari: boolean;
 
-declare
-export var win: boolean;
+declare export var win: boolean;
 
-declare
-export var ie3d: boolean;
+declare export var ie3d: boolean;
 
-declare
-export var webkit3d: boolean;
+declare export var webkit3d: boolean;
 
-declare
-export var gecko3d: boolean;
+declare export var gecko3d: boolean;
 
-declare
-export var opera12: boolean;
+declare export var opera12: boolean;
 
-declare
-export var any3d: boolean;
+declare export var any3d: boolean;
 
-declare
-export var mobile: boolean;
+declare export var mobile: boolean;
 
-declare
-export var mobileWebkit: boolean;
+declare export var mobileWebkit: boolean;
 
-declare
-export var mobiWebkit3d: boolean;
+declare export var mobiWebkit3d: boolean;
 
-declare
-export var mobileOpera: boolean;
+declare export var mobileOpera: boolean;
 
-declare
-export var mobileGecko: boolean;
+declare export var mobileGecko: boolean;
 
-declare
-export var touch: boolean;
+declare export var touch: boolean;
 
-declare
-export var msPointer: boolean;
+declare export var msPointer: boolean;
 
-declare
-export var pointer: boolean;
+declare export var pointer: boolean;
 
-declare
-export var retina: boolean;
+declare export var retina: boolean;
 
-declare
-export var canvas: boolean;
+declare export var canvas: boolean;
 
-declare
-export var vml: boolean;
+declare export var vml: boolean;
 
-declare
-export var svg: boolean;
+declare export var svg: boolean;
 declare module 'leaflet' {
     declare module.exports: typeof L
 }

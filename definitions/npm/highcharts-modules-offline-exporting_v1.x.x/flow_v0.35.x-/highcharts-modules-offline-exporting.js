@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var HighchartsOfflineExporting: (H: ___Highcharts.Static) => ___Highcharts.Static;
+declare var HighchartsOfflineExporting: (H: ___Highcharts.Static) => ___Highcharts.Static;
 declare module 'highcharts/modules/offline-exporting' {
     declare module.exports: typeof HighchartsOfflineExporting
 }

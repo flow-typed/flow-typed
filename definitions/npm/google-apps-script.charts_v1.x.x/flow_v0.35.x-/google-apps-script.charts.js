@@ -924,5 +924,4 @@ declare module 'Charts' {
             setFontSize(fontSize: Number): TextStyleBuilder
     }
 }
-declare
-var Charts: undefined.Charts;
+declare var Charts: undefined.Charts;

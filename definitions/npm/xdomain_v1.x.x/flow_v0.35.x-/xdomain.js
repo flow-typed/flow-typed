@@ -49,8 +49,7 @@ declare interface IXDomain {
         on(event: "log" | "warn" | "timeout", handler: (message?: string) => any): void,
         cookies: XDomainCookies
 }
-declare
-var xdomain: IXDomain;
+declare var xdomain: IXDomain;
 declare module 'xdomain' {
     declare export var xdomain: IXDomain;
 }

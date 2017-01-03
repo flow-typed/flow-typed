@@ -7,36 +7,29 @@
  */
 
 
-declare
-var npm$namespace$photonui: {
+declare var npm$namespace$photonui: {
     domInsert: typeof photonui$domInsert,
     getWidget: typeof photonui$getWidget,
 }
-declare
-var npm$namespace$Helpers: {
+declare var npm$namespace$Helpers: {
     escapeHtml: typeof Helpers$escapeHtml,
     uuid4: typeof Helpers$uuid4,
     cleanNode: typeof Helpers$cleanNode,
     getAbsolutePosition: typeof Helpers$getAbsolutePosition,
     numberToCssSize: typeof Helpers$numberToCssSize,
 }
-declare
-function Helpers$escapeHtml(string: string): void
+declare function Helpers$escapeHtml(string: string): void
 
-declare
-function Helpers$uuid4(): string
+declare function Helpers$uuid4(): string
 
-declare
-function Helpers$cleanNode(node: HTMLElement): void
+declare function Helpers$cleanNode(node: HTMLElement): void
 
-declare
-function Helpers$getAbsolutePosition(element: HTMLElement | string): {
+declare function Helpers$getAbsolutePosition(element: HTMLElement | string): {
     x: number,
     y: number
 }
 
-declare
-function Helpers$numberToCssSize(value: number, defaultValue?: number, nullValue?: string): string
+declare function Helpers$numberToCssSize(value: number, defaultValue?: number, nullValue?: string): string
 
 declare class Base {
     constructor(params?: {
@@ -74,11 +67,9 @@ declare class Widget mixins Base {
     domInsert(widget: photonui$Widget, element?: HTMLElement | string): void
 }
 
-declare
-function photonui$domInsert(widget: photonui$Widget, element?: HTMLElement | string): void
+declare function photonui$domInsert(widget: photonui$Widget, element?: HTMLElement | string): void
 
-declare
-function photonui$getWidget(name: string): photonui$Widget
+declare function photonui$getWidget(name: string): photonui$Widget
 
 declare class FileManager mixins Base {
     acceptedExts: string[];
@@ -455,7 +446,6 @@ declare class TabLayout mixins Layout {
     padding: number;
     tabsPosition: string
 }
-declare
-function _(string: string, replacements?: {
+declare function _(string: string, replacements?: {
     [key: string]: string
 }): string

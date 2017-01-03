@@ -1313,8 +1313,7 @@ declare module 'NWJS_Helpers' {
 /**
  * Application General Functionality And Properties.
  */
-declare
-export interface nw$App {
+declare export interface nw$App {
 
     /**
      * Get the filtered command line arguments when starting the app.
@@ -1438,8 +1437,7 @@ export interface nw$App {
 /**
  * `Clipboard` is an abstraction of clipboard for Windows, Linux and Mac.
  */
-declare
-export interface nw$Clipboard {
+declare export interface nw$Clipboard {
 
     /**
      * Get the clipboard object.
@@ -1668,8 +1666,7 @@ declare interface nw$Shell {
 /**
  * `Shortcut` represents a global keyboard shortcut, also known as system-wide hotkey.
  */
-declare
-export class Shortcut mixins NWJS_Helpers.EventEmitter {
+declare export class Shortcut mixins NWJS_Helpers.EventEmitter {
 
     /**
      * Create new Shortcut.
@@ -1714,8 +1711,7 @@ export class Shortcut mixins NWJS_Helpers.EventEmitter {
 /**
  * `Tray` is an abstraction of different controls on different platforms, usually it"s a small icon shown on the OS"s notification area. On Mac OS X it"s called Status Item, on GTK it"s Status Icon, and on Windows it"s System Tray Icon.
  */
-declare
-export class Tray mixins NWJS_Helpers.EventEmitter {
+declare export class Tray mixins NWJS_Helpers.EventEmitter {
 
     /**
      * Create a new Tray.
@@ -1792,20 +1788,15 @@ declare type nw$Window = {
         callback?: (new_win?: NWJS_Helpers.win) => void): void
 }
 
-declare
-export var App: nw$App;
+declare export var App: nw$App;
 
-declare
-export var Clipboard: nw$Clipboard;
+declare export var Clipboard: nw$Clipboard;
 
-declare
-export var Screen: nw$Screen;
+declare export var Screen: nw$Screen;
 
-declare
-export var Shell: nw$Shell;
+declare export var Shell: nw$Shell;
 
-declare
-export var Window: nw$Window;
+declare export var Window: nw$Window;
 declare module 'nw.gui' {
     declare export class Menu mixins nw$Menu {}
     declare export class MenuItem mixins nw$MenuItem {}

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Stylus$Static {
+declare export interface Stylus$Static {
 
     /**
      * Return a new `Renderer` for the given `str` and `options`.
@@ -70,8 +69,7 @@ export interface Stylus$Static {
         resolver(options: any): Stylus$LiteralFunction
 }
 
-declare
-export interface Stylus$NodeStatic {
+declare export interface Stylus$NodeStatic {
     Node: typeof undefined,
         Root: typeof undefined,
         Null: typeof undefined,
@@ -116,8 +114,7 @@ export interface Stylus$NodeStatic {
         null: Nodes.Null
 }
 
-declare
-export interface Stylus$Functions {
+declare export interface Stylus$Functions {
 
     /**
      * Convert the given `color` to an `HSLA` node,
@@ -521,8 +518,7 @@ export interface Stylus$Functions {
         list - separator(list: Nodes.Expression): Nodes.String
 }
 
-declare
-export interface Stylus$Utils {
+declare export interface Stylus$Utils {
 
     /**
      * Check if `path` looks absolute.
@@ -624,8 +620,7 @@ export interface Stylus$Utils {
         compileSelectors(arr: string[], leaveHidden: boolean): string[]
 }
 
-declare
-export interface Stylus$UrlFunction {
+declare export interface Stylus$UrlFunction {
     (options: Stylus$UrlOptions): Stylus$LiteralFunction,
     mimes: {
         .gif: string,
@@ -639,25 +634,19 @@ export interface Stylus$UrlFunction {
     }
 }
 
-declare
-export interface Stylus$Middleware {
+declare export interface Stylus$Middleware {
     (req: any, res: any, next: Function): void
 }
 
-declare
-export class Visitor {}
+declare export class Visitor {}
 
-declare
-export class Parser {}
+declare export class Parser {}
 
-declare
-export class Evaluator {}
+declare export class Evaluator {}
 
-declare
-export class Compiler {}
+declare export class Compiler {}
 
-declare
-export class Renderer mixins NodeJS.EventEmitter {
+declare export class Renderer mixins NodeJS.EventEmitter {
     options: Stylus$RenderOptions;
     str: string;
     events: any;
@@ -1606,13 +1595,11 @@ declare module 'Nodes' {
 }
 
 
-declare
-export interface Stylus$Dictionary<T>{
+declare export interface Stylus$Dictionary<T>{
     [key: string]: T
 }
 
-declare
-export interface Stylus$RenderOptions {
+declare export interface Stylus$RenderOptions {
     globals?: Stylus$Dictionary<any>,
         functions?: Stylus$Dictionary<any>,
         imports?: string[],
@@ -1621,25 +1608,21 @@ export interface Stylus$RenderOptions {
         Evaluator?: typeof Evaluator
 }
 
-declare
-export interface Stylus$RenderCallback {
+declare export interface Stylus$RenderCallback {
     (err: Error, css: string, js: string): void
 }
 
-declare
-export interface Stylus$UrlOptions {
+declare export interface Stylus$UrlOptions {
     limit?: string,
         path: string
 }
 
-declare
-export interface Stylus$LiteralFunction {
+declare export interface Stylus$LiteralFunction {
     (url: string): Nodes.Literal,
         raw: boolean
 }
 
-declare
-export interface Stylus$ExceptionOptions {
+declare export interface Stylus$ExceptionOptions {
     filename: string,
         context: number,
         lineno: number,

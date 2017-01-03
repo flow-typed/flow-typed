@@ -95,74 +95,61 @@ declare class Stream<T>{
         mergeFunction?: Stream$Accumulator<T>): Stream$Map<T>;
     toMap(path: string, mergeFunction?: Stream$Accumulator<T>): Stream$Map<T >
 }
-declare
-export interface Stream$Map<T>{
+declare export interface Stream$Map<T>{
     [index: string]: T
 }
 
-declare
-export interface Stream$Sample {
+declare export interface Stream$Sample {
     [index: string]: any
 }
 
-declare
-export interface Stream$Accumulator<T>{
+declare export interface Stream$Accumulator<T>{
     (e1: T, e2: T): T
 }
 
-declare
-export interface Stream$Collector<T>{
+declare export interface Stream$Collector<T>{
     supplier: Stream$Supplier<T>,
     accumulator: Stream$Accumulator<T>,
     finisher: Stream$Function<T,
     T >
 }
 
-declare
-export interface Stream$Comparator<T>{
+declare export interface Stream$Comparator<T>{
     (e1: T, e2: T): number
 }
 
-declare
-export interface Stream$Consumer<T>{
+declare export interface Stream$Consumer<T>{
     (elem: T): void
 }
 
-declare
-export interface Stream$Function<T, U>{
+declare export interface Stream$Function<T, U>{
     (elem: T): U
 }
 
-declare
-export interface Stream$GroupingResult<T>{
+declare export interface Stream$GroupingResult<T>{
     [index: string]: T
 }
 
-declare
-export interface Stream$Iterator<T>{
+declare export interface Stream$Iterator<T>{
     next(): T,
     done: boolean
 }
 
-declare
-export interface Stream$JoinOptions {
+declare export interface Stream$JoinOptions {
     prefix: string,
         delimiter: string,
         suffix: string
 }
 
-declare
-export interface Stream$Predicate<T>{
+declare export interface Stream$Predicate<T>{
     (elem: T): boolean
 }
 
-declare
-export interface Stream$Supplier<T>{
+declare export interface Stream$Supplier<T>{
     (): T
 }
 
-declare
-export class Optional<T>{ of<T>(elem: T): Stream$Optional<T>;
+declare export class Optional<T>{ of<T>(elem: T): Stream$Optional<T>;
     ofNullable<T>(elem: T): Stream$Optional<T>;
     filter(predicate: (elem: T) => boolean): Stream$Optional<T>;
     map<U>(mapper: (elem: T) => U): Stream$Optional<U>;

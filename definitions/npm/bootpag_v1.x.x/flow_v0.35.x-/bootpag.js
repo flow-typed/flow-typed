@@ -10,8 +10,7 @@
 /**
  * Bootpag plugin interface options
  */
-declare
-export interface JqueryBootpag$Options {
+declare export interface JqueryBootpag$Options {
 
     /**
      * number of pages

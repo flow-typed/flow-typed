@@ -15,8 +15,7 @@ declare interface Milliseconds {
         month(month: number): number,
         years(years: number): number
 }
-declare
-var milliseconds: Milliseconds;
+declare var milliseconds: Milliseconds;
 declare module 'milliseconds' {
     declare module.exports: typeof milliseconds
 }

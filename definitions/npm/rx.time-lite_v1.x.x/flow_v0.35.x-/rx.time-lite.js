@@ -6,20 +6,17 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Rx$TimeInterval<T>{
+declare export interface Rx$TimeInterval<T>{
     value: T,
     interval: number
 }
 
-declare
-export interface Rx$Timestamp<T>{
+declare export interface Rx$Timestamp<T>{
     value: T,
     timestamp: number
 }
 
-declare
-export interface Rx$Observable<T>{
+declare export interface Rx$Observable<T>{
     delay(dueTime: Date, scheduler?: IScheduler): Rx$Observable<T>,
     delay(dueTime: number, scheduler?: IScheduler): Rx$Observable<T>,
     debounce(dueTime: number, scheduler?: IScheduler): Rx$Observable<T>,

@@ -102,8 +102,7 @@ declare interface StripeBankTokenResponse {
         used: boolean,
         error: StripeError
 }
-declare
-var Stripe: StripeStatic;
+declare var Stripe: StripeStatic;
 declare module 'Stripe' {
     declare module.exports: typeof StripeStatic
 }

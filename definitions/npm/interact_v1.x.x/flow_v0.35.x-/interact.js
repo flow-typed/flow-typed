@@ -252,8 +252,7 @@ declare interface Interact$InteractStatic {
         styleCursor(newValue: boolean): Interact$InteractStatic,
         supportsTouch(): boolean
 }
-declare
-var interact: Interact$InteractStatic;
+declare var interact: Interact$InteractStatic;
 declare module 'interact.js' {
     declare module.exports: typeof interact
 }

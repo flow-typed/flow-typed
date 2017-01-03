@@ -6,20 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function describe(description: string, specDefinitions: () => void): voiddeclare
-function xdescribe(description: string, specDefinitions: () => void): voiddeclare
-function it(expectation: string, assertion: () => void): voiddeclare
-function xit(expectation: string, assertion: () => void): voiddeclare
-function beforeEach(action: () => void): voiddeclare
-function afterEach(action: () => void): voiddeclare
-function expect(spy: Function): jasmine$Matchersdeclare
-function spyOn(object: any, method: string): jasmine$Spydeclare
-function runs(asyncMethod: Function): voiddeclare
-function waitsFor(latchMethod: () => boolean, failureMessage?: string, timeout?: number): voiddeclare
-function waits(timeout?: number): void
-declare
-var npm$namespace$jasmine: {
+declare function describe(description: string, specDefinitions: () => void): voiddeclare function xdescribe(description: string, specDefinitions: () => void): voiddeclare function it(expectation: string, assertion: () => void): voiddeclare function xit(expectation: string, assertion: () => void): voiddeclare function beforeEach(action: () => void): voiddeclare function afterEach(action: () => void): voiddeclare function expect(spy: Function): jasmine$Matchersdeclare function spyOn(object: any, method: string): jasmine$Spydeclare function runs(asyncMethod: Function): voiddeclare function waitsFor(latchMethod: () => boolean, failureMessage?: string, timeout?: number): voiddeclare function waits(timeout?: number): void
+declare var npm$namespace$jasmine: {
     any: typeof jasmine$any,
     objectContaining: typeof jasmine$objectContaining,
     createSpy: typeof jasmine$createSpy,
@@ -27,26 +15,19 @@ var npm$namespace$jasmine: {
     pp: typeof jasmine$pp,
     getEnv: typeof jasmine$getEnv,
 }
-declare
-var Clock: jasmine$Clock;
+declare var Clock: jasmine$Clock;
 
-declare
-function jasmine$any(aclass: any): jasmine$Any
+declare function jasmine$any(aclass: any): jasmine$Any
 
-declare
-function jasmine$objectContaining(sample: any): jasmine$ObjectContaining
+declare function jasmine$objectContaining(sample: any): jasmine$ObjectContaining
 
-declare
-function jasmine$createSpy(name: string, originalFn?: Function): jasmine$Spy
+declare function jasmine$createSpy(name: string, originalFn?: Function): jasmine$Spy
 
-declare
-function jasmine$createSpyObj(baseName: string, methodNames: any[]): any
+declare function jasmine$createSpyObj(baseName: string, methodNames: any[]): any
 
-declare
-function jasmine$pp(value: any): string
+declare function jasmine$pp(value: any): string
 
-declare
-function jasmine$getEnv(): jasmine$Env
+declare function jasmine$getEnv(): jasmine$Env
 
 declare interface jasmine$Any {
     new(expectedClass: any): any,
@@ -399,5 +380,4 @@ declare interface jasmine$Jasmine {
         util: jasmine$Util
 }
 
-declare
-export var HtmlReporter: any;
+declare export var HtmlReporter: any;

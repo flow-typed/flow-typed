@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$chrome: {
+declare var npm$namespace$chrome: {
         getDefaultService: typeof chrome$getDefaultService,
         setDefaultService: typeof chrome$setDefaultService,
     }
@@ -363,8 +362,7 @@ declare class ServiceBuilder {
 a ChromeDriver executable found on the system PATH.
  * @return  The default ChromeDriver service.
 */
-declare
-function chrome$getDefaultService(): any
+declare function chrome$getDefaultService(): any
 
 
 /**
@@ -372,8 +370,7 @@ function chrome$getDefaultService(): any
  * @param  The service to use.
  * @throws  {Error} If the default service is currently running.
  */
-declare
-function chrome$setDefaultService(service: any): void
+declare function chrome$setDefaultService(service: any): void
 /**
  * Manages a Firefox subprocess configured for use with WebDriver.
  */
@@ -603,8 +600,7 @@ declare class Profile {
      */
     encode(): undefined.Promise<string >
 }
-declare
-var npm$namespace$executors: {
+declare var npm$namespace$executors: {
         createExecutor: typeof executors$createExecutor,
     }
     /**
@@ -612,8 +608,7 @@ var npm$namespace$executors: {
      * @param url The server's URL, or a promise that will resolve to that URL.
      * @returns  The new command executor.
      */
-declare
-function executors$createExecutor(url: string): webdriver$CommandExecutordeclare interface error$IErrorCode {
+declare function executors$createExecutor(url: string): webdriver$CommandExecutordeclare interface error$IErrorCode {
     SUCCESS: number,
         NO_SUCH_ELEMENT: number,
         NO_SUCH_FRAME: number,
@@ -647,8 +642,7 @@ function executors$createExecutor(url: string): webdriver$CommandExecutordeclare
         METHOD_NOT_ALLOWED: number
 }
 
-declare
-var ErrorCode: error$IErrorCode;
+declare var ErrorCode: error$IErrorCode;
 
 
 /**
@@ -746,8 +740,7 @@ declare class Error {
 }
 
 
-declare
-var npm$namespace$logging: {
+declare var npm$namespace$logging: {
         getLevel: typeof logging$getLevel,
     }
     /**
@@ -789,8 +782,7 @@ declare interface logging$IType {
         SERVER: string
 }
 
-declare
-var Type: logging$IType;
+declare var Type: logging$IType;
 
 
 /**
@@ -811,8 +803,7 @@ declare interface logging$ILevelValues {
         OFF: logging$ILevel
 }
 
-declare
-var Level: logging$ILevelValues;
+declare var Level: logging$ILevelValues;
 
 
 /**
@@ -823,8 +814,7 @@ will be returned.
 convert .
  * @return  The converted level.
 */
-declare
-function logging$getLevel(nameOrValue: string): logging$ILevel
+declare function logging$getLevel(nameOrValue: string): logging$ILevel
 
 declare interface logging$IEntryJSON {
     level: string,
@@ -894,8 +884,7 @@ declare class Entry {
 }
 
 
-declare
-var npm$namespace$promise: {
+declare var npm$namespace$promise: {
         all: typeof promise$all,
         asap: typeof promise$asap,
         controlFlow: typeof promise$controlFlow,
@@ -927,8 +916,7 @@ var npm$namespace$promise: {
     rejected value.
      * @template  
     */
-declare
-function promise$all(arr: promise$Promise<any>[]): promise$Promise<any[] >
+declare function promise$all(arr: promise$Promise<any>[]): promise$Promise<any[] >
 
 
     /**
@@ -943,16 +931,14 @@ function promise$all(arr: promise$Promise<any>[]): promise$Promise<any[] >
      * @param  The function to call when the value is
     rejected.
     */
-    declare
-function promise$asap(value: any, callback: Function, opt_errback?: Function): void
+    declare function promise$asap(value: any, callback: Function, opt_errback?: Function): void
 
 
 /**
  * 
  * @return  The currently active control flow.
  */
-declare
-function promise$controlFlow(): promise$ControlFlow
+declare function promise$controlFlow(): promise$ControlFlow
 
 
 /**
@@ -964,8 +950,7 @@ to the newly created flow.
  * @return  A promise that resolves to the callback
 result.
 */
-declare
-function promise$createFlow<R>(callback: (flow: promise$ControlFlow) => R): promise$Promise<R >
+declare function promise$createFlow<R>(callback: (flow: promise$ControlFlow) => R): promise$Promise<R >
 
 
     /**
@@ -974,8 +959,7 @@ function promise$createFlow<R>(callback: (flow: promise$ControlFlow) => R): prom
      * @param  The value to test.
      * @return  Whether the value is a promise.
      */
-    declare
-function promise$isPromise(value: any): boolean
+    declare function promise$isPromise(value: any): boolean
 
 
 /**
@@ -983,8 +967,7 @@ function promise$isPromise(value: any): boolean
  * @param  The function to test.
  * @return  Whether the function is a generator.
  */
-declare
-function promise$isGenerator(fn: Function): boolean
+declare function promise$isGenerator(fn: Function): boolean
 
 
 /**
@@ -993,8 +976,7 @@ function promise$isGenerator(fn: Function): boolean
 resolving the promise.
  * @return  The promise.
 */
-declare
-function promise$delayed(ms: number): promise$Promise<void >
+declare function promise$delayed(ms: number): promise$Promise<void >
 
 
     /**
@@ -1018,8 +1000,7 @@ function promise$delayed(ms: number): promise$Promise<void >
      * @code  fn}.
      * @template  
     */
-    declare
-function promise$filter<T>(
+    declare function promise$filter<T>(
         arr: T[],
         fn: (element: T, index: number, array: T[]) => any,
         opt_self?: any): promise$Promise<T[] >
@@ -1029,16 +1010,14 @@ function promise$filter<T>(
      * Creates a new deferred object.
      * @return  The new deferred object.
      */
-    declare
-function promise$defer<T>(): promise$Deferred<T >
+    declare function promise$defer<T>(): promise$Deferred<T >
 
 
     /**
      * Creates a promise that has been resolved with the given value.*=} opt_value The resolved value.
      * @return  The resolved promise.
      */
-    declare
-function promise$fulfilled<T>(opt_value?: T): promise$Promise<T >
+    declare function promise$fulfilled<T>(opt_value?: T): promise$Promise<T >
 
 
     /**
@@ -1063,8 +1042,7 @@ function promise$fulfilled<T>(opt_value?: T): promise$Promise<T >
      * @code  fn}.
      * @template  
     */
-    declare
-function promise$map<T>(
+    declare function promise$map<T>(
         arr: T[],
         fn: (element: T, index: number, array: T[]) => any,
         opt_self?: any): promise$Promise<T[] >
@@ -1075,8 +1053,7 @@ function promise$map<T>(
      *     usually an Error or a string.
      * @return  The rejected promise.
      */
-    declare
-function promise$rejected(opt_reason?: any): promise$Promise<void >
+    declare function promise$rejected(opt_reason?: any): promise$Promise<void >
 
 
     /**
@@ -1089,8 +1066,7 @@ function promise$rejected(opt_reason?: any): promise$Promise<void >
      * @return  A promise that will be resolved with the
     result of the provided function's callback.
     */
-    declare
-function promise$checkedNodeCall<T>(fn: Function, ...var_args: any[]): promise$Promise<T >
+    declare function promise$checkedNodeCall<T>(fn: Function, ...var_args: any[]): promise$Promise<T >
 
 
     /**
@@ -1132,8 +1108,7 @@ function promise$checkedNodeCall<T>(fn: Function, ...var_args: any[]): promise$P
     generator's final result.
      * @throws  {TypeError} If the given function is not a generator.
     */
-    declare
-function promise$consume<T>(
+    declare function promise$consume<T>(
         generatorFn: Function,
         opt_self?: any,
         ...var_args: any[]): promise$Promise<T >
@@ -1150,8 +1125,7 @@ function promise$consume<T>(
     rejected.
      * @return  A new promise.
     */
-    declare
-function promise$when<T, R>(
+    declare function promise$when<T, R>(
         value: T,
         opt_callback?: (value: T) => any,
         opt_errback?: (error: any) => any): promise$Promise<R >
@@ -1175,8 +1149,7 @@ function promise$when<T, R>(
      * @return  A promise for a fully resolved version
     of the input value.
     */
-    declare
-function promise$fullyResolved<T>(value: any): promise$Promise<T >
+    declare function promise$fullyResolved<T>(value: any): promise$Promise<T >
 
 
     /**
@@ -1184,8 +1157,7 @@ function promise$fullyResolved<T>(value: any): promise$Promise<T >
      * @param  The new default flow.
      * @throws  {Error} If the default flow is not currently active.
      */
-    declare
-function promise$setDefaultFlow(flow: promise$ControlFlow): void
+    declare function promise$setDefaultFlow(flow: promise$ControlFlow): void
 
 
 /**
@@ -1839,8 +1811,7 @@ declare class ControlFlow mixins EventEmitter {
 }
 
 
-declare
-var npm$namespace$stacktrace: {
+declare var npm$namespace$stacktrace: {
         format: typeof stacktrace$format,
         get: typeof stacktrace$get,
     }
@@ -1932,8 +1903,7 @@ declare class Snapshot {
  * @param  The error to format.
  * @return  The formatted error.
  */
-declare
-function stacktrace$format(error: any): any
+declare function stacktrace$format(error: any): any
 
 
 /**
@@ -1942,15 +1912,12 @@ function stacktrace$format(error: any): any
 this function.
  * @return  The frames of the stack trace.
 */
-declare
-function stacktrace$get(): stacktrace$Frame[]
+declare function stacktrace$get(): stacktrace$Frame[]
 
-declare
-var BROWSER_SUPPORTED: boolean;
+declare var BROWSER_SUPPORTED: boolean;
 
 
-declare
-var npm$namespace$until: {
+declare var npm$namespace$until: {
         ableToSwitchToFrame: typeof until$ableToSwitchToFrame,
         alertIsPresent: typeof until$alertIsPresent,
         elementIsDisabled: typeof until$elementIsDisabled,
@@ -2017,8 +1984,7 @@ function(!webdriver.WebDriver): !webdriver.WebElement)} frame
 The frame identifier.
  * @return  A new condition.
 */
-declare
-function until$ableToSwitchToFrame(
+declare function until$ableToSwitchToFrame(
     frame: number |
     webdriver$WebElement |
     webdriver$Locator |
@@ -2031,8 +1997,7 @@ function until$ableToSwitchToFrame(
      * returned promise will be fulfilled with the handle for the opened alert.
      * @return  The new condition.
      */
-    declare
-function until$alertIsPresent(): until$Condition<webdriver$Alert >
+    declare function until$alertIsPresent(): until$Condition<webdriver$Alert >
 
 
     /**
@@ -2041,8 +2006,7 @@ function until$alertIsPresent(): until$Condition<webdriver$Alert >
      * @return  The new condition.
      * @see  webdriver.WebDriver#isEnabled
      */
-    declare
-function until$elementIsDisabled(element: webdriver$WebElement): until$Condition<boolean >
+    declare function until$elementIsDisabled(element: webdriver$WebElement): until$Condition<boolean >
 
 
     /**
@@ -2051,8 +2015,7 @@ function until$elementIsDisabled(element: webdriver$WebElement): until$Condition
      * @return  The new condition.
      * @see  webdriver.WebDriver#isEnabled
      */
-    declare
-function until$elementIsEnabled(element: webdriver$WebElement): until$Condition<boolean >
+    declare function until$elementIsEnabled(element: webdriver$WebElement): until$Condition<boolean >
 
 
     /**
@@ -2061,8 +2024,7 @@ function until$elementIsEnabled(element: webdriver$WebElement): until$Condition<
      * @return  The new condition.
      * @see  webdriver.WebDriver#isSelected
      */
-    declare
-function until$elementIsNotSelected(element: webdriver$WebElement): until$Condition<boolean >
+    declare function until$elementIsNotSelected(element: webdriver$WebElement): until$Condition<boolean >
 
 
     /**
@@ -2072,8 +2034,7 @@ function until$elementIsNotSelected(element: webdriver$WebElement): until$Condit
      * @return  The new condition.
      * @see  webdriver.WebDriver#isDisplayed
      */
-    declare
-function until$elementIsNotVisible(element: webdriver$WebElement): until$Condition<boolean >
+    declare function until$elementIsNotVisible(element: webdriver$WebElement): until$Condition<boolean >
 
 
     /**
@@ -2082,8 +2043,7 @@ function until$elementIsNotVisible(element: webdriver$WebElement): until$Conditi
      * @return  The new condition.
      * @see  webdriver.WebDriver#isSelected
      */
-    declare
-function until$elementIsSelected(element: webdriver$WebElement): until$Condition<boolean >
+    declare function until$elementIsSelected(element: webdriver$WebElement): until$Condition<boolean >
 
 
     /**
@@ -2092,8 +2052,7 @@ function until$elementIsSelected(element: webdriver$WebElement): until$Condition
      * @return  The new condition.
      * @see  webdriver.WebDriver#isDisplayed
      */
-    declare
-function until$elementIsVisible(element: webdriver$WebElement): until$Condition<boolean >
+    declare function until$elementIsVisible(element: webdriver$WebElement): until$Condition<boolean >
 
 
     /**
@@ -2104,8 +2063,7 @@ function until$elementIsVisible(element: webdriver$WebElement): until$Condition<
     to use.
      * @return  The new condition.
     */
-    declare
-function until$elementLocated(
+    declare function until$elementLocated(
     locator: webdriver$Locator | By$Hash | Function): until$Condition<webdriver$WebElement >
 
 
@@ -2119,8 +2077,7 @@ function until$elementLocated(
      * @return  The new condition.
      * @see  webdriver.WebDriver#getText
     */
-    declare
-function until$elementTextContains(element: webdriver$WebElement, substr: string): until$Condition<boolean >
+    declare function until$elementTextContains(element: webdriver$WebElement, substr: string): until$Condition<boolean >
 
 
     /**
@@ -2134,8 +2091,7 @@ function until$elementTextContains(element: webdriver$WebElement, substr: string
      * @return  The new condition.
      * @see  webdriver.WebDriver#getText
     */
-    declare
-function until$elementTextIs(element: webdriver$WebElement, text: string): until$Condition<boolean >
+    declare function until$elementTextIs(element: webdriver$WebElement, text: string): until$Condition<boolean >
 
 
     /**
@@ -2148,8 +2104,7 @@ function until$elementTextIs(element: webdriver$WebElement, text: string): until
      * @return  The new condition.
      * @see  webdriver.WebDriver#getText
     */
-    declare
-function until$elementTextMatches(element: webdriver$WebElement, regex: RegExp): until$Condition<boolean >
+    declare function until$elementTextMatches(element: webdriver$WebElement, regex: RegExp): until$Condition<boolean >
 
 
     /**
@@ -2161,8 +2116,7 @@ function until$elementTextMatches(element: webdriver$WebElement, regex: RegExp):
      * @return  The new
     condition.
     */
-    declare
-function until$elementsLocated(
+    declare function until$elementsLocated(
     locator: webdriver$Locator | By$Hash | Function): until$Condition<webdriver$WebElement[] >
 
 
@@ -2173,8 +2127,7 @@ function until$elementsLocated(
      * @param  The element that should become stale.
      * @return  The new condition.
     */
-    declare
-function until$stalenessOf(element: webdriver$WebElement): until$Condition<boolean >
+    declare function until$stalenessOf(element: webdriver$WebElement): until$Condition<boolean >
 
 
     /**
@@ -2184,8 +2137,7 @@ function until$stalenessOf(element: webdriver$WebElement): until$Condition<boole
     title.
      * @return  The new condition.
     */
-    declare
-function until$titleContains(substr: string): until$Condition<boolean >
+    declare function until$titleContains(substr: string): until$Condition<boolean >
 
 
     /**
@@ -2194,8 +2146,7 @@ function until$titleContains(substr: string): until$Condition<boolean >
      * @param  The expected page title.
      * @return  The new condition.
      */
-    declare
-function until$titleIs(title: string): until$Condition<boolean >
+    declare function until$titleIs(title: string): until$Condition<boolean >
 
 
     /**
@@ -2204,8 +2155,7 @@ function until$titleIs(title: string): until$Condition<boolean >
      * @param  The regular expression to test against.
      * @return  The new condition.
      */
-    declare
-function until$titleMatches(regex: RegExp): until$Condition<boolean >
+    declare function until$titleMatches(regex: RegExp): until$Condition<boolean >
 
     declare interface webdriver$ILocation {
         x: number,
@@ -2229,8 +2179,7 @@ declare interface webdriver$IButton {
         RIGHT: number
 }
 
-declare
-var Button: webdriver$IButton;
+declare var Button: webdriver$IButton;
 
 
 /**
@@ -2318,8 +2267,7 @@ declare interface webdriver$IKey {
         chord: (...var_args: string[]) => string
 }
 
-declare
-var Key: webdriver$IKey;
+declare var Key: webdriver$IKey;
 
 
 /**
@@ -2739,8 +2687,7 @@ declare interface webdriver$IBrowser {
         HTMLUNIT: string
 }
 
-declare
-var Browser: webdriver$IBrowser;
+declare var Browser: webdriver$IBrowser;
 
 declare interface webdriver$ProxyConfig {
     proxyType: string,
@@ -3012,8 +2959,7 @@ declare interface webdriver$ICapability {
         VERSION: string
 }
 
-declare
-var Capability: webdriver$ICapability;
+declare var Capability: webdriver$ICapability;
 
 declare class Capabilities {
 
@@ -3286,8 +3232,7 @@ declare interface webdriver$ICommandName {
         GET_SESSION_LOGS: string
 }
 
-declare
-var CommandName: webdriver$ICommandName;
+declare var CommandName: webdriver$ICommandName;
 
 
 /**
@@ -5148,8 +5093,7 @@ declare class WebElementPromise mixins WebElement, undefined.IThenable<webdriver
 }
 
 
-declare
-var npm$namespace$By: {
+declare var npm$namespace$By: {
         className: typeof By$className,
         css: typeof By$css,
         id: typeof By$id,
@@ -5168,8 +5112,7 @@ var npm$namespace$By: {
      * @see  http://www.w3.org/TR/2011/WD-html5-20110525/elements.html#classes
      * @see  http://www.w3.org/TR/CSS2/selector.html#class-html
      */
-declare
-function By$className(value: string): webdriver$Locator
+declare function By$className(value: string): webdriver$Locator
 
 
 /**
@@ -5182,8 +5125,7 @@ implementation may, however, emulate the CSS selector API.
  * @return  The new locator.
  * @see  http://www.w3.org/TR/CSS2/selector.html
 */
-declare
-function By$css(value: string): webdriver$Locator
+declare function By$css(value: string): webdriver$Locator
 
 
 /**
@@ -5191,8 +5133,7 @@ function By$css(value: string): webdriver$Locator
  * @param  The ID to search for.
  * @return  The new locator.
  */
-declare
-function By$id(value: string): webdriver$Locator
+declare function By$id(value: string): webdriver$Locator
 
 
 /**
@@ -5201,8 +5142,7 @@ function By$id(value: string): webdriver$Locator
  * @param  The link text to search for.
  * @return  The new locator.
  */
-declare
-function By$linkText(value: string): webdriver$Locator
+declare function By$linkText(value: string): webdriver$Locator
 
 
 /**
@@ -5215,8 +5155,7 @@ The result of this expression must be an element or list of elements.
  * @return  A new,
 JavaScript-based locator function.
 */
-declare
-function By$js(
+declare function By$js(
     script: any,
     ...var_args: any[]): (WebDriver: webdriver$WebDriver) => undefined.Promise<any >
 
@@ -5226,8 +5165,7 @@ function By$js(
      * @param  The name attribute to search for.
      * @return  The new locator.
      */
-    declare
-function By$name(value: string): webdriver$Locator
+    declare function By$name(value: string): webdriver$Locator
 
 
 /**
@@ -5236,8 +5174,7 @@ function By$name(value: string): webdriver$Locator
  * @param  The substring to check for in a link's visible text.
  * @return  The new locator.
  */
-declare
-function By$partialLinkText(value: string): webdriver$Locator
+declare function By$partialLinkText(value: string): webdriver$Locator
 
 
 /**
@@ -5249,8 +5186,7 @@ DOM function.
  * @return  The new locator.
  * @see  http://www.w3.org/TR/REC-DOM-Level-1/level-one-core.html
 */
-declare
-function By$tagName(value: string): webdriver$Locator
+declare function By$tagName(value: string): webdriver$Locator
 
 
 /**
@@ -5264,8 +5200,7 @@ WebElement.
  * @return  The new locator.
  * @see  http://www.w3.org/TR/xpath/
 */
-declare
-function By$xpath(value: string): webdriver$Locator
+declare function By$xpath(value: string): webdriver$Locator
 
 
 /**
@@ -5417,8 +5352,7 @@ declare class Session {
      */
     toJSON(): string
 }
-declare
-var npm$namespace$testing: {
+declare var npm$namespace$testing: {
         describe: typeof testing$describe,
         xdescribe: typeof testing$xdescribe,
         after: typeof testing$after,
@@ -5435,8 +5369,7 @@ var npm$namespace$testing: {
      * @param fn The suite function, or {
      * @code  undefined} to define a pending test suite.
      */
-declare
-function testing$describe(name: string, fn: Function): void
+declare function testing$describe(name: string, fn: Function): void
 
 
 /**
@@ -5445,40 +5378,35 @@ function testing$describe(name: string, fn: Function): void
  * @param fn The suite function, or {
  * @code  undefined} to define a pending test suite.
  */
-declare
-function testing$xdescribe(name: string, fn: Function): void
+declare function testing$xdescribe(name: string, fn: Function): void
 
 
 /**
  * Register a function to call after the current suite finishes.
  * @param fn 
  */
-declare
-function testing$after(fn: Function): void
+declare function testing$after(fn: Function): void
 
 
 /**
  * Register a function to call after each test in a suite.
  * @param fn 
  */
-declare
-function testing$afterEach(fn: Function): void
+declare function testing$afterEach(fn: Function): void
 
 
 /**
  * Register a function to call before the current suite starts.
  * @param fn 
  */
-declare
-function testing$before(fn: Function): void
+declare function testing$before(fn: Function): void
 
 
 /**
  * Register a function to call before each test in a suite.
  * @param fn 
  */
-declare
-function testing$beforeEach(fn: Function): void
+declare function testing$beforeEach(fn: Function): void
 
 
 /**
@@ -5487,8 +5415,7 @@ function testing$beforeEach(fn: Function): void
  * @param fn The test function, or {
  * @code  undefined} to define a pending test case.
  */
-declare
-function testing$it(name: string, fn: Function): void
+declare function testing$it(name: string, fn: Function): void
 
 
 /**
@@ -5498,8 +5425,7 @@ function testing$it(name: string, fn: Function): void
  * @param fn The test function, or {
  * @code  undefined} to define a pending test case.
  */
-declare
-function testing$iit(name: string, fn: Function): void
+declare function testing$iit(name: string, fn: Function): void
 
 
 /**
@@ -5508,8 +5434,7 @@ function testing$iit(name: string, fn: Function): void
  * @param fn The test function, or {
  * @code  undefined} to define a pending test case.
  */
-declare
-function testing$xit(name: string, fn: Function): voiddeclare module 'selenium-webdriver/chrome' {
+declare function testing$xit(name: string, fn: Function): voiddeclare module 'selenium-webdriver/chrome' {
     declare module.exports: typeof chrome
 }
 declare module 'selenium-webdriver/firefox' {

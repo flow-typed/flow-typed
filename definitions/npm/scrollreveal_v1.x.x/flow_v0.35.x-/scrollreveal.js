@@ -78,5 +78,4 @@ declare interface scrollReveal$ScrollRevealObject {
             interval: number): scrollReveal$ScrollRevealObject,
         sync(): void
 }
-declare
-var ScrollReveal: scrollReveal$ScrollRevealObject;
+declare var ScrollReveal: scrollReveal$ScrollRevealObject;

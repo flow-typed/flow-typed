@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var screenfull: IScreenfull;
+declare var screenfull: IScreenfull;
 declare interface IScreenfullRaw {
     requestFullscreen?: string,
         exitFullscreen?: string,

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IEmailComposerOptions {
+declare export interface ngCordova$IEmailComposerOptions {
     to: string | Array<string>,
         cc?: string | Array<string>,
         bcc?: string | Array<string>,
@@ -17,8 +16,7 @@ export interface ngCordova$IEmailComposerOptions {
         isHtml?: boolean
 }
 
-declare
-export interface ngCordova$IEmailComposerService {
+declare export interface ngCordova$IEmailComposerService {
     isAvailable(): ng.IPromise<boolean>,
         open(properties: ngCordova$IEmailComposerOptions): ng.IPromise<any>,
         addAlias(app: string, schema: string): void

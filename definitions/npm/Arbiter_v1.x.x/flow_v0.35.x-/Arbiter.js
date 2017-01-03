@@ -6,13 +6,11 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ArbiterDef$SubscribeHandler {
+declare export interface ArbiterDef$SubscribeHandler {
     (data: any, message: string, subscriber_context: any): void
 }
 
-declare
-export interface ArbiterDef$SubscribeOptions {
+declare export interface ArbiterDef$SubscribeOptions {
 
     /**
      * By default, all subscribers have a priority of 0. Higher values get higher
@@ -32,8 +30,7 @@ export interface ArbiterDef$SubscribeOptions {
         persist?: boolean
 }
 
-declare
-export interface ArbiterDef$PublishOptions {
+declare export interface ArbiterDef$PublishOptions {
 
     /**
      * By default, subscribers can return "false" to prevent subsequent subscribers from
@@ -55,8 +52,7 @@ export interface ArbiterDef$PublishOptions {
         async?: boolean
 }
 
-declare
-export interface ArbiterDef$ArbiterStatic {
+declare export interface ArbiterDef$ArbiterStatic {
     version: string,
         updated_on: string,
 
@@ -138,5 +134,4 @@ export interface ArbiterDef$ArbiterStatic {
          */
         resubscribe(subscription_id: number): boolean
 }
-declare
-var Arbiter: ArbiterDef$ArbiterStatic;
+declare var Arbiter: ArbiterDef$ArbiterStatic;

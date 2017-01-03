@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class RenderPass {
+declare export class RenderPass {
     constructor(scene: Scene, camera: Camera, overrideMaterial?: Material, clearColor?: Color, clearAlpha?: number): this;
     constructor(scene: Scene, camera: Camera, overrideMaterial?: Material, clearColor?: string, clearAlpha?: number): this;
     constructor(scene: Scene, camera: Camera, overrideMaterial?: Material, clearColor?: number, clearAlpha?: number): this;

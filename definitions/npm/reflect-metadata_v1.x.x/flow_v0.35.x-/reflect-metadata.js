@@ -10,8 +10,7 @@ declare module 'reflect-metadata' {
 
 }
 
-declare
-var npm$namespace$Reflect: {
+declare var npm$namespace$Reflect: {
         decorate: typeof Reflect$decorate,
         metadata: typeof Reflect$metadata,
         defineMetadata: typeof Reflect$defineMetadata,
@@ -35,8 +34,7 @@ var npm$namespace$Reflect: {
     // constructor
     C = Reflect.decorate(decoratorsArray, C);
     */
-declare
-function Reflect$decorate(decorators: ClassDecorator[], target: Function): Function
+declare function Reflect$decorate(decorators: ClassDecorator[], target: Function): Function
 
 
 /**
@@ -76,8 +74,7 @@ class C {
 method() { }
 }
 */
-declare
-function Reflect$metadata(
+declare function Reflect$metadata(
     metadataKey: any,
     metadataValue: any): {
     (target: Function): void,
@@ -102,8 +99,7 @@ function MyAnnotation(options): ClassDecorator {
 return target => Reflect.defineMetadata("custom:annotation", options, target);
 }
 */
-declare
-function Reflect$defineMetadata(metadataKey: any, metadataValue: any, target: Object): void
+declare function Reflect$defineMetadata(metadataKey: any, metadataValue: any, target: Object): void
 
 
 /**
@@ -118,8 +114,7 @@ class C {
 // constructor
 result = Reflect.hasMetadata("custom:annotation", C);
 */
-declare
-function Reflect$hasMetadata(metadataKey: any, target: Object): boolean
+declare function Reflect$hasMetadata(metadataKey: any, target: Object): boolean
 
 
 /**
@@ -134,8 +129,7 @@ class C {
 // constructor
 result = Reflect.hasOwnMetadata("custom:annotation", C);
 */
-declare
-function Reflect$hasOwnMetadata(metadataKey: any, target: Object): boolean
+declare function Reflect$hasOwnMetadata(metadataKey: any, target: Object): boolean
 
 
 /**
@@ -150,8 +144,7 @@ class C {
 // constructor
 result = Reflect.getMetadata("custom:annotation", C);
 */
-declare
-function Reflect$getMetadata(metadataKey: any, target: Object): any
+declare function Reflect$getMetadata(metadataKey: any, target: Object): any
 
 
 /**
@@ -166,8 +159,7 @@ class C {
 // constructor
 result = Reflect.getOwnMetadata("custom:annotation", C);
 */
-declare
-function Reflect$getOwnMetadata(metadataKey: any, target: Object): any
+declare function Reflect$getOwnMetadata(metadataKey: any, target: Object): any
 
 
 /**
@@ -181,8 +173,7 @@ class C {
 // constructor
 result = Reflect.getMetadataKeys(C);
 */
-declare
-function Reflect$getMetadataKeys(target: Object): any[]
+declare function Reflect$getMetadataKeys(target: Object): any[]
 
 
 /**
@@ -196,8 +187,7 @@ class C {
 // constructor
 result = Reflect.getOwnMetadataKeys(C);
 */
-declare
-function Reflect$getOwnMetadataKeys(target: Object): any[]
+declare function Reflect$getOwnMetadataKeys(target: Object): any[]
 
 
 /**
@@ -212,5 +202,4 @@ class C {
 // constructor
 result = Reflect.deleteMetadata("custom:annotation", C);
 */
-declare
-function Reflect$deleteMetadata(metadataKey: any, target: Object): boolean
+declare function Reflect$deleteMetadata(metadataKey: any, target: Object): boolean

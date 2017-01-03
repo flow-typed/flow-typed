@@ -11,8 +11,7 @@ declare interface autosize$AutosizeStatic {
     (el: NodeList): void,
     (el: JQuery): void
 }
-declare
-var autosize: autosize$AutosizeStatic;
+declare var autosize: autosize$AutosizeStatic;
 declare module 'autosize' {
     declare module.exports: typeof autosize
 }

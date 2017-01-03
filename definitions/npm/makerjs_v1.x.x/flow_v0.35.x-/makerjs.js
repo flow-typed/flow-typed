@@ -246,5 +246,4 @@ declare module 'models' {
         constructor(font: opentypejs.Font, text: string, fontSize: number, combine?: boolean): this
     }
 }
-declare
-var Bezier: typeof undefined;
+declare var Bezier: typeof undefined;

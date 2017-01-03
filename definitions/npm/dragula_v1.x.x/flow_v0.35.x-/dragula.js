@@ -39,8 +39,7 @@ declare interface dragula$Dragula {
     (options: dragula$DragulaOptions): dragula$Drake,
     (): dragula$Drake
 }
-declare
-var dragula: dragula$Dragula;
+declare var dragula: dragula$Dragula;
 declare module 'dragula' {
     declare module.exports: typeof dragula
 }

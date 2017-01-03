@@ -15,10 +15,8 @@ declare interface JQuery {
         w2form(options: Object): W2UI$W2Form,
         w2popup(options: Object): W2UI$W2Popup
 }
-declare
-var w2popup: W2UI$W2Popup;
-declare
-var w2ui: W2UI$W2UI;
+declare var w2popup: W2UI$W2Popup;
+declare var w2ui: W2UI$W2UI;
 declare interface W2UI$W2Event {
     onComplete: () => void,
         target: string

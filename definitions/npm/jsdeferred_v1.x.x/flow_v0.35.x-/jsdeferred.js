@@ -66,12 +66,4 @@ declare class Deferred {
 declare interface JQueryXHR {
     next(fun: Function): Deferred
 }
-declare
-function chain(...args: any[]): Deferreddeclare
-function wait(n: number): Deferreddeclare
-function call(fun?: Function, ...args: any[]): Deferreddeclare
-function parallel(dl: any): Deferreddeclare
-function earlier(dl: any): Deferreddeclare
-function loop(n: number, fun: FunctionWithNumber): Deferreddeclare
-function repeat(n: number, fun: FunctionWithNumber): Deferreddeclare
-function next(fun: Function): Deferred
+declare function chain(...args: any[]): Deferreddeclare function wait(n: number): Deferreddeclare function call(fun?: Function, ...args: any[]): Deferreddeclare function parallel(dl: any): Deferreddeclare function earlier(dl: any): Deferreddeclare function loop(n: number, fun: FunctionWithNumber): Deferreddeclare function repeat(n: number, fun: FunctionWithNumber): Deferreddeclare function next(fun: Function): Deferred

@@ -186,8 +186,7 @@ declare type CheerioAPI = {
     load(html: string, options?: CheerioOptionsInterface): CheerioStatic,
     load(element: CheerioElement, options?: CheerioOptionsInterface): CheerioStatic
 } & CheerioSelector
-declare
-var cheerio: CheerioAPI;
+declare var cheerio: CheerioAPI;
 declare module 'cheerio' {
     declare module.exports: typeof cheerio
 }

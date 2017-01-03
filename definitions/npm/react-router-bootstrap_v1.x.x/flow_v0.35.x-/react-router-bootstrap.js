@@ -14,11 +14,9 @@ declare type ReactRouterBootstrap$LinkContainer = {}
 
 declare type ReactRouterBootstrap$LinkContainerElement = {}
 
-declare
-var LinkContainer: ReactRouterBootstrap$LinkContainer;
+declare var LinkContainer: ReactRouterBootstrap$LinkContainer;
 
-declare
-var IndexLinkContainer: ReactRouterBootstrap$LinkContainer;
+declare var IndexLinkContainer: ReactRouterBootstrap$LinkContainer;
 declare module 'react-router-bootstrap/lib/LinkContainer' {
     declare module.exports: typeof ReactRouterBootstrap$LinkContainer
 }

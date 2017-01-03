@@ -55,5 +55,4 @@ declare module 'Lock' {
             getUserLock(): GoogleAppsScript$Lock
     }
 }
-declare
-var LockService: undefined.LockService;
+declare var LockService: undefined.LockService;

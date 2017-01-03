@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IGeoPositionError {
+declare export interface ngCordova$IGeoPositionError {
     code: number,
         message: string
 }
 
-declare
-export interface ngCordova$IGeoCoordinates {
+declare export interface ngCordova$IGeoCoordinates {
     latitude?: number,
         longitude?: number,
         accuracy?: number,
@@ -23,21 +21,18 @@ export interface ngCordova$IGeoCoordinates {
         altitudeAccuracy?: number
 }
 
-declare
-export interface ngCordova$IGeoPosition {
+declare export interface ngCordova$IGeoPosition {
     coords: ngCordova$IGeoCoordinates,
         timestamp: Date
 }
 
-declare
-export interface ngCordova$IGeolocationOptions {
+declare export interface ngCordova$IGeolocationOptions {
     timeout?: number,
         maximumAge?: number,
         enableHighAccuracy?: boolean
 }
 
-declare
-export interface ngCordova$IGeolocationService {
+declare export interface ngCordova$IGeolocationService {
     getCurrentPosition(options?: ngCordova$IGeolocationOptions): ng.IPromise<ngCordova$IGeoPosition>,
         watchPosition(options?: ngCordova$IGeolocationOptions): ng.IPromise<ngCordova$IGeoPosition>,
         clearWatch(watchID: {

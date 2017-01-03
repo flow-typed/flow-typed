@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class MaskPass {
+declare export class MaskPass {
     constructor(scene: Scene, camera: Camera): this;
     scene: Scene;
     camera: Camera;
@@ -22,8 +21,7 @@ export class MaskPass {
         delta: number): void
 }
 
-declare
-export class ClearMaskPass {
+declare export class ClearMaskPass {
     constructor(): this;
     enabled: boolean;
     render(

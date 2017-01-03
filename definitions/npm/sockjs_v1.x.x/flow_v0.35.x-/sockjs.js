@@ -32,8 +32,7 @@ declare type SockJS = {
     CONNECTING: number,
     CLOSED: number
 } & WebSocket
-declare
-var SockJS: {
+declare var SockJS: {
     prototype: SockJS,
     new(
         url: string,

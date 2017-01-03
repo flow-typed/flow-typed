@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class ShaderPass {
+declare export class ShaderPass {
     constructor(shader: Shader, textureID?: string): this;
     textureID: string;
     uniforms: any;

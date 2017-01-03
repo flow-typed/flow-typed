@@ -7,15 +7,13 @@
  */
 
 
-declare
-var npm$namespace$createjs: {
+declare var npm$namespace$createjs: {
     extend: typeof createjs$extend,
     indexOf: typeof createjs$indexOf,
     promote: typeof createjs$promote,
     proxy: typeof createjs$proxy,
 }
-declare
-export class Event {
+declare export class Event {
     constructor(type: string, bubbles: boolean, cancelable: boolean): this;
     bubbles: boolean;
     cancelable: boolean;
@@ -54,8 +52,7 @@ export class Event {
     toString(): string
 }
 
-declare
-export class EventDispatcher {
+declare export class EventDispatcher {
     constructor(): this;
     addEventListener(
         type: string,
@@ -155,17 +152,13 @@ export class EventDispatcher {
     willTrigger(type: string): boolean
 }
 
-declare
-export function createjs$extend(subclass: () => any, superclass: () => any): () => any
+declare export function createjs$extend(subclass: () => any, superclass: () => any): () => any
 
-declare
-export function createjs$indexOf(array: any[], searchElement: Object): number
+declare export function createjs$indexOf(array: any[], searchElement: Object): number
 
-declare
-export function createjs$promote(subclass: () => any, prefix: string): () => any
+declare export function createjs$promote(subclass: () => any, prefix: string): () => any
 
-declare
-export function createjs$proxy(
+declare export function createjs$proxy(
     method: (eventObj: Object) => boolean,
     scope: Object,
     ...arg: any[]): (eventObj: Object) => any

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Hashids$IHashids {
+declare export interface Hashids$IHashids {
     new(salt: string, minHashLength?: number, alphabet?: string): Hashids$IHashids,
     version: string,
         minAlphabetLength: number,

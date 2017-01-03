@@ -25,8 +25,7 @@ declare interface XtermConstructor {
     new(options?: Xterm.IOptions): Xterm,
     (options?: Xterm.IOptions): Xterm
 }
-declare
-var Xterm: XtermConstructor;
+declare var Xterm: XtermConstructor;
 declare module 'xterm' {
     declare module.exports: typeof Xterm
 }

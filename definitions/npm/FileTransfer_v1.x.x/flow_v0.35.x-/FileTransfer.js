@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IFileTransferService {
+declare export interface ngCordova$IFileTransferService {
     download(
             url: string,
             filePath: string,
@@ -20,8 +19,7 @@ export interface ngCordova$IFileTransferService {
             trustAllHosts?: boolean): ngCordova$IFileTransferPromise<FileUploadResult >
 }
 
-declare
-export type ngCordova$IFileTransferPromise<T>= {
+declare export type ngCordova$IFileTransferPromise<T>= {
     then<TResult>(
         successCallback: (promiseValue: T) => ng.IPromise<TResult>| TResult,
         errorCallback?: (error: FileTransferError) => ng.IPromise<TResult>| TResult,
@@ -30,15 +28,13 @@ export type ngCordova$IFileTransferPromise<T>= {
         onRejected: (error: FileTransferError) => ng.IPromise<TResult>| TResult): ng.IPromise<TResult >
 }
 
-declare
-export type ngCordova$IFileDownloadOptions = {
+declare export type ngCordova$IFileDownloadOptions = {
     encodeURI?: boolean,
     timeout?: number
 } & FileDownloadOptions
 
 
-declare
-export type ngCordova$IFileUploadOptions = {
+declare export type ngCordova$IFileUploadOptions = {
     encodeURI?: boolean,
     timeout?: number
 } & FileUploadOptions

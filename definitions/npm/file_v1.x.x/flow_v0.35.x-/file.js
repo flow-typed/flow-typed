@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IFileService {
+declare export interface ngCordova$IFileService {
     getFreeDiskSpace(): ngCordova$IFilePromise<number>,
         checkDir(path: string, directory: string): ngCordova$IFilePromise<DirectoryEntry>,
         checkFile(path: string, file: string): ngCordova$IFilePromise<FileEntry>,
@@ -63,8 +62,7 @@ export interface ngCordova$IFileService {
             newFile?: string): ngCordova$IFilePromise<FileEntry >
 }
 
-declare
-export type ngCordova$IFilePromise<T>= {
+declare export type ngCordova$IFilePromise<T>= {
     then<TResult>(
         successCallback: (promiseValue: T) => ng.IPromise<TResult>| TResult,
         errorCallback?: (error: ngCordova$IFileError) => ng.IPromise<TResult>| TResult): ng.IPromise<TResult>,
@@ -72,13 +70,11 @@ export type ngCordova$IFilePromise<T>= {
         onRejected: (error: ngCordova$IFileError) => ng.IPromise<TResult>| TResult): ng.IPromise<TResult >
 }
 
-declare
-export interface ngCordova$IFileRemoveResult<TEntry>{
+declare export interface ngCordova$IFileRemoveResult<TEntry>{
     success: boolean,
     fileRemoved: TEntry
 }
 
-declare
-export type ngCordova$IFileError = {
+declare export type ngCordova$IFileError = {
     message: string
 } & FileError

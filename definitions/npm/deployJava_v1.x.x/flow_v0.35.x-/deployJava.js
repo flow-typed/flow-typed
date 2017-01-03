@@ -359,5 +359,4 @@ declare interface DeployJava$DeployJavaStatic {
          */
         writeEmbedTag(): void
 }
-declare
-var deployJava: DeployJava$DeployJavaStatic;
+declare var deployJava: DeployJava$DeployJavaStatic;

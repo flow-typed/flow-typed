@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var colorbrewer: ColorBrewer$Base;
+declare var colorbrewer: ColorBrewer$Base;
 declare interface ColorBrewer$ColorScheme {
     [n: number]: string[]
 }

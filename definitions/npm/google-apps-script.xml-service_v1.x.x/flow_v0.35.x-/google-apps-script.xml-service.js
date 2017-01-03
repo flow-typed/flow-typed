@@ -337,5 +337,4 @@ declare module 'XML_Service' {
             parse(xml: string): Document
     }
 }
-declare
-var XmlService: undefined.XmlService;
+declare var XmlService: undefined.XmlService;

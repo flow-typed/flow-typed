@@ -29,12 +29,10 @@ declare interface Heuristics {
     manhatten: Heuristic,
         diagonal: Heuristic
 }
-declare
-var npm$namespace$astar: {
+declare var npm$namespace$astar: {
     search: typeof astar$search,
 }
-declare
-function astar$search(
+declare function astar$search(
     graph: Graph,
     start: {
         x: number,
@@ -49,5 +47,4 @@ function astar$search(
         heuristic?: Heuristic
     }): Array<GridNode >
 
-    declare
-var heuristics: Heuristics;
+    declare var heuristics: Heuristics;

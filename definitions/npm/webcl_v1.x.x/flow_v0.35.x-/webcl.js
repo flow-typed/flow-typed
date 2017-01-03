@@ -9,8 +9,7 @@
 declare interface Window {
     webcl: WEBCL$WebCL
 }
-declare
-var WebCLEvent: {
+declare var WebCLEvent: {
     new(): WEBCL$WebCLEvent
 };
 declare type WEBCL$WebCLBuffer = {

@@ -29,8 +29,7 @@ declare type AtomEventKit$Disposable = {
 } & AtomEventKit$IDisposable
 
 
-declare
-var Disposable: AtomEventKit$DisposableStatic;
+declare var Disposable: AtomEventKit$DisposableStatic;
 
 
 /**
@@ -54,8 +53,7 @@ declare type AtomEventKit$CompositeDisposable = {
 } & AtomEventKit$IDisposable
 
 
-declare
-var CompositeDisposable: AtomEventKit$CompositeDisposableStatic;
+declare var CompositeDisposable: AtomEventKit$CompositeDisposableStatic;
 
 
 /**
@@ -97,8 +95,7 @@ declare interface AtomEventKit$Emitter {
         emit(eventName: string, value: any): void
 }
 
-declare
-var Emitter: AtomEventKit$EmitterStatic;
+declare var Emitter: AtomEventKit$EmitterStatic;
 declare module 'event-kit' {
     declare module.exports: typeof AtomEventKit
 }

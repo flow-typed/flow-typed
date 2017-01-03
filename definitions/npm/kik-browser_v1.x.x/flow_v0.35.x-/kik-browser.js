@@ -127,5 +127,4 @@ declare interface KikGetFromCameraCallbacks {
         onComplete: (photos: string[]) => void,
         onCancel: () => void
 }
-declare
-var kik: Kik;
+declare var kik: Kik;

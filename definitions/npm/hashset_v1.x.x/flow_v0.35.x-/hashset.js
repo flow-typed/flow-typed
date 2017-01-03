@@ -28,8 +28,7 @@ declare interface IHashSetStatic {
             hashCode?: (value: TValue) => any,
             equals?: (value1: TValue, value2: TValue) => boolean): IHashSet<TValue >
 }
-declare
-var HashSet: IHashSetStatic;
+declare var HashSet: IHashSetStatic;
 declare module 'hashset' {
     declare module.exports: typeof HashSet
 }

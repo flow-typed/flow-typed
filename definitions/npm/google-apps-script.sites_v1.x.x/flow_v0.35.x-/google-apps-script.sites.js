@@ -225,5 +225,4 @@ declare module 'Sites' {
             getSites(domain: string, start: Integer, max: Integer): Site[]
     }
 }
-declare
-var SitesApp: undefined.SitesApp;
+declare var SitesApp: undefined.SitesApp;

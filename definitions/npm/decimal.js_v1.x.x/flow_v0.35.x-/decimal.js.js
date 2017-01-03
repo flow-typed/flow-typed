@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Decimal: decimal$IDecimalStatic;
+declare var Decimal: decimal$IDecimalStatic;
 declare module 'decimal.js' {
     declare module.exports: typeof Decimal
 }

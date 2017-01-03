@@ -1917,8 +1917,7 @@ declare interface ext_dojo$NodeList {
     (array: any): void
 }
 
-declare
-var events: any[];
+declare var events: any[];
 
 
 /**

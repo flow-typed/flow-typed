@@ -69,8 +69,7 @@ declare interface StateMachine {
         transition: StateMachineTransition,
         transitions: StateMachineTransitions
 }
-declare
-var StateMachine: StateMachineStatic;
+declare var StateMachine: StateMachineStatic;
 declare module 'state-machine' {
     declare module.exports: typeof StateMachine
 }

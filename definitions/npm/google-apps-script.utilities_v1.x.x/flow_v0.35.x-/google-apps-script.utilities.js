@@ -52,11 +52,7 @@ declare module 'Utilities' {
             jsonStringify(obj: Object): string
     }
 }
-declare
-var Charset: undefined.Charset;
-declare
-var DigestAlgorithm: undefined.DigestAlgorithm;
-declare
-var MacAlgorithm: undefined.MacAlgorithm;
-declare
-var Utilities: undefined.Utilities;
+declare var Charset: undefined.Charset;
+declare var DigestAlgorithm: undefined.DigestAlgorithm;
+declare var MacAlgorithm: undefined.MacAlgorithm;
+declare var Utilities: undefined.Utilities;

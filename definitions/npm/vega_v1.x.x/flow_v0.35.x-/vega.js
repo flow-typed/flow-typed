@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Vega$Parse {
+declare export interface Vega$Parse {
     spec(
             url: string,
             callback: (chart: (args: Vega$ViewArgs) => Vega$View) => void): void,
@@ -17,16 +16,14 @@ export interface Vega$Parse {
         data(dataSet: Vega$Data[], callback: () => void): void
 }
 
-declare
-export interface Vega$ViewArgs {
+declare export interface Vega$ViewArgs {
     el: any,
         data?: any,
         hover?: boolean,
         renderer?: string
 }
 
-declare
-export interface Vega$View {
+declare export interface Vega$View {
     width(): number,
         width(w: number): Vega$View,
         height(): number,
@@ -47,24 +44,21 @@ export interface Vega$View {
         defs(defs: Vega$Defs): Vega$View
 }
 
-declare
-export interface Vega$Padding {
+declare export interface Vega$Padding {
     top: number,
         right: number,
         bottom: number,
         left: number
 }
 
-declare
-export interface Vega$UpdateOptions {
+declare export interface Vega$UpdateOptions {
     props?: string,
         items?: any,
         duration?: number,
         ease?: string
 }
 
-declare
-export interface Vega$Bounds {
+declare export interface Vega$Bounds {
     x1: number,
         y1: number,
         x2: number,
@@ -84,8 +78,7 @@ export interface Vega$Bounds {
         height(): number
 }
 
-declare
-export interface Vega$Model {
+declare export interface Vega$Model {
     defs(): Vega$Defs,
         defs(defs: Vega$Defs): Vega$Model,
         data(): Runtime$DataSets,
@@ -101,18 +94,15 @@ export interface Vega$Model {
         reset(): Vega$Model
 }
 
-declare
-export interface Runtime$DataSets {
+declare export interface Runtime$DataSets {
     [name: string]: Runtime$Datum[]
 }
 
-declare
-export interface Runtime$Datum {
+declare export interface Runtime$Datum {
     [key: string]: any
 }
 
-declare
-export interface Runtime$Marks {
+declare export interface Runtime$Marks {
     type: string,
         width: number,
         height: number,
@@ -122,21 +112,18 @@ export interface Runtime$Marks {
         marks: Vega$Mark[]
 }
 
-declare
-export interface Runtime$PropertySets {
+declare export interface Runtime$PropertySets {
     enter?: Axis$Properties,
         exit?: Axis$Properties,
         update?: Axis$Properties,
         hover?: Axis$Properties
 }
 
-declare
-export interface Runtime$Properties {
+declare export interface Runtime$Properties {
     (item: Vega$Node, group: Vega$Node, trans: any): void
 }
 
-declare
-export interface Vega$Node {
+declare export interface Vega$Node {
     def: Vega$Mark,
         marktype: string,
         interactive: boolean,
@@ -153,8 +140,7 @@ export interface Vega$Node {
         axisItems?: Vega$Node[]
 }
 
-declare
-export interface Vega$Defs {
+declare export interface Vega$Defs {
     width: number,
         height: number,
         viewport?: number[],
@@ -163,8 +149,7 @@ export interface Vega$Defs {
         data: Vega$Data[]
 }
 
-declare
-export interface Vega$Spec {
+declare export interface Vega$Spec {
 
     /**
      * A unique name for the visualization specification.
@@ -237,8 +222,7 @@ export interface Vega$Spec {
         marks: (Vega$Mark | Vega$GroupMark)[]
 }
 
-declare
-export interface Vega$Data {
+declare export interface Vega$Data {
 
     /**
      * A unique name for the data set.
@@ -279,8 +263,7 @@ export interface Vega$Data {
         transform?: Data$Transform[]
 }
 
-declare
-export interface Data$FormatBase {
+declare export interface Data$FormatBase {
 
     /**
      * The currently supported format types are json (JavaScript Object
@@ -297,15 +280,13 @@ export interface Data$FormatBase {
 For example "property": "values.features" is equivalent to retrieving json.values.features from the
 loaded JSON object.
 */
-declare
-export type Data$JsonFormat = {
+declare export type Data$JsonFormat = {
     type: string,
     property?: string
 } & Data$FormatBase
 
 
-declare
-export type Data$CsvOrTsvFormat = {
+declare export type Data$CsvOrTsvFormat = {
     type: string,
     parse?: {
         [propertyName: string]: string
@@ -313,16 +294,14 @@ export type Data$CsvOrTsvFormat = {
 } & Data$FormatBase
 
 
-declare
-export type Data$TopoJsonFormat = {
+declare export type Data$TopoJsonFormat = {
     type: string,
     feature?: string,
     mesh?: string
 } & Data$FormatBase
 
 
-declare
-export type Data$TreeJson = {
+declare export type Data$TreeJson = {
     type: string,
     children?: string,
     parse?: {
@@ -331,14 +310,11 @@ export type Data$TreeJson = {
 } & Data$FormatBase
 
 
-declare
-export type Data$Format = Data$JsonFormat | Data$CsvOrTsvFormat | Data$TopoJsonFormat | Data$TreeJson;
+declare export type Data$Format = Data$JsonFormat | Data$CsvOrTsvFormat | Data$TopoJsonFormat | Data$TreeJson;
 
-declare
-export interface Data$Transform {}
+declare export interface Data$Transform {}
 
-declare
-export interface Vega$Scale {
+declare export interface Vega$Scale {
     name?: string,
         type?: string,
         domain?: any,
@@ -362,8 +338,7 @@ export interface Vega$Scale {
         zero?: boolean
 }
 
-declare
-export interface Vega$Axis {
+declare export interface Vega$Axis {
     type: string,
         scale: string,
         orient?: string,
@@ -384,13 +359,11 @@ export interface Vega$Axis {
         properties?: Axis$Properties
 }
 
-declare
-export interface Axis$Properties {
+declare export interface Axis$Properties {
     (item: Vega$Node, group: Vega$Node, trans: any): void
 }
 
-declare
-export interface Vega$Legend {}
+declare export interface Vega$Legend {}
 
 declare module 'Mark' {
     declare export interface From {
@@ -401,8 +374,7 @@ declare module 'Mark' {
 }
 
 
-declare
-export type Vega$GroupMark = {
+declare export type Vega$GroupMark = {
     type: string,
 
     /**
@@ -430,16 +402,14 @@ export type Vega$GroupMark = {
 } & Vega$Mark
 
 
-declare
-export interface Vega$PropertySets {
+declare export interface Vega$PropertySets {
     enter?: Axis$Properties,
         exit?: Axis$Properties,
         update?: Axis$Properties,
         hover?: Axis$Properties
 }
 
-declare
-export interface Vega$PropertySet {
+declare export interface Vega$PropertySet {
     x?: Vega$ValueRef,
         x2?: Vega$ValueRef,
         width?: Vega$ValueRef,
@@ -476,8 +446,7 @@ export interface Vega$PropertySet {
         fontStyle?: Vega$ValueRef
 }
 
-declare
-export interface Vega$ValueRef {
+declare export interface Vega$ValueRef {
     value?: any,
         field?: any,
         group?: any,
@@ -486,19 +455,15 @@ export interface Vega$ValueRef {
         offset?: number,
         band?: boolean
 }
-declare
-export var parse: Vega$Parse;
+declare export var parse: Vega$Parse;
 
 
-declare
-var npm$namespace$scene: {
+declare var npm$namespace$scene: {
     item: typeof scene$item,
 }
-declare
-export function scene$item(mark: Vega$Node): Vega$Node
+declare export function scene$item(mark: Vega$Node): Vega$Node
 
-declare
-export class Bounds mixins Vega$Bounds {
+declare export class Bounds mixins Vega$Bounds {
     x1: number;
     y1: number;
     x2: number;

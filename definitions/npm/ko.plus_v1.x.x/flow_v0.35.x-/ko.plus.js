@@ -36,8 +36,7 @@ declare interface KnockoutBindingHandlers {
         command: KnockoutBindingHandler,
         sortBy: KnockoutBindingHandler
 }
-declare
-export interface KoPlus$Command {
+declare export interface KoPlus$Command {
     (): void,
     isRunning: KnockoutObservable<boolean>,
         canExecute: KnockoutComputed<boolean>,
@@ -50,29 +49,25 @@ export interface KoPlus$Command {
         then: (resolve: Function, reject: Function) => KoPlus$Command
 }
 
-declare
-export interface KoPlus$CommandOptions {
+declare export interface KoPlus$CommandOptions {
     action: Function,
         canExecute?: () => boolean,
         context?: any
 }
 
-declare
-export type KoPlus$EditableStatic = {
+declare export type KoPlus$EditableStatic = {
     (value?: T): KoPlus$Editable<T>,
     makeEditable(target: any): void
 } & KnockoutObservableStatic
 
 
-declare
-export type KoPlus$EditableArrayStatic = {
+declare export type KoPlus$EditableArrayStatic = {
     (value?: Array<T>): KoPlus$EditableArray<T>,
     makeEditable(target: any): void
 } & KnockoutObservableArrayStatic
 
 
-declare
-export interface KoPlus$EditableFunctions {
+declare export interface KoPlus$EditableFunctions {
     isEditing: KnockoutObservable<boolean>,
         beginEdit(): void,
         endEdit(): void,
@@ -80,9 +75,7 @@ export interface KoPlus$EditableFunctions {
         rollback(): void
 }
 
-declare
-export type KoPlus$Editable<T>= {} & KnockoutObservable & KoPlus$EditableFunctions
+declare export type KoPlus$Editable<T>= {} & KnockoutObservable & KoPlus$EditableFunctions
 
 
-declare
-export type KoPlus$EditableArray<T>= {} & KnockoutObservableArray & KoPlus$EditableFunctions
+declare export type KoPlus$EditableArray<T>= {} & KnockoutObservableArray & KoPlus$EditableFunctions

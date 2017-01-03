@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface DataTables$Settings {
+declare export interface DataTables$Settings {
 
     /**
      * Buttons extension options
@@ -19,8 +18,7 @@ export interface DataTables$Settings {
 /**
  * Buttons extension options
  */
-declare
-export interface DataTables$ButtonSettings {
+declare export interface DataTables$ButtonSettings {
 
     /**
      * Action to take when the button is activated
@@ -86,18 +84,15 @@ export interface DataTables$ButtonSettings {
         customize?: DataTables$FunctionButtonCustomize
 }
 
-declare
-export interface DataTables$FunctionButtonAvailable {
+declare export interface DataTables$FunctionButtonAvailable {
     (dt: DataTables$DataTable, config: any): boolean
 }
 
-declare
-export interface DataTables$ButtonExportOptions {
+declare export interface DataTables$ButtonExportOptions {
     columns?: string
 }
 
-declare
-export interface DataTables$ButtonKey {
+declare export interface DataTables$ButtonKey {
     key?: string,
         shiftKey?: boolean,
         altKey?: boolean,
@@ -105,22 +100,18 @@ export interface DataTables$ButtonKey {
         metaKey?: boolean
 }
 
-declare
-export interface DataTables$ButtonText {
+declare export interface DataTables$ButtonText {
     (dt: DataTables$DataTable, node: JQuery, config: any): string
 }
 
-declare
-export interface DataTables$FunctionButtonInit {
+declare export interface DataTables$FunctionButtonInit {
     (dt: DataTables$DataTable, node: JQuery, config: any): void
 }
 
-declare
-export interface DataTables$FunctionButtonAction {
+declare export interface DataTables$FunctionButtonAction {
     (e: any, dt: DataTables$DataTable, node: JQuery, config: any): void
 }
 
-declare
-export interface DataTables$FunctionButtonCustomize {
+declare export interface DataTables$FunctionButtonCustomize {
     (win: Window): void
 }

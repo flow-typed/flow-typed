@@ -94,5 +94,4 @@ declare interface Resemble$ResembleComparisonResult {
         },
         analysisTime: number
 }
-declare
-var resemble: Resemble$ResembleStatic;
+declare var resemble: Resemble$ResembleStatic;

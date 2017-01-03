@@ -10,8 +10,7 @@ declare module 'fabric' {
     declare module.exports: typeof fabric
 }
 
-declare
-var npm$namespace$fabric: {
+declare var npm$namespace$fabric: {
     createCanvasForNode: typeof fabric$createCanvasForNode,
     createSVGRefElementsMarkup: typeof fabric$createSVGRefElementsMarkup,
     createSVGFontFacesMarkup: typeof fabric$createSVGFontFacesMarkup,
@@ -29,30 +28,25 @@ var npm$namespace$fabric: {
     log: typeof fabric$log,
     warn: typeof fabric$warn,
 }
-declare
-var isLikelyNode: boolean;
+declare var isLikelyNode: boolean;
 
-declare
-var isTouchSupported: boolean;
+declare var isTouchSupported: boolean;
 
-declare
-function fabric$createCanvasForNode(width: number, height: number): fabric$ICanvas
+declare function fabric$createCanvasForNode(width: number, height: number): fabric$ICanvas
 
 
 /**
  * Creates markup containing SVG referenced elements like patterns, gradients etc.
  * @param  instance of fabric.Canvas
  */
-declare
-function fabric$createSVGRefElementsMarkup(canvas: fabric$IStaticCanvas): string
+declare function fabric$createSVGRefElementsMarkup(canvas: fabric$IStaticCanvas): string
 
 
 /**
  * Creates markup containing SVG font faces
  * @param  Array of fabric objects
  */
-declare
-function fabric$createSVGFontFacesMarkup(objects: fabric$IObject[]): string
+declare function fabric$createSVGFontFacesMarkup(objects: fabric$IObject[]): string
 
 
 /**
@@ -61,8 +55,7 @@ function fabric$createSVGFontFacesMarkup(objects: fabric$IObject[]): string
  * @param  
  * @param  Method for further parsing of SVG elements, called after each fabric object created.
  */
-declare
-function fabric$loadSVGFromString(
+declare function fabric$loadSVGFromString(
     string: string,
     callback: (results: fabric$IObject[], options: any) => void,
     reviver?: Function): void
@@ -75,8 +68,7 @@ function fabric$loadSVGFromString(
  * @param  
  * @param  Method for further parsing of SVG elements, called after each fabric object created.
  */
-declare
-function fabric$loadSVGFromURL(
+declare function fabric$loadSVGFromURL(
     url: string,
     callback: (results: fabric$IObject[], options: any) => void,
     reviver?: Function): void
@@ -86,27 +78,23 @@ function fabric$loadSVGFromURL(
  * Returns CSS rules for a given SVG document
  * @param  SVG document to parse
  */
-declare
-function fabric$getCSSRules(doc: SVGElement): any
+declare function fabric$getCSSRules(doc: SVGElement): any
 
-declare
-function fabric$parseElements(elements: any[], callback: Function, options: any, reviver?: Function): void
+declare function fabric$parseElements(elements: any[], callback: Function, options: any, reviver?: Function): void
 
 
 /**
  * Parses "points" attribute, returning an array of values
  * @param  points attribute string
  */
-declare
-function fabric$parsePointsAttribute(points: string): any[]
+declare function fabric$parsePointsAttribute(points: string): any[]
 
 
 /**
  * Parses "style" attribute, retuning an object with values
  * @param  Element to parse
  */
-declare
-function fabric$parseStyleAttribute(element: SVGElement): any
+declare function fabric$parseStyleAttribute(element: SVGElement): any
 
 
 /**
@@ -115,8 +103,7 @@ function fabric$parseStyleAttribute(element: SVGElement): any
  * @param  Element to parse
  * @param  Array of attributes to parse
  */
-declare
-function fabric$parseAttributes(
+declare function fabric$parseAttributes(
     elemen: HTMLElement,
     attributes: string[],
     svgUid?: string): {
@@ -128,8 +115,7 @@ function fabric$parseAttributes(
  * Parses an SVG document, returning all of the gradient declarations found in it
  * @param  SVG document to parse
  */
-declare
-function fabric$getGradientDefs(doc: SVGElement): {
+declare function fabric$getGradientDefs(doc: SVGElement): {
     [key: string]: any
 }
 
@@ -139,8 +125,7 @@ function fabric$getGradientDefs(doc: SVGElement): {
  * @param  font declaration
  * @param  definition
  */
-declare
-function fabric$parseFontDeclaration(value: string, oStyle: any): void
+declare function fabric$parseFontDeclaration(value: string, oStyle: any): void
 
 
 /**
@@ -149,8 +134,7 @@ function fabric$parseFontDeclaration(value: string, oStyle: any): void
  * @param  Callback to call when parsing is finished; It's being passed an array of elements (parsed from a document).
  * @param  Method for further parsing of SVG elements, called after each fabric object created.
  */
-declare
-function fabric$parseSVGDocument(
+declare function fabric$parseSVGDocument(
     doc: SVGElement,
     callback: (results: fabric$IObject[], options: any) => void,
     reviver?: Function): void
@@ -160,88 +144,63 @@ function fabric$parseSVGDocument(
  * Parses "transform" attribute, returning an array of values
  * @param  String containing attribute value
  */
-declare
-function fabric$parseTransformAttribute(attributeValue: string): number[]
+declare function fabric$parseTransformAttribute(attributeValue: string): number[]
 
 
 /**
  * Wrapper around `console.log` (when available)
  */
-declare
-function fabric$log(...values: any[]): void
+declare function fabric$log(...values: any[]): void
 
 
 /**
  * Wrapper around `console.warn` (when available)
  */
-declare
-function fabric$warn(...values: any[]): void
+declare function fabric$warn(...values: any[]): void
 
-declare
-var Canvas: fabric$ICanvasStatic;
+declare var Canvas: fabric$ICanvasStatic;
 
-declare
-var StaticCanvas: fabric$IStaticCanvasStatic;
+declare var StaticCanvas: fabric$IStaticCanvasStatic;
 
-declare
-var Color: fabric$IColorStatic;
+declare var Color: fabric$IColorStatic;
 
-declare
-var Pattern: fabric$IPatternStatic;
+declare var Pattern: fabric$IPatternStatic;
 
-declare
-var Intersection: fabric$IIntersectionStatic;
+declare var Intersection: fabric$IIntersectionStatic;
 
-declare
-var Point: fabric$IPointStatic;
+declare var Point: fabric$IPointStatic;
 
-declare
-var Circle: fabric$ICircleStatic;
+declare var Circle: fabric$ICircleStatic;
 
-declare
-var Ellipse: fabric$IEllipseStatic;
+declare var Ellipse: fabric$IEllipseStatic;
 
-declare
-var Group: fabric$IGroupStatic;
+declare var Group: fabric$IGroupStatic;
 
-declare
-var Image: fabric$IImageStatic;
+declare var Image: fabric$IImageStatic;
 
-declare
-var Line: fabric$ILineStatic;
+declare var Line: fabric$ILineStatic;
 
-declare
-var Object: fabric$IObjectStatic;
+declare var Object: fabric$IObjectStatic;
 
-declare
-var Path: fabric$IPathStatic;
+declare var Path: fabric$IPathStatic;
 
-declare
-var PathGroup: fabric$IPathGroupStatic;
+declare var PathGroup: fabric$IPathGroupStatic;
 
-declare
-var Polygon: fabric$IPolygonStatic;
+declare var Polygon: fabric$IPolygonStatic;
 
-declare
-var Polyline: fabric$IPolylineStatic;
+declare var Polyline: fabric$IPolylineStatic;
 
-declare
-var Rect: fabric$IRectStatic;
+declare var Rect: fabric$IRectStatic;
 
-declare
-var Shadow: fabric$IShadowStatic;
+declare var Shadow: fabric$IShadowStatic;
 
-declare
-var Text: fabric$ITextStatic;
+declare var Text: fabric$ITextStatic;
 
-declare
-var IText: fabric$IITextStatic;
+declare var IText: fabric$IITextStatic;
 
-declare
-var Triangle: fabric$ITriangleStatic;
+declare var Triangle: fabric$ITriangleStatic;
 
-declare
-var util: fabric$IUtil;
+declare var util: fabric$IUtil;
 
 declare interface fabric$IDataURLOptions {
 
@@ -4692,28 +4651,23 @@ declare type fabric$IPencilBrush = {
 } & fabric$IBaseBrush
 
 
-declare
-var BaseBrush: {
+declare var BaseBrush: {
     new(): fabric$IBaseBrush
 };
 
-declare
-var CircleBrush: {
+declare var CircleBrush: {
     new(canvas: fabric$ICanvas): fabric$ICircle
 };
 
-declare
-var SprayBrush: {
+declare var SprayBrush: {
     new(canvas: fabric$ICanvas): fabric$ISprayBrush
 };
 
-declare
-var PencilBrush: {
+declare var PencilBrush: {
     new(canvas: fabric$ICanvas): fabric$IPencilBrush
 };
 
-declare
-var PatternBrush: {
+declare var PatternBrush: {
     new(canvas: fabric$ICanvas): fabric$IPatternBrush
 };
 

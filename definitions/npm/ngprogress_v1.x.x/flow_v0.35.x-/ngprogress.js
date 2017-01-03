@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface NgProgress$INgProgress {
+declare export interface NgProgress$INgProgress {
     start(): void,
         height(height: string): void,
         color(color: string): void,
@@ -18,7 +17,6 @@ export interface NgProgress$INgProgress {
         complete(): void
 }
 
-declare
-export interface NgProgress$INgProgressFactory {
+declare export interface NgProgress$INgProgressFactory {
     createInstance(): NgProgress$INgProgress
 }

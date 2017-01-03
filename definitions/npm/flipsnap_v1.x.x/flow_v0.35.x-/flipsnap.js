@@ -101,5 +101,4 @@ declare type FlipsnapTouchEndEvent = {
     newPoint: number,
     originalPoint: number
 } & Event
-declare
-var Flipsnap: FlipsnapStatic;
+declare var Flipsnap: FlipsnapStatic;

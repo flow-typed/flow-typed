@@ -329,5 +329,4 @@ declare interface linq$KeyValuePair<TKey, TValue>{
     Key: TKey,
     Value: TValue
 }
-declare
-var Enumerable: linq$EnumerableStatic;
+declare var Enumerable: linq$EnumerableStatic;

@@ -52,5 +52,4 @@ declare module 'Cache' {
             getUserCache(): GoogleAppsScript$Cache
     }
 }
-declare
-var CacheService: undefined.CacheService;
+declare var CacheService: undefined.CacheService;

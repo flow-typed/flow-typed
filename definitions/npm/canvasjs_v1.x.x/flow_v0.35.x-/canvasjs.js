@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$CanvasJS: {
+declare var npm$namespace$CanvasJS: {
     addColorSet: typeof CanvasJS$addColorSet,
     addCultureInfo: typeof CanvasJS$addCultureInfo,
 }
@@ -39,8 +38,7 @@ declare class Chart {
  * @param the name of the color set
  * @param an array of colors.
  */
-declare
-function CanvasJS$addColorSet(colorSetName: string, colorSetArray: string[]): void
+declare function CanvasJS$addColorSet(colorSetName: string, colorSetArray: string[]): void
 
 
 /**
@@ -48,8 +46,7 @@ function CanvasJS$addColorSet(colorSetName: string, colorSetArray: string[]): vo
  * @param culture the name of the culture
  * @param the information used by this culture
  */
-declare
-function CanvasJS$addCultureInfo(culture: string, info: CanvasJS$CultureInfo): void
+declare function CanvasJS$addCultureInfo(culture: string, info: CanvasJS$CultureInfo): void
 
 declare interface CanvasJS$CultureInfo {
 

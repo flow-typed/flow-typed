@@ -310,5 +310,4 @@ declare interface JQuery {
         foundation(libraries: string, method: Foundation$Options | string): JQuery,
         foundation(libraries: string, method: string, options: Object): JQuery
 }
-declare
-var Foundation: Foundation$FoundationStatic;
+declare var Foundation: Foundation$FoundationStatic;

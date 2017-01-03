@@ -10,8 +10,7 @@ declare module 'decorum' {
     declare module.exports: typeof decorum
 }
 
-declare
-var npm$namespace$decorum: {
+declare var npm$namespace$decorum: {
         Validation: typeof decorum$Validation,
         Email: typeof decorum$Email,
         FieldName: typeof decorum$FieldName,
@@ -31,8 +30,7 @@ var npm$namespace$decorum: {
     value, the field will be considered invalid and will return the passed error message upon validation.
      * @returns  A field validation decorator.
     */
-declare
-export function decorum$Validation<TModel>(
+declare export function decorum$Validation<TModel>(
     message: string | decorum$MessageHandler<decorum$CustomValidator<TModel >> ,
     predicate: (value: any, model: TModel) => boolean): PropertyDecorator
 
@@ -43,8 +41,7 @@ export function decorum$Validation<TModel>(
  * @param message [Optional] Overrides the default validation error message.
  * @returns  A field validation decorator.
  */
-declare
-export function decorum$Email(
+declare export function decorum$Email(
     message?: string | decorum$MessageHandler<decorum$EmailValidator>): PropertyDecorator
 
 
@@ -53,8 +50,7 @@ export function decorum$Email(
  * @param name The field's friendly name
  * @returns  A field validation decorator.
  */
-declare
-export function decorum$FieldName(name: string): PropertyDecorator
+declare export function decorum$FieldName(name: string): PropertyDecorator
 
 
 /**
@@ -63,8 +59,7 @@ export function decorum$FieldName(name: string): PropertyDecorator
  * @param message [Optional] Overrides the default validation error message.
  * @returns  A field validation decorator.
  */
-declare
-export function decorum$Length(
+declare export function decorum$Length(
     length: number,
     message?: string | decorum$MessageHandler<decorum$LengthValidator>): PropertyDecorator
 
@@ -75,8 +70,7 @@ export function decorum$Length(
  * @param message [Optional] Overrides the default validation error message.
  * @returns  A field validation decorator.
  */
-declare
-export function decorum$MaxLength(
+declare export function decorum$MaxLength(
     maxLength: number,
     message?: string | decorum$MessageHandler<decorum$MaxLengthValidator>): PropertyDecorator
 
@@ -87,8 +81,7 @@ export function decorum$MaxLength(
  * @param message [Optional] Overrides the default validation error message.
  * @returns  A field validation decorator.
  */
-declare
-export function decorum$MinLength(
+declare export function decorum$MinLength(
     minLength: number,
     message?: string | decorum$MessageHandler<decorum$MinLengthValidator>): PropertyDecorator
 
@@ -99,8 +92,7 @@ export function decorum$MinLength(
  * @param message [Optional] Overrides the default validation error message.
  * @returns  A field validation decorator.
  */
-declare
-export function decorum$Pattern(
+declare export function decorum$Pattern(
     regex: RegExp,
     message?: string | decorum$MessageHandler<decorum$PatternValidator>): PropertyDecorator
 
@@ -110,8 +102,7 @@ export function decorum$Pattern(
  * @param message [Optional] Overrides the default validation error message.
  * @returns  A field validation decorator.
  */
-declare
-export function decorum$Required(
+declare export function decorum$Required(
     message?: string | decorum$MessageHandler<decorum$RequiredFieldValidator>): PropertyDecorator
 
 
@@ -120,8 +111,7 @@ export function decorum$Required(
  * @param message [Optional] Overrides the default validation error message.
  * @returns  A field validation decorator.
  */
-declare
-export function decorum$Alpha(
+declare export function decorum$Alpha(
     message?: string | decorum$MessageHandler<decorum$PatternValidator>): PropertyDecorator
 
 
@@ -130,16 +120,14 @@ export function decorum$Alpha(
  * @param message [Optional] Overrides the default validation error message.
  * @returns  A field validation decorator.
  */
-declare
-export function decorum$AlphaNumeric(
+declare export function decorum$AlphaNumeric(
     message?: string | decorum$MessageHandler<decorum$PatternValidator>): PropertyDecorator
 
 
 /**
  * A map from field name to array of field validation decorators.
  */
-declare
-export type decorum$ValidationDefinitions = {
+declare export type decorum$ValidationDefinitions = {
     [field: string]: PropertyDecorator[]
 };
 
@@ -147,8 +135,7 @@ export type decorum$ValidationDefinitions = {
 /**
  * Static container for convenience methods related to field validation.
  */
-declare
-export class Validator {
+declare export class Validator {
 
     /**
      * Creates a new model validator for the given model. Model should be a valid class that has a valid constructor
@@ -190,8 +177,7 @@ export class Validator {
 /**
  * Details about validation errors on a field.
  */
-declare
-export interface decorum$IFieldValidationError {
+declare export interface decorum$IFieldValidationError {
 
     /**
      * The property name of the field on the model.
@@ -213,8 +199,7 @@ export interface decorum$IFieldValidationError {
 /**
  * Result returned when a model is validated.
  */
-declare
-export interface decorum$IValidationResult {
+declare export interface decorum$IValidationResult {
 
     /**
      * Whether or not the model is valid.
@@ -231,8 +216,7 @@ export interface decorum$IValidationResult {
 /**
  * Wraps a model to allow the consuming class to call validation methods.
  */
-declare
-export class ModelValidator {
+declare export class ModelValidator {
 
     /**
      * Creates a new model validator.
@@ -274,8 +258,7 @@ export class ModelValidator {
  * wrapping metadata about the field such as the field name, friendly name, value, etc.
 The second parameter is the validator instance that triggered the error.
 */
-declare
-export interface decorum$MessageHandler<TValidator>{
+declare export interface decorum$MessageHandler<TValidator>{
     (opts: decorum$IMessageOpts, validator: TValidator): string
 }
 
@@ -284,8 +267,7 @@ export interface decorum$MessageHandler<TValidator>{
  * Options passed to a field to aid in generating a message. Contains data about
  * the field such as name, friendly name, and value.
  */
-declare
-export interface decorum$IMessageOpts {
+declare export interface decorum$IMessageOpts {
 
     /**
      * The property name from the model. I.e. 'emailAddress', 'username', etc.
@@ -307,20 +289,17 @@ export interface decorum$IMessageOpts {
 /**
  * A map of validation "key" (unique name for a given type of validation) to message handler callback.
  */
-declare
-export interface decorum$IMessageHandlerMap {
+declare export interface decorum$IMessageHandlerMap {
     [key: string]: decorum$MessageHandler<any >
 }
 
-declare
-export var MessageHandlers: decorum$IMessageHandlerMap;
+declare export var MessageHandlers: decorum$IMessageHandlerMap;
 
 
 /**
  * Custom validation class.
  */
-declare
-export class CustomValidator<TModel>mixins BaseValidator {
+declare export class CustomValidator<TModel>mixins BaseValidator {
     constructor(predicate: (value: any, model: TModel) => boolean, message: string | decorum$MessageHandler<decorum$CustomValidator<TModel >> ): this;
     getMessage(opts: decorum$IMessageOpts): string;
     isValid(value: any, model: any): boolean
@@ -330,8 +309,7 @@ export class CustomValidator<TModel>mixins BaseValidator {
 /**
  * An email validator.
  */
-declare
-export class EmailValidator mixins PatternValidator {
+declare export class EmailValidator mixins PatternValidator {
     EmailRegex: RegExp;
     constructor(message?: string | decorum$MessageHandler<decorum$EmailValidator>): this;
     getMessage(opts: decorum$IMessageOpts): string;
@@ -342,8 +320,7 @@ export class EmailValidator mixins PatternValidator {
 /**
  * An exact length validator.
  */
-declare
-export class LengthValidator mixins BaseValidator {
+declare export class LengthValidator mixins BaseValidator {
     length: number;
     constructor(length: number, message?: string | decorum$MessageHandler<decorum$LengthValidator>): this;
     getMessage(opts: decorum$IMessageOpts): string;
@@ -354,8 +331,7 @@ export class LengthValidator mixins BaseValidator {
 /**
  * A maximum length validator.
  */
-declare
-export class MaxLengthValidator mixins BaseValidator {
+declare export class MaxLengthValidator mixins BaseValidator {
     maxLength: number;
     constructor(maxLength: number, message?: string | decorum$MessageHandler<decorum$MaxLengthValidator>): this;
     getMessage(opts: decorum$IMessageOpts): string;
@@ -366,8 +342,7 @@ export class MaxLengthValidator mixins BaseValidator {
 /**
  * A minimum length validator.
  */
-declare
-export class MinLengthValidator mixins BaseValidator {
+declare export class MinLengthValidator mixins BaseValidator {
     minLength: number;
     constructor(minLength: number, message?: string | decorum$MessageHandler<decorum$MinLengthValidator>): this;
     getMessage(opts: decorum$IMessageOpts): string;
@@ -378,8 +353,7 @@ export class MinLengthValidator mixins BaseValidator {
 /**
  * A regular expression validator.
  */
-declare
-export class PatternValidator mixins BaseValidator {
+declare export class PatternValidator mixins BaseValidator {
     pattern: RegExp;
     constructor(pattern: RegExp, message?: string | decorum$MessageHandler<decorum$PatternValidator>): this;
     getMessage(opts: decorum$IMessageOpts): string;
@@ -390,8 +364,7 @@ export class PatternValidator mixins BaseValidator {
 /**
  * A field requiredness validator.
  */
-declare
-export class RequiredFieldValidator mixins BaseValidator {
+declare export class RequiredFieldValidator mixins BaseValidator {
     constructor(message?: string | decorum$MessageHandler<decorum$RequiredFieldValidator>): this;
     validatesEmptyValue(): boolean;
     getMessage(opts: decorum$IMessageOpts): string;
@@ -404,8 +377,7 @@ export class RequiredFieldValidator mixins BaseValidator {
  *   getMessage(...) - Get error message to return when field is invalid.
   isValid(...)    - Check validity of field given proposed value and the rest of the model.
 */
-declare
-export class BaseValidator {
+declare export class BaseValidator {
 
     /**
      * Initializes the {BaseValidator}
@@ -462,8 +434,7 @@ export class BaseValidator {
 /**
  * Validation options for a given field including actual validators and meta data such as the field name.
  */
-declare
-export class FieldOptions {
+declare export class FieldOptions {
     constructor(property: string): this;
 
     /**

@@ -6,11 +6,9 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export var version: string;
+declare export var version: string;
 
-declare
-export type FixedDataTable$TableProps = {
+declare export type FixedDataTable$TableProps = {
 
     /**
      * Pixel width of table. If all columns do not fit,
@@ -351,8 +349,7 @@ declare interface FixedDataTable$ColumnProps {
         allowCellsRecycling?: boolean
 }
 
-declare
-export interface FixedDataTable$ColumnGroupProps {
+declare export interface FixedDataTable$ColumnGroupProps {
 
     /**
      * The horizontal alignment of the table cell content.
@@ -392,14 +389,11 @@ export interface FixedDataTable$ColumnGroupProps {
         groupHeaderRenderer?: Function
 }
 
-declare
-export class Table mixins ___React.Component<FixedDataTable$TableProps, {}>{}
+declare export class Table mixins ___React.Component<FixedDataTable$TableProps, {}>{}
 
-declare
-export class Column mixins ___React.Component<FixedDataTable$ColumnProps, {}>{}
+declare export class Column mixins ___React.Component<FixedDataTable$ColumnProps, {}>{}
 
-declare
-export class ColumnGroup mixins ___React.Component<FixedDataTable$ColumnGroupProps, {}>{}
+declare export class ColumnGroup mixins ___React.Component<FixedDataTable$ColumnGroupProps, {}>{}
 declare module 'fixed-data-table' {
     declare module.exports: typeof FixedDataTable
 }

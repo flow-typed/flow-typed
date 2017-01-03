@@ -78,5 +78,4 @@ declare interface DiLite$Utils {
 declare module 'di-lite' {
     declare module.exports: typeof di
 }
-declare
-var di: DiLite$DiLiteStatic;
+declare var di: DiLite$DiLiteStatic;

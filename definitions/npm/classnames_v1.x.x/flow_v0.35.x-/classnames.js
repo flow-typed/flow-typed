@@ -14,8 +14,7 @@ declare type ClassArray = {} & Array
 declare interface ClassNamesFn {
     (...classes: ClassValue[]): string
 }
-declare
-var classNames: ClassNamesFn;
+declare var classNames: ClassNamesFn;
 declare module 'classnames' {
     declare module.exports: typeof classNames
 }

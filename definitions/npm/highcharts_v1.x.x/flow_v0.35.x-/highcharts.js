@@ -7634,8 +7634,7 @@ declare interface JQuery {
             options: ___Highcharts$Options,
             callback: (chart: ___Highcharts$ChartObject) => void): JQuery
 }
-declare
-var Highcharts: ___Highcharts$Static;
+declare var Highcharts: ___Highcharts$Static;
 declare module 'highcharts' {
     declare module.exports: typeof ___Highcharts
 }

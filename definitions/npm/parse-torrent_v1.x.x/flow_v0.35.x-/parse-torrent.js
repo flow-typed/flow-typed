@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ParseTorrent$ParsedTorrent {
+declare export interface ParseTorrent$ParsedTorrent {
     infoHash: string,
         xt?: string,
         info?: {

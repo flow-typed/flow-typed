@@ -110,8 +110,7 @@ declare interface Auth0LockStatic {
         on(event: "authenticated", callback: (authResult: any) => void): void,
         on(event: string, callback: (...args: any[]) => void): void
 }
-declare
-var Auth0Lock: Auth0LockStatic;
+declare var Auth0Lock: Auth0LockStatic;
 declare module 'auth0-lock' {
     declare module.exports: typeof Auth0Lock
 }

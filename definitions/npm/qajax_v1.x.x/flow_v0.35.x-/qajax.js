@@ -6,32 +6,24 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function Qajax(url: string): Q.Promise<XMLHttpRequest >
-    declare
-var npm$namespace$Qajax: {
+declare function Qajax(url: string): Q.Promise<XMLHttpRequest >
+    declare var npm$namespace$Qajax: {
     filterStatus: typeof Qajax$filterStatus,
     filterSuccess: typeof Qajax$filterSuccess,
     toJSON: typeof Qajax$toJSON,
     getJSON: typeof Qajax$getJSON,
     serialize: typeof Qajax$serialize,
 }
-declare
-export var defaults: any;
+declare export var defaults: any;
 
-declare
-export function Qajax$filterStatus(validStatus: number): (xhr: XMLHttpRequest) => Q.Promise<XMLHttpRequest >
+declare export function Qajax$filterStatus(validStatus: number): (xhr: XMLHttpRequest) => Q.Promise<XMLHttpRequest >
 
-    declare
-export function Qajax$filterSuccess(): Q.Promise<XMLHttpRequest >
+    declare export function Qajax$filterSuccess(): Q.Promise<XMLHttpRequest >
 
-    declare
-export function Qajax$toJSON(xhr: XMLHttpRequest): Q.Promise<any >
+    declare export function Qajax$toJSON(xhr: XMLHttpRequest): Q.Promise<any >
 
-    declare
-export function Qajax$getJSON(url: string): Q.Promise<any >
+    declare export function Qajax$getJSON(url: string): Q.Promise<any >
 
-    declare
-export function Qajax$serialize(paramsObj: any): stringdeclare module 'qajax' {
+    declare export function Qajax$serialize(paramsObj: any): stringdeclare module 'qajax' {
     declare module.exports: typeof Qajax
 }

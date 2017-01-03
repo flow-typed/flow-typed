@@ -32,5 +32,4 @@ declare interface favicojs$Favico {
         video(imageElement: HTMLElement): void,
         webcam(): void
 }
-declare
-var Favico: favicojs$FavicoJsStatic;
+declare var Favico: favicojs$FavicoJsStatic;

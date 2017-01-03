@@ -53,8 +53,7 @@ declare interface oboe$FailReason {
 declare interface oboe$PatternMap {
     [pattern: string]: oboe$CallbackSignature
 }
-declare
-var oboe: oboe$OboeFunction;
+declare var oboe: oboe$OboeFunction;
 declare module 'oboe' {
     declare module.exports: typeof oboe
 }

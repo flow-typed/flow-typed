@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$___React: {
+declare var npm$namespace$___React: {
     createElement: typeof ___React$createElement,
     requireNativeComponent: typeof ___React$requireNativeComponent,
     ___spread: typeof ___React$___spread,
@@ -31,8 +30,7 @@ declare module 'NativeMethodsMixin' {
  * 
  * @see  https://github.com/facebook/react-native/blob/master/Libraries/ReactIOS/NativeMethodsMixin.js
  */
-declare
-export interface ___React$NativeComponent {
+declare export interface ___React$NativeComponent {
 
     /**
      * Determines the location on screen, width, and height of the given view and
@@ -107,17 +105,14 @@ export interface ___React$NativeComponent {
         }
 }
 
-declare
-export interface ___React$ReactClass<D, P, S>{}
+declare export interface ___React$ReactClass<D, P, S>{}
 
-declare
-export function ___React$createElement<P>(
+declare export function ___React$createElement<P>(
         type: React.ReactType,
         props?: P,
         ...children: React.ReactNode[]): React.ReactElement<P >
 
-    declare
-export type ___React$Runnable = (appParameters: any) => void;
+    declare export type ___React$Runnable = (appParameters: any) => void;
 
 declare interface ___React$NativeSyntheticEvent<T>{
     bubbles: boolean,
@@ -134,8 +129,7 @@ declare interface ___React$NativeSyntheticEvent<T>{
     type: string
 }
 
-declare
-export interface ___React$NativeTouchEvent {
+declare export interface ___React$NativeTouchEvent {
 
     /**
      * Array of all touch events that have changed since the last event
@@ -183,18 +177,15 @@ export interface ___React$NativeTouchEvent {
         touches: ___React$NativeTouchEvent[]
 }
 
-declare
-export type ___React$GestureResponderEvent = {} & ___React$NativeSyntheticEvent
+declare export type ___React$GestureResponderEvent = {} & ___React$NativeSyntheticEvent
 
 
-declare
-export interface ___React$PointProperties {
+declare export interface ___React$PointProperties {
     x: number,
         y: number
 }
 
-declare
-export interface ___React$Insets {
+declare export interface ___React$Insets {
     top?: number,
         left?: number,
         bottom?: number,
@@ -206,8 +197,7 @@ export interface ___React$Insets {
  * //FIXME: need to find documentation on which compoenent is a native (i.e. non composite component)//FIXME: need to find documentation on which component is a TTouchable and can implement that interface
  * @see  React.DOMAtributes
  */
-declare
-export interface ___React$Touchable {
+declare export interface ___React$Touchable {
     onTouchStart?: (event: ___React$GestureResponderEvent) => void,
         onTouchMove?: (event: ___React$GestureResponderEvent) => void,
         onTouchEnd?: (event: ___React$GestureResponderEvent) => void,
@@ -215,8 +205,7 @@ export interface ___React$Touchable {
         onTouchEndCapture?: (event: ___React$GestureResponderEvent) => void
 }
 
-declare
-export type ___React$AppConfig = {
+declare export type ___React$AppConfig = {
     appKey: string,
     component: ___React$ReactClass<any,
     any,
@@ -240,8 +229,7 @@ pass into `runApplication`. These should always be used as a pair.
 sure the JS execution environment is setup before other modules are
 `require`d.
 */
-declare
-export class AppRegistry {
+declare export class AppRegistry {
     registerConfig(config: ___React$AppConfig[]): void;
     registerComponent(appKey: string, getComponentFunc: () => React.ComponentClass<any>): string;
     registerRunnable(appKey: string, func: ___React$Runnable): string;
@@ -250,8 +238,7 @@ export class AppRegistry {
     runApplication(appKey: string, appParameters: any): void
 }
 
-declare
-export interface ___React$LayoutAnimationTypes {
+declare export interface ___React$LayoutAnimationTypes {
     spring: string,
         linear: string,
         easeInEaseOut: string,
@@ -259,14 +246,12 @@ export interface ___React$LayoutAnimationTypes {
         easeOut: string
 }
 
-declare
-export interface ___React$LayoutAnimationProperties {
+declare export interface ___React$LayoutAnimationProperties {
     opacity: string,
         scaleXY: string
 }
 
-declare
-export interface ___React$LayoutAnimationAnim {
+declare export interface ___React$LayoutAnimationAnim {
     duration?: number,
         delay?: number,
         springDamping?: number,
@@ -275,16 +260,14 @@ export interface ___React$LayoutAnimationAnim {
         property?: string
 }
 
-declare
-export interface ___React$LayoutAnimationConfig {
+declare export interface ___React$LayoutAnimationConfig {
     duration: number,
         create?: ___React$LayoutAnimationAnim,
         update?: ___React$LayoutAnimationAnim,
         delete?: ___React$LayoutAnimationAnim
 }
 
-declare
-export interface ___React$LayoutAnimationStatic {
+declare export interface ___React$LayoutAnimationStatic {
     configureNext: (
             config: ___React$LayoutAnimationConfig,
             onAnimationDidEnd?: () => void,
@@ -308,11 +291,9 @@ export interface ___React$LayoutAnimationStatic {
         }
 }
 
-declare
-export type ___React$FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch";
+declare export type ___React$FlexAlignType = "flex-start" | "flex-end" | "center" | "stretch";
 
-declare
-export type ___React$FlexJustifyType = "flex-start" |
+declare export type ___React$FlexJustifyType = "flex-start" |
     "flex-end" |
     "center" |
     "space-between" |
@@ -324,8 +305,7 @@ export type ___React$FlexJustifyType = "flex-start" |
  * @see  https://facebook.github.io/react-native/docs/flexbox.html#proptypes
  * @see  LayoutPropTypes.js
  */
-declare
-export interface ___React$FlexStyle {
+declare export interface ___React$FlexStyle {
     alignItems?: ___React$FlexAlignType,
         alignSelf?: "auto" | ___React$FlexAlignType,
         borderBottomWidth?: number,
@@ -375,8 +355,7 @@ export interface ___React$FlexStyle {
  * 
  * @see  ShadowPropTypesIOS.js
  */
-declare
-export interface ___React$ShadowPropTypesIOSStatic {
+declare export interface ___React$ShadowPropTypesIOSStatic {
 
     /**
      * Sets the drop shadow color
@@ -427,8 +406,7 @@ declare type ___React$GeolocationReturnType = {
     }
 };
 
-declare
-export interface ___React$TransformsStyle {
+declare export interface ___React$TransformsStyle {
     transform?: [{
             perspective: number
         }, {
@@ -462,29 +440,25 @@ export interface ___React$TransformsStyle {
         translateY?: number
 }
 
-declare
-export interface ___React$StyleSheetProperties {
+declare export interface ___React$StyleSheetProperties {
     hairlineWidth: number,
         flatten<T>(style: T): T
 }
 
-declare
-export interface ___React$LayoutRectangle {
+declare export interface ___React$LayoutRectangle {
     x: number,
         y: number,
         width: number,
         height: number
 }
 
-declare
-export interface ___React$LayoutChangeEvent {
+declare export interface ___React$LayoutChangeEvent {
     nativeEvent: {
         layout: ___React$LayoutRectangle
     }
 }
 
-declare
-export type ___React$TextStyleIOS = {
+declare export type ___React$TextStyleIOS = {
     letterSpacing?: number,
     textDecorationColor?: string,
     textDecorationStyle?: "solid" | "double" | "dotted" | "dashed",
@@ -492,14 +466,12 @@ export type ___React$TextStyleIOS = {
 } & ___React$ViewStyle
 
 
-declare
-export type ___React$TextStyleAndroid = {
+declare export type ___React$TextStyleAndroid = {
     textAlignVertical?: "auto" | "top" | "bottom" | "center"
 } & ___React$ViewStyle
 
 
-declare
-export type ___React$TextStyle = {
+declare export type ___React$TextStyle = {
     color?: string,
     fontFamily?: string,
     fontSize?: number,
@@ -542,8 +514,7 @@ export type ___React$TextStyle = {
 } & ___React$TextStyleIOS & ___React$TextStyleAndroid & ___React$ViewStyle
 
 
-declare
-export interface ___React$TextPropertiesIOS {
+declare export interface ___React$TextPropertiesIOS {
 
     /**
      * Specifies should fonts scale to respect Text Size accessibility
@@ -558,8 +529,7 @@ export interface ___React$TextPropertiesIOS {
         suppressHighlighting?: boolean
 }
 
-declare
-export type ___React$TextProperties = {
+declare export type ___React$TextProperties = {
 
     /**
      * Specifies should fonts scale to respect Text Size accessibility setting on iOS.
@@ -606,16 +576,14 @@ export type ___React$TextProperties = {
 /**
  * A React component for displaying text which supports nesting, styling, and touch handling.
  */
-declare
-export type ___React$TextStatic = {}
+declare export type ___React$TextStatic = {}
 
 
 /**
  * IOS Specific properties for TextInput
  * @see  https://facebook.github.io/react-native/docs/textinput.html#props
  */
-declare
-export interface ___React$TextInputIOSProperties {
+declare export interface ___React$TextInputIOSProperties {
 
     /**
      * enum('never', 'while-editing', 'unless-editing', 'always')
@@ -653,8 +621,7 @@ export interface ___React$TextInputIOSProperties {
  * Android Specific properties for TextInput
  * @see  https://facebook.github.io/react-native/docs/textinput.html#props
  */
-declare
-export interface ___React$TextInputAndroidProperties {
+declare export interface ___React$TextInputAndroidProperties {
 
     /**
      * Sets the number of lines for a TextInput.
@@ -691,8 +658,7 @@ export interface ___React$TextInputAndroidProperties {
  * 
  * @see  https://facebook.github.io/react-native/docs/textinput.html#props
  */
-declare
-export type ___React$TextInputProperties = {
+declare export type ___React$TextInputProperties = {
 
         /**
          * Can tell TextInput to automatically capitalize certain characters.
@@ -894,8 +860,7 @@ export type ___React$TextInputProperties = {
      * 
      * @see  https://facebook.github.io/react-native/docs/textinput.html#methods
      */
-    declare
-export type ___React$TextInputStatic = {
+    declare export type ___React$TextInputStatic = {
 
         /**
          * Returns if the input is currently focused.
@@ -911,8 +876,7 @@ export type ___React$TextInputStatic = {
     } & ___React$NativeComponent &
 
 
-    declare
-export type ___React$ToolbarAndroidAction = {
+    declare export type ___React$ToolbarAndroidAction = {
 
     /**
      * title: required, the title of this action
@@ -935,8 +899,7 @@ export type ___React$ToolbarAndroidAction = {
     showWithText?: boolean
 };
 
-declare
-export type ___React$ToolbarAndroidProperties = {
+declare export type ___React$ToolbarAndroidProperties = {
         actions?: ___React$ToolbarAndroidAction[],
 
         /**
@@ -1022,8 +985,7 @@ export type ___React$ToolbarAndroidProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$ToolbarAndroidStatic = {}
+    declare export type ___React$ToolbarAndroidStatic = {}
 
 
 /**
@@ -1051,8 +1013,7 @@ So we have provided an abstract Touchable implementation for things that should 
 This uses the responder system and allows you to easily configure tap interactions declaratively.
 Use TouchableHighlight anywhere where you would use a button or link on web.
 */
-declare
-export interface ___React$GestureResponderHandlers {
+declare export interface ___React$GestureResponderHandlers {
 
     /**
      * A view can become the touch responder by implementing the correct negotiation methods.
@@ -1130,8 +1091,7 @@ export interface ___React$GestureResponderHandlers {
         onMoveShouldSetResponderCapture?: () => void
 }
 
-declare
-export type ___React$ViewStyle = {
+declare export type ___React$ViewStyle = {
     backfaceVisibility?: "visible" | "hidden",
     backgroundColor?: string,
     borderBottomColor?: string,
@@ -1162,8 +1122,7 @@ export type ___React$ViewStyle = {
 } & ___React$FlexStyle & ___React$TransformsStyle
 
 
-declare
-export interface ___React$ViewPropertiesIOS {
+declare export interface ___React$ViewPropertiesIOS {
 
     /**
      * Provides additional traits to screen reader.
@@ -1185,8 +1144,7 @@ export interface ___React$ViewPropertiesIOS {
         shouldRasterizeIOS?: boolean
 }
 
-declare
-export interface ___React$ViewPropertiesAndroid {
+declare export interface ___React$ViewPropertiesAndroid {
 
     /**
      * Indicates to accessibility services to treat UI component like a native one.
@@ -1253,8 +1211,7 @@ export interface ___React$ViewPropertiesAndroid {
  * 
  * @see  https://facebook.github.io/react-native/docs/view.html#props
  */
-declare
-export type ___React$ViewProperties = {
+declare export type ___React$ViewProperties = {
 
         /**
          * Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -1347,8 +1304,7 @@ export type ___React$ViewProperties = {
     View maps directly to the native view equivalent on whatever platform React is running on,
     whether that is a UIView, <div>, android.view, etc.
     */
-    declare
-export type ___React$ViewStatic = {} & ___React$NativeComponent &
+    declare export type ___React$ViewStatic = {} & ___React$NativeComponent &
 
 
 
@@ -1356,19 +1312,16 @@ export type ___React$ViewStatic = {} & ___React$NativeComponent &
      * 
      * @see  https://facebook.github.io/react-native/docs/viewpagerandroid.html#props
      */
-    declare
-export interface ___React$ViewPagerAndroidOnPageScrollEventData {
+    declare export interface ___React$ViewPagerAndroidOnPageScrollEventData {
     position: number,
         offset: number
 }
 
-declare
-export interface ___React$ViewPagerAndroidOnPageSelectedEventData {
+declare export interface ___React$ViewPagerAndroidOnPageSelectedEventData {
     position: number
 }
 
-declare
-export type ___React$ViewPagerAndroidProperties = {
+declare export type ___React$ViewPagerAndroidProperties = {
     initialPage?: number,
 
     /**
@@ -1386,18 +1339,15 @@ export type ___React$ViewPagerAndroidProperties = {
 } & ___React$ViewProperties
 
 
-declare
-export type ___React$ViewPagerAndroidStatic = {
+declare export type ___React$ViewPagerAndroidStatic = {
         setPage: (selectedPage: number) => void,
         setPageWithoutAnimation: (selectedPage: number) => void
     } & ___React$NativeComponent &
 
 
-    declare
-export type ___React$KeyboardAvoidingViewStatic = {}
+    declare export type ___React$KeyboardAvoidingViewStatic = {}
 
-declare
-export type ___React$KeyboardAvoidingViewProps = {
+declare export type ___React$KeyboardAvoidingViewProps = {
         behavior?: "height" | "position" | "padding",
 
         /**
@@ -1413,8 +1363,7 @@ export type ___React$KeyboardAvoidingViewProps = {
     /**
      * //FIXME: No documentation extracted from code comment on WebView.ios.js
      */
-    declare
-export interface ___React$NavState {
+    declare export interface ___React$NavState {
     url?: string,
         title?: string,
         loading?: boolean,
@@ -1422,8 +1371,7 @@ export interface ___React$NavState {
         canGoForward?: boolean, [key: string]: any
 }
 
-declare
-export interface ___React$WebViewPropertiesAndroid {
+declare export interface ___React$WebViewPropertiesAndroid {
 
     /**
      * Used for android only, JS is enabled by default for WebView on iOS
@@ -1437,8 +1385,7 @@ export interface ___React$WebViewPropertiesAndroid {
         domStorageEnabled?: boolean
 }
 
-declare
-export interface ___React$WebViewIOSLoadRequestEvent {
+declare export interface ___React$WebViewIOSLoadRequestEvent {
     target: number,
         canGoBack: boolean,
         lockIdentifier: number,
@@ -1449,8 +1396,7 @@ export interface ___React$WebViewIOSLoadRequestEvent {
         url: string
 }
 
-declare
-export interface ___React$WebViewPropertiesIOS {
+declare export interface ___React$WebViewPropertiesIOS {
 
     /**
      * Determines whether HTML5 videos play inline or use the native
@@ -1482,16 +1428,14 @@ export interface ___React$WebViewPropertiesIOS {
         scrollEnabled?: boolean
 }
 
-declare
-export interface ___React$WebViewUriSource {
+declare export interface ___React$WebViewUriSource {
     uri?: string,
         method?: string,
         headers?: any,
         body?: string
 }
 
-declare
-export interface ___React$WebViewHtmlSource {
+declare export interface ___React$WebViewHtmlSource {
     html: string,
         baseUrl?: string
 }
@@ -1501,8 +1445,7 @@ export interface ___React$WebViewHtmlSource {
  * 
  * @see  https://facebook.github.io/react-native/docs/webview.html#props
  */
-declare
-export type ___React$WebViewProperties = {
+declare export type ___React$WebViewProperties = {
         automaticallyAdjustContentInsets?: boolean,
         bounces?: boolean,
         contentInset?: ___React$Insets,
@@ -1569,8 +1512,7 @@ export type ___React$WebViewProperties = {
     } & ___React$ViewProperties & ___React$WebViewPropertiesAndroid & ___React$WebViewPropertiesIOS &
 
 
-    declare
-export type ___React$WebViewStatic = {
+    declare export type ___React$WebViewStatic = {
 
     /**
      * Go back one page in the webview's history.
@@ -1599,15 +1541,13 @@ export type ___React$WebViewStatic = {
  * @see  https://facebook.github.io/react-native/docs/segmentedcontrolios.html
  * @see  SegmentedControlIOS.ios.js
  */
-declare
-export interface ___React$NativeSegmentedControlIOSChangeEvent {
+declare export interface ___React$NativeSegmentedControlIOSChangeEvent {
     value: string,
         selectedSegmentIndex: number,
         target: number
 }
 
-declare
-export type ___React$SegmentedControlIOSProperties = {
+declare export type ___React$SegmentedControlIOSProperties = {
 
         /**
          * If false the user won't be able to interact with the control. Default value is true.
@@ -1652,11 +1592,9 @@ export type ___React$SegmentedControlIOSProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$SegmentedControlIOSStatic = {}
+    declare export type ___React$SegmentedControlIOSStatic = {}
 
-declare
-export type ___React$NavigatorIOSProperties = {
+declare export type ___React$NavigatorIOSProperties = {
 
     /**
      * The background color of the navigation bar
@@ -1714,8 +1652,7 @@ export type ___React$NavigatorIOSProperties = {
 Navigator functions are also available on the NavigatorIOS component:
  * @see  https://facebook.github.io/react-native/docs/navigatorios.html#navigator
 */
-declare
-export interface ___React$NavigationIOS {
+declare export interface ___React$NavigationIOS {
 
     /**
      * Navigate forward to a new route
@@ -1763,8 +1700,7 @@ export interface ___React$NavigationIOS {
         popToTop(): void
 }
 
-declare
-export type ___React$NavigatorIOSStatic = {} & ___React$NavigationIOS &
+declare export type ___React$NavigatorIOSStatic = {} & ___React$NavigationIOS &
 
 
 
@@ -1772,8 +1708,7 @@ export type ___React$NavigatorIOSStatic = {} & ___React$NavigationIOS &
      * 
      * @see  https://facebook.github.io/react-native/docs/activityindicator.html#props
      */
-    declare
-export type ___React$ActivityIndicatorProperties = {
+    declare export type ___React$ActivityIndicatorProperties = {
 
         /**
          * Whether to show the indicator (true, the default) or hide it (false).
@@ -1802,16 +1737,14 @@ export type ___React$ActivityIndicatorProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$ActivityIndicatorStatic = {}
+    declare export type ___React$ActivityIndicatorStatic = {}
 
 
 /**
  * 
  * @see  https://facebook.github.io/react-native/docs/activityindicatorios.html#props
  */
-declare
-export type ___React$ActivityIndicatorIOSProperties = {
+declare export type ___React$ActivityIndicatorIOSProperties = {
 
         /**
          * Whether to show the indicator (true, the default) or hide it (false).
@@ -1860,11 +1793,9 @@ export type ___React$ActivityIndicatorIOSProperties = {
      * 
      * @Deprecated  since version 0.28.0
      */
-    declare
-export type ___React$ActivityIndicatorIOSStatic = {}
+    declare export type ___React$ActivityIndicatorIOSStatic = {}
 
-declare
-export type ___React$DatePickerIOSProperties = {
+declare export type ___React$DatePickerIOSProperties = {
 
         /**
          * The currently selected date.
@@ -1912,11 +1843,9 @@ export type ___React$DatePickerIOSProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$DatePickerIOSStatic = {}
+    declare export type ___React$DatePickerIOSStatic = {}
 
-declare
-export type ___React$DrawerSlideEvent = {} & ___React$NativeSyntheticEvent
+declare export type ___React$DrawerSlideEvent = {} & ___React$NativeSyntheticEvent
 
 
 
@@ -1924,8 +1853,7 @@ export type ___React$DrawerSlideEvent = {} & ___React$NativeSyntheticEvent
  * 
  * @see  DrawerLayoutAndroid.android.js
  */
-declare
-export type ___React$DrawerLayoutAndroidProperties = {
+declare export type ___React$DrawerLayoutAndroidProperties = {
 
         /**
          * Specifies the background color of the drawer. The default value
@@ -2019,8 +1947,7 @@ export type ___React$DrawerLayoutAndroidProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$DrawerLayoutAndroidStatic = {
+    declare export type ___React$DrawerLayoutAndroidStatic = {
 
     /**
      * Specifies the side of the screen from which the drawer will slide in.
@@ -2046,8 +1973,7 @@ export type ___React$DrawerLayoutAndroidStatic = {
  * 
  * @see  PickerIOS.ios.js
  */
-declare
-export type ___React$PickerIOSItemProperties = {
+declare export type ___React$PickerIOSItemProperties = {
     value?: string | number,
     label?: string
 }
@@ -2057,34 +1983,29 @@ export type ___React$PickerIOSItemProperties = {
  * 
  * @see  PickerIOS.ios.js
  */
-declare
-export type ___React$PickerIOSItemStatic = {}
+declare export type ___React$PickerIOSItemStatic = {}
 
 
 /**
  * 
  * @see  Picker.js
  */
-declare
-export type ___React$PickerItemProperties = {
+declare export type ___React$PickerItemProperties = {
     label: string,
     value?: any,
     color?: string,
     testID?: string
 }
 
-declare
-export type ___React$PickerItemStatic = {}
+declare export type ___React$PickerItemStatic = {}
 
-declare
-export type ___React$PickerPropertiesIOS = {
+declare export type ___React$PickerPropertiesIOS = {
         itemStyle?: ___React$ViewStyle,
         ref?: Ref<___React$PickerStatic & ___React$ViewStatic >
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$PickerPropertiesAndroid = {
+    declare export type ___React$PickerPropertiesAndroid = {
         enabled?: boolean,
         mode?: "dialog" | "dropdown",
         prompt?: string,
@@ -2098,8 +2019,7 @@ export type ___React$PickerPropertiesAndroid = {
      * @see  https://facebook.github.io/react-native/docs/picker.html
      * @see  Picker.js
      */
-    declare
-export type ___React$PickerProperties = {
+    declare export type ___React$PickerProperties = {
 
         /**
          * Callback for when an item is selected. This is called with the
@@ -2132,8 +2052,7 @@ export type ___React$PickerProperties = {
      * @see  https://facebook.github.io/react-native/docs/picker.html
      * @see  Picker.js
      */
-    declare
-export type ___React$PickerStatic = {
+    declare export type ___React$PickerStatic = {
     Item: ___React$PickerItemStatic
 }
 
@@ -2143,8 +2062,7 @@ export type ___React$PickerStatic = {
  * @see  https://facebook.github.io/react-native/docs/pickerios.html
  * @see  PickerIOS.ios.js
  */
-declare
-export type ___React$PickerIOSProperties = {
+declare export type ___React$PickerIOSProperties = {
     itemStyle?: ___React$ViewStyle
 }
 
@@ -2154,8 +2072,7 @@ export type ___React$PickerIOSProperties = {
  * @see  https://facebook.github.io/react-native/docs/pickerios.html
  * @see  PickerIOS.ios.js
  */
-declare
-export type ___React$PickerIOSStatic = {
+declare export type ___React$PickerIOSStatic = {
     Item: ___React$PickerIOSItemStatic
 }
 
@@ -2165,8 +2082,7 @@ export type ___React$PickerIOSStatic = {
  * @see  https://facebook.github.io/react-native/docs/progressbarandroid.html
  * @see  ProgressBarAndroid.android.js
  */
-declare
-export type ___React$ProgressBarAndroidProperties = {
+declare export type ___React$ProgressBarAndroidProperties = {
         style?: ___React$ViewStyle,
 
         /**
@@ -2211,8 +2127,7 @@ export type ___React$ProgressBarAndroidProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$ProgressBarAndroidStatic = {}
+    declare export type ___React$ProgressBarAndroidStatic = {}
 
 
 /**
@@ -2220,8 +2135,7 @@ export type ___React$ProgressBarAndroidStatic = {}
  * @see  https://facebook.github.io/react-native/docs/progressviewios.html
  * @see  ProgressViewIOS.ios.js
  */
-declare
-export type ___React$ProgressViewIOSProperties = {
+declare export type ___React$ProgressViewIOSProperties = {
         style?: ___React$ViewStyle,
 
         /**
@@ -2257,11 +2171,9 @@ export type ___React$ProgressViewIOSProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$ProgressViewIOSStatic = {}
+    declare export type ___React$ProgressViewIOSStatic = {}
 
-declare
-export type ___React$RefreshControlPropertiesIOS = {
+declare export type ___React$RefreshControlPropertiesIOS = {
 
         /**
          * The color of the refresh indicator.
@@ -2281,8 +2193,7 @@ export type ___React$RefreshControlPropertiesIOS = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$RefreshControlPropertiesAndroid = {
+    declare export type ___React$RefreshControlPropertiesAndroid = {
 
         /**
          * The colors (at least one) that will be used to draw the refresh indicator.
@@ -2313,8 +2224,7 @@ export type ___React$RefreshControlPropertiesAndroid = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$RefreshControlProperties = {
+    declare export type ___React$RefreshControlProperties = {
 
         /**
          * Called when the view starts refreshing.
@@ -2329,13 +2239,11 @@ export type ___React$RefreshControlProperties = {
     } & ___React$RefreshControlPropertiesIOS & ___React$RefreshControlPropertiesAndroid &
 
 
-    declare
-export type ___React$RefreshControlStatic = {
+    declare export type ___React$RefreshControlStatic = {
     SIZE: Object
 }
 
-declare
-export type ___React$SliderPropertiesIOS = {
+declare export type ___React$SliderPropertiesIOS = {
 
         /**
          * Assigns a maximum track image. Only static images are supported.
@@ -2376,8 +2284,7 @@ export type ___React$SliderPropertiesIOS = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$SliderProperties = {
+    declare export type ___React$SliderProperties = {
 
         /**
          * If true the user won't be able to move the slider.
@@ -2433,16 +2340,14 @@ export type ___React$SliderProperties = {
     } & ___React$SliderPropertiesIOS &
 
 
-    declare
-export type ___React$SliderStatic = {}
+    declare export type ___React$SliderStatic = {}
 
 
 /**
  * 
  * @see  https://facebook.github.io/react-native/docs/sliderios.html
  */
-declare
-export type ___React$SliderIOSProperties = {
+declare export type ___React$SliderIOSProperties = {
 
         /**
          * If true the user won't be able to move the slider. Default value is false.
@@ -2505,16 +2410,14 @@ export type ___React$SliderIOSProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$SliderIOSStatic = {}
+    declare export type ___React$SliderIOSStatic = {}
 
 
 /**
  * //FIXME: no dcumentation, inferred
  * @see  SwitchIOS.ios.js
  */
-declare
-export type ___React$SwitchIOSStyle = {
+declare export type ___React$SwitchIOSStyle = {
     height?: number,
     width?: number
 } & ___React$ViewStyle
@@ -2524,8 +2427,7 @@ export type ___React$SwitchIOSStyle = {
 /**
  * https://facebook.github.io/react-native/docs/switchios.html#props
  */
-declare
-export type ___React$SwitchIOSProperties = {
+declare export type ___React$SwitchIOSProperties = {
 
     /**
      * If true the user won't be able to toggle the switch. Default value is false.
@@ -2567,16 +2469,14 @@ This is a controlled component, so you must hook in to the onValueChange callbac
 otherwise the user's change will be reverted immediately to reflect props.value as the source of truth.
  * @see  https://facebook.github.io/react-native/docs/switchios.html
 */
-declare
-export type ___React$SwitchIOSStatic = {}
+declare export type ___React$SwitchIOSStatic = {}
 
 
 /**
  * 
  * @see  ImageResizeMode.js
  */
-declare
-export interface ___React$ImageResizeModeStatic {
+declare export interface ___React$ImageResizeModeStatic {
 
     /**
      * contain - The image will be resized such that it will be completely
@@ -2603,8 +2503,7 @@ export interface ___React$ImageResizeModeStatic {
  * Image style
  * @see  https://facebook.github.io/react-native/docs/image.html#style
  */
-declare
-export type ___React$ImageStyle = {
+declare export type ___React$ImageStyle = {
     resizeMode?: string,
     backfaceVisibility?: "visible" | "hidden",
     borderBottomLeftRadius?: number,
@@ -2622,8 +2521,7 @@ export type ___React$ImageStyle = {
 } & ___React$FlexStyle & ___React$TransformsStyle
 
 
-declare
-export interface ___React$ImagePropertiesIOS {
+declare export interface ___React$ImagePropertiesIOS {
 
     /**
      * The text that's read by the screen reader when the user interacts with the image.
@@ -2668,8 +2566,7 @@ export interface ___React$ImagePropertiesIOS {
  * 
  * @see  https://facebook.github.io/react-native/docs/image.html
  */
-declare
-export type ___React$ImageProperties = {
+declare export type ___React$ImageProperties = {
 
         /**
          * onLayout function
@@ -2723,8 +2620,7 @@ export type ___React$ImageProperties = {
     } & ___React$ImagePropertiesIOS &
 
 
-    declare
-export type ___React$ImageStatic = {
+    declare export type ___React$ImageStatic = {
     uri: string,
     resizeMode: ___React$ImageResizeModeStatic,
     getSize(
@@ -2739,8 +2635,7 @@ export type ___React$ImageStatic = {
  * 
  * @see  https://facebook.github.io/react-native/docs/listview.html#props
  */
-declare
-export type ___React$ListViewProperties = {
+declare export type ___React$ListViewProperties = {
         dataSource?: ___React$ListViewDataSource,
 
         /**
@@ -2875,13 +2770,11 @@ export type ___React$ListViewProperties = {
     } & ___React$ScrollViewProperties &
 
 
-    declare
-export type ___React$ListViewStatic = {
+    declare export type ___React$ListViewStatic = {
     DataSource: ___React$ListViewDataSource
 }
 
-declare
-export interface ___React$MapViewAnnotation {
+declare export interface ___React$MapViewAnnotation {
     latitude?: number,
         longitude?: number,
         animateDrop?: boolean,
@@ -2894,16 +2787,14 @@ export interface ___React$MapViewAnnotation {
         id?: string
 }
 
-declare
-export interface ___React$MapViewRegion {
+declare export interface ___React$MapViewRegion {
     latitude: number,
         longitude: number,
         latitudeDelta?: number,
         longitudeDelta?: number
 }
 
-declare
-export interface ___React$MapViewOverlay {
+declare export interface ___React$MapViewOverlay {
     coordinates: ({
             latitude: number,
             longitude: number
@@ -2914,8 +2805,7 @@ export interface ___React$MapViewOverlay {
         id?: string
 }
 
-declare
-export interface ___React$MapViewPropertiesIOS {
+declare export interface ___React$MapViewPropertiesIOS {
 
     /**
      * If false points of interest won't be displayed on the map.
@@ -2970,13 +2860,11 @@ export interface ___React$MapViewPropertiesIOS {
         showsCompass?: boolean
 }
 
-declare
-export interface ___React$MapViewPropertiesAndroid {
+declare export interface ___React$MapViewPropertiesAndroid {
     active?: boolean
 }
 
-declare
-export type ___React$MapViewProperties = {
+declare export type ___React$MapViewProperties = {
 
         /**
          * Callback that is called once, when the user taps an annotation.
@@ -3052,11 +2940,9 @@ export type ___React$MapViewProperties = {
      * 
      * @see  https://facebook.github.io/react-native/docs/mapview.html#content
      */
-    declare
-export type ___React$MapViewStatic = {}
+    declare export type ___React$MapViewStatic = {}
 
-declare
-export type ___React$ModalProperties = {
+declare export type ___React$ModalProperties = {
     animated?: boolean,
     animationType?: "none" | "slide" | "fade",
     transparent?: boolean,
@@ -3065,11 +2951,9 @@ export type ___React$ModalProperties = {
     onShow?: (event: ___React$NativeSyntheticEvent<any>) => void
 }
 
-declare
-export type ___React$ModalStatic = {}
+declare export type ___React$ModalStatic = {}
 
-declare
-export interface ___React$TouchableWithoutFeedbackAndroidProperties {
+declare export interface ___React$TouchableWithoutFeedbackAndroidProperties {
 
     /**
      * Indicates to accessibility services to treat UI component like a native one.
@@ -3079,8 +2963,7 @@ export interface ___React$TouchableWithoutFeedbackAndroidProperties {
     accessibilityComponentType?: string
 }
 
-declare
-export interface ___React$TouchableWithoutFeedbackIOSProperties {
+declare export interface ___React$TouchableWithoutFeedbackIOSProperties {
 
     /**
      * Provides additional traits to screen reader.
@@ -3095,8 +2978,7 @@ export interface ___React$TouchableWithoutFeedbackIOSProperties {
  * 
  * @see  https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
  */
-declare
-export type ___React$TouchableWithoutFeedbackProperties = {
+declare export type ___React$TouchableWithoutFeedbackProperties = {
 
     /**
      * Called when the touch is released, but not if cancelled (e.g. by a scroll that steals the responder lock).
@@ -3174,8 +3056,7 @@ export type ___React$TouchableWithoutFeedbackProperties = {
 } & ___React$TouchableWithoutFeedbackAndroidProperties & ___React$TouchableWithoutFeedbackIOSProperties
 
 
-declare
-export type ___React$TouchableWithoutFeedbackProps = {} & ___React$TouchableWithoutFeedbackProperties &
+declare export type ___React$TouchableWithoutFeedbackProps = {} & ___React$TouchableWithoutFeedbackProperties &
 
 
 
@@ -3185,16 +3066,14 @@ export type ___React$TouchableWithoutFeedbackProps = {} & ___React$TouchableWith
     This is one of the primary reason a "web" app doesn't feel "native".
      * @see  https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html
     */
-    declare
-export type ___React$TouchableWithoutFeedbackStatic = {}
+    declare export type ___React$TouchableWithoutFeedbackStatic = {}
 
 
 /**
  * 
  * @see  https://facebook.github.io/react-native/docs/touchablehighlight.html#props
  */
-declare
-export type ___React$TouchableHighlightProperties = {
+declare export type ___React$TouchableHighlightProperties = {
 
         /**
          * Determines what the opacity of the wrapped view should be when touch is active.
@@ -3237,16 +3116,14 @@ export type ___React$TouchableHighlightProperties = {
     If you wish to have several child components, wrap them in a View.
      * @see  https://facebook.github.io/react-native/docs/touchablehighlight.html
     */
-    declare
-export type ___React$TouchableHighlightStatic = {}
+    declare export type ___React$TouchableHighlightStatic = {}
 
 
 /**
  * 
  * @see  https://facebook.github.io/react-native/docs/touchableopacity.html#props
  */
-declare
-export type ___React$TouchableOpacityProperties = {
+declare export type ___React$TouchableOpacityProperties = {
 
         /**
          * Determines what the opacity of the wrapped view should be when touch is active.
@@ -3264,8 +3141,7 @@ export type ___React$TouchableOpacityProperties = {
     and in general is easy to add to an app without weird side-effects.
      * @see  https://facebook.github.io/react-native/docs/touchableopacity.html
     */
-    declare
-export type ___React$TouchableOpacityStatic = {
+    declare export type ___React$TouchableOpacityStatic = {
 
     /**
      * Determines what the opacity of the wrapped view should be when touch is active.
@@ -3278,8 +3154,7 @@ export type ___React$TouchableOpacityStatic = {
  * 
  * @see  https://facebook.github.io/react-native/docs/touchableopacity.html#props
  */
-declare
-export type ___React$TouchableNativeFeedbackProperties = {
+declare export type ___React$TouchableNativeFeedbackProperties = {
 
         /**
          * Determines the type of background drawable that's going to be used to display feedback.
@@ -3303,21 +3178,17 @@ export type ___React$TouchableNativeFeedbackProperties = {
     Background drawable of native feedback touchable can be customized with background property.
      * @see  https://facebook.github.io/react-native/docs/touchablenativefeedback.html#content
     */
-    declare
-export type ___React$TouchableNativeFeedbackStatic = {
+    declare export type ___React$TouchableNativeFeedbackStatic = {
     SelectableBackground: () => ___React$TouchableNativeFeedbackStatic,
     SelectableBackgroundBorderless: () => ___React$TouchableNativeFeedbackStatic,
     Ripple: (color: string, borderless?: boolean) => ___React$TouchableNativeFeedbackStatic
 }
 
-declare
-export interface ___React$LeftToRightGesture {}
+declare export interface ___React$LeftToRightGesture {}
 
-declare
-export interface ___React$AnimationInterpolator {}
+declare export interface ___React$AnimationInterpolator {}
 
-declare
-export interface ___React$SceneConfig {
+declare export interface ___React$SceneConfig {
     gestures: {
             pop: ___React$LeftToRightGesture
         },
@@ -3330,8 +3201,7 @@ export interface ___React$SceneConfig {
         }
 }
 
-declare
-export interface ___React$SceneConfigs {
+declare export interface ___React$SceneConfigs {
     PushFromRight: ___React$SceneConfig,
         FloatFromRight: ___React$SceneConfig,
         FloatFromLeft: ___React$SceneConfig,
@@ -3344,8 +3214,7 @@ export interface ___React$SceneConfigs {
         VerticalDownSwipeJump: ___React$SceneConfig
 }
 
-declare
-export interface ___React$Route {
+declare export interface ___React$Route {
     component?: React.ComponentClass<___React$ViewProperties>,
         id?: string,
         title?: string,
@@ -3365,8 +3234,7 @@ export interface ___React$Route {
  * 
  * @see  https://facebook.github.io/react-native/docs/navigator.html#content
  */
-declare
-export type ___React$NavigatorProperties = {
+declare export type ___React$NavigatorProperties = {
 
     /**
      * Optional function that allows configuration about scene animations and gestures.
@@ -3441,8 +3309,7 @@ export type ___React$NavigatorProperties = {
 /**
  * Class that contains the info and methods for app navigation.
  */
-declare
-export interface ___React$NavigationContext {
+declare export interface ___React$NavigationContext {
     parent: ___React$NavigationContext,
         top: ___React$NavigationContext,
         currentRoute: any,
@@ -3465,8 +3332,7 @@ To change the animation or gesture properties of the scene, provide a configureS
 See Navigator.SceneConfigs for default animations and more info on scene config options.
  * @see  https://facebook.github.io/react-native/docs/navigator.html
 */
-declare
-export type ___React$NavigatorStatic = {
+declare export type ___React$NavigatorStatic = {
     SceneConfigs: ___React$SceneConfigs,
     NavigationBar: NavigatorStatic$NavigationBarStatic,
     BreadcrumbNavigationBar: NavigatorStatic$BreadcrumbNavigationBarStatic,
@@ -3548,8 +3414,7 @@ export type ___React$NavigatorStatic = {
 /**
  * //FIXME: No documentation extracted from code comment on WebView.ios.js
  */
-declare
-export interface NavigatorStatic$NavState {
+declare export interface NavigatorStatic$NavState {
     url?: string,
         title?: string,
         loading?: boolean,
@@ -3557,11 +3422,9 @@ export interface NavigatorStatic$NavState {
         canGoForward?: boolean, [key: string]: any
 }
 
-declare
-export interface NavigatorStatic$NavigationBarStyle {}
+declare export interface NavigatorStatic$NavigationBarStyle {}
 
-declare
-export interface NavigatorStatic$NavigationBarRouteMapper {
+declare export interface NavigatorStatic$NavigationBarRouteMapper {
     Title: (
             route: ___React$Route,
             nav: ___React$Navigator,
@@ -3584,30 +3447,24 @@ export interface NavigatorStatic$NavigationBarRouteMapper {
  * 
  * @see  NavigatorNavigationBar.js
  */
-declare
-export type NavigatorStatic$NavigationBarProperties = {
+declare export type NavigatorStatic$NavigationBarProperties = {
     navigator?: ___React$Navigator,
     routeMapper?: NavigatorStatic$NavigationBarRouteMapper,
     navState?: NavigatorStatic$NavState,
     style?: ___React$ViewStyle
 }
 
-declare
-export type NavigatorStatic$NavigationBarStatic = {
+declare export type NavigatorStatic$NavigationBarStatic = {
     Styles: NavigatorStatic$NavigationBarStyle
 }
 
-declare
-export type NavigatorStatic$NavigationBar = NavigatorStatic$NavigationBarStatic;
+declare export type NavigatorStatic$NavigationBar = NavigatorStatic$NavigationBarStatic;
 
-declare
-export var NavigationBar: NavigatorStatic$NavigationBarStatic;
+declare export var NavigationBar: NavigatorStatic$NavigationBarStatic;
 
-declare
-export interface NavigatorStatic$BreadcrumbNavigationBarStyle {}
+declare export interface NavigatorStatic$BreadcrumbNavigationBarStyle {}
 
-declare
-export interface NavigatorStatic$BreadcrumbNavigationBarRouteMapper {
+declare export interface NavigatorStatic$BreadcrumbNavigationBarRouteMapper {
     rightContentForRoute: (
             route: ___React$Route,
             navigator: ___React$Navigator) => React.ReactElement<any>,
@@ -3627,27 +3484,22 @@ export interface NavigatorStatic$BreadcrumbNavigationBarRouteMapper {
  * 
  * @see  NavigatorNavigationBar.js
  */
-declare
-export type NavigatorStatic$BreadcrumbNavigationBarProperties = {
+declare export type NavigatorStatic$BreadcrumbNavigationBarProperties = {
     navigator?: ___React$Navigator,
     routeMapper?: NavigatorStatic$BreadcrumbNavigationBarRouteMapper,
     navState?: NavigatorStatic$NavState,
     style?: ___React$ViewStyle
 }
 
-declare
-export type NavigatorStatic$BreadcrumbNavigationBarStatic = {
+declare export type NavigatorStatic$BreadcrumbNavigationBarStatic = {
     Styles: NavigatorStatic$BreadcrumbNavigationBarStyle
 }
 
-declare
-export type NavigatorStatic$BreadcrumbNavigationBar = NavigatorStatic$BreadcrumbNavigationBarStatic;
+declare export type NavigatorStatic$BreadcrumbNavigationBar = NavigatorStatic$BreadcrumbNavigationBarStatic;
 
-declare
-var BreadcrumbNavigationBar: NavigatorStatic$BreadcrumbNavigationBarStatic;
+declare var BreadcrumbNavigationBar: NavigatorStatic$BreadcrumbNavigationBarStatic;
 
-declare
-export type ___React$StyleSheetStatic = {
+declare export type ___React$StyleSheetStatic = {
 
     /**
      * Creates a StyleSheet style reference from the given object.
@@ -3746,8 +3598,7 @@ export type ___React$StyleSheetStatic = {
 /**
  * //FIXME: Could not find docs. Inferred from examples and jscode : ListViewDataSource.js
  */
-declare
-export interface ___React$DataSourceAssetCallback {
+declare export interface ___React$DataSourceAssetCallback {
     rowHasChanged?: (r1: any, r2: any) => boolean,
         sectionHeaderHasChanged?: (h1: any, h2: any) => boolean,
         getRowData?:<T>(dataBlob: any, sectionID: number | string, rowID: number | string) => T,
@@ -3758,8 +3609,7 @@ export interface ___React$DataSourceAssetCallback {
 /**
  * //FIXME: Could not find docs. Inferred from examples and js code: ListViewDataSource.js
  */
-declare
-export interface ___React$ListViewDataSource {
+declare export interface ___React$ListViewDataSource {
     new(onAsset: ___React$DataSourceAssetCallback): ___React$ListViewDataSource,
 
     /**
@@ -3841,8 +3691,7 @@ export interface ___React$ListViewDataSource {
  * 
  * @see  https://facebook.github.io/react-native/docs/tabbarios-item.html#props
  */
-declare
-export type ___React$TabBarItemProperties = {
+declare export type ___React$TabBarItemProperties = {
 
         /**
          * Little red bubble that sits at the top right of the icon.
@@ -3907,16 +3756,14 @@ export type ___React$TabBarItemProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$TabBarItemStatic = {}
+    declare export type ___React$TabBarItemStatic = {}
 
 
 /**
  * 
  * @see  https://facebook.github.io/react-native/docs/tabbarios.html#props
  */
-declare
-export type ___React$TabBarIOSProperties = {
+declare export type ___React$TabBarIOSProperties = {
 
         /**
          * Background color of the tab bar
@@ -3942,13 +3789,11 @@ export type ___React$TabBarIOSProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$TabBarIOSStatic = {
+    declare export type ___React$TabBarIOSStatic = {
     Item: ___React$TabBarItemStatic
 }
 
-declare
-export interface ___React$PixelRatioStatic {
+declare export interface ___React$PixelRatioStatic {
     get(): number,
         getFontScale(): number,
 
@@ -3980,11 +3825,9 @@ export interface ___React$PixelRatioStatic {
  * 
  * @see  https://facebook.github.io/react-native/docs/platform-specific-code.html#content
  */
-declare
-export type ___React$PlatformOSType = "ios" | "android";
+declare export type ___React$PlatformOSType = "ios" | "android";
 
-declare
-export interface ___React$PlatformStatic {
+declare export interface ___React$PlatformStatic {
     OS: ___React$PlatformOSType,
 
         /**
@@ -3997,13 +3840,11 @@ export interface ___React$PlatformStatic {
         }): T
 }
 
-declare
-export interface ___React$DeviceEventSubscriptionStatic {
+declare export interface ___React$DeviceEventSubscriptionStatic {
     remove(): void
 }
 
-declare
-export interface ___React$DeviceEventEmitterStatic {
+declare export interface ___React$DeviceEventEmitterStatic {
     addListener<T>(
             type: string,
             onReceived: (data: T) => void): ___React$DeviceEventSubscription,
@@ -4020,8 +3861,7 @@ export interface ___React$DeviceEventEmitterStatic {
         removeListener(eventType: String, listener: Function): void
 }
 
-declare
-export interface ___React$ScaledSize {
+declare export interface ___React$ScaledSize {
     width: number,
         height: number,
         scale: number,
@@ -4044,8 +3884,7 @@ Example: `var {height, width} = Dimensions.get('window');`
  * @returns  Value for the dimension.
  * @see  https://facebook.github.io/react-native/docs/dimensions.html#content
 */
-declare
-export interface ___React$Dimensions {
+declare export interface ___React$Dimensions {
 
     /**
      * Initial dimensions are set before runApplication is called so they
@@ -4072,16 +3911,13 @@ export interface ___React$Dimensions {
         }[]): void
 }
 
-declare
-export type ___React$PromiseTask = {
+declare export type ___React$PromiseTask = {
     gen: () => Promise<any >
 };
 
-declare
-export type ___React$Handle = number;
+declare export type ___React$Handle = number;
 
-declare
-export interface ___React$InteractionManagerStatic {
+declare export interface ___React$InteractionManagerStatic {
 
     /**
      * Schedule a function to run after all interactions have completed.
@@ -4113,8 +3949,7 @@ export interface ___React$InteractionManagerStatic {
         setDeadline(deadline: number): void
 }
 
-declare
-export type ___React$ScrollViewStyle = {
+declare export type ___React$ScrollViewStyle = {
     backfaceVisibility?: "visible" | "hidden",
     backgroundColor?: string,
     borderColor?: string,
@@ -4146,8 +3981,7 @@ export type ___React$ScrollViewStyle = {
 } & ___React$FlexStyle & ___React$TransformsStyle
 
 
-declare
-export interface ___React$ScrollViewPropertiesIOS {
+declare export interface ___React$ScrollViewPropertiesIOS {
 
     /**
      * When true the scroll view bounces horizontally when it reaches the end
@@ -4310,8 +4144,7 @@ export interface ___React$ScrollViewPropertiesIOS {
         zoomScale?: number
 }
 
-declare
-export interface ___React$ScrollViewPropertiesAndroid {
+declare export interface ___React$ScrollViewPropertiesAndroid {
 
     /**
      * Sometimes a scrollview takes up more space than its content fills.
@@ -4332,8 +4165,7 @@ export interface ___React$ScrollViewPropertiesAndroid {
         scrollPerfTag?: string
 }
 
-declare
-export type ___React$ScrollViewProperties = {
+declare export type ___React$ScrollViewProperties = {
 
         /**
          * These styles will be applied to the scroll view content container which
@@ -4423,8 +4255,7 @@ export type ___React$ScrollViewProperties = {
     } & ___React$ViewProperties & ___React$ScrollViewPropertiesIOS & ___React$ScrollViewPropertiesAndroid & ___React$Touchable &
 
 
-    declare
-export type ___React$ScrollViewProps = {
+    declare export type ___React$ScrollViewProps = {
         ref?: Ref<___React$ScrollViewStatic >
     } & ___React$ScrollViewProperties &
 
@@ -4462,28 +4293,24 @@ export type ___React$ScrollViewProps = {
         scrollWithoutAnimationTo?: (y: number, x: number) => void
     }
 
-declare
-export interface ___React$NativeScrollRectangle {
+declare export interface ___React$NativeScrollRectangle {
     left: number,
         top: number,
         bottom: number,
         right: number
 }
 
-declare
-export interface ___React$NativeScrollPoint {
+declare export interface ___React$NativeScrollPoint {
     x: number,
         y: number
 }
 
-declare
-export interface ___React$NativeScrollSize {
+declare export interface ___React$NativeScrollSize {
     height: number,
         width: number
 }
 
-declare
-export interface ___React$NativeScrollEvent {
+declare export interface ___React$NativeScrollEvent {
     contentInset: ___React$NativeScrollRectangle,
         contentOffset: ___React$NativeScrollPoint,
         contentSize: ___React$NativeScrollSize,
@@ -4500,8 +4327,7 @@ open.
 See https://github.com/facebook/react-native/pull/5602 for why
 ListViewDataSource is not subclassed.
 */
-declare
-export interface ___React$SwipeableListViewDataSource {
+declare export interface ___React$SwipeableListViewDataSource {
     cloneWithRowsAndSections(
             dataBlob: any,
             sectionIdentities: Array<string>,
@@ -4511,8 +4337,7 @@ export interface ___React$SwipeableListViewDataSource {
         setOpenRowID(rowID: string): ___React$ListViewDataSource
 }
 
-declare
-export type ___React$SwipeableListViewProps = {
+declare export type ___React$SwipeableListViewProps = {
     dataSource: ___React$SwipeableListViewDataSource,
     maxSwipeDistance?: number,
     renderRow: (
@@ -4523,8 +4348,7 @@ export type ___React$SwipeableListViewProps = {
     renderQuickActions(rowData: Object, sectionID: string, rowID: string): React.ReactElement<any >
 }
 
-declare
-export type ___React$SwipeableListViewStatic = {
+declare export type ___React$SwipeableListViewStatic = {
     getNewDataSource(): ___React$SwipeableListViewDataSource
 }
 
@@ -4533,8 +4357,7 @@ export type ___React$SwipeableListViewStatic = {
  * 
  * @see  : http://facebook.github.io/react-native/docs/actionsheetios.html#content
  */
-declare
-export interface ___React$ActionSheetIOSOptions {
+declare export interface ___React$ActionSheetIOSOptions {
     title?: string,
         options?: string[],
         cancelButtonIndex?: number,
@@ -4542,8 +4365,7 @@ export interface ___React$ActionSheetIOSOptions {
         message?: string
 }
 
-declare
-export interface ___React$ShareActionSheetIOSOptions {
+declare export interface ___React$ShareActionSheetIOSOptions {
     message?: string,
         url?: string
 }
@@ -4553,8 +4375,7 @@ export interface ___React$ShareActionSheetIOSOptions {
  * 
  * @see  https://facebook.github.io/react-native/docs/actionsheetios.html#content
  */
-declare
-export interface ___React$ActionSheetIOSStatic {
+declare export interface ___React$ActionSheetIOSStatic {
 
     /**
      * Display an iOS action sheet. The options object must contain one
@@ -4589,15 +4410,13 @@ export interface ___React$ActionSheetIOSStatic {
  * 
  * @see  https://facebook.github.io/react-native/docs/alert.html#content
  */
-declare
-export interface ___React$AlertButton {
+declare export interface ___React$AlertButton {
     text?: string,
         onPress?: () => void,
         style?: "default" | "cancel" | "destructive"
 }
 
-declare
-export interface ___React$AlertStatic {
+declare export interface ___React$AlertStatic {
     alert: (
         title: string,
         message?: string,
@@ -4609,8 +4428,7 @@ export interface ___React$AlertStatic {
 /**
  * //FIXME: No documentation - inferred from RCTAdSupport.m
  */
-declare
-export interface ___React$AdSupportIOSStatic {
+declare export interface ___React$AdSupportIOSStatic {
     getAdvertisingId: (onSuccess: (deviceId: string) => void, onFailure: (err: Error) => void) => void,
         getAdvertisingTrackingEnabled: (
             onSuccess: (hasTracking: boolean) => void,
@@ -4634,8 +4452,7 @@ By default, the only button will be an 'OK' button
 The last button in the list will be considered the 'Primary' button and it will appear bold.
  * @see  https://facebook.github.io/react-native/docs/alertios.html#content
 */
-declare
-export interface ___React$AlertIOSStatic {
+declare export interface ___React$AlertIOSStatic {
     alert: (
             title: string,
             message?: string,
@@ -4665,14 +4482,11 @@ iOS App States
 For more information, see Apple's documentation: https://developer.apple.com/library/ios/documentation/iPhone/Conceptual/iPhoneOSProgrammingGuide/TheAppLifeCycle/TheAppLifeCycle.html
  * @see  https://facebook.github.io/react-native/docs/appstateios.html#content
 */
-declare
-export type ___React$AppStateEvent = "change" | "memoryWarning";
+declare export type ___React$AppStateEvent = "change" | "memoryWarning";
 
-declare
-export type ___React$AppStateStatus = "active" | "background" | "inactive";
+declare export type ___React$AppStateStatus = "active" | "background" | "inactive";
 
-declare
-export interface ___React$AppStateStatic {
+declare export interface ___React$AppStateStatic {
     currentState: string,
 
         /**
@@ -4700,8 +4514,7 @@ It is recommended that you use an abstraction on top of AsyncStorage
 instead of AsyncStorage directly for anything more than light usage since it operates globally.
  * @see  https://facebook.github.io/react-native/docs/asyncstorage.html#content
 */
-declare
-export interface ___React$AsyncStorageStatic {
+declare export interface ___React$AsyncStorageStatic {
 
     /**
      * Fetches key and passes the result to callback, along with an Error if there is any.
@@ -4778,15 +4591,13 @@ export interface ___React$AsyncStorageStatic {
 listeners or if none of the listeners return true.
 Methods don't have more detailed documentation as of 0.25.
 */
-declare
-export interface ___React$BackAndroidStatic {
+declare export interface ___React$BackAndroidStatic {
     exitApp(): void,
         addEventListener(eventName: string, handler: () => void): void,
         removeEventListener(eventName: string, handler: () => void): void
 }
 
-declare
-export interface ___React$CameraRollFetchParams {
+declare export interface ___React$CameraRollFetchParams {
     first: number,
         after?: string,
         groupTypes: string,
@@ -4794,21 +4605,18 @@ export interface ___React$CameraRollFetchParams {
         assetType?: string
 }
 
-declare
-export interface ___React$CameraRollNodeInfo {
+declare export interface ___React$CameraRollNodeInfo {
     image: ___React$Image,
         group_name: string,
         timestamp: number,
         location: any
 }
 
-declare
-export interface ___React$CameraRollEdgeInfo {
+declare export interface ___React$CameraRollEdgeInfo {
     node: ___React$CameraRollNodeInfo
 }
 
-declare
-export interface ___React$CameraRollAssetInfo {
+declare export interface ___React$CameraRollAssetInfo {
     edges: ___React$CameraRollEdgeInfo[],
         page_info: {
             has_next_page: boolean,
@@ -4816,8 +4624,7 @@ export interface ___React$CameraRollAssetInfo {
         }
 }
 
-declare
-export interface ___React$GetPhotosParamType {
+declare export interface ___React$GetPhotosParamType {
     first: number,
         after: string,
         groupTypes: "Album" |
@@ -4832,8 +4639,7 @@ export interface ___React$GetPhotosParamType {
         mimeTypes: string[]
 }
 
-declare
-export interface ___React$GetPhotosReturnType {
+declare export interface ___React$GetPhotosReturnType {
     edges: {
             node: {
                 type: string,
@@ -4857,8 +4663,7 @@ export interface ___React$GetPhotosReturnType {
 /**
  * CameraRoll provides access to the local camera roll / gallery.
  */
-declare
-export interface ___React$CameraRollStatic {
+declare export interface ___React$CameraRollStatic {
     GroupTypesOptions: string[],
 
         /**
@@ -4897,29 +4702,25 @@ export interface ___React$CameraRollStatic {
         getPhotos(params: ___React$GetPhotosParamType): Promise<___React$GetPhotosReturnType >
 }
 
-declare
-export interface ___React$ClipboardStatic {
+declare export interface ___React$ClipboardStatic {
     getString(): Promise<string>,
         setString(content: string): void
 }
 
-declare
-export interface ___React$DatePickerAndroidOpenOption {
+declare export interface ___React$DatePickerAndroidOpenOption {
     date?: Date | number,
         minDate?: Date | number,
         maxDate?: Date | number
 }
 
-declare
-export interface ___React$DatePickerAndroidOpenReturn {
+declare export interface ___React$DatePickerAndroidOpenReturn {
     action: string,
         year?: number,
         month?: number,
         day?: number
 }
 
-declare
-export interface ___React$DatePickerAndroidStatic {
+declare export interface ___React$DatePickerAndroidStatic {
     open(
             options?: ___React$DatePickerAndroidOpenOption): Promise<___React$DatePickerAndroidOpenReturn>,
 
@@ -4934,8 +4735,7 @@ export interface ___React$DatePickerAndroidStatic {
         dismissedAction: string
 }
 
-declare
-export interface ___React$FetchableListenable<T>{
+declare export interface ___React$FetchableListenable<T>{
     fetch: () => Promise<T>,
 
     /**
@@ -4951,8 +4751,7 @@ export interface ___React$FetchableListenable<T>{
     removeEventListener: (eventName: string, listener: (result: T) => void) => void
 }
 
-declare
-export interface ___React$IntentAndroidStatic {
+declare export interface ___React$IntentAndroidStatic {
 
     /**
      * Starts a corresponding external activity for the given URL.
@@ -4988,8 +4787,7 @@ export interface ___React$IntentAndroidStatic {
         getInitialURL(callback: (url: string) => void): void
 }
 
-declare
-export interface ___React$LinkingStatic {
+declare export interface ___React$LinkingStatic {
 
     /**
      * Add a handler to Linking changes by listening to the url event type and providing the handler
@@ -5030,8 +4828,7 @@ export interface ___React$LinkingStatic {
         getInitialURL(): Promise<string >
 }
 
-declare
-export interface ___React$LinkingIOSStatic {
+declare export interface ___React$LinkingIOSStatic {
 
     /**
      * Add a handler to LinkingIOS changes by listening to the url event type and providing the handler
@@ -5081,8 +4878,7 @@ Asynchronously determine if the device is online and on a cellular network.
 - `unknown` - error case and the network status is unknown
  * @see  https://facebook.github.io/react-native/docs/netinfo.html#content
 */
-declare
-export type ___React$NetInfoReturnType = "none" |
+declare export type ___React$NetInfoReturnType = "none" |
     "wifi" |
     "cell" |
     "unknown" |
@@ -5107,8 +4903,7 @@ export type ___React$NetInfoReturnType = "none" |
     "VPN" |
     "UNKNOWN";
 
-declare
-export type ___React$NetInfoStatic = {
+declare export type ___React$NetInfoStatic = {
 
     /**
      * Available on all platforms.
@@ -5126,8 +4921,7 @@ export type ___React$NetInfoStatic = {
 } & ___React$FetchableListenable
 
 
-declare
-export interface ___React$PanResponderGestureState {
+declare export interface ___React$PanResponderGestureState {
 
     /**
      * ID of the gestureState- persisted as long as there at least one touch on
@@ -5186,8 +4980,7 @@ export interface ___React$PanResponderGestureState {
  * 
  * @see  documentation of GestureResponderHandlers
  */
-declare
-export interface ___React$PanResponderCallbacks {
+declare export interface ___React$PanResponderCallbacks {
     onMoveShouldSetPanResponder?: (
             e: ___React$GestureResponderEvent,
             gestureState: ___React$PanResponderGestureState) => boolean,
@@ -5226,8 +5019,7 @@ export interface ___React$PanResponderCallbacks {
             gestureState: ___React$PanResponderGestureState) => boolean
 }
 
-declare
-export interface ___React$PanResponderInstance {
+declare export interface ___React$PanResponderInstance {
     panHandlers: ___React$GestureResponderHandlers
 }
 
@@ -5240,8 +5032,7 @@ and can be used to recognize simple multi-touch gestures.
 It provides a predictable wrapper of the responder handlers provided by the gesture responder system.
 For each handler, it provides a new gestureState object alongside the normal event.
 */
-declare
-export interface ___React$PanResponderStatic {
+declare export interface ___React$PanResponderStatic {
 
     /**
      * 
@@ -5278,15 +5069,13 @@ export interface ___React$PanResponderStatic {
     create(config: ___React$PanResponderCallbacks): ___React$PanResponderInstance
 }
 
-declare
-export interface ___React$PushNotificationPermissions {
+declare export interface ___React$PushNotificationPermissions {
     alert?: boolean,
         badge?: boolean,
         sound?: boolean
 }
 
-declare
-export interface ___React$PushNotification {
+declare export interface ___React$PushNotification {
 
     /**
      * An alias for `getAlert` to get the notification's main message string
@@ -5338,8 +5127,7 @@ declare type ___React$ScheduleLocalNotificationDetails = {
 
 //FIXME: BGR: The documentation seems completely off compared to the actual js implementation. I could never get the example to run
 */
-declare
-export interface ___React$PushNotificationIOSStatic {
+declare export interface ___React$PushNotificationIOSStatic {
 
     /**
      * Schedules the localNotification for immediate presentation.
@@ -5445,8 +5233,7 @@ export interface ___React$PushNotificationIOSStatic {
  * 
  * @enum  ('default', 'light-content')
  */
-declare
-export type ___React$StatusBarStyle = "default" | "light-content";
+declare export type ___React$StatusBarStyle = "default" | "light-content";
 
 
 /**
@@ -5455,8 +5242,7 @@ export type ___React$StatusBarStyle = "default" | "light-content";
  */
 declare type ___React$StatusBarAnimation = "none" | "fade" | "slide";
 
-declare
-export type ___React$StatusBarPropertiesIOS = {
+declare export type ___React$StatusBarPropertiesIOS = {
 
     /**
      * Sets the color of the status bar text.
@@ -5475,8 +5261,7 @@ export type ___React$StatusBarPropertiesIOS = {
     showHideTransition?: "fade" | "slide"
 }
 
-declare
-export type ___React$StatusBarPropertiesAndroid = {
+declare export type ___React$StatusBarPropertiesAndroid = {
 
     /**
      * The background color of the status bar.
@@ -5491,8 +5276,7 @@ export type ___React$StatusBarPropertiesAndroid = {
     translucent?: boolean
 }
 
-declare
-export type ___React$StatusBarProperties = {
+declare export type ___React$StatusBarProperties = {
 
         /**
          * If the transition between status bar property changes should be
@@ -5507,8 +5291,7 @@ export type ___React$StatusBarProperties = {
     } & ___React$StatusBarPropertiesIOS & ___React$StatusBarPropertiesAndroid &
 
 
-    declare
-export type ___React$StatusBarStatic = {
+    declare export type ___React$StatusBarStatic = {
     setHidden: (hidden: boolean, animation: ___React$StatusBarAnimation) => void,
     setBarStyle: (style: ___React$StatusBarStyle, animated: boolean) => void,
     setNetworkActivityIndicatorVisible: (visible: boolean) => void,
@@ -5521,8 +5304,7 @@ export type ___React$StatusBarStatic = {
  * StatusBarIOS is being deprecated.
  * @see  https://github.com/facebook/react-native/commit/4de616b4c1a9d3556632a93504828f0539fa4fa5
  */
-declare
-export interface ___React$StatusBarIOSStatic {}
+declare export interface ___React$StatusBarIOSStatic {}
 
 declare type ___React$TimePickerAndroidOpenOptions = {
     hour?: number,
@@ -5530,8 +5312,7 @@ declare type ___React$TimePickerAndroidOpenOptions = {
     is24Hour?: boolean
 };
 
-declare
-export interface ___React$TimePickerAndroidStatic {
+declare export interface ___React$TimePickerAndroidStatic {
 
     /**
      * The available keys for the options object are:
@@ -5565,8 +5346,7 @@ export interface ___React$TimePickerAndroidStatic {
         dismissedAction: string
 }
 
-declare
-export interface ___React$ToastAndroidStatic {
+declare export interface ___React$ToastAndroidStatic {
 
     /**
      * String message: A string with the text to toast
@@ -5578,8 +5358,7 @@ export interface ___React$ToastAndroidStatic {
         LONG: number
 }
 
-declare
-export type ___React$SwitchPropertiesIOS = {
+declare export type ___React$SwitchPropertiesIOS = {
 
         /**
          * Background color when the switch is turned on.
@@ -5599,8 +5378,7 @@ export type ___React$SwitchPropertiesIOS = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$SwitchProperties = {
+    declare export type ___React$SwitchProperties = {
 
         /**
          * If true the user won't be able to toggle the switch.
@@ -5628,8 +5406,7 @@ export type ___React$SwitchProperties = {
     } & ___React$ViewProperties &
 
 
-    declare
-export type ___React$SwitchStatic = {}
+    declare export type ___React$SwitchStatic = {}
 
 
 /**
@@ -5642,13 +5419,11 @@ There will be no effect on devices that do not support Vibration, eg. the iOS si
 Vibration patterns are currently unsupported.
  * @see  https://facebook.github.io/react-native/docs/vibrationios.html#content
 */
-declare
-export interface ___React$VibrationIOSStatic {
+declare export interface ___React$VibrationIOSStatic {
     vibrate(): void
 }
 
-declare
-export interface ___React$VibrationStatic {
+declare export interface ___React$VibrationStatic {
     vibrate(pattern: number | number[], repeat: boolean): void,
 
         /**
@@ -5664,11 +5439,9 @@ export interface ___React$VibrationStatic {
  * but this cool website has nice visual illustrations of what they represent:
 http://xaedes.de/dev/transitions/
 */
-declare
-export type ___React$EasingFunction = (value: number) => number;
+declare export type ___React$EasingFunction = (value: number) => number;
 
-declare
-export interface ___React$EasingStatic {
+declare export interface ___React$EasingStatic {
     step0: ___React$EasingFunction,
         step1: ___React$EasingFunction,
         linear: ___React$EasingFunction,
@@ -5929,8 +5702,7 @@ declare module 'Animated' {
 }
 
 
-declare
-export interface ___React$GeolocationStatic {
+declare export interface ___React$GeolocationStatic {
     getCurrentPosition(
             geo_success: (position: ___React$GeolocationReturnType) => void,
             geo_error?: (error: Error) => void,
@@ -5943,84 +5715,63 @@ export interface ___React$GeolocationStatic {
         stopObserving(): void
 }
 
-declare
-export type ___React$fetch = (url: string, options?: Object) => Promise<any>;
+declare export type ___React$fetch = (url: string, options?: Object) => Promise<any>;
 
-declare
-export type ___React$timedScheduler = (fn: string | Function, time: number) => number;
+declare export type ___React$timedScheduler = (fn: string | Function, time: number) => number;
 
-declare
-export type ___React$untimedScheduler = (fn: string | Function) => number;
+declare export type ___React$untimedScheduler = (fn: string | Function) => number;
 
-declare
-export type ___React$setTimeout = ___React$timedScheduler;
+declare export type ___React$setTimeout = ___React$timedScheduler;
 
-declare
-export type ___React$setInterval = ___React$timedScheduler;
+declare export type ___React$setInterval = ___React$timedScheduler;
 
-declare
-export type ___React$setImmediate = ___React$untimedScheduler;
+declare export type ___React$setImmediate = ___React$untimedScheduler;
 
-declare
-export type ___React$requestAnimationFrame = ___React$untimedScheduler;
+declare export type ___React$requestAnimationFrame = ___React$untimedScheduler;
 
-declare
-export type ___React$schedulerCanceller = (id: number) => void;
+declare export type ___React$schedulerCanceller = (id: number) => void;
 
-declare
-export type ___React$clearTimeout = ___React$schedulerCanceller;
+declare export type ___React$clearTimeout = ___React$schedulerCanceller;
 
-declare
-export type ___React$clearInterval = ___React$schedulerCanceller;
+declare export type ___React$clearInterval = ___React$schedulerCanceller;
 
-declare
-export type ___React$clearImmediate = ___React$schedulerCanceller;
+declare export type ___React$clearImmediate = ___React$schedulerCanceller;
 
-declare
-export type ___React$cancelAnimationFrame = ___React$schedulerCanceller;
+declare export type ___React$cancelAnimationFrame = ___React$schedulerCanceller;
 
-declare
-export interface ___React$TabsReducerStatic {
+declare export interface ___React$TabsReducerStatic {
     JumpToAction(index: number): any
 }
 
-declare
-export type ___React$TabsReducerFunction = (params: any) => any;
+declare export type ___React$TabsReducerFunction = (params: any) => any;
 
-declare
-export interface ___React$NavigationReducerStatic {
+declare export interface ___React$NavigationReducerStatic {
     TabsReducer: any
 }
 
-declare
-export interface ___React$NavigationTab {
+declare export interface ___React$NavigationTab {
     key: string
 }
 
-declare
-export interface ___React$NavigationAction {
+declare export interface ___React$NavigationAction {
     type: string
 }
 
-declare
-export interface ___React$NavigationRoute {
+declare export interface ___React$NavigationRoute {
     key: string
 }
 
-declare
-export type ___React$NavigationState = {
+declare export type ___React$NavigationState = {
     index: number,
     routes: ___React$NavigationRoute[]
 } & ___React$NavigationRoute
 
 
-declare
-export type ___React$NavigationRenderer = (
+declare export type ___React$NavigationRenderer = (
     route: ___React$NavigationState,
     onNavigate: (action: ___React$NavigationAction) => boolean) => JSX.Element;
 
-declare
-export interface ___React$NavigationAnimatedViewStaticProps {
+declare export interface ___React$NavigationAnimatedViewStaticProps {
     route?: any,
         style?: ___React$ViewStyle,
         renderOverlay(props: Object): JSX.Element,
@@ -6028,23 +5779,19 @@ export interface ___React$NavigationAnimatedViewStaticProps {
         renderScene(props: Object): JSX.Element
 }
 
-declare
-export type ___React$NavigationAnimatedViewStatic = {}
+declare export type ___React$NavigationAnimatedViewStatic = {}
 
-declare
-export interface ___React$NavigationHeaderProps {
+declare export interface ___React$NavigationHeaderProps {
     renderTitleComponent(props: Object): JSX.Element,
         onNavigateBack(): void
 }
 
-declare
-export type ___React$NavigationHeaderStatic = {
+declare export type ___React$NavigationHeaderStatic = {
     Title: JSX.Element,
     HEIGHT: number
 }
 
-declare
-export interface ___React$NavigationCardStackProps {
+declare export interface ___React$NavigationCardStackProps {
     direction?: "horizontal" | "vertical",
         style?: ___React$ViewStyle,
         route?: any,
@@ -6052,43 +5799,36 @@ export interface ___React$NavigationCardStackProps {
         onNavigateBack(): void
 }
 
-declare
-export type ___React$NavigationCardStackStatic = {}
+declare export type ___React$NavigationCardStackStatic = {}
 
-declare
-export interface ___React$NavigationExperimentalStatic {
+declare export interface ___React$NavigationExperimentalStatic {
     AnimatedView: ___React$NavigationAnimatedViewStatic,
         CardStack: ___React$NavigationCardStackStatic,
         Header: ___React$NavigationHeaderStatic,
         Reducer: ___React$NavigationReducerStatic
 }
 
-declare
-export interface ___React$NavigationContainerProps {
+declare export interface ___React$NavigationContainerProps {
     tabs: ___React$NavigationTab[],
         index: number
 }
 
-declare
-export type ___React$NavigationContainerStatic = {
+declare export type ___React$NavigationContainerStatic = {
     create(inClass: any): any
 }
 
-declare
-export type ___React$NavigationRootContainerProps = {
+declare export type ___React$NavigationRootContainerProps = {
     renderNavigation: ___React$NavigationRenderer,
     reducer: ___React$NavigationReducerStatic,
     persistenceKey?: string
 }
 
-declare
-export type ___React$NavigationRootContainerStatic = {
+declare export type ___React$NavigationRootContainerStatic = {
     getBackAction(): ___React$NavigationAction,
     handleNavigation(action: ___React$NavigationAction): boolean
 }
 
-declare
-export interface ___React$NativeEventSubscription {
+declare export interface ___React$NativeEventSubscription {
 
     /**
      * Call this method to un-subscribe from a native-event
@@ -6101,451 +5841,306 @@ export interface ___React$NativeEventSubscription {
  * Receive events from native-code
  * @see  https://facebook.github.io/react-native/docs/native-modules-ios.html#sending-events-to-javascript
  */
-declare
-export interface ___React$NativeAppEventEmitterStatic {
+declare export interface ___React$NativeAppEventEmitterStatic {
     addListener(event: string, handler: (data: any) => void): ___React$NativeEventSubscription
 }
 
-declare
-export var ActivityIndicator: ___React$ActivityIndicatorStatic;
+declare export var ActivityIndicator: ___React$ActivityIndicatorStatic;
 
-declare
-export type ___React$ActivityIndicator = ___React$ActivityIndicatorStatic;
+declare export type ___React$ActivityIndicator = ___React$ActivityIndicatorStatic;
 
-declare
-export var ActivityIndicatorIOS: ___React$ActivityIndicatorIOSStatic;
+declare export var ActivityIndicatorIOS: ___React$ActivityIndicatorIOSStatic;
 
-declare
-export type ___React$ActivityIndicatorIOS = ___React$ActivityIndicatorIOSStatic;
+declare export type ___React$ActivityIndicatorIOS = ___React$ActivityIndicatorIOSStatic;
 
-declare
-export var DatePickerIOS: ___React$DatePickerIOSStatic;
+declare export var DatePickerIOS: ___React$DatePickerIOSStatic;
 
-declare
-export type ___React$DatePickerIOS = ___React$DatePickerIOSStatic;
+declare export type ___React$DatePickerIOS = ___React$DatePickerIOSStatic;
 
-declare
-export var DrawerLayoutAndroid: ___React$DrawerLayoutAndroidStatic;
+declare export var DrawerLayoutAndroid: ___React$DrawerLayoutAndroidStatic;
 
-declare
-export type ___React$DrawerLayoutAndroid = ___React$DrawerLayoutAndroidStatic;
+declare export type ___React$DrawerLayoutAndroid = ___React$DrawerLayoutAndroidStatic;
 
-declare
-export var Image: ___React$ImageStatic;
+declare export var Image: ___React$ImageStatic;
 
-declare
-export type ___React$Image = ___React$ImageStatic;
+declare export type ___React$Image = ___React$ImageStatic;
 
-declare
-export var LayoutAnimation: ___React$LayoutAnimationStatic;
+declare export var LayoutAnimation: ___React$LayoutAnimationStatic;
 
-declare
-export type ___React$LayoutAnimation = ___React$LayoutAnimationStatic;
+declare export type ___React$LayoutAnimation = ___React$LayoutAnimationStatic;
 
-declare
-export var ListView: ___React$ListViewStatic;
+declare export var ListView: ___React$ListViewStatic;
 
-declare
-export type ___React$ListView = ___React$ListViewStatic;
+declare export type ___React$ListView = ___React$ListViewStatic;
 
-declare
-export var MapView: ___React$MapViewStatic;
+declare export var MapView: ___React$MapViewStatic;
 
-declare
-export type ___React$MapView = ___React$MapViewStatic;
+declare export type ___React$MapView = ___React$MapViewStatic;
 
-declare
-export var Modal: ___React$ModalStatic;
+declare export var Modal: ___React$ModalStatic;
 
-declare
-export type ___React$Modal = ___React$ModalStatic;
+declare export type ___React$Modal = ___React$ModalStatic;
 
-declare
-export var Navigator: ___React$NavigatorStatic;
+declare export var Navigator: ___React$NavigatorStatic;
 
-declare
-export type ___React$Navigator = ___React$NavigatorStatic;
+declare export type ___React$Navigator = ___React$NavigatorStatic;
 
-declare
-export var NavigatorIOS: ___React$NavigatorIOSStatic;
+declare export var NavigatorIOS: ___React$NavigatorIOSStatic;
 
-declare
-export type ___React$NavigatorIOS = ___React$NavigatorIOSStatic;
+declare export type ___React$NavigatorIOS = ___React$NavigatorIOSStatic;
 
-declare
-export var Picker: ___React$PickerStatic;
+declare export var Picker: ___React$PickerStatic;
 
-declare
-export type ___React$Picker = ___React$PickerStatic;
+declare export type ___React$Picker = ___React$PickerStatic;
 
-declare
-export var PickerIOS: ___React$PickerIOSStatic;
+declare export var PickerIOS: ___React$PickerIOSStatic;
 
-declare
-export type ___React$PickerIOS = ___React$PickerIOSStatic;
+declare export type ___React$PickerIOS = ___React$PickerIOSStatic;
 
-declare
-export var ProgressBarAndroid: ___React$ProgressBarAndroidStatic;
+declare export var ProgressBarAndroid: ___React$ProgressBarAndroidStatic;
 
-declare
-export type ___React$ProgressBarAndroid = ___React$ProgressBarAndroidStatic;
+declare export type ___React$ProgressBarAndroid = ___React$ProgressBarAndroidStatic;
 
-declare
-export var ProgressViewIOS: ___React$ProgressViewIOSStatic;
+declare export var ProgressViewIOS: ___React$ProgressViewIOSStatic;
 
-declare
-export type ___React$ProgressViewIOS = ___React$ProgressViewIOSStatic;
+declare export type ___React$ProgressViewIOS = ___React$ProgressViewIOSStatic;
 
-declare
-export var RefreshControl: ___React$RefreshControlStatic;
+declare export var RefreshControl: ___React$RefreshControlStatic;
 
-declare
-export type ___React$RefreshControl = ___React$RefreshControlStatic;
+declare export type ___React$RefreshControl = ___React$RefreshControlStatic;
 
-declare
-export var Slider: ___React$SliderIOS;
+declare export var Slider: ___React$SliderIOS;
 
-declare
-export type ___React$Slider = ___React$SliderIOS;
+declare export type ___React$Slider = ___React$SliderIOS;
 
-declare
-export var SliderIOS: ___React$SliderIOSStatic;
+declare export var SliderIOS: ___React$SliderIOSStatic;
 
-declare
-export type ___React$SliderIOS = ___React$SliderIOSStatic;
+declare export type ___React$SliderIOS = ___React$SliderIOSStatic;
 
-declare
-export var StatusBar: ___React$StatusBarStatic;
+declare export var StatusBar: ___React$StatusBarStatic;
 
-declare
-export type ___React$StatusBar = ___React$StatusBarStatic;
+declare export type ___React$StatusBar = ___React$StatusBarStatic;
 
-declare
-export var ScrollView: ___React$ScrollViewStatic;
+declare export var ScrollView: ___React$ScrollViewStatic;
 
-declare
-export type ___React$ScrollView = ___React$ScrollViewStatic;
+declare export type ___React$ScrollView = ___React$ScrollViewStatic;
 
-declare
-export var StyleSheet: ___React$StyleSheetStatic;
+declare export var StyleSheet: ___React$StyleSheetStatic;
 
-declare
-export type ___React$StyleSheet = ___React$StyleSheetStatic;
+declare export type ___React$StyleSheet = ___React$StyleSheetStatic;
 
-declare
-export var SwipeableListView: ___React$SwipeableListViewStatic;
+declare export var SwipeableListView: ___React$SwipeableListViewStatic;
 
-declare
-export type ___React$SwipeableListView = ___React$SwipeableListViewStatic;
+declare export type ___React$SwipeableListView = ___React$SwipeableListViewStatic;
 
-declare
-export var Switch: ___React$SwitchStatic;
+declare export var Switch: ___React$SwitchStatic;
 
-declare
-export type ___React$Switch = ___React$SwitchStatic;
+declare export type ___React$Switch = ___React$SwitchStatic;
 
-declare
-export var SwitchIOS: ___React$SwitchIOSStatic;
+declare export var SwitchIOS: ___React$SwitchIOSStatic;
 
-declare
-export type ___React$SwitchIOS = ___React$SwitchIOSStatic;
+declare export type ___React$SwitchIOS = ___React$SwitchIOSStatic;
 
-declare
-export var TabBarIOS: ___React$TabBarIOSStatic;
+declare export var TabBarIOS: ___React$TabBarIOSStatic;
 
-declare
-export type ___React$TabBarIOS = ___React$TabBarIOSStatic;
+declare export type ___React$TabBarIOS = ___React$TabBarIOSStatic;
 
-declare
-export var Text: ___React$TextStatic;
+declare export var Text: ___React$TextStatic;
 
-declare
-export type ___React$Text = ___React$TextStatic;
+declare export type ___React$Text = ___React$TextStatic;
 
-declare
-export var TextInput: ___React$TextInputStatic;
+declare export var TextInput: ___React$TextInputStatic;
 
-declare
-export type ___React$TextInput = ___React$TextInputStatic;
+declare export type ___React$TextInput = ___React$TextInputStatic;
 
-declare
-export var ToolbarAndroid: ___React$ToolbarAndroidStatic;
+declare export var ToolbarAndroid: ___React$ToolbarAndroidStatic;
 
-declare
-export type ___React$ToolbarAndroid = ___React$ToolbarAndroidStatic;
+declare export type ___React$ToolbarAndroid = ___React$ToolbarAndroidStatic;
 
-declare
-export var TouchableHighlight: ___React$TouchableHighlightStatic;
+declare export var TouchableHighlight: ___React$TouchableHighlightStatic;
 
-declare
-export type ___React$TouchableHighlight = ___React$TouchableHighlightStatic;
+declare export type ___React$TouchableHighlight = ___React$TouchableHighlightStatic;
 
-declare
-export var TouchableNativeFeedback: ___React$TouchableNativeFeedbackStatic;
+declare export var TouchableNativeFeedback: ___React$TouchableNativeFeedbackStatic;
 
-declare
-export type ___React$TouchableNativeFeedback = ___React$TouchableNativeFeedbackStatic;
+declare export type ___React$TouchableNativeFeedback = ___React$TouchableNativeFeedbackStatic;
 
-declare
-export var TouchableOpacity: ___React$TouchableOpacityStatic;
+declare export var TouchableOpacity: ___React$TouchableOpacityStatic;
 
-declare
-export type ___React$TouchableOpacity = ___React$TouchableOpacityStatic;
+declare export type ___React$TouchableOpacity = ___React$TouchableOpacityStatic;
 
-declare
-export var TouchableWithoutFeedback: ___React$TouchableWithoutFeedbackStatic;
+declare export var TouchableWithoutFeedback: ___React$TouchableWithoutFeedbackStatic;
 
-declare
-export type ___React$TouchableWithoutFeedback = ___React$TouchableWithoutFeedbackStatic;
+declare export type ___React$TouchableWithoutFeedback = ___React$TouchableWithoutFeedbackStatic;
 
-declare
-export var View: ___React$ViewStatic;
+declare export var View: ___React$ViewStatic;
 
-declare
-export type ___React$View = ___React$ViewStatic;
+declare export type ___React$View = ___React$ViewStatic;
 
-declare
-export var ViewPagerAndroid: ___React$ViewPagerAndroidStatic;
+declare export var ViewPagerAndroid: ___React$ViewPagerAndroidStatic;
 
-declare
-export type ___React$ViewPagerAndroid = ___React$ViewPagerAndroidStatic;
+declare export type ___React$ViewPagerAndroid = ___React$ViewPagerAndroidStatic;
 
-declare
-export var WebView: ___React$WebViewStatic;
+declare export var WebView: ___React$WebViewStatic;
 
-declare
-export type ___React$WebView = ___React$WebViewStatic;
+declare export type ___React$WebView = ___React$WebViewStatic;
 
-declare
-export var ActionSheetIOS: ___React$ActionSheetIOSStatic;
+declare export var ActionSheetIOS: ___React$ActionSheetIOSStatic;
 
-declare
-export type ___React$ActionSheetIOS = ___React$ActionSheetIOSStatic;
+declare export type ___React$ActionSheetIOS = ___React$ActionSheetIOSStatic;
 
-declare
-export var AdSupportIOS: ___React$AdSupportIOSStatic;
+declare export var AdSupportIOS: ___React$AdSupportIOSStatic;
 
-declare
-export type ___React$AdSupportIOS = ___React$AdSupportIOSStatic;
+declare export type ___React$AdSupportIOS = ___React$AdSupportIOSStatic;
 
-declare
-export var Alert: ___React$AlertStatic;
+declare export var Alert: ___React$AlertStatic;
 
-declare
-export type ___React$Alert = ___React$AlertStatic;
+declare export type ___React$Alert = ___React$AlertStatic;
 
-declare
-export var AlertIOS: ___React$AlertIOSStatic;
+declare export var AlertIOS: ___React$AlertIOSStatic;
 
-declare
-export type ___React$AlertIOS = ___React$AlertIOSStatic;
+declare export type ___React$AlertIOS = ___React$AlertIOSStatic;
 
-declare
-export var AppState: ___React$AppStateStatic;
+declare export var AppState: ___React$AppStateStatic;
 
-declare
-export type ___React$AppState = ___React$AppStateStatic;
+declare export type ___React$AppState = ___React$AppStateStatic;
 
-declare
-export var AppStateIOS: ___React$AppStateStatic;
+declare export var AppStateIOS: ___React$AppStateStatic;
 
-declare
-export type ___React$AppStateIOS = ___React$AppStateStatic;
+declare export type ___React$AppStateIOS = ___React$AppStateStatic;
 
-declare
-export var AsyncStorage: ___React$AsyncStorageStatic;
+declare export var AsyncStorage: ___React$AsyncStorageStatic;
 
-declare
-export type ___React$AsyncStorage = ___React$AsyncStorageStatic;
+declare export type ___React$AsyncStorage = ___React$AsyncStorageStatic;
 
-declare
-export var BackAndroid: ___React$BackAndroidStatic;
+declare export var BackAndroid: ___React$BackAndroidStatic;
 
-declare
-export type ___React$BackAndroid = ___React$BackAndroidStatic;
+declare export type ___React$BackAndroid = ___React$BackAndroidStatic;
 
-declare
-export var CameraRoll: ___React$CameraRollStatic;
+declare export var CameraRoll: ___React$CameraRollStatic;
 
-declare
-export type ___React$CameraRoll = ___React$CameraRollStatic;
+declare export type ___React$CameraRoll = ___React$CameraRollStatic;
 
-declare
-export var Clipboard: ___React$ClipboardStatic;
+declare export var Clipboard: ___React$ClipboardStatic;
 
-declare
-export type ___React$Clipboard = ___React$ClipboardStatic;
+declare export type ___React$Clipboard = ___React$ClipboardStatic;
 
-declare
-export var DatePickerAndroid: ___React$DatePickerAndroidStatic;
+declare export var DatePickerAndroid: ___React$DatePickerAndroidStatic;
 
-declare
-export type ___React$DatePickerAndroid = ___React$DatePickerAndroidStatic;
+declare export type ___React$DatePickerAndroid = ___React$DatePickerAndroidStatic;
 
-declare
-export var IntentAndroid: ___React$IntentAndroidStatic;
+declare export var IntentAndroid: ___React$IntentAndroidStatic;
 
-declare
-export type ___React$IntentAndroid = ___React$IntentAndroidStatic;
+declare export type ___React$IntentAndroid = ___React$IntentAndroidStatic;
 
-declare
-export var KeyboardAvoidingView: ___React$KeyboardAvoidingViewStatic;
+declare export var KeyboardAvoidingView: ___React$KeyboardAvoidingViewStatic;
 
-declare
-export type ___React$KeyboardAvoidingView = ___React$KeyboardAvoidingViewStatic;
+declare export type ___React$KeyboardAvoidingView = ___React$KeyboardAvoidingViewStatic;
 
-declare
-export var Linking: ___React$LinkingStatic;
+declare export var Linking: ___React$LinkingStatic;
 
-declare
-export type ___React$Linking = ___React$LinkingStatic;
+declare export type ___React$Linking = ___React$LinkingStatic;
 
-declare
-export var LinkingIOS: ___React$LinkingIOSStatic;
+declare export var LinkingIOS: ___React$LinkingIOSStatic;
 
-declare
-export type ___React$LinkingIOS = ___React$LinkingIOSStatic;
+declare export type ___React$LinkingIOS = ___React$LinkingIOSStatic;
 
-declare
-export var NetInfo: ___React$NetInfoStatic;
+declare export var NetInfo: ___React$NetInfoStatic;
 
-declare
-export type ___React$NetInfo = ___React$NetInfoStatic;
+declare export type ___React$NetInfo = ___React$NetInfoStatic;
 
-declare
-export var PanResponder: ___React$PanResponderStatic;
+declare export var PanResponder: ___React$PanResponderStatic;
 
-declare
-export type ___React$PanResponder = ___React$PanResponderStatic;
+declare export type ___React$PanResponder = ___React$PanResponderStatic;
 
-declare
-export var PushNotificationIOS: ___React$PushNotificationIOSStatic;
+declare export var PushNotificationIOS: ___React$PushNotificationIOSStatic;
 
-declare
-export type ___React$PushNotificationIOS = ___React$PushNotificationIOSStatic;
+declare export type ___React$PushNotificationIOS = ___React$PushNotificationIOSStatic;
 
-declare
-export var StatusBarIOS: ___React$StatusBarIOSStatic;
+declare export var StatusBarIOS: ___React$StatusBarIOSStatic;
 
-declare
-export type ___React$StatusBarIOS = ___React$StatusBarIOSStatic;
+declare export type ___React$StatusBarIOS = ___React$StatusBarIOSStatic;
 
-declare
-export var TimePickerAndroid: ___React$TimePickerAndroidStatic;
+declare export var TimePickerAndroid: ___React$TimePickerAndroidStatic;
 
-declare
-export type ___React$TimePickerAndroid = ___React$TimePickerAndroidStatic;
+declare export type ___React$TimePickerAndroid = ___React$TimePickerAndroidStatic;
 
-declare
-export var ToastAndroid: ___React$ToastAndroidStatic;
+declare export var ToastAndroid: ___React$ToastAndroidStatic;
 
-declare
-export type ___React$ToastAndroid = ___React$ToastAndroidStatic;
+declare export type ___React$ToastAndroid = ___React$ToastAndroidStatic;
 
-declare
-export var VibrationIOS: ___React$VibrationIOSStatic;
+declare export var VibrationIOS: ___React$VibrationIOSStatic;
 
-declare
-export type ___React$VibrationIOS = ___React$VibrationIOSStatic;
+declare export type ___React$VibrationIOS = ___React$VibrationIOSStatic;
 
-declare
-export var Vibration: ___React$VibrationStatic;
+declare export var Vibration: ___React$VibrationStatic;
 
-declare
-export type ___React$Vibration = ___React$VibrationStatic;
+declare export type ___React$Vibration = ___React$VibrationStatic;
 
-declare
-export var Dimensions: ___React$Dimensions;
+declare export var Dimensions: ___React$Dimensions;
 
-declare
-export var ShadowPropTypesIOS: ___React$ShadowPropTypesIOSStatic;
+declare export var ShadowPropTypesIOS: ___React$ShadowPropTypesIOSStatic;
 
-declare
-export type ___React$NavigationExperimental = ___React$NavigationExperimentalStatic;
+declare export type ___React$NavigationExperimental = ___React$NavigationExperimentalStatic;
 
-declare
-export var NavigationExperimental: ___React$NavigationExperimentalStatic;
+declare export var NavigationExperimental: ___React$NavigationExperimentalStatic;
 
-declare
-export type ___React$NavigationContainer = ___React$NavigationContainerStatic;
+declare export type ___React$NavigationContainer = ___React$NavigationContainerStatic;
 
-declare
-export var NavigationContainer: ___React$NavigationContainerStatic;
+declare export var NavigationContainer: ___React$NavigationContainerStatic;
 
-declare
-export type ___React$NavigationRootContainer = ___React$NavigationRootContainerStatic;
+declare export type ___React$NavigationRootContainer = ___React$NavigationRootContainerStatic;
 
-declare
-export var NavigationRootContainer: ___React$NavigationRootContainerStatic;
+declare export var NavigationRootContainer: ___React$NavigationRootContainerStatic;
 
-declare
-export type ___React$NavigationReducer = ___React$NavigationReducerStatic;
+declare export type ___React$NavigationReducer = ___React$NavigationReducerStatic;
 
-declare
-export var NavigationReducer: ___React$NavigationReducerStatic;
+declare export var NavigationReducer: ___React$NavigationReducerStatic;
 
-declare
-export type ___React$Easing = ___React$EasingStatic;
+declare export type ___React$Easing = ___React$EasingStatic;
 
-declare
-export var Easing: ___React$EasingStatic;
+declare export var Easing: ___React$EasingStatic;
 
-declare
-export var NativeModules: any;
+declare export var NativeModules: any;
 
-declare
-export var NativeAppEventEmitter: ___React$NativeAppEventEmitterStatic;
+declare export var NativeAppEventEmitter: ___React$NativeAppEventEmitterStatic;
 
-declare
-export interface ___React$ComponentInterface<P>{
+declare export interface ___React$ComponentInterface<P>{
     name?: string,
     displayName?: string,
     propTypes: P
 }
 
-declare
-export function ___React$requireNativeComponent<P>(
+declare export function ___React$requireNativeComponent<P>(
         viewName: string,
         componentInterface?: ___React$ComponentInterface<P>,
         extraConfig?: {
             nativeOnly: Object
         }): React.ComponentClass<P >
 
-    declare
-export var SegmentedControlIOS: ___React$SegmentedControlIOSStatic;
+    declare export var SegmentedControlIOS: ___React$SegmentedControlIOSStatic;
 
-declare
-export type ___React$SegmentedControlIOS = ___React$SegmentedControlIOSStatic;
+declare export type ___React$SegmentedControlIOS = ___React$SegmentedControlIOSStatic;
 
-declare
-export var PixelRatio: ___React$PixelRatioStatic;
+declare export var PixelRatio: ___React$PixelRatioStatic;
 
-declare
-export var Platform: ___React$PlatformStatic;
+declare export var Platform: ___React$PlatformStatic;
 
-declare
-export var DeviceEventEmitter: ___React$DeviceEventEmitterStatic;
+declare export var DeviceEventEmitter: ___React$DeviceEventEmitterStatic;
 
-declare
-export var DeviceEventSubscription: ___React$DeviceEventSubscriptionStatic;
+declare export var DeviceEventSubscription: ___React$DeviceEventSubscriptionStatic;
 
-declare
-export type ___React$DeviceEventSubscription = ___React$DeviceEventSubscriptionStatic;
+declare export type ___React$DeviceEventSubscription = ___React$DeviceEventSubscriptionStatic;
 
-declare
-export var InteractionManager: ___React$InteractionManagerStatic;
+declare export var InteractionManager: ___React$InteractionManagerStatic;
 
-declare
-export var Geolocation: ___React$GeolocationStatic;
+declare export var Geolocation: ___React$GeolocationStatic;
 
-declare
-export type ___React$Geolocation = ___React$GeolocationStatic;
+declare export type ___React$Geolocation = ___React$GeolocationStatic;
 
-declare
-export function ___React$___spread(target: any, ...sources: any[]): any
+declare export function ___React$___spread(target: any, ...sources: any[]): any
 
-declare
-export interface ___React$GlobalStatic {
+declare export interface ___React$GlobalStatic {
 
     /**
      * Accepts a function as its only argument and calls that function before the next repaint.
@@ -6556,23 +6151,17 @@ export interface ___React$GlobalStatic {
     requestAnimationFrame(fn: () => void): void
 }
 
-declare
-export interface addons$TestModuleStatic {
+declare export interface addons$TestModuleStatic {
     verifySnapshot: (done: (indicator?: any) => void) => void,
         markTestPassed: (indicator: any) => void,
         markTestCompleted: () => void
 }
 
-declare
-export var TestModule: addons$TestModuleStatic;
+declare export var TestModule: addons$TestModuleStatic;
 
-declare
-export type addons$TestModule = addons$TestModuleStatic;
+declare export type addons$TestModule = addons$TestModuleStatic;
 declare module 'react-native' {
     declare module.exports: typeof ReactNative
 }
-declare
-var global: ___React$GlobalStatic;
-declare
-function require(name: string): anydeclare
-var ___DEV__: boolean;
+declare var global: ___React$GlobalStatic;
+declare function require(name: string): anydeclare var ___DEV__: boolean;

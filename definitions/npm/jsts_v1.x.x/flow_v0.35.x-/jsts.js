@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export var version: string;
+declare export var version: string;
 
 
 /**
@@ -20,8 +19,7 @@ additional information such as an envelope, a precision model, and spatial
 reference system information), a <code>Coordinate</code> only contains
 coordinate values and accessor methods.
 */
-declare
-export class Coordinate {
+declare export class Coordinate {
 
     /**
      * 
@@ -119,8 +117,7 @@ values of <code>Double.POSITIVE_INFINITY</code> and
 When Envelope objects are created or initialized, the supplies extent values
 are automatically sorted into the correct order.
 */
-declare
-export class Envelope {
+declare export class Envelope {
 
     /**
      * Test the point q to see whether it intersects the Envelope defined by p1-p2
@@ -429,8 +426,7 @@ export class Envelope {
 /**
  * The base class for all geometric objects.
  */
-declare
-export class Geometry {
+declare export class Geometry {
 
     /**
      * Creates a new <tt>Geometry</tt> via the specified GeometryFactory.
@@ -1286,11 +1282,9 @@ A ring must have either 0 or 4 or more points. The first and last points
 must be equal (in 2D). If these conditions are not met, the constructors
 throw an {@link IllegalArgumentException}
 */
-declare
-export class LinearRing mixins LineString {}
+declare export class LinearRing mixins LineString {}
 
-declare
-export class LineString mixins Geometry {
+declare export class LineString mixins Geometry {
 
     /**
      * 
@@ -1339,8 +1333,7 @@ export class LineString mixins Geometry {
     isRing(): boolean
 }
 
-declare
-export class Point mixins Geometry {
+declare export class Point mixins Geometry {
 
     /**
      * 
@@ -1379,8 +1372,7 @@ The shell and holes must conform to the assertions specified in the <A
 HREF="http://www.opengis.org/techno/specs.htm">OpenGIS Simple Features
 Specification for SQL</A>.
 */
-declare
-export class Polygon mixins Geometry {
+declare export class Polygon mixins Geometry {
 
     /**
      * 
@@ -1408,8 +1400,7 @@ export class Polygon mixins Geometry {
     getNumInteriorRing(): number
 }
 
-declare
-export class GeoJSONWriter {
+declare export class GeoJSONWriter {
 
     /**
      * Writes the GeoJSON representation of a {@link Geometry}. The
@@ -1448,8 +1439,7 @@ implementation. In particular, the <code>GeometryFactory</code> determines
 the <code>PrecisionModel</code> and <code>SRID</code> that is used.
 <P>
 */
-declare
-export class WKTReader {
+declare export class WKTReader {
 
     /**
      * 

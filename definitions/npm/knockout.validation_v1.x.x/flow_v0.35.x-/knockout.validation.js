@@ -229,5 +229,4 @@ declare interface KnockoutSubscribableFunctions<T>{
 declare module 'knockout.validation' {
     declare module.exports: typeof validation
 }
-declare
-var validation: KnockoutValidationStatic;
+declare var validation: KnockoutValidationStatic;

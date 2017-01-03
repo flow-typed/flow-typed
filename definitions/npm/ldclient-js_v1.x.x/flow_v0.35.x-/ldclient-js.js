@@ -10,8 +10,7 @@
 /**
  * The names of events to which users of the client can subscribe.
  */
-declare
-export type LaunchDarkly$LDEventName = "ready" | "change";
+declare export type LaunchDarkly$LDEventName = "ready" | "change";
 
 
 /**
@@ -19,15 +18,13 @@ export type LaunchDarkly$LDEventName = "ready" | "change";
  * 
 Flags can have any JSON-serializable value.
 */
-declare
-export type LaunchDarkly$LDFlagValue = any;
+declare export type LaunchDarkly$LDFlagValue = any;
 
 
 /**
  * A map of feature flags from their keys to their values.
  */
-declare
-export type LaunchDarkly$LDFlagSet = {
+declare export type LaunchDarkly$LDFlagSet = {
     [key: string]: LaunchDarkly$LDFlagValue
 };
 
@@ -35,8 +32,7 @@ export type LaunchDarkly$LDFlagSet = {
 /**
  * A map of feature flag keys to objects holding changes in their values.
  */
-declare
-export type LaunchDarkly$LDFlagChangeset = {
+declare export type LaunchDarkly$LDFlagChangeset = {
     [key: string]: {
         current: LaunchDarkly$LDFlagValue,
         previous: LaunchDarkly$LDFlagValue
@@ -60,8 +56,7 @@ declare type LaunchDarkly$LDEventSignature = (
 /**
  * LaunchDarkly initialization options.
  */
-declare
-export interface LaunchDarkly$LDOptions {
+declare export interface LaunchDarkly$LDOptions {
 
     /**
      * The signed user key for Secure Mode.
@@ -83,8 +78,7 @@ export interface LaunchDarkly$LDOptions {
 /**
  * A LaunchDarkly user object.
  */
-declare
-export interface LaunchDarkly$LDUser {
+declare export interface LaunchDarkly$LDUser {
 
     /**
      * A unique string identifying a user.
@@ -153,8 +147,7 @@ export interface LaunchDarkly$LDUser {
  * The LaunchDarkly client's instance interface.
  * @see  http://docs.launchdarkly.com/docs/js-sdk-reference
  */
-declare
-export interface LaunchDarkly$LDClient {
+declare export interface LaunchDarkly$LDClient {
 
     /**
      * Identifies a user to LaunchDarkly.
@@ -219,8 +212,7 @@ export interface LaunchDarkly$LDClient {
          */
         allFlags: () => LaunchDarkly$LDFlagSet
 }
-declare
-var LDClient: {
+declare var LDClient: {
     initialize: (
         key: string,
         user: LaunchDarkly$LDUser,

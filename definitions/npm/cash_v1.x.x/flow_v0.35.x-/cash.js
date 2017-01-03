@@ -503,5 +503,4 @@ declare interface Cash {
 declare module 'cash' {
     declare module.exports: typeof CashStatic
 }
-declare
-var cash: CashStatic;
+declare var cash: CashStatic;

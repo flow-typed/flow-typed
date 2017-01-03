@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var deferredBootstrapper: angular.IDeferredBootstrapperStatic;
+declare var deferredBootstrapper: angular.IDeferredBootstrapperStatic;
 declare module 'angular' {
     declare interface IDeferredBootstrapperStatic {
         bootstrap(configParam: IConfigParam): ng.IPromise<boolean >

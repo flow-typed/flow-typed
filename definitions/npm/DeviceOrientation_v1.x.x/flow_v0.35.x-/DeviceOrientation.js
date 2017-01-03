@@ -6,29 +6,25 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IDeviceOrientationHeading {
+declare export interface ngCordova$IDeviceOrientationHeading {
     magneticHeading: number,
         trueHeading?: number,
         headingAccuracy?: number,
         timestamp?: number
 }
 
-declare
-export interface ngCordova$IDeviceOrientationWatchOptions {
+declare export interface ngCordova$IDeviceOrientationWatchOptions {
     frequency?: number,
         filter?: number
 }
 
-declare
-export type ngCordova$IDeviceOrientationWatchPromise = {
+declare export type ngCordova$IDeviceOrientationWatchPromise = {
     watchID: number,
     cancel: () => void,
     clearWatch: (watchId?: number) => void
 }
 
-declare
-export interface ngCordova$IDeviceOrientationService {
+declare export interface ngCordova$IDeviceOrientationService {
     getCurrentHeading(): ng.IPromise<ngCordova$IDeviceOrientationHeading>,
         watchHeading(
             options: ngCordova$IDeviceOrientationWatchOptions): ngCordova$IDeviceOrientationWatchPromise,

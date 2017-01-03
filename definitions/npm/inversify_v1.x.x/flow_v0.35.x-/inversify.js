@@ -13,10 +13,8 @@ declare interface Symbol {
 declare interface SymbolConstructor {
     (description?: string | number): Symbol
 }
-declare
-var Symbol: SymbolConstructor;
-declare
-var npm$namespace$inversify: {
+declare var Symbol: SymbolConstructor;
+declare var npm$namespace$inversify: {
     injectable: typeof inversify$injectable,
     tagged: typeof inversify$tagged,
     named: typeof inversify$named,
@@ -26,26 +24,21 @@ var npm$namespace$inversify: {
     guid: typeof inversify$guid,
     multiInject: typeof inversify$multiInject,
 }
-declare
-export interface interfaces$KernelConstructor {
+declare export interface interfaces$KernelConstructor {
     new(): interfaces$Kernel
 }
 
-declare
-export interface interfaces$KernelModuleConstructor {
+declare export interface interfaces$KernelModuleConstructor {
     new(registry: (bind: interfaces$Bind) => void): interfaces$KernelModule
 }
 
-declare
-export interface interfaces$Newable<T>{
+declare export interface interfaces$Newable<T>{
     new(...args: any[]): T
 }
 
-declare
-export type interfaces$ServiceIdentifier<T>= (string | Symbol | interfaces$Newable<T>);
+declare export type interfaces$ServiceIdentifier<T>= (string | Symbol | interfaces$Newable<T>);
 
-declare
-export type interfaces$Binding<T>= {
+declare export type interfaces$Binding<T>= {
     guid: string,
     moduleId: string,
     activated: boolean,
@@ -62,76 +55,64 @@ export type interfaces$Binding<T>= {
 } & interfaces$Clonable
 
 
-declare
-export type interfaces$Factory<T>= {
+declare export type interfaces$Factory<T>= {
     (...args: any[]): (((...args: any[]) => T) | T)
 } & Function
 
 
-declare
-export type interfaces$FactoryCreator<T>= {
+declare export type interfaces$FactoryCreator<T>= {
     (context: interfaces$Context): interfaces$Factory<T >
 } & Function
 
 
-declare
-export type interfaces$Provider<T>= {
+declare export type interfaces$Provider<T>= {
     (): Promise<T >
 } & Function
 
 
-declare
-export type interfaces$ProviderCreator<T>= {
+declare export type interfaces$ProviderCreator<T>= {
     (context: interfaces$Context): interfaces$Provider<T >
 } & Function
 
 
-declare
-export interface interfaces$PlanAndResolve<T>{
+declare export interface interfaces$PlanAndResolve<T>{
     (args: interfaces$PlanAndResolveArgs): T[]
 }
 
-declare
-export interface interfaces$PlanAndResolveArgs {
+declare export interface interfaces$PlanAndResolveArgs {
     multiInject: boolean,
         serviceIdentifier: interfaces$ServiceIdentifier<any>,
         target: interfaces$Target,
         contextInterceptor: (contexts: interfaces$Context) => interfaces$Context
 }
 
-declare
-export type interfaces$Middleware = {
+declare export type interfaces$Middleware = {
     (next: interfaces$PlanAndResolve<any>): interfaces$PlanAndResolve<any >
 } & Function
 
 
-declare
-export interface interfaces$Context {
+declare export interface interfaces$Context {
     guid: string,
         kernel: interfaces$Kernel,
         plan: interfaces$Plan,
         addPlan(plan: interfaces$Plan): void
 }
 
-declare
-export interface interfaces$ReflectResult {
+declare export interface interfaces$ReflectResult {
     [key: string]: interfaces$Metadata[]
 }
 
-declare
-export interface interfaces$Metadata {
+declare export interface interfaces$Metadata {
     key: string,
         value: any
 }
 
-declare
-export interface interfaces$Plan {
+declare export interface interfaces$Plan {
     parentContext: interfaces$Context,
         rootRequest: interfaces$Request
 }
 
-declare
-export interface interfaces$Planner {
+declare export interface interfaces$Planner {
     createContext(kernel: interfaces$Kernel): interfaces$Context,
         createPlan(
             parentContext: interfaces$Context,
@@ -145,8 +126,7 @@ export interface interfaces$Planner {
             target: interfaces$Target): interfaces$Binding<any>[]
 }
 
-declare
-export interface interfaces$QueryableString {
+declare export interface interfaces$QueryableString {
     startsWith(searchString: string): boolean,
         endsWith(searchString: string): boolean,
         contains(searchString: string): boolean,
@@ -154,8 +134,7 @@ export interface interfaces$QueryableString {
         value(): string
 }
 
-declare
-export interface interfaces$Request {
+declare export interface interfaces$Request {
     guid: string,
         serviceIdentifier: interfaces$ServiceIdentifier<any>,
         parentContext: interfaces$Context,
@@ -169,8 +148,7 @@ export interface interfaces$Request {
             target: interfaces$Target): interfaces$Request
 }
 
-declare
-export interface interfaces$Target {
+declare export interface interfaces$Target {
     guid: string,
         serviceIdentifier: interfaces$ServiceIdentifier<any>,
         type: number,
@@ -185,13 +163,11 @@ export interface interfaces$Target {
         matchesTag(key: string): (value: any) => boolean
 }
 
-declare
-export interface interfaces$Resolver {
+declare export interface interfaces$Resolver {
     resolve<T>(context: interfaces$Context): T
 }
 
-declare
-export interface interfaces$Kernel {
+declare export interface interfaces$Kernel {
     guid: string,
         parent: interfaces$Kernel,
         bind<T>(
@@ -219,31 +195,26 @@ export interface interfaces$Kernel {
         restore(): void
 }
 
-declare
-export type interfaces$Bind = {
+declare export type interfaces$Bind = {
     (serviceIdentifier: interfaces$ServiceIdentifier<T>): interfaces$BindingToSyntax<T >
 } & Function
 
 
-declare
-export interface interfaces$KernelModule {
+declare export interface interfaces$KernelModule {
     guid: string,
         registry: (bind: interfaces$Bind) => void
 }
 
-declare
-export interface interfaces$KernelSnapshot {
+declare export interface interfaces$KernelSnapshot {
     bindings: interfaces$Lookup<interfaces$Binding<any >> ,
         middleware: interfaces$PlanAndResolve<any >
 }
 
-declare
-export interface interfaces$Clonable<T>{
+declare export interface interfaces$Clonable<T>{
     clone(): T
 }
 
-declare
-export type interfaces$Lookup<T>= {
+declare export type interfaces$Lookup<T>= {
     add(serviceIdentifier: interfaces$ServiceIdentifier<any>, value: T): void,
     get(serviceIdentifier: interfaces$ServiceIdentifier<any>): Array<T>,
     remove(serviceIdentifier: interfaces$ServiceIdentifier<any>): void,
@@ -252,31 +223,26 @@ export type interfaces$Lookup<T>= {
 } & interfaces$Clonable
 
 
-declare
-export interface interfaces$KeyValuePair<T>{
+declare export interface interfaces$KeyValuePair<T>{
     serviceIdentifier: interfaces$ServiceIdentifier<any>,
     value: Array<T>,
     guid: string
 }
 
-declare
-export interface interfaces$BindingInSyntax<T>{
+declare export interface interfaces$BindingInSyntax<T>{
     inSingletonScope(): interfaces$BindingWhenOnSyntax<T>,
     inTransientScope(): interfaces$BindingWhenOnSyntax<T >
 }
 
-declare
-export type interfaces$BindingInWhenOnSyntax<T>= {} & interfaces$BindingInSyntax & interfaces$BindingWhenOnSyntax
+declare export type interfaces$BindingInWhenOnSyntax<T>= {} & interfaces$BindingInSyntax & interfaces$BindingWhenOnSyntax
 
 
-declare
-export interface interfaces$BindingOnSyntax<T>{
+declare export interface interfaces$BindingOnSyntax<T>{
     onActivation(
         fn: (context: interfaces$Context, injectable: T) => T): interfaces$BindingWhenSyntax<T >
 }
 
-declare
-export interface interfaces$BindingToSyntax<T>{
+declare export interface interfaces$BindingToSyntax<T>{
     to(constructor: {
         new(...args: any[]): T
     }): interfaces$BindingInWhenOnSyntax<T>,
@@ -292,12 +258,10 @@ export interface interfaces$BindingToSyntax<T>{
         provider: interfaces$ProviderCreator<T2>): interfaces$BindingWhenOnSyntax<T >
 }
 
-declare
-export type interfaces$BindingWhenOnSyntax<T>= {} & interfaces$BindingWhenSyntax & interfaces$BindingOnSyntax
+declare export type interfaces$BindingWhenOnSyntax<T>= {} & interfaces$BindingWhenSyntax & interfaces$BindingOnSyntax
 
 
-declare
-export interface interfaces$BindingWhenSyntax<T>{
+declare export interface interfaces$BindingWhenSyntax<T>{
     when(
         constraint: (request: interfaces$Request) => boolean): interfaces$BindingOnSyntax<T>,
     whenTargetNamed(name: string): interfaces$BindingOnSyntax<T>,
@@ -317,59 +281,44 @@ export interface interfaces$BindingWhenSyntax<T>{
         constraint: (request: interfaces$Request) => boolean): interfaces$BindingOnSyntax<T >
 }
 
-declare
-export var Kernel: interfaces$KernelConstructor;
+declare export var Kernel: interfaces$KernelConstructor;
 
-declare
-export var KernelModule: interfaces$KernelModuleConstructor;
+declare export var KernelModule: interfaces$KernelModuleConstructor;
 
-declare
-export var decorate: (
+declare export var decorate: (
     decorator: (ClassDecorator | ParameterDecorator),
     target: any,
     parameterIndex?: number) => void;
 
-declare
-export function inversify$injectable(): (typeConstructor: any) => void
+declare export function inversify$injectable(): (typeConstructor: any) => void
 
-declare
-export function inversify$tagged(
+declare export function inversify$tagged(
     metadataKey: string,
     metadataValue: any): (target: any, targetKey: string, index?: number) => any
 
-declare
-export function inversify$named(name: string): (target: any, targetKey: string, index?: number) => any
+declare export function inversify$named(name: string): (target: any, targetKey: string, index?: number) => any
 
-declare
-export function inversify$targetName(name: string): (target: any, targetKey: string, index: number) => any
+declare export function inversify$targetName(name: string): (target: any, targetKey: string, index: number) => any
 
-declare
-export function inversify$unmanaged(): (target: any, targetKey: string, index: number) => any
+declare export function inversify$unmanaged(): (target: any, targetKey: string, index: number) => any
 
-declare
-export function inversify$inject(
+declare export function inversify$inject(
     serviceIdentifier: interfaces$ServiceIdentifier<any>): (target: any, targetKey: string, index?: number) => any
 
-declare
-export function inversify$guid(): string
+declare export function inversify$guid(): string
 
-declare
-export function inversify$multiInject(
+declare export function inversify$multiInject(
     serviceIdentifier: interfaces$ServiceIdentifier<any>): (target: any, targetKey: string, index?: number) => any
 
-declare
-export var traverseAncerstors: (
+declare export var traverseAncerstors: (
     request: interfaces$Request,
     constraint: (request: interfaces$Request) => boolean) => boolean;
 
-declare
-export var taggedConstraint: (tag: string) => (value: any) => (request: interfaces$Request) => boolean;
+declare export var taggedConstraint: (tag: string) => (value: any) => (request: interfaces$Request) => boolean;
 
-declare
-export var namedConstraint: (value: any) => (request: interfaces$Request) => boolean;
+declare export var namedConstraint: (value: any) => (request: interfaces$Request) => boolean;
 
-declare
-export var typeConstraint: (type: (Function | string)) => (request: interfaces$Request) => boolean;
+declare export var typeConstraint: (type: (Function | string)) => (request: interfaces$Request) => boolean;
 declare module 'inversify' {
     declare module.exports: typeof inversify
 }

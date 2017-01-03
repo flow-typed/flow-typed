@@ -40,8 +40,7 @@ declare interface Dagre$Edge {
 declare interface Dagre$GraphLib {
     Graph: Dagre$Graph
 }
-declare
-var dagre: Dagre$DagreFactory;
+declare var dagre: Dagre$DagreFactory;
 declare module 'dagre' {
     declare module.exports: typeof dagre
 }

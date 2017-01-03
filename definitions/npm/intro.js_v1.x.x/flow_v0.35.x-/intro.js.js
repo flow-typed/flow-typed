@@ -63,8 +63,7 @@ declare interface IntroJs$Factory {
     (element: HTMLElement): IntroJs$IntroJs,
     (querySelector: string): IntroJs$IntroJs
 }
-declare
-var introJs: IntroJs$Factory;
+declare var introJs: IntroJs$Factory;
 declare module 'intro.js' {
     declare module.exports: typeof IntroJs
 }

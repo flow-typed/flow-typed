@@ -7,19 +7,15 @@
  */
 
 
-declare
-var npm$namespace$YAML: {
+declare var npm$namespace$YAML: {
     load: typeof YAML$load,
     stringify: typeof YAML$stringify,
     parse: typeof YAML$parse,
 }
-declare
-function YAML$load(path: string): any
+declare function YAML$load(path: string): any
 
-declare
-function YAML$stringify(nativeObject: any, inline?: number, spaces?: number): string
+declare function YAML$stringify(nativeObject: any, inline?: number, spaces?: number): string
 
-declare
-function YAML$parse(yamlString: string): anydeclare module 'yamljs' {
+declare function YAML$parse(yamlString: string): anydeclare module 'yamljs' {
     declare module.exports: typeof YAML
 }

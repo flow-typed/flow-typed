@@ -137,8 +137,7 @@ declare type Pickadate$MinOrMaxDateOption = Date | [number, number, number] | nu
 
 declare type Pickadate$MinOrMaxTimeOption = Date | [number, number] | number | boolean;
 
-declare
-export type Pickadate$DateOptions = {
+declare export type Pickadate$DateOptions = {
     monthsFull?: string[],
     monthsShort?: string[],
     weekdaysFull?: string[],
@@ -199,8 +198,7 @@ export type Pickadate$DateOptions = {
 } & Pickadate$Options
 
 
-declare
-export type Pickadate$TimeOptions = {
+declare export type Pickadate$TimeOptions = {
 
     /**
      * The formatLabel option is unique. It can contain HTML and it can
@@ -249,8 +247,7 @@ declare interface Pickadate$Item {
     pick: number
 }
 
-declare
-export type Pickadate$DateItem = {
+declare export type Pickadate$DateItem = {
 
     /**
      * The full year.
@@ -279,8 +276,7 @@ export type Pickadate$DateItem = {
 } & Pickadate$Item
 
 
-declare
-export type Pickadate$TimeItem = {
+declare export type Pickadate$TimeItem = {
 
     /**
      * Hour of the day from 0 to 23.
@@ -294,8 +290,7 @@ export type Pickadate$TimeItem = {
 } & Pickadate$Item
 
 
-declare
-export interface Pickadate$CallbackObject {
+declare export interface Pickadate$CallbackObject {
     open?: () => void,
         close?: () => void,
         render?: () => void,
@@ -304,8 +299,7 @@ export interface Pickadate$CallbackObject {
         set?: (thingSet: any) => void
 }
 
-declare
-export interface Pickadate$SetObject {
+declare export interface Pickadate$SetObject {
     clear?: any,
         select?: any,
         highlight?: any,
@@ -316,8 +310,7 @@ export interface Pickadate$SetObject {
         enable?: any
 }
 
-declare
-export type Pickadate$TimeSetObject = {
+declare export type Pickadate$TimeSetObject = {
 
     /**
      * Choose the minutes interval between each time in the list.
@@ -327,8 +320,7 @@ export type Pickadate$TimeSetObject = {
 } & Pickadate$SetObject
 
 
-declare
-export interface Pickadate$SetOptions {
+declare export interface Pickadate$SetOptions {
 
     /**
      * By default, any callbacks bound with the on method will be fired
@@ -479,12 +471,10 @@ declare interface Pickadate$Picker<TPickerObject, TItemObject, TOptions>{
     trigger(event: string, data?: any): TPickerObject
 }
 
-declare
-export type Pickadate$DatePicker = {} & Pickadate$Picker
+declare export type Pickadate$DatePicker = {} & Pickadate$Picker
 
 
-declare
-export type Pickadate$TimePicker = {} & Pickadate$Picker
+declare export type Pickadate$TimePicker = {} & Pickadate$Picker
 declare interface JQuery {
 
     /**

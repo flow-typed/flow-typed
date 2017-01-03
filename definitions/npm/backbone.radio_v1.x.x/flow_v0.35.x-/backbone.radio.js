@@ -14,8 +14,7 @@ declare interface Backbone$Radio {
 }
 
 
-declare
-var npm$namespace$Radio: {
+declare var npm$namespace$Radio: {
     log: typeof Radio$log,
     tuneIn: typeof Radio$tuneIn,
     tuneOut: typeof Radio$tuneOut,
@@ -38,110 +37,87 @@ var npm$namespace$Radio: {
     listenToOnce: typeof Radio$listenToOnce,
     stopListening: typeof Radio$stopListening,
 }
-declare
-var VERSION: string;
+declare var VERSION: string;
 
-declare
-var DEBUG: boolean;
+declare var DEBUG: boolean;
 
-declare
-function Radio$log(channelName: string, eventName: string, ...args: any[]): void
+declare function Radio$log(channelName: string, eventName: string, ...args: any[]): void
 
-declare
-function Radio$tuneIn(channelName: string): Backbone$Radio
+declare function Radio$tuneIn(channelName: string): Backbone$Radio
 
-declare
-function Radio$tuneOut(channelName: string): Backbone$Radio
+declare function Radio$tuneOut(channelName: string): Backbone$Radio
 
-declare
-function Radio$channel(channelName: string): Radio$Channel
+declare function Radio$channel(channelName: string): Radio$Channel
 
-declare
-function Radio$command(channelName: string, commandName: string, ...args: any[]): void
+declare function Radio$command(channelName: string, commandName: string, ...args: any[]): void
 
-declare
-function Radio$comply(
+declare function Radio$comply(
     channelName: string,
     commandName: string,
     callback: (...args: any[]) => void,
     context?: any): Radio$Commands
 
-declare
-function Radio$complyOnce(
+declare function Radio$complyOnce(
     channelName: string,
     commandName: string,
     callback: (...args: any[]) => void,
     context?: any): Radio$Commands
 
-declare
-function Radio$stopComplying(
+declare function Radio$stopComplying(
     channelName: string,
     commandName?: string,
     callback?: (...args: any[]) => void,
     context?: any): Radio$Commands
 
-declare
-function Radio$request(channelName: string, requestName: string, ...args: any[]): any
+declare function Radio$request(channelName: string, requestName: string, ...args: any[]): any
 
-declare
-function Radio$reply(
+declare function Radio$reply(
     channelName: string,
     requestName: string,
     callback: (...args: any[]) => any,
     context?: any): Radio$Requests
 
-declare
-function Radio$replyOnce(
+declare function Radio$replyOnce(
     channelName: string,
     requestName: string,
     callback: (...args: any[]) => any,
     context?: any): Radio$Requests
 
-declare
-function Radio$stopReplying(
+declare function Radio$stopReplying(
     channelName: string,
     commandName?: string,
     callback?: (...args: any[]) => any,
     context?: any): Radio$Requests
 
-declare
-function Radio$on(
+declare function Radio$on(
     channelName: string,
     eventName: string,
     callback?: Function,
     context?: any): any
 
-declare
-function Radio$off(
+declare function Radio$off(
     channelName: string,
     eventName?: string,
     callback?: Function,
     context?: any): any
 
-declare
-function Radio$trigger(channelName: string, eventName: string, ...args: any[]): any
+declare function Radio$trigger(channelName: string, eventName: string, ...args: any[]): any
 
-declare
-function Radio$bind(channelName: string, eventName: string, callback: Function, context?: any): any
+declare function Radio$bind(channelName: string, eventName: string, callback: Function, context?: any): any
 
-declare
-function Radio$unbind(
+declare function Radio$unbind(
     channelName: string,
     eventName?: string,
     callback?: Function,
     context?: any): any
 
-declare
-function Radio$once(channelName: string, events: string, callback: Function, context?: any): any
+declare function Radio$once(channelName: string, events: string, callback: Function, context?: any): any
 
-declare
-function Radio$listenTo(channelName: string, object: any, events: string, callback: Function): any
+declare function Radio$listenTo(channelName: string, object: any, events: string, callback: Function): any
 
-declare
-function Radio$listenToOnce(channelName: string, object: any, events: string, callback: Function): any
+declare function Radio$listenToOnce(channelName: string, object: any, events: string, callback: Function): any
 
-declare
-function Radio$stopListening(channelName: string, object?: any, events?: string, callback?: Function): any
+declare function Radio$stopListening(channelName: string, object?: any, events?: string, callback?: Function): any
 
 declare class Commands {
     command(commandName: string, ...args: any[]): void;

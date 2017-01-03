@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Notify: {
+declare var Notify: {
     new(title: string, options?: notifyjs$INotifyOption): notifyjs$INotify,
 
     /**

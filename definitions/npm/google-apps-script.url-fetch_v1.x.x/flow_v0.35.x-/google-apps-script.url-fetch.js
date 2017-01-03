@@ -70,5 +70,4 @@ declare module 'URL_Fetch' {
             removeOAuthService(serviceName: string): void
     }
 }
-declare
-var UrlFetchApp: undefined.UrlFetchApp;
+declare var UrlFetchApp: undefined.UrlFetchApp;

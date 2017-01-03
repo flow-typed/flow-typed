@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Giraffe: {
+declare var npm$namespace$Giraffe: {
     bindAppEvents: typeof Giraffe$bindAppEvents,
     bindDataEvents: typeof Giraffe$bindDataEvents,
     bindEvent: typeof Giraffe$bindEvent,
@@ -58,58 +57,43 @@ declare interface Giraffe$StringMap {
     [def: string]: string
 }
 
-declare
-var app: Giraffe$App;
+declare var app: Giraffe$App;
 
-declare
-var apps: Giraffe$AppMap;
+declare var apps: Giraffe$AppMap;
 
-declare
-var defaultOptions: Giraffe$DefaultOptions;
+declare var defaultOptions: Giraffe$DefaultOptions;
 
-declare
-var version: string;
+declare var version: string;
 
-declare
-var views: Giraffe$ViewMap<Giraffe$Model>;
+declare var views: Giraffe$ViewMap<Giraffe$Model>;
 
-declare
-function Giraffe$bindAppEvents(instance: Giraffe$GiraffeObject): Giraffe$GiraffeObject
+declare function Giraffe$bindAppEvents(instance: Giraffe$GiraffeObject): Giraffe$GiraffeObject
 
-declare
-function Giraffe$bindDataEvents(instance: Giraffe$GiraffeObject): Giraffe$GiraffeObject
+declare function Giraffe$bindDataEvents(instance: Giraffe$GiraffeObject): Giraffe$GiraffeObject
 
-declare
-function Giraffe$bindEvent(
+declare function Giraffe$bindEvent(
     context: Backbone.Events,
     target: Backbone.Events,
     event: any,
     callback: Function): void
 
-declare
-function Giraffe$unbindEvent(
+declare function Giraffe$unbindEvent(
     context: Backbone.Events,
     target: Backbone.Events,
     event: any,
     callback: Function): void
 
-declare
-function Giraffe$bindEventMap(context: Backbone.Events, target: Backbone.Events, eventMap: any): void
+declare function Giraffe$bindEventMap(context: Backbone.Events, target: Backbone.Events, eventMap: any): void
 
-declare
-function Giraffe$unbindEventMap(context: Backbone.Events, target: Backbone.Events, eventMap: any): void
+declare function Giraffe$unbindEventMap(context: Backbone.Events, target: Backbone.Events, eventMap: any): void
 
-declare
-function Giraffe$configure(instance: any, options?: any): void
+declare function Giraffe$configure(instance: any, options?: any): void
 
-declare
-function Giraffe$dispose(instance: Giraffe$GiraffeObject, ...args: any[]): Giraffe$GiraffeObject
+declare function Giraffe$dispose(instance: Giraffe$GiraffeObject, ...args: any[]): Giraffe$GiraffeObject
 
-declare
-function Giraffe$disposeThis(...args: any[]): Giraffe$GiraffeObject
+declare function Giraffe$disposeThis(...args: any[]): Giraffe$GiraffeObject
 
-declare
-function Giraffe$wrapFn(obj: any, name: string, before: Function, after: Function): void
+declare function Giraffe$wrapFn(obj: any, name: string, before: Function, after: Function): void
 
 declare class Collection<TModel>mixins Backbone.Collection<TModel>, GiraffeObject {
     app: Giraffe$App;

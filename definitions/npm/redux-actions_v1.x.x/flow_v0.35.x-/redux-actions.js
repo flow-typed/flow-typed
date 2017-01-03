@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$ReduxActions: {
+declare var npm$namespace$ReduxActions: {
     createAction: typeof ReduxActions$createAction,
     handleAction: typeof ReduxActions$handleAction,
     handleActions: typeof ReduxActions$handleActions,
@@ -43,26 +42,22 @@ declare type ReduxActions$ReducerMap<State, Payload>= {
     Payload >
 };
 
-declare
-export function ReduxActions$createAction(
+declare export function ReduxActions$createAction(
     actionType: string,
     payloadCreator?: ReduxActions$PayloadCreator<any, any>,
     metaCreator?: ReduxActions$MetaCreator<any, any>): (...args: any[]) => ReduxActions$Action<any >
 
-    declare
-export function ReduxActions$handleAction<StateAndPayload>(
+    declare export function ReduxActions$handleAction<StateAndPayload>(
         actionType: {
             toString: () => string
         },
         reducer: ReduxActions$Reducer<StateAndPayload, StateAndPayload>| ReduxActions$ReducerMap<StateAndPayload, StateAndPayload>): ReduxActions$Reducer<StateAndPayload, StateAndPayload >
 
-    declare
-export function ReduxActions$handleActions<StateAndPayload>(
+    declare export function ReduxActions$handleActions<StateAndPayload>(
         reducerMap: ReduxActions$ReducerMap<StateAndPayload, StateAndPayload>,
         initialState?: StateAndPayload): ReduxActions$Reducer<StateAndPayload, StateAndPayload >
 
-    declare
-export function ReduxActions$combineActions(...actionTypes: {
+    declare export function ReduxActions$combineActions(...actionTypes: {
     toString: () => string
 }[]): {
     toString: () => string

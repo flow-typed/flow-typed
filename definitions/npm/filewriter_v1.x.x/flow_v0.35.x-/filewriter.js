@@ -93,8 +93,7 @@ declare type FileSaver = {
      */
     onwriteend: Function
 } & EventTarget
-declare
-var FileSaver: {
+declare var FileSaver: {
 
     /**
      * When the FileSaver constructor is called, the user agent must return a new FileSaver object with readyState set to INIT.

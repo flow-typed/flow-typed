@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$PDK: {
+declare var npm$namespace$PDK: {
     me: typeof PDK$me,
     request: typeof PDK$request,
     login: typeof PDK$login,
@@ -54,8 +53,7 @@ declare interface PDK$InitOptions {
  * Get information on the currently authenticated user
  * @param cb the callback export function to handle the response
  */
-declare
-export function PDK$me(callback: Function): void
+declare export function PDK$me(callback: Function): void
 
 
 /**
@@ -65,8 +63,7 @@ The path is the only required argument.
  * @param path URL path
  * @param httpMethod HTTP verb
 */
-declare
-export function PDK$request(
+declare export function PDK$request(
     path: string,
     httpMethod?: string | HttpMethod,
     params?: PDK$OAuthRequestParams,
@@ -76,8 +73,7 @@ export function PDK$request(
 /**
  * Show user login dialog, and save access token
  */
-declare
-export function PDK$login(options: PDK$LoginOptions, callback: Function): void
+declare export function PDK$login(options: PDK$LoginOptions, callback: Function): void
 
 
 /**
@@ -85,22 +81,19 @@ export function PDK$login(options: PDK$LoginOptions, callback: Function): void
  * 
 Need to call login to re-connect, unless session is saved on server.
 */
-declare
-export function PDK$logout(callback?: (session: PDK$OauthSession) => any): void
+declare export function PDK$logout(callback?: (session: PDK$OauthSession) => any): void
 
 
 /**
  * Get the active session for the current user
  */
-declare
-export function PDK$getSession(): PDK$OauthSession
+declare export function PDK$getSession(): PDK$OauthSession
 
 
 /**
  * Save the user specified session
  */
-declare
-export function PDK$setSession(session: PDK$OauthSession, callback?: (session: PDK$OauthSession) => any): void
+declare export function PDK$setSession(session: PDK$OauthSession, callback?: (session: PDK$OauthSession) => any): void
 
 
 /**
@@ -143,8 +136,7 @@ Typical initialization enabling all optional features:
  </script>
  ```
 */
-declare
-export function PDK$init(options: PDK$InitOptions): void
+declare export function PDK$init(options: PDK$InitOptions): void
 
 
 /**
@@ -153,7 +145,6 @@ export function PDK$init(options: PDK$InitOptions): void
  * @param note The Pin's description.
  * @param url The URL the Pin will link to when you click through.
  */
-declare
-export function PDK$pin(imageUrl: string, note: string, url: string, callback: Function): voiddeclare module 'pinterest-sdk' {
+declare export function PDK$pin(imageUrl: string, note: string, url: string, callback: Function): voiddeclare module 'pinterest-sdk' {
     declare module.exports: typeof PDK
 }

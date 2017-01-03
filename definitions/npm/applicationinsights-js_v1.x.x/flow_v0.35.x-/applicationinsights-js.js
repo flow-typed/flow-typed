@@ -1097,5 +1097,4 @@ declare module 'Microsoft' {
 declare module 'applicationinsights-js' {
     declare export var AppInsights: undefined.IAppInsights;
 }
-declare
-var appInsights: undefined.IAppInsights;
+declare var appInsights: undefined.IAppInsights;

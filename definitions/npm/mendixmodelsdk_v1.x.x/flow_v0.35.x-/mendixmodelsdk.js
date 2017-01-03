@@ -12906,20 +12906,16 @@ declare module 'mendixmodelsdk' {
                 errorCallback: common$IErrorCallback): void
         }
 }
-declare
-var mobservable: IMobservableStatic;
-declare
-var global: any;
-declare
-var require: {
+declare var mobservable: IMobservableStatic;
+declare var global: any;
+declare var require: {
     (id: string): any,
     resolve(id: string): string,
     cache: any,
     extensions: any,
     main: any
 };
-declare
-var module: {
+declare var module: {
     exports: any,
     require(id: string): any,
     id: string,

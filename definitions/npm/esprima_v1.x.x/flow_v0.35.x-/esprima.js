@@ -7,19 +7,15 @@
  */
 
 
-declare
-var npm$namespace$esprima: {
+declare var npm$namespace$esprima: {
     parse: typeof esprima$parse,
     tokenize: typeof esprima$tokenize,
 }
-declare
-var version: string;
+declare var version: string;
 
-declare
-function esprima$parse(code: string, options?: esprima$Options): ESTree.Program
+declare function esprima$parse(code: string, options?: esprima$Options): ESTree.Program
 
-declare
-function esprima$tokenize(code: string, options?: esprima$Options): Array<esprima$Token >
+declare function esprima$tokenize(code: string, options?: esprima$Options): Array<esprima$Token >
 
     declare interface esprima$Token {
         type: string,
@@ -42,8 +38,7 @@ declare interface esprima$Options {
         sourceType?: "script" | "module"
 }
 
-declare
-var Syntax: {
+declare var Syntax: {
     AssignmentExpression: string,
     AssignmentPattern: string,
     ArrayExpression: string,

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface WebTorrent$ClientOptions {
+declare export interface WebTorrent$ClientOptions {
     dht?: boolean | Object,
         maxConns?: number,
         nodeId?: string | Buffer,
@@ -17,20 +16,17 @@ export interface WebTorrent$ClientOptions {
         wrtc?: Object
 }
 
-declare
-export interface WebTorrent$TorrentOptions {
+declare export interface WebTorrent$TorrentOptions {
     announce?: Array<string>,
         path?: string,
         store?: Function
 }
 
-declare
-export interface WebTorrent$ClientConstructor {
+declare export interface WebTorrent$ClientConstructor {
     new(config?: WebTorrent$ClientOptions): WebTorrent$Client
 }
 
-declare
-export type WebTorrent$Client = {
+declare export type WebTorrent$Client = {
     on(event: string, listener: Function): this,
 
     /**
@@ -150,8 +146,7 @@ export type WebTorrent$Client = {
 } & & WebTorrent$ClientConstructor
 
 
-declare
-export type WebTorrent$Torrent = {
+declare export type WebTorrent$Torrent = {
     on(event: string, listener: Function): this,
 
     /**
@@ -280,8 +275,7 @@ export type WebTorrent$Torrent = {
     on(event: "wire", callback: (wire: any) => void): this
 }
 
-declare
-export type WebTorrent$InTorrentFile = {
+declare export type WebTorrent$InTorrentFile = {
     on(event: string, listener: Function): this,
 
     /**

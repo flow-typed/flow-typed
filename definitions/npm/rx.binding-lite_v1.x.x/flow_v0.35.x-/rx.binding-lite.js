@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Rx$BehaviorSubject<T>= {
+declare export type Rx$BehaviorSubject<T>= {
     getValue(): T
 } & Subject
 
@@ -16,11 +15,9 @@ declare interface Rx$BehaviorSubjectStatic {
     new<T>(initialValue: T): Rx$BehaviorSubject<T >
 }
 
-declare
-export var BehaviorSubject: Rx$BehaviorSubjectStatic;
+declare export var BehaviorSubject: Rx$BehaviorSubjectStatic;
 
-declare
-export type Rx$ReplaySubject<T>= {} & Subject
+declare export type Rx$ReplaySubject<T>= {} & Subject
 
 
 declare interface Rx$ReplaySubjectStatic {
@@ -30,8 +27,7 @@ declare interface Rx$ReplaySubjectStatic {
         scheduler?: IScheduler): Rx$ReplaySubject<T >
 }
 
-declare
-export var ReplaySubject: Rx$ReplaySubjectStatic;
+declare export var ReplaySubject: Rx$ReplaySubjectStatic;
 
 declare type Rx$ConnectableObservable<T>= {
     connect(): IDisposable,
@@ -43,11 +39,9 @@ declare interface Rx$ConnectableObservableStatic {
     new<T>(): Rx$ConnectableObservable<T >
 }
 
-declare
-export var ConnectableObservable: Rx$ConnectableObservableStatic;
+declare export var ConnectableObservable: Rx$ConnectableObservableStatic;
 
-declare
-export interface Rx$Observable<T>{
+declare export interface Rx$Observable<T>{
     multicast(subject: Rx$Observable<T>): Rx$ConnectableObservable<T>,
     multicast<TResult>(
         subjectSelector: () => ISubject<T>,

@@ -14,8 +14,7 @@ declare type FsFinder$Mask = string;
 
 declare type FsFinder$Directory = string;
 
-declare
-export class Finder mixins Base {
+declare export class Finder mixins Base {
     TIME_FORMAT: string; in (path: string): FsFinder$Finder;
     from(path: string): FsFinder$Finder;
     find(
@@ -38,8 +37,7 @@ export class Finder mixins Base {
     date(operation?: any, value?: any): FsFinder$Finder
 }
 
-declare
-export class Base {
+declare export class Base {
     recursively(recursive?: boolean): FsFinder$Finder;
     exclude(excludes: string | string[], exactly?: boolean): FsFinder$Finder;
     showSystemFiles(systemFiles?: boolean): FsFinder$Finder;

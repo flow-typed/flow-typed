@@ -7,35 +7,26 @@
  */
 
 
-declare
-var npm$namespace$ReactRouterRedux: {
+declare var npm$namespace$ReactRouterRedux: {
     routerReducer: typeof ReactRouterRedux$routerReducer,
     syncHistoryWithStore: typeof ReactRouterRedux$syncHistoryWithStore,
     routerMiddleware: typeof ReactRouterRedux$routerMiddleware,
 }
-declare
-var CALL_HISTORY_METHOD: string;
+declare var CALL_HISTORY_METHOD: string;
 
-declare
-var LOCATION_CHANGE: string;
+declare var LOCATION_CHANGE: string;
 
-declare
-var push: ReactRouterRedux$PushAction;
+declare var push: ReactRouterRedux$PushAction;
 
-declare
-var replace: ReactRouterRedux$ReplaceAction;
+declare var replace: ReactRouterRedux$ReplaceAction;
 
-declare
-var go: ReactRouterRedux$GoAction;
+declare var go: ReactRouterRedux$GoAction;
 
-declare
-var goBack: ReactRouterRedux$GoForwardAction;
+declare var goBack: ReactRouterRedux$GoForwardAction;
 
-declare
-var goForward: ReactRouterRedux$GoBackAction;
+declare var goForward: ReactRouterRedux$GoBackAction;
 
-declare
-var routerActions: ReactRouterRedux$RouteActions;
+declare var routerActions: ReactRouterRedux$RouteActions;
 
 declare type ReactRouterRedux$LocationDescriptor = H.LocationDescriptor;
 
@@ -78,16 +69,13 @@ declare interface ReactRouterRedux$SyncHistoryWithStoreOptions {
         adjustUrlOnReplay?: boolean
 }
 
-declare
-function ReactRouterRedux$routerReducer(state?: any, options?: any): R.Reducer<any >
+declare function ReactRouterRedux$routerReducer(state?: any, options?: any): R.Reducer<any >
 
-    declare
-function ReactRouterRedux$syncHistoryWithStore(
+    declare function ReactRouterRedux$syncHistoryWithStore(
     history: H.History,
     store: R.Store<any>,
     options?: ReactRouterRedux$SyncHistoryWithStoreOptions): ReactRouterRedux$ReactRouterReduxHistory
 
-declare
-function ReactRouterRedux$routerMiddleware(history: H.History): R.Middlewaredeclare module 'react-router-redux' {
+declare function ReactRouterRedux$routerMiddleware(history: H.History): R.Middlewaredeclare module 'react-router-redux' {
     declare module.exports: typeof ReactRouterRedux
 }

@@ -76,8 +76,7 @@ declare interface jo$InlineCountOptions {
         none(): jo
 }
 
-declare
-export class FilterClause {
+declare export class FilterClause {
     constructor(): this;
     constructor(property: string): this;
     toString(): string;
@@ -124,15 +123,13 @@ export class FilterClause {
     ceiling(): jo$FilterClause
 }
 
-declare
-export class PrecedenceGroup {
+declare export class PrecedenceGroup {
     constructor(filterClause: jo$FilterClause): this;
     andFilter(filterClause: jo$FilterClause): jo$FilterClause;
     orFilter(filterClause: jo$FilterClause): jo$FilterClause
 }
 
-declare
-export class Concat {
+declare export class Concat {
     constructor(value1: string | jo$Concat, value2: string | jo$Concat): this;
     LeftSide: string | jo$Concat;
     RightSide: string | jo$Concat;

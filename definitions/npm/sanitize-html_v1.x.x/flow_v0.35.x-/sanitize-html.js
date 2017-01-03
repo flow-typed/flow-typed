@@ -6,10 +6,8 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function sanitize(dirty: string, options?: sanitize$IOptions): string
-declare
-var npm$namespace$sanitize: {
+declare function sanitize(dirty: string, options?: sanitize$IOptions): string
+declare var npm$namespace$sanitize: {
     simpleTransform: typeof sanitize$simpleTransform,
 }
 declare type sanitize$Attributes = {
@@ -62,11 +60,9 @@ declare interface sanitize$IOptions {
         }
 }
 
-declare
-var defaults: sanitize$IDefaults;
+declare var defaults: sanitize$IDefaults;
 
-declare
-function sanitize$simpleTransform(
+declare function sanitize$simpleTransform(
     tagName: string,
     attribs: sanitize$Attributes,
     merge?: boolean): sanitize$Transformerdeclare module 'sanitize-html' {

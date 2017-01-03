@@ -1643,7 +1643,5 @@ declare type ZeptoCoordinates = {
 declare interface ZeptoEventHandlers {
     [key: string]: Function
 }
-declare
-var Zepto: (fn: ($: ZeptoStatic) => void) => void;
-declare
-var $: ZeptoStatic;
+declare var Zepto: (fn: ($: ZeptoStatic) => void) => void;
+declare var $: ZeptoStatic;

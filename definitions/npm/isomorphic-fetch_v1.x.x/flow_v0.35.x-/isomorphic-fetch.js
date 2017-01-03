@@ -183,8 +183,7 @@ declare class Response mixins Body, IResponse {
 declare interface Window {
     fetch(url: RequestInfo, init?: RequestInit): Promise<IResponse >
 }
-declare
-var fetch: typeof undefined;
+declare var fetch: typeof undefined;
 declare module 'isomorphic-fetch' {
     declare module.exports: typeof fetch
 }

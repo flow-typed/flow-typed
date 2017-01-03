@@ -1837,7 +1837,5 @@ declare interface SchedulerStatic {
          */
         updateView(date: Date, view: string): void
 }
-declare
-var scheduler: SchedulerStatic;
-declare
-var Scheduler: SchedulerEnterprise;
+declare var scheduler: SchedulerStatic;
+declare var Scheduler: SchedulerEnterprise;

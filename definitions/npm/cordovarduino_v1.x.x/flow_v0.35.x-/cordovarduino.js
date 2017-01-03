@@ -82,5 +82,4 @@ declare interface Cordovardunio$SerialOptions {
          */
         parity?: number
 }
-declare
-var serial: Cordovardunio$Serial;
+declare var serial: Cordovardunio$Serial;

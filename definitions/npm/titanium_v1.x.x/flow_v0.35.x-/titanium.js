@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Ti: {
+declare var npm$namespace$Ti: {
     addEventListener: typeof Ti$addEventListener,
     applyProperties: typeof Ti$applyProperties,
     createBuffer: typeof Ti$createBuffer,
@@ -24,65 +23,45 @@ var npm$namespace$Ti: {
     setBubbleParent: typeof Ti$setBubbleParent,
     setUserAgent: typeof Ti$setUserAgent,
 }
-declare
-export var apiName: string;
+declare export var apiName: string;
 
-declare
-export var bubbleParent: boolean;
+declare export var bubbleParent: boolean;
 
-declare
-export var buildDate: string;
+declare export var buildDate: string;
 
-declare
-export var buildHash: string;
+declare export var buildHash: string;
 
-declare
-export var userAgent: string;
+declare export var userAgent: string;
 
-declare
-export var version: string;
+declare export var version: string;
 
-declare
-export function Ti$addEventListener(name: string, callback: (...args: any[]) => any): void
+declare export function Ti$addEventListener(name: string, callback: (...args: any[]) => any): void
 
-declare
-export function Ti$applyProperties(props: Dictionary<Object>): void
+declare export function Ti$applyProperties(props: Dictionary<Object>): void
 
-declare
-export function Ti$createBuffer(params: CreateBufferArgs): Ti$Buffer
+declare export function Ti$createBuffer(params: CreateBufferArgs): Ti$Buffer
 
-declare
-export function Ti$fireEvent(name: string, event: Dictionary<Object>): void
+declare export function Ti$fireEvent(name: string, event: Dictionary<Object>): void
 
-declare
-export function Ti$getApiName(): string
+declare export function Ti$getApiName(): string
 
-declare
-export function Ti$getBubbleParent(): boolean
+declare export function Ti$getBubbleParent(): boolean
 
-declare
-export function Ti$getBuildDate(): string
+declare export function Ti$getBuildDate(): string
 
-declare
-export function Ti$getBuildHash(): string
+declare export function Ti$getBuildHash(): string
 
-declare
-export function Ti$getUserAgent(): string
+declare export function Ti$getUserAgent(): string
 
-declare
-export function Ti$getVersion(): string
+declare export function Ti$getVersion(): string
 
-declare
-export function Ti$include(name: string): void
+declare export function Ti$include(name: string): void
 
-declare
-export function Ti$removeEventListener(name: string, callback: (...args: any[]) => any): void
+declare export function Ti$removeEventListener(name: string, callback: (...args: any[]) => any): void
 
-declare
-export function Ti$setBubbleParent(bubbleParent: boolean): void
+declare export function Ti$setBubbleParent(bubbleParent: boolean): void
 
-declare
-export function Ti$setUserAgent(userAgent: string): void
+declare export function Ti$setUserAgent(userAgent: string): void
 
 declare module 'XML' {
     declare export var apiName: string;
@@ -286,8 +265,7 @@ declare module 'XML' {
 }
 
 
-declare
-export type Ti$IOStream = {
+declare export type Ti$IOStream = {
     close(): void,
     isReadable(): boolean,
     isWriteable(): boolean,
@@ -3926,8 +3904,7 @@ declare module 'UI' {
 }
 
 
-declare
-export interface Ti$API {
+declare export interface Ti$API {
     debug(message: Array<Global$String>): void,
         debug(message: string): void,
         error(message: Array<Global$String>): void,
@@ -4789,8 +4766,7 @@ declare module 'Geolocation' {
 }
 
 
-declare
-export interface Ti$Proxy {
+declare export interface Ti$Proxy {
     apiName: string,
         bubbleParent: boolean,
         addEventListener(name: string, callback: (...args: any[]) => any): void,
@@ -5266,8 +5242,7 @@ declare module 'Cloud' {
 }
 
 
-declare
-export type Ti$Blob = {
+declare export type Ti$Blob = {
     file: undefined.File,
     height: number,
     length: number,
@@ -5294,8 +5269,7 @@ export type Ti$Blob = {
     toString(): string
 }
 
-declare
-export interface Ti$Codec {
+declare export interface Ti$Codec {
     BIG_ENDIAN: number,
         CHARSET_ASCII: string,
         CHARSET_ISO_LATIN_1: string,
@@ -5317,8 +5291,7 @@ export interface Ti$Codec {
         getNativeByteOrder(): number
 }
 
-declare
-export interface Ti$Locale {
+declare export interface Ti$Locale {
     currentCountry: string,
         currentLanguage: string,
         currentLocale: string,
@@ -7570,8 +7543,7 @@ declare module 'Contacts' {
 }
 
 
-declare
-export interface Ti$CloudPush {
+declare export interface Ti$CloudPush {
     SERVICE_DISABLED: number,
         SERVICE_INVALID: number,
         SERVICE_MISSING: number,
@@ -8150,8 +8122,7 @@ declare module 'Platform' {
 }
 
 
-declare
-export type Ti$Buffer = {
+declare export type Ti$Buffer = {
     byteOrder: number,
     length: number,
     type: string,
@@ -8752,13 +8723,11 @@ declare module 'Network' {
 }
 
 
-declare
-export interface Ti$Yahoo {
+declare export interface Ti$Yahoo {
     yql(yql: string, callback: (...args: any[]) => any): void
 }
 
-declare
-export interface Ti$Gesture {
+declare export interface Ti$Gesture {
     landscape: boolean,
         orientation: number,
         portrait: boolean,
@@ -8771,8 +8740,7 @@ export interface Ti$Gesture {
         isPortrait(): boolean
 }
 
-declare
-export interface Ti$Analytics {
+declare export interface Ti$Analytics {
     lastEvent: string,
         addEvent(type: string, name: string, data?: any): void,
         featureEvent(name: string, data?: any): void,
@@ -8834,8 +8802,7 @@ declare module 'Facebook' {
 }
 
 
-declare
-export interface Ti$Utils {
+declare export interface Ti$Utils {
     base64decode(obj: string): Ti$Blob,
         base64decode(obj: Ti$Blob): Ti$Blob,
         base64encode(obj: string): Ti$Blob,
@@ -8849,8 +8816,7 @@ export interface Ti$Utils {
         sha256(obj: Ti$Blob): string
 }
 
-declare
-export type Ti$Event = {
+declare export type Ti$Event = {
     alerts: Array<undefined.Alert>,
     allDay: boolean,
     begin: Date,
@@ -8885,8 +8851,7 @@ export type Ti$Event = {
     setExtendedProperty(name: string, value: string): void
 }
 
-declare
-export interface Ti$Stream {
+declare export interface Ti$Stream {
     MODE_APPEND: number,
         MODE_READ: number,
         MODE_WRITE: number,
@@ -8985,8 +8950,7 @@ declare class recurrenceEndDictionary {
     endDate: Date;
     occurrenceCount: number
 }
-declare
-var npm$namespace$Global: {
+declare var npm$namespace$Global: {
     L: typeof Global$L,
     alert: typeof Global$alert,
     clearInterval: typeof Global$clearInterval,
@@ -8997,35 +8961,25 @@ var npm$namespace$Global: {
     setInterval: typeof Global$setInterval,
     setTimeout: typeof Global$setTimeout,
 }
-declare
-export function Global$L(key: string, hint?: string): string
+declare export function Global$L(key: string, hint?: string): string
 
-declare
-export function Global$alert(message: string): void
+declare export function Global$alert(message: string): void
 
-declare
-export function Global$clearInterval(timerId: number): void
+declare export function Global$clearInterval(timerId: number): void
 
-declare
-export function Global$clearTimeout(timerId: number): void
+declare export function Global$clearTimeout(timerId: number): void
 
-declare
-export function Global$decodeURIComponent(value: string): string
+declare export function Global$decodeURIComponent(value: string): string
 
-declare
-export function Global$encodeURIComponent(value: string): string
+declare export function Global$encodeURIComponent(value: string): string
 
-declare
-export function Global$require(moduleId: string): any
+declare export function Global$require(moduleId: string): any
 
-declare
-export function Global$setInterval(_function: (...args: any[]) => any, delay: number): number
+declare export function Global$setInterval(_function: (...args: any[]) => any, delay: number): number
 
-declare
-export function Global$setTimeout(_function: (...args: any[]) => any, delay: number): number
+declare export function Global$setTimeout(_function: (...args: any[]) => any, delay: number): number
 
-declare
-export interface Global$console {
+declare export interface Global$console {
     debug(message: any): void,
         error(message: any): void,
         info(message: any): void,
@@ -9033,8 +8987,7 @@ export interface Global$console {
         warn(message: any): void
 }
 
-declare
-export interface Global$String {
+declare export interface Global$String {
     format(formatString: string, value: string): string,
         format(formatString: string, value: number): string,
         formatCurrency(value: number): string,
@@ -9043,8 +8996,7 @@ export interface Global$String {
         formatTime(date: Date, format?: string): string
 }
 
-declare
-export interface Global$JSON {
+declare export interface Global$JSON {
     parse(text: string, reviver: (...args: any[]) => any): any,
         stringify(value: any, replacer?: (...args: any[]) => any, space?: number): string,
         stringify(value: any, replacer?: Array<Global$String>, space?: string): string,

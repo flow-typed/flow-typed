@@ -94,8 +94,7 @@ declare interface raygun$RaygunStatic {
         whitelistCrossOriginDomains(whitelist: string[]): raygun$RaygunStatic,
         onBeforeSend(callback: (payload: raygun$IPayload) => raygun$IPayload): raygun$RaygunStatic
 }
-declare
-var Raygun: raygun$RaygunStatic;
+declare var Raygun: raygun$RaygunStatic;
 declare module 'Raygun' {
     declare module.exports: typeof Raygun
 }

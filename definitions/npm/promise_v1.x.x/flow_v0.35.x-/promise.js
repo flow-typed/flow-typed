@@ -9,10 +9,8 @@
 declare module 'promise' {
     declare module.exports: typeof Promise
 }
-declare
-var Promise: Promise$Ipromise;
-declare
-export interface Promise$Ipromise {
+declare var Promise: Promise$Ipromise;
+declare export interface Promise$Ipromise {
     new<T>(
             resolver: (resolve: (value: T) => void, reject: (reason: any) => void) => void): Promise$IThenable<T>,
         resolve:<T>(value: T) => Promise$IThenable<T>,
@@ -22,8 +20,7 @@ export interface Promise$Ipromise {
         nodeify: (fn: Function) => Function
 }
 
-declare
-export interface Promise$IThenable<T>{
+declare export interface Promise$IThenable<T>{
     then<R>(
         onFulfilled?: (value: T) => Promise$IThenable<R>| R,
         onRejected?: (error: any) => Promise$IThenable<R>| R): Promise$IThenable<R>,

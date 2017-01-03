@@ -111,8 +111,7 @@ declare interface NProgressConfigureOptions {
          */
         template?: string
 }
-declare
-var NProgress: NProgressStatic;
+declare var NProgress: NProgressStatic;
 declare module 'nprogress' {
     declare module.exports: typeof NProgress
 }

@@ -7,15 +7,13 @@
  */
 
 
-declare
-var npm$namespace$noUiSlider: {
+declare var npm$namespace$noUiSlider: {
         create: typeof noUiSlider$create,
     }
     /**
      * To create a slider, call noUiSlider.create() with an element and your options.
      */
-declare
-function noUiSlider$create(target: HTMLElement, options: noUiSlider$Options): void
+declare function noUiSlider$create(target: HTMLElement, options: noUiSlider$Options): void
 
 declare interface noUiSlider$Options {
 

@@ -12,8 +12,7 @@ declare interface CordovaPlugins {
 /**
  * Beacon Plugin.
  */
-declare
-export interface BeaconPlugin$LocationManager {
+declare export interface BeaconPlugin$LocationManager {
     delegate: BeaconPlugin$Delegate,
         BeaconRegion: BeaconPlugin$BeaconRegion,
         Region: BeaconPlugin$Region,
@@ -44,8 +43,7 @@ export interface BeaconPlugin$LocationManager {
         appendToDeviceLog(message: string): Q.Promise<string >
 }
 
-declare
-export interface BeaconPlugin$PluginResult {
+declare export interface BeaconPlugin$PluginResult {
     eventType: string,
         region: BeaconPlugin$Region,
         beacons: BeaconPlugin$Beacon[],
@@ -54,8 +52,7 @@ export interface BeaconPlugin$PluginResult {
         error: string
 }
 
-declare
-export interface BeaconPlugin$Delegate {
+declare export interface BeaconPlugin$Delegate {
     didDetermineStateForRegion(pluginResult: BeaconPlugin$PluginResult): void,
         didStartMonitoringForRegion(pluginResult: BeaconPlugin$PluginResult): void,
         didExitRegion(pluginResult: BeaconPlugin$PluginResult): void,
@@ -67,14 +64,12 @@ export interface BeaconPlugin$Delegate {
         monitoringDidFailForRegionWithError(pluginResult: BeaconPlugin$PluginResult): void
 }
 
-declare
-export interface BeaconPlugin$Region {
+declare export interface BeaconPlugin$Region {
     identifier: string,
         new(identifier: string): BeaconPlugin$Region
 }
 
-declare
-export type BeaconPlugin$BeaconRegion = {
+declare export type BeaconPlugin$BeaconRegion = {
     uuid: string,
     major: string,
     minor: string,
@@ -88,8 +83,7 @@ export type BeaconPlugin$BeaconRegion = {
 } & BeaconPlugin$Region
 
 
-declare
-export type BeaconPlugin$CircularRegion = {
+declare export type BeaconPlugin$CircularRegion = {
     latitude: number,
     longitude: number,
     radius: number,
@@ -101,8 +95,7 @@ export type BeaconPlugin$CircularRegion = {
 } & BeaconPlugin$Region
 
 
-declare
-export interface BeaconPlugin$Beacon {
+declare export interface BeaconPlugin$Beacon {
     uuid: string,
         major: string,
         minor: string,

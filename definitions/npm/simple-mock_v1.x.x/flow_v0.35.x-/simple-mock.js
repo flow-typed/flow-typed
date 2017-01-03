@@ -10,8 +10,7 @@ declare type Simple$Fn<T>= {
     (...args: any[]): T
 };
 
-declare
-export interface Simple$Static {
+declare export interface Simple$Static {
 
     /**
      * Restores all current mocks.
@@ -91,8 +90,7 @@ declare interface Simple$Calls<T>{
     k: number
 }
 
-declare
-export interface Simple$Spy<T>{
+declare export interface Simple$Spy<T>{
     (...args: any[]): T,
     called: boolean,
 
@@ -124,8 +122,7 @@ declare interface Simple$Action<T>{
     throwError: Error
 }
 
-declare
-export type Simple$Stub<T>= {
+declare export type Simple$Stub<T>= {
 
     /**
      * Configures this stub to call this function, returning its return value.

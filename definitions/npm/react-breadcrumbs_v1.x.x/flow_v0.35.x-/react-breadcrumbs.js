@@ -28,8 +28,7 @@ declare type ReactBreadcrumbs$BreadcrumbsProps = {
 
 declare type ReactBreadcrumbs$Breadcrumbs = {}
 
-declare
-var Breadcrumbs: ReactBreadcrumbs$Breadcrumbs;
+declare var Breadcrumbs: ReactBreadcrumbs$Breadcrumbs;
 declare module 'react-breadcrumbs' {
     declare module.exports: typeof Breadcrumbs
 }

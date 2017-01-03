@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class AbstractPlugin {
+declare export class AbstractPlugin {
     create(
         src: string,
         startTime: number,
@@ -24,8 +23,7 @@ export class AbstractPlugin {
     setVolume(value: number): boolean
 }
 
-declare
-export class AbstractSoundInstance mixins EventDispatcher {
+declare export class AbstractSoundInstance mixins EventDispatcher {
     constructor(src: string, startTime: number, duration: number, playbackResource: Object): this;
     duration: number;
     loop: number;
@@ -63,22 +61,19 @@ export class AbstractSoundInstance mixins EventDispatcher {
     stop(): createjs$AbstractSoundInstance
 }
 
-declare
-export class FlashAudioLoader mixins AbstractLoader {
+declare export class FlashAudioLoader mixins AbstractLoader {
     flashId: string;
     setFlash(flash: Object): void
 }
 
-declare
-export class FlashAudioPlugin mixins AbstractPlugin {
+declare export class FlashAudioPlugin mixins AbstractPlugin {
     flashReady: boolean;
     showOutput: boolean;
     swfPath: string;
     isSupported(): boolean
 }
 
-declare
-export class FlashAudioSoundInstance mixins AbstractSoundInstance {
+declare export class FlashAudioSoundInstance mixins AbstractSoundInstance {
     constructor(src: string, startTime: number, duration: number, playbackResource: Object): this
 }
 
@@ -87,8 +82,7 @@ export class FlashAudioSoundInstance mixins AbstractSoundInstance {
  * 
  * @deprecated  - use FlashAudioPlugin
  */
-declare
-export class FlashPlugin {
+declare export class FlashPlugin {
     constructor(): this;
     buildDate: string;
     flashReady: boolean;
@@ -107,8 +101,7 @@ export class FlashPlugin {
     setVolume(value: number): boolean
 }
 
-declare
-export class HTMLAudioPlugin mixins AbstractPlugin {
+declare export class HTMLAudioPlugin mixins AbstractPlugin {
     constructor(): this;
     defaultNumChannels: number;
     enableIOS: boolean;
@@ -116,16 +109,13 @@ export class HTMLAudioPlugin mixins AbstractPlugin {
     isSupported(): boolean
 }
 
-declare
-export class HTMLAudioSoundInstance mixins AbstractSoundInstance {
+declare export class HTMLAudioSoundInstance mixins AbstractSoundInstance {
     constructor(src: string, startTime: number, duration: number, playbackResource: Object): this
 }
 
-declare
-export class HTMLAudioTagPool {}
+declare export class HTMLAudioTagPool {}
 
-declare
-export class PlayPropsConfig {
+declare export class PlayPropsConfig {
     delay: number;
     duration: number;
     interrupt: string;
@@ -138,8 +128,7 @@ export class PlayPropsConfig {
     set(props: any): createjs$PlayPropsConfig
 }
 
-declare
-export class Sound mixins EventDispatcher {
+declare export class Sound mixins EventDispatcher {
     activePlugin: Object;
     alternateExtensions: any[];
     defaultInterruptBehavior: string;
@@ -282,19 +271,16 @@ export class Sound mixins EventDispatcher {
     willTrigger(type: string): boolean
 }
 
-declare
-export class SoundJS {
+declare export class SoundJS {
     buildDate: string;
     version: string
 }
 
-declare
-export class WebAudioLoader {
+declare export class WebAudioLoader {
     context: AudioContext
 }
 
-declare
-export class WebAudioPlugin mixins AbstractPlugin {
+declare export class WebAudioPlugin mixins AbstractPlugin {
     constructor(): this;
     context: AudioContext;
     context: AudioContext;
@@ -304,8 +290,7 @@ export class WebAudioPlugin mixins AbstractPlugin {
     playEmptySound(): void
 }
 
-declare
-export class WebAudioSoundInstance mixins AbstractSoundInstance {
+declare export class WebAudioSoundInstance mixins AbstractSoundInstance {
     constructor(src: string, startTime: number, duration: number, playbackResource: Object): this;
     context: AudioContext;
     destinationNode: AudioNode;

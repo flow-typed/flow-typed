@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Redux: {
+declare var npm$namespace$Redux: {
         combineReducers: typeof Redux$combineReducers,
         applyMiddleware: typeof Redux$applyMiddleware,
         bindActionCreators: typeof Redux$bindActionCreators,
@@ -82,8 +81,7 @@ state for any unrecognized action.
  * @returns  A reducer function that invokes every reducer inside the passed
 object, and builds a state object with the same shape.
 */
-declare
-function Redux$combineReducers<S>(reducers: Redux$ReducersMapObject): Redux$Reducer<S >
+declare function Redux$combineReducers<S>(reducers: Redux$ReducersMapObject): Redux$Reducer<S >
 
 
     /**
@@ -232,8 +230,7 @@ declare type Redux$GenericStoreEnhancer =<S>(
 
 declare type Redux$StoreEnhancerStoreCreator<S>= (reducer: Redux$Reducer<S>, preloadedState?: S) => Redux$Store<S>;
 
-declare
-var createStore: Redux$StoreCreator;
+declare var createStore: Redux$StoreCreator;
 
 declare interface Redux$MiddlewareAPI<S>{
     dispatch: Redux$Dispatch<S>,
@@ -271,8 +268,7 @@ functions as named arguments.
  * @param middlewares The middleware chain to be applied.
  * @returns  A store enhancer applying the middleware.
 */
-declare
-function Redux$applyMiddleware(...middlewares: Redux$Middleware[]): Redux$GenericStoreEnhancer
+declare function Redux$applyMiddleware(...middlewares: Redux$Middleware[]): Redux$GenericStoreEnhancer
 
 
 /**
@@ -320,8 +316,7 @@ also pass a single function.
 creator wrapped into the `dispatch` call. If you passed a function as
 `actionCreator`, the return value will also be a single function.
 */
-declare
-function Redux$bindActionCreators<A>(actionCreator: A, dispatch: Redux$Dispatch<any>): A
+declare function Redux$bindActionCreators<A>(actionCreator: A, dispatch: Redux$Dispatch<any>): A
 
 
 /**
@@ -333,7 +328,6 @@ resulting composite function.
 to left. For example, `compose(f, g, h)` is identical to doing
 `(...args) => f(g(h(...args)))`.
 */
-declare
-function Redux$compose():<R>(a: R, ...args: any[]) => Rdeclare module 'redux' {
+declare function Redux$compose():<R>(a: R, ...args: any[]) => Rdeclare module 'redux' {
     declare module.exports: typeof Redux
 }

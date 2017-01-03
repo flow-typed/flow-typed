@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$SeamlessImmutable: {
+declare var npm$namespace$SeamlessImmutable: {
     from: typeof SeamlessImmutable$from,
     isImmutable: typeof SeamlessImmutable$isImmutable,
     ImmutableError: typeof SeamlessImmutable$ImmutableError,
@@ -26,8 +25,7 @@ declare interface SeamlessImmutable$AsMutableOptions {
     deep: boolean
 }
 
-declare
-export interface SeamlessImmutable$ImmutableObject<T>{
+declare export interface SeamlessImmutable$ImmutableObject<T>{
     set(property: string, value: any): SeamlessImmutable$ImmutableObject<any>,
     setIn(
         propertyPath: Array<string>,
@@ -51,26 +49,21 @@ export interface SeamlessImmutable$ImmutableObject<T>{
         filter: (value: any, key: string) => boolean): SeamlessImmutable$ImmutableObject<any >
 }
 
-declare
-export interface SeamlessImmutable$ImmutableArray<T>{
+declare export interface SeamlessImmutable$ImmutableArray<T>{
     asMutable(): Array<T>,
     asMutable(opts: SeamlessImmutable$AsMutableOptions): Array<T>,
     asObject(toKeyValue: (item: T) => Array<any>): SeamlessImmutable$ImmutableObject<T>,
     flatMap(mapFunction: (item: T) => Array<any>): SeamlessImmutable$ImmutableArray<any >
 }
 
-declare
-export type SeamlessImmutable$Immutable<T>= T & (SeamlessImmutable$ImmutableObject<T>| SeamlessImmutable$ImmutableArray<T>);
+declare export type SeamlessImmutable$Immutable<T>= T & (SeamlessImmutable$ImmutableObject<T>| SeamlessImmutable$ImmutableArray<T>);
 
-declare
-export function SeamlessImmutable$from<T>(
+declare export function SeamlessImmutable$from<T>(
         obj: Array<T>,
         options?: SeamlessImmutable$Options): Array<T>& SeamlessImmutable$ImmutableArray<T >
 
-    declare
-export function SeamlessImmutable$isImmutable(target: any): boolean
+    declare export function SeamlessImmutable$isImmutable(target: any): boolean
 
-declare
-export function SeamlessImmutable$ImmutableError(message: string): Errordeclare module 'seamless-immutable' {
+declare export function SeamlessImmutable$ImmutableError(message: string): Errordeclare module 'seamless-immutable' {
     declare module.exports: typeof SeamlessImmutable
 }

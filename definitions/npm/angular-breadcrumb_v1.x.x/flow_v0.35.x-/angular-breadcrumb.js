@@ -33,8 +33,7 @@ declare module 'ui' {
 /**
  * Provider that returns an instance of $breadcrumb service. It contains the global configuration of the module.
  */
-declare
-export interface ncy$$breadcrumbProvider {
+declare export interface ncy$$breadcrumbProvider {
 
     /**
      * Setter for options defined in a module.config block
@@ -46,8 +45,7 @@ export interface ncy$$breadcrumbProvider {
 /**
  * Global configuration options for angular-breadcrumb
  */
-declare
-export interface ncy$breadcrumbProviderOptions {
+declare export interface ncy$breadcrumbProviderOptions {
 
     /**
      * An existing state's name to be the state is the first step of the breadcrumb
@@ -74,8 +72,7 @@ export interface ncy$breadcrumbProviderOptions {
 /**
  * Service responsible for access to $state and for directive configuration.
  */
-declare
-export interface ncy$$breadcrumbService {
+declare export interface ncy$$breadcrumbService {
 
     /**
      * Returns the state chain to the current state (i.e. all the steps of the breadcrumb). It's an array of state object enriched with the module-specific property ncyBreadcrumbLink (the href for the breadcrumb step).

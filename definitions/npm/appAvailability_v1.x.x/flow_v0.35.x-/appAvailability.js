@@ -6,7 +6,6 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface ngCordova$IAppAvailabilityService {
+declare export interface ngCordova$IAppAvailabilityService {
     check(urlScheme: string): ng.IPromise<any >
 }

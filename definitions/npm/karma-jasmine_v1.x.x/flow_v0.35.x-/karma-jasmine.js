@@ -6,6 +6,4 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function fdescribe(description: string, specDefinitions: () => void): voiddeclare
-function fit(expectation: string, assertion: () => void): void
+declare function fdescribe(description: string, specDefinitions: () => void): voiddeclare function fit(expectation: string, assertion: () => void): void

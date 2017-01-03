@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var R: R$Static;
+declare var R: R$Static;
 declare type R$Ord = number | string | boolean;
 
 declare interface R$ListIterator<T, TResult>{

@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$opentypejs: {
+declare var npm$namespace$opentypejs: {
     load: typeof opentypejs$load,
     loadSync: typeof opentypejs$loadSync,
     parse: typeof opentypejs$parse,
@@ -201,13 +200,11 @@ declare interface opentypejs$KerningPairs {
     [pair: string]: number
 }
 
-declare
-function opentypejs$load(url: string, callback: {
+declare function opentypejs$load(url: string, callback: {
     (error: any, font?: opentypejs$Font): void
 }): void
 
-declare
-function opentypejs$loadSync(url: string): opentypejs$Font
+declare function opentypejs$loadSync(url: string): opentypejs$Font
 
 declare interface opentypejs$LocalizedName {
     [lang: string]: string
@@ -222,8 +219,7 @@ declare interface opentypejs$Metrics {
         yMin: number
 }
 
-declare
-function opentypejs$parse(buffer: any): opentypejs$Font
+declare function opentypejs$parse(buffer: any): opentypejs$Font
 
 declare class Path {
     constructor(): this;
@@ -285,8 +281,7 @@ declare interface opentypejs$Table {
         tables: opentypejs$Table[],
         tableName: string
 }
-declare
-var opentype: typeof opentypejs;
+declare var opentype: typeof opentypejs;
 declare module 'opentype.js' {
     declare module.exports: typeof opentype
 }

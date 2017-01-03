@@ -9,28 +9,17 @@
 declare class ngGridReorderable {
     constructor(): this
 }
-declare
-var ngStyleProvider: ngGrid$IStyleProviderStatic;
-declare
-var ngSearchProvider: ngGrid$ISearchProviderStatic;
-declare
-var ngSelectionProvider: ngGrid$ISelectionProviderStatic;
-declare
-var ngEventProvider: ngGrid$IEventProviderStatic;
-declare
-var ngAggregate: ngGrid$IAggregateStatic;
-declare
-var ngRenderedRange: ngGrid$IRenderedRangeStatic;
-declare
-var ngDimension: ngGrid$IDimensionStatic;
-declare
-var ngRow: ngGrid$IRowStatic;
-declare
-var ngColumn: ngGrid$IColumnStatic;
-declare
-var ngFooter: ngGrid$IFooterStatic;
-declare
-export interface ngGrid$IDomAccessProvider {
+declare var ngStyleProvider: ngGrid$IStyleProviderStatic;
+declare var ngSearchProvider: ngGrid$ISearchProviderStatic;
+declare var ngSelectionProvider: ngGrid$ISelectionProviderStatic;
+declare var ngEventProvider: ngGrid$IEventProviderStatic;
+declare var ngAggregate: ngGrid$IAggregateStatic;
+declare var ngRenderedRange: ngGrid$IRenderedRangeStatic;
+declare var ngDimension: ngGrid$IDimensionStatic;
+declare var ngRow: ngGrid$IRowStatic;
+declare var ngColumn: ngGrid$IColumnStatic;
+declare var ngFooter: ngGrid$IFooterStatic;
+declare export interface ngGrid$IDomAccessProvider {
     previousColumn: ngGrid$IColumn,
         grid: ngGrid$IGridInstance,
         changeUserSelect(elm: angular.IAugmentedJQuery, value: string): void,
@@ -38,39 +27,33 @@ export interface ngGrid$IDomAccessProvider {
         selectionHandlers($scope: ngGrid$IGridScope, elm: angular.IAugmentedJQuery): void
 }
 
-declare
-export interface ngGrid$IStyleProviderStatic {
+declare export interface ngGrid$IStyleProviderStatic {
     new($scope: ngGrid$IGridScope, grid: ngGrid$IGridInstance): ngGrid$IStyleProvider
 }
 
-declare
-export interface ngGrid$IStyleProvider {}
+declare export interface ngGrid$IStyleProvider {}
 
-declare
-export interface ngGrid$ISearchProviderStatic {
+declare export interface ngGrid$ISearchProviderStatic {
     new(
         $scope: ngGrid$IGridScope,
         grid: ngGrid$IGridInstance,
         $filter: angular.IFilterService): ngGrid$ISearchProvider
 }
 
-declare
-export interface ngGrid$ISearchProvider {
+declare export interface ngGrid$ISearchProvider {
     fieldMap: any,
         extFilter: boolean,
         evalFilter(): void
 }
 
-declare
-export interface ngGrid$ISelectionProviderStatic {
+declare export interface ngGrid$ISelectionProviderStatic {
     new(
         grid: ngGrid$IGridInstance,
         $scope: ngGrid$IGridScope,
         $parse: angular.IParseService): ngGrid$ISelectionProvider
 }
 
-declare
-export interface ngGrid$ISelectionProvider {
+declare export interface ngGrid$ISelectionProvider {
     multi: boolean,
         selectedItems: any[],
         selectedIndex: number,
@@ -84,8 +67,7 @@ export interface ngGrid$ISelectionProvider {
         toggleSelectAll(checkAll: boolean, bypass: boolean, selectFiltered: boolean): void
 }
 
-declare
-export interface ngGrid$IEventProviderStatic {
+declare export interface ngGrid$IEventProviderStatic {
     new(
         grid: ngGrid$IGridInstance,
         $scope: ngGrid$IGridScope,
@@ -93,8 +75,7 @@ export interface ngGrid$IEventProviderStatic {
         $timeout: angular.ITimeoutService): ngGrid$IEventProvider
 }
 
-declare
-export interface ngGrid$IEventProvider {
+declare export interface ngGrid$IEventProvider {
     colToMove: ngGrid$IColumn,
         groupToMove: any,
         assignEvents(): void,
@@ -108,8 +89,7 @@ export interface ngGrid$IEventProvider {
         onHeaderDrop(event: any): void
 }
 
-declare
-export interface ngGrid$IAggregateStatic {
+declare export interface ngGrid$IAggregateStatic {
     new(
         aggEntity: any,
         rowFactory: ngGrid$IRowFactory,
@@ -117,8 +97,7 @@ export interface ngGrid$IAggregateStatic {
         groupInitState: boolean): ngGrid$IAggregate
 }
 
-declare
-export interface ngGrid$IAggregate {
+declare export interface ngGrid$IAggregate {
     rowIndex: number,
         offsetTop: number,
         entity: any,
@@ -138,8 +117,7 @@ export interface ngGrid$IAggregate {
         aggLabelFilter: any
 }
 
-declare
-export interface ngGrid$IRowConfig {
+declare export interface ngGrid$IRowConfig {
     enableCellSelection: boolean,
         enableRowSelection: boolean,
         jqueryUITheme: boolean,
@@ -151,19 +129,16 @@ export interface ngGrid$IRowConfig {
         beforeSelectionChangeCallback(): void
 }
 
-declare
-export interface ngGrid$IRenderedRangeStatic {
+declare export interface ngGrid$IRenderedRangeStatic {
     new(top: number, bottom: number): ngGrid$IRenderedRange
 }
 
-declare
-export interface ngGrid$IRenderedRange {
+declare export interface ngGrid$IRenderedRange {
     bottomRow: number,
         topRow: number
 }
 
-declare
-export interface ngGrid$IRowFactory {
+declare export interface ngGrid$IRowFactory {
     aggCache: any,
         dataChanged: boolean,
         groupedData: any,
@@ -185,20 +160,17 @@ export interface ngGrid$IRowFactory {
         renderedChangeNoGroups(): void
 }
 
-declare
-export interface ngGrid$IDimensionStatic {
+declare export interface ngGrid$IDimensionStatic {
     new(options: any): ngGrid$IDimension
 }
 
-declare
-export interface ngGrid$IDimension {
+declare export interface ngGrid$IDimension {
     outerHeight?: number,
         outerWidth?: number,
         autoFitHeight?: boolean
 }
 
-declare
-export interface ngGrid$IElementDimension {
+declare export interface ngGrid$IElementDimension {
     rootMaxH?: number,
         rootMaxW?: number,
         rowIndexCellW?: number,
@@ -207,8 +179,7 @@ export interface ngGrid$IElementDimension {
         scrollW?: number
 }
 
-declare
-export interface ngGrid$IRowStatic {
+declare export interface ngGrid$IRowStatic {
     new(
         entity: any,
         config: ngGrid$IRowConfig,
@@ -217,8 +188,7 @@ export interface ngGrid$IRowStatic {
         $utils: any): ngGrid$IRow
 }
 
-declare
-export interface ngGrid$IRow {
+declare export interface ngGrid$IRow {
     entity: any,
         config: ngGrid$IRowConfig,
         selectionProvider: ngGrid$ISelectionProvider,
@@ -240,8 +210,7 @@ export interface ngGrid$IRow {
         setVars(fromRow: ngGrid$IRow): void
 }
 
-declare
-export interface ngGrid$IColumnStatic {
+declare export interface ngGrid$IColumnStatic {
     new(
         config: ngGrid$IGridOptions,
         $scope: ngGrid$IGridScope,
@@ -251,8 +220,7 @@ export interface ngGrid$IColumnStatic {
         $utils: any): ngGrid$IColumn
 }
 
-declare
-export interface ngGrid$IColumn {
+declare export interface ngGrid$IColumn {
     colDef: ngGrid$IColumnDef,
         width: number,
         groupIndex: number,
@@ -297,8 +265,7 @@ export interface ngGrid$IColumn {
         setVars(fromCol: ngGrid$IColumn): void
 }
 
-declare
-export type ngGrid$IGridScope = {
+declare export type ngGrid$IGridScope = {
     elementsNeedMeasuring: boolean,
     columns: any[],
     renderedRows: any[],
@@ -338,8 +305,7 @@ export type ngGrid$IGridScope = {
     headerScrollerDim(): any
 }
 
-declare
-export interface ngGrid$IGridInstance {
+declare export interface ngGrid$IGridInstance {
     $canvas: angular.IAugmentedJQuery,
         $viewport: angular.IAugmentedJQuery,
         $groupPanel: angular.IAugmentedJQuery,
@@ -386,16 +352,13 @@ export interface ngGrid$IGridInstance {
         sortData(col: ngGrid$IColumn, event: any): void
 }
 
-declare
-export interface ngGrid$IFooterStatic {
+declare export interface ngGrid$IFooterStatic {
     new($scope: ngGrid$IGridScope, grid: ngGrid$IGridInstance): ngGrid$IFooter
 }
 
-declare
-export interface ngGrid$IFooter {}
+declare export interface ngGrid$IFooter {}
 
-declare
-export interface ngGrid$IGridOptions {
+declare export interface ngGrid$IGridOptions {
 
     /**
      * Define an aggregate template to customize the rows when grouped. See github wiki for more details. 
@@ -653,8 +616,7 @@ export interface ngGrid$IGridOptions {
         enableHighlighting?: boolean
 }
 
-declare
-export interface ngGrid$IColumnDef {
+declare export interface ngGrid$IColumnDef {
 
     /**
      * This can be an absolute numberor it can also be defined in percentages (20%, 30%),
@@ -756,14 +718,12 @@ export interface ngGrid$IColumnDef {
         pinned?: boolean
 }
 
-declare
-export interface ngGrid$IFilterOptions {
+declare export interface ngGrid$IFilterOptions {
     filterText?: string,
         useExternalFilter?: boolean
 }
 
-declare
-export interface ngGrid$IPagingOptions {
+declare export interface ngGrid$IPagingOptions {
 
     /**
      * pageSizes: list of available page sizes.  
@@ -786,8 +746,7 @@ export interface ngGrid$IPagingOptions {
         currentPage?: number
 }
 
-declare
-export interface ngGrid$IPlugin {
+declare export interface ngGrid$IPlugin {
     init(
         childScope: ngGrid$IGridScope,
         gridInstance: ngGrid$IGridInstance,

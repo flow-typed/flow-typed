@@ -6,12 +6,10 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var webkitAudioContext: {
+declare var webkitAudioContext: {
     new(): AudioContext
 };
-declare
-var webkitOfflineAudioContext: {
+declare var webkitOfflineAudioContext: {
     new(
         numberOfChannels: number,
         length: number,

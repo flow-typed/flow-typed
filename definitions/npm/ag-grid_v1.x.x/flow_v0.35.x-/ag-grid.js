@@ -1553,7 +1553,5 @@ declare module 'grid' {
             onNewRowsLoaded(): void
     }
 }
-declare
-var exports: any;
-declare
-var module: any;
+declare var exports: any;
+declare var module: any;

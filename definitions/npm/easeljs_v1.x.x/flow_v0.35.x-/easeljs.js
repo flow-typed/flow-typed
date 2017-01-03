@@ -7,22 +7,19 @@
  */
 
 declare type NativeMouseEvent = {} & createjs$MouseEvent
-declare
-export class AlphaMapFilter mixins Filter {
+declare export class AlphaMapFilter mixins Filter {
     constructor(alphaMap: HTMLImageElement | HTMLCanvasElement): this;
     alphaMap: HTMLImageElement | HTMLCanvasElement;
     clone(): createjs$AlphaMapFilter
 }
 
-declare
-export class AlphaMaskFilter mixins Filter {
+declare export class AlphaMaskFilter mixins Filter {
     constructor(mask: HTMLImageElement | HTMLCanvasElement): this;
     mask: HTMLImageElement | HTMLCanvasElement;
     clone(): createjs$AlphaMaskFilter
 }
 
-declare
-export class Bitmap mixins DisplayObject {
+declare export class Bitmap mixins DisplayObject {
     constructor(imageOrUrl: HTMLImageElement |
         HTMLCanvasElement |
         HTMLVideoElement |
@@ -33,8 +30,7 @@ export class Bitmap mixins DisplayObject {
     clone(): createjs$Bitmap
 }
 
-declare
-export class ScaleBitmap mixins DisplayObject {
+declare export class ScaleBitmap mixins DisplayObject {
     constructor(imageOrUrl: HTMLImageElement |
         HTMLCanvasElement |
         HTMLVideoElement |
@@ -50,8 +46,7 @@ export class ScaleBitmap mixins DisplayObject {
     clone(): createjs$ScaleBitmap
 }
 
-declare
-export class BitmapText mixins DisplayObject {
+declare export class BitmapText mixins DisplayObject {
     constructor(text?: string, spriteSheet?: createjs$SpriteSheet): this;
     maxPoolSize: number;
     letterSpacing: number;
@@ -61,8 +56,7 @@ export class BitmapText mixins DisplayObject {
     text: string
 }
 
-declare
-export class BlurFilter mixins Filter {
+declare export class BlurFilter mixins Filter {
     constructor(blurX?: number, blurY?: number, quality?: number): this;
     blurX: number;
     blurY: number;
@@ -70,8 +64,7 @@ export class BlurFilter mixins Filter {
     clone(): createjs$BlurFilter
 }
 
-declare
-export class ButtonHelper {
+declare export class ButtonHelper {
     constructor(target: createjs$Sprite, outLabel?: string, overLabel?: string, downLabel?: string, play?: boolean, hitArea?: createjs$DisplayObject, hitLabel?: string): this;
     constructor(target: createjs$MovieClip, outLabel?: string, overLabel?: string, downLabel?: string, play?: boolean, hitArea?: createjs$DisplayObject, hitLabel?: string): this;
     downLabel: string | number;
@@ -95,8 +88,7 @@ export class ButtonHelper {
     toString(): string
 }
 
-declare
-export class ColorFilter mixins Filter {
+declare export class ColorFilter mixins Filter {
     constructor(redMultiplier?: number, greenMultiplier?: number, blueMultiplier?: number, alphaMultiplier?: number, redOffset?: number, greenOffset?: number, blueOffset?: number, alphaOffset?: number): this;
     alphaMultiplier: number;
     alphaOffset: number;
@@ -109,8 +101,7 @@ export class ColorFilter mixins Filter {
     clone(): createjs$ColorFilter
 }
 
-declare
-export class ColorMatrix {
+declare export class ColorMatrix {
     constructor(brightness?: number, contrast?: number, saturation?: number, hue?: number): this;
     adjustBrightness(value: number): createjs$ColorMatrix;
     adjustColor(
@@ -136,15 +127,13 @@ export class ColorMatrix {
     toString(): string
 }
 
-declare
-export class ColorMatrixFilter mixins Filter {
+declare export class ColorMatrixFilter mixins Filter {
     constructor(matrix: number[] | createjs$ColorMatrix): this;
     matrix: number[] | createjs$ColorMatrix;
     clone(): createjs$ColorMatrixFilter
 }
 
-declare
-export class Container mixins DisplayObject {
+declare export class Container mixins DisplayObject {
     constructor(): this;
     children: createjs$DisplayObject[];
     mouseChildren: boolean;
@@ -193,8 +182,7 @@ export class Container mixins DisplayObject {
     swapChildrenAt(index1: number, index2: number): void
 }
 
-declare
-export class DisplayObject mixins EventDispatcher {
+declare export class DisplayObject mixins EventDispatcher {
     constructor(): this;
     alpha: number;
     cacheCanvas: HTMLCanvasElement | Object;
@@ -265,8 +253,7 @@ export class DisplayObject mixins EventDispatcher {
     updateContext(ctx: CanvasRenderingContext2D): void
 }
 
-declare
-export class DisplayProps {
+declare export class DisplayProps {
     constructor(visible?: number, alpha?: number, shadow?: number, compositeOperation?: number, matrix?: number): this;
     alpha: number;
     compositeOperation: string;
@@ -295,8 +282,7 @@ export class DisplayProps {
         matrix?: number): createjs$DisplayProps
 }
 
-declare
-export class DOMElement mixins DisplayObject {
+declare export class DOMElement mixins DisplayObject {
     constructor(htmlElement: HTMLElement): this;
     htmlElement: HTMLElement;
     clone(): createjs$DisplayObject;
@@ -313,14 +299,12 @@ export class DOMElement mixins DisplayObject {
         regY?: number): createjs$DOMElement
 }
 
-declare
-export class EaselJS {
+declare export class EaselJS {
     buildDate: string;
     version: string
 }
 
-declare
-export class Filter {
+declare export class Filter {
     constructor(): this;
     applyFilter(
         ctx: CanvasRenderingContext2D,
@@ -336,8 +320,7 @@ export class Filter {
     toString(): string
 }
 
-declare
-export class Graphics {
+declare export class Graphics {
     constructor(): this;
     BASE_64: Object;
     beginCmd: Graphics$BeginPath;
@@ -555,8 +538,7 @@ export class Graphics {
     sd(segments?: number[], offset?: number): createjs$Graphics
 }
 
-declare
-export class Arc {
+declare export class Arc {
     constructor(x: number, y: number, radius: number, startAngle: number, endAngle: number, anticlockwise: number): this;
     anticlockwise: number;
     endAngle: number;
@@ -566,8 +548,7 @@ export class Arc {
     y: number
 }
 
-declare
-export class ArcTo {
+declare export class ArcTo {
     constructor(x1: number, y1: number, x2: number, y2: number, radius: number): this;
     x1: number;
     y1: number;
@@ -576,11 +557,9 @@ export class ArcTo {
     radius: number
 }
 
-declare
-export class BeginPath {}
+declare export class BeginPath {}
 
-declare
-export class BezierCurveTo {
+declare export class BezierCurveTo {
     constructor(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): this;
     cp1x: number;
     cp1y: number;
@@ -590,19 +569,16 @@ export class BezierCurveTo {
     y: number
 }
 
-declare
-export class Circle {
+declare export class Circle {
     constructor(x: number, y: number, radius: number): this;
     x: number;
     y: number;
     radius: number
 }
 
-declare
-export class ClosePath {}
+declare export class ClosePath {}
 
-declare
-export class Fill {
+declare export class Fill {
     constructor(style: Object, matrix?: createjs$Matrix2D): this;
     style: Object;
     matrix: createjs$Matrix2D;
@@ -625,22 +601,19 @@ export class Fill {
         r1: number): Graphics$Fill
 }
 
-declare
-export class LineTo {
+declare export class LineTo {
     constructor(x: number, y: number): this;
     x: number;
     y: number
 }
 
-declare
-export class MoveTo {
+declare export class MoveTo {
     constructor(x: number, y: number): this;
     x: number;
     y: number
 }
 
-declare
-export class PolyStar {
+declare export class PolyStar {
     constructor(x: number, y: number, radius: number, sides: number, pointSize: number, angle: number): this;
     angle: number;
     pointSize: number;
@@ -650,8 +623,7 @@ export class PolyStar {
     y: number
 }
 
-declare
-export class QuadraticCurveTo {
+declare export class QuadraticCurveTo {
     constructor(cpx: number, cpy: number, x: number, y: number): this;
     cpx: number;
     cpy: number;
@@ -659,8 +631,7 @@ export class QuadraticCurveTo {
     y: number
 }
 
-declare
-export class Rect {
+declare export class Rect {
     constructor(x: number, y: number, w: number, h: number): this;
     x: number;
     y: number;
@@ -668,8 +639,7 @@ export class Rect {
     h: number
 }
 
-declare
-export class RoundRect {
+declare export class RoundRect {
     constructor(x: number, y: number, w: number, h: number, radiusTL: number, radiusTR: number, radiusBR: number, radiusBL: number): this;
     x: number;
     y: number;
@@ -681,8 +651,7 @@ export class RoundRect {
     radiusBL: number
 }
 
-declare
-export class Stroke {
+declare export class Stroke {
     constructor(style: Object, ignoreScale: boolean): this;
     style: Object;
     ignoreScale: boolean;
@@ -705,8 +674,7 @@ export class Stroke {
         r1: number): Graphics$Stroke
 }
 
-declare
-export class StrokeStyle {
+declare export class StrokeStyle {
     constructor(width: number, caps: string, joints: number, miterLimit: number): this;
     caps: string;
     joints: string;
@@ -714,8 +682,7 @@ export class StrokeStyle {
     width: number
 }
 
-declare
-export class Matrix2D {
+declare export class Matrix2D {
     constructor(a?: number, b?: number, c?: number, d?: number, tx?: number, ty?: number): this;
     a: number;
     b: number;
@@ -792,8 +759,7 @@ export class Matrix2D {
     translate(x: number, y: number): createjs$Matrix2D
 }
 
-declare
-export class MouseEvent mixins Event {
+declare export class MouseEvent mixins Event {
     constructor(type: string, bubbles: boolean, cancelable: boolean, stageX: number, stageY: number, nativeEvent: NativeMouseEvent, pointerID: number, primary: boolean, rawX: number, rawY: number): this;
     isTouch: boolean;
     localX: number;
@@ -902,8 +868,7 @@ export class MouseEvent mixins Event {
     willTrigger(type: string): boolean
 }
 
-declare
-export class MovieClip mixins Container {
+declare export class MovieClip mixins Container {
     constructor(mode?: string, startPosition?: number, loop?: boolean, labels?: Object): this;
     actionsEnabled: boolean;
     autoReset: boolean;
@@ -944,8 +909,7 @@ export class MovieClip mixins Container {
     stop(): void
 }
 
-declare
-export class MovieClipPlugin {
+declare export class MovieClipPlugin {
     tween(
         tween: Tween,
         prop: string,
@@ -957,8 +921,7 @@ export class MovieClipPlugin {
         end: Object): void
 }
 
-declare
-export class Point {
+declare export class Point {
     constructor(x?: number, y?: number): this;
     x: number;
     y: number;
@@ -968,8 +931,7 @@ export class Point {
     toString(): string
 }
 
-declare
-export class Rectangle {
+declare export class Rectangle {
     constructor(x?: number, y?: number, width?: number, height?: number): this;
     height: number;
     width: number;
@@ -987,8 +949,7 @@ export class Rectangle {
     union(rect: createjs$Rectangle): createjs$Rectangle
 }
 
-declare
-export class Shadow {
+declare export class Shadow {
     constructor(color: string, offsetX: number, offsetY: number, blur: number): this;
     blur: number;
     color: string;
@@ -999,8 +960,7 @@ export class Shadow {
     toString(): string
 }
 
-declare
-export class Shape mixins DisplayObject {
+declare export class Shape mixins DisplayObject {
     constructor(graphics?: createjs$Graphics): this;
     graphics: createjs$Graphics;
     clone(recursive?: boolean): createjs$Shape;
@@ -1017,8 +977,7 @@ export class Shape mixins DisplayObject {
         regY?: number): createjs$Shape
 }
 
-declare
-export class Sprite mixins DisplayObject {
+declare export class Sprite mixins DisplayObject {
     constructor(spriteSheet: createjs$SpriteSheet, frameOrAnimation?: string | number): this;
     currentAnimation: string;
     currentAnimationFrame: number;
@@ -1052,8 +1011,7 @@ export class Sprite mixins DisplayObject {
     stop(): void
 }
 
-declare
-export class SpriteContainer mixins Container {
+declare export class SpriteContainer mixins Container {
     constructor(spriteSheet?: createjs$SpriteSheet): this;
     spriteSheet: createjs$SpriteSheet
 }
@@ -1070,8 +1028,7 @@ declare interface createjs$SpriteSheetFrame {
         rect: createjs$Rectangle
 }
 
-declare
-export class SpriteSheet mixins EventDispatcher {
+declare export class SpriteSheet mixins EventDispatcher {
     constructor(data: Object): this;
     animations: string[];
     complete: boolean;
@@ -1089,8 +1046,7 @@ export class SpriteSheet mixins EventDispatcher {
     getNumFrames(animation: string): number
 }
 
-declare
-export class SpriteSheetBuilder mixins EventDispatcher {
+declare export class SpriteSheetBuilder mixins EventDispatcher {
     constructor(): this;
     maxHeight: number;
     maxWidth: number;
@@ -1123,8 +1079,7 @@ export class SpriteSheetBuilder mixins EventDispatcher {
     stopAsync(): void
 }
 
-declare
-export class SpriteSheetUtils {
+declare export class SpriteSheetUtils {
 
     /**
      * 
@@ -1149,8 +1104,7 @@ export class SpriteSheetUtils {
         canvas?: HTMLCanvasElement): HTMLCanvasElement
 }
 
-declare
-export class SpriteStage mixins Stage {
+declare export class SpriteStage mixins Stage {
     constructor(canvas: HTMLCanvasElement | string, preserveDrawingBuffer?: boolean, antialias?: boolean): this;
     INDICES_PER_BOX: number;
     isWebGL: boolean;
@@ -1163,8 +1117,7 @@ export class SpriteStage mixins Stage {
     updateViewport(width: number, height: number): void
 }
 
-declare
-export class Stage mixins Container {
+declare export class Stage mixins Container {
     constructor(canvas: HTMLCanvasElement | string | Object): this;
     autoClear: boolean;
     canvas: HTMLCanvasElement | Object;
@@ -1192,8 +1145,7 @@ export class Stage mixins Container {
     update(...arg: any[]): void
 }
 
-declare
-export class Text mixins DisplayObject {
+declare export class Text mixins DisplayObject {
     constructor(text?: string, font?: string, color?: string): this;
     color: string;
     font: string;
@@ -1222,8 +1174,7 @@ export class Text mixins DisplayObject {
         regY?: number): createjs$Text
 }
 
-declare
-export class Ticker {
+declare export class Ticker {
     framerate: number;
     interval: number;
     maxDelta: number;
@@ -1377,8 +1328,7 @@ export class Ticker {
     willTrigger(type: string): boolean
 }
 
-declare
-export class TickerEvent {
+declare export class TickerEvent {
     target: Object;
     type: string;
     paused: boolean;
@@ -1387,14 +1337,12 @@ export class TickerEvent {
     runTime: number
 }
 
-declare
-export class Touch {
+declare export class Touch {
     disable(stage: createjs$Stage): void;
     enable(stage: createjs$Stage, singleTouch?: boolean, allowDefault?: boolean): boolean;
     isSupported(): boolean
 }
 
-declare
-export class UID {
+declare export class UID {
     get(): number
 }

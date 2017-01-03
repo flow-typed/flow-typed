@@ -26,8 +26,7 @@ declare interface BigScreenStatic {
             onError?: (element: Element, reason: string) => void): void,
         videoEnabled(video: HTMLVideoElement): boolean
 }
-declare
-var bigscreen: BigScreenStatic;
+declare var bigscreen: BigScreenStatic;
 declare module 'bigscreen' {
     declare module.exports: typeof bigscreen
 }

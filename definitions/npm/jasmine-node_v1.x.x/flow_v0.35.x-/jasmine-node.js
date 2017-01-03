@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-function it(
+declare function it(
     expectation: string,
     assertion: (done: (err?: any) => void) => void,
     timeout?: number): voiddeclare interface jasmine$Env {

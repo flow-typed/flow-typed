@@ -255,5 +255,4 @@ declare interface QRScannerError {
          */
         _message: String
 }
-declare
-var QRScanner: QRScanner;
+declare var QRScanner: QRScanner;

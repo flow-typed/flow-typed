@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var j: j$JfpStatic;
+declare var j: j$JfpStatic;
 declare interface j$JfpStatic {
 
     /**

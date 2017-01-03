@@ -38,8 +38,7 @@ declare interface XSSFilters {
         uriFragmentInSingleQuotedAttr(s: string): string,
         uriFragmentInUnQuotedAttr(s: string): string
 }
-declare
-var xssFilters: XSSFilters;
+declare var xssFilters: XSSFilters;
 declare module 'xss-filters' {
     declare module.exports: typeof xssFilters
 }

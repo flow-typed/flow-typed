@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$doublearray: {
+declare var npm$namespace$doublearray: {
     builder: typeof doublearray$builder,
     load: typeof doublearray$load,
 }
@@ -74,8 +73,6 @@ declare interface doublearray$DoubleArray {
         dump(): string
 }
 
-declare
-export function doublearray$builder(initial_size?: number): doublearray$DoubleArrayBuilder
+declare export function doublearray$builder(initial_size?: number): doublearray$DoubleArrayBuilder
 
-declare
-export function doublearray$load(base_buffer: Int8Array, check_buffer: Int8Array): doublearray$DoubleArray
+declare export function doublearray$load(base_buffer: Int8Array, check_buffer: Int8Array): doublearray$DoubleArray

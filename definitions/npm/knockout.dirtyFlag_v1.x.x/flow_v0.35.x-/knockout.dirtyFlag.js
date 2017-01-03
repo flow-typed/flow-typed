@@ -17,8 +17,7 @@ declare interface KnockoutStatic {
 declare interface KnockoutDirtyFlagStatic {
     DirtyFlag: DirtyFlag
 }
-declare
-var kodirtyflag: KnockoutDirtyFlagStatic;
+declare var kodirtyflag: KnockoutDirtyFlagStatic;
 declare module 'kodirtyflag' {
     declare module.exports: typeof kodirtyflag
 }

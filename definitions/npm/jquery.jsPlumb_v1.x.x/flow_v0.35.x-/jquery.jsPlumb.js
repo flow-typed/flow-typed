@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var jsPlumb: jsPlumbInstance;
+declare var jsPlumb: jsPlumbInstance;
 declare interface jsPlumbInstance {
     setRenderMode(renderMode: string): string,
         bind(event: string, callback: (e: << UNKNOWN PARAM FORMAT >> ) => void): void,

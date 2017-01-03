@@ -23,8 +23,7 @@ declare interface Express$PartialInput {
         data: any
 }
 
-declare
-export interface Express$Response {
+declare export interface Express$Response {
     success(data?: any, status?: number): void,
         fail(data: any, status?: number): void,
         error(err: any, status?: number): void,

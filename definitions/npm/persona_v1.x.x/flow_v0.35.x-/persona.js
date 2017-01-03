@@ -6,16 +6,14 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Persona$WatchOptions {
+declare export interface Persona$WatchOptions {
     loggedInUser: String,
         onlogin: (String: << UNKNOWN PARAM FORMAT >> ) => void,
         onlogout: () => void,
         onready?: () => void
 }
 
-declare
-export interface Persona$RequestOptions {
+declare export interface Persona$RequestOptions {
     backgroundColor?: String,
         siteName?: String,
         siteLogo?: String,
@@ -25,8 +23,7 @@ export interface Persona$RequestOptions {
         oncancel?: () => void
 }
 
-declare
-export interface Persona$GetOptions {
+declare export interface Persona$GetOptions {
     backgroundColor?: String,
         siteName?: String,
         siteLogo?: String,
@@ -34,8 +31,7 @@ export interface Persona$GetOptions {
         privacyPolicy?: String
 }
 
-declare
-export interface Persona$Persona {
+declare export interface Persona$Persona {
     watch(options: Persona$WatchOptions): void,
         request(options: Persona$RequestOptions): void,
         request(): void,

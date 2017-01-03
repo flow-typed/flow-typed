@@ -7,34 +7,25 @@
  */
 
 
-declare
-var npm$namespace$ReactRouterRedux: {
+declare var npm$namespace$ReactRouterRedux: {
     routeReducer: typeof ReactRouterRedux$routeReducer,
     syncHistory: typeof ReactRouterRedux$syncHistory,
 }
-declare
-var TRANSITION: string;
+declare var TRANSITION: string;
 
-declare
-var UPDATE_LOCATION: string;
+declare var UPDATE_LOCATION: string;
 
-declare
-var push: ReactRouterRedux$PushAction;
+declare var push: ReactRouterRedux$PushAction;
 
-declare
-var replace: ReactRouterRedux$ReplaceAction;
+declare var replace: ReactRouterRedux$ReplaceAction;
 
-declare
-var go: ReactRouterRedux$GoAction;
+declare var go: ReactRouterRedux$GoAction;
 
-declare
-var goBack: ReactRouterRedux$GoForwardAction;
+declare var goBack: ReactRouterRedux$GoForwardAction;
 
-declare
-var goForward: ReactRouterRedux$GoBackAction;
+declare var goForward: ReactRouterRedux$GoBackAction;
 
-declare
-var routeActions: ReactRouterRedux$RouteActions;
+declare var routeActions: ReactRouterRedux$RouteActions;
 
 declare type ReactRouterRedux$LocationDescriptor = H.LocationDescriptor;
 
@@ -61,10 +52,8 @@ declare type ReactRouterRedux$HistoryMiddleware = {
     unsubscribe(): void
 }
 
-declare
-function ReactRouterRedux$routeReducer(state?: any, options?: any): R.Reducer<any >
+declare function ReactRouterRedux$routeReducer(state?: any, options?: any): R.Reducer<any >
 
-    declare
-function ReactRouterRedux$syncHistory(history: H.History): ReactRouterRedux$HistoryMiddlewaredeclare module 'react-router-redux' {
+    declare function ReactRouterRedux$syncHistory(history: H.History): ReactRouterRedux$HistoryMiddlewaredeclare module 'react-router-redux' {
     declare module.exports: typeof ReactRouterRedux
 }

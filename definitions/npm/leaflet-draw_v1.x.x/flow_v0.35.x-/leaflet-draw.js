@@ -6,23 +6,19 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface L$MapOptions {
+declare export interface L$MapOptions {
     drawControl?: boolean
 }
 
-declare
-export interface L$ControlStatic {
+declare export interface L$ControlStatic {
     Draw: Control$DrawStatic
 }
 
-declare
-export interface Control$DrawStatic {
+declare export interface Control$DrawStatic {
     new(options?: Control$IDrawConstructorOptions): Control$Draw
 }
 
-declare
-export interface Control$IDrawConstructorOptions {
+declare export interface Control$IDrawConstructorOptions {
 
     /**
      * The initial position of the control (one of the map corners).
@@ -46,8 +42,7 @@ export interface Control$IDrawConstructorOptions {
         edit: Control$EditOptions
 }
 
-declare
-export interface Control$DrawOptions {
+declare export interface Control$DrawOptions {
 
     /**
      * Polyline draw handler options. Set to false to disable handler.
@@ -85,8 +80,7 @@ export interface Control$DrawOptions {
         marker?: DrawOptions$MarkerOptions
 }
 
-declare
-export interface Control$EditOptions {
+declare export interface Control$EditOptions {
 
     /**
      * This is the FeatureGroup that stores all editable shapes.
@@ -111,12 +105,10 @@ export interface Control$EditOptions {
         remove?: DrawOptions$DeleteHandlerOptions
 }
 
-declare
-export type Control$Draw = {} & IControl
+declare export type Control$Draw = {} & IControl
 
 
-declare
-export interface DrawOptions$PolylineOptions {
+declare export interface DrawOptions$PolylineOptions {
 
     /**
      * Determines if line segments can cross.
@@ -168,8 +160,7 @@ export interface DrawOptions$PolylineOptions {
         repeatMode?: boolean
 }
 
-declare
-export type DrawOptions$PolygonOptions = {
+declare export type DrawOptions$PolygonOptions = {
 
     /**
      * Show the area of the drawn polygon in m², ha or km².
@@ -181,8 +172,7 @@ export type DrawOptions$PolygonOptions = {
 } & DrawOptions$PolylineOptions
 
 
-declare
-export interface DrawOptions$RectangleOptions {
+declare export interface DrawOptions$RectangleOptions {
 
     /**
      * The options used when drawing the rectangle on the map.
@@ -199,8 +189,7 @@ export interface DrawOptions$RectangleOptions {
         repeatMode?: boolean
 }
 
-declare
-export interface DrawOptions$CircleOptions {
+declare export interface DrawOptions$CircleOptions {
 
     /**
      * The options used when drawing the circle on the map.
@@ -217,8 +206,7 @@ export interface DrawOptions$CircleOptions {
         repeatMode?: boolean
 }
 
-declare
-export interface DrawOptions$MarkerOptions {
+declare export interface DrawOptions$MarkerOptions {
 
     /**
      * TThe icon displayed when drawing a marker.
@@ -242,8 +230,7 @@ export interface DrawOptions$MarkerOptions {
         repeatMode?: boolean
 }
 
-declare
-export interface DrawOptions$EditHandlerOptions {
+declare export interface DrawOptions$EditHandlerOptions {
 
     /**
      * The path options for how the layers will look while in edit mode.
@@ -254,11 +241,9 @@ export interface DrawOptions$EditHandlerOptions {
     selectedPathOptions?: L$PathOptions
 }
 
-declare
-export interface DrawOptions$DeleteHandlerOptions {}
+declare export interface DrawOptions$DeleteHandlerOptions {}
 
-declare
-export interface DrawEvents$Created {
+declare export interface DrawEvents$Created {
 
     /**
      * Layer that was just created.
@@ -271,8 +256,7 @@ export interface DrawEvents$Created {
         layerType: string
 }
 
-declare
-export interface DrawEvents$Edited {
+declare export interface DrawEvents$Edited {
 
     /**
      * List of all layers just edited on the map.
@@ -284,8 +268,7 @@ export interface DrawEvents$Edited {
 /**
  * Triggered when layers have been removed (and saved) from the FeatureGroup.
  */
-declare
-export interface DrawEvents$Deleted {
+declare export interface DrawEvents$Deleted {
 
     /**
      * List of all layers just removed from the map.
@@ -293,8 +276,7 @@ export interface DrawEvents$Deleted {
     layers: LayerGroup<ILayer >
 }
 
-declare
-export interface DrawEvents$DrawStart {
+declare export interface DrawEvents$DrawStart {
 
     /**
      * The type of layer this is. One of: polyline, polygon, rectangle, circle, marker
@@ -302,8 +284,7 @@ export interface DrawEvents$DrawStart {
     layerType: string
 }
 
-declare
-export interface DrawEvents$DrawStop {
+declare export interface DrawEvents$DrawStop {
 
     /**
      * The type of layer this is. One of: polyline, polygon, rectangle, circle, marker
@@ -311,8 +292,7 @@ export interface DrawEvents$DrawStop {
     layerType: string
 }
 
-declare
-export interface DrawEvents$EditStart {
+declare export interface DrawEvents$EditStart {
 
     /**
      * The type of edit this is. One of: edit
@@ -320,8 +300,7 @@ export interface DrawEvents$EditStart {
     handler: string
 }
 
-declare
-export interface DrawEvents$EditStop {
+declare export interface DrawEvents$EditStop {
 
     /**
      * The type of edit this is. One of: edit
@@ -329,8 +308,7 @@ export interface DrawEvents$EditStop {
     handler: string
 }
 
-declare
-export interface DrawEvents$DeleteStart {
+declare export interface DrawEvents$DeleteStart {
 
     /**
      * The type of edit this is. One of: remove
@@ -338,8 +316,7 @@ export interface DrawEvents$DeleteStart {
     handler: string
 }
 
-declare
-export interface DrawEvents$DeleteStop {
+declare export interface DrawEvents$DeleteStop {
 
     /**
      * The type of edit this is. One of: remove

@@ -80,8 +80,7 @@ declare module 'nodemailer' {
      */
     declare export function createTransport(options?: directTransport.DirectOptions, defaults?: Object): Transporter
 }
-declare
-export interface nodemailer$AttachmentObject {
+declare export interface nodemailer$AttachmentObject {
 
     /**
      * filename to be reported as the name of the attached file, use of unicode is allowed
@@ -119,11 +118,8 @@ export interface nodemailer$AttachmentObject {
         contentDisposition?: string
 }
 
-declare
-export type nodemailer$SendMailOptions = nodemailer$SendMailOptions;
+declare export type nodemailer$SendMailOptions = nodemailer$SendMailOptions;
 
-declare
-export type nodemailer$SentMessageInfo = nodemailer$SentMessageInfo;
+declare export type nodemailer$SentMessageInfo = nodemailer$SentMessageInfo;
 
-declare
-export type nodemailer$Transport = nodemailer$Transport;
+declare export type nodemailer$Transport = nodemailer$Transport;

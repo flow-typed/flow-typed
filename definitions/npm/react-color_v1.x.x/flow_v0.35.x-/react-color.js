@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$ReactColor: {
+declare var npm$namespace$ReactColor: {
     CustomPicker: typeof ReactColor$CustomPicker,
 }
 declare interface ReactColor$HSLColor {
@@ -49,8 +48,7 @@ declare type ReactColor$AlphaPickerProps = {
 
 declare type ReactColor$AlphaPicker = {}
 
-declare
-var AlphaPicker: ReactColor$AlphaPicker;
+declare var AlphaPicker: ReactColor$AlphaPicker;
 
 declare type ReactColor$BlockPickerProps = {
     colors?: Array<string>,
@@ -60,8 +58,7 @@ declare type ReactColor$BlockPickerProps = {
 
 declare type ReactColor$BlockPicker = {}
 
-declare
-var BlockPicker: ReactColor$BlockPicker;
+declare var BlockPicker: ReactColor$BlockPicker;
 
 declare type ReactColor$ChromePickerProps = {
     disableAlpha?: boolean
@@ -70,8 +67,7 @@ declare type ReactColor$ChromePickerProps = {
 
 declare type ReactColor$ChromePicker = {}
 
-declare
-var ChromePicker: ReactColor$ChromePicker;
+declare var ChromePicker: ReactColor$ChromePicker;
 
 declare type ReactColor$CirclePickerProps = {
     colors?: Array<string>,
@@ -81,8 +77,7 @@ declare type ReactColor$CirclePickerProps = {
 
 declare type ReactColor$CirclePicker = {}
 
-declare
-var CirclePicker: ReactColor$CirclePicker;
+declare var CirclePicker: ReactColor$CirclePicker;
 
 declare type ReactColor$CompactPickerProps = {
     colors?: Array<string >
@@ -91,8 +86,7 @@ declare type ReactColor$CompactPickerProps = {
 
 declare type ReactColor$CompactPicker = {}
 
-declare
-var CompactPicker: ReactColor$CompactPicker;
+declare var CompactPicker: ReactColor$CompactPicker;
 
 declare type ReactColor$GithubPickerProps = {
     colors?: Array<string>,
@@ -102,8 +96,7 @@ declare type ReactColor$GithubPickerProps = {
 
 declare type ReactColor$GithubPicker = {}
 
-declare
-var GithubPicker: ReactColor$GithubPicker;
+declare var GithubPicker: ReactColor$GithubPicker;
 
 declare type ReactColor$HuePickerProps = {
     height?: string,
@@ -113,16 +106,14 @@ declare type ReactColor$HuePickerProps = {
 
 declare type ReactColor$HuePicker = {}
 
-declare
-var HuePicker: ReactColor$HuePicker;
+declare var HuePicker: ReactColor$HuePicker;
 
 declare type ReactColor$MaterialPickerProps = {} & ReactColor$ColorPickerProps
 
 
 declare type ReactColor$MaterialPicker = {}
 
-declare
-var MaterialPicker: ReactColor$MaterialPicker;
+declare var MaterialPicker: ReactColor$MaterialPicker;
 
 declare type ReactColor$PhotoshopPickerProps = {
     header?: string,
@@ -133,8 +124,7 @@ declare type ReactColor$PhotoshopPickerProps = {
 
 declare type ReactColor$PhotoshopPicker = {}
 
-declare
-var PhotoshopPicker: ReactColor$PhotoshopPicker;
+declare var PhotoshopPicker: ReactColor$PhotoshopPicker;
 
 declare type ReactColor$SketchPickerProps = {
     disableAlpha?: boolean,
@@ -145,16 +135,14 @@ declare type ReactColor$SketchPickerProps = {
 
 declare type ReactColor$SketchPicker = {}
 
-declare
-var SketchPicker: ReactColor$SketchPicker;
+declare var SketchPicker: ReactColor$SketchPicker;
 
 declare type ReactColor$SliderPickerProps = {} & ReactColor$ColorPickerProps
 
 
 declare type ReactColor$SliderPicker = {}
 
-declare
-var SliderPicker: ReactColor$SliderPicker;
+declare var SliderPicker: ReactColor$SliderPicker;
 
 declare type ReactColor$SwatchesPickerProps = {
     colors?: Array<Array<string >> ,
@@ -165,16 +153,14 @@ declare type ReactColor$SwatchesPickerProps = {
 
 declare type ReactColor$SwatchesPicker = {}
 
-declare
-var SwatchesPicker: ReactColor$SwatchesPicker;
+declare var SwatchesPicker: ReactColor$SwatchesPicker;
 
 declare type ReactColor$TwitterPickerProps = {} & ReactColor$ColorPickerProps
 
 
 declare type ReactColor$TwitterPicker = {}
 
-declare
-var TwitterPicker: ReactColor$TwitterPicker;
+declare var TwitterPicker: ReactColor$TwitterPicker;
 
 declare interface ReactColor$InjectedColorProps {
     hex?: string,
@@ -183,8 +169,7 @@ declare interface ReactColor$InjectedColorProps {
         onChange?: ReactColor$ColorChangeHandler
 }
 
-declare
-function ReactColor$CustomPicker<A>(
+declare function ReactColor$CustomPicker<A>(
         component: React.ComponentClass<A>| React.StatelessComponent<A>): React.ComponentClass<A & ReactColor$InjectedColorProps >
 
     declare type ReactColor$CustomPickerProps<A>= {
@@ -198,8 +183,7 @@ declare type ReactColor$AlphaProps = {} & ReactColor$CustomPickerProps
 
 declare type ReactColor$Alpha = {}
 
-declare
-var Alpha: ReactColor$Alpha;
+declare var Alpha: ReactColor$Alpha;
 
 declare interface ReactColor$EditableInputStyles {
     input?: React.CSSProperties,
@@ -217,8 +201,7 @@ declare type ReactColor$EditableInputProps = {
 
 declare type ReactColor$EditableInput = {}
 
-declare
-var EditableInput: ReactColor$EditableInput;
+declare var EditableInput: ReactColor$EditableInput;
 
 declare type ReactColor$HueProps = {
     direction?: "horizontal" | "vertical"
@@ -227,16 +210,14 @@ declare type ReactColor$HueProps = {
 
 declare type ReactColor$Hue = {}
 
-declare
-var Hue: ReactColor$Hue;
+declare var Hue: ReactColor$Hue;
 
 declare type ReactColor$SaturationProps = {} & ReactColor$CustomPickerProps
 
 
 declare type ReactColor$Saturation = {}
 
-declare
-var Saturation: ReactColor$Saturation;
+declare var Saturation: ReactColor$Saturation;
 
 declare type ReactColor$CheckboardProps = {
     grey?: string,
@@ -246,8 +227,7 @@ declare type ReactColor$CheckboardProps = {
 
 declare type ReactColor$Checkboard = {}
 
-declare
-var Checkboard: ReactColor$Checkboard;
+declare var Checkboard: ReactColor$Checkboard;
 declare module 'react-color/lib/components/common/Alpha' {
     declare module.exports: typeof ReactColor$Alpha
 }

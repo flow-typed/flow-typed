@@ -303,8 +303,7 @@ declare interface GlobalizationError {
          */
         message: string
 }
-declare
-var GlobalizationError: {
+declare var GlobalizationError: {
     UNKNOWN_ERROR: number,
     FORMATTING_ERROR: number,
     PARSING_ERROR: number,

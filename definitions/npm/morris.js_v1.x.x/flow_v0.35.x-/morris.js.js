@@ -327,5 +327,4 @@ declare class MorrisStatic {
 declare module 'morris' {
     declare module.exports: typeof Morris
 }
-declare
-var Morris: morris$MorrisStatic;
+declare var Morris: morris$MorrisStatic;

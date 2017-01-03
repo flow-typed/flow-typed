@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface cucumber$CallbackStepDefinition {
+declare export interface cucumber$CallbackStepDefinition {
     pending: () => PromiseLike<any>,
         (error?: any, pending?: string): void
 }
 
-declare
-export interface cucumber$TableDefinition {
+declare export interface cucumber$TableDefinition {
     raw: () => Array<any>,
         rows: () => Array<any>,
         rowsHash: () => {},
@@ -30,8 +28,7 @@ declare interface cucumber$StepDefinitionOptions {
     timeout?: number
 }
 
-declare
-export interface cucumber$StepDefinitions {
+declare export interface cucumber$StepDefinitions {
     Given(
             pattern: RegExp | string,
             options: cucumber$StepDefinitionOptions,
@@ -75,8 +72,7 @@ declare interface cucumber$AroundCode {
     (scenario: cucumber$HookScenario, runScenario?: (error: string, callback?: Function) => void): void
 }
 
-declare
-export interface cucumber$Hooks {
+declare export interface cucumber$Hooks {
     Before(code: cucumber$HookCode): void,
         After(code: cucumber$HookCode): void,
         Around(code: cucumber$AroundCode): void,

@@ -83,21 +83,17 @@ declare module 'Associations' {
 }
 
 
-declare
-export var Many: string;
+declare export var Many: string;
 
-declare
-export var One: string;
+declare export var One: string;
 
-declare
-export var Self: string;
+declare export var Self: string;
 
 
 /**
  * A Backbone model with special provision for handling relations to other models 
  */
-declare
-export class AssociatedModel mixins Backbone$Model {
+declare export class AssociatedModel mixins Backbone$Model {
 
     /**
      * Relations with their associated model 

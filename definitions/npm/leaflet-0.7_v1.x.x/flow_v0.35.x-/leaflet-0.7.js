@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface L$WMSOptions {
+declare export interface L$WMSOptions {
 
     /**
      * (required) Comma-separated list of WMS layers to show.
@@ -42,12 +41,9 @@ export interface L$WMSOptions {
          */
         version?: string
 }
-declare
-var L_PREFER_CANVAS: boolean;
-declare
-var L_NO_TOUCH: boolean;
-declare
-var L_DISABLE_3D: boolean;
+declare var L_PREFER_CANVAS: boolean;
+declare var L_NO_TOUCH: boolean;
+declare var L_DISABLE_3D: boolean;
 declare module 'leaflet' {
     declare module.exports: typeof L
 }

@@ -1404,8 +1404,7 @@ declare interface sketch$Anchor {
     (an: any, id: any, isControl: any): void
 }
 
-declare
-var count: number;
+declare var count: number;
 
 
 /**
@@ -1417,11 +1416,9 @@ declare interface sketch$Annotation {
     (figure: any, id: any): void
 }
 
-declare
-var calculate: Object;
+declare var calculate: Object;
 
-declare
-var Modes: Object;
+declare var Modes: Object;
 
 
 /**
@@ -1613,56 +1610,39 @@ declare interface sketch$DoubleArrowAnnotation {
     (figure: any, id: any): void
 }
 
-declare
-var anchors: Object;
+declare var anchors: Object;
 
-declare
-var control: Object;
+declare var control: Object;
 
-declare
-var end: Object;
+declare var end: Object;
 
-declare
-var endArrow: Object;
+declare var endArrow: Object;
 
-declare
-var endArrowGroup: Object;
+declare var endArrowGroup: Object;
 
-declare
-var endRotation: number;
+declare var endRotation: number;
 
-declare
-var labelShape: Object;
+declare var labelShape: Object;
 
-declare
-var pathShape: Object;
+declare var pathShape: Object;
 
-declare
-var start: Object;
+declare var start: Object;
 
-declare
-var startArrow: Object;
+declare var startArrow: Object;
 
-declare
-var startArrowGroup: Object;
+declare var startArrowGroup: Object;
 
-declare
-var startRotation: number;
+declare var startRotation: number;
 
-declare
-var textAlign: string;
+declare var textAlign: string;
 
-declare
-var textOffset: number;
+declare var textOffset: number;
 
-declare
-var textPosition: Object;
+declare var textPosition: Object;
 
-declare
-var textYOffset: number;
+declare var textYOffset: number;
 
-declare
-var transform: Object;
+declare var transform: Object;
 
 
 /**
@@ -1832,8 +1812,7 @@ declare interface sketch$Figure {
     (mixin: any): void
 }
 
-declare
-var gridSize: number;
+declare var gridSize: number;
 
 
 /**

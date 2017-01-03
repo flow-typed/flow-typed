@@ -594,8 +594,7 @@ declare interface PromiseConstructor {
          */
         resolve(): Promise<void >
 }
-declare
-var Promise: PromiseConstructor;
+declare var Promise: PromiseConstructor;
 declare interface Map<K, V>{
     clear(): void,
     delete(key: K): boolean,
@@ -614,8 +613,7 @@ declare interface MapConstructor {
         new<K, V>(iterable: IterableShim<[K, V]>): Map<K, V>,
         prototype: Map<any, any >
 }
-declare
-var Map: MapConstructor;
+declare var Map: MapConstructor;
 declare interface Set<T>{
     add(value: T): Set<T>,
     clear(): void,
@@ -633,8 +631,7 @@ declare interface SetConstructor {
         new<T>(iterable: IterableShim<T>): Set<T>,
         prototype: Set<any >
 }
-declare
-var Set: SetConstructor;
+declare var Set: SetConstructor;
 declare interface WeakMap<K, V>{
     delete(key: K): boolean,
     get(key: K): V,
@@ -647,8 +644,7 @@ declare interface WeakMapConstructor {
         new<K, V>(iterable: IterableShim<[K, V]>): WeakMap<K, V>,
         prototype: WeakMap<any, any >
 }
-declare
-var WeakMap: WeakMapConstructor;
+declare var WeakMap: WeakMapConstructor;
 declare interface WeakSet<T>{
     add(value: T): WeakSet<T>,
     delete(value: T): boolean,
@@ -659,10 +655,8 @@ declare interface WeakSetConstructor {
         new<T>(iterable: IterableShim<T>): WeakSet<T>,
         prototype: WeakSet<any >
 }
-declare
-var WeakSet: WeakSetConstructor;
-declare
-var npm$namespace$Reflect: {
+declare var WeakSet: WeakSetConstructor;
+declare var npm$namespace$Reflect: {
     apply: typeof Reflect$apply,
     construct: typeof Reflect$construct,
     defineProperty: typeof Reflect$defineProperty,
@@ -678,47 +672,33 @@ var npm$namespace$Reflect: {
     set: typeof Reflect$set,
     setPrototypeOf: typeof Reflect$setPrototypeOf,
 }
-declare
-function Reflect$apply(target: Function, thisArgument: any, argumentsList: ArrayLike<any>): any
+declare function Reflect$apply(target: Function, thisArgument: any, argumentsList: ArrayLike<any>): any
 
-declare
-function Reflect$construct(target: Function, argumentsList: ArrayLike<any>): any
+declare function Reflect$construct(target: Function, argumentsList: ArrayLike<any>): any
 
-declare
-function Reflect$defineProperty(target: any, propertyKey: PropertyKey, attributes: PropertyDescriptor): boolean
+declare function Reflect$defineProperty(target: any, propertyKey: PropertyKey, attributes: PropertyDescriptor): boolean
 
-declare
-function Reflect$deleteProperty(target: any, propertyKey: PropertyKey): boolean
+declare function Reflect$deleteProperty(target: any, propertyKey: PropertyKey): boolean
 
-declare
-function Reflect$enumerate(target: any): IterableIteratorShim<any >
+declare function Reflect$enumerate(target: any): IterableIteratorShim<any >
 
-    declare
-function Reflect$get(target: any, propertyKey: PropertyKey, receiver?: any): any
+    declare function Reflect$get(target: any, propertyKey: PropertyKey, receiver?: any): any
 
-declare
-function Reflect$getOwnPropertyDescriptor(target: any, propertyKey: PropertyKey): PropertyDescriptor
+declare function Reflect$getOwnPropertyDescriptor(target: any, propertyKey: PropertyKey): PropertyDescriptor
 
-declare
-function Reflect$getPrototypeOf(target: any): any
+declare function Reflect$getPrototypeOf(target: any): any
 
-declare
-function Reflect$has(target: any, propertyKey: PropertyKey): boolean
+declare function Reflect$has(target: any, propertyKey: PropertyKey): boolean
 
-declare
-function Reflect$isExtensible(target: any): boolean
+declare function Reflect$isExtensible(target: any): boolean
 
-declare
-function Reflect$ownKeys(target: any): Array<PropertyKey >
+declare function Reflect$ownKeys(target: any): Array<PropertyKey >
 
-    declare
-function Reflect$preventExtensions(target: any): boolean
+    declare function Reflect$preventExtensions(target: any): boolean
 
-declare
-function Reflect$set(target: any, propertyKey: PropertyKey, value: any, receiver?: any): boolean
+declare function Reflect$set(target: any, propertyKey: PropertyKey, value: any, receiver?: any): boolean
 
-declare
-function Reflect$setPrototypeOf(target: any, proto: any): booleandeclare module 'es6-shim' {
+declare function Reflect$setPrototypeOf(target: any, proto: any): booleandeclare module 'es6-shim' {
     declare var String: StringConstructor;
     declare var Array: ArrayConstructor;
     declare var Number: NumberConstructor;

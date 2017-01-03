@@ -430,8 +430,7 @@ declare interface FirebaseStatic {
             TIMESTAMP: any
         }
 }
-declare
-var Firebase: FirebaseStatic;
+declare var Firebase: FirebaseStatic;
 declare module 'firebase' {
     declare module.exports: typeof Firebase
 }

@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$JsDiff: {
+declare var npm$namespace$JsDiff: {
     diffChars: typeof JsDiff$diffChars,
     diffWords: typeof JsDiff$diffWords,
     diffWordsWithSpace: typeof JsDiff$diffWordsWithSpace,
@@ -71,26 +70,19 @@ declare class Diff {
     tokenize(value: string): any
 }
 
-declare
-function JsDiff$diffChars(oldStr: string, newStr: string): JsDiff$IDiffResult[]
+declare function JsDiff$diffChars(oldStr: string, newStr: string): JsDiff$IDiffResult[]
 
-declare
-function JsDiff$diffWords(oldStr: string, newStr: string): JsDiff$IDiffResult[]
+declare function JsDiff$diffWords(oldStr: string, newStr: string): JsDiff$IDiffResult[]
 
-declare
-function JsDiff$diffWordsWithSpace(oldStr: string, newStr: string): JsDiff$IDiffResult[]
+declare function JsDiff$diffWordsWithSpace(oldStr: string, newStr: string): JsDiff$IDiffResult[]
 
-declare
-function JsDiff$diffJson(oldObj: Object, newObj: Object): JsDiff$IDiffResult[]
+declare function JsDiff$diffJson(oldObj: Object, newObj: Object): JsDiff$IDiffResult[]
 
-declare
-function JsDiff$diffLines(oldStr: string, newStr: string): JsDiff$IDiffResult[]
+declare function JsDiff$diffLines(oldStr: string, newStr: string): JsDiff$IDiffResult[]
 
-declare
-function JsDiff$diffCss(oldStr: string, newStr: string): JsDiff$IDiffResult[]
+declare function JsDiff$diffCss(oldStr: string, newStr: string): JsDiff$IDiffResult[]
 
-declare
-function JsDiff$createPatch(
+declare function JsDiff$createPatch(
     fileName: string,
     oldStr: string,
     newStr: string,
@@ -100,8 +92,7 @@ function JsDiff$createPatch(
         context: number
     }): string
 
-declare
-function JsDiff$createTwoFilesPatch(
+declare function JsDiff$createTwoFilesPatch(
     oldFileName: string,
     newFileName: string,
     oldStr: string,
@@ -112,8 +103,7 @@ function JsDiff$createTwoFilesPatch(
         context: number
     }): string
 
-declare
-function JsDiff$structuredPatch(
+declare function JsDiff$structuredPatch(
     oldFileName: string,
     newFileName: string,
     oldStr: string,
@@ -124,11 +114,9 @@ function JsDiff$structuredPatch(
         context: number
     }): JsDiff$IUniDiff
 
-declare
-function JsDiff$applyPatch(oldStr: string, uniDiff: string | JsDiff$IUniDiff | JsDiff$IUniDiff[]): string
+declare function JsDiff$applyPatch(oldStr: string, uniDiff: string | JsDiff$IUniDiff | JsDiff$IUniDiff[]): string
 
-declare
-function JsDiff$applyPatches(
+declare function JsDiff$applyPatches(
     uniDiff: JsDiff$IUniDiff[],
     options: {
         loadFile: (index: number, callback: (err: Error, data: string) => void) => void,
@@ -136,16 +124,13 @@ function JsDiff$applyPatches(
         complete: (err?: Error) => void
     }): void
 
-declare
-function JsDiff$parsePatch(diffStr: string, options?: {
+declare function JsDiff$parsePatch(diffStr: string, options?: {
     strict: boolean
 }): JsDiff$IUniDiff[]
 
-declare
-function JsDiff$convertChangesToXML(changes: JsDiff$IDiffResult[]): string
+declare function JsDiff$convertChangesToXML(changes: JsDiff$IDiffResult[]): string
 
-declare
-function JsDiff$convertChangesToDMP(changes: JsDiff$IDiffResult[]): {
+declare function JsDiff$convertChangesToDMP(changes: JsDiff$IDiffResult[]): {
     0: number,
     1: string
 }[] declare module 'diff' {

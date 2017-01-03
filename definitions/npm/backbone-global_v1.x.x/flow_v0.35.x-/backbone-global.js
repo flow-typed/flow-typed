@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$Backbone: {
+declare var npm$namespace$Backbone: {
     sync: typeof Backbone$sync,
     ajax: typeof Backbone$ajax,
     noConflict: typeof Backbone$noConflict,
@@ -323,8 +322,7 @@ declare class Router mixins Events {
     execute(callback: Function, args: any[], name: string): void
 }
 
-declare
-var history: Backbone$History;
+declare var history: Backbone$History;
 
 declare class History mixins Events {
     handlers: any[];
@@ -394,23 +392,17 @@ declare class View<TModel>mixins Events {
     _ensureElement(): void
 }
 
-declare
-function Backbone$sync(method: string, model: Backbone$Model, options?: JQueryAjaxSettings): any
+declare function Backbone$sync(method: string, model: Backbone$Model, options?: JQueryAjaxSettings): any
 
-declare
-function Backbone$ajax(options?: JQueryAjaxSettings): JQueryXHR
+declare function Backbone$ajax(options?: JQueryAjaxSettings): JQueryXHR
 
-declare
-var emulateHTTP: boolean;
+declare var emulateHTTP: boolean;
 
-declare
-var emulateJSON: boolean;
+declare var emulateJSON: boolean;
 
-declare
-function Backbone$noConflict(): typeof Backbone
+declare function Backbone$noConflict(): typeof Backbone
 
-declare
-var $: JQueryStatic;
+declare var $: JQueryStatic;
 declare module 'backbone' {
     declare module.exports: typeof Backbone
 }

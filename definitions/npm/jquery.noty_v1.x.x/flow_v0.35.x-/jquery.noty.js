@@ -93,5 +93,4 @@ declare interface JQueryStatic {
 declare interface JQuery {
     noty: Noty
 }
-declare
-var noty: Noty;
+declare var noty: Noty;

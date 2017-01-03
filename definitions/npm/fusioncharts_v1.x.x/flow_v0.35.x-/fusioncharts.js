@@ -185,5 +185,4 @@ declare module 'FusionCharts' {
     declare var FusionCharts: FusionCharts$FusionChartStatic;
     declare module.exports: typeof FusionCharts
 }
-declare
-var FusionCharts: FusionCharts$FusionChartStatic;
+declare var FusionCharts: FusionCharts$FusionChartStatic;

@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var expect: Expectations$IExpectations;
+declare var expect: Expectations$IExpectations;
 declare interface Expectations$IExpectations {
     (value: any): Expectations$Expect,
     addAssertion(name: string, matcher: Function): void

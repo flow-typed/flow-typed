@@ -53,9 +53,6 @@ declare interface chunkedDc$Standalone {
     Chunker: chunkedDc$ChunkerStatic,
         Unchunker: chunkedDc$UnchunkerStatic
 }
-declare
-var chunkedDc: chunkedDc$Standalone;
-declare
-var Chunker: chunkedDc$ChunkerStatic;
-declare
-var Unchunker: chunkedDc$UnchunkerStatic;
+declare var chunkedDc: chunkedDc$Standalone;
+declare var Chunker: chunkedDc$ChunkerStatic;
+declare var Unchunker: chunkedDc$UnchunkerStatic;

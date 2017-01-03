@@ -43,8 +43,7 @@ declare interface Chai$Assertion {
         notJsonOf(expected: any, message?: string): Chai$Assertion
 }
 
-declare
-export interface Chai$Assert {
+declare export interface Chai$Assert {
 
     /**
      * Compare object attributes and values rather than checking to see if

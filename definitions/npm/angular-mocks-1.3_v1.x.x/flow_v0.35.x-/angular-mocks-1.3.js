@@ -308,5 +308,4 @@ declare module 'angular' {
     }
 
 }
-declare
-var inject: angular.IInjectStatic;
+declare var inject: angular.IInjectStatic;

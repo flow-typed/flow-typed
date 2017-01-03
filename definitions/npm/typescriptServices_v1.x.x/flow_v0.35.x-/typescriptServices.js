@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$ts: {
+declare var npm$namespace$ts: {
     displayPartsToString: typeof ts$displayPartsToString,
     getDefaultCompilerOptions: typeof ts$getDefaultCompilerOptions,
     transpileModule: typeof ts$transpileModule,
@@ -22,8 +21,7 @@ var npm$namespace$ts: {
     createClassifier: typeof ts$createClassifier,
     getDefaultLibFilePath: typeof ts$getDefaultLibFilePath,
 }
-declare
-var servicesVersion: string;
+declare var servicesVersion: string;
 
 declare type ts$Node = {
     kind: SyntaxKind,
@@ -115,12 +113,10 @@ declare interface ts$IScriptSnapshot {
 }
 
 
-declare
-var npm$namespace$ScriptSnapshot: {
+declare var npm$namespace$ScriptSnapshot: {
     fromString: typeof ScriptSnapshot$fromString,
 }
-declare
-function ScriptSnapshot$fromString(text: string): ts$IScriptSnapshot
+declare function ScriptSnapshot$fromString(text: string): ts$IScriptSnapshot
 
 declare interface ts$PreProcessedFileInfo {
     referencedFiles: ts$FileReference[],
@@ -285,17 +281,13 @@ declare interface ts$DocumentHighlights {
         highlightSpans: ts$HighlightSpan[]
 }
 
-declare
-var none: string;
+declare var none: string;
 
-declare
-var definition: string;
+declare var definition: string;
 
-declare
-var reference: string;
+declare var reference: string;
 
-declare
-var writtenReference: string;
+declare var writtenReference: string;
 
 declare interface ts$HighlightSpan {
     fileName?: string,
@@ -572,116 +564,79 @@ declare interface ts$DocumentRegistry {
         reportStats(): string
 }
 
-declare
-var unknown: string;
+declare var unknown: string;
 
-declare
-var warning: string;
+declare var warning: string;
 
-declare
-var keyword: string;
+declare var keyword: string;
 
-declare
-var scriptElement: string;
+declare var scriptElement: string;
 
-declare
-var moduleElement: string;
+declare var moduleElement: string;
 
-declare
-var classElement: string;
+declare var classElement: string;
 
-declare
-var localClassElement: string;
+declare var localClassElement: string;
 
-declare
-var interfaceElement: string;
+declare var interfaceElement: string;
 
-declare
-var typeElement: string;
+declare var typeElement: string;
 
-declare
-var enumElement: string;
+declare var enumElement: string;
 
-declare
-var variableElement: string;
+declare var variableElement: string;
 
-declare
-var localVariableElement: string;
+declare var localVariableElement: string;
 
-declare
-var functionElement: string;
+declare var functionElement: string;
 
-declare
-var localFunctionElement: string;
+declare var localFunctionElement: string;
 
-declare
-var memberFunctionElement: string;
+declare var memberFunctionElement: string;
 
-declare
-var memberGetAccessorElement: string;
+declare var memberGetAccessorElement: string;
 
-declare
-var memberSetAccessorElement: string;
+declare var memberSetAccessorElement: string;
 
-declare
-var memberVariableElement: string;
+declare var memberVariableElement: string;
 
-declare
-var constructorImplementationElement: string;
+declare var constructorImplementationElement: string;
 
-declare
-var callSignatureElement: string;
+declare var callSignatureElement: string;
 
-declare
-var indexSignatureElement: string;
+declare var indexSignatureElement: string;
 
-declare
-var constructSignatureElement: string;
+declare var constructSignatureElement: string;
 
-declare
-var parameterElement: string;
+declare var parameterElement: string;
 
-declare
-var typeParameterElement: string;
+declare var typeParameterElement: string;
 
-declare
-var primitiveType: string;
+declare var primitiveType: string;
 
-declare
-var label: string;
+declare var label: string;
 
-declare
-var alias: string;
+declare var alias: string;
 
-declare
-var constElement: string;
+declare var constElement: string;
 
-declare
-var letElement: string;
+declare var letElement: string;
 
-declare
-var none: string;
+declare var none: string;
 
-declare
-var publicMemberModifier: string;
+declare var publicMemberModifier: string;
 
-declare
-var privateMemberModifier: string;
+declare var privateMemberModifier: string;
 
-declare
-var protectedMemberModifier: string;
+declare var protectedMemberModifier: string;
 
-declare
-var exportedModifier: string;
+declare var exportedModifier: string;
 
-declare
-var ambientModifier: string;
+declare var ambientModifier: string;
 
-declare
-var staticModifier: string;
+declare var staticModifier: string;
 
-declare
-var abstractModifier: string;
+declare var abstractModifier: string;
 
 declare class ClassificationTypeNames {
     comment: string;
@@ -708,11 +663,9 @@ declare type ts$DisplayPartsSymbolWriter = {
 } & ts$SymbolWriter
 
 
-declare
-function ts$displayPartsToString(displayParts: ts$SymbolDisplayPart[]): string
+declare function ts$displayPartsToString(displayParts: ts$SymbolDisplayPart[]): string
 
-declare
-function ts$getDefaultCompilerOptions(): ts$CompilerOptions
+declare function ts$getDefaultCompilerOptions(): ts$CompilerOptions
 
 declare interface ts$TranspileOptions {
     compilerOptions?: ts$CompilerOptions,
@@ -728,52 +681,42 @@ declare interface ts$TranspileOutput {
         sourceMapText?: string
 }
 
-declare
-function ts$transpileModule(input: string, transpileOptions: ts$TranspileOptions): ts$TranspileOutput
+declare function ts$transpileModule(input: string, transpileOptions: ts$TranspileOptions): ts$TranspileOutput
 
-declare
-function ts$transpile(
+declare function ts$transpile(
     input: string,
     compilerOptions?: ts$CompilerOptions,
     fileName?: string,
     diagnostics?: ts$Diagnostic[],
     moduleName?: string): string
 
-declare
-function ts$createLanguageServiceSourceFile(
+declare function ts$createLanguageServiceSourceFile(
     fileName: string,
     scriptSnapshot: ts$IScriptSnapshot,
     scriptTarget: ScriptTarget,
     version: string,
     setNodeParents: boolean): ts$SourceFile
 
-declare
-var disableIncrementalParsing: boolean;
+declare var disableIncrementalParsing: boolean;
 
-declare
-function ts$updateLanguageServiceSourceFile(
+declare function ts$updateLanguageServiceSourceFile(
     sourceFile: ts$SourceFile,
     scriptSnapshot: ts$IScriptSnapshot,
     version: string,
     textChangeRange: ts$TextChangeRange,
     aggressiveChecks?: boolean): ts$SourceFile
 
-declare
-function ts$createGetCanonicalFileName(useCaseSensitivefileNames: boolean): (fileName: string) => string
+declare function ts$createGetCanonicalFileName(useCaseSensitivefileNames: boolean): (fileName: string) => string
 
-declare
-function ts$createDocumentRegistry(useCaseSensitiveFileNames?: boolean): ts$DocumentRegistry
+declare function ts$createDocumentRegistry(useCaseSensitiveFileNames?: boolean): ts$DocumentRegistry
 
-declare
-function ts$preProcessFile(sourceText: string, readImportFiles?: boolean): ts$PreProcessedFileInfo
+declare function ts$preProcessFile(sourceText: string, readImportFiles?: boolean): ts$PreProcessedFileInfo
 
-declare
-function ts$createLanguageService(
+declare function ts$createLanguageService(
     host: ts$LanguageServiceHost,
     documentRegistry?: ts$DocumentRegistry): ts$LanguageService
 
-declare
-function ts$createClassifier(): ts$Classifier
+declare function ts$createClassifier(): ts$Classifier
 
 
 /**
@@ -781,5 +724,4 @@ function ts$createClassifier(): ts$Classifier
  * node package.
 The functionality is not supported if the ts module is consumed outside of a node module.
 */
-declare
-function ts$getDefaultLibFilePath(options: ts$CompilerOptions): string
+declare function ts$getDefaultLibFilePath(options: ts$CompilerOptions): string

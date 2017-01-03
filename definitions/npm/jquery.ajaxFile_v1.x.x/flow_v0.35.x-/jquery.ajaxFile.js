@@ -90,8 +90,7 @@ declare interface JQueryAjaxFile$IJQueryOption {
 declare interface JQueryAjaxFile$IAjaxFileJQueryExtension {
     ajaxWithFile<T>(jqueryOption: JQueryAjaxFile$IJQueryOption): JQueryDeferred<T >
 }
-declare
-var AjaxFile: JQueryAjaxFile$IAjaxFileStatic;
+declare var AjaxFile: JQueryAjaxFile$IAjaxFileStatic;
 declare module 'ajaxfile' {
     declare module.exports: typeof AjaxFile
 }

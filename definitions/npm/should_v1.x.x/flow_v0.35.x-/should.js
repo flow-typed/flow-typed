@@ -149,10 +149,8 @@ declare type Internal = {
     ifError(value: any): void,
     inspect(value: any, obj: any): any
 } & ShouldInternal
-declare
-var should: Internal;
-declare
-var Should: Internal;
+declare var should: Internal;
+declare var Should: Internal;
 declare interface Window {
     Should: Internal
 }

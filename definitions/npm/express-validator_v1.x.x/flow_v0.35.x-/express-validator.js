@@ -10,8 +10,7 @@ declare type Express$Request = {}
 declare module 'express-validator' {
     declare module.exports: typeof ExpressValidator
 }
-declare
-export interface ExpressValidator$ValidationError {
+declare export interface ExpressValidator$ValidationError {
     msg: string,
         param: string
 }
@@ -33,8 +32,7 @@ declare interface ExpressValidator$Dictionary<T>{
     [key: string]: T
 }
 
-declare
-export interface ExpressValidator$RequestValidation {
+declare export interface ExpressValidator$RequestValidation {
     assert: ExpressValidator$ValidatorExtraFunction,
         validate: ExpressValidator$ValidatorExtraFunction,
         check: ExpressValidator$ValidatorExtraFunction,
@@ -58,8 +56,7 @@ export interface ExpressValidator$RequestValidation {
         asyncValidationErrors<T>(mapped?: boolean): Promise<T[] | ExpressValidator$Dictionary<T >>
 }
 
-declare
-export interface ExpressValidator$Validator {
+declare export interface ExpressValidator$Validator {
 
     /**
      * Alias for regex()

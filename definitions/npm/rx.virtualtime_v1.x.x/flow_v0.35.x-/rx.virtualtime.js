@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type Rx$VirtualTimeScheduler<TAbsolute, TRelative>= {
+declare export type Rx$VirtualTimeScheduler<TAbsolute, TRelative>= {
     advanceBy(time: TRelative): void,
     advanceTo(time: TAbsolute): void,
     scheduleAbsolute(dueTime: TAbsolute, action: () => void): IDisposable,
@@ -31,12 +30,10 @@ export type Rx$VirtualTimeScheduler<TAbsolute, TRelative>= {
 } & Scheduler
 
 
-declare
-export type Rx$HistoricalScheduler = {} & Rx$VirtualTimeScheduler
+declare export type Rx$HistoricalScheduler = {} & Rx$VirtualTimeScheduler
 
 
-declare
-export var HistoricalScheduler: {
+declare export var HistoricalScheduler: {
     new(
         initialClock: number,
         comparer: (first: number, second: number) => number): Rx$HistoricalScheduler

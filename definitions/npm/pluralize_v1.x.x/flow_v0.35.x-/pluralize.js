@@ -58,5 +58,4 @@ declare interface PluralizeStatic {
 declare module 'pluralize' {
     declare module.exports: typeof pluralize
 }
-declare
-var pluralize: PluralizeStatic;
+declare var pluralize: PluralizeStatic;

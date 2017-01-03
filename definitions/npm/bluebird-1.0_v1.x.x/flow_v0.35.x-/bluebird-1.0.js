@@ -639,28 +639,22 @@ declare class Promise<R>mixins Promise$Thenable<R>{
         values: R[],
         filterer: (item: R, index: number, arrayLength: number) => boolean): Promise<R[] >
 }
-declare
-export type Promise$RangeError = {} & Error
+declare export type Promise$RangeError = {} & Error
 
 
-declare
-export type Promise$CancellationError = {} & Error
+declare export type Promise$CancellationError = {} & Error
 
 
-declare
-export type Promise$TimeoutError = {} & Error
+declare export type Promise$TimeoutError = {} & Error
 
 
-declare
-export type Promise$TypeError = {} & Error
+declare export type Promise$TypeError = {} & Error
 
 
-declare
-export type Promise$RejectionError = {} & Error
+declare export type Promise$RejectionError = {} & Error
 
 
-declare
-export interface Promise$Thenable<R>{
+declare export interface Promise$Thenable<R>{
     then<U>(
         onFulfilled: (value: R) => Promise$Thenable<U>,
         onRejected: (error: any) => Promise$Thenable<U>): Promise$Thenable<U>,
@@ -675,8 +669,7 @@ export interface Promise$Thenable<R>{
         onRejected?: (error: any) => U): Promise$Thenable<U >
 }
 
-declare
-export interface Promise$Resolver<R>{
+declare export interface Promise$Resolver<R>{
 
     /**
      * Returns a reference to the controlled promise that can be passed to clients.
@@ -707,8 +700,7 @@ export interface Promise$Resolver<R>{
     callback: (err: any, value: R, ...values: R[]) => void
 }
 
-declare
-export interface Promise$Inspection<R>{
+declare export interface Promise$Inspection<R>{
 
     /**
      * See if the underlying promise was fulfilled at the creation time of this inspection object.

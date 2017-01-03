@@ -424,8 +424,7 @@ declare interface PDFJSStatic {
             progressCallback?: (progressData: PDFProgressData) => void): PDFPromise<PDFDocumentProxy>,
         PDFViewer(params: PDFViewerParams): void
 }
-declare
-var PDFJS: PDFJSStatic;
+declare var PDFJS: PDFJSStatic;
 declare module 'PDFJS' {
     declare module.exports: typeof PDFJS
 }

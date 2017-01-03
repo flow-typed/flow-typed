@@ -40,5 +40,4 @@ declare interface PlotlyStatic {
 declare module 'plotly.js' {
     declare module.exports: typeof plotly
 }
-declare
-var plotly: PlotlyStatic;
+declare var plotly: PlotlyStatic;

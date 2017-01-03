@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Elm: Elm;
+declare var Elm: Elm;
 declare interface Elm {
     embed<P>(
             elmModule: ElmModule<P>,

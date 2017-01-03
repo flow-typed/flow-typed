@@ -6,11 +6,9 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export var Timeline: TL$ITimeline;
+declare export var Timeline: TL$ITimeline;
 
-declare
-export type TL$ITimeline = {
+declare export type TL$ITimeline = {
     new(containerId: string, data: string | TL$ITimelineConfig): TL$ITimeline,
     new(
         containerId: string,
@@ -41,8 +39,7 @@ export type TL$ITimeline = {
 } & TL$ITimelineEvents
 
 
-declare
-export interface TL$ITimelineEvents {
+declare export interface TL$ITimelineEvents {
     addEventListener(type: string, fn: () => void, context?: any): TL$ITimelineEvents,
         hasEventListeners(type: string): boolean,
         removeEventListener(type: string, fn: () => void, context?: any): TL$ITimelineEvents,
@@ -52,21 +49,18 @@ export interface TL$ITimelineEvents {
         fire(type: string, data?: any): TL$ITimelineEvents
 }
 
-declare
-export interface TL$ITimelineSlide {
+declare export interface TL$ITimelineSlide {
     data: TL$ITimelineSlideData
 }
 
-declare
-export interface TL$ITimelineConfig {
+declare export interface TL$ITimelineConfig {
     events: TL$ITimelineSlideData[],
         title?: TL$ITimelineSlideData,
         eras?: TL$ITimelineEra[],
         scale?: "human" | "cosmological"
 }
 
-declare
-export interface TL$ITimelineSlideData {
+declare export interface TL$ITimelineSlideData {
     start_date?: TL$ITimelineDate,
         end_date?: TL$ITimelineDate,
         text?: TL$ITimelineText,
@@ -81,15 +75,13 @@ export interface TL$ITimelineSlideData {
         unique_id?: string
 }
 
-declare
-export interface TL$ITimelineEra {
+declare export interface TL$ITimelineEra {
     start_date: TL$ITimelineDate,
         end_date: TL$ITimelineDate,
         text?: TL$ITimelineText
 }
 
-declare
-export interface TL$ITimelineDate {
+declare export interface TL$ITimelineDate {
     year: number,
         month?: number,
         day?: number,
@@ -100,22 +92,19 @@ export interface TL$ITimelineDate {
         display_date?: string
 }
 
-declare
-export interface TL$ITimelineText {
+declare export interface TL$ITimelineText {
     headline?: string,
         text?: string
 }
 
-declare
-export interface TL$ITimelineMedia {
+declare export interface TL$ITimelineMedia {
     url: string,
         caption?: string,
         credit?: string,
         thumbnail?: string
 }
 
-declare
-export interface TL$ITimelineOptions {
+declare export interface TL$ITimelineOptions {
     debug?: boolean,
         height?: number,
         width?: number,

@@ -6,12 +6,10 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var ClientMessages: {
+declare var ClientMessages: {
     [name: string]: string
 };
-declare
-var npm$namespace$WLAuthorizationManager: {
+declare var npm$namespace$WLAuthorizationManager: {
     addCachedAuthorizationHeader: typeof WLAuthorizationManager$addCachedAuthorizationHeader,
     getAppIdentity: typeof WLAuthorizationManager$getAppIdentity,
     getAuthorizationScope: typeof WLAuthorizationManager$getAuthorizationScope,
@@ -22,63 +20,52 @@ var npm$namespace$WLAuthorizationManager: {
     obtainAuthorizationHeader: typeof WLAuthorizationManager$obtainAuthorizationHeader,
     setAuthorizationPersistencePolicy: typeof WLAuthorizationManager$setAuthorizationPersistencePolicy,
 }
-declare
-var ALWAYS: string;
+declare var ALWAYS: string;
 
-declare
-var NEVER: string;
+declare var NEVER: string;
 
 declare interface WLAuthorizationManager$RequestObject {
     setRequestHeader: (header: string, value: string) => void
 }
 
-declare
-function WLAuthorizationManager$addCachedAuthorizationHeader(
+declare function WLAuthorizationManager$addCachedAuthorizationHeader(
     request: WLAuthorizationManager$RequestObject): JQueryDeferred<WLAuthorizationManager$RequestObject >
 
-    declare
-function WLAuthorizationManager$getAppIdentity(): JQueryDeferred<any >
+    declare function WLAuthorizationManager$getAppIdentity(): JQueryDeferred<any >
 
-    declare
-function WLAuthorizationManager$getAuthorizationScope(responseAuthenticationHeader: string): string
+    declare function WLAuthorizationManager$getAuthorizationScope(responseAuthenticationHeader: string): string
 
 
 /**
  * TODO: Set Promise types. Should be something like: JQueryDeferred<data, error>()
  */
-declare
-function WLAuthorizationManager$getCachedAuthorizationHeader(): JQueryDeferred<any >
+declare function WLAuthorizationManager$getCachedAuthorizationHeader(): JQueryDeferred<any >
 
 
     /**
      * TODO: Set Promise types. Should be something like: JQueryDeferred<data, error>()
      */
-    declare
-function WLAuthorizationManager$getDeviceIdentity(): JQueryDeferred<any >
+    declare function WLAuthorizationManager$getDeviceIdentity(): JQueryDeferred<any >
 
 
     /**
      * TODO: Set Promise types. Should be something like: JQueryDeferred<data, error>()
      */
-    declare
-function WLAuthorizationManager$getUserIdentity(): JQueryDeferred<any >
+    declare function WLAuthorizationManager$getUserIdentity(): JQueryDeferred<any >
 
-    declare
-function WLAuthorizationManager$isAuthorizationRequired(responseStatus: number, responseAuthenticationHeader: string): boolean
+    declare function WLAuthorizationManager$isAuthorizationRequired(responseStatus: number, responseAuthenticationHeader: string): boolean
 
 
 /**
  * TODO: Set Promise types. Should be something like: JQueryDeferred<header, error>()
  */
-declare
-function WLAuthorizationManager$obtainAuthorizationHeader(scope: string): JQueryDeferred<any >
+declare function WLAuthorizationManager$obtainAuthorizationHeader(scope: string): JQueryDeferred<any >
 
 
     /**
      * See WLAuthorizarionManager.NEVER and WLAuthorizarionManager.ALWAYS
      */
-    declare
-function WLAuthorizationManager$setAuthorizationPersistencePolicy(authorizationPersistencePolicy: string): voiddeclare class WLResourceRequest {
+    declare function WLAuthorizationManager$setAuthorizationPersistencePolicy(authorizationPersistencePolicy: string): voiddeclare class WLResourceRequest {
     constructor(url: string, method: string, timeout?: number): this;
     addHeader(name: string, value: string | number | boolean): void;
     getHeader(name: string): string;

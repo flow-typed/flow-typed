@@ -234,5 +234,4 @@ declare module 'Drive' {
             getUserLoginId(): string
     }
 }
-declare
-var DriveApp: undefined.DriveApp;
+declare var DriveApp: undefined.DriveApp;

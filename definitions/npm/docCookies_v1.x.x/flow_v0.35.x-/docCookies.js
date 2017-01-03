@@ -82,5 +82,4 @@ declare interface docCookies {
          */
         keys(): string[]
 }
-declare
-var docCookies: docCookies;
+declare var docCookies: docCookies;

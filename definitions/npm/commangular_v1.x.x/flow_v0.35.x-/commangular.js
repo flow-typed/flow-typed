@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var commangular: commangular.ICommAngularStatic;
+declare var commangular: commangular.ICommAngularStatic;
 declare module 'commangular' {
     declare interface ICommAngularStatic {
 

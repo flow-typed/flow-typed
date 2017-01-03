@@ -132,8 +132,7 @@ declare interface HystrixJS$CircuitFactory {
 declare interface HystrixJS$HystrixSSEStream {
     toObservable(): Rx.Observable<any >
 }
-declare
-var hystrixjs: {
+declare var hystrixjs: {
     commandFactory: HystrixJS$CommandFactory,
     metricsFactory: HystrixJS$MetricsFactory,
     circuitFactory: HystrixJS$CircuitFactory,

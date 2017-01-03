@@ -41,8 +41,7 @@ declare interface Numeral {
         divide(value: any): Numeral,
         difference(value: any): number
 }
-declare
-var numeral: Numeral;
+declare var numeral: Numeral;
 declare module 'numeral' {
     declare module.exports: typeof numeral
 }

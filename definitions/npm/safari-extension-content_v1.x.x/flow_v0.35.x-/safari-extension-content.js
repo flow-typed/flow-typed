@@ -9,11 +9,9 @@
 declare interface Window {
     safari: typeof safari
 }
-declare
-export var extension: SafariContentExtension;
+declare export var extension: SafariContentExtension;
 
-declare
-export var self: SafariContentWebPage;
+declare export var self: SafariContentWebPage;
 declare interface SafariEvent {
 
     /**

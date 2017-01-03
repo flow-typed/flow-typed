@@ -35,8 +35,7 @@ declare interface Each {
 declare interface EachStatic {
     (array: any[]): Each
 }
-declare
-var each: EachStatic;
+declare var each: EachStatic;
 declare module 'each' {
     declare module.exports: typeof each
 }

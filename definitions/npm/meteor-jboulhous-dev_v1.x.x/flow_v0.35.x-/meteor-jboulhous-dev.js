@@ -6,5 +6,4 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var isDevelopment: boolean;
+declare var isDevelopment: boolean;

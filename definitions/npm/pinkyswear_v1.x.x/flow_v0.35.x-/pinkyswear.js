@@ -227,5 +227,4 @@ declare interface PinkySwearStatic {
          */
         (): PinkySwear$Promise
 }
-declare
-var pinkySwear: PinkySwearStatic;
+declare var pinkySwear: PinkySwearStatic;

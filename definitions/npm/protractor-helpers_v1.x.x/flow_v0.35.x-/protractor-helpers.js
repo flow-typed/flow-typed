@@ -16,9 +16,7 @@ declare interface protractor$IProtractorLocatorStrategy {
             optParentElement?: protractor$ElementFinder,
             optRootSelector?: string): webdriver.Locator
 }
-declare
-function $data(hook: string): protractor$ElementFinderdeclare
-function $$data(hook: string): protractor$ElementArrayFinderdeclare interface jasmine$Matchers {
+declare function $data(hook: string): protractor$ElementFinderdeclare function $$data(hook: string): protractor$ElementArrayFinderdeclare interface jasmine$Matchers {
     toBePresent(): boolean,
         toBeDisplayed(): boolean,
         toHaveCountOf(expectedCount: number): boolean,

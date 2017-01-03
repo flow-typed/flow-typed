@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var fbq: undefined.Event;
+declare var fbq: undefined.Event;
 declare module 'facebook' {
     declare module 'Pixel' {
         declare interface Event {

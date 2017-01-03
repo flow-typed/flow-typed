@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface JQueryTinyScrollbar$JQueryTinyScrollbarOptions {
+declare export interface JQueryTinyScrollbar$JQueryTinyScrollbarOptions {
 
     /**
      * Enable mobile invert style scrolling. (default: false)

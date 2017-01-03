@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$FalcorJsonGraph: {
+declare var npm$namespace$FalcorJsonGraph: {
         ref: typeof FalcorJsonGraph$ref,
         atom: typeof FalcorJsonGraph$atom,
         error: typeof FalcorJsonGraph$error,
@@ -112,21 +111,16 @@ declare interface FalcorJsonGraph$Sentinel {
     $expires?: number
 }
 
-declare
-function FalcorJsonGraph$ref(
+declare function FalcorJsonGraph$ref(
     path: string | FalcorJsonGraph$PathSet,
     props?: FalcorJsonGraph$Sentinel): FalcorJsonGraph$Reference
 
-declare
-function FalcorJsonGraph$atom(value: any, props?: FalcorJsonGraph$Sentinel): FalcorJsonGraph$Atom
+declare function FalcorJsonGraph$atom(value: any, props?: FalcorJsonGraph$Sentinel): FalcorJsonGraph$Atom
 
-declare
-function FalcorJsonGraph$error(errorValue: any, props?: FalcorJsonGraph$Sentinel): FalcorJsonGraph$Error
+declare function FalcorJsonGraph$error(errorValue: any, props?: FalcorJsonGraph$Sentinel): FalcorJsonGraph$Error
 
-declare
-function FalcorJsonGraph$pathValue(path: string | FalcorJsonGraph$PathSet, value: any): FalcorJsonGraph$PathValue
+declare function FalcorJsonGraph$pathValue(path: string | FalcorJsonGraph$PathSet, value: any): FalcorJsonGraph$PathValue
 
-declare
-function FalcorJsonGraph$pathInvalidation(path: string | FalcorJsonGraph$PathSet): FalcorJsonGraph$InvalidPathdeclare module 'falcor-json-graph' {
+declare function FalcorJsonGraph$pathInvalidation(path: string | FalcorJsonGraph$PathSet): FalcorJsonGraph$InvalidPathdeclare module 'falcor-json-graph' {
     declare module.exports: typeof FalcorJsonGraph
 }

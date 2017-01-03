@@ -28,5 +28,4 @@ declare interface SpinnerPlugin$SpinnerPluginStatic {
          */
         activityStop(successCallback?: () => void, failureCallback?: (error: string) => void): void
 }
-declare
-var SpinnerPlugin: SpinnerPlugin$SpinnerPluginStatic;
+declare var SpinnerPlugin: SpinnerPlugin$SpinnerPluginStatic;

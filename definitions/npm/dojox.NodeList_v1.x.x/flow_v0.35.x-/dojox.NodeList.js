@@ -26,8 +26,7 @@ declare interface NodeList$delegate {
     (array: any): void
 }
 
-declare
-var events: any[];
+declare var events: any[];
 
 
 /**

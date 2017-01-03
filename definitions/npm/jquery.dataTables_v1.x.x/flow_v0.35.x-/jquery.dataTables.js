@@ -9,8 +9,7 @@
 declare interface JQuery {
     DataTable(param?: DataTables$Settings): DataTables$DataTable
 }
-declare
-export type DataTables$DataTable = {
+declare export type DataTables$DataTable = {
 
     /**
      * Get the data for the whole table.
@@ -173,8 +172,7 @@ export type DataTables$DataTable = {
 } & DataTables$DataTableCore
 
 
-declare
-export type DataTables$DataTables = {
+declare export type DataTables$DataTables = {
     [index: number]: DataTables$DataTable
 } & DataTables$DataTableCore
 
@@ -1062,8 +1060,7 @@ declare type DataTables$TablesMethods = {
 } & DataTables$DataTableCore
 
 
-declare
-export interface DataTables$StaticFunctions {
+declare export interface DataTables$StaticFunctions {
 
     /**
      * Check is a table node is a DataTable or not
@@ -1097,8 +1094,7 @@ export interface DataTables$StaticFunctions {
         Api(selector: string | Node | Node[] | JQuery): DataTables$DataTable
 }
 
-declare
-export interface DataTables$StaticUtilFunctions {
+declare export interface DataTables$StaticUtilFunctions {
 
     /**
      * Escape special characters in a regular expression string. Since: 1.10.4
@@ -1127,8 +1123,7 @@ declare interface DataTables$ObjectTablesStatic {
         api: boolean
 }
 
-declare
-export interface DataTables$Settings {
+declare export interface DataTables$Settings {
 
     /**
      * Feature control DataTables' smart column width handling. Since: 1.10
@@ -1397,8 +1392,7 @@ export interface DataTables$Settings {
         language?: DataTables$LanguageSettings
 }
 
-declare
-export interface DataTables$AjaxDataRequest {
+declare export interface DataTables$AjaxDataRequest {
     draw: number,
         start: number,
         length: number,
@@ -1408,20 +1402,17 @@ export interface DataTables$AjaxDataRequest {
         search: DataTables$AjaxDataRequestSearch
 }
 
-declare
-export interface DataTables$AjaxDataRequestSearch {
+declare export interface DataTables$AjaxDataRequestSearch {
     value: string,
         regex: boolean
 }
 
-declare
-export interface DataTables$AjaxDataRequestOrder {
+declare export interface DataTables$AjaxDataRequestOrder {
     column: number,
         dir: string
 }
 
-declare
-export interface DataTables$AjaxDataRequestColumn {
+declare export interface DataTables$AjaxDataRequestColumn {
     data: string | number,
         name: string,
         searchable: boolean,
@@ -1429,8 +1420,7 @@ export interface DataTables$AjaxDataRequestColumn {
         search: DataTables$AjaxDataRequestSearch
 }
 
-declare
-export interface DataTables$AjaxData {
+declare export interface DataTables$AjaxData {
     draw: number,
         recordsTotal: number,
         recordsFiltered: number,
@@ -1460,8 +1450,7 @@ declare interface DataTables$FunctionAjaxData {
     (data: Object, settings: DataTables$Settings): string | Object
 }
 
-declare
-export interface DataTables$ColumnSettings {
+declare export interface DataTables$ColumnSettings {
 
     /**
      * Cell type to be created for a column. th/td Since: 1.10
@@ -1583,14 +1572,12 @@ declare interface DataTables$CellMetaSettings {
         settings: DataTables$Settings
 }
 
-declare
-export interface DataTables$RendererSettings {
+declare export interface DataTables$RendererSettings {
     header?: string,
         pageButton?: string
 }
 
-declare
-export interface DataTables$SearchSettings {
+declare export interface DataTables$SearchSettings {
 
     /**
      * Control case-sensitive filtering option. Since: 1.10
@@ -1702,8 +1689,7 @@ declare interface DataTables$ArrayStringNode {
     [index: string]: Node
 }
 
-declare
-export interface DataTables$SettingsLegacy {
+declare export interface DataTables$SettingsLegacy {
     ajax: any,
         oApi: any,
         oFeatures: DataTables$FeaturesLegacy,
@@ -1788,8 +1774,7 @@ export interface DataTables$SettingsLegacy {
         nScrollFoot: Node
 }
 
-declare
-export interface DataTables$FeaturesLegacy {
+declare export interface DataTables$FeaturesLegacy {
     bAutoWidth: boolean,
         bDeferRender: boolean,
         bFilter: boolean,
@@ -1803,8 +1788,7 @@ export interface DataTables$FeaturesLegacy {
         bStateSave: boolean
 }
 
-declare
-export interface DataTables$ScrollingLegacy {
+declare export interface DataTables$ScrollingLegacy {
     bAutoCss: boolean,
         bCollapse: boolean,
         bInfinite: boolean,
@@ -1814,8 +1798,7 @@ export interface DataTables$ScrollingLegacy {
         sY: string
 }
 
-declare
-export interface DataTables$RowLegacy {
+declare export interface DataTables$RowLegacy {
     nTr: Node,
         _aData: any,
         _aSortData: any[],
@@ -1823,8 +1806,7 @@ export interface DataTables$RowLegacy {
         _sRowStripe: string
 }
 
-declare
-export interface DataTables$ColumnLegacy {
+declare export interface DataTables$ColumnLegacy {
     aDataSort: any,
         asSorting: string[],
         bSearchable: boolean,
@@ -1851,13 +1833,11 @@ export interface DataTables$ColumnLegacy {
         sWidthOrig: string
 }
 
-declare
-export interface DataTables$CookieCallbackLegacy {
+declare export interface DataTables$CookieCallbackLegacy {
     (name: string, data: any, expires: string, path: string, cookie: string): void
 }
 
-declare
-export interface DataTables$LanguageLegacy {
+declare export interface DataTables$LanguageLegacy {
     oAria?: DataTables$LanguageAriaLegacy,
         oPaginate?: DataTables$LanguagePaginateLegacy,
         sEmptyTable?: string,
@@ -1874,14 +1854,12 @@ export interface DataTables$LanguageLegacy {
         sZeroRecords?: string
 }
 
-declare
-export interface DataTables$LanguageAriaLegacy {
+declare export interface DataTables$LanguageAriaLegacy {
     sSortAscending?: string,
         sSortDescending?: string
 }
 
-declare
-export interface DataTables$LanguagePaginateLegacy {
+declare export interface DataTables$LanguagePaginateLegacy {
     sFirst?: string,
         sLast?: string,
         sNext?: string,

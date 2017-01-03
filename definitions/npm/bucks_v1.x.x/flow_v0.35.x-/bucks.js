@@ -109,5 +109,4 @@ declare interface Bucks$TaskWithNext {
 declare interface Bucks$Task {
     (err?: Error, res?: any): any
 }
-declare
-var Bucks: Bucks$BucksStatic;
+declare var Bucks: Bucks$BucksStatic;

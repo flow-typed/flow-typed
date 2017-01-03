@@ -13,8 +13,7 @@
 This is not a plug and play UI, and will not. This is a minimal, lightweight, and fully extendable API to
 control editing of geometries. So you can easily build your own UI with your own needs and choices.
 */
-declare
-export interface L$EditableStatic {
+declare export interface L$EditableStatic {
     new(map: L$Map, options: L$EditOptions): L$Editable
 }
 
@@ -22,8 +21,7 @@ export interface L$EditableStatic {
 /**
  * Options to pass to L.Editable when instanciating.
  */
-declare
-export interface L$EditOptions {
+declare export interface L$EditOptions {
 
     /**
      * Class to be used when creating a new Polyline.
@@ -98,8 +96,7 @@ export interface L$EditOptions {
 This is not a plug and play UI, and will not. This is a minimal, lightweight, and fully extendable API to
 control editing of geometries. So you can easily build your own UI with your own needs and choices.
 */
-declare
-export type L$Editable = {
+declare export type L$Editable = {
 
     /**
      * Options to pass to L.Editable when instanciating.
@@ -132,8 +129,7 @@ export type L$Editable = {
     stopDrawing(): void
 }
 
-declare
-export var Editable: L$EditableStatic;
+declare export var Editable: L$EditableStatic;
 
 
 /**
@@ -141,8 +137,7 @@ export var Editable: L$EditableStatic;
  * 
 When editing is enabled, the editor is accessible on the instance with the editor property.
 */
-declare
-export interface L$EditableMixin {
+declare export interface L$EditableMixin {
 
     /**
      * Enable editing, by creating an editor if not existing, and then calling enable on it.
@@ -165,8 +160,7 @@ export interface L$EditableMixin {
         editEnabled(): boolean
 }
 
-declare
-export interface L$Map {
+declare export interface L$Map {
 
     /**
      * Whether to create a L.Editable instance at map init or not.
@@ -184,12 +178,10 @@ export interface L$Map {
         editTools: L$Editable
 }
 
-declare
-export type L$Polyline = {} & L$EditableMixin
+declare export type L$Polyline = {} & L$EditableMixin
 
 
-declare
-export interface Map$MapOptions {
+declare export interface Map$MapOptions {
 
     /**
      * Whether to create a L.Editable instance at map init or not.
@@ -207,8 +199,7 @@ export interface Map$MapOptions {
  * When editing a feature (marker, polyline…), an editor is attached to it. This editor basically knows
  * how to handle the edition.
  */
-declare
-export interface L$BaseEditor {
+declare export interface L$BaseEditor {
 
     /**
      * Set up the drawing tools for the feature to be editable.
@@ -226,8 +217,7 @@ export interface L$BaseEditor {
  * Inherit from L.Editable.BaseEditor.
  * Inherited by L.Editable.PolylineEditor and L.Editable.PolygonEditor.
  */
-declare
-export type L$PathEditor = {
+declare export type L$PathEditor = {
 
     /**
      * Rebuild edit elements (vertex, middlemarker, etc.).
@@ -240,8 +230,7 @@ export type L$PathEditor = {
 /**
  * Inherit from L.Editable.PathEditor.
  */
-declare
-export type L$PolylineEditor = {
+declare export type L$PolylineEditor = {
 
     /**
      * Set up drawing tools to continue the line forward.
@@ -259,8 +248,7 @@ export type L$PolylineEditor = {
 /**
  * Inherit from L.Editable.PathEditor.
  */
-declare
-export type L$PolygonEditor = {
+declare export type L$PolygonEditor = {
 
     /**
      * Set up drawing tools for creating a new hole on the polygon. If the latlng param is given, a first
@@ -274,13 +262,10 @@ export type L$PolygonEditor = {
 /**
  * Inherit from L.Editable.BaseEditor.
  */
-declare
-export type L$MarkerEditor = {} & L$BaseEditor
+declare export type L$MarkerEditor = {} & L$BaseEditor
 
 
-declare
-export type L$Marker = {} & L$EditableMixin & L$MarkerEditor
+declare export type L$Marker = {} & L$EditableMixin & L$MarkerEditor
 
 
-declare
-export type L$Polygon = {} & L$EditableMixin & L$PolygonEditor
+declare export type L$Polygon = {} & L$EditableMixin & L$PolygonEditor

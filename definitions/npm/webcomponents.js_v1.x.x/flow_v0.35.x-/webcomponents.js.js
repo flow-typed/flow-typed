@@ -6,27 +6,23 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface webcomponents$CustomElementInit {
+declare export interface webcomponents$CustomElementInit {
     prototype: HTMLElement,
         extends?: string
 }
 
-declare
-export interface webcomponents$CustomElementConstructor {
+declare export interface webcomponents$CustomElementConstructor {
     new(): HTMLElement
 }
 
-declare
-export interface webcomponents$CustomElementsPolyfill {
+declare export interface webcomponents$CustomElementsPolyfill {
     hasNative: boolean,
         flags: any,
         ready: boolean,
         useNative: boolean
 }
 
-declare
-export interface webcomponents$HTMLImportsPolyfill {
+declare export interface webcomponents$HTMLImportsPolyfill {
     IMPORT_LINK_TYPE: string,
         isIE: boolean,
         flags: any,
@@ -36,15 +32,13 @@ export interface webcomponents$HTMLImportsPolyfill {
         whenReady(callback: () => void): void
 }
 
-declare
-export type webcomponents$ShadowRootPolyfill = {
+declare export type webcomponents$ShadowRootPolyfill = {
     innerHTML: string,
     host: Element
 } & DocumentFragment
 
 
-declare
-export interface webcomponents$Polyfill {
+declare export interface webcomponents$Polyfill {
     flags: any
 }
 declare module 'webcomponents.js' {

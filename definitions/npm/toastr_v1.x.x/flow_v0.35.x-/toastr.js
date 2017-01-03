@@ -251,8 +251,7 @@ declare interface Toastr {
          */
         version: string
 }
-declare
-var toastr: Toastr;
+declare var toastr: Toastr;
 declare module 'toastr' {
     declare module.exports: typeof toastr
 }

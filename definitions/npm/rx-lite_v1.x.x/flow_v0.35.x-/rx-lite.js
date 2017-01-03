@@ -68,13 +68,11 @@ declare module 'helpers' {
 }
 
 
-declare
-export interface Rx$IDisposable {
+declare export interface Rx$IDisposable {
     dispose(): void
 }
 
-declare
-export class CompositeDisposable mixins IDisposable {
+declare export class CompositeDisposable mixins IDisposable {
     constructor(...disposables: Rx$IDisposable[]): this;
     constructor(disposables: Rx$IDisposable[]): this;
     isDisposed: boolean;
@@ -85,16 +83,14 @@ export class CompositeDisposable mixins IDisposable {
     toArray(): Rx$IDisposable[]
 }
 
-declare
-export class Disposable mixins IDisposable {
+declare export class Disposable mixins IDisposable {
     constructor(action: () => void): this;
     create(action: () => void): Rx$IDisposable;
     empty: Rx$IDisposable;
     dispose(): void
 }
 
-declare
-export class SingleAssignmentDisposable mixins IDisposable {
+declare export class SingleAssignmentDisposable mixins IDisposable {
     constructor(): this;
     isDisposed: boolean;
     current: Rx$IDisposable;
@@ -103,21 +99,18 @@ export class SingleAssignmentDisposable mixins IDisposable {
     setDisposable(value: Rx$IDisposable): void
 }
 
-declare
-export class SerialDisposable mixins SingleAssignmentDisposable {
+declare export class SerialDisposable mixins SingleAssignmentDisposable {
     constructor(): this
 }
 
-declare
-export class RefCountDisposable mixins IDisposable {
+declare export class RefCountDisposable mixins IDisposable {
     constructor(disposable: Rx$IDisposable): this;
     dispose(): void;
     isDisposed: boolean;
     getDisposable(): Rx$IDisposable
 }
 
-declare
-export interface Rx$IScheduler {
+declare export interface Rx$IScheduler {
     now(): number,
         isScheduler(value: any): boolean,
         schedule(action: () => void): Rx$IDisposable,
@@ -159,12 +152,10 @@ export interface Rx$IScheduler {
             action: (state: TState) => TState): Rx$IDisposable
 }
 
-declare
-export type Rx$Scheduler = {} & Rx$IScheduler
+declare export type Rx$Scheduler = {} & Rx$IScheduler
 
 
-declare
-export interface Rx$SchedulerStatic {
+declare export interface Rx$SchedulerStatic {
     new(
         now: () => number,
         schedule: (
@@ -185,16 +176,14 @@ export interface Rx$SchedulerStatic {
         timeout: Rx$IScheduler
 }
 
-declare
-export var Scheduler: Rx$SchedulerStatic;
+declare export var Scheduler: Rx$SchedulerStatic;
 
 declare type Rx$ICurrentThreadScheduler = {
     scheduleRequired(): boolean
 } & Rx$IScheduler
 
 
-declare
-export class Notification<T>{
+declare export class Notification<T>{
     accept(observer: Rx$IObserver<T>): void;
     accept<TResult>(
         onNext: (value: T) => TResult,
@@ -215,8 +204,7 @@ export class Notification<T>{
 /**
  * Promise A+
  */
-declare
-export interface Rx$IPromise<T>{
+declare export interface Rx$IPromise<T>{
     then<R>(
         onFulfilled: (value: T) => Rx$IPromise<R>,
         onRejected: (reason: any) => Rx$IPromise<R>): Rx$IPromise<R>,
@@ -231,15 +219,13 @@ export interface Rx$IPromise<T>{
         onRejected?: (reason: any) => R): Rx$IPromise<R >
 }
 
-declare
-export interface Rx$IObserver<T>{
+declare export interface Rx$IObserver<T>{
     onNext(value: T): void,
     onError(exception: any): void,
     onCompleted(): void
 }
 
-declare
-export type Rx$Observer<T>= {
+declare export type Rx$Observer<T>= {
     toNotifier(): (notification: Rx$Notification<T>) => void,
     asObserver(): Rx$Observer<T >
 } & Rx$IObserver
@@ -254,11 +240,9 @@ declare interface Rx$ObserverStatic {
             handler: (notification: Rx$Notification<T>, thisArg?: any) => void): Rx$Observer<T >
 }
 
-declare
-export var Observer: Rx$ObserverStatic;
+declare export var Observer: Rx$ObserverStatic;
 
-declare
-export interface Rx$IObservable<T>{
+declare export interface Rx$IObservable<T>{
     subscribe(observer: Rx$Observer<T>): Rx$IDisposable,
     subscribe(
         onNext?: (value: T) => void,
@@ -269,8 +253,7 @@ export interface Rx$IObservable<T>{
     subscribeOnCompleted(onCompleted: () => void, thisArg?: any): Rx$IDisposable
 }
 
-declare
-export type Rx$Observable<T>= {
+declare export type Rx$Observable<T>= {
     forEach(
         onNext?: (value: T) => void,
         onError?: (exception: any) => void,
@@ -1006,16 +989,14 @@ declare interface Rx$ObservableStatic {
                     prototype: any
 }
 
-declare
-export var Observable: Rx$ObservableStatic;
+declare export var Observable: Rx$ObservableStatic;
 
 declare type Rx$ISubject<T>= {
     hasObservers(): boolean
 } & Rx$Observable & Rx$Observer & Rx$IDisposable
 
 
-declare
-export type Rx$Subject<T>= {} & Rx$ISubject
+declare export type Rx$Subject<T>= {} & Rx$ISubject
 
 
 declare interface Rx$SubjectStatic {
@@ -1023,16 +1004,13 @@ declare interface Rx$SubjectStatic {
         create<T>(observer?: Rx$Observer<T>, observable?: Rx$Observable<T>): Rx$ISubject<T >
 }
 
-declare
-export var Subject: Rx$SubjectStatic;
+declare export var Subject: Rx$SubjectStatic;
 
-declare
-export type Rx$AsyncSubject<T>= {} & Rx$Subject
+declare export type Rx$AsyncSubject<T>= {} & Rx$Subject
 
 
 declare interface Rx$AsyncSubjectStatic {
     new<T>(): Rx$AsyncSubject<T >
 }
 
-declare
-export var AsyncSubject: Rx$AsyncSubjectStatic;
+declare export var AsyncSubject: Rx$AsyncSubjectStatic;

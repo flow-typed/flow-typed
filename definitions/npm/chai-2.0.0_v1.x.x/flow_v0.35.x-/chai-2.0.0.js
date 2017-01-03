@@ -18,16 +18,13 @@ declare interface Chai$ChaiStatic {
         config: Chai$Config
 }
 
-declare
-export type Chai$ExpectStatic = {} & Chai$AssertionStatic
+declare export type Chai$ExpectStatic = {} & Chai$AssertionStatic
 
 
-declare
-export type Chai$AssertStatic = {} & Chai$Assert
+declare export type Chai$AssertStatic = {} & Chai$Assert
 
 
-declare
-export interface Chai$AssertionStatic {
+declare export interface Chai$AssertionStatic {
     (target: any, message?: string): Chai$Assertion
 }
 
@@ -184,8 +181,7 @@ declare interface Chai$Members {
     (set: any[], message?: string): Chai$Assertion
 }
 
-declare
-export interface Chai$Assert {
+declare export interface Chai$Assert {
 
     /**
      * 
@@ -262,21 +258,18 @@ export interface Chai$Assert {
                         ifError(val: any, msg?: string): void
 }
 
-declare
-export interface Chai$Config {
+declare export interface Chai$Config {
     includeStack: boolean
 }
 
-declare
-export class AssertionError {
+declare export class AssertionError {
     constructor(message: string, _props?: any, ssf?: Function): this;
     name: string;
     message: string;
     showDiff: boolean;
     stack: string
 }
-declare
-var chai: Chai$ChaiStatic;
+declare var chai: Chai$ChaiStatic;
 declare module 'chai' {
     declare module.exports: typeof chai
 }

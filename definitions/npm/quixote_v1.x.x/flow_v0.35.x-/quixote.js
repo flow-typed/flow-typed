@@ -93,8 +93,7 @@ declare interface RawPositionObject {
         width: number,
         height: number
 }
-declare
-var quixote: Quixote;
+declare var quixote: Quixote;
 declare module 'quixote' {
     declare module.exports: typeof Quixote
 }

@@ -10,8 +10,7 @@
 /**
  * Electron-builder Options. 
  */
-declare
-export interface ElectronBuilder$Options {
+declare export interface ElectronBuilder$Options {
 
     /**
      * Source application path. 
@@ -38,8 +37,7 @@ export interface ElectronBuilder$Options {
 /**
  * Build configuration by platforms. 
  */
-declare
-export interface ElectronBuilder$Config {
+declare export interface ElectronBuilder$Config {
 
     /**
      * Configurations for Mac OS X. 
@@ -93,8 +91,7 @@ export interface ElectronBuilder$Config {
 /**
  * OSX Installer custom contents. 
  */
-declare
-export interface ElectronBuilder$OsxContents {
+declare export interface ElectronBuilder$OsxContents {
 
     /**
      * Horizontal position on installer screen (in pixels). 
@@ -121,8 +118,7 @@ export interface ElectronBuilder$OsxContents {
 /**
  * Electron-builder done callback. 
  */
-declare
-export interface ElectronBuilder$Callback {
+declare export interface ElectronBuilder$Callback {
 
     /**
      * Callback wich is called when electron-builder is done.
@@ -135,8 +131,7 @@ export interface ElectronBuilder$Callback {
 /**
  * Prototype for electron-builder. 
  */
-declare
-export interface ElectronBuilder$Builder {
+declare export interface ElectronBuilder$Builder {
 
     /**
      * Build the installer for given platform.

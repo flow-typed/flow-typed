@@ -48,5 +48,4 @@ declare interface JSS {
          */
         set(s: string, p: Properties): void
 }
-declare
-var jss: JSS;
+declare var jss: JSS;

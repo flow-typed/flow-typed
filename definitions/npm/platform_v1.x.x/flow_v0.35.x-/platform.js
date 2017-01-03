@@ -25,5 +25,4 @@ declare interface PlatformOS {
         version?: string,
         toString(): string
 }
-declare
-var platform: PlatformStatic;
+declare var platform: PlatformStatic;

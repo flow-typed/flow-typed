@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export class VRControls {
+declare export class VRControls {
     constructor(camera: Camera, callback?: (param: string) => void): this;
 
     /**

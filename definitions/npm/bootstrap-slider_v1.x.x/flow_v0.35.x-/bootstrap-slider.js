@@ -161,8 +161,7 @@ declare interface SliderStatics {
     new(selector: string, opts: SliderOptions): Slider,
     prototype: Slider
 }
-declare
-var Slider: SliderStatics;
+declare var Slider: SliderStatics;
 /**
  * This class is actually not used when using the jQuery version of bootstrap-slider
  * The method documentation is still here thouh.

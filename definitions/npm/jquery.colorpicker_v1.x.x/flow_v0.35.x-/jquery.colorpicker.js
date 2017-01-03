@@ -85,44 +85,38 @@ declare interface JQueryColorpickerStatic {
             new(r?: number, g?: number, b?: number, a?: number): JQueryColorpickerStatic$Color
         }
 }
-declare
-export interface JQueryColorpickerStatic$CMYK {
+declare export interface JQueryColorpickerStatic$CMYK {
     c: number,
         m: number,
         y: number,
         k: number
 }
 
-declare
-export interface JQueryColorpickerStatic$HSL {
+declare export interface JQueryColorpickerStatic$HSL {
     h: number,
         s: number,
         l: number
 }
 
-declare
-export interface JQueryColorpickerStatic$HSV {
+declare export interface JQueryColorpickerStatic$HSV {
     h: number,
         s: number,
         v: number
 }
 
-declare
-export interface JQueryColorpickerStatic$LAB {
+declare export interface JQueryColorpickerStatic$LAB {
     l: number,
         a: number,
         b: number
 }
 
-declare
-export interface JQueryColorpickerStatic$RGB {
+declare export interface JQueryColorpickerStatic$RGB {
     r: number,
         g: number,
         b: number
 }
 
-declare
-export interface JQueryColorpickerStatic$Color {
+declare export interface JQueryColorpickerStatic$Color {
     set: boolean,
         copy(): JQueryColorpickerStatic$Color,
         distance(color: JQueryColorpickerStatic$Color): number,

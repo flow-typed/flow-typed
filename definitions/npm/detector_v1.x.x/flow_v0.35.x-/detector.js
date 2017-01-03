@@ -17,5 +17,4 @@ declare interface DetectorStatic {
             parent?: HTMLElement
         }): void
 }
-declare
-var Detector: DetectorStatic;
+declare var Detector: DetectorStatic;

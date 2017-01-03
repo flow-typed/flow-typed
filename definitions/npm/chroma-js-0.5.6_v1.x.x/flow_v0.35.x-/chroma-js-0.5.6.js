@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Chroma$ChromaStatic {
+declare export interface Chroma$ChromaStatic {
 
     /**
      * Creates a color from a string representation (as supported in CSS).
@@ -138,8 +137,7 @@ declare interface Chroma$PredefinedScales {
         hot: Chroma$Scale
 }
 
-declare
-export interface Chroma$Color {
+declare export interface Chroma$Color {
 
     /**
      * Creates a color from a string representation (as supported in CSS).
@@ -229,8 +227,7 @@ export interface Chroma$Color {
         toString(): string
 }
 
-declare
-export interface Chroma$Scale {
+declare export interface Chroma$Scale {
 
     /**
      * Interpolate a color using the currently set range and domain.
@@ -291,5 +288,4 @@ export interface Chroma$Scale {
          */
         range(colors: string[]): Chroma$Scale
 }
-declare
-var chroma: Chroma$ChromaStatic;
+declare var chroma: Chroma$ChromaStatic;

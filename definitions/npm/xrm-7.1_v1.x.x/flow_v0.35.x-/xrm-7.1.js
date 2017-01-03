@@ -6,18 +6,15 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Xrm: Xrm$XrmStatic;
-declare
-function GetGlobalContext(): Xrm$Contextdeclare interface Window {
+declare var Xrm: Xrm$XrmStatic;
+declare function GetGlobalContext(): Xrm$Contextdeclare interface Window {
     Xrm: Xrm$XrmStatic,
         GetGlobalContext(): Xrm$Context
 }
 /**
  * Static xRM object.
  */
-declare
-export interface Xrm$XrmStatic {
+declare export interface Xrm$XrmStatic {
 
     /**
      * Provides a namespace container for the context, data and ui objects.
@@ -199,29 +196,25 @@ export interface Xrm$XrmStatic {
 /**
  * Client Types for Xrm.Page.context.getClient().
  */
-declare
-export type Xrm$Client = "Web" | "Outlook" | "Mobile";
+declare export type Xrm$Client = "Web" | "Outlook" | "Mobile";
 
 
 /**
  * Client States for Xrm.Page.context.getClientState().
  */
-declare
-export type Xrm$ClientState = "Online" | "Offline";
+declare export type Xrm$ClientState = "Online" | "Offline";
 
 
 /**
  * Themes for Xrm.Page.context.getCurrentTheme().
  */
-declare
-export type Xrm$Theme = "default" | "Office12Blue" | "Office14Silver";
+declare export type Xrm$Theme = "default" | "Office12Blue" | "Office14Silver";
 
 
 /**
  * Interface for the client context.
  */
-declare
-export interface Xrm$ClientContext {
+declare export interface Xrm$ClientContext {
 
     /**
      * Returns a value to indicate which client the script is executing in.
@@ -339,8 +332,7 @@ declare interface Xrm$Context {
 /**
  * Interface for the Xrm.Page.data object.
  */
-declare
-export interface Xrm$Data {
+declare export interface Xrm$Data {
 
     /**
      * Asynchronously refreshes data on the form, without reloading the page.
@@ -371,8 +363,7 @@ export interface Xrm$Data {
 /**
  * Interface for the Xrm.Page.ui object.
  */
-declare
-export interface Xrm$Ui {
+declare export interface Xrm$Ui {
 
     /**
      * Clears the form notification described by uniqueId.

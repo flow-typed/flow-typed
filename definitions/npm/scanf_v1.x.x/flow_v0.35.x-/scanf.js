@@ -10,8 +10,7 @@ declare module 'scanf' {
     declare module.exports: typeof ___node_scanf$scanf
 }
 
-declare
-var npm$namespace$___node_scanf: {
+declare var npm$namespace$___node_scanf: {
         scanf: typeof ___node_scanf$scanf,
     }
     /**
@@ -21,12 +20,10 @@ var npm$namespace$___node_scanf: {
      * @param format The format represents a word.
      * @return  A word.
     */
-declare
-function ___node_scanf$scanf(format: "%s"): string
+declare function ___node_scanf$scanf(format: "%s"): string
 
 
-declare
-var npm$namespace$scanf: {
+declare var npm$namespace$scanf: {
         sscanf: typeof scanf$sscanf,
     }
     /**
@@ -37,5 +34,4 @@ var npm$namespace$scanf: {
      * @param format The format represents a word.
      * @return  A word.
     */
-declare
-function scanf$sscanf(source: string, format: "%s"): string
+declare function scanf$sscanf(source: string, format: "%s"): string

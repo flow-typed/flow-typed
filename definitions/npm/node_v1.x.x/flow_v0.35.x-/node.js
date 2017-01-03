@@ -17,21 +17,11 @@ declare interface MapConstructor {}
 declare interface WeakMapConstructor {}
 declare interface SetConstructor {}
 declare interface WeakSetConstructor {}
-declare
-var process: NodeJS$Process;
-declare
-var global: NodeJS$Global;
-declare
-var ___filename: string;
-declare
-var ___dirname: string;
-declare
-function setTimeout(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS$Timerdeclare
-function clearTimeout(timeoutId: NodeJS$Timer): voiddeclare
-function setInterval(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS$Timerdeclare
-function clearInterval(intervalId: NodeJS$Timer): voiddeclare
-function setImmediate(callback: (...args: any[]) => void, ...args: any[]): anydeclare
-function clearImmediate(immediateId: any): voiddeclare interface NodeRequireFunction {
+declare var process: NodeJS$Process;
+declare var global: NodeJS$Global;
+declare var ___filename: string;
+declare var ___dirname: string;
+declare function setTimeout(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS$Timerdeclare function clearTimeout(timeoutId: NodeJS$Timer): voiddeclare function setInterval(callback: (...args: any[]) => void, ms: number, ...args: any[]): NodeJS$Timerdeclare function clearInterval(intervalId: NodeJS$Timer): voiddeclare function setImmediate(callback: (...args: any[]) => void, ...args: any[]): anydeclare function clearImmediate(immediateId: any): voiddeclare interface NodeRequireFunction {
     (id: string): any
 }
 declare type NodeRequire = {
@@ -40,8 +30,7 @@ declare type NodeRequire = {
     extensions: any,
     main: NodeModule
 } & NodeRequireFunction
-declare
-var require: NodeRequire;
+declare var require: NodeRequire;
 declare interface NodeModule {
     exports: any,
         require: NodeRequireFunction,
@@ -51,12 +40,9 @@ declare interface NodeModule {
         parent: NodeModule,
         children: NodeModule[]
 }
-declare
-var module: NodeModule;
-declare
-var exports: any;
-declare
-var SlowBuffer: {
+declare var module: NodeModule;
+declare var exports: any;
+declare var SlowBuffer: {
     new(str: string, encoding?: string): Buffer,
     new(size: number): Buffer,
     new(size: Uint8Array): Buffer,
@@ -73,8 +59,7 @@ declare type BufferEncoding = "ascii" |
     "binary" |
     "hex";
 declare type Buffer = {} & NodeBuffer
-declare
-var Buffer: {
+declare var Buffer: {
 
     /**
      * Allocates a new buffer containing the given {str}.
@@ -207,8 +192,7 @@ var Buffer: {
      */
     allocUnsafeSlow(size: number): Buffer
 };
-declare
-export type NodeJS$ErrnoException = {
+declare export type NodeJS$ErrnoException = {
     errno?: number,
     code?: string,
     path?: string,
@@ -217,8 +201,7 @@ export type NodeJS$ErrnoException = {
 } & Error
 
 
-declare
-export class EventEmitter {
+declare export class EventEmitter {
     addListener(event: string | , listener: Function): this;
     on(event: string | , listener: Function): this;
     once(event: string | , listener: Function): this;
@@ -234,8 +217,7 @@ export class EventEmitter {
     eventNames(): (string | )[]
 }
 
-declare
-export type NodeJS$ReadableStream = {
+declare export type NodeJS$ReadableStream = {
     readable: boolean,
     read(size?: number): string | Buffer,
     setEncoding(encoding: string): void,
@@ -251,8 +233,7 @@ export type NodeJS$ReadableStream = {
 } & NodeJS$EventEmitter
 
 
-declare
-export type NodeJS$WritableStream = {
+declare export type NodeJS$WritableStream = {
     writable: boolean,
     write(buffer: Buffer | string, cb?: Function): boolean,
     write(str: string, encoding?: string, cb?: Function): boolean,
@@ -263,19 +244,16 @@ export type NodeJS$WritableStream = {
 } & NodeJS$EventEmitter
 
 
-declare
-export type NodeJS$ReadWriteStream = {
+declare export type NodeJS$ReadWriteStream = {
     pause(): NodeJS$ReadWriteStream,
     resume(): NodeJS$ReadWriteStream
 } & NodeJS$ReadableStream & NodeJS$WritableStream
 
 
-declare
-export type NodeJS$Events = {} & NodeJS$EventEmitter
+declare export type NodeJS$Events = {} & NodeJS$EventEmitter
 
 
-declare
-export type NodeJS$Domain = {
+declare export type NodeJS$Domain = {
     run(fn: Function): void,
     add(emitter: NodeJS$Events): void,
     remove(emitter: NodeJS$Events): void,
@@ -290,15 +268,13 @@ export type NodeJS$Domain = {
 } & NodeJS$Events
 
 
-declare
-export interface NodeJS$MemoryUsage {
+declare export interface NodeJS$MemoryUsage {
     rss: number,
         heapTotal: number,
         heapUsed: number
 }
 
-declare
-export interface NodeJS$ProcessVersions {
+declare export interface NodeJS$ProcessVersions {
     http_parser: string,
         node: string,
         v8: string,
@@ -309,8 +285,7 @@ export interface NodeJS$ProcessVersions {
         openssl: string
 }
 
-declare
-export type NodeJS$Process = {
+declare export type NodeJS$Process = {
     stdout: NodeJS$WritableStream,
     stderr: NodeJS$WritableStream,
     stdin: NodeJS$ReadableStream,
@@ -376,8 +351,7 @@ export type NodeJS$Process = {
 } & NodeJS$EventEmitter
 
 
-declare
-export interface NodeJS$Global {
+declare export interface NodeJS$Global {
     Array: typeof Array,
         ArrayBuffer: typeof ArrayBuffer,
         Boolean: typeof Boolean,
@@ -443,8 +417,7 @@ export interface NodeJS$Global {
         v8debug?: any
 }
 
-declare
-export interface NodeJS$Timer {
+declare export interface NodeJS$Timer {
     ref(): void,
         unref(): void
 }

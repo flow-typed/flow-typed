@@ -43,8 +43,7 @@ declare interface Keymaster {
         getPressedKeyCodes(): number[],
         filter(event: FilterEvent): void
 }
-declare
-var key: Keymaster;
+declare var key: Keymaster;
 declare module 'keymaster' {
     declare module.exports: typeof key
 }

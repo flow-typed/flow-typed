@@ -32,5 +32,4 @@ declare interface MochaPhantomJS {
         run(): void,
         customizeMocha(options: MochaPhantomJSOptions): void
 }
-declare
-var mochaPhantomJS: MochaPhantomJS;
+declare var mochaPhantomJS: MochaPhantomJS;

@@ -71,8 +71,7 @@ declare interface jsb {
         html: (js_source_text: string, options?: HTMLBeautifyOptions) => string,
         html_beautify: (js_source_text: string, options?: HTMLBeautifyOptions) => string
 }
-declare
-var js_beautify: jsb;
+declare var js_beautify: jsb;
 declare module 'js-beautify' {
     declare module.exports: typeof js_beautify
 }

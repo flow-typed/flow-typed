@@ -6,14 +6,12 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface Express$Request {
+declare export interface Express$Request {
     session?: Express$Session,
         sessionID?: string
 }
 
-declare
-export interface Express$Session {
+declare export interface Express$Session {
     [key: string]: any,
     id: string,
         regenerate: (callback: (err: any) => void) => void,
@@ -24,8 +22,7 @@ export interface Express$Session {
         cookie: Express$SessionCookie
 }
 
-declare
-export interface Express$SessionCookie {
+declare export interface Express$SessionCookie {
     originalMaxAge: number,
         path: string,
         maxAge: number,

@@ -331,8 +331,7 @@ declare interface ht$Methods {
         updateSettings(settings: Object, init: boolean): void,
         validateCells(callback: Function): void
 }
-declare
-var Handsontable: {
+declare var Handsontable: {
     new(element: Element, options: ht$Options): ht$Methods
 };
 declare module 'handsontable' {

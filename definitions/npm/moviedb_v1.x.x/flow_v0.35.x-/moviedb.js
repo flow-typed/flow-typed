@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface MovieDB$IMovieDB {
+declare export interface MovieDB$IMovieDB {
     searchMovie(
             params: MovieDB$SearchOptions,
             callback: (err: any, movies: MovieDB$SearchResults) => void): void,
@@ -16,26 +15,22 @@ export interface MovieDB$IMovieDB {
             callback: (err: any, curMovie: MovieDB$Movie) => void): void
 }
 
-declare
-export interface MovieDB$SearchOptions {
+declare export interface MovieDB$SearchOptions {
     query: string
 }
 
-declare
-export interface MovieDB$InfoOptions {
+declare export interface MovieDB$InfoOptions {
     id: number
 }
 
-declare
-export interface MovieDB$SearchResults {
+declare export interface MovieDB$SearchResults {
     page: number,
         results: MovieDB$SearchResult[],
         total_Pages: number,
         total_results: number
 }
 
-declare
-export interface MovieDB$SearchResult {
+declare export interface MovieDB$SearchResult {
     adult: boolean,
         backdrop_path: string,
         id: number,
@@ -48,8 +43,7 @@ export interface MovieDB$SearchResult {
         vote_count: number
 }
 
-declare
-export interface MovieDB$Movie {
+declare export interface MovieDB$Movie {
     adult: boolean,
         backdrop_path: string,
         belongs_to_collection: any,
@@ -75,26 +69,22 @@ export interface MovieDB$Movie {
         vote_count: number
 }
 
-declare
-export interface MovieDB$Genre {
+declare export interface MovieDB$Genre {
     id: number,
         name: string
 }
 
-declare
-export interface MovieDB$ProductionCompany {
+declare export interface MovieDB$ProductionCompany {
     id: number,
         name: string
 }
 
-declare
-export interface MovieDB$ProductionCountry {
+declare export interface MovieDB$ProductionCountry {
     iso_3166_1: number,
         name: string
 }
 
-declare
-export interface MovieDB$SpokenLanguage {
+declare export interface MovieDB$SpokenLanguage {
     iso_639_1: number,
         name: string
 }

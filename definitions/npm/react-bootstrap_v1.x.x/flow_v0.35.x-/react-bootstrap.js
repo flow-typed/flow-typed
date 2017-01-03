@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$ReactBootstrap: {
+declare var npm$namespace$ReactBootstrap: {
     createChainedFunctionType: typeof ReactBootstrap$createChainedFunctionType,
 }
 declare type ReactBootstrap$Sizes = "xs" |
@@ -55,8 +54,7 @@ declare type ReactBootstrap$AccordionProps = {
 
 declare type ReactBootstrap$Accordion = React.ClassicComponent<ReactBootstrap$AccordionProps, {}>;
 
-declare
-var Accordion: React.ClassicComponentClass<ReactBootstrap$AccordionProps>;
+declare var Accordion: React.ClassicComponentClass<ReactBootstrap$AccordionProps>;
 
 declare type ReactBootstrap$BreadcrumbProps = {
     bsClass?: string
@@ -68,8 +66,7 @@ declare type ReactBootstrap$BreadcrumbClass = {
 
 declare type ReactBootstrap$Breadcrumb = React.ClassicComponent<ReactBootstrap$BreadcrumbProps, {}>;
 
-declare
-var Breadcrumb: ReactBootstrap$BreadcrumbClass;
+declare var Breadcrumb: ReactBootstrap$BreadcrumbClass;
 
 declare type ReactBootstrap$BreadcrumbItemProps = {
     active?: boolean,
@@ -81,8 +78,7 @@ declare type ReactBootstrap$BreadcrumbItemProps = {
 
 declare type ReactBootstrap$BreadcrumbItem = React.ClassicComponent<ReactBootstrap$BreadcrumbItemProps, {}>;
 
-declare
-var BreadcrumbItem: React.ClassicComponentClass<ReactBootstrap$BreadcrumbItemProps>;
+declare var BreadcrumbItem: React.ClassicComponentClass<ReactBootstrap$BreadcrumbItemProps>;
 
 declare type ReactBootstrap$ButtonProps = {
     active?: boolean,
@@ -94,8 +90,7 @@ declare type ReactBootstrap$ButtonProps = {
 
 declare type ReactBootstrap$Button = React.ClassicComponent<ReactBootstrap$ButtonProps, {}>;
 
-declare
-var Button: React.ClassicComponentClass<ReactBootstrap$ButtonProps>;
+declare var Button: React.ClassicComponentClass<ReactBootstrap$ButtonProps>;
 
 declare type ReactBootstrap$ButtonToolbarProps = {
     block?: boolean,
@@ -107,8 +102,7 @@ declare type ReactBootstrap$ButtonToolbarProps = {
 
 declare type ReactBootstrap$ButtonToolbar = React.ClassicComponent<ReactBootstrap$ButtonToolbarProps, {}>;
 
-declare
-var ButtonToolbar: React.ClassicComponentClass<ReactBootstrap$ButtonToolbarProps>;
+declare var ButtonToolbar: React.ClassicComponentClass<ReactBootstrap$ButtonToolbarProps>;
 
 declare type ReactBootstrap$ButtonGroupProps = {
     block?: boolean,
@@ -120,8 +114,7 @@ declare type ReactBootstrap$ButtonGroupProps = {
 
 declare type ReactBootstrap$ButtonGroup = React.ClassicComponent<ReactBootstrap$ButtonGroupProps, {}>;
 
-declare
-var ButtonGroup: React.ClassicComponentClass<ReactBootstrap$ButtonGroupProps>;
+declare var ButtonGroup: React.ClassicComponentClass<ReactBootstrap$ButtonGroupProps>;
 
 declare type ReactBootstrap$SafeAnchorProps = {
     href?: string,
@@ -133,8 +126,7 @@ declare type ReactBootstrap$SafeAnchorProps = {
 
 declare type ReactBootstrap$SafeAnchor = React.ClassicComponent<ReactBootstrap$SafeAnchorProps, {}>;
 
-declare
-var SafeAnchor: React.ClassicComponentClass<ReactBootstrap$SafeAnchorProps>;
+declare var SafeAnchor: React.ClassicComponentClass<ReactBootstrap$SafeAnchorProps>;
 
 declare type ReactBootstrap$CheckboxProps = {
     bsClass?: string,
@@ -265,8 +257,7 @@ declare type ReactBootstrap$PanelProps = {
 
     declare type ReactBootstrap$Panel = React.ClassicComponent<ReactBootstrap$PanelProps, {}>;
 
-declare
-var Panel: React.ClassicComponentClass<ReactBootstrap$PanelProps>;
+declare var Panel: React.ClassicComponentClass<ReactBootstrap$PanelProps>;
 
 declare type ReactBootstrap$PanelGroupProps = {
     accordion?: boolean,
@@ -279,8 +270,7 @@ declare type ReactBootstrap$PanelGroupProps = {
 
 declare type ReactBootstrap$PanelGroup = React.ClassicComponent<ReactBootstrap$PanelGroupProps, {}>;
 
-declare
-var PanelGroup: React.ClassicComponentClass<ReactBootstrap$PanelGroupProps>;
+declare var PanelGroup: React.ClassicComponentClass<ReactBootstrap$PanelGroupProps>;
 
 declare type ReactBootstrap$SplitButtonProps = {
     bsStyle?: string,
@@ -296,8 +286,7 @@ declare type ReactBootstrap$ModalDialogProps = {}
 
 declare type ReactBootstrap$ModalDialog = React.ClassicComponent<ReactBootstrap$ModalDialogProps, {}>;
 
-declare
-var ModalDialog: React.ClassicComponentClass<ReactBootstrap$ModalDialogProps>;
+declare var ModalDialog: React.ClassicComponentClass<ReactBootstrap$ModalDialogProps>;
 
 declare type ReactBootstrap$ModalHeaderProps = {
     closeButton?: boolean,
@@ -354,8 +343,7 @@ declare type ReactBootstrap$ModalClass = {
 
 declare type ReactBootstrap$Modal = React.ClassicComponent<ReactBootstrap$ModalProps, {}>;
 
-declare
-var Modal: ReactBootstrap$ModalClass;
+declare var Modal: ReactBootstrap$ModalClass;
 
 declare interface ReactBootstrap$OverlayTriggerProps {
     overlay: any,
@@ -379,8 +367,7 @@ declare interface ReactBootstrap$OverlayTriggerProps {
 
 declare type ReactBootstrap$OverlayTrigger = React.ClassicComponent<ReactBootstrap$OverlayTriggerProps, {}>;
 
-declare
-var OverlayTrigger: React.ClassicComponentClass<ReactBootstrap$OverlayTriggerProps>;
+declare var OverlayTrigger: React.ClassicComponentClass<ReactBootstrap$OverlayTriggerProps>;
 
 declare type ReactBootstrap$TooltipProps = {
     arrowOffsetLeft?: number | string,
@@ -394,8 +381,7 @@ declare type ReactBootstrap$TooltipProps = {
 
 declare type ReactBootstrap$Tooltip = React.ClassicComponent<ReactBootstrap$TooltipProps, {}>;
 
-declare
-var Tooltip: React.ClassicComponentClass<ReactBootstrap$TooltipProps>;
+declare var Tooltip: React.ClassicComponentClass<ReactBootstrap$TooltipProps>;
 
 declare type ReactBootstrap$PopoverProps = {
     arrowOffsetLeft?: number | string,
@@ -409,8 +395,7 @@ declare type ReactBootstrap$PopoverProps = {
 
 declare type ReactBootstrap$Popover = React.ClassicComponent<ReactBootstrap$PopoverProps, {}>;
 
-declare
-var Popover: React.ClassicComponentClass<ReactBootstrap$PopoverProps>;
+declare var Popover: React.ClassicComponentClass<ReactBootstrap$PopoverProps>;
 
 declare interface ReactBootstrap$OverlayProps {
     animation?: any,
@@ -488,8 +473,7 @@ declare type ReactBootstrap$NavItemProps = {
 
 declare type ReactBootstrap$NavItem = React.ClassicComponent<ReactBootstrap$NavItemProps, {}>;
 
-declare
-var NavItem: React.ClassicComponentClass<ReactBootstrap$NavItemProps>;
+declare var NavItem: React.ClassicComponentClass<ReactBootstrap$NavItemProps>;
 
 declare type ReactBootstrap$NavbarBrandProps = {}
 
@@ -499,22 +483,19 @@ declare interface ReactBootstrap$NavbarCollapseProps {}
 
 declare type ReactBootstrap$NavbarCollapse = React.ClassicComponent<ReactBootstrap$NavbarCollapseProps, {}>;
 
-declare
-var NavbarCollapse: React.ClassicComponentClass<ReactBootstrap$NavbarCollapseProps>;
+declare var NavbarCollapse: React.ClassicComponentClass<ReactBootstrap$NavbarCollapseProps>;
 
 declare type ReactBootstrap$NavbarHeaderProps = {}
 
 declare type ReactBootstrap$NavbarHeader = React.ClassicComponent<ReactBootstrap$NavbarHeaderProps, {}>;
 
-declare
-var NavbarHeader: React.ClassicComponentClass<ReactBootstrap$NavbarHeaderProps>;
+declare var NavbarHeader: React.ClassicComponentClass<ReactBootstrap$NavbarHeaderProps>;
 
 declare interface ReactBootstrap$NavbarToggleProps {}
 
 declare type ReactBootstrap$NavbarToggle = React.ClassicComponent<ReactBootstrap$NavbarToggleProps, {}>;
 
-declare
-var NavbarToggle: React.ClassicComponentClass<ReactBootstrap$NavbarToggleProps>;
+declare var NavbarToggle: React.ClassicComponentClass<ReactBootstrap$NavbarToggleProps>;
 
 declare type ReactBootstrap$NavbarProps = {
     brand?: any,
@@ -542,8 +523,7 @@ declare type ReactBootstrap$NavbarClass = {
 
 declare type ReactBootstrap$Navbar = React.ClassicComponent<ReactBootstrap$NavbarProps, {}>;
 
-declare
-var Navbar: ReactBootstrap$NavbarClass;
+declare var Navbar: ReactBootstrap$NavbarClass;
 
 declare type ReactBootstrap$NavDropdownBaseProps = {
     active?: boolean,
@@ -569,8 +549,7 @@ declare type ReactBootstrap$TabsProps = {
 
 declare type ReactBootstrap$Tabs = React.ClassicComponent<ReactBootstrap$TabsProps, {}>;
 
-declare
-var Tabs: React.ClassicComponentClass<ReactBootstrap$TabsProps>;
+declare var Tabs: React.ClassicComponentClass<ReactBootstrap$TabsProps>;
 
 declare type ReactBootstrap$TabProps = {
     animation?: boolean,
@@ -585,8 +564,7 @@ declare type ReactBootstrap$TabClass = {
 
 declare type ReactBootstrap$Tab = ReactBootstrap$TabClass;
 
-declare
-var Tab: ReactBootstrap$TabClass;
+declare var Tab: ReactBootstrap$TabClass;
 
 declare type ReactBootstrap$TabContainerProps = {
     activeKey?: any,
@@ -622,8 +600,7 @@ declare type ReactBootstrap$PagerClass = {
 
 declare type ReactBootstrap$Pager = React.ClassicComponent<ReactBootstrap$PagerProps, {}>;
 
-declare
-var Pager: ReactBootstrap$PagerClass;
+declare var Pager: ReactBootstrap$PagerClass;
 
 declare type ReactBootstrap$PageItemProps = {
     disabled?: boolean,
@@ -636,8 +613,7 @@ declare type ReactBootstrap$PageItemProps = {
 
 declare type ReactBootstrap$PageItem = React.ClassicComponent<ReactBootstrap$PageItemProps, {}>;
 
-declare
-var PageItem: React.ClassicComponentClass<ReactBootstrap$PageItemProps>;
+declare var PageItem: React.ClassicComponentClass<ReactBootstrap$PageItemProps>;
 
 declare type ReactBootstrap$PaginationProps = {
     activePage?: number,
@@ -657,8 +633,7 @@ declare type ReactBootstrap$PaginationProps = {
 
 declare type ReactBootstrap$Pagination = React.ClassicComponent<ReactBootstrap$PaginationProps, {}>;
 
-declare
-var Pagination: React.ClassicComponentClass<ReactBootstrap$PaginationProps>;
+declare var Pagination: React.ClassicComponentClass<ReactBootstrap$PaginationProps>;
 
 declare type ReactBootstrap$AlertProps = {
     bsSize?: ReactBootstrap$Sizes,
@@ -675,8 +650,7 @@ declare type ReactBootstrap$AlertProps = {
 
 declare type ReactBootstrap$Alert = React.ClassicComponent<ReactBootstrap$AlertProps, {}>;
 
-declare
-var Alert: React.ClassicComponentClass<ReactBootstrap$AlertProps>;
+declare var Alert: React.ClassicComponentClass<ReactBootstrap$AlertProps>;
 
 declare type ReactBootstrap$CarouselProps = {
     activeIndex?: number,
@@ -702,8 +676,7 @@ declare type ReactBootstrap$CarouselClass = {
 
 declare type ReactBootstrap$Carousel = React.ClassicComponent<ReactBootstrap$CarouselProps, {}>;
 
-declare
-var Carousel: ReactBootstrap$CarouselClass;
+declare var Carousel: ReactBootstrap$CarouselClass;
 
 declare type ReactBootstrap$CarouselItemProps = {
     active?: boolean,
@@ -716,8 +689,7 @@ declare type ReactBootstrap$CarouselItemProps = {
 
 declare type ReactBootstrap$CarouselItem = React.ClassicComponent<ReactBootstrap$CarouselItemProps, {}>;
 
-declare
-var CarouselItem: React.ClassicComponentClass<ReactBootstrap$CarouselItemProps>;
+declare var CarouselItem: React.ClassicComponentClass<ReactBootstrap$CarouselItemProps>;
 
 declare type ReactBootstrap$CarouselCaptionProps = {
     componentClass?: React.ReactType
@@ -725,8 +697,7 @@ declare type ReactBootstrap$CarouselCaptionProps = {
 
 declare type ReactBootstrap$CarouselCaption = React.ClassicComponent<ReactBootstrap$CarouselCaptionProps, {}>;
 
-declare
-var CarouselCaption: React.ClassicComponentClass<ReactBootstrap$CarouselCaptionProps>;
+declare var CarouselCaption: React.ClassicComponentClass<ReactBootstrap$CarouselCaptionProps>;
 
 declare type ReactBootstrap$GridProps = {
     componentClass?: React.ReactType,
@@ -735,8 +706,7 @@ declare type ReactBootstrap$GridProps = {
 
 declare type ReactBootstrap$Grid = React.ClassicComponent<ReactBootstrap$GridProps, {}>;
 
-declare
-var Grid: React.ClassicComponentClass<ReactBootstrap$GridProps>;
+declare var Grid: React.ClassicComponentClass<ReactBootstrap$GridProps>;
 
 declare type ReactBootstrap$RowProps = {
     componentClass?: React.ReactType
@@ -744,8 +714,7 @@ declare type ReactBootstrap$RowProps = {
 
 declare type ReactBootstrap$Row = React.ClassicComponent<ReactBootstrap$RowProps, {}>;
 
-declare
-var Row: React.ClassicComponentClass<ReactBootstrap$RowProps>;
+declare var Row: React.ClassicComponentClass<ReactBootstrap$RowProps>;
 
 declare type ReactBootstrap$ColProps = {
     componentClass?: React.ReactType,
@@ -773,8 +742,7 @@ declare type ReactBootstrap$ColProps = {
 
 declare type ReactBootstrap$Col = React.ClassicComponent<ReactBootstrap$ColProps, {}>;
 
-declare
-var Col: React.ClassicComponentClass<ReactBootstrap$ColProps>;
+declare var Col: React.ClassicComponentClass<ReactBootstrap$ColProps>;
 
 declare type ReactBootstrap$ThumbnailProps = {
     bsSize?: ReactBootstrap$Sizes,
@@ -783,8 +751,7 @@ declare type ReactBootstrap$ThumbnailProps = {
 
 declare type ReactBootstrap$Thumbnail = React.ClassicComponent<ReactBootstrap$ThumbnailProps, {}>;
 
-declare
-var Thumbnail: React.ClassicComponentClass<ReactBootstrap$ThumbnailProps>;
+declare var Thumbnail: React.ClassicComponentClass<ReactBootstrap$ThumbnailProps>;
 
 declare type ReactBootstrap$ListGroupProps = {
     componentClass?: React.ReactType,
@@ -818,8 +785,7 @@ declare type ReactBootstrap$BadgeProps = {
 
 declare type ReactBootstrap$Badge = React.ClassicComponent<ReactBootstrap$BadgeProps, {}>;
 
-declare
-var Badge: React.ClassicComponentClass<ReactBootstrap$BadgeProps>;
+declare var Badge: React.ClassicComponentClass<ReactBootstrap$BadgeProps>;
 
 declare type ReactBootstrap$JumbotronProps = {
     componentClass?: React.ReactType
@@ -827,8 +793,7 @@ declare type ReactBootstrap$JumbotronProps = {
 
 declare type ReactBootstrap$Jumbotron = React.ClassicComponent<ReactBootstrap$JumbotronProps, {}>;
 
-declare
-var Jumbotron: React.ClassicComponentClass<ReactBootstrap$JumbotronProps>;
+declare var Jumbotron: React.ClassicComponentClass<ReactBootstrap$JumbotronProps>;
 
 declare type ReactBootstrap$ImageProps = {
     circle?: boolean,
@@ -839,8 +804,7 @@ declare type ReactBootstrap$ImageProps = {
 
 declare type ReactBootstrap$Image = React.ClassicComponent<ReactBootstrap$ImageProps, {}>;
 
-declare
-var Image: React.ClassicComponentClass<ReactBootstrap$ImageProps>;
+declare var Image: React.ClassicComponentClass<ReactBootstrap$ImageProps>;
 
 declare type ReactBootstrap$PageHeaderProps = {}
 
@@ -859,8 +823,7 @@ declare type ReactBootstrap$GlyphiconProps = {
 
 declare type ReactBootstrap$Glyphicon = React.ClassicComponent<ReactBootstrap$GlyphiconProps, {}>;
 
-declare
-var Glyphicon: React.ClassicComponentClass<ReactBootstrap$GlyphiconProps>;
+declare var Glyphicon: React.ClassicComponentClass<ReactBootstrap$GlyphiconProps>;
 
 declare type ReactBootstrap$TableProps = {
     bordered?: boolean,
@@ -872,8 +835,7 @@ declare type ReactBootstrap$TableProps = {
 
 declare type ReactBootstrap$Table = React.ClassicComponent<ReactBootstrap$TableProps, {}>;
 
-declare
-var Table: React.ClassicComponentClass<ReactBootstrap$TableProps>;
+declare var Table: React.ClassicComponentClass<ReactBootstrap$TableProps>;
 
 declare type ReactBootstrap$InputGroupProps = {
     bsClass?: string,
@@ -887,22 +849,19 @@ declare type ReactBootstrap$InputGroupClass = {
 
 declare type ReactBootstrap$InputGroup = React.Component<ReactBootstrap$InputGroupProps, {}>;
 
-declare
-var InputGroup: ReactBootstrap$InputGroupClass;
+declare var InputGroup: ReactBootstrap$InputGroupClass;
 
 declare type ReactBootstrap$InputGroupAddonProps = {}
 
 declare type ReactBootstrap$InputGroupAddon = React.ClassicComponent<ReactBootstrap$InputGroupAddonProps, {}>;
 
-declare
-var InputGroupAddon: React.ClassicComponentClass<ReactBootstrap$InputGroupAddonProps>;
+declare var InputGroupAddon: React.ClassicComponentClass<ReactBootstrap$InputGroupAddonProps>;
 
 declare type ReactBootstrap$InputGroupButtonProps = {}
 
 declare type ReactBootstrap$InputGroupButton = React.ClassicComponent<ReactBootstrap$InputGroupButtonProps, {}>;
 
-declare
-var InputGroupButton: React.ClassicComponentClass<ReactBootstrap$InputGroupButtonProps>;
+declare var InputGroupButton: React.ClassicComponentClass<ReactBootstrap$InputGroupButtonProps>;
 
 declare type ReactBootstrap$FormProps = {
     bsClass?: string,
@@ -944,8 +903,7 @@ declare type ReactBootstrap$FormControlClass = {
 
 declare type ReactBootstrap$FormControl = React.Component<ReactBootstrap$FormControlProps, {}>;
 
-declare
-var FormControl: ReactBootstrap$FormControlClass;
+declare var FormControl: ReactBootstrap$FormControlClass;
 
 declare type ReactBootstrap$FormControlFeedbackProps = {}
 
@@ -992,8 +950,7 @@ declare type ReactBootstrap$PortalProps = {
 
 declare type ReactBootstrap$Portal = React.ClassicComponent<ReactBootstrap$PortalProps, {}>;
 
-declare
-var Portal: React.ClassicComponentClass<ReactBootstrap$PortalProps>;
+declare var Portal: React.ClassicComponentClass<ReactBootstrap$PortalProps>;
 
 declare type ReactBootstrap$PositionProps = {
         dimension?: string | Function,
@@ -1014,8 +971,7 @@ declare interface ReactBootstrap$MediaLeftProps {
 
 declare type ReactBootstrap$MediaLeft = React.ClassicComponent<ReactBootstrap$MediaLeftProps, {}>;
 
-declare
-var MediaLeft: React.ClassicComponentClass<ReactBootstrap$MediaLeftProps>;
+declare var MediaLeft: React.ClassicComponentClass<ReactBootstrap$MediaLeftProps>;
 
 declare interface ReactBootstrap$MediaRightProps {
     align?: string
@@ -1023,8 +979,7 @@ declare interface ReactBootstrap$MediaRightProps {
 
 declare type ReactBootstrap$MediaRight = React.ClassicComponent<ReactBootstrap$MediaRightProps, {}>;
 
-declare
-var MediaRight: React.ClassicComponentClass<ReactBootstrap$MediaRightProps>;
+declare var MediaRight: React.ClassicComponentClass<ReactBootstrap$MediaRightProps>;
 
 declare interface ReactBootstrap$MediaHeadingProps {
     componentClass?: React.ReactType
@@ -1032,8 +987,7 @@ declare interface ReactBootstrap$MediaHeadingProps {
 
 declare type ReactBootstrap$MediaHeading = React.ClassicComponent<ReactBootstrap$MediaHeadingProps, {}>;
 
-declare
-var MediaHeading: React.ClassicComponentClass<ReactBootstrap$MediaHeadingProps>;
+declare var MediaHeading: React.ClassicComponentClass<ReactBootstrap$MediaHeadingProps>;
 
 declare interface ReactBootstrap$MediaBodyProps {
     componentClass?: React.ReactType
@@ -1041,15 +995,13 @@ declare interface ReactBootstrap$MediaBodyProps {
 
 declare type ReactBootstrap$MediaBody = React.ClassicComponent<ReactBootstrap$MediaBodyProps, {}>;
 
-declare
-var MediaBody: React.ClassicComponentClass<ReactBootstrap$MediaBodyProps>;
+declare var MediaBody: React.ClassicComponentClass<ReactBootstrap$MediaBodyProps>;
 
 declare interface ReactBootstrap$MediaListProps {}
 
 declare type ReactBootstrap$MediaList = React.ClassicComponent<ReactBootstrap$MediaListProps, {}>;
 
-declare
-var MediaList: React.ClassicComponentClass<ReactBootstrap$MediaListProps>;
+declare var MediaList: React.ClassicComponentClass<ReactBootstrap$MediaListProps>;
 
 declare interface ReactBootstrap$MediaListItemProps {
     componentClass?: React.ReactType
@@ -1057,8 +1009,7 @@ declare interface ReactBootstrap$MediaListItemProps {
 
 declare type ReactBootstrap$MediaListItem = React.ClassicComponent<ReactBootstrap$MediaListItemProps, {}>;
 
-declare
-var MediaListItem: React.ClassicComponentClass<ReactBootstrap$MediaListItemProps>;
+declare var MediaListItem: React.ClassicComponentClass<ReactBootstrap$MediaListItemProps>;
 
 declare type ReactBootstrap$MediaProps = {
     componentClass?: React.ReactType
@@ -1075,13 +1026,11 @@ declare type ReactBootstrap$MediaClass = {
 
 declare type ReactBootstrap$Media = React.ClassicComponent<ReactBootstrap$MediaProps, {}>;
 
-declare
-var Media: ReactBootstrap$MediaClass;
+declare var Media: ReactBootstrap$MediaClass;
 
 declare interface ReactBootstrap$bootstrapUtilsType {}
 
-declare
-function ReactBootstrap$createChainedFunctionType(...funcs: Function[]): Function
+declare function ReactBootstrap$createChainedFunctionType(...funcs: Function[]): Function
 
 declare interface ReactBootstrap$ValidComponentChildrenType {
     map: (children: any, func: any, context: any) => any,

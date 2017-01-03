@@ -14,5 +14,4 @@ declare interface GeolocationStatic {
             opts?: PositionOptions): void,
         showMap(latitude: number, longitude: number): void
 }
-declare
-var geo_position_js: GeolocationStatic;
+declare var geo_position_js: GeolocationStatic;

@@ -7,19 +7,15 @@
  */
 
 
-declare
-var npm$namespace$random: {
+declare var npm$namespace$random: {
     Engine: typeof random$Engine,
     MT19937: typeof random$MT19937,
 }
-declare
-export function random$Engine(): number
+declare export function random$Engine(): number
 
-declare
-export function random$MT19937(): number
+declare export function random$MT19937(): number
 
-declare
-export class Random {
+declare export class Random {
     constructor(engine?: random$Engine): this;
     engines: {
         nativeMath: random$Engine,

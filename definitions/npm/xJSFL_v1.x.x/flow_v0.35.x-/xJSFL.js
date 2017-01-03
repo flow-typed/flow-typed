@@ -52,26 +52,9 @@ declare class _URI {
     type: string;
     toURI(string: string): string
 }
-declare
-var xjsfl: _xjsfl;
-declare
-var $dom: FlashDocument;
-declare
-var $timeline: FlashTimeline;
-declare
-var $library: FlashLibrary;
-declare
-var $selection: FlashElement[];
-declare
-function trace(...args: any[]): voiddeclare
-function clear(): voiddeclare
-function format(format: string, ...params: any[]): voiddeclare
-function inspect(item: any): voiddeclare
-function list(item: any): voiddeclare
-function debug(item: any): voiddeclare
-function include(className: string): voiddeclare
-function require(className: string): voiddeclare
-function load(filePath: string): stringdeclare
-function save(filePath: string, data: string): voiddeclare
-function $(selector: string): ElementCollectiondeclare
-function $$(selector: string): ItemCollection
+declare var xjsfl: _xjsfl;
+declare var $dom: FlashDocument;
+declare var $timeline: FlashTimeline;
+declare var $library: FlashLibrary;
+declare var $selection: FlashElement[];
+declare function trace(...args: any[]): voiddeclare function clear(): voiddeclare function format(format: string, ...params: any[]): voiddeclare function inspect(item: any): voiddeclare function list(item: any): voiddeclare function debug(item: any): voiddeclare function include(className: string): voiddeclare function require(className: string): voiddeclare function load(filePath: string): stringdeclare function save(filePath: string, data: string): voiddeclare function $(selector: string): ElementCollectiondeclare function $$(selector: string): ItemCollection

@@ -10,8 +10,7 @@ declare module 'normalizr' {
     declare module.exports: typeof Normalizr
 }
 
-declare
-var npm$namespace$Normalizr: {
+declare var npm$namespace$Normalizr: {
     arrayOf: typeof Normalizr$arrayOf,
     valuesOf: typeof Normalizr$valuesOf,
     unionOf: typeof Normalizr$unionOf,
@@ -27,8 +26,7 @@ declare type Normalizr$SchemaObject = {
 
 declare type Normalizr$SchemaType = Normalizr$SchemaClass | Normalizr$SchemaObject | Object;
 
-declare
-export class Schema {
+declare export class Schema {
 
     /**
      * Schema lets you define a type of entity returned by your API.
@@ -72,8 +70,7 @@ declare interface Normalizr$ArraySchema {
  * @param schema 
  * @param options 
  */
-declare
-export function Normalizr$arrayOf(
+declare export function Normalizr$arrayOf(
     schema: Normalizr$SchemaType,
     options?: {
 
@@ -89,8 +86,7 @@ export function Normalizr$arrayOf(
  * @param schema 
  * @param options 
  */
-declare
-export function Normalizr$valuesOf(
+declare export function Normalizr$valuesOf(
     schema: Normalizr$SchemaType,
     options?: {
 
@@ -106,8 +102,7 @@ export function Normalizr$valuesOf(
  * @param schemaMap 
  * @param options 
  */
-declare
-export function Normalizr$unionOf(
+declare export function Normalizr$unionOf(
     schemaMap: Normalizr$SchemaType,
     options?: {
 
@@ -125,8 +120,7 @@ export function Normalizr$unionOf(
  * @param schema 
  * @param options 
  */
-declare
-export function Normalizr$normalize(
+declare export function Normalizr$normalize(
     obj: any | Array<any>,
     schema: Normalizr$SchemaType,
     options?: {

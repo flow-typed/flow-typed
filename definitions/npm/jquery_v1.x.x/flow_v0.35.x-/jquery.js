@@ -3333,7 +3333,5 @@ declare interface JQuery {
 declare module 'jquery' {
     declare module.exports: typeof $
 }
-declare
-var jQuery: JQueryStatic;
-declare
-var $: JQueryStatic;
+declare var jQuery: JQueryStatic;
+declare var $: JQueryStatic;

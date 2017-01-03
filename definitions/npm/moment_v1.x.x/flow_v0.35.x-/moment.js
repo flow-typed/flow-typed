@@ -744,5 +744,4 @@ declare module 'moment/moment' {
     declare var moment: moment$MomentStatic;
     declare module.exports: typeof moment
 }
-declare
-var moment: moment$MomentStatic;
+declare var moment: moment$MomentStatic;

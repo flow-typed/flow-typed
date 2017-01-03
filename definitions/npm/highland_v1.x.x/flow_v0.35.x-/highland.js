@@ -892,8 +892,7 @@ declare type Highland$Stream<R>= {
     */
     latest(): Highland$Stream<R >
 }
-declare
-var highland: HighlandStatic;
+declare var highland: HighlandStatic;
 declare module 'highland' {
     declare module.exports: typeof highland
 }

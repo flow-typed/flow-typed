@@ -10,8 +10,7 @@ declare module 'java' {
     declare var NodeJavaCore: NodeJavaCore$NodeAPI;
     declare module.exports: typeof NodeJavaCore
 }
-declare
-export interface NodeJavaCore$Callback<T>{
+declare export interface NodeJavaCore$Callback<T>{
     (err?: Error, result?: T): void
 }
 

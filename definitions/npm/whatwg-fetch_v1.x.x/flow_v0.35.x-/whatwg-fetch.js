@@ -9,8 +9,7 @@
 declare interface Window {
     fetch(url: RequestInfo, init?: RequestInit): Promise<Response >
 }
-declare
-var fetch: typeof undefined;
+declare var fetch: typeof undefined;
 declare type HeadersInit = Headers | string[][] | {
     [key: string]: string
 };

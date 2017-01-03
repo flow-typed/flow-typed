@@ -6,29 +6,25 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export interface d3kit$ChartMargin {
+declare export interface d3kit$ChartMargin {
     top?: number,
         right?: number,
         bottom?: number,
         left?: number
 }
 
-declare
-export interface d3kit$ChartOptions {
+declare export interface d3kit$ChartOptions {
     margin?: d3kit$ChartMargin,
         offset?: [number, number],
         initialWidth?: number,
         initialHeight?: number, [name: string]: any
 }
 
-declare
-export interface d3kit$ChartMixin {
+declare export interface d3kit$ChartMixin {
     [name: string]: any
 }
 
-declare
-export class Skeleton {
+declare export class Skeleton {
     constructor(selector: string | Element, options?: d3kit$ChartOptions, customEvents?: Array<string>): this;
     getCustomEventNames(): Array<string>;
     getDispatcher(): any;
@@ -68,13 +64,11 @@ declare interface d3kit$ChartletPropertyCallback {
     (datum?: any, datum_index?: number): any
 }
 
-declare
-export interface d3kit$ChartletEventFunction {
+declare export interface d3kit$ChartletEventFunction {
     (sel?: d3.Selection<any>, done?: string): (sel: d3.Selection<any>) => void
 }
 
-declare
-export class Chartlet {
+declare export class Chartlet {
     constructor(enterFunction?: d3kit$ChartletEventFunction, updateFunction?: d3kit$ChartletEventFunction, exitFunction?: d3kit$ChartletEventFunction, customEventName?: Array<string>): this;
     getDispatcher(): d3.Dispatch;
     getCustomEventNames(): Array<string>;
@@ -102,8 +96,7 @@ declare interface d3kit$LayerConfig {
         sublayers?: d3kit$LayerConfig
 }
 
-declare
-export class LayerOrganizer {
+declare export class LayerOrganizer {
     constructor(container: d3.Selection<any>, tag?: string): this;
     create(
         config: string | Array<string>| d3kit$LayerConfig | Array<d3kit$LayerConfig>): d3.Selection<any>| Array<d3.Selection<any >> ;
@@ -112,12 +105,10 @@ export class LayerOrganizer {
 }
 
 
-declare
-var npm$namespace$factory: {
+declare var npm$namespace$factory: {
     createChart: typeof factory$createChart,
 }
-declare
-export function factory$createChart(
+declare export function factory$createChart(
     defaultOptions: d3kit$ChartOptions,
     customEvents: Array<string>,
     constructor: (skeleton: d3kit$Skeleton) => void): (
@@ -126,8 +117,7 @@ export function factory$createChart(
     customEvents?: Array<string>) => d3kit$Skeleton
 
 
-declare
-var npm$namespace$helper: {
+declare var npm$namespace$helper: {
     debounce: typeof helper$debounce,
     extend: typeof helper$extend,
     deepExtend: typeof helper$deepExtend,
@@ -145,55 +135,39 @@ var npm$namespace$helper: {
     isElement: typeof helper$isElement,
     isFunction: typeof helper$isFunction,
 }
-declare
-export function helper$debounce(
+declare export function helper$debounce(
     fn: (...args: Array<any>) => void,
     wait: number,
     immediate: boolean): (...args: Array<any>) => void
 
-declare
-export function helper$extend(target: Object, ...args: Object[]): Object
+declare export function helper$extend(target: Object, ...args: Object[]): Object
 
-declare
-export function helper$deepExtend(target: Object, ...args: Object[]): Object
+declare export function helper$deepExtend(target: Object, ...args: Object[]): Object
 
-declare
-export function helper$bindMouseEventsToDispatcher(selection: d3.Selection<any>, dispatch: d3.Dispatch, prefix: string): void
+declare export function helper$bindMouseEventsToDispatcher(selection: d3.Selection<any>, dispatch: d3.Dispatch, prefix: string): void
 
-declare
-export function helper$removeAllChildren(selection: d3.Selection<any>, noTransition: boolean): d3.Selection<any >
+declare export function helper$removeAllChildren(selection: d3.Selection<any>, noTransition: boolean): d3.Selection<any >
 
-    declare
-export function helper$on(element: Element, type: string, listener: (...args: Array<any>) => void): void
+    declare export function helper$on(element: Element, type: string, listener: (...args: Array<any>) => void): void
 
-declare
-export function helper$off(element: Element, type: string, listener: (...args: Array<any>) => void): void
+declare export function helper$off(element: Element, type: string, listener: (...args: Array<any>) => void): void
 
-declare
-export function helper$trim(str: string, characters: string): string
+declare export function helper$trim(str: string, characters: string): string
 
-declare
-export function helper$dasherize(str: string): string
+declare export function helper$dasherize(str: string): string
 
-declare
-export function helper$$(s: Element | string): Element
+declare export function helper$$(s: Element | string): Element
 
-declare
-export function helper$$$(s: Array<Node>| NodeList): Array<Element >
+declare export function helper$$$(s: Array<Node>| NodeList): Array<Element >
 
-    declare
-export function helper$isArray(value: any): boolean
+    declare export function helper$isArray(value: any): boolean
 
-declare
-export function helper$isNumber(value: any): boolean
+declare export function helper$isNumber(value: any): boolean
 
-declare
-export function helper$isObject(value: any): boolean
+declare export function helper$isObject(value: any): boolean
 
-declare
-export function helper$isElement(o: any): boolean
+declare export function helper$isElement(o: any): boolean
 
-declare
-export function helper$isFunction(functionToCheck: any): booleandeclare module 'd3kit' {
+declare export function helper$isFunction(functionToCheck: any): booleandeclare module 'd3kit' {
     declare module.exports: typeof d3kit
 }

@@ -158,5 +158,4 @@ declare interface Mouse {
     grab(): void,
         ungrab(): void
 }
-declare
-var Util: NvUtilStatic;
+declare var Util: NvUtilStatic;

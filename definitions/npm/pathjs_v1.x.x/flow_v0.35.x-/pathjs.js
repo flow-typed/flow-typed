@@ -43,5 +43,4 @@ declare interface IPath {
         core: IPathCore,
         routes: IPathRoutes
 }
-declare
-var Path: IPath;
+declare var Path: IPath;

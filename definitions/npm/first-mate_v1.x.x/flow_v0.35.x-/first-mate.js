@@ -83,8 +83,7 @@ declare interface AtomFirstMate$Grammar {
             compatibilityMode?: boolean): AtomFirstMate$TokenizeLineResult
 }
 
-declare
-var Grammar: AtomFirstMate$GrammarStatic;
+declare var Grammar: AtomFirstMate$GrammarStatic;
 
 
 /**
@@ -123,8 +122,7 @@ declare interface AtomFirstMate$GrammarRegistry {
         selectGrammar(filePath: string, fileContents: string): AtomFirstMate$Grammar
 }
 
-declare
-var GrammarRegistry: AtomFirstMate$GrammarRegistryStatic;
+declare var GrammarRegistry: AtomFirstMate$GrammarRegistryStatic;
 declare module 'first-mate' {
     declare module.exports: typeof AtomFirstMate
 }

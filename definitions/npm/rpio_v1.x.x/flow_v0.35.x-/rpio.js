@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var rpio: Rpio;
+declare var rpio: Rpio;
 declare module 'rpio' {
     declare module.exports: typeof rpio
 }

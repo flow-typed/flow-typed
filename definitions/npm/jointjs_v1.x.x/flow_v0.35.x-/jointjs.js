@@ -142,8 +142,7 @@ declare class Circle mixins Generic {}
 declare class Image mixins Generic {}
 
 
-declare
-var npm$namespace$util: {
+declare var npm$namespace$util: {
     uuid: typeof util$uuid,
     guid: typeof util$guid,
     mixin: typeof util$mixin,
@@ -151,20 +150,14 @@ var npm$namespace$util: {
     deepMixin: typeof util$deepMixin,
     deepSupplement: typeof util$deepSupplement,
 }
-declare
-function util$uuid(): string
+declare function util$uuid(): string
 
-declare
-function util$guid(obj: any): string
+declare function util$guid(obj: any): string
 
-declare
-function util$mixin(objects: any[]): any
+declare function util$mixin(objects: any[]): any
 
-declare
-function util$supplement(objects: any[]): any
+declare function util$supplement(objects: any[]): any
 
-declare
-function util$deepMixin(objects: any[]): any
+declare function util$deepMixin(objects: any[]): any
 
-declare
-function util$deepSupplement(objects: any[], defaultIndicator?: any): any
+declare function util$deepSupplement(objects: any[], defaultIndicator?: any): any

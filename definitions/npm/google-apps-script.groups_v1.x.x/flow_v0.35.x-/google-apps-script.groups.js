@@ -51,5 +51,4 @@ declare module 'Groups' {
             getGroups(): Group[]
     }
 }
-declare
-var GroupsApp: undefined.GroupsApp;
+declare var GroupsApp: undefined.GroupsApp;

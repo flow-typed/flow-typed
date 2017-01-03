@@ -7,8 +7,7 @@
  */
 
 
-declare
-var npm$namespace$tabris: {
+declare var npm$namespace$tabris: {
     create: typeof tabris$create,
 }
 declare interface tabris$Bounds {
@@ -166,8 +165,7 @@ declare interface tabris$AnimationOptions {
         name: string
 }
 
-declare
-function tabris$create(type: string, properties: tabris$WidgetProperties): tabris$Widget<any >
+declare function tabris$create(type: string, properties: tabris$WidgetProperties): tabris$Widget<any >
 
 
     /**
@@ -1199,8 +1197,7 @@ declare interface tabris$App {
         reload(): void
 }
 
-declare
-export var app: tabris$App;
+declare export var app: tabris$App;
 
 
 /**
@@ -1259,8 +1256,7 @@ declare type tabris$Device = {
 } & tabris$EventSupport
 
 
-declare
-export var device: tabris$Device;
+declare export var device: tabris$Device;
 
 
 /**
@@ -1292,8 +1288,7 @@ declare type tabris$UI = {
 } & tabris$EventSupport
 
 
-declare
-export var ui: tabris$UI;
+declare export var ui: tabris$UI;
 declare module 'tabris' {
     declare module.exports: typeof tabris
 }

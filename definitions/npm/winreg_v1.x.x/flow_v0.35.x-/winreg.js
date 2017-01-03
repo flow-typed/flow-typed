@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var Winreg: WinregStatic;
+declare var Winreg: WinregStatic;
 declare interface WinregStatic {
 
     /**
@@ -117,8 +116,7 @@ declare interface WinregStatic {
          */
         DEFAULT_VALUE: string
 }
-declare
-export interface Winreg$Options {
+declare export interface Winreg$Options {
 
     /**
      * Optional hostname, must start with '\\' sequence.
@@ -145,8 +143,7 @@ export interface Winreg$Options {
 /**
  * A registry object, which provides access to a single registry key.
  */
-declare
-export interface Winreg$Registry {
+declare export interface Winreg$Registry {
 
     /**
      * The hostname.
@@ -306,8 +303,7 @@ export interface Winreg$Registry {
  * A single registry value record.
  * Objects of this type are created internally and returned by methods of {@link Registry} objects.
  */
-declare
-export interface Winreg$RegistryItem {
+declare export interface Winreg$RegistryItem {
 
     /**
      * The hostname.

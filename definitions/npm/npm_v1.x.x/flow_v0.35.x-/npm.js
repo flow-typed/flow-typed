@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type NPM$Static = {
+declare export type NPM$Static = {
     config: NPM$Config,
     commands: NPM$Commands,
     rollbacks: any[],
@@ -28,8 +27,7 @@ export type NPM$Static = {
     deref(command: string): string
 }
 
-declare
-export interface NPM$Commands {
+declare export interface NPM$Commands {
     install: NPM$CommandFunction,
         uninstall: NPM$CommandFunction,
         cache: NPM$CommandFunction,
@@ -113,32 +111,27 @@ export interface NPM$Commands {
         visnup: NPM$CommandFunction
 }
 
-declare
-export interface NPM$CommandFunction {
+declare export interface NPM$CommandFunction {
     (args: string[], callback: NPM$CommandCallback): void
 }
 
-declare
-export interface NPM$CommandCallback {
+declare export interface NPM$CommandCallback {
     (err?: Error, result?: any, result2?: any, result3?: any, result4?: any): void
 }
 
-declare
-export interface NPM$Spinner {
+declare export interface NPM$Spinner {
     int: string,
         started: boolean,
         start(): void,
         stop(): void
 }
 
-declare
-export interface NPM$ConfigStatic {
+declare export interface NPM$ConfigStatic {
     new(base: NPM$Config): NPM$Config,
     (base: NPM$Config): NPM$Config
 }
 
-declare
-export interface NPM$Config {
+declare export interface NPM$Config {
     loaded: boolean,
         sources: NPM$Dictionary<NPM$ConfigSource>,
         rootConf: NPM$Config,
@@ -163,14 +156,12 @@ export interface NPM$Config {
         addEnv(env: NPM$Dictionary<string>): any
 }
 
-declare
-export interface NPM$ConfigDefs {
+declare export interface NPM$ConfigDefs {
     defaults: NPM$ConfigOptions,
         types: NPM$ConfigTypes
 }
 
-declare
-export interface NPM$ConfigOptions {
+declare export interface NPM$ConfigOptions {
     always - auth?: boolean,
         bin - links?: boolean,
         browser?: string,
@@ -258,8 +249,7 @@ export interface NPM$ConfigOptions {
         _exit?: boolean
 }
 
-declare
-export interface NPM$ConfigTypes {
+declare export interface NPM$ConfigTypes {
     always - auth: typeof Boolean,
         bin - links: typeof Boolean,
         browser: any[],
@@ -347,8 +337,7 @@ export interface NPM$ConfigTypes {
         _exit: typeof Boolean
 }
 
-declare
-export interface NPM$ConfigShorthands {
+declare export interface NPM$ConfigShorthands {
     s: any[],
         d: any[],
         dd: any[],
@@ -387,14 +376,12 @@ export interface NPM$ConfigShorthands {
         C: any[]
 }
 
-declare
-export interface NPM$ConfigSource {
+declare export interface NPM$ConfigSource {
     path: string,
         type: string
 }
 
-declare
-export interface NPM$Credentials {
+declare export interface NPM$Credentials {
     scope: string,
         token?: string,
         password?: string,
@@ -403,18 +390,15 @@ export interface NPM$Credentials {
         auth?: string
 }
 
-declare
-export interface NPM$Dictionary<T>{
+declare export interface NPM$Dictionary<T>{
     [key: string]: T
 }
 
-declare
-export interface NPM$ErrorCallback {
+declare export interface NPM$ErrorCallback {
     (err?: Error): void
 }
 
-declare
-export interface NPM$SimpleCallback<T>{
+declare export interface NPM$SimpleCallback<T>{
     (err?: Error, result?: T): void
 }
 declare module 'npm' {

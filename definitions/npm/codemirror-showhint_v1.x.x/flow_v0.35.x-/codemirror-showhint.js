@@ -7,12 +7,10 @@
  */
 
 
-declare
-var npm$namespace$CodeMirror: {
+declare var npm$namespace$CodeMirror: {
     showHint: typeof CodeMirror$showHint,
 }
-declare
-var commands: any;
+declare var commands: any;
 
 
 /**
@@ -23,8 +21,7 @@ andreturn a {list, from, to} object, where list is an array of strings or object
 from and to give the start and end of the token that is being completed as {line, ch} objects. An optional
 selectedHint property (an integer) can be added to the completion object to control the initially selected hint. 
 */
-declare
-function CodeMirror$showHint(
+declare function CodeMirror$showHint(
     cm: CodeMirror$Doc,
     hinter?: (doc: CodeMirror$Doc) => CodeMirror$Hints,
     options?: CodeMirror$ShowHintOptions): void

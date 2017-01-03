@@ -9,8 +9,7 @@
 declare interface JQuery {
     dataTable(param?: DataTables$Options): DataTables$DataTable
 }
-declare
-export interface DataTables$DataTable {
+declare export interface DataTables$DataTable {
     $(selector: string, opts?: DataTables$RowParams): JQuery,
         $(selector: Node[], opts?: DataTables$RowParams): JQuery,
         $(selector: JQuery, opts?: DataTables$RowParams): JQuery,
@@ -62,22 +61,19 @@ export interface DataTables$DataTable {
         fnVersionCheck(version: string): boolean
 }
 
-declare
-export interface DataTables$Static {
+declare export interface DataTables$Static {
     fnVersionCheck(version: string): boolean,
         fnIsDataTable(table: Node): boolean,
         fnTables(visible?: boolean): Node[]
 }
 
-declare
-export interface DataTables$RowParams {
+declare export interface DataTables$RowParams {
     filter?: string,
         order?: string,
         page?: string
 }
 
-declare
-export interface DataTables$Options {
+declare export interface DataTables$Options {
     aaData?: any[],
         aaSorting?: any[],
         aaSortingFixed?: any[],
@@ -139,8 +135,7 @@ export interface DataTables$Options {
         sServerMethod?: string
 }
 
-declare
-export interface DataTables$LanguageOptions {
+declare export interface DataTables$LanguageOptions {
     oAria?: DataTables$AriaOptions,
         oPaginate?: DataTables$PaginateOptions,
         sEmptyTable?: string,
@@ -157,22 +152,19 @@ export interface DataTables$LanguageOptions {
         sZeroRecords?: string
 }
 
-declare
-export interface DataTables$AriaOptions {
+declare export interface DataTables$AriaOptions {
     sSortAscending?: string,
         sSortDescending?: string
 }
 
-declare
-export interface DataTables$PaginateOptions {
+declare export interface DataTables$PaginateOptions {
     sFirst?: string,
         sLast?: string,
         sNext?: string,
         sPrevious?: string
 }
 
-declare
-export interface DataTables$ColumnOptions {
+declare export interface DataTables$ColumnOptions {
     aDataSort?: number[],
         asSorting?: string[],
         bSearchable?: boolean,
@@ -195,14 +187,12 @@ export interface DataTables$ColumnOptions {
         sWidth?: string
 }
 
-declare
-export type DataTables$ColumnDef = {
+declare export type DataTables$ColumnDef = {
     aTargets: any[]
 } & DataTables$ColumnOptions
 
 
-declare
-export interface DataTables$Settings {
+declare export interface DataTables$Settings {
     oFeatures: DataTables$Features,
         oScroll: DataTables$ScrollingSettings,
         oLanguage: {
@@ -287,8 +277,7 @@ export interface DataTables$Settings {
         nScrollFoot: Node
 }
 
-declare
-export interface DataTables$Features {
+declare export interface DataTables$Features {
     bAutoWidth: boolean,
         bDeferRender: boolean,
         bFilter: boolean,
@@ -302,8 +291,7 @@ export interface DataTables$Features {
         bStateSave: boolean
 }
 
-declare
-export interface DataTables$ScrollingSettings {
+declare export interface DataTables$ScrollingSettings {
     bAutoCss: boolean,
         bCollapse: boolean,
         bInfinite: boolean,
@@ -313,8 +301,7 @@ export interface DataTables$ScrollingSettings {
         sY: string
 }
 
-declare
-export interface DataTables$Row {
+declare export interface DataTables$Row {
     nTr: Node,
         _aData: any,
         _aSortData: any[],
@@ -322,8 +309,7 @@ export interface DataTables$Row {
         _sRowStripe: string
 }
 
-declare
-export interface DataTables$Column {
+declare export interface DataTables$Column {
     aDataSort: any,
         asSorting: string[],
         bSearchable: boolean,
@@ -350,82 +336,66 @@ export interface DataTables$Column {
         sWidthOrig: string
 }
 
-declare
-export interface DataTables$CookieCallback {
+declare export interface DataTables$CookieCallback {
     (name: string, data: any, expires: string, path: string, cookie: string): void
 }
 
-declare
-export interface DataTables$RowCreatedCallback {
+declare export interface DataTables$RowCreatedCallback {
     (row: Node, data: any[], dataIndex: number): void
 }
 
-declare
-export interface DataTables$DrawCallback {
+declare export interface DataTables$DrawCallback {
     (settings: DataTables$Settings): void
 }
 
-declare
-export interface DataTables$FooterCallback {
+declare export interface DataTables$FooterCallback {
     (foot: Element, data: any[], start: number, end: number, display: number[]): void
 }
 
-declare
-export interface DataTables$FormatNumber {
+declare export interface DataTables$FormatNumber {
     (toFormat: number): string
 }
 
-declare
-export interface DataTables$HeaderCallback {
+declare export interface DataTables$HeaderCallback {
     (head: Element, data: any[], start: number, end: number, display: number[]): void
 }
 
-declare
-export interface DataTables$InfoCallback {
+declare export interface DataTables$InfoCallback {
     (settings: DataTables$Settings, start: number, end: number, max: number, total: number, pre: string): string
 }
 
-declare
-export interface DataTables$InitComplete {
+declare export interface DataTables$InitComplete {
     (settings: DataTables$Settings, json: any): void
 }
 
-declare
-export interface DataTables$PreDrawCallback {
+declare export interface DataTables$PreDrawCallback {
     (settings: DataTables$Settings): boolean
 }
 
-declare
-export interface DataTables$RowCallback {
+declare export interface DataTables$RowCallback {
     (row: DataTables$Settings, data: any[], displayIndex: number, displayIndexFull: number): void
 }
 
-declare
-export interface DataTables$StateLoadCallback {
+declare export interface DataTables$StateLoadCallback {
     (settings: DataTables$Settings): any
 }
 
-declare
-export interface DataTables$StateLoadParams {
+declare export interface DataTables$StateLoadParams {
     (settings: DataTables$Settings, data: any): void
 }
 
-declare
-export interface DataTables$StateLoaded {
+declare export interface DataTables$StateLoaded {
     (settings: DataTables$Settings, data: any): void
 }
 
-declare
-export interface DataTables$StateSaveCallback {
+declare export interface DataTables$StateSaveCallback {
     (settings: any, data: any): void
 }
 
-declare
-export interface DataTables$StateSaveParams {
+declare export interface DataTables$StateSaveParams {
     (settings: any, data: any): void
 }
 
-declare
-export interface DataTables$CreatedCell {
+declare export interface DataTables$CreatedCell {
     (nTd: Node, cellData: any, rowData: any, row: number, col: number): void
 }

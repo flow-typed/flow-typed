@@ -6,20 +6,17 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type NotificationSystem$System = {
+declare export type NotificationSystem$System = {
     addNotification(notification: NotificationSystem$Notification): NotificationSystem$Notification,
     removeNotification(notification: NotificationSystem$Notification): void,
     removeNotification(uid: string): void
 }
 
-declare
-export interface NotificationSystem$CallBackFunction {
+declare export interface NotificationSystem$CallBackFunction {
     (notification: NotificationSystem$Notification): void
 }
 
-declare
-export interface NotificationSystem$Notification {
+declare export interface NotificationSystem$Notification {
     title?: string,
         message?: string,
         level?: "error" | "warning" | "info" | "success",
@@ -37,14 +34,12 @@ export interface NotificationSystem$Notification {
         uid?: number | string
 }
 
-declare
-export interface NotificationSystem$ActionObject {
+declare export interface NotificationSystem$ActionObject {
     label: string,
         callback?: () => void
 }
 
-declare
-export interface NotificationSystem$ContainersStyle {
+declare export interface NotificationSystem$ContainersStyle {
     DefaultStyle: React.CSSProperties,
         tl?: React.CSSProperties,
         tr?: React.CSSProperties,
@@ -54,8 +49,7 @@ export interface NotificationSystem$ContainersStyle {
         bc?: React.CSSProperties
 }
 
-declare
-export interface NotificationSystem$ItemStyle {
+declare export interface NotificationSystem$ItemStyle {
     DefaultStyle?: React.CSSProperties,
         success?: React.CSSProperties,
         error?: React.CSSProperties,
@@ -63,13 +57,11 @@ export interface NotificationSystem$ItemStyle {
         info?: React.CSSProperties
 }
 
-declare
-export interface NotificationSystem$WrapperStyle {
+declare export interface NotificationSystem$WrapperStyle {
     DefaultStyle?: React.CSSProperties
 }
 
-declare
-export interface NotificationSystem$Style {
+declare export interface NotificationSystem$Style {
     Wrapper?: any,
         Containers?: NotificationSystem$ContainersStyle,
         NotificationItem?: NotificationSystem$ItemStyle,
@@ -80,8 +72,7 @@ export interface NotificationSystem$Style {
         ActionWrapper?: NotificationSystem$WrapperStyle
 }
 
-declare
-export interface NotificationSystem$Attributes {
+declare export interface NotificationSystem$Attributes {
     noAnimation?: boolean,
         ref?: string,
         style?: NotificationSystem$Style | boolean,

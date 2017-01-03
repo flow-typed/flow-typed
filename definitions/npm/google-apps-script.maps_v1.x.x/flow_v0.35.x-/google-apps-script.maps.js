@@ -282,5 +282,4 @@ declare module 'Maps' {
             Type: Type
     }
 }
-declare
-var Maps: undefined.Maps;
+declare var Maps: undefined.Maps;

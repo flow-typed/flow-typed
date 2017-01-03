@@ -62,5 +62,4 @@ declare interface IntercomStatic {
          */
         destroy(): void
 }
-declare
-var Intercom: IntercomStatic;
+declare var Intercom: IntercomStatic;

@@ -6,11 +6,9 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-export type CanvasGauges$FontStyle = "normal" | "italic" | "oblique";
+declare export type CanvasGauges$FontStyle = "normal" | "italic" | "oblique";
 
-declare
-export type CanvasGauges$FontWeight = "normal" |
+declare export type CanvasGauges$FontWeight = "normal" |
     "bold" |
     "bolder" |
     "lighter" |
@@ -24,26 +22,21 @@ export type CanvasGauges$FontWeight = "normal" |
     "800" |
     "900";
 
-declare
-export type CanvasGauges$RenderTarget = string | HTMLElement;
+declare export type CanvasGauges$RenderTarget = string | HTMLElement;
 
-declare
-export interface CanvasGauges$AnimationRule {
+declare export interface CanvasGauges$AnimationRule {
     (percent: number): number
 }
 
-declare
-export interface CanvasGauges$Highlight {
+declare export interface CanvasGauges$Highlight {
     from: number,
         to: number,
         color: string
 }
 
-declare
-export type CanvasGauges$MajorTicks = string[] | number[];
+declare export type CanvasGauges$MajorTicks = string[] | number[];
 
-declare
-export interface CanvasGauges$GenericOptions {
+declare export interface CanvasGauges$GenericOptions {
     renderTo: CanvasGauges$RenderTarget,
         width?: number,
         height?: number,
@@ -124,8 +117,7 @@ export interface CanvasGauges$GenericOptions {
         fontNumbersWeight?: CanvasGauges$FontWeight
 }
 
-declare
-export type CanvasGauges$RadialGaugeOptions = {
+declare export type CanvasGauges$RadialGaugeOptions = {
     ticksAngle?: number,
     startAngle?: number,
     colorNeedleCircleOuter?: string,
@@ -139,8 +131,7 @@ export type CanvasGauges$RadialGaugeOptions = {
 } & CanvasGauges$GenericOptions
 
 
-declare
-export type CanvasGauges$LinearGaugeOptions = {
+declare export type CanvasGauges$LinearGaugeOptions = {
     borderRadius?: number,
     barBeginCircle?: number,
     barWidth?: number,
@@ -161,18 +152,15 @@ export type CanvasGauges$LinearGaugeOptions = {
 } & CanvasGauges$GenericOptions
 
 
-declare
-export interface CanvasGauges$DrawEventCallback {
+declare export interface CanvasGauges$DrawEventCallback {
     (percent: number): any
 }
 
-declare
-export interface CanvasGauges$EndEventCallback {
+declare export interface CanvasGauges$EndEventCallback {
     (): any
 }
 
-declare
-export interface CanvasGauges$rules {
+declare export interface CanvasGauges$rules {
     linear: CanvasGauges$AnimationRule,
         quad: CanvasGauges$AnimationRule,
         dequad: CanvasGauges$AnimationRule,
@@ -186,8 +174,7 @@ export interface CanvasGauges$rules {
         delastic: CanvasGauges$AnimationRule
 }
 
-declare
-export class Animation {
+declare export class Animation {
     duration: number;
     rule: string | CanvasGauges$AnimationRule;
     draw: CanvasGauges$DrawEventCallback;
@@ -200,8 +187,7 @@ export class Animation {
     destroy(): any
 }
 
-declare
-export class SmartCanvas {
+declare export class SmartCanvas {
     element: HTMLCanvasElement;
     elementClone: HTMLCanvasElement;
     context: CanvasRenderingContext2D;
@@ -224,8 +210,7 @@ export class SmartCanvas {
     collection: Array<CanvasGauges$SmartCanvas >
 }
 
-declare
-export class DomObserver {
+declare export class DomObserver {
     Type: CanvasGauges$BaseGauge;
     mutationsObserved: boolean;
     isObservable: boolean;
@@ -243,8 +228,7 @@ export class DomObserver {
     domReady(handler: Function): any
 }
 
-declare
-export class BaseGauge {
+declare export class BaseGauge {
     type: CanvasGauges$BaseGauge;
     options: CanvasGauges$GenericOptions;
     canvas: CanvasGauges$SmartCanvas;
@@ -257,24 +241,21 @@ export class BaseGauge {
     initialize(type: string, options: CanvasGauges$GenericOptions): any
 }
 
-declare
-export class RadialGauge mixins BaseGauge {
+declare export class RadialGauge mixins BaseGauge {
     type: CanvasGauges$RadialGauge;
     options: CanvasGauges$RadialGaugeOptions;
     constructor(options: CanvasGauges$RadialGaugeOptions): this;
     draw(): CanvasGauges$RadialGauge
 }
 
-declare
-export class LinearGauge mixins BaseGauge {
+declare export class LinearGauge mixins BaseGauge {
     type: CanvasGauges$LinearGauge;
     options: CanvasGauges$LinearGaugeOptions;
     constructor(options: CanvasGauges$LinearGaugeOptions): this;
     draw(): CanvasGauges$LinearGauge
 }
 
-declare
-export type CanvasGauges$Collection = {
+declare export type CanvasGauges$Collection = {
     get: (id: number | string) => CanvasGauges$BaseGauge
 } & Array
 declare module 'canvas-gauges' {

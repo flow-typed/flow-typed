@@ -151,5 +151,4 @@ declare module 'tesseract.js' {
     declare var Tesseract: Tesseract.TesseractStatic;
     declare module.exports: typeof Tesseract
 }
-declare
-var Tesseract: Tesseract.TesseractStatic;
+declare var Tesseract: Tesseract.TesseractStatic;

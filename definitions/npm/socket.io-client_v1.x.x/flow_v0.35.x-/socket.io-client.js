@@ -6,8 +6,7 @@
  * Repo: http://github.com/joarwilk/flowgen
  */
 
-declare
-var io: SocketIOClientStatic;
+declare var io: SocketIOClientStatic;
 declare module 'socket.io-client' {
     declare module.exports: typeof io
 }

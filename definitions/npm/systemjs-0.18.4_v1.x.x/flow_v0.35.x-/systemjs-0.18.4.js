@@ -21,8 +21,7 @@ declare interface System {
         config: any,
         _nodeRequire: (name: string) => any
 }
-declare
-var System: System;
+declare var System: System;
 declare module 'systemjs' {
     declare module.exports: typeof System
 }

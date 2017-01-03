@@ -420,8 +420,7 @@ declare interface UrbanAirshipPlugin$RunActionResult {
     error: string,
         value: any
 }
-declare
-var UAirship: UrbanAirshipPlugin$UrbanAirshipStatic;
+declare var UAirship: UrbanAirshipPlugin$UrbanAirshipStatic;
 declare interface Document {
     addEventListener(
             type: "urbanairship.push",
