@@ -97,7 +97,7 @@ declare class Bluebird$Promise<R> {
   static method<T, R: Bluebird$Promisable<T>>(fn: () => R): () => Bluebird$Promise<T>;
   static method<T, R: Bluebird$Promisable<T>, A>(fn: (a: A) => R): (a: A) => Bluebird$Promise<T>;
   static method<T, R: Bluebird$Promisable<T>, A, B>(fn: (a: A, b: B) => R): (a: A, b: B) => Bluebird$Promise<T>;
-  static method<T, R: Bluebird$Promisable<T>, A, B, C>(fn: (a: A, b: B, c: B) => R): (a: A, b: B, c: B) => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>, A, B, C>(fn: (a: A, b: B, c: C) => R): (a: A, b: B, c: C) => Bluebird$Promise<T>;
   static method<T, R: Bluebird$Promisable<T>>(fn: (...args: any) => R): (...args: any) => Bluebird$Promise<T>;
 
   static cast<T>(value: Bluebird$Promisable<T>): Bluebird$Promise<T>;
