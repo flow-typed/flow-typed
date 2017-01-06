@@ -43,11 +43,11 @@ declare type Bluebird$PromisifyAllOptions = {
 
 declare type Bluebird$Promisable<T> = Bluebird$Promise<T> | Promise<T> | T;
 
-declare class Bluebird$Promise<R> {
+declare class Bluebird$Promise<+R> extends Promise<R> {
   static Defer: Class<Bluebird$Defer>;
   static PromiseInspection: Class<Bluebird$PromiseInspection<*>>;
 
-  static all<T, Elem: Bluebird$Promisable<T>>(Promises: Array<Elem>): Bluebird$Promise<Array<T>>;
+  static all<T, Elem: Bluebird$Promisable<T>>(promises: Bluebird$Promisable<Iterable<Elem>>): Bluebird$Promise<Array<T>>;
   static props(input: Bluebird$Promisable<Object|Map<*,*>>): Bluebird$Promise<*>;
   static any<T, Elem: Bluebird$Promisable<T>>(Promises: Array<Elem>): Bluebird$Promise<T>;
   static race<T, Elem: Bluebird$Promisable<T>>(Promises: Array<Elem>): Bluebird$Promise<T>;
