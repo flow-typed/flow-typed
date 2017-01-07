@@ -66,7 +66,7 @@ declare class Bluebird$Promise<R> {
   ): Bluebird$Promise<Array<U>>;
   static reduce<T, U, Elem: Bluebird$Promisable<T>>(
     Promises: Array<Elem>,
-    reducer: (total: U, current: T, index: number, arrayLength: number) => U,
+    reducer: (total: U, current: T, index: number, arrayLength: number) => Bluebird$Promisable<U>,
     initialValue?: U
   ): Bluebird$Promise<U>;
   static filter<T, Elem: Bluebird$Promisable<T>>(
