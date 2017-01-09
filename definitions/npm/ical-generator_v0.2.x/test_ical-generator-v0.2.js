@@ -4,11 +4,12 @@ import ical from 'ical-generator';
 const calendar = ical({
   domain: 'foo',
 });
-// $ExpectError
 ical({
-  domain: 1,
   name: '',
 });
+
+// $ExpectError - domain should be string
+ical({ domain: 1 });
 
 calendar.clear();
 const event = calendar.createEvent();

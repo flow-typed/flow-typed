@@ -59,7 +59,7 @@ type JestExpectType = {
   toMatch(regexp: RegExp): void;
   toMatchSnapshot(): void;
   toThrow(message?: string | Error): void;
-  toThrowError(message?: string): void;
+  toThrowError(message?: string | Error | RegExp): void;
   toThrowErrorMatchingSnapshot(): void;
 }
 
@@ -76,6 +76,7 @@ declare var it: {
   (name: string, fn: Function): ?Promise<void>;
   only(name: string, fn: Function): ?Promise<void>;
   skip(name: string, fn: Function): ?Promise<void>;
+  concurrent(name: string, fn: Function): ?Promise<void>,
 };
 declare function fit(name: string, fn: Function): ?Promise<void>;
 declare var test: typeof it;

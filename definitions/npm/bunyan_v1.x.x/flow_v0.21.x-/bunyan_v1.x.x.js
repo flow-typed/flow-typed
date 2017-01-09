@@ -1,4 +1,3 @@
-
 declare module 'bunyan' {
     declare var TRACE: 10;
     declare var DEBUG: 20;
@@ -97,11 +96,11 @@ declare module 'bunyan' {
         serializers?: Serializers;
         src?: boolean;
     }
-    declare interface Serializers {
-        [key: string]: (input: any) => string;
+    declare type Serializers = {
+        [key: string]: (input: any) => mixed;
     }
     declare type Stream = {
-        type: string;
+        type?: string;
         level?: number | string;
         path?: string;
         stream?: stream$Writable | tty$WriteStream | Stream;

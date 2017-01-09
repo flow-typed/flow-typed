@@ -1,10 +1,10 @@
-_**NOTE:** The [`flow-typed` CLI](https://www.npmjs.com/package/flow-typed) is currently in beta. Please try it out and report any issues you encounter. Thanks!_
-
 <img 
   alt="Flow Logo" 
   src="https://raw.githubusercontent.com/flowtype/flow-typed/master/flow-typed-logo.png"
   width="400"
 />
+
+[![Travis](https://img.shields.io/travis/flowtype/flow-typed.svg)](https://travis-ci.org/flowtype/flow-typed) [![npm](https://img.shields.io/npm/dm/flow-typed.svg)](https://www.npmjs.com/package/flow-typed)
 
 `flow-typed` is a [repository](https://github.com/flowtype/flow-typed/tree/master/definitions) of third-party 
 [library interface definitions](http://flowtype.org/docs/third-party.html) 

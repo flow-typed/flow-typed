@@ -1,5 +1,3 @@
-/* @flow */
-
 /* eslint-disable */
 
 /**
@@ -79,6 +77,7 @@ declare module 'redux-saga' {
    */
 
   declare type SagaSpread<Y: IOEffect, R, N, T> = (...args: Array<T>) => Generator<Y, R, N>;
+  declare type SagaList<Y: IOEffect[], R, N> = () => Generator<Y, R, N>;
   declare type Saga0<Y: IOEffect, R, N> = () => Generator<Y, R, N>;
   declare type Saga1<Y: IOEffect, R, N, T1> = (t1: T1) => Generator<Y, R, N>;
   declare type Saga2<Y: IOEffect, R, N, T1, T2> = (t1: T1, t2: T2) => Generator<Y, R, N>;
@@ -125,6 +124,7 @@ declare module 'redux-saga' {
   };
 
   declare type MiddlewareRunFn =
+    & (<Y, R, N, Fn: SagaList<Y, R, N>>(saga: Fn) => Task)
     & (<Y, R, N, Fn: Saga0<Y, R, N>>(saga: Fn, ...rest: Array<void>) => Task)
     & (<T1, Y, R, N, Fn: Saga1<Y, R, N, T1>>(saga: Fn, t1: T1, ...rest: Array<void>) => Task)
     & (<T1, T2, Y, R, N, Fn: Saga2<Y, R, N, T1, T2>>(saga: Fn, t1: T1, t2: T2, ...rest: Array<void>) => Task)
@@ -250,15 +250,15 @@ declare module 'redux-saga/effects' {
 
   declare type Pattern = string | Array<string> | (action: Object) => boolean;
 
-  declare type FnSpread<T, R> = (...args: Array<T>) => Promise<R>;
+  declare type FnSpread<T, R> = (...args: Array<T>) => R | Promise<R>;
 
-  declare type Fn0<R> = () => Promise<R> | Generator<*,R,*>;
-  declare type Fn1<T1, R> = (t1: T1) => Promise<R> | Generator<*,R,*>;
-  declare type Fn2<T1, T2, R> = (t1: T1, t2: T2) => Promise<R> | Generator<*,R,*>;
-  declare type Fn3<T1, T2, T3, R> = (t1: T1, t2: T2, t3: T3) => Promise<R> | Generator<*,R,*>;
-  declare type Fn4<T1, T2, T3, T4, R> = (t1: T1, t2: T2, t3: T3, t4: T4) => Promise<R> | Generator<*,R,*>;
-  declare type Fn5<T1, T2, T3, T4, T5, R> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => Promise<R> | Generator<*,R,*>;
-  declare type Fn6<T1, T2, T3, T4, T5, T6, R> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => Promise<R> | Generator<*,R,*>;
+  declare type Fn0<R> = () => R | Promise<R> | Generator<*,R,*>;
+  declare type Fn1<T1, R> = (t1: T1) => R | Promise<R> | Generator<*,R,*>;
+  declare type Fn2<T1, T2, R> = (t1: T1, t2: T2) => R | Promise<R> | Generator<*,R,*>;
+  declare type Fn3<T1, T2, T3, R> = (t1: T1, t2: T2, t3: T3) => R | Promise<R> | Generator<*,R,*>;
+  declare type Fn4<T1, T2, T3, T4, R> = (t1: T1, t2: T2, t3: T3, t4: T4) => R | Promise<R> | Generator<*,R,*>;
+  declare type Fn5<T1, T2, T3, T4, T5, R> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => R | Promise<R> | Generator<*,R,*>;
+  declare type Fn6<T1, T2, T3, T4, T5, T6, R> = (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => R | Promise<R> | Generator<*,R,*>;
 
   declare type SelectFnSpread<T> = (state: any, ...args: Array<T>) => any;
   declare type SelectFn0 = ((state: any) => any) & (() => any);

@@ -18,7 +18,11 @@ export const child_process = {
   ): Promise<execP$Result> {
     return new Promise((res, rej) => {
       node_child_process.exec(command, options, (err, stdout, stderr) => {
-        if (err) { rej(err); } else { res( {stdout: stdout, stderr: stderr, } ); }
+        if (err) {
+          rej(err);
+        } else {
+          res( {stdout: new Buffer(stdout), stderr: new Buffer(stderr), } );
+        }
       });
     });
   },

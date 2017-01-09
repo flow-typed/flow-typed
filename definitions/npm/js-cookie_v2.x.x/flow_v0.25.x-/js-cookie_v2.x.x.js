@@ -1,4 +1,3 @@
-// @flow
 declare module 'js-cookie' {
     declare type CookieOptions = {
         expires?: number | Date,

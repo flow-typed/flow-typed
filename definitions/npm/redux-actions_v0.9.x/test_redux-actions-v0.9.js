@@ -9,7 +9,4 @@ handleActions({
   bar() {},
 })();
 // $ExpectError
-handleActions({
-  foo: {},
-  bar() {},
-}, 123);
+handleActions({ foo: {}, bar() {} }, 123);

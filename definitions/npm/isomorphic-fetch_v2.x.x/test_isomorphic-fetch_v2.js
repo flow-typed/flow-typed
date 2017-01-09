@@ -11,9 +11,7 @@ isoFetch('foo', {
 });
 
 // $ExpectError foo is not a valid method
-isoFetch('foo', {
-    method: 'foo'
-});
+isoFetch('foo', { method: 'foo' });
 
 isoFetch('foo', {
     body: 'bar'
@@ -64,8 +62,3 @@ isoFetch('foo').then(res => {
 
     (res.url: string);
 });
-
-
-
-
-

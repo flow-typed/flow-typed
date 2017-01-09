@@ -1,5 +1,3 @@
-/* @flow */
-
 /* eslint-disable  */
 
 declare type tape$TestOpts = {
@@ -98,9 +96,10 @@ declare module 'tape' {
 
   declare type Tape = {
     (a: string | tape$TestOpts | tape$TestCb, b?: tape$TestCb | tape$TestOpts, c?: tape$TestCb, ...rest: Array<void>): void,
+    test: tape$TestFn,
     skip: (name: string, cb?: tape$TestCb) => void,
     createHarness: () => TestHarness,
-    createStream: (opts?: StreamOpts) => stream$Readable, 
+    createStream: (opts?: StreamOpts) => stream$Readable,
     only: (a: string | tape$TestOpts | tape$TestCb, b?: tape$TestCb | tape$TestOpts, c?: tape$TestCb, ...rest: Array<void>) => void,
   };
 

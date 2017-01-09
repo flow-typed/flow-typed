@@ -86,12 +86,12 @@ const never: Observable<number> = Observable.empty()
   .concat(Observable.of('').ignoreElements())
   .concat(Observable.never());
 
+const numberOrString: Observable<number | string> = numbers
+  .concat(strings);
+
 (Observable.of(2).startWith(1, 2, 3): Observable<number>);
 // $ExpectError
 (Observable.of(2).startWith(1, '2', 3): Observable<number>);
-
-(numbers.cache(): Observable<number>);
-(numbers.cache(1): Observable<number>);
 
 (numbers.withLatestFrom(strings): Observable<[number, string]>);
 // $ExpectError
@@ -104,6 +104,34 @@ numbers.observeOn(null);
 Observable.fromEvent(null, 'click', true);
 // $ExpectError
 Observable.fromEvent(null, 'click', {capture: 1});
+
+Observable.of(1).switchMapTo(Observable.of('test'));
+// $ExpectError
+Observable.of(1).switchMapTo(2);
+
+Observable.using(
+  () => {},
+  () => Observable.of(1),
+);
+Observable.using(
+  () => ({
+    other: 1,
+    unsubscribe: () => {},
+  }),
+  () => Observable.of(1),
+);
+Observable.using(
+  () => Observable.of(1).subscribe(() => {}),
+  subscription => new Promise(resolve => {}),
+);
+Observable.using(
+  // $ExpectError
+  () => Observable.of('bad'),
+  subscription => {},
+);
+
+Observable.of({test: 1})
+  .distinctUntilKeyChanged('test', (a, b) => a === b);
 
 // Testing covariance/contravariance/invariance of type parameters
 
@@ -131,3 +159,5 @@ const subObserver: rxjs$IObserver<SubFoo> = (null: any);
 
 const groupedSubObservable: Observable<Observable<SubFoo>> =
   subObservable.groupBy(subfoo => subfoo.y);
+
+((Observable.defer(() => Promise.resolve(1))): Observable<number>);

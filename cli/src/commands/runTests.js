@@ -4,13 +4,14 @@ import {child_process, fs, os, path} from "../lib/node.js";
 import {copyFile, recursiveRmdir} from "../lib/fileUtils.js";
 import {gitHubClient} from "../lib/github.js";
 import {getLibDefs} from "../lib/libDefs.js";
-import {versionToString} from "../lib/semver.js";
+import isInFlowTypedRepo from "../lib/isInFlowTypedRepo";
+import {toSemverString as flowVerToSemverString} from "../lib/flowVersion";
 
 import request from "request";
 import * as semver from "semver";
 
 import type {Argv} from "yargs";
-import type {Version} from "../lib/semver.js";
+import type {FlowVersion} from "../lib/flowVersion.js";
 
 // Used to decide which binary to fetch for each version of Flow
 const BIN_PLATFORM = (_ => {
@@ -33,7 +34,7 @@ type TestGroup = {
   id: string,
   testFilePaths: Array<string>,
   libDefPath: string,
-  flowVersion: Version,
+  flowVersion: FlowVersion,
 };
 
 /**
@@ -45,7 +46,7 @@ async function getTestGroups(repoDirPath): Promise<Array<TestGroup>> {
   const libDefs = await getLibDefs(repoDirPath);
   return libDefs.map(libDef => {
     const groupID =
-      `${libDef.pkgName}_${libDef.pkgVersionStr}${path.sep}flow_` +
+      `${libDef.pkgName}_${libDef.pkgVersionStr}${path.sep}` +
       `${libDef.flowVersionStr}`;
     return {
       id: groupID,
@@ -246,28 +247,9 @@ async function runTestGroup(
 
     // For each compatible version of Flow, run `flow check` and verify there
     // are no errors.
+    const testGrpFlowSemVerRange = flowVerToSemverString(testGroup.flowVersion);
     const flowVersionsToRun = orderedFlowVersions.filter(flowVer => {
-      if (testGroup.flowVersion === "all") {
-        return true;
-      }
-
-      const testGrpUpperBound = testGroup.flowVersion.upperBound;
-      testGroup.flowVersion.upperBound = undefined;
-      const testGrpLowerBoundStr = versionToString(testGroup.flowVersion);
-      const testGrpUpperBoundStr = testGrpUpperBound
-        ? versionToString(testGrpUpperBound)
-        : undefined;
-      testGroup.flowVersion.upperBound = testGrpUpperBound;
-
-      if (semver.satisfies(flowVer, testGrpLowerBoundStr)) {
-        if (testGrpUpperBoundStr) {
-          return semver.satisfies(flowVer, testGrpUpperBoundStr);
-        } else{
-          return true;
-        }
-      }
-
-      return false;
+      return semver.satisfies(flowVer, testGrpFlowSemVerRange);
     });
 
     while (flowVersionsToRun.length > 0) {
@@ -375,8 +357,15 @@ async function runTests(
 }
 
 export const name = "run-tests";
-export const description = "Run definition tests";
+export const description = "Run definition tests of library definitions in the flow-typed project.";
 export async function run(argv: Argv): Promise<number> {
+  if (!isInFlowTypedRepo()) {
+    console.log(
+      "This command only works in a clone of flowtype/flow-typed. " +
+      "It is a tool used to run tests of the library definitions in the flow-typed project."
+    );
+    return 1;
+  }
   const testPatterns = argv._.slice(1);
 
   const cwd = process.cwd();

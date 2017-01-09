@@ -1,4 +1,3 @@
-// @flow
 declare module 'react-recaptcha' {
   declare type DefaultProps = {
     elementID: string,

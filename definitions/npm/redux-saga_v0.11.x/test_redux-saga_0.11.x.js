@@ -748,6 +748,7 @@ function createSagaMiddlewareTest() {
   function* g5(a: string, b: number, c: string, d: number, e: string): Generator<*, *, *> {};
   function* g6(a: string, b: number, c: string, d: number, e: string, f: number): Generator<*, *, *> {};
   function* gSpread(...args: Array<string>): Generator<*, *, *> {};
+  function* gList(): Generator<*, *, *> { yield []; };
 
   middleware.run(g0);
   middleware.run(g1, '1');
@@ -756,6 +757,7 @@ function createSagaMiddlewareTest() {
   middleware.run(g4, '1', 2, '3', 4);
   middleware.run(g5, '1', 2, '3', 4, '5');
   middleware.run(g6, '1', 2, '3', 4, '5', 6);
+  middleware.run(gList);
 
   // $ExpectError: Too few arguments
   middleware.run(g6, '1', 2, '3');
