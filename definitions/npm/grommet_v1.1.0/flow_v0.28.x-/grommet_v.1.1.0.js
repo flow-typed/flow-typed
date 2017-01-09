@@ -4,17 +4,19 @@
  * Repo: https://github.com/RyanCCollins/grommet-flow-type
  */
 
+/* eslint-disable flowtype/no-weak-types */
 declare module 'grommet/components' {
+  declare type Grommet$AccordionDefaultProps = {
+    openMulti: false,
+    animate: true
+  }
   declare type Grommet$AccordionProps = {
     active?: number | number[],
     animate?: boolean,
     onActive?: Function,
     openMulti?: boolean
   }
-
-  declare export class Accordion extends React.Component<void, Grommet$AccordionProps, any> {
-    render(): JSX.Element
-  }
+  declare class Accordion extends React.Component<Grommet$AccordionDefaultProps, Grommet$AccordionProps, any> {}
 
   declare type Grommet$AccordionPanelProps = {
     a11yTitle?: string,
@@ -24,10 +26,8 @@ declare module 'grommet/components' {
     onChange?: Function,
     pad?: any
   }
-
-  declare export class AccordionPanel extends React.Component<void, Grommet$AccordionPanelProps, any> {
+  declare class AccordionPanel extends React.Component<void, Grommet$AccordionPanelProps, any> {
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
   }
 
   declare type Grommet$AnchorProps = {
@@ -48,9 +48,9 @@ declare module 'grommet/components' {
     target?: string
   }
 
-  declare export class Anchor extends React.Component<void, Grommet$AnchorProps, any>{
+  declare class Anchor extends React.Component<void, Grommet$AnchorProps, any> {
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$AnimateProps = {
@@ -60,19 +60,21 @@ declare module 'grommet/components' {
     leave: GrommetCustomTypes$AnimationDetails,
     visible?: "scroll" | boolean
   }
-
-  declare export class Animate extends React.Component<void, Grommet$AnimateProps, any>{
-    render(): JSX.Element
+  declare type Grommet$AnimateDefaultProps = {
+    component: 'div',
+    enter: { animation: 'fade', duration: 300 },
+    visible: true
   }
+  declare class Animate extends React.Component<Grommet$AnimateDefaultProps, Grommet$AnimateProps, any> {}
 
   declare type Grommet$AppProps = {
     centered?: boolean,
     inline?: boolean
   }
-
-  declare export class App extends React.Component<void, Grommet$AppProps, any>{
-    render(): JSX.Element
+  declare type Grommet$AppDefaultProps = {
+    centered: true
   }
+  declare class App extends React.Component<Grommet$AppDefaultProps, Grommet$AppProps, any> {}
 
   declare type Grommet$ArticleProps = {
     controls?: boolean,
@@ -81,26 +83,17 @@ declare module 'grommet/components' {
     scrollStep?: boolean,
     selected?: number
   } & Grommet$BoxProps
-
-
-  declare export class Article extends React.Component<void, Grommet$ArticleProps, any>{
-    render(): JSX.Element
+  declare type Grommet$ArticleDefaultProps = {
+    pad: 'none',
+    direction: 'column'
   }
+  declare class Article extends React.Component<Grommet$ArticleDefaultProps, Grommet$ArticleProps, any> {}
 
-  declare export type Grommet$BoxProps<T>= {
+  declare type Grommet$BoxProps<T>= {
     a11yTitle?: string | any,
     announce?: boolean,
-    align?: "start" |
-      "center" |
-      "end" |
-      "baseline" |
-      "stretch",
-    alignContent?: "start" |
-      "center" |
-      "end" |
-      "between" |
-      "around" |
-      "stretch",
+    align?: "start" | "center" | "end" | "baseline" | "stretch",
+    alignContent?: "start" | "center" | "end" | "between" | "around" | "stretch",
     alignSelf?: "start" | "center" | "end" | "stretch",
     appCentered?: boolean,
     backgroundImage?: string,
@@ -130,14 +123,7 @@ declare module 'grommet/components' {
     reverse?: boolean,
     responsive?: boolean,
     role?: string,
-    separator?: "top" |
-      "bottom" |
-      "left" |
-      "right" |
-      "horizontal" |
-      "vertical" |
-      "all" |
-      "none",
+    separator?: "top" | "bottom" | "left" | "right" | "horizontal" | "vertical" | "all" | "none",
     size?: {
       height?: GrommetBoxTypes$Size | {
         max?: GrommetBoxTypes$FixedSizes,
@@ -154,10 +140,16 @@ declare module 'grommet/components' {
     wrap?: boolean,
     onFocus?: Function
   }
-
-  declare export class Box extends React.Component<void, Grommet$BoxProps<Grommet$Box>, any>{
+  declare type Grommet$BoxDefaultProps = {
+    announce: false,
+    direction: 'column',
+    pad: 'none',
+    tag: 'div',
+    responsive: true,
+    focusable: true
+  };
+  declare class Box extends React.Component<Grommet$BoxDefaultProps, Grommet$BoxProps<Grommet$Box>, any> {
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
   }
 
   declare type Grommet$ButtonProps = {
@@ -177,10 +169,11 @@ declare module 'grommet/components' {
     secondary?: boolean,
     type?: "button" | "reset" | "submit"
   }
-
-  declare export class Button extends React.Component<void, Grommet$ButtonProps, any>{
-    render(): JSX.Element
-  }
+  declare type Grommet$ButtonDefaultProps = {
+    method: 'push',
+    type: 'button'
+  };
+  declare class Button extends React.Component<Grommet$ButtonDefaultProps, Grommet$ButtonProps, any> {}
 
   declare type Grommet$CardProps = {
     contentPad?: GrommetBoxTypes$PadSizes | {
@@ -207,8 +200,8 @@ declare module 'grommet/components' {
   } & Grommet$BoxProps
 
 
-  declare export class Card extends React.Component<void, Grommet$CardProps, any>{
-    render(): JSX.Element
+  declare class Card extends React.Component<void, Grommet$CardProps, any>{
+
   }
 
   declare type Grommet$CarouselProps = {
@@ -219,8 +212,8 @@ declare module 'grommet/components' {
     persistentNav?: boolean
   }
 
-  declare export class Carousel extends React.Component<void, Grommet$CarouselProps, any>{
-    render(): JSX.Element
+  declare class Carousel extends React.Component<void, Grommet$CarouselProps, any>{
+
   }
 
   declare type Grommet$CheckBoxProps = {
@@ -233,8 +226,8 @@ declare module 'grommet/components' {
     toggle?: boolean
   }
 
-  declare export class CheckBox extends React.Component<void, Grommet$CheckBoxProps, any>{
-    render(): JSX.Element
+  declare class CheckBox extends React.Component<void, Grommet$CheckBoxProps, any>{
+
   }
 
   declare type Grommet$ColumnsProps = {
@@ -246,8 +239,8 @@ declare module 'grommet/components' {
     size?: "small" | "medium" | "large"
   }
 
-  declare export class Columns extends React.Component<void, Grommet$ColumnsProps, any>{
-    render(): JSX.Element
+  declare class Columns extends React.Component<void, Grommet$ColumnsProps, any>{
+
   }
 
   declare type Grommet$DateTimeProps = {
@@ -259,8 +252,8 @@ declare module 'grommet/components' {
     value?: string | {}
   }
 
-  declare export class DateTime extends React.Component<void, Grommet$DateTimeProps, any>{
-    render(): JSX.Element
+  declare class DateTime extends React.Component<void, Grommet$DateTimeProps, any>{
+
   }
 
   declare type Grommet$DistributionProps = {
@@ -283,8 +276,8 @@ declare module 'grommet/components' {
     vertical?: boolean
   }
 
-  declare export class Distribution extends React.Component<void, Grommet$DistributionProps, any>{
-    render(): JSX.Element
+  declare class Distribution extends React.Component<void, Grommet$DistributionProps, any>{
+
   }
 
   declare type Grommet$FooterProps = {
@@ -295,8 +288,8 @@ declare module 'grommet/components' {
   } & Grommet$BoxProps
 
 
-  declare export class Footer extends React.Component<void, Grommet$FooterProps, any>{
-    render(): JSX.Element
+  declare class Footer extends React.Component<void, Grommet$FooterProps, any>{
+
   }
 
   declare type Grommet$FormProps = {
@@ -309,8 +302,8 @@ declare module 'grommet/components' {
     }
   }
 
-  declare export class Form extends React.Component<void, Grommet$FormProps, any>{
-    render(): JSX.Element
+  declare class Form extends React.Component<void, Grommet$FormProps, any>{
+
   }
 
   declare type Grommet$FormattedMessageProps = {
@@ -318,8 +311,8 @@ declare module 'grommet/components' {
     defaultMessage?: string
   }
 
-  declare export class FormattedMessage extends React.Component<void, Grommet$FormattedMessageProps, any>{
-    render(): JSX.Element
+  declare class FormattedMessage extends React.Component<void, Grommet$FormattedMessageProps, any>{
+
   }
 
   declare type Grommet$FormFieldProps = {
@@ -332,8 +325,8 @@ declare module 'grommet/components' {
     strong?: boolean
   }
 
-  declare export class FormField extends React.Component<void, Grommet$FormFieldProps, any>{
-    render(): JSX.Element
+  declare class FormField extends React.Component<void, Grommet$FormFieldProps, any>{
+
   }
 
   declare type Grommet$FormFieldsProps = {
@@ -341,8 +334,8 @@ declare module 'grommet/components' {
     className?: string
   }
 
-  declare export class FormFields extends React.Component<void, Grommet$FormFieldsProps, any>{
-    render(): JSX.Element
+  declare class FormFields extends React.Component<void, Grommet$FormFieldsProps, any>{
+
   }
 
   declare type Grommet$HeaderProps = {
@@ -353,8 +346,8 @@ declare module 'grommet/components' {
   } & Grommet$BoxProps
 
 
-  declare export class Header extends React.Component<void, Grommet$HeaderProps, any>{
-    render(): JSX.Element
+  declare class Header extends React.Component<void, Grommet$HeaderProps, any>{
+
   }
 
   declare type Grommet$HeadingProps = {
@@ -367,8 +360,8 @@ declare module 'grommet/components' {
     uppercase?: boolean
   }
 
-  declare export class Heading extends React.Component<void, Grommet$HeadingProps, any>{
-    render(): JSX.Element
+  declare class Heading extends React.Component<void, Grommet$HeadingProps, any>{
+
   }
 
   declare type Grommet$HeadlineProps = {
@@ -378,8 +371,8 @@ declare module 'grommet/components' {
     strong?: boolean
   }
 
-  declare export class Headline extends React.Component<void, Grommet$HeadlineProps, any>{
-    render(): JSX.Element
+  declare class Headline extends React.Component<void, Grommet$HeadlineProps, any>{
+
   }
 
   declare type Grommet$HeroProps = {
@@ -397,8 +390,8 @@ declare module 'grommet/components' {
     separator?: boolean
   }
 
-  declare export class Hero extends React.Component<void, Grommet$HeroProps, any>{
-    render(): JSX.Element
+  declare class Hero extends React.Component<void, Grommet$HeroProps, any>{
+
   }
 
   declare type Grommet$ImageProps = {
@@ -418,8 +411,8 @@ declare module 'grommet/components' {
     title?: string
   }
 
-  declare export class Image extends React.Component<void, Grommet$ImageProps, any>{
-    render(): JSX.Element
+  declare class Image extends React.Component<void, Grommet$ImageProps, any>{
+
   }
 
   declare type Grommet$LabelProps = {
@@ -431,8 +424,8 @@ declare module 'grommet/components' {
     uppercase?: boolean
   }
 
-  declare export class Label extends React.Component<void, Grommet$LabelProps, any>{
-    render(): JSX.Element
+  declare class Label extends React.Component<void, Grommet$LabelProps, any>{
+
   }
 
   declare type Grommet$LayerProps = {
@@ -448,9 +441,9 @@ declare module 'grommet/components' {
     onClose?: Function
   }
 
-  declare export class Layer extends React.Component<void, Grommet$LayerProps, any>{
+  declare class Layer extends React.Component<void, Grommet$LayerProps, any>{
     context: GrommetContextTypes$All;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$LegendProps = {
@@ -474,8 +467,8 @@ declare module 'grommet/components' {
     }
   }
 
-  declare export class Legend extends React.Component<void, Grommet$LegendProps, any>{
-    render(): JSX.Element
+  declare class Legend extends React.Component<void, Grommet$LegendProps, any>{
+
   }
 
   declare type Grommet$ListProps = {
@@ -486,13 +479,13 @@ declare module 'grommet/components' {
     selected?: number | number[]
   }
 
-  declare export class List extends React.Component<void, Grommet$ListProps, any>{
+  declare class List extends React.Component<void, Grommet$ListProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
-  declare export class ListItem extends React.Component<void, Grommet$BoxProps<Grommet$ListItem>, any>{
-    render(): JSX.Element
+  declare class ListItem extends React.Component<void, Grommet$BoxProps<Grommet$ListItem>, any>{
+
   }
 
   declare type Grommet$LoginFormProps = {
@@ -512,8 +505,8 @@ declare module 'grommet/components' {
     usernameType?: string
   }
 
-  declare export class LoginForm extends React.Component<void, Grommet$LoginFormProps, any>{
-    render(): JSX.Element
+  declare class LoginForm extends React.Component<void, Grommet$LoginFormProps, any>{
+
   }
 
   declare type Grommet$MapProps = {
@@ -539,9 +532,9 @@ declare module 'grommet/components' {
     vertical?: boolean
   }
 
-  declare export class Map extends React.Component<void, Grommet$MapProps, any>{
+  declare class Map extends React.Component<void, Grommet$MapProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$MarkdownProps = {
@@ -551,8 +544,8 @@ declare module 'grommet/components' {
     }
   }
 
-  declare export class Markdown extends React.Component<void, Grommet$MarkdownProps, any>{
-    render(): JSX.Element
+  declare class Markdown extends React.Component<void, Grommet$MarkdownProps, any>{
+
   }
 
   declare type Grommet$MenuProps = {
@@ -573,9 +566,9 @@ declare module 'grommet/components' {
   } & Grommet$BoxProps
 
 
-  declare export class Menu extends React.Component<void, Grommet$MenuProps, any>{
+  declare class Menu extends React.Component<void, Grommet$MenuProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$MeterProps = {
@@ -611,9 +604,9 @@ declare module 'grommet/components' {
     responsive?: boolean
   }
 
-  declare export class Meter extends React.Component<void, Grommet$MeterProps, any>{
+  declare class Meter extends React.Component<void, Grommet$MeterProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$NotificationProps = {
@@ -629,9 +622,9 @@ declare module 'grommet/components' {
   } & Grommet$BoxProps
 
 
-  declare export class Notification extends React.Component<void, Grommet$NotificationProps, any>{
+  declare class Notification extends React.Component<void, Grommet$NotificationProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$NumberInputProps = {
@@ -646,16 +639,16 @@ declare module 'grommet/components' {
     value?: number | string
   }
 
-  declare export class NumberInput extends React.Component<void, Grommet$NumberInputProps, any>{
-    render(): JSX.Element
+  declare class NumberInput extends React.Component<void, Grommet$NumberInputProps, any>{
+
   }
 
   declare type Grommet$ObjectProps = {
     data: {}
   }
 
-  declare export class Object extends React.Component<void, Grommet$ObjectProps, any>{
-    render(): JSX.Element
+  declare class Object extends React.Component<void, Grommet$ObjectProps, any>{
+
   }
 
   declare type Grommet$ParagraphProps = {
@@ -665,8 +658,8 @@ declare module 'grommet/components' {
     width?: "small" | "medium" | "large"
   }
 
-  declare export class Paragraph extends React.Component<void, Grommet$ParagraphProps, any>{
-    render(): JSX.Element
+  declare class Paragraph extends React.Component<void, Grommet$ParagraphProps, any>{
+
   }
 
   declare type Grommet$QuoteProps = {
@@ -677,8 +670,8 @@ declare module 'grommet/components' {
   } & Grommet$BoxProps
 
 
-  declare export class Quote extends React.Component<void, Grommet$QuoteProps, any>{
-    render(): JSX.Element
+  declare class Quote extends React.Component<void, Grommet$QuoteProps, any>{
+
   }
 
   declare type Grommet$RadioButtonProps = {
@@ -692,8 +685,8 @@ declare module 'grommet/components' {
     value?: string
   }
 
-  declare export class RadioButton extends React.Component<void, Grommet$RadioButtonProps, any>{
-    render(): JSX.Element
+  declare class RadioButton extends React.Component<void, Grommet$RadioButtonProps, any>{
+
   }
 
   declare type Grommet$SearchProps = {
@@ -724,9 +717,9 @@ declare module 'grommet/components' {
     value?: string
   }
 
-  declare export class Search extends React.Component<void, Grommet$SearchProps, any>{
+  declare class Search extends React.Component<void, Grommet$SearchProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$SearchInputProps = {
@@ -740,13 +733,13 @@ declare module 'grommet/components' {
     value?: GrommetCustomTypes$SearchInputValue | string
   }
 
-  declare export class SearchInput extends React.Component<void, Grommet$SearchInputProps, any>{
+  declare class SearchInput extends React.Component<void, Grommet$SearchInputProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
-  declare export class Section extends React.Component<void, Grommet$BoxProps<Grommet$Section>, any>{
-    render(): JSX.Element
+  declare class Section extends React.Component<void, Grommet$BoxProps<Grommet$Section>, any>{
+
   }
 
   declare type Grommet$SelectProps = {
@@ -759,8 +752,8 @@ declare module 'grommet/components' {
     value?: GrommetCustomTypes$SelectValueType | GrommetCustomTypes$SelectValueType[]
   }
 
-  declare export class Select extends React.Component<void, Grommet$SelectProps, any>{
-    render(): JSX.Element
+  declare class Select extends React.Component<void, Grommet$SelectProps, any>{
+
   }
 
   declare type Grommet$SidebarProps = {
@@ -770,21 +763,21 @@ declare module 'grommet/components' {
   } & Grommet$BoxProps
 
 
-  declare export class Sidebar extends React.Component<void, Grommet$SidebarProps, any>{
-    render(): JSX.Element
+  declare class Sidebar extends React.Component<void, Grommet$SidebarProps, any>{
+
   }
 
   declare type Grommet$SkipLinkAnchorProps = {
     label: React.ReactNode
   }
 
-  declare export class SkipLinkAnchor extends React.Component<void, Grommet$SkipLinkAnchorProps, any>{
-    render(): JSX.Element
+  declare class SkipLinkAnchor extends React.Component<void, Grommet$SkipLinkAnchorProps, any>{
+
   }
 
-  declare export class SkipLinks extends React.Component<void, any, any>{
+  declare class SkipLinks extends React.Component<void, any, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$SocialShareProps = {
@@ -801,8 +794,8 @@ declare module 'grommet/components' {
       "google"
   }
 
-  declare export class SocialShare extends React.Component<void, Grommet$SocialShareProps, any>{
-    render(): JSX.Element
+  declare class SocialShare extends React.Component<void, Grommet$SocialShareProps, any>{
+
   }
 
   declare type Grommet$SplitProps = {
@@ -814,8 +807,8 @@ declare module 'grommet/components' {
     showOnResponsive?: "priority" | "both"
   }
 
-  declare export class Split extends React.Component<void, Grommet$SplitProps, any>{
-    render(): JSX.Element
+  declare class Split extends React.Component<void, Grommet$SplitProps, any>{
+
   }
 
   declare type Grommet$SunBurstProps = {
@@ -837,9 +830,9 @@ declare module 'grommet/components' {
       "full"
   }
 
-  declare export class SunBurst extends React.Component<void, Grommet$SunBurstProps, any>{
+  declare class SunBurst extends React.Component<void, Grommet$SunBurstProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$SVGIconProps = {
@@ -853,9 +846,9 @@ declare module 'grommet/components' {
     type?: "control" | "logo" | "status"
   }
 
-  declare export class SVGIcon extends React.Component<void, Grommet$SVGIconProps, any>{
+  declare class SVGIcon extends React.Component<void, Grommet$SVGIconProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare interface Grommet$TabProps {
@@ -865,8 +858,8 @@ declare module 'grommet/components' {
       onRequestForActive?: Function
   }
 
-  declare export class Tab extends React.Component<void, Grommet$TabProps, any>{
-    render(): JSX.Element
+  declare class Tab extends React.Component<void, Grommet$TabProps, any>{
+
   }
 
   declare type Grommet$TableProps = {
@@ -878,9 +871,9 @@ declare module 'grommet/components' {
     selected?: number | number[]
   }
 
-  declare export class Table extends React.Component<void, Grommet$TableProps, any>{
+  declare class Table extends React.Component<void, Grommet$TableProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$TableHeaderProps = {
@@ -890,16 +883,16 @@ declare module 'grommet/components' {
     sortIndex?: number
   }
 
-  declare export class TableHeader extends React.Component<void, Grommet$TableHeaderProps, any>{
-    render(): JSX.Element
+  declare class TableHeader extends React.Component<void, Grommet$TableHeaderProps, any>{
+
   }
 
   declare type Grommet$TableRowProps = {
     onClick?: Function
   }
 
-  declare export class TableRow extends React.Component<void, Grommet$TableRowProps, any>{
-    render(): JSX.Element
+  declare class TableRow extends React.Component<void, Grommet$TableRowProps, any>{
+
   }
 
   declare type Grommet$TabsProps = {
@@ -909,9 +902,9 @@ declare module 'grommet/components' {
     onActive?: Function
   }
 
-  declare export class Tabs extends React.Component<void, Grommet$TabsProps, any>{
+  declare class Tabs extends React.Component<void, Grommet$TabsProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$TextInputProps = {
@@ -928,9 +921,9 @@ declare module 'grommet/components' {
     value?: string
   }
 
-  declare export class TextInput extends React.Component<void, Grommet$TextInputProps, any>{
+  declare class TextInput extends React.Component<void, Grommet$TextInputProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$TileProps = {
@@ -942,8 +935,8 @@ declare module 'grommet/components' {
   } & Grommet$BoxProps
 
 
-  declare export class Tile extends React.Component<void, Grommet$TileProps, any>{
-    render(): JSX.Element
+  declare class Tile extends React.Component<void, Grommet$TileProps, any>{
+
   }
 
   declare type Grommet$TilesProps = {
@@ -956,9 +949,9 @@ declare module 'grommet/components' {
   } & Grommet$BoxProps
 
 
-  declare export class Tiles extends React.Component<void, Grommet$TilesProps, any>{
+  declare class Tiles extends React.Component<void, Grommet$TilesProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$TimestampProps = {
@@ -967,8 +960,8 @@ declare module 'grommet/components' {
     value: string | {}
   }
 
-  declare export class Timestamp extends React.Component<void, Grommet$TimestampProps, any>{
-    render(): JSX.Element
+  declare class Timestamp extends React.Component<void, Grommet$TimestampProps, any>{
+
   }
 
   declare type Grommet$TipProps = {
@@ -977,8 +970,8 @@ declare module 'grommet/components' {
     target: string
   }
 
-  declare export class Tip extends React.Component<void, Grommet$TipProps, any>{
-    render(): JSX.Element
+  declare class Tip extends React.Component<void, Grommet$TipProps, any>{
+
   }
 
   declare type Grommet$TitleProps = {
@@ -988,9 +981,9 @@ declare module 'grommet/components' {
     truncate?: boolean
   }
 
-  declare export class Title extends React.Component<void, Grommet$TitleProps, any>{
+  declare class Title extends React.Component<void, Grommet$TitleProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$ToastProps = {
@@ -998,8 +991,8 @@ declare module 'grommet/components' {
     status?: string
   }
 
-  declare export class Toast extends React.Component<void, Grommet$ToastProps, any>{
-    render(): JSX.Element
+  declare class Toast extends React.Component<void, Grommet$ToastProps, any>{
+
   }
 
   declare type Grommet$TopologyProps = {
@@ -1011,9 +1004,9 @@ declare module 'grommet/components' {
     linkOffset?: number
   }
 
-  declare export class Topology extends React.Component<void, Grommet$TopologyProps, any>{
+  declare class Topology extends React.Component<void, Grommet$TopologyProps, any>{
     context: GrommetContextTypes$Intl;
-    render(): JSX.Element
+
   }
 
   declare type Grommet$ValueProps = {
@@ -1034,8 +1027,8 @@ declare module 'grommet/components' {
     units?: React.ReactNode | string
   }
 
-  declare export class Value extends React.Component<void, Grommet$ValueProps, any>{
-    render(): JSX.Element
+  declare class Value extends React.Component<void, Grommet$ValueProps, any>{
+
   }
 
   declare type Grommet$VideoProps = {
@@ -1065,8 +1058,8 @@ declare module 'grommet/components' {
     title?: React.ReactNode
   }
 
-  declare export class Video extends React.Component<void, Grommet$VideoProps, any>{
-    render(): JSX.Element
+  declare class Video extends React.Component<void, Grommet$VideoProps, any>{
+
   }
 
   declare type Grommet$WorldMapProps = {
@@ -1077,8 +1070,8 @@ declare module 'grommet/components' {
     }>
   }
 
-  declare export class WorldMap extends React.Component<void, Grommet$WorldMapProps, any>{
-    render(): JSX.Element
+  declare class WorldMap extends React.Component<void, Grommet$WorldMapProps, any>{
+
   }
   declare type GrommetBoxTypes$FixedSizes = "xsmall" | "small" | "medium" | "large" | "xlarge" | "xxlarge";
 

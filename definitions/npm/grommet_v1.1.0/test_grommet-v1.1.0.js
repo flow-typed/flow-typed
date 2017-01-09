@@ -63,7 +63,15 @@ import {
   Animate,
 } from 'grommet/components';
 
-class TestApp extends React.Component<any, any> {
+class FailingApp extends React.Component<void, void, void> {
+  render() {
+    return (
+      <App foo />
+    );
+  }
+}
+
+class TestApp extends React.Component<void, void, void> {
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
@@ -71,7 +79,7 @@ class TestApp extends React.Component<any, any> {
   handleClick() { return; }
   render() {
     return (
-      <App centered inline>
+      <App foo centered inline>
         <Headline align="center">
           Grommet + TypeScript
         </Headline>
