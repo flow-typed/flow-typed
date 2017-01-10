@@ -25,7 +25,7 @@ declare module 'lodash' {
   };
 
   declare type NestedArray<T> = Array<Array<T>>;
-  
+
   declare type matchesIterateeShorthand = Object;
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
@@ -35,7 +35,7 @@ declare module 'lodash' {
     | matchesIterateeShorthand
     | matchesPropertyIterateeShorthand
     | propertyIterateeShorthand;
-  
+
   declare type OIterateeWithResult<V, O, R> = Object|string|((value: V, key: string, object: O) => R);
   declare type OIteratee<O> = OIterateeWithResult<any, O, any>;
   declare type OFlatMapIteratee<T, U> = OIterateeWithResult<any, T, Array<U>>;
@@ -45,7 +45,7 @@ declare module 'lodash' {
     | matchesIterateeShorthand
     | matchesPropertyIterateeShorthand
     | propertyIterateeShorthand;
-  
+
   declare type _Iteratee<T> = (item: T, index: number, array: ?Array<T>) => mixed;
   declare type Iteratee<T> = _Iteratee<T>|Object|string;
   declare type Iteratee2<T, U> = ((item: T, index: number, array: ?Array<T>) => U)|Object|string;
@@ -298,7 +298,8 @@ declare module 'lodash' {
     isRegExp(value: any): bool;
     isSafeInteger(value: any): bool;
     isSet(value: any): bool;
-    isString(value: any): bool;
+    isString(value: string): true;
+    isString(value: number|Function|void|null|Object|Array<any>): false;
     isSymbol(value: any): bool;
     isTypedArray(value: any): bool;
     isUndefined(value: any): bool;
