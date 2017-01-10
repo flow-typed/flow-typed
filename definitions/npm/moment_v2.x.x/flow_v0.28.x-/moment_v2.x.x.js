@@ -93,6 +93,7 @@ declare class moment$MomentDuration {
   as(unit: string): number;
   get(unit: string): number;
   toJSON(): string;
+  toISOString(): string;
 }
 declare class moment$Moment {
   static ISO_8601: string;
