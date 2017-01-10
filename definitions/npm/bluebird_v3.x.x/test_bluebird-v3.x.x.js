@@ -57,3 +57,15 @@ fooPromise()
 Bluebird.resolve(['arr', { some: 'value' }, 42])
   .spread((someString: string, map: Object, answer: number) => answer)
   .then(answer => answer * 2);
+
+Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)],
+  function (memo, next) { return memo + next })
+Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)],
+  function (memo, next) { return memo + next },
+  1)
+Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)],
+  function (memo, next) { return memo + next },
+  Bluebird.resolve(1))
+Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)],
+  function (memo, next) { return memo + next },
+  Promise.resolve(1))
