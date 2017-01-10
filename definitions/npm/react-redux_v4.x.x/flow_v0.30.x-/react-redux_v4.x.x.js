@@ -14,7 +14,7 @@ declare module 'react-redux' {
 
   declare type MapStateToProps<S, OP: Object, SP: Object> = (state: S, ownProps: OP) => SP | MapStateToProps<S, OP, SP>;
 
-  declare type MapDispatchToProps<A, OP: Object, DP: Object> = ((dispatch: Dispatch<A>, ownProps: OP) => DP) | DP;
+  declare type MapDispatchToProps<A, OP: Object, DP: Object> = DP | ((dispatch: Dispatch<A>, ownProps: OP) => DP);
 
   declare type MergeProps<SP, DP: Object, OP: Object, P: Object> = (stateProps: SP, dispatchProps: DP, ownProps: OP) => P;
 
