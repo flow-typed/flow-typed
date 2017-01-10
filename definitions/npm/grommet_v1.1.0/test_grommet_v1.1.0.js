@@ -1,88 +1,101 @@
 // @flow
-import React from 'react';
-import {
-  App,
-  Article,
-  Box,
-  Card,
-  Columns,
-  Accordion,
-  AccordionPanel,
-  Paragraph,
-  Value,
-  Layer,
-  Menu,
-  Header,
-  Footer,
-  Anchor,
-  Split,
-  Hero,
-  Image,
-  Heading,
-  Headline,
-  Notification,
-  Section,
-  Sidebar,
-  Title,
-  Button,
-  Toast,
-  Label,
-  Markdown,
-  Quote,
-  Timestamp,
-  Search,
-  Select,
-  Tabs,
-  Tab,
-  Tip,
-  CheckBox,
-  Form,
-  FormFields,
-  LoginForm,
-  NumberInput,
-  FormField,
-  DateTime,
-  RadioButton,
-  SearchInput,
-  TextInput,
-  List,
-  ListItem,
-  Table,
-  TableRow,
-  TableHeader,
-  Tiles,
-  Tile,
-  Distribution,
-  Map,
-  Meter,
-  Legend,
-  SunBurst,
-  Topology,
-  WorldMap,
-  Carousel,
-  Animate,
-} from 'grommet/components';
+import React, { Component } from 'react';
+import Accordion from 'grommet/components/Accordion';
+import AccordionPanel from 'grommet/components/AccordionPanel';
+import Anchor from 'grommet/components/Anchor';
+import Animate from 'grommet/components/Animate';
+import App from 'grommet/components/App';
+import Article from 'grommet/components/Article';
+import Box from 'grommet/components/Box';
+import Button from 'grommet/components/Button';
+import Card from 'grommet/components/Card';
+import Carousel from 'grommet/components/Carousel';
+import CheckBox from 'grommet/components/CheckBox';
+import Columns from 'grommet/components/Columns';
+import DateTime from 'grommet/components/DateTime';
+import Distribution from 'grommet/components/Distribution';
+import Footer from 'grommet/components/Footer';
+import Form from 'grommet/components/Form';
+import FormField from 'grommet/components/FormField';
+import FormFields from 'grommet/components/FormFields';
+import Header from 'grommet/components/Header';
+import Heading from 'grommet/components/Heading';
+import Headline from 'grommet/components/Headline';
+import Hero from 'grommet/components/Hero';
+import Image from 'grommet/components/Image';
+import Label from 'grommet/components/Label';
+import Layer from 'grommet/components/Layer';
+import Legend from 'grommet/components/Legend';
+import List from 'grommet/components/List';
+import ListItem from 'grommet/components/ListItem';
+import LoginForm from 'grommet/components/LoginForm';
+import Map from 'grommet/components/Map';
+import Markdown from 'grommet/components/Markdown';
+import Menu from 'grommet/components/Menu';
+import Meter from 'grommet/components/Meter';
+import Notification from 'grommet/components/Notification';
+import NumberInput from 'grommet/components/NumberInput';
+import Paragraph from 'grommet/components/Paragraph';
+import Quote from 'grommet/components/Quote';
+import RadioButton from 'grommet/components/RadioButton';
+import Search from 'grommet/components/Search';
+import SearchInput from 'grommet/components/SearchInput';
+import Section from 'grommet/components/Section';
+import Select from 'grommet/components/Select';
+import Sidebar from 'grommet/components/Sidebar';
+import Split from 'grommet/components/Split';
+import SunBurst from 'grommet/components/SunBurst';
+import Tab from 'grommet/components/Tab';
+import Table from 'grommet/components/Table';
+import TableHeader from 'grommet/components/TableHeader';
+import TableRow from 'grommet/components/TableRow';
+import Tabs from 'grommet/components/Tabs';
+import TextInput from 'grommet/components/TextInput';
+import Tile from 'grommet/components/Tile';
+import Tiles from 'grommet/components/Tiles';
+import Timestamp from 'grommet/components/Timestamp';
+import Tip from 'grommet/components/Tip';
+import Title from 'grommet/components/Title';
+import Toast from 'grommet/components/Toast';
+import Topology from 'grommet/components/Topology';
+import Value from 'grommet/components/Value';
+import Video from 'grommet/components/Video';
+import WorldMap from 'grommet/components/WorldMap';
 
-class FailingApp extends React.Component<void, void, void> {
+class FailingApp extends Component {
   render() {
     return (
-      <App foo />
+      // $ExpectError This type is incompatible with boolean
+      <App centered="false">
+        {/* $ExpectError This type is incompatible with string enum */}
+        <Headline align="asdf">
+          Grommet + Flow
+        </Headline>
+      </App>
     );
   }
 }
 
-class TestApp extends React.Component<void, void, void> {
-  constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
+class ExampleApp extends Component {
+  handleClick() {
+    return "foo";
   }
-  handleClick() { return; }
   render() {
     return (
-      <App foo centered inline>
-        <Headline align="center">
+      <App centered={true} inline={true}>
+        <Headline align="center" justify="left">
           Grommet + TypeScript
         </Headline>
+        <Video full={true}
+          autoPlay={true}
+          loop={true}
+          muted={true}
+          poster='/img/mobile_first.jpg'
+          shareLink='http://grommet.io'
+          shareText='Sample share text'>
+          <source src='/video/test.mp4'
+            type='video/mp4' />
+        </Video>
         <Box pad={{between: "medium"}}
           align='center'>
           <Button label='Leave'
@@ -115,11 +128,11 @@ class TestApp extends React.Component<void, void, void> {
           series={[{
             continent: "NorthAmerica",
             colorIndex: "graph-1",
-            onClick: this.handleClick,
+            onClick: this.handleClick
           }, {
             continent: "SouthAmerica",
             colorIndex: "accent-2",
-            onClick: this.handleClick,
+            onClick: this.handleClick
           }]}
         />
         <Topology
@@ -147,8 +160,8 @@ class TestApp extends React.Component<void, void, void> {
                   colorIndex: "neutral-1",
                   total: 10,
                   children: [
-                    {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                    {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+                {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
                   ]
                 }
               ]
@@ -156,15 +169,15 @@ class TestApp extends React.Component<void, void, void> {
               value: 30,
               colorIndex: "neutral-2",
               children: [
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+              {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+              {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
               ]
             }, {
               value: 20,
               colorIndex: "neutral-3",
               children: [
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+              {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
+              {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
               ]
             }]}
             onActive={this.handleClick}
@@ -175,19 +188,19 @@ class TestApp extends React.Component<void, void, void> {
         <Legend series={[{label: "Americas", value: 40, colorIndex: "graph-1", onClick: this.handleClick}]} />
         <Map
           data={{
-          categories: [
-            {
-              id: "category-3",
-              label: "Third category",
-              items: [
-                {id: "item-3-1", label: "Sixth item"},
-                {id: "item-3-2", label: "Seventh item"}
-              ]
-            }
-          ],
-          links: [
-            {parentId: "item-1-1", childId: "item-2-2"},
-          ]
+            categories: [
+              {
+                id: "category-3",
+                label: "Third category",
+                items: [
+              {id: "item-3-1", label: "Sixth item"},
+              {id: "item-3-2", label: "Seventh item"}
+                ]
+              }
+            ],
+            links: [
+            {parentId: "item-1-1", childId: "item-2-2"}
+            ]
           }}
         />
         <Distribution series={[{label: "First", value: 40, colorIndex: "graph-1"}, {label: "Second", value: 30, colorIndex: "accent-2"}]} />
@@ -497,11 +510,11 @@ class TestApp extends React.Component<void, void, void> {
           suggestions={[
             {
               value: "first",
-              label: "FOO",
+              label: "FOO"
             },
             {
               value: "first",
-              label: "FOO",
+              label: "FOO"
             }
           ]}
         />
@@ -865,3 +878,5 @@ class TestApp extends React.Component<void, void, void> {
     );
   }
 }
+
+export default ExampleApp;
