@@ -30,6 +30,7 @@ strings.elementAt(1, 5);
 (Observable.of(numbers, numbers).concatAll(): Observable<number>);
 
 (numbers.pairwise(): Observable<Array<number>>);
+(numbers.skipWhile(x => true): Observable<number>);
 
 // $ExpectError -- need the typecast or the error appears at the declaration site
 numbers.merge((strings: Observable<string>));

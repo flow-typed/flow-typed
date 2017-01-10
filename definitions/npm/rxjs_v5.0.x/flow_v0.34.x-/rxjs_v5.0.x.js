@@ -224,6 +224,8 @@ declare class rxjs$Observable<+T> {
 
   skipUntil(other: rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
 
+  skipWhile(predicate: (value: T) => boolean): rxjs$Observable<T>;
+
   startWith(...values: Array<T>): rxjs$Observable<T>;
 
   subscribeOn(scheduler: rxjs$SchedulerClass): rxjs$Observable<T>;
