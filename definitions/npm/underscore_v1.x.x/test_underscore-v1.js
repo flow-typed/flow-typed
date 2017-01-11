@@ -1,5 +1,5 @@
 /** @flow */
-var _ = require('underscore');
+import _ from 'underscore';
 
 /**
  * _.find
@@ -171,3 +171,18 @@ _.template(321).foo;
 _.template(321)({b: "_"});
 // $ExpectError This type is incompatible with string
 _.template("a<%=b%>c")({b: 1});
+
+_.isObject({});
+_.isArguments(null);
+_.isFunction(() => {});
+_.isString('');
+_.isBoolean(true);
+_.isNumber(1);
+_.isFinite(1);
+_.isBoolean(1);
+_.isDate(new Date());
+_.isRegExp(/[a-z]/);
+_.isError(new Error('?'));
+_.isNaN(NaN);
+_.isNull(null);
+_.isUndefined(undefined);
