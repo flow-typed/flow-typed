@@ -89,14 +89,26 @@ Bluebird.resolve(['arr', { some: 'value' }, 42])
   .spread((someString: string, map: Object, answer: number) => answer)
   .then(answer => answer * 2);
 
-Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)],
-  function (memo, next) { return memo + next })
-Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)],
-  function (memo, next) { return memo + next },
-  1)
-Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)],
-  function (memo, next) { return memo + next },
-  Bluebird.resolve(1))
-Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)],
-  function (memo, next) { return memo + next },
-  Promise.resolve(1))
+Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)], (memo, next) => memo + next);
+Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)], (memo, next) => memo + next, 1);
+Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)], (memo, next) => memo + next, Bluebird.resolve(1));
+Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)], (memo, next) => memo + next, Promise.resolve(1))
+
+Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Promise.resolve(prev * num))
+Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num))
+//$ExpectError
+Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num), 'hello')
+
+type PromiseOutput<T> = () => Promise<T>;
+let givePromise1: PromiseOutput<number> = () => Promise.resolve(1);
+let givePromise2: PromiseOutput<number> = () => Bluebird.resolve(2);
+// $ExpectError
+let givePromise3: PromiseOutput<number> = () => Bluebird.resolve('hello');
+
+type PromiseInput<T> = (input: Promise<T>) => Function
+let takePromise: PromiseInput<number> = (promise) => promise.then
+takePromise(Promise.resolve(1));
+takePromise(Bluebird.resolve(1));
+// $ExpectError
+takePromise(Bluebird.resolve('hello'));
+
