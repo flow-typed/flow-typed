@@ -54,7 +54,23 @@ declare class Bluebird$Promise<R> {
   static reject<T>(error?: any): Bluebird$Promise<T>;
   static resolve<T>(object?: Bluebird$Promisable<T>): Bluebird$Promise<T>;
   static some<T, Elem: Bluebird$Promisable<T>>(Promises: Array<Elem>, count: number): Bluebird$Promise<Array<T>>;
-  static join<T, Elem: Bluebird$Promisable<T>>(...Promises: Array<Elem>): Bluebird$Promise<Array<T>>;
+
+  static join<T, A>(
+    value1: Bluebird$Promisable<A>,
+    handler: (a: A) => T
+  ): Bluebird$Promise<T>;
+  static join<T, A, B>(
+    value1: Bluebird$Promisable<A>,
+    value2: Bluebird$Promisable<B>,
+    handler: (a: A, b: B) => T
+  ): Bluebird$Promise<T>;
+  static join<T, A, B, C>(
+    value1: Bluebird$Promisable<A>,
+    value2: Bluebird$Promisable<B>,
+    value3: Bluebird$Promisable<C>,
+    handler: (a: A, b: B, c: C) => T
+  ): Bluebird$Promise<T>;
+
   static map<T, U, Elem: Bluebird$Promisable<T>>(
     Promises: Array<Elem>,
     mapper: (item: T, index: number, arrayLength: number) => U,
@@ -67,7 +83,7 @@ declare class Bluebird$Promise<R> {
   static reduce<T, U, Elem: Bluebird$Promisable<T>>(
     Promises: Array<Elem>,
     reducer: (total: U, current: T, index: number, arrayLength: number) => U,
-    initialValue?: U
+    initialValue?: Bluebird$Promisable<U>
   ): Bluebird$Promise<U>;
   static filter<T, Elem: Bluebird$Promisable<T>>(
     Promises: Array<Elem>,
@@ -94,11 +110,11 @@ declare class Bluebird$Promise<R> {
 
   // It doesn't seem possible to have type-generics for a variable number of arguments.
   // Handle up to 3 arguments, then just give up and accept 'any'.
-  static method<T>(fn: () => T): () => Bluebird$Promise<T>;
-  static method<T, A>(fn: (a: A) => T): (a: A) => Bluebird$Promise<T>;
-  static method<T, A, B>(fn: (a: A, b: B) => T): (a: A, b: B) => Bluebird$Promise<T>;
-  static method<T, A, B, C>(fn: (a: A, b: B, c: B) => T): (a: A, b: B, c: B) => Bluebird$Promise<T>;
-  static method<T>(fn: (...args: any) => T): (...args: any) => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>>(fn: () => R): () => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>, A>(fn: (a: A) => R): (a: A) => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>, A, B>(fn: (a: A, b: B) => R): (a: A, b: B) => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>, A, B, C>(fn: (a: A, b: B, c: C) => R): (a: A, b: B, c: C) => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>>(fn: (...args: any) => R): (...args: any) => Bluebird$Promise<T>;
 
   static cast<T>(value: Bluebird$Promisable<T>): Bluebird$Promise<T>;
   static bind(ctx: any): Bluebird$Promise<void>;
@@ -136,7 +152,7 @@ declare class Bluebird$Promise<R> {
   mapSeries<T, U>(mapper: (item: T, index: number, arrayLength: number) => Bluebird$Promisable<U>): Bluebird$Promise<Array<U>>;
   reduce<T, U>(
     reducer: (total: T, item: U, index: number, arrayLength: number) => Bluebird$Promisable<T>,
-    initialValue?: T
+    initialValue?: Bluebird$Promisable<T>
   ): Bluebird$Promise<T>;
   filter<T>(filterer: (item: T, index: number, arrayLength: number) => Bluebird$Promisable<bool>, options?: Bluebird$ConcurrencyOption): Bluebird$Promise<Array<T>>;
   each<T, U>(iterator: (item: T, index: number, arrayLength: number) => Bluebird$Promisable<U>): Bluebird$Promise<Array<T>>;

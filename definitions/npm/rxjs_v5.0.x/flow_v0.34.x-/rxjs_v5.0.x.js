@@ -224,6 +224,8 @@ declare class rxjs$Observable<+T> {
 
   skipUntil(other: rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
 
+  skipWhile(predicate: (value: T) => boolean): rxjs$Observable<T>;
+
   startWith(...values: Array<T>): rxjs$Observable<T>;
 
   subscribeOn(scheduler: rxjs$SchedulerClass): rxjs$Observable<T>;
@@ -247,7 +249,7 @@ declare class rxjs$Observable<+T> {
 
   throttleTime(duration: number): rxjs$Observable<T>;
 
-  timeout(due: number | Date, errorToSend?: any): rxjs$Observable<T>;
+  timeout(due: number | Date, _: void): rxjs$Observable<T>;
 
   toArray(): rxjs$Observable<T[]>;
 
@@ -668,6 +670,9 @@ declare class rxjs$SchedulerClass {
   schedule<T>(work: (state?: T) => void, delay?: number, state?: T): rxjs$Subscription;
 }
 
+declare class rxjs$TimeoutError extends Error {
+}
+
 declare module 'rxjs' {
   declare module.exports: {
     Observable: typeof rxjs$Observable,
@@ -682,6 +687,7 @@ declare module 'rxjs' {
       async: rxjs$SchedulerClass,
     },
     Subscription: typeof rxjs$Subscription,
+    TimeoutError: typeof rxjs$TimeoutError,
   }
 }
 

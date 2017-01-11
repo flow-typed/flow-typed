@@ -99,8 +99,7 @@ declare module "underscore" {
 
   declare function without<T>(a: T[], ...values: T[]): T[];
 
-  // TODO: union
-
+  declare function union<T>(...arrays: Array<Array<T>>): Array<T>;
   declare function intersection<T>(...arrays: Array<Array<T>>): Array<T>;
 
   declare function difference<T>(array: Array<T>, ...others: Array<Array<T>>): Array<T>;
@@ -133,7 +132,7 @@ declare module "underscore" {
 
   // TODO: bindAll
 
-  // TODO: partial
+  declare function partial(fn: Function, ...arguments: Array<any>): Function;
 
   declare function memoize(fn: Function): Function;
 
@@ -155,7 +154,7 @@ declare module "underscore" {
 
   // TODO: negate
 
-  // TODO: compose
+  declare function compose(...functions: Function[]): Function;
 
   /**
    * Objects
@@ -208,21 +207,20 @@ declare module "underscore" {
 
   // TODO: isElement
 
-  declare function isArray(a: any): boolean;
-
-  // TODO: isObject
-  // TODO: isArguments
-  // TODO: isFunction
-  // TODO: isString
-  // TODO: isNumber
-  // TODO: isFinite
-  // TODO: isBoolean
-  // TODO: isDate
-  // TODO: isRegExp
-  // TODO: isError
-  // TODO: isNaN
-  // TODO: isNull
-  // TODO: isUndefined
+  declare function isArray(o: any): boolean;
+  declare function isObject(o: any): boolean;
+  declare function isArguments(o: any): boolean;
+  declare function isFunction(o: any): boolean;
+  declare function isString(o: any): boolean;
+  declare function isNumber(o: any): boolean;
+  declare function isFinite(o: any): boolean;
+  declare function isBoolean(o: any): boolean;
+  declare function isDate(o: any): boolean;
+  declare function isRegExp(o: any): boolean;
+  declare function isError(o: any): boolean;
+  declare function isNaN(o: any): boolean;
+  declare function isNull(o: any): boolean;
+  declare function isUndefined(o: any): boolean;
 
   /**
    * Utility
@@ -249,4 +247,3 @@ declare module "underscore" {
   // TODO: value
 
 }
-

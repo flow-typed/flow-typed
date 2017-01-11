@@ -1,5 +1,5 @@
 /** @flow */
-var _ = require('underscore');
+import _ from 'underscore';
 
 /**
  * _.find
@@ -122,6 +122,7 @@ _.find([1, 2, 3], {val: 1});
 // $ExpectError Property not found in Number
 (_.all([2, 4, 5], function(i) { return i.length }): boolean);
 (_.some([2, 4, 5], function(i) { return i % 2 == 0 }): boolean);
+(_.union(['a', 'b'], ['b']): Array<string>);
 (_.intersection(['a', 'b'], ['b']): Array<string>);
 (_.difference(['a', 'b'], ['b']): Array<string>);
 (_.first([1,2,3]): number);
@@ -145,7 +146,17 @@ _.throttle(function(a) {a.length}, 10)('hello');
 _.debounce(function(a) {a.length}, 10)('hello');
 
 _.memoize(function(){})();
+_.partial(function (a, b) { return a + b }, 1)(2);
 _.defer(function(){});
+
+(
+
+  _.compose(
+    function (name:string):string { return name + ', hello!'; },
+    function (user:Object):string { return user.name; }
+  ): (user: Object) => string
+
+);
 
 (_.partition([1,5,2,4], function(i: number) { return i<4 }): [Array<number>, Array<number>]);
 (_.partition({x: 'foo', y: 'bar'}, function(v: string, k: string) { return k === 'bar' }): [Array<string>, Array<string>]);
@@ -160,3 +171,18 @@ _.template(321).foo;
 _.template(321)({b: "_"});
 // $ExpectError This type is incompatible with string
 _.template("a<%=b%>c")({b: 1});
+
+_.isObject({});
+_.isArguments(null);
+_.isFunction(() => {});
+_.isString('');
+_.isBoolean(true);
+_.isNumber(1);
+_.isFinite(1);
+_.isBoolean(1);
+_.isDate(new Date());
+_.isRegExp(/[a-z]/);
+_.isError(new Error('?'));
+_.isNaN(NaN);
+_.isNull(null);
+_.isUndefined(undefined);
