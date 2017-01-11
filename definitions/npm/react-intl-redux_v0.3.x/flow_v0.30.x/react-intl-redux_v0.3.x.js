@@ -1,3 +1,5 @@
+import type { Store } from 'redux'
+
 declare module 'react-intl-redux' {
 
   declare type messages = {
@@ -10,7 +12,7 @@ declare module 'react-intl-redux' {
   };
 
   declare type updateIntlAction = {
-    type: UPDATE,
+    type: typeof UPDATE,
     payload: localeObject,
   };
 
@@ -19,8 +21,8 @@ declare module 'react-intl-redux' {
 
   declare function updateIntl(localeObject: localeObject): updateIntlAction;
 
-  declare function intlReducer<S>(state?: S, action?: updateIntlAction): S;
-  
+  declare function intlReducer<V>(state?: V, action?: updateIntlAction): V;
+
   declare class Provider<S, A> extends React$Component<void, { store: Store<S, A>, children?: any }, void> { }
 
 };
