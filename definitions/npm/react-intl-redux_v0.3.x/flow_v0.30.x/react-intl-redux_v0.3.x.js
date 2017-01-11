@@ -20,5 +20,7 @@ declare module 'react-intl-redux' {
   declare function updateIntl(localeObject: localeObject): updateIntlAction;
 
   declare function intlReducer<S>(state?: S, action?: updateIntlAction): S;
+  
+  declare class Provider<S, A> extends React$Component<void, { store: Store<S, A>, children?: any }, void> { }
 
 };
