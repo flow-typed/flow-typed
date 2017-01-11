@@ -110,11 +110,11 @@ declare class Bluebird$Promise<R> {
 
   // It doesn't seem possible to have type-generics for a variable number of arguments.
   // Handle up to 3 arguments, then just give up and accept 'any'.
-  static method<T>(fn: () => T): () => Bluebird$Promise<T>;
-  static method<T, A>(fn: (a: A) => T): (a: A) => Bluebird$Promise<T>;
-  static method<T, A, B>(fn: (a: A, b: B) => T): (a: A, b: B) => Bluebird$Promise<T>;
-  static method<T, A, B, C>(fn: (a: A, b: B, c: B) => T): (a: A, b: B, c: B) => Bluebird$Promise<T>;
-  static method<T>(fn: (...args: any) => T): (...args: any) => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>>(fn: () => R): () => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>, A>(fn: (a: A) => R): (a: A) => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>, A, B>(fn: (a: A, b: B) => R): (a: A, b: B) => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>, A, B, C>(fn: (a: A, b: B, c: C) => R): (a: A, b: B, c: C) => Bluebird$Promise<T>;
+  static method<T, R: Bluebird$Promisable<T>>(fn: (...args: any) => R): (...args: any) => Bluebird$Promise<T>;
 
   static cast<T>(value: Bluebird$Promisable<T>): Bluebird$Promise<T>;
   static bind(ctx: any): Bluebird$Promise<void>;
