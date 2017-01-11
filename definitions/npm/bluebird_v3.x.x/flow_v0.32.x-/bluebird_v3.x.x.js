@@ -54,7 +54,23 @@ declare class Bluebird$Promise<R> {
   static reject<T>(error?: any): Bluebird$Promise<T>;
   static resolve<T>(object?: Bluebird$Promisable<T>): Bluebird$Promise<T>;
   static some<T, Elem: Bluebird$Promisable<T>>(Promises: Array<Elem>, count: number): Bluebird$Promise<Array<T>>;
-  static join<T, Elem: Bluebird$Promisable<T>>(...Promises: Array<Elem>): Bluebird$Promise<Array<T>>;
+
+  static join<T, A>(
+    value1: Bluebird$Promisable<A>,
+    handler: (a: A) => T
+  ): Bluebird$Promise<T>;
+  static join<T, A, B>(
+    value1: Bluebird$Promisable<A>,
+    value2: Bluebird$Promisable<B>,
+    handler: (a: A, b: B) => T
+  ): Bluebird$Promise<T>;
+  static join<T, A, B, C>(
+    value1: Bluebird$Promisable<A>,
+    value2: Bluebird$Promisable<B>,
+    value3: Bluebird$Promisable<C>,
+    handler: (a: A, b: B, c: C) => T
+  ): Bluebird$Promise<T>;
+
   static map<T, U, Elem: Bluebird$Promisable<T>>(
     Promises: Array<Elem>,
     mapper: (item: T, index: number, arrayLength: number) => U,

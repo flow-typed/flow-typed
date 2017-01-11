@@ -38,6 +38,13 @@ Bluebird.resolve(response).then(function(responseBody) {
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<number>) { })
 Bluebird.all(['hello', Bluebird.resolve('world'), Promise.resolve('!')]).then(function(r: Array<string>) { })
 
+Bluebird.join(1, Bluebird.resolve(2), function (a, b) { return a + b }).then(function (s) { return s + 1 })
+Bluebird.join(
+  1,
+  Bluebird.resolve(2),
+  Promise.resolve(3),
+  function (a, b) { return a + b }).then(function (s) { return s + 1 })
+
 // $ExpectError
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<string>) { })
 
