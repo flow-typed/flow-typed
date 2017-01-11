@@ -133,7 +133,7 @@ declare module "underscore" {
 
   // TODO: bindAll
 
-  // TODO: partial
+  declare function partial(fn: Function, ...arguments: Array<any>): Function;
 
   // TODO: memoize
 
@@ -155,7 +155,7 @@ declare module "underscore" {
 
   // TODO: negate
 
-  // TODO: compose
+  declare function compose(...functions: Function[]): Function;
 
   /**
    * Objects

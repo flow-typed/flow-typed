@@ -144,7 +144,18 @@ _.find([1, 2, 3], {val: 1});
 _.throttle(function(a) {a.length}, 10)('hello');
 _.debounce(function(a) {a.length}, 10)('hello');
 
+_.partial(function (a, b) { return a + b }, 1)(2);
+
 _.defer(function(){});
+
+(
+
+  _.compose(
+    function (name:string):string { return name + ', hello!'; },
+    function (user:Object):string { return user.name; }
+  ): (user: Object) => string
+
+);
 
 (_.partition([1,5,2,4], function(i: number) { return i<4 }): [Array<number>, Array<number>]);
 (_.partition({x: 'foo', y: 'bar'}, function(v: string, k: string) { return k === 'bar' }): [Array<string>, Array<string>]);
