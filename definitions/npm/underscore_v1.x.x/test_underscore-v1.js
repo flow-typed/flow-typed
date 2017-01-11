@@ -145,8 +145,8 @@ _.find([1, 2, 3], {val: 1});
 _.throttle(function(a) {a.length}, 10)('hello');
 _.debounce(function(a) {a.length}, 10)('hello');
 
+_.memoize(function(){})();
 _.partial(function (a, b) { return a + b }, 1)(2);
-
 _.defer(function(){});
 
 (
