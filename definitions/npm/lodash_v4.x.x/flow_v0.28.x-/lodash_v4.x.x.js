@@ -49,7 +49,7 @@ declare module 'lodash' {
   declare type _Iteratee<T> = (item: T, index: number, array: ?Array<T>) => mixed;
   declare type Iteratee<T> = _Iteratee<T>|Object|string;
   declare type Iteratee2<T, U> = ((item: T, index: number, array: ?Array<T>) => U)|Object|string;
-  declare type FlatMapIteratee<T, U> = ((item: T, index: number, array: ?Array<T>) => Array<U>)|Object|string;
+  declare type FlatMapIteratee<T, U> = ((item: T, index: ?number, array: ?Array<T>) => Array<U>)|Object|string;
   declare type Comparator<T> = (item: T, item2: T) => bool;
 
   declare type MapIterator<T,U> =
