@@ -186,5 +186,7 @@ timesNums = _.times(5, function(i: number) { return i + 1; });
 timesNums = _.times(5, function(i: number) { return JSON.stringify(i); });
 
 // lodash.flatMap for collections and objects
-_.flatMap([1, 2, 3], n => [n, n]);
+// this arrow function needs a type annotation due to a bug in flow
+// https://github.com/facebook/flow/issues/1948
+_.flatMap([1, 2, 3], (n): number[] => [n, n]);
 _.flatMap({a: 1, b: 2}, n => [n, n]);
