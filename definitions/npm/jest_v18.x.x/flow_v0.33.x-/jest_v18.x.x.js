@@ -431,6 +431,7 @@ declare var jasmine: {
   arrayContaining(value: Array<mixed>): void,
   clock(): JestClockType,
   createSpy(name: string): JestSpyType,
+  createSpyObj(baseName: string, methodNames: Array<string>): {[methodName: string]: JestSpyType},
   objectContaining(value: Object): void,
   stringMatching(value: string): void,
 }
