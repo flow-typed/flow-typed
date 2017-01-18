@@ -7,6 +7,5 @@ const B = <Modal isOpen closeTimeoutMS={200} ariaHideApp={false}/>;
 const C: string = <Modal ariaHideApp={100}/>
 
 Modal.setAppElement('#foo');
-Modal.setAppElement(document.getElementById('foo'));
 // $ExpectError only string or Element
 Modal.setAppElement(2);
