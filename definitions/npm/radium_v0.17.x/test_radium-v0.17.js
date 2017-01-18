@@ -1,4 +1,4 @@
-// @flow
+
 import Radium from 'radium';
 
 const A = Radium(<div/>);

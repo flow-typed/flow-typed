@@ -1,4 +1,4 @@
-// @flow
+
 
 import chalk from 'chalk';
 

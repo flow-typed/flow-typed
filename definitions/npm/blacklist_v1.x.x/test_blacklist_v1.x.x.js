@@ -1,4 +1,4 @@
-// @flow
+
 import blacklist from 'blacklist';
 
 (blacklist({ a: 1 }, 'a', 'b'): Object);

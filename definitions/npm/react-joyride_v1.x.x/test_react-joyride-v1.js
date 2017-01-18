@@ -1,4 +1,4 @@
-// @flow
+
 import Joyride from 'react-joyride';
 
 const A = <Joyride debug/>;

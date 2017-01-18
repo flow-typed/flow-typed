@@ -1,4 +1,4 @@
-// @flow
+
 
 import {crypto, address, ECPair, ECSignature, HDNode, Transaction} from 'bitcoinjs-lib';
 var BigInteger = require('bigi');

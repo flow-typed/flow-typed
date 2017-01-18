@@ -1,4 +1,4 @@
-// @flow
+
 import React from 'react';
 import { action, storiesOf } from '@kadira/storybook';
 

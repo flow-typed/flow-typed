@@ -1,4 +1,4 @@
-// @flow
+
 import Bluebird from 'bluebird';
 
 const defer: Bluebird.Defer = Bluebird.defer();

@@ -1,4 +1,4 @@
-// @flow
+
 
 import Big from "big.js";
 

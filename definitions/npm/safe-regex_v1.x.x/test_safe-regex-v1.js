@@ -1,4 +1,4 @@
-// @flow
+
 import safe from 'safe-regex';
 
 (safe(/.*/): boolean);

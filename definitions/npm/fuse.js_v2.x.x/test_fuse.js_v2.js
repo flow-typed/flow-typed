@@ -1,4 +1,4 @@
-// @flow
+
 import Fuse from 'fuse.js';
 
 const fuse: Fuse<number> = Fuse([1, 2]);

@@ -1,4 +1,4 @@
-// @flow
+
 
 import { format, findCurrency, currencies } from 'currency-formatter';
 import currencies2 from 'currency-formatter/currencies';

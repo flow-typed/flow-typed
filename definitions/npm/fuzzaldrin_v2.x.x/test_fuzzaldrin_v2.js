@@ -1,4 +1,4 @@
-// @flow
+
 import { filter, score } from 'fuzzaldrin';
 import fuzzaldrin from 'fuzzaldrin';
 

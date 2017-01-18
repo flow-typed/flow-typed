@@ -1,4 +1,4 @@
-// @flow
+
 
 import {Curve, Point, getCurveByName} from 'ecurve';
 var BigInteger = require('bigi');

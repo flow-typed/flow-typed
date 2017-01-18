@@ -1,4 +1,4 @@
-// @flow
+
 import Cookie from 'js-cookie';
 
 Cookie.set('version', 20, {

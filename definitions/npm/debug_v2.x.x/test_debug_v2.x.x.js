@@ -1,4 +1,4 @@
-// @flow
+
 
 import debug from 'debug';
 

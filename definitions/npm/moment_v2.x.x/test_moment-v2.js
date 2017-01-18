@@ -1,4 +1,4 @@
-// @flow
+
 import moment from 'moment';
 
 // Parse

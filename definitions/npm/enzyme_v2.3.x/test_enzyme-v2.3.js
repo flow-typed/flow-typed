@@ -1,4 +1,4 @@
-// @flow
+
 import {shallow, mount, render, ShallowWrapper, ReactWrapper} from 'enzyme';
 
 // $ExpectError too few arguments

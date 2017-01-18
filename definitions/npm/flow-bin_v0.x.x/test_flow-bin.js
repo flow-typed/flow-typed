@@ -1,4 +1,4 @@
-// @flow
+
 
 import flowBinPath from "flow-bin";
 

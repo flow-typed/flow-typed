@@ -1,4 +1,4 @@
-// @flow
+
 import EventEmitter from 'eventemitter3';
 
 class A extends EventEmitter {

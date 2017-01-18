@@ -1,4 +1,4 @@
- // @flow
+ 
 import freeze from 'deep-freeze-strict'
 
 const a = {a: 1};

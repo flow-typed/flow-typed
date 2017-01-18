@@ -1,4 +1,4 @@
-// @flow
+
 import Backbone from 'backbone';
 const { Model } = Backbone;
 

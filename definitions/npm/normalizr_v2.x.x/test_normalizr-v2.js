@@ -1,4 +1,4 @@
-// @flow
+
 import Normalizr from 'normalizr';
 
 (Normalizr.normalize({ foo: '' }, {}): Object);

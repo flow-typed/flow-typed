@@ -1,4 +1,4 @@
-// @flow
+
 import uuid from 'uuid';
 
 (uuid.v1(): string);

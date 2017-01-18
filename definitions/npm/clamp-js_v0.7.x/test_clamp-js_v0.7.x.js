@@ -1,4 +1,4 @@
-// @flow
+
 
 import clamp from "clamp-js";
 

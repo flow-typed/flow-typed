@@ -1,4 +1,4 @@
-// @flow
+
 import checkstyleFormatter from 'checkstyle-formatter'
 
 const results = [

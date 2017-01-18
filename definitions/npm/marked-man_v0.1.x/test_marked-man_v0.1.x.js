@@ -1,4 +1,4 @@
-// @flow
+
 
 import markedMan from 'marked-man'
 

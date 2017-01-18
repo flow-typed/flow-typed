@@ -1,4 +1,4 @@
-// @flow
+
 
 import { api, Predicates } from 'prismic.io';
 
