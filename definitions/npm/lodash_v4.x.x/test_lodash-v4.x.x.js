@@ -57,11 +57,26 @@ _.map(users, 'user');
 /**
  * _.clone
  */
-_.clone({a: 1}).a == 1;
+ var cloned: {a: 1} = _.clone({a: 1})
+
+cloned.a == 1;
+
+// $ExpectError number literal `1`. Cannot be compared to string
+cloned.a == 'c';
+
 // $ExpectError property `b`. Property not found in object literal
-_.clone({a: 1}).b == 1
-// $ExpectError number. This type is incompatible with function type.
-_.clone({a: 1}).a == 'c';
+cloned.b == 1;
+
+/**
+ * _.create
+ */
+var createProto: {a: number} = {a: 1};
+var createdObj = _.create(createProto, {b: 2});
+
+createdObj.b == 2;
+
+// $ExpectError property `c`. Property not found in object type
+createdObj.c == 'c';
 
 /**
  * _.isEqual
