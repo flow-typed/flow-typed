@@ -56,18 +56,18 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
   static some<T, Elem: $Promisable<T>>(Promises: Array<Elem>, count: number): Bluebird$Promise<Array<T>>;
   static join<T, A>(
     value1: $Promisable<A>,
-    handler: (a: A) => T
+    handler: (a: A) => $Promisable<T>
   ): Bluebird$Promise<T>;
   static join<T, A, B>(
     value1: $Promisable<A>,
     value2: $Promisable<B>,
-    handler: (a: A, b: B) => T
+    handler: (a: A, b: B) => $Promisable<T>
   ): Bluebird$Promise<T>;
   static join<T, A, B, C>(
     value1: $Promisable<A>,
     value2: $Promisable<B>,
     value3: $Promisable<C>,
-    handler: (a: A, b: B, c: C) => T
+    handler: (a: A, b: B, c: C) => $Promisable<T>
   ): Bluebird$Promise<T>;
   static map<T, U, Elem: $Promisable<T>>(
     Promises: Array<Elem>,
