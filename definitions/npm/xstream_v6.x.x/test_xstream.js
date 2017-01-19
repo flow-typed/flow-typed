@@ -28,8 +28,8 @@ const fromPromise: Stream<number> = xs.from(Promise.resolve(1));
 const periodic: Stream<number> = xs.periodic(123);
 const merge: Stream<number> = xs.merge(of, of);
 const merge2: Stream<number> = xs.merge(of, of, of, of);
-const combine: Stream<[number, number]> = xs.combine(of, of);
-const combine2: Stream<[number, number, number, number]> = xs.combine(of, of, of, of);
+const combine: Stream<number[]> = xs.combine(of, of);
+const combine2: Stream<number[]> = xs.combine(of, of, of, of);
 
 const listener = {
   next: console.log,
