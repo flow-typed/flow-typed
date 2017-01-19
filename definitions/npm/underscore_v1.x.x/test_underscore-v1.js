@@ -78,8 +78,7 @@ _.zip([{x:1}], [{x:2,y:1}])[0].x
 // $ExpectError `y` property not found in object literal
 _.zip([{x:1}], [{x:2,y:1}])[0][0].y
 _.zip([{x:1}], [{x:2,y:1}])[0][1].y
-// Flow could potentially catch this -- the tuple only has two elements.
-_.zip([{x:1}], [{x:2,y:1}])[0][2]
+
 
 
 /**
