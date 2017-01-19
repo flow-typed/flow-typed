@@ -35,10 +35,8 @@ const myImageSize: imageSize = {
   height: 1,
   width: 1
 }
-
-const myErrorSize: imageSize = {
-  // $ExpectError
-  height: '1',
+// $ExpectError
+const myErrorSize: imageSize = { height: '1',
   width: 1
 }
 
