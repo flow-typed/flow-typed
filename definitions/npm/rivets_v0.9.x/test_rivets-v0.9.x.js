@@ -111,9 +111,8 @@ rivets.components.testComponent = {
   }
 }
 
-rivets.components.testComponent = {
-  // $ExpectError
-  static: 'a',
+// $ExpectError
+rivets.components.testComponent = { static: 'a',
   template() {
     return 'template'
   },
