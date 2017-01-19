@@ -52,6 +52,8 @@ declare type express$CookieOptions = {
   signed?: boolean
 };
 
+declare type express$Path = string | RegExp;
+
 declare type express$RenderCallback = (err: Error | null, html?: string) => mixed;
 
 declare type express$SendFileOptions = {
@@ -97,7 +99,7 @@ declare type express$Middleware =
 declare interface express$RouteMethodType<T> {
   (middleware: express$Middleware): T;
   (...middleware: Array<express$Middleware>): T;
-  (path: string|RegExp|string[], ...middleware: Array<express$Middleware>): T;
+  (path: express$Path|express$Path[], ...middleware: Array<express$Middleware>): T;
 }
 declare class express$Route {
   all: express$RouteMethodType<this>;
@@ -137,7 +139,7 @@ declare class express$Router extends express$Route {
   static (): express$Router;
   use(middleware: express$Middleware): this;
   use(...middleware: Array<express$Middleware>): this;
-  use(path: string|RegExp|string[], ...middleware: Array<express$Middleware>): this;
+  use(path: express$Path|express$Path[], ...middleware: Array<express$Middleware>): this;
   use(path: string, router: express$Router): this;
 }
 

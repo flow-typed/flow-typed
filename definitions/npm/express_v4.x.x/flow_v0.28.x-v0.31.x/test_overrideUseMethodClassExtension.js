@@ -11,6 +11,8 @@ declare class test_express$CustomResponse extends express$Response {
 }
 declare type test_express$CustomNextFunction = express$NextFunction;
 
+declare type test_express$CustomPath = string | RegExp;
+
 declare type test_express$CustomMiddleware =
   ((req: test_express$CustomRequest, res: test_express$CustomResponse, next: test_express$CustomNextFunction) => mixed) |
   ((error: Error, req: test_express$CustomRequest, res: test_express$CustomResponse, next: test_express$CustomNextFunction) => mixed);
@@ -19,7 +21,7 @@ declare class test_express$CustomApplication extends express$Application {
   constructor(expressConstructor: () => express$Application): this;
   use(middleware: test_express$CustomMiddleware): this;
   use(...middleware: Array<test_express$CustomMiddleware>): this;
-  use(path: string|RegExp|string[], ...middleware: Array<test_express$CustomMiddleware>): this;
+  use(path: test_express$CustomPath|test_express$CustomPath[], ...middleware: Array<test_express$CustomMiddleware>): this;
   use(path: string, router: express$Router): this;
 }
 
