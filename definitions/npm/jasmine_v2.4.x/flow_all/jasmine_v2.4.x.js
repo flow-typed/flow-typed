@@ -62,12 +62,28 @@ type JasmineClockType = {
   mockDate(date: Date): void
 };
 
+declare type JasmineMatcherResult = {
+  pass: boolean;
+  message?: string | () => string;
+}
+
+declare type JasmineMatcherStruct = {
+  compare<T: any>(actual: T, expected: T): JasmineMatcherResult;
+}
+
+declare type JasmineMatcher = (utils?: mixed, customEqualityTesters?: mixed) => JasmineMatcherStruct
+
+declare type JasmineMatchers = {
+  [key: string]: JasmineMatcher
+}
+
 declare var jasmine: {
-  createSpy(name?: string): JasmineSpyType,
-  any(val: mixed): void,
-  anything(): void,
-  objectContaining(val: Object): void,
-  arrayContaining(val: mixed[]): void,
-  stringMatching(val: string): void,
-  clock(): JasmineClockType
-};
+  createSpy(name: string): JasmineSpyType;
+  any(val: mixed): void;
+  anything(): void;
+  objectContaining(val: Object): void;
+  arrayContaining(val: mixed[]): void;
+  stringMatching(val: string): void;
+  clock(): JasmineClockType;
+  addMatchers(val: JasmineMatchers): void;
+}
