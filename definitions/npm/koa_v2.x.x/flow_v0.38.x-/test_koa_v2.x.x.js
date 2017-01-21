@@ -1,5 +1,6 @@
 // @flow
 const Koa = require('koa');
+const http = require('http');
 import type {
   Middleware,
   Context,
@@ -373,4 +374,9 @@ function test_index_md() {
     // $ExpectError
     app.listen(true);
   }
+}
+
+function test_callback() {
+  const app = new Koa();
+  http.createServer(app.callback()).listen(3000);
 }
