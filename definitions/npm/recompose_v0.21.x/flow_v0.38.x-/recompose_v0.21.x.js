@@ -89,12 +89,12 @@ declare module 'recompose' {
   declare function branch<A, B>(
     test: (ownerProps: B) => boolean,
     left: HOC<A, B>,
-    right: HOC<A, B>
+    right?: HOC<A, B>
   ): HOC<A, B>;
 
   declare function renderComponent<A>(C: Component<A> | string): HOC<A, A>;
 
-  declare function renderNothing<A>(C: Component<A>): HOC<A, {}>;
+  declare function renderNothing<A>(): HOC<A, {}>;
 
   declare function shouldUpdate<A>(
     test: SCU<A>
