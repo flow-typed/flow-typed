@@ -80,6 +80,7 @@ declare class express$Response extends http$ServerResponse mixins express$Reques
   send(body?: mixed): this;
   sendFile(path: string, options?: express$SendFileOptions, callback?: (err?: ?Error) => mixed): this;
   sendStatus(statusCode: number): this;
+  header(field: string, value?: string): this;
   set(field: string, value?: string): this;
   status(statusCode: number): this;
   type(type: string): this;
