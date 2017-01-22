@@ -21,6 +21,7 @@ const router = new Router();
 app.use('/router', (req: express$Request, res: express$Response, next: express$NextFunction) => {
   router.handle(req, res, next);
 });
+app.post('/post-router-callable', router);
 
 // Can use an express app directly as a server listener
 const httpServer = http.createServer(app);
