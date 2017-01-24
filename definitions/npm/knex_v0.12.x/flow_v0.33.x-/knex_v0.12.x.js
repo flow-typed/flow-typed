@@ -101,7 +101,7 @@ declare class Knex$QueryBuilder mixins Promise {
 declare class Knex$Knex mixins Knex$QueryBuilder, Promise {
   static (config: Knex$Config): Knex$Knex;
   static QueryBuilder: typeof Knex$QueryBuilder;
-  (tableName: string): Knex$QueryBuilder;
+  $call: (tableName: string) => Knex$QueryBuilder;
   raw(sqlString: string): any;
   client: any;
   destroy(): Promise<void>;
