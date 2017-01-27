@@ -80,7 +80,10 @@ declare class express$Response extends http$ServerResponse mixins express$Reques
   send(body?: mixed): this;
   sendFile(path: string, options?: express$SendFileOptions, callback?: (err?: ?Error) => mixed): this;
   sendStatus(statusCode: number): this;
+  header(field: string, value?: string): this;
+  header(headers: {[name: string]: string}): this;
   set(field: string, value?: string): this;
+  set(headers: {[name: string]: string}): this;
   status(statusCode: number): this;
   type(type: string): this;
   vary(field: string): this;
@@ -136,6 +139,9 @@ declare class express$Router extends express$Route {
   use(path: string|RegExp|string[], ...middleware: Array<express$Middleware>): this;
   use(path: string, router: express$Router): this;
   handle(req: http$IncomingMessage, res: http$ServerResponse, next: express$NextFunction): void;
+
+  // Can't use regular callable signature syntax due to https://github.com/facebook/flow/issues/3084
+  $call: (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction) => void;
 }
 
 declare class express$Application extends express$Router mixins events$EventEmitter {
@@ -159,9 +165,6 @@ declare class express$Application extends express$Router mixins events$EventEmit
   set(name: string, value: mixed): mixed;
   render(name: string, optionsOrFunction: {[name: string]: mixed}, callback: express$RenderCallback): void;
   handle(req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
-
-  // Can't use regular callable signature syntax due to https://github.com/facebook/flow/issues/3084
-  $call: (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction) => void;
 }
 
 declare module 'express' {

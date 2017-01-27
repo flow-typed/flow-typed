@@ -18,6 +18,9 @@ const myRouter = new express.Router();
 
 myRouter.use('/dang', (req, res: express$Response, next: express$NextFunction) => {
     res.set('My Header', 'Value');
+    res.header('Another-Header', 'different value');
+    res.set({'third-header': '123', 'forth-header': 'abc'});
+    res.header({'fifth-header': '456', 'sixth-header': 'def'});
     res.status(200);
     res.render('someTemplate', {}, (err, html: ?string) => null);
     res.render('someTemplate', (err, html: ?string) => null);
