@@ -19,6 +19,10 @@ function test_Application() {
   const context: Context = app.context;
   // $ExpectError
   const _context: number = app.context;
+  const callback: () => (req: http$IncomingMessage, res: http$ServerResponse) => void = app.callback;
+  const handler: (req: http$IncomingMessage, res: http$ServerResponse) => void = app.callback();
+  // $ExpectError
+  const _callback: (req: http$IncomingMessage, res: http$ServerResponse) => void = app.callback;
   const env: string = app.env;
   // $ExpectError
   const _env: number = app.env;

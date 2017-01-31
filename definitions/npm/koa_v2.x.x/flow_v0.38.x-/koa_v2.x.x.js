@@ -292,7 +292,7 @@ declare module 'koa' {
   declare class Application extends events$EventEmitter {
     context: Context,
     // request handler for node's native http server.
-    callback: (req: http$IncomingMessage, res: http$ServerResponse) => void,
+    callback: () => (req: http$IncomingMessage, res: http$ServerResponse) => void,
     env: string,
     keys?: Array<string>|Object, // https://github.com/crypto-utils/keygrip
     middleware: Array<Middleware>,
