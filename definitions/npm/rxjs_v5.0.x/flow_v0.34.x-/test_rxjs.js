@@ -15,3 +15,19 @@ const distinct4: Observable<{a: string}> = Observable.of({a: 'a'}).distinct(
   field => field.a,
   Observable.never(),
 );
+
+// $ExpectError
+const nodeCallback1 = Observable.bindNodeCallback((num: number) => {});
+
+// $ExpectError
+const nodeCallback2: Observable<number> = Observable.bindNodeCallback(
+  (err: Error, num: number): void => {},
+  (): void => {}
+)(1);
+
+const nodeCallback2: Observable<number> = Observable.bindNodeCallback(
+  (err: Error, num: number): void => {},
+  (): number => 1,
+// $ExpectError
+  4
+)(1);
