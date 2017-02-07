@@ -16,6 +16,7 @@ declare module 'enzyme' {
     containsMatchingElement(node: React$Element<any>): boolean;
     containsAllMatchingElements(nodes: NodeOrNodes): boolean;
     containsAnyMatchingElements(nodes: NodeOrNodes): boolean;
+    exists(): boolean;
     matchesElement(node: React$Element<any>): boolean;
     hasClass(className: string): boolean;
     is(selector: EnzymeSelector): boolean;
