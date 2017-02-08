@@ -115,6 +115,26 @@ _.zip([{x:1}], [{x:2,y:1}])[0][2]
 
 
 /**
+ * _.isString
+ */
+
+var boolTrue: true;
+var boolFalse: false;
+
+boolTrue  = _.isString('foo');
+boolFalse = _.isString(['']);
+boolFalse = _.isString({});
+boolFalse = _.isString(5);
+boolFalse = _.isString(function(f) { return f });
+boolFalse = _.isString();
+
+// $ExpectError
+boolFalse = _.isString('');
+// $ExpectError
+boolTrue = _.isString(undefined);
+
+
+/**
  * _.find
  */
 _.find([1, 2, 3], x => x == 1);
