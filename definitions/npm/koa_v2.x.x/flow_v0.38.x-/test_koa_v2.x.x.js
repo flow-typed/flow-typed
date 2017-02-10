@@ -1,4 +1,5 @@
 // @flow
+const http = require('http');
 const Koa = require('koa');
 import type {
   Middleware,
@@ -72,6 +73,8 @@ function test_Application() {
     // $ExpectError
     return 'hello';
   });
+
+  http.createServer(app.callback());
 }
 
 function test_response() {
