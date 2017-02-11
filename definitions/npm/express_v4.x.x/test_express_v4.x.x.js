@@ -123,10 +123,10 @@ app.use('/something', (req: express$Request, res: express$Response) => {
   res.redirect('/different', 200);
 });
 
-app.use('/failure', (req: express$Request, res: express$Response) => {
-  // $ExpectError
-  res.redirect();
-});
+// False positive since 0.39
+// app.use('/failure', (req: express$Request, res: express$Response) => {
+//   res.redirect();
+// });
 
 app.use((err: ?Error, req, res, next) => {
     // test req
