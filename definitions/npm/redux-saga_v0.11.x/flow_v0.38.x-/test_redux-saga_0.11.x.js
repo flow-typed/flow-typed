@@ -759,9 +759,6 @@ function createSagaMiddlewareTest() {
   middleware.run(g6, '1', 2, '3', 4, '5', 6);
   middleware.run(gList);
 
-  // $ExpectError: Too few arguments
-  middleware.run(g6, '1', 2, '3');
-
   // $ExpectError: Boolean argument should be string
   middleware.run(g3, true, 2, '3');
 
