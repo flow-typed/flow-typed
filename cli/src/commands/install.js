@@ -65,11 +65,8 @@ function failWithMessage(message: string) {
 
 export type Args = {
   _: Array<string>,
-  // $FlowFixMe
   flowVersion?: string,
-  // $FlowFixMe
   overwrite: bool,
-  // $FlowFixMe
   verbose: bool,
 };
 

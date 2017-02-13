@@ -28,6 +28,7 @@ export function runCLI() {
     name: string,
     description: string,
     setup?: (yargs: Yargs) => Yargs,
+    // $FlowFixMe
     run: (argv: Argv) => Promise<number>,
   };
   const commands: Array<CommandModule> = [
@@ -69,7 +70,6 @@ export function runCLI() {
  * has a flow-typed CLI `npm install`ed, use that version instead of the global
  * version of the CLI.
  */
-// $FlowFixMe: Need to teach Flow about `require.main`
 if (require.main === module) {
   const CWD = process.cwd();
   let currDir = CWD;

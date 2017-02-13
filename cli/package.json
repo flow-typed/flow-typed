@@ -45,7 +45,7 @@
     "chokidar": "^1.6.1",
     "eslint": "^2.9.0",
     "eslint-plugin-flow-vars": "^0.4.0",
-    "flow-bin": "^0.35",
+    "flow-bin": "^0.39",
     "jest": "^17.0.3",
     "rimraf": "^2.5.4"
   },
