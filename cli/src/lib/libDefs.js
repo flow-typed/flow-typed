@@ -166,9 +166,6 @@ export async function getLibDefs(
   const libDefs: Array<LibDef> = [];
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(defsDirItems.map(async (item) => {
-    if (item === '.cli-metadata.json') {
-      return;
-    }
     const itemPath = path.join(defsDir, item);
     const itemStat = await fs.stat(itemPath);
     if (itemStat.isDirectory()) {
@@ -438,16 +435,40 @@ function writeVerbose(stream, msg, writeNewline = true) {
   }
 }
 
+const NAMESPACE_DIR_EXCEPTIONS = [
+  '.cli-metadata.json',
+  'node_modules',
+  'package.json',
+  '.eslintrc',
+];
+async function getLibDefNamespaces(defsDirPath: string) {
+  const namespaces: Array<string> = [];
+  const defsDirItems = await fs.readdir(defsDirPath);
+  await P.all(defsDirItems.map(async (item) => {
+    if (NAMESPACE_DIR_EXCEPTIONS.indexOf(item) !== -1) {
+      return;
+    }
+    namespaces.push(item);
+  }));
+  return namespaces;
+}
+
 /**
  * Get a list of LibDefs from the local repo.
  *
  * Note that this is mainly only useful while working on the flow-typed repo
  * itself. It is useless when running the npm-install CLI.
  */
-const GIT_REPO_DEFS_DIR = path.join(GIT_REPO_DIR, 'definitions', 'npm');
+const GIT_REPO_DEFS_DIR = path.join(GIT_REPO_DIR, 'definitions');
 export async function getLocalLibDefs(validationErrs?: VErrors) {
   await verifyCLIVersion(path.join(GIT_REPO_DIR, 'definitions'));
-  return getLibDefs(GIT_REPO_DEFS_DIR, validationErrs);
+  const namespaces = await getLibDefNamespaces(GIT_REPO_DEFS_DIR);
+  let libDefs: Array<LibDef> = [];
+  await P.all(namespaces.map(async (ns) => {
+    const nsLibdefs = await getLibDefs(path.join(GIT_REPO_DEFS_DIR, ns), validationErrs);
+    libDefs = libDefs.concat(nsLibdefs);
+  }));
+  return libDefs;
 };
 
 /**

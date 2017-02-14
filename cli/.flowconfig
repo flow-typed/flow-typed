@@ -7,6 +7,7 @@ flow-typed
 <PROJECT_ROOT>/.test-dir/.*
 <PROJECT_ROOT>/.flow-bins-cache/.*
 <PROJECT_ROOT>/node_modules/.*config-chain/test/broken.json
+.*/__npmLibDefs-fixtures__/.*
 
 [options]
 experimental.const_params=true

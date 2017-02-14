@@ -1,53 +1,54 @@
 // @flow
 
-import {getLocalLibDefs as getLocalDefs} from "../lib/libDefs.js";
-import isInFlowTypedRepo from "../lib/isInFlowTypedRepo";
+import {
+  fs
+} from "../lib/node";
 
-function validationError(errKey, errMsg, validationErrs) {
-  const errors = validationErrs.get(errKey) || [];
-  errors.push(errMsg);
-  validationErrs.set(errKey, errors);
-}
+import {
+  getNpmLibDefs,
+} from "../lib/npmLibDefs";
+
+import {
+  printValidationErrors,
+} from "../lib/validationErrors";
 
 export const name = "validate-defs";
-export const description = "Validates the structure of the definitions in the flow-typed project.";
-
-export async function run(): Promise<number> {
-  if (!isInFlowTypedRepo()) {
-    console.log(
-      "This command only works in a clone of flowtype/flow-typed. " +
-      "It is a tool used to validate the library definitions flow-typed project."
+export const description = "Validates the structure of the /definitions dir.";
+export type Args = {
+  _: Array<string>,
+};
+export async function run(args: Args) {
+  if (args._.length !== 2) {
+    console.error(
+      "Please specify the path of the /definitions directory to be validated " +
+      "as the first arg of this command."
     );
     return 1;
   }
+  const defsDirPath = args._[1];
+
+  if (!await fs.exists(defsDirPath)) {
+    console.error("Error: Path does not exist: %s", defsDirPath);
+    return 1;
+  }
+
+  const defsDirPathStat = await fs.stat(defsDirPath);
+  if (!defsDirPathStat.isDirectory()) {
+    console.error("Error: Path is not a directory: %s", defsDirPath);
+    return 1;
+  }
+
   const validationErrors = new Map();
-
-  const localDefs = await getLocalDefs(validationErrors);
-  localDefs.forEach(def => {
-    if (def.testFilePaths.length === 0) {
-      validationError(
-        `${def.pkgName}_${def.pkgVersionStr}`,
-        'Every definition file must have at least one test file!',
-        validationErrors
-      );
-    }
-  });
-
-  console.log(" ");
-
-  validationErrors.forEach((errors, pkgNameVersion) => {
-    console.log("Found some problems with %s:", pkgNameVersion);
-    errors.forEach((err) => console.log("  • " + err));
-    console.log("");
-  });
+  const npmLibDefs = await getNpmLibDefs(defsDirPath, validationErrors);
 
   if (validationErrors.size === 0) {
     console.log(
-      `All library definitions are named and structured correctedly. ` +
-      `(Found ${localDefs.length})`
+      "All libdefs are named and structured correctly. " +
+      `(Found ${npmLibDefs.length})`
     );
     return 0;
   }
 
+  printValidationErrors(validationErrors);
   return 1;
 };
