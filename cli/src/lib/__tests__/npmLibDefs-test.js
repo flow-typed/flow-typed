@@ -28,9 +28,9 @@ describe('npmLibDefs', () => {
       expect(
         validateVersionNumPart('x', 'major', 'contexthere', errs)
       ).toEqual(-1);
-      expect([...errs.entries()]).toEqual([
+      expect(new Set(errs)).toEqual(new Set([
         ['contexthere', ["Invalid major number: 'x'. Expected a number."]]
-      ]);
+      ]));
     });
   });
 
@@ -113,12 +113,12 @@ describe('npmLibDefs', () => {
       expect(
         parsePkgNameVer('lib_vx.x.x', 'contexthere', errs)
       ).toEqual(null);
-      expect([...errs.entries()]).toEqual([
+      expect(new Set(errs)).toEqual(new Set([
         ['lib_vx.x.x', [
           "Malformed npm package name! Expected the name to be " +
           "formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>"
         ]]
-      ]);
+      ]));
     });
   });
 
@@ -230,12 +230,12 @@ describe('npmLibDefs', () => {
         errs
       );
       expect(await defsPromise2).toEqual([]);
-      expect([...errs.entries()]).toEqual([
+      expect(new Set(errs)).toEqual(new Set([
         ['underscore_v1', [
           "Malformed npm package name! Expected the name to be formatted as " +
           "<PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>"
         ]]
-      ]);
+      ]));
     });
 
     pit('fails on unexpected files', async () => {
@@ -266,7 +266,7 @@ describe('npmLibDefs', () => {
         errs
       );
       expect((await defsPromise2).length).toBe(2);
-      expect([...errs.entries()]).toEqual([
+      expect(new Set(errs)).toEqual(new Set([
         ['underscore_v1.x.x/asdf', [
           "Unexpected file name. This directory can only contain test files " +
           "or a libdef file named `underscore_v1.x.x.js`."
@@ -280,7 +280,7 @@ describe('npmLibDefs', () => {
           "Unexpected sub-directory. This directory can only contain test " +
           "files or a libdef file named `underscore_v1.x.x.js`."
         ]],
-      ]);
+      ]));
     });
 
     pit('fails if flow versions overlap', async () => {
@@ -310,9 +310,9 @@ describe('npmLibDefs', () => {
         errs
       );
       expect((await defsPromise2).length).toBe(2);
-      expect([...errs.entries()]).toEqual([
+      expect(new Set(errs)).toEqual(new Set([
         ['npm/underscore_v1.x.x', ['Flow versions not disjoint!']],
-      ]);
+      ]));
     });
 
     pit('fails if no libdefs are found', async () => {
@@ -342,9 +342,9 @@ describe('npmLibDefs', () => {
         errs
       );
       expect(await defsPromise2).toEqual([]);
-      expect([...errs.entries()]).toEqual([
+      expect(new Set(errs)).toEqual(new Set([
         ['npm/underscore_v1.x.x', ['No libdef files found!']],
-      ]);
+      ]));
     });
   });
 
