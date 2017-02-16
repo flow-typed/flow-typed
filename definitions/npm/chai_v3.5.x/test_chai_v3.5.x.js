@@ -115,3 +115,10 @@ assert.instanceOf(instance, SampleClass, "instance check");
 // $ExpectError
 assert.instanceOf(instance, instance);
 assert.notInstanceOf(instance, Array);
+
+// tests for chai-as-promised
+expect(Promise.resolve(true)).to.eventually.equal(true).notify(function() {});
+expect(Promise.resolve(true)).to.eventually.be.resolved().then(function() {}).catch(function() {});
+expect(Promise.resolve(true)).to.eventually.be.resolvedWith(true).then(function() {}).catch(function() {});
+expect(Promise.resolve(true)).to.eventually.be.rejected().then(function() {}).catch(function() {});
+expect(Promise.resolve(true)).to.eventually.be.rejectedWith(Error).then(function() {}).catch(function() {});
