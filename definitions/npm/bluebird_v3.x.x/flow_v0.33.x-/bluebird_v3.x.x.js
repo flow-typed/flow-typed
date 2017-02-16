@@ -94,7 +94,7 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
   ): Bluebird$Promise<Array<T>>;
   static try<T>(fn: () => $Promisable<T>, args: ?Array<any>, ctx: ?any): Bluebird$Promise<T>;
   static attempt<T>(fn: () => $Promisable<T>, args: ?Array<any>, ctx: ?any): Bluebird$Promise<T>;
-  static delay<T>(value: $Promisable<T>, ms: number): Bluebird$Promise<T>;
+  static delay<T>(ms: number, value: $Promisable<T>): Bluebird$Promise<T>;
   static delay(ms: number): Bluebird$Promise<void>;
   static config(config: Bluebird$BluebirdConfig): void;
 
