@@ -25,6 +25,19 @@ async function getGitPath() {
   }
 };
 
+export async function getDiff() {
+  const gitPath = await getGitPath();
+  try {
+    const {stdout} = await child_process.spawnP(
+      gitPath,
+      ['diff', '--name-only', 'HEAD~1'],
+    );
+    return stdout.split('\n');
+  } catch (e) {
+    return null;
+  }
+}
+
 export async function cloneInto(gitURL: string, destDirPath: string) {
   const gitPath = await getGitPath();
   try {
