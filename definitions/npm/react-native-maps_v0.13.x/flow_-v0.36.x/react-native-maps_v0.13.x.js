@@ -1,4 +1,3 @@
-// @flow
 declare module 'react-native-maps' {
   declare type Region = {
     latitude: number,
@@ -33,7 +32,7 @@ declare module 'react-native-maps' {
     right: number,
   }
 
-  declare export type onInteractWithMapEvent = SyntheticEvent & {
+  declare type onInteractWithMapEvent = SyntheticEvent & {
     nativeEvent: { coordinate: LatLng, position: Point }
   }
 
@@ -63,18 +62,18 @@ declare module 'react-native-maps' {
     loadingBackgroundColor?: string,
     moveOnMarkerPress?: Boolean,
     legalLabelInsets?: EdgeInsets,
-    onRegionChange?: (region: Region) => any,
-    onRegionChangeComplete?: (region: Region) => any,
-    onPress?: (event: onInteractWithMapEvent) => any,
-    onPanDrag?: (event: onInteractWithMapEvent) => any,
-    onLongPress?: (event: onInteractWithMapEvent) => any,
-    onMarkerPress?: (event: SyntheticEvent) => any,
-    onMarkerSelect?: (event: SyntheticEvent) => any,
-    onMarkerDeselect?: (event: SyntheticEvent) => any,
-    onCalloutPress?: (event: SyntheticEvent) => any,
-    onMarkerDragStart?: (event: onInteractWithMapEvent) => any,
-    onMarkerDrag?: (event: onInteractWithMapEvent) => any,
-    onMarkerDragEnd?: (event: onInteractWithMapEvent) => any,
+    onRegionChange?: (region: Region) => void,
+    onRegionChangeComplete?: (region: Region) => void,
+    onPress?: (event: onInteractWithMapEvent) => void,
+    onPanDrag?: (event: onInteractWithMapEvent) => void,
+    onLongPress?: (event: onInteractWithMapEvent) => void,
+    onMarkerPress?: (event: SyntheticEvent) => void,
+    onMarkerSelect?: (event: SyntheticEvent) => void,
+    onMarkerDeselect?: (event: SyntheticEvent) => void,
+    onCalloutPress?: (event: SyntheticEvent) => void,
+    onMarkerDragStart?: (event: onInteractWithMapEvent) => void,
+    onMarkerDrag?: (event: onInteractWithMapEvent) => void,
+    onMarkerDragEnd?: (event: onInteractWithMapEvent) => void,
   }
 
   declare type ImageSourcePropType = number | {
@@ -98,13 +97,13 @@ declare module 'react-native-maps' {
     identifier?: String,
     rotation?: number,
     draggable?: ?boolean,
-    onPress?: (event: onInteractWithMapEvent) => any,
-    onSelect?: (event: onInteractWithMapEvent) => any,
-    onDeselect?: (event: onInteractWithMapEvent) => any,
-    onCalloutPress?: (event: SyntheticEvent) => any,
-    onDragStart?: (event: onInteractWithMapEvent) => any,
-    onDrag?: (event: onInteractWithMapEvent) => any,
-    onDragEnd?: (event: onInteractWithMapEvent) => any,
+    onPress?: (event: onInteractWithMapEvent) => void,
+    onSelect?: (event: onInteractWithMapEvent) => void,
+    onDeselect?: (event: onInteractWithMapEvent) => void,
+    onCalloutPress?: (event: SyntheticEvent) => void,
+    onDragStart?: (event: onInteractWithMapEvent) => void,
+    onDrag?: (event: onInteractWithMapEvent) => void,
+    onDragEnd?: (event: onInteractWithMapEvent) => void,
 
   }
 
@@ -113,11 +112,11 @@ declare module 'react-native-maps' {
     onPress?: (event: SyntheticEvent) => void,
   }
 
-  declare export class Callout extends React$Component {
+  declare class Callout extends React$Component {
     props: CalloutProps,
   }
 
-  declare export class Marker extends React$Component {
+  declare class Marker extends React$Component {
     props: MarkerProps,
     showCallout: () => void,
     hideCallout: () => void,
@@ -134,10 +133,10 @@ declare module 'react-native-maps' {
     geodesic?: boolean,
     lineDashPhase?: number,
     lineDashPattern?: number[],
-    onPress?: (event: SyntheticEvent) => any,
+    onPress?: (event: SyntheticEvent) => void,
   }
 
-  declare export class Polygon extends React$Component {
+  declare class Polygon extends React$Component {
     props: PolygonProps,
   }
 
@@ -151,10 +150,10 @@ declare module 'react-native-maps' {
     geodesic?: boolean,
     lineDashPhase?: number,
     lineDashPattern?: number[],
-    onPress?: (event: SyntheticEvent) => any,
+    onPress?: (event: SyntheticEvent) => void,
   }
 
-  declare export class Polyline extends React$Component {
+  declare class Polyline extends React$Component {
     props: PolygonProps,
   }
 
@@ -173,11 +172,11 @@ declare module 'react-native-maps' {
     lineDashPattern?: number[],
   }
 
-  declare export class Circle extends React$Component {
+  declare class Circle extends React$Component {
     props: CircleProps,
   }
 
-  declare export default class MapView extends React$Component {
+  declare class MapView extends React$Component {
     props: MapViewProps,
     animateToRegion: (region: Region, duration: number) => void,
     animateToCoordinate: (coordinate: LatLng, duration: number) => void,
@@ -185,5 +184,9 @@ declare module 'react-native-maps' {
     fitToSuppliedMarkers: (markerIDs: string[], animated: boolean) => void,
     fitToCoordinates: (coordinates: LatLng[], options: {
        edgePadding: EdgePadding, animated: boolean }) => void,
+  }
+
+  declare module.exports: {
+    default: typeof MapView,
   }
 }
