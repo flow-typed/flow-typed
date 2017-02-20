@@ -16,7 +16,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   body: mixed;
   cookies: {[cookie: string]: string};
   fresh: boolean;
-  hostname: boolean;
+  hostname: string;
   ip: string;
   ips: Array<string>;
   method: string;
