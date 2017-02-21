@@ -160,6 +160,6 @@ ever need to write a test for a particular version of Flow, you can put the
 
 #### 5) Run your tests with `./run_def_tests.sh left-pad`
 
-You may also leave off the argument to run *all* tests (this takes a while).
+You may also leave off the argument to run *all* tests (this takes a while). Please note that this test (and the one on Travis-CI) only will be able to run if the name of the repo folder is still "flow-typed".
 
 #### 6) Send a pull request
