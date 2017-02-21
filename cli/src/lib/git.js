@@ -3,6 +3,16 @@
 import whichCb from 'which';
 import {child_process} from "./node";
 
+async function getGitPath() {
+  try {
+    return await which('git');
+  } catch (e) {
+    throw new Error(
+      `Unable to find ${'`'}git${'`'} installed on this system: ${e.message}`
+    );
+  }
+};
+
 function which(executable): Promise<string> {
   return new Promise((res, rej) => {
     whichCb(executable, (err, resolvedPath) => {
@@ -15,13 +25,53 @@ function which(executable): Promise<string> {
   });
 }
 
-async function getGitPath() {
+export async function add(repoPath: string, pathToAdd: string) {
+  const gitPath = await getGitPath();
   try {
-    return await which('git');
-  } catch (e) {
-    throw new Error(
-      `Unable to find ${'`'}git${'`'} installed on this system: ${e.message}`
+    await child_process.spawnP(
+      gitPath,
+      ["add", pathToAdd],
+      {cwd: repoPath},
     );
+  } catch (e) {
+    throw new Error(`Error adding staged file(s) to git repo: ${e.message}`);
+  }
+};
+
+export async function commit(
+  dirPath: string,
+  message: string,
+) {
+  const gitPath = await getGitPath();
+
+  try {
+    await child_process.spawnP(
+      gitPath,
+      ["commit", "-a", "-m", message],
+      {cwd: dirPath},
+    );
+  } catch (e) {
+    console.error(e);
+    //throw new Error(`Error creating a commit in git repo: ${e.message}`);
+  }
+};
+
+export async function setLocalConfig(
+  dirPath: string,
+  name: string,
+  value: string
+) {
+  const gitPath = await getGitPath();
+
+  try {
+    await child_process.spawnP(
+      gitPath,
+      ["config", name, JSON.stringify(value)],
+      {cwd: dirPath},
+    );
+  } catch (e) {
+    console.error(e);
+    //throw new Error(`Error creating a commit in git repo: ${e.message}`);
   }
 };
 
@@ -51,6 +101,19 @@ export async function cloneInto(gitURL: string, destDirPath: string) {
     );
   } catch (e) {
     throw new Error(`Error cloning repo: ${e.message}`);
+  }
+};
+
+export async function init(dirPath: string) {
+  const gitPath = await getGitPath();
+  try {
+    await child_process.spawnP(
+      gitPath,
+      ['init'],
+      {cwd: dirPath}
+    );
+  } catch (e) {
+    throw new Error(`Error init-ing git repo: ${e.message}`);
   }
 };
 

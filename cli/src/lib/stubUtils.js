@@ -1,13 +1,13 @@
 /* @flow */
 
 import colors from 'colors/safe';
-import {determineFlowVersion} from './npmProjectUtils';
-import {findPackageJsonPath} from './npmProjectUtils';
+import {determineFlowVersion} from './npm/npmProjectUtils';
+import {findPackageJsonPath} from './npm/npmProjectUtils';
 import {format} from 'util';
 import {fs} from './node';
 import globAsync from 'glob';
-import {getPackageJsonData} from './npmProjectUtils';
-import {getPackageJsonDependencies} from './npmProjectUtils';
+import {getPackageJsonData} from './npm/npmProjectUtils';
+import {getPackageJsonDependencies} from './npm/npmProjectUtils';
 import {mkdirp} from './fileUtils';
 import {path} from './node';
 import {signCode} from './codeSign';

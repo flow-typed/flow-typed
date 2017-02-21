@@ -3,7 +3,7 @@
 import type {ValidationErrors as VErrors} from "./validationErrors";
 import {validationError} from "./validationErrors";
 
-type FlowSpecificVer = {|
+export type FlowSpecificVer = {|
   major: number,
   minor: number | 'x',
   patch: number | 'x',
@@ -209,6 +209,32 @@ export function parseDirString(
       };
     }
   }
+}
+
+export function parseFlowSpecificVer(
+  verStr: string,
+  validationErrs?: VErrors,
+): FlowSpecificVer {
+  const flowVer = parseDirString(`flow_${verStr}`, validationErrs);
+  switch (flowVer.kind) {
+    case 'specific': return flowVer.ver;
+    case 'all':
+    case 'ranged':
+      validationError(
+        verStr,
+        `This is not a specific Flow version.`,
+        validationErrs,
+      );
+      break;
+    default:
+      (flowVer: empty);
+  }
+  return {
+    major: -1,
+    minor: 'x',
+    patch: 'x',
+    prerel: null,
+  };
 }
 
 /**

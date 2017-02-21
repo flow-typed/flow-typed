@@ -10,6 +10,6 @@
     "es2015",
   ],
   "ignore": [
-    "__npmLibDefs-fixtures__"
+    "__*-fixtures__"
   ]
 }
