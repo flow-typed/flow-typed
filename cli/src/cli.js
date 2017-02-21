@@ -9,6 +9,7 @@ if (!global.__flowTypedBabelPolyfill) {
 import yargs from "yargs";
 import {fs, path} from "./lib/node.js";
 
+import * as NewInstall from "./commands/newInstall.js";
 import * as Install from "./commands/install.js";
 import * as CreateStub from "./commands/create-stub.js";
 import * as RunTests from "./commands/runTests.js";
@@ -33,6 +34,7 @@ export function runCLI() {
   };
   const commands: Array<CommandModule> = [
     CreateStub,
+    NewInstall,
     Install,
     RunTests,
     Search,

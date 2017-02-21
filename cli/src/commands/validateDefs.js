@@ -6,7 +6,7 @@ import {
 
 import {
   getNpmLibDefs,
-} from "../lib/npmLibDefs";
+} from "../lib/npm/npmLibDefs";
 
 import {
   printValidationErrors,

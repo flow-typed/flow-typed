@@ -5,6 +5,7 @@ import {
   _parsePkgNameVer as parsePkgNameVer,
   _validateVersionNumPart as validateVersionNumPart,
   _validateVersionPart as validateVersionPart,
+  getNpmLibDefs,
 } from "../npmLibDefs";
 
 import path from "path";
@@ -349,6 +350,45 @@ describe('npmLibDefs', () => {
   });
 
   describe('getNpmLibDefs', () => {
-    // TODO: Write tests here that verify npm scopes (@foo/bar) parse properly
+    const FIXTURE_ROOT = path.join(
+      BASE_FIXTURE_ROOT,
+      'getNpmLibDefs',
+    );
+
+    pit('parses npm scope name correctly', async () => {
+      const FIXTURE_DIR = path.join(
+        FIXTURE_ROOT,
+        "scoped-pkgs",
+        "definitions",
+      );
+      const libDefs = await getNpmLibDefs(FIXTURE_DIR);
+      expect(libDefs.length).toBe(4);
+      const scopedLibDefs = libDefs.filter(def => def.scope !== null);
+      expect(scopedLibDefs.length).toBe(2);
+    });
+
+    pit('errors when an unexpected file is in definitions/npm/', async () => {
+      const FIXTURE_DIR = path.join(
+        FIXTURE_ROOT,
+        'unexpected-file',
+        'definitions',
+      );
+      let err = null;
+      try { await getNpmLibDefs(FIXTURE_DIR); } catch (e) { err = e; }
+      const UNEXPECTED_FILE = path.join(FIXTURE_DIR, 'npm', 'unexpected-file');
+      expect(err && err.message).toBe(
+        `${UNEXPECTED_FILE}: Expected only directories to be present in this ` +
+        `directory.`
+      );
+
+      const errs = new Map();
+      const libDefs = await getNpmLibDefs(FIXTURE_DIR, errs);
+      expect(libDefs.length).toEqual(2);
+      expect([...errs.entries()]).toEqual([
+        [UNEXPECTED_FILE, [
+          "Expected only directories to be present in this directory."
+        ]],
+      ]);
+    });
   });
 });
