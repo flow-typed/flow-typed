@@ -2,7 +2,7 @@
 
 import semver from "semver";
 
-import {cloneInto, findLatestFileCommitHash, rebaseRepoMaster, getDiff} from "./git.js";
+import {cloneInto, findLatestFileCommitHash, rebaseRepoMaster} from "./git.js";
 import {mkdirp} from "./fileUtils.js";
 import {fs, path, os} from "./node.js";
 import {
@@ -159,24 +159,10 @@ async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>, validationErrs?: V
 /**
  * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
  */
- const basePathRegex = /definitions\/npm\/[^\/]*\/?/;
 export async function getLibDefs(
   defsDir: string,
   validationErrs?: VErrors,
-  testChanged: bool = true
 ) {
-  const diff = await getDiff();
-  let changedDefs;
-  if (diff) {
-    // $FlowFixMe
-    const baseDiff: string[] = diff.map(d => {
-      const match = d.match(basePathRegex);
-      if (match) {
-        return match[0];
-      }
-    }).filter(d => d != null);
-    changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
-  }
   const libDefs: Array<LibDef> = [];
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(defsDirItems.map(async (item) => {
@@ -209,9 +195,6 @@ export async function getLibDefs(
       validationError(itemPath, error, validationErrs);
     }
   }));
-  if (testChanged) {
-    return libDefs.filter(def => changedDefs.includes(def.pkgName));
-  }
   return libDefs;
 };
 
@@ -344,7 +327,7 @@ async function parseLibDefsFromPkgDir(
  * directory's name into a package name and version.
  */
 const REPO_DIR_ITEM_NAME_RE = /^(.*)_v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
-function parseRepoDirItem(dirItemPath, validationErrs) {
+export function parseRepoDirItem(dirItemPath: string, validationErrs?: VErrors) {
   const dirItem = path.basename(dirItemPath);
   const itemMatches = dirItem.match(REPO_DIR_ITEM_NAME_RE);
   if (itemMatches == null) {
