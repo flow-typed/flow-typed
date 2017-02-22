@@ -112,3 +112,9 @@ takePromise(Bluebird.resolve(1));
 // $ExpectError
 takePromise(Bluebird.resolve('hello'));
 
+Bluebird.delay(500);
+// $ExpectError
+Bluebird.delay('500');
+Bluebird.delay(500, 1);
+Bluebird.delay(500, Promise.resolve(5));
+Bluebird.delay(500, Bluebird.resolve(5));
