@@ -46,9 +46,9 @@ type TestGroup = {
  const basePathRegex = new RegExp(`definitions${path.sep}npm${path.sep}[^${path.sep}]*${path.sep}?`);
 async function getTestGroups(repoDirPath, onlyChanged: bool = false): Promise<Array<TestGroup>> {
   let libDefs = await getLibDefs(repoDirPath);
-  const diff = await getDiff();
-  let changedDefs;
-  if (diff) {
+  if (onlyChanged) {
+    const diff = await getDiff();
+    let changedDefs;
     // $FlowFixMe
     const baseDiff: string[] = diff.map(d => {
       const match = d.match(basePathRegex);
@@ -57,8 +57,6 @@ async function getTestGroups(repoDirPath, onlyChanged: bool = false): Promise<Ar
       }
     }).filter(d => d != null);
     changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
-  }
-  if (onlyChanged) {
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
   return libDefs.map(libDef => {

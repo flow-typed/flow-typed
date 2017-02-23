@@ -28,13 +28,17 @@ async function getGitPath() {
 export async function getDiff() {
   const gitPath = await getGitPath();
   try {
+    const {stdout:commit} = await child_process.spawnP(
+      gitPath,
+      ['merge-base', 'origin/master', 'HEAD'],
+    );
     const {stdout} = await child_process.spawnP(
       gitPath,
-      ['diff', '--name-only', 'HEAD~1'],
+      ['diff', '--name-only', commit],
     );
     return stdout.split('\n');
   } catch (e) {
-    return null;
+    return [];
   }
 }
 
