@@ -6,16 +6,15 @@ import type {Argv} from "yargs";
 import typeof Yargs from "yargs";
 
 export const name = "version";
-export const description = "Prints the CLI version.";
+export const description = "Print the CLI version";
 export function setup(yargs: Yargs) {
   return yargs
     .options({
       showDelegatorVersion: {
         alias: 'g',
         demand: false,
-        describe: 'Include info about the globally-installed CLI if the ' +
-                  'it delegated to a local package-installed version of the ' +
-                  'CLI.',
+        describe: 'Include info about the globally-installed CLI package ' +
+                  'if it has delegated to a locally-installed one',
         type: 'boolean',
       },
     })

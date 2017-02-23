@@ -13,7 +13,7 @@ import {
 } from "../lib/validationErrors";
 
 export const name = "validate-defs";
-export const description = "Validates the structure of the /definitions dir.";
+export const description = "Validate the structure of the /definitions dir";
 export type Args = {
   _: Array<string>,
 };

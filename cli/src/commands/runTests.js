@@ -357,7 +357,7 @@ async function runTests(
 }
 
 export const name = "run-tests";
-export const description = "Run definition tests of library definitions in the flow-typed project.";
+export const description = "Run definition tests for library definitions in the flow-typed project";
 export async function run(argv: Argv): Promise<number> {
   if (!isInFlowTypedRepo()) {
     console.log(

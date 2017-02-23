@@ -6,14 +6,14 @@ import type {Argv} from "yargs";
 import typeof Yargs from "yargs";
 
 export const name = 'update-cache';
-export const description = 'Updates the flow-typed definitions cache';
+export const description = 'Update the flow-typed definitions cache';
 
 export function setup(yargs: Yargs) {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .options({
       debug: {
-        describe: 'Enables verbose messages for the update procedure',
+        describe: 'Enable verbose messages for the update procedure',
         alias: 'd',
         type: 'boolean',
         demand: false,

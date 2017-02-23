@@ -24,7 +24,7 @@ import type {LibDef} from "../lib/libDefs.js";
 import type {Version} from "../lib/semver.js";
 
 export const name = 'install';
-export const description = 'Installs a libdef to the ./flow-typed directory';
+export const description = 'Install a libdef into the ./flow-typed directory';
 
 import typeof Yargs from "yargs";
 
@@ -39,7 +39,7 @@ export function setup(yargs: Yargs) {
     .options({
       flowVersion: {
         alias: 'f',
-        describe: 'The version of Flow fetched libdefs must be compatible with',
+        describe: 'The version of Flow that the fetched libdefs must be compatible with',
         type: 'string',
       },
       overwrite: {
@@ -51,7 +51,7 @@ export function setup(yargs: Yargs) {
       },
       verbose: {
         describe: 'Print additional, verbose information while installing ' +
-                  'libdefs.',
+                  'libdefs',
         type: 'boolean',
         demand: false,
       },
