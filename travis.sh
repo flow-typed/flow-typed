@@ -8,4 +8,4 @@ cd ../cli && \
 npm install && \
 ./node_modules/.bin/flow && \
 node dist/cli.js validate-defs ../definitions && \
-node dist/cli.js run-tests
+node dist/cli.js run-tests --onlyChanged
