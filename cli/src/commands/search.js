@@ -26,7 +26,7 @@ export function _formatDefTable(defs: Array<LibDef>): string {
 
 export const name = "search";
 export const description =
-  "Performs a simple search (by name) of available libdefs";
+  "Perform a simple search (by name) of available libdefs";
 
 export async function run(args: Argv): Promise<number> {
   if (!args._ || !(args._.length > 1)) {

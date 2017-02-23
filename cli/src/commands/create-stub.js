@@ -1,7 +1,7 @@
 // @flow
 
 export const name = 'create-stub';
-export const description = 'Creates a libdef stub for an untyped npm package';
+export const description = 'Create a libdef stub for an untyped npm package';
 
 import {createStub} from '../lib/stubUtils.js';
 import {findFlowRoot} from '../lib/flowProjectUtils.js';
