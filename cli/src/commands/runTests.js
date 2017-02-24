@@ -3,9 +3,10 @@
 import {child_process, fs, os, path} from "../lib/node.js";
 import {copyFile, recursiveRmdir} from "../lib/fileUtils.js";
 import {gitHubClient} from "../lib/github.js";
-import {getLibDefs} from "../lib/libDefs.js";
+import {getLibDefs, parseRepoDirItem} from "../lib/libDefs.js";
 import isInFlowTypedRepo from "../lib/isInFlowTypedRepo";
 import {toSemverString as flowVerToSemverString} from "../lib/flowVersion";
+import {getDiff} from '../lib/git';
 
 import request from "request";
 import * as semver from "semver";
@@ -42,8 +43,22 @@ type TestGroup = {
  * structs. Each TestGroup represents a Package/PackageVersion/FlowVersion
  * directory.
  */
-async function getTestGroups(repoDirPath): Promise<Array<TestGroup>> {
-  const libDefs = await getLibDefs(repoDirPath);
+ const basePathRegex = new RegExp(`definitions${path.sep}npm${path.sep}[^${path.sep}]*${path.sep}?`);
+async function getTestGroups(repoDirPath, onlyChanged: bool = false): Promise<Array<TestGroup>> {
+  let libDefs = await getLibDefs(repoDirPath);
+  if (onlyChanged) {
+    const diff = await getDiff();
+    let changedDefs;
+    // $FlowFixMe
+    const baseDiff: string[] = diff.map(d => {
+      const match = d.match(basePathRegex);
+      if (match) {
+        return match[0];
+      }
+    }).filter(d => d != null);
+    changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
+    libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
+  }
   return libDefs.map(libDef => {
     const groupID =
       `${libDef.pkgName}_${libDef.pkgVersionStr}${path.sep}` +
@@ -313,10 +328,11 @@ async function runTestGroup(
 
 async function runTests(
   repoDirPath: string,
-  testPatterns: Array<string>
+  testPatterns: Array<string>,
+  onlyChanged?: bool,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, "g"));
-  const testGroups = (await getTestGroups(repoDirPath)).filter(testGroup => {
+  const testGroups = (await getTestGroups(repoDirPath, onlyChanged)).filter(testGroup => {
     if (testPatternRes.length === 0) {
       return true;
     }
@@ -367,6 +383,7 @@ export async function run(argv: Argv): Promise<number> {
     return 1;
   }
   const testPatterns = argv._.slice(1);
+  const onlyChanged = Boolean(argv.onlyChanged);
 
   const cwd = process.cwd();
   const cwdDefsNPMPath = path.join(cwd, 'definitions', 'npm');
@@ -375,9 +392,13 @@ export async function run(argv: Argv): Promise<number> {
     ? cwdDefsNPMPath
     : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
 
-  console.log('Running definition tests in %s...\n', repoDirPath);
+  if (onlyChanged) {
+    console.log('Running changed definition tests in %s...\n', repoDirPath);
+  } else {
+    console.log('Running definition tests in %s...\n', repoDirPath);
+  }
 
-  const results = await runTests(repoDirPath, testPatterns);
+  const results = await runTests(repoDirPath, testPatterns, onlyChanged);
   console.log(" ");
   Array.from(results).forEach(([testGroupName, errors]) => {
     console.log("ERROR: %s", testGroupName);
