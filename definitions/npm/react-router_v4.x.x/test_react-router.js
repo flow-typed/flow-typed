@@ -62,6 +62,7 @@ var history: History;
 // Prompt
 <Prompt message="ok?" when={true} />;
 <Prompt message={(location) => "ok?"} />;
+<Prompt message={(location) => true} />;
 
 // $ExpectError
 <Prompt />;
