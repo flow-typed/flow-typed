@@ -37,6 +37,34 @@ type rxjs$EventListenerOptions = {
 } | boolean;
 
 declare class rxjs$Observable<+T> {
+  static bindCallback(callbackFunc: (callback: (_: void) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): () => rxjs$Observable<void>;
+  static bindCallback<U>(callbackFunc: (callback: (result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): () => rxjs$Observable<U>;
+  static bindCallback<T, U>(callbackFunc: (v1: T, callback: (result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T) => rxjs$Observable<U>;
+  static bindCallback<T, T2, U>(callbackFunc: (v1: T, v2: T2, callback: (result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2) => rxjs$Observable<U>;
+  static bindCallback<T, T2, T3, U>(callbackFunc: (v1: T, v2: T2, v3: T3, callback: (result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
+  static bindCallback<T, T2, T3, T4, U>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, callback: (result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
+  static bindCallback<T, T2, T3, T4, T5, U>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, callback: (result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
+  static bindCallback<T, T2, T3, T4, T5, T6, U>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6, callback: (result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
+  static bindCallback<U>(callbackFunc: (callback: (...args: Array<any>) => any) => any, selector: (...args: Array<any>) => U, scheduler?: rxjs$SchedulerClass): () => rxjs$Observable<U>;
+  static bindCallback<T, U>(callbackFunc: (v1: T, callback: (...args: Array<any>) => any) => any, selector: (...args: Array<any>) => U, scheduler?: rxjs$SchedulerClass): (v1: T) => rxjs$Observable<U>;
+  static bindCallback<T, T2, U>(callbackFunc: (v1: T, v2: T2, callback: (...args: Array<any>) => any) => any, selector: (...args: Array<any>) => U, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2) => rxjs$Observable<U>;
+  static bindCallback<T, T2, T3, U>(callbackFunc: (v1: T, v2: T2, v3: T3, callback: (...args: Array<any>) => any) => any, selector: (...args: Array<any>) => U, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
+  static bindCallback<T, T2, T3, T4, U>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, callback: (...args: Array<any>) => any) => any, selector: (...args: Array<any>) => U, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
+  static bindCallback<T, T2, T3, T4, T5, U>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, callback: (...args: Array<any>) => any) => any, selector: (...args: Array<any>) => U, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
+  static bindCallback<T, T2, T3, T4, T5, T6, U>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6, callback: (...args: Array<any>) => any) => any, selector: (...args: Array<any>) => U, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
+  static bindCallback<T>(callbackFunc: Function, selector?: void, scheduler?: rxjs$SchedulerClass): (...args: Array<any>) => rxjs$Observable<T>;
+  static bindCallback<T>(callbackFunc: Function, selector?: (...args: Array<any>) => T, scheduler?: rxjs$SchedulerClass): (...args: Array<any>) => rxjs$Observable<T>;
+
+  static bindNodeCallback<U>(callbackFunc: (callback: (err: any, result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): () => rxjs$Observable<U>;
+  static bindNodeCallback<T, U>(callbackFunc: (v1: T, callback: (err: any, result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T) => rxjs$Observable<U>;
+  static bindNodeCallback<T, T2, U>(callbackFunc: (v1: T, v2: T2, callback: (err: any, result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2) => rxjs$Observable<U>;
+  static bindNodeCallback<T, T2, T3, U>(callbackFunc: (v1: T, v2: T2, v3: T3, callback: (err: any, result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
+  static bindNodeCallback<T, T2, T3, T4, U>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, callback: (err: any, result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
+  static bindNodeCallback<T, T2, T3, T4, T5, U>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, callback: (err: any, result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
+  static bindNodeCallback<T, T2, T3, T4, T5, T6, U>(callbackFunc: (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6, callback: (err: any, result: U) => any) => any, selector?: void, scheduler?: rxjs$SchedulerClass): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
+  static bindNodeCallback<T>(callbackFunc: Function, selector?: void, scheduler?: rxjs$SchedulerClass): (...args: Array<any>) => rxjs$Observable<T>;
+  static bindNodeCallback<T>(callbackFunc: Function, selector?: (...args: Array<any>) => T, scheduler?: rxjs$SchedulerClass): (...args: Array<any>) => rxjs$Observable<T>;
+
   static concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
 
   static create(
