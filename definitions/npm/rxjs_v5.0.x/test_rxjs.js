@@ -162,3 +162,21 @@ const groupedSubObservable: Observable<Observable<SubFoo>> =
   subObservable.groupBy(subfoo => subfoo.y);
 
 ((Observable.defer(() => Promise.resolve(1))): Observable<number>);
+
+function f1(cb: (err: Error, result: number) => void): void {}
+function f2(x: string, cb: (err: Error, result: number) => void): void {}
+(Observable.bindNodeCallback(f1)(): Observable<number>);
+(Observable.bindNodeCallback(f2)('arg'): Observable<number>);
+// $ExpectError
+(Observable.bindNodeCallback(f1)(): Observable<string>);
+// $ExpectError
+(Observable.bindNodeCallback(f2)('arg'): Observable<string>);
+
+function f3(cb: (result: number) => void): void {}
+function f4(x: string, cb: (result: number) => void): void {}
+(Observable.bindCallback(f3)(): Observable<number>);
+(Observable.bindCallback(f4)('arg'): Observable<number>);
+// $ExpectError
+(Observable.bindCallback(f3)(): Observable<string>);
+// $ExpectError
+(Observable.bindCallback(f4)('arg'): Observable<string>);
