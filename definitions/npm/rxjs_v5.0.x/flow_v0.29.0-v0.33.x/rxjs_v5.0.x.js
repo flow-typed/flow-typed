@@ -201,6 +201,8 @@ declare class rxjs$Observable<+T> {
     seed: U,
   ): rxjs$Observable<U>;
 
+  repeat(count?: number): rxjs$Observable<T>;
+
   sample(notifier: rxjs$Observable<any>): rxjs$Observable<T>;
 
   sampleTime(delay: number): rxjs$Observable<T>;
