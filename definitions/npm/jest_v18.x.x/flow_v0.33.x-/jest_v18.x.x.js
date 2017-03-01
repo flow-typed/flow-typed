@@ -410,7 +410,7 @@ declare var expect: {
   anything(): void,
   arrayContaining(value: Array<mixed>): void,
   objectContaining(value: Object): void,
-  stringMatching(value: string): void,
+  stringMatching(value: string | RegExp): void,
 };
 
 // TODO handle return type

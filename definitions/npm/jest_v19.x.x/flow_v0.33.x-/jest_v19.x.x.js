@@ -419,7 +419,7 @@ declare var expect: {
   objectContaining(value: Object): void,
   /** Matches any received string that contains the exact expected string. */
   stringContaining(value: string): void,
-  stringMatching(value: string): void,
+  stringMatching(value: string | RegExp): void,
 };
 
 // TODO handle return type
