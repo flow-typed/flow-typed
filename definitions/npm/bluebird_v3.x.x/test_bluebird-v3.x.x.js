@@ -45,6 +45,9 @@ Bluebird.join(
   Promise.resolve(3),
   function (a, b) { return a + b }).then(function (s) { return s + 1 })
 
+Bluebird.join(1, Bluebird.resolve(2),
+  function (a, b) { return Bluebird.resolve(a + b) }).then(function (s) { return s + 1 })
+
 // $ExpectError
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<string>) { });
 
