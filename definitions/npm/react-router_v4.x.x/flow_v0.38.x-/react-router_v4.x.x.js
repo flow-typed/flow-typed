@@ -82,7 +82,7 @@ declare module 'react-router' {
 
   declare export class Prompt extends React$Component {
     props: {
-      message: string | (location: Location) => string,
+      message: string | (location: Location) => string | true,
       when?: boolean,
     }
   }
