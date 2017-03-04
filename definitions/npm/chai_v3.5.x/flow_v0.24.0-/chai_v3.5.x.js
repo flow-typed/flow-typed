@@ -91,7 +91,7 @@ declare module "chai" {
         calledWithMatch: (...args: Array<mixed>) => ExpectChain<T>,
         calledWithExactly: (...args: Array<mixed>) => ExpectChain<T>,
 
-        // chai-as-expected
+        // chai-as-promised
         eventually: ExpectChain<T>,
         resolvedWith: (value: mixed) => Promise<mixed> & ExpectChain<T>,
         resolved: () => Promise<mixed> & ExpectChain<T>,
