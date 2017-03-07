@@ -1,15 +1,21 @@
 /* @flow */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { DragSource, DropTarget, DragLayer, DragDropContext } from 'react-dnd';
 
 // Test Drag Source
 // ----------------------------------------------------------------------
-type KnightProps = {
-  connectDragSource: (e: React$Element<*>) => ?React$Element<*>,
-  connectDragPreview: (e: Image) => ?Image,
-  isDragging: boolean
-}
+type KnightDefaultProps = {
+  color: string;
+};
+type KnightProps = KnightDefaultProps & {
+  title: string;
+
+  connectDragSource: (e: React$Element<*>) => ?React$Element<*>;
+  connectDragPreview: (e: Image) => ?Image;
+  isDragging: boolean;
+};
 
 const knightSource = {
   beginDrag() {
@@ -28,17 +34,22 @@ function knightCollect(connect, monitor) {
 class Knight extends React.Component {
   props: KnightProps;
 
-  static defaultProps: KnightProps;
+  static defaultProps: KnightDefaultProps;
 
   componentDidMount() {
     const img = new Image();
     img.onload = () => { this.props.connectDragPreview(img) };
   }
 
+  foo(): string {
+    return 'foo';
+  }
+
   render() {
-    const { connectDragSource, isDragging } = this.props;
+    const { color, title, connectDragSource, isDragging } = this.props;
     return connectDragSource(
-      <div style={{
+      <div title={title} style={{
+        color,
         fontSize: 40,
         fontWeight: 'bold',
         cursor: 'move',
@@ -50,15 +61,23 @@ class Knight extends React.Component {
   }
 }
 Knight.defaultProps = {
-  connectDragSource: () => null,
-  connectDragPreview: () => null,
-  isDragging: false
+  color: 'blue'
 };
 
 const DndKnight = DragSource('knight', knightSource, knightCollect)(Knight);
-(DndKnight: Class<DndComponent<KnightProps, KnightProps, void>>);
+(DndKnight: Class<DndComponent<Knight, *, *, void>>);
 // $ExpectError
 (DndKnight: number);
+
+const x: DndKnight = ({}:any);
+// $ExpectError
+x.foo();
+
+(x.getDecoratedComponentInstance().foo(): string);
+// $ExpectError
+(x.getDecoratedComponentInstance().foo(): number);
+
+ReactDOM.render(<DndKnight title="foo" />, document.body);
 
 // Test Drop Target
 // ----------------------------------------------------------------------
@@ -67,32 +86,6 @@ function moveKnight(toX: number, toY: number) {
 
 function canMoveKnight(toX: number, toY: number) {
   return true;
-}
-
-type BoardSquareProps = {
-  x: number,
-  y: number,
-  isOver: boolean,
-  canDrop: boolean,
-  connectDropTarget: (e: React$Element<*>) => ?React$Element<*>
-};
-
-const boardSquareTarget = {
-  canDrop(props) {
-    return canMoveKnight(props.x, props.y);
-  },
-
-  drop(props) {
-    moveKnight(props.x, props.y);
-  }
-};
-
-function boardSquareCollect(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()
-  };
 }
 
 type SquareProps = {
@@ -115,10 +108,37 @@ Square.defaultProps = {
   black: true
 };
 
+type BoardSquareDefaultProps = {
+  x: number;
+};
+type BoardSquareProps = BoardSquareDefaultProps & {
+  y: number;
+  connectDropTarget: (e: React$Element<*>) => ?React$Element<*>;
+  isOver: boolean;
+  canDrop: boolean;
+};
+
+const boardSquareTarget = {
+  canDrop(props) {
+    return canMoveKnight(props.x, props.y);
+  },
+
+  drop(props) {
+    moveKnight(props.x, props.y);
+  }
+};
+
+function boardSquareCollect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
+  };
+}
 class BoardSquare extends React.Component {
   props: BoardSquareProps;
 
-  static defaultProps: BoardSquareProps;
+  static defaultProps: BoardSquareDefaultProps;
 
   renderOverlay(color: string) {
     return (
@@ -154,17 +174,15 @@ class BoardSquare extends React.Component {
   }
 }
 BoardSquare.defaultProps = {
-  x: 0,
-  y: 0,
-  isOver: false,
-  canDrop: false,
-  connectDropTarget: () => null
+  x: 0
 };
 
 const DndBoardSquare = DropTarget('boardsquare', boardSquareTarget, boardSquareCollect)(BoardSquare);
-(DndBoardSquare: Class<DndComponent<BoardSquareProps, BoardSquareProps, void>>);
+(DndBoardSquare: Class<DndComponent<BoardSquare, *, *, void>>);
 // $ExpectError
 (DndBoardSquare: string);
+
+ReactDOM.render(<DndBoardSquare y={5} />, document.body);
 
 // Test Custom Drag Layer
 // ----------------------------------------------------------------------
@@ -202,7 +220,7 @@ CustomDragLayer.defaultProps = {
 };
 
 const DndCustomDragLayer = DragLayer(dragLayerCollect)(CustomDragLayer);
-(DndCustomDragLayer: Class<DndComponent<CustomDragLayerProps, CustomDragLayerProps, void>>);
+(DndCustomDragLayer: Class<DndComponent<CustomDragLayer, *, *, void>>);
 // $ExpectError
 (DndCustomDragLayer: number);
 
@@ -232,7 +250,7 @@ Board.defaultProps = {
 };
 
 const DndBoard = DragDropContext({})(Board);
-(DndBoard: Class<ContextComponent<BoardProps, BoardProps, void>>);
+(DndBoard: Class<ContextComponent<Board, BoardProps, BoardProps, void>>);
 // $ExpectError
 (DndBoard: string);
 
@@ -266,4 +284,4 @@ const TestFuncComp = (props: TestProps) => {
 }
 
 const DndTestFuncComp = DragSource('test', testSource, testCollect)(TestFuncComp);
-(DndTestFuncComp: Class<DndComponent<void, TestProps, void>>);
+(DndTestFuncComp: Class<DndComponent<*, *, *, *>>);
