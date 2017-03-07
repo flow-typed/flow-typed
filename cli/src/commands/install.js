@@ -49,6 +49,12 @@ export function setup(yargs: Yargs) {
         type: 'boolean',
         demand: false,
       },
+      skipStubs: {
+        alias: 's',
+        describe: 'Do not generate stubs for missing libdefs',
+        type: 'boolean',
+        demand: false,
+      },
       verbose: {
         describe: 'Print additional, verbose information while installing ' +
                   'libdefs',
@@ -67,6 +73,7 @@ export type Args = {
   _: Array<string>,
   flowVersion?: string,
   overwrite: bool,
+  skipStubs: bool,
   verbose: bool,
 };
 
@@ -246,7 +253,7 @@ export async function run(args: Args): Promise<number> {
         }
       }));
 
-      if (untypedMissingLibDefs.length > 0) {
+      if (untypedMissingLibDefs.length > 0 && !args.skipStubs) {
         console.log('• Generating stubs for untyped dependencies...');
         await Promise.all(
           untypedMissingLibDefs.map(async ([pkgName, pkgVerStr]) => {
