@@ -128,9 +128,9 @@ declare module "underscore" {
   /**
    * Functions
    */
-  // TODO: bind
+  declare function bind(fn: Function, thisArg: any, ...partials: Array<any>): Function;
 
-  // TODO: bindAll
+  declare function bindAll(object: ?Object, ...methodNames: Array<string| [string]>): Object;
 
   declare function partial(fn: Function, ...arguments: Array<any>): Function;
 

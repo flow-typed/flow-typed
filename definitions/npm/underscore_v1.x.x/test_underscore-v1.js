@@ -56,6 +56,22 @@ _.range(0, 'a');
 // $ExpectError string cannot be compared to number
 _.range(0, 10)[4] == 'a';
 
+/**
+ * _.bind
+ */
+_.bind(function(a,b){return this.x+a+b;}, {x: 1}, 2, 3);
+// $ExpectError number. This type is incompatible with the expected param type of function type
+_.bind(123)
+
+/**
+ * _.bindAll
+ */
+_.bindAll({msg: 'hi', greet: function(){ return this.msg;}}, 'greet');
+_.bindAll({msg: 'hi', greet: function(){ return this.msg;}}, 'greet', 'toString');
+_.bindAll({msg: 'hi', greet: function(){ return this.msg;}}, ['greet'], 'toString');
+
+
+
 
 /**
  * _.extend
