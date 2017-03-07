@@ -136,7 +136,7 @@ declare module "underscore" {
 
   declare function memoize(fn: Function): Function;
 
-  declare function delay(fn: Function, wait: number, ...arguments: Array<any>): void;
+  declare function delay(fn: Function, wait?: number, ...arguments?: Array<any>): number;
 
   declare function defer(fn: Function, ...arguments: Array<any>): void;
 
