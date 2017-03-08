@@ -162,6 +162,7 @@ _.debounce(function(a) {a.length}, 10)('hello');
 
 _.memoize(function(){})();
 _.partial(function (a, b) { return a + b }, 1)(2);
+_.delay(function(){}, 0);
 _.defer(function(){});
 
 (
