@@ -213,7 +213,6 @@ declare class $npm$parse$ParseObject {
   dirtyKeys(): Array<string>,
   to$npm$parse$Pointer(): $npm$parse$Pointer,
   get(string: string): any,
-  extend(string: string): $npm$parse$ParseObject,
   relation(attr: string): $npm$parse$ParseRelation,
   escape(attr: string): string,
   has(attr: string): boolean,
@@ -245,7 +244,8 @@ declare class $npm$parse$ParseObject {
   static registerSubclass(className: string, constructor: Class<$npm$parse$ParseObject>): void,
   // static extend(className: any, protoProps: any, classProps: any): Class<$npm$parse$ParseObject>,
   static enableSingleInstance(): void,
-  static disableSingleInstance(): void
+  static disableSingleInstance(): void,
+  static extend(string: string): $npm$parse$ParseObject
 }
 
 // =========================
