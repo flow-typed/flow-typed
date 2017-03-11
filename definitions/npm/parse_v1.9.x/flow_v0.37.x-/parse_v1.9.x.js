@@ -213,6 +213,7 @@ declare class $npm$parse$ParseObject {
   dirtyKeys(): Array<string>,
   to$npm$parse$Pointer(): $npm$parse$Pointer,
   get(string: string): any,
+  extend(string: string): $npm$parse$ParseObject,
   relation(attr: string): $npm$parse$ParseRelation,
   escape(attr: string): string,
   has(attr: string): boolean,
