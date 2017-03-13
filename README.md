@@ -16,7 +16,7 @@ $ npm install -g flow-typed
 
 $ cd /path/to/my/project
 $ npm install
-$ flow-typed install
+$ flow-typed install rxjs@5.0.x
 'rxjs_v5.0.x.js' installed at /path/to/my/project/flow-typed/npm/rxjs_v5.0.xjs
 ```
 
