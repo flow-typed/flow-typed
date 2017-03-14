@@ -41,13 +41,15 @@ type moment$MomentCreationData = {
   strict: bool,
 };
 
+type moment$CalendarFormat = string | (moment$Moment) => string;
+
 type moment$CalendarFormats = {
-  sameDay?: string,
-  nextDay?: string,
-  nextWeek?: string,
-  lastDay?: string,
-  lastWeek?: string,
-  sameElse?: string,
+  sameDay?: moment$CalendarFormat,
+  nextDay?: moment$CalendarFormat,
+  nextWeek?: moment$CalendarFormat,
+  lastDay?: moment$CalendarFormat,
+  lastWeek?: moment$CalendarFormat,
+  sameElse?: moment$CalendarFormat,
 };
 
 declare class moment$LocaleData {

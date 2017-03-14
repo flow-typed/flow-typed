@@ -4,7 +4,7 @@ import moment from 'moment';
 // Parse
 const m3: moment = moment([123, 123]);
 
-//$ExpectError
+// $ExpectError
 moment.unix('1234');
 
 // Display
@@ -30,3 +30,24 @@ moment().isAfter();
 moment().isSameOrBefore();
 moment().isSameOrAfter();
 moment.isDate(new Date());
+
+
+// CalendarTime
+moment().calendar(null, {
+  sameDay: 'HH:mm',
+});
+moment().calendar(null, {
+  sameDay: () => 'HH:mm',
+});
+// $ExpectError
+moment().calendar(null, {
+  sameDay: (a: number) => 'HH:mm',
+});
+// $ExpectError
+moment().calendar(null, {
+  sameDay: 2,
+});
+// $ExpectError
+moment().calendar(null, {
+  sameElse: () => {},
+});
