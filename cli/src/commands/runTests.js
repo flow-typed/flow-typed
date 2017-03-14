@@ -198,6 +198,25 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
 }
 
 /**
+ * Return the sorted list of cached flow binaries that have previously been retrieved from github
+ * and cached in the `.flow-bins-cache` directory.  This function is usually called when a failure
+ * has occurred when attempting to refresh the flow releases from github, i.e. offline or over
+ * API limit.
+ */
+async function getCachedFlowBinVersions(): Promise<Array<string>> {
+  // read the files from the bin dir and remove the leading `flow-v` prefix
+  const versions = (await fs.readdir(path.join(BIN_DIR))).map(dir => dir.slice(6));
+
+  // sort the versions that we have inplace
+  versions.sort((a, b) => {
+    return semver.lt(a, b) ? -1 : 1;
+  });
+
+  // return the versions with a leading 'v' to satisfy the expected return value
+  return versions.map(version => `v${version}`);
+}
+
+/**
  * Given a TestGroup structure determine all versions of Flow that match the
  * FlowVersion specification and, for each, run `flow check` on the test
  * directory.
@@ -220,7 +239,12 @@ async function runTestGroup(
     );
   }
 
-  const orderedFlowVersions = await getOrderedFlowBinVersions();
+  let orderedFlowVersions;
+  try {
+    orderedFlowVersions = await getOrderedFlowBinVersions();
+  } catch (e) {
+    orderedFlowVersions = await getCachedFlowBinVersions();
+  }
 
   try {
     await fs.mkdir(testDirPath);
