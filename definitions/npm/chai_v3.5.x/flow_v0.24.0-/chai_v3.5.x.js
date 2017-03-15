@@ -185,6 +185,10 @@ declare module "chai" {
       static deepPropertyNotVal(obj: Object, prop: string, val: mixed, msg?: string): void;
 
       static lengthOf(exp: mixed, len: number, msg?: string): void;
+      
+      static throws(
+          func: () => any, errorLike?: Function | string | RegExp,
+          errorMsgMatcher?: string | RegExp, msg?: string): void;
     }
 
     declare var config: {
