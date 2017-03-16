@@ -161,7 +161,7 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
   reflect(): Bluebird$Promise<Bluebird$PromiseInspection<*>>;
 
   isFulfilled(): bool;
-
+  isRejected(): bool;
   isPending(): bool;
   isResolved(): bool;
 
