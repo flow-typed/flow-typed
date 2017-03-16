@@ -6,7 +6,7 @@ declare module 'parse/react-native' {
   declare module.exports: $npm$parse$Parse
 }
 
-declare module 'parse/browser' {
+declare module 'parse' {
   declare module.exports: $npm$parse$Parse
 }
 
