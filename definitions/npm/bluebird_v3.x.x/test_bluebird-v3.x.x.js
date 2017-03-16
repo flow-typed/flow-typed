@@ -121,3 +121,10 @@ Bluebird.delay('500');
 Bluebird.delay(500, 1);
 Bluebird.delay(500, Promise.resolve(5));
 Bluebird.delay(500, Bluebird.resolve(5));
+
+Bluebird.resolve().return(5).then((result: number) => {});
+Bluebird.resolve().thenReturn(5).then((result: number) => {});
+// $ExpectError
+Bluebird.resolve().return(5).then((result: string) => {});
+// $ExpectError
+Bluebird.resolve().thenReturn(5).then((result: string) => {});
