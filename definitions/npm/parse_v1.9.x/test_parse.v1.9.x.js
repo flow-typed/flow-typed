@@ -20,6 +20,11 @@ class ES6TestObject extends Parse.Object {
 
 Parse.Object.registerSubclass("ES6TestObject", ES6TestObject);
 
+async () => {
+  const testObjectQuery = new Parse.Query(ES6TestObject);
+  const testObjects: Array<ES6TestObject> = await testObjectQuery.find();
+};
+
 const usernameFor = async (sessionToken: string): Promise<?string> => {
   const user = await Parse.User.become(sessionToken);
   const username = user.getUsername();
