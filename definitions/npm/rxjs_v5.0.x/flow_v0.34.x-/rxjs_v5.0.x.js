@@ -142,7 +142,7 @@ declare class rxjs$Observable<+T> {
 
   debounceTime(dueTime: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>;
 
-  delay(dueTime: number): rxjs$Observable<T>;
+  delay(dueTime: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>;
 
   distinctUntilChanged(compare?: (x: T, y: T) => boolean): rxjs$Observable<T>;
 
