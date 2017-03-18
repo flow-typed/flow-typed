@@ -140,7 +140,7 @@ declare class rxjs$Observable<+T> {
     f: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
   ): rxjs$Observable<U>;
 
-  debounceTime(duration: number): rxjs$Observable<T>;
+  debounceTime(dueTime: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>;
 
   delay(dueTime: number): rxjs$Observable<T>;
 
@@ -186,11 +186,13 @@ declare class rxjs$Observable<+T> {
 
   // Alias for `mergeMap`
   flatMap<U>(
-    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
+    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    index?: number,
   ): rxjs$Observable<U>;
 
   switchMap<U>(
-    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
+    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    index?: number,
   ): rxjs$Observable<U>;
 
   switchMapTo<U>(
@@ -207,6 +209,7 @@ declare class rxjs$Observable<+T> {
 
   mergeMap<U>(
     project: (value: T, index?: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    index?: number,
   ): rxjs$Observable<U>;
 
   multicast(
@@ -235,7 +238,7 @@ declare class rxjs$Observable<+T> {
 
   sampleTime(delay: number): rxjs$Observable<T>;
 
-  publishReplay(): rxjs$ConnectableObservable<T>;
+  publishReplay(bufferSize?: number, windowTime?: number, scheduler?: rxjs$SchedulerClass): rxjs$ConnectableObservable<T>;
 
   retry(retryCount: number): rxjs$Observable<T>;
 
@@ -695,7 +698,7 @@ declare class rxjs$BehaviorSubject<T> extends rxjs$Subject<T> {
 }
 
 declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {
-
+  constructor(bufferSize?: number, windowTime?: number, scheduler?: rxjs$SchedulerClass): void;
 }
 
 declare class rxjs$Subscription {
