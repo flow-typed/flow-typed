@@ -20,7 +20,7 @@ const ExampleCSSModules = CSSModules(ExampleModule, styles);
 const ExampleCSSModules2 = CSSModules(ExampleModule, styles, { allowMultiple: true });
 
 // $ExpectError invalid module option.
-const BusedCSSModule = CSSModules(ExampleModule, styles, { wubbaLubba: 'dub-dub' });
+const BustedCSSModule = CSSModules(ExampleModule, styles, { wubbaLubba: 'dub-dub' });
 
 class Failure1 extends Component {
   render() {
