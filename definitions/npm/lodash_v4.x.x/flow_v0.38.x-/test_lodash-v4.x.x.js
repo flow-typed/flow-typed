@@ -2,6 +2,20 @@
 import _ from 'lodash';
 
 /**
+ * _.countBy
+ */
+_.countBy([6.1, 4.2, 6.3], Math.floor);
+_.countBy(['one', 'two', 'three'], 'length');
+
+
+/**
+ * _.differenceBy
+ */
+_.differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+_.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x');
+
+
+/**
  * _.find
  */
 _.find([1, 2, 3], x => x * 1 == 3);
@@ -37,6 +51,51 @@ _.find(users, 'active');
 
 
 /**
+ * _.groupBy
+ */
+var numbersGroupedByMathFloor = _.groupBy([6.1, 4.2, 6.3], Math.floor);
+if (numbersGroupedByMathFloor[6]) {
+  numbersGroupedByMathFloor[6][0] / numbersGroupedByMathFloor[6][1]
+}
+var stringsGroupedByLength = _.groupBy(['one', 'two', 'three'], 'length');
+if (stringsGroupedByLength[3]) {
+  stringsGroupedByLength[3][0].toLowerCase();
+}
+var numbersObj: {[key: string]: number} = {a: 6.1, b: 4.2, c: 6.3};
+var numbersGroupedByMathFloor2 = _.groupBy(numbersObj, Math.floor);
+if (numbersGroupedByMathFloor2[6]) {
+  numbersGroupedByMathFloor2[6][0] / numbersGroupedByMathFloor2[6][1]
+}
+var stringObj: {[key: string]: string} = {a: 'one', b: 'two', c: 'three'};
+var stringsGroupedByLength2 = _.groupBy(stringObj, 'length');
+if (stringsGroupedByLength2[3]) {
+  stringsGroupedByLength2[3][0].toLowerCase();
+}
+
+
+/**
+ * _.intersectionBy
+ */
+_.intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+_.intersectionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
+
+
+/**
+ * _.keyBy
+ */
+_.keyBy([
+  { 'dir': 'left', 'code': 97 },
+  { 'dir': 'right', 'code': 100 }
+], function(o) {
+  return String.fromCharCode(o.code);
+});
+_.keyBy([
+  { 'dir': 'left', 'code': 97 },
+  { 'dir': 'right', 'code': 100 }
+], 'dir');
+
+
+/**
  * _.map examples from the official doc
  */
 function square(n) {
@@ -53,6 +112,27 @@ var users = [
 
 // The `_.property` iteratee shorthand.
 _.map(users, 'user');
+
+
+/**
+ * _.pullAllBy
+ */
+_.pullAllBy([{ 'x': 1 }, { 'x': 2 }, { 'x': 3 }, { 'x': 1 }], [{ 'x': 1 }, { 'x': 3 }], 'x');
+
+
+/**
+ * _.unionBy
+ */
+_.unionBy([2.1], [1.2, 2.3], Math.floor);
+_.unionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
+
+
+/**
+ * _.uniqBy
+ */
+_.uniqBy([2.1, 1.2, 2.3], Math.floor);
+_.uniqBy([{ 'x': 1 }, { 'x': 2 }, { 'x': 1 }], 'x');
+
 
 /**
  * _.clone
@@ -88,6 +168,19 @@ _.range(0, 10)[4] == 'a';
 
 
 /**
+ * _.sortedIndexBy
+ */
+_.sortedIndexBy([{ 'x': 4 }, { 'x': 5 }], { 'x': 4 }, function(o) { return o.x; });
+_.sortedIndexBy([{ 'x': 4 }, { 'x': 5 }], { 'x': 4 }, 'x');
+
+
+/**
+ * _.sortedLastIndexBy
+ */
+_.sortedLastIndexBy([{ 'x': 4 }, { 'x': 5 }], { 'x': 4 }, function(o) { return o.x; });
+_.sortedLastIndexBy([{ 'x': 4 }, { 'x': 5 }], { 'x': 4 }, 'x');
+
+/**
  * _.extend
  */
 _.extend({a: 1}, {b: 2}).a
@@ -96,6 +189,13 @@ _.extend({a: 1}, {b: 2}).b
 _.extend({a: 1}, {b: 2}).c
 // $ExpectError property `c`. Poperty not found in object literal
 _.assignIn({a: 1}, {b: 2}).c
+
+
+/**
+ * _.xorBy
+ */
+_.xorBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+_.xorBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
 
 
 /**
