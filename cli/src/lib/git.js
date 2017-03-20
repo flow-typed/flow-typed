@@ -34,7 +34,7 @@ export async function getDiff() {
     );
     const {stdout} = await child_process.spawnP(
       gitPath,
-      ['diff', '--name-only', commit],
+      ['diff', '--name-only', commit.replace('\n','')],
     );
     return stdout.split('\n');
   } catch (e) {

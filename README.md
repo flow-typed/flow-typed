@@ -150,6 +150,16 @@ This issue was first reported here:
 The `flow-typed` npm package provides a CLI that provides several commands for
 working with this repository:
 
+##### `flow-typed install [package-specification]`
+
+Installs libdefs from looking at your package.json.
+
+If `package-specification` was specified, only that one libdef will be installed.
+
+```bash
+flow-typed install foo@1.2.3
+```
+
 ##### `flow-typed validate-defs`
 
 Verifies that all files under the `/definitions/` directory are structured and 
