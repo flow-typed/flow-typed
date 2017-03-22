@@ -70,12 +70,12 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
   ): Bluebird$Promise<T>;
   static map<T, U, Elem: $Promisable<T>>(
     Promises: Array<Elem>,
-    mapper: (item: T, index: number, arrayLength: number) => U,
+    mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>,
     options?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<U>>;
   static mapSeries<T, U, Elem: $Promisable<T>>(
     Promises: Array<Elem>,
-    mapper: (item: T, index: number, arrayLength: number) => U
+    mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>
   ): Bluebird$Promise<Array<U>>;
   static reduce<T, U, Elem: $Promisable<T>>(
     Promises: Array<Elem>,

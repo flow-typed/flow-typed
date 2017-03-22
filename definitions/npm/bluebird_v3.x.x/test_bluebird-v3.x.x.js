@@ -21,6 +21,11 @@ Bluebird.all([
   1
 ]);
 
+function mapper(x: number): Promise<number> {
+  return Bluebird.resolve(x);
+}
+let mapResult: Promise<number[]> = Bluebird.map([1], mapper);
+let mapSeriesResult: Promise<number[]> = Bluebird.mapSeries([1], mapper);
 
 Bluebird.resolve([1,2,3]).then(function(arr) {
   let l = arr.length;
