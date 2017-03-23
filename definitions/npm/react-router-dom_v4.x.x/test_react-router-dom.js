@@ -3,6 +3,7 @@ import {
   HashRouter,
   Link,
   NavLink,
+  matchPath, type Match
 } from 'react-router-dom';
 
 // BrowserRouter
@@ -72,3 +73,17 @@ import {
 
 // $ExpectError
 <NavLink />
+
+// matchPath
+const match: null | Match = matchPath('/the/pathname', '/the/:dynamicId', {
+  exact: true,
+  strict: false
+})
+const match2: null | Match = matchPath('/the/pathname', '/the/:dynamicId')
+
+// $ExpectError
+matchPath('/the/pathname')
+// $ExpectError
+matchPath()
+// $ExpectError
+const matchError: string = matchPath('/the/pathname', 'the/:dynamicId')
