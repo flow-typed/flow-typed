@@ -178,8 +178,8 @@ declare class moment$Moment {
   endOf(unit: string): this;
   local(): this;
   utc(): this;
-  utcOffset(offset: number|string): void;
-  utcOffset(): number|string;
+  utcOffset(offset: number|string): this;
+  utcOffset(): number;
   format(format?: string): string;
   fromNow(removeSuffix?: bool): string;
   from(value: moment$Moment|string|number|Date|Array<number>, removePrefix?: bool): string;
