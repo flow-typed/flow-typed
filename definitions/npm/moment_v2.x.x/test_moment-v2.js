@@ -51,3 +51,13 @@ moment().calendar(null, {
 moment().calendar(null, {
   sameElse: () => {},
 });
+
+
+// UTC offsets
+let n: number;
+n = moment().utcOffset();
+n = m.utcOffset(0).utcOffset();
+n = m.utcOffset(-1.5).utcOffset();
+n = m.utcOffset(-90).utcOffset();
+n = m.utcOffset('-01:30').utcOffset();
+n = m.utcOffset('+00:10').utcOffset();
