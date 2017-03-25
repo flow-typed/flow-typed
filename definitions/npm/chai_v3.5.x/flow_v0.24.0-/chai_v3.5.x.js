@@ -194,6 +194,11 @@ declare module "chai" {
           err?: Class<E> | Error | RegExp | string,
           errorMsgMatcher?: string | RegExp,
           msg?: string): void;
+      static doesNotThrow<E>(
+          func: () => any,
+          err?: Class<E> | Error | RegExp | string,
+          errorMsgMatcher?: string | RegExp,
+          msg?: string): void;
     }
 
     declare var config: {
