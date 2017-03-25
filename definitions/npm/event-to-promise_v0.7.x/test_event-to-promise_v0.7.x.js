@@ -4,6 +4,7 @@ import eventToPromise from 'event-to-promise';
 import EventEmitter from 'events';
 
 const emitter = new EventEmitter();
+const xhr = new XMLHttpRequest();
 
 // $ExpectError
 eventToPromise(emitter);
@@ -16,3 +17,5 @@ const waitForMultiple: Promise<Array<*>> = eventToPromise(emitter, 'data', {arra
 
 const cancelable = eventToPromise(emitter, 'data');
 cancelable.cancel();
+
+const waitForXHRLoad: Promise<Event> = eventToPromise(xhr, 'load');
