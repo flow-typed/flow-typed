@@ -16,8 +16,8 @@ const driver = builder.build();
 
 // timeouts
 driver.manage().timeouts().implicitlyWait(0);
-driver.manage().timeouts().pageLoadTimeout(timeout);
-driver.manage().timeouts().setScriptTimeout(timeout);
+driver.manage().timeouts().pageLoadTimeout(1);
+driver.manage().timeouts().setScriptTimeout(2);
 
 // $ExpectError
 const capabilities_: string = webdriver.Capabilities.chrome();
