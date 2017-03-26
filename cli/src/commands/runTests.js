@@ -87,6 +87,10 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
       const QUERY_PAGE_SIZE = 100;
       const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
 
+      if (!await fs.exists(BIN_DIR)) {
+        await fs.mkdir(BIN_DIR);
+      }
+
       let binURLs = new Map();
       let apiPayload = null;
       let page = 0;
@@ -132,10 +136,6 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
       FLOW_BIN_VERSION_ORDER.sort((a, b) => {
         return semver.lt(a, b) ? -1 : 1;
       });
-
-      if (!await fs.exists(BIN_DIR)) {
-        await fs.mkdir(BIN_DIR);
-      }
 
       await P.all(Array.from(binURLs).map(async ([version, binURL]) => {
         const zipPath = path.join(BIN_DIR, "flow-" + version + ".zip");
