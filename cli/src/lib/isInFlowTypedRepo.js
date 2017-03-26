@@ -1,5 +1,8 @@
 // @flow
 
+import * as node_path from 'path';
+
 export default function isInFlowTypedRepo() {
-  return /\/flow-typed/.test(process.cwd());
+  const PATTERN = new RegExp('\\' + node_path.sep + 'flow-typed');
+  return PATTERN.test(process.cwd());
 }
