@@ -245,6 +245,11 @@ type JestObjectType = {
    */
   autoMockOn(): JestObjectType,
   /**
+   * Clears the mock.calls and mock.instances properties of all mocks.
+   * Equivalent to calling .mockClear() on every mocked function.
+   */
+  clearAllMocks(): JestObjectType,
+  /**
    * Resets the state of all mocks. Equivalent to calling .mockReset() on every
    * mocked function.
    */
