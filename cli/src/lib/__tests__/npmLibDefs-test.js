@@ -254,7 +254,7 @@ describe('npmLibDefs', () => {
       let err = null;
       try { await defsPromise1; } catch (e) { err = e; }
       expect(err && err.message).toBe(
-        "underscore_v1.x.x/asdf: Unexpected file name. This directory can " +
+        path.join("underscore_v1.x.x", "asdf") + ": Unexpected file name. This directory can " +
         "only contain test files or a libdef file named `underscore_v1.x.x.js`."
       );
 
@@ -267,16 +267,16 @@ describe('npmLibDefs', () => {
       );
       expect((await defsPromise2).length).toBe(2);
       expect([...errs.entries()]).toEqual([
-        ['underscore_v1.x.x/asdf', [
+        [path.join("underscore_v1.x.x", "asdf"), [
           "Unexpected file name. This directory can only contain test files " +
           "or a libdef file named `underscore_v1.x.x.js`."
         ]],
         ['asdfdir', ["Flow versions must start with `flow-`"]],
-        ['underscore_v1.x.x/flow_v0.38.x-/asdf2', [
+        [path.join("underscore_v1.x.x", "flow_v0.38.x-", "asdf2"), [
           "Unexpected file. This directory can only contain test files or a " +
           "libdef file named `underscore_v1.x.x.js`."
         ]],
-        ['underscore_v1.x.x/flow_v0.38.x-/asdf2dir', [
+        [path.join("underscore_v1.x.x", "flow_v0.38.x-", "asdf2dir"), [
           "Unexpected sub-directory. This directory can only contain test " +
           "files or a libdef file named `underscore_v1.x.x.js`."
         ]],
