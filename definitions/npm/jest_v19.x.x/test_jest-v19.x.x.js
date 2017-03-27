@@ -2,6 +2,7 @@
 /* eslint-disable */
 
 jest.autoMockOff()
+jest.clearAllMocks();
 jest.resetAllMocks();
 
 // $ExpectError property `atoMockOff` not found in object type
