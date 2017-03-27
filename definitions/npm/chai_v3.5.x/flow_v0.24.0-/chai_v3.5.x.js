@@ -53,7 +53,10 @@ declare module "chai" {
         key: (key: string) => ExpectChain<T>,
         keys: (key: string | Array<string>, ...keys: Array<string>) => ExpectChain<T>,
 
-        throw: <E>(err: Class<E> | Error | RegExp | string, msg?: RegExp | string) => ExpectChain<T>,
+        throw: <E>(
+            err: Class<E> | Error | RegExp | string,                                                                                   
+            errMsgMatcher?: RegExp | string,                                                                                           
+            msg?: string) => ExpectChain<T>,
 
         respondTo: (method: string) => ExpectChain<T>,
         itself: ExpectChain<T>,
@@ -185,6 +188,17 @@ declare module "chai" {
       static deepPropertyNotVal(obj: Object, prop: string, val: mixed, msg?: string): void;
 
       static lengthOf(exp: mixed, len: number, msg?: string): void;
+      
+      static throws<E>(
+          func: () => any,
+          err?: Class<E> | Error | RegExp | string,
+          errorMsgMatcher?: string | RegExp,
+          msg?: string): void;
+      static doesNotThrow<E>(
+          func: () => any,
+          err?: Class<E> | Error | RegExp | string,
+          errorMsgMatcher?: string | RegExp,
+          msg?: string): void;
     }
 
     declare var config: {
