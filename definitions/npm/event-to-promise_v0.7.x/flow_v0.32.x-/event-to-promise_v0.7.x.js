@@ -10,7 +10,7 @@ type eventToPromise$Options = {
 
 declare module 'event-to-promise' {
   declare module.exports: {
-    <R>(emitter: events$EventEmitter, event: string, opts?: ?eventToPromise$Options): eventToPromise$CancelablePromise<R>;
-    multi<R>(emitter: events$EventEmitter, successEvents: Array<string>, errorEvents?: ?Array<string>): eventToPromise$CancelablePromise<R>;
+    <R>(emitter: events$EventEmitter | EventTarget, event: string, opts?: ?eventToPromise$Options): eventToPromise$CancelablePromise<R>;
+    multi<R>(emitter: events$EventEmitter | EventTarget, successEvents: Array<string>, errorEvents?: ?Array<string>): eventToPromise$CancelablePromise<R>;
   };
 }
