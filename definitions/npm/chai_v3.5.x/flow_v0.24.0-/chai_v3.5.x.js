@@ -165,10 +165,10 @@ declare module "chai" {
       static notInstanceOf(val: mixed, constructor: Function, msg?: string): void;
 
       static include(exp: string, inc: mixed, msg?: string): void;
-      static include(exp: Array<mixed>, inc: mixed, msg?: string): void;
+      static include<T>(exp: Array<T>, inc: T, msg?: string): void;
 
       static notInclude(exp: string, inc: mixed, msg?: string): void;
-      static notInclude(exp: Array<mixed>, inc: mixed, msg?: string): void;
+      static notInclude<T>(exp: Array<T>, inc: T, msg?: string): void;
 
       static match(exp: mixed, re: RegExp, msg?: string): void;
       static notMatch(exp: mixed, re: RegExp, msg?: string): void;
