@@ -4,7 +4,7 @@ declare class Knex$Transaction mixins Knex$QueryBuilder, events$EventEmitter, Pr
   savepoint(connection?: any): Promise<any>;
 }
 
-declare type Knex$QueryBuilderFn = (qb: Knex$QueryBuilder) => Knex$QueryBuilder;
+declare type Knex$QueryBuilderFn = (qb: Knex$QueryBuilder) => Knex$QueryBuilder | void;
 
 declare class Knex$QueryBuilder mixins Promise {
   select(key?: string[]): this;
@@ -76,6 +76,17 @@ declare class Knex$QueryBuilder mixins Promise {
   offset(offset: number): this;
   limit(limit: number): this;
   having(column: string, operator: string, value: mixed): this;
+  havingIn(column: string, values: Array<mixed>): this;
+  havingNotIn(column: string, values: Array<mixed>): this;
+  havingNull(column: string): this;
+  havingNotNull(column: string): this;
+  havingExists(builder: Knex$QueryBuilderFn | Knex$QueryBuilder): this;
+  havingNotExists(builder: Knex$QueryBuilderFn | Knex$QueryBuilder): this;
+  havingBetween<T>(column: string, range: [T, T]): this;
+  havingNotBetween<T>(column: string, range: [T, T]): this;
+  havingRaw(column: string, operator: string, value: mixed): this;
+  havingRaw(column: string, value: mixed): this;
+  havingRaw(raw: string): this;
   union(): this;
   unionAll(): this;
   count(column?: string): this;
