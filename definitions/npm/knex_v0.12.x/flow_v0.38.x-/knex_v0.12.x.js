@@ -109,7 +109,7 @@ declare class Knex$QueryBuilder mixins Promise {
   returning(columns: string[]): this;
 }
 
-declare class Knex$Knex mixins Knex$QueryBuilder, Promise {
+declare class Knex$Knex mixins Knex$QueryBuilder, Promise, events$EventEmitter {
   static (config: Knex$Config): Knex$Knex;
   static QueryBuilder: typeof Knex$QueryBuilder;
   $call: (tableName: string) => Knex$QueryBuilder;

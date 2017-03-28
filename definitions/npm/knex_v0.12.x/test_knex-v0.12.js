@@ -18,6 +18,11 @@ knex.from();
 
 knex.destroy();
 
+/**
+ * knex is also an event emitter,
+ * See : http://knexjs.org/#Interfaces-Events
+ */
+knex.on('start', () => {});
 
 /* Having tests */
 knex('foo').having('count', '>', 100);
