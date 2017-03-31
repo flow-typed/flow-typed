@@ -8,9 +8,9 @@ declare type Injector = {
 };
 
 declare module 'react-jss' {
-	declare export type FunctionComponent<P> = (props: P) => ?React$Element<any>;
-	declare export type ClassComponent<D, P, S> = Class<React$Component<D, P, S>>;
-	declare export type JSSProps<CSS> = {
+	declare type FunctionComponent<P> = (props: P) => ?React$Element<any>;
+	declare type ClassComponent<D, P, S> = Class<React$Component<D, P, S>>;
+	declare type JSSProps<CSS> = {
 		classes: Klasses<CSS>,
 		sheet: {
 			attached: boolean,
@@ -22,7 +22,7 @@ declare module 'react-jss' {
 			rules: mixed,
 		},
 	};
-	declare export default function injectSheet<Props, State, DefaultProps, CSS>(
+	declare function exports<Props, State, DefaultProps, CSS>(
 		CSS: CSS,
 	): Injector
 }
