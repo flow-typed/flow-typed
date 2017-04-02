@@ -165,5 +165,6 @@ declare module 'knex' {
     line: string,
     routine: string,
   }
+  declare type $QueryBuilder = Knex$QueryBuilder;
   declare var exports: typeof Knex$Knex;
 }
