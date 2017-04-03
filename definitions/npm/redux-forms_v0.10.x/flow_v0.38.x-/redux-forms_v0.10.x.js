@@ -247,20 +247,20 @@ declare module 'redux-forms/actions' {
 }
 
 declare module 'redux-forms/selectors' {
-  declare export type Values = { [key: string]: $npm$ReduxForms$Value | $npm$ReduxForms$Value[] | Values[] };
-  declare export type Error = string | null;
-  declare export type Errors = { [key: string]: Error | Error[] | Errors[] };
+  declare type Error = string | null;
 
-  declare export type StateLike = {
+  declare export type Values = { [key: string]: $npm$ReduxForms$Value | $npm$ReduxForms$Value[] | Values[] };
+  declare export type Errors = { [key: string]: Error | Error[] | Errors[] };
+  declare export type ReduxFormsState = {
     reduxForms: $npm$ReduxForms$State,
   };
 
-  declare export function valueSelector(name: string, state: StateLike): Values;
-  declare export function errorSelector(name: string, state: StateLike): Errors;
-  declare export function isValid(name: string, state: StateLike): boolean;
-  declare export function isTouched(name: string, state: StateLike): boolean;
-  declare export function isDirty(name: string, state: StateLike): boolean;
-  declare export function isSubmitting(name: string, state: StateLike): boolean;
+  declare export function valueSelector(name: string, state: ReduxFormsState): Values;
+  declare export function errorSelector(name: string, state: ReduxFormsState): Errors;
+  declare export function isValid(name: string, state: ReduxFormsState): boolean;
+  declare export function isTouched(name: string, state: ReduxFormsState): boolean;
+  declare export function isDirty(name: string, state: ReduxFormsState): boolean;
+  declare export function isSubmitting(name: string, state: ReduxFormsState): boolean;
 }
 
 declare module 'redux-forms' {
