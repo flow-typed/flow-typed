@@ -5,10 +5,10 @@ declare module 'redux-forms-react' {
   // ====
 
   declare type FormProps = {
-    +name: string,
-    +persistent?: boolean,
-    +onSubmit?: (values: any) => ?Promise<any>,
-    +withRef?: (el: HTMLFormElement) => void,
+    name: string,
+    persistent?: boolean,
+    onSubmit?: (values: any) => ?Promise<any>,
+    withRef?: (el: HTMLFormElement) => void,
   };
 
   declare export class Form extends React$Component {
@@ -22,18 +22,17 @@ declare module 'redux-forms-react' {
   declare type Value = any;
 
   declare type FieldProps = {|
-    +name: string,
-    +validate: (value: Value) => string | null,
-    +normalize: (value: Value) => Value,
-    +defaultValue: string,
-    +children: React$Element<*>,  // specify once Flow is capable of it
+    name: string,
+    validate: (value: Value) => string | null,
+    normalize: (value: Value) => Value,
+    defaultValue: Value,
+    children?: React$Element<*>,  // specify once Flow is capable of it
   |};
 
   declare type FieldDefaultProps = {|
-    +validate: () => null,
-    +normalize: <T>(id: T) => T,
-    +defaultValue: '',
-    +children: null,
+    validate: (value: Value) => string | null,
+    normalize: (value: Value) => Value,
+    defaultValue: Value,
   |};
 
   declare export class Field extends React$Component {
@@ -63,8 +62,8 @@ declare module 'redux-forms-react' {
   // ==========
 
   declare type FieldArrayProps = {|
-    +name: string,
-    +children: React$Element<*>,  // specify once Flow is capable of it
+    name: string,
+    children?: React$Element<*>,  // specify once Flow is capable of it
   |};
 
   declare export class FieldArray extends React$Component {
