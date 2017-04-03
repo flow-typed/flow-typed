@@ -19,9 +19,9 @@ declare type $npm$ReduxForms$Form = {|
   +submitting: boolean,
 |};
 
-declare type $npm$ReduxForms$State = {|
+declare type $npm$ReduxForms$State = {
   +[form: string]: $npm$ReduxForms$Form,
-|};
+};
 
 /* =========== */
 /* = ACTIONS = */
@@ -222,26 +222,26 @@ declare type $npm$ReduxForms$Action =
   $npm$ReduxForms$FieldBlurAction ;
 
 declare module 'redux-forms/actions' {
-  declare export const addForm: $npm$ReduxForms$AddFormCreator;
-  declare export const removeForm: $npm$ReduxForms$RemoveFormCreator;
-  declare export const addField: $npm$ReduxForms$AddFieldCreator;
-  declare export const removeField: $npm$ReduxForms$RemoveFieldCreator;
-  declare export const touchAll: $npm$ReduxForms$TouchAllCreator;
-  declare export const submitStart: $npm$ReduxForms$SubmitStartCreator;
-  declare export const submitStop: $npm$ReduxForms$SubmitStopCreator;
-  declare export const addArray: $npm$ReduxForms$AddArrayCreator;
-  declare export const removeArray: $npm$ReduxForms$RemoveArrayCreator;
-  declare export const arrayPush: $npm$ReduxForms$ArrayPushCreator;
-  declare export const arrayPop: $npm$ReduxForms$ArrayPopCreator;
-  declare export const arrayUnshift: $npm$ReduxForms$ArrayUnshiftCreator;
-  declare export const arrayShift: $npm$ReduxForms$ArrayShiftCreator;
-  declare export const arrayInsert: $npm$ReduxForms$ArrayInsertCreator;
-  declare export const arrayRemove: $npm$ReduxForms$ArrayRemoveCreator;
-  declare export const arraySwap: $npm$ReduxForms$ArraySwapCreator;
-  declare export const arrayMove: $npm$ReduxForms$ArrayMoveCreator;
-  declare export const fieldChange: $npm$ReduxForms$FieldChangeCreator;
-  declare export const fieldFocus: $npm$ReduxForms$FieldFocusCreator;
-  declare export const fieldBlur: $npm$ReduxForms$FieldBlurCreator;
+  declare export var addForm: $npm$ReduxForms$AddFormCreator;
+  declare export var removeForm: $npm$ReduxForms$RemoveFormCreator;
+  declare export var addField: $npm$ReduxForms$AddFieldCreator;
+  declare export var removeField: $npm$ReduxForms$RemoveFieldCreator;
+  declare export var touchAll: $npm$ReduxForms$TouchAllCreator;
+  declare export var submitStart: $npm$ReduxForms$SubmitStartCreator;
+  declare export var submitStop: $npm$ReduxForms$SubmitStopCreator;
+  declare export var addArray: $npm$ReduxForms$AddArrayCreator;
+  declare export var removeArray: $npm$ReduxForms$RemoveArrayCreator;
+  declare export var arrayPush: $npm$ReduxForms$ArrayPushCreator;
+  declare export var arrayPop: $npm$ReduxForms$ArrayPopCreator;
+  declare export var arrayUnshift: $npm$ReduxForms$ArrayUnshiftCreator;
+  declare export var arrayShift: $npm$ReduxForms$ArrayShiftCreator;
+  declare export var arrayInsert: $npm$ReduxForms$ArrayInsertCreator;
+  declare export var arrayRemove: $npm$ReduxForms$ArrayRemoveCreator;
+  declare export var arraySwap: $npm$ReduxForms$ArraySwapCreator;
+  declare export var arrayMove: $npm$ReduxForms$ArrayMoveCreator;
+  declare export var fieldChange: $npm$ReduxForms$FieldChangeCreator;
+  declare export var fieldFocus: $npm$ReduxForms$FieldFocusCreator;
+  declare export var fieldBlur: $npm$ReduxForms$FieldBlurCreator;
 
   declare export type Action = $npm$ReduxForms$Action;
 }
