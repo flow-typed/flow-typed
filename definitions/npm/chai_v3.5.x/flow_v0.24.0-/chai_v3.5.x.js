@@ -101,6 +101,9 @@ declare module "chai" {
         rejectedWith: (value: mixed) => Promise<mixed> & ExpectChain<T>,
         rejected: () => Promise<mixed> & ExpectChain<T>,
         notify: (callback: () => mixed) => ExpectChain<T>,
+
+        // chai-subset
+        containSubset: (obj: Object | Object[]) => ExpectChain<T>
     };
 
     declare function expect<T>(actual: T): ExpectChain<T>;
