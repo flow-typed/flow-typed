@@ -41,7 +41,7 @@ type moment$MomentCreationData = {
   strict: bool,
 };
 
-type moment$CalendarFormat = string | (moment$Moment) => string;
+type moment$CalendarFormat = string | (moment: moment$Moment) => string;
 
 type moment$CalendarFormats = {
   sameDay?: moment$CalendarFormat,
