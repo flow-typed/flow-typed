@@ -1,6 +1,7 @@
 // @flow
 
 import yargs from "yargs";
+import { resolve } from "path"
 
 const argv = yargs
   .usage('Usage: $0 <cmd> [options]')
@@ -42,6 +43,19 @@ const argv2 = yargs(['-x'])
   .option('h', {
     alias: 'help',
     description: 'display help message'
+  })
+  .options({
+    config: {
+      alias: 'c',
+      description: 'the config file',
+      default: 'config.json',
+      coerce: file => {
+        if (typeof file === 'string') {
+          return resolve(file)
+        }
+        return file
+      }
+    }
   })
   .string(['user', 'pass'])
   .implies('user', 'pass')

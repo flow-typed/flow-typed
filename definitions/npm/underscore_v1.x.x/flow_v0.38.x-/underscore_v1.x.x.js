@@ -184,7 +184,7 @@ declare module "underscore" {
    * Utility
    */
   // TODO: noConflict
-  // TODO: identity
+  declare function identity<T>(o: T): T;
   declare function constant<T>(value: T): () => T;
   // TODO: noop
   // TODO: times

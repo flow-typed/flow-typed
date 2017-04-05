@@ -54,8 +54,8 @@ declare module "chai" {
         keys: (key: string | Array<string>, ...keys: Array<string>) => ExpectChain<T>,
 
         throw: <E>(
-            err: Class<E> | Error | RegExp | string,                                                                                   
-            errMsgMatcher?: RegExp | string,                                                                                           
+            err: Class<E> | Error | RegExp | string,
+            errMsgMatcher?: RegExp | string,
             msg?: string) => ExpectChain<T>,
 
         respondTo: (method: string) => ExpectChain<T>,
@@ -101,6 +101,9 @@ declare module "chai" {
         rejectedWith: (value: mixed) => Promise<mixed> & ExpectChain<T>,
         rejected: () => Promise<mixed> & ExpectChain<T>,
         notify: (callback: () => mixed) => ExpectChain<T>,
+
+        // chai-subset
+        containSubset: (obj: Object | Object[]) => ExpectChain<T>
     };
 
     declare function expect<T>(actual: T): ExpectChain<T>;
@@ -123,6 +126,7 @@ declare module "chai" {
       static deepEqual(act: mixed, exp: mixed, msg?: string): void;
       static notDeepEqual(act: mixed, exp: mixed, msg?: string): void;
 
+      static ok(val: mixed, msg?: string): void;
       static isTrue(val: mixed, msg?: string): void;
       static isNotTrue(val: mixed, msg?: string): void;
       static isFalse(val: mixed, msg?: string): void;
@@ -188,7 +192,7 @@ declare module "chai" {
       static deepPropertyNotVal(obj: Object, prop: string, val: mixed, msg?: string): void;
 
       static lengthOf(exp: mixed, len: number, msg?: string): void;
-      
+
       static throws<E>(
           func: () => any,
           err?: Class<E> | Error | RegExp | string,
