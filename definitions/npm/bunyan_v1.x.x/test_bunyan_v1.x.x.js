@@ -24,15 +24,14 @@ const logger = Bunyan.createLogger({
     }
 });
 
+// $ExpectError - name needed
+Bunyan.createLogger({});
+
+const child = logger.child({});
+
 logger.trace('Foobar');
 
 const g: void = logger.trace('foobar');
-
-const otherLogger = logger.child({ name: 'child' });
-
-// $ExpectError
-const childLogger = otherLogger.child({ name: false });
-
 
 logger.trace({ err: new Error('type') }, 'messages');
 const sf = logger.trace(new Error('ASDF'));
