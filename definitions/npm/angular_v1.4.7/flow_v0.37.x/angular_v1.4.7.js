@@ -30,7 +30,7 @@ declare module angular {
   declare function CompileFunction(
     element: $npm$angular$JqliteElement,
     attrs: mixed,
-    controller: any
+    controller: mixed
   ): Link
 
   // TODO: Expand to cover the whole matrix of AECM, in any order. Probably
@@ -40,8 +40,8 @@ declare module angular {
     restrict?: string,
     template?: string,
     templateUrl?: string,
-    scope?: $npm$angular$DepndencyInjection<*>,
-    controller?: $npm$angular$DepndencyInjection<*>,
+    scope?: mixed,
+    controller?: $npm$angular$DependencyInjection<*>,
     link?: $npm$angular$LinkFunction,
     // TODO: flesh out this definition
     compile?: (...a: any) => Link,
@@ -66,12 +66,12 @@ declare module angular {
 
   declare type FactoryDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<mixed>,
+    di: $npm$angular$DependencyInjection<(...a: any) => Object>,
   ) => AngularModule
 
   declare type ServiceDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<Function>,
+    di: $npm$angular$DependencyInjection<(...a: any) => Function>,
   ) => AngularModule
 
   declare type RunDeclaration = (
@@ -118,5 +118,7 @@ declare module angular {
   // Service specific stuff
   //----------------------------------------------------------------------------
 
-  declare function CompileService(a: $npm$angular$JqliteElement): JQLiteElement
+  declare function CompileService(
+    a: $npm$angular$JqliteElement
+  ): $npm$angular$JqliteElement
 }

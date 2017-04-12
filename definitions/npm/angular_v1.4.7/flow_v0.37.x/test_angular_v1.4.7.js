@@ -59,9 +59,8 @@ describe('factory', () => {
   })
 
   it('requires a return value of some kind', () => {
-    angular.module('foo', []).factory('foo', ['bar', 'bazz', (bar, bazz) => {
-      // $ExpectError void. This type is incompatible with mixed
-    }])
+    // $ExpectError undefined. This type is incompatible with
+    angular.module('foo', []).factory('foo', ['bar', 'bazz', (bar, bazz) => {}])
   })
 
 })
