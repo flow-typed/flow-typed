@@ -101,3 +101,14 @@ describe('element', () => {
     angular.element(5)
   })
 })
+
+describe('copy', () => {
+  it('copies preserving the type', () => {
+    const foo: number = angular.copy(5)
+  })
+
+  it('does not change the type', () => {
+    // $ExpectError string. This type is incompatible with number
+    const foo: number = angular.copy('5')
+  })
+})

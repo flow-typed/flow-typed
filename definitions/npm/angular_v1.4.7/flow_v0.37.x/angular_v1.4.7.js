@@ -110,6 +110,8 @@ declare module angular {
 
   declare function element(html: string): JqliteElement
 
+  declare function copy<T>(object: T): T
+
 
   declare type AngularResource = {
     $promise: AngularPromise<*, *>,
