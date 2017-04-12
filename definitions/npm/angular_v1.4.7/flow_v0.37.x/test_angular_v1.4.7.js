@@ -64,3 +64,40 @@ describe('factory', () => {
   })
 
 })
+
+describe('value', () => {
+  it('can be declared', () => {
+    angular.module('foo', []).value('foo', ['bar', 'bazz', (bar, bazz) => {
+      return { a: bar, b: bazz }
+    }])
+  })
+
+  it('requires a return value of some kind', () => {
+    // $ExpectError undefined. This type is incompatible with
+    angular.module('foo', []).value('foo', ['bar', 'bazz', (bar, bazz) => {}])
+  })
+})
+
+describe('constant', () => {
+  it('can be declared', () => {
+    angular.module('foo', []).constant('foo', ['bar', 'bazz', (bar, bazz) => {
+      return { a: bar, b: bazz }
+    }])
+  })
+
+  it('requires a return value of some kind', () => {
+    // $ExpectError undefined. This type is incompatible with
+    angular.module('foo', []).constant('foo', ['bar', 'bazz', (bar, bazz) => {}])
+  })
+})
+
+describe('element', () => {
+  it('creates a jqlite element', () => {
+    const element: JqliteElement = angular.element('<span>foo</span>')
+  })
+
+  it('only accepts a string as a parameter', () => {
+    // $ExpectError number. This type is incompatible with string
+    angular.element(5)
+  })
+})

@@ -9,14 +9,14 @@ declare module angular {
 
   // Extending Array<Element> allows us to do the `jq[0]` expression and friends
   // to get the actual underlying Element.
-  declare interface $npm$angular$JqliteElement extends Array<Element> {
-    remove: () => $npm$angular$JqliteElement,
-    contents: () => $npm$angular$JqliteElement,
+  declare interface JqliteElement extends Array<Element> {
+    remove: () => JqliteElement,
+    contents: () => JqliteElement,
   }
 
   declare function $npm$angular$LinkFunction(
     scope: mixed,
-    element: $npm$angular$JqliteElement,
+    element: JqliteElement,
     attrs: mixed,
     controller: mixed
   ): void
@@ -28,7 +28,7 @@ declare module angular {
 
   // TODO: Attrs and controller should be properly typed.
   declare function CompileFunction(
-    element: $npm$angular$JqliteElement,
+    element: JqliteElement,
     attrs: mixed,
     controller: mixed
   ): Link
@@ -76,7 +76,17 @@ declare module angular {
 
   declare type RunDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<*>,
+    di: $npm$angular$DependencyInjection<void>,
+  ) => AngularModule
+
+  declare type ValueDeclaration = (
+    name: string,
+    di: $npm$angular$DependencyInjection<Object>,
+  ) => AngularModule
+
+  declare type ConstantDeclaration = (
+    name: string,
+    di: $npm$angular$DependencyInjection<Object>,
   ) => AngularModule
 
   declare type AngularModule = {
@@ -86,6 +96,8 @@ declare module angular {
     config: ConfigDeclaration,
     factory: FactoryDeclaration,
     service: ServiceDeclaration,
+    value: ValueDeclaration,
+    constant: ConstantDeclaration,
     name: string,
   }
 
@@ -95,6 +107,8 @@ declare module angular {
     name: string,
     deps: ?Array<Dependency>
   ): AngularModule
+
+  declare function element(html: string): JqliteElement
 
 
   declare type AngularResource = {
@@ -119,6 +133,6 @@ declare module angular {
   //----------------------------------------------------------------------------
 
   declare function CompileService(
-    a: $npm$angular$JqliteElement
-  ): $npm$angular$JqliteElement
+    a: JqliteElement
+  ): JqliteElement
 }
