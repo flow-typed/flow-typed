@@ -1,6 +1,6 @@
 type $npm$classnames$Classes =
   string |
-  {[className: string]: ?boolean } |
+  {[className: string]: * } |
   Array<string> |
   false |
   void |
