@@ -1,5 +1,10 @@
 // @flow
 
+/**
+ * Credit to @faceleg for some of the typedefs seen here:
+ * https://github.com/solnet-aquarium/flow-interfaces-angular/blob/master/interfaces/angular.js
+ */
+
 declare module angular {
 
   // I'm not sure how represent this properly: Angular DI declarations are a
@@ -9,21 +14,23 @@ declare module angular {
 
   // Extending Array<Element> allows us to do the `jq[0]` expression and friends
   // to get the actual underlying Element.
+  // TODO: This is supposed to be interchangeable with JQuery. Can we possibly
+  // check to see if JQuery's types are already defined?
   declare interface JqliteElement extends Array<Element> {
     remove: () => JqliteElement,
     contents: () => JqliteElement,
   }
 
-  declare function $npm$angular$LinkFunction(
+  declare function AngularLinkFunction(
     scope: mixed,
     element: JqliteElement,
     attrs: mixed,
     controller: mixed
   ): void
 
-  declare type Link = {
-    post?: $npm$angular$LinkFunction,
-    pre?: $npm$angular$LinkFunction,
+  declare type AngularCompileLink = {
+    post?: AngularLinkFunction,
+    pre?: AngularLinkFunction,
   }
 
   // TODO: Attrs and controller should be properly typed.
@@ -31,7 +38,7 @@ declare module angular {
     element: JqliteElement,
     attrs: mixed,
     controller: mixed
-  ): Link
+  ): AngularLinkFunction
 
   // TODO: Expand to cover the whole matrix of AECM, in any order. Probably
   // should write something to handle it.
@@ -42,14 +49,14 @@ declare module angular {
     templateUrl?: string,
     scope?: mixed,
     controller?: $npm$angular$DependencyInjection<*>,
-    link?: $npm$angular$LinkFunction,
+    link?: AngularLinkFunction,
     // TODO: flesh out this definition
-    compile?: (...a: any) => Link,
+    compile?: (...a: any) => AngularCompileLink,
   }
 
   declare type DirectiveDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: any) => Directive>,
+    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Directive>,
   ) => AngularModule
 
 
@@ -66,12 +73,12 @@ declare module angular {
 
   declare type FactoryDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: any) => Object>,
+    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
   ) => AngularModule
 
   declare type ServiceDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: any) => Function>,
+    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Function>,
   ) => AngularModule
 
   declare type RunDeclaration = (
@@ -81,12 +88,12 @@ declare module angular {
 
   declare type ValueDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<Object>,
+    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
   ) => AngularModule
 
   declare type ConstantDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<Object>,
+    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
   ) => AngularModule
 
   declare type AngularModule = {
@@ -108,27 +115,41 @@ declare module angular {
     deps: ?Array<Dependency>
   ): AngularModule
 
-  declare function element(html: string): JqliteElement
-
+  declare function element(html: string | Element): JqliteElement
   declare function copy<T>(object: T): T
+  declare function extend<T>(dst: T, src: Object): T
+  declare function forEach<T>(Array<T>, (value: T, key: string) => void): void
 
 
   declare type AngularResource = {
-    $promise: AngularPromise<*, *>,
+    $promise: AngularPromise<*>,
   }
 
-  declare type AngularPromise<T, U> = {
-    then: (a: (resolve: U) => T) => AngularPromise<*, *>,
-    catch: (a: (b: typeof Error) => typeof Error) => AngularPromise<*, *>,
-    finally: (a: (result: U | typeof Error) => T) => AngularPromise<*, *>,
+  declare type AngularQ = {
+    when: <T>(value: T) => AngularPromise<T>,
+  }
+
+  declare type AngularPromise<T> = {
+    then: <U>(a: (resolve: U) => T) => AngularPromise<*>,
+    catch: <U>(a: (e: Error) => U) => AngularPromise<*>,
+    finally: <U>(a: (result: U | typeof Error) => T) => AngularPromise<*>,
   }
 
   declare type AngularResourcePromise<T, U> = {
-    $promise: AngularPromise<T, U>,
+    $promise: AngularPromise<T>,
   }
 
   declare function AngularHttpPost<T, U>(url: string, data: mixed):
-    AngularPromise<T, U>
+    AngularPromise<T>
+
+  //****************************************************************************
+  // Angular testing tools
+  //****************************************************************************
+
+  declare type AngularMock = {
+    inject: (...a: Array<mixed>) => Function,
+  }
+  declare var mock: AngularMock
 
   //----------------------------------------------------------------------------
   // Service specific stuff

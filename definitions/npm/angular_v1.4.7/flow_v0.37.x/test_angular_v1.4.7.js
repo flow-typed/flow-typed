@@ -1,5 +1,11 @@
 // @flow
 
+import type {
+  AngularPromise,
+  AngularQ,
+  JqliteElement,
+} from 'angular'
+
 'use strict'
 const angular = require('angular')
 
@@ -15,6 +21,15 @@ describe('Angular modules', () => {
   it('can be declared', () => {
     const module1 = angular.module('foo', [])
     const module2 = angular.module('foo', ['bazz', 'qux'])
+  })
+
+  it('can be retrieved after being declared', () => {
+    const module1 = angular.module('foo')
+  })
+
+  it('requires a name', () => {
+    // $ExpectError undefined. This type is incompatible with string
+    const module1 = angular.module()
   })
 })
 
@@ -87,16 +102,22 @@ describe('constant', () => {
 
   it('requires a return value of some kind', () => {
     // $ExpectError undefined. This type is incompatible with
-    angular.module('foo', []).constant('foo', ['bar', 'bazz', (bar, bazz) => {}])
+    angular.module('foo', []).constant('foo', ['bar', 'bazz', (bar, bazz) => {
+      // intentionally return nothing
+    }])
   })
 })
 
 describe('element', () => {
-  it('creates a jqlite element', () => {
+  it('creates a jqlite element from a string', () => {
     const element: JqliteElement = angular.element('<span>foo</span>')
   })
 
-  it('only accepts a string as a parameter', () => {
+  it('creates a jqlite element from an element', () => {
+    const element: JqliteElement = angular.element(window.document.body)
+  })
+
+  it('does not accept other types as a parameter', () => {
     // $ExpectError number. This type is incompatible with string
     angular.element(5)
   })
@@ -111,4 +132,84 @@ describe('copy', () => {
     // $ExpectError string. This type is incompatible with number
     const foo: number = angular.copy('5')
   })
+})
+
+describe('jqlite', () => {
+  it('can remove itself', () => {
+    angular.element('foo').remove()
+  })
+
+  it('yields nothing on removal', () => {
+    // $ExpectError string. This type is incompatible with void
+    const removal: string = angular.element('foo').remove()
+  })
+
+  it('can retrieve contents as a JqliteElement', () => {
+    const contents: JqliteElement = angular.element('foo').contents()
+  })
+
+  it('does not yield a string', () => {
+    // $ExpectError string. This type is incompatible with JqliteElement
+    const contents: string = angular.element('foo').contents('bar')
+  })
+})
+
+describe('$compile', () => {
+
+})
+
+describe('$resource', () => {
+
+})
+
+describe('$q', () => {
+  it('can create a promise that resolves a pre-defined value', () => {
+    angular.mock.inject(($q: AngularQ) => {
+      const promise: AngularPromise<string> = $q.when('foo')
+    })
+  })
+
+  it('creates a promise with the type provided the value resolved', () => {
+    angular.mock.inject(($q: AngularQ) => {
+      // $ExpectError number. This type is incompatible with string
+      const promise: AngularPromise<number> = $q.when('foo')
+    })
+  })
+
+  it('can chain promises between mapped types', () => {
+    angular.mock.inject(($q: AngularQ) => {
+      const finalPromise: AngularPromise<string> = $q.when('foo')
+        .then((s) => parseInt(s))
+        .then((n) => n.toString())
+    })
+  })
+
+  it('catches with errors', () => {
+    angular.mock.inject(($q: AngularQ) => {
+      $q.when('foo').catch((e) => console.log(e.message))
+    })
+  })
+
+  it('chains rejected promises into resolved promises', () => {
+    angular.mock.inject(($q: AngularQ) => {
+      const promise: AngularPromise<string> = $q.when('foo').catch((e) => 'bar')
+    })
+  })
+
+  it('has both an error and a resolved value potential in finally', () => {
+    angular.mock.inject(($q: AngularQ) => {
+      $q.when('foo').finally((v) => {
+        if(typeof v == 'string') {
+          const s: string = v
+        }
+        else if(v instanceof Error){
+          const e: Error = v
+        }
+      })
+    })
+  })
+})
+
+describe('$http', () => {
+
 })
