@@ -187,6 +187,11 @@ type JestExpectType = {
    */
   toHaveBeenCalledWith(...args: Array<any>): void,
   /**
+   * If you have a mock function, you can use .toHaveBeenLastCalledWith to test what
+   * arguments it was last called with.
+   */
+  toHaveBeenLastCalledWith(...args: Array<any>): void,
+  /**
    * Check that an object has a .length property and it is set to a certain
    * numeric value.
    */
