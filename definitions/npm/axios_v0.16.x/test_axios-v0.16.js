@@ -22,7 +22,7 @@ const client = axios.create();
 client.post('/something', {});
 
 (client.defaults.headers.common.Authorization = 'test')
-
+  
 const source: CancelTokenSource = axios.CancelToken.source();
 source.token.promise.then((cancel: Cancel) => {
   const x: string = cancel.message;
