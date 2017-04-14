@@ -93,7 +93,7 @@ declare module 'axios' {
       request: AxiosRequestInterceptor<mixed>,
       response: AxiosResponseInterceptor<mixed>,
     };
-    defaults: AxiosXHRConfig<T>
+    defaults: AxiosXHRConfig<*> & { headers: Object };
   }
 
   declare class AxiosError<T> extends Error {
