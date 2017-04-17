@@ -4,6 +4,11 @@ import type {
   AngularPromise,
   AngularQ,
   JqliteElement,
+  AngularHttpService,
+  AngularResourceFactory,
+  AngularResourceResult,
+  AngularResource,
+  AngularCompileService,
 } from 'angular'
 
 'use strict'
@@ -155,11 +160,35 @@ describe('jqlite', () => {
 })
 
 describe('$compile', () => {
+  it('is a function that uses a jqlite element', () => {
+    angular.mock.inject(($compile: AngularCompileService) => {
+      $compile(angular.element('foo'))
+    })
+  })
 
+  it('returns a compiled jqlite element', () => {
+    angular.mock.inject(($compile: AngularCompileService) => {
+      const element: JqliteElement = $compile(angular.element('foo'))
+    })
+  })
 })
 
 describe('$resource', () => {
 
+  it('returns a $resource instance when invoked', () => {
+    angular.mock.inject(($resource: AngularResourceFactory) => {
+      const resource: AngularResource = $resource('/foo')
+    })
+  })
+
+  describe('instance', () => {
+    it('has a get function that returns a special $resource result', () => {
+      angular.mock.inject(($resource: AngularResourceFactory) => {
+        const resource: AngularResource = $resource('/foo')
+        const promise: AngularPromise<*> = resource.get().$promise
+      })
+    })
+  })
 })
 
 describe('$q', () => {
@@ -211,5 +240,9 @@ describe('$q', () => {
 })
 
 describe('$http', () => {
-
+  it('can POST', () => {
+    angular.mock.inject(($http: AngularHttpService) => {
+      const promise: AngularPromise<*> = $http.post('/foo', { bar: 'bazz' })
+    })
+  })
 })

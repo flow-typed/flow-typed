@@ -121,10 +121,6 @@ declare module angular {
   declare function forEach<T>(Array<T>, (value: T, key: string) => void): void
 
 
-  declare type AngularResource = {
-    $promise: AngularPromise<*>,
-  }
-
   declare type AngularQ = {
     when: <T>(value: T) => AngularPromise<T>,
   }
@@ -134,13 +130,6 @@ declare module angular {
     catch: <U>(a: (e: Error) => U) => AngularPromise<*>,
     finally: <U>(a: (result: U | typeof Error) => T) => AngularPromise<*>,
   }
-
-  declare type AngularResourcePromise<T, U> = {
-    $promise: AngularPromise<T>,
-  }
-
-  declare function AngularHttpPost<T, U>(url: string, data: mixed):
-    AngularPromise<T>
 
   //****************************************************************************
   // Angular testing tools
@@ -155,7 +144,29 @@ declare module angular {
   // Service specific stuff
   //----------------------------------------------------------------------------
 
-  declare function CompileService(
+  declare type AngularHttpService = {
+    post: AngularHttpPost<*>
+  }
+
+  declare function AngularHttpPost<T>(url: string, data: mixed):
+    AngularPromise<T>
+
+  declare type AngularResourceResult<T> = {
+    $promise: AngularPromise<T>,
+  }
+
+  declare type AngularResource = {
+    get: <T>(options?: Object, callback?: Function) => AngularResourceResult<T>,
+  }
+
+  declare function AngularResourceFactory(
+    url: string,
+    defaultParams?: Object,
+    actions?: Object,
+    options?: Object,
+  ): AngularResource
+
+  declare function AngularCompileService(
     a: JqliteElement
   ): JqliteElement
 }
