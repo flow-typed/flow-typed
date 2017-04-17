@@ -14,7 +14,7 @@ type PkgJson = {|
     name: string,
     version: string,
 
-    bundledDependencies?: {[pkgName: string]: string},
+    bundledDependencies?: string[],
     dependencies?: {[pkgName: string]: string},
     devDependencies?: {[pkgName: string]: string},
     optionalDependencies?: {[pkgName: string]: string},
@@ -26,7 +26,6 @@ const PKG_JSON_DEP_FIELDS = [
   'dependencies',
   'devDependencies',
   'peerDependencies',
-  'bundledDependencies',
 ];
 export async function findPackageJsonDepVersionStr(
   pkgJson: PkgJson,
@@ -72,8 +71,9 @@ export function getPackageJsonDependencies(
     const contentSection = pkgJson.content[section];
     if (contentSection) {
       Object.keys(contentSection).forEach(pkgName => {
-        if (deps[pkgName]) {
-          throw new Error(`Found ${pkgName} listed twice in package.json!`);
+        const lastFoundVersion = deps[pkgName];
+        if (lastFoundVersion && lastFoundVersion !== contentSection[pkgName]) {
+          throw new Error(`Found multiple versions of ${pkgName} listed in package.json!`);
         }
         deps[pkgName] = contentSection[pkgName];
       });
