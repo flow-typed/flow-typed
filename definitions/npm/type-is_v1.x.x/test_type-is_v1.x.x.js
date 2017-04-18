@@ -27,6 +27,3 @@ typeis(req3, ['text/*', 'image/*']);
 const req4 = {headers: {'content-length': '1'}};
 
 typeis.hasBody(req4);
-
-
-
