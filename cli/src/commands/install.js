@@ -330,6 +330,8 @@ async function installNpmLibDefs({
       "Consider using `%s` to generate an empty libdef that you can fill in.",
       colors.bold(`flow-typed create-stub ${explicitLibDefs.join(' ')}`)
     );
+
+    return 1;
   } else {
     // If a package that's missing a flow-typed libdef has any .flow files,
     // we'll skip generating a stub for it.
@@ -376,7 +378,7 @@ async function installNpmLibDefs({
     }
   }
 
-  return 1;
+  return 0;
 }
 
 async function installNpmLibDef(
