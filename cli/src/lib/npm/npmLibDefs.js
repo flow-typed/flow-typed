@@ -394,58 +394,66 @@ export async function getInstalledNpmLibDefs(
   if (await fs.exists(libDefDirPath)) {
     const filesInNpmDir = await getFilesInDir(libDefDirPath, true);
     await P.all([...filesInNpmDir].map(async (fileName) => {
-      const filePath = path.join(libDefDirPath, fileName);
-      const fileContent = (await fs.readFile(filePath)).toString();
-      if (verifySignedCode(fileContent)) {
-        const signedCodeVer = getSignedCodeVersion(fileContent);
-        if (signedCodeVer === null) {
-          return;
-        }
-        const matches = signedCodeVer.match(/([^\/]+)\/([^\/]+)\/([^\/]+)/);
-        if (matches == null) {
-          return;
-        }
+      const fullFilePath = path.join(libDefDirPath, fileName);
+      const terseFilePath = path.relative(flowProjectRootDir, fullFilePath);
+      const fileStat = await fs.stat(fullFilePath);
+      if (fileStat.isFile()) {
+        const fileContent = (await fs.readFile(fullFilePath)).toString();
+        if (verifySignedCode(fileContent)) {
+          const signedCodeVer = getSignedCodeVersion(fileContent);
+          if (signedCodeVer === null) {
+            return;
+          }
+          const matches = signedCodeVer.match(/([^\/]+)\/(@[^\/]+\/)?([^\/]+)\/([^\/]+)/);
+          if (matches == null) {
+            return;
+          }
 
-        if (matches[1] === "<<STUB>>") {
-          installedLibDefs.set(filePath, {kind: "Stub", name: matches[2]});
-          return;
+          if (matches[1] === "<<STUB>>") {
+            installedLibDefs.set(terseFilePath, {kind: "Stub", name: matches[2]});
+            return;
+          }
+
+          const scope =
+            matches[2] == null
+            ? null
+            : matches[2].substr(0, matches[2].length-1);
+
+          const nameVer = matches[3];
+          if (nameVer === null) {
+            return;
+          }
+
+          const pkgNameVer = parsePkgNameVer(
+            nameVer,
+            '',
+            new Map(),
+          );
+          if (pkgNameVer === null) {
+            return;
+          }
+          const {pkgName, pkgVersion} = pkgNameVer;
+
+          const flowVerMatches = matches[4].match(/^flow_(>=|<=)?(v.+)$/);
+          const flowDirStr =
+            flowVerMatches == null
+            ? `flow_${matches[3]}`
+            : `flow_${flowVerMatches[2]}`;
+          const context = `${nameVer}/${flowDirStr}`;
+          const flowVer =
+            flowVerMatches == null
+            ? parseFlowDirString(flowDirStr, context)
+            : parseFlowDirString(flowDirStr, context);
+
+          installedLibDefs.set(terseFilePath, {kind: "LibDef", libDef: {
+            scope,
+            name: pkgName,
+            version: versionToString(pkgVersion),
+            flowVersion: flowVer,
+            path: terseFilePath,
+            testFilePaths: [],
+          }});
         }
-
-        const nameVer = matches[2];
-        if (nameVer === null) {
-          return;
-        }
-
-        const pkgNameVer = parsePkgNameVer(
-          nameVer,
-          '',
-          new Map(),
-        );
-        if (pkgNameVer === null) {
-          return;
-        }
-        const {pkgName, pkgVersion} = pkgNameVer;
-
-        const flowVerMatches = matches[3].match(/^flow_(>=|<=)?(v.+)$/);
-        const flowDirStr =
-          flowVerMatches == null
-          ? `flow_${matches[3]}`
-          : `flow_${flowVerMatches[2]}`;
-        const context = `${nameVer}/${flowDirStr}`;
-        const flowVer =
-          flowVerMatches == null
-          ? parseFlowDirString(flowDirStr, context)
-          : parseFlowDirString(flowDirStr, context);
-
-        installedLibDefs.set(filePath, {kind: "LibDef", libDef: {
-          // TODO!!
-          scope: null,
-          name: pkgName,
-          version: versionToString(pkgVersion),
-          flowVersion: flowVer,
-          path: filePath,
-          testFilePaths: [],
-        }});
       }
     }));
   }
@@ -518,6 +526,7 @@ export async function getNpmLibDefVersionHash(
   );
   return (
     `${latestCommitHash.substr(0, 10)}/` +
+    (libDef.scope === null ? '' : `${libDef.scope}/`) +
     `${libDef.name}_${libDef.version}/` +
     `flow_${flowVersionToSemver(libDef.flowVersion)}`
   );

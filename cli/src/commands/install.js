@@ -250,6 +250,7 @@ async function installNpmLibDefs({
   );
   [...alreadyInstalledLibDefs.entries()].forEach(
     ([filePath, npmLibDef]) => {
+      const fullFilePath = path.join(flowProjectRoot, filePath);
       switch (npmLibDef.kind) {
         case 'LibDef':
           // If a libdef is already installed for some dependency, we need to
@@ -258,7 +259,7 @@ async function installNpmLibDefs({
           //const toInstall = libDefsToInstall.has(libDef.name);
           //console.log(`Found ${libDef.name} already installed. Uninstall? ${toInstall != null ? 'yes' : 'no'}`);
           if (libDefsToInstall.has(libDef.name)) {
-            libDefsToUninstall.set(libDef.name, filePath);
+            libDefsToUninstall.set(libDef.name, fullFilePath);
           }
           break;
 
@@ -386,7 +387,7 @@ async function installNpmLibDef(
   const scopedDir =
     npmLibDef.scope === null
     ? npmDir
-    : path.join(npmDir, '@' + npmLibDef.scope);
+    : path.join(npmDir, npmLibDef.scope);
   mkdirp(scopedDir);
 
   const fileName = `${npmLibDef.name}_${npmLibDef.version}.js`;

@@ -5,6 +5,7 @@ import {
   _parsePkgNameVer as parsePkgNameVer,
   _validateVersionNumPart as validateVersionNumPart,
   _validateVersionPart as validateVersionPart,
+  getInstalledNpmLibDefs,
   getNpmLibDefs,
 } from "../npmLibDefs";
 
@@ -13,116 +14,6 @@ import path from "path";
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__npmLibDefs-fixtures__');
 
 describe('npmLibDefs', () => {
-  describe('validateVersionNumPart', () => {
-    it('returns a number when a string-number is given', () => {
-      expect(validateVersionNumPart('42', '', '')).toBe(42);
-    });
-
-    it('errors when a non-number-string is given', () => {
-      const errmsg =
-        "contexthere: Invalid major number: 'x'. Expected a number.";
-      expect(
-        () => validateVersionNumPart('x', 'major', 'contexthere')
-      ).toThrow(errmsg);
-
-      const errs = new Map();
-      expect(
-        validateVersionNumPart('x', 'major', 'contexthere', errs)
-      ).toEqual(-1);
-      expect([...errs.entries()]).toEqual([
-        ['contexthere', ["Invalid major number: 'x'. Expected a number."]]
-      ]);
-    });
-  });
-
-  describe('validateVersionPart', () => {
-    it('returns "x" when given "x"', () => {
-      expect(validateVersionPart('x', '', '')).toBe('x');
-    });
-  });
-
-  describe('parsePkgNameVer', () => {
-    it('parses non-wildcard libs', () => {
-      expect(parsePkgNameVer('lib_v1.2.3', 'contexthere')).toEqual({
-        pkgName: 'lib',
-        pkgVersion: {
-          major: 1,
-          minor: 2,
-          patch: 3,
-        }
-      });
-      expect(parsePkgNameVer('lib_v1.2.3-asdf', 'contexthere')).toEqual({
-        pkgName: 'lib',
-        pkgVersion: {
-          major: 1,
-          minor: 2,
-          patch: 3,
-          prerel: 'asdf',
-        }
-      });
-    });
-
-    it('parses wildcard minor libs', () => {
-      expect(parsePkgNameVer('lib_v1.x.x', 'contexthere')).toEqual({
-        pkgName: 'lib',
-        pkgVersion: {
-          major: 1,
-          minor: 'x',
-          patch: 'x',
-        },
-      });
-      expect(parsePkgNameVer('lib_v1.x.x-asdf', 'contexthere')).toEqual({
-        pkgName: 'lib',
-        pkgVersion: {
-          major: 1,
-          minor: 'x',
-          patch: 'x',
-          prerel: 'asdf',
-        },
-      });
-    });
-
-    it('parses wildcard patch libs', () => {
-      expect(parsePkgNameVer('lib_v1.2.x', 'contexthere')).toEqual({
-        pkgName: 'lib',
-        pkgVersion: {
-          major: 1,
-          minor: 2,
-          patch: 'x',
-        },
-      });
-      expect(parsePkgNameVer('lib_v1.2.x-asdf', 'contexthere')).toEqual({
-        pkgName: 'lib',
-        pkgVersion: {
-          major: 1,
-          minor: 2,
-          patch: 'x',
-          prerel: 'asdf',
-        },
-      });
-    });
-
-    it('errors on wildcard major', () => {
-      expect(
-        () => parsePkgNameVer('lib_vx.x.x', 'contexthere')
-      ).toThrow(
-        "lib_vx.x.x: Malformed npm package name! Expected the name to be " +
-        "formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>"
-      );
-
-      const errs = new Map();
-      expect(
-        parsePkgNameVer('lib_vx.x.x', 'contexthere', errs)
-      ).toEqual(null);
-      expect([...errs.entries()]).toEqual([
-        ['lib_vx.x.x', [
-          "Malformed npm package name! Expected the name to be " +
-          "formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>"
-        ]]
-      ]);
-    });
-  });
-
   describe('extractLibDefsFromNpmPkgDir', () => {
     const FIXTURE_ROOT = path.join(
       BASE_FIXTURE_ROOT,
@@ -349,6 +240,92 @@ describe('npmLibDefs', () => {
     });
   });
 
+  describe('getInstalledNpmLibDefs', () => {
+    const FIXTURE_ROOT = path.join(
+      BASE_FIXTURE_ROOT,
+      'getInstalledNpmLibDefs',
+    );
+
+    pit('returns an empty map when /flow-typed dir not present', async () => {
+      const installedLibdefs = await getInstalledNpmLibDefs(
+        path.join(FIXTURE_ROOT, 'emptyFlowTypedDir'),
+      );
+      expect(installedLibdefs.size).toBe(0);
+    });
+
+    pit('finds unscoped libdefs', async () => {
+      const installedLibdefs = await getInstalledNpmLibDefs(
+        path.join(FIXTURE_ROOT, 'unscopedLibDefs'),
+      );
+      expect(installedLibdefs.size).toBe(1);
+      const semverLibDef = installedLibdefs.get(
+        'flow-typed/npm/semver_v5.1.x.js'
+      );
+      // Since Flow doesn't understand Jest/Jasmine predicates, we wrap in a
+      // vanilla one
+      if (semverLibDef == null) {
+        expect(semverLibDef).not.toEqual(null);
+      } else {
+        if (semverLibDef.kind !== "LibDef") {
+          expect(semverLibDef.kind).toBe("LibDef");
+        } else {
+          expect(semverLibDef.libDef).toEqual({
+            flowVersion: {
+              kind: "specific",
+              ver: {
+                major: 0,
+                minor: 27,
+                patch: 0,
+                prerel: null,
+              },
+            },
+            name: "semver",
+            path: "flow-typed/npm/semver_v5.1.x.js",
+            scope: null,
+            testFilePaths: [],
+            version: "v5.1.x"
+          });
+        }
+      }
+    });
+
+    pit('finds scoped libdefs', async () => {
+      const installedLibdefs = await getInstalledNpmLibDefs(
+        path.join(FIXTURE_ROOT, 'scopedLibDefs'),
+      );
+      expect(installedLibdefs.size).toBe(1);
+      const semverLibDef = installedLibdefs.get(
+        'flow-typed/npm/@kadira/storybook_v1.x.x.js'
+      );
+      // Since Flow doesn't understand Jest/Jasmine predicates, we wrap in a
+      // vanilla one
+      if (semverLibDef == null) {
+        expect(semverLibDef).not.toEqual(null);
+      } else {
+        if (semverLibDef.kind !== "LibDef") {
+          expect(semverLibDef.kind).toBe("LibDef");
+        } else {
+          expect(semverLibDef.libDef).toEqual({
+            flowVersion: {
+              kind: "specific",
+              ver: {
+                major: 0,
+                minor: 30,
+                patch: 'x',
+                prerel: null,
+              },
+            },
+            name: "storybook",
+            path: "flow-typed/npm/@kadira/storybook_v1.x.x.js",
+            scope: "@kadira",
+            testFilePaths: [],
+            version: "v1.x.x"
+          });
+        }
+      }
+    });
+  });
+
   describe('getNpmLibDefs', () => {
     const FIXTURE_ROOT = path.join(
       BASE_FIXTURE_ROOT,
@@ -389,6 +366,116 @@ describe('npmLibDefs', () => {
           "Expected only directories to be present in this directory."
         ]],
       ]);
+    });
+  });
+
+  describe('parsePkgNameVer', () => {
+    it('parses non-wildcard libs', () => {
+      expect(parsePkgNameVer('lib_v1.2.3', 'contexthere')).toEqual({
+        pkgName: 'lib',
+        pkgVersion: {
+          major: 1,
+          minor: 2,
+          patch: 3,
+        }
+      });
+      expect(parsePkgNameVer('lib_v1.2.3-asdf', 'contexthere')).toEqual({
+        pkgName: 'lib',
+        pkgVersion: {
+          major: 1,
+          minor: 2,
+          patch: 3,
+          prerel: 'asdf',
+        }
+      });
+    });
+
+    it('parses wildcard minor libs', () => {
+      expect(parsePkgNameVer('lib_v1.x.x', 'contexthere')).toEqual({
+        pkgName: 'lib',
+        pkgVersion: {
+          major: 1,
+          minor: 'x',
+          patch: 'x',
+        },
+      });
+      expect(parsePkgNameVer('lib_v1.x.x-asdf', 'contexthere')).toEqual({
+        pkgName: 'lib',
+        pkgVersion: {
+          major: 1,
+          minor: 'x',
+          patch: 'x',
+          prerel: 'asdf',
+        },
+      });
+    });
+
+    it('parses wildcard patch libs', () => {
+      expect(parsePkgNameVer('lib_v1.2.x', 'contexthere')).toEqual({
+        pkgName: 'lib',
+        pkgVersion: {
+          major: 1,
+          minor: 2,
+          patch: 'x',
+        },
+      });
+      expect(parsePkgNameVer('lib_v1.2.x-asdf', 'contexthere')).toEqual({
+        pkgName: 'lib',
+        pkgVersion: {
+          major: 1,
+          minor: 2,
+          patch: 'x',
+          prerel: 'asdf',
+        },
+      });
+    });
+
+    it('errors on wildcard major', () => {
+      expect(
+        () => parsePkgNameVer('lib_vx.x.x', 'contexthere')
+      ).toThrow(
+        "lib_vx.x.x: Malformed npm package name! Expected the name to be " +
+        "formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>"
+      );
+
+      const errs = new Map();
+      expect(
+        parsePkgNameVer('lib_vx.x.x', 'contexthere', errs)
+      ).toEqual(null);
+      expect([...errs.entries()]).toEqual([
+        ['lib_vx.x.x', [
+          "Malformed npm package name! Expected the name to be " +
+          "formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>"
+        ]]
+      ]);
+    });
+  });
+
+  describe('validateVersionNumPart', () => {
+    it('returns a number when a string-number is given', () => {
+      expect(validateVersionNumPart('42', '', '')).toBe(42);
+    });
+
+    it('errors when a non-number-string is given', () => {
+      const errmsg =
+        "contexthere: Invalid major number: 'x'. Expected a number.";
+      expect(
+        () => validateVersionNumPart('x', 'major', 'contexthere')
+      ).toThrow(errmsg);
+
+      const errs = new Map();
+      expect(
+        validateVersionNumPart('x', 'major', 'contexthere', errs)
+      ).toEqual(-1);
+      expect([...errs.entries()]).toEqual([
+        ['contexthere', ["Invalid major number: 'x'. Expected a number."]]
+      ]);
+    });
+  });
+
+  describe('validateVersionPart', () => {
+    it('returns "x" when given "x"', () => {
+      expect(validateVersionPart('x', '', '')).toBe('x');
     });
   });
 });

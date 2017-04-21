@@ -1,7 +1,11 @@
 // @flow
 
-import type {ValidationErrors as VErrors} from "./validationErrors";
-import {validationError} from "./validationErrors";
+import type {
+  ValidationErrors as VErrors
+} from "./validationErrors";
+import {
+  validationError
+} from "./validationErrors";
 
 export type FlowSpecificVer = {|
   major: number,
