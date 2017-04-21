@@ -41,7 +41,7 @@ import {
   _installNpmLibDefs as installNpmLibDefs,
   _installNpmLibDef as installNpmLibDef,
   run,
-} from "../newInstall";
+} from "../install";
 
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__install-fixtures__');
 
