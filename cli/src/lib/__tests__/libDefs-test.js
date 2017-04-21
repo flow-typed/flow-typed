@@ -118,7 +118,10 @@ describe('libDefs', () => {
       return {
         pkgName: name,
         pkgVersionStr: verStr,
-        flowVersion: parseFlowDirString(flowVerStr),
+        flowVersion: parseFlowDirString(
+          flowVerStr,
+          `${name}_${verStr}/${flowVerStr}`
+        ),
         flowVersionStr: flowVerStr,
         path: '',
         testFilePaths: [],

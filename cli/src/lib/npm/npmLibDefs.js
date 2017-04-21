@@ -122,7 +122,11 @@ async function extractLibDefsFromNpmPkgDir(
       validationError(pkgDirItemContext, error, validationErrors);
     } else if (pkgDirItemStat.isDirectory()) {
       const errCount = validationErrors == null ? 0 : validationErrors.size;
-      const parsedFlowDir = parseFlowDirString(pkgDirItem, validationErrors);
+      const parsedFlowDir = parseFlowDirString(
+        pkgDirItem,
+        `${pkgNameVer}/${pkgDirItem}`,
+        validationErrors
+      );
       // If parsing a flow directory incurred a validation error, don't keep it
       // around in our list of parsed flow directories
       // TODO: Make the parseFlowDirString API return `null` when there's an
@@ -423,10 +427,15 @@ export async function getInstalledNpmLibDefs(
         const {pkgName, pkgVersion} = pkgNameVer;
 
         const flowVerMatches = matches[3].match(/^flow_(>=|<=)?(v.+)$/);
+        const flowDirStr =
+          flowVerMatches == null
+          ? `flow_${matches[3]}`
+          : `flow_${flowVerMatches[2]}`;
+        const context = `${nameVer}/${flowDirStr}`;
         const flowVer =
           flowVerMatches == null
-          ? parseFlowDirString(`flow_${matches[3]}`)
-          : parseFlowDirString(`flow_${flowVerMatches[2]}`);
+          ? parseFlowDirString(flowDirStr, context)
+          : parseFlowDirString(flowDirStr, context);
 
         installedLibDefs.set(filePath, {kind: "LibDef", libDef: {
           // TODO!!

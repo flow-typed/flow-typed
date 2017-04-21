@@ -54,6 +54,7 @@ function _parseVerNumOrX(
 
 function _parseVersion(
   verStr: string,
+  context: string,
   expectPossibleRangeUpper: boolean,
   validationErrs?: VErrors
 ): [number, FlowSpecificVer] {
@@ -63,7 +64,7 @@ function _parseVersion(
       'Flow version ranges must start with a `v`!',
       validationErrs,
     );
-    return _parseVersion('v' + verStr, expectPossibleRangeUpper, validationErrs);
+    return _parseVersion('v' + verStr, context, expectPossibleRangeUpper, validationErrs);
   }
 
   const verParts = verStr.slice(1).match(/^([0-9]+)\.([0-9]+|x)(\.([0-9]+|x))?/);
@@ -71,19 +72,20 @@ function _parseVersion(
   if (verParts == null) {
     if (verStr[1] === 'x') {
       validationError(
-        verStr,
+        context,
         'The major version of a Flow version string cannot be `x`, it must ' +
         'be a number!',
         validationErrs,
       );
       return _parseVersion(
         'v0' + verStr.substr(2),
+        context,
         expectPossibleRangeUpper,
         validationErrs,
       );
     } else {
       validationError(
-        verStr,
+        context,
         'Flow versions must be a non-range semver with an exact major ' +
         'version and either an exact minor version or an `x` minor ver.',
         validationErrs,
@@ -116,7 +118,7 @@ function _parseVersion(
       // This is excitingly inefficient but because it operates on tiny inputs
       // (and only sometimes) it shouldn't be an issue in practice.
       try {
-        _parseVersion(verAfterParts.substr(1), false);
+        _parseVersion(verAfterParts.substr(1), context, false);
         return [verParts[0].length + 1, {major, minor, patch, prerel: null}];
       } catch (e) {
         // It's possible that a prerel *and* a range co-exist!
@@ -125,7 +127,7 @@ function _parseVersion(
         let prerel = prerelParts.shift(); // 'prerel'
         while (prerelParts.length > 0) {
           try {
-            _parseVersion(prerelParts.join('-'), false);
+            _parseVersion(prerelParts.join('-'), context, false);
             break;
           } catch (e) {
             prerel += '-' + prerelParts.shift();
@@ -155,11 +157,12 @@ function _parseVersion(
 
 export function parseDirString(
   verStr: string,
+  context: string,
   validationErrs?: VErrors,
 ): FlowVersion {
   if (verStr.substr(0, 'flow_'.length) !== 'flow_') {
     validationError(
-      verStr,
+      context,
       'Flow versions must start with `flow-`',
       validationErrs,
     );
@@ -176,12 +179,18 @@ export function parseDirString(
       lower: null,
       upper: _parseVersion(
         verStr.substr('flow_-'.length),
+        context,
         false,
         validationErrs,
       )[1],
     };
   } else {
-    const [offset, lowerVer] = _parseVersion(afterPrefix, true, validationErrs);
+    const [offset, lowerVer] = _parseVersion(
+      afterPrefix,
+      context,
+      true,
+      validationErrs
+    );
     if (offset === afterPrefix.length) {
       return {
         kind: 'specific',
@@ -191,7 +200,12 @@ export function parseDirString(
       const upperVer =
         offset + 1 === afterPrefix.length
         ? null
-        : _parseVersion(afterPrefix.substr(offset + 1), false, validationErrs)[1];
+        : _parseVersion(
+            afterPrefix.substr(offset + 1),
+            context,
+            false,
+            validationErrs
+          )[1];
       return {
         kind: 'ranged',
         lower: lowerVer,
@@ -213,9 +227,10 @@ export function parseDirString(
 
 export function parseFlowSpecificVer(
   verStr: string,
+  context: string,
   validationErrs?: VErrors,
 ): FlowSpecificVer {
-  const flowVer = parseDirString(`flow_${verStr}`, validationErrs);
+  const flowVer = parseDirString(`flow_${verStr}`, context, validationErrs);
   switch (flowVer.kind) {
     case 'specific': return flowVer.ver;
     case 'all':

@@ -127,7 +127,7 @@ describe("install (command)", () => {
       return testProject(async (ROOT_DIR) => {
         const result = await installNpmLibDefs({
           cwd: ROOT_DIR,
-          flowVersion: parseFlowDirString('flow_v0.40.0'),
+          flowVersion: parseFlowDirString('flow_v0.40.0', 'testContext'),
           explicitLibDefs: [],
           verbose: false,
           overwrite: false,
@@ -147,7 +147,7 @@ describe("install (command)", () => {
         await touchFile(path.join(ROOT_DIR, ".flowconfig"));
         const result = await installNpmLibDefs({
           cwd: ROOT_DIR,
-          flowVersion: parseFlowDirString('flow_v0.40.0'),
+          flowVersion: parseFlowDirString('flow_v0.40.0', 'testContext',),
           explicitLibDefs: ["INVALID"],
           verbose: false,
           overwrite: false,
@@ -169,7 +169,7 @@ describe("install (command)", () => {
         ]);
         const result = await installNpmLibDefs({
           cwd: ROOT_DIR,
-          flowVersion: parseFlowDirString('flow_v0.40.0'),
+          flowVersion: parseFlowDirString('flow_v0.40.0', 'testContext'),
           explicitLibDefs: [],
           verbose: false,
           overwrite: false,

@@ -9,7 +9,7 @@ describe('search command', () => {
       return {
         pkgName: name,
         pkgVersionStr: verStr,
-        flowVersion: parseFlowDirString(flowVerStr),
+        flowVersion: parseFlowDirString(flowVerStr, 'testContext'),
         flowVersionStr: flowVerStr,
         path: '',
         testFilePaths: [],

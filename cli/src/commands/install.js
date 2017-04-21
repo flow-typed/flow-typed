@@ -126,9 +126,15 @@ async function determineFlowVersion(cwd: string, flowVersionArg?: string) {
       flowVersionStr = `${flowVersionStr}.0`;
     }
 
-    return {kind: 'specific', ver: parseFlowSpecificVer(flowVersionStr)};
+    return {
+      kind: 'specific',
+      ver: parseFlowSpecificVer(flowVersionStr, flowVersionArg)
+    };
   } else {
-    return {kind: 'specific', ver: await findFlowSpecificVer(cwd)};
+    return {
+      kind: 'specific',
+      ver: await findFlowSpecificVer(cwd, cwd)
+    };
   }
 }
 

@@ -272,7 +272,7 @@ describe('npmLibDefs', () => {
           "Unexpected file name. This directory can only contain test files " +
           "or a libdef file named `underscore_v1.x.x.js`."
         ]],
-        ['asdfdir', ["Flow versions must start with `flow-`"]],
+        ['underscore_v1.x.x/asdfdir', ["Flow versions must start with `flow-`"]],
         [path.join("underscore_v1.x.x", "flow_v0.38.x-", "asdf2"), [
           "Unexpected file. This directory can only contain test files or a " +
           "libdef file named `underscore_v1.x.x.js`."
