@@ -57,8 +57,8 @@ declare module "underscore" {
 
   declare function sortBy<T>(a: T[], property: any): T[];
   declare function sortBy<T>(a: T[], iteratee: (val: T)=>any): T[];
-  declare function groupBy<T>(a: Array<T>, iteratee: (val: T, index: number)=>any | string): {[key:string]: T[]};
-  declare function indexBy<T>(a: Array<T>, iteratee: (val: T, index: number)=>any | string): {[key:string]: T[]};
+  declare function groupBy<T>(a: Array<T>, iteratee: string | (val: T, index: number)=>any): {[key:string]: T[]};
+  declare function indexBy<T>(a: Array<T>, iteratee: string | (val: T, index: number)=>any): {[key:string]: T[]};
   declare function countBy<T>(a: Array<T>, iteratee: (val: T, index: number)=>any): {[key:string]: T[]};
   declare function shuffle<T>(list: ?Array<T>): Array<T>;
   declare function sample<T>(a: T[]): T;
