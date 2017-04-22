@@ -48,8 +48,11 @@ _.invert({Moe: 'Moses', Larry: 'Louis', Curly: 'Jerome'});
 _.functions(_);
 
 _.extend({name: 'moe'}, {age: 50});
+
+/* starting with 1.8
 _.extendOwn({name: 'moe'}, {age: 50});
 _.assign({name: 'moe'}, {age: 50});
+*/
 
 _.defaults({flavor: 'chocolate'}, {flavor: 'vanilla', sprinkles: 'lots'});
 
