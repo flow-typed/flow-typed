@@ -1,7 +1,7 @@
 /** @flow */
 import _ from 'underscore';
 
-_.where(listOfPlays, {author: 'Shakespeare', year: 1611});
+_.where([{title: "Cymbeline", author: "Shakespeare", year: 1611}, {title: "The Tempest", author: "Shakespeare", year: 1611}], {author: 'Shakespeare', year: 1611});
 
 _.invoke([[5, 1, 7], [3, 2, 1]], 'sort');
 
