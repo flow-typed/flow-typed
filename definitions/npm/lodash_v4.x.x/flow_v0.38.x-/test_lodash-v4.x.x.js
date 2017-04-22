@@ -29,6 +29,9 @@ _.find([{x:1}, {x:2}, {x:3}], v => v.x == 3);
 _.find({x: 1, y: 2}, (a: number, b: string) => a);
 _.find({x: 1, y: 2}, { x: 3 });
 
+// $ExpectError undefined. This type is incompatible with object type.
+var result: Object = _.find(users, 'active');
+
 /**
  * _.find examples from the official doc
  */
