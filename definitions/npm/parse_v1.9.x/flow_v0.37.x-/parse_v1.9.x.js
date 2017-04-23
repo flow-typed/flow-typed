@@ -244,7 +244,8 @@ declare class $npm$parse$ParseObject {
   static registerSubclass(className: string, constructor: Class<$npm$parse$ParseObject>): void,
   // static extend(className: any, protoProps: any, classProps: any): Class<$npm$parse$ParseObject>,
   static enableSingleInstance(): void,
-  static disableSingleInstance(): void
+  static disableSingleInstance(): void,
+  static extend(string: string): $npm$parse$ParseObject
 }
 
 // =========================
