@@ -65,6 +65,7 @@ declare module 'semver' {
 
   // Not explicitly documented
   declare function parse(version: string): ?SemVer;
+  declare function clean(version: string): string | null;
 
   declare class Range {
     set: Array<Array<{semver: SemVer}>>;
