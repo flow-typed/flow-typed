@@ -187,7 +187,7 @@ async function installNpmLibDefs({
       }
 
       const [_, npmScope, pkgName, pkgVerStr] = termMatches;
-      const scopedPkgName = npmScope == null ? npmScope + pkgName : pkgName;
+      const scopedPkgName = npmScope != null ? npmScope + pkgName : pkgName;
       libdefsToSearchFor.set(scopedPkgName, pkgVerStr);
     }
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
