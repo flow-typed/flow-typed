@@ -214,6 +214,12 @@ declare class rxjs$Observable<+T> {
     index?: number,
   ): rxjs$Observable<U>;
 
+  mergeMap<U, I, R>(
+    project: (value: T, index?: number) => rxjs$Observable<I> | Promise<I> | Iterable<I>,
+    resultSelector: (outerValue: T, innerValue: I, outerIndex: number, innerIndex: number) => R,
+    index?: number
+  ): rxjs$Observable<R>;
+
   multicast(
     subjectOrSubjectFactory: rxjs$Subject<T> | () => rxjs$Subject<T>,
   ): rxjs$ConnectableObservable<T>;
