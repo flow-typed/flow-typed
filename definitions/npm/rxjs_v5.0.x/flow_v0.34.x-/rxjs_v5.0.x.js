@@ -177,6 +177,8 @@ declare class rxjs$Observable<+T> {
 
   ignoreElements<U>(): rxjs$Observable<U>;
 
+  last<U>(predicate?: (value: T, index: number, source: rxjs$Observable<T>) => boolean): rxjs$Observable<U>;
+
   let<U>(project: (self: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
 
   // Alias for `let`
