@@ -66,7 +66,7 @@ declare module "underscore" {
 
   declare function sample<T>(a: T[]): T;
 
-  // TODO: toArray
+  declare function toArray<T>(a: Iterable<T>|{[key:any]: T}): Array<T>;
 
   declare function size(o: Object): number;
   declare function size(o: Array<any>): number;
