@@ -89,7 +89,7 @@ declare class express$Response extends http$ClientRequest mixins express$Request
   vary(field: string): this;
 }
 
-declare type express$NextFunction = (err?: ?Error) => mixed;
+declare type express$NextFunction = (err?: ?Error | 'route') => mixed;
 declare type express$Middleware =
   ((req: express$Request, res: express$Response, next: express$NextFunction) => mixed) |
   ((error: ?Error, req: express$Request, res: express$Response, next: express$NextFunction) => mixed);
