@@ -1,4 +1,4 @@
-import styled, {ThemeProvider} from 'styled-components'
+import styled, {ThemeProvider, withTheme} from 'styled-components'
 import type {Theme} from 'styled-components'
 
 const Title = styled.h1`
@@ -6,6 +6,10 @@ const Title = styled.h1`
   text-align: center;
   color: palevioletred;
 `;
+
+const ExtendedTitle = styled(Title)`
+  font-size: 2em;
+`
 
 const Wrapper = styled.section`
   padding: 4em;
@@ -23,6 +27,8 @@ const Component = () => (
     </Wrapper>
   </ThemeProvider>
 )
+
+const ComponentWithTheme = withTheme(Component)
 
 // $ExpectError
 const NoExistingElementWrapper = styled.nonexisting`
