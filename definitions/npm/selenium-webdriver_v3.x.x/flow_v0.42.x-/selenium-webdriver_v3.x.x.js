@@ -1,5 +1,21 @@
 // @flow
 
+/*
+*	TODO:
+*
+*	1) Reduce the amount of any types
+*	2) Reduce the amount of FUnction types
+*	3) Use Templated promise types
+*/
+
+declare type webdriver$Thenable = Promise<any>;
+
+declare class webdriver$Resolver {
+	promise: webdriver$Thenable;
+	fulfill(obj: any): void;
+	reject(obj: any): void;
+}
+
 declare class webdriver$Capabilities {
 	static android(): this;
 	static chrome(): this;
@@ -52,8 +68,8 @@ declare class webdriver$Builder {
 declare class webdriver$WebDriver {
 	close(): webdriver$Thenable;
 	quit(): webdriver$Thenable;
-	findElement(locator: webdriver$By|Function): webdriver$WebElementPromise;
-	findElements(locator: webdriver$By|Function): webdriver$WebElementPromise;
+	findElement(locator: webdriver$By | Function): webdriver$WebElementPromise;
+	findElements(locator: webdriver$By | Function): webdriver$WebElementPromise;
 	get(url: string): webdriver$Thenable;
 	getTitle(): webdriver$Thenable;
 	getCurrentUrl(): webdriver$Thenable;
@@ -61,7 +77,7 @@ declare class webdriver$WebDriver {
 	manage(): webdriver$Options;
 	executeScript(args: any): webdriver$Thenable;
 	takeScreenshot(): webdriver$Thenable;
-	wait(condition: webdriver$Condition|Function, timeout: ?number, message: ?string): webdriver$Thenable;
+	wait(condition: webdriver$Thenable | webdriver$Condition | Function, timeout: ?number, message: ?string): webdriver$Thenable;
 	sleep(ms: number): webdriver$Thenable;
 }
 
@@ -84,21 +100,7 @@ declare class webdriver$WebElement {
 	sendKeys(var_args: any): webdriver$Thenable;
 }
 
-declare class webdriver$WebElementPromise extends webdriver$WebElement {
-	then(f: Function): this;
-	catch(f: Function): this;
-}
-
-declare class webdriver$Thenable {
-	then(f: Function): this;
-	catch(f: Function): this;
-}
-
-declare class webdriver$Resolver {
-	promise: webdriver$Thenable;
-	fulfill(obj: any): void;
-	reject(obj: any): void;
-}
+declare class webdriver$WebElementPromise mixins webdriver$WebElement, Promise<any> {}
 
 declare interface webdriver$promise {
 	defer(): webdriver$Resolver;
@@ -109,7 +111,7 @@ declare class webdriver$Condition {
 }
 
 declare interface webdriver$until {
-	ableToSwitchToFrame(frame: number|webdriver$WebElement|webdriver$By|Function): webdriver$Condition;
+	ableToSwitchToFrame(frame: number | webdriver$WebElement | webdriver$By | Function): webdriver$Condition;
 	alertIsPresent(): webdriver$Condition;
 	titleIs(title: string): webdriver$Condition;
 	titleContains(substr: string): webdriver$Condition;
@@ -117,8 +119,8 @@ declare interface webdriver$until {
 	urlIs(url: string): webdriver$Condition;
 	urlContains(substrUrl: string): webdriver$Condition;
 	urlMatches(regex: RegExp): webdriver$Condition;
-	elementLocated(locator: webdriver$By|Function): webdriver$Condition;
-	elementsLocated(locator: webdriver$By|Function): webdriver$Condition;
+	elementLocated(locator: webdriver$By | Function): webdriver$Condition;
+	elementsLocated(locator: webdriver$By | Function): webdriver$Condition;
 	stalenessOf(element: webdriver$WebElement): webdriver$Condition;
 	elementIsVisible(element: webdriver$WebElement): webdriver$Condition;
 	elementIsNotVisible(element: webdriver$WebElement): webdriver$Condition;
@@ -130,6 +132,12 @@ declare interface webdriver$until {
 	elementTextContains(element: webdriver$WebElement, substr: string): webdriver$Condition;
 	elementTextMatches(element: webdriver$WebElement, regex: RegExp): webdriver$Condition;
 }
+
+declare type webdriver$Button = {
+	LEFT: 0,
+	MIDDLE: 1,
+	RIGHT: 2
+};
 
 declare type webdriver$Key = {
 	NULL:         '',
@@ -214,7 +222,7 @@ declare class webdriver$logging$Level {
 
 declare class webdriver$logging$Preferences {
 	constructor(): this;
-	setLevel(type: webdriver$logging$Type|string, level: webdriver$logging$Level|string|number): void;
+	setLevel(type: webdriver$logging$Type | string, level: webdriver$logging$Level | string | number): void;
 	toJSON(): Object;
 }
 
@@ -224,7 +232,22 @@ declare interface webdriver$logging {
 	Preferences: Class<webdriver$logging$Preferences>;
 }
 
+declare class webdriver$ActionSequence {
+	constructor(driver: Class<webdriver$WebDriver>): this;
+	perform(): webdriver$Thenable;
+	mouseMove(location: webdriver$WebElement, opt_offset?: {x: number, y: number}): this;
+	mouseDown(opt_elementOrButton?: webdriver$WebElement | webdriver$Button, opt_button?: webdriver$Button): this;
+	mouseUp(opt_elementOrButton?: webdriver$WebElement | webdriver$Button, opt_button?: webdriver$Button): this;
+	dragAndDrop(element: webdriver$WebElement, location: webdriver$WebElement | {x: number, y: number}): this;
+	click(opt_elementOrButton?: webdriver$WebElement | webdriver$Button, opt_button?: webdriver$Button): this;
+	doubleClick(opt_elementOrButton?: webdriver$WebElement | webdriver$Button, opt_button?: webdriver$Button): this;
+	keyDown(key: webdriver$Key): this;
+	keyUp(key: webdriver$Key): this;
+	sendKeys(...var_args: Array<string | webdriver$Key>): this;
+}
+
 declare module 'selenium-webdriver' {
+	declare export var Button: webdriver$Button;
 	declare export var Key: webdriver$Key;
 	declare export var Capabilities: Class<webdriver$Capabilities>;
 	declare export var Options: Class<webdriver$Options>;
@@ -238,8 +261,34 @@ declare module 'selenium-webdriver' {
     declare export var WebElement: Class<webdriver$WebElement>;
     declare export var WebElementPromise: Class<webdriver$WebElementPromise>;
 	declare export var Thenable: Class<webdriver$Thenable>;
+	declare export var ActionSequence: Class<webdriver$ActionSequence>;
 
 	declare export var until: webdriver$until;
 	declare export var promise: webdriver$promise;
 	declare export var logging: webdriver$logging;
+}
+
+declare type webdriver_testing$TestFunction = ((done: () => void) => void | Promise<mixed>);
+
+declare module 'selenium-webdriver/testing' {
+	declare var describe : {
+	    (name: string, spec:() => void): void;
+	    only(description: string, spec:() => void): void;
+	    skip(description: string, spec:() => void): void;
+	    timeout(ms: number): void;
+	};
+
+	declare var context : typeof describe;
+
+	declare var it : {
+	    (name: string, spec?: webdriver_testing$TestFunction): void;
+	    only(description: string, spec: webdriver_testing$TestFunction): void;
+	    skip(description: string, spec: webdriver_testing$TestFunction): void;
+	    timeout(ms:number): void;
+	};
+
+	declare function before(method: webdriver_testing$TestFunction): void;
+	declare function beforeEach(method: webdriver_testing$TestFunction): void;
+	declare function after(method: webdriver_testing$TestFunction): void;
+	declare function afterEach(method: webdriver_testing$TestFunction): void;
 }
