@@ -33,6 +33,8 @@ declare module 'enzyme' {
     text(): string;
     html(): string;
     get(index: number): React$Element<any>;
+    getNode(): React$Element<any>;
+    getNodes(): Array<React$Element<any>>;
     at(index: number): this;
     first(): this;
     last(): this;

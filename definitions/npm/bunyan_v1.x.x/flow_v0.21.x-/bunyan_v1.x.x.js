@@ -89,7 +89,6 @@ declare module 'bunyan' {
         }
     }
     declare interface LoggerOptions {
-        name: string;
         streams?: Array<Stream>;
         level?: BunyanLogLevels | string,
         stream?:  stream$Writable;
@@ -110,7 +109,7 @@ declare module 'bunyan' {
     }
     declare var stdSerializers: Serializers;
     declare function resolveLevel(value: number | string): number;
-    declare function createLogger(options: LoggerOptions): Logger;
+    declare function createLogger(options: LoggerOptions & { name: string }): Logger;
     declare class RingBuffer extends events$EventEmitter {
         constructor(options: RingBufferOptions): any;
         writable: boolean;

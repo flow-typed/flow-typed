@@ -63,7 +63,7 @@ declare module "underscore" {
   declare function shuffle<T>(list: ?Array<T>): Array<T>;
   declare function sample<T>(a: T[]): T;
 
-  declare function toArray(list: any): Array<any>;
+  declare function toArray<T>(a: Iterable<T>|{[key:any]: T}): Array<T>;
 
   declare function size(o: Object): number;
   declare function size(o: Array<any>): number;

@@ -1,12 +1,31 @@
 // @flow
 
-import {fs} from "./node.js";
-import {path} from "./node.js";
-import {searchUpDirPath} from "./fileUtils.js";
-import semver from "semver";
-import {stringToVersion} from "./semver.js";
+import {
+  searchUpDirPath
+} from "../fileUtils.js";
 
-import type {Version} from "./semver.js";
+import type {
+  FlowSpecificVer,
+} from "../flowVersion.js";
+
+import {
+  fs
+} from "../node.js";
+
+import {
+  path,
+} from "../node.js";
+
+import {
+  stringToVersion,
+} from "../semver.js";
+import type {
+  Version,
+} from "../semver.js";
+
+import
+  semver
+from "semver";
 
 type PkgJson = {|
   pathStr: string,
@@ -52,7 +71,7 @@ export async function findPackageJsonDepVersionStr(
       `${pkgJson.pathStr}!`
     );
   }
-}
+};
 
 export async function findPackageJsonPath(pathStr: string): Promise<string> {
   const pkgJsonPathStr = await searchUpDirPath(
@@ -65,6 +84,7 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
   return path.join(pkgJsonPathStr, 'package.json');
 };
 
+// TODO: Write tests for this
 export function getPackageJsonDependencies(
   pkgJson: PkgJson
 ): {[depName: string]: string} {
@@ -80,7 +100,7 @@ export function getPackageJsonDependencies(
     }
     return deps;
   }, {});
-}
+};
 
 export async function getPackageJsonData(pathStr: string): Promise<PkgJson> {
   const pkgJsonPath = await findPackageJsonPath(pathStr);
@@ -105,7 +125,7 @@ export async function determineFlowVersion(
     } else {
       const flowVerRange = new semver.Range(flowBinVersionStr);
       if (flowVerRange.set[0].length !== 2) {
-        const cliPkgJson = require("../../package.json");
+        const cliPkgJson = require("../../../package.json");
         const cliFlowVer = cliPkgJson.devDependencies['flow-bin'];
         throw new Error(
           `Unable to extract flow-bin version from package.json!\n` +
@@ -120,3 +140,35 @@ export async function determineFlowVersion(
 
   return null;
 };
+
+export async function findFlowSpecificVer(
+  startingPath: string,
+): Promise<FlowSpecificVer> {
+  const flowSemver = await determineFlowVersion(startingPath);
+  if (flowSemver === null) {
+    throw new Error(
+      "Failed to find a flow-bin dependency in package.json.\n" +
+      "Please install flow-bin: `npm install --save-dev flow-bin`"
+    );
+  }
+  if (flowSemver.range !== undefined) {
+    throw new Error(
+      `Unable to extract flow-bin version from package.json!\n` +
+      `Never use a complex version range with flow-bin. Always use a ` +
+      `specific major/minor version (i.e. "^0.39").`
+    );
+  }
+  const major = flowSemver.major;
+  if (major === 'x') {
+    throw new Error(
+      `Unable to extract flow-bin version from package.json!\n` +
+      `Never use a wildcard major version with flow-bin!`
+    );
+  }
+  return {
+    major,
+    minor: flowSemver.minor,
+    patch: flowSemver.patch,
+    prerel: flowSemver.prerel == null ? null : flowSemver.prerel,
+  };
+}
