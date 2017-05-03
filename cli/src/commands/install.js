@@ -72,6 +72,7 @@ export type Args = {
   _: Array<string>,
   flowVersion?: string,
   overwrite: boolean,
+  skip: boolean,
   verbose: bool,
 };
 export function setup(yargs: Yargs) {
@@ -87,6 +88,12 @@ export function setup(yargs: Yargs) {
       verbose: {
         describe: "Print additional, verbose info while installing libdefs",
         type: "boolean",
+        demand: false,
+      },
+      skip: {
+        alias: 's',
+        describe: 'Do not generate stubs for missing libdefs',
+        type: 'boolean',
         demand: false,
       },
     });
@@ -107,6 +114,7 @@ export async function run(args: Args) {
     explicitLibDefs,
     verbose: args.verbose,
     overwrite: args.overwrite,
+    skip: args.skip,
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
@@ -153,6 +161,7 @@ type installNpmLibDefsArgs = {|
   explicitLibDefs: Array<string>,
   verbose: boolean,
   overwrite: boolean,
+  skip: boolean,
 |};
 async function installNpmLibDefs({
   cwd,
@@ -160,6 +169,7 @@ async function installNpmLibDefs({
   explicitLibDefs,
   verbose,
   overwrite,
+  skip,
 }: installNpmLibDefsArgs): Promise<number> {
   const flowProjectRoot = await findFlowRoot(cwd);
   if (flowProjectRoot === null) {
@@ -346,7 +356,7 @@ async function installNpmLibDefs({
       }
     }));
 
-    if (untypedMissingLibDefs.length > 0) {
+    if (untypedMissingLibDefs.length > 0 && !skip) {
       console.log('• Generating stubs for untyped dependencies...');
       await Promise.all(
         untypedMissingLibDefs.map(async ([pkgName, pkgVerStr]) => {
