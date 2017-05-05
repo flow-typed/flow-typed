@@ -194,6 +194,16 @@ declare class rxjs$Observable<+T> {
     index?: number,
   ): rxjs$Observable<U>;
 
+  flatMapTo<U>(
+    innerObservable: rxjs$Observable<U>
+  ): rxjs$Observable<U>;
+
+  flatMapTo<U, V>(
+    innerObservable: rxjs$Observable < U >,
+    resultSelector: (outerValue: T, innerValue: U, outerIndex: number, innerIndex: number) => V,
+    concurrent ?: number
+  ): rxjs$Observable<V>;
+
   switchMap<U>(
     project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
     index?: number,
@@ -215,6 +225,16 @@ declare class rxjs$Observable<+T> {
     project: (value: T, index?: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
     index?: number,
   ): rxjs$Observable<U>;
+
+  mergeMapTo<U>(
+    innerObservable: rxjs$Observable<U>
+  ): rxjs$Observable<U>;
+
+  mergeMapTo<U, V>(
+    innerObservable: rxjs$Observable < U >,
+    resultSelector: (outerValue: T, innerValue: U, outerIndex: number, innerIndex: number) => V,
+    concurrent ?: number
+  ): rxjs$Observable<V>;
 
   multicast(
     subjectOrSubjectFactory: rxjs$Subject<T> | () => rxjs$Subject<T>,
