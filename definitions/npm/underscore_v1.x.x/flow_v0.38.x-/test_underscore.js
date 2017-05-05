@@ -81,3 +81,18 @@ var toArrayString: Array<string> = _.toArray({foo: 'bar', baz: 'qux'});
 var toArrayNumber: Array<number> = _.toArray({foo: 4, bar: 2});
 // $ExpectError
 var toArrayNumberError: Array<string> = _.toArray({foo: 4, baz: 2});
+
+var composed: (prop: {num: number}) => number = _.compose(
+  (prop: {num: number}) => prop.num
+);
+
+var composed2: (prop: {num: number}) => string = _.compose(
+  (num: number) => num + '',
+  (prop: {num: number}) => prop.num,
+);
+
+// $ExpectError
+var composedFail: (prop: {num: number}) => number = _.compose(
+  (num: number) => num + '',
+  (prop: {num: number}) => prop.num,
+);
