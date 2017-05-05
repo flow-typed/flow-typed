@@ -107,6 +107,8 @@ declare class rxjs$Observable<+T> {
 
   static interval(period: number): rxjs$Observable<number>;
 
+  static timer(initialDelay: (number | Date), period?: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<number>;
+
   static merge<T, U>(
     source0: rxjs$Observable<T>,
     source1: rxjs$Observable<U>,
@@ -127,6 +129,8 @@ declare class rxjs$Observable<+T> {
   audit(durationSelector: (value: T) => rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
 
   race(other: rxjs$Observable<T>): rxjs$Observable<T>;
+
+  repeat(): rxjs$Observable<T>;
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>;
 

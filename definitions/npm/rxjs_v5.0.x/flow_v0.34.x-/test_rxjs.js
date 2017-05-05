@@ -15,3 +15,6 @@ const distinct4: Observable<{a: string}> = Observable.of({a: 'a'}).distinct(
   field => field.a,
   Observable.never(),
 );
+
+const timer$: Observable<number> = Observable.timer(1000).startWith(10);
+const numbers: Observable<number> = Observable.of(1, 2, 3).repeat();
