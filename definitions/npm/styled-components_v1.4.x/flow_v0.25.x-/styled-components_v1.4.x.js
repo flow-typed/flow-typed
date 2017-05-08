@@ -25,7 +25,7 @@ declare module 'styled-components' {
   declare module.exports: {
     injectGlobal: (strings: Array<string>, ...interpolations: Array<Interpolation>) => void,
     css: (strings: Array<string>, ...interpolations: Array<Interpolation>) => Array<Interpolation>,
-    keyframes: (nameGenerator: NameGenerator) => (strings: Array<string>, ...interpolations: Array<Interpolation>) => string,
+    keyframes: (strings: Array<string>, ...interpolations: Array<Interpolation>) => string,
     withTheme: (component: Component) => React$Component<*, ThemeProviderProps, *>,
     ThemeProvider: typeof ThemeProvider,
     (baseComponent: Component): StyledComponent,
