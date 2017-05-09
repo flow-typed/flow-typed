@@ -131,6 +131,7 @@ describe("install (command)", () => {
           explicitLibDefs: [],
           verbose: false,
           overwrite: false,
+          skip: false,
         });
         expect(result).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([[
@@ -151,6 +152,7 @@ describe("install (command)", () => {
           explicitLibDefs: ["INVALID"],
           verbose: false,
           overwrite: false,
+          skip: false,
         });
         expect(result).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([[
@@ -173,6 +175,7 @@ describe("install (command)", () => {
           explicitLibDefs: [],
           verbose: false,
           overwrite: false,
+          skip: false,
         });
         expect(result).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([[
@@ -325,6 +328,7 @@ describe("install (command)", () => {
           _: [],
           overwrite: false,
           verbose: false,
+          skip: false,
         });
 
         // Installs libdefs
@@ -368,11 +372,44 @@ describe("install (command)", () => {
           _: [],
           overwrite: false,
           verbose: false,
+          skip: false,
         });
 
         // Installs a stub for someUntypedDep
         expect(await fs.exists(
           path.join(FLOWPROJ_DIR, "flow-typed", "npm", "someUntypedDep_vx.x.x.js")
+        )).toBe(true);
+      });
+    });
+
+    pit("doesn't stub unavailable libdefs when --skip is passed", () => {
+      return fakeProjectEnv(async (FLOWPROJ_DIR) => {
+        // Create some dependencies
+        await Promise.all([
+          writePkgJson(path.join(FLOWPROJ_DIR, "package.json"), {
+            name: "test",
+            devDependencies: {
+              "flow-bin": "^0.43.0",
+            },
+            dependencies: {
+              "someUntypedDep": "1.2.3",
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, "node_modules", "someUntypedDep")),
+          mkdirp(path.join(FLOWPROJ_DIR, "node_modules", "flow-bin")),
+        ]);
+
+        // Run the install command
+        await run({
+          _: [],
+          overwrite: false,
+          verbose: false,
+          skip: true,
+        });
+
+        // Installs a stub for someUntypedDep
+        expect(await fs.exists(
+          path.join(FLOWPROJ_DIR, "flow-typed", "npm")
         )).toBe(true);
       });
     });
@@ -399,6 +436,7 @@ describe("install (command)", () => {
           _: [],
           overwrite: false,
           verbose: false,
+          skip: false,
         });
 
         const libdefFilePath = path.join(
@@ -418,6 +456,7 @@ describe("install (command)", () => {
           _: [],
           overwrite: false,
           verbose: false,
+          skip: false,
         });
 
         // Verify that the tweaked libdef file wasn't overwritten
@@ -449,6 +488,7 @@ describe("install (command)", () => {
           _: [],
           overwrite: false,
           verbose: false,
+          skip: false,
         });
 
         const libdefFilePath = path.join(
@@ -466,6 +506,7 @@ describe("install (command)", () => {
         await run({
           _: [],
           overwrite: true,
+          skip: false,
           verbose: false,
         });
 
