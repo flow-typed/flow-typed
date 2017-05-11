@@ -1,4 +1,4 @@
-import styled, {ThemeProvider, withTheme} from 'styled-components'
+import styled, {ThemeProvider, withTheme, keyframes} from 'styled-components'
 import type {Theme} from 'styled-components'
 
 const Title = styled.h1`
@@ -29,6 +29,11 @@ const Component = () => (
 )
 
 const ComponentWithTheme = withTheme(Component)
+
+const OpacityKeyFrame = keyframes`
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+`;
 
 // $ExpectError
 const NoExistingElementWrapper = styled.nonexisting`

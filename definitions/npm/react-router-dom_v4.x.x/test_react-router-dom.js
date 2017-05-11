@@ -75,15 +75,16 @@ import {
 <NavLink />
 
 // matchPath
-const match: null | Match = matchPath('/the/pathname', '/the/:dynamicId', {
+const match: null | Match = matchPath('/the/pathname', {
+  path: '/the/:dynamicId',
   exact: true,
   strict: false
 })
-const match2: null | Match = matchPath('/the/pathname', '/the/:dynamicId')
+const match2: null | Match = matchPath('/the/pathname', {path: '/the/:dynamicId'})
 
 // $ExpectError
 matchPath('/the/pathname')
 // $ExpectError
 matchPath()
 // $ExpectError
-const matchError: string = matchPath('/the/pathname', 'the/:dynamicId')
+const matchError: string = matchPath('/the/pathname', {path: 'the/:dynamicId'})
