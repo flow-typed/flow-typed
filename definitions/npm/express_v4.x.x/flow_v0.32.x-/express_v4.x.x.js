@@ -13,7 +13,7 @@ declare class express$RequestResponseBase {
 
 declare class express$Request extends http$IncomingMessage mixins express$RequestResponseBase {
   baseUrl: string;
-  body: mixed;
+  body: any;
   cookies: {[cookie: string]: string};
   fresh: boolean;
   hostname: string;
