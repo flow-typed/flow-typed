@@ -177,6 +177,8 @@ declare class rxjs$Observable<+T> {
 
   ignoreElements<U>(): rxjs$Observable<U>;
 
+  last<U>(predicate?: (value: T, index: number, source: rxjs$Observable<T>) => boolean): rxjs$Observable<U>;
+
   let<U>(project: (self: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
 
   // Alias for `let`
@@ -211,6 +213,12 @@ declare class rxjs$Observable<+T> {
     project: (value: T, index?: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
     index?: number,
   ): rxjs$Observable<U>;
+
+  mergeMap<U, I, R>(
+    project: (value: T, index?: number) => rxjs$Observable<I> | Promise<I> | Iterable<I>,
+    resultSelector: (outerValue: T, innerValue: I, outerIndex: number, innerIndex: number) => R,
+    index?: number
+  ): rxjs$Observable<R>;
 
   multicast(
     subjectOrSubjectFactory: rxjs$Subject<T> | () => rxjs$Subject<T>,
