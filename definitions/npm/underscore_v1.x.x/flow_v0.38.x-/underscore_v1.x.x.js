@@ -294,11 +294,11 @@ declare module "underscore" {
     reject<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): T[];
     reject<T>(a: T[], pred: (val: T, k: string)=>boolean): T[];
 
-    every<T>(a: Array<T>, pred: (val: T)=>boolean): boolean;
-    all<T>(a: Array<T>, pred: (val: T)=>boolean): boolean;
+    every<T>(a: Array<T>, pred?: (val: T)=>boolean): boolean;
+    all<T>(a: Array<T>, pred?: (val: T)=>boolean): boolean;
 
-    some<T>(a: Array<T>, pred: (val: T)=>boolean): boolean;
-    any<T>(a: Array<T>, pred: (val: T)=>boolean): boolean;
+    some<T>(a: Array<T>, pred?: (val: T)=>boolean): boolean;
+    any<T>(a: Array<T>, pred?: (val: T)=>boolean): boolean;
 
     contains<T>(list: T[], val: T, fromIndex?: number): boolean;
     includes<T>(list: T[], val: T, fromIndex?: number): boolean;

@@ -68,6 +68,12 @@ _.escape('Curly, Larry & Moe');
 
 _.unescape('Curly, Larry &amp; Moe');
 
+_.some(['a', true, 0]);
+_.any(['a', true, 0]);
+_.every(['a', true, 0]);
+_.all(['a', true, 0]);
+
+
 // $ExpectError
 _.zip([{x:1}], [{x:2,y:1}])[0][2]
 // $ExpectError array literal. Tuple arity mismatch.
