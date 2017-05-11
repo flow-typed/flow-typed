@@ -142,8 +142,9 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
 
       await P.all(Array.from(binURLs).map(async ([version, binURL]) => {
         const zipPath = path.join(BIN_DIR, "flow-" + version + ".zip");
+		const binPath = path.join(BIN_DIR, "flow-" + version + (IS_WINDOWS ? ".exe" : ""));
 
-        if (await fs.exists(path.join(BIN_DIR, "flow-" + version))) {
+        if (await fs.exists(binPath)) {
           return;
         }
 
