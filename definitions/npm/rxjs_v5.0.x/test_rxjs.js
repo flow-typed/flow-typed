@@ -180,3 +180,18 @@ function f4(x: string, cb: (result: number) => void): void {}
 (Observable.bindCallback(f3)(): Observable<string>);
 // $ExpectError
 (Observable.bindCallback(f4)('arg'): Observable<string>);
+
+numbers.takeWhile(n => n < 3);
+numbers.takeWhile((n, i) => n < 3 && i < 2);
+
+numbers.skipWhile(n => n < 2);
+numbers.skipWhile((n, i) => n < 2 && i < 1);
+
+numbers.filter(n => n < 3);
+numbers.filter((n, i) => n < 3 && i < 2);
+numbers.filter(
+  function(n) {
+    return this.x === 'bar' && n < 3;
+  },
+  {x: 'bar'}, // thisArg
+);

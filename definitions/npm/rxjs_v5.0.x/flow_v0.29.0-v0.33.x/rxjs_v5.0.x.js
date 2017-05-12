@@ -150,7 +150,7 @@ declare class rxjs$Observable<+T> {
 
   elementAt(index: number, defaultValue?: T): rxjs$Observable<T>;
 
-  filter(predicate: (value: T) => boolean): rxjs$Observable<T>;
+  filter(predicate: (value: T, index: number) => boolean, thisArg?: any): rxjs$Observable<T>;
 
   finally(f: () => mixed): rxjs$Observable<T>;
 
@@ -250,7 +250,7 @@ declare class rxjs$Observable<+T> {
 
   skipUntil(other: rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
 
-  skipWhile(predicate: (value: T) => boolean): rxjs$Observable<T>;
+  skipWhile(predicate: (value: T, index: number) => boolean): rxjs$Observable<T>;
 
   startWith(...values: Array<T>): rxjs$Observable<T>;
 
@@ -260,7 +260,7 @@ declare class rxjs$Observable<+T> {
 
   takeUntil(other: rxjs$Observable<any>): rxjs$Observable<T>;
 
-  takeWhile(f: (value: T) => boolean): rxjs$Observable<T>;
+  takeWhile(predicate: (value: T, index: number) => boolean): rxjs$Observable<T>;
 
   do(
     onNext?: (value: T) => mixed,
