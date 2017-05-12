@@ -230,20 +230,20 @@ declare module 'lodash' {
     now(): number;
 
     // Function
-    after(n: number, fn: Function): Function;
+    after<Args: Array<any>, R>(n: number, fn: (...args: Args) => R): (...args: Args) => R | void;
     ary(func: Function, n?: number): Function;
-    before(n: number, fn: Function): Function;
+    before<Args: Array<any>, R>(n: number, fn: (...args: Args) => R): (...args: Args) => R | void;
     bind(func: Function, thisArg: any, ...partials: Array<any>): Function;
     bindKey(obj: Object, key: string, ...partials: Array<any>): Function;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce(func: Function, wait?: number, options?: DebounceOptions): Function;
+    debounce<F: Function>(func: F, wait?: number, options?: DebounceOptions): F;
     defer(func: Function, ...args?: Array<any>): number;
     delay(func: Function, wait: number, ...args?: Array<any>): number;
     flip(func: Function): Function;
-    memoize(func: Function, resolver?: Function): Function;
-    negate(predicate: Function): Function;
-    once(func: Function): Function;
+    memoize<F: Function>(func: F, resolver?: Function): F;
+    negate<Args: Array<any>, R>(predicate: (...args: Args) => R): (...args: Args) => boolean;
+    once<F: Function>(func: F): F;
     overArgs(func: Function, ...transforms: Array<Function>): Function;
     overArgs(func: Function, transforms: Array<Function>): Function;
     partial(func: Function, ...partials: any[]): Function;
@@ -253,9 +253,9 @@ declare module 'lodash' {
     rearg(func: Function, indexes: Array<number>): Function;
     rest(func: Function, start?: number): Function;
     spread(func: Function): Function;
-    throttle(func: Function, wait?: number, options?: ThrottleOptions): Function;
+    throttle<F: Function>(func: F, wait?: number, options?: ThrottleOptions): F;
     unary(func: Function): Function;
-    wrap(value: any, wrapper: Function): Function;
+    wrap<V, Rest: Array<any>, R>(value: V, wrapper: (V, ...rest: Rest) => R): (...rest: Rest) => R;
 
     // Lang
     castArray(value: *): any[];

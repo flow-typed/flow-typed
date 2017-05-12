@@ -312,3 +312,72 @@ timesNums = _.times(5, function(i: number) { return JSON.stringify(i); });
 // https://github.com/facebook/flow/issues/1948
 _.flatMap([1, 2, 3], (n): number[] => [n, n]);
 _.flatMap({a: 1, b: 2}, n => [n, n]);
+
+/**
+ * Function helpers.
+ */
+
+function example(n: number, msg: string): number {
+  console.log(msg);
+  return n + 1;
+}
+
+/**
+ * _.after
+ */
+const afteredExample = _.after(3, example);
+(afteredExample: (number, string) => number | void);
+
+// $ExpectError undefined (too few arguments, expected default/rest parameters)
+afteredExample(123);
+// $ExpectError number This type is incompatible with expected param type of string
+afteredExample(123, 456);
+// $ExpectError number This type is incompatible with string
+var answer: string = afteredExample(123, "msg");
+// $ExpectError undefined This type is incompatible with string
+var answer: string = afteredExample(123, "msg");
+
+/**
+ * _.before
+ */
+const beforedExample = _.before(3, example);
+(beforedExample: (number, string) => number | void);
+
+// $ExpectError undefined (too few arguments, expected default/rest parameters)
+beforedExample(123);
+// $ExpectError number This type is incompatible with expected param type of string
+beforedExample(123, 456);
+// $ExpectError number This type is incompatible with string
+var answer: string = beforedExample(123, "msg");
+// $ExpectError undefined This type is incompatible with string
+var answer: string = beforedExample(123, "msg");
+
+/**
+ * _.debounce
+ */
+(_.debounce(example): (number, string) => number);
+
+/**
+ * _.memoize
+ */
+(_.memoize(example): (number, string) => number);
+
+/**
+ * _.negate
+ */
+(_.negate(example): (number, string) => boolean);
+
+/**
+ * _.once
+ */
+(_.once(example): (number, string) => number);
+
+/**
+ * _.throttle
+ */
+(_.throttle(example): (number, string) => number);
+
+/**
+ * _.wrap
+ */
+(_.wrap(123, example): string => number);
