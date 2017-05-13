@@ -736,7 +736,7 @@ testSelector = $('div').hover(testCallbackEventObject);
 //keydown(handler: (eventObject: JQueryKeyEventObject) => any): JQuery;
 testSelector = $('div').keydown(testCallbackKeyEventObject);
 
-//keydown(eventData?: any, handler?: (eventObject: JQueryKeyEventObject) => any): JQuery;
+//keydown(eventData: any, handler: (eventObject: JQueryKeyEventObject) => any): JQuery;
 testSelector = $('div').keydown({}, testCallbackKeyEventObject);
 
 //keypress(_: void): JQuery;
@@ -745,7 +745,7 @@ testSelector = $('div').keypress();
 //keypress(handler: (eventObject: JQueryKeyEventObject) => any): JQuery;
 testSelector = $('div').keypress(testCallbackKeyEventObject);
 
-//keypress(eventData?: any, handler?: (eventObject: JQueryKeyEventObject) => any): JQuery;
+//keypress(eventData: any, handler: (eventObject: JQueryKeyEventObject) => any): JQuery;
 testSelector = $('div').keypress({}, testCallbackKeyEventObject);
 
 //keyup(_: void): JQuery;
@@ -754,7 +754,7 @@ testSelector = $('div').keyup();
 //keyup(handler: (eventObject: JQueryKeyEventObject) => any): JQuery;
 testSelector = $('div').keyup(testCallbackKeyEventObject);
 
-//keyup(eventData?: any, handler?: (eventObject: JQueryKeyEventObject) => any): JQuery;
+//keyup(eventData: any, handler: (eventObject: JQueryKeyEventObject) => any): JQuery;
 testSelector = $('div').keyup(testCallbackKeyEventObject);
 
 //load(handler: (eventObject: JQueryEventObject) => any): JQuery;

@@ -245,17 +245,17 @@ declare class JQueryCallback {
   /**
    * Disable a callback list from doing anything more.
    */
-  disable(_: void): JQueryCallback;
+  disable(): JQueryCallback;
 
   /**
    * Determine if the callbacks list has been disabled.
    */
-  disabled(_: void): boolean;
+  disabled(): boolean;
 
   /**
    * Remove all of the callbacks from a list.
    */
-  empty(_: void): JQueryCallback;
+  empty(): JQueryCallback;
 
   /**
    * Call all of the callbacks with the given arguments
@@ -267,7 +267,7 @@ declare class JQueryCallback {
   /**
    * Determine if the callbacks have already been called at least once.
    */
-  fired(_: void): boolean;
+  fired(): boolean;
 
   /**
    * Call all callbacks in a list with the given context and arguments.
@@ -287,12 +287,12 @@ declare class JQueryCallback {
   /**
    * Lock a callback list in its current state.
    */
-  lock(_: void): JQueryCallback;
+  lock(): JQueryCallback;
 
   /**
    * Determine if the callbacks list has been locked.
    */
-  locked(_: void): boolean;
+  locked(): boolean;
 
   /**
    * Remove a callback or a collection of callbacks from a callback list.
@@ -347,7 +347,7 @@ declare class JQueryPromise <T> extends JQueryGenericPromise <T> {
   /**
    * Determine the current state of a Deferred object.
    */
-  state(_: void): string;
+  state(): string;
   /**
    * Add handlers to be called when the Deferred object is either resolved or rejected.
    *
@@ -387,7 +387,7 @@ declare class JQueryDeferred <T> extends JQueryGenericPromise <T> {
   /**
    * Determine the current state of a Deferred object.
    */
-  state(_: void): string;
+  state(): string;
   /**
    * Add handlers to be called when the Deferred object is either resolved or rejected.
    *
@@ -2114,7 +2114,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute each time the event is triggered.
    */
-  keydown(eventData?: any, handler?: (eventObject: JQueryKeyEventObject) => any): JQuery;
+  keydown(eventData: any, handler: (eventObject: JQueryKeyEventObject) => any): JQuery;
 
   /**
    * Trigger the "keypress" event on an element.
@@ -2132,7 +2132,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute each time the event is triggered.
    */
-  keypress(eventData?: any, handler?: (eventObject: JQueryKeyEventObject) => any): JQuery;
+  keypress(eventData: any, handler: (eventObject: JQueryKeyEventObject) => any): JQuery;
 
   /**
    * Trigger the "keyup" event on an element.
@@ -2150,7 +2150,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute each time the event is triggered.
    */
-  keyup(eventData?: any, handler?: (eventObject: JQueryKeyEventObject) => any): JQuery;
+  keyup(eventData: any, handler: (eventObject: JQueryKeyEventObject) => any): JQuery;
 
   /**
    * Bind an event handler to the "load" JavaScript event.
