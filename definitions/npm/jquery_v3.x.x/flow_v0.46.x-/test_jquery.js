@@ -44,7 +44,13 @@ $.cookie('string', {p: 0});
 $.cookie(0);
 
 //ajax(settings: JQueryAjaxSettings): JQueryXHR;
-$.ajax({dataType: 'mycustomtype'});
+$.ajax({
+	url: 'url',
+	data: {id: 3},
+	success: (data) => {
+		console.log(data);
+	}
+});
 
 //ajax(url: string, settings?: JQueryAjaxSettings): JQueryXHR;
 $.ajax('url');
