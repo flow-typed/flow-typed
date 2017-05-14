@@ -11,7 +11,7 @@ import {
   withRouter,
   matchPath,
 } from 'react-router';
-import type { Location, Match } from 'react-router';
+import type { Location, Match, ContextRouter } from 'react-router';
 
 // Location
 var locationOK: Location = {
@@ -119,6 +119,23 @@ const FooWithRouterError = withRouter(Foo);
 // $ExpectError
 const BarWithRouterError = withRouter(Bar);
 <BarWithRouterError name={3} />;
+
+// Test ContextRouter as props
+type WithRouterProps = ContextRouter & {
+  name: string,
+};
+
+// $ExpectError
+const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
+  // Wrong arguments here, error will bubble up to the component declaration
+  history.push(['bla']);
+  return (
+    <div>
+      {name}
+    </div>
+  );
+};
+
 
 // matchPath
 const match: null | Match = matchPath('/the/pathname', '/the/:dynamicId', {
