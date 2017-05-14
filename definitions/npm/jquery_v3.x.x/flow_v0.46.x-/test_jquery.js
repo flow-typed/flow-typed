@@ -53,7 +53,9 @@ $.ajax({
 });
 
 //ajax(url: string, settings?: JQueryAjaxSettings): JQueryXHR;
-$.ajax('url');
+$.ajax('url').done((data) => {
+	console.log(data);
+});
 
 //ajaxPrefilter(dataTypes: string, handler: (opts: any, originalOpts: JQueryAjaxSettings, jqXHR: JQueryXHR) => any): void;
 $.ajaxPrefilter('text/html', function (options) {

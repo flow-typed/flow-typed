@@ -223,6 +223,8 @@ declare class JQueryXHR {
    * A function to be called if the request fails.
    */
   error(xhr: JQueryXHR, textStatus: string, errorThrown: string): void;
+  done <R> (doneCallback: (data: any, textStatus: string, xhr: JQueryXHR) => R): JQueryPromise <R>;
+  fail <R> (failCallback: (xhr: JQueryXHR, textStatus: string, errorThrown: string) => void): void;
 }
 
 /**
