@@ -1973,7 +1973,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute each time the event is triggered.
    */
-  blur(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+  blur(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 
   /**
    * Trigger the "change" event on an element.
@@ -1991,7 +1991,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute each time the event is triggered.
    */
-  change(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+  change(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 
   /**
    * Trigger the "click" event on an element.
@@ -2009,7 +2009,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute each time the event is triggered.
    */
-  click(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+  click(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 
   /**
    * Trigger the "dblclick" event on an element.
@@ -2027,7 +2027,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute each time the event is triggered.
    */
-  dblclick(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+  dblclick(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 
   delegate(selector: any, eventType: string, handler: (eventObject: JQueryEventObject) => any): JQuery;
   delegate(selector: any, eventType: string, eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
@@ -2048,7 +2048,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute each time the event is triggered.
    */
-  focus(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+  focus(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 
   /**
    * Trigger the "focusin" event on an element.
@@ -2166,7 +2166,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute when the event is triggered.
    */
-  load(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+  load(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 
   /**
    * Trigger the "mousedown" event on an element.
@@ -2515,7 +2515,7 @@ declare class JQuery {
    * @param eventData An object containing data that will be passed to the event handler.
    * @param handler A function to execute each time the event is triggered.
    */
-  submit(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+  submit(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 
   /**
    * Execute all handlers and behaviors attached to the matched elements for the given event type.
@@ -2607,7 +2607,7 @@ declare class JQuery {
    * @param eventData A plain object of data that will be passed to the event handler.
    * @param handler A function to execute when the event is triggered.
    */
-  unload(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+  unload(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 
   /**
    * The DOM node context originally passed to jQuery(); if none was passed then context will likely be the document. (DEPRECATED from v1.10: void;
