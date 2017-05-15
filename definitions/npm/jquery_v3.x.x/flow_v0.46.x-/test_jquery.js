@@ -672,7 +672,7 @@ testSelector = $('div').blur();
 //blur(handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').blur(testCallbackEventObject);
 
-//blur(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+//blur(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').blur({}, testCallbackEventObject);
 
 //change(_: void): JQuery;
@@ -681,7 +681,7 @@ testSelector = $('div').change();
 //change(handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').change(testCallbackEventObject);
 
-//change(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+//change(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').change({}, testCallbackEventObject);
 
 //click(_: void): JQuery;
@@ -690,7 +690,7 @@ testSelector = $('div').click();
 //click(handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').click(testCallbackEventObject);
 
-//click(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+//click(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').click({}, testCallbackEventObject);
 
 //dblclick(_: void): JQuery;
@@ -699,7 +699,7 @@ testSelector = $('div').dblclick();
 //dblclick(handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').dblclick(testCallbackEventObject);
 
-//dblclick(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+//dblclick(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').dblclick({}, testCallbackEventObject);
 
 //delegate(selector: any, eventType: string, handler: (eventObject: JQueryEventObject) => any): JQuery;
@@ -714,7 +714,7 @@ testSelector = $('div').focus();
 //focus(handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').focus(testCallbackEventObject);
 
-//focus(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+//focus(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').focus({}, testCallbackEventObject);
 
 //focusin(_: void): JQuery;
@@ -768,7 +768,7 @@ testSelector = $('div').keyup(testCallbackKeyEventObject);
 //load(handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').load(testCallbackEventObject);
 
-//load(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+//load(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').load({}, testCallbackEventObject);
 
 //mousedown(_: void): JQuery;
@@ -924,7 +924,7 @@ testSelector = $('div').submit();
 //submit(handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').submit(testCallbackEventObject);
 
-//submit(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+//submit(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').submit({}, testCallbackEventObject);
 
 //trigger(eventType: string, extraParameters?: any[] | Object): JQuery;
@@ -963,7 +963,7 @@ testSelector = $('div').undelegate('namespace');
 //unload(handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').unload(testCallbackEventObject);
 
-//unload(eventData?: any, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+//unload(eventData: any, handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').unload({}, testCallbackEventObject);
 
 //error(handler: (eventObject: JQueryEventObject) => any): JQuery;
