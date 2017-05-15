@@ -2302,10 +2302,16 @@ declare class JQuery {
    * Remove an event handler.
    *
    * @param events One or more space-separated event types and optional namespaces, or just namespaces, such as "click", "keydown.myPlugin", or ".myPlugin".
+   */
+  off(events: string): JQuery;
+  /**
+   * Remove an event handler.
+   *
+   * @param events One or more space-separated event types and optional namespaces, or just namespaces, such as "click", "keydown.myPlugin", or ".myPlugin".
    * @param selector A selector which should match the one originally passed to .on() when attaching event handlers.
    * @param handler A handler function previous: anyly attached for the event(s), or the special value false.
    */
-  off(events: string, selector?: string, handler?: (eventObject: JQueryEventObject) => any): JQuery;
+  off(events: string, selector: string, handler: (eventObject: JQueryEventObject) => any): JQuery;
   /**
    * Remove an event handler.
    *

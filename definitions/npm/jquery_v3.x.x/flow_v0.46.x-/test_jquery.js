@@ -837,6 +837,9 @@ testSelector = $('div').mouseup({}, testCallbackMouseEventObject);
 //off(_: void): JQuery;
 testSelector = $('div').off();
 
+//off(events: string): JQuery;
+testSelector = $('div').off('click');
+
 //off(events: string, selector?: string, handler?: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').off('click', 'p', testCallbackEventObject);
 
