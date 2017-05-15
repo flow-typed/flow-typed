@@ -96,8 +96,8 @@ declare class rxjs$Observable<+T> {
   ): rxjs$Observable<T>;
 
   static fromEventPattern(
-    addHandler: (handler: () => void) => void,
-    removeHandler: (handler: () => void) => void,
+    addHandler: (handler: (item: T) => void) => void,
+    removeHandler: (handler: (item: T) => void) => void,
     selector?: () => T,
   ): rxjs$Observable<T>;
 
