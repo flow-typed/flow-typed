@@ -313,7 +313,49 @@ timesNums = _.times(5, function(i: number) { return JSON.stringify(i); });
 _.flatMap([1, 2, 3], (n): number[] => [n, n]);
 _.flatMap({a: 1, b: 2}, n => [n, n]);
 
-// Function helpers
+/**
+ * Function helpers.
+ */
 
-const plusOne = x => x + 1;
-const afteredPlusOne: number => number | void = _.after(3, plusOne);
+function example(n: number, msg: string): number {
+  console.log(msg);
+  return n + 1;
+}
+
+/**
+ * _.after
+ */
+const afteredExample = _.after(3, example);
+// $ExpectError number This type is incompatible with string
+var answer: string = afteredExample(123, "msg");
+// $ExpectError undefined This type is incompatible with string
+var answer: string = afteredExample(123, "msg");
+
+/**
+ * _.before
+ */
+const beforedExample = _.before(3, example);
+// $ExpectError number This type is incompatible with string
+var answer: string = beforedExample(123, "msg");
+// $ExpectError undefined This type is incompatible with string
+var answer: string = beforedExample(123, "msg");
+
+/**
+ * _.debounce
+ */
+(_.debounce(example): (number, string) => number);
+
+/**
+ * _.memoize
+ */
+(_.memoize(example): (number, string) => number);
+
+/**
+ * _.once
+ */
+(_.once(example): (number, string) => number);
+
+/**
+ * _.throttle
+ */
+(_.throttle(example): (number, string) => number);
