@@ -90,12 +90,12 @@ type JestPromiseType = {
    * Use rejects to unwrap the reason of a rejected promise so any other
    * matcher can be chained. If the promise is fulfilled the assertion fails.
    */
-  rejects(): JestExpectType,
+  rejects: JestExpectType,
   /**
    * Use resolves to unwrap the value of a fulfilled promise so any other
    * matcher can be chained. If the promise is rejected the assertion fails.
    */
-  resolves(): JestExpectType
+  resolves: JestExpectType
 };
 
 type JestExpectType = {
