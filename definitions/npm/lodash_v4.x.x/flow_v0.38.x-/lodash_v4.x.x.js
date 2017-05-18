@@ -476,7 +476,7 @@ declare module 'lodash' {
     methodOf(object?: ?Object, ...args?: Array<any>): Function;
     mixin<T: Function|Object>(object?: T, source: Object, options?: { chain: bool }): T;
     noConflict(): Lodash;
-    noop(): void;
+    noop(...args: Array<mixed>): void;
     nthArg(n?: number): Function;
     over(...iteratees: Array<Function>): Function;
     over(iteratees: Array<Function>): Function;
