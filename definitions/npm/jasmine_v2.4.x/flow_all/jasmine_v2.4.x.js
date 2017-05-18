@@ -61,7 +61,7 @@ type JasmineClockType = {
 }
 
 declare var jasmine: {
-  createSpy(name: string): JasmineSpyType;
+  createSpy(name?: string): JasmineSpyType;
   any(val: mixed): void;
   anything(): void;
   objectContaining(val: Object): void;
