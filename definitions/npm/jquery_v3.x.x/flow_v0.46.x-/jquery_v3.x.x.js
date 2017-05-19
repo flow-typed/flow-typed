@@ -656,7 +656,6 @@ declare class JQueryEasingFunctions {
  * Static members of jQuery (those on $ and jQuery themselves)
  */
 declare class JQueryStatic {
-  cookie(key: string, value?: any): string;
   /**
    * Perform an asynchronous HTTP (Ajax: any) request.
    *
