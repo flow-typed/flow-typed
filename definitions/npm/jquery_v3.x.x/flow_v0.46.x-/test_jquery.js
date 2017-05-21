@@ -35,7 +35,6 @@ let testCallbackMouseEventObject = function (eventObject: JQueryMouseEventObject
  * Static members of jQuery (those on $ and jQuery themselves)
  */
 
-//cookie(key: string, value?: any): string;
 testString = $.cookie('string');
 // $ExpectError
 testNumber = $.cookie('string');
