@@ -78,10 +78,13 @@ export async function setLocalConfig(
 export async function getDiff() {
   const gitPath = await getGitPath();
   try {
-    const {stdout:commit} = await child_process.spawnP(
+    let {stdout:commit} = await child_process.spawnP(
       gitPath,
       ['merge-base', 'origin/master', 'HEAD'],
     );
+    // Remove trailing spaces and new lines
+    commit = commit.replace(/^\s+|\s+$/g, '');
+
     const {stdout} = await child_process.spawnP(
       gitPath,
       ['diff', '--name-only', commit.replace('\n','')],
