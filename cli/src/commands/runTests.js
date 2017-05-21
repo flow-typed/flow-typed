@@ -56,7 +56,6 @@ async function getTestGroups(
   let libDefs = await getLibDefs(repoDirPath);
   if (onlyChanged) {
     const diff = await getDiff();
-    console.log(diff);
     let changedDefs;
     // $FlowFixMe
     const baseDiff: string[] = diff
