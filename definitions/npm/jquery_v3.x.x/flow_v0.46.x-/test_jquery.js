@@ -1,13 +1,11 @@
 /** @flow */
 /* eslint-disable flowtype/no-weak-types */
 
-
 /********************************************************************************
  * Imports
  */
 
 import $ from 'jquery';
-
 
 /********************************************************************************
  * Global variables
@@ -26,92 +24,92 @@ let testSelector: JQuery = $('div');
 let testCoordinates: JQueryCoordinates;
 let testEventObject: JQueryEventObject;
 let testAnimationOptions: JQueryAnimationOptions;
-let testCallbackEventObject = function (eventObject: JQueryEventObject) {return false};
-let testCallbackKeyEventObject = function (eventObject: JQueryKeyEventObject) {return false};
-let testCallbackMouseEventObject = function (eventObject: JQueryMouseEventObject) {return false};
-
+let testCallbackEventObject = function(eventObject: JQueryEventObject) {
+  return false;
+};
+let testCallbackKeyEventObject = function(eventObject: JQueryKeyEventObject) {
+  return false;
+};
+let testCallbackMouseEventObject = function(
+  eventObject: JQueryMouseEventObject
+) {
+  return false;
+};
 
 /********************************************************************************
  * Static members of jQuery (those on $ and jQuery themselves)
  */
 
-testString = $.cookie('string');
-// $ExpectError
-testNumber = $.cookie('string');
-$.cookie('string', {p: 0});
-// $ExpectError
-$.cookie(0);
-
 //ajax(settings: JQueryAjaxSettings): JQueryXHR;
 $.ajax({
-	url: 'url',
-	data: {id: 3},
-	success: (data) => {
-		console.log(data);
-	}
+  url: 'url',
+  data: { id: 3 },
+  success: data => {
+    console.log(data);
+  }
 });
 
 //ajax(url: string, settings?: JQueryAjaxSettings): JQueryXHR;
-$.ajax('url').done((data) => {
-	console.log(data);
+$.ajax('url').done(data => {
+  console.log(data);
 });
 
 //ajaxPrefilter(dataTypes: string, handler: (opts: any, originalOpts: JQueryAjaxSettings, jqXHR: JQueryXHR) => any): void;
-$.ajaxPrefilter('text/html', function (options) {
-	if (options.crossDomain) {
-		options.crossDomain = false;
-	}
+$.ajaxPrefilter('text/html', function(options) {
+  if (options.crossDomain) {
+    options.crossDomain = false;
+  }
 });
 
 //ajaxPrefilter(handler: (opts: any, originalOpts: JQueryAjaxSettings, jqXHR: JQueryXHR) => any): void;
-$.ajaxPrefilter(function (options) {
-	if (options.crossDomain) {
-		options.crossDomain = false;
-	}
+$.ajaxPrefilter(function(options) {
+  if (options.crossDomain) {
+    options.crossDomain = false;
+  }
 });
 
 //ajaxSetup(options: JQueryAjaxSettings): void;
 $.ajaxSetup({
-	url: '/xmlhttp/',
-	global: false,
-	type: 'POST'
+  url: '/xmlhttp/',
+  global: false,
+  type: 'POST'
 });
 
 //get(url: string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any, dataType?: string): JQueryXHR;
-$.get('ajax/test.html', function (data) {
-	alert('Load was performed.');
+$.get('ajax/test.html', function(data) {
+  alert('Load was performed.');
 });
 
 //get(url: string, data?: Object | string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any, dataType?: string): JQueryXHR;
-$.get('test.cgi', {name: 'John', time: '2pm'}).then(function (data) {
-	alert('Data Loaded: ' + data);
+$.get('test.cgi', { name: 'John', time: '2pm' }).then(function(data) {
+  alert('Data Loaded: ' + data);
 });
 
 //getJSON(url: string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any): JQueryXHR;
-$.getJSON('ajax/test.json', function (data) {
-	alert('Load was performed.');
+$.getJSON('ajax/test.json', function(data) {
+  alert('Load was performed.');
 });
 
 //getJSON(url: string, data?: Object | string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any): JQueryXHR;
-$.getJSON('ajax/test.json', {name: 'John', time: '2pm'}, function (data) {
-	alert('Load was performed.');
+$.getJSON('ajax/test.json', { name: 'John', time: '2pm' }, function(data) {
+  alert('Load was performed.');
 });
 
 //getScript(url: string, success?: (script: string, textStatus: string, jqXHR: JQueryXHR) => any): JQueryXHR;
-$.getScript('ajax/test.js', function (data) {
-	alert('Load was performed.');
+$.getScript('ajax/test.js', function(data) {
+  alert('Load was performed.');
 });
 
 //param: JQueryParam;
 
 //post(url: string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any, dataType?: string): JQueryXHR;
-$.post('ajax/test.html', function (data) {
-	$('.result').html(data);
+$.post('ajax/test.html', function(data) {
+  $('.result').html(data);
 });
 
 //post(url: string, data?: Object | string, success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any, dataType?: string): JQueryXHR;
-$.post('ajax/test.html', {name: 'John', time: '2pm'}, function (data) {
-	$('.result').html(data);
+$.post('ajax/test.html', { name: 'John', time: '2pm' }, function(data) {
+  $('.result').html(data);
 });
 
 //Callbacks(flags?: string): JQueryCallback;
@@ -132,7 +130,7 @@ testSelector = $(testElement);
 testSelector = $(testElements);
 
 //(callback: (jQueryAlias?: JQueryStatic) => any): JQuery;
-testSelector = $(function () {});
+testSelector = $(function() {});
 
 //(object: {}): JQuery;
 testSelector = $({});
@@ -162,7 +160,7 @@ $.when($.ajax('test.aspx')).then(function (data) {
 //cssNumber: any;
 
 //data <T> (element: Element, key: string, value: T): T;
-$.data($('div')[0], 'test', {first: 16, last: 'pizza!'});
+$.data($('div')[0], 'test', { first: 16, last: 'pizza!' });
 
 //data(element: Element, key: string): any;
 console.log($.data($('div')[0], 'test'));
@@ -197,19 +195,19 @@ $.removeData($('div')[0], 'test1');
 //proxy(fnction: (...args: any[]) => any, context: Object, ...additionalArguments: any[]): any;
 //proxy(context: Object, name: string, ...additionalArguments: any[]): any;
 const testProxyContext = {
-	name: 'John',
-	test: function() {
-		$('#log').append(this.name);
-		$('#test').off('click', testProxyContext.test);
-	}
+  name: 'John',
+  test: function() {
+    $('#log').append(this.name);
+    $('#test').off('click', testProxyContext.test);
+  }
 };
 $('#test').on('click', $.proxy(testProxyContext, 'test'));
 
 //Event: JQueryEventConstructor;
 
 //error(message: any): JQuery;
-$('#book').error(function () {
-	alert('Handler for .error() called.');
+$('#book').error(function() {
+  alert('Handler for .error() called.');
 });
 
 //expr: any;
@@ -225,22 +223,32 @@ testBoolean = $.contains(testElement, testElement);
 
 //each <T> (collection: T[], callback: (indexInArray: number, valueOfElement: T) => any): any;
 //each(collection: any, callback: (indexInArray: any, valueOfElement: any) => any): any;
-$.each([52, 97], function (index: number, value: number) {
-	console.log(index + ': ' + value);
+$.each([52, 97], function(index: number, value: number) {
+  console.log(index + ': ' + value);
 });
 
 //extend(target: any, object1?: any, ...objectN: any[]): any;
-testObject = $.extend({apple: 0, banana: {weight: 52, price: 100}, cherry: 97}, {banana: {price: 200}, durian: 100});
+testObject = $.extend(
+  { apple: 0, banana: { weight: 52, price: 100 }, cherry: 97 },
+  { banana: { price: 200 }, durian: 100 }
+);
 
 //extend(deep: boolean, target: any, object1?: any, ...objectN: any[]): any;
-testObject = $.extend(true, {apple: 0, banana: {weight: 52, price: 100}, cherry: 97}, {banana: {price: 200}, durian: 100});
+testObject = $.extend(
+  true,
+  { apple: 0, banana: { weight: 52, price: 100 }, cherry: 97 },
+  { banana: { price: 200 }, durian: 100 }
+);
 
 //globalEval(code: string): any;
 $.globalEval('var newVar = true;');
 
 //grep <T> (array: T[], func: (elementOfArray: T, indexInArray: number) => boolean, invert?: boolean): T[];
-testArray = $.grep([1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1], function (value: number, index: number) {
-	return (value !== 5 && index > 4);
+testArray = $.grep([1, 9, 3, 8, 6, 1, 5, 9, 4, 7, 3, 8, 6, 9, 1], function(
+  value: number,
+  index: number
+) {
+  return value !== 5 && index > 4;
 });
 
 //inArray <T> (value: T, array: T[], fromIndex?: number): number;
@@ -272,8 +280,11 @@ testArray = $.makeArray($('li'));
 
 //map < T, U > (array: T[], callback: (elementOfArray: T, indexInArray: number) => U): U[];
 //map(arrayOrObject: any, callback: (value: any, indexOrKey: any) => any): any;
-testArray = $.map([ 'a', 'b', 'c', 'd', 'e' ], function (value: string, index: number) {
-	return (value.toUpperCase() + index);
+testArray = $.map(['a', 'b', 'c', 'd', 'e'], function(
+  value: string,
+  index: number
+) {
+  return value.toUpperCase() + index;
 });
 
 //merge <T> (first: T[], second: T[]): T[];
@@ -289,7 +300,9 @@ testNumber = $.now();
 testObject = $.parseJSON('{id: 7}');
 
 //parseXML(data: string): any;
-testObject = $.parseXML('<rss version="2.0"><channel><title>RSS Title</title></channel></rss>');
+testObject = $.parseXML(
+  '<rss version="2.0"><channel><title>RSS Title</title></channel></rss>'
+);
 
 //trim(str: string): string;
 testString = $.trim(testString);
@@ -302,34 +315,35 @@ const testUniqueDivs: Element[] = $.unique($('div').get());
 
 //parseHTML(data: string, context?: HTMLElement, keepScripts?: boolean): any[];
 //parseHTML(data: string, context?: Document, keepScripts?: boolean): any[];
-const testHtmlNodes: Element[] = $.parseHTML('hello, <b>my name is</b> jQuery.');
-
+const testHtmlNodes: Element[] = $.parseHTML(
+  'hello, <b>my name is</b> jQuery.'
+);
 
 /********************************************************************************
  * The jQuery instance members
  */
 
 //ajaxComplete(handler: (event: JQueryEventObject, XMLHttpRequest: XMLHttpRequest, ajaxOptions: any) => any): JQuery;
-testSelector = testSelector.ajaxComplete(function () {});
+testSelector = testSelector.ajaxComplete(function() {});
 
 //ajaxError(handler: (event: JQueryEventObject, jqXHR: JQueryXHR, ajaxSettings: JQueryAjaxSettings, thrownError: any) => any): JQuery;
-testSelector = testSelector.ajaxError(function () {});
+testSelector = testSelector.ajaxError(function() {});
 
 //ajaxSend(handler: (event: JQueryEventObject, jqXHR: JQueryXHR, ajaxOptions: JQueryAjaxSettings) => any): JQuery;
-testSelector = testSelector.ajaxSend(function () {});
+testSelector = testSelector.ajaxSend(function() {});
 
 //ajaxStart(handler: () => any): JQuery;
-testSelector = testSelector.ajaxStart(function () {});
+testSelector = testSelector.ajaxStart(function() {});
 
 //ajaxStop(handler: () => any): JQuery;
-testSelector = testSelector.ajaxStop(function () {});
+testSelector = testSelector.ajaxStop(function() {});
 
 //ajaxSuccess(handler: (event: JQueryEventObject, XMLHttpRequest: XMLHttpRequest, ajaxOptions: JQueryAjaxSettings) => any): JQuery;
-testSelector = testSelector.ajaxSuccess(function () {});
+testSelector = testSelector.ajaxSuccess(function() {});
 
 //load(url: string, data?: string | Object, complete?: (responseText: string, textStatus: string, XMLHttpRequest: XMLHttpRequest) => any): JQuery;
-testSelector = testSelector.load('ajax/test.html', function () {
-	alert('Load was performed.');
+testSelector = testSelector.load('ajax/test.html', function() {
+  alert('Load was performed.');
 });
 
 //serialize(_: void): string;
@@ -339,8 +353,8 @@ testString = testSelector.serialize();
 const testArrayElements: JQuerySerializeArrayElement[] = testSelector.serializeArray();
 
 //addClass(func: (index: number, className: string) => string): JQuery;
-testSelector.addClass(function (index) {
-	return 'item-' + index;
+testSelector.addClass(function(index) {
+  return 'item-' + index;
 });
 
 //addClass(className: string): JQuery;
@@ -350,13 +364,15 @@ testSelector = testSelector.addClass('class');
 testSelector = testSelector.addBack('div');
 
 //attr(attributeName: string, func: (index: number, attr: string) => string | number): JQuery;
-testSelector = testSelector.attr('href', function () {return 'ajax/test.html'});
+testSelector = testSelector.attr('href', function() {
+  return 'ajax/test.html';
+});
 
 //attr(attributeName: string, value: string | number): JQuery;
 testSelector = testSelector.attr('href', 'ajax/test.html');
 
 //attr(attributes: Object): JQuery;
-testSelector = testSelector.attr({href: 'ajax/test.html'});
+testSelector = testSelector.attr({ href: 'ajax/test.html' });
 
 //attr(attributeName: string): string;
 testString = testSelector.attr('href');
@@ -365,7 +381,9 @@ testString = testSelector.attr('href');
 testBoolean = testSelector.hasClass('class');
 
 //html(func: (index: number, oldhtml: string) => string): JQuery;
-testSelector = testSelector.html(function () {return '<div>'});
+testSelector = testSelector.html(function() {
+  return '<div>';
+});
 
 //html(htmlString: string): JQuery;
 testSelector = testSelector.html('<div>');
@@ -380,11 +398,11 @@ testString = testSelector.prop('href');
 testSelector = testSelector.prop('href', 'ajax/test.html');
 
 //prop(properties: Object): JQuery;
-testSelector = testSelector.prop({href: 'ajax/test.html'});
+testSelector = testSelector.prop({ href: 'ajax/test.html' });
 
 //prop(propertyName: string, func: (index: number, oldPropertyValue: any) => any): JQuery;
-testSelector = $('input').prop('checked', function (i, val) {
-	return !val;
+testSelector = $('input').prop('checked', function(i, val) {
+  return !val;
 });
 
 //removeAttr(attributeName: string): JQuery;
@@ -394,8 +412,8 @@ testString = testSelector.removeAttr('href');
 testString = testSelector.removeClass('class');
 
 //removeClass(func: (index: number, className: string) => string): JQuery;
-testSelector = testSelector.removeClass(function () {
-	return $(this).prev().attr('class');
+testSelector = testSelector.removeClass(function() {
+  return $(this).prev().attr('class');
 });
 
 //removeProp(propertyName: string): JQuery;
@@ -408,8 +426,8 @@ testSelector = testSelector.toggleClass('class');
 testSelector = testSelector.toggleClass(true);
 
 //toggleClass(func: (index: number, className: string, swtch: boolean) => string, swtch?: boolean): JQuery;
-testSelector = $('div').toggleClass(function () {
-	return $(this).parent().is('.bar') ? 'happy' : '';
+testSelector = $('div').toggleClass(function() {
+  return $(this).parent().is('.bar') ? 'happy' : '';
 });
 
 //val(_: void): any;
@@ -419,20 +437,20 @@ testString = testSelector.val();
 testSelector = testSelector.val('value');
 
 //val(func: (index: number, value: string) => string): JQuery;
-testSelector = $('input').val(function (index, value) {
-	return value.trim();
+testSelector = $('input').val(function(index, value) {
+  return value.trim();
 });
 
 //css(propertyName: string, value: (index: number, value: string) => string | number): JQuery;
-testSelector = $('div').css('width', function (index) {
-	return index * 50;
+testSelector = $('div').css('width', function(index) {
+  return index * 50;
 });
 
 //css(propertyName: string, value: string | number): JQuery;
 testSelector = $('div').css('width', 50);
 
 //css(properties: Object): JQuery;
-testSelector = $('div').css({width: 50});
+testSelector = $('div').css({ width: 50 });
 
 //css(propertyName: string): string;
 testString = $('div').css('width');
@@ -444,8 +462,8 @@ testNumber = $('div').height();
 testSelector = $('div').height(50);
 
 //height(func: (index: number, height: number) => number | string): JQuery;
-testSelector = $('div').height(function (index) {
-	return index * 50;
+testSelector = $('div').height(function(index) {
+  return index * 50;
 });
 
 //innerHeight(_: void): number;
@@ -467,8 +485,8 @@ testCoordinates = $('div').offset();
 testSelector = $('div').offset(testCoordinates);
 
 //offset(func: (index: number, coords: JQueryCoordinates) => JQueryCoordinates): JQuery;
-testSelector = $('div').offset(function () {
-	return testCoordinates;
+testSelector = $('div').offset(function() {
+  return testCoordinates;
 });
 
 //outerHeight(includeMargin?: boolean): number;
@@ -505,18 +523,18 @@ testNumber = $('div').width();
 testSelector = $('div').width(50);
 
 //width(func: (index: number, width: number) => number | string): JQuery;
-testSelector = $('div').width(function (index) {
-	return index * 50;
+testSelector = $('div').width(function(index) {
+  return index * 50;
 });
 
 //clearQueue(queueName?: string): JQuery;
 testSelector = $('div').clearQueue('queue');
 
 //data(key: string, value: any): JQuery;
-testSelector = $('div').data('test', {first: 16, last: 'pizza!'});
+testSelector = $('div').data('test', { first: 16, last: 'pizza!' });
 
 //data(obj: {[key: string]: any;}): JQuery;
-testSelector = $('div').data({key: 'value'});
+testSelector = $('div').data({ key: 'value' });
 
 //data(key: string, _: void): any;
 $('div').data('key');
@@ -849,7 +867,7 @@ testSelector = $('div').off('click', 'p', testCallbackEventObject);
 testSelector = $('div').off('click', testCallbackEventObject);
 
 //off(events: {[key: string]: any;}, selector?: string): JQuery;
-testSelector = $('div').off({'click': testCallbackEventObject}, 'p');
+testSelector = $('div').off({ click: testCallbackEventObject }, 'p');
 
 //on(events: string, handler: (eventObject: JQueryEventObject, ...args: any[]) => any): JQuery;
 testSelector = $('div').on('click', testCallbackEventObject);
@@ -864,10 +882,10 @@ testSelector = $('div').on('click', 'p', {}, testCallbackEventObject);
 testSelector = $('div').on('click', {}, testCallbackEventObject);
 
 //on(events: {[key: string]: any;}, selector?: string, data?: any): JQuery;
-testSelector = $('div').on({'click': testCallbackEventObject}, 'p', {});
+testSelector = $('div').on({ click: testCallbackEventObject }, 'p', {});
 
 //on(events: {[key: string]: any;}, data?: any): JQuery;
-testSelector = $('div').on({'click': testCallbackEventObject}, {});
+testSelector = $('div').on({ click: testCallbackEventObject }, {});
 
 //one(events: string, handler: (eventObject: JQueryEventObject) => any): JQuery;
 testSelector = $('div').one('click', testCallbackEventObject);
@@ -882,10 +900,10 @@ testSelector = $('div').one('click', 'p', {}, testCallbackEventObject);
 testSelector = $('div').one('click', {}, testCallbackEventObject);
 
 //one(events: {[key: string]: any;}, selector?: string, data?: any): JQuery;
-testSelector = $('div').one({'click': testCallbackEventObject}, 'p', {});
+testSelector = $('div').one({ click: testCallbackEventObject }, 'p', {});
 
 //one(events: {[key: string]: any;}, data?: any): JQuery;
-testSelector = $('div').one({'click': testCallbackEventObject}, {});
+testSelector = $('div').one({ click: testCallbackEventObject }, {});
 
 //ready(handler: (jQueryAlias?: JQueryStatic) => any): JQuery;
 testSelector = $('div').ready(() => false);
@@ -1068,7 +1086,7 @@ testSelector = $('div').wrapInner('div');
 testSelector = $('div').wrapInner(() => 'div');
 
 //each(func: (index: number, elem: Element) => any): JQuery;
-testSelector = $('div').each((index) => index);
+testSelector = $('div').each(index => index);
 
 //get(index: number): HTMLElement;
 testHTMLElement = $('div').get(0);
@@ -1134,7 +1152,7 @@ testSelector = $('div').eq(1);
 testSelector = $('div').filter('p');
 
 //filter(func: (index: number, element: Element) => any): JQuery;
-testSelector = $('div').filter((index) => index);
+testSelector = $('div').filter(index => index);
 
 //filter(element: Element): JQuery;
 testSelector = $('div').filter(testElement);
@@ -1164,7 +1182,7 @@ testSelector = $('div').has(testElement);
 testBoolean = $('div').is('p');
 
 //is(func: (index: number, element: Element) => boolean): boolean;
-testBoolean = $('div').is((index) => index > 0);
+testBoolean = $('div').is(index => index > 0);
 
 //is(selection: JQuery): boolean;
 testBoolean = $('div').is(testSelector);
@@ -1176,7 +1194,7 @@ testBoolean = $('div').is(testElement);
 testSelector = $('div').last();
 
 //map(callback: (index: number, domElement: Element) => any): JQuery;
-testSelector = $('div').map((index) => index);
+testSelector = $('div').map(index => index);
 
 //next(selector?: string): JQuery;
 testSelector = $('div').next('p');
