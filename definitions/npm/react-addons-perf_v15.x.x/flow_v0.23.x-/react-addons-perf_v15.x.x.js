@@ -1,5 +1,3 @@
-declare type ReactAddonTest$FunctionOrComponentClass = React$Component<any, any, any> | Function;
-
 declare module 'react-addons-perf' {
   declare function start(): void;
   declare function stop(): void;
