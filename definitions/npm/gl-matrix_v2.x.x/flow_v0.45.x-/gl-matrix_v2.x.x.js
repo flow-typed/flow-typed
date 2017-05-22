@@ -1,37 +1,46 @@
-
 declare module 'gl-matrix' {
+  declare type Vec2 = [number, number];
 
-  declare type Vec2 = [ number, number ]
+  declare type Vec3 = [number, number, number];
 
-  declare type  Vec3 = [ number, number, number ]
+  declare type Vec4 = [number, number, number, number];
 
-  declare type Vec4 = [ number, number, number, number ]
+  declare type Quat = [number, number, number, number];
 
-  declare type Quat = [ number, number, number, number ]
+  declare type Mat2d = [number, number, number, number, number, number];
 
-  declare type Mat2d = [
-    number, number, number,
-    number, number, number,
-  ]
-
-  declare type Mat2 = [
-    number, number,
-    number, number,
-  ]
+  declare type Mat2 = [number, number, number, number];
 
   declare type Mat3 = [
-    number, number, number,
-    number, number, number,
-    number, number, number,
-  ]
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number
+  ];
 
   declare type Mat4 = [
-    number, number, number, number,
-    number, number, number, number,
-    number, number, number, number,
-    number, number, number, number,
-  ]
-
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number,
+    number
+  ];
 
   declare var vec2: {
     create(): Vec2,
@@ -72,10 +81,10 @@ declare module 'gl-matrix' {
     transformMat2d(out: Vec2, a: Vec2, m: Mat2d): Vec2,
     transformMat3(out: Vec2, a: Vec2, m: Mat3): Vec2,
     transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2,
-    str(a: Vec2):string,
+    str(a: Vec2): string,
     exactEquals(a: Vec2, b: Vec2): boolean,
-    equals(a: Vec2, b: Vec2): boolean,
-  }
+    equals(a: Vec2, b: Vec2): boolean
+  };
 
   declare var vec3: {
     create(): Vec3,
@@ -120,12 +129,19 @@ declare module 'gl-matrix' {
     rotateX(out: Vec3, a: Vec3, b: Vec3, c: number): Vec3,
     rotateY(out: Vec3, a: Vec3, b: Vec3, c: number): Vec3,
     rotateZ(out: Vec3, a: Vec3, b: Vec3, c: number): Vec3,
-    forEach ( arr: Array< Vec3>, stride: number, offset: number, count: number, fn: ( a: Vec3, arg: T ) => U, arg: T ): Array<U>,
+    forEach<T, U>(
+      arr: Array<Vec3>,
+      stride: number,
+      offset: number,
+      count: number,
+      fn: (a: Vec3, arg: T) => U,
+      arg: T
+    ): Array<U>,
     angle(a: Vec3, b: Vec3): number,
-    str(a: Vec3):string,
+    str(a: Vec3): string,
     exactEquals(a: Vec3, b: Vec3): boolean,
-    equals(a: Vec3, b: Vec3): boolean,
-  }
+    equals(a: Vec3, b: Vec3): boolean
+  };
 
   declare var vec4: {
     create(): Vec4,
@@ -163,10 +179,10 @@ declare module 'gl-matrix' {
     random(out: Vec4, scale?: number): Vec4,
     transformMat4(out: Vec4, a: Vec4, m: Mat4): Vec4,
     transformQuat(out: Vec4, a: Vec4, q: Quat): Vec4,
-    str(a: Vec4):string,
+    str(a: Vec4): string,
     exactEquals(a: Vec4, b: Vec4): boolean,
-    equals(a: Vec4, b: Vec4): boolean,
-  }
+    equals(a: Vec4, b: Vec4): boolean
+  };
 
   declare var quat: {
     create(): Quat,
@@ -199,10 +215,10 @@ declare module 'gl-matrix' {
     sqrLen(a: Quat): number,
     normalize(out: Quat, a: Quat): Quat,
     fromMat3(out: Quat, m: Mat3): Quat,
-    str(a: Quat):string,
+    str(a: Quat): string,
     exactEquals(a: Quat, b: Quat): boolean,
-    equals(a: Quat, b: Quat): boolean,
-  }
+    equals(a: Quat, b: Quat): boolean
+  };
 
   declare var mat2: {
     create(): Mat2,
@@ -230,16 +246,31 @@ declare module 'gl-matrix' {
     exactEquals(a: Mat2, b: Mat2): boolean,
     equals(a: Mat2, b: Mat2): boolean,
     multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2,
-    multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2,
-  }
+    multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2
+  };
 
   declare var mat2d: {
     create(): Mat2d,
     clone(a: Mat2d): Mat2d,
     copy(out: Mat2d, a: Mat2d): Mat2d,
     identity(out: Mat2d): Mat2d,
-    fromValues(a: number, b: number, c: number, d: number, tx: number, ty: number): Mat2d,
-    set(out: Mat2d, a: number, b: number, c: number, d: number, tx: number, ty: number): Mat2d,
+    fromValues(
+      a: number,
+      b: number,
+      c: number,
+      d: number,
+      tx: number,
+      ty: number
+    ): Mat2d,
+    set(
+      out: Mat2d,
+      a: number,
+      b: number,
+      c: number,
+      d: number,
+      tx: number,
+      ty: number
+    ): Mat2d,
     invert(out: Mat2d, a: Mat2d): Mat2d,
     determinant(a: Mat2d): number,
     multiply(out: Mat2d, a: Mat2d, b: Mat2d): Mat2d,
@@ -250,24 +281,45 @@ declare module 'gl-matrix' {
     fromRotation(out: Mat2d, rad: number): Mat2d,
     fromScaling(out: Mat2d, v: Vec2): Mat2d,
     fromTranslation(out: Mat2d, v: Vec2): Mat2d,
-    str(a: Mat2d):string,
-    frob(a: Mat2d): number ,
+    str(a: Mat2d): string,
+    frob(a: Mat2d): number,
     add(out: Mat2d, a: Mat2d, b: Mat2d): Mat2d,
     subtract(out: Mat2d, a: Mat2d, b: Mat2d): Mat2d,
     sub(out: Mat2d, a: Mat2d, b: Mat2d): Mat2d,
     multiplyScalar(out: Mat2d, a: Mat2d, b: number): Mat2d,
     multiplyScalarAndAdd(out: Mat2d, a: Mat2d, b: Mat2d, scale: number): Mat2d,
     exactEquals(a: Mat2d, b: Mat2d): boolean,
-    equals(a: Mat2d, b: Mat2d): boolean,
-  }
+    equals(a: Mat2d, b: Mat2d): boolean
+  };
 
   declare var mat3: {
     create(): Mat3,
     fromMat4(out: Mat3, a: Mat4): Mat3,
     clone(a: Mat3): Mat3,
     copy(out: Mat3, a: Mat3): Mat3,
-    fromValues(m00: number, m01: number, m02: number, m10: number, m11: number, m12: number, m20: number, m21: number, m22: number): Mat3,
-    set(out: Mat3, m00: number, m01: number, m02: number, m10: number, m11: number, m12: number, m20: number, m21: number, m22: number): Mat3,
+    fromValues(
+      m00: number,
+      m01: number,
+      m02: number,
+      m10: number,
+      m11: number,
+      m12: number,
+      m20: number,
+      m21: number,
+      m22: number
+    ): Mat3,
+    set(
+      out: Mat3,
+      m00: number,
+      m01: number,
+      m02: number,
+      m10: number,
+      m11: number,
+      m12: number,
+      m20: number,
+      m21: number,
+      m22: number
+    ): Mat3,
     identity(out: Mat3): Mat3,
     transpose(out: Mat3, a: Mat3): Mat3,
     invert(out: Mat3, a: Mat3): Mat3,
@@ -284,7 +336,7 @@ declare module 'gl-matrix' {
     fromMat2d(out: Mat3, a: Mat2d): Mat3,
     fromQuat(out: Mat3, q: Quat): Mat3,
     normalFromMat4(out: Mat3, a: Mat4): Mat3,
-    str(a: Mat3):string,
+    str(a: Mat3): string,
     frob(a: Mat3): number,
     add(out: Mat3, a: Mat3, b: Mat3): Mat3,
     subtract(out: Mat3, a: Mat3, b: Mat3): Mat3,
@@ -292,15 +344,50 @@ declare module 'gl-matrix' {
     multiplyScalar(out: Mat3, a: Mat3, b: number): Mat3,
     multiplyScalarAndAdd(out: Mat3, a: Mat3, b: Mat3, scale: number): Mat3,
     exactEquals(a: Mat3, b: Mat3): boolean,
-    equals(a: Mat3, b: Mat3): boolean,
-  }
+    equals(a: Mat3, b: Mat3): boolean
+  };
 
   declare var mat4: {
     create(): Mat4,
     clone(a: Mat4): Mat4,
     copy(out: Mat4, a: Mat4): Mat4,
-    fromValues(m00: number, m01: number, m02: number, m03: number, m10: number, m11: number, m12: number, m13: number, m20: number, m21: number, m22: number, m23: number, m30: number, m31: number, m32: number, m33: number): Mat4,
-    set(out: Mat4, m00: number, m01: number, m02: number, m03: number, m10: number, m11: number, m12: number, m13: number, m20: number, m21: number, m22: number, m23: number, m30: number, m31: number, m32: number, m33: number): Mat4,
+    fromValues(
+      m00: number,
+      m01: number,
+      m02: number,
+      m03: number,
+      m10: number,
+      m11: number,
+      m12: number,
+      m13: number,
+      m20: number,
+      m21: number,
+      m22: number,
+      m23: number,
+      m30: number,
+      m31: number,
+      m32: number,
+      m33: number
+    ): Mat4,
+    set(
+      out: Mat4,
+      m00: number,
+      m01: number,
+      m02: number,
+      m03: number,
+      m10: number,
+      m11: number,
+      m12: number,
+      m13: number,
+      m20: number,
+      m21: number,
+      m22: number,
+      m23: number,
+      m30: number,
+      m31: number,
+      m32: number,
+      m33: number
+    ): Mat4,
     identity(out: Mat4): Mat4,
     determinant(a: Mat4): number,
     rotate(out: Mat4, a: Mat4, rad: number, axis: Vec3): Mat4,
@@ -315,14 +402,52 @@ declare module 'gl-matrix' {
     getScaling(out: Vec3, mat: Mat4): Vec3,
     getRotation(out: Quat, mat: Mat4): Quat,
     fromRotationTranslationScale(out: Mat4, q: Quat, v: Vec3, s: Vec3): Mat4,
-    fromRotationTranslationScaleOrigin(out: Mat4, q: Quat, v: Vec3, s: Vec3, o: Vec3): Mat4,
+    fromRotationTranslationScaleOrigin(
+      out: Mat4,
+      q: Quat,
+      v: Vec3,
+      s: Vec3,
+      o: Vec3
+    ): Mat4,
     fromQuat(out: Mat4, q: Quat): Mat4,
-    frustum(out: Mat4, left: number, right: number, bottom: number, top: number, near: number, far: number): Mat4,
-    perspective(out: Mat4, fovy: number, aspect: number, near: number, far: number): Mat4,
-    perspectiveFromFieldOfView(out: Mat4, fov:{ upDegrees: number, downDegrees: number, leftDegrees: number, rightDegrees: number }, near: number, far: number): Mat4,
-    ortho(out: Mat4, left: number, right: number, bottom: number, top: number, near: number, far: number): Mat4,
+    frustum(
+      out: Mat4,
+      left: number,
+      right: number,
+      bottom: number,
+      top: number,
+      near: number,
+      far: number
+    ): Mat4,
+    perspective(
+      out: Mat4,
+      fovy: number,
+      aspect: number,
+      near: number,
+      far: number
+    ): Mat4,
+    perspectiveFromFieldOfView(
+      out: Mat4,
+      fov: {
+        upDegrees: number,
+        downDegrees: number,
+        leftDegrees: number,
+        rightDegrees: number
+      },
+      near: number,
+      far: number
+    ): Mat4,
+    ortho(
+      out: Mat4,
+      left: number,
+      right: number,
+      bottom: number,
+      top: number,
+      near: number,
+      far: number
+    ): Mat4,
     lookAt(out: Mat4, eye: Vec3, center: Vec3, up: Vec3): Mat4,
-    str(a: Mat4):string,
+    str(a: Mat4): string,
     frob(a: Mat4): number,
     add(out: Mat4, a: Mat4, b: Mat4): Mat4,
     subtract(out: Mat4, a: Mat4, b: Mat4): Mat4,
@@ -332,7 +457,6 @@ declare module 'gl-matrix' {
     multiplyScalarAndAdd(out: Mat4, a: Mat4, b: Mat4, scale: number): Mat4,
     exactEquals(a: Mat4, b: Mat4): boolean,
     equals(a: Mat4, b: Mat4): boolean,
-
 
     transpose(out: Mat4, a: Mat4): Mat4,
     invert(out: Mat4, a: Mat4): Mat4,
@@ -353,7 +477,7 @@ declare module 'gl-matrix' {
       scale(out: Mat4, a: Mat4, v: Vec3): Mat4,
       rotateX(out: Mat4, a: Mat4, rad: number): Mat4,
       rotateY(out: Mat4, a: Mat4, rad: number): Mat4,
-      rotateZ(out: Mat4, a: Mat4, rad: number): Mat4,
+      rotateZ(out: Mat4, a: Mat4, rad: number): Mat4
     },
 
     scalar: {
@@ -365,7 +489,7 @@ declare module 'gl-matrix' {
       scale(out: Mat4, a: Mat4, v: Vec3): Mat4,
       rotateX(out: Mat4, a: Mat4, rad: number): Mat4,
       rotateY(out: Mat4, a: Mat4, rad: number): Mat4,
-      rotateZ(out: Mat4, a: Mat4, rad: number): Mat4,
+      rotateZ(out: Mat4, a: Mat4, rad: number): Mat4
     }
-  }
+  };
 }
