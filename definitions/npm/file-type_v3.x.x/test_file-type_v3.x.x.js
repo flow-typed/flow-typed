@@ -1,7 +1,7 @@
 import fileType from 'file-type';
 
 const buffer = new Buffer(1);
-const array = new Uint8Array();
+const array = new Uint8Array(buffer);
 
 const type1 = fileType(buffer);
 if (type1) {

@@ -312,3 +312,14 @@ timesNums = _.times(5, function(i: number) { return JSON.stringify(i); });
 // https://github.com/facebook/flow/issues/1948
 _.flatMap([1, 2, 3], (n): number[] => [n, n]);
 _.flatMap({a: 1, b: 2}, n => [n, n]);
+
+/**
+ * _.noop
+ */
+_.noop();
+_.noop(1);
+_.noop('a', 2, [], null);
+(_.noop: (string) => void);
+(_.noop: (number, string) => void);
+// $ExpectError functions are contravariant in return types
+(_.noop: (string) => string);
