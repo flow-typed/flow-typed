@@ -109,8 +109,8 @@ declare module 'radium' {
     (elem: React$Element<any>): React$Element<any>;
     (config: RadiumConfig): ConfiguredRadium;
     Plugins: Object;
-    Style: React$Element<any>;
-    StyleRoot: React$Element<any>;
+    Style: ClassComponent<any, any, any>;
+    StyleRoot: ClassComponent<any, any, any>;
     getState(state: Object, elementKey: string, value: ':active' | ':hover' | ':focus'): boolean;
     keyframes(animationObject: Object, name?: string): string;
   }
