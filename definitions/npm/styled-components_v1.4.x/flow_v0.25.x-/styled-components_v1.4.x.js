@@ -188,6 +188,7 @@ declare module 'styled-components/native' {
   declare module.exports: {
     css: (strings: Array<string>, ...interpolations: Array<Interpolation>) => Array<Interpolation>,
     withTheme: (component: Component) => React$Component<*, ThemeProviderProps, *>,
+    keyframes: (strings: Array<string>, ...interpolations: Array<Interpolation>) => string,
     ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
 
     (baseComponent: Component): StyledComponent,

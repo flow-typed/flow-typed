@@ -3,7 +3,7 @@ import type {Theme} from 'styled-components'
 import nativeStyled, {
   ThemeProvider as NativeThemeProvider,
   withTheme as nativeWithTheme,
-  keyframes as nativeKeyframe
+  keyframes as nativeKeyframes
 } from 'styled-components/native'
 import type {Theme as NativeTheme} from 'styled-components/native'
 
