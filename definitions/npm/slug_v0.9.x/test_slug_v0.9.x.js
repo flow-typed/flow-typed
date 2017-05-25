@@ -16,6 +16,8 @@ slug('Hello world', { mode: 'invalid_mode' })
 // $ExpectError
 slug('Hello world', { remove: 'hello' })
 
+slug('Hello world', { remove: null })
+
 // $ExpectError
 slug('Hello world', { symbols: 'hello' })
 
