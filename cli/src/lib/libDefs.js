@@ -2,6 +2,7 @@
 
 import semver from "semver";
 
+import {CliError} from './errors';
 import {cloneInto, findLatestFileCommitHash, rebaseRepoMaster} from "./git.js";
 import {mkdirp} from "./fileUtils.js";
 import {fs, path, os} from "./node.js";
@@ -509,6 +510,15 @@ function libdefMatchesPackageVersion(pkgSemver: string, defVersionRaw: string): 
   // The libdef version should be treated as a semver prefixed by a carat
   // (i.e: "foo_v2.2.x" is the same range as "^2.2.x")
   // UNLESS it is prefixed by the equals character (i.e. "foo_=v2.2.x")
+
+  if (pkgSemver === 'latest') {
+    throw new CliError(
+      "Unsupported version 'latest'",
+      "flow-typed does not currently support installing library definitions based on packages set" +
+      "to 'latest'. Please set a version number."
+    );
+  }
+
   let defVersion = defVersionRaw;
   if (defVersionRaw[0] !== '=' && defVersionRaw[0] !== '^') {
     defVersion = '^' + defVersionRaw;

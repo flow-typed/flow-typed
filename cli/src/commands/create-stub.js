@@ -3,6 +3,7 @@
 export const name = 'create-stub';
 export const description = 'Create a libdef stub for an untyped npm package';
 
+import {CliError} from '../lib/errors';
 import {createStub} from '../lib/stubUtils.js';
 import {findFlowRoot} from '../lib/flowProjectUtils.js';
 
@@ -29,25 +30,19 @@ type Args = {
   _: Array<string>,
 }
 
-function failWithMessage(message: string) {
-  console.error(message);
-  return 1;
-}
-
 export async function run(args: Args): Promise<number> {
   if (!Array.isArray(args._) || args._.length < 2) {
-    return failWithMessage(
-      'Please provide the names of one or more npm packages'
-    );
+    throw new CliError('Please provide the names of one or more npm packages');
   }
   const packages = args._.slice(1);
 
   // Find the project root
   const projectRoot = await findFlowRoot(process.cwd());
   if (projectRoot == null) {
-    return failWithMessage(
-      `\nERROR: Unable to find a flow project in the current dir or any of ` +
-      `it's parents!\nPlease run this command from within a Flow project.`
+    throw new CliError(
+      'Unable to find a flow project',
+      'The current working directory is not within a Flow project. ' +
+      'Please run this command from within a Flow project.'
     );
   }
 
