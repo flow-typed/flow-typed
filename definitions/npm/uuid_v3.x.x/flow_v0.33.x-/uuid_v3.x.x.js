@@ -9,4 +9,5 @@ declare module 'uuid' {
     random?: number[],
     rng?: () => number[] | Buffer,
   |}, buffer?: number[] | Buffer, offset?: number): string;
+  declare module.exports: v4;
 }
