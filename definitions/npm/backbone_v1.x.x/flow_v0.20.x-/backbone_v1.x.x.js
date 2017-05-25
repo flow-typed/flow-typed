@@ -44,7 +44,7 @@ declare module 'backbone' {
     constructor(attributes?: Attrs, options?: ModelOpts): void;
     static initialize(attributes?: Attrs, options?: ModelOpts): void;
     initialize(): void;
-    get(attr: string): any;
+    get(attr: ?string): any,
     set(attrs: Attrs, options?: Object): this;
     set(attr: string, value: mixed, options?: Object): this;
     escape(attr: string): mixed;
@@ -74,12 +74,12 @@ declare module 'backbone' {
     url(): string;
     urlRoot: string | () => string;
     parse(response: Object, options?: Object): any;
-    clone: this;
-    isNew: boolean;
+    clone(): this;
+    isNew(): boolean;
     hasChanged(attribute?: string): boolean;
     chagnedAttributes(attributes?: {[attr: string]: mixed}): boolean;
     previous(attribute: string): mixed;
-    previousAttirbutes(): Attrs;
+    previousAttributes(): Attrs;
     // Start Underscore methods
     // @TODO Underscore Methods should be defined by the library definition
     keys(): string[];
@@ -143,10 +143,10 @@ declare module 'backbone' {
     indexBy: Function;
     // end underscore methods
     add(models: Array<TModel>, options?: Object): void;
-    remove(models: Array<TModel>, options?: Object): void;
+    remove(models: Array<TModel| string | number>, options?: Object): void;
     reset(models?: Array<TModel>, options?: Object): void;
     set(models: Array<TModel>, options?: Object): void;
-    get(id: string): ?TModel;
+    get(id: ?string): ?TModel;
     at(index: number): ?TModel;
     push(model: TModel, options?: Object): void;
     pop(otions?: Object): void;

@@ -30,7 +30,11 @@ const TaskModel: Class<Fooable> = Backbone.Model.extend({
 const instance = new TaskModel();
 instance.fetch({});
 
+instance.get('field');
+instance.get(null);
 
+instance.isNew();
+instance.clone();
 
 class TasksCollection extends Backbone.Collection {
     model: TaskModel;
