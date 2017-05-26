@@ -84,6 +84,27 @@ _.intersectionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
 
 
 /**
+ * _.get
+ */
+
+// Object — examples from lodash docs
+var exampleObjectForGetTest = { 'a': [{ 'b': { 'c': 3 } }] };
+_.get(exampleObjectForGetTest, 'a[0].b.c');
+_.get(exampleObjectForGetTest, ['a', '0', 'b', 'c']);
+_.get(exampleObjectForGetTest, 'a.b.c', 'default');
+
+// Array — not documented, but _.get does support arrays
+_.get([1, 2, 3], '0');
+_.get(['foo', 'bar', 'baz'], '[1]');
+_.get([{ a: 'foo' }, { b: 'bar' }, { c: 'baz' }], '2');
+_.get([[1, 2], [3, 4], [5, 6], [7, 8]], '3');
+
+// Second argument must be string when looking for array items by index
+// $ExpectError number This type is incompatible with union: ?array type | string
+_.get([1, 2, 3], 0);
+
+
+/**
  * _.keyBy
  */
 _.keyBy([
