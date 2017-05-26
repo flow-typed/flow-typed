@@ -13,7 +13,7 @@ const a1: firebase.app.App = firebase.initializeApp({
 });
 
 // #2
-// $ExpectError
+// $ExpectError missing databaseURL field
 const a2: firebase.app.App = firebase.initializeApp({
   apiKey: 'apiKey',
   storageBucker: 'storageBucket',
@@ -40,7 +40,7 @@ firebase.auth()
       (user.isAnonymous);
       (user.uid);
       (user.providerData);
-      // $ExpectError
+      // $ExpectError unknown field
       (user.foobar);
     }
   });
@@ -53,7 +53,7 @@ firebase.auth()
   })
   .then(userCredential => {
     (userCredential.user);
-    // $ExpectError
+    // $ExpectError unknown field
     (userCredential.foobar);
   })
 
@@ -67,13 +67,13 @@ firebase.auth()
     (result.additionalUserInfo);
     (result.operationType);
     (result.user);
-    // $ExpectError
+    // $ExpectError unknown field
     (result.foobar);
   });
 
 // #8
 const provider2 = new firebase.auth.EmailAuthProvider();
-// $ExpectError
+// $ExpectError only OAuthProviders can be used in linkWithPopup()
 firebase.auth()
   .currentUser
   .linkWithPopup(provider2)
@@ -82,7 +82,7 @@ firebase.auth()
     (result.additionalUserInfo);
     (result.operationType);
     (result.user);
-    // $ExpectError
+    // $ExpectError unknown field
     (result.foobar);
   });
 
@@ -103,7 +103,7 @@ firebase.database().ref('users/42').on('value', snp => {
 });
 
 // #12
-// $ExpectError
+// $ExpectError type incompatible with EventType enum
 firebase.database().ref('users/42').on('foo', snp => {
   (snp.val());
 });
@@ -117,5 +117,8 @@ firebase.database()
   .then(snp => snp.forEach(_ => true))
 
 // #14
-// $ExpectError
-firebase.database().ref('users/42').orderByKey().limitToLast('foo')
+// $ExpectError incompatible type
+firebase.database()
+  .ref('users/42')
+  .orderByKey()
+  .limitToLast('foo')
