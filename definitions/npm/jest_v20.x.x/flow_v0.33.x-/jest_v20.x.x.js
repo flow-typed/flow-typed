@@ -28,6 +28,14 @@ type JestMockFn = {
    */
   mockReset(): Function,
   /**
+   * Removes the mock and restores the initial implementation. This is useful
+   * when you want to mock functions in certain test cases and restore the
+   * original implementation in others. Beware that mockFn.mockRestore only
+   * works when mock was created with jest.spyOn. Thus you have to take care of
+   * restoration yourself when manually assigning jest.fn().
+   */
+  mockRestore(): Function,
+  /**
    * Accepts a function that should be used as the implementation of the mock.
    * The mock itself will still record all calls that go into and instances
    * that come from itself -- the only difference is that the implementation
