@@ -44,7 +44,7 @@ declare module 'enzyme' {
     prop(key: string): any;
     key(): string;
     simulate(event: string, ...args: Array<any>): this;
-    setState(state: Object): this;
+    setState(state: Object, callback?: Function): this,
     setProps(props: Object): this;
     setContext(context: Object): this;
     instance(): React$Component<any, any, any>;
