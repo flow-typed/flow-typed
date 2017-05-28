@@ -218,7 +218,7 @@ declare module 'lodash' {
     sampleSize<V, T: Object>(object: T, n?: number): Array<V>;
     shuffle<T>(array: ?Array<T>): Array<T>;
     shuffle<V, T: Object>(object: T): Array<V>;
-    size(collection: Array<any>|Object): number;
+    size(collection: Array<any>|Object|string): number;
     some<T>(array: ?Array<T>, predicate?: Predicate<T>): bool;
     some<A, T: {[id: string]: A}>(object?: ?T, predicate?: OPredicate<A, T>): bool;
     sortBy<T>(array: ?Array<T>, ...iteratees?: Array<Iteratee<T>>): Array<T>;
