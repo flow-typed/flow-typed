@@ -380,7 +380,7 @@ declare module 'lodash' {
     forOwnRight(object?: ?Object, iteratee?: OIteratee<*>): Object;
     functions(object?: ?Object): Array<string>;
     functionsIn(object?: ?Object): Array<string>;
-    get(object?: ?Object, path?: ?Array<string>|string, defaultValue?: any): any;
+    get(object?: ?Object|?Array<any>, path?: ?Array<string>|string, defaultValue?: any): any;
     has(object?: ?Object, path?: ?Array<string>|string): bool;
     hasIn(object?: ?Object, path?: ?Array<string>|string): bool;
     invert(object?: ?Object, multiVal?: bool): Object;
