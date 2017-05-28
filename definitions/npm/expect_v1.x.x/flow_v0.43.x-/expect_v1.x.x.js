@@ -31,8 +31,8 @@ declare class $npm$expect$Expectation<T> {
   toNotThrow<E>(error?: $npm$expect$ErrorMatcher<E>, message?: string): this;
   toBeA(constructor: mixed, message?: string): this;
   toNotBeA(constructor: mixed, message?: string): this;
-  toMatch(pattern: RegExp | Object, message?: string): this;
-  toNotMatch(pattern: RegExp | Object, message?: string): this;
+  toMatch(pattern: any, message?: string): this;
+  toNotMatch(pattern: any, message?: string): this;
 
   toBeLessThan(n: T & number, message?: string): this;
   toBeLessThanOrEqualTo(n: T & number, message?: string): this;
