@@ -302,7 +302,7 @@ declare class Reference extends Query {
   root: Reference;
   child(path: string): Reference;
   onDisconnect(): OnDisconnect;
-  push(value: FirebaseValue, onComplete?: OnCompleteCallback): ThenableReference;
+  push(value?: FirebaseValue, onComplete?: OnCompleteCallback): ThenableReference;
   remove(onComplete: OnCompleteCallback): Promise<void>;
   set(value: FirebaseValue, onComplete?: OnCompleteCallback): Promise<void>;
   setPriority(priority: Priority, onComplete?: OnCompleteCallback): Promise<void>;
