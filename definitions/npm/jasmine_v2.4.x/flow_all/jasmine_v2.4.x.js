@@ -56,7 +56,7 @@ type JasmineSpyType = {
 type JasmineClockType = {
   install(): void;
   uninstall(): void;
-  tick(): void;
+  tick(milliseconds: number): void;
   mockDate(date: Date): void;
 }
 
