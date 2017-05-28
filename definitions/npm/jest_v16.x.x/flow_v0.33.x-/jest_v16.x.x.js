@@ -29,7 +29,7 @@ type JestCallsType = {
 type JestClockType = {
   install(): void;
   mockDate(date: Date): void;
-  tick(milliseconds: number): void;
+  tick(milliseconds?:number): void;
   uninstall(): void;
 }
 
