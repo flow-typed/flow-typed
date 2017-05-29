@@ -178,7 +178,7 @@ declare class moment$Moment {
   endOf(unit: string): this;
   local(): this;
   utc(): this;
-  utcOffset(offset: number|string): this;
+  utcOffset(offset: number|string, keepLocalTime?: boolean, keepMinutes?: boolean): this;
   utcOffset(): number;
   format(format?: string): string;
   fromNow(removeSuffix?: bool): string;
