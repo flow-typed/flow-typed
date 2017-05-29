@@ -1,3 +1,6 @@
+// flow-typed signature: 8db84626f27f5d96bac52eb31e6f6cc4
+// flow-typed version: 31a33238c7/selenium-webdriver_v3.x.x/flow_>=v0.42.x
+
 // @flow
 
 /*
@@ -268,7 +271,7 @@ declare module 'selenium-webdriver' {
 	declare export var logging: webdriver$logging;
 }
 
-declare type webdriver_testing$TestFunction = ((done: () => void) => void | Promise<mixed>);
+declare type webdriver_testing$TestFunction = ((done: (error?: any) => void) => void | Promise<mixed>);
 
 declare module 'selenium-webdriver/testing' {
 	declare var describe : {
