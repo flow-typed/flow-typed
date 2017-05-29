@@ -80,6 +80,13 @@ declare module 'react-redux' {
 
   declare function connect<S, A, OP, SP, DP, P>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: Null,
+    mergeProps: MergeProps<SP, DP, OP, P>,
+    options?: ConnectOptions
+  ): Connector<OP, P>;
+
+  declare function connect<S, A, OP, SP, DP, P>(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: MapDispatchToProps<A, OP, DP>,
     mergeProps: MergeProps<SP, DP, OP, P>,
     options?: ConnectOptions
