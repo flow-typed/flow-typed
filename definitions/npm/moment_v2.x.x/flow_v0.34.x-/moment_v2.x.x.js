@@ -52,6 +52,8 @@ type moment$CalendarFormats = {
   sameElse?: moment$CalendarFormat,
 };
 
+type moment$Inclusivity = '()' | '[)' | '()' | '(]' | '[]'
+
 declare class moment$LocaleData {
   months(moment: moment$Moment): string;
   monthsShort(moment: moment$Moment): string;
@@ -195,12 +197,12 @@ declare class moment$Moment {
   toJSON(): string;
   toISOString(): string;
   toObject(): moment$MomentObject;
+  isBetween(from: moment$Moment|string|number|Date|Array<number>, to: moment$Moment|string|number|Date|Array<number>, units?: string, inclusivity?: moment$Inclusivity): bool;
   isBefore(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isSame(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isAfter(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isSameOrBefore(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isSameOrAfter(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
-  isBetween(date: moment$Moment|string|number|Date|Array<number>): bool;
   isDST(): bool;
   isDSTShifted(): bool;
   isLeapYear(): bool;
