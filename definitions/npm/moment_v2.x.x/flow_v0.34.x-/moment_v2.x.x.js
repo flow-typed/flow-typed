@@ -52,7 +52,6 @@ type moment$CalendarFormats = {
   sameElse?: moment$CalendarFormat,
 };
 
-
 type moment$Inclusivity = '()' | '[)' | '()' | '(]' | '[]'
 
 declare class moment$LocaleData {
