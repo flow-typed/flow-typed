@@ -230,13 +230,13 @@ type JestExpectType = {
   toMatchSnapshot(name?: string): void,
   /**
    * Use .toThrow to test that a function throws when it is called.
+   * If you want to test that a specific error gets thrown, you can provide an
+   * argument to toThrow. The argument can be a string for the error message,
+   * a class for the error, or a regex that should match the error.
+   *
+   * Alias: .toThrowError
    */
-  toThrow(message?: string | Error): void,
-  /**
-   * Use .toThrowError to test that a function throws a specific error when it
-   * is called. The argument can be a string for the error message, a class for
-   * the error, or a regex that should match the error.
-   */
+  toThrow(message?: string | Error | RegExp): void,
   toThrowError(message?: string | Error | RegExp): void,
   /**
    * Use .toThrowErrorMatchingSnapshot to test that a function throws a error

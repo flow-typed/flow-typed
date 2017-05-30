@@ -72,6 +72,10 @@ expect(() => {
     throw err;
 }).toThrowError(err);
 
+expect(() => {}).toThrow('err');
+expect(() => {}).toThrow(/err/);
+expect(() => {}).toThrow(err);
+
 // Test method chaining fixes
 jest
   .doMock('testModule1', () => { })
