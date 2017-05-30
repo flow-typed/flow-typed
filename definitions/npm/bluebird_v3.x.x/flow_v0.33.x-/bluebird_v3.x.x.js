@@ -71,12 +71,12 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
   ): Bluebird$Promise<T>;
   static map<T, U, Elem: $Promisable<T>>(
     Promises: Array<Elem>,
-    mapper: (item: T, index: number, arrayLength: number) => U,
+    mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>,
     options?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<U>>;
   static mapSeries<T, U, Elem: $Promisable<T>>(
     Promises: Array<Elem>,
-    mapper: (item: T, index: number, arrayLength: number) => U
+    mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>
   ): Bluebird$Promise<Array<U>>;
   static reduce<T, U, Elem: $Promisable<T>>(
     Promises: Array<Elem>,
@@ -156,6 +156,7 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
   each<T, U>(iterator: (item: T, index: number, arrayLength: number) => $Promisable<U>): Bluebird$Promise<Array<T>>;
   asCallback<T>(callback: (error: ?any, value?: T) => any, options?: Bluebird$SpreadOption): void;
   return<T>(value: T): Bluebird$Promise<T>;
+  thenReturn<T>(value: T): Bluebird$Promise<T>;
   spread<T>(...args: Array<T>): Bluebird$Promise<*>;
 
   reflect(): Bluebird$Promise<Bluebird$PromiseInspection<*>>;

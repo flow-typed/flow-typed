@@ -18,7 +18,9 @@ declare module 'react-redux' {
 
   declare type MergeProps<SP, DP: Object, OP: Object, P: Object> = (stateProps: SP, dispatchProps: DP, ownProps: OP) => P;
 
-  declare type StatelessComponent<P> = (props: P) => ?React$Element<any>;
+  declare type Context = { store: Store<*, *> };
+
+  declare type StatelessComponent<P> = (props: P, context: Context) => ?React$Element<any>;
 
   declare class ConnectedComponent<OP, P, Def, St> extends React$Component<void, OP, void> {
     static WrappedComponent: Class<React$Component<Def, P, St>>;
@@ -75,6 +77,13 @@ declare module 'react-redux' {
     mergeProps: Null,
     options?: ConnectOptions
   ): Connector<OP, $Supertype<SP & DP & OP>>;
+
+  declare function connect<S, A, OP, SP, DP, P>(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: Null,
+    mergeProps: MergeProps<SP, DP, OP, P>,
+    options?: ConnectOptions
+  ): Connector<OP, P>;
 
   declare function connect<S, A, OP, SP, DP, P>(
     mapStateToProps: MapStateToProps<S, OP, SP>,

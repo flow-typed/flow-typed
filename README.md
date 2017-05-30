@@ -16,7 +16,7 @@ $ npm install -g flow-typed
 
 $ cd /path/to/my/project
 $ npm install
-$ flow-typed install
+$ flow-typed install rxjs@5.0.x
 'rxjs_v5.0.x.js' installed at /path/to/my/project/flow-typed/npm/rxjs_v5.0.xjs
 ```
 
@@ -149,6 +149,16 @@ This issue was first reported here:
 
 The `flow-typed` npm package provides a CLI that provides several commands for
 working with this repository:
+
+##### `flow-typed install [package-specification]`
+
+Installs libdefs from looking at your package.json.
+
+If `package-specification` was specified, only that one libdef will be installed.
+
+```bash
+flow-typed install foo@1.2.3
+```
 
 ##### `flow-typed validate-defs`
 

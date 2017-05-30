@@ -128,15 +128,15 @@ declare module "underscore" {
   /**
    * Functions
    */
-  // TODO: bind
+  declare function bind(fn: Function, thisArg: any, ...partials: Array<any>): Function;
 
-  // TODO: bindAll
+  declare function bindAll(object: ?Object, ...methodNames: Array<string| [string]>): Object;
 
   declare function partial(fn: Function, ...arguments: Array<any>): Function;
 
   declare function memoize(fn: Function): Function;
 
-  // TODO: delay
+  declare function delay(fn: Function, wait?: number, ...arguments?: Array<any>): number;
 
   declare function defer(fn: Function, ...arguments: Array<any>): void;
 

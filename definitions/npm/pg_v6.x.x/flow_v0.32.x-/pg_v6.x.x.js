@@ -57,15 +57,15 @@ declare module pg {
     //database port
     port: number,
     // database host. defaults to localhost
-    host: string,
+    host?: string,
     // whether to try SSL/TLS to connect to server. default value: false
-    ssl: boolean,
+    ssl?: boolean,
     // name displayed in the pg_stat_activity view and included in CSV log entries
     // default value: process.env.PGAPPNAME
-    application_name: string,
+    application_name?: string,
     // fallback value for the application_name configuration parameter
     // default value: false
-    fallback_application_name: string,
+    fallback_application_name?: string,
 
     // pg-pool
     Client: mixed,

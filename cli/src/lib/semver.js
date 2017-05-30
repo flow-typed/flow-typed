@@ -22,10 +22,21 @@ export function emptyVersion(): Version {
   };
 }
 
-export function getRangeLowerBound(rangeStr: string): string {
-  const range = new semver.Range(rangeStr);
+export function getRangeLowerBound(rangeRaw: string | semver.Range): string {
+  const range =
+    typeof rangeRaw === 'string'
+    ? new semver.Range(rangeRaw)
+    : rangeRaw;
   return range.set[0][0].semver.version;
 };
+
+export function getRangeUpperBound(rangeRaw: string | semver.Range): string {
+  const range =
+    typeof rangeRaw === 'string'
+    ? new semver.Range(rangeRaw)
+    : rangeRaw;
+  return range.set[0][1].semver.version;
+}
 
 // TODO: This has some egregious duplication with
 //       libDef.getLocalLibDefFlowVersions(). Need to better consolidate logic

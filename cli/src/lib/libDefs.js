@@ -200,7 +200,7 @@ export async function getLibDefs(
 
 function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): FlowVersion {
   const pkgFlowDirName = path.basename(pkgFlowDirPath);
-  return parseFlowDirString(pkgFlowDirName, validationErrs);
+  return parseFlowDirString(pkgFlowDirName, pkgFlowDirPath, validationErrs);
 }
 
 /**

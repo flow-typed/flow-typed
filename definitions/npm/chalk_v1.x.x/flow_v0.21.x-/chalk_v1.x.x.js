@@ -3,7 +3,7 @@ type $npm$chalk$StyleElement = {
   close: string;
 };
 
-type $npm$chalk$Chain = $npm$chalk$Style & (...text: string[]) => string;
+type $npm$chalk$Chain = $npm$chalk$Style & (...text: any[]) => string;
 
 type $npm$chalk$Style = {
   // General

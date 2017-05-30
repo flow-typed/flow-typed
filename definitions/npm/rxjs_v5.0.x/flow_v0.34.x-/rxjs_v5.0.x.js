@@ -96,8 +96,8 @@ declare class rxjs$Observable<+T> {
   ): rxjs$Observable<T>;
 
   static fromEventPattern(
-    addHandler: (handler: () => void) => void,
-    removeHandler: (handler: () => void) => void,
+    addHandler: (handler: (item: T) => void) => void,
+    removeHandler: (handler: (item: T) => void) => void,
     selector?: () => T,
   ): rxjs$Observable<T>;
 
@@ -106,6 +106,8 @@ declare class rxjs$Observable<+T> {
   static empty<U>(): rxjs$Observable<U>;
 
   static interval(period: number): rxjs$Observable<number>;
+
+  static timer(initialDelay: (number | Date), period?: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<number>;
 
   static merge<T, U>(
     source0: rxjs$Observable<T>,
@@ -128,6 +130,8 @@ declare class rxjs$Observable<+T> {
 
   race(other: rxjs$Observable<T>): rxjs$Observable<T>;
 
+  repeat(): rxjs$Observable<T>;
+
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>;
 
   catch<U>(selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
@@ -140,9 +144,9 @@ declare class rxjs$Observable<+T> {
     f: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
   ): rxjs$Observable<U>;
 
-  debounceTime(duration: number): rxjs$Observable<T>;
+  debounceTime(dueTime: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>;
 
-  delay(dueTime: number): rxjs$Observable<T>;
+  delay(dueTime: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>;
 
   distinctUntilChanged(compare?: (x: T, y: T) => boolean): rxjs$Observable<T>;
 
@@ -152,7 +156,7 @@ declare class rxjs$Observable<+T> {
 
   elementAt(index: number, defaultValue?: T): rxjs$Observable<T>;
 
-  filter(predicate: (value: T) => boolean): rxjs$Observable<T>;
+  filter(predicate: (value: T, index: number) => boolean, thisArg?: any): rxjs$Observable<T>;
 
   finally(f: () => mixed): rxjs$Observable<T>;
 
@@ -186,11 +190,23 @@ declare class rxjs$Observable<+T> {
 
   // Alias for `mergeMap`
   flatMap<U>(
-    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
+    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    index?: number,
   ): rxjs$Observable<U>;
 
+  flatMapTo<U>(
+    innerObservable: rxjs$Observable<U>
+  ): rxjs$Observable<U>;
+
+  flatMapTo<U, V>(
+    innerObservable: rxjs$Observable < U >,
+    resultSelector: (outerValue: T, innerValue: U, outerIndex: number, innerIndex: number) => V,
+    concurrent ?: number
+  ): rxjs$Observable<V>;
+
   switchMap<U>(
-    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
+    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    index?: number,
   ): rxjs$Observable<U>;
 
   switchMapTo<U>(
@@ -207,7 +223,18 @@ declare class rxjs$Observable<+T> {
 
   mergeMap<U>(
     project: (value: T, index?: number) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
+    index?: number,
   ): rxjs$Observable<U>;
+
+  mergeMapTo<U>(
+    innerObservable: rxjs$Observable<U>
+  ): rxjs$Observable<U>;
+
+  mergeMapTo<U, V>(
+    innerObservable: rxjs$Observable < U >,
+    resultSelector: (outerValue: T, innerValue: U, outerIndex: number, innerIndex: number) => V,
+    concurrent ?: number
+  ): rxjs$Observable<V>;
 
   multicast(
     subjectOrSubjectFactory: rxjs$Subject<T> | () => rxjs$Subject<T>,
@@ -235,7 +262,7 @@ declare class rxjs$Observable<+T> {
 
   sampleTime(delay: number): rxjs$Observable<T>;
 
-  publishReplay(): rxjs$ConnectableObservable<T>;
+  publishReplay(bufferSize?: number, windowTime?: number, scheduler?: rxjs$SchedulerClass): rxjs$ConnectableObservable<T>;
 
   retry(retryCount: number): rxjs$Observable<T>;
 
@@ -252,7 +279,7 @@ declare class rxjs$Observable<+T> {
 
   skipUntil(other: rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
 
-  skipWhile(predicate: (value: T) => boolean): rxjs$Observable<T>;
+  skipWhile(predicate: (value: T, index: number) => boolean): rxjs$Observable<T>;
 
   startWith(...values: Array<T>): rxjs$Observable<T>;
 
@@ -262,7 +289,7 @@ declare class rxjs$Observable<+T> {
 
   takeUntil(other: rxjs$Observable<any>): rxjs$Observable<T>;
 
-  takeWhile(f: (value: T) => boolean): rxjs$Observable<T>;
+  takeWhile(predicate: (value: T, index: number) => boolean): rxjs$Observable<T>;
 
   do(
     onNext?: (value: T) => mixed,
@@ -695,7 +722,7 @@ declare class rxjs$BehaviorSubject<T> extends rxjs$Subject<T> {
 }
 
 declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {
-
+  constructor(bufferSize?: number, windowTime?: number, scheduler?: rxjs$SchedulerClass): void;
 }
 
 declare class rxjs$Subscription {

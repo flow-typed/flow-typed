@@ -1,10 +1,30 @@
 // @flow
 
-import mkdirpCb from "mkdirp";
+import
+  fsExtra
+from "fs-extra";
 
-import {fs, path} from "./node.js";
+import
+  mkdirpCb
+from "mkdirp";
+
+import {
+  fs,
+  path,
+} from "./node.js";
 
 const P = Promise;
+
+export function copyDir(
+  srcPath: string,
+  destPath: string,
+): Promise<void> {
+  return new Promise((res, rej) => {
+    fsExtra.copy(srcPath, destPath, (err) => {
+      if (err) { rej(err); } else { res(); }
+    });
+  });
+}
 
 export function copyFile(
   srcPath: string,
@@ -24,6 +44,30 @@ export function copyFile(
       reader.pipe(writer);
     }
   });
+};
+
+export async function getFilesInDir(
+  dirPath: string,
+  recursive: boolean = false,
+): Promise<Set<string>> {
+  let dirItems = await fs.readdir(dirPath);
+  let dirItemStats = await P.all(
+    dirItems.map(item => fs.stat(path.join(dirPath, item)))
+  );
+  const installedLibDefs = new Set();
+  await P.all(dirItems.map(async (itemName, idx) => {
+    const itemStat = dirItemStats[idx];
+    if (itemStat.isFile()) {
+      installedLibDefs.add(itemName);
+    } else if (recursive && itemStat.isDirectory()) {
+      const itemPath = path.join(dirPath, itemName);
+      const subDirFiles = await getFilesInDir(itemPath, recursive);
+      subDirFiles.forEach(
+        subItemName => installedLibDefs.add(path.join(itemName, subItemName))
+      );
+    }
+  }));
+  return installedLibDefs;
 };
 
 export function mkdirp(path: string) {

@@ -10,6 +10,7 @@ import {getDiff} from '../lib/git';
 
 import request from "request";
 import * as semver from "semver";
+import * as unzip from "unzip";
 
 import type {Argv} from "yargs";
 import type {FlowVersion} from "../lib/flowVersion.js";
@@ -82,10 +83,15 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
   if (_flowBinVersionPromise === null) {
     _flowBinVersionPromise = (async function() {
       console.log("Fetching all Flow binaries...");
+	  const IS_WINDOWS = os.type() === "Windows_NT";
       const FLOW_BIN_VERSION_ORDER = [];
       const GH_CLIENT = gitHubClient();
       const QUERY_PAGE_SIZE = 100;
       const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
+
+      if (!await fs.exists(BIN_DIR)) {
+        await fs.mkdir(BIN_DIR);
+      }
 
       let binURLs = new Map();
       let apiPayload = null;
@@ -103,7 +109,8 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
         apiPayload.forEach(rel => {
           // We only test against versions since 0.15.0 because it has proper
           // [ignore] fixes (which are necessary to run tests)
-          if (semver.lt(rel.tag_name, "0.15.0")) {
+		  // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
+          if (semver.lt(rel.tag_name, IS_WINDOWS ? "0.30.0" : "0.15.0")) {
             return;
           }
 
@@ -133,14 +140,11 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
         return semver.lt(a, b) ? -1 : 1;
       });
 
-      if (!await fs.exists(BIN_DIR)) {
-        await fs.mkdir(BIN_DIR);
-      }
-
       await P.all(Array.from(binURLs).map(async ([version, binURL]) => {
         const zipPath = path.join(BIN_DIR, "flow-" + version + ".zip");
+		const binPath = path.join(BIN_DIR, "flow-" + version + (IS_WINDOWS ? ".exe" : ""));
 
-        if (await fs.exists(path.join(BIN_DIR, "flow-" + version))) {
+        if (await fs.exists(binPath)) {
           return;
         }
 
@@ -165,22 +169,40 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
         const flowBinDirPath = path.join(BIN_DIR, "TMP-flow-" + version);
         await fs.mkdir(flowBinDirPath);
         console.log("  Extracting flow-%s...", version);
-        await new Promise((res, rej) => {
-          const child = child_process.exec(
-            "unzip " + zipPath + " flow/flow -d " + flowBinDirPath
-          );
-          let stdErrOut = "";
-          child.stdout.on("data", data => stdErrOut += data);
-          child.stderr.on("data", data => stdErrOut += data);
-          child.on("error", err => rej(err));
-          child.on("close", code => {
-            if (code === 0) { res(); } else { rej(stdErrOut); }
-          });
-        });
-        await fs.rename(
-          path.join(flowBinDirPath, "flow", "flow"),
-          path.join(BIN_DIR, "flow-" + version)
-        );
+		if (IS_WINDOWS) {
+	        await new Promise((res, rej) => {
+	          const unzipExtractor = unzip.Extract({path: flowBinDirPath});
+	          unzipExtractor.on('error', function (err) {
+				 rej(err);
+	          });
+	          unzipExtractor.on('close', function () {
+	            res();
+			  });
+	          fs.createReadStream(zipPath).pipe(unzipExtractor);
+		    });
+	        await fs.rename(
+	          path.join(flowBinDirPath, "flow", "flow.exe"),
+	          path.join(BIN_DIR, "flow-" + version + ".exe")
+	        );
+		} else {
+	        await new Promise((res, rej) => {
+	          const child = child_process.exec(
+	            "unzip " + zipPath + " flow/flow -d " + flowBinDirPath
+	          );
+	          let stdErrOut = "";
+	          child.stdout.on("data", data => stdErrOut += data);
+	          child.stderr.on("data", data => stdErrOut += data);
+	          child.on("error", err => rej(err));
+	          child.on("close", code => {
+	            if (code === 0) { res(); } else { rej(stdErrOut); }
+	          });
+	        });
+	        await fs.rename(
+	          path.join(flowBinDirPath, "flow", "flow"),
+	          path.join(BIN_DIR, "flow-" + version)
+	        );
+		}
+
         console.log("  Removing flow-%s artifacts...", version);
         await P.all([
           recursiveRmdir(flowBinDirPath),
@@ -195,6 +217,25 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
     })();
   }
   return _flowBinVersionPromise;
+}
+
+/**
+ * Return the sorted list of cached flow binaries that have previously been retrieved from github
+ * and cached in the `.flow-bins-cache` directory.  This function is usually called when a failure
+ * has occurred when attempting to refresh the flow releases from github, i.e. offline or over
+ * API limit.
+ */
+async function getCachedFlowBinVersions(): Promise<Array<string>> {
+  // read the files from the bin dir and remove the leading `flow-v` prefix
+  const versions = (await fs.readdir(path.join(BIN_DIR))).map(dir => dir.slice(6));
+
+  // sort the versions that we have inplace
+  versions.sort((a, b) => {
+    return semver.lt(a, b) ? -1 : 1;
+  });
+
+  // return the versions with a leading 'v' to satisfy the expected return value
+  return versions.map(version => `v${version}`);
 }
 
 /**
@@ -220,7 +261,12 @@ async function runTestGroup(
     );
   }
 
-  const orderedFlowVersions = await getOrderedFlowBinVersions();
+  let orderedFlowVersions;
+  try {
+    orderedFlowVersions = await getOrderedFlowBinVersions();
+  } catch (e) {
+    orderedFlowVersions = await getCachedFlowBinVersions();
+  }
 
   try {
     await fs.mkdir(testDirPath);
