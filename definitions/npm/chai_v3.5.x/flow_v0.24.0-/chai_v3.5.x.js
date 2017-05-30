@@ -92,6 +92,8 @@ declare module "chai" {
         called: () => ExpectChain<T>,
         callCount: (n: number) => ExpectChain<T>,
         calledOnce: () => ExpectChain<T>,
+        calledTwice: () => ExpectChain<T>,
+        calledThrice: () => ExpectChain<T>,
         calledBefore: (spy: mixed) => ExpectChain<T>,
         calledAfter: (spy: mixed) => ExpectChain<T>,
         calledWith: (...args: Array<mixed>) => ExpectChain<T>,
