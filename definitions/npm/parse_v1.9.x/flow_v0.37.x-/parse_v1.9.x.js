@@ -6,7 +6,7 @@ declare module 'parse/react-native' {
   declare module.exports: $npm$parse$Parse
 }
 
-declare module 'parse/browser' {
+declare module 'parse' {
   declare module.exports: $npm$parse$Parse
 }
 
@@ -76,13 +76,27 @@ declare class $npm$parse$ParseConfig {
 // =========================
 declare type $npm$parse$ParseCloud = {
   run(name: string, data?: mixed, options?: { [key: string]: mixed }): Promise<any>,
-  define(name: string, cloudFunction: any): any,
+  define(name: string, cloudFunction: (request: $npm$parse$ParseCloud$FunctionRequest, response: $npm$parse$ParseCloud$FunctionResponse) => any): any,
   beforeSave(className: string, trigger: any): any,
   afterSave(className: string, trigger: any): any,
   beforeDelete(className: string, trigger: any): any,
   afterDelete(className: string, trigger: any): any,
   beforeFind(className: string, trigger: any): any,
-  afterFind(className: string, trigger: any): any
+  afterFind(className: string, trigger: any): any,
+  FunctionRequest: Class<$npm$parse$ParseCloud$FunctionRequest>,
+  FunctionResponse: Class<$npm$parse$ParseCloud$FunctionResponse>
+}
+
+declare class $npm$parse$ParseCloud$FunctionRequest {
+  installationId: string,
+  user: $npm$parse$ParseUser,
+  params: Object,
+  master: boolean,
+}
+
+declare class $npm$parse$ParseCloud$FunctionResponse {
+  error: Function,
+  success: Function
 }
 
 // =========================

@@ -5,6 +5,7 @@
  */
 
 it('desc', () => {});
+it('desc', (e) => {});
 it('desc', (done : Function) => {});
 it('desc', () => new Promise((res, rej) => {}));
 

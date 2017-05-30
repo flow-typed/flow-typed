@@ -74,7 +74,7 @@ type JestCallsType = {
 type JestClockType = {
   install(): void,
   mockDate(date: Date): void,
-  tick(): void,
+  tick(milliseconds?:number): void,
   uninstall(): void,
 }
 
@@ -187,6 +187,11 @@ type JestExpectType = {
    */
   toHaveBeenCalledWith(...args: Array<any>): void,
   /**
+   * If you have a mock function, you can use .toHaveBeenLastCalledWith to test what
+   * arguments it was last called with.
+   */
+  toHaveBeenLastCalledWith(...args: Array<any>): void,
+  /**
    * Check that an object has a .length property and it is set to a certain
    * numeric value.
    */
@@ -291,7 +296,7 @@ type JestObjectType = {
    * The third argument can be used to create virtual mocks -- mocks of modules
    * that don't exist anywhere in the system.
    */
-  mock(moduleName: string, moduleFactory?: any): JestObjectType,
+  mock(moduleName: string, moduleFactory?: any, options?: Object): JestObjectType,
   /**
    * Resets the module registry - the cache of all required modules. This is
    * useful to isolate modules where local state might conflict between tests.

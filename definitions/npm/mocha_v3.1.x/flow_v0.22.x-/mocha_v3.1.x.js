@@ -1,4 +1,4 @@
-type TestFunction = ((done: () => void) => void | Promise<mixed>);
+type TestFunction = ((done: (error?: any) => void) => void | Promise<mixed>);
 
 declare var describe : {
     (name:string, spec:() => void): void;

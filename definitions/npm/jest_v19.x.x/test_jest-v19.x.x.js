@@ -28,6 +28,8 @@ expect('someVal').toBeCalledWith('a')
 // $ExpectError property `toHaveBeeenCalledWith` not found in object type
 expect('someVal').toHaveBeeenCalledWith('a')
 
+expect('someVal').toHaveBeenLastCalledWith('a')
+
 // $ExpectError property `fn` not found in Array
 mockFn.mock.calls.fn()
 

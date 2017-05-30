@@ -65,7 +65,7 @@ declare module 'redux-form' {
     touchOnChange?: boolean,
     validate?: (values:Object, props:Object) => Object
   };
-  declare function reduxForm(config: FormConfig, mapStateToProps?: Function, mapDispatchToProps?: Function, mergeProps?: any, options?: Object): (component: React.Component) => React.Component;
+  declare function reduxForm(config: FormConfig, mapStateToProps?: Function, mapDispatchToProps?: Function, mergeProps?: any, options?: Object): (component: React.Component<*,*,*>) => React.Component<*,*,*>;
 
   declare function reducer(state: any, action: Object): any;
   declare function getValues(state: any): any;
