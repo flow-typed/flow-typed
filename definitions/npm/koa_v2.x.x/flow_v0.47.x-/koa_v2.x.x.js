@@ -204,7 +204,7 @@ declare module 'koa' {
     overwrite: boolean, //  whether to overwrite previously set cookies of the same name (false by default).
   };
   declare type Cookies = {
-    get: (name: string, options: {signed: boolean}) => string|void,
+    get: (name: string, options?: {signed: boolean}) => string|void,
     set: ((name: string, value: string, options?: CookiesSetOptions) => Context)&
     // delete cookie (an outbound header with an expired date is used.)
     ( (name: string) => Context),
