@@ -1,3 +1,6 @@
+// flow-typed signature: dbac1bc52eeef945a82af2e742a5d11b
+// flow-typed version: 4f8db0832e/grommet_v1.1.0/flow_>=v0.37.x
+
 /* eslint-disable flowtype/no-weak-types */
 
 declare module 'grommet' {
@@ -22,7 +25,7 @@ declare module 'grommet/components/AccordionPanel' {
     a11yTitle?: string,
     active?: boolean,
     animate?: boolean,
-    heading?: ReactNode,
+    heading?: ?ReactElementOrNode,
     onChange?: Function,
     pad?: any
   }
@@ -64,7 +67,7 @@ declare module 'grommet/components/Anchor' {
     animateIcon?: boolean,
     disabled?: boolean,
     href?: string,
-    icon?: ReactNode,
+    icon?: ?ReactElementOrNode,
     id?: string,
     label?: string,
     method?: "push" | "replace",
@@ -111,8 +114,8 @@ declare module 'grommet/components/Button' {
     align?: "start" | "center" | "end",
     fill?: boolean,
     href?: string,
-    icon?: React$Element<any>,
-    label?: ReactNode,
+    icon?: ?React$Element<any>,
+    label?: ?ReactElementOrNode,
     method?: "push" | "replace",
     onClick?: Function,
     path?: string,
@@ -135,18 +138,18 @@ declare module 'grommet/components/Card' {
       horizontal?: GrommetBoxTypes$PadSizes,
       vertical?: GrommetBoxTypes$PadSizes
     },
-    description?: string | React$Element<any>,
-    heading?: string | React$Element<any>,
+    description?: string | ?React$Element<any>,
+    heading?: string | ?React$Element<any>,
     headingStrong?: boolean,
-    label?: string | React$Element<any>,
-    link?: React$Element<any>,
+    label?: string | ?React$Element<any>,
+    link?: ?React$Element<any>,
     textSize?: "xsmall" | "small" | "medium" | "large" | "xlarge",
-    thumbnail?: string | React$Element<any>,
+    thumbnail?: string | ?React$Element<any>,
     truncate?: boolean,
     video?: {
       source: string,
       type?: string
-    } | React$Element<any>
+    } | ?React$Element<any>
   } & Grommet$BoxProps<Card> & Grommet$BoxFull
 
   declare class Card extends React$Component {
@@ -184,7 +187,7 @@ declare module 'grommet/components/chart/Axis' {
     labels: Array<{
       colorIndex?: string,
       index: number,
-      label: ReactNode
+      label: ?ReactElementOrNode
     }>,
     reverse?: boolean,
     ticks?: boolean,
@@ -294,7 +297,7 @@ declare module 'grommet/components/chart/MarkerLabel' {
     colorIndex?: string,
     count?: number,
     index?: number,
-    label?: ReactNode,
+    label?: ?ReactElementOrNode,
     max?: number,
     min?: number,
     reverse?: boolean,
@@ -327,7 +330,7 @@ declare module 'grommet/components/CheckBox' {
   declare type Grommet$CheckBoxProps = {
     checked?: boolean,
     disabled?: boolean,
-    label?: ReactNode,
+    label?: ?ReactElementOrNode,
     name?: string,
     onChange?: Function,
     reverse?: boolean,
@@ -375,7 +378,7 @@ declare module 'grommet/components/Distribution' {
     a11yTitle?: string,
     full?: boolean,
     series?: Array<{
-      label?: ReactNode,
+      label?: ?ReactElementOrNode,
       value: number,
       colorIndex?: string,
       important?: boolean,
@@ -383,7 +386,7 @@ declare module 'grommet/components/Distribution' {
       icon?: {
         width?: number,
         height?: number,
-        svgElement?: ReactNode
+        svgElement?: ?ReactElementOrNode
       }
     }>,
     size?: "small" | "medium" | "large" | "full",
@@ -441,11 +444,11 @@ declare module 'grommet/components/FormattedMessage' {
 
 declare module 'grommet/components/FormField' {
   declare type Grommet$FormFieldProps = {
-    error?: ReactNode,
-    help?: ReactNode,
+    error?: ?ReactElementOrNode,
+    help?: ?ReactElementOrNode,
     hidden?: boolean,
     htmlFor?: string,
-    label?: ReactNode,
+    label?: ?ReactElementOrNode,
     size?: "medium" | "large",
     strong?: boolean
   }
@@ -457,7 +460,7 @@ declare module 'grommet/components/FormField' {
 
 declare module 'grommet/components/FormFields' {
   declare type Grommet$FormFieldsProps = {
-    children?: ReactNode,
+    children?: ?ReactElementOrNode,
     className?: string
   }
 
@@ -512,12 +515,12 @@ declare module 'grommet/components/Headline' {
 
 declare module 'grommet/components/Hero' {
   declare type Grommet$HeroProps = {
-    background?: React$Element<any>,
+    background?: ?React$Element<any>,
     backgroundColorIndex?: string,
     size?: "small" | "medium" | "large",
     backgroundImage?: string,
     backgroundPosition?: "left" | "center" | "right",
-    backgroundVideo?: React$Element<any>,
+    backgroundVideo?: ?React$Element<any>,
     colorIndex?: string,
     flush?: boolean,
     image?: string,
@@ -3249,7 +3252,7 @@ declare module 'grommet/components/Layer' {
       "bottom" |
       "left" |
       "right",
-    closer?: ReactNode | boolean,
+    closer?: ?ReactElementOrNode | boolean,
     flush?: boolean,
     hidden?: boolean,
     peek?: boolean,
@@ -3269,15 +3272,15 @@ declare module 'grommet/components/Legend' {
     onActive?: Function,
     series: Array<{
       label?: string,
-      value?: number | ReactNode,
-      units?: number | ReactNode | {
+      value?: number | ?ReactElementOrNode,
+      units?: number | ?ReactElementOrNode | {
         prefix?: string,
         suffix?: string
       },
       colorIndex?: number | string,
       onClick?: Function
     }>,
-    total?: boolean | ReactNode,
+    total?: boolean | ?ReactElementOrNode,
     units?: string | {
       prefix?: string,
       suffix?: string
@@ -3291,7 +3294,7 @@ declare module 'grommet/components/Legend' {
 
 declare module 'grommet/components/List' {
   declare type Grommet$ListProps = {
-    emptyIndicator?: ReactNode,
+    emptyIndicator?: ?ReactElementOrNode,
     onMore?: Function,
     onSelect?: Function,
     selectable?: boolean | "multiple",
@@ -3315,8 +3318,8 @@ declare module 'grommet/components/LoginForm' {
       rememberMe?: boolean
     },
     errors?: string[],
-    forgotPassword?: ReactNode,
-    logo?: ReactNode,
+    forgotPassword?: ?ReactElementOrNode,
+    logo?: ?ReactElementOrNode,
     onSubmit?: Function,
     onChange?: Function,
     rememberMe?: boolean,
@@ -3337,11 +3340,11 @@ declare module 'grommet/components/Map' {
     data: {
       categories: Array<{
         id?: string,
-        label?: ReactNode,
+        label?: ?ReactElementOrNode,
         items: Array<{
           id?: string,
           label?: string,
-          node?: ReactNode
+          node?: ?ReactElementOrNode
         }>
       }>,
       links: Array<{
@@ -3383,7 +3386,7 @@ declare module 'grommet/components/Menu' {
       right?: GrommetCustomTypes$HORIZONTAL_ALIGN_OPTIONS
     },
     dropColorIndex?: string,
-    icon?: ReactNode,
+    icon?: ?ReactElementOrNode,
     id?: string,
     inline?: boolean | "expand",
     fill?: boolean,
@@ -3404,7 +3407,7 @@ declare module 'grommet/components/Meter' {
     activeIndex?: number,
     a11yTitle?: string,
     colorIndex?: string,
-    label?: ReactNode,
+    label?: ?ReactElementOrNode,
     max?: number,
     min?: number,
     onActive?: Function,
@@ -3464,8 +3467,8 @@ declare module 'grommet/components/meter/utils' {
 
 declare module 'grommet/components/Notification' {
   declare type Grommet$NotificationProps = {
-    closer?: ReactNode | boolean,
-    context?: ReactNode,
+    closer?: ?ReactElementOrNode | boolean,
+    context?: ?ReactElementOrNode,
     message: string,
     onClose?: Function,
     percentComplete?: number,
@@ -3525,7 +3528,7 @@ declare module 'grommet/components/Quote' {
   declare type Grommet$QuoteProps = {
     borderColorIndex?: string,
     size?: "small" | "medium" | "large" | "full",
-    credit?: string | React$Element<any>,
+    credit?: string | ?React$Element<any>,
     emphasizeCredit?: boolean
   } & Grommet$BoxFull & Grommet$BoxProps<Quote>
   declare class Quote extends React$Component {
@@ -3540,7 +3543,7 @@ declare module 'grommet/components/RadioButton' {
     defaultChecked?: boolean,
     disabled?: boolean,
     id: string,
-    label: ReactNode,
+    label: ?ReactElementOrNode,
     name?: string,
     onChange?: Function,
     value?: string
@@ -3575,7 +3578,7 @@ declare module 'grommet/components/Search' {
     responsive?: boolean,
     size?: "small" | "medium" | "large",
     suggestions?: Array<{
-      label?: ReactNode,
+      label?: ?ReactElementOrNode,
       value?: any
     } | string>,
     value?: string
@@ -3642,7 +3645,7 @@ declare module 'grommet/components/Sidebar' {
 
 declare module 'grommet/components/SkipLinkAnchor' {
   declare type Grommet$SkipLinkAnchorProps = {
-    label: ReactNode
+    label: ?ReactElementOrNode
   }
   declare class SkipLinkAnchor extends React$Component {
     props: Grommet$SkipLinkAnchorProps;
@@ -3696,7 +3699,7 @@ declare module 'grommet/components/SunBurst' {
       total?: number,
       value: number
     }>,
-    label?: ReactNode,
+    label?: ?ReactElementOrNode,
     onActive?: Function,
     onClick?: Function,
     size?: "small" | "medium" | "large" | "xlarge" | "full"
@@ -3751,7 +3754,7 @@ declare module 'grommet/components/Table' {
 
 declare module 'grommet/components/TableHeader' {
   declare type Grommet$TableHeaderProps = {
-    labels: ReactNode[],
+    labels: ?ReactElementOrNode[],
     onSort?: Function,
     sortAscending?: boolean,
     sortIndex?: number
@@ -3795,7 +3798,7 @@ declare module 'grommet/components/TextInput' {
     onSelect?: Function,
     placeHolder?: string,
     suggestions?: Array<string | {
-      label?: ReactNode,
+      label?: ?ReactElementOrNode,
       value?: any
     }>,
     value?: string
@@ -3905,13 +3908,13 @@ declare module 'grommet/components/Value' {
     align?: "start" | "center" | "end",
     announce?: boolean,
     colorIndex?: string,
-    icon?: ReactNode,
-    label?: string | ReactNode,
+    icon?: ?ReactElementOrNode,
+    label?: string | ?ReactElementOrNode,
     onClick?: Function,
     size?: "xsmall" | "small" | "medium" | "large" | "xlarge",
-    trendIcon?: ReactNode,
-    value?: ReactNode | number | string,
-    units?: ReactNode | string
+    trendIcon?: ?ReactElementOrNode,
+    value?: ?ReactElementOrNode | number | string,
+    units?: ?ReactElementOrNode | string
   }
   declare class Value extends React$Component {
     props: Grommet$ValueProps;
@@ -3944,7 +3947,7 @@ declare module 'grommet/components/Video' {
       label?: string,
       time?: number
     }>,
-    title?: ReactNode
+    title?: ?ReactElementOrNode
   }
   declare class Video extends React$Component {
     props: Grommet$VideoProps;
@@ -5831,7 +5834,7 @@ declare type Grommet$Icons$GenericProps = {
   responsive?: boolean
 }
 
-declare type ReactNode = ReactNode | React$Element<any>;
+declare type ReactElementOrNode = HTMLElement | React$Element<any>;
 
 declare type Grommet$BoxProps<T> = {
   a11yTitle?: string | any,
@@ -5869,7 +5872,7 @@ declare type Grommet$BoxProps<T> = {
   separator?: "top" | "bottom" | "left" | "right" | "horizontal" | "vertical" | "all" | "none",
   tag?: string,
   textAlign?: "left" | "center" | "right",
-  texture?: ReactNode | string,
+  texture?: ?ReactElementOrNode | string,
   wrap?: boolean,
   onFocus?: Function
 }
@@ -5878,6 +5881,7 @@ declare type Grommet$BoxFull = {
   full?: "horizontal" | "vertical" | boolean,
 }
 
+declare type Grommet$BoxSizingStringTypes = 'auto' | 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge' | 'full';
 declare type Grommet$BoxSizing = {
   size?: {
     height?: GrommetBoxTypes$Size | {
@@ -5888,5 +5892,6 @@ declare type Grommet$BoxSizing = {
       max?: GrommetBoxTypes$FixedSizes,
       min?: GrommetBoxTypes$FixedSizes
     }
-  }
+  } | Grommet$BoxSizingStringTypes
 }
+
