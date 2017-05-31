@@ -31,13 +31,9 @@ type $npm$color$CMYKObject = {
 
 declare module 'color' {
   declare class Color {
-    (value: $npm$color$RGBObject): Color;
-    (value: string): Color;
-    (): Color;
+    constructor(value?: $npm$color$RGBObject | string): Color;
 
-    static (value: $npm$color$RGBObject): Color;
-    static (value: string): Color;
-    static (): Color;
+    static (value?: $npm$color$RGBObject | string): Color;
 
     rgb(r: number, g: number, b: number): Color;
     rgb(rgb: Array<number>): Color;
