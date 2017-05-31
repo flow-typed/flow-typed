@@ -119,8 +119,9 @@ _.keyBy([
 ], 'dir');
 
 // Example of keying a map of objects by a number type
-type ById<T: Object> = { [number]: T }
-var group: ById<Object> = { 1: { id: 4 }, 2: { id: 4 }, 3: { id: 7 } }
+type KeyByTest$ByNumber<T: Object> = { [number]: T }
+type KeyByTest$Record = { id: number }
+var group: KeyByTest$ByNumber<KeyByTest$Record> = { 1: { id: 4 }, 2: { id: 4 }, 3: { id: 7 } }
 _.keyBy(group, 'id')
 
 
