@@ -43,6 +43,10 @@ declare type Bluebird$PromisifyAllOptions = {
 
 declare type $Promisable<T> = Promise<T> | T;
 
+declare class Bluebird$Disposable<R> {
+
+}
+
 declare class Bluebird$Promise<+R> extends Promise<R>{
   static Defer: Class<Bluebird$Defer>;
   static PromiseInspection: Class<Bluebird$PromiseInspection<*>>;
@@ -168,6 +172,11 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
 
   value(): R;
   reason(): any;
+
+  disposer(disposer: (value: R, promise: Promise<*>) => void): Bluebird$Disposable<R>;
+
+  static using<T, A>(disposable: Bluebird$Disposable<T>, handler: (value: T) => $Promisable<A>): Bluebird$Promise<A>;
+
 }
 
 declare class Bluebird$Defer {
@@ -177,5 +186,6 @@ declare class Bluebird$Defer {
 }
 
 declare module 'bluebird' {
-  declare var exports: typeof Bluebird$Promise;
+  declare export default typeof Bluebird$Promise;
+  declare export type Disposable<T> = Bluebird$Disposable<T>;
 }

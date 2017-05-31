@@ -1,5 +1,6 @@
 // @flow
 import Bluebird from 'bluebird';
+import type { Disposable } from 'bluebird';
 
 const defer: Bluebird.Defer = Bluebird.defer();
 const promise: Bluebird<*> = defer.promise;
@@ -133,3 +134,10 @@ Bluebird.resolve().thenReturn(5).then((result: number) => {});
 Bluebird.resolve().return(5).then((result: string) => {});
 // $ExpectError
 Bluebird.resolve().thenReturn(5).then((result: string) => {});
+
+let disposable: Disposable<boolean> = Bluebird.resolve(true).disposer((value: boolean) => {});
+Bluebird.using(disposable, (value: boolean) => 9).then((result: number) => {});
+// $ExpectError
+Bluebird.using(disposable, (value: number) => 9);
+// $ExpectError
+Bluebird.using(disposable, (value: boolean) => 9).then((result: boolean) => {});
