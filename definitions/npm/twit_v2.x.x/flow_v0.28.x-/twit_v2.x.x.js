@@ -4,7 +4,7 @@ declare module 'twit' {
     start(): void;
   }
   declare class Twit {
-    static constructor(options: {
+    constructor(options: {
       consumer_key: string,
       consumer_secret: string,
       access_token: string,
