@@ -118,6 +118,11 @@ _.keyBy([
   { 'dir': 'right', 'code': 100 }
 ], 'dir');
 
+// Example of keying a map of objects by a number type
+type ById<T: Object> = { [number]: T }
+var group: ById<Object> = { 1: { id: 4 }, 2: { id: 4 }, 3: { id: 7 } }
+_.keyBy(group, 'id')
+
 
 /**
  * _.map examples from the official doc
