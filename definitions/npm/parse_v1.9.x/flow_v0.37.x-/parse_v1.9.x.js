@@ -64,6 +64,7 @@ declare type $npm$parse$Pointer = {
 // =========================
 declare class $npm$parse$ParseConfig {
   static(): $npm$parse$ParseConfig,
+  constructor(): $npm$parse$ParseConfig,
   attributes: { [key: string]: any },
   get(attr: string): any,
   escape(attr: string): string,
@@ -104,6 +105,7 @@ declare class $npm$parse$ParseCloud$FunctionResponse {
 // =========================
 declare class $npm$parse$ParseGeoPoint {
   static(arg1: Array<number> | { latitude: number; longitude: number } | number, arg2?: number): $npm$parse$ParseGeoPoint,
+  constructor(arg1: Array<number> | { latitude: number; longitude: number } | number, arg2?: number): $npm$parse$ParseGeoPoint,
   toJSON(): { __type: string; latitude: number; longitude: number },
   equals(other: mixed): boolean,
   radiansTo(point: $npm$parse$ParseGeoPoint): number,
@@ -130,6 +132,7 @@ declare type $npm$parse$QueryJSON = {
 
 declare class $npm$parse$ParseQuery<T> {
   static(objectClass: string | T): $npm$parse$ParseQuery<T>,
+  constructor(objectClass: string | T): $npm$parse$ParseQuery<T>,
   className: string,
   toJSON(): $npm$parse$QueryJSON,
   get(objectId: string, options?: $npm$parse$FullOptions): Promise<?T>,
@@ -182,6 +185,7 @@ declare type $npm$parse$FileSource = { format: 'file', file: File, type: string 
 
 declare class $npm$parse$ParseFile {
   static(name: string, data?: $npm$parse$FileData, type?: string): $npm$parse$ParseFile,
+  constructor(name: string, data?: $npm$parse$FileData, type?: string): $npm$parse$ParseFile,
   name(): string,
   url(options?: { forceSecure?: boolean }): ?string,
   save(options?: { success?: any, error?: any }): Promise<$npm$parse$ParseFile>,
@@ -198,6 +202,7 @@ declare type $npm$parse$ByIdMap = { [userId: string]: $npm$parse$PermissionsMap 
 declare class $npm$parse$ParseACL {
   permissionsById: $npm$parse$ByIdMap,
   static(arg1: $npm$parse$ParseUser | $npm$parse$ByIdMap): $npm$parse$ParseACL,
+  constructor(arg1: $npm$parse$ParseUser | $npm$parse$ByIdMap): $npm$parse$ParseACL,
   toJSON(): $npm$parse$ByIdMap,
   equals(other: $npm$parse$ParseACL): boolean,
   setReadAccess(userId: $npm$parse$ParseUser | $npm$parse$ParseRole | string, allowed: boolean): void,
@@ -219,6 +224,7 @@ declare class $npm$parse$ParseACL {
 // =========================
 declare class $npm$parse$ParseObject {
   static(className: ?string | { className: string, [attr: string]: mixed }, attributes?: { [attr: string]: mixed }, options?: { ignoreValidation: boolean }): $npm$parse$ParseObject,
+  constructor(className: ?string | { className: string, [attr: string]: mixed }, attributes?: { [attr: string]: mixed }, options?: { ignoreValidation: boolean }): $npm$parse$ParseObject,
   id: string,
   className: string,
   toJSON(seen: Array<any> | void): $npm$parse$AttributeMap,
@@ -266,6 +272,7 @@ declare class $npm$parse$ParseObject {
 // =========================
 declare class $npm$parse$ParseUser extends $npm$parse$ParseObject {
   static(attributes: ?$npm$parse$AttributeMap): $npm$parse$ParseUser,
+  constructor(attributes: ?$npm$parse$AttributeMap): $npm$parse$ParseUser,
   isCurrent(): boolean,
   getUsername(): string,
   setUsername(username: string): void,
@@ -299,6 +306,7 @@ declare class $npm$parse$ParseUser extends $npm$parse$ParseObject {
 // =========================
 declare class $npm$parse$ParseRelation {
   static(parent: ?$npm$parse$ParseObject, key: ?string): $npm$parse$ParseRelation,
+  constructor(parent: ?$npm$parse$ParseObject, key: ?string): $npm$parse$ParseRelation,
   parent: ?$npm$parse$ParseObject,
   add(objects: $npm$parse$ParseObject | Array<$npm$parse$ParseObject | string>): $npm$parse$ParseObject,
   remove(objects: $npm$parse$ParseObject | Array<$npm$parse$ParseObject | string>): void,
@@ -311,6 +319,7 @@ declare class $npm$parse$ParseRelation {
 // =========================
 declare class $npm$parse$ParseError {
   static(code: ?number, message: ?string): $npm$parse$ParseError,
+  constructor(code: ?number, message: ?string): $npm$parse$ParseError,
   code: ?number,
   message: ?string
 }
@@ -320,6 +329,7 @@ declare class $npm$parse$ParseError {
 // =========================
 declare class $npm$parse$ParseRole extends $npm$parse$ParseObject {
   static(name: string, acl: $npm$parse$ParseACL): $npm$parse$ParseRole,
+  constructor(name: string, acl: $npm$parse$ParseACL): $npm$parse$ParseRole,
   getName(): ?string,
   setName(name: string, options?: $npm$parse$RequestOptions): $npm$parse$ParseObject | boolean,
   getUsers(): $npm$parse$ParseRelation,
