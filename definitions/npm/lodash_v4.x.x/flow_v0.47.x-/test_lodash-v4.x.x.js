@@ -121,8 +121,14 @@ _.keyBy([
 // Example of keying a map of objects by a number type
 type KeyByTest$ByNumber<T: Object> = { [number]: T }
 type KeyByTest$Record = { id: number }
-var group: KeyByTest$ByNumber<KeyByTest$Record> = { 1: { id: 4 }, 2: { id: 4 }, 3: { id: 7 } }
-_.keyBy(group, 'id')
+var keyByTest$array: Array<KeyByTest$Record> = [{ id: 4 }, { id: 4 }, { id: 7 }]
+var keyByTest$map: KeyByTest$ByNumber<KeyByTest$Record> = {
+  [keyByTest$array[0].id]: keyByTest$array[0],
+  [keyByTest$array[1].id]: keyByTest$array[1],
+  [keyByTest$array[2].id]: keyByTest$array[2],
+}
+
+var keyByTest$map2: KeyByTest$ByNumber<KeyByTest$Record> = _.keyBy(keyByTest$map, 'id')
 
 
 /**
