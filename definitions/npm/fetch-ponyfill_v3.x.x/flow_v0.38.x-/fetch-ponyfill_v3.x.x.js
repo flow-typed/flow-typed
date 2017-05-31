@@ -16,4 +16,3 @@ declare module 'fetch-ponyfill' {
 
   declare export default function PonyfillConstructor(options?: InitOptions): PonyfillExports;
 }
-

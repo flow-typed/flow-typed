@@ -33,11 +33,6 @@ fetch(url, {
   return json.split(',');
 })
 
-//$ExpectError
-fetch(url, {
-  method: 'INVALID'
-})
-
 
 const _fetch1 = FetchConstructor({Promise, XMLHttpRequest}).fetch;
 //$ExpectError
