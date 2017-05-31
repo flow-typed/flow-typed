@@ -23,7 +23,7 @@ handleActions({
 handleActions({ foo: {}, bar() {} });
 
 
-const { a } = createActions('a', () => null, new Symbol('foo'));
+const { a } = createActions('a', () => null, Symbol('foo'));
 a();
 
 // $ExpectError
