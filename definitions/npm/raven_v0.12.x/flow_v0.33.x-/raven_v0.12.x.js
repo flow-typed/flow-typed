@@ -9,7 +9,7 @@ declare module 'raven' {
     transport: (options: any) => any,
   }
   declare class Raven extends events$EventEmitter {
-    static constructor(dsn: string, options?: ClientOptions): Raven;
+    constructor(dsn: string, options?: ClientOptions): Raven;
     patchGlobal(cb?: () => void): void;
     captureException(e: Error, cb?: (result: any) => void): void;
     setUserContext(data: Object): void;
