@@ -141,7 +141,7 @@ async function determineFlowVersion(cwd: string, flowVersionArg?: string) {
   } else {
     return {
       kind: 'specific',
-      ver: await findFlowSpecificVer(cwd, cwd)
+      ver: await findFlowSpecificVer(cwd)
     };
   }
 }
