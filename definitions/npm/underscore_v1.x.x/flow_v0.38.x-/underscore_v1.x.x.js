@@ -447,8 +447,8 @@ declare module "underscore" {
     findKey(object: Object, predicate: () => boolean, context?: mixed): ?string;
     extend: typeof $underscore$Extend;
     extendOwn: typeof $underscore$Extend;
-    pick<K, V>(object: {[keys: K]: V}): {[keys: K]: V};
-    omit<K, V>(object: {[keys: K]: V}): {[keys: K]: V};
+    pick<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
+    omit<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
     defaults<K, V>(defaults: {[keys: K]: V}, more: {[keys: K]: V}): {[keys: K]: V};
     clone<O: {}>(object: O): O;
     tap<O>(object: O): O;

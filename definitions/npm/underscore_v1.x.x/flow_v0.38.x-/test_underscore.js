@@ -13,10 +13,6 @@ _.countBy([1, 2, 3, 4, 5], function(num) {
 
 _.shuffle([1, 2, 3, 4, 5, 6]);
 
-(function() {
-	return _.toArray(arguments).slice(1);
-})(1, 2, 3, 4);
-
 _.unzip([['moe', 30, true], ['larry', 40, false], ['curly', 50, false]]);
 
 _.lastIndexOf([1, 2, 3, 1, 2, 3], 2);
