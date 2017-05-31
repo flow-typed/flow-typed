@@ -188,4 +188,5 @@ declare class Bluebird$Defer {
 declare module 'bluebird' {
   declare export default typeof Bluebird$Promise;
   declare export type Disposable<T> = Bluebird$Disposable<T>;
+  declare export function using<T, A>(disposable: Bluebird$Disposable<T>, handler: (value: T) => $Promisable<A>): Bluebird$Promise<A>;
 }
