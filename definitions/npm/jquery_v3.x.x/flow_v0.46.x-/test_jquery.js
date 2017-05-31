@@ -406,10 +406,10 @@ testSelector = $('input').prop('checked', function(i, val) {
 });
 
 //removeAttr(attributeName: string): JQuery;
-testString = testSelector.removeAttr('href');
+testSelector = testSelector.removeAttr('href');
 
 //removeClass(className?: string): JQuery;
-testString = testSelector.removeClass('class');
+testSelector = testSelector.removeClass('class');
 
 //removeClass(func: (index: number, className: string) => string): JQuery;
 testSelector = testSelector.removeClass(function() {
@@ -417,7 +417,7 @@ testSelector = testSelector.removeClass(function() {
 });
 
 //removeProp(propertyName: string): JQuery;
-testString = testSelector.removeProp('class');
+testSelector = testSelector.removeProp('class');
 
 //toggleClass(className: string, swtch?: boolean): JQuery;
 testSelector = testSelector.toggleClass('class');
@@ -972,7 +972,7 @@ testSelector = $('div').undelegate();
 testSelector = $('div').undelegate('p', 'click', testCallbackEventObject);
 
 //undelegate(selector: string, events: Object): JQuery;
-testSelector = $('div').undelegate('p', testEventObject);
+testSelector = $('div').undelegate('p', {});
 
 //undelegate(namespace: string): JQuery;
 testSelector = $('div').undelegate('namespace');
