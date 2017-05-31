@@ -84,7 +84,7 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
     _flowBinVersionPromise = (async function() {
       console.log("Fetching all Flow binaries...");
 	  const IS_WINDOWS = os.type() === "Windows_NT";
-      const FLOW_BIN_VERSION_ORDER = [];
+      let FLOW_BIN_VERSION_ORDER = [];
       const GH_CLIENT = gitHubClient();
       const QUERY_PAGE_SIZE = 100;
       const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
@@ -139,6 +139,17 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
       FLOW_BIN_VERSION_ORDER.sort((a, b) => {
         return semver.lt(a, b) ? -1 : 1;
       });
+
+      // Group Flow Versions by Major/Minor to only use latest Patch version
+      let groupedVersions = new Map();
+      FLOW_BIN_VERSION_ORDER.forEach(version => {
+        const majorMinor = `${semver.major(version)}${semver.minor(version)}`;
+        groupedVersions = groupedVersions.set(majorMinor, version);
+      });
+      FLOW_BIN_VERSION_ORDER = [...groupedVersions.values()];
+      // Only test against latest 10 Versions
+      FLOW_BIN_VERSION_ORDER.splice(0, FLOW_BIN_VERSION_ORDER.length - 10);
+      binURLs = new Map([...binURLs].filter(([version]) => FLOW_BIN_VERSION_ORDER.includes(version)));
 
       await P.all(Array.from(binURLs).map(async ([version, binURL]) => {
         const zipPath = path.join(BIN_DIR, "flow-" + version + ".zip");
