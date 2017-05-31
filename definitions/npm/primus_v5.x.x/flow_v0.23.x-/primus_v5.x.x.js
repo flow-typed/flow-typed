@@ -55,7 +55,7 @@ declare class Primus$Spark {
   emit(eventName: string, ...arguments?: any[]): void;
 }
 declare class Primus$Primus {
-  static contructor(server: http.Server, options?: Primus$Options): Primus$Primus;
+  constructor(server: http.Server, options?: Primus$Options): Primus$Primus;
   static createServer(options: Primus$CreateOptions): Primus$Primus;
   static createServer(onConnection: (spark: Primus$Spark) => any, options?: Primus$CreateOptions): Primus$Primus;
   static createSocket(options: Primus$SocketOptions): Class<net.Socket>;
