@@ -129,7 +129,7 @@ var keyByTest_map: KeyByTest$ByNumber<KeyByTest$Record> = {
   [keyByTest_array[2].id]: keyByTest_array[2],
 }
 
-var keyByTest$map2: KeyByTest$ByNumberMaybe<?KeyByTest$Record> = _.keyBy(keyByTest$map, 'id')
+var keyByTest_map2: KeyByTest$ByNumberMaybe<?KeyByTest$Record> = _.keyBy(keyByTest_map, 'id')
 
 
 /**
