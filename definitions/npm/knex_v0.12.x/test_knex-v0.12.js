@@ -6,18 +6,37 @@ Knex({
   client: 'foo',
 });
 
-knex.select('foo').withSchema('a').from('bar').where('foo', 2).orWhere('bar', 'foo').whereNot('asd', 1).whereIn('batz', [1, 2]);
-knex.select(knex.raw(''))
+knex
+  .select('foo')
+  .withSchema('a')
+  .from('bar')
+  .where('foo', 2)
+  .orWhere('bar', 'foo')
+  .whereNot('asd', 1)
+  .whereIn('batz', [1, 2]);
+knex.select(knex.raw(''));
 
-knex.innerJoin('bar', function () { return this; });
-knex.leftJoin('bar', function () { return this; });
-knex.rightJoin('bar', function () { return this; });
-knex.rightOuterJoin('bar', function () { return this; });
-knex.fullOuterJoin('bar', function () { return this; });
-knex.crossJoin('bar', function () { return this; });
+knex.innerJoin('bar', function() {
+  return this;
+});
+knex.leftJoin('bar', function() {
+  return this;
+});
+knex.rightJoin('bar', function() {
+  return this;
+});
+knex.rightOuterJoin('bar', function() {
+  return this;
+});
+knex.fullOuterJoin('bar', function() {
+  return this;
+});
+knex.crossJoin('bar', function() {
+  return this;
+});
 
 knex('foo').insert({
-  a: 1
+  a: 1,
 });
 knex('bar').del();
 // $ExpectError
@@ -48,3 +67,27 @@ knex('foo').havingBetween('count', [1, 5]);
 // $ExpectError
 knex('foo').havingBetween('count', [1, 2, 3]);
 knex('foo').havingRaw('count > 10');
+
+/**
+ * Bindings with *raw methods
+ */
+
+knex.raw('', ['a', 1]);
+knex.raw('', {name: 'foo'});
+knex('foo').havingRaw('');
+knex('foo').havingRaw('', ['a']);
+knex('foo').whereRaw('');
+knex('foo').whereRaw('', ['a']);
+knex('foo').joinRaw('');
+knex('foo').joinRaw('', ['a']);
+
+// $ExpectError
+knex('foo').raw();
+// $ExpectError
+knex('foo').raw('', '');
+// $ExpectError
+knex('foo').havingRaw();
+// $ExpectError
+knex('foo').whereRaw();
+// $ExpectError
+knex('foo').joinRaw();

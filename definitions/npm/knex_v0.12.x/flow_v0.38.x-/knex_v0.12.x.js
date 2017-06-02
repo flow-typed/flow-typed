@@ -35,7 +35,7 @@ declare class Knex$QueryBuilder mixins Promise {
   whereNotExists(column: string): this,
   whereBetween(column: string, range: number[]): this,
   whereNotBetween(column: string, range: number[]): this,
-  whereRaw(raw: any): this,
+  whereRaw(sql: string, bindings?: Knex$RawBindings): this,
   orWhere(builder: Knex$QueryBuilderFn): this,
   orWhere(column: string, value: any): this,
   orWhere(column: string, operator: string, value: any): this,
@@ -50,7 +50,7 @@ declare class Knex$QueryBuilder mixins Promise {
   orWhereNotExists(column: string): this,
   orWhereBetween(column: string, range: number[]): this,
   orWhereNotBetween(column: string, range: number[]): this,
-  orWhereRaw(raw: any): this,
+  orWhereRaw(sql: string, bindings?: Knex$RawBindings): this,
   innerJoin(table: string, c1: string, operator: string, c2: string): this,
   innerJoin(table: string, c1: string, c2: string): this,
   innerJoin(builder: Knex$QueryBuilder, c1?: string, c2?: string): this,
@@ -77,12 +77,12 @@ declare class Knex$QueryBuilder mixins Promise {
   crossJoin(column: string, c1: string, c2: string): this,
   crossJoin(column: string, c1: string, operator: string, c2: string): this,
   crossJoin(table: string, builder: Knex$QueryBuilderFn): this,
-  joinRaw(sql: string, bindings?: mixed[]): this,
+  joinRaw(sql: string, bindings?: Knex$RawBindings): this,
   distinct(): this,
   groupBy(column: string): this,
-  groupByRaw(): this,
+  groupByRaw(sql: string, bindings?: Knex$RawBindings): this,
   orderBy(column: string, direction?: 'desc' | 'asc'): this,
-  orderByRaw(): this,
+  orderByRaw(sql: string, bindings?: Knex$RawBindings): this,
   offset(offset: number): this,
   limit(limit: number): this,
   having(column: string, operator: string, value: mixed): this,
@@ -96,7 +96,7 @@ declare class Knex$QueryBuilder mixins Promise {
   havingNotBetween<T>(column: string, range: [T, T]): this,
   havingRaw(column: string, operator: string, value: mixed): this,
   havingRaw(column: string, value: mixed): this,
-  havingRaw(raw: string): this,
+  havingRaw(raw: string, bindings?: Knex$RawBindings): this,
   union(): this,
   unionAll(): this,
   count(column?: string): this,
@@ -124,7 +124,7 @@ declare class Knex$Knex mixins Knex$QueryBuilder, Promise, events$EventEmitter {
   static (config: Knex$Config): Knex$Knex,
   static QueryBuilder: typeof Knex$QueryBuilder,
   $call: (tableName: string) => Knex$QueryBuilder,
-  raw(sqlString: string): any,
+  raw(sqlString: string, bindings?: Knex$RawBindings): any,
   client: any,
   destroy(): Promise<void>
 }
@@ -140,6 +140,9 @@ declare type Knex$PostgresConfig = {
   },
   searchPath?: string
 };
+
+declare type Knex$RawBindings = Array<mixed> | {[key: string]: mixed };
+
 declare type Knex$MysqlConfig = {
   client?: 'mysql',
   connection?: {
