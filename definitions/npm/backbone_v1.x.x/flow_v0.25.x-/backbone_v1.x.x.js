@@ -191,6 +191,12 @@ declare module 'backbone' {
     constructor(options?: Object): this;
     initialize(options?: Object): this;
     start(options?: { pushState?: boolean, hashChange?: boolean, root?: string}): this;
+    navigate(fragment: string, options?: { trigger?: boolean, replace?:  boolean}): boolean | void;
+    loadUrl(fragment: string): boolean;
+    route(route: string, callback: Function): void;
+    decodeFragment(fragment: string): string;
+    getFragment(): string;
+    fragment: string;
   }
   declare var history: History;
 
