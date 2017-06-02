@@ -3,20 +3,20 @@
  */
 
 // helpers
-type Fn1<A, B> = (a: A) => B // a unary function
+type $npm$Fluture$Fn1<A, B> = (a: A) => B // a unary function
 
 // Create the global type Fluture
 // Rej = type of returned rejected value
 // Res = type of returned resolved value
 declare class Fluture<Rej, Res> {
-  map: <T>(fn: Fn1<Res, T>) => Fluture<Rej, T>,
-  bimap: <A, B>(left: Fn1<Rej, A>, right: Fn1<Res, B>) => Fluture<A, B>,
+  map: <T>(fn: $npm$Fluture$Fn1<Res, T>) => Fluture<Rej, T>,
+  bimap: <A, B>(left: $npm$Fluture$Fn1<Rej, A>, right: $npm$Fluture$Fn1<Res, B>) => Fluture<A, B>,
   chain: <A, B>(fn: (a: Res) => Fluture<A, B>) => Fluture<A, B>,
   swap: () => Fluture<Res, Rej>,
-  mapRej: <T>(fn: Fn1<Rej, T>) => Fluture<T, Res>,
+  mapRej: <T>(fn: $npm$Fluture$Fn1<Rej, T>) => Fluture<T, Res>,
   chainRej: <T>(fn: (a: Rej) => Fluture<T, Res>) => Fluture<T, Res>,
   // We can't type fold with 2 different types of left and right
-  fold: <T>(left: Fn1<Rej, T>, right: Fn1<Res, T>) => Fluture<void, T>,
+  fold: <T>(left: $npm$Fluture$Fn1<Rej, T>, right: $npm$Fluture$Fn1<Res, T>) => Fluture<void, T>,
   // We can't infer the type of applied Res(B)
   ap: <A, B>(a: Fluture<A, B>) => Fluture<A, *>,
   // We can't infer the first reject or resolve
@@ -27,8 +27,8 @@ declare class Fluture<Rej, Res> {
   finally: (a: Fluture<*, *>) => Fluture<Rej, Res>,
   lastly: (a: Fluture<*, *>) => Fluture<Rej, Res>,
 
-  fork: (rej: Fn1<Rej, *>, res: Fn1<Res, *>) => () => *,
-  value: (res: Fn1<Res, *>) => () => *,
+  fork: (rej: $npm$Fluture$Fn1<Rej, *>, res: $npm$Fluture$Fn1<Res, *>) => () => *,
+  value: (res: $npm$Fluture$Fn1<Res, *>) => () => *,
   promise: () => Promise<Res>,
 
   // We can't infer the first reject or resolve
@@ -37,8 +37,8 @@ declare class Fluture<Rej, Res> {
 
 declare module fluture {
   declare type Computation<Rej, Res> = (
-    rej: Fn1<Rej, void>,
-    res: Fn1<Res, void>
+    rej: $npm$Fluture$Fn1<Rej, void>,
+    res: $npm$Fluture$Fn1<Res, void>
   ) => void
 
   declare type NodeBack<Rej, Res> = (rej: Rej, res: Res) => void
