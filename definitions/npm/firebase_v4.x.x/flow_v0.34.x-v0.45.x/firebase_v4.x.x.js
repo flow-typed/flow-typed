@@ -303,7 +303,7 @@ declare class Reference extends Query {
   child(path: string): Reference;
   onDisconnect(): OnDisconnect;
   push(value?: FirebaseValue, onComplete?: OnCompleteCallback): ThenableReference;
-  remove(onComplete: OnCompleteCallback): Promise<void>;
+  remove(onComplete?: OnCompleteCallback): Promise<void>;
   set(value: FirebaseValue, onComplete?: OnCompleteCallback): Promise<void>;
   setPriority(priority: Priority, onComplete?: OnCompleteCallback): Promise<void>;
   setWithPriority(newVal: FirebaseValue, newPriority: Priority, onComplete?: OnCompleteCallback): Promise<void>;
@@ -316,7 +316,7 @@ declare class Reference extends Query {
 }
 
 declare class ServerValue {
-  TIMESTAMP: {};
+  static TIMESTAMP: {};
 }
 
 declare class ThenableReference extends Reference {}
