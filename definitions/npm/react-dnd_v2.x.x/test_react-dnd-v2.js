@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { DragSource, DropTarget, DragLayer, DragDropContext } from 'react-dnd';
+import { DragSource, DropTarget, DragLayer, DragDropContext, DragDropContextProvider } from 'react-dnd';
 
 // Test Drag Source
 // ----------------------------------------------------------------------
@@ -253,6 +253,18 @@ const DndBoard = DragDropContext({})(Board);
 (DndBoard: Class<ContextComponent<Board, BoardProps, BoardProps, void>>);
 // $ExpectError
 (DndBoard: string);
+
+// Test Drag Drop Context Provider
+// ----------------------------------------------------------------------
+<DragDropContextProvider backend={{}}/>;
+// $ExpectError
+<DragDropContextProvider/>;
+
+<DragDropContextProvider backend={{}} window={window}/>;
+<DragDropContextProvider backend={{}} window={document}/>;
+<DragDropContextProvider backend={{}} window={document.createElement('div')}/>;
+// $ExpectError
+<DragDropContextProvider backend={{}} window={{}}/>;
 
 // Test Functional React Components
 // ----------------------------------------------------------------------

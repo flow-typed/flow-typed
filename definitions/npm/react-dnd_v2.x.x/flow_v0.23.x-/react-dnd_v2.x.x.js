@@ -200,6 +200,15 @@ type DragDropContext = <D, P, S, C: React$Component<D, P, S>>(
   backend: mixed
 ) => (component: Class<C>) => Class<ContextComponent<C, D, P, S>>;
 
+// Drag Drop Context Provider
+// ----------------------------------------------------------------------
+type DragDropContextProviderProps = {
+  backend: mixed,
+  window?: EventTarget
+};
+
+type DragDropContextProvider = Class<React$Component<void, DragDropContextProviderProps, void>>;
+
 // Top-level API
 // ----------------------------------------------------------------------
 declare module 'react-dnd' {
@@ -207,6 +216,7 @@ declare module 'react-dnd' {
     DragSource: DragSource,
     DropTarget: DropTarget,
     DragLayer: DragLayer,
-    DragDropContext: DragDropContext
+    DragDropContext: DragDropContext,
+    DragDropContextProvider: DragDropContextProvider
   }
 }
