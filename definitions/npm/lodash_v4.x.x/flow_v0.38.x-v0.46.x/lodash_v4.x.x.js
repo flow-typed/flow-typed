@@ -460,10 +460,10 @@ declare module 'lodash' {
     cond(pairs: NestedArray<Function>): Function;
     conforms(source: Object): Function;
     constant<T>(value: T): () => T;
-    defaultTo<T1:string|boolean|Object,T2>(value: T1, default: T2): T1;
+    defaultTo<T1:string|boolean|Object,T2>(value: T1, defaultValue: T2): T1;
     // NaN is a number instead of its own type, otherwise it would behave like null/void
-    defaultTo<T1:number,T2>(value: T1, default: T2): T1|T2;
-    defaultTo<T1:void|null,T2>(value: T1, default: T2): T2;
+    defaultTo<T1:number,T2>(value: T1, defaultValue: T2): T1|T2;
+    defaultTo<T1:void|null,T2>(value: T1, defaultValue: T2): T2;
     flow(...funcs?: Array<Function>): Function;
     flow(funcs?: Array<Function>): Function;
     flowRight(...funcs?: Array<Function>): Function;
