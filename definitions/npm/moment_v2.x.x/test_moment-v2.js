@@ -1,5 +1,9 @@
 // @flow
 import moment from 'moment';
+import { duration } from 'moment';
+
+// $ExpectError
+import { moment } from 'moment';
 
 // Parse
 const m3: moment = moment([123, 123]);
@@ -66,3 +70,16 @@ n = m.utcOffset('+00:10').utcOffset();
 n = m.utcOffset(0, true).utcOffset();
 n = m.utcOffset(0, false).utcOffset();
 n = m.utcOffset(0, true, true).utcOffset();
+
+
+// Durations
+let d: duration;
+d = duration(1, 'second');
+d = moment.duration(100);
+d = duration({
+  months: 2,
+  years: 3,
+});
+d.humanize();
+// $ExpectError
+d.months().years();

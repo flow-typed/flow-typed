@@ -237,5 +237,6 @@ declare class moment$Moment {
 }
 
 declare module 'moment' {
-  declare module.exports: Class<moment$Moment>;
+  declare export default Class<moment$Moment>;
+  declare export var duration: $PropertyType<Class<moment$Moment>, 'duration'>;
 }
