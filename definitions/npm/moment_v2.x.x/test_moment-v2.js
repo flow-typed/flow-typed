@@ -2,12 +2,6 @@
 import moment from 'moment';
 import { duration } from 'moment';
 
-const momentCommonJS = require('moment');
-const { duration: durationCommonJS } = require('moment');
-
-(momentCommonJS: moment);
-(durationCommonJS: duration);
-
 // $ExpectError
 import { moment } from 'moment';
 
@@ -87,5 +81,7 @@ d = duration({
   years: 3,
 });
 d.humanize();
+d.months();
+d.years();
 // $ExpectError
 d.months().years();
