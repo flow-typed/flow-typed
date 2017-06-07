@@ -186,6 +186,7 @@ declare class Bluebird$Defer {
 }
 
 declare module 'bluebird' {
-  declare export default typeof Bluebird$Promise;
-  declare export type Disposable<T> = Bluebird$Disposable<T>;
+  declare var exports: typeof Bluebird$Promise;
+
+  declare type Disposable<T> = Bluebird$Disposable<T>;
 }

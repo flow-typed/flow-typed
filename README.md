@@ -37,7 +37,7 @@ implementation of that module/library.
 tests to ensure that definitions remain high quality, and tooling to make it 
 as easy as possible to import them into your project. 
 
-All you have to do when you add a one or more new dependencies to your project 
+All you have to do when you add one or more new dependencies to your project 
 is run `flow-typed install`. This will search the libdef repo and download all
 the libdefs that are relevant for your project and install them for you. After
 that, **simply check them in** and be on your way!
