@@ -33,3 +33,6 @@ node_modules
 cli/dist/*
 cli/.test-dir/*
 cli/.flow-bins-cache/*
+
+# Editors
+.vscode
