@@ -50,25 +50,28 @@ declare module 'redux' {
 
   declare function combineReducers<O: Object, A>(reducers: O): CombinedReducer<$ObjMap<O, <S>(r: Reducer<S, any>) => S>, A>;
 
-  declare function compose<A, B, C>(bc: (b: B) => C, ab: (a: A) => B): A => C
+  declare function compose<A, B, C>(
+    bc: (b: B) => C,
+    ab: (a: A) => B
+  ): (a: A) => C
   declare function compose<A, B, C, D>(
     cd: (c: C) => D,
     bc: (b: B) => C,
     ab: (a: A) => B
-  ): A => D
+  ): (a: A) => D
   declare function compose<A, B, C, D, E>(
     de: (d: D) => E,
     cd: (c: C) => D,
     bc: (b: B) => C,
     ab: (a: A) => B
-  ): A => E
+  ): (a: A) => E
   declare function compose<A, B, C, D, E, F>(
     ef: (e: E) => F,
     de: (d: D) => E,
     cd: (c: C) => D,
     bc: (b: B) => C,
     ab: (a: A) => B
-  ): A => F
+  ): (a: A) => F
   declare function compose<A, B, C, D, E, F, G>(
     fg: (f: F) => G,
     ef: (e: E) => F,
@@ -76,7 +79,7 @@ declare module 'redux' {
     cd: (c: C) => D,
     bc: (b: B) => C,
     ab: (a: A) => B
-  ): A => G
+  ): (a: A) => G
   declare function compose<A, B, C, D, E, F, G, H>(
     gh: (g: G) => H,
     fg: (f: F) => G,
@@ -85,7 +88,7 @@ declare module 'redux' {
     cd: (c: C) => D,
     bc: (b: B) => C,
     ab: (a: A) => B
-  ): A => H
+  ): (a: A) => H
   declare function compose<A, B, C, D, E, F, G, H, I>(
     hi: (h: H) => I,
     gh: (g: G) => H,
@@ -95,6 +98,6 @@ declare module 'redux' {
     cd: (c: C) => D,
     bc: (b: B) => C,
     ab: (a: A) => B
-  ): A => I
+  ): (a: A) => I
 
 }
