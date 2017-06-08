@@ -50,6 +50,7 @@ declare module 'redux' {
 
   declare function combineReducers<O: Object, A>(reducers: O): CombinedReducer<$ObjMap<O, <S>(r: Reducer<S, any>) => S>, A>;
 
+  declare function compose<A, B>(ab: (a: A) => B): (a: A) => B
   declare function compose<A, B, C>(
     bc: (b: B) => C,
     ab: (a: A) => B
