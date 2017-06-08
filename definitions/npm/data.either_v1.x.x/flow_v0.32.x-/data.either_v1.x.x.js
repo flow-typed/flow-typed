@@ -1,36 +1,59 @@
-/*eslint no-unused-vars: 0, flowtype/no-types-missing-file-annotation: 0*/
+// /*eslint no-unused-vars: 0, flowtype/no-types-missing-file-annotation: 0*/
 
-// Warning: this should be improved...
+interface Functor<A> {
+  map<B>(f: (a: A) => B): Functor<B>;
+}
 
-class Validation<F, S> {}
+interface Apply<A> extends Functor<A> {
+  ap<B>(fab: Apply<(a: A) => B>): Apply<B>;
+}
 
-class Applicative<F> {}
+interface Applicative<A> extends Apply<A> {
+  static of<B>(b: B): Applicative<B>;
+}
+
+interface Chain<A> extends Apply<A> {
+  chain<B>(f: (a: A) => Chain<B>): Chain<B>;
+}
+
+interface Monad<A> extends Applicative<A>, Chain<A> {}
+
+interface Semigroup<T> {
+  concat(s: T): T
+}
+
+interface Monoid<T> extends Semigroup<T> {
+  empty(): T
+}
+
+interface Validation<F, S> extends Applicative<S> {}
 
 declare module 'data.either' {
 
-  declare class IEither<L, R> {
+  declare class Either<L, A> {
     isLeft: boolean;
     isRight: boolean;
-    isEqual<L, R>(m: IEither<L, R>): boolean;
+    isEqual<L, A>(m: Either<L, A>): boolean;
     toString(): string;
-    get(): R;
-    getOrElse(value: R): R;
-    merge(): R | L;
-    ap<B>(f: Applicative<R>): Applicative<B>;
-    map<B>(f: (v: R) => B): IEither<L, B>;
-    chain<B>(f: (v: R) => IEither<L, B>): IEither<L, B>;
-    fold<B>(fl: (left: L) => B, fr: (right: R) => B): B;
-    cata<B>(patterns: {| Left: (v: L) => B, Right: (v: R) => B |}): B;
-    swap(): IEither<R, L>;
-    bimap<A, B>(fl: (left: L) => A, fr: (right: R) => B): IEither<A, B>;
-    leftMap<A, R>(fl: (left: L) => A): IEither<A, R>;
-    orElse<A, R>(f: (left: ?L) => IEither<A, R>): IEither<A, R>;
-    static Left<L, R>(left: L): IEither<L, R>;
-    static Right<L, R>(right: R): IEither<L, R>;
-    static of<L, R>(value: R): IEither<L, R>;
-    static fromNullable<L, R>(value: ?R): IEither<L, R>;
-    static fromValidation<L, R>(m: Validation<L, R>): IEither<L, R>;
+    get(): A;
+    getOrElse(v: A): A;
+    merge(): A | L;
+    ap<B>(fab: Either<L, B> | Applicative<B>): Either<L, B>;
+    map<B>(f: (r: A) => B): Either<L, B>;
+    chain<B>(f: (r: A) => Either<L, B>): Either<L, B>;
+    fold<B>(fl: (l: L) => B, fr: (r: A) => B): B;
+    cata<B>(p: {| Left: (l: L) => B, Right: (r: A) => B |}): B;
+    swap(): Either<A, L>;
+    bimap<L1, B>(fl: (l: L) => L1, fr: (r: A) => B): Either<L1, B>;
+    leftMap<L1, A>(fl: (l: L) => L1): Either<L1, A>;
+    orElse<L1, A>(f: (l: ?L) => Either<L1, A>): Either<L1, A>;
+    concat<L, Monoid>(m: Either<L, A>): Either<L, Monoid>;
+    static Left<L, A>(l: L): Either<L, A>;
+    static Right<L, A>(r: A): Either<L, A>;
+    static of<L, A>(r: A): Either<L, A>;
+    static fromNullable<L, A>(r: ?A): Either<L, A>;
+    static fromValidation<L, A>(m: Validation<L, A>): Either<L, A>;
   }
 
-  declare module.exports: typeof IEither;
+  declare module.exports: typeof Either;
 }
