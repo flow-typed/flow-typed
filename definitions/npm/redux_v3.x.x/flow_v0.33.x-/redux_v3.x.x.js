@@ -50,47 +50,51 @@ declare module 'redux' {
 
   declare function combineReducers<O: Object, A>(reducers: O): CombinedReducer<$ObjMap<O, <S>(r: Reducer<S, any>) => S>, A>;
 
-  declare function compose<A, B, C>((B) => C, (A) => B): A => C
-  declare function compose<A, B, C, D>((C) => D, (B) => C, (A) => B): A => D
+  declare function compose<A, B, C>((bc: B) => C, (ab: A) => B): A => C
+  declare function compose<A, B, C, D>(
+    (cd: C) => D,
+    (bc: B) => C,
+    (ab: A) => B
+  ): A => D
   declare function compose<A, B, C, D, E>(
-    (D) => E,
-    (C) => D,
-    (B) => C,
-    (A) => B
+    (de: D) => E,
+    (cd: C) => D,
+    (bc: B) => C,
+    (ab: A) => B
   ): A => E
   declare function compose<A, B, C, D, E, F>(
-    (E) => F,
-    (D) => E,
-    (C) => D,
-    (B) => C,
-    (A) => B
+    (ef: E) => F,
+    (de: D) => E,
+    (cd: C) => D,
+    (bc: B) => C,
+    (ab: A) => B
   ): A => F
   declare function compose<A, B, C, D, E, F, G>(
-    (F) => G,
-    (E) => F,
-    (D) => E,
-    (C) => D,
-    (B) => C,
-    (A) => B
+    (fg: F) => G,
+    (ef: E) => F,
+    (de: D) => E,
+    (cd: C) => D,
+    (bc: B) => C,
+    (ab: A) => B
   ): A => G
   declare function compose<A, B, C, D, E, F, G, H>(
-    (G) => H,
-    (F) => G,
-    (E) => F,
-    (D) => E,
-    (C) => D,
-    (B) => C,
-    (A) => B
+    (gh: G) => H,
+    (fg: F) => G,
+    (ef: E) => F,
+    (de: D) => E,
+    (cd: C) => D,
+    (bc: B) => C,
+    (ab: A) => B
   ): A => H
   declare function compose<A, B, C, D, E, F, G, H, I>(
-    (H) => I,
-    (G) => H,
-    (F) => G,
-    (E) => F,
-    (D) => E,
-    (C) => D,
-    (B) => C,
-    (A) => B
+    (hi: H) => I,
+    (gh: G) => H,
+    (fg: F) => G,
+    (ef: E) => F,
+    (de: D) => E,
+    (cd: C) => D,
+    (bc: B) => C,
+    (ab: A) => B
   ): A => I
 
 }
