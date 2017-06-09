@@ -260,7 +260,7 @@ declare class rxjs$Observable<+T> {
 
   sample(notifier: rxjs$Observable<any>): rxjs$Observable<T>;
 
-  sampleTime(delay: number): rxjs$Observable<T>;
+  sampleTime(delay: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>;
 
   publishReplay(bufferSize?: number, windowTime?: number, scheduler?: rxjs$SchedulerClass): rxjs$ConnectableObservable<T>;
 
@@ -788,5 +788,11 @@ declare module 'rxjs/Subject' {
 declare module 'rxjs/Subscription' {
   declare module.exports: {
     Subscription: typeof rxjs$Subscription
+  }
+}
+
+declare module 'rxjs/testing/TestScheduler' {
+  declare module.exports: {
+    TestScheduler: typeof rxjs$SchedulerClass
   }
 }
