@@ -1,6 +1,7 @@
 // @flow
 import {renderToString} from 'react-dom/server'
 import styled, {ThemeProvider, withTheme, keyframes, ServerStyleSheet, StyleSheetManager} from 'styled-components'
+import React from 'react'
 import type {Theme} from 'styled-components'
 
 const Title = styled.h1`
@@ -70,3 +71,12 @@ const html2 = renderToString(
 
 const css2 = sheet.getStyleTags()
 const css3 = sheet.getStyleElement()
+
+class TestReactClass extends React.Component {
+  render() { return <div />; }
+}
+
+const StyledClass = styled(TestReactClass)`
+  color: red;
+`;
+
