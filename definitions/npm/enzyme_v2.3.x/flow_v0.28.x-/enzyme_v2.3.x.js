@@ -47,7 +47,7 @@ declare module 'enzyme' {
     setState(state: Object, callback?: Function): this,
     setProps(props: Object): this;
     setContext(context: Object): this;
-    instance(): React$Component<any, any, any>;
+    instance(): React$Component<*, *, *>;
     update(): this;
     debug(): string;
     type(): string | Function | null;
@@ -64,6 +64,7 @@ declare module 'enzyme' {
   }
 
   declare export class ReactWrapper extends Wrapper {
+    constructor(nodes: NodeOrNodes, root: any, options?: ?Object): ReactWrapper;
     mount(): this;
     ref(refName: string): this;
     detach(): void;
