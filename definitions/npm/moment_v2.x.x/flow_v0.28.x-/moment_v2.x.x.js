@@ -6,40 +6,40 @@ declare module 'moment' {
 
 
   declare interface Locale {
-    calendar(key?: CalendarKey, m?: Moment, now?: Moment): string,
-    longDateFormat(key: LongDateFormatKey): string,
-    invalidDate(): string,
-    ordinal(n: number): string,
-    preparse(inp: string): string,
-    postformat(inp: string): string,
+    calendar(key?: CalendarKey, m?: Moment, now?: Moment): string;
+    longDateFormat(key: LongDateFormatKey): string;
+    invalidDate(): string;
+    ordinal(n: number): string;
+    preparse(inp: string): string;
+    postformat(inp: string): string;
     relativeTime(
       n: number,
       withoutSuffix: boolean,
       key: RelativeTimeKey,
-      isFuture: boolean): string,
-    pastFuture(diff: number, absRelTime: string): string,
-    set(config: Object): void,
-    months(): string[],
-    months(m: Moment, format?: string): string,
-    monthsShort(): string[],
-    monthsShort(m: Moment, format?: string): string,
-    monthsParse(monthName: string, format: string, strict: boolean): number,
-    monthsRegex(strict: boolean): RegExp,
-    monthsShortRegex(strict: boolean): RegExp,
-    week(m: Moment): number,
-    firstDayOfYear(): number,
-    firstDayOfWeek(): number,
-    weekdays(): string[],
-    weekdays(m: Moment, format?: string): string,
-    weekdaysMin(): string[],
-    weekdaysMin(m: Moment): string,
-    weekdaysShort(): string[],
-    weekdaysShort(m: Moment): string,
-    weekdaysParse(weekdayName: string, format: string, strict: boolean): number,
-    weekdaysRegex(strict: boolean): RegExp,
-    weekdaysShortRegex(strict: boolean): RegExp,
-    weekdaysMinRegex(strict: boolean): RegExp,
-    isPM(input: string): boolean,
+      isFuture: boolean): string;
+    pastFuture(diff: number, absRelTime: string): string;
+    set(config: Object): void;
+    months(): string[];
+    months(m: Moment, format?: string): string;
+    monthsShort(): string[];
+    monthsShort(m: Moment, format?: string): string;
+    monthsParse(monthName: string, format: string, strict: boolean): number;
+    monthsRegex(strict: boolean): RegExp;
+    monthsShortRegex(strict: boolean): RegExp;
+    week(m: Moment): number;
+    firstDayOfYear(): number;
+    firstDayOfWeek(): number;
+    weekdays(): string[];
+    weekdays(m: Moment, format?: string): string;
+    weekdaysMin(): string[];
+    weekdaysMin(m: Moment): string;
+    weekdaysShort(): string[];
+    weekdaysShort(m: Moment): string;
+    weekdaysParse(weekdayName: string, format: string, strict: boolean): number;
+    weekdaysRegex(strict: boolean): RegExp;
+    weekdaysShortRegex(strict: boolean): RegExp;
+    weekdaysMinRegex(strict: boolean): RegExp;
+    isPM(input: string): boolean;
     meridiem(hour: number, minute: number, isLower: boolean): string
   }
 
@@ -62,7 +62,10 @@ declare module 'moment' {
     lastDay?: CalendarSpecVal,
     nextWeek?: CalendarSpecVal,
     lastWeek?: CalendarSpecVal,
-    sameElse?: CalendarSpecVal, [x: string]: CalendarSpecVal | void
+    sameElse?: CalendarSpecVal,
+
+    // any additional properties might be used with moment.calendarFormat
+    [key: string]: ?CalendarSpecVal
   }
 
   declare type RelativeTimeSpecVal = (string | ((
@@ -124,7 +127,7 @@ declare module 'moment' {
     invalidDate?: string,
     ordinal?: (n: number) => string,
     ordinalParse?: RegExp,
-    week?: WeekSpec, [x: string]: any
+    week?: WeekSpec, [key: string]: any
   }
 
   declare interface MomentObjectOutput {
@@ -393,234 +396,234 @@ declare module 'moment' {
     strict?: boolean
   }
 
-  declare export default class Moment {
-  format(format?: string): string;
-  startOf(unitOfTime: unitOfTime$StartOf): Moment;
-  endOf(unitOfTime: unitOfTime$StartOf): Moment;
-  add(
-    amount?: DurationInputArg1,
-  unit?: DurationInputArg2): Moment;
+  declare interface Moment {
+    format(format?: string): string;
+    startOf(unitOfTime: unitOfTime$StartOf): Moment;
+    endOf(unitOfTime: unitOfTime$StartOf): Moment;
+    add(
+      amount?: DurationInputArg1,
+    unit?: DurationInputArg2): Moment;
 
-  /**
-   *
-   * @deprecated  reverse syntax
-   */
-  add(unit: unitOfTime$DurationConstructor, amount: number | string): Moment;
-  subtract(
-    amount?: DurationInputArg1,
-  unit?: DurationInputArg2): Moment;
+    /**
+     *
+     * @deprecated  reverse syntax
+     */
+    add(unit: unitOfTime$DurationConstructor, amount: number | string): Moment;
+    subtract(
+      amount?: DurationInputArg1,
+    unit?: DurationInputArg2): Moment;
 
-  /**
-   *
-   * @deprecated  reverse syntax
-   */
-  subtract(unit: unitOfTime$DurationConstructor, amount: number | string): Moment;
-  calendar(time?: MomentInput, formats?: CalendarSpec): string;
-  clone(): Moment;
+    /**
+     *
+     * @deprecated  reverse syntax
+     */
+    subtract(unit: unitOfTime$DurationConstructor, amount: number | string): Moment;
+    calendar(time?: MomentInput, formats?: CalendarSpec): string;
+    clone(): Moment;
 
-  /**
-   *
-   * @return  Unix timestamp in milliseconds
-   */
-  valueOf(): number;
-  local(keepLocalTime?: boolean): Moment;
-  isLocal(): boolean;
-  utc(keepLocalTime?: boolean): Moment;
-  isUTC(): boolean;
+    /**
+     *
+     * @return  Unix timestamp in milliseconds
+     */
+    valueOf(): number;
+    local(keepLocalTime?: boolean): Moment;
+    isLocal(): boolean;
+    utc(keepLocalTime?: boolean): Moment;
+    isUTC(): boolean;
 
-  /**
-   *
-   * @deprecated  use isUTC
-   */
-  isUtc(): boolean;
-  parseZone(): Moment;
-  isValid(): boolean;
-  invalidAt(): number;
-  hasAlignedHourOffset(other?: MomentInput): boolean;
-  creationData(): MomentCreationData;
-  parsingFlags(): MomentParsingFlags;
-  year(y: number): Moment;
-  year(): number;
+    /**
+     *
+     * @deprecated  use isUTC
+     */
+    isUtc(): boolean;
+    parseZone(): Moment;
+    isValid(): boolean;
+    invalidAt(): number;
+    hasAlignedHourOffset(other?: MomentInput): boolean;
+    creationData(): MomentCreationData;
+    parsingFlags(): MomentParsingFlags;
+    year(y: number): Moment;
+    year(): number;
 
-  /**
-   *
-   * @deprecated  use year(y)
-   */
-  years(y: number): Moment;
+    /**
+     *
+     * @deprecated  use year(y)
+     */
+    years(y: number): Moment;
 
-  /**
-   *
-   * @deprecated  use year()
-   */
-  years(): number;
-  quarter(): number;
-  quarter(q: number): Moment;
-  quarters(): number;
-  quarters(q: number): Moment;
-  month(M: number | string): Moment;
-  month(): number;
+    /**
+     *
+     * @deprecated  use year()
+     */
+    years(): number;
+    quarter(): number;
+    quarter(q: number): Moment;
+    quarters(): number;
+    quarters(q: number): Moment;
+    month(M: number | string): Moment;
+    month(): number;
 
-  /**
-   *
-   * @deprecated  use month(M)
-   */
-  months(M: number | string): Moment;
+    /**
+     *
+     * @deprecated  use month(M)
+     */
+    months(M: number | string): Moment;
 
-  /**
-   *
-   * @deprecated  use month()
-   */
-  months(): number;
-  day(d: number | string): Moment;
-  day(): number;
-  days(d: number | string): Moment;
-  days(): number;
-  date(d: number): Moment;
-  date(): number;
+    /**
+     *
+     * @deprecated  use month()
+     */
+    months(): number;
+    day(d: number | string): Moment;
+    day(): number;
+    days(d: number | string): Moment;
+    days(): number;
+    date(d: number): Moment;
+    date(): number;
 
-  /**
-   *
-   * @deprecated  use date(d)
-   */
-  dates(d: number): Moment;
+    /**
+     *
+     * @deprecated  use date(d)
+     */
+    dates(d: number): Moment;
 
-  /**
-   *
-   * @deprecated  use date()
-   */
-  dates(): number;
-  hour(h: number): Moment;
-  hour(): number;
-  hours(h: number): Moment;
-  hours(): number;
-  minute(m: number): Moment;
-  minute(): number;
-  minutes(m: number): Moment;
-  minutes(): number;
-  second(s: number): Moment;
-  second(): number;
-  seconds(s: number): Moment;
-  seconds(): number;
-  millisecond(ms: number): Moment;
-  millisecond(): number;
-  milliseconds(ms: number): Moment;
-  milliseconds(): number;
-  weekday(): number;
-  weekday(d: number): Moment;
-  isoWeekday(): number;
-  isoWeekday(d: number | string): Moment;
-  weekYear(): number;
-  weekYear(d: number): Moment;
-  isoWeekYear(): number;
-  isoWeekYear(d: number): Moment;
-  week(): number;
-  week(d: number): Moment;
-  weeks(): number;
-  weeks(d: number): Moment;
-  isoWeek(): number;
-  isoWeek(d: number): Moment;
-  isoWeeks(): number;
-  isoWeeks(d: number): Moment;
-  weeksInYear(): number;
-  isoWeeksInYear(): number;
-  dayOfYear(): number;
-  dayOfYear(d: number): Moment;
-  from(inp: MomentInput, suffix?: boolean): string;
-  to(inp: MomentInput, suffix?: boolean): string;
-  fromNow(withoutSuffix?: boolean): string;
-  toNow(withoutPrefix?: boolean): string;
-  diff(b: MomentInput, unitOfTime?: unitOfTime$Diff, precise?: boolean): number;
-  toArray(): number[];
-  toDate(): Date;
-  toISOString(): string;
-  inspect(): string;
-  toJSON(): string;
-  unix(): number;
-  isLeapYear(): boolean;
+    /**
+     *
+     * @deprecated  use date()
+     */
+    dates(): number;
+    hour(h: number): Moment;
+    hour(): number;
+    hours(h: number): Moment;
+    hours(): number;
+    minute(m: number): Moment;
+    minute(): number;
+    minutes(m: number): Moment;
+    minutes(): number;
+    second(s: number): Moment;
+    second(): number;
+    seconds(s: number): Moment;
+    seconds(): number;
+    millisecond(ms: number): Moment;
+    millisecond(): number;
+    milliseconds(ms: number): Moment;
+    milliseconds(): number;
+    weekday(): number;
+    weekday(d: number): Moment;
+    isoWeekday(): number;
+    isoWeekday(d: number | string): Moment;
+    weekYear(): number;
+    weekYear(d: number): Moment;
+    isoWeekYear(): number;
+    isoWeekYear(d: number): Moment;
+    week(): number;
+    week(d: number): Moment;
+    weeks(): number;
+    weeks(d: number): Moment;
+    isoWeek(): number;
+    isoWeek(d: number): Moment;
+    isoWeeks(): number;
+    isoWeeks(d: number): Moment;
+    weeksInYear(): number;
+    isoWeeksInYear(): number;
+    dayOfYear(): number;
+    dayOfYear(d: number): Moment;
+    from(inp: MomentInput, suffix?: boolean): string;
+    to(inp: MomentInput, suffix?: boolean): string;
+    fromNow(withoutSuffix?: boolean): string;
+    toNow(withoutPrefix?: boolean): string;
+    diff(b: MomentInput, unitOfTime?: unitOfTime$Diff, precise?: boolean): number;
+    toArray(): number[];
+    toDate(): Date;
+    toISOString(): string;
+    inspect(): string;
+    toJSON(): string;
+    unix(): number;
+    isLeapYear(): boolean;
 
-  /**
-   *
-   * @deprecated  in favor of utcOffset
-   */
-  zone(): number;
-  zone(b: number | string): Moment;
-  utcOffset(): number;
-  utcOffset(b: number | string, keepLocalTime?: boolean): Moment;
-  isUtcOffset(): boolean;
-  daysInMonth(): number;
-  isDST(): boolean;
-  zoneAbbr(): string;
-  zoneName(): string;
-  isBefore(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
-  isAfter(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
-  isSame(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
-  isSameOrAfter(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
-  isSameOrBefore(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
-  isBetween(
-    a: MomentInput,
-    b: MomentInput,
-    granularity?: unitOfTime$StartOf,
-    inclusivity?: "()" | "[)" | "(]" | "[]"
-  ): boolean;
+    /**
+     *
+     * @deprecated  in favor of utcOffset
+     */
+    zone(): number;
+    zone(b: number | string): Moment;
+    utcOffset(): number;
+    utcOffset(b: number | string, keepLocalTime?: boolean): Moment;
+    isUtcOffset(): boolean;
+    daysInMonth(): number;
+    isDST(): boolean;
+    zoneAbbr(): string;
+    zoneName(): string;
+    isBefore(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
+    isAfter(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
+    isSame(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
+    isSameOrAfter(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
+    isSameOrBefore(inp?: MomentInput, granularity?: unitOfTime$StartOf): boolean;
+    isBetween(
+      a: MomentInput,
+      b: MomentInput,
+      granularity?: unitOfTime$StartOf,
+      inclusivity?: "()" | "[)" | "(]" | "[]"
+    ): boolean;
 
-  /**
-   *
-   * @deprecated  as of 2.8.0, use locale
-   */
-  lang(language: LocaleSpecifier): Moment;
+    /**
+     *
+     * @deprecated  as of 2.8.0, use locale
+     */
+    lang(language: LocaleSpecifier): Moment;
 
-  /**
-   *
-   * @deprecated  as of 2.8.0, use locale
-   */
-  lang(): Locale;
-  locale(): string;
-  locale(locale: LocaleSpecifier): Moment;
-  localeData(): Locale;
+    /**
+     *
+     * @deprecated  as of 2.8.0, use locale
+     */
+    lang(): Locale;
+    locale(): string;
+    locale(locale: LocaleSpecifier): Moment;
+    localeData(): Locale;
 
-  /**
-   *
-   * @deprecated  no reliable implementation
-   */
-  isDSTShifted(): boolean;
+    /**
+     *
+     * @deprecated  no reliable implementation
+     */
+    isDSTShifted(): boolean;
 
-  /**
-   *
-   * @deprecated  as of 2.7.0, use moment.min/max
-   */
-  max(
-    inp?: MomentInput,
-    format?: MomentFormatSpecification,
-    strict?: boolean): Moment;
+    /**
+     *
+     * @deprecated  as of 2.7.0, use moment.min/max
+     */
+    max(
+      inp?: MomentInput,
+      format?: MomentFormatSpecification,
+      strict?: boolean): Moment;
 
-  /**
-   *
-   * @deprecated  as of 2.7.0, use moment.min/max
-   */
-  max(
-    inp?: MomentInput,
-    format?: MomentFormatSpecification,
-    language?: string,
-    strict?: boolean): Moment;
+    /**
+     *
+     * @deprecated  as of 2.7.0, use moment.min/max
+     */
+    max(
+      inp?: MomentInput,
+      format?: MomentFormatSpecification,
+      language?: string,
+      strict?: boolean): Moment;
 
-  /**
-   *
-   * @deprecated  as of 2.7.0, use moment.min/max
-   */
-  min(
-    inp?: MomentInput,
-    format?: MomentFormatSpecification,
-    strict?: boolean): Moment;
+    /**
+     *
+     * @deprecated  as of 2.7.0, use moment.min/max
+     */
+    min(
+      inp?: MomentInput,
+      format?: MomentFormatSpecification,
+      strict?: boolean): Moment;
 
-  /**
-   *
-   * @deprecated  as of 2.7.0, use moment.min/max
-   */
-  min(
-    inp?: MomentInput,
-    format?: MomentFormatSpecification,
-    language?: string,
-    strict?: boolean): Moment;
+    /**
+     *
+     * @deprecated  as of 2.7.0, use moment.min/max
+     */
+    min(
+      inp?: MomentInput,
+      format?: MomentFormatSpecification,
+      language?: string,
+      strict?: boolean): Moment;
     get(unit: unitOfTime$All): number;
     set(unit: unitOfTime$All, value: number): Moment;
     set(objectLiteral: MomentSetObject): Moment;
@@ -630,52 +633,99 @@ declare module 'moment' {
   declare export var version: string;
   declare export var fn: Moment;
 
-  declare export function utc(
-    inp?: MomentInput,
-    format?: MomentFormatSpecification,
-    strict?: boolean): Moment
+  // NOTE(constructor): Same as moment constructor
+  declare export function utc(inp?: MomentInput, format?: MomentFormatSpecification, strict?: boolean): Moment;
+  declare export function utc(inp?: MomentInput, format?: MomentFormatSpecification, language?: string, strict?: boolean): Moment;
 
-  declare export function unix(timestamp: number): Moment
-  declare export function invalid(flags?: MomentParsingFlagsOpt): Moment
-  declare export function isMoment(m: any): Moment
-  declare export function isDate(m: any): Date
-  declare export function isDuration(d: any): Duration
+  declare export function unix(timestamp: number): Moment;
+
+  declare export function invalid(flags?: MomentParsingFlagsOpt): Moment;
+  declare export function isMoment(m: any): Moment;
+  declare export function isDate(m: any): Date;
+  declare export function isDuration(d: any): Duration;
 
   /**
-   *
-   * @deprecated  in 2.8.0
+   * @deprecated in 2.8.0
    */
-  declare export function lang(language?: string): string
-  declare export function locale(language?: string): string
-  declare export function localeData(key?: string | string[]): Locale
-  declare export function duration(
-    inp?: DurationInputArg1,
-    unit?: DurationInputArg2): Duration
-  declare export function parseZone(
-    inp?: MomentInput,
-    format?: MomentFormatSpecification,
-    strict?: boolean): Moment
-  declare export function months(): string[]
-  declare export function monthsShort(): string[]
-  declare export function weekdays(): string[]
-  declare export function weekdaysShort(): string[]
-  declare export function weekdaysMin(): string[]
-  declare export function min(...moments: MomentInput[]): Moment
-  declare export function max(...moments: MomentInput[]): Moment
+  declare export function lang(language?: string): string;
+  /**
+   * @deprecated in 2.8.0
+   */
+  declare export function lang(language?: string, definition?: Locale): string;
 
+  declare export function locale(language?: string): string;
+  declare export function locale(language?: string[]): string;
+  declare export function locale(language?: string, definition?: LocaleSpecification | void): string; // null | undefined
+
+  declare export function localeData(key?: string | string[]): Locale;
+
+  declare export function duration(inp?: DurationInputArg1, unit?: DurationInputArg2): Duration;
+
+  // NOTE(constructor): Same as moment constructor
+  declare export function parseZone(inp?: MomentInput, format?: MomentFormatSpecification, strict?: boolean): Moment;
+  declare export function parseZone(inp?: MomentInput, format?: MomentFormatSpecification, language?: string, strict?: boolean): Moment;
+
+  declare export function months(): string[];
+  declare export function months(index: number): string;
+  declare export function months(format: string): string[];
+  declare export function months(format: string, index: number): string;
+  declare export function monthsShort(): string[];
+  declare export function monthsShort(index: number): string;
+  declare export function monthsShort(format: string): string[];
+  declare export function monthsShort(format: string, index: number): string;
+
+  declare export function weekdays(): string[];
+  declare export function weekdays(index: number): string;
+  declare export function weekdays(format: string): string[];
+  declare export function weekdays(format: string, index: number): string;
+  declare export function weekdays(localeSorted: boolean): string[];
+  declare export function weekdays(localeSorted: boolean, index: number): string;
+  declare export function weekdays(localeSorted: boolean, format: string): string[];
+  declare export function weekdays(localeSorted: boolean, format: string, index: number): string;
+  declare export function weekdaysShort(): string[];
+  declare export function weekdaysShort(index: number): string;
+  declare export function weekdaysShort(format: string): string[];
+  declare export function weekdaysShort(format: string, index: number): string;
+  declare export function weekdaysShort(localeSorted: boolean): string[];
+  declare export function weekdaysShort(localeSorted: boolean, index: number): string;
+  declare export function weekdaysShort(localeSorted: boolean, format: string): string[];
+  declare export function weekdaysShort(localeSorted: boolean, format: string, index: number): string;
+  declare export function weekdaysMin(): string[];
+  declare export function weekdaysMin(index: number): string;
+  declare export function weekdaysMin(format: string): string[];
+  declare export function weekdaysMin(format: string, index: number): string;
+  declare export function weekdaysMin(localeSorted: boolean): string[];
+  declare export function weekdaysMin(localeSorted: boolean, index: number): string;
+  declare export function weekdaysMin(localeSorted: boolean, format: string): string[];
+  declare export function weekdaysMin(localeSorted: boolean, format: string, index: number): string;
+
+  declare export function min(...moments: MomentInput[]): Moment;
+  declare export function max(...moments: MomentInput[]): Moment;
 
   /**
    * Returns unix time in milliseconds. Overwrite for profit.
    */
-  declare export function now(): number
-  declare export function defineLocale(language: string, localeSpec: LocaleSpecification | void): Locale
-  declare export function updateLocale(language: string, localeSpec: LocaleSpecification | void): Locale
-  declare export function locales(): string[]
-  declare export function normalizeUnits(unit: unitOfTime$All): string
-  declare export function relativeTimeThreshold(threshold: string): number | boolean
-  declare export function relativeTimeRounding(fn: (num: number) => number): boolean
-  declare export function calendarFormat(m: Moment, now: Moment): string
+  declare export function now(): number;
+
+  declare export function defineLocale(language: string, localeSpec: LocaleSpecification | void): Locale; // null
+  declare export function updateLocale(language: string, localeSpec: LocaleSpecification | void): Locale; // null
+
+  declare export function locales(): string[];
+
+  declare export function normalizeUnits(unit: unitOfTime$All): string;
+  declare export function relativeTimeThreshold(threshold: string): number | boolean;
+  declare export function relativeTimeThreshold(threshold: string, limit: number): boolean;
+  declare export function relativeTimeRounding(fn: (num: number) => number): boolean;
+  declare export function relativeTimeRounding(): (num: number) => number;
+  declare export function calendarFormat(m: Moment, now: Moment): string;
+
+  /**
+   * Constant used to enable explicit ISO_8601 format parsing.
+   */
   declare export var ISO_8601: MomentBuiltinFormat;
+
   declare export var defaultFormat: string;
   declare export var defaultFormatUtc: string;
+
+  declare export default function moment(inp?: MomentInput, format?: MomentFormatSpecification, strict?: boolean): Moment
 }
