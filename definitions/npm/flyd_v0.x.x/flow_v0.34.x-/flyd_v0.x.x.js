@@ -20,6 +20,7 @@ type StreamObj = { [key: string]: Stream | StreamObj };
 
 declare module 'flyd' {
   declare type Stream = Stream;
+  declare type flyd$Stream<T> = flyd$Stream<T>;
 
   declare module.exports: {
     stream<T>(v: T): flyd$Stream<T>,
