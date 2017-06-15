@@ -264,7 +264,7 @@ declare class rxjs$Observable<+T> {
 
   publishReplay(bufferSize?: number, windowTime?: number, scheduler?: rxjs$SchedulerClass): rxjs$ConnectableObservable<T>;
 
-  retry(retryCount: number): rxjs$Observable<T>;
+  retry(retryCount: ?number): rxjs$Observable<T>;
 
   retryWhen(notifier: (errors: rxjs$Observable<Error>) => rxjs$Observable<any>): rxjs$Observable<T>;
 
