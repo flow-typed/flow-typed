@@ -30,12 +30,7 @@ const max = flyd.combine(
   [n1, n2]
 );
 // $ExpectError
-const min = flyd.combine(
-  () => {
-    return 0;
-  },
-  [0, 0]
-);
+const min = flyd.combine(() => 0, [0, 0]);
 
 // immediate
 const s = flyd.stream();
@@ -74,7 +69,7 @@ const squaredNumbers$ = flyd.map(n => {
   return n * n;
 }, numbers$);
 // $ExpectError
-const noNumbers$ = flyd.map(() => null, numbers$);
+const noNumbers$ = flyd.map(1, numbers$);
 
 // on
 flyd.on(n => {

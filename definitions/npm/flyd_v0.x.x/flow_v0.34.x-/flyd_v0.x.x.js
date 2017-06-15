@@ -1,14 +1,15 @@
-// TODO type this out with generics so that flow can understand
-// how flyd retains and passes values, and also make the signature more clear...
-type Stream = {
-  // when called with a value returns itself, otherwise returns `val`
-  $call: (*) => *,
-  end(E: boolean): void,
-  map(F: (*) => *): Stream,
-  ap(Stream): Stream,
-  of(*): Stream,
-  val: *,
+declare class flyd$Stream<+T> {
+  static val: T;
+
+  end(boolean): flyd$Stream<boolean>;
+  map<T, V>((T) => V): flyd$Stream<V>;
+  ap<V>(flyd$Stream<V>): flyd$Stream<V>;
+  of<V>(...values: V[]): flyd$Stream<V>;
+
+  (...rest: Array<void>): T;
+  (*): flyd$Stream<*>;
 }
+type Stream = flyd$Stream<*>;
 type CombineFn = (...args: Array<Stream>) => *;
 type MapFn = (*) => *;
 type ScanFn = (*, *) => *;
@@ -21,10 +22,10 @@ declare module 'flyd' {
   declare type Stream = Stream;
 
   declare module.exports: {
-    stream(v: *): Stream,
-    immediate(s: Stream): Stream,
+    stream<T>(v: T): flyd$Stream<T>,
+    immediate<T>(s: flyd$Stream<?T>): flyd$Stream<?T>,
     isStream(s: *): boolean,
-    combine: CurriedFunction2<CombineFn, Array<Stream>, Stream>,
+    combine: CurriedFunction2<CombineFn, Array<flyd$Stream<*>>, Stream>,
     endsOn: CurriedFunction2<Stream, Stream, Stream>,
     map: CurriedFunction2<MapFn, Stream, Stream>,
     on: CurriedFunction2<MapFn, Stream, Stream>,
