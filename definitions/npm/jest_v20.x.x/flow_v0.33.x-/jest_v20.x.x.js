@@ -106,8 +106,30 @@ type JestPromiseType = {
   resolves: JestExpectType
 };
 
+/**
+ *  Plugin: jest-enzyme
+ */
+type EnzymeMatchersType = {
+  toBeChecked(): void,
+  toBeDisabled(): void,
+  toBeEmpty(): void,
+  toBePresent(): void,
+  toContainReact(component: React$Element<any>): void,
+  toHaveClassName(className: string): void,
+  toHaveHTML(html: string): void,
+  toHaveProp(propKey: string, propValue?: any): void,
+  toHaveRef(refName: string): void,
+  toHaveState(stateKey: string, stateValue?: any): void,
+  toHaveStyle(styleKey: string, styleValue?: any): void,
+  toHaveTagName(tagName: string): void,
+  toHaveText(text: string): void,
+  toIncludeText(text: string): void,
+  toHaveValue(value: any): void,
+  toMatchSelector(selector: string): void,
+};
+
 type JestExpectType = {
-  not: JestExpectType,
+  not: JestExpectType & EnzymeMatchersType,
   /**
    * If you have a mock function, you can use .lastCalledWith to test what
    * arguments it was last called with.
@@ -442,7 +464,7 @@ declare var xtest: typeof it;
 /** The expect function is used every time you want to test a value */
 declare var expect: {
   /** The object that you want to make assertions against */
-  (value: any): JestExpectType & JestPromiseType,
+  (value: any): JestExpectType & JestPromiseType & EnzymeMatchersType,
   /** Add additional Jasmine matchers to Jest's roster */
   extend(matchers: { [name: string]: JestMatcher }): void,
   /** Add a module that formats application-specific data structures. */
