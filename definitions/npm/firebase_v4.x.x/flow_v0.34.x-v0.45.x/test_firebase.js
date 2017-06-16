@@ -15,7 +15,6 @@ const a1: firebase.app.App = firebase.initializeApp({
 // #2
 // $ExpectError
 const a2: firebase.app.App = firebase.initializeApp({
-  apiKey: 'apiKey',
   storageBucker: 'storageBucket',
   projectId: '42',
 });
