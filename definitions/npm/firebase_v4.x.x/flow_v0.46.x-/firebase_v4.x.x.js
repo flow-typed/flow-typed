@@ -297,7 +297,7 @@ declare class OnDisconnect {
     onComplete?: OnCompleteCallback
   ): Promise<void>,
   update(
-    values: { [path: string]: FirebaseValue },
+    values: { +[path: string]: FirebaseValue },
     onComplete?: OnCompleteCallback
   ): Promise<void>
 }
