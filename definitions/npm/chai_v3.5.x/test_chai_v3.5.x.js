@@ -128,3 +128,32 @@ expect({}).to.containSubset({});
 expect([{}]).to.containSubset([{}]);
 // $ExpectError
 expect({}).to.containSubset(0);
+
+// tests for chai-redux-mock-store
+expect({}).to.have.dispatchedActions([
+  (action) => { expect(action).to.have.property('type', 'HELLO'); },
+  { type: 'SOME_TYPE', payload: { name: 'John Doe' } },
+]);
+expect({}).to.contain.dispatchedActions([
+  (action) => { expect(action).to.have.property('type', 'HELLO'); },
+  { type: 'SOME_TYPE', payload: { name: 'John Doe' } },
+]);
+expect({}).to.have.dispatchedTypes([
+  'HELLO',
+  'OTHER_ACTION'
+]);
+expect({}).to.contain.dispatchedTypes([
+  'HELLO',
+  'OTHER_ACTION'
+]);
+// $ExpectError
+expect({}).to.have.dispatchedActions([
+  'HELLO',
+  'OTHER_ACTION'
+]);
+// $ExpectError
+expect({}).to.have.dispatchedTypes([
+  (action) => { expect(action).to.have.property('type', 'HELLO'); },
+  { type: 'SOME_TYPE', payload: { name: 'John Doe' } },
+]);
+

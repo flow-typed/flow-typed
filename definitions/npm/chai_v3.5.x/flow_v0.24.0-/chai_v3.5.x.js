@@ -109,7 +109,11 @@ declare module "chai" {
         notify: (callback: () => mixed) => ExpectChain<T>,
 
         // chai-subset
-        containSubset: (obj: Object | Object[]) => ExpectChain<T>
+        containSubset: (obj: Object | Object[]) => ExpectChain<T>,
+
+        // chai-redux-mock-store
+        dispatchedActions: (Array<Object | (action: Object) => any>) => ExpectChain<T>,
+        dispatchedTypes: (Array<string>) => ExpectChain<T>
     };
 
     declare function expect<T>(actual: T): ExpectChain<T>;
