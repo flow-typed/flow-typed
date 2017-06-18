@@ -195,3 +195,12 @@ numbers.filter(
   },
   {x: 'bar'}, // thisArg
 );
+
+(numbers.bufferCount(4): Observable<Array<number>>);
+(numbers.bufferTime(500): Observable<Array<number>>);
+
+// $ExpectError
+(numbers.startWith('foo').bufferCount(4): Observable<Array<number>>);
+
+// $ExpectError
+(numbers.startWith('foo').bufferTime(500): Observable<Array<number>>);
