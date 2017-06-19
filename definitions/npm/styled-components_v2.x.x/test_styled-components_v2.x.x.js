@@ -33,6 +33,14 @@ const Component = () => (
 
 const ComponentWithTheme = withTheme(Component)
 
+const Component2 = () => (
+  <ThemeProvider theme={outerTheme => outerTheme}>
+    <Wrapper>
+      <Title>Hello World, this is my first styled component!</Title>
+    </Wrapper>
+  </ThemeProvider>
+)
+
 const OpacityKeyFrame = keyframes`
   0%   { opacity: 0; }
   100% { opacity: 1; }
@@ -79,4 +87,3 @@ class TestReactClass extends React.Component {
 const StyledClass = styled(TestReactClass)`
   color: red;
 `;
-

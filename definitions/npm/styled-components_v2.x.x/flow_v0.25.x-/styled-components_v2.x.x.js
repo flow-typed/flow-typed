@@ -11,7 +11,7 @@ type $npm$styledComponents$StyledComponent = (
 
 type $npm$styledComponents$Theme = {[key: string]: mixed};
 type $npm$styledComponents$ThemeProviderProps = {
-  theme: ((outerTheme: $npm$styledComponents$Theme) => void) | $npm$styledComponents$Theme
+  theme: $npm$styledComponents$Theme | ((outerTheme: $npm$styledComponents$Theme) => void)
 };
 type $npm$styledComponents$Component =
   | ReactClass<*>
