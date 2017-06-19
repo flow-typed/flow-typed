@@ -16,7 +16,7 @@ declare var it : {
     timeout(ms:number): void;
 };
 
-declare function before(method : TestFunction):void;
-declare function beforeEach(method : TestFunction):void;
-declare function after(method : TestFunction):void;
-declare function afterEach(method : TestFunction):void;
+declare function before(name?:string, method : TestFunction):void;
+declare function beforeEach(name?:string, method : TestFunction):void;
+declare function after(name?:string, method : TestFunction):void;
+declare function afterEach(name?:string, method : TestFunction):void;
