@@ -248,13 +248,7 @@ declare type OAuthProvider =
   | TwitterAuthProvider
 
 /** **** database ******/
-declare type FirebaseValue =
-  | {}
-  | Array<FirebaseValue>
-  | string
-  | number
-  | boolean
-  | null
+declare type FirebaseValue = any
 declare type OnCompleteCallback = (error: ?Object) => void
 declare type QueryEventType =
   | 'value'
