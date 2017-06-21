@@ -1,80 +1,101 @@
 declare module 'tinycolor2' {
   declare type Format =
-    | 'hex'
-    | 'hex6'
     | 'hex3'
-    | 'hex4'
+    | 'hex6'
     | 'hex8'
-    | 'name'
-    | 'rgb'
-    | 'prgb'
     | 'hsl'
-    | 'hsv';
+    | 'hsv'
+    | 'name'
+    | 'prgb'
+    | 'rgb';
 
-  declare type HsvColor = { h: number, s: number, v: number, a?: number };
-  declare type HslColor = { h: number, s: number, l: number, a?: number };
-  declare type RgbColor = { r: number, g: number, b: number, a?: number };
-  declare type RgbPercentageColor = {
+  declare type HsvColor = { h: number, s: number, v: number };
+  declare type HsvaColor = HsvColor & { a: number };
+  declare type HslColor = { h: number, s: number, l: number };
+  declare type HslaColor = HslColor & { a: number };
+  declare type RgbColor = { r: number, g: number, b: number };
+  declare type RgbaColor = RgbColor & { a: number };
+  declare type PercentageRgbaColor = {
     r: string,
     g: string,
     b: string,
-    a?: number
+    a: number,
+  };
+  declare type HexColor = string;
+  declare type RatioColor =
+    | HsvColor
+    | HsvaColor
+    | HslColor
+    | HslaColor
+    | RgbColor
+    | RgbaColor;
+  declare type Color = RatioColor | HexColor;
+  declare type Options = {
+    format: Format,
+  };
+  declare type ReadableOptions = {
+    level: 'AA' | 'AAA',
+    size: 'small' | 'large',
+  };
+  declare type MostReadableOptions = ReadableOptions & {
+    includeFallbackColors: boolean,
   };
 
-  declare type RatioColor = RgbColor | HslColor | HsvColor;
+  declare type TinyColor = {
+    <C>(color: C, opts?: Options): TinyColorInstance<C>,
+  };
 
-  declare type Color =
-    | HsvColor
-    | HslColor
-    | RgbColor
-    | RgbPercentageColor
-    | string;
-
-  declare class Tinycolor {
-    (color: mixed, opts?: Object): Color,
-    analogous(): Tinycolor,
-    brighten(amount?: number): Tinycolor,
-    clone(): Tinycolor,
-    complement(): Tinycolor,
-    darken(amount?: number): Tinycolor,
-    desaturate(amount?: number): Tinycolor,
-    fromRatio(color: RatioColor, opts: Object): Tinycolor,
-    equals(Color, Color): boolean,
-    getAlpha(): number,
-    getBrightness(): number,
+  declare type TinyColorInstance<C> = {
+    fromRatio<RC>(ratio: RC): TinyColorInstance<RC>,
     getFormat(): Format,
-    getLuminance(): number,
-    getOriginalInput(): mixed,
-    greyscale(): Tinycolor,
-    isDark(): boolean,
-    isLight(): boolean,
-    isReadable(Color, Color, ops?: Object): boolean,
+    getOriginalInput(): C,
     isValid(): boolean,
-    lighten(amount?: number): Tinycolor,
-    monochromatic(): Tinycolor,
-    random(): Color,
-    readability(Color, Color): number,
-    saturate(amount?: number): Tinycolor,
-    setAlpha(): Tinycolor,
-    spin(amount?: number): Tinycolor,
-    splitcomplement(): Tinycolor,
-    tetrad(): Tinycolor,
-    toFilter(): string,
+    getBrightness(): number,
+    isLight(): boolean,
+    isDark(): boolean,
+    getLuminance(): number,
+    getAlpha(): number,
+    setAlpha(number): TinyColorInstance<C>,
+    toHsv(): HsvaColor,
+    toHsvString(): string,
+    toHsl(): HslaColor,
+    toHslString(): string,
     toHex(): string,
+    toHexString(): string,
     toHex8(): string,
     toHex8String(): string,
-    toHexString(): string,
-    toHsl(): HslColor,
-    toHslString(): string,
-    toHsv(): HsvColor,
-    toHsvString(): string,
-    toName(): string,
-    toPercentageRgb(): RgbPercentageColor,
-    toPercentageRgbString(): string,
-    toRgb(): RgbColor,
+    toRgb(): RgbaColor,
     toRgbString(): string,
-    toString(): string,
-    triad(): Tinycolor
-  }
-  declare function exports(color: Color): Tinycolor;
+    toPercentageRgb(): PercentageRgbaColor,
+    toPercentageRgbString(): string,
+    toName(): string,
+    toFilter(): string,
+    toString(format?: Format): string,
+    lighten(amount?: number): TinyColorInstance<C>,
+    brighten(amount?: number): TinyColorInstance<C>,
+    darken(amount?: number): TinyColorInstance<C>,
+    desaturate(amount?: number): TinyColorInstance<C>,
+    saturate(amount?: number): TinyColorInstance<C>,
+    greyscale(): TinyColorInstance<C>,
+    spin(amount?: number): TinyColorInstance<C>,
+    analogous(): Array<TinyColorInstance<C>>,
+    monochromatic(): Array<TinyColorInstance<C>>,
+    splitcomplement(): Array<TinyColorInstance<C>>,
+    triad(): Array<TinyColorInstance<C>>,
+    tetrad(): Array<TinyColorInstance<C>>,
+    complement(): TinyColorInstance<C>,
+    equals(color1: Color, color2: Color): boolean,
+    mix(color1: Color, color2: Color, amount?: number): TinyColorInstance<C>,
+    random(): TinyColorInstance<C>,
+    readability(color1: Color, color2: Color): number,
+    isReadable(color1: Color, color2: Color, opts?: ReadableOptions): boolean,
+    mostReadable(
+      color: Color,
+      list: Array<Color>,
+      opts?: MostReadableOptions
+    ): TinyColorInstance<C>,
+    clone(): TinyColorInstance<C>,
+  };
+
+  declare module.exports: TinyColor;
 }
