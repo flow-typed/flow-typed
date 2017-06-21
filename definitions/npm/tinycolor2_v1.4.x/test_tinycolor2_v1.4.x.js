@@ -1,10 +1,12 @@
+// @flow
 import tinycolor from 'tinycolor2';
+import type { TinyColorInstance, RgbaColor } from 'tinycolor2';
 
-const color = tinycolor('#F00');
+const color = tinycolor2('rgb(0,0,0)');
 
-color.toHSL();
-color.toHSV();
-color.toHex();
-
+(color: TinyColorInstance<'rgb(0,0,0)'>);
+tinycolor2.fromRatio({ r: 0, g: 0, b: 0 });
+color.toRgb().r;
+(color.toRgb(): RgbaColor);
 // $ExpectError
-color.toThing();
+new color.nope();
