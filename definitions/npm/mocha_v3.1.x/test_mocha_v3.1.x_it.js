@@ -13,8 +13,6 @@ it('desc', () => new Promise((res, rej) => {}));
 it('desc', (done : number) => {});
 // $ExpectError number. This type is incompatible with function type.
 it('desc', 12);
-// $ExpectError number. This type is incompatible with undefined.
-it('desc', () => 1);
 // $ExpectError number. This type is incompatible with string.
 it(12, () => {});
 
@@ -31,8 +29,6 @@ it.skip('desc', () => new Promise((res, rej) => {}));
 it.skip('desc', (done : number) => {});
 // $ExpectError number. This type is incompatible with function type.
 it.skip('desc', 12);
-// $ExpectError number. This type is incompatible with undefined.
-it.skip('desc', () => 1);
 // $ExpectError number. This type is incompatible with string.
 it.skip(12, () => {});
 
@@ -51,8 +47,6 @@ it.only('desc', () => new Promise((res, rej) => {}));
 it.only('desc', (done : number) => {});
 // $ExpectError number. This type is incompatible with function type.
 it.only('desc', 12);
-// $ExpectError number. This type is incompatible with undefined.
-it.only('desc', () => 1);
 // $ExpectError number. This type is incompatible with string.
 it.only(12, () => {});
 
