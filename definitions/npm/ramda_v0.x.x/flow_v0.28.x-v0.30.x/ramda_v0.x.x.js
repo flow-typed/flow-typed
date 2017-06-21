@@ -609,8 +609,8 @@ declare module ramda {
   // *Function
   declare var __: *;
 
-  declare var T: (_: any) => boolean;
-  declare var F: (_: any) => boolean;
+  declare var T: (_: any) => true;
+  declare var F: (_: any) => false;
 
   declare function addIndex<A,B>(iterFn:(fn:(x:A) => B, xs: Array<A>) => Array<B>): (fn: (x: A, idx: number, xs: Array<A>) => B, xs: Array<A>) => Array<B>;
 
