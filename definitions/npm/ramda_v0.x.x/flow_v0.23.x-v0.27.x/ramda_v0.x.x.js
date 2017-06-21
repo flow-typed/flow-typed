@@ -558,8 +558,8 @@ declare module 'ramda' {
     * wrap
     */
     __: any;
-    T: (_: any) => boolean;
-    F: (_: any) => boolean;
+    T: (_: any) => true;
+    F: (_: any) => false;
     always<T>(x:T): (x: any) => T;
     ap<T,V>(fns: Array<(x:T) => V>, xs: Array<T>): Array<V>;
     ap<T,V>(fns: Array<(x:T) => V>): (xs: Array<T>) => Array<V>;
