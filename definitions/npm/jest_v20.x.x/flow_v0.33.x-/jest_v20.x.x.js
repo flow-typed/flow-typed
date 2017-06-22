@@ -114,7 +114,7 @@ type EnzymeMatchersType = {
   toBeDisabled(): void,
   toBeEmpty(): void,
   toBePresent(): void,
-  toContainReact(component: React$Element<any>): void,
+  toContainReact(element: React$Element<any>): void,
   toHaveClassName(className: string): void,
   toHaveHTML(html: string): void,
   toHaveProp(propKey: string, propValue?: any): void,
@@ -125,6 +125,7 @@ type EnzymeMatchersType = {
   toHaveText(text: string): void,
   toIncludeText(text: string): void,
   toHaveValue(value: any): void,
+  toMatchElement(element: React$Element<any>): void,
   toMatchSelector(selector: string): void,
 };
 
