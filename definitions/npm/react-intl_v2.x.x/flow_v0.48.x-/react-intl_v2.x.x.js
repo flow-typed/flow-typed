@@ -97,8 +97,8 @@ declare module 'react-intl' {
   declare function injectIntl(
     WrappedComponent: ReactClass<*>,
     options?: {
-      intlPropName: string,
-      withRef: boolean,
+      intlPropName?: string,
+      withRef?: boolean,
     }
   ): ReactClass<*>;
   declare function formatMessage(messageDescriptor: MessageDescriptor, values?: Object): string;
