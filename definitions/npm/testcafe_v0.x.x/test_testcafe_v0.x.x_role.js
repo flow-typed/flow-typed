@@ -1,5 +1,7 @@
 import { Role, Selector, t } from 'testcafe';
 
+// $ExpectError - string as Selector
+Selector(123)
 const userName = Selector('#user-name');
 
 const someUser = Role('http://localhost:3000/fixtures/api/es-next/roles/pages/login-page.html', async() => {

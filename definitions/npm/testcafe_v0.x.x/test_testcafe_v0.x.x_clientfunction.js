@@ -10,6 +10,9 @@ test('Dispatch', async() => {
     throw await getUserAgent();
 });
 
+// $ExpectError - ClientFunction wants fn
+ClientFunction(123)
+
 test('Call with arguments', async() => {
     const getElementText = ClientFunction((className, idx) => {
         return document.querySelectorAll('.' + className)[idx].textContent;

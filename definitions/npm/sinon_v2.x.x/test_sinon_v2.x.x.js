@@ -232,6 +232,8 @@ class TestCreateStubInstance {
 }
 
 sinon.createStubInstance(TestCreateStubInstance).someTestMethod('some argument');
+// $ExpectError - string needed
+sinon.createStubInstance(TestCreateStubInstance).someTestMethod(123);
 
 function testGetCalls() {
   let double = sinon.spy((a: number) => a * 2);
