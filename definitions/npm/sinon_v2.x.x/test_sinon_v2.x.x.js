@@ -18,6 +18,8 @@ function testOne() {
   let callback = sinon.spy();
   let proxy = once(callback);
   proxy();
+  // $ExpectError - calledOnce is bool
+  (callback.calledOnce: string)
   if (callback.calledOnce) { console.log("test1 calledOnce success"); } else { console.log("test1 calledOnce failure"); }
 }
 
@@ -232,8 +234,6 @@ class TestCreateStubInstance {
 }
 
 sinon.createStubInstance(TestCreateStubInstance).someTestMethod('some argument');
-// $ExpectError - string needed
-sinon.createStubInstance(TestCreateStubInstance).someTestMethod(123);
 
 function testGetCalls() {
   let double = sinon.spy((a: number) => a * 2);
