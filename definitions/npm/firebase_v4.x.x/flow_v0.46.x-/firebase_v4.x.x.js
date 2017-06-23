@@ -134,9 +134,14 @@ declare interface ConfirmationResult {
   confirm(verificationCode: string): Promise<FirebaseUserCredential>
 }
 
+declare type FirebaseUserProfile = {
+  displayName?: string,
+  photoURL?: string
+}
+
 declare interface FirebaseAdditionalUserInfo {
   providerId: string,
-  profile?: Object,
+  profile?: FirebaseUserProfile,
   username?: string
 }
 
@@ -193,7 +198,7 @@ declare class FirebaseUser extends FirebaseUserInfo {
   updateEmail(newEmail: string): Promise<void>,
   updatePassword(newPassword: string): Promise<void>,
   updatePhoneNumber(phoneCredential: AuthCredential): Promise<void>,
-  updateProfile(profile: { displayName: ?string, photoURL: ?string }): Promise<
+  updateProfile(profile: FirebaseUserProfile): Promise<
     void
   >
 }
