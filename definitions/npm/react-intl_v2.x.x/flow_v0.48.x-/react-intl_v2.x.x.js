@@ -14,7 +14,7 @@ type LocaleData = {
 
 type MessageDescriptor = {
   id: string,
-  defaultMessage?: string,
+  defaultMessage: string,
   description?: string,
 };
 
