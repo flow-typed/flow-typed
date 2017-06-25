@@ -14,7 +14,7 @@ type LocaleData = {
 
 type MessageDescriptor = {
   id: string,
-  defaultMessage?: string,
+  defaultMessage: string,
   description?: string,
 };
 
@@ -35,8 +35,14 @@ type IntlFormat = {
   formatRelative: (value: any, options?: Object) => string,
   formatNumber: (value: any, options?: Object) => string,
   formatPlural: (value: any, options?: Object) => string,
-  formatMessage: (messageDescriptor: MessageDescriptor, values?: Object) => string,
-  formatHTMLMessage: (messageDescriptor: MessageDescriptor, values?: Object) => string,
+  formatMessage: (
+    messageDescriptor: MessageDescriptor,
+    values?: Object,
+  ) => string,
+  formatHTMLMessage: (
+    messageDescriptor: MessageDescriptor,
+    values?: Object,
+  ) => string,
 };
 
 type $IntlShape = IntlConfig & IntlFormat & { now: () => number };
@@ -91,23 +97,50 @@ type $DateParseable = number | string | Date;
 
 declare module 'react-intl' {
   // PropType checker
-  declare function intlShape(props: Object, propName: string, componentName: string): void;
+  declare function intlShape(
+    props: Object,
+    propName: string,
+    componentName: string,
+  ): void;
   declare function addLocaleData(data: LocaleData | Array<LocaleData>): void;
-  declare function defineMessages(messageDescriptors: MessageDescriptorMap): MessageDescriptorMap;
+  declare function defineMessages<T: { [key: string]: MessageDescriptor }>(
+    messageDescriptors: T,
+  ): T;
   declare function injectIntl(
     WrappedComponent: ReactClass<*>,
     options?: {
       intlPropName?: string,
       withRef?: boolean,
-    }
+    },
   ): ReactClass<*>;
-  declare function formatMessage(messageDescriptor: MessageDescriptor, values?: Object): string;
-  declare function formatHTMLMessage(messageDescriptor: MessageDescriptor, values?: Object): string;
-  declare function formatDate(value: any, options?: DateTimeFormatOptions & { format: string }): string;
-  declare function formatTime(value: any, options?: DateTimeFormatOptions & { format: string }): string;
-  declare function formatRelative(value: any, options?: RelativeFormatOptions & { format: string, now: any }): string;
-  declare function formatNumber(value: any, options?: NumberFormatOptions & { format: string }): string;
-  declare function formatPlural(value: any, options?: PluralFormatOptions): PluralCategoryString;
+  declare function formatMessage(
+    messageDescriptor: MessageDescriptor,
+    values?: Object,
+  ): string;
+  declare function formatHTMLMessage(
+    messageDescriptor: MessageDescriptor,
+    values?: Object,
+  ): string;
+  declare function formatDate(
+    value: any,
+    options?: DateTimeFormatOptions & { format: string },
+  ): string;
+  declare function formatTime(
+    value: any,
+    options?: DateTimeFormatOptions & { format: string },
+  ): string;
+  declare function formatRelative(
+    value: any,
+    options?: RelativeFormatOptions & { format: string, now: any },
+  ): string;
+  declare function formatNumber(
+    value: any,
+    options?: NumberFormatOptions & { format: string },
+  ): string;
+  declare function formatPlural(
+    value: any,
+    options?: PluralFormatOptions,
+  ): PluralCategoryString;
 
   declare class FormattedMessage extends React.Component<
     void,
@@ -115,7 +148,7 @@ declare module 'react-intl' {
       values?: Object,
       tagName?: string,
     },
-    void
+    void,
   > {}
   declare class FormattedHTMLMessage extends React.Component<
     void,
@@ -123,7 +156,7 @@ declare module 'react-intl' {
       values?: Object,
       tagName?: string,
     },
-    void
+    void,
   > {}
   declare class FormattedDate extends React.Component<
     void,
@@ -131,7 +164,7 @@ declare module 'react-intl' {
       value: $DateParseable,
       format?: string,
     },
-    void
+    void,
   > {}
   declare class FormattedTime extends React.Component<
     void,
@@ -139,7 +172,7 @@ declare module 'react-intl' {
       value: $DateParseable,
       format?: string,
     },
-    void
+    void,
   > {}
   declare class FormattedRelative extends React.Component<
     void,
@@ -149,7 +182,7 @@ declare module 'react-intl' {
       updateInterval?: number,
       initialNow?: $DateParseable,
     },
-    void
+    void,
   > {}
   declare class FormattedNumber extends React.Component<
     void,
@@ -157,7 +190,7 @@ declare module 'react-intl' {
       value: number | string,
       format?: string,
     },
-    void
+    void,
   > {}
   declare class FormattedPlural extends React.Component<
     void,
@@ -170,7 +203,7 @@ declare module 'react-intl' {
       few?: React.Component,
       many?: React.Component,
     },
-    void
+    void,
   > {}
   declare class IntlProvider extends React.Component<
     void,
@@ -178,7 +211,7 @@ declare module 'react-intl' {
       children: React.Component,
       initialNow?: $DateParseable,
     },
-    void
+    void,
   > {}
   declare type IntlShape = $IntlShape;
 }
