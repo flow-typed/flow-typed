@@ -125,14 +125,11 @@ const PluralComponent: ReactClass<
   description="Plural example"
   values={{ name: <b>John Doe</b>, numMessages: 1 }}
 />;
-{
-  /* <FormattedHTMLMessage
+<FormattedHTMLMessage
   id="test"
   defaultMessage="test message"
   description="this is description"
-/>; */
-}
-
+/>;
 <FormattedDate value={new Date(1459832991883)} />;
 
 <FormattedTime value={new Date(1459832991883)} />;
