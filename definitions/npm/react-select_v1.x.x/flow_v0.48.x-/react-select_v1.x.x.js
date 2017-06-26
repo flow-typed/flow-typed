@@ -5,7 +5,7 @@ declare type SelectOption = {
 };
 declare type stringOrNode = string | React$Element<*>;
 declare module 'react-select' {
-  declare export class Select extends React$Component {
+  declare export default class Select extends React$Component {
     props: {
       addLabelText?: string, // placeholder displayed when you want to add a label on a multi-value input
       /*
