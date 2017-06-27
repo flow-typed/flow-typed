@@ -1,10 +1,12 @@
 // @flow
-/* eslint-disable flowtype/no-weak-types, flowtype/type-id-match, flowtype/sort-keys */
+/* eslint-disable flowtype/no-weak-types */
 
-type $npm$newrelic$Rule = {|
+type $npm$newrelic$NamingRule = {|
   name: string,
-  ignore: string | RegExp,
-  enforce_backstop?: boolean,
+  pattern: string,
+  terminate_chain?: boolean,
+  replace_all?: boolean,
+  precedence?: boolean,
 |};
 type $npm$newrelic$Config = {|
   app_name?: string | Array<string>,
@@ -73,7 +75,10 @@ type $npm$newrelic$Config = {|
     tracer_tracing?: boolean,
   |},
 
-  rules?: Array<$npm$newrelic$Rule>,
+  rules?: {|
+    name?: Array<$npm$newrelic$NamingRule>,
+    ignore?: Array<string>,
+  |},
 
   custom_insights_events?: {|
     enabled?: boolean,
@@ -103,26 +108,33 @@ type $npm$newrelic$Config = {|
 // @see https://docs.newrelic.com/docs/agents/nodejs-agent/supported-features/nodejs-agent-api
 declare module 'newrelic' {
   declare type Config = $npm$newrelic$Config;
+  declare type NamingRule = $npm$newrelic$NamingRule;
 
   declare function setTransactionName(name: string): void;
-  declare function setControllerName(name: string, action?: mixed): void; // TODO type action
+  declare function setControllerName(name: string, action?: mixed): void;
 
   declare function addNamingRule(pattern: string, name: string): void;
   declare function addIgnoringRule(pattern: string): void;
 
-  declare function createWebTransaction(url: string, handle: mixed): void;
-  declare function createBackgroundTransaction(name: string, group: ?string, handle: mixed): void;// TODO type group and handle
+  declare function createWebTransaction<Return>(url: string, handle: () => Return): () => Return;
+  declare function createBackgroundTransaction<Return>(name: string, group: ?string, handle: () => Return): () => Return;
   declare function endTransaction(): void;
-  declare function createTracer(name: string, callback: (error: ?Error, result: mixed) => void): void; // TODO type callback result
+  declare function createTracer(name: string, callback?: (error: ?Error, result: mixed) => void): void;
 
-  declare function recordMetric(name: string, value: mixed): void;
+  declare function recordMetric(name: string, value: number): void;
   declare function incrementMetric(name: string, amount?: number): void;
 
   declare function recordCustomEvent(eventType: string, attributes: {}): void;
+
   declare function addCustomParameter(name: string, value: mixed): void;
   declare function addCustomParameters(params: { [string]: mixed }): void;
-  declare function getBrowserTimingHeader(): any;// TODO type return
+  declare function getBrowserTimingHeader(): string;
   declare function setIgnoreTransaction(ignored: boolean): void;
-  declare function noticeError(error: mixed, customParameters?: {}): void;
-  declare function shutdown(options?: {}, callback?: (error: ?Error, result: mixed) => void): void;// TODO type callback result
+  declare function noticeError(error: mixed, customParameters?: { [string]: mixed }): void;
+  declare function shutdown(
+    options?: {|
+      collectPendingData?: boolean
+    |},
+    callback?: (error: ?Error, result: mixed) => void
+  ): void;
 }
