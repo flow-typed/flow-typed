@@ -37,6 +37,8 @@ const str: string = 'hello world'
 //Type
 {
   const x: boolean = _.is(Number, 1)
-  const x1: boolean = _.isNil(1)
+  const x1: false = _.isNil(1)
+  const x1a: true = _.isNil()
+  const x1b: true = _.isNil(null)
   const x2: boolean = _.propIs(1, 'num', { num: 1 })
 }
