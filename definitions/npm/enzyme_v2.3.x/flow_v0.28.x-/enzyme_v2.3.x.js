@@ -35,7 +35,7 @@ declare module 'enzyme' {
     get(index: number): React$Element<any>;
     getNode(): React$Element<any>;
     getNodes(): Array<React$Element<any>>;
-    getDOMNode(): HTMLElement;
+    getDOMNode(): HTMLElement | HTMLInputElement;
     at(index: number): this;
     first(): this;
     last(): this;
