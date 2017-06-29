@@ -5,7 +5,7 @@ declare type SelectOption = {
 };
 declare type stringOrNode = string | React$Element<*>;
 declare module 'react-select' {
-  declare export class Select extends React$Component {
+  declare export default class Select extends React$Component {
     props: {
       addLabelText?: string, // placeholder displayed when you want to add a label on a multi-value input
       /*
@@ -28,7 +28,7 @@ declare module 'react-select' {
       delimiter?: string, // delimiter to use to join multiple values for the hidden field value
       disabled?: boolean, // whether the Select is disabled or not
       escapeClearsValue?: boolean, // whether escape clears the value when the menu is closed
-      filterOption: (option: any, filterString: string) => boolean, // method to filter a single option (option, filterString)
+      filterOption?: (option: any, filterString: string) => boolean, // method to filter a single option (option, filterString)
       filterOptions?:
         | boolean // eslint-disable-line
         | ((options: Array<any>, filterValue: string, excludeOptions: Array<any>, props: Object) => Array<any>), // boolean to enable default filtering or function to filter the options array ([options], filterString, [values])
@@ -80,7 +80,7 @@ declare module 'react-select' {
       valueComponent?: (props: Object) => React$Element<*>, // value component to render
       valueKey?: string, // path of the label value in option objects
       valueRenderer?: (props: Object) => React$Element<*>, // valueRenderer: function (option) {}
-      wrapperStyle: any, // optional style to apply to the component wrapper
+      wrapperStyle?: any, // optional style to apply to the component wrapper
     },
   }
 }
