@@ -46,7 +46,10 @@ declare module 'flyd/module/diff' {
 }
 
 declare module 'flyd/module/droprepeats' {
-  declare module.exports: (s: Stream) => Stream;
+  declare module.exports: {
+    dropRepeats: (s: Stream) => Stream,
+    dropRepeatsWith: CurriedFunction2<(*) => boolean, Stream, Stream>,
+  };
 }
 
 declare module 'flyd/module/every' {
