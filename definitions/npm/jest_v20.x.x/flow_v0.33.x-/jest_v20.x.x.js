@@ -416,8 +416,25 @@ declare function beforeEach(fn: Function): void;
 declare function afterAll(fn: Function): void;
 /** Runs this function before any tests have started inside this context */
 declare function beforeAll(fn: Function): void;
+
 /** A context for grouping tests together */
-declare function describe(name: string, fn: Function): void;
+declare var describe: {
+  /**
+   * Creates a block that groups together several related tests in one "test suite"
+   */
+  (name: string, fn: Function): void,
+
+  /**
+   * Only run this describe block
+   */
+  only(name: string, fn: Function): void,
+
+  /**
+   * Skip running this describe block
+   */
+  skip(name: string, fn: Function): void,
+};
+
 
 /** An individual test unit */
 declare var it: {

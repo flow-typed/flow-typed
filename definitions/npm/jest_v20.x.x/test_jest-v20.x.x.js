@@ -31,6 +31,10 @@ expect('someVal').toHaveBeeenCalledWith('a')
 // $ExpectError property `fn` not found in Array
 mockFn.mock.calls.fn()
 
+describe('name', () => {});
+describe.only('name', () => {});
+describe.skip('name', () => {});
+
 test('test', () => expect('foo').toMatchSnapshot());
 test.only('test', () => expect('foo').toMatchSnapshot());
 test.skip('test', () => expect('foo').toMatchSnapshot());
