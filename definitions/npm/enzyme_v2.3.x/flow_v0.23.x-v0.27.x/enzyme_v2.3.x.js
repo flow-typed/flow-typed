@@ -12,6 +12,7 @@ declare module 'enzyme' {
     findWhere(predicate: PredicateFunction<this>): this;
     filter(selector: EnzymeSelector): this;
     filterWhere(predicate: PredicateFunction<this>): this;
+    component: React$Component;
     contains(nodeOrNodes: NodeOrNodes): boolean;
     containsMatchingElement(node: React$Element<any>): boolean;
     containsAllMatchingElements(nodes: NodeOrNodes): boolean;
@@ -40,11 +41,11 @@ declare module 'enzyme' {
     last(): this;
     state(key?: string): any;
     context(key?: string): any;
-    props(): Object;
+    props: Object;
     prop(key: string): any;
     key(): string;
     simulate(event: string, ...args: Array<any>): this;
-    setState(state: Object): this;
+    setState(state: Object, callback?: Function): this;
     setProps(props: Object): this;
     setContext(context: Object): this;
     instance(): React$Component<any, any, any>;
@@ -60,6 +61,8 @@ declare module 'enzyme' {
     someWhere(predicate: PredicateFunction<this>): boolean;
     every(selector: EnzymeSelector): boolean;
     everyWhere(predicate: PredicateFunction<this>): boolean;
+    node: this;
+    refs: {[string]: this};
     length: number;
   }
 
