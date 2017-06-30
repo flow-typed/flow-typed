@@ -245,9 +245,9 @@ type JestExpectType = {
    */
   toHaveProperty(propPath: string, value?: any): void,
   /**
-   * Use .toMatch to check that a string matches a regular expression.
+   * Use .toMatch to check that a string matches a regular expression or string.
    */
-  toMatch(regexp: RegExp): void,
+  toMatch(regexpOrString: RegExp | string): void,
   /**
    * Use .toMatchObject to check that a javascript object matches a subset of the properties of an object.
    */
