@@ -861,10 +861,8 @@ testSelector = $('div').off('click');
 testSelector = $('div').off('click', 'p', testCallbackEventObject);
 
 //off(events: string, handler: (eventObject: JQueryEventObject, ...args: any[]) => any): JQuery;
-// TODO: unable to create test!!!
-
-//off(events: string, handler: (eventObject: JQueryEventObject) => any): JQuery;
-testSelector = $('div').off('click', testCallbackEventObject);
+testSelector = $('div').off('click', (eventObject: JQueryEventObject) => false);
+testSelector = $('div').off('click', (eventObject: JQueryEventObject, p: string) => false);
 
 //off(events: {[key: string]: any;}, selector?: string): JQuery;
 testSelector = $('div').off({ click: testCallbackEventObject }, 'p');
