@@ -75,6 +75,7 @@ export type Args = {
   skip: boolean,
   verbose: bool,
   libdefDir?: string,
+  packageDir?: string,
 };
 export function setup(yargs: Yargs) {
   return yargs
@@ -103,11 +104,17 @@ export function setup(yargs: Yargs) {
         type: 'string',
         demand: false,
       },
+      packageDir: {
+        alias: 'p',
+        describe: "The relative path of package.json where flow-bin is installed",
+        type: "string",
+      },
     });
 };
 export async function run(args: Args) {
   const cwd = process.cwd();
-  const flowVersion = await determineFlowVersion(cwd, args.flowVersion);
+  const packageDir = args.packageDir ? path.resolve(args.packageDir) : cwd;
+  const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
   const libdefDir = args.libdefDir || 'flow-typed';
   const explicitLibDefs = args._.slice(1);
 

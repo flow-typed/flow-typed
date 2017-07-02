@@ -558,5 +558,41 @@ describe("install (command)", () => {
         );
       });
     });
+
+    pit("uses flow-bin defined in another package.json", () => {
+      return fakeProjectEnv(async (FLOWPROJ_DIR) => {
+        // Create some dependencies
+        await Promise.all([
+          writePkgJson(path.join(FLOWPROJ_DIR, "package.json"), {
+            name: "test",
+            dependencies: {
+              "foo": "1.2.3",
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, "node_modules", "foo")),
+          writePkgJson(path.join(FLOWPROJ_DIR, "..", "package.json"), {
+            name: "parent",
+            devDependencies: {
+              "flow-bin": "^0.45.0",
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, "..", "node_modules", "flow-bin")),
+        ]);
+
+        // Run the install command
+        await run({
+          _: [],
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          packageDir: path.join(FLOWPROJ_DIR, ".."),
+        });
+
+        // Installs libdef
+        expect(await fs.exists(
+          path.join(FLOWPROJ_DIR, "flow-typed", "npm", "foo_v1.x.x.js")
+        )).toEqual(true);
+      });
+    });
   });
 });
