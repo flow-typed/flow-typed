@@ -5,6 +5,7 @@ import _ from 'lodash';
  * _.find
  */
 _.find([1, 2, 3], x => x * 1 == 3);
+_.find([1, 2, 3], x => x == 2, 1);
 // $ExpectError number cannot be compared to string
 _.find([1, 2, 3], x => x == 'a');
 // $ExpectError number. This type is incompatible with function type.

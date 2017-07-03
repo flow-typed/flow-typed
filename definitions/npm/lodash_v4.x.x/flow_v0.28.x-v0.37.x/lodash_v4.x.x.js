@@ -175,10 +175,10 @@ declare module 'lodash' {
     every<T: Object>(object: T, iteratee?: OIteratee<T>): bool;
     filter<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
     filter<A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>): Array<A>;
-    find<T>(array: ?Array<T>, predicate?: Predicate<T>): T;
-    find<V, A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>): V;
-    findLast<T>(array: ?Array<T>, predicate?: Predicate<T>): T;
-    findLast<V, A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>): V;
+    find<T>(array: ?Array<T>, predicate?: Predicate<T>, fromIndex?: number): T;
+    find<V, A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>, fromIndex?: number): V;
+    findLast<T>(array: ?Array<T>, predicate?: Predicate<T>, fromIndex?: number): T;
+    findLast<V, A, T: {[id: string]: A}>(object: T, predicate?: OPredicate<A, T>, fromIndex?: number): V;
     flatMap<T, U>(array: ?Array<T>, iteratee?: FlatMapIteratee<T, U>): Array<U>;
     flatMap<T: Object, U>(object: T, iteratee?: OFlatMapIteratee<T, U>): Array<U>;
     flatMapDeep<T, U>(array: ?Array<T>, iteratee?: FlatMapIteratee<T, U>): Array<U>;
