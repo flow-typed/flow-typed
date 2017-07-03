@@ -265,6 +265,7 @@ boolFalse = _.isString({});
 boolFalse = _.isString(5);
 boolFalse = _.isString(function(f) { return f });
 boolFalse = _.isString();
+boolFalse = _.isString(true);
 
 // $ExpectError
 boolFalse = _.isString('');
