@@ -91,7 +91,7 @@ type JestMatcherResult = {
   pass: boolean
 };
 
-type JestMatcher = (actual: any, expected: any) => JestMatcherResult;
+type JestMatcher = (actual: any, ...expected: any) => JestMatcherResult;
 
 type JestPromiseType = {
   /**
