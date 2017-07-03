@@ -299,7 +299,7 @@ declare module 'lodash' {
     isSafeInteger(value: any): bool;
     isSet(value: any): bool;
     isString(value: string): true;
-    isString(value: number|Function|void|null|Object|Array<any>): false;
+    isString(value: number|bool|Function|void|null|Object|Array<any>): false;
     isSymbol(value: any): bool;
     isTypedArray(value: any): bool;
     isUndefined(value: any): bool;
