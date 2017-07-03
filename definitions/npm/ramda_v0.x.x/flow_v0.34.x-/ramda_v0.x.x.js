@@ -364,9 +364,9 @@ declare module ramda {
   declare function reduceRight<A, B>(fn: (acc: A, elem: B) => A, init: A, ...rest: Array<void>): (xs: Array<B>) => A;
   declare function reduceRight<A, B>(fn: (acc: A, elem: B) => A, init: A, xs: Array<B>): A;
 
-  declare function scan<A, B>(fn: (acc: A, elem: B) => A, ...rest: Array<void>): ((init: A, xs: Array<B>) => A) & ((init: A, ...rest: Array<void>) => (xs: Array<B>) => A);
-  declare function scan<A, B>(fn: (acc: A, elem: B) => A, init: A, ...rest: Array<void>): (xs: Array<B>) => A;
-  declare function scan<A, B>(fn: (acc: A, elem: B) => A, init: A, xs: Array<B>): A;
+  declare function scan<A, B>(fn: (acc: A, elem: B) => A, ...rest: Array<void>): ((init: A, xs: Array<B>) => Array<A>) & ((init: A, ...rest: Array<void>) => (xs: Array<B>) => Array<A>);
+  declare function scan<A, B>(fn: (acc: A, elem: B) => A, init: A, ...rest: Array<void>): (xs: Array<B>) => Array<A>;
+  declare function scan<A, B>(fn: (acc: A, elem: B) => A, init: A, xs: Array<B>): Array<A>;
 
   declare function splitAt<V,T:Array<V>|string>(i: number, xs: T): [T,T];
   declare function splitAt<V,T:Array<V>|string>(i: number): (xs: T) => [T,T];
