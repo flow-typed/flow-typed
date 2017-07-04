@@ -22,7 +22,7 @@ declare module 'enzyme' {
     hasClass(className: string): boolean;
     is(selector: EnzymeSelector): boolean;
     isEmpty(): boolean;
-    not(selector: EnzymeSelector): boolean;
+    not(selector: EnzymeSelector): this;
     children(selector?: EnzymeSelector): this;
     childAt(index: number): this;
     parents(selector?: EnzymeSelector): this;
