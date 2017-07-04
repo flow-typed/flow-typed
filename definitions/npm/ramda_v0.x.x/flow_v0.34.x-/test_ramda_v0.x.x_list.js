@@ -155,9 +155,14 @@ const str: string = 'hello world'
   const redxs3: number = _.reduceRight(_.add, 10, ns)
   const redxs4: string = _.reduceRight(_.concat, '', ss)
   const redxs5: Array<string> = _.reduceRight(_.concat, [])(_.map(x => [ x ], ss))
-  const redxs6: number = _.scan(_.add, 10, ns)
-  const redxs7: string = _.scan(_.concat, '', ss)
-  const redxs8: Array<string> = _.scan(_.concat, [])(_.map(x => [ x ], ss))
+  const redxs6: Array<number> = _.scan(_.add)(10)(ns)
+  const redxs7: Array<number> = _.scan(_.add, 10)(ns)
+  const redxs8: Array<number> = _.scan(_.add)(10, ns)
+  const redxs9: Array<number> = _.scan(_.add, 10, ns)
+  const redxs10: Array<string> = _.scan(_.concat)('')(ss)
+  const redxs11: Array<string> = _.scan(_.concat, '')(ss)
+  const redxs12: Array<string> = _.scan(_.concat)('', ss)
+  const redxs13: Array<string> = _.scan(_.concat, '', ss)
 
   const reduceToNamesBy = _.reduceBy((acc, student) => acc.concat(student.name), [])
   const namesByGrade = reduceToNamesBy((student) => {
