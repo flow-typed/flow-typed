@@ -70,6 +70,7 @@ expect({a: 1, b: 2}).to.have.key("a");
 expect({a: 1, b: 2}).to.have.keys("a", "b");
 expect({a: 1, b: 2}).to.have.keys(["a", "b"]);
 
+expect(() => {}).to.throw();
 expect(() => {}).to.throw(Error);
 expect(() => {}).to.throw(new Error("stuff"));
 expect(() => {}).to.throw("stuff");
