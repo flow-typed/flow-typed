@@ -207,6 +207,9 @@ declare module 'react-dnd' {
     DragSource: DragSource,
     DropTarget: DropTarget,
     DragLayer: DragLayer,
-    DragDropContext: DragDropContext
+    DragDropContext: DragDropContext,
+    ConnectDragSource: ConnectDragSource,
+    ConnectDragPreview: ConnectDragPreview,
+    ConnectDropTarget: ConnectDropTarget
   }
 }
