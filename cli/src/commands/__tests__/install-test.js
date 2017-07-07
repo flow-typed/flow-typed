@@ -414,6 +414,45 @@ describe("install (command)", () => {
       });
     });
 
+    pit("overwrites stubs when libdef becomes available (with --overwrite)", () => {
+      return fakeProjectEnv(async (FLOWPROJ_DIR) => {
+        // Create some dependencies
+        await Promise.all([
+          writePkgJson(path.join(FLOWPROJ_DIR, "package.json"), {
+            name: "test",
+            devDependencies: {
+              "flow-bin": "^0.43.0",
+            },
+            dependencies: {
+              "foo": "1.2.3",
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, "node_modules", "foo")),
+          mkdirp(path.join(FLOWPROJ_DIR, "node_modules", "flow-bin")),
+        ]);
+
+        await fs.writeFile(path.join(FLOWPROJ_DIR, "flow-typed", "npm", "foo_vx.x.x.js"), '');
+
+        // Run the install command
+        await run({
+          _: [],
+          overwrite: true,
+          verbose: false,
+          skip: false,
+        });
+
+        // Replaces the stub with the real typedef
+        expect(await Promise.all([
+          fs.exists(
+            path.join(FLOWPROJ_DIR, "flow-typed", "npm", "foo_vx.x.x.js")
+          ),
+          fs.exists(
+            path.join(FLOWPROJ_DIR, "flow-typed", "npm", "foo_v1.x.x.js")
+          ),
+        ])).toEqual([false, true]);
+      });
+    });
+
     pit("doesn't overwrite tweaked libdefs (without --overwrite)", () => {
       return fakeProjectEnv(async (FLOWPROJ_DIR) => {
         // Create some dependencies
