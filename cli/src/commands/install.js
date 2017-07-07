@@ -442,6 +442,16 @@ async function installNpmLibDef(
       colors.green(`.${path.sep}${terseFilePath}`)
     );
 
+    // Remove any lingering stubs
+    console.log(npmLibDef.name);
+    console.log(scopedDir);
+    const stubName = `${npmLibDef.name}_vx.x.x.js`;
+    const stubPath = path.join(scopedDir, stubName);
+
+    if (overwrite && (await fs.exists(stubPath))) {
+      await fs.unlink(stubPath);
+    }
+
     return true;
   } catch (e) {
     console.error(`  !! Failed to install ${npmLibDef.name} at ${filePath}`);
