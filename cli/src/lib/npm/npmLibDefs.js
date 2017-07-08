@@ -388,8 +388,10 @@ type InstalledNpmLibDef =
   | {| kind: "Stub", name: string |}
 export async function getInstalledNpmLibDefs(
   flowProjectRootDir: string,
+  libdefDir?: string,
 ): Promise<Map<string, InstalledNpmLibDef>> {
-  const libDefDirPath = path.join(flowProjectRootDir, 'flow-typed', 'npm');
+  const typedefDir = libdefDir || 'flow-typed';
+  const libDefDirPath = path.join(flowProjectRootDir, typedefDir, 'npm');
   const installedLibDefs = new Map();
   if (await fs.exists(libDefDirPath)) {
     const filesInNpmDir = await getFilesInDir(libDefDirPath, true);

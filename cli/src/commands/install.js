@@ -74,6 +74,7 @@ export type Args = {
   overwrite: boolean,
   skip: boolean,
   verbose: bool,
+  libdefDir?: string,
 };
 export function setup(yargs: Yargs) {
   return yargs
@@ -96,11 +97,18 @@ export function setup(yargs: Yargs) {
         type: 'boolean',
         demand: false,
       },
+      libdefDir: {
+        alias: 'l',
+        describe: 'Use a custom directory to install libdefs',
+        type: 'string',
+        demand: false,
+      },
     });
 };
 export async function run(args: Args) {
   const cwd = process.cwd();
   const flowVersion = await determineFlowVersion(cwd, args.flowVersion);
+  const libdefDir = args.libdefDir || 'flow-typed';
   const explicitLibDefs = args._.slice(1);
 
   const coreLibDefResult = await installCoreLibDefs();
@@ -112,6 +120,7 @@ export async function run(args: Args) {
     cwd,
     flowVersion,
     explicitLibDefs,
+    libdefDir: libdefDir,
     verbose: args.verbose,
     overwrite: args.overwrite,
     skip: args.skip,
@@ -159,6 +168,7 @@ type installNpmLibDefsArgs = {|
   cwd: string,
   flowVersion: FlowVersion,
   explicitLibDefs: Array<string>,
+  libdefDir: string,
   verbose: boolean,
   overwrite: boolean,
   skip: boolean,
@@ -167,6 +177,7 @@ async function installNpmLibDefs({
   cwd,
   flowVersion,
   explicitLibDefs,
+  libdefDir,
   verbose,
   overwrite,
   skip,
@@ -257,6 +268,7 @@ async function installNpmLibDefs({
   const libDefsToUninstall = new Map();
   const alreadyInstalledLibDefs = await getInstalledNpmLibDefs(
     path.join(flowProjectRoot),
+    libdefDir,
   );
   [...alreadyInstalledLibDefs.entries()].forEach(
     ([filePath, npmLibDef]) => {
@@ -284,7 +296,7 @@ async function installNpmLibDefs({
 
   if (libDefsToInstall.size > 0) {
     console.log(`• Installing ${libDefsToInstall.size} libDefs...`);
-    const flowTypedDirPath = path.join(flowProjectRoot, 'flow-typed', 'npm');
+    const flowTypedDirPath = path.join(flowProjectRoot, libdefDir, 'npm');
     await mkdirp(flowTypedDirPath);
     const results = await Promise.all(
       [...libDefsToInstall.values()].map(async (def: NpmLibDef) => {
@@ -365,6 +377,7 @@ async function installNpmLibDefs({
             pkgName,
             pkgVerStr,
             true, /*ovewrite*/
+            libdefDir
           );
         })
       );

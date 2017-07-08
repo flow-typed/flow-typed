@@ -18,6 +18,13 @@ export function setup(yargs: Object) {
         type: 'bool',
         demand: false,
       },
+      libdefDir: {
+        default: 'flow-typed',
+        alias: 'l',
+        describe: 'Use a custom directory to install libdefs',
+        type: 'string',
+        demand: false,
+      },
     })
     .example('$0 create-stub foo@^1.2.0')
     .example('$0 create-stub foo bar baz')
@@ -26,6 +33,7 @@ export function setup(yargs: Object) {
 
 type Args = {
   overwrite: boolean,
+  libdefDir?: string,
   _: Array<string>,
 }
 
@@ -74,7 +82,13 @@ export async function run(args: Args): Promise<number> {
         version = parts[1];
       }
 
-      return createStub(projectRoot, packageName, version, args.overwrite);
+      return createStub(
+        projectRoot,
+        packageName,
+        version,
+        args.overwrite,
+        args.libdefDir,
+      );
     }),
   );
 
