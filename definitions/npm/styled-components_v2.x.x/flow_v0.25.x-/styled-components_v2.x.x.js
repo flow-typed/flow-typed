@@ -50,7 +50,7 @@ declare module 'styled-components' {
     injectGlobal: (strings: Array<string>, ...interpolations: Array<Interpolation>) => void,
     css: (strings: Array<string>, ...interpolations: Array<Interpolation>) => Array<Interpolation>,
     keyframes: (strings: Array<string>, ...interpolations: Array<Interpolation>) => string,
-    withTheme: (component: Component) => React$Component<*, ThemeProviderProps, *>,
+    withTheme: (component: Component) => ReactClass<*>,
     ServerStyleSheet: typeof Npm$StyledComponents$ServerStyleSheet,
     StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager,
     ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
@@ -204,7 +204,7 @@ declare module 'styled-components/native' {
 
   declare module.exports: {
     css: (strings: Array<string>, ...interpolations: Array<Interpolation>) => Array<Interpolation>,
-    withTheme: (component: Component) => React$Component<*, ThemeProviderProps, *>,
+    withTheme: (component: Component) => ReactClass<*>,
     keyframes: (strings: Array<string>, ...interpolations: Array<Interpolation>) => string,
     ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
 
