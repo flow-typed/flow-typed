@@ -79,6 +79,7 @@ async function writeStub(
   packageVersion: string,
   overwrite: boolean,
   files: Array<string>,
+  libdefDir: string,
 ): Promise<string> {
   let output = [
     '/**',
@@ -127,7 +128,7 @@ async function writeStub(
   output += "\n"; // File should end with a newline
   const filename = path.join(
     projectRoot,
-    "flow-typed",
+    libdefDir,
     "npm",
     format("%s_vx.x.x.js", packageName),
   );
@@ -186,11 +187,15 @@ export async function createStub(
   packageName: string,
   explicitVersion: string | null,
   overwrite: boolean,
+  libdefDir?: string,
 ): Promise<boolean> {
   let files = [];
   let resolutionError = null;
   let pathToPackage = null;
   let version = explicitVersion || null;
+
+  const typedefDir = libdefDir || 'flow-typed';
+
   try {
     pathToPackage = await resolvePkgDirPath(
       packageName,
@@ -238,6 +243,7 @@ export async function createStub(
       version,
       overwrite,
       files,
+      typedefDir,
     );
     const terseFilename = path.relative(projectRoot, filename);
     console.log(
