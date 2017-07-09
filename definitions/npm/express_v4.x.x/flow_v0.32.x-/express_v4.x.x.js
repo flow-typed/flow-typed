@@ -1,4 +1,5 @@
 import type { Server } from 'http';
+import type { Socket } from 'net';
 
 declare type express$RouterOptions = {
   caseSensitive?: boolean,
@@ -15,6 +16,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   baseUrl: string;
   body: any;
   cookies: {[cookie: string]: string};
+  connection: Socket;
   fresh: boolean;
   hostname: string;
   ip: string;
