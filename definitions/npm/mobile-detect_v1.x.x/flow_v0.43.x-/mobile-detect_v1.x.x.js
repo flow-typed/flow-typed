@@ -197,6 +197,7 @@ declare module 'mobile-detect' {
     userAgents(): Array<UserAgent>;
     version(key: VersionKey): number | null;
     versionStr(key: VersionKey): string | null;
+    isPhoneSized(maxPhoneWidth?: number): boolean;
   }
 
   declare var exports: Class<MobileDetect>;
