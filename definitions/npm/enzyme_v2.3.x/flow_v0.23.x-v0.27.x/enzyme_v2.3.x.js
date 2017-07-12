@@ -1,5 +1,5 @@
 declare module 'enzyme' {
-  declare type PredicateFunction<T: Wrapper> = (wrapper: T) => boolean;
+  declare type PredicateFunction<T: Wrapper> = (wrapper: T, index: number) => boolean;
   declare type NodeOrNodes = React$Element<any> | Array<React$Element<any>>;
   declare type EnzymeSelector = string | ReactClass<any> | Object;
 
@@ -44,16 +44,16 @@ declare module 'enzyme' {
     prop(key: string): any;
     key(): string;
     simulate(event: string, ...args: Array<any>): this;
-    setState(state: Object): this;
-    setProps(props: Object): this;
+    setState(state: {}, callback?: Function): this,
+    setProps(props: {}): this;
     setContext(context: Object): this;
     instance(): React$Component<any, any, any>;
     update(): this;
     debug(): string;
     type(): string | Function | null;
     name(): string;
-    forEach(fn: (node: this) => any): this;
-    map<T>(fn: (node: this) => T): Array<T>;
+    forEach(fn: (node: this, index: number) => mixed): this;
+    map<T>(fn: (node: this, index: number) => T): Array<T>;
     reduce<T>(fn: (value: T, node: this, index: number) => T, initialValue?: T): Array<T>;
     reduceRight<T>(fn: (value: T, node: this, index: number) => T, initialValue?: T): Array<T>;
     some(selector: EnzymeSelector): boolean;
