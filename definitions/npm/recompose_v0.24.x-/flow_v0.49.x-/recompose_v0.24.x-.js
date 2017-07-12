@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 // TODO:
 // extend compose to 10
 
