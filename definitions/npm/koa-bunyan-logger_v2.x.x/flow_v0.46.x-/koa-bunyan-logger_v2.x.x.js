@@ -1,3 +1,6 @@
+// flow-typed signature: fc9ba94617ec40078c47daf2a840cb60
+// flow-typed version: d3898aa134/koa-bunyan-logger_v2.x.x/flow_>=v0.46.x
+
 // flow-typed signature: 94ef6104423d3d9d602b0a953d3dda20
 // flow-typed version: <<STUB>>/koa-bunyan-logger_v^2.0.0/flow_v0.46.0
 
@@ -53,7 +56,7 @@ declare module 'koa-bunyan-logger' {
   declare interface LoggerOptions {
     streams?: Array<Stream>;
     level?: BunyanLogLevels | string,
-    stream?:  stream$Writable;
+    stream?: stream$Writable;
     serializers?: Serializers;
     src?: boolean;
   }
@@ -121,7 +124,7 @@ declare module 'koa-bunyan-logger' {
    * import type { Middleware } from 'koa';
   **/
   declare type Middleware =
-    (ctx: *, next: () => Promise<void>) => Promise<void>|void;
+    (ctx: *, next: () => Promise<void>) => Promise<void> | void;
 
   declare type MiddlewareType = Middleware;
 
