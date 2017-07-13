@@ -283,7 +283,7 @@ declare module 'koa' {
     ips: $PropertyType<Request, 'ips'>,
     ip: $PropertyType<Request, 'ip'>,
 
-    [key: string]: mixed, // props added by middlewares.
+    [key: string]: any, // props added by middlewares.
   }
 
   declare type Middleware =
