@@ -21,38 +21,44 @@ declare module ramda {
     (value: any, key: string): boolean;
   }
 
-  declare type CurriedFunction1<A, R> =
-    & ((...r: [A]) => R)
+  declare type __CurriedFunction1<A, R, AA: A> =
+    & ((...r: [AA]) => R)
+  declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>
 
-  declare type CurriedFunction2<A, B, R> =
-    & ((...r: [A]) => CurriedFunction1<B, R>)
-    & ((...r: [A, B]) => R)
+  declare type __CurriedFunction2<A, B, R, AA: A, BB: B> =
+    & ((...r: [AA]) => CurriedFunction1<BB, R>)
+    & ((...r: [AA, BB]) => R)
+  declare type CurriedFunction2<A, B, R> = __CurriedFunction2<A, B, R, *, *>
 
-  declare type CurriedFunction3<A, B, C, R> =
-    & ((...r: [A]) => CurriedFunction2<B, C, R>)
-    & ((...r: [A, B]) => CurriedFunction1<C, R>)
-    & ((...r: [A, B, C]) => R)
+  declare type __CurriedFunction3<A, B, C, R, AA: A, BB: B, CC: C> =
+    & ((...r: [AA]) => CurriedFunction2<BB, CC, R>)
+    & ((...r: [AA, BB]) => CurriedFunction1<CC, R>)
+    & ((...r: [AA, BB, CC]) => R)
+  declare type CurriedFunction3<A, B, C, R> = __CurriedFunction3<A, B, C, R, *, *, *>
 
-  declare type CurriedFunction4<A, B, C, D, R> =
-    & ((...r: [A]) => CurriedFunction3<B, C, D, R>)
-    & ((...r: [A, B]) => CurriedFunction2<C, D, R>)
-    & ((...r: [A, B, C]) => CurriedFunction1<D, R>)
-    & ((...r: [A, B, C, D]) => R)
+  declare type __CurriedFunction4<A, B, C, D, R, AA: A, BB: B, CC: C, DD: D> =
+    & ((...r: [AA]) => CurriedFunction3<BB, CC, DD, R>)
+    & ((...r: [AA, BB]) => CurriedFunction2<CC, DD, R>)
+    & ((...r: [AA, BB, CC]) => CurriedFunction1<DD, R>)
+    & ((...r: [AA, BB, CC, DD]) => R)
+  declare type CurriedFunction4<A, B, C, D, R> = __CurriedFunction4<A, B, C, D, R, *, *, *, *>
 
-  declare type CurriedFunction5<A, B, C, D, E, R> =
-    & ((...r: [A]) => CurriedFunction4<B, C, D, E, R>)
-    & ((...r: [A, B]) => CurriedFunction3<C, D, E, R>)
-    & ((...r: [A, B, C]) => CurriedFunction2<D, E, R>)
-    & ((...r: [A, B, C, D]) => CurriedFunction1<E, R>)
-    & ((...r: [A, B, C, D, E]) => R)
+  declare type __CurriedFunction5<A, B, C, D, E, R, AA: A, BB: B, CC: C, DD: D, EE: E> =
+    & ((...r: [AA]) => CurriedFunction4<BB, CC, DD, EE, R>)
+    & ((...r: [AA, BB]) => CurriedFunction3<CC, DD, EE, R>)
+    & ((...r: [AA, BB, CC]) => CurriedFunction2<DD, EE, R>)
+    & ((...r: [AA, BB, CC, DD]) => CurriedFunction1<EE, R>)
+    & ((...r: [AA, BB, CC, DD, EE]) => R)
+  declare type CurriedFunction5<A, B, C, D, E, R> = __CurriedFunction5<A, B, C, D, E, R, *, *, *, *, *>
 
-  declare type CurriedFunction6<A, B, C, D, E, F, R> =
-    & ((...r: [A]) => CurriedFunction5<B, C, D, E, F, R>)
-    & ((...r: [A, B]) => CurriedFunction4<C, D, E, F, R>)
-    & ((...r: [A, B, C]) => CurriedFunction3<D, E, F, R>)
-    & ((...r: [A, B, C, D]) => CurriedFunction2<E, F, R>)
-    & ((...r: [A, B, C, D, E]) => CurriedFunction1<F, R>)
-    & ((...r: [A, B, C, D, E, F]) => R)
+  declare type __CurriedFunction6<A, B, C, D, E, F, R, AA: A, BB: B, CC: C, DD: D, EE: E, FF: F> =
+    & ((...r: [AA]) => CurriedFunction5<BB, CC, DD, EE, FF, R>)
+    & ((...r: [AA, BB]) => CurriedFunction4<CC, DD, EE, FF, R>)
+    & ((...r: [AA, BB, CC]) => CurriedFunction3<DD, EE, FF, R>)
+    & ((...r: [AA, BB, CC, DD]) => CurriedFunction2<EE, FF, R>)
+    & ((...r: [AA, BB, CC, DD, EE]) => CurriedFunction1<FF, R>)
+    & ((...r: [AA, BB, CC, DD, EE, FF]) => R)
+  declare type CurriedFunction6<A, B, C, D, E, F, R> = __CurriedFunction6<A, B, C, D, E, F, R, *, *, *, *, *, *>
 
   declare type Curry =
     & (<A, R>((...r: [A]) => R) => CurriedFunction1<A, R>)
@@ -644,7 +650,7 @@ declare module ramda {
   declare function apply<T,V>(fn: (...args: Array<T>) => V, ...rest: Array<void>): (xs: Array<T>) => V;
   declare function apply<T,V>(fn: (...args: Array<T>) => V, xs: Array<T>): V;
 
-  declare function applySpec<S,V,T:NestedObject<(...args: Array<V>) => S>>(spec: T): (...args: Array<V>) => NestedObject<S>;
+  declare function applySpec<V, S, A: Array<V>, T: NestedObject<(...args: A) => S>>(spec: T): (...args: A) => NestedObject<S>
 
   declare function binary<T>(fn:(...args: Array<any>) => T): (x: any, y: any) => T;
 

@@ -1,6 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, uncurryN } from 'ramda'
+import _, { compose, pipe, uncurryN, curry } from 'ramda'
 // Function
 const ns: Array<number> = [ 1, 2, 3, 4, 5 ]
 const ss: Array<string> = [ 'one', 'two', 'three', 'four' ]
