@@ -20,7 +20,7 @@ describe('npmLibDefs', () => {
       'extractLibDefsFromNpmPkgDir',
     );
 
-    pit('succeeds on well-formed repo', async () => {
+    it('succeeds on well-formed repo', async () => {
       const UNDERSCORE_PATH = path.join(
         FIXTURE_ROOT,
         'well-formed',
@@ -94,7 +94,7 @@ describe('npmLibDefs', () => {
       ]);
     });
 
-    pit('fails on bad package dir name', async () => {
+    it('fails on bad package dir name', async () => {
       const UNDERSCORE_PATH = path.join(
         FIXTURE_ROOT,
         'bad-pkg-namever',
@@ -130,7 +130,7 @@ describe('npmLibDefs', () => {
       ]);
     });
 
-    pit('fails on unexpected files', async () => {
+    it('fails on unexpected files', async () => {
       const UNDERSCORE_PATH = path.join(
         FIXTURE_ROOT,
         'unexpected-pkg-file',
@@ -175,7 +175,7 @@ describe('npmLibDefs', () => {
       ]);
     });
 
-    pit('fails if flow versions overlap', async () => {
+    it('fails if flow versions overlap', async () => {
       const UNDERSCORE_PATH = path.join(
         FIXTURE_ROOT,
         'overlapping-flow-versions',
@@ -207,7 +207,7 @@ describe('npmLibDefs', () => {
       ]);
     });
 
-    pit('fails if no libdefs are found', async () => {
+    it('fails if no libdefs are found', async () => {
       const UNDERSCORE_PATH = path.join(
         FIXTURE_ROOT,
         'empty-libdef-dir',
@@ -246,14 +246,14 @@ describe('npmLibDefs', () => {
       'getInstalledNpmLibDefs',
     );
 
-    pit('returns an empty map when /flow-typed dir not present', async () => {
+    it('returns an empty map when /flow-typed dir not present', async () => {
       const installedLibdefs = await getInstalledNpmLibDefs(
         path.join(FIXTURE_ROOT, 'emptyFlowTypedDir'),
       );
       expect(installedLibdefs.size).toBe(0);
     });
 
-    pit('finds unscoped libdefs', async () => {
+    it('finds unscoped libdefs', async () => {
       const installedLibdefs = await getInstalledNpmLibDefs(
         path.join(FIXTURE_ROOT, 'unscopedLibDefs'),
       );
@@ -289,7 +289,7 @@ describe('npmLibDefs', () => {
       }
     });
 
-    pit('finds scoped libdefs', async () => {
+    it('finds scoped libdefs', async () => {
       const installedLibdefs = await getInstalledNpmLibDefs(
         path.join(FIXTURE_ROOT, 'scopedLibDefs'),
       );
@@ -332,7 +332,7 @@ describe('npmLibDefs', () => {
       'getNpmLibDefs',
     );
 
-    pit('parses npm scope name correctly', async () => {
+    it('parses npm scope name correctly', async () => {
       const FIXTURE_DIR = path.join(
         FIXTURE_ROOT,
         "scoped-pkgs",
@@ -344,7 +344,7 @@ describe('npmLibDefs', () => {
       expect(scopedLibDefs.length).toBe(2);
     });
 
-    pit('errors when an unexpected file is in definitions/npm/', async () => {
+    it('errors when an unexpected file is in definitions/npm/', async () => {
       const FIXTURE_DIR = path.join(
         FIXTURE_ROOT,
         'unexpected-file',

@@ -41,7 +41,7 @@ describe('libDefs', () => {
       cacheRepoAssure.pendingAssure = Promise.resolve();
     });
 
-    pit('clones the repo if not present on disk', async () => {
+    it('clones the repo if not present on disk', async () => {
       await ensureCacheRepo();
       expect(_mock(cloneInto).mock.calls).toEqual([
         [REMOTE_REPO_URL, CACHE_REPO_DIR],
@@ -50,7 +50,7 @@ describe('libDefs', () => {
       expect(_mock(fs.writeFile).mock.calls[0][0]).toBe(LAST_UPDATED_FILE);
     });
 
-    pit('does NOT clone the repo if already present on disk', async () => {
+    it('does NOT clone the repo if already present on disk', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
       });
@@ -59,7 +59,7 @@ describe('libDefs', () => {
       expect(_mock(cloneInto).mock.calls).toEqual([]);
     });
 
-    pit('rebases if present on disk + lastUpdated is old', async () => {
+    it('rebases if present on disk + lastUpdated is old', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
       });
@@ -73,7 +73,7 @@ describe('libDefs', () => {
       expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([CACHE_REPO_DIR]);
     });
 
-    pit('does NOT rebase if on disk, but lastUpdated is recent', async () => {
+    it('does NOT rebase if on disk, but lastUpdated is recent', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === CACHE_REPO_DIR ||
                dirPath === CACHE_REPO_GIT_DIR ||
@@ -97,7 +97,7 @@ describe('libDefs', () => {
       cacheRepoAssure.pendingAssure = Promise.resolve();
     });
 
-    pit('rebases if present on disk + lastUpdated is old', async () => {
+    it('rebases if present on disk + lastUpdated is old', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
       });

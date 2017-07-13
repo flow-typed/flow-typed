@@ -39,7 +39,7 @@ describe("cacheRepoUtils", () => {
     });
     afterEach(() => {(console: any).log = origConsoleLog;});
 
-    pit('clones the repo if not present on disk', async () => {
+    it('clones the repo if not present on disk', async () => {
       await ensureCacheRepo();
       expect(_mock(cloneInto).mock.calls).toEqual([
         [REMOTE_REPO_URL, getCacheRepoDir()],
@@ -48,7 +48,7 @@ describe("cacheRepoUtils", () => {
       expect(_mock(fs.writeFile).mock.calls[0][0]).toBe(getLastUpdatedFile());
     });
 
-    pit('does NOT clone the repo if already present on disk', async () => {
+    it('does NOT clone the repo if already present on disk', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir();
       });
@@ -57,7 +57,7 @@ describe("cacheRepoUtils", () => {
       expect(_mock(cloneInto).mock.calls).toEqual([]);
     });
 
-    pit('rebases if present on disk + lastUpdated is old', async () => {
+    it('rebases if present on disk + lastUpdated is old', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir();
       });
@@ -71,7 +71,7 @@ describe("cacheRepoUtils", () => {
       expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([getCacheRepoDir()]);
     });
 
-    pit('does NOT rebase if on disk, but lastUpdated is recent', async () => {
+    it('does NOT rebase if on disk, but lastUpdated is recent', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === getCacheRepoDir() ||
                dirPath === getCacheRepoGitDir() ||
@@ -93,7 +93,7 @@ describe("cacheRepoUtils", () => {
     beforeEach(() => {fs.readFile = jest.fn();});
     afterEach(() => {fs.readFile = realReadFile;});
 
-    pit("does not throw if the cli range is compatible", async () => {
+    it("does not throw if the cli range is compatible", async () => {
       const readFileMock = _mock(fs.readFile);
       readFileMock.mockImplementation(() => {
         switch (readFileMock.mock.calls.length) {
@@ -120,7 +120,7 @@ describe("cacheRepoUtils", () => {
       expect(err).toBe(null);
     });
 
-    pit("throws if the cli range is incompatible", async () => {
+    it("throws if the cli range is incompatible", async () => {
       const readFileMock = _mock(fs.readFile);
       readFileMock.mockImplementation(() => {
         switch (readFileMock.mock.calls.length) {
