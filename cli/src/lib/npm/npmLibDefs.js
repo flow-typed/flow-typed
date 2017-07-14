@@ -103,13 +103,15 @@ async function extractLibDefsFromNpmPkgDir(
   const pkgDirItems = await fs.readdir(pkgDirPath);
 
   if (validating) {
-    await _npmExists(pkgName).then((exists) => {
-      if (!exists) {
-        const error =
-          `Package does not exist on npm!`;
-        validationError(pkgName, error, validationErrors);
-      }
-    });
+    await _npmExists(pkgName)
+      .then()
+      .catch((error) => {
+        // Only fail spen on 404, not on timeout
+        if (error.statusCode === 404) {
+          const pkgError = `Package does not exist on npm!`;
+          validationError(pkgName, pkgError, validationErrors);
+        }
+      });
   }
 
   const commonTestFiles = [];
@@ -383,16 +385,11 @@ function filterLibDefs(
   });
 }
 
-const constant = value => () => value;
-
 async function _npmExists(
   pkgName: string
 ): Promise<Function> {
   const pkgUrl = `https://www.npmjs.org/package/${pkgName}`;
-  // TODO: Lower timeout so tests run faster?
-  return got(pkgUrl, { method: 'HEAD' })
-    .then(constant(true))
-    .catch(constant(false));
+  return got(pkgUrl, { method: 'HEAD' });
 }
 
 export async function findNpmLibDef(
