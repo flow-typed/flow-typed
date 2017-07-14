@@ -8,12 +8,12 @@ declare type bodyParser$Options = {
 };
 
 declare type bodyParser$OptionsText = bodyParser$Options & {
-  reviever?: (key: string, value: any) => any;
+  reviver?: (key: string, value: any) => any;
   strict?: boolean;
 };
 
 declare type bodyParser$OptionsJson = bodyParser$Options & {
-  reviever?: (key: string, value: any) => any;
+  reviver?: (key: string, value: any) => any;
   strict?: boolean;
 };
 
