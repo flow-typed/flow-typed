@@ -43,6 +43,10 @@ import
   semver
 from "semver";
 
+import
+  got
+from "got";
+
 import type {
   ValidationErrors as VErrors
 } from "../validationErrors";
@@ -76,6 +80,7 @@ async function extractLibDefsFromNpmPkgDir(
   scope: null | string,
   pkgNameVer: string,
   validationErrors?: VErrors,
+  validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
   const errContext = `npm/${scope === null ? '' : scope + '/'}${pkgNameVer}`;
   const parsedPkgNameVer = parsePkgNameVer(
@@ -96,6 +101,18 @@ async function extractLibDefsFromNpmPkgDir(
   const pkgVersionStr = versionToString(pkgVersion);
   const libDefFileName = `${pkgName}_${pkgVersionStr}.js`;
   const pkgDirItems = await fs.readdir(pkgDirPath);
+
+  if (validating) {
+    await _npmExists(pkgName)
+      .then()
+      .catch((error) => {
+        // Only fail spen on 404, not on timeout
+        if (error.statusCode === 404) {
+          const pkgError = `Package does not exist on npm!`;
+          validationError(pkgName, pkgError, validationErrors);
+        }
+      });
+  }
 
   const commonTestFiles = [];
   const parsedFlowDirs: Array<[string, FlowVersion]> = [];
@@ -368,6 +385,13 @@ function filterLibDefs(
   });
 }
 
+async function _npmExists(
+  pkgName: string
+): Promise<Function> {
+  const pkgUrl = `https://www.npmjs.org/package/${pkgName}`;
+  return got(pkgUrl, { method: 'HEAD' });
+}
+
 export async function findNpmLibDef(
   pkgName: string,
   pkgVersion: string,
@@ -468,6 +492,7 @@ export async function getInstalledNpmLibDefs(
 export async function getNpmLibDefs(
   defsDirPath: string,
   validationErrors?: VErrors,
+  validating?: boolean
 ): Promise<Array<NpmLibDef>> {
   const npmLibDefs: Array<NpmLibDef> = [];
 
@@ -490,6 +515,7 @@ export async function getNpmLibDefs(
               scope,
               itemName,
               validationErrors,
+              validating,
             );
             libDefs.forEach(libDef => npmLibDefs.push(libDef));
           } else {
@@ -505,6 +531,7 @@ export async function getNpmLibDefs(
           null, // No scope
           itemName,
           validationErrors,
+          validating,
         );
         libDefs.forEach(libDef => npmLibDefs.push(libDef));
       }
