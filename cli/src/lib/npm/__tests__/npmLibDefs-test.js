@@ -28,11 +28,15 @@ describe('npmLibDefs', () => {
         'npm',
         'underscore_v1.x.x',
       );
+      const errs = new Map();
       const defs = await extractLibDefsFromNpmPkgDir(
         UNDERSCORE_PATH,
         null,
-        'underscore_v1.x.x'
+        'underscore_v1.x.x',
+        errs,
+        true
       );
+      expect([...errs.entries()]).toEqual([]);
       expect(defs).toEqual([
         {
           flowVersion: {
@@ -236,6 +240,29 @@ describe('npmLibDefs', () => {
       expect(await defsPromise2).toEqual([]);
       expect([...errs.entries()]).toEqual([
         ['npm/underscore_v1.x.x', ['No libdef files found!']],
+      ]);
+    });
+
+    it('fails if libdef not published on npm', async () => {
+      const TOTALLY_NOT_REAL_PKG_PATH = path.join(
+        FIXTURE_ROOT,
+        'pkg-not-on-npm',
+        'definitions',
+        'npm',
+        'totally-not-real-pkg_v1.x.x',
+      );
+
+      const errs = new Map();
+      const defsPromise2 = extractLibDefsFromNpmPkgDir(
+        TOTALLY_NOT_REAL_PKG_PATH,
+        null,
+        'totally-not-real-pkg_v1.x.x',
+        errs,
+        true,
+      );
+      expect((await defsPromise2).length).toBe(2);
+      expect([...errs.entries()]).toEqual([
+        ['totally-not-real-pkg', ['Package does not exist on npm!']],
       ]);
     });
   });
