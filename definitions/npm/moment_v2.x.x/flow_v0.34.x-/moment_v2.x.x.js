@@ -76,7 +76,9 @@ declare class moment$LocaleData {
   firstDayOfWeek(): number;
   firstDayOfYear(): number;
 }
+
 declare class moment$MomentDuration {
+  static (value: number|Object|string, unit?: string): moment$MomentDuration;
   humanize(suffix?: bool): string;
   milliseconds(): number;
   asMilliseconds(): number;
@@ -99,6 +101,7 @@ declare class moment$MomentDuration {
   toJSON(): string;
   toISOString(): string;
 }
+
 declare class moment$Moment {
   static ISO_8601: string;
   static (string?: string, format?: string|Array<string>, locale?: string, strict?: bool): moment$Moment;
@@ -230,12 +233,13 @@ declare class moment$Moment {
   static weekdaysShort(): string;
   static weekdaysMin(): string;
   static localeData(key?: string): moment$LocaleData;
-  static duration(value: number|Object|string, unit?: string): moment$MomentDuration;
+  static duration: Class<moment$MomentDuration>;
   static isDuration(obj: any): bool;
   static normalizeUnits(unit: string): string;
   static invalid(object: any): moment$Moment;
 }
 
 declare module 'moment' {
-  declare module.exports: Class<moment$Moment>;
+  declare export default Class<moment$Moment>;
+  declare export var duration: Class<moment$MomentDuration>;
 }
