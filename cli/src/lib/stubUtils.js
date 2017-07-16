@@ -225,7 +225,7 @@ export async function createStub(
     try {
       const pkgJsonPathStr = await findPackageJsonPath(projectRoot);
       const pkgJsonData = await getPackageJsonData(pkgJsonPathStr);
-      const rootDependencies = await getPackageJsonDependencies(pkgJsonData);
+      const rootDependencies = await getPackageJsonDependencies(pkgJsonData, []);
       version = rootDependencies[packageName] || null;
     } catch (e) { }
   }
