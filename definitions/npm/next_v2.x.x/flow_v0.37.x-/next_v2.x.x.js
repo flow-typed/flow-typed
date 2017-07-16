@@ -42,7 +42,7 @@ declare module "next/link" {
 
   declare export type State = {
     href: string | URLObject,
-    as: string | URLObject
+    as?: string | URLObject
   };
   declare export default Class<Component<void, State, *>>
 }
