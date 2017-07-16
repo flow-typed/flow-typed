@@ -76,7 +76,7 @@ export type Args = {
   verbose: bool,
   libdefDir?: string,
   packageDir?: string,
-  ignoreDeps: Array<string>,
+  ignoreDeps?: Array<string>,
 };
 export function setup(yargs: Yargs) {
   return yargs
@@ -110,6 +110,11 @@ export function setup(yargs: Yargs) {
         describe: "The relative path of package.json where flow-bin is installed",
         type: "string",
       },
+      ignoreDeps: {
+        alias: 'i',
+        describe: "Dependency categories to ignore when installing definitions",
+        type: "array",
+      },
     });
 };
 export async function run(args: Args) {
@@ -118,6 +123,7 @@ export async function run(args: Args) {
   const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
   const libdefDir = args.libdefDir || 'flow-typed';
   const explicitLibDefs = args._.slice(1);
+  const ignoreDeps = args.ignoreDeps || [];
 
   const coreLibDefResult = await installCoreLibDefs();
   if (coreLibDefResult !== 0) {
@@ -132,7 +138,7 @@ export async function run(args: Args) {
     verbose: args.verbose,
     overwrite: args.overwrite,
     skip: args.skip,
-    ignoreDeps: args.ignoreDeps,
+    ignoreDeps: ignoreDeps,
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
