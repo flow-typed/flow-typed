@@ -41,8 +41,6 @@ type PkgJson = {|
   }
 |};
 
-//Issues #379, 453, 528, 599
-
 const PKG_JSON_DEP_FIELDS = [
   'dependencies',
   'devDependencies',
