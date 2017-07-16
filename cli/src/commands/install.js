@@ -76,6 +76,7 @@ export type Args = {
   verbose: bool,
   libdefDir?: string,
   packageDir?: string,
+  ignoreDeps: Array<string>,
 };
 export function setup(yargs: Yargs) {
   return yargs
@@ -131,6 +132,7 @@ export async function run(args: Args) {
     verbose: args.verbose,
     overwrite: args.overwrite,
     skip: args.skip,
+    ignoreDeps: args.ignoreDeps,
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
@@ -179,6 +181,7 @@ type installNpmLibDefsArgs = {|
   verbose: boolean,
   overwrite: boolean,
   skip: boolean,
+  ignoreDeps: Array<string>,
 |};
 async function installNpmLibDefs({
   cwd,
@@ -188,6 +191,7 @@ async function installNpmLibDefs({
   verbose,
   overwrite,
   skip,
+  ignoreDeps,
 }: installNpmLibDefsArgs): Promise<number> {
   const flowProjectRoot = await findFlowRoot(cwd);
   if (flowProjectRoot === null) {
@@ -221,7 +225,7 @@ async function installNpmLibDefs({
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
     const pkgJsonData = await getPackageJsonData(cwd);
-    const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData);
+    const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData, ignoreDeps);
     for (const pkgName in pkgJsonDeps) {
       libdefsToSearchFor.set(pkgName, pkgJsonDeps[pkgName]);
     }
