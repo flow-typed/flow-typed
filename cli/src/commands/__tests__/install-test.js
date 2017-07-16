@@ -129,11 +129,11 @@ describe("install (command)", () => {
           cwd: ROOT_DIR,
           flowVersion: parseFlowDirString('flow_v0.40.0', 'testContext'),
           explicitLibDefs: [],
-          ignoreDeps: [],
+          libdefDir: 'flow-typed',
           verbose: false,
           overwrite: false,
           skip: false,
-          libdefDir: 'flow-typed',
+          ignoreDeps: [],
         });
         expect(result).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([[
@@ -431,7 +431,6 @@ describe("install (command)", () => {
           overwrite: false,
           verbose: false,
           skip: false,
-          ignoreDeps: [],
         });
 
         // Installs a stub for someUntypedDep
@@ -464,7 +463,6 @@ describe("install (command)", () => {
           overwrite: false,
           verbose: false,
           skip: true,
-          ignoreDeps: [],
         });
 
         // Installs a stub for someUntypedDep
@@ -499,7 +497,6 @@ describe("install (command)", () => {
           overwrite: true,
           verbose: false,
           skip: false,
-          ignoreDeps: [],
         });
 
         // Replaces the stub with the real typedef
@@ -537,7 +534,6 @@ describe("install (command)", () => {
           overwrite: false,
           verbose: false,
           skip: false,
-          ignoreDeps: [],
         });
 
         const libdefFilePath = path.join(
@@ -558,7 +554,6 @@ describe("install (command)", () => {
           overwrite: false,
           verbose: false,
           skip: false,
-          ignoreDeps: [],
         });
 
         // Verify that the tweaked libdef file wasn't overwritten
@@ -591,7 +586,6 @@ describe("install (command)", () => {
           overwrite: false,
           verbose: false,
           skip: false,
-          ignoreDeps: [],
         });
 
         const libdefFilePath = path.join(
@@ -611,7 +605,6 @@ describe("install (command)", () => {
           overwrite: true,
           skip: false,
           verbose: false,
-          ignoreDeps: [],
         });
 
         // Verify that the tweaked libdef file wasn't overwritten
@@ -648,7 +641,6 @@ describe("install (command)", () => {
           verbose: false,
           skip: false,
           packageDir: path.join(FLOWPROJ_DIR, ".."),
-          ignoreDeps: [],
         });
 
         // Installs libdef
