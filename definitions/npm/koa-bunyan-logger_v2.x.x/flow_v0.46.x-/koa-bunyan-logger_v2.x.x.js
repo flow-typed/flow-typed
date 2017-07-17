@@ -1,10 +1,10 @@
-// flow-typed signature: 94ef6104423d3d9d602b0a953d3dda20
-// flow-typed version: <<STUB>>/koa-bunyan-logger_v^2.0.0/flow_v0.46.0
-
 /**
  * This is an libdef for:
  *
  *   'koa-bunyan-logger'
+ * 
+ * NOTE: once import types from modules is working, 
+ * remove types redeclaration from bunyan and koa
  *
  */
 
@@ -53,7 +53,7 @@ declare module 'koa-bunyan-logger' {
   declare interface LoggerOptions {
     streams?: Array<Stream>;
     level?: BunyanLogLevels | string,
-    stream?:  stream$Writable;
+    stream?: stream$Writable;
     serializers?: Serializers;
     src?: boolean;
   }
@@ -121,7 +121,7 @@ declare module 'koa-bunyan-logger' {
    * import type { Middleware } from 'koa';
   **/
   declare type Middleware =
-    (ctx: *, next: () => Promise<void>) => Promise<void>|void;
+    (ctx: *, next: () => Promise<void>) => Promise<void> | void;
 
   declare type MiddlewareType = Middleware;
 
