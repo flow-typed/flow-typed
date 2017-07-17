@@ -1,7 +1,7 @@
 // @flow
 
-jest.mock("../git");
-jest.mock("../node");
+jest.mock('../git');
+jest.mock('../node');
 
 import {
   _CACHE_REPO_EXPIRY as CACHE_REPO_EXPIRY,
@@ -12,23 +12,18 @@ import {
   ensureCacheRepo,
   getCacheRepoDir,
   verifyCLIVersion,
-} from "../cacheRepoUtils";
+} from '../cacheRepoUtils';
 
-import {
-  cloneInto,
-  rebaseRepoMaster,
-} from "../git";
+import {cloneInto, rebaseRepoMaster} from '../git';
 
-import {
-  fs,
-} from "../node";
+import {fs} from '../node';
 
 function _mock(mockFn) {
   return ((mockFn: any): JestMockFn);
 }
 
-describe("cacheRepoUtils", () => {
-  describe("ensureCacheRepo", () => {
+describe('cacheRepoUtils', () => {
+  describe('ensureCacheRepo', () => {
     let origConsoleLog = console.log;
     beforeEach(() => {
       _mock(cloneInto).mockClear();
@@ -37,7 +32,9 @@ describe("cacheRepoUtils", () => {
       cacheRepoEnsureToken.lastEnsured = 0;
       cacheRepoEnsureToken.pendingEnsurance = Promise.resolve();
     });
-    afterEach(() => {(console: any).log = origConsoleLog;});
+    afterEach(() => {
+      (console: any).log = origConsoleLog;
+    });
 
     it('clones the repo if not present on disk', async () => {
       await ensureCacheRepo();
@@ -50,7 +47,9 @@ describe("cacheRepoUtils", () => {
 
     it('does NOT clone the repo if already present on disk', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir();
+        return (
+          dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir()
+        );
       });
 
       await ensureCacheRepo();
@@ -59,25 +58,31 @@ describe("cacheRepoUtils", () => {
 
     it('rebases if present on disk + lastUpdated is old', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir();
+        return (
+          dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir()
+        );
       });
-      _mock(fs.readFile).mockImplementation((filePath) => {
+      _mock(fs.readFile).mockImplementation(filePath => {
         if (filePath === getLastUpdatedFile()) {
           return String(Date.now() - CACHE_REPO_EXPIRY - 1);
         }
       });
 
       await ensureCacheRepo();
-      expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([getCacheRepoDir()]);
+      expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([
+        getCacheRepoDir(),
+      ]);
     });
 
     it('does NOT rebase if on disk, but lastUpdated is recent', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath === getCacheRepoDir() ||
-               dirPath === getCacheRepoGitDir() ||
-               dirPath === getLastUpdatedFile();
+        return (
+          dirPath === getCacheRepoDir() ||
+          dirPath === getCacheRepoGitDir() ||
+          dirPath === getLastUpdatedFile()
+        );
       });
-      _mock(fs.readFile).mockImplementation((filePath) => {
+      _mock(fs.readFile).mockImplementation(filePath => {
         if (filePath === getLastUpdatedFile()) {
           return String(Date.now());
         }
@@ -88,27 +93,30 @@ describe("cacheRepoUtils", () => {
     });
   });
 
-  describe("verifyCLIVersion", () => {
+  describe('verifyCLIVersion', () => {
     let realReadFile = fs.readFile;
-    beforeEach(() => {fs.readFile = jest.fn();});
-    afterEach(() => {fs.readFile = realReadFile;});
+    beforeEach(() => {
+      fs.readFile = jest.fn();
+    });
+    afterEach(() => {
+      fs.readFile = realReadFile;
+    });
 
-    it("does not throw if the cli range is compatible", async () => {
+    it('does not throw if the cli range is compatible', async () => {
       const readFileMock = _mock(fs.readFile);
       readFileMock.mockImplementation(() => {
         switch (readFileMock.mock.calls.length) {
           case 1:
             return Promise.resolve(
-              JSON.stringify({compatibleCLIRange: '^1.0.0'})
+              JSON.stringify({compatibleCLIRange: '^1.0.0'}),
             );
           case 2:
-            return Promise.resolve(
-              JSON.stringify({version: '1.1.0'})
+            return Promise.resolve(JSON.stringify({version: '1.1.0'}));
+          default:
+            throw new Error(
+              'Unexpected call to fs.readFile! Did this impl of ' +
+                'verifyCLIVersion change?',
             );
-          default: throw new Error(
-            "Unexpected call to fs.readFile! Did this impl of " +
-            "verifyCLIVersion change?"
-          );
         }
       });
       let err = null;
@@ -120,22 +128,21 @@ describe("cacheRepoUtils", () => {
       expect(err).toBe(null);
     });
 
-    it("throws if the cli range is incompatible", async () => {
+    it('throws if the cli range is incompatible', async () => {
       const readFileMock = _mock(fs.readFile);
       readFileMock.mockImplementation(() => {
         switch (readFileMock.mock.calls.length) {
           case 1:
             return Promise.resolve(
-              JSON.stringify({compatibleCLIRange: '0.0.0'})
+              JSON.stringify({compatibleCLIRange: '0.0.0'}),
             );
           case 2:
-            return Promise.resolve(
-              JSON.stringify({version: '1.0.0'})
+            return Promise.resolve(JSON.stringify({version: '1.0.0'}));
+          default:
+            throw new Error(
+              'Unexpected call to fs.readFile! Did this impl of ' +
+                'verifyCLIVersion change?',
             );
-          default: throw new Error(
-            "Unexpected call to fs.readFile! Did this impl of " +
-            "verifyCLIVersion change?"
-          );
         }
       });
       let err = null;
@@ -145,9 +152,9 @@ describe("cacheRepoUtils", () => {
         err = e;
       }
       expect(err && err.message).toBe(
-        "Please upgrade your flow-typed CLI! This CLI is version 1.0.0, but " +
-        "the latest flow-typed definitions are only compatible with " +
-        "flow-typed@0.0.0"
+        'Please upgrade your flow-typed CLI! This CLI is version 1.0.0, but ' +
+          'the latest flow-typed definitions are only compatible with ' +
+          'flow-typed@0.0.0',
       );
     });
   });
