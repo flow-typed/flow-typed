@@ -59,7 +59,7 @@ async function writePkgJson(filePath, pkgJson) {
 
 describe("install (command)", () => {
   describe("determineFlowVersion", () => {
-    pit("infers version from path if arg not passed", () => {
+    it("infers version from path if arg not passed", () => {
       return testProject(async (ROOT_DIR) => {
         const ARBITRARY_PATH = path.join(ROOT_DIR, "some", "arbitrary", "path");
         await Promise.all([
@@ -86,7 +86,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("uses explicitly specified version", async () => {
+    it("uses explicitly specified version", async () => {
       const explicitVer = await determineFlowVersion("/", "0.7.0");
       expect(explicitVer).toEqual({
         kind: "specific",
@@ -99,7 +99,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("uses 'v'-prefixed explicitly specified version", async () => {
+    it("uses 'v'-prefixed explicitly specified version", async () => {
       const explicitVer = await determineFlowVersion("/", "v0.7.0");
       expect(explicitVer).toEqual({
         kind: "specific",
@@ -123,7 +123,7 @@ describe("install (command)", () => {
       (console: any).error = origConsoleError;
     });
 
-    pit("errors if unable to find a project root (.flowconfig)", () => {
+    it("errors if unable to find a project root (.flowconfig)", () => {
       return testProject(async (ROOT_DIR) => {
         const result = await installNpmLibDefs({
           cwd: ROOT_DIR,
@@ -143,7 +143,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("errors if an explicitly specified libdef arg doesn't match npm " +
+    it("errors if an explicitly specified libdef arg doesn't match npm " +
         "pkgver format", () => {
       return testProject(async (ROOT_DIR) => {
         await touchFile(path.join(ROOT_DIR, ".flowconfig"));
@@ -163,7 +163,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("errors if 0 dependencies are found in package.json", () => {
+    it("errors if 0 dependencies are found in package.json", () => {
       return testProject(async (ROOT_DIR) => {
         await Promise.all([
           touchFile(path.join(ROOT_DIR, ".flowconfig")),
@@ -208,7 +208,7 @@ describe("install (command)", () => {
       (console: any).log = origConsoleLog;
     });
 
-    pit("installs scoped libdefs within a scoped directory", () => {
+    it("installs scoped libdefs within a scoped directory", () => {
       return testProject(async (ROOT_DIR) => {
         const FAKE_CACHE_DIR = path.join(ROOT_DIR, "fakeCache");
         const FAKE_CACHE_REPO_DIR = path.join(FAKE_CACHE_DIR, "repo");
@@ -309,7 +309,7 @@ describe("install (command)", () => {
       });
     }
 
-    pit("installs available libdefs", () => {
+    it("installs available libdefs", () => {
       return fakeProjectEnv(async (FLOWPROJ_DIR) => {
         // Create some dependencies
         await Promise.all([
@@ -353,7 +353,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("stubs unavailable libdefs", () => {
+    it("stubs unavailable libdefs", () => {
       return fakeProjectEnv(async (FLOWPROJ_DIR) => {
         // Create some dependencies
         await Promise.all([
@@ -385,7 +385,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("doesn't stub unavailable libdefs when --skip is passed", () => {
+    it("doesn't stub unavailable libdefs when --skip is passed", () => {
       return fakeProjectEnv(async (FLOWPROJ_DIR) => {
         // Create some dependencies
         await Promise.all([
@@ -417,7 +417,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("overwrites stubs when libdef becomes available (with --overwrite)", () => {
+    it("overwrites stubs when libdef becomes available (with --overwrite)", () => {
       return fakeProjectEnv(async (FLOWPROJ_DIR) => {
         // Create some dependencies
         await Promise.all([
@@ -456,7 +456,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("doesn't overwrite tweaked libdefs (without --overwrite)", () => {
+    it("doesn't overwrite tweaked libdefs (without --overwrite)", () => {
       return fakeProjectEnv(async (FLOWPROJ_DIR) => {
         // Create some dependencies
         await Promise.all([
@@ -508,7 +508,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("overwrites tweaked libdefs when --overwrite is passed", () => {
+    it("overwrites tweaked libdefs when --overwrite is passed", () => {
       return fakeProjectEnv(async (FLOWPROJ_DIR) => {
         // Create some dependencies
         await Promise.all([
@@ -559,7 +559,7 @@ describe("install (command)", () => {
       });
     });
 
-    pit("uses flow-bin defined in another package.json", () => {
+    it("uses flow-bin defined in another package.json", () => {
       return fakeProjectEnv(async (FLOWPROJ_DIR) => {
         // Create some dependencies
         await Promise.all([

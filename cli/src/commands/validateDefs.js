@@ -39,7 +39,7 @@ export async function run(args: Args) {
   }
 
   const validationErrors = new Map();
-  const npmLibDefs = await getNpmLibDefs(defsDirPath, validationErrors);
+  const npmLibDefs = await getNpmLibDefs(defsDirPath, validationErrors, true);
 
   if (validationErrors.size === 0) {
     console.log(
