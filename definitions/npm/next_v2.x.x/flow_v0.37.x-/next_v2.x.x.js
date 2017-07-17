@@ -24,10 +24,27 @@ declare module "next/head" {
 }
 
 declare module "next/link" {
-  import type {Component} from 'react';
+  import type { Component } from "react";
 
-  declare export type State = { href: string };
-  declare export default Class<Component<void, State, *>>;
+  declare export type URLObject = {
+    +href?: string,
+    +protocol?: string,
+    +slashes?: boolean,
+    +auth?: string,
+    +hostname?: string,
+    +port?: string | number,
+    +host?: string,
+    +pathname?: string,
+    +search?: string,
+    +query?: Object,
+    +hash?: string
+  };
+
+  declare export type State = {
+    href: string | URLObject,
+    as?: string | URLObject
+  };
+  declare export default Class<Component<void, State, *>>
 }
 
 declare module "next/prefetch" {
