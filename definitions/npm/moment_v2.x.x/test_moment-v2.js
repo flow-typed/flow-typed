@@ -66,3 +66,7 @@ n = m.utcOffset('+00:10').utcOffset();
 n = m.utcOffset(0, true).utcOffset();
 n = m.utcOffset(0, false).utcOffset();
 n = m.utcOffset(0, true, true).utcOffset();
+
+const getLocale: string = moment.locale();
+const setLocale: string = moment.locale('en');
+const setArrayLocale: string = moment.locale(['en', 'de'])
