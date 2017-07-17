@@ -4,9 +4,7 @@ import {searchUpDirPath} from '../fileUtils.js';
 
 import type {FlowSpecificVer} from '../flowVersion.js';
 
-import {fs} from '../node.js';
-
-import {path} from '../node.js';
+import {fs, path} from '../node.js';
 
 import {stringToVersion} from '../semver.js';
 import type {Version} from '../semver.js';

@@ -224,9 +224,10 @@ async function installNpmLibDefs({
 
   // Search for the requested libdefs
   const libDefsToInstall: Map<string, NpmLibDef> = new Map();
-  const outdatedLibDefsToInstall: Array<
-    [NpmLibDef, {name: string, ver: string}],
-  > = [];
+  const outdatedLibDefsToInstall: [
+    NpmLibDef,
+    {name: string, ver: string},
+  ][] = [];
   const unavailableLibDefs = [];
   await Promise.all(
     libDefsToSearchForEntries.map(async ([name, ver]) => {

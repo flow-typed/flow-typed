@@ -1,11 +1,11 @@
 // @flow
 
 import * as node_child_process from 'child_process';
-import * as node_fs from 'fs';
 import * as node_https from 'https';
 import * as node_os from 'os';
 import * as node_path from 'path';
 import * as node_url from 'url';
+import fsExtra from 'fs-extra';
 
 type execP$Result = {stdout: Buffer, stderr: Buffer};
 type spawnP$Result = {stdout: string, stderr: string, exitCode: number};
@@ -80,140 +80,22 @@ export const child_process = {
 };
 
 export const fs = {
-  appendFile: function(path: string, data: string): Promise<void> {
-    return new Promise((res, rej) => {
-      node_fs.appendFile(path, data, err => {
-        if (err) {
-          rej(err);
-        } else {
-          res();
-        }
-      });
-    });
-  },
-  close: function(fd: number): Promise<void> {
-    return new Promise((res, rej) => {
-      node_fs.close(fd, err => {
-        if (err) {
-          rej(err);
-        } else {
-          res();
-        }
-      });
-    });
-  },
-  createReadStream: node_fs.createReadStream,
-  createWriteStream: node_fs.createWriteStream,
-  exists: async function(path: string): Promise<boolean> {
-    let exists = true;
-    try {
-      await fs.stat(path);
-    } catch (e) {
-      exists = false;
-    }
-    return exists;
-  },
-  mkdir: function(path: string, mode?: number): Promise<void> {
-    return new Promise((res, rej) => {
-      node_fs.mkdir(path, mode, err => {
-        if (err) {
-          rej(err);
-        } else {
-          res();
-        }
-      });
-    });
-  },
-  open: function(path: string, flags: string, mode?: number): Promise<number> {
-    return new Promise((res, rej) => {
-      node_fs.open(path, flags, mode, (err, fd) => {
-        if (err) {
-          rej(err);
-        } else {
-          res(fd);
-        }
-      });
-    });
-  },
-  readdir: function(path: string): Promise<Array<string>> {
-    return new Promise((res, rej) => {
-      node_fs.readdir(path, (err, items) => {
-        if (err) {
-          rej(err);
-        } else {
-          res(items);
-        }
-      });
-    });
-  },
-  readFile: function(f: string, opts?: Object): Promise<Buffer> {
-    return new Promise((res, rej) => {
-      node_fs.readFile(f, opts || {}, (err, data: Buffer) => {
-        if (err) {
-          rej(err);
-        } else {
-          res(data);
-        }
-      });
-    });
-  },
-  rename: function(oldPath: string, newPath: string): Promise<void> {
-    return new Promise((res, rej) => {
-      node_fs.rename(oldPath, newPath, function(err) {
-        if (err) {
-          rej(err);
-        } else {
-          res();
-        }
-      });
-    });
-  },
-  rmdir: function(path: string): Promise<void> {
-    return new Promise((res, rej) => {
-      node_fs.rmdir(path, err => {
-        if (err) {
-          rej(err);
-        } else {
-          res();
-        }
-      });
-    });
-  },
-  stat: function(path: string): Promise<fs.Stats> {
-    return new Promise((res, rej) => {
-      node_fs.stat(path, (err, stats) => {
-        if (err) {
-          rej(err);
-        } else {
-          res(stats);
-        }
-      });
-    });
-  },
-  statSync: node_fs.statSync,
-  Stats: node_fs.Stats,
-  unlink: function(path: string): Promise<void> {
-    return new Promise((res, rej) => {
-      node_fs.unlink(path, err => {
-        if (err) {
-          rej(err);
-        } else {
-          res();
-        }
-      });
-    });
-  },
-  writeFile: function(f: string, data: string, opts?: Object): Promise<void> {
-    return new Promise((res, rej) => {
-      node_fs.writeFile(f, data, opts, err => {
-        if (err) {
-          rej(err);
-        } else {
-          res();
-        }
-      });
-    });
-  },
+  appendFile: fsExtra.appendFile,
+  close: fsExtra.close,
+  createReadStream: fsExtra.createReadStream,
+  createWriteStream: fsExtra.createWriteStream,
+  exists: fsExtra.exists,
+  mkdir: fsExtra.mkdir,
+  open: fsExtra.open,
+  readdir: fsExtra.readdir,
+  readFile: fsExtra.readFile,
+  rename: fsExtra.rename,
+  rmdir: fsExtra.rmdir,
+  stat: fsExtra.stat,
+  statSync: fsExtra.statSync,
+  Stats: fsExtra.Stats,
+  unlink: fsExtra.unlink,
+  writeFile: fsExtra.writeFile,
 };
 export const https = node_https;
 export const os = node_os;

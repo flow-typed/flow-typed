@@ -5,7 +5,7 @@ import type {LibDef} from '../lib/libDefs.js';
 import type {Argv} from 'yargs';
 import {toSemverString as flowVersionToSemver} from '../lib/flowVersion';
 
-import table from 'table';
+import {table} from 'table';
 
 export function _formatDefTable(defs: Array<LibDef>): string {
   const formatted = [['Name', 'Package Version', 'Flow Version']].concat(

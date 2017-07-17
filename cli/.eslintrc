@@ -4,15 +4,16 @@
     "es6": true
   },
   "plugins": [
-    "flow-vars",
+    "flowtype",
     "prettier"
+  ],
+  "extends": [
+    "plugin:flowtype/recommended"
   ],
   "globals": {
   },
   "rules": {
     "prettier/prettier": ["error", "fb"],
-    "flow-vars/define-flow-type": 1,
-    "flow-vars/use-flow-type": 1,
     "eqeqeq": [2, "smart"],
     "semi": 2,
     "no-unused-vars": ["error", {
