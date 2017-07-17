@@ -76,6 +76,7 @@ export type Args = {
   verbose: bool,
   libdefDir?: string,
   packageDir?: string,
+  ignoreDeps?: Array<string>,
 };
 export function setup(yargs: Yargs) {
   return yargs
@@ -109,6 +110,11 @@ export function setup(yargs: Yargs) {
         describe: "The relative path of package.json where flow-bin is installed",
         type: "string",
       },
+      ignoreDeps: {
+        alias: 'i',
+        describe: "Dependency categories to ignore when installing definitions",
+        type: "array",
+      },
     });
 };
 export async function run(args: Args) {
@@ -117,6 +123,7 @@ export async function run(args: Args) {
   const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
   const libdefDir = args.libdefDir || 'flow-typed';
   const explicitLibDefs = args._.slice(1);
+  const ignoreDeps = args.ignoreDeps || [];
 
   const coreLibDefResult = await installCoreLibDefs();
   if (coreLibDefResult !== 0) {
@@ -131,6 +138,7 @@ export async function run(args: Args) {
     verbose: args.verbose,
     overwrite: args.overwrite,
     skip: args.skip,
+    ignoreDeps: ignoreDeps,
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
@@ -179,6 +187,7 @@ type installNpmLibDefsArgs = {|
   verbose: boolean,
   overwrite: boolean,
   skip: boolean,
+  ignoreDeps: Array<string>,
 |};
 async function installNpmLibDefs({
   cwd,
@@ -188,6 +197,7 @@ async function installNpmLibDefs({
   verbose,
   overwrite,
   skip,
+  ignoreDeps,
 }: installNpmLibDefsArgs): Promise<number> {
   const flowProjectRoot = await findFlowRoot(cwd);
   if (flowProjectRoot === null) {
@@ -221,7 +231,7 @@ async function installNpmLibDefs({
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
     const pkgJsonData = await getPackageJsonData(cwd);
-    const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData);
+    const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData, ignoreDeps);
     for (const pkgName in pkgJsonDeps) {
       libdefsToSearchFor.set(pkgName, pkgJsonDeps[pkgName]);
     }

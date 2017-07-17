@@ -86,9 +86,14 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
 
 // TODO: Write tests for this
 export function getPackageJsonDependencies(
-  pkgJson: PkgJson
+  pkgJson: PkgJson,
+  ignoreDeps: Array<string>,
 ): {[depName: string]: string} {
-  return PKG_JSON_DEP_FIELDS.reduce((deps, section) => {
+  const depFields = PKG_JSON_DEP_FIELDS.filter((field) => {
+    return ignoreDeps.indexOf(field.slice(0, -12)) === -1;
+  });
+
+  return depFields.reduce((deps, section) => {
     const contentSection = pkgJson.content[section];
     if (contentSection) {
       Object.keys(contentSection).forEach(pkgName => {

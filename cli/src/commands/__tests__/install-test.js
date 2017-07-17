@@ -133,6 +133,7 @@ describe("install (command)", () => {
           verbose: false,
           overwrite: false,
           skip: false,
+          ignoreDeps: [],
         });
         expect(result).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([[
@@ -155,6 +156,7 @@ describe("install (command)", () => {
           verbose: false,
           overwrite: false,
           skip: false,
+          ignoreDeps: [],
         });
         expect(result).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([[
@@ -179,6 +181,7 @@ describe("install (command)", () => {
           verbose: false,
           overwrite: false,
           skip: false,
+          ignoreDeps: [],
         });
         expect(result).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([[
@@ -332,6 +335,7 @@ describe("install (command)", () => {
           overwrite: false,
           verbose: false,
           skip: false,
+          ignoreDeps: [],
         });
 
         // Installs libdefs
@@ -350,6 +354,57 @@ describe("install (command)", () => {
         )).toString();
         expect(fooLibDefContents).toContain("// flow-typed signature: ");
         expect(fooLibDefContents).toContain("// flow-typed version: ");
+      });
+    });
+
+    it("ignores libdefs in dev, bundled, optional or peer dependencies when flagged", () => {
+      return fakeProjectEnv(async (FLOWPROJ_DIR) => {
+        // Create some dependencies
+        await Promise.all([
+          writePkgJson(path.join(FLOWPROJ_DIR, "package.json"), {
+            name: "test",
+            devDependencies: {
+              "foo": "1.2.3",
+            },
+            peerDependencies: {
+              "flow-bin": "^0.43.0",
+            },
+            optionalDependencies: {
+              "foo": "2.0.0",
+            },
+            bundledDependencies: {
+              "bar": "^1.6.9",
+            },
+            dependencies: {
+              "foo": "1.2.3",
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, "node_modules", "foo")),
+          mkdirp(path.join(FLOWPROJ_DIR, "node_modules", "flow-bin")),
+          mkdirp(path.join(FLOWPROJ_DIR, "node_modules", "bar")),
+        ]);
+
+        // Run the install command
+        await run({
+          _: [],
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          ignoreDeps: ['dev', 'optional', 'bundled'],
+        });
+
+        // Installs libdefs
+        expect(await Promise.all([
+          fs.exists(
+            path.join(FLOWPROJ_DIR, "flow-typed", "npm", "flow-bin_v0.x.x.js")
+          ),
+          fs.exists(
+            path.join(FLOWPROJ_DIR, "flow-typed", "npm", "foo_v1.x.x.js")
+          ),
+          fs.exists(
+            path.join(FLOWPROJ_DIR, "flow-typed", "npm", "bar_v1.x.x.js")
+          ),
+        ])).toEqual([true, true, false]);
       });
     });
 
