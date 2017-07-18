@@ -314,56 +314,56 @@ async function runTestGroup(
     });
     let lowestFlowVersionRan = flowVersionsToRun[0];
 
-    while (flowVersionsToRun.length > 0) {
-      // Run tests in batches to avoid saturation
-      const testBatch = flowVersionsToRun
-        .slice(0, Math.min(flowVersionsToRun.length, 5))
-        .map(group => (flowVersionsToRun.shift(), group));
+    // while (flowVersionsToRun.length > 0) {
+    //   // Run tests in batches to avoid saturation
+    //   const testBatch = flowVersionsToRun
+    //     .slice(0, Math.min(flowVersionsToRun.length, 5))
+    //     .map(group => (flowVersionsToRun.shift(), group));
 
-      await P.all(testBatch.map(async (flowVer) => {
-        const testRunId = testGroup.id + " (flow-" + flowVer + ")";
+    //   await P.all(testBatch.map(async (flowVer) => {
+    //     const testRunId = testGroup.id + " (flow-" + flowVer + ")";
 
-        console.log("Testing %s...", testRunId);
+    //     console.log("Testing %s...", testRunId);
 
-        const {
-          stdErrOut,
-          errCode,
-          execError
-        } = await new Promise(res => {
-          const child = child_process.exec([
-            path.join(BIN_DIR, "flow-" + flowVer),
-            "check",
-            "--strip-root",
-            "--all",
-            testDirPath
-          ].join(" "));
+    //     const {
+    //       stdErrOut,
+    //       errCode,
+    //       execError
+    //     } = await new Promise(res => {
+    //       const child = child_process.exec([
+    //         path.join(BIN_DIR, "flow-" + flowVer),
+    //         "check",
+    //         "--strip-root",
+    //         "--all",
+    //         testDirPath
+    //       ].join(" "));
 
-          let stdErrOut = "";
-          child.stdout.on("data", data => stdErrOut += data);
-          child.stderr.on("data", data => stdErrOut += data);
+    //       let stdErrOut = "";
+    //       child.stdout.on("data", data => stdErrOut += data);
+    //       child.stderr.on("data", data => stdErrOut += data);
 
-          child.on("error", execError => {
-            res({stdErrOut, errCode: null, execError});
-          });
+    //       child.on("error", execError => {
+    //         res({stdErrOut, errCode: null, execError});
+    //       });
 
-          child.on("close", errCode => {
-            res({stdErrOut, errCode, execError: null});
-          });
-        });
+    //       child.on("close", errCode => {
+    //         res({stdErrOut, errCode, execError: null});
+    //       });
+    //     });
 
-        if (execError !== null) {
-          errors.push(
-            testRunId + ": Error executing Flow process: " + execError.stack
-          );
-        } else if (errCode !== 0) {
-          errors.push(
-            testRunId + ": Unexpected Flow errors(" + String(errCode) + "):\n" +
-            stdErrOut + "\n" +
-            String(execError)
-          );
-        }
-      }));
-    }
+    //     if (execError !== null) {
+    //       errors.push(
+    //         testRunId + ": Error executing Flow process: " + execError.stack
+    //       );
+    //     } else if (errCode !== 0) {
+    //       errors.push(
+    //         testRunId + ": Unexpected Flow errors(" + String(errCode) + "):\n" +
+    //         stdErrOut + "\n" +
+    //         String(execError)
+    //       );
+    //     }
+    //   }));
+    // }
 
     let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
       return semver.lt(flowVer, lowestFlowVersionRan);
@@ -407,8 +407,7 @@ async function runTestGroup(
     }
 
     if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
-      console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
-        Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
+      console.log(`${testGroup.id} -> ${lowestCapableFlowVersion}`);
     }
 
     return errors;
