@@ -312,7 +312,7 @@ async function runTestGroup(
     const flowVersionsToRun = orderedFlowVersions.filter(flowVer => {
       return semver.satisfies(flowVer, testGrpFlowSemVerRange);
     });
-    const lowestFlowVersionRan = flowVersionsToRun[0];
+    let lowestFlowVersionRan = flowVersionsToRun[0];
 
     while (flowVersionsToRun.length > 0) {
       // Run tests in batches to avoid saturation
@@ -369,6 +369,7 @@ async function runTestGroup(
       return semver.lt(flowVer, lowestFlowVersionRan);
     });
     lowerFlowVersionsToRun.reverse();
+    let lowestCapableFlowVersion = lowestFlowVersionRan;
 
     while (lowerFlowVersionsToRun.length > 0) {
       const lowerTestBatch = lowerFlowVersionsToRun
@@ -400,10 +401,14 @@ async function runTestGroup(
         if (execError !== null || errCode !== 0) {
           lowerFlowVersionsToRun = [];
         } else {
-          console.log("Tests ran successfully on flow-", flowVer,
-            ". Consider adding it to the flow range!");
+          lowestCapableFlowVersion = semver.lt(lowestCapableFlowVersion, flowVer) ? lowestCapableFlowVersion: flowVer;
         }
       }));
+    }
+
+    if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
+      console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
+        Consider setting it as the lower bound!`);
     }
 
     return errors;
