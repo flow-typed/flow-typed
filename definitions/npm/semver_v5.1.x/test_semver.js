@@ -9,6 +9,9 @@ semver.cmp('1.2.3', '> ', '1.2.4');
 
 (semver.outside('1.2.3', '1.2', '>'): boolean);
 
+(semver.clean('v1.2.3'): string);
+(semver.clean('xxx'): null);
+
 // $ExpectError
 semver.outside('1.2.3', '1.2', '> ');
 
