@@ -151,7 +151,7 @@ declare class express$Application extends express$Router mixins events$EventEmit
   listen(handle: Object, callback?: (err?: ?Error) => mixed): Server;
   disable(name: string): void;
   disabled(name: string): boolean;
-  enable(name: string): void;
+  enable(name: string): express$Application;
   enabled(name: string): boolean;
   engine(name: string, callback: Function): void;
   /**
