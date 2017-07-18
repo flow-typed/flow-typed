@@ -222,6 +222,8 @@ declare class $npm$parse$ParseACL {
 // =========================
 // ParseObject
 // =========================
+declare type $npm$parse$ParseAuthData = ?{ [key: string]: mixed }
+
 declare class $npm$parse$ParseObject {
   static(className: ?string | { className: string, [attr: string]: mixed }, attributes?: { [attr: string]: mixed }, options?: { ignoreValidation: boolean }): $npm$parse$ParseObject,
   constructor(className: ?string | { className: string, [attr: string]: mixed }, attributes?: { [attr: string]: mixed }, options?: { ignoreValidation: boolean }): $npm$parse$ParseObject,
@@ -264,7 +266,8 @@ declare class $npm$parse$ParseObject {
   static registerSubclass(className: string, constructor: Class<$npm$parse$ParseObject>): void,
   // static extend(className: any, protoProps: any, classProps: any): Class<$npm$parse$ParseObject>,
   static enableSingleInstance(): void,
-  static disableSingleInstance(): void
+  static disableSingleInstance(): void,
+  static logInWith(provider: string, options?: { authData?: $npm$parse$ParseAuthData }): Promise<$npm$parse$ParseUser>
 }
 
 // =========================
