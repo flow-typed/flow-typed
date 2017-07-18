@@ -408,7 +408,7 @@ async function runTestGroup(
 
     if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
       console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
-        Consider setting it as the lower bound!`);
+        Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
     }
 
     return errors;
