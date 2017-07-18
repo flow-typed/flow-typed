@@ -312,6 +312,7 @@ async function runTestGroup(
     const flowVersionsToRun = orderedFlowVersions.filter(flowVer => {
       return semver.satisfies(flowVer, testGrpFlowSemVerRange);
     });
+    const lowestFlowVersionRan = flowVersionsToRun[0];
 
     while (flowVersionsToRun.length > 0) {
       // Run tests in batches to avoid saturation
@@ -360,6 +361,47 @@ async function runTestGroup(
             stdErrOut + "\n" +
             String(execError)
           );
+        }
+      }));
+    }
+
+    let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
+      return semver.lt(flowVer, lowestFlowVersionRan);
+    });
+    lowerFlowVersionsToRun.reverse();
+
+    while (lowerFlowVersionsToRun.length > 0) {
+      const lowerTestBatch = lowerFlowVersionsToRun
+        .slice(0, Math.min(lowerFlowVersionsToRun.length, 5))
+        .map(group => (lowerFlowVersionsToRun.shift(), group));
+
+      await P.all(lowerTestBatch.map(async (flowVer) => {
+        const {
+          errCode,
+          execError
+        } = await new Promise(res => {
+          const child = child_process.exec([
+            path.join(BIN_DIR, "flow-" + flowVer),
+            "check",
+            "--strip-root",
+            "--all",
+            testDirPath
+          ].join(" "));
+
+          child.on("error", execError => {
+            res({errCode: null, execError});
+          });
+
+          child.on("close", errCode => {
+            res({errCode, execError: null});
+          });
+        });
+
+        if (execError !== null || errCode !== 0) {
+          lowerFlowVersionsToRun = [];
+        } else {
+          console.log("Tests ran successfully on flow-", flowVer,
+            ". Consider adding it to the flow range!");
         }
       }));
     }
