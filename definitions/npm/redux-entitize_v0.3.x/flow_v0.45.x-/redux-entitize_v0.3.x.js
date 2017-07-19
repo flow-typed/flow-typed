@@ -32,6 +32,14 @@ declare module "redux-entitize" {
     }
   };
 
+  declare type DeleteEntityActionType = {
+    type: "redux-entitize/DELETE_ENTITY",
+    payload: {
+      id: string,
+      schema: string
+    }
+  };
+
   // eslint-disable-next-line flowtype/no-weak-types
   declare type ReducerType = (state: StateType, action: Object) => StateType;
 
@@ -41,6 +49,7 @@ declare module "redux-entitize" {
   // Action creators
   declare function updateEntityAction(schema: string, data: EntityType): UpdateEntityActionType;
   declare function updateEntitiesAction(schema: string, data: EntityType[]): UpdateEntitiesActionType;
+  declare function deleteEntityAction(schema: string, id: string): DeleteEntityActionType;
 
   // Selectors
   declare type SelectorsType = {
