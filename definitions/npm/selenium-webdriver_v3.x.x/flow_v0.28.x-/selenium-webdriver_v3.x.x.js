@@ -1,4 +1,4 @@
-// Type definitions for Selenium WebDriver JS 3.x
+// Type definitions for selenium webdriver JS 3.x
 // Created by Dieter Oberkofler (https://github.com/doberkofler)
 
 // @flow
@@ -526,7 +526,7 @@ declare class webdriver$Builder {
 	constructor(): webdriver$Builder;
 	forBrowser(name: string, opt_version?: string, opt_platform?: string): webdriver$Builder;
 	build(): webdriver$WebDriver;
-	buildAsync(): WebDriverPromise<webdriver$WebDriver>;
+	buildAsync(): webdriver$Promise<webdriver$WebDriver>;
 	getCapabilities(): webdriver$Capabilities;
 	getServerUrl(): string;
 	setAlertBehavior(behavior: string): webdriver$Builder;
@@ -579,7 +579,7 @@ declare class webdriver$TouchSequence {
 }
 
 declare class webdriver$WebDriver {
-	constructor(session: webdriver$Session | WebDriverPromise<webdriver$Session>, executor: webdriver$CommandExecutor, opt_flow?: webdriver$ControlFlow): webdriver$WebDriver;
+	constructor(session: webdriver$Session | webdriver$Promise<webdriver$Session>, executor: webdriver$CommandExecutor, opt_flow?: webdriver$ControlFlow): webdriver$WebDriver;
 	static Navigation: Class<webdriver$Navigation>;
 	static Options: Class<webdriver$Options>;
 	static Timeouts: Class<webdriver$Timeouts>;
@@ -587,7 +587,7 @@ declare class webdriver$WebDriver {
 	static Logs: Class<webdriver$Logs>;
 	static TargetLocator: webdriver$TargetLocator;
 	static attachToSession(executor: webdriver$CommandExecutor, sessionId: string, opt_flow?: webdriver$ControlFlow): webdriver$WebDriver;
-	static createSession(executor: webdriver$CommandExecutor, desiredCapabilities: WebDriverCapabilities, opt_flow?: webdriver$ControlFlow): webdriver$WebDriver;
+	static createSession(executor: webdriver$CommandExecutor, desiredCapabilities: webdriver$Capabilities, opt_flow?: webdriver$ControlFlow): webdriver$WebDriver;
 	controlFlow(): webdriver$ControlFlow;
 	schedule<T>(command: webdriver$Command, description: string): webdriver$Promise<T>;
 	setFileDetector(detector: webdriver$FileDetector): void;
@@ -625,7 +625,7 @@ declare class webdriver$TargetLocator {
 	frame(nameOrIndex: string): webdriver$Promise<void>;
 	frame(nameOrIndex: number): webdriver$Promise<void>;
 	window(nameOrHandle: string): webdriver$Promise<void>;
-	//alert(): WebDriverAlertPromise;
+	//alert(): webdriver$AlertPromise;
 }
 
 // WIP
@@ -738,13 +738,13 @@ declare module 'selenium-webdriver' {
 	declare export var TouchSequence: Class<webdriver$TouchSequence>;
 	declare export var Builder: Class<webdriver$Builder>;
 	declare export var Capabilities: Class<webdriver$Capabilities>;
-	declare export var Command: Class<WebDriverCommand>;
+	declare export var Command: Class<webdriver$Command>;
 	declare export var EventEmitter: Class<webdriver$EventEmitter>;
 	declare export var FileDetector: Class<webdriver$FileDetector>;
     declare export var WebDriver: Class<webdriver$WebDriver>;
     declare export var WebElement: Class<webdriver$WebElement>;
     declare export var WebElementPromise: Class<webdriver$WebElementPromise>;
-	//declare export var Locator: typeof WebDriverLocator;
+	//declare export var Locator: typeof webdriver$Locator;
 	declare export var Session: Class<webdriver$Session>;
     declare export var By: Class<webdriver$By>;
 	declare export var Thenable: Class<webdriver$Promise<any>>;
