@@ -1,4 +1,4 @@
-// Type definitions for selenium webdriver JS 3.x
+// Type definitions for selenium webdriver JS 3.x.x
 // Created by Dieter Oberkofler (https://github.com/doberkofler)
 
 // @flow
