@@ -428,7 +428,7 @@ declare class webdriver$EventEmitter {
 	removeAllListeners(opt_type?: string): webdriver$EventEmitter;
 }
 
-declare class webdriver$ extends webdriver$EventEmitter {
+declare class webdriver$ControlFlow extends webdriver$EventEmitter {
 	constructor(): webdriver$ControlFlow;
 	static EventType: {
 		IDLE: string;
