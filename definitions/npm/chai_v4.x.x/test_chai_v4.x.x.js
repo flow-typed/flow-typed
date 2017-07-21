@@ -123,6 +123,7 @@ expect(Promise.resolve(true)).to.eventually.be.resolved().then(function() {}).ca
 expect(Promise.resolve(true)).to.eventually.be.resolvedWith(true).then(function() {}).catch(function() {});
 expect(Promise.resolve(true)).to.eventually.be.rejected().then(function() {}).catch(function() {});
 expect(Promise.resolve(true)).to.eventually.be.rejectedWith(Error).then(function() {}).catch(function() {});
+expect(Promise.resolve(true)).to.eventually.be.fullfilled().then(function() {}).catch(function() {});
 
 // tests for chai-subset
 expect({}).to.containSubset({});
