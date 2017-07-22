@@ -262,11 +262,11 @@ declare module 'prismic.io' {
 
   declare class Predicates {
     toQuery(predicate: Object) : string;
-    at(fragment: string, value: string) : PredicateQuery;
-    not(fragment: string, value: string) : PredicateQuery;
+    at(fragment: string, value: number | string) : PredicateQuery;
+    not(fragment: string, value: number | string) : PredicateQuery;
     missing(fragment: string) : PredicateQuery;
     has(fragment: string) : PredicateQuery;
-    any(fragment: string, values: Array<string>) : PredicateQuery;
+    any(fragment: string, values: Array<number | string>) : PredicateQuery;
     in(fragment: string, values: Array<string>) : PredicateQuery;
     fulltext(fragment: string, value: string) : PredicateQuery;
     similar(documentId: string, maxResults: number) : PredicateQuery;
