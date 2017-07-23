@@ -12,6 +12,9 @@ addons:
     packages:
       - unzip
       - g++-4.8
+before_install:
+  - git config --global user.name "Travis CI"
+  - git config --global user.email "travis@flowtyped.com"
 script: ./travis.sh
 cache:
   directories:
