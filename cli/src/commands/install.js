@@ -370,7 +370,7 @@ async function installNpmLibDefs({
             flowProjectRoot,
             pkgName,
             pkgVerStr,
-            true /*ovewrite*/,
+            overwrite,
             libdefDir,
           );
         }),
