@@ -170,8 +170,6 @@ declare class express$Application extends express$Router mixins events$EventEmit
 }
 
 declare module 'express' {
-  declare function serveStatic(root: string, options?: Object): express$Middleware;
-
   declare export type RouterOptions = express$RouterOptions;
   declare export type CookieOptions = express$CookieOptions;
   declare export type Middleware = express$Middleware;
@@ -182,7 +180,7 @@ declare module 'express' {
 
   declare module.exports: {
     (): express$Application, // If you try to call like a function, it will use this signature
-    static: serveStatic, // `static` property on the function
+    static: (root: string, options?: Object) => express$Middleware, // `static` property on the function
     Router: typeof express$Router, // `Router` property on the function
   };
 }
