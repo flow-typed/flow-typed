@@ -71,6 +71,13 @@ declare module 'react-redux' {
     options?: ConnectOptions
   ): Connector<OP, $Supertype<DP & OP>>;
 
+  declare function connect<S, A, OP, SP>(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: Null,
+    mergeProps: MergeProps<SP, DP, OP, P>,
+    options?: ConnectOptions
+  ): Connector<OP, $Supertype<SP & { dispatch: Dispatch<A> } & OP>>;
+
   declare function connect<S, A, OP, SP, DP>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: MapDispatchToProps<A, OP, DP>,
