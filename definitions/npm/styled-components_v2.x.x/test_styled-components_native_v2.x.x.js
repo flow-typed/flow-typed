@@ -66,60 +66,60 @@ type ReactFunctionalComponent<Props: {}> = Props => React$Element<*>
 
 const TestFunctionalComponent = (props: { foo: string }) => <div />
 
-const NeedsFoo1: ReactFunctionalComponent<{ foo: string }> = styled(TestFunctionalComponent)`
+const NeedsFoo1: ReactFunctionalComponent<{ foo: string }> = nativeStyled(TestFunctionalComponent)`
   background-color: red;
 `;
 
 // $ExpectError
-const NeedsFoo1Error: ReactFunctionalComponent<{ foo: number }> = styled(TestFunctionalComponent)`
+const NeedsFoo1Error: ReactFunctionalComponent<{ foo: number }> = nativeStyled(TestFunctionalComponent)`
   background-color: red;
 `;
 
-const NeedsFoo2: ReactFunctionalComponent<{ foo: string }> = styled(NeedsFoo1)`
+const NeedsFoo2: ReactFunctionalComponent<{ foo: string }> = nativeStyled(NeedsFoo1)`
   background-color: red;
 `;
 
 // $ExpectError
-const NeedsFoo2Error: ReactFunctionalComponent<{ foo: number }> = styled(NeedsFoo1)`
+const NeedsFoo2Error: ReactFunctionalComponent<{ foo: number }> = nativeStyled(NeedsFoo1)`
   background-color: red;
 `;
 
 const NeedsFooWithTheme1:
   ReactFunctionalComponent<{ foo: string }>
-  = withTheme(TestFunctionalComponent);
+  = nativeWithTheme(TestFunctionalComponent);
 
 // $ExpectError
 const NeedsFooWithTheme1Error:
   ReactFunctionalComponent<{ foo: number }>
-  = withTheme(TestFunctionalComponent);
+  = nativeWithTheme(TestFunctionalComponent);
 
 const NeedsFooWithTheme2:
   & ReactFunctionalComponent<{ foo: string }>
   & ReactFunctionalComponent<{ theme: {} }>
-  = withTheme(TestFunctionalComponent);
+  = nativeWithTheme(TestFunctionalComponent);
 
 // $ExpectError
 const NeedsFooWithTheme2Error:
   & ReactFunctionalComponent<{ foo: string }>
   & ReactFunctionalComponent<{ theme: string }>
-  = withTheme(TestFunctionalComponent);
+  = nativeWithTheme(TestFunctionalComponent);
 
 const NeedsFooWithTheme3:
   ReactFunctionalComponent<{ foo: string }>
-  = withTheme(NeedsFooWithTheme1);
+  = nativeWithTheme(NeedsFooWithTheme1);
 
 // $ExpectError
 const NeedsFooWithTheme3Error:
   ReactFunctionalComponent<{ foo: number }>
-  = withTheme(NeedsFooWithTheme1);
+  = nativeWithTheme(NeedsFooWithTheme1);
 
 const NeedsFooWithTheme4:
   & ReactFunctionalComponent<{ foo: string }>
   & ReactFunctionalComponent<{ theme: {} }>
-  = withTheme(NeedsFooWithTheme2);
+  = nativeWithTheme(NeedsFooWithTheme2);
 
 // $ExpectError
 const NeedsFooWithTheme4Error:
   & ReactFunctionalComponent<{ foo: string }>
   & ReactFunctionalComponent<{ theme: string }>
-  = withTheme(NeedsFooWithTheme2);
+  = nativeWithTheme(NeedsFooWithTheme2);
