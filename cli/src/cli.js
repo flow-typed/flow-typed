@@ -2,24 +2,24 @@
 // @flow
 
 if (!global.__flowTypedBabelPolyfill) {
-  require("babel-polyfill");
+  require('babel-polyfill');
   global.__flowTypedBabelPolyfill = true;
 }
 
-import yargs from "yargs";
-import {fs, path} from "./lib/node.js";
+import yargs from 'yargs';
+import {fs, path} from './lib/node.js';
 
-import * as Install from "./commands/install.js";
-import * as CreateStub from "./commands/create-stub.js";
-import * as RunTests from "./commands/runTests.js";
-import * as Search from "./commands/search.js";
-import * as Update from "./commands/update.js";
-import * as UpdateCache from "./commands/update-cache";
-import * as ValidateDefs from "./commands/validateDefs.js";
-import * as Version from "./commands/version.js";
+import * as Install from './commands/install.js';
+import * as CreateStub from './commands/create-stub.js';
+import * as RunTests from './commands/runTests.js';
+import * as Search from './commands/search.js';
+import * as Update from './commands/update.js';
+import * as UpdateCache from './commands/update-cache';
+import * as ValidateDefs from './commands/validateDefs.js';
+import * as Version from './commands/version.js';
 
-import type {Argv} from "yargs";
-import typeof Yargs from "yargs";
+import type {Argv} from 'yargs';
+import typeof Yargs from 'yargs';
 
 const identity = <T>(x: T): T => x;
 
@@ -43,26 +43,36 @@ export function runCLI() {
   ];
 
   commands
-    .reduce((cmdYargs, cmd) => cmdYargs.command(
-      cmd.name,
-      cmd.description,
-      cmd.setup || identity,
-      args => cmd.run(args, yargs).catch(err => {
-        if (err.stack) {
-          console.log('UNCAUGHT ERROR: %s', err.stack);
-        } else if (typeof err === 'object' && err !== null) {
-          console.log("UNCAUGHT ERROR: %s", JSON.stringify(err, null, 2));
-        } else {
-          console.log("UNCAUGHT ERROR:", err);
-        }
-        process.exit(1);
-      }).then((code) => process.exit(code))
-    ), yargs)
+    .reduce(
+      (cmdYargs, cmd) =>
+        cmdYargs.command(
+          cmd.name,
+          cmd.description,
+          cmd.setup || identity,
+          args =>
+            cmd
+              .run(args, yargs)
+              .catch(err => {
+                if (err.stack) {
+                  console.log('UNCAUGHT ERROR: %s', err.stack);
+                } else if (typeof err === 'object' && err !== null) {
+                  console.log(
+                    'UNCAUGHT ERROR: %s',
+                    JSON.stringify(err, null, 2),
+                  );
+                } else {
+                  console.log('UNCAUGHT ERROR:', err);
+                }
+                process.exit(1);
+              })
+              .then(code => process.exit(code)),
+        ),
+      yargs,
+    )
     .demand(1)
     .strict()
     .help('h')
-    .alias('h', 'help')
-    .argv;
+    .alias('h', 'help').argv;
 }
 
 /**
@@ -75,13 +85,20 @@ if (require.main === module) {
   let currDir = CWD;
   let lastDir = null;
   while (currDir !== lastDir) {
-    const localCLIPath = path.join(currDir, 'node_modules', '.bin', 'flow-typed');
+    const localCLIPath = path.join(
+      currDir,
+      'node_modules',
+      '.bin',
+      'flow-typed',
+    );
     try {
       if (fs.statSync(localCLIPath).isFile()) {
         runCLI = require.call(null, localCLIPath).runCLI;
         break;
       }
-    } catch (e) { /* File doesn't exist, move up a dir... */ }
+    } catch (e) {
+      /* File doesn't exist, move up a dir... */
+    }
     lastDir = currDir;
     currDir = path.resolve(currDir, '..');
   }

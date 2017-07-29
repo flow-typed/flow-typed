@@ -33,6 +33,7 @@ node_modules
 cli/dist/*
 cli/.test-dir/*
 cli/.flow-bins-cache/*
+cli/package-lock.json
 
 # Editors
 .vscode

@@ -444,7 +444,7 @@ declare module "underscore" {
     invert<K, V>(object: {[keys: K]: V}): {[keys: V]: K};
     // TODO: _.create
     functions(object: Object): Array<string>;
-    findKey(object: Object, predicate: () => boolean, context?: mixed): ?string;
+    findKey(object: Object, predicate: (...args: Array<any>) => boolean, context?: mixed): ?string;
     extend: typeof $underscore$Extend;
     extendOwn: typeof $underscore$Extend;
     pick<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
@@ -492,7 +492,7 @@ declare module "underscore" {
     invert(): UnderscoreChainedObject<WrappedObj>;
     // TODO: _.create
     functions(): UnderscoreChainedList<string>;
-    findKey(predicate: () => boolean, context?: mixed): UnderscoreChainedValue<?string>;
+    findKey(predicate: (...args: Array<any>) => boolean, context?: mixed): UnderscoreChainedValue<?string>;
     // TODO: Reimplement these when you can get them to return UnderscoreChainedObject
     // extend: ExtendParameterized<{[key: K]: V}>;
     // extendOwn: ExtendParameterized<{[key: K]: V}>>;
@@ -543,7 +543,7 @@ declare module "underscore" {
     // TODO: _.create
     functions(): Array<string>;
     find(predicate: (v: any, k: $Keys<WrappedObj>, obj: WrappedObj) => boolean): ?any;
-    findKey(predicate: () => boolean, context?: mixed): ?string;
+    findKey(predicate: (...args: Array<any>) => boolean, context?: mixed): ?string;
     extend: typeof $underscore$ExtendParameterized;
     extendOwn: typeof $underscore$ExtendParameterized;
     // TODO make these actually remove properties

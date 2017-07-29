@@ -17,6 +17,7 @@ detect.userAgent();
 detect.userAgents();
 detect.version('Mobile');
 detect.versionStr('Mobile');
+detect.isPhoneSized(1024);
 
 // $ExpectError
 detect.foo();

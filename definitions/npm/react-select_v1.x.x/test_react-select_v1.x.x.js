@@ -1,6 +1,6 @@
 import React from 'react';
-import { Select as SelectComponent } from 'react-select';
-import type { Select } from 'react-select';
+import { default as SelectComponent } from 'react-select';
+import type Select from 'react-select';
 
 const ArrowRenderer = (props: { onMouseDown: Event }): React$Element<*> => <span>Arrow</span>;
 const ClearRenderer = (): React$Element<*> => <span />;

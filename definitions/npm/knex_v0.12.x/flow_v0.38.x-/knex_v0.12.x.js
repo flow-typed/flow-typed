@@ -53,7 +53,7 @@ declare class Knex$QueryBuilder mixins Promise {
   orWhereRaw(sql: string, bindings?: Knex$RawBindings): this,
   innerJoin(table: string, c1: string, operator: string, c2: string): this,
   innerJoin(table: string, c1: string, c2: string): this,
-  innerJoin(builder: Knex$QueryBuilder, c1?: string, c2?: string): this,
+  innerJoin(builder: Knex$QueryBuilder | Knex$QueryBuilderFn, c1?: string, c2?: string): this,
   innerJoin(table: string, builder: Knex$QueryBuilderFn): this,
   leftJoin(table: string, c1: string, operator: string, c2: string): this,
   leftJoin(table: string, c1: string, c2: string): this,

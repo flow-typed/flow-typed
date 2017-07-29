@@ -19,6 +19,7 @@ _.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x');
  * _.find
  */
 _.find([1, 2, 3], x => x * 1 == 3);
+_.find([1, 2, 3], x => x == 2, 1);
 // $ExpectError number cannot be compared to string
 _.find([1, 2, 3], x => x == 'a');
 // $ExpectError number. This type is incompatible with function type.
@@ -265,6 +266,7 @@ boolFalse = _.isString({});
 boolFalse = _.isString(5);
 boolFalse = _.isString(function(f) { return f });
 boolFalse = _.isString();
+boolFalse = _.isString(true);
 
 // $ExpectError
 boolFalse = _.isString('');

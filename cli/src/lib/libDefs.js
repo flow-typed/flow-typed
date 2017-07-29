@@ -1,23 +1,20 @@
 // @flow
 
-import semver from "semver";
+import semver from 'semver';
 
-import {cloneInto, findLatestFileCommitHash, rebaseRepoMaster} from "./git.js";
-import {mkdirp} from "./fileUtils.js";
-import {fs, path, os} from "./node.js";
-import {
-  emptyVersion,
-  versionToString,
-} from "./semver.js";
+import {cloneInto, findLatestFileCommitHash, rebaseRepoMaster} from './git.js';
+import {mkdirp} from './fileUtils.js';
+import {fs, path, os} from './node.js';
+import {emptyVersion, versionToString} from './semver.js';
 import {
   disjointVersionsAll,
   parseDirString as parseFlowDirString,
   toSemverString as flowVerToSemver,
   toDirString as flowVerToDirString,
-} from "./flowVersion.js";
-import type {FlowVersion} from "./flowVersion.js";
-import type {ValidationErrors as VErrors} from "./validationErrors";
-import {validationError} from "./validationErrors";
+} from './flowVersion.js';
+import type {FlowVersion} from './flowVersion.js';
+import type {ValidationErrors as VErrors} from './validationErrors';
+import {validationError} from './validationErrors';
 
 const P = Promise;
 
@@ -50,13 +47,16 @@ async function cloneCacheRepo(verbose?: VerboseOutput) {
 
 const CACHE_REPO_GIT_DIR = path.join(CACHE_REPO_DIR, '.git');
 async function rebaseCacheRepo(verbose?: VerboseOutput) {
-  if (await fs.exists(CACHE_REPO_DIR) && await fs.exists(CACHE_REPO_GIT_DIR)) {
+  if (
+    (await fs.exists(CACHE_REPO_DIR)) &&
+    (await fs.exists(CACHE_REPO_GIT_DIR))
+  ) {
     try {
       await rebaseRepoMaster(CACHE_REPO_DIR);
     } catch (e) {
       writeVerbose(
         verbose,
-        'ERROR: Unable to rebase the local cache repo. ' + e.message
+        'ERROR: Unable to rebase the local cache repo. ' + e.message,
       );
       return false;
     }
@@ -86,24 +86,24 @@ export const _cacheRepoAssure = {
 };
 async function ensureCacheRepo(
   verbose?: VerboseOutput,
-  cacheRepoExpiry: number = CACHE_REPO_EXPIRY
+  cacheRepoExpiry: number = CACHE_REPO_EXPIRY,
 ) {
   // Only re-run rebase checks if a check hasn't been run in the last 5 minutes
-  if (_cacheRepoAssure.lastAssured + (5 * 1000 * 60) >= Date.now()) {
+  if (_cacheRepoAssure.lastAssured + 5 * 1000 * 60 >= Date.now()) {
     return _cacheRepoAssure.pendingAssure;
   }
 
   _cacheRepoAssure.lastAssured = Date.now();
   const prevAssure = _cacheRepoAssure.pendingAssure;
-  return _cacheRepoAssure.pendingAssure =
-    prevAssure.then(() => (async function() {
+  return (_cacheRepoAssure.pendingAssure = prevAssure.then(() =>
+    (async function() {
       const repoDirExists = fs.exists(CACHE_REPO_DIR);
       const repoGitDirExists = fs.exists(CACHE_REPO_GIT_DIR);
       if (!await repoDirExists || !await repoGitDirExists) {
         writeVerbose(
           verbose,
           '• flow-typed cache not found, fetching from GitHub...',
-          false
+          false,
         );
         await cloneCacheRepo(verbose);
         writeVerbose(verbose, 'done.');
@@ -119,7 +119,7 @@ async function ensureCacheRepo(
           }
         }
 
-        if ((lastUpdated + cacheRepoExpiry) < Date.now()) {
+        if (lastUpdated + cacheRepoExpiry < Date.now()) {
           writeVerbose(verbose, '• rebasing flow-typed cache...', false);
           const rebaseSuccessful = await rebaseCacheRepo(verbose);
           if (rebaseSuccessful) {
@@ -127,14 +127,15 @@ async function ensureCacheRepo(
           } else {
             writeVerbose(
               verbose,
-              '\nNOTE: Unable to rebase local cache! If you don\'t currently ' +
-              'have internet connectivity, no worries -- we\'ll update the ' +
-              'local cache the next time you do.\n'
+              "\nNOTE: Unable to rebase local cache! If you don't currently " +
+                "have internet connectivity, no worries -- we'll update the " +
+                'local cache the next time you do.\n',
             );
           }
         }
       }
-    })());
+    })(),
+  ));
 }
 // Exported for tests -- since we really want this part well-tested.
 export {
@@ -147,7 +148,11 @@ export {
   REMOTE_REPO_URL as _REMOTE_REPO_URL,
 };
 
-async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>, validationErrs?: VErrors) {
+async function addLibDefs(
+  pkgDirPath,
+  libDefs: Array<LibDef>,
+  validationErrs?: VErrors,
+) {
   const parsedDirItem = parseRepoDirItem(pkgDirPath, validationErrs);
   (await parseLibDefsFromPkgDir(
     parsedDirItem,
@@ -159,44 +164,43 @@ async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>, validationErrs?: V
 /**
  * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
  */
-export async function getLibDefs(
-  defsDir: string,
-  validationErrs?: VErrors,
-) {
+export async function getLibDefs(defsDir: string, validationErrs?: VErrors) {
   const libDefs: Array<LibDef> = [];
   const defsDirItems = await fs.readdir(defsDir);
-  await P.all(defsDirItems.map(async (item) => {
-    const itemPath = path.join(defsDir, item);
-    const itemStat = await fs.stat(itemPath);
-    if (itemStat.isDirectory()) {
-      if (item.charAt(0) === '@') {
-        // directory is of the form '@<scope>', so go one level deeper
-        const scope = item;
-        const defsDirItems = await fs.readdir(itemPath);
-        await P.all(defsDirItems.map(async (item) => {
-          const itemPath = path.join(defsDir, scope, item);
-          const itemStat = await fs.stat(itemPath);
-          if (itemStat.isDirectory()) {
-            // itemPath is a lib dir
-            await addLibDefs(itemPath, libDefs, validationErrs);
-          } else {
-            const error =
-              `Expected only directories in the 'definitions/npm/@<scope>' directory!`;
-            validationError(itemPath, error, validationErrs);
-          }
-        }));
+  await P.all(
+    defsDirItems.map(async item => {
+      const itemPath = path.join(defsDir, item);
+      const itemStat = await fs.stat(itemPath);
+      if (itemStat.isDirectory()) {
+        if (item.charAt(0) === '@') {
+          // directory is of the form '@<scope>', so go one level deeper
+          const scope = item;
+          const defsDirItems = await fs.readdir(itemPath);
+          await P.all(
+            defsDirItems.map(async item => {
+              const itemPath = path.join(defsDir, scope, item);
+              const itemStat = await fs.stat(itemPath);
+              if (itemStat.isDirectory()) {
+                // itemPath is a lib dir
+                await addLibDefs(itemPath, libDefs, validationErrs);
+              } else {
+                const error = `Expected only directories in the 'definitions/npm/@<scope>' directory!`;
+                validationError(itemPath, error, validationErrs);
+              }
+            }),
+          );
+        } else {
+          // itemPath is a lib dir
+          await addLibDefs(itemPath, libDefs, validationErrs);
+        }
       } else {
-        // itemPath is a lib dir
-        await addLibDefs(itemPath, libDefs, validationErrs);
+        const error = `Expected only directories in the 'definitions/npm' directory!`;
+        validationError(itemPath, error, validationErrs);
       }
-    } else {
-      const error =
-        `Expected only directories in the 'definitions/npm' directory!`;
-      validationError(itemPath, error, validationErrs);
-    }
-  }));
+    }),
+  );
   return libDefs;
-};
+}
 
 function parsePkgFlowDirVersion(pkgFlowDirPath, validationErrs): FlowVersion {
   const pkgFlowDirName = path.basename(pkgFlowDirPath);
@@ -232,7 +236,7 @@ async function parseLibDefsFromPkgDir(
       const isValidTestFile = validateTestFile(
         pkgDirItemPath,
         pkgDirItemContext,
-        validationErrs
+        validationErrs,
       );
 
       if (isValidTestFile) {
@@ -241,7 +245,7 @@ async function parseLibDefsFromPkgDir(
     } else if (pkgDirItemStat.isDirectory()) {
       flowDirs.push([
         pkgDirItemPath,
-        parsePkgFlowDirVersion(pkgDirItemPath, validationErrs)
+        parsePkgFlowDirVersion(pkgDirItemPath, validationErrs),
       ]);
     } else {
       const error = 'Unexpected directory item';
@@ -258,67 +262,67 @@ async function parseLibDefsFromPkgDir(
   }
 
   const libDefs = [];
-  await P.all(flowDirs.map(async ([flowDirPath, flowVersion]) => {
-    const testFilePaths = [].concat(commonTestFiles);
-    const basePkgName =
-      pkgName.charAt(0) === '@'
-      ? pkgName.split(path.sep).pop()
-      : pkgName;
-    const libDefFileName = `${basePkgName}_${pkgVersionStr}.js`;
-    let libDefFilePath;
-    (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
-      const flowDirItemPath = path.join(flowDirPath, flowDirItem);
-      const flowDirItemContext = path.relative(repoPath, flowDirItemPath);
-      const flowDirItemStat = fs.statSync(flowDirItemPath);
-      if (flowDirItemStat.isFile()) {
-        // If we couldn't discern the package name, we've already recorded an
-        // error for that -- so try to avoid spurious downstream errors.
-        if (pkgName === 'ERROR') {
-          return;
-        }
+  await P.all(
+    flowDirs.map(async ([flowDirPath, flowVersion]) => {
+      const testFilePaths = [].concat(commonTestFiles);
+      const basePkgName =
+        pkgName.charAt(0) === '@' ? pkgName.split(path.sep).pop() : pkgName;
+      const libDefFileName = `${basePkgName}_${pkgVersionStr}.js`;
+      let libDefFilePath;
+      (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
+        const flowDirItemPath = path.join(flowDirPath, flowDirItem);
+        const flowDirItemContext = path.relative(repoPath, flowDirItemPath);
+        const flowDirItemStat = fs.statSync(flowDirItemPath);
+        if (flowDirItemStat.isFile()) {
+          // If we couldn't discern the package name, we've already recorded an
+          // error for that -- so try to avoid spurious downstream errors.
+          if (pkgName === 'ERROR') {
+            return;
+          }
 
-        if (path.extname(flowDirItem) === '.swp') {
-          return;
-        }
+          if (path.extname(flowDirItem) === '.swp') {
+            return;
+          }
 
-        if (flowDirItem === libDefFileName) {
-          libDefFilePath = path.join(flowDirPath, flowDirItem);
-          return;
-        }
+          if (flowDirItem === libDefFileName) {
+            libDefFilePath = path.join(flowDirPath, flowDirItem);
+            return;
+          }
 
-        const isValidTestFile = validateTestFile(
-          flowDirItemPath,
-          flowDirItemContext,
-          validationErrs
-        );
+          const isValidTestFile = validateTestFile(
+            flowDirItemPath,
+            flowDirItemContext,
+            validationErrs,
+          );
 
-        if (isValidTestFile) {
-          testFilePaths.push(flowDirItemPath);
+          if (isValidTestFile) {
+            testFilePaths.push(flowDirItemPath);
+          }
+        } else {
+          const error = 'Unexpected directory item';
+          validationError(flowDirItemContext, error, validationErrs);
         }
-      } else {
-        const error = 'Unexpected directory item';
-        validationError(flowDirItemContext, error, validationErrs);
+      });
+
+      if (libDefFilePath == null) {
+        libDefFilePath = path.join(flowDirPath, libDefFileName);
+        if (pkgName !== 'ERROR') {
+          const error = 'No libdef file found!';
+          validationError(flowDirPath, error, validationErrs);
+        }
+        return;
       }
-    });
 
-    if (libDefFilePath == null) {
-      libDefFilePath = path.join(flowDirPath, libDefFileName);
-      if (pkgName !== 'ERROR') {
-        const error = 'No libdef file found!';
-        validationError(flowDirPath, error, validationErrs);
-      }
-      return;
-    }
-
-    libDefs.push({
-      pkgName,
-      pkgVersionStr,
-      flowVersion: flowVersion,
-      flowVersionStr: flowVerToDirString(flowVersion),
-      path: libDefFilePath,
-      testFilePaths,
-    });
-  }));
+      libDefs.push({
+        pkgName,
+        pkgVersionStr,
+        flowVersion: flowVersion,
+        flowVersionStr: flowVerToDirString(flowVersion),
+        path: libDefFilePath,
+        testFilePaths,
+      });
+    }),
+  );
   return libDefs;
 }
 
@@ -327,7 +331,10 @@ async function parseLibDefsFromPkgDir(
  * directory's name into a package name and version.
  */
 const REPO_DIR_ITEM_NAME_RE = /^(.*)_v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
-export function parseRepoDirItem(dirItemPath: string, validationErrs?: VErrors) {
+export function parseRepoDirItem(
+  dirItemPath: string,
+  validationErrs?: VErrors,
+) {
   const dirItem = path.basename(dirItemPath);
   const itemMatches = dirItem.match(REPO_DIR_ITEM_NAME_RE);
   if (itemMatches == null) {
@@ -345,12 +352,9 @@ export function parseRepoDirItem(dirItemPath: string, validationErrs?: VErrors) 
   if (item.charAt(0) === '@') {
     pkgName = `${item}${path.sep}${pkgName}`;
   }
-  major =
-    validateVersionNumPart(major, "major", dirItemPath, validationErrs);
-  minor =
-    validateVersionPart(minor, "minor", dirItemPath, validationErrs);
-  patch =
-    validateVersionPart(patch, "patch", dirItemPath, validationErrs);
+  major = validateVersionNumPart(major, 'major', dirItemPath, validationErrs);
+  minor = validateVersionPart(minor, 'minor', dirItemPath, validationErrs);
+  patch = validateVersionPart(patch, 'patch', dirItemPath, validationErrs);
 
   if (prerel != null) {
     prerel = prerel.substr(1);
@@ -367,7 +371,8 @@ function validateTestFile(testFilePath, context, validationErrs) {
   const testFileName = path.basename(testFilePath);
   if (!TEST_FILE_NAME_RE.test(testFileName)) {
     const error =
-      "Malformed test file name! Test files must be formatted as test_(.*).js: " + testFileName;
+      'Malformed test file name! Test files must be formatted as test_(.*).js: ' +
+      testFileName;
     validationError(context, error, validationErrs);
     return false;
   }
@@ -381,8 +386,7 @@ function validateTestFile(testFilePath, context, validationErrs) {
 function validateVersionNumPart(part, partName, context, validationErrs?) {
   const num = parseInt(part, 10);
   if (String(num) !== part) {
-    const error =
-      `'${context}': Invalid ${partName} number: '${part}'. Expected a number.`;
+    const error = `'${context}': Invalid ${partName} number: '${part}'. Expected a number.`;
     validationError(context, error, validationErrs);
   }
   return num;
@@ -393,7 +397,7 @@ function validateVersionNumPart(part, partName, context, validationErrs?) {
  * `patch` part), parse the string into either a number or 'x'.
  */
 function validateVersionPart(part, partName, context, validationErrs?) {
-  if (part === "x") {
+  if (part === 'x') {
     return part;
   }
   return validateVersionNumPart(part, partName, context, validationErrs);
@@ -409,8 +413,8 @@ async function verifyCLIVersion(defsDirPath) {
   if (!metadata.compatibleCLIRange) {
     throw new Error(
       `Unable to find the 'compatibleCLIRange' property in ` +
-      `${metadataFilePath}. You might need to update to a newer version of ` +
-      `the Flow CLI.`
+        `${metadataFilePath}. You might need to update to a newer version of ` +
+        `the Flow CLI.`,
     );
   }
   const minCLIVersion = metadata.compatibleCLIRange;
@@ -418,8 +422,8 @@ async function verifyCLIVersion(defsDirPath) {
   if (!semver.satisfies(thisCLIVersion, minCLIVersion)) {
     throw new Error(
       `Please upgrade your CLI version! This CLI is version ` +
-      `${thisCLIVersion}, but the latest flow-typed definitions are only ` +
-      `compatible with flow-typed@${minCLIVersion}`
+        `${thisCLIVersion}, but the latest flow-typed definitions are only ` +
+        `compatible with flow-typed@${minCLIVersion}`,
     );
   }
 }
@@ -444,12 +448,14 @@ const NAMESPACE_DIR_EXCEPTIONS = [
 async function getLibDefNamespaces(defsDirPath: string) {
   const namespaces: Array<string> = [];
   const defsDirItems = await fs.readdir(defsDirPath);
-  await P.all(defsDirItems.map(async (item) => {
-    if (NAMESPACE_DIR_EXCEPTIONS.indexOf(item) !== -1) {
-      return;
-    }
-    namespaces.push(item);
-  }));
+  await P.all(
+    defsDirItems.map(async item => {
+      if (NAMESPACE_DIR_EXCEPTIONS.indexOf(item) !== -1) {
+        return;
+      }
+      namespaces.push(item);
+    }),
+  );
   return namespaces;
 }
 
@@ -464,12 +470,17 @@ export async function getLocalLibDefs(validationErrs?: VErrors) {
   await verifyCLIVersion(path.join(GIT_REPO_DIR, 'definitions'));
   const namespaces = await getLibDefNamespaces(GIT_REPO_DEFS_DIR);
   let libDefs: Array<LibDef> = [];
-  await P.all(namespaces.map(async (ns) => {
-    const nsLibdefs = await getLibDefs(path.join(GIT_REPO_DEFS_DIR, ns), validationErrs);
-    libDefs = libDefs.concat(nsLibdefs);
-  }));
+  await P.all(
+    namespaces.map(async ns => {
+      const nsLibdefs = await getLibDefs(
+        path.join(GIT_REPO_DEFS_DIR, ns),
+        validationErrs,
+      );
+      libDefs = libDefs.concat(nsLibdefs);
+    }),
+  );
   return libDefs;
-};
+}
 
 /**
  * Get a list of LibDefs from the flow-typed cache repo checkout.
@@ -485,27 +496,30 @@ export async function getCacheLibDefs(
   await ensureCacheRepo(verbose);
   await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
   return getLibDefs(CACHE_REPO_DEFS_DIR, validationErrs);
-};
+}
 
 export async function getCacheLibDefVersion(libDef: LibDef) {
   await ensureCacheRepo();
   await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
   const latestCommitHash = await findLatestFileCommitHash(
     CACHE_REPO_DIR,
-    path.relative(CACHE_REPO_DIR, libDef.path)
+    path.relative(CACHE_REPO_DIR, libDef.path),
   );
   return (
     `${latestCommitHash.substr(0, 10)}/` +
     `${libDef.pkgName}_${libDef.pkgVersionStr}/` +
     `flow_${libDef.flowVersionStr}`
   );
-};
+}
 
 function packageNameMatch(a: string, b: string): boolean {
   return a.toLowerCase() === b.toLowerCase();
 }
 
-function libdefMatchesPackageVersion(pkgSemver: string, defVersionRaw: string): boolean {
+function libdefMatchesPackageVersion(
+  pkgSemver: string,
+  defVersionRaw: string,
+): boolean {
   // The libdef version should be treated as a semver prefixed by a carat
   // (i.e: "foo_v2.2.x" is the same range as "^2.2.x")
   // UNLESS it is prefixed by the equals character (i.e. "foo_=v2.2.x")
@@ -514,12 +528,12 @@ function libdefMatchesPackageVersion(pkgSemver: string, defVersionRaw: string): 
     defVersion = '^' + defVersionRaw;
   }
 
-  if(semver.valid(pkgSemver)) {
+  if (semver.valid(pkgSemver)) {
     // test the single package version against the libdef range
     return semver.satisfies(pkgSemver, defVersion);
   }
 
-  if(semver.valid(defVersion)) {
+  if (semver.valid(defVersion)) {
     // test the single defVersion agains the package range
     return semver.satisfies(defVersion, pkgSemver);
   }
@@ -527,14 +541,16 @@ function libdefMatchesPackageVersion(pkgSemver: string, defVersionRaw: string): 
   const pkgRange = new semver.Range(pkgSemver);
   const defRange = new semver.Range(defVersion);
 
-  if(defRange.set[0].length !== 2) {
-    throw Error("Invalid libDef version, It appears to be a non-contiguous range.");
+  if (defRange.set[0].length !== 2) {
+    throw Error(
+      'Invalid libDef version, It appears to be a non-contiguous range.',
+    );
   }
 
   const defLowerB = defRange.set[0][0].semver.version;
   const defUpperB = defRange.set[0][1].semver.version;
 
-  if(semver.gtr(defLowerB, pkgSemver) || semver.ltr(defUpperB, pkgSemver)) {
+  if (semver.gtr(defLowerB, pkgSemver) || semver.ltr(defUpperB, pkgSemver)) {
     return false;
   }
 
@@ -547,92 +563,90 @@ function libdefMatchesPackageVersion(pkgSemver: string, defVersionRaw: string): 
  */
 type LibDefFilter =
   | {|type: 'fuzzy', flowVersionStr?: string, term: string|}
-  | {|type: 'exact', flowVersionStr?: string, pkgName: string, pkgVersionStr: string|}
-  | {|type: 'exact-name', flowVersionStr?: string, term: string|}
-;
+  | {|
+      type: 'exact',
+      flowVersionStr?: string,
+      pkgName: string,
+      pkgVersionStr: string,
+    |}
+  | {|type: 'exact-name', flowVersionStr?: string, term: string|};
 export function filterLibDefs(
   defs: Array<LibDef>,
   filter: LibDefFilter,
 ): Array<LibDef> {
-  return defs.filter((def: LibDef) => {
-    let filterMatch = false;
-    switch (filter.type) {
-      case 'exact':
-        filterMatch = (
-          packageNameMatch(def.pkgName, filter.pkgName)
-          && libdefMatchesPackageVersion(filter.pkgVersionStr, def.pkgVersionStr)
-        );
-        break;
-
-      case 'exact-name':
-        filterMatch = (
-          packageNameMatch(def.pkgName, filter.term)
-        );
-        break;
-
-      case 'fuzzy':
-        filterMatch = (
-          def.pkgName.toLowerCase().indexOf(filter.term.toLowerCase()) !== -1
-        );
-        break;
-
-      default:
-        throw new Error(
-          `'${filter.type}' is an unexpected filter type! This should never ` +
-          `happen!`
-        );
-    }
-
-    if (!filterMatch) {
-      return false;
-    }
-
-    const filterFlowVerStr = filter.flowVersionStr;
-    if (filterFlowVerStr) {
-      const {flowVersion} = def;
-      switch (flowVersion.kind) {
-        case 'all':
-          return semver.satisfies(
-            filterFlowVerStr,
-            def.flowVersionStr
-          );
-        case 'specific':
-          return semver.satisfies(
-            filterFlowVerStr,
-            def.flowVersionStr
-          );
-        case 'ranged':
-          const {upper} = flowVersion;
-          if (upper) {
-            const lowerSpecific = {
-              kind: 'ranged',
-              upper: null,
-              lower: flowVersion.lower,
-            };
-            const lowerSpecificSemver = flowVerToSemver(lowerSpecific);
-            const upperSpecificSemver = flowVerToSemver({
-              kind: 'specific',
-              ver: upper,
-            });
-            return (
-              semver.satisfies(filterFlowVerStr, lowerSpecificSemver)
-              && semver.satisfies(filterFlowVerStr, upperSpecificSemver)
+  return defs
+    .filter((def: LibDef) => {
+      let filterMatch = false;
+      switch (filter.type) {
+        case 'exact':
+          filterMatch =
+            packageNameMatch(def.pkgName, filter.pkgName) &&
+            libdefMatchesPackageVersion(
+              filter.pkgVersionStr,
+              def.pkgVersionStr,
             );
-          } else {
-            return semver.satisfies(
-              filterFlowVerStr,
-              def.flowVersionStr,
-            );
-          }
+          break;
 
-        default: (flowVersion: empty); throw new Error('Unexpected FlowVersion kind!');
+        case 'exact-name':
+          filterMatch = packageNameMatch(def.pkgName, filter.term);
+          break;
+
+        case 'fuzzy':
+          filterMatch =
+            def.pkgName.toLowerCase().indexOf(filter.term.toLowerCase()) !== -1;
+          break;
+
+        default:
+          throw new Error(
+            `'${filter.type}' is an unexpected filter type! This should never ` +
+              `happen!`,
+          );
       }
-    }
 
-    return true;
-  }).sort((a, b) => {
-    const aZeroed = a.pkgVersionStr.replace(/x/g, '0');
-    const bZeroed = b.pkgVersionStr.replace(/x/g, '0');
-    return semver.gt(aZeroed, bZeroed) ? -1 : 1;
-  });
-};
+      if (!filterMatch) {
+        return false;
+      }
+
+      const filterFlowVerStr = filter.flowVersionStr;
+      if (filterFlowVerStr) {
+        const {flowVersion} = def;
+        switch (flowVersion.kind) {
+          case 'all':
+            return semver.satisfies(filterFlowVerStr, def.flowVersionStr);
+          case 'specific':
+            return semver.satisfies(filterFlowVerStr, def.flowVersionStr);
+          case 'ranged':
+            const {upper} = flowVersion;
+            if (upper) {
+              const lowerSpecific = {
+                kind: 'ranged',
+                upper: null,
+                lower: flowVersion.lower,
+              };
+              const lowerSpecificSemver = flowVerToSemver(lowerSpecific);
+              const upperSpecificSemver = flowVerToSemver({
+                kind: 'specific',
+                ver: upper,
+              });
+              return (
+                semver.satisfies(filterFlowVerStr, lowerSpecificSemver) &&
+                semver.satisfies(filterFlowVerStr, upperSpecificSemver)
+              );
+            } else {
+              return semver.satisfies(filterFlowVerStr, def.flowVersionStr);
+            }
+
+          default:
+            (flowVersion: empty);
+            throw new Error('Unexpected FlowVersion kind!');
+        }
+      }
+
+      return true;
+    })
+    .sort((a, b) => {
+      const aZeroed = a.pkgVersionStr.replace(/x/g, '0');
+      const bZeroed = b.pkgVersionStr.replace(/x/g, '0');
+      return semver.gt(aZeroed, bZeroed) ? -1 : 1;
+    });
+}
