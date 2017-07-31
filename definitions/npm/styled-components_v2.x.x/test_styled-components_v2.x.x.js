@@ -92,6 +92,15 @@ type ReactFunctionalComponent<Props: {}> = Props => React$Element<*>
 
 const TestFunctionalComponent = (props: { foo: string }) => <div />
 
+const NeedsFoo0: ReactFunctionalComponent<{}> = styled.div`
+  background-color: red;
+`;
+
+// $ExpectError
+const NeedsFoo0Error: {} => string = styled.div`
+  background-color: red;
+`;
+
 const NeedsFoo1: ReactFunctionalComponent<{ foo: string }> = styled(TestFunctionalComponent)`
   background-color: red;
 `;
