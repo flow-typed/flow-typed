@@ -17,6 +17,7 @@ Bluebird.all([
   new Bluebird(() => {}),
 ]);
 Bluebird.map([1], (x: number) => new Bluebird(() => {})).all();
+Bluebird.map(Bluebird.resolve([1]), (x: number) => new Bluebird(() => {})).all();
 Bluebird.reject('test');
 Bluebird.all([
   1
@@ -101,12 +102,15 @@ Bluebird.resolve(['arr', { some: 'value' }, 42])
 Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)], (memo, next) => memo + next);
 Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)], (memo, next) => memo + next, 1);
 Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)], (memo, next) => memo + next, Bluebird.resolve(1));
-Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)], (memo, next) => memo + next, Promise.resolve(1))
+Bluebird.reduce([5, Bluebird.resolve(6), Promise.resolve(7)], (memo, next) => memo + next, Promise.resolve(1));
 
-Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Promise.resolve(prev * num))
-Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num))
+Bluebird.reduce(Promise.resolve([5, Bluebird.resolve(6), Promise.resolve(7)]), (memo, next) => memo + next);
+Bluebird.reduce(Bluebird.resolve([5, Bluebird.resolve(6), Promise.resolve(7)]), (memo, next) => memo + next, 1);
+
+Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Promise.resolve(prev * num));
+Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num));
 //$ExpectError
-Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num), 'hello')
+Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num), 'hello');
 
 type PromiseOutput<T> = () => Promise<T>;
 let givePromise1: PromiseOutput<number> = () => Promise.resolve(1);
