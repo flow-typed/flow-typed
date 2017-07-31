@@ -1,8 +1,17 @@
 // @flow
 import {renderToString} from 'react-dom/server'
-import styled, {ThemeProvider, withTheme, keyframes, ServerStyleSheet, StyleSheetManager} from 'styled-components'
+import styled, {
+  ThemeProvider,
+  withTheme,
+  keyframes,
+  ServerStyleSheet,
+  StyleSheetManager
+} from 'styled-components'
 import React from 'react'
-import type {Theme} from 'styled-components'
+import type {
+  Theme,
+  Interpolation,
+} from 'styled-components'
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -91,6 +100,15 @@ const StyledClass = styled(TestReactClass)`
 type ReactFunctionalComponent<Props: {}> = Props => React$Element<*>
 
 const TestFunctionalComponent = (props: { foo: string }) => <div />
+
+const NeedsFoo: Array<Interpolation> = styled.css`
+  background-color: red;
+`;
+
+// $ExpectError
+const NeedsFooError: Array<Interpolation | boolean> = styled.css`
+  background-color: red;
+`;
 
 const NeedsFoo0: ReactFunctionalComponent<{}> = styled.div`
   background-color: red;

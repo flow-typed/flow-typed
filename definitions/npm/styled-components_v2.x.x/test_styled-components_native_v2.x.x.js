@@ -2,9 +2,12 @@
 import nativeStyled, {
   ThemeProvider as NativeThemeProvider,
   withTheme as nativeWithTheme,
-  keyframes as nativeKeyframes
+  keyframes as nativeKeyframes,
 } from 'styled-components/native'
-import type {Theme as NativeTheme} from 'styled-components/native'
+import type {
+  Theme as NativeTheme,
+  Interpolation as NativeInterpolation,
+} from 'styled-components/native'
 
 const NativeTitle = nativeStyled.Text`
   font-size: 1.5em;
@@ -66,12 +69,21 @@ type ReactFunctionalComponent<Props: {}> = Props => React$Element<*>
 
 const TestFunctionalComponent = (props: { foo: string }) => <div />
 
-const NeedsFoo0: ReactFunctionalComponent<{}> = styled.View`
+const NeedsFoo: Array<NativeInterpolation> = nativeStyled.css`
   background-color: red;
 `;
 
 // $ExpectError
-const NeedsFoo0Error: {} => string = styled.View`
+const NeedsFooError: Array<NativeInterpolation | boolean> = nativeStyled.css`
+  background-color: red;
+`;
+
+const NeedsFoo0: ReactFunctionalComponent<{}> = nativeStyled.View`
+  background-color: red;
+`;
+
+// $ExpectError
+const NeedsFoo0Error: {} => string = nativeStyled.View`
   background-color: red;
 `;
 

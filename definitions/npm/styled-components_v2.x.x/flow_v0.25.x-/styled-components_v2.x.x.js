@@ -3,7 +3,7 @@
 type $npm$styledComponents$Interpolation = ((executionContext: Object) => string) | string | number;
 type $npm$styledComponents$NameGenerator = (hash: number) => string;
 
-type $npm$styledComponents$TaggedTemplateLiteral<R: $npm$styledComponents$Component<*>> =
+type $npm$styledComponents$TaggedTemplateLiteral<R> =
   (Array<string>, $npm$styledComponents$Interpolation) => R;
 
 type $npm$styledComponents$Theme = {[key: string]: mixed};
@@ -44,12 +44,14 @@ declare module 'styled-components' {
   declare type ThemeProviderProps = $npm$styledComponents$ThemeProviderProps;
 
   declare type TaggedTemplateLiteral<R> = $npm$styledComponents$TaggedTemplateLiteral<R>;
-  declare type TaggedTemplateLiteralToComponent<C = Component<{}>> = TaggedTemplateLiteral<C>;
+  declare type TaggedTemplateLiteralToComponent<
+    C: Component<*> = Component<{}>,
+  > = TaggedTemplateLiteral<C>;
 
   declare module.exports: {
-    injectGlobal: TaggedTemplateLiteral<*> => void,
-    css: TaggedTemplateLiteral<*> => Array<Interpolation>,
-    keyframes: TaggedTemplateLiteral<*> => string,
+    injectGlobal: TaggedTemplateLiteral<void>,
+    css: TaggedTemplateLiteral<Array<Interpolation>>,
+    keyframes: TaggedTemplateLiteral<string>,
     withTheme: <T: {}, C: Component<*>>(component: C) => (C & Component<{ theme: T }>),
     ServerStyleSheet: typeof Npm$StyledComponents$ServerStyleSheet,
     StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager,
@@ -204,12 +206,14 @@ declare module 'styled-components/native' {
   declare type ThemeProviderProps = $npm$styledComponents$ThemeProviderProps;
 
   declare type TaggedTemplateLiteral<R> = $npm$styledComponents$TaggedTemplateLiteral<R>;
-  declare type TaggedTemplateLiteralToComponent<C = Component<{}>> = TaggedTemplateLiteral<C>;
+  declare type TaggedTemplateLiteralToComponent<
+    C: Component<*> = Component<{}>,
+  > = TaggedTemplateLiteral<C>;
 
   declare module.exports: {
-    css: TaggedTemplateLiteral<*> => Array<Interpolation>,
+    css: TaggedTemplateLiteral<Array<Interpolation>>,
     withTheme: <T: {}, C: Component<*>>(component: C) => (C & Component<{ theme: T }>),
-    keyframes: TaggedTemplateLiteral<*> => string,
+    keyframes: TaggedTemplateLiteral<string>,
     ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
 
     <T, U: T>(baseComponent: U):  TaggedTemplateLiteralToComponent<T>,
