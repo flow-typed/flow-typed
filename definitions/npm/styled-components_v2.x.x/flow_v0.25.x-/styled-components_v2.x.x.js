@@ -12,7 +12,7 @@ type $npm$styledComponents$ThemeProviderProps = {
 };
 type $npm$styledComponents$Component<Props: {}> =
   | ReactClass<Props>
-  | (props: Props) => React$Element<*>;
+  | Props => React$Element<*>;
 
 class Npm$StyledComponents$ThemeProvider extends React$Component {
   props: $npm$styledComponents$ThemeProviderProps;
@@ -41,7 +41,7 @@ declare module 'styled-components' {
 
   declare type Component<P> = $npm$styledComponents$Component<P>;
   declare type StyledComponent<P> = TaggedTemplateLiteral<Component<P>>;
-  declare type BaseStyledComponent = StyledComponent<Component<{}>>
+  declare type BaseStyledComponent = StyledComponent<*>
 
   declare type Theme = $npm$styledComponents$Theme;
   declare type ThemeProviderProps = $npm$styledComponents$ThemeProviderProps;
@@ -50,7 +50,7 @@ declare module 'styled-components' {
     injectGlobal: TaggedTemplateLiteral<void>,
     css: TaggedTemplateLiteral<Array<Interpolation>>,
     keyframes: TaggedTemplateLiteral<string>,
-    withTheme: <T: {}, P: {}, C: Component<P>>(component: C) => (C & Component<{ theme: T }>),
+    withTheme: <T: {}, C: Component<*>>(component: C) => (C & Component<{ theme: T }>),
     ServerStyleSheet: typeof Npm$StyledComponents$ServerStyleSheet,
     StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager,
     ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
@@ -201,14 +201,14 @@ declare module 'styled-components/native' {
 
   declare type Component<P> = $npm$styledComponents$Component<P>;
   declare type StyledComponent<P> = TaggedTemplateLiteral<Component<P>>;
-  declare type BaseStyledComponent = StyledComponent<Component<{}>>
+  declare type BaseStyledComponent = StyledComponent<*>
 
   declare type Theme = $npm$styledComponents$Theme;
   declare type ThemeProviderProps = $npm$styledComponents$ThemeProviderProps;
 
   declare module.exports: {
     css: TaggedTemplateLiteral<Array<Interpolation>>,
-    withTheme: <T: {}, P: {}, C: Component<P>>(component: C) => (C & Component<{ theme: T }>),
+    withTheme: <T: {}, C: Component<*>>(component: C) => (C & Component<{ theme: T }>),
     keyframes: TaggedTemplateLiteral<string>,
     ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
 

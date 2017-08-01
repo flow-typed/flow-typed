@@ -23,7 +23,7 @@ const ExtendedTitle = styled(Title)`
   font-size: 2em;
 `
 
-const Wrapper = styled.section`
+const Wrapper: BaseStyledComponent = styled.section`
   padding: 4em;
   background: ${({theme}) => theme.background};
 `;

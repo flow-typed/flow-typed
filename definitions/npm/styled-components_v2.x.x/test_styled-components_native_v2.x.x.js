@@ -19,7 +19,7 @@ const ExtendedNativeTitle = nativeStyled(NativeTitle)`
   font-size: 2em;
 `
 
-const NativeWrapper = nativeStyled.View`
+const NativeWrapper: BaseStyledComponent = nativeStyled.View`
   padding: 4em;
   background: ${({theme}) => theme.background};
 `;
