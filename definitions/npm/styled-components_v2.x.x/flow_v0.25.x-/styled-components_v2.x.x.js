@@ -3,14 +3,16 @@
 type $npm$styledComponents$Interpolation = ((executionContext: Object) => string) | string | number;
 type $npm$styledComponents$NameGenerator = (hash: number) => string;
 
-type $npm$styledComponents$TaggedTemplateLiteral<R> =
-  (Array<string>, $npm$styledComponents$Interpolation) => R;
+type $npm$styledComponents$TaggedTemplateLiteral<R> = {
+  (Array<string>, $npm$styledComponents$Interpolation): R,
+  attrs: <O: {}, P>(O) => $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$Component<P>>,
+}
 
 type $npm$styledComponents$Theme = {[key: string]: mixed};
 type $npm$styledComponents$ThemeProviderProps = {
   theme: $npm$styledComponents$Theme | ((outerTheme: $npm$styledComponents$Theme) => void)
 };
-type $npm$styledComponents$Component<Props: {}> =
+type $npm$styledComponents$Component<Props: ?{}> =
   | ReactClass<Props>
   | Props => React$Element<*>;
 

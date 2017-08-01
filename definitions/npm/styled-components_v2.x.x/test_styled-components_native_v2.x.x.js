@@ -24,6 +24,29 @@ const NativeWrapper: BaseStyledComponent = nativeStyled.View`
   background: ${({theme}) => theme.background};
 `;
 
+const Attrs1: $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$Component<{}>> = styled.section.attrs({
+  testProp: 'foo'
+})
+
+// $ExpectError
+const Attrs1Error: $npm$styledComponents$TaggedTemplateLiteral<*> = nativeStyled.section.attrs({
+  testProp: 'foo'
+})``
+
+const Attrs2: $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$Component<{}>> = styled.section
+  .attrs({
+    testProp1: 'foo'
+  })
+  .attrs({
+    testProp2: 'bar'
+  })
+
+const Attrs3: BaseStyledComponent = styled.section.attrs({
+  testProp: 'foo'
+})`
+  background-color: red;
+`
+
 const nativeTheme: NativeTheme = {
   background: "papayawhip"
 }
