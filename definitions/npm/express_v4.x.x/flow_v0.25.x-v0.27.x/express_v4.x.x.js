@@ -32,6 +32,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   subdomains: Array<string>;
   xhr: boolean;
   accepts(types: string): string | false;
+  accepts(types: Array<string>): string | false;
   acceptsCharsets(...charsets: Array<string>): string | false;
   acceptsEncodings(...encoding: Array<string>): string | false;
   acceptsLanguages(...lang: Array<string>): string | false;
