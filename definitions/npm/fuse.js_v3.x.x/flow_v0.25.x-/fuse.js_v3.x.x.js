@@ -3,7 +3,7 @@ declare module 'fuse.js' {
     caseSensitive?: boolean,
     includeScore?: boolean,
     includeMatches?: boolean,
-    minMatchCharLength: number,
+    minMatchCharLength?: number,
     shouldSort?: boolean,
     tokenize?: boolean,
     matchAllTokens?: boolean,
@@ -16,13 +16,13 @@ declare module 'fuse.js' {
     maxPatternLength?: number,
     getFn?: (obj: any, path: string) => any,
     sortFn?: (a: any, b: any) => boolean,
-    verbose: boolean,
-    tokenSeparator: RegExp,
-}
+    verbose?: boolean,
+    tokenSeparator?: RegExp,
+  }
   declare class Fuse<T> {
-    static (items: Array<T>, options?: FuseOptions): Fuse<T>;
-  search(pattern: string): Array<T>;
-  setCollection<U: Array<T>>(list: U): U;
-}
-  declare module.exports: typeof Fuse;
+    constructor(items: Array<T>, options?: FuseOptions): Fuse<T>,
+    search(pattern: string): Array<T>,
+    setCollection<U: Array<T>>(list: U): U,
+  }
+  declare module.exports: typeof Fuse
 }
