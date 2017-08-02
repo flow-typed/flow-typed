@@ -14,6 +14,7 @@ app.use('/response_api', (req: express$Request, res: express$Response) => {
     'Content-Type': 'application/json',
   });
   res.end('{}');
+  res.req;
 });
 
 // Can manually invoke router.handle() to handle a request.
