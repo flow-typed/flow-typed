@@ -74,8 +74,8 @@ declare module 'lodash' {
     dropRightWhile<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
     dropWhile<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
     fill<T, U>(array: ?Array<T>, value: U, start?: number, end?: number): Array<T|U>;
-    findIndex<T>(array: ?Array<T>, predicate?: Predicate<T>): number;
-    findLastIndex<T>(array: ?Array<T>, predicate?: Predicate<T>): number;
+    findIndex<T>(array: ?Array<T>, predicate?: Predicate<T>, fromIndex?: number): number;
+    findLastIndex<T>(array: ?Array<T>, predicate?: Predicate<T>, fromIndex?: number): number;
     // alias of _.head
     first<T>(array: ?Array<T>): T;
     flatten<T,X>(array: Array<Array<T>|X>): Array<T|X>;
