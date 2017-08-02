@@ -133,6 +133,7 @@ app.use('/something', (req: express$Request, res: express$Response) => {
 app.use((err: ?Error, req, res, next) => {
     // test req
     req.accepts('accepted/type');
+    req.accepts(['json', 'text']);
     // test response
     res.redirect('/somewhere');
     // test next
