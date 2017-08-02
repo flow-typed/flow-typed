@@ -11,6 +11,7 @@ knex
   .withSchema('a')
   .from('bar')
   .where('foo', 2)
+  .where({ mixed: 'hi' })
   .orWhere('bar', 'foo')
   .whereNot('asd', 1)
   .whereIn('batz', [1, 2]);
