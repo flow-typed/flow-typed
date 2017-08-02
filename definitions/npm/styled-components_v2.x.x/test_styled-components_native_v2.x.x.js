@@ -2,9 +2,12 @@
 import nativeStyled, {
   ThemeProvider as NativeThemeProvider,
   withTheme as nativeWithTheme,
-  keyframes as nativeKeyframes
+  keyframes as nativeKeyframes,
 } from 'styled-components/native'
-import type {Theme as NativeTheme} from 'styled-components/native'
+import type {
+  Theme as NativeTheme,
+  Interpolation as NativeInterpolation,
+} from 'styled-components/native'
 
 const NativeTitle = nativeStyled.Text`
   font-size: 1.5em;
@@ -16,10 +19,33 @@ const ExtendedNativeTitle = nativeStyled(NativeTitle)`
   font-size: 2em;
 `
 
-const NativeWrapper = nativeStyled.View`
+const NativeWrapper: BaseStyledComponent = nativeStyled.View`
   padding: 4em;
   background: ${({theme}) => theme.background};
 `;
+
+const Attrs1: $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$Component<{}>> = styled.section.attrs({
+  testProp: 'foo'
+})
+
+// $ExpectError
+const Attrs1Error: $npm$styledComponents$TaggedTemplateLiteral<*> = nativeStyled.section.attrs({
+  testProp: 'foo'
+})``
+
+const Attrs2: $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$Component<{}>> = styled.section
+  .attrs({
+    testProp1: 'foo'
+  })
+  .attrs({
+    testProp2: 'bar'
+  })
+
+const Attrs3: BaseStyledComponent = styled.section.attrs({
+  testProp: 'foo'
+})`
+  background-color: red;
+`
 
 const nativeTheme: NativeTheme = {
   background: "papayawhip"
@@ -65,6 +91,24 @@ const NativeNumberWrapper = nativeStyled(num)`
 type ReactFunctionalComponent<Props: {}> = Props => React$Element<*>
 
 const TestFunctionalComponent = (props: { foo: string }) => <div />
+
+const NeedsFoo: Array<NativeInterpolation> = nativeStyled.css`
+  background-color: red;
+`;
+
+// $ExpectError
+const NeedsFooError: Array<NativeInterpolation | boolean> = nativeStyled.css`
+  background-color: red;
+`;
+
+const NeedsFoo0: ReactFunctionalComponent<{}> = nativeStyled.View`
+  background-color: red;
+`;
+
+// $ExpectError
+const NeedsFoo0Error: {} => string = nativeStyled.View`
+  background-color: red;
+`;
 
 const NeedsFoo1: ReactFunctionalComponent<{ foo: string }> = nativeStyled(TestFunctionalComponent)`
   background-color: red;
