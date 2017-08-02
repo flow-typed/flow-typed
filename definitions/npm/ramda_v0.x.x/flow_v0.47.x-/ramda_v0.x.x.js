@@ -9,6 +9,7 @@ type Transformer<A,B> = {
 
 declare module ramda {
   declare type UnaryFn<A,R> = (a: A) => R;
+  declare type UnaryPromiseFn<A,R> = UnaryFn<A, Promise<R>>
   declare type BinaryFn<A,B,R> = ((a: A, b: B) => R) & ((a:A) => (b: B) => R);
   declare type UnarySameTypeFn<T> = UnaryFn<T,T>
   declare type BinarySameTypeFn<T> = BinaryFn<T,T,T>
@@ -75,6 +76,13 @@ declare module ramda {
     & (<A,B,C>(ab: UnaryFn<A,B>, bc: UnaryFn<B,C>, ...rest: Array<void>) => UnaryFn<A,C>)
     & (<A,B>(ab: UnaryFn<A,B>, ...rest: Array<void>) => UnaryFn<A,B>)
 
+  declare type PipeP = (<A,B,C,D,E,F,G>(ab: UnaryPromiseFn<A,B>, bc: UnaryPromiseFn<B,C>, cd: UnaryPromiseFn<C,D>, de: UnaryPromiseFn<D,E>, ef: UnaryPromiseFn<E,F>, fg: UnaryPromiseFn<F,G>, ...rest: Array<void>) => UnaryPromiseFn<A,G>)
+    & (<A,B,C,D,E,F>(ab: UnaryPromiseFn<A,B>, bc: UnaryPromiseFn<B,C>, cd: UnaryPromiseFn<C,D>, de: UnaryPromiseFn<D,E>, ef: UnaryPromiseFn<E,F>, ...rest: Array<void>) => UnaryPromiseFn<A,F>)
+    & (<A,B,C,D,E>(ab: UnaryPromiseFn<A,B>, bc: UnaryPromiseFn<B,C>, cd: UnaryPromiseFn<C,D>, de: UnaryPromiseFn<D,E>, ...rest: Array<void>) => UnaryPromiseFn<A,E>)
+    & (<A,B,C,D>(ab: UnaryPromiseFn<A,B>, bc: UnaryPromiseFn<B,C>, cd: UnaryPromiseFn<C,D>, ...rest: Array<void>) => UnaryPromiseFn<A,D>)
+    & (<A,B,C>(ab: UnaryPromiseFn<A,B>, bc: UnaryPromiseFn<B,C>, ...rest: Array<void>) => UnaryPromiseFn<A,C>)
+    & (<A,B>(ab: UnaryPromiseFn<A,B>, ...rest: Array<void>) => UnaryPromiseFn<A,B>)
+
   declare type Compose = & (<A,B,C,D,E,F,G>(fg: UnaryFn<F,G>, ef: UnaryFn<E,F>, de: UnaryFn<D,E>, cd: UnaryFn<C,D>, bc: UnaryFn<B,C>, ab: UnaryFn<A,B>, ...rest: Array<void>) => UnaryFn<A,G>)
     & (<A,B,C,D,E,F>(ef: UnaryFn<E,F>, de: UnaryFn<D,E>, cd: UnaryFn<C,D>, bc: UnaryFn<B,C>, ab: UnaryFn<A,B>, ...rest: Array<void>) => UnaryFn<A,F>)
     & (<A,B,C,D,E>(de: UnaryFn<D,E>, cd: UnaryFn<C,D>, bc: UnaryFn<B,C>, ab: UnaryFn<A,B>, ...rest: Array<void>) => UnaryFn<A,E>)
@@ -121,6 +129,7 @@ declare module ramda {
 
   declare var compose: Compose;
   declare var pipe: Pipe;
+  declare var pipeP: PipeP;
   declare var curry: Curry;
   declare function curryN(length: number, fn: (...args: Array<any>) => any): Function
 
@@ -699,12 +708,13 @@ declare module ramda {
   // TODO partial
   // TODO partialRight
   // TODO pipeK
-  // TODO pipeP
 
   declare function tap<T>(fn: (x: T) => any, ...rest: Array<void>): (x: T) => T;
   declare function tap<T>(fn: (x: T) => any, x: T): T;
 
-  // TODO tryCatch
+  declare function tryCatch<A, B, E>(tryer: (a: A) => B): ((catcher: (e: E, a: A) => B) => (a: A) => B) & ((catcher: (e: E, a: A) => B, a: A) => B);
+  declare function tryCatch<A, B, E>(tryer: (a: A) => B, catcher: (e: E, a: A) => B): (a: A) => B;
+  declare function tryCatch<A, B, E>(tryer: (a: A) => B, catcher: (e: E, a: A) => B, a: A): B;
 
   declare function unapply<T,V>(fn: (xs: Array<T>) => V): (...args: Array<T>) => V;
 
