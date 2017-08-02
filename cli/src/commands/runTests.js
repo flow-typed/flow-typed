@@ -66,6 +66,7 @@ async function getTestGroups(
         }
       })
       .filter(d => d != null);
+    console.log(baseDiff);
     changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
