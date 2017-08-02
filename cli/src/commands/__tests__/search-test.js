@@ -1,7 +1,7 @@
 // @flow
 
-import {_formatDefTable} from "../search.js";
-import {parseDirString as parseFlowDirString} from "../../lib/flowVersion.js";
+import {_formatDefTable} from '../search.js';
+import {parseDirString as parseFlowDirString} from '../../lib/flowVersion.js';
 
 describe('search command', () => {
   describe('_formatDefTable()', () => {
@@ -23,14 +23,22 @@ describe('search command', () => {
 
       const formatted = _formatDefTable(fixture);
       expect(formatted).toEqual(
-        "\nFound definitions:" + "\n" +
-        "╔══════╤═════════════════╤══════════════╗" + "\n" +
-        "║ Name │ Package Version │ Flow Version ║" + "\n" +
-        "╟──────┼─────────────────┼──────────────╢" + "\n" +
-        "║ mori │ v0.3.x          │ >=v0.22.x    ║" + "\n" +
-        "╟──────┼─────────────────┼──────────────╢" + "\n" +
-        "║ mori │ v0.3.x          │ >=v0.18.x    ║" + "\n" +
-        "╚══════╧═════════════════╧══════════════╝" + "\n"
+        '\nFound definitions:' +
+          '\n' +
+          '╔══════╤═════════════════╤══════════════╗' +
+          '\n' +
+          '║ Name │ Package Version │ Flow Version ║' +
+          '\n' +
+          '╟──────┼─────────────────┼──────────────╢' +
+          '\n' +
+          '║ mori │ v0.3.x          │ >=v0.22.x    ║' +
+          '\n' +
+          '╟──────┼─────────────────┼──────────────╢' +
+          '\n' +
+          '║ mori │ v0.3.x          │ >=v0.18.x    ║' +
+          '\n' +
+          '╚══════╧═════════════════╧══════════════╝' +
+          '\n',
       );
     });
 

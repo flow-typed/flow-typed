@@ -4,8 +4,8 @@ import {
   getSignedCodeVersion,
   signCode,
   signCodeStream,
-  verifySignedCode
-} from "../codeSign.js";
+  verifySignedCode,
+} from '../codeSign.js';
 
 describe('codeSign', () => {
   describe('verifySignedCode', () => {
@@ -45,7 +45,7 @@ describe('codeSign', () => {
   });
 
   describe('signCodeStream', () => {
-    pit('signs and versions the output code', () => {
+    it('signs and versions the output code', () => {
       const version = 'VersionA';
       const stream = signCodeStream(version);
       stream.write('line 1\n');
@@ -53,7 +53,7 @@ describe('codeSign', () => {
       stream.write('line 3\n');
 
       let signedCode = '';
-      stream.on('data', data => signedCode += data);
+      stream.on('data', data => (signedCode += data));
 
       return new Promise((res, _rej) => {
         stream.on('close', () => {

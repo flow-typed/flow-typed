@@ -44,7 +44,6 @@ _.isEqual({x: 1}, {y: 2});
 // See https://github.com/splodingsocks/FlowTyped/pull/1#issuecomment-149345275
 // and https://github.com/facebook/flow/issues/956
 _.isEqual(1);
-_.isEqual(1, 2, 3);
 
 
 /**

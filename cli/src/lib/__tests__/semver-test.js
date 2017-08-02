@@ -18,8 +18,16 @@ describe('semver', () => {
     });
 
     it('parses wildcard versions', () => {
-      expect(stringToVersion('v1.2.x')).toEqual({major: 1, minor: 2, patch: 'x'});
-      expect(stringToVersion('v1.x.3')).toEqual({major: 1, minor: 'x', patch: 3});
+      expect(stringToVersion('v1.2.x')).toEqual({
+        major: 1,
+        minor: 2,
+        patch: 'x',
+      });
+      expect(stringToVersion('v1.x.3')).toEqual({
+        major: 1,
+        minor: 'x',
+        patch: 3,
+      });
 
       // No wildcards on majors. This is rarely useful, so we assume it's a
       // mistake for now.

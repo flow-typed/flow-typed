@@ -105,6 +105,8 @@ app.enable(100);
 // $ExpectError
 const f: number = app.enabled('100');
 
+const g: express$Application = app.enable('foo');
+
 app.render('view', { title: 'News Feed' }, (err: ?Error, html: ?string): void => {
     if (err) return console.log(err);
     console.log(html);
@@ -131,6 +133,7 @@ app.use('/something', (req: express$Request, res: express$Response) => {
 app.use((err: ?Error, req, res, next) => {
     // test req
     req.accepts('accepted/type');
+    req.accepts(['json', 'text']);
     // test response
     res.redirect('/somewhere');
     // test next

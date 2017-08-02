@@ -5,6 +5,7 @@ import _ from 'lodash';
  * _.find
  */
 _.find([1, 2, 3], x => x * 1 == 3);
+_.find([1, 2, 3], x => x == 2, 1);
 // $ExpectError number cannot be compared to string
 _.find([1, 2, 3], x => x == 'a');
 // $ExpectError number. This type is incompatible with function type.
@@ -34,6 +35,27 @@ _.find(users, ['active', false]);
 
 // The `_.property` iteratee shorthand.
 _.find(users, 'active');
+
+
+/**
+ * _.get
+ */
+
+// Object — examples from lodash docs
+var exampleObjectForGetTest = { 'a': [{ 'b': { 'c': 3 } }] };
+_.get(exampleObjectForGetTest, 'a[0].b.c');
+_.get(exampleObjectForGetTest, ['a', '0', 'b', 'c']);
+_.get(exampleObjectForGetTest, 'a.b.c', 'default');
+
+// Array — not documented, but _.get does support arrays
+_.get([1, 2, 3], '0');
+_.get(['foo', 'bar', 'baz'], '[1]');
+_.get([{ a: 'foo' }, { b: 'bar' }, { c: 'baz' }], '2');
+_.get([[1, 2], [3, 4], [5, 6], [7, 8]], '3');
+
+// Second argument must be string when looking for array items by index
+// $ExpectError number This type is incompatible with union: ?array type | string
+_.get([1, 2, 3], 0);
 
 
 /**
@@ -127,6 +149,7 @@ boolFalse = _.isString({});
 boolFalse = _.isString(5);
 boolFalse = _.isString(function(f) { return f });
 boolFalse = _.isString();
+boolFalse = _.isString(true);
 
 // $ExpectError
 boolFalse = _.isString('');

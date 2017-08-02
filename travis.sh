@@ -5,7 +5,7 @@ cd definitions && \
 #npm install && \
 #npm test && \
 cd ../cli && \
-npm install && \
-./node_modules/.bin/flow && \
+yarn && \
+yarn flow && \
 node dist/cli.js validate-defs ../definitions && \
 node dist/cli.js run-tests --onlyChanged

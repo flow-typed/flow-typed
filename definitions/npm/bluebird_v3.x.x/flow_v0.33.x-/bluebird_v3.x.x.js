@@ -43,17 +43,32 @@ declare type Bluebird$PromisifyAllOptions = {
 
 declare type $Promisable<T> = Promise<T> | T;
 
+declare class Bluebird$Disposable<R> {
+
+}
+
 declare class Bluebird$Promise<+R> extends Promise<R>{
   static Defer: Class<Bluebird$Defer>;
   static PromiseInspection: Class<Bluebird$PromiseInspection<*>>;
 
-  static all<T, Elem: $Promisable<T>>(Promises: $Promisable<Iterable<Elem>>): Bluebird$Promise<Array<T>>;
-  static props(input: $Promisable<Object | Map<*,*>>): Bluebird$Promise<*>;
-  static any<T, Elem: $Promisable<T>>(Promises: Array<Elem>): Bluebird$Promise<T>;
-  static race<T, Elem: $Promisable<T>>(Promises: Array<Elem>): Bluebird$Promise<T>;
+  static all<T, Elem: $Promisable<T>>(
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
+  ): Bluebird$Promise<Array<T>>;
+  static props(
+    input: Object | Map<*,*> | $Promisable<Object | Map<*,*>>
+  ): Bluebird$Promise<*>;
+  static any<T, Elem: $Promisable<T>>(
+    Promises: Array<Elem> | $Promisable<Array<Elem>>
+  ): Bluebird$Promise<T>;
+  static race<T, Elem: $Promisable<T>>(
+    Promises: Array<Elem> | $Promisable<Array<Elem>>
+  ): Bluebird$Promise<T>;
   static reject<T>(error?: any): Bluebird$Promise<T>;
   static resolve<T>(object?: $Promisable<T>): Bluebird$Promise<T>;
-  static some<T, Elem: $Promisable<T>>(Promises: Array<Elem>, count: number): Bluebird$Promise<Array<T>>;
+  static some<T, Elem: $Promisable<T>>(
+    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    count: number
+  ): Bluebird$Promise<Array<T>>;
   static join<T, A>(
     value1: $Promisable<A>,
     handler: (a: A) => $Promisable<T>
@@ -70,26 +85,26 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
     handler: (a: A, b: B, c: C) => $Promisable<T>
   ): Bluebird$Promise<T>;
   static map<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Array<Elem> | $Promisable<Array<Elem>>,
     mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>,
     options?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<U>>;
   static mapSeries<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Array<Elem> | $Promisable<Array<Elem>>,
     mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>
   ): Bluebird$Promise<Array<U>>;
   static reduce<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Array<Elem> | $Promisable<Array<Elem>>,
     reducer: (total: U, current: T, index: number, arrayLength: number) => $Promisable<U>,
     initialValue?: $Promisable<U>
   ): Bluebird$Promise<U>;
   static filter<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Array<Elem> | $Promisable<Array<Elem>>,
     filterer: (item: T, index: number, arrayLength: number) => $Promisable<bool>,
     option?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<T>>;
   static each<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Array<Elem> | $Promisable<Array<Elem>>,
     iterator: (item: T, index: number, arrayLength: number) => $Promisable<mixed>,
   ): Bluebird$Promise<Array<T>>;
   static try<T>(fn: () => $Promisable<T>, args: ?Array<any>, ctx: ?any): Bluebird$Promise<T>;
@@ -168,6 +183,11 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
 
   value(): R;
   reason(): any;
+
+  disposer(disposer: (value: R, promise: Promise<*>) => void): Bluebird$Disposable<R>;
+
+  static using<T, A>(disposable: Bluebird$Disposable<T>, handler: (value: T) => $Promisable<A>): Bluebird$Promise<A>;
+
 }
 
 declare class Bluebird$Defer {
@@ -178,4 +198,6 @@ declare class Bluebird$Defer {
 
 declare module 'bluebird' {
   declare var exports: typeof Bluebird$Promise;
+
+  declare type Disposable<T> = Bluebird$Disposable<T>;
 }

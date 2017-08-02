@@ -44,7 +44,7 @@ logger.trace('foo', new Error('foo'));
 // $ExpectError
 const v: number = Bunyan.VERSION;
 
-Bunyan.safeCycles('true', false);
+Bunyan.safeCycles()('true', false);
 
 const consoleRawStream = new Bunyan.ConsoleRawStream()
 
