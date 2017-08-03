@@ -47,7 +47,7 @@ type TestGroup = {
  * directory.
  */
 const basePathRegex = new RegExp(
-  `definitions${path.sep}npm${path.sep}[^${path.sep}]*${path.sep}?`,
+  `definitions${path.sep}npm${path.sep}(\@[^${path.sep}]*${path.sep})?[^${path.sep}]*${path.sep}?`,
 );
 async function getTestGroups(
   repoDirPath,
