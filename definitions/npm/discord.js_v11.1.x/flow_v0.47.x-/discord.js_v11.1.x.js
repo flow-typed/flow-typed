@@ -228,7 +228,7 @@ declare module 'discord.js' {
     sort(compareFunction?: (a: [K, V], b: [K, V]) => number): Collection<K, V>;
   }
 
-  declare class Collector<K, V> {
+  declare export class Collector<K, V> {
     constructor(client: Client, filter: CollectorFilter, options?: CollectorOptions): this;
 
     client: Client;
@@ -241,7 +241,7 @@ declare module 'discord.js' {
 
     listener: Function;
     cleanup(): void;
-    handle(...args: any[]): CollectorHandler<K, V>;
+    handle(...args: any[]): ?CollectorHandler<K, V>;
     postCheck(...args: any[]): string | null;
 
     on(event: 'collect', listener: (element: V, collector: Collector<K, V>) => void): this;
@@ -1270,12 +1270,12 @@ declare module 'discord.js' {
     ws?: WebSocketOptions
   };
 
-  declare type CollectorHandler<K, V>= {
+  declare export type CollectorHandler<K, V>= {
     key: K,
     value: V
   };
 
-  declare type CollectorFilter = (...args: any[]) => boolean;
+  declare export type CollectorFilter = (...args: any[]) => boolean;
 
   declare type CollectorOptions = {
     time?: number
@@ -1543,7 +1543,7 @@ declare module 'discord.js' {
 
   declare type PresenceStatus = 'online' | 'idle' | 'invisible' | 'dnd';
 
-  declare type ReactionCollectorOptions = CollectorOptions & {
+  declare export type ReactionCollectorOptions = CollectorOptions & {
     max?: number,
     maxEmojis?: number,
     maxUsers?: number
@@ -1599,7 +1599,7 @@ declare module 'discord.js' {
 
   declare type RoleResolvable = Role | string;
 
-  declare type Snowflake = string;
+  declare export type Snowflake = string;
 
   declare type SplitOptions = {
     maxLength?: number,
