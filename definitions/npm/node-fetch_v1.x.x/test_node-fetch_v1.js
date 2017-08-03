@@ -42,6 +42,9 @@ nodeFetch('foo').then(res => {
     // $ExpectError value should be a string
     (res.headers.set('foo', 5): void);
     (res.headers.values(): Iterator<*>);
+    (res.headers.raw(): {
+      [string]: string[]
+    })
 
 
     (res.ok: boolean);
