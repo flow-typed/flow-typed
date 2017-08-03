@@ -38,7 +38,7 @@ declare class fetch$Blob {
     size: number;
     type: string;
     isClosed: boolean;
-    constructor(parts: Array<Buffer | ArrayBuffer | fetch$Blob | string>, options?: fetch$BlobOptions): void;
+    constructor(parts: Array<Buffer | ArrayBuffer | fetch$Blob | string>, options?: fetch$BlobOptions): void;
     slice(): fetch$Blob;
     close(): void;
 }
