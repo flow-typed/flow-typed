@@ -7,15 +7,17 @@
 import {
   Collector,
   Message,
-  CollectorFilter,
   Client,
-  CollectorHandler,
   MessageReaction,
   Collection,
   User,
+  version
+} from 'discord.js';
+import type { 
+  CollectorFilter,
+  CollectorHandler,
   ReactionCollectorOptions,
   Snowflake,
-  version
 } from 'discord.js';
 
 const client = new Client({
@@ -66,7 +68,7 @@ class ReactionCollector extends Collector<Snowflake, MessageReaction> {
     this.client.on('messageReactionAdd', this.listener);
   }
 
-  handle(reaction: MessageReaction): CollectorHandler<Snowflake, MessageReaction> {
+  handle(reaction: MessageReaction): ?CollectorHandler<Snowflake, MessageReaction> {
     if (reaction.message.id !== this.message.id) { return null; }
     return {
       key: reaction.emoji.id || reaction.emoji.name,
@@ -74,7 +76,7 @@ class ReactionCollector extends Collector<Snowflake, MessageReaction> {
     };
   }
 
-  postCheck(reaction: MessageReaction, user: User): string {
+  postCheck(reaction: MessageReaction, user: User): string | null {
     this.users.set(user.id, user);
     if (this.options.max && ++this.total >= this.options.max) { return 'limit'; }
     if (this.options.maxEmojis && this.collected.size >= this.options.maxEmojis) { return 'emojiLimit'; }
