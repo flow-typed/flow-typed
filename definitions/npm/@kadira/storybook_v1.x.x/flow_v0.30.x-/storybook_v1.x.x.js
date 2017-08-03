@@ -1,6 +1,7 @@
 declare module '@kadira/storybook' {
   declare interface Story {
     add: (storyName: string, callback: Function) => Story;
+    remove: (story: string) => Story;
   }
 
   declare function storiesOf(name: string, module: any): Story;

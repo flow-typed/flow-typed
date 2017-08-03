@@ -182,6 +182,7 @@ export async function getLibDefs(defsDir: string, validationErrs?: VErrors) {
               const itemStat = await fs.stat(itemPath);
               if (itemStat.isDirectory()) {
                 // itemPath is a lib dir
+                console.log(itemPath);
                 await addLibDefs(itemPath, libDefs, validationErrs);
               } else {
                 const error = `Expected only directories in the 'definitions/npm/@<scope>' directory!`;
