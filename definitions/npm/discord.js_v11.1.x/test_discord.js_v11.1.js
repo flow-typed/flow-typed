@@ -1,90 +1,74 @@
 // @flow
 
-/*
- * Based on <https://github.com/zajrik/discord.js-typings/blob/b500eb2331/discord.js-test.ts>
- */
-
 import {
-  Collector,
-  Message,
+  Channel,
   Client,
-  MessageReaction,
-  Collection,
-  User,
-  version
-} from 'discord.js';
-import type { 
-  CollectorFilter,
-  CollectorHandler,
-  ReactionCollectorOptions,
-  Snowflake,
+  DMChannel,
+  GroupDMChannel,
+  Guild,
+  GuildMember,
+  Message,
+  TextChannel,
+  User
 } from 'discord.js';
 
-const client = new Client({
-  disableEveryone: false,
-  disabledEvents: ['GUILD_MEMBER_ADD']
+const client = new Client();
+
+(client.browser: boolean);
+(client.ping: number);
+(client.pings: Array<number>);
+
+client.on('channelCreate', (channel: Channel) => {
+  (channel.client: Client);
+  (channel.createdAt: Date);
+  (channel.createdTimestamp: number);
+  (channel.id: string);
+  (channel.type: string);
+  (channel.delete(): Promise<Channel>);
 });
 
-client.on('message', (message) => {
-  if (message.content === 'hello') {
-    message.channel.sendMessage('o/');
-  }
-
-  const collector: ReactionCollector = new ReactionCollector(message,
-    (reaction: MessageReaction) => reaction.emoji.toString() === '👌',
-    { time: 30e3 });
-  collector.on('end', collected => console.log(collected));
+client.on('guildCreate', (guild: Guild) => {
+  (guild.available: boolean);
 });
 
-// $ExpectError token must be a string
+client.on('guildMemberAdd', (member: GuildMember) => {
+  (member.bannable: boolean);
+  (member.client: Client);
+  (member.deaf: boolean);
+  (member.displayColor: number);
+  (member.displayHexColor: string);
+  (member.displayName: string);
+  (member.guild: Guild);
+  (member.send(): Promise<Message | Message[]>);
+});
+
+client.on('message', (message: Message) => {
+  (message.author: User);
+  (message.channel: TextChannel | DMChannel | GroupDMChannel);
+  (message.cleanContent: string);
+  (message.client: Client);
+  (message.content: string);
+  (message.createdAt: Date);
+  (message.createdTimestamp: number);
+  (message.deletable: boolean);
+  (message.editable: boolean);
+  (message.edits: Array<Message>);
+  (message.pin(): Promise<Message>);
+  (message.toString(): string);
+  (message.unpin(): Promise<Message>);
+
+  // Ensure that `TextChannel`, `DMChannel`, and `GroupDMChannel` implement
+  // `PartialTextBasedChannel` and `TextBasedChannel`.
+  const { channel } = message;
+  (channel.typing: boolean);
+  (channel.typingCount: number);
+  (channel.send(): Promise<Message | Message[]>);
+  (channel.startTyping(): void);
+  (channel.stopTyping(): void);
+  (channel.toString(): string);
+});
+
+// $ExpectError token should be a string
 client.login(123);
 
-client.login('abc');
-
-export class TestCollector extends Collector<Snowflake, Message> {
-  filter: CollectorFilter;
-  constructor(client: Client, filter: CollectorFilter, ) {
-    super(client, filter);
-  }
-
-  handle(message: Message): CollectorHandler<Snowflake, Message> {
-    return { key: message.id, value: message };
-  }
-
-  cleanup(): void {}
-  postCheck(): null { return null; }
-}
-
-class ReactionCollector extends Collector<Snowflake, MessageReaction> {
-  message: Message;
-  users: Collection<Snowflake, User>;
-  total: number;
-  options: ReactionCollectorOptions;
-  constructor(message: Message, filter: CollectorFilter, options?: ReactionCollectorOptions) {
-    super(message.client, filter, options || {});
-    this.message = message;
-    this.users = new Collection();
-    this.total = 0;
-    this.client.on('messageReactionAdd', this.listener);
-  }
-
-  handle(reaction: MessageReaction): ?CollectorHandler<Snowflake, MessageReaction> {
-    if (reaction.message.id !== this.message.id) { return null; }
-    return {
-      key: reaction.emoji.id || reaction.emoji.name,
-      value: reaction
-    };
-  }
-
-  postCheck(reaction: MessageReaction, user: User): string | null {
-    this.users.set(user.id, user);
-    if (this.options.max && ++this.total >= this.options.max) { return 'limit'; }
-    if (this.options.maxEmojis && this.collected.size >= this.options.maxEmojis) { return 'emojiLimit'; }
-    if (this.options.maxUsers && this.users.size >= this.options.maxUsers) { return 'userLimit'; }
-    return null;
-  }
-
-  cleanup(): void {
-    this.client.removeListener('messageReactionAdd', this.listener);
-  }
-}
+client.login('123');
