@@ -61,12 +61,44 @@ Bluebird.join(1, Bluebird.resolve(2),
 // $ExpectError
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<string>) { });
 
+interface ICustomError extends Error {
+   static(message: string, code: number): ICustomError,
+   constructor(message: string, code: number): void,
+   code: number
+}
+function _MyCustomError(message: string, code: number) {
+  this.message = message;
+  this.name = "MyCustomError";
+  this.code = code
+  Error.captureStackTrace(this, _MyCustomError);
+}
+_MyCustomError.prototype = Object.create(Error.prototype);
+_MyCustomError.prototype.constructor = _MyCustomError;
+const MyCustomError: Class<ICustomError> = _MyCustomError;
+
 function foo(a: number, b: string) {
   throw new Error('oh no');
 }
 let fooPromise = Bluebird.method(foo);
-fooPromise(1, 'b').catch(function(e: Error) {
+fooPromise(1, 'b').catch(function(e) {
   let m: string = e.message;
+});
+fooPromise(1, 'b').catch(Error, function(e: Error) {
+  let m: string = e.message;
+});
+fooPromise(1, 'b').catch(MyCustomError, function(e: MyCustomError) {
+  let m: string = e.message;
+  let c: number = e.code;
+});
+// $ExpectError
+fooPromise(1, 'b').catch(Error, function(e: NetworkError) {
+  let m: string = e.message;
+  let c: number = e.code;
+});
+fooPromise(1, 'b').catch(Error, MyCustomError, function(e) {
+  let m: string = e.message;
+  // $ExpectError
+  let c: number = e.code;
 });
 
 function fooPlain (a: number, b: string) {
