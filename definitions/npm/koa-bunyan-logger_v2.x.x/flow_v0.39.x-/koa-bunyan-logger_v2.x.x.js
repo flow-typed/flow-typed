@@ -156,7 +156,7 @@ declare module 'koa-bunyan-logger' {
     requestIdContext(options?: RequestIdOptions): MiddlewareType;
     requestLogger(options: RequestLogger$Options): MiddlewareType;
     timeContext(options: TimeContext$Options): MiddlewareType;
-    (options?: LoggerFactoryOptions | Logger): Logger;
+    (options?: LoggerFactoryOptions | Logger): MiddlewareType;
     bunyan: {
       stdSerializers: StdSerializers;
       createLogger(options: LoggerFactoryOptions): Logger;
