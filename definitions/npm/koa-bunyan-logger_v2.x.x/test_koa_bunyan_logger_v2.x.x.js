@@ -33,7 +33,6 @@ const child = logger.child({});
 
 logger.trace('Foobar');
 
-// $ExpectError
 logger.log()
 
 koaBunyanLogger({
