@@ -213,6 +213,31 @@ declare module 'leaflet' {
 
     // Base Classes
 
+    declare class Evented {
+        on(type: string, fn: Function, context?: Object): this;
+        on(eventMap: EventMap): this;
+        off(type: string, fn?: Function, context?: Object): this;
+        off(eventMap: EventMap): this;
+        off(): this;
+        fire(type: string, data?: Object, propagate?: boolean): this;
+        listens(type: string): boolean;
+        once(type: string, fn: Function, context?: Object): this;
+        once(eventMap: EventMap): this;
+        addEventParent(obj: Evented): this;
+        removeEventParent(obj: Evented): this;
+        // aliases
+        addEventListener(type: string, fn: Function, context?: Object): this;
+        addEventListener(eventMap: EventMap): this;
+        removeEventListener(type: string, fn?: Function, context?: Object): this;
+        removeEventListener(eventMap: EventMap): this;
+        removeEventListener(): this;
+        clearAllEventListeners(): this;
+        addOneTimeEventListener(type: string, fn: Function, context?: Object): this;
+        addOneTimeEventListener(eventMap: EventMap): this;
+        fireEvent(type: string, data?: Object, propagate?: boolean): this;
+        hasEventListeners(type: string): boolean;
+    }
+
     declare class Control {
         static Layers: typeof Layers;
         static Zoom: Object;
@@ -334,6 +359,10 @@ declare module 'leaflet' {
         bgPos?: Point;
     }
 
+    declare type EventMap = {
+        [type: string]: Function
+    };
+
     declare type ControlOptions = {
         position?: string
     }
@@ -347,14 +376,15 @@ declare module 'leaflet' {
     }
 
     declare export default {
-        Map: typeof Map,
-        Marker: typeof Marker,
-        TileLayer: typeof TileLayer,
-        LayerGroup: typeof LayerGroup,
-        LatLng: typeof LatLng,
+        Map         : typeof Map,
+        Marker      : typeof Marker,
+        TileLayer   : typeof TileLayer,
+        LayerGroup  : typeof LayerGroup,
+        LatLng      : typeof LatLng,
         LatLngBounds: typeof LatLngBounds,
-        Point: typeof Point,
-        DivIcon: typeof DivIcon,
-        Control: typeof Control
+        Point       : typeof Point,
+        DivIcon     : typeof DivIcon,
+        Evented     : typeof Evented,
+        Control     : typeof Control
     };
 }
