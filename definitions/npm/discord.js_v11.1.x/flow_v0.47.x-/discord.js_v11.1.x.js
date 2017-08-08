@@ -228,7 +228,7 @@ declare module 'discord.js' {
     sort(compareFunction?: (a: [K, V], b: [K, V]) => number): Collection<K, V>;
   }
 
-  declare export class Collector<K, V> {
+  declare class Collector<K, V> {
     constructor(client: Client, filter: CollectorFilter, options?: CollectorOptions): this;
 
     client: Client;
@@ -241,14 +241,14 @@ declare module 'discord.js' {
 
     listener: Function;
     cleanup(): void;
-    handle(...args: any[]): ?CollectorHandler<K, V>;
+    handle(...args: any[]): CollectorHandler<K, V>;
     postCheck(...args: any[]): string | null;
 
     on(event: 'collect', listener: (element: V, collector: Collector<K, V>) => void): this;
     on(event: 'end', listener: (collected: Collection<K, V>, reason: string) => void): string
   }
 
-  declare export class DMChannel {
+  declare export class DMChannel extends Channel mixins PartialTextBasedChannelFields, TextBasedChannelFields {
     constructor(client: Client, data: object): this;
     lastMessageID: Snowflake;
     messages: Collection<Snowflake, Message>;
@@ -282,7 +282,7 @@ declare module 'discord.js' {
     equals(game: Game): boolean
   }
 
-  declare export class GroupDMChannel {
+  declare export class GroupDMChannel extends Channel mixins PartialTextBasedChannelFields, TextBasedChannelFields {
     constructor(client: Client, data: object): this;
     applicationID: string;
     icon: string;
@@ -389,7 +389,7 @@ declare module 'discord.js' {
     toString(): string
   }
 
-  declare export class GuildMember {
+  declare export class GuildMember mixins PartialTextBasedFields {
     constructor(guild: Guild, data: object): this;
     bannable: boolean;
     client: Client;
@@ -912,7 +912,7 @@ declare module 'discord.js' {
     resume(): void
   }
 
-  declare export class TextChannel extends TextBasedChannelFields {
+  declare export class TextChannel extends GuildChannel mixins PartialTextBasedChannelFields, TextBasedChannelFields {
     constructor(guild: Guild, data: object): this;
     lastMessageID: string;
     members: Collection<Snowflake, GuildMember>;
@@ -1178,10 +1178,6 @@ declare module 'discord.js' {
     setTimeout(fn: Function, delay: number, ...args: any[]): timers$Timeout;
   }
 
-  declare type Constructable<T> = (...args: any[]) => T;
-  declare var PartialTextBasedChannel: <T>(Base?: Constructable<T>) => Constructable<T & PartialTextBasedChannelFields>;
-  declare var TextBasedChannel: <T>(Base?: Constructable<T>) => Constructable<T & TextBasedChannelFields>;
-
   declare class PartialTextBasedChannelFields {
     lastMessage?: Message,
     acknowledge(): Promise<DMChannel | GroupDMChannel | TextChannel>,
@@ -1195,7 +1191,7 @@ declare module 'discord.js' {
     sendMessage(options?: MessageOptions): Promise<Message | Message[] >
   }
 
-  declare class TextBasedChannelFields mixins PartialTextBasedChannelFields {
+  declare class TextBasedChannelFields {
     typing: boolean,
     typingCount: number,
     awaitMessages(filter: CollectorFilter, options?: AwaitMessagesOptions): Promise<Collection<string, Message>>,
@@ -1270,12 +1266,12 @@ declare module 'discord.js' {
     ws?: WebSocketOptions
   };
 
-  declare export type CollectorHandler<K, V>= {
+  declare type CollectorHandler<K, V>= {
     key: K,
     value: V
   };
 
-  declare export type CollectorFilter = (...args: any[]) => boolean;
+  declare type CollectorFilter = (...args: any[]) => boolean;
 
   declare type CollectorOptions = {
     time?: number
@@ -1543,7 +1539,7 @@ declare module 'discord.js' {
 
   declare type PresenceStatus = 'online' | 'idle' | 'invisible' | 'dnd';
 
-  declare export type ReactionCollectorOptions = CollectorOptions & {
+  declare type ReactionCollectorOptions = CollectorOptions & {
     max?: number,
     maxEmojis?: number,
     maxUsers?: number
@@ -1599,7 +1595,7 @@ declare module 'discord.js' {
 
   declare type RoleResolvable = Role | string;
 
-  declare export type Snowflake = string;
+  declare type Snowflake = string;
 
   declare type SplitOptions = {
     maxLength?: number,
