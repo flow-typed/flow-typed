@@ -1,10 +1,13 @@
-import nodeFetch from 'node-fetch';
+// @flow
+
+import nodeFetch, { type Headers, type Response } from 'node-fetch';
+import type { Readable } from 'stream';
 
 (nodeFetch('foo'): Promise<Response>);
 (nodeFetch('foo', {}): Promise<Response>);
 
 // $ExpectError url has to be string
-(nodeFetch(123): Promise<any>);
+(nodeFetch(123): Promise<Response>);
 
 nodeFetch('foo', {
     method: 'GET'
@@ -14,8 +17,8 @@ nodeFetch('foo', {
     body: 'bar'
 });
 
-// $ExpectError number is not a valid body type
 nodeFetch('foo', {
+    // $ExpectError number is not a valid body type
     body: 5
 });
 
@@ -31,16 +34,20 @@ nodeFetch('foo').then(res => {
     (res.headers.delete('foo'): void);
     // $ExpectError
     (res.headers.delete(5): void);
+    // $ExpectError `entries` not found in Headers
     (res.headers.entries(): Iterator<*>);
     (res.headers.get('test'): string);
     // $ExpectError
     (res.headers.get(5): string);
+    (res.headers.getAll('test'): Array<string>);
     (res.headers.has('foo'): boolean);
     // $ExpectError
     (res.headers.has(5): boolean);
+    // $ExpectError `keys` not found in Headers
     (res.headers.keys(): Iterator<string>);
     // $ExpectError value should be a string
     (res.headers.set('foo', 5): void);
+    // $ExpectError `values` not found in Headers
     (res.headers.values(): Iterator<*>);
 
 
@@ -55,4 +62,11 @@ nodeFetch('foo').then(res => {
     res.type = 'foo';
 
     (res.url: string);
+    (res.size: number);
+    (res.timeout: number);
+
+    (res.bodyUsed: boolean);
+    (res.body: Readable);
+    (res.text(): Promise<string>);
+    (res.buffer(): Promise<Buffer>);
 });
