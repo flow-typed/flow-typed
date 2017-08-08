@@ -58,15 +58,15 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
     input: Object | Map<*,*> | $Promisable<Object | Map<*,*>>
   ): Bluebird$Promise<*>;
   static any<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
   ): Bluebird$Promise<T>;
   static race<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
   ): Bluebird$Promise<T>;
   static reject<T>(error?: any): Bluebird$Promise<T>;
   static resolve<T>(object?: $Promisable<T>): Bluebird$Promise<T>;
   static some<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     count: number
   ): Bluebird$Promise<Array<T>>;
   static join<T, A>(
@@ -85,26 +85,26 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
     handler: (a: A, b: B, c: C) => $Promisable<T>
   ): Bluebird$Promise<T>;
   static map<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>,
     options?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<U>>;
   static mapSeries<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>
   ): Bluebird$Promise<Array<U>>;
   static reduce<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     reducer: (total: U, current: T, index: number, arrayLength: number) => $Promisable<U>,
     initialValue?: $Promisable<U>
   ): Bluebird$Promise<U>;
   static filter<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     filterer: (item: T, index: number, arrayLength: number) => $Promisable<bool>,
     option?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<T>>;
   static each<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     iterator: (item: T, index: number, arrayLength: number) => $Promisable<mixed>,
   ): Bluebird$Promise<Array<T>>;
   static try<T>(fn: () => $Promisable<T>, args: ?Array<any>, ctx: ?any): Bluebird$Promise<T>;
