@@ -115,6 +115,7 @@ declare class moment$Moment {
   static utc(moment: moment$Moment): moment$Moment;
   static utc(date: Date): moment$Moment;
   static parseZone(rawDate: string): moment$Moment;
+  parseZone(): moment$Moment;
   isValid(): bool;
   invalidAt(): 0|1|2|3|4|5|6;
   creationData(): moment$MomentCreationData;
