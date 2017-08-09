@@ -15,9 +15,9 @@ import type {
   StyledComponent,
 } from 'styled-components'
 
-type FunctionalReactComponent<P: {}> = P => React$Element<*>
-type ReactComponentClass<P> = Class<React$Component<*, P, *>>
-type ReactComponentConstructor<P> = & FunctionalReactComponent<P> & ReactComponentClass<P>
+type FunctionalReactComponent<Props: {}> = Props => React$Element<*>
+type ReactComponentClass<Props, DefaultProps = *> = Class<React$Component<DefaultProps, Props, *>>
+type ReactComponentConstructor<Props> = & FunctionalReactComponent<Props> & ReactComponentClass<Props>
 
 const Title: ReactComponentConstructor<{}> = styled.h1`
   font-size: 1.5em;
@@ -125,30 +125,36 @@ const css2 = sheet.getStyleTags()
 const css3 = sheet.getStyleElement()
 
 // ---- COMPONENT CLASS TESTS ----
-class NeedsFooReactClass extends React.Component {
+class NeedsThemeReactClass extends React.Component {
+  props: { foo: string, theme: Theme }
+  render() { return <div />; }
+}
+
+class ReactClass extends React.Component {
   props: { foo: string }
   render() { return <div />; }
 }
 
-const NeedsFooStyledClass: ReactComponentClass<{ foo: string }> = styled(NeedsFooReactClass)`
+const StyledClass: ReactComponentClass<{ foo: string, theme: Theme }> = styled(NeedsThemeReactClass)`
   color: red;
 `;
 
-const NeedsFooWithTheme1Class: ReactComponentClass<{ foo: string, theme: Theme }> = withTheme(NeedsFooReactClass);
-const NeedsFooWithTheme2Class: ReactComponentClass<{ foo: string, theme: Theme }> = withTheme(NeedsFooWithTheme1Class);
+const NeedsFoo1Class: ReactComponentClass<{ foo: string }> = withTheme(NeedsThemeReactClass);
 
 // $ExpectError
-const NeedsFooWithTheme1ErrorClass: ReactComponentClass<{ foo: number }> = withTheme(NeedsFooReactClass);
+const NeedsFoo0ClassError: ReactComponentClass<{ foo: string }> = withTheme(ReactClass);
 // $ExpectError
-const NeedsFooWithTheme2ErrorClass: ReactComponentClass<{ foo: string, theme: string }> = withTheme(NeedsFooReactClass);
+const NeedsFoo1ClassError: ReactComponentClass<{ foo: string }> = withTheme(NeedsFoo1Class);
 // $ExpectError
-const NeedsFooWithTheme3ErrorClass: ReactComponentClass<{ foo: string }> = withTheme(NeedsFooReactClass);
+const NeedsFoo1ErrorClass: ReactComponentClass<{ foo: number }> = withTheme(NeedsThemeReactClass);
 // $ExpectError
-const NeedsFooWithTheme4ErrorClass: ReactComponentClass<{ foo: number, theme: Theme }> = withTheme(NeedsFooWithTheme1Class);
+const NeedsFoo2ErrorClass: ReactComponentClass<{ foo: string }, { theme: string }> = withTheme(NeedsThemeReactClass);
 // $ExpectError
-const NeedsFooWithTheme5ErrorClass: ReactComponentClass<{ foo: number }> = withTheme(NeedsFooWithTheme1Class);
+const NeedsFoo3ErrorClass: ReactComponentClass<{ foo: string, theme: Theme }> = withTheme(NeedsFoo1Class);
 // $ExpectError
-const NeedsFooWithTheme6ErrorClass: ReactComponentClass<{ foo: string, theme: string }> = withTheme(NeedsFooWithTheme1Class);
+const NeedsFoo4ErrorClass: ReactComponentClass<{ foo: number }> = withTheme(NeedsFoo1Class);
+// $ExpectError
+const NeedsFoo5ErrorClass: ReactComponentClass<{ foo: string, theme: string }> = withTheme(NeedsFoo1Class);
 
 // ---- INTERPOLATION TESTS ----
 const interpolation: Array<Interpolation> = styled.css`
@@ -172,9 +178,9 @@ const defaultComponentError: {} => string = styled.div`
 `;
 
 // ---- FUNCTIONAL COMPONENT TESTS ----
-const FunctionalComponent: ({ foo: string } => React$Element<*>) = props => <div />
+const FunctionalComponent: FunctionalReactComponent<{ foo: string, theme: Theme }> = props => <div />
 
-const NeedsFoo1: FunctionalReactComponent<{ foo: string }> = styled(FunctionalComponent)`
+const NeedsFoo1: FunctionalReactComponent<{ foo: string, theme: Theme }> = styled(FunctionalComponent)`
   background-color: red;
 `;
 // $ExpectError
@@ -182,7 +188,7 @@ const NeedsFoo1Error: FunctionalReactComponent<{ foo: number }> = styled(Functio
   background-color: red;
 `;
 
-const NeedsFoo2: FunctionalReactComponent<{ foo: string }> = styled(NeedsFoo1)`
+const NeedsFoo2: FunctionalReactComponent<{ foo: string, theme: Theme }> = styled(NeedsFoo1)`
   background-color: red;
 `;
 // $ExpectError
@@ -191,18 +197,18 @@ const NeedsFoo2Error: FunctionalReactComponent<{ foo: number }> = styled(NeedsFo
 `;
 
 // ---- FUNCTIONAL COMPONENT TESTS (withTheme)----
-const NeedsFooWithTheme1Functional: FunctionalReactComponent<{ foo: string, theme: Theme }> = withTheme(FunctionalComponent);
-const NeedsFooWithTheme2Functional: FunctionalReactComponent<{ foo: string, theme: Theme }> = withTheme(NeedsFooWithTheme1Functional);
+const NeedsFoo1Functional: FunctionalReactComponent<{ foo: string }> = withTheme(FunctionalComponent);
+const NeedsFoo2Functional: FunctionalReactComponent<{ foo: string }> = withTheme(NeedsFoo1Functional);
 
 // $ExpectError
-const NeedsFooWithTheme1ErrorFunctional: FunctionalReactComponent<{ foo: number }> = withTheme(FunctionalComponent);
+const NeedsFoo1ErrorFunctional: FunctionalReactComponent<{ foo: number }> = withTheme(FunctionalComponent);
 // $ExpectError
-const NeedsFooWithTheme2ErrorFunctional: FunctionalReactComponent<{ foo: string, theme: string }> = withTheme(FunctionalComponent);
+const NeedsFoo2ErrorFunctional: FunctionalReactComponent<{ foo: string }, { theme: string }> = withTheme(FunctionalComponent);
 // $ExpectError
-const NeedsFooWithTheme3ErrorFunctional: FunctionalReactComponent<{ foo: string }> = withTheme(FunctionalComponent);
+const NeedsFoo3ErrorFunctional: FunctionalReactComponent<{ foo: number, theme: Theme }> = withTheme(FunctionalComponent);
 // $ExpectError
-const NeedsFooWithTheme4ErrorFunctional: FunctionalReactComponent<{ foo: number, theme: Theme }> = withTheme(NeedsFooWithTheme1Functional);
+const NeedsFoo4ErrorFunctional: FunctionalReactComponent<{ foo: number }> = withTheme(NeedsFoo1Functional);
 // $ExpectError
-const NeedsFooWithTheme5ErrorFunctional: FunctionalReactComponent<{ foo: number }> = withTheme(NeedsFooWithTheme1Functional);
+const NeedsFoo5ErrorFunctional: FunctionalReactComponent<{ foo: string }, { theme: string }> = withTheme(NeedsFoo1Functional);
 // $ExpectError
-const NeedsFooWithTheme6ErrorFunctional: FunctionalReactComponent<{ foo: string, theme: string }> = withTheme(NeedsFooWithTheme1Functional);
+const NeedsFoo6ErrorFunctional: FunctionalReactComponent<{ foo: number }, { theme: Theme }> = withTheme(NeedsFoo1Functional);
