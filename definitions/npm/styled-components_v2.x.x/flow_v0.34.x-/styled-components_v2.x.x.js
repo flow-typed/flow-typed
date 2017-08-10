@@ -3,7 +3,7 @@
 type $npm$styledComponents$Interpolation = ((executionContext: Object) => string) | string | number;
 type $npm$styledComponents$NameGenerator = (hash: number) => string;
 
-type $npm$styledComponents$TaggedTemplateLiteral<R> = (Array<string>, $npm$styledComponents$Interpolation) => R;
+type $npm$styledComponents$TaggedTemplateLiteral<R> = {| (Array<string>, $npm$styledComponents$Interpolation): R |};
 
 type $npm$styledComponents$ReactComponentFunctional<Props: {}> = Props => React$Element<*>
 type $npm$styledComponents$ReactComponentClass<Props, DefaultProps = *> = Class<React$Component<DefaultProps, Props, *>>
@@ -16,10 +16,10 @@ type $npm$styledComponents$ReactComponentIntersection<Props> =
   & $npm$styledComponents$ReactComponentFunctional<Props>
   & $npm$styledComponents$ReactComponentClass<Props>;
 
-type $npm$styledComponents$ReactComponentStyledStaticProps<Props> = {
+type $npm$styledComponents$ReactComponentStyledStaticProps<Props> = {|
   attrs: <O: {}>(O) => $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props>,
   extend: $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props>,
-}
+|}
 
 type $npm$styledComponents$ReactComponentStyled<Props> =
   & $npm$styledComponents$ReactComponentStyledStaticProps<Props>
@@ -99,7 +99,7 @@ declare module 'styled-components' {
       StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager,
       ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
 
-      <Props, Component: ReactComponentUnion<Props>>(Component): ReactComponentStyledTaggedTemplateLiteral<Props>,
+      <Props>(ReactComponentUnion<Props>): ReactComponentStyledTaggedTemplateLiteral<Props>,
 
       a:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
       abbr:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
@@ -259,7 +259,7 @@ declare module 'styled-components/native' {
       withTheme: $npm$styledComponents$WithTheme,
       ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
 
-      <Props, Component: ReactComponentUnion<Props>>(Component): ReactComponentStyledTaggedTemplateLiteral<Props>,
+      <Props>(ReactComponentUnion<Props>): ReactComponentStyledTaggedTemplateLiteral<Props>,
 
       ActivityIndicator:            ReactComponentStyledTaggedTemplateLiteral<{}>,
       ActivityIndicatorIOS:         ReactComponentStyledTaggedTemplateLiteral<{}>,

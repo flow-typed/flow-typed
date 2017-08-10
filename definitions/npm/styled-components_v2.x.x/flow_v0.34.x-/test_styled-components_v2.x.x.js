@@ -66,6 +66,19 @@ const Attrs1: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section.attr
   testProp: 'foo'
 });
 
+// $ExpectError
+const Attrs1Error: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section.attrs({
+  testProp: 'foo'
+})``;
+
+declare var needsString: string => void
+
+needsReactComponentFunctional(styled.section.attrs({})``)
+needsReactComponentClass(styled.section.attrs({})``)
+
+// $ExpectError
+needsString(styled.section.attrs({})``)
+
 const Attrs2: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section
   .attrs({
     testProp1: 'foo'

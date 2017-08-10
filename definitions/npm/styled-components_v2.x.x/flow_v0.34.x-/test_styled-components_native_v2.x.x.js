@@ -63,6 +63,19 @@ const NativeAttrs1: NativeReactComponentStyledTaggedTemplateLiteral<*> = nativeS
   testProp: 'foo'
 });
 
+// $ExpectError
+const NativeAttrs1Error: NativeReactComponentStyledTaggedTemplateLiteral<*> = nativeStyled.View.attrs({
+  testProp: 'foo'
+})``;
+
+declare var needsString: string => void
+
+nativeNeedsReactComponentFunctional(nativeStyled.View.attrs({})``)
+nativeNeedsReactComponentClass(nativeStyled.View.attrs({})``)
+
+// $ExpectError
+needsString(nativeStyled.View.attrs({})``)
+
 const NativeAttrs2: NativeReactComponentStyledTaggedTemplateLiteral<*> = nativeStyled.View
   .attrs({
     testProp1: 'foo'
