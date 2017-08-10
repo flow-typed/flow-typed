@@ -3,37 +3,63 @@
 type $npm$styledComponents$Interpolation = ((executionContext: Object) => string) | string | number;
 type $npm$styledComponents$NameGenerator = (hash: number) => string;
 
-type $npm$styledComponents$ReactComponentClass<Props: {}, DefaultProps = *> = Class<React$Component<DefaultProps, Props, *>>
-type $npm$styledComponents$FunctionalReactComponent<Props: {}> = Props => React$Element<*>
+type $npm$styledComponents$TaggedTemplateLiteral<R> = {| (Array<string>, $npm$styledComponents$Interpolation): R |};
+
+type $npm$styledComponents$ReactComponentFunctional<Props: {}> = Props => React$Element<*>
+type $npm$styledComponents$ReactComponentClass<Props, DefaultProps = *> = Class<React$Component<DefaultProps, Props, *>>
 
 type $npm$styledComponents$ReactComponentUnion<Props> =
-  | $npm$styledComponents$ReactComponentClass<Props>
-  | $npm$styledComponents$FunctionalReactComponent<Props>;
+  | $npm$styledComponents$ReactComponentFunctional<Props>
+  | $npm$styledComponents$ReactComponentClass<Props>;
 
-type $npm$styledComponents$ReactComponentIntersection<Props> =
-  & $npm$styledComponents$ReactComponentClass<Props>
-  & $npm$styledComponents$FunctionalReactComponent<Props>
+type $npm$styledComponents$ReactComponentIntersection<Props, DefaultProps = *> =
+  & $npm$styledComponents$ReactComponentFunctional<Props>
+  & $npm$styledComponents$ReactComponentClass<Props, DefaultProps>;
+
+type $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent = <
+  Props, DefaultProps,
+  Input:
+    | string
+    | $npm$styledComponents$ReactComponentStyled<Props, DefaultProps>
+    | $npm$styledComponents$ReactComponentClass<Props, DefaultProps>
+    | $npm$styledComponents$ReactComponentFunctional<Props>,
+>(Input) => $npm$styledComponents$ReactComponentStyled<Props, DefaultProps>
+
+type $npm$styledComponents$ReactComponentStyledStaticProps<Props> = {|
+  attrs: <O: {}>(O) => $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props>,
+  extend: $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props>,
+  withComponent: $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent,
+|}
+
+type $npm$styledComponents$ReactComponentStyled<Props, DefaultProps = *> =
+  & $npm$styledComponents$ReactComponentStyledStaticProps<Props>
+  & $npm$styledComponents$ReactComponentIntersection<Props, DefaultProps>
+
+type $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props> =
+  & $npm$styledComponents$ReactComponentStyledStaticProps<Props>
+  & $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$ReactComponentStyled<Props>>
 
 type $npm$styledComponents$WithThemeReactComponentClass = <
   InputProps: { theme: $npm$styledComponents$Theme },
-  InputDefaultProps,
+  InputDefaultProps: {},
   OutputProps: $Diff<InputProps, { theme: $npm$styledComponents$Theme }>,
   OutputDefaultProps: InputDefaultProps & { theme: $npm$styledComponents$Theme },
 >($npm$styledComponents$ReactComponentClass<InputProps, InputDefaultProps>) => $npm$styledComponents$ReactComponentClass<OutputProps, OutputDefaultProps>
 
-type $npm$styledComponents$WithThemeFunctionalReactComponent = <
+type $npm$styledComponents$WithThemeReactComponentClassUndefinedDefaultProps = <
+  InputProps: { theme: $npm$styledComponents$Theme },
+  OutputProps: $Diff<InputProps, { theme: $npm$styledComponents$Theme }>,
+>($npm$styledComponents$ReactComponentClass<InputProps, void>) => $npm$styledComponents$ReactComponentClass<OutputProps, { theme: $npm$styledComponents$Theme }>
+
+type $npm$styledComponents$WithThemeReactComponentFunctional = <
   InputProps: { theme: $npm$styledComponents$Theme },
   OutputProps: $Diff<InputProps, { theme: $npm$styledComponents$Theme }>
->($npm$styledComponents$FunctionalReactComponent<InputProps>) => $npm$styledComponents$FunctionalReactComponent<OutputProps>
+>($npm$styledComponents$ReactComponentFunctional<InputProps>) => $npm$styledComponents$ReactComponentFunctional<OutputProps>
 
 type $npm$styledComponents$WithTheme =
   & $npm$styledComponents$WithThemeReactComponentClass
-  & $npm$styledComponents$WithThemeFunctionalReactComponent
-
-type $npm$styledComponents$TaggedTemplateLiteral<R> = {
-  (Array<string>, $npm$styledComponents$Interpolation): R,
-  attrs: <O: {}>(O) => $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$ReactComponentIntersection<*>>
-};
+  & $npm$styledComponents$WithThemeReactComponentClassUndefinedDefaultProps
+  & $npm$styledComponents$WithThemeReactComponentFunctional
 
 type $npm$styledComponents$Theme = {[key: string]: mixed};
 type $npm$styledComponents$ThemeProviderProps = {
@@ -60,225 +86,237 @@ class Npm$StyledComponents$ServerStyleSheet {
 }
 
 declare module 'styled-components' {
-  declare type Interpolation = $npm$styledComponents$Interpolation;
-  declare type NameGenerator = $npm$styledComponents$NameGenerator;
-  declare type TaggedTemplateLiteral<R> = $npm$styledComponents$TaggedTemplateLiteral<R>;
-  declare type StyledComponent<Component: $npm$styledComponents$ReactComponentUnion<*>> = TaggedTemplateLiteral<Component>;
-  declare type BaseStyledComponent = StyledComponent<$npm$styledComponents$ReactComponentIntersection<*>>;
-  declare type Theme = $npm$styledComponents$Theme;
-  declare type ThemeProviderProps = $npm$styledComponents$ThemeProviderProps;
+  declare type Interpolation                                    = $npm$styledComponents$Interpolation;
+  declare type NameGenerator                                    = $npm$styledComponents$NameGenerator;
+  declare type Theme                                            = $npm$styledComponents$Theme;
+  declare type ThemeProviderProps                               = $npm$styledComponents$ThemeProviderProps;
+  declare type TaggedTemplateLiteral<R>                         = $npm$styledComponents$TaggedTemplateLiteral<R>;
+
+  declare type ReactComponentFunctional<Props: {}>              = $npm$styledComponents$ReactComponentFunctional<Props>;
+  declare type ReactComponentClass<Props, DefaultProps = *>     = $npm$styledComponents$ReactComponentClass<Props, DefaultProps>;
+  declare type ReactComponentUnion<Props>                       = $npm$styledComponents$ReactComponentUnion<Props>;
+  declare type ReactComponentIntersection<Props>                = $npm$styledComponents$ReactComponentIntersection<Props>;
+  declare type ReactComponentStyledStaticProps<Props>           = $npm$styledComponents$ReactComponentStyledStaticProps<Props>;
+  declare type ReactComponentStyled<Props>                      = $npm$styledComponents$ReactComponentStyled<Props>;
+  declare type ReactComponentStyledTaggedTemplateLiteral<Props> = $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props>;
 
   declare module.exports: {
-      injectGlobal: TaggedTemplateLiteral<void>,
-      css: TaggedTemplateLiteral<Array<Interpolation>>,
-      keyframes: TaggedTemplateLiteral<string>,
-      withTheme: $npm$styledComponents$WithTheme,
-      ServerStyleSheet: typeof Npm$StyledComponents$ServerStyleSheet,
-      StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager,
-      ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
+    <Props>(ReactComponentUnion<Props>): ReactComponentStyledTaggedTemplateLiteral<Props>,
 
-      <P, C: $npm$styledComponents$ReactComponentUnion<P>>(C): TaggedTemplateLiteral<C>,
+    injectGlobal: TaggedTemplateLiteral<void>,
+    css: TaggedTemplateLiteral<Array<Interpolation>>,
+    keyframes: TaggedTemplateLiteral<string>,
+    withTheme: $npm$styledComponents$WithTheme,
+    ServerStyleSheet: typeof Npm$StyledComponents$ServerStyleSheet,
+    StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager,
+    ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
 
-      a:                        BaseStyledComponent,
-      abbr:                     BaseStyledComponent,
-      address:                  BaseStyledComponent,
-      area:                     BaseStyledComponent,
-      article:                  BaseStyledComponent,
-      aside:                    BaseStyledComponent,
-      audio:                    BaseStyledComponent,
-      b:                        BaseStyledComponent,
-      base:                     BaseStyledComponent,
-      bdi:                      BaseStyledComponent,
-      bdo:                      BaseStyledComponent,
-      big:                      BaseStyledComponent,
-      blockquote:               BaseStyledComponent,
-      body:                     BaseStyledComponent,
-      br:                       BaseStyledComponent,
-      button:                   BaseStyledComponent,
-      canvas:                   BaseStyledComponent,
-      caption:                  BaseStyledComponent,
-      cite:                     BaseStyledComponent,
-      code:                     BaseStyledComponent,
-      col:                      BaseStyledComponent,
-      colgroup:                 BaseStyledComponent,
-      data:                     BaseStyledComponent,
-      datalist:                 BaseStyledComponent,
-      dd:                       BaseStyledComponent,
-      del:                      BaseStyledComponent,
-      details:                  BaseStyledComponent,
-      dfn:                      BaseStyledComponent,
-      dialog:                   BaseStyledComponent,
-      div:                      BaseStyledComponent,
-      dl:                       BaseStyledComponent,
-      dt:                       BaseStyledComponent,
-      em:                       BaseStyledComponent,
-      embed:                    BaseStyledComponent,
-      fieldset:                 BaseStyledComponent,
-      figcaption:               BaseStyledComponent,
-      figure:                   BaseStyledComponent,
-      footer:                   BaseStyledComponent,
-      form:                     BaseStyledComponent,
-      h1:                       BaseStyledComponent,
-      h2:                       BaseStyledComponent,
-      h3:                       BaseStyledComponent,
-      h4:                       BaseStyledComponent,
-      h5:                       BaseStyledComponent,
-      h6:                       BaseStyledComponent,
-      head:                     BaseStyledComponent,
-      header:                   BaseStyledComponent,
-      hgroup:                   BaseStyledComponent,
-      hr:                       BaseStyledComponent,
-      html:                     BaseStyledComponent,
-      i:                        BaseStyledComponent,
-      iframe:                   BaseStyledComponent,
-      img:                      BaseStyledComponent,
-      input:                    BaseStyledComponent,
-      ins:                      BaseStyledComponent,
-      kbd:                      BaseStyledComponent,
-      keygen:                   BaseStyledComponent,
-      label:                    BaseStyledComponent,
-      legend:                   BaseStyledComponent,
-      li:                       BaseStyledComponent,
-      link:                     BaseStyledComponent,
-      main:                     BaseStyledComponent,
-      map:                      BaseStyledComponent,
-      mark:                     BaseStyledComponent,
-      menu:                     BaseStyledComponent,
-      menuitem:                 BaseStyledComponent,
-      meta:                     BaseStyledComponent,
-      meter:                    BaseStyledComponent,
-      nav:                      BaseStyledComponent,
-      noscript:                 BaseStyledComponent,
-      object:                   BaseStyledComponent,
-      ol:                       BaseStyledComponent,
-      optgroup:                 BaseStyledComponent,
-      option:                   BaseStyledComponent,
-      output:                   BaseStyledComponent,
-      p:                        BaseStyledComponent,
-      param:                    BaseStyledComponent,
-      picture:                  BaseStyledComponent,
-      pre:                      BaseStyledComponent,
-      progress:                 BaseStyledComponent,
-      q:                        BaseStyledComponent,
-      rp:                       BaseStyledComponent,
-      rt:                       BaseStyledComponent,
-      ruby:                     BaseStyledComponent,
-      s:                        BaseStyledComponent,
-      samp:                     BaseStyledComponent,
-      script:                   BaseStyledComponent,
-      section:                  BaseStyledComponent,
-      select:                   BaseStyledComponent,
-      small:                    BaseStyledComponent,
-      source:                   BaseStyledComponent,
-      span:                     BaseStyledComponent,
-      strong:                   BaseStyledComponent,
-      style:                    BaseStyledComponent,
-      sub:                      BaseStyledComponent,
-      summary:                  BaseStyledComponent,
-      sup:                      BaseStyledComponent,
-      table:                    BaseStyledComponent,
-      tbody:                    BaseStyledComponent,
-      td:                       BaseStyledComponent,
-      textarea:                 BaseStyledComponent,
-      tfoot:                    BaseStyledComponent,
-      th:                       BaseStyledComponent,
-      thead:                    BaseStyledComponent,
-      time:                     BaseStyledComponent,
-      title:                    BaseStyledComponent,
-      tr:                       BaseStyledComponent,
-      track:                    BaseStyledComponent,
-      u:                        BaseStyledComponent,
-      ul:                       BaseStyledComponent,
-      var:                      BaseStyledComponent,
-      video:                    BaseStyledComponent,
-      wbr:                      BaseStyledComponent,
+    a:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    abbr:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    address:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    area:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    article:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    aside:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    audio:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    b:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    base:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    bdi:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    bdo:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    big:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    blockquote:               ReactComponentStyledTaggedTemplateLiteral<{}>,
+    body:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    br:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    button:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    canvas:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    caption:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    cite:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    code:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    col:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    colgroup:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    data:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    datalist:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    dd:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    del:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    details:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    dfn:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    dialog:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    div:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    dl:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    dt:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    em:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    embed:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    fieldset:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    figcaption:               ReactComponentStyledTaggedTemplateLiteral<{}>,
+    figure:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    footer:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    form:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    h1:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    h2:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    h3:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    h4:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    h5:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    h6:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    head:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    header:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    hgroup:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    hr:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    html:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    i:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    iframe:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    img:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    input:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ins:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    kbd:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    keygen:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    label:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    legend:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    li:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    link:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    main:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    map:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    mark:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    menu:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    menuitem:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    meta:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    meter:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    nav:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    noscript:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    object:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ol:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    optgroup:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    option:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    output:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    p:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    param:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    picture:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    pre:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    progress:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    q:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    rp:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    rt:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ruby:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    s:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    samp:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    script:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    section:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    select:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    small:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    source:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    span:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    strong:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    style:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    sub:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    summary:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    sup:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    table:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    tbody:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    td:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    textarea:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    tfoot:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    th:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    thead:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    time:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    title:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    tr:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    track:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    u:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ul:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    var:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    video:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    wbr:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
 
-      // SVG
-      circle:                   BaseStyledComponent,
-      clipPath:                 BaseStyledComponent,
-      defs:                     BaseStyledComponent,
-      ellipse:                  BaseStyledComponent,
-      g:                        BaseStyledComponent,
-      image:                    BaseStyledComponent,
-      line:                     BaseStyledComponent,
-      linearGradient:           BaseStyledComponent,
-      mask:                     BaseStyledComponent,
-      path:                     BaseStyledComponent,
-      pattern:                  BaseStyledComponent,
-      polygon:                  BaseStyledComponent,
-      polyline:                 BaseStyledComponent,
-      radialGradient:           BaseStyledComponent,
-      rect:                     BaseStyledComponent,
-      stop:                     BaseStyledComponent,
-      svg:                      BaseStyledComponent,
-      text:                     BaseStyledComponent,
-      tspan:                    BaseStyledComponent,
+    // SVG
+    circle:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    clipPath:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    defs:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ellipse:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    g:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    image:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    line:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    linearGradient:           ReactComponentStyledTaggedTemplateLiteral<{}>,
+    mask:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    path:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    pattern:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    polygon:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    polyline:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    radialGradient:           ReactComponentStyledTaggedTemplateLiteral<{}>,
+    rect:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    stop:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    svg:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    text:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    tspan:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
   };
 }
 
 declare module 'styled-components/native' {
-  declare type Interpolation = $npm$styledComponents$Interpolation;
-  declare type NameGenerator = $npm$styledComponents$NameGenerator;
-  declare type TaggedTemplateLiteral<R> = $npm$styledComponents$TaggedTemplateLiteral<R>;
-  declare type StyledComponent<Component: $npm$styledComponents$ReactComponentUnion<*>> = TaggedTemplateLiteral<Component>;
-  declare type BaseStyledComponent = StyledComponent<$npm$styledComponents$ReactComponentIntersection<*>>;
-  declare type Theme = $npm$styledComponents$Theme;
-  declare type ThemeProviderProps = $npm$styledComponents$ThemeProviderProps;
+  declare type Interpolation                                    = $npm$styledComponents$Interpolation;
+  declare type NameGenerator                                    = $npm$styledComponents$NameGenerator;
+  declare type Theme                                            = $npm$styledComponents$Theme;
+  declare type ThemeProviderProps                               = $npm$styledComponents$ThemeProviderProps;
+  declare type TaggedTemplateLiteral<R>                         = $npm$styledComponents$TaggedTemplateLiteral<R>;
+
+  declare type ReactComponentFunctional<Props: {}>              = $npm$styledComponents$ReactComponentFunctional<Props>;
+  declare type ReactComponentClass<Props, DefaultProps = *>     = $npm$styledComponents$ReactComponentClass<Props, DefaultProps>;
+  declare type ReactComponentUnion<Props>                       = $npm$styledComponents$ReactComponentUnion<Props>;
+  declare type ReactComponentIntersection<Props>                = $npm$styledComponents$ReactComponentIntersection<Props>;
+  declare type ReactComponentStyledStaticProps<Props>           = $npm$styledComponents$ReactComponentStyledStaticProps<Props>;
+  declare type ReactComponentStyled<Props>                      = $npm$styledComponents$ReactComponentStyled<Props>;
+  declare type ReactComponentStyledTaggedTemplateLiteral<Props> = $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props>;
 
   declare module.exports: {
+    <Props>(ReactComponentUnion<Props>): ReactComponentStyledTaggedTemplateLiteral<Props>,
+
     css: TaggedTemplateLiteral<Array<Interpolation>>,
     keyframes: TaggedTemplateLiteral<string>,
     withTheme: $npm$styledComponents$WithTheme,
     ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
 
-    <P, C: $npm$styledComponents$ReactComponentUnion<P>>(C): TaggedTemplateLiteral<C>,
-
-    ActivityIndicator:            BaseStyledComponent,
-    ActivityIndicatorIOS:         BaseStyledComponent,
-    ART:                          BaseStyledComponent,
-    Button:                       BaseStyledComponent,
-    DatePickerIOS:                BaseStyledComponent,
-    DrawerLayoutAndroid:          BaseStyledComponent,
-    FlatList:                     BaseStyledComponent,
-    Image:                        BaseStyledComponent,
-    ImageEditor:                  BaseStyledComponent,
-    ImageStore:                   BaseStyledComponent,
-    KeyboardAvoidingView:         BaseStyledComponent,
-    ListView:                     BaseStyledComponent,
-    MapView:                      BaseStyledComponent,
-    Modal:                        BaseStyledComponent,
-    Navigator:                    BaseStyledComponent,
-    NavigatorIOS:                 BaseStyledComponent,
-    Picker:                       BaseStyledComponent,
-    PickerIOS:                    BaseStyledComponent,
-    ProgressBarAndroid:           BaseStyledComponent,
-    ProgressViewIOS:              BaseStyledComponent,
-    RecyclerViewBackedScrollView: BaseStyledComponent,
-    RefreshControl:               BaseStyledComponent,
-    ScrollView:                   BaseStyledComponent,
-    SectionList:                  BaseStyledComponent,
-    SegmentedControlIOS:          BaseStyledComponent,
-    Slider:                       BaseStyledComponent,
-    SliderIOS:                    BaseStyledComponent,
-    SnapshotViewIOS:              BaseStyledComponent,
-    StatusBar:                    BaseStyledComponent,
-    SwipeableListView:            BaseStyledComponent,
-    Switch:                       BaseStyledComponent,
-    SwitchAndroid:                BaseStyledComponent,
-    SwitchIOS:                    BaseStyledComponent,
-    TabBarIOS:                    BaseStyledComponent,
-    Text:                         BaseStyledComponent,
-    TextInput:                    BaseStyledComponent,
-    ToastAndroid:                 BaseStyledComponent,
-    ToolbarAndroid:               BaseStyledComponent,
-    Touchable:                    BaseStyledComponent,
-    TouchableHighlight:           BaseStyledComponent,
-    TouchableNativeFeedback:      BaseStyledComponent,
-    TouchableOpacity:             BaseStyledComponent,
-    TouchableWithoutFeedback:     BaseStyledComponent,
-    View:                         BaseStyledComponent,
-    ViewPagerAndroid:             BaseStyledComponent,
-    VirtualizedList:              BaseStyledComponent,
-    WebView:                      BaseStyledComponent,
+    ActivityIndicator:            ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ActivityIndicatorIOS:         ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ART:                          ReactComponentStyledTaggedTemplateLiteral<{}>,
+    Button:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    DatePickerIOS:                ReactComponentStyledTaggedTemplateLiteral<{}>,
+    DrawerLayoutAndroid:          ReactComponentStyledTaggedTemplateLiteral<{}>,
+    FlatList:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    Image:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ImageEditor:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ImageStore:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    KeyboardAvoidingView:         ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ListView:                     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    MapView:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    Modal:                        ReactComponentStyledTaggedTemplateLiteral<{}>,
+    Navigator:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    NavigatorIOS:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    Picker:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    PickerIOS:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ProgressBarAndroid:           ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ProgressViewIOS:              ReactComponentStyledTaggedTemplateLiteral<{}>,
+    RecyclerViewBackedScrollView: ReactComponentStyledTaggedTemplateLiteral<{}>,
+    RefreshControl:               ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ScrollView:                   ReactComponentStyledTaggedTemplateLiteral<{}>,
+    SectionList:                  ReactComponentStyledTaggedTemplateLiteral<{}>,
+    SegmentedControlIOS:          ReactComponentStyledTaggedTemplateLiteral<{}>,
+    Slider:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    SliderIOS:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    SnapshotViewIOS:              ReactComponentStyledTaggedTemplateLiteral<{}>,
+    StatusBar:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    SwipeableListView:            ReactComponentStyledTaggedTemplateLiteral<{}>,
+    Switch:                       ReactComponentStyledTaggedTemplateLiteral<{}>,
+    SwitchAndroid:                ReactComponentStyledTaggedTemplateLiteral<{}>,
+    SwitchIOS:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    TabBarIOS:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    Text:                         ReactComponentStyledTaggedTemplateLiteral<{}>,
+    TextInput:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ToastAndroid:                 ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ToolbarAndroid:               ReactComponentStyledTaggedTemplateLiteral<{}>,
+    Touchable:                    ReactComponentStyledTaggedTemplateLiteral<{}>,
+    TouchableHighlight:           ReactComponentStyledTaggedTemplateLiteral<{}>,
+    TouchableNativeFeedback:      ReactComponentStyledTaggedTemplateLiteral<{}>,
+    TouchableOpacity:             ReactComponentStyledTaggedTemplateLiteral<{}>,
+    TouchableWithoutFeedback:     ReactComponentStyledTaggedTemplateLiteral<{}>,
+    View:                         ReactComponentStyledTaggedTemplateLiteral<{}>,
+    ViewPagerAndroid:             ReactComponentStyledTaggedTemplateLiteral<{}>,
+    VirtualizedList:              ReactComponentStyledTaggedTemplateLiteral<{}>,
+    WebView:                      ReactComponentStyledTaggedTemplateLiteral<{}>,
   };
 }
