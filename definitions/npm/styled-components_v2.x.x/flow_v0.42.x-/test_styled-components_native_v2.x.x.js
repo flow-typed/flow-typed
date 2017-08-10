@@ -118,6 +118,8 @@ const NativeWithComponent2: NativeReactComponentStyled<*> = nativeStyled.View.wi
 const NativeWithComponent3: NativeReactComponentStyled<*> = nativeStyled.View.withComponent(NativeAttrs3Class);
 // $ExpectError
 const NativeWithComponentError1: NativeReactComponentStyled<*> = nativeStyled.View.withComponent(0);
+// $ExpectError
+const NativeWithComponentError2: NativeReactComponentStyled<*> = nativeStyled.View.withComponent('NotHere');
 
 // ---- WithTheme ----
 const NativeComponent: NativeReactComponentFunctional<{ theme: NativeTheme }> = ({ theme }) => (

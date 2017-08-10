@@ -121,6 +121,8 @@ const withComponent2: ReactComponentStyled<*> = styled.div.withComponent(withCom
 const withComponent3: ReactComponentStyled<*> = styled.div.withComponent(Attrs3Class);
 // $ExpectError
 const withComponentError1: ReactComponentStyled<*> = styled.div.withComponent(0);
+// $ExpectError
+const withComponentError2: ReactComponentStyled<*> = styled.div.withComponent('NotHere');
 
 // ---- WithTheme ----
 const Component: ReactComponentFunctional<{ theme: Theme }> = ({ theme }) => (
