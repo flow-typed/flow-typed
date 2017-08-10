@@ -112,6 +112,14 @@ const nativeTheme: NativeTheme = {
   background: "papayawhip"
 };
 
+// ---- WithComponent ----
+const NativeWithComponent1: NativeReactComponentStyled<*> = nativeStyled.View.withComponent('Text');
+const NativeWithComponent2: NativeReactComponentStyled<*> = nativeStyled.View.withComponent(NativeWithComponent1);
+const NativeWithComponent3: NativeReactComponentStyled<*> = nativeStyled.View.withComponent(NativeAttrs3Class);
+// $ExpectError
+const NativeWithComponentError1: NativeReactComponentStyled<*> = nativeStyled.View.withComponent(0);
+
+// ---- WithTheme ----
 const NativeComponent: NativeReactComponentFunctional<{ theme: NativeTheme }> = ({ theme }) => (
   <NativeThemeProvider theme={theme}>
     <NativeWrapper>

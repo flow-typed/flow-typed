@@ -115,6 +115,14 @@ const theme: Theme = {
   background: "papayawhip"
 };
 
+// ---- WithComponent ----
+const withComponent1: ReactComponentStyled<*> = styled.div.withComponent('a');
+const withComponent2: ReactComponentStyled<*> = styled.div.withComponent(withComponent1);
+const withComponent3: ReactComponentStyled<*> = styled.div.withComponent(Attrs3Class);
+// $ExpectError
+const withComponentError1: ReactComponentStyled<*> = styled.div.withComponent(0);
+
+// ---- WithTheme ----
 const Component: ReactComponentFunctional<{ theme: Theme }> = ({ theme }) => (
   <ThemeProvider theme={theme}>
     <Wrapper>
