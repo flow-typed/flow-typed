@@ -11,45 +11,62 @@ import React from 'react'
 import type {
   Theme,
   Interpolation,
-  TaggedTemplateLiteral,
-  StyledComponent,
+
+  // Temporary
+  ReactComponentFunctional,
+  ReactComponentClass,
+  ReactComponentStyled,
+  ReactComponentStyledTaggedTemplateLiteral,
+  ReactComponentUnion,
+  ReactComponentIntersection,
 } from 'styled-components'
 
-type FunctionalReactComponent<Props: {}> = Props => React$Element<*>
-type ReactComponentClass<Props, DefaultProps = *> = Class<React$Component<DefaultProps, Props, *>>
-type ReactComponentConstructor<Props> = & FunctionalReactComponent<Props> & ReactComponentClass<Props>
+const TitleTaggedTemplateLiteral: ReactComponentStyledTaggedTemplateLiteral<{}> = styled.h1;
 
-const Title: ReactComponentConstructor<{}> = styled.h1`
+const TitleStyled: ReactComponentStyled<*> = styled.h1`
   font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
 `;
 
-declare var needsFunctionalReactComponent: FunctionalReactComponent<*> => void
+const TitleGeneric: ReactComponentIntersection<*> = styled.h1`
+  font-size: 1.5em;
+`;
+
+const TitleFunctional: ReactComponentFunctional<*> = styled.h1`
+  font-size: 1.5em;
+`;
+
+const TitleClass: ReactComponentClass<*> = styled.h1`
+  font-size: 1.5em;
+`;
+
+declare var needsReactComponentFunctional: ReactComponentFunctional<*> => void
 declare var needsReactComponentClass: ReactComponentClass<*> => void
 
-needsFunctionalReactComponent(Title)
-needsReactComponentClass(Title)
+needsReactComponentFunctional(TitleStyled)
+needsReactComponentClass(TitleStyled)
 
-const ExtendedTitle: ReactComponentConstructor<{}> = styled(Title)`
+const ExtendedTitle: ReactComponentIntersection<*> = styled(TitleStyled)`
   font-size: 2em;
 `;
 
-const Wrapper: ReactComponentConstructor<{}> = styled.section`
+const Wrapper: ReactComponentIntersection<*> = styled.section`
   padding: 4em;
   background: ${({theme}) => theme.background};
 `;
 
-const Attrs1: StyledComponent<ReactComponentConstructor<{}>> = styled.section.attrs({
+// ---- EXTEND ----
+const Attrs0ReactComponent: ReactComponentStyled<*> = styled.div.extend``;
+const Attrs0ExtendReactComponent: ReactComponentIntersection<*> = Attrs0ReactComponent.extend``;
+
+const Attrs0SyledComponent: ReactComponentStyledTaggedTemplateLiteral<*> = styled.div;
+const Attrs0ExtendStyledComponent: ReactComponentIntersection<*> = Attrs0SyledComponent.extend``;
+
+// ---- ATTRIBUTES ----
+const Attrs1: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section.attrs({
   testProp: 'foo'
 });
 
-// $ExpectError
-const Attrs1Error: TaggedTemplateLiteral<*> = nativeStyled.section.attrs({
-  testProp: 'foo'
-})``;
-
-const Attrs2: StyledComponent<ReactComponentConstructor<{}>> = styled.section
+const Attrs2: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section
   .attrs({
     testProp1: 'foo'
   })
@@ -57,7 +74,25 @@ const Attrs2: StyledComponent<ReactComponentConstructor<{}>> = styled.section
     testProp2: 'bar'
   });
 
-const Attrs3: ReactComponentConstructor<{}> = styled.section.attrs({
+const Attrs3Styled: ReactComponentStyled<*> = styled.section.attrs({
+  testProp: 'foo'
+})`
+  background-color: red;
+`;
+
+const Attrs3Generic: ReactComponentIntersection<*> = styled.section.attrs({
+  testProp: 'foo'
+})`
+  background-color: red;
+`;
+
+const Attrs3Functional: ReactComponentFunctional<*> = styled.section.attrs({
+  testProp: 'foo'
+})`
+  background-color: red;
+`;
+
+const Attrs3Class: ReactComponentClass<*> = styled.section.attrs({
   testProp: 'foo'
 })`
   background-color: red;
@@ -67,20 +102,20 @@ const theme: Theme = {
   background: "papayawhip"
 };
 
-const Component: FunctionalReactComponent<{}> = () => (
+const Component: ReactComponentFunctional<{ theme: Theme }> = ({ theme }) => (
   <ThemeProvider theme={theme}>
     <Wrapper>
-      <Title>Hello World, this is my first styled component!</Title>
+      <TitleStyled>Hello World, this is my first styled component!</TitleStyled>
     </Wrapper>
   </ThemeProvider>
 );
 
-const ComponentWithTheme: FunctionalReactComponent<{ theme: Theme }> = withTheme(Component);
+const ComponentWithTheme: ReactComponentFunctional<{}> = withTheme(Component);
 
-const Component2: FunctionalReactComponent<{}> = () => (
+const Component2: ReactComponentFunctional<{}> = () => (
   <ThemeProvider theme={outerTheme => outerTheme}>
     <Wrapper>
-      <Title>Hello World, this is my first styled component!</Title>
+      <TitleStyled>Hello World, this is my first styled component!</TitleStyled>
     </Wrapper>
   </ThemeProvider>
 );
@@ -111,13 +146,13 @@ const NumberWrapper = styled(num)`
 `;
 
 const sheet = new ServerStyleSheet()
-const html = renderToString(sheet.collectStyles(<Component />))
+const html = renderToString(sheet.collectStyles(<ComponentWithTheme />))
 const css = sheet.getStyleTags()
 
 const sheet2 = new ServerStyleSheet()
 const html2 = renderToString(
   <StyleSheetManager sheet={sheet}>
-    <Component />
+    <ComponentWithTheme />
   </StyleSheetManager>
 )
 
@@ -139,7 +174,7 @@ const StyledClass: ReactComponentClass<{ foo: string, theme: Theme }> = styled(N
   color: red;
 `;
 
-const NeedsFoo1Class: ReactComponentClass<{ foo: string }> = withTheme(NeedsThemeReactClass);
+const NeedsFoo1Class: ReactComponentClass<{ foo: string }, { theme: Theme }> = withTheme(NeedsThemeReactClass);
 
 // $ExpectError
 const NeedsFoo0ClassError: ReactComponentClass<{ foo: string }> = withTheme(ReactClass);
@@ -168,7 +203,7 @@ const interpolationError: Array<Interpolation | boolean> = styled.css`
 
 
 // ---- DEFAULT COMPONENT TESTS ----
-const defaultComponent: ReactComponentConstructor<{}> = styled.div`
+const defaultComponent: ReactComponentIntersection<{}> = styled.div`
   background-color: red;
 `;
 
@@ -178,37 +213,37 @@ const defaultComponentError: {} => string = styled.div`
 `;
 
 // ---- FUNCTIONAL COMPONENT TESTS ----
-const FunctionalComponent: FunctionalReactComponent<{ foo: string, theme: Theme }> = props => <div />
+const FunctionalComponent: ReactComponentFunctional<{ foo: string, theme: Theme }> = props => <div />;
 
-const NeedsFoo1: FunctionalReactComponent<{ foo: string, theme: Theme }> = styled(FunctionalComponent)`
+const NeedsFoo1: ReactComponentFunctional<{ foo: string, theme: Theme }> = styled(FunctionalComponent)`
   background-color: red;
 `;
 // $ExpectError
-const NeedsFoo1Error: FunctionalReactComponent<{ foo: number }> = styled(FunctionalComponent)`
+const NeedsFoo1Error: ReactComponentFunctional<{ foo: number }> = styled(FunctionalComponent)`
   background-color: red;
 `;
 
-const NeedsFoo2: FunctionalReactComponent<{ foo: string, theme: Theme }> = styled(NeedsFoo1)`
+const NeedsFoo2: ReactComponentFunctional<{ foo: string, theme: Theme }> = styled(NeedsFoo1)`
   background-color: red;
 `;
 // $ExpectError
-const NeedsFoo2Error: FunctionalReactComponent<{ foo: number }> = styled(NeedsFoo1)`
+const NeedsFoo2Error: ReactComponentFunctional<{ foo: number }> = styled(NeedsFoo1)`
   background-color: red;
 `;
 
 // ---- FUNCTIONAL COMPONENT TESTS (withTheme)----
-const NeedsFoo1Functional: FunctionalReactComponent<{ foo: string }> = withTheme(FunctionalComponent);
-const NeedsFoo2Functional: FunctionalReactComponent<{ foo: string }> = withTheme(NeedsFoo1Functional);
+const NeedsFoo1Functional: ReactComponentFunctional<{ foo: string }> = withTheme(FunctionalComponent);
+const NeedsFoo2Functional: ReactComponentFunctional<{ foo: string }> = withTheme(NeedsFoo1Functional);
 
 // $ExpectError
-const NeedsFoo1ErrorFunctional: FunctionalReactComponent<{ foo: number }> = withTheme(FunctionalComponent);
+const NeedsFoo1ErrorFunctional: ReactComponentFunctional<{ foo: number }> = withTheme(FunctionalComponent);
 // $ExpectError
-const NeedsFoo2ErrorFunctional: FunctionalReactComponent<{ foo: string }, { theme: string }> = withTheme(FunctionalComponent);
+const NeedsFoo2ErrorFunctional: ReactComponentFunctional<{ foo: string }, { theme: string }> = withTheme(FunctionalComponent);
 // $ExpectError
-const NeedsFoo3ErrorFunctional: FunctionalReactComponent<{ foo: number, theme: Theme }> = withTheme(FunctionalComponent);
+const NeedsFoo3ErrorFunctional: ReactComponentFunctional<{ foo: number, theme: Theme }> = withTheme(FunctionalComponent);
 // $ExpectError
-const NeedsFoo4ErrorFunctional: FunctionalReactComponent<{ foo: number }> = withTheme(NeedsFoo1Functional);
+const NeedsFoo4ErrorFunctional: ReactComponentFunctional<{ foo: number }> = withTheme(NeedsFoo1Functional);
 // $ExpectError
-const NeedsFoo5ErrorFunctional: FunctionalReactComponent<{ foo: string }, { theme: string }> = withTheme(NeedsFoo1Functional);
+const NeedsFoo5ErrorFunctional: ReactComponentFunctional<{ foo: string }, { theme: string }> = withTheme(NeedsFoo1Functional);
 // $ExpectError
-const NeedsFoo6ErrorFunctional: FunctionalReactComponent<{ foo: number }, { theme: Theme }> = withTheme(NeedsFoo1Functional);
+const NeedsFoo6ErrorFunctional: ReactComponentFunctional<{ foo: number }, { theme: Theme }> = withTheme(NeedsFoo1Functional);
