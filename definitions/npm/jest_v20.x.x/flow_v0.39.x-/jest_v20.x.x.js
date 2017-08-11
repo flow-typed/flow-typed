@@ -415,13 +415,13 @@ type JestSpyType = {
 };
 
 /** Runs this function after every test inside this context */
-declare function afterEach(fn: (done: () => void) => ?Promise<mixed>): void;
+declare function afterEach(fn: (done: () => void) => ?Promise<mixed>, timeout?: number): void;
 /** Runs this function before every test inside this context */
-declare function beforeEach(fn: (done: () => void) => ?Promise<mixed>): void;
+declare function beforeEach(fn: (done: () => void) => ?Promise<mixed>, timeout?: number): void;
 /** Runs this function after all tests have finished inside this context */
-declare function afterAll(fn: (done: () => void) => ?Promise<mixed>): void;
+declare function afterAll(fn: (done: () => void) => ?Promise<mixed>, timeout?: number): void;
 /** Runs this function before any tests have started inside this context */
-declare function beforeAll(fn: (done: () => void) => ?Promise<mixed>): void;
+declare function beforeAll(fn: (done: () => void) => ?Promise<mixed>, timeout?: number): void;
 
 /** A context for grouping tests together */
 declare var describe: {
@@ -449,33 +449,38 @@ declare var it: {
    *
    * @param {string} Name of Test
    * @param {Function} Test
+   * @param {number} Timeout for the test, in milliseconds.
    */
-  (name: string, fn?: (done: () => void) => ?Promise<mixed>): void,
+  (name: string, fn?: (done: () => void) => ?Promise<mixed>, timeout?: number): void,
   /**
    * Only run this test
    *
    * @param {string} Name of Test
    * @param {Function} Test
+   * @param {number} Timeout for the test, in milliseconds.
    */
-  only(name: string, fn?: (done: () => void) => ?Promise<mixed>): void,
+  only(name: string, fn?: (done: () => void) => ?Promise<mixed>, timeout?: number): void,
   /**
    * Skip running this test
    *
    * @param {string} Name of Test
    * @param {Function} Test
+   * @param {number} Timeout for the test, in milliseconds.
    */
-  skip(name: string, fn?: (done: () => void) => ?Promise<mixed>): void,
+  skip(name: string, fn?: (done: () => void) => ?Promise<mixed>, timeout?: number): void,
   /**
    * Run the test concurrently
    *
    * @param {string} Name of Test
    * @param {Function} Test
+   * @param {number} Timeout for the test, in milliseconds.
    */
-  concurrent(name: string, fn?: (done: () => void) => ?Promise<mixed>): void
+  concurrent(name: string, fn?: (done: () => void) => ?Promise<mixed>, timeout?: number): void,
 };
 declare function fit(
   name: string,
   fn: (done: () => void) => ?Promise<mixed>,
+  timeout?: number,
 ): void;
 /** An individual test unit */
 declare var test: typeof it;
