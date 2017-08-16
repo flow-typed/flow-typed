@@ -1,17 +1,17 @@
 /* globals */
 /* eslint-disable no-unused-vars, no-unused-expressions, arrow-body-style */
 /* @flow */
-import React from 'react'
+import React from "react";
 // import { Observable } from 'rxjs'
-import { compose, mapProps, withProps, mapPropsStream } from 'recompose'
+import { compose, mapProps, withProps, mapPropsStream } from "recompose";
 
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
-type EnhancedCompProps = { eA: 1 }
+type EnhancedCompProps = { eA: 1 };
 
 const Observable = {
-  of: (a: Object) => Object,
-}
+  of: (a: Object) => Object
+};
 
 const Comp = ({ a }) =>
   <div>
@@ -20,11 +20,11 @@ const Comp = ({ a }) =>
       // $ExpectError
       (a: number)
     }
-  </div>
+  </div>;
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   (mapPropsStream((props$: Observable<EnhancedCompProps>) =>
-    Observable.of({ a: 1, b: '1' })
+    Observable.of({ a: 1, b: "1" })
   ): HOC<{ a: string, b: string }, *>),
   // If you need to to detect erros after a mapPropsStream HOC (the same for mapProps and some others)
   // you need to explicitly set Types for all HOCs below
@@ -32,8 +32,8 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
   withProps(props => ({
     a: (props.a: string),
     // Must $ ExpectError but not
-    e: Math.round(props.a),
+    e: Math.round(props.a)
   }))
-)
+);
 
-enhacer(Comp)
+enhacer(Comp);

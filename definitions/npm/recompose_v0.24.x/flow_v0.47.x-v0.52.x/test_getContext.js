@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars, no-unused-expressions, arrow-body-style */
 /* @flow */
-import React from 'react'
-import { compose, withProps, getContext } from 'recompose'
+import React from "react";
+import { compose, withProps, getContext } from "recompose";
 // import PropTypes from 'prop-types'
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
 const PropTypes = {
   number: () => {},
-  string: () => {},
-}
+  string: () => {}
+};
 
-type EnhancedCompProps = { eA: 1 }
+type EnhancedCompProps = { eA: 1 };
 
 const Comp = ({ eA }) =>
   <div>
@@ -19,14 +19,14 @@ const Comp = ({ eA }) =>
       // $ExpectError eA nor any nor string
       (eA: string)
     }
-  </div>
+  </div>;
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   getContext({
     // as an idea is to use a hack like this
     // so we can test all such types
     color: ((PropTypes.string: any): string),
-    num: ((PropTypes.number: any): number),
+    num: ((PropTypes.number: any): number)
   }),
   withProps(props => ({
     eA: (props.eA: number),
@@ -34,12 +34,12 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
     // $ExpectError eA nor any nor string
     eAErr: (props.eA: string),
     // $ExpectError color nor any nor number
-    colorErr: (props.color: number),
+    colorErr: (props.color: number)
   })),
   withProps(props => ({
     // $ExpectError property not found
-    err: props.iMNotExists,
+    err: props.iMNotExists
   }))
-)
+);
 
-const EnhancedComponent = enhacer(Comp)
+const EnhancedComponent = enhacer(Comp);

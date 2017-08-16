@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars, no-unused-expressions */
 /* @flow */
-import React from 'react'
-import { compose, withProps, defaultProps } from 'recompose'
+import React from "react";
+import { compose, withProps, defaultProps } from "recompose";
 
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
-type EnhancedCompProps = { eA: 1 }
+type EnhancedCompProps = { eA: 1 };
 
 const Comp = ({ hello, eA }) =>
   <div>
@@ -19,11 +19,11 @@ const Comp = ({ hello, eA }) =>
       // $ExpectError hello nor any nor number
       (hello: number)
     }
-  </div>
+  </div>;
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   defaultProps({
-    hello: 'world',
+    hello: "world"
   }),
   withProps(props => ({
     hello: (props.hello: string),
@@ -31,12 +31,12 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
     // $ExpectError hello nor any nor number
     helloErr: (props.hello: number),
     // $ExpectError eA nor any nor string
-    eAErr: (props.eA: string),
+    eAErr: (props.eA: string)
   })),
   withProps(props => ({
     // $ExpectError property not found
-    err: props.iMNotExists,
+    err: props.iMNotExists
   }))
-)
+);
 
-const EnhancedComponent = enhacer(Comp)
+const EnhancedComponent = enhacer(Comp);

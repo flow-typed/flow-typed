@@ -1,12 +1,12 @@
 /* globals */
 /* eslint-disable no-unused-vars, no-unused-expressions, arrow-body-style */
 /* @flow */
-import React from 'react'
-import { compose, mapProps, withProps } from 'recompose'
+import React from "react";
+import { compose, mapProps, withProps } from "recompose";
 
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
-type EnhancedCompProps = { eA: 1 }
+type EnhancedCompProps = { eA: 1 };
 
 const Comp = ({ a }) =>
   <div>
@@ -15,11 +15,11 @@ const Comp = ({ a }) =>
       // $ExpectError
       (a: number)
     }
-  </div>
+  </div>;
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   mapProps(p => ({
-    a: '1',
+    a: "1"
   })),
   // If you need to to detect erros after a mapProps HOC
   // you need to explicitly set Types for all HOCs below
@@ -27,8 +27,8 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
   withProps(props => ({
     a: (props.a: string),
     // Must $ ExpectError but not
-    e: Math.round(props.a),
+    e: Math.round(props.a)
   }))
-)
+);
 
-enhacer(Comp)
+enhacer(Comp);

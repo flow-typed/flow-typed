@@ -1,18 +1,18 @@
 /* eslint-disable no-unused-vars, no-unused-expressions, arrow-body-style */
 /* @flow */
-import React from 'react'
+import React from "react";
 import {
   compose,
   withProps,
   branch,
   renderNothing,
   renderComponent,
-  onlyUpdateForKeys,
-} from 'recompose'
+  onlyUpdateForKeys
+} from "recompose";
 
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
-type EnhancedCompProps = { eA: 1 }
+type EnhancedCompProps = { eA: 1 };
 
 const Comp = ({ eA }) =>
   <div>
@@ -21,39 +21,39 @@ const Comp = ({ eA }) =>
       // $ExpectError eA nor any nor string
       (eA: string)
     }
-  </div>
+  </div>;
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   branch(({ eA }) => eA === 1, renderNothing),
   withProps(props => ({
     eA: (props.eA: number),
     // $ExpectError eA nor any nor string
-    eAErr: (props.eA: string),
+    eAErr: (props.eA: string)
   })),
   withProps(props => ({
     // $ExpectError property not found
-    err: props.iMNotExists,
+    err: props.iMNotExists
   }))
-)
+);
 
 const enhacerLoading: HOC<*, EnhancedCompProps> = compose(
   branch(({ eA }) => eA === 1, renderComponent(p => <div>Loading</div>)),
   withProps(props => ({
     eA: (props.eA: number),
     // $ExpectError eA nor any nor string
-    eAErr: (props.eA: string),
+    eAErr: (props.eA: string)
   }))
-)
+);
 
 // can work with onlyUpdateForKeys
 const enhacerUpdating: HOC<*, EnhancedCompProps> = compose(
-  branch(({ eA }) => eA === 1, onlyUpdateForKeys(['eA'])),
+  branch(({ eA }) => eA === 1, onlyUpdateForKeys(["eA"])),
   withProps(props => ({
     eA: (props.eA: number),
     // $ExpectError eA nor any nor string
-    eAErr: (props.eA: string),
+    eAErr: (props.eA: string)
   }))
-)
+);
 
 // can infer withProps type
 const enhacerWithProps: HOC<*, EnhancedCompProps> = compose(
@@ -61,9 +61,9 @@ const enhacerWithProps: HOC<*, EnhancedCompProps> = compose(
   withProps(props => ({
     eA: (props.eA: number),
     // $ExpectError eA nor any nor string
-    eAErr: (props.eA: string),
+    eAErr: (props.eA: string)
   }))
-)
+);
 
 // can infer compose types
 const enhacerWithCompose: HOC<*, EnhancedCompProps> = compose(
@@ -72,9 +72,9 @@ const enhacerWithCompose: HOC<*, EnhancedCompProps> = compose(
     compose(
       withProps(props => {
         // $ExpectError eA nor any nor string
-        ;(props.eA: string)
+        (props.eA: string);
 
-        return { x: 1 }
+        return { x: 1 };
       }),
       withProps(props => ({ y: 2 }))
     )
@@ -85,9 +85,9 @@ const enhacerWithCompose: HOC<*, EnhancedCompProps> = compose(
     // $ExpectError x nor any nor string
     xErr: (props.x: string),
     // $ExpectError y nor any nor string
-    yErr: (props.y: string),
+    yErr: (props.y: string)
   }))
-)
+);
 
 const enhacerLeftRight: HOC<*, EnhancedCompProps> = compose(
   branch(
@@ -101,9 +101,9 @@ const enhacerLeftRight: HOC<*, EnhancedCompProps> = compose(
     // $ExpectError x nor any nor string
     xErr: (props.x: string),
     // $ExpectError y nor any nor string
-    yErr: (props.y: string),
+    yErr: (props.y: string)
   }))
-)
+);
 
 /*
 Wrong types of left right, this will cause an infinite recursion
@@ -117,4 +117,4 @@ const enhacerLeftRight2: HOC<*, EnhancedCompProps> = compose(
 );
 */
 
-const EnhancedComponent = enhacer(Comp)
+const EnhancedComponent = enhacer(Comp);

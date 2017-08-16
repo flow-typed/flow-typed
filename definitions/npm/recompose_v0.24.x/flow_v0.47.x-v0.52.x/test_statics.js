@@ -1,21 +1,21 @@
 /* eslint-disable no-unused-vars, no-unused-expressions, arrow-body-style */
 /* @flow */
-import React from 'react'
+import React from "react";
 import {
   compose,
   withProps,
   setStatic,
   setPropTypes,
-  setDisplayName,
-} from 'recompose'
+  setDisplayName
+} from "recompose";
 // import PropTypes from 'prop-types'
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
 const PropTypes = {
-  string: () => {},
-}
+  string: () => {}
+};
 
-type EnhancedCompProps = { eA: 1 }
+type EnhancedCompProps = { eA: 1 };
 
 const Comp = ({ eA }) =>
   <div>
@@ -24,32 +24,32 @@ const Comp = ({ eA }) =>
       // $ExpectError eA nor any nor string
       (eA: string)
     }
-  </div>
+  </div>;
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
-  setStatic('hello', 'world'),
+  setStatic("hello", "world"),
   setPropTypes({
-    a: PropTypes.string,
+    a: PropTypes.string
   }),
-  setDisplayName('hello'),
+  setDisplayName("hello"),
   withProps(props => ({
     eA: (props.eA: number),
     // $ExpectError eA nor any nor string
-    eAErr: (props.eA: string),
+    eAErr: (props.eA: string)
   })),
   withProps(props => ({
     // $ExpectError property not found
-    err: props.iMNotExists,
+    err: props.iMNotExists
   }))
-)
+);
 
 // $ExpectError name is string
-setDisplayName(1)
+setDisplayName(1);
 
 // $ExpectError propTypes is object
-setPropTypes(1)
+setPropTypes(1);
 
 // $ExpectError name is string
-setStatic(1, 'world')
+setStatic(1, "world");
 
-const EnhancedComponent = enhacer(Comp)
+const EnhancedComponent = enhacer(Comp);

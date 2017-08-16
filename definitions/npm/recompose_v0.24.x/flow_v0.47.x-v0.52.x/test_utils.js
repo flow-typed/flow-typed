@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars, no-unused-expressions, arrow-body-style */
 /* @flow */
 
-import React from 'react'
-import { compose, withProps, hoistStatics } from 'recompose'
+import React from "react";
+import { compose, withProps, hoistStatics } from "recompose";
 
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
-type EnhancedCompProps = { a: number }
+type EnhancedCompProps = { a: number };
 
 const A = ({ a, b }) =>
   <div>
@@ -20,17 +20,17 @@ const A = ({ a, b }) =>
       // $ExpectError
       (b: number)
     }
-  </div>
+  </div>;
 
-A.displayName = 'HELLO WORLD'
+A.displayName = "HELLO WORLD";
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   withProps(({ a }) => ({
     hello: a,
-    b: `${a}`,
+    b: `${a}`
   }))
-)
+);
 
-hoistStatics(enhacer)(A)
+hoistStatics(enhacer)(A);
 
 // I see no reason to test other utils, please add if you think otherwise

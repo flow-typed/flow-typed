@@ -40,7 +40,7 @@
 
 //-------------------
 
-declare module 'recompose' {
+declare module "recompose" {
   // -----------------------------------------------------------------
   // Private declarations
   // -----------------------------------------------------------------
@@ -50,23 +50,23 @@ declare module 'recompose' {
     B,
     C,
     D
-  ) => void
+  ) => void;
 
-  declare type Void<T> = Void_<*, *, *, *, *, T>
+  declare type Void<T> = Void_<*, *, *, *, *, T>;
 
   declare type ExtractStateHandlersCodomain = <State, Enhanced, V>(
     v: (state: State, props: Enhanced) => V
-  ) => Void<V>
+  ) => Void<V>;
 
   declare type ExtractHandlersCodomain = <Enhanced, V>(
     v: (props: Enhanced) => V
-  ) => V
+  ) => V;
 
-  declare type FunctionComponent<A> = (props: A) => ?React$Element<any>
+  declare type FunctionComponent<A> = (props: A) => ?React$Element<any>;
 
-  declare type ClassComponent<D, A, S> = Class<React$Component<D, A, S>>
+  declare type ClassComponent<D, A, S> = Class<React$Component<D, A, S>>;
 
-  declare type UnaryFn<A, R> = (a: A) => R
+  declare type UnaryFn<A, R> = (a: A) => R;
 
   declare type Compose = (<A, B, C, D, E, F, G, H, I>(
     hi: UnaryFn<H, I>,
@@ -79,25 +79,25 @@ declare module 'recompose' {
     ab: UnaryFn<A, B>,
     ...rest: Array<void>
   ) => UnaryFn<A, I>) &
-  (<A, B, C, D, E, F, G, H>(
-    gh: UnaryFn<G, H>,
-    fg: UnaryFn<F, G>,
-    ef: UnaryFn<E, F>,
-    de: UnaryFn<D, E>,
-    cd: UnaryFn<C, D>,
-    bc: UnaryFn<B, C>,
-    ab: UnaryFn<A, B>,
-    ...rest: Array<void>
-  ) => UnaryFn<A, H>) &
-  (<A, B, C, D, E, F, G>(
-    fg: UnaryFn<F, G>,
-    ef: UnaryFn<E, F>,
-    de: UnaryFn<D, E>,
-    cd: UnaryFn<C, D>,
-    bc: UnaryFn<B, C>,
-    ab: UnaryFn<A, B>,
-    ...rest: Array<void>
-  ) => UnaryFn<A, G>) &
+    (<A, B, C, D, E, F, G, H>(
+      gh: UnaryFn<G, H>,
+      fg: UnaryFn<F, G>,
+      ef: UnaryFn<E, F>,
+      de: UnaryFn<D, E>,
+      cd: UnaryFn<C, D>,
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>,
+      ...rest: Array<void>
+    ) => UnaryFn<A, H>) &
+    (<A, B, C, D, E, F, G>(
+      fg: UnaryFn<F, G>,
+      ef: UnaryFn<E, F>,
+      de: UnaryFn<D, E>,
+      cd: UnaryFn<C, D>,
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>,
+      ...rest: Array<void>
+    ) => UnaryFn<A, G>) &
     (<A, B, C, D, E, F>(
       ef: UnaryFn<E, F>,
       de: UnaryFn<D, E>,
@@ -124,7 +124,7 @@ declare module 'recompose' {
       ab: UnaryFn<A, B>,
       ...rest: Array<void>
     ) => UnaryFn<A, C>) &
-    (<A, B>(ab: UnaryFn<A, B>, ...rest: Array<void>) => UnaryFn<A, B>)
+    (<A, B>(ab: UnaryFn<A, B>, ...rest: Array<void>) => UnaryFn<A, B>);
 
   // -----------------------------------------------------------------
   // Public declarations
@@ -132,14 +132,14 @@ declare module 'recompose' {
 
   declare export type Component<A> =
     | FunctionComponent<A>
-    | ClassComponent<any, A, any>
+    | ClassComponent<any, A, any>;
 
   declare export type HOC<Base, Enhanced> = UnaryFn<
     Component<Base>,
     Component<Enhanced>
-  >
+  >;
 
-  declare export var compose: Compose
+  declare export var compose: Compose;
 
   // ---------------------------------------------------------------------------
   // ----------------===<<<HOCs with good flow support>>>===--------------------
@@ -147,15 +147,15 @@ declare module 'recompose' {
 
   declare export function defaultProps<Default, Enhanced>(
     defProps: Default
-  ): HOC<{ ...$Exact<Enhanced>, ...Default }, Enhanced>
+  ): HOC<{ ...$Exact<Enhanced>, ...Default }, Enhanced>;
 
   declare export function mapProps<Base, Enhanced>(
     propsMapper: (ownerProps: Enhanced) => Base
-  ): HOC<Base, Enhanced>
+  ): HOC<Base, Enhanced>;
 
   declare export function withProps<BaseAdd, Enhanced>(
     propsMapper: ((ownerProps: Enhanced) => BaseAdd) | BaseAdd
-  ): HOC<{ ...$Exact<Enhanced>, ...BaseAdd }, Enhanced>
+  ): HOC<{ ...$Exact<Enhanced>, ...BaseAdd }, Enhanced>;
 
   declare export function withStateHandlers<
     State,
@@ -164,7 +164,7 @@ declare module 'recompose' {
       [key: string]: (
         state: State,
         props: Enhanced
-      ) => (...payload: any[]) => $Shape<State>,
+      ) => (...payload: any[]) => $Shape<State>
     }
   >(
     initialState: ((props: Enhanced) => State) | State,
@@ -173,10 +173,10 @@ declare module 'recompose' {
     {
       ...$Exact<Enhanced>,
       ...State,
-      ...$ObjMap<StateHandlers, ExtractStateHandlersCodomain>,
+      ...$ObjMap<StateHandlers, ExtractStateHandlersCodomain>
     },
     Enhanced
-  >
+  >;
 
   declare export function withHandlers<
     Enhanced,
@@ -184,40 +184,40 @@ declare module 'recompose' {
       | ((
           props: Enhanced
         ) => {
-          [key: string]: (props: Enhanced) => Function,
+          [key: string]: (props: Enhanced) => Function
         })
       | {
-          [key: string]: (props: Enhanced) => Function,
+          [key: string]: (props: Enhanced) => Function
         }
   >(
     handlers: ((props: Enhanced) => Handlers) | Handlers
   ): HOC<
     {
       ...$Exact<Enhanced>,
-      ...$ObjMap<Handlers, ExtractHandlersCodomain>,
+      ...$ObjMap<Handlers, ExtractHandlersCodomain>
     },
     Enhanced
-  >
+  >;
 
-  declare export function pure<A>(a: Component<A>): Component<A>
+  declare export function pure<A>(a: Component<A>): Component<A>;
   declare export function onlyUpdateForPropTypes<A>(
     a: Component<A>
-  ): Component<A>
-  declare export function onlyUpdateForKeys<A>(Array<$Keys<A>>): HOC<A, A>
+  ): Component<A>;
+  declare export function onlyUpdateForKeys<A>(Array<$Keys<A>>): HOC<A, A>;
   declare export function shouldUpdate<A>(
     (props: A, nextProps: A) => boolean
-  ): HOC<A, A>
+  ): HOC<A, A>;
 
-  declare export function toClass<A>(a: Component<A>): Component<A>
+  declare export function toClass<A>(a: Component<A>): Component<A>;
 
   declare export function withContext<A, ContextPropTypes, ContextObj>(
     childContextTypes: ContextPropTypes,
     getChildContext: (props: A) => ContextObj
-  ): HOC<A, A>
+  ): HOC<A, A>;
 
   declare export function getContext<CtxTypes, Enhanced>(
     contextTypes: CtxTypes
-  ): HOC<{ ...$Exact<Enhanced>, ...CtxTypes }, Enhanced>
+  ): HOC<{ ...$Exact<Enhanced>, ...CtxTypes }, Enhanced>;
 
   /**
    * It's wrong declaration but having that renderNothing and renderComponent are somehow useless
@@ -226,8 +226,8 @@ declare module 'recompose' {
    * `branch(testFn, renderNothing | renderComponent(Comp))` will work as expected.
    * Tests are placed at test_branch.
    */
-  declare export function renderNothing<A>(C: Component<A>): Component<A>
-  declare export function renderComponent<A>(a: Component<A>): HOC<A, A>
+  declare export function renderNothing<A>(C: Component<A>): Component<A>;
+  declare export function renderComponent<A>(a: Component<A>): HOC<A, A>;
 
   /**
    * We make an assumtion that left and right have the same type if exists
@@ -238,19 +238,19 @@ declare module 'recompose' {
     left: (Component<Base>) => Component<Enhanced>,
     // I never use right part and it can be a problem with inference as should be same type as left
     right?: (Component<Base>) => Component<Enhanced>
-  ): HOC<Base, Enhanced>
+  ): HOC<Base, Enhanced>;
 
   // test_statics
-  declare export function setStatic<A>(key: string, value: any): HOC<A, A>
-  declare export function setPropTypes<A>(propTypes: Object): HOC<A, A>
-  declare export function setDisplayName<A>(displayName: string): HOC<A, A>
+  declare export function setStatic<A>(key: string, value: any): HOC<A, A>;
+  declare export function setPropTypes<A>(propTypes: Object): HOC<A, A>;
+  declare export function setDisplayName<A>(displayName: string): HOC<A, A>;
 
   declare export function withPropsOnChange<BaseAdd, Enhanced>(
     shouldMapOrKeys:
       | ((props: Enhanced, nextProps: Enhanced) => boolean)
       | Array<$Keys<Enhanced>>,
     propsMapper: (ownerProps: Enhanced) => BaseAdd
-  ): HOC<{ ...$Exact<Enhanced>, ...BaseAdd }, Enhanced>
+  ): HOC<{ ...$Exact<Enhanced>, ...BaseAdd }, Enhanced>;
 
   // ---------------------------------------------------------------------------
   // ----------------===<<<TODO (UNSUPPORTED) HOCs>>>===------------------------
@@ -259,25 +259,25 @@ declare module 'recompose' {
   // use withProps instead
   declare export function flattenProp<Base, Enhanced>(
     propName: $Keys<Enhanced>
-  ): HOC<Base, Enhanced>
+  ): HOC<Base, Enhanced>;
 
   // use withProps instead
   declare export function renameProp<Base, Enhanced>(
     oldName: $Keys<Enhanced>,
     newName: $Keys<Base>
-  ): HOC<Base, Enhanced>
+  ): HOC<Base, Enhanced>;
 
   // use withProps instead
   declare export function renameProps<Base, Enhanced>(nameMap: {
-    [key: $Keys<Enhanced>]: $Keys<Base>,
-  }): HOC<Base, Enhanced>
+    [key: $Keys<Enhanced>]: $Keys<Base>
+  }): HOC<Base, Enhanced>;
 
   // use withStateHandlers instead
   declare export function withState<Base, Enhanced, T>(
     stateName: string,
     stateUpdaterName: string,
     initialState: T | ((props: Enhanced) => T)
-  ): HOC<Base, Enhanced>
+  ): HOC<Base, Enhanced>;
 
   // use withStateHandlers instead
   declare export function withReducer<A, B, Action, State>(
@@ -285,51 +285,51 @@ declare module 'recompose' {
     dispatchName: string,
     reducer: (state: State, action: Action) => State,
     initialState: State
-  ): HOC<A, B>
+  ): HOC<A, B>;
 
   // lifecycle use React instead
-  declare export function lifecycle<A, B>(spec: Object): HOC<A, B>
+  declare export function lifecycle<A, B>(spec: Object): HOC<A, B>;
 
   // Help needed, as explicitly providing the type
   // errors not detected, see TODO at test_mapPropsStream.js
   declare export function mapPropsStream<Base, Enhanced>(
     (props$: any) => any
-  ): HOC<Base, Enhanced>
+  ): HOC<Base, Enhanced>;
 
   // ---------------------------------------------------------------------------
   // -----------------------------===<<<Utils>>>===-----------------------------
   // ---------------------------------------------------------------------------
 
-  declare export function getDisplayName<A>(C: Component<A>): string
+  declare export function getDisplayName<A>(C: Component<A>): string;
 
   declare export function wrapDisplayName<A>(
     C: Component<A>,
     wrapperName: string
-  ): string
+  ): string;
 
-  declare export function shallowEqual(objA: mixed, objB: mixed): boolean
+  declare export function shallowEqual(objA: mixed, objB: mixed): boolean;
 
-  declare export function isClassComponent(value: any): boolean
+  declare export function isClassComponent(value: any): boolean;
 
   declare export function createEagerElement<A>(
     type: Component<A> | string,
     props: ?A,
     children?: ?ReactNode
-  ): React$Element<any>
+  ): React$Element<any>;
 
   declare export function createEagerFactory<A>(
     type: Component<A> | string
-  ): (props: ?A, children?: ?ReactNode) => React$Element<any>
+  ): (props: ?A, children?: ?ReactNode) => React$Element<any>;
 
   declare export function createSink<A>(
     callback: (props: A) => void
-  ): Component<A>
+  ): Component<A>;
 
-  declare export function componentFromProp<A>(propName: string): Component<A>
+  declare export function componentFromProp<A>(propName: string): Component<A>;
 
   declare export function nest<A>(
     ...Components: Array<Component<any> | string>
-  ): Component<A>
+  ): Component<A>;
 
-  declare export function hoistStatics<A, B, H: HOC<A, B>>(hoc: H): H
+  declare export function hoistStatics<A, B, H: HOC<A, B>>(hoc: H): H;
 }

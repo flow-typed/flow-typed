@@ -1,22 +1,22 @@
 /* globals $Exact, $PropertyType */
 /* eslint-disable no-unused-vars, no-unused-expressions, arrow-body-style */
 /* @flow */
-import React from 'react'
+import React from "react";
 import {
   compose,
   withProps,
   flattenProp,
   renameProp,
   renameProps,
-  withState,
-} from 'recompose'
+  withState
+} from "recompose";
 
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
 type EnhancedCompProps = {
   eA: number,
-  obj: { objPropA: string, objPropB: number },
-}
+  obj: { objPropA: string, objPropB: number }
+};
 
 const Comp = ({ eA, objPropA }) =>
   <div>
@@ -30,31 +30,31 @@ const Comp = ({ eA, objPropA }) =>
       // $ExpectError eA nor any nor string
       (objPropA: number)
     }
-  </div>
+  </div>;
 
 const Comp2 = ({ eA, objPropA }) =>
   <div>
     {/* hack to preview types */}
     {/* :: eA, objPropA */}
-  </div>
+  </div>;
 
 const flattenEnhacer: HOC<*, EnhancedCompProps> = compose(
-  (flattenProp('obj'): HOC<
+  (flattenProp("obj"): HOC<
     {
       ...$Exact<EnhancedCompProps>,
-      ...$Exact<$PropertyType<EnhancedCompProps, 'obj'>>,
+      ...$Exact<$PropertyType<EnhancedCompProps, "obj">>
     },
     EnhancedCompProps
   >),
   withProps(props => ({
     eA: (props.eA: number),
     // TODO: Must throw, but not
-    eB: (props.eA: string),
+    eB: (props.eA: string)
   }))
-)
+);
 
-const EnhancedComponent = flattenEnhacer(Comp)
-const EnhancedComponent2 = flattenEnhacer(Comp2)
+const EnhancedComponent = flattenEnhacer(Comp);
+const EnhancedComponent2 = flattenEnhacer(Comp2);
 
 // renameEnhacer voodoo (you don't need it, use withProps instead)
 const RenameComp = ({ eA, objNew, obj }) =>
@@ -81,60 +81,60 @@ const RenameComp = ({ eA, objNew, obj }) =>
       // $ExpectError eA nor any nor string
       (obj: string)
     }
-  </div>
+  </div>;
 
 const renameEnhacer: HOC<*, EnhancedCompProps> = compose(
-  (renameProp('obj', 'objNew'): HOC<
+  (renameProp("obj", "objNew"): HOC<
     {
       ...$Exact<EnhancedCompProps>,
       ...$Exact<{ obj: null }>,
       // $PropertyType does not work here
-      ...$Exact<{ objNew: { objPropA: string, objPropB: number } }>,
+      ...$Exact<{ objNew: { objPropA: string, objPropB: number } }>
     },
     EnhancedCompProps
   >),
   withProps(props => ({
     eA: (props.eA: number),
     // TODO: Must throw issue but no !!!!
-    eB: (props.eA: string),
+    eB: (props.eA: string)
   }))
-)
+);
 
-renameEnhacer(RenameComp)
+renameEnhacer(RenameComp);
 
 const renamePropsEnhacer: HOC<*, EnhancedCompProps> = compose(
-  (renameProps({ obj: 'objNew' }): HOC<
+  (renameProps({ obj: "objNew" }): HOC<
     {
       ...$Exact<EnhancedCompProps>,
       // --- repeat for every key ---
       ...$Exact<{ obj: null }>,
       // $PropertyType does not work here
-      ...$Exact<{ objNew: { objPropA: string, objPropB: number } }>,
+      ...$Exact<{ objNew: { objPropA: string, objPropB: number } }>
     },
     EnhancedCompProps
   >),
   withProps(props => ({
     eA: (props.eA: number),
     // TODO: Must throw issue but no !!!!
-    eB: (props.eA: string),
+    eB: (props.eA: string)
   }))
-)
+);
 
 // use withStateHandlers instead
 const withStateEnhancer: HOC<*, EnhancedCompProps> = compose(
-  (withState('a', 'setA', { hello: 'world' }): HOC<
+  (withState("a", "setA", { hello: "world" }): HOC<
     {
       ...$Exact<EnhancedCompProps>,
-      ...$Exact<{ a: { hello: string }, setA: (a: { hello: string }) => void }>,
+      ...$Exact<{ a: { hello: string }, setA: (a: { hello: string }) => void }>
     },
     EnhancedCompProps
   >),
   withProps(props => ({
     eA: (props.eA: number),
     // TODO: Must throw issue but no !!!!
-    eB: (props.eA: string),
+    eB: (props.eA: string)
   }))
-)
+);
 
 // withReducer see withState above
 // lifecycle see  withState above

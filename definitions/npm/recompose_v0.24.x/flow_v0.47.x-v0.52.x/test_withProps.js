@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars, no-unused-expressions */
 /* @flow */
-import React from 'react'
-import { compose, withProps } from 'recompose'
+import React from "react";
+import { compose, withProps } from "recompose";
 
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
-type EnhancedCompProps = { a: string, b: number }
+type EnhancedCompProps = { a: string, b: number };
 
 const Comp = ({ hello, b }) =>
   <div>
@@ -19,21 +19,21 @@ const Comp = ({ hello, b }) =>
       // $ExpectError
       (hello: number)
     }
-  </div>
+  </div>;
 
 const enhancer: HOC<*, EnhancedCompProps> = compose(
   withProps(({ a, b }) => ({
     hello: a,
-    b: `${b}`,
+    b: `${b}`
   })),
   withProps(({ b, hello }) => ({
     hello: (hello: string),
     // $ExpectError (This type is incompatible with number)
-    c: (b: number),
+    c: (b: number)
   })),
   // check non functional form of with props
   withProps({
-    d: 'hi',
+    d: "hi"
   }),
   withProps(props => ({
     a: (props.a: string),
@@ -43,16 +43,15 @@ const enhancer: HOC<*, EnhancedCompProps> = compose(
     // $ExpectError a not a number and not any
     aErr: (props.a: number),
     // $ExpectError d not a number and not any
-    dErr: (props.d: number),
+    dErr: (props.d: number)
   }))
-)
+);
 
-const EnhancedComponent = enhancer(Comp)
-
-;<EnhancedComponent a={'1'} b={1} />
-
-// $ExpectError
-;<EnhancedComponent a={'1'} b={'1'} />
+const EnhancedComponent = enhancer(Comp);
+<EnhancedComponent a={"1"} b={1} />;
 
 // $ExpectError
-;<EnhancedComponent a={'1'} />
+<EnhancedComponent a={"1"} b={"1"} />;
+
+// $ExpectError
+<EnhancedComponent a={"1"} />;

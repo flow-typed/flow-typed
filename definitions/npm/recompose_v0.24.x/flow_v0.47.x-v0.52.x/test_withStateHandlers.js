@@ -1,30 +1,30 @@
 /* eslint-disable no-unused-vars, no-unused-expressions */
 /* @flow */
 
-import React from 'react'
-import { compose, withProps, withStateHandlers } from 'recompose'
+import React from "react";
+import { compose, withProps, withStateHandlers } from "recompose";
 
-import type { HOC } from 'recompose'
+import type { HOC } from "recompose";
 
 type EnhancedCompProps = {
-  initialCounter: number,
-}
+  initialCounter: number
+};
 
 const enhancer: HOC<*, EnhancedCompProps> = compose(
   withStateHandlers(
-    { value: 'world', letIt: 'be' },
+    { value: "world", letIt: "be" },
     {
       // we need to set argument type so inference will work good
       setValue: (state, props) => (value: string) => ({
-        value,
+        value
       }),
       changeValue: (state, props) => (
         { i, j }: { i: number, j: string },
         k: number
       ) => ({
-        value: `world again ${i} ${j}`,
+        value: `world again ${i} ${j}`
       }),
-      inform: state => () => {},
+      inform: state => () => {}
     }
   ),
   // here props itself will not be infered without explicit handler args types
@@ -36,21 +36,21 @@ const enhancer: HOC<*, EnhancedCompProps> = compose(
     // $ExpectError property not found (to detect that props is not any)
     err: props.iMNotExists,
     // $ExpectError initialCounter not any nor string
-    icErr: (props.initialCounter: string),
+    icErr: (props.initialCounter: string)
   }))
-)
+);
 
 const enhancerFuncInit: HOC<*, EnhancedCompProps> = compose(
   withStateHandlers(
     props => ({
-      counter: props.initialCounter,
+      counter: props.initialCounter
     }),
     {
       // it's better to set argument type with named props, easier to find an error
       // if you call it with wrong arguments
       incCounter: ({ counter }) => ({ value }: { value: number }) => ({
-        counter: counter + value,
-      }),
+        counter: counter + value
+      })
     }
   ),
   withProps(props => ({
@@ -59,31 +59,31 @@ const enhancerFuncInit: HOC<*, EnhancedCompProps> = compose(
     // $ExpectError check that incCounter is not any
     iVal2: (props.incCounter({ value: 1 }): number),
     // $ExpectError property not found
-    err: props.iMNotExists,
+    err: props.iMNotExists
   }))
-)
+);
 
 const BaseComponent = ({ hi, changeValue }) =>
   <div
     onClick={() => {
       // check that supports few arguments
-      const x = changeValue({ i: 1, j: '1' }, 1)
+      const x = changeValue({ i: 1, j: "1" }, 1);
 
       // Check that result is void
-      ;(x: void)
+      (x: void);
 
       // $ExpectError check that x is not any
-      ;(x: {})
+      (x: {});
 
       // Check hi
-      ;(hi: string)
+      (hi: string);
 
       // $ExpectError check that hi is not any
-      ;(hi: number)
+      (hi: number);
     }}
   >
     {hi}
-  </div>
+  </div>;
 
-const EnhancedComponent = enhancer(BaseComponent)
-;<EnhancedComponent initialCounter={0} />
+const EnhancedComponent = enhancer(BaseComponent);
+<EnhancedComponent initialCounter={0} />;
