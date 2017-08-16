@@ -1,19 +1,33 @@
 {
   "name": "definitions",
-  "version": "1.0.0",
   "description": "",
+  "author": "flowtype",
+  "license": "MIT",
+  "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "precommit": "lint-staged",
+    "test": "eslint npm/**/test*"
+  },
   "dependencies": {
     "babel-eslint": "^6.1.0",
-    "eslint": "^3.0.1"
+    "eslint": "^3.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.3",
+    "prettier": "^1.5.3",
+    "prettier-package-json": "^1.4.0"
   },
   "devDependencies": {
     "eslint-plugin-flow-typed": "^1.0.0",
     "eslint-plugin-flowtype": "^2.19.0"
   },
-  "scripts": {
-    "test": "eslint npm/**/test*"
-  },
-  "author": "flowtype",
-  "license": "MIT"
+  "lint-staged": {
+    "gitDir": "../",
+    "package.json": [
+      "prettier-package-json --write",
+      "prettier --write",
+      "git add"
+    ],
+    "*.js": ["prettier --write", "git add"]
+  }
 }
