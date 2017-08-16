@@ -454,7 +454,7 @@ declare module 'lodash' {
     words(string?: string, pattern?: RegExp|string): Array<string>;
 
     // Util
-    attempt(func: Function): any;
+    attempt(func: Function, ...args: Array<any>): any;
     bindAll(object?: ?Object, methodNames: Array<string>): Object;
     bindAll(object?: ?Object, ...methodNames: Array<string>): Object;
     cond(pairs: NestedArray<Function>): Function;
