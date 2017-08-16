@@ -2,6 +2,14 @@
 import _ from 'lodash';
 
 /**
+ * _.attempt
+ */
+_.attempt(() => void 0)
+_.attempt(x => x)
+_.attempt(x => x, 'first arg')
+_.attempt((x, y, z) => {}, null, {}, [])
+
+/**
  * _.countBy
  */
 _.countBy([6.1, 4.2, 6.3], Math.floor);
