@@ -69,7 +69,9 @@ _.any(['a', true, 0]);
 _.every(['a', true, 0]);
 _.all(['a', true, 0]);
 
-_.findKey({a: {t: 'a'}, b: {t: 'b'}}, obj => obj.t == 'a');
+_.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v) => v.t === 'a');
+_.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k) => k === 'a' && v.t === 'a');
+_.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k, o) => k === 'a' && v.t === 'a' && o[k] === v);
 
 
 // $ExpectError
