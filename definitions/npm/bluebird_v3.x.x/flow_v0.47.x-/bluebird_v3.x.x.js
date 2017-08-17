@@ -146,7 +146,7 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
   catch<U, ErrorT: Error>(err: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
   catch<U, ErrorT: Error>(err1: Class<ErrorT>, err2: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
   catch<U, ErrorT: Error>(err1: Class<ErrorT>, err2: Class<ErrorT>, err3: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
-  catch<U>(onReject: (error: any) => $Promisable<U>): Bluebird$Promise<U>;
+  catch<U>(onReject?: (error: any) => $Promisable<U>): Bluebird$Promise<U>;
   caught<U, ErrorT: Error>(err: Class<ErrorT>, onReject: (error: Error) => $Promisable<U>): Bluebird$Promise<U>;
   caught<U, ErrorT: Error>(err1: Class<ErrorT>, err2: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
   caught<U, ErrorT: Error>(err1: Class<ErrorT>, err2: Class<ErrorT>, err3: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
