@@ -30,7 +30,7 @@ type Props2 = {
   dispatch: Dispatch
 };
 
-class C2 extends React.Component<void, Props2, void> {
+class C2 extends React.Component<Props2> {
   render() {
     return (
       // $ExpectError
@@ -41,7 +41,7 @@ class C2 extends React.Component<void, Props2, void> {
   }
 }
 
-class C3 extends React.Component<void, Props2, void> {
+class C3 extends React.Component<Props2> {
   render() {
     return (
       <div onClick={this.props.dispatch({ type: "A" })}>
