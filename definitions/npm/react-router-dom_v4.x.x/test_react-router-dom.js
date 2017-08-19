@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   BrowserRouter,
   HashRouter,
@@ -18,7 +19,7 @@ import {
 </BrowserRouter>;
 
 // $ExpectError
-<BrowserRouter basename={3} />;
+<BrowserRouter basename={{}} />;
 
 // HashRouter
 <HashRouter><div /></HashRouter>;
@@ -46,7 +47,7 @@ import {
 </Link>;
 
 // $ExpectError
-<Link to={3} />;
+<Link to={[]} />;
 
 // NavLink
 <NavLink to="/about">About</NavLink>;
