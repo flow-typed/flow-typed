@@ -93,6 +93,47 @@ declare module 'leaflet' {
         popupPane: HTMLElement;
     }
 
+    declare type MapOptions = {
+        preferCanvas?: boolean;
+        attributionControl?: boolean;
+        zoomControl?: boolean;
+        closePopupOnClick?: boolean;
+        zoomSnap?: number;
+        zoomDelta?: number;
+        trackResize?: boolean;
+        boxZoom?: boolean;
+        doubleClickZoom?: boolean | string;
+        dragging?: boolean;
+        crs?: CRS;
+        center?: LatLng;
+        zoom?: number;
+        minZoom?: number;
+        maxZoom?: number;
+        layers?: Layer[];
+        maxBounds?: LatLngBounds;
+        renderer?: Renderer;
+        zoomAnimation?: boolean;
+        zoomAnimationThreshold?: number;
+        fadeAnimation?: boolean;
+        markerZoomAnimation?: boolean;
+        transform3DLimit?: number;
+        inertia?: boolean;
+        inertiaDeceleration?: number;
+        inertiaMaxSpeed?: number;
+        easeLinearity?: number;
+        worldCopyJump?: boolean;
+        maxBoundsViscosity?: number;
+        keyboard?: boolean;
+        keyboardPanDelta?: number;
+        scrollWheelZoom?: boolean | string;
+        wheelDebounceTime?: number;
+        wheelPxPerZoomLevel?: number;
+        tap?: boolean;
+        tapTolerance?: number;
+        touchZoom?: boolean | string;
+        bounceAtZoomLimits?: boolean;
+    }
+
     // UI Layers
 
     declare class Marker extends Layer {
@@ -107,12 +148,83 @@ declare module 'leaflet' {
         dragging: Handler;
     }
 
+    declare type MarkerOptions = {
+        icon?: Icon;
+        draggable?: boolean;
+        keyboard?: boolean;
+        title?: string;
+        alt?: string;
+        zIndexOffset?: number;
+        opacity?: number;
+        riseOnHover?: boolean;
+        riseOffset?: number;
+        pane?: string;
+        bubblingMouseEvents?: boolean;
+    }
+
+    declare class Popup extends Layer {
+        options: PopupOptions;
+        constructor(options?: PopupOptions, sourse?: Layer): void;
+        getLatLng(): LatLng;
+        setLatLng(latlng: LatLng): this;
+        getContent(): string | HTMLElement;
+        setContent(htmlContent: string | HTMLElement | ContentFactory): this;
+        getElement(): string | HTMLElement;
+        update(): null;
+        isOpen(): boolean;
+        bringToFront(): this;
+        bringToBack(): this;
+        openOn(map: Map): this;
+    }
+
+    declare type PopupOptions = {
+        maxWidth?: number;
+        minWidth?: number;
+        maxHeight?: number;
+        autoPan?: boolean;
+        autoPanPaddingTopLeft?: Point;
+        autoPanPaddingBottomRight?: Point;
+        autoPanPadding?: Point;
+        keepInView?: boolean;
+        closeButton?: boolean;
+        autoClose?: boolean;
+        closeOnClick?: boolean;
+        className?: string;
+    }
+
+    declare class Tooltip extends Layers {
+        options: TooltipOptions;
+        constructor(options?: TooltipOptions, source?: Layer): void;
+    }
+
+    declare type TooltipOptions = {
+        pane?: string;
+        offset?: Point;
+        direction?: 'right' | 'left' | 'top' | 'bottom' | 'center' | 'auto';
+        permanent?: boolean;
+        sticky?: boolean;
+        interactive?: boolean;
+        opacity?: number;
+    }
+
     // Raster Layers
 
     declare class TileLayer extends GridLayer {
         constructor(url: string, options?: TileLayerOptions): void;
         setUrl(url: string, noRedraw?: boolean): this;
         createTile(coords: Object, done?: Function): HTMLElement;
+    }
+
+    declare type TileLayerOptions = {
+        minZoom?: number;
+        maxZoom?: number;
+        subdomains?: string | string[];
+        errorTileUrl?: string;
+        zoomOffset?: number;
+        tms?: boolean;
+        zoomReverse?: boolean;
+        detectRetina?: boolean;
+        crossOrigin?: boolean;
     }
 
     // Other Layers
@@ -200,6 +312,11 @@ declare module 'leaflet' {
         constructor(options: DivIconOptions): void;
     }
 
+    declare type DivIconOptions = IconOptions & {
+        html?: string;
+        bgPos?: Point;
+    }
+
     // Controls
 
     declare class Layers extends Control {
@@ -238,6 +355,48 @@ declare module 'leaflet' {
         hasEventListeners(type: string): boolean;
     }
 
+    declare class Layer extends Evented {
+        options: LayerOptions;
+
+        addTo(map: Map | LayerGroup): this;
+        remove(): this;
+        removeFrom(map: Map): this;
+        getPane(name?: string): HTMLElement;
+        getAttribution(): string;
+
+        onAdd(map: Map): this;
+        onRemove(map: Map): this;
+        getEvents(): EventMap;
+        beforeAdd(map: Map): this;
+
+        bindPopup(content: PopupContent | ContentFactory, options?: PopupOptions): this;
+        unbindPopup(): this;
+        openPopup(latlng?: LatLng): this;
+        closePopup(): this;
+        togglePopup(): this;
+        isPopupOpen(): boolean;
+        setPopupContent(content: PopupContent): this;
+        getPopup(): Popup;
+
+        bindTooltip(content: TooltipContent | ContentFactory, options?: TooltipOptions): this;
+        unbindTooltip(): this;
+        openTooltip(latlng?: LatLng): this;
+        closeTooltip(): this;
+        toggleTooltip(): this;
+        isTooltipOpen(): boolean;
+        setTooltipContent(content: TooltipContent): this;
+        getTooltip(): Tooltip;
+    }
+
+    declare type LayerOptions = {
+        pane: string;
+        attribution: string;
+    };
+
+    declare type ContentFactory = (layer: Layer) => (string | HTMLElement);
+    declare type PopupContent = string | HTMLElement | Popup;
+    declare type TooltipContent = string | HTMLElement | Tooltip;
+
     declare class Control {
         static Layers: typeof Layers;
         static Zoom: Object;
@@ -254,62 +413,17 @@ declare module 'leaflet' {
         onRemove(map: Map): mixed;
     }
 
+    declare type ControlLayersOptions = ControlOptions & {
+        collapsed?: boolean;
+        autoZIndex?: boolean;
+        hideSingleBase?: boolean;
+        sortLayers?: boolean;
+        sortFunction?: Function;
+    }
+
     // Other
 
     declare type CornerType = LatLng | [number, number];
-
-    declare type TileLayerOptions = {
-        minZoom?: number;
-        maxZoom?: number;
-        subdomains?: string | string[];
-        errorTileUrl?: string;
-        zoomOffset?: number;
-        tms?: boolean;
-        zoomReverse?: boolean;
-        detectRetina?: boolean;
-        crossOrigin?: boolean;
-    };
-
-    declare type MapOptions = {
-        preferCanvas?: boolean;
-        attributionControl?: boolean;
-        zoomControl?: boolean;
-        closePopupOnClick?: boolean;
-        zoomSnap?: number;
-        zoomDelta?: number;
-        trackResize?: boolean;
-        boxZoom?: boolean;
-        doubleClickZoom?: boolean | string;
-        dragging?: boolean;
-        crs?: CRS;
-        center?: LatLng;
-        zoom?: number;
-        minZoom?: number;
-        maxZoom?: number;
-        layers?: Layer[];
-        maxBounds?: LatLngBounds;
-        renderer?: Renderer;
-        zoomAnimation?: boolean;
-        zoomAnimationThreshold?: number;
-        fadeAnimation?: boolean;
-        markerZoomAnimation?: boolean;
-        transform3DLimit?: number;
-        inertia?: boolean;
-        inertiaDeceleration?: number;
-        inertiaMaxSpeed?: number;
-        easeLinearity?: number;
-        worldCopyJump?: boolean;
-        maxBoundsViscosity?: number;
-        keyboard?: boolean;
-        keyboardPanDelta?: number;
-        scrollWheelZoom?: boolean | string;
-        wheelDebounceTime?: number;
-        wheelPxPerZoomLevel?: number;
-        tap?: boolean;
-        tapTolerance?: number;
-        touchZoom?: boolean | string;
-        bounceAtZoomLimits?: boolean;
-    }
 
     declare type LocateOptions = {
         watch?: boolean;
@@ -340,25 +454,6 @@ declare module 'leaflet' {
         maxZoom?: number;
     }
 
-    declare type MarkerOptions = {
-        icon?: Icon;
-        draggable?: boolean;
-        keyboard?: boolean;
-        title?: string;
-        alt?: string;
-        zIndexOffset?: number;
-        opacity?: number;
-        riseOnHover?: boolean;
-        riseOffset?: number;
-        pane?: string;
-        bubblingMouseEvents?: boolean;
-    }
-
-    declare type DivIconOptions = IconOptions & {
-        html?: string;
-        bgPos?: Point;
-    }
-
     declare type EventMap = {
         [type: string]: Function
     };
@@ -367,24 +462,19 @@ declare module 'leaflet' {
         position?: string
     }
 
-    declare type ControlLayersOptions = ControlOptions & {
-        collapsed?: boolean;
-        autoZIndex?: boolean;
-        hideSingleBase?: boolean;
-        sortLayers?: boolean;
-        sortFunction?: Function;
-    }
-
     declare export default {
-        Map         : typeof Map,
-        Marker      : typeof Marker,
-        TileLayer   : typeof TileLayer,
-        LayerGroup  : typeof LayerGroup,
-        LatLng      : typeof LatLng,
-        LatLngBounds: typeof LatLngBounds,
-        Point       : typeof Point,
-        DivIcon     : typeof DivIcon,
-        Evented     : typeof Evented,
-        Control     : typeof Control
+        Map         : Class<Map>,
+        Marker      : Class<Marker>,
+        Popup       : Class<Popup>,
+        Tooltip     : Class<Tooltip>,
+        TileLayer   : Class<TileLayer>,
+        LayerGroup  : Class<LayerGroup>,
+        LatLng      : Class<LatLng>,
+        LatLngBounds: Class<LatLngBounds>,
+        Point       : Class<Point>,
+        DivIcon     : Class<DivIcon>,
+        Evented     : Class<Evented>,
+        Layer       : Class<Layer>,
+        Control     : Class<Control>
     };
 }
