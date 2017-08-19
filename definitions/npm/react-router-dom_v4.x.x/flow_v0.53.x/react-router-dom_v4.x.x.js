@@ -118,7 +118,7 @@ declare module 'react-router-dom' {
   }> {}
 
   declare export class Route extends React$Component<{
-    component?: Class<React$Component<*>>,
+    component?: React$Component<*>,
     render?: (router: ContextRouter) => React$Element<*>,
     children?: (router: ContextRouter) => React$Element<*>,
     path?: string,
