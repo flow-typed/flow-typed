@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 declare module 'react-router-dom' {
   declare export class BrowserRouter extends React$Component<{
     basename?: string,
@@ -120,7 +122,7 @@ declare module 'react-router-dom' {
   declare export class Route extends React$Component<{
     component?: React$Component<*>,
     render?: (router: ContextRouter) => React$Element<*>,
-    children?: (router: ContextRouter) => React$Element<*>,
+    children?: React.ComponentType<ContextRouter>,
     path?: string,
     exact?: bool,
     strict?: bool
