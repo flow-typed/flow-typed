@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 /**
  * 1) Types give additional constraint on a language, recompose was written on the untyped language
  * as a consequence of this fact
