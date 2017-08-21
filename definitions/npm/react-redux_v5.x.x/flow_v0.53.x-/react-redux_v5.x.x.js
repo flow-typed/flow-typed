@@ -51,6 +51,11 @@ declare module "react-redux" {
     children?: any
   }> {}
 
+  declare function createProvider(
+    storeKey?: string,
+    subKey?: string
+  ): Provider<*, *>;
+
   declare type ConnectOptions = {
     pure?: boolean,
     withRef?: boolean
