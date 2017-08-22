@@ -1,7 +1,6 @@
 // @flow
 import React from "react";
-import { connect } from "react-redux";
-import type { Connector } from "react-redux";
+import { connect, type Connector } from "react-redux";
 
 // copy & paste from redux libedef :(
 type ReduxDispatch<A: { type: $Subtype<string> }> = (action: A) => A;
