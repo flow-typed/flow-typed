@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React from "react";
 import {
   StaticRouter,
   MemoryRouter,
@@ -10,23 +10,25 @@ import {
   Switch,
   withRouter,
   matchPath
-} from 'react-router';
-import type { Location, Match, ContextRouter } from 'react-router';
+} from "react-router";
+import type { Location, Match, ContextRouter } from "react-router";
 
 // Location
 var locationOK: Location = {
-  pathname: '/path',
-  search: '?search',
-  hash: '#hash',
+  pathname: "/path",
+  search: "?search",
+  hash: "#hash",
   state: null,
-  key: 'key'
+  key: "key"
 };
 
 // $ExpectError
 var locationError: Location = {};
 
 // StaticRouter
-<StaticRouter context={{}}><div /></StaticRouter>;
+<StaticRouter context={{}}>
+  <div />
+</StaticRouter>;
 <StaticRouter location="/" context={{}} basename="/foo/">
   <div />
 </StaticRouter>;
@@ -35,9 +37,11 @@ var locationError: Location = {};
 <StaticRouter />;
 
 // MemoryRouter
-<MemoryRouter><div /></MemoryRouter>;
+<MemoryRouter>
+  <div />
+</MemoryRouter>;
 <MemoryRouter
-  initialEntries={['/one', '/two', { pathname: '/three' }]}
+  initialEntries={["/one", "/two", { pathname: "/three" }]}
   initialIndex={1}
   getUserConfirmation={(
     message: string,
@@ -49,18 +53,22 @@ var locationError: Location = {};
 </MemoryRouter>;
 
 // $ExpectError
-<MemoryRouter initialEntries={''} />;
+<MemoryRouter initialEntries={""} />;
 
 // Router
 var history: History;
-<Router history={history}><div /></Router>;
+<Router history={history}>
+  <div />
+</Router>;
 
 // $ExpectError
-<Router><div /></Router>;
+<Router>
+  <div />
+</Router>;
 
 // Prompt
 <Prompt message="ok?" when={true} />;
-<Prompt message={location => 'ok?'} />;
+<Prompt message={location => "ok?"} />;
 <Prompt message={location => true} />;
 
 // $ExpectError
@@ -70,9 +78,9 @@ var history: History;
 <Redirect to="/foo" push />;
 <Redirect
   to={{
-    pathname: '/login',
-    search: '?utm=foo',
-    state: { referrer: '/current' }
+    pathname: "/login",
+    search: "?utm=foo",
+    state: { referrer: "/current" }
   }}
 />;
 
@@ -82,10 +90,16 @@ var history: History;
 // Route
 var User = () => <div />;
 <Route path="/user/:username" component={User} exact={true} strict={true} />;
-<Route path="/home" render={({ match }) => <div>Home {match.path}</div>} />;
+<Route
+  path="/home"
+  render={({ match }) =>
+    <div>
+      Home {match.path}
+    </div>}
+/>;
 <Route
   path="/"
-  children={({ match }) => <div className={match ? 'active' : ''} />}
+  children={({ match }) => <div className={match ? "active" : ""} />}
 />;
 
 // $ExpectError
@@ -102,9 +116,10 @@ type FooProps = {
   location: Location,
   name: string
 };
-const Foo = ({ location, name }: FooProps) => (
-  <div>{location.pathname} {name}</div>
-);
+const Foo = ({ location, name }: FooProps) =>
+  <div>
+    {location.pathname} {name}
+  </div>;
 const FooWithRouter = withRouter(Foo);
 <FooWithRouter name="name" />;
 
@@ -115,7 +130,7 @@ const BarWithRouter = withRouter(Bar);
 <BarWithRouter name="name" />;
 
 // $ExpectError
-withRouter('nope');
+withRouter("nope");
 
 // const FooWithRouterError = withRouter(Foo);
 // <FooWithRouterError name={3} />;
@@ -132,7 +147,7 @@ type WithRouterProps = ContextRouter & {
 // $ExpectError
 const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
   // Wrong arguments here, error will bubble up to the component declaration
-  history.push(['bla']);
+  history.push(["bla"]);
   return (
     <div>
       {name}
@@ -141,15 +156,15 @@ const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
 };
 
 // matchPath
-const match: null | Match = matchPath('/the/pathname', '/the/:dynamicId', {
+const match: null | Match = matchPath("/the/pathname", "/the/:dynamicId", {
   exact: true,
   strict: false
 });
-const match2: null | Match = matchPath('/the/pathname', '/the/:dynamicId');
+const match2: null | Match = matchPath("/the/pathname", "/the/:dynamicId");
 
 // $ExpectError
-matchPath('/the/pathname');
+matchPath("/the/pathname");
 // $ExpectError
 matchPath();
 // $ExpectError
-const matchError: string = matchPath('/the/pathname', 'the/:dynamicId');
+const matchError: string = matchPath("/the/pathname", "the/:dynamicId");
