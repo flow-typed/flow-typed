@@ -82,9 +82,8 @@ const match: null | Match = matchPath('/the/pathname', {
   strict: false
 })
 const match2: null | Match = matchPath('/the/pathname', {path: '/the/:dynamicId'})
+const match3: null | Match = matchPath('/the/pathname')
 
-// $ExpectError
-matchPath('/the/pathname')
 // $ExpectError
 matchPath()
 // $ExpectError
