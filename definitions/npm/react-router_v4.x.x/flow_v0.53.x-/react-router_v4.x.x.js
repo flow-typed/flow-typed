@@ -1,4 +1,4 @@
-declare module 'react-router' {
+declare module "react-router" {
   // NOTE: many of these are re-exported by react-router-dom and
   // react-router-native, so when making changes, please be sure to update those
   // as well.
@@ -17,20 +17,24 @@ declare module 'react-router' {
     state?: any
   };
 
-  declare export type HistoryAction = 'PUSH' | 'REPLACE' | 'POP';
+  declare export type HistoryAction = "PUSH" | "REPLACE" | "POP";
 
   declare export type RouterHistory = {
     length: number,
     location: Location,
     action: HistoryAction,
-    listen(callback: (location: Location, action: HistoryAction) => void): () => void,
+    listen(
+      callback: (location: Location, action: HistoryAction) => void
+    ): () => void,
     push(path: string | LocationShape, state?: any): void,
     replace(path: string | LocationShape, state?: any): void,
     go(n: number): void,
     goBack(): void,
     goForward(): void,
     canGo?: (n: number) => boolean,
-    block(callback: (location: Location, action: HistoryAction) => boolean): void,
+    block(
+      callback: (location: Location, action: HistoryAction) => boolean
+    ): void,
     // createMemoryHistory
     index?: number,
     entries?: Array<Location>
@@ -49,7 +53,10 @@ declare module 'react-router' {
     match: Match
   };
 
-  declare export type GetUserConfirmation = (message: string, callback: (confirmed: boolean) => void) => void;
+  declare export type GetUserConfirmation = (
+    message: string,
+    callback: (confirmed: boolean) => void
+  ) => void;
 
   declare type StaticRouterContext = {
     url?: string
@@ -88,23 +95,28 @@ declare module 'react-router' {
   declare export class Route extends React$Component<{
     component?: React$ComponentType<*>,
     render?: (router: ContextRouter) => React$Node,
-    children?: React.ComponentType<ContextRouter>,
+    children?: React$ComponentType<ContextRouter>,
     path?: string,
     exact?: boolean,
     strict?: boolean
   }> {}
 
   declare export class Switch extends React$Component<{
-    children?: React$Node,
+    children?: React$Node
   }> {}
 
-  declare export function withRouter<P>(Component: React$ComponentType<P> | FunctionComponent<P>): React$ComponentType<$Diff<P, ContextRouter>>;
+  declare export function withRouter<P>(
+    Component: React$ComponentType<P>
+  ): React$ComponentType<$Diff<P, ContextRouter>>;
 
   declare type MatchPathOptions = {
     path?: string,
     exact?: boolean,
     strict?: boolean,
-    sensitive?: boolean,
+    sensitive?: boolean
   };
-  declare export function matchPath(pathname: string, options?: MatchPathOptions | string): null | Match;
+  declare export function matchPath(
+    pathname: string,
+    options?: MatchPathOptions | string
+  ): null | Match;
 }

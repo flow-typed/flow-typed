@@ -152,14 +152,14 @@ const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
 };
 
 // matchPath
-const match: null | Match = matchPath("/the/pathname", "/the/:dynamicId", {
+const match: null | Match = matchPath("/the/pathname", {
+  path: "/the/:dynamicId",
   exact: true,
   strict: false
 });
 const match2: null | Match = matchPath("/the/pathname", "/the/:dynamicId");
+const match3: null | Match = matchPath("/the/pathname");
 
-// $ExpectError
-matchPath("/the/pathname");
 // $ExpectError
 matchPath();
 // $ExpectError
