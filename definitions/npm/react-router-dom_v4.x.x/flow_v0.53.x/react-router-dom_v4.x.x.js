@@ -140,8 +140,8 @@ declare module "react-router-dom" {
   }> {}
 
   declare export function withRouter<P>(
-    Component: React$ComponentType<P>
-  ): React$ComponentType<$Diff<P, ContextRouter>>;
+    Component: React$ComponentType<ContextRouter & P>
+  ): React$ComponentType<P>;
 
   declare type MatchPathOptions = {
     path?: string,
