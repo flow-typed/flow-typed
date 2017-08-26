@@ -1,3 +1,5 @@
+/* eslint-disable flowtype/no-weak-types */
+
 type JasmineExpectType = {
   not: JasmineExpectType,
   toBe(value: mixed): void,
@@ -23,13 +25,13 @@ declare function describe(name: string, fn: Function): void;
 declare function fdescribe(name: string, fn: Function): void;
 declare function xdescribe(name: string, fn: Function): void;
 
-declare function beforeEach(fn: Function): void;
-declare function afterEach(fn: Function): void;
-declare function beforeAll(fn: Function): void;
-declare function afterAll(fn: Function): void;
+declare function beforeEach(fn: Function, timeout?: number): void;
+declare function afterEach(fn: Function, timeout?: number): void;
+declare function beforeAll(fn: Function, timeout?: number): void;
+declare function afterAll(fn: Function, timeout?: number): void;
 
-declare function it(name: string, fn: Function): void;
-declare function fit(name: string, fn: Function): void;
+declare function it(name: string, fn: Function, timeout?: number): void;
+declare function fit(name: string, fn: Function, timeout?: number): void;
 declare function xit(name: string, fn: Function): void;
 
 declare function expect(value: mixed): JasmineExpectType;
