@@ -158,9 +158,11 @@ declare module 'react-router-dom' {
   declare export function withRouter<P, S>(Component: ClassComponent<void, P, S> | FunctionComponent<P>): ClassComponent<void, $Diff<P, ContextRouter>, S>;
 
   declare type MatchPathOptions = {
-    path: string,
+    path: ?string,
     exact?: boolean,
     strict?: boolean,
-  }
-  declare export function matchPath(pathname: string, options: MatchPathOptions): null | Match
+    sensitive?: boolean
+  };
+
+  declare export function matchPath(pathname: string, options?: MatchPathOptions | string): null | Match
 }

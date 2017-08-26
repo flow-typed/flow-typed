@@ -135,11 +135,6 @@ withRouter("nope");
 const BarWithRouterError = withRouter(Bar);
 <BarWithRouterError name={3} />;
 
-// Test ContextRouter as props
-type WithRouterProps = ContextRouter & {
-  name: string
-};
-
 // $ExpectError
 const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
   // Wrong arguments here, error will bubble up to the component declaration
@@ -152,15 +147,27 @@ const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
 };
 
 // matchPath
-const match: null | Match = matchPath("/the/pathname", "/the/:dynamicId", {
+const match: null | Match = matchPath("/the/pathname", {
+  path: "/the/:dynamicId",
   exact: true,
   strict: false
 });
 const match2: null | Match = matchPath("/the/pathname", "/the/:dynamicId");
+const match3: null | Match = matchPath("/the/pathname");
 
-// $ExpectError
-matchPath("/the/pathname");
 // $ExpectError
 matchPath();
 // $ExpectError
 const matchError: string = matchPath("/the/pathname", "the/:dynamicId");
+
+const Unrouted: React$ComponentType<
+  ContextRouter & {| someProp: string |}
+> = () => <span />;
+
+const Routed1: React$ComponentType<{| someProp: string |}> = withRouter(
+  Unrouted
+);
+// $ExpectError
+const Routed2: React$ComponentType<{| someProp2: string |}> = withRouter(
+  Unrouted
+);

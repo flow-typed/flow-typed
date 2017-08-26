@@ -1,7 +1,41 @@
-declare module "react-router" {
-  // NOTE: many of these are re-exported by react-router-dom and
-  // react-router-native, so when making changes, please be sure to update those
-  // as well.
+import * as React from "react";
+
+declare module "react-router-dom" {
+  declare export class BrowserRouter extends React$Component<{
+    basename?: string,
+    forceRefresh?: boolean,
+    getUserConfirmation?: GetUserConfirmation,
+    keyLength?: number,
+    children?: React$Node
+  }> {}
+
+  declare export class HashRouter extends React$Component<{
+    basename?: string,
+    getUserConfirmation?: GetUserConfirmation,
+    hashType?: "slash" | "noslash" | "hashbang",
+    children?: React$Node
+  }> {}
+
+  declare export class Link extends React$Component<{
+    to: string | LocationShape,
+    replace?: boolean,
+    children?: React$Node
+  }> {}
+
+  declare export class NavLink extends React$Component<{
+    to: string | LocationShape,
+    activeClassName?: string,
+    className?: string,
+    activeStyle?: Object,
+    style?: Object,
+    isActive?: (match: Match, location: Location) => boolean,
+    children?: React$Node,
+    exact?: boolean,
+    strict?: boolean
+  }> {}
+
+  // NOTE: Below are duplicated from react-router. If updating these, please
+  // update the react-router and react-router-native types as well.
   declare export type Location = {
     pathname: string,
     search: string,
@@ -95,7 +129,7 @@ declare module "react-router" {
   declare export class Route extends React$Component<{
     component?: React$ComponentType<*>,
     render?: (router: ContextRouter) => React$Node,
-    children?: React$ComponentType<ContextRouter>,
+    children?: React.ComponentType<ContextRouter>,
     path?: string,
     exact?: boolean,
     strict?: boolean
@@ -112,9 +146,10 @@ declare module "react-router" {
   declare type MatchPathOptions = {
     path?: string,
     exact?: boolean,
-    strict?: boolean,
-    sensitive?: boolean
+    sensitive?: boolean,
+    strict?: boolean
   };
+
   declare export function matchPath(
     pathname: string,
     options?: MatchPathOptions | string
