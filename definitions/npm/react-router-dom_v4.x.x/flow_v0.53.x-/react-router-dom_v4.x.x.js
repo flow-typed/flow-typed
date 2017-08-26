@@ -1,0 +1,175 @@
+declare module 'react-router-dom' {
+  declare class BrowserRouter extends React$Component<BrowserRouterProps> {}
+
+  declare export type BrowserRouterProps = {
+    basename?: string,
+    forceRefresh?: boolean,
+    getUserConfirmation?: GetUserConfirmation,
+    keyLength?: number,
+    children?: React$Element<*>,
+  }
+
+  declare export class HashRouter extends React$Component <HashRouterProps> {}
+
+  declare export type HashRouterProps = {
+    basename?: string,
+    getUserConfirmation?: GetUserConfirmation,
+    hashType?: 'slash' | 'noslash' | 'hashbang',
+    children?: React$Element<*>,
+  }
+
+  declare export class Link extends React$Component <LinkProps> {}
+
+  declare export type LinkProps = {
+    to: string | LocationShape,
+    onClick?: Function,
+    innerRef?: string | Function,
+    target?: '_blank' | '_self' | '_top' | '_parent',
+    replace?: boolean,
+    children?: React$Element<*>,
+  }
+
+  declare export class NavLink extends React$Component <NavLinkProps> {}
+
+  declare export type NavLinkProps = {
+    to: string | LocationShape,
+    activeClassName?: string,
+    className?: string,
+    activeStyle?: Object,
+    style?: Object,
+    isActive?: (match: Match, location: Location) => boolean,
+    children?: React$Element<*>,
+    exact?: boolean,
+    strict?: boolean,
+  }
+
+  // NOTE: Below are duplicated from react-router. If updating these, please
+  // update the react-router and react-router-native types as well.
+  declare export type Location = {
+    pathname: string,
+    search: string,
+    hash: string,
+    state?: any,
+    key?: string
+  };
+
+  declare export type LocationShape = {
+    pathname?: string,
+    search?: string,
+    hash?: string,
+    state?: any
+  };
+
+  declare export type HistoryAction = "PUSH" | "REPLACE" | "POP";
+
+  declare export type RouterHistory = {
+    length: number,
+    location: Location,
+    action: HistoryAction,
+    listen(
+      callback: (location: Location, action: HistoryAction) => void
+    ): () => void,
+    push(path: string | LocationShape, state?: any): void,
+    replace(path: string | LocationShape, state?: any): void,
+    go(n: number): void,
+    goBack(): void,
+    goForward(): void,
+    canGo?: (n: number) => boolean,
+    block(
+      callback: (location: Location, action: HistoryAction) => boolean
+    ): void,
+    // createMemoryHistory
+    index?: number,
+    entries?: Array<Location>
+  };
+
+  declare export type Match = {
+    params: { [key: string]: ?string },
+    isExact: boolean,
+    path: string,
+    url: string
+  };
+
+  declare export type ContextRouter = {
+    history: RouterHistory,
+    location: Location,
+    match: Match
+  };
+
+  declare export type GetUserConfirmation = (
+    message: string,
+    callback: (confirmed: boolean) => void
+  ) => void;
+
+  declare type StaticRouterContext = {
+    url?: string
+  };
+
+  declare export class StaticRouter extends React$Component <StaticRouterProps> {}
+
+  declare type StaticRouterProps = {
+    basename?: string,
+    location?: string | Location,
+    context: StaticRouterContext,
+    children?: React$Element<*>
+  };
+
+  declare export class MemoryRouter extends React$Component <MemoryRouterProps> {}
+
+  declare export type MemoryRouterProps = {
+    initialEntries?: Array<LocationShape | string>,
+    initialIndex?: number,
+    getUserConfirmation?: GetUserConfirmation,
+    keyLength?: number,
+    children?: React$Element<*>,
+  }
+
+  declare export class Router extends React$Component <RouterProps> {}
+
+  declare export type RouterProps = {
+    history: RouterHistory,
+    children?: React$Element<*>,
+  }
+
+  declare export class Prompt extends React$Component <PromptProps> {}
+
+  declare export type PromptProps = {
+    message: string | (location: Location) => string | true,
+    when?: boolean,
+  }
+
+  declare export class Redirect extends React$Component <RedirectProps> {}
+
+  declare export type RedirectProps = {
+    to: string | LocationShape,
+    push?: boolean,
+  }
+
+  declare export class Route extends React$Component <RouteProps> {}
+
+  declare export type RouteProps = {
+    component?: Class<React$Component<*>>,
+    render?: (router: ContextRouter) => React$Element<*>,
+    children?: (router: ContextRouter) => React$Element<*>,
+    path?: string,
+    exact?: boolean,
+    strict?: boolean,
+  }
+
+  declare export class Switch extends React$Component <SwitchProps> {}
+
+  declare export type SwitchProps = {
+    children?: Array<React$Element<*>>,
+  }
+
+  declare export type FunctionComponent<P> = (props: P) => ?React$Element<any>;
+  declare export type ClassComponent<P, S> = Class<React$Component<P, S>>;
+  declare export function withRouter<P, S>(Component: ClassComponent<P, S> | FunctionComponent<P>): ClassComponent<$Diff<P, ContextRouter>, S>;
+
+  declare export type MatchPathOptions = {
+    path: string,
+    exact?: boolean,
+    strict?: boolean,
+  }
+  declare export function matchPath(pathname: string, options: MatchPathOptions): null | Match
+}
