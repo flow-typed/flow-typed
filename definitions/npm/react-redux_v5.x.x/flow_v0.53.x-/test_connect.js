@@ -170,17 +170,31 @@ const CC9 = connector9(C3);
 <CC9 b={1} />; // wrong b type
 
 //
+// connect(() => mapStateToProps)
+//
+const connector10: Connector<
+  OwnProps1,
+  Props2
+> = connect(() => (state: State) => ({ a: state.c }));
+const CC10 = connector10(C3);
+<CC10 b="s" />;
+// $ExpectError
+<CC10 />; // missing b
+// $ExpectError
+<CC10 b={1} />; // wrong b type
+
+//
 // connect(mapStateToProps, mapDispatchToProps, MergeProps)
 //
 
-const connector10: Connector<{}, Props2> = connect(
+const connector11: Connector<{}, Props2> = connect(
   (state: State) => ({ a: state.c }),
   (dispatch: Dispatch) => ({ dispatch }),
   (stateProps, dispatchProps) =>
     Object.assign({}, stateProps, dispatchProps, { b: "s" })
 );
-const CC10 = connector10(C3);
-<CC10 />;
+const CC11 = connector11(C3);
+<CC11 />;
 
 //
 // ConnectedComponent
