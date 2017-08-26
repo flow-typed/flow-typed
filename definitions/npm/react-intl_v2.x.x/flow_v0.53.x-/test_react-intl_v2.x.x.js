@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from "react";
 import {
   intlShape,
   addLocaleData,
@@ -12,22 +12,22 @@ import {
   FormattedRelative,
   FormattedNumber,
   FormattedPlural,
-  IntlProvider,
-} from 'react-intl';
-import type { IntlShape } from 'react-intl';
+  IntlProvider
+} from "react-intl";
+import type { IntlShape } from "react-intl";
 
-intlShape({ foo: 'bar' }, 'propName', 'TestComponentName');
+intlShape({ foo: "bar" }, "propName", "TestComponentName");
 // $ExpectError number. This type is incompatible with void
 const result1: number = intlShape(
-  { foo: 'bar' },
-  'propName',
-  'TestComponentName',
+  { foo: "bar" },
+  "propName",
+  "TestComponentName"
 );
 
 const localeData = {
-  locale: 'fi',
-  testKey: { foo: 'bar' },
-  testKey2: { baz: 'buu' },
+  locale: "fi",
+  testKey: { foo: "bar" },
+  testKey2: { baz: "buu" }
 };
 addLocaleData(localeData);
 // $ExpectError number. This type is incompatible with void
@@ -35,15 +35,15 @@ const resultLocaleData: number = addLocaleData(localeData);
 
 const messages = {
   messagekey1: {
-    id: 'messageid1',
-    defaultMessage: 'Nice default message',
-    description: 'description field yeah',
+    id: "messageid1",
+    defaultMessage: "Nice default message",
+    description: "description field yeah"
   },
   messagekey2_foo: {
-    id: 'messageid2_foo',
-    defaultMessage: 'Nice default message for second translation id',
-    description: 'description field yeah for second field',
-  },
+    id: "messageid2_foo",
+    defaultMessage: "Nice default message for second translation id",
+    description: "description field yeah for second field"
+  }
 };
 const messageDescriptorMap = defineMessages(messages);
 // $ExpectError foo is undefined
@@ -55,59 +55,100 @@ const messageDescriptorMap3: Array<string> = defineMessages(messages);
 // $ExpectError string. This type is incompatible with MessageDescriptorMap
 const messageDescriptorMap4: string = defineMessages(messages);
 
-class TestComponent extends Component {
+class TestComponent extends React.Component<{ name: string, intl: IntlShape }> {
   render() {
-    return React.createElement('div', null, `Hello ppl`);
+    return React.createElement("div", {}, `Hello ${this.props.name}`);
   }
 }
-const InjectedTestComponent: ReactClass<*> = injectIntl(TestComponent);
-const InjectedTestComponentWithRef: ReactClass<*> = injectIntl(TestComponent, {
-  withRef: true,
+
+const InjectedTestComponent: React.ComponentType<{ name: string }> = injectIntl(
+  TestComponent
+);
+
+const InjectedTestComponentWithRef: React.ComponentType<{
+  name: string
+}> = injectIntl(TestComponent, {
+  withRef: true
 });
-// $ExpectError void. This type is incompatible with ReactClass<*>
+
+// $ExpectError This type is incompatible
+const BadPropsComponent: React.ComponentType<{ name: number }> = injectIntl(
+  TestComponent
+);
+
+// $ExpectError This type is incompatible
+const ExtraPropsComponent: React.ComponentType<{ foo: number }> = injectIntl(
+  TestComponent
+);
+
+// $ExpectError void. This type is incompatible
 const FailingInjectedTestComponent: void = injectIntl(TestComponent);
 
-const MessageComponent: ReactClass<
-  *,
-> = injectIntl((props: { intl: IntlShape }) => {
-  const { formatMessage } = props.intl;
-  return <div>{formatMessage(messageDescriptorMap.messagekey1)}</div>;
-});
-// const HTMLMessageComponent: ReactClass<
+const MessageComponent: React.ComponentType<{}> = injectIntl(
+  (props: { intl: IntlShape }) => {
+    const { formatMessage } = props.intl;
+    return (
+      <div>
+        {formatMessage(messageDescriptorMap.messagekey1)}
+      </div>
+    );
+  }
+);
+// const HTMLMessageComponent: React.ComponentType<
 //   *,
 // > = injectIntl((props: { intl: IntlShape }) => {
 //   const { formatHTMLMessage } = props.intl;
 //   return <div>{formatHTMLMessage(messageDescriptorMap.messagekey2)}</div>;
 // });
-const DateComponent: ReactClass<
-  *,
+const DateComponent: React.ComponentType<
+  *
 > = injectIntl((props: { intl: IntlShape }) => {
   const { formatDate } = props.intl;
-  return <div>{formatDate(new Date(1459832991883))}</div>;
+  return (
+    <div>
+      {formatDate(new Date(1459832991883))}
+    </div>
+  );
 });
-const TimeComponent: ReactClass<
-  *,
+const TimeComponent: React.ComponentType<
+  *
 > = injectIntl((props: { intl: IntlShape }) => {
   const { formatTime } = props.intl;
-  return <div>{formatTime(new Date(1459832991883))}</div>;
+  return (
+    <div>
+      {formatTime(new Date(1459832991883))}
+    </div>
+  );
 });
-const RelativeComponent: ReactClass<
-  *,
+const RelativeComponent: React.ComponentType<
+  *
 > = injectIntl((props: { intl: IntlShape }) => {
   const { formatRelative } = props.intl;
-  return <div>{formatRelative(Date.now())}</div>;
+  return (
+    <div>
+      {formatRelative(Date.now())}
+    </div>
+  );
 });
-const NumberComponent: ReactClass<
-  *,
+const NumberComponent: React.ComponentType<
+  *
 > = injectIntl((props: { intl: IntlShape }) => {
   const { formatNumber } = props.intl;
-  return <div>{formatNumber(1000)}</div>;
+  return (
+    <div>
+      {formatNumber(1000)}
+    </div>
+  );
 });
-const PluralComponent: ReactClass<
-  *,
+const PluralComponent: React.ComponentType<
+  *
 > = injectIntl((props: { intl: IntlShape }) => {
   const { formatPlural } = props.intl;
-  return <div>{formatPlural(10, { one: 'message', other: 'messages' })}</div>;
+  return (
+    <div>
+      {formatPlural(10, { one: "message", other: "messages" })}
+    </div>
+  );
 });
 
 // Components
@@ -136,4 +177,6 @@ const PluralComponent: ReactClass<
 <FormattedRelative value={Date.now()} />;
 <FormattedNumber value={1000} />;
 <FormattedPlural value={10} one="message" other="messages" />;
-<IntlProvider locale="en" />;
+<IntlProvider locale="en">
+  <div />
+</IntlProvider>;
