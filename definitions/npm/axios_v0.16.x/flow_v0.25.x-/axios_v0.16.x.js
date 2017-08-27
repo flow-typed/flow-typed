@@ -62,7 +62,7 @@ declare module 'axios' {
     statusText: string,
     request: http$ClientRequest | XMLHttpRequest
   }
-  declare type $AxiosXHR<T> = $AxiosXHR<T>;
+  declare type $AxiosXHR<T> = AxiosXHR<T>;
   declare class AxiosInterceptorIdent extends String {}
   declare class AxiosRequestInterceptor<T> {
     use(
