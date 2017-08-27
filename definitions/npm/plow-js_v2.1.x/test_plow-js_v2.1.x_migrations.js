@@ -7,6 +7,8 @@ import * as plow from "plow-js";
 plow.$add("foo", "bar", { foo: ["baz"] });
 plow.$add(["foo"], "bar", { foo: ["baz"] });
 plow.$add("foo", "bar", { foo: ["baz"] }).foo;
+plow.$add("foo", "bar", { foo: ["baz"] }).foo[0];
+plow.$add("foo", "bar", { foo: ["baz"] }).foo[1];
 
 // $ExpectError
 plow.$add("foo", "bar", { foo: ["baz"] }).bar;
@@ -61,6 +63,7 @@ plow.$drop(null, { foo: ["baz"] });
 plow.$override("foo", { baz: "bar" }, { foo: {} });
 plow.$override(["foo"], { baz: "bar" }, { foo: {} });
 plow.$override("foo", { baz: "bar" }, { foo: {} }).foo;
+plow.$override("foo", { baz: "bar" }, { foo: {} }).foo.baz;
 
 // $ExpectError
 plow.$override("foo", { baz: "bar" }, { foo: {} }).bar;
@@ -144,21 +147,21 @@ plow.$set(["foo"], "bar", { foo: ["bar"] });
 plow.$set("foo", "bar", { foo: ["bar"] }).foo;
 
 // $ExpectError
-plow.$set("foo", "bar", { foo: ["bar"] }).bar;
+plow.$set("foo", "bar", { foo: ["bar"] }) * 2;
 
 plow.$set("foo", "bar")({ foo: ["bar"] });
 plow.$set(["foo"], "bar")({ foo: ["bar"] });
 plow.$set("foo", "bar")({ foo: ["bar"] }).foo;
 
 // $ExpectError
-plow.$set("foo", "bar")({ foo: ["bar"] }).bar;
+plow.$set("foo", "bar")({ foo: ["bar"] }) * 2;
 
 plow.$set("foo")("bar")({ foo: ["bar"] });
 plow.$set(["foo"])("bar")({ foo: ["bar"] });
 plow.$set("foo")("bar")({ foo: ["bar"] }).foo;
 
 // $ExpectError
-plow.$set("foo")("bar")({ foo: ["bar"] }).bar;
+plow.$set("foo")("bar")({ foo: ["bar"] }) * 2;
 
 // $ExpectError
 plow.$set(null, "bar", { foo: ["bar"] });
@@ -216,3 +219,86 @@ plow.$shift("foo")({ foo: ["baz"] }).bar;
 
 // $ExpectError
 plow.$shift(null, { foo: ["baz"] });
+
+/**
+ * `$unshift`
+ */
+plow.$unshift("foo", "bar", { foo: ["bar"] });
+plow.$unshift(["foo"], "bar", { foo: ["bar"] });
+plow.$unshift("foo", "bar", { foo: ["bar"] }).foo;
+
+// $ExpectError
+plow.$unshift("foo", "bar", { foo: ["bar"] }).bar;
+
+plow.$unshift("foo", "bar")({ foo: ["bar"] });
+plow.$unshift(["foo"], "bar")({ foo: ["bar"] });
+plow.$unshift("foo", "bar")({ foo: ["bar"] }).foo;
+
+// $ExpectError
+plow.$unshift("foo", "bar")({ foo: ["bar"] }).bar;
+
+plow.$unshift("foo")("bar")({ foo: ["bar"] });
+plow.$unshift(["foo"])("bar")({ foo: ["bar"] });
+plow.$unshift("foo")("bar")({ foo: ["bar"] }).foo;
+
+// $ExpectError
+plow.$unshift("foo")("bar")({ foo: ["bar"] }).bar;
+
+// $ExpectError
+plow.$unshift(null, "bar", { foo: ["bar"] });
+
+/**
+ * `$merge`
+ */
+plow.$merge("foo", "bar", { foo: ["bar"] });
+plow.$merge(["foo"], "bar", { foo: ["bar"] });
+plow.$merge("foo", "bar", { foo: ["bar"] }).foo;
+plow.$merge("foo", { baz: 1 }, { foo: { bar: 2 } }).foo.bar;
+plow.$merge("foo", { baz: 1 }, { foo: { bar: 2 } }).foo.baz;
+
+// $ExpectError
+plow.$merge("foo", "bar", { foo: ["bar"] }) * 2;
+
+plow.$merge("foo", "bar")({ foo: ["bar"] });
+plow.$merge(["foo"], "bar")({ foo: ["bar"] });
+plow.$merge("foo", "bar")({ foo: ["bar"] }).foo;
+
+// $ExpectError
+plow.$merge("foo", "bar")({ foo: ["bar"] }) * 2;
+
+plow.$merge("foo")("bar")({ foo: ["bar"] });
+plow.$merge(["foo"])("bar")({ foo: ["bar"] });
+plow.$merge("foo")("bar")({ foo: ["bar"] }).foo;
+
+// $ExpectError
+plow.$merge("foo")("bar")({ foo: ["bar"] }) * 2;
+
+// $ExpectError
+plow.$merge(null, "bar", { foo: ["bar"] });
+
+/**
+ * `$toggle`
+ */
+plow.$toggle("foo", "bar", { foo: ["bar"] });
+plow.$toggle(["foo"], "bar", { foo: ["bar"] });
+plow.$toggle("foo", "bar", { foo: ["bar"] }).foo;
+
+// $ExpectError
+plow.$toggle("foo", "bar", { foo: ["bar"] }).bar;
+
+plow.$toggle("foo", "bar")({ foo: ["bar"] });
+plow.$toggle(["foo"], "bar")({ foo: ["bar"] });
+plow.$toggle("foo", "bar")({ foo: ["bar"] }).foo;
+
+// $ExpectError
+plow.$toggle("foo", "bar")({ foo: ["bar"] }).bar;
+
+plow.$toggle("foo")("bar")({ foo: ["bar"] });
+plow.$toggle(["foo"])("bar")({ foo: ["bar"] });
+plow.$toggle("foo")("bar")({ foo: ["bar"] }).foo;
+
+// $ExpectError
+plow.$toggle("foo")("bar")({ foo: ["bar"] }).bar;
+
+// $ExpectError
+plow.$toggle(null, "bar", { foo: ["bar"] });
