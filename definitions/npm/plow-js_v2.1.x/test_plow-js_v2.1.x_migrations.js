@@ -66,21 +66,21 @@ plow.$override("foo", { baz: "bar" }, { foo: {} }).foo;
 plow.$override("foo", { baz: "bar" }, { foo: {} }).foo.baz;
 
 // $ExpectError
-plow.$override("foo", { baz: "bar" }, { foo: {} }).bar;
+plow.$override("foo", { baz: "bar" }, { foo: {} }) * 2;
 
 plow.$override("foo", { baz: "bar" })({ foo: {} });
 plow.$override(["foo"], { baz: "bar" })({ foo: {} });
 plow.$override("foo", { baz: "bar" })({ foo: {} }).foo;
 
 // $ExpectError
-plow.$override("foo", { baz: "bar" })({ foo: {} }).bar;
+plow.$override("foo", { baz: "bar" })({ foo: {} }) * 2;
 
 plow.$override("foo")({ baz: "bar" })({ foo: {} });
 plow.$override(["foo"])({ baz: "bar" })({ foo: {} });
 plow.$override("foo")({ baz: "bar" })({ foo: {} }).foo;
 
 // $ExpectError
-plow.$override("foo")({ baz: "bar" })({ foo: {} }).bar;
+plow.$override("foo")({ baz: "bar" })({ foo: {} }) * 2;
 
 // $ExpectError
 plow.$override(null, { baz: "bar" }, { foo: {} });

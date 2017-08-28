@@ -150,7 +150,7 @@ plow.$and(
 });
 
 // $ExpectError
-plow.$and({ foo: [2] });
+plow.$and(plow.$contains(1, "foo"), { foo: [2] }).length;
 
 /**
  * `$or`
@@ -164,7 +164,7 @@ plow.$or(
 });
 
 // $ExpectError
-plow.$or({ foo: [2] });
+plow.$or(plow.$contains(1, "foo"), { foo: [2] }).length;
 
 /**
  * `$not`
