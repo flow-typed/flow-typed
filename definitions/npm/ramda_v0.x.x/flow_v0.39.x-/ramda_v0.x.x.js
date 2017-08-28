@@ -6,6 +6,8 @@ type Transformer<A,B> = {
   '@@transducer/result': (result: *) => B
 }
 
+declare type $npm$ramda$Placeholder = {'@@functional/placeholder': true};
+
 
 declare module ramda {
   declare type UnaryFn<A,R> = (a: A) => R;
@@ -602,6 +604,7 @@ declare module ramda {
   declare function project<T>(keys: Array<string>, val: Array<{[key:string]: T}>): Array<{[key:string]: T}>;
 
   declare function prop<T,O:{[k:string]:T}>(key: $Keys<O>, ...rest: Array<void>): (o: O) => ?T;
+  declare function prop<T,O:{[k:string]:T}>(__: $npm$ramda$Placeholder, o: O): (key: $Keys<O>) => ?T;
   declare function prop<T,O:{[k:string]:T}>(key: $Keys<O>, o: O): ?T;
 
   declare function propOr<T,V,A:{[k:string]:V}>(or: T, ...rest: Array<void>):
@@ -635,7 +638,7 @@ declare module ramda {
   // TODO view
 
   // *Function
-  declare var __: *;
+  declare var __: $npm$ramda$Placeholder;
 
   declare var T: (_: any) => true;
   declare var F: (_: any) => false;
