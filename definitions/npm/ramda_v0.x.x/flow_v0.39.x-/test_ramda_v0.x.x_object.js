@@ -126,6 +126,12 @@ const pb:Object = _.pickBy(isUpperCase, ooo)
 const ppp:?number = _.prop('x', { x: 100 })
 //$ExpectError
 const ppp1:?number = _.prop('y', { x: 100 })
+const ppp2:?number = _.prop('x')({ x: 100 })
+//$ExpectError
+const ppp3:?number = _.prop('y')({ x: 100 })
+const ppp4:?number = _.prop(_.__, { x: 100 })('x')
+//$ExpectError
+const ppp5:?number = _.prop(_.__, { x: 100 })('y')
 
 const alice = {
   name: 'ALICE',
