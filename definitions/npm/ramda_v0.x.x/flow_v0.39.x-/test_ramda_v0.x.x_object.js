@@ -42,6 +42,13 @@ const id = objectsClone2.id
 //$ExpectError
 const idE = objectsClone4.id
 
+const dissocd: { a: number } = _.dissoc('b', { a: 1, b: 2 })
+const dissocd2: { a: number } = _.dissoc('b')({ a: 1, b: 2 })
+//$ExpectError
+const dissocd3: { a: string } = _.dissoc('b', { a: 1, b: 2 })
+//$ExpectError
+const dissocd4: { a: string } = _.dissoc('b')({ a: 1, b: 2 })
+
 const o1 = { a: 1, b: 2, c: 3, d: 4 }
 const o2 = { a: 10, b: 20, c: 3, d: 40 }
 const ep: boolean = _.eqProps('a')(o1, o2)
