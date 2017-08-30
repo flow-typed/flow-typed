@@ -11,6 +11,7 @@ import type {
 
   // Temporary
   ReactComponentFunctional as NativeReactComponentFunctional,
+  ReactComponentFunctionalDefaultProps as NativeReactComponentFunctionalDefaultProps,
   ReactComponentClass as NativeReactComponentClass,
   ReactComponentStyled as NativeReactComponentStyled,
   ReactComponentStyledTaggedTemplateLiteral as NativeReactComponentStyledTaggedTemplateLiteral,
@@ -240,15 +241,18 @@ const NativeNeedsFoo2Error: NativeReactComponentFunctional<{ foo: number }> = na
 const NativeNeedsFoo1Functional: NativeReactComponentFunctional<{ foo: string }> = nativeWithTheme(NativeFunctionalComponent);
 const NativeNeedsFoo2Functional: NativeReactComponentFunctional<{ foo: string }> = nativeWithTheme(NativeNeedsFoo1Functional);
 
+const NativeNeedsFoo1FunctionalDefaultProps: NativeReactComponentFunctionalDefaultProps<{ foo: string }, { theme: NativeTheme }> = nativeWithTheme(NativeFunctionalComponent);
+const NativeNeedsFoo2FunctionalDefaultProps: NativeReactComponentFunctionalDefaultProps<{ foo: string }, { theme: NativeTheme }> = nativeWithTheme(NativeNeedsFoo1FunctionalDefaultProps);
+
 // $ExpectError
 const NativeNeedsFoo1ErrorFunctional: NativeReactComponentFunctional<{ foo: number }> = nativeWithTheme(NativeFunctionalComponent);
 // $ExpectError
-const NativeNeedsFoo2ErrorFunctional: NativeReactComponentFunctional<{ foo: string }, { theme: string }> = nativeWithTheme(NativeFunctionalComponent);
+const NativeNeedsFoo2ErrorFunctional: NativeReactComponentFunctionalDefaultProps<{ foo: string }, { theme: string }> = nativeWithTheme(NativeFunctionalComponent);
 // $ExpectError
 const NativeNeedsFoo3ErrorFunctional: NativeReactComponentFunctional<{ foo: number, theme: NativeTheme }> = nativeWithTheme(NativeFunctionalComponent);
 // $ExpectError
 const NativeNeedsFoo4ErrorFunctional: NativeReactComponentFunctional<{ foo: number }> = nativeWithTheme(NativeNeedsFoo1Functional);
 // $ExpectError
-const NativeNeedsFoo5ErrorFunctional: NativeReactComponentFunctional<{ foo: string }, { theme: string }> = nativeWithTheme(NativeNeedsFoo1Functional);
+const NativeNeedsFoo5ErrorFunctional: NativeReactComponentFunctionalDefaultProps<{ foo: string }, { theme: string }> = nativeWithTheme(NativeNeedsFoo1Functional);
 // $ExpectError
-const NativeNeedsFoo6ErrorFunctional: NativeReactComponentFunctional<{ foo: number }, { theme: NativeTheme }> = nativeWithTheme(NativeNeedsFoo1Functional);
+const NativeNeedsFoo6ErrorFunctional: NativeReactComponentFunctionalDefaultProps<{ foo: number }, { theme: NativeTheme }> = nativeWithTheme(NativeNeedsFoo1Functional);

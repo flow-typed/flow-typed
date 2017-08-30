@@ -14,6 +14,7 @@ import type {
 
   // Temporary
   ReactComponentFunctional,
+  ReactComponentFunctionalDefaultProps,
   ReactComponentClass,
   ReactComponentStyled,
   ReactComponentStyledTaggedTemplateLiteral,
@@ -256,15 +257,18 @@ const NeedsFoo2Error: ReactComponentFunctional<{ foo: number }> = styled(NeedsFo
 const NeedsFoo1Functional: ReactComponentFunctional<{ foo: string }> = withTheme(FunctionalComponent);
 const NeedsFoo2Functional: ReactComponentFunctional<{ foo: string }> = withTheme(NeedsFoo1Functional);
 
+const NeedsFoo1FunctionalDefaultProps: ReactComponentFunctionalDefaultProps<{ foo: string }, { theme: Theme }> = withTheme(FunctionalComponent);
+const NeedsFoo2FunctionalDefaultProps: ReactComponentFunctionalDefaultProps<{ foo: string }, { theme: Theme }> = withTheme(NeedsFoo1FunctionalDefaultProps);
+
 // $ExpectError
 const NeedsFoo1ErrorFunctional: ReactComponentFunctional<{ foo: number }> = withTheme(FunctionalComponent);
 // $ExpectError
-const NeedsFoo2ErrorFunctional: ReactComponentFunctional<{ foo: string }, { theme: string }> = withTheme(FunctionalComponent);
+const NeedsFoo2ErrorFunctional: ReactComponentFunctionalDefaultProps<{ foo: string }, { theme: string }> = withTheme(FunctionalComponent);
 // $ExpectError
 const NeedsFoo3ErrorFunctional: ReactComponentFunctional<{ foo: number, theme: Theme }> = withTheme(FunctionalComponent);
 // $ExpectError
 const NeedsFoo4ErrorFunctional: ReactComponentFunctional<{ foo: number }> = withTheme(NeedsFoo1Functional);
 // $ExpectError
-const NeedsFoo5ErrorFunctional: ReactComponentFunctional<{ foo: string }, { theme: string }> = withTheme(NeedsFoo1Functional);
+const NeedsFoo5ErrorFunctional: ReactComponentFunctionalDefaultProps<{ foo: string }, { theme: string }> = withTheme(NeedsFoo1Functional);
 // $ExpectError
-const NeedsFoo6ErrorFunctional: ReactComponentFunctional<{ foo: number }, { theme: Theme }> = withTheme(NeedsFoo1Functional);
+const NeedsFoo6ErrorFunctional: ReactComponentFunctionalDefaultProps<{ foo: number }, { theme: Theme }> = withTheme(NeedsFoo1Functional);
