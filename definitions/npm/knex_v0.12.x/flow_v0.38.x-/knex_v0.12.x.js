@@ -38,6 +38,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   whereBetween(column: string, range: number[]): this,
   whereNotBetween(column: string, range: number[]): this,
   whereRaw(sql: string, bindings?: Knex$RawBindings): this,
+  orWhere(object: { [string]: any }): this,
   orWhere(builder: Knex$QueryBuilderFn<R>): this,
   orWhere(column: string, value: any): this,
   orWhere(column: string, operator: string, value: any): this,

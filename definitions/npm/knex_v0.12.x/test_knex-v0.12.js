@@ -114,3 +114,27 @@ knex("foo").havingRaw();
 knex("foo").whereRaw();
 // $ExpectError
 knex("foo").joinRaw();
+
+
+/**
+ * Knex.orWhere()
+ */
+
+knex("foo").orWhere((qb) => {
+  qb.where("a", "b");
+});
+knex("foo").orWhere("column", "value");
+knex("foo").orWhere("column", "operator", "value");
+knex("foo").orWhere({
+  col1: "val1",
+  col2: "val2"
+});
+
+// $ExpectError
+knex("foo").orWhere();
+// $ExpectError
+knex("foo").orWhere(1, 1);
+// $ExpectError
+knex("foo").orWhere(1, 1, 1);
+// $ExpectError
+knex("foo").orWhere(true);
