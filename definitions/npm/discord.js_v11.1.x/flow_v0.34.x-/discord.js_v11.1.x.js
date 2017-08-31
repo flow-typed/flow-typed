@@ -9,9 +9,9 @@ declare module 'discord.js' {
   declare class AudioPlayer extends events$EventEmitter {
     constructor(voiceConnection: VoiceConnection): this;
     dispatcher: StreamDispatcher;
-    opusEncoder: object;
-    prism: object;
-    transcoder: object;
+    opusEncoder: Object;
+    prism: Object;
+    transcoder: Object;
     voiceConnection: VoiceConnection
   }
 
@@ -20,7 +20,7 @@ declare module 'discord.js' {
   }
 
   declare export class Channel {
-    constructor(client: Client, data: object): this;
+    constructor(client: Client, data: Object): this;
     client: Client;
     createdAt: Date;
     createdTimestamp: number;
@@ -49,8 +49,8 @@ declare module 'discord.js' {
     user: ClientUser;
     users: Collection<Snowflake, User>;
     voiceConnections: Collection<Snowflake, VoiceConnection>;
-    clearInterval(interval: timers$Timeout): void;
-    clearTimeout(timeout: timers$Timeout): void;
+    clearInterval(interval: Timer): void;
+    clearTimeout(timeout: Timer): void;
     createVoiceBroadcast(): VoiceBroadcast;
     destroy(): Promise<void>;
     fetchApplication(id?: Snowflake): Promise<ClientOAuth2Application>;
@@ -60,8 +60,8 @@ declare module 'discord.js' {
     fetchWebhook(id: Snowflake, token?: string): Promise<Webhook>;
     generateInvite(permissions?: PermissionResolvable[] | number): Promise<string>;
     login(token: string): Promise<string>;
-    setInterval(fn: Function, delay: number, ...args: any[]): timers$Timeout;
-    setTimeout(fn: Function, delay: number, ...args: any[]): timers$Timeout;
+    setInterval(fn: Function, delay: number, ...args: any[]): Timer;
+    setTimeout(fn: Function, delay: number, ...args: any[]): Timer;
     sweepMessages(lifetime?: number): number;
     syncGuilds(guilds?: Guild[] | Collection<Snowflake, Guild>): void;
     on(event: string, listener: Function): this;
@@ -168,7 +168,7 @@ declare module 'discord.js' {
   }
 
   declare export class ClientUserSettings {
-    constructor(user: User, data: object): this;
+    constructor(user: User, data: Object): this;
     convertEmoticons: boolean;
     defaultGuildsRestricted: boolean;
     detectPlatformAccounts: boolean;
@@ -187,10 +187,10 @@ declare module 'discord.js' {
     status: PresenceStatus;
     theme: string;
     addRestrictedGuild(guild: Guild): Promise<Guild>;
-    patch(data: object): void;
+    patch(data: Object): void;
     removeRestrictedGuild(guild: Guild): Promise<Guild>;
     setGuildPosition(guild: Guild, position: number, relative?: boolean): Promise<Guild>;
-    update(name: string, value: any): Promise<object >
+    update(name: string, value: any): Promise<Object>
   }
 
   declare class ClientVoiceManager {
@@ -249,7 +249,7 @@ declare module 'discord.js' {
   }
 
   declare export class DMChannel extends Channel mixins PartialTextBasedChannelFields, TextBasedChannelFields {
-    constructor(client: Client, data: object): this;
+    constructor(client: Client, data: Object): this;
     lastMessageID: Snowflake;
     messages: Collection<Snowflake, Message>;
     recipient: User;
@@ -257,7 +257,7 @@ declare module 'discord.js' {
   }
 
   declare export class Emoji {
-    constructor(guild: Guild, data: object): this;
+    constructor(guild: Guild, data: Object): this;
     client: Client;
     createdAt: Date;
     createdTimestamp: number;
@@ -270,11 +270,11 @@ declare module 'discord.js' {
     roles: Collection<Snowflake, Role>;
     url: string;
     edit(data: EmojiEditData): Promise<Emoji>;
-    equals(other: Emoji | object): boolean;
+    equals(other: Emoji | Object): boolean;
     toString(): string
   }
   declare export class Game {
-    constructor(data: object): this;
+    constructor(data: Object): this;
     name: string;
     streaming: boolean;
     type: number;
@@ -283,7 +283,7 @@ declare module 'discord.js' {
   }
 
   declare export class GroupDMChannel extends Channel mixins PartialTextBasedChannelFields, TextBasedChannelFields {
-    constructor(client: Client, data: object): this;
+    constructor(client: Client, data: Object): this;
     applicationID: string;
     icon: string;
     lastMessageID: string;
@@ -299,7 +299,7 @@ declare module 'discord.js' {
   }
 
   declare export class Guild {
-    constructor(client: Client, data: object): this;
+    constructor(client: Client, data: Object): this;
     afkChannelID: string;
     afkTimeout: number;
     applicationID: string;
@@ -313,7 +313,7 @@ declare module 'discord.js' {
     embedEnabled: boolean;
     emojis: Collection<Snowflake, Emoji>;
     explicitContentFilter: number;
-    features: object[];
+    features: Object[];
     icon: string;
     iconURL: string;
     id: Snowflake;
@@ -336,7 +336,7 @@ declare module 'discord.js' {
     addMember(user: UserResolvable, options: AddGuildMemberOptions): Promise<GuildMember>;
     allowDMs(allow: boolean): Promise<Guild>;
     ban(user: UserResolvable, deleteDays?: number): Promise<GuildMember | User | string>;
-    createChannel(name: string, type: 'text' | 'voice', overwrites?: PermissionOverwrites[] | object[]): Promise<TextChannel | VoiceChannel>;
+    createChannel(name: string, type: 'text' | 'voice', overwrites?: PermissionOverwrites[] | Object[]): Promise<TextChannel | VoiceChannel>;
     createEmoji(attachment: BufferResolvable | Base64Resolvable, name: string, roles?: Collection<Snowflake, Role>| Role[]): Promise<Emoji>;
     createRole(data?: RoleData): Promise<Role>;
     delete(): Promise<Guild>;
@@ -370,7 +370,7 @@ declare module 'discord.js' {
   }
 
   declare export class GuildChannel extends Channel {
-    constructor(guild: Guild, data: object): this;
+    constructor(guild: Guild, data: Object): this;
     calculatedPosition: number;
     deletable: boolean;
     guild: Guild;
@@ -389,8 +389,8 @@ declare module 'discord.js' {
     toString(): string
   }
 
-  declare export class GuildMember mixins PartialTextBasedFields {
-    constructor(guild: Guild, data: object): this;
+  declare export class GuildMember mixins PartialTextBasedChannelFields {
+    constructor(guild: Guild, data: Object): this;
     bannable: boolean;
     client: Client;
     colorRole: Role;
@@ -405,7 +405,6 @@ declare module 'discord.js' {
     joinedAt: Date;
     joinedTimestamp: number;
     kickable: boolean;
-    lastMessage: Message;
     lastMessageID: string;
     mute: boolean;
     nickname: string;
@@ -426,7 +425,7 @@ declare module 'discord.js' {
     ban(deleteDays?: number): Promise<GuildMember>;
     createDM(): Promise<DMChannel>;
     deleteDM(): Promise<DMChannel>;
-    edit(data: object): Promise<GuildMember>;
+    edit(data: Object): Promise<GuildMember>;
     hasPermission(permission: PermissionResolvable | PermissionResolvable[], explicit?: boolean, checkAdmin?: boolean, checkOwner?: boolean): boolean;
     hasPermissions(permission: PermissionResolvable[], explicit?: boolean): boolean;
     kick(): Promise<GuildMember>;
@@ -443,7 +442,7 @@ declare module 'discord.js' {
   }
 
   declare export class Invite {
-    constructor(client: Client, data: object): this;
+    constructor(client: Client, data: Object): this;
     channel: GuildChannel | PartialGuildChannel;
     client: Client;
     code: string;
@@ -463,7 +462,7 @@ declare module 'discord.js' {
   }
 
   declare export class Message {
-    constructor(channel: TextChannel | DMChannel | GroupDMChannel, data: object, client: Client): this;
+    constructor(channel: TextChannel | DMChannel | GroupDMChannel, data: Object, client: Client): this;
     attachments: Collection<Snowflake, MessageAttachment>;
     author: User;
     channel: TextChannel | DMChannel | GroupDMChannel;
@@ -498,7 +497,7 @@ declare module 'discord.js' {
     delete(timeout?: number): Promise<Message>;
     edit(content: StringResolvable, options?: MessageEditOptions): Promise<Message>;
     editCode(lang: string, content: StringResolvable): Promise<Message>;
-    equals(message: Message, rawData: object): boolean;
+    equals(message: Message, rawData: Object): boolean;
     fetchWebhook(): Promise<Webhook>;
     isMemberMentioned(member: GuildMember | User): boolean;
     isMentioned(data: GuildChannel | User | Role | Snowflake): boolean;
@@ -511,7 +510,7 @@ declare module 'discord.js' {
   }
 
   declare export class MessageAttachment {
-    constructor(message: Message, data: object): this;
+    constructor(message: Message, data: Object): this;
     client: Client;
     filename: string;
     filesize: number;
@@ -535,7 +534,7 @@ declare module 'discord.js' {
   }
 
   declare export class MessageEmbed {
-    constructor(message: Message, data: object): this;
+    constructor(message: Message, data: Object): this;
     author: MessageEmbedAuthor;
     client: Client;
     color: number;
@@ -556,7 +555,7 @@ declare module 'discord.js' {
   }
 
   declare export class MessageEmbedAuthor {
-    constructor(embed: MessageEmbed, data: object): this;
+    constructor(embed: MessageEmbed, data: Object): this;
     embed: MessageEmbed;
     iconURL: string;
     name: string;
@@ -564,7 +563,7 @@ declare module 'discord.js' {
   }
 
   declare export class MessageEmbedField {
-    constructor(embed: MessageEmbed, data: object): this;
+    constructor(embed: MessageEmbed, data: Object): this;
     embed: MessageEmbed;
     inline: boolean;
     name: string;
@@ -572,7 +571,7 @@ declare module 'discord.js' {
   }
 
   declare export class MessageEmbedFooter {
-    constructor(embed: MessageEmbed, data: object): this;
+    constructor(embed: MessageEmbed, data: Object): this;
     embed: MessageEmbed;
     iconURL: string;
     proxyIconURL: string;
@@ -580,7 +579,7 @@ declare module 'discord.js' {
   }
 
   declare export class MessageEmbedImage {
-    constructor(embed: MessageEmbed, data: object): this;
+    constructor(embed: MessageEmbed, data: Object): this;
     embed: MessageEmbed;
     height: number;
     proxyURL: string;
@@ -589,14 +588,14 @@ declare module 'discord.js' {
   }
 
   declare export class MessageEmbedProvider {
-    constructor(embed: MessageEmbed, data: object): this;
+    constructor(embed: MessageEmbed, data: Object): this;
     embed: MessageEmbed;
     name: string;
     url: string
   }
 
   declare export class MessageEmbedThumbnail {
-    constructor(embed: MessageEmbed, data: object): this;
+    constructor(embed: MessageEmbed, data: Object): this;
     embed: MessageEmbed;
     height: number;
     proxyURL: string;
@@ -605,7 +604,7 @@ declare module 'discord.js' {
   }
 
   declare export class MessageEmbedVideo {
-    constructor(embed: MessageEmbed, data: object): this;
+    constructor(embed: MessageEmbed, data: Object): this;
     embed: MessageEmbed;
     height: number;
     url: string;
@@ -625,7 +624,7 @@ declare module 'discord.js' {
   }
 
   declare export class MessageReaction {
-    constructor(message: Message, emoji: object, count: number, me: boolean): this;
+    constructor(message: Message, emoji: Object, count: number, me: boolean): this;
     count: number;
     emoji: Emoji | ReactionEmoji;
     me: boolean;
@@ -636,8 +635,8 @@ declare module 'discord.js' {
   }
 
   declare export class OAuth2Application {
-    constructor(client: Client, data: object): this;
-    bot: object;
+    constructor(client: Client, data: Object): this;
+    bot: Object;
     botPublic: boolean;
     botRequireCodeGrant: boolean;
     client: Client;
@@ -658,7 +657,7 @@ declare module 'discord.js' {
   }
 
   declare export class PartialGuild {
-    constructor(client: Client, data: object): this;
+    constructor(client: Client, data: Object): this;
     client: Client;
     icon: string;
     id: Snowflake;
@@ -667,7 +666,7 @@ declare module 'discord.js' {
   }
 
   declare export class PartialGuildChannel {
-    constructor(client: Client, data: object): this;
+    constructor(client: Client, data: Object): this;
     client: Client;
     id: Snowflake;
     name: string;
@@ -675,7 +674,7 @@ declare module 'discord.js' {
   }
 
   declare export class PermissionOverwrites {
-    constructor(guildChannel: GuildChannel, data: object): this;
+    constructor(guildChannel: GuildChannel, data: Object): this;
     allow: number;
     channel: GuildChannel;
     deny: number;
@@ -710,9 +709,9 @@ declare module 'discord.js' {
   }
 
   declare export class Presence {
-    constructor(data: object): this;
+    constructor(data: Object): this;
     game: Game;
-    status: online | offline | idle | dnd;
+    status: 'online' | 'offline' | 'idle' | 'dnd';
     equals(presence: Presence): boolean
   }
 
@@ -739,10 +738,10 @@ declare module 'discord.js' {
   }
 
   declare class RequestHandler {
-    constructor(restManager: object): this;
+    constructor(restManager: Object): this;
     globalLimit: boolean;
-    queue: object[];
-    restManager: object;
+    queue: Object[];
+    restManager: Object;
     handle(): void;
     push(request: {}): void
   }
@@ -795,7 +794,7 @@ declare module 'discord.js' {
   }
 
   declare export class Role {
-    constructor(guild: Guild, data: object): this;
+    constructor(guild: Guild, data: Object): this;
     calculatedPosition: number;
     client: Client;
     color: number;
@@ -838,24 +837,24 @@ declare module 'discord.js' {
   }
 
   declare class SequentialRequestHandler extends RequestHandler {
-    constructor(restManager: object, endpoint: string): this;
+    constructor(restManager: Object, endpoint: string): this;
     busy: boolean;
     endpoint: string;
     globalLimit: boolean;
     queue: any[];
-    restManager: object;
+    restManager: Object;
     timeDifference: number;
-    execute(item: any[]): Promise<object | Error>;
+    execute(item: any[]): Promise<Object | Error>;
     handle(): void;
     push(request: {}): void
   }
 
   declare export class Shard {
     constructor(manager: ShardingManager, id: number, args?: string[]): this;
-    env: object;
+    env: Object;
     id: string;
     manager: ShardingManager;
-    process: ChildProcess;
+    process: child_process$ChildProcess;
     eval(script: string): Promise<any>;
     fetchClientValue(prop: string): Promise<any>;
     send(message: any): Promise<Shard >
@@ -873,7 +872,7 @@ declare module 'discord.js' {
 
   declare export class ShardingManager extends events$EventEmitter {
     constructor(file: string, options?: {
-      totalShards?: number | auto,
+      totalShards?: number | 'auto',
       respawn?: boolean,
       shardArgs?: string[],
       token?: string
@@ -889,8 +888,9 @@ declare module 'discord.js' {
     createShard(id: number): Promise<Shard>;
     fetchClientValues(prop: string): Promise<any[]>;
     spawn(amount?: number, delay?: number): Promise<Collection<number, Shard >> ;
-    on(event: launch, listener: (shard: Shard) => void): this;
-    on(event: message, listener: (shard: Shard, message: any) => void): this
+
+    // on(event: 'launch', listener: (shard: Shard) => void): this;
+    // on(event: 'message', listener: (shard: Shard, message: any) => void): this
   }
 
   declare export class SnowflakeUtil {
@@ -913,7 +913,7 @@ declare module 'discord.js' {
   }
 
   declare export class TextChannel extends GuildChannel mixins PartialTextBasedChannelFields, TextBasedChannelFields {
-    constructor(guild: Guild, data: object): this;
+    constructor(guild: Guild, data: Object): this;
     lastMessageID: string;
     members: Collection<Snowflake, GuildMember>;
     messages: Collection<Snowflake, Message>;
@@ -923,7 +923,7 @@ declare module 'discord.js' {
   }
 
   declare export class User {
-    constructor(client: Client, data: object): this;
+    constructor(client: Client, data: Object): this;
     avatar: string;
     avatarURL: string;
     bot: boolean;
@@ -957,9 +957,9 @@ declare module 'discord.js' {
   }
 
   declare export class UserConnection {
-    constructor(user: User, data: object): this;
+    constructor(user: User, data: Object): this;
     id: string;
-    integrations: object[];
+    integrations: Object[];
     name: string;
     revoked: boolean;
     type: string;
@@ -967,7 +967,7 @@ declare module 'discord.js' {
   }
 
   declare export class UserProfile {
-    constructor(user: User, data: object): this;
+    constructor(user: User, data: Object): this;
     client: Client;
     connections: Collection<string, UserConnection>;
     mutualGuilds: Collection<Snowflake, Guild>;
@@ -978,15 +978,15 @@ declare module 'discord.js' {
 
   declare export class Util {
     arrayEqual(a: any[], b: any[]): boolean;
-    cloneObject(obj: object): object;
+    cloneObject(obj: Object): Object;
     convertToBuffer(ab: ArrayBuffer | string): Buffer;
     escapeMarkdown(text: string, onlyCodeBlock?: boolean, onlyInlineCode?: boolean): string;
     fetchRecommendedShards(token: string, guildsPerShard?: number): Promise<number>;
     makeError(obj: { name: string, message: string, stack: string }): Error;
-    makePlainError(err: Error): object;
-    mergeDefault(def: object, given: object): object;
+    makePlainError(err: Error): Object;
+    mergeDefault(def: Object, given: Object): Object;
     moveElementInArray(array: any[], element: any, newIndex: number, offset?: boolean): number;
-    parseEmoji(text: string): object;
+    parseEmoji(text: string): Object;
     splitMessage(text: string, options?: SplitOptions): string | string[];
     str2ab(str: string): ArrayBuffer
   }
@@ -994,9 +994,9 @@ declare module 'discord.js' {
   declare export class VoiceBroadcast extends events$EventEmitter {
     constructor(client: Client): this;
     client: Client;
-    currentTranscoder: object;
+    currentTranscoder: Object;
     dispatchers: StreamDispatcher[];
-    prism: object;
+    prism: Object;
     destroy(): void;
     end(): void;
     pause(): void;
@@ -1007,15 +1007,15 @@ declare module 'discord.js' {
     playStream(stream: stream$Readable, options?: StreamOptions): VoiceBroadcast;
     resume(): void;
 
-    on(event: 'string', listener: Function): this;
-    on(event: 'error', listener: (error: Error) => void): this;
-    on(event: 'subscribe', listener: (dispatcher: StreamDispatcher) => void): this;
-    on(event: 'unsubscribe', listener: (dispatcher: StreamDispatcher) => void): this;
-    on(event: 'warn', listener: (warning: string | Error) => void): this
+    // on(event: 'string', listener: Function): this;
+    // on(event: 'error', listener: (error: Error) => void): this;
+    // on(event: 'subscribe', listener: (dispatcher: StreamDispatcher) => void): this;
+    // on(event: 'unsubscribe', listener: (dispatcher: StreamDispatcher) => void): this;
+    // on(event: 'warn', listener: (warning: string | Error) => void): this
   }
 
   declare export class VoiceChannel extends GuildChannel {
-    constructor(guild: Guild, data: object): this;
+    constructor(guild: Guild, data: Object): this;
     bitrate: number;
     connection: VoiceConnection;
     full: boolean;
@@ -1036,7 +1036,7 @@ declare module 'discord.js' {
     client: Client;
     dispatcher: StreamDispatcher;
     player: AudioPlayer;
-    prism: object;
+    prism: Object;
     receivers: VoiceReceiver[];
     speaking: boolean;
     status: number;
@@ -1049,20 +1049,20 @@ declare module 'discord.js' {
     playFile(file: string, options?: StreamOptions): StreamDispatcher;
     playOpusStream(steam: stream$Readable, options?: StreamOptions): StreamDispatcher;
     playStream(stream: stream$Readable, options?: StreamOptions): StreamDispatcher;
-    sendVoiceStateUpdate(options: object): void;
+    sendVoiceStateUpdate(options: Object): void;
     setSessionID(sessionID: string): void;
     setTokenAndEndpoint(token: string, endpoint: string): void;
 
-    on(event: 'authenticated', listener: () => void): this;
-    on(event: 'debug', listener: (message: string) => void): this;
-    on(event: 'disconnect', listener: (error: Error) => void): this;
-    on(event: 'error', listener: (error: Error) => void): this;
-    on(event: 'failed', listener: (error: Error) => void): this;
-    on(event: 'newSession', listener: () => void): this;
-    on(event: 'ready', listener: () => void): this;
-    on(event: 'reconnecting', listener: () => void): this;
-    on(event: 'speaking', listener: (user: User, speaking: boolean) => void): this;
-    on(event: 'warn', listener: (warning: string | Error) => void): this
+    // on(event: 'authenticated', listener: () => void): this;
+    // on(event: 'debug', listener: (message: string) => void): this;
+    // on(event: 'disconnect', listener: (error: Error) => void): this;
+    // on(event: 'error', listener: (error: Error) => void): this;
+    // on(event: 'failed', listener: (error: Error) => void): this;
+    // on(event: 'newSession', listener: () => void): this;
+    // on(event: 'ready', listener: () => void): this;
+    // on(event: 'reconnecting', listener: () => void): this;
+    // on(event: 'speaking', listener: (user: User, speaking: boolean) => void): this;
+    // on(event: 'warn', listener: (warning: string | Error) => void): this
   }
 
   declare class VoiceConnectionUDPClient extends events$EventEmitter {
@@ -1074,7 +1074,7 @@ declare module 'discord.js' {
     socket: any;
     voiceConnection: VoiceConnection;
     findEndpointAddress(): Promise<string>;
-    send(packet: object): Promise<object >
+    send(packet: Object): Promise<Object >
   }
 
   declare export class VoiceReceiver extends events$EventEmitter {
@@ -1087,13 +1087,13 @@ declare module 'discord.js' {
     destroy(): void;
     recreate(): void;
 
-    on(event: 'opus', listener: (user: User, buffer: Buffer) => void): this;
-    on(event: 'pcm', listener: (user: User, buffer: Buffer) => void): this;
-    on(event: 'warn', listener: (reason: string, message: string) => void): this
+    // on(event: 'opus', listener: (user: User, buffer: Buffer) => void): this;
+    // on(event: 'pcm', listener: (user: User, buffer: Buffer) => void): this;
+    // on(event: 'warn', listener: (reason: string, message: string) => void): this
   }
 
   declare export class VoiceRegion {
-    constructor(data: object): this;
+    constructor(data: Object): this;
     custom: boolean;
     deprecated: boolean;
     id: string;
@@ -1103,7 +1103,7 @@ declare module 'discord.js' {
     vip: boolean
   }
 
-  declare class VoiceWebsocket extends event$EventEmitter {
+  declare class VoiceWebsocket extends events$EventEmitter {
     constructor(voiceConnection: VoiceConnection): this;
     attempts: number;
     client: Client;
@@ -1115,22 +1115,22 @@ declare module 'discord.js' {
     onError(error: Error): void;
     onMessage(event: any): void;
     onOpen(): void;
-    onPacket(packet: object): void;
+    onPacket(packet: Object): void;
     reset(): void;
     send(data: string): Promise<string>;
     sendHeartbeat(): void;
-    sendPacket(packet: object): Promise<string>;
+    sendPacket(packet: Object): Promise<string>;
     setHeartbeat(interval: number): void;
 
-    on(event: 'ready', listener: (packet: object) => void): this;
-    on(event: 'sessionDescription', listener: (encryptionMode: string, secretKey: SecretKey) => void): this;
-    on(event: 'speaking', listener: (data: object) => void): this;
-    on(event: 'unknownPacket', listener: (packet: object) => void): this;
-    on(event: 'warn', listener: (warn: string) => void): this
+    // on(event: 'ready', listener: (packet: Object) => void): this;
+    // on(event: 'sessionDescription', listener: (encryptionMode: string, secretKey: SecretKey) => void): this;
+    // on(event: 'speaking', listener: (data: Object) => void): this;
+    // on(event: 'unknownPacket', listener: (packet: Object) => void): this;
+    // on(event: 'warn', listener: (warn: string) => void): this
   }
 
   declare export class VolumeInterface extends events$EventEmitter {
-    constructor(object?: { volume: number }): this;
+    constructor(Object?: { volume: number }): this;
     volume: number;
     volumeDecibels: number;
     volumeLogarithmic: number;
@@ -1138,23 +1138,23 @@ declare module 'discord.js' {
     setVolumeDecibels(db: number): void;
     setVolumeLogarithmic(value: number): void;
 
-    on(event: 'debug', listener: (information: string) => void): this;
-    on(event: 'end', listener: (reason: string) => void): this;
-    on(event: 'error', listener: (err: Error) => void): this;
-    on(event: 'speaking', listener: (value: boolean) => void): this;
-    on(event: 'start', listener: () => void): this;
-    on(event: 'volumeChange', listener: (oldVolume: number, newVolume: number) => void): this
+    // on(event: 'debug', listener: (information: string) => void): this;
+    // on(event: 'end', listener: (reason: string) => void): this;
+    // on(event: 'error', listener: (err: Error) => void): this;
+    // on(event: 'speaking', listener: (value: boolean) => void): this;
+    // on(event: 'start', listener: () => void): this;
+    // on(event: 'volumeChange', listener: (oldVolume: number, newVolume: number) => void): this
   }
 
   declare export class Webhook {
-    constructor(client: Client, dataOrID: object | string, token: string): this;
+    constructor(client: Client, dataOrID: Object | string, token: string): this;
     avatar: string;
     channelID: string;
     client: Client;
     guildID: string;
     id: Snowflake;
     name: string;
-    owner: User | object;
+    owner: User | Object;
     token: string;
     delete(): Promise<void>;
     edit(name: string, avatar: BufferResolvable): Promise<Webhook>;
@@ -1164,18 +1164,18 @@ declare module 'discord.js' {
     sendFile(attachment: BufferResolvable, name?: string, content?: StringResolvable, options?: WebhookMessageOptions): Promise<Message>;
     sendMessage(content?: StringResolvable, options?: WebhookMessageOptions): Promise<Message | Message[]>;
     sendMessage(options?: WebhookMessageOptions): Promise<Message | Message[]>;
-    sendSlackMessage(body: object): Promise<void >
+    sendSlackMessage(body: Object): Promise<void >
   }
 
   declare export class WebhookClient extends Webhook {
     constructor(id: string, token: string, options?: ClientOptions): this;
 
     options: ClientOptions;
-    clearInterval(interval: timers$Timeout): void;
-    clearTimeout(timeout: timers$Timeout): void;
+    clearInterval(interval: Timer): void;
+    clearTimeout(timeout: Timer): void;
     destroy(): void;
-    setInterval(fn: Function, delay: number, ...args: any[]): timers$Timeout;
-    setTimeout(fn: Function, delay: number, ...args: any[]): timers$Timeout;
+    setInterval(fn: Function, delay: number, ...args: any[]): Timer;
+    setTimeout(fn: Function, delay: number, ...args: any[]): Timer;
   }
 
   declare class PartialTextBasedChannelFields {
@@ -1412,8 +1412,8 @@ declare module 'discord.js' {
       | '-user'
       | '-bot'
       | '-webhook',
-    sortBy?: relevant | recent,
-    sortOrder?: asc | desc,
+    sortBy?: 'relevant' | 'recent',
+    sortOrder?: 'asc' | 'desc',
     contextSize?: number,
     limit?: number,
     offset?: number,
@@ -1614,6 +1614,11 @@ declare module 'discord.js' {
 
   declare type StringResolvable = string | string[] | any;
 
+  declare interface Timer {
+    ref(): void;
+    unref(): void;
+  }
+
   declare type UserResolvable = User | Snowflake | Message | Guild | GuildMember;
 
   declare type VoiceStatus = number;
@@ -1623,7 +1628,7 @@ declare module 'discord.js' {
     avatarURL?: string,
     tts?: boolean,
     nonce?: string,
-    embeds?: object[],
+    embeds?: Object[],
     disableEveryone?: boolean,
     file?: FileOptions | string,
     code?: string | boolean,
