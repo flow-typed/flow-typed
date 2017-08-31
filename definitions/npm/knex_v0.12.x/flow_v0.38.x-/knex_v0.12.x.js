@@ -26,6 +26,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   where(column: string, value: any): this,
   where(column: string, operator: string, value: any): this,
   where(object: { [string]: any }): this,
+  whereNot(object: { [string]: any }): this,
   whereNot(builder: Knex$QueryBuilderFn<R>): this,
   whereNot(column: string, value: any): this,
   whereNot(column: string, operator: string, value: any): this,

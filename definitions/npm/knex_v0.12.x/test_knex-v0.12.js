@@ -138,3 +138,27 @@ knex("foo").orWhere(1, 1);
 knex("foo").orWhere(1, 1, 1);
 // $ExpectError
 knex("foo").orWhere(true);
+
+
+/**
+ * Knex.whereNot()
+ */
+
+knex("foo").whereNot((qb) => {
+  qb.whereNot("a", "b");
+});
+knex("foo").whereNot("column", "value");
+knex("foo").whereNot("column", "operator", "value");
+knex("foo").whereNot({
+  col1: "val1",
+  col2: "val2"
+});
+
+// $ExpectError
+knex("foo").whereNot();
+// $ExpectError
+knex("foo").whereNot(1, 1);
+// $ExpectError
+knex("foo").whereNot(1, 1, 1);
+// $ExpectError
+knex("foo").whereNot(true);
