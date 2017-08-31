@@ -43,6 +43,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   orWhere(builder: Knex$QueryBuilderFn<R>): this,
   orWhere(column: string, value: any): this,
   orWhere(column: string, operator: string, value: any): this,
+  orWhereNot(object: { [string]: any }): this,
   orWhereNot(builder: Knex$QueryBuilderFn<R>): this,
   orWhereNot(column: string, value: any): this,
   orWhereNot(column: string, operator: string, value: any): this,
