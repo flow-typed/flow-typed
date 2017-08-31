@@ -13,3 +13,7 @@ declare module 'classnames' {
 declare module 'classnames/bind' {
   declare module.exports: $Exports<'classnames'>;
 }
+
+declare module 'classnames/dedupe' {
+  declare module.exports: $Exports<'classnames'>;
+}
