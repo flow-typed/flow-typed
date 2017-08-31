@@ -503,16 +503,11 @@ declare module ramda {
 
   declare function clone<T>(src: T): $Shape<T>;
 
-  declare function dissoc<T>(key: string, ...args: Array<void>):
-    ((val: T, ...rest: Array<void>) => (src: {[k:string]:T}) => {[k:string]:T}) & ((val: T, src: {[k:string]:T}) => {[k:string]:T});
-  declare function dissoc<T>(key: string, val:T, ...args: Array<void>): (src: {[k:string]:T}) => {[k:string]:T};
-  declare function dissoc<T>(key: string, val: T, src: {[k:string]:T}): {[k:string]:T};
+  declare function dissoc<T>(key: string, ...args: Array<void>): (src: {[k:string]:T}) => {[k:string]:T};
+  declare function dissoc<T>(key: string, src: {[k:string]:T}): {[k:string]:T};
 
-  declare function dissocPath<T>(key: Array<string>, ...args: Array<void>):
-    ((val: T, ...rest: Array<void>) => (src: {[k:string]:T}) => {[k:string]:T})
-    & ((val: T) => (src: {[k:string]:T}) => {[k:string]:T});
-  declare function dissocPath<T>(key: Array<string>, val:T, ...args: Array<void>): (src: {[k:string]:T}) => {[k:string]:T};
-  declare function dissocPath<T>(key: Array<string>, val:T, src: {[k:string]:T}): {[k:string]:T};
+  declare function dissocPath<T>(key: Array<string>, ...args: Array<void>): (src: {[k:string]:T}) => {[k:string]:T};
+  declare function dissocPath<T>(key: Array<string>, src: {[k:string]:T}): {[k:string]:T};
 
   // TODO: Started failing in v31... (Attempt to fix below)
   // declare type __UnwrapNestedObjectR<T, U, V: NestedObject<(t: T) => U>> = U
