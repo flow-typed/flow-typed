@@ -141,6 +141,30 @@ knex("foo").orWhere(true);
 
 
 /**
+ * Knex.where()
+ */
+
+knex('foo').where((qb) => {
+  qb.where('a', 'b');
+});
+knex('foo').where('column', 'value');
+knex('foo').where('column', 'operator', 'value');
+knex('foo').where({
+  col1: 'val1',
+  col2: 'val2'
+});
+
+// $ExpectError
+knex('foo').where();
+// $ExpectError
+knex('foo').where(1, 1);
+// $ExpectError
+knex('foo').where(1, 1, 1);
+// $ExpectError
+knex('foo').where(true);
+
+
+/**
  * Knex.whereNot()
  */
 
