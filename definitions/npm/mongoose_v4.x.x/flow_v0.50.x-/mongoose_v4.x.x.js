@@ -240,6 +240,7 @@ declare class Mongoose$Document {
   static db: any,
   static modelName: string,
   static schema: Mongoose$Schema<this>,
+  static on(type: string, cb: Function): void,
 
   constructor(data?: $Shape<this>): this,
   id: string | number,
@@ -360,7 +361,7 @@ declare class Mongoose$Query<Result, Doc> extends Promise<Result> {
   getQuery(): Object,
   getUpdate(): Object,
   hint(index: Object): Mongoose$Query<Result, Doc>,
-  lean(passPlainObject: boolean): Mongoose$Query<Result, Doc>,
+  lean(passPlainObject?: boolean): Mongoose$Query<any, Doc>,
   maxScan(n: number): Mongoose$Query<Result, Doc>,
   populate(path: string): Mongoose$Query<Result, Doc>,
   populate(obj: {
@@ -393,7 +394,7 @@ declare class Mongoose$Query<Result, Doc> extends Promise<Result> {
 }
 
 declare class Mongoose$QueryCursor<Doc> {
-  on(type: "data" | "end", cb: Function): void,
+  on(type: "data" | "end" | string, cb: Function): void,
   next(cb: (err: Error, doc: Doc) => void): void
 }
 
