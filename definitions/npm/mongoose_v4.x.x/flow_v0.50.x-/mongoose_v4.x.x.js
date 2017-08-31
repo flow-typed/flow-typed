@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import mongoose from "mongoose";
 
 type MongoId =
@@ -91,12 +93,12 @@ type Mongoose$SchemaHookTypes =
   | "findOneAndRemove"
   | "init";
 
-type Mongoose$SchemaPlugin<Doc, O> = (
-  schema: Mongoose$Schema<Doc>,
-  opts: O
+type Mongoose$SchemaPlugin<Opts> = (
+  schema: Mongoose$Schema<any>,
+  opts: Opts
 ) => void;
 
-declare class Mongoose$Schema<Doc: Object> {
+declare class Mongoose$Schema<Doc> {
   static Types: Mongoose$Types,
   constructor(
     fields: SchemaFields,
@@ -121,7 +123,7 @@ declare class Mongoose$Schema<Doc: Object> {
     serialCb: (doc: Doc, next: Function) => any
   ): void,
   // post(hookType: Mongoose$SchemaHookTypes, serialCb: (error: Error, doc: Doc, next: Function) => any): void;
-  plugin<O>(plugin: Mongoose$SchemaPlugin<Doc, O>, opts: O): void,
+  plugin<Opts>(plugin: Mongoose$SchemaPlugin<Opts>, opts: Opts): void,
   add(fields: SchemaFields, prefix?: string): void,
   loadClass(cls: Class<Doc>): void,
   paths: {
@@ -432,18 +434,17 @@ type ConnectionConnectOpts = {
   }
 };
 type ConnectionEventTypes = "error" | "open" | "disconnected" | string;
-type CreateMongooseModel = <Doc>(
-  name: string,
-  schema: Mongoose$Schema<Doc>,
-  collection?: Mongoose$Collection
-) => Class<Doc>;
 
 declare class Mongoose$Connection {
   constructor(): this,
   close(): Promise<any>,
   connect(uri: string, opts?: ConnectionConnectOpts): void,
   openUri(uri: string, opts?: ConnectionConnectOpts): void,
-  model: CreateMongooseModel,
+  model<Doc>(
+    name: string,
+    schema: Mongoose$Schema<Doc>,
+    collection?: Mongoose$Collection
+  ): Class<Doc>,
   collection(name: string): Mongoose$Collection,
   modelNames(): string[],
   config: Object,
@@ -476,7 +477,7 @@ declare module "mongoose" {
     Schema: typeof Mongoose$Schema,
     Types: Mongoose$Types,
     Promise: any,
-    model: CreateMongooseModel,
+    model: $PropertyType<Mongoose$Connection, "model">,
     createConnection(): Mongoose$Connection,
     set: (key: string, value: string | Function | boolean) => void
   };
