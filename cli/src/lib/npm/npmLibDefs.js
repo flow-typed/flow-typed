@@ -3,36 +3,36 @@
 import {
   ensureCacheRepo,
   getCacheRepoDir,
-  verifyCLIVersion
-} from "../cacheRepoUtils";
+  verifyCLIVersion,
+} from '../cacheRepoUtils';
 
-import { getSignedCodeVersion, verifySignedCode } from "../codeSign";
+import {getSignedCodeVersion, verifySignedCode} from '../codeSign';
 
-import { getFilesInDir } from "../fileUtils";
+import {getFilesInDir} from '../fileUtils';
 
-import type { FlowVersion } from "../flowVersion";
+import type {FlowVersion} from '../flowVersion';
 import {
   disjointVersionsAll as disjointFlowVersionsAll,
   parseDirString as parseFlowDirString,
-  toSemverString as flowVersionToSemver
-} from "../flowVersion";
+  toSemverString as flowVersionToSemver,
+} from '../flowVersion';
 
-import { findLatestFileCommitHash } from "../git";
+import {findLatestFileCommitHash} from '../git';
 
-import { fs, path } from "../node";
+import {fs, path} from '../node';
 
 import {
   getRangeLowerBound,
   getRangeUpperBound,
-  versionToString
-} from "../semver";
+  versionToString,
+} from '../semver';
 
-import semver from "semver";
+import semver from 'semver';
 
-import got from "got";
+import got from 'got';
 
-import type { ValidationErrors as VErrors } from "../validationErrors";
-import { validationError } from "../validationErrors";
+import type {ValidationErrors as VErrors} from '../validationErrors';
+import {validationError} from '../validationErrors';
 
 const P = Promise;
 
@@ -42,14 +42,14 @@ export type NpmLibDef = {|
   version: string,
   flowVersion: FlowVersion,
   path: string,
-  testFilePaths: Array<string>
+  testFilePaths: Array<string>,
 |};
 
 export type NpmLibDefFilter = {|
-  type: "exact",
+  type: 'exact',
   pkgName: string,
   pkgVersion: string,
-  flowVersion?: FlowVersion
+  flowVersion?: FlowVersion,
 |};
 
 const TEST_FILE_NAME_RE = /^test_.*\.js$/;
@@ -59,36 +59,38 @@ async function extractLibDefsFromNpmPkgDir(
   scope: null | string,
   pkgNameVer: string,
   validationErrors?: VErrors,
-  validating?: boolean
+  validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
-  const errContext = `npm/${scope === null ? "" : scope + "/"}${pkgNameVer}`;
+  const errContext = `npm/${scope === null ? '' : scope + '/'}${pkgNameVer}`;
   const parsedPkgNameVer = parsePkgNameVer(
     pkgNameVer,
     errContext,
-    validationErrors
+    validationErrors,
   );
   if (parsedPkgNameVer === null) {
     return [];
   }
-  const { pkgName, pkgVersion } = parsedPkgNameVer;
+  const {pkgName, pkgVersion} = parsedPkgNameVer;
 
   const npmDefsDirPath =
     scope === null
-      ? path.resolve(pkgDirPath, "..")
-      : path.resolve(pkgDirPath, "..", "..");
+      ? path.resolve(pkgDirPath, '..')
+      : path.resolve(pkgDirPath, '..', '..');
 
   const pkgVersionStr = versionToString(pkgVersion);
   const libDefFileName = `${pkgName}_${pkgVersionStr}.js`;
   const pkgDirItems = await fs.readdir(pkgDirPath);
 
   if (validating) {
-    await _npmExists(pkgName).then().catch(error => {
-      // Only fail spen on 404, not on timeout
-      if (error.statusCode === 404) {
-        const pkgError = `Package does not exist on npm!`;
-        validationError(pkgName, pkgError, validationErrors);
-      }
-    });
+    await _npmExists(pkgName)
+      .then()
+      .catch(error => {
+        // Only fail spen on 404, not on timeout
+        if (error.statusCode === 404) {
+          const pkgError = `Package does not exist on npm!`;
+          validationError(pkgName, pkgError, validationErrors);
+        }
+      });
   }
 
   const commonTestFiles = [];
@@ -99,7 +101,7 @@ async function extractLibDefsFromNpmPkgDir(
 
     const pkgDirItemStat = fs.statSync(pkgDirItemPath);
     if (pkgDirItemStat.isFile()) {
-      if (path.extname(pkgDirItem) === ".swp") {
+      if (path.extname(pkgDirItem) === '.swp') {
         return;
       }
 
@@ -112,14 +114,14 @@ async function extractLibDefsFromNpmPkgDir(
 
       const error =
         `Unexpected file name. This directory can only contain test files ` +
-        `or a libdef file named ${"`" + libDefFileName + "`"}.`;
+        `or a libdef file named ${'`' + libDefFileName + '`'}.`;
       validationError(pkgDirItemContext, error, validationErrors);
     } else if (pkgDirItemStat.isDirectory()) {
       const errCount = validationErrors == null ? 0 : validationErrors.size;
       const parsedFlowDir = parseFlowDirString(
         pkgDirItem,
         `${pkgNameVer}/${pkgDirItem}`,
-        validationErrors
+        validationErrors,
       );
       // If parsing a flow directory incurred a validation error, don't keep it
       // around in our list of parsed flow directories
@@ -130,7 +132,7 @@ async function extractLibDefsFromNpmPkgDir(
       }
       parsedFlowDirs.push([pkgDirItemPath, parsedFlowDir]);
     } else {
-      const error = "Unexpected directory item";
+      const error = 'Unexpected directory item';
       validationError(pkgDirItemContext, error, validationErrors);
     }
   });
@@ -138,13 +140,13 @@ async function extractLibDefsFromNpmPkgDir(
   if (!disjointFlowVersionsAll(parsedFlowDirs.map(([_, ver]) => ver))) {
     validationError(
       errContext,
-      "Flow versions not disjoint!",
-      validationErrors
+      'Flow versions not disjoint!',
+      validationErrors,
     );
   }
 
   if (parsedFlowDirs.length === 0) {
-    validationError(errContext, "No libdef files found!", validationErrors);
+    validationError(errContext, 'No libdef files found!', validationErrors);
   }
 
   const libDefs = [];
@@ -156,11 +158,11 @@ async function extractLibDefsFromNpmPkgDir(
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
         const flowDirItemContext = path.relative(
           npmDefsDirPath,
-          flowDirItemPath
+          flowDirItemPath,
         );
         const flowDirItemStat = fs.statSync(flowDirItemPath);
         if (flowDirItemStat.isFile()) {
-          if (path.extname(flowDirItem) === ".swp") {
+          if (path.extname(flowDirItem) === '.swp') {
             return;
           }
 
@@ -180,12 +182,12 @@ async function extractLibDefsFromNpmPkgDir(
 
           const error =
             `Unexpected file. This directory can only contain test files ` +
-            `or a libdef file named ${"`" + libDefFileName + "`"}.`;
+            `or a libdef file named ${'`' + libDefFileName + '`'}.`;
           validationError(flowDirItemContext, error, validationErrors);
         } else {
           const error =
             `Unexpected sub-directory. This directory can only contain test ` +
-            `files or a libdef file named ${"`" + libDefFileName + "`"}.`;
+            `files or a libdef file named ${'`' + libDefFileName + '`'}.`;
           validationError(flowDirItemContext, error, validationErrors);
         }
       });
@@ -203,9 +205,9 @@ async function extractLibDefsFromNpmPkgDir(
         version: pkgVersionStr,
         flowVersion,
         path: libDefFilePath,
-        testFilePaths
+        testFilePaths,
       });
-    })
+    }),
   );
 
   return libDefs;
@@ -214,14 +216,14 @@ async function extractLibDefsFromNpmPkgDir(
 async function getCacheNpmLibDefs() {
   await ensureCacheRepo();
   await verifyCLIVersion();
-  return getNpmLibDefs(path.join(getCacheRepoDir(), "definitions"));
+  return getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
 }
 
 const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
 function parsePkgNameVer(
   pkgNameVer: string,
   errContext: string,
-  validationErrors?: VErrors
+  validationErrors?: VErrors,
 ) {
   const pkgNameVerMatches = pkgNameVer.match(PKG_NAMEVER_RE);
   if (pkgNameVerMatches == null) {
@@ -233,15 +235,15 @@ function parsePkgNameVer(
   }
 
   let [_, pkgName, major, minor, patch, prerel] = pkgNameVerMatches;
-  major = validateVersionNumPart(major, "major", errContext, validationErrors);
-  minor = validateVersionPart(minor, "minor", errContext, validationErrors);
-  patch = validateVersionPart(patch, "patch", errContext, validationErrors);
+  major = validateVersionNumPart(major, 'major', errContext, validationErrors);
+  minor = validateVersionPart(minor, 'minor', errContext, validationErrors);
+  patch = validateVersionPart(patch, 'patch', errContext, validationErrors);
 
   if (prerel != null) {
     prerel = prerel.substr(1);
   }
 
-  return { pkgName, pkgVersion: { major, minor, patch, prerel } };
+  return {pkgName, pkgVersion: {major, minor, patch, prerel}};
 }
 
 /**
@@ -252,9 +254,9 @@ function validateVersionPart(
   part: string,
   partName: string,
   context: string,
-  validationErrs?: VErrors
-): number | "x" {
-  if (part === "x") {
+  validationErrs?: VErrors,
+): number | 'x' {
+  if (part === 'x') {
     return part;
   }
   return validateVersionNumPart(part, partName, context, validationErrs);
@@ -268,7 +270,7 @@ function validateVersionNumPart(
   part: string,
   partName: string,
   context: string,
-  validationErrs?: VErrors
+  validationErrs?: VErrors,
 ): number {
   const num = parseInt(part, 10);
   if (String(num) !== part) {
@@ -284,8 +286,8 @@ function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
   // `^`. (i.e.: "foo_v2.2.x" is the same range as "^2.2.x")
   // UNLESS it is prefixed by the equals character (i.e. "foo_=v2.2.x")
   let libDefSemver =
-    libDefSemverRaw[0] !== "=" && libDefSemverRaw[0] !== "^"
-      ? "^" + libDefSemverRaw
+    libDefSemverRaw[0] !== '=' && libDefSemverRaw[0] !== '^'
+      ? '^' + libDefSemverRaw
       : libDefSemverRaw;
 
   if (semver.valid(pkgSemver)) {
@@ -303,7 +305,7 @@ function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
 
   if (libDefRange.set[0].length !== 2) {
     throw new Error(
-      "Invalid npm libdef version! It appears to be a non-continugous range."
+      'Invalid npm libdef version! It appears to be a non-continugous range.',
     );
   }
 
@@ -322,13 +324,13 @@ function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
 
 function filterLibDefs(
   defs: Array<NpmLibDef>,
-  filter: NpmLibDefFilter
+  filter: NpmLibDefFilter,
 ): Array<NpmLibDef> {
   return defs
     .filter(def => {
       let filterMatch = false;
       switch (filter.type) {
-        case "exact":
+        case 'exact':
           filterMatch =
             filter.pkgName.toLowerCase() === def.name.toLowerCase() &&
             pkgVersionMatch(filter.pkgVersion, def.version);
@@ -342,15 +344,15 @@ function filterLibDefs(
 
       const filterFlowVersion = filter.flowVersion;
       if (filterFlowVersion !== undefined) {
-        const { flowVersion } = def;
+        const {flowVersion} = def;
         switch (flowVersion.kind) {
-          case "all":
+          case 'all':
             return true;
-          case "ranged":
-          case "specific":
+          case 'ranged':
+          case 'specific':
             return semver.satisfies(
               flowVersionToSemver(filterFlowVersion),
-              flowVersionToSemver(def.flowVersion)
+              flowVersionToSemver(def.flowVersion),
             );
           default:
             (flowVersion: empty);
@@ -360,41 +362,41 @@ function filterLibDefs(
       return true;
     })
     .sort((a, b) => {
-      const aZeroed = a.version.replace(/x/g, "0");
-      const bZeroed = b.version.replace(/x/g, "0");
+      const aZeroed = a.version.replace(/x/g, '0');
+      const bZeroed = b.version.replace(/x/g, '0');
       return semver.gt(aZeroed, bZeroed) ? -1 : 1;
     });
 }
 
 async function _npmExists(pkgName: string): Promise<Function> {
   const pkgUrl = `https://www.npmjs.org/package/${pkgName}`;
-  return got(pkgUrl, { method: "HEAD" });
+  return got(pkgUrl, {method: 'HEAD'});
 }
 
 export async function findNpmLibDef(
   pkgName: string,
   pkgVersion: string,
-  flowVersion: FlowVersion
+  flowVersion: FlowVersion,
 ): Promise<null | NpmLibDef> {
   const libDefs = await getCacheNpmLibDefs();
   const filteredLibDefs = filterLibDefs(libDefs, {
-    type: "exact",
+    type: 'exact',
     pkgName,
     pkgVersion,
-    flowVersion
+    flowVersion,
   });
   return filteredLibDefs.length === 0 ? null : filteredLibDefs[0];
 }
 
 type InstalledNpmLibDef =
-  | {| kind: "LibDef", libDef: NpmLibDef |}
-  | {| kind: "Stub", name: string |};
+  | {|kind: 'LibDef', libDef: NpmLibDef|}
+  | {|kind: 'Stub', name: string|};
 export async function getInstalledNpmLibDefs(
   flowProjectRootDir: string,
-  libdefDir?: string
+  libdefDir?: string,
 ): Promise<Map<string, InstalledNpmLibDef>> {
-  const typedefDir = libdefDir || "flow-typed";
-  const libDefDirPath = path.join(flowProjectRootDir, typedefDir, "npm");
+  const typedefDir = libdefDir || 'flow-typed';
+  const libDefDirPath = path.join(flowProjectRootDir, typedefDir, 'npm');
   const installedLibDefs = new Map();
   if (await fs.exists(libDefDirPath)) {
     const filesInNpmDir = await getFilesInDir(libDefDirPath, true);
@@ -411,16 +413,16 @@ export async function getInstalledNpmLibDefs(
               return;
             }
             const matches = signedCodeVer.match(
-              /([^\/]+)\/(@[^\/]+\/)?([^\/]+)\/([^\/]+)/
+              /([^\/]+)\/(@[^\/]+\/)?([^\/]+)\/([^\/]+)/,
             );
             if (matches == null) {
               return;
             }
 
-            if (matches[1] === "<<STUB>>") {
+            if (matches[1] === '<<STUB>>') {
               installedLibDefs.set(terseFilePath, {
-                kind: "Stub",
-                name: matches[2]
+                kind: 'Stub',
+                name: matches[2],
               });
               return;
             }
@@ -435,11 +437,11 @@ export async function getInstalledNpmLibDefs(
               return;
             }
 
-            const pkgNameVer = parsePkgNameVer(nameVer, "", new Map());
+            const pkgNameVer = parsePkgNameVer(nameVer, '', new Map());
             if (pkgNameVer === null) {
               return;
             }
-            const { pkgName, pkgVersion } = pkgNameVer;
+            const {pkgName, pkgVersion} = pkgNameVer;
 
             const flowVerMatches = matches[4].match(/^flow_(>=|<=)?(v.+)$/);
             const flowDirStr =
@@ -453,19 +455,19 @@ export async function getInstalledNpmLibDefs(
                 : parseFlowDirString(flowDirStr, context);
 
             installedLibDefs.set(terseFilePath, {
-              kind: "LibDef",
+              kind: 'LibDef',
               libDef: {
                 scope,
                 name: pkgName,
                 version: versionToString(pkgVersion),
                 flowVersion: flowVer,
                 path: terseFilePath,
-                testFilePaths: []
-              }
+                testFilePaths: [],
+              },
             });
           }
         }
-      })
+      }),
     );
   }
   return installedLibDefs;
@@ -477,18 +479,18 @@ export async function getInstalledNpmLibDefs(
 export async function getNpmLibDefs(
   defsDirPath: string,
   validationErrors?: VErrors,
-  validating?: boolean
+  validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
   const npmLibDefs: Array<NpmLibDef> = [];
 
-  const npmDefsDirPath = path.join(defsDirPath, "npm");
+  const npmDefsDirPath = path.join(defsDirPath, 'npm');
   const dirItems = await fs.readdir(npmDefsDirPath);
   await P.all(
     dirItems.map(async itemName => {
       const itemPath = path.join(npmDefsDirPath, itemName);
       const itemStat = await fs.stat(itemPath);
       if (itemStat.isDirectory()) {
-        if (itemName[0] === "@") {
+        if (itemName[0] === '@') {
           // This must be a scoped npm package, so go one directory deeper
           const scope = itemName;
           const scopeDirItems = await fs.readdir(itemPath);
@@ -502,14 +504,14 @@ export async function getNpmLibDefs(
                   scope,
                   itemName,
                   validationErrors,
-                  validating
+                  validating,
                 );
                 libDefs.forEach(libDef => npmLibDefs.push(libDef));
               } else {
                 const error = `Expected only sub-directories in this dir!`;
                 validationError(itemPath, error, validationErrors);
               }
-            })
+            }),
           );
         } else {
           // itemPath must be a package dir
@@ -518,7 +520,7 @@ export async function getNpmLibDefs(
             null, // No scope
             itemName,
             validationErrors,
-            validating
+            validating,
           );
           libDefs.forEach(libDef => npmLibDefs.push(libDef));
         }
@@ -526,7 +528,7 @@ export async function getNpmLibDefs(
         const error = `Expected only directories to be present in this directory.`;
         validationError(itemPath, error, validationErrors);
       }
-    })
+    }),
   );
 
   return npmLibDefs;
@@ -534,15 +536,15 @@ export async function getNpmLibDefs(
 
 export async function getNpmLibDefVersionHash(
   repoDirPath: string,
-  libDef: NpmLibDef
+  libDef: NpmLibDef,
 ): Promise<string> {
   const latestCommitHash = await findLatestFileCommitHash(
     repoDirPath,
-    path.relative(repoDirPath, libDef.path)
+    path.relative(repoDirPath, libDef.path),
   );
   return (
     `${latestCommitHash.substr(0, 10)}/` +
-    (libDef.scope === null ? "" : `${libDef.scope}/`) +
+    (libDef.scope === null ? '' : `${libDef.scope}/`) +
     `${libDef.name}_${libDef.version}/` +
     `flow_${flowVersionToSemver(libDef.flowVersion)}`
   );
@@ -552,5 +554,5 @@ export {
   extractLibDefsFromNpmPkgDir as _extractLibDefsFromNpmPkgDir,
   parsePkgNameVer as _parsePkgNameVer,
   validateVersionNumPart as _validateVersionNumPart,
-  validateVersionPart as _validateVersionPart
+  validateVersionPart as _validateVersionPart,
 };
