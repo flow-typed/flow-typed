@@ -1,0 +1,99 @@
+declare module "react-flip-move" {
+  declare export type Styles = {
+    [key: string]: string
+  };
+
+  declare type ReactStyles = {
+    [key: string]: string | number
+  };
+
+  declare export type Animation = {
+    from: Styles,
+    to: Styles
+  };
+
+  declare export type Presets = {
+    elevator: Animation,
+    fade: Animation,
+    accordionVertical: Animation,
+    accordionHorizontal: Animation,
+    none: null
+  };
+
+  declare export type AnimationProp = $Keys<Presets> | boolean | Animation;
+
+  declare export type ClientRect = {
+    top: number,
+    right: number,
+    bottom: number,
+    left: number,
+    height: number,
+    width: number
+  };
+
+  // can't use $Shape<React$Element<*>> here, because we use it in intersection
+  declare export type ElementShape = {
+    +type: $PropertyType<React$Element<*>, "type">,
+    +props: $PropertyType<React$Element<*>, "props">,
+    +key: $PropertyType<React$Element<*>, "key">,
+    +ref: $PropertyType<React$Element<*>, "ref">
+  };
+
+  declare type ChildHook = (element: ElementShape, node: ?HTMLElement) => mixed;
+
+  declare export type ChildrenHook = (
+    elements: Array<ElementShape>,
+    nodes: Array<?HTMLElement>
+  ) => mixed;
+
+  declare export type GetPosition = (node: HTMLElement) => ClientRect;
+
+  declare export type VerticalAlignment = "top" | "bottom";
+
+  declare type BaseProps = {
+    easing: string,
+    typeName: string,
+    disableAllAnimations: boolean,
+    getPosition: GetPosition,
+    maintainContainerHeight: boolean,
+    verticalAlignment: VerticalAlignment
+  };
+
+  declare type PolymorphicProps = {
+    duration: string | number,
+    delay: string | number,
+    staggerDurationBy: string | number,
+    staggerDelayBy: string | number,
+    enterAnimation: AnimationProp,
+    leaveAnimation: AnimationProp
+  };
+
+  declare type OptionalProps = {
+    children?: React$Node,
+    onStart?: ChildHook,
+    onFinish?: ChildHook,
+    onStartAll?: ChildrenHook,
+    onFinishAll?: ChildrenHook
+  };
+
+  declare export type DelegatedProps = {
+    style?: ReactStyles
+  };
+
+  declare export type FlipMoveDefaultProps = BaseProps & PolymorphicProps;
+
+  declare export type CommonProps = BaseProps & OptionalProps;
+
+  declare export type FlipMoveProps = FlipMoveDefaultProps &
+    OptionalProps &
+    DelegatedProps & {
+      appearAnimation?: AnimationProp,
+      disableAnimations?: boolean // deprecated, use disableAllAnimations instead
+    };
+
+  declare class FlipMove extends React$Component<FlipMoveProps> {
+    static defaultProps: FlipMoveDefaultProps
+  }
+
+  declare export default typeof FlipMove
+}
