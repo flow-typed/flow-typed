@@ -50,6 +50,18 @@ declare module "react-flip-move" {
 
   declare export type VerticalAlignment = "top" | "bottom";
 
+  // same as React.Node, but without fragments, see https://github.com/facebook/flow/issues/4781
+  declare export type Child =
+    | void
+    | null
+    | boolean
+    | number
+    | string
+    | React$Element<*>;
+
+  // can't import from React, see https://github.com/facebook/flow/issues/4787
+  declare type ChildrenArray<T> = $ReadOnlyArray<ChildrenArray<T>> | T;
+
   declare type BaseProps = {
     easing: string,
     typeName: string,
@@ -69,7 +81,7 @@ declare module "react-flip-move" {
   };
 
   declare type OptionalProps = {
-    children?: React$Node,
+    children?: ChildrenArray<Child>,
     onStart?: ChildHook,
     onFinish?: ChildHook,
     onStartAll?: ChildrenHook,
