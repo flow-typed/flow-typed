@@ -80,8 +80,7 @@ declare module "react-flip-move" {
     leaveAnimation: AnimationProp
   };
 
-  declare type OptionalProps = {
-    children?: ChildrenArray<Child>,
+  declare type Hooks = {
     onStart?: ChildHook,
     onFinish?: ChildHook,
     onStartAll?: ChildrenHook,
@@ -94,11 +93,12 @@ declare module "react-flip-move" {
 
   declare export type FlipMoveDefaultProps = BaseProps & PolymorphicProps;
 
-  declare export type CommonProps = BaseProps & OptionalProps;
+  declare export type CommonProps = BaseProps & Hooks;
 
   declare export type FlipMoveProps = FlipMoveDefaultProps &
-    OptionalProps &
+    Hooks &
     DelegatedProps & {
+      children?: ChildrenArray<Child>,
       appearAnimation?: AnimationProp,
       disableAnimations?: boolean // deprecated, use disableAllAnimations instead
     };
