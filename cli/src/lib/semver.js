@@ -1,51 +1,51 @@
 // @flow
 
-import * as semver from 'semver';
+import * as semver from "semver";
 
-type VersionRange = '>=' | '<=';
+type VersionRange = ">=" | "<=";
 export type Version = {|
   range?: VersionRange,
-  major: number | 'x',
-  minor: number | 'x',
-  patch: number | 'x',
+  major: number | "x",
+  minor: number | "x",
+  patch: number | "x",
   prerel: null | string,
-  upperBound?: Version, // TODO: rename to otherBound
+  upperBound?: Version // TODO: rename to otherBound
 |};
 
 export function emptyVersion(): Version {
   return {
-    range: '<=',
-    major: 'x',
-    minor: 'x',
-    patch: 'x',
-    prerel: null,
+    range: "<=",
+    major: "x",
+    minor: "x",
+    patch: "x",
+    prerel: null
   };
 }
 
 export function getRangeLowerBound(rangeRaw: string | semver.Range): string {
   const range =
-    typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
+    typeof rangeRaw === "string" ? new semver.Range(rangeRaw) : rangeRaw;
   return range.set[0][0].semver.version;
 }
 
 export function getRangeUpperBound(rangeRaw: string | semver.Range): string {
   const range =
-    typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
+    typeof rangeRaw === "string" ? new semver.Range(rangeRaw) : rangeRaw;
   return range.set[0][1].semver.version;
 }
 
 // TODO: This has some egregious duplication with
 //       libDef.getLocalLibDefFlowVersions(). Need to better consolidate logic
-const VER = 'v([0-9]+).([0-9]+|x).([0-9]+|x)(-.*)?';
+const VER = "v([0-9]+).([0-9]+|x).([0-9]+|x)(-.*)?";
 const VERSION_RE = new RegExp(`^([><]=?)?${VER}(_([><]=?)${VER})?$`);
 export function stringToVersion(verStr: string): Version {
   const versionParts = verStr.match(VERSION_RE);
   if (versionParts == null) {
     throw new Error(
       `${verStr} is a malformed version string. Expected a version formatted ` +
-        'as `' +
+        "as `" +
         VERSION_RE.toString() +
-        '`',
+        "`"
     );
   }
   let [
@@ -60,44 +60,44 @@ export function stringToVersion(verStr: string): Version {
     upperMajor,
     upperMinor,
     upperPatch,
-    upperPrerel,
+    upperPrerel
   ] = versionParts;
-  if (range != null && range !== '>=' && range !== '<=') {
+  if (range != null && range !== ">=" && range !== "<=") {
     throw new Error(`'${verStr}': Invalid version range: ${range}`);
   }
-  if (upperRange != null && upperRange !== '>=' && upperRange !== '<=') {
+  if (upperRange != null && upperRange !== ">=" && upperRange !== "<=") {
     throw new Error(
-      `'${verStr}': Invalid version upper-bound range: ${upperRange}`,
+      `'${verStr}': Invalid version upper-bound range: ${upperRange}`
     );
   }
 
-  major = _validateVersionNumberPart(verStr, 'major', major);
-  if (minor !== 'x') {
-    minor = _validateVersionNumberPart(verStr, 'minor', minor);
+  major = _validateVersionNumberPart(verStr, "major", major);
+  if (minor !== "x") {
+    minor = _validateVersionNumberPart(verStr, "minor", minor);
   }
-  if (patch !== 'x') {
-    patch = _validateVersionNumberPart(verStr, 'patch', patch);
+  if (patch !== "x") {
+    patch = _validateVersionNumberPart(verStr, "patch", patch);
   }
 
   let upperBound;
   if (upperMajor) {
     upperMajor = _validateVersionNumberPart(
       verStr,
-      'upper-bound major',
-      upperMajor,
+      "upper-bound major",
+      upperMajor
     );
-    if (upperMinor !== 'x') {
+    if (upperMinor !== "x") {
       upperMinor = _validateVersionNumberPart(
         verStr,
-        'upper-bound minor',
-        upperMinor,
+        "upper-bound minor",
+        upperMinor
       );
     }
-    if (upperPatch !== 'x') {
+    if (upperPatch !== "x") {
       upperPatch = _validateVersionNumberPart(
         verStr,
-        'upper-bound patch',
-        upperPatch,
+        "upper-bound patch",
+        upperPatch
       );
     }
     upperBound = {
@@ -105,13 +105,13 @@ export function stringToVersion(verStr: string): Version {
       major: upperMajor,
       minor: upperMinor,
       patch: upperPatch,
-      prerel: upperPrerel.substr(1),
+      prerel: upperPrerel.substr(1)
     };
   }
 
-  if (range === '<=' && major === minor === patch === 0) {
+  if (range === "<=" && major === minor === patch === 0) {
     throw new Error(
-      `It doesn't make sense to have a version range of '<=v0.0.0'!`,
+      `It doesn't make sense to have a version range of '<=v0.0.0'!`
     );
   }
 
@@ -119,13 +119,13 @@ export function stringToVersion(verStr: string): Version {
     prerel = prerel.substr(1);
   }
 
-  return {range, major, minor, patch, prerel, upperBound};
+  return { range, major, minor, patch, prerel, upperBound };
 }
 
 export function versionToString(ver: Version): string {
-  const rangeStr = ver.range ? ver.range : '';
-  const upperStr = ver.upperBound ? `_${versionToString(ver.upperBound)}` : '';
-  const prerel = ver.prerel == null ? '' : `-${ver.prerel}`;
+  const rangeStr = ver.range ? ver.range : "";
+  const upperStr = ver.upperBound ? `_${versionToString(ver.upperBound)}` : "";
+  const prerel = ver.prerel == null ? "" : `-${ver.prerel}`;
   return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${prerel}${upperStr}`;
 }
 
@@ -133,7 +133,7 @@ function _validateVersionNumberPart(context, partName, part) {
   const num = parseInt(part, 10);
   if (String(num) !== part) {
     throw new Error(
-      `${context}: Invalid ${partName} number. Expected a number.`,
+      `${context}: Invalid ${partName} number. Expected a number.`
     );
   }
   return num;
