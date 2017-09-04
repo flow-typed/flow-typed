@@ -251,6 +251,8 @@ const NeedsFoo2Error: ReactComponentFunctionalUndefinedDefaultProps<{ foo: numbe
   background-color: red;
 `;
 
+const NeedsNothingInferred = styled(() => <div />);
+
 // ---- FUNCTIONAL COMPONENT TESTS (withTheme)----
 const NeedsFoo1Functional: ReactComponentFunctionalUndefinedDefaultProps<{ foo: string }> = withTheme(FunctionalComponent);
 const NeedsFoo2Functional: ReactComponentFunctionalUndefinedDefaultProps<{ foo: string }> = withTheme(NeedsFoo1Functional);

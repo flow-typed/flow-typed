@@ -235,6 +235,8 @@ const NativeNeedsFoo2Error: NativeReactComponentFunctionalUndefinedDefaultProps<
   background-color: red;
 `;
 
+const NativeNeedsNothingInferred = nativeStyled(() => <View />);
+
 // ---- FUNCTIONAL COMPONENT TESTS (nativeWithTheme)----
 const NativeNeedsFoo1Functional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string }> = nativeWithTheme(NativeFunctionalComponent);
 const NativeNeedsFoo2Functional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string }> = nativeWithTheme(NativeNeedsFoo1Functional);

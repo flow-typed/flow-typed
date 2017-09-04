@@ -6,12 +6,12 @@ type $npm$styledComponents$NameGenerator = (hash: number) => string;
 type $npm$styledComponents$TaggedTemplateLiteral<R> = {| (Array<string>, $npm$styledComponents$Interpolation): R |};
 
 // ---- FUNCTIONAL COMPONENT DEFINITIONS ----
-type $npm$styledComponents$ReactComponentFunctional<Props, DefaultProps = *> = {
-  (Props): React$Node,
-  defaultProps: DefaultProps,
-}
+type $npm$styledComponents$ReactComponentFunctional<Props, DefaultProps = *> =
+  & { defaultProps: DefaultProps }
+  & $npm$styledComponents$ReactComponentFunctionalUndefinedDefaultProps<Props>
 
-type $npm$styledComponents$ReactComponentFunctionalUndefinedDefaultProps<Props> = { (Props): React$Node }
+type $npm$styledComponents$ReactComponentFunctionalUndefinedDefaultProps<Props> =
+  React$StatelessFunctionalComponent<Props>
 
 // ---- CLASS COMPONENT DEFINITIONS ----
 class $npm$styledComponents$ReactComponent<Props, DefaultProps> extends React$Component<Props> {
@@ -29,7 +29,6 @@ type $npm$styledComponents$ReactComponentUnionWithDefaultProps<Props, DefaultPro
   | $npm$styledComponents$ReactComponentFunctionalUndefinedDefaultProps<Props>
   | $npm$styledComponents$ReactComponentClass<Props, DefaultProps>
   | $npm$styledComponents$ReactComponentClassUndefinedDefaultProps<Props>
-  | React$StatelessFunctionalComponent<Props>;
 
 type $npm$styledComponents$ReactComponentIntersection<Props, DefaultProps = *> =
   & $npm$styledComponents$ReactComponentFunctional<Props, DefaultProps>
