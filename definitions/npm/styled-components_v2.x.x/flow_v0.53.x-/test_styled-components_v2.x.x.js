@@ -118,10 +118,28 @@ const theme: Theme = {
 const withComponent1: ReactComponentStyled<*> = styled.div.withComponent('a');
 const withComponent2: ReactComponentStyled<*> = styled.div.withComponent(withComponent1);
 const withComponent3: ReactComponentStyled<*> = styled.div.withComponent(Attrs3Class);
+const withComponent4: ReactComponentStyled<*> = styled('div').withComponent('a');
+const withComponent5: ReactComponentStyled<*> = styled('div').withComponent(withComponent1);
+const withComponent6: ReactComponentStyled<*> = styled('div').withComponent(Attrs3Class);
 // $ExpectError
 const withComponentError1: ReactComponentStyled<*> = styled.div.withComponent(0);
 // $ExpectError
 const withComponentError2: ReactComponentStyled<*> = styled.div.withComponent('NotHere');
+
+class CustomComponentError3 extends React.Component<{ foo: string }> {
+  render() { return <div />; }
+}
+
+// $ExpectError
+const withComponentError3 = styled(CustomComponentError3).withComponent('a');
+// $ExpectError
+const withComponentError4 = styled(CustomComponentError3).withComponent(withComponent1);
+// $ExpectError
+const withComponentError5 = styled(CustomComponentError3).withComponent(Attrs3Class);
+// $ExpectError
+const withComponentError6 = styled(CustomComponentError3).withComponent(0);
+// $ExpectError
+const withComponentError7 = styled(CustomComponentError3).withComponent('NotHere');
 
 // ---- WithTheme ----
 const Component: ReactComponentFunctionalUndefinedDefaultProps<{ theme: Theme }> = ({ theme }) => (

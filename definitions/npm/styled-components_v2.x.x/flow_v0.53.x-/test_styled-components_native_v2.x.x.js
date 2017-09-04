@@ -115,10 +115,28 @@ const nativeTheme: NativeTheme = {
 const NativeWithComponent1: NativeReactComponentStyled<*> = nativeStyled.View.withComponent('Text');
 const NativeWithComponent2: NativeReactComponentStyled<*> = nativeStyled.View.withComponent(NativeWithComponent1);
 const NativeWithComponent3: NativeReactComponentStyled<*> = nativeStyled.View.withComponent(NativeAttrs3Class);
+const NativeWithComponent4: NativeReactComponentStyled<*> = nativeStyled('View').withComponent('Text');
+const NativeWithComponent5: NativeReactComponentStyled<*> = nativeStyled('View').withComponent(NativeWithComponent1);
+const NativeWithComponent6: NativeReactComponentStyled<*> = nativeStyled('View').withComponent(NativeAttrs3Class);
 // $ExpectError
 const NativeWithComponentError1: NativeReactComponentStyled<*> = nativeStyled.View.withComponent(0);
 // $ExpectError
 const NativeWithComponentError2: NativeReactComponentStyled<*> = nativeStyled.View.withComponent('NotHere');
+
+class NativeCustomComponentError3 extends React.Component<{ foo: string }> {
+  render() { return <div />; }
+}
+
+// $ExpectError
+const NativeWithComponentError3 = nativeStyled(NativeCustomComponentError3).withComponent('Text');
+// $ExpectError
+const NativeWithComponentError4 = nativeStyled(NativeCustomComponentError3).withComponent(NativeWithComponent1);
+// $ExpectError
+const NativeWithComponentError5 = nativeStyled(NativeCustomComponentError3).withComponent(NativeAttrs3Class);
+// $ExpectError
+const NativeWithComponentError6 = nativeStyled(NativeCustomComponentError3).withComponent(0);
+// $ExpectError
+const NativeWithComponentError7 = nativeStyled(NativeCustomComponentError3).withComponent('NotHere');
 
 // ---- WithTheme ----
 const NativeComponent: NativeReactComponentFunctionalUndefinedDefaultProps<{ theme: NativeTheme }> = ({ theme }) => (
