@@ -35,7 +35,7 @@ type $npm$styledComponents$ReactComponentIntersection<Props, DefaultProps = *> =
   & $npm$styledComponents$ReactComponentClass<Props, DefaultProps>;
 
 // ---- WITHCOMPONENT ----
-type $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent<ComponentList> = <
+type $npm$styledComponents$ReactComponentStyledWithComponent<ComponentList> = <
   Props, DefaultProps,
   Input:
     | ComponentList
@@ -43,27 +43,37 @@ type $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent<Componen
     | $npm$styledComponents$ReactComponentUnionWithDefaultProps<Props, DefaultProps>
 >(Input) => $npm$styledComponents$ReactComponentStyled<Props, DefaultProps>
 
-type $npm$styledComponents$ReactComponentStyledStaticProps<Props, ComponentList> =
-  & $npm$styledComponents$ReactComponentStyledStaticProperties<Props, ComponentList>
-  & $npm$styledComponents$ReactComponentStyledStaticPropertiesWithComponent<ComponentList>
-
-type $npm$styledComponents$ReactComponentStyledStaticProperties<Props, ComponentList> = {|
-  attrs: <O: {}>(O) => $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props, ComponentList>,
+// ---- STATIC PROPERTIES ----
+type $npm$styledComponents$ReactComponentStyledStaticProps<Props, ComponentList> = {|
+  attrs: <AdditionalProps: {}>(AdditionalProps) => $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props & AdditionalProps, ComponentList>,
   extend: $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props, ComponentList>,
 |}
 
-type $npm$styledComponents$ReactComponentStyledStaticPropertiesWithComponent<ComponentList> = {|
-  withComponent: $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent<ComponentList>,
+type $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent<Props, ComponentList> = {|
+  withComponent: $npm$styledComponents$ReactComponentStyledWithComponent<ComponentList>,
+  attrs: <AdditionalProps: {}>(AdditionalProps) => $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<Props & AdditionalProps, ComponentList>,
+  extend: $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<Props, ComponentList>,
 |}
+
+// ---- STYLED FUNCTION ----
+// Error: styled(CustomComponent).withComponent('a')
+// Ok:    styled('div').withComponent('a')
+type $npm$styledComponents$Call<ComponentListKeys> =
+  & (ComponentListKeys => $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<{}, ComponentListKeys>)
+  & (<Props>($npm$styledComponents$ReactComponentUnion<Props>) => $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props, ComponentListKeys>)
 
 // ---- STYLED COMPONENT ----
 type $npm$styledComponents$ReactComponentStyled<Props, ComponentList, DefaultProps = *> =
-  & $npm$styledComponents$ReactComponentStyledStaticProps<Props, ComponentList>
+  & $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent<Props, ComponentList>
   & $npm$styledComponents$ReactComponentIntersection<Props, DefaultProps>
 
 // ---- TAGGED TEMPLATE LITERAL ----
 type $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props, ComponentList> =
   & $npm$styledComponents$ReactComponentStyledStaticProps<Props, ComponentList>
+  & $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$ReactComponentStyled<Props, ComponentList>>
+
+type $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<Props, ComponentList> =
+  & $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent<Props, ComponentList>
   & $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$ReactComponentStyled<Props, ComponentList>>
 
 // ---- WITHTHEME ----
@@ -118,7 +128,7 @@ type $npm$styledComponents$StyledComponentsComponentListKeys =
   $Subtype<$Keys<$npm$styledComponents$StyledComponentsComponentList>>
 
 type $npm$styledComponents$StyledComponentsComponentListValue =
-  $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<{}, $npm$styledComponents$StyledComponentsComponentListKeys>
+  $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<{}, $npm$styledComponents$StyledComponentsComponentListKeys>
 
 // ---- COMPONENT LIST ----
 type $npm$styledComponents$StyledComponentsComponentList = {|
@@ -272,12 +282,12 @@ declare module 'styled-components' {
   declare type ReactComponentClassUndefinedDefaultProps<Props: {}>        = $npm$styledComponents$ReactComponentClassUndefinedDefaultProps<Props>;
   declare type ReactComponentUnion<Props>                                 = $npm$styledComponents$ReactComponentUnion<Props>;
   declare type ReactComponentIntersection<Props>                          = $npm$styledComponents$ReactComponentIntersection<Props>;
-  declare type ReactComponentStyledStaticProps<Props>                     = $npm$styledComponents$ReactComponentStyledStaticProps<Props, ComponentListKeys>;
+  declare type ReactComponentStyledStaticProps<Props>                     = $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent<Props, ComponentListKeys>;
   declare type ReactComponentStyled<Props>                                = $npm$styledComponents$ReactComponentStyled<Props, ComponentListKeys>;
-  declare type ReactComponentStyledTaggedTemplateLiteral<Props>           = $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props, ComponentListKeys>;
+  declare type ReactComponentStyledTaggedTemplateLiteral<Props>           = $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<Props, ComponentListKeys>;
 
   declare module.exports: {
-    <Props>(ComponentListKeys | ReactComponentUnion<Props>): ReactComponentStyledTaggedTemplateLiteral<Props>,
+    $call: $npm$styledComponents$Call<ComponentListKeys>,
 
     injectGlobal: TaggedTemplateLiteral<void>,
     css: TaggedTemplateLiteral<Array<Interpolation>>,
@@ -295,7 +305,7 @@ type $npm$styledComponents$StyledComponentsNativeComponentListKeys =
   $Subtype<$Keys<$npm$styledComponents$StyledComponentsNativeComponentList>>
 
 type $npm$styledComponents$StyledComponentsNativeComponentListValue =
-  $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<{}, $npm$styledComponents$StyledComponentsNativeComponentListKeys>
+  $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<{}, $npm$styledComponents$StyledComponentsNativeComponentListKeys>
 
 type $npm$styledComponents$StyledComponentsNativeComponentList = {|
   ActivityIndicator:            $npm$styledComponents$StyledComponentsNativeComponentListValue,
@@ -361,12 +371,12 @@ declare module 'styled-components/native' {
   declare type ReactComponentClassUndefinedDefaultProps<Props: {}>        = $npm$styledComponents$ReactComponentClassUndefinedDefaultProps<Props>;
   declare type ReactComponentUnion<Props>                                 = $npm$styledComponents$ReactComponentUnion<Props>;
   declare type ReactComponentIntersection<Props>                          = $npm$styledComponents$ReactComponentIntersection<Props>;
-  declare type ReactComponentStyledStaticProps<Props>                     = $npm$styledComponents$ReactComponentStyledStaticProps<Props, NativeComponentListKeys>;
+  declare type ReactComponentStyledStaticProps<Props>                     = $npm$styledComponents$ReactComponentStyledStaticPropsWithComponent<Props, NativeComponentListKeys>;
   declare type ReactComponentStyled<Props>                                = $npm$styledComponents$ReactComponentStyled<Props, NativeComponentListKeys>;
-  declare type ReactComponentStyledTaggedTemplateLiteral<Props>           = $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteral<Props, NativeComponentListKeys>;
+  declare type ReactComponentStyledTaggedTemplateLiteral<Props>           = $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<Props, NativeComponentListKeys>;
 
   declare module.exports: {
-    <Props>(NativeComponentListKeys | ReactComponentUnion<Props>): ReactComponentStyledTaggedTemplateLiteral<Props>,
+    $call: $npm$styledComponents$Call<NativeComponentListKeys>,
 
     css: TaggedTemplateLiteral<Array<Interpolation>>,
     keyframes: TaggedTemplateLiteral<string>,
