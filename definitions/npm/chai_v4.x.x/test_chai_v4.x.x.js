@@ -95,6 +95,11 @@ expect((x) => x).to.change({val: 0}, 'val');
 expect((x) => x).to.increase({val: 0}, 'val');
 expect((x) => x).to.decrease({val: 0}, 'val');
 
+// Expect can take an optional message argument, but nothing more
+expect(10, "ten").to.equal(10);
+// $ExpectError
+expect(1, "one", "another").to.equal(1)
+
 /**
  * assert API (http://chaijs.com/api/assert/)
  */

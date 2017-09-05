@@ -113,7 +113,7 @@ declare module "chai" {
         containSubset: (obj: Object | Object[]) => ExpectChain<T>
     };
 
-    declare function expect<T>(actual: T): ExpectChain<T>;
+    declare function expect<T>(actual: T, message?: string): ExpectChain<T>;
 
     declare function use(plugin: (chai: Object, utils: Object) => void): void;
 
