@@ -133,6 +133,10 @@ declare class rxjs$Observable<+T> {
   repeat(): rxjs$Observable<T>;
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>;
+  bufferCount(bufferSize: number, startBufferEvery?: number): rxjs$Observable<Array<T>>;
+  bufferTime(bufferTimeSpan: number, bufferCreationInterval?: number, maxBufferSize?: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<Array<T>>;
+  bufferToggle<U>(openings: rxjs$Observable<U> | Promise<U>, closingSelector: (value: U) => (rxjs$Observable<any> | Promise<any>)): rxjs$Observable<Array<T>>;
+  bufferWhen(closingSelector: () => rxjs$Observable<any>): rxjs$Observable<Array<T>>;
 
   catch<U>(selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
 
