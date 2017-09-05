@@ -49,8 +49,8 @@ interface UriOptions {
 
 interface WhenOptions<T> {
   is: T,
-  otherwise?: joi$Schema,
-  then?: joi$Schema
+  otherwise?: npm$joi$Schema,
+  then?: npm$joi$Schema
 }
 
 interface ReferenceOptions {
@@ -82,11 +82,11 @@ interface ValidationResult<T> {
   value: T
 }
 
-declare interface joi$Schema {}
+declare interface npm$joi$Schema {}
 
-interface Reference extends joi$Schema {}
+interface Reference extends npm$joi$Schema {}
 
-interface AnySchema<T: joi$Schema> {
+interface AnySchema<T: npm$joi$Schema> {
   allow(value: mixed, ...values: mixed[]): T,
   allow(values: mixed[]): T,
   concat(schema: T): T,
@@ -121,166 +121,176 @@ interface AnySchema<T: joi$Schema> {
   unit(name: string): T,
   valid(value: any, ...values: any[]): T,
   valid(values: any[]): T,
-  when<U>(ref: Reference, options: WhenOptions<U>): joi$AlternativesSchema,
-  when<U>(ref: string, options: WhenOptions<U>): joi$AlternativesSchema
+  when<U>(ref: Reference, options: WhenOptions<U>): npm$joi$AlternativesSchema,
+  when<U>(ref: string, options: WhenOptions<U>): npm$joi$AlternativesSchema
 }
 
-declare interface joi$AlternativesSchema
-  extends AnySchema<joi$AlternativesSchema> {
-  try(schemas: joi$Schema[]): joi$AlternativesSchema,
-  when<T>(ref: Reference, options: WhenOptions<T>): joi$AlternativesSchema,
-  when<T>(ref: string, options: WhenOptions<T>): joi$AlternativesSchema
+declare interface npm$joi$AlternativesSchema
+  extends AnySchema<npm$joi$AlternativesSchema> {
+  try(schemas: npm$joi$Schema[]): npm$joi$AlternativesSchema,
+  when<T>(ref: Reference, options: WhenOptions<T>): npm$joi$AlternativesSchema,
+  when<T>(ref: string, options: WhenOptions<T>): npm$joi$AlternativesSchema
 }
 
-declare interface joi$ArraySchema extends AnySchema<joi$ArraySchema> {
-  items(type: joi$Schema, ...types: joi$Schema[]): joi$ArraySchema,
-  items(types: joi$Schema[]): joi$ArraySchema,
-  length(limit: number): joi$ArraySchema,
-  max(limit: number): joi$ArraySchema,
-  min(limit: number): joi$ArraySchema,
-  single(enabled?: FalsyValue): joi$ArraySchema,
-  sparse(enabled?: FalsyValue): joi$ArraySchema,
-  unique(): joi$ArraySchema
+declare interface npm$joi$ArraySchema extends AnySchema<npm$joi$ArraySchema> {
+  items(type: npm$joi$Schema, ...types: npm$joi$Schema[]): npm$joi$ArraySchema,
+  items(types: npm$joi$Schema[]): npm$joi$ArraySchema,
+  length(limit: number): npm$joi$ArraySchema,
+  max(limit: number): npm$joi$ArraySchema,
+  min(limit: number): npm$joi$ArraySchema,
+  single(enabled?: FalsyValue): npm$joi$ArraySchema,
+  sparse(enabled?: FalsyValue): npm$joi$ArraySchema,
+  unique(): npm$joi$ArraySchema
 }
 
-declare interface joi$BinarySchema extends AnySchema<joi$BinarySchema> {
-  encoding(encoding: BufferEncoding): joi$BinarySchema,
-  length(limit: number): joi$BinarySchema,
-  max(limit: number): joi$BinarySchema,
-  min(limit: number): joi$BinarySchema
+declare interface npm$joi$BinarySchema extends AnySchema<npm$joi$BinarySchema> {
+  encoding(encoding: BufferEncoding): npm$joi$BinarySchema,
+  length(limit: number): npm$joi$BinarySchema,
+  max(limit: number): npm$joi$BinarySchema,
+  min(limit: number): npm$joi$BinarySchema
 }
 
-declare interface joi$BooleanSchema extends AnySchema<joi$BooleanSchema> {
-  falsy(value: mixed): joi$BooleanSchema,
-  truthy(vlaue: mixed): joi$BooleanSchema,
-  insensitive(enabled?: FalsyValue): joi$BooleanSchema
+declare interface npm$joi$BooleanSchema
+  extends AnySchema<npm$joi$BooleanSchema> {
+  falsy(value: mixed): npm$joi$BooleanSchema,
+  truthy(vlaue: mixed): npm$joi$BooleanSchema,
+  insensitive(enabled?: FalsyValue): npm$joi$BooleanSchema
 }
 
-declare interface joi$DateSchema extends AnySchema<joi$DateSchema> {
-  format(format: string): joi$DateSchema,
-  format(format: string[]): joi$DateSchema,
-  iso(): joi$DateSchema,
-  max(date: Date): joi$DateSchema,
-  max(date: number): joi$DateSchema,
-  max(date: string): joi$DateSchema,
-  max(date: Reference): joi$DateSchema,
-  min(date: Date): joi$DateSchema,
-  min(date: number): joi$DateSchema,
-  min(date: string): joi$DateSchema,
-  min(date: Reference): joi$DateSchema,
-  timestamp(type?: "javascript" | "unix"): joi$DateSchema
+declare interface npm$joi$DateSchema extends AnySchema<npm$joi$DateSchema> {
+  format(format: string): npm$joi$DateSchema,
+  format(format: string[]): npm$joi$DateSchema,
+  iso(): npm$joi$DateSchema,
+  max(date: Date): npm$joi$DateSchema,
+  max(date: number): npm$joi$DateSchema,
+  max(date: string): npm$joi$DateSchema,
+  max(date: Reference): npm$joi$DateSchema,
+  min(date: Date): npm$joi$DateSchema,
+  min(date: number): npm$joi$DateSchema,
+  min(date: string): npm$joi$DateSchema,
+  min(date: Reference): npm$joi$DateSchema,
+  timestamp(type?: "javascript" | "unix"): npm$joi$DateSchema
 }
 
-declare interface joi$FunctionSchema extends AnySchema<joi$FunctionSchema> {
-  arity(expectedArity: number): joi$FunctionSchema,
-  maxArity(maxArity: number): joi$FunctionSchema,
-  minArity(minArity: number): joi$FunctionSchema,
-  ref(): joi$FunctionSchema
+declare interface npm$joi$FunctionSchema
+  extends AnySchema<npm$joi$FunctionSchema> {
+  arity(expectedArity: number): npm$joi$FunctionSchema,
+  maxArity(maxArity: number): npm$joi$FunctionSchema,
+  minArity(minArity: number): npm$joi$FunctionSchema,
+  ref(): npm$joi$FunctionSchema
 }
 
-declare interface joi$NumberSchema extends AnySchema<joi$NumberSchema> {
-  greater(limit: number): joi$NumberSchema,
-  greater(limit: Reference): joi$NumberSchema,
-  integer(): joi$NumberSchema,
-  less(limit: number): joi$NumberSchema,
-  less(limit: Reference): joi$NumberSchema,
-  max(limit: number): joi$NumberSchema,
-  max(limit: Reference): joi$NumberSchema,
-  min(limit: number): joi$NumberSchema,
-  min(limit: Reference): joi$NumberSchema,
-  multiple(base: number): joi$NumberSchema,
-  negative(): joi$NumberSchema,
-  positive(): joi$NumberSchema,
-  precision(limit: number): joi$NumberSchema
+declare interface npm$joi$NumberSchema extends AnySchema<npm$joi$NumberSchema> {
+  greater(limit: number): npm$joi$NumberSchema,
+  greater(limit: Reference): npm$joi$NumberSchema,
+  integer(): npm$joi$NumberSchema,
+  less(limit: number): npm$joi$NumberSchema,
+  less(limit: Reference): npm$joi$NumberSchema,
+  max(limit: number): npm$joi$NumberSchema,
+  max(limit: Reference): npm$joi$NumberSchema,
+  min(limit: number): npm$joi$NumberSchema,
+  min(limit: Reference): npm$joi$NumberSchema,
+  multiple(base: number): npm$joi$NumberSchema,
+  negative(): npm$joi$NumberSchema,
+  positive(): npm$joi$NumberSchema,
+  precision(limit: number): npm$joi$NumberSchema
 }
 
-declare interface joi$ObjectSchema extends AnySchema<joi$ObjectSchema> {
-  and(peer1: string, ...peers: string[]): joi$ObjectSchema,
-  and(peers: string[]): joi$ObjectSchema,
+declare interface npm$joi$ObjectSchema extends AnySchema<npm$joi$ObjectSchema> {
+  and(peer1: string, ...peers: string[]): npm$joi$ObjectSchema,
+  and(peers: string[]): npm$joi$ObjectSchema,
   assert(
     ref: Reference,
-    schema: joi$Schema,
+    schema: npm$joi$Schema,
     message?: string
-  ): joi$ObjectSchema,
-  assert(ref: string, schema: joi$Schema, message?: string): joi$ObjectSchema,
-  keys(schema?: { [key: string]: joi$Schema }): joi$ObjectSchema,
-  length(limit: number): joi$ObjectSchema,
-  max(limit: number): joi$ObjectSchema,
-  min(limit: number): joi$ObjectSchema,
-  nand(peer1: string, ...peers: string[]): joi$ObjectSchema,
-  nand(peers: string[]): joi$ObjectSchema,
-  optionalKeys(child: string, ...children: string[]): joi$ObjectSchema,
-  optionalKeys(children: string): joi$ObjectSchema,
-  optionalKeys(children: string[]): joi$ObjectSchema,
-  or(peer1: string, ...peers: string[]): joi$ObjectSchema,
-  or(peers: string[]): joi$ObjectSchema,
-  pattern(regex: RegExp, schema: joi$Schema): joi$ObjectSchema,
-  rename(from: string, to: string, options?: RenameOptions): joi$ObjectSchema,
-  requiredKeys(child: string, ...children: string[]): joi$ObjectSchema,
-  requiredKeys(children: string): joi$ObjectSchema,
-  requiredKeys(children: string[]): joi$ObjectSchema,
-  type(constructor: Function, name?: string): joi$ObjectSchema,
-  unknown(allow?: boolean): joi$ObjectSchema,
-  with(key: string, peers: string): joi$ObjectSchema,
-  with(key: string, peers: string[]): joi$ObjectSchema,
-  without(key: string, peers: string): joi$ObjectSchema,
-  without(key: string, peers: string[]): joi$ObjectSchema,
-  xor(peer1: string, ...peers: string[]): joi$ObjectSchema,
-  xor(peers: string[]): joi$ObjectSchema
+  ): npm$joi$ObjectSchema,
+  assert(
+    ref: string,
+    schema: npm$joi$Schema,
+    message?: string
+  ): npm$joi$ObjectSchema,
+  keys(schema?: { [key: string]: npm$joi$Schema }): npm$joi$ObjectSchema,
+  length(limit: number): npm$joi$ObjectSchema,
+  max(limit: number): npm$joi$ObjectSchema,
+  min(limit: number): npm$joi$ObjectSchema,
+  nand(peer1: string, ...peers: string[]): npm$joi$ObjectSchema,
+  nand(peers: string[]): npm$joi$ObjectSchema,
+  optionalKeys(child: string, ...children: string[]): npm$joi$ObjectSchema,
+  optionalKeys(children: string): npm$joi$ObjectSchema,
+  optionalKeys(children: string[]): npm$joi$ObjectSchema,
+  or(peer1: string, ...peers: string[]): npm$joi$ObjectSchema,
+  or(peers: string[]): npm$joi$ObjectSchema,
+  pattern(regex: RegExp, schema: npm$joi$Schema): npm$joi$ObjectSchema,
+  rename(
+    from: string,
+    to: string,
+    options?: RenameOptions
+  ): npm$joi$ObjectSchema,
+  requiredKeys(child: string, ...children: string[]): npm$joi$ObjectSchema,
+  requiredKeys(children: string): npm$joi$ObjectSchema,
+  requiredKeys(children: string[]): npm$joi$ObjectSchema,
+  type(constructor: Function, name?: string): npm$joi$ObjectSchema,
+  unknown(allow?: boolean): npm$joi$ObjectSchema,
+  with(key: string, peers: string): npm$joi$ObjectSchema,
+  with(key: string, peers: string[]): npm$joi$ObjectSchema,
+  without(key: string, peers: string): npm$joi$ObjectSchema,
+  without(key: string, peers: string[]): npm$joi$ObjectSchema,
+  xor(peer1: string, ...peers: string[]): npm$joi$ObjectSchema,
+  xor(peers: string[]): npm$joi$ObjectSchema
 }
 
-declare interface joi$StringSchema extends AnySchema<joi$StringSchema> {
-  alphanum(): joi$StringSchema,
-  creditCard(): joi$StringSchema,
-  email(options?: EmailOptions): joi$StringSchema,
-  guid(): joi$StringSchema,
-  hex(): joi$StringSchema,
-  hostname(): joi$StringSchema,
-  insensitive(): joi$StringSchema,
-  ip(options?: IpOptions): joi$StringSchema,
-  isoDate(): joi$StringSchema,
-  length(limit: number, encoding?: string): joi$StringSchema,
-  length(limit: Reference, encoding?: string): joi$StringSchema,
-  lowercase(): joi$StringSchema,
-  max(limit: number, encoding?: string): joi$StringSchema,
-  max(limit: Reference, encoding?: string): joi$StringSchema,
-  min(limit: number, encoding?: string): joi$StringSchema,
-  min(limit: Reference, encoding?: string): joi$StringSchema,
-  regex(pattern: RegExp, name?: string): joi$StringSchema,
-  replace(pattern: RegExp, replacement: string): joi$StringSchema,
-  replace(pattern: string, replacement: string): joi$StringSchema,
-  token(): joi$StringSchema,
-  trim(): joi$StringSchema,
-  uppercase(): joi$StringSchema,
-  uri(options?: UriOptions): joi$StringSchema,
-  valid(value: string, ...values: string[]): joi$StringSchema,
-  valid(values: string[]): joi$StringSchema
+declare interface npm$joi$StringSchema extends AnySchema<npm$joi$StringSchema> {
+  alphanum(): npm$joi$StringSchema,
+  creditCard(): npm$joi$StringSchema,
+  email(options?: EmailOptions): npm$joi$StringSchema,
+  guid(): npm$joi$StringSchema,
+  hex(): npm$joi$StringSchema,
+  hostname(): npm$joi$StringSchema,
+  insensitive(): npm$joi$StringSchema,
+  ip(options?: IpOptions): npm$joi$StringSchema,
+  isoDate(): npm$joi$StringSchema,
+  length(limit: number, encoding?: string): npm$joi$StringSchema,
+  length(limit: Reference, encoding?: string): npm$joi$StringSchema,
+  lowercase(): npm$joi$StringSchema,
+  max(limit: number, encoding?: string): npm$joi$StringSchema,
+  max(limit: Reference, encoding?: string): npm$joi$StringSchema,
+  min(limit: number, encoding?: string): npm$joi$StringSchema,
+  min(limit: Reference, encoding?: string): npm$joi$StringSchema,
+  regex(pattern: RegExp, name?: string): npm$joi$StringSchema,
+  replace(pattern: RegExp, replacement: string): npm$joi$StringSchema,
+  replace(pattern: string, replacement: string): npm$joi$StringSchema,
+  token(): npm$joi$StringSchema,
+  trim(): npm$joi$StringSchema,
+  uppercase(): npm$joi$StringSchema,
+  uri(options?: UriOptions): npm$joi$StringSchema,
+  valid(value: string, ...values: string[]): npm$joi$StringSchema,
+  valid(values: string[]): npm$joi$StringSchema
 }
 
 declare module "joi" {
   declare module.exports: {
     alternatives(
-      type1: joi$Schema,
-      type2: joi$Schema,
-      ...types: joi$Schema[]
-    ): joi$Schema,
-    alternatives(types: joi$Schema[]): joi$Schema,
-    any(): joi$Schema,
-    array(): joi$ArraySchema,
-    assert(value: any, schema: joi$Schema, message?: string | Error): void,
-    binary(): joi$BinarySchema,
-    bool(): joi$BooleanSchema,
-    boolean(): joi$BooleanSchema,
-    compile(schema: Object): joi$Schema,
-    date(): joi$DateSchema,
-    func(): joi$FunctionSchema,
-    number(): joi$NumberSchema,
-    object(schema?: { [key: string]: joi$Schema }): joi$ObjectSchema,
+      type1: npm$joi$Schema,
+      type2: npm$joi$Schema,
+      ...types: npm$joi$Schema[]
+    ): npm$joi$Schema,
+    alternatives(types: npm$joi$Schema[]): npm$joi$Schema,
+    any(): npm$joi$Schema,
+    array(): npm$joi$ArraySchema,
+    assert(value: any, schema: npm$joi$Schema, message?: string | Error): void,
+    binary(): npm$joi$BinarySchema,
+    bool(): npm$joi$BooleanSchema,
+    boolean(): npm$joi$BooleanSchema,
+    compile(schema: Object): npm$joi$Schema,
+    date(): npm$joi$DateSchema,
+    func(): npm$joi$FunctionSchema,
+    number(): npm$joi$NumberSchema,
+    object(schema?: { [key: string]: npm$joi$Schema }): npm$joi$ObjectSchema,
     ref(key: string, options?: ReferenceOptions): Reference,
-    string(): joi$StringSchema,
+    string(): npm$joi$StringSchema,
     validate<T>(
       value: T,
-      schema: joi$Schema,
+      schema: npm$joi$Schema,
       callback: (err: ValidationError, value: T) => void
     ): void,
     validate<T>(
