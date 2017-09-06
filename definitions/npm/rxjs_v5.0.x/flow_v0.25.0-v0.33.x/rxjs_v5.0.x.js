@@ -152,6 +152,12 @@ declare class rxjs$Observable<+T> {
 
   elementAt(index: number, defaultValue?: T): rxjs$Observable<T>;
 
+  expand(
+    project: (value: T, index: number) => rxjs$Observable<T>,
+    concurrent?: number,
+    scheduler?: rxjs$SchedulerClass,
+  ): rxjs$Observable<T>;
+
   filter(predicate: (value: T, index: number) => boolean, thisArg?: any): rxjs$Observable<T>;
 
   finally(f: () => mixed): rxjs$Observable<T>;

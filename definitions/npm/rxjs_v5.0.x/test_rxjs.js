@@ -195,3 +195,6 @@ numbers.filter(
   },
   {x: 'bar'}, // thisArg
 );
+
+Observable.of('a').expand(x => Observable.of(x + x)).subscribe(() => {});
+Observable.of(1).expand((x, i) => Observable.of(x + i)).subscribe(() => {});
