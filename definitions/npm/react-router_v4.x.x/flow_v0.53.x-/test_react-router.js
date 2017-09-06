@@ -11,7 +11,12 @@ import {
   withRouter,
   matchPath
 } from "react-router";
-import type { Location, Match, ContextRouter } from "react-router";
+import type {
+  Location,
+  Match,
+  ContextRouter,
+  RouterHistory
+} from "react-router";
 
 // Location
 var locationOK: Location = {
@@ -55,9 +60,10 @@ var locationError: Location = {};
 // $ExpectError
 <MemoryRouter initialEntries={""} />;
 
-// Router - fails as history is void in Flow 0.53
-// var history: History;
-// <Router history={history}><div /></Router>;
+declare var history: RouterHistory;
+<Router history={history}>
+  <div />
+</Router>;
 
 // $ExpectError
 <Router>
@@ -110,10 +116,10 @@ var User = () => <div />;
 </Switch>;
 
 // withRouter
-type FooProps = ContextRouter & {
-  location: Location,
+type FooProps = {|
+  ...ContextRouter,
   name: string
-};
+|};
 const Foo = ({ location, name }: FooProps) =>
   <div>
     {location.pathname} {name}
@@ -135,9 +141,9 @@ withRouter("nope");
 const BarWithRouterError = withRouter(Bar);
 <BarWithRouterError name={3} />;
 
-// $ExpectError
-const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
-  // Wrong arguments here, error will bubble up to the component declaration
+const IncorrectHistoryUsage = ({ history, name }: FooProps) => {
+  // Wrong arguments here
+  // $ExpectError
   history.push(["bla"]);
   return (
     <div>
@@ -160,14 +166,21 @@ matchPath();
 // $ExpectError
 const matchError: string = matchPath("/the/pathname", "the/:dynamicId");
 
-const Unrouted: React$ComponentType<
-  ContextRouter & {| someProp: string |}
-> = () => <span />;
+const Unrouted: React$ComponentType<{|
+  ...ContextRouter,
+  someProp: string
+|}> = () => <span />;
 
 const Routed1: React$ComponentType<{| someProp: string |}> = withRouter(
   Unrouted
 );
-// $ExpectError
+
+// $ExpectError: This error bubbles up from the assignment in Routed2.
+const Unrouted2: React$ComponentType<{|
+  ...ContextRouter,
+  someProp: string
+|}> = () => <span />;
+
 const Routed2: React$ComponentType<{| someProp2: string |}> = withRouter(
-  Unrouted
+  Unrouted2
 );
