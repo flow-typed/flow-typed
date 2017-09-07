@@ -3,6 +3,7 @@
 import yargs from "yargs";
 import { resolve } from "path";
 
+yargs.parse();
 yargs.parse("-x");
 yargs.parse(["-x"]);
 yargs.parse(["-x"], {});
