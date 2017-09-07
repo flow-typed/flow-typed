@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import mongoose from "mongoose";
 
 type MongoId =
@@ -147,7 +145,8 @@ declare class Mongoose$Schema<Doc> {
   virtualpath(name: string): ?VirtualType,
   indexTypes(): string[],
   reserved: string[],
-  obj: SchemaOpts<Doc>
+  obj: SchemaOpts<Doc>,
+  _indexes: Array<[{ [fieldName: string]: number | string }, { [optionName: string]: mixed }]>
 }
 
 type Mongoose$SchemaField<Schema> = {
@@ -473,6 +472,11 @@ declare module "mongoose" {
   declare export type MongooseConnection = Mongoose$Connection;
   declare export type MongoId = MongoId;
   declare export type MongoOrScalarId = MongoOrScalarId;
+  declare export type MongooseQuery<Result, Doc> = Mongoose$Query<Result, Doc>;
+  declare export type MongooseDocument = Mongoose$Document;
+  declare export type MongooseModel = typeof Mongoose$Document;
+  declare export type MongooseSchema<Doc> = Mongoose$Schema<Doc>;
+  declare export type MongooseSchemaField<Schema> = Mongoose$SchemaField<Schema>;
 
   declare module.exports: {
     Schema: typeof Mongoose$Schema,
@@ -480,6 +484,9 @@ declare module "mongoose" {
     Promise: any,
     model: $PropertyType<Mongoose$Connection, "model">,
     createConnection(): Mongoose$Connection,
-    set: (key: string, value: string | Function | boolean) => void
+    set: (key: string, value: string | Function | boolean) => void,
+    connect: Function,
+    connection: Mongoose$Connection,
+    Query: typeof Mongoose$Query,
   };
 }
