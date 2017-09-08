@@ -47,20 +47,20 @@ declare module "react-router" {
     url: string
   };
 
-  declare export type ContextRouter = {
+  declare export type ContextRouter = {|
     history: RouterHistory,
     location: Location,
     match: Match
-  };
+  |};
 
   declare export type GetUserConfirmation = (
     message: string,
     callback: (confirmed: boolean) => void
   ) => void;
 
-  declare type StaticRouterContext = {
+  declare type StaticRouterContext = {|
     url?: string
-  };
+  |};
 
   declare export class StaticRouter extends React$Component<{
     basename?: string,
@@ -106,7 +106,7 @@ declare module "react-router" {
   }> {}
 
   declare export function withRouter<P>(
-    Component: React$ComponentType<ContextRouter & P>
+    Component: React$ComponentType<{| ...ContextRouter, ...P |}>
   ): React$ComponentType<P>;
 
   declare type MatchPathOptions = {

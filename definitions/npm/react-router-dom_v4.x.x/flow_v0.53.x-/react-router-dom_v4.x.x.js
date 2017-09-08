@@ -1,5 +1,3 @@
-import * as React from "react";
-
 declare module "react-router-dom" {
   declare export class BrowserRouter extends React$Component<{
     basename?: string,
@@ -81,11 +79,11 @@ declare module "react-router-dom" {
     url: string
   };
 
-  declare export type ContextRouter = {
+  declare export type ContextRouter = {|
     history: RouterHistory,
     location: Location,
     match: Match
-  };
+  |};
 
   declare export type GetUserConfirmation = (
     message: string,
@@ -129,7 +127,7 @@ declare module "react-router-dom" {
   declare export class Route extends React$Component<{
     component?: React$ComponentType<*>,
     render?: (router: ContextRouter) => React$Node,
-    children?: React.ComponentType<ContextRouter>,
+    children?: React$ComponentType<ContextRouter>,
     path?: string,
     exact?: boolean,
     strict?: boolean
@@ -140,7 +138,7 @@ declare module "react-router-dom" {
   }> {}
 
   declare export function withRouter<P>(
-    Component: React$ComponentType<ContextRouter & P>
+    Component: React$ComponentType<{| ...ContextRouter, ...P |}>
   ): React$ComponentType<P>;
 
   declare type MatchPathOptions = {

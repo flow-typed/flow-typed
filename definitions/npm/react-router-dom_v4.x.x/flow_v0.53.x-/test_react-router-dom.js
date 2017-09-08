@@ -1,3 +1,4 @@
+// @flow
 import React from "react";
 import {
   BrowserRouter,
@@ -5,10 +6,9 @@ import {
   Link,
   NavLink,
   matchPath,
-  withRouter,
-  type ContextRouter,
-  type Match
+  withRouter
 } from "react-router-dom";
+import type { ContextRouter, Match } from "react-router-dom";
 
 // BrowserRouter
 <BrowserRouter>
@@ -106,14 +106,21 @@ const matchError: string = matchPath("/the/pathname", {
   path: "the/:dynamicId"
 });
 
-const Unrouted: React$ComponentType<
-  ContextRouter & {| someProp: string |}
-> = () => <span />;
+const Unrouted: React$ComponentType<{|
+  ...ContextRouter,
+  someProp: string
+|}> = () => <span />;
 
 const Routed1: React$ComponentType<{| someProp: string |}> = withRouter(
   Unrouted
 );
-// $ExpectError
+
+// $ExpectError: This error bubbles up from the assignment in Routed2.
+const Unrouted2: React$ComponentType<{|
+  ...ContextRouter,
+  someProp: string
+|}> = () => <span />;
+
 const Routed2: React$ComponentType<{| someProp2: string |}> = withRouter(
-  Unrouted
+  Unrouted2
 );
