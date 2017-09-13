@@ -544,9 +544,8 @@ declare module ramda {
   declare function minBy<T,V>(fn: (x:T) => V, x: T, ...rest: Array<void>): (y: T) => T;
   declare function minBy<T,V>(fn: (x:T) => V, x: T, y: T): T;
 
-  // TODO: sortBy: Started failing in v38...
-  // declare function sortBy<T,V>(fn: (x:T) => V, ...rest: Array<void>): (x: Array<T>) => Array<T>;
-  // declare function sortBy<T,V>(fn: (x:T) => V, x: Array<T>): Array<T>;
+  declare function sortBy<T,V>(fn: (x:T) => V, ...rest: Array<void>): (x: Array<T>) => Array<T>;
+  declare function sortBy<T,V>(fn: (x:T) => V, x: Array<T>): Array<T>;
 
   declare function symmetricDifference<T>(x: Array<T>, ...rest: Array<void>): (y: Array<T>) => Array<T>;
   declare function symmetricDifference<T>(x: Array<T>, y: Array<T>): Array<T>;
