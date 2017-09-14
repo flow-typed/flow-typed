@@ -281,7 +281,7 @@ declare module "joi" {
     binary(): npm$joi$BinarySchema,
     bool(): npm$joi$BooleanSchema,
     boolean(): npm$joi$BooleanSchema,
-    compile(schema: Object): npm$joi$Schema,
+    compile(schema: Object | mixed[]): npm$joi$Schema,
     date(): npm$joi$DateSchema,
     func(): npm$joi$FunctionSchema,
     number(): npm$joi$NumberSchema,
