@@ -107,7 +107,7 @@ var User = () => <div />;
 />;
 <Route>
   <div>children</div>
-</Route>
+</Route>;
 
 // $ExpectError
 <Route path="/user/:username" component={<User />} />;
