@@ -9,7 +9,7 @@ const objMixed: { [k: string]: mixed } = { a: 1, c: "d" };
 const os: Array<{ [k: string]: * }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
-// TODO: "Gap" Functions: Started failing in v31...g
+// TODO: "Gap" Functions: Started failing in v31...
 // const g = _.propIs
 // const __ = _.__
 // const g1: boolean = g(1, '2', {p: 3})
