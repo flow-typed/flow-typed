@@ -105,6 +105,9 @@ var User = () => <div />;
   path="/"
   children={({ match }) => <div className={match ? "active" : ""} />}
 />;
+<Route>
+  <div>children</div>
+</Route>;
 
 // $ExpectError
 <Route path="/user/:username" component={<User />} />;
