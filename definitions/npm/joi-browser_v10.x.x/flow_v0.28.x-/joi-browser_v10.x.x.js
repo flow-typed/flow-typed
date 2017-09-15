@@ -317,7 +317,7 @@ declare module "joi-browser" {
     binary(): npm$joiBrowser$BinarySchema,
     bool(): npm$joiBrowser$BooleanSchema,
     boolean(): npm$joiBrowser$BooleanSchema,
-    compile(schema: Object): npm$joiBrowser$Schema,
+    compile(schema: Object | mixed[]): npm$joiBrowser$Schema,
     date(): npm$joiBrowser$DateSchema,
     func(): npm$joiBrowser$FunctionSchema,
     number(): npm$joiBrowser$NumberSchema,
