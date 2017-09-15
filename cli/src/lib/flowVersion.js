@@ -1,29 +1,29 @@
 // @flow
 
-import type {ValidationErrors as VErrors} from './validationErrors';
-import {validationError} from './validationErrors';
+import type { ValidationErrors as VErrors } from "./validationErrors";
+import { validationError } from "./validationErrors";
 
 export type FlowSpecificVer = {|
   major: number,
-  minor: number | 'x',
-  patch: number | 'x',
-  prerel: string | 'x' | null,
+  minor: number | "x",
+  patch: number | "x",
+  prerel: string | "x" | null
 |};
 
 export type FlowVersion =
-  | {|kind: 'all'|}
-  | {|kind: 'specific', ver: FlowSpecificVer|}
+  | {| kind: "all" |}
+  | {| kind: "specific", ver: FlowSpecificVer |}
   | {|
-      kind: 'ranged',
+      kind: "ranged",
       upper: FlowSpecificVer | null,
-      lower: FlowSpecificVer | null,
+      lower: FlowSpecificVer | null
     |};
 
 function _parseVerNum(
   numStr: string,
   verName: string,
   context: string,
-  validationErrs?: VErrors,
+  validationErrs?: VErrors
 ): number {
   const num = parseInt(numStr, 10);
   if (String(num) !== numStr) {
@@ -37,13 +37,13 @@ function _parseVerNumOrX(
   numStr: string | null | void,
   verName: string,
   context: string,
-  validationErrs?: VErrors,
-): number | 'x' {
+  validationErrs?: VErrors
+): number | "x" {
   if (numStr == null) {
-    return 'x';
+    return "x";
   }
 
-  if (numStr === 'x') {
+  if (numStr === "x") {
     return numStr;
   }
 
@@ -54,19 +54,19 @@ function _parseVersion(
   verStr: string,
   context: string,
   expectPossibleRangeUpper: boolean,
-  validationErrs?: VErrors,
+  validationErrs?: VErrors
 ): [number, FlowSpecificVer] {
-  if (verStr[0] !== 'v') {
+  if (verStr[0] !== "v") {
     validationError(
       verStr,
-      'Flow version ranges must start with a `v`!',
-      validationErrs,
+      "Flow version ranges must start with a `v`!",
+      validationErrs
     );
     return _parseVersion(
-      'v' + verStr,
+      "v" + verStr,
       context,
       expectPossibleRangeUpper,
-      validationErrs,
+      validationErrs
     );
   }
 
@@ -75,28 +75,28 @@ function _parseVersion(
     .match(/^([0-9]+)\.([0-9]+|x)(\.([0-9]+|x))?/);
   let majorStr, minorStr, patchStr;
   if (verParts == null) {
-    if (verStr[1] === 'x') {
+    if (verStr[1] === "x") {
       validationError(
         context,
-        'The major version of a Flow version string cannot be `x`, it must ' +
-          'be a number!',
-        validationErrs,
+        "The major version of a Flow version string cannot be `x`, it must " +
+          "be a number!",
+        validationErrs
       );
       return _parseVersion(
-        'v0' + verStr.substr(2),
+        "v0" + verStr.substr(2),
         context,
         expectPossibleRangeUpper,
-        validationErrs,
+        validationErrs
       );
     } else {
       validationError(
         context,
-        'Flow versions must be a non-range semver with an exact major ' +
-          'version and either an exact minor version or an `x` minor ver.',
-        validationErrs,
+        "Flow versions must be a non-range semver with an exact major " +
+          "version and either an exact minor version or an `x` minor ver.",
+        validationErrs
       );
     }
-    return [0, {major: 0, minor: 'x', patch: 'x', prerel: null}];
+    return [0, { major: 0, minor: "x", patch: "x", prerel: null }];
   } else {
     majorStr = verParts[1];
     minorStr = verParts[2];
@@ -104,15 +104,15 @@ function _parseVersion(
   }
 
   const [major, minor, patch] = [
-    _parseVerNum(majorStr, 'major', verStr, validationErrs),
-    _parseVerNumOrX(minorStr, 'minor', verStr, validationErrs),
-    _parseVerNumOrX(patchStr, 'patch', verStr, validationErrs),
+    _parseVerNum(majorStr, "major", verStr, validationErrs),
+    _parseVerNumOrX(minorStr, "minor", verStr, validationErrs),
+    _parseVerNumOrX(patchStr, "patch", verStr, validationErrs)
   ];
 
   const verAfterParts = verStr.substr(verParts[0].length + 1);
   if (
     patchStr != null &&
-    verAfterParts[0] === '-' &&
+    verAfterParts[0] === "-" &&
     verAfterParts[1] != null
   ) {
     if (expectPossibleRangeUpper) {
@@ -128,29 +128,29 @@ function _parseVersion(
       // (and only sometimes) it shouldn't be an issue in practice.
       try {
         _parseVersion(verAfterParts.substr(1), context, false);
-        return [verParts[0].length + 1, {major, minor, patch, prerel: null}];
+        return [verParts[0].length + 1, { major, minor, patch, prerel: null }];
       } catch (e) {
         // It's possible that a prerel *and* a range co-exist!
         // v0.1.x-prerel-v0.2.x
-        let prerelParts = verAfterParts.substr(1).split('-'); // ['prerel', 'v0.2.x']
+        let prerelParts = verAfterParts.substr(1).split("-"); // ['prerel', 'v0.2.x']
         let prerel = prerelParts.shift(); // 'prerel'
         while (prerelParts.length > 0) {
           try {
-            _parseVersion(prerelParts.join('-'), context, false);
+            _parseVersion(prerelParts.join("-"), context, false);
             break;
           } catch (e) {
-            prerel += '-' + prerelParts.shift();
+            prerel += "-" + prerelParts.shift();
           }
         }
 
         return [
-          verParts[0].length + '-'.length + prerel.length + 1,
+          verParts[0].length + "-".length + prerel.length + 1,
           {
             major,
             minor,
             patch,
-            prerel,
-          },
+            prerel
+          }
         ];
       }
     } else {
@@ -161,57 +161,69 @@ function _parseVersion(
           major,
           minor,
           patch,
-          prerel: verAfterParts.substr(1),
-        },
+          prerel: verAfterParts.substr(1)
+        }
       ];
     }
   } else {
-    return [verParts[0].length + 1, {major, minor, patch, prerel: null}];
+    return [verParts[0].length + 1, { major, minor, patch, prerel: null }];
   }
 }
 
 export function parseDirString(
   verStr: string,
   context: string,
-  validationErrs?: VErrors,
+  validationErrs?: VErrors
 ): FlowVersion {
-  if (verStr.substr(0, 'flow_'.length) !== 'flow_') {
+  if (verStr.substr(0, "flow_".length) !== "flow_") {
     validationError(
       context,
-      'Flow versions must start with `flow-`',
-      validationErrs,
+      "Flow versions must start with `flow-`",
+      validationErrs
     );
-    return {kind: 'all'};
+    return { kind: "all" };
   }
 
-  const afterPrefix = verStr.substr('flow_'.length);
+  const afterPrefix = verStr.substr("flow_".length);
 
-  if (afterPrefix === 'all') {
-    return {kind: 'all'};
-  } else if (afterPrefix[0] === '-') {
+  if (afterPrefix === "all") {
+    return { kind: "all" };
+  } else if (afterPrefix[0] === "-") {
     return {
-      kind: 'ranged',
+      kind: "ranged",
       lower: null,
       upper: _parseVersion(
-        verStr.substr('flow_-'.length),
+        verStr.substr("flow_-".length),
         context,
         false,
-        validationErrs,
-      )[1],
+        validationErrs
+      )[1]
     };
   } else {
     const [offset, lowerVer] = _parseVersion(
       afterPrefix,
       context,
       true,
-      validationErrs,
+      validationErrs
     );
     if (offset === afterPrefix.length) {
       return {
-        kind: 'specific',
-        ver: lowerVer,
+        kind: "specific",
+        ver: lowerVer
       };
-    } else if (afterPrefix[offset] === '-') {
+    } else if (afterPrefix.slice(offset, offset + 3) === " <=") {
+      const upperVer = _parseVersion(
+        afterPrefix.substr(offset + 3),
+        context,
+        false,
+        validationErrs
+      )[1];
+      return {
+        kind: "ranged",
+        lower: lowerVer,
+        upper: upperVer
+      };
+    } else if (afterPrefix[offset] === "-") {
       const upperVer =
         offset + 1 === afterPrefix.length
           ? null
@@ -219,22 +231,22 @@ export function parseDirString(
               afterPrefix.substr(offset + 1),
               context,
               false,
-              validationErrs,
+              validationErrs
             )[1];
       return {
-        kind: 'ranged',
+        kind: "ranged",
         lower: lowerVer,
-        upper: upperVer,
+        upper: upperVer
       };
     } else {
       validationError(
         verStr,
         `Unexpected trailing characters: ${afterPrefix.substr(offset)}`,
-        validationErrs,
+        validationErrs
       );
       return {
-        kind: 'specific',
-        ver: lowerVer,
+        kind: "specific",
+        ver: lowerVer
       };
     }
   }
@@ -243,18 +255,18 @@ export function parseDirString(
 export function parseFlowSpecificVer(
   verStr: string,
   context: string,
-  validationErrs?: VErrors,
+  validationErrs?: VErrors
 ): FlowSpecificVer {
   const flowVer = parseDirString(`flow_${verStr}`, context, validationErrs);
   switch (flowVer.kind) {
-    case 'specific':
+    case "specific":
       return flowVer.ver;
-    case 'all':
-    case 'ranged':
+    case "all":
+    case "ranged":
       validationError(
         verStr,
         `This is not a specific Flow version.`,
-        validationErrs,
+        validationErrs
       );
       break;
     default:
@@ -262,28 +274,28 @@ export function parseFlowSpecificVer(
   }
   return {
     major: -1,
-    minor: 'x',
-    patch: 'x',
-    prerel: null,
+    minor: "x",
+    patch: "x",
+    prerel: null
   };
 }
 
 /**
  * Given two version ranges a and b, determine whether a is before b.
  */
-function lt(n1: number | 'x', n2: number | 'x'): boolean | 'maybe' {
-  if (n1 === 'x' || n2 === 'x') return false;
+function lt(n1: number | "x", n2: number | "x"): boolean | "maybe" {
+  if (n1 === "x" || n2 === "x") return false;
   if (n1 < n2) return true;
   if (n1 > n2) return false;
-  return 'maybe';
+  return "maybe";
 }
 function before(a: FlowSpecificVer, b: FlowSpecificVer): boolean {
   let test = lt(a.major, b.major);
-  if (test !== 'maybe') return test;
+  if (test !== "maybe") return test;
   test = lt(a.minor, b.minor);
-  if (test !== 'maybe') return test;
+  if (test !== "maybe") return test;
   test = lt(a.patch, b.patch);
-  if (test !== 'maybe') return test;
+  if (test !== "maybe") return test;
   return false;
 }
 
@@ -292,15 +304,15 @@ function before(a: FlowSpecificVer, b: FlowSpecificVer): boolean {
  */
 function maxSat(ver: FlowVersion): FlowSpecificVer | null {
   switch (ver.kind) {
-    case 'all':
+    case "all":
       return null;
-    case 'ranged':
+    case "ranged":
       return ver.upper;
-    case 'specific':
+    case "specific":
       return ver.ver;
     default:
       (ver: empty);
-      throw new Error('Unexpected FlowVersion kind!');
+      throw new Error("Unexpected FlowVersion kind!");
   }
 }
 
@@ -309,15 +321,15 @@ function maxSat(ver: FlowVersion): FlowSpecificVer | null {
  */
 function minSat(ver: FlowVersion): FlowSpecificVer | null {
   switch (ver.kind) {
-    case 'all':
+    case "all":
       return null;
-    case 'ranged':
+    case "ranged":
       return ver.lower;
-    case 'specific':
+    case "specific":
       return ver.ver;
     default:
       (ver: empty);
-      throw new Error('Unexpected FlowVersion kind!');
+      throw new Error("Unexpected FlowVersion kind!");
   }
 }
 
@@ -352,10 +364,10 @@ export function disjointVersionsAll(vers: Array<FlowVersion>): boolean {
 
 export function toDirString(ver: FlowVersion): string {
   switch (ver.kind) {
-    case 'all':
-      return 'flow_all';
+    case "all":
+      return "flow_all";
 
-    case 'specific': {
+    case "specific": {
       let str = `flow_v${ver.ver.major}.${ver.ver.minor}`;
       if (ver.ver.patch !== null) {
         str += `.${ver.ver.patch}`;
@@ -366,9 +378,9 @@ export function toDirString(ver: FlowVersion): string {
       return str;
     }
 
-    case 'ranged': {
-      const {lower, upper} = ver;
-      let str = 'flow_';
+    case "ranged": {
+      const { lower, upper } = ver;
+      let str = "flow_";
       if (lower !== null) {
         str += `v${lower.major}.${lower.minor}`;
         if (lower.patch !== null) {
@@ -379,7 +391,7 @@ export function toDirString(ver: FlowVersion): string {
         }
       }
 
-      str += '-';
+      str += "-";
 
       if (upper !== null) {
         str += `v${upper.major}.${upper.minor}`;
@@ -395,21 +407,21 @@ export function toDirString(ver: FlowVersion): string {
 
     default:
       (ver: empty);
-      throw new Error('Unexpected FlowVersion kind!');
+      throw new Error("Unexpected FlowVersion kind!");
   }
 }
 
 export function toSemverString(ver: FlowVersion): string {
   switch (ver.kind) {
-    case 'all':
-      return 'vx.x.x';
+    case "all":
+      return "vx.x.x";
 
-    case 'specific':
-      return toDirString(ver).substr('flow_'.length);
+    case "specific":
+      return toDirString(ver).substr("flow_".length);
 
-    case 'ranged': {
-      const {upper, lower} = ver;
-      let str = '';
+    case "ranged": {
+      const { upper, lower } = ver;
+      let str = "";
       if (lower !== null) {
         str += `>=v${lower.major}.${lower.minor}`;
         if (lower.patch !== null) {
@@ -419,7 +431,7 @@ export function toSemverString(ver: FlowVersion): string {
           }
         }
         if (upper !== null) {
-          str += ' ';
+          str += " ";
         }
       }
 
@@ -437,9 +449,9 @@ export function toSemverString(ver: FlowVersion): string {
 
     default:
       (ver: empty);
-      throw new Error('Unexpected FlowVersion kind!');
+      throw new Error("Unexpected FlowVersion kind!");
   }
 }
 
 // Exported for tests
-export {_parseVersion as __parseVersion};
+export { _parseVersion as __parseVersion };
