@@ -449,7 +449,7 @@ declare module "underscore" {
     extendOwn: typeof $underscore$Extend;
     pick<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
     omit<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
-    defaults<K, V>(defaults: {[keys: K]: V}, more: {[keys: K]: V}): {[keys: K]: V};
+    defaults(defaults: ?Object, ...mores?: Array<Object>): Object;
     clone<O: {}>(object: O): O;
     tap<O>(object: O): O;
     has(object: Object, key: string): boolean;

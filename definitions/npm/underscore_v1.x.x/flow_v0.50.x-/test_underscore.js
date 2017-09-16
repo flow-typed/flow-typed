@@ -51,6 +51,15 @@ _.assign({name: 'moe'}, {age: 50});
 */
 
 _.defaults({flavor: 'chocolate'}, {flavor: 'vanilla', sprinkles: 'lots'});
+_.defaults({}, {flavor: 'chocolate'});
+_.defaults({flavor: 'chocolate'}, {sprinkles: 'lots'}, {foo: 'bar'}, {foo1: 'bar1'});
+_.defaults({flavor: 'chocolate'}, {flavor: 'vanilla'});
+_.defaults({zero: 0, one: 1, empty: '', nan: NaN, nothing: null}, {zero: 1, one: 10, twenty: 20, nothing: 'str'});
+_.defaults({zero: 0, one: 1, empty: '', nan: NaN, nothing: null}, {empty: 'full'}, {nan: 'nan'}, {word: 'word'}, {word: 'dog'});
+_.defaults(null, {a: 1});
+_.defaults(void 0, {a: 1});
+// $ExpectError
+_.defaults({}, null, void 0, {a: 1});
 
 _.isMatch({name: 'moe', age: 32}, {age: 32});
 
