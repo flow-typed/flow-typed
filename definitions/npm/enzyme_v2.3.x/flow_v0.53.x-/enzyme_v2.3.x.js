@@ -83,7 +83,7 @@ declare module "enzyme" {
   }
 
   declare export class ShallowWrapper extends Wrapper {
-    constructor(nodes: NodeOrNodes, root: any, options?: ?Object): ReactWrapper;
+    constructor(nodes: NodeOrNodes, root: any, options?: ?Object): ShallowWrapper;
     equals(node: React.Node): boolean,
     shallow(options?: { context?: Object }): ShallowWrapper
   }
