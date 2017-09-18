@@ -30,7 +30,8 @@ moment().isAfter();
 moment().isSameOrBefore();
 moment().isSameOrAfter();
 moment.isDate(new Date());
-
+moment().isBefore(new Date(), 'day');
+moment().isSame(new Date(), 'day');
 
 // CalendarTime
 moment().calendar(null, {
