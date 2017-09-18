@@ -199,11 +199,11 @@ declare class moment$Moment {
   toJSON(): string;
   toISOString(): string;
   toObject(): moment$MomentObject;
-  isBefore(date?: moment$Moment|string|number|Date|Array<number>): bool;
-  isSame(date?: moment$Moment|string|number|Date|Array<number>): bool;
-  isAfter(date?: moment$Moment|string|number|Date|Array<number>): bool;
-  isSameOrBefore(date?: moment$Moment|string|number|Date|Array<number>): bool;
-  isSameOrAfter(date?: moment$Moment|string|number|Date|Array<number>): bool;
+  isBefore(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
+  isSame(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
+  isAfter(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
+  isSameOrBefore(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
+  isSameOrAfter(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isBetween(date: moment$Moment|string|number|Date|Array<number>): bool;
   isDST(): bool;
   isDSTShifted(): bool;
