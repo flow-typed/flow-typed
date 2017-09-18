@@ -78,6 +78,26 @@ _.any(['a', true, 0]);
 _.every(['a', true, 0]);
 _.all(['a', true, 0]);
 
+_.union([1, 2, 3], [2, 30, 1], [1, 40]);
+_([1, 2, 3]).union([2, 30, 1], [1, 40]);
+_.union([1, 2, 3], [2, 30, 1], [1, 40, [1]]);
+// $ExpectError
+_.union([1, 2, 3], 4)
+
+_.filter([1, 2, 3, 4, 5, 6], function(num: number): boolean { return num % 2 === 0; });
+_.filter([1, 2, 3, 4, 5, 6], function(num, index: number, as: number[]): boolean { 
+  return num % 2 == 0 || index === 7 || as.length > 3; 
+});
+_.filter({name: 'foo', a: 'bar'}, function (val, key, obj): boolean {
+  var testKey = key + 'foo';
+  var allKeys = _.keys(obj);
+  return val === 'foo';
+});
+var list = [{a: 1, b: 2}, {a: 2, b: 2}, {a: 1, b: 3}, {a: 1, b: 4}];
+_.filter(list, {a: 1});
+_.filter(list, {})
+_(list).filter({})
+
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v) => v.t === 'a');
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k) => k === 'a' && v.t === 'a');
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k, o) => k === 'a' && v.t === 'a' && o[k] === v);

@@ -284,10 +284,12 @@ declare module "underscore" {
     find<T>(list: T[], predicate: (val: T)=>boolean): ?T;
     detect<T>(list: T[], predicate: (val: T)=>boolean): ?T;
 
-    filter<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): T[];
-    filter<T>(a: T[], pred: (val: T, k: string)=>boolean): T[];
-    select<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): T[];
-    select<T>(a: T[], pred: (val: T, k: string)=>boolean): T[];
+    filter<T>(o: {[key:string]: T}, pred: (val: T, k: string, o: {[string]: T})=>boolean): T[];
+    filter<T>(a: T[], pred: (val: T, k: number, a: T[])=>boolean): T[];
+    filter<T>(o: {[string]: T}[], pred: {[string]: T}): T[];
+    select<T>(o: {[key:string]: T}, pred: (val: T, k: string, o: {[string]: T})=>boolean): T[];
+    select<T>(a: T[], pred: (val: T, k: number, a: T[])=>boolean): T[];
+    select<T>(o: {[string]: T}[], pred: {[string]: T}): T[];
     where<T>(list: Array<T>, properties: Object): Array<T>;
     findWhere<T>(list: Array<T>, properties: {[key:string]: any}): ?T;
 
@@ -610,6 +612,7 @@ declare module "underscore" {
     reduceRight<U>(iteratee: (memo: U, value: T, index?: number) => U, init: U): U;
     find(predicate: (value: T) => boolean): ?T;
     filter(predicate: (value: T) => boolean): Array<T>;
+    filter(predicate: {[string]: T}): Array<T>;    
     where(properties: Object): Array<T>;
     findWhere(properties: $Shape<T>): ?T;
     reject(predicate: (value: T) => boolean, context?: mixed): Array<T>;
