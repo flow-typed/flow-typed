@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "test": "eslint npm/**/test*"
+    "test": "eslint **/**/test_*"
   },
   "dependencies": {
     "babel-eslint": "^7.2.3",
