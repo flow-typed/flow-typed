@@ -150,23 +150,23 @@ declare module pg {
 
   declare type ClientConfig = {
     //database user's name
-    user: string,
+    user?: string,
     //name of database to connect
-    database: string,
+    database?: string,
     //database user's password
-    password: string,
+    password?: string,
     //database port
-    port: number,
+    port?: number,
     // database host. defaults to localhost
-    host: string,
+    host?: string,
     // whether to try SSL/TLS to connect to server. default value: false
-    ssl: boolean,
+    ssl?: boolean,
     // name displayed in the pg_stat_activity view and included in CSV log entries
     // default value: process.env.PGAPPNAME
-    application_name: string,
+    application_name?: string,
     // fallback value for the application_name configuration parameter
     // default value: false
-    fallback_application_name: string,
+    fallback_application_name?: string,
   }
 
   declare type Row = {
@@ -234,6 +234,9 @@ declare module pg {
     constructor(config?: string | ClientConfig): void;
     connect(callback?: ClientConnectCallback):void;
     end(): void;
+
+    escapeLiteral(str: string): string;
+    escapeIdentifier(str: string): string;
 
     query:
     ( (query: QueryConfig|string, callback?: QueryCallback) => Query ) &
