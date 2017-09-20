@@ -1179,40 +1179,34 @@ declare module ramda {
   declare function assoc<T, S>(
     key: string,
     ...args: Array<void>
-  ): ((
-    val: T,
-    ...rest: Array<void>
-  ) => (src: { [k: string]: S }) => { [k: string]: S | T }) &
-    ((val: T, src: { [k: string]: S }) => { [k: string]: S | T });
+  ): ((val: T, ...rest: Array<void>) => (src: S) => { [k: string]: T }) &
+    ((val: T, src: S) => { [k: string]: T } & S);
   declare function assoc<T, S>(
     key: string,
     val: T,
     ...args: Array<void>
-  ): (src: { [k: string]: S }) => { [k: string]: S | T };
+  ): (src: S) => { [k: string]: T } & S;
   declare function assoc<T, S>(
     key: string,
     val: T,
-    src: { [k: string]: S }
-  ): { [k: string]: S | T };
+    src: S
+  ): { [k: string]: T } & S;
 
   declare function assocPath<T, S>(
     key: Array<string>,
     ...args: Array<void>
-  ): ((
-    val: T,
-    ...rest: Array<void>
-  ) => (src: { [k: string]: S }) => { [k: string]: S | T }) &
-    ((val: T) => (src: { [k: string]: S }) => { [k: string]: S | T });
+  ): ((val: T, ...rest: Array<void>) => (src: S) => { [k: string]: T }) &
+    ((val: T) => (src: S) => { [k: string]: T } & S);
   declare function assocPath<T, S>(
     key: Array<string>,
     val: T,
     ...args: Array<void>
-  ): (src: { [k: string]: S }) => { [k: string]: S | T };
+  ): (src: S) => { [k: string]: T } & S;
   declare function assocPath<T, S>(
     key: Array<string>,
     val: T,
-    src: { [k: string]: S }
-  ): { [k: string]: S | T };
+    src: S
+  ): { [k: string]: T } & S;
 
   declare function clone<T>(src: T): $Shape<T>;
 

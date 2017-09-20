@@ -11,8 +11,11 @@ const str: string = "hello world";
 
 // Object
 const a: { [k: string]: number | string } = _.assoc("c", "s", { a: 1, b: 2 });
-//$ExpectError
-const a1: { [k: string]: number | boolean } = _.assoc("c", "s", { a: 1, b: 2 });
+const mixedA: { x: { [string]: number }, y: Array<string> } = _.assoc(
+  "x",
+  { x1: 11 },
+  { y: ["y1"] }
+);
 
 const apath: { [k: string]: number | string | Object } = _.assocPath(
   ["a", "b", "c"],
