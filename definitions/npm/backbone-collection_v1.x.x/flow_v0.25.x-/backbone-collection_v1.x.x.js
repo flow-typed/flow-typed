@@ -5,6 +5,8 @@ declare type Backbone$Attrs = { [name: string]: any };
 declare type Backbone$Id = number | string;
 
 declare module "backbone-collection" {
+  declare var version: string;
+
   declare type eventCallback = (event: Event) => void | mixed;
 
   /**
