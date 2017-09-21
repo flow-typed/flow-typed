@@ -14,9 +14,13 @@ declare module 'meow' {
     alias?: { [arg: string]: string | Array<string> },
     default?: { [arg: string]: any },
     stopEarly?: boolean,
-    // TODO: Strings as keys don't work...
-    // '--'? boolean,
+    '--'?: boolean,
     unknown?: (param: string) => boolean
+  };
+
+  declare type Flags = {
+    '--'?: Array<string>,
+    [flag: string]: string | boolean
   };
 
   declare module.exports: (
@@ -24,7 +28,7 @@ declare module 'meow' {
     minimistOptions?: minimistOptions,
   ) => {
     input: Array<string>,
-    flags: { [flag: string]: string | boolean },
+    flags: Flags,
     pkg: Object,
     help: string,
     showHelp: Function
