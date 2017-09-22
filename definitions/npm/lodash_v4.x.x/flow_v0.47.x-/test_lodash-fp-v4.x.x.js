@@ -1,6 +1,14 @@
 // @flow
 import _ from 'lodash/fp';
 
+_.filter('x', [{x: 1}, {x: 2}]);
+_.filter('x')([{x: 1}, {x: 2}]);
+_.filter('x', {a: {x: 1}, b: {x: 2}});
+_.filter('x')({a: {x: 1}, b: {x: 2}});
+_.filter((v: {y?: number}) => v.y)({a: {x: 1}, b: {x: 2}})[0].x;
+// $ExpectError
+_.filter((v: {y: number}) => v.y)({a: {x: 1}, b: {x: 2}});
+
 /**
  * _.attempt
  */
@@ -14,6 +22,7 @@ _.attempt((x, y, z) => {})
 _.countBy(Math.floor, [6.1, 4.2, 6.3]);
 _.countBy('length', ['one', 'two', 'three']);
 _.countBy('length')(['one', 'two', 'three']);
+_.countBy('length')({one: 'one', two: 'two', three: 'three'});
 
 
 /**
@@ -321,6 +330,10 @@ numsAndStrList = _.concat(nums)(['123']);
 numsAndStrList = _.concat(nums, ['123', '456']);
 numsAndStrList = _.concat(nums, [1,2,3, '456']);
 mixedList = _.concat(nums, [[1,2,3], '456']);
+(_.concat(1, 2): number[]);
+(_.concat(1, [2]): number[]);
+(_.concat([1], [2]): number[]);
+(_.concat([1], 2): number[]);
 
 // Array#map, lodash.map, lodash#map
 nativeSquares = nums.map(function(num) {
