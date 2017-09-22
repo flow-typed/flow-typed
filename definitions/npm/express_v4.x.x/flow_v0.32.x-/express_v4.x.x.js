@@ -30,7 +30,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   params: express$RequestParams;
   path: string;
   protocol: 'https' | 'http';
-  query: {[name: string]: string};
+  query: {[name: string]: string | Array<string>};
   route: string;
   secure: boolean;
   signedCookies: {[signedCookie: string]: string};

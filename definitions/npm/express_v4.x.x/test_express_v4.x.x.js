@@ -134,6 +134,10 @@ app.use((err: ?Error, req: express$Request, res: express$Response, next: express
     // test req
     req.accepts('accepted/type');
     req.accepts(['json', 'text']);
+    if (typeof req.query.foo === 'string')
+      console.log((req.query.foo: string));
+    else
+      console.log((req.query.foo: Array<string>));
     // test response
     res.redirect('/somewhere');
     // test next
