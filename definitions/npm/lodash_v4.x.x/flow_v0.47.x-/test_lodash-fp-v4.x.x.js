@@ -145,8 +145,8 @@ var keyByTest_map: KeyByTest$ByNumber<KeyByTest$Record> = {
   [keyByTest_array[2].id]: keyByTest_array[2],
 }
 
-var keyByTest_map2: KeyByTest$ByNumberMaybe<?KeyByTest$Record> = _.keyBy('id', keyByTest_map)
-var keyByTest_map3: KeyByTest$ByNumberMaybe<?KeyByTest$Record> = _.keyBy('id')(keyByTest_map)
+var keyByTest_map2: KeyByTest$ByNumberMaybe<KeyByTest$Record> = _.keyBy('id', keyByTest_map)
+var keyByTest_map3: KeyByTest$ByNumberMaybe<KeyByTest$Record> = _.keyBy('id')(keyByTest_map)
 
 
 /**
@@ -316,8 +316,10 @@ var numsAndStrList : Array<number|string>;
 var mixedList : Array<mixed>;
 allNums = _.concat(nums, nums);
 numsAndStrList = _.concat(nums, '123');
+numsAndStrList = _.concat(nums)('123');
+numsAndStrList = _.concat(nums)(['123']);
 numsAndStrList = _.concat(nums, ['123', '456']);
-numsAndStrList = _.concat(nums, [[1,2,3], '456']);
+numsAndStrList = _.concat(nums, [1,2,3, '456']);
 mixedList = _.concat(nums, [[1,2,3], '456']);
 
 // Array#map, lodash.map, lodash#map
@@ -379,3 +381,8 @@ _.noop('a', 2, [], null);
 (_.noop: (number, string) => void);
 // $ExpectError functions are contravariant in return types
 (_.noop: (string) => string);
+
+const ab = (a: number) => `${a}`;
+const bc = (b: string) => ({b});
+const cd = (c: {b: string}) => [c.b];
+const pipedResult: string[] = _.pipe(ab, bc, cd)(1);
