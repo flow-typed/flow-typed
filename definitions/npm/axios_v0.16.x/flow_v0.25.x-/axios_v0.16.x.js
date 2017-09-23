@@ -74,7 +74,7 @@ declare module 'axios' {
   declare class AxiosResponseInterceptor<T> {
     use(
       successHandler: ?(response: AxiosXHR<T>) => mixed,
-      errorHandler: ?(error: mixed) => mixed,
+      errorHandler: ?(error: $AxiosError<any>) => mixed,
     ): AxiosInterceptorIdent;
     eject(ident: AxiosInterceptorIdent): void;
   }
