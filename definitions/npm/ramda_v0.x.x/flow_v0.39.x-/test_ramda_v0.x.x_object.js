@@ -137,15 +137,15 @@ const ooo = { a: 1, b: 2, A: 3, B: 4 }
 const isUpperCase = (val, key) => key.toUpperCase() === key
 const pb:Object = _.pickBy(isUpperCase, ooo)
 
-const ppp:?number = _.prop('x', { x: 100 })
+const ppp:number = _.prop('x', { x: 100 })
 //$ExpectError
-const ppp1:?number = _.prop('y', { x: 100 })
-const ppp2:?number = _.prop('x')({ x: 100 })
+const ppp1:number = _.prop('y', { x: 100 })
+const ppp2:number = _.prop('x')({ x: 100 })
 //$ExpectError
-const ppp3:?number = _.prop('y')({ x: 100 })
-const ppp4:?number = _.prop(_.__, { x: 100 })('x')
+const ppp3:number = _.prop('y')({ x: 100 })
+const ppp4:number = _.prop(_.__, { x: 100 })('x')
 //$ExpectError
-const ppp5:?number = _.prop(_.__, { x: 100 })('y')
+const ppp5:number = _.prop(_.__, { x: 100 })('y')
 
 const alice = {
   name: 'ALICE',

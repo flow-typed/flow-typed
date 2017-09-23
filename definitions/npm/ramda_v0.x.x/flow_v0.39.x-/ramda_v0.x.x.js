@@ -670,9 +670,9 @@ declare module ramda {
   declare function project<T>(keys: Array<string>, ...rest: Array<void>): (val: Array<{[key:string]: T}>) => Array<{[key:string]: T}>;
   declare function project<T>(keys: Array<string>, val: Array<{[key:string]: T}>): Array<{[key:string]: T}>;
 
-  declare function prop<T,O:{[k:string]:T}>(key: $Keys<O>, ...rest: Array<void>): (o: O) => ?T;
-  declare function prop<T,O:{[k:string]:T}>(__: $npm$ramda$Placeholder, o: O): (key: $Keys<O>) => ?T;
-  declare function prop<T,O:{[k:string]:T}>(key: $Keys<O>, o: O): ?T;
+  declare function prop<T,O:{[k:string]:T}>(key: $Keys<O>, ...rest: Array<void>): (o: O) => T;
+  declare function prop<T,O:{[k:string]:T}>(__: $npm$ramda$Placeholder, o: O): (key: $Keys<O>) => T;
+  declare function prop<T,O:{[k:string]:T}>(key: $Keys<O>, o: O): T;
 
   declare function propOr<T,V,A:{[k:string]:V}>(or: T, ...rest: Array<void>):
   ((p: $Keys<A>, ...rest: Array<void>) => (o: A) => V|T)
