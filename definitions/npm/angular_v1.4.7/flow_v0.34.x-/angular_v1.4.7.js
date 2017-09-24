@@ -19,6 +19,7 @@ declare module angular {
   declare interface JqliteElement extends Array<Element> {
     remove: () => JqliteElement,
     contents: () => JqliteElement,
+    injector: Function,
   }
 
   declare function AngularLinkFunction(
