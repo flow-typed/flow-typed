@@ -2,26 +2,26 @@
 import React from "react";
 import { AppContainer } from "react-hot-loader";
 
-let errorReporter = () => <div>error message</div>;
+let defaultErrorReporter = () => <div>error message</div>;
 
 // $ExpectError - missing children prop
-(() => { <div><AppContainer /></div>; })();
+<div><AppContainer /></div>;
 
 // passing
 <AppContainer>
   <div>some child</div>
-</AppContainer>
+</AppContainer>;
 
 
 
 // $ExpectError - not one child
-const container = <AppContainer><div>some child</div><i>other</i></AppContainer> || null;
+<AppContainer><div>some child</div><i>other</i></AppContainer>;
 
 
 
 // passing - errorReporter as NodeElement or function returning NodeElement
 <div>
-  <AppContainer errorReporter={errorReporter}>
+  <AppContainer errorReporter={defaultErrorReporter}>
     <div>some child</div>
   </AppContainer>
   <AppContainer errorReporter={<i>Err</i>}>
