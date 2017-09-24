@@ -15,7 +15,7 @@ let errorReporter = () => <div>error message</div>;
 
 
 // $ExpectError - not one child
-(() => { <AppContainer>{[1, 2].map(() => <div>some child</div>)}</AppContainer> })();
+(() => { <AppContainer><div>some child</div><i>other</i></AppContainer> })();
 
 
 
@@ -29,10 +29,8 @@ let errorReporter = () => <div>error message</div>;
   </AppContainer>
 </div>;
 
-errorReporter = () => [1, 2, 3].map(i => <i>{i}</i>);
 // $ExpectError - errorReporter cannot return an array of children
-<AppContainer errorReporter={errorReporter}><div>some child</div></AppContainer>;
+<AppContainer errorReporter={() => [1, 2, 3].map(i => <i>{i}</i>)}><div>some child</div></AppContainer>;
 
-errorReporter = [1, 2, 3].map(i => <i>{i}</i>);
 // $ExpectError - errorReporter cannot be an array of children
-<AppContainer errorReporter={errorReporter}><div>some child</div></AppContainer>;
+<AppContainer errorReporter={[1, 2, 3].map(i => <i>{i}</i>)}><div>some child</div></AppContainer>;
