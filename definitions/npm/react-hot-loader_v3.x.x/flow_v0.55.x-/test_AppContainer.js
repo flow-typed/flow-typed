@@ -15,7 +15,7 @@ let errorReporter = () => <div>error message</div>;
 
 
 // $ExpectError - not one child
-(() => { <AppContainer><div>some child</div><i>other</i></AppContainer> })();
+const container = <AppContainer><div>some child</div><i>other</i></AppContainer> || null;
 
 
 
