@@ -226,4 +226,5 @@ declare module "react-intl" {
     }
   > {}
   declare type IntlShape = $npm$ReactIntl$IntlShape;
+  declare type MessageDescriptor = $npm$ReactIntl$MessageDescriptor;
 }

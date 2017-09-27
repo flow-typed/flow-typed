@@ -14,7 +14,7 @@ import {
   FormattedPlural,
   IntlProvider
 } from "react-intl";
-import type { IntlShape } from "react-intl";
+import type { IntlShape, MessageDescriptor } from "react-intl";
 
 intlShape({ foo: "bar" }, "propName", "TestComponentName");
 // $ExpectError number. This type is incompatible with void
@@ -43,6 +43,9 @@ const messages = {
     id: "messageid2_foo",
     defaultMessage: "Nice default message for second translation id",
     description: "description field yeah for second field"
+  },
+  messagekey3: {
+    id: "messageid3"
   }
 };
 const messageDescriptorMap = defineMessages(messages);
@@ -54,6 +57,9 @@ const messageDescriptorMap2 = defineMessages({ message: {} });
 const messageDescriptorMap3: Array<string> = defineMessages(messages);
 // $ExpectError string. This type is incompatible with MessageDescriptorMap
 const messageDescriptorMap4: string = defineMessages(messages);
+const msg1:MessageDescriptor = messageDescriptorMap.messagekey1;
+const msg2:MessageDescriptor = messageDescriptorMap.messagekey2_foo;
+const msg3:MessageDescriptor = messageDescriptorMap.messagekey3;
 
 class TestComponent extends React.Component<{ name: string, intl: IntlShape }> {
   render() {
