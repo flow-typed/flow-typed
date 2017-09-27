@@ -105,3 +105,23 @@ const a = Admin.findOne({}).exec().then(ddd => {
 const a1 = new Admin({ email: "123", token: "www" });
 // $ExpectError
 const a2 = new Admin({ email: 123, token: "www" });
+
+//
+export const UserSchema = new Schema(
+  {
+    email: {
+      type: String,
+      match: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+      set: (v: string) => v.toLowerCase().trim(),
+      required: true
+    },
+    name: String
+  },
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at"
+    },
+    collection: "admin"
+  }
+);
