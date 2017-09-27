@@ -41,7 +41,12 @@ type SchemaOpts<Doc> = {
   useNestedStrict?: boolean,
   validateBeforeSave?: boolean,
   versionKey?: string,
-  timestamps?: boolean
+  timestamps?:
+    | boolean
+    | {
+        createdAt?: string,
+        updatedAt?: string
+      }
 };
 
 type IndexFields = {
@@ -146,7 +151,9 @@ declare class Mongoose$Schema<Doc> {
   indexTypes(): string[],
   reserved: string[],
   obj: SchemaOpts<Doc>,
-  _indexes: Array<[{ [fieldName: string]: number | string }, { [optionName: string]: mixed }]>
+  _indexes: Array<
+    [{ [fieldName: string]: number | string }, { [optionName: string]: mixed }]
+  >
 }
 
 type Mongoose$SchemaField<Schema> = {
@@ -476,7 +483,9 @@ declare module "mongoose" {
   declare export type MongooseDocument = Mongoose$Document;
   declare export type MongooseModel = typeof Mongoose$Document;
   declare export type MongooseSchema<Doc> = Mongoose$Schema<Doc>;
-  declare export type MongooseSchemaField<Schema> = Mongoose$SchemaField<Schema>;
+  declare export type MongooseSchemaField<Schema> = Mongoose$SchemaField<
+    Schema
+  >;
 
   declare module.exports: {
     Schema: typeof Mongoose$Schema,
@@ -487,6 +496,6 @@ declare module "mongoose" {
     set: (key: string, value: string | Function | boolean) => void,
     connect: Function,
     connection: Mongoose$Connection,
-    Query: typeof Mongoose$Query,
+    Query: typeof Mongoose$Query
   };
 }
