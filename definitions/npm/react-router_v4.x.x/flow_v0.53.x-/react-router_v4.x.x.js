@@ -58,9 +58,9 @@ declare module "react-router" {
     callback: (confirmed: boolean) => void
   ) => void;
 
-  declare type StaticRouterContext = {|
+  declare type StaticRouterContext = {
     url?: string
-  |};
+  };
 
   declare export class StaticRouter extends React$Component<{
     basename?: string,
