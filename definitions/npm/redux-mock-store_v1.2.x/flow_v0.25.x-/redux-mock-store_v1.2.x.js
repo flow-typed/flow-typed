@@ -10,7 +10,7 @@ declare module 'redux-mock-store' {
   declare type mockStoreWithoutMiddleware<S, A> = {
     getState(): S,
     getActions(): Array<A>,
-    dispatch(action: A): A,
+    dispatch(action: A | (action: A) => A): A,
     clearActions(): void,
     subscribe(callback: Function): void,
     replaceReducer(nextReducer: Function): void
