@@ -1,10 +1,11 @@
-import type { Dispatch, Store } from "redux";
+import type {Dispatch, Store} from 'redux';
 
-declare module "react-redux" {
+declare module 'react-redux' {
   /*
 
     S = State
     A = Action
+    D = Dispatch
     OP = OwnProps
     SP = StateProps
     DP = DispatchProps
@@ -13,82 +14,82 @@ declare module "react-redux" {
 
   declare type MapStateToProps<S, OP: Object, SP: Object> = (
     state: S,
-    ownProps: OP
+    ownProps: OP,
   ) => SP;
 
-  declare type MapDispatchToProps<A, OP: Object, DP: Object> =
-    | ((dispatch: Dispatch<A>, ownProps: OP) => DP)
+  declare type MapDispatchToProps<A, OP: Object, DP: Object, D = Dispatch<A>> =
+    | ((dispatch: D, ownProps: OP) => DP)
     | DP;
 
   declare type MergeProps<SP, DP: Object, OP: Object, P: Object> = (
     stateProps: SP,
     dispatchProps: DP,
-    ownProps: OP
+    ownProps: OP,
   ) => P;
 
   declare class ConnectedComponent<OP, P> extends React$Component<OP> {
-    static WrappedComponent: Class<React$Component<P>>,
-    getWrappedInstance(): React$Component<P>,
-    props: OP,
-    state: void
+    static WrappedComponent: Class<React$Component<P>>;
+    getWrappedInstance(): React$Component<P>;
+    props: OP;
+    state: void;
   }
 
   declare type ConnectedComponentClass<OP, P> = Class<
-    ConnectedComponent<OP, P>
+    ConnectedComponent<OP, P>,
   >;
 
   declare type Connector<OP, P> = (
-    component: React$ComponentType<P>
+    component: React$ComponentType<P>,
   ) => ConnectedComponentClass<OP, P>;
 
-  declare class Provider<S, A> extends React$Component<{
-    store: Store<S, A>,
-    children?: any
+  declare class Provider<S, A, D = Dispatch<A>> extends React$Component<{
+    store: Store<S, A, D>,
+    children?: any,
   }> {}
 
   declare type ConnectOptions = {
     pure?: boolean,
-    withRef?: boolean
+    withRef?: boolean,
   };
 
   declare type Null = null | void;
 
-  declare function connect<A, OP>(
+  declare function connect<A, OP, D>(
     ...rest: Array<void> // <= workaround for https://github.com/facebook/flow/issues/2360
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<{dispatch: D} & OP>>;
 
-  declare function connect<A, OP>(
+  declare function connect<A, OP, D>(
     mapStateToProps: Null,
     mapDispatchToProps: Null,
     mergeProps: Null,
-    options: ConnectOptions
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+    options: ConnectOptions,
+  ): Connector<OP, $Supertype<{dispatch: D} & OP>>;
 
-  declare function connect<S, A, OP, SP>(
+  declare function connect<S, A, OP, SP, D>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: Null,
     mergeProps: Null,
-    options?: ConnectOptions
-  ): Connector<OP, $Supertype<SP & { dispatch: Dispatch<A> } & OP>>;
+    options?: ConnectOptions,
+  ): Connector<OP, $Supertype<SP & {dispatch: D} & OP>>;
 
-  declare function connect<A, OP, DP>(
+  declare function connect<A, OP, DP, D>(
     mapStateToProps: Null,
-    mapDispatchToProps: MapDispatchToProps<A, OP, DP>,
+    mapDispatchToProps: MapDispatchToProps<A, OP, DP, D>,
     mergeProps: Null,
-    options?: ConnectOptions
+    options?: ConnectOptions,
   ): Connector<OP, $Supertype<DP & OP>>;
 
-  declare function connect<S, A, OP, SP, DP>(
+  declare function connect<S, A, OP, SP, DP, D>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: MapDispatchToProps<A, OP, DP>,
+    mapDispatchToProps: MapDispatchToProps<A, OP, DP, D>,
     mergeProps: Null,
-    options?: ConnectOptions
+    options?: ConnectOptions,
   ): Connector<OP, $Supertype<SP & DP & OP>>;
 
-  declare function connect<S, A, OP, SP, DP, P>(
+  declare function connect<S, A, OP, SP, DP, P, D>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: MapDispatchToProps<A, OP, DP>,
+    mapDispatchToProps: MapDispatchToProps<A, OP, DP, D>,
     mergeProps: MergeProps<SP, DP, OP, P>,
-    options?: ConnectOptions
+    options?: ConnectOptions,
   ): Connector<OP, P>;
 }
