@@ -131,7 +131,7 @@ declare class rxjs$Observable<+T> {
 
   race(other: rxjs$Observable<T>): rxjs$Observable<T>;
 
-  repeat(): rxjs$Observable<T>;
+  repeat(count?: number): rxjs$Observable<T>;
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>;
 

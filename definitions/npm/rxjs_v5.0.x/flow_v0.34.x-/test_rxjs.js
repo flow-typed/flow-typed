@@ -25,7 +25,7 @@ const distinct4: Observable<{ a: string }> = Observable.of({ a: 'a' }).distinct(
 );
 
 const timer$: Observable<number> = Observable.timer(1000).startWith(10);
-const numbers2: Observable<number> = Observable.of(1, 2, 3).repeat();
+const numbers2: Observable<number> = Observable.of(1, 2, 3).repeat(2);
 
 const subscriber: Subscriber<number> = Subscriber.create(console.log, console.error, console.log);
 const subscriber2: Subscriber<number> = new Subscriber(x => console.log(x));
