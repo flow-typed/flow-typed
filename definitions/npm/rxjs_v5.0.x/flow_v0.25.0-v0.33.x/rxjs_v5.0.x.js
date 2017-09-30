@@ -354,6 +354,7 @@ declare class rxjs$Observable<+T> {
 
   static combineLatest<A>(
     a: rxjs$Observable<A>,
+    _: void,
   ): rxjs$Observable<[A]>;
 
   static combineLatest<A, B>(
