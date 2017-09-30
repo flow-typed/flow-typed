@@ -65,16 +65,16 @@ const combinedBad: Observable<{n: number, s: string}> = Observable.combineLatest
   (n, s) => ({n, s})
 );
 
-const combined3: Observable<{n: number, s: string}> = Observable.forkJoin(
+const forked: Observable<{n: number, s: string}> = Observable.forkJoin(
   numbers,
   strings,
   (n, s) => ({n, s})
 );
 
-const combined4: Observable<[number, string]> = Observable.forkJoin(numbers, strings);
+const forked2: Observable<[number, string]> = Observable.forkJoin(numbers, strings);
 
 // $ExpectError
-const combinedBad2: Observable<{n: number, s: string}> = Observable.forkJoin(
+const forkedBad: Observable<{n: number, s: string}> = Observable.forkJoin(
   numbers,
   numbers,
   (n, s) => ({n, s})
