@@ -1518,7 +1518,7 @@ declare module "lodash/fp" {
     bind(func: Function, thisArg: any): Function,
     bindKey(obj: Object): (key: string) => Function,
     bindKey(obj: Object, key: string): Function,
-    curry(func: Function): Function,
+    curry: Curry,
     curryN(arity: number): (func: Function) => Function,
     curryN(arity: number, func: Function): Function,
     curryRight(func: Function): Function,
