@@ -371,7 +371,7 @@ flatMap({a: 1, b: 2}, n => [n, n]);
 noop();
 noop(1);
 noop('a', 2, [], null);
-(_.noop: (string) => void);
-(_.noop: (number, string) => void);
+(noop: (string) => void);
+(noop: (number, string) => void);
 // $ExpectError functions are contravariant in return types
-(_.noop: (string) => string);
+(noop: (string) => string);
