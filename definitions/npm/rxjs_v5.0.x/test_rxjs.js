@@ -54,6 +54,10 @@ const combined: Observable<{n: number, s: string}> = Observable.combineLatest(
 
 const combined2: Observable<[number, string]> = Observable.combineLatest(numbers, strings);
 
+const combined3: Observable<[number]> = Observable.combineLatest(
+  numbers
+);
+
 // $ExpectError
 const combinedBad: Observable<{n: number, s: string}> = Observable.combineLatest(
   numbers,
