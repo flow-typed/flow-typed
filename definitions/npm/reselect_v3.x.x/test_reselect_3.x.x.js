@@ -68,7 +68,7 @@ createSelector(
 defaultMemoize((a: number) => a + 1)(2);
 defaultMemoize((a: number) => a + 1, (a, b) => a === b)(2);
 
-// TEST 8: Should threat newly created selector as normal one
+// TEST 8: Should treat newly created selector as normal one
 let x = createSelectorCreator(defaultMemoize)(
   state => state.x,
   state => state.y,
@@ -90,6 +90,22 @@ createStructuredSelector({
   x: 10,
   y: 20
 });
+
+// Nested structured selector
+let structured = createStructuredSelector({
+  combination: createStructuredSelector({
+    sum: (state: number[]) => state.reduce((a, b) => a + b, 0),
+    product: (state: number[]) => state.reduce((a, b) => a * b, 1)
+  }),
+  multiples: createStructuredSelector({
+    two: (state: number[]) => state.filter(n => n % 2 === 0),
+    three: (state: number[]) => state.filter(n => n % 3 === 0)
+  })
+});
+
+let data = structured([1, 2, 3, 4, 5, 6, 7]);
+// $ExpectError: Should not pass when invoked with a different state shape
+let data2 = structured([""]);
 
 type TestState1 = {
   x: number,

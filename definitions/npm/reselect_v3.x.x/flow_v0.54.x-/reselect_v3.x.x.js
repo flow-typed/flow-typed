@@ -1275,31 +1275,28 @@ declare module "reselect" {
       ) => T
     >
   };
+  declare type StructuredSelectorCreator = {
+    <S, P, T>(
+      selectors: { [$Keys<T>]: ParametricSelector<S, P, *> },
+      selectorCreator?: SelectorCreator
+    ): ParametricSelector<S, P, T>
+  };
 
-  declare class Reselect {
-    createSelector: SelectorCreator,
+  declare type CreateSelectorCreator = {
+    (memoize: <F: Function>(func: F) => F): SelectorCreator,
 
-    defaultMemoize<F: Function>(
-      func: F,
-      equalityCheck?: <T>(a: T, b: T, index: number) => boolean
-    ): F,
-
-    createSelectorCreator(
-      memoize: <F: Function>(func: F) => F
-    ): SelectorCreator,
-
-    createSelectorCreator<O1>(
+    <O1>(
       memoize: <F: Function>(func: F, option1: O1) => F,
       option1: O1
     ): SelectorCreator,
 
-    createSelectorCreator<O1, O2>(
+    <O1, O2>(
       memoize: <F: Function>(func: F, option1: O1, option2: O2) => F,
       option1: O1,
       option2: O2
     ): SelectorCreator,
 
-    createSelectorCreator<O1, O2, O3>(
+    <O1, O2, O3>(
       memoize: <F: Function>(
         func: F,
         option1: O1,
@@ -1311,17 +1308,20 @@ declare module "reselect" {
       option2: O2,
       option3: O3,
       ...rest: any[]
-    ): SelectorCreator,
+    ): SelectorCreator
+  };
 
-    createStructuredSelector<S, T>(
-      selectors: { [$Keys<T>]: Selector<S, any> },
-      selectorCreator?: SelectorCreator
-    ): Selector<S, T>,
+  declare class Reselect {
+    createSelector: SelectorCreator,
 
-    createStructuredSelector<S, P, T>(
-      selectors: { [$Keys<T>]: ParametricSelector<S, P, any> },
-      selectorCreator?: SelectorCreator
-    ): ParametricSelector<S, P, T>
+    defaultMemoize<F: Function>(
+      func: F,
+      equalityCheck?: <T>(a: T, b: T, index: number) => boolean
+    ): F,
+
+    createSelectorCreator: CreateSelectorCreator,
+
+    createStructuredSelector: StructuredSelectorCreator
   }
   declare var exports: Reselect;
 }
