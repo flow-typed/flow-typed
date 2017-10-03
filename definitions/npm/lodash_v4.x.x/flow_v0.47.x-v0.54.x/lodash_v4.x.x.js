@@ -1893,8 +1893,6 @@ declare module "lodash/fp" {
     bindAll(methodNames: Array<string>): (object: Object) => Object,
     bindAll(methodNames: Array<string>, object: Object): Object,
     cond(pairs: NestedArray<Function>): Function,
-    conforms<T: { [key: string]: mixed }>(predicates: T & { [key: string]: (x: any) => boolean }): (source: T) => boolean,
-    conforms<T: { [key: string]: mixed }>(predicates: T & { [key: string]: (x: any) => boolean }, source: T): boolean,
     constant<T>(value: T): () => T,
     always<T>(value: T): () => T,
     defaultTo<T1: string | boolean | Object, T2>(defaultValue: T2): (value: T1) => T1,
