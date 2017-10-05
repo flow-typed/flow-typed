@@ -306,7 +306,7 @@ describe('npmLibDefs', () => {
       const installedLibdefs = await getInstalledNpmLibDefs(
         path.join(FIXTURE_ROOT, 'unscopedLibDefs'),
       );
-      expect(installedLibdefs.size).toBe(1);
+      expect(installedLibdefs.size).toBe(2);
       const semverLibDef = installedLibdefs.get(
         'flow-typed/npm/semver_v5.1.x.js',
       );
@@ -369,6 +369,48 @@ describe('npmLibDefs', () => {
             scope: '@kadira',
             testFilePaths: [],
             version: 'v1.x.x',
+          });
+        }
+      }
+    });
+
+    it('finds libDef with fully-bounded semver range', async () => {
+      const installedLibdefs = await getInstalledNpmLibDefs(
+        path.join(FIXTURE_ROOT, 'unscopedLibDefs'),
+      );
+      expect(installedLibdefs.size).toBe(2);
+      const semverLibDef = installedLibdefs.get(
+        'flow-typed/npm/react-redux_v5.x.x.js',
+      );
+      // Since Flow doesn't understand Jest/Jasmine predicates, we wrap in a
+      // vanilla one
+      if (semverLibDef == null) {
+        expect(semverLibDef).not.toEqual(null);
+      } else {
+        if (semverLibDef.kind !== 'LibDef') {
+          expect(semverLibDef.kind).toBe('LibDef');
+        } else {
+          expect(semverLibDef.libDef).toEqual({
+            flowVersion: {
+              kind: 'ranged',
+              lower: {
+                major: 0,
+                minor: 30,
+                patch: 'x',
+                prerel: null,
+              },
+              upper: {
+                major: 0,
+                minor: 52,
+                patch: 'x',
+                prerel: null,
+              },
+            },
+            name: 'react-redux',
+            path: 'flow-typed/npm/react-redux_v5.x.x.js',
+            scope: null,
+            testFilePaths: [],
+            version: 'v5.x.x',
           });
         }
       }
