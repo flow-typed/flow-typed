@@ -1,11 +1,11 @@
 // @flow
-import moment from 'moment';
+import moment from "moment";
 
 // Parse
 const m3: moment = moment([123, 123]);
 
 // $ExpectError
-moment.unix('1234');
+moment.unix("1234");
 
 // Display
 const A: Date = moment().toDate();
@@ -17,10 +17,10 @@ moment().millisecond().seconds();
 moment().milliseconds(100).seconds();
 
 // Manipulate
-const m1: moment = moment().add(2, 'day');
-moment().add({day: 1})
-const m2: moment = moment().subtract(1, 's');
-moment().subtract({day: 1})
+const m1: moment = moment().add(2, "day");
+moment().add({ day: 1 });
+const m2: moment = moment().subtract(1, "s");
+moment().subtract({ day: 1 });
 const m: moment = moment.utc();
 
 // Query
@@ -31,27 +31,26 @@ moment().isSameOrBefore();
 moment().isSameOrAfter();
 moment.isDate(new Date());
 
-
 // CalendarTime
 moment().calendar(null, {
-  sameDay: 'HH:mm',
+  sameDay: "HH:mm"
 });
 moment().calendar(null, {
-  sameDay: () => 'HH:mm',
+  sameDay: () => "HH:mm"
 });
 // $ExpectError
 moment().calendar(null, {
-  sameDay: (a: number) => 'HH:mm',
+  sameDay: (a: number) => "HH:mm"
 });
 // $ExpectError
 moment().calendar(null, {
-  sameDay: 2,
+  sameDay: 2
 });
 // $ExpectError
 moment().calendar(null, {
-  sameElse: () => {},
+  // $ExpectError (>=0.56.0)
+  sameElse: () => {}
 });
-
 
 // UTC offsets
 let n: number;
@@ -59,8 +58,8 @@ n = moment().utcOffset();
 n = m.utcOffset(0).utcOffset();
 n = m.utcOffset(-1.5).utcOffset();
 n = m.utcOffset(-90).utcOffset();
-n = m.utcOffset('-01:30').utcOffset();
-n = m.utcOffset('+00:10').utcOffset();
+n = m.utcOffset("-01:30").utcOffset();
+n = m.utcOffset("+00:10").utcOffset();
 
 // Optional 2nd and 3rd arguments
 n = m.utcOffset(0, true).utcOffset();
@@ -68,5 +67,5 @@ n = m.utcOffset(0, false).utcOffset();
 n = m.utcOffset(0, true, true).utcOffset();
 
 const getLocale: string = moment.locale();
-const setLocale: string = moment.locale('en');
-const setArrayLocale: string = moment.locale(['en', 'de'])
+const setLocale: string = moment.locale("en");
+const setArrayLocale: string = moment.locale(["en", "de"]);
