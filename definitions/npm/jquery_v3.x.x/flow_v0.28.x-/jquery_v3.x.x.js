@@ -219,6 +219,17 @@ declare class JQueryXHR {
    * Property containing the parsed response if the response Content-Type is json
    */
   responseJSON?: any;
+
+  /**
+   * Property containing the parsed response if the response Content-Type is text/plain
+   */
+  responseText?: string;
+
+  /**
+   * Status code of the response
+   */
+  status?: number;
+
   /**
    * A function to be called if the request fails.
    */
