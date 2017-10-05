@@ -206,7 +206,12 @@ declare class moment$Moment {
   isAfter(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isSameOrBefore(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isSameOrAfter(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
-  isBetween(date: moment$Moment|string|number|Date|Array<number>): bool;
+  isBetween(
+    fromDate: moment$Moment|string|number|Date|Array<number>,
+    toDate?: ?moment$Moment|string|number|Date|Array<number>,
+    granularity?: ?string,
+    inclusion?: ?string
+  ): bool;
   isDST(): bool;
   isDSTShifted(): bool;
   isLeapYear(): bool;
