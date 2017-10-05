@@ -626,6 +626,11 @@ declare class rxjs$Observable<+T> {
     resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
   ): rxjs$Observable<H>,
 
+  static combineLatest<A>(
+    a: rxjs$Observable<A>,
+    _: void,
+  ): rxjs$Observable<[A]>;
+
   static combineLatest<A, B>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
