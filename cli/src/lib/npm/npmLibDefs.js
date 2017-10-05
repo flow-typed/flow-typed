@@ -441,11 +441,16 @@ export async function getInstalledNpmLibDefs(
             }
             const {pkgName, pkgVersion} = pkgNameVer;
 
-            const flowVerMatches = matches[4].match(/^flow_(>=|<=)?(v.+)$/);
-            const flowDirStr =
+            const flowVerMatches = matches[4].match(
+              /^flow_(>=|<=)?(v[^ ]+) ?(<=(v.+))?$/,
+            );
+            const flowVerStr =
               flowVerMatches == null
-                ? `flow_${matches[3]}`
-                : `flow_${flowVerMatches[2]}`;
+                ? matches[3]
+                : flowVerMatches[3] == null
+                  ? flowVerMatches[2]
+                  : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
+            const flowDirStr = `flow_${flowVerStr}`;
             const context = `${nameVer}/${flowDirStr}`;
             const flowVer =
               flowVerMatches == null
