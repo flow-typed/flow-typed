@@ -46,9 +46,7 @@ type TestGroup = {
  * structs. Each TestGroup represents a Package/PackageVersion/FlowVersion
  * directory.
  */
-const basePathRegex = new RegExp(
-  `definitions${path.sep}npm${path.sep}(\@[^${path.sep}]*${path.sep})?[^${path.sep}]*${path.sep}?`,
-);
+const basePathRegex = new RegExp('definitions/npm/(@[^/]*/)?[^/]*/?');
 async function getTestGroups(
   repoDirPath,
   onlyChanged: boolean = false,
