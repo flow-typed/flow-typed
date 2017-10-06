@@ -1,52 +1,135 @@
 declare module "lodash" {
-  declare type __CurriedFunction1<A, R, AA: A> =
-    & ((...r: [AA]) => R)
-  declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>
+  declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
+  declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>;
 
-  declare type __CurriedFunction2<A, B, R, AA: A, BB: B> =
-    & ((...r: [AA]) => CurriedFunction1<BB, R>)
-    & ((...r: [AA, BB]) => R)
-  declare type CurriedFunction2<A, B, R> = __CurriedFunction2<A, B, R, *, *>
+  declare type __CurriedFunction2<A, B, R, AA: A, BB: B> = ((
+    ...r: [AA]
+  ) => CurriedFunction1<BB, R>) &
+    ((...r: [AA, BB]) => R);
+  declare type CurriedFunction2<A, B, R> = __CurriedFunction2<A, B, R, *, *>;
 
-  declare type __CurriedFunction3<A, B, C, R, AA: A, BB: B, CC: C> =
-    & ((...r: [AA]) => CurriedFunction2<BB, CC, R>)
-    & ((...r: [AA, BB]) => CurriedFunction1<CC, R>)
-    & ((...r: [AA, BB, CC]) => R)
-  declare type CurriedFunction3<A, B, C, R> = __CurriedFunction3<A, B, C, R, *, *, *>
+  declare type __CurriedFunction3<A, B, C, R, AA: A, BB: B, CC: C> = ((
+    ...r: [AA]
+  ) => CurriedFunction2<BB, CC, R>) &
+    ((...r: [AA, BB]) => CurriedFunction1<CC, R>) &
+    ((...r: [AA, BB, CC]) => R);
+  declare type CurriedFunction3<A, B, C, R> = __CurriedFunction3<
+    A,
+    B,
+    C,
+    R,
+    *,
+    *,
+    *
+  >;
 
-  declare type __CurriedFunction4<A, B, C, D, R, AA: A, BB: B, CC: C, DD: D> =
-    & ((...r: [AA]) => CurriedFunction3<BB, CC, DD, R>)
-    & ((...r: [AA, BB]) => CurriedFunction2<CC, DD, R>)
-    & ((...r: [AA, BB, CC]) => CurriedFunction1<DD, R>)
-    & ((...r: [AA, BB, CC, DD]) => R)
-  declare type CurriedFunction4<A, B, C, D, R> = __CurriedFunction4<A, B, C, D, R, *, *, *, *>
+  declare type __CurriedFunction4<
+    A,
+    B,
+    C,
+    D,
+    R,
+    AA: A,
+    BB: B,
+    CC: C,
+    DD: D
+  > = ((...r: [AA]) => CurriedFunction3<BB, CC, DD, R>) &
+    ((...r: [AA, BB]) => CurriedFunction2<CC, DD, R>) &
+    ((...r: [AA, BB, CC]) => CurriedFunction1<DD, R>) &
+    ((...r: [AA, BB, CC, DD]) => R);
+  declare type CurriedFunction4<A, B, C, D, R> = __CurriedFunction4<
+    A,
+    B,
+    C,
+    D,
+    R,
+    *,
+    *,
+    *,
+    *
+  >;
 
-  declare type __CurriedFunction5<A, B, C, D, E, R, AA: A, BB: B, CC: C, DD: D, EE: E> =
-    & ((...r: [AA]) => CurriedFunction4<BB, CC, DD, EE, R>)
-    & ((...r: [AA, BB]) => CurriedFunction3<CC, DD, EE, R>)
-    & ((...r: [AA, BB, CC]) => CurriedFunction2<DD, EE, R>)
-    & ((...r: [AA, BB, CC, DD]) => CurriedFunction1<EE, R>)
-    & ((...r: [AA, BB, CC, DD, EE]) => R)
-  declare type CurriedFunction5<A, B, C, D, E, R> = __CurriedFunction5<A, B, C, D, E, R, *, *, *, *, *>
+  declare type __CurriedFunction5<
+    A,
+    B,
+    C,
+    D,
+    E,
+    R,
+    AA: A,
+    BB: B,
+    CC: C,
+    DD: D,
+    EE: E
+  > = ((...r: [AA]) => CurriedFunction4<BB, CC, DD, EE, R>) &
+    ((...r: [AA, BB]) => CurriedFunction3<CC, DD, EE, R>) &
+    ((...r: [AA, BB, CC]) => CurriedFunction2<DD, EE, R>) &
+    ((...r: [AA, BB, CC, DD]) => CurriedFunction1<EE, R>) &
+    ((...r: [AA, BB, CC, DD, EE]) => R);
+  declare type CurriedFunction5<A, B, C, D, E, R> = __CurriedFunction5<
+    A,
+    B,
+    C,
+    D,
+    E,
+    R,
+    *,
+    *,
+    *,
+    *,
+    *
+  >;
 
-  declare type __CurriedFunction6<A, B, C, D, E, F, R, AA: A, BB: B, CC: C, DD: D, EE: E, FF: F> =
-    & ((...r: [AA]) => CurriedFunction5<BB, CC, DD, EE, FF, R>)
-    & ((...r: [AA, BB]) => CurriedFunction4<CC, DD, EE, FF, R>)
-    & ((...r: [AA, BB, CC]) => CurriedFunction3<DD, EE, FF, R>)
-    & ((...r: [AA, BB, CC, DD]) => CurriedFunction2<EE, FF, R>)
-    & ((...r: [AA, BB, CC, DD, EE]) => CurriedFunction1<FF, R>)
-    & ((...r: [AA, BB, CC, DD, EE, FF]) => R)
-  declare type CurriedFunction6<A, B, C, D, E, F, R> = __CurriedFunction6<A, B, C, D, E, F, R, *, *, *, *, *, *>
+  declare type __CurriedFunction6<
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+    R,
+    AA: A,
+    BB: B,
+    CC: C,
+    DD: D,
+    EE: E,
+    FF: F
+  > = ((...r: [AA]) => CurriedFunction5<BB, CC, DD, EE, FF, R>) &
+    ((...r: [AA, BB]) => CurriedFunction4<CC, DD, EE, FF, R>) &
+    ((...r: [AA, BB, CC]) => CurriedFunction3<DD, EE, FF, R>) &
+    ((...r: [AA, BB, CC, DD]) => CurriedFunction2<EE, FF, R>) &
+    ((...r: [AA, BB, CC, DD, EE]) => CurriedFunction1<FF, R>) &
+    ((...r: [AA, BB, CC, DD, EE, FF]) => R);
+  declare type CurriedFunction6<A, B, C, D, E, F, R> = __CurriedFunction6<
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+    R,
+    *,
+    *,
+    *,
+    *,
+    *,
+    *
+  >;
 
-  declare type Curry =
-    & (<A, R>((...r: [A]) => R) => CurriedFunction1<A, R>)
-    & (<A, B, R>((...r: [A, B]) => R) => CurriedFunction2<A, B, R>)
-    & (<A, B, C, R>((...r: [A, B, C]) => R) => CurriedFunction3<A, B, C, R>)
-    & (<A, B, C, D, R>((...r: [A, B, C, D]) => R) => CurriedFunction4<A, B, C, D, R>)
-    & (<A, B, C, D, E, R>((...r: [A, B, C, D, E]) => R) => CurriedFunction5<A, B, C, D, E, R>)
-    & (<A, B, C, D, E, F, R>((...r: [A, B, C, D, E, F]) => R) => CurriedFunction6<A, B, C, D, E, F, R>)
+  declare type Curry = (<A, R>((...r: [A]) => R) => CurriedFunction1<A, R>) &
+    (<A, B, R>((...r: [A, B]) => R) => CurriedFunction2<A, B, R>) &
+    (<A, B, C, R>((...r: [A, B, C]) => R) => CurriedFunction3<A, B, C, R>) &
+    (<A, B, C, D, R>(
+      (...r: [A, B, C, D]) => R
+    ) => CurriedFunction4<A, B, C, D, R>) &
+    (<A, B, C, D, E, R>(
+      (...r: [A, B, C, D, E]) => R
+    ) => CurriedFunction5<A, B, C, D, E, R>) &
+    (<A, B, C, D, E, F, R>(
+      (...r: [A, B, C, D, E, F]) => R
+    ) => CurriedFunction6<A, B, C, D, E, F, R>);
 
-  declare type UnaryFn<A,R> = (a: A) => R;
+  declare type UnaryFn<A, R> = (a: A) => R;
 
   declare type TemplateSettings = {
     escape?: RegExp,
@@ -544,15 +627,11 @@ declare module "lodash" {
     curry: Curry,
     curry(func: Function, arity?: number): Function,
     curryRight(func: Function, arity?: number): Function,
-    debounce(
-      func: Function,
-      wait?: number,
-      options?: DebounceOptions
-    ): Function,
+    debounce<F: Function>(func: F, wait?: number, options?: DebounceOptions): F,
     defer(func: Function, ...args?: Array<any>): number,
     delay(func: Function, wait: number, ...args?: Array<any>): number,
     flip(func: Function): Function,
-    memoize(func: Function, resolver?: Function): Function,
+    memoize<F: Function>(func: F, resolver?: Function): F,
     negate(predicate: Function): Function,
     once(func: Function): Function,
     overArgs(func: Function, ...transforms: Array<Function>): Function,
@@ -1094,54 +1173,137 @@ declare module "lodash" {
 }
 
 declare module "lodash/fp" {
-  declare type __CurriedFunction1<A, R, AA: A> =
-    & ((...r: [AA]) => R)
-  declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>
+  declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
+  declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>;
 
-  declare type __CurriedFunction2<A, B, R, AA: A, BB: B> =
-    & ((...r: [AA]) => CurriedFunction1<BB, R>)
-    & ((...r: [AA, BB]) => R)
-  declare type CurriedFunction2<A, B, R> = __CurriedFunction2<A, B, R, *, *>
+  declare type __CurriedFunction2<A, B, R, AA: A, BB: B> = ((
+    ...r: [AA]
+  ) => CurriedFunction1<BB, R>) &
+    ((...r: [AA, BB]) => R);
+  declare type CurriedFunction2<A, B, R> = __CurriedFunction2<A, B, R, *, *>;
 
-  declare type __CurriedFunction3<A, B, C, R, AA: A, BB: B, CC: C> =
-    & ((...r: [AA]) => CurriedFunction2<BB, CC, R>)
-    & ((...r: [AA, BB]) => CurriedFunction1<CC, R>)
-    & ((...r: [AA, BB, CC]) => R)
-  declare type CurriedFunction3<A, B, C, R> = __CurriedFunction3<A, B, C, R, *, *, *>
+  declare type __CurriedFunction3<A, B, C, R, AA: A, BB: B, CC: C> = ((
+    ...r: [AA]
+  ) => CurriedFunction2<BB, CC, R>) &
+    ((...r: [AA, BB]) => CurriedFunction1<CC, R>) &
+    ((...r: [AA, BB, CC]) => R);
+  declare type CurriedFunction3<A, B, C, R> = __CurriedFunction3<
+    A,
+    B,
+    C,
+    R,
+    *,
+    *,
+    *
+  >;
 
-  declare type __CurriedFunction4<A, B, C, D, R, AA: A, BB: B, CC: C, DD: D> =
-    & ((...r: [AA]) => CurriedFunction3<BB, CC, DD, R>)
-    & ((...r: [AA, BB]) => CurriedFunction2<CC, DD, R>)
-    & ((...r: [AA, BB, CC]) => CurriedFunction1<DD, R>)
-    & ((...r: [AA, BB, CC, DD]) => R)
-  declare type CurriedFunction4<A, B, C, D, R> = __CurriedFunction4<A, B, C, D, R, *, *, *, *>
+  declare type __CurriedFunction4<
+    A,
+    B,
+    C,
+    D,
+    R,
+    AA: A,
+    BB: B,
+    CC: C,
+    DD: D
+  > = ((...r: [AA]) => CurriedFunction3<BB, CC, DD, R>) &
+    ((...r: [AA, BB]) => CurriedFunction2<CC, DD, R>) &
+    ((...r: [AA, BB, CC]) => CurriedFunction1<DD, R>) &
+    ((...r: [AA, BB, CC, DD]) => R);
+  declare type CurriedFunction4<A, B, C, D, R> = __CurriedFunction4<
+    A,
+    B,
+    C,
+    D,
+    R,
+    *,
+    *,
+    *,
+    *
+  >;
 
-  declare type __CurriedFunction5<A, B, C, D, E, R, AA: A, BB: B, CC: C, DD: D, EE: E> =
-    & ((...r: [AA]) => CurriedFunction4<BB, CC, DD, EE, R>)
-    & ((...r: [AA, BB]) => CurriedFunction3<CC, DD, EE, R>)
-    & ((...r: [AA, BB, CC]) => CurriedFunction2<DD, EE, R>)
-    & ((...r: [AA, BB, CC, DD]) => CurriedFunction1<EE, R>)
-    & ((...r: [AA, BB, CC, DD, EE]) => R)
-  declare type CurriedFunction5<A, B, C, D, E, R> = __CurriedFunction5<A, B, C, D, E, R, *, *, *, *, *>
+  declare type __CurriedFunction5<
+    A,
+    B,
+    C,
+    D,
+    E,
+    R,
+    AA: A,
+    BB: B,
+    CC: C,
+    DD: D,
+    EE: E
+  > = ((...r: [AA]) => CurriedFunction4<BB, CC, DD, EE, R>) &
+    ((...r: [AA, BB]) => CurriedFunction3<CC, DD, EE, R>) &
+    ((...r: [AA, BB, CC]) => CurriedFunction2<DD, EE, R>) &
+    ((...r: [AA, BB, CC, DD]) => CurriedFunction1<EE, R>) &
+    ((...r: [AA, BB, CC, DD, EE]) => R);
+  declare type CurriedFunction5<A, B, C, D, E, R> = __CurriedFunction5<
+    A,
+    B,
+    C,
+    D,
+    E,
+    R,
+    *,
+    *,
+    *,
+    *,
+    *
+  >;
 
-  declare type __CurriedFunction6<A, B, C, D, E, F, R, AA: A, BB: B, CC: C, DD: D, EE: E, FF: F> =
-    & ((...r: [AA]) => CurriedFunction5<BB, CC, DD, EE, FF, R>)
-    & ((...r: [AA, BB]) => CurriedFunction4<CC, DD, EE, FF, R>)
-    & ((...r: [AA, BB, CC]) => CurriedFunction3<DD, EE, FF, R>)
-    & ((...r: [AA, BB, CC, DD]) => CurriedFunction2<EE, FF, R>)
-    & ((...r: [AA, BB, CC, DD, EE]) => CurriedFunction1<FF, R>)
-    & ((...r: [AA, BB, CC, DD, EE, FF]) => R)
-  declare type CurriedFunction6<A, B, C, D, E, F, R> = __CurriedFunction6<A, B, C, D, E, F, R, *, *, *, *, *, *>
+  declare type __CurriedFunction6<
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+    R,
+    AA: A,
+    BB: B,
+    CC: C,
+    DD: D,
+    EE: E,
+    FF: F
+  > = ((...r: [AA]) => CurriedFunction5<BB, CC, DD, EE, FF, R>) &
+    ((...r: [AA, BB]) => CurriedFunction4<CC, DD, EE, FF, R>) &
+    ((...r: [AA, BB, CC]) => CurriedFunction3<DD, EE, FF, R>) &
+    ((...r: [AA, BB, CC, DD]) => CurriedFunction2<EE, FF, R>) &
+    ((...r: [AA, BB, CC, DD, EE]) => CurriedFunction1<FF, R>) &
+    ((...r: [AA, BB, CC, DD, EE, FF]) => R);
+  declare type CurriedFunction6<A, B, C, D, E, F, R> = __CurriedFunction6<
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+    R,
+    *,
+    *,
+    *,
+    *,
+    *,
+    *
+  >;
 
-  declare type Curry =
-    & (<A, R>((...r: [A]) => R) => CurriedFunction1<A, R>)
-    & (<A, B, R>((...r: [A, B]) => R) => CurriedFunction2<A, B, R>)
-    & (<A, B, C, R>((...r: [A, B, C]) => R) => CurriedFunction3<A, B, C, R>)
-    & (<A, B, C, D, R>((...r: [A, B, C, D]) => R) => CurriedFunction4<A, B, C, D, R>)
-    & (<A, B, C, D, E, R>((...r: [A, B, C, D, E]) => R) => CurriedFunction5<A, B, C, D, E, R>)
-    & (<A, B, C, D, E, F, R>((...r: [A, B, C, D, E, F]) => R) => CurriedFunction6<A, B, C, D, E, F, R>)
+  declare type Curry = (<A, R>((...r: [A]) => R) => CurriedFunction1<A, R>) &
+    (<A, B, R>((...r: [A, B]) => R) => CurriedFunction2<A, B, R>) &
+    (<A, B, C, R>((...r: [A, B, C]) => R) => CurriedFunction3<A, B, C, R>) &
+    (<A, B, C, D, R>(
+      (...r: [A, B, C, D]) => R
+    ) => CurriedFunction4<A, B, C, D, R>) &
+    (<A, B, C, D, E, R>(
+      (...r: [A, B, C, D, E]) => R
+    ) => CurriedFunction5<A, B, C, D, E, R>) &
+    (<A, B, C, D, E, F, R>(
+      (...r: [A, B, C, D, E, F]) => R
+    ) => CurriedFunction6<A, B, C, D, E, F, R>);
 
-  declare type UnaryFn<A,R> = (a: A) => R;
+  declare type UnaryFn<A, R> = (a: A) => R;
 
   declare type TemplateSettings = {
     escape?: RegExp,
@@ -1180,10 +1342,7 @@ declare module "lodash/fp" {
     | matchesPropertyIterateeShorthand
     | propertyIterateeShorthand;
 
-  declare type OIterateeWithResult<V, R> =
-    | Object
-    | string
-    | ((value: V) => R);
+  declare type OIterateeWithResult<V, R> = Object | string | ((value: V) => R);
   declare type OIteratee<O> = OIterateeWithResult<any, any>;
   declare type OFlatMapIteratee<T, U> = OIterateeWithResult<any, Array<U>>;
 
@@ -1203,9 +1362,7 @@ declare module "lodash/fp" {
     | string;
   declare type Comparator<T> = (item: T, item2: T) => boolean;
 
-  declare type MapIterator<T, U> =
-    | ((item: T) => U)
-    | propertyIterateeShorthand;
+  declare type MapIterator<T, U> = ((item: T) => U) | propertyIterateeShorthand;
 
   declare type OMapIterator<T, U> =
     | ((item: T) => U)
@@ -1216,15 +1373,36 @@ declare module "lodash/fp" {
     chunk<T>(size: number): (array: Array<T>) => Array<Array<T>>,
     chunk<T>(size: number, array: Array<T>): Array<Array<T>>,
     compact<T, N: T>(array: Array<N>): Array<T>,
-    concat<T, U, A: Array<T> | T, B: Array<U> | U>(base: A): (elements: B) => Array<T | U>,
-    concat<T, U, A: Array<T> | T, B: Array<U> | U>(base: A, elements: B): Array<T | U>,
+    concat<T, U, A: Array<T> | T, B: Array<U> | U>(
+      base: A
+    ): (elements: B) => Array<T | U>,
+    concat<T, U, A: Array<T> | T, B: Array<U> | U>(
+      base: A,
+      elements: B
+    ): Array<T | U>,
     difference<T>(values: Array<T>): (array: Array<T>) => Array<T>,
     difference<T>(values: Array<T>, array: Array<T>): Array<T>,
-    differenceBy<T>(iteratee: ValueOnlyIteratee<T>): ((values: Array<T>) => (array: Array<T>) => T[]) & ((values: Array<T>, array: Array<T>) => T[]),
-    differenceBy<T>(iteratee: ValueOnlyIteratee<T>, values: Array<T>): (array: Array<T>) => T[],
-    differenceBy<T>(iteratee: ValueOnlyIteratee<T>, values: Array<T>, array: Array<T>): T[],
-    differenceWith<T>(values: T[]): ((comparator: Comparator<T>) => (array: T[]) => T[]) & ((comparator: Comparator<T>, array: T[]) => T[]),
-    differenceWith<T>(values: T[], comparator: Comparator<T>): (array: T[]) => T[],
+    differenceBy<T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): ((values: Array<T>) => (array: Array<T>) => T[]) &
+      ((values: Array<T>, array: Array<T>) => T[]),
+    differenceBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      values: Array<T>
+    ): (array: Array<T>) => T[],
+    differenceBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      values: Array<T>,
+      array: Array<T>
+    ): T[],
+    differenceWith<T>(
+      values: T[]
+    ): ((comparator: Comparator<T>) => (array: T[]) => T[]) &
+      ((comparator: Comparator<T>, array: T[]) => T[]),
+    differenceWith<T>(
+      values: T[],
+      comparator: Comparator<T>
+    ): (array: T[]) => T[],
     differenceWith<T>(values: T[], comparator: Comparator<T>, array: T[]): T[],
     drop<T>(n: number): (array: Array<T>) => Array<T>,
     drop<T>(n: number, array: Array<T>): Array<T>,
@@ -1238,20 +1416,60 @@ declare module "lodash/fp" {
     dropWhile<T>(predicate: Predicate<T>, array: Array<T>): Array<T>,
     dropLastWhile<T>(predicate: Predicate<T>): (array: Array<T>) => Array<T>,
     dropLastWhile<T>(predicate: Predicate<T>, array: Array<T>): Array<T>,
-    fill<T, U>(start: number): ((end: number) => (((value: U) => (array: Array<T>) => Array<T | U>) & ((value: U, array: Array<T>) => Array<T | U>))) & ((end: number, value: U) => (array: Array<T>) => Array<T | U>) & ((end: number, value: U, array: Array<T>) => Array<T | U>),
-    fill<T, U>(start: number, end: number): ((value: U) => (array: Array<T>) => Array<T | U>) & ((value: U, array: Array<T>) => Array<T | U>),
-    fill<T, U>(start: number, end: number, value: U): (array: Array<T>) => Array<T | U>,
-    fill<T, U>(start: number, end: number, value: U, array: Array<T>): Array<T | U>,
+    fill<T, U>(
+      start: number
+    ): ((
+      end: number
+    ) => ((value: U) => (array: Array<T>) => Array<T | U>) &
+      ((value: U, array: Array<T>) => Array<T | U>)) &
+      ((end: number, value: U) => (array: Array<T>) => Array<T | U>) &
+      ((end: number, value: U, array: Array<T>) => Array<T | U>),
+    fill<T, U>(
+      start: number,
+      end: number
+    ): ((value: U) => (array: Array<T>) => Array<T | U>) &
+      ((value: U, array: Array<T>) => Array<T | U>),
+    fill<T, U>(
+      start: number,
+      end: number,
+      value: U
+    ): (array: Array<T>) => Array<T | U>,
+    fill<T, U>(
+      start: number,
+      end: number,
+      value: U,
+      array: Array<T>
+    ): Array<T | U>,
     findIndex<T>(predicate: Predicate<T>): (array: Array<T>) => number,
     findIndex<T>(predicate: Predicate<T>, array: Array<T>): number,
-    findIndexFrom<T>(predicate: Predicate<T>): ((fromIndex: number) => (array: Array<T>) => number) & ((fromIndex: number, array: Array<T>) => number),
-    findIndexFrom<T>(predicate: Predicate<T>, fromIndex: number): (array: Array<T>) => number,
-    findIndexFrom<T>(predicate: Predicate<T>, fromIndex: number, array: Array<T>): number,
+    findIndexFrom<T>(
+      predicate: Predicate<T>
+    ): ((fromIndex: number) => (array: Array<T>) => number) &
+      ((fromIndex: number, array: Array<T>) => number),
+    findIndexFrom<T>(
+      predicate: Predicate<T>,
+      fromIndex: number
+    ): (array: Array<T>) => number,
+    findIndexFrom<T>(
+      predicate: Predicate<T>,
+      fromIndex: number,
+      array: Array<T>
+    ): number,
     findLastIndex<T>(predicate: Predicate<T>): (array: Array<T>) => number,
     findLastIndex<T>(predicate: Predicate<T>, array: Array<T>): number,
-    findLastIndexFrom<T>(predicate: Predicate<T>): ((fromIndex: number) => (array: Array<T>) => number) & ((fromIndex: number, array: Array<T>) => number),
-    findLastIndexFrom<T>(predicate: Predicate<T>, fromIndex: number): (array: Array<T>) => number,
-    findLastIndexFrom<T>(predicate: Predicate<T>, fromIndex: number, array: Array<T>): number,
+    findLastIndexFrom<T>(
+      predicate: Predicate<T>
+    ): ((fromIndex: number) => (array: Array<T>) => number) &
+      ((fromIndex: number, array: Array<T>) => number),
+    findLastIndexFrom<T>(
+      predicate: Predicate<T>,
+      fromIndex: number
+    ): (array: Array<T>) => number,
+    findLastIndexFrom<T>(
+      predicate: Predicate<T>,
+      fromIndex: number,
+      array: Array<T>
+    ): number,
     // alias of _.head
     first<T>(array: Array<T>): T,
     flatten<T, X>(array: Array<Array<T> | X>): Array<T | X>,
@@ -1263,26 +1481,55 @@ declare module "lodash/fp" {
     head<T>(array: Array<T>): T,
     indexOf<T>(value: T): (array: Array<T>) => number,
     indexOf<T>(value: T, array: Array<T>): number,
-    indexOfFrom<T>(value: T): ((fromIndex: number) => (array: Array<T>) => number) & ((fromIndex: number, array: Array<T>) => number),
+    indexOfFrom<T>(
+      value: T
+    ): ((fromIndex: number) => (array: Array<T>) => number) &
+      ((fromIndex: number, array: Array<T>) => number),
     indexOfFrom<T>(value: T, fromIndex: number): (array: Array<T>) => number,
     indexOfFrom<T>(value: T, fromIndex: number, array: Array<T>): number,
     initial<T>(array: Array<T>): Array<T>,
     init<T>(array: Array<T>): Array<T>,
     intersection<T>(a1: Array<T>): (a2: Array<T>) => Array<T>,
     intersection<T>(a1: Array<T>, a2: Array<T>): Array<T>,
-    intersectionBy<T>(iteratee: ValueOnlyIteratee<T>): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>),
-    intersectionBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>): (a2: Array<T>) => Array<T>,
-    intersectionBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>, a2: Array<T>): Array<T>,
-    intersectionWith<T>(comparator: Comparator<T>): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>),
-    intersectionWith<T>(comparator: Comparator<T>, a1: Array<T>): (a2: Array<T>) => Array<T>,
-    intersectionWith<T>(comparator: Comparator<T>, a1: Array<T>, a2: Array<T>): Array<T>,
+    intersectionBy<T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) &
+      ((a1: Array<T>, a2: Array<T>) => Array<T>),
+    intersectionBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      a1: Array<T>
+    ): (a2: Array<T>) => Array<T>,
+    intersectionBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      a1: Array<T>,
+      a2: Array<T>
+    ): Array<T>,
+    intersectionWith<T>(
+      comparator: Comparator<T>
+    ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) &
+      ((a1: Array<T>, a2: Array<T>) => Array<T>),
+    intersectionWith<T>(
+      comparator: Comparator<T>,
+      a1: Array<T>
+    ): (a2: Array<T>) => Array<T>,
+    intersectionWith<T>(
+      comparator: Comparator<T>,
+      a1: Array<T>,
+      a2: Array<T>
+    ): Array<T>,
     join<T>(separator: string): (array: Array<T>) => string,
     join<T>(separator: string, array: Array<T>): string,
     last<T>(array: Array<T>): T,
     lastIndexOf<T>(value: T): (array: Array<T>) => number,
     lastIndexOf<T>(value: T, array: Array<T>): number,
-    lastIndexOfFrom<T>(value: T): ((fromIndex: number) => (array: Array<T>) => number) & ((fromIndex: number, array: Array<T>) => number),
-    lastIndexOfFrom<T>(value: T, fromIndex: number): (array: Array<T>) => number,
+    lastIndexOfFrom<T>(
+      value: T
+    ): ((fromIndex: number) => (array: Array<T>) => number) &
+      ((fromIndex: number, array: Array<T>) => number),
+    lastIndexOfFrom<T>(
+      value: T,
+      fromIndex: number
+    ): (array: Array<T>) => number,
     lastIndexOfFrom<T>(value: T, fromIndex: number, array: Array<T>): number,
     nth<T>(n: number): (array: T[]) => T,
     nth<T>(n: number, array: T[]): T,
@@ -1290,10 +1537,23 @@ declare module "lodash/fp" {
     pull<T>(value: T, array: Array<T>): Array<T>,
     pullAll<T>(values: Array<T>): (array: Array<T>) => Array<T>,
     pullAll<T>(values: Array<T>, array: Array<T>): Array<T>,
-    pullAllBy<T>(iteratee: ValueOnlyIteratee<T>): ((values: Array<T>) => (array: Array<T>) => Array<T>) & ((values: Array<T>, array: Array<T>) => Array<T>),
-    pullAllBy<T>(iteratee: ValueOnlyIteratee<T>, values: Array<T>): (array: Array<T>) => Array<T>,
-    pullAllBy<T>(iteratee: ValueOnlyIteratee<T>, values: Array<T>, array: Array<T>): Array<T>,
-    pullAllWith<T>(comparator: Function): ((values: T[]) => (array: T[]) => T[]) & ((values: T[], array: T[]) => T[]),
+    pullAllBy<T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): ((values: Array<T>) => (array: Array<T>) => Array<T>) &
+      ((values: Array<T>, array: Array<T>) => Array<T>),
+    pullAllBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      values: Array<T>
+    ): (array: Array<T>) => Array<T>,
+    pullAllBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      values: Array<T>,
+      array: Array<T>
+    ): Array<T>,
+    pullAllWith<T>(
+      comparator: Function
+    ): ((values: T[]) => (array: T[]) => T[]) &
+      ((values: T[], array: T[]) => T[]),
     pullAllWith<T>(comparator: Function, values: T[]): (array: T[]) => T[],
     pullAllWith<T>(comparator: Function, values: T[], array: T[]): T[],
     pullAt<T>(indexed: Array<number>): (array: Array<T>) => Array<T>,
@@ -1301,25 +1561,50 @@ declare module "lodash/fp" {
     remove<T>(predicate: Predicate<T>): (array: Array<T>) => Array<T>,
     remove<T>(predicate: Predicate<T>, array: Array<T>): Array<T>,
     reverse<T>(array: Array<T>): Array<T>,
-    slice<T>(start: number): ((end: number) => (array: Array<T>) => Array<T>) & ((end: number, array: Array<T>) => Array<T>),
+    slice<T>(
+      start: number
+    ): ((end: number) => (array: Array<T>) => Array<T>) &
+      ((end: number, array: Array<T>) => Array<T>),
     slice<T>(start: number, end: number): (array: Array<T>) => Array<T>,
     slice<T>(start: number, end: number, array: Array<T>): Array<T>,
     sortedIndex<T>(value: T): (array: Array<T>) => number,
     sortedIndex<T>(value: T, array: Array<T>): number,
-    sortedIndexBy<T>(iteratee: ValueOnlyIteratee<T>): ((value: T) => (array: Array<T>) => number) & ((value: T, array: Array<T>) => number),
-    sortedIndexBy<T>(iteratee: ValueOnlyIteratee<T>, value: T): (array: Array<T>) => number,
-    sortedIndexBy<T>(iteratee: ValueOnlyIteratee<T>, value: T, array: Array<T>): number,
+    sortedIndexBy<T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): ((value: T) => (array: Array<T>) => number) &
+      ((value: T, array: Array<T>) => number),
+    sortedIndexBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      value: T
+    ): (array: Array<T>) => number,
+    sortedIndexBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      value: T,
+      array: Array<T>
+    ): number,
     sortedIndexOf<T>(value: T): (array: Array<T>) => number,
     sortedIndexOf<T>(value: T, array: Array<T>): number,
     sortedLastIndex<T>(value: T): (array: Array<T>) => number,
     sortedLastIndex<T>(value: T, array: Array<T>): number,
-    sortedLastIndexBy<T>(iteratee: ValueOnlyIteratee<T>): ((value: T) => (array: Array<T>) => number) & ((value: T, array: Array<T>) => number),
-    sortedLastIndexBy<T>(iteratee: ValueOnlyIteratee<T>, value: T): (array: Array<T>) => number,
-    sortedLastIndexBy<T>(iteratee: ValueOnlyIteratee<T>, value: T, array: Array<T>): number,
+    sortedLastIndexBy<T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): ((value: T) => (array: Array<T>) => number) &
+      ((value: T, array: Array<T>) => number),
+    sortedLastIndexBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      value: T
+    ): (array: Array<T>) => number,
+    sortedLastIndexBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      value: T,
+      array: Array<T>
+    ): number,
     sortedLastIndexOf<T>(value: T): (array: Array<T>) => number,
     sortedLastIndexOf<T>(value: T, array: Array<T>): number,
     sortedUniq<T>(array: Array<T>): Array<T>,
-    sortedUniqBy<T>(iteratee: (value: T) => mixed): (array: Array<T>) => Array<T>,
+    sortedUniqBy<T>(
+      iteratee: (value: T) => mixed
+    ): (array: Array<T>) => Array<T>,
     sortedUniqBy<T>(iteratee: (value: T) => mixed, array: Array<T>): Array<T>,
     tail<T>(array: Array<T>): Array<T>,
     take<T>(n: number): (array: Array<T>) => Array<T>,
@@ -1336,12 +1621,32 @@ declare module "lodash/fp" {
     takeWhile<T>(predicate: Predicate<T>, array: Array<T>): Array<T>,
     union<T>(a1: Array<T>): (a2: Array<T>) => Array<T>,
     union<T>(a1: Array<T>, a2: Array<T>): Array<T>,
-    unionBy<T>(iteratee: ValueOnlyIteratee<T>): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>),
-    unionBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>): (a2: Array<T>) => Array<T>,
-    unionBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>, a2: Array<T>): Array<T>,
-    unionWith<T>(comparator: Comparator<T>): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>),
-    unionWith<T>(comparator: Comparator<T>, a1: Array<T>): (a2: Array<T>) => Array<T>,
-    unionWith<T>(comparator: Comparator<T>, a1: Array<T>, a2: Array<T>): Array<T>,
+    unionBy<T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) &
+      ((a1: Array<T>, a2: Array<T>) => Array<T>),
+    unionBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      a1: Array<T>
+    ): (a2: Array<T>) => Array<T>,
+    unionBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      a1: Array<T>,
+      a2: Array<T>
+    ): Array<T>,
+    unionWith<T>(
+      comparator: Comparator<T>
+    ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) &
+      ((a1: Array<T>, a2: Array<T>) => Array<T>),
+    unionWith<T>(
+      comparator: Comparator<T>,
+      a1: Array<T>
+    ): (a2: Array<T>) => Array<T>,
+    unionWith<T>(
+      comparator: Comparator<T>,
+      a1: Array<T>,
+      a2: Array<T>
+    ): Array<T>,
     uniq<T>(array: Array<T>): Array<T>,
     uniqBy<T>(iteratee: ValueOnlyIteratee<T>): (array: Array<T>) => Array<T>,
     uniqBy<T>(iteratee: ValueOnlyIteratee<T>, array: Array<T>): Array<T>,
@@ -1356,18 +1661,54 @@ declare module "lodash/fp" {
     xor<T>(a1: Array<T>, a2: Array<T>): Array<T>,
     symmetricDifference<T>(a1: Array<T>): (a2: Array<T>) => Array<T>,
     symmetricDifference<T>(a1: Array<T>, a2: Array<T>): Array<T>,
-    xorBy<T>(iteratee: ValueOnlyIteratee<T>): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>),
-    xorBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>): (a2: Array<T>) => Array<T>,
-    xorBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>, a2: Array<T> ): Array<T>,
-    symmetricDifferenceBy<T>(iteratee: ValueOnlyIteratee<T>): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>),
-    symmetricDifferenceBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>): (a2: Array<T>) => Array<T>,
-    symmetricDifferenceBy<T>(iteratee: ValueOnlyIteratee<T>, a1: Array<T>, a2: Array<T> ): Array<T>,
-    xorWith<T>(comparator: Comparator<T>): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>),
-    xorWith<T>(comparator: Comparator<T>, a1: Array<T>): (a2: Array<T>) => Array<T>,
+    xorBy<T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) &
+      ((a1: Array<T>, a2: Array<T>) => Array<T>),
+    xorBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      a1: Array<T>
+    ): (a2: Array<T>) => Array<T>,
+    xorBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      a1: Array<T>,
+      a2: Array<T>
+    ): Array<T>,
+    symmetricDifferenceBy<T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) &
+      ((a1: Array<T>, a2: Array<T>) => Array<T>),
+    symmetricDifferenceBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      a1: Array<T>
+    ): (a2: Array<T>) => Array<T>,
+    symmetricDifferenceBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      a1: Array<T>,
+      a2: Array<T>
+    ): Array<T>,
+    xorWith<T>(
+      comparator: Comparator<T>
+    ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) &
+      ((a1: Array<T>, a2: Array<T>) => Array<T>),
+    xorWith<T>(
+      comparator: Comparator<T>,
+      a1: Array<T>
+    ): (a2: Array<T>) => Array<T>,
     xorWith<T>(comparator: Comparator<T>, a1: Array<T>, a2: Array<T>): Array<T>,
-    symmetricDifferenceWith<T>(comparator: Comparator<T>): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) & ((a1: Array<T>, a2: Array<T>) => Array<T>),
-    symmetricDifferenceWith<T>(comparator: Comparator<T>, a1: Array<T>): (a2: Array<T>) => Array<T>,
-    symmetricDifferenceWith<T>(comparator: Comparator<T>, a1: Array<T>, a2: Array<T>): Array<T>,
+    symmetricDifferenceWith<T>(
+      comparator: Comparator<T>
+    ): ((a1: Array<T>) => (a2: Array<T>) => Array<T>) &
+      ((a1: Array<T>, a2: Array<T>) => Array<T>),
+    symmetricDifferenceWith<T>(
+      comparator: Comparator<T>,
+      a1: Array<T>
+    ): (a2: Array<T>) => Array<T>,
+    symmetricDifferenceWith<T>(
+      comparator: Comparator<T>,
+      a1: Array<T>,
+      a2: Array<T>
+    ): Array<T>,
     zip<A, B>(a1: A[]): (a2: B[]) => Array<[A, B]>,
     zip<A, B>(a1: A[], a2: B[]): Array<[A, B]>,
     zipAll(arrays: Array<Array<any>>): Array<any>,
@@ -1377,47 +1718,164 @@ declare module "lodash/fp" {
     zipObj(props: Array<any>, values: Array<any>): Object,
     zipObjectDeep(props: any[]): (values: any) => Object,
     zipObjectDeep(props: any[], values: any): Object,
-    zipWith<T>(iteratee: Iteratee<T>): ((a1: NestedArray<T>) => (a2: NestedArray<T>) => Array<T>) & ((a1: NestedArray<T>, a2: NestedArray<T>) => Array<T>),
-    zipWith<T>(iteratee: Iteratee<T>, a1: NestedArray<T>): (a2: NestedArray<T>) => Array<T>,
-    zipWith<T>(iteratee: Iteratee<T>, a1: NestedArray<T>, a2: NestedArray<T>): Array<T>,
+    zipWith<T>(
+      iteratee: Iteratee<T>
+    ): ((a1: NestedArray<T>) => (a2: NestedArray<T>) => Array<T>) &
+      ((a1: NestedArray<T>, a2: NestedArray<T>) => Array<T>),
+    zipWith<T>(
+      iteratee: Iteratee<T>,
+      a1: NestedArray<T>
+    ): (a2: NestedArray<T>) => Array<T>,
+    zipWith<T>(
+      iteratee: Iteratee<T>,
+      a1: NestedArray<T>,
+      a2: NestedArray<T>
+    ): Array<T>,
     // Collection
-    countBy<T>(iteratee: ValueOnlyIteratee<T>): (collection: Array<T> | { [id: any]: T }) => { [string]: number },
-    countBy<T>(iteratee: ValueOnlyIteratee<T>, collection: Array<T> | { [id: any]: T }): { [string]: number },
+    countBy<T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => { [string]: number },
+    countBy<T>(
+      iteratee: ValueOnlyIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): { [string]: number },
     // alias of _.forEach
-    each<T>(iteratee: Iteratee<T> | OIteratee<T>): (collection: Array<T> | { [id: any]: T }) => Array<T>,
-    each<T>(iteratee: Iteratee<T> | OIteratee<T>, collection: Array<T> | { [id: any]: T }): Array<T>,
+    each<T>(
+      iteratee: Iteratee<T> | OIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<T>,
+    each<T>(
+      iteratee: Iteratee<T> | OIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<T>,
     // alias of _.forEachRight
-    eachRight<T>(iteratee: Iteratee<T> | OIteratee<T>): (collection: Array<T> | { [id: any]: T }) => Array<T>,
-    eachRight<T>(iteratee: Iteratee<T> | OIteratee<T>, collection: Array<T> | { [id: any]: T }): Array<T>,
-    every<T>(iteratee: Iteratee<T> | OIteratee<T>): (collection: Array<T> | { [id: any]: T }) => boolean,
-    every<T>(iteratee: Iteratee<T> | OIteratee<T>, collection: Array<T> | { [id: any]: T }): boolean,
-    all<T>(iteratee: Iteratee<T> | OIteratee<T>): (collection: Array<T> | { [id: any]: T }) => boolean,
-    all<T>(iteratee: Iteratee<T> | OIteratee<T>, collection: Array<T> | { [id: any]: T }): boolean,
-    filter<T>(predicate: Predicate<T> | OPredicate<T>): (collection: Array<T> | { [id: any]: T }) => Array<T>,
-    filter<T>(predicate: Predicate<T> | OPredicate<T>, collection: Array<T> | { [id: any]: T }): Array<T>,
-    find<T>(predicate: Predicate<T> | OPredicate<T>): (collection: Array<T> | { [id: any]: T }) => T | void,
-    find<T>(predicate: Predicate<T> | OPredicate<T>, collection: Array<T> | { [id: any]: T }): T | void,
-    findFrom<T>(predicate: Predicate<T> | OPredicate<T>): ((fromIndex: number) => (collection: Array<T> | { [id: any]: T }) => T | void) & ((fromIndex: number, collection: Array<T> | { [id: any]: T }) => T | void),
-    findFrom<T>(predicate: Predicate<T> | OPredicate<T>, fromIndex: number): (collection: Array<T> | { [id: any]: T }) => T | void,
-    findFrom<T>(predicate: Predicate<T> | OPredicate<T>, fromIndex: number, collection: Array<T> | { [id: any]: T }): T | void,
-    findLast<T>(predicate: Predicate<T> | OPredicate<T>): (collection: Array<T> | { [id: any]: T }) => T | void,
-    findLast<T>(predicate: Predicate<T> | OPredicate<T>, collection: Array<T> | { [id: any]: T }): T | void,
-    findLastFrom<T>(predicate: Predicate<T> | OPredicate<T>): ((fromIndex: number) => (collection: Array<T> | { [id: any]: T }) => T | void) & ((fromIndex: number, collection: Array<T> | { [id: any]: T }) => T | void),
-    findLastFrom<T>(predicate: Predicate<T> | OPredicate<T>, fromIndex: number): (collection: Array<T> | { [id: any]: T }) => T | void,
-    findLastFrom<T>(predicate: Predicate<T> | OPredicate<T>, fromIndex: number, collection: Array<T> | { [id: any]: T }): T | void,
-    flatMap<T, U>(iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>): (collection: Array<T> | { [id: any]: T }) => Array<U>,
-    flatMap<T, U>(iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>, collection: Array<T> | { [id: any]: T }): Array<U>,
-    flatMapDeep<T, U>(iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>): (collection: Array<T> | { [id: any]: T }) => Array<U>,
-    flatMapDeep<T, U>(iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>, collection: Array<T> | { [id: any]: T }): Array<U>,
-    flatMapDepth<T, U>(iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>): ((depth: number) => (collection: Array<T> | { [id: any]: T }) => Array<U>) & ((depth: number, collection: Array<T> | { [id: any]: T }) => Array<U>),
-    flatMapDepth<T, U>(iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>, depth: number): (collection: Array<T> | { [id: any]: T }) => Array<U>,
-    flatMapDepth<T, U>(iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>, depth: number, collection: Array<T> | { [id: any]: T }): Array<U>,
-    forEach<T>(iteratee: Iteratee<T> | OIteratee<T>): (collection: Array<T> | { [id: any]: T }) => Array<T>,
-    forEach<T>(iteratee: Iteratee<T> | OIteratee<T>, collection: Array<T> | { [id: any]: T }): Array<T>,
-    forEachRight<T>(iteratee: Iteratee<T> | OIteratee<T>): (collection: Array<T> | { [id: any]: T }) => Array<T>,
-    forEachRight<T>(iteratee: Iteratee<T> | OIteratee<T>, collection: Array<T> | { [id: any]: T }): Array<T>,
-    groupBy<V, T>(iteratee: ValueOnlyIteratee<T>): (collection: Array<T> | { [id: any]: T }) => { [key: V]: Array<T> },
-    groupBy<V, T>(iteratee: ValueOnlyIteratee<T>, collection: Array<T> | { [id: any]: T }): { [key: V]: Array<T> },
+    eachRight<T>(
+      iteratee: Iteratee<T> | OIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<T>,
+    eachRight<T>(
+      iteratee: Iteratee<T> | OIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<T>,
+    every<T>(
+      iteratee: Iteratee<T> | OIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => boolean,
+    every<T>(
+      iteratee: Iteratee<T> | OIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): boolean,
+    all<T>(
+      iteratee: Iteratee<T> | OIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => boolean,
+    all<T>(
+      iteratee: Iteratee<T> | OIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): boolean,
+    filter<T>(
+      predicate: Predicate<T> | OPredicate<T>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<T>,
+    filter<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<T>,
+    find<T>(
+      predicate: Predicate<T> | OPredicate<T>
+    ): (collection: Array<T> | { [id: any]: T }) => T | void,
+    find<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): T | void,
+    findFrom<T>(
+      predicate: Predicate<T> | OPredicate<T>
+    ): ((
+      fromIndex: number
+    ) => (collection: Array<T> | { [id: any]: T }) => T | void) &
+      ((
+        fromIndex: number,
+        collection: Array<T> | { [id: any]: T }
+      ) => T | void),
+    findFrom<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      fromIndex: number
+    ): (collection: Array<T> | { [id: any]: T }) => T | void,
+    findFrom<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      fromIndex: number,
+      collection: Array<T> | { [id: any]: T }
+    ): T | void,
+    findLast<T>(
+      predicate: Predicate<T> | OPredicate<T>
+    ): (collection: Array<T> | { [id: any]: T }) => T | void,
+    findLast<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): T | void,
+    findLastFrom<T>(
+      predicate: Predicate<T> | OPredicate<T>
+    ): ((
+      fromIndex: number
+    ) => (collection: Array<T> | { [id: any]: T }) => T | void) &
+      ((
+        fromIndex: number,
+        collection: Array<T> | { [id: any]: T }
+      ) => T | void),
+    findLastFrom<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      fromIndex: number
+    ): (collection: Array<T> | { [id: any]: T }) => T | void,
+    findLastFrom<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      fromIndex: number,
+      collection: Array<T> | { [id: any]: T }
+    ): T | void,
+    flatMap<T, U>(
+      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<U>,
+    flatMap<T, U>(
+      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<U>,
+    flatMapDeep<T, U>(
+      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<U>,
+    flatMapDeep<T, U>(
+      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<U>,
+    flatMapDepth<T, U>(
+      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
+    ): ((
+      depth: number
+    ) => (collection: Array<T> | { [id: any]: T }) => Array<U>) &
+      ((depth: number, collection: Array<T> | { [id: any]: T }) => Array<U>),
+    flatMapDepth<T, U>(
+      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
+      depth: number
+    ): (collection: Array<T> | { [id: any]: T }) => Array<U>,
+    flatMapDepth<T, U>(
+      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
+      depth: number,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<U>,
+    forEach<T>(
+      iteratee: Iteratee<T> | OIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<T>,
+    forEach<T>(
+      iteratee: Iteratee<T> | OIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<T>,
+    forEachRight<T>(
+      iteratee: Iteratee<T> | OIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<T>,
+    forEachRight<T>(
+      iteratee: Iteratee<T> | OIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<T>,
+    groupBy<V, T>(
+      iteratee: ValueOnlyIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => { [key: V]: Array<T> },
+    groupBy<V, T>(
+      iteratee: ValueOnlyIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): { [key: V]: Array<T> },
     includes(value: string): (str: string) => boolean,
     includes(value: string, str: string): boolean,
     includes<T>(value: T): (collection: Array<T> | { [id: any]: T }) => boolean,
@@ -1426,53 +1884,164 @@ declare module "lodash/fp" {
     contains(value: string, str: string): boolean,
     contains<T>(value: T): (collection: Array<T> | { [id: any]: T }) => boolean,
     contains<T>(value: T, collection: Array<T> | { [id: any]: T }): boolean,
-    includesFrom(value: string): ((fromIndex: number) => (str: string) => boolean) & ((fromIndex: number, str: string) => boolean),
+    includesFrom(
+      value: string
+    ): ((fromIndex: number) => (str: string) => boolean) &
+      ((fromIndex: number, str: string) => boolean),
     includesFrom(value: string, fromIndex: number): (str: string) => boolean,
     includesFrom(value: string, fromIndex: number, str: string): boolean,
-    includesFrom<T>(value: T): ((fromIndex: number) => (collection: Array<T>) => boolean) & ((fromIndex: number, collection: Array<T>) => boolean),
-    includesFrom<T>(value: T, fromIndex: number): (collection: Array<T>) => boolean,
+    includesFrom<T>(
+      value: T
+    ): ((fromIndex: number) => (collection: Array<T>) => boolean) &
+      ((fromIndex: number, collection: Array<T>) => boolean),
+    includesFrom<T>(
+      value: T,
+      fromIndex: number
+    ): (collection: Array<T>) => boolean,
     includesFrom<T>(value: T, fromIndex: number, collection: Array<T>): boolean,
-    invokeMap<T>(path: ((value: T) => Array<string> | string) | Array<string> | string): (collection: Array<T> | { [id: any]: T }) => Array<any>,
-    invokeMap<T>(path: ((value: T) => Array<string> | string) | Array<string> | string, collection: Array<T> | { [id: any]: T }): Array<any>,
-    invokeArgsMap<T>(path: ((value: T) => Array<string> | string) | Array<string> | string): ((collection: Array<T> | { [id: any]: T }) => (args: Array<any>) => Array<any>) & ((collection: Array<T> | { [id: any]: T }, args: Array<any>) => Array<any>),
-    invokeArgsMap<T>(path: ((value: T) => Array<string> | string) | Array<string> | string, collection: Array<T> | { [id: any]: T }): (args: Array<any>) => Array<any>,
-    invokeArgsMap<T>(path: ((value: T) => Array<string> | string) | Array<string> | string, collection: Array<T> | { [id: any]: T }, args: Array<any>): Array<any>,
-    keyBy<T, V>(iteratee: ValueOnlyIteratee<T>): (collection: Array<T> | { [id: any]: T }) => { [key: V]: T },
-    keyBy<T, V>(iteratee: ValueOnlyIteratee<T>, collection: Array<T> | { [id: any]: T }): { [key: V]: T },
-    indexBy<T, V>(iteratee: ValueOnlyIteratee<T>): (collection: Array<T> | { [id: any]: T }) => { [key: V]: T },
-    indexBy<T, V>(iteratee: ValueOnlyIteratee<T>, collection: Array<T> | { [id: any]: T }): { [key: V]: T },
-    map<T, U>(iteratee: MapIterator<T, U> | OMapIterator<T, U>): (collection: Array<T> | { [id: any]: T}) => Array<U>,
-    map<T, U>(iteratee: MapIterator<T, U> | OMapIterator<T, U>, collection: Array<T> | { [id: any]: T}): Array<U>,
+    invokeMap<T>(
+      path: ((value: T) => Array<string> | string) | Array<string> | string
+    ): (collection: Array<T> | { [id: any]: T }) => Array<any>,
+    invokeMap<T>(
+      path: ((value: T) => Array<string> | string) | Array<string> | string,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<any>,
+    invokeArgsMap<T>(
+      path: ((value: T) => Array<string> | string) | Array<string> | string
+    ): ((
+      collection: Array<T> | { [id: any]: T }
+    ) => (args: Array<any>) => Array<any>) &
+      ((
+        collection: Array<T> | { [id: any]: T },
+        args: Array<any>
+      ) => Array<any>),
+    invokeArgsMap<T>(
+      path: ((value: T) => Array<string> | string) | Array<string> | string,
+      collection: Array<T> | { [id: any]: T }
+    ): (args: Array<any>) => Array<any>,
+    invokeArgsMap<T>(
+      path: ((value: T) => Array<string> | string) | Array<string> | string,
+      collection: Array<T> | { [id: any]: T },
+      args: Array<any>
+    ): Array<any>,
+    keyBy<T, V>(
+      iteratee: ValueOnlyIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => { [key: V]: T },
+    keyBy<T, V>(
+      iteratee: ValueOnlyIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): { [key: V]: T },
+    indexBy<T, V>(
+      iteratee: ValueOnlyIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => { [key: V]: T },
+    indexBy<T, V>(
+      iteratee: ValueOnlyIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): { [key: V]: T },
+    map<T, U>(
+      iteratee: MapIterator<T, U> | OMapIterator<T, U>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<U>,
+    map<T, U>(
+      iteratee: MapIterator<T, U> | OMapIterator<T, U>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<U>,
     map(iteratee: (char: string) => any): (str: string) => string,
     map(iteratee: (char: string) => any, str: string): string,
-    pluck<T, U>(iteratee: MapIterator<T, U> | OMapIterator<T, U>): (collection: Array<T> | { [id: any]: T}) => Array<U>,
-    pluck<T, U>(iteratee: MapIterator<T, U> | OMapIterator<T, U>, collection: Array<T> | { [id: any]: T}): Array<U>,
+    pluck<T, U>(
+      iteratee: MapIterator<T, U> | OMapIterator<T, U>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<U>,
+    pluck<T, U>(
+      iteratee: MapIterator<T, U> | OMapIterator<T, U>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<U>,
     pluck(iteratee: (char: string) => any): (str: string) => string,
     pluck(iteratee: (char: string) => any, str: string): string,
-    orderBy<T>(iteratees: Array<Iteratee<T> | OIteratee<*>> | string): ((orders: Array<"asc" | "desc"> | string) => (collection: Array<T> | { [id: any]: T}) => Array<T>) & ((orders: Array<"asc" | "desc"> | string, collection: Array<T> | { [id: any]: T}) => Array<T>),
-    orderBy<T>(iteratees: Array<Iteratee<T> | OIteratee<*>> | string, orders: Array<"asc" | "desc"> | string): (collection: Array<T> | { [id: any]: T}) => Array<T>,
-    orderBy<T>(iteratees: Array<Iteratee<T> | OIteratee<*>> | string, orders: Array<"asc" | "desc"> | string, collection: Array<T> | { [id: any]: T}): Array<T>,
-    partition<T>(predicate: Predicate<T> | OPredicate<T>): (collection: Array<T> | { [id: any]: T }) => NestedArray<T>,
-    partition<T>(predicate: Predicate<T> | OPredicate<T>, collection: Array<T> | { [id: any]: T }): NestedArray<T>,
-    reduce<T, U>(iteratee: (accumulator: U, value: T) => U): ((accumulator: U) => (collection: Array<T> | { [id: any]: T}) => U) & ((accumulator: U, collection: Array<T> | { [id: any]: T}) => U),
-    reduce<T, U>(iteratee: (accumulator: U, value: T) => U, accumulator: U): (collection: Array<T> | { [id: any]: T}) => U,
-    reduce<T, U>(iteratee: (accumulator: U, value: T) => U, accumulator: U, collection: Array<T> | { [id: any]: T}): U,
-    reduceRight<T, U>(iteratee: (value: T, accumulator: U) => U): ((accumulator: U) => (collection: Array<T> | { [id: any]: T }) => U) & ((accumulator: U, collection: Array<T> | { [id: any]: T }) => U),
-    reduceRight<T, U>(iteratee: (value: T, accumulator: U) => U, accumulator: U): (collection: Array<T> | { [id: any]: T }) => U,
-    reduceRight<T, U>(iteratee: (value: T, accumulator: U) => U, accumulator: U, collection: Array<T> | { [id: any]: T }): U,
-    reject<T>(predicate: Predicate<T> | OPredicate<T>): (collection: Array<T> | { [id: any]: T }) => Array<T>,
-    reject<T>(predicate: Predicate<T> | OPredicate<T>, collection: Array<T> | { [id: any]: T }): Array<T>,
+    orderBy<T>(
+      iteratees: Array<Iteratee<T> | OIteratee<*>> | string
+    ): ((
+      orders: Array<"asc" | "desc"> | string
+    ) => (collection: Array<T> | { [id: any]: T }) => Array<T>) &
+      ((
+        orders: Array<"asc" | "desc"> | string,
+        collection: Array<T> | { [id: any]: T }
+      ) => Array<T>),
+    orderBy<T>(
+      iteratees: Array<Iteratee<T> | OIteratee<*>> | string,
+      orders: Array<"asc" | "desc"> | string
+    ): (collection: Array<T> | { [id: any]: T }) => Array<T>,
+    orderBy<T>(
+      iteratees: Array<Iteratee<T> | OIteratee<*>> | string,
+      orders: Array<"asc" | "desc"> | string,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<T>,
+    partition<T>(
+      predicate: Predicate<T> | OPredicate<T>
+    ): (collection: Array<T> | { [id: any]: T }) => NestedArray<T>,
+    partition<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): NestedArray<T>,
+    reduce<T, U>(
+      iteratee: (accumulator: U, value: T) => U
+    ): ((accumulator: U) => (collection: Array<T> | { [id: any]: T }) => U) &
+      ((accumulator: U, collection: Array<T> | { [id: any]: T }) => U),
+    reduce<T, U>(
+      iteratee: (accumulator: U, value: T) => U,
+      accumulator: U
+    ): (collection: Array<T> | { [id: any]: T }) => U,
+    reduce<T, U>(
+      iteratee: (accumulator: U, value: T) => U,
+      accumulator: U,
+      collection: Array<T> | { [id: any]: T }
+    ): U,
+    reduceRight<T, U>(
+      iteratee: (value: T, accumulator: U) => U
+    ): ((accumulator: U) => (collection: Array<T> | { [id: any]: T }) => U) &
+      ((accumulator: U, collection: Array<T> | { [id: any]: T }) => U),
+    reduceRight<T, U>(
+      iteratee: (value: T, accumulator: U) => U,
+      accumulator: U
+    ): (collection: Array<T> | { [id: any]: T }) => U,
+    reduceRight<T, U>(
+      iteratee: (value: T, accumulator: U) => U,
+      accumulator: U,
+      collection: Array<T> | { [id: any]: T }
+    ): U,
+    reject<T>(
+      predicate: Predicate<T> | OPredicate<T>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<T>,
+    reject<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<T>,
     sample<T>(collection: Array<T> | { [id: any]: T }): T,
-    sampleSize<T>(n: number): (collection: Array<T> | { [id: any]: T }) => Array<T>,
+    sampleSize<T>(
+      n: number
+    ): (collection: Array<T> | { [id: any]: T }) => Array<T>,
     sampleSize<T>(n: number, collection: Array<T> | { [id: any]: T }): Array<T>,
     shuffle<T>(collection: Array<T> | { [id: any]: T }): Array<T>,
     size(collection: Array<any> | Object): number,
-    some<T>(predicate: Predicate<T> | OPredicate<T>): (collection: Array<T> | { [id: any]: T }) => boolean,
-    some<T>(predicate: Predicate<T> | OPredicate<T>, collection: Array<T> | { [id: any]: T }): boolean,
-    any<T>(predicate: Predicate<T> | OPredicate<T>): (collection: Array<T> | { [id: any]: T }) => boolean,
-    any<T>(predicate: Predicate<T> | OPredicate<T>, collection: Array<T> | { [id: any]: T }): boolean,
-    sortBy<T>(iteratees: Array<Iteratee<T> | OIteratee<T>> | Iteratee<T> | OIteratee<T>): (collection: Array<T> | { [id: any]: T }) => Array<T>,
-    sortBy<T>(iteratees: Array<Iteratee<T> | OIteratee<T>> | Iteratee<T> | OIteratee<T>, collection: Array<T> | { [id: any]: T }): Array<T>,
+    some<T>(
+      predicate: Predicate<T> | OPredicate<T>
+    ): (collection: Array<T> | { [id: any]: T }) => boolean,
+    some<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): boolean,
+    any<T>(
+      predicate: Predicate<T> | OPredicate<T>
+    ): (collection: Array<T> | { [id: any]: T }) => boolean,
+    any<T>(
+      predicate: Predicate<T> | OPredicate<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): boolean,
+    sortBy<T>(
+      iteratees: Array<Iteratee<T> | OIteratee<T>> | Iteratee<T> | OIteratee<T>
+    ): (collection: Array<T> | { [id: any]: T }) => Array<T>,
+    sortBy<T>(
+      iteratees: Array<Iteratee<T> | OIteratee<T>> | Iteratee<T> | OIteratee<T>,
+      collection: Array<T> | { [id: any]: T }
+    ): Array<T>,
 
     // Date
     now(): number,
@@ -1495,13 +2064,13 @@ declare module "lodash/fp" {
     curryRight(func: Function): Function,
     curryRightN(arity: number): (func: Function) => Function,
     curryRightN(arity: number, func: Function): Function,
-    debounce(wait: number): (func: Function) => Function,
-    debounce(wait: number, func: Function): Function,
+    debounce(wait: number): <F: Function>(func: F) => F,
+    debounce<F: Function>(wait: number, func: F): F,
     defer(func: Function): number,
     delay(wait: number): (func: Function) => number,
     delay(wait: number, func: Function): number,
     flip(func: Function): Function,
-    memoize(func: Function): Function,
+    memoize<F: Function>(func: F): F,
     negate(predicate: Function): Function,
     complement(predicate: Function): Function,
     once(func: Function): Function,
@@ -1533,16 +2102,41 @@ declare module "lodash/fp" {
     castArray(value: *): any[],
     clone<T>(value: T): T,
     cloneDeep<T>(value: T): T,
-    cloneDeepWith<T, U>(customizer: (value: T, key: number | string, object: T, stack: any) => U): (value: T) => U,
-    cloneDeepWith<T, U>(customizer: (value: T, key: number | string, object: T, stack: any) => U, value: T): U,
-    cloneWith<T, U>(customizer: (value: T, key: number | string, object: T, stack: any) => U): (value: T) => U,
-    cloneWith<T, U>(customizer: (value: T, key: number | string, object: T, stack: any) => U, value: T): U,
-    conformsTo<T: { [key: string]: mixed }>(predicates: T & { [key: string]: (x: any) => boolean }): (source: T) => boolean,
-    conformsTo<T: { [key: string]: mixed }>(predicates: T & { [key: string]: (x: any) => boolean }, source: T): boolean,
-    where<T: { [key: string]: mixed }>(predicates: T & { [key: string]: (x: any) => boolean }): (source: T) => boolean,
-    where<T: { [key: string]: mixed }>(predicates: T & { [key: string]: (x: any) => boolean }, source: T): boolean,
-    conforms<T: { [key: string]: mixed }>(predicates: T & { [key: string]: (x: any) => boolean }): (source: T) => boolean,
-    conforms<T: { [key: string]: mixed }>(predicates: T & { [key: string]: (x: any) => boolean }, source: T): boolean,
+    cloneDeepWith<T, U>(
+      customizer: (value: T, key: number | string, object: T, stack: any) => U
+    ): (value: T) => U,
+    cloneDeepWith<T, U>(
+      customizer: (value: T, key: number | string, object: T, stack: any) => U,
+      value: T
+    ): U,
+    cloneWith<T, U>(
+      customizer: (value: T, key: number | string, object: T, stack: any) => U
+    ): (value: T) => U,
+    cloneWith<T, U>(
+      customizer: (value: T, key: number | string, object: T, stack: any) => U,
+      value: T
+    ): U,
+    conformsTo<T: { [key: string]: mixed }>(
+      predicates: T & { [key: string]: (x: any) => boolean }
+    ): (source: T) => boolean,
+    conformsTo<T: { [key: string]: mixed }>(
+      predicates: T & { [key: string]: (x: any) => boolean },
+      source: T
+    ): boolean,
+    where<T: { [key: string]: mixed }>(
+      predicates: T & { [key: string]: (x: any) => boolean }
+    ): (source: T) => boolean,
+    where<T: { [key: string]: mixed }>(
+      predicates: T & { [key: string]: (x: any) => boolean },
+      source: T
+    ): boolean,
+    conforms<T: { [key: string]: mixed }>(
+      predicates: T & { [key: string]: (x: any) => boolean }
+    ): (source: T) => boolean,
+    conforms<T: { [key: string]: mixed }>(
+      predicates: T & { [key: string]: (x: any) => boolean },
+      source: T
+    ): boolean,
     eq(value: any): (other: any) => boolean,
     eq(value: any, other: any): boolean,
     identical(value: any): (other: any) => boolean,
@@ -1565,9 +2159,40 @@ declare module "lodash/fp" {
     isEqual(value: any, other: any): boolean,
     equals(value: any): (other: any) => boolean,
     equals(value: any, other: any): boolean,
-    isEqualWith<T, U>(customizer: (objValue: any, otherValue: any, key: number | string, object: T, other: U, stack: any) => boolean | void): ((value: T) => (other: U) => boolean) & ((value: T, other: U) => boolean),
-    isEqualWith<T, U>(customizer: (objValue: any, otherValue: any, key: number | string, object: T, other: U, stack: any) => boolean | void, value: T): (other: U) => boolean,
-    isEqualWith<T, U>(customizer: (objValue: any, otherValue: any, key: number | string, object: T, other: U, stack: any) => boolean | void, value: T, other: U): boolean,
+    isEqualWith<T, U>(
+      customizer: (
+        objValue: any,
+        otherValue: any,
+        key: number | string,
+        object: T,
+        other: U,
+        stack: any
+      ) => boolean | void
+    ): ((value: T) => (other: U) => boolean) &
+      ((value: T, other: U) => boolean),
+    isEqualWith<T, U>(
+      customizer: (
+        objValue: any,
+        otherValue: any,
+        key: number | string,
+        object: T,
+        other: U,
+        stack: any
+      ) => boolean | void,
+      value: T
+    ): (other: U) => boolean,
+    isEqualWith<T, U>(
+      customizer: (
+        objValue: any,
+        otherValue: any,
+        key: number | string,
+        object: T,
+        other: U,
+        stack: any
+      ) => boolean | void,
+      value: T,
+      other: U
+    ): boolean,
     isError(value: any): boolean,
     isFinite(value: any): boolean,
     isFunction(value: Function): true,
@@ -1579,9 +2204,37 @@ declare module "lodash/fp" {
     isMatch(source: Object, object: Object): boolean,
     whereEq(source: Object): (object: Object) => boolean,
     whereEq(source: Object, object: Object): boolean,
-    isMatchWith<T: Object, U: Object>(customizer: (objValue: any, srcValue: any, key: number | string, object: T, source: U) => boolean | void): ((source: U) => (object: T) => boolean) & ((source: U, object: T) => boolean),
-    isMatchWith<T: Object, U: Object>(customizer: (objValue: any, srcValue: any, key: number | string, object: T, source: U) => boolean | void, source: U): (object: T) => boolean,
-    isMatchWith<T: Object, U: Object>(customizer: (objValue: any, srcValue: any, key: number | string, object: T, source: U) => boolean | void, source: U, object: T): boolean,
+    isMatchWith<T: Object, U: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: number | string,
+        object: T,
+        source: U
+      ) => boolean | void
+    ): ((source: U) => (object: T) => boolean) &
+      ((source: U, object: T) => boolean),
+    isMatchWith<T: Object, U: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: number | string,
+        object: T,
+        source: U
+      ) => boolean | void,
+      source: U
+    ): (object: T) => boolean,
+    isMatchWith<T: Object, U: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: number | string,
+        object: T,
+        source: U
+      ) => boolean | void,
+      source: U,
+      object: T
+    ): boolean,
     isNaN(value: any): boolean,
     isNative(value: any): boolean,
     isNil(value: any): boolean,
@@ -1594,7 +2247,9 @@ declare module "lodash/fp" {
     isSafeInteger(value: any): boolean,
     isSet(value: any): boolean,
     isString(value: string): true,
-    isString(value: number | boolean | Function | void | null | Object | Array<any>): false,
+    isString(
+      value: number | boolean | Function | void | null | Object | Array<any>
+    ): false,
     isSymbol(value: any): boolean,
     isTypedArray(value: any): boolean,
     isUndefined(value: any): boolean,
@@ -1639,10 +2294,16 @@ declare module "lodash/fp" {
     sumBy<T>(iteratee: Iteratee<T>, array: Array<T>): number,
 
     // number
-    clamp(lower: number): ((upper: number) => (number: number) => number) & ((upper: number, number: number) => number),
+    clamp(
+      lower: number
+    ): ((upper: number) => (number: number) => number) &
+      ((upper: number, number: number) => number),
     clamp(lower: number, upper: number): (number: number) => number,
     clamp(lower: number, upper: number, number: number): number,
-    inRange(start: number): ((end: number) => (number: number) => boolean) & ((end: number, number: number) => boolean),
+    inRange(
+      start: number
+    ): ((end: number) => (number: number) => boolean) &
+      ((end: number, number: number) => boolean),
     inRange(start: number, end: number): (number: number) => boolean,
     inRange(start: number, end: number, number: number): boolean,
     random(lower: number): (upper: number) => number,
@@ -1656,18 +2317,123 @@ declare module "lodash/fp" {
     extendAll(objects: Array<Object>): Object,
     assignIn<A, B>(a: A): (b: B) => A & B,
     assignIn<A, B>(a: A, b: B): A & B,
-    assignInWith<T: Object, A: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object),
-    assignInWith<T: Object, A: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void, object: T): (s1: A) => Object,
-    assignInWith<T: Object, A: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void, object: T, s1: A): Object,
-    assignWith<T: Object, A: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object),
-    assignWith<T: Object, A: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void, object: T): (s1: A) => Object,
-    assignWith<T: Object, A: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void, object: T, s1: A): Object,
-    assignInAllWith(customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void): (objects: Array<Object>) => Object,
-    assignInAllWith(customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void, objects: Array<Object>): Object,
-    extendAllWith(customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void): (objects: Array<Object>) => Object,
-    extendAllWith(customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void, objects: Array<Object>): Object,
-    assignAllWith(customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void): (objects: Array<Object>) => Object,
-    assignAllWith(customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void, objects: Array<Object>): Object,
+    assignInWith<T: Object, A: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A
+      ) => any | void
+    ): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object),
+    assignInWith<T: Object, A: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A
+      ) => any | void,
+      object: T
+    ): (s1: A) => Object,
+    assignInWith<T: Object, A: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A
+      ) => any | void,
+      object: T,
+      s1: A
+    ): Object,
+    assignWith<T: Object, A: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A
+      ) => any | void
+    ): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object),
+    assignWith<T: Object, A: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A
+      ) => any | void,
+      object: T
+    ): (s1: A) => Object,
+    assignWith<T: Object, A: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A
+      ) => any | void,
+      object: T,
+      s1: A
+    ): Object,
+    assignInAllWith(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: Object,
+        source: Object
+      ) => any | void
+    ): (objects: Array<Object>) => Object,
+    assignInAllWith(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: Object,
+        source: Object
+      ) => any | void,
+      objects: Array<Object>
+    ): Object,
+    extendAllWith(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: Object,
+        source: Object
+      ) => any | void
+    ): (objects: Array<Object>) => Object,
+    extendAllWith(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: Object,
+        source: Object
+      ) => any | void,
+      objects: Array<Object>
+    ): Object,
+    assignAllWith(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: Object,
+        source: Object
+      ) => any | void
+    ): (objects: Array<Object>) => Object,
+    assignAllWith(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: Object,
+        source: Object
+      ) => any | void,
+      objects: Array<Object>
+    ): Object,
     at(paths: Array<string>): (object: Object) => Array<any>,
     at(paths: Array<string>, object: Object): Array<any>,
     props(paths: Array<string>): (object: Object) => Array<any>,
@@ -1689,13 +2455,50 @@ declare module "lodash/fp" {
     extend<A, B>(a: A): (b: B) => A & B,
     extend<A, B>(a: A, b: B): A & B,
     // alias for _.assignInWith
-    extendWith<T: Object, A: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object),
-    extendWith<T: Object, A: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void, object: T): (s1: A) => Object,
-    extendWith<T: Object, A: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A) => any | void, object: T, s1: A): Object,
-    findKey<A, T: { [id: any]: A }>(predicate: OPredicate<A>): (object: T) => string | void,
-    findKey<A, T: { [id: any]: A }>(predicate: OPredicate<A>, object: T): string | void,
-    findLastKey<A, T: { [id: any]: A }>(predicate: OPredicate<A>): (object: T) => string | void,
-    findLastKey<A, T: { [id: any]: A }>(predicate: OPredicate<A>, object: T): string | void,
+    extendWith<T: Object, A: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A
+      ) => any | void
+    ): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object),
+    extendWith<T: Object, A: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A
+      ) => any | void,
+      object: T
+    ): (s1: A) => Object,
+    extendWith<T: Object, A: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A
+      ) => any | void,
+      object: T,
+      s1: A
+    ): Object,
+    findKey<A, T: { [id: any]: A }>(
+      predicate: OPredicate<A>
+    ): (object: T) => string | void,
+    findKey<A, T: { [id: any]: A }>(
+      predicate: OPredicate<A>,
+      object: T
+    ): string | void,
+    findLastKey<A, T: { [id: any]: A }>(
+      predicate: OPredicate<A>
+    ): (object: T) => string | void,
+    findLastKey<A, T: { [id: any]: A }>(
+      predicate: OPredicate<A>,
+      object: T
+    ): string | void,
     forIn(iteratee: OIteratee<*>): (object: Object) => Object,
     forIn(iteratee: OIteratee<*>, object: Object): Object,
     forInRight(iteratee: OIteratee<*>): (object: Object) => Object,
@@ -1712,15 +2515,51 @@ declare module "lodash/fp" {
     prop(path: Array<string> | string, object: Object | Array<any>): any,
     path(path: Array<string> | string): (object: Object | Array<any>) => any,
     path(path: Array<string> | string, object: Object | Array<any>): any,
-    getOr(defaultValue: any): ((path: Array<string> | string) => (object: Object | Array<any>) => any) & ((path: Array<string> | string, object: Object | Array<any>) => any),
-    getOr(defaultValue: any, path: Array<string> | string): (object: Object | Array<any>) => any,
-    getOr(defaultValue: any, path: Array<string> | string, object: Object | Array<any>): any,
-    propOr(defaultValue: any): ((path: Array<string> | string) => (object: Object | Array<any>) => any) & ((path: Array<string> | string, object: Object | Array<any>) => any),
-    propOr(defaultValue: any, path: Array<string> | string): (object: Object | Array<any>) => any,
-    propOr(defaultValue: any, path: Array<string> | string, object: Object | Array<any>): any,
-    pathOr(defaultValue: any): ((path: Array<string> | string) => (object: Object | Array<any>) => any) & ((path: Array<string> | string, object: Object | Array<any>) => any),
-    pathOr(defaultValue: any, path: Array<string> | string): (object: Object | Array<any>) => any,
-    pathOr(defaultValue: any, path: Array<string> | string, object: Object | Array<any>): any,
+    getOr(
+      defaultValue: any
+    ): ((
+      path: Array<string> | string
+    ) => (object: Object | Array<any>) => any) &
+      ((path: Array<string> | string, object: Object | Array<any>) => any),
+    getOr(
+      defaultValue: any,
+      path: Array<string> | string
+    ): (object: Object | Array<any>) => any,
+    getOr(
+      defaultValue: any,
+      path: Array<string> | string,
+      object: Object | Array<any>
+    ): any,
+    propOr(
+      defaultValue: any
+    ): ((
+      path: Array<string> | string
+    ) => (object: Object | Array<any>) => any) &
+      ((path: Array<string> | string, object: Object | Array<any>) => any),
+    propOr(
+      defaultValue: any,
+      path: Array<string> | string
+    ): (object: Object | Array<any>) => any,
+    propOr(
+      defaultValue: any,
+      path: Array<string> | string,
+      object: Object | Array<any>
+    ): any,
+    pathOr(
+      defaultValue: any
+    ): ((
+      path: Array<string> | string
+    ) => (object: Object | Array<any>) => any) &
+      ((path: Array<string> | string, object: Object | Array<any>) => any),
+    pathOr(
+      defaultValue: any,
+      path: Array<string> | string
+    ): (object: Object | Array<any>) => any,
+    pathOr(
+      defaultValue: any,
+      path: Array<string> | string,
+      object: Object | Array<any>
+    ): any,
     has(path: Array<string> | string): (object: Object) => boolean,
     has(path: Array<string> | string, object: Object): boolean,
     hasIn(path: Array<string> | string): (object: Object) => boolean,
@@ -1731,9 +2570,19 @@ declare module "lodash/fp" {
     invertBy(iteratee: Function, object: Object): Object,
     invoke(path: Array<string> | string): (object: Object) => any,
     invoke(path: Array<string> | string, object: Object): any,
-    invokeArgs(path: Array<string> | string): ((object: Object) => (args: Array<any>) => any) & ((object: Object, args: Array<any>) => any),
-    invokeArgs(path: Array<string> | string, object: Object): (args: Array<any>) => any,
-    invokeArgs(path: Array<string> | string, object: Object, args: Array<any>): any,
+    invokeArgs(
+      path: Array<string> | string
+    ): ((object: Object) => (args: Array<any>) => any) &
+      ((object: Object, args: Array<any>) => any),
+    invokeArgs(
+      path: Array<string> | string,
+      object: Object
+    ): (args: Array<any>) => any,
+    invokeArgs(
+      path: Array<string> | string,
+      object: Object,
+      args: Array<any>
+    ): any,
     keys(object: Object): Array<string>,
     keysIn(object: Object): Array<string>,
     mapKeys(iteratee: OIteratee<*>): (object: Object) => Object,
@@ -1743,56 +2592,175 @@ declare module "lodash/fp" {
     merge(object: Object): (source: Object) => Object,
     merge(object: Object, source: Object): Object,
     mergeAll(objects: Array<Object>): Object,
-    mergeWith<T: Object, A: Object, B: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object),
-    mergeWith<T: Object, A: Object, B: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void, object: T): (s1: A) => Object,
-    mergeWith<T: Object, A: Object, B: Object>(customizer: (objValue: any, srcValue: any, key: string, object: T, source: A | B) => any | void, object: T, s1: A): Object,
-    mergeAllWith(customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void): (objects: Array<Object>) => Object,
-    mergeAllWith(customizer: (objValue: any, srcValue: any, key: string, object: Object, source: Object) => any | void, objects: Array<Object>): Object,
+    mergeWith<T: Object, A: Object, B: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A | B
+      ) => any | void
+    ): ((object: T) => (s1: A) => Object) & ((object: T, s1: A) => Object),
+    mergeWith<T: Object, A: Object, B: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A | B
+      ) => any | void,
+      object: T
+    ): (s1: A) => Object,
+    mergeWith<T: Object, A: Object, B: Object>(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: T,
+        source: A | B
+      ) => any | void,
+      object: T,
+      s1: A
+    ): Object,
+    mergeAllWith(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: Object,
+        source: Object
+      ) => any | void
+    ): (objects: Array<Object>) => Object,
+    mergeAllWith(
+      customizer: (
+        objValue: any,
+        srcValue: any,
+        key: string,
+        object: Object,
+        source: Object
+      ) => any | void,
+      objects: Array<Object>
+    ): Object,
     omit(props: Array<string>): (object: Object) => Object,
     omit(props: Array<string>, object: Object): Object,
     omitAll(props: Array<string>): (object: Object) => Object,
     omitAll(props: Array<string>, object: Object): Object,
-    omitBy<A, T: { [id: any]: A }>(predicate: OPredicate<A>): (object: T) => Object,
+    omitBy<A, T: { [id: any]: A }>(
+      predicate: OPredicate<A>
+    ): (object: T) => Object,
     omitBy<A, T: { [id: any]: A }>(predicate: OPredicate<A>, object: T): Object,
     pick(props: Array<string>): (object: Object) => Object,
     pick(props: Array<string>, object: Object): Object,
     pickAll(props: Array<string>): (object: Object) => Object,
     pickAll(props: Array<string>, object: Object): Object,
-    pickBy<A, T: { [id: any]: A }>(predicate: OPredicate<A>): (object: T) => Object,
+    pickBy<A, T: { [id: any]: A }>(
+      predicate: OPredicate<A>
+    ): (object: T) => Object,
     pickBy<A, T: { [id: any]: A }>(predicate: OPredicate<A>, object: T): Object,
     result(path: Array<string> | string): (object: Object) => any,
     result(path: Array<string> | string, object: Object): any,
-    set(path: Array<string> | string): ((value: any) => (object: Object) => Object) & ((value: any, object: Object) => Object),
+    set(
+      path: Array<string> | string
+    ): ((value: any) => (object: Object) => Object) &
+      ((value: any, object: Object) => Object),
     set(path: Array<string> | string, value: any): (object: Object) => Object,
     set(path: Array<string> | string, value: any, object: Object): Object,
-    assoc(path: Array<string> | string): ((value: any) => (object: Object) => Object) & ((value: any, object: Object) => Object),
+    assoc(
+      path: Array<string> | string
+    ): ((value: any) => (object: Object) => Object) &
+      ((value: any, object: Object) => Object),
     assoc(path: Array<string> | string, value: any): (object: Object) => Object,
     assoc(path: Array<string> | string, value: any, object: Object): Object,
-    assocPath(path: Array<string> | string): ((value: any) => (object: Object) => Object) & ((value: any, object: Object) => Object),
-    assocPath(path: Array<string> | string, value: any): (object: Object) => Object,
+    assocPath(
+      path: Array<string> | string
+    ): ((value: any) => (object: Object) => Object) &
+      ((value: any, object: Object) => Object),
+    assocPath(
+      path: Array<string> | string,
+      value: any
+    ): (object: Object) => Object,
     assocPath(path: Array<string> | string, value: any, object: Object): Object,
-    setWith<T>(customizer: (nsValue: any, key: string, nsObject: T) => any): ((path: Array<string> | string) => (((value: any) => (object: T) => Object) & ((value: any, object: T) => Object))) & ((path: Array<string> | string, value: any) => (object: T) => Object) & ((path: Array<string> | string, value: any, object: T) => Object),
-    setWith<T>(customizer: (nsValue: any, key: string, nsObject: T) => any, path: Array<string> | string): ((value: any) => (object: T) => Object) & ((value: any, object: T) => Object),
-    setWith<T>(customizer: (nsValue: any, key: string, nsObject: T) => any, path: Array<string> | string, value: any): (object: T) => Object,
-    setWith<T>(customizer: (nsValue: any, key: string, nsObject: T) => any, path: Array<string> | string, value: any, object: T): Object,
+    setWith<T>(
+      customizer: (nsValue: any, key: string, nsObject: T) => any
+    ): ((
+      path: Array<string> | string
+    ) => ((value: any) => (object: T) => Object) &
+      ((value: any, object: T) => Object)) &
+      ((path: Array<string> | string, value: any) => (object: T) => Object) &
+      ((path: Array<string> | string, value: any, object: T) => Object),
+    setWith<T>(
+      customizer: (nsValue: any, key: string, nsObject: T) => any,
+      path: Array<string> | string
+    ): ((value: any) => (object: T) => Object) &
+      ((value: any, object: T) => Object),
+    setWith<T>(
+      customizer: (nsValue: any, key: string, nsObject: T) => any,
+      path: Array<string> | string,
+      value: any
+    ): (object: T) => Object,
+    setWith<T>(
+      customizer: (nsValue: any, key: string, nsObject: T) => any,
+      path: Array<string> | string,
+      value: any,
+      object: T
+    ): Object,
     toPairs(object: Object | Array<*>): NestedArray<any>,
     toPairsIn(object: Object): NestedArray<any>,
-    transform(iteratee: OIteratee<*>): ((accumulator: any) => (collection: Object | Array<any>) => any) & ((accumulator: any, collection: Object | Array<any>) => any),
-    transform(iteratee: OIteratee<*>, accumulator: any): (collection: Object | Array<any>) => any,
-    transform(iteratee: OIteratee<*>, accumulator: any, collection: Object | Array<any>): any,
+    transform(
+      iteratee: OIteratee<*>
+    ): ((accumulator: any) => (collection: Object | Array<any>) => any) &
+      ((accumulator: any, collection: Object | Array<any>) => any),
+    transform(
+      iteratee: OIteratee<*>,
+      accumulator: any
+    ): (collection: Object | Array<any>) => any,
+    transform(
+      iteratee: OIteratee<*>,
+      accumulator: any,
+      collection: Object | Array<any>
+    ): any,
     unset(path: Array<string> | string): (object: Object) => boolean,
     unset(path: Array<string> | string, object: Object): boolean,
     dissoc(path: Array<string> | string): (object: Object) => boolean,
     dissoc(path: Array<string> | string, object: Object): boolean,
     dissocPath(path: Array<string> | string): (object: Object) => boolean,
     dissocPath(path: Array<string> | string, object: Object): boolean,
-    update(path: string[] | string): ((updater: Function) => (object: Object) => Object) & ((updater: Function, object: Object) => Object),
-    update(path: string[] | string, updater: Function): (object: Object) => Object,
+    update(
+      path: string[] | string
+    ): ((updater: Function) => (object: Object) => Object) &
+      ((updater: Function, object: Object) => Object),
+    update(
+      path: string[] | string,
+      updater: Function
+    ): (object: Object) => Object,
     update(path: string[] | string, updater: Function, object: Object): Object,
-    updateWith(customizer: Function): ((path: string[] | string) => (((updater: Function) => (object: Object) => Object) & ((updater: Function, object: Object) => Object))) & ((path: string[] | string, updater: Function) => (object: Object) => Object) & ((path: string[] | string, updater: Function, object: Object) => Object),
-    updateWith(customizer: Function, path: string[] | string): ((updater: Function) => (object: Object) => Object) & ((updater: Function, object: Object) => Object),
-    updateWith(customizer: Function, path: string[] | string, updater: Function): (object: Object) => Object,
-    updateWith(customizer: Function, path: string[] | string, updater: Function, object: Object): Object,
+    updateWith(
+      customizer: Function
+    ): ((
+      path: string[] | string
+    ) => ((updater: Function) => (object: Object) => Object) &
+      ((updater: Function, object: Object) => Object)) &
+      ((
+        path: string[] | string,
+        updater: Function
+      ) => (object: Object) => Object) &
+      ((path: string[] | string, updater: Function, object: Object) => Object),
+    updateWith(
+      customizer: Function,
+      path: string[] | string
+    ): ((updater: Function) => (object: Object) => Object) &
+      ((updater: Function, object: Object) => Object),
+    updateWith(
+      customizer: Function,
+      path: string[] | string,
+      updater: Function
+    ): (object: Object) => Object,
+    updateWith(
+      customizer: Function,
+      path: string[] | string,
+      updater: Function,
+      object: Object
+    ): Object,
     values(object: Object): Array<any>,
     valuesIn(object: Object): Array<any>,
 
@@ -1814,26 +2782,50 @@ declare module "lodash/fp" {
     lowerFirst(string: string): string,
     pad(length: number): (string: string) => string,
     pad(length: number, string: string): string,
-    padChars(chars: string): ((length: number) => (string: string) => string) & ((length: number, string: string) => string),
+    padChars(
+      chars: string
+    ): ((length: number) => (string: string) => string) &
+      ((length: number, string: string) => string),
     padChars(chars: string, length: number): (string: string) => string,
     padChars(chars: string, length: number, string: string): string,
     padEnd(length: number): (string: string) => string,
     padEnd(length: number, string: string): string,
-    padCharsEnd(chars: string): ((length: number) => (string: string) => string) & ((length: number, string: string) => string),
+    padCharsEnd(
+      chars: string
+    ): ((length: number) => (string: string) => string) &
+      ((length: number, string: string) => string),
     padCharsEnd(chars: string, length: number): (string: string) => string,
     padCharsEnd(chars: string, length: number, string: string): string,
     padStart(length: number): (string: string) => string,
     padStart(length: number, string: string): string,
-    padCharsStart(chars: string): ((length: number) => (string: string) => string) & ((length: number, string: string) => string),
+    padCharsStart(
+      chars: string
+    ): ((length: number) => (string: string) => string) &
+      ((length: number, string: string) => string),
     padCharsStart(chars: string, length: number): (string: string) => string,
     padCharsStart(chars: string, length: number, string: string): string,
     parseInt(radix: number): (string: string) => number,
     parseInt(radix: number, string: string): number,
     repeat(n: number): (string: string) => string,
     repeat(n: number, string: string): string,
-    replace(pattern: RegExp | string): ((replacement: ((string: string) => string) | string) => (string: string) => string) & ((replacement: ((string: string) => string) | string, string: string) => string),
-    replace(pattern: RegExp | string, replacement: ((string: string) => string) | string): (string: string) => string,
-    replace(pattern: RegExp | string, replacement: ((string: string) => string) | string, string: string): string,
+    replace(
+      pattern: RegExp | string
+    ): ((
+      replacement: ((string: string) => string) | string
+    ) => (string: string) => string) &
+      ((
+        replacement: ((string: string) => string) | string,
+        string: string
+      ) => string),
+    replace(
+      pattern: RegExp | string,
+      replacement: ((string: string) => string) | string
+    ): (string: string) => string,
+    replace(
+      pattern: RegExp | string,
+      replacement: ((string: string) => string) | string,
+      string: string
+    ): string,
     snakeCase(string: string): string,
     split(separator: RegExp | string): (string: string) => Array<string>,
     split(separator: RegExp | string, string: string): Array<string>,
@@ -1866,8 +2858,13 @@ declare module "lodash/fp" {
     cond(pairs: NestedArray<Function>): Function,
     constant<T>(value: T): () => T,
     always<T>(value: T): () => T,
-    defaultTo<T1: string | boolean | Object, T2>(defaultValue: T2): (value: T1) => T1,
-    defaultTo<T1: string | boolean | Object, T2>(defaultValue: T2, value: T1): T1,
+    defaultTo<T1: string | boolean | Object, T2>(
+      defaultValue: T2
+    ): (value: T1) => T1,
+    defaultTo<T1: string | boolean | Object, T2>(
+      defaultValue: T2,
+      value: T1
+    ): T1,
     // NaN is a number instead of its own type, otherwise it would behave like null/void
     defaultTo<T1: number, T2>(defaultValue: T2): (value: T1) => T1 | T2,
     defaultTo<T1: number, T2>(defaultValue: T2, value: T1): T1 | T2,
@@ -1893,9 +2890,19 @@ declare module "lodash/fp" {
     pathEq(path: Array<string> | string, srcValue: any): Function,
     method(path: Array<string> | string): Function,
     methodOf(object: Object): Function,
-    mixin<T: Function | Object>(object: T): ((source: Object) => (options: {chain: boolean}) => T) & ((source: Object, options: {chain: boolean}) => T),
-    mixin<T: Function | Object>(object: T, source: Object): (options: {chain: boolean}) => T,
-    mixin<T: Function | Object>(object: T, source: Object, options: {chain: boolean}): T,
+    mixin<T: Function | Object>(
+      object: T
+    ): ((source: Object) => (options: { chain: boolean }) => T) &
+      ((source: Object, options: { chain: boolean }) => T),
+    mixin<T: Function | Object>(
+      object: T,
+      source: Object
+    ): (options: { chain: boolean }) => T,
+    mixin<T: Function | Object>(
+      object: T,
+      source: Object,
+      options: { chain: boolean }
+    ): T,
     noConflict(): Lodash,
     noop(...args: Array<mixed>): void,
     nthArg(n: number): Function,
@@ -1905,18 +2912,26 @@ declare module "lodash/fp" {
     allPass(predicates: Array<Function>): Function,
     overSome(predicates: Array<Function>): Function,
     anyPass(predicates: Array<Function>): Function,
-    property(path: Array<string> | string): (object: Object | Array<any>) => any,
+    property(
+      path: Array<string> | string
+    ): (object: Object | Array<any>) => any,
     property(path: Array<string> | string, object: Object | Array<any>): any,
     propertyOf(object: Object): (path: Array<string> | string) => Function,
     propertyOf(object: Object, path: Array<string> | string): Function,
     range(start: number): (end: number) => Array<number>,
     range(start: number, end: number): Array<number>,
-    rangeStep(step: number): ((start: number) => (end: number) => Array<number>) & ((start: number, end: number) => Array<number>),
+    rangeStep(
+      step: number
+    ): ((start: number) => (end: number) => Array<number>) &
+      ((start: number, end: number) => Array<number>),
     rangeStep(step: number, start: number): (end: number) => Array<number>,
     rangeStep(step: number, start: number, end: number): Array<number>,
     rangeRight(start: number): (end: number) => Array<number>,
     rangeRight(start: number, end: number): Array<number>,
-    rangeStepRight(step: number): ((start: number) => (end: number) => Array<number>) & ((start: number, end: number) => Array<number>),
+    rangeStepRight(
+      step: number
+    ): ((start: number) => (end: number) => Array<number>) &
+      ((start: number, end: number) => Array<number>),
     rangeStepRight(step: number, start: number): (end: number) => Array<number>,
     rangeStepRight(step: number, start: number, end: number): Array<number>,
     runInContext(context: Object): Function,
