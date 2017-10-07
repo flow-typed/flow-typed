@@ -42,7 +42,7 @@ is run `flow-typed install`. This will search the libdef repo and download all
 the libdefs that are relevant for your project and install them for you. After
 that, **simply check them in** and be on your way!
 
-## Gettings Started
+## Getting Started
 
 Check out [Importing And Using Type Definitions](https://github.com/flowtype/flow-typed/wiki/Importing-And-Using-Type-Definitions)
 in the wiki. It will walk you through using typedefs installed through flow-typed,

@@ -130,6 +130,8 @@ declare class rxjs$Observable<+T> {
 
   buffer(bufferBoundaries: rxjs$Observable<any>): rxjs$Observable<Array<T>>;
 
+  bufferCount(bufferSize: number, startBufferEvery?: number): rxjs$Observable<Array<T>>;
+
   catch<U>(selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>): rxjs$Observable<U>;
 
   concat<U>(...sources: rxjs$Observable<U>[]): rxjs$Observable<T | U>;
@@ -351,6 +353,11 @@ declare class rxjs$Observable<+T> {
     g: rxjs$Observable<G>,
     resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H,
   ): rxjs$Observable<H>;
+
+  static combineLatest<A>(
+    a: rxjs$Observable<A>,
+    _: void,
+  ): rxjs$Observable<[A]>;
 
   static combineLatest<A, B>(
     a: rxjs$Observable<A>,

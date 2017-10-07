@@ -100,6 +100,7 @@ declare class moment$MomentDuration {
 }
 declare class moment$Moment {
   static ISO_8601: string;
+  static (string?: string, format?: string|Array<string>, strict?: bool): moment$Moment;
   static (string?: string, format?: string|Array<string>, locale?: string, strict?: bool): moment$Moment;
   static (initDate: ?Object|number|Date|Array<number>|moment$Moment|string): moment$Moment;
   static unix(seconds: number): moment$Moment;
@@ -205,7 +206,12 @@ declare class moment$Moment {
   isAfter(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isSameOrBefore(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
   isSameOrAfter(date?: moment$Moment|string|number|Date|Array<number>, units?: ?string): bool;
-  isBetween(date: moment$Moment|string|number|Date|Array<number>): bool;
+  isBetween(
+    fromDate: moment$Moment|string|number|Date|Array<number>,
+    toDate?: ?moment$Moment|string|number|Date|Array<number>,
+    granularity?: ?string,
+    inclusion?: ?string
+  ): bool;
   isDST(): bool;
   isDSTShifted(): bool;
   isLeapYear(): bool;
