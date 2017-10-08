@@ -44,10 +44,8 @@ function handleRequest<MiddleWare>(req: express$Request, res: express$Response, 
         });
 }
 
-myRouter.use(handleRequest, (err: ?Error, req: express$Request, res: express$Response, next: express$NextFunction): void => {
-    if (err) {
-        console.error(err);
-    }
+myRouter.use(handleRequest, (err: Error, req: express$Request, res: express$Response, next: express$NextFunction): void => {
+    console.error(err);
     next(err);
 });
 
@@ -130,7 +128,7 @@ app.use('/something', (req: express$Request, res: express$Response) => {
 //   res.redirect();
 // });
 
-app.use((err: ?Error, req: express$Request, res: express$Response, next: express$NextFunction) => {
+app.use((err: Error, req: express$Request, res: express$Response, next: express$NextFunction) => {
     // test req
     req.accepts('accepted/type');
     req.accepts(['json', 'text']);
