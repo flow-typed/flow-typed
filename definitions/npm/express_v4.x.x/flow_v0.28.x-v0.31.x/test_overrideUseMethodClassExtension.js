@@ -13,7 +13,7 @@ declare type test_express$CustomNextFunction = express$NextFunction;
 
 declare type test_express$CustomMiddleware =
   ((req: test_express$CustomRequest, res: test_express$CustomResponse, next: test_express$CustomNextFunction) => mixed) |
-  ((error: ?Error, req: test_express$CustomRequest, res: test_express$CustomResponse, next: test_express$CustomNextFunction) => mixed);
+  ((error: Error, req: test_express$CustomRequest, res: test_express$CustomResponse, next: test_express$CustomNextFunction) => mixed);
 
 declare class test_express$CustomApplication extends express$Application {
   constructor(expressConstructor: () => express$Application): this;
