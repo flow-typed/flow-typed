@@ -130,7 +130,7 @@ declare module "react-intl" {
       intlPropName?: string,
       withRef?: boolean
     }
-  ): React$ComponentType<Props>;
+  ): React$ComponentType<$Diff<Props, { intl: $npm$ReactIntl$IntlShape }>>;
   declare function formatMessage(
     messageDescriptor: $npm$ReactIntl$MessageDescriptor,
     values?: Object
