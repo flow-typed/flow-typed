@@ -31,11 +31,14 @@ declare module 'bunyan' {
         },
         [key: string]: any
     };
+    declare type Writable = {
+      write(rec: BunyanRecord): void
+  }
     declare class Logger extends events$EventEmitter {
         constructor(options: LoggerOptions): any;
         addStream(stream: Stream): void;
         addSerializers(serializers: Serializers): void;
-        child(opts: LoggerOptions, simple?: boolean): Logger;
+        child(opts?: LoggerOptions, simple?: boolean): Logger;
         reopenFileStreams(): void;
         level(): string | number;
         level(value: number | string): void;
@@ -89,7 +92,6 @@ declare module 'bunyan' {
         }
     }
     declare interface LoggerOptions {
-        name: string;
         streams?: Array<Stream>;
         level?: BunyanLogLevels | string,
         stream?:  stream$Writable;
@@ -103,14 +105,14 @@ declare module 'bunyan' {
         type?: string;
         level?: number | string;
         path?: string;
-        stream?: stream$Writable | tty$WriteStream | Stream;
+        stream?: stream$Writable | tty$WriteStream | Stream | Writable;
         closeOnExit?: boolean;
         period?: string;
         count?: number;
     }
     declare var stdSerializers: Serializers;
     declare function resolveLevel(value: number | string): number;
-    declare function createLogger(options: LoggerOptions): Logger;
+    declare function createLogger(options: LoggerOptions & { name: string }): Logger;
     declare class RingBuffer extends events$EventEmitter {
         constructor(options: RingBufferOptions): any;
         writable: boolean;

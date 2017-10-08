@@ -55,7 +55,7 @@ class AxiosExtended extends axios.Axios {
 
 const extended = new AxiosExtended();
 axios.all([
-  extended.specialPut()
+  extended.specialPut('foo')
     .then((r) => {
         // $ExpectError
         (r.statusText: number)

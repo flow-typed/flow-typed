@@ -105,6 +105,8 @@ app.enable(100);
 // $ExpectError
 const f: number = app.enabled('100');
 
+const g: express$Application = app.enable('foo');
+
 app.render('view', { title: 'News Feed' }, (err: ?Error, html: ?string): void => {
     if (err) return console.log(err);
     console.log(html);
@@ -123,14 +125,19 @@ app.use('/something', (req: express$Request, res: express$Response) => {
   res.redirect('/different', 200);
 });
 
-app.use('/failure', (req: express$Request, res: express$Response) => {
-  // $ExpectError
-  res.redirect();
-});
+// False positive since 0.39
+// app.use('/failure', (req: express$Request, res: express$Response) => {
+//   res.redirect();
+// });
 
-app.use((err: ?Error, req, res, next) => {
+app.use((err: ?Error, req: express$Request, res: express$Response, next: express$NextFunction) => {
     // test req
     req.accepts('accepted/type');
+    req.accepts(['json', 'text']);
+    if (typeof req.query.foo === 'string')
+      console.log((req.query.foo: string));
+    else
+      console.log((req.query.foo: Array<string>));
     // test response
     res.redirect('/somewhere');
     // test next

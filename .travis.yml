@@ -2,20 +2,19 @@ sudo: false
 language: node_js
 node_js:
   - '6'
-  - '7'
-compiler: clang-3.6
+  - '8'
 env:
-  - CXX=clang-3.6
+  - CXX=g++-4.8
 addons:
   apt:
     sources:
-      #- llvm-toolchain-precise-3.6
       - ubuntu-toolchain-r-test
     packages:
       - unzip
-      #- clang-3.6
-      - clang
       - g++-4.8
+before_install:
+  - git config --global user.name "Travis CI"
+  - git config --global user.email "travis@flowtyped.com"
 script: ./travis.sh
 cache:
   directories:

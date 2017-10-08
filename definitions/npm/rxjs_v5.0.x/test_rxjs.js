@@ -54,6 +54,10 @@ const combined: Observable<{n: number, s: string}> = Observable.combineLatest(
 
 const combined2: Observable<[number, string]> = Observable.combineLatest(numbers, strings);
 
+const combined3: Observable<[number]> = Observable.combineLatest(
+  numbers
+);
+
 // $ExpectError
 const combinedBad: Observable<{n: number, s: string}> = Observable.combineLatest(
   numbers,
@@ -61,16 +65,16 @@ const combinedBad: Observable<{n: number, s: string}> = Observable.combineLatest
   (n, s) => ({n, s})
 );
 
-const combined3: Observable<{n: number, s: string}> = Observable.forkJoin(
+const forked: Observable<{n: number, s: string}> = Observable.forkJoin(
   numbers,
   strings,
   (n, s) => ({n, s})
 );
 
-const combined4: Observable<[number, string]> = Observable.forkJoin(numbers, strings);
+const forked2: Observable<[number, string]> = Observable.forkJoin(numbers, strings);
 
 // $ExpectError
-const combinedBad2: Observable<{n: number, s: string}> = Observable.forkJoin(
+const forkedBad: Observable<{n: number, s: string}> = Observable.forkJoin(
   numbers,
   numbers,
   (n, s) => ({n, s})
@@ -162,3 +166,39 @@ const groupedSubObservable: Observable<Observable<SubFoo>> =
   subObservable.groupBy(subfoo => subfoo.y);
 
 ((Observable.defer(() => Promise.resolve(1))): Observable<number>);
+
+function f1(cb: (err: Error, result: number) => void): void {}
+function f2(x: string, cb: (err: Error, result: number) => void): void {}
+(Observable.bindNodeCallback(f1)(): Observable<number>);
+(Observable.bindNodeCallback(f2)('arg'): Observable<number>);
+// $ExpectError
+(Observable.bindNodeCallback(f1)(): Observable<string>);
+// $ExpectError
+(Observable.bindNodeCallback(f2)('arg'): Observable<string>);
+
+function f3(cb: (result: number) => void): void {}
+function f4(x: string, cb: (result: number) => void): void {}
+(Observable.bindCallback(f3)(): Observable<number>);
+(Observable.bindCallback(f4)('arg'): Observable<number>);
+// $ExpectError
+(Observable.bindCallback(f3)(): Observable<string>);
+// $ExpectError
+(Observable.bindCallback(f4)('arg'): Observable<string>);
+
+numbers.takeWhile(n => n < 3);
+numbers.takeWhile((n, i) => n < 3 && i < 2);
+
+numbers.skipWhile(n => n < 2);
+numbers.skipWhile((n, i) => n < 2 && i < 1);
+
+numbers.filter(n => n < 3);
+numbers.filter((n, i) => n < 3 && i < 2);
+numbers.filter(
+  function(n) {
+    return this.x === 'bar' && n < 3;
+  },
+  {x: 'bar'}, // thisArg
+);
+
+Observable.of('a').expand(x => Observable.of(x + x)).subscribe(() => {});
+Observable.of(1).expand((x, i) => Observable.of(x + i)).subscribe(() => {});

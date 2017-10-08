@@ -9,4 +9,7 @@
   "presets": [
     "es2015",
   ],
+  "ignore": [
+    "__*-fixtures__"
+  ]
 }

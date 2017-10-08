@@ -34,8 +34,8 @@ declare module 'bull' {
     retry(): Promise<any>,
   }
   declare class Queue {
-    static (queueName: string, redisPort: number, redisHost: string, redisOptions: Object): Queue,
-    static (queueName: string, redisPort: number, redisHost: string): Queue,
+    static (queueName: string, redisPort: number, redisHost: string, redisOptions?: Object): Queue,
+    constructor (queueName: string, redisPort: number, redisHost: string, redisOptions?: Object): Queue,
     process(callback: callbackOrPromise): void,
     process(concurrency: number, callback: callbackOrPromise): void,
     add(data: Object, opts: Object): Promise<Job>,

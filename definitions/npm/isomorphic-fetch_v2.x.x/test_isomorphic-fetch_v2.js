@@ -10,9 +10,6 @@ isoFetch('foo', {
     method: 'GET'
 });
 
-// $ExpectError foo is not a valid method
-isoFetch('foo', { method: 'foo' });
-
 isoFetch('foo', {
     body: 'bar'
 });
@@ -38,9 +35,6 @@ isoFetch('foo').then(res => {
     (res.headers.get('test'): string);
     // $ExpectError
     (res.headers.get(5): string);
-    (res.headers.getAll('foo'): Array<string>);
-    // $ExpectError
-    (res.headers.getAll(5): Array<string>);
     (res.headers.has('foo'): boolean);
     // $ExpectError
     (res.headers.has(5): boolean);

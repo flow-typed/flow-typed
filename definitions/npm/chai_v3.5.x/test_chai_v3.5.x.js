@@ -70,6 +70,7 @@ expect({a: 1, b: 2}).to.have.key("a");
 expect({a: 1, b: 2}).to.have.keys("a", "b");
 expect({a: 1, b: 2}).to.have.keys(["a", "b"]);
 
+expect(() => {}).to.throw();
 expect(() => {}).to.throw(Error);
 expect(() => {}).to.throw(new Error("stuff"));
 expect(() => {}).to.throw("stuff");
@@ -115,3 +116,16 @@ assert.instanceOf(instance, SampleClass, "instance check");
 // $ExpectError
 assert.instanceOf(instance, instance);
 assert.notInstanceOf(instance, Array);
+
+// tests for chai-as-promised
+expect(Promise.resolve(true)).to.eventually.equal(true).notify(function() {});
+expect(Promise.resolve(true)).to.eventually.be.resolved().then(function() {}).catch(function() {});
+expect(Promise.resolve(true)).to.eventually.be.resolvedWith(true).then(function() {}).catch(function() {});
+expect(Promise.resolve(true)).to.eventually.be.rejected().then(function() {}).catch(function() {});
+expect(Promise.resolve(true)).to.eventually.be.rejectedWith(Error).then(function() {}).catch(function() {});
+
+// tests for chai-subset
+expect({}).to.containSubset({});
+expect([{}]).to.containSubset([{}]);
+// $ExpectError
+expect({}).to.containSubset(0);

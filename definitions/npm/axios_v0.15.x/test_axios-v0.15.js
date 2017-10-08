@@ -21,6 +21,8 @@ const client = axios.create();
 
 client.post('/something', {});
 
+(client.defaults.headers.common.Authorization = 'test')
+
 const source: CancelTokenSource = axios.CancelToken.source();
 source.token.promise.then((cancel: Cancel) => {
   const x: string = cancel.message;
@@ -74,7 +76,7 @@ class AxiosExtended extends axios.Axios {
 
 const extended = new AxiosExtended();
 axios.all([
-  extended.specialPut()
+  extended.specialPut('foo')
     .then((r) => {
         // $ExpectError
         (r.statusText: number)

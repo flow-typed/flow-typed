@@ -35,7 +35,7 @@ import type { Task, Channel, Buffer, SagaMonitor } from 'redux-saga';
 
 import type {
   IOEffect,
-  TakeEffect,
+  TakePatternEffect,
   PutEffect,
   SelectEffect,
 } from 'redux-saga/effects';
@@ -142,6 +142,9 @@ function takeTest() {
   take(['FOO', 'BAR']);
   takem(['FOO', 'BAR']);
 
+  take({ take: (cb) => undefined, close: () => undefined, put: (msg) => undefined });
+  takem({ take: (cb) => undefined, close: () => undefined, put: (msg) => undefined });
+
   // $ExpectError: PatternFn returns a boolean
   take((action) => null);
 
@@ -153,6 +156,18 @@ function takeTest() {
 
   // $ExpectError: Only string patterns for arrays
   takem(['FOO', 'BAR', 1]);
+
+  // $ExpectError: Channels must have take prop
+  take({ close: () => undefined, put: (msg) => undefined });
+
+  // $ExpectError: Channels must have take prop
+  takem({ close: () => undefined, put: (msg) => undefined });
+
+  // $ExpectError: Channels must have close prop
+  take({ take: (cb) => undefined, put: (msg) => undefined });
+
+  // $ExpectError: Channels must have close prop
+  takem({ take: (cb) => undefined, put: (msg) => undefined });
 }
 
 function putTest() {
@@ -809,7 +824,7 @@ function raceTest() {
   });
 
   // Should recognize the RACE data structure
-  (r.RACE.foo: TakeEffect<string>);
+  (r.RACE.foo: TakePatternEffect<string>);
   (r.RACE.bar: PutEffect<{ type: string }>);
 
   // $ExpectError: ReduxEffects have a hidden symbol
@@ -1060,9 +1075,6 @@ function createSagaMiddlewareTest() {
   middleware.run(g5, '1', 2, '3', 4, '5');
   middleware.run(g6, '1', 2, '3', 4, '5', 6);
   middleware.run(gList);
-
-  // $ExpectError: Too few arguments
-  middleware.run(g6, '1', 2, '3');
 
   // $ExpectError: Boolean argument should be string
   middleware.run(g3, true, 2, '3');

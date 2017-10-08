@@ -1,68 +1,69 @@
 {
   "name": "flow-typed",
-  "version": "2.0.0",
   "description": "A repository of high quality flowtype definitions",
+  "license": "MIT",
+  "homepage": "https://github.com/flowtype/flow-typed#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowtype/flow-typed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flowtype/flow-typed/issues"
+  },
+  "version": "2.2.0",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "scripts": {
-    "clean": "rimraf dist",
     "build": "mkdirp dist && babel ./src --out-dir=./dist",
-    "flow": "flow && test \"$? -eq 0 -o $? -eq 2\"",
+    "clean": "rimraf dist",
+    "flow": "flow",
     "lint": "eslint .",
     "prepublish": "mkdirp dist && npm run test",
     "test": "npm run clean && npm run build && npm run test-quick",
     "test-quick": "jest && npm run lint",
     "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/flowtype/flow-typed.git"
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "colors": "^1.1.2",
+    "fs-extra": "^4.0.0",
+    "github": "0.2.4",
+    "glob": "^7.1.2",
+    "got": "^7.1.0",
+    "md5": "^2.1.0",
+    "mkdirp": "^0.5.1",
+    "request": "^2.81.0",
+    "rimraf": "^2.6.1",
+    "semver": "^5.1.0",
+    "table": "^4.0.1",
+    "through": "^2.3.8",
+    "unzip": "^0.1.11",
+    "which": "^1.2.14",
+    "yargs": "^4.2.0"
   },
-  "keywords": [
-    "flow",
-    "flowtype"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/flowtype/flow-typed/issues"
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-syntax-async-functions": "^6.5.0",
+    "babel-plugin-syntax-trailing-function-commas": "^6.22.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-regenerator": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.2.0",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "flow-bin": "0.50.0",
+    "jest": "^20.0.4",
+    "prettier": "^1.5.3"
   },
-  "homepage": "https://github.com/flowtype/flow-typed#readme",
+  "keywords": ["flow", "flowtype"],
   "jest": {
     "name": "flow-typed-cli",
     "modulePathIgnorePatterns": [
-      "<rootDir>/dist/.*"
-    ]
-  },
-  "devDependencies": {
-    "babel-cli": "^6.6.5",
-    "babel-eslint": "^6.0.4",
-    "babel-plugin-syntax-async-functions": "^6.5.0",
-    "babel-plugin-syntax-trailing-function-commas": "^6.8.0",
-    "babel-plugin-transform-flow-strip-types": "^6.7.0",
-    "babel-plugin-transform-object-rest-spread": "6.6.5",
-    "babel-plugin-transform-regenerator": "^6.6.5",
-    "babel-preset-es2015": "^6.6.0",
-    "chokidar": "^1.6.1",
-    "eslint": "^2.9.0",
-    "eslint-plugin-flow-vars": "^0.4.0",
-    "flow-bin": "^0.35",
-    "jest": "^17.0.3",
-    "rimraf": "^2.5.4"
-  },
-  "dependencies": {
-    "babel-polyfill": "^6.6.1",
-    "colors": "^1.1.2",
-    "github": "^0.2.4",
-    "glob": "^7.0.6",
-    "lodash": "^4.11.2",
-    "md5": "^2.1.0",
-    "mkdirp": "^0.5.1",
-    "request": "^2.69.0",
-    "rx-lite": "4.0.8",
-    "semver": "^5.1.0",
-    "table": "^3.7.8",
-    "through": "^2.3.8",
-    "which": "^1.2.11",
-    "yargs": "^4.2.0"
+      "<rootDir>/dist/.*",
+      "<rootDir>/node_modules/.*"
+    ],
+    "testPathIgnorePatterns": ["<rootDir>/.*/__[^/]*-fixtures__/.*"]
   }
 }
