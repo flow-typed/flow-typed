@@ -23,7 +23,7 @@ declare module "react-i18next" {
   }>;
 
   declare function translate<OP, P>(
-    locales: Locales,
+    locales?: Locales,
     options?: TranslateOptions
   ): Translator<OP, P>;
 
