@@ -1,10 +1,10 @@
 declare module 'react-addons-css-transition-group' {
   declare type ReactCSSTransitionGroupNames = {
-    enter: string,
+    enter?: string,
     enterActive?: string,
-    leave: string,
+    leave?: string,
     leaveActive?: string,
-    appear: string,
+    appear?: string,
     appearActive?: string
   };
   declare type Props = {
