@@ -33,61 +33,65 @@ describe('npmLibDefs', () => {
         UNDERSCORE_PATH,
         null,
         'underscore_v1.x.x',
-        errs
+        errs,
       );
       expect([...errs.entries()]).toEqual([]);
-      expect(defs).toEqual([
-        {
-          flowVersion: {
-            kind: 'ranged',
-            lower: {
-              major: 0,
-              minor: 13,
-              patch: 'x',
-              prerel: null,
+      expect(defs).toEqual(
+        expect.arrayContaining([
+          {
+            flowVersion: {
+              kind: 'ranged',
+              lower: {
+                major: 0,
+                minor: 13,
+                patch: 'x',
+                prerel: null,
+              },
+              upper: {
+                major: 0,
+                minor: 37,
+                patch: 'x',
+                prerel: null,
+              },
             },
-            upper: {
-              major: 0,
-              minor: 37,
-              patch: 'x',
-              prerel: null,
-            },
+            name: 'underscore',
+            path: path.join(
+              UNDERSCORE_PATH,
+              'flow_v0.13.x-v0.37.x',
+              'underscore_v1.x.x.js',
+            ),
+            scope: null,
+            testFilePaths: [
+              path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
+            ],
+            version: 'v1.x.x',
           },
-          name: 'underscore',
-          path: path.join(
-            UNDERSCORE_PATH,
-            'flow_v0.13.x-v0.37.x',
-            'underscore_v1.x.x.js',
-          ),
-          scope: null,
-          testFilePaths: [path.join(UNDERSCORE_PATH, 'test_underscore-v1.js')],
-          version: 'v1.x.x',
-        },
-        {
-          flowVersion: {
-            kind: 'ranged',
-            lower: {
-              major: 0,
-              minor: 38,
-              patch: 'x',
-              prerel: null,
+          {
+            flowVersion: {
+              kind: 'ranged',
+              lower: {
+                major: 0,
+                minor: 38,
+                patch: 'x',
+                prerel: null,
+              },
+              upper: null,
             },
-            upper: null,
+            name: 'underscore',
+            path: path.join(
+              UNDERSCORE_PATH,
+              'flow_v0.38.x-',
+              'underscore_v1.x.x.js',
+            ),
+            scope: null,
+            testFilePaths: [
+              path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
+              path.join(UNDERSCORE_PATH, 'flow_v0.38.x-', 'test_underscore.js'),
+            ],
+            version: 'v1.x.x',
           },
-          name: 'underscore',
-          path: path.join(
-            UNDERSCORE_PATH,
-            'flow_v0.38.x-',
-            'underscore_v1.x.x.js',
-          ),
-          scope: null,
-          testFilePaths: [
-            path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
-            path.join(UNDERSCORE_PATH, 'flow_v0.38.x-', 'test_underscore.js'),
-          ],
-          version: 'v1.x.x',
-        },
-      ]);
+        ]),
+      );
     });
 
     it('fails on bad package dir name', async () => {
