@@ -78,12 +78,12 @@ declare type JasmineMatchers = {
 }
 
 declare var jasmine: {
-  createSpy(name: string): JasmineSpyType;
-  any(val: mixed): void;
-  anything(): void;
-  objectContaining(val: Object): void;
-  arrayContaining(val: mixed[]): void;
-  stringMatching(val: string): void;
-  clock(): JasmineClockType;
-  addMatchers(val: JasmineMatchers): void;
+  createSpy(name?: string): JasmineSpyType,
+  any(val: mixed): void,
+  anything(): void,
+  objectContaining(val: Object): void,
+  arrayContaining(val: mixed[]): void,
+  stringMatching(val: string): void,
+  clock(): JasmineClockType,
+  addMatchers(val: JasmineMatchers): void
 }
