@@ -152,7 +152,7 @@ async function writeStub(
     }
   }
 
-  const flowVersionRaw = await determineFlowVersion(projectRoot);
+  const flowVersionRaw = await determineFlowVersion();
   const flowVersion = flowVersionRaw
     ? `/flow_${versionToString(flowVersionRaw)}`
     : '';

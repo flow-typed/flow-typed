@@ -47,35 +47,15 @@ async function writePkgJson(filePath, pkgJson) {
 
 describe('install (command)', () => {
   describe('determineFlowVersion', () => {
-    it('infers version from path if arg not passed', () => {
-      return testProject(async ROOT_DIR => {
-        const ARBITRARY_PATH = path.join(ROOT_DIR, 'some', 'arbitrary', 'path');
-        await Promise.all([
-          mkdirp(ARBITRARY_PATH),
-          touchFile(path.join(ROOT_DIR, '.flowconfig')),
-          writePkgJson(path.join(ROOT_DIR, 'package.json'), {
-            name: 'test',
-            devDependencies: {
-              'flow-bin': '^0.40.0',
-            },
-          }),
-        ]);
-
-        const flowVer = await determineFlowVersion(ARBITRARY_PATH);
-        expect(flowVer).toEqual({
-          kind: 'specific',
-          ver: {
-            major: 0,
-            minor: 40,
-            patch: 0,
-            prerel: null,
-          },
-        });
+    it('infers version from the eather if arg not passed', () => {
+      return testProject(async _ROOT_DIR => {
+        const flowVer = await determineFlowVersion();
+        expect(flowVer.kind).toEqual('specific');
       });
     });
 
     it('uses explicitly specified version', async () => {
-      const explicitVer = await determineFlowVersion('/', '0.7.0');
+      const explicitVer = await determineFlowVersion('0.7.0');
       expect(explicitVer).toEqual({
         kind: 'specific',
         ver: {
@@ -88,7 +68,7 @@ describe('install (command)', () => {
     });
 
     it("uses 'v'-prefixed explicitly specified version", async () => {
-      const explicitVer = await determineFlowVersion('/', 'v0.7.0');
+      const explicitVer = await determineFlowVersion('v0.7.0');
       expect(explicitVer).toEqual({
         kind: 'specific',
         ver: {
