@@ -64,7 +64,7 @@ class FlowErrorClassComp extends React.Component<Props> {
   }
 }
 
-// $ExpectError - too few arguments
+// passing
 translate();
 // $ExpectError - wrong argument type
 translate({});
