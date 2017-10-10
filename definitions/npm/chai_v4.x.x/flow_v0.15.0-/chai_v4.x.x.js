@@ -240,7 +240,10 @@ declare module "chai" {
       err?: Class<E> | Error | RegExp | string,
       errorMsgMatcher?: string | RegExp,
       msg?: string
-    ): void
+    ): void,
+
+    static closeTo(actual: number, expected: number, delta: number, msg?: string): void,
+    static approximately(actual: number, expected: number, delta: number, msg?: string): void
   }
 
   declare var config: {
