@@ -1,11 +1,11 @@
 import MapView from 'react-native-maps';
 
 // $ExpectError
-<MapView initialRegion="mexico" />
+const A = <MapView initialRegion="mexico" />;
 
-<MapView />
+const B = <MapView />;
 
 // $ExpectError
-<MapView.Marker />
+const C = <MapView.Marker />;
 
-<MapView.Marker coordinate={{ latitude: 50, longitude: 50 }} />
+const D = <MapView.Marker coordinate={{ latitude: 50, longitude: 50 }} />;
