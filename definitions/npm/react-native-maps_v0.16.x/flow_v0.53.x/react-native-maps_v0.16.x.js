@@ -37,9 +37,7 @@ declare module 'react-native-maps' {
     position: Point;
   }
 
-  declare export class InteractWithMapEvent<+T: EventTarget = EventTarget> extends SyntheticEvent<
-    T,
-  > {
+  declare export class InteractWithMapEvent extends SyntheticEvent<*> {
     nativeEvent: EventWithCoordinateAndPosition;
   }
 
@@ -71,16 +69,16 @@ declare module 'react-native-maps' {
     legalLabelInsets?: EdgeInsets,
     onRegionChange?: (region: Region) => void,
     onRegionChangeComplete?: (region: Region) => void,
-    onPress?: (event: InteractWithMapEvent<*>) => void,
-    onPanDrag?: (event: InteractWithMapEvent<*>) => void,
-    onLongPress?: (event: InteractWithMapEvent<*>) => void,
+    onPress?: (event: InteractWithMapEvent) => void,
+    onPanDrag?: (event: InteractWithMapEvent) => void,
+    onLongPress?: (event: InteractWithMapEvent) => void,
     onMarkerPress?: (event: SyntheticEvent<*>) => void,
     onMarkerSelect?: (event: SyntheticEvent<*>) => void,
     onMarkerDeselect?: (event: SyntheticEvent<*>) => void,
     onCalloutPress?: (event: SyntheticEvent<*>) => void,
-    onMarkerDragStart?: (event: InteractWithMapEvent<*>) => void,
-    onMarkerDrag?: (event: InteractWithMapEvent<*>) => void,
-    onMarkerDragEnd?: (event: InteractWithMapEvent<*>) => void,
+    onMarkerDragStart?: (event: InteractWithMapEvent) => void,
+    onMarkerDrag?: (event: InteractWithMapEvent) => void,
+    onMarkerDragEnd?: (event: InteractWithMapEvent) => void,
   };
 
   declare type ImageSourcePropType =
@@ -113,13 +111,13 @@ declare module 'react-native-maps' {
     identifier?: String,
     rotation?: number,
     draggable?: ?boolean,
-    onPress?: (event: InteractWithMapEvent<*>) => void,
-    onSelect?: (event: InteractWithMapEvent<*>) => void,
-    onDeselect?: (event: InteractWithMapEvent<*>) => void,
+    onPress?: (event: InteractWithMapEvent) => void,
+    onSelect?: (event: InteractWithMapEvent) => void,
+    onDeselect?: (event: InteractWithMapEvent) => void,
     onCalloutPress?: (event: SyntheticEvent<*>) => void,
-    onDragStart?: (event: InteractWithMapEvent<*>) => void,
-    onDrag?: (event: InteractWithMapEvent<*>) => void,
-    onDragEnd?: (event: InteractWithMapEvent<*>) => void,
+    onDragStart?: (event: InteractWithMapEvent) => void,
+    onDrag?: (event: InteractWithMapEvent) => void,
+    onDragEnd?: (event: InteractWithMapEvent) => void,
   };
 
   declare class Marker extends React$Component<MarkerProps> {
