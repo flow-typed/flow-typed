@@ -114,3 +114,99 @@ knex("foo").havingRaw();
 knex("foo").whereRaw();
 // $ExpectError
 knex("foo").joinRaw();
+
+
+/**
+ * Knex.orWhere()
+ */
+
+knex("foo").orWhere((qb) => {
+  qb.where("a", "b");
+});
+knex("foo").orWhere("column", "value");
+knex("foo").orWhere("column", "operator", "value");
+knex("foo").orWhere({
+  col1: "val1",
+  col2: "val2"
+});
+
+// $ExpectError
+knex("foo").orWhere();
+// $ExpectError
+knex("foo").orWhere(1, 1);
+// $ExpectError
+knex("foo").orWhere(1, 1, 1);
+// $ExpectError
+knex("foo").orWhere(true);
+
+
+/**
+ * Knex.where()
+ */
+
+knex('foo').where((qb) => {
+  qb.where('a', 'b');
+});
+knex('foo').where('column', 'value');
+knex('foo').where('column', 'operator', 'value');
+knex('foo').where({
+  col1: 'val1',
+  col2: 'val2'
+});
+
+// $ExpectError
+knex('foo').where();
+// $ExpectError
+knex('foo').where(1, 1);
+// $ExpectError
+knex('foo').where(1, 1, 1);
+// $ExpectError
+knex('foo').where(true);
+
+
+/**
+ * Knex.whereNot()
+ */
+
+knex("foo").whereNot((qb) => {
+  qb.whereNot("a", "b");
+});
+knex("foo").whereNot("column", "value");
+knex("foo").whereNot("column", "operator", "value");
+knex("foo").whereNot({
+  col1: "val1",
+  col2: "val2"
+});
+
+// $ExpectError
+knex("foo").whereNot();
+// $ExpectError
+knex("foo").whereNot(1, 1);
+// $ExpectError
+knex("foo").whereNot(1, 1, 1);
+// $ExpectError
+knex("foo").whereNot(true);
+
+
+/**
+ * Knex.orWhereNot()
+ */
+
+knex("foo").orWhereNot((qb) => {
+  qb.where("a", "b");
+});
+knex("foo").orWhereNot("column", "value");
+knex("foo").orWhereNot("column", "operator", "value");
+knex("foo").orWhereNot({
+  col1: "val1",
+  col2: "val2"
+});
+
+// $ExpectError
+knex("foo").orWhereNot();
+// $ExpectError
+knex("foo").orWhereNot(1, 1);
+// $ExpectError
+knex("foo").orWhereNot(1, 1, 1);
+// $ExpectError
+knex("foo").orWhereNot(true);
