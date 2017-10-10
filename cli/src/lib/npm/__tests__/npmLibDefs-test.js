@@ -34,61 +34,64 @@ describe('npmLibDefs', () => {
         null,
         'underscore_v1.x.x',
         errs,
-        true,
       );
       expect([...errs.entries()]).toEqual([]);
-      expect(defs).toEqual([
-        {
-          flowVersion: {
-            kind: 'ranged',
-            lower: {
-              major: 0,
-              minor: 13,
-              patch: 'x',
-              prerel: null,
+      expect(defs).toEqual(
+        expect.arrayContaining([
+          {
+            flowVersion: {
+              kind: 'ranged',
+              lower: {
+                major: 0,
+                minor: 13,
+                patch: 'x',
+                prerel: null,
+              },
+              upper: {
+                major: 0,
+                minor: 37,
+                patch: 'x',
+                prerel: null,
+              },
             },
-            upper: {
-              major: 0,
-              minor: 37,
-              patch: 'x',
-              prerel: null,
-            },
+            name: 'underscore',
+            path: path.join(
+              UNDERSCORE_PATH,
+              'flow_v0.13.x-v0.37.x',
+              'underscore_v1.x.x.js',
+            ),
+            scope: null,
+            testFilePaths: [
+              path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
+            ],
+            version: 'v1.x.x',
           },
-          name: 'underscore',
-          path: path.join(
-            UNDERSCORE_PATH,
-            'flow_v0.13.x-v0.37.x',
-            'underscore_v1.x.x.js',
-          ),
-          scope: null,
-          testFilePaths: [path.join(UNDERSCORE_PATH, 'test_underscore-v1.js')],
-          version: 'v1.x.x',
-        },
-        {
-          flowVersion: {
-            kind: 'ranged',
-            lower: {
-              major: 0,
-              minor: 38,
-              patch: 'x',
-              prerel: null,
+          {
+            flowVersion: {
+              kind: 'ranged',
+              lower: {
+                major: 0,
+                minor: 38,
+                patch: 'x',
+                prerel: null,
+              },
+              upper: null,
             },
-            upper: null,
+            name: 'underscore',
+            path: path.join(
+              UNDERSCORE_PATH,
+              'flow_v0.38.x-',
+              'underscore_v1.x.x.js',
+            ),
+            scope: null,
+            testFilePaths: [
+              path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
+              path.join(UNDERSCORE_PATH, 'flow_v0.38.x-', 'test_underscore.js'),
+            ],
+            version: 'v1.x.x',
           },
-          name: 'underscore',
-          path: path.join(
-            UNDERSCORE_PATH,
-            'flow_v0.38.x-',
-            'underscore_v1.x.x.js',
-          ),
-          scope: null,
-          testFilePaths: [
-            path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
-            path.join(UNDERSCORE_PATH, 'flow_v0.38.x-', 'test_underscore.js'),
-          ],
-          version: 'v1.x.x',
-        },
-      ]);
+        ]),
+      );
     });
 
     it('fails on bad package dir name', async () => {
@@ -268,28 +271,29 @@ describe('npmLibDefs', () => {
       ]);
     });
 
-    it('fails if libdef not published on npm', async () => {
-      const TOTALLY_NOT_REAL_PKG_PATH = path.join(
-        FIXTURE_ROOT,
-        'pkg-not-on-npm',
-        'definitions',
-        'npm',
-        'totally-not-real-pkg_v1.x.x',
-      );
+    // Fails at random (see #1229)
+    // it('fails if libdef not published on npm', async () => {
+    //   const TOTALLY_NOT_REAL_PKG_PATH = path.join(
+    //     FIXTURE_ROOT,
+    //     'pkg-not-on-npm',
+    //     'definitions',
+    //     'npm',
+    //     'totally-not-real-pkg_v1.x.x',
+    //   );
 
-      const errs = new Map();
-      const defsPromise2 = extractLibDefsFromNpmPkgDir(
-        TOTALLY_NOT_REAL_PKG_PATH,
-        null,
-        'totally-not-real-pkg_v1.x.x',
-        errs,
-        true,
-      );
-      expect((await defsPromise2).length).toBe(2);
-      expect([...errs.entries()]).toEqual([
-        ['totally-not-real-pkg', ['Package does not exist on npm!']],
-      ]);
-    });
+    //   const errs = new Map();
+    //   const defsPromise2 = extractLibDefsFromNpmPkgDir(
+    //     TOTALLY_NOT_REAL_PKG_PATH,
+    //     null,
+    //     'totally-not-real-pkg_v1.x.x',
+    //     errs,
+    //     true,
+    //   );
+    //   expect((await defsPromise2).length).toBe(2);
+    //   expect([...errs.entries()]).toEqual([
+    //     ['totally-not-real-pkg', ['Package does not exist on npm!']],
+    //   ]);
+    // });
   });
 
   describe('getInstalledNpmLibDefs', () => {
