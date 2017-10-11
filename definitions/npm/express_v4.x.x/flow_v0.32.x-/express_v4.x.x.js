@@ -149,7 +149,7 @@ declare class express$Router extends express$Route {
   handle(req: http$IncomingMessage, res: http$ServerResponse, next: express$NextFunction): void;
   param(
     param: string,
-    (req: $Subtype<express$Request>, res: express$Response, next: express$NextFunction, id: string) => mixed
+    ((req: $Subtype<express$Request>, res: express$Response, next: express$NextFunction, id: string) => mixed)
   ): this;
 
   // Can't use regular callable signature syntax due to https://github.com/facebook/flow/issues/3084
