@@ -178,7 +178,7 @@ export function parseDirString(
   if (verStr.substr(0, 'flow_'.length) !== 'flow_') {
     validationError(
       context,
-      'Flow versions must start with `flow-`',
+      'Flow versions must start with `flow_`',
       validationErrs,
     );
     return {kind: 'all'};
@@ -186,7 +186,7 @@ export function parseDirString(
 
   const afterPrefix = verStr.substr('flow_'.length);
 
-  if (afterPrefix === 'all') {
+  if (afterPrefix === 'all' || afterPrefix === 'vx.x.x') {
     return {kind: 'all'};
   } else if (afterPrefix[0] === '-') {
     return {
