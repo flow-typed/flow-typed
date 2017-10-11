@@ -147,6 +147,15 @@ declare class express$Router extends express$Route {
   use(path: string|RegExp|string[], ...middleware: Array<express$Middleware>): this;
   use(path: string, router: express$Router): this;
   handle(req: http$IncomingMessage, res: http$ServerResponse, next: express$NextFunction): void;
+  param(
+    param: string,
+    callback: (
+      req: $Subtype<express$Request>,
+      res: express$Response,
+      next: express$NextFunction,
+      id: string
+    ) => mixed
+  ): void;
 
   // Can't use regular callable signature syntax due to https://github.com/facebook/flow/issues/3084
   $call: (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction) => void;
