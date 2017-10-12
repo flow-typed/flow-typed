@@ -6,6 +6,6 @@ type $npm$classnames$Classes =
   | void
   | null;
 
-declare module 'classnames' {
+declare module "classnames" {
   declare function exports(...classes: Array<$npm$classnames$Classes>): string;
 }
