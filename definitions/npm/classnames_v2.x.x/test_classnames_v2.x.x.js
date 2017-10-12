@@ -15,6 +15,9 @@ classnames({ a: null, b: undefined });
 classnames(undefined);
 classnames(null);
 classnames("a", false);
+classnames("a", ["b", null, { c: "truthy", d: null }]);
 
 // $ExpectError
 classnames(42);
+// $ExpectError
+classnames("a", ["b", 42]);
