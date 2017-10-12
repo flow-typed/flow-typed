@@ -46,10 +46,7 @@ type TestGroup = {
  * structs. Each TestGroup represents a Package/PackageVersion/FlowVersion
  * directory.
  */
-const escapedPathSep = path.sep === '\\' ? '\\\\' : path.sep;
-const basePathRegex = new RegExp(
-  `definitions${escapedPathSep}npm${escapedPathSep}(\@[^${escapedPathSep}]*${escapedPathSep})?[^${escapedPathSep}]*${escapedPathSep}?`,
-);
+const basePathRegex = new RegExp('definitions/npm/(@[^/]*/)?[^/]*/?');
 async function getTestGroups(
   repoDirPath,
   onlyChanged: boolean = false,
@@ -71,9 +68,7 @@ async function getTestGroups(
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
   return libDefs.map(libDef => {
-    const groupID =
-      `${libDef.pkgName}_${libDef.pkgVersionStr}${path.sep}` +
-      `${libDef.flowVersionStr}`;
+    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
     return {
       id: groupID,
       testFilePaths: libDef.testFilePaths,
@@ -283,8 +278,7 @@ async function runTestGroup(
 ): Promise<Array<string>> {
   // Some older versions of Flow choke on ">"/"<"/"="
   const testDirName = testGroup.id
-    .split(path.sep)
-    .join('--')
+    .replace('/', '--')
     .replace(/>/g, 'gt')
     .replace(/</g, 'lt')
     .replace(/=/g, 'eq');
