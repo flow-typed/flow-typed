@@ -49,6 +49,18 @@ createSelector(
 );
 // END TEST
 
+// TEST: Should work when using another selector as functions
+const simpleSelector = (state: State): string => "foo";
+const resultSelector = (arg: string): string => "foo";
+
+const combinedSelector1 = createSelector(simpleSelector, resultSelector);
+
+const combinedSelector2: (state: State) => string = createSelector(
+  combinedSelector1,
+  resultSelector
+);
+// END TEST
+
 // TEST: Should pass for additional arguments
 createSelector(
   (state: State, props: TestProps, test) => state.x + props.x + test,
@@ -63,6 +75,15 @@ createSelector(
   },
   10
 );
+// END TEST
+
+// TEST: props as second argument
+const selector = createSelector(
+  (state: State, props) => "foo",
+  state => "bar",
+  (result1, result2) => result1 + result2
+);
+
 // END TEST
 
 defaultMemoize((a: number) => a + 1)(2);
