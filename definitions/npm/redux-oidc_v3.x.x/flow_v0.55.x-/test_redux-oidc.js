@@ -6,6 +6,7 @@ const reduxOidc = require("redux-oidc");
 // $ExpectError: flow-typed doesn't support pulling in _other_ modules yet?
 const redux = require("redux");
 // This was also attempted, but still no joy.
+// See https://github.com/flowtype/flow-typed/issues/1331
 // const redux = require('../../redux_v3.x.x/flow_v0.33.x-/redux_v3.x.x.js')
 
 const CallbackComponent = reduxOidc.CallbackComponent;
