@@ -30,7 +30,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   params: express$RequestParams;
   path: string;
   protocol: 'https' | 'http';
-  query: {[name: string]: string};
+  query: {[name: string]: string | Array<string>};
   route: string;
   secure: boolean;
   signedCookies: {[signedCookie: string]: string};
@@ -99,8 +99,8 @@ declare class express$Response extends http$ServerResponse mixins express$Reques
 
 declare type express$NextFunction = (err?: ?Error | 'route') => mixed;
 declare type express$Middleware =
-  ((req: express$Request, res: express$Response, next: express$NextFunction) => mixed) |
-  ((error: ?Error, req: express$Request, res: express$Response, next: express$NextFunction) => mixed);
+  ((req: $Subtype<express$Request>, res: express$Response, next: express$NextFunction) => mixed) |
+  ((error: Error, req: $Subtype<express$Request>, res: express$Response, next: express$NextFunction) => mixed);
 declare interface express$RouteMethodType<T> {
   (middleware: express$Middleware): T;
   (...middleware: Array<express$Middleware>): T;
@@ -147,6 +147,15 @@ declare class express$Router extends express$Route {
   use(path: string|RegExp|string[], ...middleware: Array<express$Middleware>): this;
   use(path: string, router: express$Router): this;
   handle(req: http$IncomingMessage, res: http$ServerResponse, next: express$NextFunction): void;
+  param(
+    param: string,
+    callback: (
+      req: $Subtype<express$Request>,
+      res: express$Response,
+      next: express$NextFunction,
+      id: string
+    ) => mixed
+  ): void;
 
   // Can't use regular callable signature syntax due to https://github.com/facebook/flow/issues/3084
   $call: (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction) => void;

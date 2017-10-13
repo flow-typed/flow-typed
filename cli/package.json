@@ -1,41 +1,45 @@
 {
   "name": "flow-typed",
-  "version": "2.1.5",
   "description": "A repository of high quality flowtype definitions",
+  "license": "MIT",
+  "homepage": "https://github.com/flowtype/flow-typed#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowtype/flow-typed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/flowtype/flow-typed/issues"
+  },
+  "version": "2.2.0",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "scripts": {
-    "clean": "rimraf dist",
     "build": "mkdirp dist && babel ./src --out-dir=./dist",
+    "clean": "rimraf dist",
     "flow": "flow",
-    "lint": "eslint .",
+    "lint": "eslint .; exit 0",
     "prepublish": "mkdirp dist && npm run test",
     "test": "npm run clean && npm run build && npm run test-quick",
     "test-quick": "jest && npm run lint",
     "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/flowtype/flow-typed.git"
-  },
-  "keywords": [
-    "flow",
-    "flowtype"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/flowtype/flow-typed/issues"
-  },
-  "homepage": "https://github.com/flowtype/flow-typed#readme",
-  "jest": {
-    "name": "flow-typed-cli",
-    "modulePathIgnorePatterns": [
-      "<rootDir>/dist/.*",
-      "<rootDir>/node_modules/.*"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/.*/__[^/]*-fixtures__/.*"
-    ]
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "colors": "^1.1.2",
+    "fs-extra": "^4.0.0",
+    "github": "0.2.4",
+    "glob": "^7.1.2",
+    "got": "^7.1.0",
+    "md5": "^2.1.0",
+    "mkdirp": "^0.5.1",
+    "request": "^2.81.0",
+    "rimraf": "^2.6.1",
+    "semver": "^5.1.0",
+    "table": "^4.0.1",
+    "through": "^2.3.8",
+    "unzip": "^0.1.11",
+    "which": "^1.2.14",
+    "yargs": "^4.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -53,22 +57,13 @@
     "jest": "^20.0.4",
     "prettier": "^1.5.3"
   },
-  "dependencies": {
-    "babel-polyfill": "^6.23.0",
-    "colors": "^1.1.2",
-    "fs-extra": "^4.0.0",
-    "github": "^9.2.0",
-    "glob": "^7.1.2",
-    "got": "^7.1.0",
-    "md5": "^2.1.0",
-    "mkdirp": "^0.5.1",
-    "request": "^2.81.0",
-    "rimraf": "^2.6.1",
-    "semver": "^5.1.0",
-    "table": "^4.0.1",
-    "through": "^2.3.8",
-    "unzip": "^0.1.11",
-    "which": "^1.2.14",
-    "yargs": "^4.2.0"
+  "keywords": ["flow", "flowtype"],
+  "jest": {
+    "name": "flow-typed-cli",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist/.*",
+      "<rootDir>/node_modules/.*"
+    ],
+    "testPathIgnorePatterns": ["<rootDir>/.*/__[^/]*-fixtures__/.*"]
   }
 }

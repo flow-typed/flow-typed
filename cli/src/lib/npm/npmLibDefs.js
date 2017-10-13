@@ -82,11 +82,12 @@ async function extractLibDefsFromNpmPkgDir(
   const pkgDirItems = await fs.readdir(pkgDirPath);
 
   if (validating) {
-    await _npmExists(pkgName).then().catch(error => {
+    const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}`;
+    await _npmExists(fullPkgName).then().catch(error => {
       // Only fail spen on 404, not on timeout
       if (error.statusCode === 404) {
         const pkgError = `Package does not exist on npm!`;
-        validationError(pkgName, pkgError, validationErrors);
+        validationError(fullPkgName, pkgError, validationErrors);
       }
     });
   }
@@ -367,7 +368,7 @@ function filterLibDefs(
 }
 
 async function _npmExists(pkgName: string): Promise<Function> {
-  const pkgUrl = `https://www.npmjs.org/package/${pkgName}`;
+  const pkgUrl = `https://www.npmjs.com/package/${pkgName}`;
   return got(pkgUrl, {method: 'HEAD'});
 }
 
@@ -441,11 +442,16 @@ export async function getInstalledNpmLibDefs(
             }
             const {pkgName, pkgVersion} = pkgNameVer;
 
-            const flowVerMatches = matches[4].match(/^flow_(>=|<=)?(v.+)$/);
-            const flowDirStr =
+            const flowVerMatches = matches[4].match(
+              /^flow_(>=|<=)?(v[^ ]+) ?(<=(v.+))?$/,
+            );
+            const flowVerStr =
               flowVerMatches == null
-                ? `flow_${matches[3]}`
-                : `flow_${flowVerMatches[2]}`;
+                ? matches[3]
+                : flowVerMatches[3] == null
+                  ? flowVerMatches[2]
+                  : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
+            const flowDirStr = `flow_${flowVerStr}`;
             const context = `${nameVer}/${flowDirStr}`;
             const flowVer =
               flowVerMatches == null

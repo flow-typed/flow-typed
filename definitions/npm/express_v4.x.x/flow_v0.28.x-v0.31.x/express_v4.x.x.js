@@ -24,7 +24,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   params: {[param: string]: string};
   path: string;
   protocol: 'https' | 'http';
-  query: {[name: string]: string};
+  query: {[name: string]: string | Array<string>};
   route: string;
   secure: boolean;
   signedCookies: {[signedCookie: string]: string};
@@ -93,7 +93,7 @@ declare class express$Response extends http$ClientRequest mixins express$Request
 declare type express$NextFunction = (err?: ?Error | 'route') => mixed;
 declare type express$Middleware =
   ((req: express$Request, res: express$Response, next: express$NextFunction) => mixed) |
-  ((error: ?Error, req: express$Request, res: express$Response, next: express$NextFunction) => mixed);
+  ((error: Error, req: express$Request, res: express$Response, next: express$NextFunction) => mixed);
 declare interface express$RouteMethodType<T> {
   (middleware: express$Middleware): T;
   (...middleware: Array<express$Middleware>): T;

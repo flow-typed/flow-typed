@@ -7,7 +7,7 @@ declare module 'sanitize-html' {
   }
   declare type SanitizeOptions = {
     allowedTags?: Array<string>|false,
-    allowedAttributes?: {[key: string]: Array<string>}[]|false,
+    allowedAttributes?: {[key: string]: Array<string>}[]|Object|false,
     transformTags?: {[key: string]: string|(tagName: string, attribs: Object) => { tagName: string, attribs: Object}},
     exclusiveFilter?: (frame: Frame) => bool,
     textFilter?: (text: string) => string,
