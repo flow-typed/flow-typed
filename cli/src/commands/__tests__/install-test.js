@@ -160,7 +160,7 @@ describe('install (command)', () => {
       },
     );
 
-    it('errors if 0 dependencies are found in package.json', () => {
+    it('warns if 0 dependencies are found in package.json', () => {
       return testProject(async ROOT_DIR => {
         await Promise.all([
           touchFile(path.join(ROOT_DIR, '.flowconfig')),
@@ -178,7 +178,7 @@ describe('install (command)', () => {
           skip: false,
           ignoreDeps: [],
         });
-        expect(result).toBe(1);
+        expect(result).toBe(0);
         expect(_mock(console.error).mock.calls).toEqual([
           ["No dependencies were found in this project's package.json!"],
         ]);

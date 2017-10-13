@@ -206,7 +206,7 @@ async function installNpmLibDefs({
       console.error(
         "No dependencies were found in this project's package.json!",
       );
-      return 1;
+      return 0;
     }
 
     if (verbose) {
