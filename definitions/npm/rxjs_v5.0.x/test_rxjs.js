@@ -18,6 +18,8 @@ const bogusStrings: Observable<string> = numbers.map(x => x);
 
 (numbers.audit(() => strings): Observable<number>);
 
+(numbers.auditTime(250): Observable<number>);
+
 // $ExpectError
 numbers.subscribe((x: string) => {});
 strings.subscribe((x: string) => {});
