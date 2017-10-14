@@ -3,7 +3,7 @@ import React from "react";
 import Collapsible from "react-collapsible";
 
 var success = (
-  <Collapsible trigger="Click me" invalid="invalid">
+  <Collapsible trigger="Click me">
     <p>Children</p>
   </Collapsible>
 );
