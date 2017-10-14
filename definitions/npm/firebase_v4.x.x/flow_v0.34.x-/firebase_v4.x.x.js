@@ -66,6 +66,7 @@ declare class $npm$firebase$App {
   +options: $npm$firebase$Config,
   auth(): $npm$firebase$auth$Auth,
   database(): $npm$firebase$database$Database,
+  storage(): $npm$firebase$storage$Storage,
   delete(): Promise<void>
 }
 
@@ -425,6 +426,128 @@ declare class $npm$firebase$database$ServerValue {
 
 declare class $npm$firebase$database$ThenableReference extends $npm$firebase$database$Reference {}
 
+/** **** storage ******/
+declare type $npm$firebase$storage$StringFormat =
+  | "raw"
+  | "base64"
+  | "base64url"
+  | "data_url";
+declare type $npm$firebase$storage$TaskEvent = "state_changed";
+declare type $npm$firebase$storage$TaskState =
+  | "running"
+  | "paused"
+  | "success"
+  | "canceled"
+  | "error";
+
+declare class $npm$firebase$storage$Storage {
+  app: $npm$firebase$App,
+  maxOperationRetryTime: number,
+  maxUploadRetryTime: number,
+  ref(path?: string): $npm$firebase$storage$Reference,
+  refFromURL(url: string): $npm$firebase$storage$Reference,
+  setMaxOperationRetryTime(time: number): void,
+  setMaxUploadRetryTime(time: number): void
+}
+
+declare class $npm$firebase$storage$FullMetadata extends $npm$firebase$storage$UploadMetadata {
+  bucket: string,
+  downloadURLs: Array<string>,
+  fullPath: string,
+  generation: string,
+  metageneration: string,
+  name: string,
+  size: number,
+  timeCreated: string,
+  updated: string
+}
+
+declare class $npm$firebase$storage$Reference {
+  bucket: string,
+  fullPath: string,
+  name: string,
+  parent?: $npm$firebase$storage$Reference,
+  root: $npm$firebase$storage$Reference,
+  storage: $npm$firebase$storage$Storage,
+  child(path: string): $npm$firebase$storage$Reference,
+  delete(): Promise<void>,
+  getDownloadURL(): Promise<string>,
+  getMetadata(): Promise<$npm$firebase$storage$FullMetadata>,
+  put(
+    data: Blob | Uint8Array | ArrayBuffer,
+    metadata?: $npm$firebase$storage$UploadMetadata
+  ): $npm$firebase$storage$UploadTask,
+  putString(
+    data: string,
+    format: $npm$firebase$storage$StringFormat,
+    metadata?: $npm$firebase$storage$UploadMetadata
+  ): $npm$firebase$storage$UploadTask,
+  toString(): string,
+  updateMetadata(
+    metadata: $npm$firebase$storage$SettableMetadata
+  ): Promise<$npm$firebase$storage$FullMetadata>
+}
+
+declare class $npm$firebase$storage$SettableMetadata {
+  cacheControl?: string,
+  contentDisposition?: string,
+  contentEncoding?: string,
+  contentLanguage?: string,
+  contentType?: string,
+  customMetadata?: { [key: string]: string | void }
+}
+
+declare class $npm$firebase$storage$UploadMetadata extends $npm$firebase$storage$SettableMetadata {
+  md5Hash?: string
+}
+
+declare interface $npm$firebase$storage$Observer {
+  next: (snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void,
+  error?: (error: Error) => void,
+  complete?: () => void
+}
+
+declare type $npm$firebase$storage$Unsubscribe = () => void;
+
+declare type $npm$firebase$storage$Subscribe = (
+  observerOrNext:
+    | $npm$firebase$storage$Observer
+    | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void),
+  onError?: (error: Error) => void,
+  onComplete?: () => void
+) => $npm$firebase$storage$Unsubscribe;
+
+declare class $npm$firebase$storage$UploadTask extends Promise<
+  $npm$firebase$storage$UploadTaskSnapshot
+> {
+  snapshot: $npm$firebase$storage$UploadTaskSnapshot,
+  cancel(): boolean,
+  on(
+    event: $npm$firebase$storage$TaskEvent,
+    ...rest: Array<void>
+  ): $npm$firebase$storage$Subscribe,
+  on(
+    event: $npm$firebase$storage$TaskEvent,
+    observerOrNext:
+      | $npm$firebase$storage$Observer
+      | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void),
+    onError?: (error: Error) => void,
+    onComplete?: () => void
+  ): $npm$firebase$storage$Unsubscribe,
+  pause(): boolean,
+  resume(): boolean
+}
+
+declare class $npm$firebase$storage$UploadTaskSnapshot {
+  bytesTransferred: number,
+  downloadURL?: string,
+  metadata: $npm$firebase$storage$FullMetadata,
+  ref: $npm$firebase$storage$Reference,
+  state: $npm$firebase$storage$TaskState,
+  task: $npm$firebase$storage$UploadTask,
+  totalBytes: number
+}
+
 // Exporting the types
 declare module "firebase" {
   declare module.exports: {
@@ -473,6 +596,16 @@ declare module "firebase" {
       Reference: typeof $npm$firebase$database$Reference,
       ServerValue: typeof $npm$firebase$database$ServerValue,
       ThenableReference: typeof $npm$firebase$database$ThenableReference
+    },
+    storage: {
+      (app?: $npm$firebase$App): $npm$firebase$storage$Storage,
+      Storage: typeof $npm$firebase$storage$Storage,
+      FullMetadata: typeof $npm$firebase$storage$FullMetadata,
+      Reference: typeof $npm$firebase$storage$Reference,
+      SettableMetadata: typeof $npm$firebase$storage$SettableMetadata,
+      UploadMetadata: typeof $npm$firebase$storage$UploadMetadata,
+      UploadTask: typeof $npm$firebase$storage$UploadTask,
+      UploadTaskSnapshot: typeof $npm$firebase$storage$UploadTaskSnapshot
     }
   };
 }
@@ -502,7 +635,6 @@ declare module "firebase/auth" {
     TwitterAuthProvider: typeof $npm$firebase$auth$TwitterAuthProvider
   };
 }
-
 declare module "firebase/database" {
   declare module.exports: {
     (app?: $npm$firebase$App): $npm$firebase$database$Database,
@@ -517,5 +649,17 @@ declare module "firebase/database" {
     Reference: typeof $npm$firebase$database$Reference,
     ServerValue: typeof $npm$firebase$database$ServerValue,
     ThenableReference: typeof $npm$firebase$database$ThenableReference
+  };
+}
+declare module "firebase/storage" {
+  declare module.exports: {
+    (app?: $npm$firebase$App): $npm$firebase$storage$Storage,
+    Storage: typeof $npm$firebase$storage$Storage,
+    FullMetadata: typeof $npm$firebase$storage$FullMetadata,
+    Reference: typeof $npm$firebase$storage$Reference,
+    SettableMetadata: typeof $npm$firebase$storage$SettableMetadata,
+    UploadMetadata: typeof $npm$firebase$storage$UploadMetadata,
+    UploadTask: typeof $npm$firebase$storage$UploadTask,
+    UploadTaskSnapshot: typeof $npm$firebase$storage$UploadTaskSnapshot
   };
 }
