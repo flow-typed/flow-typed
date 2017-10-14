@@ -72,9 +72,9 @@ firebase.auth()
 
 // #8
 const provider2 = new firebase.auth.EmailAuthProvider();
-// $ExpectError
 firebase.auth()
   .currentUser
+  // $ExpectError
   .linkWithPopup(provider2)
   .then(result => {
     (result.credential);
