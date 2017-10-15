@@ -31,8 +31,9 @@ app.post("/post-router-callable", router);
 const httpServer = http.createServer(app);
 httpServer.listen(9000);
 
+const badHttpServer = null;
 // $ExpectError
-httpServer.listen([]);
+badHttpServer.listen();
 
 // Can manually invoke app.handle() to handle a request
 const httpServer2 = http.createServer((req, res) => app.handle(req, res));
