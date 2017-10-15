@@ -32,7 +32,7 @@ const httpServer = http.createServer(app);
 httpServer.listen(9000);
 
 // $ExpectError
-httpServer.listen(3, 3, 3, 3);
+httpServer.listen([]);
 
 // Can manually invoke app.handle() to handle a request
 const httpServer2 = http.createServer((req, res) => app.handle(req, res));
