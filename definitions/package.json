@@ -23,11 +23,13 @@
   },
   "lint-staged": {
     "gitDir": "../",
-    "package.json": [
-      "prettier-package-json --write",
-      "prettier --write",
-      "git add"
-    ],
-    "*.js": ["prettier --write", "git add"]
+    "linters": {
+      "package.json": [
+        "prettier-package-json --write",
+        "prettier --write",
+        "git add"
+      ],
+      "*.js": ["prettier --write", "git add"]
+    }
   }
 }
