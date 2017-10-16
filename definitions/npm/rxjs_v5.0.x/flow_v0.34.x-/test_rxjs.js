@@ -80,3 +80,18 @@ const project: Array<Observable<string>> = [
     (x, y, index1, index2) => String(x + y + index1 + index2)
   )
 ];
+
+(Observable.range(0, 10, Scheduler.asap): Observable<number>);
+(numbers.bufferTime(1, 1, 1, Scheduler.asap): Observable<Array<number>>);
+(Observable.of(1).defaultIfEmpty(null): Observable<?number>);
+(Observable.of(1).defaultIfEmpty(1): Observable<number>);
+(Observable.of(1).timeoutWith(100, Observable.of(null)): Observable<?number>);
+
+(Observable.of(1).groupBy(elem => ""): Observable<
+  rxjs$GroupedObservable<string, number>
+>);
+(Observable.of(1).groupBy(
+  elem => elem,
+  elem => String(elem),
+  grouped => Observable.never()
+): Observable<rxjs$GroupedObservable<number, string>>);

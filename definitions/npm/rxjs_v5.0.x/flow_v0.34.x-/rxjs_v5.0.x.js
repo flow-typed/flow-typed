@@ -329,6 +329,12 @@ declare class rxjs$Observable<+T> {
 
   static of(...values: T[]): rxjs$Observable<T>,
 
+  static range(
+    start?: number,
+    count?: number,
+    scheduler?: rxjs$SchedulerClass
+  ): rxjs$Observable<number>,
+
   static throw(error: any): rxjs$Observable<any>,
 
   audit(
@@ -344,6 +350,13 @@ declare class rxjs$Observable<+T> {
   bufferCount(
     bufferSize: number,
     startBufferEvery?: number
+  ): rxjs$Observable<Array<T>>,
+
+  bufferTime(
+    bufferTimeSpan: number,
+    bufferCreationInterval?: number,
+    maxBufferSize?: number,
+    scheduler?: rxjs$SchedulerClass
   ): rxjs$Observable<Array<T>>,
 
   catch<U>(
@@ -372,6 +385,8 @@ declare class rxjs$Observable<+T> {
     dueTime: number,
     scheduler?: rxjs$SchedulerClass
   ): rxjs$Observable<T>,
+
+  defaultIfEmpty<U>(defaultValue: U): rxjs$Observable<T | U>,
 
   delay(dueTime: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>,
 
@@ -437,11 +452,17 @@ declare class rxjs$Observable<+T> {
     defaultValue: U
   ): rxjs$Observable<U>,
 
-  groupBy(
-    keySelector: (value: T) => mixed,
-    elementSelector?: (value: T) => T,
-    compare?: (x: T, y: T) => boolean
-  ): rxjs$Observable<rxjs$Observable<T>>,
+  groupBy<K>(
+    keySelector: (value: T) => K,
+    _: void
+  ): rxjs$Observable<rxjs$GroupedObservable<K, T>>,
+  groupBy<K, V>(
+    keySelector: (value: T) => K,
+    elementSelector: (value: T) => V,
+    durationSelector?: (
+      grouped: rxjs$GroupedObservable<K, V>
+    ) => rxjs$Observable<any>
+  ): rxjs$Observable<rxjs$GroupedObservable<K, V>>,
 
   ignoreElements<U>(): rxjs$Observable<U>,
 
@@ -616,6 +637,12 @@ declare class rxjs$Observable<+T> {
   throttleTime(duration: number): rxjs$Observable<T>,
 
   timeout(due: number | Date, _: void): rxjs$Observable<T>,
+
+  timeoutWith<U>(
+    due: number | Date,
+    withObservable: rxjs$Observable<U>,
+    scheduler?: rxjs$SchedulerClass
+  ): rxjs$Observable<T | U>,
 
   toArray(): rxjs$Observable<T[]>,
 
@@ -999,6 +1026,10 @@ declare class rxjs$Observable<+T> {
 declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
   connect(): rxjs$Subscription,
   refCount(): rxjs$Observable<T>
+}
+
+declare class rxjs$GroupedObservable<K, V> extends rxjs$Observable<V> {
+  key: K
 }
 
 declare class rxjs$Observer<T> {
