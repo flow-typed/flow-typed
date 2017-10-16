@@ -580,18 +580,10 @@ export function filterLibDefs(
       switch (filter.type) {
         case 'exact':
           if (packageNameMatch(def.pkgName, filter.pkgName)) {
-            try {
-              filterMatch = libdefMatchesPackageVersion(filter.pkgVersionStr, def.pkgVersionStr);
-            } catch(error) {
-              if (error.message.indexOf('Invalid comparator') > -1) {
-                console.error(
-                  `\u2022 Unprocessible version of '${filter.pkgName}' ` +
-                  `in package.json: '${filter.pkgVersionStr}'.`
-                );
-              } else {
-                throw error;
-              }
-            }
+            filterMatch = libdefMatchesPackageVersion(
+              filter.pkgVersionStr,
+              def.pkgVersionStr,
+            );
           }
           break;
 
