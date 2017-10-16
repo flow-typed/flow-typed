@@ -142,3 +142,16 @@ app.use((err: Error, req: express$Request, res: express$Response, next: express$
     next();
     next(err);
 });
+
+// $ExpectError path could not be an Object
+const invalidPath: express$Path = {};
+
+let validPath: express$Path = 'string_path';
+validPath = 'pattern?path';
+validPath = new RegExp('some.*regexp');
+
+const validPaths = ['string', 'pattern?', /a[b-f]+g/];
+
+app.get(validPaths, (req: express$Request, res: express$Response) => {
+  res.end();
+});
