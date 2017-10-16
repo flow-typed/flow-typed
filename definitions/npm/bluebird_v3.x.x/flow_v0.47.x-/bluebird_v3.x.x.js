@@ -139,7 +139,8 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
 
   constructor(callback: (
     resolve: (result?: $Promisable<R>) => void,
-    reject: (error?: any) => void
+    reject: (error?: any) => void,
+    onCancel?: (callback: () => void) => void
   ) => mixed): void;
   then<U>(onFulfill?: (value: R) => $Promisable<U>, onReject?: (error: any) => $Promisable<U>): Bluebird$Promise<U>;
 
