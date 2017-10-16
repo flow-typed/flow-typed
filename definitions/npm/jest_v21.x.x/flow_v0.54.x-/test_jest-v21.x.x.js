@@ -1,6 +1,8 @@
 /* @flow */
 /* eslint-disable */
 
+import React from "react";
+
 jest.autoMockOff();
 jest.clearAllMocks();
 jest.resetAllMocks();
@@ -195,7 +197,6 @@ expect([1, 2, 3]).toHaveLength(3);
 
 // $ExpectError
 import { shallow } from "enzyme";
-import React from "react";
 const Dummy = () => <div />;
 const wrapper = shallow(<Dummy />);
 

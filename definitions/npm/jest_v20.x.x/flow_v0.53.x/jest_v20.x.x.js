@@ -1,3 +1,5 @@
+import type { Element } from "react";
+
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
   /**
@@ -42,7 +44,7 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
    * will also be executed when the mock is called.
    */
   mockImplementation(
-    fn: (...args: TArguments) => TReturn,
+    fn: (...args: TArguments) => TReturn
   ): JestMockFn<TArguments, TReturn>,
   /**
    * Accepts a function that will be used as an implementation of the mock for
@@ -50,7 +52,7 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
    * calls produce different results.
    */
   mockImplementationOnce(
-    fn: (...args: TArguments) => TReturn,
+    fn: (...args: TArguments) => TReturn
   ): JestMockFn<TArguments, TReturn>,
   /**
    * Just a simple sugar function for returning `this`
@@ -118,7 +120,7 @@ type EnzymeMatchersType = {
   toBeDisabled(): void,
   toBeEmpty(): void,
   toBePresent(): void,
-  toContainReact(element: React$Element<any>): void,
+  toContainReact(element: Element<*>): void,
   toHaveClassName(className: string): void,
   toHaveHTML(html: string): void,
   toHaveProp(propKey: string, propValue?: any): void,
@@ -129,8 +131,8 @@ type EnzymeMatchersType = {
   toHaveText(text: string): void,
   toIncludeText(text: string): void,
   toHaveValue(value: any): void,
-  toMatchElement(element: React$Element<any>): void,
-  toMatchSelector(selector: string): void,
+  toMatchElement(element: Element<*>): void,
+  toMatchSelector(selector: string): void
 };
 
 type JestExpectType = {
@@ -326,7 +328,7 @@ type JestObjectType = {
    * implementation.
    */
   fn<TArguments: $ReadOnlyArray<*>, TReturn>(
-    implementation?: (...args: TArguments) => TReturn,
+    implementation?: (...args: TArguments) => TReturn
   ): JestMockFn<TArguments, TReturn>,
   /**
    * Determines if the given function is a mocked function.
@@ -415,13 +417,25 @@ type JestSpyType = {
 };
 
 /** Runs this function after every test inside this context */
-declare function afterEach(fn: (done: () => void) => ?Promise<mixed>, timeout?: number): void;
+declare function afterEach(
+  fn: (done: () => void) => ?Promise<mixed>,
+  timeout?: number
+): void;
 /** Runs this function before every test inside this context */
-declare function beforeEach(fn: (done: () => void) => ?Promise<mixed>, timeout?: number): void;
+declare function beforeEach(
+  fn: (done: () => void) => ?Promise<mixed>,
+  timeout?: number
+): void;
 /** Runs this function after all tests have finished inside this context */
-declare function afterAll(fn: (done: () => void) => ?Promise<mixed>, timeout?: number): void;
+declare function afterAll(
+  fn: (done: () => void) => ?Promise<mixed>,
+  timeout?: number
+): void;
 /** Runs this function before any tests have started inside this context */
-declare function beforeAll(fn: (done: () => void) => ?Promise<mixed>, timeout?: number): void;
+declare function beforeAll(
+  fn: (done: () => void) => ?Promise<mixed>,
+  timeout?: number
+): void;
 
 /** A context for grouping tests together */
 declare var describe: {
@@ -438,9 +452,8 @@ declare var describe: {
   /**
    * Skip running this describe block
    */
-  skip(name: string, fn: () => void): void,
+  skip(name: string, fn: () => void): void
 };
-
 
 /** An individual test unit */
 declare var it: {
@@ -451,7 +464,11 @@ declare var it: {
    * @param {Function} Test
    * @param {number} Timeout for the test, in milliseconds.
    */
-  (name: string, fn?: (done: () => void) => ?Promise<mixed>, timeout?: number): void,
+  (
+    name: string,
+    fn?: (done: () => void) => ?Promise<mixed>,
+    timeout?: number
+  ): void,
   /**
    * Only run this test
    *
@@ -459,7 +476,11 @@ declare var it: {
    * @param {Function} Test
    * @param {number} Timeout for the test, in milliseconds.
    */
-  only(name: string, fn?: (done: () => void) => ?Promise<mixed>, timeout?: number): void,
+  only(
+    name: string,
+    fn?: (done: () => void) => ?Promise<mixed>,
+    timeout?: number
+  ): void,
   /**
    * Skip running this test
    *
@@ -467,7 +488,11 @@ declare var it: {
    * @param {Function} Test
    * @param {number} Timeout for the test, in milliseconds.
    */
-  skip(name: string, fn?: (done: () => void) => ?Promise<mixed>, timeout?: number): void,
+  skip(
+    name: string,
+    fn?: (done: () => void) => ?Promise<mixed>,
+    timeout?: number
+  ): void,
   /**
    * Run the test concurrently
    *
@@ -475,12 +500,16 @@ declare var it: {
    * @param {Function} Test
    * @param {number} Timeout for the test, in milliseconds.
    */
-  concurrent(name: string, fn?: (done: () => void) => ?Promise<mixed>, timeout?: number): void,
+  concurrent(
+    name: string,
+    fn?: (done: () => void) => ?Promise<mixed>,
+    timeout?: number
+  ): void
 };
 declare function fit(
   name: string,
   fn: (done: () => void) => ?Promise<mixed>,
-  timeout?: number,
+  timeout?: number
 ): void;
 /** An individual test unit */
 declare var test: typeof it;
