@@ -46,3 +46,37 @@ const anonymousSubject: AnonymousSubject<number> = new AnonymousSubject(
 );
 anonymousSubject.next(5);
 anonymousSubject.error(new Error());
+
+const from: Observable<number> = Observable.from(Promise.resolve(1));
+
+// Standard projection operators
+const project: Array<Observable<string>> = [
+  numbers.switchMap(x => Promise.resolve("")),
+  numbers.switchMap(
+    x => [x],
+    (x, y, index1, index2) => String(x + y + index1 + index2)
+  ),
+  numbers.switchMap(
+    x => [x],
+    (x, y, index1, index2) => String(x + y + index1 + index2)
+  ),
+  numbers.concatMap(
+    x => [x],
+    (x, y, index1, index2) => String(x + y + index1 + index2)
+  ),
+  numbers.mergeMap(x => Observable.of("")),
+  numbers.mergeMap(x => Observable.of(""), 5),
+  numbers.mergeMap(
+    x => [x],
+    (x, y, index1, index2) => String(x + y + index1 + index2),
+    /* concurrency */ 5
+  ),
+  // $ExpectError: the ordering is wrong
+  numbers.mergeMap(x => [x], 5, (x, y, index1, index2) =>
+    String(x + y + index1 + index2)
+  ),
+  numbers.exhaustMap(
+    x => [x],
+    (x, y, index1, index2) => String(x + y + index1 + index2)
+  )
+];

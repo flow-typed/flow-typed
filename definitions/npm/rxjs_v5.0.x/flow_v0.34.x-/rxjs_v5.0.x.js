@@ -39,6 +39,8 @@ type rxjs$EventListenerOptions =
     }
   | boolean;
 
+type rxjs$ObservableInput<T> = rxjs$Observable<T> | Promise<T> | Iterable<T>;
+
 declare class rxjs$Observable<+T> {
   static bindCallback(
     callbackFunc: (callback: (_: void) => any) => any,
@@ -265,7 +267,10 @@ declare class rxjs$Observable<+T> {
     observableFactory: () => rxjs$Observable<T> | Promise<T>
   ): rxjs$Observable<T>,
 
-  static from(iterable: Iterable<T>): rxjs$Observable<T>,
+  static from(
+    input: rxjs$ObservableInput<T>,
+    scheduler?: rxjs$SchedulerClass
+  ): rxjs$Observable<T>,
 
   static fromEvent(
     element: any,
@@ -350,8 +355,18 @@ declare class rxjs$Observable<+T> {
   concatAll<U>(): rxjs$Observable<U>,
 
   concatMap<U>(
-    f: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>
+    f: (value: T, index: number) => rxjs$ObservableInput<U>,
+    _: void
   ): rxjs$Observable<U>,
+  concatMap<U, V>(
+    f: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V
+  ): rxjs$Observable<V>,
 
   debounceTime(
     dueTime: number,
@@ -373,6 +388,20 @@ declare class rxjs$Observable<+T> {
   ): rxjs$Observable<T>,
 
   elementAt(index: number, defaultValue?: T): rxjs$Observable<T>,
+
+  exhaustMap<U>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    _: void
+  ): rxjs$Observable<U>,
+  exhaustMap<U, V>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V
+  ): rxjs$Observable<V>,
 
   expand(
     project: (value: T, index: number) => rxjs$Observable<T>,
@@ -429,9 +458,19 @@ declare class rxjs$Observable<+T> {
 
   // Alias for `mergeMap`
   flatMap<U>(
-    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
-    index?: number
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    concurrency?: number
   ): rxjs$Observable<U>,
+  flatMap<U, V>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V,
+    concurrency?: number
+  ): rxjs$Observable<V>,
 
   flatMapTo<U>(innerObservable: rxjs$Observable<U>): rxjs$Observable<U>,
 
@@ -447,9 +486,18 @@ declare class rxjs$Observable<+T> {
   ): rxjs$Observable<V>,
 
   switchMap<U>(
-    project: (value: T) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
-    index?: number
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    _: void
   ): rxjs$Observable<U>,
+  switchMap<U, V>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V
+  ): rxjs$Observable<V>,
 
   switchMapTo<U>(innerObservable: rxjs$Observable<U>): rxjs$Observable<U>,
 
@@ -462,12 +510,19 @@ declare class rxjs$Observable<+T> {
   mergeAll<U>(): rxjs$Observable<U>,
 
   mergeMap<U>(
-    project: (
-      value: T,
-      index?: number
-    ) => rxjs$Observable<U> | Promise<U> | Iterable<U>,
-    index?: number
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    concurrency?: number
   ): rxjs$Observable<U>,
+  mergeMap<U, V>(
+    project: (value: T, index: number) => rxjs$ObservableInput<U>,
+    resultSelector: (
+      outerValue: T,
+      innerValue: U,
+      outerIndex: number,
+      innerIndex: number
+    ) => V,
+    concurrency?: number
+  ): rxjs$Observable<V>,
 
   mergeMapTo<U>(innerObservable: rxjs$Observable<U>): rxjs$Observable<U>,
 
