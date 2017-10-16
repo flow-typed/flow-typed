@@ -143,7 +143,7 @@ app.use((err: Error, req: express$Request, res: express$Response, next: express$
     next(err);
 });
 
-// $ExpectError Path could not be Object
+// $ExpectError path could not be an Object
 const invalidPath: express$Path = {};
 
 let validPath: express$Path = 'string_path';
