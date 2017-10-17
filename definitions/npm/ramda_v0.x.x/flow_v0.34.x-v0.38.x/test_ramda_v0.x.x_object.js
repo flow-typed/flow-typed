@@ -117,7 +117,14 @@ const path4:void = _.path([ 'a' ], null)
 
 const pathOr: string|Object|number = _.pathOr('N/A', [ 'a', 'b' ], { a: { b: 2 } })
 
-const pck: Object = _.pick([ 'a', 'd' ], { a: 1, b: 2, c: 3, d: 4 })
+const pck1: Object = _.pick([ 'a', 'd' ], { a: 1, b: 2, c: 3, d: 4 })
+//$ExpectError
+const pck2: Object = _.pick([ 'a', 'b' ], { a: 1 })
+// should allow passing in a typed object literal
+const pickedObj: { a: string, b: number, c: boolean } = { a: 'hello', b: 1, c: true }
+const pck3: { a: string, b: number } = _.pick(['a', 'b'], pickedObj)
+//$ExpectError
+const pck4: { a: string, b: string } = _.pick(['a', 'b'], pickedObj)
 
 const ooo = { a: 1, b: 2, A: 3, B: 4 }
 const isUpperCase = (val, key) => key.toUpperCase() === key
