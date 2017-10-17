@@ -226,12 +226,12 @@ declare module "lodash" {
       end?: number
     ): Array<T | U>;
     findIndex<T>(
-      array: ?Array<T>,
+      array: ?$ReadOnlyArray<T>,
       predicate?: Predicate<T>,
       fromIndex?: number
     ): number;
     findLastIndex<T>(
-      array: ?Array<T>,
+      array: ?$ReadOnlyArray<T>,
       predicate?: Predicate<T>,
       fromIndex?: number
     ): number;
@@ -462,7 +462,7 @@ declare module "lodash" {
       predicate?: OPredicate<A, T>
     ): Array<A>;
     find<T>(
-      array: ?Array<T>,
+      array: ?$ReadOnlyArray<T>,
       predicate?: Predicate<T>,
       fromIndex?: number
     ): T | void;
@@ -472,7 +472,7 @@ declare module "lodash" {
       fromIndex?: number
     ): V;
     findLast<T>(
-      array: ?Array<T>,
+      array: ?$ReadOnlyArray<T>,
       predicate?: Predicate<T>,
       fromIndex?: number
     ): T | void;
@@ -1444,35 +1444,37 @@ declare module "lodash/fp" {
       value: U,
       array: Array<T>
     ): Array<T | U>;
-    findIndex<T>(predicate: Predicate<T>): (array: Array<T>) => number;
-    findIndex<T>(predicate: Predicate<T>, array: Array<T>): number;
+    findIndex<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => number;
+    findIndex<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): number;
     findIndexFrom<T>(
       predicate: Predicate<T>
-    ): ((fromIndex: number) => (array: Array<T>) => number) &
-      ((fromIndex: number, array: Array<T>) => number);
+    ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
+      ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
     findIndexFrom<T>(
       predicate: Predicate<T>,
       fromIndex: number
-    ): (array: Array<T>) => number;
+    ): (array: $ReadOnlyArray<T>) => number;
     findIndexFrom<T>(
       predicate: Predicate<T>,
       fromIndex: number,
-      array: Array<T>
+      array: $ReadOnlyArray<T>
     ): number;
-    findLastIndex<T>(predicate: Predicate<T>): (array: Array<T>) => number;
-    findLastIndex<T>(predicate: Predicate<T>, array: Array<T>): number;
+    findLastIndex<T>(
+      predicate: Predicate<T>
+    ): (array: $ReadOnlyArray<T>) => number;
+    findLastIndex<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): number;
     findLastIndexFrom<T>(
       predicate: Predicate<T>
-    ): ((fromIndex: number) => (array: Array<T>) => number) &
-      ((fromIndex: number, array: Array<T>) => number);
+    ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
+      ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
     findLastIndexFrom<T>(
       predicate: Predicate<T>,
       fromIndex: number
-    ): (array: Array<T>) => number;
+    ): (array: $ReadOnlyArray<T>) => number;
     findLastIndexFrom<T>(
       predicate: Predicate<T>,
       fromIndex: number,
-      array: Array<T>
+      array: $ReadOnlyArray<T>
     ): number;
     // alias of _.head
     first<T>(array: Array<T>): T;
@@ -1782,19 +1784,19 @@ declare module "lodash/fp" {
     ): Array<T>;
     find<T>(
       predicate: Predicate<T> | OPredicate<T>
-    ): (collection: Array<T> | { [id: any]: T }) => T | void;
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void;
     find<T>(
       predicate: Predicate<T> | OPredicate<T>,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): T | void;
     findFrom<T>(
       predicate: Predicate<T> | OPredicate<T>
     ): ((
       fromIndex: number
-    ) => (collection: Array<T> | { [id: any]: T }) => T | void) &
+    ) => (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void) &
       ((
         fromIndex: number,
-        collection: Array<T> | { [id: any]: T }
+        collection: $ReadOnlyArray<T> | { [id: any]: T }
       ) => T | void);
     findFrom<T>(
       predicate: Predicate<T> | OPredicate<T>,
@@ -1803,32 +1805,32 @@ declare module "lodash/fp" {
     findFrom<T>(
       predicate: Predicate<T> | OPredicate<T>,
       fromIndex: number,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): T | void;
     findLast<T>(
       predicate: Predicate<T> | OPredicate<T>
-    ): (collection: Array<T> | { [id: any]: T }) => T | void;
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void;
     findLast<T>(
       predicate: Predicate<T> | OPredicate<T>,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): T | void;
     findLastFrom<T>(
       predicate: Predicate<T> | OPredicate<T>
     ): ((
       fromIndex: number
-    ) => (collection: Array<T> | { [id: any]: T }) => T | void) &
+    ) => (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void) &
       ((
         fromIndex: number,
-        collection: Array<T> | { [id: any]: T }
+        collection: $ReadOnlyArray<T> | { [id: any]: T }
       ) => T | void);
     findLastFrom<T>(
       predicate: Predicate<T> | OPredicate<T>,
       fromIndex: number
-    ): (collection: Array<T> | { [id: any]: T }) => T | void;
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => T | void;
     findLastFrom<T>(
       predicate: Predicate<T> | OPredicate<T>,
       fromIndex: number,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): T | void;
     flatMap<T, U>(
       iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>

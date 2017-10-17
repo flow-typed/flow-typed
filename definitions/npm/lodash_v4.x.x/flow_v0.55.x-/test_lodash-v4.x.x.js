@@ -1,37 +1,37 @@
 // @flow
-import assignIn from 'lodash/assignIn';
-import attempt from 'lodash/attempt';
-import clone from 'lodash/clone';
-import concat from 'lodash/concat';
-import conformsTo from 'lodash/conformsTo';
-import countBy from 'lodash/countBy';
-import debounce from 'lodash/debounce';
-import defaultTo from 'lodash/defaultTo';
-import differenceBy from 'lodash/differenceBy';
-import extend from 'lodash/extend';
-import find from 'lodash/find';
-import first from 'lodash/first';
-import flatMap from 'lodash/flatMap';
-import get from 'lodash/get';
-import groupBy from 'lodash/groupBy';
-import intersectionBy from 'lodash/intersectionBy';
-import isEqual from 'lodash/isEqual';
-import isString from 'lodash/isString';
-import keyBy from 'lodash/keyBy';
-import map from 'lodash/map';
-import memoize from 'lodash/memoize';
-import noop from 'lodash/noop';
-import pullAllBy from 'lodash/pullAllBy';
-import range from 'lodash/range';
-import sortedIndexBy from 'lodash/sortedIndexBy';
-import sortedLastIndexBy from 'lodash/sortedLastIndexBy';
-import tap from 'lodash/tap';
-import thru from 'lodash/thru';
-import times from 'lodash/times';
-import unionBy from 'lodash/unionBy';
-import uniqBy from 'lodash/uniqBy';
-import xorBy from 'lodash/xorBy';
-import zip from 'lodash/zip';
+import assignIn from "lodash/assignIn";
+import attempt from "lodash/attempt";
+import clone from "lodash/clone";
+import concat from "lodash/concat";
+import conformsTo from "lodash/conformsTo";
+import countBy from "lodash/countBy";
+import debounce from "lodash/debounce";
+import defaultTo from "lodash/defaultTo";
+import differenceBy from "lodash/differenceBy";
+import extend from "lodash/extend";
+import find from "lodash/find";
+import first from "lodash/first";
+import flatMap from "lodash/flatMap";
+import get from "lodash/get";
+import groupBy from "lodash/groupBy";
+import intersectionBy from "lodash/intersectionBy";
+import isEqual from "lodash/isEqual";
+import isString from "lodash/isString";
+import keyBy from "lodash/keyBy";
+import map from "lodash/map";
+import memoize from "lodash/memoize";
+import noop from "lodash/noop";
+import pullAllBy from "lodash/pullAllBy";
+import range from "lodash/range";
+import sortedIndexBy from "lodash/sortedIndexBy";
+import sortedLastIndexBy from "lodash/sortedLastIndexBy";
+import tap from "lodash/tap";
+import thru from "lodash/thru";
+import times from "lodash/times";
+import unionBy from "lodash/unionBy";
+import uniqBy from "lodash/uniqBy";
+import xorBy from "lodash/xorBy";
+import zip from "lodash/zip";
 
 /**
  * _.attempt
@@ -67,6 +67,7 @@ find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.y == 3);
 find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.x == 3);
 find({ x: 1, y: 2 }, (a: number, b: string) => a);
 find({ x: 1, y: 2 }, { x: 3 });
+find((["a", "b"]: $ReadOnlyArray<string>), "c");
 
 // $ExpectError undefined. This type is incompatible with object type.
 var result: Object = find(users, "active");
@@ -187,11 +188,7 @@ map(users, "user");
 /**
  * _.pullAllBy
  */
-pullAllBy(
-  [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }],
-  [{ x: 1 }, { x: 3 }],
-  "x"
-);
+pullAllBy([{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }], [{ x: 1 }, { x: 3 }], "x");
 
 /**
  * _.unionBy
