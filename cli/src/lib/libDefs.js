@@ -579,12 +579,12 @@ export function filterLibDefs(
       let filterMatch = false;
       switch (filter.type) {
         case 'exact':
-          if (packageNameMatch(def.pkgName, filter.pkgName)) {
-            filterMatch = libdefMatchesPackageVersion(
+          filterMatch =
+            packageNameMatch(def.pkgName, filter.pkgName) &&
+            libdefMatchesPackageVersion(
               filter.pkgVersionStr,
               def.pkgVersionStr,
             );
-          }
           break;
 
         case 'exact-name':
