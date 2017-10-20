@@ -1,0 +1,5 @@
+[libs]
+flow_v0.57.x-/glamorous_v4.x.x.js
+
+[options]
+suppress_comment=\\(.\\|\n\\)*\\$ExpectError
