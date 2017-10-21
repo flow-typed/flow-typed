@@ -1,6 +1,5 @@
 /* @flow */
 /* eslint-disable */
-import * as React from "react";
 
 jest.autoMockOff();
 jest.clearAllMocks();
@@ -11,46 +10,6 @@ jest.atoMockOff();
 
 const mockFn = jest.fn();
 mockFn.mock.calls.map(String).map(a => a + a);
-
-type Foo = {
-  doStuff: string => number
-};
-const foo: Foo = {
-  doStuff(str: string): number {
-    return 5;
-  }
-};
-foo.doStuff = jest.fn().mockImplementation(str => 10);
-foo.doStuff = jest.fn().mockImplementation(str => parseInt(str, 10));
-foo.doStuff = jest.fn().mockImplementation(str => str.indexOf("a"));
-// $ExpectError function `doesntExist` not found in string.
-foo.doStuff = jest.fn().mockImplementation(str => str.doesntExist());
-// $ExpectError Mock function expected to return number, not string.
-foo.doStuff = jest.fn().mockImplementation(str => "10");
-foo.doStuff = jest.fn().mockImplementationOnce(str => 10);
-foo.doStuff = jest.fn().mockImplementationOnce(str => parseInt(str, 10));
-foo.doStuff = jest.fn().mockImplementationOnce(str => str.indexOf("a"));
-// $ExpectError function `doesntExist` not found in string.
-foo.doStuff = jest.fn().mockImplementationOnce(str => str.doesntExist());
-// $ExpectError Mock function expected to return number, not string.
-foo.doStuff = jest.fn().mockImplementationOnce(str => "10");
-
-foo.doStuff = jest.fn().mockReturnValue(10);
-// $ExpectError Mock function expected to return number, not string.
-foo.doStuff = jest.fn().mockReturnValue("10");
-
-foo.doStuff = jest.fn().mockReturnValueOnce(10);
-// $ExpectError Mock function expected to return number, not string.
-foo.doStuff = jest.fn().mockReturnValueOnce("10");
-
-const mockedDoStuff = (foo.doStuff = jest.fn().mockImplementation(str => 10));
-mockedDoStuff.mock.calls[0][0].indexOf("a");
-// $ExpectError function `doesntExist` not found in string.
-mockedDoStuff.mock.calls[0][0].doesntExist("a");
-
-mockedDoStuff.mock.instances[0] > 5;
-// $ExpectError function `doesntExist` not found in number.
-mockedDoStuff.mock.instances[0].indexOf("a");
 
 expect(1).toEqual(1);
 expect(true).toBe(true);
@@ -84,43 +43,6 @@ test.skip("test", () => expect("foo").toMatchSnapshot());
 
 // $ExpectError property `fonly` not found in object type
 test.fonly("test", () => expect("foo").toMatchSnapshot());
-
-test("name", done => {
-  done();
-});
-test.only("name", done => {
-  done();
-});
-test.skip("name", done => {
-  done();
-});
-
-// $ExpectError tests should return void or Promise.
-test("name", () => 5);
-test("name", async () => {});
-test("name", () => new Promise((resolve, reject) => {}));
-// $ExpectError describe does not support Promises.
-describe("name", () => new Promise((resolve, reject) => {}));
-
-beforeEach(() => {});
-beforeEach(() => new Promise((resolve, reject) => {}));
-// $ExpectError Lifecycle methods should return void or Promise.
-beforeEach(() => 5);
-
-beforeAll(() => {});
-beforeAll(() => new Promise((resolve, reject) => {}));
-// $ExpectError Lifecycle methods should return void or Promise.
-beforeAll(() => 5);
-
-afterEach(() => {});
-afterEach(() => new Promise((resolve, reject) => {}));
-// $ExpectError Lifecycle methods should return void or Promise.
-afterEach(() => 5);
-
-afterAll(() => {});
-afterAll(() => new Promise((resolve, reject) => {}));
-// $ExpectError Lifecycle methods should return void or Promise.
-afterAll(() => 5);
 
 xtest("test", () => {});
 
