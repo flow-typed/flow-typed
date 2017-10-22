@@ -57,20 +57,20 @@ declare module "glamorous" {
     Props
   > = React$ComponentType<Props> & { defaultProps: DefaultProps };
 
-  declare type GlamorousOptions<Props, Context, DefaultProps> = $Shape<{|
-    displayName: string,
-    rootEl: string | HTMLElement,
-    filterProps: string[],
-    forwardProps: string[],
-    shouldClassNameUpdate: (
+  declare type GlamorousOptions<Props, Context, WithProps> = {|
+    displayName?: string,
+    rootEl?: string | HTMLElement,
+    filterProps?: string[],
+    forwardProps?: string[],
+    shouldClassNameUpdate?: (
       props: Props,
       prevProps: Props,
       context: Context,
       prevContext: Context
     ) => boolean,
     propsAreCssOverrides?: false,
-    withProps: $Shape<DefaultProps>
-  |}>;
+    withProps?: WithProps
+  |};
 
   declare type GlamorousProps = { className?: string, theme?: Object };
 
@@ -115,7 +115,7 @@ declare module "glamorous" {
   declare export type GlamorousComponent<
     OriginalProps,
     Props,
-    DefaultProps: {} | void = void
+    DefaultProps: {} = {}
   > = Class<GlamorousComponentInstance<OriginalProps, Props, DefaultProps>>;
 
   declare type StyleFunction<Properties, Props> = (
@@ -157,26 +157,26 @@ declare module "glamorous" {
 
   declare type GlamorousHTMLComponentFactory<Tag: HTMLTagName> = <Props>(
     ...styles: StyleArgument<CSSProperties, Props>[]
-  ) => GlamorousComponent<React$ElementProps<Tag>, Props, void>;
+  ) => GlamorousComponent<React$ElementProps<Tag>, Props, {}>;
 
   declare type GlamorousBuiltinComponent<Tag: HTMLTagName> = GlamorousComponent<
     {},
     CSSProperties & React$ElementProps<Tag>,
-    void
+    {}
   >;
 
   declare type Glamorous = {
-    <OriginalProps, Context, DefaultProps: {}>(
+    <OriginalProps, Context, DefaultProps, WithProps: {}>(
       component: ComponentWithDefaultProps<
         DefaultProps,
         OriginalProps & GlamorousProps
       >,
-      options?: GlamorousOptions<OriginalProps, Context, DefaultProps>
+      options?: GlamorousOptions<OriginalProps, Context, WithProps>
     ): GlamorousComponentFactory<OriginalProps, CSSProperties, DefaultProps>,
-    <OriginalProps, Context>(
+    <OriginalProps, Context, WithProps: {}>(
       component: React$ComponentType<OriginalProps & GlamorousProps>,
-      options?: GlamorousOptions<OriginalProps, Context, void>
-    ): GlamorousComponentFactory<OriginalProps, CSSProperties, void>,
+      options?: GlamorousOptions<OriginalProps, Context, WithProps>
+    ): GlamorousComponentFactory<OriginalProps, CSSProperties, {}>,
 
     a: GlamorousHTMLComponentFactory<"a">,
     button: GlamorousHTMLComponentFactory<"button">,

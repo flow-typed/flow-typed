@@ -55,10 +55,10 @@ glamorous(MyDiv, {
   forwardProps: ["a", "b"],
   shouldClassNameUpdate: (props, previousProps, context, previousContext) =>
     true,
-  propsAreCssOverrides: false
-  // withProps: {
-  //   isBlue: true
-  // }
+  propsAreCssOverrides: false,
+  withProps: {
+    isBlue: true
+  }
 })();
 
 <Span marginLeft={3} />;
@@ -107,4 +107,6 @@ const StyledClassComponentWithDefaults = glamorous(
 )();
 
 <StyledClassComponentWithDefaults />;
-// <StyledClassComponentWithDefaults x="3" />;
+<StyledClassComponentWithDefaults x={3} />;
+// $ExpectError
+<StyledClassComponentWithDefaults x="3" />;
