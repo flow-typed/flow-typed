@@ -75,29 +75,29 @@ declare module "glamorous" {
     theme?: Object
   };
 
-  declare type GlamorousComponentFunctions<ExternalProps, Props> = {
+  declare type GlamorousComponentFunctions<OriginalProps, Props> = {
     /**
      * Copies the styles of an already created glamorous component with a different tag
      */
     withComponent: (
       component: string | React$Component<Props>
-    ) => GlamorousComponent<ExternalProps, Props>,
+    ) => GlamorousComponent<OriginalProps, Props>,
 
     /**
      * Applies props by default for a component
      */
     withProps: <DefaultProps: {}>(
       props: DefaultProps
-    ) => GlamorousComponent<ExternalProps & $Shape<DefaultProps>, Props>
+    ) => GlamorousComponent<OriginalProps & $Shape<DefaultProps>, Props>
   };
 
   declare export type GlamorousComponent<
-    ExternalProps,
+    OriginalProps,
     Props
   > = React$StatelessFunctionalComponent<
-    ExternalProps & Props & ExtraGlamorousProps
+    OriginalProps & Props & ExtraGlamorousProps
   > &
-    GlamorousComponentFunctions<ExternalProps, Props>;
+    GlamorousComponentFunctions<OriginalProps, Props>;
 
   declare type StyleFunction<Properties, Props> = (
     props: Props
@@ -124,16 +124,16 @@ declare module "glamorous" {
     | StaticStyleArray<Properties>;
 
   declare type GlamorousComponentFactory<
-    ExternalProps,
+    OriginalProps,
     Properties,
     DefaultProps
   > = {
     <Props: {}>(
       ...styles: StyleArgument<
         Properties,
-        Props & ExternalProps & DefaultProps
+        Props & OriginalProps & DefaultProps
       >[]
-    ): GlamorousComponent<ExternalProps & $Shape<DefaultProps>, Props>
+    ): GlamorousComponent<OriginalProps & $Shape<DefaultProps>, Props>
   };
 
   declare type GlamorousHTMLComponentFactory<Tag: HTMLTagName> = <Props>(
@@ -147,10 +147,10 @@ declare module "glamorous" {
   >;
 
   declare type Glamorous = {
-    <ExternalProps, Context, DefaultProps: {}>(
-      component: React$ComponentType<ExternalProps & GlamorousProps>,
-      options?: GlamorousOptions<ExternalProps, Context, DefaultProps>
-    ): GlamorousComponentFactory<ExternalProps, CSSProperties, DefaultProps>,
+    <OriginalProps, Context, DefaultProps: {}>(
+      component: React$ComponentType<OriginalProps & GlamorousProps>,
+      options?: GlamorousOptions<OriginalProps, Context, DefaultProps>
+    ): GlamorousComponentFactory<OriginalProps, CSSProperties, DefaultProps>,
 
     a: GlamorousHTMLComponentFactory<"a">,
     button: GlamorousHTMLComponentFactory<"button">,
