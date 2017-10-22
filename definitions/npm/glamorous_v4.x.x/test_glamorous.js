@@ -55,15 +55,15 @@ glamorous(MyDiv, {
   forwardProps: ["a", "b"],
   shouldClassNameUpdate: (props, previousProps, context, previousContext) =>
     true,
-  propsAreCssOverrides: false,
-  withProps: {
-    isBlue: true
-  }
+  propsAreCssOverrides: false
+  // withProps: {
+  //   isBlue: true
+  // }
 })();
 
 <Span marginLeft={3} />;
 // $ExpectError
-<Span marginLeft={{}} />;
+<Span marginLeft={true} />;
 <glamorous.Span marginLeft={3} />;
 
 const css: CSSProperties = {
@@ -90,3 +90,21 @@ const StyledClassComponent = glamorous(ClassComponent)();
 // $ExpectError
 <StyledClassComponent />;
 <StyledClassComponent x={3} />;
+
+class ClassComponentWithDefaults extends React.Component<{
+  x: number,
+  className?: string,
+  theme?: Object
+}> {
+  static defaultProps = { x: 3 };
+  render() {
+    return null;
+  }
+}
+
+const StyledClassComponentWithDefaults = glamorous(
+  ClassComponentWithDefaults
+)();
+
+<StyledClassComponentWithDefaults />;
+// <StyledClassComponentWithDefaults x="3" />;

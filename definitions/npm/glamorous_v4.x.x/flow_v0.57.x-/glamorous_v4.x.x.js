@@ -42,6 +42,21 @@ declare module "glamorous" {
     | "tr"
     | "ul";
 
+  declare type ClassComponent<Props, State> = Class<
+    React$Component<Props, State>
+  >;
+
+  declare type ClassComponentWithDefaultProps<
+    DefaultProps,
+    Props,
+    State
+  > = ClassComponent<Props, State> & { defaultProps: DefaultProps };
+
+  declare type ComponentWithDefaultProps<
+    DefaultProps,
+    Props
+  > = React$ComponentType<Props> & { defaultProps: DefaultProps };
+
   declare type GlamorousOptions<Props, Context, DefaultProps> = $Shape<{|
     displayName: string,
     rootEl: string | HTMLElement,
@@ -75,29 +90,33 @@ declare module "glamorous" {
     theme?: Object
   };
 
-  declare type GlamorousComponentFunctions<OriginalProps, Props> = {
+  declare class GlamorousComponentInstance<
+    OriginalProps,
+    Props,
+    DefaultProps
+  > extends React$Component<OriginalProps & Props> {
+    static defaultProps: DefaultProps,
+
     /**
      * Copies the styles of an already created glamorous component with a different tag
      */
-    withComponent: (
+    static withComponent: (
       component: string | React$Component<Props>
     ) => GlamorousComponent<OriginalProps, Props>,
 
     /**
      * Applies props by default for a component
      */
-    withProps: <DefaultProps: {}>(
+    static withProps: <DefaultProps: {}>(
       props: DefaultProps
     ) => GlamorousComponent<OriginalProps & $Shape<DefaultProps>, Props>
-  };
+  }
 
   declare export type GlamorousComponent<
     OriginalProps,
-    Props
-  > = React$StatelessFunctionalComponent<
-    OriginalProps & Props & ExtraGlamorousProps
-  > &
-    GlamorousComponentFunctions<OriginalProps, Props>;
+    Props,
+    DefaultProps: {} | void = void
+  > = Class<GlamorousComponentInstance<OriginalProps, Props, DefaultProps>>;
 
   declare type StyleFunction<Properties, Props> = (
     props: Props
@@ -133,24 +152,31 @@ declare module "glamorous" {
         Properties,
         Props & OriginalProps & DefaultProps
       >[]
-    ): GlamorousComponent<OriginalProps & $Shape<DefaultProps>, Props>
+    ): Class<GlamorousComponentInstance<OriginalProps, Props, DefaultProps>>
   };
 
   declare type GlamorousHTMLComponentFactory<Tag: HTMLTagName> = <Props>(
     ...styles: StyleArgument<CSSProperties, Props>[]
-  ) => GlamorousComponent<React$ElementProps<Tag>, Props>;
+  ) => GlamorousComponent<React$ElementProps<Tag>, Props, void>;
 
-  declare type GlamorousBuiltinComponent<
-    Tag: HTMLTagName
-  > = React$StatelessFunctionalComponent<
-    CSSProperties & ExtraGlamorousProps & React$ElementProps<"span">
+  declare type GlamorousBuiltinComponent<Tag: HTMLTagName> = GlamorousComponent<
+    {},
+    CSSProperties & React$ElementProps<Tag>,
+    void
   >;
 
   declare type Glamorous = {
     <OriginalProps, Context, DefaultProps: {}>(
-      component: React$ComponentType<OriginalProps & GlamorousProps>,
+      component: ComponentWithDefaultProps<
+        DefaultProps,
+        OriginalProps & GlamorousProps
+      >,
       options?: GlamorousOptions<OriginalProps, Context, DefaultProps>
     ): GlamorousComponentFactory<OriginalProps, CSSProperties, DefaultProps>,
+    <OriginalProps, Context>(
+      component: React$ComponentType<OriginalProps & GlamorousProps>,
+      options?: GlamorousOptions<OriginalProps, Context, void>
+    ): GlamorousComponentFactory<OriginalProps, CSSProperties, void>,
 
     a: GlamorousHTMLComponentFactory<"a">,
     button: GlamorousHTMLComponentFactory<"button">,
