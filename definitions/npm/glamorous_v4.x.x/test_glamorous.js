@@ -1,6 +1,10 @@
 // @flow
 import * as React from "react";
-import glamorous, { Span, type GlamorousComponent } from "glamorous";
+import glamorous, {
+  Span,
+  type GlamorousComponent,
+  type CSSProperties
+} from "glamorous";
 
 const canBeBlue = ({ isBlue }: { isBlue: boolean }) => ({
   color: isBlue ? "blue" : "red"
@@ -61,5 +65,12 @@ glamorous(MyDiv, {
 // $ExpectError
 <Span marginLeft={{}} />;
 <glamorous.Span marginLeft={3} />;
+
+const css: CSSProperties = {
+  color: "blue",
+  foo: {
+    color: "blue"
+  }
+};
 
 glamorous.div({ ":first-child": { color: "blue" } });

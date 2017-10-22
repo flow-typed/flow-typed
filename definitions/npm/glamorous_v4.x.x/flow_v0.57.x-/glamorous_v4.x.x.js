@@ -15,6 +15,7 @@ declare module "glamorous" {
   >;
   declare export type CSSProperties = {
     ...CSSPropertiesComplete,
+    $call?: empty,
     [string]: CSSProperties
   };
   declare type SVGProperties = {||};
