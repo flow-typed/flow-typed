@@ -74,3 +74,19 @@ const css: CSSProperties = {
 };
 
 glamorous.div({ ":first-child": { color: "blue" } });
+
+class ClassComponent extends React.Component<{
+  x: number,
+  className?: string,
+  theme?: Object
+}> {
+  render() {
+    return null;
+  }
+}
+
+const StyledClassComponent = glamorous(ClassComponent)();
+
+// $ExpectError
+<StyledClassComponent />;
+<StyledClassComponent x={3} />;
