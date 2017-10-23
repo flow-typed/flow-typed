@@ -121,6 +121,9 @@ declare module "glamorous" {
   declare type StyleFunction<Properties, Props> = (
     props: Props
   ) =>
+    | null
+    | false
+    | void
     | Properties
     | string
     | Array<Properties | string | StyleFunction<Properties, Props>>;
@@ -139,11 +142,6 @@ declare module "glamorous" {
     | string
     | StyleFunction<Properties, Props>
     | StyleArray<Properties, Props>;
-
-  declare type StaticStyleArgument<Properties> =
-    | Properties
-    | string
-    | StaticStyleArray<Properties>;
 
   declare type GlamorousComponentFactory<
     OriginalProps,
@@ -164,7 +162,7 @@ declare module "glamorous" {
 
   declare type GlamorousBuiltinComponent<Tag: HTMLTagName> = GlamorousComponent<
     {},
-    CSSProperties & React$ElementProps<Tag>,
+    CSSPropertiesComplete & React$ElementProps<Tag>,
     {}
   >;
 

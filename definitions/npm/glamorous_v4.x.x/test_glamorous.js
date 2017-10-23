@@ -14,32 +14,52 @@ const margin = ({ ml }: { ml: number }) => ({
   marginLeft: ml
 });
 
-// No css properties
-(glamorous.div(): GlamorousComponent<React$ElementProps<"div">, {}>);
-(glamorous.div(null): GlamorousComponent<React$ElementProps<"div">, {}>);
-(glamorous.div(undefined): GlamorousComponent<React$ElementProps<"div">, {}>);
-(glamorous.div(false): GlamorousComponent<React$ElementProps<"div">, {}>);
-(glamorous.div({}): GlamorousComponent<React$ElementProps<"div">, {}>);
-// $ExpectError: Invalid css properties
-glamorous.div({ notCSS: true });
+// CSS Properties
+{
+  // No css properties
+  (glamorous.div(): GlamorousComponent<React$ElementProps<"div">, {}>);
+  (glamorous.div(null): GlamorousComponent<React$ElementProps<"div">, {}>);
+  (glamorous.div(undefined): GlamorousComponent<React$ElementProps<"div">, {}>);
+  (glamorous.div(false): GlamorousComponent<React$ElementProps<"div">, {}>);
+  (glamorous.div({}): GlamorousComponent<React$ElementProps<"div">, {}>);
+  // $ExpectError: Invalid css properties
+  glamorous.div({ notCSS: true });
 
-// Valid css properties
-(glamorous.div({ color: "red" }): GlamorousComponent<
-  React$ElementProps<"div">,
-  {}
->);
+  // Valid css properties
+  (glamorous.div({ color: "red" }): GlamorousComponent<
+    React$ElementProps<"div">,
+    {}
+  >);
+}
 
-// A style function
-(glamorous.div(canBeBlue): GlamorousComponent<
-  React$ElementProps<"div">,
-  { isBlue: boolean }
->);
+// Style functions
+{
+  // A style function
+  (glamorous.div(canBeBlue): GlamorousComponent<
+    React$ElementProps<"div">,
+    { isBlue: boolean }
+  >);
 
-// Multiple style functions
-(glamorous.div(canBeBlue, margin): GlamorousComponent<
-  React$ElementProps<"div">,
-  { isBlue: boolean, ml: number }
->);
+  // Multiple style functions
+  (glamorous.div(canBeBlue, margin): GlamorousComponent<
+    React$ElementProps<"div">,
+    { isBlue: boolean, ml: number }
+  >);
+
+  // Styles functions that can return falsy values
+  (glamorous.div(() => false): GlamorousComponent<
+    React$ElementProps<"div">,
+    {}
+  >);
+  (glamorous.div(() => undefined): GlamorousComponent<
+    React$ElementProps<"div">,
+    {}
+  >);
+  (glamorous.div(() => null): GlamorousComponent<
+    React$ElementProps<"div">,
+    {}
+  >);
+}
 
 const MyDiv = glamorous.div(canBeBlue);
 // $ExpectError: Enforce style function required props
@@ -71,10 +91,15 @@ glamorous(MyDiv, {
   }
 })();
 
-<Span marginLeft={3} />;
-// $ExpectError
-<Span marginLeft={true} />;
-<glamorous.Span marginLeft={3} />;
+// Built-in components
+{
+  <Span>children</Span>;
+  <Span css={{ marginLeft: 3 }} />;
+  <Span marginLeft={3} />;
+  // $ExpectError
+  <Span marginLeft={true} />;
+  <glamorous.Span marginLeft={3} />;
+}
 
 const css: CSSProperties = {
   color: "blue",
