@@ -117,3 +117,22 @@ const StyledClassComponentWithDefaults = glamorous(
 <StyledClassComponentWithDefaults x={3} />;
 // $ExpectError
 <StyledClassComponentWithDefaults x="3" />;
+
+const ClassComponentWithProps = StyledClassComponent.withProps({ x: 3 });
+
+// withProps extends default props
+<ClassComponentWithProps />;
+// withProps props can be overridden
+<ClassComponentWithProps x={4} />;
+// $ExpectError: withProps preserves prop types
+<ClassComponentWithProps x="3" />;
+
+const ClassComponentWithNoProps = StyledClassComponent.withProps({});
+<ClassComponentWithNoProps x={4} />;
+// $ExpectError: withProps preserves propTypes
+<ClassComponentWithNoProps />;
+// $ExpectError: withProps preserves propTypes
+<ClassComponentWithNoProps x="3" />;
+
+// $ExpectError: withProps only accepts props that exist
+StyledClassComponent.withProps({ notAProp: 3 });

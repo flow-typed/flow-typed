@@ -107,9 +107,9 @@ declare module "glamorous" {
     /**
      * Applies props by default for a component
      */
-    static withProps: <DefaultProps: {}>(
-      props: DefaultProps
-    ) => GlamorousComponent<OriginalProps & $Shape<DefaultProps>, Props>
+    static withProps: <WithProps: $Shape<OriginalProps & Props>>(
+      props: WithProps
+    ) => GlamorousComponent<OriginalProps, Props, DefaultProps & WithProps>
   }
 
   declare export type GlamorousComponent<
