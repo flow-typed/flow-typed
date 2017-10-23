@@ -1,3 +1,5 @@
+// -*- origami-fold-style: triple-braces -*-
+
 declare module "glamorous" {
   declare type SingleOrArray<Properties, T: $Keys<Properties>> = $ObjMap<
     Properties,
@@ -20,6 +22,7 @@ declare module "glamorous" {
   };
   declare type SVGProperties = {||};
 
+  // HTMLTagName {{{
   declare type HTMLTagName =
     | "a"
     | "abbr"
@@ -169,6 +172,7 @@ declare module "glamorous" {
     | "video"
     | "wbr"
     | "xmp";
+  // }}}
 
   declare type ClassComponent<Props, State> = Class<
     React$Component<Props, State>
@@ -307,6 +311,7 @@ declare module "glamorous" {
       options?: GlamorousOptions<OriginalProps, Context, WithProps>
     ): GlamorousComponentFactory<OriginalProps, CSSProperties, {}>,
 
+    // GlamorousHTMLComponentFactories {{{
     a: GlamorousHTMLComponentFactory<"a">,
     abbr: GlamorousHTMLComponentFactory<"abbr">,
     acronym: GlamorousHTMLComponentFactory<"acronym">,
@@ -455,7 +460,9 @@ declare module "glamorous" {
     video: GlamorousHTMLComponentFactory<"video">,
     wbr: GlamorousHTMLComponentFactory<"wbr">,
     xmp: GlamorousHTMLComponentFactory<"xmp">,
+    // }}}
 
+    // GlamorousBuiltinComponents {{{
     A: GlamorousBuiltinComponent<"a">,
     Abbr: GlamorousBuiltinComponent<"abbr">,
     Acronym: GlamorousBuiltinComponent<"acronym">,
@@ -604,8 +611,10 @@ declare module "glamorous" {
     Video: GlamorousBuiltinComponent<"video">,
     Wbr: GlamorousBuiltinComponent<"wbr">,
     Xmp: GlamorousBuiltinComponent<"xmp">
+    // }}}
   };
 
+  // export GlamorousBuiltinComponents {{{
   declare export var A: GlamorousBuiltinComponent<"a">;
   declare export var Abbr: GlamorousBuiltinComponent<"abbr">;
   declare export var Acronym: GlamorousBuiltinComponent<"acronym">;
@@ -754,6 +763,7 @@ declare module "glamorous" {
   declare export var Video: GlamorousBuiltinComponent<"video">;
   declare export var Wbr: GlamorousBuiltinComponent<"wbr">;
   declare export var Xmp: GlamorousBuiltinComponent<"xmp">;
+  // }}}
 
   declare export default Glamorous
 }
