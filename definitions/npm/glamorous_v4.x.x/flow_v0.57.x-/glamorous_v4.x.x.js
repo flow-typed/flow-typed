@@ -132,6 +132,9 @@ declare module "glamorous" {
   declare type StaticStyleArray<Properties> = Array<Properties | string>;
 
   declare type StyleArgument<Properties, Props> =
+    | null
+    | void
+    | false
     | Properties
     | string
     | StyleFunction<Properties, Props>

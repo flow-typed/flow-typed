@@ -16,6 +16,9 @@ const margin = ({ ml }: { ml: number }) => ({
 
 // No css properties
 (glamorous.div(): GlamorousComponent<React$ElementProps<"div">, {}>);
+(glamorous.div(null): GlamorousComponent<React$ElementProps<"div">, {}>);
+(glamorous.div(undefined): GlamorousComponent<React$ElementProps<"div">, {}>);
+(glamorous.div(false): GlamorousComponent<React$ElementProps<"div">, {}>);
 (glamorous.div({}): GlamorousComponent<React$ElementProps<"div">, {}>);
 // $ExpectError: Invalid css properties
 glamorous.div({ notCSS: true });
