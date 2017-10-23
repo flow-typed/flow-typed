@@ -14,28 +14,35 @@ const margin = ({ ml }: { ml: number }) => ({
   marginLeft: ml
 });
 
-glamorous.div({});
-// $ExpectError
+// No css properties
+(glamorous.div(): GlamorousComponent<React$ElementProps<"div">, {}>);
+(glamorous.div({}): GlamorousComponent<React$ElementProps<"div">, {}>);
+// $ExpectError: Invalid css properties
 glamorous.div({ notCSS: true });
 
+// Valid css properties
 (glamorous.div({ color: "red" }): GlamorousComponent<
   React$ElementProps<"div">,
   {}
 >);
 
+// A style function
 (glamorous.div(canBeBlue): GlamorousComponent<
   React$ElementProps<"div">,
   { isBlue: boolean }
 >);
 
+// Multiple style functions
 (glamorous.div(canBeBlue, margin): GlamorousComponent<
   React$ElementProps<"div">,
   { isBlue: boolean, ml: number }
 >);
 
 const MyDiv = glamorous.div(canBeBlue);
+// $ExpectError: Enforce style function required props
+<MyDiv />;
 <MyDiv isBlue />;
-// $ExpectError
+// $ExpectError: Enforce style function prop types
 <MyDiv isBlue={3} />;
 
 (glamorous(MyDiv)(margin): GlamorousComponent<
