@@ -126,7 +126,7 @@ declare class rxjs$Observable<+T> {
 
   audit(durationSelector: (value: T) => rxjs$Observable<any> | Promise<any>): rxjs$Observable<T>;
 
-  auditTime(duration: number): rxjs$Observable<T>;
+  auditTime(duration: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>;
 
   race(other: rxjs$Observable<T>): rxjs$Observable<T>;
 
