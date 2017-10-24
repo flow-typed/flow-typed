@@ -240,7 +240,7 @@ declare module "lodash" {
     flatten<T, X>(array: Array<Array<T> | X>): Array<T | X>,
     flattenDeep<T>(array: any[]): Array<T>,
     flattenDepth(array: any[], depth?: number): any[],
-    fromPairs<T>(pairs: Array<T>): Object,
+    fromPairs<A, B>(pairs: Array<[A,B]>): { [key: A]: B },
     head<T>(array: ?Array<T>): T,
     indexOf<T>(array: ?Array<T>, value: T, fromIndex?: number): number,
     initial<T>(array: ?Array<T>): Array<T>,
@@ -422,7 +422,7 @@ declare module "lodash" {
       a5: E[]
     ): Array<[A, B, C, D, E]>,
 
-    zipObject(props?: Array<any>, values?: Array<any>): Object,
+    zipObject<K, V>(props?: Array<K>, values?: Array<V>): { [key: K]: V },
     zipObjectDeep(props?: any[], values?: any): Object,
     //Workaround until (...parameter: T, parameter2: U) works
     zipWith<T>(a1: NestedArray<T>, iteratee?: Iteratee<T>): Array<T>,
@@ -555,11 +555,11 @@ declare module "lodash" {
       iteratees?: Array<OIteratee<*>> | string,
       orders?: Array<"asc" | "desc"> | string
     ): Array<V>,
-    partition<T>(array: ?Array<T>, predicate?: Predicate<T>): NestedArray<T>,
+    partition<T>(array: ?Array<T>, predicate?: Predicate<T>): [Array<T>, Array<T>],
     partition<V, A, T: { [id: string]: A }>(
       object: T,
       predicate?: OPredicate<A, T>
-    ): NestedArray<V>,
+    ): [Array<V>, Array<V>],
     reduce<T, U>(
       array: ?Array<T>,
       iteratee?: (
@@ -964,6 +964,7 @@ declare module "lodash" {
       path?: ?Array<string> | string,
       ...args?: Array<any>
     ): any,
+    keys<K>(object?: ?{ [key: K]: any }): Array<K>,
     keys(object?: ?Object): Array<string>,
     keysIn(object?: ?Object): Array<string>,
     mapKeys(object?: ?Object, iteratee?: OIteratee<*>): Object,
@@ -1477,7 +1478,7 @@ declare module "lodash/fp" {
     flattenDeep<T>(array: any[]): Array<T>,
     flattenDepth(depth: number): (array: any[]) => any[],
     flattenDepth(depth: number, array: any[]): any[],
-    fromPairs<T>(pairs: Array<T>): Object,
+    fromPairs<A, B>(pairs: Array<[A, B]>): { [key: A]: B },
     head<T>(array: Array<T>): T,
     indexOf<T>(value: T): (array: Array<T>) => number,
     indexOf<T>(value: T, array: Array<T>): number,
@@ -1712,8 +1713,8 @@ declare module "lodash/fp" {
     zip<A, B>(a1: A[]): (a2: B[]) => Array<[A, B]>,
     zip<A, B>(a1: A[], a2: B[]): Array<[A, B]>,
     zipAll(arrays: Array<Array<any>>): Array<any>,
-    zipObject(props: Array<any>): (values: Array<any>) => Object,
-    zipObject(props: Array<any>, values: Array<any>): Object,
+    zipObject<K, V>(props?: Array<K>): (values?: Array<V>) => { [key: K]: V },
+    zipObject<K, V>(props?: Array<K>, values?: Array<V>): { [key: K]: V },
     zipObj(props: Array<any>): (values: Array<any>) => Object,
     zipObj(props: Array<any>, values: Array<any>): Object,
     zipObjectDeep(props: any[]): (values: any) => Object,
@@ -1976,11 +1977,11 @@ declare module "lodash/fp" {
     ): Array<T>,
     partition<T>(
       predicate: Predicate<T> | OPredicate<T>
-    ): (collection: Array<T> | { [id: any]: T }) => NestedArray<T>,
+    ): (collection: Array<T> | { [id: any]: T }) => [Array<T>, Array<T>],
     partition<T>(
       predicate: Predicate<T> | OPredicate<T>,
       collection: Array<T> | { [id: any]: T }
-    ): NestedArray<T>,
+    ): [Array<T>, Array<T>],
     reduce<T, U>(
       iteratee: (accumulator: U, value: T) => U
     ): ((accumulator: U) => (collection: Array<T> | { [id: any]: T }) => U) &
@@ -2583,6 +2584,7 @@ declare module "lodash/fp" {
       object: Object,
       args: Array<any>
     ): any,
+    keys<K>(object: { [key: K]: any }): Array<K>,
     keys(object: Object): Array<string>,
     keysIn(object: Object): Array<string>,
     mapKeys(iteratee: OIteratee<*>): (object: Object) => Object,
