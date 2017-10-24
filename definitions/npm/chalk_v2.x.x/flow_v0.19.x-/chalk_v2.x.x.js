@@ -26,6 +26,14 @@ type $npm$chalk$Style = {
   white: $npm$chalk$Chain;
   gray: $npm$chalk$Chain;
   grey: $npm$chalk$Chain;
+  redBright: $npm$chalk$Chain;
+  greenBright: $npm$chalk$Chain;
+  yellowBright: $npm$chalk$Chain;
+  blueBright: $npm$chalk$Chain;
+  magentaBright: $npm$chalk$Chain;
+  cyanBright: $npm$chalk$Chain;
+  whiteBright: $npm$chalk$Chain;
+
 
   // Background colors
   bgBlack: $npm$chalk$Chain;
@@ -36,6 +44,14 @@ type $npm$chalk$Style = {
   bgMagenta: $npm$chalk$Chain;
   bgCyan: $npm$chalk$Chain;
   bgWhite: $npm$chalk$Chain;
+  bgBlackBright: $npm$chalk$Chain;
+  bgRedBright: $npm$chalk$Chain;
+  bgGreenBright: $npm$chalk$Chain;
+  bgYellowBright: $npm$chalk$Chain;
+  bgBlueBright: $npm$chalk$Chain;
+  bgMagentaBright: $npm$chalk$Chain;
+  bgCyanBright: $npm$chalk$Chain;
+  bgWhiteBright: $npm$chalk$Chain;
 };
 
 declare module "chalk" {
@@ -62,6 +78,13 @@ declare module "chalk" {
   declare var white: $npm$chalk$Chain;
   declare var gray: $npm$chalk$Chain;
   declare var grey: $npm$chalk$Chain;
+  declare var redBright: $npm$chalk$Chain;
+  declare var greenBright: $npm$chalk$Chain;
+  declare var yellowBright: $npm$chalk$Chain;
+  declare var blueBright: $npm$chalk$Chain;
+  declare var magentaBright: $npm$chalk$Chain;
+  declare var cyanBright: $npm$chalk$Chain;
+  declare var whiteBright: $npm$chalk$Chain;
 
   // Background colors
   declare var bgBlack: $npm$chalk$Chain;
@@ -72,4 +95,12 @@ declare module "chalk" {
   declare var bgMagenta: $npm$chalk$Chain;
   declare var bgCyan: $npm$chalk$Chain;
   declare var bgWhite: $npm$chalk$Chain;
+  declare var bgBlackBright: $npm$chalk$Chain;
+  declare var bgRedBright: $npm$chalk$Chain;
+  declare var bgGreenBright: $npm$chalk$Chain;
+  declare var bgYellowBright: $npm$chalk$Chain;
+  declare var bgBlueBright: $npm$chalk$Chain;
+  declare var bgMagentaBright: $npm$chalk$Chain;
+  declare var bgCyanBright: $npm$chalk$Chain;
+  declare var bgWhiteBright: $npm$chalk$Chain;
 }
