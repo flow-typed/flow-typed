@@ -1,3 +1,8 @@
 declare module "cuid" {
-  declare module.exports: () => string;
+  declare type cuid = {
+    slug: () => string,
+    fingerprint: () => string
+  } & (() => string);
+
+  declare module.exports: cuid;
 }
