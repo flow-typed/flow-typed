@@ -410,10 +410,6 @@ declare module "log4js" {
   };
 
   declare export interface Logger {
-    setLevel(level: string): void,
-    setLevel(level: Level): void,
-    new(dispatch: Function, name: string): Logger,
-
     level: string,
 
     log(...args: any[]): void,
