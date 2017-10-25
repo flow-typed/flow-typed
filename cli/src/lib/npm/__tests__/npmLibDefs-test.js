@@ -180,7 +180,7 @@ describe('npmLibDefs', () => {
         ],
         [
           'underscore_v1.x.x/asdfdir',
-          ['Flow versions must start with `flow-`'],
+          ['Flow versions must start with `flow_`'],
         ],
         [
           path.join('underscore_v1.x.x', 'flow_v0.38.x-', 'asdf2'),
