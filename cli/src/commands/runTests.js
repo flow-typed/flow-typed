@@ -336,7 +336,7 @@ async function runFlowTypeDefTests(flowVersionsToRun, groupId, testDirPath) {
           errors.push(
             testRunId + ": Error executing Flow process: " + execError.stack
           );
-        } else if (stdErrOut !== "Found 0 errors\n") {
+        } else if (!stdErrOut.endsWith("Found 0 errors\n")) {
           errors.push(
             testRunId +
               ": Unexpected Flow errors(" +
