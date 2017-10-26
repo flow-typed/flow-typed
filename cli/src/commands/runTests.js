@@ -275,7 +275,7 @@ async function getCachedFlowBinVersions(): Promise<Array<string>> {
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(testDirPath, libDefPath) {
+async function writeFlowConfig(testDirPath, libDefPath, includeWarnings) {
   const destFlowConfigPath = path.join(testDirPath, ".flowconfig");
   const flowConfigData = [
     "[libs]",
@@ -283,7 +283,7 @@ async function writeFlowConfig(testDirPath, libDefPath) {
     "",
     "[options]",
     "suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError",
-    "include_warnings=true",
+    includeWarnings ? "include_warnings=true" : "",
     "",
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
@@ -292,6 +292,65 @@ async function writeFlowConfig(testDirPath, libDefPath) {
     path.join(testDirPath, "..", "..", "node_modules")
   ].join("\n");
   await fs.writeFile(destFlowConfigPath, flowConfigData);
+}
+
+async function runFlowTypeDefTests(flowVersionsToRun, groupId, testDirPath) {
+  const errors = [];
+  while (flowVersionsToRun.length > 0) {
+    // Run tests in batches to avoid saturation
+    const testBatch = flowVersionsToRun
+      .slice(0, Math.min(flowVersionsToRun.length, 5))
+      .map(group => (flowVersionsToRun.shift(), group));
+
+    await P.all(
+      testBatch.map(async flowVer => {
+        const testRunId = groupId + " (flow-" + flowVer + ")";
+
+        console.log("Testing %s...", testRunId);
+
+        const { stdErrOut, errCode, execError } = await new Promise(res => {
+          const child = child_process.exec(
+            [
+              path.join(BIN_DIR, "flow-" + flowVer),
+              "check",
+              "--strip-root",
+              "--all",
+              testDirPath
+            ].join(" ")
+          );
+
+          let stdErrOut = "";
+          child.stdout.on("data", data => (stdErrOut += data));
+          child.stderr.on("data", data => (stdErrOut += data));
+
+          child.on("error", execError => {
+            res({ stdErrOut, errCode: null, execError });
+          });
+
+          child.on("close", errCode => {
+            res({ stdErrOut, errCode, execError: null });
+          });
+        });
+
+        if (execError !== null) {
+          errors.push(
+            testRunId + ": Error executing Flow process: " + execError.stack
+          );
+        } else if (stdErrOut !== "Found 0 errors\n") {
+          errors.push(
+            testRunId +
+              ": Unexpected Flow errors(" +
+              String(errCode) +
+              "):\n" +
+              stdErrOut +
+              "\n" +
+              String(execError)
+          );
+        }
+      })
+    );
+  }
+  return errors;
 }
 
 /**
@@ -347,7 +406,7 @@ async function runTestGroup(
       ),
       copyFile(testGroup.libDefPath, destLibDefPath)
     ]);
-    await writeFlowConfig(testDirPath, testGroup.libDefPath);
+
     // For each compatible version of Flow, run `flow check` and verify there
     // are no errors.
     const testGrpFlowSemVerRange = flowVerToSemverString(testGroup.flowVersion);
@@ -356,61 +415,28 @@ async function runTestGroup(
     });
     let lowestFlowVersionRan = flowVersionsToRun[0];
 
-    while (flowVersionsToRun.length > 0) {
-      // Run tests in batches to avoid saturation
-      const testBatch = flowVersionsToRun
-        .slice(0, Math.min(flowVersionsToRun.length, 5))
-        .map(group => (flowVersionsToRun.shift(), group));
+    const higherVersions = flowVersionsToRun.filter(flowVer =>
+      semver.gte(flowVer, "0.53.0")
+    );
+    const lowerVersions = flowVersionsToRun.filter(flowVer =>
+      semver.lt(flowVer, "0.53.0")
+    );
 
-      await P.all(
-        testBatch.map(async flowVer => {
-          const testRunId = testGroup.id + " (flow-" + flowVer + ")";
+    await writeFlowConfig(testDirPath, testGroup.libDefPath, true);
+    const higherVersionErrors = await runFlowTypeDefTests(
+      higherVersions,
+      testGroup.id,
+      testDirPath
+    );
 
-          console.log("Testing %s...", testRunId);
+    await writeFlowConfig(testDirPath, testGroup.libDefPath, false);
+    const lowerVersionErrors = await runFlowTypeDefTests(
+      lowerVersions,
+      testGroup.id,
+      testDirPath
+    );
 
-          const { stdErrOut, errCode, execError } = await new Promise(res => {
-            const child = child_process.exec(
-              [
-                path.join(BIN_DIR, "flow-" + flowVer),
-                "check",
-                "--strip-root",
-                "--all",
-                testDirPath
-              ].join(" ")
-            );
-
-            let stdErrOut = "";
-            child.stdout.on("data", data => (stdErrOut += data));
-            child.stderr.on("data", data => (stdErrOut += data));
-
-            child.on("error", execError => {
-              res({ stdErrOut, errCode: null, execError });
-            });
-
-            child.on("close", errCode => {
-              res({ stdErrOut, errCode, execError: null });
-            });
-          });
-
-          if (execError !== null) {
-            errors.push(
-              testRunId + ": Error executing Flow process: " + execError.stack
-            );
-          } else if (stdErrOut !== "Found 0 errors\n") {
-            errors.push(
-              testRunId +
-                ": Unexpected Flow errors(" +
-                String(errCode) +
-                "):\n" +
-                stdErrOut +
-                "\n" +
-                String(execError)
-            );
-          }
-        })
-      );
-    }
-
+    errors.push(...lowerVersionErrors, ...higherVersionErrors);
     let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
       return semver.lt(flowVer, lowestFlowVersionRan);
     });
