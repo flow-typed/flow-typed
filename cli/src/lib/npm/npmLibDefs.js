@@ -299,6 +299,10 @@ function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
     return semver.satisfies(libDefSemver, pkgSemver);
   }
 
+  if (!(semver.validRange(pkgSemver) && semver.validRange(libDefSemver))) {
+    return false;
+  }
+
   const pkgRange = new semver.Range(pkgSemver);
   const libDefRange = new semver.Range(libDefSemver);
 

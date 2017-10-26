@@ -7,6 +7,7 @@ import {
   _validateVersionPart as validateVersionPart,
   getInstalledNpmLibDefs,
   getNpmLibDefs,
+  findNpmLibDef,
 } from '../npmLibDefs';
 
 import path from 'path';
@@ -294,6 +295,39 @@ describe('npmLibDefs', () => {
     //     ['totally-not-real-pkg', ['Package does not exist on npm!']],
     //   ]);
     // });
+  });
+
+  describe('findNpmLibDef', () => {
+    describe('when no cached libDefs found', () => {
+      it('returns null', async () => {
+        const pkgName = 'jest-test-npm-package';
+        const pkgVersion = 'v1.0.0';
+        const flowVersion = { kind: 'all' };
+
+        const filtered = await findNpmLibDef(pkgName, pkgVersion, flowVersion);
+
+        expect(filtered).toBeNull();
+      });
+    });
+
+    describe('when non-semver package provided', () => {
+      it('doesn\'t throw error', async () => {
+        const pkgName = 'flow-bin';
+        const pkgVersion = 'github:flowtype/flow-bin';
+        const flowVersion = { kind: 'all' };
+
+        let filtered;
+        let error;
+        try {
+          filtered = await findNpmLibDef(pkgName, pkgVersion, flowVersion);
+        } catch (e) {
+          error = e;
+        }
+
+        expect(error).toBeUndefined();
+        expect(filtered).toBeNull();
+      });
+    });
   });
 
   describe('getInstalledNpmLibDefs', () => {
