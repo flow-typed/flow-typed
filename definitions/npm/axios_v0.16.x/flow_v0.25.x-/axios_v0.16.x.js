@@ -57,7 +57,7 @@ declare module 'axios' {
   declare class AxiosXHR<T> {
     config: AxiosXHRConfig<T>;
     data: T;
-    headers: Object;
+    headers?: Object;
     status: number;
     statusText: string,
     request: http$ClientRequest | XMLHttpRequest
