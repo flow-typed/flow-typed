@@ -70,7 +70,7 @@ a new feature, consider opening an issue first to discuss it.
 
 The `flow-typed` npm package provides a CLI that includes several commands for
 working with this repository. The full list of commands is available at
-[CLI Commands & Flags](https://github.com/flowtype/flow-typed/wiki/CLI-Commands-&-Flags).
+[CLI Commands & Flags](https://github.com/flowtype/flow-typed/wiki/CLI-Commands-and-Flags).
 
 ##### `flow-typed install [package-specification]`
 
@@ -96,8 +96,7 @@ For each libdef, find each test and run it with all compatible versions of Flow.
 If any errors arise that are not *`// $ExpectError`*, the test has failed.
 
 Note that this command assumes that the `/definitions/` directory is correctly
-structured. It should be run *after* running
-[`flow-typed validate-defs`](#flow-typed-validate-defs).
+structured. It should be run *after* running `flow-typed validate-defs`.
 
 ##### `flow-typed update-cache [--debug]`
 
