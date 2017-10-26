@@ -337,6 +337,7 @@ async function runTestGroup(
       "",
       "[options]",
       "suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError",
+      "include_warnings=true",
       "",
 
       // Be sure to ignore stuff in the node_modules directory of the flow-typed
@@ -394,7 +395,7 @@ async function runTestGroup(
             errors.push(
               testRunId + ": Error executing Flow process: " + execError.stack
             );
-          } else if (errCode !== 0) {
+          } else if (stdErrOut !== "Found 0 errors\n") {
             errors.push(
               testRunId +
                 ": Unexpected Flow errors(" +
