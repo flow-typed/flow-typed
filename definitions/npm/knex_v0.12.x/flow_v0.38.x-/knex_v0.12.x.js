@@ -9,6 +9,8 @@ declare type Knex$QueryBuilderFn<R> = (
 ) => Knex$QueryBuilder<R> | void;
 
 declare class Knex$QueryBuilder<R> mixins Promise<R> {
+  clearSelect(): this,
+  clearWhere(): this,
   select(key?: string[]): this,
   select(...key: string[]): this,
   timeout(ms: number, options?: { cancel: boolean }): this,
