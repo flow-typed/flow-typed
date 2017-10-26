@@ -7,6 +7,8 @@ Knex({
 });
 
 knex
+  .clearSelect()
+  .clearWhere()
   .select("foo")
   .withSchema("a")
   .from("bar")
