@@ -275,6 +275,25 @@ async function getCachedFlowBinVersions(): Promise<Array<string>> {
   return versions.map(version => `v${version}`);
 }
 
+async function writeFlowConfig(testDirPath, libDefPath) {
+  const destFlowConfigPath = path.join(testDirPath, ".flowconfig");
+  const flowConfigData = [
+    "[libs]",
+    path.basename(libDefPath),
+    "",
+    "[options]",
+    "suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError",
+    "include_warnings=true",
+    "",
+
+    // Be sure to ignore stuff in the node_modules directory of the flow-typed
+    // CLI repository!
+    "[ignore]",
+    path.join(testDirPath, "..", "..", "node_modules")
+  ].join("\n");
+  await fs.writeFile(destFlowConfigPath, flowConfigData);
+}
+
 /**
  * Given a TestGroup structure determine all versions of Flow that match the
  * FlowVersion specification and, for each, run `flow check` on the test
@@ -328,25 +347,7 @@ async function runTestGroup(
       ),
       copyFile(testGroup.libDefPath, destLibDefPath)
     ]);
-
-    // Write out a .flowconfig
-    const destFlowConfigPath = path.join(testDirPath, ".flowconfig");
-    const flowConfigData = [
-      "[libs]",
-      path.basename(testGroup.libDefPath),
-      "",
-      "[options]",
-      "suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError",
-      "include_warnings=true",
-      "",
-
-      // Be sure to ignore stuff in the node_modules directory of the flow-typed
-      // CLI repository!
-      "[ignore]",
-      path.join(testDirPath, "..", "..", "node_modules")
-    ].join("\n");
-    await fs.writeFile(destFlowConfigPath, flowConfigData);
-
+    await writeFlowConfig(testDirPath, testGroup.libDefPath);
     // For each compatible version of Flow, run `flow check` and verify there
     // are no errors.
     const testGrpFlowSemVerRange = flowVerToSemverString(testGroup.flowVersion);
