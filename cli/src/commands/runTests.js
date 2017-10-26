@@ -450,7 +450,7 @@ async function runTestGroup(
 
       await P.all(
         lowerTestBatch.map(async flowVer => {
-          const { errCode, execError } = await new Promise(res => {
+          const { stdErrOut, execError } = await new Promise(res => {
             const child = child_process.exec(
               [
                 path.join(BIN_DIR, "flow-" + flowVer),
@@ -461,16 +461,20 @@ async function runTestGroup(
               ].join(" ")
             );
 
+            let stdErrOut = "";
+            child.stdout.on("data", data => (stdErrOut += data));
+            child.stderr.on("data", data => (stdErrOut += data));
+
             child.on("error", execError => {
-              res({ errCode: null, execError });
+              res({ stdErrOut, execError });
             });
 
-            child.on("close", errCode => {
-              res({ errCode, execError: null });
+            child.on("close", () => {
+              res({ stdErrOut, execError: null });
             });
           });
 
-          if (execError !== null || errCode !== 0) {
+          if (execError !== null || !stdErrOut.endsWith("Found 0 errors\n")) {
             lowerFlowVersionsToRun = [];
           } else {
             lowestCapableFlowVersion = semver.lt(
