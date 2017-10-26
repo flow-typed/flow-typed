@@ -66,15 +66,32 @@ createSelector(
 // END TEST
 
 // TEST: Should work when using another selector as functions
-const simpleSelector = (state: State): string => "foo";
-const resultSelector = (arg: string): string => "foo";
+{
+  const simpleSelector = (state: State): string => "foo";
+  const resultSelector = (arg: string): string => "foo";
 
-const combinedSelector1 = createSelector(simpleSelector, resultSelector);
+  const combinedSelector1 = createSelector(simpleSelector, resultSelector);
 
-const combinedSelector2: (state: State) => string = createSelector(
-  combinedSelector1,
-  resultSelector
-);
+  const combinedSelector2: (state: State) => string = createSelector(
+    combinedSelector1,
+    resultSelector
+  );
+}
+// END TEST
+
+// TEST: Should work when using more complex selectors as functions
+{
+  const resultFunc = (param1: string, param2: number): number => 42;
+  const simpleSelector = (state: State): string => "foo";
+  const compoundSelector = createSelector(simpleSelector, () => 42);
+  const func: State => number = createSelector(
+    simpleSelector,
+    compoundSelector,
+    resultFunc
+  );
+
+  const result: number = func({ x: 42, y: 42 });
+}
 // END TEST
 
 defaultMemoize((a: number) => a + 1)(2);
