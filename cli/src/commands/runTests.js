@@ -593,7 +593,8 @@ export async function run(argv: Argv): Promise<number> {
   const onlyChanged = Boolean(argv.onlyChanged);
 
   const cwd = process.cwd();
-  const cwdDefsNPMPath = path.join(cwd, "definitions", "npm");
+  const basePath = argv.path ? String(argv.path) : cwd;
+  const cwdDefsNPMPath = path.join(basePath, "definitions", "npm");
   let repoDirPath = (await fs.exists(cwdDefsNPMPath))
     ? cwdDefsNPMPath
     : path.join(__dirname, "..", "..", "..", "definitions", "npm");
