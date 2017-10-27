@@ -415,18 +415,11 @@ async function runTestGroup(
     });
     let lowestFlowVersionRan = flowVersionsToRun[0];
 
-    const higherVersions = flowVersionsToRun.filter(flowVer =>
-      semver.gte(flowVer, "0.53.0")
-    );
     const lowerVersions = flowVersionsToRun.filter(flowVer =>
       semver.lt(flowVer, "0.53.0")
     );
-
-    await writeFlowConfig(testDirPath, testGroup.libDefPath, true);
-    const higherVersionErrors = await runFlowTypeDefTests(
-      higherVersions,
-      testGroup.id,
-      testDirPath
+    const higherVersions = flowVersionsToRun.filter(flowVer =>
+      semver.gte(flowVer, "0.53.0")
     );
 
     await writeFlowConfig(testDirPath, testGroup.libDefPath, false);
@@ -436,7 +429,14 @@ async function runTestGroup(
       testDirPath
     );
 
-    errors.push(...lowerVersionErrors, ...higherVersionErrors);
+    await writeFlowConfig(testDirPath, testGroup.libDefPath, true);
+    const higherVersionErrors = await runFlowTypeDefTests(
+      higherVersions,
+      testGroup.id,
+      testDirPath
+    );
+
+    errors.push(...higherVersionErrors, ...lowerVersionErrors);
     let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
       return semver.lt(flowVer, lowestFlowVersionRan);
     });
