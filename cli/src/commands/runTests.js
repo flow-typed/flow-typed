@@ -275,6 +275,156 @@ async function getCachedFlowBinVersions(): Promise<Array<string>> {
   return versions.map(version => `v${version}`);
 }
 
+async function writeFlowConfig(testDirPath, libDefPath, includeWarnings) {
+  const destFlowConfigPath = path.join(testDirPath, ".flowconfig");
+  const flowConfigData = [
+    "[libs]",
+    path.basename(libDefPath),
+    "",
+    "[options]",
+    "suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError",
+    includeWarnings ? "include_warnings=true" : "",
+    "",
+
+    // Be sure to ignore stuff in the node_modules directory of the flow-typed
+    // CLI repository!
+    "[ignore]",
+    path.join(testDirPath, "..", "..", "node_modules")
+  ].join("\n");
+  await fs.writeFile(destFlowConfigPath, flowConfigData);
+}
+
+function testTypeDefinition(flowVer, testDirPath) {
+  return new Promise(res => {
+    const child = child_process.exec(
+      [
+        path.join(BIN_DIR, "flow-" + flowVer),
+        "check",
+        "--strip-root",
+        "--all",
+        testDirPath
+      ].join(" ")
+    );
+
+    let stdErrOut = "";
+    child.stdout.on("data", data => (stdErrOut += data));
+    child.stderr.on("data", data => (stdErrOut += data));
+
+    child.on("error", execError => {
+      res({ stdErrOut, errCode: null, execError });
+    });
+
+    child.on("close", errCode => {
+      res({ stdErrOut, errCode, execError: null });
+    });
+  });
+}
+
+async function runFlowTypeDefTests(flowVersionsToRun, groupId, testDirPath) {
+  const errors = [];
+  while (flowVersionsToRun.length > 0) {
+    // Run tests in batches to avoid saturation
+    const testBatch = flowVersionsToRun
+      .slice(0, Math.min(flowVersionsToRun.length, 5))
+      .map(group => (flowVersionsToRun.shift(), group));
+
+    await P.all(
+      testBatch.map(async flowVer => {
+        const testRunId = groupId + " (flow-" + flowVer + ")";
+
+        console.log("Testing %s...", testRunId);
+
+        const { stdErrOut, errCode, execError } = await testTypeDefinition(
+          flowVer,
+          testDirPath
+        );
+
+        if (execError !== null) {
+          errors.push(
+            testRunId + ": Error executing Flow process: " + execError.stack
+          );
+        } else if (!stdErrOut.endsWith("Found 0 errors\n")) {
+          errors.push(
+            testRunId +
+              ": Unexpected Flow errors(" +
+              String(errCode) +
+              "):\n" +
+              stdErrOut +
+              "\n" +
+              String(execError)
+          );
+        }
+      })
+    );
+  }
+  return errors;
+}
+
+async function testLowestCapableFlowVersion(
+  lowerVersions,
+  testDirPath,
+  lowestFlowVersionRan
+) {
+  let lowerFlowVersionsToRun = lowerVersions;
+  let lowestCapableFlowVersion = lowestFlowVersionRan;
+  while (lowerFlowVersionsToRun.length > 0) {
+    const lowerTestBatch = lowerFlowVersionsToRun
+      .slice(0, Math.min(lowerFlowVersionsToRun.length, 5))
+      .map(group => (lowerFlowVersionsToRun.shift(), group));
+
+    await P.all(
+      lowerTestBatch.map(async flowVer => {
+        const { stdErrOut, execError } = await testTypeDefinition(
+          flowVer,
+          testDirPath
+        );
+
+        if (execError !== null || !stdErrOut.endsWith("Found 0 errors\n")) {
+          lowerFlowVersionsToRun = [];
+        } else {
+          lowestCapableFlowVersion = semver.lt(
+            lowestCapableFlowVersion,
+            flowVer
+          )
+            ? lowestCapableFlowVersion
+            : flowVer;
+        }
+      })
+    );
+  }
+  return lowestCapableFlowVersion;
+}
+
+async function findLowestCapableFlowVersion(
+  orderedFlowVersions,
+  lowestFlowVersionRan,
+  testDirPath,
+  libDefPath
+) {
+  let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
+    return semver.lt(flowVer, lowestFlowVersionRan);
+  });
+  lowerFlowVersionsToRun.reverse();
+  const lowerLowVersions = lowerFlowVersionsToRun.filter(flowVer =>
+    semver.lt(flowVer, "0.53.0")
+  );
+  const higherLowVersions = lowerFlowVersionsToRun.filter(flowVer =>
+    semver.gte(flowVer, "0.53.0")
+  );
+  await writeFlowConfig(testDirPath, libDefPath, true);
+  const lowestOfHigherVersions = await testLowestCapableFlowVersion(
+    higherLowVersions,
+    testDirPath,
+    lowestFlowVersionRan
+  );
+  await writeFlowConfig(testDirPath, libDefPath, false);
+  return await testLowestCapableFlowVersion(
+    lowerLowVersions,
+    testDirPath,
+    lowestOfHigherVersions
+  );
+}
+
 /**
  * Given a TestGroup structure determine all versions of Flow that match the
  * FlowVersion specification and, for each, run `flow check` on the test
@@ -329,23 +479,6 @@ async function runTestGroup(
       copyFile(testGroup.libDefPath, destLibDefPath)
     ]);
 
-    // Write out a .flowconfig
-    const destFlowConfigPath = path.join(testDirPath, ".flowconfig");
-    const flowConfigData = [
-      "[libs]",
-      path.basename(testGroup.libDefPath),
-      "",
-      "[options]",
-      "suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError",
-      "",
-
-      // Be sure to ignore stuff in the node_modules directory of the flow-typed
-      // CLI repository!
-      "[ignore]",
-      path.join(testDirPath, "..", "..", "node_modules")
-    ].join("\n");
-    await fs.writeFile(destFlowConfigPath, flowConfigData);
-
     // For each compatible version of Flow, run `flow check` and verify there
     // are no errors.
     const testGrpFlowSemVerRange = flowVerToSemverString(testGroup.flowVersion);
@@ -354,107 +487,34 @@ async function runTestGroup(
     });
     let lowestFlowVersionRan = flowVersionsToRun[0];
 
-    while (flowVersionsToRun.length > 0) {
-      // Run tests in batches to avoid saturation
-      const testBatch = flowVersionsToRun
-        .slice(0, Math.min(flowVersionsToRun.length, 5))
-        .map(group => (flowVersionsToRun.shift(), group));
+    const lowerVersions = flowVersionsToRun.filter(flowVer =>
+      semver.lt(flowVer, "0.53.0")
+    );
+    const higherVersions = flowVersionsToRun.filter(flowVer =>
+      semver.gte(flowVer, "0.53.0")
+    );
 
-      await P.all(
-        testBatch.map(async flowVer => {
-          const testRunId = testGroup.id + " (flow-" + flowVer + ")";
+    await writeFlowConfig(testDirPath, testGroup.libDefPath, false);
+    const lowerVersionErrors = await runFlowTypeDefTests(
+      lowerVersions,
+      testGroup.id,
+      testDirPath
+    );
 
-          console.log("Testing %s...", testRunId);
+    await writeFlowConfig(testDirPath, testGroup.libDefPath, true);
+    const higherVersionErrors = await runFlowTypeDefTests(
+      higherVersions,
+      testGroup.id,
+      testDirPath
+    );
 
-          const { stdErrOut, errCode, execError } = await new Promise(res => {
-            const child = child_process.exec(
-              [
-                path.join(BIN_DIR, "flow-" + flowVer),
-                "check",
-                "--strip-root",
-                "--all",
-                testDirPath
-              ].join(" ")
-            );
-
-            let stdErrOut = "";
-            child.stdout.on("data", data => (stdErrOut += data));
-            child.stderr.on("data", data => (stdErrOut += data));
-
-            child.on("error", execError => {
-              res({ stdErrOut, errCode: null, execError });
-            });
-
-            child.on("close", errCode => {
-              res({ stdErrOut, errCode, execError: null });
-            });
-          });
-
-          if (execError !== null) {
-            errors.push(
-              testRunId + ": Error executing Flow process: " + execError.stack
-            );
-          } else if (errCode !== 0) {
-            errors.push(
-              testRunId +
-                ": Unexpected Flow errors(" +
-                String(errCode) +
-                "):\n" +
-                stdErrOut +
-                "\n" +
-                String(execError)
-            );
-          }
-        })
-      );
-    }
-
-    let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
-      return semver.lt(flowVer, lowestFlowVersionRan);
-    });
-    lowerFlowVersionsToRun.reverse();
-    let lowestCapableFlowVersion = lowestFlowVersionRan;
-
-    while (lowerFlowVersionsToRun.length > 0) {
-      const lowerTestBatch = lowerFlowVersionsToRun
-        .slice(0, Math.min(lowerFlowVersionsToRun.length, 5))
-        .map(group => (lowerFlowVersionsToRun.shift(), group));
-
-      await P.all(
-        lowerTestBatch.map(async flowVer => {
-          const { errCode, execError } = await new Promise(res => {
-            const child = child_process.exec(
-              [
-                path.join(BIN_DIR, "flow-" + flowVer),
-                "check",
-                "--strip-root",
-                "--all",
-                testDirPath
-              ].join(" ")
-            );
-
-            child.on("error", execError => {
-              res({ errCode: null, execError });
-            });
-
-            child.on("close", errCode => {
-              res({ errCode, execError: null });
-            });
-          });
-
-          if (execError !== null || errCode !== 0) {
-            lowerFlowVersionsToRun = [];
-          } else {
-            lowestCapableFlowVersion = semver.lt(
-              lowestCapableFlowVersion,
-              flowVer
-            )
-              ? lowestCapableFlowVersion
-              : flowVer;
-          }
-        })
-      );
-    }
+    errors.push(...higherVersionErrors, ...lowerVersionErrors);
+    const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
+      orderedFlowVersions,
+      lowestFlowVersionRan,
+      testDirPath,
+      testGroup.libDefPath
+    );
 
     if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
       console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
