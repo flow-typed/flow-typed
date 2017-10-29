@@ -11,9 +11,14 @@ import { getDiff } from "../lib/git";
 import request from "request";
 import * as semver from "semver";
 import * as unzip from "unzip";
-
-import type { Argv } from "yargs";
+import typeof Yargs from "yargs";
 import type { FlowVersion } from "../lib/flowVersion.js";
+
+export type Args = {
+  _: Array<string>,
+  path?: string,
+  onlyChanged?: boolean
+};
 
 // Used to decide which binary to fetch for each version of Flow
 const BIN_PLATFORM = (_ => {
@@ -581,7 +586,24 @@ async function runTests(
 export const name = "run-tests";
 export const description =
   "Run definition tests for library definitions in the flow-typed project";
-export async function run(argv: Argv): Promise<number> {
+
+export function setup(yargs: Yargs) {
+  return yargs.usage(`$0 ${name} - ${description}`).options({
+    path: {
+      describe:
+        "Override default path for libdef root (Mainly for testing purposes)",
+      type: "string",
+      demand: false
+    },
+    onlyChanged: {
+      type: "boolean",
+      description: "Run only changed definition tests",
+      demand: false
+    }
+  });
+}
+
+export async function run(argv: Args): Promise<number> {
   if (!isInFlowTypedRepo()) {
     console.log(
       "This command only works in a clone of flowtype/flow-typed. " +
@@ -593,7 +615,8 @@ export async function run(argv: Argv): Promise<number> {
   const onlyChanged = Boolean(argv.onlyChanged);
 
   const cwd = process.cwd();
-  const cwdDefsNPMPath = path.join(cwd, "definitions", "npm");
+  const basePath = argv.path ? String(argv.path) : cwd;
+  const cwdDefsNPMPath = path.join(basePath, "definitions", "npm");
   let repoDirPath = (await fs.exists(cwdDefsNPMPath))
     ? cwdDefsNPMPath
     : path.join(__dirname, "..", "..", "..", "definitions", "npm");
