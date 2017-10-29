@@ -1,8 +1,8 @@
 cd definitions
-call npm install
-call npm test
+call yarn install
+call yarn test
 cd ..\cli
-call npm install
+call yarn install
 node dist\cli.js validate-defs ..\definitions
 node dist\cli.js run-tests %*
 cd ..
