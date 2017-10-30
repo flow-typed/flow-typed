@@ -1,23 +1,31 @@
-/* eslint-disable no-unused-vars, no-unused-expressions */
+/* eslint-disable no-unused-vars, no-unused-expressions, arrow-body-style */
 /* @flow */
 import React from "react";
-import { compose, withProps, pure } from "recompose";
+import { compose, withProps, shouldUpdate } from "recompose";
 
 import type { HOC } from "recompose";
 
 type EnhancedCompProps = { eA: 1 };
 
-const Comp = ({ eA }) =>
+const Comp = ({ eA }) => (
   <div>
     {(eA: number)}
     {
       // $ExpectError eA nor any nor string
       (eA: string)
     }
-  </div>;
+  </div>
+);
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
-  pure,
+  shouldUpdate((props, nextProps) => {
+    // $ExpectError eA nor any nor string
+    (props.eA: string);
+    // $ExpectError eA nor any nor string
+    (nextProps.eA: string);
+
+    return props.eA === nextProps.eA;
+  }),
   withProps(props => ({
     eA: (props.eA: number),
     // $ExpectError eA nor any nor string
@@ -27,6 +35,13 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
     // $ExpectError property not found
     err: props.iMNotExists
   }))
+);
+
+const enhacerErr: HOC<*, EnhancedCompProps> = compose(
+  shouldUpdate(() => {
+    // $ExpectError must be boolean
+    return 1;
+  })
 );
 
 const EnhancedComponent = enhacer(Comp);

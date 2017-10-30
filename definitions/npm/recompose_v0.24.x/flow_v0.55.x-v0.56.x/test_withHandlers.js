@@ -50,7 +50,7 @@ const enhancer2: HOC<*, EnhancedCompProps> = compose(
   }))
 );
 
-const BaseComp = ({ value, onValueChange }) =>
+const BaseComp = ({ value, onValueChange }) => (
   <div
     onClick={() => {
       const res = onValueChange(1);
@@ -64,6 +64,7 @@ const BaseComp = ({ value, onValueChange }) =>
       // $ExpectError value is not any or string
       (value: string)
     }
-  </div>;
+  </div>
+);
 
 const Enhanced = enhancer(BaseComp);

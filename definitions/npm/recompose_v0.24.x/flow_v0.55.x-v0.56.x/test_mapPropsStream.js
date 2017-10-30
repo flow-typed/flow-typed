@@ -13,14 +13,15 @@ const Observable = {
   of: (a: Object) => Object
 };
 
-const Comp = ({ a }) =>
+const Comp = ({ a }) => (
   <div>
     {(a: string)}
     {
       // $ExpectError
       (a: number)
     }
-  </div>;
+  </div>
+);
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   (mapPropsStream((props$: Observable<EnhancedCompProps>) =>

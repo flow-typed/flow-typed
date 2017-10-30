@@ -18,7 +18,7 @@ type EnhancedCompProps = {
   obj: { objPropA: string, objPropB: number }
 };
 
-const Comp = ({ eA, objPropA }) =>
+const Comp = ({ eA, objPropA }) => (
   <div>
     {(eA: number)}
     {(objPropA: string)}
@@ -30,13 +30,15 @@ const Comp = ({ eA, objPropA }) =>
       // $ExpectError eA nor any nor string
       (objPropA: number)
     }
-  </div>;
+  </div>
+);
 
-const Comp2 = ({ eA, objPropA }) =>
+const Comp2 = ({ eA, objPropA }) => (
   <div>
     {/* hack to preview types */}
     {/* :: eA, objPropA */}
-  </div>;
+  </div>
+);
 
 const flattenEnhacer: HOC<*, EnhancedCompProps> = compose(
   (flattenProp("obj"): HOC<
@@ -57,7 +59,7 @@ const EnhancedComponent = flattenEnhacer(Comp);
 const EnhancedComponent2 = flattenEnhacer(Comp2);
 
 // renameEnhacer voodoo (you don't need it, use withProps instead)
-const RenameComp = ({ eA, objNew, obj }) =>
+const RenameComp = ({ eA, objNew, obj }) => (
   <div>
     {(eA: number)}
 
@@ -81,7 +83,8 @@ const RenameComp = ({ eA, objNew, obj }) =>
       // $ExpectError eA nor any nor string
       (obj: string)
     }
-  </div>;
+  </div>
+);
 
 const renameEnhacer: HOC<*, EnhancedCompProps> = compose(
   (renameProp("obj", "objNew"): HOC<
