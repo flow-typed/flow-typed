@@ -38,3 +38,6 @@ cli/package-lock.json
 # Editors
 .vscode
 .idea
+
+# yarn
+definitions/yarn.lock
