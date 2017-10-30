@@ -82,7 +82,6 @@ const project: Array<Observable<string>> = [
 ];
 
 (Observable.range(0, 10, Scheduler.asap): Observable<number>);
-(numbers.bufferTime(1, 1, 1, Scheduler.asap): Observable<Array<number>>);
 (Observable.of(1).defaultIfEmpty(null): Observable<?number>);
 (Observable.of(1).defaultIfEmpty(1): Observable<number>);
 (Observable.of(1).timeoutWith(100, Observable.of(null)): Observable<?number>);
@@ -95,3 +94,45 @@ const project: Array<Observable<string>> = [
   elem => String(elem),
   grouped => Observable.never()
 ): Observable<rxjs$GroupedObservable<number, string>>);
+
+// http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-buffer
+var clicks = Observable.fromEvent(document, "click");
+var interval = Observable.interval(1000);
+var buffered = interval.buffer(clicks);
+buffered.subscribe(x => console.log(x));
+
+// http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-bufferCount
+// $ExpectError
+clicks.bufferCount();
+var buffered = clicks.bufferCount(2);
+buffered.subscribe(x => console.log(x));
+
+var buffered = clicks.bufferCount(2, 1);
+buffered.subscribe(x => console.log(x));
+
+// http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-bufferTime
+// $ExpectError
+clicks.bufferTime();
+var buffered = clicks.bufferTime(1000);
+buffered.subscribe(x => console.log(x));
+
+var buffered = clicks.bufferTime(2000, 5000);
+buffered.subscribe(x => console.log(x));
+
+// http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-bufferToggle
+var openings = Observable.interval(1000);
+var buffered = clicks.bufferToggle(
+  openings,
+  i => (i % 2 ? Observable.interval(500) : Observable.empty())
+);
+// $ExpectError
+clicks.bufferToggle(openings,i => (i.length % 2 ? Observable.interval(500) : Observable.empty()));
+buffered.subscribe(x => console.log(x));
+
+// http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-bufferWhen
+var buffered = clicks.bufferWhen(() =>
+  Observable.interval(1000 + Math.random() * 4000)
+);
+// $ExpectError
+click.bufferWhen(() => true);
+buffered.subscribe(x => console.log(x));
