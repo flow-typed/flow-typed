@@ -1,5 +1,5 @@
 declare module "smoothscroll-polyfill" {
-  declare var exports: {
+  declare module.exports: {
     polyfill: () => void
   };
 }
