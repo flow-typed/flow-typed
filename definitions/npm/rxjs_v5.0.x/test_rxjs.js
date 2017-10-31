@@ -204,3 +204,7 @@ numbers.filter(
 
 Observable.of('a').expand(x => Observable.of(x + x)).subscribe(() => {});
 Observable.of(1).expand((x, i) => Observable.of(x + i)).subscribe(() => {});
+
+(numbers.last(): Observable<number>);
+// $ExpectError
+(numbers.last(): Observable<string>);
