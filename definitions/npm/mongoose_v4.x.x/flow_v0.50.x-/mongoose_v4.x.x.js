@@ -107,7 +107,7 @@ declare class Mongoose$Schema<Doc> {
     fields: SchemaFields,
     opts?: SchemaOpts<Doc>
   ): Mongoose$Schema<Doc>,
-  index(fields: IndexFields, opts?: IndexOpts): void,
+  index(fields: IndexFields, opts?: IndexOpts): this,
   methods: Mongoose$SchemaMethods,
   statics: Mongoose$SchemaStatics,
   virtual(fieldName: string): Mongoose$SchemaVirtualField,
