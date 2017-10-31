@@ -470,7 +470,7 @@ describe('npmLibDefs', () => {
       const cwd = path.join(FIXTURE_ROOT, 'defs-in-pkgs');
       const FIXTURE_DIR = path.join(cwd, 'fakeCacheRepo', 'definitions');
       const libDefs = await getNpmLibDefs(FIXTURE_DIR, undefined, false, {cwd});
-      expect(libDefs.length).toBe(4);
+      expect(libDefs.length).toBe(5);
       const scopedLibDefs = libDefs.filter(def => def.scope !== null);
       expect(scopedLibDefs.length).toBe(2);
     });
