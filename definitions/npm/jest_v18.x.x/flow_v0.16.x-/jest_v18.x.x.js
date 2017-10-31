@@ -421,7 +421,7 @@ declare function spyOn(value: mixed, method: string): Object;
 declare var jest: JestObjectType
 
 /**
- * The global Jamine object, this is generally not exposed as the public API,
+ * The global Jasmine object, this is generally not exposed as the public API,
  * using features inside here could break in later versions of Jest.
  */
 declare var jasmine: {
