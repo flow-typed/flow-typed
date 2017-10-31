@@ -302,7 +302,7 @@ describe('npmLibDefs', () => {
       it('returns null', async () => {
         const pkgName = 'jest-test-npm-package';
         const pkgVersion = 'v1.0.0';
-        const flowVersion = { kind: 'all' };
+        const flowVersion = {kind: 'all'};
 
         const filtered = await findNpmLibDef(pkgName, pkgVersion, flowVersion);
 
@@ -311,10 +311,10 @@ describe('npmLibDefs', () => {
     });
 
     describe('when non-semver package provided', () => {
-      it('doesn\'t throw error', async () => {
+      it("doesn't throw error", async () => {
         const pkgName = 'flow-bin';
         const pkgVersion = 'github:flowtype/flow-bin';
-        const flowVersion = { kind: 'all' };
+        const flowVersion = {kind: 'all'};
 
         let filtered;
         let error;
@@ -461,6 +461,15 @@ describe('npmLibDefs', () => {
     it('parses npm scope name correctly', async () => {
       const FIXTURE_DIR = path.join(FIXTURE_ROOT, 'scoped-pkgs', 'definitions');
       const libDefs = await getNpmLibDefs(FIXTURE_DIR);
+      expect(libDefs.length).toBe(4);
+      const scopedLibDefs = libDefs.filter(def => def.scope !== null);
+      expect(scopedLibDefs.length).toBe(2);
+    });
+
+    it('parses defs in packages correctly', async () => {
+      const cwd = path.join(FIXTURE_ROOT, 'defs-in-pkgs');
+      const FIXTURE_DIR = path.join(cwd, 'fakeCacheRepo', 'definitions');
+      const libDefs = await getNpmLibDefs(FIXTURE_DIR, undefined, false, {cwd});
       expect(libDefs.length).toBe(4);
       const scopedLibDefs = libDefs.filter(def => def.scope !== null);
       expect(scopedLibDefs.length).toBe(2);

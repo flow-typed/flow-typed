@@ -33,6 +33,7 @@ import got from 'got';
 
 import type {ValidationErrors as VErrors} from '../validationErrors';
 import {validationError} from '../validationErrors';
+import glob from '../glob';
 
 const P = Promise;
 
@@ -212,10 +213,19 @@ async function extractLibDefsFromNpmPkgDir(
   return libDefs;
 }
 
-async function getCacheNpmLibDefs() {
+type GetCacheNpmLibDefsOptions = {
+  cwd?: string,
+};
+
+async function getCacheNpmLibDefs({cwd}: GetCacheNpmLibDefsOptions = {}) {
   await ensureCacheRepo();
   await verifyCLIVersion();
-  return getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
+  return getNpmLibDefs(
+    path.join(getCacheRepoDir(), 'definitions'),
+    undefined,
+    false,
+    {cwd},
+  );
 }
 
 const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
@@ -376,12 +386,17 @@ async function _npmExists(pkgName: string): Promise<Function> {
   return got(pkgUrl, {method: 'HEAD'});
 }
 
+type FindNpmLibDefOptions = {
+  cwd?: string,
+};
+
 export async function findNpmLibDef(
   pkgName: string,
   pkgVersion: string,
   flowVersion: FlowVersion,
+  {cwd}: FindNpmLibDefOptions = {},
 ): Promise<null | NpmLibDef> {
-  const libDefs = await getCacheNpmLibDefs();
+  const libDefs = await getCacheNpmLibDefs({cwd});
   const filteredLibDefs = filterLibDefs(libDefs, {
     type: 'exact',
     pkgName,
@@ -481,6 +496,10 @@ export async function getInstalledNpmLibDefs(
   return installedLibDefs;
 }
 
+type GetNpmLibDefsOptions = {
+  cwd?: string,
+};
+
 /**
  * Retrieve a list of *all* npm libdefs.
  */
@@ -488,8 +507,47 @@ export async function getNpmLibDefs(
   defsDirPath: string,
   validationErrors?: VErrors,
   validating?: boolean,
+  options?: GetNpmLibDefsOptions = {},
 ): Promise<Array<NpmLibDef>> {
-  const npmLibDefs: Array<NpmLibDef> = [];
+  const npmLibDefs: Map<string, Array<NpmLibDef>> = new Map();
+
+  const {cwd} = options;
+  if (cwd) {
+    const node_modules = path.join(cwd, 'node_modules');
+    const pkgDefDirs = [
+      ...(await glob(path.join(node_modules, '@*', '*', 'flow-typed'))),
+      ...(await glob(path.join(node_modules, '*', 'flow-typed'))),
+    ];
+
+    await P.all(
+      pkgDefDirs.map(async itemPath => {
+        const itemStat = await fs.stat(itemPath);
+        if (!itemStat.isDirectory()) return;
+        const pkgDir = path.dirname(itemPath);
+        const pkgJson = JSON.parse(
+          await fs.readFile(path.join(pkgDir, 'package.json'), 'utf8'),
+        );
+        const pkgName = path.relative(node_modules, pkgDir);
+        let scope, itemName;
+        if (pkgName[0] === '@') {
+          // This must be a scoped npm package
+          [scope, itemName] = pkgName.split(/\//);
+        } else {
+          scope = null;
+          itemName = pkgName;
+        }
+        itemName += `_v${pkgJson.version}`;
+        const libDefs = await extractLibDefsFromNpmPkgDir(
+          itemPath,
+          scope,
+          itemName,
+          validationErrors,
+          validating,
+        );
+        if (!npmLibDefs.has(pkgName)) npmLibDefs.set(pkgName, libDefs);
+      }),
+    );
+  }
 
   const npmDefsDirPath = path.join(defsDirPath, 'npm');
   const dirItems = await fs.readdir(npmDefsDirPath);
@@ -514,7 +572,8 @@ export async function getNpmLibDefs(
                   validationErrors,
                   validating,
                 );
-                libDefs.forEach(libDef => npmLibDefs.push(libDef));
+                const pkgName = `${scope}/${itemName}`;
+                if (!npmLibDefs.has(pkgName)) npmLibDefs.set(pkgName, libDefs);
               } else {
                 const error = `Expected only sub-directories in this dir!`;
                 validationError(itemPath, error, validationErrors);
@@ -530,7 +589,7 @@ export async function getNpmLibDefs(
             validationErrors,
             validating,
           );
-          libDefs.forEach(libDef => npmLibDefs.push(libDef));
+          if (!npmLibDefs.has(itemName)) npmLibDefs.set(itemName, libDefs);
         }
       } else {
         const error = `Expected only directories to be present in this directory.`;
@@ -539,7 +598,7 @@ export async function getNpmLibDefs(
     }),
   );
 
-  return npmLibDefs;
+  return [].concat.apply([], [...npmLibDefs.values()]);
 }
 
 export async function getNpmLibDefVersionHash(

@@ -235,7 +235,7 @@ async function installNpmLibDefs({
         return;
       }
 
-      const libDef = await findNpmLibDef(name, ver, flowVersion);
+      const libDef = await findNpmLibDef(name, ver, flowVersion, {cwd});
       if (libDef === null) {
         unavailableLibDefs.push({ name, ver });
       } else {
