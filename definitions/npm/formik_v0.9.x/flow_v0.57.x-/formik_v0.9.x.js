@@ -183,4 +183,6 @@ declare module "formik" {
   declare export var Field: React$StatelessFunctionalComponent<any>;
 
   declare export var Form: React$StatelessFunctionalComponent<any>;
+
+  declare export var withFormik: Function;
 }
