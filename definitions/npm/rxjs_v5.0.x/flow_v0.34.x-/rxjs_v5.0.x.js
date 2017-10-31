@@ -480,6 +480,27 @@ declare class rxjs$Observable<+T> {
 
   ignoreElements<U>(): rxjs$Observable<U>;
 
+  last(
+    predicate?: (value: T, index: number, source: rxjs$Observable<T>) => boolean
+  ): rxjs$Observable<T>;
+  last<U>(
+    predicate: ?(
+      value: T,
+      index: number,
+      source: rxjs$Observable<T>
+    ) => boolean,
+    resultSelector: (value: T, index: number) => U
+  ): rxjs$Observable<U>;
+  last<U>(
+    predicate: ?(
+      value: T,
+      index: number,
+      source: rxjs$Observable<T>
+    ) => boolean,
+    resultSelector: ?(value: T, index: number) => U,
+    defaultValue: U
+  ): rxjs$Observable<U>;
+
   let<U>(
     project: (self: rxjs$Observable<T>) => rxjs$Observable<U>
   ): rxjs$Observable<U>;
