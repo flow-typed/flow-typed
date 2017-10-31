@@ -55,7 +55,9 @@ expect(1).to.be.within(5, 6);
 
 expect(new Date()).to.be.an.instanceof(Date);
 expect({ a: 1 }).to.have.property("a");
-expect({ a: 1 }).to.have.property("a").which.is.above(0);
+expect({ a: 1 })
+  .to.have.property("a")
+  .which.is.above(0);
 expect({ a: 1 }).to.have.property("a", 1);
 expect({ a: { b: 1 } }).to.have.nested.property("a.b", 1);
 
@@ -122,21 +124,23 @@ assert.instanceOf(instance, instance);
 assert.notInstanceOf(instance, Array);
 
 // tests for chai-as-promised
-expect(Promise.resolve(true)).to.eventually.equal(true).notify(function() {});
-expect(Promise.resolve(true)).to.eventually.be
-  .resolved()
+expect(Promise.resolve(true))
+  .to.eventually.equal(true)
+  .notify(function() {});
+expect(Promise.resolve(true))
+  .to.eventually.be.resolved()
   .then(function() {})
   .catch(function() {});
-expect(Promise.resolve(true)).to.eventually.be
-  .resolvedWith(true)
+expect(Promise.resolve(true))
+  .to.eventually.be.resolvedWith(true)
   .then(function() {})
   .catch(function() {});
-expect(Promise.resolve(true)).to.eventually.be
-  .rejected()
+expect(Promise.resolve(true))
+  .to.eventually.be.rejected()
   .then(function() {})
   .catch(function() {});
-expect(Promise.resolve(true)).to.eventually.be
-  .rejectedWith(Error)
+expect(Promise.resolve(true))
+  .to.eventually.be.rejectedWith(Error)
   .then(function() {})
   .catch(function() {});
 
@@ -145,3 +149,28 @@ expect({}).to.containSubset({});
 expect([{}]).to.containSubset([{}]);
 // $ExpectError
 expect({}).to.containSubset(0);
+
+// tests for chai-redux-mock-store
+expect({}).to.have.dispatchedActions([
+  action => {
+    expect(action).to.have.property("type", "HELLO");
+  },
+  { type: "SOME_TYPE", payload: { name: "John Doe" } }
+]);
+expect({}).to.contain.dispatchedActions([
+  action => {
+    expect(action).to.have.property("type", "HELLO");
+  },
+  { type: "SOME_TYPE", payload: { name: "John Doe" } }
+]);
+expect({}).to.have.dispatchedTypes(["HELLO", "OTHER_ACTION"]);
+expect({}).to.contain.dispatchedTypes(["HELLO", "OTHER_ACTION"]);
+// $ExpectError
+expect({}).to.have.dispatchedActions(["HELLO", "OTHER_ACTION"]);
+// $ExpectError
+expect({}).to.have.dispatchedTypes([
+  action => {
+    expect(action).to.have.property("type", "HELLO");
+  },
+  { type: "SOME_TYPE", payload: { name: "John Doe" } }
+]);
