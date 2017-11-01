@@ -76,7 +76,8 @@ working with this repository. The full list of commands is available at
 
 Installs libdefs from looking at your package.json.
 
-If `package-specification` was specified, only that one libdef will be installed.
+If `package-specification` was specified, only that one libdef will be installed.  
+If the `--ignore-dev-dependencies` flag was specified, devDependencies will be ignored.
 
 ```bash
 flow-typed install foo@1.2.3
