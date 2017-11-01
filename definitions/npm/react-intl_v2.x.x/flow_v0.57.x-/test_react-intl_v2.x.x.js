@@ -14,7 +14,7 @@ import {
   FormattedPlural,
   IntlProvider
 } from "react-intl";
-import type { IntlShape, MessageDescriptor } from "react-intl";
+import type { IntlShape, MessageDescriptor, IntlInjectedComponentClass } from "react-intl";
 
 intlShape({ foo: "bar" }, "propName", "TestComponentName");
 // $ExpectError number. This type is incompatible with void
