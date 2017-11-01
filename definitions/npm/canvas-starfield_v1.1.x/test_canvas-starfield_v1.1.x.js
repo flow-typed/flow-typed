@@ -10,6 +10,10 @@ const starfield = new Starfield({
   shootingStarInterval: 1
 });
 
+const starfield2 = new Starfield({
+  canvas: "#canvas-starfield"
+});
+
 const invalidStarfield = new Starfield({
   // $ExpectError
   canvas: 0,
