@@ -11,5 +11,5 @@ declare module "canvas-starfield" {
     start(): void;
   }
 
-  declare var exports: Starfield;
+  declare var exports: Class<Starfield>;
 }
