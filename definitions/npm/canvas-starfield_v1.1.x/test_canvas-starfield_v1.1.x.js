@@ -3,19 +3,25 @@ import Starfield from "canvas-starfield";
 
 const starfield = new Starfield({
   canvas: "#canvas-starfield",
-  maxStars: 1000,
   vx: 0.5,
   vy: 0.5,
   maxRadius: 1,
+  maxStars: 1000,
   shootingStarInterval: 1
 });
 
-// $ExpectError
 const invalidStarfield = new Starfield({
+  // $ExpectError
   canvas: 0,
-  maxStars: "",
+  // $ExpectError
   vx: "",
+  // $ExpectError
+  vy: "",
+  // $ExpectError
   maxRadius: "",
+  // $ExpectError
+  maxStars: "",
+  // $ExpectError
   shootingStarInterval: ""
 });
 

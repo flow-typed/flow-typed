@@ -4,8 +4,8 @@ declare module "canvas-starfield" {
       canvas: string | HTMLCanvasElement,
       vx?: number,
       vy?: number,
-      maxStars?: number,
       maxRadius?: number,
+      maxStars?: number,
       shootingStarInterval?: number
     }): Starfield;
     start(): void;
