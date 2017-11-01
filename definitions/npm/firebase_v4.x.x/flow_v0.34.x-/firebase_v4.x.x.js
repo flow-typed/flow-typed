@@ -312,8 +312,8 @@ declare class $npm$firebase$database$DataSnapshot {
 }
 
 declare class $npm$firebase$database$OnDisconnect {
-  cancel(onComplete: $npm$firebase$database$OnCompleteCallback): Promise<void>,
-  remove(onComplete: $npm$firebase$database$OnCompleteCallback): Promise<void>,
+  cancel(onComplete?: $npm$firebase$database$OnCompleteCallback): Promise<void>,
+  remove(onComplete?: $npm$firebase$database$OnCompleteCallback): Promise<void>,
   set(
     value: $npm$firebase$database$Value,
     onComplete?: $npm$firebase$database$OnCompleteCallback
