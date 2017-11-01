@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import { action, decorateAction } from '@storybook/addon-actions'
 
 const Button = (props) => <button {...props} />;
