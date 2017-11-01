@@ -14,6 +14,9 @@ expect(
 // $ExpectError
 expect(1).to.what("nope");
 
+// Fail message
+expect(1, "Fail");
+
 /**
  * Config
  */
@@ -43,6 +46,7 @@ expect([1]).which.includes(1);
 expect([1]).to.contain(1);
 expect([1]).which.contains(1);
 
+expect(1).to.eq(2);
 expect(1).to.eql(2);
 expect(1).to.equal(2);
 expect(1).which.equals(2);
@@ -174,3 +178,10 @@ expect({}).to.have.dispatchedTypes([
   },
   { type: "SOME_TYPE", payload: { name: "John Doe" } }
 ]);
+
+// chai-enzyme
+expect({ }).to.have.attr('key', 1);
+expect({ }).to.have.data('key', 1);
+expect({ }).to.have.prop('key', 1);
+expect({ }).to.have.state('key', 1);
+expect({ }).to.have.value('val');
