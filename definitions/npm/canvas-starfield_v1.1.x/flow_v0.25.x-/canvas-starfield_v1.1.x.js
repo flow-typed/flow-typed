@@ -7,7 +7,7 @@ declare module "canvas-starfield" {
       maxStars?: number,
       maxRadius?: number,
       shootingStarInterval?: number
-    }): this;
+    }): Starfield;
     start(): void;
   }
 
