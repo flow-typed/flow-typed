@@ -22,4 +22,4 @@ const invalidStarfield = new Starfield({
 starfield.start();
 
 // $ExpectError
-starfield.start();
+starfield.start("a");
