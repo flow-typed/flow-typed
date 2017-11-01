@@ -2,12 +2,12 @@
 /** ** firebase ****/
 
 declare interface $npm$firebase$Config {
-  apiKey: string,
-  authDomain?: string,
-  databaseURL?: string,
-  projectId?: string,
-  storageBucket?: string,
-  messagingSenderId?: string
+  apiKey: string;
+  authDomain?: string;
+  databaseURL?: string;
+  projectId?: string;
+  storageBucket?: string;
+  messagingSenderId?: string;
 }
 
 declare interface $npm$firebase$auth$Error {
@@ -49,92 +49,92 @@ declare interface $npm$firebase$auth$Error {
     | "auth/operation-not-supported-in-this-environment"
     | "auth/popup-closed-by-user"
     | "auth/unauthorized-domain"
-    | "auth/no-such-provider",
-  message: string
+    | "auth/no-such-provider";
+  message: string;
 }
 
 declare interface $npm$firebase$Error {
-  code: $PropertyType<$npm$firebase$auth$Error, "code"> | "app/no-app",
-  message: string,
-  name: string,
-  stack: ?string
+  code: $PropertyType<$npm$firebase$auth$Error, "code"> | "app/no-app";
+  message: string;
+  name: string;
+  stack: ?string;
 }
 
 /** *** app *****/
 declare class $npm$firebase$App {
-  name: string,
-  +options: $npm$firebase$Config,
-  auth(): $npm$firebase$auth$Auth,
-  database(): $npm$firebase$database$Database,
-  storage(): $npm$firebase$storage$Storage,
-  delete(): Promise<void>
+  name: string;
+  +options: $npm$firebase$Config;
+  auth(): $npm$firebase$auth$Auth;
+  database(): $npm$firebase$database$Database;
+  storage(): $npm$firebase$storage$Storage;
+  delete(): Promise<void>;
 }
 
 /** **** auth *******/
 declare interface $npm$firebase$auth$ActionCodeInfo {
-  data: { email: string }
+  data: { email: string };
 }
 
 declare interface $npm$firebase$auth$ApplicationVerifier {
-  type: string,
-  verify(): Promise<string>
+  type: string;
+  verify(): Promise<string>;
 }
 
 declare class $npm$firebase$auth$Auth {
-  app: $npm$firebase$App,
-  currentUser: $npm$firebase$auth$User,
-  applyActionCode(code: string): Promise<void>,
-  checkActionCode(code: string): Promise<$npm$firebase$auth$ActionCodeInfo>,
-  confirmPasswordReset(code: string, newPassword: string): Promise<void>,
-  createCustomToken(uid: string, developerClaims?: {}): string,
+  app: $npm$firebase$App;
+  currentUser: $npm$firebase$auth$User;
+  applyActionCode(code: string): Promise<void>;
+  checkActionCode(code: string): Promise<$npm$firebase$auth$ActionCodeInfo>;
+  confirmPasswordReset(code: string, newPassword: string): Promise<void>;
+  createCustomToken(uid: string, developerClaims?: {}): string;
   createUserWithEmailAndPassword(
     email: string,
     password: string
-  ): Promise<$npm$firebase$auth$User>,
-  fetchProvidersForEmail(email: string): Promise<Array<string>>,
+  ): Promise<$npm$firebase$auth$User>;
+  fetchProvidersForEmail(email: string): Promise<Array<string>>;
   onAuthStateChanged(
     nextOrObserver: (?$npm$firebase$auth$User) => void,
     error?: (error: $npm$firebase$auth$Error) => void,
     completed?: () => void
-  ): () => void,
+  ): () => void;
   onIdTokenChanged(
     nextOrObserver: Object | ((user?: $npm$firebase$auth$User) => void),
     error?: (error: $npm$firebase$auth$Error) => void,
     completed?: () => void
-  ): () => void,
-  sendPasswordResetEmail(email: string): Promise<void>,
+  ): () => void;
+  sendPasswordResetEmail(email: string): Promise<void>;
   signInAndRetrieveDataWithCredential(
     credential: $npm$firebase$auth$AuthCredential
-  ): Promise<$npm$firebase$auth$UserCredential>,
-  signInAnonymously(): Promise<$npm$firebase$auth$User>,
+  ): Promise<$npm$firebase$auth$UserCredential>;
+  signInAnonymously(): Promise<$npm$firebase$auth$User>;
   signInWithCredential(
     credential: $npm$firebase$auth$AuthCredential
-  ): Promise<$npm$firebase$auth$User>,
-  signInWithCustomToken(token: string): Promise<$npm$firebase$auth$User>,
+  ): Promise<$npm$firebase$auth$User>;
+  signInWithCustomToken(token: string): Promise<$npm$firebase$auth$User>;
   signInWithEmailAndPassword(
     email: string,
     password: string
-  ): Promise<$npm$firebase$auth$User>,
+  ): Promise<$npm$firebase$auth$User>;
   signInWithPhoneNumber(
     phoneNumber: string,
     applicationVerifier: $npm$firebase$auth$ApplicationVerifier
-  ): Promise<$npm$firebase$auth$ConfirmationResult>,
-  signOut(): Promise<void>,
-  verifyIdToken(idToken: string): Promise<Object>,
-  verifyPasswordResetCode(code: string): Promise<string>
+  ): Promise<$npm$firebase$auth$ConfirmationResult>;
+  signOut(): Promise<void>;
+  verifyIdToken(idToken: string): Promise<Object>;
+  verifyPasswordResetCode(code: string): Promise<string>;
 }
 
 declare interface $npm$firebase$auth$AuthCredential {
-  providerId: string
+  providerId: string;
 }
 
 declare class $npm$firebase$auth$AuthProvider {
-  providerId: string
+  providerId: string;
 }
 
 declare interface $npm$firebase$auth$ConfirmationResult {
-  verificationId: string,
-  confirm(verificationCode: string): Promise<$npm$firebase$auth$UserCredential>
+  verificationId: string;
+  confirm(verificationCode: string): Promise<$npm$firebase$auth$UserCredential>;
 }
 
 declare type $npm$firebase$auth$UserProfile = {
@@ -143,130 +143,133 @@ declare type $npm$firebase$auth$UserProfile = {
 };
 
 declare interface $npm$firebase$auth$AdditionalUserInfo {
-  providerId: string,
-  profile?: $npm$firebase$auth$UserProfile,
-  username?: string
+  providerId: string;
+  profile?: $npm$firebase$auth$UserProfile;
+  username?: string;
 }
 
 declare interface $npm$firebase$auth$UserCredential {
-  user: $npm$firebase$auth$User,
-  credential?: $npm$firebase$auth$AuthCredential,
-  operationType?: string,
-  additionalUserInfo?: $npm$firebase$auth$AdditionalUserInfo
+  user: $npm$firebase$auth$User;
+  credential?: $npm$firebase$auth$AuthCredential;
+  operationType?: string;
+  additionalUserInfo?: $npm$firebase$auth$AdditionalUserInfo;
 }
 
 declare class $npm$firebase$auth$UserInfo {
-  displayName: ?string,
-  email: ?string,
-  photoURL: ?string,
-  providerId: string,
-  uid: string
+  displayName: ?string;
+  email: ?string;
+  photoURL: ?string;
+  providerId: string;
+  uid: string;
 }
 
 declare class $npm$firebase$auth$User extends $npm$firebase$auth$UserInfo {
-  displayName: ?string,
-  email: ?string,
-  emailVerified: boolean,
-  isAnonymous: boolean,
-  phoneNumber: ?string,
-  photoUrl: ?string,
-  providerData: Array<$npm$firebase$auth$UserInfo>,
-  providerId: string,
-  refreshToken: string,
-  uid: string,
-  delete(): Promise<void>,
-  getIdToken(forceRefresh?: boolean): Promise<string>,
-  getToken(forceRefresh?: boolean): Promise<string>,
+  displayName: ?string;
+  email: ?string;
+  emailVerified: boolean;
+  isAnonymous: boolean;
+  phoneNumber: ?string;
+  photoUrl: ?string;
+  providerData: Array<$npm$firebase$auth$UserInfo>;
+  providerId: string;
+  refreshToken: string;
+  uid: string;
+  delete(): Promise<void>;
+  getIdToken(forceRefresh?: boolean): Promise<string>;
+  getToken(forceRefresh?: boolean): Promise<string>;
   linkAndRetrieveDataWithCredential(
     credential: $npm$firebase$auth$AuthCredential
-  ): Promise<$npm$firebase$auth$UserCredential>,
+  ): Promise<$npm$firebase$auth$UserCredential>;
   linkWithCredential(
     credential: $npm$firebase$auth$AuthCredential
-  ): Promise<$npm$firebase$auth$User>,
+  ): Promise<$npm$firebase$auth$User>;
   linkWithPhoneNumber(
     phoneNumber: string,
     applicationVerifier: $npm$firebase$auth$ApplicationVerifier
-  ): Promise<$npm$firebase$auth$ConfirmationResult>,
+  ): Promise<$npm$firebase$auth$ConfirmationResult>;
   linkWithPopup(
     provider: $npm$firebase$auth$OAuthProvider
-  ): Promise<$npm$firebase$auth$UserCredential>,
+  ): Promise<$npm$firebase$auth$UserCredential>;
   reauthenticateAndRetrieveDataWithCredential(
     credential: $npm$firebase$auth$AuthCredential
-  ): Promise<void>,
+  ): Promise<void>;
   reauthenticateWithCredential(
     credential: $npm$firebase$auth$AuthCredential
-  ): Promise<void>,
+  ): Promise<void>;
   reauthenticateWithPhoneNumber(
     phoneNumber: string,
     applicationVerifier: $npm$firebase$auth$ApplicationVerifier
-  ): Promise<$npm$firebase$auth$ConfirmationResult>,
-  reload(): Promise<void>,
-  sendEmailVerification(): Promise<void>,
-  toJSON(): Object,
-  unlink(providerId: string): Promise<$npm$firebase$auth$User>,
-  updateEmail(newEmail: string): Promise<void>,
-  updatePassword(newPassword: string): Promise<void>,
+  ): Promise<$npm$firebase$auth$ConfirmationResult>;
+  reload(): Promise<void>;
+  sendEmailVerification(): Promise<void>;
+  toJSON(): Object;
+  unlink(providerId: string): Promise<$npm$firebase$auth$User>;
+  updateEmail(newEmail: string): Promise<void>;
+  updatePassword(newPassword: string): Promise<void>;
   updatePhoneNumber(
     phoneCredential: $npm$firebase$auth$AuthCredential
-  ): Promise<void>,
-  updateProfile(profile: $npm$firebase$auth$UserProfile): Promise<void>
+  ): Promise<void>;
+  updateProfile(profile: $npm$firebase$auth$UserProfile): Promise<void>;
 }
 
 declare class $npm$firebase$auth$EmailAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string,
-  providerId: string,
-  credential(email: string, password: string): $npm$firebase$auth$AuthCredential
+  PROVIDER_ID: string;
+  providerId: string;
+  credential(
+    email: string,
+    password: string
+  ): $npm$firebase$auth$AuthCredential;
 }
 
 declare class $npm$firebase$auth$FacebookAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string,
-  credential(token: string): $npm$firebase$auth$AuthCredential,
-  addScope(scope: string): $npm$firebase$auth$FacebookAuthProvider,
+  PROVIDER_ID: string;
+  credential(token: string): $npm$firebase$auth$AuthCredential;
+  addScope(scope: string): $npm$firebase$auth$FacebookAuthProvider;
   setCustomParameters(
     customOAuthParameters: Object
-  ): $npm$firebase$auth$FacebookAuthProvider
+  ): $npm$firebase$auth$FacebookAuthProvider;
 }
 
 declare class $npm$firebase$auth$GithubAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string,
-  credential(token: string): $npm$firebase$auth$AuthCredential,
-  addScope(scope: string): $npm$firebase$auth$GithubAuthProvider,
+  PROVIDER_ID: string;
+  credential(token: string): $npm$firebase$auth$AuthCredential;
+  addScope(scope: string): $npm$firebase$auth$GithubAuthProvider;
   setCustomParameters(
     customOAuthParameters: Object
-  ): $npm$firebase$auth$GithubAuthProvider
+  ): $npm$firebase$auth$GithubAuthProvider;
 }
 
 declare class $npm$firebase$auth$GoogleAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string,
+  PROVIDER_ID: string;
   credential(
     idToken?: string,
     accessToken?: string
-  ): $npm$firebase$auth$AuthCredential,
-  addScope(scope: string): $npm$firebase$auth$GoogleAuthProvider,
+  ): $npm$firebase$auth$AuthCredential;
+  addScope(scope: string): $npm$firebase$auth$GoogleAuthProvider;
   setCustomParameters(
     customOAuthParameters: Object
-  ): $npm$firebase$auth$GoogleAuthProvider
+  ): $npm$firebase$auth$GoogleAuthProvider;
 }
 
 declare class $npm$firebase$auth$PhoneAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string,
+  PROVIDER_ID: string;
   constructor(
     auth?: $npm$firebase$auth$Auth
-  ): $npm$firebase$auth$PhoneAuthProvider,
+  ): $npm$firebase$auth$PhoneAuthProvider;
   credential(
     verificationId: string,
     verificationCode: string
-  ): $npm$firebase$auth$AuthCredential,
+  ): $npm$firebase$auth$AuthCredential;
   verifyPhoneNumber(
     phoneNumber: string,
     applicationVerifier: $npm$firebase$auth$ApplicationVerifier
-  ): Promise<string>
+  ): Promise<string>;
 }
 
 declare class $npm$firebase$auth$TwitterAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string,
-  credential(token: string, secret: string): $npm$firebase$auth$AuthCredential,
-  setCustomParameters(customOAuthParameters: Object): this
+  PROVIDER_ID: string;
+  credential(token: string, secret: string): $npm$firebase$auth$AuthCredential;
+  setCustomParameters(customOAuthParameters: Object): this;
 }
 
 declare type $npm$firebase$auth$OAuthProvider =
@@ -289,44 +292,44 @@ declare type $npm$firebase$database$QueryEventType =
 declare type $npm$firebase$database$Priority = string | number | null;
 
 declare class $npm$firebase$database$Database {
-  app: $npm$firebase$App,
-  goOffline(): void,
-  goOnline(): void,
-  ref(path?: string): $npm$firebase$database$Reference,
-  refFromURL(url: string): $npm$firebase$database$Reference
+  app: $npm$firebase$App;
+  goOffline(): void;
+  goOnline(): void;
+  ref(path?: string): $npm$firebase$database$Reference;
+  refFromURL(url: string): $npm$firebase$database$Reference;
 }
 
 declare class $npm$firebase$database$DataSnapshot {
-  key: ?string,
-  ref: $npm$firebase$database$Reference,
-  child(path?: string): $npm$firebase$database$DataSnapshot,
-  exists(): boolean,
-  exportVal(): $npm$firebase$database$Value,
-  forEach(action: ($npm$firebase$database$DataSnapshot) => boolean): boolean,
-  getPriority(): $npm$firebase$database$Priority,
-  hasChild(path: string): boolean,
-  hasChildren(): boolean,
-  numChildren(): number,
-  toJSON(): Object,
-  val(): $npm$firebase$database$Value
+  key: ?string;
+  ref: $npm$firebase$database$Reference;
+  child(path?: string): $npm$firebase$database$DataSnapshot;
+  exists(): boolean;
+  exportVal(): $npm$firebase$database$Value;
+  forEach(action: ($npm$firebase$database$DataSnapshot) => boolean): boolean;
+  getPriority(): $npm$firebase$database$Priority;
+  hasChild(path: string): boolean;
+  hasChildren(): boolean;
+  numChildren(): number;
+  toJSON(): Object;
+  val(): $npm$firebase$database$Value;
 }
 
 declare class $npm$firebase$database$OnDisconnect {
-  cancel(onComplete: $npm$firebase$database$OnCompleteCallback): Promise<void>,
-  remove(onComplete: $npm$firebase$database$OnCompleteCallback): Promise<void>,
+  cancel(onComplete?: $npm$firebase$database$OnCompleteCallback): Promise<void>;
+  remove(onComplete?: $npm$firebase$database$OnCompleteCallback): Promise<void>;
   set(
     value: $npm$firebase$database$Value,
     onComplete?: $npm$firebase$database$OnCompleteCallback
-  ): Promise<void>,
+  ): Promise<void>;
   setWithPriority(
     value: $npm$firebase$database$Value,
     priority: number | string | null,
     onComplete?: $npm$firebase$database$OnCompleteCallback
-  ): Promise<void>,
+  ): Promise<void>;
   update(
     values: { +[path: string]: $npm$firebase$database$Value },
     onComplete?: $npm$firebase$database$OnCompleteCallback
-  ): Promise<void>
+  ): Promise<void>;
 }
 
 declare type $npm$firebase$database$Callback = (
@@ -335,71 +338,71 @@ declare type $npm$firebase$database$Callback = (
 ) => void;
 
 declare class $npm$firebase$database$Query {
-  ref: $npm$firebase$database$Reference,
+  ref: $npm$firebase$database$Reference;
   endAt(
     value: number | string | boolean | null,
     key?: string
-  ): $npm$firebase$database$Query,
+  ): $npm$firebase$database$Query;
   equalTo(
     value: number | string | boolean | null,
     key?: string
-  ): $npm$firebase$database$Query,
-  isEqual(other: $npm$firebase$database$Query): boolean,
-  limitToFirst(limit: number): $npm$firebase$database$Query,
-  limitToLast(limit: number): $npm$firebase$database$Query,
+  ): $npm$firebase$database$Query;
+  isEqual(other: $npm$firebase$database$Query): boolean;
+  limitToFirst(limit: number): $npm$firebase$database$Query;
+  limitToLast(limit: number): $npm$firebase$database$Query;
   off(
     eventType?: $npm$firebase$database$QueryEventType,
     callback?: $npm$firebase$database$Callback,
     context?: Object
-  ): void,
+  ): void;
   on(
     eventType: $npm$firebase$database$QueryEventType,
     callback: $npm$firebase$database$Callback,
     cancelCallbackOrContext?: (error: Object) => void | Object,
     context?: $npm$firebase$database$Callback
-  ): $npm$firebase$database$Callback,
+  ): $npm$firebase$database$Callback;
   once(
     eventType: $npm$firebase$database$QueryEventType,
     successCallback?: $npm$firebase$database$Callback,
     failureCallbackOrContext?: (error: Object) => void | Object,
     context?: Object
-  ): Promise<$npm$firebase$database$DataSnapshot>,
-  orderByChild(path: string): $npm$firebase$database$Query,
-  orderByKey(): $npm$firebase$database$Query,
-  orderByPriority(): $npm$firebase$database$Query,
-  orderByValue(): $npm$firebase$database$Query,
+  ): Promise<$npm$firebase$database$DataSnapshot>;
+  orderByChild(path: string): $npm$firebase$database$Query;
+  orderByKey(): $npm$firebase$database$Query;
+  orderByPriority(): $npm$firebase$database$Query;
+  orderByValue(): $npm$firebase$database$Query;
   startAt(
     value: number | string | boolean | null,
     key?: string
-  ): $npm$firebase$database$Query,
-  toJSON(): Object,
-  toString(): string
+  ): $npm$firebase$database$Query;
+  toJSON(): Object;
+  toString(): string;
 }
 
 declare class $npm$firebase$database$Reference extends $npm$firebase$database$Query {
-  key: ?string,
-  parent?: $npm$firebase$database$Reference,
-  root: $npm$firebase$database$Reference,
-  child(path: string): $npm$firebase$database$Reference,
-  onDisconnect(): $npm$firebase$database$OnDisconnect,
+  key: ?string;
+  parent?: $npm$firebase$database$Reference;
+  root: $npm$firebase$database$Reference;
+  child(path: string): $npm$firebase$database$Reference;
+  onDisconnect(): $npm$firebase$database$OnDisconnect;
   push(
     value?: $npm$firebase$database$Value,
     onComplete?: $npm$firebase$database$OnCompleteCallback
-  ): $npm$firebase$database$ThenableReference & Promise<void>,
-  remove(onComplete?: $npm$firebase$database$OnCompleteCallback): Promise<void>,
+  ): $npm$firebase$database$ThenableReference & Promise<void>;
+  remove(onComplete?: $npm$firebase$database$OnCompleteCallback): Promise<void>;
   set(
     value: $npm$firebase$database$Value,
     onComplete?: $npm$firebase$database$OnCompleteCallback
-  ): Promise<void>,
+  ): Promise<void>;
   setPriority(
     priority: $npm$firebase$database$Priority,
     onComplete?: $npm$firebase$database$OnCompleteCallback
-  ): Promise<void>,
+  ): Promise<void>;
   setWithPriority(
     newVal: $npm$firebase$database$Value,
     newPriority: $npm$firebase$database$Priority,
     onComplete?: $npm$firebase$database$OnCompleteCallback
-  ): Promise<void>,
+  ): Promise<void>;
   transaction(
     transactionUpdate: (
       data: $npm$firebase$database$Value
@@ -413,15 +416,15 @@ declare class $npm$firebase$database$Reference extends $npm$firebase$database$Qu
   ): Promise<{
     committed: boolean,
     snapshot: $npm$firebase$database$DataSnapshot | null
-  }>,
+  }>;
   update(
     values: { [path: string]: $npm$firebase$database$Value },
     onComplete?: $npm$firebase$database$OnCompleteCallback
-  ): Promise<void>
+  ): Promise<void>;
 }
 
 declare class $npm$firebase$database$ServerValue {
-  static TIMESTAMP: {}
+  static TIMESTAMP: {};
 }
 
 declare class $npm$firebase$database$ThenableReference extends $npm$firebase$database$Reference {}
@@ -441,70 +444,70 @@ declare type $npm$firebase$storage$TaskState =
   | "error";
 
 declare class $npm$firebase$storage$Storage {
-  app: $npm$firebase$App,
-  maxOperationRetryTime: number,
-  maxUploadRetryTime: number,
-  ref(path?: string): $npm$firebase$storage$Reference,
-  refFromURL(url: string): $npm$firebase$storage$Reference,
-  setMaxOperationRetryTime(time: number): void,
-  setMaxUploadRetryTime(time: number): void
+  app: $npm$firebase$App;
+  maxOperationRetryTime: number;
+  maxUploadRetryTime: number;
+  ref(path?: string): $npm$firebase$storage$Reference;
+  refFromURL(url: string): $npm$firebase$storage$Reference;
+  setMaxOperationRetryTime(time: number): void;
+  setMaxUploadRetryTime(time: number): void;
 }
 
 declare class $npm$firebase$storage$FullMetadata extends $npm$firebase$storage$UploadMetadata {
-  bucket: string,
-  downloadURLs: Array<string>,
-  fullPath: string,
-  generation: string,
-  metageneration: string,
-  name: string,
-  size: number,
-  timeCreated: string,
-  updated: string
+  bucket: string;
+  downloadURLs: Array<string>;
+  fullPath: string;
+  generation: string;
+  metageneration: string;
+  name: string;
+  size: number;
+  timeCreated: string;
+  updated: string;
 }
 
 declare class $npm$firebase$storage$Reference {
-  bucket: string,
-  fullPath: string,
-  name: string,
-  parent?: $npm$firebase$storage$Reference,
-  root: $npm$firebase$storage$Reference,
-  storage: $npm$firebase$storage$Storage,
-  child(path: string): $npm$firebase$storage$Reference,
-  delete(): Promise<void>,
-  getDownloadURL(): Promise<string>,
-  getMetadata(): Promise<$npm$firebase$storage$FullMetadata>,
+  bucket: string;
+  fullPath: string;
+  name: string;
+  parent?: $npm$firebase$storage$Reference;
+  root: $npm$firebase$storage$Reference;
+  storage: $npm$firebase$storage$Storage;
+  child(path: string): $npm$firebase$storage$Reference;
+  delete(): Promise<void>;
+  getDownloadURL(): Promise<string>;
+  getMetadata(): Promise<$npm$firebase$storage$FullMetadata>;
   put(
     data: Blob | Uint8Array | ArrayBuffer,
     metadata?: $npm$firebase$storage$UploadMetadata
-  ): $npm$firebase$storage$UploadTask,
+  ): $npm$firebase$storage$UploadTask;
   putString(
     data: string,
     format: $npm$firebase$storage$StringFormat,
     metadata?: $npm$firebase$storage$UploadMetadata
-  ): $npm$firebase$storage$UploadTask,
-  toString(): string,
+  ): $npm$firebase$storage$UploadTask;
+  toString(): string;
   updateMetadata(
     metadata: $npm$firebase$storage$SettableMetadata
-  ): Promise<$npm$firebase$storage$FullMetadata>
+  ): Promise<$npm$firebase$storage$FullMetadata>;
 }
 
 declare class $npm$firebase$storage$SettableMetadata {
-  cacheControl?: string,
-  contentDisposition?: string,
-  contentEncoding?: string,
-  contentLanguage?: string,
-  contentType?: string,
-  customMetadata?: { [key: string]: string | void }
+  cacheControl?: string;
+  contentDisposition?: string;
+  contentEncoding?: string;
+  contentLanguage?: string;
+  contentType?: string;
+  customMetadata?: { [key: string]: string | void };
 }
 
 declare class $npm$firebase$storage$UploadMetadata extends $npm$firebase$storage$SettableMetadata {
-  md5Hash?: string
+  md5Hash?: string;
 }
 
 declare interface $npm$firebase$storage$Observer {
-  next: (snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void,
-  error?: (error: Error) => void,
-  complete?: () => void
+  next: (snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void;
+  error?: (error: Error) => void;
+  complete?: () => void;
 }
 
 declare type $npm$firebase$storage$Unsubscribe = () => void;
@@ -520,12 +523,12 @@ declare type $npm$firebase$storage$Subscribe = (
 declare class $npm$firebase$storage$UploadTask extends Promise<
   $npm$firebase$storage$UploadTaskSnapshot
 > {
-  snapshot: $npm$firebase$storage$UploadTaskSnapshot,
-  cancel(): boolean,
+  snapshot: $npm$firebase$storage$UploadTaskSnapshot;
+  cancel(): boolean;
   on(
     event: $npm$firebase$storage$TaskEvent,
     ...rest: Array<void>
-  ): $npm$firebase$storage$Subscribe,
+  ): $npm$firebase$storage$Subscribe;
   on(
     event: $npm$firebase$storage$TaskEvent,
     observerOrNext:
@@ -533,19 +536,19 @@ declare class $npm$firebase$storage$UploadTask extends Promise<
       | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void),
     onError?: (error: Error) => void,
     onComplete?: () => void
-  ): $npm$firebase$storage$Unsubscribe,
-  pause(): boolean,
-  resume(): boolean
+  ): $npm$firebase$storage$Unsubscribe;
+  pause(): boolean;
+  resume(): boolean;
 }
 
 declare class $npm$firebase$storage$UploadTaskSnapshot {
-  bytesTransferred: number,
-  downloadURL?: string,
-  metadata: $npm$firebase$storage$FullMetadata,
-  ref: $npm$firebase$storage$Reference,
-  state: $npm$firebase$storage$TaskState,
-  task: $npm$firebase$storage$UploadTask,
-  totalBytes: number
+  bytesTransferred: number;
+  downloadURL?: string;
+  metadata: $npm$firebase$storage$FullMetadata;
+  ref: $npm$firebase$storage$Reference;
+  state: $npm$firebase$storage$TaskState;
+  task: $npm$firebase$storage$UploadTask;
+  totalBytes: number;
 }
 
 // Exporting the types
