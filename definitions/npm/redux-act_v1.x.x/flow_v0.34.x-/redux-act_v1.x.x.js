@@ -1,9 +1,11 @@
+type Reducer$On<S> = (actionCreator: mixed, reduceFunction: (S) => mixed) => mixed;
+type Reducer$Off = (actionCreator: mixed) => mixed;
+type Reducer$OnOff<S> = (on: Reducer$On<S>, off: Reducer$Off) => void;
+
 declare module 'redux-act' {
   declare module.exports: {
     createReducer<ReducerState>(
-      handlers: {
-        [key: string]: (ReducerState, payload: mixed) => ReducerState,
-      },
+      handlers: {|[key: string]: (ReducerState, payload: mixed) => ReducerState|} | Reducer$OnOff<ReducerState>,
       defaultState?: ReducerState,
     ): {
       (): (state: ReducerState, payload?: mixed, meta?: mixed) => ReducerState,
@@ -11,8 +13,8 @@ declare module 'redux-act' {
       // TODO: Document parameters & add tests
       options: () => mixed,
       has: (actionCreator: mixed) => boolean,
-      on: (actionCreator: mixed, reduceFunction: () => mixed) => void,
-      off: (actionCreator: mixed) => void,
+      on: Reducer$On<ReducerState>,
+      off: Reducer$Off,
       assignAll: ({}|Array<mixed>, {}|Array<mixed>) => mixed,
       bindAll: ({}|Array<mixed>, {}|Array<mixed>) => mixed,
       batch: ({}|Array<mixed>) => mixed,

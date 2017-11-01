@@ -20,15 +20,23 @@ createReducer({
   isEditing: false,
 })
 
-createReducer({
-  // $ExpectError
-  foo: {},
-  bar() {},
-}, 123);
+// $ExpectError
+createReducer({ foo: {}, bar() {} }, 123);
 
 const increment = createAction('increment');
 const decrement = createAction('decrement');
+
 createReducer({
   [increment.toString()]: (state) => state + 1,
   [decrement.toString()]: (state) => state - 1,
 }, 0);
+
+createReducer((on) => {
+  on(increment.toString(), (state) => state + 1);
+  on(decrement.toString(), (state) => state - 1);
+}, 10);
+
+createReducer((on, off) => {
+  on(increment.toString(), (state) => state + 1);
+  off(decrement.toString());
+}, 10);
