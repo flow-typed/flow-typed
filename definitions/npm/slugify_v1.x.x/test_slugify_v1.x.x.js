@@ -1,7 +1,7 @@
 /* @flow */
 import slugify from "slugify";
 
-const slugText: string = slugify("Hello world");
+const slugifiedText: string = slugify("Hello world");
 slugify("Hello world", "-");
 
 // $ExpectError
