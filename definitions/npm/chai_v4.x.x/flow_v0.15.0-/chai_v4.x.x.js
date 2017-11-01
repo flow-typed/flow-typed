@@ -27,6 +27,7 @@ declare module "chai" {
     contain: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
     contains: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
 
+    eq: (value: T) => ExpectChain<T>,
     eql: (value: T) => ExpectChain<T>,
     equal: (value: T) => ExpectChain<T>,
     equals: (value: T) => ExpectChain<T>,
@@ -88,6 +89,7 @@ declare module "chai" {
     extensible: () => ExpectChain<T>,
     sealed: () => ExpectChain<T>,
     frozen: () => ExpectChain<T>,
+    NaN: () => ExpectChain<T>,
 
     // chai-immutable
     size: (n: number) => ExpectChain<T>,
@@ -120,10 +122,17 @@ declare module "chai" {
     dispatchedActions: (
       actions: Array<Object | ((action: Object) => any)>
     ) => ExpectChain<T>,
-    dispatchedTypes: (actions: Array<string>) => ExpectChain<T>
+    dispatchedTypes: (actions: Array<string>) => ExpectChain<T>,
+
+    // chai-enzyme
+    attr: (key: string, val?: any) => ExpectChain<T>,
+    data: (key: string, val?: any) => ExpectChain<T>,
+    prop: (key: string, val?: any) => ExpectChain<T>,
+    state: (key: string, val?: any) => ExpectChain<T>,
+    value: (val: string) => ExpectChain<T>
   };
 
-  declare function expect<T>(actual: T): ExpectChain<T>;
+  declare function expect<T>(actual: T, message?: string): ExpectChain<T>;
 
   declare function use(plugin: (chai: Object, utils: Object) => void): void;
 
