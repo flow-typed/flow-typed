@@ -441,7 +441,7 @@ async function runTestGroup(
 ): Promise<Array<string>> {
   // Some older versions of Flow choke on ">"/"<"/"="
   const testDirName = testGroup.id
-    .replace("/", "--")
+    .replace(/\//g, "--")
     .replace(/>/g, "gt")
     .replace(/</g, "lt")
     .replace(/=/g, "eq");
