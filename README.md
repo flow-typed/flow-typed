@@ -72,11 +72,12 @@ The `flow-typed` npm package provides a CLI that includes several commands for
 working with this repository. The full list of commands is available at
 [CLI Commands & Flags](https://github.com/flowtype/flow-typed/wiki/CLI-Commands-and-Flags).
 
-##### `flow-typed install [package-specification]`
+##### `flow-typed install [package-specification] [--ignoreDeps deps]`
 
 Installs libdefs from looking at your package.json.
 
-If `package-specification` was specified, only that one libdef will be installed.
+If `package-specification` was specified, only that one libdef will be installed.  
+If the `--ignoreDeps` flag was specified, the libdefs for the specified deps will be ignored. i.e: `--ignoreDeps dev bundle peer`.
 
 ```bash
 flow-typed install foo@1.2.3
