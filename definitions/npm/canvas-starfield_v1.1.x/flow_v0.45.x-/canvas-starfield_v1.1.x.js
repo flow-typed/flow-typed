@@ -8,7 +8,7 @@ declare module "canvas-starfield" {
       maxStars?: number,
       shootingStarInterval?: number
     }): Starfield;
-    start(): void;
+    start(void): void;
   }
 
   declare var exports: Class<Starfield>;
