@@ -1,6 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, uncurryN, curry } from "ramda";
+import _, { compose, pipe, uncurryN, curry, pipeP, tryCatch } from "ramda";
 // Function
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -75,7 +75,7 @@ const str2: string = _.compose(_.replace("3", "4"), _.toLower, _.trim)(
 const fn2: (n: number) => (n: number) => number = pipe(_.add);
 const fn3: (n: number) => number = fn2(2);
 const add2p = _.pipe(_.add(2));
-const b: number = add2(2);
+const b: number = add2p(2);
 const fail: string = _.pipe(_.trim)("h");
 const str3: Array<string | void> = _.pipe(_.toLower, _.trim, _.match(/2/))(
   " 1,2,3 "
@@ -328,3 +328,128 @@ const needs3_error3: string => string => string = uncurryN(3, needs3)(
 );
 
 const needs3_no_error: string = uncurryN(3, needs3)("", "", "");
+
+// --- PipeP ---
+const pAdd: number => number => Promise<number> = a => b =>
+  Promise.resolve(a + b);
+const pAppend: string => string => Promise<string> = a => b =>
+  Promise.resolve(a + b);
+const pToString: number => Promise<string> = n => Promise.resolve(String(n));
+const pFn1: number => Promise<number> = pipeP(pAdd(2));
+const pFoo1: Promise<number> = pFn1(2);
+const pFn2: number => Promise<string> = pipeP(pAdd(2), pToString);
+const pFoo2: Promise<string> = pFn2(2);
+const pFn3: number => Promise<string> = pipeP(pAdd(2), pToString, pAppend("A"));
+const pFoo3: Promise<string> = pFn3(2);
+const pFn4: number => Promise<string> = pipeP(
+  pAdd(2),
+  pToString,
+  pAppend("A"),
+  pAppend("B")
+);
+const pFoo4: Promise<string> = pFn4(2);
+const pFn5: number => Promise<string> = pipeP(
+  pAdd(2),
+  pToString,
+  pAppend("A"),
+  pAppend("B"),
+  pAppend("C")
+);
+const pFoo5: Promise<string> = pFn5(2);
+const pFn6: number => Promise<string> = pipeP(
+  pAdd(2),
+  pToString,
+  pAppend("A"),
+  pAppend("B"),
+  pAppend("C"),
+  pAppend("D")
+);
+const pFoo6: Promise<string> = pFn6(2);
+
+//$ExpectError
+const pipeP_error1: number => Promise<number> = _.pipeP(_.add(2));
+//$ExpectError
+const pipeP_error2: number => Promise<string> = _.pipeP(pAdd(2), String);
+//$ExpectError
+const pipeP_error3: number => Promise<number> = pipeP(
+  pAdd(2),
+  pToString,
+  pAdd(2)
+);
+//$ExpectError
+const pipeP_error4: number => Promise<string> = pipeP(
+  pAdd(2),
+  pToString,
+  pAppend("A"),
+  pAdd(2)
+);
+//$ExpectError
+const pipeP_error5: number => Promise<string> = pipeP(
+  pAdd(2),
+  pToString,
+  pAppend("A"),
+  pAppend("B"),
+  pAdd(2)
+);
+//$ExpectError
+const pipeP_error6: number => Promise<string> = pipeP(
+  pAdd(2),
+  pToString,
+  pAppend("A"),
+  pAppend("B"),
+  pAppend("C"),
+  pAdd(2)
+);
+
+// -------------
+
+// --- TyrCatch ---
+const tryFn: boolean => string = a => String(a);
+
+const tryFn_2: boolean => boolean = a => a;
+
+const catchFn: (Error, boolean) => string = (e, a) => e.message;
+
+const catchFn_2: (Error, boolean) => boolean = (e, a) => a;
+
+const tc1: string = tryCatch(tryFn, catchFn, true);
+const tc2: boolean => string = tryCatch(tryFn, catchFn);
+const tc3: string = tc2(true);
+//const tc7: string = tryCatch(tryFn)(catchFn)(true);
+const tc4: string = tryCatch(tryFn)(catchFn, true);
+const tc5: string = tryCatch(tryFn)(catchFn)(true);
+
+//$ExpectError
+const tc_error1: boolean = tryCatch(tryFn, catchFn, true);
+//$ExpectError
+const tc_error2: boolean = tryCatch(tryFn, catchFn)(true);
+//$ExpectError
+const tc_error3: boolean = tryCatch(tryFn)(catchFn, true);
+//$ExpectError
+const tc_error4: boolean = tryCatch(tryFn)(catchFn)(true);
+//$ExpectError
+const tc_error5: string = tryCatch(tryFn_2, catchFn, "string");
+//$ExpectError
+const tc_error6: string = tryCatch(tryFn_2, catchFn)("string");
+//$ExpectError
+const tc_error7: string = tryCatch(tryFn_2)(catchFn, "string");
+//$ExpectError
+const tc_error8: string = tryCatch(tryFn_2)(catchFn)("string");
+//$ExpectError
+const tc_error9: string = tryCatch(tryFn_2, catchFn, true);
+//$ExpectError
+const tc_error10: string = tryCatch(tryFn_2, catchFn)(true);
+//$ExpectError
+const tc_error11: string = tryCatch(tryFn_2)(catchFn, true);
+//$ExpectError
+const tc_error12: string = tryCatch(tryFn_2)(catchFn)(true);
+//$ExpectError
+const tc_error13: string = tryCatch(tryFn, catchFn_2, true);
+//$ExpectError
+const tc_error14: string = tryCatch(tryFn, catchFn_2)(true);
+//$ExpectError
+const tc_error15: string = tryCatch(tryFn)(catchFn_2, true);
+//$ExpectError
+const tc_error16: string = tryCatch(tryFn)(catchFn_2)(true);
+
+// -------------
