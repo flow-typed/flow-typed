@@ -19,9 +19,11 @@ type Actions2 = TestAction1 | TestAction2;
 const when1: Case<number, TestAction1> = ["TEST", getPayload];
 // $ExpectError
 const when2: Case<number, TestAction2> = ["TEST2", getPayload];
+const when3: Case<number, Actions1> = [["TEST", "TEST4"], getPayload];
+// $ExpectError
 const when3: Case<number, Actions1> = [["TEST2", "TEST4"], getPayload];
 // $ExpectError
-const when4: Case<number, Actions2> = [["TEST2", "TEST3"], getPayload];
+const when4: Case<number, Actions2> = [["TEST", "TEST2"], getPayload];
 const when5: Case<number, TestAction2> = [
   "TEST2",
   (s, { payload: { x } }) => x
