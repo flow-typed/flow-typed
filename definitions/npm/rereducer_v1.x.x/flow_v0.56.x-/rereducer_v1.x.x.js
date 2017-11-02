@@ -4,7 +4,10 @@ declare module "rereducer" {
     state: State
   ) => boolean;
 
-  declare type Pattern<State> = string | Matcher<State> | Array<Pattern<State>>;
+  declare type Pattern<State, Action> =
+    | $PropertyType<Action, "type">
+    | Matcher<State>
+    | Array<Pattern<State, Action>>;
 
   declare export type Reducer<State> = (
     state: ?State,
@@ -17,7 +20,7 @@ declare module "rereducer" {
   ) => State;
 
   declare export type Case<State, Action> = [
-    Pattern<State>,
+    Pattern<State, Action>,
     InnerReducer<State, Action>
   ];
 
