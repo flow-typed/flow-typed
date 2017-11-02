@@ -1445,15 +1445,15 @@ declare module ramda {
     val: Array<{ [key: string]: T }>
   ): Array<{ [key: string]: T }>;
 
-  declare function prop<T, O: { [k: string]: T }>(
-    key: $Keys<O>,
+  declare function prop<T: string, O>(
+    key: T,
     ...rest: Array<void>
-  ): (o: O) => ?T;
-  declare function prop<T, O: { [k: string]: T }>(
+  ): (o: O) => $ElementType<O, T>;
+  declare function prop<T: string, O>(
     __: $npm$ramda$Placeholder,
     o: O
-  ): (key: $Keys<O>) => ?T;
-  declare function prop<T, O: { [k: string]: T }>(key: $Keys<O>, o: O): ?T;
+  ): (key: T) => $ElementType<O, T>;
+  declare function prop<T: string, O>(key: T, o: O): $ElementType<O, T>;
 
   declare function propOr<T, V, A: { [k: string]: V }>(
     or: T,
