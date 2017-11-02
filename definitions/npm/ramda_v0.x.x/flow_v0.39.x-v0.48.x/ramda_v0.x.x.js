@@ -20,7 +20,7 @@ declare module ramda {
   declare type BinaryPredicateFn2<T, S> = (x: T, y: S) => boolean;
 
   declare interface ObjPredicate {
-    (value: any, key: string): boolean
+    (value: any, key: string): boolean;
   }
 
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
@@ -309,22 +309,22 @@ declare module ramda {
     ) => (xs: T) => T);
 
   declare class Monad<T> {
-    chain: Function
+    chain: Function;
   }
 
   declare class Semigroup<T> {}
 
   declare class Chain {
-    chain<T, V: Monad<T> | Array<T>>(fn: (a: T) => V, x: V): V,
-    chain<T, V: Monad<T> | Array<T>>(fn: (a: T) => V): (x: V) => V
+    chain<T, V: Monad<T> | Array<T>>(fn: (a: T) => V, x: V): V;
+    chain<T, V: Monad<T> | Array<T>>(fn: (a: T) => V): (x: V) => V;
   }
 
   declare class GenericContructor<T> {
-    constructor(x: T): GenericContructor<any>
+    constructor(x: T): GenericContructor<any>;
   }
 
   declare class GenericContructorMulti {
-    constructor(...args: Array<any>): GenericContructor<any>
+    constructor(...args: Array<any>): GenericContructor<any>;
   }
 
   /**
