@@ -1,4 +1,5 @@
 import MapView from 'react-native-maps';
+import React, { Component } from 'react';
 
 // $ExpectError
 const A = <MapView initialRegion="mexico" />;

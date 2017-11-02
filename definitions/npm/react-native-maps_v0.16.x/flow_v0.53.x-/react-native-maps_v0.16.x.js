@@ -37,7 +37,7 @@ declare module 'react-native-maps' {
     position: Point;
   }
 
-  declare export class InteractWithMapEvent extends SyntheticEvent<*> {
+  declare export class InteractWithMapEvent extends Event {
     nativeEvent: EventWithCoordinateAndPosition;
   }
 
