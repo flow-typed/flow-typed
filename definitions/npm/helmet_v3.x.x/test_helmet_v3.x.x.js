@@ -16,7 +16,7 @@ helmet.hpkp({
   reportUri: 'http://example.com',
   reportOnly: false,
   setIf: function (req, res) {
-    return req.secure
+    return req.statusCode == 200
   }
 })
 
@@ -31,7 +31,7 @@ helmet.hpkp({
   notEnoughDefaultProps: '',
   reportOnly: false,
   setIf: function (req, res) {
-    return req.secure
+    return req.statusCode == 200
   }
 })
 

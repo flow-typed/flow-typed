@@ -1,4 +1,4 @@
-import type { Middleware, Request, Response } from 'express'
+declare type Middleware = (req: http$IncomingMessage, res: http$ServerResponse, next: (err?: ?Error) => mixed) => mixed;
 
 declare type helmet$XssFilterOptions = {
   setOnOldIE?: boolean;
@@ -12,7 +12,7 @@ declare type helmet$HstsOptions = {
   maxAge: number;
   includeSubDomains: boolean;
   preload: boolean;
-  setIf?: (req: Request, res: Response) => boolean;
+  setIf?: (req: http$IncomingMessage, res: http$ServerResponse) => boolean;
 }
 
 declare type helmet$HpkpOptions = {
@@ -21,7 +21,7 @@ declare type helmet$HpkpOptions = {
   includeSubDomains?: boolean;
   reportUri?: string;
   reportOnly?: boolean;
-  setIf?: (req: Request, res: Response) => boolean;
+  setIf?: (req: http$IncomingMessage, res: http$ServerResponse) => boolean;
 }
 
 declare type helmet$hidePoweredByOptions = {
