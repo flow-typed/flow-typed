@@ -1,6 +1,6 @@
-import React from 'react';
-import FlipMove from 'react-flip-move';
-import type { ElementShape } from 'react-flip-move';
+import React from "react";
+import FlipMove from "react-flip-move";
+import type { ElementShape } from "react-flip-move";
 
 function childHook(el: ElementShape, node: ?HTMLElement) {}
 function childrenHook(els: Array<ElementShape>, nodes: Array<?HTMLElement>) {}
@@ -22,7 +22,7 @@ function childrenHook(els: Array<ElementShape>, nodes: Array<?HTMLElement>) {}
     bottom: 0,
     left: 0,
     height: 0,
-    width: 0,
+    width: 0
   })}
   maintainContainerHeight={true}
   verticalAlignment="top"
@@ -32,7 +32,7 @@ function childrenHook(els: Array<ElementShape>, nodes: Array<?HTMLElement>) {}
   onFinishAll={childrenHook}
   style={{
     height: 0,
-    color: 'red',
+    color: "red"
   }}
 >
   <div />
@@ -48,7 +48,7 @@ function childrenHook(els: Array<ElementShape>, nodes: Array<?HTMLElement>) {}
   enterAnimation={true}
   leaveAnimation={{
     from: { opacity: "0.5" },
-    to: { opacity: "1" },
+    to: { opacity: "1" }
   }}
   verticalAlignment="bottom"
 />;
@@ -68,14 +68,9 @@ function childrenHook(els: Array<ElementShape>, nodes: Array<?HTMLElement>) {}
 // $ExpectError
 <FlipMove appearAnimation="foo" />;
 // $ExpectError
-<FlipMove enterAnimation={{ from: 0, to: 0, }} />;
+<FlipMove enterAnimation={{ from: 0, to: 0 }} />;
 // $ExpectError
-<FlipMove
-  leaveAnimation={{
-    from: { height: 0 },
-    to: { height: 10 },
-  }}
-/>;
+<FlipMove leaveAnimation={{ from: { height: 0 }, to: { height: 10 } }} />;
 // $ExpectError
 <FlipMove disableAllAnimations={0} />;
 // $ExpectError

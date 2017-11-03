@@ -13,21 +13,30 @@ export function setup(yargs: Object) {
       overwrite: {
         default: false,
         alias: 'o',
-        describe: 'Overwrite an existing stub if it is already present in the ' +
-                  '`flow-typed` directory and has been modified',
+        describe:
+          'Overwrite an existing stub if it is already present in the ' +
+          '`flow-typed` directory and has been modified',
         type: 'bool',
+        demand: false,
+      },
+      libdefDir: {
+        default: 'flow-typed',
+        alias: 'l',
+        describe: 'Use a custom directory to install libdefs',
+        type: 'string',
         demand: false,
       },
     })
     .example('$0 create-stub foo@^1.2.0')
     .example('$0 create-stub foo bar baz')
     .help('h');
-};
+}
 
 type Args = {
   overwrite: boolean,
+  libdefDir?: string,
   _: Array<string>,
-}
+};
 
 function failWithMessage(message: string) {
   console.error(message);
@@ -37,7 +46,7 @@ function failWithMessage(message: string) {
 export async function run(args: Args): Promise<number> {
   if (!Array.isArray(args._) || args._.length < 2) {
     return failWithMessage(
-      'Please provide the names of one or more npm packages'
+      'Please provide the names of one or more npm packages',
     );
   }
   const packages = args._.slice(1);
@@ -47,7 +56,7 @@ export async function run(args: Args): Promise<number> {
   if (projectRoot == null) {
     return failWithMessage(
       `\nERROR: Unable to find a flow project in the current dir or any of ` +
-      `it's parents!\nPlease run this command from within a Flow project.`
+        `it's parents!\nPlease run this command from within a Flow project.`,
     );
   }
 
@@ -65,16 +74,22 @@ export async function run(args: Args): Promise<number> {
        */
       let parts = pkg.split(/@/);
       let packageName = parts[0];
-      if (parts[0] === "") {
+      if (parts[0] === '') {
         // Scoped package
-        packageName = "@" + parts[1];
+        packageName = '@' + parts[1];
         parts = parts.slice(1);
       }
       if (parts.length > 1) {
         version = parts[1];
       }
 
-      return createStub(projectRoot, packageName, version, args.overwrite);
+      return createStub(
+        projectRoot,
+        packageName,
+        version,
+        args.overwrite,
+        args.libdefDir,
+      );
     }),
   );
 

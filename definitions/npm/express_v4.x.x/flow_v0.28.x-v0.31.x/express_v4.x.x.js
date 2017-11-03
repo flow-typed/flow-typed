@@ -24,7 +24,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   params: {[param: string]: string};
   path: string;
   protocol: 'https' | 'http';
-  query: {[name: string]: string};
+  query: {[name: string]: string | Array<string>};
   route: string;
   secure: boolean;
   signedCookies: {[signedCookie: string]: string};
@@ -32,6 +32,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   subdomains: Array<string>;
   xhr: boolean;
   accepts(types: string): string | false;
+  accepts(types: Array<string>): string | false;
   acceptsCharsets(...charsets: Array<string>): string | false;
   acceptsEncodings(...encoding: Array<string>): string | false;
   acceptsLanguages(...lang: Array<string>): string | false;
@@ -50,6 +51,8 @@ declare type express$CookieOptions = {
   secure?: boolean,
   signed?: boolean
 };
+
+declare type express$Path = string | RegExp;
 
 declare type express$RenderCallback = (err: Error | null, html?: string) => mixed;
 
@@ -92,11 +95,11 @@ declare class express$Response extends http$ClientRequest mixins express$Request
 declare type express$NextFunction = (err?: ?Error | 'route') => mixed;
 declare type express$Middleware =
   ((req: express$Request, res: express$Response, next: express$NextFunction) => mixed) |
-  ((error: ?Error, req: express$Request, res: express$Response, next: express$NextFunction) => mixed);
+  ((error: Error, req: express$Request, res: express$Response, next: express$NextFunction) => mixed);
 declare interface express$RouteMethodType<T> {
   (middleware: express$Middleware): T;
   (...middleware: Array<express$Middleware>): T;
-  (path: string|RegExp|string[], ...middleware: Array<express$Middleware>): T;
+  (path: express$Path|express$Path[], ...middleware: Array<express$Middleware>): T;
 }
 declare class express$Route {
   all: express$RouteMethodType<this>;
@@ -136,7 +139,7 @@ declare class express$Router extends express$Route {
   static (): express$Router;
   use(middleware: express$Middleware): this;
   use(...middleware: Array<express$Middleware>): this;
-  use(path: string|RegExp|string[], ...middleware: Array<express$Middleware>): this;
+  use(path: express$Path|express$Path[], ...middleware: Array<express$Middleware>): this;
   use(path: string, router: express$Router): this;
 }
 
@@ -151,7 +154,7 @@ declare class express$Application extends express$Router mixins events$EventEmit
   listen(handle: Object, callback?: (err?: ?Error) => mixed): Server;
   disable(name: string): void;
   disabled(name: string): boolean;
-  enable(name: string): void;
+  enable(name: string): express$Application;
   enabled(name: string): boolean;
   engine(name: string, callback: Function): void;
   /**

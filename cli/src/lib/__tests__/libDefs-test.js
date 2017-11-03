@@ -18,11 +18,8 @@ import {
   filterLibDefs,
   updateCacheRepo,
 } from '../libDefs.js';
-import {parseDirString as parseFlowDirString} from "../flowVersion";
-import {
-  cloneInto,
-  rebaseRepoMaster,
-} from "../git.js";
+import {parseDirString as parseFlowDirString} from '../flowVersion';
+import {cloneInto, rebaseRepoMaster} from '../git.js';
 
 /**
  * Jest's process of mocking in place fools Flow, so we use this as an explicit
@@ -41,7 +38,7 @@ describe('libDefs', () => {
       cacheRepoAssure.pendingAssure = Promise.resolve();
     });
 
-    pit('clones the repo if not present on disk', async () => {
+    it('clones the repo if not present on disk', async () => {
       await ensureCacheRepo();
       expect(_mock(cloneInto).mock.calls).toEqual([
         [REMOTE_REPO_URL, CACHE_REPO_DIR],
@@ -50,7 +47,7 @@ describe('libDefs', () => {
       expect(_mock(fs.writeFile).mock.calls[0][0]).toBe(LAST_UPDATED_FILE);
     });
 
-    pit('does NOT clone the repo if already present on disk', async () => {
+    it('does NOT clone the repo if already present on disk', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
       });
@@ -59,11 +56,11 @@ describe('libDefs', () => {
       expect(_mock(cloneInto).mock.calls).toEqual([]);
     });
 
-    pit('rebases if present on disk + lastUpdated is old', async () => {
+    it('rebases if present on disk + lastUpdated is old', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
       });
-      _mock(fs.readFile).mockImplementation((filePath) => {
+      _mock(fs.readFile).mockImplementation(filePath => {
         if (filePath === LAST_UPDATED_FILE) {
           return String(Date.now() - CACHE_REPO_EXPIRY - 1);
         }
@@ -73,13 +70,15 @@ describe('libDefs', () => {
       expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([CACHE_REPO_DIR]);
     });
 
-    pit('does NOT rebase if on disk, but lastUpdated is recent', async () => {
+    it('does NOT rebase if on disk, but lastUpdated is recent', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
-        return dirPath === CACHE_REPO_DIR ||
-               dirPath === CACHE_REPO_GIT_DIR ||
-               dirPath === LAST_UPDATED_FILE;
+        return (
+          dirPath === CACHE_REPO_DIR ||
+          dirPath === CACHE_REPO_GIT_DIR ||
+          dirPath === LAST_UPDATED_FILE
+        );
       });
-      _mock(fs.readFile).mockImplementation((filePath) => {
+      _mock(fs.readFile).mockImplementation(filePath => {
         if (filePath === LAST_UPDATED_FILE) {
           return String(Date.now());
         }
@@ -97,12 +96,12 @@ describe('libDefs', () => {
       cacheRepoAssure.pendingAssure = Promise.resolve();
     });
 
-    pit('rebases if present on disk + lastUpdated is old', async () => {
+    it('rebases if present on disk + lastUpdated is old', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return dirPath === CACHE_REPO_DIR || dirPath === CACHE_REPO_GIT_DIR;
       });
 
-      _mock(fs.readFile).mockImplementation((filePath) => {
+      _mock(fs.readFile).mockImplementation(filePath => {
         if (filePath === LAST_UPDATED_FILE) {
           return String(Date.now() - CACHE_REPO_EXPIRY - 1);
         }
@@ -120,7 +119,7 @@ describe('libDefs', () => {
         pkgVersionStr: verStr,
         flowVersion: parseFlowDirString(
           flowVerStr,
-          `${name}_${verStr}/${flowVerStr}`
+          `${name}_${verStr}/${flowVerStr}`,
         ),
         flowVersionStr: flowVerStr,
         path: '',
@@ -165,7 +164,7 @@ describe('libDefs', () => {
         const filtered = filterLibDefs(fixture, {
           type: 'fuzzy',
           term: 'mori',
-          flowVersionStr: 'v0.19.0'
+          flowVersionStr: 'v0.19.0',
         });
         expect(filtered).toEqual([fixture[1]]);
       });
@@ -177,7 +176,10 @@ describe('libDefs', () => {
           _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
           _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
         ];
-        const filtered = filterLibDefs(fixture, {type: 'exact-name', term: 'mori'});
+        const filtered = filterLibDefs(fixture, {
+          type: 'exact-name',
+          term: 'mori',
+        });
         expect(filtered).toEqual([fixture[1], fixture[0]]);
       });
 
@@ -186,7 +188,10 @@ describe('libDefs', () => {
           _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
           _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
         ];
-        const filtered = filterLibDefs(fixture, {type: 'exact-name', term: 'Mori'});
+        const filtered = filterLibDefs(fixture, {
+          type: 'exact-name',
+          term: 'Mori',
+        });
         expect(filtered).toEqual([fixture[1], fixture[0]]);
       });
 
@@ -196,7 +201,10 @@ describe('libDefs', () => {
           _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
           _generateMockLibdef('mo**ri', 'v0.3.x', '>=v0.18.x'),
         ];
-        const filtered = filterLibDefs(fixture, {type: 'exact-name', term: 'mori'});
+        const filtered = filterLibDefs(fixture, {
+          type: 'exact-name',
+          term: 'mori',
+        });
         expect(filtered).toEqual([fixture[1]]);
       });
 
@@ -238,7 +246,7 @@ describe('libDefs', () => {
           type: 'exact',
           flowVersionStr: 'v0.28.0',
           pkgName: 'Mori',
-          pkgVersionStr: 'v0.3.x'
+          pkgVersionStr: 'v0.3.x',
         });
         expect(filtered).toEqual([fixture[0]]);
       });
@@ -248,7 +256,7 @@ describe('libDefs', () => {
           _generateMockLibdef('**mori', 'v0.3.x', '>=v0.22.x'),
           _generateMockLibdef('mori**', 'v0.3.x', '>=v0.22.x'),
           _generateMockLibdef('mo**ri', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori',   'v0.3.x', '>=v0.22.x'),
+          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact',
@@ -304,7 +312,7 @@ describe('libDefs', () => {
       });
 
       describe('given a package range', () => {
-        it("DOES NOT match when libdef range does not intersect package range", () => {
+        it('DOES NOT match when libdef range does not intersect package range', () => {
           const fixture = [
             _generateMockLibdef('mori', 'v0.2.x', '>=v0.22.x'),
             _generateMockLibdef('mori', 'v0.4.x', '>=v0.22.x'),
@@ -318,21 +326,24 @@ describe('libDefs', () => {
           expect(filtered).toEqual([]);
         });
 
-        it("DOES NOT match when ranges intersect but package supports older " +
-           "versions than libdef", () => {
-          const fixture = [
-            _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          ];
-          const filtered = filterLibDefs(fixture, {
-            type: 'exact',
-            flowVersionStr: 'v0.22.0',
-            pkgName: 'mori',
-            pkgVersionStr: '>=0.2.9 <0.3.0',
-          });
-          expect(filtered).toEqual([]);
-        });
+        it(
+          'DOES NOT match when ranges intersect but package supports older ' +
+            'versions than libdef',
+          () => {
+            const fixture = [
+              _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
+            ];
+            const filtered = filterLibDefs(fixture, {
+              type: 'exact',
+              flowVersionStr: 'v0.22.0',
+              pkgName: 'mori',
+              pkgVersionStr: '>=0.2.9 <0.3.0',
+            });
+            expect(filtered).toEqual([]);
+          },
+        );
 
-        it("matches when ranges intersect and libdef supports older versions", () => {
+        it('matches when ranges intersect and libdef supports older versions', () => {
           const fixture = [
             _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
             _generateMockLibdef('mori', 'v0.3.8', '>=v0.22.x'),

@@ -9,6 +9,7 @@ mousetrap.stopCallback = (e: KeyboardEvent, element: Element, combo: string) => 
 bind('c', (e: Event) => true);
 bind(['ctrl', 'c'], (e: Event) => true);
 unbind('c');
+unbind(['ctrl', 'c']);
 reset();
 trigger('c');
 

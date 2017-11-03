@@ -1,3 +1,5 @@
+/* eslint-disable flowtype/no-weak-types */
+
 type JasmineExpectType = {
   not: JasmineExpectType,
   toBe(value: mixed): void,
@@ -23,13 +25,13 @@ declare function describe(name: string, fn: Function): void;
 declare function fdescribe(name: string, fn: Function): void;
 declare function xdescribe(name: string, fn: Function): void;
 
-declare function beforeEach(fn: Function): void;
-declare function afterEach(fn: Function): void;
-declare function beforeAll(fn: Function): void;
-declare function afterAll(fn: Function): void;
+declare function beforeEach(fn: Function, timeout?: number): void;
+declare function afterEach(fn: Function, timeout?: number): void;
+declare function beforeAll(fn: Function, timeout?: number): void;
+declare function afterAll(fn: Function, timeout?: number): void;
 
-declare function it(name: string, fn: Function): void;
-declare function fit(name: string, fn: Function): void;
+declare function it(name: string, fn: Function, timeout?: number): void;
+declare function fit(name: string, fn: Function, timeout?: number): void;
 declare function xit(name: string, fn: Function): void;
 
 declare function expect(value: mixed): JasmineExpectType;
@@ -60,6 +62,21 @@ type JasmineClockType = {
   mockDate(date: Date): void
 };
 
+declare type JasmineMatcherResult = {
+  pass: boolean;
+  message?: string | () => string;
+}
+
+declare type JasmineMatcherStruct = {
+  compare<T: any>(actual: T, expected: T): JasmineMatcherResult;
+}
+
+declare type JasmineMatcher = (utils?: mixed, customEqualityTesters?: mixed) => JasmineMatcherStruct
+
+declare type JasmineMatchers = {
+  [key: string]: JasmineMatcher
+}
+
 declare var jasmine: {
   createSpy(name?: string): JasmineSpyType,
   any(val: mixed): void,
@@ -67,5 +84,6 @@ declare var jasmine: {
   objectContaining(val: Object): void,
   arrayContaining(val: mixed[]): void,
   stringMatching(val: string): void,
-  clock(): JasmineClockType
-};
+  clock(): JasmineClockType,
+  addMatchers(val: JasmineMatchers): void
+}
