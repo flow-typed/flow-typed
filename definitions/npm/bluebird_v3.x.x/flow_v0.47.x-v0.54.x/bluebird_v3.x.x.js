@@ -65,15 +65,15 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
     input: Object | Map<*, *> | $Promisable<Object | Map<*, *>>
   ): Bluebird$Promise<*>;
   static any<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
   ): Bluebird$Promise<T>;
   static race<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
   ): Bluebird$Promise<T>;
   static reject<T>(error?: any): Bluebird$Promise<T>;
   static resolve<T>(object?: $Promisable<T>): Bluebird$Promise<T>;
   static some<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     count: number
   ): Bluebird$Promise<Array<T>>;
   static join<T, A>(
@@ -92,16 +92,16 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
     handler: (a: A, b: B, c: C) => $Promisable<T>
   ): Bluebird$Promise<T>;
   static map<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>,
     options?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<U>>;
   static mapSeries<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>
   ): Bluebird$Promise<Array<U>>;
   static reduce<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     reducer: (
       total: U,
       current: T,
@@ -111,7 +111,7 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
     initialValue?: $Promisable<U>
   ): Bluebird$Promise<U>;
   static filter<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     filterer: (
       item: T,
       index: number,
@@ -120,7 +120,7 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
     option?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<T>>;
   static each<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem> | $Promisable<Array<Elem>>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     iterator: (
       item: T,
       index: number,
@@ -194,8 +194,40 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
     onFulfill?: (value: R) => $Promisable<U>,
     onReject?: (error: any) => $Promisable<U>
   ): Bluebird$Promise<U>;
-  catch<U>(onReject?: (error: any) => ?$Promisable<U>): Bluebird$Promise<U>;
-  caught<U>(onReject?: (error: any) => ?$Promisable<U>): Bluebird$Promise<U>;
+
+  catch<U, ErrorT: Error>(
+    err: Class<ErrorT>,
+    onReject: (error: ErrorT) => $Promisable<U>
+  ): Bluebird$Promise<U>;
+  catch<U, ErrorT: Error>(
+    err1: Class<ErrorT>,
+    err2: Class<ErrorT>,
+    onReject: (error: ErrorT) => $Promisable<U>
+  ): Bluebird$Promise<U>;
+  catch<U, ErrorT: Error>(
+    err1: Class<ErrorT>,
+    err2: Class<ErrorT>,
+    err3: Class<ErrorT>,
+    onReject: (error: ErrorT) => $Promisable<U>
+  ): Bluebird$Promise<U>;
+  catch<U>(onReject?: (error: any) => $Promisable<U>): Bluebird$Promise<U>;
+  caught<U, ErrorT: Error>(
+    err: Class<ErrorT>,
+    onReject: (error: Error) => $Promisable<U>
+  ): Bluebird$Promise<U>;
+  caught<U, ErrorT: Error>(
+    err1: Class<ErrorT>,
+    err2: Class<ErrorT>,
+    onReject: (error: ErrorT) => $Promisable<U>
+  ): Bluebird$Promise<U>;
+  caught<U, ErrorT: Error>(
+    err1: Class<ErrorT>,
+    err2: Class<ErrorT>,
+    err3: Class<ErrorT>,
+    onReject: (error: ErrorT) => $Promisable<U>
+  ): Bluebird$Promise<U>;
+  caught<U>(onReject: (error: any) => $Promisable<U>): Bluebird$Promise<U>;
+
   error<U>(onReject?: (error: any) => ?$Promisable<U>): Bluebird$Promise<U>;
   done<U>(
     onFulfill?: (value: R) => mixed,
