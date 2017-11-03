@@ -183,13 +183,15 @@ Bluebird.resolve()
 Bluebird.resolve()
   .thenReturn(5)
   .then((result: number) => {});
-// $ExpectError
+
 Bluebird.resolve()
   .return(5)
+  // $ExpectError
   .then((result: string) => {});
-// $ExpectError
+
 Bluebird.resolve()
   .thenReturn(5)
+  // $ExpectError
   .then((result: string) => {});
 
 let disposable: Disposable<boolean> = Bluebird.resolve(
