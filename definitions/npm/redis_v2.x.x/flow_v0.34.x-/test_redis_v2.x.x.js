@@ -2,7 +2,7 @@
 
 const redis = require("redis");
 
-const client: redis.Client = redis.createClient();
+const client: redis.RedisClient = redis.createClient();
 
 client.hmset("some-key", { key1: "value1" }, err =>
   console.log("hmset error:", err)
