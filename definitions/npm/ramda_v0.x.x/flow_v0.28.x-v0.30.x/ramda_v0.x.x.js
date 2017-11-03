@@ -499,8 +499,8 @@ declare module ramda {
   declare function dissocPath<T>(key: Array<string>, val:T, ...args: Array<void>): (src: {[k:string]:T}) => {[k:string]:T};
   declare function dissocPath<T>(key: Array<string>, val:T, src: {[k:string]:T}): {[k:string]:T};
 
-  declare function evolve<V,R>(fn: NestedObject<(x:any) => R>, ...rest: Array<void>): (src: NestedObject<any>) => NestedObject<R>;
-  declare function evolve<V,R>(fn: NestedObject<(x:any) => R>, src: NestedObject<any>): NestedObject<R>;
+  declare function evolve<R: NestedObject<any>>(fn: NestedObject<UnarySameTypeFn<any>>, ...rest: Array<void>): (src: R) => R;
+  declare function evolve<R: NestedObject<any>>(fn: NestedObject<UnarySameTypeFn<any>>, src: R): R;
 
   declare function eqProps(key: string, ...args: Array<void>):
   ((o1: Object, ...rest: Array<void>) => (o2: Object) => boolean)
