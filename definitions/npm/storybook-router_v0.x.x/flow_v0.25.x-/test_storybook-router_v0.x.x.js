@@ -57,6 +57,3 @@ StoryRouter({}, { initialEntries: "string" });
 
 // $ExpectError
 StoryRouter({}, { keyLength: "string" });
-
-// $ExpectError
-StoryRouter({}, { children: "string" });
