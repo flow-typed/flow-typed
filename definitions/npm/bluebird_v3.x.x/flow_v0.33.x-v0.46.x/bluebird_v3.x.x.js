@@ -14,7 +14,9 @@ type Bluebird$MultiArgsOption = {
   multiArgs: boolean;
 };
 type Bluebird$BluebirdConfig = {
-  warnings?: boolean,
+  warnings?: boolean | {
+    wForgottenReturn?: boolean
+  },
   longStackTraces?: boolean,
   cancellation?: boolean,
   monitoring?: boolean
