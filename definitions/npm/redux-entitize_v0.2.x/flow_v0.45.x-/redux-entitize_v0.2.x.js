@@ -1,8 +1,10 @@
-import { type Schema } from "normalizr";
+declare class NormalizrSchema {
+  define(nestedSchema: Object): void;
+}
 
 declare module "redux-entitize" {
   declare type SchemaMapType = {
-    [schemaName: string]: Schema
+    [schemaName: string]: NormalizrSchema
   };
 
   //eslint-disable-next-line flowtype/no-weak-types
