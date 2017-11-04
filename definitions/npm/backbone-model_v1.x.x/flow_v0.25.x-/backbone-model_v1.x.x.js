@@ -1,49 +1,65 @@
+// subset of the `backbone` module
+
 // repeated in backbone, backbone-model, and backbone-collection
 declare type Backbone$Attrs = { [name: string]: any };
 declare type Backbone$Id = number | string;
 
-declare module 'backbone' {
-  declare var $: any; // @TODO this is no correct, but it is difficult to require another definition from here.
-  declare var _: any; // @TODO this is no correct, but it is difficult to require another definition from here.
-  declare var version: string;
-
+declare module "backbone-model" {
   declare type eventCallback = (event: Event) => void | mixed;
-  declare type Attrs = {[name: string]: mixed};
-  declare type CRUDMethod = 'create' | 'read' | 'update' | 'delete';
 
   /**
    * Events Module - http://backbonejs.org/#Events
    */
   declare class Events {
     // Not sure the best way of adding these to the declaration files
-    on(event: string, callback: eventCallback, context?: Object): void;
-    once(event: string, callback: eventCallback, context?: Object): void;
-    bind(event: string, callback: eventCallback, context?: Object): void;
-    off(event: ?string, callback?: ?eventCallback, context?: Object): void;
-    unbind(event: ?string, callback?: ?eventCallback, context?: Object): void;
-    trigger(event: string, ...args?: Array<mixed>): void;
-    listenTo(other: Events, event: string, callback: eventCallback): void;
-    listenToOnce(other: Events, event: string, callback: eventCallback): void;
-    stopListening(other: Events, callback?: ?eventCallback, context?: Object): void;
-    static on(event: string, callback: eventCallback, context?: Object): void;
-    static bind(event: string, callback: eventCallback, context?: Object): void;
-    static off(event: ?string, callback?: ?eventCallback, context?: Object): void;
-    static unbind(event: ?string, callback?: ?eventCallback, context?: Object): void;
-    static trigger(event: string, ...args?: Array<mixed>): void;
-    static listenTo(other: Events, event: string, callback: eventCallback): void;
-    static stopListening(other: Events, callback?: ?eventCallback, context?: Object): void;
+    on(event: string, callback: eventCallback, context?: Object): void,
+    once(event: string, callback: eventCallback, context?: Object): void,
+    bind(event: string, callback: eventCallback, context?: Object): void,
+    off(event: ?string, callback?: ?eventCallback, context?: Object): void,
+    unbind(event: ?string, callback?: ?eventCallback, context?: Object): void,
+    trigger(event: string, ...args?: Array<mixed>): void,
+    listenTo(other: Events, event: string, callback: eventCallback): void,
+    listenToOnce(other: Events, event: string, callback: eventCallback): void,
+    stopListening(
+      other: Events,
+      callback?: ?eventCallback,
+      context?: Object
+    ): void,
+    static on(event: string, callback: eventCallback, context?: Object): void,
+    static bind(event: string, callback: eventCallback, context?: Object): void,
+    static off(
+      event: ?string,
+      callback?: ?eventCallback,
+      context?: Object
+    ): void,
+    static unbind(
+      event: ?string,
+      callback?: ?eventCallback,
+      context?: Object
+    ): void,
+    static trigger(event: string, ...args?: Array<mixed>): void,
+    static listenTo(
+      other: Events,
+      event: string,
+      callback: eventCallback
+    ): void,
+    static stopListening(
+      other: Events,
+      callback?: ?eventCallback,
+      context?: Object
+    ): void
   }
 
   /**
    * Model Class - http://backbonejs.org/#Model
    */
   declare type ModelOpts = {
+    [optionName: string]: mixed,
     collection?: Collection<*>,
-    parse?: Function,
-    [optionName: string]: mixed
+    parse?: Function
   };
 
-declare class Model {
+  declare class Model {
     static extend<P, CP>(
       instanceProperies: P,
       classProperties?: CP
@@ -175,98 +191,12 @@ declare class Model {
     create(attributes: Object, options?: Object): void
   }
 
-
-  /**
-   * Router Class http://backbonejs.org/#Router
-   */
-  declare class Router mixins Events {
-      static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Router & P> & CP;
-      routes: {
-        [route: string]: string | ((e: Event) => mixed | void);
-      };
-      constructor(options?: Object): this;
-      initialize(options?: Object): this;
-      route(route: string, name: string, callback?: (e: Event) => mixed | void): this;
-      navigate(fragment: string, options?: { trigger?: boolean, replace?:  boolean}): this;
-      execute(callback: Function, args: Array<mixed>, name: string): void | mixed;
-  }
-
-  /**
-   * History - http://backbonejs.org/#History
-   */
-  declare class History mixins Events {
-    static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<History & P> & CP;
-    static started: boolean;
-    constructor(options?: Object): this;
-    initialize(options?: Object): this;
-    start(options?: { pushState?: boolean, hashChange?: boolean, root?: string}): this;
-    navigate(fragment: string, options?: { trigger?: boolean, replace?:  boolean}): boolean | void;
-    loadUrl(fragment: string): boolean;
-    route(route: string, callback: Function): void;
-    decodeFragment(fragment: string): string;
-    getFragment(): string;
-    fragment: string;
-  }
-  declare var history: History;
-
-  /**
-   * Sync - http://backbonejs.org/#Sync
-   */
-  declare function sync(method: CRUDMethod, model: Model, options?: Object):  any; // Should really be a jQuery XHR.
-  declare function ajax(request: Object): any;
-  declare var emulateHTTP: boolean;
-  declare var emulateJSON: boolean;
-
-  /**
-   * View -
-   */
-  declare type AttributesHasMap = {
-      [attribute: string]: mixed
-  };
-  declare type EventsHash = {
-      [event: string]: string | Function
-  };
-  declare class View mixins Events {
-    static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<View & P> & CP;
-    constructor(): this;
-    initialize(options?: Object): this;
-    el: HTMLElement | string;
-    $el: any;
-    setElement(el: HTMLElement): this;
-    attributes: AttributesHasMap | () => AttributesHasMap;
-    $: typeof $;
-    template(data: Object): string;
-    render(): this | mixed;
-    remove(): this;
-    events: EventsHash | () => EventsHash;
-    delegateEvents(events?: EventsHash): this;
-    undelegateEvents(): this;
-  }
-
   /**
    * Declaring the export for backbone as well.
    */
   declare class Backbone {
-    Events: typeof Events;
-    Model: typeof Model;
-    Collection: typeof Collection;
-    Router: typeof Router;
-    History: typeof History;
-    history: typeof history;
-    View: typeof View;
-
-    // Sync
-    sync: typeof sync;
-    ajax: typeof ajax;
-    emulateHTTP: typeof emulateHTTP;
-    emulateJSON: typeof emulateJSON;
-
-
-    // Utilty
-    $: typeof $; // @TODO this is no correct, but it is difficult to require another definition from here.
-    _: typeof _; // @TODO this is no correct, but it is difficult to require another definition from here.
-    version: typeof version;
-    noConflict(): this;
+    // subset of the `backbone` module
+    Model: typeof Model
   }
 
   declare var exports: Backbone;
