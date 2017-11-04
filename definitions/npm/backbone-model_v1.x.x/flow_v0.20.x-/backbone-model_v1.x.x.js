@@ -2,6 +2,8 @@
 
 // repeated in backbone, backbone-model, and backbone-collection
 
+type Comparator<T> = (attr: string) => any | ((attrA: T, attrB: T) => number);
+
 declare module "backbone-model" {
   declare type EventCallback = (event: Event) => void | mixed;
   declare type Backbone$Attrs = { [name: string]: mixed };
@@ -180,9 +182,7 @@ declare module "backbone-model" {
     shift(options?: Object): TModel;
     slice(begin: number, end: number): Array<TModel>;
     length: number;
-    comparator:
-      | string
-      | ((attr: string) => any | ((attrA: TModel, attrB: TModel) => number));
+    comparator: string | Comparator<TModel>;
     sort(options?: Object): Array<TModel>;
     pluck(attribute: string): Array<TModel>;
     where(attributes: { [attributeName: string]: mixed }): Array<TModel>;

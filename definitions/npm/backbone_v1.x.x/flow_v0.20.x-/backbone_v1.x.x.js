@@ -1,3 +1,5 @@
+type Comparator<T> = (attr: string) => any | ((attrA: T, attrB: T) => number);
+
 declare module "backbone" {
   declare var $: any; // @TODO this is no correct, but it is difficult to require another definition from here.
   declare var _: any; // @TODO this is no correct, but it is difficult to require another definition from here.
@@ -180,9 +182,7 @@ declare module "backbone" {
     shift(options?: Object): TModel;
     slice(begin: number, end: number): Array<TModel>;
     length: number;
-    comparator:
-      | string
-      | ((attr: string) => any | ((attrA: TModel, attrB: TModel) => number));
+    comparator: string | Comparator<TModel>;
     sort(options?: Object): Array<TModel>;
     pluck(attribute: string): Array<TModel>;
     where(attributes: { [attributeName: string]: mixed }): Array<TModel>;
