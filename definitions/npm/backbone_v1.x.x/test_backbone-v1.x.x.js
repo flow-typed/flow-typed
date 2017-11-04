@@ -1,6 +1,5 @@
 // @flow
-import Backbone from "backbone";
-const { Model } = Backbone;
+import Backbone, { Model, Collection } from "backbone";
 
 const otherBackbone: typeof Backbone = Backbone.noConflict();
 
@@ -16,10 +15,12 @@ const otherBackbone: typeof Backbone = Backbone.noConflict();
 (Backbone._: any);
 
 (Backbone.Events.on: Function);
+
 interface Fooable extends Model {
   foo(): string;
   view: Backbone.View;
 }
+
 const TaskModel: Class<Fooable> = Backbone.Model.extend({
   foo(): string {
     return "";
@@ -29,7 +30,7 @@ const TaskModel: Class<Fooable> = Backbone.Model.extend({
 const instance = new TaskModel();
 instance.fetch({});
 
-class TasksCollection extends Backbone.Collection<TaskModel> {
+class TasksCollection extends Collection<TaskModel> {
   model: TaskModel;
 }
 

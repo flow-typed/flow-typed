@@ -1,5 +1,5 @@
 // @flow
-import Backbone from "backbone-model";
+import Backbone, { Model } from "backbone-model";
 import type { Backbone$Attrs } from "backbone-model";
 
 // $ExpectError
@@ -11,7 +11,7 @@ import type { Backbone$Attrs } from "backbone-model";
 // $ExpectError
 (Backbone.Events.on: Function);
 
-interface Fooable extends Backbone.Model {
+interface Fooable extends Model {
   foo(): string;
   // $ExpectError
   view: Backbone.View;
