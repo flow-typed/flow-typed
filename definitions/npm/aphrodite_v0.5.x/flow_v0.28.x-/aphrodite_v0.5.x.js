@@ -34,4 +34,8 @@ declare module 'aphrodite' {
     suppressStyleInjection: () => void;
     clearBufferAndResumeStyleInjection: () => void;
   };
+
+  declare module 'aphrodite/no-important' {
+    declare module.exports: $Exports<'aphrodite'>;
+  };
 };
