@@ -1,5 +1,5 @@
 // @flow
-import Backbone from 'backbone';
+import Backbone from "backbone";
 const { Model } = Backbone;
 
 const otherBackbone: typeof Backbone = Backbone.noConflict();
@@ -8,7 +8,6 @@ const otherBackbone: typeof Backbone = Backbone.noConflict();
 
 // $ExpectError should be a view type
 (otherBackbone.View: void);
-
 
 (Backbone.version: string);
 
@@ -20,20 +19,18 @@ const otherBackbone: typeof Backbone = Backbone.noConflict();
 interface Fooable extends Model {
   foo(): string;
   view: Backbone.View;
-};
+}
 const TaskModel: Class<Fooable> = Backbone.Model.extend({
   foo(): string {
-    return '';
+    return "";
   }
 });
 
 const instance = new TaskModel();
 instance.fetch({});
 
-
-
-class TasksCollection extends Backbone.Collection {
-    model: TaskModel;
+class TasksCollection extends Backbone.Collection<TaskModel> {
+  model: TaskModel;
 }
 
 const tasks = new TasksCollection();
@@ -46,13 +43,13 @@ tasks.toJSON([]);
 // $ExpectError should not allow to be non number
 tasks.length = false;
 
-(tasks.pluck('name'): Array<any>);
+(tasks.pluck("name"): Array<any>);
 
 // $ExpectError
 (task.pluck(2): Array<any>);
 
 (tasks.forEach: Function);
-(tasks.sync(): Function)
+(tasks.sync(): Function);
 // $ExpectError
 instance.fetch(null);
 // $ExpectError
@@ -63,24 +60,28 @@ instance.toJSON();
 // $ExpectError
 (instance.foo(): number);
 
+instance.get("field");
+instance.get(null);
+
+instance.isNew();
+instance.clone();
 
 class TasksRouter extends Backbone.Router {
-    constructor() {
-        super();
-        this.routes = {
-            // $ExpectError
-            '10': false
-        };
-    }
-};
-
+  constructor() {
+    super();
+    this.routes = {
+      // $ExpectError
+      "10": false
+    };
+  }
+}
 
 const router = new TasksRouter();
 
-router.route('/create', 'createRoute');
+router.route("/create", "createRoute");
 
 // $ExpectError
-router.route('/create', 'delete', null);
+router.route("/create", "delete", null);
 
 // $ExpectError
 Backbone.history.start({ root: false });
