@@ -26,20 +26,13 @@ function reducerAge(age: number, action: Action, entireState: State): number {
   return age
 }
 
-// ok
 const reducer0: CombinedSectionReducer<State, Action, State> = combineSectionReducers({
   a: reducerA,
   name: reducerName,
   age: reducerAge
 })
 
-// ok
 const superReducer: SectionReducer<{data: State}, Action, {data: State}> = combineSectionReducers({
-  data: reducer0
-});
-
-// $ExpectError
-const superReducerFail: SectionReducer<{data: {}}, Action, {data: State}> = combineSectionReducers({
   data: reducer0
 });
 
