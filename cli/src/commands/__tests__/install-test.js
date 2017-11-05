@@ -222,10 +222,8 @@ describe("install (command)", () => {
             }
           })
         ]);
-        await gitInit(FAKE_CACHE_REPO_DIR), await gitAdd(
-          FAKE_CACHE_REPO_DIR,
-          "definitions"
-        );
+        await gitInit(FAKE_CACHE_REPO_DIR),
+          await gitAdd(FAKE_CACHE_REPO_DIR, "definitions");
         await gitCommit(FAKE_CACHE_REPO_DIR, "FIRST");
 
         setCustomCacheDir(FAKE_CACHE_DIR);
@@ -272,10 +270,11 @@ describe("install (command)", () => {
           touchFile(path.join(FLOWPROJ_DIR, ".flowconfig"))
         ]);
 
-        await gitInit(FAKE_CACHE_REPO_DIR), await Promise.all([
-          gitConfig(FAKE_CACHE_REPO_DIR, "user.name", "Test Author"),
-          gitConfig(FAKE_CACHE_REPO_DIR, "user.email", "test@flow-typed.org")
-        ]);
+        await gitInit(FAKE_CACHE_REPO_DIR),
+          await Promise.all([
+            gitConfig(FAKE_CACHE_REPO_DIR, "user.name", "Test Author"),
+            gitConfig(FAKE_CACHE_REPO_DIR, "user.email", "test@flow-typed.org")
+          ]);
         await gitAdd(FAKE_CACHE_REPO_DIR, "definitions");
         await gitCommit(FAKE_CACHE_REPO_DIR, "FIRST");
 
@@ -346,16 +345,16 @@ describe("install (command)", () => {
           writePkgJson(path.join(FLOWPROJ_DIR, "package.json"), {
             name: "test",
             devDependencies: {
-              foo: "1.2.3"
-            },
-            peerDependencies: {
               "flow-bin": "^0.43.0"
             },
-            optionalDependencies: {
-              foo: "2.0.0"
+            peerDependencies: {
+              foo: "1.2.3"
             },
             bundledDependencies: {
               bar: "^1.6.9"
+            },
+            optionalDependencies: {
+              foo: "2.0.0"
             },
             dependencies: {
               foo: "1.2.3"
@@ -372,7 +371,7 @@ describe("install (command)", () => {
           overwrite: false,
           verbose: false,
           skip: false,
-          ignoreDeps: ["dev", "optional", "bundled"]
+          ignoreDeps: ["optional"]
         });
 
         // Installs libdefs
