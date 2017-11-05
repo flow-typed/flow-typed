@@ -78,9 +78,16 @@ declare module "redux-actions" {
    *       // Flow infers that the type of `payload` is number
    *     }, defaultState)
    */
+
+  declare type ReducerDefinition<State, Action> = {
+    [key: string]:
+      | (Reducer<State, Action> | ReducerDefinition<State, Action>)
+      | ReducerMap<State, Action>
+  };
+
   declare function handleAction<Type, State, Action: { type: Type }>(
     type: Type,
-    reducer: Reducer<State, Action> | ReducerMap<State, Action>,
+    reducer: ReducerDefinition<State, Action>,
     defaultState: State
   ): Reducer<State, Action>;
 
