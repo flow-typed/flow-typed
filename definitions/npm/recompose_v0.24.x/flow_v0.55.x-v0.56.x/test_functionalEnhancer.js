@@ -12,7 +12,7 @@ function mapProps<BaseProps: {}, EnhancedProps>(
 
 type EnhancedProps = { hello: string };
 
-const baseComponent = ({ hello, len }) =>
+const baseComponent = ({ hello, len }) => (
   <div>
     {(hello: string)}
 
@@ -27,7 +27,8 @@ const baseComponent = ({ hello, len }) =>
       // $ExpectError
       (len: string)
     }
-  </div>;
+  </div>
+);
 
 const enhancer: HOC<*, EnhancedProps> = compose(
   mapProps(({ hello }) => ({
