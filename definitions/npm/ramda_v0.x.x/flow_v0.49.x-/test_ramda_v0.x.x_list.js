@@ -194,6 +194,18 @@ const str: string = "hello world";
   const redxs5: Array<string> = _.reduceRight(_.concat, [])(
     _.map(x => [x], ss)
   );
+  //$ExpectError
+  const redxs5a: string = _.reduceRight(
+    (acc: string, value: number): string => acc,
+    "",
+    ns
+  );
+  const redxs5b: string = _.reduceRight(
+    (value: number, acc: string): string => acc,
+    "",
+    ns
+  );
+
   const redxs6: Array<number> = _.scan(_.add)(10)(ns);
   const redxs7: Array<number> = _.scan(_.add, 10)(ns);
   const redxs8: Array<number> = _.scan(_.add)(10, ns);
