@@ -944,17 +944,17 @@ declare module ramda {
   ): { [key: string]: B };
 
   declare function reduceRight<A, B>(
-    fn: (acc: A, elem: B) => A,
+    fn: (elem: B, acc: A) => A,
     ...rest: Array<void>
   ): ((init: A, xs: Array<B>) => A) &
     ((init: A, ...rest: Array<void>) => (xs: Array<B>) => A);
   declare function reduceRight<A, B>(
-    fn: (acc: A, elem: B) => A,
+    fn: (elem: B, acc: A) => A,
     init: A,
     ...rest: Array<void>
   ): (xs: Array<B>) => A;
   declare function reduceRight<A, B>(
-    fn: (acc: A, elem: B) => A,
+    fn: (elem: B, acc: A) => A,
     init: A,
     xs: Array<B>
   ): A;
