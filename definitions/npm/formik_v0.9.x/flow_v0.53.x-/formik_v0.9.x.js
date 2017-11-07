@@ -56,7 +56,7 @@ declare module "formik" {
     /**
      * Submission handler
      */
-    onSubmit: (values: Object, formikActions: FormikActions<any>) => void,
+    onSubmit: (values: Object, formikActions: FormikActions<any>) => any,
 
     /**
      * Form component to render
@@ -124,16 +124,16 @@ declare module "formik" {
   declare export type FormikHandlers = {
     /** Form submit handler */
     // TODO: React.FormEvent<HTMLFormElement>
-    handleSubmit: (e: Function) => void,
+    handleSubmit: (e: Function) => any,
     /** Classic React change handler, keyed by input name */
     // TODO: React.ChangeEvent<any>
-    handleChange: (e: Function) => void,
+    handleChange: (e: Function) => any,
     /** Mark input as touched */
-    handleBlur: (e: any) => void,
+    handleBlur: (e: any) => any,
     /** Change value of form field directly */
-    handleChangeValue: (name: string, value: any) => void,
+    handleChangeValue: (name: string, value: any) => any,
     /** Reset form event handler  */
-    handleReset: () => void
+    handleReset: () => any
   };
 
   declare export type FormikProps<Values> = {
@@ -171,9 +171,9 @@ declare module "formik" {
     field: {
       /** Classic React change handler, keyed by input name */
       // TODO: React.ChangeEvent<any>
-      onChange: (e: any) => void,
+      onChange: (e: any) => any,
       /** Mark input as touched */
-      onBlur: (e: any) => void,
+      onBlur: (e: any) => any,
       /** Value of the input */
       value: any
     },
