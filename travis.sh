@@ -2,8 +2,8 @@
 #set -o errexit
 
 cd definitions && \
-#yarn install && \
-#yarn test && \
+yarn install && \
+yarn test && \
 cd ../cli && \
 yarn && \
 yarn run flow && \
