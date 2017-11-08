@@ -369,16 +369,16 @@ declare module ramda {
   }
 
   /**
-  * DONE:
-  * Function*
-  * List*
-  * Logic
-  * Math
-  * Object*
-  * Relation
-  * String
-  * Type
-  */
+   * DONE:
+   * Function*
+   * List*
+   * Logic
+   * Math
+   * Object*
+   * Relation
+   * String
+   * Type
+   */
 
   declare var compose: Compose;
   declare var pipe: Pipe;
@@ -1034,17 +1034,25 @@ declare module ramda {
   ): (y: A) => boolean;
   declare function eqBy<A, B>(fn: (x: A) => B, x: A, y: A): boolean;
 
-  declare function propEq(
-    prop: string,
-    ...rest: Array<void>
-  ): ((val: *, o: { [k: string]: * }) => boolean) &
-    ((val: *, ...rest: Array<void>) => (o: { [k: string]: * }) => boolean);
-  declare function propEq(
-    prop: string,
-    val: *,
-    ...rest: Array<void>
-  ): (o: { [k: string]: * }) => boolean;
-  declare function propEq(prop: string, val: *, o: { [k: string]: * }): boolean;
+  // Workaround for $ElementType.
+  // See https://github.com/facebook/flow/issues/4804
+  declare type $Ramda_ElementType<A, B> = $ElementType<A, B>;
+  // Flow cares about the order in which these appear. Generally function
+  // siguatures should go from smallest arity to largest arity.
+  declare type PropEq = (<T>(
+    prop: $Keys<T>
+  ) => ((val: $ElementType<T, $Keys<T>>) => (obj: T) => boolean) &
+    ((val: $ElementType<T, $Keys<T>>, obj: T) => boolean)) &
+    (<T>(
+      prop: $Keys<T>,
+      val: $ElementType<T, $Keys<T>>
+    ) => (obj: T) => boolean) &
+    (<T>(
+      prop: $Keys<T>,
+      val: $Ramda_ElementType<T, $Keys<T>>,
+      obj: T
+    ) => boolean);
+  declare var propEq: PropEq;
 
   declare function pathEq(
     path: Array<string>,
