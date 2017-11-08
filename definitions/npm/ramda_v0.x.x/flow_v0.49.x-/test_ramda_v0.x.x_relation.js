@@ -53,8 +53,22 @@ const interBy: Array<number> = _.intersectionWith(_.eqBy(Math.abs), ns, ns);
 const pathEqObj: boolean = _.pathEq(["hello"], 1, obj);
 const pathEqObj2: boolean = _.pathEq(["hello"])(1)(obj);
 
-const propEqObj: boolean = _.propEq("hello", 1, obj);
-const propEqObj2: boolean = _.propEq("hello")(1)(obj);
+type PropEqFoo = { bar: number };
+const propEqFoo: PropEqFoo = { bar: 2 };
+
+const propEqResult1: boolean = _.propEq("bar", 1, propEqFoo);
+// Test curried versions.
+const propEqResult1a: boolean = _.propEq("bar")(1)(propEqFoo);
+const propEqResult1b: boolean = _.propEq("bar")(1, propEqFoo);
+const propEqResult1c: boolean = _.propEq("bar", 1)(propEqFoo);
+
+// The type compared should be the type of the property.
+// $ExpectError
+const propEqResult2: boolean = _.propEq("bar", "wrong", propEqFoo);
+
+// The property name must be a property on the object supplied.
+// $ExpectError
+const propEqResult3: boolean = _.propEq("baz", 1, propEqFoo);
 
 const sortByFirstItem = _.sortBy(([first]) => first);
 const pairs = [[-1, 1], [-2, 2], [-3, 3]];
