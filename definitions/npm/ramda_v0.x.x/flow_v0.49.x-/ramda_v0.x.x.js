@@ -1523,14 +1523,14 @@ declare module ramda {
 
   declare function keysIn(o: Object): Array<string>;
 
-  declare function props<T, O: { [k: string]: T }>(
-    keys: Array<$Keys<O>>,
+  declare function props<T: string, O>(
+    keys: Array<T>,
     ...rest: Array<void>
-  ): (o: O) => Array<?T>;
-  declare function props<T, O: { [k: string]: T }>(
-    keys: Array<$Keys<O>>,
+  ): (o: O) => Array<$ElementType<O, T>>;
+  declare function props<T: string, O>(
+    keys: Array<T>,
     o: O
-  ): Array<?T>;
+  ): Array<$ElementType<O, T>>;
 
   // TODO set
 

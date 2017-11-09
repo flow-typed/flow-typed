@@ -197,9 +197,31 @@ const fav = favoriteWithDefault(alice);
 const nameWithDefault = _.propOr("Ramda", "name");
 const nm: number | string = nameWithDefault(alice);
 
-const pss: Array<?number | boolean> = _.props(["x", "y"], { x: true, y: 2 });
-//$ExpectError
-const pssE: Array<?number | boolean> = _.props(["d", "y"], { x: true, y: 2 });
+const pss1: Array<number | boolean> = _.props(["x", "y"], {
+  x: true,
+  y: 2,
+  z: "foo"
+});
+const pss2: Array<number | boolean> = _.props(
+  ["x", "y"],
+  ({ x: true, y: 2, z: "foo" }: { x: boolean, y: number })
+);
+const pss3: Array<number> = _.props(["y"], { x: true, y: 2, z: "foo" });
+const pss4: Array<number> = _.props(["y"], ({ y: 2 }: { [string]: number }));
+//$ExpectError -- wrong key
+const pssE1: Array<number | boolean> = _.props(["d", "y"], {
+  x: true,
+  y: 2,
+  z: "foo"
+});
+//$ExpectError -- wrong type
+const pssE2: Array<string | boolean> = _.props(["x", "y"], {
+  x: true,
+  y: 2,
+  z: "foo"
+});
+//$ExpectError -- wrong type on indexer value
+const pssE3: Array<string> = _.props(["y"], ({ y: 2 }: { [string]: number }));
 
 const top: Array<["a" | "b" | "c", number]> = _.toPairs({ a: 1, b: 2, c: 3 });
 
