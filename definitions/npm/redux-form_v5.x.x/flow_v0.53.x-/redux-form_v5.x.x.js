@@ -13,7 +13,7 @@ import * as React from 'react';
  */
 
 declare module 'redux-form' {
-  declare type InputProps = {
+  declare export type InputProps = {
     name: string,
     value: string | boolean,
     valid: boolean,
@@ -48,7 +48,7 @@ declare module 'redux-form' {
     visited: boolean,
   };
 
-  declare type FieldInputProps = {
+  declare export type FieldInputProps = {
     input: InputProps,
     meta: MetaProps,
   };
@@ -65,7 +65,7 @@ declare module 'redux-form' {
     component: ClassComponent<P, void> | FunctionComponent<P> | string
   } & $Diff<P, FieldInputProps>;
 
-  declare type RegisteredField<T> = {
+  declare export type RegisteredField<T> = {
     name: $Keys<T>,
     type: string,
   };
@@ -76,7 +76,7 @@ declare module 'redux-form' {
     registeredFields: Array<RegisteredField<T>>,
   };
 
-  declare type FormProps = {
+  declare export type FormProps = {
     active: string,
     asyncValidate: (values: Object, dispatch: Function, props: Object) => Promise<void>,
     asyncValidating: string | boolean,
@@ -100,7 +100,7 @@ declare module 'redux-form' {
     values: Object
   };
 
-  declare type FormConfig = {
+  declare export type FormConfig = {
     fields: Array<string>,
     form: string,
     alwaysAsyncValidate?: boolean,
@@ -123,7 +123,7 @@ declare module 'redux-form' {
     validate?: (values:Object, props:Object) => Object
   };
 
-  declare type FormComponentProps = {
+  declare export type FormComponentProps = {
     // State:
     asyncValidating: boolean,   // true if async validation is running
     dirty: boolean,             // true if any values are different from initialValues
