@@ -430,8 +430,8 @@ declare module ramda {
   declare function type(x: ?any): string;
   declare function isArrayLike(x: any): boolean;
 
-  declare function isNil(x: void | null): true;
-  declare function isNil(x: mixed): false;
+  declare function isNil(x: mixed): boolean %checks(x === undefined ||
+    x === null);
 
   // *List
   declare function adjust<T>(
