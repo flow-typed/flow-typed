@@ -1,6 +1,15 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, curry, filter, find, repeat, zipWith } from "ramda";
+import _, {
+  compose,
+  pipe,
+  curry,
+  filter,
+  find,
+  isNil,
+  repeat,
+  zipWith
+} from "ramda";
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -36,8 +45,15 @@ const str: string = "hello world";
 //Type
 {
   const x: boolean = _.is(Number, 1);
-  const x1: false = _.isNil(1);
-  const x1a: true = _.isNil();
-  const x1b: true = _.isNil(null);
+  const x1: boolean = isNil(1);
+
+  // should refine type
+  const x1a: ?{ a: number } = { a: 1 };
+  //$ExpectError
+  x1a.a;
+  if (!isNil(x1a)) {
+    x1a.a;
+  }
+
   const x2: boolean = _.propIs(1, "num", { num: 1 });
 }
