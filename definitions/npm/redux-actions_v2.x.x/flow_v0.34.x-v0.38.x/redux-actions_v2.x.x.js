@@ -3,7 +3,7 @@ declare module "redux-actions" {
    * Use `ActionType` to get the type of the action created by a given action
    * creator. For example:
    *
-   *     import { creatAction, type ActionType } from 'redux-actions'
+   *     import { createAction, type ActionType } from 'redux-actions'
    *
    *     const increment = createAction(INCREMENT, (count: number) => count)
    *
