@@ -25,9 +25,9 @@ declare module 'redux-form' {
     visited: boolean,
     autofilled: boolean,
     error?: string,
-    onChange: (eventOrValue: SyntheticEvent<any> | string | boolean) => mixed,
-    onUpdate: (eventOrValue: SyntheticEvent<any> | string | boolean) => mixed,
-    onBlur: (eventOrValue: SyntheticEvent<any> | string | boolean) => mixed,
+    onChange: (eventOrValue: Event | string | boolean) => mixed,
+    onUpdate: (eventOrValue: Event | string | boolean) => mixed,
+    onBlur: (eventOrValue: Event | string | boolean) => mixed,
     onDragStart: Function,
     onDrop: Function,
     onFocus: Function,
@@ -53,7 +53,7 @@ declare module 'redux-form' {
     meta: MetaProps,
   };
 
-  declare type FunctionComponent<P> = (props: P) => React.Node;
+  declare type FunctionComponent<P> = (props?: P) => React.Node;
   declare type ClassComponent<P, S> = Class<React$Component<P, S>>;
   declare type Component<P> = FunctionComponent<P> | ClassComponent<P, any>;
 
