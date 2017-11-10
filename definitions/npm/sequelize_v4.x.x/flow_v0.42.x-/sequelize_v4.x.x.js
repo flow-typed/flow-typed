@@ -3,13 +3,13 @@
 declare module "sequelize" {
   /**
    * The options for the getAssociation mixin of the belongsTo association.
-   * @see  BelongsToGetAssociationMixin
+   * @see  BelongsToGetOne
    */
-  declare interface BelongsToGetAssociationMixinOptions {
+  declare export type BelongsToGetOneOptions = {
     /**
      * Apply a scope on the related model, or remove its default scope by passing false.
      */
-    scope?: string | boolean
+    scope?: ?(string | boolean)
   }
 
 
@@ -21,8 +21,8 @@ declare module "sequelize" {
 
   User.belongsTo(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttrib>, UserAttrib {
-    getRole: Sequelize.BelongsToGetAssociationMixin<RoleInstance>;
+  interface UserInstance extends Model<UserInstance, UserAttrib>, UserAttrib {
+    getRole: BelongsToGetOne<RoleInstance>;
     // setRole...
     // createRole...
   }
@@ -30,20 +30,20 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to/
    * @see  Model
   */
-  declare interface BelongsToGetAssociationMixin<TInstance>{
+  declare export type BelongsToGetOne<TInstance: Model<any>> = {
     /**
      * Get the associated instance.
      * @param options The options to use when getting the association.
      */
-    (options?: BelongsToGetAssociationMixinOptions): Promise<?TInstance>
+    (options?: BelongsToGetOneOptions): Promise<?TInstance>
   }
 
 
   /**
    * The options for the setAssociation mixin of the belongsTo association.
-   * @see  BelongsToSetAssociationMixin
+   * @see  BelongsToSetOne
    */
-  declare interface BelongsToSetAssociationMixinOptions {
+  declare export type BelongsToSetOneOptions = {
     /**
      * Skip saving this after setting the foreign key if false.
      */
@@ -59,30 +59,29 @@ declare module "sequelize" {
 
   User.belongsTo(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRole...
-    setRole: Sequelize.BelongsToSetAssociationMixin<RoleInstance, RoleId>;
+    setRole: BelongsToSetOne<RoleInstance, RoleId>;
     // createRole...
   }
   ```
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to/
    * @see  Model
   */
-  declare interface BelongsToSetAssociationMixin<TInstance, TInstancePrimaryKey>{
+  declare export type BelongsToSetOne<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Set the associated instance.
      * @param newAssociation An instance or the primary key of an instance to associate with this. Pass null or undefined to remove the association.
      * @param options the options passed to `this.save`.
      */
-    (newAssociation?: TInstance | TInstancePrimaryKey, options?: BelongsToSetAssociationMixinOptions | InstanceSaveOptions): Promise<void>
+    (newAssociation?: TInstance | TInstancePrimaryKey, options?: BelongsToSetOneOptions & InstanceSaveOptions<any>): Promise<void>
   }
-
 
   /**
    * The options for the createAssociation mixin of the belongsTo association.
-   * @see  BelongsToCreateAssociationMixin
+   * @see  BelongsToCreateOne
    */
-  declare interface BelongsToCreateAssociationMixinOptions {}
+  declare export type BelongsToCreateOneOptions = {}
 
 
   /**
@@ -93,34 +92,34 @@ declare module "sequelize" {
 
   User.belongsTo(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRole...
     // setRole...
-    createRole: Sequelize.BelongsToCreateAssociationMixin<RoleAttributes>;
+    createRole: BelongsToCreateOne<RoleAttributes>;
   }
   ```
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to/
    * @see  Model
   */
-  declare interface BelongsToCreateAssociationMixin<TAttributes>{
+  declare export type BelongsToCreateOne<TAttributes> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options The options passed to `target.create` and `setAssociation`.
      */
-    (values?: TAttributes, options?: BelongsToCreateAssociationMixinOptions | CreateOptions | BelongsToSetAssociationMixinOptions): Promise<void>
+    (values?: $Shape<TAttributes>, options?: BelongsToCreateOneOptions & CreateOptions<any> & BelongsToSetOneOptions): Promise<void>
   }
 
 
   /**
    * The options for the getAssociation mixin of the hasOne association.
-   * @see  HasOneGetAssociationMixin
+   * @see  HasOneGetOne
    */
-  declare interface HasOneGetAssociationMixinOptions {
+  declare export type HasOneGetOneOptions = {
     /**
      * Apply a scope on the related model, or remove its default scope by passing false.
      */
-    scope?: string | boolean
+    scope?: ?(string | boolean)
   }
 
 
@@ -132,8 +131,8 @@ declare module "sequelize" {
 
   User.hasOne(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttrib>, UserAttrib {
-    getRole: Sequelize.HasOneGetAssociationMixin<RoleInstance>;
+  interface UserInstance extends Model<UserInstance, UserAttrib>, UserAttrib {
+    getRole: HasOneGetOne<RoleInstance>;
     // setRole...
     // createRole...
   }
@@ -141,20 +140,20 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-one/
    * @see  Model
   */
-  declare interface HasOneGetAssociationMixin<TInstance>{
+  declare export type HasOneGetOne<TInstance: Model<any>> = {
     /**
      * Get the associated instance.
      * @param options The options to use when getting the association.
      */
-    (options?: HasOneGetAssociationMixinOptions): Promise<?TInstance>
+    (options?: HasOneGetOneOptions): Promise<?TInstance>
   }
 
 
   /**
    * The options for the setAssociation mixin of the hasOne association.
-   * @see  HasOneSetAssociationMixin
+   * @see  HasOneSetOne
    */
-  declare interface HasOneSetAssociationMixinOptions {
+  declare export type HasOneSetOneOptions = {
     /**
      * Skip saving this after setting the foreign key if false.
      */
@@ -170,30 +169,30 @@ declare module "sequelize" {
 
   User.hasOne(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRole...
-    setRole: Sequelize.HasOneSetAssociationMixin<RoleInstance, RoleId>;
+    setRole: HasOneSetOne<RoleInstance, RoleId>;
     // createRole...
   }
   ```
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-one/
    * @see  Model
   */
-  declare interface HasOneSetAssociationMixin<TInstance, TInstancePrimaryKey>{
+  declare export type HasOneSetOne<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Set the associated instance.
      * @param newAssociation An instance or the primary key of an instance to associate with this. Pass null or undefined to remove the association.
      * @param options The options passed to `getAssocation` and `target.save`.
      */
-    (newAssociation?: TInstance | TInstancePrimaryKey, options?: HasOneSetAssociationMixinOptions | HasOneGetAssociationMixinOptions | InstanceSaveOptions): Promise<void>
+    (newAssociation?: TInstance | TInstancePrimaryKey, options?: HasOneSetOneOptions & HasOneGetOneOptions & InstanceSaveOptions<any>): Promise<void>
   }
 
 
   /**
    * The options for the createAssociation mixin of the hasOne association.
-   * @see  HasOneCreateAssociationMixin
+   * @see  HasOneCreateOne
    */
-  declare interface HasOneCreateAssociationMixinOptions {}
+  declare export type HasOneCreateOneOptions = {}
 
 
   /**
@@ -204,39 +203,39 @@ declare module "sequelize" {
 
   User.hasOne(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRole...
     // setRole...
-    createRole: Sequelize.HasOneCreateAssociationMixin<RoleAttributes>;
+    createRole: HasOneCreateOne<RoleAttributes>;
   }
   ```
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-one/
    * @see  Model
   */
-  declare interface HasOneCreateAssociationMixin<TAttributes>{
+  declare export type HasOneCreateOne<TAttributes> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options The options passed to `target.create` and `setAssociation`.
      */
-    (values?: TAttributes, options?: HasOneCreateAssociationMixinOptions | HasOneSetAssociationMixinOptions | CreateOptions): Promise<void>
+    (values?: $Shape<TAttributes>, options?: HasOneCreateOneOptions & HasOneSetOneOptions & CreateOptions<any>): Promise<void>
   }
 
 
   /**
    * The options for the getAssociations mixin of the hasMany association.
-   * @see  HasManyGetAssociationsMixin
+   * @see  HasManyGetMany
    */
-  declare interface HasManyGetAssociationsMixinOptions {
+  declare export type HasManyGetManyOptions = {
     /**
      * An optional where clause to limit the associated models.
      */
-    where?: AnyWhereOptions,
+    where?: WhereOptions,
 
     /**
      * Apply a scope on the related model, or remove its default scope by passing false.
      */
-    scope?: string | boolean
+    scope?: ?(string | boolean)
   }
 
 
@@ -248,8 +247,8 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
-    getRoles: Sequelize.HasManyGetAssociationsMixin<RoleInstance>;
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
+    getRoles: HasManyGetMany<RoleInstance>;
     // setRoles...
     // addRoles...
     // addRole...
@@ -264,20 +263,20 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManyGetAssociationsMixin<TInstance>{
+  declare export type HasManyGetMany<TInstance: Model<any>> = {
     /**
      * Get everything currently associated with this, using an optional where clause.
      * @param options The options to use when getting the associations.
      */
-    (options?: HasManyGetAssociationsMixinOptions): Promise<TInstance[]>
+    (options?: HasManyGetManyOptions): Promise<TInstance[]>
   }
 
 
   /**
    * The options for the setAssociations mixin of the hasMany association.
-   * @see  HasManySetAssociationsMixin
+   * @see  HasManySetMany
    */
-  declare interface HasManySetAssociationsMixinOptions {
+  declare export type HasManySetManyOptions = {
     /**
      * Run validation for the join model.
      */
@@ -293,9 +292,9 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
-    setRoles: Sequelize.HasManySetAssociationsMixin<RoleInstance, RoleId>;
+    setRoles: HasManySetMany<RoleInstance, RoleId>;
     // addRoles...
     // addRole...
     // createRole...
@@ -309,22 +308,22 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManySetAssociationsMixin<TInstance, TInstancePrimaryKey>{
+  declare export type HasManySetMany<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Set the associated models by passing an array of instances or their primary keys.
      * Everything that it not in the passed array will be un-associated.
      * @param newAssociations An array of instances or primary key of instances to associate with this. Pass null or undefined to remove all associations.
      * @param options The options passed to `target.findAll` and `update`.
      */
-    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: HasManySetAssociationsMixinOptions | AnyFindOptions | InstanceUpdateOptions): Promise<void>
+    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: HasManySetManyOptions & AnyFindOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
   /**
    * The options for the addAssociations mixin of the hasMany association.
-   * @see  HasManyAddAssociationsMixin
+   * @see  HasManyAddMany
    */
-  declare interface HasManyAddAssociationsMixinOptions {
+  declare export type HasManyAddManyOptions = {
     /**
      * Run validation for the join model.
      */
@@ -340,10 +339,10 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
-    addRoles: Sequelize.HasManyAddAssociationsMixin<RoleInstance, RoleId>;
+    addRoles: HasManyAddMany<RoleInstance, RoleId>;
     // addRole...
     // createRole...
     // removeRole...
@@ -356,21 +355,21 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManyAddAssociationsMixin<TInstance, TInstancePrimaryKey>{
+  declare export type HasManyAddMany<TInstance: Model<any>, TInstancePrimaryKey> ={
     /**
      * Associate several instances with this.
      * @param newAssociations An array of instances or primary key of instances to associate with this.
      * @param options The options passed to `target.update`.
      */
-    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: HasManyAddAssociationsMixinOptions | InstanceUpdateOptions): Promise<void>
+    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: HasManyAddManyOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
   /**
    * The options for the addAssociation mixin of the hasMany association.
-   * @see  HasManyAddAssociationMixin
+   * @see  HasManyAddOne
    */
-  declare interface HasManyAddAssociationMixinOptions {
+  declare export type HasManyAddOneOptions = {
     /**
      * Run validation for the join model.
      */
@@ -386,11 +385,11 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
-    addRole: Sequelize.HasManyAddAssociationMixin<RoleInstance, RoleId>;
+    addRole: HasManyAddOne<RoleInstance, RoleId>;
     // createRole...
     // removeRole...
     // removeRoles...
@@ -402,21 +401,21 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManyAddAssociationMixin<TInstance, TInstancePrimaryKey>{
+  declare export type HasManyAddOne<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Associate an instance with this.
      * @param newAssociation An instance or the primary key of an instance to associate with this.
      * @param options The options passed to `target.update`.
      */
-    (newAssociation?: TInstance | TInstancePrimaryKey, options?: HasManyAddAssociationMixinOptions | InstanceUpdateOptions): Promise<void>
+    (newAssociation?: TInstance | TInstancePrimaryKey, options?: HasManyAddOneOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
   /**
    * The options for the createAssociation mixin of the hasMany association.
-   * @see  HasManyCreateAssociationMixin
+   * @see  HasManyCreateOne
    */
-  declare interface HasManyCreateAssociationMixinOptions {}
+  declare export type HasManyCreateOneOptions = {}
 
 
   /**
@@ -427,12 +426,12 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
     // addRole...
-    createRole: Sequelize.HasManyCreateAssociationMixin<RoleAttributes>;
+    createRole: HasManyCreateOne<RoleAttributes>;
     // removeRole...
     // removeRoles...
     // hasRole...
@@ -443,21 +442,21 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManyCreateAssociationMixin<TAttributes, TInstance>{
+  declare export type HasManyCreateOne<TAttributes, TInstance: Model<TAttributes>> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options The options to use when creating the association.
      */
-    (values?: TAttributes, options?: HasManyCreateAssociationMixinOptions | CreateOptions): Promise<TInstance>
+    (values?: $Shape<TAttributes>, options?: HasManyCreateOneOptions & CreateOptions<any>): Promise<TInstance>
   }
 
 
   /**
    * The options for the removeAssociation mixin of the hasMany association.
-   * @see  HasManyRemoveAssociationMixin
+   * @see  HasManyRemoveOne
    */
-  declare interface HasManyRemoveAssociationMixinOptions {}
+  declare export type HasManyRemoveOneOptions = {}
 
 
   /**
@@ -468,13 +467,13 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
     // addRole...
     // createRole...
-    removeRole: Sequelize.HasManyRemoveAssociationMixin<RoleInstance, RoleId>;
+    removeRole: HasManyRemoveOne<RoleInstance, RoleId>;
     // removeRoles...
     // hasRole...
     // hasRoles...
@@ -484,21 +483,21 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManyRemoveAssociationMixin<TInstance, TInstancePrimaryKey>{
+  declare export type HasManyRemoveOne<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Un-associate the instance.
      * @param oldAssociated The instance or the primary key of the instance to un-associate.
      * @param options The options passed to `target.update`.
      */
-    (oldAssociated?: TInstance | TInstancePrimaryKey, options?: HasManyRemoveAssociationMixinOptions | InstanceUpdateOptions): Promise<void>
+    (oldAssociated?: TInstance | TInstancePrimaryKey, options?: HasManyRemoveOneOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
   /**
    * The options for the removeAssociations mixin of the hasMany association.
-   * @see  HasManyRemoveAssociationsMixin
+   * @see  HasManyRemoveMany
    */
-  declare interface HasManyRemoveAssociationsMixinOptions {}
+  declare export type HasManyRemoveManyOptions = {}
 
 
   /**
@@ -509,14 +508,14 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
     // addRole...
     // createRole...
     // removeRole...
-    removeRoles: Sequelize.HasManyRemoveAssociationsMixin<RoleInstance, RoleId>;
+    removeRoles: HasManyRemoveMany<RoleInstance, RoleId>;
     // hasRole...
     // hasRoles...
     // countRoles...
@@ -525,21 +524,21 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManyRemoveAssociationsMixin<TInstance, TInstancePrimaryKey>{
+  declare export type HasManyRemoveMany<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Un-associate several instances.
      * @param oldAssociated An array of instances or primary key of instances to un-associate.
      * @param options The options passed to `target.update`.
      */
-    (oldAssociateds?: Array<TInstance | TInstancePrimaryKey>, options?: HasManyRemoveAssociationsMixinOptions | InstanceUpdateOptions): Promise<void>
+    (oldAssociateds?: Array<TInstance | TInstancePrimaryKey>, options?: HasManyRemoveManyOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
   /**
    * The options for the hasAssociation mixin of the hasMany association.
-   * @see  HasManyHasAssociationMixin
+   * @see  HasManyHasOne
    */
-  declare interface HasManyHasAssociationMixinOptions {}
+  declare export type HasManyHasOneOptions = {}
 
 
   /**
@@ -550,7 +549,7 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
@@ -558,7 +557,7 @@ declare module "sequelize" {
     // createRole...
     // removeRole...
     // removeRoles...
-    hasRole: Sequelize.HasManyHasAssociationMixin<RoleInstance, RoleId>;
+    hasRole: HasManyHasOne<RoleInstance, RoleId>;
     // hasRoles...
     // countRoles...
   }
@@ -566,21 +565,21 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManyHasAssociationMixin<TInstance, TInstancePrimaryKey>{
+  declare export type HasManyHasOne<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Check if an instance is associated with this.
      * @param target The instance or the primary key of the instance to check.
      * @param options The options passed to `getAssociations`.
      */
-    (target: TInstance | TInstancePrimaryKey, options?: HasManyHasAssociationMixinOptions | HasManyGetAssociationsMixinOptions): Promise<boolean>
+    (target: TInstance | TInstancePrimaryKey, options?: HasManyHasOneOptions & HasManyGetManyOptions): Promise<boolean>
   }
 
 
   /**
    * The options for the hasAssociations mixin of the hasMany association.
-   * @see  HasManyHasAssociationsMixin
+   * @see  HasManyHasMany
    */
-  declare interface HasManyHasAssociationsMixinOptions {}
+  declare export type HasManyHasManyOptions = {}
 
 
   /**
@@ -591,7 +590,7 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
@@ -600,37 +599,37 @@ declare module "sequelize" {
     // removeRole...
     // removeRoles
     // hasRole...
-    hasRoles: Sequelize.HasManyHasAssociationsMixin<RoleInstance, RoleId>;
+    hasRoles: HasManyHasMany<RoleInstance, RoleId>;
     // countRoles...
   }
   ```
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManyHasAssociationsMixin<TInstance, TInstancePrimaryKey>{
+  declare export type HasManyHasMany<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Check if all instances are associated with this.
      * @param targets An array of instances or primary key of instances to check.
      * @param options The options passed to `getAssociations`.
      */
-    (targets: Array<TInstance | TInstancePrimaryKey>, options?: HasManyHasAssociationsMixinOptions | HasManyGetAssociationsMixinOptions): Promise<boolean>
+    (targets: Array<TInstance | TInstancePrimaryKey>, options?: HasManyHasManyOptions & HasManyGetManyOptions): Promise<boolean>
   }
 
 
   /**
    * The options for the countAssociations mixin of the hasMany association.
-   * @see  HasManyCountAssociationsMixin
+   * @see  HasManyCount
    */
-  declare interface HasManyCountAssociationsMixinOptions {
+  declare export type HasManyCountOptions = {
     /**
      * An optional where clause to limit the associated models.
      */
-    where?: AnyWhereOptions,
+    where?: WhereOptions,
 
     /**
      * Apply a scope on the related model, or remove its default scope by passing false.
      */
-    scope?: string | boolean
+    scope?: ?(string | boolean)
   }
 
 
@@ -642,7 +641,7 @@ declare module "sequelize" {
 
   User.hasMany(Role);
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
@@ -652,35 +651,35 @@ declare module "sequelize" {
     // removeRoles...
     // hasRole...
     // hasRoles...
-    countRoles: Sequelize.HasManyCountAssociationsMixin;
+    countRoles: HasManyCount;
   }
   ```
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare interface HasManyCountAssociationsMixin {
+  declare export type HasManyCount = {
     /**
      * Count everything currently associated with this, using an optional where clause.
      * @param options The options to use when counting the associations.
      */
-    (options?: HasManyCountAssociationsMixinOptions): Promise<number>
+    (options?: HasManyCountOptions): Promise<number>
   }
 
 
   /**
    * The options for the getAssociations mixin of the belongsToMany association.
-   * @see  BelongsToManyGetAssociationsMixin
+   * @see  BelongsToManyGetMany
    */
-  declare interface BelongsToManyGetAssociationsMixinOptions {
+  declare export type BelongsToManyGetManyOptions = {
     /**
      * An optional where clause to limit the associated models.
      */
-    where?: AnyWhereOptions,
+    where?: WhereOptions,
 
     /**
      * Apply a scope on the related model, or remove its default scope by passing false.
      */
-    scope?: string | boolean
+    scope?: ?(string | boolean)
   }
 
 
@@ -692,8 +691,8 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
-    getRoles: Sequelize.BelongsToManyGetAssociationsMixin<RoleInstance>;
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
+    getRoles: BelongsToManyGetMany<RoleInstance>;
     // setRoles...
     // addRoles...
     // addRole...
@@ -708,20 +707,20 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManyGetAssociationsMixin<TInstance>{
+  declare export type BelongsToManyGetMany<TInstance: Model<any>> = {
     /**
      * Get everything currently associated with this, using an optional where clause.
      * @param options The options to use when getting the associations.
      */
-    (options?: BelongsToManyGetAssociationsMixinOptions): Promise<TInstance[]>
+    (options?: BelongsToManyGetManyOptions): Promise<TInstance[]>
   }
 
 
   /**
    * The options for the setAssociations mixin of the belongsToMany association.
-   * @see  BelongsToManySetAssociationsMixin
+   * @see  BelongsToManySetMany
    */
-  declare interface BelongsToManySetAssociationsMixinOptions {
+  declare export type BelongsToManySetManyOptions = {
     /**
      * Run validation for the join model.
      */
@@ -737,9 +736,9 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
-    setRoles: Sequelize.BelongsToManySetAssociationsMixin<RoleInstance, RoleId, UserRoleAttributes>;
+    setRoles: BelongsToManySetMany<RoleInstance, RoleId, UserRoleAttributes>;
     // addRoles...
     // addRole...
     // createRole...
@@ -753,29 +752,29 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManySetAssociationsMixin<TInstance, TInstancePrimaryKey, TJoinTableAttributes>{
+  declare export type BelongsToManySetMany<TInstance: Model<any>, TInstancePrimaryKey, TJoinTableAttributes> = {
     /**
      * Set the associated models by passing an array of instances or their primary keys.
      * Everything that it not in the passed array will be un-associated.
      * @param newAssociations An array of instances or primary key of instances to associate with this. Pass null or undefined to remove all associations.
      * @param options The options passed to `through.findAll`, `bulkCreate`, `update` and `destroy`. Can also hold additional attributes for the join table.
      */
-    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManySetAssociationsMixinOptions |
-      AnyFindOptions |
-      BulkCreateOptions |
-      InstanceUpdateOptions |
-      InstanceDestroyOptions |
+    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManySetManyOptions &
+      AnyFindOptions &
+      BulkCreateOptions<any> &
+      InstanceUpdateOptions<any> &
+      InstanceDestroyOptions &
       {
-        through: TJoinTableAttributes
+        through?: TJoinTableAttributes
       }): Promise<void>
   }
 
 
   /**
    * The options for the addAssociations mixin of the belongsToMany association.
-   * @see  BelongsToManyAddAssociationsMixin
+   * @see  BelongsToManyAddMany
    */
-  declare interface BelongsToManyAddAssociationsMixinOptions {
+  declare export type BelongsToManyAddManyOptions = {
     /**
      * Run validation for the join model.
      */
@@ -791,10 +790,10 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
-    addRoles: Sequelize.BelongsToManyAddAssociationsMixin<RoleInstance, RoleId, UserRoleAttributes>;
+    addRoles: BelongsToManyAddMany<RoleInstance, RoleId, UserRoleAttributes>;
     // addRole...
     // createRole...
     // removeRole...
@@ -807,28 +806,28 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManyAddAssociationsMixin<TInstance, TInstancePrimaryKey, TJoinTableAttributes>{
+  declare export type BelongsToManyAddMany<TInstance: Model<any>, TInstancePrimaryKey, TJoinTableAttributes> = {
     /**
      * Associate several instances with this.
      * @param newAssociations An array of instances or primary key of instances to associate with this.
      * @param options The options passed to `through.findAll`, `bulkCreate`, `update` and `destroy`. Can also hold additional attributes for the join table.
      */
-    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyAddAssociationsMixinOptions |
-      AnyFindOptions |
-      BulkCreateOptions |
-      InstanceUpdateOptions |
-      InstanceDestroyOptions |
+    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyAddManyOptions &
+      AnyFindOptions &
+      BulkCreateOptions<any> &
+      InstanceUpdateOptions<any> &
+      InstanceDestroyOptions &
       {
-        through: TJoinTableAttributes
+        through?: TJoinTableAttributes
       }): Promise<void>
   }
 
 
   /**
    * The options for the addAssociation mixin of the belongsToMany association.
-   * @see  BelongsToManyAddAssociationMixin
+   * @see  BelongsToManyAddOne
    */
-  declare interface BelongsToManyAddAssociationMixinOptions {
+  declare export type BelongsToManyAddOneOptions = {
     /**
      * Run validation for the join model.
      */
@@ -844,11 +843,11 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
-    addRole: Sequelize.BelongsToManyAddAssociationMixin<RoleInstance, RoleId, UserRoleAttributes>;
+    addRole: BelongsToManyAddOne<RoleInstance, RoleId, UserRoleAttributes>;
     // createRole...
     // removeRole...
     // removeRoles...
@@ -860,28 +859,28 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManyAddAssociationMixin<TInstance, TInstancePrimaryKey, TJoinTableAttributes>{
+  declare export type BelongsToManyAddOne<TInstance: Model<any>, TInstancePrimaryKey, TJoinTableAttributes> = {
     /**
      * Associate an instance with this.
      * @param newAssociation An instance or the primary key of an instance to associate with this.
      * @param options The options passed to `through.findAll`, `bulkCreate`, `update` and `destroy`. Can also hold additional attributes for the join table.
      */
-    (newAssociation?: TInstance | TInstancePrimaryKey, options?: BelongsToManyAddAssociationMixinOptions |
-      AnyFindOptions |
-      BulkCreateOptions |
-      InstanceUpdateOptions |
-      InstanceDestroyOptions |
+    (newAssociation?: TInstance | TInstancePrimaryKey, options?: BelongsToManyAddOneOptions &
+      AnyFindOptions &
+      BulkCreateOptions<any> &
+      InstanceUpdateOptions<any> &
+      InstanceDestroyOptions &
       {
-        through: TJoinTableAttributes
+        through?: TJoinTableAttributes
       }): Promise<void>
   }
 
 
   /**
    * The options for the createAssociation mixin of the belongsToMany association.
-   * @see  BelongsToManyCreateAssociationMixin
+   * @see  BelongsToManyCreateOne
    */
-  declare interface BelongsToManyCreateAssociationMixinOptions {}
+  declare export type BelongsToManyCreateOneOptions = {}
 
 
   /**
@@ -892,12 +891,12 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
     // addRole...
-    createRole: Sequelize.BelongsToManyCreateAssociationMixin<RoleAttributes, UserRoleAttributes>;
+    createRole: BelongsToManyCreateOne<RoleAttributes, UserRoleAttributes>;
     // removeRole...
     // removeRoles...
     // hasRole...
@@ -908,23 +907,23 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManyCreateAssociationMixin<TAttributes, TInstance, TJoinTableAttributes>{
+  declare export type BelongsToManyCreateOne<TAttributes, TInstance: Model<TAttributes>, TJoinTableAttributes> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options Options passed to `create` and `add`. Can also hold additional attributes for the join table.
      */
-    (values?: TAttributes, options?: BelongsToManyCreateAssociationMixinOptions | CreateOptions | {
-      through: TJoinTableAttributes
+    (values?: $Shape<TAttributes>, options?: BelongsToManyCreateOneOptions & CreateOptions<any> & {
+      through?: TJoinTableAttributes
     }): Promise<TInstance>
   }
 
 
   /**
    * The options for the removeAssociation mixin of the belongsToMany association.
-   * @see  BelongsToManyRemoveAssociationMixin
+   * @see  BelongsToManyRemoveOne
    */
-  declare interface BelongsToManyRemoveAssociationMixinOptions {}
+  declare export type BelongsToManyRemoveOneOptions = {}
 
 
   /**
@@ -935,13 +934,13 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
     // addRole...
     // createRole...
-    removeRole: Sequelize.BelongsToManyRemoveAssociationMixin<RoleInstance, RoleId>;
+    removeRole: BelongsToManyRemoveOne<RoleInstance, RoleId>;
     // removeRoles...
     // hasRole...
     // hasRoles...
@@ -951,21 +950,21 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManyRemoveAssociationMixin<TInstance, TInstancePrimaryKey>{
+  declare export type BelongsToManyRemoveOne<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Un-associate the instance.
      * @param oldAssociated The instance or the primary key of the instance to un-associate.
      * @param options The options passed to `through.destroy`.
      */
-    (oldAssociated?: TInstance | TInstancePrimaryKey, options?: BelongsToManyRemoveAssociationMixinOptions | InstanceDestroyOptions): Promise<void>
+    (oldAssociated?: TInstance | TInstancePrimaryKey, options?: BelongsToManyRemoveOneOptions & InstanceDestroyOptions): Promise<void>
   }
 
 
   /**
    * The options for the removeAssociations mixin of the belongsToMany association.
-   * @see  BelongsToManyRemoveAssociationsMixin
+   * @see  BelongsToManyRemoveMany
    */
-  declare interface BelongsToManyRemoveAssociationsMixinOptions {}
+  declare export type BelongsToManyRemoveManyOptions = {}
 
 
   /**
@@ -976,14 +975,14 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
     // addRole...
     // createRole...
     // removeRole...
-    removeRoles: Sequelize.BelongsToManyRemoveAssociationsMixin<RoleInstance, RoleId>;
+    removeRoles: BelongsToManyRemoveMany<RoleInstance, RoleId>;
     // hasRole...
     // hasRoles...
     // countRoles...
@@ -992,21 +991,21 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManyRemoveAssociationsMixin<TInstance, TInstancePrimaryKey>{
+  declare export type BelongsToManyRemoveMany<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Un-associate several instances.
      * @param oldAssociated An array of instances or primary key of instances to un-associate.
      * @param options The options passed to `through.destroy`.
      */
-    (oldAssociateds?: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyRemoveAssociationsMixinOptions | InstanceDestroyOptions): Promise<void>
+    (oldAssociateds?: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyRemoveManyOptions & InstanceDestroyOptions): Promise<void>
   }
 
 
   /**
    * The options for the hasAssociation mixin of the belongsToMany association.
-   * @see  BelongsToManyHasAssociationMixin
+   * @see  BelongsToManyHasOne
    */
-  declare interface BelongsToManyHasAssociationMixinOptions {}
+  declare export type BelongsToManyHasOneOptions = {}
 
 
   /**
@@ -1017,7 +1016,7 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
@@ -1025,7 +1024,7 @@ declare module "sequelize" {
     // createRole...
     // removeRole...
     // removeRoles...
-    hasRole: Sequelize.BelongsToManyHasAssociationMixin<RoleInstance, RoleId>;
+    hasRole: BelongsToManyHasOne<RoleInstance, RoleId>;
     // hasRoles...
     // countRoles...
   }
@@ -1033,21 +1032,21 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManyHasAssociationMixin<TInstance, TInstancePrimaryKey>{
+  declare export type BelongsToManyHasOne<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Check if an instance is associated with this.
      * @param target The instance or the primary key of the instance to check.
      * @param options The options passed to `getAssociations`.
      */
-    (target: TInstance | TInstancePrimaryKey, options?: BelongsToManyHasAssociationMixinOptions | BelongsToManyGetAssociationsMixinOptions): Promise<boolean>
+    (target: TInstance | TInstancePrimaryKey, options?: BelongsToManyHasOneOptions & BelongsToManyGetManyOptions): Promise<boolean>
   }
 
 
   /**
    * The options for the hasAssociations mixin of the belongsToMany association.
-   * @see  BelongsToManyHasAssociationsMixin
+   * @see  BelongsToManyHasMany
    */
-  declare interface BelongsToManyHasAssociationsMixinOptions {}
+  declare export type BelongsToManyHasManyOptions = {}
 
 
   /**
@@ -1058,7 +1057,7 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
@@ -1067,37 +1066,37 @@ declare module "sequelize" {
     // removeRole...
     // removeRoles
     // hasRole...
-    hasRoles: Sequelize.BelongsToManyHasAssociationsMixin<RoleInstance, RoleId>;
+    hasRoles: BelongsToManyHasMany<RoleInstance, RoleId>;
     // countRoles...
   }
   ```
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManyHasAssociationsMixin<TInstance, TInstancePrimaryKey>{
+  declare export type BelongsToManyHasMany<TInstance: Model<any>, TInstancePrimaryKey> = {
     /**
      * Check if all instances are associated with this.
      * @param targets An array of instances or primary key of instances to check.
      * @param options The options passed to `getAssociations`.
      */
-    (targets: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyHasAssociationsMixinOptions | BelongsToManyGetAssociationsMixinOptions): Promise<boolean>
+    (targets: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyHasManyOptions & BelongsToManyGetManyOptions): Promise<boolean>
   }
 
 
   /**
    * The options for the countAssociations mixin of the belongsToMany association.
-   * @see  BelongsToManyCountAssociationsMixin
+   * @see  BelongsToManyCount
    */
-  declare interface BelongsToManyCountAssociationsMixinOptions {
+  declare export type BelongsToManyCountOptions = {
     /**
      * An optional where clause to limit the associated models.
      */
-    where?: AnyWhereOptions,
+    where?: WhereOptions,
 
-      /**
-       * Apply a scope on the related model, or remove its default scope by passing false.
-       */
-      scope?: string | boolean
+    /**
+     * Apply a scope on the related model, or remove its default scope by passing false.
+     */
+    scope?: ?(string | boolean)
   }
 
 
@@ -1109,7 +1108,7 @@ declare module "sequelize" {
 
   User.belongsToMany(Role, { through: UserRole });
 
-  interface UserInstance extends Sequelize.Instance<UserInstance, UserAttributes>, UserAttributes {
+  interface UserInstance extends Model<UserInstance, UserAttributes>, UserAttributes {
     // getRoles...
     // setRoles...
     // addRoles...
@@ -1119,18 +1118,18 @@ declare module "sequelize" {
     // removeRoles...
     // hasRole...
     // hasRoles...
-    countRoles: Sequelize.BelongsToManyCountAssociationsMixin;
+    countRoles: BelongsToManyCount;
   }
   ```
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare interface BelongsToManyCountAssociationsMixin {
+  declare export type BelongsToManyCount = {
     /**
      * Count everything currently associated with this, using an optional where clause.
      * @param options The options to use when counting the associations.
      */
-    (options?: BelongsToManyCountAssociationsMixinOptions): Promise<number>
+    (options?: BelongsToManyCountOptions): Promise<number>
   }
 
 
@@ -1138,7 +1137,7 @@ declare module "sequelize" {
    * Foreign Key Options
    * @see  AssociationOptions
    */
-  declare interface AssociationForeignKeyOptions extends ColumnOptions {
+  declare export type AssociationForeignKeyOptions = ColumnOptions & {
     /**
      * Attribute name for the relation
      */
@@ -1151,7 +1150,7 @@ declare module "sequelize" {
    * Options provided when associating models
    * @see  Association class
    */
-  declare interface AssociationOptions {
+  declare export type AssociationOptions = {
     /**
      * Set to true to run before-/afterDestroy hooks when an associated model is deleted because of a cascade.
      * For example if `User.hasOne(Profile, {onDelete: 'cascade', hooks:true})`, the before-/afterDestroy hooks
@@ -1186,7 +1185,7 @@ declare module "sequelize" {
      *
     Cascade if this is a n:m, and set null if it is a 1:m
 
-    Defaults to 'SET NULL' or 'CASCADE'
+    Defaults to 'SET_NULL' or 'CASCADE'
     */
     onDelete?: string,
 
@@ -1209,7 +1208,7 @@ declare module "sequelize" {
    * Options for Association Scope
    * @see  AssociationOptionsManyToMany
    */
-  declare interface AssociationScope {
+  declare export type AssociationScope = {
     [scopeName: string]: any
   }
 
@@ -1219,12 +1218,12 @@ declare module "sequelize" {
    * @see  AssociationOptionsHasMany
    * @see  AssociationOptionsBelongsToMany
    */
-  declare interface AssociationOptionsManyToMany extends AssociationOptions {
+  declare export type AssociationOptionsManyToMany = AssociationOptions & {
     /**
      * A key/value set that will be used for association create and find defaults on the target.
      * (sqlite not supported for N:M)
      */
-    scope?: AssociationScope
+    scope?: ?AssociationScope
   }
 
 
@@ -1233,7 +1232,7 @@ declare module "sequelize" {
    * Options provided when associating models with hasOne relationship
    * @see  Association class hasOne method
    */
-  declare interface AssociationOptionsHasOne extends AssociationOptions {
+  declare export type AssociationOptionsHasOne = AssociationOptions & {
     /**
      * A string or a data type to represent the identifier in the table
      */
@@ -1246,7 +1245,7 @@ declare module "sequelize" {
    * Options provided when associating models with belongsTo relationship
    * @see  Association class belongsTo method
    */
-  declare interface AssociationOptionsBelongsTo extends AssociationOptions {
+  declare export type AssociationOptionsBelongsTo = AssociationOptions & {
     /**
      * The name of the field to use as the key for the association in the target table. Defaults to the primary
      * key of the target table
@@ -1265,7 +1264,7 @@ declare module "sequelize" {
    * Options provided when associating models with hasMany relationship
    * @see  Association class hasMany method
    */
-  declare interface AssociationOptionsHasMany extends AssociationOptionsManyToMany {
+  declare export type AssociationOptionsHasMany = AssociationOptionsManyToMany & {
     /**
      * A string or a data type to represent the identifier in the table
      */
@@ -1278,7 +1277,7 @@ declare module "sequelize" {
    * Options provided when associating models with belongsToMany relationship
    * @see  Association class belongsToMany method
    */
-  declare interface AssociationOptionsBelongsToMany extends AssociationOptionsManyToMany {
+  declare export type AssociationOptionsBelongsToMany = AssociationOptionsManyToMany & {
     /**
      * The name of the table that is used to join source and target in n:m associations. Can also be a
      * sequelize
@@ -1289,7 +1288,7 @@ declare module "sequelize" {
      * @see  https://github.com/sequelize/sequelize/blob/v3.4.1/lib/associations/has-many.js
      * @see  https://github.com/sequelize/sequelize/blob/v3.4.1/lib/associations/belongs-to-many.js
     */
-    through: Class<Model<any, any>> | string | ThroughOptions,
+    through: Class<Model<any>> | string | ThroughOptions,
 
     /**
      * The name of the foreign key in the join table (representing the target model) or an object representing
@@ -1311,17 +1310,17 @@ declare module "sequelize" {
    * Used for a association table in n:m associations.
    * @see  AssociationOptionsBelongsToMany
    */
-  declare interface ThroughOptions {
+  declare export type ThroughOptions = {
     /**
      * The model used to join both sides of the N:M association.
      */
-    model: Class<Model<any, any>>,
+    model: Class<Model<any>>,
 
     /**
      * A key/value set that will be used for association create and find defaults on the through model.
      * (Remember to add the attributes to the through model)
      */
-    scope?: AssociationScope,
+    scope?: ?AssociationScope,
 
     /**
      * If true a unique key will be generated from the foreign keys used (might want to turn this off and create
@@ -1336,7 +1335,7 @@ declare module "sequelize" {
    * Abstract DataType interface. Use this if you want to create an interface that has a value any of the
    * DataTypes that Sequelize supports.
    */
-  declare type DataTypeAbstract = {
+  declare export type DataTypeAbstract = {
     /**
      * Although this is not needed for the definitions itself, we want to make sure that DataTypeAbstract is not
      * something than can be evaluated to an empty object.
@@ -1525,17 +1524,12 @@ declare module "sequelize" {
 
   declare type DataTypeUUIDv4 = DataTypeAbstract & {}
 
+  declare class DataTypeVirtualClass {
+    constructor(subtype: DataTypeAbstract, requireAttributes?: Array<string>): DataTypeVirtual;
+  }
 
-  declare type DataTypeVirtual = DataTypeAbstract & {
-    /**
-     * Virtual field
-     *
-    Accepts subtype any of the DataTypes
-    Array of required attributes that are available on the model
-    */
-    new(
-      subtype: DataTypeAbstract,
-      requireAttributes?: Array<string>): DataTypeVirtual
+  declare type DataTypeVirtual = DataTypeAbstract & typeof DataTypeVirtualClass & {
+    (subtype: DataTypeAbstract, requireAttributes?: Array<string>): DataTypeVirtual;
   }
 
   declare type DataTypeEnum = DataTypeAbstract & {
@@ -1610,7 +1604,7 @@ declare module "sequelize" {
   })
   ```
   */
-  declare type DataTypes = {
+  declare export type DataTypes = {
     ABSTRACT: DataTypeAbstract,
     STRING: DataTypeString,
     CHAR: DataTypeChar,
@@ -1648,7 +1642,7 @@ declare module "sequelize" {
    * Abstract Deferrable interface. Use this if you want to create an interface that has a value any of the
    * Deferrables that Sequelize supports.
    */
-  declare interface DeferrableAbstract {
+  declare export type DeferrableAbstract = {
     /**
      * Although this is not needed for the definitions itself, we want to make sure that DeferrableAbstract is
      * not something than can be evaluated to an empty object.
@@ -1657,7 +1651,7 @@ declare module "sequelize" {
       toSql(): string
   }
 
-  declare type DeferrableInitiallyDeferred = {
+  declare export type DeferrableInitiallyDeferred = {
     /**
      * A property that will defer constraints checks to the end of transactions.
      */
@@ -1665,7 +1659,7 @@ declare module "sequelize" {
   } & DeferrableAbstract
 
 
-  declare type DeferrableInitiallyImmediate = {
+  declare export type DeferrableInitiallyImmediate = {
     /**
      * A property that will trigger the constraint checks immediately
      */
@@ -1673,7 +1667,7 @@ declare module "sequelize" {
   } & DeferrableAbstract
 
 
-  declare type DeferrableNot = {
+  declare export type DeferrableNot = {
     /**
      * A property that will set the constraints to not deferred. This is the default in PostgreSQL and it make
      * it impossible to dynamically defer the constraints within a transaction.
@@ -1682,7 +1676,7 @@ declare module "sequelize" {
   } & DeferrableAbstract
 
 
-  declare type DeferrableSetDeferred = {
+  declare export type DeferrableSetDeferred = {
     /**
      * A property that will trigger an additional query at the beginning of a
      * transaction which sets the constraints to deferred.
@@ -1692,7 +1686,7 @@ declare module "sequelize" {
   } & DeferrableAbstract
 
 
-  declare type DeferrableSetImmediate = {
+  declare export type DeferrableSetImmediate = {
     /**
      * A property that will trigger an additional query at the beginning of a
      * transaction which sets the constraints to immediately.
@@ -1734,7 +1728,7 @@ declare module "sequelize" {
   });
   ```
   */
-  declare interface Deferrable {
+  declare export type Deferrable = {
     INITIALLY_DEFERRED: DeferrableInitiallyDeferred,
     INITIALLY_IMMEDIATE: DeferrableInitiallyImmediate,
     NOT: DeferrableNot,
@@ -1746,11 +1740,11 @@ declare module "sequelize" {
   /**
    * The Base Error all Sequelize Errors inherit from.
    */
-  declare class BaseError extends Error {
+  declare export class BaseError extends Error {
 
   }
 
-  declare class ValidationError extends BaseError {
+  declare export class ValidationError extends BaseError {
     /**
      * Validation Error. Thrown when the sequelize validation has failed. The error contains an `errors`
      * property, which is an array with 1 or more ValidationErrorItems, one for each validation that failed.
@@ -1774,7 +1768,7 @@ declare module "sequelize" {
   }
 
 
-  declare class ValidationErrorItem extends BaseError {
+  declare export class ValidationErrorItem extends BaseError {
     /**
      * Validation Error Item
      * Instances of this class are included in the `ValidationError.errors` property.
@@ -1811,7 +1805,7 @@ declare module "sequelize" {
   }
 
 
-  declare class DatabaseError extends BaseError {
+  declare export class DatabaseError extends BaseError {
     /**
      * A base class for all database related errors.
      */
@@ -1819,7 +1813,7 @@ declare module "sequelize" {
   }
 
 
-  declare class TimeoutError extends DatabaseError {
+  declare export class TimeoutError extends DatabaseError {
     /**
      * Thrown when a database query times out because of a deadlock
      */
@@ -1827,7 +1821,7 @@ declare module "sequelize" {
   }
 
 
-  declare class UniqueConstraintError extends ValidationError {
+  declare export class UniqueConstraintError extends ValidationError {
     /**
      * Thrown when a unique constraint is violated in the database
      */
@@ -1840,7 +1834,7 @@ declare module "sequelize" {
   }
 
 
-  declare class ForeignKeyConstraintError extends DatabaseError {
+  declare export class ForeignKeyConstraintError extends DatabaseError {
     /**
      * Thrown when a foreign key constraint is violated in the database
      */
@@ -1855,7 +1849,7 @@ declare module "sequelize" {
   }
 
 
-  declare class ExclusionConstraintError extends DatabaseError {
+  declare export class ExclusionConstraintError extends DatabaseError {
     /**
      * Thrown when an exclusion constraint is violated in the database
      */
@@ -1870,7 +1864,7 @@ declare module "sequelize" {
   }
 
 
-  declare class ConnectionError extends BaseError {
+  declare export class ConnectionError extends BaseError {
     /**
      * A base class for all connection related errors.
      */
@@ -1878,7 +1872,7 @@ declare module "sequelize" {
   }
 
 
-  declare class ConnectionRefusedError extends ConnectionError {
+  declare export class ConnectionRefusedError extends ConnectionError {
     /**
      * Thrown when a connection to a database is refused
      */
@@ -1886,7 +1880,7 @@ declare module "sequelize" {
   }
 
 
-  declare class AccessDeniedError extends ConnectionError{
+  declare export class AccessDeniedError extends ConnectionError{
     /**
      * Thrown when a connection to a database is refused due to insufficient privileges
      */
@@ -1894,7 +1888,7 @@ declare module "sequelize" {
   }
 
 
-  declare class HostNotFoundError extends ConnectionError {
+  declare export class HostNotFoundError extends ConnectionError {
     /**
      * Thrown when a connection to a database has a hostname that was not found
      */
@@ -1902,7 +1896,7 @@ declare module "sequelize" {
   }
 
 
-  declare class HostNotReachableError extends ConnectionError {
+  declare export class HostNotReachableError extends ConnectionError {
     /**
      * Thrown when a connection to a database has a hostname that was not reachable
      */
@@ -1910,7 +1904,7 @@ declare module "sequelize" {
   }
 
 
-  declare class InvalidConnectionError extends ConnectionError {
+  declare export class InvalidConnectionError extends ConnectionError {
     /**
      * Thrown when a connection to a database has invalid values for any of the connection parameters
      */
@@ -1918,7 +1912,7 @@ declare module "sequelize" {
   }
 
 
-  declare class ConnectionTimedOutError extends ConnectionError {
+  declare export class ConnectionTimedOutError extends ConnectionError {
     /**
      * Thrown when a connection to a database times out
      */
@@ -1926,7 +1920,7 @@ declare module "sequelize" {
   }
 
 
-  declare class EmptyResultError extends BaseError {
+  declare export class EmptyResultError extends BaseError {
     /**
      * Thrown when a record was not found, Usually used with rejectOnEmpty mode (see message for details)
      */
@@ -1941,45 +1935,47 @@ declare module "sequelize" {
   beforeDestroy, beforeUpdate, afterCreate, afterDestroy, afterUpdate, afterBulkCreate, afterBulkDestroy and
   afterBulkUpdate.
   */
-  declare interface HooksDefineOptions<TInstance>{
-    beforeValidate?: (instance: TInstance, options: Object, fn?: Function) => any,
-    afterValidate?: (instance: TInstance, options: Object, fn?: Function) => any,
-    beforeCreate?: (attributes: TInstance, options: Object, fn?: Function) => any,
-    afterCreate?: (attributes: TInstance, options: Object, fn?: Function) => any,
-    beforeDestroy?: (instance: TInstance, options: Object, fn?: Function) => any,
-    beforeDelete?: (instance: TInstance, options: Object, fn?: Function) => any,
-    afterDestroy?: (instance: TInstance, options: Object, fn?: Function) => any,
-    afterDelete?: (instance: TInstance, options: Object, fn?: Function) => any,
-    beforeUpdate?: (instance: TInstance, options: Object, fn?: Function) => any,
-    afterUpdate?: (instance: TInstance, options: Object, fn?: Function) => any,
-    beforeBulkCreate?: (instances: TInstance[], options: Object, fn?: Function) => any,
-    afterBulkCreate?: (instances: TInstance[], options: Object, fn?: Function) => any,
-    beforeBulkDestroy?: (options: Object, fn?: Function) => any,
-    beforeBulkDelete?: (options: Object, fn?: Function) => any,
-    afterBulkDestroy?: (options: Object, fn?: Function) => any,
-    afterBulkDelete?: (options: Object, fn?: Function) => any,
-    beforeBulkUpdate?: (options: Object, fn?: Function) => any,
-    afterBulkUpdate?: (options: Object, fn?: Function) => any,
-    beforeFind?: (options: Object, fn?: Function) => any,
-    beforeFindAfterExpandIncludeAll?: (options: Object, fn?: Function) => any,
-    beforeFindAfterOptions?: (options: Object, fn?: Function) => any,
-    afterFind?: (
-      instancesOrInstance: TInstance[] | TInstance,
-      options: Object,
-      fn?: Function) => any,
+  declare export type HooksDefineOptions<TInstance: Model<any>> = {
+    beforeValidate?: AsyncFn2<TInstance, Object>,
+    validationFailed?: AsyncFn3<TInstance, Object, ValidationError>,
+    afterValidate?: AsyncFn2<TInstance, Object>,
+    beforeCreate?: AsyncFn2<TInstance, Object>,
+    afterCreate?: AsyncFn2<TInstance, Object>,
+    beforeDestroy?: AsyncFn2<TInstance, Object>,
+    beforeDelete?: AsyncFn2<TInstance, Object>,
+    afterDestroy?: AsyncFn2<TInstance, Object>,
+    afterDelete?: AsyncFn2<TInstance, Object>,
+    beforeUpdate?: AsyncFn2<TInstance, Object>,
+    afterUpdate?: AsyncFn2<TInstance, Object>,
+    beforeBulkCreate?: AsyncFn2<TInstance[], Object>,
+    afterBulkCreate?: AsyncFn2<TInstance[], Object>,
+    beforeBulkDestroy?: AsyncFn1<Object>,
+    beforeBulkDelete?: AsyncFn1<Object>,
+    afterBulkDestroy?: AsyncFn1<Object>,
+    afterBulkDelete?: AsyncFn1<Object>,
+    beforeBulkUpdate?: AsyncFn1<Object>,
+    afterBulkUpdate?: AsyncFn1<Object>,
+    beforeFind?: AsyncFn1<Object>,
+    beforeFindAfterExpandIncludeAll?: AsyncFn1<Object>,
+    beforeFindAfterOptions?: AsyncFn1<Object>,
+    afterFind?: AsyncFn2<TInstance | TInstance[], Object>,
   }
 
 
   /**
    * Options used for Instance.increment method
    */
-  declare interface InstanceIncrementDecrementOptions {
+  declare export type InstanceIncrementDecrementOptions = {
     /**
      * The number to increment by
-     *
-    Defaults to 1
-    */
+     * Defaults to 1
+     */
     by?: number,
+
+    /**
+     * If true, the updatedAt timestamp will not be updated.
+     */
+    silent?: boolean,
 
     /**
      * A function that gets executed while running the query to log the sql.
@@ -1992,16 +1988,16 @@ declare module "sequelize" {
     transaction?: Transaction,
 
     /**
-     * A hash of attributes to describe your search. See above for examples.
+     * An optional parameter to specify the schema search_path (Postgres only)
      */
-    where?: AnyWhereOptions | Array<col | and | or | string>
+    searchPath?: string,
   }
 
 
   /**
    * Options used for Instance.restore method
    */
-  declare interface InstanceRestoreOptions {
+  declare export type InstanceRestoreOptions = {
     /**
      * A function that gets executed while running the query to log the sql.
      */
@@ -2017,7 +2013,7 @@ declare module "sequelize" {
   /**
    * Options used for Instance.destroy method
    */
-  declare interface InstanceDestroyOptions {
+  declare export type InstanceDestroyOptions = {
     /**
      * If set to true, paranoid models will actually be deleted
      */
@@ -2038,19 +2034,19 @@ declare module "sequelize" {
   /**
    * Options used for Instance.update method
    */
-  declare type InstanceUpdateOptions = {
+  declare export type InstanceUpdateOptions<TAttributes> = {
     /**
      * A hash of attributes to describe your search. See above for examples.
      */
-    where?: AnyWhereOptions | Array<col | and | or | string>
-  } & InstanceSaveOptions & InstanceSetOptions
+    where?: WhereOptions,
+  } & InstanceSaveOptions<TAttributes> & InstanceSetOptions
 
 
 
   /**
    * Options used for Instance.set method
    */
-  declare interface InstanceSetOptions {
+  declare export type InstanceSetOptions = {
     /**
      * If set to true, field and virtual setters will be ignored
      */
@@ -2066,16 +2062,16 @@ declare module "sequelize" {
   /**
    * Options used for Instance.save method
    */
-  declare type InstanceSaveOptions = {
+  declare export type InstanceSaveOptions<TAttributes> = {
     /**
      * If true, the updatedAt timestamp will not be updated.
      *
     Defaults to false
     */
     silent?: boolean
-  } & FieldsOptions & LoggingOptions & ReturningOptions & SearchPathOptions
+  } & FieldsOptions<TAttributes> & LoggingOptions & ReturningOptions & SearchPathOptions
 
-  declare interface LoggingOptions {
+  declare export type LoggingOptions = {
     /**
      * A function that gets executed while running the query to log the sql.
      */
@@ -2087,7 +2083,7 @@ declare module "sequelize" {
     benchmark?: boolean
   }
 
-  declare interface SearchPathOptions {
+  declare export type SearchPathOptions = {
     /**
      * Transaction to run query under
      */
@@ -2099,14 +2095,14 @@ declare module "sequelize" {
     searchPath?: string
   }
 
-  declare interface ReturningOptions {
+  declare export type ReturningOptions = {
     /**
      * Append RETURNING  to get back auto generated values (Postgres only)
      */
     returning?: boolean
   }
 
-  declare interface FieldsOptions {
+  declare export type FieldsOptions<TAttributes> = {
     /**
      * Run validations before the row is inserted
      */
@@ -2115,14 +2111,14 @@ declare module "sequelize" {
     /**
      * The fields to insert / update. Defaults to all fields
      */
-    fields?: string[]
+    fields?: $Keys<TAttributes>[]
   }
 
 
   /**
    * Options to pass to Model on drop
    */
-  declare type DropOptions = {
+  declare export type DropOptions = {
     /**
      * Also drop all objects depending on this table, such as views. Only works in postgres
      */
@@ -2134,7 +2130,7 @@ declare module "sequelize" {
   /**
    * Schema Options provided for applying a schema to a model
    */
-  declare type SchemaOptions = {
+  declare export type SchemaOptions = {
     /**
      * The character(s) that separates the schema name from the table name
      */
@@ -2146,14 +2142,14 @@ declare module "sequelize" {
   /**
    * GetTableName Options
    */
-  declare type GetTableNameOptions = {} & LoggingOptions
+  declare export type GetTableNameOptions = {} & LoggingOptions
 
 
 
   /**
    * AddScope Options for Model.addScope
    */
-  declare interface AddScopeOptions {
+  declare export type AddScopeOptions = {
     /**
      * If a scope of the same name already exists, should it be overwritten?
      */
@@ -2164,7 +2160,7 @@ declare module "sequelize" {
   /**
    * Scope Options for Model.scope
    */
-  declare interface ScopeOptions {
+  declare export type ScopeOptions = {
     /**
      * The scope(s) to apply. Scopes can either be passed as consecutive arguments, or as an array of arguments.
      * To apply simple scopes and scope functions with no arguments, pass them as strings. For scope function,
@@ -2172,98 +2168,198 @@ declare module "sequelize" {
     any arguments, or an array, where the first element is the name of the method, and consecutive elements
     are arguments to that method. Pass null to remove all scopes, including the default.
     */
-    method: string | any[]
+    method: string | any[],
   }
-
 
   /**
-   * Where Complex nested query
+   * The type accepted by every `where` option
+   *
+   * The `Array<string | number>` is to support string with replacements, like `['id > ?', 25]`
    */
-  declare interface WhereNested<Comparable: number | string | Date> {
-    $and?: Array<AnyWhereOptions | WhereLogic<Comparable>>,
-    $or?: Array<AnyWhereOptions | WhereLogic<Comparable>>
-  }
-
+  declare export type WhereOptions = WhereAttributeHash | AndOperator | OrOperator | where | fn | Array<string | number | AndOperator | OrOperator>;
 
   /**
-   * Nested where Postgre Statement
+   * Example: `$any: [2,3]` becomes `ANY ARRAY[2, 3]::INTEGER`
+   *
+   * _PG only_
    */
-  declare interface WherePGStatement {
-    $any?: Array<string | number>,
-    $all?: Array<string | number>
+  declare export type AnyOperator = {
+    $any: Array<string | number>;
   }
 
+  /** Undocumented? */
+  declare export type AllOperator = {
+    $all: Array<string | number>;
+  }
+
+  /**
+   * Operators that can be used in WhereOptions
+   *
+   * See http://docs.sequelizejs.com/en/v3/docs/querying/#operators
+   */
+  declare export type WhereOperators = {
+
+    /**
+     * Example: `$any: [2,3]` becomes `ANY ARRAY[2, 3]::INTEGER`
+     *
+     * _PG only_
+     */
+    $any?: Array<string | number>;
+
+    /** Example: `$gte: 6,` becomes `>= 6` */
+    $gte?: number | string | Date;
+
+    /** Example: `$lt: 10,` becomes `< 10` */
+    $lt?: number | string | Date;
+
+    /** Example: `$lte: 10,` becomes `<= 10` */
+    $lte?: number | string | Date;
+
+    /** Example: `$ne: 20,` becomes `!= 20` */
+    $ne?: string | number | WhereOperators;
+
+    /** Example: `$not: true,` becomes `IS NOT TRUE` */
+    $not?: boolean | string | number | WhereOperators;
+
+    /** Example: `$between: [6, 10],` becomes `BETWEEN 6 AND 10` */
+    $between?: [number, number];
+
+    /** Example: `$in: [1, 2],` becomes `IN [1, 2]` */
+    $in?: Array<string | number> | literal;
+
+    /** Example: `$notIn: [1, 2],` becomes `NOT IN [1, 2]` */
+    $notIn?: Array<string | number> | literal;
+
+    /**
+     * Examples:
+     *  - `$like: '%hat',` becomes `LIKE '%hat'`
+     *  - `$like: { $any: ['cat', 'hat']}` becomes `LIKE ANY ARRAY['cat', 'hat']`
+     */
+    $like?: string | AnyOperator | AllOperator;
+
+    /**
+     * Examples:
+     *  - `$notLike: '%hat'` becomes `NOT LIKE '%hat'`
+     *  - `$notLike: { $any: ['cat', 'hat']}` becomes `NOT LIKE ANY ARRAY['cat', 'hat']`
+     */
+    $notLike?: string | AnyOperator | AllOperator;
+
+    /**
+     * case insensitive PG only
+     *
+     * Examples:
+     *  - `$iLike: '%hat'` becomes `ILIKE '%hat'`
+     *  - `$iLike: { $any: ['cat', 'hat']}` becomes `ILIKE ANY ARRAY['cat', 'hat']`
+     */
+    $ilike?: string | AnyOperator | AllOperator;
+
+    /**
+     * case insensitive PG only
+     *
+     * Examples:
+     *  - `$iLike: '%hat'` becomes `ILIKE '%hat'`
+     *  - `$iLike: { $any: ['cat', 'hat']}` becomes `ILIKE ANY ARRAY['cat', 'hat']`
+     */
+    $iLike?: string | AnyOperator | AllOperator;
+
+    /**
+     * PG array overlap operator
+     *
+     * Example: `$overlap: [1, 2]` becomes `&& [1, 2]`
+     */
+    $overlap?: [number, number];
+
+    /**
+     * PG array contains operator
+     *
+     * Example: `$contains: [1, 2]` becomes `@> [1, 2]`
+     */
+    $contains?: any[];
+
+    /**
+     * PG array contained by operator
+     *
+     * Example: `$contained: [1, 2]` becomes `<@ [1, 2]`
+     */
+    $contained?: any[];
+
+    /** Example: `$gt: 6,` becomes `> 6` */
+    $gt?: number | string | Date;
+
+    /**
+     * PG only
+     *
+     * Examples:
+     *  - `$notILike: '%hat'` becomes `NOT ILIKE '%hat'`
+     *  - `$notLike: ['cat', 'hat']` becomes `LIKE ANY ARRAY['cat', 'hat']`
+     */
+    $notILike?: string | AnyOperator | AllOperator;
+
+    /** Example: `$notBetween: [11, 15],` becomes `NOT BETWEEN 11 AND 15` */
+    $notBetween?: [number, number];
+  } | {[op: Symbol]: any}
+
+  /** Example: `$or: [{a: 5}, {a: 6}]` becomes `(a = 5 OR a = 6)` */
+  declare export type OrOperator = {
+    [$or: Symbol | '$or']: WhereOperators | WhereAttributeHash | Array<Array<string> | Array<number> | WhereOperators | WhereAttributeHash | where | AndOperator>;
+  }
+
+  /** Example: `$and: {a: 5}` becomes `AND (a = 5)` */
+  declare export type AndOperator = {
+    [$and: Symbol | '$and']: WhereOperators | WhereAttributeHash | Array<Array<string> | Array<number> | WhereOperators | WhereAttributeHash | where | OrOperator>;
+  }
 
   /**
    * Where Geometry Options
    */
-  declare interface WhereGeometryOptions {
-    type: string,
-    coordinates: Array<number[] | number>
+  declare export type WhereGeometryOptions = {
+    type: string;
+    coordinates: Array<Array<number> | number>;
   }
 
   /**
-   * Logic of where statement
+   * Used for the right hand side of WhereAttributeHash.
+   * WhereAttributeHash is in there for JSON columns.
    */
-  declare type WhereLogic<Comparable: string | number | Date> = $Shape<{
-    $ne: boolean | Comparable | WhereLogic<any>,
-    $in: Array<Comparable> | literal,
-    $not: boolean | Comparable | WhereLogic<any>,
-    $notIn: Array<Comparable> | literal,
-    $gte: Comparable,
-    $gt: Comparable,
-    $lte: Comparable,
-    $lt: Comparable,
-    $like: string | WherePGStatement,
-    $notLike: string | WherePGStatement,
-    $iLike: string | WherePGStatement,
-    $notILike: string | WherePGStatement,
-    $regexp: string | WherePGStatement,
-    $notRegexp: string | WherePGStatement,
-    $iRegexp: string | WherePGStatement,
-    $notIRegexp: string | WherePGStatement,
-    $between: [Comparable, Comparable],
-    $notBetween: [Comparable, Comparable],
-    $overlap: [Comparable, Comparable],
-    $adjacent: [Comparable, Comparable],
-    $contains: Comparable | [Comparable, Comparable],
-    $contained: [Comparable, Comparable],
-    $strictLeft: [Comparable, Comparable],
-    $strictRight: [Comparable, Comparable],
-    $noExtendLeft: [Comparable, Comparable],
-    $noExtendRight: [Comparable, Comparable],
-    $col: string,
-    $raw: string,
-  }>;
-
+  declare export type WhereValue =
+    string // literal value
+    | number // literal value
+    | boolean // literal value
+    | null
+    | WhereOperators
+    | WhereAttributeHash // for JSON columns
+    | col // reference another column
+    | OrOperator
+    | AndOperator
+    | WhereGeometryOptions
+    | Array<string | number | WhereAttributeHash>; // implicit $or
 
   /**
-   * A hash of attributes to describe your search. See above for examples.
-   *
-  We did put Object in the end, because there where query might be a JSON Blob. It cripples a bit the
-  typesafety, but there is no way to pass the tests if we just remove it.
-  */
-  declare type WhereOptions<T> = {
-    [field: $Keys<T>]: string | number | boolean | Symbol | WhereLogic<any> | WhereNested<any> | WherePGStatement<any> | WhereOptions<any> | col | and | or | WhereGeometryOptions | Array<string | number | Date> | null;
-  };
-
-
-  /**
-   * A hash of attributes to describe your search, accepting any field names. See `WhereOptions` for details.
+   * A hash of attributes to describe your search.
    */
-  declare interface AnyWhereOptions {
-    [field: string]: WhereOptions<any>[] | Object
+  declare export type WhereAttributeHash = {
+    /**
+     * Possible key values:
+     * - A simple attribute name
+     * - A nested key for JSON columns
+     *
+     *       {
+   *         "meta.audio.length": {
+   *           $gt: 20
+   *         }
+   *       }
+     */
+    [field: string]: WhereValue;
   }
-
 
   /**
    * Through options for Include Options
    */
-  declare interface IncludeThroughOptions {
+  declare export type IncludeThroughOptions = {
     /**
      * Filter on the join model for belongsToMany relations
      */
-    where?: AnyWhereOptions,
+    where?: WhereOptions,
 
     /**
      * A list of attributes to select from the join model for belongsToMany relations
@@ -2275,9 +2371,9 @@ declare module "sequelize" {
   /**
    * Association Object for Include Options
    */
-  declare interface IncludeAssociation {
-    source: Class<Model<any, any>>,
-    target: Class<Model<any, any>>,
+  declare export type IncludeAssociation = {
+    source: Class<Model<any>>,
+    target: Class<Model<any>>,
     identifier: string
   }
 
@@ -2285,11 +2381,11 @@ declare module "sequelize" {
   /**
    * Complex include options
    */
-  declare interface IncludeOptions {
+  declare export type IncludeOptions<TAttributes, ModelClass: Class<Model<TAttributes>>> = {
     /**
      * The model you want to eagerly load
      */
-    model?: Class<Model<any, any>>,
+    model?: ModelClass,
 
     /**
      * The alias of the relation, in case the model you want to eagerly load is aliassed. For `hasOne` /
@@ -2306,14 +2402,14 @@ declare module "sequelize" {
      * Where clauses to apply to the child models. Note that this converts the eager load to an inner join,
      * unless you explicitly set `required: false`
      */
-    where?: AnyWhereOptions,
+    where?: WhereOptions,
 
     /**
      * A list of attributes to select from the child model
      */
-    attributes?: FindOptionsAttributesArray | {
-      include?: FindOptionsAttributesArray,
-      exclude?: Array<string>
+    attributes?: FindOptionsAttributesArray<TAttributes> | {
+      include?: FindOptionsAttributesArray<TAttributes>,
+      exclude?: Array<$Keys<TAttributes>>
     },
 
     /**
@@ -2330,7 +2426,7 @@ declare module "sequelize" {
     /**
      * Load further nested related models
      */
-    include?: Array<Class<Model<any, any>>| IncludeOptions>,
+    include?: Array<Class<Model<any>> | IncludeOptions<any, any>>,
 
     /**
      * If true, only non-deleted records will be returned. If false, both deleted and non-deleted records will
@@ -2344,14 +2440,16 @@ declare module "sequelize" {
   /**
    * Shortcut for types used in FindOptions.attributes
    */
-  declare type FindOptionsAttributesArray = Array<string |
+  declare export type FindOptionsAttributesArray<TAttributes> = Array<
+    $Keys<TAttributes> |
     literal |
-    [string, string] |
-    fn |
     [fn, string] |
-    cast |
     [cast, string] |
-    [literal, string]>;
+    [literal, string] |
+    [$Keys<TAttributes>, string] |
+    fn |
+    cast
+  >;
 
 
   /**
@@ -2359,11 +2457,11 @@ declare module "sequelize" {
    *
   A hash of options to describe the scope of the search
   */
-  declare type FindOptions<T>= {
+  declare export type FindOptions<TAttributes>= {
     /**
      * A hash of attributes to describe your search. See above for examples.
      */
-    where?: WhereOptions<T> | where | fn | Array<col | and | or | string>,
+    where?: WhereOptions,
 
     /**
      * A list of the attributes that you want to select. To rename an attribute, you can pass an array, with
@@ -2371,9 +2469,9 @@ declare module "sequelize" {
     `Sequelize.literal`, `Sequelize.fn` and so on), and the second is the name you want the attribute to
     have in the returned instance
     */
-    attributes?: FindOptionsAttributesArray | {
-      include?: FindOptionsAttributesArray,
-      exclude?: Array<string>
+    attributes?: FindOptionsAttributesArray<TAttributes> | {
+      include?: FindOptionsAttributesArray<TAttributes>,
+      exclude?: Array<$Keys<TAttributes>>
     },
 
     /**
@@ -2388,7 +2486,7 @@ declare module "sequelize" {
     If your association are set up with an `as` (eg. `X.hasMany(Y, { as: 'Z }`, you need to specify Z in
     the as attribute when eager loading Y).
     */
-    include?: Array<Class<Model<any, any>> | IncludeOptions>,
+    include?: Array<Class<Model<any>> | IncludeOptions<any, any>>,
 
     /**
      * Specifies an ordering. If a string is provided, it will be escaped. Using an array, you can provide
@@ -2402,19 +2500,15 @@ declare module "sequelize" {
       literal |
       Array<
         string |
-        number |
-        Class<Model<any, any>> |
-        {model: Class<Model<any, any>>, as?: string}
-      > |
-      Array<
-        string |
         col |
         literal |
+        Class<Model<any>> |
+        {model: Class<Model<any>>, as?: string} |
         Array<
           string |
           number |
-          Class<Model<any, any>> |
-          {model: Class<Model<any, any>>, as?: string}
+          Class<Model<any>> |
+          {model: Class<Model<any>>, as?: string}
         >
       >,
 
@@ -2435,7 +2529,7 @@ declare module "sequelize" {
     */
     lock?: TransactionLockLevel | {
       level: TransactionLockLevel,
-      of: Class<Model<any, any>>
+      of: Class<Model<any>>
     },
 
     /**
@@ -2446,7 +2540,7 @@ declare module "sequelize" {
     /**
      * having ?!?
      */
-    having?: AnyWhereOptions,
+    having?: WhereOptions,
 
     /**
      * Group by. It is not mentioned in sequelize's JSDoc, but mentioned in docs.
@@ -2471,22 +2565,22 @@ declare module "sequelize" {
   } & LoggingOptions & SearchPathOptions
 
 
-  declare type AnyFindOptions = FindOptions<any>;
+  declare export type AnyFindOptions = FindOptions<any>;
 
 
   /**
    * Options for Model.count method
    */
-  declare type CountOptions = {
+  declare export type CountOptions = {
     /**
      * A hash of search attributes.
      */
-    where?: AnyWhereOptions | string[],
+    where?: WhereOptions,
 
     /**
      * Include options. See `find` for details
      */
-    include?: Array<Class<Model<any, any>>| IncludeOptions>,
+    include?: Array<Class<Model<any>>| IncludeOptions<any, any>>,
 
     /**
      * Apply COUNT(DISTINCT(col))
@@ -2503,7 +2597,7 @@ declare module "sequelize" {
      *
     TODO: Check?
     */
-    group?: Object
+    group?: Object | Array<string>,
   } & LoggingOptions & SearchPathOptions
 
 
@@ -2511,7 +2605,7 @@ declare module "sequelize" {
   /**
    * Options for Model.build method
    */
-  declare type BuildOptions = {
+  declare export type BuildOptions = {
     /**
      * If set to true, values will ignore field and virtual setters.
      */
@@ -2527,7 +2621,7 @@ declare module "sequelize" {
      *
     TODO: See set
     */
-    include?: Array<Class<Model<any, any>>| IncludeOptions>
+    include?: Array<Class<Model<any>> | IncludeOptions<any, any>>
   } & ReturningOptions
 
 
@@ -2535,23 +2629,23 @@ declare module "sequelize" {
   /**
    * Options for Model.create method
    */
-  declare type CreateOptions = {
+  declare export type CreateOptions<TAttributes> = {
     /**
      * On Duplicate
      */
     onDuplicate?: string
-  } & BuildOptions & InstanceSaveOptions
+  } & BuildOptions & InstanceSaveOptions<TAttributes>
 
 
 
   /**
    * Options for Model.findOrInitialize method
    */
-  declare type FindOrInitializeOptions<TAttributes>= {
+  declare export type FindOrInitializeOptions<TAttributes>= {
     /**
      * Default values to use if building a new instance
      */
-    defaults?: TAttributes
+    defaults?: $Shape<TAttributes>
   } & FindOptions<TAttributes>
 
 
@@ -2559,11 +2653,11 @@ declare module "sequelize" {
   /**
    * Options for Model.findOrInitialize method
    */
-  declare type FindCreateFindOptions<TAttributes>= {
+  declare export type FindCreateFindOptions<TAttributes>= {
     /**
      * Default values to use if building a new instance
      */
-    defaults?: TAttributes
+    defaults?: $Shape<TAttributes>
   } & FindOptions<TAttributes>
 
 
@@ -2572,14 +2666,14 @@ declare module "sequelize" {
    * Options for Model.upsert method
    *
    */
-  declare type UpsertOptions = {} & FieldsOptions & LoggingOptions & SearchPathOptions
+  declare export type UpsertOptions<TAttributes> = {} & FieldsOptions<TAttributes> & LoggingOptions & SearchPathOptions
 
 
 
   /**
    * Options for Model.bulkCreate method
    */
-  declare type BulkCreateOptions = {
+  declare export type BulkCreateOptions<TAttributes> = {
     /**
      * Run before / after bulk create hooks?
      */
@@ -2603,14 +2697,14 @@ declare module "sequelize" {
      * mariadb). By default, all fields are updated.
      */
     updateOnDuplicate?: string[]
-  } & FieldsOptions & LoggingOptions & SearchPathOptions & ReturningOptions
+  } & FieldsOptions<TAttributes> & LoggingOptions & SearchPathOptions & ReturningOptions
 
 
 
   /**
    * The options passed to Model.destroy in addition to truncate
    */
-  declare type TruncateOptions = {
+  declare export type TruncateOptions = {
     /**
      * Only used in conjuction with TRUNCATE. Truncates  all tables that have foreign-key references to the
      * named table, or to any tables added to the group due to CASCADE.
@@ -2632,11 +2726,11 @@ declare module "sequelize" {
   /**
    * Options used for Model.destroy
    */
-  declare type DestroyOptions = {
+  declare export type DestroyOptions = {
     /**
      * Filter the destroy
      */
-    where?: AnyWhereOptions,
+    where?: WhereOptions,
 
     /**
      * Run before / after bulk destroy hooks?
@@ -2666,16 +2760,18 @@ declare module "sequelize" {
     truncate?: boolean
   } & TruncateOptions
 
-
+  declare type AsyncFn1<A> = (a: A, callback: (error?: Error) => any) => ?Promise<void>
+  declare type AsyncFn2<A, B> = ((a: A, b: B, callback: (error?: Error) => any) => ?Promise<void>)
+  declare type AsyncFn3<A, B, C> = ((a: A, b: B, c: C, callback: (error?: Error) => any) => ?Promise<void>)
 
   /**
    * Options for Model.restore
    */
-  declare type RestoreOptions = {
+  declare export type RestoreOptions = {
     /**
      * Filter the restore
      */
-    where?: AnyWhereOptions,
+    where?: WhereOptions,
 
     /**
      * Run before / after bulk restore hooks?
@@ -2704,11 +2800,11 @@ declare module "sequelize" {
   /**
    * Options used for Model.update
    */
-  declare type UpdateOptions = {
+  declare export type UpdateOptions<TAttributes> = {
     /**
      * Options to describe the scope of the search.
      */
-    where: AnyWhereOptions,
+    where: WhereOptions,
 
     /**
      * Run before / after bulk update hooks?
@@ -2746,18 +2842,18 @@ declare module "sequelize" {
      * If true, the updatedAt timestamp will not be updated.
      */
     silent?: boolean
-  } & FieldsOptions & LoggingOptions & ReturningOptions
+  } & FieldsOptions<TAttributes> & LoggingOptions & ReturningOptions
 
 
 
   /**
    * Options used for Model.aggregate
    */
-  declare type AggregateOptions = {
+  declare export type AggregateOptions = {
     /**
      * A hash of search attributes.
      */
-    where?: AnyWhereOptions,
+    where?: WhereOptions,
 
     /**
      * The type of the result. If `field` is a field in this Model, the default will be the type of that field,
@@ -2790,8 +2886,8 @@ declare module "sequelize" {
    * as factory. This class should _not_ be instantiated directly, it is created using `sequelize.define`, and
   already created models can be loaded using `sequelize.import`
   */
-  declare class Model<TInstance, TAttributes, TPlainAttributes = TAttributes> {
-    static init(attributes: DefineAttributes, options: DefineOptions<TInstance>): Model<TInstance, TAttributes>;
+  declare export class Model<TAttributes, TInitAttributes = TAttributes, TPlainAttributes = TAttributes> {
+    static init(attributes: DefineAttributes, options: DefineOptions<this>): this;
 
     /**
      * Remove attribute from model definition
@@ -2819,7 +2915,7 @@ declare module "sequelize" {
      * @param schema The name of the schema
      * @param options
     */
-    static schema(schema: string, options?: SchemaOptions): this,
+    static schema(schema: string, options?: SchemaOptions): Class<this>,
 
     /**
      * Get the tablename of the model, taking schema into account. The method will return The name as a string
@@ -2893,7 +2989,7 @@ declare module "sequelize" {
     model will clear the previous scope.
     */
     static scope(
-      options?: string | ScopeOptions | AnyWhereOptions | Array<string | ScopeOptions | AnyWhereOptions>): this,
+      options?: string | ScopeOptions | Array<string | ScopeOptions>): Class<this>,
 
     /**
      * Search for multiple instances.
@@ -2957,9 +3053,9 @@ declare module "sequelize" {
      * @see  {Sequelize#query}
     */
     static findAll<TCustomAttributes>(
-      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<TInstance[]>,
+      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<this[]>,
     static all<TCustomAttributes>(
-      optionz?: FindOptions<TAttributes & TCustomAttributes>): Promise<TInstance[]>,
+      optionz?: FindOptions<TAttributes & TCustomAttributes>): Promise<this[]>,
 
     /**
      * Search for a single instance by its primary key. This applies LIMIT 1, so the listener will
@@ -2967,19 +3063,19 @@ declare module "sequelize" {
      */
     static findById<TCustomAttributes>(
       identifier?: number | string,
-      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?TInstance>,
+      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?this>,
     static findByPrimary<TCustomAttributes>(
       identifier?: number | string,
-      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?TInstance>,
+      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?this>,
 
     /**
      * Search for a single instance. This applies LIMIT 1, so the listener will always be called with a single
      * instance.
      */
     static findOne<TCustomAttributes>(
-      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?TInstance>,
+      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?this>,
     static find<TCustomAttributes>(
-      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?TInstance>,
+      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?this>,
 
     /**
      * Run an aggregation method on the specified field
@@ -3038,12 +3134,12 @@ declare module "sequelize" {
     */
     static findAndCount<TCustomAttributes>(
       options?: FindOptions<TAttributes & TCustomAttributes>): Promise<{
-      rows: TInstance[],
+      rows: this[],
       count: number
     }>,
     static findAndCountAll<TCustomAttributes>(
       options?: FindOptions<TAttributes & TCustomAttributes>): Promise<{
-      rows: TInstance[],
+      rows: this[],
       count: number
     }>,
 
@@ -3065,26 +3161,26 @@ declare module "sequelize" {
     /**
      * Builds a new model instance. Values is an object of key value pairs, must be defined but can be empty.
      */
-    static build(record?: TAttributes, options?: BuildOptions): TInstance,
+    static build(record?: TInitAttributes, options?: BuildOptions): this,
 
     /**
      * Undocumented bulkBuild
      */
-    static bulkBuild(records: TAttributes[], options?: BuildOptions): TInstance[],
+    static bulkBuild(records: TInitAttributes[], options?: BuildOptions): this[],
 
     /**
      * Builds a new model instance and calls save on it.
      */
-    static create(values?: TAttributes, options?: CreateOptions): Promise<TInstance>,
+    static create(values?: TInitAttributes, options?: CreateOptions<TAttributes>): Promise<this>,
 
     /**
      * Find a row that matches the query, or build (but don't save) the row if none is found.
      * The successfull result of the promise will be (instance, initialized) - Make sure to use .spread()
      */
     static findOrInitialize(
-      options: FindOrInitializeOptions<TAttributes>): Promise<[TInstance, boolean]>,
+      options: FindOrInitializeOptions<TInitAttributes>): Promise<[this, boolean]>,
     static findOrBuild(
-      options: FindOrInitializeOptions<TAttributes>): Promise<[TInstance, boolean]>,
+      options: FindOrInitializeOptions<TInitAttributes>): Promise<[this, boolean]>,
 
     /**
      * Find a row that matches the query, or build and save the row if none is found
@@ -3098,14 +3194,14 @@ declare module "sequelize" {
     will be created instead, and any unique constraint violation will be handled internally.
     */
     static findOrCreate(
-      options: FindOrInitializeOptions<TAttributes>): Promise<[TInstance, boolean]>,
+      options: FindOrInitializeOptions<TInitAttributes>): Promise<[this, boolean]>,
 
     /**
      * A more performant findOrCreate that will not work under a transaction (at least not in postgres)
      * Will execute a find call, if empty then attempt to create, if unique constraint then attempt to find again
      */
     static findCreateFind<TCustomAttributes>(
-      options: FindCreateFindOptions<TAttributes & TCustomAttributes>): Promise<[TInstance, boolean]>,
+      options: FindCreateFindOptions<TInitAttributes & TCustomAttributes>): Promise<[this, boolean]>,
 
     /**
      * Insert or update a single row. An update will be executed if a row which matches the supplied values on
@@ -3126,8 +3222,8 @@ declare module "sequelize" {
     because SQLite always runs INSERT OR IGNORE + UPDATE, in a single query, so there is no way to know
     whether the row was inserted or not.
     */
-    static upsert(values: TAttributes, options?: UpsertOptions): Promise<boolean>,
-    static insertOrUpdate(values: TAttributes, options?: UpsertOptions): Promise<boolean>,
+    static upsert(values: TInitAttributes, options?: UpsertOptions<TAttributes>): Promise<boolean>,
+    static insertOrUpdate(values: TInitAttributes, options?: UpsertOptions<TAttributes>): Promise<boolean>,
 
     /**
      * Create and insert multiple instances in bulk.
@@ -3140,8 +3236,8 @@ declare module "sequelize" {
      * @param records List of objects (key/value pairs) to create instances from
     */
     static bulkCreate(
-      records: TAttributes[],
-      options?: BulkCreateOptions): Promise<TInstance[]>,
+      records: TInitAttributes[],
+      options?: BulkCreateOptions<TAttributes>): Promise<this[]>,
 
     /**
      * Truncate all instances of the model. This is a convenient method for Model.destroy({ truncate: true }).
@@ -3165,8 +3261,8 @@ declare module "sequelize" {
     affected rows (only supported in postgres with `options.returning` true.)
     */
     static update(
-      values: TAttributes,
-      options: UpdateOptions): Promise<[number, TInstance[]]>,
+      values: $Shape<TAttributes>,
+      options: UpdateOptions<TAttributes>): Promise<[number, this[]]>,
 
     /**
      * Run a describe query on the table. The result will be return to the listener as a hash of attributes and
@@ -3177,7 +3273,7 @@ declare module "sequelize" {
     /**
      * Unscope the model
      */
-    static unscoped(): this,
+    static unscoped(): Class<this>,
 
     /**
      * Add a hook to the model
@@ -3187,17 +3283,17 @@ declare module "sequelize" {
      * @param fn The hook function
      * @alias  hook
      */
-    static addHook(hookType: string, name: string, fn: Function): Model<TInstance, TAttributes>,
-    static addHook(hookType: string, fn: Function): Model<TInstance, TAttributes>,
-    static hook(hookType: string, name: string, fn: Function): Model<TInstance, TAttributes>,
-    static hook(hookType: string, fn: Function): Model<TInstance, TAttributes>,
+    static addHook(hookType: string, name: string, fn: Function): Class<this>,
+    static addHook(hookType: string, fn: Function): Class<this>,
+    static hook(hookType: string, name: string, fn: Function): Class<this>,
+    static hook(hookType: string, fn: Function): Class<this>,
 
     /**
      * Remove hook from the model
      * @param hookType
      * @param name
      */
-    static removeHook(hookType: string, name: string): Model<TInstance, TAttributes>,
+    static removeHook(hookType: string, name: string): Class<this>,
 
     /**
      * Check whether the model has any hooks of this type
@@ -3214,8 +3310,8 @@ declare module "sequelize" {
      */
     static beforeValidate(
       name: string,
-      fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
-    static beforeValidate(fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static beforeValidate(fn: AsyncFn2<this, Object>): void,
 
     /**
      * A hook that is run after validation
@@ -3224,8 +3320,18 @@ declare module "sequelize" {
      */
     static afterValidate(
       name: string,
-      fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
-    static afterValidate(fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static afterValidate(fn: AsyncFn2<this, Object>): void,
+
+    /**
+     * A hook that is run after validation
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    static validationFailed(
+      name: string,
+      fn: AsyncFn3<this, Object, ValidationError>): void,
+    static validationFailed(fn: AsyncFn3<this, Object, ValidationError>): void,
 
     /**
      * A hook that is run before creating a single instance
@@ -3234,8 +3340,8 @@ declare module "sequelize" {
      */
     static beforeCreate(
       name: string,
-      fn: (attributes: TInstance, options: Object, fn?: Function) => void): void,
-    static beforeCreate(fn: (attributes: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static beforeCreate(fn: AsyncFn2<this, Object>): void,
 
     /**
      * A hook that is run after creating a single instance
@@ -3244,8 +3350,8 @@ declare module "sequelize" {
      */
     static afterCreate(
       name: string,
-      fn: (attributes: TInstance, options: Object, fn?: Function) => void): void,
-    static afterCreate(fn: (attributes: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static afterCreate(fn: AsyncFn2<this, Object>): void,
 
     /**
      * A hook that is run before destroying a single instance
@@ -3255,12 +3361,12 @@ declare module "sequelize" {
      */
     static beforeDestroy(
       name: string,
-      fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
-    static beforeDestroy(fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static beforeDestroy(fn: AsyncFn2<this, Object>): void,
     static beforeDelete(
       name: string,
-      fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
-    static beforeDelete(fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static beforeDelete(fn: AsyncFn2<this, Object>): void,
 
     /**
      * A hook that is run after destroying a single instance
@@ -3270,12 +3376,12 @@ declare module "sequelize" {
      */
     static afterDestroy(
       name: string,
-      fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
-    static afterDestroy(fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static afterDestroy(fn: AsyncFn2<this, Object>): void,
     static afterDelete(
       name: string,
-      fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
-    static afterDelete(fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static afterDelete(fn: AsyncFn2<this, Object>): void,
 
     /**
      * A hook that is run before updating a single instance
@@ -3284,8 +3390,8 @@ declare module "sequelize" {
      */
     static beforeUpdate(
       name: string,
-      fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
-    static beforeUpdate(fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static beforeUpdate(fn: AsyncFn2<this, Object>): void,
 
     /**
      * A hook that is run after updating a single instance
@@ -3294,8 +3400,8 @@ declare module "sequelize" {
      */
     static afterUpdate(
       name: string,
-      fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
-    static afterUpdate(fn: (instance: TInstance, options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this, Object>): void,
+    static afterUpdate(fn: AsyncFn2<this, Object>): void,
 
     /**
      * A hook that is run before creating instances in bulk
@@ -3304,8 +3410,8 @@ declare module "sequelize" {
      */
     static beforeBulkCreate(
       name: string,
-      fn: (instances: TInstance[], options: Object, fn?: Function) => void): void,
-    static beforeBulkCreate(fn: (instances: TInstance[], options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this[], Object>): void,
+    static beforeBulkCreate(fn: AsyncFn2<this[], Object>): void,
 
     /**
      * A hook that is run after creating instances in bulk
@@ -3315,8 +3421,8 @@ declare module "sequelize" {
      */
     static afterBulkCreate(
       name: string,
-      fn: (instances: TInstance[], options: Object, fn?: Function) => void): void,
-    static afterBulkCreate(fn: (instances: TInstance[], options: Object, fn?: Function) => void): void,
+      fn: AsyncFn2<this[], Object>): void,
+    static afterBulkCreate(fn: AsyncFn2<this[], Object>): void,
 
     /**
      * A hook that is run before destroying instances in bulk
@@ -3324,10 +3430,10 @@ declare module "sequelize" {
      * @param fn A callback function that is called with options
      * @alias  beforeBulkDelete
      */
-    static beforeBulkDestroy(name: string, fn: (options: Object, fn?: Function) => void): void,
-    static beforeBulkDestroy(fn: (options: Object, fn?: Function) => void): void,
-    static beforeBulkDelete(name: string, fn: (options: Object, fn?: Function) => void): void,
-    static beforeBulkDelete(fn: (options: Object, fn?: Function) => void): void,
+    static beforeBulkDestroy(name: string, fn: AsyncFn1<Object>): void,
+    static beforeBulkDestroy(fn: AsyncFn1<Object>): void,
+    static beforeBulkDelete(name: string, fn: AsyncFn1<Object>): void,
+    static beforeBulkDelete(fn: AsyncFn1<Object>): void,
 
     /**
      * A hook that is run after destroying instances in bulk
@@ -3335,50 +3441,50 @@ declare module "sequelize" {
      * @param fn A callback function that is called with options
      * @alias  afterBulkDelete
      */
-    static afterBulkDestroy(name: string, fn: (options: Object, fn?: Function) => void): void,
-    static afterBulkDestroy(fn: (options: Object, fn?: Function) => void): void,
-    static afterBulkDelete(name: string, fn: (options: Object, fn?: Function) => void): void,
-    static afterBulkDelete(fn: (options: Object, fn?: Function) => void): void,
+    static afterBulkDestroy(name: string, fn: AsyncFn1<Object>): void,
+    static afterBulkDestroy(fn: AsyncFn1<Object>): void,
+    static afterBulkDelete(name: string, fn: AsyncFn1<Object>): void,
+    static afterBulkDelete(fn: AsyncFn1<Object>): void,
 
     /**
      * A hook that is run after updating instances in bulk
      * @param name
      * @param fn A callback function that is called with options
      */
-    static beforeBulkUpdate(name: string, fn: (options: Object, fn?: Function) => void): void,
-    static beforeBulkUpdate(fn: (options: Object, fn?: Function) => void): void,
+    static beforeBulkUpdate(name: string, fn: AsyncFn1<Object>): void,
+    static beforeBulkUpdate(fn: AsyncFn1<Object>): void,
 
     /**
      * A hook that is run after updating instances in bulk
      * @param name
      * @param fn A callback function that is called with options
      */
-    static afterBulkUpdate(name: string, fn: (options: Object, fn?: Function) => void): void,
-    static afterBulkUpdate(fn: (options: Object, fn?: Function) => void): void,
+    static afterBulkUpdate(name: string, fn: AsyncFn1<Object>): void,
+    static afterBulkUpdate(fn: AsyncFn1<Object>): void,
 
     /**
      * A hook that is run before a find (select) query
      * @param name
      * @param fn A callback function that is called with options
      */
-    static beforeFind(name: string, fn: (options: Object, fn?: Function) => void): void,
-    static beforeFind(fn: (options: Object, fn?: Function) => void): void,
+    static beforeFind(name: string, fn: AsyncFn1<Object>): void,
+    static beforeFind(fn: AsyncFn1<Object>): void,
 
     /**
      * A hook that is run before a find (select) query, after any { include: {all: ...} } options are expanded
      * @param name
      * @param fn A callback function that is called with options
      */
-    static beforeFindAfterExpandIncludeAll(name: string, fn: (options: Object, fn?: Function) => void): void,
-    static beforeFindAfterExpandIncludeAll(fn: (options: Object, fn?: Function) => void): void,
+    static beforeFindAfterExpandIncludeAll(name: string, fn: AsyncFn1<Object>): void,
+    static beforeFindAfterExpandIncludeAll(fn: AsyncFn1<Object>): void,
 
     /**
      * A hook that is run before a find (select) query, after all option parsing is complete
      * @param name
      * @param fn A callback function that is called with options
      */
-    static beforeFindAfterOptions(name: string, fn: (options: Object, fn?: Function) => void): void,
-    static beforeFindAfterOptions(fn: (options: Object, fn?: Function) => void): void,
+    static beforeFindAfterOptions(name: string, fn: AsyncFn1<Object>): void,
+    static beforeFindAfterOptions(fn: AsyncFn1<Object>): void,
 
     /**
      * A hook that is run after a find (select) query
@@ -3387,15 +3493,9 @@ declare module "sequelize" {
      */
     static afterFind(
       name: string,
-      fn: (
-        instancesOrInstance: TInstance[] | TInstance,
-        options: Object,
-        fn?: Function) => void): void,
+      AsyncFn2<this | this[], Object>): void,
     static afterFind(
-      fn: (
-        instancesOrInstance: TInstance[] | TInstance,
-        options: Object,
-        fn?: Function) => void): void,
+      AsyncFn2<this | this[], Object>): void,
 
     /**
      * A hook that is run before a define call
@@ -3404,64 +3504,64 @@ declare module "sequelize" {
      */
     static beforeDefine(
       name: string,
-      fn: (attributes: DefineAttributes, options: Object) => void): void,
-    static beforeDefine(fn: (attributes: DefineAttributes, options: Object) => void): void,
+      fn: AsyncFn2<DefineAttributes, Object>): void,
+    static beforeDefine(fn: AsyncFn2<DefineAttributes, Object>): void,
 
     /**
      * A hook that is run after a define call
      * @param name
      * @param fn A callback function that is called with factory
      */
-    static afterDefine(name: string, fn: (model: Model<TInstance, any>) => void): void,
-    static afterDefine(fn: (model: Model<TInstance, any>) => void): void,
+    static afterDefine(name: string, fn: AsyncFn1<Model<this, any>>): void,
+    static afterDefine(fn: AsyncFn1<Model<this, any>>): void,
 
     /**
      * A hook that is run before Sequelize() call
      * @param name
      * @param fn A callback function that is called with config, options
      */
-    static beforeInit(name: string, fn: (config: Object, options: Object) => void): void,
-    static beforeInit(fn: (config: Object, options: Object) => void): void,
+    static beforeInit(name: string, fn: AsyncFn2<Object, Object>): void,
+    static beforeInit(fn: AsyncFn2<Object, Object>): void,
 
     /**
      * A hook that is run after Sequelize() call
      * @param name
      * @param fn A callback function that is called with sequelize
      */
-    static afterInit(name: string, fn: (sequelize: Sequelize) => void): void,
-    static afterInit(fn: (sequelize: Sequelize) => void): void,
+    static afterInit(name: string, fn: AsyncFn1<Sequelize>): void,
+    static afterInit(fn: AsyncFn1<Sequelize>): void,
 
     /**
      * A hook that is run before Model.sync call
      * @param name
      * @param fn A callback function that is called with options passed to Model.sync
      */
-    static beforeSync(name: string, fn: (options: SyncOptions) => void): void,
-    static beforeSync(fn: (options: SyncOptions) => void): void,
+    static beforeSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    static beforeSync(fn: AsyncFn1<SyncOptions>): void,
 
     /**
      * A hook that is run after Model.sync call
      * @param name
      * @param fn A callback function that is called with options passed to Model.sync
      */
-    static afterSync(name: string, fn: (options: SyncOptions) => void): void,
-    static afterSync(fn: (options: SyncOptions) => void): void,
+    static afterSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    static afterSync(fn: AsyncFn1<SyncOptions>): void,
 
     /**
      * A hook that is run before sequelize.sync call
      * @param name
      * @param fn A callback function that is called with options passed to sequelize.sync
      */
-    static beforeBulkSync(name: string, fn: (options: SyncOptions) => void): void,
-    static beforeBulkSync(fn: (options: SyncOptions) => void): void,
+    static beforeBulkSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    static beforeBulkSync(fn: AsyncFn1<SyncOptions>): void,
 
     /**
      * A hook that is run after sequelize.sync call
      * @param name
      * @param fn A callback function that is called with options passed to sequelize.sync
      */
-    static afterBulkSync(name: string, fn: (options: SyncOptions) => void): void,
-    static afterBulkSync(fn: (options: SyncOptions) => void): void,
+    static afterBulkSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    static afterBulkSync(fn: AsyncFn1<SyncOptions>): void,
 
     /**
      * Creates an association between this (the source) and the provided target. The foreign key is added
@@ -3472,7 +3572,7 @@ declare module "sequelize" {
      * @param options Options for the association
      */
     static hasOne(
-      target: Class<Model<any, any>>,
+      target: Class<Model<any>>,
       options?: AssociationOptionsHasOne): void,
 
     /**
@@ -3484,7 +3584,7 @@ declare module "sequelize" {
      * @param options Options for the association
      */
     static belongsTo(
-      target: Class<Model<any, any>>,
+      target: Class<Model<any>>,
       options?: AssociationOptionsBelongsTo): void,
 
     /**
@@ -3539,7 +3639,7 @@ declare module "sequelize" {
      * @param options Options for the association
      */
     static hasMany(
-      target: Class<Model<any, any>>,
+      target: Class<Model<any>>,
       options?: AssociationOptionsHasMany): void,
 
     /**
@@ -3589,9 +3689,12 @@ declare module "sequelize" {
      * @param options Options for the association
      */
     static belongsToMany(
-      target: Class<Model<any, any>>,
+      target: Class<Model<any>>,
       options: AssociationOptionsBelongsToMany): void,
 
+    Model: Class<this>,
+
+    sequelize: Sequelize,
 
     /**
      * Returns true if this instance has not yet been persisted to the database
@@ -3606,12 +3709,12 @@ declare module "sequelize" {
     /**
      * Get the value of the underlying data value
      */
-    getDataValue(key: string): any,
+    getDataValue(key: $Keys<TAttributes>): any,
 
     /**
      * Update the underlying data value
      */
-    setDataValue(key: string, value: any): void,
+    setDataValue(key: $Keys<TAttributes>, value: any): void,
 
     /**
      * If no key is given, returns all values of the instance, also invoking virtual getters.
@@ -3621,7 +3724,7 @@ declare module "sequelize" {
      * @param options .plain If set to true, included instances will be returned as plain objects
      */
     get(options: {plain: true, raw?: boolean, clone?: boolean}): TPlainAttributes,
-    get(key: string, options?: {plain?: boolean, clone?: boolean, raw?: boolean}): any,
+    get(key: $Keys<TAttributes>, options?: {plain?: boolean, clone?: boolean, raw?: boolean}): any,
     get(options?: {plain?: boolean, clone?: boolean, raw?: boolean}): TAttributes,
 
     /**
@@ -3647,10 +3750,10 @@ declare module "sequelize" {
      * @param options .raw If set to true, field and virtual setters will be ignored
      * @param options .reset Clear all previously set data values
      */
-    set(key: string, value: any, options?: InstanceSetOptions): this,
-    set(keys: Object, options?: InstanceSetOptions): this,
-    setAttributes(key: string, value: any, options?: InstanceSetOptions): this,
-    setAttributes(keys: Object, options?: InstanceSetOptions): this,
+    set(key: $Keys<TAttributes>, value: any, options?: InstanceSetOptions): this,
+    set(keys: $Shape<TAttributes>, options?: InstanceSetOptions): this,
+    setAttributes(key: $Keys<TAttributes>, value: any, options?: InstanceSetOptions): this,
+    setAttributes(keys: $Shape<TAttributes>, options?: InstanceSetOptions): this,
 
     /**
      * If changed is called with a string it will return a boolean indicating whether the value of that key in
@@ -3660,13 +3763,13 @@ declare module "sequelize" {
 
      If changed is called without an argument and no keys have changed, it will return `false`.
      */
-    changed(key: string): boolean,
+    changed(key: $Keys<TAttributes>): boolean,
     changed(): boolean | string[],
 
     /**
      * Returns the previous value for key from `_previousDataValues`.
      */
-    previous(key: string): any,
+    previous(key: $Keys<TAttributes>): any,
 
     /**
      * Validate this instance, and if the validation passes, persist it to the database.
@@ -3675,7 +3778,7 @@ declare module "sequelize" {
      called with an instance of `Sequelize.ValidationError`. This error will have a property for each of the
      fields for which validation failed, with the error message for that field.
      */
-    save(options?: InstanceSaveOptions): Promise<this>,
+    save(options?: InstanceSaveOptions<TAttributes>): Promise<this>,
 
     /**
      * Refresh the current instance in-place, i.e. update the object with current data from the DB and return
@@ -3693,22 +3796,22 @@ declare module "sequelize" {
      * @param options .skip An array of strings. All properties that are in this array will not be validated
      */
     validate(options?: {
-      skip?: string[]
+      skip?: $Keys<TAttributes>[]
     }): Promise<ValidationError>,
 
     /**
      * This is the same as calling `set` and then calling `save`.
      */
     update(
-      key: string,
+      key: $Keys<TAttributes>,
       value: any,
-      options?: InstanceUpdateOptions): Promise<this>,
-    update(keys: Object, options?: InstanceUpdateOptions): Promise<this>,
+      options?: InstanceUpdateOptions<TAttributes>): Promise<this>,
+    update(keys: $Shape<TAttributes>, options?: InstanceUpdateOptions<TAttributes>): Promise<this>,
     updateAttributes(
-      key: string,
+      key: $Keys<TAttributes>,
       value: any,
-      options?: InstanceUpdateOptions): Promise<this>,
-    updateAttributes(keys: Object, options?: InstanceUpdateOptions): Promise<this>,
+      options?: InstanceUpdateOptions<TAttributes>): Promise<this>,
+    updateAttributes(keys: $Shape<TAttributes>, options?: InstanceUpdateOptions<TAttributes>): Promise<this>,
 
     /**
      * Destroy the row corresponding to this instance. Depending on your setting for paranoid, the row will
@@ -3741,7 +3844,7 @@ declare module "sequelize" {
      If and object is provided, each column is incremented by the value given.
      */
     increment(
-      fields: string | string[] | Object,
+      fields: $Keys<TAttributes> | $Keys<TAttributes>[] | {[key: $Keys<TAttributes>]: number},
       options?: InstanceIncrementDecrementOptions): Promise<this>,
 
     /**
@@ -3764,24 +3867,24 @@ declare module "sequelize" {
      If and object is provided, each column is decremented by the value given
      */
     decrement(
-      fields: string | string[] | Object,
+      fields: $Keys<TAttributes> | $Keys<TAttributes>[] | {[key: $Keys<TAttributes>]: number},
       options?: InstanceIncrementDecrementOptions): Promise<this>,
 
     /**
      * Check whether all values of this and `other` Instance are the same
      */
-    equals(other: Model<any, any>): boolean,
+    equals(other: Model<any>): boolean,
 
     /**
-     * Check if this is eqaul to one of `others` by calling equals
+     * Check if this is equal to one of `others` by calling equals
      */
-    equalsOneOf(others: Model<any, any>[]): boolean,
+    equalsOneOf(others: Model<any>[]): boolean,
 
     /**
      * Convert the instance to a JSON representation. Proxies to calling `get` with no keys. This means get all
      * values gotten from the DB, and apply all custom getters.
      */
-    toJSON(): TAttributes,
+    toJSON(): TPlainAttributes,
   }
 
 
@@ -3790,36 +3893,36 @@ declare module "sequelize" {
    * Most of the methods accept options and use only the logger property of the options. That's why the most used
    * interface type for options in a method is separated here as another interface.
    */
-  declare interface QueryInterfaceOptions {
+  declare export type QueryInterfaceOptions = {
     /**
      * A function that gets executed while running the query to log the sql.
      */
     logging?: boolean | Function
   }
 
-  declare interface AddUniqueConstraintOptions {
+  declare export type AddUniqueConstraintOptions = {
     type: 'unique',
     name?: string
   }
 
-  declare interface AddDefaultConstraintOptions {
+  declare export type AddDefaultConstraintOptions = {
     type: 'default',
     name?: string,
     defaultValue?: any
   }
 
-  declare interface AddCheckConstraintOptions {
+  declare export type AddCheckConstraintOptions = {
     type: 'check',
     name?: string,
-    where?: AnyWhereOptions
+    where?: WhereOptions
   }
 
-  declare interface AddPrimaryKeyConstraintOptions {
+  declare export type AddPrimaryKeyConstraintOptions = {
     type: 'primary key',
     name?: string
   }
 
-  declare interface AddForeignKeyConstraintOptions {
+  declare export type AddForeignKeyConstraintOptions = {
     type: 'foreign key',
     name?: string,
     references?: {
@@ -3830,7 +3933,7 @@ declare module "sequelize" {
     onUpdate: string
   }
 
-  declare type AddConstraintOptions =
+  declare export type AddConstraintOptions =
     AddUniqueConstraintOptions |
     AddDefaultConstraintOptions |
     AddCheckConstraintOptions |
@@ -3844,7 +3947,7 @@ declare module "sequelize" {
   This interface is available through sequelize.QueryInterface. It should not be commonly used, but it's
   referenced anyway, so it can be used.
   */
-  declare interface QueryInterface {
+  declare export interface QueryInterface {
     /**
      * Returns the dialect-specific sql generator.
      *
@@ -4038,7 +4141,7 @@ declare module "sequelize" {
      * Inserts a new record
      */
     insert(
-      instance: Model<any, any>,
+      instance: Model<any>,
       tableName: string,
       values: Object,
       options?: QueryOptions): Promise<Object>,
@@ -4050,7 +4153,7 @@ declare module "sequelize" {
       tableName: string,
       values: Object,
       updateValues: Object,
-      model: Class<Model<any, any>>,
+      model: Class<Model<any>>,
       options?: QueryOptions): Promise<Object>,
 
     /**
@@ -4066,7 +4169,7 @@ declare module "sequelize" {
      * Updates a row
      */
     update(
-      instance: Model<any, any>,
+      instance: Model<any>,
       tableName: string,
       values: Object,
       identifier: Object,
@@ -4086,7 +4189,7 @@ declare module "sequelize" {
      * Deletes a row
      */
     delete(
-      instance: Model<any, any>,
+      instance: Model<any>,
       tableName: string,
       identifier: Object,
       options?: QueryOptions): Promise<Object>,
@@ -4098,13 +4201,13 @@ declare module "sequelize" {
       tableName: string,
       identifier: Object,
       options?: QueryOptions,
-      model?: Class<Model<any, any>>): Promise<Object>,
+      model?: Class<Model<any>>): Promise<Object>,
 
     /**
      * Returns selected rows
      */
     select(
-      model: Class<Model<any, any>>,
+      model: Class<Model<any>>,
       tableName: string,
       options?: QueryOptions): Promise<Object[]>,
 
@@ -4112,7 +4215,7 @@ declare module "sequelize" {
      * Increments a row value
      */
     increment(
-      instance: Model<any, any>,
+      instance: Model<any>,
       tableName: string,
       values: Object,
       identifier: Object,
@@ -4125,7 +4228,7 @@ declare module "sequelize" {
       tableName: string,
       options: QueryOptions,
       attributeSelector: string | string[],
-      model?: Class<Model<any, any>>): Promise<string[]>,
+      model?: Class<Model<any>>): Promise<string[]>,
 
     /**
      * Postgres only. Creates a trigger on specified table to call the specified function with supplied
@@ -4253,7 +4356,7 @@ declare module "sequelize" {
       options?: QueryOptions): Promise<void>
   }
 
-  declare interface QueryTypes {
+  declare export type QueryTypes = {
     SELECT: string,
     INSERT: string,
     UPDATE: string,
@@ -4275,7 +4378,7 @@ declare module "sequelize" {
    * @see  Define
    * @see  AssociationForeignKeyOptions
    */
-  declare interface ColumnOptions {
+  declare export type ColumnOptions = {
     /**
      * If false, the column will have a NOT NULL constraint, and a not null validation will be run before an
      * instance is saved.
@@ -4298,11 +4401,11 @@ declare module "sequelize" {
    * References options for the column's attributes
    * @see  AttributeColumnOptions
    */
-  declare interface DefineAttributeColumnReferencesOptions {
+  declare export type DefineAttributeColumnReferencesOptions = {
     /**
      * If this column references another table, provide it here as a Model, or a string
      */
-    model: string | Class<Model<any, any>>,
+    model: string | Class<Model<any>>,
 
     /**
      * The column of the foreign table that this column references
@@ -4326,7 +4429,7 @@ declare module "sequelize" {
    * Column options for the model schema attributes
    * @see  Attributes
    */
-  declare type DefineAttributeColumnOptions = {
+  declare export type DefineAttributeColumnOptions = {
     /**
      * A string or a data type
      */
@@ -4418,7 +4521,7 @@ declare module "sequelize" {
    * Interface for Attributes provided for a column
    * @see  Sequelize.define
    */
-  declare type DefineAttributes = {
+  declare export type DefineAttributes = {
     [name: string]: string | DataTypeAbstract | DefineAttributeColumnOptions
   }
 
@@ -4427,7 +4530,7 @@ declare module "sequelize" {
    * Interface for query options
    * @see  Options
    */
-  declare type QueryOptions = {
+  declare export type QueryOptions = {
     /**
      * If true, sequelize will not try to format the results of the query, or build an instance of a model from
      * the result
@@ -4459,13 +4562,13 @@ declare module "sequelize" {
      * Either an object of named parameter replacements in the format `:param` or an array of unnamed
      * replacements to replace `?` in your SQL.
      */
-    replacements?: Object | string[],
+    replacements?: Object | Array<string | number | boolean | Date>,
 
     /**
      * Either an object of named bind parameter in the format `$param` or an array of unnamed
      * bind parameter to replace `$1`, `$2`, ... in your SQL.
      */
-    bind?: Object | string[],
+    bind?: Object | Array<string | number | boolean | Date>,
 
     /**
      * Force the query to use the write pool, regardless of the query type.
@@ -4482,7 +4585,7 @@ declare module "sequelize" {
     /**
      * A sequelize instance used to build the return instance
      */
-    instance?: Model<any, any>,
+    instance?: Model<any>,
 
     /**
      * A sequelize model used to build the returned model instances (used to be called callee)
@@ -4521,7 +4624,7 @@ declare module "sequelize" {
 
   The validations are implemented by validator.js.
   */
-  declare interface DefineValidateOptions {
+  declare export type DefineValidateOptions = {
     /**
      * is: ["^[a-z]+$",'i'] // will only allow letters
      * is: /^[a-z]+$/i    // same as the previous example using real RegExp
@@ -4766,48 +4869,47 @@ declare module "sequelize" {
     }, [name: string]: any
   }
 
-  declare type IndexType = 'UNIQUE' | 'FULLTEXT' | 'SPATIAL'
+  declare export type IndexType = 'UNIQUE' | 'FULLTEXT' | 'SPATIAL'
 
-  declare interface DefineIndexOptions {
-
+  declare export type DefineIndexOptions = {
     /**
      * The index type
      */
     indicesType?: IndexType,
 
-      /**
-       * The name of the index. Default is __
-       */
-      indexName?: string,
+    /**
+     * The name of the index. Default is __
+     */
+    indexName?: string,
 
-      /**
-       * For FULLTEXT columns set your parser
-       */
-      parser?: string,
+    /**
+     * For FULLTEXT columns set your parser
+     */
+    parser?: string,
 
-      /**
-       * Set a type for the index, e.g. BTREE. See the documentation of the used dialect
-       */
-      indexType?: string,
+    /**
+     * Set a type for the index, e.g. BTREE. See the documentation of the used dialect
+     */
+    indexType?: string,
 
-      /**
-       * A function that receives the sql query, e.g. console.log
-       */
-      logging?: Function,
+    /**
+     * A function that receives the sql query, e.g. console.log
+     */
+    logging?: Function,
 
-      /**
-       * A hash of attributes to limit your index(Filtered Indexes - MSSQL & PostgreSQL only)
-       */
-      where?: AnyWhereOptions
+    /**
+     * A hash of attributes to limit your index(Filtered Indexes - MSSQL & PostgreSQL only)
+     */
+    where?: WhereOptions
   }
 
-  declare type IndexMethod = 'BTREE' | 'HASH' | 'GIST' | 'GIN'
+  declare export type IndexMethod = 'BTREE' | 'HASH' | 'GIST' | 'GIN'
 
   /**
    * Interface for indexes property in DefineOptions
    * @see  DefineOptions
    */
-  declare interface DefineIndexesOptions {
+  declare export type DefineIndexesOptions = {
     /**
      * The name of the index. Defaults to model name + _ + fields concatenated
      */
@@ -4864,7 +4966,7 @@ declare module "sequelize" {
     /**
      * Condition for partioal index
      */
-    where?: AnyWhereOptions
+    where?: WhereOptions
   }
 
 
@@ -4872,7 +4974,7 @@ declare module "sequelize" {
    * Interface for name property in DefineOptions
    * @see  DefineOptions
    */
-  declare interface DefineNameOptions {
+  declare export type DefineNameOptions = {
     /**
      * Singular model name
      */
@@ -4889,7 +4991,7 @@ declare module "sequelize" {
    * Interface for getterMethods in DefineOptions
    * @see  DefineOptions
    */
-  declare interface DefineGetterMethodsOptions {
+  declare export type DefineGetterMethodsOptions = {
     [name: string]: () => any
   }
 
@@ -4898,7 +5000,7 @@ declare module "sequelize" {
    * Interface for setterMethods in DefineOptions
    * @see  DefineOptions
    */
-  declare interface DefineSetterMethodsOptions {
+  declare export type DefineSetterMethodsOptions = {
     [name: string]: (val: any) => void
   }
 
@@ -4907,7 +5009,7 @@ declare module "sequelize" {
    * Interface for Define Scope Options
    * @see  DefineOptions
    */
-  declare interface DefineScopeOptions {
+  declare export type DefineScopeOptions = {
     [scopeName: string]: AnyFindOptions | Function
   }
 
@@ -4916,7 +5018,7 @@ declare module "sequelize" {
    * Options for model definition
    * @see  Sequelize.define
    */
-  declare interface DefineOptions<TInstance>{
+  declare export type DefineOptions<TInstance: Model<any>> = {
     /**
      * Define the default search scope to use for this model. Scopes have the same form as the options passed to
      * find / findAll.
@@ -5080,7 +5182,7 @@ declare module "sequelize" {
    * Sync Options
    * @see  Sequelize.sync
    */
-  declare interface SyncOptions {
+  declare export type SyncOptions = {
     /**
      * If force is true, each DAO will do DROP TABLE IF EXISTS ..., before it tries to create its own table
      */
@@ -5119,14 +5221,14 @@ declare module "sequelize" {
     searchPath?: string
   }
 
-  declare interface SetOptions {}
+  declare export type SetOptions = {}
 
 
   /**
    * Connection Pool options
    * @see  Options
    */
-  declare interface PoolOptions {
+  declare export type PoolOptions = {
     /**
      * Maximum connections of the pool
      */
@@ -5160,7 +5262,7 @@ declare module "sequelize" {
    * Interface for replication Options in the sequelize constructor
    * @see  Options
    */
-  declare interface ReplicationOptions {
+  declare export type ReplicationOptions = {
     read?: {
       host?: string,
       port?: string | number,
@@ -5182,7 +5284,7 @@ declare module "sequelize" {
    * Interface for retry Options in the sequelize constructor and QueryOptions
    * @see  Options, QueryOptions
    */
-  declare interface RetryOptions {
+  declare export type RetryOptions = {
     /**
      * Only retry a query if the error matches one of these strings.
      */
@@ -5198,7 +5300,7 @@ declare module "sequelize" {
   /**
    * Operator symbols to be used when querying data
    */
-  declare interface Operators {
+  declare export type Operators = {
     eq: Symbol,
     ne: Symbol,
     gte: Symbol,
@@ -5335,7 +5437,7 @@ declare module "sequelize" {
     }
   }
 
-  declare type OperatorsAliases = {
+  declare export type OperatorsAliases = {
     [key: string]: Symbol,
   }
 
@@ -5343,7 +5445,7 @@ declare module "sequelize" {
   /**
    * Options for the constructor of Sequelize main class
    */
-  declare interface Options {
+  declare export type Options = {
     /**
      * The dialect of the database you are connecting to. One of mysql, postgres, sqlite, mariadb and mssql.
      *
@@ -5522,12 +5624,12 @@ declare module "sequelize" {
     operatorsAliases?: boolean | OperatorsAliases
   }
 
-  declare interface QueryOptionsTransactionRequired {
+  declare export type QueryOptionsTransactionRequired = {
     transaction: Transaction,
   }
 
-  declare interface ModelsHashInterface {
-    [name: string]: Class<Model<any, any>>
+  declare export type ModelsHashInterface = {
+    [name: string]: Class<Model<any>>
   }
 
 
@@ -5543,25 +5645,29 @@ declare module "sequelize" {
   should also be installed in your project. You don't need to import it however, as
   sequelize will take care of that.
   */
-  declare class Sequelize {
-    constructor(database: string, username?: string, password?: string, options?: Options): Sequelize;
+  declare export default class Sequelize {
+    constructor(database: string, username?: ?string, password?: ?string, options?: Options): Sequelize;
+    constructor(database: string, options?: Options): Sequelize;
     constructor(options: Options): Sequelize;
 
     /**
      * A modified version of bluebird promises, that allows listening for sql events
      */
     static Promise: typeof Promise,
+    Promise: typeof Promise,
 
     /**
      * Available query types for use with `sequelize.query`
      */
     static QueryTypes: QueryTypes,
+    QueryTypes: QueryTypes,
 
     /**
      * Exposes the validator.js object, so you can extend it with custom validation functions.
      * The validator is exposed both on the instance, and on the constructor.
      */
     static Validator: Validator,
+    Validator: Validator,
 
     /**
      * A Model represents a table in the database. Sometimes you might also see it referred to as model, or
@@ -5569,22 +5675,26 @@ declare module "sequelize" {
      and already created models can be loaded using sequelize.import
      */
     static Model: typeof Model,
+    Model: typeof Model,
 
     /**
      * A reference to the sequelize transaction class. Use this to access isolationLevels when creating a
      * transaction
      */
-    static Transaction: TransactionStatic,
+    static Transaction: typeof Transaction,
+    Transaction: typeof Transaction,
 
     /**
      * A reference to the deferrable collection. Use this to access the different deferrable options.
      */
     static Deferrable: Deferrable,
+    Deferrable: Deferrable,
 
     /**
      * A reference to the sequelize instance class.
      */
     static Op: Operators,
+    Op: Operators,
 
     /**
      * Creates a object representing a database function. This can be used in search queries, both in where and
@@ -5602,6 +5712,7 @@ declare module "sequelize" {
      * @param args All further arguments will be passed as arguments to the function
      */
     static fn(fn: string, ...args: any[]): fn,
+    fn(fn: string, ...args: any[]): fn,
 
     /**
      * Creates a object representing a column in the DB. This is often useful in conjunction with
@@ -5609,6 +5720,7 @@ declare module "sequelize" {
      * @param col The name of the column
      */
     static col(col: string): col,
+    col(col: string): col,
 
     /**
      * Creates a object representing a call to the cast function.
@@ -5616,25 +5728,30 @@ declare module "sequelize" {
      * @param type The type to cast it to
      */
     static cast(val: any, type: string): cast,
+    cast(val: any, type: string): cast,
 
     /**
      * Creates a object representing a literal, i.e. something that will not be escaped.
      * @param val
      */
     static literal(val: any): literal,
+    literal(val: any): literal,
     static asIs(val: any): literal,
+    asIs(val: any): literal,
 
     /**
      * An AND query
      * @param args Each argument will be joined by AND
      */
-    static and(...args: Array<string | Object>): and,
+    static and(...args: Array<string | Object>): AndOperator,
+    and(...args: Array<string | Object>): AndOperator,
 
     /**
      * An OR query
      * @param args Each argument will be joined by OR
      */
-    static or(...args: Array<string | Object>): or,
+    static or(...args: Array<string | Object>): OrOperator,
+    or(...args: Array<string | Object>): OrOperator,
 
     /**
      * Creates an object representing nested where conditions for postgres's json data-type.
@@ -5644,6 +5761,9 @@ declare module "sequelize" {
      '<value>'".
      */
     static json(
+      conditionsOrPath: string | Object,
+      value?: string | number | boolean): json,
+    json(
       conditionsOrPath: string | Object,
       value?: string | number | boolean): json,
 
@@ -5665,25 +5785,45 @@ declare module "sequelize" {
      etc.)
      */
     static where(attr: Object, comparator: string, logic: string | Object): where,
+    where(attr: Object, comparator: string, logic: string | Object): where,
     static where(attr: Object, logic: string | Object): where,
+    where(attr: Object, logic: string | Object): where,
     static condition(attr: Object, logic: string | Object): where,
+    condition(attr: Object, logic: string | Object): where,
 
-    static Error: BaseError,
-    static ValidationError: ValidationError,
-    static ValidationErrorItem: ValidationErrorItem,
-    static DatabaseError: DatabaseError,
-    static TimeoutError: TimeoutError,
-    static UniqueConstraintError: UniqueConstraintError,
-    static ExclusionConstraintError: ExclusionConstraintError,
-    static ForeignKeyConstraintError: ForeignKeyConstraintError,
-    static ConnectionError: ConnectionError,
-    static ConnectionRefusedError: ConnectionRefusedError,
-    static AccessDeniedError: AccessDeniedError,
-    static HostNotFoundError: HostNotFoundError,
-    static HostNotReachableError: HostNotReachableError,
-    static InvalidConnectionError: InvalidConnectionError,
-    static ConnectionTimedOutError: ConnectionTimedOutError,
-    static EmptyResultError: EmptyResultError,
+    static Error: typeof BaseError,
+    static ValidationError: typeof ValidationError,
+    static ValidationErrorItem: typeof ValidationErrorItem,
+    static DatabaseError: typeof DatabaseError,
+    static TimeoutError: typeof TimeoutError,
+    static UniqueConstraintError: typeof UniqueConstraintError,
+    static ExclusionConstraintError: typeof ExclusionConstraintError,
+    static ForeignKeyConstraintError: typeof ForeignKeyConstraintError,
+    static ConnectionError: typeof ConnectionError,
+    static ConnectionRefusedError: typeof ConnectionRefusedError,
+    static AccessDeniedError: typeof AccessDeniedError,
+    static HostNotFoundError: typeof HostNotFoundError,
+    static HostNotReachableError: typeof HostNotReachableError,
+    static InvalidConnectionError: typeof InvalidConnectionError,
+    static ConnectionTimedOutError: typeof ConnectionTimedOutError,
+    static EmptyResultError: typeof EmptyResultError,
+
+    Error: typeof BaseError,
+    ValidationError: typeof ValidationError,
+    ValidationErrorItem: typeof ValidationErrorItem,
+    DatabaseError: typeof DatabaseError,
+    TimeoutError: typeof TimeoutError,
+    UniqueConstraintError: typeof UniqueConstraintError,
+    ExclusionConstraintError: typeof ExclusionConstraintError,
+    ForeignKeyConstraintError: typeof ForeignKeyConstraintError,
+    ConnectionError: typeof ConnectionError,
+    ConnectionRefusedError: typeof ConnectionRefusedError,
+    AccessDeniedError: typeof AccessDeniedError,
+    HostNotFoundError: typeof HostNotFoundError,
+    HostNotReachableError: typeof HostNotReachableError,
+    InvalidConnectionError: typeof InvalidConnectionError,
+    ConnectionTimedOutError: typeof ConnectionTimedOutError,
+    EmptyResultError: typeof EmptyResultError,
 
     static ABSTRACT: DataTypeAbstract,
     static STRING: DataTypeString,
@@ -5717,6 +5857,582 @@ declare module "sequelize" {
     static GEOMETRY: DataTypeGeometry,
 
     /**
+     * Add a hook to the model
+     * @param hookType
+     * @param name Provide a name for the hook function. It can be used to remove the hook later or to order
+     hooks based on some sort of priority system in the future.
+     * @param fn The hook function
+     * @alias  hook
+     */
+    static addHook(hookType: string, name: string, fn: Function): this,
+    static addHook(hookType: string, fn: Function): this,
+    static hook(hookType: string, name: string, fn: Function): this,
+    static hook(hookType: string, fn: Function): this,
+
+    /**
+     * Remove hook from the model
+     * @param hookType
+     * @param name
+     */
+    static removeHook(hookType: string, name: string): this,
+
+    /**
+     * Check whether the model has any hooks of this type
+     * @param hookType
+     * @alias  hasHooks
+     */
+    static hasHook(hookType: string): boolean,
+    static hasHooks(hookType: string): boolean,
+
+    /**
+     * A hook that is run before validation
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    static beforeValidate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static beforeValidate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after validation
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    static afterValidate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static afterValidate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after validation
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    static validationFailed(
+      name: string,
+      fn: AsyncFn3<Model<any>, Object, ValidationError>): void,
+    static validationFailed(fn: AsyncFn3<Model<any>, Object, ValidationError>): void,
+
+    /**
+     * A hook that is run before creating a single instance
+     * @param name
+     * @param fn A callback function that is called with attributes, options
+     */
+    static beforeCreate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static beforeCreate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after creating a single instance
+     * @param name
+     * @param fn A callback function that is called with attributes, options
+     */
+    static afterCreate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static afterCreate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run before destroying a single instance
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     * @alias  beforeDelete
+     */
+    static beforeDestroy(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static beforeDestroy(fn: AsyncFn2<Model<any>, Object>): void,
+    static beforeDelete(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static beforeDelete(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after destroying a single instance
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     * @alias  afterDelete
+     */
+    static afterDestroy(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static afterDestroy(fn: AsyncFn2<Model<any>, Object>): void,
+    static afterDelete(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static afterDelete(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run before updating a single instance
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    static beforeUpdate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static beforeUpdate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after updating a single instance
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    static afterUpdate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    static afterUpdate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run before creating instances in bulk
+     * @param name
+     * @param fn A callback function that is called with instances, options
+     */
+    static beforeBulkCreate(
+      name: string,
+      fn: AsyncFn2<Model<any>[], Object>): void,
+    static beforeBulkCreate(fn: AsyncFn2<Model<any>[], Object>): void,
+
+    /**
+     * A hook that is run after creating instances in bulk
+     * @param name
+     * @param fn A callback function that is called with instances, options
+     * @name  afterBulkCreate
+     */
+    static afterBulkCreate(
+      name: string,
+      fn: AsyncFn2<Model<any>[], Object>): void,
+    static afterBulkCreate(fn: AsyncFn2<Model<any>[], Object>): void,
+
+    /**
+     * A hook that is run before destroying instances in bulk
+     * @param name
+     * @param fn A callback function that is called with options
+     * @alias  beforeBulkDelete
+     */
+    static beforeBulkDestroy(name: string, fn: AsyncFn1<Object>): void,
+    static beforeBulkDestroy(fn: AsyncFn1<Object>): void,
+    static beforeBulkDelete(name: string, fn: AsyncFn1<Object>): void,
+    static beforeBulkDelete(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run after destroying instances in bulk
+     * @param name
+     * @param fn A callback function that is called with options
+     * @alias  afterBulkDelete
+     */
+    static afterBulkDestroy(name: string, fn: AsyncFn1<Object>): void,
+    static afterBulkDestroy(fn: AsyncFn1<Object>): void,
+    static afterBulkDelete(name: string, fn: AsyncFn1<Object>): void,
+    static afterBulkDelete(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run after updating instances in bulk
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    static beforeBulkUpdate(name: string, fn: AsyncFn1<Object>): void,
+    static beforeBulkUpdate(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run after updating instances in bulk
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    static afterBulkUpdate(name: string, fn: AsyncFn1<Object>): void,
+    static afterBulkUpdate(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run before a find (select) query
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    static beforeFind(name: string, fn: AsyncFn1<Object>): void,
+    static beforeFind(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run before a find (select) query, after any { include: {all: ...} } options are expanded
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    static beforeFindAfterExpandIncludeAll(name: string, fn: AsyncFn1<Object>): void,
+    static beforeFindAfterExpandIncludeAll(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run before a find (select) query, after all option parsing is complete
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    static beforeFindAfterOptions(name: string, fn: AsyncFn1<Object>): void,
+    static beforeFindAfterOptions(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run after a find (select) query
+     * @param name
+     * @param fn A callback function that is called with instance(s), options
+     */
+    static afterFind(
+      name: string,
+      AsyncFn2<Model<any> | Model<any>[], Object>): void,
+    static afterFind(
+      AsyncFn2<Model<any> | Model<any>[], Object>): void,
+
+    /**
+     * A hook that is run before a define call
+     * @param name
+     * @param fn A callback function that is called with attributes, options
+     */
+    static beforeDefine(
+      name: string,
+      fn: AsyncFn2<DefineAttributes, Object>): void,
+    static beforeDefine(fn: AsyncFn2<DefineAttributes, Object>): void,
+
+    /**
+     * A hook that is run after a define call
+     * @param name
+     * @param fn A callback function that is called with factory
+     */
+    static afterDefine(name: string, fn: AsyncFn1<Model<Model<any>, any>>): void,
+    static afterDefine(fn: AsyncFn1<Model<Model<any>, any>>): void,
+
+    /**
+     * A hook that is run before Sequelize() call
+     * @param name
+     * @param fn A callback function that is called with config, options
+     */
+    static beforeInit(name: string, fn: AsyncFn2<Object, Object>): void,
+    static beforeInit(fn: AsyncFn2<Object, Object>): void,
+
+    /**
+     * A hook that is run after Sequelize() call
+     * @param name
+     * @param fn A callback function that is called with sequelize
+     */
+    static afterInit(name: string, fn: AsyncFn1<Sequelize>): void,
+    static afterInit(fn: AsyncFn1<Sequelize>): void,
+
+    /**
+     * A hook that is run before Model.sync call
+     * @param name
+     * @param fn A callback function that is called with options passed to Model.sync
+     */
+    static beforeSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    static beforeSync(fn: AsyncFn1<SyncOptions>): void,
+
+    /**
+     * A hook that is run after Model.sync call
+     * @param name
+     * @param fn A callback function that is called with options passed to Model.sync
+     */
+    static afterSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    static afterSync(fn: AsyncFn1<SyncOptions>): void,
+
+    /**
+     * A hook that is run before sequelize.sync call
+     * @param name
+     * @param fn A callback function that is called with options passed to sequelize.sync
+     */
+    static beforeBulkSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    static beforeBulkSync(fn: AsyncFn1<SyncOptions>): void,
+
+    /**
+     * A hook that is run after sequelize.sync call
+     * @param name
+     * @param fn A callback function that is called with options passed to sequelize.sync
+     */
+    static afterBulkSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    static afterBulkSync(fn: AsyncFn1<SyncOptions>): void,
+
+    /**
+     * Add a hook to the model
+     * @param hookType
+     * @param name Provide a name for the hook function. It can be used to remove the hook later or to order
+     hooks based on some sort of priority system in the future.
+     * @param fn The hook function
+     * @alias  hook
+     */
+    addHook(hookType: string, name: string, fn: Function): this,
+    addHook(hookType: string, fn: Function): this,
+    hook(hookType: string, name: string, fn: Function): this,
+    hook(hookType: string, fn: Function): this,
+
+    /**
+     * Remove hook from the model
+     * @param hookType
+     * @param name
+     */
+    removeHook(hookType: string, name: string): this,
+
+    /**
+     * Check whether the model has any hooks of this type
+     * @param hookType
+     * @alias  hasHooks
+     */
+    hasHook(hookType: string): boolean,
+    hasHooks(hookType: string): boolean,
+
+    /**
+     * A hook that is run before validation
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    beforeValidate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    beforeValidate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after validation
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    afterValidate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    afterValidate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after validation
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    validationFailed(
+      name: string,
+      fn: AsyncFn3<Model<any>, Object, ValidationError>): void,
+    validationFailed(fn: AsyncFn3<Model<any>, Object, ValidationError>): void,
+
+    /**
+     * A hook that is run before creating a single instance
+     * @param name
+     * @param fn A callback function that is called with attributes, options
+     */
+    beforeCreate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    beforeCreate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after creating a single instance
+     * @param name
+     * @param fn A callback function that is called with attributes, options
+     */
+    afterCreate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    afterCreate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run before destroying a single instance
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     * @alias  beforeDelete
+     */
+    beforeDestroy(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    beforeDestroy(fn: AsyncFn2<Model<any>, Object>): void,
+    beforeDelete(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    beforeDelete(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after destroying a single instance
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     * @alias  afterDelete
+     */
+    afterDestroy(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    afterDestroy(fn: AsyncFn2<Model<any>, Object>): void,
+    afterDelete(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    afterDelete(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run before updating a single instance
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    beforeUpdate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    beforeUpdate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run after updating a single instance
+     * @param name
+     * @param fn A callback function that is called with instance, options
+     */
+    afterUpdate(
+      name: string,
+      fn: AsyncFn2<Model<any>, Object>): void,
+    afterUpdate(fn: AsyncFn2<Model<any>, Object>): void,
+
+    /**
+     * A hook that is run before creating instances in bulk
+     * @param name
+     * @param fn A callback function that is called with instances, options
+     */
+    beforeBulkCreate(
+      name: string,
+      fn: AsyncFn2<Model<any>[], Object>): void,
+    beforeBulkCreate(fn: AsyncFn2<Model<any>[], Object>): void,
+
+    /**
+     * A hook that is run after creating instances in bulk
+     * @param name
+     * @param fn A callback function that is called with instances, options
+     * @name  afterBulkCreate
+     */
+    afterBulkCreate(
+      name: string,
+      fn: AsyncFn2<Model<any>[], Object>): void,
+    afterBulkCreate(fn: AsyncFn2<Model<any>[], Object>): void,
+
+    /**
+     * A hook that is run before destroying instances in bulk
+     * @param name
+     * @param fn A callback function that is called with options
+     * @alias  beforeBulkDelete
+     */
+    beforeBulkDestroy(name: string, fn: AsyncFn1<Object>): void,
+    beforeBulkDestroy(fn: AsyncFn1<Object>): void,
+    beforeBulkDelete(name: string, fn: AsyncFn1<Object>): void,
+    beforeBulkDelete(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run after destroying instances in bulk
+     * @param name
+     * @param fn A callback function that is called with options
+     * @alias  afterBulkDelete
+     */
+    afterBulkDestroy(name: string, fn: AsyncFn1<Object>): void,
+    afterBulkDestroy(fn: AsyncFn1<Object>): void,
+    afterBulkDelete(name: string, fn: AsyncFn1<Object>): void,
+    afterBulkDelete(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run after updating instances in bulk
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    beforeBulkUpdate(name: string, fn: AsyncFn1<Object>): void,
+    beforeBulkUpdate(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run after updating instances in bulk
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    afterBulkUpdate(name: string, fn: AsyncFn1<Object>): void,
+    afterBulkUpdate(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run before a find (select) query
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    beforeFind(name: string, fn: AsyncFn1<Object>): void,
+    beforeFind(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run before a find (select) query, after any { include: {all: ...} } options are expanded
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    beforeFindAfterExpandIncludeAll(name: string, fn: AsyncFn1<Object>): void,
+    beforeFindAfterExpandIncludeAll(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run before a find (select) query, after all option parsing is complete
+     * @param name
+     * @param fn A callback function that is called with options
+     */
+    beforeFindAfterOptions(name: string, fn: AsyncFn1<Object>): void,
+    beforeFindAfterOptions(fn: AsyncFn1<Object>): void,
+
+    /**
+     * A hook that is run after a find (select) query
+     * @param name
+     * @param fn A callback function that is called with instance(s), options
+     */
+    afterFind(
+      name: string,
+      AsyncFn2<Model<any> | Model<any>[], Object>): void,
+    afterFind(
+      AsyncFn2<Model<any> | Model<any>[], Object>): void,
+
+    /**
+     * A hook that is run before a define call
+     * @param name
+     * @param fn A callback function that is called with attributes, options
+     */
+    beforeDefine(
+      name: string,
+      fn: AsyncFn2<DefineAttributes, Object>): void,
+    beforeDefine(fn: AsyncFn2<DefineAttributes, Object>): void,
+
+    /**
+     * A hook that is run after a define call
+     * @param name
+     * @param fn A callback function that is called with factory
+     */
+    afterDefine(name: string, fn: AsyncFn1<Model<Model<any>, any>>): void,
+    afterDefine(fn: AsyncFn1<Model<Model<any>, any>>): void,
+
+    /**
+     * A hook that is run before Sequelize() call
+     * @param name
+     * @param fn A callback function that is called with config, options
+     */
+    beforeInit(name: string, fn: AsyncFn2<Object, Object>): void,
+    beforeInit(fn: AsyncFn2<Object, Object>): void,
+
+    /**
+     * A hook that is run after Sequelize() call
+     * @param name
+     * @param fn A callback function that is called with sequelize
+     */
+    afterInit(name: string, fn: AsyncFn1<Sequelize>): void,
+    afterInit(fn: AsyncFn1<Sequelize>): void,
+
+    /**
+     * A hook that is run before Model.sync call
+     * @param name
+     * @param fn A callback function that is called with options passed to Model.sync
+     */
+    beforeSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    beforeSync(fn: AsyncFn1<SyncOptions>): void,
+
+    /**
+     * A hook that is run after Model.sync call
+     * @param name
+     * @param fn A callback function that is called with options passed to Model.sync
+     */
+    afterSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    afterSync(fn: AsyncFn1<SyncOptions>): void,
+
+    /**
+     * A hook that is run before sequelize.sync call
+     * @param name
+     * @param fn A callback function that is called with options passed to sequelize.sync
+     */
+    beforeBulkSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    beforeBulkSync(fn: AsyncFn1<SyncOptions>): void,
+
+    /**
+     * A hook that is run after sequelize.sync call
+     * @param name
+     * @param fn A callback function that is called with options passed to sequelize.sync
+     */
+    afterBulkSync(name: string, fn: AsyncFn1<SyncOptions>): void,
+    afterBulkSync(fn: AsyncFn1<SyncOptions>): void,
+
+  /**
      * Defined models.
      */
     models: ModelsHashInterface,
@@ -5787,21 +6503,16 @@ declare module "sequelize" {
      * @param options These options are merged with the default define options provided to the Sequelize
     constructor
     */
-    define<TInstance,
-    TAttributes>(
+    define<TAttributes, TPlainAttributes, TInstance: Model<TAttributes, TPlainAttributes>>(
       modelName: string,
       attributes: DefineAttributes,
-      options?: DefineOptions<TInstance>): Class<Model<TInstance,
-    TAttributes>>,
+      options?: DefineOptions<TInstance>): Class<TInstance>,
 
     /**
      * Fetch a Model which is already defined
      * @param modelName The name of a model defined with Sequelize.define
      */
-    model<TInstance,
-    TAttributes>(
-      modelName: string): Class<Model<TInstance,
-    TAttributes>>,
+    model<ModelClass: Class<Model<any>>>(modelName: string): ModelClass,
 
     /**
      * Checks whether a model with the given name is defined
@@ -5823,13 +6534,11 @@ declare module "sequelize" {
      * @param defineFunction An optional function that provides model definitions. Useful if you do not
     want to use the module root as the define function
     */
-    import<TInstance,
-    TAttributes>(
+    import<ModelClass: Class<Model<any>>>(
       path: string,
       defineFunction?: (
         sequelize: Sequelize,
-        dataTypes: DataTypes) => Class<Model<TInstance, TAttributes>>): Class<Model<TInstance,
-    TAttributes>>,
+        dataTypes: DataTypes) => ModelClass): ModelClass,
 
     /**
      * Execute a query on the DB, with the posibility to bypass all the sequelize goodness.
@@ -6004,11 +6713,11 @@ declare module "sequelize" {
      * @param options Transaction Options
      * @param autoCallback Callback for the transaction
     */
+    transaction(options?: TransactionOptions): Promise<Transaction>,
     transaction(
       options: TransactionOptions,
-      autoCallback: (t: Transaction) => Promise<any>): Promise<any>,
-    transaction(autoCallback: (t: Transaction) => Promise<any>): Promise<any>,
-    transaction(options?: TransactionOptions): Promise<Transaction>,
+      autoCallback: (t: Transaction) => Promise<any>): Promise<void>,
+    transaction(autoCallback: (t: Transaction) => Promise<any>): Promise<void>,
 
     /**
      * Close all connections used by this sequelize instance, and free all references so the instance can be
@@ -6030,7 +6739,7 @@ declare module "sequelize" {
   /**
    * Validator Interface
    */
-  declare type Validator = {
+  declare export type Validator = {
     notEmpty(str: string): boolean,
     len(str: string, min: number, max: number): boolean,
     isUrl(str: string): boolean,
@@ -6055,51 +6764,38 @@ declare module "sequelize" {
 
   To run a query under a transaction, you should pass the transaction in the options object.
   */
-  declare interface Transaction {
+  declare export class Transaction {
     /**
-     * Possible options for row locking. Used in conjuction with `find` calls:
-     * @see  TransactionStatic
+     * Commit the transaction
      */
-    LOCK: TransactionLock,
+    commit(): Promise<void>,
 
-      /**
-       * Commit the transaction
-       */
-      commit(): Promise<void>,
+    /**
+     * Rollback (abort) the transaction
+     */
+    rollback(): Promise<void>,
 
-      /**
-       * Rollback (abort) the transaction
-       */
-      rollback(): Promise<void>
-  }
-
-
-  /**
-   * The transaction static object
-   * @see  Transaction
-   */
-  declare interface TransactionStatic {
     /**
      * Isolations levels can be set per-transaction by passing `options.isolationLevel` to
      * `sequelize.transaction`. Default to `REPEATABLE_READ` but you can override the default isolation level
-    by passing
-    `options.isolationLevel` in `new Sequelize`.
+     by passing
+     `options.isolationLevel` in `new Sequelize`.
 
-    The possible isolations levels to use when starting a transaction:
+     The possible isolations levels to use when starting a transaction:
 
-    ```js
-    {
-       READ_UNCOMMITTED: "READ_UNCOMMITTED",
-       READ_COMMITTED: "READ_COMMITTED",
-       REPEATABLE_READ: "REPEATABLE_READ",
-       SERIALIZABLE: "SERIALIZABLE"
-    }
-    ```
+     ```js
+     {
+        READ_UNCOMMITTED: "READ_UNCOMMITTED",
+        READ_COMMITTED: "READ_COMMITTED",
+        REPEATABLE_READ: "REPEATABLE_READ",
+        SERIALIZABLE: "SERIALIZABLE"
+     }
+     ```
 
-    Pass in the desired level as the first argument:
+     Pass in the desired level as the first argument:
 
-    ```js
-    return sequelize.transaction({
+     ```js
+     return sequelize.transaction({
        isolationLevel: Sequelize.Transaction.SERIALIZABLE
     }, function (t) {
 
@@ -6110,30 +6806,31 @@ declare module "sequelize" {
     }).catch(function(err) {
        // do something with the err.
     });
-    ```
+     ```
      * @see  ISOLATION_LEVELS
-    */
+     */
+    static ISOLATION_LEVELS: TransactionIsolationLevels,
     ISOLATION_LEVELS: TransactionIsolationLevels,
 
     /**
      * Transaction type can be set per-transaction by passing `options.type` to
      * `sequelize.transaction`. Default to `DEFERRED` but you can override the default isolation level
-    by passing `options.transactionType` in `new Sequelize`.
+     by passing `options.transactionType` in `new Sequelize`.
 
-    The transaction types to use when starting a transaction:
+     The transaction types to use when starting a transaction:
 
-    ```js
-    {
-       DEFERRED: "DEFERRED",
-       IMMEDIATE: "IMMEDIATE",
-       EXCLUSIVE: "EXCLUSIVE"
-    }
-    ```
+     ```js
+     {
+        DEFERRED: "DEFERRED",
+        IMMEDIATE: "IMMEDIATE",
+        EXCLUSIVE: "EXCLUSIVE"
+     }
+     ```
 
-    Pass in the transaction type the first argument:
+     Pass in the transaction type the first argument:
 
-    ```js
-    return sequelize.transaction({
+     ```js
+     return sequelize.transaction({
        type: Sequelize.Transaction.EXCLUSIVE
     }, function (t) {
 
@@ -6144,35 +6841,36 @@ declare module "sequelize" {
     }).catch(function(err) {
        // do something with the err.
     });
-    ```
+     ```
      * @see  Sequelize.Transaction.TYPES
-    */
+     */
+    static TYPES: TransactionTypes,
     TYPES: TransactionTypes,
 
     /**
      * Possible options for row locking. Used in conjuction with `find` calls:
      *
-    ```js
-    t1 // is a transaction
-    t1.LOCK.UPDATE,
-    t1.LOCK.SHARE,
-    t1.LOCK.KEY_SHARE, // Postgres 9.3+ only
-    t1.LOCK.NO_KEY_UPDATE // Postgres 9.3+ only
-    ```
+     ```js
+     t1 // is a transaction
+     t1.LOCK.UPDATE,
+     t1.LOCK.SHARE,
+     t1.LOCK.KEY_SHARE, // Postgres 9.3+ only
+     t1.LOCK.NO_KEY_UPDATE // Postgres 9.3+ only
+     ```
 
-    Usage:
-    ```js
-    t1 // is a transaction
-    Model.findAll({
+     Usage:
+     ```js
+     t1 // is a transaction
+     Model.findAll({
        where: ...,
        transaction: t1,
        lock: t1.LOCK...
     });
-    ```
+     ```
 
-    Postgres also supports specific locks while eager loading by using OF:
-    ```js
-    UserModel.findAll({
+     Postgres also supports specific locks while eager loading by using OF:
+     ```js
+     UserModel.findAll({
        where: ...,
        include: [TaskModel, ...],
        transaction: t1,
@@ -6181,21 +6879,22 @@ declare module "sequelize" {
        of: UserModel
        }
     });
-    ```
-    UserModel will be locked but TaskModel won't!
-    */
-    LOCK: TransactionLock
+     ```
+     UserModel will be locked but TaskModel won't!
+     */
+    static LOCK: TransactionLock,
+    LOCK: TransactionLock,
   }
 
-  declare type TransactionIsolationLevelReadUncommitted = 'READ_UNCOMMITTED';
+  declare export type TransactionIsolationLevelReadUncommitted = 'READ_UNCOMMITTED';
 
-  declare type TransactionIsolationLevelReadCommitted = 'READ_COMMITTED';
+  declare export type TransactionIsolationLevelReadCommitted = 'READ_COMMITTED';
 
-  declare type TransactionIsolationLevelRepeatableRead = 'REPEATABLE_READ';
+  declare export type TransactionIsolationLevelRepeatableRead = 'REPEATABLE_READ';
 
-  declare type TransactionIsolationLevelSerializable = 'SERIALIZABLE';
+  declare export type TransactionIsolationLevelSerializable = 'SERIALIZABLE';
 
-  declare type TransactionIsolationLevel = TransactionIsolationLevelReadUncommitted | TransactionIsolationLevelReadCommitted | TransactionIsolationLevelRepeatableRead | TransactionIsolationLevelSerializable;
+  declare export type TransactionIsolationLevel = TransactionIsolationLevelReadUncommitted | TransactionIsolationLevelReadCommitted | TransactionIsolationLevelRepeatableRead | TransactionIsolationLevelSerializable;
 
 
   /**
@@ -6203,20 +6902,20 @@ declare module "sequelize" {
    * Default to `REPEATABLE_READ` but you can override the default isolation level by passing
   `options.isolationLevel` in `new Sequelize`.
   */
-  declare interface TransactionIsolationLevels {
+  declare export type TransactionIsolationLevels = {
     READ_UNCOMMITTED: TransactionIsolationLevelReadUncommitted,
-      READ_COMMITTED: TransactionIsolationLevelReadCommitted,
-      REPEATABLE_READ: TransactionIsolationLevelRepeatableRead,
-      SERIALIZABLE: TransactionIsolationLevelSerializable
+    READ_COMMITTED: TransactionIsolationLevelReadCommitted,
+    REPEATABLE_READ: TransactionIsolationLevelRepeatableRead,
+    SERIALIZABLE: TransactionIsolationLevelSerializable
   }
 
-  declare type TransactionTypeDeferred = 'DEFERRED';
+  declare export type TransactionTypeDeferred = 'DEFERRED';
 
-  declare type TransactionTypeImmediate = 'IMMEDIATE';
+  declare export type TransactionTypeImmediate = 'IMMEDIATE';
 
-  declare type TransactionTypeExclusive = 'EXCLUSIVE';
+  declare export type TransactionTypeExclusive = 'EXCLUSIVE';
 
-  declare type TransactionType = TransactionTypeDeferred | TransactionTypeImmediate | TransactionTypeExclusive;
+  declare export type TransactionType = TransactionTypeDeferred | TransactionTypeImmediate | TransactionTypeExclusive;
 
 
   /**
@@ -6224,21 +6923,21 @@ declare module "sequelize" {
    * Default to `DEFERRED` but you can override the default isolation level by passing
   `options.transactionType` in `new Sequelize`.
   */
-  declare interface TransactionTypes {
+  declare export type TransactionTypes = {
     DEFERRED: TransactionTypeDeferred,
     IMMEDIATE: TransactionTypeImmediate,
     EXCLUSIVE: TransactionTypeExclusive
   }
 
-  declare type TransactionLockLevelUpdate = 'UPDATE';
+  declare export type TransactionLockLevelUpdate = 'UPDATE';
 
-  declare type TransactionLockLevelShare = 'SHARE';
+  declare export type TransactionLockLevelShare = 'SHARE';
 
-  declare type TransactionLockLevelKeyShare = 'KEY_SHARE';
+  declare export type TransactionLockLevelKeyShare = 'KEY_SHARE';
 
-  declare type TransactionLockLevelNoKeyUpdate = 'NO_KEY_UPDATE';
+  declare export type TransactionLockLevelNoKeyUpdate = 'NO_KEY_UPDATE';
 
-  declare type TransactionLockLevel =
+  declare export type TransactionLockLevel =
     TransactionLockLevelUpdate |
     TransactionLockLevelShare |
     TransactionLockLevelKeyShare |
@@ -6247,7 +6946,7 @@ declare module "sequelize" {
   /**
    * Possible options for row locking. Used in conjuction with `find` calls:
    */
-  declare interface TransactionLock {
+  declare export type TransactionLock = {
     UPDATE: TransactionLockLevelUpdate,
     SHARE: TransactionLockLevelShare,
     KEY_SHARE: TransactionLockLevelKeyShare,
@@ -6259,7 +6958,7 @@ declare module "sequelize" {
    * Options provided when the transaction is created
    * @see  sequelize.transaction()
    */
-  declare interface TransactionOptions {
+  declare export type TransactionOptions = {
     autocommit?: boolean,
 
     /**
@@ -6278,43 +6977,34 @@ declare module "sequelize" {
     logging?: Function
   }
 
-  declare interface fn {
+  declare export interface fn {
     fn: string,
     args: any[]
   }
 
-  declare interface col {
+  declare export interface col {
     col: string
   }
 
-  declare interface cast {
+  declare export interface cast {
     val: any,
     type: string
   }
 
-  declare interface literal {
+  declare export interface literal {
     val: any
   }
 
-  declare interface and {
-    args: any[]
-  }
-
-  declare interface or {
-    args: any[]
-  }
-
-  declare interface json {
+  declare export interface json {
     conditions?: Object,
     path?: string,
     value?: string | number | boolean
   }
 
-  declare interface where {
+  declare export interface where {
     attribute: Object,
     comparator?: string,
     logic: string | Object
   }
-
-  declare var exports: typeof Sequelize;
 }
+
