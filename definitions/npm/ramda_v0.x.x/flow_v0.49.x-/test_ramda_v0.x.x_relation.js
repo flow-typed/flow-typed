@@ -56,15 +56,22 @@ const pathEqObj2: boolean = _.pathEq(["hello"])(1)(obj);
 type PropEqFoo = { bar: number };
 const propEqFoo: PropEqFoo = { bar: 2 };
 
-const propEqResult1: boolean = _.propEq("bar", 1, propEqFoo);
+const propEqResult1a: boolean = _.propEq("bar", 1, propEqFoo);
 // Test curried versions.
-const propEqResult1a: boolean = _.propEq("bar")(1)(propEqFoo);
-const propEqResult1b: boolean = _.propEq("bar")(1, propEqFoo);
-const propEqResult1c: boolean = _.propEq("bar", 1)(propEqFoo);
+const propEqResult1b: boolean = _.propEq("bar")(1)(propEqFoo);
+const propEqResult1c: boolean = _.propEq("bar")(1, propEqFoo);
+const propEqResult1d: boolean = _.propEq("bar", 1)(propEqFoo);
 
 // The type compared should be the type of the property.
 // $ExpectError
-const propEqResult2: boolean = _.propEq("bar", "wrong", propEqFoo);
+const propEqResult2a: boolean = _.propEq("bar", "wrong", propEqFoo);
+// Test the same comparison param against the various arities.
+// $ExpectError
+const propEqResult2b: boolean = _.propEq("bar")("wrong")(propEqFoo);
+// $ExpectError
+const propEqResult2c: boolean = _.propEq("bar")("wrong", propEqFoo);
+// $ExpectError
+const propEqResult2d: boolean = _.propEq("bar", "wrong")(propEqFoo);
 
 // The property name must be a property on the object supplied.
 // $ExpectError
