@@ -53,7 +53,7 @@ declare module 'redux-form' {
     meta: MetaProps,
   };
 
-  declare type FunctionComponent<P> = (props?: P) => React.Node;
+  declare type FunctionComponent<P> = (props?: P) => ?React$Element<any>;
   declare type ClassComponent<P, S> = Class<React$Component<P, S>>;
   declare type Component<P> = FunctionComponent<P> | ClassComponent<P, any>;
 
