@@ -1041,11 +1041,11 @@ declare module ramda {
   // siguatures should go from smallest arity to largest arity.
   declare type PropEq = (<T>(
     prop: $Keys<T>
-  ) => ((val: $ElementType<T, $Keys<T>>) => (obj: T) => boolean) &
+  ) => ((val: $Ramda_ElementType<T, $Keys<T>>) => (obj: T) => boolean) &
     ((val: $ElementType<T, $Keys<T>>, obj: T) => boolean)) &
     (<T>(
       prop: $Keys<T>,
-      val: $ElementType<T, $Keys<T>>
+      val: $Ramda_ElementType<T, $Keys<T>>
     ) => (obj: T) => boolean) &
     (<T>(
       prop: $Keys<T>,
