@@ -27,7 +27,9 @@ function _parseVerNum(
 ): number {
   const num = parseInt(numStr, 10);
   if (String(num) !== numStr) {
-    const error = `'${context}': Invalid ${verName} number: '${numStr}'. Expected a number.`;
+    const error = `'${context}': Invalid ${verName} number: '${
+      numStr
+    }'. Expected a number.`;
     validationError(context, error, validationErrs);
   }
   return num;

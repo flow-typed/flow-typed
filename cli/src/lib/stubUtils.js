@@ -156,7 +156,9 @@ async function writeStub(
   const flowVersion = flowVersionRaw
     ? `/flow_${versionToString(flowVersionRaw)}`
     : '';
-  const stubVersion = `<<STUB>>/${packageName}_v${packageVersion}${flowVersion}`;
+  const stubVersion = `<<STUB>>/${packageName}_v${packageVersion}${
+    flowVersion
+  }`;
   await fs.writeFile(filename, signCode(output, stubVersion));
   return filename;
 }

@@ -348,7 +348,10 @@ export function parseRepoDirItem(
   }
 
   let [_, pkgName, major, minor, patch, prerel] = itemMatches;
-  const item = path.dirname(dirItemPath).split(path.sep).pop();
+  const item = path
+    .dirname(dirItemPath)
+    .split(path.sep)
+    .pop();
   if (item.charAt(0) === '@') {
     pkgName = `${item}${path.sep}${pkgName}`;
   }
@@ -386,7 +389,9 @@ function validateTestFile(testFilePath, context, validationErrs) {
 function validateVersionNumPart(part, partName, context, validationErrs?) {
   const num = parseInt(part, 10);
   if (String(num) !== part) {
-    const error = `'${context}': Invalid ${partName} number: '${part}'. Expected a number.`;
+    const error = `'${context}': Invalid ${partName} number: '${
+      part
+    }'. Expected a number.`;
     validationError(context, error, validationErrs);
   }
   return num;
@@ -598,8 +603,9 @@ export function filterLibDefs(
 
         default:
           throw new Error(
-            `'${filter.type}' is an unexpected filter type! This should never ` +
-              `happen!`,
+            `'${
+              filter.type
+            }' is an unexpected filter type! This should never ` + `happen!`,
           );
       }
 
