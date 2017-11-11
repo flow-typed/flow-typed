@@ -91,6 +91,8 @@ jest.resetModules().resetModules();
 
 jest.spyOn({}, "foo");
 
+jest.setTimeout(1000);
+
 expect.addSnapshotSerializer(JSON.stringify);
 expect.assertions(1);
 expect.hasAssertions();
