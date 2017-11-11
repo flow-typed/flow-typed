@@ -302,7 +302,7 @@ describe('npmLibDefs', () => {
       it('returns null', async () => {
         const pkgName = 'jest-test-npm-package';
         const pkgVersion = 'v1.0.0';
-        const flowVersion = { kind: 'all' };
+        const flowVersion = {kind: 'all'};
 
         const filtered = await findNpmLibDef(pkgName, pkgVersion, flowVersion);
 
@@ -311,10 +311,10 @@ describe('npmLibDefs', () => {
     });
 
     describe('when non-semver package provided', () => {
-      it('doesn\'t throw error', async () => {
+      it("doesn't throw error", async () => {
         const pkgName = 'flow-bin';
         const pkgVersion = 'github:flowtype/flow-bin';
-        const flowVersion = { kind: 'all' };
+        const flowVersion = {kind: 'all'};
 
         let filtered;
         let error;

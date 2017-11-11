@@ -29,7 +29,7 @@
         "prettier --write",
         "git add"
       ],
-      "*.js": ["prettier --write", "git add"]
+      "definitions/**/*.js": ["prettier --write", "git add"]
     }
   }
 }
