@@ -53,29 +53,40 @@ const interBy: Array<number> = _.intersectionWith(_.eqBy(Math.abs), ns, ns);
 const pathEqObj: boolean = _.pathEq(["hello"], 1, obj);
 const pathEqObj2: boolean = _.pathEq(["hello"])(1)(obj);
 
-type PropEqFoo = { bar: number };
-const propEqFoo: PropEqFoo = { bar: 2 };
+// It's good to test this with multiple params since $Keys<T> is a union.
+type PropEqObj = { bar: number, baz: string };
+const propEqObj: PropEqObj = { bar: 2, baz: "qux" };
 
-const propEqResult1a: boolean = _.propEq("bar", 1, propEqFoo);
+const propEqResult1a: boolean = _.propEq("bar", 1, propEqObj);
 // Test curried versions.
-const propEqResult1b: boolean = _.propEq("bar")(1)(propEqFoo);
-const propEqResult1c: boolean = _.propEq("bar")(1, propEqFoo);
-const propEqResult1d: boolean = _.propEq("bar", 1)(propEqFoo);
+const propEqResult1b: boolean = _.propEq("bar")(1)(propEqObj);
+const propEqResult1c: boolean = _.propEq("bar")(1, propEqObj);
+const propEqResult1d: boolean = _.propEq("bar", 1)(propEqObj);
 
-// The type compared should be the type of the property.
-// $ExpectError
-const propEqResult2a: boolean = _.propEq("bar", "wrong", propEqFoo);
-// Test the same comparison param against the various arities.
-// $ExpectError
-const propEqResult2b: boolean = _.propEq("bar")("wrong")(propEqFoo);
-// $ExpectError
-const propEqResult2c: boolean = _.propEq("bar")("wrong", propEqFoo);
-// $ExpectError
-const propEqResult2d: boolean = _.propEq("bar", "wrong")(propEqFoo);
+// The type compared can be any type just like any other === comparison.
+// Also test the various arities.
+const propEqResult2a: boolean = _.propEq("bar", "always false", propEqObj);
+const propEqResult2b: boolean = _.propEq("bar")("always false")(propEqObj);
+const propEqResult2c: boolean = _.propEq("bar")("always false", propEqObj);
+const propEqResult2d: boolean = _.propEq("bar", "always false")(propEqObj);
 
 // The property name must be a property on the object supplied.
 // $ExpectError
-const propEqResult3: boolean = _.propEq("baz", 1, propEqFoo);
+const propEqResultError: boolean = _.propEq("missing", 1, propEqObj);
+
+// propEq must work with key value pairs.
+const propEqKvp: { [string]: mixed } = { foo: 1, bar: "2", baz: 3 };
+const propEqResult3a: boolean = _.propEq("qux", "value", propEqKvp);
+const propEqResult3b: boolean = _.propEq("qux")("value")(propEqKvp);
+const propEqResult3c: boolean = _.propEq("qux")("value", propEqKvp);
+const propEqResult3d: boolean = _.propEq("qux", "value")(propEqKvp);
+
+// propEq must work with arrays.
+const propEqArray = [1, 2, 3];
+const propEqResult4a: boolean = _.propEq(1, 2, propEqArray);
+const propEqResult4b: boolean = _.propEq(1)(2)(propEqArray);
+const propEqResult4c: boolean = _.propEq(1)(2, propEqArray);
+const propEqResult4d: boolean = _.propEq(1, 2)(propEqArray);
 
 const sortByFirstItem = _.sortBy(([first]) => first);
 const pairs = [[-1, 1], [-2, 2], [-3, 3]];
