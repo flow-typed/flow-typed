@@ -619,6 +619,16 @@ declare module ramda {
     ...rest: Array<void>
   ): (xs: Array<T>) => Array<T>;
 
+  declare function forEachObjIndexed<O: Object, A, B>(
+    fn: (val: A, key: string, o: O) => B,
+    o: { [key: string]: A }
+  ): O;
+
+  declare function forEachObjIndexed<O: Object, A, B>(
+    fn: (val: A, key: string, o: O) => B,
+    ...args: Array<void>
+  ): (o: { [key: string]: A }) => O;
+
   declare function lastIndexOf<E>(x: E, xs: Array<E>): number;
   declare function lastIndexOf<E>(
     x: E,
