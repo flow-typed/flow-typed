@@ -56,6 +56,8 @@ const str: string = 'hello world'
   const s7: number = _.findIndex(x => x === '2', { a:'1', b:'2' })
   const forEachxs = _.forEach(x => console.log(x), ns)
 
+  const forEachObj = _.forEachObjIndexed((value, key) => {}, {x: 1, y: 2})
+
   const groupedBy: {[k: string]: Array<number>} = _.groupBy(x => x > 1 ? 'more' : 'less' , ns)
 
   const groupedWith: Array<Array<number>> = _.groupWith(x => x > 1, ns)
