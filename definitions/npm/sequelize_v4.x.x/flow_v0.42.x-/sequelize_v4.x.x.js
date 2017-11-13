@@ -1377,7 +1377,7 @@ declare module "sequelize" {
     field: string,
   }
 
-  declare class Association<Source: Model<any>, Target: Model<any>> {
+  declare export class Association<Source: Model<any>, Target: Model<any>> {
     constructor(source: Class<Source>, target: Class<Target>, options?: AssociationOptions): this;
     static BelongsTo: typeof BelongsTo;
     static HasOne: typeof HasOne;
