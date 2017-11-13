@@ -1377,8 +1377,12 @@ declare module "sequelize" {
     field: string,
   }
 
-  declare export class Association<Source: Model<any>, Target: Model<any>> {
+  declare class Association<Source: Model<any>, Target: Model<any>> {
     constructor(source: Class<Source>, target: Class<Target>, options?: AssociationOptions): this;
+    static BelongsTo: typeof BelongsTo;
+    static HasOne: typeof HasOne;
+    static BelongsToMany: typeof BelongsToMany;
+    static HasMany: typeof HasMany;
     source: Class<Source>;
     target: Class<Target>;
     sequelize: Sequelize;
@@ -1396,7 +1400,7 @@ declare module "sequelize" {
 
   declare type ArrayOrElement<T> = T | Array<T>;
 
-  declare export class BelongsTo<Source: Model<any>, TargetAttributes: Object, TargetInitAttributes: Object, Target: Model<TargetAttributes, TargetInitAttributes>> extends Association<Source, Target> {
+  declare class BelongsTo<Source: Model<any>, TargetAttributes: Object, TargetInitAttributes: Object, Target: Model<TargetAttributes, TargetInitAttributes>> extends Association<Source, Target> {
     associationType: 'BelongsTo';
     foreignKey: string;
     foreignKeyField: string;
@@ -1414,7 +1418,7 @@ declare module "sequelize" {
     create(sourceInstance: Source, values: TargetInitAttributes, options?: CreateOptions<TargetAttributes>): Promise<Target>;
   }
 
-  declare export class HasOne<Source: Model<any>, TargetAttributes: Object, TargetInitAttributes: Object, Target: Model<TargetAttributes, TargetInitAttributes>> extends Association<Source, Target> {
+  declare class HasOne<Source: Model<any>, TargetAttributes: Object, TargetInitAttributes: Object, Target: Model<TargetAttributes, TargetInitAttributes>> extends Association<Source, Target> {
     associationType: 'HasOne';
     foreignKey: string;
     foreignKeyField: string;
@@ -1432,7 +1436,7 @@ declare module "sequelize" {
     create(sourceInstance: Source, values: TargetInitAttributes, options?: CreateOptions<TargetAttributes>): Promise<Target>;
   }
 
-  declare export class HasMany<Source: Model<any>, TargetAttributes: Object, TargetInitAttributes: Object, Target: Model<TargetAttributes, TargetInitAttributes>> extends Association<Source, Target> {
+  declare class HasMany<Source: Model<any>, TargetAttributes: Object, TargetInitAttributes: Object, Target: Model<TargetAttributes, TargetInitAttributes>> extends Association<Source, Target> {
     associationType: 'HasMany';
     foreignKey: string;
     foreignKeyField: string;
@@ -1451,7 +1455,7 @@ declare module "sequelize" {
     create(sourceInstance: Source, values: TargetInitAttributes, options?: CreateOptions<TargetAttributes>): Promise<Target>;
   }
 
-  declare export class BelongsToMany<
+  declare class BelongsToMany<
     SourceAttributes: Object,
     SourceInitAttributes: Object,
     Source: Model<SourceAttributes, SourceInitAttributes>,
