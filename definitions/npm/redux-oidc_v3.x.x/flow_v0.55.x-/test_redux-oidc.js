@@ -32,7 +32,7 @@ const userManager = reduxOidc.createUserManager(userManagerConfig);
 userManager.signinRedirect();
 userManager.signoutRedirect();
 
-// The reducer state can have a null user
+// The reducer state can have a nullable user
 const state: OidcReducerState = {
   user: null
 };
