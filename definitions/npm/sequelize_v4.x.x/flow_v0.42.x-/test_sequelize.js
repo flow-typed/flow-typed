@@ -30,6 +30,8 @@ import type {
   BelongsToManyHasOne,
   BelongsToManyHasMany,
   BelongsToManyCount,
+  Association,
+  DataTypeAbstract,
 } from "sequelize";
 
 //
@@ -204,17 +206,26 @@ let WarehouseBranch: typeof WarehouseBranchInstance = s.define('warehouseBranch'
 let Customer: typeof CustomerInstance = s.define('customer', {});
 let customer = Customer.build();
 
-Product.hasOne(Barcode);
-Barcode.belongsTo(Product);
+const ProductBarcode = Product.hasOne(Barcode);
+const BarcodeProduct = Barcode.belongsTo(Product);
 
-Warehouse.hasMany(Product);
-Product.belongsTo(Warehouse);
+const WarehouseProducts = Warehouse.hasMany(Product);
+const ProductWarehouse = Product.belongsTo(Warehouse);
 
-Warehouse.belongsToMany(Branch, { through: WarehouseBranch });
-Branch.belongsToMany(Warehouse, { through: WarehouseBranch });
+const WarehouseBranches = Warehouse.belongsToMany(Branch, { through: WarehouseBranch });
+const BranchWarehouses = Branch.belongsToMany(Warehouse, { through: WarehouseBranch });
 
 Branch.belongsToMany(Customer, { through: 'branchCustomer' });
 Customer.belongsToMany(Branch, { through: 'branchCustomer' });
+
+// Metadata
+
+(Warehouse.associations.branch: Association<WarehouseInstance, BranchInstance>);
+(Warehouse.tableName: string);
+(Warehouse.rawAttributes.blah.type: DataTypeAbstract);
+(Warehouse.tableAttributes.blah.type: DataTypeAbstract);
+(Warehouse.attributes.blah.type: DataTypeAbstract);
+(Warehouse.primaryKeys.blah.type: DataTypeAbstract);
 
 // hasOne
 product.getBarcode();
@@ -368,7 +379,82 @@ customer.hasBranch(2, { scope: 'baz' }).then((result: boolean) => { });
 customer.countBranches();
 customer.countBranches({ scope: 'baz' }).then((result: number) => { });
 
+// query on associations
 
+WarehouseProducts.get(warehouse).then((products: Array<ProductInstance>) => {})
+WarehouseProducts.get([warehouse], {scope: 'baz'}).then((products: {[id: number]: ProductInstance}) => {})
+WarehouseProducts.count(warehouse).then((count: number) => {})
+WarehouseProducts.count(warehouse, {scope: 'baz'}).then((count: number) => {})
+WarehouseProducts.has(warehouse, [product, 2]).then((result: boolean) => {})
+WarehouseProducts.has(warehouse, [product, 2], {scope: 'baz'}).then((result: boolean) => {})
+WarehouseProducts.set(warehouse, [product, 2]).then((result: WarehouseInstance) => {})
+WarehouseProducts.set(warehouse, [product, 2], {where: {}, scope: 'baz'}).then((result: WarehouseInstance) => {})
+WarehouseProducts.remove(warehouse, [product, 2]).then((result: typeof WarehouseProducts) => {})
+WarehouseProducts.remove(warehouse, [product, 2], {where: {}, individualHooks: true}).then((result: typeof WarehouseProducts) => {})
+WarehouseProducts.create(warehouse, {
+  name: 'doodad',
+  price: 2.50,
+}, {individualHooks: true}).then((result: ProductInstance) => {})
+
+WarehouseBranches.get(warehouse).then((branches: Array<BranchInstance>) => {})
+WarehouseBranches.get(warehouse, {scope: 'baz'}).then((branches: Array<BranchInstance>) => {})
+WarehouseBranches.count(warehouse).then((count: number) => {})
+WarehouseBranches.count(warehouse, {scope: 'baz'}).then((count: number) => {})
+WarehouseBranches.has(warehouse, [branch, 2]).then((result: boolean) => {})
+WarehouseBranches.has(warehouse, [branch, 2], {scope: 'blah'}).then((result: boolean) => {})
+WarehouseBranches.set(warehouse, [branch, 2]).then((result: any) => {})
+WarehouseBranches.set(warehouse, [branch, 2], {scope: 'blah'}).then((result: any) => {})
+WarehouseBranches.remove(warehouse, [branch, 2]).then(() => {})
+WarehouseBranches.remove(warehouse, [branch, 2], {scope: 'blah'}).then(() => {})
+WarehouseBranches.create(warehouse, {
+  address: 'somewhere',
+  rank: 12,
+}, {
+  through: {
+    distance: 4.5,
+  },
+  individualHooks: true,
+}).then((result: Branch) => {})
+
+ProductBarcode.get(product).then((barcode: BarcodeInstance) => {})
+ProductBarcode.get(product).then((barcode: BarcodeInstance) => {})
+ProductBarcode.get([product]).then((barcodes: {[id: number]: BarcodeInstance}) => {})
+ProductBarcode.get([product], {scope: 'boo'})
+ProductBarcode.set(product, barcode)
+ProductBarcode.set(product, 1, {scope: 'bar'})
+ProductBarcode.create(product, {
+  code: 'blah',
+  dateIssued: new Date(),
+}).then((barcode: BarcodeInstance) => {})
+ProductBarcode.create(product, {
+  code: 'blah',
+  dateIssued: new Date(),
+}, {
+  save: true,
+})
+
+ProductWarehouse.get(product).then((warehouse: WarehouseInstance) => {})
+ProductWarehouse.get([product]).then((warehouses: {[id: number]: WarehouseInstance}) => {})
+ProductWarehouse.get([product], {scope: 'boo'})
+ProductWarehouse.set(product, warehouse)
+ProductWarehouse.set(product, 1, {scope: 'bar'})
+ProductWarehouse.create(product, {
+  address: 'somewhere',
+  capacity: 10000,
+}).then((warehouse: WarehouseInstance) => {})
+ProductWarehouse.create(product, {
+  address: 'somewhere',
+  capacity: 10000,
+}, {
+  save: true,
+})
+
+// query with associations
+
+Warehouse.findAll({include: [{association: WarehouseProducts}]}).then((warehouses: Array<WarehouseInstance>) => {})
+Warehouse.findAll({include: [{association: WarehouseBranches}]}).then((warehouses: Array<WarehouseInstance>) => {})
+Branch.findAll({include: [{association: BranchWarehouses}]}).then((branch: Array<BranchInstance>) => {})
+Product.findOne({include: [{association: ProductWarehouse}]}).then((product: ?Product) => {})
 
 type ProductAttributes = {
   id?: number;
@@ -380,6 +466,7 @@ declare class ProductInstance extends Model<ProductAttributes> {
   id?: number;
   name?: string;
   price?: number;
+
   // hasOne association mixins:
   getBarcode: HasOneGetOne<BarcodeInstance>;
   setBarcode: HasOneSetOne<BarcodeInstance, number>;
