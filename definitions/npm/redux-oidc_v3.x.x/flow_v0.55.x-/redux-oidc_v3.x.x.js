@@ -6,7 +6,14 @@ declare module "redux-oidc" {
     signoutRedirect: () => Promise<*>
   };
   declare type User<P> = {
-    expired: ?boolean,
+    id_token: string,
+    access_token: string,
+    token_type: string,
+    scope: string,
+    expires_at: number,
+    +expires_in: ?boolean,
+    +expired: ?boolean,
+    +scopes: Array<string>,
     profile: P
   };
   declare type UserManagerSettings = {|
