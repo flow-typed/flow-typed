@@ -1,8 +1,9 @@
 // @flow
 
 "use strict";
-const React = require("react");
-const reduxOidc = require("redux-oidc");
+import type { OidcReducerState } from "redux-oidc";
+import React from "react";
+import reduxOidc from "redux-oidc";
 // $ExpectError: flow-typed doesn't support pulling in _other_ modules yet?
 const redux = require("redux");
 // This was also attempted, but still no joy.
@@ -31,14 +32,16 @@ const userManager = reduxOidc.createUserManager(userManagerConfig);
 userManager.signinRedirect();
 userManager.signoutRedirect();
 
-// The reducer has a user
-const user = reduxOidc.reducer.user;
+// The reducer state can have a nullable user
+const state: OidcReducerState = {
+  user: null
+};
 
 // $ExpectError: The user could be null/undefined.
-console.log(user.expired);
+console.log(state.user.expired);
 
-if (user) {
-  console.log(user.expired);
+if (state.user) {
+  console.log(state.user.expired);
 }
 
 type Action = {
