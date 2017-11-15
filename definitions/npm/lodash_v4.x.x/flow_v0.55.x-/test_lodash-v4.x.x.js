@@ -303,6 +303,16 @@ boolFalse = isString(true);
 boolFalse = isString("");
 // $ExpectError
 boolTrue = isString(undefined);
+declare var cond: string | number;
+if (isString(cond)) {
+  (cond: string);
+  // $ExpectError
+  (cond: number);
+} else {
+  (cond: number);
+  // $ExpectError
+  (cond: string);
+}
 
 /**
  * _.find
