@@ -726,10 +726,7 @@ declare module "lodash" {
     isRegExp(value: any): boolean;
     isSafeInteger(value: any): boolean;
     isSet(value: any): boolean;
-    isString(value: string): true;
-    isString(
-      value: number | boolean | Function | void | null | Object | Array<any>
-    ): false;
+    isString(x: any): boolean %checks(typeof x === "string");
     isSymbol(value: any): boolean;
     isTypedArray(value: any): boolean;
     isUndefined(value: any): boolean;
