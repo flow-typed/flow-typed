@@ -1,7 +1,7 @@
 // @flow
 
 "use strict";
-import type { OidcReducerState } from "redux-oidc";
+import type { OidcReducerState, User } from "redux-oidc";
 import React from "react";
 import reduxOidc from "redux-oidc";
 // $ExpectError: flow-typed doesn't support pulling in _other_ modules yet?
@@ -32,6 +32,10 @@ const userManager = reduxOidc.createUserManager(userManagerConfig);
 userManager.signinRedirect();
 userManager.signoutRedirect();
 
+userManager.signinRedirect({
+  data: { redirectUrl: "https://www.duckduckgo.com" }
+});
+
 // The reducer state can have a nullable user
 const state: OidcReducerState = {
   user: null
@@ -50,6 +54,7 @@ type Action = {
 type State = {
   foo: string
 };
+
 // redux-oidc provides some components.
 const reducer = (state: State, action: Action) => action;
 const store = redux.createStore(redux.combineReducers([reducer]));
@@ -60,6 +65,23 @@ const StatelessComponent = () => {
       <CallbackComponent
         userManager={userManager}
         successCallback={() => console.log("success!")}
+        errorCallback={() => console.log("error!")}
+      />
+      <OidcProvider store={store} userManager={userManager} />
+    </div>
+  );
+};
+
+type Props = {
+  redirectToLink: (user?: User<*>) => void
+};
+
+const ExampleComponent = ({ redirectToLink }: Props) => {
+  return (
+    <div>
+      <CallbackComponent
+        userManager={userManager}
+        successCallback={redirectToLink}
         errorCallback={() => console.log("error!")}
       />
       <OidcProvider store={store} userManager={userManager} />
