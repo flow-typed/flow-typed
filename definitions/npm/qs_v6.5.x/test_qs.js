@@ -11,7 +11,7 @@ parse({});
 
 parse("test");
 
-parse({
+parse("test", {
   allowPrototypes: true,
   arrayLimit: 5,
   decoder: noop,
@@ -32,14 +32,14 @@ stringify(obj);
 stringify([1, 2, "test"]);
 
 stringify(obj, {
-  encoder: identity,
+  encoder: noop,
   delimiter: "/",
   strictNullHandling: true,
   skipNulls: true,
   encode: true,
-  sort: identity,
+  sort: noop,
   allowDots: true,
-  serializeDate: identity,
+  serializeDate: noop,
   encodeValuesOnly: true,
   format: "/",
   addQueryPrefix: true
