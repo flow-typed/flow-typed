@@ -2,7 +2,11 @@ import type { Reducer, Store } from "redux";
 
 declare module "redux-oidc" {
   declare type UserManager = {
-    signinRedirect: () => Promise<*>,
+    signinRedirect: (data?: {
+      data: {
+        redirectUrl: string
+      }
+    }) => Promise<*>,
     signoutRedirect: () => Promise<*>
   };
   declare type User<P> = {
@@ -14,7 +18,10 @@ declare module "redux-oidc" {
     +expires_in: ?boolean,
     +expired: ?boolean,
     +scopes: Array<string>,
-    profile: P
+    profile: P,
+    state: {
+      redirectUrl: string
+    }
   };
   declare type UserManagerSettings = {|
     client_id: string,
@@ -41,7 +48,7 @@ declare module "redux-oidc" {
 
   declare class CallbackComponent extends React$Component<{
     userManager: UserManager,
-    successCallback: () => mixed,
+    successCallback: (user?: User<*>) => mixed,
     errorCallback?: () => mixed
   }> {}
 
