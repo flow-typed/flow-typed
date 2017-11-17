@@ -268,8 +268,8 @@ type JestExpectType = {
    *
    * Alias: .toThrowError
    */
-  toThrow(message?: string | Error | RegExp): void,
-  toThrowError(message?: string | Error | RegExp): void,
+  toThrow(message?: string | Error | Class<Error> | RegExp): void,
+  toThrowError(message?: string | Error | Class<Error> | RegExp): void,
   /**
    * Use .toThrowErrorMatchingSnapshot to test that a function throws a error
    * matching the most recent snapshot when it is called.
