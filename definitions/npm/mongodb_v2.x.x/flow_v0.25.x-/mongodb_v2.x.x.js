@@ -1,7 +1,7 @@
 declare class MongoDB$ObjectID {
   /**
    * Create a new ObjectID instance
-   * @param {(string|number|ongoDB$ObjectID)} id Can be a 24 byte hex string, 12 byte binary string or a Number.
+   * @param {(string|number|MongoDB$ObjectID)} id Can be a 24 byte hex string, 12 byte binary string or a Number.
    */
   constructor(id?: string | number | MongoDB$ObjectID): this;
 
