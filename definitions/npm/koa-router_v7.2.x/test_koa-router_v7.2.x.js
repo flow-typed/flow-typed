@@ -34,3 +34,10 @@ goodRouter.get("/", async ctx => {
 goodRouter.use(10);
 goodRouter.use(async ctx => {});
 goodRouter.use("/foo", async ctx => {});
+
+goodRouter.param("foo", async ctx => {
+  // $ExpectError
+  console.log(ctx.params.foo);
+});
+goodRouter.param("foo", async (foo, ctx) => {});
+goodRouter.param("foo", (foo, ctx, next) => {});
