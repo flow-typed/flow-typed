@@ -83,6 +83,41 @@ const o2 = { a: 10, b: 20, c: 3, d: 40 };
 const ep: boolean = _.eqProps("a")(o1, o2);
 const ep2: boolean = _.eqProps("c", o1)(o2);
 
+const evolved1 = _.evolve(
+  {
+    foo: x => x + 1,
+    bar: x => x + 2
+  },
+  {
+    foo: 1,
+    bar: 2
+  }
+);
+const evolved2 = _.evolve({
+  foo: x => x + 1,
+  bar: x => x + 2
+})({
+  foo: 1,
+  bar: 2
+});
+const evolved3 = _.evolve(
+  {
+    foo: x => x + 1
+  },
+  {
+    bar: 1
+  }
+);
+const evolved4 = _.evolve({
+  foo: x => x + 1
+})({
+  bar: 1
+});
+//$ExpectError
+const evolved5: number = evolved4.foo;
+//$ExpectError
+const evolved6 = _.evolve(["foo"]);
+
 const hasid = _.has("id");
 const has: boolean = hasid(tomato);
 
