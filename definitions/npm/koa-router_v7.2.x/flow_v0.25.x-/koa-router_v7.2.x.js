@@ -4,7 +4,13 @@
 
 type KoaRouter$Middleware = (
   ctx: any,
-  next: () => Promise<void>
+  next: () => void | Promise<void>
+) => Promise<void> | void;
+
+type KoaRouter$ParamMiddleware = (
+  param: string,
+  ctx: any,
+  next: () => void | Promise<void>
 ) => Promise<void> | void;
 
 declare module "koa-router" {
@@ -50,7 +56,7 @@ declare module "koa-router" {
       methodNotAllowed?: () => any
     }): KoaRouter$Middleware;
 
-    param(param: string, middleware: KoaRouter$Middleware): this;
+    param(param: string, middleware: KoaRouter$ParamMiddleware): this;
 
     redirect(source: string, destination: string, code?: number): this;
 
