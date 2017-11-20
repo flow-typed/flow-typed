@@ -29,6 +29,7 @@ goodRouter.get("/");
 goodRouter.get("/", async ctx => {
   ctx.body = "Hello World";
 });
+goodRouter.get(["/", "/foo"], ctx => {});
 
 // $ExpectError
 goodRouter.use(10);
