@@ -102,58 +102,58 @@ type Mongoose$SchemaPlugin<Opts> = (
 ) => void;
 
 declare class Mongoose$Schema<Doc> {
-  static Types: Mongoose$Types,
+  static Types: Mongoose$Types;
   constructor(
     fields: SchemaFields,
     opts?: SchemaOpts<Doc>
-  ): Mongoose$Schema<Doc>,
-  index(fields: IndexFields, opts?: IndexOpts): this,
-  methods: Mongoose$SchemaMethods,
-  statics: Mongoose$SchemaStatics,
-  virtual(fieldName: string): Mongoose$SchemaVirtualField,
+  ): Mongoose$Schema<Doc>;
+  index(fields: IndexFields, opts?: IndexOpts): this;
+  methods: Mongoose$SchemaMethods;
+  statics: Mongoose$SchemaStatics;
+  virtual(fieldName: string): Mongoose$SchemaVirtualField;
   pre(
     hookType: Mongoose$SchemaHookTypes,
     serialCb: (next: Function) => any
-  ): void,
+  ): void;
   pre(
     hookType: Mongoose$SchemaHookTypes,
     true,
     parallelCb: (next: Function, done: Function) => any
-  ): void,
+  ): void;
   // post(hookType: Mongoose$SchemaHookTypes, parallelCb: (doc: Doc) => any): void;
   post(
     hookType: Mongoose$SchemaHookTypes,
     serialCb: (doc: Doc, next: Function) => any
-  ): void,
+  ): void;
   // post(hookType: Mongoose$SchemaHookTypes, serialCb: (error: Error, doc: Doc, next: Function) => any): void;
-  plugin<Opts>(plugin: Mongoose$SchemaPlugin<Opts>, opts: Opts): void,
-  add(fields: SchemaFields, prefix?: string): void,
-  loadClass(cls: Class<Doc>): void,
+  plugin<Opts>(plugin: Mongoose$SchemaPlugin<Opts>, opts: Opts): void;
+  add(fields: SchemaFields, prefix?: string): void;
+  loadClass(cls: Class<Doc>): void;
   paths: {
     [name: string]: Mongoose$SchemaField<this>
-  },
-  clone(): Mongoose$Schema<Doc>,
-  eachPath(fn: (path: string, fieldOpts: Object) => void): this,
-  get(optionKey: string): any,
-  set(optionKey: string, value: any): void,
-  indexes(): ?Array<[string, IndexOpts]>,
-  path(path: string): Object,
-  path(path: string, schemaType: Object): void,
-  pathType(path: string): string,
-  remove(path: string | string[]): void,
-  requiredPaths(invalidate?: boolean): string[],
-  method(method: string, fn: Function): this,
-  method(methods: { [method: string]: Function }): this,
-  static (method: string, fn: Function): this,
-  static (methods: { [method: string]: Function }): this,
-  virtual(name: string, opts?: Object): VirtualType,
-  virtualpath(name: string): ?VirtualType,
-  indexTypes(): string[],
-  reserved: string[],
-  obj: SchemaOpts<Doc>,
+  };
+  clone(): Mongoose$Schema<Doc>;
+  eachPath(fn: (path: string, fieldOpts: Object) => void): this;
+  get(optionKey: string): any;
+  set(optionKey: string, value: any): void;
+  indexes(): ?Array<[string, IndexOpts]>;
+  path(path: string): Object;
+  path(path: string, schemaType: Object): void;
+  pathType(path: string): string;
+  remove(path: string | string[]): void;
+  requiredPaths(invalidate?: boolean): string[];
+  method(method: string, fn: Function): this;
+  method(methods: { [method: string]: Function }): this;
+  static (method: string, fn: Function): this;
+  static (methods: { [method: string]: Function }): this;
+  virtual(name: string, opts?: Object): VirtualType;
+  virtualpath(name: string): ?VirtualType;
+  indexTypes(): string[];
+  reserved: string[];
+  obj: SchemaOpts<Doc>;
   _indexes: Array<
     [{ [fieldName: string]: number | string }, { [optionName: string]: mixed }]
-  >
+  >;
 }
 
 type Mongoose$SchemaField<Schema> = {
@@ -168,8 +168,8 @@ type Mongoose$SchemaField<Schema> = {
 };
 
 declare class Mongoose$SchemaVirtualField {
-  get(() => any): this,
-  set((value: any) => any): this
+  get(() => any): this;
+  set((value: any) => any): this;
 }
 
 type MongooseProjection = Object | string;
@@ -186,114 +186,114 @@ declare class Mongoose$Document {
     criteria?: Object,
     projection?: MongooseProjection,
     options?: Object
-  ): Mongoose$Query<Array<this>, this>,
+  ): Mongoose$Query<Array<this>, this>;
   static findOne(
     criteria?: Object,
     projection?: MongooseProjection
-  ): Mongoose$Query<?this, this>,
+  ): Mongoose$Query<?this, this>;
   static findById(
     id: MongoOrScalarId,
     projection?: MongooseProjection,
     options?: Object
-  ): Mongoose$Query<?this, this>,
+  ): Mongoose$Query<?this, this>;
   static findOneAndRemove(
     criteria: ?Object,
     options?: Object
-  ): Mongoose$Query<?this, this>,
+  ): Mongoose$Query<?this, this>;
   static findOneAndUpdate(
     criteria: ?Object,
     data: Object,
     options?: Object
-  ): Mongoose$Query<?this, this>,
+  ): Mongoose$Query<?this, this>;
   static findByIdAndRemove(
     id: MongoOrScalarId,
     options?: Object
-  ): Mongoose$Query<?this, this>,
+  ): Mongoose$Query<?this, this>;
   static findByIdAndUpdate(
     id: MongoOrScalarId,
     data: Object,
     options?: Object
-  ): Mongoose$Query<?this, this>,
-  static count(criteria: Object): Promise<number>,
-  static remove(criteria: Object): Promise<mixed>,
+  ): Mongoose$Query<?this, this>;
+  static count(criteria: Object): Promise<number>;
+  static remove(criteria: Object): Promise<mixed>;
   static update(
     criteria: Object,
     update: Object,
     options?: Object
-  ): Promise<UpdateResult> & { exec(): Promise<UpdateResult> },
+  ): Promise<UpdateResult> & { exec(): Promise<UpdateResult> };
   static updateOne(
     criteria: Object,
     update: Object,
     options?: Object
-  ): Promise<UpdateResult> & { exec(): Promise<UpdateResult> },
+  ): Promise<UpdateResult> & { exec(): Promise<UpdateResult> };
   static updateMany(
     criteria: Object,
     update: Object,
     options?: Object
-  ): Promise<UpdateResult> & { exec(): Promise<UpdateResult> },
-  static create(doc: $Shape<this> | Array<$Shape<this>>): Promise<this>,
-  static where(criteria?: Object): Mongoose$Query<this, this>,
-  static aggregate(pipeline: Object[]): Promise<any>,
-  static bulkWrite(ops: Object[]): Promise<any>,
-  static deleteMany(criteria: Object): Promise<any>,
-  static deleteOne(criteria: Object): Promise<any>,
-  static distinct(field: string, criteria?: Object): Promise<any>,
-  static ensureIndexes(opts?: Object): Promise<any>,
-  static hydrate(data: Object): Mongoose$Document,
-  static insertMany(docs: Object | Object[], opts?: Object): Promise<any>,
-  static mapReduce(o: Object): Promise<any>,
-  static collection: Mongoose$Collection,
-  static db: any,
-  static modelName: string,
-  static schema: Mongoose$Schema<this>,
-  static on(type: string, cb: Function): void,
+  ): Promise<UpdateResult> & { exec(): Promise<UpdateResult> };
+  static create(doc: $Shape<this> | Array<$Shape<this>>): Promise<this>;
+  static where(criteria?: Object): Mongoose$Query<this, this>;
+  static aggregate(pipeline: Object[]): Promise<any>;
+  static bulkWrite(ops: Object[]): Promise<any>;
+  static deleteMany(criteria: Object): Promise<any>;
+  static deleteOne(criteria: Object): Promise<any>;
+  static distinct(field: string, criteria?: Object): Promise<any>;
+  static ensureIndexes(opts?: Object): Promise<any>;
+  static hydrate(data: Object): Mongoose$Document;
+  static insertMany(docs: Object | Object[], opts?: Object): Promise<any>;
+  static mapReduce(o: Object): Promise<any>;
+  static collection: Mongoose$Collection;
+  static db: any;
+  static modelName: string;
+  static schema: Mongoose$Schema<this>;
+  static on(type: string, cb: Function): void;
 
-  constructor(data?: $Shape<this>): this,
-  id: string | number,
-  _id: MongoOrScalarId,
-  __v?: number,
-  save(): Promise<this>,
-  update(update: Object, options?: Object): Promise<UpdateResult>,
-  set(data: $Shape<this>): this,
-  set(path: string, val: any, type?: any, options?: Object): this,
-  isSelected(fieldName: string): boolean,
-  validate(opts?: Object): Promise<*>,
-  validateSync(pathsToValidate: string | string[]): Error | void,
-  errors: Object,
-  isNew: boolean,
-  schema: Mongoose$Schema<this>,
+  constructor(data?: $Shape<this>): this;
+  id: string | number;
+  _id: MongoOrScalarId;
+  __v?: number;
+  save(): Promise<this>;
+  update(update: Object, options?: Object): Promise<UpdateResult>;
+  set(data: $Shape<this>): this;
+  set(path: string, val: any, type?: any, options?: Object): this;
+  isSelected(fieldName: string): boolean;
+  validate(opts?: Object): Promise<*>;
+  validateSync(pathsToValidate: string | string[]): Error | void;
+  errors: Object;
+  isNew: boolean;
+  schema: Mongoose$Schema<this>;
 
-  $ignore(path: string): void,
-  $isDefault(path: string): boolean,
-  depopulate(path: string): this,
-  equals(doc: Mongoose$Document): boolean,
-  get(path: string, type?: Object): any,
+  $ignore(path: string): void;
+  $isDefault(path: string): boolean;
+  depopulate(path: string): this;
+  equals(doc: Mongoose$Document): boolean;
+  get(path: string, type?: Object): any;
 
-  inspect(): Object,
+  inspect(): Object;
   invalidate(
     path: string,
     errorMsg: string | Error,
     value?: any,
     kind?: string
-  ): ValidationError,
-  isDirectModified(path: string): boolean,
-  isDirectSelected(path: string): boolean,
-  isInit(path: string): boolean,
-  isModified(path?: string): boolean,
-  isSelected(path: string): boolean,
-  markModified(path: string): void,
-  modifiedPaths(): string[],
+  ): ValidationError;
+  isDirectModified(path: string): boolean;
+  isDirectSelected(path: string): boolean;
+  isInit(path: string): boolean;
+  isModified(path?: string): boolean;
+  isSelected(path: string): boolean;
+  markModified(path: string): void;
+  modifiedPaths(): string[];
 
-  populate(path?: string | Object, cb?: (err: Error, doc: this) => void): void,
-  execPopulate(): Promise<this>,
-  populated(path: string): ?MongoOrScalarId,
-  toJSON(options: ToObjectOpts<this>): Object,
-  toObject(options: ToObjectOpts<this>): Object,
-  toString(): string,
-  unmarkModified(path: string): void,
+  populate(path?: string | Object, cb?: (err: Error, doc: this) => void): void;
+  execPopulate(): Promise<this>;
+  populated(path: string): ?MongoOrScalarId;
+  toJSON(options: ToObjectOpts<this>): Object;
+  toObject(options: ToObjectOpts<this>): Object;
+  toString(): string;
+  unmarkModified(path: string): void;
 
-  increment(): void,
-  remove(): Promise<this>
+  increment(): void;
+  remove(): Promise<this>;
 }
 
 type ValidationError = Object;
@@ -302,14 +302,14 @@ type ValidationError = Object;
 // For better dropdown suggesting used `Mongoose$Query<Result, Doc>`
 //   Fast check: `User.find().limit(5).` does not suggest if used `this`
 declare class Mongoose$Query<Result, Doc> extends Promise<Result> {
-  exec(): Promise<Result>,
-  where(criteria: Object): Mongoose$Query<Result, Doc>,
-  sort(fields: Object | string): Mongoose$Query<Result, Doc>,
-  limit(n: number): Mongoose$Query<Result, Doc>,
-  skip(n: number): Mongoose$Query<Result, Doc>,
-  select(fields: MongooseProjection): Mongoose$Query<Result, Doc>,
-  setOptions(opts: Object): Mongoose$Query<Result, Doc>,
-  update(data: Object): Mongoose$Query<any, Doc>,
+  exec(): Promise<Result>;
+  where(criteria: Object): Mongoose$Query<Result, Doc>;
+  sort(fields: Object | string): Mongoose$Query<Result, Doc>;
+  limit(n: number): Mongoose$Query<Result, Doc>;
+  skip(n: number): Mongoose$Query<Result, Doc>;
+  select(fields: MongooseProjection): Mongoose$Query<Result, Doc>;
+  setOptions(opts: Object): Mongoose$Query<Result, Doc>;
+  update(data: Object): Mongoose$Query<any, Doc>;
   update(
     criteria: Object,
     data: Object,
@@ -322,34 +322,34 @@ declare class Mongoose$Query<Result, Doc> extends Promise<Result> {
       strict?: boolean,
       overwrite?: boolean
     }
-  ): Mongoose$Query<any, Doc>,
+  ): Mongoose$Query<any, Doc>;
   updateMany(
     criteria: Object,
     data: Object,
     opts?: Object
-  ): Mongoose$Query<any, Doc>,
+  ): Mongoose$Query<any, Doc>;
   updateOne(
     criteria: Object,
     data: Object,
     opts?: Object
-  ): Mongoose$Query<any, Doc>,
-  remove(criteria?: Object): Mongoose$Query<?Doc, Doc>,
-  count(criteria?: Object): Promise<number>,
-  schema: Mongoose$Schema<Doc>,
-  $where(fn: Function): Mongoose$Query<Result, Doc>,
-  batchSize(n: number): Mongoose$Query<Result, Doc>,
-  collation(value: Object): Mongoose$Query<Result, Doc>,
-  comment(val: string): Mongoose$Query<Result, Doc>,
-  cursor(opts: Object): Mongoose$QueryCursor<Doc>,
-  deleteMany(criteria?: Object): Mongoose$Query<any, Doc>,
-  deleteOne(criteria?: Object): Mongoose$Query<any, Doc>,
-  distinct(field: string, criteria?: Object): Mongoose$Query<Result, Doc>,
-  find(criteria: Object): Mongoose$Query<Result, Doc>,
-  findOne(criteria?: Object, projection?: Object): Mongoose$Query<?Doc, Doc>,
+  ): Mongoose$Query<any, Doc>;
+  remove(criteria?: Object): Mongoose$Query<?Doc, Doc>;
+  count(criteria?: Object): Promise<number>;
+  schema: Mongoose$Schema<Doc>;
+  $where(fn: Function): Mongoose$Query<Result, Doc>;
+  batchSize(n: number): Mongoose$Query<Result, Doc>;
+  collation(value: Object): Mongoose$Query<Result, Doc>;
+  comment(val: string): Mongoose$Query<Result, Doc>;
+  cursor(opts: Object): Mongoose$QueryCursor<Doc>;
+  deleteMany(criteria?: Object): Mongoose$Query<any, Doc>;
+  deleteOne(criteria?: Object): Mongoose$Query<any, Doc>;
+  distinct(field: string, criteria?: Object): Mongoose$Query<Result, Doc>;
+  find(criteria: Object): Mongoose$Query<Result, Doc>;
+  findOne(criteria?: Object, projection?: Object): Mongoose$Query<?Doc, Doc>;
   findOneAndRemove(
     criteria: Object,
     opts?: { sort?: Object, maxTimeMS?: number, passRawResult?: boolean }
-  ): Mongoose$Query<?Doc, Doc>,
+  ): Mongoose$Query<?Doc, Doc>;
   findOneAndUpdate(
     criteria: Object,
     data: Object,
@@ -363,19 +363,19 @@ declare class Mongoose$Query<Result, Doc> extends Promise<Result> {
       passRawResult?: boolean,
       runSettersOnQuery?: boolean
     }
-  ): Mongoose$Query<?Doc, Doc>,
-  getQuery(): Object,
-  getUpdate(): Object,
-  hint(index: Object): Mongoose$Query<Result, Doc>,
-  lean(passPlainObject?: boolean): Mongoose$Query<any, Doc>,
-  maxScan(n: number): Mongoose$Query<Result, Doc>,
-  populate(path: string): Mongoose$Query<Result, Doc>,
+  ): Mongoose$Query<?Doc, Doc>;
+  getQuery(): Object;
+  getUpdate(): Object;
+  hint(index: Object): Mongoose$Query<Result, Doc>;
+  lean(passPlainObject?: boolean): Mongoose$Query<any, Doc>;
+  maxScan(n: number): Mongoose$Query<Result, Doc>;
+  populate(path: string): Mongoose$Query<Result, Doc>;
   populate(obj: {
     path: string,
     select?: string,
     match?: Object,
     options?: Object
-  }): Mongoose$Query<Result, Doc>,
+  }): Mongoose$Query<Result, Doc>;
   read(
     pref:
       | "primary"
@@ -384,50 +384,50 @@ declare class Mongoose$Query<Result, Doc> extends Promise<Result> {
       | "secondaryPreferred"
       | "nearest",
     tags?: Object[]
-  ): Mongoose$Query<Result, Doc>,
-  selected(): boolean,
-  selectedExclusively(): boolean,
-  selectedInclusively(): boolean,
-  setOptions(options: Object): Mongoose$Query<Result, Doc>,
+  ): Mongoose$Query<Result, Doc>;
+  selected(): boolean;
+  selectedExclusively(): boolean;
+  selectedInclusively(): boolean;
+  setOptions(options: Object): Mongoose$Query<Result, Doc>;
   slice(
     path: string,
     val: number | [number, number]
-  ): Mongoose$Query<Result, Doc>,
-  snapshot(bool: boolean): Mongoose$Query<Result, Doc>,
-  stream(opts?: Object): Mongoose$QueryStream,
-  tailable(bool: boolean, opts?: Object): Mongoose$Query<Result, Doc>,
-  toConstructor(): Class<Mongoose$Query<Result, Doc>>
+  ): Mongoose$Query<Result, Doc>;
+  snapshot(bool: boolean): Mongoose$Query<Result, Doc>;
+  stream(opts?: Object): Mongoose$QueryStream;
+  tailable(bool: boolean, opts?: Object): Mongoose$Query<Result, Doc>;
+  toConstructor(): Class<Mongoose$Query<Result, Doc>>;
 }
 
 declare class Mongoose$QueryCursor<Doc> {
-  on(type: "data" | "end" | string, cb: Function): void,
-  next(cb: (err: Error, doc: Doc) => void): void
+  on(type: "data" | "end" | string, cb: Function): void;
+  next(cb: (err: Error, doc: Doc) => void): void;
 }
 
 declare class Mongoose$QueryStream {
-  destroy(): void,
-  pause(): void,
-  pipe(): void,
-  resume(): void,
-  paused: boolean,
-  readable: boolean,
-  on(event: "data" | "error" | "close", cb: Function): void
+  destroy(): void;
+  pause(): void;
+  pipe(): void;
+  resume(): void;
+  paused: boolean;
+  readable: boolean;
+  on(event: "data" | "error" | "close", cb: Function): void;
 }
 
 declare class Mongoose$Collection {
-  constructor(name: string, conn: Mongoose$Connection, opts?: Object): this,
-  ensureIndex(): any,
-  find(): any,
-  findAndModify(): any,
-  findOne(): any,
-  getIndexes(): any,
-  inser(): any,
-  mapReduce(): any,
-  save(): any,
-  update(): any,
-  collectionName: string,
-  conn: Mongoose$Connection,
-  name: string
+  constructor(name: string, conn: Mongoose$Connection, opts?: Object): this;
+  ensureIndex(): any;
+  find(): any;
+  findAndModify(): any;
+  findOne(): any;
+  getIndexes(): any;
+  inser(): any;
+  mapReduce(): any;
+  save(): any;
+  update(): any;
+  collectionName: string;
+  conn: Mongoose$Connection;
+  name: string;
 }
 
 type ConnectionConnectOpts = {
@@ -443,36 +443,36 @@ type ConnectionConnectOpts = {
 type ConnectionEventTypes = "error" | "open" | "disconnected" | string;
 
 declare class Mongoose$Connection {
-  constructor(): this,
-  close(): Promise<any>,
-  connect(uri: string, opts?: ConnectionConnectOpts): void,
-  openUri(uri: string, opts?: ConnectionConnectOpts): void,
+  constructor(): this;
+  close(): Promise<any>;
+  connect(uri: string, opts?: ConnectionConnectOpts): void;
+  openUri(uri: string, opts?: ConnectionConnectOpts): void;
   model<Doc>(
     name: string,
     schema: Mongoose$Schema<Doc>,
     collection?: Mongoose$Collection
-  ): Class<Doc>,
-  collection(name: string): Mongoose$Collection,
-  modelNames(): string[],
-  config: Object,
-  db: any,
-  collections: Mongoose$Collection[],
-  readyState: number,
+  ): Class<Doc>;
+  collection(name: string): Mongoose$Collection;
+  modelNames(): string[];
+  config: Object;
+  db: any;
+  collections: Mongoose$Collection[];
+  readyState: number;
 
   // EventEmitter
-  addListener(event: ConnectionEventTypes, listener: Function): this,
-  emit(event: ConnectionEventTypes, ...args: Array<any>): boolean,
-  eventNames(): Array<ConnectionEventTypes>,
-  listeners(event: ConnectionEventTypes): Array<Function>,
-  listenerCount(event: ConnectionEventTypes): number,
-  on(event: ConnectionEventTypes, listener: Function): this,
-  once(event: ConnectionEventTypes, listener: Function): this,
-  prependListener(event: ConnectionEventTypes, listener: Function): this,
-  prependOnceListener(event: ConnectionEventTypes, listener: Function): this,
-  removeAllListeners(event?: ConnectionEventTypes): this,
-  removeListener(event: ConnectionEventTypes, listener: Function): this,
-  setMaxListeners(n: number): this,
-  getMaxListeners(): number
+  addListener(event: ConnectionEventTypes, listener: Function): this;
+  emit(event: ConnectionEventTypes, ...args: Array<any>): boolean;
+  eventNames(): Array<ConnectionEventTypes>;
+  listeners(event: ConnectionEventTypes): Array<Function>;
+  listenerCount(event: ConnectionEventTypes): number;
+  on(event: ConnectionEventTypes, listener: Function): this;
+  once(event: ConnectionEventTypes, listener: Function): this;
+  prependListener(event: ConnectionEventTypes, listener: Function): this;
+  prependOnceListener(event: ConnectionEventTypes, listener: Function): this;
+  removeAllListeners(event?: ConnectionEventTypes): this;
+  removeListener(event: ConnectionEventTypes, listener: Function): this;
+  setMaxListeners(n: number): this;
+  getMaxListeners(): number;
 }
 
 declare module "mongoose" {
@@ -496,6 +496,8 @@ declare module "mongoose" {
     set: (key: string, value: string | Function | boolean) => void,
     connect: Function,
     connection: Mongoose$Connection,
-    Query: typeof Mongoose$Query
+    connections: Mongoose$Connection[],
+    Query: typeof Mongoose$Query,
+    disconnect: (fn?: (error: any) => void) => Promise<void>
   };
 }

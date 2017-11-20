@@ -269,6 +269,9 @@ declare module "chai" {
       delta: number,
       msg?: string
     ): void;
+    
+    // chai-immutable
+    static sizeOf(val: mixed, length: number): void;
   }
 
   declare var config: {

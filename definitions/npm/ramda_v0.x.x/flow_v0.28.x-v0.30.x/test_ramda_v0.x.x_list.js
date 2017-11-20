@@ -49,6 +49,8 @@ const str: string = 'hello world'
   const findxs6:number = _.findLastIndex(_.propEq('a', 2), os)
   const findxs7:number = _.findLastIndex(_.propEq('a', 4))(os)
 
+  const forEachObj = _.forEachObjIndexed((value, key) => {}, {x: 1, y: 2})
+
   const s: Array<number> = filter(x => x > 1, [ 1, 2 ])
   const s1: Array<string> = _.filter(x => x === '2', [ '2', '3' ])
   const s3: {[key: string]: string} = _.filter(x => x === '2', { a:'2', b:'3' })

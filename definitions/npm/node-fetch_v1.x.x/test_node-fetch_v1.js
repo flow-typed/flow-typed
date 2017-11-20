@@ -10,7 +10,10 @@ import type { Readable } from 'stream';
 (nodeFetch(123): Promise<Response>);
 
 nodeFetch('foo', {
-    method: 'GET'
+    method: 'GET',
+    headers: {
+      Authorization: "Foo",
+    },
 });
 
 nodeFetch('foo', {

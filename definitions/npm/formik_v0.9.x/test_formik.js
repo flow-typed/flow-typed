@@ -1,15 +1,30 @@
 // @flow
 
 import * as React from "react";
-import { Formik, Form, Field, type FieldProps } from "formik";
+import {
+  Formik,
+  Form,
+  Field,
+  type FieldProps,
+  type FormikActions,
+  type FormikConfig
+} from "formik";
 
 <Formik
   initialValues={{ foo: "hi" }}
-  onSubmit={(values, formikActions) => {
+  onSubmit={(values: *, formikActions: FormikActions<*>) => {
     values.foo;
     values.bar;
   }}
 />;
+
+const config1: FormikConfig = {
+  onSubmit: (values: *, formikActions: FormikActions<*>) => {}
+};
+// $ExpectError
+const configRequiresOnSubmit: FormikConfig = {
+  onSubmit: null
+};
 
 const CustomInputComponent = (props: FieldProps) => <input />;
 

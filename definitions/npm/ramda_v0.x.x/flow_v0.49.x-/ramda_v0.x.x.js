@@ -155,29 +155,14 @@ declare module ramda {
     ) => CurriedFunction6<A, B, C, D, E, F, R>);
 
   declare type Partial = (<A, R>((...r: [A]) => R, args: [A]) => () => R) &
-    (<A, B, R>((...r: [A, B]) => R, args: [A]) => CurriedFunction1<B, R>) &
+    (<A, B, R>((...r: [A, B]) => R, args: [A]) => B => R) &
     (<A, B, R>((...r: [A, B]) => R, args: [A, B]) => () => R) &
-    (<A, B, C, R>(
-      (...r: [A, B, C]) => R,
-      args: [A]
-    ) => CurriedFunction2<B, C, R>) &
-    (<A, B, C, R>(
-      (...r: [A, B, C]) => R,
-      args: [A, B]
-    ) => CurriedFunction1<C, R>) &
+    (<A, B, C, R>((...r: [A, B, C]) => R, args: [A]) => (B, C) => R) &
+    (<A, B, C, R>((...r: [A, B, C]) => R, args: [A, B]) => C => R) &
     (<A, B, C, R>((...r: [A, B, C]) => R, args: [A, B, C]) => () => R) &
-    (<A, B, C, D, R>(
-      (...r: [A, B, C, D]) => R,
-      args: [A]
-    ) => CurriedFunction3<B, C, D, R>) &
-    (<A, B, C, D, R>(
-      (...r: [A, B, C, D]) => R,
-      args: [A, B]
-    ) => CurriedFunction2<C, D, R>) &
-    (<A, B, C, D, R>(
-      (...r: [A, B, C, D]) => R,
-      args: [A, B, C]
-    ) => CurriedFunction1<D, R>) &
+    (<A, B, C, D, R>((...r: [A, B, C, D]) => R, args: [A]) => (B, C, D) => R) &
+    (<A, B, C, D, R>((...r: [A, B, C, D]) => R, args: [A, B]) => (C, D) => R) &
+    (<A, B, C, D, R>((...r: [A, B, C, D]) => R, args: [A, B, C]) => D => R) &
     (<A, B, C, D, R>(
       (...r: [A, B, C, D]) => R,
       args: [A, B, C, D]
@@ -185,19 +170,19 @@ declare module ramda {
     (<A, B, C, D, E, R>(
       (...r: [A, B, C, D, E]) => R,
       args: [A]
-    ) => CurriedFunction4<B, C, D, E, R>) &
+    ) => (B, C, D, E) => R) &
     (<A, B, C, D, E, R>(
       (...r: [A, B, C, D, E]) => R,
       args: [A, B]
-    ) => CurriedFunction3<C, D, E, R>) &
+    ) => (C, D, E) => R) &
     (<A, B, C, D, E, R>(
       (...r: [A, B, C, D, E]) => R,
       args: [A, B, C]
-    ) => CurriedFunction2<D, E, R>) &
+    ) => (D, E) => R) &
     (<A, B, C, D, E, R>(
       (...r: [A, B, C, D, E]) => R,
       args: [A, B, C, D]
-    ) => CurriedFunction1<E, R>) &
+    ) => E => R) &
     (<A, B, C, D, E, R>(
       (...r: [A, B, C, D, E]) => R,
       args: [A, B, C, D, E]
@@ -205,26 +190,122 @@ declare module ramda {
     (<A, B, C, D, E, F, R>(
       (...r: [A, B, C, D, E, F]) => R,
       args: [A]
-    ) => CurriedFunction5<B, C, D, E, F, R>) &
+    ) => (B, C, D, E, F) => R) &
     (<A, B, C, D, E, F, R>(
       (...r: [A, B, C, D, E, F]) => R,
       args: [A, B]
-    ) => CurriedFunction4<C, D, E, F, R>) &
+    ) => (C, D, E, F) => R) &
     (<A, B, C, D, E, F, R>(
       (...r: [A, B, C, D, E, F]) => R,
       args: [A, B, C]
-    ) => CurriedFunction3<D, E, F, R>) &
+    ) => (D, E, F) => R) &
     (<A, B, C, D, E, F, R>(
       (...r: [A, B, C, D, E, F]) => R,
       args: [A, B, C, D]
-    ) => CurriedFunction2<E, F, R>) &
+    ) => (E, F) => R) &
     (<A, B, C, D, E, F, R>(
       (...r: [A, B, C, D, E, F]) => R,
       args: [A, B, C, D, E]
-    ) => CurriedFunction1<F, R>) &
+    ) => F => R) &
     (<A, B, C, D, E, F, R>(
       (...r: [A, B, C, D, E, F]) => R,
       args: [A, B, C, D, E, F]
+    ) => () => R) &
+    (<A, B, C, D, E, F, G, R>(
+      (...r: [A, B, C, D, E, F, G]) => R,
+      args: [A]
+    ) => (B, C, D, E, F, G) => R) &
+    (<A, B, C, D, E, F, G, R>(
+      (...r: [A, B, C, D, E, F, G]) => R,
+      args: [A, B]
+    ) => (C, D, E, F, G) => R) &
+    (<A, B, C, D, E, F, G, R>(
+      (...r: [A, B, C, D, E, F, G]) => R,
+      args: [A, B, C]
+    ) => (D, E, F, G) => R) &
+    (<A, B, C, D, E, F, G, R>(
+      (...r: [A, B, C, D, E, F, G]) => R,
+      args: [A, B, C, D]
+    ) => (E, F, G) => R) &
+    (<A, B, C, D, E, F, G, R>(
+      (...r: [A, B, C, D, E, F, G]) => R,
+      args: [A, B, C, D, E]
+    ) => (F, G) => R) &
+    (<A, B, C, D, E, F, G, R>(
+      (...r: [A, B, C, D, E, F, G]) => R,
+      args: [A, B, C, D, E, F]
+    ) => G => R) &
+    (<A, B, C, D, E, F, G, R>(
+      (...r: [A, B, C, D, E, F, G]) => R,
+      args: [A, B, C, D, E, F, G]
+    ) => () => R) &
+    (<A, B, C, D, E, F, G, H, R>(
+      (...r: [A, B, C, D, E, F, G, H]) => R,
+      args: [A]
+    ) => (B, C, D, E, F, G, H) => R) &
+    (<A, B, C, D, E, F, G, H, R>(
+      (...r: [A, B, C, D, E, F, G, H]) => R,
+      args: [A, B]
+    ) => (C, D, E, F, G, H) => R) &
+    (<A, B, C, D, E, F, G, H, R>(
+      (...r: [A, B, C, D, E, F, G, H]) => R,
+      args: [A, B, C]
+    ) => (D, E, F, G, H) => R) &
+    (<A, B, C, D, E, F, G, H, R>(
+      (...r: [A, B, C, D, E, F, G, H]) => R,
+      args: [A, B, C, D]
+    ) => (E, F, G, H) => R) &
+    (<A, B, C, D, E, F, G, H, R>(
+      (...r: [A, B, C, D, E, F, G, H]) => R,
+      args: [A, B, C, D, E]
+    ) => (F, G, H) => R) &
+    (<A, B, C, D, E, F, G, H, R>(
+      (...r: [A, B, C, D, E, F, G, H]) => R,
+      args: [A, B, C, D, E, F]
+    ) => (G, H) => R) &
+    (<A, B, C, D, E, F, G, H, R>(
+      (...r: [A, B, C, D, E, F, G, H]) => R,
+      args: [A, B, C, D, E, F, G]
+    ) => H => R) &
+    (<A, B, C, D, E, F, G, H, R>(
+      (...r: [A, B, C, D, E, F, G, H]) => R,
+      args: [A, B, C, D, E, F, G, H]
+    ) => () => R) &
+    (<A, B, C, D, E, F, G, H, I, R>(
+      (...r: [A, B, C, D, E, F, G, H, I]) => R,
+      args: [A]
+    ) => (B, C, D, E, F, G, H, I) => R) &
+    (<A, B, C, D, E, F, G, H, I, R>(
+      (...r: [A, B, C, D, E, F, G, H, I]) => R,
+      args: [A, B]
+    ) => (C, D, E, F, G, H, I) => R) &
+    (<A, B, C, D, E, F, G, H, I, R>(
+      (...r: [A, B, C, D, E, F, G, H, I]) => R,
+      args: [A, B, C]
+    ) => (D, E, F, G, H, I) => R) &
+    (<A, B, C, D, E, F, G, H, I, R>(
+      (...r: [A, B, C, D, E, F, G, H, I]) => R,
+      args: [A, B, C, D]
+    ) => (E, F, G, H, I) => R) &
+    (<A, B, C, D, E, F, G, H, I, R>(
+      (...r: [A, B, C, D, E, F, G, H, I]) => R,
+      args: [A, B, C, D, E]
+    ) => (F, G, H, I) => R) &
+    (<A, B, C, D, E, F, G, H, I, R>(
+      (...r: [A, B, C, D, E, F, G, H, I]) => R,
+      args: [A, B, C, D, E, F]
+    ) => (G, H, I) => R) &
+    (<A, B, C, D, E, F, G, H, I, R>(
+      (...r: [A, B, C, D, E, F, G, H, I]) => R,
+      args: [A, B, C, D, E, F, G]
+    ) => (H, I) => R) &
+    (<A, B, C, D, E, F, G, H, I, R>(
+      (...r: [A, B, C, D, E, F, G, H, I]) => R,
+      args: [A, B, C, D, E, F, G, H]
+    ) => I => R) &
+    (<A, B, C, D, E, F, G, H, I, R>(
+      (...r: [A, B, C, D, E, F, G, H, I]) => R,
+      args: [A, B, C, D, E, F, G, H, I]
     ) => () => R);
 
   declare type Pipe = (<A, B, C, D, E, F, G>(
@@ -247,7 +328,6 @@ declare module ramda {
     (<A, B, C, D, E>(
       ab: UnaryFn<A, B>,
       bc: UnaryFn<B, C>,
-      cd: UnaryFn<C, D>,
       de: UnaryFn<D, E>,
       ...rest: Array<void>
     ) => UnaryFn<A, E>) &
@@ -369,16 +449,16 @@ declare module ramda {
   }
 
   /**
-  * DONE:
-  * Function*
-  * List*
-  * Logic
-  * Math
-  * Object*
-  * Relation
-  * String
-  * Type
-  */
+   * DONE:
+   * Function*
+   * List*
+   * Logic
+   * Math
+   * Object*
+   * Relation
+   * String
+   * Type
+   */
 
   declare var compose: Compose;
   declare var pipe: Pipe;
@@ -430,8 +510,8 @@ declare module ramda {
   declare function type(x: ?any): string;
   declare function isArrayLike(x: any): boolean;
 
-  declare function isNil(x: void | null): true;
-  declare function isNil(x: mixed): false;
+  declare function isNil(x: mixed): boolean %checks(x === undefined ||
+    x === null);
 
   // *List
   declare function adjust<T>(
@@ -660,6 +740,16 @@ declare module ramda {
     fn: (x: T) => ?V,
     ...rest: Array<void>
   ): (xs: Array<T>) => Array<T>;
+
+  declare function forEachObjIndexed<O: Object, A, B>(
+    fn: (val: A, key: string, o: O) => B,
+    o: { [key: string]: A }
+  ): O;
+
+  declare function forEachObjIndexed<O: Object, A, B>(
+    fn: (val: A, key: string, o: O) => B,
+    ...args: Array<void>
+  ): (o: { [key: string]: A }) => O;
 
   declare function lastIndexOf<E>(x: E, xs: Array<E>): number;
   declare function lastIndexOf<E>(
@@ -944,17 +1034,17 @@ declare module ramda {
   ): { [key: string]: B };
 
   declare function reduceRight<A, B>(
-    fn: (acc: A, elem: B) => A,
+    fn: (elem: B, acc: A) => A,
     ...rest: Array<void>
   ): ((init: A, xs: Array<B>) => A) &
     ((init: A, ...rest: Array<void>) => (xs: Array<B>) => A);
   declare function reduceRight<A, B>(
-    fn: (acc: A, elem: B) => A,
+    fn: (elem: B, acc: A) => A,
     init: A,
     ...rest: Array<void>
   ): (xs: Array<B>) => A;
   declare function reduceRight<A, B>(
-    fn: (acc: A, elem: B) => A,
+    fn: (elem: B, acc: A) => A,
     init: A,
     xs: Array<B>
   ): A;
@@ -1034,17 +1124,22 @@ declare module ramda {
   ): (y: A) => boolean;
   declare function eqBy<A, B>(fn: (x: A) => B, x: A, y: A): boolean;
 
-  declare function propEq(
-    prop: string,
-    ...rest: Array<void>
-  ): ((val: *, o: { [k: string]: * }) => boolean) &
-    ((val: *, ...rest: Array<void>) => (o: { [k: string]: * }) => boolean);
-  declare function propEq(
-    prop: string,
-    val: *,
-    ...rest: Array<void>
-  ): (o: { [k: string]: * }) => boolean;
-  declare function propEq(prop: string, val: *, o: { [k: string]: * }): boolean;
+  // Flow cares about the order in which these appear. Generally function
+  // siguatures should go from smallest arity to largest arity.
+  declare type PropEq = (<T>(
+    prop: $Keys<T>
+  ) => ((val: mixed) => (obj: T) => boolean) &
+    ((val: mixed, obj: T) => boolean)) &
+    (<T>(prop: $Keys<T>, val: mixed) => (obj: T) => boolean) &
+    (<T>(prop: $Keys<T>, val: mixed, obj: T) => boolean) &
+    // Array variants.
+    (<T>(
+      prop: number
+    ) => ((val: mixed) => (obj: Array<*>) => boolean) &
+      ((val: mixed, obj: Array<*>) => boolean)) &
+    (<T>(prop: number, val: mixed) => (obj: Array<*>) => boolean) &
+    (<T>(prop: number, val: mixed, obj: Array<*>) => boolean);
+  declare var propEq: PropEq;
 
   declare function pathEq(
     path: Array<string>,
@@ -1515,14 +1610,14 @@ declare module ramda {
 
   declare function keysIn(o: Object): Array<string>;
 
-  declare function props<T, O: { [k: string]: T }>(
-    keys: Array<$Keys<O>>,
+  declare function props<T: string, O>(
+    keys: Array<T>,
     ...rest: Array<void>
-  ): (o: O) => Array<?T>;
-  declare function props<T, O: { [k: string]: T }>(
-    keys: Array<$Keys<O>>,
+  ): (o: O) => Array<$ElementType<O, T>>;
+  declare function props<T: string, O>(
+    keys: Array<T>,
     o: O
-  ): Array<?T>;
+  ): Array<$ElementType<O, T>>;
 
   // TODO set
 

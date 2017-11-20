@@ -119,6 +119,9 @@ declare class $npm$firebase$auth$Auth {
     phoneNumber: string,
     applicationVerifier: $npm$firebase$auth$ApplicationVerifier
   ): Promise<$npm$firebase$auth$ConfirmationResult>;
+  signInWithPopup(
+    provider: $npm$firebase$auth$AuthProvider
+  ): Promise<$npm$firebase$auth$UserCredential>;
   signOut(): Promise<void>;
   verifyIdToken(idToken: string): Promise<Object>;
   verifyPasswordResetCode(code: string): Promise<string>;

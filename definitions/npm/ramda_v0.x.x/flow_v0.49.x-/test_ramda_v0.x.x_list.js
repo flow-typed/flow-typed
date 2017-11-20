@@ -75,6 +75,8 @@ const str: string = "hello world";
   const s7: number = _.findIndex(x => x === "2", { a: "1", b: "2" });
   const forEachxs = _.forEach(x => console.log(x), ns);
 
+  const forEachObj = _.forEachObjIndexed((value, key) => {}, {x: 1, y: 2});
+
   const groupedBy: { [k: string]: Array<number> } = _.groupBy(
     x => (x > 1 ? "more" : "less"),
     ns
@@ -194,6 +196,18 @@ const str: string = "hello world";
   const redxs5: Array<string> = _.reduceRight(_.concat, [])(
     _.map(x => [x], ss)
   );
+  //$ExpectError
+  const redxs5a: string = _.reduceRight(
+    (acc: string, value: number): string => acc,
+    "",
+    ns
+  );
+  const redxs5b: string = _.reduceRight(
+    (value: number, acc: string): string => acc,
+    "",
+    ns
+  );
+
   const redxs6: Array<number> = _.scan(_.add)(10)(ns);
   const redxs7: Array<number> = _.scan(_.add, 10)(ns);
   const redxs8: Array<number> = _.scan(_.add)(10, ns);

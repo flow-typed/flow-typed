@@ -8,7 +8,7 @@ import isInFlowTypedRepo from "../lib/isInFlowTypedRepo";
 import { toSemverString as flowVerToSemverString } from "../lib/flowVersion";
 import { getDiff } from "../lib/git";
 
-import request from "request";
+import got from "got";
 import * as semver from "semver";
 import * as unzip from "unzip";
 import typeof Yargs from "yargs";
@@ -187,20 +187,21 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
           // Download the zip file
           await new Promise((res, rej) => {
             console.log("  Fetching flow-%s...", version);
-            const fileRequest = request({
-              url: binURL,
-              headers: {
-                "User-Agent":
-                  "flow-typed Test Runner " + "(github.com/flowtype/flow-typed)"
-              }
-            }).on("error", err => rej(err));
-
-            fileRequest.pipe(
-              fs.createWriteStream(zipPath).on("close", () => {
-                console.log("    flow-%s finished downloading.", version);
-                res();
+            got
+              .stream(binURL, {
+                headers: {
+                  "User-Agent":
+                    "flow-typed Test Runner " +
+                    "(github.com/flowtype/flow-typed)"
+                }
               })
-            );
+              .on("error", err => rej(err))
+              .pipe(
+                fs.createWriteStream(zipPath).on("close", () => {
+                  console.log("    flow-%s finished downloading.", version);
+                  res();
+                })
+              );
           });
 
           // Extract the flow binary

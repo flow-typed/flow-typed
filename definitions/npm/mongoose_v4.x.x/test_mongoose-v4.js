@@ -94,13 +94,15 @@ Admin.test(123);
 // $ExpectError
 Admin.test("123");
 
-const a = Admin.findOne({}).exec().then(ddd => {
-  if (ddd) {
-    ddd.checkPassword("123");
-    // $ExpectError
-    ddd.checkPassword(123);
-  }
-});
+const a = Admin.findOne({})
+  .exec()
+  .then(ddd => {
+    if (ddd) {
+      ddd.checkPassword("123");
+      // $ExpectError
+      ddd.checkPassword(123);
+    }
+  });
 
 const a1 = new Admin({ email: "123", token: "www" });
 // $ExpectError
@@ -125,3 +127,7 @@ export const UserSchema = new Schema(
     collection: "admin"
   }
 );
+
+mongoose.disconnect(err => console.log("err"));
+
+mongoose.disconnect().then(data => console.log(data));
