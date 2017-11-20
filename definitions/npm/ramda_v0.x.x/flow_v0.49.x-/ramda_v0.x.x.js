@@ -1365,8 +1365,8 @@ declare module ramda {
     src: { [k: string]: T }
   ): { [k: string]: T };
 
-  declare function evolve<A: Object>({ [string]: Function }, A): A;
-  declare function evolve<A: Object>({ [string]: Function }): A => A;
+  declare function evolve<A: Object>(NestedObject<Function>, A): A;
+  declare function evolve<A: Object>(NestedObject<Function>): A => A;
 
   declare function eqProps(
     key: string,
