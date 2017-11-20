@@ -1,12 +1,6 @@
 import mongoose from "mongoose";
 
-type MongoId =
-  | typeof mongoose.Types.ObjectId
-  | {
-      toString(): string
-    };
-
-type MongoOrScalarId = MongoId | string | number;
+type MongoId = BSONObjectId | string | number;
 
 type SchemaFields = {
   [fieldName: string]: any
@@ -63,10 +57,22 @@ type IndexOpts = {|
   weights?: Object
 |};
 
+declare class BSONObjectId {
+  constructor(id?: string | number | BSONObjectId): BSONObjectId;
+  toHexString(): string;
+  toString(): string;
+  toJSON(): string;
+  inspect(): string;
+  equals(otherId: string | number | BSONObjectId): boolean;
+  getTimestamp(): Date;
+
+  static createFromTime(time: number): BSONObjectId;
+  static createFromHexString(str: string): BSONObjectId;
+  static isValid(id: string | number | BSONObjectId): boolean;
+}
+
 type Mongoose$Types = {|
-  ObjectId: {
-    $call: (id: string | MongoId) => MongoId
-  },
+  ObjectId: Class<BSONObjectId>,
   Mixed: Object,
   Embedded: Object,
   Document: Object,
@@ -192,7 +198,7 @@ declare class Mongoose$Document {
     projection?: MongooseProjection
   ): Mongoose$Query<?this, this>;
   static findById(
-    id: MongoOrScalarId,
+    id: MongoId,
     projection?: MongooseProjection,
     options?: Object
   ): Mongoose$Query<?this, this>;
@@ -206,11 +212,11 @@ declare class Mongoose$Document {
     options?: Object
   ): Mongoose$Query<?this, this>;
   static findByIdAndRemove(
-    id: MongoOrScalarId,
+    id: MongoId,
     options?: Object
   ): Mongoose$Query<?this, this>;
   static findByIdAndUpdate(
-    id: MongoOrScalarId,
+    id: MongoId,
     data: Object,
     options?: Object
   ): Mongoose$Query<?this, this>;
@@ -250,7 +256,7 @@ declare class Mongoose$Document {
 
   constructor(data?: $Shape<this>): this;
   id: string | number;
-  _id: MongoOrScalarId;
+  _id: MongoId;
   __v?: number;
   save(): Promise<this>;
   update(update: Object, options?: Object): Promise<UpdateResult>;
@@ -286,9 +292,9 @@ declare class Mongoose$Document {
 
   populate(path?: string | Object, cb?: (err: Error, doc: this) => void): void;
   execPopulate(): Promise<this>;
-  populated(path: string): ?MongoOrScalarId;
-  toJSON(options: ToObjectOpts<this>): Object;
-  toObject(options: ToObjectOpts<this>): Object;
+  populated(path: string): ?MongoId;
+  toJSON(options?: ToObjectOpts<this>): Object;
+  toObject(options?: ToObjectOpts<this>): Object;
   toString(): string;
   unmarkModified(path: string): void;
 
@@ -421,7 +427,7 @@ declare class Mongoose$Collection {
   findAndModify(): any;
   findOne(): any;
   getIndexes(): any;
-  inser(): any;
+  insert(): any;
   mapReduce(): any;
   save(): any;
   update(): any;
@@ -448,7 +454,7 @@ declare class Mongoose$Connection {
   connect(uri: string, opts?: ConnectionConnectOpts): void;
   openUri(uri: string, opts?: ConnectionConnectOpts): void;
   model<Doc>(
-    name: string,
+    name: string | Doc,
     schema: Mongoose$Schema<Doc>,
     collection?: Mongoose$Collection
   ): Class<Doc>;
@@ -478,7 +484,7 @@ declare class Mongoose$Connection {
 declare module "mongoose" {
   declare export type MongooseConnection = Mongoose$Connection;
   declare export type MongoId = MongoId;
-  declare export type MongoOrScalarId = MongoOrScalarId;
+  declare export type BSONObjectId = BSONObjectId;
   declare export type MongooseQuery<Result, Doc> = Mongoose$Query<Result, Doc>;
   declare export type MongooseDocument = Mongoose$Document;
   declare export type MongooseModel = typeof Mongoose$Document;
@@ -498,6 +504,7 @@ declare module "mongoose" {
     connection: Mongoose$Connection,
     connections: Mongoose$Connection[],
     Query: typeof Mongoose$Query,
-    disconnect: (fn?: (error: any) => void) => Promise<void>
+    disconnect: (fn?: (error: any) => void) => Promise<void>,
+    Model: typeof Mongoose$Document
   };
 }
