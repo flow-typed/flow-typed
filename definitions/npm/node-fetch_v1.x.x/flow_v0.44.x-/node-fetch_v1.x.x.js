@@ -20,11 +20,13 @@ declare module 'node-fetch' {
     size: number
   }
 
+  declare type HeaderObject = {
+    [index: string]: string
+  }
+
   declare interface RequestInit {
     method?: string,
-    headers?: HeaderInit | {
-      [index: string]: string
-    },
+    headers?: HeaderObject,
     body?: BodyInit,
     redirect?: RequestRedirect,
 
