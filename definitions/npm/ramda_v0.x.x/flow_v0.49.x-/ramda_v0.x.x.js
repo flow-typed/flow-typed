@@ -1365,12 +1365,8 @@ declare module ramda {
     src: { [k: string]: T }
   ): { [k: string]: T };
 
-  // TODO: Started failing in v31... (Attempt to fix below)
-  // declare type __UnwrapNestedObjectR<T, U, V: NestedObject<(t: T) => U>> = U
-  // declare type UnwrapNestedObjectR<T> = UnwrapNestedObjectR<*, *, T>
-  //
-  // declare function evolve<R, T: NestedObject<(x:any) => R>>(fn: T, ...rest: Array<void>): (src: NestedObject<any>) => UnwrapNestedObjectR<T>;
-  // declare function evolve<R: NestedObject<(x:any) => R>>(fn: T, src: NestedObject<any>): UnwrapNestedObjectR<T>;
+  declare function evolve<A: Object>(NestedObject<Function>, A): A;
+  declare function evolve<A: Object>(NestedObject<Function>): A => A;
 
   declare function eqProps(
     key: string,
