@@ -22,23 +22,47 @@ declare module "koa-router" {
       methods?: Array<string>
     }): Router;
 
-    get(name: string, route: string, handler: KoaRouter$Middleware): this;
-    get(route: string, handler: KoaRouter$Middleware): this;
+    get(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    get(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    patch(name: string, route: string, handler: KoaRouter$Middleware): this;
-    patch(route: string, handler: KoaRouter$Middleware): this;
+    patch(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    patch(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    post(name: string, route: string, handler: KoaRouter$Middleware): this;
-    post(route: string, handler: KoaRouter$Middleware): this;
+    post(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    post(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    put(name: string, route: string, handler: KoaRouter$Middleware): this;
-    put(route: string, handler: KoaRouter$Middleware): this;
+    put(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    put(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    delete(name: string, route: string, handler: KoaRouter$Middleware): this;
-    delete(route: string, handler: KoaRouter$Middleware): this;
+    delete(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    delete(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    del(name: string, route: string, handler: KoaRouter$Middleware): this;
-    del(route: string, handler: KoaRouter$Middleware): this;
+    del(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    del(route: string | string[], handler: KoaRouter$Middleware): this;
 
     use(...middleware: Array<KoaRouter$Middleware>): this;
     use(
