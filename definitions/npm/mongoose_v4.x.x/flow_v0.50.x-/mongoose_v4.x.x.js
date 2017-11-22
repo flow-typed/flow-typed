@@ -455,7 +455,7 @@ declare class Mongoose$Connection {
   openUri(uri: string, opts?: ConnectionConnectOpts): void;
   model<Doc>(
     name: string | Doc,
-    schema: Mongoose$Schema<Doc>,
+    schema?: Mongoose$Schema<Doc>,
     collection?: Mongoose$Collection
   ): Class<Doc>;
   collection(name: string): Mongoose$Collection;
@@ -464,6 +464,7 @@ declare class Mongoose$Connection {
   db: any;
   collections: Mongoose$Collection[];
   readyState: number;
+  models: { [name: string]: Mongoose$Document };
 
   // EventEmitter
   addListener(event: ConnectionEventTypes, listener: Function): this;
@@ -498,7 +499,7 @@ declare module "mongoose" {
     Types: Mongoose$Types,
     Promise: any,
     model: $PropertyType<Mongoose$Connection, "model">,
-    createConnection(): Mongoose$Connection,
+    createConnection(uri?: string): Mongoose$Connection,
     set: (key: string, value: string | Function | boolean) => void,
     connect: Function,
     connection: Mongoose$Connection,
