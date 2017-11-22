@@ -17,9 +17,16 @@ const x: number = b.getOrElse(10);
 const y: string = d.getOrElse("boo");
 const z: Maybe<string> = e.ap(Maybe.of("a")).ap(Maybe.of("b"));
 
+const xy: Maybe<string> = Maybe.fromNullable(null).orElse(() =>
+  Maybe.Just("foo")
+);
+
 // --- Errors
 // $ExpectError
 b.chain(x => x + x);
 
 // $ExpectError
 const _z = e.ap("a");
+
+// $ExpectError
+const _xy: Maybe<string> = Maybe.fromNullable(null).orElse("foo");
