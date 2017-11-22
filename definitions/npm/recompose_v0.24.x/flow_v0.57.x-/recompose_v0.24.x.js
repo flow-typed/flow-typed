@@ -473,3 +473,7 @@ declare module "recompose/createEventHandler" {
     "createEventHandler"
   >;
 }
+
+declare module "recompose/compose" {
+  declare module.exports: $PropertyType<$Exports<"recompose">, "compose">;
+}
