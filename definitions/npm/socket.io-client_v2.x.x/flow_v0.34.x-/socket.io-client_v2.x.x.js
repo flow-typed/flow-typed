@@ -9,54 +9,66 @@ declare module "socket.io-client" {
     reconnectionDelayMax: number,
     randomizationFactor: number,
     timeout: number,
+    autoConnect: boolean,
+    query: { [string]: string },
     parser: any
   }>;
 
-  declare type LookupOptions = $Shape<{ forceNew: boolean }>;
+  declare type SocketOptions = $Shape<{
+    query: string
+  }>;
 
-  declare type SocketOptions = $Shape<{ query: string }>;
-
-  declare class Emitter {
-    on(event: string, cb: Callback): this;
-    addEventListener(event: string, cb: Callback): this;
-    once(event: string, cb: Callback): this;
-    off(event: string, cb: Callback): this;
-    removeListener(event: string, cb: Callback): this;
-    removeAllListeners(event: string, cb: Callback): this;
-    removeEventListener(event: string, cb: Callback): this;
-    emit(event: string, payload: mixed): this;
+  declare class Emitter<T> {
+    on(event: string, cb: Callback): T;
+    addEventListener(event: string, cb: Callback): T;
+    once(event: string, cb: Callback): T;
+    off(event: string, cb: Callback): T;
+    removeListener(event: string, cb: Callback): T;
+    removeAllListeners(event: string, cb: Callback): T;
+    removeEventListener(event: string, cb: Callback): T;
+    emit(event: string, payload: mixed): T;
     listeners(event: string): Callback[];
     hasListeners(event: string): boolean;
   }
 
-  declare export class Manager extends Emitter {
-    static (uri?: string, opts?: ManagerOptions): this;
-    reconnection(boolean): this;
-    reconnectionAttempts(number): this;
-    reconnectionDelay(number): this;
-    randomizationFactor(number): this;
-    reconnectionDelayMax(number): this;
-    timeout(number): this;
-    open(fn?: (err?: Error) => void, opts?: ManagerOptions): this;
-    connect(fn: any, opts: any): this;
+  declare export class Manager extends Emitter<Manager> {
+    constructor(uri?: string, opts?: ManagerOptions): Manager;
+    opts: ManagerOptions;
+    reconnection(boolean): Manager;
+    reconnectionAttempts(number): Manager;
+    reconnectionDelay(number): Manager;
+    randomizationFactor(number): Manager;
+    reconnectionDelayMax(number): Manager;
+    timeout(number): Manager;
+    open(fn?: (err?: Error) => void): Manager;
+    connect(fn?: (err?: Error) => void): Manager;
     socket(namespace: string, opts?: SocketOptions): Socket;
   }
 
-  declare export class Socket extends Emitter {
-    static (io: Manager, nsp: string, opts?: SocketOptions): this;
-    open(): this;
-    connect(): this;
-    send(...args: mixed[]): this;
-    emit(event: string, ...args: mixed[]): this; // overrides Emitter#emit
-    close(): this;
-    disconnect(): this;
-    compress(boolean): this;
+  declare export class Socket extends Emitter<Socket> {
+    constructor(io: Manager, nsp: string, opts?: SocketOptions): Socket;
+    open(): Socket;
+    connect(): Socket;
+    send(...args: mixed[]): Socket;
+    emit(event: string, ...args: mixed[]): Socket; // overrides Emitter#emit
+    close(): Socket;
+    disconnect(): Socket;
+    compress(boolean): Socket;
     io: Manager;
   }
 
-  declare export var protocol: 4;
+  // all of ManagerOptions with a few additions
+  declare type LookupOptions = $Shape<
+    {
+      forceNew: boolean,
+      "force new connection": true,
+      multiplex: boolean
+    } & ManagerOptions
+  >;
 
   declare type Lookup = (uri?: string, opts?: LookupOptions) => Socket;
+
+  declare export var protocol: 4;
   declare export var connect: Lookup;
   declare export default Lookup
 }
