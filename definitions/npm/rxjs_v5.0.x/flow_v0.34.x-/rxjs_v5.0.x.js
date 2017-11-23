@@ -604,7 +604,7 @@ declare class rxjs$Observable<+T> {
 
   pairwise(): rxjs$Observable<[T, T]>;
 
-  pipe(): rxjs$Observable<T>,
+  pipe(): rxjs$Observable<T>;
 
   pipe<A>(op1: rxjs$OperatorFunctionLast<T, A>): A;
 
