@@ -41,6 +41,9 @@ type rxjs$EventListenerOptions =
 
 type rxjs$ObservableInput<T> = rxjs$Observable<T> | Promise<T> | Iterable<T>;
 
+type rxjs$OperatorFunction<T, R> = rxjs$Observable<T> => rxjs$Observable<R>;
+type rxjs$OperatorFunctionLast<T, R: rxjs$Observable<*>> = rxjs$Observable<T> => R;
+
 declare class rxjs$Observable<+T> {
   static bindCallback(
     callbackFunc: (callback: (_: void) => any) => any,
@@ -600,6 +603,36 @@ declare class rxjs$Observable<+T> {
   observeOn(scheduler: rxjs$SchedulerClass): rxjs$Observable<T>;
 
   pairwise(): rxjs$Observable<[T, T]>;
+
+  pipe(): rxjs$Observable<T>;
+
+  pipe<A>(op1: rxjs$OperatorFunctionLast<T, A>): A;
+
+  pipe<A, B>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunctionLast<A, B>
+  ): B;
+
+  pipe<A, B, C>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunction<A, B>,
+    op3: rxjs$OperatorFunctionLast<B, C>
+  ): C;
+
+  pipe<A, B, C, D>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunction<A, B>,
+    op3: rxjs$OperatorFunction<B, C>,
+    op4: rxjs$OperatorFunctionLast<C, D>
+  ): D;
+
+  pipe<A, B, C, D, E>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunction<A, B>,
+    op3: rxjs$OperatorFunction<B, C>,
+    op4: rxjs$OperatorFunction<C, D>,
+    op5: rxjs$OperatorFunctionLast<D, E>
+  ): E;
 
   publish(): rxjs$ConnectableObservable<T>;
 
