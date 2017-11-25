@@ -73,7 +73,9 @@ async function getTestGroups(
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
   return libDefs.map(libDef => {
-    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
+    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${
+      libDef.flowVersionStr
+    }`;
     return {
       id: groupID,
       testFilePaths: libDef.testFilePaths,
@@ -491,6 +493,10 @@ async function runTestGroup(
     const flowVersionsToRun = orderedFlowVersions.filter(flowVer => {
       return semver.satisfies(flowVer, testGrpFlowSemVerRange);
     });
+    // Windows hasn't flow < 30.0 but we have tests for flow < 30.0. We need skip it. Example: redux_v3
+    if (!flowVersionsToRun.length) {
+      return [];
+    }
     let lowestFlowVersionRan = flowVersionsToRun[0];
 
     const lowerVersions = flowVersionsToRun.filter(flowVer =>
@@ -523,7 +529,9 @@ async function runTestGroup(
     );
 
     if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
-      console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
+      console.log(`Tests for ${testGroup.id} ran successfully on flow ${
+        lowestCapableFlowVersion
+      }.
         Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
     }
 
@@ -541,23 +549,22 @@ async function runTests(
   onlyChanged?: boolean
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, "g"));
-  const testGroups = (await getTestGroups(
-    repoDirPath,
-    onlyChanged
-  )).filter(testGroup => {
-    if (testPatternRes.length === 0) {
-      return true;
-    }
-
-    for (var i = 0; i < testPatternRes.length; i++) {
-      const pattern = testPatternRes[i];
-      if (testGroup.id.match(pattern) != null) {
+  const testGroups = (await getTestGroups(repoDirPath, onlyChanged)).filter(
+    testGroup => {
+      if (testPatternRes.length === 0) {
         return true;
       }
-    }
 
-    return false;
-  });
+      for (var i = 0; i < testPatternRes.length; i++) {
+        const pattern = testPatternRes[i];
+        if (testGroup.id.match(pattern) != null) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  );
 
   try {
     // Create a temp dir to copy files into to run the tests
