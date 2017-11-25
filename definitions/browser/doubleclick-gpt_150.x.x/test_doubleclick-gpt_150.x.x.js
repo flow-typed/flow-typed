@@ -63,7 +63,10 @@ let content =
   "<a href='www.mydestinationsite.com'><img src='www.mysite.com/img.png'></img></a>";
 googletag.content().setContent(slot, content);
 
-googletag.pubads().definePassback("/1234567/sports", [468, 60]).display();
+googletag
+  .pubads()
+  .definePassback("/1234567/sports", [468, 60])
+  .display();
 
 googletag
   .pubads()
@@ -138,9 +141,15 @@ googletag.pubads().clearTargeting("interests");
 googletag.pubads().clearTargeting();
 // All targeting has been cleared.
 
-googletag.pubads().defineOutOfPagePassback("/1234567/sports").display();
+googletag
+  .pubads()
+  .defineOutOfPagePassback("/1234567/sports")
+  .display();
 
-googletag.pubads().definePassback("/1234567/sports", [468, 60]).display();
+googletag
+  .pubads()
+  .definePassback("/1234567/sports", [468, 60])
+  .display();
 
 googletag.pubads().display("/1234567/sports", [728, 90], "div-1");
 
