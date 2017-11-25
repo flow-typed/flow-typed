@@ -1,4 +1,4 @@
-declare module 'redux-mock-store' {
+declare module "redux-mock-store" {
   /*
     S = State
     A = Action
@@ -16,13 +16,13 @@ declare module 'redux-mock-store' {
     replaceReducer(nextReducer: Function): void
   };
 
-  declare function exports(middlewares: ?Array<Function>): mockStore;
+  declare module.exports: (middlewares: ?Array<Function>) => mockStore;
 }
 
 // Filename aliases
-declare module 'redux-mock-store/src/index' {
-  declare module.exports: $Exports<'redux-mock-store'>;
+declare module "redux-mock-store/src/index" {
+  declare module.exports: $Exports<"redux-mock-store">;
 }
-declare module 'redux-mock-store/src/index.js' {
-  declare module.exports: $Exports<'redux-mock-store'>;
+declare module "redux-mock-store/src/index.js" {
+  declare module.exports: $Exports<"redux-mock-store">;
 }
