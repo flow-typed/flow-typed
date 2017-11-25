@@ -99,10 +99,6 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
       const QUERY_PAGE_SIZE = 100;
       const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
 
-      if (!await fs.exists(BIN_DIR)) {
-        await fs.mkdir(BIN_DIR);
-      }
-
       let binURLs = new Map();
       let apiPayload = null;
       let page = 0;
@@ -208,38 +204,22 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
           const flowBinDirPath = path.join(BIN_DIR, "TMP-flow-" + version);
           await fs.mkdir(flowBinDirPath);
           console.log("  Extracting flow-%s...", version);
-          if (IS_WINDOWS) {
-            await new Promise((res, rej) => {
-              const unzipExtractor = unzip.Extract({ path: flowBinDirPath });
-              unzipExtractor.on("error", function(err) {
-                rej(err);
-              });
-              unzipExtractor.on("close", function() {
-                res();
-              });
-              fs.createReadStream(zipPath).pipe(unzipExtractor);
+          await new Promise((res, rej) => {
+            const unzipExtractor = unzip.Extract({ path: flowBinDirPath });
+            unzipExtractor.on("error", function(err) {
+              rej(err);
             });
+            unzipExtractor.on("close", function() {
+              res();
+            });
+            fs.createReadStream(zipPath).pipe(unzipExtractor);
+          });
+          if (IS_WINDOWS) {    
             await fs.rename(
               path.join(flowBinDirPath, "flow", "flow.exe"),
               path.join(BIN_DIR, "flow-" + version + ".exe")
             );
           } else {
-            await new Promise((res, rej) => {
-              const child = child_process.exec(
-                "unzip " + zipPath + " flow/flow -d " + flowBinDirPath
-              );
-              let stdErrOut = "";
-              child.stdout.on("data", data => (stdErrOut += data));
-              child.stderr.on("data", data => (stdErrOut += data));
-              child.on("error", err => rej(err));
-              child.on("close", code => {
-                if (code === 0) {
-                  res();
-                } else {
-                  rej(stdErrOut);
-                }
-              });
-            });
             await fs.rename(
               path.join(flowBinDirPath, "flow", "flow"),
               path.join(BIN_DIR, "flow-" + version)
@@ -260,6 +240,15 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
   return _flowBinVersionPromise;
 }
 
+const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+$/
+/**
+ * flow filename should be `flow-vx.x.x`
+ * @param {string} name 
+ */
+function checkFlowFilename(name) {
+  return flowNameRegex.test(name);
+}
+
 /**
  * Return the sorted list of cached flow binaries that have previously been retrieved from github
  * and cached in the `.flow-bins-cache` directory.  This function is usually called when a failure
@@ -267,8 +256,8 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
  * API limit.
  */
 async function getCachedFlowBinVersions(): Promise<Array<string>> {
-  // read the files from the bin dir and remove the leading `flow-v` prefix
-  const versions = (await fs.readdir(path.join(BIN_DIR))).map(dir =>
+  // read the files with name `flow-vx.x.x` from the bin dir and remove the leading `flow-v` prefix
+  const versions = (await fs.readdir(path.join(BIN_DIR))).filter(checkFlowFilename).map(dir =>
     dir.slice(6)
   );
 
@@ -432,6 +421,15 @@ async function findLowestCapableFlowVersion(
 }
 
 /**
+ * Remove all files except flow instances
+ */
+async function removeTrashFromBinDir() {
+  (await fs.readdir(path.join(BIN_DIR))).filter(name => !checkFlowFilename(name)).forEach(async el => {
+    await fs.unlink(path.resolve(BIN_DIR, el));
+  });
+}
+
+/**
  * Given a TestGroup structure determine all versions of Flow that match the
  * FlowVersion specification and, for each, run `flow check` on the test
  * directory.
@@ -455,6 +453,12 @@ async function runTestGroup(
     );
   }
 
+  if (!await fs.exists(BIN_DIR)) {
+    await fs.mkdir(BIN_DIR);
+  }
+
+  //Prepare bin folder to collect flow instances
+  await removeTrashFromBinDir()
   let orderedFlowVersions;
   try {
     orderedFlowVersions = await getOrderedFlowBinVersions();
