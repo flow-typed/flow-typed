@@ -1,10 +1,12 @@
 // @flow
 
 import pino from "pino";
+import type { Logger } from "pino";
 
 (pino.LOG_VERSION: number);
 
-const p: pino.Logger = pino();
+const p: Logger = pino();
+
 p.info("hello world");
 p.error("this is at error level");
 p.info("the answer is %d", 42);
