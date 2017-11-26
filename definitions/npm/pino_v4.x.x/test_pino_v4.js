@@ -3,8 +3,6 @@
 import pino from "pino";
 import type { Logger } from "pino";
 
-(pino.LOG_VERSION: number);
-
 const p: Logger = pino();
 
 p.info("hello world");
@@ -15,6 +13,9 @@ p.info({ obj: 42, b: 2 }, "hello world");
 p.info({ obj: { aa: "bbb" } }, "another");
 setImmediate(p.info, "after setImmediate");
 p.error(new Error("an error"));
+
+// $ExpectError
+p.LOG_VERSION = 10;
 
 // $ExpectError
 p("no log level");
