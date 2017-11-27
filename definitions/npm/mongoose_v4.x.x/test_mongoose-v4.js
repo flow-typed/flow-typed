@@ -83,7 +83,7 @@ AdminSchema.post("save", (doc, next) => {
 
 export const Admin = mongoose.model("Admin", AdminSchema);
 
-Admin.findById().then(d => {
+Admin.findById(1).then(d => {
   if (d) {
     // $ExpectError
     d.checkPassword(123);
