@@ -1,12 +1,40 @@
-import mongoose from "mongoose";
+/*** FIX broken globals import 'bson' (((( ***/
+// import 'bson';
+declare class bson$ObjectId {
+  constructor(id?: string | number | bson$ObjectId): this;
+  generationTime: number;
+  static createFromHexString(hexString: string): bson$ObjectId;
+  static createFromTime(time: number): bson$ObjectId;
+  static isValid(id?: string | number | bson$ObjectId | null | void): boolean;
+  equals(otherID: bson$ObjectId): boolean;
+  generate(time?: number): string;
+  getTimestamp(): Date;
+  toHexString(): string;
+  toString(): string;
+  inspect(): string;
+  toJSON(): string;
+}
+declare class bson$Decimal128 {
+  constructor(bytes: Buffer): this;
+  static fromString(string: string): bson$Decimal128;
+  toString(): string;
+  toJSON(): { $numberDecimal: string };
+}
+/*** end FIX broken globals import 'bson' (((( ***/
 
-type MongoId =
-  | typeof mongoose.Types.ObjectId
-  | {
-      toString(): string
-    };
+type MongoId = bson$ObjectId | string | number;
 
-type MongoOrScalarId = MongoId | string | number;
+type Mongoose$Types = {|
+  ObjectId: Class<bson$ObjectId>,
+  Mixed: Object,
+  Embedded: Object,
+  Document: Object,
+  DocumentArray: Object,
+  Subdocument: Object,
+  Array: Object,
+  Buffer: Object,
+  Decimal128: Class<bson$Decimal128>
+|};
 
 type SchemaFields = {
   [fieldName: string]: any
@@ -61,20 +89,6 @@ type IndexOpts = {|
   name?: string,
   default_language?: string,
   weights?: Object
-|};
-
-type Mongoose$Types = {|
-  ObjectId: {
-    $call: (id: string | MongoId) => MongoId
-  },
-  Mixed: Object,
-  Embedded: Object,
-  Document: Object,
-  DocumentArray: Object,
-  Subdocument: Object,
-  Array: Object,
-  Buffer: Object,
-  Decimal128: Object
 |};
 
 type Mongoose$SchemaMethods = {
@@ -192,7 +206,7 @@ declare class Mongoose$Document {
     projection?: MongooseProjection
   ): Mongoose$Query<?this, this>;
   static findById(
-    id: MongoOrScalarId,
+    id: MongoId,
     projection?: MongooseProjection,
     options?: Object
   ): Mongoose$Query<?this, this>;
@@ -206,11 +220,11 @@ declare class Mongoose$Document {
     options?: Object
   ): Mongoose$Query<?this, this>;
   static findByIdAndRemove(
-    id: MongoOrScalarId,
+    id: MongoId,
     options?: Object
   ): Mongoose$Query<?this, this>;
   static findByIdAndUpdate(
-    id: MongoOrScalarId,
+    id: MongoId,
     data: Object,
     options?: Object
   ): Mongoose$Query<?this, this>;
@@ -250,7 +264,7 @@ declare class Mongoose$Document {
 
   constructor(data?: $Shape<this>): this;
   id: string | number;
-  _id: MongoOrScalarId;
+  _id: bson$ObjectId | string | number;
   __v?: number;
   save(): Promise<this>;
   update(update: Object, options?: Object): Promise<UpdateResult>;
@@ -286,9 +300,9 @@ declare class Mongoose$Document {
 
   populate(path?: string | Object, cb?: (err: Error, doc: this) => void): void;
   execPopulate(): Promise<this>;
-  populated(path: string): ?MongoOrScalarId;
-  toJSON(options: ToObjectOpts<this>): Object;
-  toObject(options: ToObjectOpts<this>): Object;
+  populated(path: string): ?MongoId;
+  toJSON(options?: ToObjectOpts<this>): Object;
+  toObject(options?: ToObjectOpts<this>): Object;
   toString(): string;
   unmarkModified(path: string): void;
 
@@ -421,7 +435,7 @@ declare class Mongoose$Collection {
   findAndModify(): any;
   findOne(): any;
   getIndexes(): any;
-  inser(): any;
+  insert(): any;
   mapReduce(): any;
   save(): any;
   update(): any;
@@ -448,8 +462,8 @@ declare class Mongoose$Connection {
   connect(uri: string, opts?: ConnectionConnectOpts): void;
   openUri(uri: string, opts?: ConnectionConnectOpts): void;
   model<Doc>(
-    name: string,
-    schema: Mongoose$Schema<Doc>,
+    name: string | Doc,
+    schema?: Mongoose$Schema<Doc>,
     collection?: Mongoose$Collection
   ): Class<Doc>;
   collection(name: string): Mongoose$Collection;
@@ -458,6 +472,7 @@ declare class Mongoose$Connection {
   db: any;
   collections: Mongoose$Collection[];
   readyState: number;
+  models: { [name: string]: Mongoose$Document };
 
   // EventEmitter
   addListener(event: ConnectionEventTypes, listener: Function): this;
@@ -478,7 +493,8 @@ declare class Mongoose$Connection {
 declare module "mongoose" {
   declare export type MongooseConnection = Mongoose$Connection;
   declare export type MongoId = MongoId;
-  declare export type MongoOrScalarId = MongoOrScalarId;
+  declare export type BSONObjectId = bson$ObjectId;
+  declare export type ObjectId = bson$ObjectId;
   declare export type MongooseQuery<Result, Doc> = Mongoose$Query<Result, Doc>;
   declare export type MongooseDocument = Mongoose$Document;
   declare export type MongooseModel = typeof Mongoose$Document;
@@ -492,12 +508,13 @@ declare module "mongoose" {
     Types: Mongoose$Types,
     Promise: any,
     model: $PropertyType<Mongoose$Connection, "model">,
-    createConnection(): Mongoose$Connection,
+    createConnection(uri?: string): Mongoose$Connection,
     set: (key: string, value: string | Function | boolean) => void,
     connect: Function,
     connection: Mongoose$Connection,
     connections: Mongoose$Connection[],
     Query: typeof Mongoose$Query,
-    disconnect: (fn?: (error: any) => void) => Promise<void>
+    disconnect: (fn?: (error: any) => void) => Promise<void>,
+    Model: typeof Mongoose$Document
   };
 }
