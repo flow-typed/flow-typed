@@ -701,14 +701,13 @@ declare module ramda {
   ): ((xs: string) => string) & ((xs: T) => ?V);
   declare function nth<T: string>(i: number, xs: T): T;
 
-  declare function find<V, O: { [key: string]: * }, T: Array<V> | O>(
-    fn: UnaryPredicateFn<V>,
-    ...rest: Array<void>
-  ): (xs: T | O) => ?V | O;
-  declare function find<V, O: { [key: string]: * }, T: Array<V> | O>(
-    fn: UnaryPredicateFn<V>,
-    xs: T | O
-  ): ?V | O;
+  declare type Find = (<V, T: Array<V>>(
+    fn: UnaryPredicateFn<V>
+  ) => (xs: T) => ?V) &
+    (<V, T: Array<V>>(fn: UnaryPredicateFn<V>, xs: T) => ?V);
+
+  declare var find: Find;
+
   declare function findLast<V, O: { [key: string]: * }, T: Array<V> | O>(
     fn: UnaryPredicateFn<V>,
     ...rest: Array<void>
