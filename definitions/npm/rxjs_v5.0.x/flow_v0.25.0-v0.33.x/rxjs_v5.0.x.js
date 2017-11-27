@@ -495,6 +495,8 @@ declare class rxjs$Observable<+T> {
 
   publishReplay(): rxjs$ConnectableObservable<T>;
 
+  pluck(...properties: string[]): rxjs$Observable<T>;
+
   retry(retryCount: ?number): rxjs$Observable<T>;
 
   retryWhen(

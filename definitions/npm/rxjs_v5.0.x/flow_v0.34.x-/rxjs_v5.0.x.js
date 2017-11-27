@@ -634,6 +634,8 @@ declare class rxjs$Observable<+T> {
     op5: rxjs$OperatorFunctionLast<D, E>
   ): E;
 
+  pluck(...properties: string[]): rxjs$Observable<T>;
+
   publish(): rxjs$ConnectableObservable<T>;
 
   publishLast(): rxjs$ConnectableObservable<T>;
