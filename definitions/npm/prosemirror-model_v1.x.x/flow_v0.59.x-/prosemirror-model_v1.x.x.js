@@ -1,5 +1,4 @@
-// flow-typed signature: 51dc3696f1c0e271adf54cc359852262
-// flow-typed version: <<STUB>>/prosemirror-model_v^1.0.0/flow_v0.57.3
+// @flow
 declare module "prosemirror-model" {
   declare export class Node {
     type: NodeType,
