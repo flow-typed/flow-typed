@@ -6005,6 +6005,8 @@ declare module "sequelize" {
     where(attr: Object, comparator: string, logic: string | Object): where,
     static where(attr: Object, logic: string | Object): where,
     where(attr: Object, logic: string | Object): where,
+    static condition(attr: Object, comparator: string, logic: string | Object): where,
+    condition(attr: Object, comparator: string, logic: string | Object): where,
     static condition(attr: Object, logic: string | Object): where,
     condition(attr: Object, logic: string | Object): where,
 
