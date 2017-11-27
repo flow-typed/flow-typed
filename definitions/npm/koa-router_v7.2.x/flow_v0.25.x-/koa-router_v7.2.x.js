@@ -4,7 +4,13 @@
 
 type KoaRouter$Middleware = (
   ctx: any,
-  next: () => Promise<void>
+  next: () => void | Promise<void>
+) => Promise<void> | void;
+
+type KoaRouter$ParamMiddleware = (
+  param: string,
+  ctx: any,
+  next: () => void | Promise<void>
 ) => Promise<void> | void;
 
 declare module "koa-router" {
@@ -16,23 +22,47 @@ declare module "koa-router" {
       methods?: Array<string>
     }): Router;
 
-    get(name: string, route: string, handler: KoaRouter$Middleware): this;
-    get(route: string, handler: KoaRouter$Middleware): this;
+    get(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    get(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    patch(name: string, route: string, handler: KoaRouter$Middleware): this;
-    patch(route: string, handler: KoaRouter$Middleware): this;
+    patch(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    patch(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    post(name: string, route: string, handler: KoaRouter$Middleware): this;
-    post(route: string, handler: KoaRouter$Middleware): this;
+    post(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    post(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    put(name: string, route: string, handler: KoaRouter$Middleware): this;
-    put(route: string, handler: KoaRouter$Middleware): this;
+    put(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    put(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    delete(name: string, route: string, handler: KoaRouter$Middleware): this;
-    delete(route: string, handler: KoaRouter$Middleware): this;
+    delete(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    delete(route: string | string[], handler: KoaRouter$Middleware): this;
 
-    del(name: string, route: string, handler: KoaRouter$Middleware): this;
-    del(route: string, handler: KoaRouter$Middleware): this;
+    del(
+      name: string,
+      route: string | string[],
+      handler: KoaRouter$Middleware
+    ): this;
+    del(route: string | string[], handler: KoaRouter$Middleware): this;
 
     use(...middleware: Array<KoaRouter$Middleware>): this;
     use(
@@ -50,7 +80,7 @@ declare module "koa-router" {
       methodNotAllowed?: () => any
     }): KoaRouter$Middleware;
 
-    param(param: string, middleware: KoaRouter$Middleware): this;
+    param(param: string, middleware: KoaRouter$ParamMiddleware): this;
 
     redirect(source: string, destination: string, code?: number): this;
 

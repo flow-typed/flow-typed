@@ -2,49 +2,55 @@ import io from "socket.io-client";
 
 io("foo");
 io("foo", {});
-io("foo", { forceNew: true });
+io("foo", { forceNew: true, path: "/foobar" });
 
-const socket = io("foo")
-  .open()
-  .connect()
-  .send({ foo: "bar" }, { bar: "baz" })
-  .emit("bar", { foo: "bar" }) // overrides Emitter#emit
-  .close()
-  .disconnect()
-  .compress(true)
-  .on("foo", () => {})
-  .addEventListener("foo", () => {})
-  .once("foo", () => {})
-  .off("foo", () => {})
-  .removeListener("foo", () => {})
-  .removeAllListeners("foo", () => {})
-  .removeEventListener("foo", () => {});
-
-const callbacks = socket.listeners("foo");
-const hasFooListener = socket.hasListeners("foo");
-
-const manager = socket.io
-  .reconnection(true)
-  .reconnectionAttempts(5)
-  .reconnectionDelay(5)
-  .randomizationFactor(5)
-  .reconnectionDelayMax(5)
-  .timeout(5)
-  .open(err => {}, {})
-  .connect(() => {}, {})
-  .on("foo", () => {})
-  .addEventListener("foo", () => {})
-  .once("foo", () => {})
-  .off("foo", () => {})
-  .removeListener("foo", () => {})
-  .removeAllListeners("foo", () => {})
-  .removeEventListener("foo", () => {})
-  .emit("foo", { bar: "baz" });
-
-manager.socket("/baz", {});
+io.connect("foo");
+io.connect("foo", {});
+io.connect("foo", { forceNew: false, path: "/barbaz" });
 
 // $ExpectError
 io("foo", { invalid_key: 5 });
 
 // $ExpectError
 io(5);
+
+// test Socket
+const socket = io("foo");
+socket.hasListeners("event");
+socket.listeners("event");
+socket
+  .open()
+  .connect()
+  .send("any", "number", "of", "args")
+  .emit("event", "any", "number", "of", "args")
+  .close()
+  .disconnect()
+  .compress(false)
+  .on("event", cb => {})
+  .addEventListener("event", cb => {})
+  .once("event", cb => {})
+  .off("event", cb => {})
+  .removeListener("event", cb => {})
+  .removeAllListeners("event", cb => {})
+  .removeEventListener("event", cb => {});
+
+// test Manager
+const manager = socket.io;
+manager
+  .reconnection(true)
+  .reconnectionAttempts(4)
+  .reconnectionDelay(10)
+  .randomizationFactor(100)
+  .reconnectionDelayMax(2000)
+  .timeout(60000)
+  .open(err => {})
+  .connect(err => {})
+  .socket("/nsp", { query: "foo" })
+  .on("event", cb => {})
+  .addEventListener("event", cb => {})
+  .once("event", cb => {})
+  .off("event", cb => {})
+  .removeListener("event", cb => {})
+  .removeAllListeners("event", cb => {})
+  .removeEventListener("event", cb => {})
+  .emit("event", { payload: true });

@@ -1365,12 +1365,8 @@ declare module ramda {
     src: { [k: string]: T }
   ): { [k: string]: T };
 
-  // TODO: Started failing in v31... (Attempt to fix below)
-  // declare type __UnwrapNestedObjectR<T, U, V: NestedObject<(t: T) => U>> = U
-  // declare type UnwrapNestedObjectR<T> = UnwrapNestedObjectR<*, *, T>
-  //
-  // declare function evolve<R, T: NestedObject<(x:any) => R>>(fn: T, ...rest: Array<void>): (src: NestedObject<any>) => UnwrapNestedObjectR<T>;
-  // declare function evolve<R: NestedObject<(x:any) => R>>(fn: T, src: NestedObject<any>): UnwrapNestedObjectR<T>;
+  declare function evolve<A: Object>(NestedObject<Function>, A): A;
+  declare function evolve<A: Object>(NestedObject<Function>): A => A;
 
   declare function eqProps(
     key: string,
@@ -1900,12 +1896,12 @@ declare module ramda {
   declare function or(x: boolean, y: boolean): boolean;
   declare function or(x: boolean): (y: boolean) => boolean;
 
-  // TODO: pathSatisfies: Started failing in v39...
-  // declare function pathSatisfies<T>(cond: (x: T) => boolean, path: Array<string>, o: NestedObject<T>): boolean;
-  // declare function pathSatisfies<T>(cond: (x: T) => boolean, path: Array<string>, ...rest: Array<void>): (o: NestedObject<T>) => boolean;
-  // declare function pathSatisfies<T>(cond: (x: T) => boolean, ...rest: Array<void>):
-  // ((path: Array<string>, ...rest: Array<void>) => (o: NestedObject<T>) => boolean)
-  // & ((path: Array<string>, o: NestedObject<T>) => boolean)
+  declare var pathSatisfies: CurriedFunction3<
+    UnaryPredicateFn<any>,
+    string[],
+    Object,
+    boolean
+  >;
 
   declare function propSatisfies<T>(
     cond: (x: T) => boolean,

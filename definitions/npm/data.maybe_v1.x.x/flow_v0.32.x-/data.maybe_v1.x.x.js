@@ -34,7 +34,7 @@ declare module "data.maybe" {
     map<B>(f: (v: T) => B): IMaybe<B>;
     ap<B>(fb: IMaybe<B> | Applicative<B>): IMaybe<B>;
     chain<B>(f: (v: T) => IMaybe<B>): IMaybe<B>;
-    orElse<B>(f: () => IMaybe<B>): IMaybe<B>;
+    orElse<T>(f: () => IMaybe<T>): IMaybe<T>;
     cata<B>(patterns: {| Nothing: () => B, Just: (v: T) => B |}): B;
     static Nothing<T>(): IMaybe<T>;
     static Just<T>(value: T): IMaybe<T>;

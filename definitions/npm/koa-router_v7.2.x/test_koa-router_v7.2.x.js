@@ -29,8 +29,16 @@ goodRouter.get("/");
 goodRouter.get("/", async ctx => {
   ctx.body = "Hello World";
 });
+goodRouter.get(["/", "/foo"], ctx => {});
 
 // $ExpectError
 goodRouter.use(10);
 goodRouter.use(async ctx => {});
 goodRouter.use("/foo", async ctx => {});
+
+goodRouter.param("foo", async ctx => {
+  // $ExpectError
+  console.log(ctx.params.foo);
+});
+goodRouter.param("foo", async (foo, ctx) => {});
+goodRouter.param("foo", (foo, ctx, next) => {});
