@@ -1,9 +1,9 @@
-declare class BSON$ObjectId {
+declare class bson$ObjectId {
   /**
    * Create a new ObjectID instance
-   * @param {(string|number|BSON$ObjectId)} id Can be a 24 byte hex string, 12 byte binary string or a Number.
+   * @param {(string|number|bson$ObjectId)} id Can be a 24 byte hex string, 12 byte binary string or a Number.
    */
-  constructor(id?: string | number | BSON$ObjectId): this;
+  constructor(id?: string | number | bson$ObjectId): this;
 
   /** The generation time of this ObjectID instance */
   generationTime: number;
@@ -13,28 +13,28 @@ declare class BSON$ObjectId {
    * @param {string} hexString create a ObjectID from a passed in 24 byte hexstring.
    * @return {ObjectID} return the created ObjectID
    */
-  static createFromHexString(hexString: string): BSON$ObjectId;
+  static createFromHexString(hexString: string): bson$ObjectId;
 
   /**
    * Creates an ObjectID from a second based number, with the rest of the ObjectID zeroed out. Used for comparisons or sorting the ObjectID.
    * @param {number} time an integer number representing a number of seconds.
    * @return {ObjectID} return the created ObjectID
    */
-  static createFromTime(time: number): BSON$ObjectId;
+  static createFromTime(time: number): bson$ObjectId;
 
   /**
    * Checks if a value is a valid bson ObjectID
    *
    * @return {boolean} return true if the value is a valid bson ObjectID, return false otherwise.
    */
-  static isValid(id?: string | number | BSON$ObjectId | null | void): boolean;
+  static isValid(id?: string | number | bson$ObjectId | null | void): boolean;
 
   /**
    * Compares the equality of this ObjectID with `otherID`.
    * @param {object} otherID ObjectID instance to compare against.
    * @return {boolean} the result of comparing two ObjectID's
    */
-  equals(otherID: BSON$ObjectId): boolean;
+  equals(otherID: bson$ObjectId): boolean;
 
   /**
    * Generate a 12 byte id string used in ObjectID's
@@ -60,7 +60,7 @@ declare class BSON$ObjectId {
   toJSON(): string;
 }
 
-declare class BSON$Binary {
+declare class bson$Binary {
   constructor(buffer: Buffer, subType: number): this;
   put(byte_value: string): void;
   write(string: Buffer | string, offset: number): void;
@@ -79,36 +79,36 @@ declare class BSON$Binary {
   static SUBTYPE_USER_DEFINED: 128;
 }
 
-declare class BSON$Code {
+declare class bson$Code {
   constructor(code: string | Function, scope?: Object): this;
   toJSON(): { scope: ?Object, code: string | Function };
 }
 
-declare class BSON$DBRef {
-  constructor(namespace: string, oid: BSON$ObjectId, db?: string): this;
-  toJSON(): { $ref: string, $id: BSON$ObjectId, $db: string };
+declare class bson$DBRef {
+  constructor(namespace: string, oid: bson$ObjectId, db?: string): this;
+  toJSON(): { $ref: string, $id: bson$ObjectId, $db: string };
 }
 
-declare class BSON$Decimal128 {
+declare class bson$Decimal128 {
   constructor(bytes: Buffer): this;
-  static fromString(string: string): BSON$Decimal128;
+  static fromString(string: string): bson$Decimal128;
   toString(): string;
   toJSON(): { $numberDecimal: string };
 }
 
-declare class BSON$Double {
+declare class bson$Double {
   constructor(value: number): this;
   valueOf(): number;
   toJSON(): number;
 }
 
-declare class BSON$Int32 {
+declare class bson$Int32 {
   constructor(value: number): this;
   valueOf(): number;
   toJSON(): number;
 }
 
-declare class BSON$Long {
+declare class bson$Long {
   constructor(low: number, high: number): this;
   toInt(): number;
   toNumber(): number;
@@ -121,52 +121,52 @@ declare class BSON$Long {
   isZero(): boolean;
   isNegative(): boolean;
   isOdd(): boolean;
-  equals(other: BSON$Long): boolean;
-  notEquals(other: BSON$Long): boolean;
-  lessThan(other: BSON$Long): boolean;
-  lessThanOrEqual(other: BSON$Long): boolean;
-  greaterThan(other: BSON$Long): boolean;
-  greaterThanOrEqual(other: BSON$Long): boolean;
-  compare(other: BSON$Long): 1 | 0 | -1;
-  negate(): BSON$Long;
-  add(other: BSON$Long): BSON$Long;
-  subtract(other: BSON$Long): BSON$Long;
-  multiply(other: BSON$Long): BSON$Long;
-  div(other: BSON$Long): BSON$Long;
-  modulo(other: BSON$Long): BSON$Long;
-  not(): BSON$Long;
-  and(other: BSON$Long): BSON$Long;
-  or(other: BSON$Long): BSON$Long;
-  xor(other: BSON$Long): BSON$Long;
-  shiftLeft(numBits: number): BSON$Long;
-  shiftRight(numBits: number): BSON$Long;
-  shiftRightUnsigned(numBits: number): BSON$Long;
-  static fromInt(value: number): BSON$Long;
-  static fromNumber(value: number): BSON$Long;
-  static fromBits(lowBits: number, highBits: number): BSON$Long;
-  static fromString(str: string, opt_radix: number): BSON$Long;
-  static ZERO: BSON$Long;
-  static ONE: BSON$Long;
-  static NEG_ONE: BSON$Long;
-  static MAX_VALUE: BSON$Long;
-  static MIN_VALUE: BSON$Long;
+  equals(other: bson$Long): boolean;
+  notEquals(other: bson$Long): boolean;
+  lessThan(other: bson$Long): boolean;
+  lessThanOrEqual(other: bson$Long): boolean;
+  greaterThan(other: bson$Long): boolean;
+  greaterThanOrEqual(other: bson$Long): boolean;
+  compare(other: bson$Long): 1 | 0 | -1;
+  negate(): bson$Long;
+  add(other: bson$Long): bson$Long;
+  subtract(other: bson$Long): bson$Long;
+  multiply(other: bson$Long): bson$Long;
+  div(other: bson$Long): bson$Long;
+  modulo(other: bson$Long): bson$Long;
+  not(): bson$Long;
+  and(other: bson$Long): bson$Long;
+  or(other: bson$Long): bson$Long;
+  xor(other: bson$Long): bson$Long;
+  shiftLeft(numBits: number): bson$Long;
+  shiftRight(numBits: number): bson$Long;
+  shiftRightUnsigned(numBits: number): bson$Long;
+  static fromInt(value: number): bson$Long;
+  static fromNumber(value: number): bson$Long;
+  static fromBits(lowBits: number, highBits: number): bson$Long;
+  static fromString(str: string, opt_radix: number): bson$Long;
+  static ZERO: bson$Long;
+  static ONE: bson$Long;
+  static NEG_ONE: bson$Long;
+  static MAX_VALUE: bson$Long;
+  static MIN_VALUE: bson$Long;
 }
 
-declare type BSON$Map = Map<any, any>;
+declare type bson$Map = Map<any, any>;
 
-declare class BSON$MaxKey {
+declare class bson$MaxKey {
   constructor(): this;
 }
 
-declare class BSON$MinKey {
+declare class bson$MinKey {
   constructor(): this;
 }
 
-declare class BSON$BSONRegExp {
+declare class bson$BSONRegExp {
   constructor(pattern?: string, options?: string): this;
 }
 
-declare class BSON$Symbol {
+declare class bson$Symbol {
   constructor(value: string): this;
   valueOf(): string;
   toString(): string;
@@ -174,7 +174,7 @@ declare class BSON$Symbol {
   toJSON(): string;
 }
 
-declare class BSON$Timestamp {
+declare class bson$Timestamp {
   constructor(low: number, high: number): this;
   toInt(): number;
   toNumber(): number;
@@ -187,69 +187,69 @@ declare class BSON$Timestamp {
   isZero(): boolean;
   isNegative(): boolean;
   isOdd(): boolean;
-  equals(other: BSON$Timestamp): boolean;
-  notEquals(other: BSON$Timestamp): boolean;
-  lessThan(other: BSON$Timestamp): boolean;
-  lessThanOrEqual(other: BSON$Timestamp): boolean;
-  greaterThan(other: BSON$Timestamp): boolean;
-  greaterThanOrEqual(other: BSON$Timestamp): boolean;
-  compare(other: BSON$Timestamp): 1 | 0 | -1;
-  negate(): BSON$Timestamp;
-  add(other: BSON$Timestamp): BSON$Timestamp;
-  subtract(other: BSON$Timestamp): BSON$Timestamp;
-  multiply(other: BSON$Timestamp): BSON$Timestamp;
-  div(other: BSON$Timestamp): BSON$Timestamp;
-  modulo(other: BSON$Timestamp): BSON$Timestamp;
-  not(): BSON$Timestamp;
-  and(other: BSON$Timestamp): BSON$Timestamp;
-  or(other: BSON$Timestamp): BSON$Timestamp;
-  xor(other: BSON$Timestamp): BSON$Timestamp;
-  shiftLeft(numBits: number): BSON$Timestamp;
-  shiftRight(numBits: number): BSON$Timestamp;
-  shiftRightUnsigned(numBits: number): BSON$Timestamp;
-  static fromInt(value: number): BSON$Timestamp;
-  static fromNumber(value: number): BSON$Timestamp;
-  static fromBits(lowBits: number, highBits: number): BSON$Timestamp;
-  static fromString(str: string, opt_radix: number): BSON$Timestamp;
-  static ZERO: BSON$Timestamp;
-  static ONE: BSON$Timestamp;
-  static NEG_ONE: BSON$Timestamp;
-  static MAX_VALUE: BSON$Timestamp;
-  static MIN_VALUE: BSON$Timestamp;
+  equals(other: bson$Timestamp): boolean;
+  notEquals(other: bson$Timestamp): boolean;
+  lessThan(other: bson$Timestamp): boolean;
+  lessThanOrEqual(other: bson$Timestamp): boolean;
+  greaterThan(other: bson$Timestamp): boolean;
+  greaterThanOrEqual(other: bson$Timestamp): boolean;
+  compare(other: bson$Timestamp): 1 | 0 | -1;
+  negate(): bson$Timestamp;
+  add(other: bson$Timestamp): bson$Timestamp;
+  subtract(other: bson$Timestamp): bson$Timestamp;
+  multiply(other: bson$Timestamp): bson$Timestamp;
+  div(other: bson$Timestamp): bson$Timestamp;
+  modulo(other: bson$Timestamp): bson$Timestamp;
+  not(): bson$Timestamp;
+  and(other: bson$Timestamp): bson$Timestamp;
+  or(other: bson$Timestamp): bson$Timestamp;
+  xor(other: bson$Timestamp): bson$Timestamp;
+  shiftLeft(numBits: number): bson$Timestamp;
+  shiftRight(numBits: number): bson$Timestamp;
+  shiftRightUnsigned(numBits: number): bson$Timestamp;
+  static fromInt(value: number): bson$Timestamp;
+  static fromNumber(value: number): bson$Timestamp;
+  static fromBits(lowBits: number, highBits: number): bson$Timestamp;
+  static fromString(str: string, opt_radix: number): bson$Timestamp;
+  static ZERO: bson$Timestamp;
+  static ONE: bson$Timestamp;
+  static NEG_ONE: bson$Timestamp;
+  static MAX_VALUE: bson$Timestamp;
+  static MIN_VALUE: bson$Timestamp;
 }
 
 declare module "bson" {
-  declare export type BsonBinary = BSON$Binary;
-  declare export type BsonCode = BSON$Code;
-  declare export type BsonDBRef = BSON$DBRef;
-  declare export type BsonDecimal128 = BSON$Decimal128;
-  declare export type BsonDouble = BSON$Double;
-  declare export type BsonInt32 = BSON$Int32;
-  declare export type BsonLong = BSON$Long;
-  declare export type BsonMap = BSON$Map;
-  declare export type BsonMaxKey = BSON$MaxKey;
-  declare export type BsonMinKey = BSON$MinKey;
-  declare export type BsonObjectId = BSON$ObjectId;
-  declare export type BsonBSONRegExp = BSON$BSONRegExp;
-  declare export type BsonSymbol = BSON$Symbol;
-  declare export type BsonTimestamp = BSON$Timestamp;
+  declare export type BsonBinary = bson$Binary;
+  declare export type BsonCode = bson$Code;
+  declare export type BsonDBRef = bson$DBRef;
+  declare export type BsonDecimal128 = bson$Decimal128;
+  declare export type BsonDouble = bson$Double;
+  declare export type BsonInt32 = bson$Int32;
+  declare export type BsonLong = bson$Long;
+  declare export type BsonMap = bson$Map;
+  declare export type BsonMaxKey = bson$MaxKey;
+  declare export type BsonMinKey = bson$MinKey;
+  declare export type BsonObjectId = bson$ObjectId;
+  declare export type BsonBSONRegExp = bson$BSONRegExp;
+  declare export type BsonSymbol = bson$Symbol;
+  declare export type BsonTimestamp = bson$Timestamp;
 
   declare module.exports: {
-    Binary: Class<BSON$Binary>,
-    Code: Class<BSON$Code>,
-    DBRef: Class<BSON$DBRef>,
-    Decimal128: Class<BSON$Decimal128>,
-    Double: Class<BSON$Double>,
-    Int32: Class<BSON$Int32>,
-    Long: Class<BSON$Long>,
-    Map: BSON$Map,
-    MaxKey: Class<BSON$MaxKey>,
-    MinKey: Class<BSON$MinKey>,
-    ObjectId: Class<BSON$ObjectId>,
-    ObjectID: Class<BSON$ObjectId>,
-    BSONRegExp: Class<BSON$BSONRegExp>,
-    Symbol: Class<BSON$Symbol>,
-    Timestamp: Class<BSON$Timestamp>,
+    Binary: Class<bson$Binary>,
+    Code: Class<bson$Code>,
+    DBRef: Class<bson$DBRef>,
+    Decimal128: Class<bson$Decimal128>,
+    Double: Class<bson$Double>,
+    Int32: Class<bson$Int32>,
+    Long: Class<bson$Long>,
+    Map: bson$Map,
+    MaxKey: Class<bson$MaxKey>,
+    MinKey: Class<bson$MinKey>,
+    ObjectId: Class<bson$ObjectId>,
+    ObjectID: Class<bson$ObjectId>,
+    BSONRegExp: Class<bson$BSONRegExp>,
+    Symbol: Class<bson$Symbol>,
+    Timestamp: Class<bson$Timestamp>,
 
     // methods
     serialize(object: Object, options?: Object): Buffer,
