@@ -21,6 +21,6 @@ const node: NodeSpec = {
 
 const schema: Schema = new Schema({ nodes: { p: pNode } });
 
-const node: Node = schema.node("p", null, "Hello, world!");
+const node: Node = schema.node("p", null, schema.text("Hello, world!"));
 const nodeJSON = node.toJSON();
 const parsedNode: Node = Node.fromJSON(schema, nodeJSON);
