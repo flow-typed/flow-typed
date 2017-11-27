@@ -17,14 +17,15 @@ const PropTypes = {
 
 type EnhancedCompProps = { eA: 1 };
 
-const Comp = ({ eA }) =>
+const Comp = ({ eA }) => (
   <div>
     {(eA: number)}
     {
       // $ExpectError eA nor any nor string
       (eA: string)
     }
-  </div>;
+  </div>
+);
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   setStatic("hello", "world"),

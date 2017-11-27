@@ -8,14 +8,15 @@ import type { HOC } from "recompose";
 
 type EnhancedCompProps = { eA: 1 };
 
-const Comp = ({ a }) =>
+const Comp = ({ a }) => (
   <div>
     {(a: string)}
     {
       // $ExpectError
       (a: number)
     }
-  </div>;
+  </div>
+);
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   mapProps(p => ({

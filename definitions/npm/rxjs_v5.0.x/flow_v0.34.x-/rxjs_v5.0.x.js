@@ -41,8 +41,10 @@ type rxjs$EventListenerOptions =
 
 type rxjs$ObservableInput<T> = rxjs$Observable<T> | Promise<T> | Iterable<T>;
 
-type rxjs$OperatorFunction<T, R> = rxjs$Observable<T> => rxjs$Observable<R>;
-type rxjs$OperatorFunctionLast<T, R: rxjs$Observable<*>> = rxjs$Observable<T> => R;
+type rxjs$OperatorFunction<T, R> = (rxjs$Observable<T>) => rxjs$Observable<R>;
+type rxjs$OperatorFunctionLast<T, R: rxjs$Observable<*>> = (
+  rxjs$Observable<T>
+) => R;
 
 declare class rxjs$Observable<+T> {
   static bindCallback(

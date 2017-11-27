@@ -8,7 +8,7 @@ import type { HOC } from "recompose";
 
 type EnhancedCompProps = { a: number };
 
-const A = ({ a, b }) =>
+const A = ({ a, b }) => (
   <div>
     {a}
     {(b: string)}
@@ -20,7 +20,8 @@ const A = ({ a, b }) =>
       // $ExpectError
       (b: number)
     }
-  </div>;
+  </div>
+);
 
 A.displayName = "HELLO WORLD";
 

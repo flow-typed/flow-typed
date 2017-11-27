@@ -7,7 +7,7 @@ import type { HOC } from "recompose";
 
 type EnhancedCompProps = { eA: 1 };
 
-const Comp = ({ hello, eA }) =>
+const Comp = ({ hello, eA }) => (
   <div>
     {(hello: string)}
     {(eA: number)}
@@ -19,7 +19,8 @@ const Comp = ({ hello, eA }) =>
       // $ExpectError hello nor any nor number
       (hello: number)
     }
-  </div>;
+  </div>
+);
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   withPropsOnChange(["eA"], ({ eA }) => ({

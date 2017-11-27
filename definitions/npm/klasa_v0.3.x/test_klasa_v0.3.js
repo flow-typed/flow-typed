@@ -10,8 +10,9 @@ const client = new Client({
   cmdEditing: true,
   typing: true,
   readyMessage: client =>
-    `${client.user.tag}, Ready to serve ${client.guilds
-      .size} guilds and ${client.users.size} users`
+    `${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${
+      client.users.size
+    } users`
 });
 
 (client.application: Object);
