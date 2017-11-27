@@ -8,3 +8,4 @@ mongodb.ObjectId.isValid(null);
 const mongo = new mongodb.ObjectId();
 const id: string = mongo.generate();
 
+mongodb.MongoClient.connect();
