@@ -13,7 +13,7 @@ const pNode: NodeSpec = {
 };
 
 // $ExpectError toDOM should return something resembling an output spec
-const node: NodeSpec = {
+const nodeSpec: NodeSpec = {
   toDOM() {
     return { foo: "p", bar: 0 };
   }
@@ -24,3 +24,4 @@ const schema: Schema = new Schema({ nodes: { p: pNode } });
 const node: Node = schema.node("p", null, schema.text("Hello, world!"));
 const nodeJSON = node.toJSON();
 const parsedNode: Node = Node.fromJSON(schema, nodeJSON);
+node.eq(parsedNode);
