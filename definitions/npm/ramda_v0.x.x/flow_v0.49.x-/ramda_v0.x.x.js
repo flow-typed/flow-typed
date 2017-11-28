@@ -328,6 +328,7 @@ declare module ramda {
     (<A, B, C, D, E>(
       ab: UnaryFn<A, B>,
       bc: UnaryFn<B, C>,
+      cd: UnaryFn<C, D>,
       de: UnaryFn<D, E>,
       ...rest: Array<void>
     ) => UnaryFn<A, E>) &
