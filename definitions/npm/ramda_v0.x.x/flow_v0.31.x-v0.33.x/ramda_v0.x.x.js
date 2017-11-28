@@ -1347,14 +1347,13 @@ declare module ramda {
 
   declare function valuesIn<T, O: { [k: string]: T }>(o: O): Array<T | any>;
 
-  declare function where<T>(
-    predObj: { [key: string]: UnaryPredicateFn<T> },
-    ...rest: Array<void>
-  ): (o: { [k: string]: T }) => boolean;
-  declare function where<T>(
-    predObj: { [key: string]: UnaryPredicateFn<T> },
-    o: { [k: string]: T }
+  declare function where(
+    predObj: { [key: string]: UnaryPredicateFn<any> },
+    o: Object
   ): boolean;
+  declare function where(predObj: { [key: string]: UnaryPredicateFn<any> }): (
+    o: Object
+  ) => boolean;
 
   declare function whereEq<T, S, O: { [k: string]: T }, Q: { [k: string]: S }>(
     predObj: O,
