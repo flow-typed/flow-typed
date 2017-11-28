@@ -278,13 +278,14 @@ const val = _.values({ a: 1, b: 2, c: true });
 const val1: number | boolean = val[0];
 
 const pred = _.where({
-  a: _.equals("foo"),
+  a: (a: string) => a === "foo",
   b: _.complement(_.equals("bar")),
+  c: (c: Object) => !!c,
   x: _.gt(10),
   y: _.lt(20)
 });
 
-const w: boolean = pred({ a: "foo", b: "xxx", x: 11, y: 19 });
+const w: boolean = pred({ a: "foo", b: "xxx", c: {}, x: 11, y: 19 });
 
 const pred1 = _.whereEq({ a: 1, b: 2 });
 
