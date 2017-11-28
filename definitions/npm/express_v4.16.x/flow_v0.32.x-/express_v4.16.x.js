@@ -201,7 +201,7 @@ declare class express$Router extends express$Route {
   ) => void;
 }
 
-declare class express$Application extends express$Router {
+declare class express$Application extends express$Router mixins events$EventEmitter {
   constructor(): void;
   locals: { [name: string]: mixed };
   mountpath: string;
