@@ -491,6 +491,11 @@ async function runTestGroup(
     const flowVersionsToRun = orderedFlowVersions.filter(flowVer => {
       return semver.satisfies(flowVer, testGrpFlowSemVerRange);
     });
+    
+    // Windows hasn't flow < 30.0 but we have tests for flow < 30.0. We need skip it. Example: redux_v3
+    if (!flowVersionsToRun.length) {
+      return [];
+    }
     let lowestFlowVersionRan = flowVersionsToRun[0];
 
     const lowerVersions = flowVersionsToRun.filter(flowVer =>
