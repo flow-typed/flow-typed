@@ -99,4 +99,5 @@ tracker.trackMultiProductsPurchaseEventWithCustomDimensionValues(
   "Purchase",
   { "1": "premium", "5": "foo" }
 );
+
 tracker.trackSocialInteraction("Twitter", "Post");
