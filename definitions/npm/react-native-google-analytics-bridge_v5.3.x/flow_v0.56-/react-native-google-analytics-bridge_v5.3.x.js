@@ -230,7 +230,7 @@ declare module "react-native-google-analytics-bridge" {
     trackSocialInteraction(
       network: string,
       action: string,
-      targetUrl: string
+      targetUrl?: string
     ): void,
 
     /**
