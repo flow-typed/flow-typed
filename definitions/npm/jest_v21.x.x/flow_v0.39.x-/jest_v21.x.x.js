@@ -417,7 +417,7 @@ type JestObjectType = {
    * Creates a mock function similar to jest.fn but also tracks calls to
    * object[methodName].
    */
-  spyOn(object: Object, methodName: string): JestMockFn<any, any>,
+  spyOn<T: Object, K: $Keys<T>>(object: T, methodName: K): JestMockFn<any, any>,
   /**
    * Set the default timeout interval for tests and before/after hooks in milliseconds.
    * Note: The default timeout interval is 5 seconds if this method is not called.
@@ -556,7 +556,7 @@ declare var expect: {
 
 // TODO handle return type
 // http://jasmine.github.io/2.4/introduction.html#section-Spies
-declare function spyOn(value: mixed, method: string): Object;
+declare function spyOn<T: mixed, K: $Keys<T>>(value: T, method: K): Object;
 
 /** Holds all functions related to manipulating test runner */
 declare var jest: JestObjectType;
