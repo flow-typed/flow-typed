@@ -1,6 +1,4 @@
-// flow-typed signature: 7b3169cca6d068b1b2d6fde46b23b8e0
-// flow-typed version: <<STUB>>/react-native-google-analytics-bridge_v^5.3.3/flow_v0.56.0
-
+// @flow
 declare module "react-native-google-analytics-bridge" {
   declare export type Product = {
     id: string,
