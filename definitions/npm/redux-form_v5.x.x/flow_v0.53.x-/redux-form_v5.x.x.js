@@ -53,9 +53,9 @@ declare module 'redux-form' {
     meta: MetaProps,
   };
 
-  declare type FunctionComponent<P> = (props?: P) => ?React$Element<any>;
+  declare type FunctionComponent<P, S> = (props?: P, S = void) => ?React$Element<any>;
   declare type ClassComponent<P, S> = Class<React$Component<P, S>>;
-  declare type Component<P> = FunctionComponent<P> | ClassComponent<P, any>;
+  declare type Component<P> = FunctionComponent<P, any> | ClassComponent<P, any>;
 
   declare export type FieldProps<P> = {
     name: string,
