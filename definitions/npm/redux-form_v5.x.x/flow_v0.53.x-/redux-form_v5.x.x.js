@@ -53,7 +53,7 @@ declare module 'redux-form' {
     meta: MetaProps,
   };
 
-  declare type FunctionComponent<P, S> = (props?: P, S = void) => ?React$Element<any>;
+  declare type <P, S> = (props?: P, void) => ?React$Element<any>;
   declare type ClassComponent<P, S> = Class<React$Component<P, S>>;
   declare type Component<P> = FunctionComponent<P, any> | ClassComponent<P, any>;
 
@@ -62,7 +62,7 @@ declare module 'redux-form' {
     placeholder?: ?string,
     label?: string,
     value?: ?(string | boolean),
-    component: ClassComponent<P, void> | FunctionComponent<P> | string
+    component: ClassComponent<P, void> | FunctionComponent<P, void> | string
   } & $Diff<P, FieldInputProps>;
 
   declare export type RegisteredField<T> = {
@@ -164,5 +164,5 @@ declare module 'redux-form' {
   declare export class Field<P> extends React$Component<FieldProps<P>, void> {}
   declare export function reducer(state: any, action: Object): any;
   declare export function reduxForm<P>(config: FormConfig):
-  (component: Component<P>) => FunctionComponent<$Diff<P, FormComponentProps>>
+  (component: Component<P>) => FunctionComponent<$Diff<P, FormComponentProps>, void>
 }
