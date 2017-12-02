@@ -78,6 +78,28 @@ const forked2: Observable<[number, string]> = Observable.forkJoin(
   strings
 );
 
+const forked3a: Observable<Array<number>> = Observable.forkJoin(
+  [1, 2, 3].map(number => Observable.of(number))
+);
+
+const forked3b: Observable<
+  Array<number | string | boolean>
+> = Observable.forkJoin([1, "2", 3, true].map(val => Observable.of(val)));
+
+const forked3c: Observable<Array<any>> = Observable.forkJoin(
+  [1, "2", 3, true].map(val => Observable.of(val))
+);
+
+const forked4a: Observable<number> = Observable.forkJoin(
+  [1, 2, 3].map(number => Observable.of(number)),
+  (...numbers: Array<number>) => numbers.reduce((a, b) => a + b)
+);
+
+const forked4b: Observable<number> = Observable.forkJoin(
+  [1, "2", 3, true].map(val => Observable.of(val)),
+  (...vals: Array<any>) => vals.map(Number).reduce((a, b) => a + b)
+);
+
 // $ExpectError
 const forkedBad: Observable<{ n: number, s: string }> = Observable.forkJoin(
   numbers,
