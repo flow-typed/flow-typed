@@ -2,48 +2,48 @@ import { Stats } from "fs";
 
 declare module "glob-promise" {
   declare module.exports: {
-    $call: globP$GlobP,
-    promise: globP$GlobP,
-    glob: globP$Glob,
-    sync: globP$Sync,
-    hasMagic: globP$hasMagic,
-    Glob: Class<globP$GlobClass>
+    $call: globPromise$GlobPromised,
+    promise: globPromise$GlobPromised,
+    glob: globPromise$Glob,
+    sync: globPromise$Sync,
+    hasMagic: globPromise$hasMagic,
+    Glob: Class<globPromise$GlobClass>
   };
 }
 
-declare interface globP$hasMagic {
-  (globP$Pattern, ?globP$Options): boolean;
+declare interface globPromise$hasMagic {
+  (globPromise$Pattern, ?globPromise$Options): boolean;
 }
 
-declare interface globP$Sync {
-  (globP$Pattern, ?globP$Options): string[];
+declare interface globPromise$Sync {
+  (globPromise$Pattern, ?globPromise$Options): string[];
 }
 
-declare interface globP$GlobP {
-  (globP$Pattern, ?globP$Options): Promise<string[]>;
+declare interface globPromise$GlobPromised {
+  (globPromise$Pattern, ?globPromise$Options): Promise<string[]>;
 }
 
-declare type globP$GlobCallback = (
+declare type globPromise$GlobCallback = (
   string[]
 ) => void | ((Error, string[]) => void);
 
-declare interface globP$Glob {
-  (globP$Pattern, globP$Options, globP$GlobCallback): void;
+declare interface globPromise$Glob {
+  (globPromise$Pattern, globPromise$Options, globPromise$GlobCallback): void;
 
-  (globP$Pattern, globP$GlobCallback): void;
+  (globPromise$Pattern, globPromise$GlobCallback): void;
 }
 
-declare interface globP$Cache {
+declare interface globPromise$Cache {
   [string]: boolean | "FILE" | "DIR" | string[];
 }
 
-declare interface globP$StatCache {
+declare interface globPromise$StatCache {
   [string]: Stats;
 }
 
-declare type globP$Pattern = string;
+declare type globPromise$Pattern = string;
 
-declare type globP$Options = {|
+declare type globPromise$Options = {|
   cwd?: string,
   root?: string,
   dot?: boolean,
@@ -54,7 +54,7 @@ declare type globP$Options = {|
   silent?: boolean,
   strict?: boolean,
   cache?: boolean,
-  statCache?: globP$StatCache,
+  statCache?: globPromise$StatCache,
   symlinks?: { [string]: boolean },
   sync?: boolean,
   nounique?: boolean,
@@ -74,8 +74,15 @@ declare type globP$Options = {|
   absolute?: boolean
 |};
 
-declare class globP$GlobClass extends events$EventEmitter {
-  constructor(globP$Pattern): this;
-  constructor(globP$Pattern, globP$Options | globP$GlobCallback): this;
-  constructor(globP$Pattern, globP$Options, globP$GlobCallback): this;
+declare class globPromise$GlobClass extends events$EventEmitter {
+  constructor(globPromise$Pattern): this;
+  constructor(
+    globPromise$Pattern,
+    globPromise$Options | globPromise$GlobCallback
+  ): this;
+  constructor(
+    globPromise$Pattern,
+    globPromise$Options,
+    globPromise$GlobCallback
+  ): this;
 }
