@@ -239,6 +239,23 @@ describe('$q', () => {
   })
 })
 
+describe("mock", () => {
+  describe("module", () => {
+    it("takes strings, functions and objects", () => {
+      angular.mock.module("string", () => {}, {});
+    });
+
+    it("does not accept numbers", () => {
+      //$ExpectError
+      angular.mock.module(123);
+    });
+
+    it("returns a function", () => {
+      angular.mock.module("string", {})();
+    });
+  });
+});
+
 describe('$http', () => {
   it('can POST', () => {
     angular.mock.inject(($http: AngularHttpService) => {

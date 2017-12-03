@@ -138,6 +138,7 @@ declare module angular {
 
   declare type AngularMock = {
     inject: (...a: Array<mixed>) => Function,
+    module: (...a: Array<string | Function | Object>) => () => void
   }
   declare var mock: AngularMock
 
