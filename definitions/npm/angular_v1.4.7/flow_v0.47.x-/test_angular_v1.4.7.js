@@ -99,6 +99,11 @@ describe('filter', () => {
 
 })
 
+describe('filter', () => {
+  it('can be declared', () => {
+    angular.module('foo', []).run(['bar', 'bazz', (bar, bazz) => {}])
+  })
+})
 
 describe('value', () => {
   it('can be declared to any value', () => {

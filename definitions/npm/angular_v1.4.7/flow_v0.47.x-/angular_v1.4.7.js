@@ -88,8 +88,7 @@ declare module angular {
   ) => AngularModule
 
   declare type RunDeclaration = (
-    name: string,
-    di: $npm$angular$DependencyInjection<void>,
+    fn: $npm$angular$DependencyInjection<(...a: Array<*>) => void>,
   ) => AngularModule
 
   declare type ValueDeclaration = (
