@@ -14,6 +14,9 @@ declare module angular {
   // I'm not sure how represent this properly: Angular DI declarations are a
   // list of strings with a single function at the end. The function can vary,
   // so it is a type param.
+  //
+  // NOTE: if you use compile step to mangle array, replace below with
+  // declare type $npm$angular$DependencyInjection<T> = T
   declare type $npm$angular$DependencyInjection<T> = Array<string | T>
 
   // Extending Array<Element> allows us to do the `jq[0]` expression and friends
