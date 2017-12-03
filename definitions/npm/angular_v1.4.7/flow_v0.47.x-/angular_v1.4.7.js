@@ -80,7 +80,7 @@ declare module angular {
 
   declare type FactoryDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Object>,
   ) => AngularModule
 
   declare type FilterDeclaration = (
@@ -154,7 +154,7 @@ declare module angular {
   //****************************************************************************
 
   declare type AngularMock = {
-    inject: (...a: Array<mixed>) => Function,
+    inject: (...a: Array<*>) => Function,
     module: (...a: Array<string | Function | Object>) => () => void
   }
   declare var mock: AngularMock
