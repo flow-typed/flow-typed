@@ -122,12 +122,18 @@ declare module angular {
     deps: ?Array<Dependency>
   ): AngularModule
 
-  declare function element(html: string | Element): JqliteElement
+  declare function element(html: string | Element | Document): JqliteElement
   declare function copy<T>(object: T): T
-  declare function extend<T>(dst: T, src: Object): T
-  declare function forEach<T>(obj: Array<T>, iterator: (value: T, key: string) => void): void
 
+  declare function extend<A, B>(a: A, b: B): A & B;
+  declare function extend<A, B, C>(a: A, b: B, c: C): A & B & C;
+  declare function extend<A, B, C, D>(a: A, b: B, c: C, d: D): A & B & C & D;
+  declare function extend<A, B, C, D, E>(a: A, b: B, c: C, d: D, e: E): A & B & C & D & E;
 
+  declare function forEach<T>(obj: Object | Array<T>, iterator: (value: T, key: string) => void): void;
+  declare function fromJson(json: string): Object | Array<*> | string | number;
+  declare function toJson(obj: Object | Array<any> | string | Date | number | boolean, pretty?: boolean | number): string;
+  declare function isDefined(val: any): boolean;
   declare type AngularQ = {
     when: <T>(value: T) => AngularPromise<T>,
   }
