@@ -99,18 +99,15 @@ describe('filter', () => {
 
 })
 
-describe('value', () => {
-  it('can be declared', () => {
-    angular.module('foo', []).value('foo', ['bar', 'bazz', (bar, bazz) => {
-      return { a: bar, b: bazz }
-    }])
-  })
 
-  it('requires a return value of some kind', () => {
-    // $ExpectError undefined. This type is incompatible with
-    angular.module('foo', []).value('foo', ['bar', 'bazz', (bar, bazz) => {}])
+describe('value', () => {
+  it('can be declared to any value', () => {
+    angular.module('foo', []).value('foo', 123)
+    angular.module('foo', []).value('foo', 'str')
+    angular.module('foo', []).value('foo', {})
   })
 })
+
 
 describe('constant', () => {
   it('can be declared to any value', () => {
