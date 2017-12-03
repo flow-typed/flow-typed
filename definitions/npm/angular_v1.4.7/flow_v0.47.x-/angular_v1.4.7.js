@@ -119,7 +119,7 @@ declare module angular {
 
   declare function module(
     name: string,
-    deps: ?Array<Dependency>
+    deps?: ?Array<Dependency>
   ): AngularModule
 
   declare function element(html: string | Element | Document): JqliteElement
