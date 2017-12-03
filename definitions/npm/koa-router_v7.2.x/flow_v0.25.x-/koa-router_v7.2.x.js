@@ -4,13 +4,13 @@
 
 type KoaRouter$Middleware = (
   ctx: any,
-  next: () => void | Promise<void>
+  next: () => Promise<void>
 ) => Promise<void> | void;
 
 type KoaRouter$ParamMiddleware = (
   param: string,
   ctx: any,
-  next: () => void | Promise<void>
+  next: () => Promise<void>
 ) => Promise<void> | void;
 
 declare module "koa-router" {
