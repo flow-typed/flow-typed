@@ -7,7 +7,9 @@
 
 declare module angular {
 
-  declare type ScopeBindings = '<' | '=' | '&' | '<?' | '=?' | '&?' | '=ngModel';
+  // NOTE: if you don't use named scope bindings, remove string type in the end
+  // for stricter types
+  declare type ScopeBindings = '<' | '=' | '&' | '<?' | '=?' | '&?' | string;
   declare type Scope = {[key: string]: ScopeBindings};
   declare type ControllerFunction = (...a: Array<*>) => void;
 

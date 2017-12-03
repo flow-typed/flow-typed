@@ -88,18 +88,6 @@ describe('directives', () => {
       }
     }])
   })
-
-  it('scope does not accept bad binding direction markings', () => {
-    angular.module('foo', []).directive('foo', ['bar', 'bazz', (bar, bazz) => {
-      // $ExpectError
-      return {
-        templateUrl: 'foo.html',
-        scope: {
-          prop: 'this is not accepted'
-        }
-      }
-    }])
-  })
 })
 
 describe('service', () => {
