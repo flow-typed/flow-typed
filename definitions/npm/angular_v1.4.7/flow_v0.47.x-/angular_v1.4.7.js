@@ -7,6 +7,8 @@
 
 declare module angular {
 
+  declare type ScopeBindings = '<' | '=' | '&' | '<?' | '=?' | '&?' | '=ngModel';
+  declare type Scope = {[key: string]: ScopeBindings};
   declare type ControllerFunction = (...a: Array<*>) => void;
 
   // I'm not sure how represent this properly: Angular DI declarations are a
@@ -46,20 +48,22 @@ declare module angular {
   // TODO: Expand to cover the whole matrix of AECM, in any order. Probably
   // should write something to handle it.
   declare type DirectiveRestrict = 'A' | 'E' | 'AE' | 'EA'
-  declare type Directive = {
-    restrict?: string,
+  declare type Directive = {|
+    restrict?: DirectiveRestrict,
     template?: string,
     templateUrl?: string,
-    scope?: mixed,
-    controller?: $npm$angular$DependencyInjection<*>,
+    scope?: Scope,
+    controller?: ControllerFunction,
     link?: AngularLinkFunction,
+    controllerAs?: string,
+    bindToController?: boolean,
     // TODO: flesh out this definition
     compile?: (...a: any) => AngularCompileLink,
-  }
+  |}
 
   declare type DirectiveDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Directive>,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Directive>,
   ) => AngularModule
 
 

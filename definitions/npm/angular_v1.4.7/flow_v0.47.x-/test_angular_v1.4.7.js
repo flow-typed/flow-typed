@@ -54,6 +54,52 @@ describe('directives', () => {
       return 'this is clearly not a directive'
     }])
   })
+
+  it('requires proper restrict when defined', () => {
+    angular.module('foo', []).directive('foo', ['bar', 'bazz', (bar, bazz) => {
+      // $ExpectError
+      return {
+        restrict: 'fails to this',
+        templateUrl: 'foo.html',
+      }
+    }])
+  })
+
+  it('does not accept random properties', () => {
+    angular.module('foo', []).directive('foo', ['bar', 'bazz', (bar, bazz) => {
+      // $ExpectError
+      return {
+        random: 'prop which is not allowed',
+        templateUrl: 'foo.html',
+      }
+    }])
+  })
+
+  it('all bells and whistles for directive', () => {
+    angular.module('foo', []).directive('foo', ['bar', 'bazz', (bar, bazz) => {
+      return {
+        bindToController: true,
+        controllerAs: 'ctrl',
+        templateUrl: 'foo.html',
+        scope: {
+          prop: '<'
+        },
+        controller: () => {}
+      }
+    }])
+  })
+
+  it('scope does not accept bad binding direction markings', () => {
+    angular.module('foo', []).directive('foo', ['bar', 'bazz', (bar, bazz) => {
+      // $ExpectError
+      return {
+        templateUrl: 'foo.html',
+        scope: {
+          prop: 'this is not accepted'
+        }
+      }
+    }])
+  })
 })
 
 describe('service', () => {
