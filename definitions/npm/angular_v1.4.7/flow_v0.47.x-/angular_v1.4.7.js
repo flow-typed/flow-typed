@@ -102,7 +102,7 @@ declare module angular {
     di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
   ) => AngularModule
 
-  declare type AngularModule = {
+  declare type AngularModule = {|
     controller: ControllerDeclaration,
     directive: DirectiveDeclaration,
     run: RunDeclaration,
@@ -113,7 +113,7 @@ declare module angular {
     value: ValueDeclaration,
     constant: ConstantDeclaration,
     name: string,
-  }
+  |}
 
   declare type Dependency = AngularModule | string
 
