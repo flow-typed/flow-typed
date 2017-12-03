@@ -85,6 +85,20 @@ describe('factory', () => {
 
 })
 
+describe('filter', () => {
+  it('can be declared', () => {
+    angular.module('foo', []).filter('foo', ['bar', 'bazz', (bar, bazz) => {
+      return () => {};
+    }])
+  })
+
+  it('requires a return value of some kind', () => {
+    // $ExpectError cant return object
+    angular.module('foo', []).filter('foo', ['bar', 'bazz', () => ({})])
+  })
+
+})
+
 describe('value', () => {
   it('can be declared', () => {
     angular.module('foo', []).value('foo', ['bar', 'bazz', (bar, bazz) => {

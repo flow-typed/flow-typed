@@ -77,6 +77,11 @@ declare module angular {
     di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
   ) => AngularModule
 
+  declare type FilterDeclaration = (
+    name: string,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Function>,
+  ) => AngularModule
+
   declare type ServiceDeclaration = (
     name: string,
     di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Function>,
@@ -103,6 +108,7 @@ declare module angular {
     run: RunDeclaration,
     config: ConfigDeclaration,
     factory: FactoryDeclaration,
+    filter: FilterDeclaration,
     service: ServiceDeclaration,
     value: ValueDeclaration,
     constant: ConstantDeclaration,
