@@ -26,12 +26,12 @@ declare module angular {
     injector: Function,
   }
 
-  declare function AngularLinkFunction(
-    scope: mixed,
+  declare type AngularLinkFunction = (
+    scope: $Scope<*>,
     element: JqliteElement,
     attrs: mixed,
     controller: mixed
-  ): void
+  ) => void
 
   declare type AngularCompileLink = {
     post?: AngularLinkFunction,
