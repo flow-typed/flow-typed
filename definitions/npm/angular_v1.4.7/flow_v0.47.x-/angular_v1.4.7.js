@@ -99,7 +99,7 @@ declare module angular {
 
   declare type ConstantDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
+    value: mixed,
   ) => AngularModule
 
   declare type AngularModule = {|

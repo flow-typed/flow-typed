@@ -113,17 +113,10 @@ describe('value', () => {
 })
 
 describe('constant', () => {
-  it('can be declared', () => {
-    angular.module('foo', []).constant('foo', ['bar', 'bazz', (bar, bazz) => {
-      return { a: bar, b: bazz }
-    }])
-  })
-
-  it('requires a return value of some kind', () => {
-    // $ExpectError undefined. This type is incompatible with
-    angular.module('foo', []).constant('foo', ['bar', 'bazz', (bar, bazz) => {
-      // intentionally return nothing
-    }])
+  it('can be declared to any value', () => {
+    angular.module('foo', []).constant('foo', 123)
+    angular.module('foo', []).constant('foo', 'str')
+    angular.module('foo', []).constant('foo', {})
   })
 })
 
