@@ -69,7 +69,7 @@ declare module angular {
 
   declare type ConfigDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<*>,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => void>,
   ) => AngularModule
 
   declare type FactoryDeclaration = (
