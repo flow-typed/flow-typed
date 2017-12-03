@@ -84,7 +84,7 @@ declare module angular {
 
   declare type ServiceDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Function>,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Function | Object>,
   ) => AngularModule
 
   declare type RunDeclaration = (

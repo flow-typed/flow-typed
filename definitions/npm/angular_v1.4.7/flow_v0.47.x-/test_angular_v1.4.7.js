@@ -63,10 +63,23 @@ describe('service', () => {
     }])
   })
 
-  it('requires a return value of a function', () => {
+  it('can return object', () => {
     angular.module('foo', []).service('foo', ['bar', 'bazz', (bar, bazz) => {
-      // $ExpectError object. This type is incompatible with Function
       return { foo: 'bar' }
+    }])
+  })
+
+  it('can return function', () => {
+    angular.module('foo', []).service('foo', ['bar', 'bazz', (bar, bazz) => {
+      return () => {};
+    }])
+  })
+
+
+  it('cant return other types', () => {
+    angular.module('foo', []).service('foo', ['bar', 'bazz', (bar, bazz) => {
+      //$ExpectError
+      return 123;
     }])
   })
 })
