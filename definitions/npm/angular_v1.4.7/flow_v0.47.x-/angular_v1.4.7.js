@@ -42,7 +42,7 @@ declare module angular {
   declare function CompileFunction(
     element: JqliteElement,
     attrs: mixed,
-    controller: mixed
+    controller: ControllerFunction
   ): AngularLinkFunction
 
   // TODO: Expand to cover the whole matrix of AECM, in any order. Probably
