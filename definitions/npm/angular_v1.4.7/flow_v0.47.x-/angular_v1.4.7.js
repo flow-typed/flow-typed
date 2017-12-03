@@ -7,6 +7,8 @@
 
 declare module angular {
 
+  declare type ControllerFunction = (...a: Array<*>) => void;
+
   // I'm not sure how represent this properly: Angular DI declarations are a
   // list of strings with a single function at the end. The function can vary,
   // so it is a type param.
@@ -63,7 +65,7 @@ declare module angular {
 
   declare type ControllerDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<*>,
+    di: $npm$angular$DependencyInjection<ControllerFunction>,
   ) => AngularModule
 
 

@@ -98,6 +98,12 @@ describe('factory', () => {
 
 })
 
+describe('controller', () => {
+  it('can be declared', () => {
+    angular.module('foo', []).controller('foo', ['bar', 'bazz', (bar, bazz) => {}])
+  })
+})
+
 describe('config', () => {
   it('can be declared', () => {
     angular.module('foo', []).config('foo', ['bar', 'bazz', (bar, bazz) => {}])
