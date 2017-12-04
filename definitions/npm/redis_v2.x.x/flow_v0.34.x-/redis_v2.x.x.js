@@ -55,8 +55,7 @@ declare module "redis" {
     hsetAsync: (topic: string, key: string, value: string) => Promise<number>;
     hgetAsync: (
       topic: string,
-      key: string,
-      value: string
+      key: string
     ) => Promise<string> | Promise<void>;
     hgetallAsync: (
       topic: string,
