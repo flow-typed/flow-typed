@@ -345,7 +345,7 @@ function filterLibDefs(
       let filterMatch = false;
       switch (filter.type) {
         case 'exact':
-          const fullName = def.scope ? `${def.scope}/${def.name}` : def.name
+          const fullName = def.scope ? `${def.scope}/${def.name}` : def.name;
           filterMatch =
             filter.pkgName.toLowerCase() === fullName.toLowerCase() &&
             (def.selfTyped || pkgVersionMatch(filter.pkgVersion, def.version));
@@ -546,7 +546,7 @@ export async function getNpmLibDefs(
           validationErrors,
           validating,
         );
-        libDefs.forEach(def => def.selfTyped = true)
+        libDefs.forEach(def => (def.selfTyped = true));
         if (!npmLibDefs.has(pkgName)) npmLibDefs.set(pkgName, libDefs);
       }),
     );
@@ -611,9 +611,9 @@ export async function getNpmLibDefVersionHash(
   const latestCommitHash = libDef.selfTyped
     ? libDef.version
     : (await findLatestFileCommitHash(
-      repoDirPath,
-      path.relative(repoDirPath, libDef.path),
-    )).substr(0, 10);
+        repoDirPath,
+        path.relative(repoDirPath, libDef.path),
+      )).substr(0, 10);
   return (
     `${latestCommitHash}/` +
     (libDef.scope === null ? '' : `${libDef.scope}/`) +

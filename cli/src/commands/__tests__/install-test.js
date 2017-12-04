@@ -394,13 +394,13 @@ describe('install (command)', () => {
           ),
         )).toString();
         expect(scopedUnderscoreLibDefContents).toContain(
-          '// flow-typed signature: '
+          '// flow-typed signature: ',
         );
         expect(scopedUnderscoreLibDefContents).toContain(
-          '// flow-typed version: '
+          '// flow-typed version: ',
         );
         expect(scopedUnderscoreLibDefContents).toContain(
-          '// flow-self-typed test'
+          '// flow-self-typed test',
         );
       });
     });
