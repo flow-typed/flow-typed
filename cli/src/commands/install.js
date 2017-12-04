@@ -433,7 +433,7 @@ async function installNpmLibDef(
         colors.green(
           `Consider contributing your changes back to flow-typed repository :)`
         ),
-        `Read more from https://github.com/flowtype/flow-typed/wiki/Contributing-Library-Definitions`,
+        `Read more at https://github.com/flowtype/flow-typed/wiki/Contributing-Library-Definitions`,
         "Use --overwrite to overwrite the existing libdef."
       );
       return true;
