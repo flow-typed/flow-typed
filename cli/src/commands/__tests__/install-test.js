@@ -307,8 +307,8 @@ describe('install (command)', () => {
             },
             dependencies: {
               foo: '1.2.3',
-              underscore: '^1.0.0',
-              '@testscope/underscore': '^1.0.0',
+              underscore: '^1.6.0',
+              '@testscope/underscore': '^1.6.0',
             },
           }),
           copyDir(
@@ -355,7 +355,7 @@ describe('install (command)', () => {
                 FLOWPROJ_DIR,
                 'flow-typed',
                 'npm',
-                'underscore_vx.x.x.js',
+                'underscore_v1.8.3.js',
               ),
             ),
             fs.exists(
@@ -364,7 +364,7 @@ describe('install (command)', () => {
                 'flow-typed',
                 'npm',
                 '@testscope',
-                'underscore_vx.x.x.js',
+                'underscore_v1.8.3.js',
               ),
             ),
           ]),
@@ -378,10 +378,11 @@ describe('install (command)', () => {
         expect(fooLibDefContents).toContain('// flow-typed version: ');
 
         const underscoreLibDefContents = (await fs.readFile(
-          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'underscore_vx.x.x.js'),
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'underscore_v1.8.3.js'),
         )).toString();
         expect(underscoreLibDefContents).toContain('// flow-typed signature: ');
         expect(underscoreLibDefContents).toContain('// flow-typed version: ');
+        expect(underscoreLibDefContents).toContain('// flow-self-typed test');
 
         const scopedUnderscoreLibDefContents = (await fs.readFile(
           path.join(
@@ -389,14 +390,17 @@ describe('install (command)', () => {
             'flow-typed',
             'npm',
             '@testscope',
-            'underscore_vx.x.x.js',
+            'underscore_v1.8.3.js',
           ),
         )).toString();
         expect(scopedUnderscoreLibDefContents).toContain(
-          '// flow-typed signature: ',
+          '// flow-typed signature: '
         );
         expect(scopedUnderscoreLibDefContents).toContain(
-          '// flow-typed version: ',
+          '// flow-typed version: '
+        );
+        expect(scopedUnderscoreLibDefContents).toContain(
+          '// flow-self-typed test'
         );
       });
     });

@@ -44,6 +44,7 @@ export type NpmLibDef = {|
   flowVersion: FlowVersion,
   path: string,
   testFilePaths: Array<string>,
+  selfTyped?: boolean,
 |};
 
 export type NpmLibDefFilter = {|
@@ -344,9 +345,10 @@ function filterLibDefs(
       let filterMatch = false;
       switch (filter.type) {
         case 'exact':
+          const fullName = def.scope ? `${def.scope}/${def.name}` : def.name
           filterMatch =
-            filter.pkgName.toLowerCase() === def.name.toLowerCase() &&
-            pkgVersionMatch(filter.pkgVersion, def.version);
+            filter.pkgName.toLowerCase() === fullName.toLowerCase() &&
+            (def.selfTyped || pkgVersionMatch(filter.pkgVersion, def.version));
           break;
         default:
           (filter: empty);
@@ -515,8 +517,8 @@ export async function getNpmLibDefs(
   if (cwd) {
     const node_modules = path.join(cwd, 'node_modules');
     const pkgDefDirs = [
-      ...(await glob(path.join(node_modules, '@*', '*', 'flow-typed'))),
-      ...(await glob(path.join(node_modules, '*', 'flow-typed'))),
+      ...(await glob(path.join(node_modules, '@*', '*', 'flow-self-typed'))),
+      ...(await glob(path.join(node_modules, '*', 'flow-self-typed'))),
     ];
 
     await P.all(
@@ -544,6 +546,7 @@ export async function getNpmLibDefs(
           validationErrors,
           validating,
         );
+        libDefs.forEach(def => def.selfTyped = true)
         if (!npmLibDefs.has(pkgName)) npmLibDefs.set(pkgName, libDefs);
       }),
     );
@@ -605,12 +608,14 @@ export async function getNpmLibDefVersionHash(
   repoDirPath: string,
   libDef: NpmLibDef,
 ): Promise<string> {
-  const latestCommitHash = await findLatestFileCommitHash(
-    repoDirPath,
-    path.relative(repoDirPath, libDef.path),
-  );
+  const latestCommitHash = libDef.selfTyped
+    ? libDef.version
+    : (await findLatestFileCommitHash(
+      repoDirPath,
+      path.relative(repoDirPath, libDef.path),
+    )).substr(0, 10);
   return (
-    `${latestCommitHash.substr(0, 10)}/` +
+    `${latestCommitHash}/` +
     (libDef.scope === null ? '' : `${libDef.scope}/`) +
     `${libDef.name}_${libDef.version}/` +
     `flow_${flowVersionToSemver(libDef.flowVersion)}`
