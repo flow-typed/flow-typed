@@ -1,6 +1,6 @@
 /* This module definition is by no means complete. A lot of methods of the RedisClient class are missing */
 declare module "redis" {
-  declare class RedisClient extends events$EventEmitter {
+  declare class RedisClient extends events$EventEmitter mixins RedisClientPromisified {
     hmset: (key: string, map: any, callback: (?Error) => void) => void;
     rpush: (key: string, value: string, callback: (?Error) => void) => void;
     lpush: (key: string, value: any) => void;
