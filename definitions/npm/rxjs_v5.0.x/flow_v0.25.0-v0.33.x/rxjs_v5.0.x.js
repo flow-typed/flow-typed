@@ -1014,6 +1014,26 @@ declare class rxjs$Observable<+T> {
     _: void
   ): rxjs$Observable<[A, B, C, D, E, F, G, H]>;
 
+  static forkJoin<A>(
+    a: Array<rxjs$Observable<A>>,
+    _: void
+  ): rxjs$Observable<Array<A>>;
+
+  static forkJoin<A>(
+    a: Array<rxjs$Observable<any>>,
+    _: void
+  ): rxjs$Observable<A>;
+
+  static forkJoin<A, B>(
+    a: Array<rxjs$Observable<A>>,
+    resultSelector: (...values: Array<A>) => B
+  ): rxjs$Observable<B>;
+
+  static forkJoin<A>(
+    a: Array<rxjs$Observable<any>>,
+    resultSelector: (...values: Array<any>) => A
+  ): rxjs$Observable<A>;
+
   withLatestFrom<A>(a: rxjs$Observable<A>): rxjs$Observable<[T, A]>;
 
   withLatestFrom<A, B>(
