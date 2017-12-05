@@ -334,8 +334,9 @@ function filterLibDefs(
       let filterMatch = false;
       switch (filter.type) {
         case 'exact':
+          const fullName = def.scope ? `${def.scope}/${def.name}` : def.name;
           filterMatch =
-            filter.pkgName.toLowerCase() === def.name.toLowerCase() &&
+            filter.pkgName.toLowerCase() === fullName.toLowerCase() &&
             pkgVersionMatch(filter.pkgVersion, def.version);
           break;
         default:
