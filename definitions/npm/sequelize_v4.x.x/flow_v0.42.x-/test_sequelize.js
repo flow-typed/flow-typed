@@ -227,6 +227,9 @@ Customer.belongsToMany(Branch, { through: 'branchCustomer' });
 (Warehouse.attributes.blah.type: DataTypeAbstract);
 (Warehouse.primaryKeys.blah.type: DataTypeAbstract);
 
+Warehouse.getAssociations(WarehouseBranch)
+Warehouse.getAssociationForAlias(WarehouseBranch, 'blah')
+
 // hasOne
 product.getBarcode();
 product.getBarcode({ scope: null }).then(b => b && b.code);
