@@ -17,7 +17,7 @@ declare module 'mysql' {
     connectTimeout?: number,
     stringifyObjects?: boolean,
     insecureAuth?: boolean,
-    typeCast?: boolean,
+    typeCast?: boolean | (field: Object, next: Function) => any,
     queryFormat?: (query: string, values: ?mixed, timezone: string) => string,
     supportBigNumbers?: boolean,
     bigNumberStrings?: boolean,
@@ -86,18 +86,18 @@ declare module 'mysql' {
     ping(callback: QueryCallback): void;
 
     escapeId(val: mixed, forbidQualified?: boolean): string;
-    escape(val: mixed, stringifyObjects?: boolean, timeZone: string): string;
+    escape(val: mixed, stringifyObjects?: boolean, timeZone?: string): string;
     format(sql: string, valus: Array<mixed>): string;
   }
 
   declare class Pool extends events$EventEmitter {
-    getConnection(callback: (error: ?Error) => *): void;
+    getConnection(callback: (error: ?Error, connection?: Connection) => *): void;
     end(callback?: (error: ?Error) => *): void;
     query(sql: QueryOptions, values?: Array<mixed>, callback?: QueryCallback): Query;
     query(sql: QueryOptions, callback?: QueryCallback): Query;
 
     escapeId(val: mixed, forbidQualified?: boolean): string;
-    escape(val: mixed, stringifyObjects?: boolean, timeZone: string): string;
+    escape(val: mixed, stringifyObjects?: boolean, timeZone?: string): string;
   }
 
   declare type PoolOptions = ConnectionOptions & {
@@ -134,9 +134,10 @@ declare module 'mysql' {
   }
 
   declare function escapeId(val: mixed, forbidQualified?: boolean): string;
-  declare function escape(val: mixed, stringifyObjects?: boolean, timeZone: string): string;
+  declare function escape(val: mixed, stringifyObjects?: boolean, timeZone?: string): string;
   declare function format(sql: string, valus: Array<mixed>): string;
   declare function createConnection(options: ConnectionOptions | string): Connection;
   declare function createPool(options: PoolOptions | string): Pool;
   declare function createPoolCluster(options?: PoolClusterOptions): PoolCluster;
+  declare function raw(sql: string): { toSqlString: () => string };
 }
