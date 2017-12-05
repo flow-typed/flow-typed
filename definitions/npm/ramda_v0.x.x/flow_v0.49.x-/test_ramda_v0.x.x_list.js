@@ -209,6 +209,12 @@ const str: string = "hello world";
   const redxs2: Array<string> = reduce(_.concat, [])(_.map(x => [x], ss));
   // Example used in docs: http://ramdajs.com/docs/#reduce
   const redxs4: number = reduce(subtract, 0, [1, 2, 3, 4]);
+  // Using accumulator type that differs from the element type (A and B).
+  const redxs5: number = reduce((acc, s) => acc + parseInt(s), 0, [
+    "1",
+    "2",
+    "3"
+  ]);
 
   // Ramda works with $ReadOnlyArray as it is immutable.
   const readOnlyArray: $ReadOnlyArray<number> = [1, 2, 3, 4];
