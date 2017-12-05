@@ -81,7 +81,7 @@ declare module "redis" {
     port?: number,
     path?: string,
     url?: string,
-    parser: 'javascript' | 'hiredis',
+    parser?: 'javascript' | 'hiredis',
     string_numbers?: boolean,
     return_buffers?: boolean,
     detect_buffers?: boolean,
