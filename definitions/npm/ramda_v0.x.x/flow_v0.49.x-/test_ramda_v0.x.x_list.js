@@ -1,6 +1,16 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, curry, filter, find, repeat, zipWith } from "ramda";
+import _, {
+  compose,
+  pipe,
+  curry,
+  filter,
+  find,
+  reduce,
+  repeat,
+  subtract,
+  zipWith
+} from "ramda";
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -193,34 +203,56 @@ const str: string = "hello world";
   const ys4: Array<string> = _.repeat("1", 10);
   const ys5: Array<number> = _.repeat(1, 10);
 
-  const redxs: number = _.reduce(_.add, 10, ns);
-  const redxs1: string = _.reduce(_.concat, "", ss);
-  const redxs2: Array<string> = _.reduce(_.concat, [])(_.map(x => [x], ss));
-  const redxs3: number = _.reduceRight(_.add, 10, ns);
-  const redxs4: string = _.reduceRight(_.concat, "", ss);
-  const redxs5: Array<string> = _.reduceRight(_.concat, [])(
+  // reduce
+  const redxs: number = reduce(_.add, 10, ns);
+  const redxs1: string = reduce(_.concat, "", ss);
+  const redxs2: Array<string> = reduce(_.concat, [])(_.map(x => [x], ss));
+  // Example used in docs: http://ramdajs.com/docs/#reduce
+  const redxs4: number = reduce(subtract, 0, [1, 2, 3, 4]);
+  // Using accumulator type that differs from the element type (A and B).
+  const redxs5: number = reduce((acc, s) => acc + parseInt(s), 0, [
+    "1",
+    "2",
+    "3"
+  ]);
+
+  // Ramda works with $ReadOnlyArray as it is immutable.
+  const readOnlyArray: $ReadOnlyArray<number> = [1, 2, 3, 4];
+  // $ReadOnlyArray with curried permutations:
+  const redxsReadOnly3: number = reduce(subtract, 0, readOnlyArray);
+  const redxsReadOnly2_1: number = reduce(subtract, 0)(readOnlyArray);
+  const redxsReadOnly1_2: number = reduce(subtract)(0, readOnlyArray);
+  const redxsReadOnly1_1_1: number = reduce(subtract)(0)(readOnlyArray);
+
+  // $ExpectError reduce will not work with an object.
+  reduce(subtract, 0, { foo: 1, bar: 2 });
+
+  // reduceRight
+  const redrxs1: number = _.reduceRight(_.add, 10, ns);
+  const redrxs2: string = _.reduceRight(_.concat, "", ss);
+  const redrxs3: Array<string> = _.reduceRight(_.concat, [])(
     _.map(x => [x], ss)
   );
   //$ExpectError
-  const redxs5a: string = _.reduceRight(
+  const redrxs3a: string = _.reduceRight(
     (acc: string, value: number): string => acc,
     "",
     ns
   );
-  const redxs5b: string = _.reduceRight(
+  const redrxs3b: string = _.reduceRight(
     (value: number, acc: string): string => acc,
     "",
     ns
   );
 
-  const redxs6: Array<number> = _.scan(_.add)(10)(ns);
-  const redxs7: Array<number> = _.scan(_.add, 10)(ns);
-  const redxs8: Array<number> = _.scan(_.add)(10, ns);
-  const redxs9: Array<number> = _.scan(_.add, 10, ns);
-  const redxs10: Array<string> = _.scan(_.concat)("")(ss);
-  const redxs11: Array<string> = _.scan(_.concat, "")(ss);
-  const redxs12: Array<string> = _.scan(_.concat)("", ss);
-  const redxs13: Array<string> = _.scan(_.concat, "", ss);
+  const scanxs6: Array<number> = _.scan(_.add)(10)(ns);
+  const scanxs7: Array<number> = _.scan(_.add, 10)(ns);
+  const scanxs8: Array<number> = _.scan(_.add)(10, ns);
+  const scanxs9: Array<number> = _.scan(_.add, 10, ns);
+  const scanxs10: Array<string> = _.scan(_.concat)("")(ss);
+  const scanxs11: Array<string> = _.scan(_.concat, "")(ss);
+  const scanxs12: Array<string> = _.scan(_.concat)("", ss);
+  const scanxs13: Array<string> = _.scan(_.concat, "", ss);
 
   const reduceToNamesBy = _.reduceBy(
     (acc, student) => acc.concat(student.name),

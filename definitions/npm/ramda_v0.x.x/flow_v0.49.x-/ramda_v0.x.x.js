@@ -976,21 +976,21 @@ declare module ramda {
 
   declare function reverse<T, V: Array<T> | string>(xs: V): V;
 
-  declare function reduce<A, B>(
-    fn: (acc: A, elem: B) => A,
-    ...rest: Array<void>
-  ): ((init: A, xs: Array<B>) => A) &
-    ((init: A, ...rest: Array<void>) => (xs: Array<B>) => A);
-  declare function reduce<A, B>(
-    fn: (acc: A, elem: B) => A,
-    init: A,
-    ...rest: Array<void>
-  ): (xs: Array<B>) => A;
-  declare function reduce<A, B>(
-    fn: (acc: A, elem: B) => A,
-    init: A,
-    xs: Array<B>
-  ): A;
+  declare type Reduce = (<A, B>(
+    fn: (acc: A, elm: B) => A
+  ) => ((init: A) => (xs: Array<B> | $ReadOnlyArray<B>) => A) &
+    ((init: A, xs: Array<B> | $ReadOnlyArray<B>) => A)) &
+    (<A, B>(
+      fn: (acc: A, elm: B) => A,
+      init: A
+    ) => (xs: Array<B> | $ReadOnlyArray<B>) => A) &
+    (<A, B>(
+      fn: (acc: A, elm: B) => A,
+      init: A,
+      xs: Array<B> | $ReadOnlyArray<B>
+    ) => A);
+
+  declare var reduce: Reduce;
 
   declare function reduceBy<A, B>(
     fn: (acc: B, elem: A) => B,
