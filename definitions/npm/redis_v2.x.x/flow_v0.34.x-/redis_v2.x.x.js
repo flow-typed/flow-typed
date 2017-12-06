@@ -93,7 +93,7 @@ declare module "redis" {
     max_attempts?: number,
     retry_unfulfilled_commands?: boolean,
     password?: string,
-    db?: string,
+    db?: number,
     family?: 'IPv4' | 'IPv6',
     disable_resubscribing?: boolean,
     rename_commands?: {[name: string]: string},
