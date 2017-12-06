@@ -54,6 +54,40 @@ describe('directives', () => {
       return 'this is clearly not a directive'
     }])
   })
+
+  it('requires proper restrict when defined', () => {
+    angular.module('foo', []).directive('foo', ['bar', 'bazz', (bar, bazz) => {
+      // $ExpectError
+      return {
+        restrict: 'fails to this',
+        templateUrl: 'foo.html',
+      }
+    }])
+  })
+
+  it('does not accept random properties', () => {
+    angular.module('foo', []).directive('foo', ['bar', 'bazz', (bar, bazz) => {
+      // $ExpectError
+      return {
+        random: 'prop which is not allowed',
+        templateUrl: 'foo.html',
+      }
+    }])
+  })
+
+  it('all bells and whistles for directive', () => {
+    angular.module('foo', []).directive('foo', ['bar', 'bazz', (bar, bazz) => {
+      return {
+        bindToController: true,
+        controllerAs: 'ctrl',
+        templateUrl: 'foo.html',
+        scope: {
+          prop: '<'
+        },
+        controller: () => {}
+      }
+    }])
+  })
 })
 
 describe('service', () => {
@@ -63,10 +97,23 @@ describe('service', () => {
     }])
   })
 
-  it('requires a return value of a function', () => {
+  it('can return object', () => {
     angular.module('foo', []).service('foo', ['bar', 'bazz', (bar, bazz) => {
-      // $ExpectError object. This type is incompatible with Function
       return { foo: 'bar' }
+    }])
+  })
+
+  it('can return function', () => {
+    angular.module('foo', []).service('foo', ['bar', 'bazz', (bar, bazz) => {
+      return () => {};
+    }])
+  })
+
+
+  it('cant return other types', () => {
+    angular.module('foo', []).service('foo', ['bar', 'bazz', (bar, bazz) => {
+      //$ExpectError
+      return 123;
     }])
   })
 })
@@ -85,31 +132,53 @@ describe('factory', () => {
 
 })
 
-describe('value', () => {
+describe('controller', () => {
   it('can be declared', () => {
-    angular.module('foo', []).value('foo', ['bar', 'bazz', (bar, bazz) => {
-      return { a: bar, b: bazz }
-    }])
-  })
-
-  it('requires a return value of some kind', () => {
-    // $ExpectError undefined. This type is incompatible with
-    angular.module('foo', []).value('foo', ['bar', 'bazz', (bar, bazz) => {}])
+    angular.module('foo', []).controller('foo', ['bar', 'bazz', (bar, bazz) => {}])
   })
 })
 
-describe('constant', () => {
+describe('config', () => {
   it('can be declared', () => {
-    angular.module('foo', []).constant('foo', ['bar', 'bazz', (bar, bazz) => {
-      return { a: bar, b: bazz }
+    angular.module('foo', []).config('foo', ['bar', 'bazz', (bar, bazz) => {}])
+  })
+
+})
+
+describe('filter', () => {
+  it('can be declared', () => {
+    angular.module('foo', []).filter('foo', ['bar', 'bazz', (bar, bazz) => {
+      return () => {};
     }])
   })
 
   it('requires a return value of some kind', () => {
-    // $ExpectError undefined. This type is incompatible with
-    angular.module('foo', []).constant('foo', ['bar', 'bazz', (bar, bazz) => {
-      // intentionally return nothing
-    }])
+    // $ExpectError cant return object
+    angular.module('foo', []).filter('foo', ['bar', 'bazz', () => ({})])
+  })
+
+})
+
+describe('filter', () => {
+  it('can be declared', () => {
+    angular.module('foo', []).run(['bar', 'bazz', (bar, bazz) => {}])
+  })
+})
+
+describe('value', () => {
+  it('can be declared to any value', () => {
+    angular.module('foo', []).value('foo', 123)
+    angular.module('foo', []).value('foo', 'str')
+    angular.module('foo', []).value('foo', {})
+  })
+})
+
+
+describe('constant', () => {
+  it('can be declared to any value', () => {
+    angular.module('foo', []).constant('foo', 123)
+    angular.module('foo', []).constant('foo', 'str')
+    angular.module('foo', []).constant('foo', {})
   })
 })
 
@@ -238,6 +307,23 @@ describe('$q', () => {
     })
   })
 })
+
+describe("mock", () => {
+  describe("module", () => {
+    it("takes strings, functions and objects", () => {
+      angular.mock.module("string", () => {}, {});
+    });
+
+    it("does not accept numbers", () => {
+      //$ExpectError
+      angular.mock.module(123);
+    });
+
+    it("returns a function", () => {
+      angular.mock.module("string", {})();
+    });
+  });
+});
 
 describe('$http', () => {
   it('can POST', () => {
