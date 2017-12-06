@@ -71,12 +71,24 @@ declare module angular {
     di: $npm$angular$DependencyInjection<(...a: Array<*>) => Directive>,
   ) => AngularModule
 
+  declare type Component = {|
+    bindings?: Scope,
+    template?: string,
+    templateUrl?: string,
+    controllerAs?: string,
+    controller?: $npm$angular$DependencyInjection<Class<*> | ControllerFunction>,
+    transclude?: boolean
+  |}
+
+  declare type ComponentDeclaration = (
+    name: string,
+    component: Component,
+  ) => AngularModule
 
   declare type ControllerDeclaration = (
     name: string,
     di: $npm$angular$DependencyInjection<ControllerFunction>,
   ) => AngularModule
-
 
   declare type ConfigDeclaration = (
     name: string,
@@ -114,6 +126,7 @@ declare module angular {
 
   declare type AngularModule = {|
     controller: ControllerDeclaration,
+    component: ComponentDeclaration,
     directive: DirectiveDeclaration,
     run: RunDeclaration,
     config: ConfigDeclaration,
