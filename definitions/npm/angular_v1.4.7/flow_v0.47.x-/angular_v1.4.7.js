@@ -240,4 +240,6 @@ declare module angular {
     $parent: $Scope<*>,
     $root: $Scope<*>
   |} & T;
+
+  declare type $Timeout = (fn?: Function, delay?: number, invokeApply?: boolean, additionalParams?: *) => AngularPromise<*>
 }
