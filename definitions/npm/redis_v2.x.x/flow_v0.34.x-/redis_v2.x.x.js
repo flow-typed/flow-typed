@@ -27,6 +27,7 @@ declare module "redis" {
     psubscribe: (pattern: string) => void;
     punsubscribe: (pattern: string) => void;
     duplicate: () => RedisClient;
+    end: (flush: boolean) => void;
     quit: () => void;
   }
 
@@ -71,12 +72,46 @@ declare module "redis" {
     psubscribeAsync: (pattern: string) => Promise<void>;
     punsubscribeAsync: (pattern: string) => Promise<void>;
     duplicateAsync: () => Promise<RedisClientPromisified>;
+    endAsync: (flush: boolean) => Promise<void>;
     quitAsync: () => Promise<void>;
   }
+
+  declare type CreateOptions = {
+    host?: string,
+    port?: number,
+    path?: string,
+    url?: string,
+    parser?: 'javascript' | 'hiredis',
+    string_numbers?: boolean,
+    return_buffers?: boolean,
+    detect_buffers?: boolean,
+    socket_keepalive?: boolean,
+    no_ready_check?: boolean,
+    enable_offline_queue?: boolean,
+    retry_max_delay?: ?number,
+    connect_timeout?: number,
+    max_attempts?: number,
+    retry_unfulfilled_commands?: boolean,
+    password?: string,
+    db?: number,
+    family?: 'IPv4' | 'IPv6',
+    disable_resubscribing?: boolean,
+    rename_commands?: {[name: string]: string},
+    tls?: Object,
+    prefix?: string,
+    retry_strategy?: (options: {attempt: number, total_retry_time: number, error: Error, times_connected: number}) => any,
+  }
+
+  declare type CreateClient = (
+    ((port: number, host?: string, options?: CreateOptions) => RedisClient) &
+    ((port: number, options?: CreateOptions) => RedisClient) &
+    ((socketOrUrl: string, options?: CreateOptions) => RedisClient) &
+    ((options?: CreateOptions) => RedisClient)
+  )
 
   declare module.exports: {
     RedisClient: typeof RedisClient,
     RedisClientPromisified: typeof RedisClientPromisified,
-    createClient: (settings: any) => RedisClient | RedisClientPromisified
+    createClient: CreateClient,
   };
 }
