@@ -7,9 +7,18 @@
 
 declare module angular {
 
+  // NOTE: if you don't use named scope bindings, remove string type in the end
+  // for stricter types
+  declare type ScopeBindings = '<' | '=' | '&' | '<?' | '=?' | '&?' | string;
+  declare type Scope = {[key: string]: ScopeBindings};
+  declare type ControllerFunction = (...a: Array<*>) => void;
+
   // I'm not sure how represent this properly: Angular DI declarations are a
   // list of strings with a single function at the end. The function can vary,
   // so it is a type param.
+  //
+  // NOTE: if you use compile step to mangle array, replace below with
+  // declare type $npm$angular$DependencyInjection<T> = T
   declare type $npm$angular$DependencyInjection<T> = Array<string | T>
 
   // Extending Array<Element> allows us to do the `jq[0]` expression and friends
@@ -22,12 +31,12 @@ declare module angular {
     injector: Function,
   }
 
-  declare function AngularLinkFunction(
-    scope: mixed,
+  declare type AngularLinkFunction = (
+    scope: $Scope<*>,
     element: JqliteElement,
     attrs: mixed,
     controller: mixed
-  ): void
+  ) => void
 
   declare type AngularCompileLink = {
     post?: AngularLinkFunction,
@@ -38,90 +47,103 @@ declare module angular {
   declare function CompileFunction(
     element: JqliteElement,
     attrs: mixed,
-    controller: mixed
+    controller: ControllerFunction
   ): AngularLinkFunction
 
   // TODO: Expand to cover the whole matrix of AECM, in any order. Probably
   // should write something to handle it.
   declare type DirectiveRestrict = 'A' | 'E' | 'AE' | 'EA'
-  declare type Directive = {
-    restrict?: string,
+  declare type Directive = {|
+    restrict?: DirectiveRestrict,
     template?: string,
     templateUrl?: string,
-    scope?: mixed,
-    controller?: $npm$angular$DependencyInjection<*>,
+    scope?: Scope,
+    controller?: ControllerFunction,
     link?: AngularLinkFunction,
+    controllerAs?: string,
+    bindToController?: boolean,
     // TODO: flesh out this definition
     compile?: (...a: any) => AngularCompileLink,
-  }
+  |}
 
   declare type DirectiveDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Directive>,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Directive>,
   ) => AngularModule
 
 
   declare type ControllerDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<*>,
+    di: $npm$angular$DependencyInjection<ControllerFunction>,
   ) => AngularModule
 
 
   declare type ConfigDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<*>,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => void>,
   ) => AngularModule
 
   declare type FactoryDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Object>,
+  ) => AngularModule
+
+  declare type FilterDeclaration = (
+    name: string,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Function>,
   ) => AngularModule
 
   declare type ServiceDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Function>,
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Function | Object>,
   ) => AngularModule
 
   declare type RunDeclaration = (
-    name: string,
-    di: $npm$angular$DependencyInjection<void>,
+    fn: $npm$angular$DependencyInjection<(...a: Array<*>) => void>,
   ) => AngularModule
 
   declare type ValueDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
+    value: mixed,
   ) => AngularModule
 
   declare type ConstantDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<mixed>) => Object>,
+    value: mixed,
   ) => AngularModule
 
-  declare type AngularModule = {
+  declare type AngularModule = {|
     controller: ControllerDeclaration,
     directive: DirectiveDeclaration,
     run: RunDeclaration,
     config: ConfigDeclaration,
     factory: FactoryDeclaration,
+    filter: FilterDeclaration,
     service: ServiceDeclaration,
     value: ValueDeclaration,
     constant: ConstantDeclaration,
     name: string,
-  }
+  |}
 
   declare type Dependency = AngularModule | string
 
   declare function module(
     name: string,
-    deps: ?Array<Dependency>
+    deps?: ?Array<Dependency>
   ): AngularModule
 
-  declare function element(html: string | Element): JqliteElement
+  declare function element(html: string | Element | Document): JqliteElement
   declare function copy<T>(object: T): T
-  declare function extend<T>(dst: T, src: Object): T
-  declare function forEach<T>(obj: Array<T>, iterator: (value: T, key: string) => void): void
 
+  declare function extend<A, B>(a: A, b: B): A & B;
+  declare function extend<A, B, C>(a: A, b: B, c: C): A & B & C;
+  declare function extend<A, B, C, D>(a: A, b: B, c: C, d: D): A & B & C & D;
+  declare function extend<A, B, C, D, E>(a: A, b: B, c: C, d: D, e: E): A & B & C & D & E;
 
+  declare function forEach<T>(obj: Object | Array<T>, iterator: (value: T, key: string) => void): void;
+  declare function fromJson(json: string): Object | Array<*> | string | number;
+  declare function toJson(obj: Object | Array<any> | string | Date | number | boolean, pretty?: boolean | number): string;
+  declare function isDefined(val: any): boolean;
   declare type AngularQ = {
     when: <T>(value: T) => AngularPromise<T>,
   }
@@ -137,7 +159,8 @@ declare module angular {
   //****************************************************************************
 
   declare type AngularMock = {
-    inject: (...a: Array<mixed>) => Function,
+    inject: (...a: Array<*>) => Function,
+    module: (...a: Array<string | Function | Object>) => () => void
   }
   declare var mock: AngularMock
 
@@ -217,4 +240,6 @@ declare module angular {
     $parent: $Scope<*>,
     $root: $Scope<*>
   |} & T;
+
+  declare type $Timeout = (fn?: Function, delay?: number, invokeApply?: boolean, additionalParams?: *) => AngularPromise<*>
 }
