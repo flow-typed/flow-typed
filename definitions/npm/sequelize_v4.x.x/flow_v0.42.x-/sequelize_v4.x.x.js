@@ -3891,6 +3891,9 @@ declare module "sequelize" {
       ThroughAttributes, Through
     >,
 
+    static getAssociations<Target: Model<any>>(model: Class<Target>): Array<Association<this, Target>>;
+    static getAssociationForAlias<Target: Model<any>>(model: Class<Target>, alias: ?string): ?Association<this, Target>;
+
     static associations: {[name: string]: Association<this, any>},
     static tableName: string,
     static rawAttributes: {[name: string]: Attribute},
