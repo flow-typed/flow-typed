@@ -11,9 +11,9 @@ declare module "formik" {
     /** Manually set top level status. */
     setStatus: (status?: any) => void,
     /**
-   * Manually set top level error
-   * @deprecated since 0.8.0
-   */
+     * Manually set top level error
+     * @deprecated since 0.8.0
+     */
     setError: (e: any) => void,
     /** Manually set errors object */
     setErrors: (errors: FormikErrors) => void,
@@ -46,8 +46,7 @@ declare module "formik" {
     enableReinitialize?: boolean
   };
 
-  declare export type FormikConfig = {
-    ...FormikSharedConfig,
+  declare export type FormikConfig = FormikSharedConfig & {
     /**
      * Initial values of the form
      */
@@ -136,12 +135,10 @@ declare module "formik" {
     handleReset: () => any
   };
 
-  declare export type FormikProps<Values> = {
-    ...FormikState<Values>,
-    ...FormikActions<Values>,
-    ...FormikHandlers,
-    ...FormikComputedProps<Values>
-  };
+  declare export type FormikProps<Values> = FormikState<Values> &
+    FormikActions<Values> &
+    FormikHandlers &
+    FormikComputedProps<Values>;
 
   declare export class Formik<
     Props: FormikConfig = FormikConfig
@@ -161,7 +158,7 @@ declare module "formik" {
    *   field,
    *   form,
    *   ...props
-       * }: MyProps) =>
+   * }: MyProps) =>
    *   <div>
    *     <input {...field} {...props}/>
    *     {form.touched[field.name] && form.errors[field.name]}
