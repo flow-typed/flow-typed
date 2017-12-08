@@ -978,16 +978,18 @@ declare module ramda {
 
   declare type Reduce = (<A, B>(
     fn: (acc: A, elm: B) => A
-  ) => ((init: A) => (xs: Array<B> | $ReadOnlyArray<B>) => A) &
-    ((init: A, xs: Array<B> | $ReadOnlyArray<B>) => A)) &
+  ) => ((
+    init: A
+  ) => (xs: Array<B> | $ReadOnlyArray<B> | { [key: string]: B }) => A) &
+    ((init: A, xs: Array<B> | $ReadOnlyArray<B> | { [key: string]: B }) => A)) &
     (<A, B>(
       fn: (acc: A, elm: B) => A,
       init: A
-    ) => (xs: Array<B> | $ReadOnlyArray<B>) => A) &
+    ) => (xs: Array<B> | $ReadOnlyArray<B> | { [key: string]: B }) => A) &
     (<A, B>(
       fn: (acc: A, elm: B) => A,
       init: A,
-      xs: Array<B> | $ReadOnlyArray<B>
+      xs: Array<B> | $ReadOnlyArray<B> | { [key: string]: B }
     ) => A);
 
   declare var reduce: Reduce;

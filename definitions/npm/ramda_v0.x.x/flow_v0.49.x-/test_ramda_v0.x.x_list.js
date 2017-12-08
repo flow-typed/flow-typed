@@ -6,7 +6,6 @@ import _, {
   curry,
   filter,
   find,
-  reduce,
   repeat,
   subtract,
   zipWith
@@ -204,28 +203,32 @@ const str: string = "hello world";
   const ys5: Array<number> = _.repeat(1, 10);
 
   // reduce
-  const redxs: number = reduce(_.add, 10, ns);
-  const redxs1: string = reduce(_.concat, "", ss);
-  const redxs2: Array<string> = reduce(_.concat, [])(_.map(x => [x], ss));
+  const redxs: number = _.reduce(_.add, 10, ns);
+  const redxs1: string = _.reduce(_.concat, "", ss);
+  const redxs2: Array<string> = _.reduce(_.concat, [])(_.map(x => [x], ss));
   // Example used in docs: http://ramdajs.com/docs/#reduce
-  const redxs4: number = reduce(subtract, 0, [1, 2, 3, 4]);
+  const redxs4: number = _.reduce(subtract, 0, [1, 2, 3, 4]);
   // Using accumulator type that differs from the element type (A and B).
-  const redxs5: number = reduce((acc, s) => acc + parseInt(s), 0, [
+  const redxs5: number = _.reduce((acc, s) => acc + parseInt(s), 0, [
     "1",
     "2",
     "3"
   ]);
+  // Reducing an object
+  const redxs6: number = _.reduce((acc, x) => acc + x, 0, { a: 1, b: 2 });
+  // $ExpectError should check value type of object and align with return type
+  const redxs6Err: number = _.reduce((acc, x) => acc + x, 0, {
+    a: "1",
+    b: "2"
+  });
 
   // Ramda works with $ReadOnlyArray as it is immutable.
   const readOnlyArray: $ReadOnlyArray<number> = [1, 2, 3, 4];
   // $ReadOnlyArray with curried permutations:
-  const redxsReadOnly3: number = reduce(subtract, 0, readOnlyArray);
-  const redxsReadOnly2_1: number = reduce(subtract, 0)(readOnlyArray);
-  const redxsReadOnly1_2: number = reduce(subtract)(0, readOnlyArray);
-  const redxsReadOnly1_1_1: number = reduce(subtract)(0)(readOnlyArray);
-
-  // $ExpectError reduce will not work with an object.
-  reduce(subtract, 0, { foo: 1, bar: 2 });
+  const redxsReadOnly3: number = _.reduce(subtract, 0, readOnlyArray);
+  const redxsReadOnly2_1: number = _.reduce(subtract, 0)(readOnlyArray);
+  const redxsReadOnly1_2: number = _.reduce(subtract)(0, readOnlyArray);
+  const redxsReadOnly1_1_1: number = _.reduce(subtract)(0)(readOnlyArray);
 
   // reduceRight
   const redrxs1: number = _.reduceRight(_.add, 10, ns);
