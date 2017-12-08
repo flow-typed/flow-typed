@@ -215,9 +215,12 @@ const str: string = "hello world";
     "3"
   ]);
   // Reducing an object
-  const redxs6: number = _.reduce((acc, x) => acc + x, 0, { a: 1, b: 2 })
+  const redxs6: number = _.reduce((acc, x) => acc + x, 0, { a: 1, b: 2 });
   // $ExpectError should check value type of object and align with return type
-  const redxs6Err: number = _.reduce((acc, x) => acc + x, 0, { a: '1', b: '2' })
+  const redxs6Err: number = _.reduce((acc, x) => acc + x, 0, {
+    a: "1",
+    b: "2"
+  });
 
   // Ramda works with $ReadOnlyArray as it is immutable.
   const readOnlyArray: $ReadOnlyArray<number> = [1, 2, 3, 4];
