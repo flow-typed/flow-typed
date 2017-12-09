@@ -28,6 +28,8 @@ import sortedLastIndexBy from "lodash/sortedLastIndexBy";
 import tap from "lodash/tap";
 import thru from "lodash/thru";
 import times from "lodash/times";
+import toPairs from "lodash/toPairs";
+import toPairsIn from "lodash/toPairsIn";
 import unionBy from "lodash/unionBy";
 import uniqBy from "lodash/uniqBy";
 import xorBy from "lodash/xorBy";
@@ -412,3 +414,10 @@ memoized = memoize(() => {});
 var debounced: (a: number) => string = debounce((a: number) => "foo");
 // $ExpectError debounce retains type information
 debounced = debounce(() => {});
+
+/**
+ * _.toPairs / _.toPairsIn
+ */
+var pairs: [string, number][];
+pairs = toPairs({ a: 12, b: 100 });
+pairs = toPairsIn({ a: 12, b: 100 });
