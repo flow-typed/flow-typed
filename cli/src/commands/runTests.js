@@ -73,7 +73,9 @@ async function getTestGroups(
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
   return libDefs.map(libDef => {
-    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
+    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${
+      libDef.flowVersionStr
+    }`;
     return {
       id: groupID,
       testFilePaths: libDef.testFilePaths,
@@ -214,7 +216,7 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
             });
             fs.createReadStream(zipPath).pipe(unzipExtractor);
           });
-          if (IS_WINDOWS) {    
+          if (IS_WINDOWS) {
             await fs.rename(
               path.join(flowBinDirPath, "flow", "flow.exe"),
               path.join(BIN_DIR, "flow-" + version + ".exe")
@@ -223,6 +225,10 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
             await fs.rename(
               path.join(flowBinDirPath, "flow", "flow"),
               path.join(BIN_DIR, "flow-" + version)
+            );
+
+            await child_process.execP(
+              ["chmod", "755", path.join(BIN_DIR, "flow-" + version)].join(" ")
             );
           }
 
@@ -240,10 +246,10 @@ async function getOrderedFlowBinVersions(): Promise<Array<string>> {
   return _flowBinVersionPromise;
 }
 
-const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+$/
+const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+$/;
 /**
  * flow filename should be `flow-vx.x.x`
- * @param {string} name 
+ * @param {string} name
  */
 function checkFlowFilename(name) {
   return flowNameRegex.test(name);
@@ -257,9 +263,9 @@ function checkFlowFilename(name) {
  */
 async function getCachedFlowBinVersions(): Promise<Array<string>> {
   // read the files with name `flow-vx.x.x` from the bin dir and remove the leading `flow-v` prefix
-  const versions = (await fs.readdir(path.join(BIN_DIR))).filter(checkFlowFilename).map(dir =>
-    dir.slice(6)
-  );
+  const versions = (await fs.readdir(path.join(BIN_DIR)))
+    .filter(checkFlowFilename)
+    .map(dir => dir.slice(6));
 
   // sort the versions that we have inplace
   versions.sort((a, b) => {
@@ -424,9 +430,11 @@ async function findLowestCapableFlowVersion(
  * Remove all files except flow instances
  */
 async function removeTrashFromBinDir() {
-  (await fs.readdir(path.join(BIN_DIR))).filter(name => !checkFlowFilename(name)).forEach(async el => {
-    await fs.unlink(path.resolve(BIN_DIR, el));
-  });
+  (await fs.readdir(path.join(BIN_DIR)))
+    .filter(name => !checkFlowFilename(name))
+    .forEach(async el => {
+      await fs.unlink(path.resolve(BIN_DIR, el));
+    });
 }
 
 /**
@@ -458,7 +466,7 @@ async function runTestGroup(
   }
 
   //Prepare bin folder to collect flow instances
-  await removeTrashFromBinDir()
+  await removeTrashFromBinDir();
   let orderedFlowVersions;
   try {
     orderedFlowVersions = await getOrderedFlowBinVersions();
@@ -495,7 +503,7 @@ async function runTestGroup(
     const flowVersionsToRun = orderedFlowVersions.filter(flowVer => {
       return semver.satisfies(flowVer, testGrpFlowSemVerRange);
     });
-    
+
     // Windows hasn't flow < 30.0 but we have tests for flow < 30.0. We need skip it. Example: redux_v3
     if (!flowVersionsToRun.length) {
       return [];
@@ -532,7 +540,9 @@ async function runTestGroup(
     );
 
     if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
-      console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
+      console.log(`Tests for ${testGroup.id} ran successfully on flow ${
+        lowestCapableFlowVersion
+      }.
         Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
     }
 
@@ -550,23 +560,22 @@ async function runTests(
   onlyChanged?: boolean
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, "g"));
-  const testGroups = (await getTestGroups(
-    repoDirPath,
-    onlyChanged
-  )).filter(testGroup => {
-    if (testPatternRes.length === 0) {
-      return true;
-    }
-
-    for (var i = 0; i < testPatternRes.length; i++) {
-      const pattern = testPatternRes[i];
-      if (testGroup.id.match(pattern) != null) {
+  const testGroups = (await getTestGroups(repoDirPath, onlyChanged)).filter(
+    testGroup => {
+      if (testPatternRes.length === 0) {
         return true;
       }
-    }
 
-    return false;
-  });
+      for (var i = 0; i < testPatternRes.length; i++) {
+        const pattern = testPatternRes[i];
+        if (testGroup.id.match(pattern) != null) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  );
 
   try {
     // Create a temp dir to copy files into to run the tests
