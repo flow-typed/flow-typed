@@ -21,6 +21,7 @@ declare module "redis" {
     get: (key: string) => any;
     set: (key: string, value: any) => void;
     del: (...keys: Array<string>) => void;
+    rpoplpush: (source: string, destination: string) => string | void;
     publish: (topic: string, value: any) => void;
     subscribe: (topic: string) => void;
     unsubscribe: (topic: string) => void;
@@ -54,10 +55,7 @@ declare module "redis" {
       cursor2: number
     ) => Promise<Array<string>> | Promise<void>;
     hsetAsync: (topic: string, key: string, value: string) => Promise<number>;
-    hgetAsync: (
-      topic: string,
-      key: string
-    ) => Promise<string> | Promise<void>;
+    hgetAsync: (topic: string, key: string) => Promise<string> | Promise<void>;
     hgetallAsync: (
       topic: string,
       key: string
@@ -66,6 +64,10 @@ declare module "redis" {
     getAsync: (key: string) => Promise<any>;
     setAsync: (key: string, value: any) => Promise<void>;
     delAsync: (...keys: Array<string>) => Promise<void>;
+    rpoplpushAsync: (
+      source: string,
+      destination: string
+    ) => Promise<string> | Promise<void>;
     publishAsync: (topic: string, value: any) => Promise<void>;
     subscribeAsync: (topic: string) => Promise<void>;
     unsubscribeAsync: (topic: string) => Promise<void>;
@@ -81,7 +83,7 @@ declare module "redis" {
     port?: number,
     path?: string,
     url?: string,
-    parser?: 'javascript' | 'hiredis',
+    parser?: "javascript" | "hiredis",
     string_numbers?: boolean,
     return_buffers?: boolean,
     detect_buffers?: boolean,
@@ -94,24 +96,31 @@ declare module "redis" {
     retry_unfulfilled_commands?: boolean,
     password?: string,
     db?: number,
-    family?: 'IPv4' | 'IPv6',
+    family?: "IPv4" | "IPv6",
     disable_resubscribing?: boolean,
-    rename_commands?: {[name: string]: string},
+    rename_commands?: { [name: string]: string },
     tls?: Object,
     prefix?: string,
-    retry_strategy?: (options: {attempt: number, total_retry_time: number, error: Error, times_connected: number}) => any,
-  }
+    retry_strategy?: (options: {
+      attempt: number,
+      total_retry_time: number,
+      error: Error,
+      times_connected: number
+    }) => any
+  };
 
-  declare type CreateClient = (
-    ((port: number, host?: string, options?: CreateOptions) => RedisClient) &
+  declare type CreateClient = ((
+    port: number,
+    host?: string,
+    options?: CreateOptions
+  ) => RedisClient) &
     ((port: number, options?: CreateOptions) => RedisClient) &
     ((socketOrUrl: string, options?: CreateOptions) => RedisClient) &
-    ((options?: CreateOptions) => RedisClient)
-  )
+    ((options?: CreateOptions) => RedisClient);
 
   declare module.exports: {
     RedisClient: typeof RedisClient,
     RedisClientPromisified: typeof RedisClientPromisified,
-    createClient: CreateClient,
+    createClient: CreateClient
   };
 }
