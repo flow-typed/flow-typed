@@ -21,6 +21,7 @@ declare module "redis" {
     get: (key: string) => any;
     set: (key: string, value: any) => void;
     del: (...keys: Array<string>) => void;
+    rpoplpush: (source: string, destination: string) => string | void;
     publish: (topic: string, value: any) => void;
     subscribe: (topic: string) => void;
     unsubscribe: (topic: string) => void;
@@ -66,6 +67,7 @@ declare module "redis" {
     getAsync: (key: string) => Promise<any>;
     setAsync: (key: string, value: any) => Promise<void>;
     delAsync: (...keys: Array<string>) => Promise<void>;
+    rpoplpushAsync: (source: string, destination: string) => Promise<string> | Promise<void>;
     publishAsync: (topic: string, value: any) => Promise<void>;
     subscribeAsync: (topic: string) => Promise<void>;
     unsubscribeAsync: (topic: string) => Promise<void>;
