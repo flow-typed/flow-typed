@@ -3,7 +3,7 @@
 // TODO: PoolNamespace internal structure
 // TODO: Packets internal structure
 
-declare module 'mysql' {
+declare module "mysql" {
   declare type ConnectionOptions = {
     host?: string,
     port?: number,
@@ -17,7 +17,7 @@ declare module 'mysql' {
     connectTimeout?: number,
     stringifyObjects?: boolean,
     insecureAuth?: boolean,
-    typeCast?: boolean,
+    typeCast?: boolean | ((field: Object, next: Function) => any),
     queryFormat?: (query: string, values: ?mixed, timezone: string) => string,
     supportBigNumbers?: boolean,
     bigNumberStrings?: boolean,
@@ -31,7 +31,7 @@ declare module 'mysql' {
 
   declare type QueryOptions = {
     sql: string,
-    typeCast?: boolean | (field: Object, next: Function) => any,
+    typeCast?: boolean | ((field: Object, next: Function) => any),
     nestTables?: boolean | string, // string form is a separator used to produce column names
     values?: Array<mixed>,
     timeout?: number
@@ -49,7 +49,7 @@ declare module 'mysql' {
     length: number,
     table: string,
     db: string
-  }
+  };
 
   declare class Query extends events$EventEmitter {
     // readableStreamOptions declared in Flow /lib/node.js
@@ -65,15 +65,22 @@ declare module 'mysql' {
 
     end(callback?: (error: ?Error) => *): void;
 
-    query(sql: QueryOptions, values?: Array<mixed>, callback?: QueryCallback): Query;
+    query(
+      sql: QueryOptions,
+      values?: Array<mixed>,
+      callback?: QueryCallback
+    ): Query;
     query(sql: QueryOptions, callback?: QueryCallback): Query;
 
-    changeUser(options: {
-      user?: string,
-      password?: string,
-      charset?: string,
-      database?: string
-    }, callback: (error: ?Error) => *): void;
+    changeUser(
+      options: {
+        user?: string,
+        password?: string,
+        charset?: string,
+        database?: string
+      },
+      callback: (error: ?Error) => *
+    ): void;
 
     beginTransaction(options: QueryOptions, callback: QueryCallback): void;
     beginTransaction(callback: QueryCallback): void;
@@ -86,18 +93,24 @@ declare module 'mysql' {
     ping(callback: QueryCallback): void;
 
     escapeId(val: mixed, forbidQualified?: boolean): string;
-    escape(val: mixed, stringifyObjects?: boolean, timeZone: string): string;
+    escape(val: mixed, stringifyObjects?: boolean, timeZone?: string): string;
     format(sql: string, valus: Array<mixed>): string;
   }
 
   declare class Pool extends events$EventEmitter {
-    getConnection(callback: (error: ?Error) => *): void;
+    getConnection(
+      callback: (error: ?Error, connection?: Connection) => *
+    ): void;
     end(callback?: (error: ?Error) => *): void;
-    query(sql: QueryOptions, values?: Array<mixed>, callback?: QueryCallback): Query;
+    query(
+      sql: QueryOptions,
+      values?: Array<mixed>,
+      callback?: QueryCallback
+    ): Query;
     query(sql: QueryOptions, callback?: QueryCallback): Query;
 
     escapeId(val: mixed, forbidQualified?: boolean): string;
-    escape(val: mixed, stringifyObjects?: boolean, timeZone: string): string;
+    escape(val: mixed, stringifyObjects?: boolean, timeZone?: string): string;
   }
 
   declare type PoolOptions = ConnectionOptions & {
@@ -107,25 +120,38 @@ declare module 'mysql' {
     queueLimit?: number
   };
 
-  declare type PoolClusterSelector = 'RR' | 'ORDER' | 'RANDOM';
+  declare type PoolClusterSelector = "RR" | "ORDER" | "RANDOM";
 
   declare type PoolClusterOptions = {
     defaultSelector?: PoolClusterSelector,
     canRetry?: boolean,
     removeNodeErrorCount?: number,
     restoreNodeTimeout?: number
-  }
+  };
 
-  declare type QueryCallback = (error: ?Error, results: QueryResults, fields?: Array<QueryField>) => *;
+  declare type QueryCallback = (
+    error: ?Error,
+    results: QueryResults,
+    fields?: Array<QueryField>
+  ) => *;
 
   declare class PoolCluster extends events$EventEmitter {
     add(config: PoolOptions | string): void;
     add(name: string, config: PoolOptions | string): void;
     remove(name: string): void;
 
-    getConnection(pattern: string | RegExp, selector: PoolClusterSelector, callback: (error: ?Error, connection?: Connection) => *): void;
-    getConnection(pattern: string | RegExp, callback: (error: ?Error, connection?: Connection) => *): void;
-    getConnection(callback: (error: ?Error, connection?: Connection) => *): void;
+    getConnection(
+      pattern: string | RegExp,
+      selector: PoolClusterSelector,
+      callback: (error: ?Error, connection?: Connection) => *
+    ): void;
+    getConnection(
+      pattern: string | RegExp,
+      callback: (error: ?Error, connection?: Connection) => *
+    ): void;
+    getConnection(
+      callback: (error: ?Error, connection?: Connection) => *
+    ): void;
 
     // Truth to be told, of returns not a Pool, but PoolNamespace instance but it is the same for the most part
     of(pattern: string | RegExp, selector?: PoolClusterSelector): Pool;
@@ -134,9 +160,16 @@ declare module 'mysql' {
   }
 
   declare function escapeId(val: mixed, forbidQualified?: boolean): string;
-  declare function escape(val: mixed, stringifyObjects?: boolean, timeZone: string): string;
+  declare function escape(
+    val: mixed,
+    stringifyObjects?: boolean,
+    timeZone?: string
+  ): string;
   declare function format(sql: string, valus: Array<mixed>): string;
-  declare function createConnection(options: ConnectionOptions | string): Connection;
+  declare function createConnection(
+    options: ConnectionOptions | string
+  ): Connection;
   declare function createPool(options: PoolOptions | string): Pool;
   declare function createPoolCluster(options?: PoolClusterOptions): PoolCluster;
+  declare function raw(sql: string): { toSqlString: () => string };
 }
