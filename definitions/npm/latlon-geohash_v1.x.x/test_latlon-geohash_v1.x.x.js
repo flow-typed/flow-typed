@@ -1,3 +1,5 @@
+/* @flow */
+
 import Geohash from "latlon-geohash";
 
 const validGeohash: string = "stq4s2xh1tf57j1n2";
