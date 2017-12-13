@@ -67,7 +67,7 @@ declare module "mysql" {
 
     query(
       sql: QueryOptions,
-      values?: Array<mixed>,
+      values?: Array<mixed> | Object,
       callback?: QueryCallback
     ): Query;
     query(sql: QueryOptions, callback?: QueryCallback): Query;
