@@ -1,8 +1,6 @@
 declare module "awilix" {
   declare module.exports: {
-    createContainer(
-      ?awilix$ContainerOptions
-    ): awilix$Container<{ [string]: * }>,
+    createContainer(?awilix$ContainerOptions): awilix$Container<{}>,
     ResolutionMode: Class<awilix$ResolutionMode>,
     Lifetime: Class<awilix$Lifetime>,
     asValue: awilix$asValue,
@@ -26,7 +24,7 @@ declare type awilix$MergedRegistrations<T1, T2> = awilix$Container<
   T1 & $ObjMap<T2, <T>(awilix$Registration<T>) => T>
 >;
 
-declare class awilix$Container<R> {
+declare class awilix$Container<R = { [string]: * }> {
   cradle: R;
   registrations: awilix$Registration<$Values<R>>[];
   options: awilix$ContainerOptions;
@@ -41,7 +39,7 @@ declare class awilix$Container<R> {
     registrations: RegistrationMap,
     opts?: awilix$ContainerRegOptions<RegistrationMap>
   ): awilix$Container<
-    R | $ObjMap<RegistrationMap, <T>(awilix$Registration<T>) => T>
+    R & $ObjMap<RegistrationMap, <T>(awilix$Registration<T>) => T>
   >;
 
   registerClass<T>(
