@@ -1,6 +1,6 @@
 declare module "awilix" {
   declare module.exports: {
-    createContainer(?awilix$ContainerOptions): awilix$Container<{}>,
+    createContainer<R>(?awilix$ContainerOptions): awilix$Container<R>,
     ResolutionMode: Class<awilix$ResolutionMode>,
     Lifetime: Class<awilix$Lifetime>,
     asValue: awilix$asValue,
