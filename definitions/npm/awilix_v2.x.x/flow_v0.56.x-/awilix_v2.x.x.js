@@ -1,6 +1,6 @@
 declare module "awilix" {
-  declare module.exports: {
-    createContainer<R>(?awilix$ContainerOptions): awilix$Container<R>,
+  declare module .exports: {
+    createContainer(?awilix$ContainerOptions): awilix$Container<{}>,
     ResolutionMode: Class<awilix$ResolutionMode>,
     Lifetime: Class<awilix$Lifetime>,
     asValue: awilix$asValue,
@@ -173,12 +173,12 @@ declare type awilix$ContainerOptions = {|
 declare type awilix$ContainerRegOptions<T> =
   | string
   | {|
-      name?: string,
-      lifetime?: awilix$Lifetime,
-      resolutionMode?: awilix$ResolutionMode,
-      injector?: awilix$InjectorFunction<T>,
-      register?: awilix$AsProviderFunction
-    |};
+  name?: string,
+  lifetime?: awilix$Lifetime,
+  resolutionMode?: awilix$ResolutionMode,
+  injector?: awilix$InjectorFunction<T>,
+  register?: awilix$AsProviderFunction
+|};
 
 declare class awilix$Lifetime {
   static SCOPED: awilix$Lifetime;
