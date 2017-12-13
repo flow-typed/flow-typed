@@ -1,10 +1,19 @@
 // @flow
 import React from "react";
 import { connect } from "react-redux";
-import type { Connector } from "react-redux";
+import type { Connector, MapStateToProps, MapDispatchToProps } from "react-redux";
 
 // copy & paste from redux libedef :(
 type ReduxDispatch<A: { type: $Subtype<string> }> = (action: A) => A;
+
+type ReduxStore<S, A, D = Dispatch<A>> = {
+  dispatch: D;
+  getState(): S;
+  subscribe(listener: () => void): () => void;
+  replaceReducer(nextReducer: ReduxReducer<S, A>): void
+};
+
+type ReduxReducer<S, A> = (state: S, action: A) => S;
 
 type Action = { type: "A" } | { type: "B" };
 type Dispatch = ReduxDispatch<Action>;
@@ -13,6 +22,8 @@ type State = {
   c: number,
   d: string
 };
+
+type Store = ReduxStore<State, Action, Dispatch>;
 
 type Props1 = {
   a: number,
@@ -187,3 +198,137 @@ const CC10 = connector10(C3);
 // ConnectedComponent
 //
 (CC1.WrappedComponent: C1);
+
+/*
+ * Redux Thunk style usage
+ */
+
+type ThunkDispatch = {
+  <R>(thunkAction: ThunkAction<R>): R,
+  <A: Action>(action: A): A,
+};
+type GetState = () => State;
+type ThunkAction<R> = (dispatch: ThunkDispatch, getState: GetState) => R;
+type ThunkStore = ReduxStore<State, Action, ThunkDispatch>;
+type ThunkStoreMapStateToProps<OP, SP> = MapStateToProps<State, OP, SP>;
+type ThunkStoreMapDispatchToProps<OP, DP> = MapDispatchToProps<
+  Action,
+  OP,
+  DP,
+  ThunkDispatch,
+>;
+
+function actionACreator(): {type: 'A'} {
+  return {type: 'A'};
+}
+function actionBCreator(): {type: 'B'} {
+  return {type: 'B'};
+}
+
+type PromiseActionA = Promise<{type: 'A'}>;
+function thunkActionA(): ThunkAction<PromiseActionA> {
+  return (dispatch, getState) => {
+    const actionA = dispatch(actionACreator());
+    return Promise.resolve(actionA);
+  };
+}
+
+type ThunkDispatchProps1 = {
+  asyncA: () => PromiseActionA,
+  fireB: () => {type: 'B'},
+};
+const thunkMapDispatchToProps1: ThunkStoreMapDispatchToProps<
+  {},
+  ThunkDispatchProps1,
+> = dispatch => {
+  return {
+    asyncA: () => dispatch(thunkActionA()),
+    fireB: () => dispatch(actionBCreator()),
+  };
+};
+
+const thunkMapDispatchToProps2: ThunkStoreMapDispatchToProps<
+  {},
+  ThunkDispatchProps1,
+> = {
+  asyncA: (thunkActionA: any), // How do we approach the auto bindActionCreators for thunkActions?
+  fireB: actionBCreator,
+};
+
+class TestThunkDispatchComponent extends React.Component<{
+  asyncA: () => PromiseActionA,
+  fireB: () => {type: 'B'},
+}> {}
+
+const thunkDispatchConnector1: Connector<
+  {},
+  {
+    asyncA: () => PromiseActionA,
+    fireB: () => {type: 'B'},
+  },
+> = connect(null, thunkMapDispatchToProps1);
+
+const thunkDispatchConnector2: Connector<
+  {},
+  {
+    asyncA: () => PromiseActionA,
+    fireB: () => {type: 'B'},
+  },
+> = connect(null, thunkMapDispatchToProps2);
+
+const thunkDispatchConnector3 = connect(null, thunkMapDispatchToProps2);
+(thunkDispatchConnector3: React$ComponentType<{}>);
+
+// $FlowExpectedError
+(thunkDispatchConnector3: React$ComponentType<{bar: number}>);
+
+const ConnectedThunkDispatchComponent1: React$ComponentType<{}> = thunkDispatchConnector1(
+  TestThunkDispatchComponent,
+);
+<ConnectedThunkDispatchComponent1 />;
+
+const ConnectedThunkDispatchComponent2: React$ComponentType<{}> = thunkDispatchConnector2(
+  TestThunkDispatchComponent,
+);
+<ConnectedThunkDispatchComponent2 />;
+
+type TestThunkDispatchComponentWithOPProps = {
+  asyncA: () => PromiseActionA,
+  fireB: () => {type: 'B'},
+  foo: string,
+};
+class TestThunkDispatchComponentWithOP extends React.Component<
+  TestThunkDispatchComponentWithOPProps,
+> {}
+
+type ThunkDispatchPropsWithOP = {
+  asyncA: () => PromiseActionA,
+  fireB: () => {type: 'B'},
+};
+const thunkMapDispatchToPropsWithOP: ThunkStoreMapDispatchToProps<
+  {foo: string},
+  ThunkDispatchPropsWithOP,
+> = dispatch => {
+  return {
+    asyncA: () => dispatch(thunkActionA()),
+    fireB: () => dispatch(actionBCreator()),
+  };
+};
+
+const thunkDispatchConnectorWithOP: Connector<
+  {foo: string},
+  {
+    asyncA: () => PromiseActionA,
+    fireB: () => {type: 'B'},
+    foo: string,
+  },
+> = connect(null, thunkMapDispatchToPropsWithOP);
+
+const ConnectedTestThunkDispatchComponentWithOP: React$ComponentType<{
+  foo: string,
+}> = thunkDispatchConnectorWithOP(TestThunkDispatchComponentWithOP);
+// $ExpectError: missing foo prop
+<ConnectedTestThunkDispatchComponentWithOP />;
+// $ExpectError: incorrect foo prop type
+<ConnectedTestThunkDispatchComponentWithOP foo={1} />;
+<ConnectedTestThunkDispatchComponentWithOP foo="" />;
