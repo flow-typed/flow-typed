@@ -17,5 +17,5 @@ declare module "platform" {
       family: ?string
     };
   }
-  declare var exports: Platform;
+  declare module.exports: Platform;
 }

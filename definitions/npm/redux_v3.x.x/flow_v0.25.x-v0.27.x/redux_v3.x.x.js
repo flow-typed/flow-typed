@@ -39,5 +39,5 @@ declare module "redux" {
     applyMiddleware(...middlewares: Array<Middleware>): StoreEnhancer;
     compose(...functions: Array<Function | StoreEnhancer>): Function;
   }
-  declare var exports: Redux;
+  declare module.exports: Redux;
 }

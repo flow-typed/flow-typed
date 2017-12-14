@@ -213,5 +213,5 @@ declare module "backbone-collection" {
     Collection: typeof Collection;
   }
 
-  declare var exports: Backbone;
+  declare module.exports: Backbone;
 }

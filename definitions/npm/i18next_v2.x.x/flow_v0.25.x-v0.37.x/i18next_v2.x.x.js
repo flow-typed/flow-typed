@@ -93,5 +93,5 @@ declare module "i18next" {
     getResourceBundle(lng: string, ns: string): boolean;
     removeResourceBundle(lng: string, ns: string): boolean;
   }
-  declare var exports: i18next;
+  declare module.exports: i18next;
 }

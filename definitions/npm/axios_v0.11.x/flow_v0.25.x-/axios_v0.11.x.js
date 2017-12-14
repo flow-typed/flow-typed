@@ -68,5 +68,5 @@ declare module "axios" {
       response: AxiosResponseInterceptor<mixed>
     };
   }
-  declare var exports: Axios;
+  declare module.exports: Axios;
 }

@@ -1,5 +1,5 @@
 // @flow
 
 declare module "clone" {
-  declare var exports: <T>(object: T) => T;
+  declare module.exports: <T>(object: T) => T;
 }

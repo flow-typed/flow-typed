@@ -1,5 +1,5 @@
 declare module "pluralize" {
-  declare var exports: {
+  declare module.exports: {
     (word: string, count?: number, inclusive?: boolean): string,
 
     addIrregularRule(single: string, plural: string): void,

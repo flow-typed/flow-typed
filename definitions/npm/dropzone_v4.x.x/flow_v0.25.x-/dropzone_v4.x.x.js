@@ -69,5 +69,5 @@ declare module "dropzone" {
     removeAllFiles(cancel?: boolean): void;
     removeFile(file: File): void;
   }
-  declare var exports: Class<Dropzone>;
+  declare module.exports: Class<Dropzone>;
 }

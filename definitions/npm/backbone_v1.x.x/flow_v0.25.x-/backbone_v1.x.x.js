@@ -313,5 +313,5 @@ declare module "backbone" {
     noConflict(): this;
   }
 
-  declare var exports: Backbone;
+  declare module.exports: Backbone;
 }

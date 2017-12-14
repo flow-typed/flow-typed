@@ -89,5 +89,5 @@ interface AlaSQL {
 }
 
 declare module "alasql" {
-  declare var exports: AlaSQL;
+  declare module.exports: AlaSQL;
 }

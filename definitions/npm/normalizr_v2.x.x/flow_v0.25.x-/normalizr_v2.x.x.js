@@ -19,5 +19,5 @@ declare module "normalizr" {
       options?: Object
     ): Normalizr$Schema;
   }
-  declare var exports: Normalizr;
+  declare module.exports: Normalizr;
 }

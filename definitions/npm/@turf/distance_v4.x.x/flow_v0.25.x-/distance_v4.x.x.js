@@ -16,7 +16,7 @@ type $npm$Turf$Distance$FeaturePoint = {
 };
 
 declare module "@turf/distance" {
-  declare var exports: (
+  declare module.exports: (
     from: $npm$Turf$Distance$FeaturePoint,
     to: $npm$Turf$Distance$FeaturePoint,
     units?: "miles" | "meters" | "kilometers" | "degrees" | "radians"

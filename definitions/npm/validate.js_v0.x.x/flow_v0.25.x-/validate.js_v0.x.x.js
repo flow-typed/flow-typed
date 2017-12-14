@@ -85,5 +85,5 @@ declare module "validate.js" {
     validators: { [key: string]: ValidatorFunction }
   };
 
-  declare var exports: ValidateFunction;
+  declare module.exports: ValidateFunction;
 }

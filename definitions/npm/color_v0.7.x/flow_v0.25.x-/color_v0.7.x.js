@@ -124,5 +124,5 @@ declare module "color" {
     rotate(value: number): Color;
     saturate(value: number): Color;
   }
-  declare var exports: typeof Color;
+  declare module.exports: typeof Color;
 }

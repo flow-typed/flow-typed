@@ -90,13 +90,13 @@ declare module "history" {
 }
 
 declare module "history/lib/createBrowserHistory" {
-  declare var exports: any; // TODO
+  declare module.exports: any; // TODO
 }
 
 declare module "history/lib/createHashHistory" {
-  declare var exports: any; // TODO
+  declare module.exports: any; // TODO
 }
 
 declare module "history/lib/createMemoryHistory" {
-  declare var exports: any; // TODO
+  declare module.exports: any; // TODO
 }

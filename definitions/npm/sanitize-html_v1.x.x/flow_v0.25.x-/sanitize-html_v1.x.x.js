@@ -29,5 +29,5 @@ declare module "sanitize-html" {
       recognizeSelfClosing: boolean
     }>
   };
-  declare function exports(dirty: string, options?: SanitizeOptions): string;
+  declare module.exports: (dirty: string, options?: SanitizeOptions) => string;
 }

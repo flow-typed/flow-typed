@@ -211,5 +211,5 @@ declare module "backbone-model" {
     Model: typeof Model;
   }
 
-  declare var exports: Backbone;
+  declare module.exports: Backbone;
 }

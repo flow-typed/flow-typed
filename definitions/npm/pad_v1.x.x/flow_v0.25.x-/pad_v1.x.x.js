@@ -5,9 +5,9 @@ type $npm$pad$options = {
 };
 
 declare module "pad" {
-  declare function exports(
+  declare module.exports: (
     textOrLeftPadding: string | number,
     textOrRightPadding: string | number,
     charOrOptions: ?string | $npm$pad$options
-  ): string;
+  ) => string;
 }

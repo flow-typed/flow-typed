@@ -47,5 +47,5 @@ declare class VerEx extends RegExp {
 }
 
 declare module "verbal-expressions" {
-  declare function exports(): VerEx;
+  declare module.exports: () => VerEx;
 }

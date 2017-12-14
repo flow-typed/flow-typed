@@ -47,5 +47,5 @@ declare module "big.js" {
     toJSON(): string;
   }
 
-  declare var exports: typeof Big;
+  declare module.exports: typeof Big;
 }

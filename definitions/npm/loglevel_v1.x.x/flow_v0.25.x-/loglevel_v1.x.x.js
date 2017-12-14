@@ -36,5 +36,5 @@ declare module "loglevel" {
     }
   };
 
-  declare var exports: LogLevelModule;
+  declare module.exports: LogLevelModule;
 }

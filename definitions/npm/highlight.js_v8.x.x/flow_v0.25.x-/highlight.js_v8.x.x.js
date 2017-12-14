@@ -58,5 +58,5 @@ declare module "highlight.js" {
     getLanguage(name: string): ?HighlightJs$Language;
   }
 
-  declare var exports: HighlightJs;
+  declare module.exports: HighlightJs;
 }

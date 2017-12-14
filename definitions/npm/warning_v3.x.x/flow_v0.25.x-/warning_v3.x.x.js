@@ -1,3 +1,3 @@
 declare module warning {
-  declare var exports: (shouldBeTrue: boolean, warning: string) => void;
+  declare module.exports: (shouldBeTrue: boolean, warning: string) => void;
 }

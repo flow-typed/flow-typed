@@ -35,5 +35,5 @@ declare module "jsuri" {
     toString: () => string;
   }
 
-  declare var exports: typeof URI;
+  declare module.exports: typeof URI;
 }

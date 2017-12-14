@@ -148,5 +148,5 @@ declare module "morgan" {
     stream?: StreamOptions;
   }
 
-  declare var exports: Morgan;
+  declare module.exports: Morgan;
 }

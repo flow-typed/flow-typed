@@ -16,5 +16,5 @@ declare module "eventemitter3" {
     off(event: string, listener?: Function, context?: any): this;
     emit(event: string, ...params?: Array<any>): this;
   }
-  declare var exports: Class<EventsEmitter>;
+  declare module.exports: Class<EventsEmitter>;
 }

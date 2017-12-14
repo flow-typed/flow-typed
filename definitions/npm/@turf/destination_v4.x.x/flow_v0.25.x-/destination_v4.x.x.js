@@ -16,7 +16,7 @@ type $npm$Turf$Destination$FeaturePoint = {
 };
 
 declare module "@turf/destination" {
-  declare var exports: (
+  declare module.exports: (
     point: $npm$Turf$Destination$FeaturePoint,
     radius: number,
     resolution: number,

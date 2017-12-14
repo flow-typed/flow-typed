@@ -16,7 +16,7 @@ type $npm$Turf$Destination$FeaturePoint<Properties: Object> = {
 };
 
 declare module "turf-point" {
-  declare var exports: <Properties: Object>(
+  declare module.exports: <Properties: Object>(
     coordinates: [number, number],
     properties?: Properties
   ) => $npm$Turf$Destination$FeaturePoint<Properties>;

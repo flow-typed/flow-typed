@@ -8,8 +8,8 @@ type npm$clampJs$ClampOptions = {
 };
 
 declare module "clamp-js" {
-  declare function exports(
+  declare module.exports: (
     element: HTMLElement,
     options?: npm$clampJs$ClampOptions
-  ): void;
+  ) => void;
 }

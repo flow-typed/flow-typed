@@ -61,5 +61,5 @@ declare module "bull" {
     clean(grace: number): Promise<Array<Job>>;
   }
   declare class PriorityQueue extends Queue {}
-  declare var exports: typeof Queue;
+  declare module.exports: typeof Queue;
 }

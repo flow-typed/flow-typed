@@ -18,7 +18,7 @@ type $npm$turfPolygon$FeaturePolygon<Properties: Object> = {
 };
 
 declare module "turf-polygon" {
-  declare var exports: <Properties: Object>(
+  declare module.exports: <Properties: Object>(
     Array<Array<[number, number]>>,
     properties?: Properties
   ) => $npm$turfPolygon$FeaturePolygon;

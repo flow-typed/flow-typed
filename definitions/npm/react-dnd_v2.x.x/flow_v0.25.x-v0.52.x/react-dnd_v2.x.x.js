@@ -193,7 +193,7 @@ type DragDropContext = <D, P, S, C: React$Component<D, P, S>>(
 // Top-level API
 // ----------------------------------------------------------------------
 declare module "react-dnd" {
-  declare var exports: {
+  declare module.exports: {
     DragSource: DragSource,
     DropTarget: DropTarget,
     DragLayer: DragLayer,

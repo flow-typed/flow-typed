@@ -200,5 +200,5 @@ declare module "mobile-detect" {
     isPhoneSized(maxPhoneWidth?: number): boolean;
   }
 
-  declare var exports: Class<MobileDetect>;
+  declare module.exports: Class<MobileDetect>;
 }

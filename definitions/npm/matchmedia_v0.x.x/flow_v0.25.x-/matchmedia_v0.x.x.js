@@ -38,5 +38,5 @@ declare module "matchmedia" {
     media: string
   };
 
-  declare function exports(query: string, values?: Values): MediaQueryList;
+  declare module.exports: (query: string, values?: Values) => MediaQueryList;
 }

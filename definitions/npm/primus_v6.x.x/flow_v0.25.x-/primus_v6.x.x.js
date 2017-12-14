@@ -117,5 +117,5 @@ declare class Primus$Room {
 }
 
 declare module "primus" {
-  declare var exports: Class<Primus$Primus>;
+  declare module.exports: Class<Primus$Primus>;
 }

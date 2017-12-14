@@ -33,7 +33,7 @@ declare class $npm$bigi$BigInteger {
 }
 
 declare module "bigi" {
-  declare var exports: typeof $npm$bigi$BigInteger;
+  declare module.exports: typeof $npm$bigi$BigInteger;
 }
 
 declare class $npm$ecurve$Curve {

@@ -149,5 +149,7 @@ declare module "expect" {
 
   declare function restoreSpies(): void;
 
-  declare var exports: $npm$expect$ExpectStatic<$npm$expect$Expectation<mixed>>;
+  declare module.exports: $npm$expect$ExpectStatic<
+    $npm$expect$Expectation<mixed>
+  >;
 }

@@ -107,5 +107,5 @@ declare module "radium" {
       property: ":active" | ":hover" | ":focus"
     ): boolean;
   }
-  declare var exports: Radium;
+  declare module.exports: Radium;
 }

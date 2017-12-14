@@ -1121,5 +1121,5 @@ declare module "ramda" {
       RMap,
       RReduce {}
 
-  declare var exports: Ramda;
+  declare module.exports: Ramda;
 }

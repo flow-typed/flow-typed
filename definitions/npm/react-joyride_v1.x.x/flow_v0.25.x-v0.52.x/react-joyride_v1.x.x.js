@@ -51,5 +51,5 @@ declare module "react-joyride" {
     static defaultProps: ReactJoyride$DefaultProps;
     props: ReactJoyride$Props;
   }
-  declare var exports: typeof Joyride;
+  declare module.exports: typeof Joyride;
 }
