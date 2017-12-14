@@ -1,6 +1,6 @@
 declare class $npm$bigi$BigInteger {
-  constructor(input: string|Array<number>, base?: number): void;
-  static (input: string|Array<number>, base?: number): $npm$bigi$BigInteger;
+  constructor(input: string | Array<number>, base?: number): void;
+  static (input: string | Array<number>, base?: number): $npm$bigi$BigInteger;
 
   toString(base?: number): string;
   toByteArray(): Array<number>;
@@ -29,5 +29,4 @@ declare class $npm$bigi$BigInteger {
 
 declare module "bigi" {
   declare var exports: typeof $npm$bigi$BigInteger;
-
 }
