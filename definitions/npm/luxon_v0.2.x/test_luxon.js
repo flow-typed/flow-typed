@@ -396,6 +396,7 @@ if (date.equals(new Date())) { }
 
 (date.set({year: 1, month: 2}): DateTime);
 (date.set({minutes: 1, seconds: 2}): DateTime);
+(date.set({minutes: 1, seconds: 2, ordinal: 255}): DateTime);
 // $ExpectError
 (date.set({minutes: 1, seconds: 2, simpsons: 3}): DateTime);
 
@@ -536,7 +537,7 @@ var dur: Duration = Duration.invalid('test');
 (dur.as('minutes'): number);
 (dur.as('second'): number);
 (dur.as('seconds'): number);
-(dur.as('millsecond'): number);
+(dur.as('millisecond'): number);
 (dur.as('milliseconds'): number);
 // $ExpectError
 (dur.as('date'): number);
@@ -559,7 +560,7 @@ var dur: Duration = Duration.invalid('test');
 (dur.get('minutes'): number);
 (dur.get('second'): number);
 (dur.get('seconds'): number);
-(dur.get('millsecond'): number);
+(dur.get('millisecond'): number);
 (dur.get('milliseconds'): number);
 // $ExpectError
 (dur.get('date'): number);
@@ -702,16 +703,24 @@ var int: Interval = Interval.invalid('test');
 (int.count('seconds'): number);
 (int.count('millisecond'): number);
 (int.count('milliseconds'): number);
-(int.count('weekNumber'): number);
-(int.count('weekNumbers'): number);
-(int.count('weekYear'): number);
-(int.count('weekYears'): number);
-(int.count('weekday'): number);
-(int.count('weekdays'): number);
 (int.count('week'): number);
 (int.count('weeks'): number);
 // $ExpectError
 (int.count('wks'): number);
+// $ExpectError
+(int.count('weekNumber'): number);
+// $ExpectError
+(int.count('weekNumbers'): number);
+// $ExpectError
+(int.count('weekYear'): number);
+// $ExpectError
+(int.count('weekYears'): number);
+// $ExpectError
+(int.count('weekday'): number);
+// $ExpectError
+(int.count('weekdays'): number);
+// $ExpectError
+(int.count('ordinal'): number);
 
 (int.difference(): Interval);
 (int.difference(int): Interval);
@@ -735,16 +744,24 @@ var int: Interval = Interval.invalid('test');
 (int.hasSame('seconds'): boolean);
 (int.hasSame('millisecond'): boolean);
 (int.hasSame('milliseconds'): boolean);
-(int.hasSame('weekNumber'): boolean);
-(int.hasSame('weekNumbers'): boolean);
-(int.hasSame('weekYear'): boolean);
-(int.hasSame('weekYears'): boolean);
-(int.hasSame('weekday'): boolean);
-(int.hasSame('weekdays'): boolean);
 (int.hasSame('week'): boolean);
 (int.hasSame('weeks'): boolean);
 // $ExpectError
 (int.hasSame('wks'): boolean);
+// $ExpectError
+(int.hasSame('weekNumber'): number);
+// $ExpectError
+(int.hasSame('weekNumbers'): number);
+// $ExpectError
+(int.hasSame('weekYear'): number);
+// $ExpectError
+(int.hasSame('weekYears'): number);
+// $ExpectError
+(int.hasSame('weekday'): number);
+// $ExpectError
+(int.hasSame('weekdays'): number);
+// $ExpectError
+(int.hasSame('ordinal'): number);
 
 (int.inspect(): string);
 
@@ -768,16 +785,24 @@ var int: Interval = Interval.invalid('test');
 (int.length('seconds'): number);
 (int.length('millisecond'): number);
 (int.length('milliseconds'): number);
-(int.length('weekNumber'): number);
-(int.length('weekNumbers'): number);
-(int.length('weekYear'): number);
-(int.length('weekYears'): number);
-(int.length('weekday'): number);
-(int.length('weekdays'): number);
 (int.length('week'): number);
 (int.length('weeks'): number);
 // $ExpectError
 (int.length('wks'): number);
+// $ExpectError
+(int.length('weekNumber'): number);
+// $ExpectError
+(int.length('weekNumbers'): number);
+// $ExpectError
+(int.length('weekYear'): number);
+// $ExpectError
+(int.length('weekYears'): number);
+// $ExpectError
+(int.length('weekday'): number);
+// $ExpectError
+(int.length('weekdays'): number);
+// $ExpectError
+(int.length('ordinal'): number);
 
 (int.overlaps(int): boolean);
 

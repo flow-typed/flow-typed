@@ -64,6 +64,30 @@ declare module 'luxon' {
 
   declare export type ConversionAccuracy = 'longterm' | 'casual'
 
+  declare export type DateTimeUnit =
+    'year' | 'years' |
+    'month' | 'months' |
+    'day' | 'days' |
+    'hour' | 'hours' |
+    'minute' | 'minutes' |
+    'second' | 'seconds' |
+    'millisecond' | 'milliseconds' |
+    'weekNumber' | 'weekNumbers' |
+    'weekYear' | 'weekYears' |
+    'weekday' | 'weekdays' |
+    'week' | 'weeks' |
+    'ordinal'
+
+  declare export type DurationUnit =
+    'year' | 'years' |
+    'month' | 'months' |
+    'week' | 'weeks' |
+    'day' | 'days' |
+    'hour' | 'hours' |
+    'minute' | 'minutes' |
+    'second' | 'seconds' |
+    'millisecond' | 'milliseconds'
+
   declare export class Interval {
     static after(start: DateTime | DateTimeFromObjectOptions | Date, duration: Duration | number | DurationFromObjectOptions): Interval;
     static before(end: DateTime | DateTimeFromObjectOptions | Date, duration: Duration | number | DurationFromObjectOptions): Interval;
@@ -79,18 +103,18 @@ declare module 'luxon' {
     abutsEnd(other: Interval): boolean;
     abutsStart(other: Interval): boolean;
     contains(dateTime: DateTime): boolean;
-    count(unit: DateTimeUnit): number;
+    count(unit: DurationUnit): number;
     difference(...intervals: Array<Interval>): Interval;
     divideEqually(numberOfParts: number): Array<Interval>;
     engulfs(other: Interval): boolean;
     equals(other: Interval): boolean;
-    hasSame(unit: DateTimeUnit): boolean;
+    hasSame(unit: DurationUnit): boolean;
     inspect(): string;
     intersection(other: Interval): Interval;
     isAfter(dateTime: DateTime): boolean;
     isBefore(dateTime: DateTime): boolean;
     isEmpty(): boolean;
-    length(unit: DateTimeUnit): number;
+    length(unit: DurationUnit): number;
     overlaps(other: Interval): boolean;
     set(values: {|start?: DateTime, end?: DateTime|}): Interval;
     splitAt(...dateTimes: Array<DateTime>): Array<Interval>;
@@ -100,29 +124,6 @@ declare module 'luxon' {
     toString(): string;
     union(other: Interval): Interval;
   }
-
-  declare export type DateTimeUnit =
-    'year' | 'years' |
-    'month' | 'months' |
-    'day' | 'days' |
-    'hour' | 'hours' |
-    'minute' | 'minutes' |
-    'second' | 'seconds' |
-    'millisecond' | 'milliseconds' |
-    'weekNumber' | 'weekNumbers' |
-    'weekYear' | 'weekYears' |
-    'weekday' | 'weekdays' |
-    'week' | 'weeks'
-
-  declare export type DurationUnit =
-    'year' | 'years' |
-    'month' | 'months' |
-    'week' | 'weeks' |
-    'day' | 'days' |
-    'hour' | 'hours' |
-    'minute' | 'minutes' |
-    'second' | 'seconds' |
-    'millsecond' | 'milliseconds'
 
   declare type DurationFromOptions = {|
     locale?: ?string,
