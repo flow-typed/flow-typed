@@ -458,7 +458,8 @@ const DndCustomDragLayer = DragLayer(dragLayerCollect)(CustomDragLayer);
 
 type BoardProps = {
   width: number,
-  height: number
+  height: number,
+  playable: bool
 };
 
 class Board extends React.Component<BoardProps> {
@@ -479,3 +480,6 @@ class Board extends React.Component<BoardProps> {
 const DndBoard = DragDropContext({})(Board);
 
 (DndBoard.DecoratedComponent: typeof Board);
+
+// $FlowExpectError
+const board = <DndBoard />
