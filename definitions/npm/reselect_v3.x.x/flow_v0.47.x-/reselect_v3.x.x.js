@@ -884,5 +884,5 @@ declare module "reselect" {
     ) => Selector<TState, TProps, any>
   };
 
-  declare var exports: Reselect;
+  declare module.exports: Reselect;
 }

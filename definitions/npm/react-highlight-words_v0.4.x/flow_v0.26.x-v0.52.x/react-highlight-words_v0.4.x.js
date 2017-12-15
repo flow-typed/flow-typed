@@ -1,14 +1,14 @@
-declare module 'react-highlight-words' {
+declare module "react-highlight-words" {
   declare type Props = {
-    autoEscape?: bool,
+    autoEscape?: boolean,
     highlightClassName?: string,
     highlightStyle?: Object,
     sanitize?: Function,
     searchWords: string[],
-    textToHighlight: string,
-  }
+    textToHighlight: string
+  };
   declare class ReactHighlightedWords extends React$Component {
     props: Props;
   }
-  declare var exports: typeof ReactHighlightedWords;
+  declare module.exports: typeof ReactHighlightedWords;
 }

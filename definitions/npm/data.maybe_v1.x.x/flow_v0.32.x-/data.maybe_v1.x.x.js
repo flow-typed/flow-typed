@@ -44,5 +44,5 @@ declare module "data.maybe" {
     static fromValidation<F, S>(vm: Validation<F, S>): IMaybe<S>;
   }
 
-  declare var exports: typeof IMaybe;
+  declare module.exports: typeof IMaybe;
 }
