@@ -171,6 +171,21 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
 // $ExpectError
 (numbers.withLatestFrom(numbers): Observable<[number, string]>);
 
+(numbers.withLatestFrom(strings, (a: number, b: string) => ({
+  a,
+  b
+})): Observable<{ a: number, b: string }>);
+
+(numbers.withLatestFrom(strings, strings): Observable<
+  [number, string, string]
+>);
+
+(numbers.withLatestFrom(
+  strings,
+  strings,
+  (a: number, b: string, c: string) => ({ a, b, c })
+): Observable<{ a: number, b: string, c: string }>);
+
 numbers.observeOn(Scheduler.async);
 // $ExpectError
 numbers.observeOn(null);
