@@ -143,12 +143,39 @@ const zipped2: Observable<[number, string]> = Observable.zip(numbers, strings);
 
 const zipped3: Observable<[number]> = Observable.zip(numbers);
 
+(Observable.zip(numbers, strings, strings): Observable<
+  [number, string, string]
+>);
+
 // $ExpectError
 const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
   numbers,
   numbers,
   (n, s) => ({ n, s })
 );
+
+(Observable.zip(numbers, strings): Observable<[number, string]>);
+(Observable.zip(numbers, strings, (a: number, b: string) => ({
+  a,
+  b
+})): Observable<{ a: number, b: string }>);
+
+(numbers.zip(strings): Observable<[number, string]>);
+// $ExpectError
+(numbers.zip(numbers): Observable<[number, string]>);
+
+(numbers.zip(strings, (a: number, b: string) => ({
+  a,
+  b
+})): Observable<{ a: number, b: string }>);
+
+(numbers.zip(strings, strings): Observable<[number, string, string]>);
+
+(numbers.zip(strings, strings, (a: number, b: string, c: string) => ({
+  a,
+  b,
+  c
+})): Observable<{ a: number, b: string, c: string }>);
 
 // $ExpectError
 const bogusEmpty: Observable<string> = Observable.empty().concat(
@@ -196,6 +223,10 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
   a,
   b
 })): Observable<{ a: number, b: string }>);
+
+(numbers.withLatestFrom(strings, strings): Observable<
+  [number, string, string]
+>);
 
 (numbers.withLatestFrom(strings, strings): Observable<
   [number, string, string]
