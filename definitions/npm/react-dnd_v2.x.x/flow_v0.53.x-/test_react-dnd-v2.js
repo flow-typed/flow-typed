@@ -481,5 +481,5 @@ const DndBoard = DragDropContext({})(Board);
 
 (DndBoard.DecoratedComponent: typeof Board);
 
-// $FlowExpectError
+// $ExpectError: Missing required prop: playable
 const board = <DndBoard />
