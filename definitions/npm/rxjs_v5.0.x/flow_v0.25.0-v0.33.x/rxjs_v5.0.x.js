@@ -475,6 +475,11 @@ declare class rxjs$Observable<+T> {
 
   pairwise(): rxjs$Observable<[T, T]>;
 
+  partition(
+    predicate: (value: T, index?: number) => boolean,
+    thisArg: any
+  ): [rxjs$Observable<T>, rxjs$Observable<T>];
+
   publish(): rxjs$ConnectableObservable<T>;
 
   publishLast(): rxjs$ConnectableObservable<T>;

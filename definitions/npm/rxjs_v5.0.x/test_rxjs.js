@@ -32,6 +32,9 @@ strings.elementAt(1, 5);
 (Observable.of(numbers, numbers).concatAll(): Observable<number>);
 
 // (numbers.pairwise(): Observable<Array<number>>);
+
+(numbers.partition(x => x % 2 === 0): [Observable<number>, Observable<number>]);
+
 (numbers.skipWhile(x => true): Observable<number>);
 
 // $ExpectError -- need the typecast or the error appears at the declaration site
