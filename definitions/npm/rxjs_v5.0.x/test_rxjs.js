@@ -64,11 +64,32 @@ const combined2: Observable<[number, string]> = Observable.combineLatest(
 
 const combined3: Observable<[number]> = Observable.combineLatest(numbers);
 
+(Observable.combineLatest(numbers, strings, strings): Observable<
+  [number, string, string]
+>);
+
 const combinedBad: Observable<{
   n: number,
   s: string
   // $ExpectError
 }> = Observable.combineLatest(numbers, numbers, (n, s) => ({ n, s }));
+
+(numbers.combineLatest(strings): Observable<[number, string]>);
+// $ExpectError
+(numbers.combineLatest(numbers): Observable<[number, string]>);
+
+(numbers.combineLatest(strings, (a: number, b: string) => ({
+  a,
+  b
+})): Observable<{ a: number, b: string }>);
+
+(numbers.combineLatest(strings, strings): Observable<[number, string, string]>);
+
+(numbers.combineLatest(strings, strings, (a: number, b: string, c: string) => ({
+  a,
+  b,
+  c
+})): Observable<{ a: number, b: string, c: string }>);
 
 const forked: Observable<{ n: number, s: string }> = Observable.forkJoin(
   numbers,
