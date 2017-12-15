@@ -1039,6 +1039,21 @@ declare class rxjs$Observable<+T> {
     resultSelector: (...values: Array<any>) => A
   ): rxjs$Observable<A>;
 
+  window(
+    windowBoundaries: rxjs$Observable<any>
+  ): rxjs$Observable<rxjs$Observable<T>>;
+  windowCount(
+    windowSize: number,
+    startWindowEvery?: number
+  ): rxjs$Observable<rxjs$Observable<T>>;
+  windowToggle<A>(
+    openings: rxjs$Observable<A>,
+    closingSelector: (value: A) => rxjs$Observable<any>
+  ): rxjs$Observable<rxjs$Observable<T>>;
+  windowWhen(
+    closingSelector: () => rxjs$Observable<any>
+  ): rxjs$Observable<rxjs$Observable<T>>;
+
   withLatestFrom<A>(a: rxjs$Observable<A>): rxjs$Observable<[T, A]>;
 
   withLatestFrom<A, B>(

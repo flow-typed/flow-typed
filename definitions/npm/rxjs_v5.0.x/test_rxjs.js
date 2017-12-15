@@ -145,6 +145,28 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
 // $ExpectError
 (Observable.of(2).startWith(1, "2", 3): Observable<number>);
 
+(numbers.window(Observable.interval(100)): Observable<Observable<number>>);
+// $ExpectError
+(numbers.window(Observable.interval(100)): Observable<Observable<string>>);
+
+(numbers.windowCount(3): Observable<Observable<number>>);
+(numbers.windowCount(2, 3): Observable<Observable<number>>);
+
+(numbers.windowToggle(
+  Observable.interval(100),
+  i => (i % 2 ? Observable.interval(500) : Observable.empty())
+): Observable<Observable<number>>);
+(numbers.windowToggle(
+  Observable.interval(100),
+  // $ExpectError
+  Observable.interval(500)
+): Observable<Observable<number>>);
+(numbers.windowWhen(() => Observable.interval(100)): Observable<
+  Observable<number>
+>);
+// $ExpectError
+(numbers.windowWhen(Observable.interval(100)): Observable<Observable<number>>);
+
 (numbers.withLatestFrom(strings): Observable<[number, string]>);
 // $ExpectError
 (numbers.withLatestFrom(numbers): Observable<[number, string]>);
