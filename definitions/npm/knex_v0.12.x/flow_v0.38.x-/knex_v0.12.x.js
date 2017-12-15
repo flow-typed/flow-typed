@@ -120,7 +120,8 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   avg(column?: string): this;
   avgDistinct(column?: string): this;
   pluck(column: string): this;
-  first(): this;
+  first(key?: string[]): this;
+  first(...key: string[]): this;
   from(table: string): this;
   from(
     builder: Knex$QueryBuilderFn<R> | Knex$Knex<R> | Knex$QueryBuilder<R>
