@@ -606,6 +606,11 @@ declare class rxjs$Observable<+T> {
 
   pairwise(): rxjs$Observable<[T, T]>;
 
+  partition(
+    predicate: (value: T, index: number) => boolean,
+    thisArg: any
+  ): [rxjs$Observable<T>, rxjs$Observable<T>];
+
   pipe(): rxjs$Observable<T>;
 
   pipe<A>(op1: rxjs$OperatorFunctionLast<T, A>): A;
@@ -1221,6 +1226,21 @@ declare class rxjs$Observable<+T> {
     a: Array<rxjs$Observable<any>>,
     resultSelector: (...values: Array<any>) => A
   ): rxjs$Observable<A>;
+
+  window(
+    windowBoundaries: rxjs$Observable<any>
+  ): rxjs$Observable<rxjs$Observable<T>>;
+  windowCount(
+    windowSize: number,
+    startWindowEvery?: number
+  ): rxjs$Observable<rxjs$Observable<T>>;
+  windowToggle<A>(
+    openings: rxjs$Observable<A>,
+    closingSelector: (value: A) => rxjs$Observable<any>
+  ): rxjs$Observable<rxjs$Observable<T>>;
+  windowWhen(
+    closingSelector: () => rxjs$Observable<any>
+  ): rxjs$Observable<rxjs$Observable<T>>;
 
   withLatestFrom<A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<[T, A]>;
 
