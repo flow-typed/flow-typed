@@ -173,6 +173,8 @@ declare module "formik" {
       onBlur: (e: any) => any,
       /** Value of the input */
       value: any
+      /* name of the input */
+      name?: string;
     },
     form: FormikProps<any>
   };
