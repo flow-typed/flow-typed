@@ -459,13 +459,14 @@ const DndCustomDragLayer = DragLayer(dragLayerCollect)(CustomDragLayer);
 type BoardProps = {
   width: number,
   height: number,
-  playable: bool
+  playable: bool,
 };
 
 class Board extends React.Component<BoardProps> {
   static defaultProps: BoardProps = {
     width: 400,
-    height: 400
+    height: 400,
+    playable: true,
   };
 
   render() {
