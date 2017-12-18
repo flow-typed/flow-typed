@@ -16,7 +16,7 @@ declare type express$RequestParams = {
   [param: string]: string
 };
 
-declare class express$Request extends http$IncomingMessage {
+declare class express$Request extends http$IncomingMessage mixins express$RequestResponseBase {
   baseUrl: string;
   body: any;
   cookies: { [cookie: string]: string };
@@ -73,7 +73,7 @@ declare type express$SendFileOptions = {
   dotfiles?: "allow" | "deny" | "ignore"
 };
 
-declare class express$Response extends http$ServerResponse {
+declare class express$Response extends http$ServerResponse mixins express$RequestResponseBase {
   headersSent: boolean;
   locals: { [name: string]: mixed };
   append(field: string, value?: string): this;

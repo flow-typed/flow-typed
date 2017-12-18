@@ -1173,7 +1173,7 @@ declare module "lodash" {
     templateSettings: TemplateSettings;
   }
 
-  declare var exports: Lodash;
+  declare module.exports: Lodash;
 }
 
 declare module "lodash/fp" {
@@ -2971,7 +2971,7 @@ declare module "lodash/fp" {
     templateSettings: TemplateSettings;
   }
 
-  declare var exports: Lodash;
+  declare module.exports: Lodash;
 }
 
 declare module "lodash/chunk" {

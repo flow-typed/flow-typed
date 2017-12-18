@@ -1,3 +1,3 @@
 declare module "url-join" {
-  declare var exports: (...parts: Array<string>) => string;
+  declare module.exports: (...parts: Array<string>) => string;
 }

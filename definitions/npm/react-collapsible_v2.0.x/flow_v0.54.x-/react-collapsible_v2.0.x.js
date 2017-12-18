@@ -34,5 +34,5 @@ declare module "react-collapsible" {
   };
 
   declare class Collapsible extends Component<Props> {}
-  declare var exports: typeof Collapsible;
+  declare module.exports: typeof Collapsible;
 }

@@ -172,7 +172,9 @@ declare module "formik" {
       /** Mark input as touched */
       onBlur: (e: any) => any,
       /** Value of the input */
-      value: any
+      value: any,
+      /* name of the input */
+      name?: string,
     },
     form: FormikProps<any>
   };
