@@ -452,7 +452,7 @@ declare class rxjs$Observable<+T> {
 
   switchMapTo<U>(innerObservable: rxjs$Observable<U>): rxjs$Observable<U>;
 
-  map<U>(f: (value: T) => U): rxjs$Observable<U>;
+  map<U>(f: (value: T, index: number) => U, thisArg?: any): rxjs$Observable<U>;
 
   mapTo<U>(value: U): rxjs$Observable<U>;
 
