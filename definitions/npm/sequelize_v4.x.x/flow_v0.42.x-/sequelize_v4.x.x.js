@@ -3076,7 +3076,12 @@ declare module "sequelize" {
   already created models can be loaded using `sequelize.import`
   */
   declare export class Model<TAttributes, TInitAttributes = TAttributes, TPlainAttributes = TAttributes> {
-    static init(attributes: DefineAttributes, options: DefineOptions<this>): this;
+    static init(attributes: DefineAttributes, options: DefineOptions<this>): this,
+
+    /**
+     * The options this model was initialized with
+     */
+    static options: ResolvedDefineOptions<this>,
 
     /**
      * Remove attribute from model definition
@@ -5395,6 +5400,174 @@ declare module "sequelize" {
     Set to true or a string with the attribute name you want to use to enable.
     */
     version?: boolean | string
+  }
+
+  /**
+   * @see  Model.options
+   */
+  declare export type ResolvedDefineOptions<TInstance: Model<any>> = {
+    /**
+     * Define the default search scope to use for this model. Scopes have the same form as the options passed to
+     * find / findAll.
+     */
+    defaultScope: AnyFindOptions,
+
+    /**
+     * More scopes, defined in the same way as defaultScope above. See `Model.scope` for more information about
+     * how scopes are defined, and what you can do with them
+     */
+    scopes: DefineScopeOptions,
+
+    /**
+     * Don't persits null values. This means that all columns with null values will not be saved.
+     */
+    omitNull: boolean,
+
+    /**
+     * Adds createdAt and updatedAt timestamps to the model. Default true.
+     */
+    timestamps: boolean,
+
+    /**
+     * Calling destroy will not delete the model, but instead set a deletedAt timestamp if this is true. Needs
+     * timestamps=true to work. Default false.
+     */
+    paranoid: boolean,
+
+    /**
+     * Converts all camelCased columns to underscored if true. Default false.
+     */
+    underscored: boolean,
+
+    /**
+     * Converts camelCased model names to underscored tablenames if true. Default false.
+     */
+    underscoredAll: boolean,
+
+    /**
+     * Indicates if the model's table has a trigger associated with it. Default false.
+     */
+    hasTrigger?: boolean,
+
+    /**
+     * If freezeTableName is true, sequelize will not try to alter the DAO name to get the table name.
+     * Otherwise, the dao name will be pluralized. Default false.
+     */
+    freezeTableName: boolean,
+
+    /**
+     * An object with two attributes, `singular` and `plural`, which are used when this model is associated to
+     * others.
+     */
+    name: {
+      singular: string,
+      plural: string,
+    },
+
+    /**
+     * Indexes for the provided database table
+     */
+    indexes: DefineIndexesOptions[],
+
+    /**
+     * Override the name of the createdAt column if a string is provided, or disable it if false. Timestamps
+     * must be true. Not affected by underscored setting.
+     */
+    createdAt?: string | boolean,
+
+    /**
+     * Override the name of the deletedAt column if a string is provided, or disable it if false. Timestamps
+     * must be true. Not affected by underscored setting.
+     */
+    deletedAt?: string | boolean,
+
+    /**
+     * Override the name of the updatedAt column if a string is provided, or disable it if false. Timestamps
+     * must be true. Not affected by underscored setting.
+     */
+    updatedAt?: string | boolean,
+
+    /**
+     * Defaults to pluralized model name, unless freezeTableName is true, in which case it uses model name
+     * verbatim
+     */
+    tableName?: string,
+
+    /**
+     * Provide getter functions that work like those defined per column. If you provide a getter method with
+     * the
+    same name as a column, it will be used to access the value of that column. If you provide a name that
+    does not match a column, this function will act as a virtual getter, that can fetch multiple other
+    values
+    */
+    getterMethods?: DefineGetterMethodsOptions,
+
+    /**
+     * Provide setter functions that work like those defined per column. If you provide a setter method with
+     * the
+    same name as a column, it will be used to update the value of that column. If you provide a name that
+    does not match a column, this function will act as a virtual setter, that can act on and set other
+    values, but will not be persisted
+    */
+    setterMethods?: DefineSetterMethodsOptions,
+
+    /**
+     * Provide functions that are added to each instance (DAO). If you override methods provided by sequelize,
+     * you can access the original method using `this.constructor.super_.prototype`, e.g.
+    `this.constructor.super_.prototype.toJSON.apply(this, arguments)`
+    */
+    instanceMethods?: Object,
+
+    /**
+     * Provide functions that are added to the model (Model). If you override methods provided by sequelize,
+     * you can access the original method using `this.constructor.prototype`, e.g.
+    `this.constructor.prototype.find.apply(this, arguments)`
+    */
+    classMethods?: Object,
+    schema: ?string,
+    schemaDelimeter: string,
+
+    /**
+     * You can also change the database engine, e.g. to MyISAM. InnoDB is the default.
+     */
+    engine?: string,
+    charset?: string,
+
+    /**
+     * Finaly you can specify a comment for the table in MySQL and PG
+     */
+    comment?: string,
+    collate?: string,
+
+    /**
+     * Set the initial AUTO_INCREMENT value for the table in MySQL.
+     */
+    initialAutoIncrement?: string,
+
+    /**
+     * An object of hook function that are called before and after certain lifecycle events.
+     * The possible hooks are: beforeValidate, afterValidate, beforeBulkCreate, beforeBulkDestroy,
+    beforeBulkUpdate, beforeCreate, beforeDestroy, beforeUpdate, afterCreate, afterDestroy, afterUpdate,
+    afterBulkCreate, afterBulkDestory and afterBulkUpdate. See Hooks for more information about hook
+    functions and their signatures. Each property can either be a function, or an array of functions.
+    */
+    hooks: HooksDefineOptions<TInstance>,
+
+    /**
+     * An object of model wide validations. Validations have access to all model values via `this`. If the
+     * validator function takes an argument, it is asumed to be async, and is called with a callback that
+    accepts an optional error.
+    */
+    validate: DefineValidateOptions,
+
+    /**
+     * Enable optimistic locking.  When enabled, sequelize will add a version count attribute
+     * to the model and throw an OptimisticLockingError error when stale instances are saved.
+    Set to true or a string with the attribute name you want to use to enable.
+    */
+    version?: boolean | string,
+
+    sequelize: Sequelize,
   }
 
 
