@@ -206,7 +206,7 @@ declare module "react-dnd" {
 
 	declare class DragDropContextProvider<ProviderProps> extends React$Component<ProviderProps> {
 		props: ProviderProps;
-	};
+	}
   
   declare function DragDropContext<OP: {}, CP: {}>(
     backend: mixed
