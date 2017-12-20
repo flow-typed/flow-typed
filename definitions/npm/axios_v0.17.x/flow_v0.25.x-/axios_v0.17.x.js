@@ -33,7 +33,7 @@ declare module "axios" {
     httpAgent?: mixed; // Missing the type in the core flow node libdef
     httpsAgent?: mixed; // Missing the type in the core flow node libdef
     maxContentLength?: number;
-    maxRedirects?: 5;
+    maxRedirects?: number;
     params?: Object;
     paramsSerializer?: (params: Object) => string;
     progress?: (progressEvent: Event) => void | mixed;
