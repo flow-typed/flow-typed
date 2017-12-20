@@ -1,22 +1,28 @@
-declare module 'axios' {
+declare module "axios" {
   declare interface AxiosXHRConfigBase<T> {
     adapter?: <T>(config: AxiosXHRConfig<T>) => Promise<AxiosXHR<T>>;
     auth?: {
-        username: string,
-        password: string
+      username: string,
+      password: string
     };
-    baseURL?: string,
+    baseURL?: string;
     progress?: (progressEvent: Event) => void | mixed;
     maxContentLength?: number;
-    maxRedirects?: 5,
+    maxRedirects?: 5;
     headers?: Object;
     params?: Object;
     paramsSerializer?: (params: Object) => string;
-    responseType?: 'arraybuffer' | 'blob' | 'document' | 'json' | 'text' | 'stream';
+    responseType?:
+      | "arraybuffer"
+      | "blob"
+      | "document"
+      | "json"
+      | "text"
+      | "stream";
     transformResponse?: Array<<U>(data: T) => U>;
-    transformRequest?: Array<<U>(data: T) => U|Array<<U>(data: T) => U>>;
+    transformRequest?: Array<<U>(data: T) => U | Array<<U>(data: T) => U>>;
     timeout?: number;
-    validateStatus?: (status: number) => boolean,
+    validateStatus?: (status: number) => boolean;
     withCredentials?: boolean;
     xsrfCookieName?: string;
     xsrfHeaderName?: string;
@@ -35,39 +41,56 @@ declare module 'axios' {
     data: T;
     headers: Object;
     status: number;
-    statusText: string,
-    request: http$ClientRequest | XMLHttpRequest
+    statusText: string;
+    request: http$ClientRequest | XMLHttpRequest;
   }
   declare type $AxiosXHR<T> = $AxiosXHR<T>;
   declare class AxiosInterceptorIdent extends String {}
   declare class AxiosRequestInterceptor<T> {
     use(
-      successHandler: ?(response: AxiosXHRConfig<T>) => Promise<AxiosXHRConfig<*>> | AxiosXHRConfig<*>,
-      errorHandler: ?(error: mixed) => mixed,
+      successHandler: ?(
+        response: AxiosXHRConfig<T>
+      ) => Promise<AxiosXHRConfig<*>> | AxiosXHRConfig<*>,
+      errorHandler: ?(error: mixed) => mixed
     ): AxiosInterceptorIdent;
     eject(ident: AxiosInterceptorIdent): void;
   }
   declare class AxiosResponseInterceptor<T> {
     use(
       successHandler: ?(response: AxiosXHR<T>) => mixed,
-      errorHandler: ?(error: mixed) => mixed,
+      errorHandler: ?(error: mixed) => mixed
     ): AxiosInterceptorIdent;
     eject(ident: AxiosInterceptorIdent): void;
   }
   declare type AxiosPromise<T> = Promise<AxiosXHR<T>>;
   declare class Axios {
     constructor<T>(config?: AxiosXHRConfigBase<T>): void;
-    $call: <T>(config: AxiosXHRConfig<T> | string, config?: AxiosXHRConfig<T>) => AxiosPromise<T>;
+    $call: <T>(
+      config: AxiosXHRConfig<T> | string,
+      config?: AxiosXHRConfig<T>
+    ) => AxiosPromise<T>;
     request<T>(config: AxiosXHRConfig<T>): AxiosPromise<T>;
     delete<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
     get<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
     head<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
-    post<T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
-    put<T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
-    patch<T>(url: string, data?: mixed, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
+    post<T>(
+      url: string,
+      data?: mixed,
+      config?: AxiosXHRConfigBase<T>
+    ): AxiosPromise<T>;
+    put<T>(
+      url: string,
+      data?: mixed,
+      config?: AxiosXHRConfigBase<T>
+    ): AxiosPromise<T>;
+    patch<T>(
+      url: string,
+      data?: mixed,
+      config?: AxiosXHRConfigBase<T>
+    ): AxiosPromise<T>;
     interceptors: {
       request: AxiosRequestInterceptor<mixed>,
-      response: AxiosResponseInterceptor<mixed>,
+      response: AxiosResponseInterceptor<mixed>
     };
   }
 
@@ -80,10 +103,10 @@ declare module 'axios' {
   declare type $AxiosError<T> = AxiosError<T>;
 
   declare interface AxiosExport extends Axios {
-      Axios: typeof Axios;
-      create(config?: AxiosXHRConfigBase<any>): Axios;
-      all: typeof Promise.all;
-      spread(callback: Function): (arr: Array<any>) => Function
+    Axios: typeof Axios;
+    create(config?: AxiosXHRConfigBase<any>): Axios;
+    all: typeof Promise.all;
+    spread(callback: Function): (arr: Array<any>) => Function;
   }
   declare module.exports: AxiosExport;
 }
