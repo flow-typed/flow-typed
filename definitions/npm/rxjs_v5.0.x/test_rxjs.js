@@ -183,6 +183,9 @@ Observable.of(1).switchMapTo(Observable.of("test"));
 // $ExpectError
 Observable.of(1).switchMapTo(2);
 
+(strings.map(x => x): Observable<string>);
+(strings.map((x, i) => i): Observable<number>);
+
 Observable.using(() => {}, () => Observable.of(1));
 Observable.using(
   () => ({
