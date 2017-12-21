@@ -178,6 +178,48 @@ declare module "formik" {
     },
     form: FormikProps<any>
   };
+   
+    /* This is used for HOC with Formik. 
+     * @example
+     * 
+     * import * as React from 'react';
+     * import type {FormikHOC} from 'formik';
+     * // define HOC using withFormik
+     * const formikEnhancer = withFormik({...SOMECODE});
+     * type PropsType = FormikHOC; // defining the type
+     *
+     * @formikEnhancer
+     * export default class MyFormikHoc extends React.PureComponent<PropsType> {
+     *     render() {
+     *       const {setFieldValue, status, errors, dirty} = this.props;     
+     *     }
+     *  }
+     *
+     * 
+     * <MyFormikHoc/> 
+    */
+   declare export type FormikHOC = {
+    dirty?: $PropertyType<FormikComputedProps<*>, 'dirty'>,
+    errors?: FormikErrors,
+    handleBlur?: $PropertyType<FormikHandlers, 'handleBlur'>,
+    handleChange?: $PropertyType<FormikHandlers, 'handleChange'>,
+    handleReset?: $PropertyType<FormikHandlers, 'handleReset'>,
+    handleSubmit?: $PropertyType<FormikHandlers, 'FormikHandlers'>,
+    isValid?: $PropertyType<FormikComputedProps<*>, 'isValid'>,
+    resetForm?: $PropertyType<FormikActions<*>, 'resetForm'>,
+    setErrors?: $PropertyType<FormikActions<*>, 'setErrors'>,
+    setFieldError?: $PropertyType<FormikActions<*>, 'setFieldError'>,
+    setFieldTouched?: $PropertyType<FormikActions<*>, 'setFieldTouched'>,
+    setFieldValue?: $PropertyType<FormikActions<*>, 'setFieldValue'>,
+    setStatus?: $PropertyType<FormikActions<*>, 'setStatus'>,
+    setSubmitting?: $PropertyType<FormikActions<*>, 'setSubmitting'>,
+    setTouched?: $PropertyType<FormikActions<*>, 'setTouched'>,
+    setValues?: $PropertyType<FormikActions<*>, 'setValues'>,
+    status?: $PropertyType<FormikState<*>, 'status'>,
+    touched?: $PropertyType<FormikState<*>, 'touched'>,
+    values?: $PropertyType<FormikState<*>, 'values'>,
+    isSubmitting?: $PropertyType<FormikState<*>, 'isSubmitting'>,
+  }
 
   declare export var Field: React$StatelessFunctionalComponent<any>;
 
