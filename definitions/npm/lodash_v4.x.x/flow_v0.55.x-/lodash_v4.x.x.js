@@ -424,25 +424,41 @@ declare module "lodash" {
 
     zipObject<K, V>(props?: Array<K>, values?: Array<V>): { [key: K]: V };
     zipObjectDeep(props?: any[], values?: any): Object;
-    //Workaround until (...parameter: T, parameter2: U) works
-    zipWith<T>(a1: NestedArray<T>, iteratee?: Iteratee<T>): Array<T>;
-    zipWith<T>(
-      a1: NestedArray<T>,
-      a2: NestedArray<T>,
-      iteratee?: Iteratee<T>
+
+    zipWith<A>(a1: Array<A>): Array<[A]>;
+    zipWith<T, A>(a1: Array<A>, iteratee: (A) => T): Array<T>;
+
+    zipWith<A, B>(a1: Array<A>, a2: Array<B>): Array<[A, B]>;
+    zipWith<T, A, B>(
+      a1: Array<A>,
+      a2: Array<B>,
+      iteratee: (A, B) => T
     ): Array<T>;
-    zipWith<T>(
-      a1: NestedArray<T>,
-      a2: NestedArray<T>,
-      a3: NestedArray<T>,
-      iteratee?: Iteratee<T>
+
+    zipWith<A, B, C>(
+      a1: Array<A>,
+      a2: Array<B>,
+      a3: Array<C>
+    ): Array<[A, B, C]>;
+    zipWith<T, A, B, C>(
+      a1: Array<A>,
+      a2: Array<B>,
+      a3: Array<C>,
+      iteratee: (A, B, C) => T
     ): Array<T>;
-    zipWith<T>(
-      a1: NestedArray<T>,
-      a2: NestedArray<T>,
-      a3: NestedArray<T>,
-      a4: NestedArray<T>,
-      iteratee?: Iteratee<T>
+
+    zipWith<A, B, C, D>(
+      a1: Array<A>,
+      a2: Array<B>,
+      a3: Array<C>,
+      a4: Array<D>
+    ): Array<[A, B, C, D]>;
+    zipWith<T, A, B, C, D>(
+      a1: Array<A>,
+      a2: Array<B>,
+      a3: Array<C>,
+      a4: Array<D>,
+      iteratee: (A, B, C, D) => T
     ): Array<T>;
 
     // Collection
