@@ -1,7 +1,6 @@
 declare module "reselect" {
-  declare type Selector<TState, TProps, TResult> = {
-    (state: TState, props: TProps, ...rest: any[]): TResult
-  };
+  declare type Selector<TState, TProps, TResult> = 
+    (state: TState, props: TProps, ...rest: any[]) => TResult;
 
   declare type SelectorCreator = {
     <

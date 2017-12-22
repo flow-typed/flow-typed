@@ -2,9 +2,8 @@
 // flow-typed version: b43dff3e0e/reselect_v3.x.x/flow_>=v0.28.x
 
 declare module "reselect" {
-  declare type Selector<-TState, TProps, TResult> = {
-    (state: TState, props: TProps, ...rest: any[]): TResult
-  };
+  declare type Selector<-TState, TProps, TResult> =
+    (state: TState, props: TProps, ...rest: any[]) => TResult
 
   declare type SelectorCreator = {
     <TState, TProps, TResult, T1>(
