@@ -1,4 +1,5 @@
 declare module "yamljs" {
+  declare type Load = (path: string) => mixed;
   declare type Parse = (yaml: string) => mixed;
   declare type Stringify = (
     obj: mixed,
@@ -7,6 +8,7 @@ declare module "yamljs" {
   ) => string;
 
   declare export default {
+    load: Load,
     parse: Parse,
     stringify: Stringify
   }
