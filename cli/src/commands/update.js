@@ -1,7 +1,7 @@
 // @flow
 
-import * as Install from "./install";
-import type {Args} from "./install";
+import * as Install from './install';
+import type {Args} from './install';
 
 export const name = 'update';
 export const description =
@@ -13,4 +13,4 @@ export const setup = Install.setup;
 export async function run(args: Args): Promise<number> {
   args.overwrite = true;
   return Install.run(args);
-};
+}

@@ -8,6 +8,15 @@ const { createServer } = require('http')
 const { parse } = require('url')
 
 // server
+// $ExpectError
+next({ dev: 1 });
+// $ExpectError
+next({ dir: false });
+// $ExpectError
+next({ quiet: 'derp' });
+// $ExpectError
+next({ staticMarkup: 42 });
+
 const app = next({ dev: true, dir: ".", quiet: false});
 const handle = app.getRequestHandler()
 app.prepare()

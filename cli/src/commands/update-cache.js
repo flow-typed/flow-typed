@@ -2,24 +2,22 @@
 
 import {updateCacheRepo} from '../lib/libDefs';
 
-import type {Argv} from "yargs";
-import typeof Yargs from "yargs";
+import type {Argv} from 'yargs';
+import typeof Yargs from 'yargs';
 
 export const name = 'update-cache';
 export const description = 'Update the flow-typed definitions cache';
 
 export function setup(yargs: Yargs) {
-  return yargs
-    .usage(`$0 ${name} - ${description}`)
-    .options({
-      debug: {
-        describe: 'Enable verbose messages for the update procedure',
-        alias: 'd',
-        type: 'boolean',
-        demand: false,
-      }
-    });
-};
+  return yargs.usage(`$0 ${name} - ${description}`).options({
+    debug: {
+      describe: 'Enable verbose messages for the update procedure',
+      alias: 'd',
+      type: 'boolean',
+      demand: false,
+    },
+  });
+}
 
 export async function run(argv: Argv): Promise<number> {
   try {

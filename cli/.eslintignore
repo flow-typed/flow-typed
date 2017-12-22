@@ -1,3 +1,3 @@
 dist/
 flow-typed/
-**/__npmLibDefs-fixtures__/**
+**/__*-fixtures__/**

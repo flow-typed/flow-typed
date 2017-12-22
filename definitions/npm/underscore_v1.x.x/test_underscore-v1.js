@@ -44,7 +44,6 @@ _.isEqual({x: 1}, {y: 2});
 // See https://github.com/splodingsocks/FlowTyped/pull/1#issuecomment-149345275
 // and https://github.com/facebook/flow/issues/956
 _.isEqual(1);
-_.isEqual(1, 2, 3);
 
 
 /**
@@ -148,7 +147,7 @@ _.find([1, 2, 3], {val: 1});
 (_.sortBy(['hello', 'world'], function(e) { return e.length }): Array<string>);
 (_.uniq([1,2,2]): Array<number>);
 (_.compact([1, null]): Array<number>);
-(_.select([1,2,3], function(e) { return e % 2 == 0 }): Array<number>);
+(_.select([1,2,3], function(e: number): boolean { return e % 2 == 0 }): Array<number>);
 (_.reject([1,2,3], function(e) { return e % 2 == 0 }): Array<number>);
 (_.without([1,2,3], 1, 2): Array<number>);
 (_.has({a: 1, b: 2}, 'b'): boolean);

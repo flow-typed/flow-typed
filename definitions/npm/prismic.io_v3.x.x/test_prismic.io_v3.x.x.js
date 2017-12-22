@@ -250,11 +250,13 @@ api('http://foo.prismic.com', options).then(_api => {
     .set('foo', 'bar')
     .ref('foo')
     .query(
+      Predicates.at('foo', 1),
       Predicates.at('foo', 'bar'),
+      Predicates.not('foo', 1),
       Predicates.not('foo', 'bar'),
       Predicates.missing('foo'),
       Predicates.has('foo'),
-      Predicates.any('foo', ['bar']),
+      Predicates.any('foo', ['bar', 1]),
       Predicates.in('foo', ['bar']),
       Predicates.fulltext('foo', 'bar'),
       Predicates.similar('foo', 1),
@@ -284,7 +286,7 @@ api('http://foo.prismic.com', options).then(_api => {
     )
     .query(
       // $ExpectError
-      Predicates.at('foo', 1)
+      Predicates.at('foo', null)
     )
     .pageSize(1)
     .fetch('foo')
