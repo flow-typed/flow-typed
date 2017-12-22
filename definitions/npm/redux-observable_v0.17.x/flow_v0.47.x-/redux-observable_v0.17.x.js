@@ -26,6 +26,8 @@ declare module 'redux-observable' {
     ofType(...keys: Array<$PropertyType<A, 'type'>>): ActionsObservable<A>;
   }
 
+  declare export function ofType<A: { +type: $Subtype<string> }>(...keys: Array<$PropertyType<A, "type">>): (source: ActionsObservable<A>) => ActionsObservable<A>;
+
   declare export function combineEpics<S, A, D>(...epics: Array<Epic<S, A, D>>): Epic<S, A, D>;
 
   declare export function createEpicMiddleware<S, A, D>(epic: Epic<S, A, D>, options?: EpicMiddlewareOptions<A, D>): EpicMiddleware<S, A>;
