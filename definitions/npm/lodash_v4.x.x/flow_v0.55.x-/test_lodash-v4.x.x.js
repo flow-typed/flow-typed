@@ -183,6 +183,13 @@ function square(n) {
 map([4, 8], square);
 map({ a: 4, b: 8 }, square);
 
+//accepts tuple types
+
+const tuple: [number, number] = [1, 2];
+map(tuple, val => val + 2);
+//$ExpectError cannot push to tuple
+map(tuple, (val, nothing, tupleArray) => tupleArray.push(123));
+
 var users = [{ user: "barney" }, { user: "fred" }];
 
 // The `_.property` iteratee shorthand.
