@@ -1065,7 +1065,7 @@ declare module "material-ui/Menu/Menu" {
     onExit?: TransitionCallback,
     onExiting?: TransitionCallback,
     onExited?: TransitionCallback,
-    onRequestClose?: Function,
+    onClose?: Function,
     open?: boolean,
     PaperProps?: Object,
     PopoverClasses?: Object,
@@ -1153,7 +1153,7 @@ declare module "material-ui/Modal/Modal" {
     onExit?: TransitionCallback,
     onExiting?: TransitionCallback,
     onExited?: TransitionCallback,
-    onRequestClose?: Function,
+    onClose?: Function,
     show: boolean
   }>;
 }
@@ -1213,7 +1213,7 @@ declare module "material-ui/Popover/Popover" {
     onExit?: TransitionCallback,
     onExiting?: TransitionCallback,
     onExited?: TransitionCallback,
-    onRequestClose?: Function,
+    onClose?: Function,
     open: boolean,
     PaperProps?: Object,
     role?: string,
@@ -1379,7 +1379,7 @@ declare module "material-ui/Snackbar/Snackbar" {
     onExited?: TransitionCallback,
     onMouseEnter?: Function,
     onMouseLeave?: Function,
-    onRequestClose?: (event: ?Event, reason: string) => void,
+    onClose?: (event: ?Event, reason: string) => void,
     open: boolean,
     SnackbarContentProps?: Object,
     transition?: React$ComponentType<*>,
@@ -1783,8 +1783,8 @@ declare module "material-ui/Table/TableCell" {
     classes?: Object,
     className?: string,
     component?: React$ElementType,
-    numeric: boolean,
-    padding: Padding
+    numeric?: boolean,
+    padding?: Padding
   }>;
 }
 
@@ -1949,10 +1949,7 @@ declare module "material-ui/TextField/TextField" {
     helperText?: React$Node,
     helperTextClassName?: string,
     id?: string,
-    inputClassName?: string,
-    InputClassName?: string,
     InputLabelProps?: Object,
-    inputProps?: Object,
     InputProps?: Object,
     inputRef?: Function,
     label?: React$Node,
@@ -2013,7 +2010,7 @@ declare module "material-ui/Tooltip/Tooltip" {
     disableTriggerHover?: boolean,
     disableTriggerTouch?: boolean,
     id?: string,
-    onRequestClose?: Function,
+    onClose?: Function,
     onRequestOpen?: Function,
     open?: boolean,
     title: React$Node,
