@@ -1152,8 +1152,8 @@ declare module "lodash" {
     defaultTo<T1: void | null, T2>(value: T1, defaultValue: T2): T2;
     flow: $ComposeReverse;
     flow(funcs?: Array<Function>): Function;
-    flowRight: $Compose;
     flowRight(funcs?: Array<Function>): Function;
+    flowRight: $Compose;
     identity<T>(value: T): T;
     iteratee(func?: any): Function;
     matches(source: Object): Function;
