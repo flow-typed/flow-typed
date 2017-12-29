@@ -118,7 +118,6 @@ const str: string = "hello world";
 
   const ind: number = _.indexOf(1, ns);
   const ind1: number = _.indexOf(str)(ss);
-
   const ind2: { [key: string]: { [k: string]: number | string } } = _.indexBy(
     x => "s",
     os
@@ -126,6 +125,7 @@ const str: string = "hello world";
   const ind3: { [key: string]: { [k: string]: number | string } } = _.indexBy(
     x => "s"
   )(os);
+  const ind4: number = _.indexOf(null)(ss);
 
   const insxs: Array<number> = _.insert(1, 2, ns);
   const insxs2: Array<string> = _.insert(1, "2", ss);

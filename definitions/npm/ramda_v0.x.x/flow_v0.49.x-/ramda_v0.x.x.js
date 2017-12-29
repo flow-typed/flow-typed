@@ -640,9 +640,9 @@ declare module ramda {
     input: A
   ): R;
 
-  declare function indexOf<E>(x: E, xs: Array<E>): number;
+  declare function indexOf<E>(x: ?E, xs: Array<E>): number;
   declare function indexOf<E>(
-    x: E,
+    x: ?E,
     ...rest: Array<void>
   ): (xs: Array<E>) => number;
 

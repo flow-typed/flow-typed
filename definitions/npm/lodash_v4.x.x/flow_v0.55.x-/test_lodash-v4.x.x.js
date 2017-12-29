@@ -34,6 +34,7 @@ import unionBy from "lodash/unionBy";
 import uniqBy from "lodash/uniqBy";
 import xorBy from "lodash/xorBy";
 import zip from "lodash/zip";
+import zipWith from "lodash/zipWith";
 
 /**
  * _.attempt
@@ -182,6 +183,13 @@ function square(n) {
 map([4, 8], square);
 map({ a: 4, b: 8 }, square);
 
+//accepts tuple types
+
+const tuple: [number, number] = [1, 2];
+map(tuple, val => val + 2);
+//$ExpectError cannot push to tuple
+map(tuple, (val, nothing, tupleArray) => tupleArray.push(123));
+
 var users = [{ user: "barney" }, { user: "fred" }];
 
 // The `_.property` iteratee shorthand.
@@ -283,6 +291,13 @@ zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][0].y;
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][1].y;
 // $ExpectError Flow could potentially catch this -- the tuple only has two elements.
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
+
+/**
+ * _.zipWith
+ */
+zipWith(["a", "b", "c"], [1, 2, 3], (str, num) => ({ [str]: num }));
+// $ExpectError `x` should be a `string`, `y` a `number`
+zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
 
 /**
  * _.isString
