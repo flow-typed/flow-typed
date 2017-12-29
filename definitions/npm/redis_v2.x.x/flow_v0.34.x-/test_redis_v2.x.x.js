@@ -25,3 +25,15 @@ client.hmset("some-key", { key1: "value1" }, err =>
 client.rpush("some-list", "some-value", err =>
   console.log("rpush error:", err)
 );
+
+client.lpush("key", "value", (err, newLength) => {
+  if (err) {
+    console.log(`lpush error: ${err.message}`);
+  }
+  console.log(`New length: ${newLength}`);
+});
+client.lpush("key", "value");
+// $EXpectError
+client.lpush("key");
+// $EXpectError
+client.lpush("key", { foo: 'bar' });
