@@ -4,6 +4,7 @@
 jest.autoMockOff();
 jest.clearAllMocks();
 jest.resetAllMocks();
+jest.restoreAllMocks();
 
 // $ExpectError property `atoMockOff` not found in object type
 jest.atoMockOff();
