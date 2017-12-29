@@ -308,6 +308,10 @@ type JestObjectType = {
    */
   resetAllMocks(): JestObjectType,
   /**
+   * Restores all mocks back to their original value.
+   */
+  restoreAllMocks(): JestObjectType,
+  /**
    * Removes any pending timers from the timer system.
    */
   clearAllTimers(): void,
