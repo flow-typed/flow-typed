@@ -20,6 +20,7 @@ Router.replaceRoute("/blog/hello-world");
 Router.prefetchRoute("blog", { slug: "hello-world" });
 Router.prefetchRoute("/blog/hello-world");
 
+// $ExpectError
 RoutesBuiler({ Link: null, Router: null });
 
 // $ExpectError
