@@ -41,19 +41,19 @@ type ReactTestInstance = {
 type ReactTestRenderer = {
   toJSON(): null | ReactTestRendererJSON,
   toTree(): null | ReactTestRendererTree,
-  unmount(nextElement?: React$ElementType): void,
-  update(nextElement: React$ElementType): void,
+  unmount(nextElement?: React$Element<any>): void,
+  update(nextElement: React$Element<any>): void,
   getInstance(): null | ReactTestInstance,
   root: ReactTestInstance
 };
 
 type TestRendererOptions = {
-  createNodeMock(element: React$ElementType): any
+  createNodeMock(element: React$Element<any>): any
 };
 
 declare module "react-test-renderer" {
   declare function create(
-    nextElement: React$ElementType,
+    nextElement: React$Element<any>,
     options?: TestRendererOptions
   ): ReactTestRenderer;
 }
