@@ -5,7 +5,6 @@ import {determineFlowVersion} from './npm/npmProjectUtils';
 import {findPackageJsonPath} from './npm/npmProjectUtils';
 import {format} from 'util';
 import {fs} from './node';
-import globAsync from 'glob';
 import {getPackageJsonData} from './npm/npmProjectUtils';
 import {getPackageJsonDependencies} from './npm/npmProjectUtils';
 import {mkdirp} from './fileUtils';
@@ -13,18 +12,7 @@ import {path} from './node';
 import {signCode} from './codeSign';
 import {verifySignedCode} from './codeSign';
 import {versionToString} from './semver';
-
-export function glob(pattern: string, options: Object): Promise<Array<string>> {
-  return new Promise((resolve, reject) =>
-    globAsync(pattern, options, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(files);
-      }
-    }),
-  );
-}
+import glob from './glob';
 
 async function resolvePkgDirPath(
   pkgName: string,

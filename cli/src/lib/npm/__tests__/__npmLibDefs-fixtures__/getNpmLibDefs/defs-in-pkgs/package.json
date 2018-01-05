@@ -1,0 +1,9 @@
+{
+  "name": "defs-in-pkgs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}
