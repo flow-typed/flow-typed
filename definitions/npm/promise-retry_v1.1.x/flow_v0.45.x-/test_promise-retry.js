@@ -1,20 +1,27 @@
 // @flow
-import promiseRetry from 'promise-retry';
+import promiseRetry from "promise-retry";
 
-function promiseFn (retry: (err: Error) => void, attemptNumber: Number): Promise<string> {
-   return Promise.resolve('foo');
+function promiseFn(
+  retry: (err: Error) => void,
+  attemptNumber: number
+): Promise<string> {
+  if (attemptNumber > 1) {
+    // noop just to do the comparison
+  }
+  return Promise.resolve("foo");
 }
 
-promiseRetry(promiseFn).then(function (str: string) { console.log(str); });
+promiseRetry(promiseFn).then(function(str: string) {
+  console.log(str);
+});
 
 promiseRetry(promiseFn, {
   retries: 1,
   factor: 1,
   minTimeout: 1000,
   maxTimeout: 5000,
-  randomize: true,
-})
-.then(function (str: string) {
+  randomize: true
+}).then(function(str: string) {
   console.log(str);
 });
 
@@ -22,7 +29,14 @@ promiseRetry(promiseFn, {
 promiseRetry(2);
 
 // $ExpectError
-promiseRetry(function () { /* noop */ }, {retries: 'banana'});
+promiseRetry(
+  function() {
+    /* noop */
+  },
+  { retries: "banana" }
+);
 
 // $ExpectError
-promiseRetry(promiseFn).then(function (num: number) { console.log(num); });
+promiseRetry(promiseFn).then(function(num: number) {
+  console.log(num);
+});
