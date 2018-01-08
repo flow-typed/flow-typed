@@ -1,4 +1,4 @@
-declare module 'fuse.js' {
+declare module "fuse.js" {
   declare type FuseOptions = {
     caseSensitive?: boolean,
     includeScore?: boolean,
@@ -9,7 +9,7 @@ declare module 'fuse.js' {
     matchAllTokens?: boolean,
     findAllMatches?: boolean,
     id?: string,
-    keys?: Array<any>,
+    keys?: $ReadOnlyArray<any>,
     location?: number,
     threshold?: number,
     distance?: number,
@@ -17,12 +17,12 @@ declare module 'fuse.js' {
     getFn?: (obj: any, path: string) => any,
     sortFn?: (a: any, b: any) => boolean,
     verbose?: boolean,
-    tokenSeparator?: RegExp,
-  }
+    tokenSeparator?: RegExp
+  };
   declare class Fuse<T> {
-    constructor(items: Array<T>, options?: FuseOptions): Fuse<T>,
-    search(pattern: string): Array<T>,
-    setCollection<U: Array<T>>(list: U): U,
+    constructor(items: $ReadOnlyArray<T>, options?: FuseOptions): Fuse<T>;
+    search(pattern: string): Array<T>;
+    setCollection<U: $ReadOnlyArray<T>>(list: U): U;
   }
-  declare module.exports: typeof Fuse
+  declare module.exports: typeof Fuse;
 }

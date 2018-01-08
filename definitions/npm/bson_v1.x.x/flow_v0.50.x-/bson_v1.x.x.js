@@ -234,32 +234,15 @@ declare module "bson" {
   declare export type BsonSymbol = bson$Symbol;
   declare export type BsonTimestamp = bson$Timestamp;
 
-  declare module.exports: {
-    Binary: Class<bson$Binary>,
-    Code: Class<bson$Code>,
-    DBRef: Class<bson$DBRef>,
-    Decimal128: Class<bson$Decimal128>,
-    Double: Class<bson$Double>,
-    Int32: Class<bson$Int32>,
-    Long: Class<bson$Long>,
-    Map: bson$Map,
-    MaxKey: Class<bson$MaxKey>,
-    MinKey: Class<bson$MinKey>,
-    ObjectId: Class<bson$ObjectId>,
-    ObjectID: Class<bson$ObjectId>,
-    BSONRegExp: Class<bson$BSONRegExp>,
-    Symbol: Class<bson$Symbol>,
-    Timestamp: Class<bson$Timestamp>,
-
-    // methods
-    serialize(object: Object, options?: Object): Buffer,
+  declare class bson$BSON {
+    serialize(object: Object, options?: Object): Buffer;
     serializeWithBufferAndIndex(
       object: Object,
       finalBuffer: Buffer,
       options?: Object
-    ): number,
-    deserialize(buffer: Buffer, options?: Object): Object,
-    calculateObjectSize(object: Object, options?: Object): number,
+    ): number;
+    deserialize(buffer: Buffer, options?: Object): Object;
+    calculateObjectSize(object: Object, options?: Object): number;
     deserializeStream(
       data: Buffer,
       startIndex: number,
@@ -267,39 +250,56 @@ declare module "bson" {
       documents: Array<Object>,
       docStartIndex: number,
       options?: Object
-    ): number,
+    ): number;
+  }
 
-    // constants
-    BSON_INT32_MAX: 0x7fffffff,
-    BSON_INT32_MIN: -0x80000000,
-    BSON_INT64_MAX: number,
-    BSON_INT64_MIN: number,
-    JS_INT_MAX: 0x20000000000000,
-    JS_INT_MIN: -0x20000000000000,
+  declare export default typeof bson$BSON
 
-    BSON_DATA_NUMBER: 1,
-    BSON_DATA_STRING: 2,
-    BSON_DATA_OBJECT: 3,
-    BSON_DATA_ARRAY: 4,
-    BSON_DATA_BINARY: 5,
-    BSON_DATA_OID: 7,
-    BSON_DATA_BOOLEAN: 8,
-    BSON_DATA_DATE: 9,
-    BSON_DATA_NULL: 10,
-    BSON_DATA_REGEXP: 11,
-    BSON_DATA_CODE: 13,
-    BSON_DATA_SYMBOL: 14,
-    BSON_DATA_CODE_W_SCOPE: 15,
-    BSON_DATA_INT: 16,
-    BSON_DATA_TIMESTAMP: 17,
-    BSON_DATA_LONG: 18,
-    BSON_DATA_MIN_KEY: 0xff,
-    BSON_DATA_MAX_KEY: 0x7f,
-    BSON_BINARY_SUBTYPE_DEFAULT: 0,
-    BSON_BINARY_SUBTYPE_FUNCTION: 1,
-    BSON_BINARY_SUBTYPE_BYTE_ARRAY: 2,
-    BSON_BINARY_SUBTYPE_UUID: 3,
-    BSON_BINARY_SUBTYPE_MD5: 4,
-    BSON_BINARY_SUBTYPE_USER_DEFINED: 128
-  };
+  declare export var Binary: Class<bson$Binary>;
+  declare export var Code: Class<bson$Code>;
+  declare export var DBRef: Class<bson$DBRef>;
+  declare export var Decimal128: Class<bson$Decimal128>;
+  declare export var Double: Class<bson$Double>;
+  declare export var Int32: Class<bson$Int32>;
+  declare export var Long: Class<bson$Long>;
+  declare export var Map: bson$Map;
+  declare export var MaxKey: Class<bson$MaxKey>;
+  declare export var MinKey: Class<bson$MinKey>;
+  declare export var ObjectId: Class<bson$ObjectId>;
+  declare export var ObjectID: Class<bson$ObjectId>;
+  declare export var BSONRegExp: Class<bson$BSONRegExp>;
+  declare export var Symbol: Class<bson$Symbol>;
+  declare export var Timestamp: Class<bson$Timestamp>;
+
+  declare export var BSON_INT32_MAX: 0x7fffffff;
+  declare export var BSON_INT32_MIN: -0x80000000;
+  declare export var BSON_INT64_MAX: number;
+  declare export var BSON_INT64_MIN: number;
+  declare export var JS_INT_MAX: 0x20000000000000;
+  declare export var JS_INT_MIN: -0x200000000000;
+
+  declare export var BSON_DATA_NUMBER: 1;
+  declare export var BSON_DATA_STRING: 2;
+  declare export var BSON_DATA_OBJECT: 3;
+  declare export var BSON_DATA_ARRAY: 4;
+  declare export var BSON_DATA_BINARY: 5;
+  declare export var BSON_DATA_OID: 7;
+  declare export var BSON_DATA_BOOLEAN: 8;
+  declare export var BSON_DATA_DATE: 9;
+  declare export var BSON_DATA_NULL: 10;
+  declare export var BSON_DATA_REGEXP: 11;
+  declare export var BSON_DATA_CODE: 13;
+  declare export var BSON_DATA_SYMBOL: 14;
+  declare export var BSON_DATA_CODE_W_SCOPE: 15;
+  declare export var BSON_DATA_INT: 16;
+  declare export var BSON_DATA_TIMESTAMP: 17;
+  declare export var BSON_DATA_LONG: 18;
+  declare export var BSON_DATA_MIN_KEY: 0xff;
+  declare export var BSON_DATA_MAX_KEY: 0x7f;
+  declare export var BSON_BINARY_SUBTYPE_DEFAULT: 0;
+  declare export var BSON_BINARY_SUBTYPE_FUNCTION: 1;
+  declare export var BSON_BINARY_SUBTYPE_BYTE_ARRAY: 2;
+  declare export var BSON_BINARY_SUBTYPE_UUID: 3;
+  declare export var BSON_BINARY_SUBTYPE_MD5: 4;
+  declare export var BSON_BINARY_SUBTYPE_USER_DEFINED: 128;
 }
