@@ -379,7 +379,7 @@ declare module "underscore" {
 
     isEqual(object: Object, b: Object): boolean;
     isMatch(object: Object, b: Object): boolean;
-    isEmpty(object: Object): boolean;
+    isEmpty(object: Object | Array<any>): boolean;
     isElement(object: any): boolean;
     isArray(value: any): boolean;
     isObject(value: any): boolean;
@@ -415,7 +415,7 @@ declare module "underscore" {
 
     isEqual(object: any, b: any): boolean;
     isMatch(object: Object, b: Object): boolean;
-    isEmpty(object: Object): boolean;
+    isEmpty(object: Object | Array<any>): boolean;
     isElement(object: Object): boolean;
     isArray(value: any): boolean;
     isObject(value: any): boolean;
@@ -450,6 +450,7 @@ declare module "underscore" {
     extend: typeof $underscore$Extend;
     extendOwn: typeof $underscore$Extend;
     pick<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
+    pick<K, V>(object: Array<V>, predicate?: K): {[keys: K]: V};
     omit<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
     defaults(defaults: ?Object, ...mores?: Array<Object>): Object;
     clone<O: {}>(object: O): O;
@@ -460,7 +461,7 @@ declare module "underscore" {
     // TODO _.matcher, _.matches
     isEqual(object: Object, b: Object): boolean;
     isMatch(object: Object, b: Object): boolean;
-    isEmpty(object: Object): boolean;
+    isEmpty(object: Object | Array<any>): boolean;
     isElement(object: any): boolean;
     isArray(value: any): boolean;
     isObject(value: any): boolean;
@@ -612,7 +613,7 @@ declare module "underscore" {
     reduceRight<U>(iteratee: (memo: U, value: T, index?: number) => U, init: U): U;
     find(predicate: (value: T) => boolean): ?T;
     filter(predicate: (value: T) => boolean): Array<T>;
-    filter(predicate: {[string]: T}): Array<T>;    
+    filter(predicate: {[string]: T}): Array<T>;
     where(properties: Object): Array<T>;
     findWhere(properties: $Shape<T>): ?T;
     reject(predicate: (value: T) => boolean, context?: mixed): Array<T>;
