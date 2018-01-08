@@ -4,6 +4,7 @@ declare module "next" {
     res: http$ServerResponse,
     parsedUrl: any
   ) => Promise<void>;
+
   declare export type NextApp = {
     prepare(): Promise<void>,
     getRequestHandler(): RequestHandler,
@@ -34,12 +35,14 @@ declare module "next" {
       query: any
     ): string
   };
+
   declare export type Options = {
     dev?: boolean,
     dir?: string,
     quiet?: boolean,
     staticMarkup?: boolean
   };
+
   declare module.exports: (opts: Options) => NextApp;
 }
 
@@ -113,6 +116,7 @@ declare module "next/document" {
     xhr?: any,
     err?: any
   };
+
   declare export var Head: Class<Component<void, *, *>>;
   declare export var Main: Class<Component<void, *, *>>;
   declare export var NextScript: Class<Component<void, *, *>>;

@@ -4,6 +4,7 @@ declare module "next" {
     res: http$ServerResponse,
     parsedUrl: any
   ) => Promise<void>;
+
   declare export type NextApp = {
     prepare(): Promise<void>,
     getRequestHandler(): RequestHandler,
@@ -34,12 +35,14 @@ declare module "next" {
       query?: Object
     ): string
   };
+
   declare export type Options = {
     dev?: boolean,
     dir?: string,
     quiet?: boolean,
     staticMarkup?: boolean
   };
+
   declare export default (opts: Options) => NextApp
 }
 
@@ -72,6 +75,7 @@ declare module "next/link" {
     as?: string | URLObject,
     passHref?: boolean
   };
+
   declare export default Class<React$Component<Props>>
 }
 
@@ -126,6 +130,7 @@ declare module "next/document" {
     +xhr?: any,
     +err?: any
   };
+
   declare export var Head: Class<React$Component<any, any>>;
   declare export var Main: Class<React$Component<any, any>>;
   declare export var NextScript: Class<React$Component<any, any>>;
