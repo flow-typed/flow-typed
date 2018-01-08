@@ -17,7 +17,8 @@ import type { FlowVersion } from "../lib/flowVersion.js";
 export type Args = {
   _: Array<string>,
   path?: string,
-  onlyChanged?: boolean
+  onlyChanged?: boolean,
+  numberOfFlowVersions?: number
 };
 
 // Used to decide which binary to fetch for each version of Flow
@@ -91,20 +92,25 @@ async function getTestGroups(
  * TEST_BIN/flow-vXXX for use later when running tests.
  */
 let _flowBinVersionPromise = null;
-async function getOrderedFlowBinVersions(): Promise<Array<string>> {
+async function getOrderedFlowBinVersions(
+  numberOfReleases: number = 15
+): Promise<Array<string>> {
   if (_flowBinVersionPromise === null) {
     _flowBinVersionPromise = (async function() {
       console.log("Fetching all Flow binaries...");
       const IS_WINDOWS = os.type() === "Windows_NT";
       const FLOW_BIN_VERSION_ORDER = [];
       const GH_CLIENT = gitHubClient();
-      const QUERY_PAGE_SIZE = 100;
+      // We only test against the latest numberOfReleases Versions
+      const QUERY_PAGE_SIZE = numberOfReleases;
       const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
 
       let binURLs = new Map();
       let apiPayload = null;
       let page = 0;
-      while (apiPayload === null || apiPayload.length === QUERY_PAGE_SIZE) {
+      while (
+        apiPayload === null /* || apiPayload.length === QUERY_PAGE_SIZE*/
+      ) {
         apiPayload = await new Promise((res, rej) => {
           GH_CLIENT.releases.listReleases(
             {
@@ -261,9 +267,11 @@ function checkFlowFilename(name) {
  * has occurred when attempting to refresh the flow releases from github, i.e. offline or over
  * API limit.
  */
-async function getCachedFlowBinVersions(): Promise<Array<string>> {
+async function getCachedFlowBinVersions(
+  numberOfReleases: number = 15
+): Promise<Array<string>> {
   // read the files with name `flow-vx.x.x` from the bin dir and remove the leading `flow-v` prefix
-  const versions = (await fs.readdir(path.join(BIN_DIR)))
+  const versions: any[] = (await fs.readdir(path.join(BIN_DIR)))
     .filter(checkFlowFilename)
     .map(dir => dir.slice(6));
 
@@ -271,6 +279,8 @@ async function getCachedFlowBinVersions(): Promise<Array<string>> {
   versions.sort((a, b) => {
     return semver.lt(a, b) ? -1 : 1;
   });
+
+  versions.splice(0, versions.length - numberOfReleases);
 
   // return the versions with a leading 'v' to satisfy the expected return value
   return versions.map(version => `v${version}`);
@@ -444,6 +454,7 @@ async function removeTrashFromBinDir() {
  */
 async function runTestGroup(
   testGroup: TestGroup,
+  numberOfFlowVersions: number = 15,
   errors = []
 ): Promise<Array<string>> {
   // Some older versions of Flow choke on ">"/"<"/"="
@@ -469,9 +480,9 @@ async function runTestGroup(
   await removeTrashFromBinDir();
   let orderedFlowVersions;
   try {
-    orderedFlowVersions = await getOrderedFlowBinVersions();
+    orderedFlowVersions = await getOrderedFlowBinVersions(numberOfFlowVersions);
   } catch (e) {
-    orderedFlowVersions = await getCachedFlowBinVersions();
+    orderedFlowVersions = await getCachedFlowBinVersions(numberOfFlowVersions);
   }
 
   try {
@@ -557,7 +568,8 @@ async function runTestGroup(
 async function runTests(
   repoDirPath: string,
   testPatterns: Array<string>,
-  onlyChanged?: boolean
+  onlyChanged?: boolean,
+  numberOfFlowVersions?: number
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, "g"));
   const testGroups = (await getTestGroups(repoDirPath, onlyChanged)).filter(
@@ -587,7 +599,10 @@ async function runTests(
     const results = new Map();
     while (testGroups.length > 0) {
       const testGroup = testGroups.shift();
-      const testGroupErrors = await runTestGroup(testGroup);
+      const testGroupErrors = await runTestGroup(
+        testGroup,
+        numberOfFlowVersions
+      );
       if (testGroupErrors.length > 0) {
         const errors = results.get(testGroup.id) || [];
         testGroupErrors.forEach(err => errors.push(err));
@@ -618,6 +633,11 @@ export function setup(yargs: Yargs) {
       type: "boolean",
       description: "Run only changed definition tests",
       demand: false
+    },
+    numberOfFlowVersions: {
+      type: "number",
+      description: "Only run against the latest X versions of flow",
+      demand: false
     }
   });
 }
@@ -632,6 +652,7 @@ export async function run(argv: Args): Promise<number> {
   }
   const testPatterns = argv._.slice(1);
   const onlyChanged = Boolean(argv.onlyChanged);
+  const numberOfFlowVersions = Number(argv.numberOfFlowVersions) || 15;
 
   const cwd = process.cwd();
   const basePath = argv.path ? String(argv.path) : cwd;
@@ -641,12 +662,25 @@ export async function run(argv: Args): Promise<number> {
     : path.join(__dirname, "..", "..", "..", "definitions", "npm");
 
   if (onlyChanged) {
-    console.log("Running changed definition tests in %s...\n", repoDirPath);
+    console.log(
+      "Running changed definition tests against latest %s flow versions in %s...\n",
+      numberOfFlowVersions,
+      repoDirPath
+    );
   } else {
-    console.log("Running definition tests in %s...\n", repoDirPath);
+    console.log(
+      "Running definition tests against latest %s flow versions in %s...\n",
+      numberOfFlowVersions,
+      repoDirPath
+    );
   }
 
-  const results = await runTests(repoDirPath, testPatterns, onlyChanged);
+  const results = await runTests(
+    repoDirPath,
+    testPatterns,
+    onlyChanged,
+    numberOfFlowVersions
+  );
   console.log(" ");
   Array.from(results).forEach(([testGroupName, errors]) => {
     console.log("ERROR: %s", testGroupName);
