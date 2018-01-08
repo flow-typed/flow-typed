@@ -322,7 +322,9 @@ async function installNpmLibDefs({
             : ["a versioned update", "this package"];
         console.log(
           `\n` +
-            `  Consider submitting ${libDefPlural[0]} for ${libDefPlural[1]} to \n` +
+            `  Consider submitting ${libDefPlural[0]} for ${
+              libDefPlural[1]
+            } to \n` +
             `  https://github.com/flowtype/flow-typed/\n`
         );
       }
@@ -426,7 +428,9 @@ async function installNpmLibDef(
         "  • %s\n" + "    %s\n    %s\n    └> %s",
         colors.bold(
           colors.red(
-            `${terseFilePath} already exists and appears to have been manually ` +
+            `${
+              terseFilePath
+            } already exists and appears to have been manually ` +
               `written or changed!`
           )
         ),
