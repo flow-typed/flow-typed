@@ -54,3 +54,17 @@ client.mget(["key1", "key2"], (error, entries) => {
   }
   console.log(entries.join(','));
 });
+
+client.mset(["key1", "value1", "key2", "value"], (error) => {
+  if (error !== null) console.error(error);
+});
+client.mset(["key1", "value1", "key2", "value"]);
+// $ExpectError
+client.mset([
+  {
+    key: 'key1',
+    value: 'value1'
+  }
+], (error) => {
+  if (error !== null) console.error(error);
+});
