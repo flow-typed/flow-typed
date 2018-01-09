@@ -170,7 +170,7 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
   ): (...args: any) => Bluebird$Promise<T>;
 
   static cast<T>(value: $Promisable<T>): Bluebird$Promise<T>;
-  static bind(ctx: any): Bluebird$Promise<void>;
+  // static bind(ctx: any): Bluebird$Promise<void>;
   static is(value: any): boolean;
   static longStackTraces(): void;
 
@@ -236,7 +236,7 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
   timeout(ms: number, message?: string): Bluebird$Promise<R>;
   cancel(): void;
 
-  bind(ctx: any): Bluebird$Promise<R>;
+  // bind(ctx: any): Bluebird$Promise<R>;
   call(propertyName: string, ...args: Array<any>): Bluebird$Promise<any>;
   throw(reason: Error): Bluebird$Promise<R>;
   thenThrow(reason: Error): Bluebird$Promise<R>;
