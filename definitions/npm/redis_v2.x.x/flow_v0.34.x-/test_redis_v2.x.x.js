@@ -37,3 +37,11 @@ client.lpush("key", "value");
 client.lpush("key");
 // $EXpectError
 client.lpush("key", { foo: 'bar' });
+
+client.mget(["key1", "key2"], (error, entries) => {
+  if (error === null) {
+    console.log('Error!');
+    return;
+  }
+  console.log(entries.join(','));
+});
