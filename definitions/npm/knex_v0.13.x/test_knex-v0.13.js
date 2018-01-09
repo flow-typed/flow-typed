@@ -116,3 +116,9 @@ knex("foo").havingRaw();
 knex("foo").whereRaw();
 // $ExpectError
 knex("foo").joinRaw();
+
+knex.batchInsert('foo', [{ foo: 'bar' }]);
+knex.batchInsert('foo', [{ foo: 'bar' }], 50);
+knex.transaction((trx) => {
+  knex.batchInsert('foo', [{ foo: 'bar' }], 50).transacting(trx);
+});
