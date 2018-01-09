@@ -139,6 +139,7 @@ declare class Knex$Knex<R>
   static QueryBuilder: typeof Knex$QueryBuilder;
   $call: (tableName: string) => Knex$QueryBuilder<R>;
   raw(sqlString: string, bindings?: Knex$RawBindings): any;
+  batchInsert: (tableName: string, rows: Array<Object>, chunkSize?: number) => Knex$QueryBuilder<R>;
   client: any;
   destroy(): Promise<void>;
 }

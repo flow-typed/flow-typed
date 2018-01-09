@@ -1,7 +1,7 @@
 // @flow
 
-jest.mock("../git");
-jest.mock("../node");
+jest.mock('../git');
+jest.mock('../node');
 
 import {
   _CACHE_REPO_EXPIRY as CACHE_REPO_EXPIRY,
@@ -11,19 +11,19 @@ import {
   _REMOTE_REPO_URL as REMOTE_REPO_URL,
   ensureCacheRepo,
   getCacheRepoDir,
-  verifyCLIVersion
-} from "../cacheRepoUtils";
+  verifyCLIVersion,
+} from '../cacheRepoUtils';
 
-import { cloneInto, rebaseRepoMaster } from "../git";
+import {cloneInto, rebaseRepoMaster} from '../git';
 
-import { fs } from "../node";
+import {fs} from '../node';
 
 function _mock(mockFn) {
   return ((mockFn: any): JestMockFn<*, *>);
 }
 
-describe("cacheRepoUtils", () => {
-  describe("ensureCacheRepo", () => {
+describe('cacheRepoUtils', () => {
+  describe('ensureCacheRepo', () => {
     let origConsoleLog = console.log;
     beforeEach(() => {
       _mock(cloneInto).mockClear();
@@ -36,16 +36,16 @@ describe("cacheRepoUtils", () => {
       (console: any).log = origConsoleLog;
     });
 
-    it("clones the repo if not present on disk", async () => {
+    it('clones the repo if not present on disk', async () => {
       await ensureCacheRepo();
       expect(_mock(cloneInto).mock.calls).toEqual([
-        [REMOTE_REPO_URL, getCacheRepoDir()]
+        [REMOTE_REPO_URL, getCacheRepoDir()],
       ]);
       expect(_mock(fs.writeFile).mock.calls.length).toBe(1);
       expect(_mock(fs.writeFile).mock.calls[0][0]).toBe(getLastUpdatedFile());
     });
 
-    it("does NOT clone the repo if already present on disk", async () => {
+    it('does NOT clone the repo if already present on disk', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return (
           dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir()
@@ -56,7 +56,7 @@ describe("cacheRepoUtils", () => {
       expect(_mock(cloneInto).mock.calls).toEqual([]);
     });
 
-    it("rebases if present on disk + lastUpdated is old", async () => {
+    it('rebases if present on disk + lastUpdated is old', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return (
           dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir()
@@ -70,11 +70,11 @@ describe("cacheRepoUtils", () => {
 
       await ensureCacheRepo();
       expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([
-        getCacheRepoDir()
+        getCacheRepoDir(),
       ]);
     });
 
-    it("does NOT rebase if on disk, but lastUpdated is recent", async () => {
+    it('does NOT rebase if on disk, but lastUpdated is recent', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return (
           dirPath === getCacheRepoDir() ||
@@ -93,7 +93,7 @@ describe("cacheRepoUtils", () => {
     });
   });
 
-  describe("verifyCLIVersion", () => {
+  describe('verifyCLIVersion', () => {
     let realReadFile = fs.readFile;
     beforeEach(() => {
       fs.readFile = jest.fn();
@@ -102,20 +102,20 @@ describe("cacheRepoUtils", () => {
       fs.readFile = realReadFile;
     });
 
-    it("does not throw if the cli range is compatible", async () => {
+    it('does not throw if the cli range is compatible', async () => {
       const readFileMock = _mock(fs.readFile);
       readFileMock.mockImplementation(() => {
         switch (readFileMock.mock.calls.length) {
           case 1:
             return Promise.resolve(
-              JSON.stringify({ compatibleCLIRange: "^1.0.0" })
+              JSON.stringify({compatibleCLIRange: '^1.0.0'}),
             );
           case 2:
-            return Promise.resolve(JSON.stringify({ version: "1.1.0" }));
+            return Promise.resolve(JSON.stringify({version: '1.1.0'}));
           default:
             throw new Error(
-              "Unexpected call to fs.readFile! Did this impl of " +
-                "verifyCLIVersion change?"
+              'Unexpected call to fs.readFile! Did this impl of ' +
+                'verifyCLIVersion change?',
             );
         }
       });
@@ -128,20 +128,20 @@ describe("cacheRepoUtils", () => {
       expect(err).toBe(null);
     });
 
-    it("throws if the cli range is incompatible", async () => {
+    it('throws if the cli range is incompatible', async () => {
       const readFileMock = _mock(fs.readFile);
       readFileMock.mockImplementation(() => {
         switch (readFileMock.mock.calls.length) {
           case 1:
             return Promise.resolve(
-              JSON.stringify({ compatibleCLIRange: "0.0.0" })
+              JSON.stringify({compatibleCLIRange: '0.0.0'}),
             );
           case 2:
-            return Promise.resolve(JSON.stringify({ version: "1.0.0" }));
+            return Promise.resolve(JSON.stringify({version: '1.0.0'}));
           default:
             throw new Error(
-              "Unexpected call to fs.readFile! Did this impl of " +
-                "verifyCLIVersion change?"
+              'Unexpected call to fs.readFile! Did this impl of ' +
+                'verifyCLIVersion change?',
             );
         }
       });
@@ -152,9 +152,9 @@ describe("cacheRepoUtils", () => {
         err = e;
       }
       expect(err && err.message).toBe(
-        "Please upgrade your flow-typed CLI! This CLI is version 1.0.0, but " +
-          "the latest flow-typed definitions are only compatible with " +
-          "flow-typed@0.0.0"
+        'Please upgrade your flow-typed CLI! This CLI is version 1.0.0, but ' +
+          'the latest flow-typed definitions are only compatible with ' +
+          'flow-typed@0.0.0',
       );
     });
   });

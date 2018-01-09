@@ -3,7 +3,7 @@ declare module "redis" {
   declare class RedisClient extends events$EventEmitter mixins RedisClientPromisified {
     hmset: (key: string, map: any, callback: (?Error) => void) => void;
     rpush: (key: string, value: string, callback: (?Error) => void) => void;
-    lpush: (key: string, value: any, callback?: (?Error, number) => void) => void;
+    lpush: (key: string, value: string, callback?: (?Error, number) => void) => void;
     lrem: (
       topic: string,
       cursor: number,
@@ -19,8 +19,9 @@ declare module "redis" {
     hgetall: (topic: string, key: string) => Array<string> | void;
     hdel: (topic: string, key: string) => number;
     get: (key: string) => any;
-    set: (key: string, value: any) => void;
+    set: (key: string, value: string, cb?: (error: Error | null) => void) => void;
     del: (...keys: Array<string>) => void;
+    mget: (keys: Array<string>, (Error | null, Array<string | null>) => void) => void;
     rpoplpush: (source: string, destination: string) => string | void;
     publish: (topic: string, value: any) => void;
     subscribe: (topic: string) => void;

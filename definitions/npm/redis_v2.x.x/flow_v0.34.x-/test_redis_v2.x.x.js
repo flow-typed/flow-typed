@@ -19,6 +19,15 @@ redis.createClient('redis://localhost:6739')
 redis.createClient('redis://localhost:6739', options)
 redis.createClient(options)
 
+client.set('some-key', 'Some value');
+client.set('some-key', 'Some value', (error) => {
+  console.log('Error?', error);
+});
+// $ExpectError
+client.set('some-key');
+// $ExpectError
+client.set('some-key', { foo: 'bar' });
+
 client.hmset("some-key", { key1: "value1" }, err =>
   console.log("hmset error:", err)
 );
@@ -33,7 +42,15 @@ client.lpush("key", "value", (err, newLength) => {
   console.log(`New length: ${newLength}`);
 });
 client.lpush("key", "value");
-// $EXpectError
+// $ExpectError
 client.lpush("key");
-// $EXpectError
+// $ExpectError
 client.lpush("key", { foo: 'bar' });
+
+client.mget(["key1", "key2"], (error, entries) => {
+  if (error === null) {
+    console.log('Error!');
+    return;
+  }
+  console.log(entries.join(','));
+});
