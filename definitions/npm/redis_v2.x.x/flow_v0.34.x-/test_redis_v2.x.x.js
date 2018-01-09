@@ -19,6 +19,15 @@ redis.createClient('redis://localhost:6739')
 redis.createClient('redis://localhost:6739', options)
 redis.createClient(options)
 
+client.set('some-key', 'Some value');
+client.set('some-key', 'Some value', (error) => {
+  console.log('Error?', error);
+});
+// $ExpectError
+client.set('some-key');
+// $ExpectError
+client.set('some-key', { foo: 'bar' });
+
 client.hmset("some-key", { key1: "value1" }, err =>
   console.log("hmset error:", err)
 );
