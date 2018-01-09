@@ -42,7 +42,7 @@ client.lpush("key", "value", (err, newLength) => {
   console.log(`New length: ${newLength}`);
 });
 client.lpush("key", "value");
-// $EXpectError
+// $ExpectError
 client.lpush("key");
-// $EXpectError
+// $ExpectError
 client.lpush("key", { foo: 'bar' });
