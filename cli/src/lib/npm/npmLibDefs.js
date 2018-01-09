@@ -83,13 +83,15 @@ async function extractLibDefsFromNpmPkgDir(
 
   if (validating) {
     const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}`;
-    await _npmExists(fullPkgName).then().catch(error => {
-      // Only fail spen on 404, not on timeout
-      if (error.statusCode === 404) {
-        const pkgError = `Package does not exist on npm!`;
-        validationError(fullPkgName, pkgError, validationErrors);
-      }
-    });
+    await _npmExists(fullPkgName)
+      .then()
+      .catch(error => {
+        // Only fail spen on 404, not on timeout
+        if (error.statusCode === 404) {
+          const pkgError = `Package does not exist on npm!`;
+          validationError(fullPkgName, pkgError, validationErrors);
+        }
+      });
   }
 
   const commonTestFiles = [];

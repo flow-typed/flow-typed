@@ -1,16 +1,16 @@
 // @flow
-import { run } from "../runTests";
-import { path } from "../../lib/node";
+import {run} from '../runTests';
+import {path} from '../../lib/node';
 
-describe("run-tests (command)", () => {
-  describe("regression 1385", () => {
+describe('run-tests (command)', () => {
+  describe('regression 1385', () => {
     const origConsoleLog = console.log;
     let status;
     beforeEach(async () => {
       (console: any).log = jest.fn();
       const args = {
-        _: ["run-tests", "regression-1385_v1.x.x"],
-        path: path.join(__dirname, "__runTests-fixtures__")
+        _: ['run-tests', 'regression-1385_v1.x.x'],
+        path: path.join(__dirname, '__runTests-fixtures__'),
       };
       status = await run(args);
     }, 30000);
@@ -23,7 +23,7 @@ describe("run-tests (command)", () => {
       expect(status).toEqual(1);
     });
 
-    it("console logs about unused suppression", async () => {
+    it('console logs about unused suppression', async () => {
       const expectedError = `// $ExpectError
         ^^^^^^^^^^^^^^^ Error suppressing comment. Unused suppression`;
       const calls = ((console.log: any): JestMockFn<*, *>).mock.calls;
