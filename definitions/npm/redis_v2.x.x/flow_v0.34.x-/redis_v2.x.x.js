@@ -19,7 +19,7 @@ declare module "redis" {
     hgetall: (topic: string, key: string) => Array<string> | void;
     hdel: (topic: string, key: string) => number;
     get: (key: string) => any;
-    set: (key: string, value: any) => void;
+    set: (key: string, value: string, cb?: (error: Error | null) => void) => void;
     del: (...keys: Array<string>) => void;
     rpoplpush: (source: string, destination: string) => string | void;
     publish: (topic: string, value: any) => void;
