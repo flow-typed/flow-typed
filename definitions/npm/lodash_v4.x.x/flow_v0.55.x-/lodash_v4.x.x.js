@@ -212,13 +212,13 @@ declare module "lodash" {
     chunk<T>(array?: ?Array<T>, size?: ?number): Array<Array<T>>;
     compact<T, N: ?T>(array?: ?Array<N>): Array<T>;
     concat<T>(base?: ?Array<T>, ...elements: Array<any>): Array<T | any>;
-    difference<T>(array?: ?Array<T>, values?: ?Array<T>): Array<T>;
+    difference<T>(array?: ?$ReadOnlyArray<T>, values?: ?$ReadOnlyArray<T>): Array<T>;
     differenceBy<T>(
-      array?: ?Array<T>,
-      values?: ?Array<T>,
+      array?: ?$ReadOnlyArray<T>,
+      values?: ?$ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
     ): T[];
-    differenceWith<T>(array?: ?T[], values?: ?T[], comparator?: ?Comparator<T>): T[];
+    differenceWith<T>(array?: ?$ReadOnlyArray<T>, values?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): T[];
     drop<T>(array?: ?Array<T>, n?: ?number): Array<T>;
     dropRight<T>(array?: ?Array<T>, n?: ?number): Array<T>;
     dropRightWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
