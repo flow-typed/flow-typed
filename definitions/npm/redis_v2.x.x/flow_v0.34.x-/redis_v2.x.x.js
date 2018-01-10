@@ -18,7 +18,7 @@ declare module "redis" {
     hget: (topic: string, key: string, value: string) => string | void;
     hgetall: (topic: string, key: string) => Array<string> | void;
     hdel: (topic: string, key: string) => number;
-    get: (key: string) => any;
+    get: (key: string, (Error | null, string | null) => void) => void;
     set: (key: string, value: string, cb?: (error: Error | null) => void) => void;
     del: (...keys: Array<string>) => void;
     mget: (keys: Array<string>, (Error | null, Array<string | null>) => void) => void;
