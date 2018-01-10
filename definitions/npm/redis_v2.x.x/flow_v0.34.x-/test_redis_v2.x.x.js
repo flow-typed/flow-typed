@@ -68,3 +68,8 @@ client.mset([
 ], (error) => {
   if (error !== null) console.error(error);
 });
+
+client.flushall();
+client.flushall((error) => {
+  if (error !== null) console.error(error);
+});
