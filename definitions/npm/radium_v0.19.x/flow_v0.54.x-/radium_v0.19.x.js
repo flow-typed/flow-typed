@@ -112,8 +112,8 @@ declare module "radium" {
     (elem: Element<any>): Element<any>;
     (config: RadiumConfig): ConfiguredRadium;
     Plugins: Object;
-    Style: ClassComponent<any, any, any>;
-    StyleRoot: ClassComponent<any, any, any>;
+    Style: ClassComponent<any, any>;
+    StyleRoot: ClassComponent<any, any>;
     getState(
       state: Object,
       elementKey: string,
