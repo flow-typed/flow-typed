@@ -73,7 +73,7 @@ declare module "next/link" {
     href: string | URLObject,
     as?: string | URLObject
   };
-  declare export default Class<Component<void, State>>
+  declare export default Class<Component<*, State>>
 }
 
 declare module "next/prefetch" {
@@ -85,7 +85,7 @@ declare module "next/prefetch" {
   };
   declare export var reloadIfPrefetched: any;
   declare export function prefetch(url: string): any;
-  declare export default Class<Component<void, State>>
+  declare export default Class<Component<*, State>>
 }
 
 declare module "next/router" {
@@ -117,10 +117,10 @@ declare module "next/document" {
     err?: any
   };
 
-  declare export var Head: Class<Component<void, *>>;
-  declare export var Main: Class<Component<void, *>>;
-  declare export var NextScript: Class<Component<void, *>>;
-  declare export default Class<Component<void, *>> & {
+  declare export var Head: Class<Component<*, *>>;
+  declare export var Main: Class<Component<*, *>>;
+  declare export var NextScript: Class<Component<*, *>>;
+  declare export default Class<Component<*, *>> & {
     getInitialProps: (ctx: Context) => Promise<*>,
     renderPage(cb: Function): void
   }
