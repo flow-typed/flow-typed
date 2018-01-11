@@ -15,7 +15,7 @@ type Props2 = {
   b: string,
 };
 
-class C2 extends React.Component<void, Props2, void> {
+class C2 extends React.Component<Props2, void> {
   render () {
     return <div>{this.props.a} {this.props.b}</div>
   }
