@@ -1,33 +1,25 @@
 // @flow
 import React from 'react';
 import Radium from 'radium';
-import type { FunctionComponent } from 'radium';
 import type { StatelessFunctionalComponent } from 'react';
 
 type Props1 = {
-    a: number,
-    b: string
+  a: boolean,
+  b: number,
 };
 
-const C1: FunctionComponent<Props1, void> = (props: Props1) => <div>{props.a} {props.b}</div>
+const C1: StatelessFunctionalComponent<Props1> = (props: Props1) => <div>{props.a} {props.b}</div>
 
 type Props2 = {
-    a: number,
-    b: string,
+  a: number,
+  b: string,
 };
 
 class C2 extends React.Component<void, Props2, void> {
-    render () {
-        return <div>{this.props.a} {this.props.b}</div>
-    }
+  render () {
+    return <div>{this.props.a} {this.props.b}</div>
+  }
 }
-
-type Props3 = {
-    a: boolean,
-    b: number,
-};
-
-const C3: StatelessFunctionalComponent<Props3> = (props: Props3) => <div>{props.a} {props.b}</div>
 
 Radium(<div/>);
 Radium(<Radium.StyleRoot/>);
@@ -39,11 +31,11 @@ Radium.getState({}, 'ref', ':hover');
 Radium.getState({}, 'ref', ':visible') // invalid property
 
 const RC1 = Radium(C1);
-<RC1 a={1} b="s" />;
+<RC1 a={true} b={2} />;
 // $ExpectError
 <RC1 />; // missing a, b
 // $ExpectError
-<RC1 a={1} />; // missing b
+<RC1 a={false} />; // missing b
 // $ExpectError
 <RC1 a="s" b="s" />; // wrong a type
 
@@ -56,22 +48,13 @@ const RC2 = Radium(C2);
 // $ExpectError
 <RC2 a="s" b="s" />; // wrong a type
 
-const RC3 = Radium(C3);
-<RC3 a={true} b={2} />;
-// $ExpectError
-<RC3 />; // missing a, b
-// $ExpectError
-<RC3 a={false} />; // missing b
-// $ExpectError
-<RC3 a="s" b="s" />; // wrong a type
-
 const ConfiguredRadium = Radium({ userAgent: 'foo' })
 const CRC1 = ConfiguredRadium(C1);
-<CRC1 a={1} b="s" />;
+<CRC1 a={true} b={2} />;
 // $ExpectError
 <CRC1 />; // missing a, b
 // $ExpectError
-<CRC1 a={1} />; // missing b
+<CRC1 a={false} />; // missing b
 // $ExpectError
 <CRC1 a="s" b="s" />; // wrong a type
 
@@ -83,12 +66,3 @@ const CRC2 = ConfiguredRadium(C2);
 <CRC2 a={1} />; // missing b
 // $ExpectError
 <CRC2 a="s" b="s" />; // wrong a type
-
-const CRC3 = ConfiguredRadium(C3);
-<CRC3 a={true} b={2} />;
-// $ExpectError
-<CRC3 />; // missing a, b
-// $ExpectError
-<CRC3 a={false} />; // missing b
-// $ExpectError
-<CRC3 a="s" b="s" />; // wrong a type
