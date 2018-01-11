@@ -49,7 +49,7 @@ declare module "next" {
 declare module "next/head" {
   import type { Component } from "react";
 
-  declare export default Class<Component<void, *>>
+  declare export default Class<Component<*, *>>
 }
 
 declare module "next/link" {

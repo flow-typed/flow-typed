@@ -1,11 +1,11 @@
 declare module "next" {
-  declare export type RequestHandler = (
+  declare type RequestHandler = (
     req: http$IncomingMessage,
     res: http$ServerResponse,
     parsedUrl: any
   ) => Promise<void>;
 
-  declare export type NextApp = {
+  declare type NextApp = {
     prepare(): Promise<void>,
     getRequestHandler(): RequestHandler,
     render(
