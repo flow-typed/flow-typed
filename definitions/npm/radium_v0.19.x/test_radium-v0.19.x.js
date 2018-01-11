@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import Radium from 'radium';
-import type { FunctionComponent } from 'radium'
+import type { FunctionComponent } from 'radium';
+import type { StatelessFunctionalComponent } from 'react';
 
 type Props1 = {
     a: number,
@@ -20,6 +21,13 @@ class C2 extends React.Component<void, Props2, void> {
         return <div>{this.props.a} {this.props.b}</div>
     }
 }
+
+type Props3 = {
+    a: boolean,
+    b: number,
+};
+
+const C3: StatelessFunctionalComponent<Props3> = (props: Props3) => <div>{props.a} {props.b}</div>
 
 Radium(<div/>);
 Radium(<Radium.StyleRoot/>);
@@ -48,6 +56,15 @@ const RC2 = Radium(C2);
 // $ExpectError
 <RC2 a="s" b="s" />; // wrong a type
 
+const RC3 = Radium(C3);
+<RC3 a={true} b={2} />;
+// $ExpectError
+<RC3 />; // missing a, b
+// $ExpectError
+<RC3 a={false} />; // missing b
+// $ExpectError
+<RC3 a="s" b="s" />; // wrong a type
+
 const ConfiguredRadium = Radium({ userAgent: 'foo' })
 const CRC1 = ConfiguredRadium(C1);
 <CRC1 a={1} b="s" />;
@@ -58,7 +75,6 @@ const CRC1 = ConfiguredRadium(C1);
 // $ExpectError
 <CRC1 a="s" b="s" />; // wrong a type
 
-
 const CRC2 = ConfiguredRadium(C2);
 <CRC2 a={1} b="s" />;
 // $ExpectError
@@ -67,3 +83,12 @@ const CRC2 = ConfiguredRadium(C2);
 <CRC2 a={1} />; // missing b
 // $ExpectError
 <CRC2 a="s" b="s" />; // wrong a type
+
+const CRC3 = ConfiguredRadium(C3);
+<CRC3 a={true} b={2} />;
+// $ExpectError
+<CRC3 />; // missing a, b
+// $ExpectError
+<CRC3 a={false} />; // missing b
+// $ExpectError
+<CRC3 a="s" b="s" />; // wrong a type
