@@ -19,6 +19,14 @@ redis.createClient('redis://localhost:6739')
 redis.createClient('redis://localhost:6739', options)
 redis.createClient(options)
 
+client.get('some-key', (error, value) => {
+  if (error !== null) {
+    console.error(error)
+    return;
+  }
+  console.log(value);
+});
+
 client.set('some-key', 'Some value');
 client.set('some-key', 'Some value', (error) => {
   console.log('Error?', error);
