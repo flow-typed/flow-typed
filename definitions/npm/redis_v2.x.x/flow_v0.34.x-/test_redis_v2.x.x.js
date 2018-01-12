@@ -36,6 +36,11 @@ client.set('some-key');
 // $ExpectError
 client.set('some-key', { foo: 'bar' });
 
+client.del(['key1', 'key2', 'key3']);
+client.del(['key1', 'key2', 'key3'], (error) => {
+  if (error) console.error(error);
+});
+
 client.hmset("some-key", { key1: "value1" }, err =>
   console.log("hmset error:", err)
 );

@@ -20,7 +20,7 @@ declare module "redis" {
     hdel: (topic: string, key: string) => number;
     get: (key: string, (Error | null, string | null) => void) => void;
     set: (key: string, value: string, cb?: (error: Error | null) => void) => void;
-    del: (...keys: Array<string>) => void;
+    del: (keys: Array<string>, cb?: (Error | null) => void) => void;
     mget: (keys: Array<string>, (Error | null, Array<string | null>) => void) => void;
     mset: (keysAndValues: Array<string>, cb?: (Error | null) => void) => void;
     rpoplpush: (source: string, destination: string) => string | void;
