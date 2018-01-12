@@ -24,6 +24,7 @@ declare module "redis" {
     mget: (keys: Array<string>, (Error | null, Array<string | null>) => void) => void;
     mset: (keysAndValues: Array<string>, cb?: (Error | null) => void) => void;
     rpoplpush: (source: string, destination: string) => string | void;
+    flushall: (cb?: (Error | null) => void) => void;
     publish: (topic: string, value: any) => void;
     subscribe: (topic: string) => void;
     unsubscribe: (topic: string) => void;
