@@ -20,6 +20,8 @@ declare module "redis" {
     hdel: (topic: string, key: string) => number;
     get: (key: string, (Error | null, string | null) => void) => void;
     set: (key: string, value: string, cb?: (error: Error | null) => void) => void;
+    setex: (key: string, timeout: string | number, value: string, callback?: (error: ?Error, result: ?string) => void) => void;
+    ttl: (key: string, callback: (error: ?Error, ttl: ?number) => void) => void;
     del: (keys: Array<string>, cb?: (Error | null) => void) => void;
     mget: (keys: Array<string>, (Error | null, Array<string | null>) => void) => void;
     mset: (keysAndValues: Array<string>, cb?: (Error | null) => void) => void;
