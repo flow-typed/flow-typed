@@ -78,10 +78,10 @@ declare module "react-redux" {
 
   declare function connect<P: Object, R: Object, PR: Object>(
     mapStateToProps: MapStateToProps<P, R>
-  ): (ComponentType<PR>) => ComponentType<$Diff<PR, R> & P>;
+  ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<PR, {dispatch: any}>, R> & P>;
   declare function connect<R: Object, PR: Object>(
     mapStateToProps: MapStateToProps<R>
-  ): (ComponentType<PR>) => ComponentType<$Diff<PR, R>>;
+  ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<PR, {dispatch: any}>, R>>;
   declare function connect<PR: Object>(
     mapStateToProps?: null,
     mapDispatchToProps?: null
@@ -89,9 +89,9 @@ declare module "react-redux" {
   declare function connect<A, OP: Object, P: Object, SP: Object, DP: Object,PR: Object>(
     mapStateToProps: MapStateToProps<P, SP>,
     mapDispatchToProps: MapDispatchToProps<A, OP, DP>
-  ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<PR, SP>, DP> & P & OP>;
+  ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<$Diff<PR, {dispatch: any}>, SP>, DP> & P & OP>;
   declare function connect<A, OP: Object, DP: Object,PR: Object>(
     mapStateToProps?: null,
     mapDispatchToProps: MapDispatchToProps<A, OP, DP>
-  ): (ComponentType<PR>) => ComponentType<$Diff<PR, DP> & OP>;
+  ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<PR, {dispatch: any}>, DP> & OP>;
 }
