@@ -133,6 +133,14 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   returning(columns: string[]): this;
 }
 
+type MigrateConfig = {|
+  directory?: string,
+  extension?: string,
+  tableName?: string,
+  disableTransactions?: boolean,
+  loadExtensions?: Array<string>
+|};
+
 declare class Knex$Knex<R>
   mixins Knex$QueryBuilder<R>, Promise<R>, events$EventEmitter {
   static (config: Knex$Config): Knex$Knex<R>;
@@ -140,6 +148,12 @@ declare class Knex$Knex<R>
   $call: (tableName: string) => Knex$QueryBuilder<R>;
   raw(sqlString: string, bindings?: Knex$RawBindings): any;
   batchInsert: (tableName: string, rows: Array<Object>, chunkSize?: number) => Knex$QueryBuilder<R>;
+  migrate: {
+    make: (name: string, config?: MigrateConfig) => Promise<string>,
+    latest: (config?: MigrateConfig) => Promise<void>,
+    rollback: (config?: MigrateConfig) => Promise<void>,
+    currentVersion: (config?: MigrateConfig) => Promise<string>
+  };
   client: any;
   destroy(): Promise<void>;
 }
