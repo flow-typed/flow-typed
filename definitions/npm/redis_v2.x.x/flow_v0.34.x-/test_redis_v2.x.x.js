@@ -36,6 +36,13 @@ client.set('some-key');
 // $ExpectError
 client.set('some-key', { foo: 'bar' });
 
+client.setex('some-key', 12345, 'value');
+client.setex('some-key', 12345, 'value', (error) => {
+  if (error !== null) console.error(error);
+});
+// $ExpectError
+client.setx('somekey', 'value');
+
 client.del(['key1', 'key2', 'key3']);
 client.del(['key1', 'key2', 'key3'], (error) => {
   if (error) console.error(error);
