@@ -18,7 +18,7 @@ declare type express$RequestParams = {
 
 declare class express$Request extends http$IncomingMessage mixins express$RequestResponseBase {
   baseUrl: string;
-  body: any;
+  body: mixed;
   cookies: { [cookie: string]: string };
   connection: Socket;
   fresh: boolean;
