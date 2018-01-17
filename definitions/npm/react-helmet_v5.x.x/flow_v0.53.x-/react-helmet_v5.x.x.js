@@ -1,5 +1,3 @@
-// @qtran
-
 import type { Node, Element } from 'react';
 
 declare module 'react-helmet' {
