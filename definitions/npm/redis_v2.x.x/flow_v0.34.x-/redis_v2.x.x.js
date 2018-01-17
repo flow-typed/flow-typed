@@ -15,6 +15,7 @@ declare module "redis" {
       cursor2: number,
       (error: Error | null, entries: Array<string>) => void
     ) => boolean;
+    llen: (key: string, (error: Error | null, length: number) => void) => boolean;
     hset: (topic: string, key: string, value: string) => number;
     hget: (topic: string, key: string, value: string) => string | void;
     hgetall: (topic: string, key: string) => Array<string> | void;
