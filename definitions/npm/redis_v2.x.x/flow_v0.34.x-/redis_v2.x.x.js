@@ -12,8 +12,9 @@ declare module "redis" {
     lrange: (
       topic: string,
       cursor: number,
-      cursor2: number
-    ) => Array<string> | void;
+      cursor2: number,
+      (error: Error | null, entries: Array<string>) => void
+    ) => boolean;
     hset: (topic: string, key: string, value: string) => number;
     hget: (topic: string, key: string, value: string) => string | void;
     hgetall: (topic: string, key: string) => Array<string> | void;
@@ -58,7 +59,7 @@ declare module "redis" {
       topic: string,
       cursor: number,
       cursor2: number
-    ) => Promise<Array<string>> | Promise<void>;
+    ) => Promise<Array<string>>;
     hsetAsync: (topic: string, key: string, value: string) => Promise<number>;
     hgetAsync: (topic: string, key: string) => Promise<string> | Promise<void>;
     hgetallAsync: (
