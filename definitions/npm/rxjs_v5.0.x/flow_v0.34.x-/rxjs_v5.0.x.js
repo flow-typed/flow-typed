@@ -408,6 +408,11 @@ declare class rxjs$Observable<+T> {
   defaultIfEmpty<U>(defaultValue: U): rxjs$Observable<T | U>;
 
   delay(dueTime: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T>;
+  
+  delayWhen(
+    delayDurationSelector: (value: T) => rxjs$Observable<any>,
+    subscriptionDelay?: rxjs$Observable<any>
+  ): rxjs$Observable<T>;
 
   distinctUntilChanged(compare?: (x: T, y: T) => boolean): rxjs$Observable<T>;
 
