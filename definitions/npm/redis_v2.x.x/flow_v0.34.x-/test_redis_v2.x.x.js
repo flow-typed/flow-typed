@@ -75,6 +75,14 @@ client.lrange("key", 0, 5, (error, entries) => {
   console.log(entries.join(','));
 });
 
+client.llen('key', (error, length) => {
+  if (error !== null) {
+    console.error(error);
+    return;
+  }
+  console.log(length);
+});
+
 client.mget(["key1", "key2"], (error, entries) => {
   if (error === null) {
     console.log('Error!');
