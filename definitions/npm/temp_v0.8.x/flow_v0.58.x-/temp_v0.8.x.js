@@ -17,7 +17,7 @@ declare module 'temp' {
     // Functions
     mkdir(
       affixes?: Affixes,
-      callback?: (err: ?ErrnoError, dirPath: string) => void,
+      callback?: (err: ?ErrnoError, dirPath: string) => mixed,
     ): void;
     mkdirSync(affixes?: Affixes): string;
     open(
@@ -25,7 +25,7 @@ declare module 'temp' {
       callback?: (
         err: ?ErrnoError,
         info: {path: string, fd: ?number},
-      ) => void,
+      ) => mixed,
     ): void;
     openSync(affixes?: Affixes): {path: string, fd: ?number};
     path(rawAffixes?: Affixes, defaultPrefix?: string): string;
@@ -33,7 +33,7 @@ declare module 'temp' {
       callback?: (
         err: ?ErrnoError,
         info: {files: number, dirs?: number},
-      ) => void,
+      ) => mixed,
     ): void;
     cleanupSync(): {files: number, dirs: number};
     createWriteStream(affixes?: Affixes): stream$Writable;
