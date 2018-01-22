@@ -31,28 +31,30 @@ const fail = () => (
     <Helmet title={{}} />
 )
 
+// rewind and renderStatic are aliases
+const heads = [Helmet.rewind(), Helmet.renderStatic()];
 
-const head = Helmet.rewind();
+heads.forEach((head) => {
+  (head.htmlAttributes.toString(): string);
+  (head.title.toString(): string);
+  (head.base.toString(): string);
+  (head.meta.toString(): string);
+  (head.link.toString(): string);
+  (head.script.toString(): string);
+  (head.style.toString(): string);
 
-(head.htmlAttributes.toString(): string);
-(head.title.toString(): string);
-(head.base.toString(): string);
-(head.meta.toString(): string);
-(head.link.toString(): string);
-(head.script.toString(): string);
-(head.style.toString(): string);
-
-// $ExpectError
-(head.htmlAttributes.toString(): boolean);
-// $ExpectError
-(head.title.toString(): boolean);
-// $ExpectError
-(head.base.toString(): boolean);
-// $ExpectError
-(head.meta.toString(): boolean);
-// $ExpectError
-(head.link.toString(): boolean);
-// $ExpectError
-(head.script.toString(): boolean);
-// $ExpectError
-(head.style.toString(): boolean);
+  // $ExpectError
+  (head.htmlAttributes.toString(): boolean);
+  // $ExpectError
+  (head.title.toString(): boolean);
+  // $ExpectError
+  (head.base.toString(): boolean);
+  // $ExpectError
+  (head.meta.toString(): boolean);
+  // $ExpectError
+  (head.link.toString(): boolean);
+  // $ExpectError
+  (head.script.toString(): boolean);
+  // $ExpectError
+  (head.style.toString(): boolean);
+});
