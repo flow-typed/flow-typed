@@ -43,6 +43,7 @@ declare module 'react-helmet' {
 
     declare class Helmet extends React$Component<Props> {
       static rewind(): StateOnServer;
+      static renderStatic(): StateOnServer;
       static canUseDom(canUseDOM: boolean): void;
     }
 
