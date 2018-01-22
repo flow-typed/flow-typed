@@ -40,7 +40,7 @@ declare module 'icepick' {
         s4: S4,
     ): T & S1 & S2 & S3 & S4;
 
-    declare function merge<T, S1>(target: T, source: S1): T & S1;
+    declare function merge<T, S1>(target: T, source: S1, resolver?: (target: any, source: any, key: string) => any): T & S1;
 
     declare function push<T>(array: T[], element: T): T[];
     declare function pop<T>(array: T[]): T[];

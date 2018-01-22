@@ -165,13 +165,19 @@ class Foo {}
 // merge(target, source)
 {
     const defaults = { a: 1, c: { d: 1, e: [1, 2, 3], f: { g: 1 } } };
-    const obj = { c: { d: 2, e: [2], f: null } };
 
+    const obj = { c: { d: 2, e: [2], f: null } };
     const result1: (typeof defaults & typeof obj) = i.merge(defaults, obj); // {a: 1, c: {d: 2, e: [2]}, f: null}
+
     const obj2 = { c: { d: 2 } };
     const result2: (typeof defaults & typeof obj2) = i.merge(result1, obj2);
 
     result1 === result2; // true
+
+    const obj3 = { c: { d: 2 } };
+    const result3: (typeof defaults & typeof obj3) = i.merge(result1, obj3, function(target, source, key) {
+        return target;
+    });
 }
 
 // arrays
