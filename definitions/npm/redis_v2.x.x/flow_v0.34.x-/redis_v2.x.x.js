@@ -18,7 +18,7 @@ declare module "redis" {
     llen: (key: string, (error: Error | null, length: number) => void) => boolean;
     hset: (topic: string, key: string, value: string) => number;
     hget: (topic: string, key: string, value: string) => string | void;
-    hgetall: (topic: string, key: string) => Array<string> | void;
+    hgetall: (topic: string) => Array<string> | void;
     hdel: (topic: string, key: string) => number;
     get: (key: string, (Error | null, string | null) => void) => void;
     set: (key: string, value: string, cb?: (error: Error | null) => void) => void;
@@ -64,8 +64,7 @@ declare module "redis" {
     hsetAsync: (topic: string, key: string, value: string) => Promise<number>;
     hgetAsync: (topic: string, key: string) => Promise<string> | Promise<void>;
     hgetallAsync: (
-      topic: string,
-      key: string
+      topic: string
     ) => Promise<Array<string>> | Promise<void>;
     hdelAsync: (topic: string, key: string) => Promise<number>;
     getAsync: (key: string) => Promise<any>;
