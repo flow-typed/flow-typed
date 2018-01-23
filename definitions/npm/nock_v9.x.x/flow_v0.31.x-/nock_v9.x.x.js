@@ -4,8 +4,9 @@ declare type $npm$nock$Path = string | RegExp | ((url: string) => boolean);
 declare type $npm$nock$Parameter =
   | string
   | RegExp
+  | Array<mixed>
   | Object
-  | ((body: Object) => boolean);
+  | ((body: Object | Array<mixed>) => boolean);
 
 declare type $npm$nock$RecordedCall = {
   scope: string,
