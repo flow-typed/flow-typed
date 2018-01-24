@@ -1,35 +1,102 @@
 /* This module definition is by no means complete. A lot of methods of the RedisClient class are missing */
 declare module "redis" {
   declare class RedisClient extends events$EventEmitter mixins RedisClientPromisified {
-    hmset: (key: string, map: any, callback: (?Error) => void) => void;
-    rpush: (key: string, value: string, callback: (?Error) => void) => void;
-    lpush: (key: string, value: string, callback?: (?Error, number) => void) => void;
+    hmset: (
+      key: string,
+      map: any,
+      callback?: (error: ?Error) => void
+    ) => void;
+    rpush: (
+      key: string,
+      value: string,
+      callback?: (error: ?Error) => void
+    ) => void;
+    lpush: (
+      key: string,
+      value: string,
+      callback?: (error: ?Error, newLength: ?number) => void
+    ) => void;
     lrem: (
       topic: string,
       cursor: number,
-      value: string
-    ) => Array<string> | void;
+      value: string,
+      callback?: (error: ?Error, entries: ?Array<string>) => void
+    ) => void;
     lrange: (
       topic: string,
       cursor: number,
       cursor2: number,
-      (error: Error | null, entries: Array<string>) => void
-    ) => boolean;
-    llen: (key: string, (error: Error | null, length: number) => void) => boolean;
-    hset: (topic: string, key: string, value: string) => number;
-    hget: (topic: string, key: string, value: string) => string | void;
-    hgetall: (topic: string, key: string) => Array<string> | void;
-    hdel: (topic: string, key: string) => number;
-    get: (key: string, (Error | null, string | null) => void) => void;
-    set: (key: string, value: string, cb?: (error: Error | null) => void) => void;
-    setex: (key: string, timeout: number, value: string, callback?: (error: ?Error, result: ?string) => void) => void;
-    ttl: (key: string, callback: (error: ?Error, ttl: ?number) => void) => void;
-    del: (keys: Array<string>, cb?: (Error | null) => void) => void;
-    mget: (keys: Array<string>, (Error | null, Array<string | null>) => void) => void;
-    mset: (keysAndValues: Array<string>, cb?: (Error | null) => void) => void;
-    rpoplpush: (source: string, destination: string) => string | void;
-    flushall: (cb?: (Error | null) => void) => void;
-    publish: (topic: string, value: any) => void;
+      callback: (error: ?Error, entries: ?Array<string>) => void
+    ) => void;
+    llen: (
+      key: string,
+      callback: (error: ?Error, length: ?number) => void
+    ) => void;
+    hset: (
+      topic: string,
+      key: string,
+      value: string,
+      callback?: (error: ?Error, result: ?(0 | 1)) => void
+    ) => void;
+    hget: (
+      topic: string,
+      key: string,
+      value: string,
+      callback: (error: ?Error, result: ?string) => void
+    ) => void;
+    hgetall: (
+      topic: string,
+      callback: (error: ?Error, result: ?Array<string>) => void
+    ) => void;
+    hdel: (
+      topic: string,
+      key: string,
+      callback?: (error: ?Error, numRemoved: ?number) => void
+    ) => void;
+    get: (
+      key: string,
+      callback: (error: ?Error, value: ?string) => void
+    ) => void;
+    set: (
+      key: string,
+      value: string,
+      callback?: (error: ?Error, result: ?(0 | 1)) => void
+    ) => void;
+    setex: (
+      key: string,
+      timeout: number,
+      value: string,
+      callback?: (error: ?Error, result: ?string) => void
+    ) => void;
+    ttl: (
+      key: string,
+      callback: (error: ?Error, ttl: ?number) => void
+    ) => void;
+    del: (
+      keys: Array<string>,
+      callback?: (error: ?Error, numRemoved: ?number) => void
+    ) => void;
+    mget: (
+      keys: Array<string>,
+      callback: (error: ?Error, values: ?Array<?string>) => void
+    ) => void;
+    mset: (
+      keysAndValues: Array<string>,
+      callback?: (error: ?Error, result: ?string) => void
+    ) => void;
+    rpoplpush: (
+      source: string,
+      destination: string,
+      callback?: (error: ?Error, result: ?string) => void
+    ) => void;
+    flushall: (
+      callback?: (error: ?Error, result: ?string) => void
+    ) => void;
+    publish: (
+      topic: string,
+      value: any,
+      callback?: (error: ?Error, numReceivers: ?number) => void
+    ) => void;
     subscribe: (topic: string) => void;
     unsubscribe: (topic: string) => void;
     psubscribe: (pattern: string) => void;
@@ -61,11 +128,16 @@ declare module "redis" {
       cursor: number,
       cursor2: number
     ) => Promise<Array<string>>;
+    mgetAsync: (
+      keys: Array<string>
+    ) => Promise<Array<?string>>;
+    msetAsync: (
+      keysAndValues: Array<string>,
+    ) => Promise<string>;
     hsetAsync: (topic: string, key: string, value: string) => Promise<number>;
     hgetAsync: (topic: string, key: string) => Promise<string> | Promise<void>;
     hgetallAsync: (
       topic: string,
-      key: string
     ) => Promise<Array<string>> | Promise<void>;
     hdelAsync: (topic: string, key: string) => Promise<number>;
     getAsync: (key: string) => Promise<any>;

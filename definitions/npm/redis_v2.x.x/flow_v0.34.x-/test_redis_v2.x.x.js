@@ -55,11 +55,11 @@ client.rpush("some-list", "some-value", err =>
   console.log("rpush error:", err)
 );
 
-client.lpush("key", "value", (err, newLength) => {
+client.lpush("key", "value", (err, newLength: ?number) => {
   if (err) {
     console.log(`lpush error: ${err.message}`);
   }
-  console.log(`New length: ${newLength}`);
+  if (newLength) console.log(`New length: ${newLength}`);
 });
 client.lpush("key", "value");
 // $ExpectError
@@ -67,28 +67,33 @@ client.lpush("key");
 // $ExpectError
 client.lpush("key", { foo: 'bar' });
 
-client.lrange("key", 0, 5, (error, entries) => {
+client.lrange("key", 0, 5, (error, entries: ?Array<string>) => {
   if (error !== null) {
     console.error(error);
     return;
   }
-  console.log(entries.join(','));
+  if (entries) console.log(entries.join(','));
 });
 
-client.llen('key', (error, length) => {
+client.llen('key', (error, length: ?number) => {
   if (error !== null) {
     console.error(error);
     return;
   }
-  console.log(length);
+  if (length) console.log(length);
 });
 
-client.mget(["key1", "key2"], (error, entries) => {
+// $ExpectError
+client.mget(["key1", "key2"], (error, entries: ?Array<string>) => {})
+// $ExpectError
+client.mget(["key1", "key2"], (error, entries: Array<?string>) => {})
+
+client.mget(["key1", "key2"], (error, entries: ?Array<?string>) => {
   if (error === null) {
     console.log('Error!');
     return;
   }
-  console.log(entries.join(','));
+  if (entries) console.log(entries.join(','));
 });
 
 client.mset(["key1", "value1", "key2", "value"], (error) => {
@@ -109,3 +114,7 @@ client.flushall();
 client.flushall((error) => {
   if (error !== null) console.error(error);
 });
+
+client.hgetall("key", (error: ?Error, result: ?Array<string>) => {})
+// $ExpectError
+client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: ?Array<string>) => {})
