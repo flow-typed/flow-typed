@@ -225,7 +225,6 @@ declare module 'styled-components/native' {
     ListView: StyledComponent,
     MapView: StyledComponent,
     Modal: StyledComponent,
-    Navigator: StyledComponent,
     NavigatorIOS: StyledComponent,
     Picker: StyledComponent,
     PickerIOS: StyledComponent,

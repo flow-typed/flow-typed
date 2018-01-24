@@ -323,7 +323,6 @@ type $npm$styledComponents$StyledComponentsNativeComponentList = {|
   ListView:                     $npm$styledComponents$StyledComponentsNativeComponentListValue,
   MapView:                      $npm$styledComponents$StyledComponentsNativeComponentListValue,
   Modal:                        $npm$styledComponents$StyledComponentsNativeComponentListValue,
-  Navigator:                    $npm$styledComponents$StyledComponentsNativeComponentListValue,
   NavigatorIOS:                 $npm$styledComponents$StyledComponentsNativeComponentListValue,
   Picker:                       $npm$styledComponents$StyledComponentsNativeComponentListValue,
   PickerIOS:                    $npm$styledComponents$StyledComponentsNativeComponentListValue,
