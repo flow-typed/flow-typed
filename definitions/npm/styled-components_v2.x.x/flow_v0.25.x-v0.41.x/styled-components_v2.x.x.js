@@ -218,6 +218,7 @@ declare module 'styled-components/native' {
     DrawerLayoutAndroid: StyledComponent,
     FlatList: StyledComponent,
     Image: StyledComponent,
+    ImageBackground: StyledComponent,
     ImageEditor: StyledComponent,
     ImageStore: StyledComponent,
     KeyboardAvoidingView: StyledComponent,
