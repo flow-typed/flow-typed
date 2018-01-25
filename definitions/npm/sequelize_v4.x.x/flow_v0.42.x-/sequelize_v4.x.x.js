@@ -6017,22 +6017,6 @@ declare module "sequelize" {
     operatorsAliases?: boolean | OperatorsAliases
   }
 
-  declare export type Config = {
-    database: string,
-    dialectModulePath: ?string,
-    dialectOptions: ?Object,
-    host: string,
-    keepDefaultTimezone: any, // undocumented
-    native: boolean,
-    password: string,
-    pool: PoolOptions,
-    port: number,
-    protocol: string,
-    replication: boolean,
-    ssl: any, // undocumented
-    username: string,
-  }
-
   declare export type QueryOptionsTransactionRequired = {
     transaction: Transaction,
   }
@@ -6852,8 +6836,6 @@ declare module "sequelize" {
      * Defined options.
      */
     options: Options,
-
-    config: Config,
 
     /**
      * Returns the specified dialect.
