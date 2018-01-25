@@ -2539,7 +2539,7 @@ declare module "sequelize" {
     /**
      * The association you want to eagerly load. (This can be used instead of providing a model/as pair)
      */
-    association?: Association<TInstance, any>,
+    association?: Association<any, TInstance>,
 
     /**
      * Where clauses to apply to the child models. Note that this converts the eager load to an inner join,
@@ -6017,6 +6017,22 @@ declare module "sequelize" {
     operatorsAliases?: boolean | OperatorsAliases
   }
 
+  declare export type Config = {
+    database: string,
+    dialectModulePath: ?string,
+    dialectOptions: ?Object,
+    host: string,
+    keepDefaultTimezone: any, // undocumented
+    native: boolean,
+    password: string,
+    pool: PoolOptions,
+    port: number,
+    protocol: string,
+    replication: boolean,
+    ssl: any, // undocumented
+    username: string,
+  }
+
   declare export type QueryOptionsTransactionRequired = {
     transaction: Transaction,
   }
@@ -6836,6 +6852,8 @@ declare module "sequelize" {
      * Defined options.
      */
     options: Options,
+
+    config: Config,
 
     /**
      * Returns the specified dialect.
