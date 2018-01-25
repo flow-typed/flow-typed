@@ -222,6 +222,27 @@ class Foo {}
     const arr = [1, 2, {foo: 'bar'}];
     const obj = {foo: 'f', bar: { foo: 'f', bar: 'b' }};
 
+    // ensure correct types given to chain
+    {
+        const result1: any[] = i.chain([]).value();
+        const result2: Object = i.chain({}).value();
+        const result3: Function = i.chain(function() { return; }).value();
+        const result4: Symbol = i.chain(Symbol('foo')).value();
+
+        // $ExpectError
+        i.chain(1).value();
+        // $ExpectError
+        i.chain(true).value();
+        // $ExpectError
+        i.chain('test').value();
+
+        // Functions and Symbols should be treated as Objects
+        // $ExpectError
+        i.chain(function() { return; }).push(5).value();
+        // $ExpectError
+        i.chain(Symbol('foo')).push(5).value();
+    }
+
     // chain assoc
     {
         const coll: typeof arr = i.chain(arr).assoc(0, 5).value(); // [5, 2, {foo: 'bar'}]
