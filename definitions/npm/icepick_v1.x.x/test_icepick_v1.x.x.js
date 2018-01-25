@@ -216,3 +216,140 @@ class Foo {}
         .getIn(['a', 0])
         .value();
 }
+
+// chain(coll) with array and objects
+{
+    const arr = [1, 2, {foo: 'bar'}];
+    const obj = {foo: 'f', bar: { foo: 'f', bar: 'b' }};
+
+    // ensure correct types given to chain
+    {
+        const result1: any[] = i.chain([]).value();
+        const result2: Object = i.chain({}).value();
+        const result3: Function = i.chain(function() { return; }).value();
+        const result4: Symbol = i.chain(Symbol('foo')).value();
+
+        // $ExpectError
+        i.chain(1).value();
+        // $ExpectError
+        i.chain(true).value();
+        // $ExpectError
+        i.chain('test').value();
+
+        // Functions and Symbols should be treated as Objects
+        // $ExpectError
+        i.chain(function() { return; }).push(5).value();
+        // $ExpectError
+        i.chain(Symbol('foo')).push(5).value();
+    }
+
+    // chain assoc
+    {
+        const coll: typeof arr = i.chain(arr).assoc(0, 5).value(); // [5, 2, {foo: 'bar'}]
+        const coll2: typeof obj = i.chain(obj).assoc(0, 5).value(); // {"0": 5, foo: 'f', bar...}
+        // $ExpectError
+        i.chain(arr).assoc('key', 5).value();
+    }
+
+    // chain set
+    {
+        const coll: typeof arr = i.chain(arr).set(0, 5).value(); // [5, 2, {foo: 'bar'}]
+        const coll2: typeof obj = i.chain(obj).set(0, 5).value(); // {"0": 5, foo: 'f', bar...}
+        // $ExpectError
+        i.chain(arr).set('key', 5).value();
+    }
+
+    // chain dissoc
+    {
+        const coll: typeof arr = i.chain(arr).dissoc(0).value(); // [2, {foo: 'bar'}]
+        const coll2: typeof obj = i.chain(obj).dissoc(0).value();
+        // $ExpectError
+        i.chain(arr).dissoc('key').value();
+    }
+
+    // chain unset
+    {
+        const coll1: typeof arr = i.chain(arr).unset(0).value(); // [null, 2, {foo: 'bar'}]
+        const coll2: typeof obj = i.chain(obj).unset(0).value();
+        // $ExpectError
+        i.chain(arr).unset('key').value();
+    }
+
+    // chain thru
+    {
+        const coll: typeof arr = i.chain(arr).thru(function(val) { return val; }).value();
+        const coll2: typeof obj = i.chain(obj).thru(function(val) { return val; }).value();
+        // $ExpectError
+        i.chain(arr).thru(function(val) { return 5; }).value();
+    }
+
+    // chain push
+    {
+        const coll: typeof arr = i.chain(arr).push({key: 'value'}).value();
+        // $ExpectError
+        i.chain(obj).push({key: 'value'}).value();
+    }
+
+    // chain pop
+    {
+        const coll: typeof arr = i.chain(arr).pop().value();
+        // $ExpectError
+        i.chain(obj).pop().value();
+    }
+
+    // chain shift
+    {
+        const coll: typeof arr = i.chain(arr).shift().value();
+        // $ExpectError
+        i.chain(obj).shift().value();
+    }
+
+    // chain unshift
+    {
+        const coll: typeof arr = i.chain(arr).unshift(0).value();
+        // $ExpectError
+        i.chain(obj).unshift(0).value();
+    }
+
+    // chain reverse
+    {
+        const coll: typeof arr = i.chain(arr).reverse().value();
+        // $ExpectError
+        i.chain(obj).reverse().value();
+    }
+
+    // chain sort
+    {
+        const coll: typeof arr = i.chain(arr).sort().value();
+        // $ExpectError
+        i.chain(obj).sort().value();
+    }
+
+    // chain splice
+    {
+        const coll: typeof arr = i.chain(arr).splice(1, 0).value();
+        // $ExpectError
+        i.chain(obj).splice(1, 0).value();
+    }
+
+    // chain slice
+    {
+        const coll: typeof arr = i.chain(arr).slice(0, 1).value();
+        // $ExpectError
+        i.chain(obj).slice(0, 1).value();
+    }
+
+    // chain map
+    {
+        const coll: typeof arr = i.chain(arr).map(function(val) { return val; }).value();
+        // $ExpectError
+        i.chain(obj).map(function(val) { return val; }).value();
+    }
+
+    // chain filter
+    {
+        const coll: typeof arr = i.chain(arr).filter(function(val) { return true; }).value();
+        // $ExpectError
+        i.chain(obj).filter(function(val) { return true; }).value();
+    }
+}

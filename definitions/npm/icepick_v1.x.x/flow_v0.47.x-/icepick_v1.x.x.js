@@ -85,7 +85,28 @@ declare module 'icepick' {
             s4: S4,
         ): IcepickWrapper<T & S1 & S2 & S3 & S4>;
         merge<S1>(source: S1): IcepickWrapper<T & S1>;
+        thru((val: T) => T): IcepickWrapper<T>;
     }
 
-    declare function chain<T>(target: T): IcepickWrapper<T>;
+    declare class IcepickArrayWrapper<T> {
+        value(): T[];
+        assoc(path: number, value: T): IcepickArrayWrapper<T>;
+        set(key: number, value: T): IcepickArrayWrapper<T>;
+        dissoc(key: number): IcepickArrayWrapper<T>;
+        unset(key: number): IcepickArrayWrapper<T | null>;
+        push(element: T): IcepickArrayWrapper<T>;
+        pop(): IcepickArrayWrapper<T>;
+        shift(): IcepickArrayWrapper<T>;
+        unshift(element: T): IcepickArrayWrapper<T>;
+        reverse(): IcepickArrayWrapper<T>;
+        sort(compareFunction?: (a: T, b: T) => number): IcepickArrayWrapper<T>;
+        splice(startIndex: number, deleteCount: number, ...items?: T[]): IcepickArrayWrapper<T>;
+        slice(begin?: number, end?: number): IcepickArrayWrapper<T>;
+        map<U>(fn: (value: T) => U): IcepickArrayWrapper<U>;
+        filter(fn: (value: T) => boolean): IcepickArrayWrapper<T>;
+        thru((val: T[]) => T[]): IcepickArrayWrapper<T>;
+    }
+
+    declare function chain<T: Object>(target: T): IcepickWrapper<T>;
+    declare function chain<T>(target: T[]): IcepickArrayWrapper<T>;
 }
