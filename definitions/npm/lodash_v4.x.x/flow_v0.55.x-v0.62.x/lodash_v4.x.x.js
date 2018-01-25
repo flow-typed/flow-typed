@@ -1203,8 +1203,8 @@ declare module "lodash" {
       object: T,
       predicate?: ?OPredicate<A, T>
     ): {};
-    pick(object?: ?Object, ...props: Array<string>): Object;
-    pick(object?: ?Object, props: Array<string>): Object;
+    pick(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
+    pick(object?: ?Object, props: $ReadOnlyArray<string>): Object;
     pickBy<A, T: { [id: string]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
