@@ -1,19 +1,24 @@
 // @flow
 
-declare module 'luxon' {
-  declare type WeekdayLength = 'narrow' | 'short' | 'long'
-  declare type EraLength = 'narrow' | 'short' | 'long'
-  declare type MonthLength = 'numeric' | '2-digit' | 'narrow' | 'short' | 'long'
-  declare type NumericLength = 'numeric' | '2-digit'
+declare module "luxon" {
+  declare type WeekdayLength = "narrow" | "short" | "long";
+  declare type EraLength = "narrow" | "short" | "long";
+  declare type MonthLength =
+    | "numeric"
+    | "2-digit"
+    | "narrow"
+    | "short"
+    | "long";
+  declare type NumericLength = "numeric" | "2-digit";
 
-  declare type HourCycle = 'h11' | 'h12' | 'h23' | 'h24'
+  declare type HourCycle = "h11" | "h12" | "h23" | "h24";
 
   declare type IntlDateTimeFormatOptions = {|
-    localeMatcher?: 'lookup' | 'best fit',
+    localeMatcher?: "lookup" | "best fit",
     timeZone?: string,
     hour12?: boolean,
     hourCycle?: HourCycle,
-    formatMatcher?: 'basic' | 'best fit',
+    formatMatcher?: "basic" | "best fit",
     weekday?: WeekdayLength,
     era?: EraLength,
     year?: NumericLength,
@@ -22,14 +27,17 @@ declare module 'luxon' {
     hour?: NumericLength,
     minute?: NumericLength,
     second?: NumericLength,
-    timeZoneName?: 'short' | 'long',
-  |}
+    timeZoneName?: "short" | "long"
+  |};
 
-  declare export interface Zone {
-    static offsetName(ts: number, opts?: {
-      format?: ?string,
-      localeCode?: ?string,
-    }): string;
+  declare export class Zone {
+    static offsetName(
+      ts: number,
+      opts?: {
+        format?: ?string,
+        localeCode?: ?string
+      }
+    ): string;
     isValid: boolean;
     name: string;
     type: string;
@@ -49,49 +57,100 @@ declare module 'luxon' {
     static resetCaches(): void;
   }
 
-  declare type MonthWeekdayOptions = {|locale?: ?string, numberingSystem?: ?string, outputCalendar?: ?string|}
+  declare type MonthWeekdayOptions = {|
+    locale?: ?string,
+    numberingSystem?: ?string,
+    outputCalendar?: ?string
+  |};
 
   declare export class Info {
-    static eras(length: EraLength, options?: {|locale?: ?string|}): Array<string>;
-    static features(): {intl: boolean, intlTokens: boolean, timezones: boolean};
+    static eras(
+      length: EraLength,
+      options?: {| locale?: ?string |}
+    ): Array<string>;
+    static features(): {
+      intl: boolean,
+      intlTokens: boolean,
+      timezones: boolean
+    };
     static hasDST(zone: string | Zone): boolean;
-    static meridiems(options?: {|locale?: ?string|}): Array<string>;
-    static months(length: MonthLength, options?: MonthWeekdayOptions): Array<string>;
-    static monthsFormat(length: MonthLength, options?: MonthWeekdayOptions): Array<string>;
-    static weekdays(length: WeekdayLength, options?: MonthWeekdayOptions): Array<string>;
-    static weekdaysFormat(length: WeekdayLength, options?: MonthWeekdayOptions): Array<string>;
+    static meridiems(options?: {| locale?: ?string |}): Array<string>;
+    static months(
+      length: MonthLength,
+      options?: MonthWeekdayOptions
+    ): Array<string>;
+    static monthsFormat(
+      length: MonthLength,
+      options?: MonthWeekdayOptions
+    ): Array<string>;
+    static weekdays(
+      length: WeekdayLength,
+      options?: MonthWeekdayOptions
+    ): Array<string>;
+    static weekdaysFormat(
+      length: WeekdayLength,
+      options?: MonthWeekdayOptions
+    ): Array<string>;
   }
 
-  declare export type ConversionAccuracy = 'longterm' | 'casual'
+  declare export type ConversionAccuracy = "longterm" | "casual";
 
   declare export type DateTimeUnit =
-    'year' | 'years' |
-    'month' | 'months' |
-    'day' | 'days' |
-    'hour' | 'hours' |
-    'minute' | 'minutes' |
-    'second' | 'seconds' |
-    'millisecond' | 'milliseconds' |
-    'weekNumber' | 'weekNumbers' |
-    'weekYear' | 'weekYears' |
-    'weekday' | 'weekdays' |
-    'week' | 'weeks' |
-    'ordinal'
+    | "year"
+    | "years"
+    | "month"
+    | "months"
+    | "day"
+    | "days"
+    | "hour"
+    | "hours"
+    | "minute"
+    | "minutes"
+    | "second"
+    | "seconds"
+    | "millisecond"
+    | "milliseconds"
+    | "weekNumber"
+    | "weekNumbers"
+    | "weekYear"
+    | "weekYears"
+    | "weekday"
+    | "weekdays"
+    | "week"
+    | "weeks"
+    | "ordinal";
 
   declare export type DurationUnit =
-    'year' | 'years' |
-    'month' | 'months' |
-    'week' | 'weeks' |
-    'day' | 'days' |
-    'hour' | 'hours' |
-    'minute' | 'minutes' |
-    'second' | 'seconds' |
-    'millisecond' | 'milliseconds'
+    | "year"
+    | "years"
+    | "month"
+    | "months"
+    | "week"
+    | "weeks"
+    | "day"
+    | "days"
+    | "hour"
+    | "hours"
+    | "minute"
+    | "minutes"
+    | "second"
+    | "seconds"
+    | "millisecond"
+    | "milliseconds";
 
   declare export class Interval {
-    static after(start: DateTime | DateTimeFromObjectOptions | Date, duration: Duration | number | DurationFromObjectOptions): Interval;
-    static before(end: DateTime | DateTimeFromObjectOptions | Date, duration: Duration | number | DurationFromObjectOptions): Interval;
-    static fromDateTimes(start: DateTime | DateTimeFromObjectOptions | Date, end: DateTime | DateTimeFromObjectOptions | Date): Interval;
+    static after(
+      start: DateTime | DateTimeFromObjectOptions | Date,
+      duration: Duration | number | DurationFromObjectOptions
+    ): Interval;
+    static before(
+      end: DateTime | DateTimeFromObjectOptions | Date,
+      duration: Duration | number | DurationFromObjectOptions
+    ): Interval;
+    static fromDateTimes(
+      start: DateTime | DateTimeFromObjectOptions | Date,
+      end: DateTime | DateTimeFromObjectOptions | Date
+    ): Interval;
     static fromISO(string: string, options?: DateTimeFromOptions): Interval;
     static invalid(reason: string): Interval;
     static merge(intervals: Array<Interval>): Array<Interval>;
@@ -116,10 +175,13 @@ declare module 'luxon' {
     isEmpty(): boolean;
     length(unit: DurationUnit): number;
     overlaps(other: Interval): boolean;
-    set(values: {|start?: DateTime, end?: DateTime|}): Interval;
+    set(values: {| start?: DateTime, end?: DateTime |}): Interval;
     splitAt(...dateTimes: Array<DateTime>): Array<Interval>;
-    toDuration(unit: DurationUnit | Array<DurationUnit>, options?: {|conversionAccuracy?: ?ConversionAccuracy|}): Duration;
-    toFormat(dateFormat: string, options?: {|separator?: string|}): string;
+    toDuration(
+      unit: DurationUnit | Array<DurationUnit>,
+      options?: {| conversionAccuracy?: ?ConversionAccuracy |}
+    ): Duration;
+    toFormat(dateFormat: string, options?: {| separator?: string |}): string;
     toISO(options?: ToISOOptions): string;
     toString(): string;
     union(other: Interval): Interval;
@@ -128,22 +190,30 @@ declare module 'luxon' {
   declare type DurationFromOptions = {|
     locale?: ?string,
     numberingSystem?: ?string,
-    conversionAccuracy?: ?ConversionAccuracy,
-  |}
+    conversionAccuracy?: ?ConversionAccuracy
+  |};
 
   declare type DurationFromObjectOptions = {|
-    year?: number, years?: number,
-    month?: number, months?: number,
-    week?: number, weeks?: number,
-    day?: number, days?: number,
-    hour?: number, hours?: number,
-    minute?: number, minutes?: number,
-    second?: number, seconds?: number,
-    millsecond?: number, milliseconds?: number,
+    year?: number,
+    years?: number,
+    month?: number,
+    months?: number,
+    week?: number,
+    weeks?: number,
+    day?: number,
+    days?: number,
+    hour?: number,
+    hours?: number,
+    minute?: number,
+    minutes?: number,
+    second?: number,
+    seconds?: number,
+    millsecond?: number,
+    milliseconds?: number,
     locale?: ?string,
     numberingSystem?: ?string,
-    conversionAccuracy?: ?ConversionAccuracy,
-  |}
+    conversionAccuracy?: ?ConversionAccuracy
+  |};
 
   declare export type DurationObject = {
     years?: number,
@@ -152,14 +222,14 @@ declare module 'luxon' {
     hours?: number,
     minutes?: number,
     seconds?: number,
-    milliseconds?: number,
-  }
+    milliseconds?: number
+  };
 
   declare export type DurationConfig = {
     locale: string,
     numberingSystem: ?string,
-    conversionAccuracy: ConversionAccuracy,
-  }
+    conversionAccuracy: ConversionAccuracy
+  };
 
   declare export class Duration {
     static fromISO(text: string, options?: DurationFromOptions): Duration;
@@ -189,11 +259,12 @@ declare module 'luxon' {
     reconfigure(options: DurationFromOptions): Duration;
     set(values: DurationFromObjectOptions): Duration;
     shiftTo(first: DurationUnit, ...rest: Array<DurationUnit>): Duration;
-    toFormat(fmt: string, options?: {|round?: boolean|}): string;
+    toFormat(fmt: string, options?: {| round?: boolean |}): string;
     toISO(): string;
     toJSON(): string;
-    toObject(options: {|includeConfig: true|}): DurationObject & DurationConfig;
-    toObject(options?: {|includeConfig?: boolean|}): DurationObject;
+    toObject(options: {| includeConfig: true |}): DurationObject &
+      DurationConfig;
+    toObject(options?: {| includeConfig?: boolean |}): DurationObject;
     toString(): string;
   }
 
@@ -202,55 +273,77 @@ declare module 'luxon' {
     setZone?: ?boolean,
     locale?: ?string,
     outputCalendar?: ?string,
-    numberingSystem?: ?string,
-  |}
+    numberingSystem?: ?string
+  |};
 
   declare type ToISOOptions = {|
     suppressMilliseconds?: ?boolean,
     suppressSeconds?: ?boolean,
-    includeOffset?: ?boolean,
-  |}
+    includeOffset?: ?boolean
+  |};
 
   declare type SetZoneOptions = {|
-    keepCalendarTime?: ?boolean,
-  |}
+    keepCalendarTime?: ?boolean
+  |};
 
   declare type DateTimeFieldsOptions = {|
-    year?: number, years?: number,
-    month?: number, months?: number,
-    day?: number, days?: number,
-    hour?: number, hours?: number,
-    minute?: number, minutes?: number,
-    second?: number, seconds?: number,
-    millisecond?: number, milliseconds?: number,
-    weekNumber?: number, weekNumbers?: number,
-    weekYear?: number, weekYears?: number,
-    weekday?: number, weekdays?: number,
-    week?: number, weeks?: number,
-  |}
+    year?: number,
+    years?: number,
+    month?: number,
+    months?: number,
+    day?: number,
+    days?: number,
+    hour?: number,
+    hours?: number,
+    minute?: number,
+    minutes?: number,
+    second?: number,
+    seconds?: number,
+    millisecond?: number,
+    milliseconds?: number,
+    weekNumber?: number,
+    weekNumbers?: number,
+    weekYear?: number,
+    weekYears?: number,
+    weekday?: number,
+    weekdays?: number,
+    week?: number,
+    weeks?: number
+  |};
 
   declare type DateTimeFromObjectOptions = {|
-    year?: number, years?: number,
-    month?: number, months?: number,
-    day?: number, days?: number,
-    hour?: number, hours?: number,
-    minute?: number, minutes?: number,
-    second?: number, seconds?: number,
-    millisecond?: number, milliseconds?: number,
-    weekNumber?: number, weekNumbers?: number,
-    weekYear?: number, weekYears?: number,
-    weekday?: number, weekdays?: number,
-    week?: number, weeks?: number,
+    year?: number,
+    years?: number,
+    month?: number,
+    months?: number,
+    day?: number,
+    days?: number,
+    hour?: number,
+    hours?: number,
+    minute?: number,
+    minutes?: number,
+    second?: number,
+    seconds?: number,
+    millisecond?: number,
+    milliseconds?: number,
+    weekNumber?: number,
+    weekNumbers?: number,
+    weekYear?: number,
+    weekYears?: number,
+    weekday?: number,
+    weekdays?: number,
+    week?: number,
+    weeks?: number,
     zone?: ?(string | Zone),
     setZone?: ?boolean,
     locale?: ?string,
     outputCalendar?: ?string,
-    numberingSystem?: ?string,
-  |}
+    numberingSystem?: ?string
+  |};
 
   declare type DateTimeDiffOptions = {|
-    conversionAccuracy?: ?ConversionAccuracy,
-  |}
+    conversionAccuracy?: ?ConversionAccuracy
+  |};
 
   declare export type DateTimeObject = {
     year: number,
@@ -259,20 +352,20 @@ declare module 'luxon' {
     hour: number,
     minute: number,
     second: number,
-    millisecond: number,
-  }
+    millisecond: number
+  };
 
   declare export type DateTimeConfig = {
     locale: string,
     outputCalendar: ?string,
-    numberingSystem: ?string,
-  }
+    numberingSystem: ?string
+  };
 
   declare export type ResolvedLocaleOptions = {
     locale: string,
     outputCalendar: string,
-    numberingSystem: string,
-  }
+    numberingSystem: string
+  };
 
   declare export class DateTime {
     static DATETIME_FULL: IntlDateTimeFormatOptions;
@@ -295,24 +388,51 @@ declare module 'luxon' {
     static TIME_WITH_LONG_OFFSET: IntlDateTimeFormatOptions;
     static TIME_WITH_SECONDS: IntlDateTimeFormatOptions;
     static TIME_WITH_SHORT_OFFSET: IntlDateTimeFormatOptions;
-    static local(year?: number, month?: number, day?: number, hour?: number, minute?: number, second?: number, millisecond?: number): DateTime;
-    static utc(year?: number, month?: number, day?: number, hour?: number, minute?: number, second?: number, millisecond?: number): DateTime;
+    static local(
+      year?: number,
+      month?: number,
+      day?: number,
+      hour?: number,
+      minute?: number,
+      second?: number,
+      millisecond?: number
+    ): DateTime;
+    static utc(
+      year?: number,
+      month?: number,
+      day?: number,
+      hour?: number,
+      minute?: number,
+      second?: number,
+      millisecond?: number
+    ): DateTime;
     static fromHTTP(text: string, options?: DateTimeFromOptions): DateTime;
     static fromObject(obj: DateTimeFromObjectOptions): DateTime;
     static fromISO(text: string, options?: DateTimeFromOptions): DateTime;
     static fromJSDate(date: Date, options?: DateTimeFromOptions): DateTime;
-    static fromMillis(millseconds: number, options?: DateTimeFromOptions): DateTime;
+    static fromMillis(
+      millseconds: number,
+      options?: DateTimeFromOptions
+    ): DateTime;
     static fromRFC2822(text: string, options?: DateTimeFromOptions): DateTime;
     static fromSQL(text: string, options?: DateTimeFromOptions): DateTime;
-    static fromString(text: string, fmt: string, options?: DateTimeFromOptions): DateTime;
-    static fromStringExplain(text: string, fmt: string, options?: DateTimeFromOptions): {
+    static fromString(
+      text: string,
+      fmt: string,
+      options?: DateTimeFromOptions
+    ): DateTime;
+    static fromStringExplain(
+      text: string,
+      fmt: string,
+      options?: DateTimeFromOptions
+    ): {
       input: string,
-      tokens: Array<{literal: boolean, val: string}>,
+      tokens: Array<{ literal: boolean, val: string }>,
       regex: RegExp,
       rawMatches: ?Array<string>,
       matches: Object,
-      result: {[unit: DateTimeUnit]: number},
-      zone: ?Zone,
+      result: { [unit: DateTimeUnit]: number },
+      zone: ?Zone
     };
     static invalid(reason: string): DateTime;
     static max(first: DateTime, ...rest: Array<DateTime>): DateTime;
@@ -346,8 +466,15 @@ declare module 'luxon' {
     weekdayShort: string;
     year: number;
     zoneName: string;
-    diff(otherDateTime: DateTime, unit: DateTimeUnit | Array<DateTimeUnit>, options?: DateTimeDiffOptions): Duration;
-    diffNow(unit: DateTimeUnit | Array<DateTimeUnit>, options?: DateTimeDiffOptions): Duration;
+    diff(
+      otherDateTime: DateTime,
+      unit: DateTimeUnit | Array<DateTimeUnit>,
+      options?: DateTimeDiffOptions
+    ): Duration;
+    diffNow(
+      unit: DateTimeUnit | Array<DateTimeUnit>,
+      options?: DateTimeDiffOptions
+    ): Duration;
     endOf(unit: DateTimeUnit): DateTime;
     equals(other: DateTime): boolean;
     get(unit: DateTimeUnit): number;
@@ -356,12 +483,14 @@ declare module 'luxon' {
     minus(duration: Duration | number | DurationFromObjectOptions): DateTime;
     plus(duration: Duration | number | DurationFromObjectOptions): DateTime;
     reconfigure(options: DateTimeFromOptions): DateTime;
-    resolvedLocaleOpts(options?: IntlDateTimeFormatOptions): ResolvedLocaleOptions;
-    set(values: {[unit: DateTimeUnit]: number}): DateTime;
+    resolvedLocaleOpts(
+      options?: IntlDateTimeFormatOptions
+    ): ResolvedLocaleOptions;
+    set(values: { [unit: DateTimeUnit]: number }): DateTime;
     setLocale(locale: string): DateTime;
     setZone(zone: string | Zone, options?: SetZoneOptions): DateTime;
     startOf(unit: DateTimeUnit): DateTime;
-    toFormat(fmt: string, options?: {|round?: ?boolean|}): string;
+    toFormat(fmt: string, options?: {| round?: ?boolean |}): string;
     toHTTP(): string;
     toISO(options?: ToISOOptions): string;
     toISODate(): string;
@@ -369,14 +498,23 @@ declare module 'luxon' {
     toISOWeekDate(): string;
     toJSDate(): Date;
     toLocal(): DateTime;
-    toLocaleParts(options?: IntlDateTimeFormatOptions): Array<{type: string, value: number}>;
+    toLocaleParts(
+      options?: IntlDateTimeFormatOptions
+    ): Array<{ type: string, value: number }>;
     toLocaleString(options?: IntlDateTimeFormatOptions): string;
-    toObject(options: {|includeConfig: true|}): DateTimeObject & DateTimeConfig;
-    toObject(options?: {|includeConfig?: ?boolean|}): DateTimeObject;
+    toObject(options: {| includeConfig: true |}): DateTimeObject &
+      DateTimeConfig;
+    toObject(options?: {| includeConfig?: ?boolean |}): DateTimeObject;
     toRFC2822(): string;
-    toSQL(opts?: {|includeZone?: ?boolean, includeOffset?: ?boolean|}): string;
+    toSQL(opts?: {|
+      includeZone?: ?boolean,
+      includeOffset?: ?boolean
+    |}): string;
     toSQLDate(): string;
-    toSQLTime(opts?: {|includeZone?: ?boolean, includeOffset?: ?boolean|}): string;
+    toSQLTime(opts?: {|
+      includeZone?: ?boolean,
+      includeOffset?: ?boolean
+    |}): string;
     toString(): string;
     toUTC(offset?: number, options?: SetZoneOptions): DateTime;
     until(other: DateTime): Duration;

@@ -7,6 +7,7 @@ import conformsTo from "lodash/conformsTo";
 import countBy from "lodash/countBy";
 import debounce from "lodash/debounce";
 import defaultTo from "lodash/defaultTo";
+import difference from "lodash/difference";
 import differenceBy from "lodash/differenceBy";
 import extend from "lodash/extend";
 import find from "lodash/find";
@@ -49,6 +50,11 @@ attempt((x, y, z) => {}, null, {}, []);
  */
 countBy([6.1, 4.2, 6.3], Math.floor);
 countBy(["one", "two", "three"], "length");
+
+/**
+ * _.difference
+ */
+difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>));
 
 /**
  * _.differenceBy

@@ -1,28 +1,28 @@
 // @flow
 
+// TODO Once we support dependencies, put into declare module
 import type Either from "data.either";
 
-interface Functor<A> {
-  map<B>(f: (a: A) => B): Functor<B>;
-}
-
-interface Apply<A> extends Functor<A> {
-  ap<B>(fab: Apply<(a: A) => B>): Apply<B>;
-}
-
-interface Applicative<A> extends Apply<A> {
-  static of<B>(b: B): Applicative<B>;
-}
-
-interface Chain<A> extends Apply<A> {
-  chain<B>(f: (a: A) => Chain<B>): Chain<B>;
-}
-
-interface Monad<A> extends Applicative<A>, Chain<A> {}
-
-interface Validation<F, S> extends Applicative<S> {}
-
 declare module "data.maybe" {
+  declare class Functor<A> {
+    map<B>(f: (a: A) => B): Functor<B>;
+  }
+
+  declare class Apply<A> extends Functor<A> {
+    ap<B>(fab: Apply<(a: A) => B>): Apply<B>;
+  }
+
+  declare class Applicative<A> extends Apply<A> {
+    static of<B>(b: B): Applicative<B>;
+  }
+
+  declare class Chain<A> extends Apply<A> {
+    chain<B>(f: (a: A) => Chain<B>): Chain<B>;
+  }
+  declare interface Monad<A> extends Applicative<A>, Chain<A> {}
+
+  declare class Validation<F, S> extends Applicative<S> {}
+
   declare class IMaybe<T> {
     isNothing: boolean;
     isJust: boolean;
