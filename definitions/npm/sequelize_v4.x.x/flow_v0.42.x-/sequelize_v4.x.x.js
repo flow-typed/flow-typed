@@ -2540,7 +2540,7 @@ declare module "sequelize" {
     /**
      * The association you want to eagerly load. (This can be used instead of providing a model/as pair)
      */
-    association?: Association<TInstance, any>,
+    association?: Association<any, TInstance>,
 
     /**
      * Where clauses to apply to the child models. Note that this converts the eager load to an inner join,
