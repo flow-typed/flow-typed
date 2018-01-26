@@ -106,21 +106,21 @@ const matchError: string = matchPath("/the/pathname", {
   path: "the/:dynamicId"
 });
 
-const Unrouted: React$ComponentType<{|
-  ...ContextRouter,
+const Unrouted: React$ComponentType<{
+  ...$Exact<ContextRouter>,
   someProp: string
-|}> = () => <span />;
+}> = () => <span />;
 
-const Routed1: React$ComponentType<{| someProp: string |}> = withRouter(
+const Routed1: React$ComponentType<{ someProp: string }> = withRouter(
   Unrouted
 );
 
-// $ExpectError: This error bubbles up from the assignment in Routed2.
-const Unrouted2: React$ComponentType<{|
-  ...ContextRouter,
+const Unrouted2: React$ComponentType<{
+  ...$Exact<ContextRouter>,
   someProp: string
-|}> = () => <span />;
+}> = () => <span />;
 
-const Routed2: React$ComponentType<{| someProp2: string |}> = withRouter(
+// $ExpectError: Wrong prop
+const Routed2: React$ComponentType<{ someProp2: string }> = withRouter(
   Unrouted2
 );

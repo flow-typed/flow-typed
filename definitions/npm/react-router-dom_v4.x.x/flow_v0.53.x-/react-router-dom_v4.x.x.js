@@ -79,11 +79,11 @@ declare module "react-router-dom" {
     url: string
   };
 
-  declare export type ContextRouter = {|
+  declare export type ContextRouter = {
     history: RouterHistory,
     location: Location,
     match: Match
-  |};
+  };
 
   declare export type GetUserConfirmation = (
     message: string,
@@ -137,8 +137,8 @@ declare module "react-router-dom" {
     children?: React$Node
   }> {}
 
-  declare export function withRouter<P>(
-    Component: React$ComponentType<{| ...ContextRouter, ...P |}>
+  declare export function withRouter<P: {}>(
+    Component: React$ComponentType<P>
   ): React$ComponentType<$Diff<P, ContextRouter>>;
 
   declare type MatchPathOptions = {
