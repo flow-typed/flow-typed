@@ -17,6 +17,7 @@ declare module "enzyme" {
     findWhere(predicate: PredicateFunction<this>): this,
     filter(selector: EnzymeSelector): this,
     filterWhere(predicate: PredicateFunction<this>): this,
+    hostNodes(): this,
     contains(nodeOrNodes: NodeOrNodes): boolean,
     containsMatchingElement(node: React.Node): boolean,
     containsAllMatchingElements(nodes: NodeOrNodes): boolean,
