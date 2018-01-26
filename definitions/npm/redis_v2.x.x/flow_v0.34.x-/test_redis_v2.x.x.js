@@ -115,6 +115,6 @@ client.flushall((error) => {
   if (error !== null) console.error(error);
 });
 
-client.hgetall("key", (error: ?Error, result: ?Array<string>) => {})
+client.hgetall("key", (error: ?Error, result: ?{[key: string]: string}) => {})
 // $ExpectError
-client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: ?Array<string>) => {})
+client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: ?{[key: string]: string}) => {})
