@@ -1476,6 +1476,7 @@ declare module "sequelize" {
     foreignIdentifierField?: string;
     paired?: BelongsToMany<TargetAttributes, TargetInitAttributes, Target, SourceAttributes, SourceInitAttributes, Source, ThroughAttributes, Through>;
     through: ThroughOptions<Through>;
+    throughModel: Class<Through>;
     get(instance: Source, options?: FindOptions<TargetAttributes>): Promise<Array<Target>>;
     count(instance: Source, options?: FindOptions<TargetAttributes>): Promise<number>;
     has<PrimaryKey>(sourceInstance: Source, targetInstances: ArrayOrElement<PrimaryKey | Target>, options?: FindOptions<TargetAttributes>): Promise<boolean>;
