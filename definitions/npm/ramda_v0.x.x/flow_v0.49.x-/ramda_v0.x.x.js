@@ -500,6 +500,7 @@ declare module ramda {
   >;
   declare var split: CurriedFunction2<RegExp | string, string, Array<string>>;
   declare var test: CurriedFunction2<RegExp, string, boolean>;
+  declare var startsWith: CurriedFunction2<string | Array<string>, string, boolean>;
   declare function toLower(a: string): string;
   declare function toString(a: any): string;
   declare function toUpper(a: string): string;
