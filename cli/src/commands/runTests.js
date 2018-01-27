@@ -103,7 +103,7 @@ async function getOrderedFlowBinVersions(
       const GH_CLIENT = gitHubClient();
       // We only test against the latest numberOfReleases Versions
       const QUERY_PAGE_SIZE = numberOfReleases;
-      const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
+      const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
 
       let binURLs = new Map();
       let apiPayload = null;
