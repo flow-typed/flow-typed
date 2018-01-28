@@ -112,3 +112,68 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
   //$ExpectError forMapDispatchToProps missing
   <Connected passtrough={123} forMapStateToProps={'data'} />;
 }
+
+function testMapDispatchToPropsPassesActionCreators() {
+  type Props = {
+    passtrough: number,
+    dispatch1: () => {},
+    dispatch2: () => {}
+  };
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.passtrough}</div>;
+    }
+  }
+
+  const mapDispatchToProps = {
+    dispatch1: () => {},
+    dispatch2: () => {}
+  };
+  const Connected = connect(null, mapDispatchToProps)(Com);
+  <Connected passtrough={123}/>;
+  //$ExpectError no passTrough
+  <Connected/>;
+
+  const mapDispatchToProps2 = {
+    dispatch1: () => {}
+  };
+  const Connected2 = connect(null, mapDispatchToProps2)(Com);
+  //$ExpectError no dispatch2
+  <Connected2 passtrough={123}/>;
+}
+
+function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
+  type Props = {
+    passtrough: number,
+    dispatch1: () => {},
+    dispatch2: () => {},
+    fromMapStateToProps: number
+  };
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.passtrough}</div>;
+    }
+  }
+  type State = {a: number}
+  type MapStateToPropsProps = {forMapStateToProps: string}
+  const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
+    return {
+      fromMapStateToProps: state.a
+    }
+  }
+  const mapDispatchToProps = {
+    dispatch1: () => {},
+    dispatch2: () => {}
+  };
+  const Connected = connect(mapStateToProps, mapDispatchToProps)(Com);
+  <Connected passtrough={123} forMapStateToProps="str"/>;
+  //$ExpectError no passTrough
+  <Connected/>;
+
+  const mapDispatchToProps2 = {
+    dispatch1: () => {}
+  };
+  const Connected2 = connect(mapStateToProps, mapDispatchToProps2)(Com);
+  //$ExpectError no dispatch2
+  <Connected2 passtrough={123} forMapStateToProps="str"/>;
+}
