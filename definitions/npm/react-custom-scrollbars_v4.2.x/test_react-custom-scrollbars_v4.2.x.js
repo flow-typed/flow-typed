@@ -37,6 +37,7 @@ function GoodScrollBars() {
       autoHeightMax={30}
     />
   );
+}
 
 function GoodScrollBars2() {
   return (
