@@ -77,11 +77,9 @@ declare module "react-redux" {
   declare type MapDispatchToProps<A, OP: Object, DP: Object> = (dispatch: Dispatch<A>, ownProps: OP) => DP
 
   declare function connect<P: Object, R: Object, PR: Object>(
-    mapStateToProps: MapStateToProps<P, R>
+    mapStateToProps: MapStateToProps<P, R>,
+    mapDispatchToProps?: null
   ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<PR, {dispatch: any}>, R> & P>;
-  declare function connect<R: Object, PR: Object>(
-    mapStateToProps: MapStateToProps<R>
-  ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<PR, {dispatch: any}>, R>>;
   declare function connect<PR: Object>(
     mapStateToProps?: null,
     mapDispatchToProps?: null
