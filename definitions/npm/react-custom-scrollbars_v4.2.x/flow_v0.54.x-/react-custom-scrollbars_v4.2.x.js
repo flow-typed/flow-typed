@@ -29,8 +29,8 @@ declare module "react-custom-scrollbars" {
     thumbMinSize?: number,
     universal?: boolean,
     autoHeight?: boolean,
-    autoHeightMin?: number,
-    autoHeightMax?: number
+    autoHeightMin?: number | string,
+    autoHeightMax?: number | string
   };
 
   declare export default class Scrollbars extends React$Component<Props> {
