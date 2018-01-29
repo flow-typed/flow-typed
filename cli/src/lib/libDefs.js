@@ -80,7 +80,10 @@ async function updateCacheRepo(verbose?: VerboseOutput) {
  * (else: create/rebase it)
  */
 const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
-export const _cacheRepoAssure = {
+export const _cacheRepoAssure: {
+  lastAssured: number,
+  pendingAssure: Promise<*>,
+} = {
   lastAssured: 0,
   pendingAssure: Promise.resolve(),
 };
