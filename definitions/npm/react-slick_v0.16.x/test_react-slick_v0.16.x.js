@@ -18,9 +18,7 @@ class BadSlick2 extends Component<*> {
 class BadSlick3 extends Component<*> {
   render() {
     // $ExpectError
-    return (
-      <Slider afterChange={(currSlide: string) => console.log(currSlife)} />
-    );
+    return <Slider afterChange={(currSlide: string) => console.log(currSlide)} />;
   }
 }
 
