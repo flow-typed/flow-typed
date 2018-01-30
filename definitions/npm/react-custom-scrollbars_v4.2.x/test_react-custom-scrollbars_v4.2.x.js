@@ -38,3 +38,30 @@ function GoodScrollBars() {
     />
   );
 }
+
+function GoodScrollBars2() {
+  return (
+    <Scrollbars
+      onScroll={(event: SyntheticUIEvent<*>) => console.log(event)}
+      onScrollFrame={values => console.log(values)}
+      onScrollStart={() => console.log("start")}
+      onScrollStop={() => console.log("stop")}
+      onUpdate={values => console.log(values)}
+      renderView={() => null}
+      renderTrackHorizontal={() => null}
+      renderTrackVertical={() => null}
+      renderThumbHorizontal={() => null}
+      renderThumbVertical={() => null}
+      hideTracksWhenNotNeeded
+      autoHide
+      autoHideTimeout={300}
+      autoHideDuration={300}
+      thumbSize={10}
+      thumbMinSize={5}
+      universal
+      autoHeight
+      autoHeightMin={"20px"}
+      autoHeightMax={"30rem"}
+    />
+  );
+}
