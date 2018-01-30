@@ -51,7 +51,7 @@ declare module "react-toastify" {
   };
 
   declare type Toast = {
-    (content: ToastContent, options: ToastOptions): number,
+    (content: ToastContent, options?: ToastOptions): number,
     success(content: ToastContent, options?: ToastOptions): number,
     info(content: ToastContent, options?: ToastOptions): number,
     warn(content: ToastContent, options?: ToastOptions): number,
