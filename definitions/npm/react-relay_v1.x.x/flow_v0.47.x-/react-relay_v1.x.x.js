@@ -349,7 +349,7 @@ declare module "react-relay" {
     connectionConfig: ConnectionConfig
   ): TBase;
 
-  declare export type Variables = { [name: string]: $FlowFixMe };
+  declare export type Variables = { [name: string]: boolean | string | number | null | void };
   declare export type DataID = string;
 
   declare type TEnvironment = Environment;
