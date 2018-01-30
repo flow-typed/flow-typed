@@ -2,44 +2,98 @@
  * @flow
  */
 
-import Router from "koa-router";
-
-/**
- * Test Global KoaRouter$Middleware type
- */
+import App, { type Middleware } from "koa";
+import Router, { type ParamMiddleware } from "koa-router";
 
 // $ExpectError
-const badMiddleware: KoaRouter$Middleware = 10;
-const goodMiddleware: KoaRouter$Middleware = async (ctx, next) => {};
+Router.url("/");
+Router.url("/", {});
 
-/**
- * Test Router instantiation
- */
+const router = new Router();
 
 // $ExpectError
-const badRouter = new Router({ prefix: 10 });
-const goodRouter = new Router({ prefix: "/api" });
-
-/**
- * Test Router methods
- */
+const badRouter1 = new Router("api");
+const goodRouter1 = new Router({ prefix: "/api" });
 
 // $ExpectError
-goodRouter.get(10);
-goodRouter.get("/", async ctx => {
-  ctx.body = "Hello World";
-});
-goodRouter.get(["/", "/foo"], ctx => {});
-goodRouter.get(["/", "/foo"], ctx => {}, ctx => {});
+const badRouter2 = new Router({ sensitive: "true" });
+const goodRouter2 = new Router({ sensitive: true });
+
+const middleware: Middleware = async (ctx, next) => {
+  ctx.body = "ok";
+  await next();
+};
+
+const paramMiddleware: ParamMiddleware = async (param, ctx, next) => {
+  ctx.body = "ok";
+  await next();
+};
 
 // $ExpectError
-goodRouter.use(10);
-goodRouter.use(async ctx => {});
-goodRouter.use("/foo", async ctx => {});
+router.use((ctx: string) => "bad type");
+router.use("/", middleware);
+router.use("/", middleware, middleware);
+router.use(middleware);
+router.use(middleware, middleware);
 
-goodRouter.param("foo", async ctx => {
-  // $ExpectError
-  console.log(ctx.params.foo);
-});
-goodRouter.param("foo", async (foo, ctx) => {});
-goodRouter.param("foo", (foo, ctx, next) => {});
+// $ExpectError
+router.get();
+router.get("/", middleware);
+router.get("/", middleware, middleware);
+
+// $ExpectError
+router.post();
+router.post("/", middleware);
+router.post("/", middleware, middleware);
+
+// $ExpectError
+router.put();
+router.put("/", middleware);
+router.put("/", middleware, middleware);
+
+// $ExpectError
+router.patch();
+router.patch("/", middleware);
+router.patch("/", middleware, middleware);
+
+// $ExpectError
+router.delete();
+router.delete("/", middleware);
+router.delete("/", middleware, middleware);
+
+// $ExpectError
+router.del();
+router.del("/", middleware);
+router.del("/", middleware, middleware);
+
+// $ExpectError
+router.all();
+router.all("name", "/", middleware);
+router.all("/", middleware);
+router.all("/", middleware, middleware);
+
+// $ExpectError
+router.param(10);
+router.param("param", paramMiddleware);
+
+// $ExpectError
+router.param("param");
+router.param("param", paramMiddleware);
+
+// $ExpectError
+router.prefix();
+router.prefix("/api");
+
+// $ExpectError
+router.url();
+router.url("name");
+
+const app = new App();
+
+// $ExpectError
+app.use(router.route());
+app.use(router.routes());
+
+// $ExpectError
+app.use(router.allowedMethod());
+app.use(router.allowedMethods());
