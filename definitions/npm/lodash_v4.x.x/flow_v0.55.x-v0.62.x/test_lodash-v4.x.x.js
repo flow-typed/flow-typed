@@ -22,6 +22,7 @@ import keyBy from "lodash/keyBy";
 import map from "lodash/map";
 import memoize from "lodash/memoize";
 import noop from "lodash/noop";
+import pick from "lodash/pick";
 import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
 import sortedIndexBy from "lodash/sortedIndexBy";
@@ -200,6 +201,12 @@ var users = [{ user: "barney" }, { user: "fred" }];
 
 // The `_.property` iteratee shorthand.
 map(users, "user");
+
+/**
+ * _.pick
+ */
+pick({}, (["a", "b"]: $ReadOnlyArray<string>));
+pick({}, "a", "b");
 
 /**
  * _.pullAllBy

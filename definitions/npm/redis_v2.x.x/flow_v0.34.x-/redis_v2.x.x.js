@@ -3,7 +3,7 @@ declare module "redis" {
   declare class RedisClient extends events$EventEmitter mixins RedisClientPromisified {
     hmset: (
       key: string,
-      map: any,
+      map: {[key: string]: string},
       callback?: (error: ?Error) => void
     ) => void;
     rpush: (
@@ -46,7 +46,7 @@ declare module "redis" {
     ) => void;
     hgetall: (
       topic: string,
-      callback: (error: ?Error, result: ?Array<string>) => void
+      callback: (error: ?Error, result: ?{[key: string]: string}) => void
     ) => void;
     hdel: (
       topic: string,
@@ -109,7 +109,7 @@ declare module "redis" {
   declare class RedisClientPromisified extends RedisClient {
     hmsetAsync: (
       key: string,
-      map: any,
+      map: {[key: string]: string},
       callback: (?Error) => void
     ) => Promise<void>;
     rpushAsync: (
@@ -138,7 +138,7 @@ declare module "redis" {
     hgetAsync: (topic: string, key: string) => Promise<string> | Promise<void>;
     hgetallAsync: (
       topic: string,
-    ) => Promise<Array<string>> | Promise<void>;
+    ) => Promise<{[key: string]: string}> | Promise<void>;
     hdelAsync: (topic: string, key: string) => Promise<number>;
     getAsync: (key: string) => Promise<any>;
     setAsync: (key: string, value: any) => Promise<void>;

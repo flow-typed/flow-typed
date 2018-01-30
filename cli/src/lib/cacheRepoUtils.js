@@ -68,7 +68,10 @@ async function rebaseCacheRepo() {
  * Ensure that the CACHE_REPO_DIR exists and is recently rebased.
  * (else: create/rebase it)
  */
-const cacheRepoEnsureToken = {
+const cacheRepoEnsureToken: {
+  lastEnsured: number,
+  pendingEnsurance: Promise<*>,
+} = {
   lastEnsured: 0,
   pendingEnsurance: Promise.resolve(),
 };

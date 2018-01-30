@@ -1476,6 +1476,7 @@ declare module "sequelize" {
     foreignIdentifierField?: string;
     paired?: BelongsToMany<TargetAttributes, TargetInitAttributes, Target, SourceAttributes, SourceInitAttributes, Source, ThroughAttributes, Through>;
     through: ThroughOptions<Through>;
+    throughModel: Class<Through>;
     get(instance: Source, options?: FindOptions<TargetAttributes>): Promise<Array<Target>>;
     count(instance: Source, options?: FindOptions<TargetAttributes>): Promise<number>;
     has<PrimaryKey>(sourceInstance: Source, targetInstances: ArrayOrElement<PrimaryKey | Target>, options?: FindOptions<TargetAttributes>): Promise<boolean>;
@@ -2539,7 +2540,7 @@ declare module "sequelize" {
     /**
      * The association you want to eagerly load. (This can be used instead of providing a model/as pair)
      */
-    association?: Association<TInstance, any>,
+    association?: Association<any, TInstance>,
 
     /**
      * Where clauses to apply to the child models. Note that this converts the eager load to an inner join,
