@@ -408,7 +408,14 @@ declare module "lodash" {
     uniq<T>(array?: ?Array<T>): Array<T>;
     uniqBy<T>(array?: ?Array<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     uniqWith<T>(array?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
-    unzip<T>(array?: ?Array<T>): Array<T>;
+    unzip<A, B>(array: Array<[A, B]>): [Array<A>, Array<B>];
+    unzip<A, B, C>(array: Array<[A, B, C]>): [Array<A>, Array<B>, Array<C>];
+    unzip<A, B, C, D>(
+      array: Array<[A, B, C, D]>,
+    ): [Array<A>, Array<B>, Array<C>, Array<D>];
+    unzip<A, B, C, D, E>(
+      array: Array<[A, B, C, D, E]>,
+    ): [Array<A>, Array<B>, Array<C>, Array<D>, Array<E>];
     unzipWith<T>(array: ?Array<T>, iteratee?: ?Iteratee<T>): Array<T>;
     without<T>(array?: ?Array<T>, ...values?: Array<?T>): Array<T>;
     xor<T>(...array: Array<Array<T>>): Array<T>;
