@@ -17,6 +17,7 @@ import get from "lodash/get";
 import groupBy from "lodash/groupBy";
 import intersectionBy from "lodash/intersectionBy";
 import isEqual from "lodash/isEqual";
+import isNil from "lodash/isNil";
 import isString from "lodash/isString";
 import keyBy from "lodash/keyBy";
 import map from "lodash/map";
@@ -241,6 +242,21 @@ isEqual(1);
 
 // $ExpectError function type expects no more than 2 arguments
 isEqual(1, 2, 3);
+
+/**
+ * _.isNil
+ */
+const x1: boolean = isNil(1);
+
+// $ExpectError
+// should refine type
+const x1a: ?{ a: number } = { a: 1 };
+
+// $ExpectError cannot access property a of possibly undefined
+x1a.a;
+if (!isNil(x1a)) {
+  x1a.a;
+}
 
 /**
  * _.range

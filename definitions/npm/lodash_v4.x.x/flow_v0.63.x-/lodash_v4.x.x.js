@@ -846,6 +846,7 @@ declare module "lodash" {
   declare export function isNative(value: any): boolean;
   declare export function isNil(value: void | null): true;
   declare export function isNil(value: any): false;
+  declare export function isNil(value: mixed): boolean %checks(value === undefined || value === null);
   declare export function isNull(value: null): true;
   declare export function isNull(value: any): false;
   declare export function isNumber(value: number): true;
@@ -2476,6 +2477,7 @@ declare module "lodash/fp" {
   declare export function isNaN(value: any): boolean;
   declare export function isNative(value: any): boolean;
   declare export function isNil(value: any): boolean;
+  declare export function isNil(value: mixed): boolean %checks(value === undefined || value === null);
   declare export function isNull(value: any): boolean;
   declare export function isNumber(value: any): boolean;
   declare export function isObject(value: any): boolean;
