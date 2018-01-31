@@ -248,7 +248,6 @@ isEqual(1, 2, 3);
  */
 const x1: boolean = isNil(1);
 
-// $ExpectError
 // should refine type
 const x1a: ?{ a: number } = { a: 1 };
 
