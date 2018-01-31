@@ -2,8 +2,7 @@
  * @flow
  */
 
-import App, { type Middleware } from "koa";
-import Router, { type ParamMiddleware } from "koa-router";
+import Router from "koa-router";
 
 // $ExpectError
 Router.url("/");
@@ -19,12 +18,12 @@ const goodRouter1 = new Router({ prefix: "/api" });
 const badRouter2 = new Router({ sensitive: "true" });
 const goodRouter2 = new Router({ sensitive: true });
 
-const middleware: Middleware = async (ctx, next) => {
+const middleware = async (ctx, next) => {
   ctx.body = "ok";
   await next();
 };
 
-const paramMiddleware: ParamMiddleware = async (param, ctx, next) => {
+const paramMiddleware = async (param, ctx, next) => {
   ctx.body = "ok";
   await next();
 };
@@ -87,13 +86,3 @@ router.prefix("/api");
 // $ExpectError
 router.url();
 router.url("name");
-
-const app = new App();
-
-// $ExpectError
-app.use(router.route());
-app.use(router.routes());
-
-// $ExpectError
-app.use(router.allowedMethod());
-app.use(router.allowedMethods());

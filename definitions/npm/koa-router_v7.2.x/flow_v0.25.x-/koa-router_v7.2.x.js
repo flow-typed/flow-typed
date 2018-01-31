@@ -1,11 +1,10 @@
 /**
  * A lot of type definitions are copied from Koa because we can't `import type` yet
  * Comments from types removed for brevity. Read the actual `koa` libdef to learn more about these types.
- *
- * TODO: Remove the "koa" module from here when flow-typed v3 allows for dependencies between libdefs
  */
 
-declare module "koa" {
+declare module "koa-router" {
+  // Begin `koa` types
   declare class Server extends net$Server {
     listen(
       port?: number,
@@ -168,7 +167,7 @@ declare module "koa" {
       ((name: string) => Context)
   };
 
-  declare export type Context = {
+  declare type Context = {
     accept: $PropertyType<Request, "accept">,
     app: Application,
     cookies: Cookies,
@@ -236,7 +235,7 @@ declare module "koa" {
     [key: string]: any
   };
 
-  declare export type Middleware = (
+  declare type Middleware = (
     ctx: Context,
     next: () => Promise<void>
   ) => Promise<void> | void;
@@ -266,14 +265,9 @@ declare module "koa" {
     inspect(): ApplicationJSON;
     use(fn: Middleware): this;
   }
+  // End `koa` types
 
-  declare export default Class<Application>
-}
-
-declare module "koa-router" {
-  import type { Context, Middleware } from "koa";
-
-  declare export type ParamMiddleware = (
+  declare type ParamMiddleware = (
     param: string,
     ctx: Context,
     next: () => Promise<void>
