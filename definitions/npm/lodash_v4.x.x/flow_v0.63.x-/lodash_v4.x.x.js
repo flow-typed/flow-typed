@@ -1,5 +1,5 @@
 declare module "lodash" {
-  declare type HigherOrderFunctionOptional = (funcs?: Array<Function>) => Function
+  declare type HigherOrderFunctionOptional = (...funcs?: Array<Function>) => Function
 
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
   declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>;
@@ -737,8 +737,7 @@ declare module "lodash" {
   declare export function before(n: number, fn: Function): Function;
   declare export function bind(func: Function, thisArg: any, ...partials: Array<any>): Function;
   declare export function bindKey(obj?: ?Object, key?: ?string, ...partials?: Array<?any>): Function;
-  declare export var curry: Curry;
-  declare export function curry(func: Function, arity?: number): Function;
+  declare export var curry: Curry | (func: Function, arity?: number) => Function;
   declare export function curryRight(func: Function, arity?: number): Function;
   declare export function debounce<F: Function>(func: F, wait?: number, options?: DebounceOptions): F;
   declare export function defer(func: Function, ...args?: Array<any>): TimeoutID;
@@ -1362,8 +1361,8 @@ declare module "lodash" {
     // NaN is a number instead of its own type, otherwise it would behave like null/void
   declare export function defaultTo<T1: number, T2>(value: T1, defaultValue: T2): T1 | T2;
   declare export function defaultTo<T1: void | null, T2>(value: T1, defaultValue: T2): T2;
-  declare export var flow: HigherOrderFunctionOptional;
-  declare export var flowRight: HigherOrderFunctionOptional;
+  declare export var flow: HigherOrderFunctionOptional | $ComposeReverse;
+  declare export var flowRight: HigherOrderFunctionOptional | $Compose;
   declare export function identity<T>(value: T): T;
   declare export function iteratee(func?: any): Function;
   declare export function matches(source?: ?Object): Function;
@@ -1408,7 +1407,7 @@ declare module "lodash" {
 }
 
 declare module "lodash/fp" {
-  declare type HigherOrderFunction = (funcs: Array<Function>) => Function
+  declare type HigherOrderFunction = (...funcs: Array<Function>) => Function
 
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
   declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>;
@@ -3111,10 +3110,10 @@ declare module "lodash/fp" {
   declare export function defaultTo<T1: number, T2>(defaultValue: T2, value: T1): T1 | T2;
   declare export function defaultTo<T1: void | null, T2>(defaultValue: T2): (value: T1) => T2;
   declare export function defaultTo<T1: void | null, T2>(defaultValue: T2, value: T1): T2;
-  declare export var flow: HigherOrderFunction;
-  declare export var pipe: HigherOrderFunction;
-  declare export var flowRight: HigherOrderFunction;
-  declare export var compose: HigherOrderFunction;
+  declare export var flow: HigherOrderFunction | $ComposeReverse;
+  declare export var pipe: HigherOrderFunction | $ComposeReverse;
+  declare export var flowRight: HigherOrderFunction | $Compose;
+  declare export var compose: HigherOrderFunction | $Compose;
   declare export function identity<T>(value: T): T;
   declare export function iteratee(func: any): Function;
   declare export function matches(source: Object): (object: Object) => boolean;
