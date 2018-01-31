@@ -24,18 +24,13 @@ TabNavigator({
   Test1: { screen: FunctionalScreenComponent },
 });
 
-class ClassScreenComponent extends React.Component<void> {
+class ClassScreenComponent extends React.Component<*> {
   render() {
     return "Test";
   }
 }
 StackNavigator({
   Test1: { screen: ClassScreenComponent },
-});
-
-// This is legit because strings can be components in React 16
-DrawerNavigator({
-  Test1: { screen: "test" },
 });
 
 // $ExpectError numbers can never be components
@@ -128,7 +123,7 @@ StackNavigator({
   },
 });
 
-class ComponentWithNavOptions extends React.Component<void> {
+class ComponentWithNavOptions extends React.Component<*> {
   static navigationOptions = {
     headerTitle: "Home",
   };
@@ -140,7 +135,7 @@ StackNavigator({
   Test1: { screen: ComponentWithNavOptions },
 });
 
-class ComponentWithFunctionalNavOptions extends React.Component<void> {
+class ComponentWithFunctionalNavOptions extends React.Component<*> {
   static navigationOptions = (
     { navigation }: { navigation: NavigationScreenProp<*> },
   ) => ({
