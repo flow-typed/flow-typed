@@ -80,7 +80,7 @@ find({ x: 1, y: 2 }, { x: 3 });
 find((["a", "b"]: $ReadOnlyArray<string>), "c");
 
 // $ExpectError undefined. This type is incompatible with object type.
-var result: Object = find(users, "active");
+var result: {} = find(users, "active");
 
 /**
  * _.find examples from the official doc
@@ -161,8 +161,8 @@ keyBy([{ dir: "left", code: 97 }, { dir: "right", code: 100 }], function(o) {
 keyBy([{ dir: "left", code: 97 }, { dir: "right", code: 100 }], "dir");
 
 // Example of keying a map of objects by a number type
-type KeyByTest$ByNumber<T: Object> = { [number]: T };
-type KeyByTest$ByNumberMaybe<T: ?Object> = { [number]: T };
+type KeyByTest$ByNumber<T: {}> = { [number]: T };
+type KeyByTest$ByNumberMaybe<T: ?{}> = { [number]: T };
 type KeyByTest$Record = { id: number };
 var keyByTest_array: Array<KeyByTest$Record> = [
   { id: 4 },
@@ -290,7 +290,7 @@ extend({ a: 1 }, { b: 2 }).a;
 extend({ a: 1 }, { b: 2 }).b;
 // $ExpectError property `c`. Property not found in object literal
 extend({ a: 1 }, { b: 2 }).c;
-// $ExpectError property `c`. Poperty not found in object literal
+// $ExpectError property `c`. Property not found in object literal
 assignIn({ a: 1 }, { b: 2 }).c;
 
 /**
