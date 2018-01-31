@@ -316,13 +316,13 @@ zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
 /**
  * _.unzip
  */
-unzip([[1, "a"], [2, "b"]])[0].map(x => x * 10);
-unzip([[1, "a"], [2, "b"]])[1].map(x => x + "a");
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[0].map(x => x * 10);
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[1].map(x => x + "a");
 // $ExpectError
-unzip([[1, "a"], [2, "b"]])[0].map(x => x + "a");
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[0].map(x => x + "a");
 // $ExpectError
-unzip([[1, "a"], [2, "b"]])[1].map(x => x * 10);
-unzip([[1, "a", 1], [2, "b", 2]])[2].map(x => x * 10);
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[1].map(x => x * 10);
+unzip(([[1, "a", 1], [2, "b", 2]]: Array<[number, string, number]>))[2].map(x => x * 10);
 
 /**
  * _.isString
