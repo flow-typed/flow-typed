@@ -57,6 +57,8 @@ const pathEqObj2: boolean = _.pathEq(["hello"])(1)(obj);
 type PropEqObj = { bar: number, baz: string };
 const propEqObj: PropEqObj = { bar: 2, baz: "qux" };
 
+const isQueen = _.propEq("rank", "Q");
+
 const propEqResult1a: boolean = _.propEq("bar", 1, propEqObj);
 // Test curried versions.
 const propEqResult1b: boolean = _.propEq("bar")(1)(propEqObj);
