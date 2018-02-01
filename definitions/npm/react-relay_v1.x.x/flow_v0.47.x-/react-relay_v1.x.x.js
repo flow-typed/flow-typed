@@ -350,7 +350,7 @@ declare module "react-relay" {
   ): TBase;
 
   type Variable = string | void | number | Variables | void | Array<Variables>;
-  declare export type type Variables = { [string]: Variable };
+  declare export type type Variables = { [string]: Variable } & {$call?: void};
   declare export type DataID = string;
 
   declare type TEnvironment = Environment;
