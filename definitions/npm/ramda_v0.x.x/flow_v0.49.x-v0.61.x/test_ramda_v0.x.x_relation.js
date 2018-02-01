@@ -57,6 +57,8 @@ const pathEqObj2: boolean = _.pathEq(["hello"])(1)(obj);
 type PropEqObj = { bar: number, baz: string };
 const propEqObj: PropEqObj = { bar: 2, baz: "qux" };
 
+const isQueen = _.propEq("rank", "Q");
+
 const propEqResult1a: boolean = _.propEq("bar", 1, propEqObj);
 // Test curried versions.
 const propEqResult1b: boolean = _.propEq("bar")(1)(propEqObj);
@@ -91,6 +93,16 @@ const propEqResult4d: boolean = _.propEq(1, 2)(propEqArray);
 const sortByFirstItem = _.sortBy(([first]) => first);
 const pairs = [[-1, 1], [-2, 2], [-3, 3]];
 const sorted: Array<[number, number]> = sortByFirstItem(pairs);
+
+const sortWithData = [
+  {name: 'alice', age: 40},
+  {name: 'bob', age: 30},
+  {name: 'clara', age: 40}
+];
+const descAge = (l, r) => l.age < r.age ? -1 : 1;
+const ascName = (l, r) => l.name < r.name ? -1 : 1;
+_.sortWith([descAge, ascName], sortWithData);
+_.sortWith([descAge, ascName])(sortWithData);
 
 const eqA = _.eqBy(_.prop("a"));
 const ls1: Array<{ [k: string]: number }> = [
