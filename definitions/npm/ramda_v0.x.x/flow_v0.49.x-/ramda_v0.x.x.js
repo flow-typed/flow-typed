@@ -872,6 +872,12 @@ declare module ramda {
     ...rest: Array<void>
   ): (xs: T) => T;
 
+  declare function sortWith<V, T: Array<V>>(fns: Array<(a: V, b: V) => number>, xs: T): T;
+  declare function sortWith<V, T: Array<V>>(
+    fns: Array<(a: V, b: V) => number>,
+    ...rest: Array<void>
+  ): (xs: T) => T;
+
   declare function times<T>(fn: (i: number) => T, n: number): Array<T>;
   declare function times<T>(
     fn: (i: number) => T,
