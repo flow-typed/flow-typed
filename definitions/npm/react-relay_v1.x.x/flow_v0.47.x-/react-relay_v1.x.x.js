@@ -349,7 +349,7 @@ declare module "react-relay" {
     connectionConfig: ConnectionConfig
   ): TBase;
 
-  declare type Variable = string | void | number | Variables | void | Array<Variables>;
+  declare type Variable = string | number | Variables | void | null | Array<Variables>;
   declare export type Variables = { [string]: Variable } & {$call?: void};
   declare export type DataID = string;
 
