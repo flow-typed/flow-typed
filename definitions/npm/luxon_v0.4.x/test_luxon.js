@@ -297,58 +297,58 @@ DateTime.fromSQL("12/15/2017, 12:47:25 PM", { outputCalendar: 2 });
 // $ExpectError
 DateTime.fromSQL("12/15/2017, 12:47:25 PM", { numberingSystem: 2 });
 
-var date: DateTime = DateTime.fromString(
-  "12/15/2017, 12:47:25 PM",
-  "dd/MM/yyyy h:mm:ss a"
+var date: DateTime = DateTime.fromFormat(
+  '12/15/2017, 12:47:25 PM',
+  'dd/MM/yyyy h:mm:ss a'
 );
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {});
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  zone: "America/Chicago"
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {});
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  zone: 'America/Chicago',
 });
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  zone: new CustomZone()
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  zone: new CustomZone(),
 });
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  locale: "en-US"
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  locale: 'en-US',
 });
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  zone: "America/Chicago",
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  zone: 'America/Chicago',
   setZone: true,
-  locale: "en-US",
-  outputCalendar: "gregory",
-  numberingSystem: "buddhist"
+  locale: 'en-US',
+  outputCalendar: 'gregory',
+  numberingSystem: 'buddhist',
 });
 // $ExpectError
-DateTime.fromString();
+DateTime.fromFormat();
 // $ExpectError
-DateTime.fromString("12/15/2017, 12:47:25 PM");
+DateTime.fromFormat('12/15/2017, 12:47:25 PM');
 // $ExpectError
-DateTime.fromString("12/15/2017, 12:47:25 PM", 2);
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 2);
 // $ExpectError
-DateTime.fromString("12/15/2017, 12:47:25 PM", { zone: "America/Chicago" });
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', { zone: 'America/Chicago' });
 // $ExpectError
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  foo: "bar"
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  foo: 'bar',
 });
 // $ExpectError
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  zone: 2
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  zone: 2,
 });
 // $ExpectError
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  locale: 2
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  locale: 2,
 });
 // $ExpectError
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  setZone: "yes"
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  setZone: 'yes',
 });
 // $ExpectError
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  outputCalendar: 2
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  outputCalendar: 2,
 });
 // $ExpectError
-DateTime.fromString("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
-  numberingSystem: 2
+DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+  numberingSystem: 2,
 });
 
 var date: DateTime = DateTime.invalid("test");
