@@ -1,5 +1,5 @@
 declare module "lodash" {
-  declare type HigherOrderFunctionOptional = (...funcs?: Array<Function>) => Function
+  declare type HigherOrderFunctionOptional = (funcs?: Array<Function>) => Function
 
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
   declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>;
@@ -1361,8 +1361,8 @@ declare module "lodash" {
     // NaN is a number instead of its own type, otherwise it would behave like null/void
   declare export function defaultTo<T1: number, T2>(value: T1, defaultValue: T2): T1 | T2;
   declare export function defaultTo<T1: void | null, T2>(value: T1, defaultValue: T2): T2;
-  declare export var flow: HigherOrderFunctionOptional | $ComposeReverse;
-  declare export var flowRight: HigherOrderFunctionOptional | $Compose;
+  declare export var flow: HigherOrderFunctionOptional & $ComposeReverse;
+  declare export var flowRight: HigherOrderFunctionOptional & $Compose;
   declare export function identity<T>(value: T): T;
   declare export function iteratee(func?: any): Function;
   declare export function matches(source?: ?Object): Function;
@@ -1407,7 +1407,7 @@ declare module "lodash" {
 }
 
 declare module "lodash/fp" {
-  declare type HigherOrderFunction = (...funcs: Array<Function>) => Function
+  declare type HigherOrderFunction = (funcs: Array<Function>) => Function
 
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
   declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>;
@@ -3110,10 +3110,10 @@ declare module "lodash/fp" {
   declare export function defaultTo<T1: number, T2>(defaultValue: T2, value: T1): T1 | T2;
   declare export function defaultTo<T1: void | null, T2>(defaultValue: T2): (value: T1) => T2;
   declare export function defaultTo<T1: void | null, T2>(defaultValue: T2, value: T1): T2;
-  declare export var flow: HigherOrderFunction | $ComposeReverse;
-  declare export var pipe: HigherOrderFunction | $ComposeReverse;
-  declare export var flowRight: HigherOrderFunction | $Compose;
-  declare export var compose: HigherOrderFunction | $Compose;
+  declare export var flow: HigherOrderFunction & $ComposeReverse;
+  declare export var pipe: HigherOrderFunction & $ComposeReverse;
+  declare export var flowRight: HigherOrderFunction & $Compose;
+  declare export var compose: HigherOrderFunction & $Compose;
   declare export function identity<T>(value: T): T;
   declare export function iteratee(func: any): Function;
   declare export function matches(source: Object): (object: Object) => boolean;
