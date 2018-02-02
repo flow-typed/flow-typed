@@ -9,7 +9,7 @@ type Options = {|
 
 declare module 'promise-retry' {
   declare module.exports: <T>(
-    handler: (retry: RetryFn, retryNumber: Number) => Promise<T>,
+    handler: (retry: RetryFn, retryNumber: number) => Promise<T>,
     options?: Options
   ) => Promise<T>;
 }
