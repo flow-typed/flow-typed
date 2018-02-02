@@ -494,7 +494,7 @@ declare module ramda {
   declare var match: CurriedFunction2<RegExp, string, Array<string | void>>;
   declare var replace: CurriedFunction3<
     RegExp | string,
-    string,
+    string | ((substring: string, ...args: Array<string>) => string),
     string,
     string
   >;
