@@ -1,4 +1,5 @@
 // @flow
+import _ from 'lodash'
 import assignIn from "lodash/assignIn";
 import attempt from "lodash/attempt";
 import clone from "lodash/clone";
@@ -37,6 +38,15 @@ import uniqBy from "lodash/uniqBy";
 import xorBy from "lodash/xorBy";
 import zip from "lodash/zip";
 import zipWith from "lodash/zipWith";
+
+/**
+ * _ (default export)
+ */
+_([1, 2, 3]);
+_({ a: 1, b: 2, c: 3});
+_('123');
+_(123);
+_();
 
 /**
  * _.attempt
