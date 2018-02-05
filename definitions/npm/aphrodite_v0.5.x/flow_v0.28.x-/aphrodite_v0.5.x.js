@@ -11,7 +11,7 @@ declare module "aphrodite" {
     [key: string]: Object
   };
 
-  declare type StyleDefinition = {
+  declare export type StyleDefinition = {
     [key: string]: {
       _name: string,
       _definition: Object

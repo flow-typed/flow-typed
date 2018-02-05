@@ -16,6 +16,7 @@ declare module ramda {
   declare type BinarySameTypeFn<T> = BinaryFn<T, T, T>;
   declare type NestedObject<T> = { [k: string]: T | NestedObject<T> };
   declare type UnaryPredicateFn<T> = (x: T) => boolean;
+  declare type MapUnaryPredicateFn = <V>(V) => V => boolean;
   declare type BinaryPredicateFn<T> = (x: T, y: T) => boolean;
   declare type BinaryPredicateFn2<T, S> = (x: T, y: S) => boolean;
 
@@ -328,16 +329,16 @@ declare module ramda {
   }
 
   /**
-  * DONE:
-  * Function*
-  * List*
-  * Logic
-  * Math
-  * Object*
-  * Relation
-  * String
-  * Type
-  */
+   * DONE:
+   * Function*
+   * List*
+   * Logic
+   * Math
+   * Object*
+   * Relation
+   * String
+   * Type
+   */
 
   declare var compose: Compose;
   declare var pipe: Pipe;
@@ -1506,14 +1507,13 @@ declare module ramda {
 
   declare function valuesIn<T, O: { [k: string]: T }>(o: O): Array<T | any>;
 
-  declare function where<T>(
-    predObj: { [key: string]: UnaryPredicateFn<T> },
-    ...rest: Array<void>
-  ): (o: { [k: string]: T }) => boolean;
-  declare function where<T>(
-    predObj: { [key: string]: UnaryPredicateFn<T> },
-    o: { [k: string]: T }
+  declare function where<O>(
+    predObj: $ObjMap<O, MapUnaryPredicateFn>,
+    o: O
   ): boolean;
+  declare function where<O>(
+    predObj: $ObjMap<O, MapUnaryPredicateFn>
+  ): O => boolean;
 
   declare function whereEq<T, S, O: { [k: string]: T }, Q: { [k: string]: S }>(
     predObj: O,
@@ -1762,12 +1762,12 @@ declare module ramda {
   declare function or(x: boolean, y: boolean): boolean;
   declare function or(x: boolean): (y: boolean) => boolean;
 
-  // TODO: pathSatisfies: Started failing in v39...
-  // declare function pathSatisfies<T>(cond: (x: T) => boolean, path: Array<string>, o: NestedObject<T>): boolean;
-  // declare function pathSatisfies<T>(cond: (x: T) => boolean, path: Array<string>, ...rest: Array<void>): (o: NestedObject<T>) => boolean;
-  // declare function pathSatisfies<T>(cond: (x: T) => boolean, ...rest: Array<void>):
-  // ((path: Array<string>, ...rest: Array<void>) => (o: NestedObject<T>) => boolean)
-  // & ((path: Array<string>, o: NestedObject<T>) => boolean)
+  declare var pathSatisfies: CurriedFunction3<
+    UnaryPredicateFn<any>,
+    string[],
+    Object,
+    boolean
+  >;
 
   declare function propSatisfies<T>(
     cond: (x: T) => boolean,

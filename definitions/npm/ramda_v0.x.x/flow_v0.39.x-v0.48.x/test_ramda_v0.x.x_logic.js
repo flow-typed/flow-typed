@@ -73,13 +73,19 @@ const oor: boolean = _.or(true, true);
 // which might be awkward for some
 // but can actually catch some bugs statically
 
-// TODO: pathSatisfies: Started failing in v39...
-// const psatE: boolean = _.pathSatisfies(y => y > 0, [ 'x', 'y' ], { x: { y: 2 } })
-// const psat: boolean = _.pathSatisfies(y => typeof y === 'number' && y > 0, [ 'x', 'y' ], { x: { y: 2 } })
-// const psatPart = _.pathSatisfies(y => typeof y === 'number' && y > 0)
-// const psat2: boolean = psatPart([ 'x', 'y' ])({ x: { y: 2 }, z: true })
-// const psatPart2 = _.pathSatisfies(y => typeof y === 'number' && y > 0, [ 'x', 'y' ])
-// const psat3: boolean = psatPart2({ x: { y: 2 }, z: true })
+const psatE: boolean = _.pathSatisfies(y => y > 0, ["x", "y"], { x: { y: 2 } });
+const psat: boolean = _.pathSatisfies(
+  y => typeof y === "number" && y > 0,
+  ["x", "y"],
+  { x: { y: 2 } }
+);
+const psatPart = _.pathSatisfies(y => typeof y === "number" && y > 0);
+const psat2: boolean = psatPart(["x", "y"])({ x: { y: 2 }, z: true });
+const psatPart2 = _.pathSatisfies(y => typeof y === "number" && y > 0, [
+  "x",
+  "y"
+]);
+const psat3: boolean = psatPart2({ x: { y: 2 }, z: true });
 
 const propSat: boolean = _.propSatisfies(x => x > 0, "x", { x: 1, y: 2 });
 const coerceArray = _.unless(_.isArrayLike, _.of);

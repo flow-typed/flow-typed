@@ -87,6 +87,19 @@ GUser.hasMany(GTask);
 
 GTask.create({ revision: 1, name: 'test' }).then( (gtask) => gtask.upRevision() );
 
+//
+//  Model.Options
+// ~~~~~~~~~~~~~~~
+//
+
+(GUser.options.name.singular: string);
+(GUser.options.name.plural: string);
+(GUser.options.timestamps: ?boolean);
+(GUser.options.paranoid: ?boolean);
+(GUser.options.underscored: ?boolean);
+(GUser.options.underscoredAll: ?boolean);
+(GUser.options.hasTrigger: ?boolean);
+(GUser.options.freezeTableName: ?boolean);
 
 //
 //  Associations
@@ -226,6 +239,9 @@ Customer.belongsToMany(Branch, { through: 'branchCustomer' });
 (Warehouse.tableAttributes.blah.type: DataTypeAbstract);
 (Warehouse.attributes.blah.type: DataTypeAbstract);
 (Warehouse.primaryKeys.blah.type: DataTypeAbstract);
+
+Warehouse.getAssociations(WarehouseBranch)
+Warehouse.getAssociationForAlias(WarehouseBranch, 'blah')
 
 // hasOne
 product.getBarcode();

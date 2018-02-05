@@ -322,7 +322,9 @@ async function installNpmLibDefs({
             : ['a versioned update', 'this package'];
         console.log(
           `\n` +
-            `  Consider submitting ${libDefPlural[0]} for ${libDefPlural[1]} to \n` +
+            `  Consider submitting ${libDefPlural[0]} for ${
+              libDefPlural[1]
+            } to \n` +
             `  https://github.com/flowtype/flow-typed/\n`,
         );
       },
@@ -423,13 +425,17 @@ async function installNpmLibDef(
 
     if (!overwrite && (await fs.exists(filePath))) {
       console.error(
-        '  • %s\n' + '    └> %s',
+        '  • %s\n' + '    %s\n    %s\n    └> %s',
         colors.bold(
           colors.red(
             `${terseFilePath} already exists and appears to have been manually ` +
               `written or changed!`,
           ),
         ),
+        colors.green(
+          `Consider contributing your changes back to flow-typed repository :)`,
+        ),
+        `Read more at https://github.com/flowtype/flow-typed/wiki/Contributing-Library-Definitions`,
         'Use --overwrite to overwrite the existing libdef.',
       );
       return true;

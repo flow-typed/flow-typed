@@ -116,3 +116,80 @@ knex("foo").havingRaw();
 knex("foo").whereRaw();
 // $ExpectError
 knex("foo").joinRaw();
+
+knex.batchInsert('foo', [{ foo: 'bar' }]);
+knex.batchInsert('foo', [{ foo: 'bar' }], 50);
+knex.transaction((trx) => {
+  knex.batchInsert('foo', [{ foo: 'bar' }], 50).transacting(trx);
+});
+
+
+knex.migrate.latest()
+  .then(() => {
+    console.log('Migrated to latest');
+  })
+  .catch(console.error);
+knex.migrate.latest({
+  tableName: 'migration',
+  directory: 'migrations/',
+  extension: 'js',
+  disableTransactions: false,
+  loadExtensions: ['.js']
+})
+  .then(() => {
+    console.log('Migrated to latest');
+  })
+  .catch(console.error);
+
+knex.migrate.make('my-migration')
+  .then((filePath) => {
+    console.log(`Please write your migration in ${filePath}`);
+  })
+  .catch(console.error);
+knex.migrate.make('my-migration', {
+  tableName: 'migration',
+  directory: 'migrations/',
+  extension: 'js',
+  disableTransactions: false,
+  loadExtensions: ['.js']
+})
+  .then((filePath) => {
+    console.log(`Please write your migration in ${filePath}`);
+  })
+  .catch(console.error);
+// $ExpectError
+knex.migrate.make();
+
+knex.migrate.rollback()
+  .then(() => {
+    console.log('Successful rollback');
+  })
+  .catch(console.error);
+knex.migrate.rollback({
+  tableName: 'migration',
+  directory: 'migrations/',
+  extension: 'js',
+  disableTransactions: false,
+  loadExtensions: ['.js']
+})
+  .then(() => {
+    console.log('Successful rollback');
+  })
+  .catch(console.error);
+
+knex.migrate.currentVersion()
+  .then((version) => {
+    console.log(`Current version of the data: ${version}`);
+  })
+  .catch(console.error);
+knex.migrate.currentVersion({
+  tableName: 'migration',
+  directory: 'migrations/',
+  extension: 'js',
+  disableTransactions: false,
+  loadExtensions: ['.js']
+})
+  .then((version) => {
+    console.log(`Current version of the data: ${version}`);
+  })
+  .catch(console.error);
