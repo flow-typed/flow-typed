@@ -1617,30 +1617,34 @@ declare module "lodash/fp" {
       base: A,
       elements: B
     ): Array<T | U>;
-    difference<T>(values: Array<T>): (array: Array<T>) => Array<T>;
-    difference<T>(values: Array<T>, array: Array<T>): Array<T>;
+    difference<T>(values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => T[];
+    difference<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): T[];
     differenceBy<T>(
       iteratee: ValueOnlyIteratee<T>
-    ): ((values: Array<T>) => (array: Array<T>) => T[]) &
-      ((values: Array<T>, array: Array<T>) => T[]);
+    ): ((values: $ReadOnlyArray<T>) => (array: $ReadOnlyArray<T>) => T[]) &
+      ((values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => T[]);
     differenceBy<T>(
       iteratee: ValueOnlyIteratee<T>,
-      values: Array<T>
-    ): (array: Array<T>) => T[];
+      values: $ReadOnlyArray<T>
+    ): (array: $ReadOnlyArray<T>) => T[];
     differenceBy<T>(
       iteratee: ValueOnlyIteratee<T>,
-      values: Array<T>,
-      array: Array<T>
+      values: $ReadOnlyArray<T>,
+      array: $ReadOnlyArray<T>
     ): T[];
     differenceWith<T>(
-      values: T[]
-    ): ((comparator: Comparator<T>) => (array: T[]) => T[]) &
-      ((comparator: Comparator<T>, array: T[]) => T[]);
+      values: $ReadOnly<T>
+    ): ((comparator: Comparator<T>) => (array: $ReadOnly<T>) => T[]) &
+      ((comparator: Comparator<T>, array: $ReadOnly<T>) => T[]);
     differenceWith<T>(
-      values: T[],
+      values: $ReadOnly<T>,
       comparator: Comparator<T>
-    ): (array: T[]) => T[];
-    differenceWith<T>(values: T[], comparator: Comparator<T>, array: T[]): T[];
+    ): (array: $ReadOnly<T>) => T[];
+    differenceWith<T>(
+      values: $ReadOnly<T>,
+      comparator: Comparator<T>,
+      array: $ReadOnly<T>
+    ): T[];
     drop<T>(n: number): (array: Array<T>) => Array<T>;
     drop<T>(n: number, array: Array<T>): Array<T>;
     dropLast<T>(n: number): (array: Array<T>) => Array<T>;

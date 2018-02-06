@@ -64,7 +64,7 @@ countBy('length')({one: 'one', two: 'two', three: 'three'});
 /**
  * differenceBy
  */
-differenceBy(Math.floor, [2.1, 1.2], [2.3, 3.4]);
+differenceBy(Math.floor, ([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4]);
 differenceBy('x', [{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }]);
 differenceBy('x')([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }]);
 
