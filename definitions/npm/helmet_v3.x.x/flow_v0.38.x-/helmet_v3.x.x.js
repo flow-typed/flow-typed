@@ -16,8 +16,8 @@ declare type helmet$HstsOptions = {
 }
 
 declare type helmet$HpkpOptions = {
-  maxAge?: number;
-  sha256s?: Array<string>;
+  maxAge: number;
+  sha256s: Array<string>;
   includeSubDomains?: boolean;
   reportUri?: string;
   reportOnly?: boolean;
