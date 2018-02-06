@@ -9,9 +9,9 @@ declare type helmet$ReferrerPolicyOptions = {
 }
 
 declare type helmet$HstsOptions = {
-  maxAge: number;
-  includeSubDomains: boolean;
-  preload: boolean;
+  maxAge?: number;
+  includeSubDomains?: boolean;
+  preload?: boolean;
   setIf?: (req: http$IncomingMessage, res: http$ServerResponse) => boolean;
 }
 
