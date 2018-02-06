@@ -174,10 +174,10 @@ keyBy('dir', [
   { 'dir': 'left', 'code': 97 },
   { 'dir': 'right', 'code': 100 }
 ]);
-keyBy('dir')([
+keyBy('dir')(([
   { 'dir': 'left', 'code': 97 },
   { 'dir': 'right', 'code': 100 }
-]);
+]: $ReadOnlyArray<*>));
 
 // Example of keying a map of objects by a number type
 type KeyByTest$ByNumber<T: Object> = { [number]: T }
