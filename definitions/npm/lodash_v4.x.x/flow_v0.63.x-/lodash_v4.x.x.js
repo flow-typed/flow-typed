@@ -603,7 +603,7 @@ declare module "lodash" {
       ...args?: Array<any>
     ): Array<any>;
     keyBy<T, V>(
-      array: Array<T>,
+      array: $ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
     ): { [key: V]: ?T };
     keyBy(
@@ -2165,17 +2165,17 @@ declare module "lodash/fp" {
     ): Array<any>;
     keyBy<T, V>(
       iteratee: ValueOnlyIteratee<T>
-    ): (collection: Array<T> | { [id: any]: T }) => { [key: V]: T };
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => { [key: V]: T };
     keyBy<T, V>(
       iteratee: ValueOnlyIteratee<T>,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): { [key: V]: T };
     indexBy<T, V>(
       iteratee: ValueOnlyIteratee<T>
-    ): (collection: Array<T> | { [id: any]: T }) => { [key: V]: T };
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => { [key: V]: T };
     indexBy<T, V>(
       iteratee: ValueOnlyIteratee<T>,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): { [key: V]: T };
     map<T, U>(
       iteratee: MapIterator<T, U> | OMapIterator<T, U>
