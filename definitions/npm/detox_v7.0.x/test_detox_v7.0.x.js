@@ -27,9 +27,19 @@ detox.init(configs, {initGlobals: false});
 
 // Device Object API
 // -----------------
-device.launchApp()
-device.relaunchApp()
+device.launchApp({})
+device.launchApp({newInstance: true})
+device.launchApp({permissions: {calendar: 'YES'}});
+device.launchApp({url: 'url', newInstance: false});
+device.launchApp({userNotification: { "title": "push" }, newInstance: true});
+device.launchApp({launchArgs: {arg1: 1, arg2: "2"}});
+// $ExpectError
+device.launchApp({permissions: false, url: false});
+
+// $ExpectError
+device.terminateApp({err: 'err'})
 device.terminateApp()
+device.terminateApp('other.bundle.id')
 device.reloadReactNative()
 device.sendToHome()
 device.installApp()

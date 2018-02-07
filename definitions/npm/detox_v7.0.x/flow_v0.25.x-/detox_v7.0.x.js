@@ -15,13 +15,21 @@ declare type initGlobals = {
 declare type initFunc = (config: config, initGlobals?: initGlobals) => void;
 
 declare type orientationTypes = 'portrait' | 'landscape'
+declare type paramsType = {
+    newInstance?: boolean,
+    permissions?: {},
+    url?: string,
+    userNotification?: {},
+    delete?: boolean,
+    launchArgs?: {}
+}
 
 declare type deviceMethods = {
     disableSynchronization: () => void,
     enableSynchronization: () => void,
     getPlatform: () => void,
-    installApp: () => void,
-    launchApp: () => void,
+    installApp: (path?: string) => void,
+    launchApp: (paramsType) => void,
     openURL: ({url: string, sourceApp?: string}) => void,
     relaunchApp: () => void,
     reloadReactNative: () => void,
@@ -31,8 +39,8 @@ declare type deviceMethods = {
     setLocation: (lat: number, lon: number) => void,
     setOrientation: (orientationTypes) => void,
     setURLBlacklist: (urls: string[]) => void,
-    terminateApp: () => void,
-    uninstallApp: () => void
+    terminateApp: (bundleID?: string) => void,
+    uninstallApp: (bundleID?: string) => void
 };
 
 declare type directionTypes = "left" | "right" | "top" | "down";
