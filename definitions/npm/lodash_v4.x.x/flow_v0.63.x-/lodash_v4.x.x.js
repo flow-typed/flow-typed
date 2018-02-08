@@ -2119,10 +2119,10 @@ declare module "lodash/fp" {
       iteratee: ValueOnlyIteratee<T>,
       collection: Array<T> | { [id: any]: T }
     ): { [key: V]: Array<T> };
-    includes(value: string): (str: string) => boolean;
-    includes(value: string, str: string): boolean;
     includes<T>(value: T): (collection: Array<T> | { [id: any]: T }) => boolean;
     includes<T>(value: T, collection: Array<T> | { [id: any]: T }): boolean;
+    includes(value: string): (str: string) => boolean;
+    includes(value: string, str: string): boolean;
     contains(value: string): (str: string) => boolean;
     contains(value: string, str: string): boolean;
     contains<T>(value: T): (collection: Array<T> | { [id: any]: T }) => boolean;
