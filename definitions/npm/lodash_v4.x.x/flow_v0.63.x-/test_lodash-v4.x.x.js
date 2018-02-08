@@ -59,7 +59,7 @@ difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>)
 /**
  * _.differenceBy
  */
-differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+differenceBy(([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4], Math.floor);
 differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], "x");
 
 /**
