@@ -8,5 +8,5 @@ declare module 'hoist-non-react-statics' {
     target: React$ComponentType<TP>,
     source: React$ComponentType<TP & SP> & S,
     blacklist?: { [key: $Keys<S>]: boolean }
-  ) => React$ComponentType<TP> & S; // TODO: handle blacklisted properties
+  ) => React$ComponentType<TP> & $Shape<S>;
 }
