@@ -40,7 +40,6 @@ declare module "enzyme" {
     text(): string,
     html(): string,
     get(index: number): React.Node,
-    getNodes(): Array<React.Node>,
     getDOMNode(): HTMLElement | HTMLInputElement,
     at(index: number): this,
     first(): this,
@@ -90,7 +89,9 @@ declare module "enzyme" {
       options?: ?Object
     ): ShallowWrapper,
     equals(node: React.Node): boolean,
-    shallow(options?: { context?: Object }): ShallowWrapper
+    shallow(options?: { context?: Object }): ShallowWrapper,
+    getElement(): React.Node,
+    getElements(): Array<React.Node>
   }
 
   declare function shallow(
