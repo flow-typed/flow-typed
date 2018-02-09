@@ -5,6 +5,8 @@
  */
 // Mostly from https://github.com/yahoo/react-intl/wiki/API#react-intl-api
 
+import type { Element, ChildrenArray } from "react";
+
 type $npm$ReactIntl$LocaleData = {
   locale: string,
   [key: string]: any
@@ -130,7 +132,7 @@ declare module "react-intl" {
   declare type ComponentWithDefaultProps<DefaultProps: {}, Props: {}> =
     | React$ComponentType<Props>
     | React$StatelessFunctionalComponent<Props>
-    | React.ChildrenArray<void | null | boolean | string | number | React.Element<any>>;
+    | ChildrenArray<void | null | boolean | string | number | Element<any>>;
 
   declare type InjectIntlOtions = {
     intlPropName?: string,
