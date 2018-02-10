@@ -100,14 +100,9 @@ export async function getPackageJsonData(pathStr: string): Promise<PkgJson> {
   };
 }
 
-export async function determineFlowVersion(
-  pathStr: string,
-): Promise<null | Version> {
-  const pkgJsonData = await getPackageJsonData(pathStr);
-  const flowBinVersionStr = await findPackageJsonDepVersionStr(
-    pkgJsonData,
-    'flow-bin',
-  );
+export async function determineFlowVersion(): Promise<null | Version> {
+  const pkgJsonPath = await findPackageJsonPath(require.resolve('flow-bin'));
+  const flowBinVersionStr = require(pkgJsonPath).version;
 
   if (flowBinVersionStr !== null) {
     let flowVerStr;
@@ -132,10 +127,8 @@ export async function determineFlowVersion(
   return null;
 }
 
-export async function findFlowSpecificVer(
-  startingPath: string,
-): Promise<FlowSpecificVer> {
-  const flowSemver = await determineFlowVersion(startingPath);
+export async function findFlowSpecificVer(): Promise<FlowSpecificVer> {
+  const flowSemver = await determineFlowVersion();
   if (flowSemver === null) {
     throw new Error(
       'Failed to find a flow-bin dependency in package.json.\n' +

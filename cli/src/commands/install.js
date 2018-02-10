@@ -48,7 +48,6 @@ export type Args = {
   skip: boolean,
   verbose: boolean,
   libdefDir?: string,
-  packageDir?: string,
   ignoreDeps?: Array<string>,
 };
 export function setup(yargs: Yargs) {
@@ -76,11 +75,6 @@ export function setup(yargs: Yargs) {
       type: 'string',
       demand: false,
     },
-    packageDir: {
-      alias: 'p',
-      describe: 'The relative path of package.json where flow-bin is installed',
-      type: 'string',
-    },
     ignoreDeps: {
       alias: 'i',
       describe: 'Dependency categories to ignore when installing definitions',
@@ -90,8 +84,7 @@ export function setup(yargs: Yargs) {
 }
 export async function run(args: Args) {
   const cwd = process.cwd();
-  const packageDir = args.packageDir ? path.resolve(args.packageDir) : cwd;
-  const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
+  const flowVersion = await determineFlowVersion(args.flowVersion);
   const libdefDir = args.libdefDir || 'flow-typed';
   const explicitLibDefs = args._.slice(1);
   const ignoreDeps = args.ignoreDeps || [];
@@ -117,7 +110,7 @@ export async function run(args: Args) {
   return 0;
 }
 
-async function determineFlowVersion(cwd: string, flowVersionArg?: string) {
+async function determineFlowVersion(flowVersionArg?: string) {
   if (flowVersionArg != null) {
     // Be permissive if the prefix 'v' is left off
     let flowVersionStr =
@@ -134,7 +127,7 @@ async function determineFlowVersion(cwd: string, flowVersionArg?: string) {
   } else {
     return {
       kind: 'specific',
-      ver: await findFlowSpecificVer(cwd),
+      ver: await findFlowSpecificVer(),
     };
   }
 }
