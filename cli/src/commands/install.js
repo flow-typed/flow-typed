@@ -339,7 +339,8 @@ async function installNpmLibDefs({
     // a stub if no libdef exists -- just inform them that one doesn't exist
     console.log(
       colors.red(
-        `!! No libdefs found in flow-typed for the explicitly requested libdefs. !!`,
+        `!! No flow@${flowVersionToSemver(flowVersion)}-compatible libdefs ` +
+          `found in flow-typed for the explicitly requested libdefs. !!`,
       ) +
         '\n' +
         '\n' +
