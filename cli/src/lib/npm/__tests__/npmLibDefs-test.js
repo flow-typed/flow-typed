@@ -300,6 +300,7 @@ describe('npmLibDefs', () => {
   describe('findNpmLibDef', () => {
     describe('when no cached libDefs found', () => {
       it('returns null', async () => {
+        jest.setTimeout(10000);
         const pkgName = 'jest-test-npm-package';
         const pkgVersion = 'v1.0.0';
         const flowVersion = {kind: 'all'};
