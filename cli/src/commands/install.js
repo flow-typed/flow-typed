@@ -50,6 +50,7 @@ export type Args = {
   libdefDir?: string,
   packageDir?: string,
   ignoreDeps?: Array<string>,
+  rootDir?: string,
 };
 export function setup(yargs: Yargs) {
   return yargs.usage(`$0 ${name} - ${description}`).options({
@@ -86,10 +87,15 @@ export function setup(yargs: Yargs) {
       describe: 'Dependency categories to ignore when installing definitions',
       type: 'array',
     },
+    rootDir: {
+      alias: 'r',
+      describe: 'Directory of .flowconfig relative to node_modules',
+      type: 'string',
+    },
   });
 }
 export async function run(args: Args) {
-  const cwd = process.cwd();
+  const cwd = args.rootDir ? path.resolve(args.rootDir) : process.cwd();
   const packageDir = args.packageDir ? path.resolve(args.packageDir) : cwd;
   const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
   const libdefDir = args.libdefDir || 'flow-typed';
