@@ -10,7 +10,6 @@ import {
   Trans,
   setDefaults,
   reactI18nextModule,
-  defaultOptions,
   getDefaults,
   getI18n,
   setI18n
@@ -61,7 +60,12 @@ class FlowErrorClassComp extends React.Component<Props> {
 }
 
 // passing
+const namspaces: Array<string> = ['namespace1', 'namespace2']
 translate();
+translate(namspaces)
+translate('namespace1')
+const funcTranslator: Translator<OwnProps, Props> = translate(({ s }: OwnProps) => s)
+const funcTranslatorArray: Translator<OwnProps, Props> = translate(({ s }: OwnProps) => [s])
 // $ExpectError - wrong argument type
 translate({});
 
@@ -137,16 +141,6 @@ reactI18nextModule.init(i18n);
 reactI18nextModule.type;
 // $ExpectError - no field property on reactI18nextModule
 reactI18nextModule.field;
-
-// passing
-defaultOptions.wait;
-defaultOptions.withRef;
-defaultOptions.bindI18n;
-defaultOptions.bindStore;
-defaultOptions.translateFuncName;
-defaultOptions.nsMode;
-// $ExpectError - no field property on defaultOptions
-defaultOptions.field;
 
 // passing
 setDefaults({ wait: true });
