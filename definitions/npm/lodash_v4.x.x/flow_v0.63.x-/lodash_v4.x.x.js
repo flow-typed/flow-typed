@@ -190,7 +190,7 @@ declare module "lodash" {
   ) => mixed;
   declare type Iteratee<T> = _Iteratee<T> | Object | string;
   declare type FlatMapIteratee<T, U> =
-    | ((item: T, index: number, array: ?Array<T>) => Array<U>)
+    | ((item: T, index: number, array: ?$ReadOnlyArray<T>) => Array<U>)
     | Object
     | string;
   declare type Comparator<T> = (item: T, item2: T) => boolean;
@@ -547,13 +547,16 @@ declare module "lodash" {
       object: T,
       predicate?: ?OPredicate<A, T>
     ): V;
-    flatMap<T, U>(array?: ?Array<T>, iteratee?: ?FlatMapIteratee<T, U>): Array<U>;
+    flatMap<T, U>(
+      array?: ?$ReadOnlyArray<T>,
+      iteratee?: ?FlatMapIteratee<T, U>
+    ): Array<U>;
     flatMap<T: Object, U>(
       object: T,
       iteratee?: OFlatMapIteratee<T, U>
     ): Array<U>;
     flatMapDeep<T, U>(
-      array?: ?Array<T>,
+      array?: ?$ReadOnlyArray<T>,
       iteratee?: ?FlatMapIteratee<T, U>
     ): Array<U>;
     flatMapDeep<T: Object, U>(
@@ -577,7 +580,7 @@ declare module "lodash" {
     forEachRight<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
     forEachRight<T: Object>(object: T, iteratee?: ?OIteratee<T>): T;
     groupBy<V, T>(
-      array: Array<T>,
+      array: $ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
     ): { [key: V]: Array<T> };
     groupBy(
@@ -628,19 +631,19 @@ declare module "lodash" {
       iteratee?: (char: string, index: number, str: string) => any
     ): string;
     orderBy<T>(
-      array: Array<T>,
-      iteratees?: ?Array<Iteratee<T>> | ?string,
-      orders?: ?Array<"asc" | "desc"> | ?string
+      array: $ReadOnlyArray<T>,
+      iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
+      orders?: ?$ReadOnlyArray<"asc" | "desc"> | ?string
     ): Array<T>;
     orderBy<T>(
-      array: null | void,
-      iteratees?: ?Array<Iteratee<T>> | ?string,
-      orders?: ?Array<"asc" | "desc"> | ?string
+      array: null | void,
+      iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
+      orders?: ?$ReadOnlyArray<"asc" | "desc"> | ?string
     ): Array<T>;
     orderBy<V, T: Object>(
       object: T,
-      iteratees?: Array<OIteratee<*>> | string,
-      orders?: Array<"asc" | "desc"> | string
+      iteratees?: $ReadOnlyArray<OIteratee<*>> | string,
+      orders?: $ReadOnlyArray<"asc" | "desc"> | string
     ): Array<V>;
     partition<T>(
       array?: ?Array<T>,
@@ -718,13 +721,22 @@ declare module "lodash" {
       object?: ?T,
       predicate?: OPredicate<A, T>
     ): boolean;
-    sortBy<T>(array: ?Array<T>, ...iteratees?: Array<Iteratee<T>>): Array<T>;
-    sortBy<T>(array: ?Array<T>, iteratees?: Array<Iteratee<T>>): Array<T>;
+    sortBy<T>(
+      array: ?$ReadOnlyArray<T>,
+      ...iteratees?: $ReadOnlyArray<Iteratee<T>>
+    ): Array<T>;
+    sortBy<T>(
+      array: ?$ReadOnlyArray<T>,
+      iteratees?: $ReadOnlyArray<Iteratee<T>>
+    ): Array<T>;
     sortBy<V, T: Object>(
       object: T,
       ...iteratees?: Array<OIteratee<T>>
     ): Array<V>;
-    sortBy<V, T: Object>(object: T, iteratees?: Array<OIteratee<T>>): Array<V>;
+    sortBy<V, T: Object>(
+      object: T,
+      iteratees?: $ReadOnlyArray<OIteratee<T>>
+    ): Array<V>;
 
     // Date
     now(): number;
@@ -1238,7 +1250,7 @@ declare module "lodash" {
     toPairs(object?: ?Object | Array<*>): Array<[string, any]>;
     toPairsIn(object?: ?Object): Array<[string, any]>;
     transform(
-      collection: Object | Array<any>,
+      collection: Object | $ReadOnlyArray<any>,
       iteratee?: ?OIteratee<*>,
       accumulator?: any
     ): any;
@@ -1633,18 +1645,14 @@ declare module "lodash/fp" {
       array: $ReadOnlyArray<T>
     ): T[];
     differenceWith<T>(
-      values: $ReadOnly<T>
-    ): ((comparator: Comparator<T>) => (array: $ReadOnly<T>) => T[]) &
-      ((comparator: Comparator<T>, array: $ReadOnly<T>) => T[]);
+      values: $ReadOnlyArray<T>
+    ): ((comparator: Comparator<T>) => (array: $ReadOnlyArray<T>) => T[]) &
+      ((comparator: Comparator<T>, array: $ReadOnlyArray<T>) => T[]);
     differenceWith<T>(
-      values: $ReadOnly<T>,
+      values: $ReadOnlyArray<T>,
       comparator: Comparator<T>
-    ): (array: $ReadOnly<T>) => T[];
-    differenceWith<T>(
-      values: $ReadOnly<T>,
-      comparator: Comparator<T>,
-      array: $ReadOnly<T>
-    ): T[];
+    ): (array: $ReadOnlyArray<T>) => T[];
+    differenceWith<T>(values: $ReadOnlyArray<T>, comparator: Comparator<T>, array: $ReadOnlyArray<T>): T[];
     drop<T>(n: number): (array: Array<T>) => Array<T>;
     drop<T>(n: number, array: Array<T>): Array<T>;
     dropLast<T>(n: number): (array: Array<T>) => Array<T>;
@@ -2114,10 +2122,12 @@ declare module "lodash/fp" {
     ): Array<T>;
     groupBy<V, T>(
       iteratee: ValueOnlyIteratee<T>
-    ): (collection: Array<T> | { [id: any]: T }) => { [key: V]: Array<T> };
+    ): (
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
+    ) => { [key: V]: Array<T> };
     groupBy<V, T>(
       iteratee: ValueOnlyIteratee<T>,
-      collection: Array<T> | { [id: any]: T }
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): { [key: V]: Array<T> };
     includes<T>(value: T): (collection: Array<T> | { [id: any]: T }) => boolean;
     includes<T>(value: T, collection: Array<T> | { [id: any]: T }): boolean;
@@ -2200,22 +2210,22 @@ declare module "lodash/fp" {
     pluck(iteratee: (char: string) => any): (str: string) => string;
     pluck(iteratee: (char: string) => any, str: string): string;
     orderBy<T>(
-      iteratees: Array<Iteratee<T> | OIteratee<*>> | string
+      iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<*>> | string
     ): ((
-      orders: Array<"asc" | "desc"> | string
-    ) => (collection: Array<T> | { [id: any]: T }) => Array<T>) &
+      orders: $ReadOnlyArray<"asc" | "desc"> | string
+    ) => (collection: $ReadOnlyArray<T> | { [id: any]: T }) => Array<T>) &
       ((
-        orders: Array<"asc" | "desc"> | string,
-        collection: Array<T> | { [id: any]: T }
+        orders: $ReadOnlyArray<"asc" | "desc"> | string,
+        collection: $ReadOnlyArray<T> | { [id: any]: T }
       ) => Array<T>);
     orderBy<T>(
-      iteratees: Array<Iteratee<T> | OIteratee<*>> | string,
-      orders: Array<"asc" | "desc"> | string
-    ): (collection: Array<T> | { [id: any]: T }) => Array<T>;
+      iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<*>> | string,
+      orders: $ReadOnlyArray<"asc" | "desc"> | string
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => Array<T>;
     orderBy<T>(
-      iteratees: Array<Iteratee<T> | OIteratee<*>> | string,
-      orders: Array<"asc" | "desc"> | string,
-      collection: Array<T> | { [id: any]: T }
+      iteratees: $ReadOnlyArray<Iteratee<T> | OIteratee<*>> | string,
+      orders: $ReadOnlyArray<"asc" | "desc"> | string,
+      collection: $ReadOnlyArray<T> | { [id: any]: T }
     ): Array<T>;
     partition<T>(
       predicate: Predicate<T> | OPredicate<T>
@@ -2279,11 +2289,15 @@ declare module "lodash/fp" {
       collection: Array<T> | { [id: any]: T }
     ): boolean;
     sortBy<T>(
-      iteratees: Array<Iteratee<T> | OIteratee<T>> | Iteratee<T> | OIteratee<T>
-    ): (collection: Array<T> | { [id: any]: T }) => Array<T>;
+      iteratees: | $ReadOnlyArray<Iteratee<T> | OIteratee<T>>
+      | Iteratee<T>
+      | OIteratee<T>
+    ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => Array<T>;
     sortBy<T>(
-      iteratees: Array<Iteratee<T> | OIteratee<T>> | Iteratee<T> | OIteratee<T>,
-      collection: Array<T> | { [id: any]: T }
+      iteratees: | $ReadOnlyArray<Iteratee<T> | OIteratee<T>>
+      | Iteratee<T>
+      | OIteratee<T>,
+      collection: $ReadOnlyArray<T> | { [id: any]: T },
     ): Array<T>;
 
     // Date
@@ -2952,16 +2966,18 @@ declare module "lodash/fp" {
     toPairsIn(object: Object): Array<[string, any]>;
     transform(
       iteratee: OIteratee<*>
-    ): ((accumulator: any) => (collection: Object | Array<any>) => any) &
-      ((accumulator: any, collection: Object | Array<any>) => any);
+    ): ((
+      accumulator: any
+    ) => (collection: Object | $ReadOnlyArray<any>) => any) &
+      ((accumulator: any, collection: Object | $ReadOnlyArray<any>) => any);
     transform(
       iteratee: OIteratee<*>,
       accumulator: any
-    ): (collection: Object | Array<any>) => any;
+    ): (collection: Object | $ReadOnlyArray<any>) => any;
     transform(
       iteratee: OIteratee<*>,
       accumulator: any,
-      collection: Object | Array<any>
+      collection: Object | $ReadOnlyArray<any>
     ): any;
     unset(path: Array<string> | string): (object: Object) => boolean;
     unset(path: Array<string> | string, object: Object): boolean;
