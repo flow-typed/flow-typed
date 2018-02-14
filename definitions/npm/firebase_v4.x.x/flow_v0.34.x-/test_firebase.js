@@ -184,3 +184,6 @@ firebase
       snp.foo;
     }
   })();
+
+// #23
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
