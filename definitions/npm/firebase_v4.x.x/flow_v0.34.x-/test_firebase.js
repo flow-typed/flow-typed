@@ -187,3 +187,9 @@ firebase
 
 // #23
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+firebase.auth().setPersistence('local');
+
+// $ExpectError
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.FOO);
+// $ExpectError
+firebase.auth().setPersistence('foo');
