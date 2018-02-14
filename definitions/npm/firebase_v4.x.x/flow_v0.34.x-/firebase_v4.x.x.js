@@ -80,7 +80,16 @@ declare interface $npm$firebase$auth$ApplicationVerifier {
   verify(): Promise<string>;
 }
 
+declare type $npm$firebase$auth$Auth$Persistence = {
+  +LOCAL: 'local',
+  +SESSION: 'session',
+  +NONE: 'none',
+}
+
+declare type $npm$firebase$auth$Auth$Persistence$Enum = $Values<$npm$firebase$auth$Auth$Persistence>
+
 declare class $npm$firebase$auth$Auth {
+  static Persistence: $npm$firebase$auth$Auth$Persistence;
   app: $npm$firebase$App;
   currentUser: $npm$firebase$auth$User;
   applyActionCode(code: string): Promise<void>;
@@ -103,6 +112,7 @@ declare class $npm$firebase$auth$Auth {
     completed?: () => void
   ): () => void;
   sendPasswordResetEmail(email: string): Promise<void>;
+  setPersistence(persistence: $npm$firebase$auth$Auth$Persistence$Enum): Promise<void>;
   signInAndRetrieveDataWithCredential(
     credential: $npm$firebase$auth$AuthCredential
   ): Promise<$npm$firebase$auth$UserCredential>;
