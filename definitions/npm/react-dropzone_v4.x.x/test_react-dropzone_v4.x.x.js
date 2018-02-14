@@ -1,5 +1,5 @@
 import React from "react";
-import Dropzone, { type ChildrenProps } from "react-dropzone";
+import Dropzone, { type ChildrenProps, type DropzoneFile } from "react-dropzone";
 
 <Dropzone />;
 
@@ -29,14 +29,17 @@ import Dropzone, { type ChildrenProps } from "react-dropzone";
   rejectStyle={{ height: '80px' }}
   disabledStyle={{ height: '90px' }}
   onClick={(event: SyntheticMouseEvent<>) => {}}
-  onDrop={(acceptedFiles: Array<File>, rejectedFiles: Array<File>, event: SyntheticDragEvent<>) => {}}
-  onDropAccepted={(acceptedFiles: Array<File>, event: SyntheticDragEvent<>) => {}}
-  onDropRejected={(rejectedFiles: Array<File>, event: SyntheticDragEvent<>) => {}}
+  onDrop={(acceptedFiles: Array<DropzoneFile>, rejectedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => {}}
+  onDropAccepted={(acceptedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => {}}
+  onDropRejected={(rejectedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => {}}
   onDragStart={(event: SyntheticDragEvent<>) => {}}
   onDragEnter={(event: SyntheticDragEvent<>) => {}}
   onDragOver={(event: SyntheticDragEvent<>) => {}}
   onDragLeave={(event: SyntheticDragEvent<>) => {}}
   onFileDialogCancel={() => {}}
+  ref={(ref: ?Dropzone) => {
+    if (ref) ref.open();
+  }}
 >
   {
     ({
@@ -55,9 +58,9 @@ import Dropzone, { type ChildrenProps } from "react-dropzone";
 <Dropzone
   accept="image/jpeg, image/png, application/pdf"
   onClick={() => {}}
-  onDrop={(acceptedFiles: Array<File>) => {}}
-  onDropAccepted={(acceptedFiles: Array<File>) => {}}
-  onDropRejected={(rejectedFiles: Array<File>) => {}}
+  onDrop={(acceptedFiles: Array<DropzoneFile>) => {}}
+  onDropAccepted={(acceptedFiles: Array<DropzoneFile>) => {}}
+  onDropRejected={(rejectedFiles: Array<DropzoneFile>) => {}}
   onDragStart={() => {}}
   onDragEnter={() => {}}
   onDragOver={() => {}}

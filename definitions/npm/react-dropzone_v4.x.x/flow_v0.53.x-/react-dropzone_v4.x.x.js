@@ -8,6 +8,10 @@ declare module "react-dropzone" {
     isDragReject: boolean,
   }
 
+  declare type DropzoneFile = File & {
+    preview?: string;
+  }
+
   declare type DropzoneProps = {
     accept?: string,
     children?: React$Node | (ChildrenProps) => React$Node,
@@ -31,9 +35,9 @@ declare module "react-dropzone" {
     rejectStyle?: Object,
     disabledStyle?: Object,
     onClick?: (event: SyntheticMouseEvent<>) => mixed,
-    onDrop?: (acceptedFiles: Array<File>, rejectedFiles: Array<File>, event: SyntheticDragEvent<>) => mixed,
-    onDropAccepted?: (acceptedFiles: Array<File>, event: SyntheticDragEvent<>) => mixed,
-    onDropRejected?: (rejectedFiles: Array<File>, event: SyntheticDragEvent<>) => mixed,
+    onDrop?: (acceptedFiles: Array<DropzoneFile>, rejectedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
+    onDropAccepted?: (acceptedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
+    onDropRejected?: (rejectedFiles: Array<DropzoneFile>, event: SyntheticDragEvent<>) => mixed,
     onDragStart?: (event: SyntheticDragEvent<>) => mixed,
     onDragEnter?: (event: SyntheticDragEvent<>) => mixed,
     onDragOver?: (event: SyntheticDragEvent<>) => mixed,
@@ -41,5 +45,9 @@ declare module "react-dropzone" {
     onFileDialogCancel?: () => mixed,
   };
 
-  declare module.exports: React$ComponentType<DropzoneProps>;
+  declare class Dropzone extends React$Component<DropzoneProps> {
+    open(): void;
+  }
+
+  declare module.exports: typeof Dropzone;
 }
