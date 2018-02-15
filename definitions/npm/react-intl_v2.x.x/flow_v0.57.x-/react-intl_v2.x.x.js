@@ -129,7 +129,7 @@ declare module "react-intl" {
 
   declare type ComponentWithDefaultProps<DefaultProps: {}, Props: {}> =
     React$ComponentType<Props> & { defaultProps: DefaultProps };
-  
+
   declare type InjectIntlOtions = {
     intlPropName?: string,
     withRef?: boolean
@@ -151,7 +151,7 @@ declare module "react-intl" {
     options?: InjectIntlOtions,
   ):
   IntlInjectedComponentClass<$Diff<OriginalProps, InjectIntlProvidedProps>, DefaultProps>
-  
+
   declare function injectIntl<OriginalProps: InjectIntlProvidedProps>
   (
     component: React$ComponentType<OriginalProps>,
@@ -249,7 +249,7 @@ declare module "react-intl" {
   > {}
   declare class IntlProvider extends React$Component<
     $npm$ReactIntl$IntlProviderConfig & {
-      children: React$Node,
+      children?: React$Node,
       initialNow?: $npm$ReactIntl$DateParseable
     }
   > {}
