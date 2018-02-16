@@ -1533,21 +1533,20 @@ declare module ramda {
   declare function path<V, A: null | void>(p: Array<string>, o: A): void;
   declare function path<V, A: mixed>(p: Array<string>, o: A): ?V;
 
-  declare function pathOr<T, V, A: NestedObject<V>>(
-    or: T,
-    ...rest: Array<void>
-  ): ((p: Array<string>, ...rest: Array<void>) => (o: ?A) => V | T) &
-    ((p: Array<string>, o: ?A) => V | T);
-  declare function pathOr<T, V, A: NestedObject<V>>(
-    or: T,
-    p: Array<string>,
-    ...rest: Array<void>
-  ): (o: ?A) => V | T;
-  declare function pathOr<T, V, A: NestedObject<V>>(
-    or: T,
-    p: Array<string>,
-    o: ?A
-  ): V | T;
+  declare type PathOr =
+    & (
+      <T, V, A: NestedObject<V>>(or: T) =>
+        & ((p: Array<string|number>) => (o: A) => V | T)
+        & ((p: Array<string|number>, o: A) => V | T)
+    )
+    & (
+      <T, V, A: NestedObject<V>>(or: T, p: Array<string|number>) => (o: A) => V | T
+    )
+    & (
+      <T, V, A: NestedObject<V>>(or: T, p: Array<string|number>, o: A ) => V | T
+    );
+
+  declare var pathOr: PathOr;
 
   declare function pick<A>(
     keys: Array<string>,

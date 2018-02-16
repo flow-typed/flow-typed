@@ -196,9 +196,19 @@ const path2: Object | number = _.path(["a", 1], { a: { "1": 2 } });
 const path3: ?Object = _.path(["a", "b"], { c: { b: 2 } });
 const path4: void = _.path(["a"], null);
 
-const pathOr: string | Object | number = _.pathOr("N/A", ["a", "b"], {
-  a: { b: 2 }
-});
+{ // #pathOr
+  { // it should work with basic form
+    const pathOr: string | Object | number = _.pathOr("N/A", ["a", 1], {
+      a: { [1]: 2 }
+    });
+  }
+
+  { // it should work with curried versions
+    const pathOr2 = _.pathOr('N/A', ['a'])({ a: 1 })
+    const pathOr3 = _.pathOr('N/A')(['a'], { a: 1 })
+    const pathOr4 = _.pathOr('N/A')(['a'])({ a: 1 })
+  }
+}
 
 const pck: Object = _.pick(["a", "d"], { a: 1, b: 2, c: 3, d: 4 });
 
