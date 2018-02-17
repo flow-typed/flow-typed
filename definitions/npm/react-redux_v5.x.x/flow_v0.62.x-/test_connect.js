@@ -116,8 +116,8 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
 function testMapDispatchToPropsPassesActionCreators() {
   type Props = {
     passtrough: number,
-    dispatch1: () => {},
-    dispatch2: () => {}
+    dispatch1: (num: number) => void,
+    dispatch2: () => void
   };
   class Com extends React.Component<Props> {
     render() {
@@ -126,7 +126,7 @@ function testMapDispatchToPropsPassesActionCreators() {
   }
 
   const mapDispatchToProps = {
-    dispatch1: () => {},
+    dispatch1: (num: number) => {},
     dispatch2: () => {}
   };
   const Connected = connect(null, mapDispatchToProps)(Com);
@@ -134,12 +134,20 @@ function testMapDispatchToPropsPassesActionCreators() {
   //$ExpectError no passTrough
   <Connected/>;
 
-  const mapDispatchToProps2 = {
-    dispatch1: () => {}
+  const mapDispatchToPropsWithoutDispatch2 = {
+    dispatch1: (num: number) => {}
   };
-  const Connected2 = connect(null, mapDispatchToProps2)(Com);
+  const Connected2 = connect(null, mapDispatchToPropsWithoutDispatch2)(Com);
   //$ExpectError no dispatch2
   <Connected2 passtrough={123}/>;
+
+  const mapDispatchToPropsWithWrongDispatch1 = {
+    //$ExpectError dispatch1 should be number
+    dispatch1: (num: string) => {},
+    dispatch2: () => {}
+  };
+  const Connected3 = connect(null, mapDispatchToPropsWithWrongDispatch1)(Com);
+  <Connected3 passtrough={123}/>;
 }
 
 function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
