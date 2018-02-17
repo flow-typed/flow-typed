@@ -83,15 +83,15 @@ declare module "react-redux" {
   declare function connect<PR: Object>(
     mapStateToProps?: null,
     mapDispatchToProps?: null
-  ): (ComponentType<PR>) => ComponentType<PR>;
+  ): (ComponentType<PR>) => ComponentType<$Diff<PR, {dispatch: any}>>;
   declare function connect<A, OP: Object, P: Object, SP: Object, DP: Object,PR: Object>(
     mapStateToProps: MapStateToProps<P, SP>,
     mapDispatchToProps: MapDispatchToProps<A, OP, DP>
-  ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<$Diff<PR, {dispatch: any}>, SP>, DP> & P & OP>;
+  ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<PR, SP>, DP> & P & OP>;
   declare function connect<A, OP: Object, DP: Object,PR: Object>(
     mapStateToProps?: null,
     mapDispatchToProps: MapDispatchToProps<A, OP, DP>
-  ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<PR, {dispatch: any}>, DP> & OP>;
+  ): (ComponentType<PR>) => ComponentType<$Diff<PR, DP> & OP>;
   declare function connect<PR: Object, MDP: Object>(
     mapStateToProps?: null,
     mapDispatchToProps: MDP
