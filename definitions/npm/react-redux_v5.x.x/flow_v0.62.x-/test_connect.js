@@ -177,3 +177,41 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
   //$ExpectError no dispatch2
   <Connected2 passtrough={123} forMapStateToProps="str"/>;
 }
+
+function testMergeProps() {
+  type Props = {
+    fromMergeProps: number,
+  };
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>
+        {this.props.fromMergeProps}
+      </div>;
+    }
+  }
+
+  type State = {a: number}
+  type MapStateToPropsProps = {forMapStateToProps: string}
+  const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
+    return {
+      fromMapStateToProps: state.a
+    }
+  }
+  type MapDispatchToPropsProps = {forMapDispatchToProps: string}
+  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+    return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
+  }
+  const mergeProps = (stateProps, dispatchProps, ownProps: {forMergeProps: number}) => {
+    return {fromMergeProps: 123};
+  }
+  const Connected = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Com);
+  <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} forMergeProps={1234} />;
+  //$ExpectError forMapStateToProps missing
+  <Connected forMapDispatchToProps={'more data'} forMergeProps={1234} />;
+  //$ExpectError forMergeProps is missing
+  <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
+  //$ExpectError forMapDispatchToProps is missing
+  <Connected forMapStateToProps={'data'} forMergeProps={1234} />;
+  //$ExpectError forMapDispatchToProps is wrong type
+  <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} forMergeProps={'not number'} />;
+}
