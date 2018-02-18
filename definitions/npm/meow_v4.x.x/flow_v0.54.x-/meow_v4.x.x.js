@@ -12,7 +12,7 @@ declare module "meow" {
     [key: string]: MinimistOption
   };
 
-  declare type Options = string | Array<string> | {|
+  declare type Options = {|
     description?: string | boolean,
     help?: string | boolean,
     version?: string | boolean,
