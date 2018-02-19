@@ -9,6 +9,7 @@ declare module "socket.io-client" {
     reconnectionDelayMax: number,
     randomizationFactor: number,
     timeout: number,
+    transports: ("polling" | "websocket")[],
     autoConnect: boolean,
     query: { [string]: string },
     parser: any
