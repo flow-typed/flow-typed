@@ -102,7 +102,7 @@ declare module "react-redux" {
   ): (ComponentType<PR>) => ComponentType<$Diff<$Diff<PR, R>, MDP> & P>;
   declare function connect<A, OP: Object, P: Object, SP: Object, DP: Object, PR: Object, MP: Object, MRP: Object>(
     mapStateToProps: MapStateToProps<P, SP>,
-    mapDispatchToProps: MapDispatchToProps<A, OP, DP>,
+    mapDispatchToProps: ?MapDispatchToProps<A, OP, DP>,
     mergeProps: MergeProps<SP, DP, MP, MRP>
   ): (ComponentType<PR>) => ComponentType<$Diff<PR, MRP> & P & OP & MP>;
 }
