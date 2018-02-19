@@ -33,7 +33,7 @@ declare module "react-addons-test-utils" {
   declare function findRenderedDOMComponentWithClass(
     tree: React.Component,
     className: string
-  ): ?Element;
+  ): Element;
   declare function scryRenderedDOMComponentsWithTag(
     tree: React.Component,
     tagName: string
@@ -41,7 +41,7 @@ declare module "react-addons-test-utils" {
   declare function findRenderedDOMComponentWithTag(
     tree: React.Component,
     tagName: string
-  ): ?Element;
+  ): Element;
   declare function scryRenderedComponentsWithType(
     tree: React.Component,
     componentClass: React.ElementType
@@ -49,7 +49,7 @@ declare module "react-addons-test-utils" {
   declare function findRenderedComponentWithType(
     tree: React.Component,
     componentClass: React.ElementType
-  ): ?React.Component;
+  ): React.Component;
   declare class ReactShallowRender {
     render(element: React.Element<any>): void;
     getRenderOutput(): React.Element<any>;
