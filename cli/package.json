@@ -42,7 +42,9 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.4.0",
     "babel-plugin-syntax-async-functions": "^6.5.0",
     "babel-plugin-syntax-trailing-function-commas": "^6.22.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
@@ -54,7 +56,8 @@
     "eslint-plugin-prettier": "^2.5.0",
     "flow-bin": "0.64.0",
     "jest": "^22.1.4",
-    "prettier": "^1.9.2"
+    "prettier": "^1.9.2",
+    "regenerator-runtime": "^0.11.1"
   },
   "keywords": ["flow", "flowtype"],
   "jest": {
