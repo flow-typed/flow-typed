@@ -5,7 +5,7 @@ declare module "sha3" {
     digest(type?: 'hex' | 'binary'): string;
   }
 
-  declare module .exports: {
+  declare module.exports: {
     SHA3Hash: Class<SHA3Hash>
   }
 }
