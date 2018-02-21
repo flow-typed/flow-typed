@@ -223,3 +223,20 @@ function testMergeProps() {
   //$ExpectError forMapDispatchToProps is wrong type
   <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} forMergeProps={'not number'} />;
 }
+
+function testOptions() {
+  class Com extends React.Component<{}> {
+    render() {
+      return <div></div>;
+    }
+  }
+  connect(null, null, null, {pure: true})(Com);
+  connect(null, null, null, {withRef: true})(Com);
+  connect(null, null, null, {pure: false, withRef: false})(Com);
+  // $ExpectError wrong type
+  connect(null, null, null, {pure: 123})(Com);
+  // $ExpectError wrong type
+  connect(null, null, null, {ref: 123})(Com);
+  // $ExpectError wrong key
+  connect(null, null, null, {wrongKey: true})(Com);
+}

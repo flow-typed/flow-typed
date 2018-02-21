@@ -66,10 +66,10 @@ declare module "react-redux" {
     subKey?: string
   ): Provider<*, *>;
 
-  declare type ConnectOptions = {
+  declare type ConnectOptions = {|
     pure?: boolean,
     withRef?: boolean
-  };
+  |};
 
   declare type Null = null | void;
 
@@ -104,5 +104,11 @@ declare module "react-redux" {
     mapStateToProps: MapStateToProps<P, SP>,
     mapDispatchToProps: ?MapDispatchToProps<A, OP, DP>,
     mergeProps: MergeProps<SP, DP, MP, MRP>
+  ): (ComponentType<PR>) => ComponentType<$Diff<PR, MRP> & P & OP & MP>;
+  declare function connect<A, OP: Object, P: Object, SP: Object, DP: Object, PR: Object, MP: Object, MRP: Object>(
+    mapStateToProps: ?MapStateToProps<P, SP>,
+    mapDispatchToProps: ?MapDispatchToProps<A, OP, DP>,
+    mergeProps: ?MergeProps<SP, DP, MP, MRP>,
+    options: ConnectOptions
   ): (ComponentType<PR>) => ComponentType<$Diff<PR, MRP> & P & OP & MP>;
 }
