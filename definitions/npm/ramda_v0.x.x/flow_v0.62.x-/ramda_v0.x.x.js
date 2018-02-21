@@ -1689,6 +1689,9 @@ declare module ramda {
     spec: T
   ): (...args: A) => NestedObject<S>;
 
+  declare function applyTo<T>(value: T): <R>(fn: (value: T) => R) => R
+  declare function applyTo<T, R>(value: T, fn: (value: T) => R): R
+
   declare function binary<T>(
     fn: (...args: Array<any>) => T
   ): (x: any, y: any) => T;
