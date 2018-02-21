@@ -16,7 +16,7 @@ function testPassingPropsToConnectedComponent() {
   };
   const mapStateToProps = (state: State, props: InputProps) => {
     return {
-      fromStateToProps: state.a
+      fromStateToProps: 'str' + state.a
     }
   };
 
@@ -70,7 +70,7 @@ function testMapDispatchToProps() {
   type MapStateToPropsProps = {forMapStateToProps: string}
   const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
     return {
-      fromMapStateToProps: state.a
+      fromMapStateToProps: 'str' + state.a
     }
   }
   type MapDispatchToPropsProps = {forMapDispatchToProps: string}
