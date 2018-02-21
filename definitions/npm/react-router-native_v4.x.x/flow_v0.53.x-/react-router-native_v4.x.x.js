@@ -67,9 +67,9 @@ declare module "react-router-native" {
   };
 
   declare export type ContextRouter = {|
-    history: RouterHistory,
-    location: Location,
-    match: Match
+    history: RouterHistory | void,
+    location: Location | void,
+    match: Match | void,
   |};
 
   declare export type GetUserConfirmation = (
@@ -124,9 +124,9 @@ declare module "react-router-native" {
     children?: React$Node
   }> {}
 
-  declare export function withRouter<P>(
-    Component: React$ComponentType<{| ...ContextRouter, ...P |}>
-  ): React$ComponentType<P>;
+  declare export function withRouter<P: $Supertype<ContextRouter>>(
+    Component: React$ComponentType<P>
+  ): React$ComponentType<$Exact<$Diff<P, ContextRouter>>>;
 
   declare type MatchPathOptions = {
     path?: string,
