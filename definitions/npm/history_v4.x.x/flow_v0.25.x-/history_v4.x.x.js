@@ -3,7 +3,7 @@ declare type Action = "PUSH" | "REPLACE" | "POP";
 declare module "history/createBrowserHistory" {
   declare function Unblock(): void;
 
-  declare type BrowserLocation = {
+  declare export type BrowserLocation = {
     pathname: string,
     search: string,
     hash: string,
@@ -42,7 +42,7 @@ declare module "history/createBrowserHistory" {
 declare module "history/createMemoryHistory" {
   declare function Unblock(): void;
 
-  declare type MemoryLocation = {
+  declare export type MemoryLocation = {
     pathname: string,
     search: string,
     hash: string,
@@ -86,13 +86,13 @@ declare module "history/createMemoryHistory" {
 declare module "history/createHashHistory" {
   declare function Unblock(): void;
 
-  declare type HashLocation = {
+  declare export type HashLocation = {
     pathname: string,
     search: string,
     hash: string,
   };
 
-  declare type HashHistory = {
+  declare export type HashHistory = {
     length: number,
     location: HashLocation,
     action: Action,
