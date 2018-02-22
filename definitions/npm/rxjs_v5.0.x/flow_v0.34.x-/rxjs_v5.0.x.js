@@ -1491,19 +1491,17 @@ declare interface rxjs$Operator<T, R> {
   call(subscriber: rxjs$Subscriber<R>, source: any): rxjs$TeardownLogic;
 }
 
-// FIXME(samgoldman) should be `mixins rxjs$Observable<T>, rxjs$Observer<T>`
-// once Babel parsing support exists: https://phabricator.babeljs.io/T6821
-declare class rxjs$Subject<T> extends rxjs$Observable<T> {
+declare class rxjs$Subject<T> extends rxjs$Observable<T> mixins rxjs$Observer<T> {
+  static create<T>(
+    destination: rxjs$Observer<T>,
+    source: rxjs$Observable<T>
+  ): rxjs$AnonymousSubject<T>;
+
   asObservable(): rxjs$Observable<T>;
 
   observers: Array<rxjs$Observer<T>>;
 
   unsubscribe(): void;
-
-  // Copied from rxjs$Observer<T>
-  next(value: T): mixed;
-  error(error: any): mixed;
-  complete(): mixed;
 
   // For use in subclasses only:
   _next(value: T): void;
