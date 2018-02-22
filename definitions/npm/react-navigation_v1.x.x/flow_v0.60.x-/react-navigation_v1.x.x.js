@@ -949,7 +949,9 @@ declare module 'react-navigation' {
   };
   declare export var SafeAreaView: React$ComponentType<_SafeAreaViewProps>;
 
-  declare export var Header: React$ComponentType<HeaderProps>;
+  declare export class Header<P: HeaderProps, S> extends React$Component<P, S> {
+    static HEIGHT: number
+  }
 
   declare type _HeaderTitleProps = {
     children: React$Node,
