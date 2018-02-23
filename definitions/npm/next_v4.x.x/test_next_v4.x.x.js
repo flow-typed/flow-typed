@@ -1,7 +1,6 @@
 import React from "react";
 import next from "next";
 import Link from "next/link";
-import Prefetch from "next/prefetch";
 import Head from "next/head";
 import Router from "next/router";
 import Document, {
@@ -30,12 +29,18 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
+    let q: Object | void;
+
+    if (typeof query === "object") {
+      q = query;
+    }
+
     if (pathname === "/") {
-      app.render(req, res, "/index", query);
+      app.render(req, res, "/index", q);
     } else if (pathname === "/foo") {
-      app.render(req, res, "/index", query);
+      app.render(req, res, "/index", q);
     } else if (pathname === "/about") {
-      app.render(req, res, "/about", query);
+      app.render(req, res, "/about", q);
     } else {
       handle(req, res, parsedUrl);
     }
@@ -50,19 +55,12 @@ app.prepare().then(() => {
 </Head>;
 
 <Link href="/">Index</Link>;
-<Prefetch href="/">Prefetch</Prefetch>;
-<Prefetch href="/" prefetch={false}>
-  Prefetch
-</Prefetch>;
 
 // $ExpectError
-<Link href={1}>InvalidNumLink</Link> |
-  (
-    // $ExpectError
-    <Prefetch href="/" prefetch={() => {}}>
-      Prefetch
-    </Prefetch>
-  );
+<Link href={1}>InvalidNumLink</Link>;
+
+// $ExpectError
+Router.onRouteChangeStart = {};
 
 Router.onRouteChangeStart = (url: string) => {};
 Router.onRouteChangeStart = null;
@@ -75,6 +73,9 @@ Router.onRouteChangeError = (err, url) => {
     console.log(`Route to ${url} was cancelled!`);
   }
 };
+
+// $ExpectError
+Router.push({});
 
 Router.push("/about");
 Router.push("/about", "/");
