@@ -1,7 +1,8 @@
 /** @flow */
+import * as React from 'react';
 import { reduxForm, reducer } from 'redux-form';
 import type { InputProps } from 'redux-form';
-import React from 'react';
+
 const Input = (props: InputProps) => {
     (props.onChange: (v: string) => mixed);
     (props.onChange: (v: SyntheticEvent<any>) => mixed);
