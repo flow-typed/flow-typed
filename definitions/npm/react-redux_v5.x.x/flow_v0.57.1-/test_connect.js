@@ -3,8 +3,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 function testPassingPropsToConnectedComponent() {
-  type Props = {passtrough: number, fromStateToProps: string};
+  type Props = {passtrough: number, passtroughWithDefaultProp: number, fromStateToProps: string};
   class Com extends React.Component<Props> {
+    static defaultProps = { passtroughWithDefaultProp: 123 };
     render() {
       return <div>{this.props.passtrough} {this.props.fromStateToProps}</div>;
     }
@@ -21,12 +22,49 @@ function testPassingPropsToConnectedComponent() {
   };
 
   const Connected = connect(mapStateToProps)(Com);
+  <Connected passtrough={123} forMapStateToProps={'data'} passtroughWithDefaultProp={123}/>;
+  // OK without passtroughWithDefaultProp
   <Connected passtrough={123} forMapStateToProps={'data'}/>;
+  //$ExpectError wrong type for passtrough
+  <Connected passtrough={''} forMapStateToProps={'data'} passtroughWithDefaultProp={123}/>;
+  //$ExpectError wrong type for forMapStateToProps
+  <Connected passtrough={123} forMapStateToProps={321} passtroughWithDefaultProp={123}/>;
+  //$ExpectError wrong type for  passtroughWithDefaultProp
+  <Connected passtrough={123} forMapStateToProps={'data'} passtroughWithDefaultProp={''}/>;
   //$ExpectError passtrough missing
   <Connected forMapStateToProps={'data'} />;
   //$ExpectError forMapStateToProps missing
   <Connected passtrough={123}/>;
+  //$ExpectError takes in only React components
+  connect(mapStateToProps)('');
+}
 
+function testWithStatelessFunctionalComponent() {
+  type Props = {passtrough: number, fromStateToProps: string};
+  const Com = (props: Props) => <div>{props.passtrough} {props.fromStateToProps}</div>
+
+  type State = {a: number};
+  type InputProps = {
+    forMapStateToProps: string
+  };
+  const mapStateToProps = (state: State, props: InputProps) => {
+    return {
+      fromStateToProps: 'str' + state.a
+    }
+  };
+
+  const Connected = connect(mapStateToProps)(Com);
+  <Connected passtrough={123} forMapStateToProps={'data'}/>;
+  //$ExpectError wrong type for passtrough
+  <Connected passtrough={''} forMapStateToProps={'data'}/>;
+  //$ExpectError wrong type for forMapStateToProps
+  <Connected passtrough={123} forMapStateToProps={321} />;
+  //$ExpectError passtrough missing
+  <Connected forMapStateToProps={'data'} />;
+  //$ExpectError forMapStateToProps missing
+  <Connected passtrough={123}/>;
+  //$ExpectError takes in only React components
+  connect(mapStateToProps)('');
 }
 
 function testMapStateToPropsDoesNotNeedProps() {
