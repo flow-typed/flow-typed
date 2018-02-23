@@ -38,9 +38,14 @@ declare module "react-redux" {
     ownProps: MP
   ) => RMP;
 
-  declare type ConnectOptions = {|
+  declare type ConnectOptions<S: Object, OP: Object, RSP: Object, RMP: Object> = {|
     pure?: boolean,
-    withRef?: boolean
+    withRef?: boolean,
+    areStatesEqual?: (next: S, prev: S) => boolean,
+    areOwnPropsEqual?: (next: OP, prev: OP) => boolean,
+    areStatePropsEqual?: (next: RSP, prev: RSP) => boolean,
+    areMergedPropsEqual?: (next: RMP, prev: RMP) => boolean,
+    storeKey?: string
   |};
 
   declare type OmitDispatch<Component> = $Diff<Component, {dispatch: Dispatch<*>}>;
@@ -81,10 +86,10 @@ declare module "react-redux" {
     mergeProps: MergeProps<RSP, RDP, MP, RMP>
   ): (component: Com) => ComponentType<$Diff<ElementConfig<Com>, RMP> & SP & DP & MP>;
 
-  declare export function connect<Com: ComponentType<*>,A, DP: Object, SP: Object, RSP: Object, RDP: Object, MP: Object, RMP: Object>(
+  declare export function connect<Com: ComponentType<*>, A, DP: Object, SP: Object, RSP: Object, RDP: Object, MP: Object, RMP: Object>(
     mapStateToProps: ?MapStateToProps<SP, RSP>,
     mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP>,
     mergeProps: ?MergeProps<RSP, RDP, MP, RMP>,
-    options: ConnectOptions
+    options: ConnectOptions<*, SP & DP & MP, RSP, RMP>
   ): (component: Com) => ComponentType<$Diff<ElementConfig<Com>, RMP> & SP & DP & MP>;
 }
