@@ -1,26 +1,55 @@
+// @flow
+
 declare module "next" {
-  declare export type RequestHandler = (req: http$IncomingMessage, res: http$ServerResponse, parsedUrl: any) => Promise<void>;
+  declare export type RequestHandler = (
+    req: http$IncomingMessage,
+    res: http$ServerResponse, parsedUrl: any
+  ) => Promise<void>;
+
   declare export type NextApp = {
     prepare(): Promise<void>,
     getRequestHandler(): RequestHandler,
-    render(req: http$IncomingMessage, res: http$ServerResponse, pathname: string, query: any): any,
-    renderToHTML(req: http$IncomingMessage, res: http$ServerResponse, pathname: string, query: string): string,
-    renderError(err: Error, req: http$IncomingMessage, res: http$ServerResponse, pathname: any, query: any): any,
-    renderErrorToHTML(err: Error, req: http$IncomingMessage, res: http$ServerResponse, pathname: string, query: any): string,
+    render(
+      req: http$IncomingMessage,
+      res: http$ServerResponse,
+      pathname: string,
+      query: any
+    ): any,
+    renderToHTML(
+      req: http$IncomingMessage,
+      res: http$ServerResponse,
+      pathname: string,
+      query: string
+    ): string,
+    renderError(
+      err: Error,
+      req: http$IncomingMessage,
+      res: http$ServerResponse,
+      pathname: any,
+      query: any
+    ): any,
+    renderErrorToHTML(
+      err: Error,
+      req: http$IncomingMessage,
+      res: http$ServerResponse,
+      pathname: string,
+      query: any
+    ): string,
   };
+
   declare export type Options = {
     dev?: boolean,
     dir?: string,
     quiet?: boolean,
     staticMarkup?: boolean,
   };
-  declare module.exports: (opts: Options) => NextApp;
+  declare export default (opts: Options) => NextApp;
 }
 
 declare module "next/head" {
-  import type {Component} from 'react';
+  import type { Component } from 'react';
 
-  declare export default Class<Component<void, *, *>>;
+  declare export default Class<Component<*, *>>;
 }
 
 declare module "next/link" {
@@ -40,23 +69,25 @@ declare module "next/link" {
     +hash?: string
   };
 
-  declare export type State = {
+  declare export type Props = {
     href: string | URLObject,
     as?: string | URLObject
   };
-  declare export default Class<Component<void, State, *>>
+
+  declare export default Class<Component<Props>>
 }
 
 declare module "next/prefetch" {
   import type {Component} from 'react';
 
-  declare export type State = {
+  declare export type Props = {
     href: string,
     prefetch?: boolean,
   };
+
   declare export var reloadIfPrefetched: any;
   declare export function prefetch(url: string): any;
-  declare export default Class<Component<void, State, *>>;
+  declare export default Class<Component<Props>>;
 }
 
 declare module "next/router" {
@@ -77,7 +108,7 @@ declare module "next/router" {
 }
 
 declare module "next/document" {
-  import type {Component} from 'react';
+  import type { Component } from 'react';
 
   declare export type Context = {
     pathname: string,
@@ -87,10 +118,11 @@ declare module "next/document" {
     xhr?: any,
     err?: any,
   };
-  declare export var Head: Class<Component<void, *, *>>;
-  declare export var Main: Class<Component<void, *, *>>;
-  declare export var NextScript: Class<Component<void, *, *>>;
-  declare export default Class<Component<void, *, *>> & {
+
+  declare export var Head: Class<Component<*, *>>;
+  declare export var Main: Class<Component<*, *>>;
+  declare export var NextScript: Class<Component<*, *>>;
+  declare export default Class<Component<*, *>> & {
     getInitialProps: (ctx: Context) => Promise<*>;
     renderPage(cb: Function): void;
   };

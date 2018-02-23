@@ -1,9 +1,17 @@
+// @flow
+
+import React from "react";
 import next from "next";
 import Link from 'next/link'
 import Prefetch from 'next/prefetch'
 import Head from 'next/head'
 import Router from 'next/router'
-import Document, {Main, Head as DocumentHead, NextScript} from "next/document"
+import Document, {
+  type Context,
+  Main,
+  Head as DocumentHead,
+  NextScript
+} from "next/document"
 const { createServer } = require('http')
 const { parse } = require('url')
 
@@ -50,9 +58,13 @@ app.prepare()
 <Prefetch href='/' prefetch={false}>Prefetch</Prefetch>;
 
 // $ExpectError
-<Link href={1}>InvalidNumLink</Link>|
+<Link href={1}>InvalidNumLink</Link>;
+
 // $ExpectError
 <Prefetch href='/' prefetch={() => {}}>Prefetch</Prefetch>;
+
+// $ExpectError
+Router.onRouteChangeStart = {};
 
 Router.onRouteChangeStart = (url: string) => {};
 Router.onRouteChangeStart = null;
@@ -76,7 +88,7 @@ const p: string = Router.pathname;
 const q: {} = Router.query;
 
 export default class TestDocument extends Document {
-  static async getInitialProps (ctx) {
+  static async getInitialProps (ctx: Context) {
     const props = await Document.getInitialProps(ctx)
     return { ...props, customValue: 'hi there!' }
   }
