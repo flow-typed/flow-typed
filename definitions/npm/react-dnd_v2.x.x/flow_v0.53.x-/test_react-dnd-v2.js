@@ -458,13 +458,14 @@ const DndCustomDragLayer = DragLayer(dragLayerCollect)(CustomDragLayer);
 
 type BoardProps = {
   width: number,
-  height: number
+  height: number,
+  playable: bool,
 };
 
 class Board extends React.Component<BoardProps> {
   static defaultProps: BoardProps = {
     width: 400,
-    height: 400
+    height: 400,
   };
 
   render() {
@@ -479,3 +480,6 @@ class Board extends React.Component<BoardProps> {
 const DndBoard = DragDropContext({})(Board);
 
 (DndBoard.DecoratedComponent: typeof Board);
+
+// $ExpectError: Missing required prop: playable
+const board = <DndBoard />
