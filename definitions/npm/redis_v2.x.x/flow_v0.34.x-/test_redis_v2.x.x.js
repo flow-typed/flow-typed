@@ -118,3 +118,10 @@ client.flushall((error) => {
 client.hgetall("key", (error: ?Error, result: ?{[key: string]: string}) => {})
 // $ExpectError
 client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: ?{[key: string]: string}) => {})
+
+
+client.lrem('my-key', 5, 'value', (error: ?Error, count: number) => {});
+// $ExpectError
+client.lrem('my-key', 5, (error: ?Error, count: number) => {});
+// $ExpectError
+client.lrem('my-key', 5, 'value', (error: ?Error, result: string) => {});

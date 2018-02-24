@@ -18,9 +18,9 @@ declare module "redis" {
     ) => void;
     lrem: (
       topic: string,
-      cursor: number,
+      count: number,
       value: string,
-      callback?: (error: ?Error, entries: ?Array<string>) => void
+      callback?: (error: ?Error, entries: number) => void
     ) => void;
     lrange: (
       topic: string,
