@@ -199,11 +199,11 @@ declare interface TestCafe$SelectorPromise extends TestCafe$SelectorAPI, Promise
 
 }
 
-declare interface TestCafe$CustomMethodsSelectorPromiseI<T> extends TestCafe$SelectorAPI, Promise<TestCafe$NodeSnapshot & $ObjMap<T, TestCafe$CustomMethodsTypeTransform>> {
+declare interface TestCafe$CustomMethodsSelectorPromiseI<T> extends TestCafe$SelectorAPI, Promise<TestCafe$NodeSnapshot & $ObjMap<T, TestCafe$CustomMethodsSelectorTypeTransform>> {
 
 }
 
-declare type TestCafe$CustomMethodsSelectorPromise<T> = TestCafe$CustomMethodsSelectorPromiseI<T> & $ObjMap<T, TestCafe$CustomMethodsTypeTransform>;
+declare type TestCafe$CustomMethodsSelectorPromise<T> = TestCafe$CustomMethodsSelectorPromiseI<T> & $ObjMap<T, TestCafe$CustomMethodsSelectorTypeTransform>;
 
 declare interface TestCafe$CustomPropsSelectorPromiseI<T> extends TestCafe$SelectorAPI, Promise<TestCafe$NodeSnapshot & $ObjMap<T, TestCafe$CustomPropsSnapshotTypeTransform>> {
 
@@ -582,7 +582,7 @@ declare interface TestCafe$CustomSelectorFnI<T> extends TestCafe$SelectorAPI, Te
 
 declare type TestCafe$CustomPropsSelectorFn<T> = TestCafe$CustomSelectorFnI<TestCafe$CustomPropsSelectorPromise<T>> & $ObjMap<T, TestCafe$CustomPropsSelectorTypeTransform>;
 
-declare type TestCafe$CustomMethodsSelectorFn<T> = TestCafe$CustomSelectorFnI<TestCafe$CustomMethodsSelectorPromise<T>> & $ObjMap<T, TestCafe$CustomMethodsTypeTransform>;
+declare type TestCafe$CustomMethodsSelectorFn<T> = TestCafe$CustomSelectorFnI<TestCafe$CustomMethodsSelectorPromise<T>> & $ObjMap<T, TestCafe$CustomMethodsSelectorTypeTransform>;
 
 declare interface TestCafe$ClientFunctionFn {
     (...args: any[]): Promise<any>,
@@ -651,4 +651,3 @@ declare module 'testcafe' {
         t: TestCafe$TestController
     };
 }
-
