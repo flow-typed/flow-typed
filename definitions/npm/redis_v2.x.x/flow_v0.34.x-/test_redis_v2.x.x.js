@@ -28,25 +28,25 @@ client.get('some-key', (error, value) => {
 });
 
 client.set('some-key', 'Some value');
-client.set('some-key', 'Some value', (error) => {
-  console.log('Error?', error);
-});
+client.set('some-key', 'Some value', (error: ?Error, res: 'OK') => {});
 // $ExpectError
 client.set('some-key');
 // $ExpectError
 client.set('some-key', { foo: 'bar' });
 
 client.setex('some-key', 12345, 'value');
-client.setex('some-key', 12345, 'value', (error) => {
-  if (error !== null) console.error(error);
-});
+client.setex('some-key', 12345, 'value', (error: ?Error, res: 'OK') => {});
 // $ExpectError
 client.setx('somekey', 'value');
 
+client.ttl('key', (error: ?Error, ttl: number) => {});
+// $ExpectError
+client.ttl('key', (error: ?Error, ttl: string) => {});
+
 client.del(['key1', 'key2', 'key3']);
-client.del(['key1', 'key2', 'key3'], (error) => {
-  if (error) console.error(error);
-});
+client.del(['key1', 'key2', 'key3'], (error: ?Error, numRemoved: number) => {});
+// $ExpectError
+client.del(['key1', 'key2', 'key3'], (error: ?Error, numRemoved: string) => {});
 
 client.hmset("some-key", { key1: "value1" }, err =>
   console.log("hmset error:", err)
@@ -55,7 +55,7 @@ client.rpush("some-list", "some-value", err =>
   console.log("rpush error:", err)
 );
 
-client.lpush("key", "value", (err, newLength: ?number) => {
+client.lpush("key", "value", (err, newLength: number) => {
   if (err) {
     console.log(`lpush error: ${err.message}`);
   }
@@ -67,7 +67,7 @@ client.lpush("key");
 // $ExpectError
 client.lpush("key", { foo: 'bar' });
 
-client.lrange("key", 0, 5, (error, entries: ?Array<string>) => {
+client.lrange("key", 0, 5, (error, entries: Array<string>) => {
   if (error !== null) {
     console.error(error);
     return;
@@ -75,7 +75,7 @@ client.lrange("key", 0, 5, (error, entries: ?Array<string>) => {
   if (entries) console.log(entries.join(','));
 });
 
-client.llen('key', (error, length: ?number) => {
+client.llen('key', (error, length: number) => {
   if (error !== null) {
     console.error(error);
     return;
@@ -85,10 +85,7 @@ client.llen('key', (error, length: ?number) => {
 
 // $ExpectError
 client.mget(["key1", "key2"], (error, entries: ?Array<string>) => {})
-// $ExpectError
-client.mget(["key1", "key2"], (error, entries: Array<?string>) => {})
-
-client.mget(["key1", "key2"], (error, entries: ?Array<?string>) => {
+client.mget(["key1", "key2"], (error, entries: Array<?string>) => {
   if (error === null) {
     console.log('Error!');
     return;
@@ -96,9 +93,7 @@ client.mget(["key1", "key2"], (error, entries: ?Array<?string>) => {
   if (entries) console.log(entries.join(','));
 });
 
-client.mset(["key1", "value1", "key2", "value"], (error) => {
-  if (error !== null) console.error(error);
-});
+client.mset(["key1", "value1", "key2", "value"], (error: ?Error, res: 'OK') => {});
 client.mset(["key1", "value1", "key2", "value"]);
 // $ExpectError
 client.mset([
@@ -111,11 +106,22 @@ client.mset([
 });
 
 client.flushall();
-client.flushall((error) => {
-  if (error !== null) console.error(error);
-});
+client.flushall((error: ?Error, res: 'OK') => {});
 
-client.hgetall("key", (error: ?Error, result: ?{[key: string]: string}) => {})
+client.hgetall("key", (error: ?Error, result: {[key: string]: string}) => {})
+// $ExpectError
+client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: {[key: string]: string}) => {})
+
+client.hdel('topic', 'key', (error: ?Error, numRemoved: number) => {});
+// $ExpectError
+client.hdel('topic', 'key', (error: ?Error, numRemoved: string) => {});
+// $ExpectError
+client.hdel('topic', 'key', (error: ?Error, res: string) => {});
+
+client.rpoplpush('source-key', 'destination-key', (error: ?Error, result: string) => {});
+// $ExpectError
+client.rpoplpush('source-key', 'destination-key', (error: ?Error, result: number) => {});
+
 // $ExpectError
 client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: ?{[key: string]: string}) => {})
 
@@ -125,3 +131,7 @@ client.lrem('my-key', 5, 'value', (error: ?Error, count: number) => {});
 client.lrem('my-key', 5, (error: ?Error, count: number) => {});
 // $ExpectError
 client.lrem('my-key', 5, 'value', (error: ?Error, result: string) => {});
+
+client.publish('topic', 'value', (error: ?Error, numReceivers: number) => {});
+// $ExpectError
+client.publish('topic', 'value', (error: ?Error, numReceivers: string) => {});
