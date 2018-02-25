@@ -14,7 +14,7 @@ declare module "redis" {
     lpush: (
       key: string,
       value: string,
-      callback?: (error: ?Error, newLength: ?number) => void
+      callback?: (error: ?Error, newLength: number) => void
     ) => void;
     lrem: (
       topic: string,
@@ -26,17 +26,17 @@ declare module "redis" {
       topic: string,
       cursor: number,
       cursor2: number,
-      callback: (error: ?Error, entries: ?Array<string>) => void
+      callback: (error: ?Error, entries: Array<string>) => void
     ) => void;
     llen: (
       key: string,
-      callback: (error: ?Error, length: ?number) => void
+      callback: (error: ?Error, length: number) => void
     ) => void;
     hset: (
       topic: string,
       key: string,
       value: string,
-      callback?: (error: ?Error, result: ?(0 | 1)) => void
+      callback?: (error: ?Error, result: (0 | 1)) => void
     ) => void;
     hget: (
       topic: string,
@@ -46,12 +46,12 @@ declare module "redis" {
     ) => void;
     hgetall: (
       topic: string,
-      callback: (error: ?Error, result: ?{[key: string]: string}) => void
+      callback: (error: ?Error, result: {[key: string]: string}) => void
     ) => void;
     hdel: (
       topic: string,
       key: string,
-      callback?: (error: ?Error, numRemoved: ?number) => void
+      callback?: (error: ?Error, numRemoved: number) => void
     ) => void;
     get: (
       key: string,
@@ -60,42 +60,42 @@ declare module "redis" {
     set: (
       key: string,
       value: string,
-      callback?: (error: ?Error, result: ?(0 | 1)) => void
+      callback?: (error: ?Error, result: 'OK') => void
     ) => void;
     setex: (
       key: string,
       timeout: number,
       value: string,
-      callback?: (error: ?Error, result: ?string) => void
+      callback?: (error: ?Error, result: 'OK') => void
     ) => void;
     ttl: (
       key: string,
-      callback: (error: ?Error, ttl: ?number) => void
+      callback: (error: ?Error, ttl: number) => void
     ) => void;
     del: (
       keys: Array<string>,
-      callback?: (error: ?Error, numRemoved: ?number) => void
+      callback?: (error: ?Error, numRemoved: number) => void
     ) => void;
     mget: (
       keys: Array<string>,
-      callback: (error: ?Error, values: ?Array<?string>) => void
+      callback: (error: ?Error, values: Array<?string>) => void
     ) => void;
     mset: (
       keysAndValues: Array<string>,
-      callback?: (error: ?Error, result: ?string) => void
+      callback?: (error: ?Error, result: 'OK') => void
     ) => void;
     rpoplpush: (
       source: string,
       destination: string,
-      callback?: (error: ?Error, result: ?string) => void
+      callback?: (error: ?Error, result: string) => void
     ) => void;
     flushall: (
-      callback?: (error: ?Error, result: ?string) => void
+      callback?: (error: ?Error, result: 'OK') => void
     ) => void;
     publish: (
       topic: string,
       value: any,
-      callback?: (error: ?Error, numReceivers: ?number) => void
+      callback?: (error: ?Error, numReceivers: number) => void
     ) => void;
     subscribe: (topic: string) => void;
     unsubscribe: (topic: string) => void;
