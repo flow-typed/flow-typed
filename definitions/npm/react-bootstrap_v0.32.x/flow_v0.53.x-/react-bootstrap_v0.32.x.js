@@ -644,4 +644,49 @@ declare module "react-bootstrap" {
     getDimensionValue?: Function,
     role?: string
   }> {}
+
+  declare export class Grid extends React$Component<{
+    fluid?: boolean,
+    componentClass?: ElementType,
+    bsClass?: string
+  }> {}
+
+  declare export class Row extends React$Component<{
+    componentClass?: ElementType,
+    bsClass?: string
+  }> {}
+
+  declare export class Col extends React$Component<{
+    componentClass?: ElementType,
+    xs?: number,
+    sm?: number,
+    md?: number,
+    lg?: number,
+    xsHidden?: number,
+    smHidden?: number,
+    mdHidden?: number,
+    lgHidden?: number,
+    xsOffset?: number,
+    smOffset?: number,
+    mdOffset?: number,
+    lgOffset?: number,
+    xsPush?: number,
+    smPush?: number,
+    mdPush?: number,
+    lgPush?: number,
+    xsPull?: number,
+    smPull?: number,
+    mdPull?: number,
+    lgPull?: number,
+    bsClass?: string
+  }> {}
+
+  declare export class Row extends React$Component<{
+    componentClass?: ElementType,
+    visibleXsBlock?: boolean,
+    visibleSmBlock?: boolean,
+    visibleMdBlock?: boolean,
+    visibleLgBlock?: boolean,
+    bsClass?: string
+  }> {}
 }
