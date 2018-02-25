@@ -1,9 +1,9 @@
 declare module "react-bootstrap" {
-  import type { Node, Element } from 'react';
+  import type { Node, Element, Component } from 'react';
   declare type BsSize = 'lg' | 'large' | 'sm' | 'small';
   declare type BsStyle = 'lg' | 'large' | 'sm' | 'small' | 'xs' | 'xsmall';
-  declare type ElementType = string;  //TODO: figure out type
-  declare type TriggerType = any; //TODO: Figure out type
+  declare type ElementType = string;
+  declare type TriggerType = 'click' | 'hover' | 'focus';
   declare export class Alert extends React$Component<{
     onDismiss: Function,
     closeLabel?: string,
@@ -318,7 +318,7 @@ declare module "react-bootstrap" {
     onExit?: Function,
     onExiting?: Function,
     onExited?: Function,
-    container?: Function, //TODO: Figure out type
+    container?: Node | Component<*> | (...args: Array<any>) => Node,
     bsSize?: BsSize,
     bsClass?: string
   }> {
