@@ -40,6 +40,8 @@ jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, { algorithm: 'ES512' }, (fo
 
 jwt.verify('token', 'secret');
 
+jwt.verify('token', 'secret', (foo) => undefined);
+
 // $ExpectError
 jwt.verify('token', { key: 'secret', passphrase: 'foo' });
 
