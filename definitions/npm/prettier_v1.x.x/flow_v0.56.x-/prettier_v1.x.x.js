@@ -171,5 +171,5 @@ declare module "prettier" {
     getSupportInfo: (version?: string) => SupportInfo
   |};
 
-  declare export default Prettier
+  declare export default Prettier;
 }

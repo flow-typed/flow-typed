@@ -71,3 +71,29 @@ prettier.format(code, {
     return ast;
   }
 });
+
+/**
+ * Test return types
+ */
+
+let result;
+
+result = prettier.format(code);
+(result: string);
+
+result = prettier.check(code);
+(result: boolean);
+
+result = prettier.formatWithCursor(code, { cursorOffset: 1 });
+(result.formatted: string);
+(result.cursorOffset: number);
+
+result = prettier.resolveConfig("/");
+(result.then: Function);
+
+result = prettier.clearConfigCache();
+(result: void);
+
+result = prettier.getSupportInfo("1.0");
+(result.languages: Array<*>);
+(result.options: Array<*>);
