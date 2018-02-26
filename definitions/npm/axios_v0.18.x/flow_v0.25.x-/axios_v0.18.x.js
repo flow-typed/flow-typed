@@ -121,7 +121,8 @@ declare module "axios" {
 
   declare class AxiosError<T> extends Error {
     config: AxiosXHRConfig<T>;
-    response: AxiosXHR<T>;
+    request?: http$ClientRequest | XMLHttpRequest;
+    response?: AxiosXHR<T>;
     code?: string;
   }
 
