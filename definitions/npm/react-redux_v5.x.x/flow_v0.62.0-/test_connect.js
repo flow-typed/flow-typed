@@ -191,8 +191,8 @@ function testMapDispatchToPropsPassesActionCreators() {
 function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
   type Props = {
     passtrough: number,
-    dispatch1: () => {},
-    dispatch2: () => {},
+    dispatch1: () => void,
+    dispatch2: () => void,
     fromMapStateToProps: number
   };
   class Com extends React.Component<Props> {
