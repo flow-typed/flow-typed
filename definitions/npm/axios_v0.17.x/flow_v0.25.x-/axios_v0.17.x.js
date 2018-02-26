@@ -69,7 +69,7 @@ declare module "axios" {
     request: http$ClientRequest | XMLHttpRequest;
   }
   declare type $AxiosXHR<T> = AxiosXHR<T>;
-  declare class AxiosInterceptorIdent extends String {}
+  declare type AxiosInterceptorIdent = number;
   declare class AxiosRequestInterceptor<T> {
     use(
       successHandler: ?(
@@ -121,7 +121,8 @@ declare module "axios" {
 
   declare class AxiosError<T> extends Error {
     config: AxiosXHRConfig<T>;
-    response: AxiosXHR<T>;
+    request?: http$ClientRequest | XMLHttpRequest;
+    response?: AxiosXHR<T>;
     code?: string;
   }
 

@@ -1,7 +1,14 @@
 declare module "axios" {
+  declare interface AxiosTransformer<T> {
+    (data: T, headers?: Object): Object;
+  }
   declare interface ProxyConfig {
     host: string;
     port: number;
+    auth?: {
+      username: string,
+      password: string
+    };
   }
   declare interface Cancel {
     constructor(message?: string): Cancel;
@@ -46,8 +53,8 @@ declare module "axios" {
       | "text"
       | "stream";
     timeout?: number;
-    transformRequest?: Array<<U>(data: T) => U | Array<<U>(data: T) => U>>;
-    transformResponse?: Array<<U>(data: T) => U>;
+    transformRequest?: AxiosTransformer<T> | Array<AxiosTransformer<T>>;
+    transformResponse?: AxiosTransformer<T> | Array<AxiosTransformer<T>>;
     validateStatus?: (status: number) => boolean;
     withCredentials?: boolean;
     xsrfCookieName?: string;
@@ -121,7 +128,8 @@ declare module "axios" {
 
   declare class AxiosError<T> extends Error {
     config: AxiosXHRConfig<T>;
-    response: AxiosXHR<T>;
+    request?: http$ClientRequest | XMLHttpRequest;
+    response?: AxiosXHR<T>;
     code?: string;
   }
 
