@@ -1,5 +1,5 @@
 declare module "socket.io-client" {
-  declare type Callback = (...args: mixed[]) => void;
+  declare type Callback = (...args: any[]) => void;
 
   declare type ManagerOptions = $Shape<{
     path: string,
@@ -50,8 +50,8 @@ declare module "socket.io-client" {
     constructor(io: Manager, nsp: string, opts?: SocketOptions): Socket;
     open(): Socket;
     connect(): Socket;
-    send(...args: mixed[]): Socket;
-    emit(event: string, ...args: mixed[]): Socket; // overrides Emitter#emit
+    send(...args: any[]): Socket;
+    emit(event: string, ...args: any[]): Socket; // overrides Emitter#emit
     close(): Socket;
     disconnect(): Socket;
     compress(boolean): Socket;
