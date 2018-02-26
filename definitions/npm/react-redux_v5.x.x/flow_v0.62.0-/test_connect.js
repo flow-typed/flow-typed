@@ -39,6 +39,45 @@ function testPassingPropsToConnectedComponent() {
   connect(mapStateToProps)('');
 }
 
+function testExactProps() {
+  type Props = {|
+    forMapStateToProps: string,
+    passtrough: number,
+    fromStateToProps: string
+  |};
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.passtrough} {this.props.fromStateToProps}</div>;
+    }
+  }
+
+  type State = {a: number};
+  type InputProps = {|
+    forMapStateToProps: string,
+    passtrough: number,
+  |};
+
+  const mapStateToProps = (state: State, props: InputProps) => {
+    return {
+      fromStateToProps: 'str' + state.a
+    }
+  };
+
+  const Connected = connect(mapStateToProps)(Com);
+  <Connected passtrough={123} forMapStateToProps={'data'} />;
+  //$ExpectError extra prop what exact props does not allow
+  <Connected passtrough={123} forMapStateToProps={321} extraProp={123}/>;
+  //$ExpectError wrong type for forMapStateToProps
+  <Connected passtrough={123} forMapStateToProps={321}/>;
+  //$ExpectError passtrough missing
+  <Connected forMapStateToProps={'data'} />;
+  //$ExpectError forMapStateToProps missing
+  <Connected passtrough={123}/>;
+  //$ExpectError takes in only React components
+  connect(mapStateToProps)('');
+}
+
 function testWithStatelessFunctionalComponent() {
   type Props = {passtrough: number, fromStateToProps: string};
   const Com = (props: Props) => <div>{props.passtrough} {props.fromStateToProps}</div>
