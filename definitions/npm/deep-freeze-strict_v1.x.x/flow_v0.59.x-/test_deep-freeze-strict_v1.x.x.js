@@ -1,7 +1,7 @@
- // @flow
+// @flow
 import freeze from 'deep-freeze-strict'
 
-const a = {a: 1};
+const a = {a: 1}
 
 const frozen = freeze(a)
 
@@ -12,3 +12,6 @@ const c: string = frozen.a
 
 // $ExpectError
 frozen.b
+
+// $ExpectError
+frozen.a = 2
