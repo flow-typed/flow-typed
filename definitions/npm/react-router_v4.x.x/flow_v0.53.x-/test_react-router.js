@@ -14,7 +14,6 @@ import {
 import type {
   Location,
   Match,
-  ContextRouter,
   RouterHistory
 } from "react-router";
 

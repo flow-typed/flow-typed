@@ -7,7 +7,7 @@ import {
   matchPath,
   withRouter
 } from "react-router-native";
-import type { ContextRouter, Match } from "react-router-native";
+import type { RouterHistory, Match } from "react-router-native";
 
 // NativeRouter
 <NativeRouter>

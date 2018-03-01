@@ -8,7 +8,7 @@ import {
   matchPath,
   withRouter
 } from "react-router-dom";
-import type { ContextRouter, Match } from "react-router-dom";
+import type { RouterHistory, Match } from "react-router-dom";
 
 // BrowserRouter
 <BrowserRouter>
