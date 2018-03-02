@@ -3,15 +3,15 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 
-// $ExpectError
+// $ExpectError options object is required
 Loadable();
 
-// $ExpectError
+// $ExpectError loader option is required
 Loadable({
   loading: () => null
 });
 
-// $ExpectError
+// $ExpectError loader option should return a promise that resolves to a react component or a module object with default export which is a react component
 Loadable({
   loader: () => Promise.resolve(1),
   loading: () => null
@@ -21,35 +21,35 @@ type Props = { a: string };
 
 class Component extends React.Component<Props> {}
 
-// $ExpectError
+// $ExpectError delay option should be a number
 Loadable({
   loader: () => Promise.resolve(Component),
   loading: () => null,
   delay: ''
 });
 
-// $ExpectError
+// $ExpectError timeout option should be a number
 Loadable({
   loader: () => Promise.resolve(Component),
   loading: () => null,
   timeout: ''
 });
 
-// $ExpectError
+// $ExpectError webpack option should be a function
 Loadable({
   loader: () => Promise.resolve(Component),
   loading: () => null,
   webpack: []
 });
 
-// $ExpectError
+// $ExpectError modules option should be an array of module names
 Loadable({
   loader: () => Promise.resolve(Component),
   loading: () => null,
   modules: [1]
 });
 
-// $ExpectError
+// $ExpectError render option should take a resolved module and related component props
 Loadable({
   loader: () => Promise.resolve(Component),
   loading: () => null,
@@ -68,7 +68,7 @@ Loadable({
     loading: () => null
   });
 
-  // $ExpectError
+  // $ExpectError "a" property should be a string (inherited from Component)
   const noWay = <Loaded a={1} />;
 
   <Loaded a="foo"/>
@@ -80,7 +80,7 @@ Loadable({
     loading: () => null
   });
 
-  // $ExpectError
+  // $ExpectError "a" property should be a string (inherited from Component)
   const noWay = <Loaded a={1} />;
 
   <Loaded a="foo"/>
