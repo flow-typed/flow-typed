@@ -313,3 +313,14 @@ const w: boolean = pred({ a: "foo", b: "xxx", c: {}, x: 11, y: 19 });
 const pred1 = _.whereEq({ a: 1, b: 2 });
 
 const win: boolean = pred1({ a: 1, d: 1 });
+
+const xLens = _.lens(_.prop('x'), _.assoc('x'));
+
+const lensView: number = _.view(xLens, {x: 1, y: 2});
+const lensSetObj: Object = _.set(xLens, 4, {x: 1, y: 2});
+const lensSetObjX: 4 = lensSetObj.x;
+
+const lensOverObj: Object = _.over(xLens, _.negate, {x: 1, y: 2});  //=> {x: -1, y: 2}
+const lensOverObjX: -1 = lensSetObj.x;
+const lensOverObjY: 2 = lensSetObj.y;
+
