@@ -53,6 +53,26 @@ const spec = {
 const getMetrics = _.applySpec(spec);
 const apspec: $Shape<R> = getMetrics(2, 2);
 
+const applyToResult1 = _.applyTo(5, value => {
+  (value: number);
+  // $ExpectError
+  (value: string);
+  return String(value)
+});
+(applyToResult1: string);
+// $ExpectError
+(applyToResult1: number);
+
+const applyToResult2 = _.applyTo(5)(value => {
+  (value: number);
+  // $ExpectError
+  (value: string);
+  return String(value)
+});
+(applyToResult2: string);
+// $ExpectError
+(applyToResult2: number);
+
 const cmp: (x: Object, y: Object) => number = _.comparator(
   (a, b) => a.age < b.age
 );
