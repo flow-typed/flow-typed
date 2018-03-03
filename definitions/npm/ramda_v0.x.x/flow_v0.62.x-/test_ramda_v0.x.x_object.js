@@ -188,6 +188,21 @@ const mwithK = _.mergeWithKey(
 );
 const propB1: boolean = mwithK.b;
 
+const mDwith = _.mergeDeepWith(
+  _.concat,
+  { a: true, values: [10, 20] },
+  { b: true, values: [15, 35] }
+);
+const propmDwithB: boolean = mDwith.b;
+
+const concatValues = (k, l, r) => k == 'values' ? _.concat(l, r) : r
+const mDwithKey = _.mergeDeepWithKey(
+  concatValues,
+  { a: true, c: { thing: 'foo', values: [10, 20] }},
+  { b: true, c: { thing: 'bar', values: [15, 35] }}
+);
+const propmDwithKeyB: boolean = mDwithKey.b;
+
 const mDLeft = _.mergeDeepLeft(
   { a: true, values: [10, 20] },
   { b: true, values: [15, 35] }
