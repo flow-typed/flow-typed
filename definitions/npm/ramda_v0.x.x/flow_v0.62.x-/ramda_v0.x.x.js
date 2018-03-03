@@ -1487,8 +1487,8 @@ declare module ramda {
     ...args: Array<void>
   ): (o: { [key: string]: A }) => { [key: string]: B };
 
-  declare type Merge = (<A, B>(a: A, b: B) => A) &
-    (<A, B>(a: A, ...rest: Array<void>) => (b: B) => A);
+  declare type Merge = (<A, B>(a: A, b: B) => A & B) &
+    (<A, B>(a: A, ...rest: Array<void>) => (b: B) => A & B);
 
   declare var merge: Merge;
 
@@ -1498,7 +1498,8 @@ declare module ramda {
 
   declare var mergeDeepLeft: Merge;
 
-  declare var mergeDeepRight: Merge;
+  declare var mergeDeepRight: (<A, B>(a: A, b: B) => B & A) &
+  (<A, B>(a: A, ...rest: Array<void>) => (b: B) => B & A);
 
   declare type MergeWith = (<A: { [k: string]: T }, B: { [k: string]: T }, T>(
     fn: (a: T, b: T) => T,
@@ -1558,10 +1559,10 @@ declare module ramda {
   declare function objOf<T>(key: string, val: T): { [key: string]: T };
 
   declare function omit<T: Object>(
-    keys: Array<$Keys<T>>,
+    keys: Array<T>,
     ...rest: Array<void>
   ): (val: T) => Object;
-  declare function omit<T: Object>(keys: Array<$Keys<T>>, val: T): Object;
+  declare function omit<T: Object>(keys: Array<T>, val: T): Object;
 
   declare function over<T, V, U>(lens: Lens, x: (any) => mixed, val: V): U;
   declare function over<T, V, U>(

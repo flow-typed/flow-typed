@@ -188,6 +188,22 @@ const mwithK = _.mergeWithKey(
 );
 const propB1: boolean = mwithK.b;
 
+const mDLeft = _.mergeDeepLeft(
+  { a: true, values: [10, 20] },
+  { b: true, values: [15, 35] }
+);
+const propB2: boolean = mDLeft.a;
+const propB3: boolean = mDLeft.b;
+const propB4: 10 = mDLeft.values[0];
+
+const mDRight = _.mergeDeepRight(
+  { a: true, values: [10, 20] },
+  { b: true, values: [15, 35] }
+);
+const propB5: boolean = mDRight.a;
+const propB6: boolean = mDRight.b;
+const propB7: 15 = mDRight.values[0];
+
 const objA = _.objOf("a", false);
 //$ExpectError
 const propAA: number = objA.a;
@@ -289,7 +305,7 @@ const pred = _.where({
   b: _.complement(_.equals("bar")),
   c: (c: Object) => !!c,
   x: _.gt(10),
-  y: _.lt(20)
+  y: _.lt(20),
 });
 
 const w: boolean = pred({ a: "foo", b: "xxx", c: {}, x: 11, y: 19 });
