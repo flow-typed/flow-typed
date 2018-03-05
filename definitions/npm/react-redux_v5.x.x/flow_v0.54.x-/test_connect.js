@@ -105,12 +105,60 @@ const CC3 = connect()(C3);
 // connect(null, null, nul, options)
 //
 
+/** Test: pure */
 connect(null, null, null, { pure: true })(C1);
 // $ExpectError
 connect(null, null, null, { pure: 1 })(C1); // wrong type
-connect(null, null, null, { withRef: true })(C1);
+
+/** Test: areStatesEqual */
+connect(null, null, null, { areStatesEqual: (nextState = {}, state = {}) => true })(C1);
 // $ExpectError
-connect(null, null, null, { withRef: 1 })(C1); // wrong type
+connect(null, null, null, { areStatesEqual: 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areStatesEqual: (nextState = {}, state = {}) => 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areStatesEqual: (nextState = 1, state = {}) => 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areStatesEqual: (nextState = {}, state = 1) => 1 })(C1); // wrong type
+
+/** Test: areOwnPropsEqual */
+connect(null, null, null, { areOwnPropsEqual: (nextOwnProps = {}, ownProps = {}) => true })(C1);
+// $ExpectError
+connect(null, null, null, { areOwnPropsEqual: 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areOwnPropsEqual: (nextOwnProps = {}, ownProps = {}) => 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areOwnPropsEqual: (nextOwnProps = 1, ownProps = {}) => 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areOwnPropsEqual: (nextOwnProps = {}, ownProps = 1) => 1 })(C1); // wrong type
+
+/** Test: areStatePropsEqual */
+connect(null, null, null, { areStatePropsEqual: (nextStateProps = {}, stateProps = {}) => true })(C1);
+// $ExpectError
+connect(null, null, null, { areStatePropsEqual: 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areStatePropsEqual: (nextStateProps = {}, stateProps = {}) => 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areStatePropsEqual: (nextStateProps = 1, stateProps = {}) => 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areStatePropsEqual: (nextStateProps = {}, stateProps = 1) => 1 })(C1); // wrong type
+
+/** Test: areMergedPropsEqual */
+connect(null, null, null, { areMergedPropsEqual: (nextMergedProps = {}, mergedProps = {}) => true })(C1);
+// $ExpectError
+connect(null, null, null, { areMergedPropsEqual: 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areMergedPropsEqual: (nextMergedProps = {}, mergedProps = {}) => 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areMergedPropsEqual: (nextMergedProps = 1, mergedProps = {}) => 1 })(C1); // wrong type
+// $ExpectError
+connect(null, null, null, { areMergedPropsEqual: (nextMergedProps = {}, mergedProps = 1) => 1 })(C1); // wrong type
+
+/** Test: storeKey */
+connect(null, null, null, { storeKey: 'test' })(C1);
+// $ExpectError
+connect(null, null, null, { storeKey: 1 })(C1);
+
 const CC4 = connect(null, null, null, {})(C1);
 <CC4 a={1} b="s" />;
 // $ExpectError

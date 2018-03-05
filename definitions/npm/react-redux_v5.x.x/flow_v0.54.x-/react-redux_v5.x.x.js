@@ -74,9 +74,33 @@ declare module "react-redux" {
     subKey?: string
   ): Provider<*, *>;
 
+  declare function areStatesEqual(
+    nextState?: Object,
+    state?: Object,
+  ): boolean;
+
+  declare function areStatesEqual(
+    nextOwnProps?: Object,
+    ownProps?: Object,
+  ): boolean;
+
+  declare function areStatePropsEqual(
+    nextStateProps?: Object,
+    stateProps?: Object,
+  ): boolean;
+
+  declare function areMergedPropsEqual(
+    nextMergedProps?: Object,
+    mergedProps?: Object,
+  ): boolean;
+
   declare type ConnectOptions = {
     pure?: boolean,
-    withRef?: boolean
+    areStatesEqual?: areStatesEqual,
+    areOwnPropsEqual?: areOwnPropsEqual,
+    areStatePropsEqual?: areStatePropsEqual,
+    areMergedPropsEqual?: areMergedPropsEqual,
+    storeKey?: string,
   };
 
   declare type Null = null | void;
