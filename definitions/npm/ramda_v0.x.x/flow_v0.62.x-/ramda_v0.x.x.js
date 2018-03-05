@@ -1499,7 +1499,7 @@ declare module ramda {
   declare var mergeDeepLeft: Merge;
 
   declare var mergeDeepRight: (<A, B>(a: A, b: B) => B & A) &
-  (<A, B>(a: A, ...rest: Array<void>) => (b: B) => B & A);
+    (<A, B>(a: A, ...rest: Array<void>) => (b: B) => B & A);
 
   declare type MergeWith = (<A: { [k: string]: T }, B: { [k: string]: T }, T>(
     fn: (a: T, b: T) => T,
@@ -1857,16 +1857,17 @@ declare module ramda {
 
   declare function nthArg<T>(n: number): (...args: Array<T>) => T;
 
-  declare var o: (<A, B, C>(fn1: (b: B) => C, fn2: (a: A) => B, x: A) => C) &
+  declare var o: (<A, B, C>(
+    fn1: (b: B) => C,
+    ...rest: void[]
+  ) => ((fn2: (a: A) => B, ...rest: void[]) => (x: A) => C) &
+    ((fn2: (a: A) => B, x: A) => C)) &
     (<A, B, C>(
       fn1: (b: B) => C,
+      fn2: (a: A) => B,
       ...rest: void[]
-    ) => (fn2: (a: A) => B, ...rest: void[]) => (x: A) => C) &
-    (<A, B, C>(
-      fn1: (b: B) => C,
-      ...rest: void[]
-    ) => (fn2: (a: A) => B, x: A) => C) &
-    (<A, B, C>(fn1: (b: B) => C, fn2: (a: A) => B) => (x: A) => C);
+    ) => (x: A) => C) &
+    (<A, B, C>(fn1: (b: B) => C, fn2: (a: A) => B, x: A) => C);
 
   declare function of<T>(x: T): Array<T>;
 

@@ -276,6 +276,10 @@ const str: string = "hello world";
   ];
   const names1: { [k: string]: Array<string> } = namesByGrade(students);
 
+  const isOdd = (acc, x) => x % 2 === 1;
+  const reduceWhile1: number = _.reduceWhile(isOdd, _.add, 0, [1, 3, 5, 60, 777, 800]);
+  const reduceWhile2: number = _.reduceWhile(isOdd, _.add, 111, [2, 4, 6]);
+
   const spl: Array<string> = _.split(/\./, "a.b.c.xyz.d");
 
   const spl1: [Array<number>, Array<number>] = _.splitAt(1, [1, 2, 3]);

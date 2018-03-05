@@ -330,12 +330,25 @@ const pred1 = _.whereEq({ a: 1, b: 2 });
 const win: boolean = pred1({ a: 1, d: 1 });
 
 const xLens = _.lens(_.prop('x'), _.assoc('x'));
+const xLensPath = _.lensPath(['y', 0, 'y']);
+const xLensIndex = _.lensIndex(0);
+const xLensProp = _.lensProp('x');
 
-const lensView: number = _.view(xLens, {x: 1, y: 2});
-const lensSetObj: Object = _.set(xLens, 4, {x: 1, y: 2});
-const lensSetObjX: 4 = lensSetObj.x;
+const dataObj = {x: 5, y: [{y: 2, z: 3}, {y: 4, z: 5}]};
+const dataArr = ['a', 'b', 'c'];
 
-const lensOverObj: Object = _.over(xLens, _.negate, {x: 1, y: 2});  //=> {x: -1, y: 2}
-const lensOverObjX: -1 = lensSetObj.x;
-const lensOverObjY: 2 = lensSetObj.y;
+const xLensView: number = _.view(xLens, dataObj);
+const xLensSet: Array<{ [k: string]: * }> = _.set(xLens, 4, dataObj);
+const xLensOver: Array<{ [k: string]: * }> = _.over(xLens, _.negate, dataObj);
 
+const xLensPathView: number = _.view(xLensPath, dataObj);
+const xLensPathSet: Array<{ [k: string]: * }> = _.set(xLensPath, 4, dataObj);
+const xLensPathOver: Array<{ [k: string]: * }> = _.over(xLensPath, _.negate, dataObj);
+
+const xLensIndexView: number = _.view(xLensIndex, dataArr);
+const xLensIndexSet: Array<string> = _.set(xLensIndex, "test", dataArr);
+const xLensIndexOver: Array<string> = _.over(xLensIndex, _.concat("test"), dataArr);
+
+const xLensPropView: number = _.view(xLensProp, dataObj);
+const xLensPropSet: Array<{ [k: string]: * }> = _.set(xLensProp, 4, dataObj);
+const xLensPropOver: Array<{ [k: string]: * }> = _.over(xLensProp, _.negate, dataObj);
