@@ -13,12 +13,16 @@ jest.atoMockOff();
 const mockFn = jest.fn();
 mockFn.mock.calls.map(String).map(a => a + a);
 
-type Foo = {
-  doStuff: string => number
-};
+type Foo = {|
+  doStuff: string => number,
+  doAsyncStuff: void => Promise<number>
+|};
 const foo: Foo = {
   doStuff(str: string): number {
     return 5;
+  },
+  doAsyncStuff(): Promise<number> {
+    return Promise.resolve(5);
   }
 };
 foo.doStuff = jest.fn().mockImplementation(str => 10);
@@ -47,6 +51,28 @@ foo.doStuff = jest.fn().mockReturnValueOnce("10");
 foo.doStuff = jest.fn().mockName("10");
 // $ExpectError mockName expects a string, not a number
 foo.doStuff = jest.fn().mockName(10);
+
+foo.doAsyncStuff = jest.fn().mockResolvedValue(10);
+foo.doAsyncStuff = jest.fn().mockReturnValue(Promise.resolve(10));
+// $ExpectError Mock function expected to return Promise<number>, not Promise<string>.
+foo.doAsyncStuff = jest.fn().mockResolvedValue("10");
+// $ExpectError Can't return a Promise from a non async function
+foo.doStuff = jest.fn().mockResolvedValue(10);
+
+foo.doAsyncStuff = jest.fn().mockResolvedValueOnce(10);
+foo.doAsyncStuff = jest.fn().mockReturnValueOnce(Promise.resolve(10));
+// $ExpectError Mock function expected to return Promise<number>, not Promise<string>.
+foo.doAsyncStuff = jest.fn().mockResolvedValueOnce("10");
+// $ExpectError Can't return a Promise from a non async function
+foo.doStuff = jest.fn().mockResolvedValueOnce(10);
+
+foo.doAsyncStuff = jest.fn().mockRejectedValue(new Error("error"));
+// NOTE: No error as Flow doesn't type rejections
+foo.doAsyncStuff = jest.fn().mockRejectedValue("10");
+
+foo.doAsyncStuff = jest.fn().mockRejectedValueOnce(new Error("error"));
+// NOTE: No error as Flow doesn't type rejections
+foo.doAsyncStuff = jest.fn().mockRejectedValueOnce("10");
 
 const mockedDoStuff = (foo.doStuff = jest.fn().mockImplementation(str => 10));
 mockedDoStuff.mock.calls[0][0].indexOf("a");

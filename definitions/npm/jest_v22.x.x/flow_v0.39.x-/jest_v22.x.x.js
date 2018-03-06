@@ -1,3 +1,9 @@
+type ExtractPromiseValueFunc = <Value>(Promise<Value>) => Value;
+type ExtractPromiseValue<PromiseValue> = $Call<
+  ExtractPromiseValueFunc,
+  PromiseValue
+>;
+
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
   /**
@@ -68,7 +74,24 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   /**
    * Sugar for only returning a value once inside your mock
    */
-  mockReturnValueOnce(value: TReturn): JestMockFn<TArguments, TReturn>
+  mockReturnValueOnce(value: TReturn): JestMockFn<TArguments, TReturn>,
+
+  /**
+   * Sugar functions for returning a resolved Promise (Jest v22.2+)
+   */
+  mockResolvedValue(
+    value: ExtractPromiseValue<TReturn>
+  ): JestMockFn<TArguments, TReturn>,
+
+  mockResolvedValueOnce(
+    value: ExtractPromiseValue<TReturn>
+  ): JestMockFn<TArguments, TReturn>,
+
+  /**
+   * Sugar functions for returning a rejected Promise (Jest v22.2+)
+   */
+  mockRejectedValue(value: any): JestMockFn<TArguments, TReturn>,
+  mockRejectedValueOnce(value: any): JestMockFn<TArguments, TReturn>
 };
 
 type JestAsymmetricEqualityType = {
