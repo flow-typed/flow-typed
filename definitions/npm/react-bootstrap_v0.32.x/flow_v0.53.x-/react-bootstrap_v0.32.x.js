@@ -1,5 +1,5 @@
 declare module "react-bootstrap" {
-  import type { Node, Element, Component } from 'react';
+  import type { Node, Element, Component, Ref } from 'react';
   declare type BsSize = 'lg' | 'large' | 'sm' | 'small';
   declare type BsStyle = 'lg' | 'large' | 'sm' | 'small' | 'xs' | 'xsmall';
   declare type ElementType = string;
@@ -175,7 +175,7 @@ declare module "react-bootstrap" {
     componentClass?: ElementType,
     type?: string,
     id?: string,
-    inputRef?: (ref: ?FormControl) => void, // TODO: double check ref
+    inputRef?: Ref<'input'>,
     bsSize?: BsSize,
     bsClass?: string,
   }> {
@@ -194,7 +194,7 @@ declare module "react-bootstrap" {
     disabled?: boolean,
     title?: string,
     validateState?: 'success' | 'warning' | 'error' | null,
-    inputRef?: (ref: ?Checkbox) => void, // TODO: double check ref
+    inputRef?: Ref<'input'>,
     bsClass?: string
   }> {}
 
@@ -203,7 +203,7 @@ declare module "react-bootstrap" {
     disabled?: boolean,
     title?: string,
     validateState?: 'success' | 'warning' | 'error' | null,
-    inputRef?: (ref: ?Radio) => void, // TODO: double check ref
+    inputRef?: Ref<'input'>,
     bsClass?: string
   }> {}
 
