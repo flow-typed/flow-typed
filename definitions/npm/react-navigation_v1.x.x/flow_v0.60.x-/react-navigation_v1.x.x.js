@@ -360,7 +360,6 @@ declare module 'react-navigation' {
     initialRouteParams?: NavigationParams,
     paths?: NavigationPathsConfig,
     navigationOptions?: NavigationScreenConfig<*>,
-    initialRouteKey?: string,
   |};
 
   declare export type NavigationStackViewConfig = {|
@@ -379,6 +378,20 @@ declare module 'react-navigation' {
   |};
 
   /**
+   * Switch Navigator
+   */
+
+  declare export type NavigationSwitchRouterConfig = {|
+    initialRouteName?: string,
+    initialRouteParams?: NavigationParams,
+    paths?: NavigationPathsConfig,
+    navigationOptions?: NavigationScreenConfig<*>,
+    order?: Array<string>,
+    backBehavior?: 'none' | 'initialRoute', // defaults to `'none'`
+    resetOnBlur?: boolean, // defaults to `true`
+  |};
+
+  /**
    * Tab Navigator
    */
 
@@ -389,7 +402,6 @@ declare module 'react-navigation' {
     navigationOptions?: NavigationScreenConfig<*>,
     // todo: type these as the real route names rather than 'string'
     order?: Array<string>,
-
     // Does the back button cause the router to switch to the initial tab
     backBehavior?: 'none' | 'initialRoute', // defaults `initialRoute`
   |};
@@ -773,11 +785,21 @@ declare module 'react-navigation' {
     routeConfigs: NavigationRouteConfigMap,
     config?: _TabNavigatorConfig
   ): NavigationContainer<*, *, *>;
+  declare type _SwitchNavigatorConfig = {|
+    ...NavigationSwitchRouterConfig,
+  |};
+  declare export function SwitchNavigator(
+    routeConfigs: NavigationRouteConfigMap,
+    config?: _SwitchNavigatorConfig
+  ): NavigationContainer<*, *, *>;
 
   declare type _DrawerViewConfig = {|
     drawerLockMode?: 'unlocked' | 'locked-closed' | 'locked-open',
     drawerWidth?: number | (() => number),
     drawerPosition?: 'left' | 'right',
+    drawerOpenRoute?: string,
+    drawerCloseRoute?: string,
+    drawerToggleRoute?: string,
     contentComponent?: React$ElementType,
     contentOptions?: {},
     style?: ViewStyleProp,
@@ -912,6 +934,9 @@ declare module 'react-navigation' {
     drawerLockMode?: 'unlocked' | 'locked-closed' | 'locked-open',
     drawerWidth: number | (() => number),
     drawerPosition: 'left' | 'right',
+    drawerOpenRoute: string,
+    drawerCloseRoute: string,
+    drawerToggleRoute: string,
     contentComponent: React$ElementType,
     contentOptions?: {},
     style?: ViewStyleProp,
@@ -948,8 +973,6 @@ declare module 'react-navigation' {
     itemsContainerStyle?: ViewStyleProp,
     itemStyle?: ViewStyleProp,
     labelStyle?: TextStyleProp,
-    activeLabelStyle?: TextStyleProp,
-    inactiveLabelStyle?: TextStyleProp,
     iconContainerStyle?: ViewStyleProp,
     drawerPosition: 'left' | 'right',
   };
