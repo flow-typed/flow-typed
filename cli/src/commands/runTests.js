@@ -130,6 +130,14 @@ async function getOrderedFlowBinVersions(
         });
 
         apiPayload.forEach(rel => {
+          // Temporary fix for https://github.com/facebook/flow/issues/5922
+          if (rel.tag_name === 'v0.67.0') {
+            console.log('==========================================================================================')
+            console.log('We are tempoarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922')
+            console.log('==========================================================================================')
+            return
+          }
+
           // We only test against versions since 0.15.0 because it has proper
           // [ignore] fixes (which are necessary to run tests)
           // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
