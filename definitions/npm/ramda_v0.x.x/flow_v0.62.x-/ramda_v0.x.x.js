@@ -1599,16 +1599,16 @@ declare module ramda {
   declare function propOr<T, V, A: { [k: string]: V }>(
     or: T,
     ...rest: Array<void>
-  ): ((p: $Keys<A>, ...rest: Array<void>) => (o: A) => V | T) &
-    ((p: $Keys<A>, o: A) => V | T);
+  ): ((p: string, ...rest: Array<void>) => (o: A) => V | T) &
+    ((p: string, o: A) => V | T);
   declare function propOr<T, V, A: { [k: string]: V }>(
     or: T,
-    p: $Keys<A>,
+    p: string,
     ...rest: Array<void>
   ): (o: A) => V | T;
   declare function propOr<T, V, A: { [k: string]: V }>(
     or: T,
-    p: $Keys<A>,
+    p: string,
     o: A
   ): V | T;
 

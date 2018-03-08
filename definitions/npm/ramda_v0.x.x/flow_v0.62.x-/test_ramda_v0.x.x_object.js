@@ -187,9 +187,9 @@ const propAA: number = objA.a;
 //$ExpectError
 const om: Object = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4 });
 
+const omap1 = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4, h: 7 });
 //$ExpectError
-const om2 = _.omit(["a", "d", "h"]);
-const omap = om2({ a: 1, b: 2, c: 3, d: 4 });
+const omap2 = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4 });
 
 const path1: Object | number = _.path(["a", "b"], { a: { b: 2 } });
 const path2: Object | number = _.path(["a", 1], { a: { "1": 2 } });
@@ -225,7 +225,6 @@ const alice = {
   age: 101
 };
 
-//$ExpectError
 const favoriteWithDefault = _.propOr("Ramda", "favoriteLibrary");
 const fav = favoriteWithDefault(alice);
 
