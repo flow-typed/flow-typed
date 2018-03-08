@@ -1566,8 +1566,9 @@ declare module ramda {
 
   declare function over<T, V, U>(lens: Lens, x: (any) => mixed, val: V): U;
   declare function over<T, V, U>(
-    lens: Lens
-  ): (x: (any) => mixed) => (val: V) => U;
+    lens: Lens,
+    ...rest: Array<void>
+  ): ((x: (any) => mixed, ...rest: Array<void>) => (val: V) => U) & ((x: (any) => mixed, val: V) => U);
 
   declare function path<V>(
     p: Array<mixed>,
@@ -1691,7 +1692,10 @@ declare module ramda {
   ): Array<$ElementType<O, T>>;
 
   declare function set<T, V, U>(lens: Lens, x: T, val: V): U;
-  declare function set<T, V, U>(lens: Lens): (x: T) => (val: V) => U;
+  declare function set<T, V, U>(
+    lens: Lens,
+    ...rest: Array<void>
+  ): ((x: (any) => mixed, ...rest: Array<void>) => (val: V) => U) & ((x: (any) => mixed, val: V) => U);
 
   declare function toPairs<T, O: { [k: string]: T }>(
     o: O

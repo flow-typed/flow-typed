@@ -343,12 +343,17 @@ const xLensOver: Array<{ [k: string]: * }> = _.over(xLens, _.negate, dataObj);
 
 const xLensPathView: number = _.view(xLensPath, dataObj);
 const xLensPathSet: Array<{ [k: string]: * }> = _.set(xLensPath, 4, dataObj);
+const xLensPathSetCurr: Array<{ [k: string]: * }> = _.set(xLensPath, 4)(dataObj);
 const xLensPathOver: Array<{ [k: string]: * }> = _.over(xLensPath, _.negate, dataObj);
+const xLensPathOverCurr: Array<{ [k: string]: * }> = _.over(xLensPath)(_.negate)(dataObj);
 
 const xLensIndexView: number = _.view(xLensIndex, dataArr);
 const xLensIndexSet: Array<string> = _.set(xLensIndex, "test", dataArr);
+const xLensIndexSetCurr: Array<string> = _.set(xLensIndex)("test", dataArr);
 const xLensIndexOver: Array<string> = _.over(xLensIndex, _.concat("test"), dataArr);
+const xLensIndexOverCurr: Array<string> = _.over(xLensIndex, _.concat("test"))(dataArr);
 
 const xLensPropView: number = _.view(xLensProp, dataObj);
 const xLensPropSet: Array<{ [k: string]: * }> = _.set(xLensProp, 4, dataObj);
 const xLensPropOver: Array<{ [k: string]: * }> = _.over(xLensProp, _.negate, dataObj);
+const xLensPropOverCurr: Array<{ [k: string]: * }> = _.over(xLensProp)(_.negate, dataObj);
