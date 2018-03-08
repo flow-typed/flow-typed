@@ -75,6 +75,21 @@ getUser((user) => console.log('Got the user!'));
 
 Using `mixed` in place of `any` for the return type of a function or the type of a variable is a judgement call, though. Return types and declared variables flow into users' programs, which means that users will have to prove the type of `mixed` before they can use them.
 
+##### Don't import types from other libdefs
+
+You might think it would be possible to import types from other libdefs, much the same way you do in your own code:
+
+```js
+import type { MyType } from 'some-module';
+declare module 'other-module' {
+  declare export function takesMyType(val: MyType): number;
+}
+```
+
+...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
+
+Currently it's not possible to safely import types from other libdefs when making your libdef. [Further discussion here](https://github.com/flowtype/flow-typed/issues/1857).
+
 ##### Prefix global variables that aren't really meant to be global
 
 Right now we don't have a good way to write types inside `declare module {}` bodies that *aren't* exported. This problem is being worked on, but in the meantime the best option is to just put a declaration outside the `declare module {}` and reference it.
