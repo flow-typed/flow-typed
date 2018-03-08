@@ -1,7 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import _, { compose, pipe, curry, filter, find, repeat, zipWith } from "ramda";
-import { describe, it } from '../../../tdd_framework'
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
