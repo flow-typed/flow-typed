@@ -7,6 +7,7 @@ to existing libdefs.
 ### tldr
 
 * [Avoid `any` when possible](#avoid-any-when-possible)
+* [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
 * [Always prefix global variables that aren't really meant to be global](#prefix-global-variables-that-arent-really-meant-to-be-global)
 
 ##### Avoid `any` when possible
