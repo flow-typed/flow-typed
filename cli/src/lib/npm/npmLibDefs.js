@@ -33,6 +33,7 @@ import got from 'got';
 
 import type {ValidationErrors as VErrors} from '../validationErrors';
 import {validationError} from '../validationErrors';
+import {TEST_FILE_NAME_RE} from '../libDefs';
 
 const P = Promise;
 
@@ -51,8 +52,6 @@ export type NpmLibDefFilter = {|
   pkgVersion: string,
   flowVersion?: FlowVersion,
 |};
-
-const TEST_FILE_NAME_RE = /^test_.*\.js$/;
 
 async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
