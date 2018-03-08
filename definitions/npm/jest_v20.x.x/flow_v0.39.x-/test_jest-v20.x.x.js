@@ -203,9 +203,9 @@ expect(wrapper).toBeChecked();
 
 expect(wrapper).toBeDisabled();
 
-expect(wrapper).toBeEmpty();
+expect(wrapper).toExist();
 
-expect(wrapper).toBePresent();
+expect(wrapper).toBeEmptyRender();
 
 expect(wrapper).toContainReact(<Dummy />);
 // $ExpectError
@@ -227,6 +227,7 @@ expect(wrapper).toHaveHTML(true);
 
 expect(wrapper).toHaveProp("test");
 expect(wrapper).toHaveProp("test", "test");
+expect(wrapper).toHaveProp({ test: "test" });
 // $ExpectError
 expect(wrapper).toHaveProp();
 // $ExpectError
@@ -240,6 +241,7 @@ expect(wrapper).toHaveRef(true);
 
 expect(wrapper).toHaveState("test");
 expect(wrapper).toHaveState("test", "test");
+expect(wrapper).toHaveState({ test: "test" });
 // $ExpectError
 expect(wrapper).toHaveState();
 // $ExpectError
@@ -247,6 +249,7 @@ expect(wrapper).toHaveState(true);
 
 expect(wrapper).toHaveStyle("color");
 expect(wrapper).toHaveStyle("color", "#ccc");
+expect(wrapper).toHaveStyle({ color: "#ccc" });
 // $ExpectError
 expect(wrapper).toHaveStyle();
 // $ExpectError
