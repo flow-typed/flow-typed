@@ -203,7 +203,7 @@ declare module "knex" {
     detail: string,
     hint?: string,
     position?: any,
-    intenralPosition?: any,
+    internalPosition?: any,
     internalQuery?: any,
     where?: any,
     schema: string,
