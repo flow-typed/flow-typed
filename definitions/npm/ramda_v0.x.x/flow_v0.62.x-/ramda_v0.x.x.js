@@ -1559,10 +1559,10 @@ declare module ramda {
   declare function objOf<T>(key: string, val: T): { [key: string]: T };
 
   declare function omit<T: Object>(
-    keys: Array<T>,
+    keys: Array<string>,
     ...rest: Array<void>
   ): (val: T) => Object;
-  declare function omit<T: Object>(keys: Array<T>, val: T): Object;
+  declare function omit<T: Object>(keys: Array<string>, val: T): Object;
 
   declare function over<T, V, U>(lens: Lens, x: (any) => mixed, val: V): U;
   declare function over<T, V, U>(

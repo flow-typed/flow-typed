@@ -78,18 +78,15 @@ const dissocPathd4: { a: { b: string } } = _.dissocPath(["a", "c"])({
   a: { b: 1, c: 2 }
 });
 
-describe('#eqProps', () => {
-  const o1 = { a: 1, b: 2, c: 3, d: 4 };
-  const o2 = { a: 10, b: 20, c: 3, d: 40 };
 
-  it('should do basic type checking', () => {
-    const ep: boolean = _.eqProps("a", o1, o2);
-  })
+const o1 = { a: 1, b: 2, c: 3, d: 4 };
+const o2 = { a: 10, b: 20, c: 3, d: 40 };
 
-  // curried versions
-  const ep: boolean = _.eqProps("a")(o1, o2);
-  const ep2: boolean = _.eqProps("c", o1)(o2);
-})
+const ep: boolean = _.eqProps("a", o1, o2);
+
+// curried versions
+const epCurr: boolean = _.eqProps("a")(o1, o2);
+const ep2: boolean = _.eqProps("c", o1)(o2);
 
 const evolved1 = _.evolve(
   {
@@ -223,12 +220,9 @@ const objA = _.objOf("a", false);
 //$ExpectError
 const propAA: number = objA.a;
 
-//$ExpectError
 const om: Object = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4 });
-
 const omap1 = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4, h: 7 });
-//$ExpectError
-const omap2 = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4 });
+const omap2 = _.omit(["a", "d", "h"])({ a: 1, b: 2, c: 3, d: 4 });
 
 const path1: Object | number = _.path(["a", "b"], { a: { b: 2 } });
 const path2: Object | number = _.path(["a", 1], { a: { "1": 2 } });
