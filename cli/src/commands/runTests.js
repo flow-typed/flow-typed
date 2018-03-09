@@ -299,6 +299,7 @@ async function writeFlowConfig(testDirPath, libDefPath, includeWarnings) {
   const flowConfigData = [
     '[libs]',
     path.basename(libDefPath),
+    '../../../definitions/tdd_framework.js',
     '',
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
