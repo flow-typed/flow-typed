@@ -53,6 +53,26 @@ const spec = {
 const getMetrics = _.applySpec(spec);
 const apspec: $Shape<R> = getMetrics(2, 2);
 
+const applyToResult1 = _.applyTo(5, value => {
+  (value: number);
+  // $ExpectError
+  (value: string);
+  return String(value)
+});
+(applyToResult1: string);
+// $ExpectError
+(applyToResult1: number);
+
+const applyToResult2 = _.applyTo(5)(value => {
+  (value: number);
+  // $ExpectError
+  (value: string);
+  return String(value)
+});
+(applyToResult2: string);
+// $ExpectError
+(applyToResult2: number);
+
 const cmp: (x: Object, y: Object) => number = _.comparator(
   (a, b) => a.age < b.age
 );
@@ -287,14 +307,25 @@ const stuffDone: number = doStuff("dd", 1, true, obb);
 const range = _.juxt([_.toString, Math.min, Math.max]);
 const ju: Array<number | string> = range(3, 4, 9, -3);
 
-let count = 0;
-const factorial = _.memoize(n => {
-  count += 1;
+let _memoize = 0;
+const _memoizeFactorial = _.memoize(n => {
+  _memoize += 1;
   return _.product(_.range(1, n + 1));
 });
-const mem: number = factorial(5);
+const mem: number = _memoizeFactorial(5);
+
+let _memoizeWith = 0;
+const _memoizeWithFactorial = _.memoizeWith(_.identity, n => {
+  _memoizeWith += 1;
+  return _.product(_.range(1, n + 1));
+});
+const memWith: number = _memoizeWithFactorial(5);
 
 const narg: string | number = _.nthArg(1)(1, "b", "c");
+
+const nameIs = ({ first, last }) => `The name's ${last}, ${first} ${last}`;
+const o1: string = _.o(_.toUpper, nameIs)({ first: "James", last: "Bond" });
+const oNum: number = _.o(_.multiply(10), _.add(10))(-4);
 
 const oof: Array<Array<number>> = _.of([42]);
 

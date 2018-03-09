@@ -78,18 +78,15 @@ const dissocPathd4: { a: { b: string } } = _.dissocPath(["a", "c"])({
   a: { b: 1, c: 2 }
 });
 
-describe('#eqProps', () => {
-  const o1 = { a: 1, b: 2, c: 3, d: 4 };
-  const o2 = { a: 10, b: 20, c: 3, d: 40 };
 
-  it('should do basic type checking', () => {
-    const ep: boolean = _.eqProps("a", o1, o2);
-  })
+const o1 = { a: 1, b: 2, c: 3, d: 4 };
+const o2 = { a: 10, b: 20, c: 3, d: 40 };
 
-  // curried versions
-  const ep: boolean = _.eqProps("a")(o1, o2);
-  const ep2: boolean = _.eqProps("c", o1)(o2);
-})
+const ep: boolean = _.eqProps("a", o1, o2);
+
+// curried versions
+const epCurr: boolean = _.eqProps("a")(o1, o2);
+const ep2: boolean = _.eqProps("c", o1)(o2);
 
 const evolved1 = _.evolve(
   {
@@ -188,16 +185,44 @@ const mwithK = _.mergeWithKey(
 );
 const propB1: boolean = mwithK.b;
 
+const mDwith = _.mergeDeepWith(
+  _.concat,
+  { a: true, values: [10, 20] },
+  { b: true, values: [15, 35] }
+);
+const propmDwithB: boolean = mDwith.b;
+
+const concatValues = (k, l, r) => k == 'values' ? _.concat(l, r) : r
+const mDwithKey = _.mergeDeepWithKey(
+  concatValues,
+  { a: true, c: { thing: 'foo', values: [10, 20] }},
+  { b: true, c: { thing: 'bar', values: [15, 35] }}
+);
+const propmDwithKeyB: boolean = mDwithKey.b;
+
+const mDLeft = _.mergeDeepLeft(
+  { a: true, values: [10, 20] },
+  { b: true, values: [15, 35] }
+);
+const propB2: boolean = mDLeft.a;
+const propB3: boolean = mDLeft.b;
+const propB4: 10 = mDLeft.values[0];
+
+const mDRight = _.mergeDeepRight(
+  { a: true, values: [10, 20] },
+  { b: true, values: [15, 35] }
+);
+const propB5: boolean = mDRight.a;
+const propB6: boolean = mDRight.b;
+const propB7: 15 = mDRight.values[0];
+
 const objA = _.objOf("a", false);
 //$ExpectError
 const propAA: number = objA.a;
 
-//$ExpectError
 const om: Object = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4 });
-
 const omap1 = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4, h: 7 });
-//$ExpectError
-const omap2 = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4 });
+const omap2 = _.omit(["a", "d", "h"])({ a: 1, b: 2, c: 3, d: 4 });
 
 const path1: Object | number = _.path(["a", "b"], { a: { b: 2 } });
 const path2: Object | number = _.path(["a", 1], { a: { "1": 2 } });
@@ -289,7 +314,7 @@ const pred = _.where({
   b: _.complement(_.equals("bar")),
   c: (c: Object) => !!c,
   x: _.gt(10),
-  y: _.lt(20)
+  y: _.lt(20),
 });
 
 const w: boolean = pred({ a: "foo", b: "xxx", c: {}, x: 11, y: 19 });
@@ -297,3 +322,32 @@ const w: boolean = pred({ a: "foo", b: "xxx", c: {}, x: 11, y: 19 });
 const pred1 = _.whereEq({ a: 1, b: 2 });
 
 const win: boolean = pred1({ a: 1, d: 1 });
+
+const xLens = _.lens(_.prop('x'), _.assoc('x'));
+const xLensPath = _.lensPath(['y', 0, 'y']);
+const xLensIndex = _.lensIndex(0);
+const xLensProp = _.lensProp('x');
+
+const dataObj = {x: 5, y: [{y: 2, z: 3}, {y: 4, z: 5}]};
+const dataArr = ['a', 'b', 'c'];
+
+const xLensView: number = _.view(xLens, dataObj);
+const xLensSet: Array<{ [k: string]: * }> = _.set(xLens, 4, dataObj);
+const xLensOver: Array<{ [k: string]: * }> = _.over(xLens, _.negate, dataObj);
+
+const xLensPathView: number = _.view(xLensPath, dataObj);
+const xLensPathSet: Array<{ [k: string]: * }> = _.set(xLensPath, 4, dataObj);
+const xLensPathSetCurr: Array<{ [k: string]: * }> = _.set(xLensPath, 4)(dataObj);
+const xLensPathOver: Array<{ [k: string]: * }> = _.over(xLensPath, _.negate, dataObj);
+const xLensPathOverCurr: Array<{ [k: string]: * }> = _.over(xLensPath)(_.negate)(dataObj);
+
+const xLensIndexView: number = _.view(xLensIndex, dataArr);
+const xLensIndexSet: Array<string> = _.set(xLensIndex, "test", dataArr);
+const xLensIndexSetCurr: Array<string> = _.set(xLensIndex)("test", dataArr);
+const xLensIndexOver: Array<string> = _.over(xLensIndex, _.concat("test"), dataArr);
+const xLensIndexOverCurr: Array<string> = _.over(xLensIndex, _.concat("test"))(dataArr);
+
+const xLensPropView: number = _.view(xLensProp, dataObj);
+const xLensPropSet: Array<{ [k: string]: * }> = _.set(xLensProp, 4, dataObj);
+const xLensPropOver: Array<{ [k: string]: * }> = _.over(xLensProp, _.negate, dataObj);
+const xLensPropOverCurr: Array<{ [k: string]: * }> = _.over(xLensProp)(_.negate, dataObj);
