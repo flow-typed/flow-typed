@@ -27,8 +27,6 @@ export type LibDef = {|
   testFilePaths: Array<string>,
 |};
 
-export const TEST_FILE_NAME_RE = /(^test_.*\.js$|CONTRIBUTING\.md)/;
-
 const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
 const GIT_REPO_DIR = path.join(__dirname, '..', '..', '..');
@@ -374,6 +372,7 @@ export function parseRepoDirItem(
 /**
  * Given a path to an assumed test file, ensure that it is named as expected.
  */
+const TEST_FILE_NAME_RE = /^test_.*\.js$/;
 function validateTestFile(testFilePath, context, validationErrs) {
   const testFileName = path.basename(testFilePath);
   if (!TEST_FILE_NAME_RE.test(testFileName)) {
