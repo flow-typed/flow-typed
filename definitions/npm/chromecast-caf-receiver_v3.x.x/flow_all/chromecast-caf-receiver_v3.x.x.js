@@ -1,16 +1,34 @@
 // @flow
 
 declare module 'cast' {
+  import type { PlayerDataChangedEvent } from 'cast.framework.ui';
+  import type { NetworkRequestInfo } from 'cast.framework';
+
   declare export type EventHandler = (event: Event) => void;
   declare export type PlayerDataChangedEventHandler = (
     event: PlayerDataChangedEvent,
   ) => void;
   declare export type RequestHandler = (request: NetworkRequestInfo) => void;
-  declare export type BinaryHandler = (
-    data: Uint8Array,
-  ) => Uint8Array | undefined;
+  declare export type BinaryHandler = (data: Uint8Array) => Uint8Array;
 }
 declare module 'cast.framework' {
+  import type {
+    Track,
+    TextTrackStyle,
+    QueueItem,
+    QueueData,
+    LoadRequestData,
+    Break,
+  } from 'cast.framework.messages';
+
+  import type { BreakManager } from 'cast.framework.breaks';
+  import type {
+    LiveSeekableRange,
+    PlayerState,
+    MediaInformation,
+    PlayerStringId,
+  } from 'cast.framework.messages';
+
   /**
    * Manages text tracks.
    */
@@ -40,7 +58,7 @@ declare module 'cast.framework' {
     /**
      * Returns the current text track style.
      */
-    getTextTracksStyle(): TextTrackStyle | undefined;
+    getTextTracksStyle(): TextTrackStyle;
 
     /**
      * Gets text track by id.
@@ -449,7 +467,7 @@ declare module 'cast.framework' {
     /**
      * Handler to process manifest data. The handler is passed the manifest, and returns the modified manifest.
      */
-    manifestHandler?: (manifest: string) => string | undefined;
+    manifestHandler?: (manifest: string) => string;
 
     /**
      * A function to customize request to get a manifest.
@@ -1127,6 +1145,7 @@ declare module 'cast.framework.breaks' {
   }
 }
 declare module 'cast.framework.events' {
+  import type { EventType } from 'cast.framework.events';
   /**
    * Event data for @see{@link EventType.SEGMENT_DOWNLOADED} event.
    */
@@ -1416,8 +1435,10 @@ declare module 'cast.framework.events' {
     /** The bitrate of the media (audio and video) in bits per second. */
     totalBitrate: number;
   }
+}
 
-  declare export var EventType: {
+declare module 'cast.framework.events.category' {
+  declare export type EventType = {
     REQUEST_SEEK: 'REQUEST_SEEK',
     REQUEST_LOAD: 'REQUEST_LOAD',
     REQUEST_STOP: 'REQUEST_STOP',
@@ -1461,9 +1482,46 @@ declare module 'cast.framework.events' {
     SEEKING: 'SEEKING',
   };
 }
-declare module 'cast.framework.events.category' {
-}
+
 declare module 'cast.framework.messages' {
+  declare export type RepeatMode = {
+    REPEAT_OFF: 'REPEAT_OFF',
+    REPEAT_ALL: 'REPEAT_ALL',
+    REPEAT_SINGLE: 'REPEAT_SINGLE',
+    REPEAT_ALL_AND_SHUFFLE: 'REPEAT_ALL_AND_SHUFFLE',
+  };
+
+  declare export type QueueType = {
+    ALBUM: 'ALBUM',
+    PLAYLIST: 'PLAYLIST',
+    AUDIOBOOK: 'AUDIOBOOK',
+    RADIO_STATION: 'RADIO_STATION',
+    PODCAST_SERIES: 'PODCAST_SERIES',
+    TV_SERIES: 'TV_SERIES',
+    VIDEO_PLAYLIST: 'VIDEO_PLAYLIST',
+    LIVE_TV: 'LIVE_TV',
+    MOVIE: 'MOVIE',
+  };
+  declare export type QueueChangeType = {
+    INSERT: 'INSERT',
+    REMOVE: 'REMOVE',
+    ITEMS_CHANGE: 'ITEMS_CHANGE',
+    UPDATE: 'UPDATE',
+    NO_CHANGE: 'NO_CHANGE',
+  };
+
+  declare export type PlayerState = {
+    IDLE: 'IDLE',
+    PLAYING: 'PLAYING',
+    PAUSED: 'PAUSED',
+    BUFFERING: 'BUFFERING',
+  };
+
+  declare export type PlayerStringId = {
+    FREE_TRIAL_ABOUT_TO_EXPIRE: '',
+    SUBSCRIPTION_ABOUT_TO_EXPIRE: '',
+    STREAM_HIJACKED: '',
+  };
   /**
    * RefreshCredentials request data.
    */
