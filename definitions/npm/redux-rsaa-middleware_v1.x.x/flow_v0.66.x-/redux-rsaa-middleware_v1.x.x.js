@@ -19,7 +19,7 @@ declare module 'redux-rsaa-middleware' {
 
   declare type State = Object;
   
-  declare var RSAAMiddleware : Middleware<State, Action, Dispatch<Action>>;
+  declare export var RSAAMiddleware : Middleware<State, Action, Dispatch<Action>>;
 
   declare export type RSAAPayload = {
     method?: string,
@@ -37,9 +37,5 @@ declare module 'redux-rsaa-middleware' {
   declare export type RSAAAction = {
     type: string,
     payload: RSAAPayload,
-  };
-  
-  declare module.exports: {
-    RSAAMiddleware: typeof RSAAMiddleware,
   };
 }
