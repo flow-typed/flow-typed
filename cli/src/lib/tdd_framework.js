@@ -17,5 +17,9 @@
  * It is set up such that you don't need to import these functions, you can just use them naturally as if they were
  * available in the global scope.
  */
-export const describe = (label: string, fn: (...any) => any): void => { fn() }
-export const it = (label: string, fn: (...any) => any): void => { fn() }
+export const describe = (label: string, fn: (...any) => any): void => {
+  fn();
+};
+export const it = (label: string, fn: (...any) => any): void => {
+  fn();
+};

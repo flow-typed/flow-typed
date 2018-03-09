@@ -196,6 +196,8 @@ declare module "MyModule" {
 You can use `describe` and `it` verbs, much like you do in Mocha/Jest/whatever, to write descriptive tests and limit scope. These are available on the global scope, so you don't need to import anything. (Note that they don't actually run tests, they're just sugar to limit scope and emulate the TDD language with which we're all familiar).
 
 ```js
+import { describe, it } from './tdd_framework';
+
 describe('#someFunction', () => {
   it('should do something', () => {
     const a: number = 1;

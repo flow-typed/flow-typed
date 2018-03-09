@@ -302,10 +302,10 @@ async function getCachedFlowBinVersions(
 
 async function writeFlowConfig(testDirPath, libDefPath, includeWarnings) {
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
+
   const flowConfigData = [
     '[libs]',
     path.basename(libDefPath),
-    '../../../definitions/tdd_framework.js',
     '',
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
@@ -318,6 +318,13 @@ async function writeFlowConfig(testDirPath, libDefPath, includeWarnings) {
     path.join(testDirPath, '..', '..', 'node_modules'),
   ].join('\n');
   await fs.writeFile(destFlowConfigPath, flowConfigData);
+
+  const tddFilePath = path.join('src', 'lib', 'tdd_framework.js');
+  const tddFrameworkFile = (await fs.readFile(tddFilePath)).toString();
+  await fs.writeFile(
+    path.join(testDirPath, 'tdd_framework.js'),
+    tddFrameworkFile,
+  );
 }
 
 function testTypeDefinition(flowVer, testDirPath) {
