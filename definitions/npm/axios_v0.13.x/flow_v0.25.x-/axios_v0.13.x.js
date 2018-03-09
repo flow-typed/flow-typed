@@ -8,7 +8,7 @@ declare module 'axios' {
     baseURL?: string,
     progress?: (progressEvent: Event) => void | mixed;
     maxContentLength?: number;
-    maxRedirects?: 5,
+    maxRedirects?: number,
     headers?: Object;
     params?: Object;
     paramsSerializer?: (params: Object) => string;

@@ -1,15 +1,12 @@
 /* @flow */
 
-import { Observable, Scheduler, Subject } from "rxjs";
+import { Observable, Observer, Scheduler, Subject } from "rxjs";
 import * as O from "rxjs/Observable";
 import * as Obs from "rxjs/Observer";
 import * as BS from "rxjs/BehaviorSubject";
 import * as RS from "rxjs/ReplaySubject";
 import * as S from "rxjs/Subject";
 import * as Sub from "rxjs/Subscription";
-
-type SuperFoo = { x: string };
-type SubFoo = { x: string, y: number };
 
 const numbers: Observable<number> = Observable.of(1, 2, 3);
 const strings: Observable<string> = numbers.map(x => x.toString());
@@ -275,14 +272,17 @@ Observable.of({ test: 1 }).distinctUntilKeyChanged("test", (a, b) => a === b);
 
 // Testing covariance/contravariance/invariance of type parameters
 
+type SuperFoo = { x: string };
+type SubFoo = { x: string, y: number };
+
 const subObservable: Observable<SubFoo> = new Observable();
 const superObservable: Observable<SuperFoo> = new Observable();
 
 const subSubject: Subject<SubFoo> = new Subject();
 const superSubject: Subject<SuperFoo> = new Subject();
 
-const superObserver: rxjs$IObserver<SuperFoo> = (null: any);
-const subObserver: rxjs$IObserver<SubFoo> = (null: any);
+const superObserver: Observer<SuperFoo> = new Observer();
+const subObserver: Observer<SubFoo> = new Observer();
 
 (subObservable: Observable<SuperFoo>);
 // $ExpectError -- covariant
@@ -293,9 +293,9 @@ const subObserver: rxjs$IObserver<SubFoo> = (null: any);
 // $ExpectError -- invariant
 (superSubject: Subject<SubFoo>);
 
-// $ExpectError -- contravariant. Type parameter is only in input positions.
-(subObserver: rxjs$IObserver<SuperFoo>);
-(superObserver: rxjs$IObserver<SubFoo>);
+// $ExpectError -- contravariant
+(subObserver: Observer<SuperFoo>);
+(superObserver: Observer<SubFoo>);
 
 const groupedSubObservable: Observable<
   Observable<SubFoo>

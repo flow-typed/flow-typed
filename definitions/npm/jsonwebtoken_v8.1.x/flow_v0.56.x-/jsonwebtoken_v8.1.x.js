@@ -89,7 +89,7 @@ declare interface jwt$Decode {
 declare interface jwt$Verify {
   (jwt: string, secretOrPrivateKey: string | Buffer): mixed;
 
-  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions): mixed;
+  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions | jwt$Callback): mixed;
 
   (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions, callback: jwt$Callback): mixed;
 

@@ -130,6 +130,20 @@ async function getOrderedFlowBinVersions(
         });
 
         apiPayload.forEach(rel => {
+          // Temporary fix for https://github.com/facebook/flow/issues/5922
+          if (rel.tag_name === 'v0.67.0') {
+            console.log(
+              '==========================================================================================',
+            );
+            console.log(
+              'We are tempoarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
+            );
+            console.log(
+              '==========================================================================================',
+            );
+            return;
+          }
+
           // We only test against versions since 0.15.0 because it has proper
           // [ignore] fixes (which are necessary to run tests)
           // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
@@ -291,6 +305,7 @@ async function writeFlowConfig(testDirPath, libDefPath, includeWarnings) {
   const flowConfigData = [
     '[libs]',
     path.basename(libDefPath),
+    '../../../definitions/tdd_framework.js',
     '',
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
@@ -493,6 +508,7 @@ async function runTestGroup(
       testDirPath,
       path.basename(testGroup.libDefPath),
     );
+    const copiedFileNames = new Set();
     await P.all([
       P.all(
         testGroup.testFilePaths.map(async (filePath, idx) => {
@@ -501,7 +517,13 @@ async function runTestGroup(
           //
           // i.e. underscore/v1.x.x/test-underscore.js
           //      underscore/v1.x.x/flow-v0.22.x/test-underscore.js
-          const destBasename = idx + '-' + path.basename(filePath);
+          //
+          // Only mangles the name when there's a naming collision. Otherwise, uses the original.
+          const fileName = path.basename(filePath);
+          const destBasename = copiedFileNames.has(fileName)
+            ? `${idx}-${fileName}`
+            : fileName;
+          copiedFileNames.add(destBasename);
           await copyFile(filePath, path.join(testDirPath, destBasename));
         }),
       ),

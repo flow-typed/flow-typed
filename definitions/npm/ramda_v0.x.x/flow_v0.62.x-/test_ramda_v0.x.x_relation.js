@@ -46,6 +46,16 @@ const _minBy: number = _.minBy(Math.abs, 2, 1);
 
 const _identical: boolean = _.identical(2, 1);
 
+const _innerJoin: Array<{ [k: string]: mixed }> = _.innerJoin(
+  (record, id) => record.id === id,
+  [{id: 824, name: 'Richie Furay'},
+   {id: 956, name: 'Dewey Martin'},
+   {id: 313, name: 'Bruce Palmer'},
+   {id: 456, name: 'Stephen Stills'},
+   {id: 177, name: 'Neil Young'}],
+  [177, 456, 999]
+);
+
 const inters: Array<number> = _.intersection(ns, ns);
 
 const interBy: Array<number> = _.intersectionWith(_.eqBy(Math.abs), ns, ns);

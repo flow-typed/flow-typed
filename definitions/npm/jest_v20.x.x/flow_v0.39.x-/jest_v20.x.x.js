@@ -114,17 +114,17 @@ type JestPromiseType = {
  *  Plugin: jest-enzyme
  */
 type EnzymeMatchersType = {
+  toExist(): void,
   toBeChecked(): void,
   toBeDisabled(): void,
-  toBeEmpty(): void,
-  toBePresent(): void,
+  toBeEmptyRender(): void,
   toContainReact(element: React$Element<any>): void,
   toHaveClassName(className: string): void,
   toHaveHTML(html: string): void,
-  toHaveProp(propKey: string, propValue?: any): void,
   toHaveRef(refName: string): void,
-  toHaveState(stateKey: string, stateValue?: any): void,
-  toHaveStyle(styleKey: string, styleValue?: any): void,
+  toHaveProp(propKey: string | Object, propValue?: any): void,
+  toHaveState(stateKey: string | Object, stateValue?: any): void,
+  toHaveStyle(styleKey: string | Object, styleValue?: any): void,
   toHaveTagName(tagName: string): void,
   toHaveText(text: string): void,
   toIncludeText(text: string): void,

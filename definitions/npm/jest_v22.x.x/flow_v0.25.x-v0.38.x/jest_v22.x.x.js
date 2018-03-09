@@ -107,6 +107,12 @@ type JestPromiseType = {
 };
 
 /**
+ * Jest allows functions and classes to be used as test names in test() and
+ * describe()
+ */
+type JestTestName = string | Function;
+
+/**
  *  Plugin: jest-enzyme
  */
 type EnzymeMatchersType = {
@@ -441,17 +447,17 @@ declare var describe: {
   /**
    * Creates a block that groups together several related tests in one "test suite"
    */
-  (name: string, fn: Function): void,
+  (name: JestTestName, fn: Function): void,
 
   /**
    * Only run this describe block
    */
-  only(name: string, fn: Function): void,
+  only(name: JestTestName, fn: Function): void,
 
   /**
    * Skip running this describe block
    */
-  skip(name: string, fn: Function): void
+  skip(name: JestTestName, fn: Function): void
 };
 
 /** An individual test unit */
@@ -459,33 +465,33 @@ declare var it: {
   /**
    * An individual test unit
    *
-   * @param {string} Name of Test
+   * @param {JestTestName} Name of Test
    * @param {Function} Test
    */
-  (name: string, fn?: Function): ?Promise<void>,
+  (name: JestTestName, fn?: Function): ?Promise<void>,
   /**
    * Only run this test
    *
-   * @param {string} Name of Test
+   * @param {JestTestName} Name of Test
    * @param {Function} Test
    */
-  only(name: string, fn?: Function): ?Promise<void>,
+  only(name: JestTestName, fn?: Function): ?Promise<void>,
   /**
    * Skip running this test
    *
-   * @param {string} Name of Test
+   * @param {JestTestName} Name of Test
    * @param {Function} Test
    */
-  skip(name: string, fn?: Function): ?Promise<void>,
+  skip(name: JestTestName, fn?: Function): ?Promise<void>,
   /**
    * Run the test concurrently
    *
-   * @param {string} Name of Test
+   * @param {JestTestName} Name of Test
    * @param {Function} Test
    */
-  concurrent(name: string, fn?: Function): ?Promise<void>
+  concurrent(name: JestTestName, fn?: Function): ?Promise<void>
 };
-declare function fit(name: string, fn: Function): ?Promise<void>;
+declare function fit(name: JestTestName, fn: Function): ?Promise<void>;
 /** An individual test unit */
 declare var test: typeof it;
 /** A disabled group of tests */

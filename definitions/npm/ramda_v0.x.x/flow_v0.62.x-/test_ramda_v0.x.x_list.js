@@ -53,6 +53,11 @@ const str: string = "hello world";
   const dropxs6: Array<number> = _.dropRepeatsWith(_.eqBy(Math.abs), ns);
   const dropxs7: Array<number> = _.dropWhile(x => x === 1, ns);
 
+  const endsWithxs: boolean = _.endsWith("a")("abc");
+  const endsWithxs1: boolean = _.endsWith("b", "abc");
+  const endsWithxs2: boolean = _.endsWith(["a"], ["a", "b", "c"]);
+  const endsWithxs3: boolean = _.endsWith(["b"], ["a", "b", "c"]);
+
   const findxs: ?{ [k: string]: number | string } = _.find(
     _.propEq("a", 2),
     os
@@ -271,6 +276,10 @@ const str: string = "hello world";
   ];
   const names1: { [k: string]: Array<string> } = namesByGrade(students);
 
+  const isOdd = (acc, x) => x % 2 === 1;
+  const reduceWhile1: number = _.reduceWhile(isOdd, _.add, 0, [1, 3, 5, 60, 777, 800]);
+  const reduceWhile2: number = _.reduceWhile(isOdd, _.add, 111, [2, 4, 6]);
+
   const spl: Array<string> = _.split(/\./, "a.b.c.xyz.d");
 
   const spl1: [Array<number>, Array<number>] = _.splitAt(1, [1, 2, 3]);
@@ -296,6 +305,11 @@ const str: string = "hello world";
     return a - b;
   };
   const sortxs: Array<number> = _.sort(diff, [4, 2, 7, 5]);
+
+  const startsWithxs: boolean = _.startsWith("a")("abc");
+  const startsWithxs1: boolean = _.startsWith("b", "abc");
+  const startsWithxs2: boolean = _.startsWith(["a"], ["a", "b", "c"]);
+  const startsWithxs3: boolean = _.startsWith(["b"], ["a", "b", "c"]);
 
   const timesxs: Array<number> = _.times(_.identity, 5);
 

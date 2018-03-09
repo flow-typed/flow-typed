@@ -203,3 +203,42 @@ express.json({
   // $ExpectError
   type: req => 0
 });
+
+// https://expressjs.com/en/4x/api.html#express.urlencoded
+// body-parser based middleware for parsing urlencoded payloads
+
+// can be called with no args
+express.urlencoded();
+
+// urlencoded is a middleware
+app.use(express.urlencoded());
+
+// limit can be a string or number
+express.urlencoded({
+  limit: 100,
+});
+express.urlencoded({
+  limit: '100b',
+});
+express.urlencoded({
+  // $ExpectError
+  limit: false,
+});
+
+// type says it must be truthy, but intent is more clearly expressed as a bool.
+express.urlencoded({
+  // $ExpectError
+  type: req => 0
+});
+
+// type can be a string or array of strings
+express.urlencoded({
+  type: 'foo'
+});
+express.urlencoded({
+  type: ['foo', 'bar']
+});
+express.urlencoded({
+  // $ExpectError
+  type: [1 , 2]
+});
