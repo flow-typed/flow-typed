@@ -6,6 +6,8 @@
  *
  * Usage:
  *
+ *    import { describe, it } from 'flow-typed-test';
+ *
  *    describe('#someFunction', () => {
  *      it('should do something', () => {
  *        // test...
@@ -18,7 +20,7 @@
  * available in the global scope.
  */
 
-export const FTDD = {
-  describe: (label: string, fn: (...any) => any): void => fn(),
-  it: (label: string, fn: (...any) => any): void => fn(),
-};
+declare module 'flow-typed-test' {
+  declare export function describe(label: string, fn: (...any) => void): void;
+  declare export function it(label: string, fn: (...any) => void): void;
+}
