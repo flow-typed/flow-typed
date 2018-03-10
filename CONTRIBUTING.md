@@ -193,13 +193,29 @@ declare module "MyModule" {
 
 ### Use `describe` and `it` blocks to limit scope
 
-You can use `describe` and `it` verbs, much like you do in Mocha/Jest/whatever, to write descriptive tests and limit scope. These are available on the global scope, so you don't need to import anything. (Note that they don't actually run tests, they're just sugar to limit scope and emulate the TDD language with which we're all familiar).
+You can use `describe` and `it` verbs, much like you do in Mocha/Jest/whatever, to write descriptive tests and limit scope. These are available on the global scope, under FTDD, so you don't need to import anything. (Note that they don't actually run tests, they're just sugar to limit scope and emulate the TDD language with which we're all familiar).
 
 ```js
-import { describe, it } from './tdd_framework';
+const { describe, it } = FTDD;
 
 describe('#someFunction', () => {
   it('should do something', () => {
+    const a: number = 1;
+  });
+
+  // you can also do type checks outside an it statement
+  //$ExpectError
+  const a: number = 'foo';
+})
+```
+
+`describe` or `it` have the potential of causing collisions. In the event of a name collision, assign them to new variable names.
+
+```js
+const { describe: foo, it: bar } = FTDD;
+
+foo('#someFunction', () => {
+  bar('should do something', () => {
     const a: number = 1;
   });
 
