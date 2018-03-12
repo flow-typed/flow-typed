@@ -88,7 +88,7 @@ declare module '@sendgrid/mail' {
     value: string;
   }
 
-  declare export interface MailData {
+  declare export type MailData = {
     to?: EmailData | EmailData[],
     cc?: EmailData | EmailData[],
     bcc?: EmailData | EmailData[],
