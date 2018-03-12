@@ -300,12 +300,18 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(testDirPath, libDefPath, includeWarnings) {
+async function writeFlowConfig(
+  repoDirPath,
+  testDirPath,
+  libDefPath,
+  includeWarnings,
+) {
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
+
   const flowConfigData = [
     '[libs]',
     path.basename(libDefPath),
-    '../../../definitions/tdd_framework.js',
+    path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
@@ -422,6 +428,7 @@ async function testLowestCapableFlowVersion(
 }
 
 async function findLowestCapableFlowVersion(
+  repoDirPath,
   orderedFlowVersions,
   lowestFlowVersionRan,
   testDirPath,
@@ -437,13 +444,13 @@ async function findLowestCapableFlowVersion(
   const higherLowVersions = lowerFlowVersionsToRun.filter(flowVer =>
     semver.gte(flowVer, '0.53.0'),
   );
-  await writeFlowConfig(testDirPath, libDefPath, true);
+  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, true);
   const lowestOfHigherVersions = await testLowestCapableFlowVersion(
     higherLowVersions,
     testDirPath,
     lowestFlowVersionRan,
   );
-  await writeFlowConfig(testDirPath, libDefPath, false);
+  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, false);
   return await testLowestCapableFlowVersion(
     lowerLowVersions,
     testDirPath,
@@ -468,6 +475,7 @@ async function removeTrashFromBinDir() {
  * directory.
  */
 async function runTestGroup(
+  repoDirPath: string,
   testGroup: TestGroup,
   numberOfFlowVersions: number = 15,
   errors = [],
@@ -550,14 +558,19 @@ async function runTestGroup(
       semver.gte(flowVer, '0.53.0'),
     );
 
-    await writeFlowConfig(testDirPath, testGroup.libDefPath, false);
+    await writeFlowConfig(
+      repoDirPath,
+      testDirPath,
+      testGroup.libDefPath,
+      false,
+    );
     const lowerVersionErrors = await runFlowTypeDefTests(
       lowerVersions,
       testGroup.id,
       testDirPath,
     );
 
-    await writeFlowConfig(testDirPath, testGroup.libDefPath, true);
+    await writeFlowConfig(repoDirPath, testDirPath, testGroup.libDefPath, true);
     const higherVersionErrors = await runFlowTypeDefTests(
       higherVersions,
       testGroup.id,
@@ -566,6 +579,7 @@ async function runTestGroup(
 
     errors.push(...higherVersionErrors, ...lowerVersionErrors);
     const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
+      repoDirPath,
       orderedFlowVersions,
       lowestFlowVersionRan,
       testDirPath,
@@ -622,6 +636,7 @@ async function runTests(
     while (testGroups.length > 0) {
       const testGroup = testGroups.shift();
       const testGroupErrors = await runTestGroup(
+        repoDirPath,
         testGroup,
         numberOfFlowVersions,
       );
