@@ -1,17 +1,17 @@
 // @flow
 
-declare module 'cast' {
-  import type { PlayerDataChangedEvent } from 'cast.framework.ui';
-  import type { NetworkRequestInfo } from 'cast.framework';
+declare module "cast" {
+  import type { PlayerDataChangedEvent } from "cast.framework.ui";
+  import type { NetworkRequestInfo } from "cast.framework";
 
   declare export type EventHandler = (event: Event) => void;
   declare export type PlayerDataChangedEventHandler = (
-    event: PlayerDataChangedEvent,
+    event: PlayerDataChangedEvent
   ) => void;
   declare export type RequestHandler = (request: NetworkRequestInfo) => void;
   declare export type BinaryHandler = (data: Uint8Array) => Uint8Array;
 }
-declare module 'cast.framework' {
+declare module "cast.framework" {
   import type {
     Track,
     TextTrackStyle,
@@ -19,15 +19,19 @@ declare module 'cast.framework' {
     QueueData,
     LoadRequestData,
     Break,
-  } from 'cast.framework.messages';
-
-  import type { BreakManager } from 'cast.framework.breaks';
-  import type {
     LiveSeekableRange,
     PlayerState,
     MediaInformation,
-    PlayerStringId,
-  } from 'cast.framework.messages';
+    PlayStringId,
+    ErrorData,
+    ErrorType,
+    IdleReason,
+    MessageType
+  } from "cast.framework.messages";
+
+  import type { BreakManager } from "cast.framework.breaks";
+
+  import type { EventType } from "cast.framework.events";
 
   /**
    * Manages text tracks.
@@ -143,7 +147,7 @@ declare module 'cast.framework' {
     fetchItems(
       itemId: number,
       nextCount: number,
-      prevCount: number,
+      prevCount: number
     ): Array<QueueItem> | Promise<Array<QueueItem>>;
 
     /**
@@ -200,7 +204,7 @@ declare module 'cast.framework' {
       includeMedia?: boolean,
       requestId?: number,
       customData?: mixed,
-      includeQueueItems?: boolean,
+      includeQueueItems?: boolean
     ): void;
 
     /**
@@ -303,7 +307,7 @@ declare module 'cast.framework' {
      */
     playString(
       stringId: PlayStringId,
-      args?: Array<string>,
+      args?: Array<string>
     ): Promise<ErrorData>;
 
     /**
@@ -316,7 +320,7 @@ declare module 'cast.framework' {
      */
     removeEventListener(
       eventType: EventType | Array<EventType>,
-      eventListener: EventHandler,
+      eventListener: EventHandler
     ): void;
 
     /**
@@ -332,7 +336,7 @@ declare module 'cast.framework' {
       requestId: number,
       type: ErrorType,
       reason?: ErrorReason,
-      customData?: mixed,
+      customData?: mixed
     ): void;
 
     /**
@@ -348,7 +352,7 @@ declare module 'cast.framework' {
       requestId: number,
       includeMedia?: boolean,
       customData?: mixed,
-      includeQueueItems?: boolean,
+      includeQueueItems?: boolean
     ): void;
 
     /**
@@ -366,7 +370,7 @@ declare module 'cast.framework' {
      */
     setMediaInformation(
       mediaInformation: MediaInformation,
-      opt_broadcast?: boolean,
+      opt_broadcast?: boolean
     ): void;
 
     /**
@@ -375,15 +379,15 @@ declare module 'cast.framework' {
     setMediaPlaybackInfoHandler(
       handler: (
         loadRequestData: LoadRequestData,
-        playbackConfig: PlaybackConfig,
-      ) => void,
+        playbackConfig: PlaybackConfig
+      ) => void
     ): void;
 
     /**
      * Sets a handler to return the media url for a load request. This handler can be used to avoid having the media content url published as part of the media status. By default the media contentId is used as the content url.
      */
     setMediaUrlResolver(
-      resolver: (loadRequestData: LoadRequestData | null) => void,
+      resolver: (loadRequestData: LoadRequestData | null) => void
     ): void;
 
     /**
@@ -391,7 +395,7 @@ declare module 'cast.framework' {
      */
     setMessageInterceptor(
       type: MessageType,
-      interceptor: (requestData: RequestData | null) => void,
+      interceptor: (requestData: RequestData | null) => void
     ): void;
 
     /**
@@ -622,7 +626,7 @@ declare module 'cast.framework' {
       codecs?: string,
       width?: number,
       height?: number,
-      framerate?: number,
+      framerate?: number
     ): boolean;
 
     /**
@@ -683,7 +687,7 @@ declare module 'cast.framework' {
      */
     removeCustomMessageListener(
       namespace: string,
-      listener: EventHandler,
+      listener: EventHandler
     ): void;
 
     /**
@@ -697,7 +701,7 @@ declare module 'cast.framework' {
     sendCustomMessage(
       namespace: string,
       senderId: string,
-      message: mixed,
+      message: mixed
     ): void;
 
     /**
@@ -749,7 +753,7 @@ declare module 'cast.framework' {
     setActiveByLanguage(language: string): void;
   }
 }
-declare module 'cast.framework.system' {
+declare module "cast.framework.system" {
   /**
    * Event dispatched by @see{@link CastReceiverManager} when the visibility of the application changes (HDMI input change, TV is turned off).
    */
@@ -899,7 +903,47 @@ declare module 'cast.framework.system' {
     sessionId(): number;
   }
 }
-declare module 'cast.framework.ui' {
+declare module "cast.framework.ui" {
+  declare export type ContentType = {
+    VIDEO: "VIDEO",
+    AUDIO: "AUDIO",
+    IMAGE: "IMAGE"
+  };
+
+  declare export type State = {
+    LAUNCHING: "LAUNCHING",
+    IDLE: "IDLE",
+    LOADING: "LOADING",
+    BUFFERING: "BUFFERING",
+    PAUSED: "PAUSED",
+    PLAYING: "PLAYING"
+  };
+
+  declare export type PlayerDataEventType = {
+    ANY_CHANGE: "ANY_CHANGE",
+    STATE_CHANGED: "STATE_CHANGED",
+    IS_SEEKING_CHANGED: "IS_SEEKING_CHANGED",
+    DURATION_CHANGED: "DURATION_CHANGED",
+    CURRENT_TIME_CHANGED: "CURRENT_TIME_CHANGED",
+    METADATA_CHANGED: "METADATA_CHANGED",
+    TITLE_CHANGED: "TITLE_CHANGED",
+    SUBTITLE_CHANGED: "SUBTITLE_CHANGED",
+    THUMBNAIL_URL_CHANGED: "THUMBNAIL_URL_CHANGED:",
+    NEXT_TITLE_CHANGED: "NEXT_TITLE_CHANGED",
+    NEXT_SUBTITLE_CHANGED: "NEXT_SUBTITLE_CHANGED",
+    NEXT_THUMBNAIL_URL_CHANGED: "NEXT_THUMBNAIL_URL_CHANGED",
+    PRELOADING_NEXT_CHANGED: "PRELOADING_NEXT_CHANGED",
+    CONTENT_TYPE_CHANGED: "CONTENT_TYPE_CHANGED",
+    IS_LIVE_CHANGED: "IS_LIVE_CHANGED",
+    BREAK_PERCENTAGE_POSITIONS_CHANGED: "BREAK_PERCENTAGE_POSITIONS_CHANGED",
+    IS_PLAYING_BREAK_CHANGED: "IS_PLAYING_BREAK_CHANGED",
+    IS_BREAK_SKIPPABLE_CHANGED: "IS_BREAK_SKIPPABLE_CHANGED",
+    WHEN_SKIPPABLE_CHANGED: "WHEN_SKIPPABLE_CHANGED",
+    NUMBER_BREAK_CLIPS_CHANGED: "NUMBER_BREAK_CLIPS_CHANGED",
+    CURRENT_BREAK_CLIP_NUMBER_CHANGED: "CURRENT_BREAK_CLIP_NUMBER_CHANGED",
+    DISPLAY_STATUS_CHANGED: "DISPLAY_STATUS_CHANGED"
+  };
+
   /**
    * Player data changed event. Provides the changed field (type), and new value.
    */
@@ -907,7 +951,7 @@ declare module 'cast.framework.ui' {
     constructor(
       type: PlayerDataEventType,
       field: string,
-      value: mixed,
+      value: mixed
     ): PlayerDataChangedEvent;
 
     /**
@@ -1046,12 +1090,12 @@ declare module 'cast.framework.ui' {
     whenSkippable?: number;
   }
 }
-declare module 'cast.framework.breaks' {
+declare module "cast.framework.breaks" {
   declare export class BreakSeekData {
     constructor(
       seekFrom: number,
       seekTo: number,
-      breaks: Array<Break>,
+      breaks: Array<Break>
     ): BreakSeekData;
 
     /**
@@ -1114,8 +1158,8 @@ declare module 'cast.framework.breaks' {
     setBreakClipLoadInterceptor(
       interceptor: (
         breakClip: BreakClip,
-        breakClipLoaderContext?: BreakClipLoadInterceptorContext,
-      ) => void,
+        breakClipLoaderContext?: BreakClipLoadInterceptorContext
+      ) => void
     ): void;
 
     /**
@@ -1123,7 +1167,7 @@ declare module 'cast.framework.breaks' {
      * @param {*} seekInterceptor
      */
     setBreakSeekInterceptor(
-      seekInterceptor: (breakSeekData: BreakSeekData) => void,
+      seekInterceptor: (breakSeekData: BreakSeekData) => void
     ): void;
 
     /**
@@ -1140,12 +1184,148 @@ declare module 'cast.framework.breaks' {
      * @param {*} interceptor
      */
     setVastTrackingInterceptor(
-      interceptor?: (trackingUrl: string) => void,
+      interceptor?: (trackingUrl: string) => void
     ): void;
   }
 }
-declare module 'cast.framework.events' {
-  import type { EventType } from 'cast.framework.events';
+
+declare module "cast.framework.events" {
+  declare export type EventType = {
+    ALL: "ALL",
+    ABORT: "ABORT",
+    CAN_PLAY: "CAN_PLAY",
+    CAN_PLAY_THROUGH: "CAN_PLAY_THROUGH",
+    DURATION_CHANGE: "DURATION_CHANGE",
+    EMPTIED: "EMPTIED",
+    ENDED: "ENDED",
+    LOADED_DATA: "LOADED_DATA",
+    LOADED_METADATA: "LOADED_METADATA",
+    LOAD_START: "LOAD_START",
+    PAUSE: "PAUSE",
+    PLAY: "PLAY",
+    PLAYING: "PLAYING",
+    PROGRESS: "PROGRESS",
+    RATE_CHANGE: "RATE_CHANGE",
+    SEEKED: "SEEKED",
+    SEEKING: "SEEKING",
+    STALLED: "STALLED",
+    TIME_UPDATE: "TIME_UPDATE",
+    SUSPEND: "SUSPEND",
+    WAITING: "WAITING",
+    BITRATE_CHANGED: "BITRATE_CHANGED",
+    BREAK_STARTED: "BREAK_STARTED",
+    BREAK_ENDED: "BREAK_ENDED",
+    BREAK_CLIP_LOADING: "BREAK_CLIP_LOADING",
+    BREAK_CLIP_STARTED: "BREAK_CLIP_STARTED",
+    BREAK_CLIP_ENDED: "BREAK_CLIP_ENDED",
+    BUFFERING: "BUFFERING",
+    CACHE_LOADED: "CACHE_LOADED",
+    CACHE_HIT: "CACHE_HIT",
+    CACHE_INSERTED: "CACHE_INSERTED",
+    CLIP_STARTED: "CLIP_STARTED",
+    CLIP_ENDED: "CLIP_ENDED",
+    EMSG: "EMSG",
+    ERROR: "ERROR",
+    ID3: "ID3",
+    MEDIA_STATUS: "MEDIA_STATUS",
+    MEDIA_FINISHED: "MEDIA_FINISHED",
+    PLAYER_PRELOADING: "PLAYER_PRELOADING",
+    PLAYER_PRELOADING_CANCELLED: "PLAYER_PRELOADING_CANCELLED",
+    PLAYER_LOAD_COMPLETE: "PLAYER_LOAD_COMPLETE",
+    PLAYER_LOADING: "PLAYER_LOADING",
+    SEGMENT_DOWNLOADED: "SEGMENT_DOWNLOADED",
+    REQUEST_SEEK: "REQUEST_SEEK",
+    REQUEST_LOAD: "REQUEST_LOAD",
+    REQUEST_STOP: "REQUEST_STOP",
+    REQUEST_PAUSE: "REQUEST_PAUSE",
+    REQUEST_PLAY: "REQUEST_PLAY",
+    REQUEST_PLAY_AGAIN: "REQUEST_PLAY_AGAIN",
+    REQUEST_PLAYBACK_RATE_CHANGE: "REQUEST_PLAYBACK_RATE_CHANGE",
+    REQUEST_SKIP_AD: "REQUEST_SKIP_AD",
+    REQUEST_VOLUME_CHANGE: "REQUEST_VOLUME_CHANGE",
+    REQUEST_EDIT_TRACKS_INFO: "REQUEST_EDIT_TRACKS_INFO",
+    REQUEST_EDIT_AUDIO_TRACKS: "REQUEST_EDIT_AUDIO_TRACKS",
+    REQUEST_SET_CREDENTIALS: "REQUEST_SET_CREDENTIALS",
+    REQUEST_LOAD_BY_ENTITY: "REQUEST_LOAD_BY_ENTITY",
+    REQUEST_USER_ACTION: "REQUEST_USER_ACTION",
+    REQUEST_DISPLAY_STATUS: "REQUEST_DISPLAY_STATUS",
+    REQUEST_CUSTOM_COMMAND: "REQUEST_CUSTOM_COMMAND",
+    REQUEST_FOCUS_STATE: "REQUEST_FOCUS_STATE",
+    REQUEST_QUEUE_LOAD: "REQUEST_QUEUE_LOAD",
+    REQUEST_QUEUE_INSERT: "REQUEST_QUEUE_INSERT",
+    REQUEST_QUEUE_UPDATE: "REQUEST_QUEUE_UPDATE",
+    REQUEST_QUEUE_REMOVE: "REQUEST_QUEUE_REMOVE",
+    REQUEST_QUEUE_REORDER: "REQUEST_QUEUE_REORDER",
+    REQUEST_QUEUE_GET_ITEM_RANGE: "REQUEST_QUEUE_GET_ITEM_RANGE",
+    REQUEST_QUEUE_GET_ITEMS: "REQUEST_QUEUE_GET_ITEMS",
+    REQUEST_QUEUE_GET_ITEM_IDS: "REQUEST_QUEUE_GET_ITEM_IDS",
+    BREAK_CLIP_ENDED: "BREAK_CLIP_ENDED",
+    BREAK_CLIP_STARTED: "BREAK_CLIP_STARTED",
+    BUFFERING: "BUFFERING",
+    ERROR: "ERROR",
+    MEDIA_FINISHED: "MEDIA_FINISHED",
+    MEDIA_STATUS: "MEDIA_STATUS",
+    PAUSE: "PAUSE",
+    PLAYER_LOADING: "PLAYER_LOADING",
+    PLAYER_LOAD_COMPLETE: "PLAYER_LOAD_COMPLETE",
+    PLAYER_PRELOADING: "PLAYER_PRELOADING",
+    PLAYER_PRELOADING_CANCELLED: "PLAYER_PRELOADING_CANCELLED",
+    PLAYING: "PLAYING",
+    REQUEST_PRECACHE: "REQUEST_PRECACHE",
+    RATE_CHANGE: "RATE_CHANGE",
+    SEEKED: "SEEKED",
+    SEEKING: "SEEKING"
+  };
+
+  declare export type DetailedErrorCode = {
+    MEDIA_UNKNOWN: "MEDIA_UNKNOWN",
+    MEDIA_ABORTED: "MEDIA_ABORTED",
+    MEDIA_DECODE: "MEDIA_DECODE",
+    MEDIA_NETWORK: "MEDIA_NETWORK",
+    MEDIA_SRC_NOT_SUPPORTED: "MEDIA_SRC_NOT_SUPPORTED",
+    SOURCE_BUFFER_FAILURE: "SOURCE_BUFFER_FAILURE",
+    MEDIAKEYS_UNKNOWN: "MEDIAKEYS_UNKNOWN",
+    MEDIAKEYS_NETWORK: "MEDIAKEYS_NETWORK",
+    MEDIAKEYS_UNSUPPORTED: "MEDIAKEYS_UNSUPPORTED",
+    MEDIAKEYS_WEBCRYPTO: "MEDIAKEYS_WEBCRYPTO",
+    NETWORK_UNKNOWN: "NETWORK_UNKNOWN",
+    SEGMENT_NETWORK: "SEGMENT_NETWORK",
+    HLS_NETWORK_MASTER_PLAYLIST: "HLS_NETWORK_MASTER_PLAYLIST",
+    HLS_NETWORK_PLAYLIST: "HLS_NETWORK_PLAYLIST",
+    HLS_NETWORK_NO_KEY_RESPONSE: "HLS_NETWORK_NO_KEY_RESPONSE",
+    HLS_NETWORK_KEY_LOAD: "HLS_NETWORK_KEY_LOAD",
+    HLS_NETWORK_INVALID_SEGMENT: "HLS_NETWORK_INVALID_SEGMENT",
+    HLS_SEGMENT_PARSING: "HLS_SEGMENT_PARSING",
+    DASH_NETWORK: "DASH_NETWORK",
+    DASH_NO_INIT: "DASH_NO_INIT",
+    SMOOTH_NETWORK: "SMOOTH_NETWORK",
+    SMOOTH_NO_MEDIA_DATA: "SMOOTH_NO_MEDIA_DATA",
+    MANIFEST_UNKNOWN: "MANIFEST_UNKNOWN",
+    HLS_MANIFEST_MASTER: "HLS_MANIFEST_MASTER",
+    HLS_MANIFEST_PLAYLIST: "HLS_MANIFEST_PLAYLIST",
+    DASH_MANIFEST_UNKNOWN: "DASH_MANIFEST_UNKNOWN",
+    DASH_MANIFEST_NO_PERIODS: "DASH_MANIFEST_NO_PERIODS",
+    DASH_MANIFEST_NO_MIMETYPE: "DASH_MANIFEST_NO_MIMETYPE",
+    DASH_INVALID_SEGMENT_INFO: "DASH_INVALID_SEGMENT_INFO",
+    SMOOTH_MANIFEST: "SMOOTH_MANIFEST",
+    SEGMENT_UNKNOWN: "SEGMENT_UNKNOWN",
+    TEXT_UNKNOWN: "TEXT_UNKNOWN",
+    APP: "APP",
+    BREAK_CLIP_LOADING_ERROR: "BREAK_CLIP_LOADING_ERROR",
+    BREAK_SEEK_INTERCEPTOR_ERROR: "BREAK_SEEK_INTERCEPTOR_ERROR",
+    IMAGE_ERROR: "IMAGE_ERROR",
+    LOAD_INTERRUPTED: "LOAD_INTERRUPTED",
+    GENERIC: "GENERIC"
+  };
+
+  declare export type EndedReason = {
+    END_OF_STREAM: "END_OF_STREAM",
+    ERROR: "ERROR",
+    STOPPED: "STOPPED",
+    INTERRUPTED: "INTERRUPTED",
+    SKIPPED: "SKIPPED",
+    BREAK_SWITCH: "BREAK_SWITCH"
+  };
   /**
    * Event data for @see{@link EventType.SEGMENT_DOWNLOADED} event.
    */
@@ -1170,7 +1350,7 @@ declare module 'cast.framework.events' {
     constructor(
       type: EventType,
       requestData?: RequestData,
-      senderId?: string,
+      senderId?: string
     ): RequestEvent;
 
     /**
@@ -1212,7 +1392,7 @@ declare module 'cast.framework.events' {
   declare export class MediaFinishedEvent {
     constructor(
       currentMediaTime?: number,
-      endedReason?: EndedReason,
+      endedReason?: EndedReason
     ): MediaFinishedEvent;
 
     /**
@@ -1341,7 +1521,7 @@ declare module 'cast.framework.events' {
   declare export class ClipEndedEvent {
     constructor(
       currentMediaTime: number,
-      endedReason?: EndedReason,
+      endedReason?: EndedReason
     ): ClipEndedEvent;
 
     /**
@@ -1392,7 +1572,7 @@ declare module 'cast.framework.events' {
       total?: number,
       whenSkippable?: number,
       endedReason?: EndedReason,
-      breakClipId?: string,
+      breakClipId?: string
     ): BreaksEvent;
 
     /**
@@ -1437,91 +1617,254 @@ declare module 'cast.framework.events' {
   }
 }
 
-declare module 'cast.framework.events.category' {
-  declare export type EventType = {
-    REQUEST_SEEK: 'REQUEST_SEEK',
-    REQUEST_LOAD: 'REQUEST_LOAD',
-    REQUEST_STOP: 'REQUEST_STOP',
-    REQUEST_PAUSE: 'REQUEST_PAUSE',
-    REQUEST_PLAY: 'REQUEST_PLAY',
-    REQUEST_PLAY_AGAIN: 'REQUEST_PLAY_AGAIN',
-    REQUEST_PLAYBACK_RATE_CHANGE: 'REQUEST_PLAYBACK_RATE_CHANGE',
-    REQUEST_SKIP_AD: 'REQUEST_SKIP_AD',
-    REQUEST_VOLUME_CHANGE: 'REQUEST_VOLUME_CHANGE',
-    REQUEST_EDIT_TRACKS_INFO: 'REQUEST_EDIT_TRACKS_INFO',
-    REQUEST_EDIT_AUDIO_TRACKS: 'REQUEST_EDIT_AUDIO_TRACKS',
-    REQUEST_SET_CREDENTIALS: 'REQUEST_SET_CREDENTIALS',
-    REQUEST_LOAD_BY_ENTITY: 'REQUEST_LOAD_BY_ENTITY',
-    REQUEST_USER_ACTION: 'REQUEST_USER_ACTION',
-    REQUEST_DISPLAY_STATUS: 'REQUEST_DISPLAY_STATUS',
-    REQUEST_CUSTOM_COMMAND: 'REQUEST_CUSTOM_COMMAND',
-    REQUEST_FOCUS_STATE: 'REQUEST_FOCUS_STATE',
-    REQUEST_QUEUE_LOAD: 'REQUEST_QUEUE_LOAD',
-    REQUEST_QUEUE_INSERT: 'REQUEST_QUEUE_INSERT',
-    REQUEST_QUEUE_UPDATE: 'REQUEST_QUEUE_UPDATE',
-    REQUEST_QUEUE_REMOVE: 'REQUEST_QUEUE_REMOVE',
-    REQUEST_QUEUE_REORDER: 'REQUEST_QUEUE_REORDER',
-    REQUEST_QUEUE_GET_ITEM_RANGE: 'REQUEST_QUEUE_GET_ITEM_RANGE',
-    REQUEST_QUEUE_GET_ITEMS: 'REQUEST_QUEUE_GET_ITEMS',
-    REQUEST_QUEUE_GET_ITEM_IDS: 'REQUEST_QUEUE_GET_ITEM_IDS',
-    BREAK_CLIP_ENDED: 'BREAK_CLIP_ENDED',
-    BREAK_CLIP_STARTED: 'BREAK_CLIP_STARTED',
-    BUFFERING: 'BUFFERING',
-    ERROR: 'ERROR',
-    MEDIA_FINISHED: 'MEDIA_FINISHED',
-    MEDIA_STATUS: 'MEDIA_STATUS',
-    PAUSE: 'PAUSE',
-    PLAYER_LOADING: 'PLAYER_LOADING',
-    PLAYER_LOAD_COMPLETE: 'PLAYER_LOAD_COMPLETE',
-    PLAYER_PRELOADING: 'PLAYER_PRELOADING',
-    PLAYER_PRELOADING_CANCELLED: 'PLAYER_PRELOADING_CANCELLED',
-    PLAYING: 'PLAYING',
-    REQUEST_PRECACHE: 'REQUEST_PRECACHE',
-    RATE_CHANGE: 'RATE_CHANGE',
-    SEEKED: 'SEEKED',
-    SEEKING: 'SEEKING',
+declare module "cast.framework.messages" {
+  declare export type UserAction = {
+    LIKE: "LIKE",
+    DISLIKE: "DISLIKE",
+    FOLLOW: "FOLLOW",
+    UNFOLLOW: "UNFOLLOW",
+    FLAG: "FLAG",
+    SKIP_AD: "SKIP_AD"
   };
-}
 
-declare module 'cast.framework.messages' {
+  declare export type UserActionContext = {
+    UNKNOWN_CONTEXT: "UNKNOWN_CONTEXT",
+    ALBUM: "ALBUM",
+    ARTIST: "ARTIST",
+    PLAYLIST: "PLAYLIST",
+    EPISODE: "EPISODE",
+    SERIES: "SERIES",
+    MOVIE: "MOVIE",
+    CHANNEL: "CHANNEL",
+    TEAM: "TEAM",
+    PLAYER: "PLAYER",
+    COACH: "COACH"
+  };
+
+  declare export type TrackType = {
+    TEXT: "TEXT",
+    AUDIO: "AUDIO",
+    VIDEO: "VIDEO"
+  };
+
+  declare export type TextTrackWindowType = {
+    NONE: "NONE",
+    NORMAL: "NORMAL",
+    ROUNDED_CORNERS: "ROUNDED_CORNERS"
+  };
+
+  declare export type TextTrackType = {
+    SUBTITLES: "SUBTITLES",
+    CAPTIONS: "CAPTIONS",
+    DESCRIPTIONS: "DESCRIPTIONS",
+    CHAPTERS: "CHAPTERS",
+    METADATA: "METADATA"
+  };
+
+  declare export type TextTrackFontStyle = {
+    NORMAL: "NORMAL",
+    BOLD: "BOLD",
+    BOLD_ITALIC: "BOLD_ITALIC",
+    ITALIC: "ITALIC"
+  };
+
+  declare export type TextTrackFontGenericFamily = {
+    SANS_SERIF: "SANS_SERIF",
+    MONOSPACED_SANS_SERIF: "MONOSPACED_SANS_SERIF",
+    SERIF: "SERIF",
+    MONOSPACED_SERIF: "MONOSPACED_SERIF",
+    CASUAL: "CASUAL",
+    CURSIVE: "CURSIVE",
+    SMALL_CAPITALS: "SMALL_CAPITALS:"
+  };
+
+  declare export type TextTrackEdgeType = {
+    NONE: "NONE",
+    OUTLINE: "OUTLINE",
+    DROP_SHADOW: "DROP_SHADOW",
+    RAISED: "RAISED",
+    DEPRESSED: "DEPRESSED"
+  };
+
+  declare export type StreamType = {
+    BUFFERED: "BUFFERED",
+    LIVE: "LIVE",
+    NONE: "NONE"
+  };
+
+  declare export type StreamingProtocolType = {
+    UNKNOWN: "UNKNOWN",
+    MPEG_DASH: "MPEG_DASH",
+    HLS: "HLS",
+    SMOOTH_STREAMING: "SMOOTH_STREAMING"
+  };
+
+  declare export type SeekResumeState = {
+    PLAYBACK_START: "PLAYBACK_START",
+    PLAYBACK_PAUSE: "PLAYBACK_PAUSE"
+  };
+
+  declare export type Command = {
+    PAUSE: "PAUSE",
+    SEEK: "SEEK",
+    STREAM_VOLUME: "STREAM_VOLUME",
+    STREAM_MUTE: "STREAM_MUTE",
+    ALL_BASIC_MEDIA: "ALL_BASIC_MEDIA",
+    QUEUE_NEXT: "QUEUE_NEXT",
+    QUEUE_PREV: "QUEUE_PREV",
+    QUEUE_SHUFFLE: "QUEUE_SHUFFLE",
+    SKIP_AD: "SKIP_AD"
+  };
+
+  declare export type ErrorReason = {
+    INVALID_COMMAND: "INVALID_COMMAND",
+    INVALID_PARAMS: "INVALID_PARAMS",
+    INVALID_MEDIA_SESSION_ID: "INVALID_MEDIA_SESSION_ID",
+    SKIP_LIMIT_REACHED: "SKIP_LIMIT_REACHED",
+    NOT_SUPPORTED: "NOT_SUPPORTED",
+    LANGUAGE_NOT_SUPPORTED: "LANGUAGE_NOT_SUPPORTED",
+    END_OF_QUEUE: "END_OF_QUEUE",
+    APP_ERROR: "APP_ERROR",
+    AUTHENTICATION_EXPIRED: "AUTHENTICATION_EXPIRED",
+    PREMIUM_ACCOUNT_REQUIRED: "PREMIUM_ACCOUNT_REQUIRED",
+    CONCURRENT_STREAM_LIMIT: "CONCURRENT_STREAM_LIMIT",
+    PARENTAL_CONTROL_RESTRICTED: "PARENTAL_CONTROL_RESTRICTED",
+    NOT_AVAILABLE_IN_REGION: "NOT_AVAILABLE_IN_REGION",
+    CONTENT_ALREADY_PLAYING: "CONTENT_ALREADY_PLAYING",
+    INVALID_REQUEST: "INVALID_REQUEST",
+    GENERIC_LOAD_ERROR: "GENERIC_LOAD_ERROR"
+  };
+
+  declare export type ErrorType = {
+    INVALID_PLAYER_STATE: "INVALID_PLAYER_STATE",
+    LOAD_FAILED: "LOAD_FAILED",
+    LOAD_CANCELLED: "LOAD_CANCELLED",
+    INVALID_REQUEST: "INVALID_REQUEST",
+    ERROR: "ERROR"
+  };
+
+  declare export type ExtendedPlayerState = {
+    LOADING: "LOADING"
+  };
+
+  declare export type FocusState = {
+    IN_FOCUS: "IN_FOCUS",
+    NOT_IN_FOCUS: "NOT_IN_FOCUS"
+  };
+
+  declare export type GetStatusOptions = {
+    NO_METADATA: "NO_METADATA",
+    NO_QUEUE_ITEMS: "NO_QUEUE_ITEMS"
+  };
+
+  declare export type PlayStringId = {
+    FREE_TRIAL_ABOUT_TO_EXPIRE: "FREE_TRIAL_ABOUT_TO_EXPIRE",
+    SUBSCRIPTION_ABOUT_TO_EXPIRE: "SUBSCRIPTION_ABOUT_TO_EXPIRE",
+    STREAM_HIJACKED: "STREAM_HIJACKED"
+  };
+
+  declare export type HdrType = {
+    SDR: "SDR",
+    HDR: "HDR",
+    DV: "DV"
+  };
+
+  declare export type HlsSegmentFormat = {
+    AAC: "AAC",
+    AC3: "AC3",
+    MP3: "MP3",
+    TS: "TS",
+    TS_AAC: "TS_AAC"
+  };
+
+  declare export type IdleReason = {
+    CANCELLED: "CANCELLED",
+    INTERRUPTED: "INTERRUPTED",
+    FINISHED: "FINISHED",
+    ERROR: "ERROR"
+  };
+
   declare export type RepeatMode = {
-    REPEAT_OFF: 'REPEAT_OFF',
-    REPEAT_ALL: 'REPEAT_ALL',
-    REPEAT_SINGLE: 'REPEAT_SINGLE',
-    REPEAT_ALL_AND_SHUFFLE: 'REPEAT_ALL_AND_SHUFFLE',
+    REPEAT_OFF: "REPEAT_OFF",
+    REPEAT_ALL: "REPEAT_ALL",
+    REPEAT_SINGLE: "REPEAT_SINGLE",
+    REPEAT_ALL_AND_SHUFFLE: "REPEAT_ALL_AND_SHUFFLE"
+  };
+
+  declare export type MessageType = {
+    MEDIA_STATUS: "MEDIA_STATUS",
+    CLOUD_STATUS: "CLOUD_STATUS",
+    QUEUE_CHANGE: "QUEUE_CHANGE",
+    QUEUE_ITEMS: "QUEUE_ITEMS",
+    QUEUE_ITEM_IDS: "QUEUE_ITEM_IDS",
+    GET_STATUS: "GET_STATUS",
+    LOAD: "LOAD",
+    PAUSE: "PAUSE",
+    STOP: "STOP",
+    PLAY: "PLAY",
+    SKIP_AD: "SKIP_AD",
+    PLAY_AGAIN: "PLAY_AGAIN",
+    SEEK: "SEEK",
+    SET_PLAYBACK_RATE: "SET_PLAYBACK_RATE",
+    SET_VOLUME: "SET_VOLUME",
+    EDIT_TRACKS_INFO: "EDIT_TRACKS_INFO",
+    EDIT_AUDIO_TRACKS: "EDIT_AUDIO_TRACKS",
+    PRECACHE: "PRECACHE",
+    PRELOAD: "PRELOAD",
+    QUEUE_LOAD: "QUEUE_LOAD",
+    QUEUE_INSERT: "QUEUE_INSERT",
+    QUEUE_UPDATE: "QUEUE_UPDATE",
+    QUEUE_REMOVE: "QUEUE_REMOVE",
+    QUEUE_REORDER: "QUEUE_REORDER",
+    QUEUE_NEXT: "QUEUE_NEXT",
+    QUEUE_PREV: "QUEUE_PREV",
+    QUEUE_GET_ITEM_RANGE: "QUEUE_GET_ITEM_RANGE",
+    QUEUE_GET_ITEMS: "QUEUE_GET_ITEMS",
+    QUEUE_GET_ITEM_IDS: "QUEUE_GET_ITEM_IDS",
+    QUEUE_SHUFFLE: "QUEUE_SHUFFLE",
+    SET_CREDENTIALS: "SET_CREDENTIALS",
+    LOAD_BY_ENTITY: "LOAD_BY_ENTITY",
+    USER_ACTION: "USER_ACTION",
+    DISPLAY_STATUS: "DISPLAY_STATUS",
+    FOCUS_STATE: "FOCUS_STATE",
+    CUSTOM_COMMAND: "CUSTOM_COMMAND"
+  };
+
+  declare export type MetadataType = {
+    GENERIC: "GENERIC",
+    MOVIE: "MOVIE",
+    TV_SHOW: "TV_SHOW",
+    MUSIC_TRACK: "MUSIC_TRACK",
+    PHOTO: "PHOTO"
   };
 
   declare export type QueueType = {
-    ALBUM: 'ALBUM',
-    PLAYLIST: 'PLAYLIST',
-    AUDIOBOOK: 'AUDIOBOOK',
-    RADIO_STATION: 'RADIO_STATION',
-    PODCAST_SERIES: 'PODCAST_SERIES',
-    TV_SERIES: 'TV_SERIES',
-    VIDEO_PLAYLIST: 'VIDEO_PLAYLIST',
-    LIVE_TV: 'LIVE_TV',
-    MOVIE: 'MOVIE',
+    ALBUM: "ALBUM",
+    PLAYLIST: "PLAYLIST",
+    AUDIOBOOK: "AUDIOBOOK",
+    RADIO_STATION: "RADIO_STATION",
+    PODCAST_SERIES: "PODCAST_SERIES",
+    TV_SERIES: "TV_SERIES",
+    VIDEO_PLAYLIST: "VIDEO_PLAYLIST",
+    LIVE_TV: "LIVE_TV",
+    MOVIE: "MOVIE"
   };
+
   declare export type QueueChangeType = {
-    INSERT: 'INSERT',
-    REMOVE: 'REMOVE',
-    ITEMS_CHANGE: 'ITEMS_CHANGE',
-    UPDATE: 'UPDATE',
-    NO_CHANGE: 'NO_CHANGE',
+    INSERT: "INSERT",
+    REMOVE: "REMOVE",
+    ITEMS_CHANGE: "ITEMS_CHANGE",
+    UPDATE: "UPDATE",
+    NO_CHANGE: "NO_CHANGE"
   };
 
   declare export type PlayerState = {
-    IDLE: 'IDLE',
-    PLAYING: 'PLAYING',
-    PAUSED: 'PAUSED',
-    BUFFERING: 'BUFFERING',
+    IDLE: "IDLE",
+    PLAYING: "PLAYING",
+    PAUSED: "PAUSED",
+    BUFFERING: "BUFFERING"
   };
 
-  declare export type PlayerStringId = {
-    FREE_TRIAL_ABOUT_TO_EXPIRE: '',
-    SUBSCRIPTION_ABOUT_TO_EXPIRE: '',
-    STREAM_HIJACKED: '',
-  };
   /**
    * RefreshCredentials request data.
    */
@@ -1559,7 +1902,7 @@ declare module 'cast.framework.messages' {
     constructor(
       width: number,
       height: number,
-      hdrType: HdrType,
+      hdrType: HdrType
     ): VideoInformation;
 
     /**
@@ -2099,7 +2442,7 @@ declare module 'cast.framework.messages' {
       repeatMode?: RepeatMode,
       items?: Array<QueueItem>,
       startIndex?: number,
-      startTime?: number,
+      startTime?: number
     ): QueueData;
 
     /**
@@ -2213,7 +2556,7 @@ declare module 'cast.framework.messages' {
   declare export class PlayStringRequestData {
     constructor(
       stringId: PlayStringId,
-      opt_arguments?: Array<string>,
+      opt_arguments?: Array<string>
     ): PlayStringRequestData;
 
     /**
@@ -2640,7 +2983,7 @@ declare module 'cast.framework.messages' {
       start?: number,
       end?: number,
       isMovingWindow?: boolean,
-      isLiveDone?: boolean,
+      isLiveDone?: boolean
     ): LiveSeekableRange;
 
     /**
@@ -2760,7 +3103,7 @@ declare module 'cast.framework.messages' {
     constructor(
       itemId: number,
       nextCount: number,
-      prevCount: number,
+      prevCount: number
     ): FetchItemsRequestData;
 
     /**
@@ -2785,7 +3128,7 @@ declare module 'cast.framework.messages' {
   declare export class ExtendedMediaStatus {
     constructor(
       playerState: MediaInformation,
-      opt_media?: MediaInformation,
+      opt_media?: MediaInformation
     ): ExtendedMediaStatus;
 
     /**
@@ -2803,7 +3146,7 @@ declare module 'cast.framework.messages' {
   declare export class ErrorEvent {
     constructor(
       detailedErrorCode?: DetailedErrorCode,
-      error?: mixed,
+      error?: mixed
     ): ErrorEvent;
     /**
      * An error code representing the cause of the error.
@@ -2911,7 +3254,7 @@ declare module 'cast.framework.messages' {
   declare export class BreakStatus {
     constructor(
       currentBreakTime: number,
-      currentBreakClipTime: number,
+      currentBreakClipTime: number
     ): BreakStatus;
 
     /**
@@ -3006,7 +3349,7 @@ declare module 'cast.framework.messages' {
     constructor(
       id: string,
       breakClipIds: Array<string>,
-      position: number,
+      position: number
     ): Break;
     /**
      * List of ids of break clip that this break includes.
