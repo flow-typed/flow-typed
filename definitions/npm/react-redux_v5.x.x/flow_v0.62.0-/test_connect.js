@@ -39,6 +39,23 @@ function testPassingPropsToConnectedComponent() {
   connect(mapStateToProps)('');
 }
 
+function doesNotRequireDefinedComponentToTypeCheck() {
+  type Props = {
+    stringProp: string,
+  };
+
+  const Component = ({ stringProp }: Props) => {
+    return <span>{stringProp}</span>;
+  };
+
+  const mapStateToProps = (state: {}) => ({
+    // $ExpectError wrong type for stringProp
+    stringProp: false,
+  });
+
+  connect(mapStateToProps)(Component);
+}
+
 function testExactProps() {
   type Props = {|
     forMapStateToProps: string,

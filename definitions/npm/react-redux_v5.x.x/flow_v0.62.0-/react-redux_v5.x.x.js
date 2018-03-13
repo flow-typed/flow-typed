@@ -50,10 +50,12 @@ declare module "react-redux" {
 
   declare type OmitDispatch<Component> = $Diff<Component, {dispatch: Dispatch<*>}>;
 
-  declare export function connect<Com: ComponentType<*>, RS: Object, DP: Object, RSP: Object>(
-    mapStateToProps: MapStateToProps<RS, DP, RSP>,
+  declare export function connect<Com: ComponentType<*>,RS: Object, DP: Object, RSP: Object,
+    OMP: OmitDispatch<ElementConfig<Com>>,
+    CP: $Diff<OMP, RSP>>(
+    mapStateToProps: MapStateToProps<RS,DP, RSP>,
     mapDispatchToProps?: null
-  ): (component: Com) => ComponentType<$Diff<OmitDispatch<ElementConfig<Com>>, RSP> & DP>;
+  ): (component: Com) => ComponentType<CP & DP>;
 
   declare export function connect<Com: ComponentType<*>>(
     mapStateToProps?: null,
