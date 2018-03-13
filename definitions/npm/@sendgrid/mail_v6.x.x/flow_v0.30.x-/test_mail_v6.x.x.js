@@ -97,3 +97,25 @@ mail.send({
     'X-CustomHeader': 'Custom header value',
   },
 });
+
+// Missing options
+// $ExpectError
+mail.send();
+
+// Empty options hash
+// $ExpectError
+mail.send({});
+
+// Incorrect options
+mail.send({
+  // $ExpectError
+  from: 0,
+});
+
+// Missing from address
+// $ExpectError
+mail.send({
+  to: 'dimitri.dobairro@example.org',
+  subject: 'Hello attachment',
+  html: '<p>Here’s an attachment for you!</p>',
+});
