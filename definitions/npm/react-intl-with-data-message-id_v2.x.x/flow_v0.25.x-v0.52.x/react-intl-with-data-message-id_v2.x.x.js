@@ -5,7 +5,7 @@
  */
 import React from "react";
 
-// Mostly from https://github.com/yahoo/react-intl/wiki/API#react-intl-with-data-message-id-api
+// Mostly from https://github.com/yahoo/react-intl/wiki/API#react-intl-api
 
 type LocaleData = {
   locale: string,
@@ -95,7 +95,7 @@ type PluralCategoryString = "zero" | "one" | "two" | "few" | "many" | "other";
 
 type $DateParseable = number | string | Date;
 
-declare module "react-intl-with-data-message-id" {
+declare module "react-intl" {
   // PropType checker
   declare function intlShape(
     props: Object,
