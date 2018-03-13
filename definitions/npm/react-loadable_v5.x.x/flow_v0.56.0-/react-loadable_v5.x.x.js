@@ -1,6 +1,4 @@
 declare module 'react-loadable' {
-  declare type LoaderResult<T> = T | { 'default': T };
-
   declare type LoadingProps = {
     isLoading: boolean,
     pastDelay: boolean,
