@@ -10,7 +10,7 @@ import {getDiff} from '../lib/git';
 
 import got from 'got';
 import * as semver from 'semver';
-import * as unzip from 'unzip';
+import * as unzip from 'unzipper';
 import typeof Yargs from 'yargs';
 import type {FlowVersion} from '../lib/flowVersion.js';
 
