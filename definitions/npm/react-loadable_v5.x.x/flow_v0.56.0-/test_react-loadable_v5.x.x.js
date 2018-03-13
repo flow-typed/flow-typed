@@ -56,11 +56,20 @@ Loadable({
   render: (a: string, b: string) => null
 });
 
-Loadable({
-  loader: () => Promise.resolve(Component),
-  loading: () => null,
-  render: (C: React$ComponentType<Props> | { default: React$ComponentType<Props> }, props: Props) => null
-});
+{
+  class SyncComponent extends React.Component<{ a: string, b: number }> {}
+
+  const LoadableComponent = Loadable({
+    loader: (): Promise<number> => Promise.resolve(1),
+    loading: () => null,
+    render: (b: number, props: Props) => <SyncComponent a={props.a} b={b} />
+  });
+
+  const foo = <LoadableComponent a="foo"/>;
+  // $ExpectError "a" property should be a string (inherited from Component)
+  const bar = <LoadableComponent a={1} />;
+}
+
 
 {
   const Loaded = Loadable({
@@ -84,4 +93,42 @@ Loadable({
   const noWay = <Loaded a={1} />;
 
   <Loaded a="foo"/>
+}
+
+{
+  const LoadableComponent: React$ComponentType<Props> = Loadable({
+    loader: () => Promise.resolve({ default: Component }),
+    loading: () => null
+  });
+}
+
+{
+  const LoadableComponent = Loadable({
+    loader: () => Promise.resolve({ default: Component }),
+    loading: () => null
+  });
+
+  LoadableComponent.preload();
+}
+
+{
+  (async function() {
+    await Loadable.preloadAll();
+    await Loadable.preloadReady();
+  })();
+}
+
+{
+  class Component extends React.Component<{ a: string, b: number }> {}
+
+  const LoadableMap = Loadable.Map({
+    loading: () => null,
+    loader: {
+      Cmp: () => Promise.resolve({ foo: Component }),
+      b: () => Promise.resolve(1)
+    },
+    render: (loaded, props: { a: string }) => <loaded.Cmp a={props.a} b={loaded.b} />
+  });
+
+  <LoadableMap a="foo" />
 }
