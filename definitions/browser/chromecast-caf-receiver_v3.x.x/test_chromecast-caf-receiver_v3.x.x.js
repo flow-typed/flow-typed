@@ -1,10 +1,12 @@
+// @flow
 import { TextTracksManager } from "cast.framework";
 import { StandbyChangedEvent } from "cast.framework.system";
-import { PlayerData } from "cast.framework.ui";
+import { PlayerData, ContentType } from "cast.framework.ui";
 import { BreakManager } from "cast.framework.breaks";
 import { MediaStatusEvent } from "cast.framework.events";
 import { Track, Break, MediaStatus, QueueData } from "cast.framework.messages";
 
+const ct = ContentType.VIDEO;
 // framework tests
 const track = new Track(123, {});
 const ttm = new TextTracksManager({});
