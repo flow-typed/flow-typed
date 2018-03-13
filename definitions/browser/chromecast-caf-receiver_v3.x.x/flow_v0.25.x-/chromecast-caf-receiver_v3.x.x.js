@@ -861,7 +861,7 @@ declare module 'cast.framework' {
      * Sets a handler to return the media url for a load request. This handler can be used to avoid having the media content url published as part of the media status. By default the media contentId is used as the content url.
      */
     setMediaUrlResolver(
-      resolver: (loadRequestData: LoadRequestData | null) => void,
+      resolver: (loadRequestData: LoadRequestData ) => void,
     ): void;
 
     /**
@@ -869,7 +869,7 @@ declare module 'cast.framework' {
      */
     setMessageInterceptor(
       type: MessageType,
-      interceptor: (requestData: RequestData | null) => void,
+      interceptor: (requestData: RequestData ) => void,
     ): void;
 
     /**
@@ -979,7 +979,7 @@ declare module 'cast.framework' {
     /**
      * The content of the request. Can be used to modify license request body.
      */
-    content: Uint8Array | null;
+    content: Uint8Array ;
 
     /**
      * An object containing properties that you would like to send in the header.
@@ -989,7 +989,7 @@ declare module 'cast.framework' {
     /**
      * The URL requested.
      */
-    url: string | null;
+    url: string ;
 
     /**
      * Indicates whether CORS Access-Control requests should be made using credentials such as cookies or authorization headers.
@@ -1218,9 +1218,9 @@ declare module 'cast.framework' {
   /** Manages audio tracks. */
   declare export class AudioTracksManager {
     constructor(params: mixed): AudioTracksManager;
-    getActiveId(): number | null;
-    getActiveTrack(): Track | null;
-    getTrackById(id: number): Track | null;
+    getActiveId(): number ;
+    getActiveTrack(): Track ;
+    getTrackById(id: number): Track ;
     getTracks(): Array<Track>;
     getTracksByLanguage(language: string): Array<Track>;
     setActiveById(id: number): void;
@@ -1584,13 +1584,13 @@ declare module 'cast.framework.breaks' {
      * Get current media break by id.
      * @param {*} id
      */
-    getBreakById(id: string): Break | null;
+    getBreakById(id: string): Break ;
 
     /**
      * Get current media break clip by id
      * @param {*} id
      */
-    getBreakClipById(id: string): BreakClip | null;
+    getBreakClipById(id: string): BreakClip ;
 
     /** Get current media break clips. */
     getBreakClips(): Array<BreakClip>;
@@ -2296,7 +2296,7 @@ declare module 'cast.framework.messages' {
     /**
      * Optional request source. It contain the assistent query that initiate the request.
      */
-    source?: string | null;
+    source?: string ;
   }
 
   /**
@@ -3114,7 +3114,7 @@ declare module 'cast.framework.messages' {
     /**
      * Optional request source. It contain the assistent query that initiate the request.
      */
-    source?: string | null;
+    source?: string ;
   }
 
   /**
