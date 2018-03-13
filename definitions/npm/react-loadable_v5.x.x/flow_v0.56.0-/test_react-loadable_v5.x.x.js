@@ -162,7 +162,7 @@ it('Loadable.Map() should work', () => {
       Cmp: () => Promise.resolve({ foo: Component }),
       b: () => Promise.resolve(1)
     },
-    render: (loaded, props: { a: string }) => <loaded.Cmp a={props.a} b={loaded.b} />
+    render: (loaded: { Cmp: { foo: React$ComponentType<{ a: string, b: number }> }, b: number }, props: { a: string }) => <loaded.Cmp.foo a={props.a} b={loaded.b} />
   });
 
   <LoadableMap a="foo" />
