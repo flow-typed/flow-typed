@@ -131,7 +131,7 @@ declare module '@sendgrid/mail' {
   declare class MailService {
     setApiKey(apiKey: string): void;
     setSubstitutionWrappers(left: string, right: string): void;
-    send(data: MailData | MailData[], isMultiple?: boolean, cb?: (err: Error | ResponseError, result: [http$ClientRequest, {}]) => void): Promise<[http$ClientRequest, {}]>;
+    send(data: MailData | MailData[], isMultiple?: boolean, cb?: (err: Error | ResponseError, result: [http$ServerResponse, {}]) => void): Promise<[http$ServerResponse, {}]>;
   }
 
   declare export default MailService & { MailService: MailService };
