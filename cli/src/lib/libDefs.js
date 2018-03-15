@@ -27,7 +27,7 @@ export type LibDef = {|
   testFilePaths: Array<string>,
 |};
 
-export const TEST_FILE_NAME_RE = /(^test_.*\.js$)/;
+export const TEST_FILE_NAME_RE = /^test_.*\.js$/;
 
 const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
@@ -368,7 +368,7 @@ export function parseRepoDirItem(
  */
 function validateTestFile(testFilePath) {
   const testFileName = path.basename(testFilePath);
-  return !TEST_FILE_NAME_RE.test(testFileName);
+  return TEST_FILE_NAME_RE.test(testFileName);
 }
 
 /**
