@@ -1,5 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
+import { describe, it } from 'flow-typed-test';
 import _, {
   compose,
   curry,
@@ -315,16 +316,16 @@ F.prototype.y = "Y";
 const f = new F();
 const topin = _.toPairsIn(f);
 
-// Test union behavior of an individual element
-{
-  const val = values({ a: 1, b: 2, c: true });
-  const val1: number | boolean = val[0];
-}
+describe('values', () => {
+  it('provides a union per element when the types of all values vary', () => {
+    const val = values({ a: 1, b: 2, c: true });
+    const val1: number | boolean = val[0];
+  })
 
-// Test from examples in docs: http://ramdajs.com/docs/#values
-{
-  const vs: Array<number> = values({a: 1, b: 2, c: 3})
-}
+  it('works with the example in the docs http://ramdajs.com/docs/#values', () => {
+    const vs: Array<number> = values({a: 1, b: 2, c: 3})
+  })
+})
 
 const pred = _.where({
   a: (a: string) => a === "foo",
