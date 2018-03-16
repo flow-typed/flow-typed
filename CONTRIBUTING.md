@@ -8,8 +8,8 @@ to existing libdefs.
 
 * [Contributing to the definitions repository](#contributing-to-the-definitions-repository)
 * [Writing libdefs tips](#writing-libdefs-tips)
-  * [Avoid `any` when possible](#avoid-any-when-possible)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
+  * [Avoid `any` when possible](#avoid-any-when-possible)
   * [Always prefix global variables that aren't really meant to be global](#prefix-global-variables-that-arent-really-meant-to-be-global)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
@@ -91,6 +91,23 @@ You know how to do it.
 
 ## Writing libdefs tips
 
+### Don't import types from other libdefs
+
+You might think it would be possible to import types from other libdefs, much the same way you do in your own code:
+
+```js
+import type { MyType } from 'some-module';
+declare module 'other-module' {
+  declare export function takesMyType(val: MyType): number;
+}
+```
+
+...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
+
+You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them, however.
+
+Currently it's not possible to safely import types from other libdefs when making your libdef. [Further discussion here](https://github.com/flowtype/flow-typed/issues/1857).
+
 ### Avoid `any` when possible
 
 Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propogating on to other code, the `any` will potentially cause Flow to miss type errors!
@@ -156,21 +173,6 @@ getUser((user) => console.log('Got the user!'));
 ```
 
 Using `mixed` in place of `any` for the return type of a function or the type of a variable is a judgement call, though. Return types and declared variables flow into users' programs, which means that users will have to prove the type of `mixed` before they can use them.
-
-### Don't import types from other libdefs
-
-You might think it would be possible to import types from other libdefs, much the same way you do in your own code:
-
-```js
-import type { MyType } from 'some-module';
-declare module 'other-module' {
-  declare export function takesMyType(val: MyType): number;
-}
-```
-
-...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
-
-Currently it's not possible to safely import types from other libdefs when making your libdef. [Further discussion here](https://github.com/flowtype/flow-typed/issues/1857).
 
 ### Prefix global variables that aren't really meant to be global
 
