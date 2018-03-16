@@ -1,6 +1,15 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, curry, filter, find, repeat, zipWith } from "ramda";
+import _, {
+  compose,
+  curry,
+  filter,
+  find,
+  pipe,
+  repeat,
+  values,
+  zipWith,
+} from "ramda";
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -151,17 +160,17 @@ const inverted1: { [k: string]: string } = _.invertObj(raceResultsByFirstName);
 const ks: Array<string> = _.keys(raceResultsByFirstName);
 const ksi: Array<string> = _.keysIn(square);
 
-const values = { x: 1, y: 2, z: 3 };
+const xs = { x: 1, y: 2, z: 3 };
 const prependKeyAndDouble = (num, key, obj) => key + num * 2;
 
 const obI: { [k: string]: string } = _.mapObjIndexed(
   prependKeyAndDouble,
-  values
+  xs
 );
 //$ExpectError
 const obI2: { [k: string]: number } = _.mapObjIndexed(
   prependKeyAndDouble,
-  values
+  xs
 );
 
 const ob1 = { a: 1 };
@@ -306,8 +315,16 @@ F.prototype.y = "Y";
 const f = new F();
 const topin = _.toPairsIn(f);
 
-const val = _.values({ a: 1, b: 2, c: true });
-const val1: number | boolean = val[0];
+// Test union behavior of an individual element
+{
+  const val = values({ a: 1, b: 2, c: true });
+  const val1: number | boolean = val[0];
+}
+
+// Test from examples in docs: http://ramdajs.com/docs/#values
+{
+  const vs: Array<number> = values({a: 1, b: 2, c: 3})
+}
 
 const pred = _.where({
   a: (a: string) => a === "foo",
