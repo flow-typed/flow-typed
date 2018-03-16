@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/flowtype/flow-typed/issues"
   },
-  "version": "2.3.0",
+  "version": "2.4.0",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "scripts": {
@@ -59,13 +59,18 @@
     "prettier": "^1.9.2",
     "regenerator-runtime": "^0.11.1"
   },
-  "keywords": ["flow", "flowtype"],
+  "keywords": [
+    "flow",
+    "flowtype"
+  ],
   "jest": {
     "name": "flow-typed-cli",
     "modulePathIgnorePatterns": [
       "<rootDir>/dist/.*",
       "<rootDir>/node_modules/.*"
     ],
-    "testPathIgnorePatterns": ["<rootDir>/.*/__[^/]*-fixtures__/.*"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/.*/__[^/]*-fixtures__/.*"
+    ]
   }
 }
