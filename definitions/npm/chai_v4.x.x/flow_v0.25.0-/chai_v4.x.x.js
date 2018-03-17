@@ -20,25 +20,25 @@ declare module "chai" {
     all: ExpectChain<T>,
 
     a: ExpectChain<T> & ((type: string, message?: string) => ExpectChain<T>),
-    an: ExpectChain<T> & ((type: string) => ExpectChain<T>),
+    an: ExpectChain<T> & ((type: string, message?: string) => ExpectChain<T>),
 
     include: ExpectChain<T> & ((value: mixed, message?: string) => ExpectChain<T>),
     includes: ExpectChain<T> & ((value: mixed, message?: string) => ExpectChain<T>),
-    contain: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
-    contains: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
+    contain: ExpectChain<T> & ((value: mixed, message?: string) => ExpectChain<T>),
+    contains: ExpectChain<T> & ((value: mixed, message?: string) => ExpectChain<T>),
 
     eq: (value: T, message?: string) => ExpectChain<T>,
     eql: (value: T, message?: string) => ExpectChain<T>,
     equal: (value: T, message?: string) => ExpectChain<T>,
-    equals: (value: T) => ExpectChain<T>,
+    equals: (value: T, message?: string) => ExpectChain<T>,
 
     above: (value: T & number, message?: string) => ExpectChain<T>,
-    gt: (value: T & number) => ExpectChain<T>,
-    greaterThan: (value: T & number) => ExpectChain<T>,
+    gt: (value: T & number, message?: string) => ExpectChain<T>,
+    greaterThan: (value: T & number, message?: string) => ExpectChain<T>,
     least: (value: T & number, message?: string) => ExpectChain<T>,
     below: (value: T & number, message?: string) => ExpectChain<T>,
-    lessThan: (value: T & number) => ExpectChain<T>,
-    lt: (value: T & number) => ExpectChain<T>,
+    lessThan: (value: T & number, message?: string) => ExpectChain<T>,
+    lt: (value: T & number, message?: string) => ExpectChain<T>,
     most: (value: T & number, message?: string) => ExpectChain<T>,
     within: (start: T & number, finish: T & number, message?: string) => ExpectChain<T>,
 
@@ -50,7 +50,7 @@ declare module "chai" {
       message?: string
     ) => ExpectChain<P> & ((name: string) => ExpectChain<mixed>),
 
-    length: (value: number) => ExpectChain<T> | ExpectChain<number>,
+    length: (value: number, message?: string) => ExpectChain<T> | ExpectChain<number>,
     lengthOf: (value: number, message?: string) => ExpectChain<T>,
 
     match: (regex: RegExp, message?: string) => ExpectChain<T>,
