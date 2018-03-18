@@ -266,7 +266,7 @@ async function getOrderedFlowBinVersions(
   return _flowBinVersionPromise;
 }
 
-const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+$/;
+const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+(\.exe)?$/;
 /**
  * flow filename should be `flow-vx.x.x`
  * @param {string} name
