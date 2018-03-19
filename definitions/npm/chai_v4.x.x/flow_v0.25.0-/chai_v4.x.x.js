@@ -19,41 +19,42 @@ declare module "chai" {
     any: ExpectChain<T>,
     all: ExpectChain<T>,
 
-    a: ExpectChain<T> & ((type: string) => ExpectChain<T>),
-    an: ExpectChain<T> & ((type: string) => ExpectChain<T>),
+    a: ExpectChain<T> & ((type: string, message?: string) => ExpectChain<T>),
+    an: ExpectChain<T> & ((type: string, message?: string) => ExpectChain<T>),
 
-    include: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
-    includes: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
-    contain: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
-    contains: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
+    include: ExpectChain<T> & ((value: mixed, message?: string) => ExpectChain<T>),
+    includes: ExpectChain<T> & ((value: mixed, message?: string) => ExpectChain<T>),
+    contain: ExpectChain<T> & ((value: mixed, message?: string) => ExpectChain<T>),
+    contains: ExpectChain<T> & ((value: mixed, message?: string) => ExpectChain<T>),
 
-    eq: (value: T) => ExpectChain<T>,
-    eql: (value: T) => ExpectChain<T>,
-    equal: (value: T) => ExpectChain<T>,
-    equals: (value: T) => ExpectChain<T>,
+    eq: (value: T, message?: string) => ExpectChain<T>,
+    eql: (value: T, message?: string) => ExpectChain<T>,
+    equal: (value: T, message?: string) => ExpectChain<T>,
+    equals: (value: T, message?: string) => ExpectChain<T>,
 
-    above: (value: T & number) => ExpectChain<T>,
-    gt: (value: T & number) => ExpectChain<T>,
-    greaterThan: (value: T & number) => ExpectChain<T>,
-    least: (value: T & number) => ExpectChain<T>,
-    below: (value: T & number) => ExpectChain<T>,
-    lessThan: (value: T & number) => ExpectChain<T>,
-    lt: (value: T & number) => ExpectChain<T>,
-    most: (value: T & number) => ExpectChain<T>,
-    within: (start: T & number, finish: T & number) => ExpectChain<T>,
+    above: (value: T & number, message?: string) => ExpectChain<T>,
+    gt: (value: T & number, message?: string) => ExpectChain<T>,
+    greaterThan: (value: T & number, message?: string) => ExpectChain<T>,
+    least: (value: T & number, message?: string) => ExpectChain<T>,
+    below: (value: T & number, message?: string) => ExpectChain<T>,
+    lessThan: (value: T & number, message?: string) => ExpectChain<T>,
+    lt: (value: T & number, message?: string) => ExpectChain<T>,
+    most: (value: T & number, message?: string) => ExpectChain<T>,
+    within: (start: T & number, finish: T & number, message?: string) => ExpectChain<T>,
 
-    instanceof: (constructor: mixed) => ExpectChain<T>,
+    instanceof: (constructor: mixed, message?: string) => ExpectChain<T>,
     nested: ExpectChain<T>,
     property: <P>(
       name: string,
-      value?: P
+      value?: P, 
+      message?: string
     ) => ExpectChain<P> & ((name: string) => ExpectChain<mixed>),
 
-    length: (value: number) => ExpectChain<T> | ExpectChain<number>,
-    lengthOf: (value: number) => ExpectChain<T>,
+    length: (value: number, message?: string) => ExpectChain<T> | ExpectChain<number>,
+    lengthOf: (value: number, message?: string) => ExpectChain<T>,
 
-    match: (regex: RegExp) => ExpectChain<T>,
-    string: (string: string) => ExpectChain<T>,
+    match: (regex: RegExp, message?: string) => ExpectChain<T>,
+    string: (string: string, message?: string) => ExpectChain<T>,
 
     key: (key: string) => ExpectChain<T>,
     keys: (
@@ -67,19 +68,21 @@ declare module "chai" {
       msg?: string
     ) => ExpectChain<T>,
 
-    respondTo: (method: string) => ExpectChain<T>,
+    respondTo: (method: string, message?: string) => ExpectChain<T>,
     itself: ExpectChain<T>,
 
-    satisfy: (method: (value: T) => boolean) => ExpectChain<T>,
+    satisfy: (method: (value: T) => boolean, message?: string) => ExpectChain<T>,
 
-    closeTo: (expected: T & number, delta: number) => ExpectChain<T>,
+    closeTo: (expected: T & number, delta: number, message?: string) => ExpectChain<T>,
 
-    members: (set: mixed) => ExpectChain<T>,
-    oneOf: (list: Array<T>) => ExpectChain<T>,
+    members: (set: mixed, message?: string) => ExpectChain<T>,
+    oneOf: (list: Array<T>, message?: string) => ExpectChain<T>,
 
-    change: (obj: mixed, key: string) => ExpectChain<T>,
-    increase: (obj: mixed, key: string) => ExpectChain<T>,
-    decrease: (obj: mixed, key: string) => ExpectChain<T>,
+    change: (obj: mixed, key: string, message?: string) => ExpectChain<T>,
+    increase: (obj: mixed, key: string, message?: string) => ExpectChain<T>,
+    decrease: (obj: mixed, key: string, message?: string) => ExpectChain<T>,
+
+    by: (delta: number, message?: string) => ExpectChain<T>,
 
     // dirty-chai
     ok: () => ExpectChain<T>,
