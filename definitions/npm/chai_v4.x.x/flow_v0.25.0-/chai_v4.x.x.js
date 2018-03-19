@@ -136,7 +136,9 @@ declare module "chai" {
     data: (key: string, val?: any) => ExpectChain<T>,
     prop: (key: string, val?: any) => ExpectChain<T>,
     state: (key: string, val?: any) => ExpectChain<T>,
-    value: (val: string) => ExpectChain<T>
+    value: (val: string) => ExpectChain<T>,
+    className: (val: string) => ExpectChain<T>,
+    text: (val: string) => ExpectChain<T>
   };
 
   declare function expect<T>(actual: T, message?: string): ExpectChain<T>;
