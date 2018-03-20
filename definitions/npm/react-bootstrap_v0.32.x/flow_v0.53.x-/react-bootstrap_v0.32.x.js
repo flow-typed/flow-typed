@@ -279,9 +279,19 @@ declare module "react-bootstrap" {
   }> {}
 
 
-  declare class MediaBody extends React$Component<{}> {}
-  declare class MediaLeft extends React$Component<{}> {}
-  declare export class Media extends React$Component<{}> {
+  declare class MediaBody extends React$Component<{
+    align?: 'top' | 'middle' | 'bottom',
+    componentClass?: ElementType,
+    bsClass?: string
+  }> {}
+  declare class MediaLeft extends React$Component<{
+    align?: 'top' | 'middle' | 'bottom',
+    bsClass?: string
+  }> {}
+  declare export class Media extends React$Component<{
+    componentClass?: ElementType,
+    bsClass?: string
+  }> {
     static Body: Class<MediaBody>;
     static Left: Class<MediaLeft>;
   }
