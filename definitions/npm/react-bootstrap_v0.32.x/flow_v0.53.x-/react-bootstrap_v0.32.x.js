@@ -600,7 +600,7 @@ declare module "react-bootstrap" {
   }> {}
 
   declare export class OverlayTrigger extends React$Component<{
-    trigger?: TriggerType | Array<string>,
+    trigger?: TriggerType | Array<TriggerType>,
     delay?: number,
     delayShow?: number,
     delayHide?: number,
