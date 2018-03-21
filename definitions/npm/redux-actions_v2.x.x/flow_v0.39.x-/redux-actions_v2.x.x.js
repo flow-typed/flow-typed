@@ -26,28 +26,28 @@ declare module "redux-actions" {
   declare function createAction<T, P>(
     type: T,
     $?: empty // hack to force Flow to not use this signature when more than one argument is given
-  ): (payload: P, ...rest: any[]) => { type: T, payload: P, error?: boolean };
+  ): {(payload: P, ...rest: any[]): { type: T, payload: P, error?: boolean }, toString: () => T};
 
   declare function createAction<T, A, P>(
     type: T,
     payloadCreator: (...rest: A) => P,
     $?: empty
-  ): (...rest: A) => { type: T, payload: P, error?: boolean };
+  ): {(...rest: A): { type: T, payload: P, error?: boolean }, toString: () => T};
 
   declare function createAction<T, A, P, M>(
     type: T,
     payloadCreator: (...rest: A) => P,
     metaCreator: (...rest: A) => M
-  ): (...rest: A) => { type: T, payload: P, error?: boolean, meta: M };
+  ): {(...rest: A): { type: T, payload: P, error?: boolean, meta: M }, toString: () => T};
 
   declare function createAction<T, P, M>(
     type: T,
     payloadCreator: null | void,
     metaCreator: (payload: P, ...rest: any[]) => M
-  ): (
-    payload: P,
-    ...rest: any[]
-  ) => { type: T, payload: P, error?: boolean, meta: M };
+  ): {(
+      payload: P,
+      ...rest: any[]
+    ): { type: T, payload: P, error?: boolean, meta: M }, toString: () => T};
 
   // `createActions` is quite difficult to write a type for. Maybe try not to
   // use this one?
