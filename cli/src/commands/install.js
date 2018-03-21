@@ -190,15 +190,23 @@ async function installNpmLibDefs({
       const term = explicitLibDefs[i];
       const termMatches = term.match(/(@[^@\/]+\/)?([^@]+)@(.+)/);
       if (termMatches == null) {
-        console.error(
-          'ERROR: Please specify npm package names in the format of `foo@1.2.3`',
-        );
-        return 1;
+        const pkgJsonData = await getPackageJsonData(cwd);
+        const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData, []);
+        const packageVersion = pkgJsonDeps[term];
+        if (packageVersion) {
+          libdefsToSearchFor.set(term, packageVersion);
+        } else {
+          console.error(
+            'ERROR: Package not found from package.json.\n' +
+              'Please specify version for the package in the format of `foo@1.2.3`',
+          );
+          return 1;
+        }
+      } else {
+        const [_, npmScope, pkgName, pkgVerStr] = termMatches;
+        const scopedPkgName = npmScope != null ? npmScope + pkgName : pkgName;
+        libdefsToSearchFor.set(scopedPkgName, pkgVerStr);
       }
-
-      const [_, npmScope, pkgName, pkgVerStr] = termMatches;
-      const scopedPkgName = npmScope != null ? npmScope + pkgName : pkgName;
-      libdefsToSearchFor.set(scopedPkgName, pkgVerStr);
     }
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
