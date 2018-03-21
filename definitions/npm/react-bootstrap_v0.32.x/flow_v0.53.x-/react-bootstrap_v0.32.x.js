@@ -35,7 +35,7 @@ declare module "react-bootstrap" {
     componentClass?: ElementType,
     href?: string,
     type?: 'button' | 'reset' | 'submit',
-    bsStyle?: BsStyle,
+    bsStyle?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'link',
     bsSize?: BsStyle,
     bsClass?: string,
   }> {}
@@ -278,6 +278,24 @@ declare module "react-bootstrap" {
     bsClass?: string
   }> {}
 
+
+  declare class MediaBody extends React$Component<{
+    align?: 'top' | 'middle' | 'bottom',
+    componentClass?: ElementType,
+    bsClass?: string
+  }> {}
+  declare class MediaLeft extends React$Component<{
+    align?: 'top' | 'middle' | 'bottom',
+    bsClass?: string
+  }> {}
+  declare export class Media extends React$Component<{
+    componentClass?: ElementType,
+    bsClass?: string
+  }> {
+    static Body: Class<MediaBody>;
+    static Left: Class<MediaLeft>;
+  }
+
   declare class Dialog extends React$Component<{
     dialogClassName?: string,
     bsSize?: BsSize,
@@ -341,6 +359,8 @@ declare module "react-bootstrap" {
     bsStyle?: 'tabs' | 'pills',
     bsClass?: string
   }> {}
+
+  declare export class NavDropdown extends React$Component<{}> {}
 
   declare export class NavItem extends React$Component<{
     active?: boolean,
@@ -662,10 +682,10 @@ declare module "react-bootstrap" {
     sm?: number,
     md?: number,
     lg?: number,
-    xsHidden?: number,
-    smHidden?: number,
-    mdHidden?: number,
-    lgHidden?: number,
+    xsHidden?: boolean,
+    smHidden?: boolean,
+    mdHidden?: boolean,
+    lgHidden?: boolean,
     xsOffset?: number,
     smOffset?: number,
     mdOffset?: number,
