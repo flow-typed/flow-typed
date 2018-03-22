@@ -99,7 +99,6 @@ async function getOrderedFlowBinVersions(
     _flowBinVersionPromise = (async function() {
       console.log('Fetching all Flow binaries...');
       const IS_WINDOWS = os.type() === 'Windows_NT';
-      const FLOW_BIN_VERSION_ORDER = [];
       const GH_CLIENT = gitHubClient();
       // We only test against the latest numberOfReleases Versions
       const QUERY_PAGE_SIZE = numberOfReleases;
@@ -125,7 +124,7 @@ async function getOrderedFlowBinVersions(
         );
       });
 
-      apiPayload
+      const FLOW_BIN_VERSION_ORDER = apiPayload
         .filter(rel => {
           // Temporary fix for https://github.com/facebook/flow/issues/5922
           if (rel.tag_name === 'v0.67.0') {
@@ -159,7 +158,7 @@ async function getOrderedFlowBinVersions(
           }
           return true;
         })
-        .forEach(rel => {
+        .map(rel => {
           // Find the binary zip in the list of assets
           const binZip = rel.assets
             .filter(({name}) => {
@@ -180,8 +179,8 @@ async function getOrderedFlowBinVersions(
             const version =
               rel.tag_name[0] === 'v' ? rel.tag_name : 'v' + rel.tag_name;
 
-            FLOW_BIN_VERSION_ORDER.push(version);
             binURLs.set(version, binZip[0]);
+            return version;
           }
         });
 
