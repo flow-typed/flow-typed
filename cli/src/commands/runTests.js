@@ -129,61 +129,67 @@ async function getOrderedFlowBinVersions(
           );
         });
 
-        apiPayload.forEach(rel => {
-          // Temporary fix for https://github.com/facebook/flow/issues/5922
-          if (rel.tag_name === 'v0.67.0') {
-            console.log(
-              '==========================================================================================',
-            );
-            console.log(
-              'We are tempoarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
-            );
-            console.log(
-              '==========================================================================================',
-            );
-            return;
-          }
+        apiPayload
+          .filter(rel => {
+            // Temporary fix for https://github.com/facebook/flow/issues/5922
+            if (rel.tag_name === 'v0.67.0') {
+              console.log(
+                '==========================================================================================',
+              );
+              console.log(
+                'We are tempoarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
+              );
+              console.log(
+                '==========================================================================================',
+              );
+              return false;
+            }
 
-          // We only test against versions since 0.15.0 because it has proper
-          // [ignore] fixes (which are necessary to run tests)
-          // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
-          if (semver.lt(rel.tag_name, IS_WINDOWS ? '0.30.0' : '0.15.0')) {
-            return;
-          }
-          // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
-          if (
-            IS_WINDOWS &&
-            (semver.eq(rel.tag_name, '0.57.0') ||
-              semver.eq(rel.tag_name, '0.57.1') ||
-              semver.eq(rel.tag_name, '0.57.2'))
-          ) {
-            return;
-          }
+            // We only test against versions since 0.15.0 because it has proper
+            // [ignore] fixes (which are necessary to run tests)
+            // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
+            if (semver.lt(rel.tag_name, IS_WINDOWS ? '0.30.0' : '0.15.0')) {
+              return false;
+            }
 
-          // Find the binary zip in the list of assets
-          const binZip = rel.assets
-            .filter(({name}) => {
-              return OS_ARCH_FILTER_RE.test(name) && !/-latest.zip$/.test(name);
-            })
-            .map(asset => asset.browser_download_url);
+            // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
+            if (
+              IS_WINDOWS &&
+              (semver.eq(rel.tag_name, '0.57.0') ||
+                semver.eq(rel.tag_name, '0.57.1') ||
+                semver.eq(rel.tag_name, '0.57.2'))
+            ) {
+              return false;
+            }
+            return true;
+          })
+          .forEach(rel => {
+            // Find the binary zip in the list of assets
+            const binZip = rel.assets
+              .filter(({name}) => {
+                return (
+                  OS_ARCH_FILTER_RE.test(name) && !/-latest.zip$/.test(name)
+                );
+              })
+              .map(asset => asset.browser_download_url);
 
-          if (binZip.length !== 1) {
-            throw new Error(
-              'Unexpected number of ' +
-                BIN_PLATFORM +
-                ' assets for flow-' +
-                rel.tag_name +
-                '! ' +
-                JSON.stringify(binZip),
-            );
-          } else {
-            const version =
-              rel.tag_name[0] === 'v' ? rel.tag_name : 'v' + rel.tag_name;
+            if (binZip.length !== 1) {
+              throw new Error(
+                'Unexpected number of ' +
+                  BIN_PLATFORM +
+                  ' assets for flow-' +
+                  rel.tag_name +
+                  '! ' +
+                  JSON.stringify(binZip),
+              );
+            } else {
+              const version =
+                rel.tag_name[0] === 'v' ? rel.tag_name : 'v' + rel.tag_name;
 
-            FLOW_BIN_VERSION_ORDER.push(version);
-            binURLs.set(version, binZip[0]);
-          }
-        });
+              FLOW_BIN_VERSION_ORDER.push(version);
+              binURLs.set(version, binZip[0]);
+            }
+          });
       }
 
       FLOW_BIN_VERSION_ORDER.sort((a, b) => {
