@@ -95,169 +95,169 @@ let _flowBinVersionPromise = null;
 async function getOrderedFlowBinVersions(
   numberOfReleases: number = 15,
 ): Promise<Array<string>> {
-  if (_flowBinVersionPromise === null) {
-    _flowBinVersionPromise = (async function() {
-      console.log('Fetching all Flow binaries...');
-      const IS_WINDOWS = os.type() === 'Windows_NT';
-      const GH_CLIENT = gitHubClient();
-      // We only test against the latest numberOfReleases Versions
-      const QUERY_PAGE_SIZE = numberOfReleases;
-      const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
+  if (_flowBinVersionPromise !== null) {
+    return _flowBinVersionPromise;
+  }
+  return (_flowBinVersionPromise = (async function() {
+    console.log('Fetching all Flow binaries...');
+    const IS_WINDOWS = os.type() === 'Windows_NT';
+    const GH_CLIENT = gitHubClient();
+    // We only test against the latest numberOfReleases Versions
+    const QUERY_PAGE_SIZE = numberOfReleases;
+    const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
 
-      let page = 0;
-      const apiPayload = await new Promise((res, rej) => {
-        GH_CLIENT.releases.listReleases(
-          {
-            owner: 'facebook',
-            repo: 'flow',
-            page: page++,
-            per_page: QUERY_PAGE_SIZE,
-          },
-          (err, result) => {
-            if (err) {
-              rej(err);
-            } else {
-              res(result);
-            }
-          },
-        );
+    let page = 0;
+    const apiPayload = await new Promise((res, rej) => {
+      GH_CLIENT.releases.listReleases(
+        {
+          owner: 'facebook',
+          repo: 'flow',
+          page: page++,
+          per_page: QUERY_PAGE_SIZE,
+        },
+        (err, result) => {
+          if (err) {
+            rej(err);
+          } else {
+            res(result);
+          }
+        },
+      );
+    });
+
+    const flowBins = apiPayload
+      .filter(rel => {
+        // Temporary fix for https://github.com/facebook/flow/issues/5922
+        if (rel.tag_name === 'v0.67.0') {
+          console.log(
+            '==========================================================================================',
+          );
+          console.log(
+            'We are tempoarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
+          );
+          console.log(
+            '==========================================================================================',
+          );
+          return false;
+        }
+
+        // We only test against versions since 0.15.0 because it has proper
+        // [ignore] fixes (which are necessary to run tests)
+        // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
+        if (semver.lt(rel.tag_name, IS_WINDOWS ? '0.30.0' : '0.15.0')) {
+          return false;
+        }
+
+        // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
+        if (
+          IS_WINDOWS &&
+          (semver.eq(rel.tag_name, '0.57.0') ||
+            semver.eq(rel.tag_name, '0.57.1') ||
+            semver.eq(rel.tag_name, '0.57.2'))
+        ) {
+          return false;
+        }
+        return true;
+      })
+      .map(rel => {
+        // Find the binary zip in the list of assets
+        const binZip = rel.assets
+          .filter(({name}) => {
+            return OS_ARCH_FILTER_RE.test(name) && !/-latest.zip$/.test(name);
+          })
+          .map(asset => asset.browser_download_url);
+
+        if (binZip.length !== 1) {
+          throw new Error(
+            'Unexpected number of ' +
+              BIN_PLATFORM +
+              ' assets for flow-' +
+              rel.tag_name +
+              '! ' +
+              JSON.stringify(binZip),
+          );
+        } else {
+          const version =
+            rel.tag_name[0] === 'v' ? rel.tag_name : 'v' + rel.tag_name;
+          return {version, binURL: binZip[0]};
+        }
+      })
+      .sort((a, b) => {
+        return semver.lt(a.version, b.version) ? -1 : 1;
       });
 
-      const flowBins = apiPayload
-        .filter(rel => {
-          // Temporary fix for https://github.com/facebook/flow/issues/5922
-          if (rel.tag_name === 'v0.67.0') {
-            console.log(
-              '==========================================================================================',
-            );
-            console.log(
-              'We are tempoarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
-            );
-            console.log(
-              '==========================================================================================',
-            );
-            return false;
-          }
+    await P.all(
+      flowBins.map(async ({version, binURL}) => {
+        const zipPath = path.join(BIN_DIR, 'flow-' + version + '.zip');
+        const binPath = path.join(
+          BIN_DIR,
+          'flow-' + version + (IS_WINDOWS ? '.exe' : ''),
+        );
 
-          // We only test against versions since 0.15.0 because it has proper
-          // [ignore] fixes (which are necessary to run tests)
-          // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
-          if (semver.lt(rel.tag_name, IS_WINDOWS ? '0.30.0' : '0.15.0')) {
-            return false;
-          }
+        if (await fs.exists(binPath)) {
+          return;
+        }
 
-          // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
-          if (
-            IS_WINDOWS &&
-            (semver.eq(rel.tag_name, '0.57.0') ||
-              semver.eq(rel.tag_name, '0.57.1') ||
-              semver.eq(rel.tag_name, '0.57.2'))
-          ) {
-            return false;
-          }
-          return true;
-        })
-        .map(rel => {
-          // Find the binary zip in the list of assets
-          const binZip = rel.assets
-            .filter(({name}) => {
-              return OS_ARCH_FILTER_RE.test(name) && !/-latest.zip$/.test(name);
+        // Download the zip file
+        await new Promise((res, rej) => {
+          console.log('  Fetching flow-%s...', version);
+          got
+            .stream(binURL, {
+              headers: {
+                'User-Agent':
+                  'flow-typed Test Runner ' +
+                  '(github.com/flowtype/flow-typed)',
+              },
             })
-            .map(asset => asset.browser_download_url);
-
-          if (binZip.length !== 1) {
-            throw new Error(
-              'Unexpected number of ' +
-                BIN_PLATFORM +
-                ' assets for flow-' +
-                rel.tag_name +
-                '! ' +
-                JSON.stringify(binZip),
+            .on('error', err => rej(err))
+            .pipe(
+              fs.createWriteStream(zipPath).on('close', () => {
+                console.log('    flow-%s finished downloading.', version);
+                res();
+              }),
             );
-          } else {
-            const version =
-              rel.tag_name[0] === 'v' ? rel.tag_name : 'v' + rel.tag_name;
-            return {version, binURL: binZip[0]};
-          }
-        })
-        .sort((a, b) => {
-          return semver.lt(a.version, b.version) ? -1 : 1;
         });
 
-      await P.all(
-        flowBins.map(async ({version, binURL}) => {
-          const zipPath = path.join(BIN_DIR, 'flow-' + version + '.zip');
-          const binPath = path.join(
-            BIN_DIR,
-            'flow-' + version + (IS_WINDOWS ? '.exe' : ''),
+        // Extract the flow binary
+        const flowBinDirPath = path.join(BIN_DIR, 'TMP-flow-' + version);
+        await fs.mkdir(flowBinDirPath);
+        console.log('  Extracting flow-%s...', version);
+        await new Promise((res, rej) => {
+          const unzipExtractor = unzip.Extract({path: flowBinDirPath});
+          unzipExtractor.on('error', function(err) {
+            rej(err);
+          });
+          unzipExtractor.on('close', function() {
+            res();
+          });
+          fs.createReadStream(zipPath).pipe(unzipExtractor);
+        });
+        if (IS_WINDOWS) {
+          await fs.rename(
+            path.join(flowBinDirPath, 'flow', 'flow.exe'),
+            path.join(BIN_DIR, 'flow-' + version + '.exe'),
+          );
+        } else {
+          await fs.rename(
+            path.join(flowBinDirPath, 'flow', 'flow'),
+            path.join(BIN_DIR, 'flow-' + version),
           );
 
-          if (await fs.exists(binPath)) {
-            return;
-          }
+          await child_process.execP(
+            ['chmod', '755', path.join(BIN_DIR, 'flow-' + version)].join(' '),
+          );
+        }
 
-          // Download the zip file
-          await new Promise((res, rej) => {
-            console.log('  Fetching flow-%s...', version);
-            got
-              .stream(binURL, {
-                headers: {
-                  'User-Agent':
-                    'flow-typed Test Runner ' +
-                    '(github.com/flowtype/flow-typed)',
-                },
-              })
-              .on('error', err => rej(err))
-              .pipe(
-                fs.createWriteStream(zipPath).on('close', () => {
-                  console.log('    flow-%s finished downloading.', version);
-                  res();
-                }),
-              );
-          });
+        console.log('  Removing flow-%s artifacts...', version);
+        await P.all([recursiveRmdir(flowBinDirPath), fs.unlink(zipPath)]);
+        console.log('    flow-%s complete!', version);
+      }),
+    );
 
-          // Extract the flow binary
-          const flowBinDirPath = path.join(BIN_DIR, 'TMP-flow-' + version);
-          await fs.mkdir(flowBinDirPath);
-          console.log('  Extracting flow-%s...', version);
-          await new Promise((res, rej) => {
-            const unzipExtractor = unzip.Extract({path: flowBinDirPath});
-            unzipExtractor.on('error', function(err) {
-              rej(err);
-            });
-            unzipExtractor.on('close', function() {
-              res();
-            });
-            fs.createReadStream(zipPath).pipe(unzipExtractor);
-          });
-          if (IS_WINDOWS) {
-            await fs.rename(
-              path.join(flowBinDirPath, 'flow', 'flow.exe'),
-              path.join(BIN_DIR, 'flow-' + version + '.exe'),
-            );
-          } else {
-            await fs.rename(
-              path.join(flowBinDirPath, 'flow', 'flow'),
-              path.join(BIN_DIR, 'flow-' + version),
-            );
+    console.log('Finished fetching Flow binaries.\n');
 
-            await child_process.execP(
-              ['chmod', '755', path.join(BIN_DIR, 'flow-' + version)].join(' '),
-            );
-          }
-
-          console.log('  Removing flow-%s artifacts...', version);
-          await P.all([recursiveRmdir(flowBinDirPath), fs.unlink(zipPath)]);
-          console.log('    flow-%s complete!', version);
-        }),
-      );
-
-      console.log('Finished fetching Flow binaries.\n');
-
-      return flowBins.map(bin => bin.version);
-    })();
-  }
-  return _flowBinVersionPromise;
+    return flowBins.map(bin => bin.version);
+  })());
 }
 
 const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+(\.exe)?$/;
