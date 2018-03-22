@@ -104,7 +104,6 @@ async function getOrderedFlowBinVersions(
       const QUERY_PAGE_SIZE = numberOfReleases;
       const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
 
-      let binURLs = new Map();
       let page = 0;
       const apiPayload = await new Promise((res, rej) => {
         GH_CLIENT.releases.listReleases(
@@ -124,7 +123,7 @@ async function getOrderedFlowBinVersions(
         );
       });
 
-      const FLOW_BIN_VERSION_ORDER = apiPayload
+      const flowBins = apiPayload
         .filter(rel => {
           // Temporary fix for https://github.com/facebook/flow/issues/5922
           if (rel.tag_name === 'v0.67.0') {
@@ -178,18 +177,15 @@ async function getOrderedFlowBinVersions(
           } else {
             const version =
               rel.tag_name[0] === 'v' ? rel.tag_name : 'v' + rel.tag_name;
-
-            binURLs.set(version, binZip[0]);
-            return version;
+            return {version, binURL: binZip[0]};
           }
+        })
+        .sort((a, b) => {
+          return semver.lt(a.version, b.version) ? -1 : 1;
         });
 
-      FLOW_BIN_VERSION_ORDER.sort((a, b) => {
-        return semver.lt(a, b) ? -1 : 1;
-      });
-
       await P.all(
-        Array.from(binURLs).map(async ([version, binURL]) => {
+        flowBins.map(async ({version, binURL}) => {
           const zipPath = path.join(BIN_DIR, 'flow-' + version + '.zip');
           const binPath = path.join(
             BIN_DIR,
@@ -258,7 +254,7 @@ async function getOrderedFlowBinVersions(
 
       console.log('Finished fetching Flow binaries.\n');
 
-      return FLOW_BIN_VERSION_ORDER;
+      return flowBins.map(bin => bin.version);
     })();
   }
   return _flowBinVersionPromise;
