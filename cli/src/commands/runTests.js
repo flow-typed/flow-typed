@@ -471,9 +471,9 @@ async function removeTrashFromBinDir() {
 async function runTestGroup(
   repoDirPath: string,
   testGroup: TestGroup,
-  numberOfFlowVersions: number = 15,
-  errors = [],
+  orderedFlowVersions: Array<string>,
 ): Promise<Array<string>> {
+  const errors = [];
   // Some older versions of Flow choke on ">"/"<"/"="
   const testDirName = testGroup.id
     .replace(/\//g, '--')
@@ -491,15 +491,6 @@ async function runTestGroup(
 
   if (!await fs.exists(BIN_DIR)) {
     await fs.mkdir(BIN_DIR);
-  }
-
-  //Prepare bin folder to collect flow instances
-  await removeTrashFromBinDir();
-  let orderedFlowVersions;
-  try {
-    orderedFlowVersions = await getOrderedFlowBinVersions(numberOfFlowVersions);
-  } catch (e) {
-    orderedFlowVersions = await getCachedFlowBinVersions(numberOfFlowVersions);
   }
 
   try {
@@ -629,10 +620,23 @@ async function runTests(
     const results = new Map();
     while (testGroups.length > 0) {
       const testGroup = testGroups.shift();
+      //Prepare bin folder to collect flow instances
+      await removeTrashFromBinDir();
+      let orderedFlowVersions;
+      try {
+        orderedFlowVersions = await getOrderedFlowBinVersions(
+          numberOfFlowVersions,
+        );
+      } catch (e) {
+        orderedFlowVersions = await getCachedFlowBinVersions(
+          numberOfFlowVersions,
+        );
+      }
+
       const testGroupErrors = await runTestGroup(
         repoDirPath,
         testGroup,
-        numberOfFlowVersions,
+        orderedFlowVersions,
       );
       if (testGroupErrors.length > 0) {
         const errors = results.get(testGroup.id) || [];
