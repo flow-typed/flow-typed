@@ -6,6 +6,8 @@
  *
  * Usage:
  *
+ *    import { describe, it } from 'flow-typed-test';
+ *
  *    describe('#someFunction', () => {
  *      it('should do something', () => {
  *        // test...
@@ -17,5 +19,8 @@
  * It is set up such that you don't need to import these functions, you can just use them naturally as if they were
  * available in the global scope.
  */
-export const describe = (label: string, fn: (...any) => any): void => { fn() }
-export const it = (label: string, fn: (...any) => any): void => { fn() }
+
+declare module 'flow-typed-test' {
+  declare export function describe(label: string, fn: (...any) => void): void;
+  declare export function it(label: string, fn: (...any) => void): void;
+}

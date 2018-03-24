@@ -123,14 +123,16 @@ type EnzymeMatchersType = {
   toBeChecked(): void,
   toBeDisabled(): void,
   toBeEmpty(): void,
+  toBeEmptyRender(): void,
   toBePresent(): void,
   toContainReact(element: React$Element<any>): void,
+  toExist(): void,
   toHaveClassName(className: string): void,
   toHaveHTML(html: string): void,
-  toHaveProp(propKey: string, propValue?: any): void,
+  toHaveProp: ((propKey: string, propValue?: any) => void) & ((props: Object) => void),
   toHaveRef(refName: string): void,
-  toHaveState(stateKey: string, stateValue?: any): void,
-  toHaveStyle(styleKey: string, styleValue?: any): void,
+  toHaveState: ((stateKey: string, stateValue?: any) => void) & ((state: Object) => void),
+  toHaveStyle: ((styleKey: string, styleValue?: any) => void) & ((style: Object) => void),
   toHaveTagName(tagName: string): void,
   toHaveText(text: string): void,
   toIncludeText(text: string): void,
@@ -556,12 +558,12 @@ declare var expect: {
   assertions(expectedAssertions: number): void,
   hasAssertions(): void,
   any(value: mixed): JestAsymmetricEqualityType,
-  anything(): void,
-  arrayContaining(value: Array<mixed>): void,
-  objectContaining(value: Object): void,
+  anything(): any,
+  arrayContaining(value: Array<mixed>): Array<mixed>,
+  objectContaining(value: Object): Object,
   /** Matches any received string that contains the exact expected string. */
-  stringContaining(value: string): void,
-  stringMatching(value: string | RegExp): void
+  stringContaining(value: string): string,
+  stringMatching(value: string | RegExp): string
 };
 
 // TODO handle return type
@@ -578,14 +580,14 @@ declare var jest: JestObjectType;
 declare var jasmine: {
   DEFAULT_TIMEOUT_INTERVAL: number,
   any(value: mixed): JestAsymmetricEqualityType,
-  anything(): void,
-  arrayContaining(value: Array<mixed>): void,
+  anything(): any,
+  arrayContaining(value: Array<mixed>): Array<mixed>,
   clock(): JestClockType,
   createSpy(name: string): JestSpyType,
   createSpyObj(
     baseName: string,
     methodNames: Array<string>
   ): { [methodName: string]: JestSpyType },
-  objectContaining(value: Object): void,
-  stringMatching(value: string): void
+  objectContaining(value: Object): Object,
+  stringMatching(value: string): string
 };

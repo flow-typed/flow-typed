@@ -7,7 +7,7 @@ type Action = { type: 'A' };
 type Thunk = (dispatch: Dispatch, getState: () => State) => void;
 type Dispatch = DispatchAPI<Action | Thunk>;
 type Store = ReduxStore<State, Action, Dispatch>;
-const reducer = (state: State, action: Action): State => state
+const reducer = (state: State = [], action: Action): State => state
 
 //
 // applyMiddleware interaction with createStore

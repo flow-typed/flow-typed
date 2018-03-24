@@ -8,8 +8,8 @@ to existing libdefs.
 
 * [Contributing to the definitions repository](#contributing-to-the-definitions-repository)
 * [Writing libdefs tips](#writing-libdefs-tips)
-  * [Avoid `any` when possible](#avoid-any-when-possible)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
+  * [Avoid `any` when possible](#avoid-any-when-possible)
   * [Always prefix global variables that aren't really meant to be global](#prefix-global-variables-that-arent-really-meant-to-be-global)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
@@ -91,6 +91,23 @@ You know how to do it.
 
 ## Writing libdefs tips
 
+### Don't import types from other libdefs
+
+You might think it would be possible to import types from other libdefs, much the same way you do in your own code:
+
+```js
+import type { MyType } from 'some-module';
+declare module 'other-module' {
+  declare export function takesMyType(val: MyType): number;
+}
+```
+
+...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
+
+You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them, however.
+
+Currently it's not possible to safely import types from other libdefs when making your libdef. [Further discussion here](https://github.com/flowtype/flow-typed/issues/1857).
+
 ### Avoid `any` when possible
 
 Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propogating on to other code, the `any` will potentially cause Flow to miss type errors!
@@ -157,21 +174,6 @@ getUser((user) => console.log('Got the user!'));
 
 Using `mixed` in place of `any` for the return type of a function or the type of a variable is a judgement call, though. Return types and declared variables flow into users' programs, which means that users will have to prove the type of `mixed` before they can use them.
 
-### Don't import types from other libdefs
-
-You might think it would be possible to import types from other libdefs, much the same way you do in your own code:
-
-```js
-import type { MyType } from 'some-module';
-declare module 'other-module' {
-  declare export function takesMyType(val: MyType): number;
-}
-```
-
-...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
-
-Currently it's not possible to safely import types from other libdefs when making your libdef. [Further discussion here](https://github.com/flowtype/flow-typed/issues/1857).
-
 ### Prefix global variables that aren't really meant to be global
 
 Right now we don't have a good way to write types inside `declare module {}` bodies that *aren't* exported. This problem is being worked on, but in the meantime the best option is to just put a declaration outside the `declare module {}` and reference it.
@@ -193,11 +195,29 @@ declare module "MyModule" {
 
 ### Use `describe` and `it` blocks to limit scope
 
-You can use `describe` and `it` verbs, much like you do in Mocha/Jest/whatever, to write descriptive tests and limit scope. These are available on the global scope, so you don't need to import anything. (Note that they don't actually run tests, they're just sugar to limit scope and emulate the TDD language with which we're all familiar).
+You can use `describe` and `it` verbs, much like you do in Mocha/Jest/whatever, to write descriptive tests and limit scope. These are available under 'flow-typed-test'. (Note that they don't actually run tests, they're just sugar to limit scope and emulate the TDD language with which we're all familiar).
 
 ```js
+import { describe, it } from 'flow-typed-test';
+
 describe('#someFunction', () => {
   it('should do something', () => {
+    const a: number = 1;
+  });
+
+  // you can also do type checks outside an it statement
+  //$ExpectError
+  const a: number = 'foo';
+})
+```
+
+`describe` or `it` have the potential of causing collisions. In the event of a name collision, import them under new names.
+
+```js
+import { describe as foo, it as bar } from 'flow-typed-test';
+
+foo('#someFunction', () => {
+  bar('should do something', () => {
     const a: number = 1;
   });
 

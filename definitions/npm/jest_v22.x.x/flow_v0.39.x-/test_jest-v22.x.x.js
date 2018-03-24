@@ -185,6 +185,9 @@ jest.spyOn({}, "foo");
 
 jest.setTimeout(1000);
 
+jest.runTimersToTime(3000);
+jest.advanceTimersByTime(3000);
+
 expect.addSnapshotSerializer(JSON.stringify);
 expect.assertions(1);
 expect.hasAssertions();
@@ -221,6 +224,8 @@ expect(wrapper).toBeDisabled();
 
 expect(wrapper).toBeEmpty();
 
+expect(wrapper).toBeEmptyRender();
+
 expect(wrapper).toBePresent();
 
 expect(wrapper).toContainReact(<Dummy />);
@@ -228,6 +233,8 @@ expect(wrapper).toContainReact(<Dummy />);
 expect(wrapper).toContainReact();
 // $ExpectError
 expect(wrapper).toContainReact("string");
+
+expect(wrapper).toExist();
 
 expect(wrapper).toHaveClassName("class");
 // $ExpectError
@@ -247,6 +254,9 @@ expect(wrapper).toHaveProp("test", "test");
 expect(wrapper).toHaveProp();
 // $ExpectError
 expect(wrapper).toHaveProp(true);
+expect(wrapper).toHaveProp({ test: "test" });
+// $ExpectError
+expect(wrapper).toHaveProp({ test: "test" }, "test");
 
 expect(wrapper).toHaveRef("test");
 // $ExpectError
@@ -256,6 +266,10 @@ expect(wrapper).toHaveRef(true);
 
 expect(wrapper).toHaveState("test");
 expect(wrapper).toHaveState("test", "test");
+expect(wrapper).toHaveState({ test: "test" });
+// $ExpectError
+expect(wrapper).toHaveState({ test: "test" }, "test");
+
 // $ExpectError
 expect(wrapper).toHaveState();
 // $ExpectError
@@ -263,6 +277,10 @@ expect(wrapper).toHaveState(true);
 
 expect(wrapper).toHaveStyle("color");
 expect(wrapper).toHaveStyle("color", "#ccc");
+expect(wrapper).toHaveStyle({ color: "#ccc" });
+// $ExpectError
+expect(wrapper).toHaveStyle({ color: "#ccc" }, "test");
+
 // $ExpectError
 expect(wrapper).toHaveStyle();
 // $ExpectError

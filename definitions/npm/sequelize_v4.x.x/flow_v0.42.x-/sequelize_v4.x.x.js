@@ -1338,6 +1338,8 @@ declare module "sequelize" {
      * A string or a data type
      */
     type: DataTypeAbstract,
+    
+    allowNull?: boolean,
 
     values?: Array<any>,
 

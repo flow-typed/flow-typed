@@ -1,7 +1,7 @@
 declare class Knex$Transaction<R>
   mixins Knex$QueryBuilder<R>, events$EventEmitter, Promise<R> {
   commit(connection?: any, value?: any): Promise<R>;
-  rollback(): Promise<R>;
+  rollback(?Error): Promise<R>;
   savepoint(connection?: any): Promise<R>;
 }
 
@@ -203,7 +203,7 @@ declare module "knex" {
     detail: string,
     hint?: string,
     position?: any,
-    intenralPosition?: any,
+    internalPosition?: any,
     internalQuery?: any,
     where?: any,
     schema: string,

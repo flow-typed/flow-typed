@@ -1705,7 +1705,7 @@ declare module ramda {
     o: O
   ): Array<[string, T]>;
 
-  declare function values<T, O: { [k: string]: T }>(o: O): Array<T>;
+  declare function values<T>(o: T): Array<$Values<T>>;
 
   declare function valuesIn<T, O: { [k: string]: T }>(o: O): Array<T | any>;
 

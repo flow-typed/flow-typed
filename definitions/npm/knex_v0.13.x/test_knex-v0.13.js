@@ -69,6 +69,11 @@ knex
   .then(function(result) {})
   .catch(function(err) {});
 
+knex
+  .transaction(function(trx) {
+    trx.rollback();
+  });
+
 /**
  * knex is also an event emitter,
  * See : http://knexjs.org/#Interfaces-Events

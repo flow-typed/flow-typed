@@ -24,7 +24,7 @@ declare module 'redux' {
     replaceReducer(nextReducer: Reducer<S, A>): void
   };
 
-  declare export type Reducer<S, A> = (state: S, action: A) => S;
+  declare export type Reducer<S, A> = (state: S | void, action: A) => S;
 
   declare export type CombinedReducer<S, A> = (state: $Shape<S> & {} | void, action: A) => S;
 
@@ -40,7 +40,7 @@ declare module 'redux' {
   declare export type StoreEnhancer<S, A, D = Dispatch<A>> = (next: StoreCreator<S, A, D>) => StoreCreator<S, A, D>;
 
   declare export function createStore<S, A, D>(reducer: Reducer<S, A>, enhancer?: StoreEnhancer<S, A, D>): Store<S, A, D>;
-  declare export function createStore<S, A, D>(reducer: Reducer<S, A>, preloadedState: S, enhancer?: StoreEnhancer<S, A, D>): Store<S, A, D>;
+  declare export function createStore<S, A, D>(reducer: Reducer<S, A>, preloadedState?: S, enhancer?: StoreEnhancer<S, A, D>): Store<S, A, D>;
 
   declare export function applyMiddleware<S, A, D>(...middlewares: Array<Middleware<S, A, D>>): StoreEnhancer<S, A, D>;
 

@@ -103,6 +103,7 @@ describe('install (command)', () => {
 
   describe('installNpmLibDefs', () => {
     const origConsoleError = console.error;
+
     beforeEach(() => {
       (console: any).error = jest.fn();
     });
@@ -140,6 +141,12 @@ describe('install (command)', () => {
       () => {
         return testProject(async ROOT_DIR => {
           await touchFile(path.join(ROOT_DIR, '.flowconfig'));
+          await writePkgJson(path.join(ROOT_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              'flow-bin': '^0.40.0',
+            },
+          });
           const result = await installNpmLibDefs({
             cwd: ROOT_DIR,
             flowVersion: parseFlowDirString('flow_v0.40.0', 'testContext'),
@@ -153,7 +160,8 @@ describe('install (command)', () => {
           expect(result).toBe(1);
           expect(_mock(console.error).mock.calls).toEqual([
             [
-              'ERROR: Please specify npm package names in the format of `foo@1.2.3`',
+              'ERROR: Package not found from package.json.\n' +
+                'Please specify version for the package in the format of `foo@1.2.3`',
             ],
           ]);
         });

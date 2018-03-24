@@ -12,49 +12,49 @@ declare interface $npm$firebase$Config {
 
 declare interface $npm$firebase$auth$Error {
   code:
-    | "auth/app-deleted"
-    | "auth/app-not-authorized"
-    | "auth/argument-error"
-    | "auth/invalid-api-key"
-    | "auth/invalid-user-token"
-    | "auth/network-request-failed"
-    | "auth/operation-not-allowed"
-    | "auth/requires-recent-login"
-    | "auth/too-many-requests"
-    | "auth/unauthorized-domain"
-    | "auth/user-disabled"
-    | "auth/user-token-expired"
-    | "auth/web-storage-unsupported"
-    | "auth/invalid-email"
-    | "auth/account-exists-with-different-credential"
-    | "auth/invalid-credential"
-    | "auth/user-not-found"
-    | "auth/wrong-password"
-    | "auth/invalid-verification-code"
-    | "auth/invalid-verification-id"
-    | "auth/expired-action-code"
-    | "auth/invalid-action-code"
-    | "auth/invalid-verification-code"
-    | "auth/missing-verification-code"
-    | "auth/captcha-check-failed"
-    | "auth/invalid-phone-number"
-    | "auth/missing-phone-number"
-    | "auth/quota-exceeded"
-    | "auth/credential-already-in-use"
-    | "auth/email-already-in-use"
-    | "auth/provider-already-linked"
-    | "auth/auth-domain-config-required"
-    | "auth/cancelled-popup-request"
-    | "auth/popup-blocked"
-    | "auth/operation-not-supported-in-this-environment"
-    | "auth/popup-closed-by-user"
-    | "auth/unauthorized-domain"
-    | "auth/no-such-provider";
+    | 'auth/app-deleted'
+    | 'auth/app-not-authorized'
+    | 'auth/argument-error'
+    | 'auth/invalid-api-key'
+    | 'auth/invalid-user-token'
+    | 'auth/network-request-failed'
+    | 'auth/operation-not-allowed'
+    | 'auth/requires-recent-login'
+    | 'auth/too-many-requests'
+    | 'auth/unauthorized-domain'
+    | 'auth/user-disabled'
+    | 'auth/user-token-expired'
+    | 'auth/web-storage-unsupported'
+    | 'auth/invalid-email'
+    | 'auth/account-exists-with-different-credential'
+    | 'auth/invalid-credential'
+    | 'auth/user-not-found'
+    | 'auth/wrong-password'
+    | 'auth/invalid-verification-code'
+    | 'auth/invalid-verification-id'
+    | 'auth/expired-action-code'
+    | 'auth/invalid-action-code'
+    | 'auth/invalid-verification-code'
+    | 'auth/missing-verification-code'
+    | 'auth/captcha-check-failed'
+    | 'auth/invalid-phone-number'
+    | 'auth/missing-phone-number'
+    | 'auth/quota-exceeded'
+    | 'auth/credential-already-in-use'
+    | 'auth/email-already-in-use'
+    | 'auth/provider-already-linked'
+    | 'auth/auth-domain-config-required'
+    | 'auth/cancelled-popup-request'
+    | 'auth/popup-blocked'
+    | 'auth/operation-not-supported-in-this-environment'
+    | 'auth/popup-closed-by-user'
+    | 'auth/unauthorized-domain'
+    | 'auth/no-such-provider';
   message: string;
 }
 
 declare interface $npm$firebase$Error {
-  code: $PropertyType<$npm$firebase$auth$Error, "code"> | "app/no-app";
+  code: $PropertyType<$npm$firebase$auth$Error, 'code'> | 'app/no-app';
   message: string;
   name: string;
   stack: ?string;
@@ -297,11 +297,11 @@ declare type $npm$firebase$database$OnCompleteCallback = (
   error: ?Object
 ) => void;
 declare type $npm$firebase$database$QueryEventType =
-  | "value"
-  | "child_added"
-  | "child_changed"
-  | "child_removed"
-  | "child_moved";
+  | 'value'
+  | 'child_added'
+  | 'child_changed'
+  | 'child_removed'
+  | 'child_moved';
 declare type $npm$firebase$database$Priority = string | number | null;
 
 declare class $npm$firebase$database$Database {
@@ -442,19 +442,190 @@ declare class $npm$firebase$database$ServerValue {
 
 declare class $npm$firebase$database$ThenableReference extends $npm$firebase$database$Reference {}
 
+/** **** firestore ******/
+declare class $npm$firebase$firestore$Firestore {
+  app: $npm$firebase$App;
+  batch(): $npm$firebase$firestore$WriteBatch;
+  collection(collectionPath: string): $npm$firebase$firestore$CollectionReference;
+  doc(documentPath: string): $npm$firebase$firestore$DocumentReference;
+  enablePersistence(): Promise<void>;
+  runTransaction(updateFunction: (transaction: $npm$firebase$firestore$Transaction) => Promise<any>): Promise<mixed>;
+  setLogLevel(logLevel: 'debug' | 'error' | 'silent'): void;
+  settings(settings: $npm$firebase$firestore$Settings): void;
+}
+
+declare interface $npm$firebase$firestore$Blob {
+  fromBase64String(base64: string): $npm$firebase$firestore$Blob;
+  fromUint8Array(array: Uint8Array): $npm$firebase$firestore$Blob;
+  toBase64(): string;
+  toUintArray(): Uint8Array;
+}
+
+declare interface $npm$firebase$firestore$QueryListenOptions {
+  includeMetadataChanges: boolean;
+  includeQueryMetadataChanges: boolean;
+}
+declare type $npm$firebase$firestore$observer = (snapshot: $npm$firebase$firestore$DocumentSnapshot) => void;
+declare type $npm$firebase$firestore$observerError = (error: $npm$firebase$Error) => void;
+
+declare class $npm$firebase$firestore$Query {
+  firestore: $npm$firebase$firestore$Firestore;
+  endAt(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
+  endBefore(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
+  get(): Promise<$npm$firebase$firestore$QuerySnapshot>;
+  limit(limit: number): $npm$firebase$firestore$Query;
+  onSnapshot(
+    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$observer,
+    observerOrOnNextOrOnError?: | $npm$firebase$firestore$QueryListenOptions
+    | $npm$firebase$firestore$observer
+    | $npm$firebase$firestore$observerError,
+    onError?: $npm$firebase$firestore$observerError
+  ): void;
+  orderBy(
+    fieldPath: $npm$firebase$firestore$FieldPath | string,
+    directionStr: 'asc' | 'desc'
+  ): $npm$firebase$firestore$Query;
+  startAfter(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
+  startAt(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
+  where(fieldPath: string, opStr: '<' | '<=' | '==' | '>' | '>=', value: any): $npm$firebase$firestore$Query;
+}
+
+declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$firestore$Query {
+  constructor(): $npm$firebase$firestore$CollectionReference;
+  id: string;
+  parent: $npm$firebase$firestore$DocumentReference | null;
+  add(data: {}): Promise<mixed>;
+  doc(documentPath?: string): $npm$firebase$firestore$DocumentReference;
+}
+
+declare interface $npm$firebase$firestore$DocumentChange {
+  type: 'added' | 'removed' | 'modified';
+}
+
+declare class $npm$firebase$firestore$DocumentReference {
+  firestore: $npm$firebase$firestore$Firestore;
+  id: string;
+  parent: typeof $npm$firebase$firestore$CollectionReference;
+  collection(collectionPath: string): typeof $npm$firebase$firestore$CollectionReference;
+  delete(): Promise<void>;
+  get(): Promise<$npm$firebase$firestore$DocumentSnapshot>;
+  onSnapshot(
+    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$observer,
+    observerOrOnNextOrOnError?: | $npm$firebase$firestore$QueryListenOptions
+    | $npm$firebase$firestore$observer
+    | $npm$firebase$firestore$observerError,
+    onError?: $npm$firebase$firestore$observerError
+  ): void;
+  set(data: {}, options?: { merge: boolean } | null): Promise<void>;
+  update(...args: Array<any>): Promise<void>;
+}
+
+declare class $npm$firebase$firestore$DocumentSnapshot {
+  data(): {};
+  get(fieldpath: typeof $npm$firebase$firestore$FieldPath): any;
+  exists: boolean;
+  id: string;
+  metadata: $npm$firebase$firestore$SnapshotMetadata;
+  ref: $npm$firebase$firestore$DocumentReference;
+}
+
+declare class $npm$firebase$firestore$FieldPath {
+  constructor(...args: Array<any>): $npm$firebase$firestore$FieldPath;
+  documentId(): typeof $npm$firebase$firestore$FieldPath;
+}
+
+declare interface $npm$firebase$firestore$FieldValue {
+  delete(): $npm$firebase$firestore$FieldValue;
+  serverTimestamp(): $npm$firebase$firestore$FieldValue;
+}
+
+declare type $npm$firebase$firestore$FirestoreError =
+  | 'cancelled'
+  | 'unknown'
+  | 'invalid-argument'
+  | 'deadline-exceeded'
+  | 'not-found'
+  | 'already-exists'
+  | 'permission-denied'
+  | 'resource-exhausted'
+  | 'failed-precondition'
+  | 'aborted'
+  | 'out-of-range'
+  | 'unimplemented'
+  | 'internal'
+  | 'unavailable'
+  | 'data-loss'
+  | 'unauthenticated';
+
+declare class $npm$firebase$firestore$GeoPoint {
+  constructor(latitude: number, longitude: number): $npm$firebase$firestore$GeoPoint;
+  latitude: number;
+  longitude: number;
+}
+
+declare class $npm$firebase$firestore$QuerySnapshot {
+  docChanges(): Array<$npm$firebase$firestore$DocumentChange>;
+  docs: Array<$npm$firebase$firestore$DocumentSnapshot>;
+  empty: boolean;
+  metadata: $npm$firebase$firestore$SnapshotMetadata;
+  query: $npm$firebase$firestore$Query;
+  size: number;
+  forEach((snapshot: $npm$firebase$firestore$DocumentSnapshot, thisArg?: any) => void): void;
+}
+
+declare interface $npm$firebase$firestore$Settings {}
+
+declare interface $npm$firebase$firestore$SnapshotMetadata {
+  fromCache: boolean;
+  hasPendingWrites: boolean;
+}
+
+declare interface $npm$firebase$firestore$Transaction {
+  delete(documentRef: $npm$firebase$firestore$DocumentReference): $npm$firebase$firestore$Transaction;
+  get(documentRef: $npm$firebase$firestore$DocumentReference): Promise<$npm$firebase$firestore$DocumentSnapshot>;
+  set(
+    documentRef: $npm$firebase$firestore$DocumentReference,
+    data: {},
+    options?: { merge: boolean }
+  ): $npm$firebase$firestore$Transaction;
+  update(documentRef: $npm$firebase$firestore$DocumentReference, ...args: Array<any>): $npm$firebase$firestore$Transaction;
+}
+
+declare interface $npm$firebase$firestore$WriteBatch {
+  commit(): Promise<void>;
+  delete(documentRef: $npm$firebase$firestore$DocumentReference): $npm$firebase$firestore$WriteBatch;
+  set(
+    documentRef: $npm$firebase$firestore$DocumentReference,
+    data: {},
+    options?: { merge: boolean }
+  ): $npm$firebase$firestore$WriteBatch;
+  update(documentRef: $npm$firebase$firestore$DocumentReference, ...args: Array<any>): $npm$firebase$firestore$WriteBatch;
+}
+
+/** **** messaging ******/
+declare class $npm$firebase$messaging$Messaging {
+  deleteToken(token: string): Promise<any>;
+  getToken(): Promise<string>;
+  onMessage(nextOrObserver: ({}) => void | {}): () => void;
+  onTokenRefresh(nextOrObserver: ({}) => void | {}): () => void;
+  requestPermission(): Promise<any>;
+  setBackgroundMessageHandler(callback: (value: {}) => void): void;
+  useServiceWorker(registration: any): void;
+}
+
 /** **** storage ******/
 declare type $npm$firebase$storage$StringFormat =
-  | "raw"
-  | "base64"
-  | "base64url"
-  | "data_url";
-declare type $npm$firebase$storage$TaskEvent = "state_changed";
+  | 'raw'
+  | 'base64'
+  | 'base64url'
+  | 'data_url';
+declare type $npm$firebase$storage$TaskEvent = 'state_changed';
 declare type $npm$firebase$storage$TaskState =
-  | "running"
-  | "paused"
-  | "success"
-  | "canceled"
-  | "error";
+  | 'running'
+  | 'paused'
+  | 'success'
+  | 'canceled'
+  | 'error';
 
 declare class $npm$firebase$storage$Storage {
   app: $npm$firebase$App;
@@ -526,9 +697,8 @@ declare interface $npm$firebase$storage$Observer {
 declare type $npm$firebase$storage$Unsubscribe = () => void;
 
 declare type $npm$firebase$storage$Subscribe = (
-  observerOrNext:
-    | $npm$firebase$storage$Observer
-    | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void),
+  observerOrNext: | $npm$firebase$storage$Observer
+  | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void),
   onError?: (error: Error) => void,
   onComplete?: () => void
 ) => $npm$firebase$storage$Unsubscribe;
@@ -544,9 +714,8 @@ declare class $npm$firebase$storage$UploadTask extends Promise<
   ): $npm$firebase$storage$Subscribe;
   on(
     event: $npm$firebase$storage$TaskEvent,
-    observerOrNext:
-      | $npm$firebase$storage$Observer
-      | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void),
+    observerOrNext: | $npm$firebase$storage$Observer
+    | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void),
     onError?: (error: Error) => void,
     onComplete?: () => void
   ): $npm$firebase$storage$Unsubscribe;
@@ -565,7 +734,7 @@ declare class $npm$firebase$storage$UploadTaskSnapshot {
 }
 
 // Exporting the types
-declare module "firebase" {
+declare module 'firebase' {
   declare module.exports: {
     +apps: Array<$npm$firebase$App>,
     initializeApp(
@@ -577,61 +746,43 @@ declare module "firebase" {
     FirebaseConfig: $npm$firebase$Config,
     FirebaseUser: typeof $npm$firebase$auth$User,
     FirebaseUserInfo: typeof $npm$firebase$auth$UserInfo,
-    app: {
-      (name?: string): typeof $npm$firebase$App,
-      App: typeof $npm$firebase$App
-    },
-    auth: {
-      (app?: $npm$firebase$App): $npm$firebase$auth$Auth,
-      FirebaseAdditionalUserInfo: $npm$firebase$auth$AdditionalUserInfo,
-      FirebaseUserCredential: $npm$firebase$auth$UserCredential,
-      ActionCodeInfo: $npm$firebase$auth$ActionCodeInfo,
-      ApplicationVerifier: $npm$firebase$auth$ApplicationVerifier,
-      Auth: typeof $npm$firebase$auth$Auth,
-      AuthCredential: $npm$firebase$auth$AuthCredential,
-      AuthProvider: $npm$firebase$auth$AuthProvider,
-      ConfirmationResult: $npm$firebase$auth$ConfirmationResult,
-      EmailAuthProvider: typeof $npm$firebase$auth$EmailAuthProvider,
-      Error: $npm$firebase$auth$Error,
-      FacebookAuthProvider: typeof $npm$firebase$auth$FacebookAuthProvider,
-      GithubAuthProvider: typeof $npm$firebase$auth$GithubAuthProvider,
-      GoogleAuthProvider: typeof $npm$firebase$auth$GoogleAuthProvider,
-      PhoneAuthProvider: typeof $npm$firebase$auth$PhoneAuthProvider,
-      TwitterAuthProvider: typeof $npm$firebase$auth$TwitterAuthProvider
-    },
-    database: {
-      (app?: $npm$firebase$App): $npm$firebase$database$Database,
-      enableLogging(
-        logger?: boolean | ((msg: string) => void),
-        persistent?: boolean
-      ): void,
-      DataSnapshot: typeof $npm$firebase$database$DataSnapshot,
-      Database: typeof $npm$firebase$database$Database,
-      OnDisconnect: typeof $npm$firebase$database$OnDisconnect,
-      Query: typeof $npm$firebase$database$Query,
-      Reference: typeof $npm$firebase$database$Reference,
-      ServerValue: typeof $npm$firebase$database$ServerValue,
-      ThenableReference: typeof $npm$firebase$database$ThenableReference
-    },
-    storage: {
-      (app?: $npm$firebase$App): $npm$firebase$storage$Storage,
-      Storage: typeof $npm$firebase$storage$Storage,
-      FullMetadata: typeof $npm$firebase$storage$FullMetadata,
-      Reference: typeof $npm$firebase$storage$Reference,
-      SettableMetadata: typeof $npm$firebase$storage$SettableMetadata,
-      UploadMetadata: typeof $npm$firebase$storage$UploadMetadata,
-      UploadTask: typeof $npm$firebase$storage$UploadTask,
-      UploadTaskSnapshot: typeof $npm$firebase$storage$UploadTaskSnapshot
-    }
+    app: $Exports<'@firebase/app'>,
+    auth: $Exports<'@firebase/auth'>,
+    database: $Exports<'@firebase/database'>,
+    firestore: $Exports<'@firebase/firestore'>,
+    messaging: $Exports<'@firebase/messaging'>,
+    storage: $Exports<'@firebase/storage'>
   };
 }
-declare module "firebase/app" {
+
+declare module 'firebase/app' {
+  declare module.exports: $Exports<'@firebase/app'>;
+}
+
+declare module 'firebase/auth' {
+  declare module.exports: $Exports<'@firebase/auth'>
+}
+
+declare module 'firebase/database' {
+  declare module.exports: $Exports<'@firebase/database'>;
+}
+
+declare module 'firebase/firestore' {
+  declare module.exports: $Exports<'@firebase/firestore'>;
+}
+
+declare module 'firebase/messaging' {
+  declare module.exports: $Exports<'@firebase/messaging'>;
+}
+
+declare module '@firebase/app' {
   declare module.exports: {
     (name?: string): $npm$firebase$App,
     App: typeof $npm$firebase$App
   };
 }
-declare module "firebase/auth" {
+
+declare module '@firebase/auth' {
   declare module.exports: {
     (app?: $npm$firebase$App): $npm$firebase$auth$Auth,
     FirebaseAdditionalUserInfo: $npm$firebase$auth$AdditionalUserInfo,
@@ -651,7 +802,12 @@ declare module "firebase/auth" {
     TwitterAuthProvider: typeof $npm$firebase$auth$TwitterAuthProvider
   };
 }
-declare module "firebase/database" {
+
+declare module 'firebase/storage' {
+  declare module.exports: $Exports<'firebase/storage'>;
+}
+
+declare module '@firebase/database' {
   declare module.exports: {
     (app?: $npm$firebase$App): $npm$firebase$database$Database,
     enableLogging(
@@ -667,7 +823,38 @@ declare module "firebase/database" {
     ThenableReference: typeof $npm$firebase$database$ThenableReference
   };
 }
-declare module "firebase/storage" {
+
+declare module '@firebase/firestore' {
+  declare module.exports: {
+    (app?: $npm$firebase$App): $npm$firebase$firestore$Firestore,
+    Blob: $npm$firebase$firestore$Blob,
+    CollectionReference: typeof $npm$firebase$firestore$CollectionReference,
+    DocumentChange: $npm$firebase$firestore$DocumentChange,
+    DocumentReference: typeof $npm$firebase$firestore$DocumentReference,
+    DocumentSnapshot: typeof $npm$firebase$firestore$DocumentSnapshot,
+    FieldPath: typeof $npm$firebase$firestore$FieldPath,
+    FieldValue: $npm$firebase$firestore$FieldValue,
+    Firestore: typeof $npm$firebase$firestore$Firestore,
+    FirestoreError: $npm$firebase$firestore$FirestoreError,
+    GeoPoint: typeof $npm$firebase$firestore$GeoPoint,
+    Query: typeof $npm$firebase$firestore$Query,
+    QueryListenOptions: $npm$firebase$firestore$QueryListenOptions,
+    QuerySnapshot: typeof $npm$firebase$firestore$QuerySnapshot,
+    Settings: $npm$firebase$firestore$Settings,
+    SnapshotMetadata: $npm$firebase$firestore$SnapshotMetadata,
+    Transaction: $npm$firebase$firestore$Transaction,
+    WriteBatch: $npm$firebase$firestore$WriteBatch
+  };
+}
+
+declare module '@firebase/messaging' {
+  declare module.exports: {
+    (app?: $npm$firebase$App): $npm$firebase$messaging$Messaging,
+    Messaging: $npm$firebase$messaging$Messaging
+  };
+}
+
+declare module '@firebase/storage' {
   declare module.exports: {
     (app?: $npm$firebase$App): $npm$firebase$storage$Storage,
     Storage: typeof $npm$firebase$storage$Storage,

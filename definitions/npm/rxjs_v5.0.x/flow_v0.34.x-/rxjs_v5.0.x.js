@@ -1548,7 +1548,11 @@ declare class rxjs$SchedulerClass {
   ): rxjs$Subscription;
 }
 
+declare class rxjs$ArgumentOutOfRangeError extends Error {}
+declare class rxjs$EmptyError extends Error {}
+declare class rxjs$ObjectUnsubscribedError extends Error {}
 declare class rxjs$TimeoutError extends Error {}
+declare class rxjs$UnsubscriptionError extends Error {}
 
 declare module "rxjs" {
   declare module.exports: {
@@ -1567,7 +1571,11 @@ declare module "rxjs" {
       async: rxjs$SchedulerClass
     },
     Subscription: typeof rxjs$Subscription,
-    TimeoutError: typeof rxjs$TimeoutError
+    ArgumentOutOfRangeError: typeof rxjs$ArgumentOutOfRangeError,
+    EmptyError: typeof rxjs$EmptyError,
+    ObjectUnsubscribedError: typeof rxjs$ObjectUnsubscribedError,
+    TimeoutError: typeof rxjs$TimeoutError,
+    UnsubscriptionError: typeof rxjs$UnsubscriptionError,
   };
 }
 
@@ -1617,5 +1625,35 @@ declare module "rxjs/Subscription" {
 declare module "rxjs/testing/TestScheduler" {
   declare module.exports: {
     TestScheduler: typeof rxjs$SchedulerClass
+  };
+}
+
+declare module "rxjs/util/ArgumentOutOfRangeError" {
+  declare module.exports: {
+    ArgumentOutOfRangeError: typeof rxjs$ArgumentOutOfRangeError,
+  };
+}
+
+declare module "rxjs/util/EmptyError" {
+  declare module.exports: {
+    EmptyError: typeof rxjs$EmptyError,
+  };
+}
+
+declare module "rxjs/util/ObjectUnsubscribedError" {
+  declare module.exports: {
+    ObjectUnsubscribedError: typeof rxjs$ObjectUnsubscribedError,
+  };
+}
+
+declare module "rxjs/util/TimeoutError" {
+  declare module.exports: {
+    TimeoutError: typeof rxjs$TimeoutError,
+  };
+}
+
+declare module "rxjs/util/UnsubscriptionError" {
+  declare module.exports: {
+    UnsubscriptionError: typeof rxjs$UnsubscriptionError,
   };
 }
