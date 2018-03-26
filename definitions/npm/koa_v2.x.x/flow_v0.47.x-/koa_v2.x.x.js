@@ -11,7 +11,7 @@ declare module 'koa' {
   // Currently, import type doesnt work well ?
   // so copy `Server` from flow/lib/node.js#L820
   declare class Server extends net$Server {
-    listen(port: number, hostname?: string, backlog?: number, callback?: Function): Server,
+    listen(port?: number, hostname?: string, backlog?: number, callback?: Function): Server,
     listen(path: string, callback?: Function): Server,
     listen(handle: Object, callback?: Function): Server,
     close(callback?: Function): Server,
@@ -283,7 +283,7 @@ declare module 'koa' {
     ips: $PropertyType<Request, 'ips'>,
     ip: $PropertyType<Request, 'ip'>,
 
-    [key: string]: mixed, // props added by middlewares.
+    [key: string]: any, // props added by middlewares.
   }
 
   declare type Middleware =

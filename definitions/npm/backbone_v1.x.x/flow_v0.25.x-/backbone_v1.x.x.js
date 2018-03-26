@@ -1,33 +1,55 @@
-declare module 'backbone' {
+type Comparator<T> = (attr: string) => any | ((attrA: T, attrB: T) => number);
+
+declare module "backbone" {
   declare var $: any; // @TODO this is no correct, but it is difficult to require another definition from here.
   declare var _: any; // @TODO this is no correct, but it is difficult to require another definition from here.
   declare var version: string;
 
-  declare type eventCallback = (event: Event) => void | mixed;
-  declare type Attrs = {[name: string]: mixed};
-  declare type CRUDMethod = 'create' | 'read' | 'update' | 'delete';
+  declare type EventCallback = (event: Event) => void | mixed;
+  declare type Backbone$Attrs = { [name: string]: mixed };
+  declare type CRUDMethod = "create" | "read" | "update" | "delete";
 
   /**
    * Events Module - http://backbonejs.org/#Events
    */
   declare class Events {
     // Not sure the best way of adding these to the declaration files
-    on(event: string, callback: eventCallback, context?: Object): void;
-    once(event: string, callback: eventCallback, context?: Object): void;
-    bind(event: string, callback: eventCallback, context?: Object): void;
-    off(event: ?string, callback?: ?eventCallback, context?: Object): void;
-    unbind(event: ?string, callback?: ?eventCallback, context?: Object): void;
+    on(event: string, callback: EventCallback, context?: Object): void;
+    once(event: string, callback: EventCallback, context?: Object): void;
+    bind(event: string, callback: EventCallback, context?: Object): void;
+    off(event: ?string, callback?: ?EventCallback, context?: Object): void;
+    unbind(event: ?string, callback?: ?EventCallback, context?: Object): void;
     trigger(event: string, ...args?: Array<mixed>): void;
-    listenTo(other: Events, event: string, callback: eventCallback): void;
-    listenToOnce(other: Events, event: string, callback: eventCallback): void;
-    stopListening(other: Events, callback?: ?eventCallback, context?: Object): void;
-    static on(event: string, callback: eventCallback, context?: Object): void;
-    static bind(event: string, callback: eventCallback, context?: Object): void;
-    static off(event: ?string, callback?: ?eventCallback, context?: Object): void;
-    static unbind(event: ?string, callback?: ?eventCallback, context?: Object): void;
+    listenTo(other: Events, event: string, callback: EventCallback): void;
+    listenToOnce(other: Events, event: string, callback: EventCallback): void;
+    stopListening(
+      other: Events,
+      callback?: ?EventCallback,
+      context?: Object
+    ): void;
+    static on(event: string, callback: EventCallback, context?: Object): void;
+    static bind(event: string, callback: EventCallback, context?: Object): void;
+    static off(
+      event: ?string,
+      callback?: ?EventCallback,
+      context?: Object
+    ): void;
+    static unbind(
+      event: ?string,
+      callback?: ?EventCallback,
+      context?: Object
+    ): void;
     static trigger(event: string, ...args?: Array<mixed>): void;
-    static listenTo(other: Events, event: string, callback: eventCallback): void;
-    static stopListening(other: Events, callback?: ?eventCallback, context?: Object): void;
+    static listenTo(
+      other: Events,
+      event: string,
+      callback: EventCallback
+    ): void;
+    static stopListening(
+      other: Events,
+      callback?: ?EventCallback,
+      context?: Object
+    ): void;
   }
 
   /**
@@ -39,13 +61,16 @@ declare module 'backbone' {
     [optionName: string]: mixed
   };
 
-  declare class Model mixins Events {
-    static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Model & P> & CP;
-    constructor(attributes?: Attrs, options?: ModelOpts): void;
-    static initialize(attributes?: Attrs, options?: ModelOpts): void;
+  declare class Model {
+    static extend<P, CP>(
+      instanceProperies: P,
+      classProperties?: CP
+    ): Class<Model & P> & CP;
+    constructor(attributes?: Backbone$Attrs, options?: ModelOpts): void;
+    static initialize(attributes?: Backbone$Attrs, options?: ModelOpts): void;
     initialize(): void;
-    get(attr: string): any;
-    set(attrs: Attrs, options?: Object): this;
+    get(attr: ?string): any;
+    set(attrs: Backbone$Attrs, options?: Object): this;
     set(attr: string, value: mixed, options?: Object): this;
     escape(attr: string): mixed;
     has(attr: string): boolean;
@@ -55,31 +80,31 @@ declare module 'backbone' {
     idAttribute: string;
     cid: string;
     cidPrefix: string;
-    attributes: Attrs;
-    changed: ?Object;
-    defaults(attr: Object): void;
-    defaults(attr: () => void): void;
-    toJSON(): Attrs;
+    attributes: Backbone$Attrs;
+    changed: Object;
+    defaults: Backbone$Attrs;
+    defaults(): Backbone$Attrs;
+    toJSON(): Backbone$Attrs;
     sync: sync;
     //Start jQuery XHR
     // @TODO should return a jQuery XHR, but I cannot define this without the dependency on jquery lib def
     fetch(options?: Object): any;
-    save(attrs: Attrs, options?: Object): any;
+    save(attrs: Backbone$Attrs, options?: Object): any;
     save(attr: string, value: mixed, options?: Object): any;
     destroy(options?: Object): any;
     // End jQuery XHR
-    validate(attrs: Attrs, options?: Object): boolean;
+    validate(attrs: Backbone$Attrs, options?: Object): boolean;
     validationError: ?Object;
     isValid(): boolean;
     url(): string;
-    urlRoot: string | () => string;
+    urlRoot: string | (() => string);
     parse(response: Object, options?: Object): any;
-    clone: this;
-    isNew: boolean;
+    clone(): this;
+    isNew(): boolean;
     hasChanged(attribute?: string): boolean;
-    chagnedAttributes(attributes?: {[attr: string]: mixed}): boolean;
+    changedAttributes(attributes?: { [attr: string]: mixed }): boolean;
     previous(attribute: string): mixed;
-    previousAttirbutes(): Attrs;
+    previousAttributes(): Backbone$Attrs;
     // Start Underscore methods
     // @TODO Underscore Methods should be defined by the library definition
     keys(): string[];
@@ -96,8 +121,11 @@ declare module 'backbone' {
   /**
    * Collection Class - http://backbonejs.org/#Collection
    */
-  declare class Collection<TModel> mixins Events {
-    static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Collection<*> & P> & CP;
+  declare class Collection<TModel> {
+    static extend<P, CP>(
+      instanceProperies: P,
+      classProperties?: CP
+    ): Class<Collection<*> & P> & CP;
     constructor(models?: TModel, options?: Object): this;
     initialize(models?: TModel, options?: Object): this;
     model: TModel;
@@ -154,11 +182,11 @@ declare module 'backbone' {
     shift(options?: Object): TModel;
     slice(begin: number, end: number): Array<TModel>;
     length: number;
-    comparator: string | (attr: string) => any | (attrA: TModel, attrB: TModel) => number;
+    comparator: string | Comparator<TModel>;
     sort(options?: Object): Array<TModel>;
     pluck(attribute: string): Array<TModel>;
-    where(attributes: {[attributeName: string]: mixed}): Array<TModel>;
-    findWhere(attributes: {[attributeName: string]: mixed}): TModel;
+    where(attributes: { [attributeName: string]: mixed }): Array<TModel>;
+    findWhere(attributes: { [attributeName: string]: mixed }): TModel;
     url: () => string | string;
     parse(response: Object, options: Object): Object;
     clone(): this;
@@ -166,32 +194,51 @@ declare module 'backbone' {
     create(attributes: Object, options?: Object): void;
   }
 
-
   /**
    * Router Class http://backbonejs.org/#Router
    */
-  declare class Router mixins Events {
-      static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<Router & P> & CP;
-      routes: {
-        [route: string]: string | ((e: Event) => mixed | void);
-      };
-      constructor(options?: Object): this;
-      initialize(options?: Object): this;
-      route(route: string, name: string, callback?: (e: Event) => mixed | void): this;
-      navigate(fragment: string, options?: { trigger?: boolean, replace?:  boolean}): this;
-      execute(callback: Function, args: Array<mixed>, name: string): void | mixed;
+  declare class Router {
+    static extend<P, CP>(
+      instanceProperies: P,
+      classProperties?: CP
+    ): Class<Router & P> & CP;
+    routes: {
+      [route: string]: string | ((e: Event) => mixed | void)
+    };
+    constructor(options?: Object): this;
+    initialize(options?: Object): this;
+    route(
+      route: string,
+      name: string,
+      callback?: (e: Event) => mixed | void
+    ): this;
+    navigate(
+      fragment: string,
+      options?: { trigger?: boolean, replace?: boolean }
+    ): this;
+    execute(callback: Function, args: Array<mixed>, name: string): void | mixed;
   }
 
   /**
    * History - http://backbonejs.org/#History
    */
-  declare class History mixins Events {
-    static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<History & P> & CP;
+  declare class History {
+    static extend<P, CP>(
+      instanceProperies: P,
+      classProperties?: CP
+    ): Class<History & P> & CP;
     static started: boolean;
     constructor(options?: Object): this;
     initialize(options?: Object): this;
-    start(options?: { pushState?: boolean, hashChange?: boolean, root?: string}): this;
-    navigate(fragment: string, options?: { trigger?: boolean, replace?:  boolean}): boolean | void;
+    start(options?: {
+      pushState?: boolean,
+      hashChange?: boolean,
+      root?: string
+    }): this;
+    navigate(
+      fragment: string,
+      options?: { trigger?: boolean, replace?: boolean }
+    ): boolean | void;
     loadUrl(fragment: string): boolean;
     route(route: string, callback: Function): void;
     decodeFragment(fragment: string): string;
@@ -203,7 +250,11 @@ declare module 'backbone' {
   /**
    * Sync - http://backbonejs.org/#Sync
    */
-  declare function sync(method: CRUDMethod, model: Model, options?: Object):  any; // Should really be a jQuery XHR.
+  declare function sync(
+    method: CRUDMethod,
+    model: Model,
+    options?: Object
+  ): any; // Should really be a jQuery XHR.
   declare function ajax(request: Object): any;
   declare var emulateHTTP: boolean;
   declare var emulateJSON: boolean;
@@ -212,24 +263,27 @@ declare module 'backbone' {
    * View -
    */
   declare type AttributesHasMap = {
-      [attribute: string]: mixed
+    [attribute: string]: mixed
   };
   declare type EventsHash = {
-      [event: string]: string | Function
+    [event: string]: string | Function
   };
-  declare class View mixins Events {
-    static extend<P, CP>(instanceProperies: P, classProperties?: CP): Class<View & P> & CP;
+  declare class View {
+    static extend<P, CP>(
+      instanceProperies: P,
+      classProperties?: CP
+    ): Class<View & P> & CP;
     constructor(): this;
     initialize(options?: Object): this;
     el: HTMLElement | string;
     $el: any;
     setElement(el: HTMLElement): this;
-    attributes: AttributesHasMap | () => AttributesHasMap;
+    attributes: AttributesHasMap | (() => AttributesHasMap);
     $: typeof $;
     template(data: Object): string;
     render(): this | mixed;
     remove(): this;
-    events: EventsHash | () => EventsHash;
+    events: EventsHash | (() => EventsHash);
     delegateEvents(events?: EventsHash): this;
     undelegateEvents(): this;
   }
@@ -252,7 +306,6 @@ declare module 'backbone' {
     emulateHTTP: typeof emulateHTTP;
     emulateJSON: typeof emulateJSON;
 
-
     // Utilty
     $: typeof $; // @TODO this is no correct, but it is difficult to require another definition from here.
     _: typeof _; // @TODO this is no correct, but it is difficult to require another definition from here.
@@ -260,5 +313,5 @@ declare module 'backbone' {
     noConflict(): this;
   }
 
-  declare var exports: Backbone;
+  declare module.exports: Backbone;
 }

@@ -46,7 +46,10 @@ declare module 'flyd/module/diff' {
 }
 
 declare module 'flyd/module/droprepeats' {
-  declare module.exports: (s: Stream) => Stream;
+  declare module.exports: {
+    dropRepeats: (s: Stream) => Stream,
+    dropRepeatsWith: CurriedFunction2<(*) => boolean, Stream, Stream>,
+  };
 }
 
 declare module 'flyd/module/every' {
@@ -98,7 +101,7 @@ declare module 'flyd/module/sampleon' {
 }
 
 declare module 'flyd/module/scanmerge' {
-  declare module.exports: CurriedFunction2<[Stream, ScanFn], *, Stream>;
+  declare module.exports: CurriedFunction2<Array<[Stream, ScanFn]>, *, Stream>;
 }
 
 declare module 'flyd/module/switchlatest' {

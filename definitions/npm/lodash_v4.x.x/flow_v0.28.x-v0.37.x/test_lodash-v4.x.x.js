@@ -5,6 +5,7 @@ import _ from 'lodash';
  * _.find
  */
 _.find([1, 2, 3], x => x * 1 == 3);
+_.find([1, 2, 3], x => x == 2, 1);
 // $ExpectError number cannot be compared to string
 _.find([1, 2, 3], x => x == 'a');
 // $ExpectError number. This type is incompatible with function type.
@@ -148,6 +149,7 @@ boolFalse = _.isString({});
 boolFalse = _.isString(5);
 boolFalse = _.isString(function(f) { return f });
 boolFalse = _.isString();
+boolFalse = _.isString(true);
 
 // $ExpectError
 boolFalse = _.isString('');
@@ -231,3 +233,7 @@ timesNums = _.times(5, function(i: number) { return JSON.stringify(i); });
 // https://github.com/facebook/flow/issues/1948
 _.flatMap([1, 2, 3], (n): number[] => [n, n]);
 _.flatMap({a: 1, b: 2}, n => [n, n]);
+
+var pairs: [string, number][];
+pairs = _.toPairs({ a: 12, b: 100 });
+pairs = _.toPairsIn({ a: 12, b: 100 });

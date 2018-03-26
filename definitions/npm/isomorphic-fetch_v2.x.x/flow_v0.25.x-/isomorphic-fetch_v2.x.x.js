@@ -1,4 +1,4 @@
 
 declare module 'isomorphic-fetch' {
-    declare module.exports: (input: string | Request, init?: RequestOptions) => Promise<Response>;
+    declare module.exports: (input: string | Request | URL, init?: RequestOptions) => Promise<Response>;
 }

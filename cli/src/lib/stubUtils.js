@@ -22,7 +22,7 @@ export function glob(pattern: string, options: Object): Promise<Array<string>> {
       } else {
         resolve(files);
       }
-    })
+    }),
   );
 }
 
@@ -50,19 +50,21 @@ async function resolvePkgDirPath(
     }
   }
   throw new Error(
-    'Unable to find `node_modules/' + pkgName + '/` install directory! ' +
-    'Did you forget to run `npm install` before running `flow-typed install`?'
+    'Unable to find `node_modules/' +
+      pkgName +
+      '/` install directory! ' +
+      'Did you forget to run `npm install` before running `flow-typed install`?',
   );
 }
 
-const moduleStubTemplate = (`
+const moduleStubTemplate = `
 declare module '%s' {
   declare module.exports: any;
-}`).trim();
-const aliasTemplate = (`
+}`.trim();
+const aliasTemplate = `
 declare module '%s%s' {
   declare module.exports: $Exports<'%s'>;
-}`).trim();
+}`.trim();
 
 function stubFor(moduleName: string, fileExt?: string): string {
   const moduleStub = format(moduleStubTemplate, moduleName);
@@ -79,6 +81,7 @@ async function writeStub(
   packageVersion: string,
   overwrite: boolean,
   files: Array<string>,
+  libdefDir: string,
 ): Promise<string> {
   let output = [
     '/**',
@@ -91,7 +94,7 @@ async function writeStub(
     ' * Once filled out, we encourage you to share your work with the',
     ' * community by sending a pull request to:',
     ' * https://github.com/flowtype/flow-typed',
-    ' */\n\n'
+    ' */\n\n',
   ].join('\n');
 
   output += stubFor(packageName);
@@ -106,30 +109,33 @@ async function writeStub(
  */
 `;
 
-    const [fileDecls, aliases] = files.reduce(([fileDecls, aliases], file) => {
-      const ext = path.extname(file);
-      const name = file.substr(0, file.length - ext.length);
-      const moduleName = `${packageName}/${name}`;
-      if (name === 'index') {
-        aliases.push(format(aliasTemplate, moduleName, '', packageName));
-        aliases.push(format(aliasTemplate, moduleName, ext, packageName));
-      } else {
-        fileDecls.push(format(moduleStubTemplate, moduleName));
-        aliases.push(format(aliasTemplate, moduleName, ext, moduleName));
-      }
-      return [fileDecls, aliases];
-    }, [[], []]);
+    const [fileDecls, aliases] = files.reduce(
+      ([fileDecls, aliases], file) => {
+        const ext = path.extname(file);
+        const name = file.substr(0, file.length - ext.length);
+        const moduleName = `${packageName}/${name}`;
+        if (name === 'index') {
+          aliases.push(format(aliasTemplate, moduleName, '', packageName));
+          aliases.push(format(aliasTemplate, moduleName, ext, packageName));
+        } else {
+          fileDecls.push(format(moduleStubTemplate, moduleName));
+          aliases.push(format(aliasTemplate, moduleName, ext, moduleName));
+        }
+        return [fileDecls, aliases];
+      },
+      [[], []],
+    );
 
     output += fileDecls.join('\n\n');
     output += '\n\n// Filename aliases\n';
     output += aliases.join('\n');
   }
-  output += "\n"; // File should end with a newline
+  output += '\n'; // File should end with a newline
   const filename = path.join(
     projectRoot,
-    "flow-typed",
-    "npm",
-    format("%s_vx.x.x.js", packageName),
+    libdefDir,
+    'npm',
+    format('%s_vx.x.x.js', packageName),
   );
   await mkdirp(path.dirname(filename));
 
@@ -139,20 +145,18 @@ async function writeStub(
       const existingStub = await fs.readFile(filename);
       if (!verifySignedCode(existingStub.toString())) {
         throw new Error(
-          "Stub already exists and has been modified. " +
-          "Use --overwrite to overwrite",
+          'Stub already exists and has been modified. ' +
+            'Use --overwrite to overwrite',
         );
       }
     }
   }
 
   const flowVersionRaw = await determineFlowVersion(projectRoot);
-  const flowVersion =
-    flowVersionRaw
+  const flowVersion = flowVersionRaw
     ? `/flow_${versionToString(flowVersionRaw)}`
     : '';
-  const stubVersion =
-    `<<STUB>>/${packageName}_v${packageVersion}${flowVersion}`;
+  const stubVersion = `<<STUB>>/${packageName}_v${packageVersion}${flowVersion}`;
   await fs.writeFile(filename, signCode(output, stubVersion));
   return filename;
 }
@@ -161,18 +165,15 @@ export async function pkgHasFlowFiles(
   projectRoot: string,
   packageName: string,
 ): Promise<boolean> {
-  let pathToPackage = await resolvePkgDirPath(
-    packageName,
-    projectRoot,
-  );
+  let pathToPackage = await resolvePkgDirPath(packageName, projectRoot);
 
-  const files = await glob("**/*.flow", {
+  const files = await glob('**/*.flow', {
     cwd: pathToPackage,
-    ignore: "node_modules/**",
+    ignore: 'node_modules/**',
   });
 
   return files.length > 0;
-};
+}
 
 /**
  * createStub("/path/to/root", "foo") will create a file
@@ -186,20 +187,21 @@ export async function createStub(
   packageName: string,
   explicitVersion: string | null,
   overwrite: boolean,
+  libdefDir?: string,
 ): Promise<boolean> {
   let files = [];
   let resolutionError = null;
   let pathToPackage = null;
   let version = explicitVersion || null;
-  try {
-    pathToPackage = await resolvePkgDirPath(
-      packageName,
-      process.cwd(),
-    );
 
-    files = await glob("**/*.{js,jsx}", {
+  const typedefDir = libdefDir || 'flow-typed';
+
+  try {
+    pathToPackage = await resolvePkgDirPath(packageName, process.cwd());
+
+    files = await glob('**/*.{js,jsx}', {
       cwd: pathToPackage,
-      ignore: "node_modules/**",
+      ignore: 'node_modules/**',
     });
   } catch (e) {
     resolutionError = e;
@@ -210,7 +212,8 @@ export async function createStub(
     // Look at the package.json for the installed module
     if (pathToPackage != null) {
       try {
-        version = (require: any)(path.join(pathToPackage, 'package.json')).version;
+        version = (require: any)(path.join(pathToPackage, 'package.json'))
+          .version;
       } catch (e) {}
     }
   }
@@ -220,16 +223,19 @@ export async function createStub(
     try {
       const pkgJsonPathStr = await findPackageJsonPath(projectRoot);
       const pkgJsonData = await getPackageJsonData(pkgJsonPathStr);
-      const rootDependencies = await getPackageJsonDependencies(pkgJsonData);
+      const rootDependencies = await getPackageJsonDependencies(
+        pkgJsonData,
+        [],
+      );
       version = rootDependencies[packageName] || null;
-    } catch (e) { }
+    } catch (e) {}
   }
 
   try {
     if (version === null) {
       throw new Error(
-        "Could not deduce version from node_modules or package.json. " +
-        "Please provide an explicit version",
+        'Could not deduce version from node_modules or package.json. ' +
+          'Please provide an explicit version',
       );
     }
     const filename = await writeStub(
@@ -238,13 +244,11 @@ export async function createStub(
       version,
       overwrite,
       files,
+      typedefDir,
     );
     const terseFilename = path.relative(projectRoot, filename);
     console.log(
-      colors.bold(
-        "  • %s@%s\n" +
-        "    └> %s"
-      ),
+      colors.bold('  • %s@%s\n' + '    └> %s'),
       packageName,
       version,
       colors.red(terseFilename),
@@ -253,7 +257,7 @@ export async function createStub(
       console.log(
         colors.yellow(
           "\t  Unable to stub all files in '%s', " +
-          "so only created a stub for the main module (%s)"
+            'so only created a stub for the main module (%s)',
         ),
         packageName,
         resolutionError.message,
@@ -264,9 +268,9 @@ export async function createStub(
     console.log(
       colors.red("❌\t%s%s': %s"),
       packageName,
-      version ? "@"+version : "",
+      version ? '@' + version : '',
       e.message,
     );
     return false;
   }
-};
+}
