@@ -7,7 +7,7 @@ type $npm$newrelic$Rule = {|
   enforce_backstop?: boolean,
 |};
 type $npm$newrelic$Config = {|
-  app_name?: string | Array<string>,
+  app_name?: string,
   license_key: string,
   host?: string,
   port?: number,
