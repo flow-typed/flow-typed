@@ -49,6 +49,11 @@ type JestMockFn = {
    */
   mockImplementationOnce(fn: Function): JestMockFn,
   /**
+   * Accepts a string to use in test result output in place of "jest.fn()" to
+   * indicate which mock function is being referenced.
+   */
+  mockName(name: string): JestMockFn,
+  /**
    * Just a simple sugar function for returning `this`
    */
   mockReturnThis(): void,
