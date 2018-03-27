@@ -4322,9 +4322,15 @@ declare module "sequelize" {
      */
     addIndex(
       tableName: string | Object,
-      attributes: string[],
-      options?: DefineIndexOptions,
-      rawTablename?: string): Promise<void>,
+      options?: {
+        fields: Array<string>,
+        unique?: boolean,
+        using?: string,
+        type?: IndexType,
+        name?: string,
+        where?: WhereOptions<any>,
+      }
+    ): Promise<void>,
 
     /**
      * Shows the index of a table
