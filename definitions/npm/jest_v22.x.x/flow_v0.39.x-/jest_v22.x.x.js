@@ -396,6 +396,13 @@ type JestObjectType = {
    * Executes only the macro task queue (i.e. all tasks queued by setTimeout()
    * or setInterval() and setImmediate()).
    */
+  advanceTimersByTime(msToRun: number): void,
+  /**
+   * Executes only the macro task queue (i.e. all tasks queued by setTimeout()
+   * or setInterval() and setImmediate()).
+   *
+   * Renamed to `advanceTimersByTime`.
+   */
   runTimersToTime(msToRun: number): void,
   /**
    * Executes only the macro-tasks that are currently pending (i.e., only the
