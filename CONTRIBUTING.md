@@ -122,7 +122,7 @@ function setCache(key: string, value: any) {
   cache.set(key, value);
 }
 function getCache(key: string) {
-  cache.get(key);
+  return cache.get(key);
 }
 
 setCache('foo', 42);
@@ -140,7 +140,7 @@ function setCache(key: string, value: mixed) {
   cache.set(key, value);
 }
 function getCache(key: string) {
-  cache.get(key);
+  return cache.get(key);
 }
 
 setCache('foo', 42);
