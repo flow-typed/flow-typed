@@ -86,3 +86,14 @@ axios.all([
     // $ExpectError
     (a: string);
 })
+
+axios({ url: '/', method: 'post', data: { foo: 'bar' }})
+  .then(({ data }: $AxiosXHR<{ foo: string }, { bar: string }>) => {
+    // $ExpectError
+    data.foo;
+  })
+
+  axios({ url: '/', method: 'post', data: { foo: 1 }})
+  .then(({ data }: $AxiosXHR<{ foo: number }>) => {
+    data.foo + 1;
+  })
