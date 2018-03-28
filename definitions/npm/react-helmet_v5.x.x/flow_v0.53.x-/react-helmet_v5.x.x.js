@@ -1,10 +1,8 @@
 declare module 'react-helmet' {
-  import type { Node, Element } from 'react';
-
   declare type Props = {
     base?: Object,
     bodyAttributes?: Object,
-    children?: Node,
+    children?: React$Node,
     defaultTitle?: string,
     defer?: boolean,
     encodeSpecialCharacters?: boolean,
@@ -26,7 +24,7 @@ declare module 'react-helmet' {
 
   declare interface TagMethods {
     toString(): string;
-    toComponent(): [Element<*>] | Element<*> | Array<Object>;
+    toComponent(): [React$Element<*>] | React$Element<*> | Array<Object>;
   }
 
   declare interface StateOnServer {
