@@ -90,6 +90,7 @@ axios.all([
 
 const promise1: AxiosPromise<{ foo: string }, { bar: string }> = axios({ url: '/', method: 'post', data: { foo: 'bar' }})
 promise1.then(({ data }) => {
+  (data.bar: string);
   // $ExpectError
   data.foo;
 });
