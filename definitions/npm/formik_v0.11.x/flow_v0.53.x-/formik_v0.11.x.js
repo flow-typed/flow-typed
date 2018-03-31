@@ -1,7 +1,6 @@
-import { ComponentType } from "react";
-import { FormikProps } from "formik";
-
 declare module "formik" {
+  import { ComponentType } from "react";
+  
   declare export type FormikErrors<Values> = {
     [field: $Keys<Values>]: string
   };
