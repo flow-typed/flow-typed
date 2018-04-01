@@ -37,7 +37,7 @@ a.getMaxListeners();
 
 // appears in v3.x
 
-(a.listenerCount(): number)
+(a.listenerCount(): number);
 
 // Breaks compatibility with v2.x
 // $ExpectError
