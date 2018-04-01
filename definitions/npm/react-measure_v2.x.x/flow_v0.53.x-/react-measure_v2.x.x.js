@@ -15,19 +15,19 @@
 
 declare module 'react-measure' {
   declare export type ContentRect = {
-    offset?: {
+    offset: {
       offsetTop: number,
       offsetLeft: number,
       offsetWidth: number,
       offsetHeight: number,
     },
-    scroll?: {
+    scroll: {
       scrollTop: number,
       scrollLeft: number,
       scrollWidth: number,
       scrollHeight: number,
     },
-    bounds?: {
+    bounds: {
       width: number,
       height: number,
       top: number,
@@ -35,7 +35,7 @@ declare module 'react-measure' {
       bottom: number,
       left: number,
     },
-    margin?: {
+    margin: {
       top: number,
       right: number,
       bottom: number,
