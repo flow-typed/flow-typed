@@ -28,8 +28,9 @@ export function setup(yargs: Yargs) {
 export async function run(args: Args): Promise<number> {
   try {
     if (args.cacheDir) {
-      console.log('• Setting cache dir', args.cacheDir);
-      setCustomCacheDir(path.resolve(args.cacheDir));
+      const cacheDir = path.resolve(args.cacheDir);
+      console.log('• Setting cache dir', cacheDir);
+      setCustomCacheDir(cacheDir);
     }
 
     console.log('Updating flow-typed definitions...');

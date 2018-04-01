@@ -119,8 +119,9 @@ export async function run(args: Args) {
   }
 
   if (args.cacheDir) {
-    console.log('• Setting cache dir', args.cacheDir);
-    setCustomCacheDir(path.resolve(args.cacheDir));
+    const cacheDir = path.resolve(args.cacheDir);
+    console.log('• Setting cache dir', cacheDir);
+    setCustomCacheDir(cacheDir);
   }
 
   const npmLibDefResult = await installNpmLibDefs({
