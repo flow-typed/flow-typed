@@ -446,10 +446,19 @@ declare module "react-bootstrap" {
     bsClass?: string
   }> {}
 
+  
+  declare class PaginationLast extends React$Component<{
+    bsClass?: string
+  }> {}
+  
   declare class PaginationPrev extends React$Component<{
     bsClass?: string
   }> {}
-
+  
+  declare class PaginationNext extends React$Component<{
+    bsClass?: string
+  }> {}
+  
   declare class PaginationEllipsis extends React$Component<{
     bsClass?: string
   }> {}
@@ -459,7 +468,9 @@ declare module "react-bootstrap" {
   }> {
     static Item: Class<PaginationItem>;
     static First: Class<PaginationFirst>;
+    static Last: Class<PaginationLast>;
     static Prev: Class<PaginationPrev>;
+    static Next: Class<PaginationNext>;
     static Ellipsis: Class<PaginationEllipsis>;
   }
 
