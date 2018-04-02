@@ -1,16 +1,16 @@
-declare module 'xterm' {
+declare module "xterm" {
   declare export type FontWeight =
-    | 'normal'
-    | 'bold'
-    | '100'
-    | '200'
-    | '300'
-    | '400'
-    | '500'
-    | '600'
-    | '700'
-    | '800'
-    | '900';
+    | "normal"
+    | "bold"
+    | "100"
+    | "200"
+    | "300"
+    | "400"
+    | "500"
+    | "600"
+    | "700"
+    | "800"
+    | "900";
 
   declare export type Theme = $Shape<{
     foreground: string,
@@ -34,15 +34,15 @@ declare module 'xterm' {
     brightMagenta: string,
     brightCyan: string,
     brightWhite: string
-  }>
+  }>;
 
   declare export type TerminalOptions = $Shape<{
     allowTransparency: boolean,
     bellSound: string,
-    bellStyle: 'none' | 'sound',
+    bellStyle: "none" | "sound",
     cols: number,
     cursorBlink: boolean,
-    cursorStyle: 'block' | 'underline' | 'bar',
+    cursorStyle: "block" | "underline" | "bar",
     disableStdin: boolean,
     enableBold: boolean,
     fontSize: number,
@@ -58,7 +58,7 @@ declare module 'xterm' {
     scrollback: number,
     tabStopWidth: number,
     theme: Theme
-  }>
+  }>;
 
   declare export type LinkMatcherOptions = $Shape<{
     matchIndex: number,
@@ -70,24 +70,24 @@ declare module 'xterm' {
     leaveCallback: (event: MouseEvent, uri: string) => boolean | void,
     priority: number,
     willLinkActivate: (event: MouseEvent, uri: string) => boolean
-  }>
+  }>;
 
   declare export type Disposable = {|
     dispose(): void
-  |}
+  |};
 
   declare export type Marker = {|
     ...Disposable,
     +id: number,
     +isDisposed: boolean,
     +line: number
-  |}
+  |};
 
   declare export type LocalizableStrings = {|
     blankLine: string,
     promptLabel: string,
     tooMuchOutput: string
-  |}
+  |};
 
   declare export class Terminal {
     element: HTMLElement;
@@ -100,42 +100,42 @@ declare module 'xterm' {
     blur(): void;
     focus(): void;
     on(
-      type: 'blur' | 'focus' | 'linefeed' | 'selection',
+      type: "blur" | "focus" | "linefeed" | "selection",
       listener: () => void
     ): void;
-    on(type: 'data', listener: (...args: any[]) => void): void;
+    on(type: "data", listener: (...args: any[]) => void): void;
     on(
-      type: 'key',
+      type: "key",
       listener: (key?: string, event?: KeyboardEvent) => void
     ): void;
     on(
-      type: 'keypress' | 'keydown',
+      type: "keypress" | "keydown",
       listener: (event?: KeyboardEvent) => void
     ): void;
     on(
-      type: 'refresh',
+      type: "refresh",
       listener: (data?: { start: number, end: number }) => void
     ): void;
     on(
-      type: 'resize',
+      type: "resize",
       listener: (data?: { cols: number, rows: number }) => void
     ): void;
-    on(type: 'scroll', listener: (ydisp?: number) => void): void;
-    on(type: 'title', listener: (title?: string) => void): void;
+    on(type: "scroll", listener: (ydisp?: number) => void): void;
+    on(type: "title", listener: (title?: string) => void): void;
     on(type: string, listener: (...args: any[]) => void): void;
     off(
-      type: | 'blur'
-      | 'focus'
-      | 'linefeed'
-      | 'selection'
-      | 'data'
-      | 'key'
-      | 'keypress'
-      | 'keydown'
-      | 'refresh'
-      | 'resize'
-      | 'scroll'
-      | 'title'
+      type: | "blur"
+      | "focus"
+      | "linefeed"
+      | "selection"
+      | "data"
+      | "key"
+      | "keypress"
+      | "keydown"
+      | "refresh"
+      | "resize"
+      | "scroll"
+      | "title"
       | string,
       listener: (...args: any[]) => void
     ): void;
@@ -171,85 +171,82 @@ declare module 'xterm' {
     clear(): void;
     write(data: string): void;
     getOption(
-      key: | 'bellSound'
-      | 'bellStyle'
-      | 'cursorStyle'
-      | 'fontFamily'
-      | 'fontWeight'
-      | 'fontWeightBold'
-      | 'termName'
+      key: | "bellSound"
+      | "bellStyle"
+      | "cursorStyle"
+      | "fontFamily"
+      | "fontWeight"
+      | "fontWeightBold"
+      | "termName"
     ): string;
     getOption(
-      key: | 'allowTransparency'
-      | 'cancelEvents'
-      | 'convertEol'
-      | 'cursorBlink'
-      | 'debug'
-      | 'disableStdin'
-      | 'enableBold'
-      | 'macOptionIsMeta'
-      | 'rightClickSelectsWord'
-      | 'popOnBell'
-      | 'screenKeys'
-      | 'useFlowControl'
-      | 'visualBell'
+      key: | "allowTransparency"
+      | "cancelEvents"
+      | "convertEol"
+      | "cursorBlink"
+      | "debug"
+      | "disableStdin"
+      | "enableBold"
+      | "macOptionIsMeta"
+      | "rightClickSelectsWord"
+      | "popOnBell"
+      | "screenKeys"
+      | "useFlowControl"
+      | "visualBell"
     ): boolean;
-    getOption(key: 'colors'): Array<string>;
+    getOption(key: "colors"): Array<string>;
     getOption(
-      key: | 'cols'
-      | 'fontSize'
-      | 'letterSpacing'
-      | 'lineHeight'
-      | 'rows'
-      | 'tabStopWidth'
-      | 'scrollback'
+      key: | "cols"
+      | "fontSize"
+      | "letterSpacing"
+      | "lineHeight"
+      | "rows"
+      | "tabStopWidth"
+      | "scrollback"
     ): number;
-    getOption(key: 'handler'): (data: string) => void;
+    getOption(key: "handler"): (data: string) => void;
     getOption(key: string): any;
     setOption(
-      key: 'fontFamily' | 'termName' | 'bellSound',
+      key: "fontFamily" | "termName" | "bellSound",
       value: string
     ): void;
+    setOption(key: "fontWeight" | "fontWeightBold", value: ?FontWeight): void;
     setOption(
-      key: 'fontWeight' | 'fontWeightBold',
-      value: ?FontWeight
+      key: "bellStyle",
+      value: null | "none" | "visual" | "sound" | "both"
     ): void;
     setOption(
-      key: 'bellStyle',
-      value: null | 'none' | 'visual' | 'sound' | 'both'
+      key: "cursorStyle",
+      value: null | "block" | "underline" | "bar"
     ): void;
     setOption(
-      key: 'cursorStyle',
-      value: null | 'block' | 'underline' | 'bar'
-    ): void;
-    setOption(
-      key: | 'allowTransparency'
-      | 'cancelEvents'
-      | 'convertEol'
-      | 'cursorBlink'
-      | 'debug'
-      | 'disableStdin'
-      | 'enableBold'
-      | 'macOptionIsMeta'
-      | 'popOnBell'
-      | 'rightClickSelectsWord'
-      | 'screenKeys'
-      | 'useFlowControl'
-      | 'visualBell',
+      key: | "allowTransparency"
+      | "cancelEvents"
+      | "convertEol"
+      | "cursorBlink"
+      | "debug"
+      | "disableStdin"
+      | "enableBold"
+      | "macOptionIsMeta"
+      | "popOnBell"
+      | "rightClickSelectsWord"
+      | "screenKeys"
+      | "useFlowControl"
+      | "visualBell",
       value: boolean
     ): void;
-    setOption(key: 'colors', value: Array<string>): void;
+    setOption(key: "colors", value: Array<string>): void;
     setOption(
-      key: | 'fontSize'
-      | 'letterSpacing'
-      | 'lineHeight'
-      | 'tabStopWidth'
-      | 'scrollback',
+      key: | "fontSize"
+      | "letterSpacing"
+      | "lineHeight"
+      | "tabStopWidth"
+      | "scrollback",
       value: number
     ): void;
-    setOption(key: 'handler', value: (data: string) => void): void;
-    setOption(key: 'theme', value: Theme): void;
-    setOption(key: 'cols' | 'rows', value: number): void;
+    setOption(key: "handler", value: (data: string) => void): void;
+    setOption(key: "theme", value: Theme): void;
+    setOption(key: "cols" | "rows", value: number): void;
     setOption(key: string, value: any): void;
     refresh(start: number, end: number): void;
     reset(): void;
