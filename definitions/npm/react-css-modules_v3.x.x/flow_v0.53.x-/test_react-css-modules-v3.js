@@ -18,7 +18,7 @@ type Props = {};
 
 type State = {};
 
-const ExampleModule2 = (props: Props, state: State) => {
+const ExampleModule2 = (props: Props) => {
   return (<div>hoge</div>)
 }
 
