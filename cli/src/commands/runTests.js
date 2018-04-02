@@ -10,7 +10,7 @@ import {getDiff} from '../lib/git';
 
 import got from 'got';
 import * as semver from 'semver';
-import * as unzip from 'unzip';
+import * as unzip from 'unzipper';
 import typeof Yargs from 'yargs';
 import type {FlowVersion} from '../lib/flowVersion.js';
 
@@ -103,7 +103,7 @@ async function getOrderedFlowBinVersions(
       const GH_CLIENT = gitHubClient();
       // We only test against the latest numberOfReleases Versions
       const QUERY_PAGE_SIZE = numberOfReleases;
-      const OS_ARCH_FILTER_RE = new RegExp(BIN_PLATFORM);
+      const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
 
       let binURLs = new Map();
       let apiPayload = null;
@@ -130,6 +130,20 @@ async function getOrderedFlowBinVersions(
         });
 
         apiPayload.forEach(rel => {
+          // Temporary fix for https://github.com/facebook/flow/issues/5922
+          if (rel.tag_name === 'v0.67.0') {
+            console.log(
+              '==========================================================================================',
+            );
+            console.log(
+              'We are tempoarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
+            );
+            console.log(
+              '==========================================================================================',
+            );
+            return;
+          }
+
           // We only test against versions since 0.15.0 because it has proper
           // [ignore] fixes (which are necessary to run tests)
           // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
@@ -252,7 +266,7 @@ async function getOrderedFlowBinVersions(
   return _flowBinVersionPromise;
 }
 
-const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+$/;
+const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+(\.exe)?$/;
 /**
  * flow filename should be `flow-vx.x.x`
  * @param {string} name
@@ -286,11 +300,18 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(testDirPath, libDefPath, includeWarnings) {
+async function writeFlowConfig(
+  repoDirPath,
+  testDirPath,
+  libDefPath,
+  includeWarnings,
+) {
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
+
   const flowConfigData = [
     '[libs]',
     path.basename(libDefPath),
+    path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
@@ -407,6 +428,7 @@ async function testLowestCapableFlowVersion(
 }
 
 async function findLowestCapableFlowVersion(
+  repoDirPath,
   orderedFlowVersions,
   lowestFlowVersionRan,
   testDirPath,
@@ -422,13 +444,13 @@ async function findLowestCapableFlowVersion(
   const higherLowVersions = lowerFlowVersionsToRun.filter(flowVer =>
     semver.gte(flowVer, '0.53.0'),
   );
-  await writeFlowConfig(testDirPath, libDefPath, true);
+  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, true);
   const lowestOfHigherVersions = await testLowestCapableFlowVersion(
     higherLowVersions,
     testDirPath,
     lowestFlowVersionRan,
   );
-  await writeFlowConfig(testDirPath, libDefPath, false);
+  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, false);
   return await testLowestCapableFlowVersion(
     lowerLowVersions,
     testDirPath,
@@ -453,6 +475,7 @@ async function removeTrashFromBinDir() {
  * directory.
  */
 async function runTestGroup(
+  repoDirPath: string,
   testGroup: TestGroup,
   numberOfFlowVersions: number = 15,
   errors = [],
@@ -493,6 +516,7 @@ async function runTestGroup(
       testDirPath,
       path.basename(testGroup.libDefPath),
     );
+    const copiedFileNames = new Set();
     await P.all([
       P.all(
         testGroup.testFilePaths.map(async (filePath, idx) => {
@@ -501,7 +525,13 @@ async function runTestGroup(
           //
           // i.e. underscore/v1.x.x/test-underscore.js
           //      underscore/v1.x.x/flow-v0.22.x/test-underscore.js
-          const destBasename = idx + '-' + path.basename(filePath);
+          //
+          // Only mangles the name when there's a naming collision. Otherwise, uses the original.
+          const fileName = path.basename(filePath);
+          const destBasename = copiedFileNames.has(fileName)
+            ? `${idx}-${fileName}`
+            : fileName;
+          copiedFileNames.add(destBasename);
           await copyFile(filePath, path.join(testDirPath, destBasename));
         }),
       ),
@@ -528,14 +558,19 @@ async function runTestGroup(
       semver.gte(flowVer, '0.53.0'),
     );
 
-    await writeFlowConfig(testDirPath, testGroup.libDefPath, false);
+    await writeFlowConfig(
+      repoDirPath,
+      testDirPath,
+      testGroup.libDefPath,
+      false,
+    );
     const lowerVersionErrors = await runFlowTypeDefTests(
       lowerVersions,
       testGroup.id,
       testDirPath,
     );
 
-    await writeFlowConfig(testDirPath, testGroup.libDefPath, true);
+    await writeFlowConfig(repoDirPath, testDirPath, testGroup.libDefPath, true);
     const higherVersionErrors = await runFlowTypeDefTests(
       higherVersions,
       testGroup.id,
@@ -544,6 +579,7 @@ async function runTestGroup(
 
     errors.push(...higherVersionErrors, ...lowerVersionErrors);
     const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
+      repoDirPath,
       orderedFlowVersions,
       lowestFlowVersionRan,
       testDirPath,
@@ -600,6 +636,7 @@ async function runTests(
     while (testGroups.length > 0) {
       const testGroup = testGroups.shift();
       const testGroupErrors = await runTestGroup(
+        repoDirPath,
         testGroup,
         numberOfFlowVersions,
       );

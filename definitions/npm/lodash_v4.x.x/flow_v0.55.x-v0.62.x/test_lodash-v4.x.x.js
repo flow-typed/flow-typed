@@ -22,6 +22,7 @@ import keyBy from "lodash/keyBy";
 import map from "lodash/map";
 import memoize from "lodash/memoize";
 import noop from "lodash/noop";
+import pick from "lodash/pick";
 import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
 import sortedIndexBy from "lodash/sortedIndexBy";
@@ -33,6 +34,7 @@ import toPairs from "lodash/toPairs";
 import toPairsIn from "lodash/toPairsIn";
 import unionBy from "lodash/unionBy";
 import uniqBy from "lodash/uniqBy";
+import unzip from "lodash/unzip";
 import xorBy from "lodash/xorBy";
 import zip from "lodash/zip";
 import zipWith from "lodash/zipWith";
@@ -202,6 +204,12 @@ var users = [{ user: "barney" }, { user: "fred" }];
 map(users, "user");
 
 /**
+ * _.pick
+ */
+pick({}, (["a", "b"]: $ReadOnlyArray<string>));
+pick({}, "a", "b");
+
+/**
  * _.pullAllBy
  */
 pullAllBy([{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }], [{ x: 1 }, { x: 3 }], "x");
@@ -304,6 +312,17 @@ zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
 zipWith(["a", "b", "c"], [1, 2, 3], (str, num) => ({ [str]: num }));
 // $ExpectError `x` should be a `string`, `y` a `number`
 zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
+
+/**
+ * _.unzip
+ */
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[0].map(x => x * 10);
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[1].map(x => x.toUpperCase());
+// $ExpectError
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[0].map(x => x.toUpperCase());
+// $ExpectError
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[1].map(x => x * 10);
+unzip(([[1, "a", 1], [2, "b", 2]]: Array<[number, string, number]>))[2].map(x => x * 10);
 
 /**
  * _.isString

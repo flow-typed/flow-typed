@@ -18,7 +18,7 @@ declare type express$RequestParams = {
 
 declare class express$Request extends http$IncomingMessage mixins express$RequestResponseBase {
   baseUrl: string;
-  body: any;
+  body: mixed;
   cookies: {[cookie: string]: string};
   connection: Socket;
   fresh: boolean;
@@ -167,11 +167,11 @@ declare class express$Application extends express$Router mixins events$EventEmit
   constructor(): void;
   locals: {[name: string]: mixed};
   mountpath: string;
-  listen(port: number, hostname?: string, backlog?: number, callback?: (err?: ?Error) => mixed): Server;
-  listen(port: number, hostname?: string, callback?: (err?: ?Error) => mixed): Server;
-  listen(port: number, callback?: (err?: ?Error) => mixed): Server;
-  listen(path: string, callback?: (err?: ?Error) => mixed): Server;
-  listen(handle: Object, callback?: (err?: ?Error) => mixed): Server;
+  listen(port: number, hostname?: string, backlog?: number, callback?: (err?: ?Error) => mixed): ?Server;
+  listen(port: number, hostname?: string, callback?: (err?: ?Error) => mixed): ?Server;
+  listen(port: number, callback?: (err?: ?Error) => mixed): ?Server;
+  listen(path: string, callback?: (err?: ?Error) => mixed): ?Server;
+  listen(handle: Object, callback?: (err?: ?Error) => mixed): ?Server;
   disable(name: string): void;
   disabled(name: string): boolean;
   enable(name: string): express$Application;

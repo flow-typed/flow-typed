@@ -1338,6 +1338,8 @@ declare module "sequelize" {
      * A string or a data type
      */
     type: DataTypeAbstract,
+    
+    allowNull?: boolean,
 
     values?: Array<any>,
 
@@ -1476,6 +1478,7 @@ declare module "sequelize" {
     foreignIdentifierField?: string;
     paired?: BelongsToMany<TargetAttributes, TargetInitAttributes, Target, SourceAttributes, SourceInitAttributes, Source, ThroughAttributes, Through>;
     through: ThroughOptions<Through>;
+    throughModel: Class<Through>;
     get(instance: Source, options?: FindOptions<TargetAttributes>): Promise<Array<Target>>;
     count(instance: Source, options?: FindOptions<TargetAttributes>): Promise<number>;
     has<PrimaryKey>(sourceInstance: Source, targetInstances: ArrayOrElement<PrimaryKey | Target>, options?: FindOptions<TargetAttributes>): Promise<boolean>;
@@ -2539,7 +2542,7 @@ declare module "sequelize" {
     /**
      * The association you want to eagerly load. (This can be used instead of providing a model/as pair)
      */
-    association?: Association<TInstance, any>,
+    association?: Association<any, TInstance>,
 
     /**
      * Where clauses to apply to the child models. Note that this converts the eager load to an inner join,
@@ -4319,9 +4322,15 @@ declare module "sequelize" {
      */
     addIndex(
       tableName: string | Object,
-      attributes: string[],
-      options?: DefineIndexOptions,
-      rawTablename?: string): Promise<void>,
+      options?: {
+        fields: Array<string>,
+        unique?: boolean,
+        using?: string,
+        type?: IndexType,
+        name?: string,
+        where?: WhereOptions<any>,
+      }
+    ): Promise<void>,
 
     /**
      * Shows the index of a table

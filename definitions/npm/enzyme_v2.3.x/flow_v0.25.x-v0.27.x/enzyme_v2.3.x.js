@@ -52,7 +52,7 @@ declare module "enzyme" {
     setContext(context: Object): this;
     instance(): React$Component<any, any, any>;
     update(): this;
-    debug(): string;
+    debug(options?: Object): string;
     type(): string | Function | null;
     name(): string;
     forEach(fn: (node: this, index: number) => mixed): this;

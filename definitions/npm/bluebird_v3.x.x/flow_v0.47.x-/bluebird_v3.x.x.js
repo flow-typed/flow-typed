@@ -297,6 +297,8 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
     disposable: Bluebird$Disposable<T>,
     handler: (value: T) => $Promisable<A>
   ): Bluebird$Promise<A>;
+  
+  suppressUnhandledRejections(): void;
 }
 
 declare class Bluebird$Defer {

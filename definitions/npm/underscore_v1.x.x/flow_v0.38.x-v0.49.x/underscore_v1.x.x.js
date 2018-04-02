@@ -582,7 +582,7 @@ declare module "underscore" {
     identity<U>(value: U): U;
     constant<U>(value: U): () => U;
     noop(): void;
-    times(n: number, iteratee: Function, context?: mixed): void;
+    times<T>(n: number, iteratee: (index: number) => T, context?: mixed): Array<T>;
     random(min: number, max: number): number;
     // TODO: Is this right?
     mixin(object: Object): Underscore & Object;

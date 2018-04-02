@@ -18,11 +18,13 @@ type State = {
 // combineReducers API
 //
 
-function reducerName(name: string, action: Action): string {
+const initialName = 'initialName'
+function reducerName(name: string = initialName, action: Action): string {
   return name
 }
 
-function reducerAge(age: number, action: Action): number {
+const initialAge = 0
+function reducerAge(age: number = initialAge, action: Action): number {
   return age
 }
 

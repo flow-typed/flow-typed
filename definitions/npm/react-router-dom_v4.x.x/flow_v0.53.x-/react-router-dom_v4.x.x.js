@@ -15,6 +15,7 @@ declare module "react-router-dom" {
   }> {}
 
   declare export class Link extends React$Component<{
+    className?: string,
     to: string | LocationShape,
     replace?: boolean,
     children?: React$Node

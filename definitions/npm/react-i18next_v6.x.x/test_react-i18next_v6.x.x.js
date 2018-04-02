@@ -50,16 +50,12 @@ class ClassComp extends React.Component<Props> {
 }
 
 // $ExpectError - wrong argument type
-const FlowErrorComp = ({ s, t }: Props) =>
-  <div
-    prop1={t("", "")} // misuse of t()
-    prop2={" " + s}
-  />;
+const FlowErrorComp = ({ s, t }: Props) => t("", "")
 
 class FlowErrorClassComp extends React.Component<Props> {
   render() {
-    // $ExpectError - wrong argument type
     const { s, t } = this.props;
+    // $ExpectError - wrong argument type
     return <div prop={t({})} />; // misuse of t()
   }
 }

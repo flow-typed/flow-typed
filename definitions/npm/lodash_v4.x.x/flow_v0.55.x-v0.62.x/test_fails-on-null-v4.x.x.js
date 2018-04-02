@@ -21,6 +21,7 @@ import rest from "lodash/rest";
 import spread from "lodash/spread";
 import throttle from "lodash/throttle";
 import unary from "lodash/unary";
+import unzip from "lodash/unzip";
 // These tests are generated with modified script from this issue:
 // https://github.com/flowtype/flow-typed/issues/1639
 
@@ -68,3 +69,5 @@ throttle(null, null, null);
 thru(null, null);
 //$ExpectError
 unary(null);
+//$ExpectError
+unzip(null);

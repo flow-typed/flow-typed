@@ -7,7 +7,8 @@ declare module 'awaiting' {
     constructor(message: string): void;
     add(err: Error): void;
     get(index: number): Error;
-    @@iterator(): Iterator<Error>;
+    // Comment syntax here as @@iterator is invalid syntax for eslint and babylon
+    /*:: @@iterator(): Iterator<Error>; */
   }
 
   declare function delay(ms: number): Promise<void>;

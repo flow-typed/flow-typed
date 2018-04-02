@@ -777,15 +777,15 @@ dur.toObject({ includeConfig: false }).conversionAccuracy;
   { year: 2016, month: 1 },
   { year: 2017, month: 1 }
 ): Interval);
-// $ExpectError
 (Interval.fromDateTimes(
-  { year: 2016, month: 1, foo: "bar" },
+  // $ExpectError
+  { year: 2016, month: 1, foo: 'bar' },
   { year: 2017, month: 1 }
 ): Interval);
-// $ExpectError
 (Interval.fromDateTimes(
   { year: 2016, month: 1 },
-  { year: 2017, month: 1, foo: "bar" }
+  // $ExpectError
+  { year: 2017, month: 1, foo: 'bar' }
 ): Interval);
 
 (Interval.fromISO("23;lkj1"): Interval);

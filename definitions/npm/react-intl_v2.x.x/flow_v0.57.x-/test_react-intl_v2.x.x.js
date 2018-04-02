@@ -175,6 +175,11 @@ const PluralComponent: React.ComponentType<
   );
 });
 
+// Using intl as a test helper
+const intlProvider = new IntlProvider({ locale: 'en', messages: {} }, {});
+const { intl } = intlProvider.getChildContext();
+(intl: IntlShape);
+
 // Components
 <FormattedMessage
   id="test"

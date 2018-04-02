@@ -584,7 +584,7 @@ declare module "underscore" {
     identity<U>(value: U): U;
     constant<U>(value: U): () => U;
     noop(): void;
-    times(n: number, iteratee: Function, context?: mixed): void;
+    times<T>(n: number, iteratee: (index: number) => T, context?: mixed): Array<T>;
     random(min: number, max: number): number;
     // TODO: Is this right?
     mixin(object: Object): Underscore & Object;
@@ -612,7 +612,7 @@ declare module "underscore" {
     reduceRight<U>(iteratee: (memo: U, value: T, index?: number) => U, init: U): U;
     find(predicate: (value: T) => boolean): ?T;
     filter(predicate: (value: T) => boolean): Array<T>;
-    filter(predicate: {[string]: T}): Array<T>;    
+    filter(predicate: {[string]: T}): Array<T>;
     where(properties: Object): Array<T>;
     findWhere(properties: $Shape<T>): ?T;
     reject(predicate: (value: T) => boolean, context?: mixed): Array<T>;

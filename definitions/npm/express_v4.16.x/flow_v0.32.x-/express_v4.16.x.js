@@ -18,7 +18,7 @@ declare type express$RequestParams = {
 
 declare class express$Request extends http$IncomingMessage mixins express$RequestResponseBase {
   baseUrl: string;
-  body: any;
+  body: mixed;
   cookies: { [cookie: string]: string };
   connection: Socket;
   fresh: boolean;
@@ -201,6 +201,14 @@ declare class express$Router extends express$Route {
   ) => void;
 }
 
+/*
+With flow-bin ^0.59, express app.listen() is deemed to return any and fails flow type coverage.
+Which is ironic because https://github.com/facebook/flow/blob/master/Changelog.md#misc-2 (release notes for 0.59)
+says "Improves typings for Node.js HTTP server listen() function."  See that?  IMPROVES!
+To work around this issue, we changed Server to ?Server here, so that our invocations of express.listen() will
+not be deemed to lack type coverage.
+*/
+
 declare class express$Application extends express$Router mixins events$EventEmitter {
   constructor(): void;
   locals: { [name: string]: mixed };
@@ -210,15 +218,15 @@ declare class express$Application extends express$Router mixins events$EventEmit
     hostname?: string,
     backlog?: number,
     callback?: (err?: ?Error) => mixed
-  ): Server;
+  ): ?Server;
   listen(
     port: number,
     hostname?: string,
     callback?: (err?: ?Error) => mixed
-  ): Server;
-  listen(port: number, callback?: (err?: ?Error) => mixed): Server;
-  listen(path: string, callback?: (err?: ?Error) => mixed): Server;
-  listen(handle: Object, callback?: (err?: ?Error) => mixed): Server;
+  ): ?Server;
+  listen(port: number, callback?: (err?: ?Error) => mixed): ?Server;
+  listen(path: string, callback?: (err?: ?Error) => mixed): ?Server;
+  listen(handle: Object, callback?: (err?: ?Error) => mixed): ?Server;
   disable(name: string): void;
   disabled(name: string): boolean;
   enable(name: string): express$Application;
@@ -255,6 +263,20 @@ declare type JsonOptions = {
   ) => mixed
 };
 
+declare type express$UrlEncodedOptions = {
+  extended?: boolean,
+  inflate?: boolean,
+  limit?: string | number,
+  parameterLimit?: number,
+  type?: string | Array<string> | ((req: express$Request) => boolean),
+  verify?: (
+    req: express$Request,
+    res: express$Response,
+    buf: Buffer,
+    encoding: string
+  ) => mixed,
+}
+
 declare module "express" {
   declare export type RouterOptions = express$RouterOptions;
   declare export type CookieOptions = express$CookieOptions;
@@ -269,6 +291,7 @@ declare module "express" {
     (): express$Application, // If you try to call like a function, it will use this signature
     json: (opts: ?JsonOptions) => express$Middleware,
     static: (root: string, options?: Object) => express$Middleware, // `static` property on the function
-    Router: typeof express$Router // `Router` property on the function
+    Router: typeof express$Router, // `Router` property on the function
+    urlencoded: (opts: ?express$UrlEncodedOptions) => express$Middleware,
   };
 }

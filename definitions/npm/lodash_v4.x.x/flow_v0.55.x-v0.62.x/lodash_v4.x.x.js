@@ -408,7 +408,14 @@ declare module "lodash" {
     uniq<T>(array?: ?Array<T>): Array<T>;
     uniqBy<T>(array?: ?Array<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     uniqWith<T>(array?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
-    unzip<T>(array?: ?Array<T>): Array<T>;
+    unzip<A, B>(array: Array<[A, B]>): [Array<A>, Array<B>];
+    unzip<A, B, C>(array: Array<[A, B, C]>): [Array<A>, Array<B>, Array<C>];
+    unzip<A, B, C, D>(
+      array: Array<[A, B, C, D]>,
+    ): [Array<A>, Array<B>, Array<C>, Array<D>];
+    unzip<A, B, C, D, E>(
+      array: Array<[A, B, C, D, E]>,
+    ): [Array<A>, Array<B>, Array<C>, Array<D>, Array<E>];
     unzipWith<T>(array: ?Array<T>, iteratee?: ?Iteratee<T>): Array<T>;
     without<T>(array?: ?Array<T>, ...values?: Array<?T>): Array<T>;
     xor<T>(...array: Array<Array<T>>): Array<T>;
@@ -1203,8 +1210,8 @@ declare module "lodash" {
       object: T,
       predicate?: ?OPredicate<A, T>
     ): {};
-    pick(object?: ?Object, ...props: Array<string>): Object;
-    pick(object?: ?Object, props: Array<string>): Object;
+    pick(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
+    pick(object?: ?Object, props: $ReadOnlyArray<string>): Object;
     pickBy<A, T: { [id: string]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
@@ -1359,10 +1366,8 @@ declare module "lodash" {
     // NaN is a number instead of its own type, otherwise it would behave like null/void
     defaultTo<T1: number, T2>(value: T1, defaultValue: T2): T1 | T2;
     defaultTo<T1: void | null, T2>(value: T1, defaultValue: T2): T2;
-    flow: $ComposeReverse;
-    flow(funcs?: Array<Function>): Function;
-    flowRight: $Compose;
-    flowRight(funcs?: Array<Function>): Function;
+    flow: ($ComposeReverse & (funcs: Array<Function>) => Function);
+    flowRight: ($Compose & (funcs: Array<Function>) => Function);
     identity<T>(value: T): T;
     iteratee(func?: any): Function;
     matches(source?: ?Object): Function;
@@ -3110,14 +3115,10 @@ declare module "lodash/fp" {
     defaultTo<T1: number, T2>(defaultValue: T2, value: T1): T1 | T2;
     defaultTo<T1: void | null, T2>(defaultValue: T2): (value: T1) => T2;
     defaultTo<T1: void | null, T2>(defaultValue: T2, value: T1): T2;
-    flow: $ComposeReverse;
-    flow(funcs: Array<Function>): Function;
-    pipe: $ComposeReverse;
-    pipe(funcs: Array<Function>): Function;
-    flowRight: $Compose;
-    flowRight(funcs: Array<Function>): Function;
-    compose: $Compose;
-    compose(funcs: Array<Function>): Function;
+    flow: ($ComposeReverse & (funcs: Array<Function>) => Function);
+    pipe: ($ComposeReverse & (funcs: Array<Function>) => Function);
+    flowRight: ($Compose & (funcs: Array<Function>) => Function);
+    compose: ($Compose & (funcs: Array<Function>) => Function);
     identity<T>(value: T): T;
     iteratee(func: any): Function;
     matches(source: Object): (object: Object) => boolean;

@@ -2,17 +2,21 @@ import io from "socket.io-client";
 
 io("foo");
 io("foo", {});
-io("foo", { forceNew: true, path: "/foobar" });
+io("foo", { forceNew: true, path: "/foobar", transports: ["websocket"] });
 
 io.connect("foo");
 io.connect("foo", {});
-io.connect("foo", { forceNew: false, path: "/barbaz" });
+io.connect("foo", { forceNew: false, path: "/barbaz", transports: ["polling"] });
 
 // $ExpectError
 io("foo", { invalid_key: 5 });
 
 // $ExpectError
+io("foo", { transports: ["invalid transport"] });
+
+// $ExpectError
 io(5);
+
 
 // test Socket
 const socket = io("foo");
@@ -21,12 +25,13 @@ socket.listeners("event");
 socket
   .open()
   .connect()
-  .send("any", "number", "of", "args")
-  .emit("event", "any", "number", "of", "args")
+  .send("any", 1, "two", { "3": false })
+  .emit("event", 1, "two", { "3": false })
   .close()
   .disconnect()
   .compress(false)
   .on("event", cb => {})
+  .on("event", (foo: string, bar: number) => {})
   .addEventListener("event", cb => {})
   .once("event", cb => {})
   .off("event", cb => {})
@@ -47,6 +52,7 @@ manager
   .connect(err => {})
   .socket("/nsp", { query: "foo" })
   .on("event", cb => {})
+  .on("event", (foo: string, bar: number) => {})
   .addEventListener("event", cb => {})
   .once("event", cb => {})
   .off("event", cb => {})
