@@ -1,5 +1,5 @@
 declare module "formik" {
-  import { ComponentType } from "react";
+  import type { ComponentType } from "react";
   
   declare export type FormikErrors<Values> = {
     [field: $Keys<Values>]: string
