@@ -10,3 +10,9 @@ const supportsDim = chalk.dim("oh to be dimmed");
 
 // $ExpectError
 const enabledString: string = chalk.enabled;
+
+const rgbValid: string = chalk.rgb(255, 0, 0).bgGreen("A red string");
+
+// $ExpectError
+const rgbInvalid: string = chalk.rgb(255, 0, 0).invalid("Unknown");
+
