@@ -1,6 +1,6 @@
 declare type $winstonLevels = {
-  [string]: number,
-}
+  [string]: number
+};
 
 declare type $winstonNpmLogLevels = {
   error: number,
@@ -8,74 +8,75 @@ declare type $winstonNpmLogLevels = {
   info: number,
   verbose: number,
   debug: number,
-  silly: number,
-}
+  silly: number
+};
 
 declare type $winstonInfo<T: $winstonLevels> = {
   level: $Keys<T>,
-  message: string,
-}
+  message: string
+};
 
-declare type $winstonFormat = Object
+declare type $winstonFormat = Object;
 
 declare type $winstonFileTransportConfig<T: $winstonLevels> = {
   filename: string,
-  level?: $Keys<T>,
-}
+  level?: $Keys<T>
+};
 
-declare class $winstonTransport {
-}
+declare class $winstonTransport {}
 
 declare class $winstonFileTransport<T> extends $winstonTransport {
-  constructor($winstonFileTransportConfig<T>): $winstonFileTransport<T>
+  constructor($winstonFileTransportConfig<T>): $winstonFileTransport<T>;
 }
 
 declare type $winstonConsoleTransportConfig<T: $winstonLevels> = {
-  level?: $Keys<T>,
-}
+  level?: $Keys<T>
+};
 
 declare class $winstonConsoleTransport<T> extends $winstonTransport {
-  constructor(config?: $winstonConsoleTransportConfig<T>): $winstonConsoleTransport<T>
+  constructor(
+    config?: $winstonConsoleTransportConfig<T>
+  ): $winstonConsoleTransport<T>;
 }
 
 declare type $winstonLoggerConfig<T: $winstonLevels> = {
-  exitOnError? : boolean,
+  exitOnError?: boolean,
   format?: $winstonFormat,
   level?: $Keys<T>,
   levels?: T,
-  transports?: Array<$winstonTransport>,
-}
+  transports?: Array<$winstonTransport>
+};
 
 declare type $winstonLogger<T: $winstonLevels> = {
   [$Keys<T>]: (message: string) => void,
-  add: ($winstonTransport) => void,
+  add: $winstonTransport => void,
   clear: () => void,
   configure: ($winstonLoggerConfig<T>) => void,
   log: (message: $winstonInfo<T>) => void,
-  remove: ($winstonTransport) => void,
-}
+  remove: $winstonTransport => void
+};
 
 declare type $winstonConfigSubModule = {
-  npm: () => $winstonNpmLogLevels,
-}
+  npm: () => $winstonNpmLogLevels
+};
 
 declare type $winstonFormatSubModule = {
   combine: (...args: Array<$winstonFormat>) => $winstonFormat,
   json: () => $winstonFormat,
   prettyPrint: () => $winstonFormat,
   simple: () => $winstonFormat,
-  timestamp: () => $winstonFormat,
-}
+  timestamp: () => $winstonFormat
+};
 
-declare type $winstonDefaultLogger = $winstonLogger<$winstonNpmLogLevels>
+declare type $winstonDefaultLogger = $winstonLogger<$winstonNpmLogLevels>;
 
 declare module "winston" {
   declare module.exports: $winstonDefaultLogger & {
     format: $winstonFormatSubModule,
     transports: {
       Console: typeof $winstonConsoleTransport,
-      File: typeof $winstonFileTransport,
+      File: typeof $winstonFileTransport
     },
-    createLogger: <T>($winstonLoggerConfig<T>) => $winstonLogger<T>,
-  }
+    createLogger: <T>($winstonLoggerConfig<T>) => $winstonLogger<T>
+  };
 }
