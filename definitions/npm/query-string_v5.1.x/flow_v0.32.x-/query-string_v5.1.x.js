@@ -1,6 +1,6 @@
 declare module 'query-string' {
   declare type ArrayFormat = 'none' | 'bracket' | 'index'
-  declare type ParseOptions = {|
+  declare type ParserOptions = {|
     arrayFormat?: ArrayFormat,
   |}
 
@@ -11,9 +11,9 @@ declare module 'query-string' {
   |}
 
   declare module.exports: {
-    extract(str: string): string,
-    parse(str: string, opts?: ParseOptions): Object,
-    parseUrl(str: string, opts?: ParseOptions): { url: string, query: Object },
-    stringify(obj: Object, opts?: StringifyOptions): string,
+    extract(input: string): string,
+    parse(input: string, options?: ParserOptions): Object,
+    parseUrl(input: string, options?: ParserOptions): { url: string, query: Object },
+    stringify(obj: Object, options?: StringifyOptions): string,
   }
 }
