@@ -1,5 +1,3 @@
-
-
 declare class JsonWebTokenError extends Error {
   name: string;
   message: string;
