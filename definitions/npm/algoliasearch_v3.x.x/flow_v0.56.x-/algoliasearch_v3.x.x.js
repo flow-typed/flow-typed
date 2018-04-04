@@ -4,7 +4,7 @@ type JSONObject = mixed;
 type HTTPClient = any;
 type Callback<Response> = (error: ?Error, response: Response) => void;
 
-declare type $algolia$SearchIndexResponse = {
+declare type $algolia$SearchIndexResponse = {|
   hits: Array<any>,
   page: number,
   nbHits: number,
@@ -14,11 +14,11 @@ declare type $algolia$SearchIndexResponse = {
   query: string,
   parsed_query: string,
   params: string,
-};
+|};
 
-declare type $algolia$SearchIndexMultiResponse = {
+declare type $algolia$SearchIndexMultiResponse = {|
   results: Array<$algolia$SearchIndexResponse>,
-};
+|};
 
 declare type $algoliasearch$Settings = {|
   // https://www.algolia.com/doc/rest-api/search/#ranking
@@ -127,12 +127,12 @@ declare type $algoliasearch$QueryMultiParameters = Array<{|
   params: $algoliasearch$QueryParameters,
 |}>;
 
-declare type $algoliasearch$Client = {
+declare interface $algoliasearch$Client {
   clearCache(): void,
   initIndex(s: string): $algoliasearch$Index,
 };
 
-declare type $algoliasearch$IndexLite = {
+declare interface $algoliasearch$IndexLite {
   clearCache(): void,
   // Single
   search(
@@ -154,12 +154,12 @@ declare type $algoliasearch$IndexLite = {
   setSettings(settings: $algoliasearch$Settings): Promise<any>,
 };
 
-declare type $algoliasearch$Index = $algoliasearch$IndexLite & {
+declare interface $algoliasearch$Index extends $algoliasearch$IndexLite {
   addObjects(o: JSONObject, callback: Callback<any>): void,
   addObjects(o: JSONObject): Promise<any>,
 };
 
-declare type $algoliasearch$ClientLite = {
+declare interface $algoliasearch$ClientLite {
   clearCache(): void,
   initIndex(s: string): $algoliasearch$IndexLite,
 };
