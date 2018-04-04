@@ -74,7 +74,8 @@ type SchemaOpts<Doc> = {
     | {
         createdAt?: string,
         updatedAt?: string
-      }
+      },
+  discriminatorKey?: string
 };
 
 type IndexFields = {
@@ -178,7 +179,8 @@ type Mongoose$SchemaField<Schema> = {
     description: ?string
   },
   enumValues?: ?(string[]),
-  schema?: Schema
+  schema?: Schema,
+  _index?: ?{ [optionName: string]: mixed }
 };
 
 declare class Mongoose$SchemaVirtualField {
@@ -261,6 +263,7 @@ declare class Mongoose$Document {
   static modelName: string;
   static schema: Mongoose$Schema<this>;
   static on(type: string, cb: Function): void;
+  static discriminator(name: string, schema: Mongoose$Schema<any>): Class<this>;
 
   collection: Mongoose$Collection;
   constructor(data?: $Shape<this>): this;
@@ -492,15 +495,15 @@ declare class Mongoose$Connection {
 }
 
 declare module "mongoose" {
-  declare export type MongooseConnection = Mongoose$Connection;
-  declare export type MongoId = MongoId;
-  declare export type BSONObjectId = bson$ObjectId;
-  declare export type ObjectId = bson$ObjectId;
-  declare export type MongooseQuery<Result, Doc> = Mongoose$Query<Result, Doc>;
-  declare export type MongooseDocument = Mongoose$Document;
-  declare export type MongooseModel = typeof Mongoose$Document;
-  declare export type MongooseSchema<Doc> = Mongoose$Schema<Doc>;
-  declare export type MongooseSchemaField<Schema> = Mongoose$SchemaField<
+  declare type MongooseConnection = Mongoose$Connection;
+  declare type MongoId = MongoId;
+  declare type BSONObjectId = bson$ObjectId;
+  declare type ObjectId = bson$ObjectId;
+  declare type MongooseQuery<Result, Doc> = Mongoose$Query<Result, Doc>;
+  declare type MongooseDocument = Mongoose$Document;
+  declare type MongooseModel = typeof Mongoose$Document;
+  declare type MongooseSchema<Doc> = Mongoose$Schema<Doc>;
+  declare type MongooseSchemaField<Schema> = Mongoose$SchemaField<
     Schema
   >;
 
