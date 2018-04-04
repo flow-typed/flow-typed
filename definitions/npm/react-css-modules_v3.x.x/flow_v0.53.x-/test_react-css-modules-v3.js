@@ -79,7 +79,7 @@ describe('Stateless Functional Component', () => {
     }
   });
 
-  it('Stateless Functional Component can be declared', () => {
+  it('Stateless Functional Component can be undeclared', () => {
     class Failure extends Component<{}> {
       render() {
         // $ExpectError Unwrapped component won't be passed `styles`.
