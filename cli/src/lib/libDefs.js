@@ -29,7 +29,9 @@ export type LibDef = {|
 
 export const TEST_FILE_NAME_RE = /^test_.*\.js$/;
 
-const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
+const CACHE_DIR = !!process.env.FLOW_TYPED_CACHE_DIR
+  ? process.env.FLOW_TYPED_CACHE_DIR
+  : path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
 const GIT_REPO_DIR = path.join(__dirname, '..', '..', '..');
 

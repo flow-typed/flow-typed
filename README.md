@@ -108,6 +108,11 @@ a short grace period during a libdef installation, but sometimes it is useful to
 do this update manually. Use this command if you want to download the most
 recent definitions into the cache for yourself.
 
+It is possible to specify a folder where cache will be stored, it could be useful
+for CI build tools such as Travis to allow it keep cache folder between builds.
+To specify cache folder define Environment property `FLOW_TYPED_CACHE_DIR`.
+By default `$(HOME)/.flow-typed` will be used.
+
 ## Active Maintenance Team
 
 [![Andrew Smith](https://github.com/andrewsouthpaw.png?size=100)](https://github.com/andrewsouthpaw) | [![Georges-Antoine Assi](https://github.com/gantoine.png?size=100)](https://github.com/gantoine) | [![Ville Saukkonen](https://github.com/villesau.png?size=100)](https://github.com/villesau)
