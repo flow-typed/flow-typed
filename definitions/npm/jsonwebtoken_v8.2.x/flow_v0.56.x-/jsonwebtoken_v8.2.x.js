@@ -1,19 +1,19 @@
 
 
 declare class JsonWebTokenError extends Error {
-  name: 'JsonWebTokenError';
+  name: string;
   message: string;
   inner: Error;
 }
 
 declare class TokenExpiredError extends Error {
-  name: 'TokenExpiredError';
+  name: string;
   expiredAt: number;
   inner: Error;
 }
 
 declare class NotBeforeError extends Error {
-  name: 'NotBeforeError';
+  name: string;
   date: Date;
   inner: Error;
 }
@@ -48,7 +48,7 @@ declare type jwt$SigningOptions<Headers> = $Shape<{
 
 declare type jwt$SigningOptionsWithAlgorithm<H> = jwt$SigningOptions<H> & { algorithm: jwt$Algorithm };
 
-declare type jwt$SVerifyCallback = (err: JsonWebTokenError | NotBeforeError | TokenExpiredError | null, decoded: jwt$Payload) => void;
+declare type jwt$VerifyCallback = (err: JsonWebTokenError | NotBeforeError | TokenExpiredError | null, decoded: jwt$Payload) => void;
 declare type jwt$VerifyOptionsWithAlgorithm = jwt$VerifyOptions & { algorithms: Array<jwt$Algorithm> };
 declare type jwt$VerifyOptions = $Shape<{
   algorithms: Array<jwt$Algorithm>,
@@ -114,13 +114,13 @@ declare interface jwt$Decode {
 declare interface jwt$Verify {
   (jwt: string, secretOrPrivateKey: string | Buffer): jwt$Payload;
 
-  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions | jwt$SVerifyCallback): jwt$Payload;
+  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions | jwt$VerifyCallback): jwt$Payload;
 
-  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions, callback: jwt$SVerifyCallback): jwt$Payload;
+  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions, callback: jwt$VerifyCallback): jwt$Payload;
 
   (jwt: string, secretOrPrivateKey: jwt$Key, options: jwt$VerifyOptionsWithAlgorithm): jwt$Payload;
 
-  (jwt: string, secretOrPrivateKey: jwt$Key, options: jwt$VerifyOptionsWithAlgorithm, callback: jwt$SVerifyCallback): jwt$Payload;
+  (jwt: string, secretOrPrivateKey: jwt$Key, options: jwt$VerifyOptionsWithAlgorithm, callback: jwt$VerifyCallback): jwt$Payload;
 }
 
 declare class jwt$TokenExpiredError extends Error {
@@ -139,7 +139,8 @@ declare module "jsonwebtoken" {
   declare type DecodingOptions = jwt$DecodingOptions
   declare type VerifyOptions = jwt$VerifyOptions
   declare type VerifyOptionsWithAlgorithm = jwt$VerifyOptionsWithAlgorithm
-  declare type Callback = jwt$Callback
+  declare type VerifyCallback = jwt$VerifyCallback
+  declare type SignCallback = jwt$SignCallback
 
   declare type Key = jwt$Key
   declare type Algorithm = jwt$Algorithm
