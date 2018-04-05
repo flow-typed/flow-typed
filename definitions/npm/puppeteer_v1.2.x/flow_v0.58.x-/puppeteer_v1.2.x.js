@@ -1,5 +1,10 @@
 // @flow
 
+/**
+ * Based on typescript definitions found at the url below
+ * https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/puppeteer
+ */
+
 import ChildProcess from 'child_process';
 import EventEmitter from 'events';
 
