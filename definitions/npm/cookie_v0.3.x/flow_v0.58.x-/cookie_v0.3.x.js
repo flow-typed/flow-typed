@@ -11,7 +11,7 @@ type SerializeOptions = {
 
 type ParseOptions = {
   decode?: ?((stringToDecode: string) => *),
-}
+};
 
 declare module 'cookie' {
   declare module.exports: {
