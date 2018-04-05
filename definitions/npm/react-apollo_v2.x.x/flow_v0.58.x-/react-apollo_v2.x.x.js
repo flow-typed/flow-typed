@@ -82,7 +82,7 @@ declare module 'react-apollo' {
   };
 
   declare export interface GraphqlQueryControls {
-    error?: ApolloError;
+    error?: ApolloError | any; // Added optional `any` to satisfy Flow < 0.62
     networkStatus: NetworkStatus;
     loading: boolean;
     variables: Object;
