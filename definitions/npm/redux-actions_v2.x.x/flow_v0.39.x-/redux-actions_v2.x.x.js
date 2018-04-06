@@ -57,7 +57,7 @@ declare module "redux-actions" {
   ): Object;
   declare function createActions(...identityActions: string[]): Object;
 
-  declare type Reducer<S, A> = (state: S, action: A) => S;
+  declare type Reducer<S, A> = (state: S | void, action: A) => S;
 
   declare type ReducerMap<S, A> =
     | { next: Reducer<S, A> }
