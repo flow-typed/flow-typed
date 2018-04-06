@@ -256,7 +256,7 @@ declare type TestCafe$SelectorParameter =
   TestCafe$SelectorFn |
   TestCafe$NodeSnapshot |
   TestCafe$SelectorPromise |
-  (...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>;
+  (...args: any[]) => null | Node | Node[] | NodeList<*> | HTMLCollection<*>;
 
 declare interface TestCafe$TestController {
     ctx: { [key: string]: any },
