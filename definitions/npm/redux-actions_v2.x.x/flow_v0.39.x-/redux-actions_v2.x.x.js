@@ -57,6 +57,20 @@ declare module "redux-actions" {
   ): Object;
   declare function createActions(...identityActions: string[]): Object;
 
+  /*
+   * The semantics of the reducer (i.e. ReduxReducer<S, A>) returned by either
+   * `handleAction` or `handleActions` are actually different from the semantics
+   * of the reducer (i.e. Reducer<S, A>) that are consumed by either `handleAction`
+   * or `handleActions`.
+   *
+   * Reducers (i.e. Reducer<S, A>) consumed by either `handleAction` or `handleActions`
+   * are assumed to be given the actual `State` type, since internally,
+   * `redux-actions` will perform the action type matching for us, and will always
+   * provide the expected state type.
+   *
+   * The reducers returned by either `handleAction` or `handleActions` will be
+   * compatible with the `redux` library.
+  */
   declare type Reducer<S, A> = (state: S, action: A) => S;
   declare type ReduxReducer<S, A> = (state: S | void, action: A) => S;
 
