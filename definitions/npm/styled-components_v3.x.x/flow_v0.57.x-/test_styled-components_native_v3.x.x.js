@@ -257,7 +257,7 @@ const NativeNeedsNothingInferred = nativeStyled(() => <View />);
 
 // ---- FUNCTIONAL COMPONENT TESTS (nativeWithTheme)----
 const NativeNeedsFoo1Functional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string, theme: NativeTheme }> = nativeWithTheme(NativeFunctionalComponent);
-const NativeNeedsFoo2Functional: NativeReactComponentFunctional<{ foo: string }> = nativeWithTheme(NativeNeedsFoo1Functional);
+const NativeNeedsFoo2Functional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string }> = nativeWithTheme(NativeNeedsFoo1Functional);
 
 const NativeNeedsFoo1FunctionalDefaultProps: NativeReactComponentFunctional<{ foo: string, theme: NativeTheme }, { theme: NativeTheme }> = nativeWithTheme(NativeFunctionalComponent);
 const NativeNeedsFoo2FunctionalDefaultProps: NativeReactComponentFunctional<{ foo: string }, { theme: NativeTheme }> = nativeWithTheme(NativeNeedsFoo1FunctionalDefaultProps);
