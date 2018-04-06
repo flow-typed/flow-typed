@@ -2,7 +2,7 @@ declare module "redux" {
   declare type State = any;
   declare type Action = Object;
   declare type AsyncAction = any;
-  declare type Reducer<S, A> = (state: S, action: A) => S;
+  declare type Reducer<S, A> = (state: S | void, action: A) => S;
   declare type BaseDispatch = (a: Action) => Action;
   declare type Dispatch = (a: Action | AsyncAction) => any;
   declare type ActionCreator = (...args: any) => Action | AsyncAction;

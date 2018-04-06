@@ -85,8 +85,8 @@ _.union([1, 2, 3], [2, 30, 1], [1, 40, [1]]);
 _.union([1, 2, 3], 4)
 
 _.filter([1, 2, 3, 4, 5, 6], function(num: number): boolean { return num % 2 === 0; });
-_.filter([1, 2, 3, 4, 5, 6], function(num, index: number, as: number[]): boolean { 
-  return num % 2 == 0 || index === 7 || as.length > 3; 
+_.filter([1, 2, 3, 4, 5, 6], function(num, index: number, as: number[]): boolean {
+  return num % 2 == 0 || index === 7 || as.length > 3;
 });
 _.filter({name: 'foo', a: 'bar'}, function (val, key, obj): boolean {
   var testKey = key + 'foo';
@@ -118,6 +118,11 @@ _.bindAll({msg: 'hi', greet: function(){ return this.msg;}}, ['greet', 'toString
 var identityIsString: string = _.identity('foo');
 // $ExpectError
 var identityIsNotString: string = _.identity(42);
+
+var timesString: Array<string> = _.times(3, (i) => `str${i}`);
+var timesNumber: Array<number> = _.times(3, (i) => i + 1);
+// $ExpectError
+var timesNumberError: Array<string> = _.times(3, (i) => i + 1);
 
 var toArrayString: Array<string> = _.toArray({foo: 'bar', baz: 'qux'});
 var toArrayNumber: Array<number> = _.toArray({foo: 4, bar: 2});

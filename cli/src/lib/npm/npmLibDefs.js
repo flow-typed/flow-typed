@@ -101,21 +101,8 @@ async function extractLibDefsFromNpmPkgDir(
 
     const pkgDirItemStat = fs.statSync(pkgDirItemPath);
     if (pkgDirItemStat.isFile()) {
-      if (path.extname(pkgDirItem) === '.swp') {
-        return;
-      }
-
       const isValidTestFile = TEST_FILE_NAME_RE.test(pkgDirItem);
-
-      if (isValidTestFile) {
-        commonTestFiles.push(pkgDirItemPath);
-        return;
-      }
-
-      const error =
-        `Unexpected file name. This directory can only contain test files ` +
-        `or a libdef file named ${'`' + libDefFileName + '`'}.`;
-      validationError(pkgDirItemContext, error, validationErrors);
+      if (isValidTestFile) commonTestFiles.push(pkgDirItemPath);
     } else if (pkgDirItemStat.isDirectory()) {
       const errCount = validationErrors == null ? 0 : validationErrors.size;
       const parsedFlowDir = parseFlowDirString(

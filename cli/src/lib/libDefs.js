@@ -27,7 +27,7 @@ export type LibDef = {|
   testFilePaths: Array<string>,
 |};
 
-export const TEST_FILE_NAME_RE = /(^test_.*\.js$|^.*\.md$)/;
+export const TEST_FILE_NAME_RE = /^test_.*\.js$/;
 
 const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
@@ -238,11 +238,7 @@ async function parseLibDefsFromPkgDir(
         return;
       }
 
-      const isValidTestFile = validateTestFile(
-        pkgDirItemPath,
-        pkgDirItemContext,
-        validationErrs,
-      );
+      const isValidTestFile = validateTestFile(pkgDirItemPath);
 
       if (isValidTestFile) {
         commonTestFiles.push(pkgDirItemPath);
@@ -294,11 +290,7 @@ async function parseLibDefsFromPkgDir(
             return;
           }
 
-          const isValidTestFile = validateTestFile(
-            flowDirItemPath,
-            flowDirItemContext,
-            validationErrs,
-          );
+          const isValidTestFile = validateTestFile(flowDirItemPath);
 
           if (isValidTestFile) {
             testFilePaths.push(flowDirItemPath);
@@ -374,16 +366,9 @@ export function parseRepoDirItem(
 /**
  * Given a path to an assumed test file, ensure that it is named as expected.
  */
-function validateTestFile(testFilePath, context, validationErrs) {
+function validateTestFile(testFilePath) {
   const testFileName = path.basename(testFilePath);
-  if (!TEST_FILE_NAME_RE.test(testFileName)) {
-    const error =
-      'Malformed test file name! Test files must be formatted as test_(.*).js: ' +
-      testFileName;
-    validationError(context, error, validationErrs);
-    return false;
-  }
-  return true;
+  return TEST_FILE_NAME_RE.test(testFileName);
 }
 
 /**
