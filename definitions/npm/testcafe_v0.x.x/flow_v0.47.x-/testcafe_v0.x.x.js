@@ -327,6 +327,8 @@ declare interface TestCafe$TestController {
         ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
         startPos: number,
         endPos: number,
+        startPos?: number,
+        endPos?: number,
         options?: TestCafe$ActionOptions): TestCafe$TestControllerPromise,
 
     selectTextAreaContent(
@@ -339,6 +341,10 @@ declare interface TestCafe$TestController {
         startPos: number,
         endLine: number,
         endPos: number,
+        startLine?: number,
+        startPos?: number,
+        endLine?: number,
+        endPos?: number,
         options?: TestCafe$ActionOptions): TestCafe$TestControllerPromise,
 
     selectEditableContent(
