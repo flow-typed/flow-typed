@@ -35,6 +35,7 @@ declare function fit(name: string, fn: Function, timeout?: number): void;
 declare function xit(name: string, fn: Function): void;
 
 declare function expect(value: mixed): JasmineExpectType;
+declare function pending(message?: string): void;
 declare function fail(err?: Error | string): void;
 
 // TODO handle return type
@@ -51,7 +52,18 @@ type JasmineCallsType = {
   reset(): void
 };
 
+type JasmineSpyStrategyType = {
+  callFake((...args: Array<any>) => any): JasmineSpyType,
+  callThrough(): JasmineSpyType,
+  identity: string,
+  returnValue(value: any): JasmineSpyType,
+  returnValues(...values: any): JasmineSpyType,
+  stub(): JasmineSpyType,
+  throwError(errorMessage?: string): JasmineSpyType
+};
+
 type JasmineSpyType = {
+  and: JasmineSpyStrategyType,
   calls: JasmineCallsType
 };
 
@@ -81,6 +93,7 @@ declare type JasmineMatchers = {
 };
 
 declare var jasmine: {
+  DEFAULT_TIMEOUT_INTERVAL: number,
   createSpy(name?: string): JasmineSpyType,
   any(val: mixed): void,
   anything(): void,
