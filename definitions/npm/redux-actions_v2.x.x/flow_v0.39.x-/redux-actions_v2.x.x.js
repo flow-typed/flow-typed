@@ -58,6 +58,7 @@ declare module "redux-actions" {
   declare function createActions(...identityActions: string[]): Object;
 
   declare type Reducer<S, A> = (state: S, action: A) => S;
+  declare type ReduxReducer<S, A> = (state: S | void, action: A) => S;
 
   declare type ReducerMap<S, A> =
     | { next: Reducer<S, A> }
@@ -70,7 +71,7 @@ declare module "redux-actions" {
    * `handleActions`. For example:
    *
    *     import { type Reducer } from 'redux'
-   *     import { createAction, handleAction, type Action } from 'redux-actions'
+   *     import { createAction, handleAction, type ActionType } from 'redux-actions'
    *
    *     const increment = createAction(INCREMENT, (count: number) => count)
    *
@@ -89,14 +90,14 @@ declare module "redux-actions" {
     type: Type,
     reducer: ReducerDefinition<State, Action>,
     defaultState: State
-  ): Reducer<State, Action>;
+  ): ReduxReducer<State, Action>;
 
   declare function handleActions<State, Action>(
     reducers: {
       [key: string]: Reducer<State, Action> | ReducerMap<State, Action>
     },
     defaultState?: State
-  ): Reducer<State, Action>;
+  ): ReduxReducer<State, Action>;
 
   declare function combineActions(
     ...types: (string | Symbol | Function)[]
