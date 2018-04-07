@@ -8,21 +8,11 @@
 declare module 'puppeteer' {
   import type { ChildProcess } from 'child_process';
 
-  declare class EventEmitter {
-    // deprecated
-    static listenerCount(emitter: EventEmitter, event: string): number;
-
-    addListener(event: string, listener: () => mixed): this;
-    emit(event: string, ...args: Array<mixed>): boolean;
-    eventNames(): Array<string>;
-    listeners(event: string): Array<() => mixed>;
-    listenerCount(event: string): number;
-    prependListener(event: string, listener: () => mixed): this;
-    prependOnceListener(event: string, listener: () => mixed): this;
-    removeAllListeners(event?: string): this;
-    removeListener(event: string, listener: () => mixed): this;
-    setMaxListeners(n: number): this;
-    getMaxListeners(): number;
+  declare class OverridableEventEmitter extends events$EventEmitter {
+    /* eslint-disable flowtype/no-weak-types */
+    +on: Function;
+    +once: Function;
+    /* eslint-enable flowtype/no-weak-types */
   }
 
   /** Keyboard provides an api for managing a virtual keyboard. */
@@ -990,7 +980,7 @@ declare module 'puppeteer' {
   };
 
   /** Page provides methods to interact with a single tab in Chromium. One Browser instance might have multiple Page instances. */
-  declare interface Page extends EventEmitter, FrameBase {
+  declare interface Page extends OverridableEventEmitter, FrameBase {
     /**
      * Provide credentials for http authentication.
      * To disable authentication, pass `null`.
@@ -1266,7 +1256,7 @@ declare module 'puppeteer' {
   }
 
   /** A Browser is created when Puppeteer connects to a Chromium instance, either through puppeteer.launch or puppeteer.connect. */
-  declare interface Browser extends EventEmitter {
+  declare interface Browser extends OverridableEventEmitter {
     /**
      * Closes browser with all the pages (if any were opened).
      * The browser object itself is considered to be disposed and can not be used anymore.
@@ -1429,7 +1419,7 @@ declare module 'puppeteer' {
     ignoreHTTPSErrors?: boolean,
   };
 
-  declare interface CDPSession extends EventEmitter {
+  declare interface CDPSession extends events$EventEmitter {
     /**
      * Detaches session from target. Once detached, session won't emit any events and can't be used
      * to send messages.
