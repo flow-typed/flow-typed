@@ -120,11 +120,7 @@ function objectToTypedTemplate(
   }
 }
 
-function functionToType(
-  fun: Function,
-  currentDepth: number,
-  maxDepth: number,
-): string {
+function guessFunctionArguments(fun: Function): string {
   let raw = fun.toString();
   let args = raw.slice(raw.indexOf('(') + 1, raw.indexOf(')'));
   args = args.replace(/ /g, '');
@@ -136,7 +132,15 @@ function functionToType(
       .join(', ');
   }
 
-  let output = format(functionTemplate, args);
+  return format(functionTemplate, args);
+}
+
+function functionToType(
+  fun: Function,
+  currentDepth: number,
+  maxDepth: number,
+): string {
+  let output = guessFunctionArguments(fun);
 
   let functionEntries = Object.entries(fun);
   if (functionEntries.length > 0) {
@@ -157,7 +161,7 @@ function objectToType(
   currentDepth: number = 0,
   deep: boolean = true,
 ): string {
-  // Every function that depends on objectToTypedString need to check deep first
+  // Every function that depends on objectToTypedTemplate need to check deep first
   if (deep) {
     if (typeof obj === 'object')
       return objectToTypedTemplate(obj, currentDepth, maxDepth);
@@ -166,6 +170,7 @@ function objectToType(
   }
 
   if (typeof obj === 'object') return 'any';
+  if (typeof obj === 'function') return guessFunctionArguments(obj);
   return typeof obj;
 }
 
