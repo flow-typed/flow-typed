@@ -79,85 +79,108 @@ function stubFor(moduleName: string, fileExt?: string): string {
   return moduleStub;
 }
 
-function getObjectToType(maxDepth?: number) {
-  let callstack: number = 0;
-  let maxCallstack: number = maxDepth || 1;
+const functionTemplate = '(%s) => any';
+const spaceByI = (i: number): string => '  '.repeat(i);
+const keyTypeTemplate = `  %s: %s,\n`;
 
-  const functionTemplate = '(%s) => any';
-  const spaceByI = (i: number): string => '  '.repeat(i);
+function objectToTypedTemplate(
+  obj: mixed,
+  currentDepth: number,
+  maxDepth: number,
+  functionHeader?: string,
+) {
+  const thisDepth = currentDepth + 1;
 
-  const keyTypeTemplate = `  %s: %s,\n`;
-  function objectToTypedTemplate(obj: mixed, functionHeader?: string) {
-    callstack++;
-    let output = '';
-    let entries = Object.entries(obj);
-    let formatedEntries = [];
-    if (functionHeader) {
-      formatedEntries.push(spaceByI(callstack + 1) + functionHeader);
-    }
-    for (let entrie of entries) {
-      formatedEntries.push(
-        format(
-          spaceByI(callstack) + keyTypeTemplate,
-          entrie[0],
-          objectToType(entrie[1], callstack > maxCallstack ? false : true),
-        ),
-      );
-    }
-    if (formatedEntries.length > 0) {
-      output = '{\n' + formatedEntries.join('') + spaceByI(callstack) + '}';
-    } else {
-      output = '{}';
-    }
-    callstack--;
-    return output;
+  let formatedEntries = [];
+  if (functionHeader) {
+    formatedEntries.push(spaceByI(thisDepth + 1) + functionHeader);
   }
 
-  function functionToType(fun: Function): string {
-    let output = '';
-    let raw = fun.toString();
-    let args = raw.slice(raw.indexOf('(') + 1, raw.indexOf(')'));
-    args = args.replace(/ /g, '');
-    if (args.length > 0) {
-      args = args
-        .split(',')
-        .map((el: string) => el + ': any')
-        .join(', ');
-    }
-    output = format(functionTemplate, args);
-    let functionEntries = Object.entries(fun);
-    if (functionEntries.length > 0) {
-      output = objectToTypedTemplate(
-        fun,
-        output.length > 0 ? output + ',\n' : undefined,
-      );
-    }
-    return output;
-  }
-  function objectToType(obj: mixed, deep: boolean = true): string {
-    let output = '';
-    // Easy to bug
-    // Every function that depends on objectToTypedString need to check deep first
-    if (deep) {
-      if (typeof obj === 'object') return objectToTypedTemplate(obj);
-      if (typeof obj === 'function') return functionToType(obj);
-    }
+  for (let entrie of Object.entries(obj)) {
+    const toTypeResult = objectToType(
+      entrie[1],
+      maxDepth,
+      thisDepth,
+      thisDepth <= maxDepth,
+    );
 
-    if (typeof obj === 'object') return 'any';
-    return typeof obj;
+    formatedEntries.push(
+      format(
+        `${spaceByI(thisDepth)}${keyTypeTemplate}`,
+        entrie[0],
+        toTypeResult,
+      ),
+    );
   }
-  return objectToType;
+
+  if (formatedEntries.length > 0) {
+    return `{\n${formatedEntries.join('')}${spaceByI(thisDepth)}}`;
+  } else {
+    return '{}';
+  }
+}
+
+function functionToType(
+  fun: Function,
+  currentDepth: number,
+  maxDepth: number,
+): string {
+  let raw = fun.toString();
+  let args = raw.slice(raw.indexOf('(') + 1, raw.indexOf(')'));
+  args = args.replace(/ /g, '');
+
+  if (args.length > 0) {
+    args = args
+      .split(',')
+      .map((el: string) => `${el}: any`)
+      .join(', ');
+  }
+
+  let output = format(functionTemplate, args);
+
+  let functionEntries = Object.entries(fun);
+  if (functionEntries.length > 0) {
+    return objectToTypedTemplate(
+      fun,
+      currentDepth,
+      maxDepth,
+      output.length > 0 ? output + ',\n' : undefined,
+    );
+  }
+
+  return output;
+}
+
+function objectToType(
+  obj: mixed,
+  maxDepth: number,
+  currentDepth: number = 0,
+  deep: boolean = true,
+): string {
+  // Every function that depends on objectToTypedString need to check deep first
+  if (deep) {
+    if (typeof obj === 'object')
+      return objectToTypedTemplate(obj, currentDepth, maxDepth);
+    if (typeof obj === 'function')
+      return functionToType(obj, currentDepth, maxDepth);
+  }
+
+  if (typeof obj === 'object') return 'any';
+  return typeof obj;
 }
 
 function guessedStubFor(
   moduleName: string,
-  fileExt?: string,
   packagePath: string,
-  maxDepth?: number,
+  maxDepth: number = 1,
 ): string {
-  let module: mixed = (require: any)(packagePath);
-  let objectToType = getObjectToType(maxDepth);
-  return format(guessedModuleStubTemplate, moduleName, objectToType(module));
+  const module: mixed = (require: any)(packagePath);
+  const formattedTemplate: string = format(
+    guessedModuleStubTemplate,
+    moduleName,
+    objectToType(module, maxDepth),
+  );
+  return formattedTemplate;
 }
 
 async function writeStub(
@@ -185,7 +208,7 @@ async function writeStub(
   let packageFolder = await resolvePkgDirPath(packageName, process.cwd());
   if (packageFolder !== null) {
     try {
-      output += guessedStubFor(packageName, undefined, packageFolder, maxDepth);
+      output += guessedStubFor(packageName, packageFolder, maxDepth);
     } catch (e) {
       output += stubFor(packageName);
     }
