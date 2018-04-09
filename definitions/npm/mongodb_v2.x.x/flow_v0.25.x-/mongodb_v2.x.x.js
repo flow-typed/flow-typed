@@ -58,6 +58,39 @@ declare class MongoDB$ObjectID {
 
 declare module "mongodb" {
   declare module.exports: {
-    ObjectId: Class<MongoDB$ObjectID>
+    // TODO: provide remaining definitions, currently using 'any' to avoid errors
+    Admin: any,
+    BSONRegExp: any,
+    Binary: any,
+    Chunk: any,
+    Code: any,
+    Collection: any,
+    connect: any,
+    CoreConnection: any,
+    CoreServer: any,
+    Cursor: any,
+    DBRef: any,
+    Db: any,
+    Decimal128: any,
+    Double: any,
+    GridFSBucket: any,
+    GridStore: any,
+    instrument: any,
+    Int32: any,
+    Logger: any,
+    Long: any,
+    Map: any,
+    MaxKey: any,
+    MinKey: any,
+    MongoClient: any,
+    MongoError: any,
+    Mongos: any,
+    ObjectID: Class<MongoDB$ObjectID>,
+    ObjectId: Class<MongoDB$ObjectID>,
+    ReadPreference: any,
+    ReplSet: any,
+    Server: any,
+    Symbol: any,
+    Timestamp: any
   };
 }

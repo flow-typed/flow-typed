@@ -27,6 +27,8 @@ export type LibDef = {|
   testFilePaths: Array<string>,
 |};
 
+export const TEST_FILE_NAME_RE = /^test_.*\.js$/;
+
 const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
 const GIT_REPO_DIR = path.join(__dirname, '..', '..', '..');
@@ -80,7 +82,10 @@ async function updateCacheRepo(verbose?: VerboseOutput) {
  * (else: create/rebase it)
  */
 const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
-export const _cacheRepoAssure = {
+export const _cacheRepoAssure: {
+  lastAssured: number,
+  pendingAssure: Promise<*>,
+} = {
   lastAssured: 0,
   pendingAssure: Promise.resolve(),
 };
@@ -233,11 +238,7 @@ async function parseLibDefsFromPkgDir(
         return;
       }
 
-      const isValidTestFile = validateTestFile(
-        pkgDirItemPath,
-        pkgDirItemContext,
-        validationErrs,
-      );
+      const isValidTestFile = validateTestFile(pkgDirItemPath);
 
       if (isValidTestFile) {
         commonTestFiles.push(pkgDirItemPath);
@@ -289,11 +290,7 @@ async function parseLibDefsFromPkgDir(
             return;
           }
 
-          const isValidTestFile = validateTestFile(
-            flowDirItemPath,
-            flowDirItemContext,
-            validationErrs,
-          );
+          const isValidTestFile = validateTestFile(flowDirItemPath);
 
           if (isValidTestFile) {
             testFilePaths.push(flowDirItemPath);
@@ -348,7 +345,10 @@ export function parseRepoDirItem(
   }
 
   let [_, pkgName, major, minor, patch, prerel] = itemMatches;
-  const item = path.dirname(dirItemPath).split(path.sep).pop();
+  const item = path
+    .dirname(dirItemPath)
+    .split(path.sep)
+    .pop();
   if (item.charAt(0) === '@') {
     pkgName = `${item}${path.sep}${pkgName}`;
   }
@@ -366,17 +366,9 @@ export function parseRepoDirItem(
 /**
  * Given a path to an assumed test file, ensure that it is named as expected.
  */
-const TEST_FILE_NAME_RE = /^test_.*\.js$/;
-function validateTestFile(testFilePath, context, validationErrs) {
+function validateTestFile(testFilePath) {
   const testFileName = path.basename(testFilePath);
-  if (!TEST_FILE_NAME_RE.test(testFileName)) {
-    const error =
-      'Malformed test file name! Test files must be formatted as test_(.*).js: ' +
-      testFileName;
-    validationError(context, error, validationErrs);
-    return false;
-  }
-  return true;
+  return TEST_FILE_NAME_RE.test(testFileName);
 }
 
 /**
@@ -598,8 +590,9 @@ export function filterLibDefs(
 
         default:
           throw new Error(
-            `'${filter.type}' is an unexpected filter type! This should never ` +
-              `happen!`,
+            `'${
+              filter.type
+            }' is an unexpected filter type! This should never ` + `happen!`,
           );
       }
 

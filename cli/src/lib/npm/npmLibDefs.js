@@ -33,6 +33,7 @@ import got from 'got';
 
 import type {ValidationErrors as VErrors} from '../validationErrors';
 import {validationError} from '../validationErrors';
+import {TEST_FILE_NAME_RE} from '../libDefs';
 
 const P = Promise;
 
@@ -51,8 +52,6 @@ export type NpmLibDefFilter = {|
   pkgVersion: string,
   flowVersion?: FlowVersion,
 |};
-
-const TEST_FILE_NAME_RE = /^test_.*\.js$/;
 
 async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
@@ -83,13 +82,15 @@ async function extractLibDefsFromNpmPkgDir(
 
   if (validating) {
     const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}`;
-    await _npmExists(fullPkgName).then().catch(error => {
-      // Only fail spen on 404, not on timeout
-      if (error.statusCode === 404) {
-        const pkgError = `Package does not exist on npm!`;
-        validationError(fullPkgName, pkgError, validationErrors);
-      }
-    });
+    await _npmExists(fullPkgName)
+      .then()
+      .catch(error => {
+        // Only fail spen on 404, not on timeout
+        if (error.statusCode === 404) {
+          const pkgError = `Package does not exist on npm!`;
+          validationError(fullPkgName, pkgError, validationErrors);
+        }
+      });
   }
 
   const commonTestFiles = [];
@@ -100,21 +101,8 @@ async function extractLibDefsFromNpmPkgDir(
 
     const pkgDirItemStat = fs.statSync(pkgDirItemPath);
     if (pkgDirItemStat.isFile()) {
-      if (path.extname(pkgDirItem) === '.swp') {
-        return;
-      }
-
       const isValidTestFile = TEST_FILE_NAME_RE.test(pkgDirItem);
-
-      if (isValidTestFile) {
-        commonTestFiles.push(pkgDirItemPath);
-        return;
-      }
-
-      const error =
-        `Unexpected file name. This directory can only contain test files ` +
-        `or a libdef file named ${'`' + libDefFileName + '`'}.`;
-      validationError(pkgDirItemContext, error, validationErrors);
+      if (isValidTestFile) commonTestFiles.push(pkgDirItemPath);
     } else if (pkgDirItemStat.isDirectory()) {
       const errCount = validationErrors == null ? 0 : validationErrors.size;
       const parsedFlowDir = parseFlowDirString(
@@ -334,8 +322,9 @@ function filterLibDefs(
       let filterMatch = false;
       switch (filter.type) {
         case 'exact':
+          const fullName = def.scope ? `${def.scope}/${def.name}` : def.name;
           filterMatch =
-            filter.pkgName.toLowerCase() === def.name.toLowerCase() &&
+            filter.pkgName.toLowerCase() === fullName.toLowerCase() &&
             pkgVersionMatch(filter.pkgVersion, def.version);
           break;
         default:

@@ -1,7 +1,7 @@
 declare module "yargs" {
   declare type Argv = {
     _: Array<string>,
-    "$0": string,
+    $0: string,
     [key: string]: mixed
   };
 
@@ -61,34 +61,34 @@ declare module "yargs" {
     | ModuleObjectDescription;
 
   declare class Yargs {
-    (args: Array<string>): Yargs,
+    (args: Array<string>): Yargs;
 
-    alias(key: string, alias: string): this,
-    alias(alias: { [key: string]: string | Array<string> }): this,
-    argv: Argv,
-    array(key: string | Array<string>): this,
-    boolean(paramter: string | Array<string>): this,
-    check(fn: (argv: Argv, options: Array<string>) => ?boolean): this,
-    choices(key: string, allowed: Array<string>): this,
-    choices(allowed: { [key: string]: Array<string> }): this,
-    coerce(key: string, fn: (value: any) => mixed): this,
-    coerce(object: { [key: string]: (value: any) => mixed }): this,
-    coerce(keys: Array<string>, fn: (value: any) => mixed): this,
+    alias(key: string, alias: string): this;
+    alias(alias: { [key: string]: string | Array<string> }): this;
+    argv: Argv;
+    array(key: string | Array<string>): this;
+    boolean(paramter: string | Array<string>): this;
+    check(fn: (argv: Argv, options: Array<string>) => ?boolean): this;
+    choices(key: string, allowed: Array<string>): this;
+    choices(allowed: { [key: string]: Array<string> }): this;
+    coerce(key: string, fn: (value: any) => mixed): this;
+    coerce(object: { [key: string]: (value: any) => mixed }): this;
+    coerce(keys: Array<string>, fn: (value: any) => mixed): this;
 
     command(
       cmd: string | Array<string>,
       desc: string | false,
       builder?: { [key: string]: Options } | ((yargsInstance: Yargs) => mixed),
       handler?: Function
-    ): this,
+    ): this;
 
     command(
       cmd: string | Array<string>,
       desc: string | false,
       module: ModuleObject
-    ): this,
+    ): this;
 
-    command(module: ModuleObject): this,
+    command(module: ModuleObject): this;
 
     completion(
       cmd: string,
@@ -98,156 +98,155 @@ declare module "yargs" {
         argv: Argv,
         done: (competion: Array<string>) => void
       ) => ?(Array<string> | Promise<Array<string>>)
-    ): this,
+    ): this;
 
     config(
       key?: string,
       description?: string,
       parseFn?: (configPath: string) => { [key: string]: mixed }
-    ): this,
+    ): this;
     config(
       key: string,
       parseFn?: (configPath: string) => { [key: string]: mixed }
-    ): this,
-    config(config: { [key: string]: mixed }): this,
+    ): this;
+    config(config: { [key: string]: mixed }): this;
 
-    conflicts(keyA: string, keyB: string): this,
-    conflicts(keys: { [key: string]: string }): this,
+    conflicts(keyA: string, keyB: string): this;
+    conflicts(keys: { [key: string]: string }): this;
 
-    count(name: string): this,
+    count(name: string): this;
 
-    default(key: string, value: mixed, description?: string): this,
-    default(defaults: { [key: string]: mixed }): this,
+    default(key: string, value: mixed, description?: string): this;
+    default(defaults: { [key: string]: mixed }): this;
 
     // Deprecated: use demandOption() and demandCommand() instead.
-    demand(key: string, msg?: string | boolean): this,
-    demand(count: number, max?: number, msg?: string | boolean): this,
+    demand(key: string, msg?: string | boolean): this;
+    demand(count: number, max?: number, msg?: string | boolean): this;
 
-    demandOption(key: string | Array<string>, msg?: string | boolean): this,
+    demandOption(key: string | Array<string>, msg?: string | boolean): this;
 
-    demandCommand(min: number, minMsg?: string): this,
+    demandCommand(min: number, minMsg?: string): this;
     demandCommand(
       min: number,
       max: number,
       minMsg?: string,
       maxMsg?: string
-    ): this,
+    ): this;
 
-    describe(key: string, description: string): this,
-    describe(describeObject: { [key: string]: string }): this,
+    describe(key: string, description: string): this;
+    describe(describeObject: { [key: string]: string }): this;
 
-    detectLocale(shouldDetect: boolean): this,
+    detectLocale(shouldDetect: boolean): this;
 
-    env(prefix?: string): this,
+    env(prefix?: string): this;
 
-    epilog(text: string): this,
-    epilogue(text: string): this,
+    epilog(text: string): this;
+    epilogue(text: string): this;
 
-    example(cmd: string, desc: string): this,
+    example(cmd: string, desc: string): this;
 
-    exitProcess(enable: boolean): this,
+    exitProcess(enable: boolean): this;
 
-    fail(fn: (failureMessage: string, err: Error, yargs: Yargs) => mixed): this,
+    fail(fn: (failureMessage: string, err: Error, yargs: Yargs) => mixed): this;
 
-    getCompletion(args: Array<string>, fn: () => void): this,
+    getCompletion(args: Array<string>, fn: () => void): this;
 
-    global(globals: string | Array<string>, isGlobal?: boolean): this,
+    global(globals: string | Array<string>, isGlobal?: boolean): this;
 
-    group(key: string | Array<string>, groupName: string): this,
+    group(key: string | Array<string>, groupName: string): this;
 
-    help(option?: string, desc?: string): this,
+    help(option?: string, desc?: string): this;
 
-    implies(keyA: string, keyB: string): this,
-    implies(keys: { [key: string]: string }): this,
+    implies(keyA: string, keyB: string): this;
+    implies(keys: { [key: string]: string }): this;
 
     locale(
-      locale:
-        | "de"
-        | "en"
-        | "es"
-        | "fr"
-        | "hi"
-        | "hu"
-        | "id"
-        | "it"
-        | "ja"
-        | "ko"
-        | "nb"
-        | "pirate"
-        | "pl"
-        | "pt"
-        | "pt_BR"
-        | "ru"
-        | "th"
-        | "tr"
-        | "zh_CN"
-    ): this,
-    locale(): string,
+      locale: | "de"
+      | "en"
+      | "es"
+      | "fr"
+      | "hi"
+      | "hu"
+      | "id"
+      | "it"
+      | "ja"
+      | "ko"
+      | "nb"
+      | "pirate"
+      | "pl"
+      | "pt"
+      | "pt_BR"
+      | "ru"
+      | "th"
+      | "tr"
+      | "zh_CN"
+    ): this;
+    locale(): string;
 
-    nargs(key: string, count: number): this,
+    nargs(key: string, count: number): this;
 
-    normalize(key: string): this,
+    normalize(key: string): this;
 
-    number(key: string | Array<string>): this,
+    number(key: string | Array<string>): this;
 
-    option(key: string, options?: Options): this,
-    option(optionMap: { [key: string]: Options }): this,
+    option(key: string, options?: Options): this;
+    option(optionMap: { [key: string]: Options }): this;
 
-    options(key: string, options?: Options): this,
-    options(optionMap: { [key: string]: Options }): this,
+    options(key: string, options?: Options): this;
+    options(optionMap: { [key: string]: Options }): this;
 
     parse(
       args: string | Array<string>,
       context?: { [key: string]: mixed },
       parseCallback?: (err: Error, argv: Argv, output?: string) => void
-    ): Argv,
+    ): Argv;
     parse(
       args: string | Array<string>,
       parseCallback?: (err: Error, argv: Argv, output?: string) => void
-    ): Argv,
+    ): Argv;
 
-    pkgConf(key: string, cwd?: string): this,
+    pkgConf(key: string, cwd?: string): this;
 
-    recommendCommands(): this,
+    recommendCommands(): this;
 
     // Alias of demand()
-    require(key: string, msg: string | boolean): this,
-    require(count: number, max?: number, msg?: string | boolean): this,
+    require(key: string, msg: string | boolean): this;
+    require(count: number, max?: number, msg?: string | boolean): this;
 
-    requiresArg(key: string | Array<string>): this,
+    requiresArg(key: string | Array<string>): this;
 
-    reset(): this,
+    reset(): this;
 
-    showCompletionScript(): this,
+    showCompletionScript(): this;
 
-    showHelp(consoleLevel?: "error" | "warn" | "log"): this,
+    showHelp(consoleLevel?: "error" | "warn" | "log"): this;
 
-    showHelpOnFail(enable: boolean, message?: string): this,
+    showHelpOnFail(enable: boolean, message?: string): this;
 
-    strict(): this,
+    strict(): this;
 
-    skipValidation(key: string): this,
+    skipValidation(key: string): this;
 
-    strict(global?: boolean): this,
+    strict(global?: boolean): this;
 
-    string(key: string | Array<string>): this,
+    string(key: string | Array<string>): this;
 
-    updateLocale(obj: { [key: string]: string }): this,
-    updateStrings(obj: { [key: string]: string }): this,
+    updateLocale(obj: { [key: string]: string }): this;
+    updateStrings(obj: { [key: string]: string }): this;
 
-    usage(message: string, opts?: { [key: string]: Options }): this,
+    usage(message: string, opts?: { [key: string]: Options }): this;
 
-    version(): this,
-    version(version: string): this,
-    version(option: string | (() => string), version: string): this,
+    version(): this;
+    version(version: string): this;
+    version(option: string | (() => string), version: string): this;
     version(
       option: string | (() => string),
       description: string | (() => string),
       version: string
-    ): this,
+    ): this;
 
-    wrap(columns: number | null): this
+    wrap(columns: number | null): this;
   }
 
-  declare var exports: Yargs;
+  declare module.exports: Yargs;
 }

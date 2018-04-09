@@ -10,7 +10,7 @@ interface Unified$Position {
   indent?: mixed;
 }
 
-interface Unified$Data { }
+interface Unified$Data {}
 
 interface Unified$Node {
   type: string;
@@ -18,7 +18,7 @@ interface Unified$Node {
   position?: Unified$Position;
 }
 
-type Done = (err: Error) => void | (doc: mixed, extra?: mixed) => void;
+type Done = (err: Error) => void | ((doc: mixed, extra?: mixed) => void);
 
 declare class Unified {
   data(key: string): mixed;
@@ -35,6 +35,6 @@ declare class Unified {
   processSync(doc: mixed): mixed;
 }
 
-declare module 'unified' {
-  declare function exports(): Unified;
+declare module "unified" {
+  declare module.exports: () => Unified;
 }

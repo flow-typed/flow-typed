@@ -87,6 +87,19 @@ GUser.hasMany(GTask);
 
 GTask.create({ revision: 1, name: 'test' }).then( (gtask) => gtask.upRevision() );
 
+//
+//  Model.Options
+// ~~~~~~~~~~~~~~~
+//
+
+(GUser.options.name.singular: string);
+(GUser.options.name.plural: string);
+(GUser.options.timestamps: ?boolean);
+(GUser.options.paranoid: ?boolean);
+(GUser.options.underscored: ?boolean);
+(GUser.options.underscoredAll: ?boolean);
+(GUser.options.hasTrigger: ?boolean);
+(GUser.options.freezeTableName: ?boolean);
 
 //
 //  Associations
@@ -226,6 +239,9 @@ Customer.belongsToMany(Branch, { through: 'branchCustomer' });
 (Warehouse.tableAttributes.blah.type: DataTypeAbstract);
 (Warehouse.attributes.blah.type: DataTypeAbstract);
 (Warehouse.primaryKeys.blah.type: DataTypeAbstract);
+
+Warehouse.getAssociations(WarehouseBranch)
+Warehouse.getAssociationForAlias(WarehouseBranch, 'blah')
 
 // hasOne
 product.getBarcode();
@@ -1217,15 +1233,12 @@ queryInterface.createTable( 'table', { name : Sequelize.STRING }, { logging : fu
 queryInterface.createTable( 'skipme', { name : Sequelize.STRING } );
 queryInterface.dropAllTables( { skip : ['skipme'] } );
 queryInterface.dropTable( 'Group', { logging : function() { } } );
-queryInterface.addIndex( 'Group', ['username', 'isAdmin'], { logging : function() { } } );
+queryInterface.addIndex( 'Group', { fields: ['username', 'isAdmin'] } );
 queryInterface.showIndex( 'Group', { logging : function() { } } );
 queryInterface.removeIndex( 'Group', ['username', 'isAdmin'], { logging : function() { } } );
 queryInterface.showIndex( 'Group' );
 queryInterface.createTable( 'table', { name : { type : Sequelize.STRING } }, { schema : 'schema' } );
-queryInterface.addIndex( { schema : 'a', tableName : 'c' }, ['d', 'e'], { logging : function() {} }, 'schema_table' );
 queryInterface.showIndex( { schema : 'schema', tableName : 'table' }, { logging : function() {} } );
-queryInterface.addIndex( 'Group', ['from'] );
-queryInterface.addIndex( 'Group', ['from'], { indexName: 'group_from' } );
 queryInterface.describeTable( '_Users', { logging : function() {} } );
 queryInterface.createTable( 's', { table_id : { type : Sequelize.INTEGER, primaryKey : true, autoIncrement : true } } );
 queryInterface.createTable( 'SomeTable', { someEnum : Sequelize.ENUM( 'value1', 'value2', 'value3' ) } );

@@ -1,14 +1,14 @@
-declare module 'debug' {
+declare module "debug" {
   declare type Debugger = {
     (...args: Array<mixed>): void,
     (formatter: string, ...args: Array<mixed>): void,
     (err: Error, ...args: Array<mixed>): void,
     enabled: boolean,
     log: () => {},
-    namespace: string;
+    namespace: string
   };
 
-  declare function exports(namespace: string): Debugger;
+  declare module.exports: (namespace: string) => Debugger;
 
   declare var names: Array<string>;
   declare var skips: Array<string>;
@@ -24,4 +24,4 @@ declare module 'debug' {
   declare var formatters: {
     [formatter: string]: () => {}
   };
-};
+}

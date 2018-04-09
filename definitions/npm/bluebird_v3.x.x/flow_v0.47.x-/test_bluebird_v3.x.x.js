@@ -32,14 +32,14 @@ function mapper(x: number): Promise<number> {
 let mapResult: Promise<number[]> = Bluebird.map([1], mapper);
 let mapSeriesResult: Promise<number[]> = Bluebird.mapSeries([1], mapper);
 
-Bluebird.resolve([1,2,3]).then(function(arr) {
+Bluebird.resolve([1,2,3]).then(function(arr: [1,2,3]) {
   let l = arr.length;
   // $ExpectError Property not found in Array
   arr.then(r => r);
 });
 
 let response = fetch('/').then(r => r.text())
-Bluebird.resolve(response).then(function(responseBody) {
+Bluebird.resolve(response).then(function(responseBody: string) {
   let length: number = responseBody.length;
   // $ExpectError Property not found in string
   responseBody.then(r => r);
@@ -61,21 +61,6 @@ Bluebird.join(1, Bluebird.resolve(2),
 // $ExpectError
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<string>) { });
 
-interface ICustomError extends Error {
-   static(message: string, code: number): ICustomError,
-   constructor(message: string, code: number): void,
-   code: number
-}
-function _MyCustomError(message: string, code: number) {
-  this.message = message;
-  this.name = "MyCustomError";
-  this.code = code
-  Error.captureStackTrace(this, _MyCustomError);
-}
-_MyCustomError.prototype = Object.create(Error.prototype);
-_MyCustomError.prototype.constructor = _MyCustomError;
-const MyCustomError: Class<ICustomError> = _MyCustomError;
-
 function foo(a: number, b: string) {
   throw new Error('oh no');
 }
@@ -86,18 +71,9 @@ fooPromise(1, 'b').catch(function(e) {
 fooPromise(1, 'b').catch(Error, function(e: Error) {
   let m: string = e.message;
 });
-fooPromise(1, 'b').catch(MyCustomError, function(e: MyCustomError) {
-  let m: string = e.message;
-  let c: number = e.code;
-});
 // $ExpectError
 fooPromise(1, 'b').catch(Error, function(e: NetworkError) {
   let m: string = e.message;
-  let c: number = e.code;
-});
-fooPromise(1, 'b').catch(Error, MyCustomError, function(e) {
-  let m: string = e.message;
-  // $ExpectError
   let c: number = e.code;
 });
 
@@ -144,25 +120,17 @@ Bluebird.reduce(Bluebird.resolve([5, Bluebird.resolve(6), Promise.resolve(7)]), 
 
 Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Promise.resolve(prev * num));
 Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num));
-//$ExpectError
-Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num), 'hello');
 
 type PromiseOutput<T> = () => Promise<T>;
 let givePromise1: PromiseOutput<number> = () => Promise.resolve(1);
 let givePromise2: PromiseOutput<number> = () => Bluebird.resolve(2);
-// $ExpectError
-let givePromise3: PromiseOutput<number> = () => Bluebird.resolve('hello');
 
 type PromiseInput<T> = (input: Promise<T>) => Function
 let takePromise: PromiseInput<number> = (promise) => promise.then
 takePromise(Promise.resolve(1));
 takePromise(Bluebird.resolve(1));
-// $ExpectError
-takePromise(Bluebird.resolve('hello'));
 
 Bluebird.delay(500);
-// $ExpectError
-Bluebird.delay('500');
 Bluebird.delay(500, 1);
 Bluebird.delay(500, Promise.resolve(5));
 Bluebird.delay(500, Bluebird.resolve(5));
@@ -178,5 +146,3 @@ let disposable: Disposable<boolean> = Bluebird.resolve(true).disposer((value: bo
 Bluebird.using(disposable, (value: boolean) => 9).then((result: number) => {});
 // $ExpectError
 Bluebird.using(disposable, (value: number) => 9);
-// $ExpectError
-Bluebird.using(disposable, (value: boolean) => 9).then((result: boolean) => {});

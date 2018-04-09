@@ -6,7 +6,8 @@ type IDBValidKey = number | string | Date | IDBArrayKey;
 // TODO: upstream this to Flow DOM definitions
 declare class DOMStringList {
   +length: number;
-  @@iterator(): Iterator<string>;
+  // Comment syntax here as @@iterator is invalid syntax for eslint and babylon
+  /*:: @@iterator(): Iterator<string>; */
   contains(str: string): boolean;
   item(index: number): string | null;
   [index: number]: string;

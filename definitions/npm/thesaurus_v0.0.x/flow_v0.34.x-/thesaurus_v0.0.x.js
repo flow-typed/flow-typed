@@ -6,5 +6,5 @@ declare module "thesaurus" {
     toJson(void): string;
   }
 
-  declare var exports: thesaurusClass;
+  declare module.exports: thesaurusClass;
 }

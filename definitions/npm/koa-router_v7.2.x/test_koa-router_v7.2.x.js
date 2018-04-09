@@ -25,11 +25,12 @@ const goodRouter = new Router({ prefix: "/api" });
  */
 
 // $ExpectError
-goodRouter.get("/");
+goodRouter.get(10);
 goodRouter.get("/", async ctx => {
   ctx.body = "Hello World";
 });
 goodRouter.get(["/", "/foo"], ctx => {});
+goodRouter.get(["/", "/foo"], ctx => {}, ctx => {});
 
 // $ExpectError
 goodRouter.use(10);
