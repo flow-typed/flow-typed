@@ -298,3 +298,25 @@ expect(wrapper).toMatchSelector("span");
 expect(wrapper).toMatchSelector();
 // $ExpectError
 expect(wrapper).toMatchSelector(true);
+
+// dom-testing-library
+{
+  const element = document.createElement('div');
+
+  expect(element).toHaveTextContent('123');
+  // $ExpectError: expected text content should be present
+  expect(element).toHaveTextContent();
+  // $ExpectError: expected text content should be a string
+  expect(element).toHaveTextContent(1);
+
+  expect(element).toBeInTheDOM();
+
+  expect(element).toHaveAttribute('foo');
+  expect(element).toHaveAttribute('foo', 'bar');
+  // $ExpectError: attribute name should be present
+  expect(element).toHaveAttribute();
+  // $ExpectError: attribute name should be a string
+  expect(element).toHaveAttribute(1);
+  // $ExpectError: expected attribute value should be a string
+  expect(element).toHaveAttribute('foo', 1);
+}
