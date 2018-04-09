@@ -135,9 +135,12 @@ declare module "jsonwebtoken" {
   declare type Token = jwt$Token
 
   declare type DecodingOptions = jwt$DecodingOptions
+
   declare type VerifyOptions = jwt$VerifyOptions
   declare type VerifyOptionsWithAlgorithm = jwt$VerifyOptionsWithAlgorithm
   declare type VerifyCallback = jwt$VerifyCallback
+
+  declare type SigningOptions<Headers> = jwt$SigningOptions<Headers>
   declare type SignCallback = jwt$SignCallback
 
   declare type Key = jwt$Key
