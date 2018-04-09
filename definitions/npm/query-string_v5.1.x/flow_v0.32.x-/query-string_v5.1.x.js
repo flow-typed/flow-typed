@@ -12,8 +12,11 @@ declare module 'query-string' {
 
   declare module.exports: {
     extract(input: string): string,
-    parse(input: string, options?: ParserOptions): Object,
-    parseUrl(input: string, options?: ParserOptions): { url: string, query: Object },
-    stringify(obj: Object, options?: StringifyOptions): string,
+    parse(input: string, options?: ParserOptions): { [name: string]: string | Array<string> },
+    parseUrl(input: string, options?: ParserOptions): {
+      url: string,
+      query: { [name: string]: string | Array<string> }
+    },
+    stringify(obj: { [name: string]: mixed }, options?: StringifyOptions): string,
   }
 }
