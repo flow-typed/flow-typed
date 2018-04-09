@@ -22,6 +22,17 @@ jwt.sign(payload, Buffer.from('secret'), {
   algorithm: 'RS256'
 });
 
+jwt.sign(payload, Buffer.from('secret'), {
+  algorithm: 'RS256',
+  mutatePayload: true,
+});
+
+// $ExpectError
+jwt.sign(payload, Buffer.from('secret'), {
+  algorithm: 'RS256',
+  mutatePayload: 1,
+});
+
 // $ExpectError
 jwt.sign(payload, Buffer.from('secret'), {
   algorithm: 'PEMDAS'
