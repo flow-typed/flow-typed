@@ -92,4 +92,10 @@ declare module "react-redux" {
     mergeProps: ?MergeProps<RSP, RDP, MP, RMP>,
     options: ConnectOptions<*, SP & DP & MP, RSP, RMP>
   ): (component: Com) => ComponentType<$Diff<ElementConfig<Com>, RMP> & SP & DP & MP>;
+
+  declare export default {
+    Provider: typeof Provider,
+    createProvider: typeof createProvider,
+    connect: typeof connect,
+  };
 }
