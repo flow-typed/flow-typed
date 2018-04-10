@@ -4,13 +4,12 @@ import cookie from 'cookie';
 describe('cookie library', () => {
   describe('parse method', () => {
     it('parse string', () => {
-      // eslint-disable-next-line flowtype/no-weak-types
-      const parsedData: Object = cookie.parse('some-string');
+      const parsedData: {[string]: string} = cookie.parse('some-string');
     });
 
     it('parse string with custom decode method', () => {
       cookie.parse('some-string', {
-        decode: (data) => { return { data } },
+        decode: () => { return 'some-string' },
       });
     });
 
