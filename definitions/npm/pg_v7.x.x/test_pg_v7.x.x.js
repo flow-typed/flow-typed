@@ -178,7 +178,9 @@ const pool = new pg.Pool({
   host: 'localhost',
   database: 'testdb',
   max: 10,
+  statement_timeout: false,
   idleTimeoutMillis: 1000,
+  connectionTimeoutMillis: 1000
 });
 
 // use pool

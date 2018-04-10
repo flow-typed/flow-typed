@@ -40,6 +40,7 @@ declare module pg {
     min: number,
     refreshIdle: boolean,
     idleTimeoutMillis: number,
+    connectionTimeoutMillis: number,
     reapIntervalMillis: number,
     returnToHead: boolean,
     priorityRange: number,
@@ -66,7 +67,9 @@ declare module pg {
     // fallback value for the application_name configuration parameter
     // default value: false
     fallback_application_name?: string,
-
+    // max milliseconds any query using this connection will execute for before timing out in error. false=unlimited
+    // default value: false
+    statement_timeout?: boolean | number,
     // pg-pool
     Client: mixed,
     Promise: mixed,
