@@ -28,7 +28,7 @@ declare module "react-redux" {
   Com = React Component
   */
 
-  declare type MapStateToProps<SP: Object, RSP: Object> = (state: Object, props: SP) => RSP;
+  declare type MapStateToProps<RS: Object, SP: Object, RSP: Object> = (state: RS, props: SP) => RSP;
 
   declare type MapDispatchToProps<A, OP: Object, RDP: Object> = (dispatch: Dispatch<A>, ownProps: OP) => RDP;
 
@@ -50,8 +50,8 @@ declare module "react-redux" {
 
   declare type OmitDispatch<Component> = $Diff<Component, {dispatch: Dispatch<*>}>;
 
-  declare export function connect<Com: ComponentType<*>, DP: Object, RSP: Object>(
-    mapStateToProps: MapStateToProps<DP, RSP>,
+  declare export function connect<Com: ComponentType<*>, RS: Object, DP: Object, RSP: Object>(
+    mapStateToProps: MapStateToProps<RS, DP, RSP>,
     mapDispatchToProps?: null
   ): (component: Com) => ComponentType<$Diff<OmitDispatch<ElementConfig<Com>>, RSP> & DP>;
 
@@ -60,8 +60,8 @@ declare module "react-redux" {
     mapDispatchToProps?: null
   ): (component: Com) => ComponentType<OmitDispatch<ElementConfig<Com>>>;
 
-  declare export function connect<Com: ComponentType<*>, A, DP: Object, SP: Object, RSP: Object, RDP: Object>(
-    mapStateToProps: MapStateToProps<SP, RSP>,
+  declare export function connect<Com: ComponentType<*>, A, RS: Object, DP: Object, SP: Object, RSP: Object, RDP: Object>(
+    mapStateToProps: MapStateToProps<RS, SP, RSP>,
     mapDispatchToProps: MapDispatchToProps<A, DP, RDP>
   ): (component: Com) => ComponentType<$Diff<$Diff<ElementConfig<Com>, RSP>, RDP> & SP & DP>;
 
@@ -75,19 +75,19 @@ declare module "react-redux" {
     mapDispatchToProps: MDP
   ): (component: Com) => ComponentType<$Diff<ElementConfig<Com>, MDP>>;
 
-  declare export function connect<Com: ComponentType<*>, SP: Object, RSP: Object, MDP: Object>(
-    mapStateToProps: MapStateToProps<SP, RSP>,
+  declare export function connect<Com: ComponentType<*>, RS: Object, SP: Object, RSP: Object, MDP: Object>(
+    mapStateToProps: MapStateToProps<RS, SP, RSP>,
     mapDispatchToPRops: MDP
   ): (component: Com) => ComponentType<$Diff<$Diff<ElementConfig<Com>, RSP>, MDP> & SP>;
 
-  declare export function connect<Com: ComponentType<*>, A, DP: Object, SP: Object, RSP: Object, RDP: Object, MP: Object, RMP: Object>(
-    mapStateToProps: MapStateToProps<SP, RSP>,
+  declare export function connect<Com: ComponentType<*>, A, RS: Object, DP: Object, SP: Object, RSP: Object, RDP: Object, MP: Object, RMP: Object>(
+    mapStateToProps: MapStateToProps<RS, SP, RSP>,
     mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP>,
     mergeProps: MergeProps<RSP, RDP, MP, RMP>
   ): (component: Com) => ComponentType<$Diff<ElementConfig<Com>, RMP> & SP & DP & MP>;
 
-  declare export function connect<Com: ComponentType<*>, A, DP: Object, SP: Object, RSP: Object, RDP: Object, MP: Object, RMP: Object>(
-    mapStateToProps: ?MapStateToProps<SP, RSP>,
+  declare export function connect<Com: ComponentType<*>, A, RS: Object, DP: Object, SP: Object, RSP: Object, RDP: Object, MP: Object, RMP: Object>(
+    mapStateToProps: ?MapStateToProps<RS, SP, RSP>,
     mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP>,
     mergeProps: ?MergeProps<RSP, RDP, MP, RMP>,
     options: ConnectOptions<*, SP & DP & MP, RSP, RMP>
