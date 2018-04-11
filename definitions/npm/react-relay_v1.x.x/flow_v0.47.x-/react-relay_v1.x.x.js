@@ -1350,3 +1350,7 @@ declare module "react-relay" {
 declare module "react-relay/compat" {
   declare module.exports: any;
 }
+
+declare module "react-relay/classic" {
+  declare module.exports: any;
+}
