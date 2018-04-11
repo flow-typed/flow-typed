@@ -37,266 +37,11 @@ type rxjs$OperatorFunctionLast<T, R: rxjs$Observable<*>> = (
 ) => R;
 
 declare class rxjs$Observable<+T> {
-  static bindCallback(
-    callbackFunc: (callback: (_: void) => any) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): () => rxjs$Observable<void>;
-  static bindCallback<U>(
-    callbackFunc: (callback: (result: U) => any) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): () => rxjs$Observable<U>;
-  static bindCallback<T, U>(
-    callbackFunc: (v1: T, callback: (result: U) => any) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T) => rxjs$Observable<U>;
-  static bindCallback<T, T2, U>(
-    callbackFunc: (v1: T, v2: T2, callback: (result: U) => any) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2) => rxjs$Observable<U>;
-  static bindCallback<T, T2, T3, U>(
-    callbackFunc: (v1: T, v2: T2, v3: T3, callback: (result: U) => any) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
-  static bindCallback<T, T2, T3, T4, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      v4: T4,
-      callback: (result: U) => any
-    ) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
-  static bindCallback<T, T2, T3, T4, T5, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      v4: T4,
-      v5: T5,
-      callback: (result: U) => any
-    ) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
-  static bindCallback<T, T2, T3, T4, T5, T6, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      v4: T4,
-      v5: T5,
-      v6: T6,
-      callback: (result: U) => any
-    ) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
-  static bindCallback<U>(
-    callbackFunc: (callback: (...args: Array<any>) => any) => any,
-    selector: (...args: Array<any>) => U,
-    scheduler?: rxjs$SchedulerClass
-  ): () => rxjs$Observable<U>;
-  static bindCallback<T, U>(
-    callbackFunc: (v1: T, callback: (...args: Array<any>) => any) => any,
-    selector: (...args: Array<any>) => U,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T) => rxjs$Observable<U>;
-  static bindCallback<T, T2, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      callback: (...args: Array<any>) => any
-    ) => any,
-    selector: (...args: Array<any>) => U,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2) => rxjs$Observable<U>;
-  static bindCallback<T, T2, T3, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      callback: (...args: Array<any>) => any
-    ) => any,
-    selector: (...args: Array<any>) => U,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
-  static bindCallback<T, T2, T3, T4, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      v4: T4,
-      callback: (...args: Array<any>) => any
-    ) => any,
-    selector: (...args: Array<any>) => U,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
-  static bindCallback<T, T2, T3, T4, T5, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      v4: T4,
-      v5: T5,
-      callback: (...args: Array<any>) => any
-    ) => any,
-    selector: (...args: Array<any>) => U,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
-  static bindCallback<T, T2, T3, T4, T5, T6, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      v4: T4,
-      v5: T5,
-      v6: T6,
-      callback: (...args: Array<any>) => any
-    ) => any,
-    selector: (...args: Array<any>) => U,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
-  static bindCallback<T>(
-    callbackFunc: Function,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (...args: Array<any>) => rxjs$Observable<T>;
-  static bindCallback<T>(
-    callbackFunc: Function,
-    selector?: (...args: Array<any>) => T,
-    scheduler?: rxjs$SchedulerClass
-  ): (...args: Array<any>) => rxjs$Observable<T>;
-
-  static bindNodeCallback<U>(
-    callbackFunc: (callback: (err: any, result: U) => any) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): () => rxjs$Observable<U>;
-  static bindNodeCallback<T, U>(
-    callbackFunc: (v1: T, callback: (err: any, result: U) => any) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T) => rxjs$Observable<U>;
-  static bindNodeCallback<T, T2, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      callback: (err: any, result: U) => any
-    ) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2) => rxjs$Observable<U>;
-  static bindNodeCallback<T, T2, T3, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      callback: (err: any, result: U) => any
-    ) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
-  static bindNodeCallback<T, T2, T3, T4, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      v4: T4,
-      callback: (err: any, result: U) => any
-    ) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
-  static bindNodeCallback<T, T2, T3, T4, T5, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      v4: T4,
-      v5: T5,
-      callback: (err: any, result: U) => any
-    ) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
-  static bindNodeCallback<T, T2, T3, T4, T5, T6, U>(
-    callbackFunc: (
-      v1: T,
-      v2: T2,
-      v3: T3,
-      v4: T4,
-      v5: T5,
-      v6: T6,
-      callback: (err: any, result: U) => any
-    ) => any,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
-  static bindNodeCallback<T>(
-    callbackFunc: Function,
-    selector?: void,
-    scheduler?: rxjs$SchedulerClass
-  ): (...args: Array<any>) => rxjs$Observable<T>;
-  static bindNodeCallback<T>(
-    callbackFunc: Function,
-    selector?: (...args: Array<any>) => T,
-    scheduler?: rxjs$SchedulerClass
-  ): (...args: Array<any>) => rxjs$Observable<T>;
-
-  static concat(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
-
   static create(
     subscribe: (
       observer: rxjs$Observer<T>
     ) => rxjs$ISubscription | Function | void
   ): rxjs$Observable<T>;
-
-  static fromEvent(
-    element: any,
-    eventName: string,
-    ...none: Array<void>
-  ): rxjs$Observable<T>;
-  static fromEvent(
-    element: any,
-    eventName: string,
-    options: rxjs$EventListenerOptions,
-    ...none: Array<void>
-  ): rxjs$Observable<T>;
-  static fromEvent(
-    element: any,
-    eventName: string,
-    selector: () => T,
-    ...none: Array<void>
-  ): rxjs$Observable<T>;
-  static fromEvent(
-    element: any,
-    eventName: string,
-    options: rxjs$EventListenerOptions,
-    selector: () => T
-  ): rxjs$Observable<T>;
-
-  static fromEventPattern(
-    addHandler: (handler: (item: T) => void) => void,
-    removeHandler: (handler: (item: T) => void) => void,
-    selector?: () => T
-  ): rxjs$Observable<T>;
-
-  static empty<U>(): rxjs$Observable<U>;
-
-  static range(
-    start?: number,
-    count?: number,
-    scheduler?: rxjs$SchedulerClass
-  ): rxjs$Observable<number>;
-
-  static throw(error: any): rxjs$Observable<any>;
 
   let<U>(
     project: (self: rxjs$Observable<T>) => rxjs$Observable<U>
@@ -345,271 +90,6 @@ declare class rxjs$Observable<+T> {
     onCompleted: ?() => mixed
   ): rxjs$Subscription;
 
-  static zip<A, B>(
-    a: rxjs$Observable<A>,
-    resultSelector: (a: A) => B
-  ): rxjs$Observable<B>;
-
-  static zip<A, B, C>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    resultSelector: (a: A, b: B) => C
-  ): rxjs$Observable<C>;
-
-  static zip<A, B, C, D>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    resultSelector: (a: A, b: B, c: C) => D
-  ): rxjs$Observable<D>;
-
-  static zip<A, B, C, D, E>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    resultSelector: (a: A, b: B, c: C, d: D) => E
-  ): rxjs$Observable<E>;
-
-  static zip<A, B, C, D, E, F>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    resultSelector: (a: A, b: B, c: C, d: D, e: E) => F
-  ): rxjs$Observable<F>;
-
-  static zip<A, B, C, D, E, F, G>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F) => G
-  ): rxjs$Observable<G>;
-
-  static zip<A, B, C, D, E, F, G, H>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    g: rxjs$Observable<G>,
-    resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
-  ): rxjs$Observable<H>;
-
-  static zip<A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<[A]>;
-
-  static zip<A, B>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    _: void
-  ): rxjs$Observable<[A, B]>;
-
-  static zip<A, B, C>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    _: void
-  ): rxjs$Observable<[A, B, C]>;
-
-  static zip<A, B, C, D>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D]>;
-
-  static zip<A, B, C, D, E>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D, E]>;
-
-  static zip<A, B, C, D, E, F>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D, E, F]>;
-
-  static zip<A, B, C, D, E, F, G>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    g: rxjs$Observable<G>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D, E, F, G]>;
-
-  static zip<A, B, C, D, E, F, G, H>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    g: rxjs$Observable<G>,
-    h: rxjs$Observable<H>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D, E, F, G, H]>;
-
-  static forkJoin<A, B>(
-    a: rxjs$Observable<A>,
-    resultSelector: (a: A) => B
-  ): rxjs$Observable<B>;
-
-  static forkJoin<A, B, C>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    resultSelector: (a: A, b: B) => C
-  ): rxjs$Observable<C>;
-
-  static forkJoin<A, B, C, D>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    resultSelector: (a: A, b: B, c: C) => D
-  ): rxjs$Observable<D>;
-
-  static forkJoin<A, B, C, D, E>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    resultSelector: (a: A, b: B, c: C, d: D) => E
-  ): rxjs$Observable<E>;
-
-  static forkJoin<A, B, C, D, E, F>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    resultSelector: (a: A, b: B, c: C, d: D, e: E) => F
-  ): rxjs$Observable<F>;
-
-  static forkJoin<A, B, C, D, E, F, G>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F) => G
-  ): rxjs$Observable<G>;
-
-  static forkJoin<A, B, C, D, E, F, G, H>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    g: rxjs$Observable<G>,
-    resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
-  ): rxjs$Observable<H>;
-
-  static forkJoin<A, B>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    _: void
-  ): rxjs$Observable<[A, B]>;
-
-  static forkJoin<A, B, C>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    _: void
-  ): rxjs$Observable<[A, B, C]>;
-
-  static forkJoin<A, B, C, D>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D]>;
-
-  static forkJoin<A, B, C, D, E>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D, E]>;
-
-  static forkJoin<A, B, C, D, E, F>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D, E, F]>;
-
-  static forkJoin<A, B, C, D, E, F, G>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    g: rxjs$Observable<G>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D, E, F, G]>;
-
-  static forkJoin<A, B, C, D, E, F, G, H>(
-    a: rxjs$Observable<A>,
-    b: rxjs$Observable<B>,
-    c: rxjs$Observable<C>,
-    d: rxjs$Observable<D>,
-    e: rxjs$Observable<E>,
-    f: rxjs$Observable<F>,
-    g: rxjs$Observable<G>,
-    h: rxjs$Observable<H>,
-    _: void
-  ): rxjs$Observable<[A, B, C, D, E, F, G, H]>;
-
-  static forkJoin<A>(
-    a: Array<rxjs$Observable<A>>,
-    _: void
-  ): rxjs$Observable<Array<A>>;
-
-  static forkJoin<A>(
-    a: Array<rxjs$Observable<any>>,
-    _: void
-  ): rxjs$Observable<A>;
-
-  static forkJoin<A, B>(
-    a: Array<rxjs$Observable<A>>,
-    resultSelector: (...values: Array<A>) => B
-  ): rxjs$Observable<B>;
-
-  static forkJoin<A>(
-    a: Array<rxjs$Observable<any>>,
-    resultSelector: (...values: Array<any>) => A
-  ): rxjs$Observable<A>;
-
-  static using<R: rxjs$ISubscription>(
-    resourceFactory: () => ?R,
-    observableFactory: (resource: R) => rxjs$Observable<T> | Promise<T> | void
-  ): rxjs$Observable<T>;
-
   _subscribe(observer: rxjs$Subscriber<T>): rxjs$Subscription;
 
   _isScalar: boolean;
@@ -619,12 +99,221 @@ declare class rxjs$Observable<+T> {
 
 declare module 'rxjs/observable/bindCallback' {
   declare module.exports: {
-    // TODO
+    bindCallback(
+      callbackFunc: (callback: (_: void) => any) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): () => rxjs$Observable<void>;
+    bindCallback<U>(
+      callbackFunc: (callback: (result: U) => any) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): () => rxjs$Observable<U>;
+    bindCallback<T, U>(
+      callbackFunc: (v1: T, callback: (result: U) => any) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T) => rxjs$Observable<U>;
+    bindCallback<T, T2, U>(
+      callbackFunc: (v1: T, v2: T2, callback: (result: U) => any) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2) => rxjs$Observable<U>;
+    bindCallback<T, T2, T3, U>(
+      callbackFunc: (v1: T, v2: T2, v3: T3, callback: (result: U) => any) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
+    bindCallback<T, T2, T3, T4, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        v4: T4,
+        callback: (result: U) => any
+      ) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
+    bindCallback<T, T2, T3, T4, T5, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        v4: T4,
+        v5: T5,
+        callback: (result: U) => any
+      ) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
+    bindCallback<T, T2, T3, T4, T5, T6, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        v4: T4,
+        v5: T5,
+        v6: T6,
+        callback: (result: U) => any
+      ) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
+    bindCallback<U>(
+      callbackFunc: (callback: (...args: Array<any>) => any) => any,
+      selector: (...args: Array<any>) => U,
+      scheduler?: rxjs$SchedulerClass
+    ): () => rxjs$Observable<U>;
+    bindCallback<T, U>(
+      callbackFunc: (v1: T, callback: (...args: Array<any>) => any) => any,
+      selector: (...args: Array<any>) => U,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T) => rxjs$Observable<U>;
+    bindCallback<T, T2, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        callback: (...args: Array<any>) => any
+      ) => any,
+      selector: (...args: Array<any>) => U,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2) => rxjs$Observable<U>;
+    bindCallback<T, T2, T3, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        callback: (...args: Array<any>) => any
+      ) => any,
+      selector: (...args: Array<any>) => U,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
+    bindCallback<T, T2, T3, T4, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        v4: T4,
+        callback: (...args: Array<any>) => any
+      ) => any,
+      selector: (...args: Array<any>) => U,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
+    bindCallback<T, T2, T3, T4, T5, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        v4: T4,
+        v5: T5,
+        callback: (...args: Array<any>) => any
+      ) => any,
+      selector: (...args: Array<any>) => U,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
+    bindCallback<T, T2, T3, T4, T5, T6, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        v4: T4,
+        v5: T5,
+        v6: T6,
+        callback: (...args: Array<any>) => any
+      ) => any,
+      selector: (...args: Array<any>) => U,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
+    bindCallback<T>(
+      callbackFunc: Function,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (...args: Array<any>) => rxjs$Observable<T>;
+    bindCallback<T>(
+      callbackFunc: Function,
+      selector?: (...args: Array<any>) => T,
+      scheduler?: rxjs$SchedulerClass
+    ): (...args: Array<any>) => rxjs$Observable<T>;
   }
 }
 declare module 'rxjs/observable/bindNodeCallback' {
   declare module.exports: {
-    // TODO
+    bindNodeCallback<U>(
+      callbackFunc: (callback: (err: any, result: U) => any) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): () => rxjs$Observable<U>;
+    bindNodeCallback<T, U>(
+      callbackFunc: (v1: T, callback: (err: any, result: U) => any) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T) => rxjs$Observable<U>;
+    bindNodeCallback<T, T2, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        callback: (err: any, result: U) => any
+      ) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2) => rxjs$Observable<U>;
+    bindNodeCallback<T, T2, T3, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        callback: (err: any, result: U) => any
+      ) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
+    bindNodeCallback<T, T2, T3, T4, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        v4: T4,
+        callback: (err: any, result: U) => any
+      ) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
+    bindNodeCallback<T, T2, T3, T4, T5, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        v4: T4,
+        v5: T5,
+        callback: (err: any, result: U) => any
+      ) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
+    bindNodeCallback<T, T2, T3, T4, T5, T6, U>(
+      callbackFunc: (
+        v1: T,
+        v2: T2,
+        v3: T3,
+        v4: T4,
+        v5: T5,
+        v6: T6,
+        callback: (err: any, result: U) => any
+      ) => any,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
+    bindNodeCallback<T>(
+      callbackFunc: Function,
+      selector?: void,
+      scheduler?: rxjs$SchedulerClass
+    ): (...args: Array<any>) => rxjs$Observable<T>;
+    bindNodeCallback<T>(
+      callbackFunc: Function,
+      selector?: (...args: Array<any>) => T,
+      scheduler?: rxjs$SchedulerClass
+    ): (...args: Array<any>) => rxjs$Observable<T>;
   }
 }
 declare module 'rxjs/observable/combineLatest' {
@@ -739,7 +428,7 @@ declare module 'rxjs/observable/combineLatest' {
 }
 declare module 'rxjs/observable/concat' {
   declare module.exports: {
-    // TODO
+    concat<+T>(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
   }
 }
 declare module 'rxjs/observable/defer' {
@@ -751,12 +440,149 @@ declare module 'rxjs/observable/defer' {
 }
 declare module 'rxjs/observable/empty' {
   declare module.exports: {
-    // TODO
+    empty<U>(): rxjs$Observable<U>;
   }
 }
 declare module 'rxjs/observable/forkJoin' {
   declare module.exports: {
-    // TODO
+    forkJoin<A, B>(
+      a: rxjs$Observable<A>,
+      resultSelector: (a: A) => B
+    ): rxjs$Observable<B>;
+
+    forkJoin<A, B, C>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      resultSelector: (a: A, b: B) => C
+    ): rxjs$Observable<C>;
+
+    forkJoin<A, B, C, D>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      resultSelector: (a: A, b: B, c: C) => D
+    ): rxjs$Observable<D>;
+
+    forkJoin<A, B, C, D, E>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      resultSelector: (a: A, b: B, c: C, d: D) => E
+    ): rxjs$Observable<E>;
+
+    forkJoin<A, B, C, D, E, F>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      resultSelector: (a: A, b: B, c: C, d: D, e: E) => F
+    ): rxjs$Observable<F>;
+
+    forkJoin<A, B, C, D, E, F, G>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F) => G
+    ): rxjs$Observable<G>;
+
+    forkJoin<A, B, C, D, E, F, G, H>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      g: rxjs$Observable<G>,
+      resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
+    ): rxjs$Observable<H>;
+
+    forkJoin<A, B>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      _: void
+    ): rxjs$Observable<[A, B]>;
+
+    forkJoin<A, B, C>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      _: void
+    ): rxjs$Observable<[A, B, C]>;
+
+    forkJoin<A, B, C, D>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D]>;
+
+    forkJoin<A, B, C, D, E>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D, E]>;
+
+    forkJoin<A, B, C, D, E, F>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D, E, F]>;
+
+    forkJoin<A, B, C, D, E, F, G>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      g: rxjs$Observable<G>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D, E, F, G]>;
+
+    forkJoin<A, B, C, D, E, F, G, H>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      g: rxjs$Observable<G>,
+      h: rxjs$Observable<H>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D, E, F, G, H]>;
+
+    forkJoin<A>(
+      a: Array<rxjs$Observable<A>>,
+      _: void
+    ): rxjs$Observable<Array<A>>;
+
+    forkJoin<A>(
+      a: Array<rxjs$Observable<any>>,
+      _: void
+    ): rxjs$Observable<A>;
+
+    forkJoin<A, B>(
+      a: Array<rxjs$Observable<A>>,
+      resultSelector: (...values: Array<A>) => B
+    ): rxjs$Observable<B>;
+
+    forkJoin<A>(
+      a: Array<rxjs$Observable<any>>,
+      resultSelector: (...values: Array<any>) => A
+    ): rxjs$Observable<A>;
   }
 }
 declare module 'rxjs/observable/from' {
@@ -774,12 +600,38 @@ declare module 'rxjs/observable/fromPromise' {
 }
 declare module 'rxjs/observable/fromEvent' {
   declare module.exports: {
-    // TODO
+    fromEvent<+T>(
+      element: any,
+      eventName: string,
+      ...none: Array<void>
+    ): rxjs$Observable<T>;
+    fromEvent<+T>(
+      element: any,
+      eventName: string,
+      options: rxjs$EventListenerOptions,
+      ...none: Array<void>
+    ): rxjs$Observable<T>;
+    fromEvent<+T>(
+      element: any,
+      eventName: string,
+      selector: () => T,
+      ...none: Array<void>
+    ): rxjs$Observable<T>;
+    fromEvent<+T>(
+      element: any,
+      eventName: string,
+      options: rxjs$EventListenerOptions,
+      selector: () => T
+    ): rxjs$Observable<T>;
   }
 }
 declare module 'rxjs/observable/fromEventPattern' {
   declare module.exports: {
-    // TODO
+    fromEventPattern<+T>(
+      addHandler: (handler: (item: T) => void) => void,
+      removeHandler: (handler: (item: T) => void) => void,
+      selector?: () => T
+    ): rxjs$Observable<T>;
   }
 }
 declare module 'rxjs/observable/generate' {
@@ -838,12 +690,16 @@ declare module 'rxjs/observable/race' {
 }
 declare module 'rxjs/observable/range' {
   declare module.exports: {
-    // TODO
+    range(
+      start?: number,
+      count?: number,
+      scheduler?: rxjs$SchedulerClass
+    ): rxjs$Observable<number>;
   }
 }
 declare module 'rxjs/observable/throwError' {
   declare module.exports: {
-    // TODO
+    throwError(error: any): rxjs$Observable<any>;
   }
 }
 declare module 'rxjs/observable/timer' {
@@ -857,12 +713,134 @@ declare module 'rxjs/observable/timer' {
 }
 declare module 'rxjs/observable/using' {
   declare module.exports: {
-    // TODO
+    using<+T, R: rxjs$ISubscription>(
+      resourceFactory: () => ?R,
+      observableFactory: (resource: R) => rxjs$Observable<T> | Promise<T> | void
+    ): rxjs$Observable<T>;
   }
 }
 declare module 'rxjs/observable/zip' {
   declare module.exports: {
-    // TODO
+    zip<A, B>(
+      a: rxjs$Observable<A>,
+      resultSelector: (a: A) => B
+    ): rxjs$Observable<B>;
+
+    zip<A, B, C>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      resultSelector: (a: A, b: B) => C
+    ): rxjs$Observable<C>;
+
+    zip<A, B, C, D>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      resultSelector: (a: A, b: B, c: C) => D
+    ): rxjs$Observable<D>;
+
+    zip<A, B, C, D, E>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      resultSelector: (a: A, b: B, c: C, d: D) => E
+    ): rxjs$Observable<E>;
+
+    zip<A, B, C, D, E, F>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      resultSelector: (a: A, b: B, c: C, d: D, e: E) => F
+    ): rxjs$Observable<F>;
+
+    zip<A, B, C, D, E, F, G>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F) => G
+    ): rxjs$Observable<G>;
+
+    zip<A, B, C, D, E, F, G, H>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      g: rxjs$Observable<G>,
+      resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
+    ): rxjs$Observable<H>;
+
+    zip<A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<[A]>;
+
+    zip<A, B>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      _: void
+    ): rxjs$Observable<[A, B]>;
+
+    zip<A, B, C>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      _: void
+    ): rxjs$Observable<[A, B, C]>;
+
+    zip<A, B, C, D>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D]>;
+
+    zip<A, B, C, D, E>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D, E]>;
+
+    zip<A, B, C, D, E, F>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D, E, F]>;
+
+    zip<A, B, C, D, E, F, G>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      g: rxjs$Observable<G>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D, E, F, G]>;
+
+    zip<A, B, C, D, E, F, G, H>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      g: rxjs$Observable<G>,
+      h: rxjs$Observable<H>,
+      _: void
+    ): rxjs$Observable<[A, B, C, D, E, F, G, H]>;
   }
 }
 
@@ -909,9 +887,9 @@ declare module "rxjs/operators" {
       closingSelector: () => rxjs$Observable<any>
     ): rxjs$Observable<T> => rxjs$Observable<Array<T>>;
 
-    // catch<U>(
-    //   selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>
-    // ): rxjs$Observable<T> => rxjs$Observable<U>;
+    catchError<+T, U>(
+      selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>
+    ): rxjs$Observable<T> => rxjs$Observable<U>;
 
     concat<+T, U>(...sources: rxjs$Observable<U>[]): rxjs$Observable<T> => rxjs$Observable<T | U>;
 
@@ -984,7 +962,7 @@ declare module "rxjs/operators" {
       thisArg?: any
     ): rxjs$Observable<T> => rxjs$Observable<T>;
 
-    // finally(f: () => mixed): rxjs$Observable<T> => rxjs$Observable<T>;
+    finalize<+T>(f: () => mixed): rxjs$Observable<T> => rxjs$Observable<T>;
 
     first<+T, U>(
       predicate: ?(
