@@ -5,7 +5,7 @@ const Comp = () => <span>component</span>;
 
 const CompFragmentContainer = Relay.createContainer(Comp, {
   fragments: {
-    viewer: graphql`
+    viewer: Relay.graphql`
       fragment Comp_viewer on Viewer {
         id
       }
