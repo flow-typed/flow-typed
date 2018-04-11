@@ -1,11 +1,15 @@
 // @flow
 import PrettyError from 'pretty-error';
 
-(PrettyError.start(): void);
+(PrettyError.start(): PrettyError);
+
 const pr: PrettyError = new PrettyError();
-(pr.start(): void);
+(pr.start(): PrettyError);
+(pr.render(new Error('')): string);
+
 // $ExpectError
-(pr.skip(100): void);
-(pr.alias('foo', 'bar'): void);
-(pr.skipNodeFiles(): void);
-(pr.withoutColors(): void);
+(pr.skip(100): PrettyError);
+
+(pr.alias('foo', 'bar'): PrettyError);
+(pr.skipNodeFiles(): PrettyError);
+(pr.withoutColors(): PrettyError);
