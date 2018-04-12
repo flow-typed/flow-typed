@@ -1,6 +1,6 @@
-import type { Stats } from 'fs';
-
 declare module 'koa-send' {
+  import type { Stats } from 'fs';
+
   declare type Context = Object;
   declare type Response = Object;
 
