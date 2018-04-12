@@ -1,6 +1,6 @@
 // @flow
 
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken'
 
 const payload = {
   foo: 'bar'
@@ -12,9 +12,9 @@ jwt.sign(payload);
 jwt.sign(payload, 'secret');
 
 // $ExpectError
-jwt.sign(payload, 'secret', (token: number) => undefined);
+jwt.sign(payload, 'secret', (err: number) => undefined);
 
-jwt.sign(payload, 'secret', (token: Error | string) => undefined);
+jwt.sign(payload, 'secret', (err: Error, token: string) => undefined);
 
 jwt.sign(payload, Buffer.from('secret'));
 
@@ -23,8 +23,7 @@ jwt.sign(payload, Buffer.from('secret'), {
 });
 
 jwt.sign(payload, Buffer.from('secret'), {
-  algorithm: 'RS256',
-  mutatePayload: true,
+  algorithm: 'RS256'
 });
 
 // $ExpectError
@@ -47,11 +46,11 @@ jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, { subject: 'missing algo' }
 // $ExpectError
 jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, (foo) => undefined);
 
-jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, { algorithm: 'ES512' }, (foo) => undefined);
+jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, { algorithm: 'ES512' }, (err: Error) => undefined);
 
 jwt.verify('token', 'secret');
 
-jwt.verify('token', 'secret', (foo) => undefined);
+jwt.verify('token', 'secret', err => undefined);
 
 // $ExpectError
 jwt.verify('token', { key: 'secret', passphrase: 'foo' });

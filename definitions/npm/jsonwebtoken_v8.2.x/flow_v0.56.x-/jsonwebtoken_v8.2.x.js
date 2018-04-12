@@ -1,109 +1,143 @@
 declare module "jsonwebtoken" {
-  declare module.exports: {
-    sign: jwt$Sign,
-    decode: jwt$Decode,
-    verify: jwt$Verify,
-    JsonWebTokenError: Class<jwt$WebTokenError>,
-    NotBeforeError: Class<jwt$NotBeforeError>,
-    TokenExpiredError: Class<jwt$TokenExpiredError>
+
+  declare class JsonWebTokenError extends Error {
+    name: string;
+    message: string;
+    inner: Error;
   }
-}
 
-declare type jwt$Encodable = String | Buffer | Object;
-declare type jwt$Key = { key: string | Buffer, passphrase: string | Buffer };
-declare type jwt$Algorithm =
-  'RS256'
-  | 'RS384'
-  | 'RS512'
-  | 'ES256'
-  | 'ES384'
-  | 'ES512'
-  | 'HS256'
-  | 'HS384'
-  | 'HS512'
-  | 'none';
+  declare class TokenExpiredError extends Error {
+    name: string;
+    expiredAt: number;
+    inner: Error;
+  }
 
-declare type jwt$Callback = (tokenOrError: Error | string) => void;
-declare type jwt$SigningOptions<Headers> = $Shape<{
-  algorithm: jwt$Algorithm,
-  expiresIn: number | string,
-  notBefore: number | string,
-  audience: string | string[],
-  issuer: string,
-  jwtid: string,
-  subject: string,
-  noTimestamp: boolean,
-  header: Headers,
-  keyid: string,
-  mutatePayload: boolean,
-}>;
+  declare class NotBeforeError extends Error {
+    name: string;
+    date: Date;
+    inner: Error;
+  }
 
-declare type jwt$SigningOptionsWithAlgorithm<H> = jwt$SigningOptions<H> & { algorithm: jwt$Algorithm };
-declare type jwt$VerifyOptionsWithAlgorithm = jwt$VerifyOptions & { algorithms: Array<jwt$Algorithm> };
+  declare type Encodable = String | Buffer | Object;
+  declare type Key = { key: string | Buffer, passphrase: string | Buffer };
+  declare type Algorithm =
+    'RS256'
+    | 'RS384'
+    | 'RS512'
+    | 'ES256'
+    | 'ES384'
+    | 'ES512'
+    | 'HS256'
+    | 'HS384'
+    | 'HS512'
+    | 'none';
 
-declare type jwt$VerifyOptions = $Shape<{
-  algorithms: Array<jwt$Algorithm>,
-  audience: string,
-  issuer: string | string[],
-  ignoreExpiration: boolean,
-  ignoreNotBefore: boolean,
-  subject: string | string[],
-  clockTolerance: number,
-  maxAge: string | number,
-  clockTimestamp: number
-}>;
+  declare type SignCallback = (err: Error, token: string) => void;
+  declare type SigningOptions<Headers> = $Shape<{
+    algorithm: Algorithm,
+    expiresIn: number | string,
+    notBefore: number | string,
+    audience: string | string[],
+    issuer: string | string[],
+    jwtid: string,
+    subject: string,
+    noTimestamp: boolean,
+    header: Headers,
+    keyid: string
+  }>;
 
-declare type jwt$DecodingOptions = $Shape<{
-  complete: boolean,
-  json: boolean,
-  encoding: string,
-}>;
+  declare type SigningOptionsWithAlgorithm<H> = SigningOptions<H> & { algorithm: Algorithm };
 
-declare interface jwt$Sign {
-  <P: jwt$Encodable>
-  (payload: P, secretOrPrivateKey: string | Buffer): string;
+  declare type VerifyCallback = (err: JsonWebTokenError | NotBeforeError | TokenExpiredError | null, decoded: Payload) => void;
+  declare type VerifyOptionsWithAlgorithm = VerifyOptions & { algorithms: Array<Algorithm> };
+  declare type VerifyOptions = $Shape<{
+    algorithms: Array<Algorithm>,
+    audience: string | string[],
+    issuer: string | string[],
+    ignoreExpiration: boolean,
+    ignoreNotBefore: boolean,
+    subject: string | string[],
+    clockTolerance: number,
+    maxAge: string | number,
+    clockTimestamp: number
+  }>;
 
-  <P: jwt$Encodable>
-  (payload: P, secretOrPrivateKey: string | Buffer, callback: jwt$Callback): string;
+  declare type DecodingOptions = $Shape<{
+    complete: boolean,
+    json: boolean
+  }>;
 
-  <P: jwt$Encodable, H>
-  (payload: P, secretOrPrivateKey: jwt$Key, options: jwt$SigningOptionsWithAlgorithm<H>): string;
+  declare interface Sign {
+    <P: Encodable>
+    (payload: P, secretOrPrivateKey: string | Buffer): string;
 
-  <P: jwt$Encodable, H>
-  (payload: P, secretOrPrivateKey: string | Buffer, options: $Shape<jwt$SigningOptions<H>>): string;
+    <P: Encodable>
+    (payload: P, secretOrPrivateKey: string | Buffer, callback: SignCallback): string;
 
-  <P: jwt$Encodable, H>
-  (payload: P, secretOrPrivateKey: string | Buffer, options: $Shape<jwt$SigningOptions<H>>, callback: jwt$Callback): string;
+    <P: Encodable, H>
+    (payload: P, secretOrPrivateKey: Key, options: SigningOptionsWithAlgorithm<H>): string;
 
-  <P: jwt$Encodable, H>
-  (payload: P, secretOrPrivateKey: jwt$Key, options: jwt$SigningOptionsWithAlgorithm<H>, callback: jwt$Callback): string;
-}
+    <P: Encodable, H>
+    (payload: P, secretOrPrivateKey: string | Buffer, options: $Shape<SigningOptions<H>>): string;
 
-declare interface jwt$Decode {
-  (jwt: string): mixed;
+    <P: Encodable, H>
+    (payload: P, secretOrPrivateKey: string | Buffer, options: $Shape<SigningOptions<H>>, callback: SignCallback): string;
 
-  (jwt: string, options: jwt$DecodingOptions): mixed;
+    <P: Encodable, H>
+    (payload: P, secretOrPrivateKey: Key, options: SigningOptionsWithAlgorithm<H>, callback: SignCallback): string;
+  }
 
-  (jwt: string, options: jwt$DecodingOptions & { complete: true }): { header: Object, payload: mixed, signature: string };
-}
+  declare type Payload = Object & {
+    jti?: string,
+    iss?: string,
+    sub?: string,
+    aud?: string | string[],
+    exp?: number,
+    iat?: number,
+    nbf?: number
+  }
 
-declare interface jwt$Verify {
-  (jwt: string, secretOrPrivateKey: string | Buffer): mixed;
+  declare type Token = {
+    header: { typ: 'JWT', alg: Algorithm },
+    payload: Payload,
+    signature?: string,
+  }
 
-  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions | jwt$Callback): mixed;
+  declare interface Decode {
+    (jwt: string): Payload;
 
-  (jwt: string, secretOrPrivateKey: string | Buffer, options: jwt$VerifyOptions, callback: jwt$Callback): mixed;
+    (jwt: string, options: DecodingOptions): Payload;
 
-  (jwt: string, secretOrPrivateKey: jwt$Key, options: jwt$VerifyOptionsWithAlgorithm): mixed;
+    (jwt: string, options: DecodingOptions & { complete: true }): Token;
+  }
 
-  (jwt: string, secretOrPrivateKey: jwt$Key, options: jwt$VerifyOptionsWithAlgorithm, callback: jwt$Callback): mixed;
-}
+  declare interface Verify {
+    (jwt: string, secretOrPrivateKey: string | Buffer): Payload;
 
-declare class jwt$TokenExpiredError extends Error {
-}
+    (jwt: string, secretOrPrivateKey: string | Buffer, options: VerifyOptions | VerifyCallback): Payload;
 
-declare class jwt$WebTokenError extends Error {
-}
+    (jwt: string, secretOrPrivateKey: string | Buffer, options: VerifyOptions, callback: VerifyCallback): Payload;
 
-declare class jwt$NotBeforeError extends Error {
+    (jwt: string, secretOrPrivateKey: Key, options: VerifyOptionsWithAlgorithm): Payload;
+
+    (jwt: string, secretOrPrivateKey: Key, options: VerifyOptionsWithAlgorithm, callback: VerifyCallback): Payload;
+  }
+
+  declare class TokenExpiredError extends Error {
+  }
+
+  declare class WebTokenError extends Error {
+  }
+
+  declare class NotBeforeError extends Error {
+  }
+
+  declare module.exports: {
+    sign: Sign,
+    decode: Decode,
+    verify: Verify,
+    JsonWebTokenError: Class<WebTokenError>,
+    NotBeforeError: Class<NotBeforeError>,
+    TokenExpiredError: Class<TokenExpiredError>
+  }
 }
