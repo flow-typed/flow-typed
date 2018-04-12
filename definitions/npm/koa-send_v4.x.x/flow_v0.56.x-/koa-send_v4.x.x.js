@@ -18,5 +18,7 @@ declare module 'koa-send' {
     extensions?: Array<string> | false
   |};
 
-  declare export default function send(ctx: Context, path: string, opts?: Options): Promise<string>;
+  declare export type SendResult = Promise<string>;
+
+  declare export default function send(ctx: Context, path: string, opts?: Options): SendResult;
 }
