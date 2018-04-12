@@ -1,10 +1,10 @@
-declare module "koa-send" {
-  import type { Stats } from "fs";
+import type { Stats } from 'fs';
 
+declare module 'koa-send' {
   declare type Context = Object;
   declare type Response = Object;
 
-  declare type Options = {|
+  declare export type Options = {|
     maxage?: number,
     maxAge?: number,
     immutable?: boolean,
@@ -18,9 +18,5 @@ declare module "koa-send" {
     extensions?: Array<string> | false
   |};
 
-  declare export default function send(
-    ctx: Context,
-    path: string,
-    opts?: Options
-  ): Promise<string>;
+  declare export default function send(ctx: Context, path: string, opts?: Options): Promise<string>;
 }
