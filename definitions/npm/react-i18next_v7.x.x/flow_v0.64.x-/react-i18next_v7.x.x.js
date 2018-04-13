@@ -7,9 +7,17 @@ declare module "react-i18next" {
     i18n: Object
   |};
 
-  declare type Translator<P> = (
-    Component: React$ComponentType<{| ...TranslatorProps, ...P |}>
-  ) => React$ComponentType<P>;
+  declare type TranslatorPropsVoid = {
+    t: TFunction | void,
+    i18nLoadedAt: Date | void,
+    i18n: Object | void
+  };
+
+  declare type Translator<P: {}, Component: React$ComponentType<P>> = (
+    WrappedComponent: Component
+  ) => React$ComponentType<
+    $Diff<React$ElementConfig<Component>, TranslatorPropsVoid>
+  >;
 
   declare type TranslateOptions = $Shape<{
     wait: boolean,
@@ -22,12 +30,12 @@ declare module "react-i18next" {
     usePureComponent: boolean
   }>;
 
-  declare function translate<P>(
+  declare function translate<P: {}, Component: React$ComponentType<P>>(
     namespaces?: | string
     | Array<string>
-    | (($Diff<P, TranslatorProps>) => string | Array<string>),
+    | (($Diff<P, TranslatorPropsVoid>) => string | Array<string>),
     options?: TranslateOptions
-  ): Translator<P>;
+  ): Translator<P, Component>;
 
   declare type I18nProps = {
     i18n?: Object,
