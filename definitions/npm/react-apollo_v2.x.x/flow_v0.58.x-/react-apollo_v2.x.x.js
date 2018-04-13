@@ -1,6 +1,8 @@
 // @flow
 import type {
   ApolloClient,
+  FetchResult,
+  DataProxy,
   MutationQueryReducersMap,
   ApolloQueryResult,
   ApolloError,
@@ -202,4 +204,57 @@ declare module 'react-apollo' {
   ): Promise<string>;
 
   declare export function cleanupApolloState(apolloState: any): void;
+
+  declare type QueryRenderPropFunction<TData, TVariables> = ({
+    data: TData,
+    loading: boolean,
+    error: ?ApolloError,
+    variables: TVariables,
+    networkStatus: NetworkStatus,
+    refetch: (variables?: TVariables) => Promise<mixed>,
+    fetchMore: ({query?: DocumentNode, variables?: TVariables, updateQuery: Function}) => Promise<mixed>,
+    load: () => void,
+    startPolling: (interval: number) => void,
+    stopPolling: (interval: number) => void,
+    subscribeToMore: (options: {document?: DocumentNode, variables?: TVariables, updateQuery?: Function, onError?: Function}) => () => void,
+    updateQuery: (previousResult: TData, options?: {variables: TVariables}) => TData,
+    client: ApolloClient
+  }) => React$Node
+
+  declare export class Query<TData> extends React$Component<{
+    query: DocumentNode,
+    children: QueryRenderPropFunction<TData, {[string]: any}>,
+    variables?: {[string]: any},
+    pollInterval?: number,
+    notifyOnNetworkStatusChange?: boolean,
+    fetchPolicy?: FetchPolicy,
+    errorPolicty?: ErrorPolicy,
+    ssr?: boolean,
+    displayName?: string,
+    delay?: boolean,
+    context?: {[string]: any}
+  }> {}
+
+  declare type MutateFunction = (options: {
+    variables?: {[string]: any},
+    optimisticResponse?: Object,
+    refetchQueries?: (mutationResult: FetchResult) => Array<{query: DocumentNode, variables: {[string]: any}}>,
+    update?: (cache: DataProxy, mutationResult: FetchResult) => any
+  }) => Promise<*>
+
+  declare type MutationRenderPropFunction<TData> = (mutate: MutateFunction, result: {loading: boolean, error: ?ApolloError, data: TData}) => React$Node
+    declare export class Mutation<TData> extends React$Component<{
+    mutation: DocumentNode,
+    children: MutationRenderPropFunction<TData>,
+    variables?: {[string]: any},
+    update?: (cache: DataProxy, mutationResult: FetchResult) => any,
+    ignoreResults?: boolean,
+    optimisticResponse?: Object,
+    refetchQueries?: (mutationResult: FetchResult) => Array<{query: DocumentNode, variables: {[string]: any}}>,
+    onCompleted?: (data: TData) => void,
+    onError?: (error: ApolloError) => void,
+    context?: {[string]: any}
+  }> {}
+
+
 }
