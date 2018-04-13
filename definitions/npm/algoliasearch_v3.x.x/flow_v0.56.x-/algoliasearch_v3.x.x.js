@@ -169,11 +169,13 @@ declare module 'algoliasearch' {
   declare type ClientOptions = $algoliasearch$ClientOptions;
   declare type Index = $algoliasearch$Index;
   declare type Settings = $algoliasearch$Settings;
-  declare module.exports: (
-    applicationID: string,
-    apiKey: string,
-    options?: ClientOptions
-  ) => Client;
+  declare module.exports: {
+    (
+      applicationID: string,
+      apiKey: string,
+      options?: ClientOptions
+    ): Client;
+  }
 }
 
 declare module 'algoliasearch/reactnative' {
@@ -181,11 +183,13 @@ declare module 'algoliasearch/reactnative' {
   declare type ClientOptions = $algoliasearch$ClientOptions;
   declare type Index = $algoliasearch$Index;
   declare type Settings = $algoliasearch$Settings;
-  declare module.exports: (
-    applicationID: string,
-    apiKey: string,
-    options?: ClientOptions
-  ) => Client;
+  declare module.exports: {
+    (
+      applicationID: string,
+      apiKey: string,
+      options?: ClientOptions
+    ): Client;
+  }
 }
 
 declare module 'algoliasearch/lite' {
@@ -193,9 +197,11 @@ declare module 'algoliasearch/lite' {
   declare type ClientOptions = $algoliasearch$ClientOptions;
   declare type Index = $algoliasearch$IndexLite;
   declare type Settings = $algoliasearch$Settings;
-  declare module.exports: (
-    applicationID: string,
-    apiKey: string,
-    options?: ClientOptions
-  ) => Client;
+  declare module.exports: {
+    (
+      applicationID: string,
+      apiKey: string,
+      options?: ClientOptions
+    ): Client;
+  }
 }
