@@ -140,8 +140,8 @@ withRouter("nope");
 // const FooWithRouterError = withRouter(Foo);
 // <FooWithRouterError name={3} />;
 
-// $ExpectError
 const BarWithRouterError = withRouter(Bar);
+// $ExpectError
 <BarWithRouterError name={3} />;
 
 const IncorrectHistoryUsage = ({ history, name }: FooProps) => {
