@@ -56,7 +56,7 @@ declare module "apollo-link-http" {
     (operation: Operation): string;
   }
 
-  declare export interface FetchOptions {
+  declare export type FetchOptions = {
     uri?: string | UriFunction;
     fetch?: any;
     includeExtensions?: boolean;
