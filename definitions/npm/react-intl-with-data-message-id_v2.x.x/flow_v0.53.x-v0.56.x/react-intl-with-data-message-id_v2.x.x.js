@@ -3,7 +3,7 @@
  * Copied here based on intention to merge with flow-typed expressed here:
  * https://github.com/marudor/flowInterfaces/issues/6
  */
-// Mostly from https://github.com/yahoo/react-intl/wiki/API#react-intl-with-data-message-id-api
+// Mostly from https://github.com/yahoo/react-intl/wiki/API#react-intl-api
 
 type $npm$ReactIntl$LocaleData = {
   locale: string,
@@ -107,7 +107,7 @@ type $npm$ReactIntl$PluralCategoryString =
 
 type $npm$ReactIntl$DateParseable = number | string | Date;
 
-declare module "react-intl-with-data-message-id" {
+declare module "react-intl" {
   // PropType checker
   declare function intlShape(
     props: Object,
