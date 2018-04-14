@@ -1,6 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, uncurryN, curry, pipeP, tryCatch } from "ramda";
+import _, { compose, pipe, uncurryN, curry, pipeP, tryCatch, applyTo } from "ramda";
 // Function
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -50,6 +50,27 @@ const spec = {
   sum: _.add,
   nested: { mul: _.multiply }
 };
+
+const applyToResult1 = applyTo(5, value => {
+  (value: number);
+  // $ExpectError
+  (value: string);
+  return String(value)
+});
+(applyToResult1: string);
+// $ExpectError
+(applyToResult1: number);
+
+const applyToResult2 = applyTo(5)(value => {
+  (value: number);
+  // $ExpectError
+  (value: string);
+  return String(value)
+});
+(applyToResult2: string);
+// $ExpectError
+(applyToResult2: number);
+
 const getMetrics = _.applySpec(spec);
 const apspec: $Shape<R> = getMetrics(2, 2);
 
