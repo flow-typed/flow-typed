@@ -91,7 +91,7 @@ url.set('key', 'value', (query: mixed) => ({}));
 
 url.set('key', 'value', (query: mixed) => {
   // $ExpectError Return type void is incompatible with return type Object
-
+  return;
 });
 
 url.set('key', 'value', true);
