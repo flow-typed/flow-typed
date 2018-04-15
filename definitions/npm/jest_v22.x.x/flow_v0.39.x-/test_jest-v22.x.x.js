@@ -192,7 +192,14 @@ jest.setTimeout(1000);
 jest.runTimersToTime(3000);
 jest.advanceTimersByTime(3000);
 
-expect.addSnapshotSerializer(JSON.stringify);
+expect.addSnapshotSerializer({
+  print: (val, serialize) => `Foo: ${serialize(val.foo)}`,
+  test: val => val && val.hasOwnProperty('foo')
+})
+
+// $ExpectError
+expect.addSnapshotSerializer(JSON.stringify)
+
 expect.assertions(1);
 expect.hasAssertions();
 
