@@ -25,7 +25,7 @@ declare module 'react-toggled' {
 
   declare type ReactToggledProps = {
     defaultOn?: boolean,
-    onToggle?: ({ on: boolean, p: ToggledProps }) => void,
+    onToggle?: (on: boolean, p: ToggledProps) => void,
     on?: boolean,
     children: (ToggledProps) => React$Node | React$Node
   };
