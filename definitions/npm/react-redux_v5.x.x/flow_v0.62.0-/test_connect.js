@@ -411,3 +411,370 @@ function testOptions() {
   // $ExpectError wrong key
   connect(null, null, null, {wrongKey: true})(Com);
 }
+
+function testAllowsKnownPropInMapStateToProps() {
+  type Props = {
+    str: string
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToProps = (state: State) => {
+    return {
+      str: state.str
+    }
+  };
+
+  connect(mapStateToProps)(Com);
+}
+
+function testForbidsLiteralOfInvalidTypeInMapStateToProps() {
+  type Props = {
+    // $ExpectError string is incompatible with number
+    str: string
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToPropsWithLiteralOfInvalidType = (state: State) => {
+    return {
+      str: 123
+    }
+  };
+
+  // $ExpectError string is incompatible with number
+  connect(mapStateToPropsWithLiteralOfInvalidType)(Com);
+}
+
+function testForbidsStateProperyOfInvalidTypeInMapStateToProps() {
+  type Props = {
+    str: string
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToPropsWithStatePropertyOfInvalidType = (state: State) => {
+    return {
+      str: state.num
+    }
+  };
+
+  // $ExpectError string is incompatible with number
+  connect(mapStateToPropsWithStatePropertyOfInvalidType)(Com);
+}
+
+function testForbidsSelectorWithInvalidReturnTypeInMapStateToProps() {
+  type Props = {
+    str: string
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  function selectorReturningNumber(state: State): number {
+    return state.num
+  }
+
+  const mapStateToPropsWithSelectorWithInvalidTypeReturnValue = (state: State) => {
+    return {
+      str: selectorReturningNumber(state)
+    }
+  };
+
+  // $ExpectError string is incompatible with number
+  connect(mapStateToPropsWithSelectorWithInvalidTypeReturnValue)(Com);
+}
+
+function testForbidsUnknownPropInMapStateToProps() {
+  type Props = {
+    str: string
+  };
+
+  // $ExpectError undefined prop notThere
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToPropsWithUnknownProp = (state: State) => {
+    // $ExpectError undefined prop notThere
+    return {
+      str: state.str,
+      notThere: 123
+    }
+  };
+
+  // $ExpectError notThere is missing in Props
+  connect(mapStateToPropsWithUnknownProp)(Com);
+}
+
+function testAllowsKnownPropInMapDispatchToProps() {
+  type Props = {
+    strToNumber: string => number
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.strToNumber("123")}</div>;
+    }
+  }
+
+  const mapDispatchToProps = (dispatch: *) => {
+    return {
+      strToNumber: (str: string) => 123
+    }
+  };
+
+  connect(null, mapDispatchToProps)(Com);
+}
+
+function testForbidsInvalidTypeInMapDispatchToProps() {
+  type Props = {
+    // $ExpectError string is incompatible with number
+    strToNumber: string => number
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.strToNumber("123")}</div>;
+    }
+  }
+
+  const mapDispatchToPropsWithInvalidType = (dispatch: *) => {
+    // $ExpectError string is incompatible with number
+    return {
+      strToNumber: (num: number) => 123
+    }
+  };
+
+  // $ExpectError string is incompatible with number
+  connect(null, mapDispatchToPropsWithInvalidType)(Com);
+}
+
+function testForbidsUnknownPropInMapDispatchToProps() {
+  type Props = {
+    strToNumber: string => number
+  };
+
+  // $ExpectError undefined prop notThere
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.strToNumber("123")}</div>;
+    }
+  }
+
+  const mapDispatchToPropsWithUnknownProp = (dispatch: *) => {
+    // $ExpectError undefined prop notThere
+    return {
+      strToNumber: (str: string) => 123,
+      notThere: (num: number) => 123
+    }
+  };
+
+  // $ExpectError notThere is missing in Props
+  connect(null, mapDispatchToPropsWithUnknownProp)(Com);
+}
+
+function testAllowsKnownPropInMapDispatchToPropsObject() {
+  type Props = {
+    onChange: string => mixed
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div onClick={() => this.props.onChange("123")}>Call</div>;
+    }
+  }
+
+  const mapDispatchToProps = {
+    onChange: (str: string) => ({ action: 'CHANGE', payload: str })
+  };
+
+  connect(null, mapDispatchToProps)(Com);
+}
+
+function testForbidsInvalidTypeInMapDispatchToPropsObject() {
+  type Props = {
+    strToNumber: string => number
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.strToNumber("123")}</div>;
+    }
+  }
+
+  const mapDispatchToPropsWithInvalidType = {
+    strToNumber: (num: number) => 123
+  };
+
+  // $ExpectError string is incompatible with number
+  connect(null, mapDispatchToPropsWithInvalidType)(Com);
+}
+
+function testForbidsUnknownPropInMapDispatchToPropsObject() {
+  type Props = {
+    strToNumber: string => number
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.strToNumber("123")}</div>;
+    }
+  }
+
+  const mapDispatchToPropsWithUnknownProp = {
+    strToNumber: (str: string) => 123,
+    notThere: (num: number) => 123
+  };
+
+  // $ExpectError notThere is missing in Props
+  connect(null, mapDispatchToPropsWithUnknownProp)(Com);
+}
+
+function testAllowsKnownPropsInMergeProps() {
+  type Props = {
+    str: string,
+    strToNumber: string => number
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str} {this.props.strToNumber("123")}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToProps = (state: State) => {
+    return {
+      // Allows arbitrary props in this case
+      strForMerge: state.str
+    }
+  };
+
+  const mapDispatchToProps = (dispatch: *) => {
+    return {
+      // Allows arbitrary props in this case
+      strToNumberForMerge: (str: string) => 123
+    }
+  };
+
+  const mergeProps = function(stateProps, dispatchProps) {
+    return {
+      str: stateProps.strForMerge,
+      strToNumber: dispatchProps.strToNumberForMerge
+    }
+  }
+
+  connect(mapStateToProps, mapDispatchToProps, mergeProps)(Com);
+}
+
+function testForbidsInvalidTypeInMergeProps() {
+  type Props = {
+    // $ExpectError string is incompatible with number
+    str: string,
+    strToNumber: string => number
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str} {this.props.strToNumber("123")}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToProps = (state: State) => {
+    return {
+      // Allows arbitrary props in this case
+      strForMerge: state.str
+    }
+  };
+
+  const mapDispatchToProps = (dispatch: *) => {
+    return {
+      // Allows arbitrary props in this case
+      strToNumberForMerge: (str: string) => 123
+    }
+  };
+
+  const mergePropsWithInvalidType = function(stateProps, dispatchProps) {
+    // $ExpectError string is incompatible with number
+    return {
+      str: 123,
+      strToNumber: dispatchProps.strToNumberForMerge,
+    }
+  }
+
+  // $ExpectError string is incompatible with number
+  connect(mapStateToProps, mapDispatchToProps, mergePropsWithInvalidType)(Com);
+}
+
+function testForbidsUnknownPropsInMergeProps() {
+  type Props = {
+    str: string,
+    strToNumber: string => number
+  };
+
+  // $ExpectError undefined prop notThere
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str} {this.props.strToNumber("123")}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToProps = (state: State) => {
+    return {
+      // Allows arbitrary props in this case
+      strForMerge: state.str
+    }
+  };
+
+  const mapDispatchToProps = (dispatch: *) => {
+    return {
+      // Allows arbitrary props in this case
+      strToNumberForMerge: (str: string) => 123
+    }
+  };
+
+  const mergePropsWithUnknownProp = function(stateProps, dispatchProps) {
+    // $ExpectError undefined prop notThere
+    return {
+      str: stateProps.strForMerge,
+      strToNumber: dispatchProps.strToNumberForMerge,
+      notThere: 3
+    }
+  }
+
+  // $ExpectError notThere is missing in Props
+  connect(mapStateToProps, mapDispatchToProps, mergePropsWithUnknownProp)(Com);
+}
