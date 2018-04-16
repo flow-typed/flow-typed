@@ -1,25 +1,22 @@
 // @flow
+import { describe, it } from 'flow-typed-test';
 import algoliasearchImport from 'algoliasearch';
 
-function syncImportTests() {
-  const searchIndex = algoliasearchImport('', '').initIndex('');
-  searchIndex.search('test').then(result => console.warn(result.hits));
-  // $ExpectError
-  searchIndex.search('test').nonPromiseProperty;
-}
+describe('algoliasearch', () => {
+  it('works with `require`', () => {
+    const algoliasearch = require('algoliasearch');
+    const searchIndex = algoliasearch('', '').initIndex('');
+    searchIndex.search('test').then(result => result.hits);
+  });
 
-function requireTests() {
-  const algoliasearch = require('algoliasearch');
-  const searchIndex = algoliasearch('', '').initIndex('');
-  searchIndex.search('test').then(result => console.warn(result.hits));
-  // $ExpectError
-  searchIndex.search('test').nonPromiseProperty;
-}
+  it('works with `import` syntax', () => {
+    const searchIndex = algoliasearchImport('', '').initIndex('');
+    searchIndex.search('test').then(result => result.hits);
+  });
 
-async function asyncImportTests() {
-  const algoliasearch = await import('algoliasearch');
-  const searchIndex = algoliasearch('', '').initIndex('');
-  searchIndex.search('test').then(result => console.warn(result.hits));
-  // $ExpectError
-  searchIndex.search('test').nonPromiseProperty;
-}
+  it('works with `await import` syntax', async () => {
+    const algoliasearch = await import('algoliasearch');
+    const searchIndex = algoliasearch('', '').initIndex('');
+    searchIndex.search('test').then(result => result.hits);
+  });
+});
