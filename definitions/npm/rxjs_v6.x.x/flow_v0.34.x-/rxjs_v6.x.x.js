@@ -600,29 +600,26 @@ declare module 'rxjs/observable/fromPromise' {
 }
 declare module 'rxjs/observable/fromEvent' {
   declare module.exports: {
-    fromEvent<+T>(
+    fromEvent: (<+T>(
       element: any,
       eventName: string,
       ...none: Array<void>
-    ): rxjs$Observable<T>;
-    fromEvent<+T>(
+    ) => rxjs$Observable<T>) & (<+T>(
       element: any,
       eventName: string,
       options: rxjs$EventListenerOptions,
       ...none: Array<void>
-    ): rxjs$Observable<T>;
-    fromEvent<+T>(
+    ) => rxjs$Observable<T>) & (<+T>(
       element: any,
       eventName: string,
       selector: () => T,
       ...none: Array<void>
-    ): rxjs$Observable<T>;
-    fromEvent<+T>(
+    ) => rxjs$Observable<T>) & (<+T>(
       element: any,
       eventName: string,
       options: rxjs$EventListenerOptions,
       selector: () => T
-    ): rxjs$Observable<T>;
+    ) => rxjs$Observable<T>);
   }
 }
 declare module 'rxjs/observable/fromEventPattern' {
@@ -985,17 +982,17 @@ declare module "rxjs/operators" {
       predicate?: (value: T, index: number, source: rxjs$Observable<T>) => boolean
     ): rxjs$Observable<T> => rxjs$Observable<T>;
 
-    groupBy<+T, K>(
+    groupBy: (<+T, K>(
       keySelector: (value: T) => K,
       _: void
-    ): rxjs$Observable<T> => rxjs$Observable<rxjs$GroupedObservable<K, T>>;
-    groupBy<+T, K, V>(
+    ) => rxjs$Observable<T> => rxjs$Observable<rxjs$GroupedObservable<K, T>>) &
+    (<+T, K, V>(
       keySelector: (value: T) => K,
       elementSelector: (value: T) => V,
       durationSelector?: (
         grouped: rxjs$GroupedObservable<K, V>
       ) => rxjs$Observable<any>
-    ): rxjs$Observable<T> => rxjs$Observable<rxjs$GroupedObservable<K, V>>;
+    ) => rxjs$Observable<T> => rxjs$Observable<rxjs$GroupedObservable<K, V>>);
 
     ignoreElements<+T, U>(): rxjs$Observable<T> => rxjs$Observable<U>;
 
@@ -1051,7 +1048,7 @@ declare module "rxjs/operators" {
       concurrent?: number
     ): rxjs$Observable<T> => rxjs$Observable<V>;
 
-    switchMap<+T, U, V>(
+    switchMap: (<+T, U, V>(
       project: (value: T, index: number) => rxjs$ObservableInput<U>,
       resultSelector: (
         outerValue: T,
@@ -1059,10 +1056,10 @@ declare module "rxjs/operators" {
         outerIndex: number,
         innerIndex: number
       ) => V
-    ): rxjs$Observable<T> => rxjs$Observable<V>;
-    switchMap<+T, U>(
+    ) => rxjs$Observable<T> => rxjs$Observable<V>) &
+    (<+T, U>(
       project: (value: T, index: number) => rxjs$ObservableInput<U>
-    ): rxjs$Observable<T> => rxjs$Observable<U>;
+    ) => rxjs$Observable<T> => rxjs$Observable<U>);
 
     switchMapTo<+T, U>(innerObservable: rxjs$Observable<U>): rxjs$Observable<T> => rxjs$Observable<U>;
 
@@ -1074,11 +1071,11 @@ declare module "rxjs/operators" {
 
     mergeAll<+T, U>(): rxjs$Observable<T> => rxjs$Observable<U>;
 
-    mergeMap<+T, U>(
+    mergeMap: (<+T, U>(
       project: (value: T, index: number) => rxjs$ObservableInput<U>,
       concurrency?: number
-    ): rxjs$Observable<T> => rxjs$Observable<U>;
-    mergeMap<+T, U, V>(
+    ) => rxjs$Observable<T> => rxjs$Observable<U>) &
+    (<+T, U, V>(
       project: (value: T, index: number) => rxjs$ObservableInput<U>,
       resultSelector: (
         outerValue: T,
@@ -1087,7 +1084,7 @@ declare module "rxjs/operators" {
         innerIndex: number
       ) => V,
       concurrency?: number
-    ): rxjs$Observable<T> => rxjs$Observable<V>;
+    ) => rxjs$Observable<T> => rxjs$Observable<V>);
 
     mergeMapTo<+T, U>(innerObservable: rxjs$Observable<U>): rxjs$Observable<T> => rxjs$Observable<U>;
 
