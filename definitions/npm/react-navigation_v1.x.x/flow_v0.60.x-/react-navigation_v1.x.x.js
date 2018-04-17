@@ -113,27 +113,27 @@ declare module 'react-navigation' {
   |};
 
   declare export type NavigationReplaceAction = {|
-    +type: 'Navigation/REPLACE',
-    +key: string,
-    +routeName: string,
-    +params?: NavigationParams,
-    +action?: NavigationNavigateAction,
+    type: 'Navigation/REPLACE',
+    key: string,
+    routeName: string,
+    params?: NavigationParams,
+    action?: NavigationNavigateAction,
   |};
   declare export type NavigationPopAction = {|
-    +type: 'Navigation/POP',
-    +n?: number,
-    +immediate?: boolean,
+    type: 'Navigation/POP',
+    n?: number,
+    immediate?: boolean,
   |};
   declare export type NavigationPopToTopAction = {|
-    +type: 'Navigation/POP_TO_TOP',
-    +immediate?: boolean,
+    type: 'Navigation/POP_TO_TOP',
+    immediate?: boolean,
   |};
   declare export type NavigationPushAction = {|
-    +type: 'Navigation/PUSH',
-    +routeName: string,
-    +params?: NavigationParams,
-    +action?: NavigationNavigateAction,
-    +key?: string,
+    type: 'Navigation/PUSH',
+    routeName: string,
+    params?: NavigationParams,
+    action?: NavigationNavigateAction,
+    key?: string,
   |};
 
   declare export type NavigationAction =
