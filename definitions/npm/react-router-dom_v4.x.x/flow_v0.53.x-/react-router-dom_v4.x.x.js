@@ -83,8 +83,9 @@ declare module "react-router-dom" {
   declare export type ContextRouter = {|
     history: RouterHistory,
     location: Location,
-    match: Match
-  |};
+    match: Match,
+    staticContext?: StaticRouterContext,
+|};
 
   declare export type GetUserConfirmation = (
     message: string,
