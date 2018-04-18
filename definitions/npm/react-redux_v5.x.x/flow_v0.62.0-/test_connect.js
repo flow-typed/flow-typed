@@ -15,7 +15,7 @@ function testPassingPropsToConnectedComponent() {
   type InputProps = {
     forMapStateToProps: string
   };
-  const mapStateToProps = (state: State, props: InputProps) => {
+  const mapStateToProps: (State, InputProps) => * = (state: State, props: InputProps) => {
     return {
       fromStateToProps: 'str' + state.a
     }
@@ -52,7 +52,7 @@ function testPassingPropsToConnectedComponentWithMapStateToPropsFactory() {
   type InputProps = {
     forMapStateToProps: string
   };
-  const mapStateToProps = () => (state: State, props: InputProps) => {
+  const mapStateToProps: () => (State, InputProps) => * = () => (state: State, props: InputProps) => {
     return {
       fromStateToProps: 'str' + state.a
     }
@@ -85,7 +85,7 @@ function doesNotRequireDefinedComponentToTypeCheck1case() {
     return <span>{stringProp}</span>;
   };
 
-  const mapStateToProps = (state: {}) => ({
+  const mapStateToProps: (*, *) => * = (state: {}) => ({
     // $ExpectError wrong type for stringProp
     stringProp: false,
   });
@@ -102,7 +102,7 @@ function doesNotRequireDefinedComponentToTypeCheck2case() {
     return <span>{numProp}</span>;
   };
 
-  const mapDispatchToProps = () => ({
+  const mapDispatchToProps: (*, *) => * = () => ({
     // $ExpectError wrong type for numProp
     numProp: false,
   });
@@ -120,12 +120,12 @@ function doesNotRequireDefinedComponentToTypeCheck3case() {
     return <span>{stringProp}</span>;
   };
 
-  const mapStateToProps = (state: {}) => ({
+  const mapStateToProps: (*, *) => * = (state: {}) => ({
     // $ExpectError wrong type for stringProp
     stringProp: false,
   });
 
-  const mapDispatchToProps = () => ({
+  const mapDispatchToProps: (*, *) => * = () => ({
     // $ExpectError wrong type for numProp
     numProp: false,
   });
@@ -142,7 +142,7 @@ function doesNotRequireDefinedComponentToTypeCheck4case() {
     return <span>{stringProp}</span>;
   };
 
-  const mapStateToProps = (state: {}) => ({
+  const mapStateToProps: (*, *) => * = (state: {}) => ({
     // $ExpectError wrong type for stringProp
     stringProp: false,
   });
@@ -159,8 +159,8 @@ function doesNotRequireDefinedComponentToTypeCheck5case() {
     return <span>{stringProp}</span>;
   };
 
-  const mapStateToProps = () => ({});
-  const mapDispatchToProps = () => ({});
+  const mapStateToProps: (*, *) => * = () => ({});
+  const mapDispatchToProps: (*, *) => * = () => ({});
 
   const mergeProps = () => ({
     // $ExpectError wrong type for stringProp
@@ -189,7 +189,7 @@ function testExactProps() {
     passthrough: number,
   |};
 
-  const mapStateToProps = (state: State, props: InputProps) => {
+  const mapStateToProps: (State, InputProps) => * = (state: State, props: InputProps) => {
     return {
       fromStateToProps: 'str' + state.a
     }
@@ -217,7 +217,7 @@ function testWithStatelessFunctionalComponent() {
   type InputProps = {
     forMapStateToProps: string
   };
-  const mapStateToProps = (state: State, props: InputProps) => {
+  const mapStateToProps: (State, InputProps) => * = (state: State, props: InputProps) => {
     return {
       fromStateToProps: 'str' + state.a
     }
@@ -246,7 +246,7 @@ function testMapStateToPropsDoesNotNeedProps() {
   }
 
   type State = {a: string}
-  const mapStateToProps = (state: State) => {
+  const mapStateToProps: (*, *) => * = (state: State) => {
     return {
       fromStateToProps: state.a
     }
@@ -276,13 +276,13 @@ function testMapDispatchToProps() {
 
   type State = {a: number}
   type MapStateToPropsProps = {forMapStateToProps: string}
-  const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
+  const mapStateToProps: (State, MapStateToPropsProps) => * = (state: State, props: MapStateToPropsProps) => {
     return {
       fromMapStateToProps: 'str' + state.a
     }
   }
   type MapDispatchToPropsProps = {forMapDispatchToProps: string}
-  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps: (*, MapDispatchToPropsProps) => * = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
   const Connected = connect(mapStateToProps, mapDispatchToProps)(Com);
@@ -313,13 +313,13 @@ function testMapDispatchToProps() {
 
   type State = { a: number }
   type MapStateToPropsProps = { forMapStateToProps: string }
-  const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
+  const mapStateToProps: (State, MapStateToPropsProps) => * = (state: State, props: MapStateToPropsProps) => {
     return {
       fromMapStateToProps: 'str' + state.a
     }
   }
   type MapDispatchToPropsProps = { forMapDispatchToProps: string }
-  const mapDispatchToProps = () => (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps: () => (*, MapDispatchToPropsProps) => * = () => (dispatch: *, ownProps: MapDispatchToPropsProps) => {
     return { fromMapDispatchToProps: ownProps.forMapDispatchToProps }
   }
   const Connected = connect(mapStateToProps, mapDispatchToProps)(Com);
@@ -347,7 +347,7 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
   }
 
   type MapDispatchToPropsProps = {forMapDispatchToProps: string};
-  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps: (*, MapDispatchToPropsProps) => * = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
   const Connected = connect(null, mapDispatchToProps)(Com);
@@ -409,7 +409,7 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
   }
   type State = {a: number}
   type MapStateToPropsProps = {forMapStateToProps: string}
-  const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
+  const mapStateToProps: (State, MapStateToPropsProps) => * = (state: State, props: MapStateToPropsProps) => {
     return {
       fromMapStateToProps: state.a
     }
@@ -445,13 +445,13 @@ function testMergeProps() {
 
   type State = {a: number}
   type MapStateToPropsProps = {forMapStateToProps: string}
-  const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
+  const mapStateToProps: (State, MapStateToPropsProps) => * = (state: State, props: MapStateToPropsProps) => {
     return {
       fromMapStateToProps: state.a
     }
   }
   type MapDispatchToPropsProps = {forMapDispatchToProps: string}
-  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps: (*, MapDispatchToPropsProps) => * = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
   const mergeProps = (stateProps, dispatchProps, ownProps: {forMergeProps: number}) => {
