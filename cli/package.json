@@ -24,10 +24,10 @@
     "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
   "dependencies": {
+    "@octokit/rest": "^15.2.6",
     "babel-polyfill": "^6.26.0",
     "colors": "^1.1.2",
     "fs-extra": "^5.0.0",
-    "github": "0.2.4",
     "glob": "^7.1.2",
     "got": "^7.1.0",
     "md5": "^2.1.0",

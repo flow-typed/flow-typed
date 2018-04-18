@@ -107,25 +107,14 @@ async function getOrderedFlowBinVersions(
     const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
 
     let page = 0;
-    const apiPayload = await new Promise((res, rej) => {
-      GH_CLIENT.releases.listReleases(
-        {
-          owner: 'facebook',
-          repo: 'flow',
-          page: page++,
-          per_page: QUERY_PAGE_SIZE,
-        },
-        (err, result) => {
-          if (err) {
-            rej(err);
-          } else {
-            res(result);
-          }
-        },
-      );
+    const apiPayload = await GH_CLIENT.repos.getReleases({
+      owner: 'facebook',
+      repo: 'flow',
+      page: page++,
+      per_page: QUERY_PAGE_SIZE,
     });
 
-    const flowBins = apiPayload
+    const flowBins = apiPayload.data
       .filter(rel => {
         // Temporary fix for https://github.com/facebook/flow/issues/5922
         if (rel.tag_name === 'v0.67.0') {
