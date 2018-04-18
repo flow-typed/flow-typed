@@ -30,8 +30,12 @@ declare module "react-redux" {
   */
 
   declare type MapStateToProps<S: Object, SP: Object, RSP: Object> = (state: S, props: SP) => RSP;
+  declare type MapStateToPropsFactory<S, SP, RSP> = () => MapStateToProps<S, SP, RSP>;
+  declare type MapStateToPropsUnion<S, SP, RSP> = MapStateToPropsFactory<S, SP, RSP> | MapStateToProps<S, SP, RSP>;
 
   declare type MapDispatchToProps<A, OP: Object, RDP: Object> = (dispatch: Dispatch<A>, ownProps: OP) => RDP;
+  declare type MapDispatchToPropsFactory<A, OP, RDP> = () => MapDispatchToProps<A, OP, RDP>;
+  declare type MapDispatchToPropsUnion<A, OP, RDP> = MapDispatchToPropsFactory<A, OP, RDP> | MapDispatchToProps<A, OP, RDP>;
 
   declare type MergeProps<SP: Object, DP: Object, MP: Object, RMP: Object> = (
     stateProps: SP,
@@ -58,7 +62,7 @@ declare module "react-redux" {
     RSP: Object,
     CP: $Diff<OmitDispatch<ElementConfig<Com>>, RSP>
     >(
-    mapStateToProps: MapStateToProps<S, DP, RSP>,
+    mapStateToProps: MapStateToPropsUnion<S, DP, RSP>,
     mapDispatchToProps?: null
   ): (component: Com) => ComponentType<CP & DP>;
 
@@ -77,8 +81,8 @@ declare module "react-redux" {
     RDP: Object,
     CP: $Diff<$Diff<ElementConfig<Com>, RSP>, RDP>
     >(
-    mapStateToProps: MapStateToProps<S, SP, RSP>,
-    mapDispatchToProps: MapDispatchToProps<A, DP, RDP>
+    mapStateToProps: MapStateToPropsUnion<S, SP, RSP>,
+    mapDispatchToProps: MapDispatchToPropsUnion<A, DP, RDP>
   ): (component: Com) => ComponentType<CP & SP & DP>;
 
   declare export function connect<
@@ -90,7 +94,7 @@ declare module "react-redux" {
     CP: $Diff<ElementConfig<Com>, DP>
     >(
     mapStateToProps?: null,
-    mapDispatchToProps: MapDispatchToProps<A, OP, DP>
+    mapDispatchToProps: MapDispatchToPropsUnion<A, OP, DP>
   ): (Com) => ComponentType<CP & OP>;
 
   declare export function connect<
@@ -109,7 +113,7 @@ declare module "react-redux" {
     MDP: Object,
     CP: $Diff<ElementConfig<Com>, RSP>
     >(
-    mapStateToProps: MapStateToProps<S, SP, RSP>,
+    mapStateToProps: MapStateToPropsUnion<S, SP, RSP>,
     mapDispatchToPRops: MDP
   ): (component: Com) => ComponentType<$Diff<CP, MDP> & SP>;
 
@@ -125,8 +129,8 @@ declare module "react-redux" {
     RMP: Object,
     CP: $Diff<ElementConfig<Com>, RMP>
     >(
-    mapStateToProps: MapStateToProps<S, SP, RSP>,
-    mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP>,
+    mapStateToProps: MapStateToPropsUnion<S, SP, RSP>,
+    mapDispatchToProps: ?MapDispatchToPropsUnion<A, DP, RDP>,
     mergeProps: MergeProps<RSP, RDP, MP, RMP>
   ): (component: Com) => ComponentType<CP & SP & DP & MP>;
 
@@ -140,8 +144,8 @@ declare module "react-redux" {
     MP: Object,
     RMP: Object
     >(
-    mapStateToProps: ?MapStateToProps<S, SP, RSP>,
-    mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP>,
+    mapStateToProps: ?MapStateToPropsUnion<S, SP, RSP>,
+    mapDispatchToProps: ?MapDispatchToPropsUnion<A, DP, RDP>,
     mergeProps: ?MergeProps<RSP, RDP, MP, RMP>,
     options: ConnectOptions<S, SP & DP & MP, RSP, RMP>
   ): (component: Com) => ComponentType<$Diff<ElementConfig<Com>, RMP> & SP & DP & MP>;
