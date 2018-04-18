@@ -3,6 +3,16 @@ import React from 'react';
 import SplitterLayout from 'react-splitter-layout';
 
 it('checks it takes at least 1 pane', () => {
+  /* react-splitter-layout accepts several children but will render only the
+   * first 2. When there's only one child it will render this child without the
+   * splitter element. It also accepts `undefined` or `null` as child, and in
+   * this case it will render only the other child. Because this is a licit
+   * usage we test it here to prevent future regressions, even if the libdef as
+   * it's currently defined doesn't special-case these values.
+   *
+   * In the future we might want to stricten the libdef to accept only 2
+   * children as it's likely a mistake to accept more than 2.
+   */
   let element = (
     <SplitterLayout>
       <div>pane 1</div>
@@ -30,7 +40,6 @@ it('checks it takes at least 1 pane', () => {
     </SplitterLayout>
   )
 
-  // Note: react-splitter-layout will render only the first 2
   element = (
     <SplitterLayout>
       <div>pane 1</div>
