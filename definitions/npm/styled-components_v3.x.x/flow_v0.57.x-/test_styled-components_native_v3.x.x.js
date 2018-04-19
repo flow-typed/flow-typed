@@ -16,6 +16,9 @@ import type {
   ReactComponentUnion as NativeReactComponentUnion,
   ReactComponentIntersection as NativeReactComponentIntersection,
 } from 'styled-components'
+import styled from 'styled-components';
+
+const Wrapper = styled.View``;
 
 const NativeTitleTaggedTemplateLiteral: NativeReactComponentStyledTaggedTemplateLiteral<*> = nativeStyled.Text;
 
