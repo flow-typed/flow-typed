@@ -103,6 +103,8 @@ declare module "formik" {
     touched: FormikTouched<Values>,
     /** whether the form is currently submitting */
     isSubmitting: boolean,
+    /** whether the form is valid */
+    isValid: boolean,
     /** Top level status state, in case you need it */
     status?: any,
     /** Number of times user tried to submit the form */
