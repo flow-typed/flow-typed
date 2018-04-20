@@ -29,12 +29,12 @@ declare module "react-redux" {
   Com = React Component
   */
 
-  declare type MapStateToProps<S: Object, SP: Object, RSP: Object> = (state: S, props: SP) => RSP;
-  declare type MapStateToPropsFactory<S, SP, RSP> = () => MapStateToProps<S, SP, RSP>;
+  declare export type MapStateToProps<S: Object, SP: Object, RSP: Object> = (state: S, props: SP) => RSP;
+  declare export type MapStateToPropsFactory<S, SP, RSP> = () => MapStateToProps<S, SP, RSP>;
   declare type MapStateToPropsUnion<S, SP, RSP> = MapStateToPropsFactory<S, SP, RSP> | MapStateToProps<S, SP, RSP>;
 
-  declare type MapDispatchToProps<A, OP: Object, RDP: Object> = (dispatch: Dispatch<A>, ownProps: OP) => RDP;
-  declare type MapDispatchToPropsFactory<A, OP, RDP> = () => MapDispatchToProps<A, OP, RDP>;
+  declare export type MapDispatchToProps<A, OP: Object, RDP: Object> = (dispatch: Dispatch<A>, ownProps: OP) => RDP;
+  declare export type MapDispatchToPropsFactory<A, OP, RDP> = () => MapDispatchToProps<A, OP, RDP>;
   declare type MapDispatchToPropsUnion<A, OP, RDP> = MapDispatchToPropsFactory<A, OP, RDP> | MapDispatchToProps<A, OP, RDP>;
 
   declare type MergeProps<SP: Object, DP: Object, MP: Object, RMP: Object> = (
