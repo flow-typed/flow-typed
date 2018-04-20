@@ -103,8 +103,6 @@ declare module "formik" {
     touched: FormikTouched<Values>,
     /** whether the form is currently submitting */
     isSubmitting: boolean,
-    /** whether the form is valid */
-    isValid: boolean,
     /** Top level status state, in case you need it */
     status?: any,
     /** Number of times user tried to submit the form */
@@ -116,11 +114,11 @@ declare module "formik" {
    */
   declare export type FormikComputedProps<Values> = {
     /** True if any input has been touched. False otherwise. */
-    -dirty: boolean,
+    +dirty: boolean,
     /** Result of isInitiallyValid on mount, then whether true values pass validation. */
-    -isValid: boolean,
+    +isValid: boolean,
     /** initialValues */
-    -initialValues: Values
+    +initialValues: Values
   };
 
   /**
