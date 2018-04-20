@@ -114,11 +114,11 @@ declare module "formik" {
    */
   declare export type FormikComputedProps<Values> = {
     /** True if any input has been touched. False otherwise. */
-    -dirty: boolean,
+    +dirty: boolean,
     /** Result of isInitiallyValid on mount, then whether true values pass validation. */
-    -isValid: boolean,
+    +isValid: boolean,
     /** initialValues */
-    -initialValues: Values
+    +initialValues: Values
   };
 
   /**
