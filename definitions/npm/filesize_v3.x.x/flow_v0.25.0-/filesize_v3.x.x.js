@@ -10,7 +10,8 @@ declare module "filesize" {
     spacer?: string,
     standard?: string,
     symbols?: Object,
-    unix?: boolean
+    unix?: boolean,
+    partial: (bytes: number | string, options?: Options) => string,
   };
 
   declare module.exports: {
