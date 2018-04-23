@@ -1126,7 +1126,7 @@ declare module "lodash" {
     functions(object?: ?Object): Array<string>;
     functionsIn(object?: ?Object): Array<string>;
     get(
-      object?: ?Object | ?$ReadOnlyArray<any>,
+      object?: ?Object | ?$ReadOnlyArray<any> | void | null,
       path?: ?$ReadOnlyArray<string> | string,
       defaultValue?: any
     ): any;
@@ -2764,8 +2764,8 @@ declare module "lodash/fp" {
     forOwnRight(iteratee: OIteratee<*>, object: Object): Object;
     functions(object: Object): Array<string>;
     functionsIn(object: Object): Array<string>;
-    get(path: $ReadOnlyArray<string> | string): (object: Object | $ReadOnlyArray<any>) => any;
-    get(path: $ReadOnlyArray<string> | string, object: Object | $ReadOnlyArray<any>): any;
+    get(path: $ReadOnlyArray<string> | string): (object: Object | $ReadOnlyArray<any> | void | null) => any;
+    get(path: $ReadOnlyArray<string> | string, object: Object | $ReadOnlyArray<any> | void | null): any;
     prop(path: Array<string> | string): (object: Object | Array<any>) => any;
     prop(path: Array<string> | string, object: Object | Array<any>): any;
     path(path: Array<string> | string): (object: Object | Array<any>) => any;
@@ -2775,15 +2775,15 @@ declare module "lodash/fp" {
     ): ((
       path: Array<string> | string
     ) => (object: Object | Array<any>) => any) &
-      ((path: Array<string> | string, object: Object | Array<any>) => any);
+      ((path: Array<string> | string, object: Object | $ReadOnlyArray<any> | void | null) => any);
     getOr(
       defaultValue: any,
       path: Array<string> | string
-    ): (object: Object | Array<any>) => any;
+    ): (object: Object | $ReadOnlyArray<any> | void | null) => any;
     getOr(
       defaultValue: any,
       path: Array<string> | string,
-      object: Object | Array<any>
+      object: Object | $ReadOnlyArray<any> | void | null
     ): any;
     propOr(
       defaultValue: any
