@@ -10,6 +10,7 @@ moment.unix("1234");
 // Display
 const A: Date = moment().toDate();
 const x: string = moment().toISOString();
+const y: string = moment().toISOString(true);
 
 // Get + Set
 // $ExpectError
@@ -53,6 +54,8 @@ moment().calendar(null, {
   // $ExpectError (>=0.56.0)
   sameElse: () => {}
 });
+// $ExpectError
+const y: string = moment().toISOString('foo');
 
 // UTC offsets
 let n: number;
