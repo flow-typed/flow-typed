@@ -8,5 +8,7 @@ const supportsColor: boolean = chalk.supportsColor;
 const colorfulString = chalk.red.bgGreen("a soon to be colorful string");
 const supportsDim = chalk.dim("oh to be dimmed");
 
+const supportsStringTemplate = chalk`{red string template} done`;
+
 // $ExpectError
 const enabledString: string = chalk.enabled;
