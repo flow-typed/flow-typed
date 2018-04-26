@@ -1,18 +1,21 @@
 declare module 'react-toggled' {
   declare export type ToggledProps = {
     on: boolean,
-    getTogglerProps(): {
+    getTogglerProps<P>(props?: P): {
+      ...P,
       'aria-expanded': boolean,
       tabIndex: 0,
       onClick(): void
     },
-    getInputTogglerProps(): {
+    getInputTogglerProps<P>(props?: P): {
+      ...P,
       'aria-expanded': boolean,
       tabIndex: 0,
       onKeyUp(): void,
       onClick(): void
     },
-    getElementTogglerProps(): {
+    getElementTogglerProps<P>(props?: P): {
+      ...P,
       'aria-expanded': boolean,
       tabIndex: 0,
       onKeyUp(): void,
@@ -27,7 +30,7 @@ declare module 'react-toggled' {
     defaultOn?: boolean,
     onToggle?: (on: boolean, p: ToggledProps) => void,
     on?: boolean,
-    children: (ToggledProps) => React$Node | React$Node
+    children: React$Node | ((ToggledProps) => React$Node)
   };
 
   declare module.exports: React$ComponentType<ReactToggledProps>;
