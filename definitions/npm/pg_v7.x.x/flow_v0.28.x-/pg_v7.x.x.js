@@ -212,7 +212,7 @@ declare module pg {
    * ToDo: should find a better way.
   */
   declare class Query extends Promise<ResultSet> {
-    then<U>( null | onFulfill?: (value: ResultSet) => Promise<U> | U,
+    then<U>( onFulfill?: null | (value: ResultSet) => Promise<U> | U,
       onReject?: null | (error: PG_ERROR) => Promise<U> | U
     ): Promise<U>;
     // Because then and catch return a Promise,
