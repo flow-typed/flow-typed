@@ -251,107 +251,66 @@ declare interface TestCafe$NativeDialogHistoryItem {
     url: string
 }
 
+declare type TestCafe$SelectorParameter =
+  string |
+  TestCafe$SelectorFn |
+  TestCafe$NodeSnapshot |
+  TestCafe$SelectorPromise |
+  (...args: any[]) => null | Node | Node[] | NodeList<*> | HTMLCollection<*>;
+
 declare interface TestCafe$TestController {
     ctx: { [key: string]: any },
     fixtureCtx: { [key: string]: any },
 
     click(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
+        selector: TestCafe$SelectorParameter,
         options?: TestCafe$ClickActionOptions): TestCafe$TestControllerPromise,
 
     rightClick(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
+        selector: TestCafe$SelectorParameter,
         options?: TestCafe$ClickActionOptions): TestCafe$TestControllerPromise,
 
     doubleClick(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
+        selector: TestCafe$SelectorParameter,
         options?: TestCafe$ClickActionOptions): TestCafe$TestControllerPromise,
 
     hover(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
+        selector: TestCafe$SelectorParameter,
         options?: TestCafe$MouseActionOptions): TestCafe$TestControllerPromise,
 
     drag(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
+        selector: TestCafe$SelectorParameter,
         dragOffsetX: number,
         dragOffsetY: number,
         options?: TestCafe$MouseActionOptions): TestCafe$TestControllerPromise,
 
     dragToElement(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
-        destinationSelector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
+        selector: TestCafe$SelectorParameter,
+        destinationSelector: TestCafe$SelectorParameter,
         options?: TestCafe$MouseActionOptions): TestCafe$TestControllerPromise,
 
     typeText(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
+        selector: TestCafe$SelectorParameter,
         text: string,
         options?: TypeActionOptions): TestCafe$TestControllerPromise,
 
     selectText(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
-        startPos: number,
-        endPos: number,
+        selector: TestCafe$SelectorParameter,
+        startPos?: number,
+        endPos?: number,
         options?: TestCafe$ActionOptions): TestCafe$TestControllerPromise,
 
     selectTextAreaContent(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
-        startLine: number,
-        startPos: number,
-        endLine: number,
-        endPos: number,
+        selector: TestCafe$SelectorParameter,
+        startLine?: number,
+        startPos?: number,
+        endLine?: number,
+        endPos?: number,
         options?: TestCafe$ActionOptions): TestCafe$TestControllerPromise,
 
     selectEditableContent(
-        startSelector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
-        endSelector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
+        startSelector: TestCafe$SelectorParameter,
+        endSelector: TestCafe$SelectorParameter,
         options?: TestCafe$ActionOptions): TestCafe$TestControllerPromise,
 
     pressKey(keys: string, options?: TestCafe$ActionOptions): TestCafe$TestControllerPromise,
@@ -361,19 +320,10 @@ declare interface TestCafe$TestController {
     navigateTo(url: string): TestCafe$TestControllerPromise,
 
     setFilesToUpload(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>),
+        selector: TestCafe$SelectorParameter,
         filePath: string | string[]): TestCafe$TestControllerPromise,
 
-    clearUpload(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>)): TestCafe$TestControllerPromise,
+    clearUpload(selector: TestCafe$SelectorParameter): TestCafe$TestControllerPromise,
 
     takeScreenshot(path?: string): TestCafe$TestControllerPromise,
 
@@ -383,12 +333,7 @@ declare interface TestCafe$TestController {
 
     maximizeWindow(): TestCafe$TestControllerPromise,
 
-    switchToIframe(
-        selector: string |
-        TestCafe$SelectorFn |
-        TestCafe$NodeSnapshot |
-        TestCafe$SelectorPromise |
-        ((...args: any[]) => Node | Node[] | NodeList<*> | HTMLCollection<*>)): TestCafe$TestControllerPromise,
+    switchToIframe(selector: TestCafe$SelectorParameter): TestCafe$TestControllerPromise,
 
     switchToMainWindow(): TestCafe$TestControllerPromise,
 
@@ -643,8 +588,7 @@ declare module 'testcafe' {
     declare module.exports: {
         (hostname: string, port1: number, port2: number): Promise<TestCafe>,
 
-        Selector(init: string | ((...args: any[]) => null | Node | Node[] | NodeList<*> | HTMLCollection<*>) | TestCafe$SelectorFn | TestCafe$NodeSnapshot | TestCafe$SelectorPromise,
-                                     options?: TestCafe$SelectorOptions): TestCafe$SelectorFn,
+        Selector(init: TestCafe$SelectorParameter, options?: TestCafe$SelectorOptions): TestCafe$SelectorFn,
         ClientFunction(fn: Function, options?: TestCafe$ClientFunctionOptions): TestCafe$ClientFunctionFn,
 
         Role: TestCafe$RoleFn,

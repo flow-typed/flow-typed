@@ -79,7 +79,7 @@ declare module 'next-routes' {
     add(route: Route | string): Routes;
     add(pattern: string, page: string): Routes;
     add(name: string, pattern: string, page: string): Routes;
-    getRequestHandler(app: Object, customHandler: (any) => any): Function;
+    getRequestHandler(app: Object, customHandler?: (any) => any): Function;
     pushRoute(
       route: string,
       params?: { [name: string]: string },

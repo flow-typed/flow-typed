@@ -44,6 +44,10 @@ foo.doStuff = jest.fn().mockReturnValueOnce(10);
 // $ExpectError Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockReturnValueOnce("10");
 
+foo.doStuff = jest.fn().mockName("10");
+// $ExpectError mockName expects a string, not a number
+foo.doStuff = jest.fn().mockName(10);
+
 const mockedDoStuff = (foo.doStuff = jest.fn().mockImplementation(str => 10));
 mockedDoStuff.mock.calls[0][0].indexOf("a");
 // $ExpectError function `doesntExist` not found in string.
@@ -188,7 +192,14 @@ jest.setTimeout(1000);
 jest.runTimersToTime(3000);
 jest.advanceTimersByTime(3000);
 
-expect.addSnapshotSerializer(JSON.stringify);
+expect.addSnapshotSerializer({
+  print: (val, serialize) => `Foo: ${serialize(val.foo)}`,
+  test: val => val && val.hasOwnProperty('foo')
+})
+
+// $ExpectError
+expect.addSnapshotSerializer(JSON.stringify)
+
 expect.assertions(1);
 expect.hasAssertions();
 
@@ -317,3 +328,25 @@ expect(wrapper).toMatchSelector("span");
 expect(wrapper).toMatchSelector();
 // $ExpectError
 expect(wrapper).toMatchSelector(true);
+
+// dom-testing-library
+{
+  const element = document.createElement('div');
+
+  expect(element).toHaveTextContent('123');
+  // $ExpectError: expected text content should be present
+  expect(element).toHaveTextContent();
+  // $ExpectError: expected text content should be a string
+  expect(element).toHaveTextContent(1);
+
+  expect(element).toBeInTheDOM();
+
+  expect(element).toHaveAttribute('foo');
+  expect(element).toHaveAttribute('foo', 'bar');
+  // $ExpectError: attribute name should be present
+  expect(element).toHaveAttribute();
+  // $ExpectError: attribute name should be a string
+  expect(element).toHaveAttribute(1);
+  // $ExpectError: expected attribute value should be a string
+  expect(element).toHaveAttribute('foo', 1);
+}
