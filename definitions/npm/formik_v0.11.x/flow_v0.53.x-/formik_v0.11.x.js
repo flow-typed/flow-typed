@@ -1,6 +1,6 @@
 declare module "formik" {
   import type { ComponentType } from "react";
-  
+
   declare export type FormikErrors<Values> = {
     [field: $Keys<Values>]: string
   };
@@ -26,11 +26,11 @@ declare module "formik" {
     /** Manually set values object  */
     setValues: (values: Values) => void,
     /** Set value of form field directly */
-    setFieldValue: (field: $Keys<Values>, value: any) => void,
+    setFieldValue: (field: $Keys<Values>, value: any, shouldValidate?: boolean) => void,
     /** Set error message of a form field directly */
     setFieldError: (field: $Keys<Values>, message: string) => void,
     /** Set whether field has been touched directly */
-    setFieldTouched: (field: $Keys<Values>, isTouched?: boolean) => void,
+    setFieldTouched: (field: $Keys<Values>, isTouched?: boolean, shouldValidate?: boolean) => void,
     /** Reset form */
     resetForm: (nextValues?: any) => void,
     /** Submit the form imperatively */
