@@ -2,7 +2,7 @@ declare module 'fantasy-options' {
   declare class OptionType<A> {
     ap(a: this): this,
     map<B>(f: (a: A) => B): OptionType<B>,
-    fold(f: (a: A) => A, g: (...rest: Array<void>) => A): A,
+    fold(f: (a: A) => mixed, g: (...rest: Array<void>) => mixed): mixed,
     chain<B>(f: (a: A) => OptionType<B>): OptionType<B>,
     concat(a: OptionType<A>): this,
     getOrElse(a: A): A,
