@@ -2241,7 +2241,7 @@ declare module "material-ui/Typography/Typography" {
     headlineMapping?: { [key: Type]: string },
     noWrap?: boolean,
     paragraph?: boolean,
-    type?: Type
+    variant?: Type
   }>;
 }
 
