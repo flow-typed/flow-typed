@@ -1,5 +1,6 @@
 // @flow
 import moment from "moment";
+import { describe, it } from 'flow-typed-test';
 
 // Parse
 const m3: moment = moment([123, 123]);
@@ -9,7 +10,18 @@ moment.unix("1234");
 
 // Display
 const A: Date = moment().toDate();
-const x: string = moment().toISOString();
+describe('toISOString', () => {
+  it('should take no parameters', () => {
+    const x: string = moment().toISOString();
+  });
+
+  it('should take a boolean', () => {
+    const y: string = moment().toISOString(true);
+  });
+
+  // $ExpectError - should fail on non-boolean value
+  const y: string = moment().toISOString('foo');
+});
 
 // Get + Set
 // $ExpectError
