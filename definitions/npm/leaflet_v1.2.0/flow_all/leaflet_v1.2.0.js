@@ -1,6 +1,3 @@
-// flow-typed signature: 9eac0d0d9e2129cc3d92d8f4f8c072db
-// flow-typed version: <<STUB>>/leaflet_v1.2.0/flow_v0.69.0
-
 declare module 'leaflet' {
 
   // http://leafletjs.com/reference-1.2.0.html#featuregroup
