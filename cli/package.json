@@ -56,13 +56,18 @@
     "jest": "^20.0.4",
     "prettier": "^1.5.3"
   },
-  "keywords": ["flow", "flowtype"],
+  "keywords": [
+    "flow",
+    "flowtype"
+  ],
   "jest": {
     "name": "flow-typed-cli",
     "modulePathIgnorePatterns": [
       "<rootDir>/dist/.*",
       "<rootDir>/node_modules/.*"
     ],
-    "testPathIgnorePatterns": ["<rootDir>/.*/__[^/]*-fixtures__/.*"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/.*/__[^/]*-fixtures__/.*"
+    ]
   }
 }
