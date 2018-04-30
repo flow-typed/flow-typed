@@ -34,6 +34,18 @@ type $npm$chalk$Style = {
   gray: $npm$chalk$Chain,
   grey: $npm$chalk$Chain,
 
+  // Text 24-bit colors
+  rgb: (r: number, g: number, b: number) => $npm$chalk$Chain,
+  hsl: (h: number, s: number, l: number) => $npm$chalk$Chain,
+  hsv: (h: number, s: number, v: number) => $npm$chalk$Chain,
+  hwb: (h: number, w: number, b: number) => $npm$chalk$Chain,
+  hex: (color: string) => $npm$chalk$Chain,
+  keyword: (color: string) => $npm$chalk$Chain,
+
+  // Text other
+  ansi16: (code: number) => $npm$chalk$Chain,
+  ansi256: (code: number) => $npm$chalk$Chain,
+
   // Background colors
   bgBlack: $npm$chalk$Chain,
   bgBlackBright: $npm$chalk$Chain,
@@ -50,7 +62,23 @@ type $npm$chalk$Style = {
   bgCyan: $npm$chalk$Chain,
   bgCyanBright: $npm$chalk$Chain,
   bgWhite: $npm$chalk$Chain,
-  bgWhiteBright: $npm$chalk$Chain
+  bgWhiteBright: $npm$chalk$Chain,
+
+  // Background 24-bit colors
+  bgRgb: (r: number, g: number, b: number) => $npm$chalk$Chain,
+  bgHsl: (h: number, s: number, l: number) => $npm$chalk$Chain,
+  bgHsv: (h: number, s: number, v: number) => $npm$chalk$Chain,
+  bgHwb: (h: number, w: number, b: number) => $npm$chalk$Chain,
+  bgHex: (color: string) => $npm$chalk$Chain,
+  bgKeyword: (color: string) => $npm$chalk$Chain,
+
+  // Background other
+  bgAnsi16: (code: number) => $npm$chalk$Chain,
+  bgAnsi256: (code: number) => $npm$chalk$Chain,
+
+  // 24-bit color
+  rgb: (r: number, g: number, b: number) => $npm$chalk$Chain,
+  hex: (color: string) => $npm$chalk$Chain
 };
 
 declare module "chalk" {
@@ -85,6 +113,18 @@ declare module "chalk" {
   declare var gray: $npm$chalk$Chain;
   declare var grey: $npm$chalk$Chain;
 
+  // Text 24-bit colors
+  declare var rgb: (r: number, g: number, b: number) => $npm$chalk$Chain;
+  declare var hsl: (h: number, s: number, l: number) => $npm$chalk$Chain;
+  declare var hsv: (h: number, s: number, v: number) => $npm$chalk$Chain;
+  declare var hwb: (h: number, w: number, b: number) => $npm$chalk$Chain;
+  declare var hex: (color: string) => $npm$chalk$Chain;
+  declare var keyword: (color: string) => $npm$chalk$Chain;
+
+  // Text other
+  declare var ansi16: (code: number) => $npm$chalk$Chain;
+  declare var ansi256: (code: number) => $npm$chalk$Chain;
+
   // Background colors
   declare var bgBlack: $npm$chalk$Chain;
   declare var bgBlackBright: $npm$chalk$Chain;
@@ -102,4 +142,21 @@ declare module "chalk" {
   declare var bgCyanBright: $npm$chalk$Chain;
   declare var bgWhite: $npm$chalk$Chain;
   declare var bgWhiteBright: $npm$chalk$Chain;
+
+  // Background 24-bit colors
+  declare var bgRgb: (r: number, g: number, b: number) => $npm$chalk$Chain;
+  declare var bgHsl: (h: number, s: number, l: number) => $npm$chalk$Chain;
+  declare var bgHsv: (h: number, s: number, v: number) => $npm$chalk$Chain;
+  declare var bgHwb: (h: number, w: number, b: number) => $npm$chalk$Chain;
+  declare var bgHex: (color: string) => $npm$chalk$Chain;
+  declare var bgKeyword: (color: string) => $npm$chalk$Chain;
+
+  // Background other
+  declare var bgAnsi16: (code: number) => $npm$chalk$Chain;
+  declare var bgAnsi256: (code: number) => $npm$chalk$Chain;
+
+  // 24-bit color
+  declare var rgb: (r: number, g: number, b: number) => $npm$chalk$Chain;
+  declare var hex: (color: string) => $npm$chalk$Chain;
 }
+
