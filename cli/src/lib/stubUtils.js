@@ -65,6 +65,10 @@ const aliasTemplate = `
 declare module '%s%s' {
   declare module.exports: $Exports<'%s'>;
 }`.trim();
+const guessedModuleStubTemplate = `
+declare module '%s' {
+  declare module.exports: %s;
+}`.trim();
 
 function stubFor(moduleName: string, fileExt?: string): string {
   const moduleStub = format(moduleStubTemplate, moduleName);
@@ -75,6 +79,115 @@ function stubFor(moduleName: string, fileExt?: string): string {
   return moduleStub;
 }
 
+const functionTemplate = '(%s) => any';
+const spaceByI = (i: number): string => '  '.repeat(i);
+const keyTypeTemplate = `  %s: %s,\n`;
+
+function objectToTypedTemplate(
+  obj: mixed,
+  currentDepth: number,
+  maxDepth: number,
+  functionHeader?: string,
+) {
+  const thisDepth = currentDepth + 1;
+
+  let formatedEntries = [];
+  if (functionHeader) {
+    formatedEntries.push(spaceByI(thisDepth + 1) + functionHeader);
+  }
+
+  for (let entrie of Object.entries(obj)) {
+    const toTypeResult = objectToType(
+      entrie[1],
+      maxDepth,
+      thisDepth,
+      thisDepth <= maxDepth,
+    );
+
+    formatedEntries.push(
+      format(
+        `${spaceByI(thisDepth)}${keyTypeTemplate}`,
+        entrie[0],
+        toTypeResult,
+      ),
+    );
+  }
+
+  if (formatedEntries.length > 0) {
+    return `{\n${formatedEntries.join('')}${spaceByI(thisDepth)}}`;
+  } else {
+    return '{}';
+  }
+}
+
+function guessFunctionArguments(fun: Function): string {
+  let raw = fun.toString();
+  let args = raw.slice(raw.indexOf('(') + 1, raw.indexOf(')'));
+  args = args.replace(/ /g, '');
+
+  if (args.length > 0) {
+    args = args
+      .split(',')
+      .map((el: string) => `${el}: any`)
+      .join(', ');
+  }
+
+  return format(functionTemplate, args);
+}
+
+function functionToType(
+  fun: Function,
+  currentDepth: number,
+  maxDepth: number,
+): string {
+  let output = guessFunctionArguments(fun);
+
+  let functionEntries = Object.entries(fun);
+  if (functionEntries.length > 0) {
+    return objectToTypedTemplate(
+      fun,
+      currentDepth,
+      maxDepth,
+      output.length > 0 ? output + ',\n' : undefined,
+    );
+  }
+
+  return output;
+}
+
+function objectToType(
+  obj: mixed,
+  maxDepth: number,
+  currentDepth: number = 0,
+  deep: boolean = true,
+): string {
+  // Every function that depends on objectToTypedTemplate need to check deep first
+  if (deep) {
+    if (typeof obj === 'object')
+      return objectToTypedTemplate(obj, currentDepth, maxDepth);
+    if (typeof obj === 'function')
+      return functionToType(obj, currentDepth, maxDepth);
+  }
+
+  if (typeof obj === 'object') return 'any';
+  if (typeof obj === 'function') return guessFunctionArguments(obj);
+  return typeof obj;
+}
+
+function guessedStubFor(
+  moduleName: string,
+  packagePath: string,
+  maxDepth: number = 1,
+): string {
+  const module: mixed = (require: any)(packagePath);
+  const formattedTemplate: string = format(
+    guessedModuleStubTemplate,
+    moduleName,
+    objectToType(module, maxDepth),
+  );
+  return formattedTemplate;
+}
+
 async function writeStub(
   projectRoot: string,
   packageName: string,
@@ -82,6 +195,7 @@ async function writeStub(
   overwrite: boolean,
   files: Array<string>,
   libdefDir: string,
+  maxDepth?: number,
 ): Promise<string> {
   let output = [
     '/**',
@@ -96,8 +210,16 @@ async function writeStub(
     ' * https://github.com/flowtype/flow-typed',
     ' */\n\n',
   ].join('\n');
-
-  output += stubFor(packageName);
+  let packageFolder = await resolvePkgDirPath(packageName, process.cwd());
+  if (packageFolder !== null) {
+    try {
+      output += guessedStubFor(packageName, packageFolder, maxDepth);
+    } catch (e) {
+      output += stubFor(packageName);
+    }
+  } else {
+    output += stubFor(packageName);
+  }
 
   if (files.length > 0) {
     output += `
@@ -188,6 +310,7 @@ export async function createStub(
   explicitVersion: string | null,
   overwrite: boolean,
   libdefDir?: string,
+  maxDepth?: number,
 ): Promise<boolean> {
   let files = [];
   let resolutionError = null;
@@ -245,6 +368,7 @@ export async function createStub(
       overwrite,
       files,
       typedefDir,
+      maxDepth,
     );
     const terseFilename = path.relative(projectRoot, filename);
     console.log(

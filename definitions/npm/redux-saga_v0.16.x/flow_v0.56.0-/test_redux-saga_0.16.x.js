@@ -295,6 +295,23 @@ function putTest() {
 
   // $ExpectError: This property cannot be inferred
   (put1.PUT.action.unknown: string);
+
+  put.resolve({ type: "test" });
+
+  const put3 = put.resolve({ type: "FOO", baz: "hi" });
+  (put3.PUT.action.baz: string);
+
+  const put4 = put.resolve(myChannel, { type: "test" });
+  (put4.PUT.channel: Channel);
+
+  // $ExpectError: Can only be called with objects
+  put.resolve("FOO");
+
+  // $ExpectError: No null as channel accepted
+  put.resolve(null, { type: "test" });
+
+  // $ExpectError: This property cannot be inferred
+  (put3.PUT.action.unknown: string);
 }
 
 function actionChannelTest() {
@@ -1204,6 +1221,7 @@ function selectTest() {
   ) => ({});
   const sSpread = (state: Object, ...args: Array<string>): Object => ({});
 
+  const eVoid = select();
   const e0 = select(s0);
   const e1 = select(s1, "1");
   const e2 = select(s2, "1", 2);
@@ -1213,6 +1231,7 @@ function selectTest() {
   const e6 = select(s6, "1", 2, "3", 4, "5", 6);
 
   // Args test
+  (eVoid.SELECT.args: []);
   (e0.SELECT.args: []);
   (e1.SELECT.args: [string]);
   (e2.SELECT.args: [string, number]);
@@ -1225,6 +1244,7 @@ function selectTest() {
   (e3.SELECT.args: [string, boolean, string]);
 
   // Fn check
+  (eVoid.SELECT.selector: void);
   (e0.SELECT.selector: typeof s0);
   (e1.SELECT.selector: typeof s1);
   (e2.SELECT.selector: typeof s2);

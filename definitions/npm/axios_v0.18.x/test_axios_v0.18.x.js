@@ -4,6 +4,7 @@ import type {
   $AxiosXHR,
   CancelTokenSource,
   Cancel,
+  AxiosPromise,
 } from 'axios';
 (axios.get('foo'): Promise<*>);
 (axios.post('bar', {}, {
@@ -86,3 +87,15 @@ axios.all([
     // $ExpectError
     (a: string);
 })
+
+const promise1: AxiosPromise<{ foo: string }, { bar: string }> = axios({ url: '/', method: 'post', data: { foo: 'bar' }})
+promise1.then(({ data }) => {
+  (data.bar: string);
+  // $ExpectError
+  data.foo;
+});
+
+const promise2: AxiosPromise<{ foo: number }> = axios({ url: '/', method: 'post', data: { foo: 1 }})
+promise2.then(({ data }) => {
+  data.foo + 1;
+});

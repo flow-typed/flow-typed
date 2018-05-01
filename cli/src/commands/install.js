@@ -27,7 +27,10 @@ import {
   getPackageJsonDependencies,
 } from '../lib/npm/npmProjectUtils';
 
-import {getCacheRepoDir} from '../lib/cacheRepoUtils';
+import {
+  getCacheRepoDir,
+  _setCustomCacheDir as setCustomCacheDir,
+} from '../lib/cacheRepoUtils';
 
 import {getRangeLowerBound} from '../lib/semver';
 
@@ -48,6 +51,7 @@ export type Args = {
   skip: boolean,
   verbose: boolean,
   libdefDir?: string,
+  cacheDir?: string,
   packageDir?: string,
   ignoreDeps?: Array<string>,
   rootDir?: string,
@@ -74,6 +78,13 @@ export function setup(yargs: Yargs) {
     libdefDir: {
       alias: 'l',
       describe: 'Use a custom directory to install libdefs',
+      type: 'string',
+      demand: false,
+    },
+    cacheDir: {
+      alias: 'c',
+      describe:
+        'Directory (absolute or relative path, ~ is not supported) to store cache of libdefs',
       type: 'string',
       demand: false,
     },
@@ -105,6 +116,12 @@ export async function run(args: Args) {
   const coreLibDefResult = await installCoreLibDefs();
   if (coreLibDefResult !== 0) {
     return coreLibDefResult;
+  }
+
+  if (args.cacheDir) {
+    const cacheDir = path.resolve(args.cacheDir);
+    console.log('• Setting cache dir', cacheDir);
+    setCustomCacheDir(cacheDir);
   }
 
   const npmLibDefResult = await installNpmLibDefs({
@@ -190,15 +207,23 @@ async function installNpmLibDefs({
       const term = explicitLibDefs[i];
       const termMatches = term.match(/(@[^@\/]+\/)?([^@]+)@(.+)/);
       if (termMatches == null) {
-        console.error(
-          'ERROR: Please specify npm package names in the format of `foo@1.2.3`',
-        );
-        return 1;
+        const pkgJsonData = await getPackageJsonData(cwd);
+        const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData, []);
+        const packageVersion = pkgJsonDeps[term];
+        if (packageVersion) {
+          libdefsToSearchFor.set(term, packageVersion);
+        } else {
+          console.error(
+            'ERROR: Package not found from package.json.\n' +
+              'Please specify version for the package in the format of `foo@1.2.3`',
+          );
+          return 1;
+        }
+      } else {
+        const [_, npmScope, pkgName, pkgVerStr] = termMatches;
+        const scopedPkgName = npmScope != null ? npmScope + pkgName : pkgName;
+        libdefsToSearchFor.set(scopedPkgName, pkgVerStr);
       }
-
-      const [_, npmScope, pkgName, pkgVerStr] = termMatches;
-      const scopedPkgName = npmScope != null ? npmScope + pkgName : pkgName;
-      libdefsToSearchFor.set(scopedPkgName, pkgVerStr);
     }
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
