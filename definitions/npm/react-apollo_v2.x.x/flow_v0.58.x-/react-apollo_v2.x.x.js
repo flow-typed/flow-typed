@@ -132,23 +132,21 @@ declare module 'react-apollo' {
     alias?: string;
   }
 
-  // Third argument of TMergedProps should be TVariables, but generics order
-  // is preserved for backward compatibility.
   declare export interface OperationComponent<
     TResult: Object = {},
     TOwnProps: Object = {},
-    TMergedProps: Object = ChildProps<TOwnProps, TResult, {}>,
-    TVariables: Object = {}
+    TVariables: Object = {},
+    TMergedProps: Object = ChildProps<TOwnProps, TResult, TVariables>
   > {
     (
       component: React$ComponentType<TMergedProps>
     ): React$ComponentType<TOwnProps>;
   }
 
-  declare export function graphql<TResult, TProps, TChildProps, TVariables>(
+  declare export function graphql<TResult, TProps, TVariables, TChildProps>(
     document: DocumentNode,
     operationOptions?: OperationOption<TResult, TProps, TChildProps, TVariables>
-  ): OperationComponent<TResult, TProps, TChildProps, TVariables>;
+  ): OperationComponent<TResult, TProps, TVariables, TChildProps>;
 
   declare type WithApolloOptions = {
     withRef?: boolean,
