@@ -111,6 +111,7 @@ it("works with class component with it's own variable Props specified at the end
   const withFancyData2: OperationComponent<
     IQuery,
     Cmplx2OwnProps,
+    *,
     Cmplx2ComponentProps
   > = graphql(query);
   const Cmplx2WithData = withFancyData2(Cmplx2Component);
@@ -158,8 +159,8 @@ it('works with Variables specified', () => {
   const withCharacter: OperationComponent<
     Response,
     InputProps,
-    Props,
-    Variables
+    Variables,
+    Props
   > = graphql(HERO_QUERY, {
     options: ({ episode }) => {
       // $ExpectError [string] The operand of an arithmetic operation must be a number
