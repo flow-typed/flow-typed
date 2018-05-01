@@ -206,7 +206,7 @@ declare module 'react-apollo' {
   declare export function cleanupApolloState(apolloState: any): void;
 
   declare type QueryRenderPropFunction<TData, TVariables> = ({
-    data: TData,
+    data?: TData,
     loading: boolean,
     error: ?ApolloError,
     variables: TVariables,
