@@ -1,3 +1,5 @@
+import * as React from "react";
+
 declare module "material-ui/AppBar/AppBar" {
   declare type Color = "inherit" | "primary" | "secondary" | "default";
   declare type Position = "fixed" | "absolute" | "sticky" | "static";
@@ -294,6 +296,11 @@ declare module "material-ui/colors/brown" {
 }
 
 declare module "material-ui/colors/common" {
+  declare type CommonColors = {
+    black: string,
+    white: string
+  };
+
   declare module.exports: any;
 }
 
@@ -1599,6 +1606,17 @@ declare module "material-ui/styles/colorManipulator" {
 
 declare module "material-ui/styles/createBreakpoints" {
   declare type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
+  declare type BreakpointValues = { [key: Breakpoint]: number };
+
+  declare export type Breakpoints = {
+    keys: Breakpoint[],
+    values: BreakpointValues,
+    up: (key: Breakpoint | number) => string,
+    down: (key: Breakpoint | number) => string,
+    between: (start: Breakpoint, end: Breakpoint) => string,
+    only: (key: Breakpoint) => string,
+    width: (key: Breakpoint) => number
+  };
 
   declare module.exports: {
     keys: Array<Breakpoint>,
@@ -1611,6 +1629,12 @@ declare module "material-ui/styles/createGenerateClassName" {
 }
 
 declare module "material-ui/styles/createMixins" {
+
+  declare export type Mixins = {
+      gutters: (styles?: React.CSSProperties) => React.CSSProperties,
+      toolbar: React.CSSProperties
+  };
+
   declare module.exports: (
     breakpoints: Object,
     spacing: Object,
@@ -1618,21 +1642,135 @@ declare module "material-ui/styles/createMixins" {
   ) => any;
 }
 
-declare module "material-ui/styles/createMuiTheme" {
-  declare module.exports: (options: Object) => any;
-}
-
 declare module "material-ui/styles/createPalette" {
+
+  import type {CommonColors} from "material-ui/colors/common";
+
+  declare type TypeText = {
+    primary: string,
+    secondary: string,
+    disabled: string,
+    hint: string
+  };
+
+  declare type TypeAction = {
+    active: string,
+    hover: string,
+    selected: string,
+    disabled: string,
+    disabledBackground: string
+  };
+
+  declare type TypeBackground = {
+    default: string,
+    paper: string
+  };
+
+  declare type PaletteType = "light" | "dark";
+
+  declare type Color = {
+    "50": string,
+    "100": string,
+    "200": string,
+    "300": string,
+    "400": string,
+    "500": string,
+    "600": string,
+    "700": string,
+    "800": string,
+    "900": string,
+    "A100": string,
+    "A200": string,
+    "A400": string,
+    "A700": string
+  };
+
+  declare type SimplePaletteColorOptions = {
+    light?: string,
+    main: string,
+    dark?: string,
+    contrastText?: string
+  };
+
+  declare type PaletteColorOptions = SimplePaletteColorOptions | $Shape<Color>;
+
+  declare export type PaletteOptions = {
+    common?: $Shape<CommonColors>,
+    type?: PaletteType,
+    primary?: PaletteColorOptions,
+    secondary?: PaletteColorOptions,
+    error?: PaletteColorOptions,
+    grey?: $Shape<Color>,
+    text?: $Shape<TypeText>,
+    divider?: string,
+    action?: $Shape<TypeAction>,
+    background?: $Shape<TypeBackground>,
+    getContrastText?: (background: string) => string
+  };
+
   declare export var light: Object;
   declare export var dark: Object;
   declare export default (palette: Object) => any;
 }
 
 declare module "material-ui/styles/createTypography" {
-  declare module.exports: (
-    palette: Object,
-    typography: Object | Function
-  ) => any;
+
+  declare type TextStyle = "display1" | "display2" | "display3" | "display4" | "headline" | "title" | "subheading"
+   | "body1" | "body2" | "caption";
+
+  declare type Style = TextStyle | "button";
+
+  declare type FontStyle = {
+    fontFamily: string,
+    fontSize: string,
+    fontWeightLight: string,
+    fontWeightRegular: string,
+    fontWeightMedium: string,
+    htmlFontSize?: number
+  };
+
+  declare type TypographyStyle = {
+    color?: string,
+    fontFamily: string,
+    fontSize: string,
+    fontWeight: string,
+    letterSpacing?: string,
+    lineHeight?: string,
+    textTransform?: string
+  };
+
+  declare type TypographyUtils = {
+      pxToRem: (px: number) => string
+  };
+
+  declare export type Typography = $Shape<{ [style: Style]:  $Shape<TypographyStyle> } & FontStyle & TypographyUtils>;
+}
+
+declare module "material-ui/styles/createMuiTheme" {
+
+  import type {PaletteOptions} from "material-ui/styles/createPalette";
+  import type {Typography} from "material-ui/styles/createTypography";
+  import type {Mixins} from "material-ui/styles/createMixins";
+  import type {Breakpoints} from "material-ui/styles/createBreakpoints";
+  import type {Shadows} from "material-ui/styles/shadows";
+  import type {Transitions} from "material-ui/styles/transitions";
+  import type {Spacing} from "material-ui/styles/spacing";
+  import type {ZIndex} from "material-ui/styles/zIndex";
+
+  declare type Direction = "ltr" | "rtl";
+
+  declare type Theme = {
+      direction: Direction,
+      palette: PaletteOptions,
+      typography: Typography,
+      mixins: Mixins,
+      shadows: Shadows,
+      transitions: Transitions,
+      spacing: Spacing,
+      zIndex: ZIndex
+  };
+
+  declare module.exports: (options: Object) => any;
 }
 
 declare module "material-ui/styles/jssPreset" {
@@ -1644,6 +1782,15 @@ declare module "material-ui/styles/getStylesCreator" {
 }
 
 declare module "material-ui/styles" {
+
+  import type {Theme as MuiTheme} from "material-ui/styles/createMuiTheme";
+
+  declare type Theme = MuiTheme;
+
+  declare type WithStyles<ClassKey: string> = {
+      classes: { [className: ClassKey]: string }
+  };
+
   declare module.exports: {
     MuiThemeProvider: $Exports<"material-ui/styles/MuiThemeProvider">,
     withStyles: $Exports<"material-ui/styles/withStyles">,
@@ -1658,11 +1805,45 @@ declare module "material-ui/styles/MuiThemeProvider" {
 }
 
 declare module "material-ui/styles/shadows" {
+
+  declare export type Shadows = [
+    "none",
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string
+  ];
+
   declare module.exports: Array<any>;
 }
 
 declare module "material-ui/styles/spacing" {
-  declare module.exports: Object;
+
+  declare export type Spacing = {
+      unit: number
+  };
+
+  declare module.exports: Spacing;
 }
 
 declare module "material-ui/styles/themeListener" {
@@ -1671,41 +1852,60 @@ declare module "material-ui/styles/themeListener" {
 }
 
 declare module "material-ui/styles/transitions" {
-  declare export var easing: Object;
-  declare export var duration: Object;
+
+  declare type Easing = {
+    easeInOut: string,
+    easeOut: string,
+    easeIn: string,
+    sharp: string
+  };
+
+  declare type Duration = {
+    shortest: number;
+    shorter: number;
+    short: number;
+    standard: number;
+    complex: number;
+    enteringScreen: number;
+    leavingScreen: number;
+  };
+
+  declare export type Transitions = {
+    easing: Easing;
+    duration: Duration;
+    create(
+      props: string | string[],
+      options?: $Shape<{ duration: number | string; easing: string; delay: number | string }>,
+     ): string;
+     getAutoHeightDuration(height: number): number;
+  };
+
+  declare export var easing: Easing;
+  declare export var duration: Duration;
   declare export var formatMs: (milliseconds: number) => string;
-  declare export var isString: (value: any) => boolean;
-  declare export var isNumber: (value: any) => boolean;
-  declare export default Object;
+  declare export default Transitions;
 }
 
 declare module "material-ui/styles/withStyles" {
-  declare type Options = {
-    flip?: boolean,
-    withTheme?: boolean,
-    name?: string,
-    media?: string,
-    meta?: string,
-    index?: number,
-    link?: boolean,
-    element?: HTMLStyleElement,
-    generateClassName?: Function
+
+  import type {Theme} from "material-ui/styles/createMuiTheme";
+
+  declare type StyleRules<ClassKey: string = string> = { [className: ClassKey]: React.CSSProperties };
+  declare type StyleRulesCallback<ClassKey: string = string> = (theme: Theme) => StyleRules<ClassKey>;
+  declare type WithStyles<ClassKey: string> = {
+      classes: { [className: ClassKey]: string }
   };
 
-  declare module.exports: (
-    stylesOrCreator: Object,
-    options?: Options
-  ) => <
-    OwnProps: {},
-    Props: $Supertype<
-      OwnProps & {
-        classes: { +[string]: string },
-        innerRef: React$Ref<React$ElementType>
-      }
-    >
-  >(
-    Component: React$ComponentType<Props>
-  ) => React$ComponentType<OwnProps>;
+  declare type WithStylesOptions = {
+    flip?: boolean,
+    withTheme?: boolean,
+    name?: string
+  };
+
+  declare module.exports: <ClassKey: string, Props: {}, Comp: React.ComponentType<Props>>(
+      style: StyleRules<ClassKey> | StyleRulesCallback<ClassKey>,
+      options?: WithStylesOptions
+  ) => (C: Comp) => $Diff<React.ElementConfig<Comp>, WithStyles<ClassKey>>;
 }
 
 declare module "material-ui/styles/withTheme" {
@@ -1715,7 +1915,19 @@ declare module "material-ui/styles/withTheme" {
 }
 
 declare module "material-ui/styles/zIndex" {
-  declare module.exports: Object;
+
+  declare export type ZIndex = {
+    mobileStepper: number,
+    appBar: number,
+    drawer: number,
+    modal: number,
+    snackbar: number,
+    tooltip: number
+  };
+
+  declare type ZIndexOptions = $Shape<ZIndex>;
+
+  declare module.exports: ZIndex;
 }
 
 declare module "material-ui/svg-icons/ArrowDownward" {
