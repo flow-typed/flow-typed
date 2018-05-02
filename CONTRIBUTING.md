@@ -129,7 +129,7 @@ To be super clear:
 1. You can't import types from other libdefs in flow-typed
 1. You can import types built into Flow (e.g. from `react`), only if you put the import statement inside the module declaration
 
-[Further discussion here](https://github.com/flowtype/flow-typed/issues/1857).
+[Further discussion here](https://github.com/flowtype/flow-typed/issues/1857) and [here](https://github.com/flowtype/flow-typed/issues/2023).
 
 ### Avoid `any` when possible
 
