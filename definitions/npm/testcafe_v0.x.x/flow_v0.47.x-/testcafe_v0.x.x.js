@@ -195,19 +195,15 @@ declare interface TestCafe$SelectorAPI {
     with(options?: TestCafe$SelectorOptions): TestCafe$SelectorFn
 }
 
-declare interface TestCafe$SelectorPromise extends TestCafe$SelectorAPI, Promise<TestCafe$NodeSnapshot> {
+declare type TestCafe$SelectorPromise = TestCafe$SelectorAPI & Promise<TestCafe$NodeSnapshot>;
 
-}
 
-declare interface TestCafe$CustomMethodsSelectorPromiseI<T> extends TestCafe$SelectorAPI, Promise<TestCafe$NodeSnapshot & $ObjMap<T, TestCafe$CustomMethodsSelectorTypeTransform>> {
-
-}
+declare type TestCafe$CustomMethodsSelectorPromiseI<T> = TestCafe$SelectorAPI & Promise<TestCafe$NodeSnapshot & $ObjMap<T, TestCafe$CustomMethodsSelectorTypeTransform>>;
 
 declare type TestCafe$CustomMethodsSelectorPromise<T> = TestCafe$CustomMethodsSelectorPromiseI<T> & $ObjMap<T, TestCafe$CustomMethodsSelectorTypeTransform>;
 
-declare interface TestCafe$CustomPropsSelectorPromiseI<T> extends TestCafe$SelectorAPI, Promise<TestCafe$NodeSnapshot & $ObjMap<T, TestCafe$CustomPropsSnapshotTypeTransform>> {
 
-}
+declare type TestCafe$CustomPropsSelectorPromiseI<T> = TestCafe$SelectorAPI & Promise<TestCafe$NodeSnapshot & $ObjMap<T, TestCafe$CustomPropsSnapshotTypeTransform>>;
 
 declare type TestCafe$CustomPropsSelectorPromise<T> = TestCafe$CustomPropsSelectorPromiseI<T> & $ObjMap<T, TestCafe$CustomPropsSelectorTypeTransform>;
 
@@ -357,9 +353,7 @@ declare interface TestCafe$TestController {
     useRole(role: TestCafe$RoleFn): TestCafe$TestControllerPromise
 }
 
-declare interface TestCafe$TestControllerPromise extends TestCafe$TestController, Promise<any> {
-
-};
+declare type TestCafe$TestControllerPromise = TestCafe$TestController & Promise<any>;
 
 declare interface TestCafe$AssertionOptions {
     timeout?: number
@@ -518,12 +512,10 @@ declare interface TestCafe$CustomSelectorCallable<T> {
   (...args: any[]): T
 }
 
-declare interface TestCafe$SelectorFn extends TestCafe$SelectorAPI, TestCafe$SelectorCallable {
-}
 
-declare interface TestCafe$CustomSelectorFnI<T> extends TestCafe$SelectorAPI, TestCafe$CustomSelectorCallable<T> {
+declare type TestCafe$SelectorFn = TestCafe$SelectorAPI & TestCafe$SelectorCallable;
 
-}
+declare type TestCafe$CustomSelectorFnI<T> = TestCafe$SelectorAPI & TestCafe$CustomSelectorCallable<T>;
 
 declare type TestCafe$CustomPropsSelectorFn<T> = TestCafe$CustomSelectorFnI<TestCafe$CustomPropsSelectorPromise<T>> & $ObjMap<T, TestCafe$CustomPropsSelectorTypeTransform>;
 
