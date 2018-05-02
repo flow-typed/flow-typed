@@ -1,3 +1,5 @@
+// flow-typed signature: c30f67b0b88c8cea0ad8d876abb8d42e
+// flow-typed version: f6dc3bf38d/material-ui_v1.x.x/flow_>=v0.58.x
 import * as React from "react";
 
 declare module "material-ui/AppBar/AppBar" {
@@ -1746,6 +1748,41 @@ declare module "material-ui/styles/createTypography" {
   declare export type Typography = $Shape<{ [style: Style]:  $Shape<TypographyStyle> } & FontStyle & TypographyUtils>;
 }
 
+declare module "material-ui/styles/transitions" {
+
+  declare type Easing = {
+    easeInOut: string,
+    easeOut: string,
+    easeIn: string,
+    sharp: string
+  };
+
+  declare type Duration = {
+    shortest: number;
+    shorter: number;
+    short: number;
+    standard: number;
+    complex: number;
+    enteringScreen: number;
+    leavingScreen: number;
+  };
+
+  declare export type Transitions = {
+    easing: Easing;
+    duration: Duration;
+    create(
+      props: string | string[],
+      options?: $Shape<{ duration: number | string; easing: string; delay: number | string }>,
+     ): string;
+     getAutoHeightDuration(height: number): number;
+  };
+
+  declare export var easing: Easing;
+  declare export var duration: Duration;
+  declare export var formatMs: (milliseconds: number) => string;
+  declare export default Transitions;
+}
+
 declare module "material-ui/styles/createMuiTheme" {
 
   import type {PaletteOptions} from "material-ui/styles/createPalette";
@@ -1849,41 +1886,6 @@ declare module "material-ui/styles/spacing" {
 declare module "material-ui/styles/themeListener" {
   declare export var CHANNEL: string;
   declare export default Object;
-}
-
-declare module "material-ui/styles/transitions" {
-
-  declare type Easing = {
-    easeInOut: string,
-    easeOut: string,
-    easeIn: string,
-    sharp: string
-  };
-
-  declare type Duration = {
-    shortest: number;
-    shorter: number;
-    short: number;
-    standard: number;
-    complex: number;
-    enteringScreen: number;
-    leavingScreen: number;
-  };
-
-  declare export type Transitions = {
-    easing: Easing;
-    duration: Duration;
-    create(
-      props: string | string[],
-      options?: $Shape<{ duration: number | string; easing: string; delay: number | string }>,
-     ): string;
-     getAutoHeightDuration(height: number): number;
-  };
-
-  declare export var easing: Easing;
-  declare export var duration: Duration;
-  declare export var formatMs: (milliseconds: number) => string;
-  declare export default Transitions;
 }
 
 declare module "material-ui/styles/withStyles" {
