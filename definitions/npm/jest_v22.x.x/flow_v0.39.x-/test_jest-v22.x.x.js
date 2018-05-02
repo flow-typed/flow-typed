@@ -185,7 +185,7 @@ jest.dontMock("testModule1").dontMock("testModule2");
 
 jest.resetModules().resetModules();
 
-jest.spyOn({}, "foo");
+jest.spyOn({}, "foo", "get");
 
 jest.setTimeout(1000);
 
