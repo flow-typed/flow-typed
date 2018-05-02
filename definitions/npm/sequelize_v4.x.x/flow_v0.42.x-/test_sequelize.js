@@ -1890,12 +1890,12 @@ s.transaction({
   });
 });
 
-s.transaction( function() {
-  return Promise.resolve();
-} );
-s.transaction( { isolationLevel : 'SERIALIZABLE' }, function( t ) { return Promise.resolve(); } );
-s.transaction( { isolationLevel : s.Transaction.ISOLATION_LEVELS.SERIALIZABLE }, (t) => Promise.resolve() );
-s.transaction( { isolationLevel : s.Transaction.ISOLATION_LEVELS.READ_COMMITTED }, (t) => Promise.resolve() );
+let autoCallback = (t: Transaction):Promise<string> => { return Promise.resolve('a') }
+let callbackValidator = (r:string) => {}
+s.transaction( autoCallback ).then( callbackValidator );
+s.transaction( { isolationLevel : 'SERIALIZABLE' }, autoCallback ).then( callbackValidator );
+s.transaction( { isolationLevel : s.Transaction.ISOLATION_LEVELS.SERIALIZABLE }, autoCallback ).then( callbackValidator );
+s.transaction( { isolationLevel : s.Transaction.ISOLATION_LEVELS.READ_COMMITTED }, autoCallback ).then( callbackValidator );
 
 // transaction types
 new Sequelize( '', { transactionType: 'DEFERRED' } );
@@ -1908,8 +1908,8 @@ s.transaction( { type : s.Transaction.TYPES.IMMEDIATE }, (t) => Promise.resolve(
 s.transaction( { type : s.Transaction.TYPES.EXCLUSIVE }, (t) => Promise.resolve() );
 
 // promise transaction
-s.transaction(async () => {
-});
+let asyncAutoCallback = async (t: Transaction):Promise<string> => 'a'
+s.transaction( asyncAutoCallback ).then( callbackValidator );
 
 // sync options types
 s.sync({

@@ -7117,11 +7117,11 @@ declare module "sequelize" {
      * @param options Transaction Options
      * @param autoCallback Callback for the transaction
     */
-    transaction(options?: TransactionOptions): Promise<Transaction>,
-    transaction(
+    transaction<T, Fn: TransactionAutoCallback<T>>(autoCallback: Fn): Promise<T>,
+    transaction<T, Fn: TransactionAutoCallback<T>>(
       options: TransactionOptions,
-      autoCallback: (t: Transaction) => Promise<any>): Promise<void>,
-    transaction(autoCallback: (t: Transaction) => Promise<any>): Promise<void>,
+      autoCallback: Fn): Promise<T>,
+    transaction(options?: TransactionOptions): Promise<Transaction>,
 
     /**
      * Close all connections used by this sequelize instance, and free all references so the instance can be
@@ -7380,6 +7380,8 @@ declare module "sequelize" {
      */
     logging?: Function
   }
+
+  declare type TransactionAutoCallback<T> = (t:Transaction) => Promise<T> | T
 
   declare export interface fn {
     fn: string,
