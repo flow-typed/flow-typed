@@ -1,5 +1,3 @@
-// flow-typed signature: c30f67b0b88c8cea0ad8d876abb8d42e
-// flow-typed version: f6dc3bf38d/material-ui_v1.x.x/flow_>=v0.58.x
 import * as React from "react";
 
 declare module "material-ui/AppBar/AppBar" {
