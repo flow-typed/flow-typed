@@ -74,7 +74,8 @@ type SchemaOpts<Doc> = {
     | {
         createdAt?: string,
         updatedAt?: string
-      }
+      },
+  discriminatorKey?: string
 };
 
 type IndexFields = {
@@ -178,7 +179,8 @@ type Mongoose$SchemaField<Schema> = {
     description: ?string
   },
   enumValues?: ?(string[]),
-  schema?: Schema
+  schema?: Schema,
+  _index?: ?{ [optionName: string]: mixed }
 };
 
 declare class Mongoose$SchemaVirtualField {
@@ -261,6 +263,7 @@ declare class Mongoose$Document {
   static modelName: string;
   static schema: Mongoose$Schema<this>;
   static on(type: string, cb: Function): void;
+  static discriminator(name: string, schema: Mongoose$Schema<any>): Class<this>;
 
   collection: Mongoose$Collection;
   constructor(data?: $Shape<this>): this;
