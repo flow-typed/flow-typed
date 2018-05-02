@@ -23,6 +23,14 @@ declare module 'react-apollo' {
     client: ApolloClient;
   }
 
+  declare export interface ApolloConsumerProps {
+    children: (client: ApolloClient) => React$Node;
+  }
+
+  declare export class ApolloConsumer extends React$Component<ApolloConsumerProps> {
+    render(): React$Node;
+  }
+
   declare export class ApolloProvider extends React$Component<ProviderProps> {
     childContextTypes: {
       client: ApolloClient,
