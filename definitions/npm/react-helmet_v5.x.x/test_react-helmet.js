@@ -57,4 +57,19 @@ heads.forEach((head) => {
   (head.script.toString(): boolean);
   // $ExpectError
   (head.style.toString(): boolean);
+
+  const Component = (
+    <html {...head.htmlAttributes.toComponent()}>
+      <head>
+        {head.title.toComponent()}
+        {head.meta.toComponent()}
+        {head.link.toComponent()}
+        {head.script.toComponent()}
+        {head.style.toComponent()}
+        {head.base.toComponent()}
+      </head>
+      <body {...head.bodyAttributes.toComponent()}>
+      </body>
+    </html>
+  )
 });
