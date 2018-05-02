@@ -2,20 +2,20 @@
 import type { ConcreteFragmentDefinition, ConcreteOperationDefinition, RelayQL } from 'react-relay';
 
 declare module 'react-runtime' {
-  declare type ConcreteVariable = {
+  declare export type ConcreteVariable = {
     kind: 'Variable',
     name: string,
     type: ?string,
     variableName: string,
   };
-  declare type ConcreteLiteral = {
+  declare export type ConcreteLiteral = {
     kind: 'Literal',
     name: string,
     type: ?string,
     value: mixed,
   };
-  declare type ConcreteArgument = ConcreteLiteral | ConcreteVariable;
-  declare type ConcreteDeferrableFragmentSpread = {
+  declare export type ConcreteArgument = ConcreteLiteral | ConcreteVariable;
+  declare export type ConcreteDeferrableFragmentSpread = {
     kind: 'DeferrableFragmentSpread',
     name: string,
     args: ?Array<ConcreteArgument>,
@@ -23,14 +23,14 @@ declare module 'react-runtime' {
     storageKey: string,
   };
 
-  declare type ConcreteCondition = {
+  declare export type ConcreteCondition = {
     kind: 'Condition',
     passingValue: boolean,
     condition: string,
     selections: Array<ConcreteSelection>,
   };
 
-  declare type ConcreteScalarField = {
+  declare export type ConcreteScalarField = {
     kind: 'ScalarField',
     alias: ?string,
     name: string,
@@ -38,7 +38,7 @@ declare module 'react-runtime' {
     storageKey: ?string,
   };
 
-  declare type ConcreteLinkedField = {
+  declare export type ConcreteLinkedField = {
     kind: 'LinkedField',
     alias: ?string,
     name: string,
@@ -49,15 +49,15 @@ declare module 'react-runtime' {
     selections: Array<ConcreteSelection>,
   };
 
-  declare type ConcreteField = ConcreteScalarField | ConcreteLinkedField;
+  declare export type ConcreteField = ConcreteScalarField | ConcreteLinkedField;
 
-  declare type ConcreteFragmentSpread = {
+  declare export type ConcreteFragmentSpread = {
     kind: 'FragmentSpread',
     name: string,
     args: ?Array<ConcreteArgument>,
   };
 
-  declare type ConcreteScalarHandle = {
+  declare export type ConcreteScalarHandle = {
     kind: 'ScalarHandle',
     alias: ?string,
     name: string,
@@ -67,7 +67,7 @@ declare module 'react-runtime' {
     filters: ?Array<string>,
   };
 
-  declare type ConcreteLinkedHandle = {
+  declare export type ConcreteLinkedHandle = {
     kind: 'LinkedHandle',
     alias: ?string,
     name: string,
@@ -77,15 +77,15 @@ declare module 'react-runtime' {
     filters: ?Array<string>,
   };
 
-  declare type ConcreteHandle = ConcreteScalarHandle | ConcreteLinkedHandle;
+  declare export type ConcreteHandle = ConcreteScalarHandle | ConcreteLinkedHandle;
 
-  declare type ConcreteInlineFragment = {
+  declare export type ConcreteInlineFragment = {
     kind: 'InlineFragment',
     selections: Array<ConcreteSelection>,
     type: string,
   };
 
-  declare type ConcreteSelection =
+  declare export type ConcreteSelection =
     | ConcreteCondition
     | ConcreteDeferrableFragmentSpread
     | ConcreteField
@@ -93,22 +93,22 @@ declare module 'react-runtime' {
     | ConcreteHandle
     | ConcreteInlineFragment;
 
-  declare type ConcreteRootArgument = {
+  declare export type ConcreteRootArgument = {
     kind: 'RootArgument',
     name: string,
     type: ?string,
   };
 
-  declare type ConcreteLocalArgument = {
+  declare export type ConcreteLocalArgument = {
     kind: 'LocalArgument',
     name: string,
     type: string,
     defaultValue: mixed,
   };
 
-  declare type ConcreteArgumentDefinition = ConcreteLocalArgument | ConcreteRootArgument;
+  declare export type ConcreteArgumentDefinition = ConcreteLocalArgument | ConcreteRootArgument;
 
-  declare type ConcreteFragment = {
+  declare export type ConcreteFragment = {
     kind: 'Fragment',
     name: string,
     type: string,
@@ -117,14 +117,14 @@ declare module 'react-runtime' {
     selections: Array<ConcreteSelection>,
   };
 
-  declare type ConcreteNonDeferrableOperation = {
+  declare export type ConcreteNonDeferrableOperation = {
     kind: 'Operation',
     name: string,
     argumentDefinitions: Array<ConcreteLocalArgument>,
     selections: Array<ConcreteSelection>,
   };
 
-  declare type ConcreteRequest = {
+  declare export type ConcreteRequest = {
     kind: 'Request',
     operationKind: 'mutation' | 'query' | 'subscription',
     name: string,
@@ -139,7 +139,7 @@ declare module 'react-runtime' {
    * Argument in the provided operation to be derived via the results of
    * other requests in the batch.
    */
-  declare type ArgumentDependency = {|
+  declare export type ArgumentDependency = {|
     // The name of the argument to provide.
     name: string,
     // The name of the request in this batch to wait for a result from.
@@ -164,7 +164,7 @@ declare module 'react-runtime' {
     maxRecurse?: number,
   |};
 
-  declare type ConcreteDeferrableOperation = {
+  declare export type ConcreteDeferrableOperation = {
     kind: 'DeferrableOperation',
     name: string,
     argumentDefinitions: Array<ConcreteLocalArgument>,
@@ -177,9 +177,9 @@ declare module 'react-runtime' {
    * Represents a single operation used to processing and normalize runtime
    * request results.
    */
-  declare type ConcreteOperation = ConcreteNonDeferrableOperation | ConcreteDeferrableOperation;
+  declare export type ConcreteOperation = ConcreteNonDeferrableOperation | ConcreteDeferrableOperation;
 
-  declare type ConcreteBatchRequest = {
+  declare export type ConcreteBatchRequest = {
     kind: 'BatchRequest',
     operationKind: 'mutation' | 'query' | 'subscription',
     name: string,
@@ -196,24 +196,24 @@ declare module 'react-runtime' {
     }>,
   };
 
-  declare type RequestNode = ConcreteRequest | ConcreteBatchRequest;
+  declare export type RequestNode = ConcreteRequest | ConcreteBatchRequest;
 
   declare export opaque type FragmentReference: empty;
 
   // The type of a graphql`...` tagged template expression.
-  declare type GraphQLTaggedNode =
+  declare export type GraphQLTaggedNode =
     | (() => ConcreteFragment | RequestNode)
     | {
         modern: () => ConcreteFragment | RequestNode,
         classic: RelayQL => ConcreteFragmentDefinition | ConcreteOperationDefinition,
       };
 
-  declare type Environment = any;
+  declare export type Environment = any;
 
   // Variables
-  declare type Variables = { [name: string]: $FlowFixMe };
+  declare export type Variables = { [name: string]: $FlowFixMe };
 
-  declare type RerunParam = {
+  declare export type RerunParam = {
     param: string,
     import?: ?string,
     target?: ?string,
@@ -231,7 +231,7 @@ declare module 'react-runtime' {
    *   batch API on Network interfaces and GraphQL servers that support it.
    * - `metadata`: user-supplied metadata.
    */
-  declare type CacheConfig = {
+  declare export type CacheConfig = {
     force?: ?boolean,
     poll?: ?number,
     rerunParamExperimental?: ?RerunParam,
@@ -239,16 +239,16 @@ declare module 'react-runtime' {
   };
 
   // $FlowFixMe(>=0.66.0) this is compatible with classic api see D4658012
-  declare type Uploadable = File | Blob;
+  declare export type Uploadable = File | Blob;
   // $FlowFixMe this is compatible with classic api see D4658012
-  declare type UploadableMap = { [key: string]: Uploadable };
+  declare export type UploadableMap = { [key: string]: Uploadable };
 
   /**
    * Represents any resource that must be explicitly disposed of. The most common
    * use-case is as a return value for subscriptions, where calling `dispose()`
    * would cancel the subscription.
    */
-  declare type Disposable = {
+  declare export type Disposable = {
     dispose(): void,
   };
 }

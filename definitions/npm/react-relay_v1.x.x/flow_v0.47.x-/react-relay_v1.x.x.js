@@ -3,7 +3,7 @@ import type { ConcreteFragment, RequestNode, FragmentReference, Environment as I
 declare module "react-relay" {
   import type { ComponentType, ElementConfig } from 'react';
 
-  declare type RerunParam = {
+  declare export type RerunParam = {
     param: string,
     import?: ?string,
     target?: ?string,
@@ -11,9 +11,9 @@ declare module "react-relay" {
   };
 
   // $FlowFixMe(>=0.66.0) this is compatible with classic api see D4658012
-  declare type Uploadable = File | Blob;
+  declare export type Uploadable = File | Blob;
   // $FlowFixMe this is compatible with classic api see D4658012
-  declare type UploadableMap = { [key: string]: Uploadable };
+  declare export type UploadableMap = { [key: string]: Uploadable };
 
   /**
    * Settings for how a query response may be cached.
@@ -26,7 +26,7 @@ declare module "react-relay" {
    *   batch API on Network interfaces and GraphQL servers that support it.
    * - `metadata`: user-supplied metadata.
    */
-  declare type CacheConfig = {
+  declare export type CacheConfig = {
     force?: ?boolean,
     poll?: ?number,
     rerunParamExperimental?: ?RerunParam,
@@ -34,50 +34,50 @@ declare module "react-relay" {
   };
 
   // Variables
-  declare type Variables = { [name: string]: $FlowFixMe };
+  declare export type Variables = { [name: string]: $FlowFixMe };
 
-  declare type ConcreteLocalArgumentDefinition = {
+  declare export type ConcreteLocalArgumentDefinition = {
     kind: 'LocalArgument',
     name: string,
     defaultValue: mixed,
   };
 
-  declare type ConcreteRootArgumentDefinition = {
+  declare export type ConcreteRootArgumentDefinition = {
     kind: 'RootArgument',
     name: string,
   };
 
-  declare type ConcreteArgumentDefinition = ConcreteLocalArgumentDefinition | ConcreteRootArgumentDefinition;
+  declare export type ConcreteArgumentDefinition = ConcreteLocalArgumentDefinition | ConcreteRootArgumentDefinition;
 
-  declare type ConcreteFragmentDefinition = {
+  declare export type ConcreteFragmentDefinition = {
     kind: 'FragmentDefinition',
     argumentDefinitions: Array<ConcreteArgumentDefinition>,
     node: ConcreteFragment,
   };
 
-  declare type ConcreteBatchCallVariable = {
+  declare export type ConcreteBatchCallVariable = {
     jsonPath: string,
     kind: 'BatchCallVariable',
     sourceQueryID: string,
   };
 
-  declare type ConcreteCallValue = {
+  declare export type ConcreteCallValue = {
     callValue: mixed,
     kind: 'CallValue',
   };
 
-  declare type ConcreteCallVariable = {
+  declare export type ConcreteCallVariable = {
     callVariableName: string,
     kind: 'CallVariable',
   };
 
-  declare type ConcreteValue =
+  declare export type ConcreteValue =
     | ConcreteBatchCallVariable
     | ConcreteCallValue
     | ConcreteCallVariable
     | Array<ConcreteCallValue | ConcreteCallVariable>;
 
-  declare type ConcreteCall = {
+  declare export type ConcreteCall = {
     kind: 'Call',
     metadata: {
       type?: ?string,
@@ -86,23 +86,23 @@ declare module "react-relay" {
     value: ?ConcreteValue,
   };
 
-  declare type ConcreteDirectiveValue =
+  declare export type ConcreteDirectiveValue =
     | ConcreteCallValue
     | ConcreteCallVariable
     | Array<ConcreteCallValue | ConcreteCallVariable>;
 
-  declare type ConcreteDirectiveArgument = {
+  declare export type ConcreteDirectiveArgument = {
     name: string,
     value: ?ConcreteDirectiveValue,
   };
 
-  declare type ConcreteDirective = {
+  declare export type ConcreteDirective = {
     args: Array<ConcreteDirectiveArgument>,
     kind: 'Directive',
     name: string,
   };
 
-  declare type ConcreteFieldMetadata = {
+  declare export type ConcreteFieldMetadata = {
     canHaveSubselections?: ?boolean,
     inferredPrimaryKey?: ?string,
     inferredRootCallName?: ?string,
@@ -115,7 +115,7 @@ declare module "react-relay" {
     isRequisite?: boolean,
   };
 
-  declare type ConcreteField = {
+  declare export type ConcreteField = {
     alias?: ?string,
     calls?: ?Array<ConcreteCall>,
     children?: ?Array<?ConcreteSelection>,
@@ -126,17 +126,17 @@ declare module "react-relay" {
     type: string,
   };
 
-  declare type VariableMapping = { [key: string]: mixed };
+  declare export type VariableMapping = { [key: string]: mixed };
 
-  declare type ConcreteFragmentSpread = {
+  declare export type ConcreteFragmentSpread = {
     kind: 'FragmentSpread',
     args: VariableMapping,
     fragment: ConcreteFragmentDefinition,
   };
 
-  declare type ConcreteSelection = ConcreteField | ConcreteFragment | ConcreteFragmentSpread;
+  declare export type ConcreteSelection = ConcreteField | ConcreteFragment | ConcreteFragmentSpread;
 
-  declare type ConcreteSubscription = {
+  declare export type ConcreteSubscription = {
     calls: Array<ConcreteCall>,
     children?: ?Array<?ConcreteSelection>,
     directives?: ?Array<ConcreteDirective>,
@@ -148,7 +148,7 @@ declare module "react-relay" {
     },
   };
 
-  declare type ConcreteMutation = {
+  declare export type ConcreteMutation = {
     calls: Array<ConcreteCall>,
     children?: ?Array<?ConcreteSelection>,
     directives?: ?Array<ConcreteDirective>,
@@ -163,7 +163,7 @@ declare module "react-relay" {
   /**
    * The output of a graphql-tagged operation definition.
    */
-  declare type ConcreteOperationDefinition = {
+  declare export type ConcreteOperationDefinition = {
     kind: 'OperationDefinition',
     argumentDefinitions: Array<ConcreteLocalArgumentDefinition>,
     name: string,
@@ -171,21 +171,21 @@ declare module "react-relay" {
     node: ConcreteFragment | ConcreteMutation | ConcreteSubscription,
   };
 
-  declare type RelayConcreteNode = mixed;
+  declare export type RelayConcreteNode = mixed;
 
   declare export function RelayQL(strings: Array<string>, ...substitutions: Array<any>): RelayConcreteNode;
 
   // The type of a graphql`...` tagged template expression.
-  declare type GraphQLTaggedNode =
+  declare export type GraphQLTaggedNode =
     | (() => ConcreteFragment | RequestNode)
     | {
         modern: () => ConcreteFragment | RequestNode,
         classic: RelayQL => ConcreteFragmentDefinition | ConcreteOperationDefinition,
       };
 
-  declare type GeneratedNodeMap = { [key: string]: GraphQLTaggedNode };
+  declare export type GeneratedNodeMap = { [key: string]: GraphQLTaggedNode };
 
-  declare type RelayProp = {
+  declare export type RelayProp = {
     environment: IEnvironment,
   };
 
@@ -221,7 +221,7 @@ declare module "react-relay" {
    *   }
    *
    */
-  declare type $FragmentRef<T> = {
+  declare export type $FragmentRef<T> = {
     +$fragmentRefs: $PropertyType<T, '$refType'>,
   };
 
@@ -229,7 +229,7 @@ declare module "react-relay" {
    * A utility type that takes the Props of a component and the type of
    * `props.relay` and returns the props of the container.
    */
-  declare type $RelayProps<Props, RelayPropT> = $ObjMap<
+  declare export type $RelayProps<Props, RelayPropT> = $ObjMap<
     $Diff<Props, { relay: RelayPropT | void }>,
     (<T: { +$refType: empty }>(T) => T) &
       (<T: { +$refType: empty }>(?T) => ?T) &
@@ -251,7 +251,7 @@ declare module "react-relay" {
    * A Subscription object is returned from .subscribe(), which can be
    * unsubscribed or checked to see if the resulting subscription has closed.
    */
-  declare type Subscription = {|
+  declare export type Subscription = {|
     +unsubscribe: () => void,
     +closed: boolean,
   |};
@@ -260,7 +260,7 @@ declare module "react-relay" {
    * An Observer is an object of optional callback functions provided to
    * .subscribe(). Each callback function is invoked when that event occurs.
    */
-  declare type Observer<-T> = {|
+  declare export type Observer<-T> = {|
     +start?: ?(Subscription) => mixed,
     +next?: ?(T) => mixed,
     +error?: ?(Error) => mixed,
@@ -268,9 +268,9 @@ declare module "react-relay" {
     +unsubscribe?: ?(Subscription) => mixed,
   |};
 
-  declare type ObserverOrCallback = Observer<void> | ((error: ?Error) => mixed);
+  declare export type ObserverOrCallback = Observer<void> | ((error: ?Error) => mixed);
 
-  declare type RefetchOptions = {
+  declare export type RefetchOptions = {
     force?: boolean,
     rerunParamExperimental?: RerunParam,
   };
@@ -280,11 +280,11 @@ declare module "react-relay" {
    * use-case is as a return value for subscriptions, where calling `dispose()`
    * would cancel the subscription.
    */
-  declare type Disposable = {
+  declare export type Disposable = {
     dispose(): void,
   };
 
-  declare type RelayRefetchProp = RelayProp & {
+  declare export type RelayRefetchProp = RelayProp & {
     refetch: (
       refetchVariables: Variables | ((fragmentVariables: Variables) => Variables),
       renderVariables: ?Variables,
@@ -305,7 +305,7 @@ declare module "react-relay" {
    */
   declare export function graphql(strings: Array<string>): GraphQLTaggedNode;
 
-  declare type QueryRendererProps = {
+  declare export type QueryRendererProps = {
     cacheConfig?: ?CacheConfig,
     // dataFrom?: DataFrom,
     // environment: IEnvironment | ClassicEnvironment,
@@ -314,7 +314,7 @@ declare module "react-relay" {
     variables: Variables,
   };
 
-  declare type QueryRendererState = {
+  declare export type QueryRendererState = {
     // prevPropsEnvironment: IEnvironment | ClassicEnvironment,
     prevPropsVariables: Variables,
     prevQuery: ?GraphQLTaggedNode,
