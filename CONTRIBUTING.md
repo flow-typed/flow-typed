@@ -104,9 +104,32 @@ declare module 'other-module' {
 
 ...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
 
-You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them, however.
+**But wait, I want my React types!**
 
-Currently it's not possible to safely import types from other libdefs when making your libdef. [Further discussion here](https://github.com/flowtype/flow-typed/issues/1857).
+Good news! You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them. You can also import types built into Flow *inside* the module declaration:
+
+```js
+declare module 'example' {
+  import type { Node } from 'react';
+}
+```
+
+**So why don't I do that for importing other libdefs?**
+
+Because it just don't work, sorry. You might think this is possible, but it isn't:
+
+```js
+declare module 'koa-router' {
+  import type { Middleware } from 'koa';
+}
+```
+
+To be super clear:
+
+1. You can't import types from other libdefs in flow-typed
+1. You can import types built into Flow (e.g. from `react`), only if you put the import statement inside the module declaration
+
+[Further discussion here](https://github.com/flowtype/flow-typed/issues/1857) and [here](https://github.com/flowtype/flow-typed/issues/2023).
 
 ### Avoid `any` when possible
 
