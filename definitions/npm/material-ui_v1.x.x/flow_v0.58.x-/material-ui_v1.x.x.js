@@ -1,6 +1,3 @@
-import * as React from "react";
-import * as CSS from "csstype";
-
 declare module "material-ui/AppBar/AppBar" {
   declare type Color = "inherit" | "primary" | "secondary" | "default";
   declare type Position = "fixed" | "absolute" | "sticky" | "static";
@@ -1650,12 +1647,13 @@ declare module "material-ui/styles/spacing" {
 
 declare module "material-ui/styles/createMixins" {
 
+  import type {Properties as CSSProperties} from "csstype";
   import type {Breakpoints} from "material-ui/styles/createBreakpoints";
   import type {Spacing} from "material-ui/styles/spacing";
 
   declare export type Mixins = {
-      gutters: (styles?: CSS.Properties<*>) => CSS.Properties<*>,
-      toolbar: CSS.Properties<*>
+      gutters: (styles?: CSSProperties<*>) => CSSProperties<*>,
+      toolbar: CSSProperties<*>
   };
 
   declare export type MixinsOptions = $Shape<Mixins>;
@@ -1775,6 +1773,7 @@ declare module "material-ui/styles/createPalette" {
 
 declare module "material-ui/styles/createTypography" {
 
+  import type {Properties as CSSProperties} from "csstype";
   import type {Palette} from "material-ui/styles/createPalette";
 
   declare type TextStyle = "display1" | "display2" | "display3" | "display4" | "headline" | "title" | "subheading"
@@ -1783,22 +1782,22 @@ declare module "material-ui/styles/createTypography" {
   declare type Style = TextStyle | "button";
 
   declare type FontStyle = {
-    fontFamily: $PropertyType<CSS.Properties, "fontFamily">,
-    fontSize: $PropertyType<CSS.Properties, "fontSize">,
-    fontWeightLight: $PropertyType<CSS.Properties, "fontWeight">,
-    fontWeightRegular: $PropertyType<CSS.Properties, "fontWeight">,
-    fontWeightMedium: $PropertyType<CSS.Properties, "fontWeight">,
-    htmlFontSize?: $PropertyType<CSS.Properties, "fontSize">
+    fontFamily: $PropertyType<CSSProperties<>, "fontFamily">,
+    fontSize: $PropertyType<CSSProperties<>, "fontSize">,
+    fontWeightLight: $PropertyType<CSSProperties<>, "fontWeight">,
+    fontWeightRegular: $PropertyType<CSSProperties<>, "fontWeight">,
+    fontWeightMedium: $PropertyType<CSSProperties<>, "fontWeight">,
+    htmlFontSize?: $PropertyType<CSSProperties<>, "fontSize">
   };
 
   declare type TypographyStyle = {
     color?: string,
-    fontFamily: $PropertyType<CSS.Properties, "fontFamily">,
-    fontSize: $PropertyType<CSS.Properties, "fontSize">,
-    fontWeight: $PropertyType<CSS.Properties, "fontWeight">,
-    letterSpacing?: $PropertyType<CSS.Properties, "letterSpacing">,
-    lineHeight?: $PropertyType<CSS.Properties, "lineHeight">,
-    textTransform?: $PropertyType<CSS.Properties, "textTransform">
+    fontFamily: $PropertyType<CSSProperties<>, "fontFamily">,
+    fontSize: $PropertyType<CSSProperties<>, "fontSize">,
+    fontWeight: $PropertyType<CSSProperties<>, "fontWeight">,
+    letterSpacing?: $PropertyType<CSSProperties<>, "letterSpacing">,
+    lineHeight?: $PropertyType<CSSProperties<>, "lineHeight">,
+    textTransform?: $PropertyType<CSSProperties<>, "textTransform">
   };
 
   declare type TypographyUtils = {
@@ -1910,13 +1909,10 @@ declare module "material-ui/styles/getStylesCreator" {
 declare module "material-ui/styles" {
 
   import type {Theme as MuiTheme} from "material-ui/styles/createMuiTheme";
+  import type {WithStyles as MuiWithStyles} from "material-ui/styles/withStyles";
 
-  declare type Theme = MuiTheme;
-
-  declare type WithStyles<ClassKey: string> = {
-      classes: { [className: ClassKey]: string },
-      theme?: Theme
-  };
+  declare export type Theme = MuiTheme;
+  declare export type WithStyles<ClassKey: string> = MuiWithStyles<ClassKey>;
 
   declare module.exports: {
     MuiThemeProvider: $Exports<"material-ui/styles/MuiThemeProvider">,
@@ -1945,10 +1941,11 @@ declare module "material-ui/styles/themeListener" {
 
 declare module "material-ui/styles/withStyles" {
 
-  import type {Theme, WithStyles} from "material-ui/styles/createMuiTheme";
+  import type {StandardProperties as CSSProperties} from "csstype";
+  import type {Theme} from "material-ui/styles/createMuiTheme";
 
-  declare type StyleRules<ClassKey: string = string> = { [className: ClassKey]: CSS.Properties<*> };
-  declare type StyleRulesCallback<ClassKey: string = string> = (theme: Theme) => StyleRules<ClassKey>;
+  declare type StyleRules<ClassKey: string> = { [className: ClassKey]: $Exact<CSSProperties<number>> };
+  declare type StyleRulesCallback<ClassKey: string> = (theme: Theme) => StyleRules<ClassKey>;
 
   declare type WithStylesOptions = {
     flip?: boolean,
@@ -1956,10 +1953,15 @@ declare module "material-ui/styles/withStyles" {
     name?: string
   };
 
-  declare module.exports: <ClassKey: string, Props: {}, Comp: React.ComponentType<Props>>(
+  declare export type WithStyles<ClassKey: string> = {
+    classes: { [className: ClassKey]: string },
+    theme?: Theme
+  };
+
+  declare module.exports: <ClassKey: string, Props: {}, Comp: React$ComponentType<Props>>(
       style: StyleRules<ClassKey> | StyleRulesCallback<ClassKey>,
       options?: WithStylesOptions
-  ) => (C: Comp) => $Diff<React.ElementConfig<Comp>, WithStyles<ClassKey>>;
+  ) => (C: Comp) => React$ComponentType<$Diff<React$ElementConfig<Comp>, WithStyles<ClassKey>>>;
 }
 
 declare module "material-ui/styles/withTheme" {
