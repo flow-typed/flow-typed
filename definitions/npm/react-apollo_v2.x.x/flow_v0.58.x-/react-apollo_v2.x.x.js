@@ -236,12 +236,27 @@ declare module 'react-apollo' {
     pollInterval?: number,
     notifyOnNetworkStatusChange?: boolean,
     fetchPolicy?: FetchPolicy,
-    errorPolicty?: ErrorPolicy,
+    errorPolicy?: ErrorPolicy,
     ssr?: boolean,
     displayName?: string,
     delay?: boolean,
     context?: {[string]: any}
   }> {}
+
+  declare type SubscriptionResult<TData> = {
+    loading: boolean,
+    data?: TData,
+    error?: ApolloError,
+  }
+
+  declare type SubscriptionProps<TData> = {
+    subscription: DocumentNode,
+    variables?: { [string]: any },
+    shouldResubscribe?: boolean | (SubscriptionProps<TData>, SubscriptionProps<TData>) => boolean,
+    children: (result: SubscriptionResult<TData>) => React$Node,
+  }
+
+  declare export class Subscription<TData> extends React$Component<SubscriptionProps<TData>> {}
 
   declare export type MutationFunction<TVariables> = (options: {
     variables?: TVariables,
