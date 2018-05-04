@@ -16,6 +16,7 @@ import first from "lodash/first";
 import flatMap from "lodash/flatMap";
 import forEach from "lodash/forEach";
 import get from "lodash/get";
+import getOr from 'lodash/fp/getOr';
 import groupBy from "lodash/groupBy";
 import intersectionBy from "lodash/intersectionBy";
 import isEqual from "lodash/isEqual";
