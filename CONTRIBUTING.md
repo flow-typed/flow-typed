@@ -95,7 +95,7 @@ You know how to do it.
 
 ### Read flow docs
 
-There's a solid writeup in the [Flow docs](https://flow.org/en/docs/libdefs/creation/) about creating new library definitions. Read it.
+There's a solid writeup in the [Flow docs](https://flow.org/en/docs/libdefs/creation/) about creating new library definitions. Give it a read!
 
 ### Don't import types from other libdefs
 
