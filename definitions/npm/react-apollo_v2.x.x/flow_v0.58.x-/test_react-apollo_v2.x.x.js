@@ -1,9 +1,14 @@
 // @flow
 import * as React from 'react';
-import { it } from 'flow-typed-test';
+import { it, describe } from 'flow-typed-test';
 import {
+  Query,
+  Mutation,
   graphql,
   withApollo,
+  type MutationFunction,
+  type MutationResult,
+  type QueryRenderProps,
   type OperationComponent,
   type GraphqlQueryControls,
   type ChildProps,
@@ -195,7 +200,6 @@ it('works with Variables specified', () => {
       return null; // actual component with data;
     }
   }
-
   const CharacterWithData = withCharacter(Character);
 });
 
@@ -210,3 +214,49 @@ it('works with withApollo HOC', () => {
   (Manual: React.ComponentType<{}>);
 })
 
+describe('Query', () => {
+  it('works', () => {
+    type Vars = {|foo: string|}
+    type Res = {|res: string|}
+    const vars: Vars = {foo: 'bar'}
+    const q = (
+      <Query variables={vars} query={HERO_QUERY}>
+        {({data}: QueryRenderProps<Res, Vars>) => {
+          // $ExpectError Cannot get `data.res`
+          data.res
+          if (!data) {
+            return
+          }
+          const d1: Res | {||} = data
+          // $ExpectError Cannot get `data.res` because property `res` is missing in object type
+          const s: string = data.res
+          if (d1.res) {
+            const d2: Res = d1
+            const s: string = d1.res
+          }
+        }}
+      </Query>
+    )
+  })
+})
+
+describe('Mutation', () => {
+  it('works', () => {
+    type Vars = {|foo: string|}
+    type Res = {|res: string|}
+    const vars: Vars = {foo: 'bar'}
+    const q = (
+      <Mutation variables={vars} mutation={HERO_QUERY}>
+        {(update: MutationFunction<Vars>, {data}: MutationResult<Res>) => {
+          // $ExpectError Cannot get `data.res`
+          data.res
+          if (!data) {
+            return
+          }
+          const d1: Res = data
+          const s: string = data.res
+        }}
+      </Mutation>
+    )
+  })
+})

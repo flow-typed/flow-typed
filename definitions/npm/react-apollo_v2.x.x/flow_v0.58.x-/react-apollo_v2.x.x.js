@@ -50,15 +50,15 @@ declare module 'react-apollo' {
 
   declare export type GraphqlData<TResult, TVariables> = GraphqlQueryControls &
     TResult & {
-      variables: TVariables,
-      refetch: (variables?: TVariables) => Promise<ApolloQueryResult<any>>,
-    };
+    variables: TVariables,
+    refetch: (variables?: TVariables) => Promise<ApolloQueryResult<any>>,
+  };
 
   declare export type ChildProps<
     TOwnProps,
     TResult,
     TVariables: Object = {}
-  > = {
+    > = {
     data: GraphqlData<TResult, TVariables>,
     mutate: MutationFunc<TResult, TVariables>,
   } & TOwnProps;
@@ -128,7 +128,7 @@ declare module 'react-apollo' {
     TProps: {},
     TChildProps: {},
     TVariables: {}
-  > {
+    > {
     +options?: OptionDescription<TProps, TVariables>;
     props?: (
       props: OptionProps<TProps, TResult, TVariables>
@@ -145,7 +145,7 @@ declare module 'react-apollo' {
     TOwnProps: Object = {},
     TVariables: Object = {},
     TMergedProps: Object = ChildProps<TOwnProps, TResult, TVariables>
-  > {
+    > {
     (
       component: React$ComponentType<TMergedProps>
     ): React$ComponentType<TOwnProps>;
@@ -211,10 +211,10 @@ declare module 'react-apollo' {
 
   declare export function cleanupApolloState(apolloState: any): void;
 
-  declare type QueryRenderPropFunction<TData, TVariables> = ({
-    data?: TData,
+  declare export type QueryRenderProps<TData, TVariables> = {
+    data?: TData | {||},
     loading: boolean,
-    error: ?ApolloError,
+    error?: ApolloError,
     variables: TVariables,
     networkStatus: NetworkStatus,
     refetch: (variables?: TVariables) => Promise<mixed>,
@@ -225,12 +225,14 @@ declare module 'react-apollo' {
     subscribeToMore: (options: {document?: DocumentNode, variables?: TVariables, updateQuery?: Function, onError?: Function}) => () => void,
     updateQuery: (previousResult: TData, options?: {variables: TVariables}) => TData,
     client: ApolloClient
-  }) => React$Node
+  }
 
-  declare export class Query<TData> extends React$Component<{
+  declare export type QueryRenderPropFunction<TData, TVariables> = (QueryRenderProps<TData, TVariables>) => React$Node
+
+  declare export class Query<TData, TVariables> extends React$Component<{
     query: DocumentNode,
-    children: QueryRenderPropFunction<TData, {[string]: any}>,
-    variables?: {[string]: any},
+    children: QueryRenderPropFunction<TData, TVariables>,
+    variables?: TVariables,
     pollInterval?: number,
     notifyOnNetworkStatusChange?: boolean,
     fetchPolicy?: FetchPolicy,
@@ -241,26 +243,28 @@ declare module 'react-apollo' {
     context?: {[string]: any}
   }> {}
 
-  declare type MutateFunction = (options: {
-    variables?: {[string]: any},
+  declare export type MutationFunction<TVariables> = (options: {
+    variables?: TVariables,
     optimisticResponse?: Object,
     refetchQueries?: (mutationResult: FetchResult) => Array<{query: DocumentNode, variables: {[string]: any}}>,
     update?: (cache: DataProxy, mutationResult: FetchResult) => any
   }) => Promise<*>
 
-  declare type MutationRenderPropFunction<TData> = (mutate: MutateFunction, result: {loading: boolean, error: ?ApolloError, data: TData}) => React$Node
-    declare export class Mutation<TData> extends React$Component<{
+  declare export type MutationResult<TData> = {loading: boolean, error?: ApolloError, data?: TData}
+
+  declare export type MutationRenderPropFunction<TData, TVariables> = (mutate: MutationFunction<TVariables>, result: MutationResult<TData>) => React$Node
+
+  declare export class Mutation<TData, TVariables> extends React$Component<{
     mutation: DocumentNode,
-    children: MutationRenderPropFunction<TData>,
-    variables?: {[string]: any},
+    children: MutationRenderPropFunction<TData, TVariables>,
+    variables?: TVariables,
     update?: (cache: DataProxy, mutationResult: FetchResult) => any,
     ignoreResults?: boolean,
     optimisticResponse?: Object,
-    refetchQueries?: (mutationResult: FetchResult) => Array<{query: DocumentNode, variables: {[string]: any}}>,
+    refetchQueries?: (mutationResult: FetchResult) => Array<{query: DocumentNode, variables: TVariables}>,
     onCompleted?: (data: TData) => void,
     onError?: (error: ApolloError) => void,
     context?: {[string]: any}
   }> {}
-
 
 }
