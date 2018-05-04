@@ -8,8 +8,10 @@ to existing libdefs.
 
 * [Contributing to the definitions repository](#contributing-to-the-definitions-repository)
 * [Writing libdefs tips](#writing-libdefs-tips)
+  * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
   * [Avoid `any` when possible](#avoid-any-when-possible)
+  * [Exporting modules](#exporting-modules)
   * [Always prefix global variables that aren't really meant to be global](#prefix-global-variables-that-arent-really-meant-to-be-global)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
@@ -90,6 +92,10 @@ You may also leave off the argument `left-pad` to run *all* tests (this takes a 
 You know how to do it.
 
 ## Writing libdefs tips
+
+### Read flow docs
+
+There's a solid writeup in the [Flow docs](https://flow.org/en/docs/libdefs/creation/) about creating new library definitions. Give it a read!
 
 ### Don't import types from other libdefs
 
@@ -196,6 +202,10 @@ getUser((user) => console.log('Got the user!'));
 ```
 
 Using `mixed` in place of `any` for the return type of a function or the type of a variable is a judgement call, though. Return types and declared variables flow into users' programs, which means that users will have to prove the type of `mixed` before they can use them.
+
+### Exporting modules
+
+When you export a module, you have a choice to use CommonJS or ES6 syntax. We generally recommend to use ES6 syntax. As [discussed here](https://github.com/flowtype/flow-typed/issues/1859#issuecomment-374575368), if you need both named exports and a default export, then you need to use the ES6 syntax.
 
 ### Prefix global variables that aren't really meant to be global
 
