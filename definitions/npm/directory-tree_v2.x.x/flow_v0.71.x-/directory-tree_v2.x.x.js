@@ -1,6 +1,6 @@
-import type pathType from 'path';
-
 declare module 'directory-tree' {
+  import typeof pathType from 'path';
+
   declare type directoryNodeType = {|
     path: string,
     name: string,
@@ -16,7 +16,7 @@ declare module 'directory-tree' {
       normalizePath?: (path: string) => string,
       exclude?: (string | Array<string>),
       extensions?: Array<string>,
-    |},
+    |} | null,
     onEachFile?: (
       item: {|
         path: string,
