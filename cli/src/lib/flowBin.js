@@ -99,7 +99,7 @@ async function extractZip(buffer, filepath, flowname) {
     }
   }
   if (!entry) {
-    throw new Error('flow binary not found in zip file');
+    throw new Error('Flow binary not found in zip file');
   }
   const readStream = await zipFile.openReadStream(entry);
   readStream.pipe(fs.createWriteStream(filepath));
@@ -108,7 +108,7 @@ async function extractZip(buffer, filepath, flowname) {
 }
 
 async function downloadBin(url, filepath, flowname) {
-  console.log(`start '${flowname}' downloading`);
+  console.log(`Start '${flowname}' downloading`);
   const response = await got(url, {encoding: null});
   console.log(`'${flowname}' downloaded`);
   await extractZip(response.body, filepath, flowname);
@@ -153,19 +153,19 @@ function filterActualVersions(releases, count, cacheDir) {
 }
 
 async function getActualVersions(count, cacheDir) {
-  console.log('fetch data from github');
+  console.log('Fetch data from github');
   const dataFromGithub = await octokit.repos.getReleases({
     owner: 'facebook',
     repo: 'flow',
     page: 0,
     per_page: 100,
   });
-  console.log('data fetched');
+  console.log('Data fetched');
   return filterActualVersions(dataFromGithub.data, count, cacheDir);
 }
 
 async function getCached(cacheLocation): Promise<Array<Flow>> {
-  console.log(`get data from cache`);
+  console.log(`Get data from cache`);
   const files: Array<string> = await fs.readdir(cacheLocation);
   return files.map(file => new Flow(path.resolve(cacheLocation, file)));
 }
@@ -175,7 +175,7 @@ async function removeFile(binPath, filename): Promise<void> {
     await fs.unlink(binPath);
     console.log(`${filename} removed from cache`);
   } catch (_) {
-    console.error(`remove '${filename}' failed`);
+    console.error(`Remove '${filename}' failed`);
   }
 }
 
@@ -189,10 +189,14 @@ function downloadActualVersionsToCache(versions) {
   );
 }
 
+let flows = null;
 export async function getOrderedFlowBins(
   cacheDir: string,
   latestVersionsNumber: number,
 ): Promise<Array<Flow>> {
+  if (flows) {
+    return flows;
+  }
   await fs.mkdirp(cacheDir);
 
   const [cached, actualVersions] = await Promise.all([
@@ -212,7 +216,7 @@ export async function getOrderedFlowBins(
     downloadActualVersionsToCache(nonCachedVersions),
   ]);
 
-  const flows = nonCachedVersions.length ? await getCached(cacheDir) : cached;
+  flows = nonCachedVersions.length ? await getCached(cacheDir) : cached;
   flows.sort((a, b) => (semver.lt(a.version, b.version) ? -1 : 1));
   return flows;
 }
