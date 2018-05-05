@@ -1,6 +1,3 @@
-// flow-typed signature: 2fd21db3d7d3c371b608c10f78bdc0a3
-// flow-typed version: da30fe6876/throttle-debounce_v1.x.x/flow_>=v0.25.x
-
 declare module "throttle-debounce" {
   /**
    * Throttle execution of a function. Especially useful for rate limiting execution of handlers
