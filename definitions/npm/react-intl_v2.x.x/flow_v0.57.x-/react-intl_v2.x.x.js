@@ -5,6 +5,8 @@
  */
 // Mostly from https://github.com/yahoo/react-intl/wiki/API#react-intl-api
 
+import type { Element, ChildrenArray } from "react";
+
 type $npm$ReactIntl$LocaleData = {
   locale: string,
   [key: string]: any
@@ -128,9 +130,11 @@ declare module "react-intl" {
   }
 
   declare type ComponentWithDefaultProps<DefaultProps: {}, Props: {}> =
-    React$ComponentType<Props> & { defaultProps: DefaultProps };
-  
-  declare type InjectIntlOtions = {
+    | React$ComponentType<Props>
+    | React$StatelessFunctionalComponent<Props>
+    | ChildrenArray<void | null | boolean | string | number | Element<any>>;
+
+  declare type InjectIntlOptions = {
     intlPropName?: string,
     withRef?: boolean
   }
@@ -148,14 +152,14 @@ declare module "react-intl" {
   declare function injectIntl<OriginalProps: InjectIntlProvidedProps, DefaultProps: {}>
   (
     component: ComponentWithDefaultProps<DefaultProps, OriginalProps>,
-    options?: InjectIntlOtions,
+    options?: InjectIntlOptions,
   ):
   IntlInjectedComponentClass<$Diff<OriginalProps, InjectIntlProvidedProps>, DefaultProps>
-  
+
   declare function injectIntl<OriginalProps: InjectIntlProvidedProps>
   (
     component: React$ComponentType<OriginalProps>,
-    options?: InjectIntlOtions,
+    options?: InjectIntlOptions,
   ):
   IntlInjectedComponentClass<$Diff<OriginalProps, InjectIntlProvidedProps>>;
 
@@ -249,7 +253,7 @@ declare module "react-intl" {
   > {}
   declare class IntlProvider extends React$Component<
     $npm$ReactIntl$IntlProviderConfig & {
-      children: React$Node,
+      children?: React$Node,
       initialNow?: $npm$ReactIntl$DateParseable
     }
   > {}

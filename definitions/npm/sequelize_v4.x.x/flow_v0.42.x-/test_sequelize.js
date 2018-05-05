@@ -87,6 +87,19 @@ GUser.hasMany(GTask);
 
 GTask.create({ revision: 1, name: 'test' }).then( (gtask) => gtask.upRevision() );
 
+//
+//  Model.Options
+// ~~~~~~~~~~~~~~~
+//
+
+(GUser.options.name.singular: string);
+(GUser.options.name.plural: string);
+(GUser.options.timestamps: ?boolean);
+(GUser.options.paranoid: ?boolean);
+(GUser.options.underscored: ?boolean);
+(GUser.options.underscoredAll: ?boolean);
+(GUser.options.hasTrigger: ?boolean);
+(GUser.options.freezeTableName: ?boolean);
 
 //
 //  Associations
@@ -1220,15 +1233,12 @@ queryInterface.createTable( 'table', { name : Sequelize.STRING }, { logging : fu
 queryInterface.createTable( 'skipme', { name : Sequelize.STRING } );
 queryInterface.dropAllTables( { skip : ['skipme'] } );
 queryInterface.dropTable( 'Group', { logging : function() { } } );
-queryInterface.addIndex( 'Group', ['username', 'isAdmin'], { logging : function() { } } );
+queryInterface.addIndex( 'Group', { fields: ['username', 'isAdmin'] } );
 queryInterface.showIndex( 'Group', { logging : function() { } } );
 queryInterface.removeIndex( 'Group', ['username', 'isAdmin'], { logging : function() { } } );
 queryInterface.showIndex( 'Group' );
 queryInterface.createTable( 'table', { name : { type : Sequelize.STRING } }, { schema : 'schema' } );
-queryInterface.addIndex( { schema : 'a', tableName : 'c' }, ['d', 'e'], { logging : function() {} }, 'schema_table' );
 queryInterface.showIndex( { schema : 'schema', tableName : 'table' }, { logging : function() {} } );
-queryInterface.addIndex( 'Group', ['from'] );
-queryInterface.addIndex( 'Group', ['from'], { indexName: 'group_from' } );
 queryInterface.describeTable( '_Users', { logging : function() {} } );
 queryInterface.createTable( 's', { table_id : { type : Sequelize.INTEGER, primaryKey : true, autoIncrement : true } } );
 queryInterface.createTable( 'SomeTable', { someEnum : Sequelize.ENUM( 'value1', 'value2', 'value3' ) } );
@@ -1880,12 +1890,12 @@ s.transaction({
   });
 });
 
-s.transaction( function() {
-  return Promise.resolve();
-} );
-s.transaction( { isolationLevel : 'SERIALIZABLE' }, function( t ) { return Promise.resolve(); } );
-s.transaction( { isolationLevel : s.Transaction.ISOLATION_LEVELS.SERIALIZABLE }, (t) => Promise.resolve() );
-s.transaction( { isolationLevel : s.Transaction.ISOLATION_LEVELS.READ_COMMITTED }, (t) => Promise.resolve() );
+let autoCallback = (t: Transaction):Promise<string> => { return Promise.resolve('a') }
+let callbackValidator = (r:string) => {}
+s.transaction( autoCallback ).then( callbackValidator );
+s.transaction( { isolationLevel : 'SERIALIZABLE' }, autoCallback ).then( callbackValidator );
+s.transaction( { isolationLevel : s.Transaction.ISOLATION_LEVELS.SERIALIZABLE }, autoCallback ).then( callbackValidator );
+s.transaction( { isolationLevel : s.Transaction.ISOLATION_LEVELS.READ_COMMITTED }, autoCallback ).then( callbackValidator );
 
 // transaction types
 new Sequelize( '', { transactionType: 'DEFERRED' } );
@@ -1898,8 +1908,8 @@ s.transaction( { type : s.Transaction.TYPES.IMMEDIATE }, (t) => Promise.resolve(
 s.transaction( { type : s.Transaction.TYPES.EXCLUSIVE }, (t) => Promise.resolve() );
 
 // promise transaction
-s.transaction(async () => {
-});
+let asyncAutoCallback = async (t: Transaction):Promise<string> => 'a'
+s.transaction( asyncAutoCallback ).then( callbackValidator );
 
 // sync options types
 s.sync({

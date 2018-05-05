@@ -14,6 +14,10 @@ declare module "react-router-native" {
   declare export class DeepLinking extends React$Component<{
     children?: React$Node
   }> {}
+  
+  declare export class BackButton extends React$Component<{
+    children?: React$Node
+  }> {}
 
   declare export class AndroidBackButton extends React$Component<{
     children?: React$Node

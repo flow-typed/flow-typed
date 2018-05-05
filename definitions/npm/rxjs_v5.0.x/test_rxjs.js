@@ -1,15 +1,12 @@
 /* @flow */
 
-import { Observable, Scheduler, Subject } from "rxjs";
+import { Observable, Observer, Scheduler, Subject } from "rxjs";
 import * as O from "rxjs/Observable";
 import * as Obs from "rxjs/Observer";
 import * as BS from "rxjs/BehaviorSubject";
 import * as RS from "rxjs/ReplaySubject";
 import * as S from "rxjs/Subject";
 import * as Sub from "rxjs/Subscription";
-
-type SuperFoo = { x: string };
-type SubFoo = { x: string, y: number };
 
 const numbers: Observable<number> = Observable.of(1, 2, 3);
 const strings: Observable<string> = numbers.map(x => x.toString());
@@ -32,6 +29,9 @@ strings.elementAt(1, 5);
 (Observable.of(numbers, numbers).concatAll(): Observable<number>);
 
 // (numbers.pairwise(): Observable<Array<number>>);
+
+(numbers.partition(x => x % 2 === 0): [Observable<number>, Observable<number>]);
+
 (numbers.skipWhile(x => true): Observable<number>);
 
 // $ExpectError -- need the typecast or the error appears at the declaration site
@@ -61,11 +61,32 @@ const combined2: Observable<[number, string]> = Observable.combineLatest(
 
 const combined3: Observable<[number]> = Observable.combineLatest(numbers);
 
+(Observable.combineLatest(numbers, strings, strings): Observable<
+  [number, string, string]
+>);
+
 const combinedBad: Observable<{
   n: number,
   s: string
   // $ExpectError
 }> = Observable.combineLatest(numbers, numbers, (n, s) => ({ n, s }));
+
+(numbers.combineLatest(strings): Observable<[number, string]>);
+// $ExpectError
+(numbers.combineLatest(numbers): Observable<[number, string]>);
+
+(numbers.combineLatest(strings, (a: number, b: string) => ({
+  a,
+  b
+})): Observable<{ a: number, b: string }>);
+
+(numbers.combineLatest(strings, strings): Observable<[number, string, string]>);
+
+(numbers.combineLatest(strings, strings, (a: number, b: string, c: string) => ({
+  a,
+  b,
+  c
+})): Observable<{ a: number, b: string, c: string }>);
 
 const forked: Observable<{ n: number, s: string }> = Observable.forkJoin(
   numbers,
@@ -119,12 +140,39 @@ const zipped2: Observable<[number, string]> = Observable.zip(numbers, strings);
 
 const zipped3: Observable<[number]> = Observable.zip(numbers);
 
+(Observable.zip(numbers, strings, strings): Observable<
+  [number, string, string]
+>);
+
 // $ExpectError
 const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
   numbers,
   numbers,
   (n, s) => ({ n, s })
 );
+
+(Observable.zip(numbers, strings): Observable<[number, string]>);
+(Observable.zip(numbers, strings, (a: number, b: string) => ({
+  a,
+  b
+})): Observable<{ a: number, b: string }>);
+
+(numbers.zip(strings): Observable<[number, string]>);
+// $ExpectError
+(numbers.zip(numbers): Observable<[number, string]>);
+
+(numbers.zip(strings, (a: number, b: string) => ({
+  a,
+  b
+})): Observable<{ a: number, b: string }>);
+
+(numbers.zip(strings, strings): Observable<[number, string, string]>);
+
+(numbers.zip(strings, strings, (a: number, b: string, c: string) => ({
+  a,
+  b,
+  c
+})): Observable<{ a: number, b: string, c: string }>);
 
 // $ExpectError
 const bogusEmpty: Observable<string> = Observable.empty().concat(
@@ -142,9 +190,50 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
 // $ExpectError
 (Observable.of(2).startWith(1, "2", 3): Observable<number>);
 
+(numbers.window(Observable.interval(100)): Observable<Observable<number>>);
+// $ExpectError
+(numbers.window(Observable.interval(100)): Observable<Observable<string>>);
+
+(numbers.windowCount(3): Observable<Observable<number>>);
+(numbers.windowCount(2, 3): Observable<Observable<number>>);
+
+(numbers.windowToggle(
+  Observable.interval(100),
+  i => (i % 2 ? Observable.interval(500) : Observable.empty())
+): Observable<Observable<number>>);
+(numbers.windowToggle(
+  Observable.interval(100),
+  // $ExpectError
+  Observable.interval(500)
+): Observable<Observable<number>>);
+(numbers.windowWhen(() => Observable.interval(100)): Observable<
+  Observable<number>
+>);
+// $ExpectError
+(numbers.windowWhen(Observable.interval(100)): Observable<Observable<number>>);
+
 (numbers.withLatestFrom(strings): Observable<[number, string]>);
 // $ExpectError
 (numbers.withLatestFrom(numbers): Observable<[number, string]>);
+
+(numbers.withLatestFrom(strings, (a: number, b: string) => ({
+  a,
+  b
+})): Observable<{ a: number, b: string }>);
+
+(numbers.withLatestFrom(strings, strings): Observable<
+  [number, string, string]
+>);
+
+(numbers.withLatestFrom(strings, strings): Observable<
+  [number, string, string]
+>);
+
+(numbers.withLatestFrom(
+  strings,
+  strings,
+  (a: number, b: string, c: string) => ({ a, b, c })
+): Observable<{ a: number, b: string, c: string }>);
 
 numbers.observeOn(Scheduler.async);
 // $ExpectError
@@ -157,6 +246,9 @@ Observable.fromEvent(null, "click", { capture: 1 });
 Observable.of(1).switchMapTo(Observable.of("test"));
 // $ExpectError
 Observable.of(1).switchMapTo(2);
+
+(strings.map(x => x): Observable<string>);
+(strings.map((x, i) => i): Observable<number>);
 
 Observable.using(() => {}, () => Observable.of(1));
 Observable.using(
@@ -180,14 +272,17 @@ Observable.of({ test: 1 }).distinctUntilKeyChanged("test", (a, b) => a === b);
 
 // Testing covariance/contravariance/invariance of type parameters
 
+type SuperFoo = { x: string };
+type SubFoo = { x: string, y: number };
+
 const subObservable: Observable<SubFoo> = new Observable();
 const superObservable: Observable<SuperFoo> = new Observable();
 
 const subSubject: Subject<SubFoo> = new Subject();
 const superSubject: Subject<SuperFoo> = new Subject();
 
-const superObserver: rxjs$IObserver<SuperFoo> = (null: any);
-const subObserver: rxjs$IObserver<SubFoo> = (null: any);
+const superObserver: Observer<SuperFoo> = new Observer();
+const subObserver: Observer<SubFoo> = new Observer();
 
 (subObservable: Observable<SuperFoo>);
 // $ExpectError -- covariant
@@ -198,9 +293,9 @@ const subObserver: rxjs$IObserver<SubFoo> = (null: any);
 // $ExpectError -- invariant
 (superSubject: Subject<SubFoo>);
 
-// $ExpectError -- contravariant. Type parameter is only in input positions.
-(subObserver: rxjs$IObserver<SuperFoo>);
-(superObserver: rxjs$IObserver<SubFoo>);
+// $ExpectError -- contravariant
+(subObserver: Observer<SuperFoo>);
+(superObserver: Observer<SubFoo>);
 
 const groupedSubObservable: Observable<
   Observable<SubFoo>
@@ -251,3 +346,6 @@ Observable.of(1)
 (numbers.last(): Observable<number>);
 // $ExpectError
 (numbers.last(): Observable<string>);
+
+// $ExpectError
+(Observable.of(0).catch(() => Observable.of('foo')): Observable<string>);

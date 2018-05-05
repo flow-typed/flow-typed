@@ -1,3 +1,3 @@
-declare module 'create-react-class' {
-  declare var exports: React$CreateClass;
+declare module "create-react-class" {
+  declare module.exports: React$CreateClass;
 }

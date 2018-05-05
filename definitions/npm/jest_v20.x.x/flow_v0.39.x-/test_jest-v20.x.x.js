@@ -169,7 +169,14 @@ jest.resetModules().resetModules();
 
 jest.spyOn({}, "foo");
 
-expect.addSnapshotSerializer(JSON.stringify);
+expect.addSnapshotSerializer({
+  print: (val, serialize) => `Foo: ${serialize(val.foo)}`,
+  test: val => val && val.hasOwnProperty('foo')
+})
+
+// $ExpectError
+expect.addSnapshotSerializer(JSON.stringify)
+
 expect.assertions(1);
 expect.hasAssertions();
 
@@ -205,6 +212,8 @@ expect(wrapper).toBeDisabled();
 
 expect(wrapper).toBeEmpty();
 
+expect(wrapper).toBeEmptyRender();
+
 expect(wrapper).toBePresent();
 
 expect(wrapper).toContainReact(<Dummy />);
@@ -212,6 +221,8 @@ expect(wrapper).toContainReact(<Dummy />);
 expect(wrapper).toContainReact();
 // $ExpectError
 expect(wrapper).toContainReact("string");
+
+expect(wrapper).toExist();
 
 expect(wrapper).toHaveClassName("class");
 // $ExpectError
@@ -231,6 +242,9 @@ expect(wrapper).toHaveProp("test", "test");
 expect(wrapper).toHaveProp();
 // $ExpectError
 expect(wrapper).toHaveProp(true);
+expect(wrapper).toHaveProp({ test: "test" });
+// $ExpectError
+expect(wrapper).toHaveProp({ test: "test" }, "test");
 
 expect(wrapper).toHaveRef("test");
 // $ExpectError
@@ -240,6 +254,10 @@ expect(wrapper).toHaveRef(true);
 
 expect(wrapper).toHaveState("test");
 expect(wrapper).toHaveState("test", "test");
+expect(wrapper).toHaveState({ test: "test" });
+// $ExpectError
+expect(wrapper).toHaveState({ test: "test" }, "test");
+
 // $ExpectError
 expect(wrapper).toHaveState();
 // $ExpectError
@@ -247,6 +265,10 @@ expect(wrapper).toHaveState(true);
 
 expect(wrapper).toHaveStyle("color");
 expect(wrapper).toHaveStyle("color", "#ccc");
+expect(wrapper).toHaveStyle({ color: "#ccc" });
+// $ExpectError
+expect(wrapper).toHaveStyle({ color: "#ccc" }, "test");
+
 // $ExpectError
 expect(wrapper).toHaveStyle();
 // $ExpectError
@@ -283,3 +305,25 @@ expect(wrapper).toMatchSelector("span");
 expect(wrapper).toMatchSelector();
 // $ExpectError
 expect(wrapper).toMatchSelector(true);
+
+// dom-testing-library
+{
+  const element = document.createElement('div');
+
+  expect(element).toHaveTextContent('123');
+  // $ExpectError: expected text content should be present
+  expect(element).toHaveTextContent();
+  // $ExpectError: expected text content should be a string
+  expect(element).toHaveTextContent(1);
+
+  expect(element).toBeInTheDOM();
+
+  expect(element).toHaveAttribute('foo');
+  expect(element).toHaveAttribute('foo', 'bar');
+  // $ExpectError: attribute name should be present
+  expect(element).toHaveAttribute();
+  // $ExpectError: attribute name should be a string
+  expect(element).toHaveAttribute(1);
+  // $ExpectError: expected attribute value should be a string
+  expect(element).toHaveAttribute('foo', 1);
+}

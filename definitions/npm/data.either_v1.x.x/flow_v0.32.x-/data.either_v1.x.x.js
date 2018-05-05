@@ -9,7 +9,7 @@ interface Apply<A> extends Functor<A> {
 }
 
 interface Applicative<A> extends Apply<A> {
-  static of<B>(b: B): Applicative<B>;
+  of<B>(b: B): Applicative<B>;
 }
 
 interface Chain<A> extends Apply<A> {

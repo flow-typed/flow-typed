@@ -66,7 +66,7 @@ export async function getFilesInDir(
   return installedLibDefs;
 }
 
-export function mkdirp(path: string) {
+export function mkdirp(path: string): Promise<*> {
   return new Promise((res, rej) => {
     mkdirpCb(path, err => {
       if (err) {

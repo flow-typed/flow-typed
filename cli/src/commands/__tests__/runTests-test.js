@@ -26,7 +26,6 @@ describe('run-tests (command)', () => {
     it('console logs about unused suppression', async () => {
       const expectedError = 'Unused suppression comment.';
       const calls = ((console.log: any): JestMockFn<*, *>).mock.calls;
-      // takes the last error message to make sure this does not break in future versions of Flow
       const lastErrorMsg = calls[calls.length - 1][1];
       expect(lastErrorMsg).toContain(expectedError);
     });

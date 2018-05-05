@@ -1,8 +1,8 @@
 // @flow
-import Fuse from 'fuse.js';
+import Fuse from "fuse.js";
 
-const fuse: Fuse<number> = Fuse([1, 2]);
-fuse.search('foo');
+const fuse: Fuse<number> = new Fuse([1, 2]);
+fuse.search("foo");
 
 // $ExpectError
 const A: number[] = fuse.search(1);

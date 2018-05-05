@@ -15,6 +15,7 @@ declare module "react-router-dom" {
   }> {}
 
   declare export class Link extends React$Component<{
+    className?: string,
     to: string | LocationShape,
     replace?: boolean,
     children?: React$Node
@@ -82,8 +83,9 @@ declare module "react-router-dom" {
   declare export type ContextRouter = {|
     history: RouterHistory,
     location: Location,
-    match: Match
-  |};
+    match: Match,
+    staticContext?: StaticRouterContext,
+|};
 
   declare export type GetUserConfirmation = (
     message: string,
@@ -115,7 +117,7 @@ declare module "react-router-dom" {
   }> {}
 
   declare export class Prompt extends React$Component<{
-    message: string | ((location: Location) => string | true),
+    message: string | ((location: Location) => string | boolean),
     when?: boolean
   }> {}
 

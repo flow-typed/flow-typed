@@ -16,6 +16,7 @@ export type Args = {
   _: Array<string>,
   path?: string,
   onlyChanged?: boolean,
+  numberOfFlowVersions?: number,
 };
 
 const PKG_ROOT_DIR = path.join(__dirname, '..', '..');
@@ -67,11 +68,13 @@ async function getTestGroups(
   });
 }
 
-async function writeFlowConfig(testDirPath, libDefPath) {
+async function writeFlowConfig(repoDirPath, testDirPath, libDefPath) {
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
+
   const flowConfigData = [
     '[libs]',
     path.basename(libDefPath),
+    path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
@@ -151,6 +154,7 @@ async function testLowestCapableFlowVersion(
 }
 
 async function findLowestCapableFlowVersion(
+  repoDirPath,
   flows,
   lowestFlowVersionRan,
   testDirPath,
@@ -160,8 +164,8 @@ async function findLowestCapableFlowVersion(
     return semver.lt(flow.version, lowestFlowVersionRan);
   });
   lowerFlowVersionsToRun.reverse();
-  await writeFlowConfig(testDirPath, libDefPath);
-  return await testLowestCapableFlowVersion(
+  await writeFlowConfig(repoDirPath, testDirPath, libDefPath);
+  return testLowestCapableFlowVersion(
     lowerFlowVersionsToRun,
     testDirPath,
     lowestFlowVersionRan,
@@ -174,9 +178,11 @@ async function findLowestCapableFlowVersion(
  * directory.
  */
 async function runTestGroup(
-  testGroup: TestGroup,
-  errors = [],
+  repoDirPath,
+  testGroup,
+  flows,
 ): Promise<Array<string>> {
+  const errors = [];
   // Some older versions of Flow choke on ">"/"<"/"="
   const testDirName = testGroup.id
     .replace(/\//g, '--')
@@ -192,8 +198,6 @@ async function runTestGroup(
     );
   }
 
-  const flows = await getOrderedFlowBins(BIN_DIR, LATEST_VERSIONS_NUMBER);
-
   try {
     await fs.mkdir(testDirPath);
 
@@ -202,6 +206,7 @@ async function runTestGroup(
       testDirPath,
       path.basename(testGroup.libDefPath),
     );
+    const copiedFileNames = new Set();
     await Promise.all([
       Promise.all(
         testGroup.testFilePaths.map(async (filePath, idx) => {
@@ -210,7 +215,13 @@ async function runTestGroup(
           //
           // i.e. underscore/v1.x.x/test-underscore.js
           //      underscore/v1.x.x/flow-v0.22.x/test-underscore.js
-          const destBasename = idx + '-' + path.basename(filePath);
+          //
+          // Only mangles the name when there's a naming collision. Otherwise, uses the original.
+          const fileName = path.basename(filePath);
+          const destBasename = copiedFileNames.has(fileName)
+            ? `${idx}-${fileName}`
+            : fileName;
+          copiedFileNames.add(destBasename);
           await copyFile(filePath, path.join(testDirPath, destBasename));
         }),
       ),
@@ -229,7 +240,7 @@ async function runTestGroup(
     }
     const lowestFlowVersionRan = flowToRun[0].version;
 
-    await writeFlowConfig(testDirPath, testGroup.libDefPath);
+    await writeFlowConfig(repoDirPath, testDirPath, testGroup.libDefPath);
     const higherVersionErrors = await runFlowTypeDefTests(
       flowToRun,
       testGroup.id,
@@ -239,6 +250,7 @@ async function runTestGroup(
     errors.push(...higherVersionErrors);
 
     const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
+      repoDirPath,
       flowToRun,
       lowestFlowVersionRan,
       testDirPath,
@@ -259,9 +271,10 @@ async function runTestGroup(
 }
 
 async function runTests(
-  repoDirPath: string,
-  testPatterns: Array<string>,
-  onlyChanged?: boolean,
+  repoDirPath,
+  testPatterns,
+  onlyChanged?,
+  numberOfFlowVersions,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
   const testGroups = (await getTestGroups(
@@ -292,7 +305,10 @@ async function runTests(
     const results = new Map();
     while (testGroups.length > 0) {
       const testGroup = testGroups.shift();
-      const testGroupErrors = await runTestGroup(testGroup);
+      //Prepare bin folder to collect flow instances
+      const flows = await getOrderedFlowBins(BIN_DIR, numberOfFlowVersions);
+
+      const testGroupErrors = await runTestGroup(repoDirPath, testGroup, flows);
       if (testGroupErrors.length > 0) {
         const errors = results.get(testGroup.id) || [];
         testGroupErrors.forEach(err => errors.push(err));
@@ -324,6 +340,11 @@ export function setup(yargs: Yargs) {
       description: 'Run only changed definition tests',
       demand: false,
     },
+    numberOfFlowVersions: {
+      type: 'number',
+      description: 'Only run against the latest X versions of flow',
+      demand: false,
+    },
   });
 }
 
@@ -337,6 +358,8 @@ export async function run(argv: Args): Promise<number> {
   }
   const testPatterns = argv._.slice(1);
   const onlyChanged = Boolean(argv.onlyChanged);
+  const numberOfFlowVersions =
+    Number(argv.numberOfFlowVersions) || LATEST_VERSIONS_NUMBER;
 
   const cwd = process.cwd();
   const basePath = argv.path || cwd;
@@ -351,7 +374,12 @@ export async function run(argv: Args): Promise<number> {
     console.log('Running definition tests in %s...\n', repoDirPath);
   }
 
-  const results = await runTests(repoDirPath, testPatterns, onlyChanged);
+  const results = await runTests(
+    repoDirPath,
+    testPatterns,
+    onlyChanged,
+    numberOfFlowVersions,
+  );
   console.log(' ');
   Array.from(results).forEach(([testGroupName, errors]) => {
     console.log('ERROR: %s', testGroupName);
