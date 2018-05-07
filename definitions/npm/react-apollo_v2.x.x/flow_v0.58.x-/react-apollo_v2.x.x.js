@@ -7,10 +7,10 @@ import type {
   ApolloQueryResult,
   ApolloError,
   FetchPolicy,
-  FetchMoreOptions,
+  FetchMoreOptions as FetchMoreOptionsAC,
   UpdateQueryOptions,
-  FetchMoreQueryOptions,
-  SubscribeToMoreOptions,
+  FetchMoreQueryOptions as FetchMoreQueryOptionsAC,
+  SubscribeToMoreOptions as SubscribeToMoreOptionsAC,
   PureQueryOptions,
   MutationUpdaterFn,
 } from 'apollo-client';
@@ -97,12 +97,12 @@ declare module 'react-apollo' {
     loading: boolean;
     variables: Object;
     fetchMore: (
-      fetchMoreOptions: FetchMoreQueryOptions & FetchMoreOptions
+      fetchMoreOptions: FetchMoreQueryOptionsAC & FetchMoreOptionsAC
     ) => Promise<ApolloQueryResult<any>>;
     refetch: (variables?: Object) => Promise<ApolloQueryResult<any>>;
     startPolling: (pollInterval: number) => void;
     stopPolling: () => void;
-    subscribeToMore: (options: SubscribeToMoreOptions) => () => void;
+    subscribeToMore: (options: SubscribeToMoreOptionsAC) => () => void;
     updateQuery: (
       mapFn: (previousQueryResult: any, options: UpdateQueryOptions) => any
     ) => void;
@@ -211,19 +211,37 @@ declare module 'react-apollo' {
 
   declare export function cleanupApolloState(apolloState: any): void;
 
-  declare export type QueryRenderProps<TData, TVariables> = {
+  declare export type SubscribeToMoreOptions<TData, TSubscriptionData, TSubscriptionVariables=void> = {
+    document?: DocumentNode,
+    variables?: TSubscriptionVariables,
+    updateQuery?: (previousResult: TData, result: {subscriptionData: {data?: TSubscriptionData}, variables: TSubscriptionVariables}) => TData,
+    onError?: Function
+  }
+
+  declare type FetchMoreOptions<TData, TVariables> = {|
+    variables?: TVariables,
+    updateQuery: (previousResult: TData, {fetchMoreResult: TData, variables: TVariables}) => TData
+  |}
+
+  declare type FetchMoreQueryOptions<TData, TVariables, TFetchMoreData, TFetchMoreVariables=void> = {|
+    query: DocumentNode,
+    variables?: TFetchMoreVariables,
+    updateQuery: (previousResult: TData, {fetchMoreResult: TFetchMoreData, variables: TFetchMoreVariables}) => TData
+  |}
+
+  declare export type QueryRenderProps<TData, TVariables=void> = {
     data?: TData | {||},
     loading: boolean,
     error?: ApolloError,
     variables: TVariables,
     networkStatus: NetworkStatus,
     refetch: (variables?: TVariables) => Promise<mixed>,
-    fetchMore: ({query?: DocumentNode, variables?: TVariables, updateQuery: Function}) => Promise<mixed>,
+    fetchMore: (options: FetchMoreOptions<TData, TVariables> | FetchMoreQueryOptions<TData, TVariables, any, any>) => Promise<mixed>,
     load: () => void,
     startPolling: (interval: number) => void,
     stopPolling: (interval: number) => void,
-    subscribeToMore: (options: {document?: DocumentNode, variables?: TVariables, updateQuery?: Function, onError?: Function}) => () => void,
-    updateQuery: (previousResult: TData, options?: {variables: TVariables}) => TData,
+    subscribeToMore: (options: SubscribeToMoreOptions<TData, any, any>) => () => void,
+    updateQuery: (previousResult: TData, options: {variables: TVariables}) => TData,
     client: ApolloClient
   }
 
@@ -269,7 +287,7 @@ declare module 'react-apollo' {
 
   declare export type MutationRenderPropFunction<TData, TVariables> = (mutate: MutationFunction<TVariables>, result: MutationResult<TData>) => React$Node
 
-  declare export class Mutation<TData, TVariables> extends React$Component<{
+  declare export class Mutation<TData, TVariables=void> extends React$Component<{
     mutation: DocumentNode,
     children: MutationRenderPropFunction<TData, TVariables>,
     variables?: TVariables,
