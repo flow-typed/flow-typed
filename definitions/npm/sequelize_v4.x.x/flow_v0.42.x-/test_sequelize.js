@@ -835,6 +835,12 @@ User.beforeUpdate( 'myHook', function( user, options ) {throw new Error( 'Whoops
 User.afterUpdate( function( user, options ) {throw new Error( 'Whoops!' );} );
 User.afterUpdate( 'myHook', function( user, options ) {throw new Error( 'Whoops!' );} );
 
+User.beforeUpsert( function( user, options ) { throw new Error('Whoops'); } );
+User.beforeUpsert( 'myHook', function( user, options ) { throw new Error('Whoops'); } );
+
+User.afterUpsert( function( result, options ) { throw new Error('Whoops'); } );
+User.afterUpsert( 'myHook', function( result, options ) { throw new Error('Whoops'); } );
+
 User.beforeBulkCreate( function( daos, options ) { throw new Error( 'Whoops!' );} );
 User.beforeBulkCreate( 'myHook', function( daos, options ) { throw new Error( 'Whoops!' );} );
 User.beforeBulkCreate( function( daos, options, fn ) {fn();} );

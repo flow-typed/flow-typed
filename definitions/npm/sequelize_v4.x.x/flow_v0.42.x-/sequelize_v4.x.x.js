@@ -3601,6 +3601,26 @@ declare module "sequelize" {
     static afterUpdate(fn: AsyncFn2<this, Object>): void,
 
     /**
+     * A hook that is run before upserting
+     * @param name
+     * @param fn A callback function that is called with attributes, options
+     */
+    static beforeUpsert(
+      name: string,
+      fn: AsyncFn2<TInitAttributes, Object>): void,
+    static beforeUpsert(fn: AsyncFn2<TInitAttributes, Object>): void,
+
+    /**
+     * A hook that is run after upserting
+     * @param name
+     * @param fn A callback function that is called with result of upsert(), options
+     */
+    static afterUpsert(
+      name: string,
+      fn: AsyncFn2<boolean | [this, boolean], Object>): void,
+    static afterUpsert(fn: AsyncFn2<boolean | [this, boolean], Object>): void,
+
+    /**
      * A hook that is run before creating instances in bulk
      * @param name
      * @param fn A callback function that is called with instances, options
