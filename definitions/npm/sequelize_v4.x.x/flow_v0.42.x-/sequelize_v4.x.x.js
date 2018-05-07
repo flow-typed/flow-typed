@@ -74,7 +74,7 @@ declare module "sequelize" {
      * @param newAssociation An instance or the primary key of an instance to associate with this. Pass null or undefined to remove the association.
      * @param options the options passed to `this.save`.
      */
-    (newAssociation?: TInstance | TInstancePrimaryKey, options?: BelongsToSetOneOptions & InstanceSaveOptions<any>): Promise<void>
+    (newAssociation: ?(TInstance | TInstancePrimaryKey), options?: BelongsToSetOneOptions & InstanceSaveOptions<any>): Promise<void>
   }
 
   /**
@@ -184,7 +184,7 @@ declare module "sequelize" {
      * @param newAssociation An instance or the primary key of an instance to associate with this. Pass null or undefined to remove the association.
      * @param options The options passed to `getAssocation` and `target.save`.
      */
-    (newAssociation?: TInstance | TInstancePrimaryKey, options?: HasOneSetOneOptions & HasOneGetOneOptions & InstanceSaveOptions<any>): Promise<void>
+    (newAssociation: ?(TInstance | TInstancePrimaryKey), options?: HasOneSetOneOptions & HasOneGetOneOptions & InstanceSaveOptions<any>): Promise<void>
   }
 
 
@@ -315,7 +315,7 @@ declare module "sequelize" {
      * @param newAssociations An array of instances or primary key of instances to associate with this. Pass null or undefined to remove all associations.
      * @param options The options passed to `target.findAll` and `update`.
      */
-    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: HasManySetManyOptions & AnyFindOptions & InstanceUpdateOptions<any>): Promise<void>
+    (newAssociations: ?Array<TInstance | TInstancePrimaryKey>, options?: HasManySetManyOptions & AnyFindOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
@@ -361,7 +361,7 @@ declare module "sequelize" {
      * @param newAssociations An array of instances or primary key of instances to associate with this.
      * @param options The options passed to `target.update`.
      */
-    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: HasManyAddManyOptions & InstanceUpdateOptions<any>): Promise<void>
+    (newAssociations: Array<TInstance | TInstancePrimaryKey>, options?: HasManyAddManyOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
@@ -407,7 +407,7 @@ declare module "sequelize" {
      * @param newAssociation An instance or the primary key of an instance to associate with this.
      * @param options The options passed to `target.update`.
      */
-    (newAssociation?: TInstance | TInstancePrimaryKey, options?: HasManyAddOneOptions & InstanceUpdateOptions<any>): Promise<void>
+    (newAssociation: TInstance | TInstancePrimaryKey, options?: HasManyAddOneOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
@@ -489,7 +489,7 @@ declare module "sequelize" {
      * @param oldAssociated The instance or the primary key of the instance to un-associate.
      * @param options The options passed to `target.update`.
      */
-    (oldAssociated?: TInstance | TInstancePrimaryKey, options?: HasManyRemoveOneOptions & InstanceUpdateOptions<any>): Promise<void>
+    (oldAssociated: TInstance | TInstancePrimaryKey, options?: HasManyRemoveOneOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
@@ -759,7 +759,7 @@ declare module "sequelize" {
      * @param newAssociations An array of instances or primary key of instances to associate with this. Pass null or undefined to remove all associations.
      * @param options The options passed to `through.findAll`, `bulkCreate`, `update` and `destroy`. Can also hold additional attributes for the join table.
      */
-    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManySetManyOptions &
+    (newAssociations: ?(Array<TInstance | TInstancePrimaryKey>), options?: BelongsToManySetManyOptions &
       AnyFindOptions &
       BulkCreateOptions<any> &
       InstanceUpdateOptions<any> &
@@ -812,7 +812,7 @@ declare module "sequelize" {
      * @param newAssociations An array of instances or primary key of instances to associate with this.
      * @param options The options passed to `through.findAll`, `bulkCreate`, `update` and `destroy`. Can also hold additional attributes for the join table.
      */
-    (newAssociations?: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyAddManyOptions &
+    (newAssociations: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyAddManyOptions &
       AnyFindOptions &
       BulkCreateOptions<any> &
       InstanceUpdateOptions<any> &
@@ -865,7 +865,7 @@ declare module "sequelize" {
      * @param newAssociation An instance or the primary key of an instance to associate with this.
      * @param options The options passed to `through.findAll`, `bulkCreate`, `update` and `destroy`. Can also hold additional attributes for the join table.
      */
-    (newAssociation?: TInstance | TInstancePrimaryKey, options?: BelongsToManyAddOneOptions &
+    (newAssociation: TInstance | TInstancePrimaryKey, options?: BelongsToManyAddOneOptions &
       AnyFindOptions &
       BulkCreateOptions<any> &
       InstanceUpdateOptions<any> &
@@ -956,7 +956,7 @@ declare module "sequelize" {
      * @param oldAssociated The instance or the primary key of the instance to un-associate.
      * @param options The options passed to `through.destroy`.
      */
-    (oldAssociated?: TInstance | TInstancePrimaryKey, options?: BelongsToManyRemoveOneOptions & InstanceDestroyOptions): Promise<void>
+    (oldAssociated: TInstance | TInstancePrimaryKey, options?: BelongsToManyRemoveOneOptions & InstanceDestroyOptions): Promise<void>
   }
 
 
