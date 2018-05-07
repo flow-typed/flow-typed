@@ -265,7 +265,7 @@ declare module 'react-apollo' {
     update?: (cache: DataProxy, mutationResult: FetchResult) => any
   }) => Promise<*>
 
-  declare export type MutationResult<TData> = {loading: boolean, error?: ApolloError, data?: TData}
+  declare export type MutationResult<TData> = {loading: boolean, error?: ApolloError, data?: TData, called: boolean}
 
   declare export type MutationRenderPropFunction<TData, TVariables> = (mutate: MutationFunction<TVariables>, result: MutationResult<TData>) => React$Node
 
