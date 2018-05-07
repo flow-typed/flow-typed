@@ -1,7 +1,7 @@
 import type { Dispatch, Store } from "redux";
+import type { ComponentType, ElementConfig } from 'react';
 
 declare module "react-redux" {
-  import type { ComponentType, ElementConfig } from 'react';
 
   declare export class Provider<S, A> extends React$Component<{
     store: Store<S, A>,
