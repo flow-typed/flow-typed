@@ -1,6 +1,4 @@
-// @flow
-
-declare module 'rethinkdb' {
+declare module "rethinkdb" {
 
   declare export class Connection {}
 
@@ -172,7 +170,9 @@ declare module 'rethinkdb' {
 
     delete (options: DeleteOptionsWithChanges): Op<DeleteResultWithChanges<TDoc>>;
 
-    update (object: $Shape<TDoc>, options?: UpdateOptions): Op<UpdateResult>;
+    update (object: $Shape<TDoc>): Op<UpdateResult>;
+
+    update (object: $Shape<TDoc>, options: UpdateOptions): Op<UpdateResult>;
 
     update (object: $Shape<TDoc>, options: UpdateOptionsWithChanges): Op<UpdateResultWithChanges<TDoc>>;
   }
@@ -182,7 +182,7 @@ declare module 'rethinkdb' {
     dbList (): SequenceOp<string>;
     tableList (): Op<string[]>;
     branch<TTest, TTrue, TFalse> (test: Op<TTest>, trueAction: Op<TTrue> | TTrue, falseAction: Op<TFalse> | TFalse): Op<TTrue | TFalse>;
-    connect (options: ConnectOptions | string): Promise<Connection>;
+    connect (options?: ConnectOptions | string): Promise<Connection>;
     dbCreate (dbName: string): Op<{ dbs_created: 1, config_changes: [{ old_val: null, new_val: DatabaseConfig }] }>;
     table (tableName: string, options?: { readMode?: 'single' | 'majority' | 'outdated', identifierFormat?: 'name' | 'uuid' }): TableOp<any, any, any>;
     error (): ErrorControlStructure;
