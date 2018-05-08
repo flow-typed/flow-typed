@@ -1,16 +1,8 @@
 declare module "apollo-client" {
-  import type {
-    DocumentNode,
-    ExecutionResult,
-    GraphQLError,
-    SelectionSetNode,
-    FieldNode,
-    InlineFragmentNode,
-    ValueNode,
-    SelectionNode,
-    NameNode
-    // $FlowFixMe - Can't import types from node_modules at the moment
-  } from "graphql";
+  // These types are from the graphql module. No way to import them at the moment
+  declare type DocumentNode = any;
+  declare type ExecutionResult = any;
+  declare type GraphQLError = any;
 
   declare export function print(ast: any): string;
 
@@ -403,9 +395,9 @@ declare module "apollo-client" {
   }
 
   declare interface DefaultOptions {
-    watchQuery?: ModifiableWatchQueryOptions;
-    query?: ModifiableWatchQueryOptions;
-    mutate?: MutationBaseOptions<>;
+    +watchQuery?: ModifiableWatchQueryOptions;
+    +query?: ModifiableWatchQueryOptions;
+    +mutate?: MutationBaseOptions<>;
   }
 
   declare export type ApolloClientOptions<TCacheShape> = {
@@ -582,7 +574,7 @@ declare module "apollo-client" {
   /* End TODO: Move to apollo-link libdef */
 
   /* TODO: Move these types to apollo-cache libdef */
-  declare class ApolloCache<TSerialized> {
+  declare export class ApolloCache<TSerialized> {
     read<T>(query: CacheReadOptions): T | null;
     write(write: CacheWriteOptions): void;
     diff<T>(query: CacheDiffOptions): CacheDiffResult<T>;
