@@ -350,3 +350,45 @@ expect(wrapper).toMatchSelector(true);
   // $ExpectError: expected attribute value should be a string
   expect(element).toHaveAttribute('foo', 1);
 }
+
+{
+  // in reality this would be a jquery object
+  const jquery = "$(someSelector)";
+
+ {
+    const a: boolean = expect(jquery).toBeInDom();
+
+    // $ExpectError: wrong type
+    const b: string = expect(jquery).toBeInDom();
+ }
+
+ {
+  expect(jquery).toExist();
+  expect(jquery).not.toExist();
+
+  expect(jquery).toHaveLength(1);
+  // $ExpectError: parameter required
+  expect(jquery).toHaveLength();
+
+  expect(jquery).toHaveId('username');
+
+  expect(jquery).toHaveClass('myclass');
+  expect(jquery).toHaveTag('div');
+  expect(jquery).toHaveAttr("attr1");
+  expect(jquery).toHaveAttr("attr1", "value1");
+
+  expect(jquery).toHaveProp("attr1");
+  expect(jquery).toHaveProp("attr1", "value1");
+
+  expect(jquery).toHaveData("attr1");
+  expect(jquery).toHaveData("attr1", "value1");
+
+  expect(jquery).toHaveText("MyText");
+  expect(jquery).toHaveText(/MyTe.t/);
+
+  expect(jquery).toHaveDescendantWithText("selector", "text");
+  expect(jquery).toHaveDescendantWithText("selector", /text/);
+
+  expect(jquery).toHaveCss({key: 'value'});
+  }
+}
