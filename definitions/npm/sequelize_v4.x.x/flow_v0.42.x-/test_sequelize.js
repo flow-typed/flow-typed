@@ -247,7 +247,7 @@ Warehouse.getAssociationForAlias(WarehouseBranch, 'blah')
 product.getBarcode();
 product.getBarcode({ scope: null }).then(b => b && b.code);
 
-product.setBarcode();
+product.setBarcode(null);
 product.setBarcode(1);
 product.setBarcode(barcode);
 product.setBarcode(barcode, { save: true }).then(() => { });
@@ -260,19 +260,18 @@ product.createBarcode({ id: 1 }, { save: true, silent: true }).then(() => { });
 barcode.getProduct();
 barcode.getProduct({ scope: 'foo' }).then(p => p && p.name);
 
-barcode.setProduct();
+barcode.setProduct(null);
 barcode.setProduct(1);
 barcode.setProduct(product);
 barcode.setProduct(product, { save: true }).then(() => { });
 
-barcode.createProduct();
 barcode.createProduct({ id: 1, name: 'Crowbar' });
 barcode.createProduct({ id: 1 }, { save: true, silent: true }).then((product) => { });
 
 product.getWarehouse();
 product.getWarehouse({ scope: null }).then(w => w && w.capacity);
 
-product.setWarehouse();
+product.setWarehouse(null);
 product.setWarehouse(1);
 product.setWarehouse(warehouse);
 product.setWarehouse(warehouse, { save: true }).then(() => { });
@@ -286,19 +285,16 @@ warehouse.getProducts();
 warehouse.getProducts({ where: {}, scope: false });
 warehouse.getProducts({ where: {}, scope: false }).then((products) => products[0].id);
 
-warehouse.setProducts();
+warehouse.setProducts(null);
 warehouse.setProducts([product]);
 warehouse.setProducts([product], { validate: true }).then(() => { });
 
-warehouse.addProducts();
 warehouse.addProducts([product]);
 warehouse.addProducts([product, 2], { validate: false }).then(() => { });
 
-warehouse.addProduct();
 warehouse.addProduct(product);
 warehouse.addProduct(2, { validate: true }).then(() => { });
 
-warehouse.createProduct();
 warehouse.createProduct({ id: 1, name: 'baz' });
 warehouse.createProduct({ id: 1 }, { silent: true }).then((product) => { });
 
@@ -306,7 +302,6 @@ warehouse.removeProducts();
 warehouse.removeProducts([product]);
 warehouse.removeProducts([product, 2], { validate: false }).then(() => { });
 
-warehouse.removeProduct();
 warehouse.removeProduct(product);
 warehouse.removeProduct(2, { validate: true }).then(() => { });
 
@@ -324,15 +319,13 @@ warehouse.getBranches();
 warehouse.getBranches({ where: {} });
 warehouse.getBranches({ where: {} }).then((branches) => branches[0].rank);
 
-warehouse.setBranches();
+warehouse.setBranches(null);
 warehouse.setBranches([branch]);
 warehouse.setBranches([branch, 2], { validate: true, through: { distance: 1 } }).then(() => { });
 
-warehouse.addBranches();
 warehouse.addBranches([branch]);
 warehouse.addBranches([branch, 2], { validate: false, through: { distance: 1 } }).then(() => { });
 
-warehouse.addBranch();
 warehouse.addBranch(branch);
 warehouse.addBranch(2, { validate: true, through: { distance: 1 } }).then(() => { });
 
@@ -344,7 +337,6 @@ warehouse.removeBranches();
 warehouse.removeBranches([branch]);
 warehouse.removeBranches([branch, 2], { validate: false }).then(() => { });
 
-warehouse.removeBranch();
 warehouse.removeBranch(branch);
 warehouse.removeBranch(2, { validate: true }).then(() => { });
 
@@ -362,15 +354,13 @@ customer.getBranches();
 customer.getBranches({ where: {} });
 customer.getBranches({ where: {} }).then((branches) => branches[0].rank);
 
-customer.setBranches();
+customer.setBranches(null);
 customer.setBranches([branch]);
 customer.setBranches([branch, 2], { validate: true }).then(() => { });
 
-customer.addBranches();
 customer.addBranches([branch]);
 customer.addBranches([branch, 2], { validate: false }).then(() => { });
 
-customer.addBranch();
 customer.addBranch(branch);
 customer.addBranch(2, { validate: true }).then(() => { });
 
@@ -382,7 +372,6 @@ customer.removeBranches();
 customer.removeBranches([branch]);
 customer.removeBranches([branch, 2], { validate: false }).then(() => { });
 
-customer.removeBranch();
 customer.removeBranch(branch);
 customer.removeBranch(2, { validate: true }).then(() => { });
 
