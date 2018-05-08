@@ -356,13 +356,6 @@ expect(wrapper).toMatchSelector(true);
   const jquery = "$(someSelector)";
 
  {
-    const a: boolean = expect(jquery).toBeInDom();
-
-    // $ExpectError: wrong type
-    const b: string = expect(jquery).toBeInDom();
- }
-
- {
   expect(jquery).toExist();
   expect(jquery).not.toExist();
 
