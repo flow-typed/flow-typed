@@ -1465,7 +1465,7 @@ declare module "sequelize" {
     TargetInitAttributes: Object,
     Target: Model<TargetAttributes, TargetInitAttributes>,
     ThroughAttributes: Object,
-    Through: Model<ThroughAttributes>
+    Through: Model<ThroughAttributes, any>
   > extends Association<Source, Target> {
     associationType: 'BelongsToMany';
     foreignKey: string;
@@ -3909,7 +3909,7 @@ declare module "sequelize" {
       TargetInitAttributes: Object,
       Target: Model<TargetAttributes, TargetInitAttributes>,
       ThroughAttributes: Object,
-      Through: Model<ThroughAttributes>
+      Through: Model<ThroughAttributes, any>
     >(
       target: Class<Target>,
       options: AssociationOptionsBelongsToMany<Through>
