@@ -23,7 +23,7 @@ declare module "axios" {
   }
   declare class CancelToken {
     constructor(executor: (cancel: Canceler) => void): CancelToken;
-    static source(): CancelTokenSource;
+    source(): CancelTokenSource;
     promise: Promise<Cancel>;
     reason?: Cancel;
     throwIfRequested(): void;
