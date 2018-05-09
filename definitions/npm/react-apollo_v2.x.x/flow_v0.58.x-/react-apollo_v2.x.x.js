@@ -6,7 +6,7 @@ import type {
   MutationQueryReducersMap,
   ApolloQueryResult,
   ApolloError,
-  FetchPolicy,
+  FetchPolicy as FetchPolicyAC,
   FetchMoreOptions as FetchMoreOptionsAC,
   UpdateQueryOptions,
   FetchMoreQueryOptions as FetchMoreQueryOptionsAC,
@@ -84,7 +84,7 @@ declare module 'react-apollo' {
   declare export type QueryOpts<TVariables> = {
     ssr?: boolean,
     variables?: TVariables,
-    fetchPolicy?: FetchPolicy,
+    fetchPolicy?: FetchPolicyAC,
     pollInterval?: number,
     skip?: boolean,
     errorPolicy?: ErrorPolicy,
@@ -246,7 +246,7 @@ declare module 'react-apollo' {
   }
 
   declare export type QueryRenderPropFunction<TData, TVariables> = (QueryRenderProps<TData, TVariables>) => React$Node
-
+  declare type FetchPolicy = 'cache-first' | 'cache-and-network' | 'network-only' | 'cache-only'
   declare export class Query<TData, TVariables> extends React$Component<{
     query: DocumentNode,
     children: QueryRenderPropFunction<TData, TVariables>,
