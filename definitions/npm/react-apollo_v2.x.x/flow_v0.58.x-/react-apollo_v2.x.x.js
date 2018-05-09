@@ -230,7 +230,7 @@ declare module 'react-apollo' {
     updateQuery: (previousResult: TData, {fetchMoreResult: TFetchMoreData, variables: TFetchMoreVariables}) => TData
   |}
 
-  declare export type QueryRenderProps<TData, TVariables=void> = {
+  declare export type QueryRenderProps<TData=any, TVariables=OperationVariables> = {
     data?: TData | {||},
     loading: boolean,
     error?: ApolloError,
