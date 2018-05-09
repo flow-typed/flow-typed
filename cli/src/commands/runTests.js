@@ -321,7 +321,7 @@ async function runTests(
   repoDirPath: string,
   testPatterns: Array<string>,
   onlyChanged?: boolean,
-  numberOfFlowVersions: number,
+  flowBins: Array<Flow>,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
   const testGroups = (await getTestGroups(repoDirPath, onlyChanged)).filter(
@@ -351,8 +351,7 @@ async function runTests(
     const results = new Map();
     while (testGroups.length > 0) {
       const testGroup = testGroups.shift();
-      const flowBins = await getFlowBinaries(BIN_DIR, numberOfFlowVersions);
-
+      
       const testGroupErrors = await runTestGroup(
         repoDirPath,
         testGroup,
@@ -431,11 +430,12 @@ export async function run(argv: Args): Promise<number> {
     );
   }
 
+  const flowBins = await getFlowBinaries(BIN_DIR, numberOfFlowVersions);
   const results = await runTests(
     repoDirPath,
     testPatterns,
     onlyChanged,
-    numberOfFlowVersions,
+    flowBins,
   );
   console.log(' ');
   Array.from(results).forEach(([testGroupName, errors]) => {
