@@ -343,20 +343,19 @@ declare module 'styled-components' {
   declare type ReactComponentStyled<Props>                                = $npm$styledComponents$ReactComponentStyled<Props, ComponentListKeys>;
   declare type ReactComponentStyledTaggedTemplateLiteral<Props>           = $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<Props, ComponentListKeys>;
 
-  declare module.exports: {
-    $call: $npm$styledComponents$Call<ComponentListKeys>,
+  declare export var $call: $npm$styledComponents$Call<ComponentListKeys>;
+  declare export var injectGlobal: TaggedTemplateLiteral<void>;
+  declare export var css: TaggedTemplateLiteral<Array<Interpolation>>;
+  declare export var keyframes: TaggedTemplateLiteral<string>;
+  declare export var withTheme: $npm$styledComponents$WithTheme;
+  declare export var ServerStyleSheet: typeof Npm$StyledComponents$ServerStyleSheet;
+  declare export var StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager;
+  declare export var ThemeProvider: typeof Npm$StyledComponents$ThemeProvider;
 
-    injectGlobal: TaggedTemplateLiteral<void>,
-    css: TaggedTemplateLiteral<Array<Interpolation>>,
-    keyframes: TaggedTemplateLiteral<string>,
-    withTheme: $npm$styledComponents$WithTheme,
-    ServerStyleSheet: typeof Npm$StyledComponents$ServerStyleSheet,
-    StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager,
-    ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
-
+  declare export default {
     ...$npm$styledComponents$StyledComponentsComponentList,
     ...$npm$styledComponents$StyledComponentsNativeComponentList,
-  };
+  }
 }
 
 declare module 'styled-components/native' {
@@ -377,14 +376,12 @@ declare module 'styled-components/native' {
   declare type ReactComponentStyled<Props>                                = $npm$styledComponents$ReactComponentStyled<Props, NativeComponentListKeys>;
   declare type ReactComponentStyledTaggedTemplateLiteral<Props>           = $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<Props, NativeComponentListKeys>;
 
-  declare module.exports: {
-    $call: $npm$styledComponents$Call<NativeComponentListKeys>,
-
-    css: TaggedTemplateLiteral<Array<Interpolation>>,
-    keyframes: TaggedTemplateLiteral<string>,
-    withTheme: $npm$styledComponents$WithTheme,
-    ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
-
+  declare export var $call: $npm$styledComponents$Call<NativeComponentListKeys>;
+  declare export var css: TaggedTemplateLiteral<Array<Interpolation>>;
+  declare export var keyframes: TaggedTemplateLiteral<string>;
+  declare export var withTheme: $npm$styledComponents$WithTheme;
+  declare export var ThemeProvider: typeof Npm$StyledComponents$ThemeProvider;
+  declare export default {
     ...$npm$styledComponents$StyledComponentsNativeComponentList,
-  };
+  }
 }
