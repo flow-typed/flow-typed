@@ -261,13 +261,13 @@ declare module 'react-apollo' {
     context?: {[string]: any}
   }> {}
 
-  declare type SubscriptionResult<TData, TVariables> = {
+  declare type SubscriptionResult<TData, TVariables=void> = {
     loading: boolean,
     data?: TData,
     error?: ApolloError,
   }
 
-  declare type SubscriptionProps<TData, TVariables=void> = {
+  declare type SubscriptionProps<TData, TVariables> = {
     subscription: DocumentNode,
     variables?: TVariables,
     shouldResubscribe?: boolean | (SubscriptionProps<TData, TVariables>, SubscriptionProps<TData, TVariables>) => boolean,
