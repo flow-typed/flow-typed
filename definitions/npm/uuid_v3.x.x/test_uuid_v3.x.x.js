@@ -1,6 +1,7 @@
 // @flow
 import uuid from "uuid";
 import v1 from "uuid/v1";
+import v3 from "uuid/v3";
 import v4 from "uuid/v4";
 import v5 from "uuid/v5";
 
@@ -10,6 +11,7 @@ import v5 from "uuid/v5";
 
 (v1(): string);
 (v4(): string);
+(v3(): string);
 (v5(): string);
 
 uuid.v1({
@@ -34,6 +36,8 @@ v1({ yolo: true });
 uuid.v4({ yolo: true });
 // $ExpectError
 v4({ yolo: true });
+// $ExpectError
+v3({ yolo: true });
 // $ExpectError
 v5({ yolo: true });
 
@@ -145,8 +149,25 @@ v4({
   rng: () => "bla"
 });
 
+v3.name;
+v3("bla");
+v3("bla", "bla");
+v3("bla", v3.DNS);
+v3("bla", v3.URL);
+v3([0x10, 0x91, 0x56, 0xbe, 0xc4, 0xfb, 0xc1, 0xea]);
+v3(
+  [0x10, 0x91, 0x56, 0xbe, 0xc4, 0xfb, 0xc1, 0xea],
+  [0x71, 0xb4, 0xef, 0xe1, 0x67, 0x1c, 0x58, 0x36]
+);
+
+// $ExpectError
+v3("bla", { yolo: true });
+
+v5.name;
 v5("bla");
 v5("bla", "bla");
+v5("bla", v5.DNS);
+v5("bla", v5.URL);
 v5([0x10, 0x91, 0x56, 0xbe, 0xc4, 0xfb, 0xc1, 0xea]);
 v5(
   [0x10, 0x91, 0x56, 0xbe, 0xc4, 0xfb, 0xc1, 0xea],
