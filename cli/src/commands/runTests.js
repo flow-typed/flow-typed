@@ -351,7 +351,7 @@ async function runTests(
     const results = new Map();
     while (testGroups.length > 0) {
       const testGroup = testGroups.shift();
-      
+
       const testGroupErrors = await runTestGroup(
         repoDirPath,
         testGroup,
