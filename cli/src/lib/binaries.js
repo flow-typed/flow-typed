@@ -70,6 +70,16 @@ function createBinFilename(binRoot, filename) {
     : path.resolve(binRoot, filename);
 }
 
+function saveFileFromStream(stream, filepath) {
+  return new Promise(res => {
+    stream.pipe(
+      fs.createWriteStream(filepath).on('close', () => {
+        res();
+      }),
+    );
+  });
+}
+
 async function extractZip(buffer, filepath, flowname) {
   console.log(`Start unzipping '${flowname}' file`);
   const zipFile = await yauzl.fromBuffer(buffer);
@@ -83,7 +93,7 @@ async function extractZip(buffer, filepath, flowname) {
     throw new Error('flow binary not found in zip file');
   }
   const readStream = await zipFile.openReadStream(entry);
-  readStream.pipe(fs.createWriteStream(filepath));
+  await saveFileFromStream(readStream, filepath);
   await zipFile.close();
   console.log(`'${flowname}' unzipped to cache`);
 }
