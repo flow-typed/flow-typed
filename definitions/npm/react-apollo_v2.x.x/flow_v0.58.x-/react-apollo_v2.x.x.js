@@ -1,7 +1,6 @@
 // @flow
 import type {
   ApolloClient,
-  FetchResult,
   DataProxy,
   MutationQueryReducersMap,
   ApolloQueryResult,
@@ -11,12 +10,12 @@ import type {
   UpdateQueryOptions,
   FetchMoreQueryOptions as FetchMoreQueryOptionsAC,
   SubscribeToMoreOptions as SubscribeToMoreOptionsAC,
-  PureQueryOptions,
   MutationUpdaterFn,
 } from 'apollo-client';
 import type { DocumentNode, VariableDefinitionNode } from 'graphql';
 
 declare module 'react-apollo' {
+
   declare export type NetworkStatus = 1 | 2 | 3 | 4 | 6 | 7 | 8;
 
   declare export interface ProviderProps {
@@ -67,6 +66,8 @@ declare module 'react-apollo' {
   declare export type DefaultChildProps<P, R> = ChildProps<P, R, {}>;
 
   declare export type ErrorPolicy = 'none' | 'ignore' | 'all';
+
+  declare type PureQueryOptions = {query: DocumentNode, variables?: {[string]: any}}
 
   declare export type RefetchQueriesProviderFn = (
     ...args: any[]
@@ -276,14 +277,27 @@ declare module 'react-apollo' {
 
   declare export class Subscription<TData> extends React$Component<SubscriptionProps<TData>> {}
 
-  declare export type MutationFunction<TData=void, TVariables=void> = (options: {
+  declare type ExecutionResult<T> = {
+    data?: T;
+    extensions?: {[string]: any};
+    errors?: any[];
+  }
+
+  declare type FetchResult<C={[string]: any}, E={[string]: any}> = ExecutionResult<C> & {
+    extensions?: E,
+    context?: C
+  }
+
+  declare type OperationVariables = {[string]: any}
+
+  declare export type MutationFunction<TData=any, TVariables=OperationVariables> = (options: {
     variables?: TVariables,
     optimisticResponse?: Object,
-    refetchQueries?: (mutationResult: FetchResult) => Array<{query: DocumentNode, variables: {[string]: any}}>,
-    update?: (cache: DataProxy, mutationResult: FetchResult) => any
-  }) => Promise<MutationResult<TData>>
+    refetchQueries?: (mutationResult: FetchResult<>) => string[] | PureQueryOptions[] | RefetchQueriesProviderFn,
+    update?: (cache: DataProxy, mutationResult: FetchResult<>) => any
+  }) => Promise<void | FetchResult<TData>>
 
-  declare export type MutationResult<TData=void> = {loading: boolean, error?: ApolloError, data?: TData, called: boolean}
+  declare export type MutationResult<TData={[string]: any}> = {loading: boolean, error?: ApolloError, data?: TData, called: boolean}
 
   declare export type MutationRenderPropFunction<TData, TVariables> = (mutate: MutationFunction<TData, TVariables>, result: MutationResult<TData>) => React$Node
 
@@ -291,10 +305,10 @@ declare module 'react-apollo' {
     mutation: DocumentNode,
     children: MutationRenderPropFunction<TData, TVariables>,
     variables?: TVariables,
-    update?: (cache: DataProxy, mutationResult: FetchResult) => any,
+    update?: (cache: DataProxy, mutationResult: FetchResult<>) => any,
     ignoreResults?: boolean,
     optimisticResponse?: Object,
-    refetchQueries?: (mutationResult: FetchResult) => Array<{query: DocumentNode, variables: TVariables}>,
+    refetchQueries?: string[] | PureQueryOptions[] | RefetchQueriesProviderFn,
     onCompleted?: (data: TData) => void,
     onError?: (error: ApolloError) => void,
     context?: {[string]: any}
