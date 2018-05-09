@@ -9,6 +9,10 @@ declare module "formik" {
     [field: $Keys<Values>]: boolean
   };
 
+  /**
+   * Using interface here because interfaces support overloaded method signatures
+   * https://github.com/facebook/flow/issues/1556#issuecomment-200051475
+   */
   declare export interface FormikActions<Values> {
     /** Manually set top level status. */
     setStatus(status?: any): void;
