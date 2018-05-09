@@ -276,16 +276,16 @@ declare module 'react-apollo' {
 
   declare export class Subscription<TData> extends React$Component<SubscriptionProps<TData>> {}
 
-  declare export type MutationFunction<TVariables> = (options: {
+  declare export type MutationFunction<TData=void, TVariables=void> = (options: {
     variables?: TVariables,
     optimisticResponse?: Object,
     refetchQueries?: (mutationResult: FetchResult) => Array<{query: DocumentNode, variables: {[string]: any}}>,
     update?: (cache: DataProxy, mutationResult: FetchResult) => any
-  }) => Promise<*>
+  }) => Promise<MutationResult<TData>>
 
-  declare export type MutationResult<TData> = {loading: boolean, error?: ApolloError, data?: TData, called: boolean}
+  declare export type MutationResult<TData=void> = {loading: boolean, error?: ApolloError, data?: TData, called: boolean}
 
-  declare export type MutationRenderPropFunction<TData, TVariables> = (mutate: MutationFunction<TVariables>, result: MutationResult<TData>) => React$Node
+  declare export type MutationRenderPropFunction<TData, TVariables> = (mutate: MutationFunction<TData, TVariables>, result: MutationResult<TData>) => React$Node
 
   declare export class Mutation<TData, TVariables=void> extends React$Component<{
     mutation: DocumentNode,
