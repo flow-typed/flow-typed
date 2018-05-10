@@ -230,7 +230,7 @@ declare module 'react-apollo' {
     updateQuery: (previousResult: TData, {fetchMoreResult: TFetchMoreData, variables: TFetchMoreVariables}) => TData
   |}
 
-  declare export type QueryRenderProps<TData, TVariables=void> = {
+  declare export type QueryRenderProps<TData=any, TVariables=OperationVariables> = {
     data?: TData | {||},
     loading: boolean,
     error?: ApolloError,
@@ -268,7 +268,7 @@ declare module 'react-apollo' {
     error?: ApolloError,
   }
 
-  declare type SubscriptionProps<TData, TVariables> = {
+  declare type SubscriptionProps<TData=any, TVariables=OperationVariables> = {
     subscription: DocumentNode,
     variables?: TVariables,
     shouldResubscribe?: boolean | (SubscriptionProps<TData, TVariables>, SubscriptionProps<TData, TVariables>) => boolean,
