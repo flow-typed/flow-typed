@@ -1657,3 +1657,276 @@ declare module "rxjs/util/UnsubscriptionError" {
     UnsubscriptionError: typeof rxjs$UnsubscriptionError,
   };
 }
+
+declare module "rxjs/observable/create" {
+    declare module.exports: {
+        create: typeof rxjs$Observable.create,
+    };
+}
+
+declare module "rxjs/observable/bindCallback" {
+    declare module.exports: {
+        bindCallback: typeof rxjs$Observable.bindCallback,
+    };
+}
+
+declare module "rxjs/observable/bindNodeCallback" {
+    declare module.exports: {
+        bindNodeCallback: typeof rxjs$Observable.bindNodeCallback,
+    };
+}
+
+declare module "rxjs/observable/combineLatest" {
+    declare module.exports: {
+        combineLatest: typeof rxjs$Observable.combineLatest,
+    };
+}
+
+declare module "rxjs/observable/concat" {
+    declare module.exports: {
+        concat: typeof rxjs$Observable.concat,
+    };
+}
+
+declare module "rxjs/observable/defer" {
+    declare module.exports: {
+        defer: typeof rxjs$Observable.defer,
+    };
+}
+
+declare module "rxjs/observable/empty" {
+    declare module.exports: {
+        empty: typeof rxjs$Observable.empty,
+    };
+}
+
+declare module "rxjs/observable/forkJoin" {
+    declare module.exports: {
+        forkJoin: typeof rxjs$Observable.forkJoin,
+    };
+}
+
+declare module "rxjs/observable/from" {
+    declare module.exports: {
+        from: typeof rxjs$Observable.from,
+    };
+}
+
+declare module "rxjs/observable/fromEvent" {
+    declare module.exports: {
+        fromEvent: typeof rxjs$Observable.fromEvent,
+    };
+}
+
+declare module "rxjs/observable/fromEventPattern" {
+    declare module.exports: {
+        fromEventPattern: typeof rxjs$Observable.fromEventPattern,
+    };
+}
+
+declare module "rxjs/observable/fromPromise" {
+    declare module.exports: {
+        fromPromise: typeof rxjs$Observable.fromPromise,
+    };
+}
+
+declare module "rxjs/observable/generate" {
+    declare module.exports: {
+        generate: typeof rxjs$Observable.generate,
+    };
+}
+
+declare module "rxjs/observable/if" {
+    declare module.exports: {
+        if: typeof rxjs$Observable.if,
+    };
+}
+
+declare module "rxjs/observable/interval" {
+    declare module.exports: {
+        interval: typeof rxjs$Observable.interval,
+    };
+}
+
+declare module "rxjs/observable/merge" {
+    declare module.exports: {
+        merge: typeof rxjs$Observable.merge,
+    };
+}
+
+declare module "rxjs/observable/race" {
+    declare module.exports: {
+        race: typeof rxjs$Observable.race,
+    };
+}
+
+declare module "rxjs/observable/never" {
+    declare module.exports: {
+        never: typeof rxjs$Observable.never,
+    };
+}
+
+declare module "rxjs/observable/of" {
+    declare module.exports: {
+        of: typeof rxjs$Observable.of,
+    };
+}
+
+declare module "rxjs/observable/onErrorResumeNext" {
+    declare module.exports: {
+        onErrorResumeNext: typeof rxjs$Observable.onErrorResumeNext,
+    };
+}
+
+declare module "rxjs/observable/pairs" {
+    declare module.exports: {
+        pairs: typeof rxjs$Observable.pairs,
+    };
+}
+
+declare module "rxjs/observable/range" {
+    declare module.exports: {
+        range: typeof rxjs$Observable.range,
+    };
+}
+
+declare module "rxjs/observable/using" {
+    declare module.exports: {
+        using: typeof rxjs$Observable.using,
+    };
+}
+
+declare module "rxjs/observable/throw" {
+    declare module.exports: {
+        throw: typeof rxjs$Observable.throw,
+    };
+}
+
+declare module "rxjs/observable/timer" {
+    declare module.exports: {
+        timer: typeof rxjs$Observable.timer,
+    };
+}
+
+declare module "rxjs/observable/zip" {
+    declare module.exports: {
+        zip: typeof rxjs$Observable.zip,
+    };
+}
+
+declare module "rxjs/observable/ajax" {
+    declare module.exports: {
+        ajax: typeof rxjs$Observable.ajax,
+    };
+}
+
+declare module "rxjs/observable/webSocket" {
+    declare module.exports: {
+        webSocket: typeof rxjs$Observable.webSocket,
+    };
+}
+
+declare module "rxjs/add/operator/buffer" { }
+declare module "rxjs/add/operator/bufferCount" { }
+declare module "rxjs/add/operator/bufferTime" { }
+declare module "rxjs/add/operator/bufferToggle" { }
+declare module "rxjs/add/operator/bufferWhen" { }
+declare module "rxjs/add/operator/catch" { }
+declare module "rxjs/add/operator/combineAll" { }
+declare module "rxjs/add/operator/combineLatest" { }
+declare module "rxjs/add/operator/concat" { }
+declare module "rxjs/add/operator/concatAll" { }
+declare module "rxjs/add/operator/concatMap" { }
+declare module "rxjs/add/operator/concatMapTo" { }
+declare module "rxjs/add/operator/count" { }
+declare module "rxjs/add/operator/dematerialize" { }
+declare module "rxjs/add/operator/debounce" { }
+declare module "rxjs/add/operator/debounceTime" { }
+declare module "rxjs/add/operator/defaultIfEmpty" { }
+declare module "rxjs/add/operator/delay" { }
+declare module "rxjs/add/operator/delayWhen" { }
+declare module "rxjs/add/operator/distinct" { }
+declare module "rxjs/add/operator/distinctUntilChanged" { }
+declare module "rxjs/add/operator/distinctUntilKeyChanged" { }
+declare module "rxjs/add/operator/do" { }
+declare module "rxjs/add/operator/exhaust" { }
+declare module "rxjs/add/operator/exhaustMap" { }
+declare module "rxjs/add/operator/expand" { }
+declare module "rxjs/add/operator/elementAt" { }
+declare module "rxjs/add/operator/filter" { }
+declare module "rxjs/add/operator/finally" { }
+declare module "rxjs/add/operator/find" { }
+declare module "rxjs/add/operator/findIndex" { }
+declare module "rxjs/add/operator/first" { }
+declare module "rxjs/add/operator/groupBy" { }
+declare module "rxjs/add/operator/ignoreElements" { }
+declare module "rxjs/add/operator/isEmpty" { }
+declare module "rxjs/add/operator/audit" { }
+declare module "rxjs/add/operator/auditTime" { }
+declare module "rxjs/add/operator/last" { }
+declare module "rxjs/add/operator/let" { }
+declare module "rxjs/add/operator/letBind" { }
+declare module "rxjs/add/operator/every" { }
+declare module "rxjs/add/operator/map" { }
+declare module "rxjs/add/operator/mapTo" { }
+declare module "rxjs/add/operator/materialize" { }
+declare module "rxjs/add/operator/max" { }
+declare module "rxjs/add/operator/merge" { }
+declare module "rxjs/add/operator/mergeAll" { }
+declare module "rxjs/add/operator/mergeMap" { }
+declare module "rxjs/add/operator/flatMap" { }
+declare module "rxjs/add/operator/flatMapTo" { }
+declare module "rxjs/add/operator/mergeMapTo" { }
+declare module "rxjs/add/operator/mergeScan" { }
+declare module "rxjs/add/operator/min" { }
+declare module "rxjs/add/operator/multicast" { }
+declare module "rxjs/add/operator/observeOn" { }
+declare module "rxjs/add/operator/onErrorResumeNext" { }
+declare module "rxjs/add/operator/pairwise" { }
+declare module "rxjs/add/operator/partition" { }
+declare module "rxjs/add/operator/pluck" { }
+declare module "rxjs/add/operator/publish" { }
+declare module "rxjs/add/operator/publishBehavior" { }
+declare module "rxjs/add/operator/publishReplay" { }
+declare module "rxjs/add/operator/publishLast" { }
+declare module "rxjs/add/operator/race" { }
+declare module "rxjs/add/operator/reduce" { }
+declare module "rxjs/add/operator/repeat" { }
+declare module "rxjs/add/operator/repeatWhen" { }
+declare module "rxjs/add/operator/retry" { }
+declare module "rxjs/add/operator/retryWhen" { }
+declare module "rxjs/add/operator/sample" { }
+declare module "rxjs/add/operator/sampleTime" { }
+declare module "rxjs/add/operator/scan" { }
+declare module "rxjs/add/operator/sequenceEqual" { }
+declare module "rxjs/add/operator/share" { }
+declare module "rxjs/add/operator/shareReplay" { }
+declare module "rxjs/add/operator/single" { }
+declare module "rxjs/add/operator/skip" { }
+declare module "rxjs/add/operator/skipLast" { }
+declare module "rxjs/add/operator/skipUntil" { }
+declare module "rxjs/add/operator/skipWhile" { }
+declare module "rxjs/add/operator/startWith" { }
+declare module "rxjs/add/operator/subscribeOn" { }
+declare module "rxjs/add/operator/switch" { }
+declare module "rxjs/add/operator/switchMap" { }
+declare module "rxjs/add/operator/switchMapTo" { }
+declare module "rxjs/add/operator/take" { }
+declare module "rxjs/add/operator/takeLast" { }
+declare module "rxjs/add/operator/takeUntil" { }
+declare module "rxjs/add/operator/takeWhile" { }
+declare module "rxjs/add/operator/throttle" { }
+declare module "rxjs/add/operator/throttleTime" { }
+declare module "rxjs/add/operator/timeInterval" { }
+declare module "rxjs/add/operator/timeout" { }
+declare module "rxjs/add/operator/timeoutWith" { }
+declare module "rxjs/add/operator/timestamp" { }
+declare module "rxjs/add/operator/toArray" { }
+declare module "rxjs/add/operator/window" { }
+declare module "rxjs/add/operator/windowCount" { }
+declare module "rxjs/add/operator/windowTime" { }
+declare module "rxjs/add/operator/windowToggle" { }
+declare module "rxjs/add/operator/windowWhen" { }
+declare module "rxjs/add/operator/withLatestFrom" { }
+declare module "rxjs/add/operator/zip" { }
+declare module "rxjs/add/operator/zipAll" { }
