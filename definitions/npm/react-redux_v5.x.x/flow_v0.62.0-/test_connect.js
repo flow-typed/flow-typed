@@ -39,6 +39,100 @@ function testPassingPropsToConnectedComponent() {
   connect(mapStateToProps)('');
 }
 
+function doesNotRequireDefinedComponentToTypeCheck1case() {
+  type Props = {
+    stringProp: string,
+  };
+
+  const Component = ({ stringProp }: Props) => {
+    return <span>{stringProp}</span>;
+  };
+
+  const mapStateToProps = (state: {}) => ({
+    // $ExpectError wrong type for stringProp
+    stringProp: false,
+  });
+
+  connect(mapStateToProps)(Component);
+}
+
+function doesNotRequireDefinedComponentToTypeCheck2case() {
+  type Props = {
+    numProp: string,
+  };
+
+  const Component = ({ numProp }: Props) => {
+    return <span>{numProp}</span>;
+  };
+
+  const mapDispatchToProps = () => ({
+    // $ExpectError wrong type for numProp
+    numProp: false,
+  });
+
+  connect(null, mapDispatchToProps)(Component);
+}
+
+function doesNotRequireDefinedComponentToTypeCheck3case() {
+  type Props = {
+    stringProp: string,
+    numProp: number
+  };
+
+  const Component = ({ stringProp }: Props) => {
+    return <span>{stringProp}</span>;
+  };
+
+  const mapStateToProps = (state: {}) => ({
+    // $ExpectError wrong type for stringProp
+    stringProp: false,
+  });
+
+  const mapDispatchToProps = () => ({
+    // $ExpectError wrong type for numProp
+    numProp: false,
+  });
+
+  connect(mapStateToProps, mapDispatchToProps)(Component);
+}
+
+function doesNotRequireDefinedComponentToTypeCheck4case() {
+  type Props = {
+    stringProp: string,
+  };
+
+  const Component = ({ stringProp }: Props) => {
+    return <span>{stringProp}</span>;
+  };
+
+  const mapStateToProps = (state: {}) => ({
+    // $ExpectError wrong type for stringProp
+    stringProp: false,
+  });
+
+  connect(mapStateToProps, {})(Component);
+}
+
+function doesNotRequireDefinedComponentToTypeCheck5case() {
+  type Props = {
+    stringProp: string
+  };
+
+  const Component = ({ stringProp }: Props) => {
+    return <span>{stringProp}</span>;
+  };
+
+  const mapStateToProps = () => ({});
+  const mapDispatchToProps = () => ({});
+
+  const mergeProps = () => ({
+    // $ExpectError wrong type for stringProp
+    stringProp: true
+  });
+
+  connect(mapStateToProps, mapDispatchToProps, mergeProps)(Component);
+}
+
 function testExactProps() {
   type Props = {|
     forMapStateToProps: string,

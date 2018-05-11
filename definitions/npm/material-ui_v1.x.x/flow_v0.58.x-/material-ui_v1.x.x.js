@@ -984,6 +984,7 @@ declare module "material-ui/internal/transition" {
     exitActive?: string
   };
 }
+
 declare module "material-ui/List" {
   declare export default $Exports<"material-ui/List/List">;
   declare export var ListItem: $Exports<"material-ui/List/ListItem">;
@@ -2237,7 +2238,7 @@ declare module "material-ui/Typography/Typography" {
     headlineMapping?: { [key: Type]: string },
     noWrap?: boolean,
     paragraph?: boolean,
-    type?: Type
+    variant?: Type
   }>;
 }
 

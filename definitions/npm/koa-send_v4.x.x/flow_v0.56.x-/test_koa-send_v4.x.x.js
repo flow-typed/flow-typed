@@ -1,4 +1,5 @@
 import send from "koa-send";
+import type { Options, SendResult } from "koa-send";
 
 const ctx = {};
 const path = "/";
@@ -22,3 +23,9 @@ send(ctx, path).then(result => {
   (result: number);
   (result: string);
 });
+
+async function sendAny(path: string, options: Options): SendResult {
+  return await send(ctx, path, options);
+}
+
+sendAny(path, { root: '/root/path' });

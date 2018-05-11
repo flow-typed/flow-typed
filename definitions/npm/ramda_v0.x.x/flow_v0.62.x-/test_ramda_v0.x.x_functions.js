@@ -1,6 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, uncurryN, curry, pipeP, tryCatch } from "ramda";
+import _, { compose, pipe, uncurryN, curry, pipeP, tryCatch, applyTo } from "ramda";
 // Function
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -50,10 +50,8 @@ const spec = {
   sum: _.add,
   nested: { mul: _.multiply }
 };
-const getMetrics = _.applySpec(spec);
-const apspec: $Shape<R> = getMetrics(2, 2);
 
-const applyToResult1 = _.applyTo(5, value => {
+const applyToResult1 = applyTo(5, value => {
   (value: number);
   // $ExpectError
   (value: string);
@@ -63,7 +61,7 @@ const applyToResult1 = _.applyTo(5, value => {
 // $ExpectError
 (applyToResult1: number);
 
-const applyToResult2 = _.applyTo(5)(value => {
+const applyToResult2 = applyTo(5)(value => {
   (value: number);
   // $ExpectError
   (value: string);
@@ -72,6 +70,29 @@ const applyToResult2 = _.applyTo(5)(value => {
 (applyToResult2: string);
 // $ExpectError
 (applyToResult2: number);
+
+const getMetrics = _.applySpec(spec);
+const apspec: $Shape<R> = getMetrics(2, 2);
+
+const applyToResult3 = _.applyTo(5, value => {
+  (value: number);
+  // $ExpectError
+  (value: string);
+  return String(value)
+});
+(applyToResult3: string);
+// $ExpectError
+(applyToResult3: number);
+
+const applyToResult4 = _.applyTo(5)(value => {
+  (value: number);
+  // $ExpectError
+  (value: string);
+  return String(value)
+});
+(applyToResult4: string);
+// $ExpectError
+(applyToResult4: number);
 
 const cmp: (x: Object, y: Object) => number = _.comparator(
   (a, b) => a.age < b.age

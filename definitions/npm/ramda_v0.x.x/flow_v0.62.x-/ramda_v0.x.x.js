@@ -891,6 +891,9 @@ declare module ramda {
     ...rest: Array<void>
   ): (xs: T) => T;
 
+  declare function descend<A, B>(A => B): (A => A) => number
+  declare function ascend<A, B>(A => B): (A => A) => number
+
   declare function times<T>(fn: (i: number) => T, n: number): Array<T>;
   declare function times<T>(
     fn: (i: number) => T,
