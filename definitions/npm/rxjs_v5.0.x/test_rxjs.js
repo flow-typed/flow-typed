@@ -349,3 +349,5 @@ Observable.of(1)
 
 // $ExpectError
 (Observable.of(0).catch(() => Observable.of('foo')): Observable<string>);
+
+(Observable.of(1, null).filter(Boolean): Observable<number>)
