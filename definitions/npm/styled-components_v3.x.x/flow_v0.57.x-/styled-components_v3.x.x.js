@@ -284,6 +284,7 @@ type $npm$styledComponents$StyledComponentsNativeComponentList = {|
   DrawerLayoutAndroid:          $npm$styledComponents$StyledComponentsNativeComponentListValue,
   FlatList:                     $npm$styledComponents$StyledComponentsNativeComponentListValue,
   Image:                        $npm$styledComponents$StyledComponentsNativeComponentListValue,
+  ImageBackground:              $npm$styledComponents$StyledComponentsNativeComponentListValue,
   ImageEditor:                  $npm$styledComponents$StyledComponentsNativeComponentListValue,
   ImageStore:                   $npm$styledComponents$StyledComponentsNativeComponentListValue,
   KeyboardAvoidingView:         $npm$styledComponents$StyledComponentsNativeComponentListValue,
