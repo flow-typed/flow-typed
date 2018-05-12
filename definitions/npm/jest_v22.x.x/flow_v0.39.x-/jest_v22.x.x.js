@@ -153,8 +153,34 @@ type DomTestingLibraryType = {
   toHaveAttribute(name: string, expectedValue?: string): void
 };
 
+// Jest JQuery Matchers: https://github.com/unindented/custom-jquery-matchers
+type JestJQueryMatchersType = {
+  toExist(): void,
+  toHaveLength(len: number): void,
+  toHaveId(id: string): void,
+  toHaveClass(className: string): void,
+  toHaveTag(tag: string): void,
+  toHaveAttr(key: string, val?: any): void,
+  toHaveProp(key: string, val?: any): void,
+  toHaveText(text: string | RegExp): void,
+  toHaveData(key: string, val?: any): void,
+  toHaveValue(val: any): void,
+  toHaveCss(css: {[key: string]: any}): void,
+  toBeChecked(): void,
+  toBeDisabled(): void,
+  toBeEmpty(): void,
+  toBeHidden(): void,
+  toBeSelected(): void,
+  toBeVisible(): void,
+  toBeFocused(): void,
+  toBeInDom(): void,
+  toBeMatchedBy(sel: string): void,
+  toHaveDescendant(sel: string): void,
+  toHaveDescendantWithText(sel: string, text: string | RegExp): void
+};
+
 type JestExpectType = {
-  not: JestExpectType & EnzymeMatchersType & DomTestingLibraryType,
+  not: JestExpectType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType,
   /**
    * If you have a mock function, you can use .lastCalledWith to test what
    * arguments it was last called with.
@@ -615,7 +641,7 @@ type JestPrettyFormatPlugins = Array<JestPrettyFormatPlugin>;
 /** The expect function is used every time you want to test a value */
 declare var expect: {
   /** The object that you want to make assertions against */
-  (value: any): JestExpectType & JestPromiseType & EnzymeMatchersType & DomTestingLibraryType,
+  (value: any): JestExpectType & JestPromiseType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType,
   /** Add additional Jasmine matchers to Jest's roster */
   extend(matchers: { [name: string]: JestMatcher }): void,
   /** Add a module that formats application-specific data structures. */
