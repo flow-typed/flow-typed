@@ -385,3 +385,113 @@ expect(wrapper).toMatchSelector(true);
   expect(jquery).toHaveCss({key: 'value'});
   }
 }
+
+{
+  expect('').toBeEmpty();
+  expect(1).toBeOneOf([1, 2, 3]);
+  expect(null).toBeNil();
+
+  {
+    const greaterThanOneButNotThree = n => n > 1 && n !== 3;
+    expect(100).toSatisfy(greaterThanOneButNotThree);
+  }
+
+  expect([]).toBeArray();
+
+  expect([]).toBeArrayOfSize(0);
+
+  expect([1, 2, 3]).toIncludeAllMembers([2, 1, 3]);
+
+  expect([1, 2, 3]).toIncludeAnyMembers([2, 1, 3]);
+
+  {
+    const isOdd = el => el % 2 === 1;
+    expect([1,3,5,7]).toSatisfyAll(isOdd);
+  }
+
+  expect(false).toBeBoolean();
+  expect(false).not.toBeTrue();
+
+  expect(true).not.toBeFalse();
+  expect(() => {}).toBeFunction();
+
+  {
+    const timeout = (n: number) => {};
+    const mock1 = jest.fn(timeout(1));
+    const mock2 = jest.fn(timeout(1));
+    expect(mock1).toHaveBeenCalledBefore(mock2);
+  }
+
+  expect(1).toBeNumber();
+  expect(NaN).toBeNaN();
+  expect(1).toBeFinite();
+  expect(1).toBePositive();
+  expect(-1).toBeNegative();
+  expect(2).toBeEven();
+  expect(1).toBeOdd();
+  expect(1).toBeWithin(1, 3);
+  expect({}).toBeObject();
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainKey('a');
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainKeys(['a', 'b']);
+  }
+  {
+    const o = { a: 'hello', b: 'world' };
+    expect(o).toContainAllKeys(['a', 'b']);
+  }
+  {
+    const o = { a: 'hello', b: 'world' };
+    expect(o).toContainAnyKeys(['a']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainValue('foo');
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainValues(['foo']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainAllValues(['foo', 'bar', 'baz']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainAnyValues(['qux', 'foo']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainEntry(['a', 'foo']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainEntries([['a', 'foo']]);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainAllEntries([['a', 'foo'], ['b', 'bar'], ['c', 'baz']]);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainAnyEntries([['a', 'qux'], ['a', 'foo']]);
+  }
+  {
+    expect({a: 1}).toBeExtensible();
+  }
+
+  expect(Object.freeze({})).toBeFrozen();
+
+  expect(Object.seal({})).toBeSealed();
+
+  expect('').toBeString();
+  expect('hello world').toEqualCaseInsensitive('hello world');
+  expect('hello world').toStartWith('hello');
+  expect('hello world').toEndWith('world');
+  expect('hello world').toInclude('ell');
+  expect('hello hello world').toIncludeRepeated('hello', 2);
+  expect('hello world').toIncludeMultiple(['world', 'hello']);
+}
