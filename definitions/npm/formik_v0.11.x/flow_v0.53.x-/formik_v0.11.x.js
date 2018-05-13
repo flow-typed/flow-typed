@@ -9,33 +9,62 @@ declare module "formik" {
     [field: $Keys<Values>]: boolean
   };
 
-  declare export type FormikActions<Values> = {
+  /**
+   * Using interface here because interfaces support overloaded method signatures
+   * https://github.com/facebook/flow/issues/1556#issuecomment-200051475
+   */
+  declare export interface FormikActions<Values> {
     /** Manually set top level status. */
-    setStatus: (status?: any) => void,
+    setStatus(status?: any): void;
     /**
      * Manually set top level error
      * @deprecated since 0.8.0
      */
-    setError: (e: any) => void,
+    setError(e: any): void;
     /** Manually set errors object */
-    setErrors: (errors: FormikErrors<Values>) => void,
+    setErrors(errors: FormikErrors<Values>): void;
     /** Manually set isSubmitting */
-    setSubmitting: (isSubmitting: boolean) => void,
+    setSubmitting(isSubmitting: boolean): void;
     /** Manually set touched object */
-    setTouched: (touched: FormikTouched<Values>) => void,
+    setTouched(touched: FormikTouched<Values>): void;
     /** Manually set values object  */
-    setValues: (values: Values) => void,
+    setValues(values: Values): void;
     /** Set value of form field directly */
-    setFieldValue: (field: $Keys<Values>, value: any, shouldValidate?: boolean) => void,
+    setFieldValue(
+      field: $Keys<Values>,
+      value: any,
+      shouldValidate?: boolean
+    ): void;
+    setFieldValue(field: string, value: any, shouldValidate?: boolean): void;
     /** Set error message of a form field directly */
-    setFieldError: (field: $Keys<Values>, message: string) => void,
+    setFieldError(field: $Keys<Values>, message: string): void;
+    setFieldError(field: string, message: string): void;
     /** Set whether field has been touched directly */
-    setFieldTouched: (field: $Keys<Values>, isTouched?: boolean, shouldValidate?: boolean) => void,
+    setFieldTouched(
+      field: $Keys<Values>,
+      isTouched?: boolean,
+      shouldValidate?: boolean
+    ): void;
+    setFieldTouched(
+      field: string,
+      isTouched?: boolean,
+      shouldValidate?: boolean
+    ): void;
+    /** Validate form values */
+    validateForm(values?: any): void;
     /** Reset form */
-    resetForm: (nextValues?: any) => void,
+    resetForm(nextValues?: any): void;
     /** Submit the form imperatively */
-    submitForm: () => void
-  };
+    submitForm(): void;
+    /** Set Formik state, careful! */
+    setFormikState(
+      f: (
+        prevState: $ReadOnly<FormikState<Values>>,
+        props: any
+      ) => $Shape<FormikState<Values>>,
+      callback?: () => any
+    ): void;
+  }
 
   declare export type FormikSharedConfig = {
     /** Tells Formik to validate the form on each input's onChange event */
@@ -106,7 +135,7 @@ declare module "formik" {
     /** Top level status state, in case you need it */
     status?: any,
     /** Number of times user tried to submit the form */
-    submitCount: number,
+    submitCount: number
   };
 
   /**
@@ -126,23 +155,13 @@ declare module "formik" {
    */
   declare export type FormikHandlers = {
     /** Form submit handler */
-    // TODO: React.FormEvent<HTMLFormElement>
-    handleSubmit: (e: Function) => any,
-    /** Reset form event handler  */
-    handleReset: () => void;
+    handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => any,
     /** Classic React change handler, keyed by input name */
-    // TODO: React.ChangeEvent<any>
-    handleChange: (e: Function) => any,
-    /** Mark input as touched */
-    handleBlur: (e: any) => any,
-    /** Classic React change handler, keyed by input name */
-    handleChange(e: Function): void;
-    /** Preact-like linkState. Will return a handleChange function.  */
-    handleChange(field: string): ((e: Function) => void);
-    /** Change value of form field directly */
-    handleChangeValue: (name: string, value: any) => any,
+    handleChange: (e: SyntheticEvent<any>) => any,
+    /** Classic React blur handler */
+    handleBlur: (e: any) => void,
     /** Reset form event handler  */
-    handleReset: () => any
+    handleReset: () => void
   };
 
   declare export type FormikProps<Values> = FormikState<Values> &
@@ -184,7 +203,7 @@ declare module "formik" {
       /** Value of the input */
       value: any,
       /* name of the input */
-      name?: string,
+      name: string
     },
     form: FormikProps<any>
   };
@@ -214,6 +233,8 @@ declare module "formik" {
 
   declare export function withFormik<Props, Values>({
     mapPropsToValues: (props: Props) => Values,
-    validationSchema: (props: Props) => any,
-  }): (ComponentType<Props>) => ComponentType<$Diff<Props, FormikProps<Values>>>;
+    validationSchema: (props: Props) => any
+  }): (
+    ComponentType<Props>
+  ) => ComponentType<$Diff<Props, FormikProps<Values>>>;
 }

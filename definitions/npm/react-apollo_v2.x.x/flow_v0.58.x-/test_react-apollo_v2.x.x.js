@@ -247,7 +247,7 @@ describe('Mutation', () => {
     const vars: Vars = {foo: 'bar'}
     const q = (
       <Mutation variables={vars} mutation={HERO_QUERY}>
-        {(update: MutationFunction<Vars>, {data}: MutationResult<Res>) => {
+        {(update: MutationFunction<Res, Vars>, {data}: MutationResult<Res>) => {
           // $ExpectError Cannot get `data.res`
           data.res
           if (!data) {
