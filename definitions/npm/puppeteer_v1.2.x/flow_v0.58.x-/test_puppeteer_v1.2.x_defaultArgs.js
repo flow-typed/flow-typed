@@ -8,7 +8,7 @@ describe('defaultArgs', () => {
     (defaultArgs(): Array<string>);
   });
   it('should complain if passed args', () => {
-    // $ExpectError
+    // $ExpectError no arguments are expected by function type
     (defaultArgs('testing...'): Array<string>);
   });
 });

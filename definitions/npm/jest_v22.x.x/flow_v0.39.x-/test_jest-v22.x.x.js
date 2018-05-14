@@ -185,14 +185,21 @@ jest.dontMock("testModule1").dontMock("testModule2");
 
 jest.resetModules().resetModules();
 
-jest.spyOn({}, "foo");
+jest.spyOn({}, "foo", "get");
 
 jest.setTimeout(1000);
 
 jest.runTimersToTime(3000);
 jest.advanceTimersByTime(3000);
 
-expect.addSnapshotSerializer(JSON.stringify);
+expect.addSnapshotSerializer({
+  print: (val, serialize) => `Foo: ${serialize(val.foo)}`,
+  test: val => val && val.hasOwnProperty('foo')
+})
+
+// $ExpectError
+expect.addSnapshotSerializer(JSON.stringify)
+
 expect.assertions(1);
 expect.hasAssertions();
 
@@ -321,3 +328,60 @@ expect(wrapper).toMatchSelector("span");
 expect(wrapper).toMatchSelector();
 // $ExpectError
 expect(wrapper).toMatchSelector(true);
+
+// dom-testing-library
+{
+  const element = document.createElement('div');
+
+  expect(element).toHaveTextContent('123');
+  // $ExpectError: expected text content should be present
+  expect(element).toHaveTextContent();
+  // $ExpectError: expected text content should be a string
+  expect(element).toHaveTextContent(1);
+
+  expect(element).toBeInTheDOM();
+
+  expect(element).toHaveAttribute('foo');
+  expect(element).toHaveAttribute('foo', 'bar');
+  // $ExpectError: attribute name should be present
+  expect(element).toHaveAttribute();
+  // $ExpectError: attribute name should be a string
+  expect(element).toHaveAttribute(1);
+  // $ExpectError: expected attribute value should be a string
+  expect(element).toHaveAttribute('foo', 1);
+}
+
+{
+  // in reality this would be a jquery object
+  const jquery = "$(someSelector)";
+
+ {
+  expect(jquery).toExist();
+  expect(jquery).not.toExist();
+
+  expect(jquery).toHaveLength(1);
+  // $ExpectError: parameter required
+  expect(jquery).toHaveLength();
+
+  expect(jquery).toHaveId('username');
+
+  expect(jquery).toHaveClass('myclass');
+  expect(jquery).toHaveTag('div');
+  expect(jquery).toHaveAttr("attr1");
+  expect(jquery).toHaveAttr("attr1", "value1");
+
+  expect(jquery).toHaveProp("attr1");
+  expect(jquery).toHaveProp("attr1", "value1");
+
+  expect(jquery).toHaveData("attr1");
+  expect(jquery).toHaveData("attr1", "value1");
+
+  expect(jquery).toHaveText("MyText");
+  expect(jquery).toHaveText(/MyTe.t/);
+
+  expect(jquery).toHaveDescendantWithText("selector", "text");
+  expect(jquery).toHaveDescendantWithText("selector", /text/);
+
+  expect(jquery).toHaveCss({key: 'value'});
+  }
+}

@@ -20,6 +20,12 @@ export function setup(yargs: Object) {
         type: 'bool',
         demand: false,
       },
+      maxDepth: {
+        alias: 'd',
+        describe: 'Allow to generate deeper template',
+        type: 'number',
+        demand: false,
+      },
       libdefDir: {
         default: 'flow-typed',
         alias: 'l',
@@ -40,6 +46,7 @@ export function setup(yargs: Object) {
 
 type Args = {
   overwrite: boolean,
+  maxDepth?: number,
   libdefDir?: string,
   _: Array<string>,
   rootDir?: string,
@@ -97,6 +104,7 @@ export async function run(args: Args): Promise<number> {
         version,
         args.overwrite,
         args.libdefDir,
+        args.maxDepth,
       );
     }),
   );

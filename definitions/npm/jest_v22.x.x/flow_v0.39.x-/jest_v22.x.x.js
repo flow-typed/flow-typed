@@ -146,8 +146,41 @@ type EnzymeMatchersType = {
   toMatchSelector(selector: string): void
 };
 
+// DOM testing library extensions https://github.com/kentcdodds/dom-testing-library#custom-jest-matchers
+type DomTestingLibraryType = {
+  toBeInTheDOM(): void,
+  toHaveTextContent(content: string): void,
+  toHaveAttribute(name: string, expectedValue?: string): void
+};
+
+// Jest JQuery Matchers: https://github.com/unindented/custom-jquery-matchers
+type JestJQueryMatchersType = {
+  toExist(): void,
+  toHaveLength(len: number): void,
+  toHaveId(id: string): void,
+  toHaveClass(className: string): void,
+  toHaveTag(tag: string): void,
+  toHaveAttr(key: string, val?: any): void,
+  toHaveProp(key: string, val?: any): void,
+  toHaveText(text: string | RegExp): void,
+  toHaveData(key: string, val?: any): void,
+  toHaveValue(val: any): void,
+  toHaveCss(css: {[key: string]: any}): void,
+  toBeChecked(): void,
+  toBeDisabled(): void,
+  toBeEmpty(): void,
+  toBeHidden(): void,
+  toBeSelected(): void,
+  toBeVisible(): void,
+  toBeFocused(): void,
+  toBeInDom(): void,
+  toBeMatchedBy(sel: string): void,
+  toHaveDescendant(sel: string): void,
+  toHaveDescendantWithText(sel: string, text: string | RegExp): void
+};
+
 type JestExpectType = {
-  not: JestExpectType & EnzymeMatchersType,
+  not: JestExpectType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType,
   /**
    * If you have a mock function, you can use .lastCalledWith to test what
    * arguments it was last called with.
@@ -441,7 +474,7 @@ type JestObjectType = {
    * Creates a mock function similar to jest.fn but also tracks calls to
    * object[methodName].
    */
-  spyOn(object: Object, methodName: string): JestMockFn<any, any>,
+  spyOn(object: Object, methodName: string, accessType?: "get" | "set"): JestMockFn<any, any>,
   /**
    * Set the default timeout interval for tests and before/after hooks in milliseconds.
    * Note: The default timeout interval is 5 seconds if this method is not called.
@@ -559,14 +592,60 @@ declare var xit: typeof it;
 /** A disabled individual test */
 declare var xtest: typeof it;
 
+type JestPrettyFormatColors = {
+  comment: { close: string, open: string },
+  content: { close: string, open: string },
+  prop: { close: string, open: string },
+  tag: { close: string, open: string },
+  value: { close: string, open: string },
+};
+
+type JestPrettyFormatIndent = string => string;
+type JestPrettyFormatRefs = Array<any>;
+type JestPrettyFormatPrint = any => string;
+type JestPrettyFormatStringOrNull = string | null;
+
+type JestPrettyFormatOptions = {|
+  callToJSON: boolean,
+  edgeSpacing: string,
+  escapeRegex: boolean,
+  highlight: boolean,
+  indent: number,
+  maxDepth: number,
+  min: boolean,
+  plugins: JestPrettyFormatPlugins,
+  printFunctionName: boolean,
+  spacing: string,
+  theme: {|
+    comment: string,
+    content: string,
+    prop: string,
+    tag: string,
+    value: string,
+  |},
+|};
+
+type JestPrettyFormatPlugin = {
+  print: (
+    val: any,
+    serialize: JestPrettyFormatPrint,
+    indent: JestPrettyFormatIndent,
+    opts: JestPrettyFormatOptions,
+    colors: JestPrettyFormatColors,
+  ) => string,
+  test: any => boolean,
+};
+
+type JestPrettyFormatPlugins = Array<JestPrettyFormatPlugin>;
+
 /** The expect function is used every time you want to test a value */
 declare var expect: {
   /** The object that you want to make assertions against */
-  (value: any): JestExpectType & JestPromiseType & EnzymeMatchersType,
+  (value: any): JestExpectType & JestPromiseType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType,
   /** Add additional Jasmine matchers to Jest's roster */
   extend(matchers: { [name: string]: JestMatcher }): void,
   /** Add a module that formats application-specific data structures. */
-  addSnapshotSerializer(serializer: (input: Object) => string): void,
+  addSnapshotSerializer(pluginModule: JestPrettyFormatPlugin): void,
   assertions(expectedAssertions: number): void,
   hasAssertions(): void,
   any(value: mixed): JestAsymmetricEqualityType,

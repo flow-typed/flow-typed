@@ -42,7 +42,7 @@ declare module "react-dnd" {
     ) => Class<
       ConnectedComponent<C, InstanceOf<C>, { ...CP } & $Diff<P, CP>>
     >) &
-    (<P: SP, C: React$StatelessFunctionalComponent<P>>(
+    (<P: SP, C: React$ComponentType<P>>(
       component: C
     ) => Class<ConnectedComponent<C, void, { ...CP } & $Diff<P, CP>>>);
 

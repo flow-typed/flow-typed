@@ -33,10 +33,10 @@ Some('world').fold(x => `Hello, ${x}!`, () => 'I dunno');
 None.fold(x => 'a', () => 'b');
 
 // $ExpectError
-Some('world').fold(x => x * 100, () => 'foo');
+Some('Hello').fold(x => `${x}, world!`, 24)
 
 // $ExpectError
-None.fold(x => x * 3, () => 'foo');
+Some('Hello').fold(42, () => 43)
 
 Some('Hello').chain(x => Some('world!'));
 
@@ -47,7 +47,7 @@ Some([1, 2]).concat(Some[(3, 4)]);
 
 Some([]).concat(None).getOrElse([]);
 
-// This should be an error, unsure how to type cocnat
+// This should be an error, unsure how to type concat
 Some(3).concat(Some([3, 3]));
 
 Some(3).orElse('foo');

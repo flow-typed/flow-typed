@@ -272,10 +272,10 @@ const NeedsFoo2Error: ReactComponentFunctionalUndefinedDefaultProps<{ foo: numbe
 const NeedsNothingInferred = styled(() => <div />);
 
 // ---- FUNCTIONAL COMPONENT TESTS (withTheme)----
-const NeedsFoo1Functional: ReactComponentFunctionalUndefinedDefaultProps<{ foo: string }> = withTheme(FunctionalComponent);
+const NeedsFoo1Functional: ReactComponentFunctionalUndefinedDefaultProps<{ foo: string, theme: Theme }> = withTheme(FunctionalComponent);
 const NeedsFoo2Functional: ReactComponentFunctionalUndefinedDefaultProps<{ foo: string }> = withTheme(NeedsFoo1Functional);
 
-const NeedsFoo1FunctionalDefaultProps: ReactComponentFunctional<{ foo: string }, { theme: Theme }> = withTheme(FunctionalComponent);
+const NeedsFoo1FunctionalDefaultProps: ReactComponentFunctional<{ foo: string, theme: Theme }, { theme: Theme }> = withTheme(FunctionalComponent);
 const NeedsFoo2FunctionalDefaultProps: ReactComponentFunctional<{ foo: string }, { theme: Theme }> = withTheme(NeedsFoo1FunctionalDefaultProps);
 
 // $ExpectError
