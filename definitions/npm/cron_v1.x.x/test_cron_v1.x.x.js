@@ -49,7 +49,7 @@ const running: boolean | void = job3.running;
 (job3.stop(): void);
 
 // $ExpectError
-new CronJob(123456, () => {
+const job4: CronJob = new CronJob(123456, () => {
   /*
    * Runs every weekday (Monday through Friday)
    * at 11:30:00 AM. It does not run on Saturday
@@ -62,7 +62,7 @@ new CronJob(123456, () => {
   timeZone /* Time zone of this job. */
 );
 // $ExpectError
-const job1 = new CronJob('00 30 11 * * 1-5', () => {
+new CronJob('00 30 11 * * 1-5', () => {
   /*
    * Runs every weekday (Monday through Friday)
    * at 11:30:00 AM. It does not run on Saturday
