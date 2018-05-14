@@ -1854,7 +1854,7 @@ declare module ramda {
   declare function memoizeWith<A, B, C>(
     keyFn: (...args: Array<A>) => C
   ): (...args: Array<A>) => (...args: Array<A>) => B;
-  declare function memoizeWith<A, B>(
+  declare function memoizeWith<A, B, C>(
     keyFn: (...args: Array<A>) => C,
     fn: (...args: Array<A>) => B
   ): (...args: Array<A>) => B;
