@@ -87,12 +87,19 @@ declare module "react-router-dom" {
     staticContext?: StaticRouterContext
   |};
 
+  declare type ContextRouterVoid = {
+    history: RouterHistory | void,
+    location: Location | void,
+    match: Match | void,
+    staticContext?: StaticRouterContext | void
+  };
+
   declare export type GetUserConfirmation = (
     message: string,
     callback: (confirmed: boolean) => void
   ) => void;
 
-  declare type StaticRouterContext = {
+  declare export type StaticRouterContext = {
     url?: string
   };
 
@@ -139,9 +146,11 @@ declare module "react-router-dom" {
     children?: React$Node
   }> {}
 
-  declare export function withRouter<P>(
-    Component: React$ComponentType<{| ...ContextRouter, ...P |}>
-  ): React$ComponentType<P>;
+  declare export function withRouter<P: {}, Component: React$ComponentType<P>>(
+    WrappedComponent: Component
+  ): React$ComponentType<
+    $Diff<React$ElementConfig<Component>, ContextRouterVoid>
+  >;
 
   declare type MatchPathOptions = {
     path?: string,
