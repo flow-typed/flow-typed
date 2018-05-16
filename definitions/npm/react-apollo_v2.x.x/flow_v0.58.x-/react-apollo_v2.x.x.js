@@ -377,7 +377,7 @@ declare module "react-apollo" {
     [queryName: string]: MutationQueryReducer<T>
   };
 
-  declare class ApolloError extends Error {
+  declare export class ApolloError extends Error {
     message: string;
     graphQLErrors: Array<GraphQLError>;
     networkError: Error | null;
