@@ -155,7 +155,7 @@ declare module "formik" {
    */
   declare export type FormikHandlers = {
     /** Form submit handler */
-    handleSubmit: (e: SyntheticEvent<HTMLFormElement>) => any,
+    handleSubmit: (e: SyntheticEvent<any>) => any,
     /** Classic React change handler, keyed by input name */
     handleChange: (e: SyntheticEvent<any>) => any,
     /** Classic React blur handler */
