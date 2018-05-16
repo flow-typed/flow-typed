@@ -18,7 +18,7 @@ declare module 'react-transition-group' {
   declare export type EnterHandler = (node: HTMLElement, isAppearing: boolean) => void;
   declare export type ExitHandler = (node: HTMLElement) => void;
 
-  declare interface TransitionActions {
+  declare type TransitionActions = {
     appear?: boolean;
     enter?: boolean;
     exit?: boolean;
