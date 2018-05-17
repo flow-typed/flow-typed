@@ -1,7 +1,6 @@
 // @flow
 
 declare module 'amqplib' {
-
     declare export type AMQPError = any;
 
     declare export type Message = {
@@ -80,7 +79,7 @@ declare module 'amqplib' {
         +persistent?: boolean,
         +deliveryMode?: boolean | number,
         +mandatory?: boolean,
-        +BCC?: boolean,
+        +BCC?: string | string[],
         +immediate?: boolean,
         +contentType?: string,
         +contentEncoding?: string,
@@ -197,7 +196,6 @@ declare module 'amqplib' {
 }
 
 declare module 'amqplib/callback_api' {
-
     import type {
         AMQPError,
         AssertExchangeOptions,
