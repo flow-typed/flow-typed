@@ -1,135 +1,136 @@
 // @flow
 
-type Msg = {
-    content: Buffer,
-    fields: {
-        deliveryTag: string,
-        consumerTag: string,
-        exchange: string,
-        routingKey: string,
-        redelivered: boolean,
-    },
-    properties: {
-        expiration: string,
-        userId: string,
-        CC: string | string[],
-        priority: number,
-        persistent: boolean,
-        contentType: string,
-        contentEncoding: string,
-        headers: { [string]: string },
-        correlationId: string,
-        replyTo: string,
-        messageId: string,
-        timestamp: number,
-        type: string,
-        appId: string,
-    },
-}
-
-type ConnectOptions = {
-    +protocol?: 'amqp' | 'amqps',
-    +hostname?: string,
-    +port?: number,
-    +username?: string,
-    +password?: string,
-    +locale?: string,
-    +frameMax?: number,
-    +heartbeat?: number,
-    +vhost?: string,
-}
-
-type AssertQueueOptions = {
-    +exclusive?: boolean,
-    +durable?: boolean,
-    +autoDelete?: boolean,
-    +arguments?: Object,
-    +messageTtl?: number,
-    +expires?: number,
-    +deadLetterExchange?: string,
-    +maxLength?: number,
-    +maxPriority?: number,
-}
-
-type DeleteQueueOptions = {
-    +ifUnused?: boolean,
-    +ifEmpty?: boolean,
-}
-
-type AssertExchangeOptions = {
-    +durable?: boolean,
-    +internal?: boolean,
-    +autoDelete?: boolean,
-    +alternateExchange?: string,
-    +arguments?: Object,
-}
-
-type DeleteExchangeOptions = {
-    +ifUnused?: boolean,
-}
-
-type PublishOptions = {
-    +expiration?: string,
-    +userId?: string,
-    +CC?: string | string[],
-    +priority?: number,
-    +persistent?: boolean,
-    +deliveryMode?: boolean | number,
-    +mandatory?: boolean,
-    +BCC?: boolean,
-    +immediate?: boolean,
-    +contentType?: string,
-    +contentEncoding?: string,
-    +headers?: Object,
-    +correlationId?: string,
-    +replyTo?: string,
-    +messageId?: string,
-    +timestamp?: number,
-    +type?: string,
-    +appId?: string,
-}
-
-type ConsumeOptions = {
-    +consumerTag?: string,
-    +noLocal?: boolean,
-    +noAck?: boolean,
-    +exclusive?: boolean,
-    +priority?: number,
-    +arguments?: Object,
-}
-
-type GetOptions = {
-    +noAck?: boolean,
-}
-
-type QueueOKReply = {
-    queue: string,
-    messageCount: number,
-    consumerCount: number,
-}
-
-type OKReply = {
-    messageCount: number,
-}
-
-type ExchangeOKReply = {
-    exchange: string,
-}
-
-type ConsumeOKReply = {
-    consumerTag: string,
-}
-
 declare module 'amqplib' {
 
-    declare export type Message = Msg
+    declare export type AMQPError = any;
+
+    declare export type Message = {
+        content: Buffer,
+        fields: {
+            deliveryTag: string,
+            consumerTag: string,
+            exchange: string,
+            routingKey: string,
+            redelivered: boolean,
+        },
+        properties: {
+            expiration: string,
+            userId: string,
+            CC: string | string[],
+            priority: number,
+            persistent: boolean,
+            contentType: string,
+            contentEncoding: string,
+            headers: Object,
+            correlationId: string,
+            replyTo: string,
+            messageId: string,
+            timestamp: number,
+            type: string,
+            appId: string,
+        },
+    }
+
+    declare export type ConnectOptions = {
+        +protocol?: 'amqp' | 'amqps',
+        +hostname?: string,
+        +port?: number,
+        +username?: string,
+        +password?: string,
+        +locale?: string,
+        +frameMax?: number,
+        +heartbeat?: number,
+        +vhost?: string,
+    }
+
+    declare export type AssertQueueOptions = {
+        +exclusive?: boolean,
+        +durable?: boolean,
+        +autoDelete?: boolean,
+        +arguments?: Object,
+        +messageTtl?: number,
+        +expires?: number,
+        +deadLetterExchange?: string,
+        +maxLength?: number,
+        +maxPriority?: number,
+    }
+
+    declare export type DeleteQueueOptions = {
+        +ifUnused?: boolean,
+        +ifEmpty?: boolean,
+    }
+
+    declare export type AssertExchangeOptions = {
+        +durable?: boolean,
+        +internal?: boolean,
+        +autoDelete?: boolean,
+        +alternateExchange?: string,
+        +arguments?: Object,
+    }
+
+    declare export type DeleteExchangeOptions = {
+        +ifUnused?: boolean,
+    }
+
+    declare export type PublishOptions = {
+        +expiration?: string,
+        +userId?: string,
+        +CC?: string | string[],
+        +priority?: number,
+        +persistent?: boolean,
+        +deliveryMode?: boolean | number,
+        +mandatory?: boolean,
+        +BCC?: boolean,
+        +immediate?: boolean,
+        +contentType?: string,
+        +contentEncoding?: string,
+        +headers?: Object,
+        +correlationId?: string,
+        +replyTo?: string,
+        +messageId?: string,
+        +timestamp?: number,
+        +type?: string,
+        +appId?: string,
+    }
+
+    declare export type ConsumeOptions = {
+        +consumerTag?: string,
+        +noLocal?: boolean,
+        +noAck?: boolean,
+        +exclusive?: boolean,
+        +priority?: number,
+        +arguments?: Object,
+    }
+
+    declare export type GetOptions = {
+        +noAck?: boolean,
+    }
+
+    declare export type QueueOKReply = {
+        queue: string,
+        messageCount: number,
+        consumerCount: number,
+    }
+
+    declare export type OKReply = {
+        messageCount: number,
+    }
+
+    declare export type ExchangeOKReply = {
+        exchange: string,
+    }
+
+    declare export type ConsumeOKReply = {
+        consumerTag: string,
+    }
+
 
     declare export class Channel {
         close: () => Promise<void>,
 
         on:
             & (('close', (() => mixed)) => void)
-            & (('error', ((err: Object) => mixed)) => void)
+            & (('error', ((err: any) => mixed)) => void)
             & (('return', ((msg: Message) => mixed)) => void)
             & (('drain', (() => mixed)) => void),
 
@@ -197,9 +198,22 @@ declare module 'amqplib' {
 
 declare module 'amqplib/callback_api' {
 
-    declare type AMQPError = Object;
-
-    declare export type Message = Msg;
+    import type {
+        AMQPError,
+        AssertExchangeOptions,
+        AssertQueueOptions,
+        ConnectOptions,
+        ConsumeOKReply,
+        ConsumeOptions,
+        DeleteExchangeOptions,
+        DeleteQueueOptions,
+        ExchangeOKReply,
+        GetOptions,
+        Message,
+        OKReply,
+        PublishOptions,
+        QueueOKReply,
+    } from 'amqplib';
 
     declare export class Channel {
         close: (?(?AMQPError => void)) => void,
