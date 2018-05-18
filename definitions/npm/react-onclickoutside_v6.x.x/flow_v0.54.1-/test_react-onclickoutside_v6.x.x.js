@@ -1,7 +1,7 @@
 //@flow
 
 import React from 'react';
-import onClickOutside, { type OnClickOutsideProps } from 'react-onclickoutside';
+import onClickOutside, { type OnClickOutsideProps, IGNORE_CLASS_NAME } from 'react-onclickoutside';
 
 class A extends React.Component<OnClickOutsideProps & { a: string }> {
   render() {
@@ -28,4 +28,8 @@ const B = onClickOutside(A);
 
 {
   <B a="foo" disableOnClickOutside eventTypes={['mouseDown']} outsideClickIgnoreClass="foo-bar" />
+}
+
+{
+  (IGNORE_CLASS_NAME: string);
 }
