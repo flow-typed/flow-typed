@@ -6,7 +6,9 @@ declare module 'react-onclickoutside' {
     stopPropagation?: boolean
   };
 
-  declare module.exports: <P, S>(
+  declare export var IGNORE_CLASS_NAME: string;
+
+  declare export default <P, S>(
     BaseComponent: Class<React$Component<P, S>>,
     config?: { excludeScrollbar?: boolean }
   ) => React$ComponentType<P & OnClickOutsideProps & {
