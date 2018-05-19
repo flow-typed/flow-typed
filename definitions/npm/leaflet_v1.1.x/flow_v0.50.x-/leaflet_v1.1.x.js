@@ -9,13 +9,13 @@ declare module 'leaflet' {
         removeLayer(layer: Layer): this;
         hasLayer(layer: Layer): boolean;
         eachLayer(fn: (layer: Layer) => mixed, context?: Object): this;
-        openPopup(popup: Popup): thsi;
-        openPopup(content: string | HTMLElement, latlng: LatLng, options?: PopupOptions): this;
+        openPopup(popup: Popup): this;
+        openPopup(content: string | HTMLElement, latlng: ILatLng | LatLngTuple, options?: PopupOptions): this;
         closePopup(popup?: Popup): this;
         openTooltip(tooltip: Tooltip): this;
-        openTooltip(content: string | HTMLElement, latlng: LatLng, options?: TooltipOptions): this;
+        openTooltip(content: string | HTMLElement, latlng: ILatLng | LatLngTuple, options?: TooltipOptions): this;
         closeTooltip(tooltip?: Tooltip): this;
-        setView(center: LatLng, zoom: number, options?: ZoomPanOptions): this;
+        setView(center: ILatLng | LatLngTuple, zoom: number, options?: ZoomPanOptions): this;
         /**
          * @todo
          */
@@ -105,12 +105,12 @@ declare module 'leaflet' {
         doubleClickZoom?: boolean | string;
         dragging?: boolean;
         crs?: CRS;
-        center?: LatLng;
+        center?: ILatLng | LatLngTuple;
         zoom?: number;
         minZoom?: number;
         maxZoom?: number;
         layers?: Layer[];
-        maxBounds?: LatLngBounds;
+        maxBounds?: LatLngBounds | LatLngBoundsTuple;
         renderer?: Renderer;
         zoomAnimation?: boolean;
         zoomAnimationThreshold?: number;
@@ -136,18 +136,6 @@ declare module 'leaflet' {
 
     // UI Layers
 
-    declare class Marker extends Layer {
-        constructor(latlng: LatLng, options?: MarkerOptions): void;
-        toGeoJSON(): Object;
-        getLatLng(): LatLng;
-        setLatLng(latlng: LatLng): this;
-        setZIndexOffset(offset: number): this;
-        setIcon(icon: Icon): this;
-        setOpacity(opacity: number): this;
-
-        dragging: Handler;
-    }
-
     declare type MarkerOptions = {
         icon?: Icon;
         draggable?: boolean;
@@ -162,11 +150,38 @@ declare module 'leaflet' {
         bubblingMouseEvents?: boolean;
     }
 
+    declare class Marker extends Layer {
+        constructor(latlng: ILatLng | LatLngTuple, options?: MarkerOptions): void;
+        toGeoJSON(): Object;
+        getLatLng(): LatLng;
+        setLatLng(latlng: ILatLng | LatLngTuple): this;
+        setZIndexOffset(offset: number): this;
+        setIcon(icon: Icon): this;
+        setOpacity(opacity: number): this;
+
+        dragging: Handler;
+    }
+
+    declare type PopupOptions = {
+        maxWidth?: number;
+        minWidth?: number;
+        maxHeight?: number;
+        autoPan?: boolean;
+        autoPanPaddingTopLeft?: IPoint | PointTuple;
+        autoPanPaddingBottomRight?: IPoint | PointTuple;
+        autoPanPadding?: IPoint | PointTuple;
+        keepInView?: boolean;
+        closeButton?: boolean;
+        autoClose?: boolean;
+        closeOnClick?: boolean;
+        className?: string;
+    }
+
     declare class Popup extends Layer {
         options: PopupOptions;
         constructor(options?: PopupOptions, sourse?: Layer): void;
         getLatLng(): LatLng;
-        setLatLng(latlng: LatLng): this;
+        setLatLng(latlng: ILatLng | LatLngTuple): this;
         getContent(): string | HTMLElement;
         setContent(htmlContent: string | HTMLElement | ContentFactory): this;
         getElement(): string | HTMLElement;
@@ -177,29 +192,9 @@ declare module 'leaflet' {
         openOn(map: Map): this;
     }
 
-    declare type PopupOptions = {
-        maxWidth?: number;
-        minWidth?: number;
-        maxHeight?: number;
-        autoPan?: boolean;
-        autoPanPaddingTopLeft?: Point;
-        autoPanPaddingBottomRight?: Point;
-        autoPanPadding?: Point;
-        keepInView?: boolean;
-        closeButton?: boolean;
-        autoClose?: boolean;
-        closeOnClick?: boolean;
-        className?: string;
-    }
-
-    declare class Tooltip extends Layers {
-        options: TooltipOptions;
-        constructor(options?: TooltipOptions, source?: Layer): void;
-    }
-
     declare type TooltipOptions = {
         pane?: string;
-        offset?: Point;
+        offset?: IPoint | PointTuple;
         direction?: 'right' | 'left' | 'top' | 'bottom' | 'center' | 'auto';
         permanent?: boolean;
         sticky?: boolean;
@@ -207,13 +202,12 @@ declare module 'leaflet' {
         opacity?: number;
     }
 
-    // Raster Layers
-
-    declare class TileLayer extends GridLayer {
-        constructor(url: string, options?: TileLayerOptions): void;
-        setUrl(url: string, noRedraw?: boolean): this;
-        createTile(coords: Object, done?: Function): HTMLElement;
+    declare class Tooltip extends Layers {
+        options: TooltipOptions;
+        constructor(options?: TooltipOptions, source?: Layer): void;
     }
+
+    // Raster Layers
 
     declare type TileLayerOptions = {
         minZoom?: number;
@@ -225,6 +219,12 @@ declare module 'leaflet' {
         zoomReverse?: boolean;
         detectRetina?: boolean;
         crossOrigin?: boolean;
+    }
+
+    declare class TileLayer extends GridLayer {
+        constructor(url: string, options?: TileLayerOptions): void;
+        setUrl(url: string, noRedraw?: boolean): this;
+        createTile(coords: Object, done?: Function): HTMLElement;
     }
 
     // Other Layers
@@ -248,24 +248,34 @@ declare module 'leaflet' {
 
     // Basic Types
 
-    declare class LatLng {
+    declare interface ILatLng {
+        lat: number;
+        lng: number;
+        alt?: number;
+    }
+
+    declare type LatLngTuple = [number, number] | [number, number, number];
+
+    declare class LatLng implements ILatLng {
         constructor(latitude: number, longitude: number, altitude?: number): void;
-        equals(otherLatLng: LatLng, maxMargin?: number): boolean;
+        equals(otherLatLng: ILatLng | LatLngTuple, maxMargin?: number): boolean;
         toString(): string;
-        distanceTo(otherLatLng: LatLng): number;
+        distanceTo(otherLatLng: ILatLng | LatLngTuple): number;
         wrap(): LatLng;
         toBounds(sizeInMeters: number): LatLngBounds;
 
         lat: number;
         lng: number;
-        alt: number;
+        alt?: number;
     }
+
+    declare type LatLngBoundsTuple = [ILatLng | LatLngTuple, ILatLng |LatLngTuple];
 
     declare class LatLngBounds {
         constructor(corner1: CornerType, corner2: CornerType): void;
         constructor(corner: CornerType[]): void;
-        extend(latlng: LatLng): this;
-        extend(otherBounds: LatLngBounds): this;
+        extend(latlng: ILatLng | LatLngTuple): this;
+        extend(otherBounds: LatLngBounds | LatLngBoundsTuple): this;
         pad(bufferRatio: number): LatLngBounds;
         getCenter(): LatLng;
         getSouthWest(): LatLng;
@@ -276,25 +286,30 @@ declare module 'leaflet' {
         getSouth(): number;
         getEast(): number;
         getNorth(): number;
-        contains(otherBounds: LatLngBounds): boolean;
-        contains(latlng: LatLng): boolean;
-        intersect(otherBounds: LatLngBounds): boolean;
-        overlaps(otherBounds: Bounds): boolean;
+        contains(otherBounds: LatLngBounds | LatLngBoundsTuple): boolean;
+        contains(latlng: ILatLng | LatLngTuple): boolean;
+        intersect(otherBounds: LatLngBounds | LatLngBoundsTuple): boolean;
+        overlaps(otherBounds: Bounds | BoundsTuple): boolean;
         toBBoxString(): string;
-        equals(otherBounds: LatLngBounds, maxMargin?: number): boolean;
+        equals(otherBounds: LatLngBounds | LatLngBoundsTuple, maxMargin?: number): boolean;
         isValid(): boolean;
     }
 
-    /**
-     * @todo
-     * All Leaflet methods and options that accept Point objects
-     * also accept them in a simple Array form (unless noted otherwise)
-     */
-    declare class Point {
+    declare type PointTuple = [number, number];
+
+    declare interface IPoint {
+        x: number;
+        y: number;
+    }
+
+    declare class Point implements IPoint {
+        x: number;
+        y: number;
+
         constructor(x: number, y: number, round?: boolean): void;
         clone(): Point;
-        add(otherPoint: Point): Point;
-        subtract(otherPoint: Point): Point;
+        add(otherPoint: IPoint | PointTuple): Point;
+        subtract(otherPoint: IPoint | PointTuple): Point;
         divideBy(num: number): Point;
         multiplyBy(num: number): Point;
         scaleBy(num: number): Point;
@@ -302,22 +317,82 @@ declare module 'leaflet' {
         round(): Point;
         floor(): Point;
         ceil(): Point;
-        distanceTo(otherPoint: Point): number;
-        equals(otherPoint: Point): boolean;
-        contains(otherPoint: Point): boolean;
+        distanceTo(otherPoint: IPoint | PointTuple): number;
+        equals(otherPoint: IPoint | PointTuple): boolean;
+        contains(otherPoint: IPoint | PointTuple): boolean;
         toString(): string;
+    }
+
+    declare type BoundsTuple = [IPoint | PointTuple, IPoint | PointTuple];
+
+    declare class Bounds {
+        min: Point;
+        max: Point;
+
+        constructor(corner1: IPoint | PointTuple, corner2: IPoint | PointTuple): void;
+        extend(point: IPoint | PointTuple): this;
+        getCenter(round?: boolean): Point;
+        getBottomLeft(): Point;
+        getTopRight(): Point;
+        getTopLeft(): Point;
+        getBottomRight(): Point;
+        getSize(): Point;
+        contains(otherBounds: Bounds | BoundsTuple): boolean;
+        contains(point: IPoint | PointTuple): boolean;
+        intersects(otherBounds: Bounds | BoundsTuple): boolean;
+        overlaps(otherBounds: Bounds | BoundsTuple): boolean;
+    }
+
+    declare type IconOptions = {
+        iconUrl: string;
+        iconRetinaUrl: string;
+        iconSize: IPoint | PointTuple;
+        iconAnchor: IPoint | PointTuple;
+        popupAnchor: IPoint | PointTuple;
+        shadowUrl: string;
+        shadowRetinaUrl: string;
+        shadowSize: IPoint | PointTuple;
+        shadowAnchor: IPoint | PointTuple;
+        className: string;
+    }
+
+    declare class Icon {
+        static Default: Class<DefaultIcon>;
+
+        createIcon(oldIcon?: HTMLElement): HTMLElement;
+        createShadow(oldIcon?: HTMLElement): HTMLElement;
+    }
+
+    declare class DefaultIcon extends Icon {
+        imagePath: string;
+    }
+
+    declare type DivIconOptions = IconOptions & {
+        html?: string;
+        bgPos?: IPoint | PointTuple;
     }
 
     declare class DivIcon extends Icon {
         constructor(options: DivIconOptions): void;
     }
 
-    declare type DivIconOptions = IconOptions & {
-        html?: string;
-        bgPos?: Point;
+    // Controls
+
+    declare type ControlOptions = {
+        position?: string
     }
 
-    // Controls
+    declare type ControlLayersOptions = ControlOptions & {
+        collapsed?: boolean;
+        autoZIndex?: boolean;
+        hideSingleBase?: boolean;
+        sortLayers?: boolean;
+        sortFunction?: Function;
+    }
+
+    declare type LayersMap = {
+        [name: string]: Layer,
+    };
 
     declare class Layers extends Control {
         constructor(baselayers: ?Object, overlays: ?Object, options?: ControlLayersOptions): void;
@@ -355,6 +430,11 @@ declare module 'leaflet' {
         hasEventListeners(type: string): boolean;
     }
 
+    declare type LayerOptions = {
+        pane: string;
+        attribution: string;
+    };
+
     declare class Layer extends Evented {
         options: LayerOptions;
 
@@ -371,7 +451,7 @@ declare module 'leaflet' {
 
         bindPopup(content: PopupContent | ContentFactory, options?: PopupOptions): this;
         unbindPopup(): this;
-        openPopup(latlng?: LatLng): this;
+        openPopup(latlng?: ILatLng | LatLngTuple): this;
         closePopup(): this;
         togglePopup(): this;
         isPopupOpen(): boolean;
@@ -380,22 +460,13 @@ declare module 'leaflet' {
 
         bindTooltip(content: TooltipContent | ContentFactory, options?: TooltipOptions): this;
         unbindTooltip(): this;
-        openTooltip(latlng?: LatLng): this;
+        openTooltip(latlng?: ILatLng | LatLngTuple): this;
         closeTooltip(): this;
         toggleTooltip(): this;
         isTooltipOpen(): boolean;
         setTooltipContent(content: TooltipContent): this;
         getTooltip(): Tooltip;
     }
-
-    declare type LayerOptions = {
-        pane: string;
-        attribution: string;
-    };
-
-    declare type ContentFactory = (layer: Layer) => (string | HTMLElement);
-    declare type PopupContent = string | HTMLElement | Popup;
-    declare type TooltipContent = string | HTMLElement | Tooltip;
 
     declare class Control {
         static Layers: typeof Layers;
@@ -413,16 +484,11 @@ declare module 'leaflet' {
         onRemove(map: Map): mixed;
     }
 
-    declare type ControlLayersOptions = ControlOptions & {
-        collapsed?: boolean;
-        autoZIndex?: boolean;
-        hideSingleBase?: boolean;
-        sortLayers?: boolean;
-        sortFunction?: Function;
-    }
-
     // Other
 
+    declare type ContentFactory = (layer: Layer) => (string | HTMLElement);
+    declare type PopupContent = string | HTMLElement | Popup;
+    declare type TooltipContent = string | HTMLElement | Tooltip;
     declare type CornerType = LatLng | [number, number];
 
     declare type LocateOptions = {
@@ -448,19 +514,15 @@ declare module 'leaflet' {
     declare type ZoomPanOptions = ZoomOptions & PanOptions;
 
     declare type FitBoundsOptions = ZoomPanOptions & {
-        paddingTopLeft?: Point;
-        paddingBottomRight?: Point;
-        padding?: Point;
+        paddingTopLeft?: IPoint | PointTuple;
+        paddingBottomRight?: IPoint | PointTuple;
+        padding?: IPoint | PointTuple;
         maxZoom?: number;
     }
 
     declare type EventMap = {
         [type: string]: Function
     };
-
-    declare type ControlOptions = {
-        position?: string
-    }
 
     declare export default {
         Map         : Class<Map>,
@@ -472,9 +534,40 @@ declare module 'leaflet' {
         LatLng      : Class<LatLng>,
         LatLngBounds: Class<LatLngBounds>,
         Point       : Class<Point>,
+        Bounds      : Class<Bounds>,
+        Icon        : Class<Icon>,
         DivIcon     : Class<DivIcon>,
         Evented     : Class<Evented>,
         Layer       : Class<Layer>,
-        Control     : Class<Control>
+        Control     : Class<Control>,
+
+    // factories
+        // UI Layers
+        marker(latlng: ILatLng | LatLngTuple, options?: MarkerOptions): Marker,
+        popup(options?: PopupOptions, source?: Layer): Popup,
+        tooltip(options?: TooltipOptions, source?: Layer): Tooltip,
+
+        // Raster Layers
+        tilelayer(urlTemplate: string, options?: TileLayerOptions): TileLayer,
+
+        // Other Layers
+        layerGroup(layers: Layer[]): LayerGroup,
+
+        // Basic Types
+        latLng(latitude: number, longitude: number, altitude?: number): LatLng,
+        latLng(coords: ILatLng | LatLngTuple): LatLng,
+        latLngBounds(corner1: ILatLng | LatLngTuple, corner2: ILatLng | LatLngTuple): LatLngBounds,
+        latLngBounds(latlngs: [ILatLng | LatLngTuple, ILatLng | LatLngTuple]): LatLngBounds,
+        point(x: number, y: number, round ?: boolean): Point,
+        point(coords: IPoint | PointTuple): Point,
+        bounds(corner1: IPoint | PointTuple, corner2: IPoint | PointTuple): Bounds,
+        bounds(latlngs: [IPoint | PointTuple, IPoint | PointTuple]): Bounds,
+        icon(options: IconOptions): Icon,
+        divIcon(options: DivIconOptions): DivIcon,
+
+        // Controls
+        control: {
+            layers(baselayers?: LayersMap, overlays?: LayersMap, options?: ControlLayersOptions): Layers,
+        },
     };
 }
