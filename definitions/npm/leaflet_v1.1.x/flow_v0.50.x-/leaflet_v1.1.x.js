@@ -2,7 +2,9 @@ declare module 'leaflet' {
     declare class Map {
         constructor(id: string, options?: MapOptions): void;
         constructor(el: HTMLElement, options?: MapOptions): void;
+
         getRenderer(layer: Path): Renderer;
+
         addControl(control: Control): this;
         removeControl(control: Control): this;
         addLayer(layer: Layer): this;
@@ -15,66 +17,65 @@ declare module 'leaflet' {
         openTooltip(tooltip: Tooltip): this;
         openTooltip(content: string | HTMLElement, latlng: ILatLng | LatLngTuple, options?: TooltipOptions): this;
         closeTooltip(tooltip?: Tooltip): this;
+
         setView(center: ILatLng | LatLngTuple, zoom: number, options?: ZoomPanOptions): this;
-        /**
-         * @todo
-         */
-        setZoom(): this;
-        zoomIn(): this;
-        zoomOut(): this;
-        setZoomAround(): this;
-        setZoomAround(): this;
-        fitBounds(): this;
-        fitWorld(): this;
-        panTo(): this;
-        panBy(): this;
-        flyTo(): this;
-        flyToBounds(): this;
-        setMaxBounds(): this;
-        setMinZoom(): this;
-        setMaxZoom(): this;
-        panInsideBounds(): this;
-        invalidateSize(): this;
-        invalidateSize(): this;
+        setZoom(zoom: number, options?: ZoomPanOptions): this;
+        zoomIn(delta?: number, options?: ZoomOptions): this;
+        zoomOut(delta?: number, options?: ZoomOptions): this;
+        setZoomAround(latlng: ILatLng | LatLngTuple, zoom: number, options: ZoomOptions): this;
+        setZoomAround(offset: IPoint | PointTuple, zoom: number, options: ZoomOptions): this;
+        fitBounds(bounds: LatLngBounds | LatLngBoundsTuple, options?: FitBoundsOptions): this;
+        fitWorld(options?: FitBoundsOptions): this;
+        panTo(latlng: ILatLng | LatLngTuple, options?: PanOptions): this;
+        panBy(offset: IPoint | PointTuple, options?: PanOptions): this;
+        flyTo(latlng: ILatLng | LatLngTuple, zoom?: number, options?: ZoomPanOptions): this;
+        flyToBounds(bounds: LatLngBounds | LatLngBoundsTuple, options?: FitBoundsOptions): this;
+        setMaxBounds(bounds: Bounds | BoundsTuple): this;
+        setMinZoom(zoom: number): this;
+        setMaxZoom(zoom: number): this;
+        panInsideBounds(bounds: LatLngBounds | LatLngBoundsTuple, options?: PanOptions): this;
+        invalidateSize(options: ZoomPanOptions): this;
+        invalidateSize(animate: boolean): this;
         stop(): this;
-        locate(): this;
+
+        locate(options?: LocateOptions): this;
         stopLocate(): this;
 
-        addHandler(): this;
+        addHandler(name: string, HandlerClass: Function): this;
         remove(): this;
-        createPane(): HTMLElement;
-        getPane(): HTMLElement;
+        createPane(name: string, container?: HTMLElement): HTMLElement;
+        getPane(pane: String | HTMLElement): HTMLElement;
         getPanes(): Object;
         getContainer(): HTMLElement;
-        whenReady(): this;
+        whenReady(fn: Function, context?: Object): this;
 
         getCenter(): LatLng;
         getZoom(): number;
         getBounds(): LatLngBounds;
         getMinZoom(): number;
         getMaxZoom(): number;
-        getBoundsZoom(): number;
+        getBoundsZoom(bounds: LatLngBounds | LatLngBoundsTuple, inside?: boolean): number;
         getSize(): Point;
         getPixelBounds(): Bounds;
         getPixelOrigin(): Point;
-        getPixelWorldBounds(): Bounds;
+        getPixelWorldBounds(zoom?: number): Bounds;
 
-        getZoomScale(): number;
-        getScaleZoom(): number;
-        project(): Point;
-        unproject(): LatLng;
-        layerPointToLatLng(): LatLng;
-        latLngToLayerPoint(): Point;
-        wrapLatLng(): LatLng;
-        wrapLatLngBounds(): LatLngBounds;
-        distance(): number;
-        containerPointToLayerPoint(): Point;
-        layerPointToContainerPoint(): Point;
-        containerPointToLatLng(): LatLng;
-        latLngToContainerPoint(): Point;
-        mouseEventToContainerPoint(): Point;
-        mouseEventToLayerPoint(): Point;
-        mouseEventToLatLng(): LatLng;
+        getZoomScale(toZoom: number, fromZoom: number): number;
+        getScaleZoom(scale: number, fromZoom: number): number;
+        project(latlng: ILatLng | LatLngTuple, zoom: number): Point;
+        unproject(point: IPoint | PointTuple, zoom: number): LatLng;
+        layerPointToLatLng(point: IPoint | PointTuple): LatLng;
+        latLngToLayerPoint(latlng: ILatLng | LatLngTuple): Point;
+        wrapLatLng(latlng: ILatLng | LatLngTuple): LatLng;
+        wrapLatLngBounds(bounds: LatLngBounds | LatLngBoundsTuple): LatLngBounds;
+        distance(latlng1: ILatLng | LatLngTuple, latlng2: ILatLng | LatLngTuple): number;
+        containerPointToLayerPoint(point: IPoint | PointTuple): Point;
+        layerPointToContainerPoint(point: IPoint | PointTuple): Point;
+        containerPointToLatLng(point: IPoint | PointTuple): LatLng;
+        latLngToContainerPoint(latlng: ILatLng | LatLngTuple): Point;
+        mouseEventToContainerPoint(ev: MouseEvent): Point;
+        mouseEventToLayerPoint(ev: MouseEvent): Point;
+        mouseEventToLatLng(ev: MouseEvent): LatLng;
 
         boxZoom: Handler;
         doubleClickZoom: Handler;
@@ -484,6 +485,89 @@ declare module 'leaflet' {
         onRemove(map: Map): mixed;
     }
 
+    // Misc
+
+    declare export interface Event {
+        type: string;
+        target: Object;
+    }
+
+    declare export interface KeyboardEvent extends Event {
+        originalEvent: window.KeyboardEvent;
+    }
+
+    declare export interface MouseEvent extends Event {
+        latlng: LatLng;
+        layerPoint: Point;
+        containerPoint: Point;
+        originalEvent: window.MouseEvent;
+    }
+
+    declare export interface LocationEvent extends Event {
+        latlng: LatLng;
+        bounds: LatLngBounds;
+        accuracy: number;
+        altitude: number;
+        altitudeAccuracy: number;
+        heading: number;
+        speed: number;
+        timestamp: number;
+    }
+
+    declare export interface ErrorEvent extends Event {
+        message: string;
+        code: number;
+    }
+
+    declare export interface LayerEvent extends Event {
+        layer: Layer;
+    }
+
+    declare export interface LayersControlEvent extends Event {
+        layer: Layer;
+        name: string;
+    }
+
+    declare export interface TileEvent extends Event {
+        tile: HTMLElement;
+        coords: Point;
+    }
+
+    declare export interface TileErrorEvent extends Event {
+        tile: HTMLElement;
+        coords: Point;
+    }
+
+    declare export interface ResizeEvent extends Event {
+        oldSize: Point;
+        newSize: Point;
+    }
+
+    declare export interface GeoJSONEvent extends Event {
+        layer: Layer;
+        properties: Object;
+        geometryType: string;
+        id: string;
+    }
+
+    declare export interface PopupEvent extends Event {
+        popup: Popup;
+    }
+
+    declare export interface TooltipEvent extends Event {
+        tooltop: Tooltip;
+    }
+
+    declare export interface DragEndEvent extends Event {
+        distance: number;
+    }
+
+    declare export interface ZoomAnimEvent extends Event {
+        center: LatLng;
+        zoom: number;
+        noUpdate: boolean;
+    }
+
     // Other
 
     declare type ContentFactory = (layer: Layer) => (string | HTMLElement);
@@ -524,50 +608,57 @@ declare module 'leaflet' {
         [type: string]: Function
     };
 
-    declare export default {
-        Map         : Class<Map>,
-        Marker      : Class<Marker>,
-        Popup       : Class<Popup>,
-        Tooltip     : Class<Tooltip>,
-        TileLayer   : Class<TileLayer>,
-        LayerGroup  : Class<LayerGroup>,
-        LatLng      : Class<LatLng>,
-        LatLngBounds: Class<LatLngBounds>,
-        Point       : Class<Point>,
-        Bounds      : Class<Bounds>,
-        Icon        : Class<Icon>,
-        DivIcon     : Class<DivIcon>,
-        Evented     : Class<Evented>,
-        Layer       : Class<Layer>,
-        Control     : Class<Control>,
+    declare class Leaflet {
+        Map         : Class<Map>;
+        Marker      : Class<Marker>;
+        Popup       : Class<Popup>;
+        Tooltip     : Class<Tooltip>;
+        TileLayer   : Class<TileLayer>;
+        LayerGroup  : Class<LayerGroup>;
+        LatLng      : Class<LatLng>;
+        LatLngBounds: Class<LatLngBounds>;
+        Point       : Class<Point>;
+        Bounds      : Class<Bounds>;
+        Icon        : Class<Icon>;
+        DivIcon     : Class<DivIcon>;
+        Evented     : Class<Evented>;
+        Layer       : Class<Layer>;
+        Control     : Class<Control>;
 
-    // factories
+        // factories
+        // Map
+        map(id: string, options?: MapOptions): Map;
+        map(el: HTMLElement, options?: MapOptions): Map;
         // UI Layers
-        marker(latlng: ILatLng | LatLngTuple, options?: MarkerOptions): Marker,
-        popup(options?: PopupOptions, source?: Layer): Popup,
-        tooltip(options?: TooltipOptions, source?: Layer): Tooltip,
+        marker(latlng: ILatLng | LatLngTuple, options?: MarkerOptions): Marker;
+        popup(options?: PopupOptions, source?: Layer): Popup;
+        tooltip(options?: TooltipOptions, source?: Layer): Tooltip;
 
         // Raster Layers
-        tilelayer(urlTemplate: string, options?: TileLayerOptions): TileLayer,
+        tilelayer(urlTemplate: string, options?: TileLayerOptions): TileLayer;
 
         // Other Layers
-        layerGroup(layers: Layer[]): LayerGroup,
+        layerGroup(layers: Layer[]): LayerGroup;
 
         // Basic Types
-        latLng(latitude: number, longitude: number, altitude?: number): LatLng,
-        latLng(coords: ILatLng | LatLngTuple): LatLng,
-        latLngBounds(corner1: ILatLng | LatLngTuple, corner2: ILatLng | LatLngTuple): LatLngBounds,
-        latLngBounds(latlngs: [ILatLng | LatLngTuple, ILatLng | LatLngTuple]): LatLngBounds,
-        point(x: number, y: number, round ?: boolean): Point,
-        point(coords: IPoint | PointTuple): Point,
-        bounds(corner1: IPoint | PointTuple, corner2: IPoint | PointTuple): Bounds,
-        bounds(latlngs: [IPoint | PointTuple, IPoint | PointTuple]): Bounds,
-        icon(options: IconOptions): Icon,
-        divIcon(options: DivIconOptions): DivIcon,
+        latLng(latitude: number, longitude: number, altitude?: number): LatLng;
+        latLng(coords: ILatLng | LatLngTuple): LatLng;
+        latLngBounds(corner1: ILatLng | LatLngTuple, corner2: ILatLng | LatLngTuple): LatLngBounds;
+        latLngBounds(latlngs: [ILatLng | LatLngTuple, ILatLng | LatLngTuple]): LatLngBounds;
+        point(x: number, y: number, round ?: boolean): Point;
+        point(coords: IPoint | PointTuple): Point;
+        bounds(corner1: IPoint | PointTuple, corner2: IPoint | PointTuple): Bounds;
+        bounds(latlngs: [IPoint | PointTuple, IPoint | PointTuple]): Bounds;
+        icon(options: IconOptions): Icon;
+        divIcon(options: DivIconOptions): DivIcon;
 
         // Controls
         control: {
-            layers(baselayers?: LayersMap, overlays?: LayersMap, options?: ControlLayersOptions): Layers,
-        },
-    };
+            layers(baselayers?: LayersMap, overlays?: LayersMap, options?: ControlLayersOptions): Layers;
+        };
+    }
+
+    declare var leaflet: Leaflet;
+
+    declare export default leaflet;
 }
