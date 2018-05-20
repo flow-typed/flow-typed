@@ -2,6 +2,7 @@
 
 import { ApolloClient, ApolloLink, ApolloCache } from "apollo-client";
 import { describe, it } from "flow-typed-test";
+import ApolloClientDefault from "apollo-client";
 
 const link = new ApolloLink();
 const cache = new ApolloCache();
@@ -10,6 +11,13 @@ describe("apollo-client", () => {
   describe("ApolloClient initialization", () => {
     it("passes when passed correct configuration", () => {
       new ApolloClient({
+        link,
+        cache
+      });
+    });
+
+    it("passes with default export", () => {
+      new ApolloClientDefault({
         link,
         cache
       });
@@ -34,6 +42,13 @@ describe("apollo-client", () => {
     it("raises error when missing link", () => {
       // $ExpectError - link required to initialize ApolloClient
       new ApolloClient({
+        cache
+      });
+    });
+
+    it("raises error when missing link on default", () => {
+      // $ExpectError - link required to initialize ApolloClient
+      new ApolloClientDefault({
         cache
       });
     });

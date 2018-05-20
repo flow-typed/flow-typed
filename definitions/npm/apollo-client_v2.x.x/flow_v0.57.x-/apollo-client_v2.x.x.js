@@ -457,6 +457,8 @@ declare module "apollo-client" {
     ): Promise<ApolloQueryResult<any>[]> | Promise<null>;
   }
 
+  declare export default typeof ApolloClient;
+
   /* apollo-link types */
   declare export class ApolloLink {
     constructor(request?: RequestHandler): this;
