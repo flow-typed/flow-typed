@@ -108,5 +108,20 @@ describe("apollo-client", () => {
         }
       });
     });
+
+    it("exposes extract", () => {
+      const client = new ApolloClient({
+        link,
+        cache
+      });
+      client.extract()
+    });
+    it("exposes restore", () => {
+      const client = new ApolloClient({
+        link,
+        cache
+      });
+      client.restore({})
+    });
   });
 });

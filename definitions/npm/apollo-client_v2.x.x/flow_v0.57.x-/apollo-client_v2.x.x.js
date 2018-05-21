@@ -455,6 +455,8 @@ declare module "apollo-client" {
     reFetchObservableQueries(
       includeStandby?: boolean
     ): Promise<ApolloQueryResult<any>[]> | Promise<null>;
+    extract(optimistic?: boolean): TCacheShape;
+    restore(serializedState: TCacheShape): ApolloCache<TCacheShape>;
   }
 
   declare export default typeof ApolloClient;

@@ -440,6 +440,8 @@ declare module "react-apollo" {
     reFetchObservableQueries(
       includeStandby?: boolean
     ): Promise<ApolloQueryResult<any>[]> | Promise<null>;
+    extract(optimistic?: boolean): TCacheShape;
+    restore(serializedState: TCacheShape): ApolloCache<TCacheShape>;
   }
 
   /* apollo-link types */
