@@ -45,6 +45,8 @@ knex("bar").del();
 // $ExpectError
 knex.from();
 
+knex.table('foo');
+
 knex.destroy();
 
 /**
@@ -72,6 +74,12 @@ knex
 knex
   .transaction(function(trx) {
     trx.rollback();
+  });
+
+knex
+  .transaction(async (trx) => {
+    await trx('foo').forUpdate();
+    await trx('bar').forShare();
   });
 
 /**
