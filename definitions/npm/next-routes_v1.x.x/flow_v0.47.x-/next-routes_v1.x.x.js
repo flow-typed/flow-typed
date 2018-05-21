@@ -59,7 +59,22 @@ declare module 'next-routes' {
       url: string,
       as: ?string,
       options?: EventChangeOptions
-    ): Promise<boolean>
+    ): Promise<boolean>,
+    pushRoute(
+      route: string,
+      params?: { [name: string]: string },
+      options?: any,
+    ): void,
+    replaceRoute(
+      route: string,
+      params?: { [name: string]: string },
+      options?: any,
+    ): void,
+    prefetchRoute(
+      route: string,
+      params?: { [name: string]: string },
+      options?: any,
+    ): void
   };
 
   declare type RoutesOpt = {
