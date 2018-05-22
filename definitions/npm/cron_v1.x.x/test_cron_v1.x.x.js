@@ -61,19 +61,6 @@ const job4: CronJob = new CronJob(123456, () => {
   true, /* Start the job right now */
   timeZone /* Time zone of this job. */
 );
-// $ExpectError
-new CronJob('00 30 11 * * 1-5', () => {
-  /*
-   * Runs every weekday (Monday through Friday)
-   * at 11:30:00 AM. It does not run on Saturday
-   * or Sunday.
-   */
-  }, () => {
-    /* This function is executed when the job stops */
-  },
-  true, /* Start the job right now */
-  -3 /* Time zone of this job. */
-);
 
 // Check cronTime fomat
 const cronTime1 = new CronTime('* * * * * *');
