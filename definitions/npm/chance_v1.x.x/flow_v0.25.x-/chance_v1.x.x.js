@@ -3,6 +3,14 @@ declare module 'chance' {
     code: string,
     name: string,
   };
+  declare type Timezone = {
+    name: string,
+    abbr: string,
+    offset: number,
+    isdst: boolean,
+    text: string,
+    utc: string[]
+  };
   declare class Chance {
     static (seed?: any): Chance;
     bool(options?: { likelihood: number }): bool;
@@ -21,6 +29,9 @@ declare module 'chance' {
       min?: number,
       max?: number,
     }): number;
+    letter(options?: {
+      casing?: 'upper' | 'lower'
+    }): string;
     natural(options?: {
       min?: number,
       max?: number,
@@ -29,6 +40,7 @@ declare module 'chance' {
       length?: number,
       pool?: string,
     }): string;
+    buffer(options?: { length?: number }): Buffer;
     paragraph(options?: { sentences: number }): string;
     sentence(options?: { words: number }): string;
     syllable(): string;
@@ -87,6 +99,7 @@ declare module 'chance' {
       grayscale?: bool,
       casing?: string,
     }): string;
+    company(): string;
     domain(options?: { tld?: string }): string;
     email(options?: { domain?: string }): string;
     fbid(): string;
@@ -95,6 +108,7 @@ declare module 'chance' {
     ip(): string;
     ipv6(): string;
     klout(): number;
+    profession(options?: { rank?: boolean }): string;
     tld(): string;
     twitter(): string;
     url(options?: {
@@ -167,6 +181,8 @@ declare module 'chance' {
     month(): string;
     second(): number;
     timestamp(): number;
+    timezone(): Timezone;
+    weekday(options?: {weekday_only?: boolean}): string;
     year(options?: {
       min?: number,
       max?: number,
@@ -191,11 +207,14 @@ declare module 'chance' {
     exp_month(options?: { future: bool }): string;
     exp_year(): string;
     capitalize(string: string): string;
+    mixin(object: Object): Chance;
     pad(number: number, width: number, padder?: string): string;
     pickone<T>(array: T[]): T;
     pickset<T>(array: T[], quantity: number): T[];
+    coin(opitons?: Object): "heads" | "tails";
     // TODO set not typed yet
-    set(): void;
+    set(key: string, value: any): void;
+    set(data: Object): void;
     shuffle<T>(array: T[]): T[];
     d4(): number;
     d6(): number;
@@ -216,8 +235,8 @@ declare module 'chance' {
       mean?: number,
       dev?: number,
     }): number;
-    radio(): string;
-    tv(): string;
+    radio(options?: {side?: string}): string;
+    tv(options?: {side?: string}): string;
     rpg(type: string): number[];
     rpg(type: string, options: { sum: true }): number;
     weighted<T>(array: T[], weights: number[]): T;
