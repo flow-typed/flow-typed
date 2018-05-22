@@ -46,7 +46,7 @@ declare module "chai" {
     nested: ExpectChain<T>,
     property: <P>(
       name: string,
-      value?: P, 
+      value?: P,
       message?: string
     ) => ExpectChain<P> & ((name: string) => ExpectChain<mixed>),
 
@@ -138,7 +138,10 @@ declare module "chai" {
     state: (key: string, val?: any) => ExpectChain<T>,
     value: (val: string) => ExpectChain<T>,
     className: (val: string) => ExpectChain<T>,
-    text: (val: string) => ExpectChain<T>
+    text: (val: string) => ExpectChain<T>,
+
+    // chai-karma-snapshot
+    matchSnapshot: (lang?: any, update?: boolean, msg?: any) => ExpectChain<T>
   };
 
   declare function expect<T>(actual: T, message?: string): ExpectChain<T>;
