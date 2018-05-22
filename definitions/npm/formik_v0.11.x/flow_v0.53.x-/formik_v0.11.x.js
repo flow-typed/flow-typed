@@ -1,5 +1,3 @@
-import { FormikActions } from "formik";
-
 declare module "formik" {
   import type { ComponentType } from "react";
 
