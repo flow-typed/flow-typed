@@ -2,7 +2,7 @@ import { CronJob, CronTime } from 'cron';
 
 const timeZone = 'America/Los_Angeles';
 
-new CronJob('* * * * * *', () => {}, null, true, 'America/Los_Angeles');
+new CronJob('* * * * * *', () => {}, undefined, true, 'America/Los_Angeles');
 
 // Another cron example
 const job1 = new CronJob('00 30 11 * * 1-5', () => {
@@ -41,8 +41,8 @@ const job3 = new CronJob({
   start: false,
   timeZone: 'America/Los_Angeles'
 });
-const lastDate: Date = job.lastDate();
-const nextDates: Date = job.nextDates(1);
+const lastDate: Date = job3.lastDate();
+const nextDates: Date = job3.nextDates(1);
 const running: boolean | void = job3.running;
 (job3.setTime(new CronTime('00 30 11 * * 1-2')): void);
 (job3.start(): void);
