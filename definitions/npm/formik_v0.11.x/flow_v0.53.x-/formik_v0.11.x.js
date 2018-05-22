@@ -1,3 +1,5 @@
+import { FormikActions } from "formik";
+
 declare module "formik" {
   import type { ComponentType } from "react";
 
@@ -13,7 +15,7 @@ declare module "formik" {
    * Using interface here because interfaces support overloaded method signatures
    * https://github.com/facebook/flow/issues/1556#issuecomment-200051475
    */
-  declare export interface FormikActions<Values> {
+  declare export interface FormikActions<Props, Values> {
     /** Manually set top level status. */
     setStatus(status?: any): void;
     /**
@@ -64,6 +66,7 @@ declare module "formik" {
       ) => $Shape<FormikState<Values>>,
       callback?: () => any
     ): void;
+    props: Props;
   }
 
   declare export type FormikSharedConfig = {
@@ -164,8 +167,8 @@ declare module "formik" {
     handleReset: () => void
   };
 
-  declare export type FormikProps<Values> = FormikState<Values> &
-    FormikActions<Values> &
+  declare export type FormikProps<Props, Values> = FormikState<Values> &
+    FormikActions<Props, Values> &
     FormikHandlers &
     FormikComputedProps<Values>;
 
@@ -234,7 +237,7 @@ declare module "formik" {
   declare type WithFormikConfig<Props, Values> = {
     displayName?: string,
     enableReinitialize?: boolean,
-    handleSubmit: (value: Values, actions: FormikActions<Values>) => void,
+    handleSubmit: (value: Values, actions: FormikActions<Props, Values>) => void,
     isInitialValid?: boolean | (props: Props) => boolean,
     mapPropsToValues?: (props: Props) => Values,
     validate?: (values: Values, props: Props) => FormikErrors<Values> | Promise<any>,
@@ -247,5 +250,5 @@ declare module "formik" {
     config: WithFormikConfig<Props, Values>,
   ): (
     ComponentType<Props>
-  ) => ComponentType<$Diff<Props, FormikProps<Values>>>;
+  ) => ComponentType<$Diff<Props, FormikProps<Props, Values>>>;
 }
