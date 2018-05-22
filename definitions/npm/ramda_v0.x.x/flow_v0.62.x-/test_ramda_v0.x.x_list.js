@@ -63,15 +63,13 @@ const str: string = "hello world";
       const result: boolean = _.startsWith(["a"], ["a", "b", "c"]);
     })
 
-    // TODO: Fix this copy pasta before merging.
-    // See https://ramdajs.com/repl/?v=0.25.0#?%2F%2F%20Works%20with%20more%20than%20just%20strings%3A%0AR.startsWith%28%5B3%5D%2C%20%5B1%2C%202%2C%203%5D%29%20%20%20%20%2F%2F%3D%3E%20true
+    // See https://ramdajs.com/repl/?v=0.25.0#?%2F%2F%20Works%20with%20more%20than%20just%20strings%3A%0AR.startsWith%28%5B1%5D%2C%20%5B1%2C%202%2C%203%5D%29%20%20%20%20%2F%2F%3D%3E%20true
     // for a working example.
     it('can check any type (not just strings) for the starting of an array', () => {
       const result: boolean = _.startsWith([1], [1, 2, 3]);
     })
 
-    // TODO: Fix this copy pasta before merging.
-    // See https://ramdajs.com/repl/?v=0.25.0#?%2F%2F%20Works%20with%20multiple%20elements%20in%20the%20comparator%3A%0AR.startsWith%28%5B2%2C%203%5D%2C%20%5B1%2C%202%2C%203%5D%29%20%20%20%20%2F%2F%3D%3E%20true
+    // See https://ramdajs.com/repl/?v=0.25.0#?%2F%2F%20Works%20with%20multiple%20elements%20in%20the%20comparator%3A%0AR.startsWith%28%5B1%2C%202%5D%2C%20%5B1%2C%202%2C%203%5D%29%20%20%20%20%2F%2F%3D%3E%20true
     // for a working example.
     it('allows any number of elements to be used as the comparator', () => {
       const result: boolean = _.startsWith([1, 2, 3], [1, 2, 3]);
