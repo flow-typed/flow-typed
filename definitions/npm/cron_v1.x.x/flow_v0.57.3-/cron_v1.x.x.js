@@ -19,7 +19,7 @@ declare module 'cron' {
         getTimeout(): number;
     }
 
-    declare interface CronJobParameters {
+    declare type CronJobParameters = {
         /**
          * The time to fire off your job. This can be in the form of cron syntax or a JS ```Date``` object.
          */
