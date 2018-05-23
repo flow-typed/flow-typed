@@ -500,16 +500,19 @@ declare module ramda {
   >;
   declare var split: CurriedFunction2<RegExp | string, string, Array<string>>;
   declare var test: CurriedFunction2<RegExp, string, boolean>;
-  declare var startsWith: CurriedFunction2<
-    string | Array<string>,
-    string | Array<string>,
-    boolean
-  >;
-  declare var endsWith: CurriedFunction2<
-    string | Array<string>,
-    string | Array<string>,
-    boolean
-  >;
+  // startsWith and endsWith use the same signature:
+  declare type EdgeWith<A> =
+    & (
+        & ((Array<A>) => (Array<A>) => boolean)
+        & (Array<A>, Array<A>) => boolean
+    )
+    & (
+        & ((string) => (string) => boolean)
+        & (string, string) => boolean
+    )
+  ;
+  declare var startsWith: EdgeWith<*>;
+  declare var endsWith: EdgeWith<*>;
   declare function toLower(a: string): string;
   declare function toString(x: any): string;
   declare function toUpper(a: string): string;
