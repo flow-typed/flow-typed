@@ -11,6 +11,7 @@ import _, {
   subtract,
   zipWith
 } from "ramda";
+import { describe, it } from 'flow-typed-test';
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -53,10 +54,71 @@ const str: string = "hello world";
   const dropxs6: Array<number> = _.dropRepeatsWith(_.eqBy(Math.abs), ns);
   const dropxs7: Array<number> = _.dropWhile(x => x === 1, ns);
 
-  const endsWithxs: boolean = _.endsWith("a")("abc");
-  const endsWithxs1: boolean = _.endsWith("b", "abc");
-  const endsWithxs2: boolean = _.endsWith(["a"], ["a", "b", "c"]);
-  const endsWithxs3: boolean = _.endsWith(["b"], ["a", "b", "c"]);
+  describe('startsWith', () => {
+    it('checks to see if one string is inside of another', () => {
+      const result: boolean = _.startsWith("a")("abc");
+    })
+
+    it('checks to see if one element of an array is starting in another array', () => {
+      const result: boolean = _.startsWith(["a"], ["a", "b", "c"]);
+    })
+
+    // See https://ramdajs.com/repl/?v=0.25.0#?%2F%2F%20Works%20with%20more%20than%20just%20strings%3A%0AR.startsWith%28%5B1%5D%2C%20%5B1%2C%202%2C%203%5D%29%20%20%20%20%2F%2F%3D%3E%20true
+    // for a working example.
+    it('can check any type (not just strings) for the starting of an array', () => {
+      const result: boolean = _.startsWith([1], [1, 2, 3]);
+    })
+
+    // See https://ramdajs.com/repl/?v=0.25.0#?%2F%2F%20Works%20with%20multiple%20elements%20in%20the%20comparator%3A%0AR.startsWith%28%5B1%2C%202%5D%2C%20%5B1%2C%202%2C%203%5D%29%20%20%20%20%2F%2F%3D%3E%20true
+    // for a working example.
+    it('allows any number of elements to be used as the comparator', () => {
+      const result: boolean = _.startsWith([1, 2, 3], [1, 2, 3]);
+    })
+
+    it('catches mismatches between the first set and the second', () => {
+      // $ExpectError
+      _.startsWith("1", [1, 2, 3])
+    })
+
+    it('catches mismatches between the inner array elements', () => {
+      // It is not understood why this isn't flagged as an error.
+      // $ShouldExpectErrorButInsteadWorksPleaseFix
+      _.startsWith(["1"], [1, 2, 3])
+    })
+  })
+
+  describe('endsWith', () => {
+    it('checks to see if one string is inside of another', () => {
+      const result: boolean = _.endsWith("a")("abc");
+    })
+
+    it('checks to see if one element of an array is ending in another array', () => {
+      const result: boolean = _.endsWith(["a"], ["a", "b", "c"]);
+    })
+
+    // See https://ramdajs.com/repl/?v=0.25.0#?%2F%2F%20Works%20with%20more%20than%20just%20strings%3A%0AR.endsWith%28%5B3%5D%2C%20%5B1%2C%202%2C%203%5D%29%20%20%20%20%2F%2F%3D%3E%20true
+    // for a working example.
+    it('can check any type (not just strings) for the ending of an array', () => {
+      const result: boolean = _.endsWith([1], [1, 2, 3]);
+    })
+
+    // See https://ramdajs.com/repl/?v=0.25.0#?%2F%2F%20Works%20with%20multiple%20elements%20in%20the%20comparator%3A%0AR.endsWith%28%5B2%2C%203%5D%2C%20%5B1%2C%202%2C%203%5D%29%20%20%20%20%2F%2F%3D%3E%20true
+    // for a working example.
+    it('allows any number of elements to be used as the comparator', () => {
+      const result: boolean = _.endsWith([1, 2, 3], [1, 2, 3]);
+    })
+
+    it('catches mismatches between the first set and the second', () => {
+      // $ExpectError
+      _.endsWith("1", [1, 2, 3])
+    })
+
+    it('catches mismatches between the inner array elements', () => {
+      // It is not understood why this isn't flagged as an error.
+      // $ShouldExpectErrorButInsteadWorksPleaseFix
+      _.endsWith(["1"], [1, 2, 3])
+    })
+  })
 
   const findxs: ?{ [k: string]: number | string } = _.find(
     _.propEq("a", 2),
@@ -305,11 +367,6 @@ const str: string = "hello world";
     return a - b;
   };
   const sortxs: Array<number> = _.sort(diff, [4, 2, 7, 5]);
-
-  const startsWithxs: boolean = _.startsWith("a")("abc");
-  const startsWithxs1: boolean = _.startsWith("b", "abc");
-  const startsWithxs2: boolean = _.startsWith(["a"], ["a", "b", "c"]);
-  const startsWithxs3: boolean = _.startsWith(["b"], ["a", "b", "c"]);
 
   const timesxs: Array<number> = _.times(_.identity, 5);
 

@@ -1,6 +1,111 @@
 /* This module definition is by no means complete. A lot of methods of the RedisClient class are missing */
+
+declare type $npm$redis$SetCallbackAllOk = (error: ?Error, result: 'OK') => void
+
+declare type $npm$redis$SetCallback = (error: ?Error, result: ?'OK') => void
+
+declare type $npm$redis$SetStandard = (
+  key: string,
+  value: string,
+  callback?: $npm$redis$SetCallbackAllOk
+) => void
+
+declare type $npm$redis$SetWithCondition = (
+  key: string,
+  value: string,
+  condition: 'NX' | 'XX',
+  callback?: $npm$redis$SetCallbackAllOk
+) => void
+
+declare type $npm$redis$SetWithExpire = (
+  key: string,
+  value: string,
+  expire: 'EX' | 'PX',
+  time: number,
+  callback?: $npm$redis$SetCallbackAllOk
+) => void
+
+declare type $npm$redis$SetWithExpireAndConditionBefore = (
+  key: string,
+  value: string,
+  condition: 'NX' | 'XX',
+  expire: 'EX' | 'PX',
+  time: number,
+  callback?: $npm$redis$SetCallback // When using XX or NX the result may be null
+) => void
+
+declare type $npm$redis$SetWithExpireAndConditionAfter = (
+  key: string,
+  value: string,
+  expire: 'EX' | 'PX',
+  time: number,
+  condition: 'NX' | 'XX',
+  callback?: $npm$redis$SetCallback // When using XX or NX the result may be null
+) => void
+
+declare type $npm$redis$SetF = $npm$redis$SetStandard
+  & $npm$redis$SetWithExpire
+  & $npm$redis$SetWithCondition
+  & $npm$redis$SetWithExpireAndConditionBefore
+  & $npm$redis$SetWithExpireAndConditionAfter
+
+declare type $npm$redis$DelCallback = (error: ?Error, numRemoved: number) => void
+
+declare type $npm$redis$DelWithArrayKeys =  (
+  keys: Array<string>,
+  callback?: $npm$redis$DelCallback
+) => void
+
+declare type $npm$redis$DelWithRestKeys =  (
+  ...keys: Array<string>
+) => void
+
+declare type $npm$redis$DelWithRestKeys1 =  (
+  key: string,
+  callback: $npm$redis$DelCallback
+) => void
+
+declare type $npm$redis$DelWithRestKeys2 =  (
+  key1: string,
+  key2: string,
+  callback: $npm$redis$DelCallback
+) => void
+
+declare type $npm$redis$DelWithRestKeys3 =  (
+  key1: string,
+  key2: string,
+  key3: string,
+  callback: $npm$redis$DelCallback
+) => void
+
+declare type $npm$redis$DelWithRestKeys4 =  (
+  key1: string,
+  key2: string,
+  key3: string,
+  key4: string,
+  callback: $npm$redis$DelCallback
+) => void
+
+declare type $npm$redis$DelWithRestKeys5 =  (
+  key1: string,
+  key2: string,
+  key3: string,
+  key4: string,
+  key5: string,
+  callback: $npm$redis$DelCallback
+) => void
+
+declare type $npm$redis$DelF = $npm$redis$DelWithArrayKeys
+  & $npm$redis$DelWithRestKeys
+  & $npm$redis$DelWithRestKeys1
+  & $npm$redis$DelWithRestKeys2
+  & $npm$redis$DelWithRestKeys3
+  & $npm$redis$DelWithRestKeys4
+  & $npm$redis$DelWithRestKeys5
+
 declare module "redis" {
   declare class RedisClient extends events$EventEmitter mixins RedisClientPromisified {
+    connected: boolean,
     hmset: (
       key: string,
       map: {[key: string]: string},
@@ -57,11 +162,7 @@ declare module "redis" {
       key: string,
       callback: (error: ?Error, value: ?string) => void
     ) => void;
-    set: (
-      key: string,
-      value: string,
-      callback?: (error: ?Error, result: 'OK') => void
-    ) => void;
+    set: $npm$redis$SetF;
     setex: (
       key: string,
       timeout: number,
@@ -72,10 +173,7 @@ declare module "redis" {
       key: string,
       callback: (error: ?Error, ttl: number) => void
     ) => void;
-    del: (
-      keys: Array<string>,
-      callback?: (error: ?Error, numRemoved: number) => void
-    ) => void;
+    del: $npm$redis$DelF;
     mget: (
       keys: Array<string>,
       callback: (error: ?Error, values: Array<?string>) => void
@@ -104,6 +202,15 @@ declare module "redis" {
     duplicate: () => RedisClient;
     end: (flush: boolean) => void;
     quit: () => void;
+    keys: (
+      pattern: string,
+      callback?: (error: ?Error, keys: string[]) => void
+    ) => void;
+    expire: (
+      key: string,
+      timeout: number,
+      callback?: (error: ?Error, timeoutWasSet: number) => void
+    ) => void;
   }
 
   declare class RedisClientPromisified extends RedisClient {
@@ -155,6 +262,9 @@ declare module "redis" {
     duplicateAsync: () => Promise<RedisClientPromisified>;
     endAsync: (flush: boolean) => Promise<void>;
     quitAsync: () => Promise<void>;
+    keysAsync: (pattern: string) => Promise<string[]>;
+    expireAsync: (key: string, timeout: number) => Promise<number>;
+    setexAsync: (key: string, timeout: number, value: string) => Promise<string>;
   }
 
   declare type CreateOptions = {

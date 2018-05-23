@@ -15,6 +15,7 @@ declare module "react-router-dom" {
   }> {}
 
   declare export class Link extends React$Component<{
+    className?: string,
     to: string | LocationShape,
     replace?: boolean,
     children?: React$Node
@@ -82,7 +83,8 @@ declare module "react-router-dom" {
   declare export type ContextRouter = {|
     history: RouterHistory,
     location: Location,
-    match: Match
+    match: Match,
+    staticContext?: StaticRouterContext
   |};
 
   declare export type GetUserConfirmation = (

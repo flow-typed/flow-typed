@@ -184,3 +184,37 @@ createStructuredSelector({
   x: 10,
   y: 20
 });
+
+// TEST: Should pass for accessing selector recomputations
+createSelector(
+  (state: State, props: TestProps, test) => state.x + props.x + test,
+  (state: State, props: TestProps, test) => state.y + props.x + test,
+  (x, y) => {
+    return x + y;
+  }
+).recomputations() + 5;
+// END TEST
+
+// TEST: Should pass for reseting selector recomputations
+createSelector(
+  (state: State, props: TestProps, test) => state.x + props.x + test,
+  (state: State, props: TestProps, test) => state.y + props.x + test,
+  (x, y) => {
+    return x + y;
+  }
+).resetRecomputations();
+// END TEST
+
+// TEST: Should pass for accessing selector resultFunc
+createSelector(
+  (state: State, props: TestProps, test) => state.x + props.x + test,
+  (state: State, props: TestProps, test) => state.y + props.x + test,
+  (x, y) => {
+    return x + y;
+  }
+).resultFunc(
+  { x: 100, y: 200 },
+  {x: 10},
+  10,
+) + 15;
+// END TEST

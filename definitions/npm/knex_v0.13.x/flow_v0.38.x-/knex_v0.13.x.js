@@ -1,5 +1,6 @@
 declare class Knex$Transaction<R>
   mixins Knex$QueryBuilder<R>, events$EventEmitter, Promise<R> {
+  $call: (tableName: string) => Knex$QueryBuilder<R>;  
   commit(connection?: any, value?: any): Promise<R>;
   rollback(?Error): Promise<R>;
   savepoint(connection?: any): Promise<R>;
@@ -24,7 +25,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   returning(columns: string[]): this;
   as(name: string): this;
   transacting(trx: ?Knex$Transaction<R>): this;
-  transaction((trx: Knex$Transaction<R>) => void): this;
+  transaction((trx: Knex$Transaction<R>) => Promise<R> | void): this;
   where(builder: Knex$QueryBuilderFn<R>): this;
   where(column: string, value: any): this;
   where(column: string, operator: string, value: any): this;
@@ -119,6 +120,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   pluck(column: string): this;
   first(key?: string[]): this;
   first(...key: string[]): this;
+  table(table: string, options?: Object): this;
   from(table: string): this;
   from(
     builder: Knex$QueryBuilderFn<R> | Knex$Knex<R> | Knex$QueryBuilder<R>
@@ -131,6 +133,8 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   update(column: string, value: any): this;
   update(val: Object): this;
   returning(columns: string[]): this;
+  forUpdate(): this;
+  forShare(): this;
 }
 
 type MigrateConfig = {|

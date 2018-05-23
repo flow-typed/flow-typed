@@ -8,8 +8,10 @@ to existing libdefs.
 
 * [Contributing to the definitions repository](#contributing-to-the-definitions-repository)
 * [Writing libdefs tips](#writing-libdefs-tips)
+  * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
   * [Avoid `any` when possible](#avoid-any-when-possible)
+  * [Exporting modules](#exporting-modules)
   * [Always prefix global variables that aren't really meant to be global](#prefix-global-variables-that-arent-really-meant-to-be-global)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
@@ -81,15 +83,19 @@ the test-runner for *all* versions of Flow the package version supports. If you
 ever need to write a test for a particular version of Flow, you can put the
 `test_` file in the appropriate flow version directory.
 
-#### 5) Run your tests with `./run_def_tests.sh left-pad`
+#### 5) Run your tests with `flow-typed validate-defs definitions && flow-typed run-tests left-pad`
 
-You may also leave off the argument to run *all* tests (this takes a while). Please note that this test (and the one on Travis-CI) only will be able to run if the name of the repo folder is still "flow-typed".
+You may also leave off the argument `left-pad` to run *all* tests (this takes a while). Please note that this test (and the one on Travis-CI) only will be able to run if the name of the repo folder is still "flow-typed".
 
 #### 6) Send a pull request
 
 You know how to do it.
 
 ## Writing libdefs tips
+
+### Read flow docs
+
+There's a solid writeup in the [Flow docs](https://flow.org/en/docs/libdefs/creation/) about creating new library definitions. Give it a read!
 
 ### Don't import types from other libdefs
 
@@ -104,9 +110,32 @@ declare module 'other-module' {
 
 ...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
 
-You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them, however.
+**But wait, I want my React types!**
 
-Currently it's not possible to safely import types from other libdefs when making your libdef. [Further discussion here](https://github.com/flowtype/flow-typed/issues/1857).
+Good news! You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them. You can also import types built into Flow *inside* the module declaration:
+
+```js
+declare module 'example' {
+  import type { Node } from 'react';
+}
+```
+
+**So why don't I do that for importing other libdefs?**
+
+Because it just don't work, sorry. You might think this is possible, but it isn't:
+
+```js
+declare module 'koa-router' {
+  import type { Middleware } from 'koa';
+}
+```
+
+To be super clear:
+
+1. You can't import types from other libdefs in flow-typed
+1. You can import types built into Flow (e.g. from `react`), only if you put the import statement inside the module declaration
+
+[Further discussion here](https://github.com/flowtype/flow-typed/issues/1857) and [here](https://github.com/flowtype/flow-typed/issues/2023).
 
 ### Avoid `any` when possible
 
@@ -122,7 +151,7 @@ function setCache(key: string, value: any) {
   cache.set(key, value);
 }
 function getCache(key: string) {
-  cache.get(key);
+  return cache.get(key);
 }
 
 setCache('foo', 42);
@@ -140,7 +169,7 @@ function setCache(key: string, value: mixed) {
   cache.set(key, value);
 }
 function getCache(key: string) {
-  cache.get(key);
+  return cache.get(key);
 }
 
 setCache('foo', 42);
@@ -173,6 +202,10 @@ getUser((user) => console.log('Got the user!'));
 ```
 
 Using `mixed` in place of `any` for the return type of a function or the type of a variable is a judgement call, though. Return types and declared variables flow into users' programs, which means that users will have to prove the type of `mixed` before they can use them.
+
+### Exporting modules
+
+When you export a module, you have a choice to use CommonJS or ES6 syntax. We generally recommend to use ES6 syntax. As [discussed here](https://github.com/flowtype/flow-typed/issues/1859#issuecomment-374575368), if you need both named exports and a default export, then you need to use the ES6 syntax.
 
 ### Prefix global variables that aren't really meant to be global
 

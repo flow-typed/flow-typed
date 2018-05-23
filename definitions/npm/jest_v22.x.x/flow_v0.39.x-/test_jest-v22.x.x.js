@@ -44,6 +44,10 @@ foo.doStuff = jest.fn().mockReturnValueOnce(10);
 // $ExpectError Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockReturnValueOnce("10");
 
+foo.doStuff = jest.fn().mockName("10");
+// $ExpectError mockName expects a string, not a number
+foo.doStuff = jest.fn().mockName(10);
+
 const mockedDoStuff = (foo.doStuff = jest.fn().mockImplementation(str => 10));
 mockedDoStuff.mock.calls[0][0].indexOf("a");
 // $ExpectError function `doesntExist` not found in string.
@@ -181,14 +185,21 @@ jest.dontMock("testModule1").dontMock("testModule2");
 
 jest.resetModules().resetModules();
 
-jest.spyOn({}, "foo");
+jest.spyOn({}, "foo", "get");
 
 jest.setTimeout(1000);
 
 jest.runTimersToTime(3000);
 jest.advanceTimersByTime(3000);
 
-expect.addSnapshotSerializer(JSON.stringify);
+expect.addSnapshotSerializer({
+  print: (val, serialize) => `Foo: ${serialize(val.foo)}`,
+  test: val => val && val.hasOwnProperty('foo')
+})
+
+// $ExpectError
+expect.addSnapshotSerializer(JSON.stringify)
+
 expect.assertions(1);
 expect.hasAssertions();
 
@@ -317,3 +328,170 @@ expect(wrapper).toMatchSelector("span");
 expect(wrapper).toMatchSelector();
 // $ExpectError
 expect(wrapper).toMatchSelector(true);
+
+// dom-testing-library
+{
+  const element = document.createElement('div');
+
+  expect(element).toHaveTextContent('123');
+  // $ExpectError: expected text content should be present
+  expect(element).toHaveTextContent();
+  // $ExpectError: expected text content should be a string
+  expect(element).toHaveTextContent(1);
+
+  expect(element).toBeInTheDOM();
+
+  expect(element).toHaveAttribute('foo');
+  expect(element).toHaveAttribute('foo', 'bar');
+  // $ExpectError: attribute name should be present
+  expect(element).toHaveAttribute();
+  // $ExpectError: attribute name should be a string
+  expect(element).toHaveAttribute(1);
+  // $ExpectError: expected attribute value should be a string
+  expect(element).toHaveAttribute('foo', 1);
+}
+
+{
+  // in reality this would be a jquery object
+  const jquery = "$(someSelector)";
+
+ {
+  expect(jquery).toExist();
+  expect(jquery).not.toExist();
+
+  expect(jquery).toHaveLength(1);
+  // $ExpectError: parameter required
+  expect(jquery).toHaveLength();
+
+  expect(jquery).toHaveId('username');
+
+  expect(jquery).toHaveClass('myclass');
+  expect(jquery).toHaveTag('div');
+  expect(jquery).toHaveAttr("attr1");
+  expect(jquery).toHaveAttr("attr1", "value1");
+
+  expect(jquery).toHaveProp("attr1");
+  expect(jquery).toHaveProp("attr1", "value1");
+
+  expect(jquery).toHaveData("attr1");
+  expect(jquery).toHaveData("attr1", "value1");
+
+  expect(jquery).toHaveText("MyText");
+  expect(jquery).toHaveText(/MyTe.t/);
+
+  expect(jquery).toHaveDescendantWithText("selector", "text");
+  expect(jquery).toHaveDescendantWithText("selector", /text/);
+
+  expect(jquery).toHaveCss({key: 'value'});
+  }
+}
+
+{
+  expect('').toBeEmpty();
+  expect(1).toBeOneOf([1, 2, 3]);
+  expect(null).toBeNil();
+
+  {
+    const greaterThanOneButNotThree = n => n > 1 && n !== 3;
+    expect(100).toSatisfy(greaterThanOneButNotThree);
+  }
+
+  expect([]).toBeArray();
+
+  expect([]).toBeArrayOfSize(0);
+
+  expect([1, 2, 3]).toIncludeAllMembers([2, 1, 3]);
+
+  expect([1, 2, 3]).toIncludeAnyMembers([2, 1, 3]);
+
+  {
+    const isOdd = el => el % 2 === 1;
+    expect([1,3,5,7]).toSatisfyAll(isOdd);
+  }
+
+  expect(false).toBeBoolean();
+  expect(false).not.toBeTrue();
+
+  expect(true).not.toBeFalse();
+  expect(() => {}).toBeFunction();
+
+  {
+    const timeout = (n: number) => {};
+    const mock1 = jest.fn(timeout(1));
+    const mock2 = jest.fn(timeout(1));
+    expect(mock1).toHaveBeenCalledBefore(mock2);
+  }
+
+  expect(1).toBeNumber();
+  expect(NaN).toBeNaN();
+  expect(1).toBeFinite();
+  expect(1).toBePositive();
+  expect(-1).toBeNegative();
+  expect(2).toBeEven();
+  expect(1).toBeOdd();
+  expect(1).toBeWithin(1, 3);
+  expect({}).toBeObject();
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainKey('a');
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainKeys(['a', 'b']);
+  }
+  {
+    const o = { a: 'hello', b: 'world' };
+    expect(o).toContainAllKeys(['a', 'b']);
+  }
+  {
+    const o = { a: 'hello', b: 'world' };
+    expect(o).toContainAnyKeys(['a']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainValue('foo');
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainValues(['foo']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainAllValues(['foo', 'bar', 'baz']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainAnyValues(['qux', 'foo']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainEntry(['a', 'foo']);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainEntries([['a', 'foo']]);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainAllEntries([['a', 'foo'], ['b', 'bar'], ['c', 'baz']]);
+  }
+  {
+    const o = { a: 'foo', b: 'bar', c: 'baz' };
+    expect(o).toContainAnyEntries([['a', 'qux'], ['a', 'foo']]);
+  }
+  {
+    expect({a: 1}).toBeExtensible();
+  }
+
+  expect(Object.freeze({})).toBeFrozen();
+
+  expect(Object.seal({})).toBeSealed();
+
+  expect('').toBeString();
+  expect('hello world').toEqualCaseInsensitive('hello world');
+  expect('hello world').toStartWith('hello');
+  expect('hello world').toEndWith('world');
+  expect('hello world').toInclude('ell');
+  expect('hello hello world').toIncludeRepeated('hello', 2);
+  expect('hello world').toIncludeMultiple(['world', 'hello']);
+}

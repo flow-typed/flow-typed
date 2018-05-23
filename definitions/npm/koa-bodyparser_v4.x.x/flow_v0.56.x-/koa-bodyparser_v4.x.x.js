@@ -21,5 +21,5 @@ declare module "koa-bodyparser" {
     onerror?: (err: Error, ctx: Context) => void
   |};
 
-  declare export default function bodyParser(opts?: Options): Middleware;
+  declare module.exports: (opts?: Options) => Middleware;
 }

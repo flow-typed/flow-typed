@@ -370,7 +370,7 @@ declare class rxjs$Observable<+T> {
 
   catch<U>(
     selector: (err: any, caught: rxjs$Observable<T>) => rxjs$Observable<U>
-  ): rxjs$Observable<U>;
+  ): rxjs$Observable<T | U>;
 
   concat<U>(...sources: rxjs$Observable<U>[]): rxjs$Observable<T | U>;
 
@@ -438,6 +438,7 @@ declare class rxjs$Observable<+T> {
     scheduler?: rxjs$SchedulerClass
   ): rxjs$Observable<T>;
 
+  filter(predicate: typeof Boolean): rxjs$Observable<$NonMaybeType<T>>;
   filter(
     predicate: (value: T, index: number) => boolean,
     thisArg?: any

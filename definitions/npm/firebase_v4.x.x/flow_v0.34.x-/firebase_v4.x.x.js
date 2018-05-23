@@ -102,12 +102,12 @@ declare class $npm$firebase$auth$Auth {
   ): Promise<$npm$firebase$auth$User>;
   fetchProvidersForEmail(email: string): Promise<Array<string>>;
   onAuthStateChanged(
-    nextOrObserver: (?$npm$firebase$auth$User) => void,
+    nextOrObserver: (?$npm$firebase$auth$User) => void | Promise<void>,
     error?: (error: $npm$firebase$auth$Error) => void,
     completed?: () => void
   ): () => void;
   onIdTokenChanged(
-    nextOrObserver: Object | ((user?: $npm$firebase$auth$User) => void),
+    nextOrObserver: Object | ((user?: $npm$firebase$auth$User) => void | Promise<void>),
     error?: (error: $npm$firebase$auth$Error) => void,
     completed?: () => void
   ): () => void;
@@ -176,6 +176,17 @@ declare class $npm$firebase$auth$UserInfo {
   uid: string;
 }
 
+declare type $npm$firebase$actionCode$settings = {
+  url: string,
+  iOS?: { bundleId: string },
+  android?: {
+    packageName: string,
+    installApp?: boolean,
+    minimumVersion?: string,
+  },
+  handleCodeInApp?: boolean,
+}
+
 declare class $npm$firebase$auth$User extends $npm$firebase$auth$UserInfo {
   displayName: ?string;
   email: ?string;
@@ -214,7 +225,7 @@ declare class $npm$firebase$auth$User extends $npm$firebase$auth$UserInfo {
     applicationVerifier: $npm$firebase$auth$ApplicationVerifier
   ): Promise<$npm$firebase$auth$ConfirmationResult>;
   reload(): Promise<void>;
-  sendEmailVerification(): Promise<void>;
+  sendEmailVerification(actionCodeSettings?: $npm$firebase$actionCode$settings): Promise<void>;
   toJSON(): Object;
   unlink(providerId: string): Promise<$npm$firebase$auth$User>;
   updateEmail(newEmail: string): Promise<void>;

@@ -1,8 +1,9 @@
 // @flow
 
-import GitHub from 'github';
+import Octokit from '@octokit/rest';
 
-const CLIENT = new GitHub({version: '3.0.0'});
+const CLIENT = new Octokit();
+
 if (process.env.GH_TOK) {
   CLIENT.authenticate({type: 'oauth', token: process.env.GH_TOK});
 }
