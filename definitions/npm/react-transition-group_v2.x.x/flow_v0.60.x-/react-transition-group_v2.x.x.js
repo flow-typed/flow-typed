@@ -18,7 +18,7 @@ declare module 'react-transition-group' {
   declare export type EnterHandler = (node: HTMLElement, isAppearing: boolean) => void;
   declare export type ExitHandler = (node: HTMLElement) => void;
 
-  declare interface TransitionActions {
+  declare type TransitionActions = {
     appear?: boolean;
     enter?: boolean;
     exit?: boolean;
@@ -46,11 +46,8 @@ declare module 'react-transition-group' {
     children: ((status: TransitionStatus) => React$Node) | React$Node,
   }> {}
 
-  declare export class TransitionGroup extends React$Component<{
+  declare export class TransitionGroup extends React$Component<TransitionActions & {
     component?: React$ElementType | null,
-    appear?: boolean,
-    enter?: boolean,
-    exit?: boolean,
     children?: React$Node,
     childFactory?: (child: React$Node) => React$Node,
   }> {}

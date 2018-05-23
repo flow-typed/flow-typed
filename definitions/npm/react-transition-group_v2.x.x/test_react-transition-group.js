@@ -52,6 +52,80 @@ describe('CSS/Transition', () => {
       // $ExpectError
       <Transition timeout={ 1 } />
     })
+
+    it('props should be compatible with other types with same structure', () => {
+      type WithTransitionProps = {
+        // props copied from Transition element config
+        mountOnEnter?: boolean,
+        unmountOnExit?: boolean,
+        appear?: boolean,
+        enter?: boolean,
+        exit?: boolean,
+        timeout: number,
+        addListener?: (node: HTMLElement, done: () => void) => void,
+        onEnter?: (node: HTMLElement, isAppearing: boolean) => void,
+        onEntering?: (node: HTMLElement, isAppearing: boolean) => void,
+        onEntered?: (node: HTMLElement, isAppearing: boolean) => void,
+        onExit?: (node: HTMLElement) => void,
+        onExiting?: (node: HTMLElement) => void,
+        onExited?: (node: HTMLElement) => void,
+        in?: boolean,
+
+        // custom props
+        children: React$Node,
+        getClassName(state: string): string
+      };
+
+      class WrapperComponent extends React.PureComponent<WithTransitionProps> {
+        render() {
+          const {
+            children,
+            mountOnEnter,
+            unmountOnExit,
+            appear,
+            enter,
+            exit,
+            timeout,
+            addListener,
+            onEnter,
+            onEntering,
+            onEntered,
+            onExit,
+            onExiting,
+            onExited,
+            in: transitionIn,
+            ...restProps
+          } = this.props;
+
+          return (
+            <Transition
+              in={transitionIn}
+              mountOnEnter={mountOnEnter}
+              unmountOnExit={unmountOnExit}
+              appear={appear}
+              enter={enter}
+              exit={exit}
+              timeout={timeout}
+              addListener={addListener}
+              onEnter={onEnter}
+              onEntering={onEntering}
+              onEntered={onEntered}
+              onExit={onExit}
+              onExited={onExited}
+              onExiting={onExiting}
+            >
+              {state => (
+                <div className={restProps.getClassName(state)}>
+                  {children}
+                </div>
+              )}
+            </Transition>
+          )
+        }
+      }
+
+      <WrapperComponent timeout={100} getClassName={state => `transition-${state}`}>Foobar</WrapperComponent>;
+    });
   })
 
   describe('CSSTransition', () => {
