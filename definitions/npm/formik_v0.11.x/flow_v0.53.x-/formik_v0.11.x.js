@@ -87,17 +87,17 @@ declare module "formik" {
     /**
      * Submission handler
      */
-    onSubmit: (values: Object, formikActions: FormikActions<any>) => any,
+    onSubmit: (values: Object, formikActions: FormikActions<any, any>) => any,
 
     /**
      * Form component to render
      */
-    component?: React$ComponentType<FormikProps<any> | void>,
+    component?: React$ComponentType<FormikProps<any, any> | void>,
 
     /**
      * Render prop (works like React router's <Route render={props =>} />)
      */
-    render?: (props: FormikProps<any>) => React$Node,
+    render?: (props: FormikProps<any, any>) => React$Node,
 
     /**
      * A Yup Schema or a function that returns a Yup schema
@@ -113,7 +113,7 @@ declare module "formik" {
     /**
      * React children or child render callback
      */
-    children?: ((props: FormikProps<any>) => React$Node) | React$Node
+    children?: ((props: FormikProps<any, any>) => React$Node) | React$Node
   };
 
   /**
