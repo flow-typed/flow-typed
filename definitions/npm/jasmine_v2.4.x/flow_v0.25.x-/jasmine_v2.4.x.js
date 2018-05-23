@@ -62,10 +62,12 @@ type JasmineSpyStrategyType = {
   throwError(errorMessage?: string): JasmineSpyType
 };
 
-type JasmineSpyType = {
+type JasmineSpyTypeProto = {
   and: JasmineSpyStrategyType,
   calls: JasmineCallsType
 };
+
+type JasmineSpyType = JasmineSpyTypeProto & Function;
 
 type JasmineClockType = {
   install(): void,
