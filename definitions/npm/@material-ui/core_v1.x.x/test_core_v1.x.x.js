@@ -3,7 +3,7 @@
 import React from "react";
 
 // Direct module import.
-import AppBar from "@material-ui/core/AppBar/AppBar";
+import AppBar from "@material-ui/core/AppBar";
 
 // Import via index.js
 import Button from "@material-ui/core/Button";
