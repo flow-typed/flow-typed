@@ -13,7 +13,7 @@ declare module "formik" {
    * Using interface here because interfaces support overloaded method signatures
    * https://github.com/facebook/flow/issues/1556#issuecomment-200051475
    */
-  declare export interface FormikActions<Values> {
+  declare export interface FormikActions<Props, Values> {
     /** Manually set top level status. */
     setStatus(status?: any): void;
     /**
@@ -64,6 +64,7 @@ declare module "formik" {
       ) => $Shape<FormikState<Values>>,
       callback?: () => any
     ): void;
+    props: Props;
   }
 
   declare export type FormikSharedConfig = {
@@ -86,17 +87,17 @@ declare module "formik" {
     /**
      * Submission handler
      */
-    onSubmit: (values: Object, formikActions: FormikActions<any>) => any,
+    onSubmit: (values: Object, formikActions: FormikActions<any, any>) => any,
 
     /**
      * Form component to render
      */
-    component?: React$ComponentType<FormikProps<any> | void>,
+    component?: React$ComponentType<FormikProps<any, any> | void>,
 
     /**
      * Render prop (works like React router's <Route render={props =>} />)
      */
-    render?: (props: FormikProps<any>) => React$Node,
+    render?: (props: FormikProps<any, any>) => React$Node,
 
     /**
      * A Yup Schema or a function that returns a Yup schema
@@ -112,7 +113,7 @@ declare module "formik" {
     /**
      * React children or child render callback
      */
-    children?: ((props: FormikProps<any>) => React$Node) | React$Node
+    children?: ((props: FormikProps<any, any>) => React$Node) | React$Node
   };
 
   /**
@@ -164,8 +165,8 @@ declare module "formik" {
     handleReset: () => void
   };
 
-  declare export type FormikProps<Values> = FormikState<Values> &
-    FormikActions<Values> &
+  declare export type FormikProps<Props, Values> = FormikState<Values> &
+    FormikActions<Props, Values> &
     FormikHandlers &
     FormikComputedProps<Values>;
 
@@ -231,10 +232,13 @@ declare module "formik" {
 
   declare export var Form: React$StatelessFunctionalComponent<any>;
 
-  declare export function withFormik<Props, Values>({
+  declare type WithFormikConfig<Props, Values> = {
     mapPropsToValues: (props: Props) => Values,
-    validationSchema: (props: Props) => any
-  }): (
+    validationSchema: (props: Props) => any,
+    handleSubmit: (value: Values, actions: FormikActions<Props, Values>) => void,
+  };
+
+  declare export function withFormik<Props, Values>(config: WithFormikConfig<Props, Values>): (
     ComponentType<Props>
-  ) => ComponentType<$Diff<Props, FormikProps<Values>>>;
+  ) => ComponentType<$Diff<Props, FormikProps<Props, Values>>>;
 }
