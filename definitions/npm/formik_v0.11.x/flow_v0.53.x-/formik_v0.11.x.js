@@ -231,10 +231,21 @@ declare module "formik" {
 
   declare export var Form: React$StatelessFunctionalComponent<any>;
 
-  declare export function withFormik<Props, Values>({
-    mapPropsToValues: (props: Props) => Values,
-    validationSchema: (props: Props) => any
-  }): (
+  declare type WithFormikConfig<Props, Values> = {
+    displayName?: string,
+    enableReinitialize?: boolean,
+    handleSubmit: (value: Values, actions: FormikActions<Values>) => void,
+    isInitialValid?: boolean | (props: Props) => boolean,
+    mapPropsToValues?: (props: Props) => Values,
+    validate?: (values: Values, props: Props) => FormikErrors<Values> | Promise<any>,
+    validateOnBlur?: boolean,
+    validateOnChange?: boolean,
+    validationSchema?: (props: Props) => any,
+  };
+
+  declare export function withFormik<Props, Values>(
+    config: WithFormikConfig<Props, Values>,
+  ): (
     ComponentType<Props>
   ) => ComponentType<$Diff<Props, FormikProps<Values>>>;
 }
