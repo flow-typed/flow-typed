@@ -1,7 +1,7 @@
 declare module "react-dropzone" {
   declare type ChildrenProps = {
     draggedFiles: Array<File>,
-    acceptedFile: Array<File>,
+    acceptedFiles: Array<File>,
     rejectedFiles: Array<File>,
     isDragActive: boolean,
     isDragAccept: boolean,

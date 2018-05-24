@@ -44,7 +44,7 @@ import Dropzone, { type ChildrenProps, type DropzoneFile } from "react-dropzone"
   {
     ({
       draggedFiles,
-      acceptedFile,
+      acceptedFiles,
       rejectedFiles,
       isDragActive,
       isDragAccept,
