@@ -344,6 +344,7 @@ declare module 'styled-components' {
   declare export type ReactComponentStyled<Props>                                = $npm$styledComponents$ReactComponentStyled<Props, ComponentListKeys>;
   declare export type ReactComponentStyledTaggedTemplateLiteral<Props>           = $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponent<Props, ComponentListKeys>;
 
+  declare export var css: TaggedTemplateLiteral<Array<Interpolation>>;
   declare export var injectGlobal: TaggedTemplateLiteral<void>;
   declare export var keyframes: TaggedTemplateLiteral<string>;
   declare export var withTheme: $npm$styledComponents$WithTheme;
