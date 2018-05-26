@@ -12,7 +12,6 @@
     const redis = new Redis();
  =============================================== */
 
-import {callback} from "../../awaiting_v2.x.x/flow_v0.33.x-/awaiting_v2.x.x";
 import {Commander, MultiOptions, Pipeline, RedisOptions, ResCallbackT, ScanStreamOption} from "ioredis";
 
 declare module "ioredis" {
