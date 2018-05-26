@@ -1,7 +1,6 @@
 declare module "camelcase" {
   declare module.exports: (
-    input: string,
+    input: string | string[],
     options?: { pascalCase?: boolean }
   ) => string;
 }
-
