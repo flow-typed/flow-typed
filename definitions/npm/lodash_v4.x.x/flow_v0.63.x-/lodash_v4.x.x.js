@@ -328,7 +328,7 @@ declare module "lodash" {
     remove<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
     reverse<T>(array: Array<T>): Array<T>;
     reverse<T: void | null>(array: T): T;
-    slice<T>(array?: ?Array<T>, start?: ?number, end?: ?number): Array<T>;
+    slice<T>(array?: ?$ReadOnlyArray<T>, start?: ?number, end?: ?number): Array<T>;
     sortedIndex<T>(array: Array<T>, value: T): number;
     sortedIndex<T>(array: void | null, value: ?T): 0;
     sortedIndexBy<T>(
