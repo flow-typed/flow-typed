@@ -351,10 +351,10 @@ declare module 'styled-components' {
   declare export var ServerStyleSheet: typeof Npm$StyledComponents$ServerStyleSheet;
   declare export var StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager;
   declare export var ThemeProvider: typeof Npm$StyledComponents$ThemeProvider;
+  declare export var css: TaggedTemplateLiteral<Array<Interpolation>>;
 
   declare export default {
     $call: $npm$styledComponents$Call<ComponentListKeys>,
-    css: TaggedTemplateLiteral<Array<Interpolation>>,
     ...$npm$styledComponents$StyledComponentsComponentList,
     ...$npm$styledComponents$StyledComponentsNativeComponentList,
   }
