@@ -518,7 +518,7 @@ declare module "lodash" {
     eachRight<T: Object>(object: T, iteratee?: OIteratee<T>): T;
     every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
     every<T: Object>(object: T, iteratee?: OIteratee<T>): boolean;
-    filter<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
+    filter<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     filter<A, T: { [id: string]: A }>(
       object: T,
       predicate?: OPredicate<A, T>
@@ -703,7 +703,7 @@ declare module "lodash" {
       iteratee?: ?(accumulator: U, value: any, key: string, object: T) => U,
       accumulator?: ?U
     ): U;
-    reject<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
+    reject<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): Array<T>;
     reject<V: Object, A, T: { [id: string]: A }>(
       object?: ?T,
       predicate?: ?OPredicate<A, T>
