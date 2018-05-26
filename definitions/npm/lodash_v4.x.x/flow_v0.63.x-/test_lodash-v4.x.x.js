@@ -55,6 +55,7 @@ countBy(["one", "two", "three"], "length");
  * _.difference
  */
 difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>));
+difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>), (["a"]: $ReadOnlyArray<string>));
 
 /**
  * _.differenceBy
