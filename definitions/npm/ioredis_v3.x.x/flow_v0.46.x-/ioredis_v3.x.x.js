@@ -12,8 +12,6 @@
     const redis = new Redis();
  =============================================== */
 
-import {Commander, MultiOptions, Pipeline, RedisOptions, ResCallbackT, ScanStreamOption} from "ioredis";
-
 declare module "ioredis" {
   declare class Commander extends events$EventEmitter {
     getBuiltinCommands(): string[];
