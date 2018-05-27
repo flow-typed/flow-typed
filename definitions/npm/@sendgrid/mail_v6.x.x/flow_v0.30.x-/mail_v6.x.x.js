@@ -1,6 +1,6 @@
 declare module '@sendgrid/mail' {
 
-  declare class ResponseError extends Error {
+  declare export class ResponseError extends Error {
     code: number;
     message: string;
     response: {
@@ -81,7 +81,7 @@ declare module '@sendgrid/mail' {
     };
   }
 
-  declare type EmailData = string | { name?: string; email: string; };
+  declare export type EmailData = string | { name?: string; email: string; };
 
   declare interface MailContent {
     type: string;
