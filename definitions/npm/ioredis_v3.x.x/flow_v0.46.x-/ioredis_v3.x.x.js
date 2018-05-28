@@ -12,7 +12,6 @@
     const redis = new Redis();
  =============================================== */
 
-
 declare module "ioredis" {
   declare class Commander extends events$EventEmitter {
     getBuiltinCommands(): string[];
