@@ -9,10 +9,12 @@ import debounce from "lodash/debounce";
 import defaultTo from "lodash/defaultTo";
 import difference from "lodash/difference";
 import differenceBy from "lodash/differenceBy";
+import each from "lodash/each";
 import extend from "lodash/extend";
 import find from "lodash/find";
 import first from "lodash/first";
 import flatMap from "lodash/flatMap";
+import forEach from "lodash/forEach";
 import get from "lodash/get";
 import groupBy from "lodash/groupBy";
 import intersectionBy from "lodash/intersectionBy";
@@ -64,6 +66,16 @@ differenceBy(([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4], Math.floor);
 differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], "x");
 
 /**
+ * _.differenceBy
+ */
+differenceBy(([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4], Math.floor);
+
+/**
+ * _.each
+ */
+each(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
+
+/**
  * _.find
  */
 find([1, 2, 3], x => x * 1 == 3);
@@ -103,6 +115,11 @@ find(users, ["active", false]);
 
 // The `_.property` iteratee shorthand.
 find(users, "active");
+
+/**
+ * _.forEach
+ */
+forEach(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
 
 /**
  * _.groupBy
