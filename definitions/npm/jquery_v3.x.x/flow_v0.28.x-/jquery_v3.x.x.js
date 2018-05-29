@@ -1779,6 +1779,12 @@ declare class JQuery {
   clearQueue(queueName?: string): JQuery;
 
   /**
+   * Return the value: any at the named data store for the first element in the jQuery collection, as set by data(name, value) or by an HTML5 data-* attribute.
+   *
+   * @param key Name of the data stored.
+   */
+  data(key: string, _: void): any;
+  /**
    * Store arbitrary data associated with the matched elements.
    *
    * @param key A string naming the piece of data to set.
@@ -1793,12 +1799,6 @@ declare class JQuery {
   data(obj: {
     [key: string]: any
   }): JQuery;
-  /**
-   * Return the value: any at the named data store for the first element in the jQuery collection, as set by data(name, value) or by an HTML5 data-* attribute.
-   *
-   * @param key Name of the data stored.
-   */
-  data(key: string, _: void): any;
   /**
    * Return the value: any at the named data store for the first element in the jQuery collection, as set by data(name, value) or by an HTML5 data-* attribute.
    */
