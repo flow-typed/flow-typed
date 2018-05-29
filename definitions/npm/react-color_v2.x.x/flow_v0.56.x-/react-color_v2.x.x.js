@@ -172,12 +172,14 @@ declare module "react-color/lib/components/common" {
     HexColor,
     RGBColor,
     HSLColor,
+    HSVColor,
     ColorChangeHandler
   } from "react-color";
 
   declare type PartialColorResult = {|
     hex?: HexColor,
     hsl?: HSLColor,
+    hsv?: HSVColor,
     rgb?: RGBColor
   |};
 
