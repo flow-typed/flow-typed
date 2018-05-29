@@ -94,3 +94,16 @@ Backbone.history.on('click', () => true);
 router.on('click', () => true);
 instance.on('click', () => true);
 tasks.on('click', () => true);
+
+// constructor accepts options
+class MyView extends Backbone.View {
+}
+
+const myView = new MyView({ el: '.some-selector' });
+
+// initialize does not need a return
+class MyView2 extends Backbone.View {
+  initialize() {
+    // code
+  }
+}
