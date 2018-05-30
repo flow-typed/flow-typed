@@ -1,6 +1,8 @@
 /* @flow */
 /** ** firebase ****/
 
+type Async<T> = T | Promise<T>;
+
 declare interface $npm$firebase$Config {
   apiKey: string;
   authDomain?: string;
@@ -102,15 +104,15 @@ declare class $npm$firebase$auth$Auth {
   ): Promise<$npm$firebase$auth$User>;
   fetchProvidersForEmail(email: string): Promise<Array<string>>;
   onAuthStateChanged(
-    nextOrObserver: (?$npm$firebase$auth$User) => void | Promise<void>,
-    error?: (error: $npm$firebase$auth$Error) => void,
-    completed?: () => void
-  ): () => void;
+    nextOrObserver: (?$npm$firebase$auth$User) => Async<void>,
+    error?: (error: $npm$firebase$auth$Error) => Async<void>,
+    completed?: () => Async<void>
+  ): () => Async<void>;
   onIdTokenChanged(
-    nextOrObserver: Object | ((user?: $npm$firebase$auth$User) => void | Promise<void>),
-    error?: (error: $npm$firebase$auth$Error) => void,
-    completed?: () => void
-  ): () => void;
+    nextOrObserver: Object | ((user?: $npm$firebase$auth$User) => Async<void>),
+    error?: (error: $npm$firebase$auth$Error) => Async<void>,
+    completed?: () => Async<void>
+  ): () => Async<void>;
   sendPasswordResetEmail(email: string): Promise<void>;
   setPersistence(persistence: $npm$firebase$auth$Auth$Persistence$Enum): Promise<void>;
   signInAndRetrieveDataWithCredential(
@@ -306,7 +308,7 @@ declare type $npm$firebase$auth$OAuthProvider =
 declare type $npm$firebase$database$Value = any;
 declare type $npm$firebase$database$OnCompleteCallback = (
   error: ?Object
-) => void;
+) => Async<void>;
 declare type $npm$firebase$database$QueryEventType =
   | 'value'
   | 'child_added'
@@ -359,7 +361,7 @@ declare class $npm$firebase$database$OnDisconnect {
 declare type $npm$firebase$database$Callback = (
   $npm$firebase$database$DataSnapshot,
   ?string
-) => void;
+) => Async<void>;
 
 declare class $npm$firebase$database$Query {
   ref: $npm$firebase$database$Reference;
@@ -382,13 +384,13 @@ declare class $npm$firebase$database$Query {
   on(
     eventType: $npm$firebase$database$QueryEventType,
     callback: $npm$firebase$database$Callback,
-    cancelCallbackOrContext?: (error: Object) => void | Object,
+    cancelCallbackOrContext?: (error: Object) => Async<void | Object>,
     context?: $npm$firebase$database$Callback
   ): $npm$firebase$database$Callback;
   once(
     eventType: $npm$firebase$database$QueryEventType,
     successCallback?: $npm$firebase$database$Callback,
-    failureCallbackOrContext?: (error: Object) => void | Object,
+    failureCallbackOrContext?: (error: Object) => Async<void | Object>,
     context?: Object
   ): Promise<$npm$firebase$database$DataSnapshot>;
   orderByChild(path: string): $npm$firebase$database$Query;
@@ -435,7 +437,7 @@ declare class $npm$firebase$database$Reference extends $npm$firebase$database$Qu
       error: null | Object,
       committed: boolean,
       snapshot: $npm$firebase$database$DataSnapshot
-    ) => void,
+    ) => Async<void>,
     applyLocally?: boolean
   ): Promise<{
     committed: boolean,
@@ -476,8 +478,8 @@ declare interface $npm$firebase$firestore$QueryListenOptions {
   includeMetadataChanges: boolean;
   includeQueryMetadataChanges: boolean;
 }
-declare type $npm$firebase$firestore$observer = (snapshot: $npm$firebase$firestore$DocumentSnapshot) => void;
-declare type $npm$firebase$firestore$observerError = (error: $npm$firebase$Error) => void;
+declare type $npm$firebase$firestore$observer = (snapshot: $npm$firebase$firestore$DocumentSnapshot) => Async<void>;
+declare type $npm$firebase$firestore$observerError = (error: $npm$firebase$Error) => Async<void>;
 
 declare class $npm$firebase$firestore$Query {
   firestore: $npm$firebase$firestore$Firestore;
@@ -581,7 +583,7 @@ declare class $npm$firebase$firestore$QuerySnapshot {
   metadata: $npm$firebase$firestore$SnapshotMetadata;
   query: $npm$firebase$firestore$Query;
   size: number;
-  forEach((snapshot: $npm$firebase$firestore$DocumentSnapshot, thisArg?: any) => void): void;
+  forEach((snapshot: $npm$firebase$firestore$DocumentSnapshot, thisArg?: any) => Async<void>): void;
 }
 
 declare interface $npm$firebase$firestore$Settings {}
@@ -617,10 +619,10 @@ declare interface $npm$firebase$firestore$WriteBatch {
 declare class $npm$firebase$messaging$Messaging {
   deleteToken(token: string): Promise<any>;
   getToken(): Promise<string>;
-  onMessage(nextOrObserver: ({}) => void | {}): () => void;
-  onTokenRefresh(nextOrObserver: ({}) => void | {}): () => void;
+  onMessage(nextOrObserver: ({}) => Async<void> | {}): () => Async<void>;
+  onTokenRefresh(nextOrObserver: ({}) => Async<void> | {}): () => Async<void>;
   requestPermission(): Promise<any>;
-  setBackgroundMessageHandler(callback: (value: {}) => void): void;
+  setBackgroundMessageHandler(callback: (value: {}) => Async<void>): void;
   useServiceWorker(registration: any): void;
 }
 
@@ -700,18 +702,18 @@ declare class $npm$firebase$storage$UploadMetadata extends $npm$firebase$storage
 }
 
 declare interface $npm$firebase$storage$Observer {
-  next: (snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void;
-  error?: (error: Error) => void;
-  complete?: () => void;
+  next: (snapshot: $npm$firebase$storage$UploadTaskSnapshot) => Async<void>;
+  error?: (error: Error) => Async<void>;
+  complete?: () => Async<void>;
 }
 
-declare type $npm$firebase$storage$Unsubscribe = () => void;
+declare type $npm$firebase$storage$Unsubscribe = () => Async<void>;
 
 declare type $npm$firebase$storage$Subscribe = (
   observerOrNext: | $npm$firebase$storage$Observer
-  | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void),
-  onError?: (error: Error) => void,
-  onComplete?: () => void
+  | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => Async<void>),
+  onError?: (error: Error) => Async<void>,
+  onComplete?: () => Async<void>
 ) => $npm$firebase$storage$Unsubscribe;
 
 declare class $npm$firebase$storage$UploadTask extends Promise<
@@ -726,9 +728,9 @@ declare class $npm$firebase$storage$UploadTask extends Promise<
   on(
     event: $npm$firebase$storage$TaskEvent,
     observerOrNext: | $npm$firebase$storage$Observer
-    | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => void),
-    onError?: (error: Error) => void,
-    onComplete?: () => void
+    | ((snapshot: $npm$firebase$storage$UploadTaskSnapshot) => Async<void>),
+    onError?: (error: Error) => Async<void>,
+    onComplete?: () => Async<void>
   ): $npm$firebase$storage$Unsubscribe;
   pause(): boolean;
   resume(): boolean;
@@ -822,7 +824,7 @@ declare module '@firebase/database' {
   declare module.exports: {
     (app?: $npm$firebase$App): $npm$firebase$database$Database,
     enableLogging(
-      logger?: boolean | ((msg: string) => void),
+      logger?: boolean | ((msg: string) => Async<void>),
       persistent?: boolean
     ): void,
     DataSnapshot: typeof $npm$firebase$database$DataSnapshot,
