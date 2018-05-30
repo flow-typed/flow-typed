@@ -93,7 +93,7 @@ declare type $npm$firebase$auth$Auth$Persistence$Enum = $Values<$npm$firebase$au
 declare class $npm$firebase$auth$Auth {
   static Persistence: $npm$firebase$auth$Auth$Persistence;
   app: $npm$firebase$App;
-  currentUser: $npm$firebase$auth$User;
+  currentUser: $npm$firebase$auth$User | null;
   applyActionCode(code: string): Promise<void>;
   checkActionCode(code: string): Promise<$npm$firebase$auth$ActionCodeInfo>;
   confirmPasswordReset(code: string, newPassword: string): Promise<void>;
