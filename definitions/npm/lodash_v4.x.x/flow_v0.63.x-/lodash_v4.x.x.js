@@ -850,8 +850,8 @@ declare module "lodash" {
         source: U
       ) => boolean | void
     ): boolean;
-    isNaN(value: Function | string | void | null | Object): false;
     isNaN(value: number): boolean;
+    isNaN(value: any): false;
     isNative(value: number | string | void | null | Object): false;
     isNative(value: any): boolean;
     isNil(value: void | null): true;
