@@ -8,6 +8,13 @@ declare module "react-color" {
     a?: number
   |};
 
+  declare export type HSVColor = {|
+    h: number,
+    s: number,
+    v: number,
+    a?: number
+  |};
+
   declare export type RGBColor = {|
     r: number,
     g: number,
@@ -15,11 +22,12 @@ declare module "react-color" {
     a?: number
   |};
 
-  declare export type Color = HexColor | HSLColor | RGBColor;
+  declare export type Color = HexColor | HSLColor | HSVColor | RGBColor;
 
   declare export type ColorResult = {|
     hex: HexColor,
     hsl: HSLColor,
+    hsv: HSVColor,
     rgb: RGBColor
   |};
 
@@ -131,16 +139,13 @@ declare module "react-color" {
   ) => void;
 
   declare export type InjectedColorProps = {
-    hex?: string,
-    hsl?: HSLColor,
-    rgb?: RGBColor,
-    onChange?: ColorWrapChangeHandler
-  };
-
-  declare export type ExportedColorProps = {
-    color?: Color,
-    onChange?: ColorChangeHandler,
-    onChangeComplete?: ColorChangeHandler
+    hex: string,
+    hsl: HSLColor,
+    hsv: HSVColor,
+    rgb: RGBColor,
+    oldHue: number,
+    onChange?: ColorWrapChangeHandler,
+    source: string
   };
 
   declare export class AlphaPicker extends React$Component<AlphaPickerProps> {}
@@ -157,9 +162,9 @@ declare module "react-color" {
   declare export class SwatchesPicker extends React$Component<SwatchesPickerProps> {}
   declare export class TwitterPicker extends React$Component<TwitterPickerProps> {}
 
-  declare export function CustomPicker<A>(
-    component: React$ComponentType<A & InjectedColorProps>
-  ): Class<A & ExportedColorProps>;
+  declare export function CustomPicker<Props: {}>(
+    Component: React$ComponentType<InjectedColorProps & $Supertype<Props>>
+  ): React$ComponentType<Props>;
 }
 
 declare module "react-color/lib/components/common" {
@@ -167,12 +172,14 @@ declare module "react-color/lib/components/common" {
     HexColor,
     RGBColor,
     HSLColor,
+    HSVColor,
     ColorChangeHandler
   } from "react-color";
 
   declare type PartialColorResult = {|
     hex?: HexColor,
     hsl?: HSLColor,
+    hsv?: HSVColor,
     rgb?: RGBColor
   |};
 

@@ -1,4 +1,5 @@
-import React from "react";
+// @flow
+import * as React from "react";
 import { render } from "react-dom";
 import {
   AlphaPicker,
@@ -15,6 +16,7 @@ import {
   TwitterPicker,
   CustomPicker
 } from "react-color";
+import type { InjectedColorProps } from "react-color"
 import { EditableInput, Hue } from "react-color/lib/components/common";
 
 /**
@@ -125,40 +127,53 @@ render(<TwitterPicker colors={["#111", "#222"]} />, root);
  * Test custom picker
  */
 
-const MyPicker = CustomPicker(({ hex, hsl, onChange }) => {
-  const styles = {
-    hue: {
-      height: 10,
-      position: "relative",
-      marginBottom: 10
-    },
-    input: {
-      height: 34,
-      border: `1px solid ${hex}`,
-      paddingLeft: 10
-    },
-    swatch: {
-      width: 54,
-      height: 38,
-      background: hex
-    }
-  };
-  return (
-    <div>
-      <div style={styles.hue}>
-        {/* $ExpectError (hsl should be a valid HSL Object) */}
-        <Hue hsl="#ffffff" onChange={onChange} />
-        <Hue hsl={hsl} onChange={onChange} />
-      </div>
+type MyPickerProps = InjectedColorProps & { ownProp: boolean };
+const MyPicker = ({ hex, hsl, hsv, onChange }: MyPickerProps) => {
+ const styles = {
+   hue: {
+     height: 10,
+     position: "relative",
+     marginBottom: 10
+   },
+   input: {
+     height: 34,
+     border: `1px solid ${hex}`,
+     paddingLeft: 10
+   },
+   swatch: {
+     width: 54,
+     height: 38,
+     background: hex
+   }
+ };
+ // $ExpectError hsv is not string
+ const a = hsv.toUpperCase();
+ // $ExpectError hsl is not string
+ const b = hsl.toUpperCase();
+ const c = hex.toUpperCase();
+ return (
+   <div>
+     <div style={styles.hue}>
+       {/* $ExpectError (hsl should be a valid HSL Object) */}
+       <Hue hsl="#ffffff" onChange={onChange} />
+       {/* $ExpectError wrong type of onChange callback */}
+       <Hue hsl={hsl} onChange={(str: string) => {}} />
+       <Hue hsl={hsl} onChange={onChange} />
+     </div>
 
-      <div style={{ display: "flex" }}>
-        <EditableInput
-          style={{ input: styles.input }}
-          value={hex}
-          onChange={onChange}
-        />
-        <div style={styles.swatch} />
-      </div>
-    </div>
-  );
-});
+     <div style={{ display: "flex" }}>
+       <EditableInput
+         style={{ input: styles.input }}
+         value={hex}
+         onChange={onChange}
+       />
+       <div style={styles.swatch} />
+     </div>
+   </div>
+ );
+};
+
+const MyEnhancedPicker = CustomPicker(MyPicker);
+render(<MyEnhancedPicker ownProp={true} />, root);
+// $ExpectError ownProp is required
+render(<MyEnhancedPicker />, root);
