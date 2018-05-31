@@ -24,6 +24,11 @@ instance.extend({ foo: "bar" });
 // $ExpectError
 instance.extend("foo");
 
+instance.has("foo");
+
+// $ExpectError
+instance.has(1);
+
 instance.t("foo").length;
 instance.t("foo", {}).length;
 
