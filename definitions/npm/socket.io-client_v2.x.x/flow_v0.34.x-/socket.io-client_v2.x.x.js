@@ -48,6 +48,7 @@ declare module "socket.io-client" {
 
   declare export class Socket extends Emitter<Socket> {
     constructor(io: Manager, nsp: string, opts?: SocketOptions): Socket;
+    id: string;
     open(): Socket;
     connect(): Socket;
     send(...args: any[]): Socket;
