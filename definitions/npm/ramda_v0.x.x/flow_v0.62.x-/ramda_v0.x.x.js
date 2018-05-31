@@ -1851,14 +1851,13 @@ declare module ramda {
 
   declare function memoize<A, B, T: (...args: Array<A>) => B>(fn: T): T;
 
-  declare function memoizeWith<A, B>(
-    keyFn: (x: A) => string,
-    ...rest: Array<void>
-  ): (fn: (x: B) => B) => A;
-  declare function memoizeWith<A, B>(
-    keyFn: (x: A) => string,
-    fn: (x: B) => B
-  ): A;
+  declare function memoizeWith<A, B, C>(
+    keyFn: (...args: Array<A>) => C
+  ): (...args: Array<A>) => (...args: Array<A>) => B;
+  declare function memoizeWith<A, B, C>(
+    keyFn: (...args: Array<A>) => C,
+    fn: (...args: Array<A>) => B
+  ): (...args: Array<A>) => B;
 
   declare function nAry<T>(
     arity: number,
