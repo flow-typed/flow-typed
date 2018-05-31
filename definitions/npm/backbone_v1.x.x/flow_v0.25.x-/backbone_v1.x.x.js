@@ -273,8 +273,8 @@ declare module "backbone" {
       instanceProperies: P,
       classProperties?: CP
     ): Class<View & P> & CP;
-    constructor(): this;
-    initialize(options?: Object): this;
+    constructor(options?: Object): void;
+    initialize(options?: Object): void;
     el: HTMLElement | string;
     $el: any;
     setElement(el: HTMLElement): this;
