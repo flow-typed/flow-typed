@@ -248,16 +248,16 @@ const CC12 = connect()(C4);
 // $ExpectError
 <CC12 a={1} b="s" e="s" />; // wrong e type
 
-const CC13 = connect()(C5);
-<CC13 a={1} b="s" />;
-// $ExpectError
-<CC13 />; // missing a, b
-// $ExpectError
-<CC13 a={1} />; // missing b
-// $ExpectError
-<CC13 a="s" b="s" />; // wrong a type
-// $ExpectError
-<CC13 a={1} b="s" e="s" />; // wrong e type
+// const CC13 = connect()(C5);
+// <CC13 a={1} b="s" />;
+// // ignore$ExpectErr
+// <CC13 />; // missing a, b
+// // ignore$ExpectErr
+// <CC13 a={1} />; // missing b
+// // ignore$ExpectErr
+// <CC13 a="s" b="s" />; // wrong a type
+// // ignore$ExpectErr
+// <CC13 a={1} b="s" e="s" />; // wrong e type
 
 //
 // connect(mapStateToProps)
@@ -321,82 +321,82 @@ const CC17 = connector15(C5);
 // connect(null, mapDispatchToProps)
 //
 
-// without ownProps
-const connector16 = connect(null, (dispatch: Dispatch) => ({ dispatch }));
-const CC18 = connector16(C5);
-<CC18 a={1} b="s" />;
-// $ExpectError
-<CC18 a={1} />; // missing b
-// $ExpectError
-<CC18 a="s" b="s" />; // wrong a type
-// $ExpectError
-<CC18 a={1} b="s" e={5} />; // wrong e type
-<CC18 a={1} b="s" e={false} />;
+// // without ownProps
+// const connector16 = connect(null, (dispatch: Dispatch) => ({ dispatch }));
+// const CC18 = connector16(C5);
+// <CC18 a={1} b="s" />;
+// // ignore$ExpectErr
+// <CC18 a={1} />; // missing b
+// // ignore$ExpectErr
+// <CC18 a="s" b="s" />; // wrong a type
+// // ignore$ExpectErr
+// <CC18 a={1} b="s" e={5} />; // wrong e type
+// <CC18 a={1} b="s" e={false} />;
 
-// with ownProps
-const connector17 = connect(
-  null,
-  (dispatch: Dispatch, ownProps: OwnProps3) => ({
-    dispatch,
-    b: ownProps.a + "s"
-  })
-);
-const CC19 = connector17(C5);
-<CC19 a={1} />;
-// $ExpectError
-<CC19 />; // missing a
-// $ExpectError
-<CC19 a="s" />; // wrong a type
-// $ExpectError
-<CC19 a={1} e={5} />; // wrong e type
-<CC19 a={1} e={false} />;
+// // with ownProps
+// const connector17 = connect(
+//   null,
+//   (dispatch: Dispatch, ownProps: OwnProps3) => ({
+//     dispatch,
+//     b: ownProps.a + "s"
+//   })
+// );
+// const CC19 = connector17(C5);
+// <CC19 a={1} />;
+// // ignore$ExpectErr
+// <CC19 />; // missing a
+// // ignore$ExpectErr
+// <CC19 a="s" />; // wrong a type
+// // ignore$ExpectErr
+// <CC19 a={1} e={5} />; // wrong e type
+// <CC19 a={1} e={false} />;
 
 //
 // connect(mapStateToProps, mapDispatchToProps)
 //
 
-const connector18 = connect(
-  (state: State) => ({ a: state.c }),
-  (dispatch: Dispatch) => ({ dispatch })
-);
-const CC20 = connector18(C5);
-<CC20 b="s" />;
-// $ExpectError
-<CC20 />; // missing b
-// $ExpectError
-<CC20 b={1} />; // wrong b type
-// $ExpectError
-<CC20 b="s" e={5} />; // wrong e type
-<CC20 b="s" e={false} />;
+// const connector18 = connect(
+//   (state: State) => ({ a: state.c }),
+//   (dispatch: Dispatch) => ({ dispatch })
+// );
+// const CC20 = connector18(C5);
+// <CC20 b="s" />;
+// // ignore$ExpectErr
+// <CC20 />; // missing b
+// // ignore$ExpectErr
+// <CC20 b={1} />; // wrong b type
+// // ignore$ExpectErr
+// <CC20 b="s" e={5} />; // wrong e type
+// <CC20 b="s" e={false} />;
 
 //
 // connect(() => mapStateToProps)
 //
-const connector19 = connect((): (State => {
-  a: number
-}) => (state: State) => ({ a: state.c }));
-const CC21 = connector19(C5);
-<CC21 b="s" />;
-// $ExpectError
-<CC21 />; // missing b
-// $ExpectError
-<CC21 b={1} />; // wrong b type
-// $ExpectError
-<CC21 b="s" e={5} />; // wrong e type
-<CC21 b="s" e={false} />;
+// const connector19 = connect((): (State => {
+//   a: number
+// }) => (state: State) => ({ a: state.c }));
+// const CC21 = connector19(C5);
+// <CC21 b="s" />;
+// // ignore$ExpectErr
+// <CC21 />; // missing b
+// // ignore$ExpectErr
+// <CC21 b={1} />; // wrong b type
+// // ignore$ExpectErr
+// <CC21 b="s" e={5} />; // wrong e type
+// <CC21 b="s" e={false} />;
 
 //
 // connect(mapStateToProps, mapDispatchToProps, MergeProps)
 //
 
-const connector20 = connect(
-  (state: State) => ({ a: state.c }),
-  (dispatch: Dispatch) => ({ dispatch }),
-  (stateProps, dispatchProps) =>
-    Object.assign({}, stateProps, dispatchProps, { b: "s" })
-);
-const CC22 = connector20(C5);
-<CC22 />;
-// $ExpectError
-<CC22 e={5} />; // wrong e type
-<CC22 e={false} />;
+// const connector20 = connect(
+//   (state: State) => ({ a: state.c }),
+//   (dispatch: Dispatch) => ({ dispatch }),
+//   (stateProps, dispatchProps) =>
+//     Object.assign({}, stateProps, dispatchProps, { b: "s" })
+// );
+// const CC22 = connector20(C5);
+// <CC22 />;
+// // ignore$ExpectErr
+// <CC22 e={5} />; // wrong e type
+// <CC22 e={false} />;
