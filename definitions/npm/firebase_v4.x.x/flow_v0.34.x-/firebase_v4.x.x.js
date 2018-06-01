@@ -744,30 +744,32 @@ declare class $npm$firebase$storage$UploadTaskSnapshot {
   totalBytes: number;
 }
 
+declare type $npm$firebase$app$exports = {
+  +apps: Array<$npm$firebase$App>,
+  initializeApp(
+    options: $npm$firebase$Config,
+    name?: string
+  ): $npm$firebase$App,
+  SDK_VERSION: string,
+  FirebaseError: $npm$firebase$Error,
+  FirebaseConfig: $npm$firebase$Config,
+  FirebaseUser: typeof $npm$firebase$auth$User,
+  FirebaseUserInfo: typeof $npm$firebase$auth$UserInfo,
+  app: $Exports<'@firebase/app'>,
+  auth: $Exports<'@firebase/auth'>,
+  database: $Exports<'@firebase/database'>,
+  firestore: $Exports<'@firebase/firestore'>,
+  messaging: $Exports<'@firebase/messaging'>,
+  storage: $Exports<'@firebase/storage'>
+};
+
 // Exporting the types
 declare module 'firebase' {
-  declare module.exports: {
-    +apps: Array<$npm$firebase$App>,
-    initializeApp(
-      options: $npm$firebase$Config,
-      name?: string
-    ): $npm$firebase$App,
-    SDK_VERSION: string,
-    FirebaseError: $npm$firebase$Error,
-    FirebaseConfig: $npm$firebase$Config,
-    FirebaseUser: typeof $npm$firebase$auth$User,
-    FirebaseUserInfo: typeof $npm$firebase$auth$UserInfo,
-    app: $Exports<'@firebase/app'>,
-    auth: $Exports<'@firebase/auth'>,
-    database: $Exports<'@firebase/database'>,
-    firestore: $Exports<'@firebase/firestore'>,
-    messaging: $Exports<'@firebase/messaging'>,
-    storage: $Exports<'@firebase/storage'>
-  };
+  declare module.exports: $npm$firebase$app$exports;
 }
 
 declare module 'firebase/app' {
-  declare module.exports: $Exports<'@firebase/app'>;
+  declare module.exports: $npm$firebase$app$exports;
 }
 
 declare module 'firebase/auth' {
