@@ -1,281 +1,288 @@
 // @flow
 
-import firebase from "firebase";
-import "firebase/firestore";
-import app from "firebase/app";
-import auth from "firebase/auth";
-import database from "firebase/database";
+import firebase from 'firebase'
+import 'firebase/firestore'
+import app from '@firebase/app'
+import auth from 'firebase/auth'
+import database from 'firebase/database'
 
 // #1
 const a1: firebase.app.App = firebase.initializeApp({
-  apiKey: "apiKey",
-  databaseURL: "databaseURL",
-  projectId: "42"
-});
+  apiKey: 'apiKey',
+  databaseURL: 'databaseURL',
+  projectId: '42',
+})
 
 // #2
 // $ExpectError
 const a2: firebase.app.App = firebase.initializeApp({
-  storageBucker: "storageBucket",
-  projectId: "42"
-});
+  storageBucker: 'storageBucket',
+  projectId: '42',
+})
 
 // #3
-const a3: app.App = app("DEFAULT");
+const a3: app.App = app('DEFAULT')
 
 // #4
 firebase
   .auth()
-  .createUserWithEmailAndPassword("email", "password")
+  .createUserWithEmailAndPassword('email', 'password')
   .then()
-  .catch();
+  .catch()
 
 // #5
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    user.displayName;
-    user.email;
-    user.emailVerified;
-    user.photoURL;
-    user.isAnonymous;
-    user.uid;
-    user.providerData;
+    user.displayName
+    user.email
+    user.emailVerified
+    user.photoURL
+    user.isAnonymous
+    user.uid
+    user.providerData
     // $ExpectError
-    user.foobar;
+    user.foobar
   }
-});
+})
 
 // #6
 firebase
   .auth()
   .currentUser.linkAndRetrieveDataWithCredential({
-    providerId: "providerId"
+    providerId: 'providerId',
   })
   .then(userCredential => {
-    userCredential.user;
+    userCredential.user
     // $ExpectError
-    userCredential.foobar;
-  });
+    userCredential.foobar
+  })
 
 // #7
-const provider = new firebase.auth.GithubAuthProvider();
+const provider = new firebase.auth.GithubAuthProvider()
 firebase
   .auth()
   .currentUser.linkWithPopup(provider)
   .then(result => {
-    result.credential;
-    result.additionalUserInfo;
-    result.operationType;
-    result.user;
+    result.credential
+    result.additionalUserInfo
+    result.operationType
+    result.user
     // $ExpectError
-    result.foobar;
-  });
+    result.foobar
+  })
 
 // #8
-const provider2 = new firebase.auth.EmailAuthProvider();
+const provider2 = new firebase.auth.EmailAuthProvider()
 firebase
   .auth()
   .currentUser // $ExpectError
   .linkWithPopup(provider2)
   .then(result => {
-    result.credential;
-    result.additionalUserInfo;
-    result.operationType;
-    result.user;
+    result.credential
+    result.additionalUserInfo
+    result.operationType
+    result.user
     // $ExpectError
-    result.foobar;
-  });
+    result.foobar
+  })
 
 // #9
-const prevUser = firebase.auth().currentUser;
-const credential = { providerId: "providerId" };
+const prevUser = firebase.auth().currentUser
+const credential = { providerId: 'providerId' }
 firebase
   .auth()
   .signInWithCredential(credential)
   .then(user =>
-    user.delete().then(() => prevUser.linkWithCredential(credential))
+    user.delete().then(() => prevUser.linkWithCredential(credential)),
   )
-  .then(() => firebase.auth().signInWithCredential(credential));
+  .then(() => firebase.auth().signInWithCredential(credential))
 
 // #10
 firebase
   .database()
-  .ref("users/42")
-  .set({ username: "foobar" });
+  .ref('users/42')
+  .set({ username: 'foobar' })
 
 // #11
 firebase
   .database()
-  .ref("users/42")
-  .on("value", snp => {
-    snp.val();
-  });
+  .ref('users/42')
+  .on('value', snp => {
+    snp.val()
+  })
 
 // #12
 firebase
   .database()
-  .ref("users/42") // $ExpectError
-  .on("foo", snp => {
-    snp.val();
-  });
+  .ref('users/42') // $ExpectError
+  .on('foo', snp => {
+    snp.val()
+  })
 
 // #13
 firebase
   .database()
-  .ref("users/42")
+  .ref('users/42')
   .orderByKey()
   .limitToLast(17)
-  .once("child_added")
-  .then(snp => snp.forEach(_ => true));
+  .once('child_added')
+  .then(snp => snp.forEach(_ => true))
 
 // #14
 firebase
   .database()
-  .ref("users/42")
+  .ref('users/42')
   .orderByKey() // $ExpectError
-  .limitToLast("foo");
+  .limitToLast('foo')
 
 // #15
 firebase
   .storage()
   .ref()
-  .child("foo")
-  .child("bar");
+  .child('foo')
+  .child('bar')
 
 // #17
 firebase
   .storage()
-  .ref("/foo")
+  .ref('/foo')
   .getMetadata()
   .then(metadata => {
-    (metadata.bucket: string);
+    ;(metadata.bucket: string)
     // $ExpectError
-    metadata.foo;
+    metadata.foo
   })
-  .catch();
+  .catch()
 
 // #18
 firebase
   .storage()
-  .ref("/foo")
-  .put(new File(["foo"], "foo.txt"))
+  .ref('/foo')
+  .put(new File(['foo'], 'foo.txt'))
   .then(snp => {
-    (snp.bytesTransferred: number);
+    ;(snp.bytesTransferred: number)
     // $ExpectError
-    snp.foo;
+    snp.foo
   })
-  .catch();
+  .catch()
 
 // #19
 firebase
   .storage()
-  .ref("/foo") // $ExpectError
-  .put("foobar");
+  .ref('/foo') // $ExpectError
+  .put('foobar')
 
 // #20
 const task = firebase
   .storage()
-  .ref("/foo")
-  .put(new File(["foo"], "foo.txt"));
-const subscribe = task.on("state_changed");
+  .ref('/foo')
+  .put(new File(['foo'], 'foo.txt'))
+const subscribe = task.on('state_changed')
 const unsubscribe = subscribe(snp => {
-  (snp.bytesTransferred: number);
+  ;(snp.bytesTransferred: number)
   // $ExpectError
-  snp.foo;
-});
-(unsubscribe(): void);
+  snp.foo
+})
+;(unsubscribe(): void)
 
 // #21
 firebase
   .storage()
-  .ref("/foo")
-  .put(new File(["foo"], "foo.txt"))
-  .on("state_changed", snp => {
-    (snp.bytesTransferred: number);
+  .ref('/foo')
+  .put(new File(['foo'], 'foo.txt'))
+  .on('state_changed', snp => {
+    ;(snp.bytesTransferred: number)
     // $ExpectError
-    snp.foo;
-  })();
+    snp.foo
+  })()
 
 // #22
 firebase
   .storage()
-  .ref("/foo")
-  .put(new File(["foo"], "foo.txt"))
-  .on("state_changed", {
+  .ref('/foo')
+  .put(new File(['foo'], 'foo.txt'))
+  .on('state_changed', {
     next: snp => {
-      (snp.bytesTransferred: number);
+      ;(snp.bytesTransferred: number)
       // $ExpectError
-      snp.foo;
-    }
-  })();
+      snp.foo
+    },
+  })()
 
 // #23
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
-firebase.auth().setPersistence('local');
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+firebase.auth().setPersistence('local')
 
 // $ExpectError
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.FOO);
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.FOO)
 // $ExpectError
-firebase.auth().setPersistence('foo');
+firebase.auth().setPersistence('foo')
 
 firebase
   .firestore()
-  .doc("/foo/bar")
+  .doc('/foo/bar')
   .get()
   .then(snapshot => {
-    (snapshot.id: string);
+    ;(snapshot.id: string)
     // $ExpectError
-    snapshot.foo;
+    snapshot.foo
   })
-  .catch();
+  .catch()
 
 // #24
 firebase
   .firestore()
-  .doc("/foo/bar")
+  .doc('/foo/bar')
   .get()
   .then(snapshot => {
-    (snapshot.id: string);
+    ;(snapshot.id: string)
     // $ExpectError
-    snapshot.foo;
+    snapshot.foo
     // $ExpectError
-    snapshot.forEach((snapshot) => {});
+    snapshot.forEach(snapshot => {})
   })
-  .catch();
+  .catch()
 
 // #25
-(firebase.firestore().doc("/foo/bar").id: string);
+;(firebase.firestore().doc('/foo/bar').id: string)
 
 // #26
 // $ExpectError
-firebase.firestore().doc("/foo/bar").limit(4);
+firebase
+  .firestore()
+  .doc('/foo/bar')
+  .limit(4)
 
 // #27
 firebase
   .firestore()
-  .collection("/foo/bar")
+  .collection('/foo/bar')
   .get()
   .then(snapshots => {
-    snapshots.forEach(snapshot => { (snapshot.id: string) });
+    snapshots.forEach(snapshot => {
+      ;(snapshot.id: string)
+    })
     // $ExpectError
-    snapshots.foo;
+    snapshots.foo
   })
-  .catch();
+  .catch()
 
 // #28
 firebase
   .firestore()
-  .collection("/foo")
+  .collection('/foo')
   .limit(4)
   .endAt({ foo: 4 })
   .endBefore({ bar: 5 })
   .startAt({ foo: 1 })
   .startAfter({ bar: 2 })
-  .orderBy(new firebase.firestore.FieldPath("foo", "bar"), "asc")
+  .orderBy(new firebase.firestore.FieldPath('foo', 'bar'), 'asc')
   .get()
   .then(snapshots => {
-    snapshots.forEach(snapshot => { (snapshot.id: string) });
+    snapshots.forEach(snapshot => {
+      ;(snapshot.id: string)
+    })
     // $ExpectError
-    snapshots.foo;
+    snapshots.foo
   })
-  .catch();
+  .catch()
