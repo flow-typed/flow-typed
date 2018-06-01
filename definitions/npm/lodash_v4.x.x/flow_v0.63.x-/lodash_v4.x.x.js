@@ -211,7 +211,7 @@ declare module "lodash" {
     // Array
     chunk<T>(array?: ?Array<T>, size?: ?number): Array<Array<T>>;
     compact<T, N: ?T>(array?: ?Array<N>): Array<T>;
-    concat<T>(base?: ?Array<T>, ...elements: Array<any>): Array<T | any>;
+    concat<T>(base?: ?$ReadOnlyArray<T>, ...elements: Array<any>): Array<T | any>;
     difference<T>(array?: ?$ReadOnlyArray<T>, ...values: Array<?$ReadOnlyArray<T>>): Array<T>;
     differenceBy<T>(
       array?: ?$ReadOnlyArray<T>,
@@ -410,7 +410,7 @@ declare module "lodash" {
     uniqWith<T>(array?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
     unzip<T>(array?: ?Array<T>): Array<T>;
     unzipWith<T>(array: ?Array<T>, iteratee?: ?Iteratee<T>): Array<T>;
-    without<T>(array?: ?Array<T>, ...values?: Array<?T>): Array<T>;
+    without<T>(array?: ?$ReadOnlyArray<T>, ...values?: Array<?T>): Array<T>;
     xor<T>(...array: Array<Array<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     xorBy<T>(a1?: ?Array<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
@@ -591,7 +591,7 @@ declare module "lodash" {
       object: T,
       iteratee?: ValueOnlyIteratee<A>
     ): { [key: V]: Array<A> };
-    includes<T>(array: Array<T>, value: T, fromIndex?: ?number): boolean;
+    includes<T>(array: $ReadOnlyArray<T>, value: T, fromIndex?: ?number): boolean;
     includes<T>(array: void | null, value?: ?T, fromIndex?: ?number): false;
     includes<T: Object>(object: T, value: any, fromIndex?: number): boolean;
     includes(str: string, value: string, fromIndex?: number): boolean;
