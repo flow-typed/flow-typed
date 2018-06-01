@@ -45,10 +45,12 @@ firebase.auth().onAuthStateChanged(user => {
   }
 })
 
-// #6
-firebase
-  .auth()
-  .currentUser.linkAndRetrieveDataWithCredential({
+const currentUser = firebase.auth().currentUser
+
+
+if (currentUser) {
+  // #6
+  currentUser.linkAndRetrieveDataWithCredential({
     providerId: 'providerId',
   })
   .then(userCredential => {
@@ -57,45 +59,47 @@ firebase
     userCredential.foobar
   })
 
-// #7
-const provider = new firebase.auth.GithubAuthProvider()
-firebase
-  .auth()
-  .currentUser.linkWithPopup(provider)
-  .then(result => {
-    result.credential
-    result.additionalUserInfo
-    result.operationType
-    result.user
-    // $ExpectError
-    result.foobar
-  })
 
-// #8
-const provider2 = new firebase.auth.EmailAuthProvider()
-firebase
-  .auth()
-  .currentUser // $ExpectError
-  .linkWithPopup(provider2)
-  .then(result => {
-    result.credential
-    result.additionalUserInfo
-    result.operationType
-    result.user
-    // $ExpectError
-    result.foobar
-  })
+  // #7
+  const provider = new firebase.auth.GithubAuthProvider()
+  currentUser.linkWithPopup(provider)
+    .then(result => {
+      result.credential
+      result.additionalUserInfo
+      result.operationType
+      result.user
+      // $ExpectError
+      result.foobar
+    })
 
-// #9
+  // #8
+  const provider2 = new firebase.auth.EmailAuthProvider()
+  currentUser // $ExpectError
+    .linkWithPopup(provider2)
+    .then(result => {
+      result.credential
+      result.additionalUserInfo
+      result.operationType
+      result.user
+      // $ExpectError
+      result.foobar
+    })
+}
+
+
+
 const prevUser = firebase.auth().currentUser
-const credential = { providerId: 'providerId' }
-firebase
-  .auth()
-  .signInWithCredential(credential)
-  .then(user =>
-    user.delete().then(() => prevUser.linkWithCredential(credential)),
-  )
-  .then(() => firebase.auth().signInWithCredential(credential))
+if (prevUser) {
+  // #9
+  const credential = { providerId: 'providerId' }
+  firebase
+    .auth()
+    .signInWithCredential(credential)
+    .then(user =>
+      user.delete().then(() => prevUser.linkWithCredential(credential)),
+    )
+    .then(() => firebase.auth().signInWithCredential(credential))
+}
 
 // #10
 firebase
