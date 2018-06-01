@@ -476,8 +476,8 @@ declare interface $npm$firebase$firestore$QueryListenOptions {
   includeMetadataChanges: boolean;
   includeQueryMetadataChanges: boolean;
 }
-declare type $npm$firebase$firestore$observer = (snapshot: $npm$firebase$firestore$DocumentSnapshot) => void;
-declare type $npm$firebase$firestore$observerError = (error: $npm$firebase$Error) => void;
+declare type $npm$firebase$firestore$observer = (snapshot: $npm$firebase$firestore$DocumentSnapshot) => void | Promise<void>;
+declare type $npm$firebase$firestore$observerError = (error: $npm$firebase$Error) => void | Promise<void>;
 
 declare class $npm$firebase$firestore$Query {
   firestore: $npm$firebase$firestore$Firestore;
