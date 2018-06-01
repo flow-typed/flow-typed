@@ -91,7 +91,7 @@ declare type $npm$firebase$auth$Auth$Persistence$Enum = $Values<$npm$firebase$au
 declare class $npm$firebase$auth$Auth {
   static Persistence: $npm$firebase$auth$Auth$Persistence;
   app: $npm$firebase$App;
-  currentUser: $npm$firebase$auth$User;
+  currentUser: $npm$firebase$auth$User | null;
   applyActionCode(code: string): Promise<void>;
   checkActionCode(code: string): Promise<$npm$firebase$auth$ActionCodeInfo>;
   confirmPasswordReset(code: string, newPassword: string): Promise<void>;
@@ -491,7 +491,7 @@ declare class $npm$firebase$firestore$Query {
     | $npm$firebase$firestore$observer
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
-  ): void;
+  ): Function;
   orderBy(
     fieldPath: $npm$firebase$firestore$FieldPath | string,
     directionStr: 'asc' | 'desc'
@@ -526,7 +526,7 @@ declare class $npm$firebase$firestore$DocumentReference {
     | $npm$firebase$firestore$observer
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
-  ): void;
+  ): Function;
   set(data: {}, options?: { merge: boolean } | null): Promise<void>;
   update(...args: Array<any>): Promise<void>;
 }
