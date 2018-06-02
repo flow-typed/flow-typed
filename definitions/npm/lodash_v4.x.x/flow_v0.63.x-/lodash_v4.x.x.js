@@ -714,7 +714,7 @@ declare module "lodash" {
     sampleSize<V, T: Object>(object: T, n?: number): Array<V>;
     shuffle<T>(array: ?Array<T>): Array<T>;
     shuffle<V, T: Object>(object: T): Array<V>;
-    size(collection: Array<any> | Object | string): number;
+    size(collection: $ReadOnlyArray<any> | Object | string): number;
     some<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): boolean;
     some<T>(array: void | null, predicate?: ?Predicate<T>): false;
     some<A, T: { [id: string]: A }>(
@@ -2275,7 +2275,7 @@ declare module "lodash/fp" {
     ): (collection: Array<T> | { [id: any]: T }) => Array<T>;
     sampleSize<T>(n: number, collection: Array<T> | { [id: any]: T }): Array<T>;
     shuffle<T>(collection: Array<T> | { [id: any]: T }): Array<T>;
-    size(collection: Array<any> | Object | string): number;
+    size(collection: $ReadOnlyArray<any> | Object | string): number;
     some<T>(
       predicate: Predicate<T> | OPredicate<T>
     ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => boolean;
