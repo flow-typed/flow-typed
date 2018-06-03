@@ -1039,8 +1039,8 @@ declare module "lodash" {
     at(object?: ?Object, paths: Array<string>): Array<any>;
     create<T>(prototype: T, properties: Object): $Supertype<T>;
     create(prototype: any, properties: void | null): {};
-    defaults(object?: ?Object, ...sources?: Array<Object>): Object;
-    defaultsDeep(object?: ?Object, ...sources?: Array<Object>): Object;
+    defaults(object?: ?Object, ...sources?: Array<?Object>): Object;
+    defaultsDeep(object?: ?Object, ...sources?: Array<?Object>): Object;
     // alias for _.toPairs
     entries(object?: ?Object): Array<[string, any]>;
     // alias for _.toPairsIn
