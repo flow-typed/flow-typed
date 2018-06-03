@@ -10,7 +10,7 @@ type CustomOrigin = (
     callback: (err: Error | null, allow?: boolean) => void
 ) => void;
 
-interface CorsOptions {
+type CorsOptions = {
     origin?: boolean | string | RegExp | string[] | RegExp[] | CustomOrigin;
     methods?: string | string[];
     allowedHeaders?: string | string[];
@@ -22,6 +22,5 @@ interface CorsOptions {
 }
 
 declare module "cors" {
-    declare function e(options?: CorsOptions): RequestHandler;
-    declare module.exports: e;
+    declare export default (options?: CorsOptions) => RequestHandler;
 }
