@@ -250,12 +250,12 @@ declare module "lodash" {
       fromIndex?: ?number
     ): -1;
     // alias of _.head
-    first<T>(array: ?Array<T>): T;
+    first<T>(array: ?$ReadOnlyArray<T>): T;
     flatten<T, X>(array?: ?Array<Array<T> | X>): Array<T | X>;
     flattenDeep<T>(array?: ?any[]): Array<T>;
     flattenDepth(array?: ?any[], depth?: ?number): any[];
     fromPairs<A, B>(pairs?: ?Array<[A, B]>): { [key: A]: B };
-    head<T>(array: ?Array<T>): T;
+    head<T>(array: ?$ReadOnlyArray<T>): T;
     indexOf<T>(array: Array<T>, value: T, fromIndex?: number): number;
     indexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
     initial<T>(array: ?Array<T>): Array<T>;
@@ -1724,14 +1724,14 @@ declare module "lodash/fp" {
       array: $ReadOnlyArray<T>
     ): number;
     // alias of _.head
-    first<T>(array: Array<T>): T;
+    first<T>(array: $ReadOnlyArray<T>): T;
     flatten<T, X>(array: Array<Array<T> | X>): Array<T | X>;
     unnest<T, X>(array: Array<Array<T> | X>): Array<T | X>;
     flattenDeep<T>(array: any[]): Array<T>;
     flattenDepth(depth: number): (array: any[]) => any[];
     flattenDepth(depth: number, array: any[]): any[];
     fromPairs<A, B>(pairs: Array<[A, B]>): { [key: A]: B };
-    head<T>(array: Array<T>): T;
+    head<T>(array: $ReadOnlyArray<T>): T;
     indexOf<T>(value: T): (array: Array<T>) => number;
     indexOf<T>(value: T, array: Array<T>): number;
     indexOfFrom<T>(
