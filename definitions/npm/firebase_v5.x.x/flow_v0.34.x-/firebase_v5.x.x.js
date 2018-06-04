@@ -99,7 +99,7 @@ declare class $npm$firebase$auth$Auth {
   createUserWithEmailAndPassword(
     email: string,
     password: string
-  ): Promise<$npm$firebase$auth$User>;
+  ): Promise<$npm$firebase$auth$UserCredential>;
   fetchProvidersForEmail(email: string): Promise<Array<string>>;
   onAuthStateChanged(
     nextOrObserver: (?$npm$firebase$auth$User) => void | Promise<void>,
