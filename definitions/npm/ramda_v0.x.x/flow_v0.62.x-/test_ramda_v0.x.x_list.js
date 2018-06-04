@@ -300,8 +300,8 @@ const str: string = "hello world";
   const redrxs3: Array<string> = _.reduceRight(_.concat, [])(
     _.map(x => [x], ss)
   );
-  //$ExpectError
   const redrxs3a: string = _.reduceRight(
+    //$ExpectError
     (acc: string, value: number): string => acc,
     "",
     ns
