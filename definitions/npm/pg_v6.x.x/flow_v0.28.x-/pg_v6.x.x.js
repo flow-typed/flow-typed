@@ -209,12 +209,15 @@ declare module pg {
    * ToDo: should find a better way.
   */
   declare class Query extends Promise<ResultSet> {
-    then<U>( onFulfill?: (value: ResultSet) => Promise<U> | U,
-      onReject?: (error: PG_ERROR) => Promise<U> | U
+    then<U>(
+      onFulfill?: ?((value: ResultSet) => Promise<U> | U),
+      onReject?: ?((error: PG_ERROR) => Promise<U> | U)
     ): Promise<U>;
     // Because then and catch return a Promise,
     // .then.catch will lose catch's type information PG_ERROR.
-    catch<U>( onReject?: (error: PG_ERROR) => ?Promise<U> | U ): Promise<U>;
+    catch<U>(
+      onReject?: ?((error: PG_ERROR) => Promise<U> | U)
+    ): Promise<U>;
 
     on :
     ((event: 'row', listener: (row: Row, result: ResultBuilder) => void) => events$EventEmitter )&
