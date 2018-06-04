@@ -1128,8 +1128,8 @@ declare module "lodash" {
     functions(object?: ?Object): Array<string>;
     functionsIn(object?: ?Object): Array<string>;
     get(
-      object?: ?Object | ?Array<any>,
-      path?: ?Array<string> | string,
+      object?: ?Object | ?$ReadOnlyArray<any>,
+      path?: ?$ReadOnlyArray<string> | string,
       defaultValue?: any
     ): any;
     has(object: Object, path: Array<string> | string): boolean;
@@ -2768,8 +2768,8 @@ declare module "lodash/fp" {
     forOwnRight(iteratee: OIteratee<*>, object: Object): Object;
     functions(object: Object): Array<string>;
     functionsIn(object: Object): Array<string>;
-    get(path: Array<string> | string): (object: Object | Array<any>) => any;
-    get(path: Array<string> | string, object: Object | Array<any>): any;
+    get(path: $ReadOnlyArray<string> | string): (object: Object | $ReadOnlyArray<any>) => any;
+    get(path: $ReadOnlyArray<string> | string, object: Object | $ReadOnlyArray<any>): any;
     prop(path: Array<string> | string): (object: Object | Array<any>) => any;
     prop(path: Array<string> | string, object: Object | Array<any>): any;
     path(path: Array<string> | string): (object: Object | Array<any>) => any;
