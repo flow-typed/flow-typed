@@ -2972,7 +2972,7 @@ declare module "@material-ui/core/utils/withWidth.js" {
   declare module.exports: $Exports<"@material-ui/core/utils/withWidth">;
 }
 
-declare module "material-ui" {
+declare module "@material-ui/core" {
   declare export var AppBar: $Exports<"@material-ui/core/AppBar/AppBar">;
   declare export var Avatar: $Exports<"@material-ui/core/Avatar/Avatar">;
   declare export var Badge: $Exports<"@material-ui/core/Badge/Badge">;
