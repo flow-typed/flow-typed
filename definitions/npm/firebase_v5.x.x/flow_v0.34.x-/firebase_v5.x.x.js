@@ -359,7 +359,7 @@ declare class $npm$firebase$database$OnDisconnect {
 declare type $npm$firebase$database$Callback = (
   $npm$firebase$database$DataSnapshot,
   ?string
-) => void;
+) => void | Promise<void>;
 
 declare class $npm$firebase$database$Query {
   ref: $npm$firebase$database$Reference;
