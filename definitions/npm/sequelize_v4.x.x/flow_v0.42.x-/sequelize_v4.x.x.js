@@ -101,13 +101,13 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to/
    * @see  Model
   */
-  declare export type BelongsToCreateOne<TAttributes> = {
+  declare export type BelongsToCreateOne<TInitAttributes> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options The options passed to `target.create` and `setAssociation`.
      */
-    (values?: $Shape<TAttributes>, options?: BelongsToCreateOneOptions & CreateOptions<any> & BelongsToSetOneOptions): Promise<void>
+    (values?: TInitAttributes, options?: BelongsToCreateOneOptions & CreateOptions<any> & BelongsToSetOneOptions): Promise<void>
   }
 
 
@@ -212,13 +212,13 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-one/
    * @see  Model
   */
-  declare export type HasOneCreateOne<TAttributes> = {
+  declare export type HasOneCreateOne<TInitAttributes> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options The options passed to `target.create` and `setAssociation`.
      */
-    (values?: $Shape<TAttributes>, options?: HasOneCreateOneOptions & HasOneSetOneOptions & CreateOptions<any>): Promise<void>
+    (values?: TInitAttributes, options?: HasOneCreateOneOptions & HasOneSetOneOptions & CreateOptions<any>): Promise<void>
   }
 
 
@@ -442,13 +442,13 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare export type HasManyCreateOne<TAttributes, TInstance: Model<TAttributes>> = {
+  declare export type HasManyCreateOne<TInitAttributes, TInstance: Model<any, TInitAttributes>> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options The options to use when creating the association.
      */
-    (values?: $Shape<TAttributes>, options?: HasManyCreateOneOptions & CreateOptions<any>): Promise<TInstance>
+    (values?: TInitAttributes, options?: HasManyCreateOneOptions & CreateOptions<any>): Promise<TInstance>
   }
 
 
@@ -907,13 +907,13 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare export type BelongsToManyCreateOne<TAttributes, TInstance: Model<TAttributes>, TJoinTableAttributes> = {
+  declare export type BelongsToManyCreateOne<TInitAttributes, TInstance: Model<any, TInitAttributes>, TJoinTableAttributes> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options Options passed to `create` and `add`. Can also hold additional attributes for the join table.
      */
-    (values?: $Shape<TAttributes>, options?: BelongsToManyCreateOneOptions & CreateOptions<any> & {
+    (values?: TInitAttributes, options?: BelongsToManyCreateOneOptions & CreateOptions<any> & {
       through?: TJoinTableAttributes
     }): Promise<TInstance>
   }
