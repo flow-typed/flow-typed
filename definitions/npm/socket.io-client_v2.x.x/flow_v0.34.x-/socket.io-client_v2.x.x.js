@@ -10,6 +10,11 @@ declare module "socket.io-client" {
     randomizationFactor: number,
     timeout: number,
     transports: ("polling" | "websocket")[],
+    transportOptions: {
+      polling: {
+        extraHeaders: {[string]:string}
+      }
+    },
     autoConnect: boolean,
     query: { [string]: string },
     parser: any
