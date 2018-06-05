@@ -873,9 +873,7 @@ declare module "lodash" {
     isSet(value: Set<any>): true;
     isSet(value: any): false;
     isString(value: string): true;
-    isString(
-      value: number | boolean | Function | void | null | Object | Array<any>
-    ): false;
+    isString(value: any): false;
     isSymbol(value: Symbol): true;
     isSymbol(value: any): false;
     isTypedArray(value: $TypedArray): true;
@@ -2506,9 +2504,7 @@ declare module "lodash/fp" {
     isSafeInteger(value: any): boolean;
     isSet(value: any): boolean;
     isString(value: string): true;
-    isString(
-      value: number | boolean | Function | void | null | Object | Array<any>
-    ): false;
+    isString(value: any): false;
     isSymbol(value: any): boolean;
     isTypedArray(value: any): boolean;
     isUndefined(value: any): boolean;
