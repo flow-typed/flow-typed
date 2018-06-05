@@ -49,6 +49,8 @@ declare module pg {
     log: Function,
 
     // node-postgres Client ------
+    //database connection string to define some other config parameters
+    connectionString: string,
     //database user's name
     user: string,
     //name of database to connect
