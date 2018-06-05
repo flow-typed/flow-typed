@@ -537,7 +537,7 @@ testSelector = $('div').data('test', { first: 16, last: 'pizza!' });
 testSelector = $('div').data({ key: 'value' });
 
 //data(key: string, _: void): any;
-$('div').data('key');
+testString = $('div').data('key');
 
 //data(_: void): any;
 testString = $('div').data();
