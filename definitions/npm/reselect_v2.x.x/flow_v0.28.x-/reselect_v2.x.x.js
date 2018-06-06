@@ -827,6 +827,8 @@ type SelectorCreator = {
   ): Selector<TState, TProps, TResult>
 };
 
+type ExtractReturnType = <Return>((...rest: any[]) => Return) => Return;
+
 type Reselect = {
   createSelector: SelectorCreator,
 
@@ -840,12 +842,10 @@ type Reselect = {
     ...memoizeOptions: any[]
   ) => SelectorCreator,
 
-  createStructuredSelector: <TState, TProps>(
-    inputSelectors: {
-      [k: string | number]: Selector<TState, TProps, any>
-    },
+  createStructuredSelector: <TState, TProps, InputSelectors: {[k: string | number]: Selector<TState, TProps, any>}>(
+    inputSelectors: InputSelectors,
     selectorCreator?: SelectorCreator
-  ) => Selector<TState, TProps, any>
+  ) => Selector<TState, TProps, $ObjMap<InputSelectors, ExtractReturnType>>
 };
 
 declare module "reselect" {
