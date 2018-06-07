@@ -71,6 +71,7 @@ ReactModal.setAppElement(1);
 <ReactModal appElement={1} />;
 
 <ReactModal onAfterOpen={() => { }} />;
+<ReactModal onAfterOpen={async () => { }} />;
 // $ExpectError
 <ReactModal onAfterOpen={1} />;
 
