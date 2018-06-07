@@ -16,7 +16,6 @@ import first from "lodash/first";
 import flatMap from "lodash/flatMap";
 import forEach from "lodash/forEach";
 import get from "lodash/get";
-import getOr from 'lodash/fp/getOr';
 import groupBy from "lodash/groupBy";
 import intersectionBy from "lodash/intersectionBy";
 import isEqual from "lodash/isEqual";
@@ -169,8 +168,6 @@ get([[1, 2], [3, 4], [5, 6], [7, 8]], "3");
 // Nil - it is safe to perform on nil root values, just like nil values along the "get" path
 get(null, 'thing');
 get(undefined, 'data');
-getOr(null, 'stuff', 'default');
-getOr(undefined, 'info', 12345);
 
 // Second argument must be string when looking for array items by index
 // $ExpectError number This type is incompatible with union: ?array type | string
