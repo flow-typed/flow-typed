@@ -104,4 +104,4 @@ import {
   Collapse,
   Zoom,
   withWidth
-} from "material-ui";
+} from "@material-ui/core";
