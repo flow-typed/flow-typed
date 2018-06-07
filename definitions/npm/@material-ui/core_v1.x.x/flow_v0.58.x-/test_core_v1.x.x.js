@@ -3,10 +3,10 @@
 import React from "react";
 
 // Direct module import.
-import AppBar from "material-ui/AppBar/AppBar";
+import AppBar from "@material-ui/core/AppBar";
 
 // Import via index.js
-import Button from "material-ui/Button";
+import Button from "@material-ui/core/Button";
 
 // $ExpectError invalid color value.
 let appBar = <AppBar color="black" />;

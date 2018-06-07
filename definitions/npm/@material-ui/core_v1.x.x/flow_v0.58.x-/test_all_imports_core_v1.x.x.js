@@ -60,6 +60,7 @@ import {
   Modal,
   Backdrop,
   ModalManager,
+  NativeSelect,
   Paper,
   Popover,
   Portal,
@@ -104,4 +105,4 @@ import {
   Collapse,
   Zoom,
   withWidth
-} from "material-ui";
+} from "@material-ui/core";
