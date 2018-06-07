@@ -3081,6 +3081,14 @@ declare module "sequelize" {
   declare export class Model<TAttributes, TInitAttributes = TAttributes, TPlainAttributes = TAttributes> {
     static init(attributes: DefineAttributes, options: DefineOptions<this>): this,
 
+    static QueryInterface: QueryInterface,
+
+    static QueryGenerator: any,
+
+    static sequelize: Sequelize,
+
+    sequelize: Sequelize,
+
     /**
      * The options this model was initialized with
      */
