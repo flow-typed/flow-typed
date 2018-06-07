@@ -1737,7 +1737,7 @@ declare module "@material-ui/core/styles/colorManipulator" {
     emphasize: (color: string, coefficient: number) => any,
     fade: (color: string, value: number) => any,
     darken: (color: string, coefficient: number) => any,
-    ligthen: (color: string, coefficient: number) => any
+    lighten: (color: string, coefficient: number) => any
   };
 }
 
