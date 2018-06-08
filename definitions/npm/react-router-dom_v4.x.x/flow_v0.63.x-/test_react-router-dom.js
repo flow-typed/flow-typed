@@ -80,6 +80,19 @@ describe("react-router-dom", () => {
       </Link>;
     });
 
+    it("allows attributes of <a> element", () => {
+      <Link
+        to="/about"
+        download
+        hreflang="de"
+        ping="https://www.example.com"
+        referrerpolicy="no-referrer"
+        target="_self"
+        type="foo"
+        onClick={() => {}}
+      >About</Link>;
+    });
+
     it("raises error if passed incorrect props", () => {
       // $ExpectError - to prop is required
       <Link />;
