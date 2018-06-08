@@ -18,7 +18,10 @@ declare module "react-router-dom" {
     className?: string,
     to: string | LocationShape,
     replace?: boolean,
-    children?: React$Node
+    children?: React$Node,
+    target?: string,
+    onClick?: Function,
+    "aria-current"?: "page" | "step" | "location" | "date" | "time" | "true"
   |}> {}
 
   declare export class NavLink extends React$Component<{|
@@ -30,7 +33,9 @@ declare module "react-router-dom" {
     isActive?: (match: Match, location: Location) => boolean,
     children?: React$Node,
     exact?: boolean,
-    strict?: boolean
+    strict?: boolean,
+    location?: Location,
+    "aria-current"?: "page" | "step" | "location" | "date" | "time" | "true"
   |}> {}
 
   // NOTE: Below are duplicated from react-router. If updating these, please

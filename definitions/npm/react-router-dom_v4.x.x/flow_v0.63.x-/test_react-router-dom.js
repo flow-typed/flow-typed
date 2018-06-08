@@ -78,6 +78,10 @@ describe("react-router-dom", () => {
       >
         About
       </Link>;
+
+      <Link to="/about" target="_blank">About</Link>;
+      <Link to="/about" onClick={() => {}}>About</Link>;
+      <Link to="/about" aria-current="step">About</Link>;
     });
 
     it("raises error if passed incorrect props", () => {
@@ -116,6 +120,17 @@ describe("react-router-dom", () => {
       >
         About
       </NavLink>;
+
+      <NavLink
+        to="/about"
+        location={{
+          pathname: "/courses",
+          search: "?sort=name",
+          hash: "#the-hash",
+          state: { fromDashboard: true }
+        }}>About</NavLink>;
+      
+      <NavLink to="/about" aria-current="step">About</NavLink>;
     });
 
     it("raises error if passed incorrect props", () => {
