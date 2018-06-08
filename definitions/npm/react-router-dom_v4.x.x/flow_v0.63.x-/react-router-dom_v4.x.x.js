@@ -14,14 +14,14 @@ declare module "react-router-dom" {
     children?: React$Node
   |}> {}
 
-  declare export class Link extends React$Component<{|
+  declare export class Link extends React$Component<{
     className?: string,
     to: string | LocationShape,
     replace?: boolean,
     children?: React$Node
-  |}> {}
+  }> {}
 
-  declare export class NavLink extends React$Component<{|
+  declare export class NavLink extends React$Component<{
     to: string | LocationShape,
     activeClassName?: string,
     className?: string,
@@ -31,7 +31,7 @@ declare module "react-router-dom" {
     children?: React$Node,
     exact?: boolean,
     strict?: boolean
-  |}> {}
+  }> {}
 
   // NOTE: Below are duplicated from react-router. If updating these, please
   // update the react-router and react-router-native types as well.
