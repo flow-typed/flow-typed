@@ -165,6 +165,10 @@ get(["foo", "bar", "baz"], "[1]");
 get([{ a: "foo" }, { b: "bar" }, { c: "baz" }], "2");
 get([[1, 2], [3, 4], [5, 6], [7, 8]], "3");
 
+// Nil - it is safe to perform on nil root values, just like nil values along the "get" path
+get(null, 'thing');
+get(undefined, 'data');
+
 // Second argument must be string when looking for array items by index
 // $ExpectError number This type is incompatible with union: ?array type | string
 get([1, 2, 3], 0);
