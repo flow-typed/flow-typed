@@ -6,7 +6,9 @@ import {
   Link,
   NavLink,
   matchPath,
-  withRouter
+  withRouter,
+  Redirect,
+  Route
 } from "react-router-dom";
 import type {
   ContextRouter,
@@ -274,4 +276,66 @@ describe("react-router-dom", () => {
       });
     });
   });
+
+  describe("Redirect", () => {
+    it("works", () => {
+      <Redirect to="/login" />;
+
+      <Redirect exact strict to="/new-path" from="/old-Path" />;
+
+      <Redirect
+        to={{
+          pathname: "/courses",
+          search: "?sort=name",
+          hash: "#the-hash",
+          state: { fromDashboard: true }
+        }}
+        from="/x"
+        push
+      />;
+    });
+
+    it("raises error if passed incorrect props", () => {
+      // $ExpectError - to prop is required
+      <Redirect />;
+
+      // $ExpectError - to prop must be a string or LocationShape
+      <Redirect to={[]} />;
+
+      // $ExpectError - unexpected prop xxx
+      <Redirect to='/x' xxx="1"/>;
+    });
+  });
+
+  describe("Route", () => {
+    it("works", () => {
+      const Component = ({}) => <div>Hi!</div>;
+      <Route path="/login" />;
+
+      <Route path="/login" component={Component} />;
+
+      <Route path="/login" render={(context: ContextRouter) => <Component />} />;
+
+      <Route path="/login" children={(context: ContextRouter) => <Component />} />;
+
+      <Route
+        location={{
+          pathname: "/courses",
+          search: "?sort=name",
+          hash: "#the-hash"
+        }}
+        exact
+        strict
+        sensitive
+      />;
+    });
+
+    it("raises error if passed incorrect props", () => {
+      // $ExpectError - prop must be a string
+      <Route path={123} />;
+
+      // $ExpectError - unexpected prop xxx
+      <Route xxx="1" />;
+    });
+  })
 });
