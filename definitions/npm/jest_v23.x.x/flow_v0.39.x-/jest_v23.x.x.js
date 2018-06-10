@@ -480,7 +480,7 @@ type JestExtendedMatchersType = {
     toIncludeMultiple(substring: string[]): void;
 };
 
-type JestExpectType = {
+interface JestExpectType {
   not: JestExpectType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType & JestExtendedMatchersType,
   /**
    * If you have a mock function, you can use .lastCalledWith to test what
@@ -634,9 +634,13 @@ type JestExpectType = {
    */
   toMatchObject(object: Object | Array<Object>): void,
   /**
-   * This ensures that a React component matches the most recent snapshot.
+   * This ensures that an Object matches the most recent snapshot.
    */
   toMatchSnapshot(propertyMatchers?: {[key: string]: JestAsymmetricEqualityType}, name?: string): void,
+  /**
+   * This ensures that an Object matches the most recent snapshot.
+   */
+  toMatchSnapshot(name: string): void,
   /**
    * Use .toThrow to test that a function throws when it is called.
    * If you want to test that a specific error gets thrown, you can provide an
@@ -652,7 +656,7 @@ type JestExpectType = {
    * matching the most recent snapshot when it is called.
    */
   toThrowErrorMatchingSnapshot(): void
-};
+}
 
 type JestObjectType = {
   /**

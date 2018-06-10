@@ -64,6 +64,7 @@ expect(5).toBeLessThan(8);
 expect("jester").toContain("jest");
 expect({ foo: "bar" }).toHaveProperty("foo");
 expect({ foo: "bar" }).toHaveProperty("foo", "bar");
+expect("foo").toMatchSnapshot("snapshot name only");
 expect("foo").toMatchSnapshot(undefined, "snapshot name");
 expect({
   foo: 1,
