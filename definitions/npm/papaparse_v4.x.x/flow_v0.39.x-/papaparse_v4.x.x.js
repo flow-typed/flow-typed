@@ -51,7 +51,7 @@ declare interface PapaParse$UnparseConfig {
 
 declare interface PapaParse$UnparseObject {
     fields: Array<any>,
-    data: string | Array<any>
+    +data: string | Array<any>
 }
 
 declare interface PapaParse$ParseError {

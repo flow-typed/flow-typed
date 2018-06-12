@@ -34,20 +34,21 @@ The naming scheme of this directory must be formatted as
 `${packageName}_v${packageVersion}`. This convention is enforced by the
 library-definition test runner.
 
-#### 2) In this new directory, create another new directory called `flow_all/`.
+#### 2) In this new directory, create another new directory called `flow_v0.25.x-/`.
 
 ***We call this the "flow version directory".***
 
-This specifies that the definition you are contributing is compatible with all
-versions of Flow. If it is not, you can specify a version range with names like
-`flow_v0.22.x-` ("any version at or after v0.22.x") or
-`flow_-v0.22.x` ("any version at or before v0.22.x") or
-`flow_v0.22.x-v0.28.x` ("any version inclusively between v0.22.x and
+This specifies that the definition you are contributing is compatible with the
+version range of the directiry. You MUST specify a version range with names like
+`flow_v0.25.x-` ("any version at or after v0.22.x") or
+`flow_-v0.25.x` ("any version at or before v0.22.x") or
+`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.22.x and
 v0.28.x").
 
 If you aren't sure which versions of Flow your definition is compatible with,
-start with `flow_all` and the test runner (which we'll run in a later step) will
-tell us if there are problems in some versions of Flow.
+start with a very low version like `flow_v0.25.x-`, and the test runner
+(which we'll run in a later step) will tell us if there are problems in some
+versions of Flow.
 
 You may create multiple flow version directories to target different versions of
 Flow if necessary.

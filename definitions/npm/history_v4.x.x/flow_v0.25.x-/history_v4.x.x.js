@@ -25,6 +25,7 @@ declare module "history/createBrowserHistory" {
     block: (message: string) => Unblock,
     block: ((location: BrowserLocation, action: Action) => string) => Unblock,
     push: (path: string) => void,
+    replace: (path: string) => void,
   };
 
   declare type HistoryOpts = {

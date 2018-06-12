@@ -185,6 +185,30 @@ createStructuredSelector({
   y: 20
 });
 
+createSelector(
+  createStructuredSelector({
+    first: (state) => state.x,
+    second: (state) => state.y
+  }),
+  // $ExpectError: Should fail when property names not in the input selectors object
+  ({first, third}: {first: number, third: number}) => first + third
+)({
+  x: 10,
+  y: 20
+});
+
+createSelector(
+  createStructuredSelector({
+    first: (state) => state.x,
+    second: (state) => state.y
+  }),
+  // $ExpectError: Return types of input selectors propogate
+  ({first, second}: {first: number, second: number}) => first + second
+)({
+  x: 10,
+  y: false
+});
+
 // TEST: Should pass for accessing selector recomputations
 createSelector(
   (state: State, props: TestProps, test) => state.x + props.x + test,

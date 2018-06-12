@@ -1213,6 +1213,16 @@ User.update( {
 User.unscoped().find( { where : { username : 'bob' } } );
 User.unscoped().count();
 
+// 
+//  Model Statics
+// ~~~~~~~~~~~~~~~
+//
+
+User.sequelize.query;
+User.QueryInterface.addColumn;
+User.QueryGenerator.selectQuery;
+user.sequelize.query;
+
 //
 //  Query Interface
 // ~~~~~~~~~~~~~~~~~
