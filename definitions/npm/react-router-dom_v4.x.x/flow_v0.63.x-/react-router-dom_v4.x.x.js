@@ -143,7 +143,8 @@ declare module "react-router-dom" {
   |}> {}
 
   declare export class Switch extends React$Component<{|
-    children?: React$Node
+    children?: React$Node,
+    location?: Location
   |}> {}
 
   declare export function withRouter<P: {}, Component: React$ComponentType<P>>(
