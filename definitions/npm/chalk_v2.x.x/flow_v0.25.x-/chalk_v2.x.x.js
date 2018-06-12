@@ -15,7 +15,12 @@ declare module "chalk" {
     level?: Level
   |};
 
-  declare type ColorSupport = boolean;
+  declare type ColorSupport = {|
+    level: Level,
+    hasBasic: boolean,
+    has256: boolean,
+    has16m: boolean
+  |};
 
   declare interface Chalk {
     (...text: string[]): string,
