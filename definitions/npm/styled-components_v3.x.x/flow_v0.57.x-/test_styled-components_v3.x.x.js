@@ -1,6 +1,7 @@
 // @flow
 import {renderToString} from 'react-dom/server'
 import styled, {
+  css,
   ThemeProvider,
   withTheme,
   keyframes,
@@ -188,7 +189,7 @@ const NumberWrapper = styled(num)`
 
 const sheet = new ServerStyleSheet()
 const html = renderToString(sheet.collectStyles(<ComponentWithTheme />))
-const css = sheet.getStyleTags()
+const css1 = sheet.getStyleTags()
 
 const sheet2 = new ServerStyleSheet()
 const html2 = renderToString(
@@ -224,11 +225,19 @@ const interpolation: Array<Interpolation> = styled.css`
   background-color: red;
 `;
 
+const interpolation2: Array<Interpolation> = css`
+  background-color: red;
+`;
+
 // $ExpectError
 const interpolationError: Array<Interpolation | boolean> = styled.css`
   background-color: red;
 `;
 
+// $ExpectError
+const interpolationError2: Array<Interpolation | boolean> = css`
+  background-color: red;
+`;
 
 // ---- DEFAULT COMPONENT TESTS ----
 const defaultComponent: ReactComponentIntersection<{}> = styled.div`

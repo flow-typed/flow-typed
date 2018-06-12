@@ -101,13 +101,13 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to/
    * @see  Model
   */
-  declare export type BelongsToCreateOne<TAttributes> = {
+  declare export type BelongsToCreateOne<TInitAttributes> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options The options passed to `target.create` and `setAssociation`.
      */
-    (values?: $Shape<TAttributes>, options?: BelongsToCreateOneOptions & CreateOptions<any> & BelongsToSetOneOptions): Promise<void>
+    (values?: TInitAttributes, options?: BelongsToCreateOneOptions & CreateOptions<any> & BelongsToSetOneOptions): Promise<void>
   }
 
 
@@ -212,13 +212,13 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-one/
    * @see  Model
   */
-  declare export type HasOneCreateOne<TAttributes> = {
+  declare export type HasOneCreateOne<TInitAttributes> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options The options passed to `target.create` and `setAssociation`.
      */
-    (values?: $Shape<TAttributes>, options?: HasOneCreateOneOptions & HasOneSetOneOptions & CreateOptions<any>): Promise<void>
+    (values?: TInitAttributes, options?: HasOneCreateOneOptions & HasOneSetOneOptions & CreateOptions<any>): Promise<void>
   }
 
 
@@ -315,7 +315,7 @@ declare module "sequelize" {
      * @param newAssociations An array of instances or primary key of instances to associate with this. Pass null or undefined to remove all associations.
      * @param options The options passed to `target.findAll` and `update`.
      */
-    (newAssociations: ?Array<TInstance | TInstancePrimaryKey>, options?: HasManySetManyOptions & AnyFindOptions & InstanceUpdateOptions<any>): Promise<void>
+    (newAssociations: ?$ReadOnlyArray<TInstance | TInstancePrimaryKey>, options?: HasManySetManyOptions & AnyFindOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
@@ -361,7 +361,7 @@ declare module "sequelize" {
      * @param newAssociations An array of instances or primary key of instances to associate with this.
      * @param options The options passed to `target.update`.
      */
-    (newAssociations: Array<TInstance | TInstancePrimaryKey>, options?: HasManyAddManyOptions & InstanceUpdateOptions<any>): Promise<void>
+    (newAssociations: $ReadOnlyArray<TInstance | TInstancePrimaryKey>, options?: HasManyAddManyOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
@@ -442,13 +442,13 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/has-many/
    * @see  Model
   */
-  declare export type HasManyCreateOne<TAttributes, TInstance: Model<TAttributes>> = {
+  declare export type HasManyCreateOne<TInitAttributes, TInstance: Model<any, TInitAttributes>> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options The options to use when creating the association.
      */
-    (values?: $Shape<TAttributes>, options?: HasManyCreateOneOptions & CreateOptions<any>): Promise<TInstance>
+    (values?: TInitAttributes, options?: HasManyCreateOneOptions & CreateOptions<any>): Promise<TInstance>
   }
 
 
@@ -530,7 +530,7 @@ declare module "sequelize" {
      * @param oldAssociated An array of instances or primary key of instances to un-associate.
      * @param options The options passed to `target.update`.
      */
-    (oldAssociateds?: Array<TInstance | TInstancePrimaryKey>, options?: HasManyRemoveManyOptions & InstanceUpdateOptions<any>): Promise<void>
+    (oldAssociateds?: $ReadOnlyArray<TInstance | TInstancePrimaryKey>, options?: HasManyRemoveManyOptions & InstanceUpdateOptions<any>): Promise<void>
   }
 
 
@@ -612,7 +612,7 @@ declare module "sequelize" {
      * @param targets An array of instances or primary key of instances to check.
      * @param options The options passed to `getAssociations`.
      */
-    (targets: Array<TInstance | TInstancePrimaryKey>, options?: HasManyHasManyOptions & HasManyGetManyOptions): Promise<boolean>
+    (targets: $ReadOnlyArray<TInstance | TInstancePrimaryKey>, options?: HasManyHasManyOptions & HasManyGetManyOptions): Promise<boolean>
   }
 
 
@@ -759,7 +759,7 @@ declare module "sequelize" {
      * @param newAssociations An array of instances or primary key of instances to associate with this. Pass null or undefined to remove all associations.
      * @param options The options passed to `through.findAll`, `bulkCreate`, `update` and `destroy`. Can also hold additional attributes for the join table.
      */
-    (newAssociations: ?(Array<TInstance | TInstancePrimaryKey>), options?: BelongsToManySetManyOptions &
+    (newAssociations: ?($ReadOnlyArray<TInstance | TInstancePrimaryKey>), options?: BelongsToManySetManyOptions &
       AnyFindOptions &
       BulkCreateOptions<any> &
       InstanceUpdateOptions<any> &
@@ -812,7 +812,7 @@ declare module "sequelize" {
      * @param newAssociations An array of instances or primary key of instances to associate with this.
      * @param options The options passed to `through.findAll`, `bulkCreate`, `update` and `destroy`. Can also hold additional attributes for the join table.
      */
-    (newAssociations: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyAddManyOptions &
+    (newAssociations: $ReadOnlyArray<TInstance | TInstancePrimaryKey>, options?: BelongsToManyAddManyOptions &
       AnyFindOptions &
       BulkCreateOptions<any> &
       InstanceUpdateOptions<any> &
@@ -907,13 +907,13 @@ declare module "sequelize" {
    * @see  http://docs.sequelizejs.com/en/latest/api/associations/belongs-to-many/
    * @see  Model
   */
-  declare export type BelongsToManyCreateOne<TAttributes, TInstance: Model<TAttributes>, TJoinTableAttributes> = {
+  declare export type BelongsToManyCreateOne<TInitAttributes, TInstance: Model<any, TInitAttributes>, TJoinTableAttributes> = {
     /**
      * Create a new instance of the associated model and associate it with this.
      * @param values The values used to create the association.
      * @param options Options passed to `create` and `add`. Can also hold additional attributes for the join table.
      */
-    (values?: $Shape<TAttributes>, options?: BelongsToManyCreateOneOptions & CreateOptions<any> & {
+    (values?: TInitAttributes, options?: BelongsToManyCreateOneOptions & CreateOptions<any> & {
       through?: TJoinTableAttributes
     }): Promise<TInstance>
   }
@@ -997,7 +997,7 @@ declare module "sequelize" {
      * @param oldAssociated An array of instances or primary key of instances to un-associate.
      * @param options The options passed to `through.destroy`.
      */
-    (oldAssociateds?: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyRemoveManyOptions & InstanceDestroyOptions): Promise<void>
+    (oldAssociateds?: $ReadOnlyArray<TInstance | TInstancePrimaryKey>, options?: BelongsToManyRemoveManyOptions & InstanceDestroyOptions): Promise<void>
   }
 
 
@@ -1079,7 +1079,7 @@ declare module "sequelize" {
      * @param targets An array of instances or primary key of instances to check.
      * @param options The options passed to `getAssociations`.
      */
-    (targets: Array<TInstance | TInstancePrimaryKey>, options?: BelongsToManyHasManyOptions & BelongsToManyGetManyOptions): Promise<boolean>
+    (targets: $ReadOnlyArray<TInstance | TInstancePrimaryKey>, options?: BelongsToManyHasManyOptions & BelongsToManyGetManyOptions): Promise<boolean>
   }
 
 
@@ -2333,7 +2333,7 @@ declare module "sequelize" {
    *
    * The `Array<string | number>` is to support string with replacements, like `['id > ?', 25]`
    */
-  declare export type WhereOptions = WhereAttributeHash | AndOperator | OrOperator | where | fn | Array<string | number | AndOperator | OrOperator>;
+  declare export type WhereOptions = WhereAttributeHash | AndOperator | OrOperator | where | fn | $ReadOnlyArray<string | number | AndOperator | OrOperator>;
 
   /**
    * Example: `$any: [2,3]` becomes `ANY ARRAY[2, 3]::INTEGER`
@@ -2341,12 +2341,12 @@ declare module "sequelize" {
    * _PG only_
    */
   declare export type AnyOperator = {
-    $any: Array<string | number>;
+    $any: $ReadOnlyArray<string | number>;
   }
 
   /** Undocumented? */
   declare export type AllOperator = {
-    $all: Array<string | number>;
+    $all: $ReadOnlyArray<string | number>;
   }
 
   /**
@@ -2361,7 +2361,7 @@ declare module "sequelize" {
      *
      * _PG only_
      */
-    $any?: Array<string | number>;
+    $any?: $ReadOnlyArray<string | number>;
 
     /** Example: `$gte: 6,` becomes `>= 6` */
     $gte?: number | string | Date;
@@ -2382,10 +2382,10 @@ declare module "sequelize" {
     $between?: [number, number];
 
     /** Example: `$in: [1, 2],` becomes `IN [1, 2]` */
-    $in?: Array<string | number> | literal;
+    $in?: $ReadOnlyArray<string | number> | literal;
 
     /** Example: `$notIn: [1, 2],` becomes `NOT IN [1, 2]` */
-    $notIn?: Array<string | number> | literal;
+    $notIn?: $ReadOnlyArray<string | number> | literal;
 
     /**
      * Examples:
@@ -2458,12 +2458,12 @@ declare module "sequelize" {
 
   /** Example: `$or: [{a: 5}, {a: 6}]` becomes `(a = 5 OR a = 6)` */
   declare export type OrOperator = {
-    [$or: Symbol | '$or']: WhereOperators | WhereAttributeHash | Array<Array<string> | Array<number> | WhereOperators | WhereAttributeHash | where | AndOperator>;
+    [$or: Symbol | '$or']: WhereOperators | WhereAttributeHash | $ReadOnlyArray<Array<string> | Array<number> | WhereOperators | WhereAttributeHash | where | AndOperator>;
   }
 
   /** Example: `$and: {a: 5}` becomes `AND (a = 5)` */
   declare export type AndOperator = {
-    [$and: Symbol | '$and']: WhereOperators | WhereAttributeHash | Array<Array<string> | Array<number> | WhereOperators | WhereAttributeHash | where | OrOperator>;
+    [$and: Symbol | '$and']: WhereOperators | WhereAttributeHash | $ReadOnlyArray<Array<string> | Array<number> | WhereOperators | WhereAttributeHash | where | OrOperator>;
   }
 
   /**
@@ -2471,7 +2471,7 @@ declare module "sequelize" {
    */
   declare export type WhereGeometryOptions = {
     type: string;
-    coordinates: Array<Array<number> | number>;
+    coordinates: $ReadOnlyArray<Array<number> | number>;
   }
 
   /**
@@ -2489,7 +2489,7 @@ declare module "sequelize" {
     | OrOperator
     | AndOperator
     | WhereGeometryOptions
-    | Array<string | number | WhereAttributeHash>; // implicit $or
+    | $ReadOnlyArray<string | number | WhereAttributeHash>; // implicit $or
 
   /**
    * A hash of attributes to describe your search.
@@ -2572,7 +2572,7 @@ declare module "sequelize" {
     /**
      * Load further nested related models
      */
-    include?: Array<Class<Model<any>> | IncludeOptions<any, any>>,
+    include?: $ReadOnlyArray<Class<Model<any>> | IncludeOptions<any, any>>,
 
     /**
      * If true, only non-deleted records will be returned. If false, both deleted and non-deleted records will
@@ -2632,7 +2632,7 @@ declare module "sequelize" {
     If your association are set up with an `as` (eg. `X.hasMany(Y, { as: 'Z }`, you need to specify Z in
     the as attribute when eager loading Y).
     */
-    include?: Array<Class<Model<any>> | IncludeOptions<any, any>>,
+    include?: $ReadOnlyArray<Class<Model<any>> | IncludeOptions<any, any>>,
 
     /**
      * Specifies an ordering. If a string is provided, it will be escaped. Using an array, you can provide
@@ -2644,13 +2644,13 @@ declare module "sequelize" {
       string |
       col |
       literal |
-      Array<
+      $ReadOnlyArray<
         string |
         col |
         literal |
         Class<Model<any>> |
         {model: Class<Model<any>>, as?: string} |
-        Array<
+        $ReadOnlyArray<
           string |
           number |
           Class<Model<any>> |
@@ -2726,7 +2726,7 @@ declare module "sequelize" {
     /**
      * Include options. See `find` for details
      */
-    include?: Array<Class<Model<any>>| IncludeOptions<any, any>>,
+    include?: $ReadOnlyArray<Class<Model<any>>| IncludeOptions<any, any>>,
 
     /**
      * Apply COUNT(DISTINCT(col))
@@ -2736,7 +2736,7 @@ declare module "sequelize" {
     /**
      * Used in conjustion with `group`
      */
-    attributes?: Array<string | [string, string]>,
+    attributes?: $ReadOnlyArray<string | [string, string]>,
 
     /**
      * For creating complex counts. Will return multiple rows as needed.
@@ -2767,7 +2767,7 @@ declare module "sequelize" {
      *
     TODO: See set
     */
-    include?: Array<Class<Model<any>> | IncludeOptions<any, any>>
+    include?: $ReadOnlyArray<Class<Model<any>> | IncludeOptions<any, any>>
   } & ReturningOptions
 
 
@@ -3081,6 +3081,14 @@ declare module "sequelize" {
   declare export class Model<TAttributes, TInitAttributes = TAttributes, TPlainAttributes = TAttributes> {
     static init(attributes: DefineAttributes, options: DefineOptions<this>): this,
 
+    static QueryInterface: QueryInterface,
+
+    static QueryGenerator: any,
+
+    static sequelize: Sequelize,
+
+    sequelize: Sequelize,
+
     /**
      * The options this model was initialized with
      */
@@ -3186,7 +3194,7 @@ declare module "sequelize" {
     model will clear the previous scope.
     */
     static scope(
-      options?: string | ScopeOptions | Array<string | ScopeOptions>): Class<this>,
+      options?: string | ScopeOptions | $ReadOnlyArray<string | ScopeOptions>): Class<this>,
 
     /**
      * Search for multiple instances.
@@ -4816,13 +4824,13 @@ declare module "sequelize" {
      * Either an object of named parameter replacements in the format `:param` or an array of unnamed
      * replacements to replace `?` in your SQL.
      */
-    replacements?: Object | Array<string | number | boolean | Date>,
+    replacements?: Object | $ReadOnlyArray<string | number | boolean | Date>,
 
     /**
      * Either an object of named bind parameter in the format `$param` or an array of unnamed
      * bind parameter to replace `$1`, `$2`, ... in your SQL.
      */
-    bind?: Object | Array<string | number | boolean | Date>,
+    bind?: Object | $ReadOnlyArray<string | number | boolean | Date>,
 
     /**
      * Force the query to use the write pool, regardless of the query type.
@@ -4883,17 +4891,17 @@ declare module "sequelize" {
      * is: ["^[a-z]+$",'i'] // will only allow letters
      * is: /^[a-z]+$/i    // same as the previous example using real RegExp
      */
-    is?: string | Array<string | RegExp>| RegExp | {
+    is?: string | $ReadOnlyArray<string | RegExp>| RegExp | {
       msg: string,
-      args: string | Array<string | RegExp>| RegExp
+      args: string | $ReadOnlyArray<string | RegExp>| RegExp
     },
 
     /**
      * not: ["[a-z]",'i']  // will not allow letters
      */
-    not?: string | Array<string | RegExp>| RegExp | {
+    not?: string | $ReadOnlyArray<string | RegExp>| RegExp | {
       msg: string,
-      args: string | Array<string | RegExp>| RegExp
+      args: string | $ReadOnlyArray<string | RegExp>| RegExp
     },
 
     /**
@@ -5200,7 +5208,7 @@ declare module "sequelize" {
     (field name), `length` (create a prefix index of length chars), `order` (the direction the column
     should be sorted in), `collate` (the collation (sort order) for the column)
     */
-    fields?: Array<string | fn | {
+    fields?: $ReadOnlyArray<string | fn | {
       attribute: string,
       length: number,
       order: string,
@@ -6165,15 +6173,15 @@ declare module "sequelize" {
      * An AND query
      * @param args Each argument will be joined by AND
      */
-    static and(...args: Array<string | Object>): AndOperator,
-    and(...args: Array<string | Object>): AndOperator,
+    static and(...args: $ReadOnlyArray<string | Object>): AndOperator,
+    and(...args: $ReadOnlyArray<string | Object>): AndOperator,
 
     /**
      * An OR query
      * @param args Each argument will be joined by OR
      */
-    static or(...args: Array<string | Object>): OrOperator,
-    or(...args: Array<string | Object>): OrOperator,
+    static or(...args: $ReadOnlyArray<string | Object>): OrOperator,
+    or(...args: $ReadOnlyArray<string | Object>): OrOperator,
 
     /**
      * Creates an object representing nested where conditions for postgres's json data-type.

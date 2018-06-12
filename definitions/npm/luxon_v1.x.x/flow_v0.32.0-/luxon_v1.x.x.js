@@ -178,6 +178,7 @@ declare module "luxon" {
     overlaps(other: Interval): boolean;
     set(values: {| start?: DateTime, end?: DateTime |}): Interval;
     splitAt(...dateTimes: Array<DateTime>): Array<Interval>;
+    splitBy(duration: number | Duration | DurationFromObjectOptions): Array<Interval>;
     toDuration(
       unit: DurationUnit | Array<DurationUnit>,
       options?: {| conversionAccuracy?: ?ConversionAccuracy |}

@@ -106,9 +106,12 @@ type Mongoose$SchemaHookTypes =
   | "save"
   | "validate"
   | "find"
+  | "findOne"
+  | "count"
   | "update"
   | "remove"
   | "findOneAndRemove"
+  | "findOneAndUpdate"
   | "init";
 
 type Mongoose$SchemaPlugin<Opts> = (

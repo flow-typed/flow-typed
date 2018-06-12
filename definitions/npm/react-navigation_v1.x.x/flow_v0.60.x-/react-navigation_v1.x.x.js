@@ -722,6 +722,7 @@ declare module 'react-navigation' {
     INIT: 'Navigation/INIT',
     NAVIGATE: 'Navigation/NAVIGATE',
     RESET: 'Navigation/RESET',
+    REPLACE: 'Navigation/REPLACE',
     SET_PARAMS: 'Navigation/SET_PARAMS',
     URI: 'Navigation/URI',
     back: {
@@ -746,6 +747,17 @@ declare module 'react-navigation' {
         key?: ?string,
         actions: Array<NavigationNavigateAction>,
       }): NavigationResetAction,
+      toString: () => string,
+    },
+    replace: {
+      (payload: {
+        routeName: string,
+        key: string,
+        newKey?: ?string,
+        params?: ?NavigationParams,
+        action?: ?NavigationNavigateAction,
+        immediate?: ?boolean,
+      }): NavigationReplaceAction,
       toString: () => string,
     },
     setParams: {
@@ -1087,8 +1099,8 @@ declare module 'react-navigation' {
       {
         navigation: NavigationScreenProp<NavigationStateRoute> | void,
       }
-      >
-    >;
+    >
+  >;
   declare export function withNavigationFocus<Props: {}>(
     Component: React$ComponentType<Props>
   ): React$ComponentType<$Diff<Props, { isFocused: boolean | void }>>;
