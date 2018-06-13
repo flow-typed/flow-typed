@@ -298,8 +298,6 @@ async function installNpmLibDefs({
         // uninstall it before installing the new (potentially updated) ver
         const libDef = npmLibDef.libDef;
         const scopedPkgName = getScopedPackageName(libDef);
-        //const toInstall = libDefsToInstall.has(scopedPkgName);
-        //console.log(`Found ${scopedPkgName} already installed. Uninstall? ${toInstall != null ? 'yes' : 'no'}`);
         if (libDefsToInstall.has(scopedPkgName)) {
           libDefsToUninstall.set(scopedPkgName, fullFilePath);
         }
