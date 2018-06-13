@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "sync-definitions": "./experimental/scripts/sync-definitions.js"
+  },
+  "devDependencies": {
+    "glob": "^7.1.2",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2"
+  }
+}
