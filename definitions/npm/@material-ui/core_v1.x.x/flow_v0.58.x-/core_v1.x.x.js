@@ -731,7 +731,7 @@ declare module "@material-ui/core/Grid/Grid" {
     | "flex-end"
     | "space-between"
     | "space-around";
-  declare type Spacing = 0 | 8 | 16 | 24 | 40;
+  declare type Spacing = 0 | 8 | 16 | 24 | 32 | 40;
   declare type Wrap = "nowrap" | "wrap" | "wrap-reverse";
 
   declare module.exports: React$ComponentType<{
