@@ -22,5 +22,5 @@ type CorsOptions = {
 }
 
 declare module "cors" {
-    declare export default (options?: CorsOptions) => RequestHandler;
+    declare module.exports: (options?: CorsOptions) => RequestHandler;
 }
