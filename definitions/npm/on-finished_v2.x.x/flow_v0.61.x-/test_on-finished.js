@@ -1,5 +1,5 @@
 // @flow
-import { type IncomingMessage, type OutgoingMessage } from 'http';
+import { IncomingMessage, ServerResponse } from 'http';
 import { describe, it } from 'flow-typed-test';
 import onFinished from 'on-finished';
 
@@ -14,8 +14,8 @@ describe('onFinished', () => {
   });
 
   it('should listen res', () => {
-    const res: OutgoingMessage = ({}: any)
-    onFinished(res, (err: Error | null, msg: OutgoingMessage) => {})
+    const res: ServerResponse = ({}: any)
+    onFinished(res, (err: Error | null, msg: ServerResponse) => {})
   });
 
 });
