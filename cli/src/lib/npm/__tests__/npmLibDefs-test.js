@@ -8,6 +8,7 @@ import {
   getInstalledNpmLibDefs,
   getNpmLibDefs,
   findNpmLibDef,
+  getScopedPackageName,
 } from '../npmLibDefs';
 
 import path from 'path';
@@ -385,6 +386,7 @@ describe('npmLibDefs', () => {
             testFilePaths: [],
             version: 'v1.x.x',
           });
+          expect(getScopedPackageName(semverLibDef.libDef)).toEqual('@kadira/storybook');
         }
       }
     });

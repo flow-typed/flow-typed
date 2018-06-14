@@ -18,8 +18,9 @@ import {
   findNpmLibDef,
   getInstalledNpmLibDefs,
   getNpmLibDefVersionHash,
+  getScopedPackageName,
+  type NpmLibDef,
 } from '../lib/npm/npmLibDefs';
-import type {NpmLibDef} from '../lib/npm/npmLibDefs';
 
 import {
   findFlowSpecificVer,
@@ -296,10 +297,9 @@ async function installNpmLibDefs({
         // If a libdef is already installed for some dependency, we need to
         // uninstall it before installing the new (potentially updated) ver
         const libDef = npmLibDef.libDef;
-        //const toInstall = libDefsToInstall.has(libDef.name);
-        //console.log(`Found ${libDef.name} already installed. Uninstall? ${toInstall != null ? 'yes' : 'no'}`);
-        if (libDefsToInstall.has(libDef.name)) {
-          libDefsToUninstall.set(libDef.name, fullFilePath);
+        const scopedPkgName = getScopedPackageName(libDef);
+        if (libDefsToInstall.has(scopedPkgName)) {
+          libDefsToUninstall.set(scopedPkgName, fullFilePath);
         }
         break;
 
@@ -316,12 +316,12 @@ async function installNpmLibDefs({
     const flowTypedDirPath = path.join(flowProjectRoot, libdefDir, 'npm');
     await mkdirp(flowTypedDirPath);
     const results = await Promise.all(
-      [...libDefsToInstall.values()].map(async (def: NpmLibDef) => {
-        const toUninstall = libDefsToUninstall.get(def.name);
+      [...libDefsToInstall.values()].map(async (libDef: NpmLibDef) => {
+        const toUninstall = libDefsToUninstall.get(getScopedPackageName(libDef));
         if (toUninstall != null) {
           await fs.unlink(toUninstall);
         }
-        return installNpmLibDef(def, flowTypedDirPath, overwrite);
+        return installNpmLibDef(libDef, flowTypedDirPath, overwrite);
       }),
     );
 
