@@ -406,8 +406,6 @@ var date = DateTime.min(DateTime.local(), null, DateTime.utc());
 // $ExpectError
 (date.diff(new Date()): Duration);
 // $ExpectError
-(date.diff(DateTime.utc()): Duration);
-// $ExpectError
 (date.diff(DateTime.utc(), "glom"): Duration);
 // $ExpectError
 (date.diff(DateTime.utc(), ["year", "glom"]): Duration);
@@ -581,6 +579,7 @@ date.toObject({ includeConfig: false }).numberingSystem;
 (date.toUTC(): DateTime);
 (date.toUTC(32): DateTime);
 (date.toUTC(32, { keepCalendarTime: true }): DateTime);
+(date.toUTC(32, { keepLocalTime: true }): DateTime);
 
 (date.until(DateTime.utc()): Duration);
 

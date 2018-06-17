@@ -285,7 +285,8 @@ declare module "luxon" {
   |};
 
   declare type SetZoneOptions = {|
-    keepCalendarTime?: ?boolean
+    keepCalendarTime?: ?boolean,
+    keepLocalTime?: ?boolean
   |};
 
   declare type DateTimeFieldsOptions = {|
@@ -471,7 +472,7 @@ declare module "luxon" {
     zoneName: string;
     diff(
       otherDateTime: DateTime,
-      unit: DateTimeUnit | Array<DateTimeUnit>,
+      unit?: DateTimeUnit | Array<DateTimeUnit>,
       options?: DateTimeDiffOptions
     ): Duration;
     diffNow(
