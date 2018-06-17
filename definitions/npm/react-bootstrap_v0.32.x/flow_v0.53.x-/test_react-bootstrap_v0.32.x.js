@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dropdown, Overlay, FormControl, Checkbox, Radio } from 'react-bootstrap';
+import { Button, Dropdown, Overlay, FormControl, Checkbox, Radio } from 'react-bootstrap';
 
 
 // normal components works
@@ -13,3 +13,13 @@ import { Dropdown, Overlay, FormControl, Checkbox, Radio } from 'react-bootstrap
 (<FormControl inputRef={(ref) => {(ref: ?HTMLInputElement)}}/>: React.Node);
 (<Checkbox inputRef={(ref) => {(ref: ?HTMLInputElement)}} />: React.Node);
 (<Radio inputRef={(ref) => {(ref: ?HTMLInputElement)}} />: React.Node);
+
+// componentClass accepts a string or a React Component
+(<Button componentClass={Button} />: React.Node);
+(<Button componentClass="Button" />: React.Node);
+
+class NotAReactComponent {}
+
+// But should reject a valid identifier that isn't a React component
+// $ExpectError
+(<Button componentClass={NotAReactComponent} />: React.Node);
