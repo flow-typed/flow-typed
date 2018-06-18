@@ -2,6 +2,7 @@
 
 import React from "react";
 import renderer from "react-test-renderer";
+import ShallowRenderer from "react-test-renderer/shallow"
 
 const Example = () => <div>Example</div>;
 
@@ -12,3 +13,8 @@ const instance = wrapper.getInstance();
 
 // $ExpectError
 renderer.create(NaN);
+
+// ShallowRenderer
+const shallowRenderer = new ShallowRenderer()
+const shallowWrapper = shallowRenderer.render(<Example />)
+const shallowInstance = shallowRenderer.getRenderOutput()
