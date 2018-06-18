@@ -317,7 +317,9 @@ async function installNpmLibDefs({
     await mkdirp(flowTypedDirPath);
     const results = await Promise.all(
       [...libDefsToInstall.values()].map(async (libDef: NpmLibDef) => {
-        const toUninstall = libDefsToUninstall.get(getScopedPackageName(libDef));
+        const toUninstall = libDefsToUninstall.get(
+          getScopedPackageName(libDef),
+        );
         if (toUninstall != null) {
           await fs.unlink(toUninstall);
         }
