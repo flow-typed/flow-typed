@@ -6,11 +6,6 @@ const mkdirp = require('mkdirp');
 const path = require('path');
 const rimraf = require('rimraf');
 
-const projectRoot = path.dirname(require.resolve('../../package.json'));
-// TODO: Figure out what to do with libdefs in <ROOT>/definitions/browser.
-const srcDefinitionsRoot = path.resolve(projectRoot, './definitions/npm');
-const destDefinitionsRoot = path.resolve(projectRoot, './experimental/definitions')
-
 /**
  * Create a structure like the following in `experimental/definitions`. This is
  * a step towards a Yarn workspaces / Lerna setup for the flow-typed libdefs.
@@ -31,13 +26,7 @@ const destDefinitionsRoot = path.resolve(projectRoot, './experimental/definition
  *        └── flow_v0.42.x-
  *            └── index.js
  */
-function main() {
-  // Blow away the `experiments/definitions` dir. This is mainly to account for
-  // libdefs being deleted or moved in <ROOT>/definitions/npm. TODO: Figure out
-  // a better solution for these cases for when we have monorepo things set up.
-  rimraf.sync(destDefinitionsRoot);
-
-  // Copy libdefs from <ROOT>/definitions/npm to <ROOT>/experimental/definitions/npm.
+function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
   glob.sync('**/!(test_)*.js', { cwd: srcDefinitionsRoot }).forEach(libdef => {
     const parts = libdef.split('/');
 
@@ -64,6 +53,21 @@ function main() {
       fs.readFileSync(`${srcDefinitionsRoot}/${libdef}`).toString(),
     );
   });
+}
+
+function main() {
+  const projectRoot = path.dirname(require.resolve('../../package.json'));
+  const browserDefinitionsRoot = path.resolve(projectRoot, './definitions/browser');
+  const npmDefinitionsRoot = path.resolve(projectRoot, './definitions/npm');
+  const destDefinitionsRoot = path.resolve(projectRoot, './experimental/definitions')
+
+  // Blow away the `experiments/definitions` dir. This is mainly to account for
+  // libdefs being deleted or moved in <ROOT>/definitions/npm. TODO: Figure out
+  // a better solution for these cases for when we have monorepo things set up.
+  rimraf.sync(destDefinitionsRoot);
+
+  copyLibdefs(browserDefinitionsRoot, destDefinitionsRoot);
+  copyLibdefs(npmDefinitionsRoot, destDefinitionsRoot);
 }
 
 if (require.main === module) {
