@@ -472,6 +472,8 @@ declare module "@material-ui/core/withMobileDialog" {
 }
 
 declare module "@material-ui/core/withWidth" {
+  import type { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+  declare export var isWidthUp: (matchWidth: Breakpoint, currentWidth: Breakpoint) => boolean;
   declare export default $Exports<"@material-ui/core/withWidth/withWidth">;
 }
 
@@ -2492,11 +2494,17 @@ declare module "@material-ui/core/utils/requirePropFactory" {
 }
 
 declare module "@material-ui/core/withWidth/withWidth" {
+  import type { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
   declare module.exports: (
-    options: Object
+    options?: {|
+      withTheme?: boolean,
+      noSSR?: boolean,
+      initialWidth?: Breakpoint,
+      resizeInterval?: number
+    |}
   ) => <Props: {}>(
     Component: React$ComponentType<Props>
-  ) => React$ComponentType<Props>;
+  ) => React$ComponentType<$Diff<Props, { width: Breakpoint }>>;
 }
 
 declare module "@material-ui/core/colors" {
