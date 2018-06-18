@@ -2392,7 +2392,7 @@ declare module "@material-ui/core/Typography/Typography" {
     | "inherit"
     | "primary"
     | "secondary"
-    | "accent"
+    | "textSecondary"
     | "error"
     | "default";
   declare type Type =
