@@ -1,5 +1,5 @@
 declare module "react-bootstrap" {
-  import type { Node, Element, ElementType, Component, Ref } from 'react';
+  import type { Component, Ref } from 'react';
   declare type BsSize = 'lg' | 'large' | 'sm' | 'small';
   declare type BsStyle = 'lg' | 'large' | 'sm' | 'small' | 'xs' | 'xsmall';
   declare type TriggerType = 'click' | 'hover' | 'focus';
