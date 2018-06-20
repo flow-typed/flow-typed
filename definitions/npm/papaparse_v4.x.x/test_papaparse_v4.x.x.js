@@ -62,5 +62,12 @@ Papa.unparse({
   data: ["3"]
 });
 
+Papa.unparse({
+  fields: ["3"],
+  data: ["3"]
+}, { 
+  quotes: true 
+});
+
 Papa.SCRIPT_PATH;
 Papa.LocalChunkSize;
