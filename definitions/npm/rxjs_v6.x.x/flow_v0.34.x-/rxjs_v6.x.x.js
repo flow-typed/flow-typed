@@ -1645,6 +1645,7 @@ declare module "rxjs" {
     ObjectUnsubscribedError: typeof rxjs$ObjectUnsubscribedError,
     TimeoutError: typeof rxjs$TimeoutError,
     UnsubscriptionError: typeof rxjs$UnsubscriptionError,
+    throwError(error: any): rxjs$Observable<any>,
   };
 }
 
