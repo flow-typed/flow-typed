@@ -68,7 +68,23 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   /**
    * Sugar for only returning a value once inside your mock
    */
-  mockReturnValueOnce(value: TReturn): JestMockFn<TArguments, TReturn>
+  mockReturnValueOnce(value: TReturn): JestMockFn<TArguments, TReturn>,
+  /** 
+   * Sugar for jest.fn().mockImplementation(() => Promise.resolve(value))
+   */
+  mockResolvedValue(value: TReturn): JestMockFn<TArguments, Promise<TReturn>>,
+  /**
+   * Sugar for jest.fn().mockImplementationOnce(() => Promise.resolve(value))
+   */
+  mockResolvedValueOnce(value: TReturn): JestMockFn<TArguments, Promise<TReturn>>,
+  /**
+   * Sugar for jest.fn().mockImplementation(() => Promise.reject(value))
+   */
+  mockRejectedValue(value: TReturn): JestMockFn<TArguments, Promise<any>>,
+  /**
+   * Sugar for jest.fn().mockImplementationOnce(() => Promise.reject(value))
+   */
+  mockRejectedValueOnce(value: TReturn): JestMockFn<TArguments, Promise<any>>
 };
 
 type JestAsymmetricEqualityType = {
