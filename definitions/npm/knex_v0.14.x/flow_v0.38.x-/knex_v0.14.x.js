@@ -88,7 +88,8 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   crossJoin(column: string, c1: string, operator: string, c2: string): this;
   crossJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
   joinRaw(sql: string, bindings?: Knex$RawBindings): this;
-  distinct(): this;
+  distinct(column?: Knex$Raw | string): this;
+  distinct(...columns: (Knex$Raw | string)[]): this;
   groupBy(column: string): this;
   groupByRaw(sql: string, bindings?: Knex$RawBindings): this;
   orderBy(column: string, direction?: "desc" | "asc"): this;
@@ -177,6 +178,12 @@ declare type Knex$PostgresConfig = {
 };
 
 declare type Knex$RawBindings = Array<mixed> | { [key: string]: mixed };
+
+declare type Knex$Raw = {
+  client: any,
+  sql: string,
+  bindings?: Knex$RawBindings,
+};
 
 declare type Knex$Mysql2Config = {
   client?: "mysql2",
