@@ -393,6 +393,7 @@ var date = DateTime.min(DateTime.local(), null, DateTime.utc());
 (date.weekday: number);
 (date.weekdayLong: string);
 (date.weekdayShort: string);
+(date.weeksInWeekYear: number);
 (date.year: number);
 (date.zoneName: string);
 
@@ -491,6 +492,8 @@ if (date.equals(new Date())) {
 (date.setZone("America/Detroit"): DateTime);
 (date.setZone(new CustomZone()): DateTime);
 
+(date.toBSON(): Date);
+
 (date.toFormat("yyyy/MM/dd"): string);
 (date.toFormat("yyyy/MM/dd", { round: true }): string);
 
@@ -537,6 +540,8 @@ if (date.equals(new Date())) {
 (date.toLocaleString({ year: "numeric" }): string);
 // $ExpectError
 (date.toLocaleString({ foo: "bar" }): string);
+
+(date.toMillis(): number);
 
 (date.toObject().year: number);
 (date.toObject().month: number);
