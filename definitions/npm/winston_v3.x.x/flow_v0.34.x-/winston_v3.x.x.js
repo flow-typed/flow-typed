@@ -63,6 +63,7 @@ declare type $winstonConfigSubModule = {
 declare type $winstonFormatSubModule = {
   combine: (...args: Array<$winstonFormat>) => $winstonFormat,
   json: () => $winstonFormat,
+  label: (config?: Object) => $winstonFormat,
   prettyPrint: () => $winstonFormat,
   simple: () => $winstonFormat,
   timestamp: () => $winstonFormat
