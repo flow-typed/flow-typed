@@ -38,10 +38,10 @@ declare module "luxon" {
         localeCode?: ?string
       }
     ): string;
-    isValid: boolean;
-    name: string;
-    type: string;
-    universal: boolean;
+    +isValid: boolean;
+    +name: string;
+    +type: string;
+    +universal: boolean;
     equals(otherZone: Zone): boolean;
     offset(ts: number): number;
   }

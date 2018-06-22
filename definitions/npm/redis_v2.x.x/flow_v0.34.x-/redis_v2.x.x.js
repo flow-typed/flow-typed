@@ -105,6 +105,7 @@ declare type $npm$redis$DelF = $npm$redis$DelWithArrayKeys
 
 declare module "redis" {
   declare class RedisClient extends events$EventEmitter mixins RedisClientPromisified {
+    connected: boolean,
     hmset: (
       key: string,
       map: {[key: string]: string},
@@ -201,6 +202,15 @@ declare module "redis" {
     duplicate: () => RedisClient;
     end: (flush: boolean) => void;
     quit: () => void;
+    keys: (
+      pattern: string,
+      callback?: (error: ?Error, keys: string[]) => void
+    ) => void;
+    expire: (
+      key: string,
+      timeout: number,
+      callback?: (error: ?Error, timeoutWasSet: number) => void
+    ) => void;
   }
 
   declare class RedisClientPromisified extends RedisClient {
@@ -244,6 +254,7 @@ declare module "redis" {
       source: string,
       destination: string
     ) => Promise<string> | Promise<void>;
+    flushallAsync: () => Promise<void>;
     publishAsync: (topic: string, value: any) => Promise<void>;
     subscribeAsync: (topic: string) => Promise<void>;
     unsubscribeAsync: (topic: string) => Promise<void>;
@@ -252,6 +263,9 @@ declare module "redis" {
     duplicateAsync: () => Promise<RedisClientPromisified>;
     endAsync: (flush: boolean) => Promise<void>;
     quitAsync: () => Promise<void>;
+    keysAsync: (pattern: string) => Promise<string[]>;
+    expireAsync: (key: string, timeout: number) => Promise<number>;
+    setexAsync: (key: string, timeout: number, value: string) => Promise<string>;
   }
 
   declare type CreateOptions = {

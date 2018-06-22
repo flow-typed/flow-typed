@@ -32,7 +32,7 @@ declare module 'react-modal' {
       beforeClose: string
     },
     appElement?: HTMLElement | string | null,
-    onAfterOpen?: () => void,
+    onAfterOpen?: () => void | Promise<void>,
     onRequestClose?: () => void,
     aria?: {
       [key: string]: string

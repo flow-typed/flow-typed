@@ -2,7 +2,8 @@ import io from "socket.io-client";
 
 io("foo");
 io("foo", {});
-io("foo", { forceNew: true, path: "/foobar", transports: ["websocket"] });
+io("foo", { forceNew: true, path: "/foobar", transports: ["websocket"]});
+io("foo", { transportOptions: { polling: { extraHeaders: { Authorization: "Basic 12345" }}}})
 
 io.connect("foo");
 io.connect("foo", {});

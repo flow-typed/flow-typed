@@ -134,7 +134,7 @@ declare module "react-intl" {
     | React$StatelessFunctionalComponent<Props>
     | ChildrenArray<void | null | boolean | string | number | Element<any>>;
 
-  declare type InjectIntlOtions = {
+  declare type InjectIntlOptions = {
     intlPropName?: string,
     withRef?: boolean
   }
@@ -152,14 +152,14 @@ declare module "react-intl" {
   declare function injectIntl<OriginalProps: InjectIntlProvidedProps, DefaultProps: {}>
   (
     component: ComponentWithDefaultProps<DefaultProps, OriginalProps>,
-    options?: InjectIntlOtions,
+    options?: InjectIntlOptions,
   ):
   IntlInjectedComponentClass<$Diff<OriginalProps, InjectIntlProvidedProps>, DefaultProps>
 
   declare function injectIntl<OriginalProps: InjectIntlProvidedProps>
   (
     component: React$ComponentType<OriginalProps>,
-    options?: InjectIntlOtions,
+    options?: InjectIntlOptions,
   ):
   IntlInjectedComponentClass<$Diff<OriginalProps, InjectIntlProvidedProps>>;
 

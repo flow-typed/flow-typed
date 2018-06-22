@@ -5,6 +5,8 @@ winston.log({
   message: "default logger info message"
 });
 winston.error("default logger error message");
+// $ExpectError
+winston.nonExistantLevel("default logger nonExistantLevel message");
 
 let logger = winston.createLogger({
   format: winston.format.json(),
@@ -52,3 +54,23 @@ logger = winston.createLogger({
 logger.foo("foo message");
 logger.bar("bar message");
 logger.info("info message");
+
+logger = winston.loggers.add("categoryOneId", {
+  format: winston.format.json(),
+  level: "debug",
+  transports: [new winston.transports.Console()]
+});
+
+logger.debug("categoryOneId debug message");
+
+const container = new winston.Container({
+  format: winston.format.json(),
+  level: "debug",
+  transports: [new winston.transports.File({ filename: "new-container.log" })]
+});
+container.add("categoryTwoId");
+container.add("categoryThreeId");
+
+logger = container.get("categoryTwoId");
+
+logger.error("categoryTwoId error message");

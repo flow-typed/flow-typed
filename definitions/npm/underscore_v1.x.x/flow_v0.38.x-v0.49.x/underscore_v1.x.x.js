@@ -437,7 +437,7 @@ declare module "underscore" {
     values<K, V>(object: {[keys: K]: V}): Array<V>;
     mapObject(
       object: Object,
-      iteratee: (val: any, key: string) => Object,
+      iteratee: (val: any, key: string) => mixed,
       context?: mixed
     ): Object;
     pairs<K, V>(object: {[keys: K]: V}): Array<[K, V]>;

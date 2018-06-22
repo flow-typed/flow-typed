@@ -346,3 +346,8 @@ Observable.of(1)
 (numbers.last(): Observable<number>);
 // $ExpectError
 (numbers.last(): Observable<string>);
+
+// $ExpectError
+(Observable.of(0).catch(() => Observable.of('foo')): Observable<string>);
+
+(Observable.of(1, null).filter(Boolean): Observable<number>)

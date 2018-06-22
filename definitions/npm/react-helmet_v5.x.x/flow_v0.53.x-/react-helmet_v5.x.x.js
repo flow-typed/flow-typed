@@ -27,10 +27,15 @@ declare module 'react-helmet' {
     toComponent(): [React$Element<*>] | React$Element<*> | Array<Object>;
   }
 
+  declare interface AttributeTagMethods {
+    toString(): string;
+    toComponent(): {[string]: *};
+  }
+
   declare interface StateOnServer {
     base: TagMethods;
-    bodyAttributes: TagMethods,
-    htmlAttributes: TagMethods;
+    bodyAttributes: AttributeTagMethods,
+    htmlAttributes: AttributeTagMethods;
     link: TagMethods;
     meta: TagMethods;
     noscript: TagMethods;

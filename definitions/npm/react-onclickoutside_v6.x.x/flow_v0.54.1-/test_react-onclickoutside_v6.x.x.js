@@ -1,7 +1,9 @@
 //@flow
 
 import React from 'react';
-import onClickOutside, { type OnClickOutsideProps } from 'react-onclickoutside';
+import onClickOutside, { type OnClickOutsideProps, IGNORE_CLASS_NAME } from 'react-onclickoutside';
+
+(IGNORE_CLASS_NAME: string);
 
 class A extends React.Component<OnClickOutsideProps & { a: string }> {
   render() {
