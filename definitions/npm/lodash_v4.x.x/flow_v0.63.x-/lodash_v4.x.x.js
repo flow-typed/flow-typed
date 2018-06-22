@@ -2915,12 +2915,12 @@ declare module "lodash/fp" {
     pickBy<A, T: { [id: any]: A }>(predicate: OPredicate<A>, object: T): Object;
     result(path: Array<string> | string): (object: Object) => any;
     result(path: Array<string> | string, object: Object): any;
-    set(
+    set<T: Object>(
       path: Array<string> | string
-    ): ((value: any) => (object: Object) => Object) &
-      ((value: any, object: Object) => Object);
-    set(path: Array<string> | string, value: any): (object: Object) => Object;
-    set(path: Array<string> | string, value: any, object: Object): Object;
+    ): ((value: any) => (object: T) => T) &
+      ((value: any, object: T) => T);
+    set<T: Object>(path: Array<string> | string, value: any): (object: T) => T;
+    set<T: Object>(path: Array<string> | string, value: any, object: T): T;
     assoc(
       path: Array<string> | string
     ): ((value: any) => (object: Object) => Object) &
@@ -2983,15 +2983,15 @@ declare module "lodash/fp" {
     dissoc(path: Array<string> | string, object: Object): Object;
     dissocPath(path: Array<string> | string): (object: Object) => Object;
     dissocPath(path: Array<string> | string, object: Object): Object;
-    update(
+    update<T: Object>(
       path: string[] | string
-    ): ((updater: Function) => (object: Object) => Object) &
-      ((updater: Function, object: Object) => Object);
-    update(
+    ): ((updater: Function) => (object: T) => T) &
+      ((updater: Function, object: T) => T);
+    update<T: Object>(
       path: string[] | string,
       updater: Function
-    ): (object: Object) => Object;
-    update(path: string[] | string, updater: Function, object: Object): Object;
+    ): (object: T) => T;
+    update<T: Object>(path: string[] | string, updater: Function, object: T): T;
     updateWith(
       customizer: Function
     ): ((
