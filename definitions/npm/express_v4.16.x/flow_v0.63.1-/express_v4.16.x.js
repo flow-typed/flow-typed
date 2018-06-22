@@ -245,6 +245,7 @@ declare class express$Application extends express$Router mixins events$EventEmit
     res: http$ServerResponse,
     next?: ?express$NextFunction
   ): void;
+  // callable signature is not inherited
   (
     req: http$IncomingMessage,
     res: http$ServerResponse,

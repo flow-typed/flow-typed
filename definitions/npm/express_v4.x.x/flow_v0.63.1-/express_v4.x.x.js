@@ -182,6 +182,7 @@ declare class express$Application extends express$Router mixins events$EventEmit
   set(name: string, value: mixed): mixed;
   render(name: string, optionsOrFunction: {[name: string]: mixed}, callback: express$RenderCallback): void;
   handle(req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
+  // callable signature is not inherited
   (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
 }
 
