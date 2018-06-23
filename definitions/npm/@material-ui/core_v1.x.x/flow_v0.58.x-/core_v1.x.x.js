@@ -474,6 +474,7 @@ declare module "@material-ui/core/withMobileDialog" {
 declare module "@material-ui/core/withWidth" {
   import type { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
   declare export var isWidthUp: (matchWidth: Breakpoint, currentWidth: Breakpoint) => boolean;
+  declare export var isWidthDown: (matchWidth: Breakpoint, currentWidth: Breakpoint) => boolean;
   declare export default $Exports<"@material-ui/core/withWidth/withWidth">;
 }
 
