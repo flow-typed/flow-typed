@@ -9,7 +9,10 @@ winston.error("default logger error message");
 winston.nonExistantLevel("default logger nonExistantLevel message");
 
 let logger = winston.createLogger({
-  format: winston.format.json(),
+  format: winston.format.combine(
+    winston.format.json(),
+    winston.format.label({label: 'label'})
+  ),
   level: "debug",
   exitOnError: false,
   transports: [
