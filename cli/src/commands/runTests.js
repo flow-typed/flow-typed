@@ -130,6 +130,20 @@ async function getOrderedFlowBinVersions(
           return false;
         }
 
+        // Temporary fix for https://github.com/flowtype/flow-typed/issues/2422
+        if (rel.tag_name === 'v0.63.0') {
+          console.log(
+            '==========================================================================================',
+          );
+          console.log(
+            'We are tempoarily skipping v0.63.0 due to https://github.com/flowtype/flow-typed/issues/2422',
+          );
+          console.log(
+            '==========================================================================================',
+          );
+          return false;
+        }
+
         // We only test against versions since 0.15.0 because it has proper
         // [ignore] fixes (which are necessary to run tests)
         // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
@@ -478,7 +492,7 @@ async function runTestGroup(
     );
   }
 
-  if (!await fs.exists(BIN_DIR)) {
+  if (!(await fs.exists(BIN_DIR))) {
     await fs.mkdir(BIN_DIR);
   }
 

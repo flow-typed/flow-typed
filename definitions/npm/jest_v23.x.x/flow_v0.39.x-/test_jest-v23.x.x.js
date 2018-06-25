@@ -14,11 +14,15 @@ const mockFn = jest.fn();
 mockFn.mock.calls.map(String).map(a => a + a);
 
 type Foo = {
-  doStuff: string => number
+  doStuff: string => number,
+  doAsyncStuff: string => Promise<number>
 };
 const foo: Foo = {
   doStuff(str: string): number {
     return 5;
+  },
+  doAsyncStuff(str: string): Promise<number> {
+    return Promise.resolve(5);
   }
 };
 foo.doStuff = jest.fn().mockImplementation(str => 10);
@@ -43,6 +47,17 @@ foo.doStuff = jest.fn().mockReturnValue("10");
 foo.doStuff = jest.fn().mockReturnValueOnce(10);
 // $ExpectError Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockReturnValueOnce("10");
+
+foo.doAsyncStuff = jest.fn().mockResolvedValue(10);
+// $ExpectError Mock function expected to return Promise<number>, not Promise<string>
+foo.doAsyncStuff = jest.fn().mockResolvedValue("10");
+
+foo.doAsyncStuff = jest.fn().mockResolvedValueOnce(10);
+// $ExpectError Mock function expected to return Promise<number>, not Promise<string>
+foo.doAsyncStuff = jest.fn().mockResolvedValueOnce("10");
+
+foo.doAsyncStuff = jest.fn().mockRejectedValue(10);
+foo.doAsyncStuff = jest.fn().mockRejectedValueOnce(10);
 
 foo.doStuff = jest.fn().mockName("10");
 // $ExpectError mockName expects a string, not a number

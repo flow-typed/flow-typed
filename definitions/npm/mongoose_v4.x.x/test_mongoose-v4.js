@@ -108,6 +108,9 @@ const a1 = new Admin({ email: "123", token: "www" });
 // $ExpectError
 const a2 = new Admin({ email: 123, token: "www" });
 
+
+Admin.aggregate([ { $project : { email : 1 } } ]).allowDiskUse(true).exec()
+
 //
 export const UserSchema = new Schema(
   {
