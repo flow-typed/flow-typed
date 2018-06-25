@@ -291,7 +291,7 @@ declare module "backbone" {
   /**
    * Declaring the export for backbone as well.
    */
-  declare class Backbone {
+  declare class Backbone extends Events {
     Events: typeof Events;
     Model: typeof Model;
     Collection: typeof Collection;
