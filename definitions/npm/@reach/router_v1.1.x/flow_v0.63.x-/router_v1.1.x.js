@@ -1,5 +1,5 @@
 // flow-typed signature: 0b893a2636b3014f9a5708ff945e0ca0
-// flow-typed version: <<STUB>>/@reach/router_v1.1.1/flow_v0.66.0
+// flow-typed version: <<STUB>>/@reach/router_v1.1.1/flow_v0.63.0
 
 declare module '@reach/router' {
   declare type NavigateFn = (to: string, options?: NavigateOptions<{}>) => void;
@@ -35,19 +35,19 @@ declare module '@reach/router' {
   declare type CommonRouteProps = {|
     children?: React$Node,
     location?: typeof location,
-    navigate?: any,
+    navigate?: NavigateFn,
     uri?: string,
   |};
 
-  declare export type DefaultRouteProps = {|
+  declare export type DefaultRouteProps = {
     ...CommonRouteProps,
-    default: true,
-  |};
+    default: boolean,
+  };
 
-  declare export type RouteProps = {|
+  declare export type RouteProps = {
     ...CommonRouteProps,
     path: string,
-  |};
+  };
 
   declare export type LocationProviderRenderFn = (context: {|
     location: typeof location,
@@ -61,7 +61,9 @@ declare module '@reach/router' {
     location?: typeof location,
   |}> {}
 
-  declare export class Link<State> extends React$Component<{|
+  declare export class Link<State> extends React$Component<{
+    ...$Shape<HTMLAnchorElement>,
+    children: React$Node,
     getProps?: (props: {
       isCurrent: boolean,
       isPartiallyCurrent: boolean,
@@ -72,7 +74,7 @@ declare module '@reach/router' {
     to?: string,
     replace?: boolean,
     href?: empty, // remove href, as it's ignored by the router
-  |}> {}
+  }> {}
 
   declare export class Redirect extends React$Component<{|
     from?: string,
@@ -100,6 +102,7 @@ declare module '@reach/router' {
 
   declare export class ServerLocation extends React$Component<{|
     url: string,
+    children?: React$Node,
   |}> {}
 
   declare export function createHistory(source: HistorySource): History;
