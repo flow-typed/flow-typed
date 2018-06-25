@@ -466,6 +466,7 @@ declare module "luxon" {
     weekday: number;
     weekdayLong: string;
     weekdayShort: string;
+    weeksInWeekYear: number;
     year: number;
     zoneName: string;
     diff(
@@ -492,6 +493,7 @@ declare module "luxon" {
     setLocale(locale: string): DateTime;
     setZone(zone: string | Zone, options?: SetZoneOptions): DateTime;
     startOf(unit: DateTimeUnit): DateTime;
+    toBSON(): Date;
     toFormat(fmt: string, options?: {| round?: ?boolean |}): string;
     toHTTP(): string;
     toISO(options?: ToISOOptions): string;
@@ -504,6 +506,7 @@ declare module "luxon" {
       options?: IntlDateTimeFormatOptions
     ): Array<{ type: string, value: number }>;
     toLocaleString(options?: IntlDateTimeFormatOptions): string;
+    toMillis(): number;
     toObject(options: {| includeConfig: true |}): DateTimeObject &
       DateTimeConfig;
     toObject(options?: {| includeConfig?: ?boolean |}): DateTimeObject;
