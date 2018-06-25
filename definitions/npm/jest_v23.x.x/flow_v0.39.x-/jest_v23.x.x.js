@@ -650,6 +650,10 @@ interface JestExpectType {
    */
   toMatchObject(object: Object | Array<Object>): void,
   /**
+   * Use .toStrictEqual to check that a javascript object matches a subset of the properties of an object.
+   */
+  toStrictEqual(value: any): void,
+  /**
    * This ensures that an Object matches the most recent snapshot.
    */
   toMatchSnapshot(propertyMatchers?: {[key: string]: JestAsymmetricEqualityType}, name?: string): void,
