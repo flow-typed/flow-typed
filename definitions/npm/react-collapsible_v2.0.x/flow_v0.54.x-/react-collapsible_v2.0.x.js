@@ -1,5 +1,3 @@
-import { Component } from "react";
-
 declare module "react-collapsible" {
   declare type Props = {
     trigger: string | React$Node,
@@ -33,6 +31,6 @@ declare module "react-collapsible" {
     contentInnerClassName?: string
   };
 
-  declare class Collapsible extends Component<Props> {}
+  declare class Collapsible extends React$Component<Props> {}
   declare module.exports: typeof Collapsible;
 }
