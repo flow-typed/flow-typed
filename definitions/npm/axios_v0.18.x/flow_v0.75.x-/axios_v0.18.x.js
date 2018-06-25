@@ -96,10 +96,6 @@ declare module "axios" {
   declare type AxiosPromise<T,R = T> = Promise<AxiosXHR<T,R>>;
   declare class Axios {
     constructor<T,R>(config?: AxiosXHRConfigBase<T,R>): void;
-    [[call]]: <T,R>(
-      config: AxiosXHRConfig<T,R> | string,
-      config?: AxiosXHRConfig<T,R>
-    ) => AxiosPromise<T,R>;
     request<T,R>(config: AxiosXHRConfig<T,R>): AxiosPromise<T,R>;
     delete<T,R>(url: string, config?: AxiosXHRConfigBase<T,R>): AxiosPromise<T,R>;
     get<T,R>(url: string, config?: AxiosXHRConfigBase<T,R>): AxiosPromise<T,R>;
@@ -143,6 +139,10 @@ declare module "axios" {
     create(config?: AxiosXHRConfigBase<any, any>): Axios;
     all: typeof Promise.all;
     spread(callback: Function): (arr: Array<any>) => Function;
+    [[call]]: <T,R>(
+      config: AxiosXHRConfig<T,R> | string,
+      config?: AxiosXHRConfig<T,R>
+    ) => AxiosPromise<T,R>;
   }
   declare module.exports: AxiosExport;
 }
