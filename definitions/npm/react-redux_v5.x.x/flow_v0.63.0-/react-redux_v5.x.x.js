@@ -33,6 +33,8 @@ declare module "react-redux" {
 
   declare type MapDispatchToProps<A, OP: Object, RDP: Object> = (dispatch: Dispatch<A>, ownProps: OP) => RDP;
 
+  declare type MapObjDispatchToProps<RDP: Object> = RDP;
+
   declare type MergeProps<SP: Object, DP: Object, MP: Object, RMP: Object> = (
     stateProps: SP,
     dispatchProps: DP,
@@ -78,7 +80,7 @@ declare module "react-redux" {
     CP: $Diff<$Diff<ElementConfig<Com>, RSP>, RDP>
     >(
     mapStateToProps: MapStateToProps<S, SP, RSP>,
-    mapDispatchToProps: MapDispatchToProps<A, DP, RDP>
+    mapDispatchToProps: MapDispatchToProps<A, DP, RDP> | MapObjDispatchToProps<RDP>
   ): (component: Com) => ComponentType<CP & SP & DP>;
 
   declare export function connect<
@@ -87,10 +89,11 @@ declare module "react-redux" {
     OP: Object,
     DP: Object,
     PR: Object,
+    RDP: Object,
     CP: $Diff<ElementConfig<Com>, DP>
     >(
     mapStateToProps?: null,
-    mapDispatchToProps: MapDispatchToProps<A, OP, DP>
+    mapDispatchToProps: MapDispatchToProps<A, OP, DP> | MapObjDispatchToProps<RDP>
   ): (Com) => ComponentType<CP & OP>;
 
   declare export function connect<
@@ -126,7 +129,7 @@ declare module "react-redux" {
     CP: $Diff<ElementConfig<Com>, RMP>
     >(
     mapStateToProps: MapStateToProps<S, SP, RSP>,
-    mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP>,
+    mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP> | ? MapObjDispatchToProps<RDP>,
     mergeProps: MergeProps<RSP, RDP, MP, RMP>
   ): (component: Com) => ComponentType<CP & SP & DP & MP>;
 
@@ -159,7 +162,7 @@ declare module "react-redux" {
     RMP: Object
     >(
     mapStateToProps: ?MapStateToProps<S, SP, RSP>,
-    mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP>,
+    mapDispatchToProps: ?MapDispatchToProps <A, DP, RDP> | ?MapObjDispatchToProps<RDP>,
     mergeProps: ?MergeProps<RSP, RDP, MP, RMP>,
     options: ConnectOptions<S, SP & DP & MP, RSP, RMP>
   ): (component: Com) => ComponentType<$Diff<ElementConfig<Com>, RMP> & SP & DP & MP>;
@@ -176,7 +179,7 @@ declare module "react-redux" {
     RMP: Object
     >(
     mapStateToProps: ?MapStateToProps<S, SP, RSP>,
-    mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP>,
+    mapDispatchToProps: ?MapDispatchToProps<A, DP, RDP> | MapObjDispatchToProps<RDP>,
     mergeProps: MDP,
     options: ConnectOptions<S, SP & DP & MP, RSP, RMP>
   ): (component: Com) => ComponentType<$Diff<ElementConfig<Com>, RMP> & SP & DP & MP>;
