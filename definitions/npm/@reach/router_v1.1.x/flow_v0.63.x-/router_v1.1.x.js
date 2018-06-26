@@ -1,5 +1,4 @@
-// flow-typed signature: 0b893a2636b3014f9a5708ff945e0ca0
-// flow-typed version: <<STUB>>/@reach/router_v1.1.1/flow_v0.63.0
+// @flow
 
 declare module '@reach/router' {
   declare type NavigateFn = (to: string, options?: NavigateOptions<{}>) => void;
