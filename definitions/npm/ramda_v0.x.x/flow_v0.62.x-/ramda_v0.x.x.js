@@ -1100,14 +1100,14 @@ declare module ramda {
   declare var propEq: PropEq;
 
   declare function pathEq(
-    path: Array<string>,
+    path: Array<string | number>,
   ): ((val: any, o: Object) => boolean) &
     ((val: any) => (o: Object) => boolean);
   declare function pathEq(
-    path: Array<string>,
+    path: Array<string | number>,
     val: any,
   ): (o: Object) => boolean;
-  declare function pathEq(path: Array<string>, val: any, o: Object): boolean;
+  declare function pathEq(path: Array<string | number>, val: any, o: Object): boolean;
 
   declare function clamp<T: number | string | Date>(
     min: T,
@@ -1279,17 +1279,17 @@ declare module ramda {
   ): { [k: string]: T } & S;
 
   declare function assocPath<T, S>(
-    key: Array<string>,
+    key: Array<string | number>,
     ...args: Array<void>
   ): ((val: T) => (src: S) => { [k: string]: T }) &
     ((val: T) => (src: S) => { [k: string]: T } & S);
   declare function assocPath<T, S>(
-    key: Array<string>,
+    key: Array<string | number>,
     val: T,
     ...args: Array<void>
   ): (src: S) => { [k: string]: T } & S;
   declare function assocPath<T, S>(
-    key: Array<string>,
+    key: Array<string | number>,
     val: T,
     src: S
   ): { [k: string]: T } & S;
@@ -1306,11 +1306,11 @@ declare module ramda {
   ): { [k: string]: T };
 
   declare function dissocPath<T>(
-    key: Array<string>,
+    key: Array<string | number>,
     ...args: Array<void>
   ): (src: { [k: string]: T }) => { [k: string]: T };
   declare function dissocPath<T>(
-    key: Array<string>,
+    key: Array<string | number>,
     src: { [k: string]: T }
   ): { [k: string]: T };
 
@@ -1440,42 +1440,29 @@ declare module ramda {
   ): ((x: (any) => mixed) => (val: V) => U) & ((x: (any) => mixed, val: V) => U);
 
   declare function path<V>(
-    p: Array<mixed>,
+    p: Array<string | number>,
   ): (o: NestedObject<V>) => V;
   declare function path<V>(
-    p: Array<mixed>,
+    p: Array<string | number>,
   ): (o: null | void) => void;
   declare function path<V>(
-    p: Array<mixed>,
+    p: Array<string | number>,
   ): (o: mixed) => ?V;
-  declare function path<V, A: NestedObject<V>>(p: Array<mixed>, o: A): V;
-  declare function path<V, A: null | void>(p: Array<mixed>, o: A): void;
-  declare function path<V, A: mixed>(p: Array<mixed>, o: A): ?V;
-
-  declare function path<V>(
-    p: Array<string>,
-  ): (o: NestedObject<V>) => V;
-  declare function path<V>(
-    p: Array<string>,
-  ): (o: null | void) => void;
-  declare function path<V>(
-    p: Array<string>,
-  ): (o: mixed) => ?V;
-  declare function path<V, A: NestedObject<V>>(p: Array<string>, o: A): V;
-  declare function path<V, A: null | void>(p: Array<string>, o: A): void;
-  declare function path<V, A: mixed>(p: Array<string>, o: A): ?V;
+  declare function path<V, A: NestedObject<V>>(p: Array<string | number>, o: A): V;
+  declare function path<V, A: null | void>(p: Array<string | number>, o: A): void;
+  declare function path<V, A: mixed>(p: Array<string | number>, o: A): ?V;
 
   declare function pathOr<T, V, A: NestedObject<V>>(
     or: T,
-  ): ((p: Array<string>) => (o: ?A) => V | T) &
-    ((p: Array<string>, o: ?A) => V | T);
+  ): ((p: Array<string | number>) => (o: ?A) => V | T) &
+    ((p: Array<string | number>, o: ?A) => V | T);
   declare function pathOr<T, V, A: NestedObject<V>>(
     or: T,
-    p: Array<string>,
+    p: Array<string | number>,
   ): (o: ?A) => V | T;
   declare function pathOr<T, V, A: NestedObject<V>>(
     or: T,
-    p: Array<string>,
+    p: Array<string | number>,
     o: ?A
   ): V | T;
 
@@ -1838,7 +1825,7 @@ declare module ramda {
 
   declare var pathSatisfies: CurriedFunction3<
     UnaryPredicateFn<any>,
-    string[],
+    Array<string | number>,
     Object,
     boolean
   >;
