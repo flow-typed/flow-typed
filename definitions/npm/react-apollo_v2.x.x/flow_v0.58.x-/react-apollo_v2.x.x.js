@@ -739,7 +739,7 @@ declare module "react-apollo" {
   }
 
   declare export type MutationFunc<TResult, TVariables> = (
-    opts: MutationOpts<TVariables>
+    opts?: MutationOpts<TVariables>
   ) => Promise<ApolloQueryResult<TResult>>;
 
   declare export type GraphqlData<TResult, TVariables> = TResult &
