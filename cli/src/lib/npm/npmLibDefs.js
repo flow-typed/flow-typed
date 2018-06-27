@@ -547,6 +547,10 @@ export async function getNpmLibDefVersionHash(
   );
 }
 
+export function getScopedPackageName(libDef: NpmLibDef): string {
+  return (libDef.scope === null ? '' : `${libDef.scope}/`) + `${libDef.name}`;
+}
+
 export {
   extractLibDefsFromNpmPkgDir as _extractLibDefsFromNpmPkgDir,
   parsePkgNameVer as _parsePkgNameVer,

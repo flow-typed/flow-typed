@@ -178,6 +178,7 @@ declare module "luxon" {
     overlaps(other: Interval): boolean;
     set(values: {| start?: DateTime, end?: DateTime |}): Interval;
     splitAt(...dateTimes: Array<DateTime>): Array<Interval>;
+    splitBy(duration: number | Duration | DurationFromObjectOptions): Array<Interval>;
     toDuration(
       unit: DurationUnit | Array<DurationUnit>,
       options?: {| conversionAccuracy?: ?ConversionAccuracy |}
@@ -465,6 +466,7 @@ declare module "luxon" {
     weekday: number;
     weekdayLong: string;
     weekdayShort: string;
+    weeksInWeekYear: number;
     year: number;
     zoneName: string;
     diff(
@@ -491,6 +493,7 @@ declare module "luxon" {
     setLocale(locale: string): DateTime;
     setZone(zone: string | Zone, options?: SetZoneOptions): DateTime;
     startOf(unit: DateTimeUnit): DateTime;
+    toBSON(): Date;
     toFormat(fmt: string, options?: {| round?: ?boolean |}): string;
     toHTTP(): string;
     toISO(options?: ToISOOptions): string;
@@ -503,6 +506,7 @@ declare module "luxon" {
       options?: IntlDateTimeFormatOptions
     ): Array<{ type: string, value: number }>;
     toLocaleString(options?: IntlDateTimeFormatOptions): string;
+    toMillis(): number;
     toObject(options: {| includeConfig: true |}): DateTimeObject &
       DateTimeConfig;
     toObject(options?: {| includeConfig?: ?boolean |}): DateTimeObject;

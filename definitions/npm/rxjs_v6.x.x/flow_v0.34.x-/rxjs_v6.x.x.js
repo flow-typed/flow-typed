@@ -1188,6 +1188,8 @@ declare module "rxjs/operators" {
       scheduler?: rxjs$SchedulerClass
     ): rxjs$Observable<T> => rxjs$Observable<T | U>;
 
+    toArray<+T>(): rxjs$Observable<T> => rxjs$Observable<T[]>;
+
     combineLatest<+T, A, B, C, D, E, F, G, H>(
       a: rxjs$Observable<A>,
       b: rxjs$Observable<B>,
@@ -1625,6 +1627,15 @@ declare class rxjs$UnsubscriptionError extends Error {}
 
 declare module "rxjs" {
   declare module.exports: {
+    from<+T>(
+      input: rxjs$ObservableInput<T>,
+      scheduler?: rxjs$SchedulerClass
+    ): rxjs$Observable<T>,
+    timer(
+      initialDelay: number | Date,
+      period?: number,
+      scheduler?: rxjs$SchedulerClass
+    ): rxjs$Observable<number>,
     Observable: typeof rxjs$Observable,
     Observer: typeof rxjs$Observer,
     ConnectableObservable: typeof rxjs$ConnectableObservable,
@@ -1645,6 +1656,7 @@ declare module "rxjs" {
     ObjectUnsubscribedError: typeof rxjs$ObjectUnsubscribedError,
     TimeoutError: typeof rxjs$TimeoutError,
     UnsubscriptionError: typeof rxjs$UnsubscriptionError,
+    throwError(error: any): rxjs$Observable<any>,
   };
 }
 

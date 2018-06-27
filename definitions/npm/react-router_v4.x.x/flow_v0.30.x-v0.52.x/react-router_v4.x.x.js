@@ -111,6 +111,7 @@ declare module 'react-router' {
   declare export class Switch extends React$Component {
     props: {
       children?: Array<React$Element<*>>,
+      location?: Location,
     }
   }
 

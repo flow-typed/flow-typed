@@ -3,7 +3,7 @@ declare module 'react-loadable' {
     isLoading: boolean,
     pastDelay: boolean,
     timedOut: boolean,
-    error: boolean
+    error: ?Error
   };
 
   declare type CommonOptions = {

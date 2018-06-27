@@ -10,6 +10,11 @@ declare module "socket.io-client" {
     randomizationFactor: number,
     timeout: number,
     transports: ("polling" | "websocket")[],
+    transportOptions: {
+      polling: {
+        extraHeaders: {[string]:string}
+      }
+    },
     autoConnect: boolean,
     query: { [string]: string },
     parser: any
@@ -48,6 +53,7 @@ declare module "socket.io-client" {
 
   declare export class Socket extends Emitter<Socket> {
     constructor(io: Manager, nsp: string, opts?: SocketOptions): Socket;
+    id: string;
     open(): Socket;
     connect(): Socket;
     send(...args: any[]): Socket;

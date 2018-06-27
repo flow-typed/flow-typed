@@ -438,6 +438,7 @@ declare class rxjs$Observable<+T> {
     scheduler?: rxjs$SchedulerClass
   ): rxjs$Observable<T>;
 
+  filter(predicate: typeof Boolean): rxjs$Observable<$NonMaybeType<T>>;
   filter(
     predicate: (value: T, index: number) => boolean,
     thisArg?: any

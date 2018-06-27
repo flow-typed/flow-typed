@@ -14,3 +14,7 @@ bodyParser({ strict: true });
 // $ExpectError (Must use valid types for options)
 bodyParser({ formLimit: 56 });
 bodyParser({ formLimit: "56kb" });
+
+// Should work when requiring koa-bodyparser
+var requiredBodyParser = require('koa-bodyparser');
+requiredBodyParser();

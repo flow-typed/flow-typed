@@ -8,8 +8,10 @@ to existing libdefs.
 
 * [Contributing to the definitions repository](#contributing-to-the-definitions-repository)
 * [Writing libdefs tips](#writing-libdefs-tips)
+  * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
   * [Avoid `any` when possible](#avoid-any-when-possible)
+  * [Exporting modules](#exporting-modules)
   * [Always prefix global variables that aren't really meant to be global](#prefix-global-variables-that-arent-really-meant-to-be-global)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
@@ -32,20 +34,21 @@ The naming scheme of this directory must be formatted as
 `${packageName}_v${packageVersion}`. This convention is enforced by the
 library-definition test runner.
 
-#### 2) In this new directory, create another new directory called `flow_all/`.
+#### 2) In this new directory, create another new directory called `flow_v0.25.x-/`.
 
 ***We call this the "flow version directory".***
 
-This specifies that the definition you are contributing is compatible with all
-versions of Flow. If it is not, you can specify a version range with names like
-`flow_v0.22.x-` ("any version at or after v0.22.x") or
-`flow_-v0.22.x` ("any version at or before v0.22.x") or
-`flow_v0.22.x-v0.28.x` ("any version inclusively between v0.22.x and
+This specifies that the definition you are contributing is compatible with the
+version range of the directiry. You MUST specify a version range with names like
+`flow_v0.25.x-` ("any version at or after v0.22.x") or
+`flow_-v0.25.x` ("any version at or before v0.22.x") or
+`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.22.x and
 v0.28.x").
 
 If you aren't sure which versions of Flow your definition is compatible with,
-start with `flow_all` and the test runner (which we'll run in a later step) will
-tell us if there are problems in some versions of Flow.
+start with a very low version like `flow_v0.25.x-`, and the test runner
+(which we'll run in a later step) will tell us if there are problems in some
+versions of Flow.
 
 You may create multiple flow version directories to target different versions of
 Flow if necessary.
@@ -91,6 +94,10 @@ You know how to do it.
 
 ## Writing libdefs tips
 
+### Read flow docs
+
+There's a solid writeup in the [Flow docs](https://flow.org/en/docs/libdefs/creation/) about creating new library definitions. Give it a read!
+
 ### Don't import types from other libdefs
 
 You might think it would be possible to import types from other libdefs, much the same way you do in your own code:
@@ -104,9 +111,32 @@ declare module 'other-module' {
 
 ...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
 
-You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them, however.
+**But wait, I want my React types!**
 
-Currently it's not possible to safely import types from other libdefs when making your libdef. [Further discussion here](https://github.com/flowtype/flow-typed/issues/1857).
+Good news! You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them. You can also import types built into Flow *inside* the module declaration:
+
+```js
+declare module 'example' {
+  import type { Node } from 'react';
+}
+```
+
+**So why don't I do that for importing other libdefs?**
+
+Because it just don't work, sorry. You might think this is possible, but it isn't:
+
+```js
+declare module 'koa-router' {
+  import type { Middleware } from 'koa';
+}
+```
+
+To be super clear:
+
+1. You can't import types from other libdefs in flow-typed
+1. You can import types built into Flow (e.g. from `react`), only if you put the import statement inside the module declaration
+
+[Further discussion here](https://github.com/flowtype/flow-typed/issues/1857) and [here](https://github.com/flowtype/flow-typed/issues/2023).
 
 ### Avoid `any` when possible
 
@@ -173,6 +203,10 @@ getUser((user) => console.log('Got the user!'));
 ```
 
 Using `mixed` in place of `any` for the return type of a function or the type of a variable is a judgement call, though. Return types and declared variables flow into users' programs, which means that users will have to prove the type of `mixed` before they can use them.
+
+### Exporting modules
+
+When you export a module, you have a choice to use CommonJS or ES6 syntax. We generally recommend to use ES6 syntax. As [discussed here](https://github.com/flowtype/flow-typed/issues/1859#issuecomment-374575368), if you need both named exports and a default export, then you need to use the ES6 syntax.
 
 ### Prefix global variables that aren't really meant to be global
 

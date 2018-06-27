@@ -105,6 +105,7 @@ declare type $npm$redis$DelF = $npm$redis$DelWithArrayKeys
 
 declare module "redis" {
   declare class RedisClient extends events$EventEmitter mixins RedisClientPromisified {
+    connected: boolean,
     hmset: (
       key: string,
       map: {[key: string]: string},
@@ -253,6 +254,7 @@ declare module "redis" {
       source: string,
       destination: string
     ) => Promise<string> | Promise<void>;
+    flushallAsync: () => Promise<void>;
     publishAsync: (topic: string, value: any) => Promise<void>;
     subscribeAsync: (topic: string) => Promise<void>;
     unsubscribeAsync: (topic: string) => Promise<void>;
