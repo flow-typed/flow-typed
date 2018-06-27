@@ -62,6 +62,7 @@ const msg1:MessageDescriptor = messageDescriptorMap.messagekey1;
 const msg2:MessageDescriptor = messageDescriptorMap.messagekey2_foo;
 const msg3:MessageDescriptor = messageDescriptorMap.messagekey3;
 
+
 // Components
 <FormattedMessage
   id="test"
