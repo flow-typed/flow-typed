@@ -770,7 +770,7 @@ declare module "react-apollo" {
     refetchQueries?: string[] | PureQueryOptions[] | RefetchQueriesProviderFn,
     update?: MutationUpdaterFn<*>,
     errorPolicy?: ErrorPolicy,
-    $call?: empty // Not function
+    $Call?: empty // Not function
   };
 
   declare export type QueryOpts<TVariables> = {
@@ -780,7 +780,7 @@ declare module "react-apollo" {
     pollInterval?: number,
     skip?: boolean,
     errorPolicy?: ErrorPolicy,
-    $call?: empty // Not function
+    $Call?: empty // Not function
   };
 
   declare export interface GraphqlQueryControls<
