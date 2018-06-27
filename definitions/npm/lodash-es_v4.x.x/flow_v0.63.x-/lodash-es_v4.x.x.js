@@ -1368,7 +1368,6 @@ declare module "lodash-es" {
     source: Object,
     options?: { chain: boolean }
   ): T;
-  declare export function noConflict(): Lodash;
   declare export function noop(...args: Array<mixed>): void;
   declare export function nthArg(n?: ?number): Function;
   declare export function over(...iteratees: Array<Function>): Function;
