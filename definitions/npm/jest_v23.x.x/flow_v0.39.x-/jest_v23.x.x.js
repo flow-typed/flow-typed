@@ -1009,7 +1009,13 @@ declare var expect: {
   objectContaining(value: Object): Object,
   /** Matches any received string that contains the exact expected string. */
   stringContaining(value: string): string,
-  stringMatching(value: string | RegExp): string
+  stringMatching(value: string | RegExp): string,
+  not: {
+    arrayContaining: (value: $ReadOnlyArray<mixed>) => Array<mixed>,
+    objectContaining: (value: {}) => Object,
+    stringContaining: (value: string) => string,
+    stringMatching: (value: string | RegExp) => string,
+  },
 };
 
 // TODO handle return type

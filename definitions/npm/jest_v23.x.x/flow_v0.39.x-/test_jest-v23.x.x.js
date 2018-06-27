@@ -232,6 +232,11 @@ expect.objectContaining({
 expect.arrayContaining(["red", "blue"]);
 expect.stringMatching("*this part*");
 
+expect.not.arrayContaining(['red', 'blue']);
+expect.not.objectContaining({foo: 'bar'});
+expect.not.stringContaining('foobar');
+expect.not.stringMatching(/foobar/);
+
 test.concurrent("test", () => {});
 
 expect([1, 2, 3]).toHaveLength(3);
