@@ -299,6 +299,7 @@ type $npm$styledComponents$StyledComponentsNativeComponentList = {|
   ProgressViewIOS:              $npm$styledComponents$StyledComponentsNativeComponentListValue,
   RecyclerViewBackedScrollView: $npm$styledComponents$StyledComponentsNativeComponentListValue,
   RefreshControl:               $npm$styledComponents$StyledComponentsNativeComponentListValue,
+  SafeAreaView:                 $npm$styledComponents$StyledComponentsNativeComponentListValue,
   ScrollView:                   $npm$styledComponents$StyledComponentsNativeComponentListValue,
   SectionList:                  $npm$styledComponents$StyledComponentsNativeComponentListValue,
   SegmentedControlIOS:          $npm$styledComponents$StyledComponentsNativeComponentListValue,
