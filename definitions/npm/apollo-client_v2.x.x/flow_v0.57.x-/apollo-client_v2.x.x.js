@@ -299,6 +299,8 @@ declare module "apollo-client" {
     variables?: any;
   }
 
+  declare export type MutationOperation<T = Object> = (options: MutationBaseOptions<T>) => Promise<FetchResult<T>>
+
   declare export interface MutationOptions<T = { [key: string]: any }>
     extends MutationBaseOptions<T> {
     mutation: DocumentNode;
