@@ -9,10 +9,12 @@ import debounce from "lodash/debounce";
 import defaultTo from "lodash/defaultTo";
 import difference from "lodash/difference";
 import differenceBy from "lodash/differenceBy";
+import each from "lodash/each";
 import extend from "lodash/extend";
 import find from "lodash/find";
 import first from "lodash/first";
 import flatMap from "lodash/flatMap";
+import forEach from "lodash/forEach";
 import get from "lodash/get";
 import groupBy from "lodash/groupBy";
 import intersectionBy from "lodash/intersectionBy";
@@ -55,12 +57,23 @@ countBy(["one", "two", "three"], "length");
  * _.difference
  */
 difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>));
+difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>), (["a"]: $ReadOnlyArray<string>));
 
 /**
  * _.differenceBy
  */
-differenceBy([2.1, 1.2], [2.3, 3.4], Math.floor);
+differenceBy(([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4], Math.floor);
 differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], "x");
+
+/**
+ * _.differenceBy
+ */
+differenceBy(([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4], Math.floor);
+
+/**
+ * _.each
+ */
+each(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
 
 /**
  * _.find
@@ -102,6 +115,11 @@ find(users, ["active", false]);
 
 // The `_.property` iteratee shorthand.
 find(users, "active");
+
+/**
+ * _.forEach
+ */
+forEach(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
 
 /**
  * _.groupBy
@@ -146,6 +164,10 @@ get([1, 2, 3], "0");
 get(["foo", "bar", "baz"], "[1]");
 get([{ a: "foo" }, { b: "bar" }, { c: "baz" }], "2");
 get([[1, 2], [3, 4], [5, 6], [7, 8]], "3");
+
+// Nil - it is safe to perform on nil root values, just like nil values along the "get" path
+get(null, 'thing');
+get(undefined, 'data');
 
 // Second argument must be string when looking for array items by index
 // $ExpectError number This type is incompatible with union: ?array type | string

@@ -3,6 +3,7 @@
 import {
   AnonymousSubject,
   Observable,
+  Observer,
   Scheduler,
   Subject,
   Subscriber
@@ -34,11 +35,7 @@ const subscriber: Subscriber<number> = Subscriber.create(
 );
 const subscriber2: Subscriber<number> = new Subscriber(x => console.log(x));
 
-const numberObserver = {
-  next: (x: number) => null,
-  error: (e: Error) => null,
-  complete: () => null
-};
+const numberObserver: Observer<number> = new Observer();
 
 const anonymousSubject: AnonymousSubject<number> = new AnonymousSubject(
   numberObserver,

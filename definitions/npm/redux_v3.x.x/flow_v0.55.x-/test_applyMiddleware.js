@@ -5,7 +5,7 @@ import { applyMiddleware, createStore } from 'redux'
 type State = Array<number>;
 type Action = { type: 'A' };
 type Store = ReduxStore<State, Action>;
-const reducer = (state: State, action: Action): State => state
+const reducer = (state: State = [], action: Action): State => state
 
 //
 // applyMiddleware API

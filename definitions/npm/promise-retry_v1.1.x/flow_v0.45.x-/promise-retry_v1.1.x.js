@@ -1,4 +1,4 @@
-type RetryFn = (err: Error) => void;
+type RetryFn = (err?: Error) => void;
 type Options = {|
   retries?: number,
   factor?: number,
@@ -8,6 +8,8 @@ type Options = {|
 |};
 
 declare module 'promise-retry' {
+  declare export type RetryOptions = Options;
+
   declare module.exports: <T>(
     handler: (retry: RetryFn, retryNumber: Number) => Promise<T>,
     options?: Options

@@ -185,3 +185,11 @@ expect({ }).to.have.data('key', 1);
 expect({ }).to.have.prop('key', 1);
 expect({ }).to.have.state('key', 1);
 expect({ }).to.have.value('val');
+
+//chai-karma-snapshot
+expect('test').to.matchSnapshot();
+expect('<div></div>').to.matchSnapshot('html');
+expect('<div></div>').to.matchSnapshot('html', true);
+expect('<div></div>').to.matchSnapshot('html', true, 'Message');
+// $ExpectError
+expect('<div></div>').to.matchSnapshot('html', 'not_boolean', 'Message');

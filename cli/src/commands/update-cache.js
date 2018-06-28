@@ -1,43 +1,45 @@
 // @flow
 
-import {updateCacheRepo} from '../lib/libDefs';
-
-import type {Argv} from 'yargs';
 import typeof Yargs from 'yargs';
+import {
+  _setCustomCacheDir as setCustomCacheDir,
+  ensureCacheRepo,
+} from '../lib/cacheRepoUtils';
+import {path} from '../lib/node';
 
 export const name = 'update-cache';
 export const description = 'Update the flow-typed definitions cache';
 
+export type Args = {
+  cacheDir?: string,
+};
 export function setup(yargs: Yargs) {
   return yargs.usage(`$0 ${name} - ${description}`).options({
-    debug: {
-      describe: 'Enable verbose messages for the update procedure',
-      alias: 'd',
-      type: 'boolean',
+    cacheDir: {
+      alias: 'c',
+      describe:
+        'Directory (absolute or relative path, ~ is not supported) to store cache of libdefs',
+      type: 'string',
       demand: false,
     },
   });
 }
 
-export async function run(argv: Argv): Promise<number> {
+export async function run(args: Args): Promise<number> {
   try {
-    let verbose;
-
-    if (argv.debug) {
-      verbose = process.stdout;
+    if (args.cacheDir) {
+      const cacheDir = path.resolve(args.cacheDir);
+      console.log('• Setting cache dir', cacheDir);
+      setCustomCacheDir(cacheDir);
     }
 
     console.log('Updating flow-typed definitions...');
-    await updateCacheRepo(verbose);
+    await ensureCacheRepo();
 
     console.log('Definitions update successful!');
     return 0;
   } catch (e) {
     console.error(`Update failed: ${e.message}`);
-
-    if (argv.debug) {
-      console.error(e);
-    }
 
     return 1;
   }

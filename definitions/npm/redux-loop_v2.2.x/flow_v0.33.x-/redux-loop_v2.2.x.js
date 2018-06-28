@@ -1,5 +1,5 @@
 declare module "redux-loop" {
-  declare type Effect = $Subtype<{ @@isEffectSymbol: true }>
+  declare type Effect = $Subtype<{}>
 
   declare type Reducer<S, A> = (state: S, action: A) => (S | [S, Effect])
 

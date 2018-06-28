@@ -25,6 +25,10 @@ function test_createAction() {
     // $ExpectError
     assert(a.payload, (x: number) => {});
   }
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 function test_createAction_givenPayloadType() {
@@ -46,6 +50,10 @@ function test_createAction_givenPayloadType() {
 
   // $ExpectError
   assert(a2.meta, (x: string) => {});
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 function test_createAction_withPayloadCreator() {
@@ -68,6 +76,10 @@ function test_createAction_withPayloadCreator() {
 
   // $ExpectError
   assert(a.payload, (x: string) => {});
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 function test_createAction_withPayloadCreatorAndMeta() {
@@ -78,6 +90,10 @@ function test_createAction_withPayloadCreatorAndMeta() {
 
   // $ExpectError
   assert(a.meta, (x: string) => {});
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 function test_createAction_withMeta() {
@@ -88,6 +104,10 @@ function test_createAction_withMeta() {
 
   // $ExpectError
   assert(a.meta, (x: string) => {});
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 // Helper to assert that the type of the first argument is compatible with the

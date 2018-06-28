@@ -49,6 +49,11 @@ type JestMockFn = {
    */
   mockImplementationOnce(fn: Function): JestMockFn,
   /**
+   * Accepts a string to use in test result output in place of "jest.fn()" to
+   * indicate which mock function is being referenced.
+   */
+  mockName(name: string): JestMockFn,
+  /**
    * Just a simple sugar function for returning `this`
    */
   mockReturnThis(): void,
@@ -105,6 +110,12 @@ type JestPromiseType = {
    */
   resolves: JestExpectType
 };
+
+/**
+ * Jest allows functions and classes to be used as test names in test() and
+ * describe()
+ */
+type JestTestName = string | Function;
 
 /**
  *  Plugin: jest-enzyme
@@ -382,6 +393,13 @@ type JestObjectType = {
    * Executes only the macro task queue (i.e. all tasks queued by setTimeout()
    * or setInterval() and setImmediate()).
    */
+  advanceTimersByTime(msToRun: number): void,
+  /**
+   * Executes only the macro task queue (i.e. all tasks queued by setTimeout()
+   * or setInterval() and setImmediate()).
+   *
+   * Renamed to `advanceTimersByTime`.
+   */
   runTimersToTime(msToRun: number): void,
   /**
    * Executes only the macro-tasks that are currently pending (i.e., only the
@@ -441,17 +459,17 @@ declare var describe: {
   /**
    * Creates a block that groups together several related tests in one "test suite"
    */
-  (name: string, fn: Function): void,
+  (name: JestTestName, fn: Function): void,
 
   /**
    * Only run this describe block
    */
-  only(name: string, fn: Function): void,
+  only(name: JestTestName, fn: Function): void,
 
   /**
    * Skip running this describe block
    */
-  skip(name: string, fn: Function): void
+  skip(name: JestTestName, fn: Function): void
 };
 
 /** An individual test unit */
@@ -459,33 +477,33 @@ declare var it: {
   /**
    * An individual test unit
    *
-   * @param {string} Name of Test
+   * @param {JestTestName} Name of Test
    * @param {Function} Test
    */
-  (name: string, fn?: Function): ?Promise<void>,
+  (name: JestTestName, fn?: Function): ?Promise<void>,
   /**
    * Only run this test
    *
-   * @param {string} Name of Test
+   * @param {JestTestName} Name of Test
    * @param {Function} Test
    */
-  only(name: string, fn?: Function): ?Promise<void>,
+  only(name: JestTestName, fn?: Function): ?Promise<void>,
   /**
    * Skip running this test
    *
-   * @param {string} Name of Test
+   * @param {JestTestName} Name of Test
    * @param {Function} Test
    */
-  skip(name: string, fn?: Function): ?Promise<void>,
+  skip(name: JestTestName, fn?: Function): ?Promise<void>,
   /**
    * Run the test concurrently
    *
-   * @param {string} Name of Test
+   * @param {JestTestName} Name of Test
    * @param {Function} Test
    */
-  concurrent(name: string, fn?: Function): ?Promise<void>
+  concurrent(name: JestTestName, fn?: Function): ?Promise<void>
 };
-declare function fit(name: string, fn: Function): ?Promise<void>;
+declare function fit(name: JestTestName, fn: Function): ?Promise<void>;
 /** An individual test unit */
 declare var test: typeof it;
 /** A disabled group of tests */

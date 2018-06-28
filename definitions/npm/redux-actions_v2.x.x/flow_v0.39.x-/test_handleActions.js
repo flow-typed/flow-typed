@@ -5,24 +5,32 @@ import type { ActionType, Reducer } from "redux-actions";
 
 const INCREMENT = "INCREMENT";
 const INCREMENT2 = "INCREMENT2";
-const NOT_INCREMENT = "NOT_INCREMENT";
 
 const increment = createAction(INCREMENT, (x: number) => x);
 const increment2 = createAction(INCREMENT2, (x: number, y: string) => x);
+const decrement = createAction("DECREMENT", (x: number) => x);
 
-const initState: { count: number } = { count: 0 };
+type StateType = { count: number };
+const initState: StateType = { count: 0 };
 
 function test_handleActions() {
   handleActions(
     {
-      [INCREMENT]: (state, action: ActionType<typeof increment>) => {
+      [INCREMENT]: (state: StateType, action: ActionType<typeof increment>): StateType => {
         return { count: state.count + 1 };
       },
-      [String(increment2)]: (state, action: ActionType<typeof increment2>) => {
+
+      [String(increment2)]: (state: StateType, action: ActionType<typeof increment2>): StateType => {
         assert(action.payload, (x: number) => {});
         return {
           count: state.count + action.payload
         };
+      },
+
+      [decrement.toString()]: (state: StateType, action: ActionType<typeof decrement>): StateType => {
+        assert(action.payload, (x: number) => {});
+        const decrementCount: number = action.payload;
+        return { count: state.count - decrementCount };
       },
 
       INFERS_STATE_TYPE: (state, action) => {

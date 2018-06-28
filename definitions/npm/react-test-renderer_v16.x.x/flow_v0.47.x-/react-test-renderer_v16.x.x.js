@@ -57,3 +57,14 @@ declare module "react-test-renderer" {
     options?: TestRendererOptions
   ): ReactTestRenderer;
 }
+
+declare module "react-test-renderer/shallow" {
+  declare export default class ShallowRenderer {
+    static createRenderer(): ShallowRenderer;
+    getMountedInstance(): ReactTestInstance;
+    getRenderOutput<E: React$Element<any>>(): E;
+    getRenderOutput(): React$Element<any>;
+    render(element: React$Element<any>, context?: any): void;
+    unmount(): void;
+  }
+}

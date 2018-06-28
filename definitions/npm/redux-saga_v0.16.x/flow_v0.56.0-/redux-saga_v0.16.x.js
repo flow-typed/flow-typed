@@ -287,7 +287,7 @@ declare module "redux-saga" {
     +CANCEL: T
   };
 
-  declare export type SelectEffect<Fn: Function, Args: $ReadOnlyArray<*>> = {
+  declare export type SelectEffect<Fn: Function | void, Args: $ReadOnlyArray<*>> = {
     +"@@redux-saga/IO": true,
     +SELECT: {
       +selector: Fn,
@@ -391,7 +391,11 @@ declare module "redux-saga/effects" {
 
   declare export var put: {
     <A: Object>(action: A): PutEffect<A, null>,
-    <A: Object>(channel: Channel, action: A): PutEffect<A, Channel>
+    <A: Object>(channel: Channel, action: A): PutEffect<A, Channel>,
+    resolve: {
+      <A: Object>(action: A): PutEffect<A, null>,
+      <A: Object>(channel: Channel, action: A): PutEffect<A, Channel>,
+    }
   };
 
   declare export var call: {
@@ -974,6 +978,7 @@ declare module "redux-saga/effects" {
   };
 
   declare export var select: {
+    (): SelectEffect<void, []>,
     <S, R, Fn: (state: S) => R>(fn: Fn): SelectEffect<Fn, []>,
     <S, R, T1, Fn: (state: S, t1: T1) => R>(
       fn: Fn,

@@ -10,7 +10,7 @@ import {getDiff} from '../lib/git';
 
 import got from 'got';
 import * as semver from 'semver';
-import * as unzip from 'unzip';
+import * as unzip from 'unzipper';
 import typeof Yargs from 'yargs';
 import type {FlowVersion} from '../lib/flowVersion.js';
 
@@ -95,164 +95,175 @@ let _flowBinVersionPromise = null;
 async function getOrderedFlowBinVersions(
   numberOfReleases: number = 15,
 ): Promise<Array<string>> {
-  if (_flowBinVersionPromise === null) {
-    _flowBinVersionPromise = (async function() {
-      console.log('Fetching all Flow binaries...');
-      const IS_WINDOWS = os.type() === 'Windows_NT';
-      const FLOW_BIN_VERSION_ORDER = [];
-      const GH_CLIENT = gitHubClient();
-      // We only test against the latest numberOfReleases Versions
-      const QUERY_PAGE_SIZE = numberOfReleases;
-      const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
+  if (_flowBinVersionPromise !== null) {
+    return _flowBinVersionPromise;
+  }
+  return (_flowBinVersionPromise = (async function() {
+    console.log('Fetching all Flow binaries...');
+    const IS_WINDOWS = os.type() === 'Windows_NT';
+    const GH_CLIENT = gitHubClient();
+    // We only test against the latest numberOfReleases Versions
+    const QUERY_PAGE_SIZE = numberOfReleases;
+    const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
 
-      let binURLs = new Map();
-      let apiPayload = null;
-      let page = 0;
-      while (
-        apiPayload === null /* || apiPayload.length === QUERY_PAGE_SIZE*/
-      ) {
-        apiPayload = await new Promise((res, rej) => {
-          GH_CLIENT.releases.listReleases(
-            {
-              owner: 'facebook',
-              repo: 'flow',
-              page: page++,
-              per_page: QUERY_PAGE_SIZE,
-            },
-            (err, result) => {
-              if (err) {
-                rej(err);
-              } else {
-                res(result);
-              }
-            },
+    let page = 0;
+    const apiPayload = await GH_CLIENT.repos.getReleases({
+      owner: 'facebook',
+      repo: 'flow',
+      page: page++,
+      per_page: QUERY_PAGE_SIZE,
+    });
+
+    const flowBins = apiPayload.data
+      .filter(rel => {
+        // Temporary fix for https://github.com/facebook/flow/issues/5922
+        if (rel.tag_name === 'v0.67.0') {
+          console.log(
+            '==========================================================================================',
           );
-        });
+          console.log(
+            'We are tempoarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
+          );
+          console.log(
+            '==========================================================================================',
+          );
+          return false;
+        }
 
-        apiPayload.forEach(rel => {
-          // We only test against versions since 0.15.0 because it has proper
-          // [ignore] fixes (which are necessary to run tests)
-          // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
-          if (semver.lt(rel.tag_name, IS_WINDOWS ? '0.30.0' : '0.15.0')) {
-            return;
-          }
-          // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
-          if (
-            IS_WINDOWS &&
-            (semver.eq(rel.tag_name, '0.57.0') ||
-              semver.eq(rel.tag_name, '0.57.1') ||
-              semver.eq(rel.tag_name, '0.57.2'))
-          ) {
-            return;
-          }
+        // Temporary fix for https://github.com/flowtype/flow-typed/issues/2422
+        if (rel.tag_name === 'v0.63.0') {
+          console.log(
+            '==========================================================================================',
+          );
+          console.log(
+            'We are tempoarily skipping v0.63.0 due to https://github.com/flowtype/flow-typed/issues/2422',
+          );
+          console.log(
+            '==========================================================================================',
+          );
+          return false;
+        }
 
-          // Find the binary zip in the list of assets
-          const binZip = rel.assets
-            .filter(({name}) => {
-              return OS_ARCH_FILTER_RE.test(name) && !/-latest.zip$/.test(name);
-            })
-            .map(asset => asset.browser_download_url);
+        // We only test against versions since 0.15.0 because it has proper
+        // [ignore] fixes (which are necessary to run tests)
+        // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
+        if (semver.lt(rel.tag_name, IS_WINDOWS ? '0.30.0' : '0.15.0')) {
+          return false;
+        }
 
-          if (binZip.length !== 1) {
-            throw new Error(
-              'Unexpected number of ' +
-                BIN_PLATFORM +
-                ' assets for flow-' +
-                rel.tag_name +
-                '! ' +
-                JSON.stringify(binZip),
-            );
-          } else {
-            const version =
-              rel.tag_name[0] === 'v' ? rel.tag_name : 'v' + rel.tag_name;
+        // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
+        if (
+          IS_WINDOWS &&
+          (semver.eq(rel.tag_name, '0.57.0') ||
+            semver.eq(rel.tag_name, '0.57.1') ||
+            semver.eq(rel.tag_name, '0.57.2'))
+        ) {
+          return false;
+        }
+        return true;
+      })
+      .map(rel => {
+        // Find the binary zip in the list of assets
+        const binZip = rel.assets
+          .filter(({name}) => {
+            return OS_ARCH_FILTER_RE.test(name) && !/-latest.zip$/.test(name);
+          })
+          .map(asset => asset.browser_download_url);
 
-            FLOW_BIN_VERSION_ORDER.push(version);
-            binURLs.set(version, binZip[0]);
-          }
-        });
-      }
-
-      FLOW_BIN_VERSION_ORDER.sort((a, b) => {
-        return semver.lt(a, b) ? -1 : 1;
+        if (binZip.length !== 1) {
+          throw new Error(
+            'Unexpected number of ' +
+              BIN_PLATFORM +
+              ' assets for flow-' +
+              rel.tag_name +
+              '! ' +
+              JSON.stringify(binZip),
+          );
+        } else {
+          const version =
+            rel.tag_name[0] === 'v' ? rel.tag_name : 'v' + rel.tag_name;
+          return {version, binURL: binZip[0]};
+        }
+      })
+      .sort((a, b) => {
+        return semver.lt(a.version, b.version) ? -1 : 1;
       });
 
-      await P.all(
-        Array.from(binURLs).map(async ([version, binURL]) => {
-          const zipPath = path.join(BIN_DIR, 'flow-' + version + '.zip');
-          const binPath = path.join(
-            BIN_DIR,
-            'flow-' + version + (IS_WINDOWS ? '.exe' : ''),
+    await P.all(
+      flowBins.map(async ({version, binURL}) => {
+        const zipPath = path.join(BIN_DIR, 'flow-' + version + '.zip');
+        const binPath = path.join(
+          BIN_DIR,
+          'flow-' + version + (IS_WINDOWS ? '.exe' : ''),
+        );
+
+        if (await fs.exists(binPath)) {
+          return;
+        }
+
+        // Download the zip file
+        await new Promise((res, rej) => {
+          console.log('  Fetching flow-%s...', version);
+          got
+            .stream(binURL, {
+              headers: {
+                'User-Agent':
+                  'flow-typed Test Runner ' +
+                  '(github.com/flowtype/flow-typed)',
+              },
+            })
+            .on('error', err => rej(err))
+            .pipe(
+              fs.createWriteStream(zipPath).on('close', () => {
+                console.log('    flow-%s finished downloading.', version);
+                res();
+              }),
+            );
+        });
+
+        // Extract the flow binary
+        const flowBinDirPath = path.join(BIN_DIR, 'TMP-flow-' + version);
+        await fs.mkdir(flowBinDirPath);
+        console.log('  Extracting flow-%s...', version);
+        await new Promise((res, rej) => {
+          const unzipExtractor = unzip.Extract({path: flowBinDirPath});
+          unzipExtractor.on('error', function(err) {
+            rej(err);
+          });
+          unzipExtractor.on('close', function() {
+            res();
+          });
+          fs.createReadStream(zipPath).pipe(unzipExtractor);
+        });
+        if (IS_WINDOWS) {
+          await fs.rename(
+            path.join(flowBinDirPath, 'flow', 'flow.exe'),
+            path.join(BIN_DIR, 'flow-' + version + '.exe'),
+          );
+        } else {
+          await fs.rename(
+            path.join(flowBinDirPath, 'flow', 'flow'),
+            path.join(BIN_DIR, 'flow-' + version),
           );
 
-          if (await fs.exists(binPath)) {
-            return;
-          }
+          await child_process.execP(
+            ['chmod', '755', path.join(BIN_DIR, 'flow-' + version)].join(' '),
+          );
+        }
 
-          // Download the zip file
-          await new Promise((res, rej) => {
-            console.log('  Fetching flow-%s...', version);
-            got
-              .stream(binURL, {
-                headers: {
-                  'User-Agent':
-                    'flow-typed Test Runner ' +
-                    '(github.com/flowtype/flow-typed)',
-                },
-              })
-              .on('error', err => rej(err))
-              .pipe(
-                fs.createWriteStream(zipPath).on('close', () => {
-                  console.log('    flow-%s finished downloading.', version);
-                  res();
-                }),
-              );
-          });
+        console.log('  Removing flow-%s artifacts...', version);
+        await P.all([recursiveRmdir(flowBinDirPath), fs.unlink(zipPath)]);
+        console.log('    flow-%s complete!', version);
+      }),
+    );
 
-          // Extract the flow binary
-          const flowBinDirPath = path.join(BIN_DIR, 'TMP-flow-' + version);
-          await fs.mkdir(flowBinDirPath);
-          console.log('  Extracting flow-%s...', version);
-          await new Promise((res, rej) => {
-            const unzipExtractor = unzip.Extract({path: flowBinDirPath});
-            unzipExtractor.on('error', function(err) {
-              rej(err);
-            });
-            unzipExtractor.on('close', function() {
-              res();
-            });
-            fs.createReadStream(zipPath).pipe(unzipExtractor);
-          });
-          if (IS_WINDOWS) {
-            await fs.rename(
-              path.join(flowBinDirPath, 'flow', 'flow.exe'),
-              path.join(BIN_DIR, 'flow-' + version + '.exe'),
-            );
-          } else {
-            await fs.rename(
-              path.join(flowBinDirPath, 'flow', 'flow'),
-              path.join(BIN_DIR, 'flow-' + version),
-            );
+    console.log('Finished fetching Flow binaries.\n');
 
-            await child_process.execP(
-              ['chmod', '755', path.join(BIN_DIR, 'flow-' + version)].join(' '),
-            );
-          }
-
-          console.log('  Removing flow-%s artifacts...', version);
-          await P.all([recursiveRmdir(flowBinDirPath), fs.unlink(zipPath)]);
-          console.log('    flow-%s complete!', version);
-        }),
-      );
-
-      console.log('Finished fetching Flow binaries.\n');
-
-      return FLOW_BIN_VERSION_ORDER;
-    })();
-  }
-  return _flowBinVersionPromise;
+    return flowBins.map(bin => bin.version);
+  })());
 }
 
-const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+$/;
+const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+(\.exe)?$/;
 /**
  * flow filename should be `flow-vx.x.x`
  * @param {string} name
@@ -286,11 +297,18 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(testDirPath, libDefPath, includeWarnings) {
+async function writeFlowConfig(
+  repoDirPath,
+  testDirPath,
+  libDefPath,
+  includeWarnings,
+) {
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
+
   const flowConfigData = [
     '[libs]',
     path.basename(libDefPath),
+    path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
@@ -407,6 +425,7 @@ async function testLowestCapableFlowVersion(
 }
 
 async function findLowestCapableFlowVersion(
+  repoDirPath,
   orderedFlowVersions,
   lowestFlowVersionRan,
   testDirPath,
@@ -422,13 +441,13 @@ async function findLowestCapableFlowVersion(
   const higherLowVersions = lowerFlowVersionsToRun.filter(flowVer =>
     semver.gte(flowVer, '0.53.0'),
   );
-  await writeFlowConfig(testDirPath, libDefPath, true);
+  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, true);
   const lowestOfHigherVersions = await testLowestCapableFlowVersion(
     higherLowVersions,
     testDirPath,
     lowestFlowVersionRan,
   );
-  await writeFlowConfig(testDirPath, libDefPath, false);
+  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, false);
   return await testLowestCapableFlowVersion(
     lowerLowVersions,
     testDirPath,
@@ -453,10 +472,11 @@ async function removeTrashFromBinDir() {
  * directory.
  */
 async function runTestGroup(
+  repoDirPath: string,
   testGroup: TestGroup,
-  numberOfFlowVersions: number = 15,
-  errors = [],
+  orderedFlowVersions: Array<string>,
 ): Promise<Array<string>> {
+  const errors = [];
   // Some older versions of Flow choke on ">"/"<"/"="
   const testDirName = testGroup.id
     .replace(/\//g, '--')
@@ -472,17 +492,8 @@ async function runTestGroup(
     );
   }
 
-  if (!await fs.exists(BIN_DIR)) {
+  if (!(await fs.exists(BIN_DIR))) {
     await fs.mkdir(BIN_DIR);
-  }
-
-  //Prepare bin folder to collect flow instances
-  await removeTrashFromBinDir();
-  let orderedFlowVersions;
-  try {
-    orderedFlowVersions = await getOrderedFlowBinVersions(numberOfFlowVersions);
-  } catch (e) {
-    orderedFlowVersions = await getCachedFlowBinVersions(numberOfFlowVersions);
   }
 
   try {
@@ -493,6 +504,7 @@ async function runTestGroup(
       testDirPath,
       path.basename(testGroup.libDefPath),
     );
+    const copiedFileNames = new Set();
     await P.all([
       P.all(
         testGroup.testFilePaths.map(async (filePath, idx) => {
@@ -501,7 +513,13 @@ async function runTestGroup(
           //
           // i.e. underscore/v1.x.x/test-underscore.js
           //      underscore/v1.x.x/flow-v0.22.x/test-underscore.js
-          const destBasename = idx + '-' + path.basename(filePath);
+          //
+          // Only mangles the name when there's a naming collision. Otherwise, uses the original.
+          const fileName = path.basename(filePath);
+          const destBasename = copiedFileNames.has(fileName)
+            ? `${idx}-${fileName}`
+            : fileName;
+          copiedFileNames.add(destBasename);
           await copyFile(filePath, path.join(testDirPath, destBasename));
         }),
       ),
@@ -528,14 +546,19 @@ async function runTestGroup(
       semver.gte(flowVer, '0.53.0'),
     );
 
-    await writeFlowConfig(testDirPath, testGroup.libDefPath, false);
+    await writeFlowConfig(
+      repoDirPath,
+      testDirPath,
+      testGroup.libDefPath,
+      false,
+    );
     const lowerVersionErrors = await runFlowTypeDefTests(
       lowerVersions,
       testGroup.id,
       testDirPath,
     );
 
-    await writeFlowConfig(testDirPath, testGroup.libDefPath, true);
+    await writeFlowConfig(repoDirPath, testDirPath, testGroup.libDefPath, true);
     const higherVersionErrors = await runFlowTypeDefTests(
       higherVersions,
       testGroup.id,
@@ -544,6 +567,7 @@ async function runTestGroup(
 
     errors.push(...higherVersionErrors, ...lowerVersionErrors);
     const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
+      repoDirPath,
       orderedFlowVersions,
       lowestFlowVersionRan,
       testDirPath,
@@ -599,9 +623,23 @@ async function runTests(
     const results = new Map();
     while (testGroups.length > 0) {
       const testGroup = testGroups.shift();
+      //Prepare bin folder to collect flow instances
+      await removeTrashFromBinDir();
+      let orderedFlowVersions;
+      try {
+        orderedFlowVersions = await getOrderedFlowBinVersions(
+          numberOfFlowVersions,
+        );
+      } catch (e) {
+        orderedFlowVersions = await getCachedFlowBinVersions(
+          numberOfFlowVersions,
+        );
+      }
+
       const testGroupErrors = await runTestGroup(
+        repoDirPath,
         testGroup,
-        numberOfFlowVersions,
+        orderedFlowVersions,
       );
       if (testGroupErrors.length > 0) {
         const errors = results.get(testGroup.id) || [];

@@ -83,6 +83,11 @@ var identityIsString: string = _.identity('foo');
 // $ExpectError
 var identityIsNotString: string = _.identity(42);
 
+var timesString: Array<string> = _.times(3, (i) => `str${i}`);
+var timesNumber: Array<number> = _.times(3, (i) => i + 1);
+// $ExpectError
+var timesNumberError: Array<string> = _.times(3, (i) => i + 1);
+
 var toArrayString: Array<string> = _.toArray({foo: 'bar', baz: 'qux'});
 var toArrayNumber: Array<number> = _.toArray({foo: 4, bar: 2});
 // $ExpectError

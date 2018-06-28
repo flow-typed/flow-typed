@@ -76,7 +76,7 @@ working with this repository. The full list of commands is available at
 
 Installs libdefs from looking at your package.json.
 
-If `package-specification` was specified, only that one libdef will be installed.  
+If `package-specification` was specified, only that one libdef will be installed.
 If the `--ignoreDeps` flag was specified, the libdefs for the specified deps will be ignored. i.e: `--ignoreDeps dev bundle peer`.
 
 ```bash
@@ -107,3 +107,9 @@ on your local filesystem. Usually, the cache will automatically be updated after
 a short grace period during a libdef installation, but sometimes it is useful to
 do this update manually. Use this command if you want to download the most
 recent definitions into the cache for yourself.
+
+## Active Maintenance Team
+
+[![Andrew Smith](https://github.com/andrewsouthpaw.png?size=100)](https://github.com/andrewsouthpaw) | [![Georges-Antoine Assi](https://github.com/gantoine.png?size=100)](https://github.com/gantoine) | [![Ville Saukkonen](https://github.com/villesau.png?size=100)](https://github.com/villesau)
+:---:|:---:|:---:
+[@AndrewSouthpaw](https://github.com/andrewsouthpaw) | [@GAntoine](https://github.com/gantoine) | [@villesau](https://github.com/villesau)

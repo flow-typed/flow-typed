@@ -34,6 +34,7 @@ import toPairs from "lodash/toPairs";
 import toPairsIn from "lodash/toPairsIn";
 import unionBy from "lodash/unionBy";
 import uniqBy from "lodash/uniqBy";
+import unzip from "lodash/unzip";
 import xorBy from "lodash/xorBy";
 import zip from "lodash/zip";
 import zipWith from "lodash/zipWith";
@@ -311,6 +312,17 @@ zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
 zipWith(["a", "b", "c"], [1, 2, 3], (str, num) => ({ [str]: num }));
 // $ExpectError `x` should be a `string`, `y` a `number`
 zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
+
+/**
+ * _.unzip
+ */
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[0].map(x => x * 10);
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[1].map(x => x.toUpperCase());
+// $ExpectError
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[0].map(x => x.toUpperCase());
+// $ExpectError
+unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[1].map(x => x * 10);
+unzip(([[1, "a", 1], [2, "b", 2]]: Array<[number, string, number]>))[2].map(x => x * 10);
 
 /**
  * _.isString

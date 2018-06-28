@@ -5,7 +5,7 @@ import { createStore } from 'redux'
 type State = Array<number>;
 type Action = { type: 'A' };
 type Store = ReduxStore<State, Action>;
-const reducer = (state: State, action: Action): State => state
+const reducer = (state: State = [], action: Action): State => state
 
 //
 // createStore API
@@ -24,6 +24,7 @@ const store6: Store = createStore(reducer, [1]);
 const store7: Store = createStore(reducer, [1], 'wrong'); // wrong enhancer
 declare var myEnhancer: StoreEnhancer<State, Action>;
 const store8: Store = createStore(reducer, [1], myEnhancer);
+const store9: Store = createStore(reducer, undefined, myEnhancer);
 
 //
 // store members

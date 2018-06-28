@@ -61,7 +61,7 @@ declare module "backbone" {
     [optionName: string]: mixed
   };
 
-  declare class Model {
+  declare class Model extends Events {
     static extend<P, CP>(
       instanceProperies: P,
       classProperties?: CP
@@ -121,7 +121,7 @@ declare module "backbone" {
   /**
    * Collection Class - http://backbonejs.org/#Collection
    */
-  declare class Collection<TModel> {
+  declare class Collection<TModel> extends Events {
     static extend<P, CP>(
       instanceProperies: P,
       classProperties?: CP
@@ -197,7 +197,7 @@ declare module "backbone" {
   /**
    * Router Class http://backbonejs.org/#Router
    */
-  declare class Router {
+  declare class Router extends Events {
     static extend<P, CP>(
       instanceProperies: P,
       classProperties?: CP
@@ -222,7 +222,7 @@ declare module "backbone" {
   /**
    * History - http://backbonejs.org/#History
    */
-  declare class History {
+  declare class History extends Events {
     static extend<P, CP>(
       instanceProperies: P,
       classProperties?: CP
@@ -268,13 +268,13 @@ declare module "backbone" {
   declare type EventsHash = {
     [event: string]: string | Function
   };
-  declare class View {
+  declare class View extends Events {
     static extend<P, CP>(
       instanceProperies: P,
       classProperties?: CP
     ): Class<View & P> & CP;
-    constructor(): this;
-    initialize(options?: Object): this;
+    constructor(options?: Object): void;
+    initialize(options?: Object): void;
     el: HTMLElement | string;
     $el: any;
     setElement(el: HTMLElement): this;
@@ -291,7 +291,7 @@ declare module "backbone" {
   /**
    * Declaring the export for backbone as well.
    */
-  declare class Backbone {
+  declare class Backbone extends Events {
     Events: typeof Events;
     Model: typeof Model;
     Collection: typeof Collection;
