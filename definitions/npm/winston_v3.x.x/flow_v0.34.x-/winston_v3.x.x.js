@@ -81,7 +81,8 @@ declare class $winstonContainer<T> {
 }
 
 declare module "winston" {
-  declare module.exports: $winstonDefaultLogger & {
+  declare module.exports: {
+    ...$winstonDefaultLogger,
     format: $winstonFormatSubModule,
     transports: {
       Console: typeof $winstonConsoleTransport,
