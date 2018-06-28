@@ -102,9 +102,9 @@ declare type coordinateTypes = {
 declare type elementActions = {};
 
 declare module "detox" {
-    declare function cleanup(): void;
-    declare function beforeEach(): void;
-    declare function afterEach(): void;
+    declare function cleanup(): Promise<void>;
+    declare function beforeEach(): Promise<void>;
+    declare function afterEach(): Promise<void>;
 
     declare type value = string;
     declare type inputString = (value) => Matcher;
@@ -138,14 +138,14 @@ declare module "detox" {
     }
 
     declare class ExpectElement {
-        toBeNotVisible(): void;
-        toBeVisible(): void;
-        toExist(): void;
-        toHaveId(id: string): void;
-        toHaveLabel(label: string): void;
-        toHaveText(text: string): void;
-        toHaveValue(value: "0" | "1"): void;
-        toNotExist(): void;
+        toBeNotVisible(): Promise<void>;
+        toBeVisible(): Promise<void>;
+        toExist(): Promise<void>;
+        toHaveId(id: string): Promise<void>;
+        toHaveLabel(label: string): Promise<void>;
+        toHaveText(text: string): Promise<void>;
+        toHaveValue(value: "0" | "1"): Promise<void>;
+        toNotExist(): Promise<void>;
     }
 
     declare class WaitForInteraction {
@@ -153,7 +153,7 @@ declare module "detox" {
         withTimeout(timeout: number): WaitForInteraction;
     }
     declare class WaitForActionInteraction {
-        scroll(amount: number, direction: directionTypes): void;
+        scroll(amount: number, direction: directionTypes): Promise<void>;
     }
 
     declare class WaitForElement {
