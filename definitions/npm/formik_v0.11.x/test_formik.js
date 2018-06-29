@@ -125,6 +125,32 @@ describe("formik", () => {
     });
   });
 
+  it("respects the user specifying more specific initialValues", () => {
+      type FormValues = {
+        requestState: "loading" | "ready",
+      }
+      const initialValues: FormValues = {requestState: "loading"}
+      const rendered = <Formik
+        initialValues={initialValues}
+        onSubmit={values => {}}
+        render={({
+          setFieldValue,
+        }) => {
+          return (
+            <form>
+              <button onClick={() => {
+                setFieldValue("requestState", "ready")
+                // $ExpectError setFieldValue value must be "loading" or "ready"
+                setFieldValue("requestState", "asfuohasfuoh")
+              }}>
+                Submit
+              </button>
+            </form>
+          );
+        }}
+      />;
+  })
+
   describe("FormikActions", () => {
     describe("setStatus", () => {
       it("passes when using setStatus properly", () => {
