@@ -2,7 +2,7 @@ declare module "formik" {
   import type { ComponentType } from "react";
 
   declare export type FormikErrors<Values> = {
-    [field: $Keys<Values>]: string
+    [field: $Keys<Values>]: ?string
   };
 
   declare export type FormikTouched<Values> = {
