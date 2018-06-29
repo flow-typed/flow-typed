@@ -35,18 +35,11 @@ declare module "formik" {
       value: any,
       shouldValidate?: boolean
     ): void;
-    setFieldValue(field: string, value: any, shouldValidate?: boolean): void;
     /** Set error message of a form field directly */
     setFieldError(field: $Keys<Values>, message: string): void;
-    setFieldError(field: string, message: string): void;
     /** Set whether field has been touched directly */
     setFieldTouched(
       field: $Keys<Values>,
-      isTouched?: boolean,
-      shouldValidate?: boolean
-    ): void;
-    setFieldTouched(
-      field: string,
       isTouched?: boolean,
       shouldValidate?: boolean
     ): void;

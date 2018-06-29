@@ -189,6 +189,7 @@ describe("formik", () => {
         const testFunc = (actions: FormikActions<Values>) => {
           actions.setFieldValue("text", "Value");
           actions.setFieldValue("text", "Value", true);
+          // $ExpectError 'other' is not a key in values
           actions.setFieldValue("other", "Value");
         };
       });
@@ -205,6 +206,7 @@ describe("formik", () => {
       it("passes when used properly", () => {
         const testFunc = (actions: FormikActions<Values>) => {
           actions.setFieldError("text", "Error");
+          // $ExpectError 'other' is not a key in values
           actions.setFieldError("other", "Error");
         };
       });
@@ -221,6 +223,7 @@ describe("formik", () => {
       it("passes when used properly", () => {
         const testFunc = (actions: FormikActions<Values>) => {
           actions.setFieldTouched("text", true);
+          // $ExpectError 'other' is not a key in values
           actions.setFieldTouched("other", true);
         };
       });
