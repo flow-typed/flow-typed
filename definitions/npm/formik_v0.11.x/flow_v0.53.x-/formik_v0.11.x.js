@@ -30,9 +30,13 @@ declare module "formik" {
     /** Manually set values object  */
     setValues(values: Values): void;
     /** Set value of form field directly */
-    setFieldValue(
-      field: $Keys<Values>,
-      value: any,
+    setFieldValue<FieldName: $Keys<Values>>(
+      field: FieldName,
+      // I don't understand why we have to wrap this with $Call. I feel
+      // like we should just be able to do
+      // value: $ElementType<Values, FieldName>. But apparently this
+      // doesn't work.
+      value: $Call<() => $ElementType<Values, FieldName>>,
       shouldValidate?: boolean
     ): void;
     /** Set error message of a form field directly */
@@ -70,7 +74,7 @@ declare module "formik" {
     enableReinitialize?: boolean
   };
 
-  declare export type FormikConfig<Values: {}> = FormikSharedConfig & {
+  declare export type FormikConfig<Values: Object> = FormikSharedConfig & {
     /**
      * Initial values of the form
      */
@@ -163,7 +167,7 @@ declare module "formik" {
     FormikComputedProps<Values>;
 
   declare export class Formik<
-    Values: {},
+    Values: Object,
     Props: FormikConfig<Values>,
 
   > extends React$Component<Props> {}

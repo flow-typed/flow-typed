@@ -100,6 +100,29 @@ describe("formik", () => {
         }}
       />;
     });
+
+    it("raises error when trying to update fields with values of the wrong type", () => {
+      <Formik
+        initialValues={{ text: "text" }}
+        onSubmit={(values) => {}}
+        render={({
+          values,
+          setFieldValue,
+        }) => {
+          return (
+            <form>
+              <button onClick={() => {
+                setFieldValue("text", "new value")
+                // $ExpectError setFieldValue must be type string
+                setFieldValue("text", 3)
+              }}>
+                Submit
+              </button>
+            </form>
+          );
+        }}
+      />;
+    });
   });
 
   describe("FormikActions", () => {
