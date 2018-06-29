@@ -16,7 +16,7 @@ describe("formik", () => {
     it("passes when used properly", () => {
       <Formik
         initialValues={{ text: "text" }}
-        validate={(values: Values) => {
+        validate={(values) => {
           const errors = {};
           if (!values.text) {
             errors.text = "Text Required";
@@ -24,8 +24,8 @@ describe("formik", () => {
           return errors;
         }}
         onSubmit={(
-          values: Values,
-          { setSubmitting, setFieldError }: FormikActions<Values>
+          values,
+          { setSubmitting, setFieldError }
         ) => {
           setFieldError("text", "Text is Required!");
           setSubmitting(false);
@@ -38,7 +38,7 @@ describe("formik", () => {
           handleBlur,
           handleSubmit,
           isSubmitting
-        }: FormikProps<Values>) => {
+        }) => {
           return (
             <form onSubmit={handleSubmit}>
               <input
@@ -63,14 +63,14 @@ describe("formik", () => {
     it("raises error when trying to access values not in Values", () => {
       <Formik
         initialValues={{ text: "text" }}
-        validate={(values: Values) => {
+        validate={(values) => {
           const errors = {};
           if (!values.text) {
             errors.text = "Text Required";
           }
           return errors;
         }}
-        onSubmit={(values: Values) => {}}
+        onSubmit={(values) => {}}
         render={({
           values,
           errors,
@@ -79,7 +79,7 @@ describe("formik", () => {
           handleBlur,
           handleSubmit,
           isSubmitting
-        }: FormikProps<Values>) => {
+        }) => {
           return (
             <form onSubmit={handleSubmit}>
               <input

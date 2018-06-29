@@ -77,26 +77,26 @@ declare module "formik" {
     enableReinitialize?: boolean
   };
 
-  declare export type FormikConfig = FormikSharedConfig & {
+  declare export type FormikConfig<Values: {}> = FormikSharedConfig & {
     /**
      * Initial values of the form
      */
-    initialValues?: {},
+    initialValues?: Values,
 
     /**
      * Submission handler
      */
-    onSubmit: (values: Object, formikActions: FormikActions<any>) => any,
+    onSubmit: (values: Values, formikActions: FormikActions<Values>) => any,
 
     /**
      * Form component to render
      */
-    component?: React$ComponentType<FormikProps<any> | void>,
+    component?: React$ComponentType<FormikProps<Values> | void>,
 
     /**
      * Render prop (works like React router's <Route render={props =>} />)
      */
-    render?: (props: FormikProps<any>) => React$Node,
+    render?: (props: FormikProps<Values>) => React$Node,
 
     /**
      * A Yup Schema or a function that returns a Yup schema
@@ -107,12 +107,12 @@ declare module "formik" {
      * Validation function. Must return an error object or promise that
      * throws an error object where that object keys map to corresponding value.
      */
-    validate?: (values: any) => void | Object | Promise<any>,
+    validate?: (values: Values) => void | FormikErrors<Values> | Promise<any>,
 
     /**
      * React children or child render callback
      */
-    children?: ((props: FormikProps<any>) => React$Node) | React$Node
+    children?: ((props: FormikProps<Values>) => React$Node) | React$Node
   };
 
   /**
@@ -170,7 +170,9 @@ declare module "formik" {
     FormikComputedProps<Values>;
 
   declare export class Formik<
-    Props: FormikConfig = FormikConfig
+    Values: {},
+    Props: FormikConfig<Values>,
+
   > extends React$Component<Props> {}
 
   /**
