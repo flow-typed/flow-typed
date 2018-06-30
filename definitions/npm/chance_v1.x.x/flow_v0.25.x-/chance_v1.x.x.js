@@ -12,6 +12,7 @@ declare module 'chance' {
     utc: string[]
   };
   declare class Chance {
+    constructor (seed?: any): Chance;
     static (seed?: any): Chance;
     bool(options?: { likelihood: number }): bool;
     character(options?: {
