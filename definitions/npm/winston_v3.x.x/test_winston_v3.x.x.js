@@ -1,4 +1,5 @@
 import winston from "winston";
+import {createLogger as importedCreateLogger} from "winston";
 
 winston.log({
   level: "info",
@@ -13,6 +14,7 @@ winston.nonExistantLevel("default logger nonExistantLevel message");
 const customPrintf = winston.format.printf(info => {
   return `${info.level}: ${info.message}`;
 });
+importedCreateLogger({});
 let logger = winston.createLogger({
   format: winston.format.combine(
     winston.format.json(),
