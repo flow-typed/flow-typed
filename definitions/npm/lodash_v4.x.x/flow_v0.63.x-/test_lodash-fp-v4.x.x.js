@@ -152,6 +152,8 @@ getOr('default', 'a.b.c', exampleObjectForGetTest);
 
 // Array — not documented, but get does support arrays
 get('0', [1, 2, 3]);
+get(0, [1, 2, 3]);
+get([0], [1, 2, 3]);
 get('[1]', ['foo', 'bar', 'baz']);
 get('2', [{ a: 'foo' }, { b: 'bar' }, { c: 'baz' }]);
 get('3', [[1, 2], [3, 4], [5, 6], [7, 8]]);
@@ -162,11 +164,6 @@ get('thing', null);
 get('data', undefined);
 getOr('default', 'stuff', null);
 getOr(12345, 'info', undefined);
-
-// First argument must be string when looking for array items by index
-// $ExpectError number This type is incompatible with union: ?array type | string
-get(0, [1, 2, 3]);
-
 
 /**
  * keyBy
