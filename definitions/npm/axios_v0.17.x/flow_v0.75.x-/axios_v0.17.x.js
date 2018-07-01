@@ -1,14 +1,7 @@
 declare module "axios" {
-  declare interface AxiosTransformer<T> {
-    (data: T, headers?: Object): Object;
-  }
   declare interface ProxyConfig {
     host: string;
     port: number;
-    auth?: {
-      username: string,
-      password: string
-    };
   }
   declare interface Cancel {
     constructor(message?: string): Cancel;
@@ -28,8 +21,8 @@ declare module "axios" {
     reason?: Cancel;
     throwIfRequested(): void;
   }
-  declare interface AxiosXHRConfigBase<T,R = T> {
-    adapter?: <T,R>(config: AxiosXHRConfig<T,R>) => Promise<AxiosXHR<T,R>>;
+  declare interface AxiosXHRConfigBase<T> {
+    adapter?: <T>(config: AxiosXHRConfig<T>) => Promise<AxiosXHR<T>>;
     auth?: {
       username: string,
       password: string
@@ -53,92 +46,98 @@ declare module "axios" {
       | "text"
       | "stream";
     timeout?: number;
-    transformRequest?: AxiosTransformer<T> | Array<AxiosTransformer<T>>;
-    transformResponse?: AxiosTransformer<R> | Array<AxiosTransformer<R>>;
+    transformRequest?: Array<<U>(data: T) => U | Array<<U>(data: T) => U>>;
+    transformResponse?: Array<<U>(data: T) => U>;
     validateStatus?: (status: number) => boolean;
     withCredentials?: boolean;
     xsrfCookieName?: string;
     xsrfHeaderName?: string;
   }
-  declare type $AxiosXHRConfigBase<T,R = T> = AxiosXHRConfigBase<T,R>;
-  declare interface AxiosXHRConfig<T,R = T> extends AxiosXHRConfigBase<T,R> {
+  declare type $AxiosXHRConfigBase<T> = AxiosXHRConfigBase<T>;
+  declare interface AxiosXHRConfig<T> extends AxiosXHRConfigBase<T> {
     data?: T;
     method?: string;
     url: string;
   }
-  declare type $AxiosXHRConfig<T,R = T> = AxiosXHRConfig<T,R>;
-  declare class AxiosXHR<T,R = T> {
-    config: AxiosXHRConfig<T,R>;
-    data: R;
+  declare type $AxiosXHRConfig<T> = AxiosXHRConfig<T>;
+  declare class AxiosXHR<T> {
+    config: AxiosXHRConfig<T>;
+    data: T;
     headers?: Object;
     status: number;
     statusText: string;
     request: http$ClientRequest | XMLHttpRequest;
   }
-  declare type $AxiosXHR<T,R = T> = AxiosXHR<T,R>;
+  declare type $AxiosXHR<T> = AxiosXHR<T>;
   declare type AxiosInterceptorIdent = number;
-  declare class AxiosRequestInterceptor<T,R = T> {
+  declare class AxiosRequestInterceptor<T> {
     use(
       successHandler: ?(
-        response: AxiosXHRConfig<T,R>
-      ) => Promise<AxiosXHRConfig<*,*>> | AxiosXHRConfig<*,*>,
+        response: AxiosXHRConfig<T>
+      ) => Promise<AxiosXHRConfig<*>> | AxiosXHRConfig<*>,
       errorHandler: ?(error: mixed) => mixed
     ): AxiosInterceptorIdent;
     eject(ident: AxiosInterceptorIdent): void;
   }
-  declare class AxiosResponseInterceptor<T,R = T> {
+  declare class AxiosResponseInterceptor<T> {
     use(
-      successHandler: ?(response: AxiosXHR<T,R>) => mixed,
+      successHandler: ?(response: AxiosXHR<T>) => mixed,
       errorHandler: ?(error: $AxiosError<any>) => mixed
     ): AxiosInterceptorIdent;
     eject(ident: AxiosInterceptorIdent): void;
   }
-  declare type AxiosPromise<T,R = T> = Promise<AxiosXHR<T,R>>;
+  declare type AxiosPromise<T> = Promise<AxiosXHR<T>>;
   declare class Axios {
-    constructor<T,R>(config?: AxiosXHRConfigBase<T,R>): void;
-    [[call]]<T,R>(config: AxiosXHRConfig<T,R> | string, config?: AxiosXHRConfig<T,R>): AxiosPromise<T,R>;
-    request<T,R>(config: AxiosXHRConfig<T,R>): AxiosPromise<T,R>;
-    delete<T,R>(url: string, config?: AxiosXHRConfigBase<T,R>): AxiosPromise<T,R>;
-    get<T,R>(url: string, config?: AxiosXHRConfigBase<T,R>): AxiosPromise<T,R>;
-    head<T,R>(url: string, config?: AxiosXHRConfigBase<T,R>): AxiosPromise<T,R>;
-    post<T,R>(
+    constructor<T>(config?: AxiosXHRConfigBase<T>): void;
+    [[call]]<T>(
+      config: AxiosXHRConfig<T> | string,
+      config?: AxiosXHRConfig<T>
+    ): AxiosPromise<T>;
+    request<T>(config: AxiosXHRConfig<T>): AxiosPromise<T>;
+    delete<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
+    get<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
+    head<T>(url: string, config?: AxiosXHRConfigBase<T>): AxiosPromise<T>;
+    post<T>(
       url: string,
       data?: mixed,
-      config?: AxiosXHRConfigBase<T,R>
-    ): AxiosPromise<T,R>;
-    put<T,R>(
+      config?: AxiosXHRConfigBase<T>
+    ): AxiosPromise<T>;
+    put<T>(
       url: string,
       data?: mixed,
-      config?: AxiosXHRConfigBase<T,R>
-    ): AxiosPromise<T,R>;
-    patch<T,R>(
+      config?: AxiosXHRConfigBase<T>
+    ): AxiosPromise<T>;
+    patch<T>(
       url: string,
       data?: mixed,
-      config?: AxiosXHRConfigBase<T,R>
-    ): AxiosPromise<T,R>;
+      config?: AxiosXHRConfigBase<T>
+    ): AxiosPromise<T>;
     interceptors: {
       request: AxiosRequestInterceptor<mixed>,
       response: AxiosResponseInterceptor<mixed>
     };
-    defaults: { headers: Object } & AxiosXHRConfig<*,*>;
+    defaults: { headers: Object } & AxiosXHRConfig<*>;
   }
 
-  declare class AxiosError<T,R = T> extends Error {
-    config: AxiosXHRConfig<T,R>;
+  declare class AxiosError<T> extends Error {
+    config: AxiosXHRConfig<T>;
     request?: http$ClientRequest | XMLHttpRequest;
-    response?: AxiosXHR<T,R>;
+    response?: AxiosXHR<T>;
     code?: string;
   }
 
-  declare type $AxiosError<T,R = T> = AxiosError<T,R>;
+  declare type $AxiosError<T> = AxiosError<T>;
 
   declare interface AxiosExport extends Axios {
-    [[call]]<T,R>(config: AxiosXHRConfig<T,R> | string, config?: AxiosXHRConfig<T,R>): AxiosPromise<T,R>;
+    [[call]]<T>(
+      config: AxiosXHRConfig<T> | string,
+      config?: AxiosXHRConfig<T>
+    ): AxiosPromise<T>;
     Axios: typeof Axios;
     Cancel: Class<Cancel>;
     CancelToken: Class<CancelToken>;
     isCancel(value: any): boolean;
-    create(config?: AxiosXHRConfigBase<any, any>): Axios;
+    create(config?: AxiosXHRConfigBase<any>): Axios;
     all: typeof Promise.all;
     spread(callback: Function): (arr: Array<any>) => Function;
   }
