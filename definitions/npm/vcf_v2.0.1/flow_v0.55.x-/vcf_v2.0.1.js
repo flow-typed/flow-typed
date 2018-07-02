@@ -3,7 +3,7 @@ declare class vcf$vCardProperty {
   static fromJSON(data: Array<string | string[]>): vcf$vCardProperty;
   is(type: string): boolean;
   isEmpty(): boolean;
-  toString(version: string): string;
+  toString(version?: string): string;
   valueOf(): string;
   toJSON(): Array<string | string[]>;
 }
