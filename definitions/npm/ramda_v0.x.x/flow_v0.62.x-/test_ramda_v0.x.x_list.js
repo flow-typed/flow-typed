@@ -120,6 +120,9 @@ const str: string = "hello world";
     })
   })
 
+  const chainxs: number[] = _.chain((n) => [n, n], [1, 2])
+  const chainxs1: number[] = _.chain((n) => [n, n])([1, 2])
+
   const findxs: ?{ [k: string]: number | string } = _.find(
     _.propEq("a", 2),
     os
