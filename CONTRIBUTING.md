@@ -18,12 +18,12 @@ to existing libdefs.
 
 ## Contributing to the definitions repository
 
-All definitions are contained in the [definitions/](https://github.com/flowtype/flow-typed/tree/master/definitions)
+All definitions are contained in the [definitions/](https://github.com/flow-typed/flow-typed/tree/master/definitions)
 directory and are named and structured very explicitly.
 
 Let's say you've created a definition for an npm package called `left-pad` at
 version 4.1.0. **[You've followed all of the
-best practices for writing high quality definitions,](https://github.com/flowtype/flow-typed/issues/13#issuecomment-214892914)**
+best practices for writing high quality definitions,](https://github.com/flow-typed/flow-typed/issues/13#issuecomment-214892914)**
 and now you'd like to contribute it:
 
 #### 1) Create a new directory called `definitions/left-pad_v4.1.0/`.
@@ -72,7 +72,7 @@ reasonable degree. At minimum your tests should:
    a type error. To indicate that a line in a test file expected to cause an
    error just put a `// $ExpectError` comment above the error-causing line.
 
-[Here](https://github.com/flowtype/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
+[Here](https://github.com/flow-typed/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
 is an example of a nice and thorough test file. You don't necessarily have to be
 this thorough, but the more thorough you are the better!
 
@@ -136,13 +136,13 @@ To be super clear:
 1. You can't import types from other libdefs in flow-typed
 1. You can import types built into Flow (e.g. from `react`), only if you put the import statement inside the module declaration
 
-[Further discussion here](https://github.com/flowtype/flow-typed/issues/1857) and [here](https://github.com/flowtype/flow-typed/issues/2023).
+[Further discussion here](https://github.com/flow-typed/flow-typed/issues/1857) and [here](https://github.com/flow-typed/flow-typed/issues/2023).
 
 ### Avoid `any` when possible
 
 Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propogating on to other code, the `any` will potentially cause Flow to miss type errors!
 
-In many places it is better (but also stricter) to use the `mixed` type rather than the `any` type. The `mixed` type is safer in that it allows anything to flow in to it, but can never be used downstream without [dynamic type tests](https://flowtype.org/docs/dynamic-type-tests.html#_) that verify the type at runtime.
+In many places it is better (but also stricter) to use the `mixed` type rather than the `any` type. The `mixed` type is safer in that it allows anything to flow in to it, but can never be used downstream without [dynamic type tests](https://flow.org/en/docs/lang/refinements/#_) that verify the type at runtime.
 
 Consider this code:
 
@@ -206,7 +206,7 @@ Using `mixed` in place of `any` for the return type of a function or the type of
 
 ### Exporting modules
 
-When you export a module, you have a choice to use CommonJS or ES6 syntax. We generally recommend to use ES6 syntax. As [discussed here](https://github.com/flowtype/flow-typed/issues/1859#issuecomment-374575368), if you need both named exports and a default export, then you need to use the ES6 syntax.
+When you export a module, you have a choice to use CommonJS or ES6 syntax. We generally recommend to use ES6 syntax. As [discussed here](https://github.com/flow-typed/flow-typed/issues/1859#issuecomment-374575368), if you need both named exports and a default export, then you need to use the ES6 syntax.
 
 ### Prefix global variables that aren't really meant to be global
 
