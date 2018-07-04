@@ -1,16 +1,16 @@
-import { describe, it } from 'flow-typed-test';
-import vCard from 'vcf';
+import { describe, it } from "flow-typed-test";
+import vCard from "vcf";
 
 describe("vcf", () => {
   it("vcard constructor and functions should work", () => {
     const card = new vCard();
     card.set("fn", "mark");
-    card.set("adr", "menlo park", {category: "work"});
-    card.add("adr", "menlo park", {category: "home"});
+    card.set("adr", "menlo park", { category: "work" });
+    card.add("adr", "menlo park", { category: "home" });
     card.parse(card.toString());
     card.toJSON();
     card.toJCard("v4");
-  })
+  });
 
   it("vcard constructor and functions should fail on bad types", () => {
     // $ExpectError
@@ -37,10 +37,12 @@ describe("vcf", () => {
 
     // $ExpectError
     card.toJCard(1);
-  })
+  });
 
   it("vcardproperty constructor and functions should work", () => {
     const card = new vCard();
+    const property = new vCard.Property("fn", "value");
+    const property2 = new vCard.Property("adr", "101 loop", { type: "work" });
     card.set("fn", "mark");
 
     const cardProperty = card.get("fn");
@@ -50,31 +52,41 @@ describe("vcf", () => {
       cardProperty.toString("v4");
       cardProperty.valueOf();
       cardProperty.toJSON();
+      property.is("fn");
+      property2.is("adr");
     }
-  })
+  });
 
   it("vcardproperty constructor and functions should fail on bad types", () => {
     const card = new vCard();
     card.set("fn", "mark");
 
+    // $ExpectError
+    const property = new vCard.Property(1, "value");
+
+    // $ExpectError
+    const property2 = new vCard.Property("adr", "101 loop", 3);
+
+    // $ExpectError
+    const property2 = new vCard.Property("adr", 12);
+
     const cardProperty = card.get("fn");
 
     if (!Array.isArray(cardProperty)) {
-  
       // $ExpectError
       cardProperty.is(1);
-  
+
       // $ExpectError
       cardProperty.isEmpty("hi");
-  
+
       // $ExpectError
       cardProperty.toString(4);
-  
+
       // $ExpectError
       cardProperty.valueOf("hi");
-      
+
       // $ExpectError
       cardProperty.toJSON("hi");
     }
-  })
-})
+  });
+});
