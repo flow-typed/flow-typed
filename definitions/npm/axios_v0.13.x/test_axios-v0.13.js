@@ -31,7 +31,7 @@ axios.get('/user', {
     ID: 12345
   }
 }).then((res) => {
-    res.data[0];
+    res.data;
 });
 
 // Send a POST request
