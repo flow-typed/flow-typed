@@ -64,8 +64,8 @@ declare module 'js-joda' {
 		static SUNDAY: DayOfWeek;
 		static from(temporal: TemporalAccessor): DayOfWeek;
 		static of(dayOfWeek: number): DayOfWeek;
-		// $ExpectError - Flow doesn't allow changing signatures of parent classes (Object.valueOf) https://github.com/facebook/flow/issues/4953
-		static valueOf(name: string): DayOfWeek;
+		// $FlowFixMe - Flow doesn't allow changing signatures of parent classes (Object.valueOf) https://github.com/facebook/flow/issues/4953
+		// static valueOf(name: string): DayOfWeek;
 		static values(): Array<DayOfWeek>;
 		adjustInto(temporal: TemporalAdjuster): this;
 		equals(other: any): boolean;
