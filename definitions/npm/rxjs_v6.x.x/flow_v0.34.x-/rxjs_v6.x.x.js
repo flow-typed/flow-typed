@@ -1631,6 +1631,7 @@ declare module "rxjs" {
       input: rxjs$ObservableInput<T>,
       scheduler?: rxjs$SchedulerClass
     ): rxjs$Observable<T>,
+    empty<+T>(): rxjs$Observable<T>,
     timer(
       initialDelay: number | Date,
       period?: number,
