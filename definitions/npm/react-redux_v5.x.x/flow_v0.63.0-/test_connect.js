@@ -457,3 +457,33 @@ function testOptions() {
   // $ExpectError wrong key
   connect(null, null, null, {wrongKey: true})(Com);
 }
+
+function testHoistConnectedComponent() {
+  type Props = {passthrough: number, passthroughWithDefaultProp: number, fromStateToProps: string};
+  class Com extends React.Component<Props> {
+    static defaultProps = { passthroughWithDefaultProp: 123 };
+    static myStatic = 1;
+
+    render() {
+      return <div>{this.props.passthrough} {this.props.fromStateToProps}</div>;
+    }
+  }
+
+  type State = {a: number};
+  type InputProps = {
+    forMapStateToProps: string
+  };
+  const mapStateToProps = (state: State, props: InputProps) => {
+    return {
+      fromStateToProps: 'str' + state.a
+    }
+  };
+
+  const Connected = connect(mapStateToProps)(Com);
+  // OK without passthroughWithDefaultProp
+  <Connected passthrough={123} forMapStateToProps={'data'}/>;
+  // OK with passthroughWithDefaultProp
+  <Connected passthrough={123} passthroughWithDefaultProp={456} forMapStateToProps={'data'}/>;
+  // OK with declared static property
+  Connected.myStatic;
+}
