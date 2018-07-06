@@ -1156,9 +1156,10 @@ declare module 'react-navigation' {
       }
     >
   >;
-  declare export function withNavigationFocus<Props: {}>(
-    Component: React$ComponentType<Props>
-  ): React$ComponentType<$Diff<Props, { isFocused: boolean | void }>>;
+  
+  declare export function withNavigationFocus<Props: {}, Comp: React$ComponentType<Props>>(
+    Component: Comp
+  ): React$ComponentType<$Diff<React$ElementConfig<Comp>, { isFocused: boolean | void }>>;
 
   declare export function getNavigation<State: NavigationState, Options: {}>(
     router: NavigationRouter<State, Options>,
