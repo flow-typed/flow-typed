@@ -158,9 +158,7 @@ declare class express$Router extends express$Route {
       id: string
     ) => mixed
   ): void;
-
-  // Can't use regular callable signature syntax due to https://github.com/facebook/flow/issues/3084
-  $call: (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction) => void;
+  (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
 }
 
 declare class express$Application extends express$Router mixins events$EventEmitter {
@@ -184,6 +182,8 @@ declare class express$Application extends express$Router mixins events$EventEmit
   set(name: string, value: mixed): mixed;
   render(name: string, optionsOrFunction: {[name: string]: mixed}, callback: express$RenderCallback): void;
   handle(req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
+  // callable signature is not inherited
+  (req: http$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
 }
 
 declare module 'express' {

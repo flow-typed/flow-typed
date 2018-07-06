@@ -1,8 +1,8 @@
 declare module "react-bootstrap" {
-  import type { Node, Element, Component, Ref } from 'react';
+  import type { Node, Element, Component, ComponentType, Ref } from 'react';
   declare type BsSize = 'lg' | 'large' | 'sm' | 'small';
   declare type BsStyle = 'lg' | 'large' | 'sm' | 'small' | 'xs' | 'xsmall';
-  declare type ElementType = string;
+  declare type ElementType = string | ComponentType<*>;
   declare type TriggerType = 'click' | 'hover' | 'focus';
   declare export class Alert extends React$Component<{
     onDismiss: Function,

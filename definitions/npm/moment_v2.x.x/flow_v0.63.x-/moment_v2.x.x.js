@@ -144,9 +144,9 @@ declare class moment$Moment {
   days(day: number|string): this;
   day(): number;
   days(): number;
-  weekday(number: number): this;
+  weekday(day: number|string): this;
   weekday(): number;
-  isoWeekday(number: number): this;
+  isoWeekday(day: number|string): this;
   isoWeekday(): number;
   dayOfYear(number: number): this;
   dayOfYear(): number;

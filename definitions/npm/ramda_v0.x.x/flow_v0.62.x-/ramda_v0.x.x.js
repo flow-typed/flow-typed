@@ -551,6 +551,9 @@ declare module ramda {
     x: E,
   ): (xs: Array<E>) => Array<E>;
 
+  declare function chain<A, B>(f: (x: A) => B[], xs: A[]): B[]
+  declare function chain<A, B>(f: (x: A) => B[]): (xs: A[]) => B[]
+
   declare function concat<V, T: Array<V> | string>(x: T, y: T): T;
   declare function concat<V, T: Array<V> | string>(x: T): (y: T) => T;
 
@@ -727,6 +730,7 @@ declare module ramda {
   ): (xs: Array<E>) => number;
 
   declare function map<T, R>(fn: (x: T) => R, xs: Array<T>): Array<R>;
+  declare function map<T, R>(fn: (x: T) => R): (xs: Array<T>) => Array<R>;
   declare function map<T, R, S: { map: Function }>(fn: (x: T) => R, xs: S): S;
   declare function map<T, R>(
     fn: (x: T) => R,

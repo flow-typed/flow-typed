@@ -1,14 +1,14 @@
 <img
   alt="Flow Logo"
-  src="https://raw.githubusercontent.com/flowtype/flow-typed/master/flow-typed-logo.png"
+  src="https://raw.githubusercontent.com/flow-typed/flow-typed/master/flow-typed-logo.png"
   width="400"
 />
 
-[![Travis](https://img.shields.io/travis/flowtype/flow-typed.svg)](https://travis-ci.org/flowtype/flow-typed) [![npm](https://img.shields.io/npm/dm/flow-typed.svg)](https://www.npmjs.com/package/flow-typed)
+[![Travis](https://img.shields.io/travis/flow-typed/flow-typed.svg)](https://travis-ci.org/flow-typed/flow-typed) [![npm](https://img.shields.io/npm/dm/flow-typed.svg)](https://www.npmjs.com/package/flow-typed)
 
-`flow-typed` is a [repository](https://github.com/flowtype/flow-typed/tree/master/definitions) of third-party
-[library interface definitions](http://flowtype.org/docs/third-party.html)
-for use with [Flow](http://flowtype.org/).
+`flow-typed` is a [repository](https://github.com/flow-typed/flow-typed/tree/master/definitions) of third-party
+[library interface definitions](https://flow.org/en/docs/libdefs)
+for use with [Flow](http://flow.org).
 
 You can grab definitions directly from this GitHub repo, or you can use the CLI (currently in beta) to install a libdef for a given library:
 ```bash
@@ -29,7 +29,7 @@ you accidentally mis-use the library (nor will it be able to auto-complete the
 library).
 
 To address this, **Flow supports
-[library definitions](http://flowtype.org/docs/third-party.html)** which allow
+[library definitions](https://flow.org/en/docs/libdefs)** which allow
 you to describe the interface of a module or library separate from the
 implementation of that module/library.
 
@@ -44,22 +44,22 @@ that, **simply check them in** and be on your way!
 
 ## Getting Started
 
-Check out [Importing And Using Type Definitions](https://github.com/flowtype/flow-typed/wiki/Importing-And-Using-Type-Definitions)
+Check out [Importing And Using Type Definitions](https://github.com/flow-typed/flow-typed/wiki/Importing-And-Using-Type-Definitions)
 in the wiki. It will walk you through using typedefs installed through flow-typed,
 as well as writing and including your own.
 
 ## FAQs
 
-Before opening an issue, take a look at the [FAQs](https://github.com/flowtype/flow-typed/wiki/FAQs).
+Before opening an issue, take a look at the [FAQs](https://github.com/flow-typed/flow-typed/wiki/FAQs).
 Chances are your question has already been answered! If not, don't hesitate to
-[open an issue](https://github.com/flowtype/flow-typed/issues/new).
+[open an issue](https://github.com/flow-typed/flow-typed/issues/new).
 
 ## How Do I Contribute Library Definitions?
 
 Just send a pull request! The wiki on
-[Contributing Library Definitions](https://github.com/flowtype/flow-typed/wiki/Contributing-Library-Definitions)
+[Contributing Library Definitions](https://github.com/flow-typed/flow-typed/wiki/Contributing-Library-Definitions)
 details the format of new contributions. Contributions should follow the best practices outline on
-[CONTRIBUTING.md](https://github.com/flowtype/flow-typed/blob/master/CONTRIBUTING.md).
+[CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md).
 
 #### Contributing to the CLI
 
@@ -70,7 +70,7 @@ a new feature, consider opening an issue first to discuss it.
 
 The `flow-typed` npm package provides a CLI that includes several commands for
 working with this repository. The full list of commands is available at
-[CLI Commands & Flags](https://github.com/flowtype/flow-typed/wiki/CLI-Commands-and-Flags).
+[CLI Commands & Flags](https://github.com/flow-typed/flow-typed/wiki/CLI-Commands-and-Flags).
 
 ##### `flow-typed install [package-specification] [--ignoreDeps deps]`
 
