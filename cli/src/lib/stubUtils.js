@@ -211,7 +211,7 @@ async function writeStub(
     ' */\n\n',
   ].join('\n');
   let packageFolder = await resolvePkgDirPath(packageName, process.cwd());
-  if (packageFolder !== null) {
+  if (packageFolder !== null && false) {
     try {
       output += guessedStubFor(packageName, packageFolder, maxDepth);
     } catch (e) {
