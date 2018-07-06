@@ -62,7 +62,7 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
    */
   mockReturnThis(): void,
   /**
-   * Deprecated: use jest.fn(() => value) instead
+   * Accepts a value that will be returned whenever the mock function is called.
    */
   mockReturnValue(value: TReturn): JestMockFn<TArguments, TReturn>,
   /**
