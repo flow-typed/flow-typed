@@ -81,7 +81,7 @@ function stubFor(moduleName: string, fileExt?: string): string {
 
 const functionTemplate = '(%s) => any';
 const spaceByI = (i: number): string => '  '.repeat(i);
-const keyTypeTemplate = `  %s: %s,\n`;
+const keyTypeTemplate = `  "%s": %s,\n`;
 
 function objectToTypedTemplate(
   obj: mixed,
@@ -211,7 +211,7 @@ async function writeStub(
     ' */\n\n',
   ].join('\n');
   let packageFolder = await resolvePkgDirPath(packageName, process.cwd());
-  if (packageFolder !== null && false) {
+  if (packageFolder !== null) {
     try {
       output += guessedStubFor(packageName, packageFolder, maxDepth);
     } catch (e) {
