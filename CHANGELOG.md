@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.5.1] - 2018-07-06
+
+### Changed
+- Temporarily disable stub guessing (#2485)
+
 ## [2.5.0] - 2018-07-06
 
 The flow-typed project has moved to a new organization, [@flow-typed](http://github.com/flow-typed)!
