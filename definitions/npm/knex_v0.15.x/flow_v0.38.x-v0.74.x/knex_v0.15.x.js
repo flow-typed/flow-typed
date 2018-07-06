@@ -159,7 +159,6 @@ declare class Knex$Knex<R>
     currentVersion: (config?: MigrateConfig) => Promise<string>
   };
   client: any;
-  pool: Object;
   destroy(): Promise<void>;
 }
 
@@ -174,8 +173,7 @@ declare type Knex$PostgresConfig = {
         database?: string,
         charset?: string
       },
-  searchPath?: string,
-  pool?: Object
+  searchPath?: string
 };
 
 declare type Knex$RawBindings = Array<mixed> | { [key: string]: mixed };
@@ -190,8 +188,7 @@ declare type Knex$Mysql2Config = {
         password?: string,
         database?: string,
         charset?: string
-      },
-  pool?: Object
+      }
 };
 
 declare type Knex$MysqlConfig = {
@@ -201,16 +198,14 @@ declare type Knex$MysqlConfig = {
     user?: string,
     password?: string,
     database?: string
-  },
-  pool?: Object
+  }
 };
 
 declare type Knex$SqliteConfig = {
   client?: "sqlite3",
   connection?: {
     filename?: string
-  },
-  pool?: Object
+  }
 };
 declare type Knex$Config =
   | Knex$PostgresConfig
