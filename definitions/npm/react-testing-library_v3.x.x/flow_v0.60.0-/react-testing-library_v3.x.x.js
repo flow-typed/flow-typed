@@ -1,3 +1,6 @@
+// flow-typed signature: 7a97eeef13774c4b5f1e5a9beed0794a
+// flow-typed version: 14a28a0d4a/react-testing-library_v3.x.x/flow_>=v0.60.0
+
 declare module 'react-testing-library' {
   declare type TextMatch = string | RegExp | (content: string, element: HTMLElement) => boolean;
 
@@ -10,15 +13,15 @@ declare module 'react-testing-library' {
   declare type RenderResult = {
     container: HTMLDivElement,
     unmount: () => void,
-    queryByTestId: (id: TextMatch, options?: TextMatchOptions,) => ?HTMLElement,
+    queryByTestId: (id: TextMatch, options?: TextMatchOptions) =>?HTMLElement,
     getByTestId: (id: TextMatch, options?: TextMatchOptions) => HTMLElement,
-    queryByText: (text: TextMatch, options?: TextMatchOptions) => ?HTMLElement,
+    queryByText: (text: TextMatch, options?: TextMatchOptions) =>?HTMLElement,
     getByText: (text: TextMatch, options?: TextMatchOptions) => HTMLElement,
-    queryByPlaceholderText: (text: TextMatch, options?: TextMatchOptions) => ?HTMLElement,
+    queryByPlaceholderText: (text: TextMatch, options?: TextMatchOptions) =>?HTMLElement,
     getByPlaceholderText: (text: TextMatch, options?: TextMatchOptions) => HTMLElement,
-    queryByLabelText: (text: TextMatch, options?: TextMatchOptions) => ?HTMLElement,
+    queryByLabelText: (text: TextMatch, options?: TextMatchOptions) =>?HTMLElement,
     getByLabelText: (text: TextMatch, options?: { selector?: string } & TextMatchOptions) => HTMLElement,
-    queryByAltText: (text: TextMatch, options?: TextMatchOptions) => ?HTMLElement,
+    queryByAltText: (text: TextMatch, options?: TextMatchOptions) =>?HTMLElement,
     getByAltText: (text: TextMatch, options?: TextMatchOptions) => HTMLElement
   };
 
@@ -124,7 +127,23 @@ declare module 'react-testing-library' {
     animationIteration: FireEvent<Event$Init>,
     transitionEnd: FireEvent<Event$Init>
   };
-
+    
+    
   declare export function renderIntoDocument(ui: React$Element<*>): RenderResult;
   declare export function cleanup(): void;
+
+  declare type Container = HTMLElement;
+
+  // dom-testing-library re-exports
+
+  declare export function queryByTestId(container: Container, id: TextMatch, options?: TextMatchOptions): ?HTMLElement;
+  declare export function getByTestId(container: Container, id: TextMatch, options?: TextMatchOptions): HTMLElement;
+  declare export function queryByText(container: Container, text: TextMatch, options?: TextMatchOptions): ?HTMLElement;
+  declare export function getByText(container: Container, text: TextMatch, options?: TextMatchOptions): HTMLElement;
+  declare export function queryByPlaceholderText(container: Container, text: TextMatch, options?: TextMatchOptions): ?HTMLElement;
+  declare export function getByPlaceholderText(container: Container, text: TextMatch, options?: TextMatchOptions): HTMLElement;
+  declare export function queryByLabelText(container: Container, text: TextMatch, options?: TextMatchOptions): ?HTMLElement;
+  declare export function getByLabelText(container: Container, text: TextMatch, options?: { selector?: string } & TextMatchOptions): HTMLElement;
+  declare export function queryByAltText(container: Container, text: TextMatch, options?: TextMatchOptions): ?HTMLElement;
+  declare export function getByAltText(container: Container, text: TextMatch, options?: TextMatchOptions): HTMLElement;
 }
