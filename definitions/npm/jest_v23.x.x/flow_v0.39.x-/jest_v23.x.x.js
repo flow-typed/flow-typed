@@ -69,7 +69,7 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
    * Sugar for only returning a value once inside your mock
    */
   mockReturnValueOnce(value: TReturn): JestMockFn<TArguments, TReturn>,
-  /** 
+  /**
    * Sugar for jest.fn().mockImplementation(() => Promise.resolve(value))
    */
   mockResolvedValue(value: TReturn): JestMockFn<TArguments, Promise<TReturn>>,
@@ -895,6 +895,17 @@ declare var it: {
     timeout?: number
   ): void,
   /**
+   * each runs this test against array of argument arrays per each run
+   *
+   * @param {table} table of Test
+   */
+  each(
+    table: Array<Array<mixed>>
+  ): (
+    name: JestTestName,
+    fn?: (...args: Array<any>) => ?Promise<mixed>
+  ) => void,
+  /**
    * Only run this test
    *
    * @param {JestTestName} Name of Test
@@ -905,7 +916,14 @@ declare var it: {
     name: JestTestName,
     fn?: (done: () => void) => ?Promise<mixed>,
     timeout?: number
-  ): void,
+  ): {
+    each(
+      table: Array<Array<mixed>>
+    ): (
+      name: JestTestName,
+      fn?: (...args: Array<any>) => ?Promise<mixed>
+    ) => void,
+  },
   /**
    * Skip running this test
    *

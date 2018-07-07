@@ -118,6 +118,8 @@ describe.skip(aFunction, () => {});
 test("test", () => expect("foo").toMatchSnapshot());
 test(AClass, () => expect("foo").toMatchSnapshot());
 test(aFunction, () => expect("foo").toMatchSnapshot());
+test.each([['arg1', 2, true], ['arg2', 3, false]])("test", () => expect("foo").toMatchSnapshot());
+test.only.each([['arg1', 2, true], ['arg2', 3, false]])("test", () => expect("foo").toMatchSnapshot());
 test.only("test", () => expect("foo").toMatchSnapshot());
 test.skip("test", () => expect("foo").toMatchSnapshot());
 
