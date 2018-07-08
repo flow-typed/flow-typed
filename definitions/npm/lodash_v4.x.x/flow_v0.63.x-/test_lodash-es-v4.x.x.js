@@ -171,8 +171,8 @@ get([[1, 2], [3, 4], [5, 6], [7, 8]], "3");
 get(null, 'thing');
 get(undefined, 'data');
 
-// Second argument must be string when looking for array items by index
-// $ExpectError number This type is incompatible with union: ?array type | string
+// Path argument may also be a numeric index (flow-typed/flow-typed/pull/2444)
+// It's definitely safe: get → baseGet → castPath → stringToPath → toString
 get([1, 2, 3], 0);
 
 /**
