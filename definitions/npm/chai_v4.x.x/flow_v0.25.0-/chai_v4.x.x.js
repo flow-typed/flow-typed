@@ -160,6 +160,11 @@ declare module "chai" {
     static isOk(object: mixed, message?: string): void;
     static isNotOk(object: mixed, message?: string): void;
 
+    static empty(object: mixed, message?: string): void;
+    static isEmpty(object: mixed, message?: string): void;
+    static notEmpty(object: mixed, message?: string): void;
+    static isNotEmpty(object: mixed, message?: string): void;
+
     static equal(actual: mixed, expected: mixed, message?: string): void;
     static notEqual(actual: mixed, expected: mixed, message?: string): void;
 
