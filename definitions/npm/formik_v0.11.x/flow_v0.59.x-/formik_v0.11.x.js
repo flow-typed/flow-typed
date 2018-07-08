@@ -2,7 +2,7 @@ declare module "formik" {
   import type { ComponentType } from "react";
 
   declare export type FormikErrors<Values> = {
-    [field: $Keys<Values>]: string
+    [field: $Keys<Values>]: ?string
   };
 
   declare export type FormikTouched<Values> = {
@@ -30,23 +30,20 @@ declare module "formik" {
     /** Manually set values object  */
     setValues(values: Values): void;
     /** Set value of form field directly */
-    setFieldValue(
-      field: $Keys<Values>,
-      value: any,
+    setFieldValue<FieldName: $Keys<Values>>(
+      field: FieldName,
+      // I don't understand why we have to wrap this with $Call. I feel
+      // like we should just be able to do
+      // value: $ElementType<Values, FieldName>. But apparently this
+      // doesn't work.
+      value: $Call<() => $ElementType<Values, FieldName>>,
       shouldValidate?: boolean
     ): void;
-    setFieldValue(field: string, value: any, shouldValidate?: boolean): void;
     /** Set error message of a form field directly */
     setFieldError(field: $Keys<Values>, message: string): void;
-    setFieldError(field: string, message: string): void;
     /** Set whether field has been touched directly */
     setFieldTouched(
       field: $Keys<Values>,
-      isTouched?: boolean,
-      shouldValidate?: boolean
-    ): void;
-    setFieldTouched(
-      field: string,
       isTouched?: boolean,
       shouldValidate?: boolean
     ): void;
@@ -77,26 +74,26 @@ declare module "formik" {
     enableReinitialize?: boolean
   };
 
-  declare export type FormikConfig = FormikSharedConfig & {
+  declare export type FormikConfig<Values: Object> = FormikSharedConfig & {
     /**
      * Initial values of the form
      */
-    initialValues?: {},
+    initialValues?: Values,
 
     /**
      * Submission handler
      */
-    onSubmit: (values: Object, formikActions: FormikActions<any>) => any,
+    onSubmit: (values: Values, formikActions: FormikActions<Values>) => any,
 
     /**
      * Form component to render
      */
-    component?: React$ComponentType<FormikProps<any> | void>,
+    component?: React$ComponentType<FormikProps<Values> | void>,
 
     /**
      * Render prop (works like React router's <Route render={props =>} />)
      */
-    render?: (props: FormikProps<any>) => React$Node,
+    render?: (props: FormikProps<Values>) => React$Node,
 
     /**
      * A Yup Schema or a function that returns a Yup schema
@@ -107,12 +104,12 @@ declare module "formik" {
      * Validation function. Must return an error object or promise that
      * throws an error object where that object keys map to corresponding value.
      */
-    validate?: (values: any) => void | Object | Promise<any>,
+    validate?: (values: Values) => void | FormikErrors<Values> | Promise<any>,
 
     /**
      * React children or child render callback
      */
-    children?: ((props: FormikProps<any>) => React$Node) | React$Node
+    children?: ((props: FormikProps<Values>) => React$Node) | React$Node
   };
 
   /**
@@ -170,7 +167,9 @@ declare module "formik" {
     FormikComputedProps<Values>;
 
   declare export class Formik<
-    Props: FormikConfig = FormikConfig
+    Values: Object,
+    Props: FormikConfig<Values>,
+
   > extends React$Component<Props> {}
 
   /**

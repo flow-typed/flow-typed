@@ -16,7 +16,7 @@ describe("formik", () => {
     it("passes when used properly", () => {
       <Formik
         initialValues={{ text: "text" }}
-        validate={(values: Values) => {
+        validate={(values) => {
           const errors = {};
           if (!values.text) {
             errors.text = "Text Required";
@@ -24,8 +24,8 @@ describe("formik", () => {
           return errors;
         }}
         onSubmit={(
-          values: Values,
-          { setSubmitting, setFieldError }: FormikActions<Values>
+          values,
+          { setSubmitting, setFieldError }
         ) => {
           setFieldError("text", "Text is Required!");
           setSubmitting(false);
@@ -38,7 +38,7 @@ describe("formik", () => {
           handleBlur,
           handleSubmit,
           isSubmitting
-        }: FormikProps<Values>) => {
+        }) => {
           return (
             <form onSubmit={handleSubmit}>
               <input
@@ -63,14 +63,14 @@ describe("formik", () => {
     it("raises error when trying to access values not in Values", () => {
       <Formik
         initialValues={{ text: "text" }}
-        validate={(values: Values) => {
+        validate={(values) => {
           const errors = {};
           if (!values.text) {
             errors.text = "Text Required";
           }
           return errors;
         }}
-        onSubmit={(values: Values) => {}}
+        onSubmit={(values) => {}}
         render={({
           values,
           errors,
@@ -79,7 +79,7 @@ describe("formik", () => {
           handleBlur,
           handleSubmit,
           isSubmitting
-        }: FormikProps<Values>) => {
+        }) => {
           return (
             <form onSubmit={handleSubmit}>
               <input
@@ -100,7 +100,56 @@ describe("formik", () => {
         }}
       />;
     });
+
+    it("raises error when trying to update fields with values of the wrong type", () => {
+      <Formik
+        initialValues={{ text: "text" }}
+        onSubmit={(values) => {}}
+        render={({
+          values,
+          setFieldValue,
+        }) => {
+          return (
+            <form>
+              <button onClick={() => {
+                setFieldValue("text", "new value")
+                // $ExpectError setFieldValue must be type string
+                setFieldValue("text", 3)
+              }}>
+                Submit
+              </button>
+            </form>
+          );
+        }}
+      />;
+    });
   });
+
+  it("respects the user specifying more specific initialValues", () => {
+      type FormValues = {
+        requestState: "loading" | "ready",
+      }
+      const initialValues: FormValues = {requestState: "loading"}
+      const rendered = <Formik
+        initialValues={initialValues}
+        onSubmit={values => {}}
+        render={({
+          setFieldValue,
+        }) => {
+          return (
+            <form>
+              <button onClick={() => {
+                setFieldValue("requestState", "ready")
+                // $ExpectError setFieldValue value must be "loading" or "ready"
+                setFieldValue("requestState", "asfuohasfuoh")
+              }}>
+                Submit
+              </button>
+            </form>
+          );
+        }}
+      />;
+  })
 
   describe("FormikActions", () => {
     describe("setStatus", () => {
@@ -189,6 +238,7 @@ describe("formik", () => {
         const testFunc = (actions: FormikActions<Values>) => {
           actions.setFieldValue("text", "Value");
           actions.setFieldValue("text", "Value", true);
+          // $ExpectError 'other' is not a key in values
           actions.setFieldValue("other", "Value");
         };
       });
@@ -205,6 +255,7 @@ describe("formik", () => {
       it("passes when used properly", () => {
         const testFunc = (actions: FormikActions<Values>) => {
           actions.setFieldError("text", "Error");
+          // $ExpectError 'other' is not a key in values
           actions.setFieldError("other", "Error");
         };
       });
@@ -221,6 +272,7 @@ describe("formik", () => {
       it("passes when used properly", () => {
         const testFunc = (actions: FormikActions<Values>) => {
           actions.setFieldTouched("text", true);
+          // $ExpectError 'other' is not a key in values
           actions.setFieldTouched("other", true);
         };
       });

@@ -1,12 +1,12 @@
 declare class vcf$vCardProperty {
-    constructor(): vcf$vCardProperty;
-    static fromJSON(data: Array<string | string[]>): vcf$vCardProperty;
-    is(type: string): boolean;
-    isEmpty(): boolean;
-    toString(version: string): string;
-    valueOf(): string;
-    toJSON(): Array<string | string[]>;
-  }
+  constructor(field: string, value: string, params: ?{}): vcf$vCardProperty;
+  static fromJSON(data: Array<string | string[]>): vcf$vCardProperty;
+  is(type: string): boolean;
+  isEmpty(): boolean;
+  toString(version?: string): string;
+  valueOf(): string;
+  toJSON(): Array<string | string[]>;
+}
 
 declare module "vcf" {
   declare class vCard {
@@ -25,7 +25,7 @@ declare module "vcf" {
     static parseLines(): Array<vCard>;
     static fromJSON(jcard: Array<string | string[]>): vCard;
     static format(card: vCard, version: string): string;
-    static Property(): vcf$vCardProperty;
+    static Property: typeof vcf$vCardProperty;
     get(key: string): vcf$vCardProperty | Array<vcf$vCardProperty>;
     set(key: string, value: string, params?: {}): this;
     add(key: string, value: string, params?: {}): this;

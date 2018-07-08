@@ -17,9 +17,9 @@ describe('# directory-tree', () => {
 
   it('use options', () => {
     const useOptions: dirTreeType = dirTree(__dirname, {
-      normalizePath: patthString => patthString,
-      exclude: ['excludePath'],
-      extensions: ['.js'],
+      normalizePath: patthString => true,
+      exclude: /some_path_to_exclude/,
+      extensions: /\.js$/,
     });
   });
 

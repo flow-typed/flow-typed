@@ -66,7 +66,10 @@ declare type $winstonFormatSubModule = {
   label: (config?: Object) => $winstonFormat,
   prettyPrint: () => $winstonFormat,
   simple: () => $winstonFormat,
-  timestamp: () => $winstonFormat
+  timestamp: () => $winstonFormat,
+  colorize: () => $winstonFormat,
+  logstash: () => $winstonFormat,
+  printf: ((args: $winstonInfo<Object>) => string) => $winstonFormat
 };
 
 declare type $winstonDefaultLogger = $winstonLogger<$winstonNpmLogLevels>;

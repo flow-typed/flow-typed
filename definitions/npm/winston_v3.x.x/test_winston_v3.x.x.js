@@ -8,10 +8,18 @@ winston.error("default logger error message");
 // $ExpectError
 winston.nonExistantLevel("default logger nonExistantLevel message");
 
+// See example:
+// https://github.com/winstonjs/winston/blob/c868f0ccdc6ddc45e586c9808d99ebae8351113b/README.md#formats
+const customPrintf = winston.format.printf(info => {
+  return `${info.level}: ${info.message}`;
+});
 let logger = winston.createLogger({
   format: winston.format.combine(
     winston.format.json(),
-    winston.format.label({label: 'label'})
+    winston.format.label({label: 'label'}),
+    winston.format.colorize(),
+    winston.format.logstash(),
+    customPrintf
   ),
   level: "debug",
   exitOnError: false,
