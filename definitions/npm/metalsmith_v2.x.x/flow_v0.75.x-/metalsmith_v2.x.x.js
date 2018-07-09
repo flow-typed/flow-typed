@@ -20,12 +20,23 @@ declare module 'metalsmith' {
 
   declare type File = {
     contents: Contents,
-    mode: string,
-    stats: Stats,
+    mode?: string,
+    stats?: Stats,
     [string]: any,
   };
 
+  // This is a more strict variant of the File type. It's used in Metalsmith's
+  // methods that returns files read from disk, without running through
+  // plugins. Such file objects always have "mode" and "stats" properties.
+  declare type RFile = {
+    contents: Contents,
+    mode: string,
+    stats: Stats,
+  };
+
   declare type FilesMap = {[string]: File};
+
+  declare type RFilesMap = {[string]: RFile};
 
   declare type Plugin = (files: FilesMap, metalsmith: Metalsmith, done: DoneCallback) => void;
 
@@ -71,11 +82,11 @@ declare module 'metalsmith' {
     run(files: FilesMap, plugins: Array<Plugin>, cb: Callback<FilesMap>): void;
     run(files: FilesMap, plugins: Array<Plugin>): FilesMap;
 
-    read(dir?: string, cb: Callback<FilesMap>): void;
-    read(dir?: string): Generator<Yieldable, FilesMap, FilesMap>;
+    read(dir?: string, cb: Callback<RFilesMap>): void;
+    read(dir?: string): Generator<Yieldable, RFilesMap, RFilesMap>;
 
-    readFile(file: string, cb: Callback<File>): void;
-    readFile(file: string): Generator<Yieldable, File, void>;
+    readFile(file: string, cb: Callback<RFile>): void;
+    readFile(file: string): Generator<Yieldable, RFile, void>;
 
     write(files: FilesMap, dir?: string, cb: Callback<void>): void;
     write(files: FilesMap, dir?: string): Generator<Yieldable, void, void>;
