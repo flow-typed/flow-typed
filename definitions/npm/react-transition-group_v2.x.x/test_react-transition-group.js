@@ -151,6 +151,16 @@ describe('CSS/Transition', () => {
       </CSSTransition>;
     })
 
+    it('should accept a function child of the current status to react node', () => {
+      <CSSTransition
+        in
+        timeout={ 1 }
+        classNames='fade'
+      >
+        {status => (<div>{status}</div>)}
+      </CSSTransition>;
+    });
+
     it('should accept alternative parameters', () => {
       <CSSTransition
         timeout={ { enter: 1, exit: 1 } }
