@@ -60,6 +60,6 @@ declare module 'react-transition-group' {
   declare export class CSSTransition extends React$Component<TransitionProps & {
     in?: boolean,
     classNames: string | CSSTransitionClassNames,
-    children?: React$Node,
+    children?: ((status: TransitionStatus) => React$Node) | React$Node,
   }> {}
 }
