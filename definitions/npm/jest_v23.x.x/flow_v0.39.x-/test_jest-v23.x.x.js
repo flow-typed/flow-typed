@@ -249,6 +249,46 @@ expect([1, 2, 3]).toHaveLength(3);
 })();
 
 /**
+ *  Plugin: jest-styled-components
+ */
+// $ExpectError
+import { mount } from "enzyme";
+// $ExpectError
+import styled from "styled-components";
+
+const ColoredSpan = styled.span`
+  color: red;
+`;
+
+const ButtonWithBreakpoint = styled.button`
+  @media (max-width: 640px) {
+    &:hover {
+      color: red;
+    }
+  }
+`;
+
+const styledWrapper = mount(<ColoredSpan />);
+
+expect(styledWrapper).toHaveStyleRule('color', 'red');
+
+expect(styledWrapper).not.toHaveStyleRule('cursor', expect.any(String));
+
+expect(mount(<ButtonWithBreakpoint />)).toHaveStyleRule(
+  'color', 'red', {
+    media: '(max-width:640px)',
+    modifier: ':hover',
+  }
+);
+
+// $ExpectError
+expect(styledWrapper).toHaveStyleRule();
+
+// $ExpectError
+expect(styledWrapper).toHaveStyleRule({backgroundColor: 'red'});
+
+
+/**
  *  Plugin: jest-enzyme
  */
 
