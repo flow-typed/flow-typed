@@ -91,7 +91,7 @@ type JestAsymmetricEqualityType = {
   /**
    * A custom Jasmine equality tester
    */
-  asymmetricMatch(value: mixed): boolean
+  asymmetricMatch(value: any): boolean
 };
 
 type JestCallsType = {
@@ -140,9 +140,15 @@ type JestTestName = string | Function;
 /**
  *  Plugin: jest-styled-components
  */
+type AsymmetricMatcher = {
+  $$typeof: Symbol;
+  sample?: string | RegExp | Object | Array<any> | Function;
+}
+
 type JestStyledComponentsMatcherValue =
   | string
   | RegExp
+  | AsymmetricMatcher
   | typeof undefined;
 
 type JestStyledComponentsMatcherOptions = {
@@ -1043,7 +1049,7 @@ declare var expect: {
   addSnapshotSerializer(pluginModule: JestPrettyFormatPlugin): void,
   assertions(expectedAssertions: number): void,
   hasAssertions(): void,
-  any(value: mixed): JestAsymmetricEqualityType,
+  any(value: any): JestAsymmetricEqualityType,
   anything(): any,
   arrayContaining(value: Array<mixed>): Array<mixed>,
   objectContaining(value: Object): Object,
@@ -1071,7 +1077,7 @@ declare var jest: JestObjectType;
  */
 declare var jasmine: {
   DEFAULT_TIMEOUT_INTERVAL: number,
-  any(value: mixed): JestAsymmetricEqualityType,
+  any(value: any): JestAsymmetricEqualityType,
   anything(): any,
   arrayContaining(value: Array<mixed>): Array<mixed>,
   clock(): JestClockType,
