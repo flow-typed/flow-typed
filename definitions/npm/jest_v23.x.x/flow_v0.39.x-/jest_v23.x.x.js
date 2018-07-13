@@ -138,6 +138,30 @@ type JestPromiseType = {
 type JestTestName = string | Function;
 
 /**
+ *  Plugin: jest-styled-components
+ */
+
+type JestStyledComponentsMatcherValue =
+  | string
+  | JestAsymmetricEqualityType
+  | RegExp
+  | typeof undefined;
+
+type JestStyledComponentsMatcherOptions = {
+  media?: string;
+  modifier?: string;
+  supports?: string;
+}
+
+type JestStyledComponentsMatchersType = {
+  toHaveStyleRule(
+    property: string,
+    value: JestStyledComponentsMatcherValue,
+    options?: JestStyledComponentsMatcherOptions
+  ): void,
+};
+
+/**
  *  Plugin: jest-enzyme
  */
 type EnzymeMatchersType = {
@@ -497,7 +521,13 @@ type JestExtendedMatchersType = {
 };
 
 interface JestExpectType {
-  not: JestExpectType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType & JestExtendedMatchersType,
+  not:
+    & JestExpectType
+    & EnzymeMatchersType
+    & DomTestingLibraryType
+    & JestJQueryMatchersType
+    & JestStyledComponentsMatchersType
+    & JestExtendedMatchersType,
   /**
    * If you have a mock function, you can use .lastCalledWith to test what
    * arguments it was last called with.
@@ -1014,7 +1044,15 @@ type JestPrettyFormatPlugins = Array<JestPrettyFormatPlugin>;
 /** The expect function is used every time you want to test a value */
 declare var expect: {
   /** The object that you want to make assertions against */
-  (value: any): JestExpectType & JestPromiseType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType & JestExtendedMatchersType,
+  (value: any):
+    & JestExpectType
+    & JestPromiseType
+    & EnzymeMatchersType
+    & DomTestingLibraryType
+    & JestJQueryMatchersType
+    & JestStyledComponentsMatchersType
+    & JestExtendedMatchersType,
+
   /** Add additional Jasmine matchers to Jest's roster */
   extend(matchers: { [name: string]: JestMatcher }): void,
   /** Add a module that formats application-specific data structures. */
