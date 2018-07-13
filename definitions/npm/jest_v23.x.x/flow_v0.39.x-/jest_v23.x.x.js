@@ -91,7 +91,7 @@ type JestAsymmetricEqualityType = {
   /**
    * A custom Jasmine equality tester
    */
-  asymmetricMatch(value: any): boolean
+  asymmetricMatch(value: mixed): boolean
 };
 
 type JestCallsType = {
@@ -140,15 +140,11 @@ type JestTestName = string | Function;
 /**
  *  Plugin: jest-styled-components
  */
-type AsymmetricMatcher = {
-  $$typeof: Symbol;
-  sample?: string | RegExp | Object | Array<any> | Function;
-}
 
 type JestStyledComponentsMatcherValue =
   | string
+  | JestAsymmetricEqualityType
   | RegExp
-  | AsymmetricMatcher
   | typeof undefined;
 
 type JestStyledComponentsMatcherOptions = {
@@ -525,7 +521,13 @@ type JestExtendedMatchersType = {
 };
 
 interface JestExpectType {
-  not: JestExpectType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType & JestExtendedMatchersType & JestStyledComponentsMatchersType,
+  not:
+    & JestExpectType
+    & EnzymeMatchersType
+    & DomTestingLibraryType
+    & JestJQueryMatchersType
+    & JestStyledComponentsMatchersType
+    & JestExtendedMatchersType,
   /**
    * If you have a mock function, you can use .lastCalledWith to test what
    * arguments it was last called with.
@@ -1042,14 +1044,22 @@ type JestPrettyFormatPlugins = Array<JestPrettyFormatPlugin>;
 /** The expect function is used every time you want to test a value */
 declare var expect: {
   /** The object that you want to make assertions against */
-  (value: any): JestExpectType & JestPromiseType & EnzymeMatchersType & DomTestingLibraryType & JestJQueryMatchersType & JestExtendedMatchersType & JestStyledComponentsMatchersType,
+  (value: any):
+    & JestExpectType
+    & JestPromiseType
+    & EnzymeMatchersType
+    & DomTestingLibraryType
+    & JestJQueryMatchersType
+    & JestStyledComponentsMatchersType
+    & JestExtendedMatchersType,
+
   /** Add additional Jasmine matchers to Jest's roster */
   extend(matchers: { [name: string]: JestMatcher }): void,
   /** Add a module that formats application-specific data structures. */
   addSnapshotSerializer(pluginModule: JestPrettyFormatPlugin): void,
   assertions(expectedAssertions: number): void,
   hasAssertions(): void,
-  any(value: any): JestAsymmetricEqualityType,
+  any(value: mixed): JestAsymmetricEqualityType,
   anything(): any,
   arrayContaining(value: Array<mixed>): Array<mixed>,
   objectContaining(value: Object): Object,
@@ -1077,7 +1087,7 @@ declare var jest: JestObjectType;
  */
 declare var jasmine: {
   DEFAULT_TIMEOUT_INTERVAL: number,
-  any(value: any): JestAsymmetricEqualityType,
+  any(value: mixed): JestAsymmetricEqualityType,
   anything(): any,
   arrayContaining(value: Array<mixed>): Array<mixed>,
   clock(): JestClockType,
