@@ -30,7 +30,7 @@ declare module "socket.io-client" {
     once(event: string, cb: Callback): T;
     off(event: string, cb: Callback): T;
     removeListener(event: string, cb: Callback): T;
-    removeAllListeners(event: string, cb: Callback): T;
+    removeAllListeners(event?: string): T;
     removeEventListener(event: string, cb: Callback): T;
     emit(event: string, payload: mixed): T;
     listeners(event: string): Callback[];
