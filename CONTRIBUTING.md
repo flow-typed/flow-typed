@@ -19,7 +19,7 @@ to existing libdefs.
 
 ## Running libdef tests
 
-We write tests for libdefs. When you make changes to a libdef, you should make sure the tests still pass or add new tests for new functionality.
+We write tests for libdefs. When you make changes to a libdef, verify that the tests still pass and add tests to cover new functionality.
 
 Running tests requires the flow-typed CLI to be installed, which we have scripts set up to build locally in a dist folder. To run your tests, you'll first have to run
 
@@ -33,7 +33,7 @@ to build the CLI. Once that's finished, you can repeatedly run
 $ ./quick_run_def_tests.sh
 ```
 
-to run tests for any libdefs that have changes. (Caveat: the tests are only run for the most recent flow version of the libdef, so if you make changes to an earlier flow version of the libdef, the tests won't run against them, and honestly you should just update your flow anyway and stop working on older versions 😉).
+to run tests for any libdefs that have changes. (Caveat: the tests are only run for the most recent flow version of the libdef, so if you make changes to an earlier flow version of the libdef, the tests won't run against them.
 
 If you ever make changes to the CLI files, make sure you rerun the `./build_and_test_cli.sh` to update the local build of the CLI with your changes.
 
