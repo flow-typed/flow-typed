@@ -45,12 +45,12 @@ colorVal = color("Color with non-string default", 0);
 let badColorVal: number = color("Color", "#ffffff");
 
 // date
-let dateVal: Date;
+let dateVal: number;
 dateVal = date("Date", new Date());
 // $ExpectError
 dateVal = date("Date with non-date default", "2018-01-01");
 // $ExpectError
-let badDateVal: string = date("Date assigned to non-date variable", new Date());
+let badDateVal: string = date("Date assigned to non-number variable", new Date());
 
 // number
 let numberVal: number;
