@@ -918,7 +918,7 @@ declare module "react-apollo" {
       ) => Promise<ApolloQueryResult<TData2>>),
     load: () => void,
     startPolling: (interval: number) => void,
-    stopPolling: (interval: number) => void,
+    stopPolling: () => void,
     subscribeToMore: (
       options: SubscribeToMoreOptions<TData, any, any>
     ) => () => void,
