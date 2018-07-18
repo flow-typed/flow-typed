@@ -5,6 +5,7 @@ import {
   Subject,
   of,
   from,
+  timer,
   interval,
   never,
   empty,
@@ -68,7 +69,9 @@ const anonymousSubject: AnonymousSubject<number> = new AnonymousSubject(
 );
 anonymousSubject.next(5);
 
-const results: Array<number> = anonymousSubject.toArray();
+const resultObservable: Observable<Array<number>> = anonymousSubject.toArray();
+
+resultObservable.toPromise().then((resolvedValue: Array<number>) => {});
 
 anonymousSubject.error(new Error());
 
