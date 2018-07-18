@@ -41,4 +41,4 @@ newrelic.addCustomAttributes({
 })
 
 const seg1: Promise<string> = newrelic.startSegment('sqg', true, () => '')
-const seg1: Promise<string> = newrelic.startSegment('sqg', true, () => Promise.resolve(''))
+const seg2: Promise<string> = newrelic.startSegment('sqg', true, () => Promise.resolve(''))
