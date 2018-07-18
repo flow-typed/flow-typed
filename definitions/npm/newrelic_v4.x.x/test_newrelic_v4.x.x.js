@@ -26,14 +26,14 @@ newrelic.addCustomAttribute('test', 'value')
 // $ExpectError
 newrelic.addCustomAttribute('test', [])
 
-newrelic.addCustomAttributes('test', {
+newrelic.addCustomAttributes({
   test1: 10,
   test2: true,
   test3: 'value'
 })
 
 // $ExpectError
-newrelic.addCustomAttributes('test', {
+newrelic.addCustomAttributes({
   test1: 10,
   test2: true,
   test3: 'value',
