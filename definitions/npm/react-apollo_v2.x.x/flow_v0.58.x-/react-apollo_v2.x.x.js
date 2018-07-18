@@ -764,24 +764,22 @@ declare module "react-apollo" {
     ...args: any[]
   ) => string[] | PureQueryOptions[];
 
-  declare export type MutationOpts<TVariables> = {
+  declare export type MutationOpts<TVariables> = {|
     variables?: TVariables,
     optimisticResponse?: Object,
     refetchQueries?: string[] | PureQueryOptions[] | RefetchQueriesProviderFn,
     update?: MutationUpdaterFn<*>,
-    errorPolicy?: ErrorPolicy,
-    $call?: empty // Not function
-  };
+    errorPolicy?: ErrorPolicy
+  |};
 
-  declare export type QueryOpts<TVariables> = {
+  declare export type QueryOpts<TVariables> = {|
     ssr?: boolean,
     variables?: TVariables,
     fetchPolicy?: FetchPolicy,
     pollInterval?: number,
     skip?: boolean,
-    errorPolicy?: ErrorPolicy,
-    $call?: empty // Not function
-  };
+    errorPolicy?: ErrorPolicy
+  |};
 
   declare export interface GraphqlQueryControls<
     TGraphQLVariables = OperationVariables

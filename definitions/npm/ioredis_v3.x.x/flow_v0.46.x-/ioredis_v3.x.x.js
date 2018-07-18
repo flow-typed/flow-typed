@@ -710,9 +710,7 @@ declare module "ioredis" {
      */
     autoResendUnfulfilledCommands?: boolean,
     lazyConnect?: boolean,
-    tls?: {
-      ca: Buffer
-    },
+    tls?: tls$connectOptions,
     sentinels?: { host: string, port: number }[],
     name?: string,
     /**

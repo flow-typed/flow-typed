@@ -118,6 +118,8 @@ describe.skip(aFunction, () => {});
 test("test", () => expect("foo").toMatchSnapshot());
 test(AClass, () => expect("foo").toMatchSnapshot());
 test(aFunction, () => expect("foo").toMatchSnapshot());
+test.each([['arg1', 2, true], ['arg2', 3, false]])("test", () => expect("foo").toMatchSnapshot());
+test.only.each([['arg1', 2, true], ['arg2', 3, false]])("test", () => expect("foo").toMatchSnapshot());
 test.only("test", () => expect("foo").toMatchSnapshot());
 test.skip("test", () => expect("foo").toMatchSnapshot());
 
@@ -245,6 +247,46 @@ expect([1, 2, 3]).toHaveLength(3);
   await expect(Promise.reject("ok")).rejects.toBe("ok");
   await expect(Promise.resolve("ok")).resolves.toBe("ok");
 })();
+
+/**
+ *  Plugin: jest-styled-components
+ */
+// $ExpectError
+import { mount } from "enzyme";
+// $ExpectError
+import styled from "styled-components";
+
+const ColoredSpan = styled.span`
+  color: red;
+`;
+
+const ButtonWithBreakpoint = styled.button`
+  @media (max-width: 640px) {
+    &:hover {
+      color: red;
+    }
+  }
+`;
+
+const styledWrapper = mount(<ColoredSpan />);
+
+expect(styledWrapper).toHaveStyleRule('color', 'red');
+
+expect(styledWrapper).not.toHaveStyleRule('cursor', expect.any(String));
+
+expect(mount(<ButtonWithBreakpoint />)).toHaveStyleRule(
+  'color', 'red', {
+    media: '(max-width:640px)',
+    modifier: ':hover',
+  }
+);
+
+// $ExpectError
+expect(styledWrapper).toHaveStyleRule();
+
+// $ExpectError
+expect(styledWrapper).toHaveStyleRule({backgroundColor: 'red'});
+
 
 /**
  *  Plugin: jest-enzyme

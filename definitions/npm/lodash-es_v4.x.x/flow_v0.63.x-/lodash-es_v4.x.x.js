@@ -1117,7 +1117,7 @@ declare module "lodash-es" {
   declare export function functionsIn(object?: ?Object): Array<string>;
   declare export function get(
     object?: ?Object | ?$ReadOnlyArray<any> | void | null,
-    path?: ?$ReadOnlyArray<string> | string,
+    path?: ?$ReadOnlyArray<string | number> | string | number,
     defaultValue?: any
   ): any;
   declare export function has(object: Object, path: Array<string> | string): boolean;

@@ -13,9 +13,9 @@ declare module 'directory-tree' {
   declare type directoryTreeType = (
     path: string,
     options?: {|
-      normalizePath?: (path: string) => string,
-      exclude?: (string | Array<string>),
-      extensions?: Array<string>,
+      normalizePath?: (path: string) => boolean,
+      exclude?: (RegExp | Array<RegExp>),
+      extensions?: RegExp,
     |} | null,
     onEachFile?: (
       item: {|

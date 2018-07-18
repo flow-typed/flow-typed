@@ -101,6 +101,8 @@ declare class moment$MomentDuration {
   days(): number,
   asDays(): number,
   months(): number,
+  asWeeks(): number,
+  weeks(): number,
   asMonths(): number,
   years(): number,
   asYears(): number,

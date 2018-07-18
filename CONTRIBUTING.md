@@ -4,9 +4,10 @@ This is a set of best practices to keep in mind while writing a libdef. These
 best practices should also be considered when reviewing new libdefs or changes
 to existing libdefs.
 
-## tldr
+## ToC
 
-* [Contributing to the definitions repository](#contributing-to-the-definitions-repository)
+* [Running libdef tests](#running-libdef-tests)
+* [Creating a new library definition](#creating-a-new-library-definition)
 * [Writing libdefs tips](#writing-libdefs-tips)
   * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
@@ -16,7 +17,27 @@ to existing libdefs.
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
 
-## Contributing to the definitions repository
+## Running libdef tests
+
+We write tests for libdefs. When you make changes to a libdef, verify that the tests still pass and add tests to cover new functionality.
+
+Running tests requires the flow-typed CLI to be installed, which we have scripts set up to build locally in a dist folder. To run your tests, you'll first have to run
+
+```
+$ ./build_and_test_cli.sh
+```
+
+to build the CLI. Once that's finished, you can repeatedly run
+
+```
+$ ./quick_run_def_tests.sh
+```
+
+to run tests for any libdefs that have changes. (Caveat: the tests are only run for the most recent flow version of the libdef, so if you make changes to an earlier flow version of the libdef, the tests won't run against them.
+
+If you ever make changes to the CLI files, make sure you rerun the `./build_and_test_cli.sh` to update the local build of the CLI with your changes.
+
+## Creating a new library definition
 
 All definitions are contained in the [definitions/](https://github.com/flow-typed/flow-typed/tree/master/definitions)
 directory and are named and structured very explicitly.

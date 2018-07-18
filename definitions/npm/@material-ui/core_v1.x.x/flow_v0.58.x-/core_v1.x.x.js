@@ -1299,7 +1299,7 @@ declare module "@material-ui/core/Modal/Modal" {
     disableBackdrop?: boolean,
     ignoreBackdropClick?: boolean,
     ignoreEscapeKeyUp?: boolean,
-    modalManager: Object,
+    modalManager?: Object,
     onBackdropClick?: Function,
     onEnter?: TransitionCallback,
     onEntering?: TransitionCallback,

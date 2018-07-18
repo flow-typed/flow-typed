@@ -1,6 +1,4 @@
 declare module "formik" {
-  import type { ComponentType } from "react";
-
   declare export type FormikErrors<Values> = {
     [field: $Keys<Values>]: ?string
   };
@@ -81,6 +79,11 @@ declare module "formik" {
     initialValues?: Values,
 
     /**
+     * Reset handler
+     */
+    onReset?: (values: Values, formikActions: FormikActions<Values>) => void,
+
+    /**
      * Submission handler
      */
     onSubmit: (values: Values, formikActions: FormikActions<Values>) => any,
@@ -88,7 +91,7 @@ declare module "formik" {
     /**
      * Form component to render
      */
-    component?: React$ComponentType<FormikProps<Values> | void>,
+    component?: React$ComponentType<FormikProps<Values>> | React$Node,
 
     /**
      * Render prop (works like React router's <Route render={props =>} />)
@@ -230,15 +233,51 @@ declare module "formik" {
 
   declare export var Form: React$StatelessFunctionalComponent<any>;
 
-  declare export function withFormik<Props, Values>({
+  /**
+   * Formik actions + { props }
+   */
+  declare export type FormikBag<P, V> = { props: P } & FormikActions<V>;
+
+  /**
+   * withFormik() configuration options. Backwards compatible.
+   */
+  declare export type WithFormikConfig<
+    Props,
+    Values,
+  > = FormikSharedConfig & {
+    /**
+     * Set the display name of the component. Useful for React DevTools.
+     */
+    displayName?: string,
+
+    /**
+     * Submission handler
+     */
+    handleSubmit: (values: Values, formikBag: FormikBag<Props, Values>) => void,
+
+    /**
+     * Map props to the form values
+     */
     mapPropsToValues?: (props: Props) => Values,
-    handleSubmit?: (
-      values: Values,
-      goodies: FormikActions<Values> & { props: Props }
-    ) => Promise<void> | void,
-    validate?: (values: Values, props: Props) => { [field: string]: any },
-    validationSchema?: (props: Props) => any
-  }): (
-    ComponentType<Props>
-  ) => ComponentType<$Diff<Props, FormikProps<Values>>>;
+
+    /**
+     * A Yup Schema or a function that returns a Yup schema
+     */
+    validationSchema?: any | ((props: Props) => any),
+
+    /**
+     * Validation function. Must return an error object or promise that
+     * throws an error object where that object keys map to corresponding value.
+     */
+    validate?: (values: Values) => void | FormikErrors<Values> | Promise<any>,
+  }
+
+  declare type TypeOrVoid = <V>(V) => (V | void)
+
+  declare export function withFormik<
+    Props,
+    Values,
+  >(WithFormikConfig<React$ComponentType<Props>, Values>): (
+    Component: React$ComponentType<Props>
+  ) => React$ComponentType<$Diff<Props, $ObjMap<FormikProps<Values>, TypeOrVoid>>>;
 }
