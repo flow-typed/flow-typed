@@ -119,7 +119,7 @@ declare module "react-redux" {
     ST: $Subtype<{[_: $Keys<Com>]: any}>
     >(
     mapStateToProps: MapStateToProps<S, SP, RSP>,
-    mapDispatchToPRops: MDP
+    mapDispatchToProps: MDP
   ): (component: Com) => ComponentType<$Diff<CP, MDP> & SP> & $Shape<ST>;
 
   declare export function connect<
