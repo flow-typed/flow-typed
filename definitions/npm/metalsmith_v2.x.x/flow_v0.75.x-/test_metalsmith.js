@@ -31,6 +31,10 @@ const dummyPlugin = (files: FilesMap, ms: Metalsmith, done: DoneCallback) => {
   done();
 };
 
+const dummyAsyncPlugin = async (files: FilesMap, ms: Metalsmith, done: DoneCallback) => {
+  done();
+};
+
 Metalsmith(__dirname)
   .source('pages')
   .destination('public')
@@ -42,6 +46,7 @@ Metalsmith(__dirname)
   // $ExpectError
   .ignore([123])
   .use(dummyPlugin)
+  .use(dummyAsyncPlugin)
   // $ExpectError
   .use(null)
   .build(err => {
