@@ -67,6 +67,7 @@ declare class $npm$firebase$App {
   auth(): $npm$firebase$auth$Auth;
   database(): $npm$firebase$database$Database;
   storage(): $npm$firebase$storage$Storage;
+  firestore(): $npm$firebase$firestore$Firestore;
   delete(): Promise<void>;
 }
 
@@ -476,7 +477,9 @@ declare interface $npm$firebase$firestore$QueryListenOptions {
   includeMetadataChanges: boolean;
   includeQueryMetadataChanges: boolean;
 }
-declare type $npm$firebase$firestore$observer = (snapshot: $npm$firebase$firestore$DocumentSnapshot) => void | Promise<void>;
+
+declare type $npm$firebase$firestore$documentObserver = (snapshot: $npm$firebase$firestore$DocumentSnapshot) => void | Promise<void>;
+declare type $npm$firebase$firestore$queryObserver = (snapshot: $npm$firebase$firestore$QuerySnapshot) => void | Promise<void>;
 declare type $npm$firebase$firestore$observerError = (error: $npm$firebase$Error) => void | Promise<void>;
 
 declare class $npm$firebase$firestore$Query {
@@ -486,9 +489,9 @@ declare class $npm$firebase$firestore$Query {
   get(): Promise<$npm$firebase$firestore$QuerySnapshot>;
   limit(limit: number): $npm$firebase$firestore$Query;
   onSnapshot(
-    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$observer,
+    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$queryObserver,
     observerOrOnNextOrOnError?: | $npm$firebase$firestore$QueryListenOptions
-    | $npm$firebase$firestore$observer
+    | $npm$firebase$firestore$queryObserver
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
   ): Function;
@@ -505,7 +508,7 @@ declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$
   constructor(): $npm$firebase$firestore$CollectionReference;
   id: string;
   parent: $npm$firebase$firestore$DocumentReference | null;
-  add(data: {}): Promise<mixed>;
+  add(data: Object): Promise<mixed>;
   doc(documentPath?: string): $npm$firebase$firestore$DocumentReference;
 }
 
@@ -521,18 +524,18 @@ declare class $npm$firebase$firestore$DocumentReference {
   delete(): Promise<void>;
   get(): Promise<$npm$firebase$firestore$DocumentSnapshot>;
   onSnapshot(
-    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$observer,
+    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$documentObserver,
     observerOrOnNextOrOnError?: | $npm$firebase$firestore$QueryListenOptions
-    | $npm$firebase$firestore$observer
+    | $npm$firebase$firestore$documentObserver
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
   ): Function;
-  set(data: {}, options?: { merge: boolean } | null): Promise<void>;
+  set(data: Object, options?: { merge: boolean } | null): Promise<void>;
   update(...args: Array<any>): Promise<void>;
 }
 
 declare class $npm$firebase$firestore$DocumentSnapshot {
-  data(): {};
+  data(): Object;
   get(fieldpath: typeof $npm$firebase$firestore$FieldPath): any;
   exists: boolean;
   id: string;
@@ -596,7 +599,7 @@ declare interface $npm$firebase$firestore$Transaction {
   get(documentRef: $npm$firebase$firestore$DocumentReference): Promise<$npm$firebase$firestore$DocumentSnapshot>;
   set(
     documentRef: $npm$firebase$firestore$DocumentReference,
-    data: {},
+    data: Object,
     options?: { merge: boolean }
   ): $npm$firebase$firestore$Transaction;
   update(documentRef: $npm$firebase$firestore$DocumentReference, ...args: Array<any>): $npm$firebase$firestore$Transaction;
@@ -607,7 +610,7 @@ declare interface $npm$firebase$firestore$WriteBatch {
   delete(documentRef: $npm$firebase$firestore$DocumentReference): $npm$firebase$firestore$WriteBatch;
   set(
     documentRef: $npm$firebase$firestore$DocumentReference,
-    data: {},
+    data: Object,
     options?: { merge: boolean }
   ): $npm$firebase$firestore$WriteBatch;
   update(documentRef: $npm$firebase$firestore$DocumentReference, ...args: Array<any>): $npm$firebase$firestore$WriteBatch;
