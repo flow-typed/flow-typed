@@ -1,22 +1,39 @@
 /* @flow */
 
 import {
-  AnonymousSubject,
   Observable,
+  Subject,
+  of,
+  from,
+  timer,
+  interval,
+  never,
+  empty,
+  range,
+  merge,
+  fromEvent,
+  AnonymousSubject,
   Observer,
   Scheduler,
-  Subject,
+  throwError,
   Subscriber
 } from "rxjs";
-import { distinct, startWith, repeat, mergeMap, concatMap, switchMap, groupBy, defaultIfEmpty, timeoutWith, buffer, bufferCount, exhaustMap, bufferWhen, bufferToggle } from 'rxjs/operators'
-import { of } from 'rxjs/observable/of';
-import { timer } from 'rxjs/observable/timer';
-import { interval } from 'rxjs/observable/interval';
-import { from } from 'rxjs/observable/from';
-import { range } from 'rxjs/observable/range';
-import { fromEvent } from 'rxjs/observable/fromEvent';
-import { empty } from 'rxjs/observable/empty';
-import { never } from 'rxjs/observable/never';
+import {
+  distinct,
+  startWith,
+  repeat,
+  mergeMap,
+  concatMap,
+  switchMap,
+  groupBy,
+  defaultIfEmpty,
+  timeoutWith,
+  buffer,
+  bufferCount,
+  exhaustMap,
+  bufferWhen,
+  bufferToggle,
+} from 'rxjs/operators'
 
 const numbers = of(1);
 Observable.create(observer => {
@@ -51,9 +68,18 @@ const anonymousSubject: AnonymousSubject<number> = new AnonymousSubject(
   of(3)
 );
 anonymousSubject.next(5);
+
+const resultObservable: Observable<Array<number>> = anonymousSubject.toArray();
+
+resultObservable.toPromise().then((resolvedValue: Array<number>) => {});
+
 anonymousSubject.error(new Error());
 
 const fromObservable: Observable<number> = from(Promise.resolve(1));
+
+const mergedObservable: Observable<number> = merge(distinct1, distinct2);
+
+const errorObservable: Observable<Error> = throwError(new Error());
 
 // Standard projection operators
 const project: Array<Observable<string>> = [
