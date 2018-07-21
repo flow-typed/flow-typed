@@ -186,12 +186,13 @@ describe('fuzzaldrin-plus@0.6.0', () => {
     });
   });
 
-  it('should not fail when reusing options object between calls', () => {
+  it('should fail when reusing options object between calls filter & others calls', () => {
     const items = ['Maybe', 'Me'];
     const query = 'me';
     const options = { usePathScoring: true };
 
     fuzzaldrinPlus.filter(items, query, options);
-    fuzzaldrinPlus.match(items[0], query, { usePathScoring: true });
+    // $ExpectError
+    fuzzaldrinPlus.match(items[0], query, options);
   });
 });
