@@ -6,7 +6,7 @@ declare module "@storybook/addon-knobs/react" {
   declare function boolean(string, boolean, ?GroupId): boolean;
   declare function button(string, ((?{}) => void), ?GroupId): void;
   declare function color(string, string, ?GroupId): string;
-  declare function date(string, Date, ?GroupId): Date;
+  declare function date(string, Date, ?GroupId): number;
   declare function number(string, number, ?{ range?: boolean, min?: number, max?: number, step?: number }, ?GroupId): number;
   declare function object(string, any, ?GroupId): any;
   declare function select<T>(string, Array<T> | { [T]: string }, T, ?GroupId): T;
