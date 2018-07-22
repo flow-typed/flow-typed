@@ -2506,7 +2506,7 @@ declare module "@material-ui/core/withWidth/withWidth" {
     noSSR?: boolean,
     initialWidth?: Breakpoint,
     resizeInterval?: number
-  |}) => <Props: {}>(
+  |}) => <Props: { width: Breakpoint }>(
     Component: React$ComponentType<Props>
   ) => React$ComponentType<$Diff<Props, { width: Breakpoint }>>;
 }
