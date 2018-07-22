@@ -296,11 +296,3 @@ firebase
   .firestore()
   .collection('/foo')
   .get({ source: 'cache' })
-
-// #30
-const emailProviderId: string = firebase.auth.EmailAuthProvider.PROVIDER_ID
-const facebookProviderId: string = firebase.auth.FacebookAuthProvider.PROVIDER_ID
-const githubProviderId: string = firebase.auth.GithubAuthProvider.PROVIDER_ID
-const googleProviderId: string = firebase.auth.GoogleAuthProvider.PROVIDER_ID
-const phoneProviderId: string = firebase.auth.PhoneAuthProvider.PROVIDER_ID
-const twitterProviderId: string = firebase.auth.TwitterAuthProvider.PROVIDER_ID

@@ -238,35 +238,46 @@ declare class $npm$firebase$auth$User extends $npm$firebase$auth$UserInfo {
 }
 
 declare class $npm$firebase$auth$EmailAuthProvider extends $npm$firebase$auth$AuthProvider {
+  static EMAIL_LINK_SIGN_IN_METHOD: string;
+  static EMAIL_PASSWORD_SIGN_IN_METHOD: string;
   static PROVIDER_ID: string;
-  providerId: string;
-  credential(
+  static credential(
     email: string,
     password: string
   ): $npm$firebase$auth$AuthCredential;
+  static credentialWithLink(
+    email: string,
+    emailLink: string
+  ): $npm$firebase$auth$AuthCredential;
+  providerId: string;
 }
 
 declare class $npm$firebase$auth$FacebookAuthProvider extends $npm$firebase$auth$AuthProvider {
+  static FACEBOOK_SIGN_IN_METHOD: string;
   static PROVIDER_ID: string;
-  credential(token: string): $npm$firebase$auth$AuthCredential;
+  static credential(token: string): $npm$firebase$auth$AuthCredential;
   addScope(scope: string): $npm$firebase$auth$FacebookAuthProvider;
   setCustomParameters(
     customOAuthParameters: Object
   ): $npm$firebase$auth$FacebookAuthProvider;
+  providerId: string
 }
 
 declare class $npm$firebase$auth$GithubAuthProvider extends $npm$firebase$auth$AuthProvider {
+  static GITHUB_SIGN_IN_METHOD: string;
   static PROVIDER_ID: string;
-  credential(token: string): $npm$firebase$auth$AuthCredential;
+  static credential(token: string): $npm$firebase$auth$AuthCredential;
   addScope(scope: string): $npm$firebase$auth$GithubAuthProvider;
   setCustomParameters(
     customOAuthParameters: Object
   ): $npm$firebase$auth$GithubAuthProvider;
+  providerId: string;
 }
 
 declare class $npm$firebase$auth$GoogleAuthProvider extends $npm$firebase$auth$AuthProvider {
+  static GOOGLE_SIGN_IN_METHOD: string;
   static PROVIDER_ID: string;
-  credential(
+  static credential(
     idToken?: string,
     accessToken?: string
   ): $npm$firebase$auth$AuthCredential;
@@ -277,18 +288,20 @@ declare class $npm$firebase$auth$GoogleAuthProvider extends $npm$firebase$auth$A
 }
 
 declare class $npm$firebase$auth$PhoneAuthProvider extends $npm$firebase$auth$AuthProvider {
+  static PHONE_SIGN_IN_METHOD: string;
   static PROVIDER_ID: string;
-  constructor(
-    auth?: $npm$firebase$auth$Auth
-  ): $npm$firebase$auth$PhoneAuthProvider;
-  credential(
+  static credential(
     verificationId: string,
     verificationCode: string
   ): $npm$firebase$auth$AuthCredential;
+  constructor(
+    auth?: $npm$firebase$auth$Auth
+  ): $npm$firebase$auth$PhoneAuthProvider;
   verifyPhoneNumber(
     phoneNumber: string,
     applicationVerifier: $npm$firebase$auth$ApplicationVerifier
   ): Promise<string>;
+  providerId: string;
 }
 
 declare class $npm$firebase$auth$TwitterAuthProvider extends $npm$firebase$auth$AuthProvider {
