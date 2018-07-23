@@ -4,9 +4,9 @@
 // @see https://docs.newrelic.com/docs/agents/nodejs-agent/supported-features/nodejs-agent-api
 declare module 'newrelic' {
 
-  declare interface TransactionHandle {
-    end(callback?: () => any): void;
-    ignore(): void;
+  declare type TransactionHandle = {
+    end: (callback?: () => any) => void,
+    ignore: () => void
   }
 
   declare interface Instrument {
