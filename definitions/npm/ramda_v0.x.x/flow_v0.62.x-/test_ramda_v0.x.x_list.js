@@ -172,7 +172,19 @@ const str: string = "hello world";
     it('fails when type refinement is incorrect', () => {
       const isString = (x): bool %checks => typeof x === 'string'
       // $ExpectError
-      const ns: Array<number> = (filter: RefineFilter)(notNull, ['1', 2])
+      const ns: Array<number> = (filter: RefineFilter)(isString, ['1', 2])
+    })
+
+    it('fails when attempting to refine from a non $Pred predicate', () => {
+      const isNumber = (x) => typeof x === 'number'
+      // $ExpectError
+      const ns: Array<number> = filter(isNumber, ['1', 2])
+    })
+
+    it('does not accept predicates missing %checks when using RefineFilter', () => {
+      const isNumber = (x) => typeof x === 'number'
+      // $ExpectError
+      const ns: Array<number> = (filter: RefineFilter)(isNumber, ['1', 2])
     })
   })
 
