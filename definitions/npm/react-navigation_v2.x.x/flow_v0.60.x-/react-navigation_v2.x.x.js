@@ -184,7 +184,7 @@ declare module 'react-navigation' {
     | NavigationLeafRoute
     | NavigationStateRoute;
 
-  declare export type NavigationLeafRoute = {
+  declare export type NavigationLeafRoute = {|
     /**
      * React's key used by some navigators. No need to specify these manually,
      * they will be defined by the router.
@@ -204,10 +204,12 @@ declare module 'react-navigation' {
      * e.g. `{ car_id: 123 }` in a route that displays a car.
      */
     params?: NavigationParams,
-  };
+  |};
 
-  declare export type NavigationStateRoute = NavigationLeafRoute &
-    NavigationState;
+  declare export type NavigationStateRoute = {|
+    ...NavigationLeafRoute,
+    ...$Exact<NavigationState>,
+  |};
 
   /**
    * Router
@@ -556,6 +558,21 @@ declare module 'react-navigation' {
     screenProps?: {},
     navigationOptions?: O,
   }>;
+
+  /**
+   * NavigationEvents component
+   */
+
+  declare type _NavigationEventsProps = {
+    navigation?: NavigationScreenProp<NavigationState>,
+    onWillFocus?: NavigationEventCallback,
+    onDidFocus?: NavigationEventCallback,
+    onWillBlur?: NavigationEventCallback,
+    onDidBlur?: NavigationEventCallback,
+  };
+  declare export var NavigationEvents: React$ComponentType<
+    _NavigationEventsProps
+  >;
 
   /**
    * Navigation container
@@ -1156,10 +1173,9 @@ declare module 'react-navigation' {
       }
     >
   >;
-  
-  declare export function withNavigationFocus<Props: {}, Comp: React$ComponentType<Props>>(
-    Component: Comp
-  ): React$ComponentType<$Diff<React$ElementConfig<Comp>, { isFocused: boolean | void }>>;
+  declare export function withNavigationFocus<Props: {}>(
+    Component: React$ComponentType<Props>
+  ): React$ComponentType<$Diff<Props, { isFocused: boolean | void }>>;
 
   declare export function getNavigation<State: NavigationState, Options: {}>(
     router: NavigationRouter<State, Options>,
