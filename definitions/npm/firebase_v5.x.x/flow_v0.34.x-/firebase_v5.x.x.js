@@ -238,35 +238,46 @@ declare class $npm$firebase$auth$User extends $npm$firebase$auth$UserInfo {
 }
 
 declare class $npm$firebase$auth$EmailAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string;
-  providerId: string;
-  credential(
+  static EMAIL_LINK_SIGN_IN_METHOD: string;
+  static EMAIL_PASSWORD_SIGN_IN_METHOD: string;
+  static PROVIDER_ID: string;
+  static credential(
     email: string,
     password: string
   ): $npm$firebase$auth$AuthCredential;
+  static credentialWithLink(
+    email: string,
+    emailLink: string
+  ): $npm$firebase$auth$AuthCredential;
+  providerId: string;
 }
 
 declare class $npm$firebase$auth$FacebookAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string;
-  credential(token: string): $npm$firebase$auth$AuthCredential;
+  static FACEBOOK_SIGN_IN_METHOD: string;
+  static PROVIDER_ID: string;
+  static credential(token: string): $npm$firebase$auth$AuthCredential;
   addScope(scope: string): $npm$firebase$auth$FacebookAuthProvider;
   setCustomParameters(
     customOAuthParameters: Object
   ): $npm$firebase$auth$FacebookAuthProvider;
+  providerId: string
 }
 
 declare class $npm$firebase$auth$GithubAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string;
-  credential(token: string): $npm$firebase$auth$AuthCredential;
+  static GITHUB_SIGN_IN_METHOD: string;
+  static PROVIDER_ID: string;
+  static credential(token: string): $npm$firebase$auth$AuthCredential;
   addScope(scope: string): $npm$firebase$auth$GithubAuthProvider;
   setCustomParameters(
     customOAuthParameters: Object
   ): $npm$firebase$auth$GithubAuthProvider;
+  providerId: string;
 }
 
 declare class $npm$firebase$auth$GoogleAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string;
-  credential(
+  static GOOGLE_SIGN_IN_METHOD: string;
+  static PROVIDER_ID: string;
+  static credential(
     idToken?: string,
     accessToken?: string
   ): $npm$firebase$auth$AuthCredential;
@@ -277,22 +288,24 @@ declare class $npm$firebase$auth$GoogleAuthProvider extends $npm$firebase$auth$A
 }
 
 declare class $npm$firebase$auth$PhoneAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string;
-  constructor(
-    auth?: $npm$firebase$auth$Auth
-  ): $npm$firebase$auth$PhoneAuthProvider;
-  credential(
+  static PHONE_SIGN_IN_METHOD: string;
+  static PROVIDER_ID: string;
+  static credential(
     verificationId: string,
     verificationCode: string
   ): $npm$firebase$auth$AuthCredential;
+  constructor(
+    auth?: $npm$firebase$auth$Auth
+  ): $npm$firebase$auth$PhoneAuthProvider;
   verifyPhoneNumber(
     phoneNumber: string,
     applicationVerifier: $npm$firebase$auth$ApplicationVerifier
   ): Promise<string>;
+  providerId: string;
 }
 
 declare class $npm$firebase$auth$TwitterAuthProvider extends $npm$firebase$auth$AuthProvider {
-  PROVIDER_ID: string;
+  static PROVIDER_ID: string;
   credential(token: string, secret: string): $npm$firebase$auth$AuthCredential;
   setCustomParameters(customOAuthParameters: Object): this;
 }
@@ -481,12 +494,15 @@ declare interface $npm$firebase$firestore$QueryListenOptions {
 declare type $npm$firebase$firestore$documentObserver = (snapshot: $npm$firebase$firestore$DocumentSnapshot) => void | Promise<void>;
 declare type $npm$firebase$firestore$queryObserver = (snapshot: $npm$firebase$firestore$QuerySnapshot) => void | Promise<void>;
 declare type $npm$firebase$firestore$observerError = (error: $npm$firebase$Error) => void | Promise<void>;
+declare type $npm$firebase$firestore$GetOptions = {
+  source?: 'default' | 'cache' | 'server'
+}
 
 declare class $npm$firebase$firestore$Query {
   firestore: $npm$firebase$firestore$Firestore;
   endAt(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
   endBefore(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
-  get(): Promise<$npm$firebase$firestore$QuerySnapshot>;
+  get(getOptions?: $npm$firebase$firestore$GetOptions): Promise<$npm$firebase$firestore$QuerySnapshot>;
   limit(limit: number): $npm$firebase$firestore$Query;
   onSnapshot(
     optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$queryObserver,

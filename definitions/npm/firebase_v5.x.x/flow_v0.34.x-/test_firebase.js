@@ -290,3 +290,9 @@ firebase
     snapshots.foo
   })
   .catch()
+
+// #29
+firebase
+  .firestore()
+  .collection('/foo')
+  .get({ source: 'cache' })
