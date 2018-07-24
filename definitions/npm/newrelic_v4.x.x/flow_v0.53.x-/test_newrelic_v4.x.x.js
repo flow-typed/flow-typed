@@ -49,6 +49,6 @@ describe('newrelic', () => {
   })
 
   it('should start segment', () => {
-    const seg: Promise<string> = newrelic.startSegment('sqg', true, () => '')
+    const seg: Promise<string> = newrelic.startSegment('sqg', true, (cb) => cb(''))
   })
 })
