@@ -9,7 +9,7 @@ declare module 'newrelic' {
     ignore: () => void
   }
 
-  declare interface Instrument {
+  declare type Instrument = {
     (opts: { moduleName: string, onRequire: () => void, onError?: (err: Error) => void }): void;
     (moduleName: string, onRequire: () => void, onError?: (err: Error) => void): void;
   }
