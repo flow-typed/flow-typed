@@ -1,6 +1,7 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import _, {
+  type RefineFilter,
   compose,
   pipe,
   curry,
@@ -147,12 +148,46 @@ const str: string = "hello world";
   const findxs6: number = _.findLastIndex(_.propEq("a", 2), os);
   const findxs7: number = _.findLastIndex(_.propEq("a", 4))(os);
 
-  const s: Array<number> = filter(x => x > 1, [1, 2]);
-  const s1: Array<string> = _.filter(x => x === "2", ["2", "3"]);
-  const s3: { [key: string]: string } = _.filter(x => x === "2", {
-    a: "2",
-    b: "3"
-  });
+  describe('filter', () => {
+    it('perserves the element type in the predicate and result array (number)', () => {
+      const s: Array<number> = filter(x => x > 1, [1, 2]);
+    })
+
+    it('perserves the element type in the predicate and result array (number)', () => {
+      const s: Array<string> = _.filter(x => x === "2", ["2", "3"]);
+    })
+
+    it('filters objects by passing the value to the predicate', () => {
+      const s: { [key: string]: string } = _.filter(x => x === "2", {
+        a: "2",
+        b: "3"
+      });
+    })
+
+    it('refines the element type using the predicate', () => {
+      const notNull = (x): bool %checks => x != null
+      const ns: Array<number> = (filter: RefineFilter)(notNull, [1, 2, null])
+    })
+
+    it('fails when type refinement is incorrect', () => {
+      const isString = (x): bool %checks => typeof x === 'string'
+      // $ExpectError
+      const ns: Array<number> = (filter: RefineFilter)(isString, ['1', 2])
+    })
+
+    it('fails when attempting to refine from a non $Pred predicate', () => {
+      const isNumber = (x) => typeof x === 'number'
+      // $ExpectError
+      const ns: Array<number> = filter(isNumber, ['1', 2])
+    })
+
+    it('does not accept predicates missing %checks when using RefineFilter', () => {
+      const isNumber = (x) => typeof x === 'number'
+      // $ExpectError
+      const ns: Array<number> = (filter: RefineFilter)(isNumber, ['1', 2])
+    })
+  })
+
   const s4 = _.find(x => x === "2", ["1", "2"]);
   //$ExpectError
   const s5: ?{ [key: string]: string } = _.find(x => x === "2", { a: 1, b: 2 });
