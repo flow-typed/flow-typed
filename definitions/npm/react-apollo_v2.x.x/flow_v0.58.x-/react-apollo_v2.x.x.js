@@ -947,14 +947,18 @@ declare module "react-apollo" {
     context?: { [string]: any }
   }> {}
 
-  declare type SubscriptionResult<TData, TVariables = void> = {
+  declare export type SubscriptionResult<TData, TVariables = OperationVariables> = {
     loading: boolean,
-    data?: TData,
+    data?: TData | {||} | void,
     error?: ApolloError
   };
 
+  declare export type SubscriptionRenderPropFunction<TData, TVariables> = (
+    result: SubscriptionResult<TData, TVariables>
+  ) => React$Node
+
   declare type SubscriptionProps<
-    TData = any,
+    TData,
     TVariables = OperationVariables
   > = {
     subscription: DocumentNode,
@@ -965,11 +969,11 @@ declare module "react-apollo" {
           SubscriptionProps<TData, TVariables>,
           SubscriptionProps<TData, TVariables>
         ) => boolean),
-    children: (result: SubscriptionResult<TData, TVariables>) => React$Node
+    children: SubscriptionRenderPropFunction<TData, TVariables>
   };
 
-  declare export class Subscription<TData> extends React$Component<
-    SubscriptionProps<TData>
+  declare export class Subscription<TData, TVariables> extends React$Component<
+    SubscriptionProps<TData, TVariables>
   > {}
 
   declare type OperationVariables = { [key: string]: any };
