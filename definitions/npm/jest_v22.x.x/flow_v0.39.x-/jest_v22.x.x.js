@@ -594,7 +594,7 @@ type JestExpectType = {
   /**
    *
    */
-  toHaveProperty(propPath: string, value?: any): void,
+  toHaveProperty(propPath: string | Array<string>, value?: any): void,
   /**
    * Use .toMatch to check that a string matches a regular expression or string.
    */
