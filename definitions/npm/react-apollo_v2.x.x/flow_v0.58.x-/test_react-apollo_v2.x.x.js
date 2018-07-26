@@ -450,7 +450,7 @@ describe("<Subscription />", () => {
     );
   });
   it("works when extending Subscription with types", () => {
-    <HeroSubscriptionComp subscription={HERO_QUERY} variables={{ heroId: "123" }}>
+    <HeroSubscriptionComp subscription={HERO_SUBSCRIPTION} variables={{ heroId: "123" }}>
       {({ data, loading, error }) => {
         if (loading) return "Loading....";
         if (error) return "Error!";
