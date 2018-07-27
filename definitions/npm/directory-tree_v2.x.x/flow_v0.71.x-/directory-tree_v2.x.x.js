@@ -7,7 +7,7 @@ declare module 'directory-tree' {
     size: number,
     type: 'directory' | 'file',
     extension?: string,
-    children?: $ReadOnlyArray<directoryNodeType>,
+    children?: Array<directoryNodeType>,
   |};
 
   declare type directoryTreeType = (
