@@ -7,14 +7,14 @@ declare module 'directory-tree' {
     size: number,
     type: 'directory' | 'file',
     extension?: string,
-    children?: Array<directoryNodeType>,
+    children?: $ReadOnlyArray<directoryNodeType>,
   |};
 
   declare type directoryTreeType = (
     path: string,
     options?: {|
       normalizePath?: (path: string) => boolean,
-      exclude?: (RegExp | Array<RegExp>),
+      exclude?: (RegExp | $ReadOnlyArray<RegExp>),
       extensions?: RegExp,
     |} | null,
     onEachFile?: (
