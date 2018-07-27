@@ -6,6 +6,7 @@ import {
   ApolloConsumer,
   Query,
   Mutation,
+  Subscription,
   graphql,
   withApollo,
   type MutationFunction,
@@ -15,7 +16,8 @@ import {
   type GraphqlQueryControls,
   type ChildProps,
   type GraphqlData,
-  type PureQueryOptions
+  type PureQueryOptions,
+  type SubscriptionResult
 } from "react-apollo";
 
 const gql = (strings, ...args) => {}; // graphql-tag stub
@@ -157,6 +159,17 @@ const OTHER_QUERY = gql`
 const HERO_MUTATION = gql`
   mutation UpdateHero($input: HeroInput!) {
     updateHero(input: $input) {
+      hero {
+        name
+        id
+      }
+    }
+  }
+`;
+
+const HERO_SUBSCRIPTION = gql`
+  mutation onHeroUpdate($heroId: ID!) {
+    heroUpdated(heroId: $heroId) {
       hero {
         name
         id
@@ -401,6 +414,71 @@ describe("<Query />", () => {
         }}
       </HeroQueryComp>;
     });
+  });
+});
+
+type HeroSubcriptionVariables = {
+  heroId: string
+};
+class HeroSubscriptionComp extends Subscription<
+  { hero: ?Hero },
+  HeroSubcriptionVariables
+> {}
+
+describe("<Subscription />", () => {
+  it("works", () => {
+    type Vars = {| foo: string |};
+    type Res = {| res: string |};
+    const vars: Vars = { foo: "1" };
+    const q = (
+      <Subscription variables={vars} subscription={HERO_SUBSCRIPTION}>
+        {({ data }: SubscriptionResult<Res, Vars>) => {
+          // $ExpectError Cannot get `data.res`
+          data.res;
+          if (!data) {
+            return;
+          }
+          const d1: Res | {||} = data;
+          // $ExpectError Cannot get `data.res` because property `res` is missing in object type
+          const s: string = data.res;
+          if (d1.res) {
+            const d2: Res = d1;
+            const s: string = d1.res;
+          }
+        }}
+      </Subscription>
+    );
+  });
+  it("works when extending Subscription with types", () => {
+    <HeroSubscriptionComp subscription={HERO_SUBSCRIPTION} variables={{ heroId: "123" }}>
+      {({ data, loading, error }) => {
+        if (loading) return "Loading....";
+        if (error) return "Error!";
+        // $ExpectError Cannot get `data.hero`. data may be undefined
+        data.hero;
+        if (!data || !data.hero) {
+          return;
+        }
+        const hero = data.hero;
+
+        const nameAgain: string = hero.name;
+        // $ExpectError unknown is not a property on Hero
+        const unknown = hero.unknown;
+
+        return <div>{nameAgain}</div>;
+      }}
+    </HeroSubscriptionComp>;
+  });
+  it("errors if wrong variables passed", () => {
+    type Vars = {| foo: string |};
+    type Res = {| res: string |};
+    const q = (
+      <Subscription variables={{ foo: 1 }} subscription={HERO_SUBSCRIPTION}>
+        { // $ExpectError variables must match shape of query variables
+          ({ data }: SubscriptionResult<Res, Vars>) => {
+        }}
+      </Subscription>
+    );
   });
 });
 
