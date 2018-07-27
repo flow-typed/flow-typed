@@ -89,6 +89,8 @@ declare module "@material-ui/core/BottomNavigationAction" {
 
 declare module "@material-ui/core/Button/Button" {
   declare type Color = "default" | "inherit" | "primary" | "secondary";
+  declare type Variant = "text" | "flat" | "outlined" | "contained" | "raised" | "fab" | "extendedFab"
+  declare type Size = "small" | "medium" | "large"
 
   declare module.exports: React$ComponentType<{
     children: React$Node,
@@ -96,14 +98,14 @@ declare module "@material-ui/core/Button/Button" {
     classes?: Object,
     color?: Color,
     component?: React$ElementType,
-    dense?: boolean,
-    disableFocusRipple?: boolean,
     disabled?: boolean,
+    disableFocusRipple?: boolean,
     disableRipple?: boolean,
-    fab?: boolean,
+    fullWidth?: boolean,
     href?: string,
-    raised?: boolean,
-    type?: string
+    mini?: boolean,
+    size?: Size,
+    variant?: Variant
   }>;
 }
 
@@ -502,11 +504,12 @@ declare module "@material-ui/core/Drawer/Drawer" {
   import type { TransitionDuration } from "@material-ui/core/internal/transition";
 
   declare type Anchor = "left" | "top" | "right" | "bottom";
-  declare type Type = "permanent" | "persistent" | "temporary";
+  declare type Variant = "permanent" | "persistent" | "temporary";
 
   declare module.exports: React$ComponentType<{
     ModalProps?: Object,
     SlideProps?: Object,
+    PaperProps?: Object,
     anchor?: Anchor,
     children: React$Node,
     className?: string,
@@ -515,7 +518,7 @@ declare module "@material-ui/core/Drawer/Drawer" {
     onClose?: Function,
     open?: boolean,
     transitionDuration?: TransitionDuration,
-    type?: Type
+    variant?: Variant,
   }>;
 }
 declare module "@material-ui/core/Drawer" {
@@ -523,24 +526,19 @@ declare module "@material-ui/core/Drawer" {
 }
 
 declare module "@material-ui/core/SwipeableDrawer/SwipeableDrawer" {
+  import typeof Drawer from "@material-ui/core/Drawer/Drawer"
   import type { TransitionDuration } from "@material-ui/core/internal/transition";
 
-  declare type Anchor = "left" | "top" | "right" | "bottom";
-  declare type Type = "permanent" | "persistent" | "temporary";
-
   declare module.exports: React$ComponentType<{
-    ModalProps?: Object,
-    SlideProps?: Object,
-    anchor?: Anchor,
-    children: React$Node,
-    className?: string,
-    classes?: Object,
-    elevation?: number,
+    disableBackdropTransition: boolean,
+    disableDiscovery: boolean,
+    disableSwipeToOpen: boolean,
     onClose?: Function,
+    onOpen?: Function,
     open?: boolean,
+    swipeAreaWidth: number,
     transitionDuration?: TransitionDuration,
-    type?: Type
-  }>;
+  } & Drawer>;
 }
 
 declare module "@material-ui/core/SwipeableDrawer" {
@@ -1236,7 +1234,7 @@ declare module "@material-ui/core/MobileStepper" {
 
 declare module "@material-ui/core/MobileStepper/MobileStepper" {
   declare type Position = "bottom" | "top" | "static";
-  declare type Type = "text" | "dots" | "progress";
+  declare type Variant = "text" | "dots" | "progress";
 
   declare module.exports: React$ComponentType<{
     activeStep?: number,
@@ -1246,7 +1244,7 @@ declare module "@material-ui/core/MobileStepper/MobileStepper" {
     nextButton: React$Element<any>,
     position?: Position,
     steps: number,
-    type?: Type
+    variant?: Variant
   }>;
 }
 
@@ -2401,7 +2399,7 @@ declare module "@material-ui/core/Typography/Typography" {
     | "textSecondary"
     | "error"
     | "default";
-  declare type Type =
+  declare type Variant =
     | "display4"
     | "display3"
     | "display2"
@@ -2422,10 +2420,10 @@ declare module "@material-ui/core/Typography/Typography" {
     component?: React$ElementType,
     color?: Color,
     gutterBottom?: boolean,
-    headlineMapping?: { [key: Type]: string },
+    headlineMapping?: { [key: Variant]: string },
     noWrap?: boolean,
     paragraph?: boolean,
-    type?: Type
+    variant?: Variant
   }>;
 }
 
