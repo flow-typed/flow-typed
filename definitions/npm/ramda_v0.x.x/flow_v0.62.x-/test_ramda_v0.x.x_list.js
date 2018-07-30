@@ -7,6 +7,7 @@ import _, {
   curry,
   filter,
   find,
+  length,
   reduce,
   repeat,
   subtract,
@@ -185,6 +186,42 @@ const str: string = "hello world";
       const isNumber = (x) => typeof x === 'number'
       // $ExpectError
       const ns: Array<number> = (filter: RefineFilter)(isNumber, ['1', 2])
+    })
+  })
+
+  describe('length', () => {
+    describe('works on', () => {
+      it('empty array', () => {
+        length([])
+      })
+      it('simple array of strings', () => {
+        length(ss)
+      })
+      it('heterogeneous arrays', () => {
+        length([1, '', ss, true, ns])
+      })
+      it('strings', () => {
+        length(str)
+      })
+      it('objects defining numeric .length property', () => {
+        length({length: 12})
+      })
+    })
+    describe('fails on', () => {
+      it('null and undefined', () => {
+        // $ExpectError
+        length(null)
+        // $ExpectError
+        length()
+      })
+      it('types that has no length', () => {
+        // $ExpectError
+        length(123)
+      })
+      it('non-numeric .length property', () => {
+        // $ExpectError
+        length({length: 'size'})
+      })
     })
   })
 

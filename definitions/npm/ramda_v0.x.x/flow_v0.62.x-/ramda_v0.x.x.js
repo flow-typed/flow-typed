@@ -941,7 +941,7 @@ declare module ramda {
 
   declare function init<T, V: Array<T> | string>(xs: V): V;
 
-  declare function length<T>(xs: Array<T>): number;
+  declare function length<T>(xs: Array<T> | string | {length: number}): number;
 
   declare function reverse<T, V: Array<T> | string>(xs: V): V;
 
