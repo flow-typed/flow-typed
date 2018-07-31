@@ -907,7 +907,7 @@ declare module "react-apollo" {
     error?: ApolloError,
     variables: TVariables,
     networkStatus: NetworkStatus,
-    refetch: (variables?: TVariables) => Promise<mixed>,
+    refetch: (variables?: TVariables) => Promise<ApolloQueryResult<TData>>,
     fetchMore: ((
       options: FetchMoreOptions<TData, TVariables> &
         FetchMoreQueryOptions<TVariables>
