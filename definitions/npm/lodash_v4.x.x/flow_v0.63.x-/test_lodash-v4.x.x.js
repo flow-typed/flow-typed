@@ -25,6 +25,8 @@ import map from "lodash/map";
 import memoize from "lodash/memoize";
 import noop from "lodash/noop";
 import pullAllBy from "lodash/pullAllBy";
+import pickBy from "lodash/pickBy";
+import omitBy from "lodash/omitBy";
 import range from "lodash/range";
 import sortedIndexBy from "lodash/sortedIndexBy";
 import sortedLastIndexBy from "lodash/sortedLastIndexBy";
@@ -462,3 +464,21 @@ debounced = debounce(() => {});
 var pairs: [string, number][];
 pairs = toPairs({ a: 12, b: 100 });
 pairs = toPairsIn({ a: 12, b: 100 });
+
+/**
+ * _.pickBy
+ */
+(pickBy([2, 3, 4], num => num % 2): Array<number>);
+// $ExpectError
+pickBy([2, 3, 4], (str: string) => str.startsWith('foo'));
+(pickBy(null, num => num % 2): void | null);
+(pickBy(undefined, num => num % 2): void | null);
+
+/**
+ * _.omitBy
+ */
+(omitBy([2, 3, 4], num => num % 2): Array<number>);
+// $ExpectError
+omitBy([2, 3, 4], (str: string) => str.startsWith('foo'));
+(omitBy(null, num => num % 2): void | null);
+(omitBy(undefined, num => num % 2): void | null);
