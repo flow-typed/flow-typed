@@ -122,12 +122,14 @@ const {
 <CheckTree />;
 
 <DatePicker />;
+
 //$ExpectError
-<DatePicker value={new Date()} />;
+<DatePicker value={"10/10/2018"} />;
 
 <DateRangePicker />;
+
 //$ExpectError
-<DateRangePicker value={[new Date(), new Date()]} />;
+<DateRangePicker value={["10/10/2018", "10/10/2018"]} />;
 
 <InputPicker data={[]} />;
 //$ExpectError

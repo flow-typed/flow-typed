@@ -1,16 +1,7 @@
 declare module "rsuite" {
-  import type {
-    Node,
-    Element,
-    ElementType,
-    Component,
-    ChildrenArray,
-    ComponentType,
-    ElementRef,
-    Ref
-  } from "react";
+  import type { ChildrenArray } from "react";
 
-  declare class moment$Moment {}
+  declare type moment$Moment = Object;
   declare type Size = "lg" | "md" | "sm" | "xs";
   declare type Types = "success" | "warning" | "error" | "info";
   declare type PickerAppearanceType = "default" | "subtle";
@@ -49,8 +40,8 @@ declare module "rsuite" {
 
   declare type Placement = PlacementEightPoints | PlacementAuto;
   declare type ItemDataType = {
-    label: any,
-    value: any
+    label: mixed,
+    value: mixed
   };
 
   declare type AnimationCallbackProps = {
@@ -72,7 +63,7 @@ declare module "rsuite" {
   declare type PickerProps = {
     className?: string,
     classPrefix?: string,
-    toggleComponentClass?: ElementType,
+    toggleComponentClass?: React$ElementType,
     style?: Object,
     container?: HTMLElement | (() => HTMLElement),
     containerPadding?: number,
@@ -83,7 +74,7 @@ declare module "rsuite" {
     block?: boolean,
     disabled?: boolean,
     placeholder?: string,
-    renderMenu?: (itemLabel: Node, item: Object) => Node,
+    renderMenu?: (itemLabel: React$Node, item: Object) => React$Node,
     onOpen?: () => void,
     onClose?: () => void
   } & AnimationCallbackProps;
@@ -94,7 +85,7 @@ declare module "rsuite" {
         appearance?: PickerAppearanceType,
         childrenKey?: string,
         data: Array<any>,
-        renderExtraFooter?: () => Node,
+        renderExtraFooter?: () => React$Node,
         value?: any,
         defaultValue?: any,
         onChange?: (value: any, event: SyntheticEvent<*>) => void,
@@ -103,8 +94,8 @@ declare module "rsuite" {
           activePaths: Array<any>,
           event: SyntheticEvent<*>
         ) => void,
-        renderValue?: (activePaths?: Array<any>) => Node,
-        renderMenuItem?: (itemLabel: Node, item: Object) => Node,
+        renderValue?: (activePaths?: Array<any>) => React$Node,
+        renderMenuItem?: (itemLabel: React$Node, item: Object) => React$Node,
         menuWidth?: number,
         menuHeight?: number,
         disabledItemValues?: Array<any>
@@ -136,11 +127,11 @@ declare module "rsuite" {
         renderValue?: (
           values: Array<any>,
           checkItems: Array<any>,
-          placeholder: string | Node
-        ) => Node,
-        renderTreeNode?: (nodeData: Object) => Node,
-        renderTreeIcon?: (nodeData: Object) => Node,
-        renderExtraFooter?: () => Node
+          placeholder: string | React$Node
+        ) => React$Node,
+        renderTreeNode?: (nodeData: Object) => React$Node,
+        renderTreeIcon?: (nodeData: Object) => React$Node,
+        renderExtraFooter?: () => React$Node
       }
   > {}
 
@@ -168,10 +159,13 @@ declare module "rsuite" {
           layer: number,
           event: SyntheticEvent<*>
         ) => void,
-        renderValue?: (activeNode: Object, placeholder: string | Node) => Node,
-        renderTreeNode?: (nodeData: Object) => Node,
-        renderTreeIcon?: (nodeData: Object) => Node,
-        renderExtraFooter?: () => Node
+        renderValue?: (
+          activeNode: Object,
+          placeholder: string | React$Node
+        ) => React$Node,
+        renderTreeNode?: (nodeData: Object) => React$Node,
+        renderTreeIcon?: (nodeData: Object) => React$Node,
+        renderExtraFooter?: () => React$Node
       }
   > {}
 
@@ -193,8 +187,8 @@ declare module "rsuite" {
       layer: number,
       event: SyntheticEvent<*>
     ) => void,
-    renderTreeNode?: (nodeData: Object) => Node,
-    renderTreeIcon?: (nodeData: Object) => Node
+    renderTreeNode?: (nodeData: Object) => React$Node,
+    renderTreeIcon?: (nodeData: Object) => React$Node
   }> {}
 
   declare export class CheckTree extends React$Component<{
@@ -215,8 +209,8 @@ declare module "rsuite" {
       layer: number,
       event: SyntheticEvent<*>
     ) => void,
-    renderTreeNode?: (nodeData: Object) => Node,
-    renderTreeIcon?: (nodeData: Object) => Node
+    renderTreeNode?: (nodeData: Object) => React$Node,
+    renderTreeIcon?: (nodeData: Object) => React$Node
   }> {}
 
   declare export class CheckPicker extends React$Component<
@@ -228,10 +222,10 @@ declare module "rsuite" {
         maxHeight?: number,
         value?: Array<any>,
         defaultValue?: Array<any>,
-        renderMenuItem?: (itemLabel: Node, item: Object) => Node,
-        renderMenuGroup?: (title: Node, item: Object) => Node,
-        renderValue?: (value: Array<any>, items: Array<any>) => Node,
-        renderExtraFooter?: () => Node,
+        renderMenuItem?: (itemLabel: React$Node, item: Object) => React$Node,
+        renderMenuGroup?: (title: React$Node, item: Object) => React$Node,
+        renderValue?: (value: Array<any>, items: Array<any>) => React$Node,
+        renderExtraFooter?: () => React$Node,
         onChange?: (value: Array<any>, event: SyntheticEvent<*>) => void,
         onSelect?: (value: any, item: Object, event: SyntheticEvent<*>) => void,
         onGroupTitleClick?: (event: SyntheticEvent<*>) => void,
@@ -309,10 +303,10 @@ declare module "rsuite" {
         maxHeight?: number,
         value?: any,
         defaultValue?: any,
-        renderMenuItem?: (itemLabel: Node, item: Object) => Node,
-        renderMenuGroup?: (title: Node, item: Object) => Node,
-        renderValue?: (value: any, item: Object) => Node,
-        renderExtraFooter?: () => Node,
+        renderMenuItem?: (itemLabel: React$Node, item: Object) => React$Node,
+        renderMenuGroup?: (title: React$Node, item: Object) => React$Node,
+        renderValue?: (value: any, item: Object) => React$Node,
+        renderExtraFooter?: () => React$Node,
         onChange?: (value: any, event: SyntheticEvent<*>) => void,
         onSelect?: (value: any, item: Object, event: SyntheticEvent<*>) => void,
         onGroupTitleClick?: (event: SyntheticEvent<*>) => void,
@@ -332,10 +326,10 @@ declare module "rsuite" {
         maxHeight?: number,
         value?: Array<any>,
         defaultValue?: Array<any>,
-        renderMenuItem?: (itemLabel: Node, item: Object) => Node,
-        renderMenuGroup?: (title: Node, item: Object) => Node,
-        renderValue?: (value: Array<any>, item: Object) => Node,
-        renderExtraFooter?: () => Node,
+        renderMenuItem?: (itemLabel: React$Node, item: Object) => React$Node,
+        renderMenuGroup?: (title: React$Node, item: Object) => React$Node,
+        renderValue?: (value: Array<any>, item: Object) => React$Node,
+        renderExtraFooter?: () => React$Node,
         onChange?: (value: Array<any>, event: SyntheticEvent<*>) => void,
         onSelect?: (
           value: Array<any>,
@@ -359,10 +353,10 @@ declare module "rsuite" {
         maxHeight?: number,
         value?: any,
         defaultValue?: any,
-        renderMenuItem?: (itemLabel: Node, item: Object) => Node,
-        renderMenuGroup?: (title: Node, item: Object) => Node,
-        renderValue?: (value: any, item: Object) => Node,
-        renderExtraFooter?: () => Node,
+        renderMenuItem?: (itemLabel: React$Node, item: Object) => React$Node,
+        renderMenuGroup?: (title: React$Node, item: Object) => React$Node,
+        renderValue?: (value: any, item: Object) => React$Node,
+        renderExtraFooter?: () => React$Node,
         onChange?: (value: any, event: SyntheticEvent<*>) => void,
         onSelect?: (value: any, item: Object, event: SyntheticEvent<*>) => void,
         onGroupTitleClick?: (event: SyntheticEvent<*>) => void,
@@ -389,7 +383,7 @@ declare module "rsuite" {
     onKeyDown?: (event: SyntheticEvent<*>) => void,
     onOpen?: () => void,
     onClose?: () => void,
-    renderItem?: (itemValue: string) => Node,
+    renderItem?: (itemValue: string) => React$Node,
     style?: Object,
     open?: boolean,
     selectOnEnter?: boolean
@@ -400,16 +394,16 @@ declare module "rsuite" {
     className?: string,
     style?: Object,
     href?: string,
-    title?: ElementType,
+    title?: React$ElementType,
     target?: string,
     classPrefix?: string,
-    componentClass?: ElementType
+    componentClass?: React$ElementType
   }> {}
 
   declare export class Breadcrumb extends React$Component<{
-    separator?: Node,
-    componentClass?: ElementType,
-    children?: ChildrenArray<Element<typeof BreadcrumbItem>>,
+    separator?: React$Node,
+    componentClass?: React$ElementType,
+    children?: ChildrenArray<React$Element<typeof BreadcrumbItem>>,
     className?: string,
     classPrefix?: string
   }> {
@@ -419,14 +413,14 @@ declare module "rsuite" {
   declare export class Button extends React$Component<{
     appearance?: "default" | "primary" | "link" | "subtle" | "ghost",
     classPrefix?: string,
-    componentClass?: ElementType,
+    componentClass?: React$ElementType,
     className?: string,
     active?: boolean,
     block?: boolean,
     href?: string,
     loading?: boolean,
     disabled?: boolean,
-    children?: Node
+    children?: React$Node
   }> {}
 
   declare export class ButtonGroup extends React$Component<{
@@ -435,7 +429,7 @@ declare module "rsuite" {
     justified?: boolean,
     block?: boolean,
     classPrefix?: string,
-    children?: Element<typeof Button>
+    children?: React$Element<typeof Button>
   }> {}
 
   declare export class ButtonToolbar extends React$Component<{
@@ -457,9 +451,9 @@ declare module "rsuite" {
       event: SyntheticInputEvent<HTMLInputElement>
     ) => void,
     onClick?: (event: SyntheticEvent<*>) => void,
-    inputRef?: ElementRef<*>,
+    inputRef?: React$ElementRef<*>,
     value?: any,
-    children?: Node,
+    children?: React$Node,
     classPrefix?: string,
     tabIndex?: number
   }> {}
@@ -500,7 +494,7 @@ declare module "rsuite" {
     smHidden?: boolean,
     mdHidden?: boolean,
     lgHidden?: boolean,
-    componentClass?: ElementType
+    componentClass?: React$ElementType
   }> {}
 
   declare export class Container extends React$Component<{
@@ -524,8 +518,8 @@ declare module "rsuite" {
     className?: string,
     vertical?: boolean,
     classPrefix?: string,
-    children?: Node,
-    componentClass?: ElementType
+    children?: React$Node,
+    componentClass?: React$ElementType
   }> {}
 
   declare export class Drawer extends React$Component<{
@@ -533,7 +527,7 @@ declare module "rsuite" {
     placement?: "top" | "right" | "bottom" | "left",
     show?: boolean,
     full?: boolean,
-    children?: Node,
+    children?: React$Node,
     className?: string
   }> {
     static Body: Class<ModalBody>;
@@ -548,9 +542,9 @@ declare module "rsuite" {
     classPrefix?: string,
     trigger?: DropdownTriggerType | Array<DropdownTriggerType>,
     placement?: PlacementEightPoints,
-    title?: Node,
+    title?: React$Node,
     disabled?: boolean,
-    icon?: Element<typeof Icon>,
+    icon?: React$Element<typeof Icon>,
     onClose?: () => void,
     onOpen?: () => void,
     onToggle?: (open?: boolean) => void,
@@ -562,12 +556,12 @@ declare module "rsuite" {
     menuStyle?: Object,
     className?: string,
     toggleClassName?: string,
-    renderTitle?: (children?: Node) => Node,
+    renderTitle?: (children?: React$Node) => React$Node,
     tabIndex?: number,
     open?: boolean,
     eventKey?: any,
-    componentClass?: ElementType,
-    toggleComponentClass?: ElementType,
+    componentClass?: React$ElementType,
+    toggleComponentClass?: React$ElementType,
     noCaret?: boolean
   }> {
     static Item: Class<DropdownMenuItem>;
@@ -577,11 +571,11 @@ declare module "rsuite" {
   declare export class DropdownMenu extends React$Component<{
     activeKey?: any,
     className?: string,
-    icon?: Element<typeof Icon>,
+    icon?: React$Element<typeof Icon>,
     classPrefix?: string,
     pullLeft?: boolean,
     onSelect?: Function,
-    title?: Node,
+    title?: React$Node,
     open?: boolean,
     trigger?: TriggerType | Array<TriggerType>,
     eventKey?: any,
@@ -594,12 +588,12 @@ declare module "rsuite" {
   declare export class DropdownMenuItem extends React$Component<{
     activeKey?: any,
     className?: string,
-    children?: Node,
-    icon?: Element<typeof Icon>,
+    children?: React$Node,
+    icon?: React$Element<typeof Icon>,
     classPrefix?: string,
     pullLeft?: boolean,
     onSelect?: Function,
-    title?: Node,
+    title?: React$Node,
     open?: boolean,
     trigger?: TriggerType | Array<TriggerType>,
     eventKey?: any,
@@ -611,19 +605,19 @@ declare module "rsuite" {
 
   declare export class DorpdownToggle extends React$Component<{
     className?: string,
-    children?: Node,
-    icon?: Element<typeof Icon>,
-    renderTitle?: (children?: Node) => Node,
+    children?: React$Node,
+    icon?: React$Element<typeof Icon>,
+    renderTitle?: (children?: React$Node) => React$Node,
     classPrefix?: string,
     noCaret?: boolean,
-    componentClass?: ElementType
+    componentClass?: React$ElementType
   }> {}
 
   declare export class ErrorMessage extends React$Component<{
     htmlFor?: string,
     show?: boolean,
     classPrefix?: string,
-    children?: Node,
+    children?: React$Node,
     className?: string,
     placement?: PlacementEightPoints
   }> {}
@@ -669,7 +663,7 @@ declare module "rsuite" {
     icon: string | SVGIcon,
     className?: string,
     classPrefix?: string,
-    componentClass?: ElementType,
+    componentClass?: React$ElementType,
     size?: "lg" | "2x" | "3x" | "4x" | "5x",
     flip?: "horizontal" | "vertical",
     stack?: "1x" | "2x",
@@ -682,17 +676,17 @@ declare module "rsuite" {
 
   declare export class IntlProvider extends React$Component<{
     locale?: Object,
-    children?: Node
+    children?: React$Node
   }> {}
 
   declare export class FormControl extends React$Component<{
     name: string,
     checkTrigger?: "change" | "blur" | "none",
-    accepter?: ElementType,
+    accepter?: React$ElementType,
     onChange?: (value: any, event: SyntheticEvent<*>) => void,
     onBlur?: (event: SyntheticEvent<*>) => void,
     classPrefix?: string,
-    errorMessage?: Node,
+    errorMessage?: React$Node,
     errorPlacement?: PlacementEightPoints
   }> {}
 
@@ -708,7 +702,7 @@ declare module "rsuite" {
     className?: string,
     fluid?: boolean,
     classPrefix?: string,
-    componentClass?: ElementType
+    componentClass?: React$ElementType
   }> {}
 
   declare export class Header extends React$Component<{
@@ -725,23 +719,23 @@ declare module "rsuite" {
 
   declare export class IconButton extends React$Component<{
     className?: string,
-    icon?: Element<typeof Icon>,
+    icon?: React$Element<typeof Icon>,
     classPrefix?: string,
     circle?: boolean,
-    children?: Node,
+    children?: React$Node,
     placement?: "left" | "right"
   }> {}
 
   declare export class Input extends React$Component<{
     type?: string,
-    componentClass?: ElementType,
+    componentClass?: React$ElementType,
     id?: string,
     classPrefix?: string,
     className?: string,
     disabled?: boolean,
     value?: string | number,
     defaultValue?: string | number,
-    inputRef?: ElementRef<*>,
+    inputRef?: React$ElementRef<*>,
     onChange?: (
       value: any,
       event: SyntheticInputEvent<HTMLInputElement>
@@ -781,8 +775,8 @@ declare module "rsuite" {
     step?: number,
     value?: number | string,
     defaultValue?: number | string,
-    prefix?: Node,
-    postfix?: Node,
+    prefix?: React$Node,
+    postfix?: React$Node,
     disabled?: boolean,
     size?: "lg" | "md" | "sm" | "xs",
     onWheel?: (event?: SyntheticEvent<*>) => void,
@@ -797,7 +791,7 @@ declare module "rsuite" {
     backdrop?: boolean,
     inverse?: boolean,
     vertical?: boolean,
-    content?: Node,
+    content?: React$Node,
     speed?: "normal" | "fast" | "slow"
   }> {}
 
@@ -807,8 +801,8 @@ declare module "rsuite" {
     onClose?: () => void,
     closable?: boolean,
     closeLabel?: string,
-    title?: Node,
-    description?: Node,
+    title?: React$Node,
+    description?: React$Node,
     showIcon?: boolean,
     full?: boolean,
     classPrefix?: string
@@ -817,7 +811,7 @@ declare module "rsuite" {
   declare export class Modal extends React$Component<{
     classPrefix?: string,
     size?: Size,
-    container?: ElementType | Function,
+    container?: React$ElementType | Function,
     onRendered?: Function,
     className?: string,
     dialogClassName?: string,
@@ -829,7 +823,7 @@ declare module "rsuite" {
     full?: boolean,
     backdrop?: boolean | "static",
     keyboard?: boolean,
-    transition?: ElementType,
+    transition?: React$ElementType,
     dialogTransitionTimeout?: number,
     backdropTransitionTimeout?: number,
     autoFocus?: boolean,
@@ -837,7 +831,7 @@ declare module "rsuite" {
     overflow?: boolean,
     drawer?: boolean,
     animation?: boolean,
-    dialogComponentClass?: ElementType,
+    dialogComponentClass?: React$ElementType,
     onEscapeKeyUp?: Function,
     onBackdropClick?: Function,
     onShow?: Function,
@@ -909,19 +903,19 @@ declare module "rsuite" {
     panel?: boolean,
     onClick?: (event: SyntheticEvent<*>) => void,
     style?: Object,
-    icon?: Element<typeof Icon>,
+    icon?: React$Element<typeof Icon>,
     onSelect?: (eventKey: any, event: SyntheticEvent<*>) => void,
     eventKey?: any,
     tabIndex?: number,
     hasTooltip?: boolean,
-    componentClass?: ElementType
+    componentClass?: React$ElementType
   }> {}
 
   declare export class Navbar extends React$Component<{
     classPrefix?: string,
     className?: string,
     appearance?: "default" | "inverse" | "subtle",
-    componentClass?: ElementType,
+    componentClass?: React$ElementType,
     hasChildContext?: boolean
   }> {
     static Body: Class<NavbarBody>;
@@ -931,7 +925,7 @@ declare module "rsuite" {
   declare export class NavbarBody extends React$Component<{
     classPrefix?: string,
     className?: string,
-    children?: Node
+    children?: React$Node
   }> {}
 
   declare export class NavbarHeader extends React$Component<{
@@ -944,13 +938,13 @@ declare module "rsuite" {
     pages?: number,
     maxButtons?: number,
     boundaryLinks?: boolean,
-    ellipsis?: boolean | Node,
-    first?: boolean | Node,
-    last?: boolean | Node,
-    prev?: boolean | Node,
-    next?: boolean | Node,
+    ellipsis?: boolean | React$Node,
+    first?: boolean | React$Node,
+    last?: boolean | React$Node,
+    prev?: boolean | React$Node,
+    next?: boolean | React$Node,
     onSelect?: (event: SyntheticEvent<*>) => void,
-    buttonComponentClass?: ElementType | string,
+    buttonComponentClass?: React$ElementType | string,
     className?: string,
     classPrefix?: string
   }> {}
@@ -967,7 +961,7 @@ declare module "rsuite" {
     headerRole?: string,
     panelRole?: string,
     classPrefix?: string,
-    children?: Node,
+    children?: React$Node,
     onSelect?: (eventKey: any, event: SyntheticEvent<*>) => void,
     onEnter?: Function,
     onEntering?: Function,
@@ -984,7 +978,7 @@ declare module "rsuite" {
     bordered?: boolean,
     defaultActiveKey?: any,
     className?: string,
-    children?: Node,
+    children?: React$Node,
     classPrefix?: string,
     onSelect?: (eventKey: any, event: SyntheticEvent<*>) => void
   }> {}
@@ -992,8 +986,8 @@ declare module "rsuite" {
   declare export class Popover extends React$Component<{
     placement?: PlacementFourSides | Placement,
     classPrefix?: string,
-    children?: Node,
-    title?: Node,
+    children?: React$Node,
+    title?: React$Node,
     visible?: boolean,
     className?: string,
     full?: boolean,
@@ -1036,8 +1030,8 @@ declare module "rsuite" {
     disabled?: boolean,
     checked?: boolean,
     defaultChecked?: boolean,
-    inputRef?: ElementRef<any>,
-    children?: Node,
+    inputRef?: React$ElementRef<any>,
+    children?: React$Node,
     className?: string,
     classPrefix?: string,
     value?: any,
@@ -1057,7 +1051,7 @@ declare module "rsuite" {
     defaultValue?: any,
     className?: string,
     classPrefix?: string,
-    children?: Node,
+    children?: React$Node,
     onChange?: (
       value: any,
       event: SyntheticInputEvent<HTMLInputElement>
@@ -1069,8 +1063,8 @@ declare module "rsuite" {
     classPrefix?: string,
     gutter?: number,
     style?: Object,
-    componentClass?: ElementType,
-    children?: ChildrenArray<Element<typeof Col>>
+    componentClass?: React$ElementType,
+    children?: ChildrenArray<React$Element<typeof Col>>
   }> {}
 
   declare export class SafeAnchor extends React$Component<{
@@ -1080,7 +1074,7 @@ declare module "rsuite" {
     role?: string,
     style?: Object,
     tabIndex?: number | string,
-    componentClass?: ElementType
+    componentClass?: React$ElementType
   }> {}
 
   declare export class Sidebar extends React$Component<{
@@ -1100,7 +1094,7 @@ declare module "rsuite" {
     onOpenChange?: (openKeys: Array<any>, event: SyntheticEvent<*>) => void,
     activeKey?: any,
     onSelect?: (eventKey: Array<any>, event: SyntheticEvent<*>) => void,
-    componentClass?: ElementType
+    componentClass?: React$ElementType
   }> {
     static Header: Class<SidenavHeader>;
     static Body: Class<SidenavBody>;
@@ -1131,7 +1125,7 @@ declare module "rsuite" {
     className?: string,
     classPrefix?: string,
     handleClassName?: string,
-    handleTitle?: Node,
+    handleTitle?: React$Node,
     barClassName?: string,
     hanldeStyle?: Object,
     disabled?: boolean,
@@ -1140,7 +1134,7 @@ declare module "rsuite" {
     progress?: boolean,
     vertical?: boolean,
     onChange?: (value: number) => void,
-    renderMark?: (mark: number) => Node
+    renderMark?: (mark: number) => React$Node
   }> {}
 
   declare export class StepItem extends React$Component<{
@@ -1148,10 +1142,10 @@ declare module "rsuite" {
     classPrefix?: string,
     itemWidth?: number | string,
     status?: "finish" | "wait" | "process" | "error",
-    icon?: Element<typeof Icon>,
+    icon?: React$Element<typeof Icon>,
     stepNumber?: number,
-    description?: Node,
-    title?: Node
+    description?: React$Node,
+    title?: React$Node
   }> {}
 
   declare export class Steps extends React$Component<{
@@ -1190,7 +1184,7 @@ declare module "rsuite" {
     firstColumn?: boolean,
     lastColumn?: boolean,
     hasChildren?: boolean,
-    children?: Node,
+    children?: React$Node,
     rowKey?: string | number,
     rowIndex?: number,
     rowData?: Object,
@@ -1201,8 +1195,11 @@ declare module "rsuite" {
       rowData?: Object,
       event?: SyntheticEvent<*>
     ) => void,
-    renderTreeToggle?: (expandButton: Node, rowData?: Object) => Node,
-    renderCell?: (contentChildren: Node) => Node,
+    renderTreeToggle?: (
+      expandButton: React$Node,
+      rowData?: Object
+    ) => React$Node,
+    renderCell?: (contentChildren: React$Node) => React$Node,
     wordWrap?: boolean,
     removed?: boolean
   }> {}
@@ -1214,7 +1211,7 @@ declare module "rsuite" {
     className?: string,
     classPrefix?: string,
     headerHeight?: number,
-    children?: Node,
+    children?: React$Node,
     index?: number,
     sortColumn?: string,
     sortType?: "desc" | "asc",
@@ -1242,12 +1239,12 @@ declare module "rsuite" {
   }> {}
 
   declare export class TablePagination extends React$Component<{
-    lengthMenu?: Array<{ value: number, label: Node }>,
+    lengthMenu?: Array<{ value: number, label: React$Node }>,
     showLengthMenu?: boolean,
     showInfo?: boolean,
     total: number,
     displayLength?: number,
-    renderLengthMenu?: (picker: Node) => Node,
+    renderLengthMenu?: (picker: React$Node) => React$Node,
     renderTotal?: Function,
     onChangePage?: Function,
     onChangeLength?: Function,
@@ -1275,8 +1272,11 @@ declare module "rsuite" {
     defaultExpandAllRows?: boolean,
     defaultExpandedRowKeys?: Array<string | number>,
     expandedRowKeys?: Array<string | number>,
-    renderTreeToggle?: (expandButton: Node, rowData: Object) => Node,
-    renderRowExpanded?: (rowDate?: Object) => Node,
+    renderTreeToggle?: (
+      expandButton: React$Node,
+      rowData: Object
+    ) => React$Node,
+    renderRowExpanded?: (rowDate?: Object) => React$Node,
     rowExpandedHeight?: number,
     style?: Object,
     sortColumn?: string,
@@ -1296,7 +1296,7 @@ declare module "rsuite" {
     onExpandChange?: (expanded: boolean, rowData: Object) => void,
     onTouchStart?: (event: SyntheticTouchEvent<*>) => void, // for tests
     onTouchMove?: (event: SyntheticTouchEvent<*>) => void, // for tests
-    bodyRef?: ElementRef<*>,
+    bodyRef?: React$ElementRef<*>,
     loadAnimation?: boolean,
     showHeader?: boolean
   }> {
@@ -1310,27 +1310,27 @@ declare module "rsuite" {
     closable?: boolean,
     classPrefix?: string,
     onClose?: (event: SyntheticEvent<*>) => void,
-    children?: Node,
+    children?: React$Node,
     className?: string,
-    componentClass?: ElementType
+    componentClass?: React$ElementType
   }> {}
 
   declare export class Timeline extends React$Component<{
     className?: string,
     classPrefix?: string,
-    children?: Node,
-    componentClass?: ElementType
+    children?: React$Node,
+    componentClass?: React$ElementType
   }> {
     static Item: Class<TimelineItem>;
   }
 
   declare export class TimelineItem extends React$Component<{
     last?: boolean,
-    dot?: Node,
+    dot?: React$Node,
     className?: string,
-    children?: Node,
+    children?: React$Node,
     classPrefix?: string,
-    componentClass?: ElementType
+    componentClass?: React$ElementType
   }> {}
 
   declare export class Toggle extends React$Component<{
@@ -1338,8 +1338,8 @@ declare module "rsuite" {
     checked?: boolean,
     defaultChecked?: boolean,
     onChange?: (checked: boolean, event: SyntheticEvent<*>) => void,
-    checkedChildren?: Node,
-    unCheckedChildren?: Node,
+    checkedChildren?: React$Node,
+    unCheckedChildren?: React$Node,
     classPrefix?: string,
     className?: string
   }> {}
@@ -1351,7 +1351,7 @@ declare module "rsuite" {
     visible?: boolean,
     classPrefix?: string,
     className?: string,
-    children?: Node,
+    children?: React$Node,
     onMouseLeave?: (event: SyntheticEvent<*>) => void,
     onMouseEnter?: (event: SyntheticEvent<*>) => void
   }> {}
@@ -1369,7 +1369,7 @@ declare module "rsuite" {
     action: string,
     accept?: string,
     autoUpload?: boolean,
-    children?: Element<any>,
+    children?: React$Element<any>,
     className?: string,
     classPrefix?: string,
     defaultFileList?: Array<FileType>,
@@ -1409,7 +1409,7 @@ declare module "rsuite" {
     ) => void,
     onRemove?: (file: FileType) => void,
     maxPreviewFileSize?: number,
-    toggleComponentClass?: ElementType
+    toggleComponentClass?: React$ElementType
   }> {}
 
   declare export class Whisper extends React$Component<{
@@ -1420,22 +1420,22 @@ declare module "rsuite" {
     show?: boolean,
     rootClose?: boolean,
     onHide?: Function,
-    transition?: ElementType,
+    transition?: React$ElementType,
     onEnter?: Function,
     onEntering?: Function,
     onEntered?: Function,
     onExit?: Function,
     onExiting?: Function,
     onExited?: Function,
-    animation?: ElementType | boolean,
+    animation?: React$ElementType | boolean,
     trigger?: WhisperTriggerType | Array<WhisperTriggerType>,
     delay?: number,
     delayShow?: number,
     delayHide?: number,
     defaultOpen?: boolean,
     open?: boolean,
-    speaker: Element<any>,
-    children: Node,
+    speaker: React$Element<any>,
+    children: React$Node,
     onMouseOver?: (event: SyntheticEvent<*>) => void,
     onMouseOut?: (event: SyntheticEvent<*>) => void,
     onClick?: (event: SyntheticEvent<*>) => void,
@@ -1450,8 +1450,8 @@ declare module "rsuite" {
   };
 
   declare type NotificationConfig = {
-    title: Node,
-    description: ElementType,
+    title: React$Node,
+    description: React$ElementType,
     duration?: number,
     placement?: string,
     top?: number,
@@ -1483,7 +1483,7 @@ declare module "rsuite" {
   };
 
   declare export class Transition extends React$Component<{
-    children?: Node,
+    children?: React$Node,
     className?: string,
     in?: boolean,
     unmountOnExit?: boolean,
@@ -1534,7 +1534,7 @@ declare module "rsuite" {
   declare export class Portal extends React$Component<{
     container?: HTMLElement | (() => HTMLElement),
     onRendered?: Function,
-    children?: Node
+    children?: React$Node
   }> {}
 
   declare export var Animation: {
@@ -1611,10 +1611,7 @@ declare module "rsuite" {
       errorMessage: string
     ): SchemaArrayType;
     minLength(minLength: number, errorMessage: string): SchemaArrayType;
-    maxLength(
-      maxLength: number,
-      errorMessage: string
-    ): SchemaArrayType;
+    maxLength(maxLength: number, errorMessage: string): SchemaArrayType;
     unrepeatable(errorMessage: string): SchemaArrayType;
     of(type: any, errorMessage: string): SchemaArrayType;
   }
