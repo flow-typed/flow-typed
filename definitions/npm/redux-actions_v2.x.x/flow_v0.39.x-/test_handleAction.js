@@ -8,10 +8,23 @@ const NOT_INCREMENT = 'NOT_INCREMENT'
 
 const increment = createAction(INCREMENT, (x: number) => x)
 
+// In case redux-actions is used in combination with redux-thunk,
+// the `payloadCreator` can return a promise.
+const incrementThunk = createAction(INCREMENT, (x: number) => Promise.resolve(x))
+
 const initState = { count: 0 }
 
 function test_handleAction() {
   const reducer = handleAction(INCREMENT, (state, action: ActionType<typeof increment>) => {
+    assert(action.payload, (x: number) => {})
+
+    // $ExpectError
+    assert(action.payload, (x: string) => {})
+  }, initState)
+}
+
+function test_handleAction_thunk() {
+  const reducer = handleAction(INCREMENT, (state, action: ActionType<typeof incrementThunk>) => {
     assert(action.payload, (x: number) => {})
 
     // $ExpectError
