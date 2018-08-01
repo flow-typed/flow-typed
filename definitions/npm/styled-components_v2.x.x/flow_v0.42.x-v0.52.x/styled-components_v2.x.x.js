@@ -61,7 +61,7 @@ type $npm$styledComponents$WithTheme =
   & $npm$styledComponents$WithThemeReactComponentClassUndefinedDefaultProps
   & $npm$styledComponents$WithThemeReactComponentFunctional
 
-type $npm$styledComponents$Theme = {[key: string]: mixed};
+type $npm$styledComponents$Theme = {+[key: string]: mixed};
 type $npm$styledComponents$ThemeProviderProps = {
   theme: $npm$styledComponents$Theme | ((outerTheme: $npm$styledComponents$Theme) => void)
 };
