@@ -255,7 +255,7 @@ declare module "redis" {
       destination: string
     ) => Promise<string> | Promise<void>;
     flushallAsync: () => Promise<void>;
-    publishAsync: (topic: string, value: any) => Promise<void>;
+    publishAsync: (topic: string, value: any) => Promise<number>;
     subscribeAsync: (topic: string) => Promise<void>;
     unsubscribeAsync: (topic: string) => Promise<void>;
     psubscribeAsync: (pattern: string) => Promise<void>;
