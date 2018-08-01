@@ -50,4 +50,10 @@ describe('# directory-tree', () => {
     // $ExpectError
     const expectNumber: number = dirTree(__dirname);
   });
+
+  it('should not use children directly', () => {
+    const result: dirTreeType = dirTree(__dirname);
+    // $ExpectError
+    result.children.push('test');
+  });
 });
