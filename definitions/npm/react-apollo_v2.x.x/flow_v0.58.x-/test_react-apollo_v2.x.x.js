@@ -415,6 +415,23 @@ describe("<Query />", () => {
       </HeroQueryComp>;
     });
   });
+
+  describe("updateQuery", () => {
+    it("works", () => {
+      <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
+        {({ updateQuery }) => {
+          // $ExpectError updateQuery return type must match previous result type
+          updateQuery((previousResult, options) => ({ hello: 'flow' }))
+          const renameHero = (newName: string) => updateQuery((previousResult, options) => {
+            // $ExpectError Cannot get `options.unknownProperty` because property `unknownProperty` is missing in options
+            const a = options.unknownProperty
+            const { variables } = options
+            return { ...previousResult, name: newName }
+          })
+        }}
+      </HeroQueryComp>;
+    })
+  })
 });
 
 type HeroSubcriptionVariables = {

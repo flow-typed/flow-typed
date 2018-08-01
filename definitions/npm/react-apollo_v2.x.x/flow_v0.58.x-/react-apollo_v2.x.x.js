@@ -923,9 +923,8 @@ declare module "react-apollo" {
       options: SubscribeToMoreOptions<TData, any, any>
     ) => () => void,
     updateQuery: (
-      previousResult: TData,
-      options: { variables: TVariables }
-    ) => TData,
+      mapFn: (previousResult: TData, options: { variables: TVariables }) => TData
+    ) => any,
     client: ApolloClient<any>
   };
 
