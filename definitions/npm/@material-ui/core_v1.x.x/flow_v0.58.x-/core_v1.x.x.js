@@ -1496,7 +1496,7 @@ declare module "@material-ui/core/Select/Select" {
     open?: boolean,
     MenuProps?: Object,
     renderValue?: Function,
-    value?: $ReadOnlyArray<string | number> | string | number
+    value?: ?($ReadOnlyArray<string | number> | string | number)
   }>;
 }
 
