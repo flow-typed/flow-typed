@@ -23,6 +23,22 @@ describe('# directory-tree', () => {
     });
   });
 
+  it('use exclude array', () => {
+    const exclude: Array<RegExp> = [/some_path_to_exclude/];
+    exclude.push(/test/);
+
+    const useExcludeArray: dirTreeType = dirTree(__dirname, {
+      exclude,
+    });
+  });
+
+  it('use exclude array', () => {
+    const exclude: $ReadOnlyArray<RegExp> = [/some_path_to_exclude/, /test/];
+    const useExcludeReadOnlyArray: dirTreeType = dirTree(__dirname, {
+      exclude,
+    });
+  });
+
   it('use onEachFile', () => {
     const useOnEachFile: dirTreeType = dirTree(__dirname, null, (item, PATH) => {
       const { path, name } = item;
@@ -33,5 +49,11 @@ describe('# directory-tree', () => {
   it('type error', () => {
     // $ExpectError
     const expectNumber: number = dirTree(__dirname);
+  });
+
+  it('should not use children directly', () => {
+    const result: dirTreeType = dirTree(__dirname);
+    // $ExpectError
+    result.children.push('test');
   });
 });
