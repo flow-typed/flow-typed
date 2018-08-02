@@ -902,7 +902,7 @@ declare module "react-apollo" {
     TData = any,
     TVariables = OperationVariables
   > = {
-    data: TData | {||} | void,
+    data: TData | {||},
     loading: boolean,
     error?: ApolloError,
     variables: TVariables,
