@@ -468,17 +468,17 @@ pairs = toPairsIn({ a: 12, b: 100 });
 /**
  * _.pickBy
  */
-(pickBy([2, 3, 4], num => num % 2): Array<number>);
+(pickBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
 // $ExpectError
-pickBy([2, 3, 4], (str: string) => str.startsWith('foo'));
+pickBy({a: 2, b: 3, c: 4}, (str: string) => str.startsWith('foo'));
 (pickBy(null, num => num % 2): void | null);
 (pickBy(undefined, num => num % 2): void | null);
 
 /**
  * _.omitBy
  */
-(omitBy([2, 3, 4], num => num % 2): Array<number>);
+(omitBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
 // $ExpectError
-omitBy([2, 3, 4], (str: string) => str.startsWith('foo'));
+omitBy({a: 2, b: 3, c: 4}, (str: string) => str.startsWith('foo'));
 (omitBy(null, num => num % 2): void | null);
 (omitBy(undefined, num => num % 2): void | null);
