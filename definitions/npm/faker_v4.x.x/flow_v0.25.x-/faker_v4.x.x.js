@@ -233,7 +233,7 @@ declare module "faker" {
     random: {
       number: (
         options?: number | {| max?: number, min?: number, precision?: number |}
-      ) => string,
+      ) => number,
       arrayElement: <Element>(Array<Element>) => Element,
       objectElement: <Key, Value>(
         object: { [Key]: Value },
