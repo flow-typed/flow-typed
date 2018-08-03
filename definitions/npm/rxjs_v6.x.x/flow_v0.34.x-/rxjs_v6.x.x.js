@@ -1627,6 +1627,7 @@ declare class rxjs$UnsubscriptionError extends Error {}
 
 declare module "rxjs" {
   declare module.exports: {
+    concat<+T>(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>,
     from<+T>(
       input: rxjs$ObservableInput<T>,
       scheduler?: rxjs$SchedulerClass
