@@ -13,8 +13,28 @@ declare type $winstonNpmLogLevels = {
 
 declare type $winstonInfo<T: $winstonLevels> = {
   level: $Keys<T>,
-  message: string
+  message: string,
+  [optionName: string]: any,
 };
+
+declare type $WinstonLogCallback = (
+  error?: any,
+  level?: string,
+  message?: string,
+  meta?: any
+) => void;
+
+declare type $WinstonLogMethod<T: $winstonLevels> =
+  (level: string, message: string, meta: any, callback?: $WinstonLogCallback) => $winstonLogger<T> |
+  (level: string, message: string, callback?: $WinstonLogCallback) => $winstonLogger<T> |
+  (level: string, message: string, ...meta: any[]) => $winstonLogger<T> |
+  (entry: $winstonInfo<T>) => $winstonLogger<T>;
+
+declare type $WinstonLeveledLogMethod<T: $winstonLevels> =
+  (message: string, meta: any, callback?: $WinstonLogCallback) => $winstonLogger<T> |
+  (message: string, callback?: $WinstonLogCallback) => $winstonLogger<T> |
+  (message: string, ...meta: any[]) => $winstonLogger<T> |
+  (infoObject: Object) => $winstonLogger<T>;
 
 declare type $winstonFormat = Object;
 
@@ -48,11 +68,11 @@ declare type $winstonLoggerConfig<T: $winstonLevels> = {
 };
 
 declare type $winstonLogger<T: $winstonLevels> = {
-  [$Keys<T>]: (message: string) => void,
+  [$Keys<T>]: $WinstonLeveledLogMethod<T>,
   add: $winstonTransport => void,
   clear: () => void,
   configure: ($winstonLoggerConfig<T>) => void,
-  log: (message: $winstonInfo<T>) => void,
+  log: $WinstonLogMethod<T>,
   remove: $winstonTransport => void
 };
 
