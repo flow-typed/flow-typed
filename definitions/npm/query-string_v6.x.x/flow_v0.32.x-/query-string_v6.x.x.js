@@ -8,6 +8,7 @@ declare module 'query-string' {
     arrayFormat?: ArrayFormat,
     encode?: boolean,
     strict?: boolean,
+    sort?: false | <A, B>(A, B) => number,
   |}
 
   declare module.exports: {
