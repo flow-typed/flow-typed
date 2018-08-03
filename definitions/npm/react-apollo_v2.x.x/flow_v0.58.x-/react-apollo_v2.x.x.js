@@ -991,7 +991,8 @@ declare module "react-apollo" {
     loading: boolean,
     error?: ApolloError,
     data?: TData,
-    called: boolean
+    called: boolean,
+    client: ApolloClient<any>
   };
 
   declare export type MutationRenderPropFunction<TData, TVariables> = (
