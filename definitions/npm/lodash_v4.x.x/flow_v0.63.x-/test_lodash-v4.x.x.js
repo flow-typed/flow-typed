@@ -24,9 +24,9 @@ import keyBy from "lodash/keyBy";
 import map from "lodash/map";
 import memoize from "lodash/memoize";
 import noop from "lodash/noop";
-import pullAllBy from "lodash/pullAllBy";
-import pickBy from "lodash/pickBy";
 import omitBy from "lodash/omitBy";
+import pickBy from "lodash/pickBy";
+import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
 import sortedIndexBy from "lodash/sortedIndexBy";
 import sortedLastIndexBy from "lodash/sortedLastIndexBy";
@@ -469,16 +469,12 @@ pairs = toPairsIn({ a: 12, b: 100 });
  * _.pickBy
  */
 (pickBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
-// $ExpectError
-pickBy({a: 2, b: 3, c: 4}, (str: string) => str.startsWith('foo'));
-(pickBy(null, num => num % 2): void | null);
-(pickBy(undefined, num => num % 2): void | null);
+(pickBy(null, num => num % 2): {});
+(pickBy(undefined, num => num % 2): {});
 
 /**
  * _.omitBy
  */
 (omitBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
-// $ExpectError
-omitBy({a: 2, b: 3, c: 4}, (str: string) => str.startsWith('foo'));
-(omitBy(null, num => num % 2): void | null);
-(omitBy(undefined, num => num % 2): void | null);
+(omitBy(null, num => num % 2): {});
+(omitBy(undefined, num => num % 2): {});
