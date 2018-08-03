@@ -1397,8 +1397,8 @@ declare module "@material-ui/core/Popover/Popover" {
 }
 
 declare module "@material-ui/core/CircularProgress/CircularProgress" {
-  declare type Color = "primary" | "accent" | "inherit";
-  declare type Mode = "determinate" | "indeterminate";
+  declare type Color = "primary" | "secondary" | "inherit";
+  declare type Mode = "determinate" | "indeterminate" | "static";
 
   declare module.exports: React$ComponentType<{
     classes?: Object,
