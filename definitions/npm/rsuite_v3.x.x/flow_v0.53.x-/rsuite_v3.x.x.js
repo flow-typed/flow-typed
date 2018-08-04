@@ -1,5 +1,4 @@
 declare module "rsuite" {
-  import type { ChildrenArray } from "react";
 
   declare type moment$Moment = Object;
   declare type Size = "lg" | "md" | "sm" | "xs";
@@ -403,7 +402,7 @@ declare module "rsuite" {
   declare export class Breadcrumb extends React$Component<{
     separator?: React$Node,
     componentClass?: React$ElementType,
-    children?: ChildrenArray<React$Element<typeof BreadcrumbItem>>,
+    children?: React$Node,
     className?: string,
     classPrefix?: string
   }> {
@@ -1064,7 +1063,7 @@ declare module "rsuite" {
     gutter?: number,
     style?: Object,
     componentClass?: React$ElementType,
-    children?: ChildrenArray<React$Element<typeof Col>>
+    children?: React$Node
   }> {}
 
   declare export class SafeAnchor extends React$Component<{
@@ -1286,7 +1285,7 @@ declare module "rsuite" {
     loading?: boolean,
     className?: string,
     classPrefix?: string,
-    children?: ChildrenArray<*>,
+    children?: mixed,
     bordered?: boolean,
     cellBordered?: boolean,
     wordWrap?: boolean,

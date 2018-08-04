@@ -154,10 +154,12 @@ const {
 <Breadcrumb>
   <Breadcrumb.Item>test</Breadcrumb.Item>
 </Breadcrumb>;
-//$ExpectError
+
 <Breadcrumb>
-  <a>test</a>
+  <Breadcrumb.Item>item1</Breadcrumb.Item>
+  <Breadcrumb.Item>item2</Breadcrumb.Item>
 </Breadcrumb>;
+
 
 <Button />;
 //$ExpectError
@@ -321,6 +323,15 @@ const {
 </RadioGroup>;
 
 <Row />;
+
+<Row>
+  <Col>1</Col>
+</Row>;
+
+<Row>
+  <Col>2</Col>
+  <Col>3</Col>
+</Row>;
 
 <SafeAnchor href="http://" />;
 <Sidebar />;
