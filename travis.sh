@@ -1,5 +1,5 @@
-#!/bin/bash
-#set -o errexit
+#!/bin/sh
+#set -e
 
 cd definitions && \
 yarn install && \
