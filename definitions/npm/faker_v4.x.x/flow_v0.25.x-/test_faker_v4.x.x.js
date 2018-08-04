@@ -4,7 +4,6 @@ import faker from "faker";
 describe("prototype", () => {
   faker.seed(12);
   faker.seed([1, 2, 3]);
-  faker.seed(undefined);
   faker.seedValue;
   faker.setLocale('ru');
 });
