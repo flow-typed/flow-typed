@@ -492,7 +492,7 @@ declare module "react-apollo" {
     toKey: () => string;
   }
 
-  declare type FetchResult<
+  declare export type FetchResult<
     C = { [key: string]: any },
     E = { [key: string]: any }
   > = ExecutionResult<C> & { extension?: E, context?: C };
