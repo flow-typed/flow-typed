@@ -270,7 +270,7 @@ declare module "react-apollo" {
     context?: any;
   }
 
-  declare type RefetchQueryDescription = Array<string | PureQueryOptions>;
+  declare export type RefetchQueryDescription = $ReadOnlyArray<string | PureQueryOptions>;
 
   declare interface MutationBaseOptions<T = { [key: string]: any }> {
     optimisticResponse?: Object | Function;
@@ -762,12 +762,12 @@ declare module "react-apollo" {
 
   declare export type RefetchQueriesProviderFn = (
     ...args: any[]
-  ) => string[] | PureQueryOptions[];
+  ) => RefetchQueryDescription
 
   declare export type MutationOpts<TVariables> = {|
     variables?: TVariables,
     optimisticResponse?: Object,
-    refetchQueries?: string[] | PureQueryOptions[] | RefetchQueriesProviderFn,
+    refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
     update?: MutationUpdaterFn<*>,
     errorPolicy?: ErrorPolicy
   |};
@@ -983,7 +983,7 @@ declare module "react-apollo" {
   > = (options: {
     variables?: TVariables,
     optimisticResponse?: Object,
-    refetchQueries?: string[] | PureQueryOptions[] | RefetchQueriesProviderFn,
+    refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
     update?: MutationUpdaterFn<TData>
   }) => Promise<void | FetchResult<TData>>;
 
@@ -1010,7 +1010,7 @@ declare module "react-apollo" {
     update?: MutationUpdaterFn<TData>,
     ignoreResults?: boolean,
     optimisticResponse?: Object,
-    refetchQueries?: string[] | PureQueryOptions[] | RefetchQueriesProviderFn,
+    refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
     onCompleted?: (data: TData) => mixed,
     onError?: (error: ApolloError) => mixed,
     context?: { [string]: any }
