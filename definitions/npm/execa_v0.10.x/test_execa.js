@@ -108,3 +108,10 @@ async () => {
 async () => {
   const { stdout } = await execa.shell('ls | wc -l');
 };
+
+async () => {
+  const children: ThenableChildProcess[] = [1, 2, 3].map(x => execa(`echo ${x}`))
+  children.forEach(child => child.stdin.end('unicorns'))
+  const results = await Promise.all(children);
+  (results: Result[])
+};
