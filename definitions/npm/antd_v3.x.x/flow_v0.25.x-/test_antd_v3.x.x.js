@@ -150,14 +150,78 @@ describe('Menu.SubMenu', () => {
 })
 
 describe('message', () => {
-  it('is a function', () => {
-    message()
+  it('have a config function', () => {
+    const element = document.createElement('div')
+    message.config({
+      duration: 1000,
+      getContainer: () => element,
+      top: 42
+    })
+  })
+  it('have a success function', () => {
+    message.success('hello', 2000, () => 'closed')
+  })
+  it('have a error function', () => {
+    message.error('hello', 2000, () => 'closed')
+  })
+  it('have an info function', () => {
+    message.info('hello', 2000, () => 'closed')
+  })
+  it('have a warning function', () => {
+    message.warning('hello', 2000, () => 'closed')
+  })
+  it('have a warn function', () => {
+    message.warn('hello', 2000, () => 'closed')
+  })
+  it('have a loading function', () => {
+    const stopLoading = message.loading('hello', 2000, () => 'closed')
+    stopLoading()
   })
 })
 
 describe('Modal', () => {
   it('is a react component', () => {
     const modal = <Modal />
+  })
+  it('have an info method', () => {
+    const ref = Modal.info({
+      title: 'hello',
+      content: 'world',
+      onOk: () => 42
+    })
+    ref.destroy()
+  })
+  it('have a success method', () => {
+    const ref = Modal.success({
+      title: 'hello',
+      content: 'world',
+      onOk: () => 42
+    })
+    ref.destroy()
+  })
+  it('have an error method', () => {
+    const ref = Modal.error({
+      title: 'hello',
+      content: 'world',
+      onOk: () => 42
+    })
+    ref.destroy()
+  })
+  it('have a warning method', () => {
+    const ref = Modal.warning({
+      title: 'hello',
+      content: 'world',
+      onOk: () => 42
+    })
+    ref.destroy()
+  })
+  it('have a confirm method', () => {
+    const ref = Modal.confirm({
+      title: 'hello',
+      content: 'world',
+      onOk: () => 42
+    })
+    ref.destroy()
   })
 })
 

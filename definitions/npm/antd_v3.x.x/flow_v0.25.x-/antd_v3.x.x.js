@@ -1,3 +1,15 @@
+declare function $npm$antd$messageFn<TReturn>(content: React$Node, duration?: number, onClose?: () => mixed): TReturn
+
+declare type $npm$antd$modalReference = {
+  destroy: () => void
+}
+
+declare function $npm$antd$modalFn({
+  title?: string,
+  content?: React$Node,
+  onOk?: () => mixed
+}): $npm$antd$modalReference
+
 declare module 'antd' {
 
   declare export class Alert extends React$Component<{}> {}
@@ -57,10 +69,26 @@ declare module 'antd' {
 
   declare export class Menu$SubMenu extends React$Component<{}> {}
 
-  declare export function message(): void
+  declare export class message {
+    static config({
+      duration?: number,
+      getContainer?: () => HTMLElement,
+      top?: number
+    }): void;
+    static success: $npm$antd$messageFn<mixed>;
+    static error:   $npm$antd$messageFn<mixed>;
+    static info:    $npm$antd$messageFn<mixed>;
+    static warning: $npm$antd$messageFn<mixed>;
+    static warn:    $npm$antd$messageFn<mixed>;
+    static loading: $npm$antd$messageFn<() => void>;
+  }
 
   declare export class Modal extends React$Component<{}> {
-    static confirm: () => mixed;
+    static info:    typeof $npm$antd$modalFn;
+    static success: typeof $npm$antd$modalFn;
+    static error:   typeof $npm$antd$modalFn;
+    static warning: typeof $npm$antd$modalFn;
+    static confirm: typeof $npm$antd$modalFn;
   }
 
   declare export class Popconfirm extends React$Component<{}> {}
