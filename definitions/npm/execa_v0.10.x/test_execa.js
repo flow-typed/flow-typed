@@ -16,13 +16,13 @@ execa('ls').then(res => {
 // $ExpectError
 execa('ls').then(res => res.foo);
 
-execa('foo').catch((err: ExecaError) => {
+execa('foo').catch(err => {
   (err.cmd: string);
   (err.code: ?string);
   (err.errno: ?number);
 });
 // $ExpectError
-execa('foo').catch((err: ExecaError) => err.foo);
+execa('foo').catch(err => err.foo);
 
 (execa('ls').pid: number);
 execa('ls').stdout.pipe(process.stdout);
@@ -107,11 +107,4 @@ async () => {
 
 async () => {
   const { stdout } = await execa.shell('ls | wc -l');
-};
-
-async () => {
-  const children: ThenableChildProcess[] = [1, 2, 3].map(x => execa(`echo ${x}`))
-  children.forEach(child => child.stdin.end('unicorns'))
-  const results = await Promise.all(children);
-  (results: Result[])
 };
