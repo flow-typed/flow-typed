@@ -1199,8 +1199,8 @@ declare module "lodash-es" {
     object: T,
     predicate?: ?OPredicate<A, T>
   ): Object;
-  declare export function omitBy<A, T: void | null>(
-    object: T,
+  declare export function omitBy<A, T>(
+    object: void | null,
     predicate?: ?OPredicate<A, T>
   ): {};
   declare export function pick(object?: ?Object, ...props: Array<string>): Object;
@@ -1209,8 +1209,8 @@ declare module "lodash-es" {
     object: T,
     predicate?: ?OPredicate<A, T>
   ): Object;
-  declare export function pickBy<A, T: void | null>(
-    object: T,
+  declare export function pickBy<A, T>(
+    object: void | null,
     predicate?: ?OPredicate<A, T>
   ): {};
   declare export function result(
