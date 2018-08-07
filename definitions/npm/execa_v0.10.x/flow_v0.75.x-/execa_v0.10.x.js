@@ -58,16 +58,7 @@ declare module 'execa' {
     killed: boolean,
   |};
 
-  declare interface ThenableChildProcess extends child_process$ChildProcess {
-    then<R, E>(
-      onfulfilled?: ?((value: Result) => R | Promise<R>),
-      onrejected?: ?((reason: ExecaError) => E | Promise<E>),
-    ): Promise<R | E>;
-
-    catch<E>(
-      onrejected?: ?((reason: ExecaError) => E | Promise<E>)
-    ): Promise<Result | E>;
-  }
+  declare type ThenableChildProcess = child_process$ChildProcess & Promise<Result>;
 
   declare interface ExecaError extends ErrnoError {
     stdout: string;

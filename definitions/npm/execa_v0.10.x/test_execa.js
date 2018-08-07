@@ -16,13 +16,13 @@ execa('ls').then(res => {
 // $ExpectError
 execa('ls').then(res => res.foo);
 
-execa('foo').catch(err => {
+execa('foo').catch((err: ExecaError) => {
   (err.cmd: string);
   (err.code: ?string);
   (err.errno: ?number);
 });
 // $ExpectError
-execa('foo').catch(err => err.foo);
+execa('foo').catch((err: ExecaError) => err.foo);
 
 (execa('ls').pid: number);
 execa('ls').stdout.pipe(process.stdout);
