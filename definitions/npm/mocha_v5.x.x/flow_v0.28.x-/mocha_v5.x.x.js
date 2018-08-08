@@ -157,6 +157,7 @@ declare interface $npm$mocha$Test extends $npm$mocha$Runnable {
   pending: boolean;
   state: 'failed' | 'passed' | void;
   fullTitle(): string;
+  timeout(ms: number): void;
 }
 
 // declare interface $npm$mocha$BeforeAndAfterContext extends $npm$mocha$HookCallbackContext {
