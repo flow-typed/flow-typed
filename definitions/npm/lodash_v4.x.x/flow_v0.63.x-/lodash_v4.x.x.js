@@ -358,7 +358,7 @@ declare module "lodash" {
     sortedLastIndexOf<T>(array: Array<T>, value: T): number;
     sortedLastIndexOf<T>(array: void | null, value?: ?T): -1;
     sortedUniq<T>(array?: ?Array<T>): Array<T>;
-    sortedUniqBy<T>(array?: ?Array<T>, iteratee?: ?ValueOnlyIteratee): Array<T>;
+    sortedUniqBy<T>(array?: ?Array<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     tail<T>(array?: ?Array<T>): Array<T>;
     take<T>(array?: ?Array<T>, n?: ?number): Array<T>;
     takeRight<T>(array?: ?Array<T>, n?: ?number): Array<T>;
@@ -1853,7 +1853,7 @@ declare module "lodash/fp" {
     sortedLastIndexOf<T>(value: T): (array: Array<T>) => number;
     sortedLastIndexOf<T>(value: T, array: Array<T>): number;
     sortedUniq<T>(array: Array<T>): Array<T>;
-    sortedUniqBy<T>(iteratee: ValueOnlyIteratee, array: Array<T>): Array<T>;
+    sortedUniqBy<T>(iteratee: ValueOnlyIteratee<T>, array: Array<T>): Array<T>;
     tail<T>(array: Array<T>): Array<T>;
     take<T>(n: number): (array: Array<T>) => Array<T>;
     take<T>(n: number, array: Array<T>): Array<T>;
