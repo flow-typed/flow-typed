@@ -54,8 +54,8 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
   static Defer: Class<Bluebird$Defer>;
   static PromiseInspection: Class<Bluebird$PromiseInspection<*>>;
 
-  static all<T, Elem: $Promisable<T>>(
-    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
+  static all<T>(
+    Promises: $Promisable<Iterable<$Promisable<T>>>
   ): Bluebird$Promise<Array<T>>;
   static props(
     input: Object | Map<*, *> | $Promisable<Object | Map<*, *>>
