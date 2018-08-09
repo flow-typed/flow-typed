@@ -394,6 +394,8 @@ declare module 'react-navigation' {
     mode?: 'card' | 'modal',
     headerMode?: HeaderMode,
     headerTransitionPreset?: 'fade-in-place' | 'uikit',
+    headerLayoutPreset?: 'left' | 'center',
+    headerBackTitleVisible?: boolean,
     cardStyle?: ViewStyleProp,
     transitionConfig?: () => TransitionConfig,
     onTransitionStart?: () => void,
