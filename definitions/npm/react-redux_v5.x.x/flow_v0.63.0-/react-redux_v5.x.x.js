@@ -1,10 +1,10 @@
-import type { Dispatch, Store } from "redux";
+import type { Dispatch as redux$Dispatch, Store as redux$Store } from "redux";
 
 declare module "react-redux" {
   import type { ComponentType, ElementConfig } from 'react';
 
   declare export class Provider<S, A> extends React$Component<{
-    store: Store<S, A>,
+    store: redux$Store<S, A>,
     children?: any
   }> {}
 
@@ -32,7 +32,7 @@ declare module "react-redux" {
 
   declare type MapStateToProps<S: Object, SP: Object, RSP: Object> = (state: S, props: SP) => RSP;
 
-  declare type MapDispatchToProps<A, OP: Object, RDP: Object> = (dispatch: Dispatch<A>, ownProps: OP) => RDP;
+  declare type MapDispatchToProps<A, OP: Object, RDP: Object> = (dispatch: redux$Dispatch<A>, ownProps: OP) => RDP;
 
   declare type MergeProps<SP: Object, DP: Object, MP: Object, RMP: Object> = (
     stateProps: SP,
@@ -50,7 +50,7 @@ declare module "react-redux" {
     storeKey?: string
   |};
 
-  declare type OmitDispatch<Component> = $Diff<Component, {dispatch: Dispatch<*>}>;
+  declare type OmitDispatch<Component> = $Diff<Component, {dispatch: redux$Dispatch<*>}>;
 
   declare export function connect<
     Com: ComponentType<*>,

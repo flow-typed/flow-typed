@@ -1,4 +1,4 @@
-import type { Dispatch, Store } from "redux";
+import type { Dispatch as redux$Dispatch, Store as redux$Store } from "redux";
 
 declare module "react-redux" {
   /*
@@ -17,7 +17,7 @@ declare module "react-redux" {
   ) => ((state: S, ownProps: OP) => SP) | SP;
 
   declare type MapDispatchToProps<A, OP: Object, DP: Object> =
-    | ((dispatch: Dispatch<A>, ownProps: OP) => DP)
+    | ((dispatch: redux$Dispatch<A>, ownProps: OP) => DP)
     | DP;
 
   declare type MergeProps<SP, DP: Object, OP: Object, P: Object> = (
@@ -26,7 +26,7 @@ declare module "react-redux" {
     ownProps: OP
   ) => P;
 
-  declare type Context = { store: Store<*, *> };
+  declare type Context = { store: redux$Store<*, *> };
 
   declare type StatelessComponent<P> = (
     props: P,
@@ -60,7 +60,7 @@ declare module "react-redux" {
 
   declare class Provider<S, A> extends React$Component<
     void,
-    { store: Store<S, A>, children?: any },
+    { store: redux$Store<S, A>, children?: any },
     void
   > {}
 
@@ -73,21 +73,21 @@ declare module "react-redux" {
 
   declare function connect<A, OP>(
     ...rest: Array<void> // <= workaround for https://github.com/facebook/flow/issues/2360
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<{ dispatch: redux$Dispatch<A> } & OP>>;
 
   declare function connect<A, OP>(
     mapStateToProps: Null,
     mapDispatchToProps: Null,
     mergeProps: Null,
     options: ConnectOptions
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<{ dispatch: redux$Dispatch<A> } & OP>>;
 
   declare function connect<S, A, OP, SP>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: Null,
     mergeProps: Null,
     options?: ConnectOptions
-  ): Connector<OP, $Supertype<SP & { dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<SP & { dispatch: redux$Dispatch<A> } & OP>>;
 
   declare function connect<A, OP, DP>(
     mapStateToProps: Null,

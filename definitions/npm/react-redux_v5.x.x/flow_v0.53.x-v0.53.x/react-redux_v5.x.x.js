@@ -1,7 +1,4 @@
-// flow-typed signature: 8db7b853f57c51094bf0ab8b2650fd9c
-// flow-typed version: ab8db5f14d/react-redux_v5.x.x/flow_>=v0.30.x
-
-import type { Dispatch, Store } from "redux";
+import type { Dispatch as redux$Dispatch, Store as redux$Store } from "redux";
 
 declare module "react-redux" {
   /*
@@ -20,7 +17,7 @@ declare module "react-redux" {
   ) => ((state: S, ownProps: OP) => SP) | SP;
 
   declare type MapDispatchToProps<A, OP: Object, DP: Object> =
-    | ((dispatch: Dispatch<A>, ownProps: OP) => DP)
+    | ((dispatch: redux$Dispatch<A>, ownProps: OP) => DP)
     | DP;
 
   declare type MergeProps<SP, DP: Object, OP: Object, P: Object> = (
@@ -29,7 +26,7 @@ declare module "react-redux" {
     ownProps: OP
   ) => P;
 
-  declare type Context = { store: Store<*, *> };
+  declare type Context = { store: redux$Store<*, *> };
 
   declare class ConnectedComponent<OP, P> extends React$Component<OP> {
     static WrappedComponent: Class<React$Component<P>>,
@@ -47,7 +44,7 @@ declare module "react-redux" {
   ) => ConnectedComponentClass<OP, P>;
 
   declare class Provider<S, A> extends React$Component<{
-    store: Store<S, A>,
+    store: redux$Store<S, A>,
     children?: any
   }> {}
 
@@ -65,21 +62,21 @@ declare module "react-redux" {
 
   declare function connect<A, OP>(
     ...rest: Array<void> // <= workaround for https://github.com/facebook/flow/issues/2360
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<{ dispatch: redux$Dispatch<A> } & OP>>;
 
   declare function connect<A, OP>(
     mapStateToProps: Null,
     mapDispatchToProps: Null,
     mergeProps: Null,
     options: ConnectOptions
-  ): Connector<OP, $Supertype<{ dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<{ dispatch: redux$Dispatch<A> } & OP>>;
 
   declare function connect<S, A, OP, SP>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: Null,
     mergeProps: Null,
     options?: ConnectOptions
-  ): Connector<OP, $Supertype<SP & { dispatch: Dispatch<A> } & OP>>;
+  ): Connector<OP, $Supertype<SP & { dispatch: redux$Dispatch<A> } & OP>>;
 
   declare function connect<A, OP, DP>(
     mapStateToProps: Null,
