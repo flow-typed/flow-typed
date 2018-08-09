@@ -898,7 +898,7 @@ declare module "rxjs/operators" {
     ): rxjs$Observable<T> => rxjs$Observable<U>;
     concatMap<+T, U, V>(
       f: (value: T, index: number) => rxjs$ObservableInput<U>,
-      resultSelector: (
+      resultSelector?: (
         outerValue: T,
         innerValue: U,
         outerIndex: number,
