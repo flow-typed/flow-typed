@@ -29,7 +29,6 @@ Cookie.set('data', {
 // $ExpectError
 Cookie.getJson();
 
-// $ExpectError
 const data: Object = Cookie.getJSON('data');
 
 
