@@ -43,7 +43,7 @@ declare module "react-apollo" {
       fetchResults?: boolean
     ): Promise<ApolloQueryResult<T>>;
     updateQuery(
-      mapFn: (previousQueryResult: any, options: UpdateQueryOptions) => any
+      mapFn: (previousQueryResult: any, options: UpdateQueryOptions) => mixed
     ): void;
     stopPolling(): void;
     startPolling(pollInterval: number): void;
@@ -60,7 +60,7 @@ declare module "react-apollo" {
       link: ApolloLink,
       queryDeduplication?: boolean,
       store: DataStore<TStore>,
-      onBroadcast?: () => void,
+      onBroadcast?: () => mixed,
       ssrMode?: boolean
     }): this;
 
@@ -186,7 +186,7 @@ declare module "react-apollo" {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater },
-      update: ((proxy: DataProxy, mutationResult: Object) => void) | void,
+      update: ((proxy: DataProxy, mutationResult: Object) => mixed) | void,
       optimisticResponse: Object | Function | void
     }): void;
     markMutationResult(mutation: {
@@ -195,7 +195,7 @@ declare module "react-apollo" {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater },
-      update: ((proxy: DataProxy, mutationResult: Object) => void) | void
+      update: ((proxy: DataProxy, mutationResult: Object) => mixed) | void
     }): void;
     markMutationComplete({
       mutationId: string,
@@ -324,20 +324,20 @@ declare module "react-apollo" {
         variables: TSubscriptionVariables
       }
     ) => TData,
-    onError?: (error: Error) => void
+    onError?: (error: Error) => mixed
   };
 
   declare export type MutationUpdaterFn<T = OperationVariables> = (
     proxy: DataProxy,
     mutationResult: FetchResult<T>
-  ) => void;
+  ) => mixed;
 
   declare export type NetworkStatus = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
   declare export type QueryListener = (
     queryStoreValue: QueryStoreValue,
     newData?: any
-  ) => void;
+  ) => mixed;
 
   declare export type QueryStoreValue = {
     document: DocumentNode,
@@ -432,7 +432,7 @@ declare module "react-apollo" {
     writeQuery(options: DataProxyWriteQueryOptions): void;
     writeFragment(options: DataProxyWriteFragmentOptions): void;
     writeData(options: DataProxyWriteDataOptions): void;
-    __actionHookForDevTools(cb: () => any): void;
+    __actionHookForDevTools(cb: () => mixed): void;
     __requestRaw(payload: GraphQLRequest): Observable<ExecutionResult<>>;
     initQueryManager(): void;
     resetStore(): Promise<Array<ApolloQueryResult<any>> | null>;
@@ -506,12 +506,12 @@ declare module "react-apollo" {
 
   declare class Observable<T> {
     subscribe(
-      observerOrNext: ((value: T) => void) | ZenObservableObserver<T>,
-      error?: (error: any) => void,
-      complete?: () => void
+      observerOrNext: ((value: T) => mixed) | ZenObservableObserver<T>,
+      error?: (error: any) => mixed,
+      complete?: () => mixed
     ): ZenObservableSubscription;
 
-    forEach(fn: (value: T) => void): Promise<void>;
+    forEach(fn: (value: T) => mixed): Promise<void>;
 
     map<R>(fn: (value: T) => R): Observable<R>;
 
@@ -556,15 +556,15 @@ declare module "react-apollo" {
   }
 
   declare interface ZenObservableObserver<T> {
-    start?: (subscription: ZenObservableSubscription) => any;
-    next?: (value: T) => void;
-    error?: (errorValue: any) => void;
-    complete?: () => void;
+    start?: (subscription: ZenObservableSubscription) => mixed;
+    next?: (value: T) => mixed;
+    error?: (errorValue: any) => mixed;
+    complete?: () => mixed;
   }
 
   declare type ZenObservableSubscriber<T> = (
     observer: ZenObservableSubscriptionObserver<T>
-  ) => void | (() => void) | SubscriptionLINK;
+  ) => mixed | (() => mixed) | SubscriptionLINK;
 
   declare interface ZenObservableObservableLike<T> {
     subscribe?: ZenObservableSubscriber<T>;
@@ -607,9 +607,9 @@ declare module "react-apollo" {
     writeData(options: CacheWriteDataOptions): void;
   }
 
-  declare type Transaction<T> = (c: ApolloCache<T>) => void;
+  declare type Transaction<T> = (c: ApolloCache<T>) => mixed;
 
-  declare type CacheWatchCallback = (newData: any) => void;
+  declare type CacheWatchCallback = (newData: any) => mixed;
 
   declare interface CacheEvictionResult {
     success: boolean;
@@ -797,7 +797,7 @@ declare module "react-apollo" {
     stopPolling: () => void;
     subscribeToMore: (options: SubscribeToMoreOptions<any, any>) => () => void;
     updateQuery: (
-      mapFn: (previousQueryResult: any, options: UpdateQueryOptions) => any
+      mapFn: (previousQueryResult: any, options: UpdateQueryOptions) => mixed
     ) => void;
   }
 
@@ -924,7 +924,7 @@ declare module "react-apollo" {
     ) => () => void,
     updateQuery: (
       mapFn: (previousResult: TData, options: { variables: TVariables }) => TData
-    ) => any,
+    ) => mixed,
     client: ApolloClient<any>
   };
 
@@ -1011,8 +1011,8 @@ declare module "react-apollo" {
     ignoreResults?: boolean,
     optimisticResponse?: Object,
     refetchQueries?: string[] | PureQueryOptions[] | RefetchQueriesProviderFn,
-    onCompleted?: (data: TData) => void,
-    onError?: (error: ApolloError) => void,
+    onCompleted?: (data: TData) => mixed,
+    onError?: (error: ApolloError) => mixed,
     context?: { [string]: any }
   }> {}
 }
