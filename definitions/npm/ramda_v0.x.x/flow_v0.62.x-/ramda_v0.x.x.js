@@ -8,6 +8,8 @@ type Transformer<A, B> = {
 
 declare type $npm$ramda$Placeholder = { "@@functional/placeholder": true };
 
+declare opaque type $npm$ramda$Reduced<T>;
+
 declare module ramda {
   declare type UnaryFn<A, R> = (a: A) => R;
   declare type UnaryPromiseFn<A, R> = UnaryFn<A, Promise<R>>;
@@ -812,6 +814,8 @@ declare module ramda {
 
   declare var range: CurriedFunction2<number, number, Array<number>>;
 
+  declare function reduced<T>(x: T | $npm$ramda$Reduced<T>): $npm$ramda$Reduced<T>;
+
   declare function remove<T>(
     from: number,
   ): ((to: number) => (src: Array<T>) => Array<T>) &
@@ -946,15 +950,15 @@ declare module ramda {
   declare function reverse<T, V: Array<T> | string>(xs: V): V;
 
   declare type Reduce = (<A, B>(
-    fn: (acc: A, elm: B) => A
+    fn: (acc: A, elm: B) => $npm$ramda$Reduced<A> | A
   ) => ((init: A) => (xs: Array<B> | $ReadOnlyArray<B>) => A) &
     ((init: A, xs: Array<B> | $ReadOnlyArray<B>) => A)) &
     (<A, B>(
-      fn: (acc: A, elm: B) => A,
+      fn: (acc: A, elm: B) => $npm$ramda$Reduced<A> | A,
       init: A
     ) => (xs: Array<B> | $ReadOnlyArray<B>) => A) &
     (<A, B>(
-      fn: (acc: A, elm: B) => A,
+      fn: (acc: A, elm: B) => $npm$ramda$Reduced<A> | A,
       init: A,
       xs: Array<B> | $ReadOnlyArray<B>
     ) => A);
