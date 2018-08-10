@@ -32,6 +32,7 @@ import times from 'lodash/times';
 import toPairs from "lodash/toPairs";
 import toPairsIn from "lodash/toPairsIn";
 import flatMap from 'lodash/flatMap';
+import debounce from 'lodash/debounce';
 
 /**
  * _.attempt
@@ -408,3 +409,14 @@ noop('a', 2, [], null);
 var pairs: [string, number][];
 pairs = toPairs({ a: 12, b: 100 });
 pairs = toPairsIn({ a: 12, b: 100 });
+
+/**
+ * _.debounce
+ */
+var debounced: (a: number) => string = debounce((a: number) => "foo");
+// $ExpectError debounce retains type information
+debounced = debounce(() => {});
+debounced.cancel();
+debounced.flush();
+// $ExpectError allows to call unknown method on debounced
+debounced.foobar();

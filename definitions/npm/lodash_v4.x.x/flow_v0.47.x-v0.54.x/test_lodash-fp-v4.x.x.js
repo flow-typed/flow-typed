@@ -399,3 +399,12 @@ const ab = (a: number) => `${a}`;
 const bc = (b: string) => ({b});
 const cd = (c: {b: string}) => [c.b];
 const pipedResult: string[] = _.pipe(ab, bc, cd)(1);
+
+/**
+ * debounce
+ */
+const debounced = _.debounce(100)(() => {});
+debounced.cancel();
+debounced.flush();
+// $ExpectError allows to call unknown method on debounced
+debounced.foobar();
