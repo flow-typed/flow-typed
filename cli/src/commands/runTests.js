@@ -130,13 +130,15 @@ async function getOrderedFlowBinVersions(
           return false;
         }
 
-        // Temporary fix for https://github.com/flowtype/flow-typed/issues/2422
-        if (rel.tag_name === 'v0.63.0') {
+        // Temporary fixes for https://github.com/flowtype/flow-typed/issues/2422
+        if (rel.tag_name === 'v0.63.0' || rel.tag_name === 'v0.70.0') {
           console.log(
             '==========================================================================================',
           );
           console.log(
-            'We are tempoarily skipping v0.63.0 due to https://github.com/flowtype/flow-typed/issues/2422',
+            `We are tempoarily skipping ${
+              rel.tag_name
+            } due to https://github.com/flowtype/flow-typed/issues/2422`,
           );
           console.log(
             '==========================================================================================',
