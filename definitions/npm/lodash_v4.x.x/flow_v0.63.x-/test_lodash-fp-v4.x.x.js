@@ -37,6 +37,7 @@ import noop from 'lodash/fp/noop';
 import pipe from 'lodash/fp/pipe';
 import compose from 'lodash/fp/compose';
 import includes from 'lodash/fp/includes';
+import debounce from 'lodash/fp/debounce';
 
 filter('x', [{x: 1}, {x: 2}]);
 filter('x')([{x: 1}, {x: 2}]);
@@ -445,3 +446,12 @@ const composedResult: string[] = compose(cd, bc, ab)(1);
  * includes
  */
 includes("test")({ a: "test2", b: "test" });
+
+/**
+ * debounce
+ */
+const debounced = debounce(100)(() => {});
+debounced.cancel();
+debounced.flush();
+// $ExpectError allows to call unknown method on debounced
+debounced.foobar();

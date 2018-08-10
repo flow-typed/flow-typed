@@ -400,3 +400,12 @@ const bc = (b: string) => ({b});
 const cd = (c: {b: string}) => [c.b];
 const pipedResult: string[] = _.pipe(ab, bc, cd)(1);
 const composedResult: string[] = _.compose(cd, bc, ab)(1);
+
+/**
+ * debounce
+ */
+const debounced = _.debounce(100)(() => {});
+debounced.cancel();
+debounced.flush();
+// $ExpectError allows to call unknown method on debounced
+debounced.foobar();

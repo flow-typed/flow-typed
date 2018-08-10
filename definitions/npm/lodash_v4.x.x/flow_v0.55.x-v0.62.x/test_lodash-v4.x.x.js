@@ -454,6 +454,10 @@ memoized = memoize(() => {});
 var debounced: (a: number) => string = debounce((a: number) => "foo");
 // $ExpectError debounce retains type information
 debounced = debounce(() => {});
+debounced.cancel();
+debounced.flush();
+// $ExpectError allows to call unknown method on debounced
+debounced.foobar();
 
 /**
  * _.toPairs / _.toPairsIn

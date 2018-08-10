@@ -156,6 +156,8 @@ declare module "lodash" {
     trailing?: boolean
   };
 
+  declare type Debounced<F> = F & {cancel: () => void, flush: () => void};
+
   declare type NestedArray<T> = Array<Array<T>>;
 
   declare type matchesIterateeShorthand = Object;
@@ -750,7 +752,11 @@ declare module "lodash" {
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce<F: Function>(func: F, wait?: number, options?: DebounceOptions): F;
+    debounce<F: Function>(
+      func: F,
+      wait?: number,
+      options?: DebounceOptions
+    ): Debounced<F>;
     defer(func: Function, ...args?: Array<any>): TimeoutID;
     delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
     flip(func: Function): Function;
@@ -766,11 +772,11 @@ declare module "lodash" {
     rearg(func: Function, indexes: Array<number>): Function;
     rest(func: Function, start?: number): Function;
     spread(func: Function): Function;
-    throttle(
-      func: Function,
+    throttle<F: Function>(
+      func: F,
       wait?: number,
       options?: ThrottleOptions
-    ): Function;
+    ): Debounced<F>;
     unary(func: Function): Function;
     wrap(value?: any, wrapper?: ?Function): Function;
 
@@ -2321,8 +2327,8 @@ declare module "lodash/fp" {
     curryRight(func: Function): Function;
     curryRightN(arity: number): (func: Function) => Function;
     curryRightN(arity: number, func: Function): Function;
-    debounce(wait: number): <F: Function>(func: F) => F;
-    debounce<F: Function>(wait: number, func: F): F;
+    debounce(wait: number): <F: Function>(func: F) => Debounced<F>;
+    debounce<F: Function>(wait: number, func: F): Debounced<F>;
     defer(func: Function): TimeoutID;
     delay(wait: number): (func: Function) => TimeoutID;
     delay(wait: number, func: Function): TimeoutID;
@@ -2349,8 +2355,8 @@ declare module "lodash/fp" {
     apply(func: Function): Function;
     spreadFrom(start: number): (func: Function) => Function;
     spreadFrom(start: number, func: Function): Function;
-    throttle(wait: number): (func: Function) => Function;
-    throttle(wait: number, func: Function): Function;
+    throttle(wait: number): <F: Function>(func: F) => Debounced<F>;
+    throttle<F: Function>(wait: number, func: F): Debounced<F>;
     unary(func: Function): Function;
     wrap(wrapper: Function): (value: any) => Function;
     wrap(wrapper: Function, value: any): Function;

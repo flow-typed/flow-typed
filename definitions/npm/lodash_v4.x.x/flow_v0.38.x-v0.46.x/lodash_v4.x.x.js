@@ -494,7 +494,7 @@ declare module "lodash" {
       func: Function,
       wait?: number,
       options?: DebounceOptions
-    ): Function;
+    ): Function & {cancel: () => void, flush: () => void};
     defer(func: Function, ...args?: Array<any>): number;
     delay(func: Function, wait: number, ...args?: Array<any>): number;
     flip(func: Function): Function;
@@ -514,7 +514,7 @@ declare module "lodash" {
       func: Function,
       wait?: number,
       options?: ThrottleOptions
-    ): Function;
+    ): Function & {cancel: () => void, flush: () => void};
     unary(func: Function): Function;
     wrap(value: any, wrapper: Function): Function;
 
