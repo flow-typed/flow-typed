@@ -1209,8 +1209,8 @@ declare module "lodash" {
       object: T,
       predicate?: ?OPredicate<A, T>
     ): Object;
-    omitBy<A, T: void | null>(
-      object: T,
+    omitBy<A, T>(
+      object: void | null,
       predicate?: ?OPredicate<A, T>
     ): {};
     pick(object?: ?Object, ...props: Array<string>): Object;
@@ -1219,8 +1219,8 @@ declare module "lodash" {
       object: T,
       predicate?: ?OPredicate<A, T>
     ): Object;
-    pickBy<A, T: void | null>(
-      object: T,
+    pickBy<A, T>(
+      object: void | null,
       predicate?: ?OPredicate<A, T>
     ): {};
     result(

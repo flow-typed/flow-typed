@@ -1,5 +1,11 @@
 declare module "faker" {
+  declare type SeedType = number | $ReadOnlyArray<number>;
+
   declare module.exports: {
+    seedValue: ?SeedType,
+    seed: (SeedType) => void,
+    setLocale: (string) => void,
+
     address: {
       zipCode: (localeFormat?: string) => string,
       city: (mustacheTemplate?: string) => string,
@@ -233,14 +239,14 @@ declare module "faker" {
     random: {
       number: (
         options?: number | {| max?: number, min?: number, precision?: number |}
-      ) => string,
+      ) => number,
       arrayElement: <Element>(Array<Element>) => Element,
       objectElement: <Key, Value>(
         object: { [Key]: Value },
         field: Key
       ) => Value,
       uuid: () => string,
-      boolean: () => string,
+      boolean: () => boolean,
       word: (type?: string) => string,
       words: (count?: number) => string,
       image: () => string,

@@ -25,6 +25,8 @@ import {
   map,
   memoize,
   noop,
+  omitBy,
+  pickBy,
   pullAllBy,
   range,
   sortedIndexBy,
@@ -466,3 +468,17 @@ debounced = debounce(() => {});
 var pairs: [string, number][];
 pairs = toPairs({ a: 12, b: 100 });
 pairs = toPairsIn({ a: 12, b: 100 });
+
+/**
+ * _.pickBy
+ */
+(pickBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
+(pickBy(null, num => num % 2): {});
+(pickBy(undefined, num => num % 2): {});
+
+/**
+ * _.omitBy
+ */
+(omitBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
+(omitBy(null, num => num % 2): {});
+(omitBy(undefined, num => num % 2): {});

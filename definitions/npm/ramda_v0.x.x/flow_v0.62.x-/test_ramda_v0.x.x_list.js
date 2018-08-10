@@ -358,6 +358,21 @@ const str: string = "hello world";
     "3"
   ]);
 
+  const redux6a: number = reduce((acc, s) => _.reduced(acc), 0, ns)
+  const redux6b: number = reduce((acc: number, s: number) => _.reduced(acc), 0, ns)
+  const redxs7: number = reduce(
+    (acc, s) => acc < 4 ? acc + parseInt(s) : _.reduced(acc),
+    0,
+    ["1", "2", "3"]
+  );
+  // $ExpectError
+  const redxs8: number = reduce(
+    // $ExpectError
+    (acc, s) => acc < 4 ? acc + parseInt(s) : _.reduced(s),
+    0,
+    ["1", "2", "3"]
+  );
+
   // Ramda works with $ReadOnlyArray as it is immutable.
   const readOnlyArray: $ReadOnlyArray<number> = [1, 2, 3, 4];
   // $ReadOnlyArray with curried permutations:
@@ -384,6 +399,14 @@ const str: string = "hello world";
   const redrxs3b: string = _.reduceRight(
     (value: number, acc: string): string => acc,
     "",
+    ns
+  );
+
+  // $ExpectError reduceRight does not support reduced.
+  const redrxs4: number = _.reduceRight(
+    // $ExpectError reduceRight does not support reduced.
+    (acc, n) => acc < 4 ? acc + n : _.reduced(acc),
+    0,
     ns
   );
 

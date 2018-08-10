@@ -24,6 +24,8 @@ import keyBy from "lodash/keyBy";
 import map from "lodash/map";
 import memoize from "lodash/memoize";
 import noop from "lodash/noop";
+import omitBy from "lodash/omitBy";
+import pickBy from "lodash/pickBy";
 import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
 import sortedIndexBy from "lodash/sortedIndexBy";
@@ -462,3 +464,17 @@ debounced = debounce(() => {});
 var pairs: [string, number][];
 pairs = toPairs({ a: 12, b: 100 });
 pairs = toPairsIn({ a: 12, b: 100 });
+
+/**
+ * _.pickBy
+ */
+(pickBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
+(pickBy(null, num => num % 2): {});
+(pickBy(undefined, num => num % 2): {});
+
+/**
+ * _.omitBy
+ */
+(omitBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
+(omitBy(null, num => num % 2): {});
+(omitBy(undefined, num => num % 2): {});

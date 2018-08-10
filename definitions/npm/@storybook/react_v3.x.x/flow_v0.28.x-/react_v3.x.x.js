@@ -1,13 +1,14 @@
 type NodeModule = typeof module;
 
 declare module '@storybook/react' {
-  declare type Renderable = React$Element<any>;
-  declare type RenderFunction = () => Renderable;
+  declare type Renderable = React$Node;
+  declare type RenderFunction = (context: Context) => Renderable;
+  declare type Context = { kind: string, story: string };
 
   declare type StoryDecorator = (
     story: RenderFunction,
-    context: { kind: string, story: string }
-  ) => Renderable | null;
+    context: Context
+  ) => Renderable;
 
   declare interface Story {
     add(storyName: string, callback: RenderFunction): Story,
@@ -29,6 +30,7 @@ declare module '@storybook/react' {
   declare function setAddon(addon: Object): void;
   declare function storiesOf(name: string, module: NodeModule): Story;
   declare function storiesOf<T>(name: string, module: NodeModule): Story & T;
+  declare function forceReRender(): void;
 
   declare function getStorybook(): Array<StoryBucket>;
 }
