@@ -492,10 +492,6 @@ async function runTestGroup(
     );
   }
 
-  if (!(await fs.exists(BIN_DIR))) {
-    await fs.mkdir(BIN_DIR);
-  }
-
   try {
     await fs.mkdir(testDirPath);
 
@@ -681,6 +677,10 @@ export function setup(yargs: Yargs) {
 }
 
 export async function run(argv: Args): Promise<number> {
+  if (!(await fs.exists(BIN_DIR))) {
+    await fs.mkdir(BIN_DIR);
+  }
+
   if (!isInFlowTypedRepo()) {
     console.log(
       'This command only works in a clone of flowtype/flow-typed. ' +
