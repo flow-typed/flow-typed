@@ -3,10 +3,10 @@
  * this: https://github.com/koajs/koa/commit/fabf5864c6a5dca0782b867a263b1b0825a05bf9
 **/
 declare module 'koa' {
-  // Currently, import type doesnt work well ?
+  // Currently, import type doesn't work well ?
   // so copy `Server` from flow/lib/node.js#L820
   declare class Server extends net$Server {
-    listen(port: number, hostname?: string, backlog?: number, callback?: Function): Server,
+    listen(port?: number, hostname?: string, backlog?: number, callback?: Function): Server,
     listen(path: string, callback?: Function): Server,
     listen(handle: Object, callback?: Function): Server,
     close(callback?: Function): Server,
