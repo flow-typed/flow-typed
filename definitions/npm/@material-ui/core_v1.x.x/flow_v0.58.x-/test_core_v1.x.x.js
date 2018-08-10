@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // $ExpectError invalid color value.
 let appBar = <AppBar color="black" />;
@@ -50,3 +51,8 @@ function renderDoubleStyledComponent () {
     <DoubleStyledComponent requiredProp='test' />
   )
 }
+
+let circularProgress1 = <CircularProgress color="secondary" variant="static" />;
+
+// $ExpectError invalid color value.
+let circularProgress2 = <CircularProgress color="black" />;
