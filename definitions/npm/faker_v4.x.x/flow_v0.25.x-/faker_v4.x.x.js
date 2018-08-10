@@ -246,7 +246,7 @@ declare module "faker" {
         field: Key
       ) => Value,
       uuid: () => string,
-      boolean: () => string,
+      boolean: () => boolean,
       word: (type?: string) => string,
       words: (count?: number) => string,
       image: () => string,
