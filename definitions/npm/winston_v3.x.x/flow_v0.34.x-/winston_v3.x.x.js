@@ -12,6 +12,7 @@ declare type $winstonNpmLogLevels = {
 };
 
 declare type $winstonInfo<T: $winstonLevels> = {
+  [optionName: string]: any,
   level: $Keys<T>,
   message: string
 };
@@ -48,7 +49,7 @@ declare type $winstonLoggerConfig<T: $winstonLevels> = {
 };
 
 declare type $winstonLogger<T: $winstonLevels> = {
-  [$Keys<T>]: (message: string) => void,
+  [$Keys<T>]: (message: string, meta?: Object) => void,
   add: $winstonTransport => void,
   clear: () => void,
   configure: ($winstonLoggerConfig<T>) => void,
