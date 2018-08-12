@@ -13,6 +13,7 @@ import {
   range,
   merge,
   combineLatest,
+  zip,
   fromEvent,
   AnonymousSubject,
   Observer,
