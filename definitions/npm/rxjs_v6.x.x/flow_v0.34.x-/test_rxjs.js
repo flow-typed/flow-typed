@@ -14,6 +14,7 @@ import {
   merge,
   combineLatest,
   forkJoin,
+  race,
   zip,
   fromEvent,
   AnonymousSubject,
