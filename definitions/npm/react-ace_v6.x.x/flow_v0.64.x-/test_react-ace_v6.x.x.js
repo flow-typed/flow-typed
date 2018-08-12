@@ -1,14 +1,10 @@
 /* @flow */
 
 import * as React from "react";
-import { DragSource, DropTarget, DragLayer, DragDropContext } from "react-dnd";
-
 import AceEditor from "react-ace";
-import "brace/mode/mysql";
 
 const editor = (
   <AceEditor
-    mode="mysql"
     name="editor"
     width="100%"
     height="100%"
@@ -31,5 +27,12 @@ const editor = (
             exec: () => {},
         },
     ]}
+  />
+);
+
+// $ExpectError
+const invalidEditor = (
+  <AceEditor
+    fontSize="not-a-number"
   />
 );
