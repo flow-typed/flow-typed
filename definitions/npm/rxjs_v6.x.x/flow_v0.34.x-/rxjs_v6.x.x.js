@@ -1754,6 +1754,114 @@ declare module "rxjs" {
       options: rxjs$EventListenerOptions,
       selector: () => T
     ) => rxjs$Observable<T>);
+
+    combineLatest: (<A, B>(
+      a: rxjs$Observable<A>,
+      resultSelector: (a: A) => B
+    ) => rxjs$Observable<B>) &
+    (<A, B, C>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      resultSelector: (a: A, b: B) => C
+    ) => rxjs$Observable<C>) &
+    (<A, B, C, D>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      resultSelector: (a: A, b: B, c: C) => D
+    ) => rxjs$Observable<D>) &
+    (<A, B, C, D, E>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      resultSelector: (a: A, b: B, c: C, d: D) => E
+    ) => rxjs$Observable<E>) &
+    (<A, B, C, D, E, F>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      resultSelector: (a: A, b: B, c: C, d: D, e: E) => F
+    ) => rxjs$Observable<F>) &
+    (<A, B, C, D, E, F, G>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F) => G
+    ) => rxjs$Observable<G>) &
+    (<A, B, C, D, E, F, G, H>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      g: rxjs$Observable<G>,
+      resultSelector: (a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
+    ) => rxjs$Observable<H>) &
+    (<A>(a: rxjs$Observable<A>, _: void) => rxjs$Observable<[A]>) &
+    (<A, B>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      _: void
+    ) => rxjs$Observable<[A, B]>) &
+    (<A, B, C>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      _: void
+    ) => rxjs$Observable<[A, B, C]>) &
+    (<A, B, C, D>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      _: void
+    ) => rxjs$Observable<[A, B, C, D]>) &
+    (<A, B, C, D, E>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      _: void
+    ) => rxjs$Observable<[A, B, C, D, E]>) &
+    (<A, B, C, D, E, F>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      _: void
+    ) => rxjs$Observable<[A, B, C, D, E, F]>) &
+    (<A, B, C, D, E, F, G>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      g: rxjs$Observable<G>,
+      _: void
+    ) => rxjs$Observable<[A, B, C, D, E, F, G]>) &
+    (<A, B, C, D, E, F, G, H>(
+      a: rxjs$Observable<A>,
+      b: rxjs$Observable<B>,
+      c: rxjs$Observable<C>,
+      d: rxjs$Observable<D>,
+      e: rxjs$Observable<E>,
+      f: rxjs$Observable<F>,
+      g: rxjs$Observable<G>,
+      h: rxjs$Observable<H>,
+      _: void
+    ) => rxjs$Observable<[A, B, C, D, E, F, G, H]>);
+
     Observable: typeof rxjs$Observable,
     Observer: typeof rxjs$Observer,
     ConnectableObservable: typeof rxjs$ConnectableObservable,
