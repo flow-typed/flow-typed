@@ -30,9 +30,9 @@ const editor = (
   />
 );
 
-// $ExpectError
 const invalidEditor = (
   <AceEditor
+    // $ExpectError
     fontSize="not-a-number"
   />
 );
