@@ -471,6 +471,7 @@ pairs = toPairsIn({ a: 12, b: 100 });
 (pickBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
 (pickBy(null, num => num % 2): {});
 (pickBy(undefined, num => num % 2): {});
+(pickBy({[1]: 1, [2]: 2}, num => num === 2): {[prop: number]: number});
 
 /**
  * _.omitBy
@@ -478,3 +479,4 @@ pairs = toPairsIn({ a: 12, b: 100 });
 (omitBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
 (omitBy(null, num => num % 2): {});
 (omitBy(undefined, num => num % 2): {});
+(omitBy({[1]: 1, [2]: 2}, num => num === 2): {[prop: number]: number});

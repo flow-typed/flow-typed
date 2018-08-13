@@ -1205,7 +1205,7 @@ declare module "lodash" {
     ): Object;
     omit(object?: ?Object, ...props: Array<string>): Object;
     omit(object?: ?Object, props: Array<string>): Object;
-    omitBy<A, T: { [id: string]: A }>(
+    omitBy<A, T: { [id: string | number]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
     ): Object;
@@ -1215,7 +1215,7 @@ declare module "lodash" {
     ): {};
     pick(object?: ?Object, ...props: Array<string>): Object;
     pick(object?: ?Object, props: Array<string>): Object;
-    pickBy<A, T: { [id: string]: A }>(
+    pickBy<A, T: { [id: string | number]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
     ): Object;
