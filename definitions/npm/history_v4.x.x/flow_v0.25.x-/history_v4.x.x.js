@@ -17,7 +17,7 @@ declare module "history/createBrowserHistory" {
     location: BrowserLocation,
     action: Action,
     push: (path: string, Array<mixed>) => void,
-    replace: (path: string, Array<mixed>) => void,
+    replace: (path: string, state?: Array<mixed>) => void,
     go: (n: number) => void,
     goBack: () => void,
     goForward: () => void,
@@ -25,7 +25,6 @@ declare module "history/createBrowserHistory" {
     block: (message: string) => Unblock,
     block: ((location: BrowserLocation, action: Action) => string) => Unblock,
     push: (path: string) => void,
-    replace: (path: string) => void,
   };
 
   declare type HistoryOpts = {
@@ -61,7 +60,7 @@ declare module "history/createMemoryHistory" {
     index: number,
     entries: Array<string>,
     push: (path: string, Array<mixed>) => void,
-    replace: (path: string, Array<mixed>) => void,
+    replace: (path: string, state?: Array<mixed>) => void,
     go: (n: number) => void,
     goBack: () => void,
     goForward: () => void,
@@ -102,7 +101,7 @@ declare module "history/createHashHistory" {
     location: HashLocation,
     action: Action,
     push: (path: string, Array<mixed>) => void,
-    replace: (path: string, Array<mixed>) => void,
+    replace: (path: string, state?: Array<mixed>) => void,
     go: (n: number) => void,
     goBack: () => void,
     goForward: () => void,
