@@ -740,8 +740,7 @@ declare module "@material-ui/core/Grid/Grid" {
     | "space-around";
   declare type Spacing = 0 | 8 | 16 | 24 | 32 | 40;
   declare type Wrap = "nowrap" | "wrap" | "wrap-reverse";
-
-  declare module.exports: React$ComponentType<{
+  declare type GridProps = {
     children?: React$Node,
     classes?: Object,
     className?: string,
@@ -760,7 +759,8 @@ declare module "@material-ui/core/Grid/Grid" {
     md?: GridSizes,
     lg?: GridSizes,
     xl?: GridSizes
-  }>;
+  }
+  declare module.exports: React$ComponentType<GridProps>;
 }
 
 declare module "@material-ui/core/Grid" {
