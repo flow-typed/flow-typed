@@ -60,14 +60,14 @@ declare module "react-redux" {
     storeKey?: string
   |};
 
-  declare type OmitDispatch<Component> = $Diff<Component, {dispatch: Dispatch<*>}>;
+  declare type OmitDispatch<Component> = $Diff<Component, {dispatch?: Dispatch<*>}>;
 
   declare export function connect<
     Com: ComponentType<*>,
     S: Object,
     SP: Object,
     RSP: Object,
-    CP: $Diff<ElementConfig<Com>, RSP>,
+    CP: $Diff<OmitDispatch<ElementConfig<Com>>, RSP>,
     ST: {[_: $Keys<Com>]: any}
     >(
     mapStateToProps: MapStateToProps<S, SP, RSP>,
