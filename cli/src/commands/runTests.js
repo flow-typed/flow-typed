@@ -679,7 +679,7 @@ export function setup(yargs: Yargs) {
 }
 
 export async function run(argv: Args): Promise<number> {
-  if (!(await fs.exists(BIN_DIR))) {
+  if (!await fs.exists(BIN_DIR)) {
     await fs.mkdir(BIN_DIR);
   }
 
