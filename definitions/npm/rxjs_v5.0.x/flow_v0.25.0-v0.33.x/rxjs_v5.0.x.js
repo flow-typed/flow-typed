@@ -308,6 +308,8 @@ declare class rxjs$Observable<+T> {
 
   static of(...values: T[]): rxjs$Observable<T>;
 
+  static race(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
+
   static throw(error: any): rxjs$Observable<any>;
 
   audit(

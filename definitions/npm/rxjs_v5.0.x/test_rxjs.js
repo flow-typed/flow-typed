@@ -37,6 +37,11 @@ strings.elementAt(1, 5);
 // $ExpectError -- need the typecast or the error appears at the declaration site
 numbers.merge((strings: Observable<string>));
 
+(Observable.race(
+  Observable.timer(0, 100),
+  Observable.timer(0, 200)
+): Observable<number>);
+
 numbers.let(_numbers => strings);
 numbers.letBind(_numbers => strings);
 // $ExpectError -- need to return an observable
