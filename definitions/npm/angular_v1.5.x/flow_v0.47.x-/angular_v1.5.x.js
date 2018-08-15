@@ -28,15 +28,36 @@ declare module angular {
   declare interface JqliteElement extends Array<Element> {
     remove: () => JqliteElement,
     contents: () => JqliteElement,
-    injector: Function,
+    empty: () => JqliteElement,
+    append: (Element | JqliteElement) => JqliteElement,
+    injector: () => AngularInjector,
   }
+
+  declare type InjectionLocals = {[string]: any };
+
+  declare interface AngularInjector {
+    get<T>(name: string, caller?: string): T;
+    invoke<T>(
+      fn: $npm$angular$DependencyInjection<*> => void,
+      self?: any,
+      locals?: InjectionLocals,
+    ): T;
+    has(name: string): string;
+    instantiate<T>(type: T, locals?: InjectionLocals): Class<T>;
+    annotate(
+      fn: $npm$angular$DependencyInjection<*> => void,
+      strictDi?: boolean,
+    ): Array<string>;
+  }
+
+
 
   declare type AngularLinkFunction = (
     scope: $Scope<*>,
-    element: JqliteElement,
-    attrs: mixed,
-    controller: mixed
-  ) => void
+    element?: JqliteElement,
+    attrs?: mixed,
+    controller?: mixed
+  ) => JqliteElement
 
   declare type AngularCompileLink = {
     post?: AngularLinkFunction,
@@ -46,8 +67,8 @@ declare module angular {
   // TODO: Attrs and controller should be properly typed.
   declare function CompileFunction(
     element: JqliteElement,
-    attrs: mixed,
-    controller: ControllerFunction
+    attrs?: mixed,
+    controller?: ControllerFunction
   ): AngularLinkFunction
 
   // TODO: Expand to cover the whole matrix of AECM, in any order. Probably
@@ -136,6 +157,7 @@ declare module angular {
     value: ValueDeclaration,
     constant: ConstantDeclaration,
     name: string,
+    requires: Array<Dependency>,
   |}
 
   declare type Dependency = AngularModule | string
@@ -144,6 +166,8 @@ declare module angular {
     name: string,
     deps?: ?Array<Dependency>
   ): AngularModule
+
+  declare function bootstrap(Document | Element, Array<Dependency>): AngularInjector;
 
   declare function element(html: string | Element | Document): JqliteElement
   declare function copy<T>(object: T): T
