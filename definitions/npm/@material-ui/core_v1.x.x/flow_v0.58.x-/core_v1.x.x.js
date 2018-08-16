@@ -1844,15 +1844,20 @@ declare module "@material-ui/core/styles/withStyles" {
     generateClassName?: Function
   };
 
+  declare export type InjectedProps = {
+    classes: void | { +[string]: string },
+    innerRef: void | React$Ref<React$ElementType>
+  }
+
   declare module.exports: (
     stylesOrCreator: Object,
     options?: Options
-  ) => <Props: {}>(
-    Component: React$ComponentType<Props>
-  ) => React$ComponentType<$Diff<Props, {
-    classes?: Object,
-    innerRef?: React$Ref<React$ElementType>
-  }>>;
+  ) => <
+    Props: {},
+    WrappedComponent: React$ComponentType<Props>
+    >(
+    Component: WrappedComponent
+  ) => React$ComponentType<$Diff<React$ElementConfig<WrappedComponent>, InjectedProps>>;
 }
 
 declare module "@material-ui/core/styles/withTheme" {
