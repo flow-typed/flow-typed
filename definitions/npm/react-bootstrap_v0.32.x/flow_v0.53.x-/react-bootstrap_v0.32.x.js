@@ -5,7 +5,7 @@ declare module "react-bootstrap" {
   declare type ElementType = string | ComponentType<*>;
   declare type TriggerType = 'click' | 'hover' | 'focus';
   declare export class Alert extends React$Component<{
-    onDismiss: Function,
+    onDismiss?: Function,
     closeLabel?: string,
     bsStyle?: 'success' | 'warning' | 'danger' | 'info',
     bsClass?: string
