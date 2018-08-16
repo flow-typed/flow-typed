@@ -1734,6 +1734,7 @@ declare module "rxjs" {
       source2: rxjs$Observable<V>
     ) => rxjs$Observable<T | U | V>) &
       (<+T>(...sources: rxjs$Observable<T>[]) => rxjs$Observable<T>),
+    fromPromise<+T>(promise: Promise<T>): rxjs$Observable<T>,
     fromEvent: (<+T>(
       element: any,
       eventName: string,
