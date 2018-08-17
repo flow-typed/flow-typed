@@ -4,8 +4,10 @@ import {
   Alert,
   Avatar,
   Button,
+  Cascader,
   Checkbox,
   Col,
+  Collapse,
   DatePicker,
   Dropdown,
   Form,
@@ -26,7 +28,7 @@ import {
   Tabs,
   Tag,
   Tooltip,
-  TreeSelect
+  TreeSelect,
 } from 'antd'
 
 describe('Alert', () => {
@@ -47,6 +49,23 @@ describe('Button', () => {
   })
 })
 
+describe('Cascader', () => {
+  it('is a react component', () => {
+    const cascader = (
+      <Cascader
+        options={[{
+          label: 'l1',
+          value: 'v1',
+          children: [{
+            label: 'l11',
+            value: 'v11'
+          }]
+        }]}
+      />
+    )
+  })
+})
+
 describe('Checkbox', () => {
   it('is a react component', () => {
     const checkbox = <Checkbox />
@@ -56,6 +75,18 @@ describe('Checkbox', () => {
 describe('Col', () => {
   it('is a react component', () => {
     const col = <Col />
+  })
+})
+
+describe('Collapse', () => {
+  it('is a react component', () => {
+    const collapse = <Collapse />
+  })
+})
+
+describe('Collapse.Panel', () => {
+  it('is a react component', () => {
+    const panel = <Collapse.Panel />
   })
 })
 
@@ -299,7 +330,7 @@ describe('Tag', () => {
 
 describe('Tooltip', () => {
   it('is a react component', () => {
-    const tooltip = <Tooltip />
+    const tooltip = <Tooltip title="hello" />
   })
 })
 
