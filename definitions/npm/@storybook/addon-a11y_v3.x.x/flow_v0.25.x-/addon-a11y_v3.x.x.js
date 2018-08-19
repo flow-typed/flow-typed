@@ -1,10 +1,11 @@
 declare module '@storybook/addon-a11y' {
-  declare type Renderable = React$Component<*, *, *> | React$Element<*>;
+  declare type Context = { kind: string, story: string };
+  declare type Renderable = React$Element<*>;
   declare type RenderFunction = () => Renderable | Array<Renderable>;
 
   declare type StoryDecorator = (
     story: RenderFunction,
-    context: { kind: string, story: string }
+    context: Context
   ) => Renderable | null;
 
   declare type AxeCheck = {
