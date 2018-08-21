@@ -392,11 +392,11 @@ declare module "lodash" {
     keyBy<T, V>(
       array: ?Array<T>,
       iteratee?: ValueOnlyIteratee<T>
-    ): { [key: V]: ?T };
+    ): { [key: V]: T };
     keyBy<V, A, T: { [id: string]: A }>(
       object: T,
       iteratee?: ValueOnlyIteratee<A>
-    ): { [key: V]: ?A };
+    ): { [key: V]: A };
     map<T, U>(array: ?Array<T>, iteratee?: MapIterator<T, U>): Array<U>;
     map<V, T: Object, U>(
       object: ?T,

@@ -373,7 +373,7 @@ declare module "lodash" {
       path: ((value: any) => Array<string> | string) | Array<string> | string,
       ...args?: Array<any>
     ): Array<any>;
-    keyBy<T, V>(array: ?Array<T>, iteratee?: Iteratee2<T, V>): { [key: V]: ?T };
+    keyBy<T, V>(array: ?Array<T>, iteratee?: Iteratee2<T, V>): { [key: V]: T };
     keyBy<V, T: Object>(object: T, iteratee?: OIteratee<T>): Object;
     map<T, U>(array: ?Array<T>, iteratee?: MapIterator<T, U>): Array<U>;
     map<V, T: Object, U>(
