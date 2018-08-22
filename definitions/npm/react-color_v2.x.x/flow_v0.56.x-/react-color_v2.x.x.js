@@ -1,4 +1,5 @@
 declare module "react-color" {
+  import type { ComponentType, Component } from 'react';
   declare export type HexColor = string;
 
   declare export type HSLColor = {|
@@ -45,7 +46,7 @@ declare module "react-color" {
     height?: string,
     direction?: "horizontal" | "vertical",
     renderers?: Object,
-    pointer?: React$ComponentType<any>
+    pointer?: ComponentType<any>
   |};
 
   declare export type BlockPickerProps = {|
@@ -90,7 +91,7 @@ declare module "react-color" {
     width?: string,
     height?: string,
     direction?: "horizontal" | "vertical",
-    pointer?: React$ComponentType<any>
+    pointer?: ComponentType<any>
   |};
 
   declare export type MaterialPickerProps = {|
@@ -115,7 +116,7 @@ declare module "react-color" {
 
   declare export type SliderPickerProps = {|
     ...ColorPickerProps,
-    pointer?: React$ComponentType<any>
+    pointer?: ComponentType<any>
   |};
 
   declare export type SwatchesPickerProps = {|
@@ -148,26 +149,27 @@ declare module "react-color" {
     source: string
   };
 
-  declare export class AlphaPicker extends React$Component<AlphaPickerProps> {}
-  declare export class BlockPicker extends React$Component<BlockPickerProps> {}
-  declare export class ChromePicker extends React$Component<ChromePickerProps> {}
-  declare export class CirclePicker extends React$Component<CirclePickerProps> {}
-  declare export class CompactPicker extends React$Component<CompactPickerProps> {}
-  declare export class GithubPicker extends React$Component<GithubPickerProps> {}
-  declare export class HuePicker extends React$Component<HuePickerProps> {}
-  declare export class MaterialPicker extends React$Component<MaterialPickerProps> {}
-  declare export class PhotoshopPicker extends React$Component<PhotoshopPickerProps> {}
-  declare export class SketchPicker extends React$Component<SketchPickerProps> {}
-  declare export class SliderPicker extends React$Component<SliderPickerProps> {}
-  declare export class SwatchesPicker extends React$Component<SwatchesPickerProps> {}
-  declare export class TwitterPicker extends React$Component<TwitterPickerProps> {}
+  declare export var AlphaPicker: Class<Component<AlphaPickerProps>>;
+  declare export var BlockPicker: Class<Component<BlockPickerProps>>;
+  declare export var ChromePicker: Class<Component<ChromePickerProps>>;
+  declare export var CirclePicker: Class<Component<CirclePickerProps>>;
+  declare export var CompactPicker: Class<Component<CompactPickerProps>>;
+  declare export var GithubPicker: Class<Component<GithubPickerProps>>;
+  declare export var HuePicker: Class<Component<HuePickerProps>>;
+  declare export var MaterialPicker: Class<Component<MaterialPickerProps>>;
+  declare export var PhotoshopPicker: Class<Component<PhotoshopPickerProps>>;
+  declare export var SketchPicker: Class<Component<SketchPickerProps>>;
+  declare export var SliderPicker: Class<Component<SliderPickerProps>>;
+  declare export var SwatchesPicker: Class<Component<SwatchesPickerProps>>;
+  declare export var TwitterPicker: Class<Component<TwitterPickerProps>>;
 
   declare export function CustomPicker<Props: {}>(
-    Component: React$ComponentType<InjectedColorProps & $Supertype<Props>>
-  ): React$ComponentType<Props>;
+    Component: ComponentType<InjectedColorProps & $Supertype<Props>>
+  ): ComponentType<Props>;
 }
 
 declare module "react-color/lib/components/common" {
+  import type { ComponentType, Component } from 'react';
   import type {
     HexColor,
     RGBColor,
@@ -185,7 +187,7 @@ declare module "react-color/lib/components/common" {
 
   declare export type AlphaProps = {|
     ...PartialColorResult,
-    pointer?: React$ComponentType<any>,
+    pointer?: ComponentType<any>,
     onChange?: ColorChangeHandler
   |};
 
@@ -202,14 +204,14 @@ declare module "react-color/lib/components/common" {
 
   declare export type HueProps = {|
     ...PartialColorResult,
-    pointer?: React$ComponentType<any>,
+    pointer?: ComponentType<any>,
     onChange?: ColorChangeHandler,
     direction?: "horizontal" | "vertical"
   |};
 
   declare export type SaturationProps = {|
     ...PartialColorResult,
-    pointer?: React$ComponentType<any>,
+    pointer?: ComponentType<any>,
     onChange?: ColorChangeHandler
   |};
 
@@ -219,9 +221,9 @@ declare module "react-color/lib/components/common" {
     grey?: string
   |};
 
-  declare export class Alpha extends React$Component<AlphaProps> {}
-  declare export class EditableInput extends React$Component<EditableInputProps> {}
-  declare export class Hue extends React$Component<HueProps> {}
-  declare export class Saturation extends React$Component<SaturationProps> {}
-  declare export class Checkboard extends React$Component<CheckboardProps> {}
+  declare export var Alpha: Class<Component<AlphaProps>>;
+  declare export var EditableInput: Class<Component<EditableInputProps>>;
+  declare export var Hue: Class<Component<HueProps>>;
+  declare export var Saturation: Class<Component<SaturationProps>>;
+  declare export var Checkboard: Class<Component<CheckboardProps>>;
 }
