@@ -34,9 +34,9 @@ declare module 'metalsmith' {
     stats: Stats,
   };
 
-  declare type FilesMap = {[string]: File};
+  declare type FilesMap = {[path: string]: File};
 
-  declare type RFilesMap = {[string]: RFile};
+  declare type RFilesMap = {[path: string]: RFile};
 
   declare type Plugin = (files: FilesMap, metalsmith: Metalsmith, done: DoneCallback) => void | Promise<void>;
 
