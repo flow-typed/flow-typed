@@ -11,10 +11,14 @@ declare module 'query-string' {
     sort?: false | <A, B>(A, B) => number,
   |}
 
+  declare type QueryParameters = {
+    [string]: string | Array<string> | null
+  }
+
   declare module.exports: {
     extract(str: string): string,
-    parse(str: string, opts?: ParseOptions): Object,
-    parseUrl(str: string, opts?: ParseOptions): { url: string, query: Object },
-    stringify(obj: Object, opts?: StringifyOptions): string,
+    parse(str: string, opts?: ParseOptions): QueryParameters,
+    parseUrl(str: string, opts?: ParseOptions): { url: string, query: QueryParameters },
+    stringify(obj: QueryParameters, opts?: StringifyOptions): string,
   }
 }
