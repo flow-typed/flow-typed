@@ -306,6 +306,11 @@ declare module "@material-ui/core/colors/brown" {
 }
 
 declare module "@material-ui/core/colors/common" {
+  declare export type CommonColors = {
+    black: string,
+    white: string
+  };
+
   declare module.exports: any;
 }
 
@@ -1752,6 +1757,23 @@ declare module "@material-ui/core/styles/colorManipulator" {
 declare module "@material-ui/core/styles/createBreakpoints" {
   declare type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
 
+  declare export type BreakpointValues = { [key: Breakpoint]: number };
+  declare export type Breakpoints = {
+    keys: Breakpoint[],
+    values: BreakpointValues,
+    up: (key: Breakpoint | number) => string,
+    down: (key: Breakpoint | number) => string,
+    between: (start: Breakpoint, end: Breakpoint) => string,
+    only: (key: Breakpoint) => string,
+    width: (key: Breakpoint) => number
+  };
+  declare export type BreakpointsOptions = $Shape<
+    {
+      unit: string;
+      step: number;
+    } & Breakpoints
+  >;
+
   declare module.exports: {
     keys: Array<Breakpoint>,
     default: (breakpoints: Object) => any
@@ -1759,50 +1781,247 @@ declare module "@material-ui/core/styles/createBreakpoints" {
 }
 
 declare module "@material-ui/core/styles/createGenerateClassName" {
-  declare module.exports: () => any;
+  declare export type JssGenerateClassName = (Object, ?Object) => string;
+
+  declare export type GenerateClassNameOptions = {|
+    dangerouslyUseGlobalCSS?: boolean,
+    productionPrefix?: string
+  |};
+
+  declare module.exports: (options?: GenerateClassNameOptions) => JssGenerateClassName;
 }
 
 declare module "@material-ui/core/styles/createMixins" {
+  declare type CSSProperties = any; // import type {StandardProperties as CSSProperties} from "csstype";
+
+  import type {Breakpoints} from "@material-ui/core/styles/createBreakpoints";
+  import type {Spacing} from "@material-ui/core/styles/spacing";
+
+  declare export type Mixins = {
+    gutters: (styles?: CSSProperties) => CSSProperties,
+    toolbar: CSSProperties
+  };
+
+  declare export type MixinsOptions = $Shape<Mixins>;
+
   declare module.exports: (
-    breakpoints: Object,
-    spacing: Object,
-    mixins: Object
-  ) => any;
+    breakpoints: Breakpoints,
+    spacing: Spacing,
+    mixins: MixinsOptions
+  ) => Mixins;
 }
 
 declare module "@material-ui/core/styles/createMuiTheme" {
-  declare module.exports: (options: Object) => any;
+  import type {Palette, PaletteOptions} from "@material-ui/core/styles/createPalette";
+  import type {Typography, TypographyOptions} from "@material-ui/core/styles/createTypography";
+  import type {Mixins, MixinsOptions} from "@material-ui/core/styles/createMixins";
+  import type {Breakpoints, BreakpointsOptions} from "@material-ui/core/styles/createBreakpoints";
+  import type {Shadows} from "@material-ui/core/styles/shadows";
+  import type {Shape, ShapeOptions} from "@material-ui/core/styles/shape";
+  import type {Transitions, TransitionsOptions} from "@material-ui/core/styles/transitions";
+  import type {Spacing, SpacingOptions} from "@material-ui/core/styles/spacing";
+  import type {ZIndex, ZIndexOptions} from "@material-ui/core/styles/zIndex";
+
+  declare export type Direction = "ltr" | "rtl";
+
+  declare export type ThemeOptions = {
+    breakpoints?: BreakpointsOptions,
+    direction?: Direction,
+    mixins?: MixinsOptions,
+    overrides?: Object,
+    shadows?: Shadows,
+    shape?: ShapeOptions,
+    spacing?: SpacingOptions,
+    palette?: PaletteOptions,
+    typography?: TypographyOptions | ((palette: Palette) => TypographyOptions),
+    transitions?: TransitionsOptions,
+    zIndex?: ZIndexOptions
+  };
+
+  declare export type Theme = {
+    breakpoints: Breakpoints;
+    direction: Direction,
+    mixins: Mixins,
+    overrides?: Object,
+    palette: Palette,
+    shadows: Shadows,
+    shape: Shape,
+    spacing: Spacing,
+    transitions: Transitions,
+    typography: Typography,
+    zIndex: ZIndex
+  };
+
+  declare module.exports: (options: ThemeOptions) => Theme;
 }
 
 declare module "@material-ui/core/styles/createPalette" {
-  declare export var light: Object;
-  declare export var dark: Object;
-  declare export default (palette: Object) => any;
+  import type {CommonColors} from "@material-ui/core/colors/common";
+
+  declare export type TypeText = {
+    primary: string,
+    secondary: string,
+    disabled: string,
+    hint: string
+  };
+
+  declare export type TypeAction = {
+    active: string,
+    hover: string,
+    selected: string,
+    disabled: string,
+    disabledBackground: string
+  };
+
+  declare export type TypeBackground = {
+    default: string,
+    paper: string
+  };
+
+  declare export type PaletteType = "light" | "dark";
+
+  declare export type Color = {
+    "50": string,
+    "100": string,
+    "200": string,
+    "300": string,
+    "400": string,
+    "500": string,
+    "600": string,
+    "700": string,
+    "800": string,
+    "900": string,
+    "A100": string,
+    "A200": string,
+    "A400": string,
+    "A700": string
+  };
+
+  declare export type PaletteColor = {
+    light: string,
+    main: string,
+    dark: string,
+    contrastText: string
+  };
+
+  declare export type TypeObject = {
+    text: TypeText;
+    action: TypeAction;
+    background: TypeBackground;
+  };
+
+  declare export type SimplePaletteColorOptions = {|
+    light?: string,
+    main: string,
+    dark?: string,
+    contrastText?: string
+  |};
+
+  declare type PaletteColorOptions = SimplePaletteColorOptions | $Shape<Color>;
+
+  declare export type PaletteOptions = {
+    primary?: PaletteColorOptions,
+    secondary?: PaletteColorOptions,
+    error?: PaletteColorOptions,
+    type?: PaletteType,
+    tonalOffset?: number,
+    constrastThreshold?: number,
+    common?: $Shape<CommonColors>,
+    grey?: $Shape<Color>,
+    text?: $Shape<TypeText>,
+    divider?: string,
+    action?: $Shape<TypeAction>,
+    background?: $Shape<TypeBackground>,
+    getContrastText?: (background: string) => string,
+    [string]: any,
+  };
+
+  declare export type Palette = {
+    common: CommonColors,
+    type: PaletteType,
+    contrastThreshold: number,
+    tonalOffset: number,
+    primary: PaletteColor,
+    secondary: PaletteColor,
+    error: PaletteColor,
+    grey: Color,
+    text: TypeText,
+    divider: string,
+    action: TypeAction,
+    background: TypeBackground,
+    getContrastText: (background: string) => string,
+    augmentColor: (
+      color: SimplePaletteColorOptions,
+      mainShade?: number | string,
+      lightShade?: number | string,
+      darkShade?: number | string,
+    ) => void,
+    [string]: any,
+  };
+
+  declare export var light: TypeObject;
+  declare export var dark: TypeObject;
+  declare export default (palette: PaletteOptions) => Palette;
 }
 
 declare module "@material-ui/core/styles/createTypography" {
-  declare module.exports: (
-    palette: Object,
-    typography: Object | Function
-  ) => any;
-}
+  declare type CSSProperties = any; // import type {StandardProperties as CSSProperties} from "csstype";
 
-declare module "@material-ui/core/styles/jssPreset" {
-  declare module.exports: () => any;
+  import type {Palette} from "@material-ui/core/styles/createPalette";
+
+  declare export type TextStyle =
+    | "display1"
+    | "display2"
+    | "display3"
+    | "display4"
+    | "headline"
+    | "title"
+    | "subheading"
+    | "body1"
+    | "body2"
+    | "caption";
+
+  declare export type Style = TextStyle | "button";
+
+  declare type FontStyle = {
+    fontFamily: $PropertyType<CSSProperties, "fontFamily">,
+    fontSize: $PropertyType<CSSProperties, "fontSize">,
+    fontWeightLight: $PropertyType<CSSProperties, "fontWeight">,
+    fontWeightRegular: $PropertyType<CSSProperties, "fontWeight">,
+    fontWeightMedium: $PropertyType<CSSProperties, "fontWeight">,
+    htmlFontSize?: $PropertyType<CSSProperties, "fontSize">
+  };
+
+  declare type TypographyStyle = {
+    color?: string,
+    fontFamily: $PropertyType<CSSProperties, "fontFamily">,
+    fontSize: $PropertyType<CSSProperties, "fontSize">,
+    fontWeight: $PropertyType<CSSProperties, "fontWeight">,
+    letterSpacing?: $PropertyType<CSSProperties, "letterSpacing">,
+    lineHeight?: $PropertyType<CSSProperties, "lineHeight">,
+    textTransform?: $PropertyType<CSSProperties, "textTransform">
+  };
+
+  declare type TypographyUtils = {
+    pxToRem: (px: number) => string
+  };
+
+  declare export type Typography = { [style: Style]:  $Shape<TypographyStyle> } & FontStyle & TypographyUtils;
+
+  declare export type TypographyOptions = $Shape<{ [style: Style]:  $Shape<TypographyStyle> } & FontStyle>;
+
+  declare module.exports: (
+    palette: Palette,
+    typography: TypographyOptions | ((palette: Palette) => TypographyOptions),
+  ) => Typography;
 }
 
 declare module "@material-ui/core/styles/getStylesCreator" {
   declare module.exports: (stylesOrCreator: Object | (Object => Object)) => any;
 }
 
-declare module "@material-ui/core/styles" {
-  declare module.exports: {
-    MuiThemeProvider: $Exports<"@material-ui/core/styles/MuiThemeProvider">,
-    withStyles: $Exports<"@material-ui/core/styles/withStyles">,
-    withTheme: $Exports<"@material-ui/core/styles/withTheme">,
-    createMuiTheme: $Exports<"@material-ui/core/styles/createMuiTheme">,
-    jssPreset: $Exports<"@material-ui/core/styles/jssPreset">
-  };
+declare module "@material-ui/core/styles/jssPreset" {
+  declare module.exports: () => any;
 }
 
 declare module "@material-ui/core/styles/MuiThemeProvider" {
@@ -1810,11 +2029,31 @@ declare module "@material-ui/core/styles/MuiThemeProvider" {
 }
 
 declare module "@material-ui/core/styles/shadows" {
-  declare module.exports: Array<any>;
+  declare export type Shadows = string[];
+
+  declare module.exports: Shadows;
+}
+
+declare module "@material-ui/core/styles/shape" {
+  declare export type Shape = {
+    borderRadius: number
+  };
+
+  declare export type ShapeOptions = $Shape<Shape>
+
+  declare module.exports: {
+    default: Shape
+  };
 }
 
 declare module "@material-ui/core/styles/spacing" {
-  declare module.exports: Object;
+  declare export type Spacing = {
+    unit: number
+  };
+
+  declare export type SpacingOptions = $Shape<Spacing>;
+
+  declare module.exports: Spacing;
 }
 
 declare module "@material-ui/core/styles/themeListener" {
@@ -1823,51 +2062,135 @@ declare module "@material-ui/core/styles/themeListener" {
 }
 
 declare module "@material-ui/core/styles/transitions" {
-  declare export var easing: Object;
-  declare export var duration: Object;
+  declare export type Easing = {
+    easeInOut: string,
+    easeOut: string,
+    easeIn: string,
+    sharp: string
+  };
+
+  declare export type Duration = {
+    shortest: number,
+    shorter: number,
+    short: number,
+    standard: number,
+    complex: number,
+    enteringScreen: number,
+    leavingScreen: number
+  };
+
+  declare export type Transitions = {
+    easing: Easing,
+    duration: Duration,
+    create(
+      props: string | string[],
+      options?: $Shape<{ duration: number | string; easing: string; delay: number | string }>,
+    ): string,
+    getAutoHeightDuration(height: number): number
+  };
+
+  declare export type TransitionsOptions = {|
+    easing?: $Shape<Easing>;
+    duration?: $Shape<Duration>;
+    create?: (
+      props: string | string[],
+      options?: $Shape<{ duration: number | string; easing: string; delay: number | string }>,
+    ) => string;
+    getAutoHeightDuration?: (height: number) => number;
+  |};
+
+  declare export var easing: Easing;
+  declare export var duration: Duration;
   declare export var formatMs: (milliseconds: number) => string;
   declare export var isString: (value: any) => boolean;
   declare export var isNumber: (value: any) => boolean;
-  declare export default Object;
+  declare export default Transitions;
 }
 
 declare module "@material-ui/core/styles/withStyles" {
-  declare type Options = {
-    flip?: boolean,
-    withTheme?: boolean,
-    name?: string,
+  import type { Theme } from "@material-ui/core/styles/createMuiTheme"
+
+  declare type CSSProperties = any; // import type {StandardProperties as CSSProperties} from "csstype";
+
+  declare type CSSCreateStyleSheetOptions = {|
     media?: string,
     meta?: string,
     index?: number,
     link?: boolean,
     element?: HTMLStyleElement,
-    generateClassName?: Function
+    generateClassName?: Function,
+    classNamePrefix?: string,
+  |};
+
+  declare type StyleRules = { [string]: CSSProperties };
+
+  declare type StyleRulesCallback = (theme: Theme) => StyleRules;
+
+  declare export type WithStylesOptions = {|
+    ...$Exact<CSSCreateStyleSheetOptions>,
+    flip?: boolean,
+    withTheme?: boolean,
+    name?: string
+  |};
+
+  declare export type WithStyles = {
+    classes: { +[string]: string },
+    innerRef: React$Ref<React$ElementType> | {current: null | React$ElementRef<React$ElementType>}
   };
 
-  declare export type InjectedProps = {
-    classes: void | { +[string]: string },
-    innerRef: void | React$Ref<React$ElementType>
-  }
-
   declare module.exports: (
-    stylesOrCreator: Object,
-    options?: Options
-  ) => <
-    Props: {},
-    WrappedComponent: React$ComponentType<Props>
-    >(
+    stylesOrCreator: StyleRules | StyleRulesCallback,
+    options?: WithStylesOptions,
+  ) => <WrappedComponent: React$ComponentType<*>>(
     Component: WrappedComponent
-  ) => React$ComponentType<$Diff<React$ElementConfig<WrappedComponent>, InjectedProps>>;
+  ) => React$ComponentType<$Diff<React$ElementConfig<WrappedComponent>, WithStyles>>;
 }
 
 declare module "@material-ui/core/styles/withTheme" {
-  declare module.exports: () => <Props: {}>(
-    Component: React$ComponentType<Props>
-  ) => React$ComponentType<Props>;
+  import type {Theme} from "@material-ui/core/styles/createMuiTheme";
+
+  declare export type WithTheme = {
+    theme: Theme;
+    innerRef: React$Ref<React$ElementType> | {current: null | React$ElementRef<React$ElementType>}
+  }
+
+  declare module.exports: () => <Props: {}, WrappedComponent: React$ComponentType<Props>>(
+    Component: WrappedComponent
+  ) => React$ComponentType<$Diff<React$ElementConfig<WrappedComponent>, WithTheme>>;
 }
 
 declare module "@material-ui/core/styles/zIndex" {
-  declare module.exports: Object;
+  declare export type ZIndex = {
+    mobileStepper: number,
+    appBar: number,
+    drawer: number,
+    modal: number,
+    snackbar: number,
+    tooltip: number
+  };
+
+  declare export type ZIndexOptions = $Shape<ZIndex>;
+
+  declare module.exports: ZIndex;
+}
+
+declare module "@material-ui/core/styles" {
+  import type {Theme as MuiTheme} from "@material-ui/core/styles/createMuiTheme";
+  import type {WithStyles as MuiWithStyles} from "@material-ui/core/styles/withStyles";
+  import type {WithTheme as MuiWithTheme} from "@material-ui/core/styles/withTheme";
+
+  declare export type Theme = MuiTheme;
+  declare export type WithStyles = MuiWithStyles;
+  declare export type WithTheme = MuiWithTheme;
+
+  declare module.exports: {
+    MuiThemeProvider: $Exports<"@material-ui/core/styles/MuiThemeProvider">,
+    withStyles: $Exports<"@material-ui/core/styles/withStyles">,
+    withTheme: $Exports<"@material-ui/core/styles/withTheme">,
+    createGenerateClassName: $Exports<"@material-ui/core/styles/createGenerateClassName">,
+    createMuiTheme: $Exports<"@material-ui/core/styles/createMuiTheme">,
+    jssPreset: $Exports<"@material-ui/core/styles/jssPreset">
+  };
 }
 
 declare module "@material-ui/core/svg-icons/ArrowDownward" {
@@ -3161,6 +3484,9 @@ declare module "@material-ui/core/styles/MuiThemeProvider.js" {
 declare module "@material-ui/core/styles/shadows.js" {
   declare module.exports: $Exports<"@material-ui/core/styles/shadows">;
 }
+declare module "@material-ui/core/styles/shape.js" {
+  declare module.exports: $Exports<"@material-ui/core/styles/shape">;
+}
 declare module "@material-ui/core/styles/spacing.js" {
   declare module.exports: $Exports<"@material-ui/core/styles/spacing">;
 }
@@ -3637,4 +3963,14 @@ declare module "@material-ui/core" {
   declare export var brown: $Exports<"@material-ui/core/colors/brown">;
   declare export var grey: $Exports<"@material-ui/core/colors/grey">;
   declare export var blueGrey: $Exports<"@material-ui/core/colors/blueGrey">;
+
+  import type {
+    Theme as StylesTheme,
+    WithStyles as StylesWithStyles,
+    WithTheme as StylesWithTheme
+  } from "@material-ui/core/styles";
+
+  declare export type Theme = StylesTheme;
+  declare export type WithStyles = StylesWithStyles;
+  declare export type WithTheme = StylesWithTheme;
 }
