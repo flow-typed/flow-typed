@@ -20,7 +20,7 @@ parse({ test: null });
 (parse("foo").foo: null | string | Array<string>);
 
 // $ExpectError: result props cannot be undefined
-(parse("foo").foo: undefined);
+(parse("foo").foo: void);
 
 stringify({ test: null });
 
