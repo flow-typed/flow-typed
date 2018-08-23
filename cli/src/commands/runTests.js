@@ -122,7 +122,7 @@ async function getOrderedFlowBinVersions(
             '==========================================================================================',
           );
           console.log(
-            'We are tempoarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
+            'We are temporarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
           );
           console.log(
             '==========================================================================================',
@@ -136,7 +136,7 @@ async function getOrderedFlowBinVersions(
             '==========================================================================================',
           );
           console.log(
-            `We are tempoarily skipping ${
+            `We are temporarily skipping ${
               rel.tag_name
             } due to https://github.com/flowtype/flow-typed/issues/2422`,
           );
@@ -679,7 +679,7 @@ export function setup(yargs: Yargs) {
 }
 
 export async function run(argv: Args): Promise<number> {
-  if (!await fs.exists(BIN_DIR)) {
+  if (!(await fs.exists(BIN_DIR))) {
     await fs.mkdir(BIN_DIR);
   }
 
