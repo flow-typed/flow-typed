@@ -4,6 +4,7 @@ import type {
   ResultSet,
   ResultBuilder,
   QueryType,
+  QuerySubmittableConfig,
   PG_ERROR,
   Client,
   Row,
@@ -120,6 +121,13 @@ function test_pg() {
        });
        // $ExpectError
       const rq2_w: Promise<ResultSet> = client.query('Parameterized Queries',1);
+
+      const rq3: QuerySubmittableConfig = client.query({
+          text: 'select * from table;',
+          submit: (connection: mixed): void => {
+            const _connection: mixed = connection;
+          },
+      });
     }
   }
 
@@ -140,6 +148,12 @@ function test_pg() {
            // $ExpectError
            const _result_w: number = result;
          });
+        const rq3: QuerySubmittableConfig = _client.query({
+            text: 'select * from table;',
+            submit: (connection: mixed): void => {
+              const _connection: mixed = connection;
+            },
+        });
          // $ExpectError
         const rq2_w: Promise<ResultSet> = _client.query('Parameterized Queries',1);
 
