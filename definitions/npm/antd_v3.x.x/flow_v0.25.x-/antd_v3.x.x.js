@@ -21,6 +21,19 @@ declare module 'antd' {
   declare export class Avatar extends React$Component<{}> {}
   declare export class Button extends React$Component<{}> {}
   
+  declare export class Grid extends React$Component<{
+    className?: string,
+    style?: CSSStyleDeclaration
+  }> {}
+
+  declare export class Meta extends React$Component<{
+    avatar?: React$Node,
+    className?: string,
+    description?: React$Node,
+    style?: CSSStyleDeclaration
+    title?: React$Node,
+  }> {}
+
   declare export class Card extends React$Component<{
     actions?: Array<React$Node>,
     activeTabKey?: string,
@@ -36,7 +49,10 @@ declare module 'antd' {
     title?: string | React$Node,
     type?: 'inner',
     onTabChange?: (key: string) => void,
-  }> {}
+  }> {
+    static Grid: typeof Grid;
+    static Meta: typeof Meta;
+  }
 
   declare type CascaderOption = {
     value: string,
