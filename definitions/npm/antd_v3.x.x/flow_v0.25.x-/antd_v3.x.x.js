@@ -20,6 +20,23 @@ declare module 'antd' {
 
   declare export class Avatar extends React$Component<{}> {}
   declare export class Button extends React$Component<{}> {}
+  
+  declare export class Card extends React$Component<{
+    actions?: Array<React$Node>,
+    activeTabKey?: string,
+    headStyle?: CSSStyleDeclaration,
+    bodyStyle?: CSSStyleDeclaration,
+    bordered?: boolean,
+    cover?: React$Node,
+    defaultActiveTabKey?: string,
+    extra?: string | React$Node,
+    hoverable?: boolean,
+    loading?: boolean,
+    tabList?: Array<{ key: string, tab: React$Node }>,
+    title?: string | React$Node,
+    type?: 'inner',
+    onTabChange?: (key: string) => void,
+  }> {}
 
   declare type CascaderOption = {
     value: string,
@@ -181,6 +198,34 @@ declare module 'antd' {
   }
 
   declare export class Spin extends React$Component<SpinProps> {}
+
+  declare export class Step extends React$Component<{
+    description?: string | React$Node,
+    icon?: string | React$Node,
+    status?: 'wait' | 'process' | 'finish' | 'error',
+    title?: string | React$Node,
+  }> {}
+
+  declare export class Steps extends React$Component<{
+    current?: number,
+    direction?: 'horizontal' | 'vertical',
+    labelPlacement?: 'horizontal' | 'vertical',
+    progressDot?:
+      | boolean
+      | ((
+          iconDot: React$Node,
+          {
+            index: number,
+            status: 'wait' | 'process' | 'finish' | 'error',
+            title: string | React$Node,
+            description: string | React$Node,
+          }
+        ) => React$Node),
+    size?: 'default' | 'small',
+    status: 'wait' | 'process' | 'finish' | 'error',
+  }> {
+    static Step: typeof Step;
+  }
 
   declare export class Table extends React$Component<{}> {}
 
