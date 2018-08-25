@@ -1,4 +1,5 @@
-declare module 'babel-register' {
+declare module '@babel/register' {
+  declare type Ignore = boolean | string | RegExp | (filename: string) => boolean;
   declare type Options = {|
     ast?: boolean,
     auxiliaryCommentAfter?: ?string,
@@ -9,12 +10,13 @@ declare module 'babel-register' {
     compact?: 'auto' | boolean,
     env?: Object,
     extends?: ?string,
+    extensions?: Array<string>,
     filename?: string,
     filenameRelative?: string,
     generatorOpts?: Object,
     getModuleId?: void | null | (moduleName: string) => string,
     highlightCode?: boolean,
-    ignore?: boolean | string | RegExp | (filename: string) => boolean,
+    ignore?: Ignore | Array<Ignore>,
     inputSourceMap?: Object,
     minified?: boolean,
     moduleId?: string,
@@ -31,8 +33,8 @@ declare module 'babel-register' {
     sourceMaps?: boolean | 'inline' | 'both',
     sourceMapTarget?: string,
     sourceRoot?: string,
-    sourceType?: 'script' | 'module' | 'unambiguous',
-    wrapPluginVisitorMethod?: null | (pluginAlias: string, visitorType: string, callback: Function) => boolean,
+    sourceType?: 'script' | 'module',
+    wrapPluginVisitorMethod?: null | (pluginAlias: string, visitorType: string, callback: Function) => boolean,
     extensions?: Array<string>,
     cache?: boolean,
   |};
