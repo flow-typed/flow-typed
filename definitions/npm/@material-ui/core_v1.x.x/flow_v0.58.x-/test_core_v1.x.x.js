@@ -66,12 +66,29 @@ class TestComponentWithTheme extends React.Component<{
   innerRef: string,
 }> {}
 
-const StyledWithThemeTestComponent = withTheme()(withStyles({})(TestComponent));
+const StyledWithThemeTestComponent = withTheme()(withStyles({})(TestComponentWithTheme));
 
 function renderStyledWithThemeTestComponent () {
   return (
     // doesn't require "classes", "theme" or "innerRef"
     <StyledWithThemeTestComponent />
+  )
+}
+
+// withStyles + withTheme - required prop
+class TestComponentWithThemeAndRequiredProp extends React.Component<{
+  classes: {},
+  theme: {},
+  innerRef: string,
+  requiredProp: boolean,
+}> {}
+
+const StyledWithThemeAndRequiredPropTestComponent = withTheme()(withStyles({})(TestComponentWithThemeAndRequiredProp));
+
+function renderStyledWithThemeAndRequiredPropTestComponent () {
+  return (
+    // $ExpectError missing required prop "requiredProp"
+    <StyledWithThemeAndRequiredPropTestComponent />
   )
 }
 
