@@ -34,11 +34,13 @@ declare module 'metalsmith' {
     stats: Stats,
   };
 
-  declare type FilesMap = {[string]: File};
+  declare type FilesMap = {[path: string]: File};
 
-  declare type RFilesMap = {[string]: RFile};
+  declare type RFilesMap = {[path: string]: RFile};
 
   declare type Plugin = (files: FilesMap, metalsmith: Metalsmith, done: DoneCallback) => void | Promise<void>;
+
+  declare type IgnoreFunc = (path: string, lstat: Stats) => boolean;
 
   declare class Metalsmith {
     static [[call]](directory: string): Metalsmith;
@@ -68,8 +70,8 @@ declare module 'metalsmith' {
     frontmatter(frontmatter: boolean): this;
     frontmatter(): boolean;
 
-    ignore(files: string | Array<string>): this;
-    ignore(): Array<string>;
+    ignore(files: string | IgnoreFunc | Array<string | IgnoreFunc>): this;
+    ignore(): Array<string | IgnoreFunc>;
 
     path(...paths: Array<string>): string;
 

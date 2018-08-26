@@ -43,6 +43,8 @@ Metalsmith(__dirname)
   .frontmatter(false)
   .ignore('README.adoc')
   .ignore(['.trash', '.tmp'])
+  .ignore((filename, stats) => false)
+  .ignore([(filename, stats) => false, filename => true])
   // $ExpectError
   .ignore([123])
   .use(dummyPlugin)
