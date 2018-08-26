@@ -194,7 +194,9 @@ declare module "react-intl" {
     $npm$ReactIntl$MessageDescriptor & {
       values?: Object,
       tagName?: string,
-      children?: (...formattedMessage: Array<React$Node>) => React$Node
+      children?: 
+        | ((...formattedMessage: Array<React$Node>) => React$Node)
+        | (string => React$Node)
     }
   > {}
   declare class FormattedHTMLMessage extends React$Component<
