@@ -86,6 +86,7 @@ declare module pg {
     release(error?: mixed): void,
 
     query:
+    ( <T: QuerySubmittableConfig>(query: T, callback?: QueryCallback) => T ) &
     ( (query: QueryConfig|string, callback?: QueryCallback) => Query ) &
     ( (text: string, values: Array<any>, callback?: QueryCallback) => Query ),
 
@@ -195,6 +196,9 @@ declare module pg {
     text: string,
     values?: any[],
   };
+  declare type QuerySubmittableConfig = QueryConfig & {
+    submit: (connection: mixed) => void,
+  };
 
   declare type QueryCallback = (err: PG_ERROR|null, result: ResultSet|void) => void;
   declare type ClientConnectCallback = (err: PG_ERROR|null, client: Client|void) => void;
@@ -247,6 +251,7 @@ declare module pg {
     escapeIdentifier(str: string): string;
 
     query:
+    ( <T: QuerySubmittableConfig>(query: T, callback?: QueryCallback) => T ) &
     ( (query: QueryConfig|string, callback?: QueryCallback) => Query ) &
     ( (text: string, values: Array<any>, callback?: QueryCallback) => Query );
 
