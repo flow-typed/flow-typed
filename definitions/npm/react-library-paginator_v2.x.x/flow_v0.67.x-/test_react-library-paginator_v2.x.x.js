@@ -1,12 +1,12 @@
 // @flow
-import { describe, it } from "flow-typed-test";
-import React from "react";
-import PaginatorContainer from "react-library-paginator";
+import { describe, it } from 'flow-typed-test';
+import React from 'react';
+import PaginatorContainer from 'react-library-paginator';
 
-describe("PaginatorContainer ", () => {
-  const handlePageChange = (page: number) => { };
+describe('PaginatorContainer ', () => {
+  const handlePageChange = (page: number) => {};
 
-  it("should accept all props", () => {
+  it('should accept all props', () => {
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}
@@ -20,24 +20,21 @@ describe("PaginatorContainer ", () => {
     />;
   });
 
-  it("should fail with incompatible types", () => {
+  it('should fail with incompatible types', () => {
     // $ExpectError
     <PaginatorContainer
-      totalItems={"777"}
-      onPageChange={(str: string) => { }}
+      totalItems={'777'}
+      onPageChange={(str: string) => {}}
       currentPage={{}}
       itemsPerPage={true}
     />;
   });
 
   it("shouldn't fail with only required props", () => {
-    <PaginatorContainer
-      totalItems={10}
-      onPageChange={handlePageChange}
-    />;
+    <PaginatorContainer totalItems={10} onPageChange={handlePageChange} />;
   });
 
-  it("should fail when some required props are missing", () => {
+  it('should fail when some required props are missing', () => {
     // $ExpectError
     <PaginatorContainer onPageChange={handlePageChange} />;
 
@@ -67,7 +64,7 @@ describe("PaginatorContainer ", () => {
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}
-      classes={"paginator-container"}
+      classes={'paginator-container'}
     />;
   });
 
@@ -118,7 +115,7 @@ describe("PaginatorContainer ", () => {
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}
-      classes={"paginator-container-styles"}
+      classes={'paginator-container-styles'}
     />;
   });
 
@@ -155,10 +152,10 @@ describe("PaginatorContainer ", () => {
       totalItems={10}
       onPageChange={handlePageChange}
       navigation={{
-        firstPageText: "fffirst",
-        prevPageText: "back!",
-        nextPageText: "forward!",
-        lastPageText: "lllast",
+        firstPageText: 'fffirst',
+        prevPageText: 'back!',
+        nextPageText: 'forward!',
+        lastPageText: 'lllast',
         hideFirstPageNav: false,
         hidePrevPageNav: false,
         hideNextPageNav: true,
@@ -172,7 +169,7 @@ describe("PaginatorContainer ", () => {
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}
-      navigation={"paginator-navigation-config"}
+      navigation={'paginator-navigation-config'}
     />;
   });
 
@@ -181,8 +178,8 @@ describe("PaginatorContainer ", () => {
       totalItems={10}
       onPageChange={handlePageChange}
       navigation={{
-        firstPageText: "fffirst",
-        prevPageText: "back!",
+        firstPageText: 'fffirst',
+        prevPageText: 'back!',
         hideNextPageNav: true,
         hideLastPageNav: true
       }}
@@ -196,7 +193,7 @@ describe("PaginatorContainer ", () => {
       onPageChange={handlePageChange}
       navigation={{
         firstPageText: {},
-        prevPageText: "back!",
+        prevPageText: 'back!',
         hideLastPageNav: 120
       }}
     />;

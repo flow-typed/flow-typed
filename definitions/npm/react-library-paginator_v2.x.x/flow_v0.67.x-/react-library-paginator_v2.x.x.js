@@ -1,4 +1,4 @@
-declare module "react-library-paginator" {
+declare module 'react-library-paginator' {
   declare type Props = {
     totalItems: number,
     onPageChange: (page: number) => void
