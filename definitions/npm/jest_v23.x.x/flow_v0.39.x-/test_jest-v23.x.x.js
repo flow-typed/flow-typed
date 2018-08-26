@@ -25,6 +25,9 @@ const foo: Foo = {
     return Promise.resolve(5);
   }
 };
+
+
+
 foo.doStuff = jest.fn().mockImplementation(str => 10);
 foo.doStuff = jest.fn().mockImplementation(str => parseInt(str, 10));
 foo.doStuff = jest.fn().mockImplementation(str => str.indexOf("a"));
@@ -86,6 +89,23 @@ expect({
 }).toMatchSnapshot({
   foo: expect.any(Number)
 }, "snapshot name");
+expect("foo").toMatchInlineSnapshot();
+expect("foo").toMatchInlineSnapshot(`"foo"`);
+expect({ foo: 1 }).toMatchInlineSnapshot({
+  foo: expect.any(Number)
+});
+expect({ foo: 1 }).toMatchInlineSnapshot(
+  {
+    foo: expect.any(Number),
+  },
+  `
+Object {
+"foo": Any<Number>,
+}
+`,
+);
+// $ExpectError
+expect({ foo: 1 }).toMatchInlineSnapshot([]);
 expect({ foo: "bar" }).toMatchObject({ baz: "qux" });
 expect("foobar").toMatch(/foo/);
 expect("foobar").toMatch("foo");
@@ -196,6 +216,10 @@ expect(() => {
 expect(() => {
   throw err;
 }).toThrowError(err);
+
+expect(() => {}).toThrowErrorMatchingSnapshot();
+expect(() => {}).toThrowErrorMatchingInlineSnapshot();
+expect(() => {}).toThrowErrorMatchingInlineSnapshot("err");
 
 expect(() => {}).toThrow("err");
 expect(() => {}).toThrow(/err/);
