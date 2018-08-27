@@ -30,7 +30,7 @@ let typography2 = <Typography variant="headline" />;
 
 // withStyles - required prop
 class TestComponent extends React.Component<{
-  classes: {},
+  classes: *,
   innerRef: string,
   requiredProp: string
 }> {}
@@ -61,8 +61,8 @@ function renderDoubleStyledComponent () {
 
 // withStyles + withTheme
 class TestComponentWithTheme extends React.Component<{
-  classes: {},
-  theme: {},
+  classes: *,
+  theme: *,
   innerRef: string,
 }> {}
 
@@ -77,8 +77,8 @@ function renderStyledWithThemeTestComponent () {
 
 // withStyles + withTheme - required prop
 class TestComponentWithThemeAndRequiredProp extends React.Component<{
-  classes: {},
-  theme: {},
+  classes: *,
+  theme: *,
   innerRef: string,
   requiredProp: boolean,
 }> {}
@@ -94,7 +94,7 @@ function renderStyledWithThemeAndRequiredPropTestComponent () {
 
 // withStyles - default prop
 class TestComponentWithDefaultProps extends React.Component<{
-  classes: {},
+  classes: *,
   innerRef: string,
   value: string,
 }> {

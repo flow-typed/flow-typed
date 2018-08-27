@@ -2134,8 +2134,8 @@ declare module "@material-ui/core/styles/withStyles" {
   |};
 
   declare export type WithStyles = {
-    classes: { +[string]: string },
-    innerRef: React$Ref<React$ElementType> | {current: null | React$ElementRef<React$ElementType>}
+    classes: void | { +[string]: string },
+    innerRef: void | React$Ref<React$ElementType> | {current: null | React$ElementRef<React$ElementType>}
   };
 
   declare module.exports: (
@@ -2143,20 +2143,20 @@ declare module "@material-ui/core/styles/withStyles" {
     options?: WithStylesOptions,
   ) => <WrappedComponent: React$ComponentType<*>>(
     Component: WrappedComponent
-  ) => React$ComponentType<$Diff<React$ElementConfig<WrappedComponent>, WithStyles>>;
+  ) => React$ComponentType<$Diff<React$ElementConfig<$Supertype<WrappedComponent>>, WithStyles>>;
 }
 
 declare module "@material-ui/core/styles/withTheme" {
   import type {Theme} from "@material-ui/core/styles/createMuiTheme";
 
   declare export type WithTheme = {
-    theme: Theme;
-    innerRef: React$Ref<React$ElementType> | {current: null | React$ElementRef<React$ElementType>}
+    theme: void | Theme;
+    innerRef: void | React$Ref<React$ElementType> | {current: null | React$ElementRef<React$ElementType>}
   }
 
   declare module.exports: () => <Props: {}, WrappedComponent: React$ComponentType<Props>>(
     Component: WrappedComponent
-  ) => React$ComponentType<$Diff<React$ElementConfig<WrappedComponent>, WithTheme>>;
+  ) => React$ComponentType<$Diff<React$ElementConfig<$Supertype<WrappedComponent>>, WithTheme>>;
 }
 
 declare module "@material-ui/core/styles/zIndex" {
