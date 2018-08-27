@@ -680,7 +680,7 @@ declare module "react-apollo" {
     complete?: boolean
   };
 
-  declare interface DataProxy {
+  declare export interface DataProxy {
     readQuery<QueryType>(
       options: DataProxyReadQueryOptions,
       optimistic?: boolean
