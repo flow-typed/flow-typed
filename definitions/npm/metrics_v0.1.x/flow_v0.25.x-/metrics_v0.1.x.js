@@ -24,7 +24,7 @@ declare module 'metrics' {
   declare class Meter {
     type: 'meter';
 
-    mark(n: number): void;
+    mark(n?: number): void;
     rates(): Rates;
     fifteenMinuteRate(): number;
     fiveMinuteRate(): number;
