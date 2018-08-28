@@ -17,7 +17,8 @@ import {
   type ChildProps,
   type GraphqlData,
   type PureQueryOptions,
-  type SubscriptionResult
+  type SubscriptionResult,
+  type RefetchQueryDescription,
 } from "react-apollo";
 
 const gql = (strings, ...args) => {}; // graphql-tag stub
@@ -593,7 +594,7 @@ describe("<Mutation />", () => {
         query: HERO_QUERY,
         variables: { episode: "episode" }
       };
-      const refetchQueries: PureQueryOptions[] = [queryOption];
+      const refetchQueries: RefetchQueryDescription = [queryOption, 'foo'];
 
       <UpdateHeroMutationComp
         mutation={HERO_MUTATION}
