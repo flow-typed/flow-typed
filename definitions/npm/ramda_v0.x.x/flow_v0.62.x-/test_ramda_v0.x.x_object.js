@@ -159,6 +159,7 @@ const inverted: { [k: string]: Array<string> } = _.invert(
 const inverted1: { [k: string]: string } = _.invertObj(raceResultsByFirstName);
 
 const ks: Array<string> = _.keys(raceResultsByFirstName);
+const ksMaybe: Array<string> = _.keys(null)
 const ksi: Array<string> = _.keysIn(square);
 
 const xs = { x: 1, y: 2, z: 3 };

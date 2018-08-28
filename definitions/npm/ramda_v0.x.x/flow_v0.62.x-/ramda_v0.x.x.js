@@ -1365,7 +1365,7 @@ declare module ramda {
   declare function invert(o: Object): { [k: string]: Array<string> };
   declare function invertObj(o: Object): { [k: string]: string };
 
-  declare function keys(o: Object): Array<string>;
+  declare function keys(o: ?Object): Array<string>;
 
   declare type Lens = <T, V>(x: T) => V;
 
