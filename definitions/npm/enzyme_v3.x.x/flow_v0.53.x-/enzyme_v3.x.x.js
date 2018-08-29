@@ -50,6 +50,7 @@ declare module "enzyme" {
     prop(key: string): any,
     key(): string,
     simulate(event: string, ...args: Array<any>): this,
+    slice(begin?: number, end?: number): this,
     setState(state: {}, callback?: Function): this,
     setProps(props: {}): this,
     setContext(context: Object): this,
