@@ -78,6 +78,12 @@ const msg3:MessageDescriptor = messageDescriptorMap.messagekey3;
   description="Plural example"
   values={{ name: <b>John Doe</b>, numMessages: 1 }}
 />;
+<FormattedMessage
+  id="test_string"
+  defaultMessage="watskeburt"
+>
+	{(msg: string) => <input placeholder={msg} />}
+</FormattedMessage>;
 <FormattedHTMLMessage
   id="test"
   defaultMessage="test message"
