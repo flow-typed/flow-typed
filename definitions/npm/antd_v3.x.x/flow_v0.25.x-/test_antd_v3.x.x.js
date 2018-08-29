@@ -4,6 +4,7 @@ import {
   Alert,
   Avatar,
   Button,
+  Card,
   Cascader,
   Checkbox,
   Col,
@@ -24,6 +25,7 @@ import {
   Select,
   Slider,
   Spin,
+  Steps,
   Table,
   Tabs,
   Tag,
@@ -46,6 +48,47 @@ describe('Avatar', () => {
 describe('Button', () => {
   it('is a react component', () => {
     const button = <Button />
+  })
+})
+
+describe('Card', () => {
+  it('is a react component', () => {
+    const card = <Card />
+  })
+
+  it('with content', () => {
+    const card =  (
+      <Card title="Card title" bordered={false} extra={<a href="#">More</a>} style={{ width: 300 }}>
+        <p>Card content</p>
+        <p>Card content</p>
+      </Card>
+    )
+  })
+  
+  it('with Card.Grid', () => {
+    const card = (
+      <Card title="Card Title">
+        <Card.Grid style={{ width: '25%', textAlign: 'center' }}>
+          Content
+        </Card.Grid>
+      </Card>
+    )
+  })
+
+  it('with Card.Meta', () => {
+    const card =  (
+      <Card
+          hoverable
+          style={{ width: 240 }}
+          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+        >
+          <Card.Meta
+            avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            title="Europe Street beat"
+            description="www.instagram.com"
+          />
+        </Card>
+    )
   })
 })
 
@@ -301,6 +344,22 @@ describe('Slider', () => {
 describe('Spin', () => {
   it('is a react component', () => {
     const spin = <Spin />
+  })
+})
+
+describe('Steps', () => {
+  it('is a react component', () => {
+    const steps = <Steps />
+  })
+
+  it('with Steps.Step', () => {
+    const steps = (
+      <Steps size="small" current={1}>
+        <Steps.Step title="Finished" description="This is a description." />
+        <Steps.Step stats="process" title="In Progress" description="This is a description." />
+        <Steps.Step status="wait" title="Waiting" description="This is a description." />
+      </Steps>
+    )
   })
 })
 
