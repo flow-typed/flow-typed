@@ -38,6 +38,7 @@ declare module "react-redux" {
   CP = Props for returned component
   Com = React Component
   ST = Static properties of Com
+  EFO = Extra factory options (used only in connectAdvanced)
   */
 
   declare type MapStateToProps<S: Object, SP: Object, RSP: Object> = (state: S, props: SP) => RSP;
@@ -61,6 +62,50 @@ declare module "react-redux" {
   |};
 
   declare type OmitDispatch<Component> = $Diff<Component, {dispatch?: Dispatch<*>}>;
+
+  declare type ConnectAdvancedOptions = {
+    getDisplayName?: (name: string) => string,
+    methodName?: string,
+    renderCountProp?: string,
+    shouldHandleStateChanges?: boolean,
+    storeKey?: string,
+    withRef?: boolean,
+  };
+
+  declare type SelectorFactoryOptions<Com> = {
+    getDisplayName: (name: string) => string,
+    methodName: string,
+    renderCountProp: ?string,
+    shouldHandleStateChanges: boolean,
+    storeKey: string,
+    withRef: boolean,
+    displayName: string,
+    wrappedComponentName: string,
+    WrappedComponent: Com,
+  };
+
+  declare type SelectorFactory<
+    Com: ComponentType<*>,
+    A,
+    S: Object,
+    OP: Object,
+    EFO: Object,
+    CP: Object
+  > = (dispatch: Dispatch<A>, factoryOptions: SelectorFactoryOptions<Com> & EFO) =>
+      MapStateToProps<S, OP, CP>;
+
+  declare export function connectAdvanced<
+    Com: ComponentType<*>,
+    A,
+    S: Object,
+    OP: Object,
+    CP: Object,
+    EFO: Object,
+    ST: {[_: $Keys<Com>]: any}
+    >(
+    selectorFactory: SelectorFactory<Com, A, S, OP, EFO, CP>,
+    connectAdvancedOptions: ?(ConnectAdvancedOptions & EFO),
+  ): (component: Com) => ComponentType<OP> & $Shape<ST>;
 
   declare export function connect<
     Com: ComponentType<*>,
@@ -208,5 +253,6 @@ declare module "react-redux" {
     Provider: typeof Provider,
     createProvider: typeof createProvider,
     connect: typeof connect,
+    connectAdvanced: typeof connectAdvanced,
   };
 }
