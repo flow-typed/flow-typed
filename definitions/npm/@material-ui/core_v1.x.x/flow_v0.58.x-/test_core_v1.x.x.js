@@ -14,7 +14,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { createMuiTheme } from "@material-ui/core";
 
-import type { Theme } from "@material-ui/core";
+import type {
+  Theme,
+  WithStyles,
+  WithTheme,
+} from "@material-ui/core";
 
 // $ExpectError invalid color value.
 let appBar = <AppBar color="black" />;
@@ -28,13 +32,22 @@ let button2 = <Button disableRipple={3} />;
 let typography1 = <Typography variant="wrong" />;
 let typography2 = <Typography variant="headline" />;
 
+const styles = {
+  root: {
+    color: '#000',
+  },
+}
+
 // withStyles - required prop
 class TestComponent extends React.Component<{
-  classes: {},
-  innerRef: string,
+  ...$Exact<WithStyles>,
   requiredProp: string
-}> {}
-const StyledTestComponent = withStyles({})(TestComponent);
+}> {
+  render() {
+    const root = this.props.classes.root
+  }
+}
+const StyledTestComponent = withStyles(styles)(TestComponent);
 
 function renderStyledTestComponentWithError () {
   return (
@@ -51,7 +64,7 @@ function renderStyledTestComponent () {
 }
 
 // withStyles x2 HOC
-const DoubleStyledComponent = withStyles({})(StyledTestComponent);
+const DoubleStyledComponent = withStyles(styles)(StyledTestComponent);
 function renderDoubleStyledComponent () {
   return (
     // doesn't require the props "classes" or "innerRef", but still requires "requiredProp"
@@ -61,12 +74,11 @@ function renderDoubleStyledComponent () {
 
 // withStyles + withTheme
 class TestComponentWithTheme extends React.Component<{
-  classes: {},
-  theme: {},
-  innerRef: string,
+  ...$Exact<WithStyles>,
+  ...$Exact<WithTheme>,
 }> {}
 
-const StyledWithThemeTestComponent = withTheme()(withStyles({})(TestComponent));
+const StyledWithThemeTestComponent = withTheme()(withStyles(styles)(TestComponentWithTheme));
 
 function renderStyledWithThemeTestComponent () {
   return (
@@ -75,10 +87,25 @@ function renderStyledWithThemeTestComponent () {
   )
 }
 
+// withStyles + withTheme - required prop
+class TestComponentWithThemeAndRequiredProp extends React.Component<{
+  ...$Exact<WithStyles>,
+  ...$Exact<WithTheme>,
+  requiredProp: boolean,
+}> {}
+
+const StyledWithThemeAndRequiredPropTestComponent = withTheme()(withStyles(styles)(TestComponentWithThemeAndRequiredProp));
+
+function renderStyledWithThemeAndRequiredPropTestComponent () {
+  return (
+    // $ExpectError missing required prop "requiredProp"
+    <StyledWithThemeAndRequiredPropTestComponent />
+  )
+}
+
 // withStyles - default prop
 class TestComponentWithDefaultProps extends React.Component<{
-  classes: {},
-  innerRef: string,
+  ...$Exact<WithStyles>,
   value: string,
 }> {
   static defaultProps = {
@@ -86,7 +113,7 @@ class TestComponentWithDefaultProps extends React.Component<{
   }
 }
 
-const DefaultPropsStyledComponent = withStyles({})(TestComponentWithDefaultProps);
+const DefaultPropsStyledComponent = withStyles(styles)(TestComponentWithDefaultProps);
 
 function renderTestComponentWithDefaultProps () {
   return (
