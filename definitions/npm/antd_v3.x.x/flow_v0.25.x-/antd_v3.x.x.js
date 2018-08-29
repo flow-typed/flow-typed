@@ -23,22 +23,22 @@ declare module 'antd' {
   
   declare export class Grid extends React$Component<{
     className?: string,
-    style?: CSSStyleDeclaration
+    style?: $Shape<CSSStyleDeclaration>,
   }> {}
 
   declare export class Meta extends React$Component<{
     avatar?: React$Node,
     className?: string,
     description?: React$Node,
-    style?: CSSStyleDeclaration
+    style?: $Shape<CSSStyleDeclaration>,
     title?: React$Node,
   }> {}
 
   declare export class Card extends React$Component<{
     actions?: Array<React$Node>,
     activeTabKey?: string,
-    headStyle?: CSSStyleDeclaration,
-    bodyStyle?: CSSStyleDeclaration,
+    headStyle?: $Shape<CSSStyleDeclaration>,
+    bodyStyle?: $Shape<CSSStyleDeclaration>,
     bordered?: boolean,
     cover?: React$Node,
     defaultActiveTabKey?: string,
@@ -238,7 +238,7 @@ declare module 'antd' {
           }
         ) => React$Node),
     size?: 'default' | 'small',
-    status: 'wait' | 'process' | 'finish' | 'error',
+    status?: 'wait' | 'process' | 'finish' | 'error',
   }> {
     static Step: typeof Step;
   }
