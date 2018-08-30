@@ -1351,6 +1351,16 @@ new Sequelize( {
   },
   typeValidation: true
 } );
+new Sequelize( {
+  database: 'db',
+  username: 'user',
+  password: 'pass',
+  retry: {
+    match: [/failed/],
+    max: 3
+  },
+  typeValidation: true
+} );
 
 new Sequelize({
   operatorsAliases: false,

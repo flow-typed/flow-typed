@@ -5716,9 +5716,9 @@ declare module "sequelize" {
    */
   declare export type RetryOptions = {
     /**
-     * Only retry a query if the error matches one of these strings.
+     * Only retry a query if the error matches one of these strings or Regexes.
      */
-    match?: string[],
+    match?: Array<string | RegExp>,
 
     /**
      * How many times a failing query is automatically retried. Set to 0 to disable retrying on SQL_BUSY error.
