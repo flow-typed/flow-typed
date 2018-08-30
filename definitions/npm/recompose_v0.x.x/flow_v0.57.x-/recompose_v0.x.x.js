@@ -167,7 +167,7 @@ declare module "recompose" {
    * We make an assumtion that left and right have the same type if exists
    */
   declare export function branch<Base, Enhanced>(
-    testFn: (props: Enhanced) => boolean,
+    testFn: (props: Base) => boolean,
     // not a HOC because of inference problems, this works but HOC<Base, Enhanced> is not
     left: (Component<Base>) => Component<Enhanced>,
     // I never use right part and it can be a problem with inference as should be same type as left
