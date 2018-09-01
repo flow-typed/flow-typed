@@ -1,6 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, uncurryN, curry, pipeP, tryCatch, applyTo } from "ramda";
+import _, { compose, pipe, uncurryN, curry, pipeP, pipeK, tryCatch, applyTo } from "ramda";
 // Function
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -446,6 +446,92 @@ const pipeP_error5: number => Promise<string> = pipeP(
 const pipeP_error6: number => Promise<string> = pipeP(
 //$ExpectError
   pAdd(2), pToString, pAppend("A"), pAppend("B"), pAppend("C"), pAdd(2)
+);
+
+// -------------
+
+// --- PipeK ---
+
+class Box<A>  {
+    value: A;
+
+    constructor(x) {
+        this.value = x;
+    }
+
+    chain(f: A => *) {
+        return f(this.value);
+    }
+
+    static of<T: *>(x: T): Box<T> {
+        return new Box(x);
+    }
+}
+
+const kAdd: number => number => Box<number> = a => b =>
+  Box.of(a + b);
+const kAppend: string => string => Box<string> = a => b =>
+  Box.of(a + b);
+const kToString: number => Box<string> = n => Box.of(String(n));
+const kFn1: number => Box<number> = pipeK(kAdd(2));
+const kFoo1: Box<number> = kFn1(2);
+const kFn2: number => Box<string> = pipeK(kAdd(2), kToString);
+const kFoo2: Box<string> = kFn2(2);
+const kFn3: number => Box<string> = pipeK(kAdd(2), kToString, kAppend("A"));
+const kFoo3: Box<string> = kFn3(2);
+const kFn4: number => Box<string> = pipeK(
+  kAdd(2),
+  kToString,
+  kAppend("A"),
+  kAppend("B")
+);
+const kFoo4: Box<string> = kFn4(2);
+const kFn5: number => Box<string> = pipeK(
+  kAdd(2),
+  kToString,
+  kAppend("A"),
+  kAppend("B"),
+  kAppend("C")
+);
+const kFoo5: Box<string> = kFn5(2);
+const kFn6: number => Box<string> = pipeK(
+  kAdd(2),
+  kToString,
+  kAppend("A"),
+  kAppend("B"),
+  kAppend("C"),
+  kAppend("D")
+);
+const kFoo6: Box<string> = kFn6(2);
+
+//$ExpectError
+const pipeK_error1: number => Box<number> = _.pipeK(_.add(2));
+//$ExpectError
+const pipeK_error2: number => Box<string> = _.pipeK(kAdd(2), String);
+//$ExpectError
+const pipeK_error3: number => Box<number> = pipeK(
+  kToString,
+  kAdd(2),
+  kAdd(2)
+);
+//$ExpectError
+const pipeK_error4: number => Box<string> = pipeK(
+  kAdd(2),
+  kToString,
+  kAppend("A"),
+  kAdd(2)
+);
+//$ExpectError
+const pipeK_error5: number => Box<string> = pipeK(
+  kAdd(2),
+  kToString,
+  kAppend("A"),
+  kAppend("B"),
+  kAdd(2)
+);
+const pipeK_error6: number => Box<number> = pipeK(
+//$ExpectError
+  kAdd(2), kToString, kAppend("A"), kAppend("B"), kAppend("C"), kAdd(2)
 );
 
 // -------------
