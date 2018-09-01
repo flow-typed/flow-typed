@@ -911,7 +911,19 @@ declare var describe: {
   /**
    * Skip running this describe block
    */
-  skip(name: JestTestName, fn: () => void): void
+  skip(name: JestTestName, fn: () => void): void,
+
+  /**
+   * each runs this test against array of argument arrays per each run
+   *
+   * @param {table} table of Test
+   */
+  each(
+    table: Array<Array<mixed> | mixed>
+  ): (
+    name: JestTestName,
+    fn?: (...args: Array<any>) => ?Promise<mixed>
+  ) => void,
 };
 
 /** An individual test unit */
@@ -934,7 +946,7 @@ declare var it: {
    * @param {table} table of Test
    */
   each(
-    table: Array<Array<mixed>>
+    table: Array<Array<mixed> | mixed>
   ): (
     name: JestTestName,
     fn?: (...args: Array<any>) => ?Promise<mixed>
@@ -952,7 +964,7 @@ declare var it: {
     timeout?: number
   ): {
     each(
-      table: Array<Array<mixed>>
+      table: Array<Array<mixed> | mixed>
     ): (
       name: JestTestName,
       fn?: (...args: Array<any>) => ?Promise<mixed>
@@ -981,7 +993,18 @@ declare var it: {
     name: JestTestName,
     fn?: (done: () => void) => ?Promise<mixed>,
     timeout?: number
-  ): void
+  ): void,
+  /**
+   * each runs this test against array of argument arrays per each run
+   *
+   * @param {table} table of Test
+   */
+  each(
+    table: Array<Array<mixed> | mixed>
+  ): (
+    name: JestTestName,
+    fn?: (...args: Array<any>) => ?Promise<mixed>
+  ) => void,
 };
 declare function fit(
   name: JestTestName,
