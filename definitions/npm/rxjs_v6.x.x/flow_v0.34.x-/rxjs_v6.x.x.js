@@ -1633,6 +1633,7 @@ declare module "rxjs" {
       scheduler?: rxjs$SchedulerClass
     ): rxjs$Observable<T>,
     of<+T>(...values: T[]): rxjs$Observable<T>,
+    defer<+T>(factory: () => ?rxjs$ObservableInput<T>): rxjs$Observable<T>,
     empty<+T>(): rxjs$Observable<T>,
     never<+T>(): rxjs$Observable<T>,
     bindNodeCallback<U>(
