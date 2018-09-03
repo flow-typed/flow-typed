@@ -14,6 +14,7 @@ import {
   range,
   merge,
   fromEvent,
+  combineLatest,
   AnonymousSubject,
   Observer,
   Scheduler,
@@ -244,3 +245,6 @@ of(1).pipe(
   identity,
   identity,
 );
+
+(combineLatest(of(1), of(2), of(3)): rxjs$Observable<[number, number, number]>);
+(combineLatest(of(1), of(2), of(3), (a, b, c) => ({ a, b, c })): rxjs$Observable<{ a: number, b: number, c: number }>);
