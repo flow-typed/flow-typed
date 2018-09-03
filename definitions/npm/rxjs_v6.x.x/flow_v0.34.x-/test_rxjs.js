@@ -6,6 +6,7 @@ import {
   concat,
   of,
   from,
+  defer,
   timer,
   interval,
   never,
@@ -169,3 +170,7 @@ var buffered = clicks.pipe(bufferWhen(() =>
 // $ExpectError
 click.pipe(bufferWhen(() => true));
 buffered.subscribe(x => console.log(x));
+
+(defer(() => Promise.resolve(1)): rxjs$Observable<number>);
+(defer(() => of(1)): rxjs$Observable<number>);
+(defer(() => null): rxjs$Observable<empty>);
