@@ -126,7 +126,7 @@ declare module "@material-ui/core/Button" {
 }
 
 declare module "@material-ui/core/ButtonBase/ButtonBase" {
-  import type {ComponentType, ElementType, Node} from "react";
+  import type {ComponentType, ElementRef, ElementType, Node, Ref} from "react";
 
   declare module.exports: ComponentType<{
     centerRipple?: boolean,
@@ -150,7 +150,7 @@ declare module "@material-ui/core/ButtonBase/ButtonBase" {
     onTouchMove?: Function,
     onTouchStart?: Function,
     role?: string,
-    rootRef?: Function,
+    rootRef?: Ref<any> | {current: ElementRef<any> | null},
     tabIndex?: number | string,
     type?: string
   }>;
@@ -265,7 +265,7 @@ declare module "@material-ui/core/CardMedia" {
 }
 
 declare module "@material-ui/core/Checkbox/Checkbox" {
-  import type {ComponentType, Node} from "react";
+  import type {ComponentType, ElementRef, Node, Ref} from "react";
 
 
   declare module.exports: ComponentType<{
@@ -280,7 +280,7 @@ declare module "@material-ui/core/Checkbox/Checkbox" {
     indeterminate?: boolean,
     indeterminateIcon?: Node,
     inputProps?: Object,
-    inputRef?: Function,
+    inputRef?: Ref<'input'> | {current: ElementRef<'input'> | null},
     name?: string,
     onChange?: Function,
     tabIndex?: number | string,
@@ -698,7 +698,7 @@ declare module "@material-ui/core/FormControl/FormControl" {
 }
 
 declare module "@material-ui/core/FormControlLabel/FormControlLabel" {
-  import type {ComponentType, Element, Node} from "react";
+  import type {ComponentType, Element, ElementRef, Node, Ref} from "react";
 
   declare module.exports: ComponentType<{
     checked?: boolean | string,
@@ -706,7 +706,7 @@ declare module "@material-ui/core/FormControlLabel/FormControlLabel" {
     className?: string,
     control: Element<any>,
     disabled?: boolean,
-    inputRef?: Function,
+    inputRef?: Ref<'input'> | {current: ElementRef<'input'> | null},
     label: Node,
     name?: string,
     onChange?: Function,
@@ -979,7 +979,7 @@ declare module "@material-ui/core/Icon" {
 }
 
 declare module "@material-ui/core/IconButton/IconButton" {
-  import type {ComponentType, Node} from "react";
+  import type {ComponentType, ElementRef, Node, Ref} from "react";
 
   declare type Color =
     | "default"
@@ -988,14 +988,14 @@ declare module "@material-ui/core/IconButton/IconButton" {
     | "secondary";
 
   declare module.exports: ComponentType<{
-    buttonRef?: Function,
+    buttonRef?: Ref<'button'> | {current: ElementRef<'button'> | null},
     children?: Node,
     classes?: Object,
     className?: string,
     color?: Color,
     disabled?: boolean,
     disableRipple?: boolean,
-    rootRef?: Function
+    rootRef?: Ref<any> | {current: ElementRef<any> | null}
   }>;
 }
 
@@ -1018,7 +1018,7 @@ declare module "@material-ui/core/InputLabel" {
 }
 
 declare module "@material-ui/core/Input/Input" {
-  import type {ComponentType, Node} from "react";
+  import type {ComponentType, ElementRef, Node, Ref} from "react";
 
   declare module.exports: ComponentType<{
     autoComplete?: string,
@@ -1034,7 +1034,7 @@ declare module "@material-ui/core/Input/Input" {
     id?: string,
     inputComponent?: string | ComponentType<*>,
     inputProps?: Object,
-    inputRef?: Function,
+    inputRef?: Ref<'input'> | {current: ElementRef<'input'> | null},
     margin?: "dense" | "none",
     multiline?: boolean,
     name?: string,
@@ -1087,7 +1087,7 @@ declare module "@material-ui/core/InputLabel/InputLabel" {
 }
 
 declare module "@material-ui/core/Input/Textarea" {
-  import type {ComponentType} from "react";
+  import type {ComponentType, ElementRef, Ref} from "react";
 
   declare type Rows = string | number;
 
@@ -1099,7 +1099,7 @@ declare module "@material-ui/core/Input/Textarea" {
     onChange?: Function,
     rows: Rows,
     rowsMax?: string | number,
-    textareaRef?: Function,
+    textareaRef?: Ref<'textarea'> | {current: ElementRef<'textarea'> | null},
     value?: string | number
   }>;
 }
@@ -1122,7 +1122,7 @@ declare module "@material-ui/core/Portal" {
 }
 
 declare module "@material-ui/core/internal/SwitchBase" {
-  import type {ComponentType, Node} from "react";
+  import type {ComponentType, ElementRef, Node, Ref} from "react";
 
   declare module.exports: ComponentType<{
     checked?: boolean | string,
@@ -1137,7 +1137,7 @@ declare module "@material-ui/core/internal/SwitchBase" {
     indeterminate?: boolean,
     indeterminateIcon?: Node,
     inputProps?: Object,
-    inputRef?: Function,
+    inputRef?: Ref<'input'> | {current: ElementRef<'input'> | null},
     inputType?: string,
     name?: string,
     onChange?: Function,
@@ -1197,7 +1197,7 @@ declare module "@material-ui/core/ListSubheader" {
 }
 
 declare module "@material-ui/core/List/List" {
-  import type {ComponentType, ElementType, Node} from "react";
+  import type {ComponentType, ElementRef, ElementType, Node, Ref} from "react";
 
   declare module.exports: ComponentType<{
     children?: Node,
@@ -1206,7 +1206,7 @@ declare module "@material-ui/core/List/List" {
     component?: ElementType,
     dense?: boolean,
     disablePadding?: boolean,
-    rootRef?: Function,
+    rootRef?: Ref<any> | {current: ElementRef<any> | null},
     subheader?: Node
   }>;
 }
@@ -1589,7 +1589,7 @@ declare module "@material-ui/core/RadioGroup" {
 }
 
 declare module "@material-ui/core/Radio/Radio" {
-  import type {ComponentType, Node} from "react";
+  import type {ComponentType, ElementRef, Node, Ref} from "react";
 
   declare module.exports: ComponentType<{
     checked?: boolean | string,
@@ -1602,7 +1602,7 @@ declare module "@material-ui/core/Radio/Radio" {
     disableRipple?: boolean,
     icon?: Node,
     inputProps?: Object,
-    inputRef?: Function,
+    inputRef?: Ref<'input'> | {current: ElementRef<'input'> | null},
     name?: string,
     onChange?: Function,
     tabIndex?: number | string,
@@ -1650,7 +1650,7 @@ declare module "@material-ui/core/Select/Select" {
 }
 
 declare module "@material-ui/core/Select/SelectInput" {
-  import type {ComponentType, Element, Node} from "react";
+  import type {ComponentType, Element, ElementRef, Node, Ref} from "react";
 
   declare module.exports: ComponentType<{
     autoWidth: boolean,
@@ -1668,7 +1668,7 @@ declare module "@material-ui/core/Select/SelectInput" {
     onFocus?: Function,
     readOnly?: boolean,
     renderValue?: Function,
-    selectRef?: Function,
+    selectRef?: Ref<'select'> | {current: ElementRef<'select'> | null},
     value?: string | number | $ReadOnlyArray<string | number>
   }>;
 }
@@ -2459,7 +2459,7 @@ declare module "@material-ui/core/Switch" {
 }
 
 declare module "@material-ui/core/Switch/Switch" {
-  import type {ComponentType, Node} from "react";
+  import type {ComponentType, ElementRef, Node, Ref} from "react";
 
   declare module.exports: ComponentType<{
     checked?: boolean | string,
@@ -2471,7 +2471,7 @@ declare module "@material-ui/core/Switch/Switch" {
     disableRipple?: boolean,
     icon?: Node,
     inputProps?: Object,
-    inputRef?: Function,
+    inputRef?: Ref<'input'> | {current: ElementRef<'input'> | null},
     name?: string,
     onChange?: Function,
     tabIndex?: number | string,
@@ -2717,7 +2717,7 @@ declare module "@material-ui/core/TextField" {
 }
 
 declare module "@material-ui/core/TextField/TextField" {
-  import type {ComponentType, Node} from "react";
+  import type {ComponentType, ElementRef, Node, Ref} from "react";
 
   declare module.exports: ComponentType<{
     autoComplete?: string,
@@ -2734,7 +2734,7 @@ declare module "@material-ui/core/TextField/TextField" {
     id?: string,
     InputLabelProps?: Object,
     InputProps?: Object,
-    inputRef?: Function,
+    inputRef?: Ref<'input'> | {current: ElementRef<'input'> | null},
     label?: Node,
     labelClassName?: string,
     multiline?: boolean,
@@ -2742,7 +2742,7 @@ declare module "@material-ui/core/TextField/TextField" {
     onChange?: (event: SyntheticInputEvent<*>) => void,
     placeholder?: string,
     required?: boolean,
-    rootRef?: Function,
+    rootRef?: Ref<any> | {current: ElementRef<any> | null},
     rows?: string | number,
     rowsMax?: string | number,
     select?: boolean,
@@ -2877,7 +2877,7 @@ declare module "@material-ui/core/Zoom/Zoom" {
 }
 
 declare module "@material-ui/core/Grow/Grow" {
-  import type {ComponentType, Element} from "react";
+  import type {ComponentType, Element, ElementRef, Ref} from "react";
 
   import type {
     TransitionCallback,
@@ -2899,7 +2899,7 @@ declare module "@material-ui/core/Grow/Grow" {
     onExit?: TransitionCallback,
     onExiting?: TransitionCallback,
     onExited?: TransitionCallback,
-    rootRef?: Function,
+    rootRef?: Ref<any> | {current: ElementRef<any> | null},
     style?: Object,
     transitionClasses?: TransitionClasses,
     timeout?: TransitionDuration
