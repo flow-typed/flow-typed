@@ -36,7 +36,8 @@ declare module "axios" {
     maxRedirects?: number;
     params?: Object;
     paramsSerializer?: (params: Object) => string;
-    progress?: (progressEvent: Event) => void | mixed;
+    onUploadProgress?: (progressEvent: ProgressEvent) => void | mixed;
+    onDownloadProgress?: (progressEvent: ProgressEvent) => void | mixed;
     proxy?: ProxyConfig | false;
     responseType?:
       | "arraybuffer"
