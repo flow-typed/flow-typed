@@ -208,6 +208,15 @@ expect.extend({
   }
 });
 
+expect.extend({
+  blah(actual, expected) {
+    return Promise.resolve({
+      message: () => "blah fail",
+      pass: false
+    });
+  }
+});
+
 const err = new Error("err");
 expect(() => {
   throw err;
