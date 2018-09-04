@@ -1,4 +1,4 @@
-declare module "@storybook/addon-knobs/react" {
+declare module "@storybook/addon-knobs" {
   declare type Renderable = React$Element<any>;
   declare type GroupId = string;
 
