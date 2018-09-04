@@ -21,6 +21,7 @@ import {
   Subscriber
 } from "rxjs";
 import {
+  map,
   distinct,
   startWith,
   repeat,
@@ -174,3 +175,17 @@ buffered.subscribe(x => console.log(x));
 (defer(() => Promise.resolve(1)): rxjs$Observable<number>);
 (defer(() => of(1)): rxjs$Observable<number>);
 (defer(() => null): rxjs$Observable<empty>);
+
+(of(1).pipe(
+  map(x => (x: number).toString(10)),
+  map(x => (x: string) === '1'),
+  map(x => ({ v: (x: boolean) })),
+  map(x => (x: { v: boolean }))
+): rxjs$Observable<{ v: boolean }>);
+
+(of(true).pipe(map((x, i) => (i: number))): rxjs$Observable<number>);
+
+of(true).pipe(map(function(x){
+  (x: boolean);
+  return this.v;
+}, { v: 123 }));
