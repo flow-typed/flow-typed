@@ -228,3 +228,19 @@ of(1).pipe(
 
 (of(1).pipe(combineLatestOp(of('a'), of(true))): rxjs$Observable<[number, string, boolean]>);
 (of(1).pipe(combineLatestOp(of('a'), of(true), (a, b, c) => ({ a, b, c }))): rxjs$Observable<{ a: number, b: string, c: boolean }>);
+
+// must accept unlimited argument
+declare function identity<T>(x: T): T;
+of(1).pipe(
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+);
