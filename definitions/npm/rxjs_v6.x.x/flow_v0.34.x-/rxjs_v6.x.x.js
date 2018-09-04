@@ -1190,224 +1190,6 @@ declare module "rxjs/operators" {
 
     toArray<+T>(): rxjs$Observable<T> => rxjs$Observable<T[]>;
 
-    combineLatest<+T, A, B, C, D, E, F, G, H>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      g: rxjs$Observable<G>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
-    ): rxjs$Observable<T> => rxjs$Observable<H>;
-
-    combineLatest<+T, A, B, C, D, E, F, G>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F) => G
-    ): rxjs$Observable<T> => rxjs$Observable<G>;
-
-    combineLatest<+T, A, B, C, D, E, F>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E) => F
-    ): rxjs$Observable<T> => rxjs$Observable<F>;
-
-    combineLatest<+T, A, B, C, D, E>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D) => E
-    ): rxjs$Observable<T> => rxjs$Observable<E>;
-
-    combineLatest<+T, A, B, C, D>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      resultSelector: (t: T, a: A, b: B, c: C) => D
-    ): rxjs$Observable<T> => rxjs$Observable<D>;
-
-    combineLatest<+T, A, B, C>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      resultSelector: (t: T, a: A, b: B) => C
-    ): rxjs$Observable<T> => rxjs$Observable<C>;
-
-    combineLatest<+T, A, B>(
-      a: rxjs$Observable<A>,
-      resultSelector: (t: T, a: A) => B
-    ): rxjs$Observable<T> => rxjs$Observable<B>;
-
-    combineLatest<+T, A, B, C, D, E, F, G>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      g: rxjs$Observable<G>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, E, F, G]>;
-
-    combineLatest<+T, A, B, C, D, E, F>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, F]>;
-
-    combineLatest<+T, A, B, C, D, E>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E]>;
-
-    combineLatest<+T, A, B, C, D>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D]>;
-
-    combineLatest<+T, A, B, C>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C]>;
-
-    combineLatest<+T, A, B>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B]>;
-
-    combineLatest<+T, A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<T> => rxjs$Observable<[T, A]>;
-
-    zip<+T, A, B, C, D, E, F, G, H>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      g: rxjs$Observable<G>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
-    ): rxjs$Observable<T> => rxjs$Observable<H>;
-
-    zip<+T, A, B, C, D, E, F, G>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F) => G
-    ): rxjs$Observable<T> => rxjs$Observable<G>;
-
-    zip<+T, A, B, C, D, E, F>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E) => F
-    ): rxjs$Observable<T> => rxjs$Observable<F>;
-
-    zip<+T, A, B, C, D, E>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D) => E
-    ): rxjs$Observable<T> => rxjs$Observable<E>;
-
-    zip<+T, A, B, C, D>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      resultSelector: (t: T, a: A, b: B, c: C) => D
-    ): rxjs$Observable<T> => rxjs$Observable<D>;
-
-    zip<+T, A, B, C>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      resultSelector: (t: T, a: A, b: B) => C
-    ): rxjs$Observable<T> => rxjs$Observable<C>;
-
-    zip<+T, A, B>(
-      a: rxjs$Observable<A>,
-      resultSelector: (t: T, a: A) => B
-    ): rxjs$Observable<T> => rxjs$Observable<B>;
-
-    zip<+T, A, B, C, D, E, F, G>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      g: rxjs$Observable<G>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, E, F, G]>;
-
-    zip<+T, A, B, C, D, E, F>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, F]>;
-
-    zip<+T, A, B, C, D, E>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E]>;
-
-    zip<+T, A, B, C, D>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D]>;
-
-    zip<+T, A, B, C>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C]>;
-
-    zip<+T, A, B>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B]>;
-
-    zip<+T, A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<T> => rxjs$Observable<[T, A]>;
-
     window<+T>(
       windowBoundaries: rxjs$Observable<any>
     ): rxjs$Observable<T> => rxjs$Observable<rxjs$Observable<T>>;
@@ -1423,118 +1205,145 @@ declare module "rxjs/operators" {
       closingSelector: () => rxjs$Observable<any>
     ): rxjs$Observable<T> => rxjs$Observable<rxjs$Observable<T>>;
 
-    withLatestFrom<+T, A, B, C, D, E, F, G, H>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      g: rxjs$Observable<G>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
-    ): rxjs$Observable<T> => rxjs$Observable<H>;
+    withLatestFrom: rxjs$Operators$withLatestFrom;
 
-    withLatestFrom<+T, A, B, C, D, E, F, G>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F) => G
-    ): rxjs$Observable<T> => rxjs$Observable<G>;
+    // deprecated in favor of static zip
+    // see: https://rxjs-dev.firebaseapp.com/api/operators/zip
+    zip: rxjs$Operators$zip;
 
-    withLatestFrom<+T, A, B, C, D, E, F>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E) => F
-    ): rxjs$Observable<T> => rxjs$Observable<F>;
-
-    withLatestFrom<+T, A, B, C, D, E>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      resultSelector: (t: T, a: A, b: B, c: C, d: D) => E
-    ): rxjs$Observable<T> => rxjs$Observable<E>;
-
-    withLatestFrom<+T, A, B, C, D>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      resultSelector: (t: T, a: A, b: B, c: C) => D
-    ): rxjs$Observable<T> => rxjs$Observable<D>;
-
-    withLatestFrom<+T, A, B, C>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      resultSelector: (t: T, a: A, b: B) => C
-    ): rxjs$Observable<T> => rxjs$Observable<C>;
-
-    withLatestFrom<+T, A, B>(
-      a: rxjs$Observable<A>,
-      resultSelector: (t: T, a: A) => B
-    ): rxjs$Observable<T> => rxjs$Observable<B>;
-
-    withLatestFrom<+T, A, B, C, D, E, F, G>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      g: rxjs$Observable<G>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, E, F, G]>;
-
-    withLatestFrom<+T, A, B, C, D, E, F>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      f: rxjs$Observable<F>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, F]>;
-
-    withLatestFrom<+T, A, B, C, D, E>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      e: rxjs$Observable<E>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E]>;
-
-    withLatestFrom<+T, A, B, C, D>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      d: rxjs$Observable<D>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D]>;
-
-    withLatestFrom<+T, A, B, C>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      c: rxjs$Observable<C>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C]>;
-
-    withLatestFrom<+T, A, B>(
-      a: rxjs$Observable<A>,
-      b: rxjs$Observable<B>,
-      _: void
-    ): rxjs$Observable<T> => rxjs$Observable<[T, A, B]>;
-
-    withLatestFrom<+T, A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<T> => rxjs$Observable<[T, A]>;
+    // deprecated in favor of static combineLatest
+    // see: https://rxjs-dev.firebaseapp.com/api/operators/combineLatest
+    combineLatest: rxjs$Operators$combineLatest;
 
     refCount<T>(): rxjs$ConnectableObservable<T> => rxjs$Observable<T>;
   };
 }
+
+interface rxjs$Operators$withLatestFrom {
+  <+T, A, B, C, D, E, F, G, H>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    f: rxjs$Observable<F>,
+    g: rxjs$Observable<G>,
+    resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
+  ): rxjs$Observable<T> => rxjs$Observable<H>;
+
+  <+T, A, B, C, D, E, F, G>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    f: rxjs$Observable<F>,
+    resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F) => G
+  ): rxjs$Observable<T> => rxjs$Observable<G>;
+
+  <+T, A, B, C, D, E, F>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E) => F
+  ): rxjs$Observable<T> => rxjs$Observable<F>;
+
+  <+T, A, B, C, D, E>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    resultSelector: (t: T, a: A, b: B, c: C, d: D) => E
+  ): rxjs$Observable<T> => rxjs$Observable<E>;
+
+  <+T, A, B, C, D>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    resultSelector: (t: T, a: A, b: B, c: C) => D
+  ): rxjs$Observable<T> => rxjs$Observable<D>;
+
+  <+T, A, B, C>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    resultSelector: (t: T, a: A, b: B) => C
+  ): rxjs$Observable<T> => rxjs$Observable<C>;
+
+  <+T, A, B>(
+    a: rxjs$Observable<A>,
+    resultSelector: (t: T, a: A) => B
+  ): rxjs$Observable<T> => rxjs$Observable<B>;
+
+  <+T, A>(
+    resultSelector: (t: T) => A
+  ): rxjs$Observable<T> => rxjs$Observable<A>;
+
+  <+T, A, B, C, D, E, F, G>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    f: rxjs$Observable<F>,
+    g: rxjs$Observable<G>,
+    _: void
+  ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, E, F, G]>;
+
+  <+T, A, B, C, D, E, F>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    f: rxjs$Observable<F>,
+    _: void
+  ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, F]>;
+
+  <+T, A, B, C, D, E>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    e: rxjs$Observable<E>,
+    _: void
+  ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E]>;
+
+  <+T, A, B, C, D>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    d: rxjs$Observable<D>,
+    _: void
+  ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D]>;
+
+  <+T, A, B, C>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    c: rxjs$Observable<C>,
+    _: void
+  ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C]>;
+
+  <+T, A, B>(
+    a: rxjs$Observable<A>,
+    b: rxjs$Observable<B>,
+    _: void
+  ): rxjs$Observable<T> => rxjs$Observable<[T, A, B]>;
+
+  <+T, A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<T> => rxjs$Observable<[T, A]>;
+
+  <+T, R>(
+    ...args: rxjs$Observable<any>[]
+  ): rxjs$Observable<T> => rxjs$Observable<any[]>;
+
+  <+T, R>(
+    ...args: (rxjs$Observable<any> | (t: T, ...obs: any[]) => R)[]
+  ): rxjs$Observable<T> => rxjs$Observable<R>;
+}
+
+type rxjs$Operators$zip = rxjs$Operators$withLatestFrom;
+type rxjs$Operators$combineLatest = rxjs$Operators$withLatestFrom;
 
 declare class rxjs$GroupedObservable<K, V> extends rxjs$Observable<V> {
   key: K;
