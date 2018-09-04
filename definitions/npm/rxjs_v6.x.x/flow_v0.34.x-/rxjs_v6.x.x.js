@@ -79,6 +79,36 @@ declare class rxjs$Observable<+T> {
     op5: rxjs$OperatorFunctionLast<D, E>
   ): E;
 
+  pipe<A, B, C, D, E, F>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunction<A, B>,
+    op3: rxjs$OperatorFunction<B, C>,
+    op4: rxjs$OperatorFunction<C, D>,
+    op5: rxjs$OperatorFunction<D, E>,
+    op6: rxjs$OperatorFunctionLast<E, F>
+  ): F;
+
+  pipe<A, B, C, D, E, F, G>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunction<A, B>,
+    op3: rxjs$OperatorFunction<B, C>,
+    op4: rxjs$OperatorFunction<C, D>,
+    op5: rxjs$OperatorFunction<D, E>,
+    op6: rxjs$OperatorFunction<E, F>,
+    op7: rxjs$OperatorFunctionLast<F, G>
+  ): G;
+
+  pipe<A, B, C, D, E, F, G>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunction<A, B>,
+    op3: rxjs$OperatorFunction<B, C>,
+    op4: rxjs$OperatorFunction<C, D>,
+    op5: rxjs$OperatorFunction<D, E>,
+    op6: rxjs$OperatorFunction<E, F>,
+    op7: rxjs$OperatorFunction<F, G>,
+    ...operations: rxjs$OperatorFunctionLast<any, any>[]
+  ): any;
+
   toArray(): rxjs$Observable<T[]>;
 
   toPromise(): Promise<T>;
