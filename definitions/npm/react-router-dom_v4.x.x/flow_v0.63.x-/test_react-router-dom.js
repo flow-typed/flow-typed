@@ -198,6 +198,9 @@ describe("react-router-dom", () => {
         }: Props) => <div />;
         const WrappedComp = withRouter(Comp);
         <WrappedComp s="" />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        <ChainedHOC s="" />;
       });
 
       it("errors if the component is not passed correct props", () => {
@@ -213,6 +216,12 @@ describe("react-router-dom", () => {
         <WrappedComp />;
         // $ExpectError - wrong type
         <WrappedComp s={1} />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        // $ExpectError - missing prop "s"
+        <ChainedHOC />;
+        // $ExpectError - wrong type
+        <ChainedHOC s={1} />;
       });
 
       it("errors if trying to access a prop that withRouter does not supply", () => {
@@ -232,6 +241,9 @@ describe("react-router-dom", () => {
         }
         const WrappedComp = withRouter(Comp);
         <WrappedComp s="" />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        <ChainedHOC s="" />;
       });
 
       it("errors if the component is not passed the correct props", () => {
@@ -245,6 +257,12 @@ describe("react-router-dom", () => {
         <WrappedComp />;
         // $ExpectError - wrong type
         <WrappedComp s={1} />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        // $ExpectError - missing prop "s"
+        <ChainedHOC />;
+        // $ExpectError - wrong type
+        <ChainedHOC s={1} />;
       });
 
       it("passes if a required prop is handled by defaultProps", () => {
@@ -259,6 +277,10 @@ describe("react-router-dom", () => {
         const WrappedComp = withRouter(Comp);
         <WrappedComp />;
         <WrappedComp s="" />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        <ChainedHOC />;
+        <ChainedHOC s="" />;
       });
 
       it("errors if a required prop that has a defaultProp is passed the wrong type", () => {
@@ -273,6 +295,10 @@ describe("react-router-dom", () => {
         const WrappedComp = withRouter(Comp);
         // $ExpectError - wrong type
         <WrappedComp s={123} />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        // $ExpectError - wrong type
+        <ChainedHOC s={123} />;
       });
     });
   });
