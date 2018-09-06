@@ -265,13 +265,13 @@ describe("<Query />", () => {
     const vars: Vars = { foo: "bar" };
     const q = (
       <Query variables={vars} query={HERO_QUERY}>
-        {({ data }: QueryRenderProps<Res, Vars>) => {
+        {(result: QueryRenderProps<Res, Vars>) => {
           // $ExpectError Cannot get `data.res`
-          data.res;
-          if (!data) {
+          result.data.res;
+          if (result.loading || result.error) {
             return;
           }
-          const d1: Res | {||} = data;
+          const d1: Res = result.data;
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
           if (d1.res) {
