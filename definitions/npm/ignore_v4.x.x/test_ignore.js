@@ -32,3 +32,7 @@ ign.createFilter()(['foo']);
 (ign.ignores('.abc/a.js'): boolean);
 // $ExpectError
 ign.ignores(['foo']);
+
+const paths: string[] = ['.abc/*', '!.abc/d/']
+ign.add(paths)
+ign.filter(paths)
