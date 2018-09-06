@@ -125,7 +125,7 @@ declare class $npm$firebase$auth$Auth {
   signInWithEmailAndPassword(
     email: string,
     password: string
-  ): Promise<$npm$firebase$auth$User>;
+  ): Promise<$npm$firebase$auth$UserCredential>;
   signInWithPhoneNumber(
     phoneNumber: string,
     applicationVerifier: $npm$firebase$auth$ApplicationVerifier
