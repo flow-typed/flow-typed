@@ -117,10 +117,10 @@ declare module 'js-joda' {
 		multipliedBy(multiplicand: number): Duration;
 		nano(): number;
 		negated(): Duration;
-		plus: (
+		plus(
 			durationOrNumber: Duration | number,
 			unitOrNumber: TemporalUnit | number
-		) => Duration;
+		): Duration;
 		plusAmountUnit(amountToAdd: number, unit: TemporalUnit): Duration;
 		plusDays(daysToAdd: number): Duration;
 		plusDuration(duration: Duration): Duration;
@@ -174,12 +174,12 @@ declare module 'js-joda' {
 	}
 	declare class DateTimeFormatterBuilder {
 		append(formatter: DateTimeFormatter): DateTimeFormatterBuilder;
-		appendFraction: (
+		appendFraction(
 			field: ChronoField,
 			minWidth: number,
 			maxWidth: number,
 			decimalPoint: boolean
-		) => DateTimeFormatterBuilder;
+		): DateTimeFormatterBuilder;
 		appendInstant(fractionalDigits: number): DateTimeFormatterBuilder;
 		appendLiteral(literal: any): DateTimeFormatterBuilder;
 		appendOffset(pattern: string, noOffsetText: string): DateTimeFormatterBuilder;
@@ -220,12 +220,12 @@ declare module 'js-joda' {
 		static NANOS_PER_DAY: number;
 		static from(temporal: TemporalAccessor): LocalTime;
 		static now(clockOrZone?: Clock | ZoneId): LocalTime;
-		static of: (
+		static of(
 			hour?: number,
 			minute?: number,
 			second?: number,
 			nanoOfSecond?: number
-		) => LocalTime;
+		): LocalTime;
 		static ofInstant(instant: Instant, zone?: ZoneId): LocalTime;
 		static ofNanoOfDay(nanoOfDay: number): LocalTime;
 		static ofSecondOfDay(secondOfDay?: number, nanoOfSecond?: number): LocalTime;
@@ -328,10 +328,10 @@ declare module 'js-joda' {
 		static ofNumberNumber(month: number, dayOfMonth: number): MonthDay;
 		static parse(text: string, formatter?: DateTimeFormatter): MonthDay;
 		static parseString(text: string): MonthDay;
-		static parseStringFormatter: (
+		static parseStringFormatter(
 			text: string,
 			formatter: DateTimeFormatter
-		) => MonthDay;
+		): MonthDay;
 		adjustInto(temporal: Temporal): Temporal;
 		atYear(year: number): LocalDate;
 		compareTo(other: MonthDay): number;
@@ -461,12 +461,12 @@ declare module 'js-joda' {
 		atStartOfDay(zone: ZoneId): ZonedDateTime;
 		atStartOfDayWithZone(zone: ZoneId): ZonedDateTime;
 		atTime(time: LocalTime): LocalDateTime;
-		atTime: (
+		atTime(
 			hour: number,
 			minute: number,
 			second?: number,
 			nanoOfSecond?: number
-		) => LocalDateTime;
+		): LocalDateTime;
 		chronology(): Chronology;
 		compareTo(other: LocalDate): number;
 		dayOfMonth(): number;
@@ -480,8 +480,8 @@ declare module 'js-joda' {
 		isBefore(other: LocalDate): boolean;
 		isEqual(other: LocalDate): boolean;
 		isLeapYear(): boolean;
-		isoWeekOfWeekyear: () => number; //implemented in IsoFields.js
-		isoWeekyear: () => number; //implemented in IsoFields.js
+		isoWeekOfWeekyear(): number; //implemented in IsoFields.js
+		isoWeekyear(): number; //implemented in IsoFields.js
 		lengthOfMonth(): number;
 		lengthOfYear(): number;
 		minus(amount: TemporalAmount): LocalDate;
@@ -528,13 +528,13 @@ declare module 'js-joda' {
 		static now(clockOrZone?: Clock | ZoneId): LocalDateTime;
 		static ofDateAndTime(date: LocalDate, time: LocalTime): LocalDateTime;
 		static ofEpochSecond(epochSecond: number, offset: ZoneOffset): LocalDateTime;
-		static ofEpochSecond: (
+		static ofEpochSecond(
 			epochSecond: number,
 			nanoOfSecond: number,
 			offset: ZoneOffset
-		) => LocalDateTime;
+		): LocalDateTime;
 		static ofInstant(instant: Instant, zoneId?: ZoneId): LocalDateTime;
-		static ofNumbers: (
+		static ofNumbers(
 			year?: number,
 			month?: Month | number,
 			dayOfMonth?: number,
@@ -542,7 +542,7 @@ declare module 'js-joda' {
 			minute?: number,
 			second?: number,
 			nanoSecond?: number
-		) => LocalDateTime;
+		): LocalDateTime;
 		static parse(text: string, formatter?: DateTimeFormatter): LocalDateTime;
 		adjustInto(temporal: TemporalAdjuster): LocalDateTime;
 		atZone(zone: ZoneId): ZonedDateTime;
@@ -656,10 +656,10 @@ declare module 'js-joda' {
 		adjustInto(temporal: Temporal): Temporal;
 	}
 	declare class TemporalAdjusters {
-		static dayOfWeekInMonth: (
+		static dayOfWeekInMonth(
 			ordinal: number,
 			dayOfWeek: DayOfWeek
-		) => TemporalAdjuster;
+		): TemporalAdjuster;
 		static firstDayOfMonth(): TemporalAdjuster;
 		static firstDayOfNextMonth(): TemporalAdjuster;
 		static firstDayOfNextYear(): TemporalAdjuster;
@@ -688,12 +688,12 @@ declare module 'js-joda' {
 	declare class ValueRange {
 		static of(min: number, max: number): ValueRange;
 		static of(min: number, maxSmallest: number, maxLargest: number): ValueRange;
-		static of: (
+		static of(
 			minSmallest: number,
 			minLargest: number,
 			maxSmallest: number,
 			maxLargest: number
-		) => ValueRange;
+		): ValueRange;
 		checkValidIntValue(value: number, field: ChronoField): number;
 		checkValidValue(value: number, field: ChronoField): any;
 		equals(other: any): boolean;
@@ -779,11 +779,11 @@ declare module 'js-joda' {
 		static of(offsetId: string): ZoneOffset;
 		static ofHours(hours: number): ZoneOffset;
 		static ofHoursMinutes(hours: number, minutes: number): ZoneOffset;
-		static ofHoursMinutesSeconds: (
+		static ofHoursMinutesSeconds(
 			hours: number,
 			minutes: number,
 			seconds: number
-		) => ZoneOffset;
+		): ZoneOffset;
 		static ofTotalMinutes(totalMinutes: number): ZoneOffset;
 		static ofTotalSeconds(totalSeconds: number): ZoneOffset;
 		adjustInto(temporal: Temporal): Temporal;
@@ -827,7 +827,7 @@ declare module 'js-joda' {
 		static of(): any;
 		static of(localDateTime: LocalDateTime, zone: ZoneId): ZonedDateTime;
 		static of(date: LocalDate, time: LocalTime, zone: ZoneId): ZonedDateTime;
-		static of: (
+		static of(
 			year: number,
 			month: number,
 			dayOfMonth: number,
@@ -836,7 +836,7 @@ declare module 'js-joda' {
 			second: number,
 			nanoOfSecond: number,
 			zone: ZoneId
-		) => ZonedDateTime;
+		): ZonedDateTime;
 		static of8(
 			year: number,
 			month: number,
@@ -855,16 +855,16 @@ declare module 'js-joda' {
 			zone: ZoneId
 		): ZonedDateTime;
 		static ofInstant2(instant: Instant, zone: ZoneId): ZonedDateTime;
-		static ofLocal: (
+		static ofLocal(
 			localDateTime: LocalDateTime,
 			zone: ZoneId,
 			preferredOffset: ZoneOffset
-		) => ZonedDateTime;
-		static ofStrict: (
+		): ZonedDateTime;
+		static ofStrict(
 			localDateTime: LocalDateTime,
 			offset: ZoneOffset,
 			zone: ZoneId
-		) => ZonedDateTime;
+		): ZonedDateTime;
 		static parse(text: string, formatter?: DateTimeFormatter): ZonedDateTime;
 		dayOfMonth(): number;
 		dayOfWeek(): DayOfWeek;
@@ -952,8 +952,8 @@ declare module 'js-joda' {
 		temporal: LocalDate | LocalDateTime | ZonedDateTime,
 		zone?: ZoneId
 	): {
-		toDate: () => Date,
-		toEpochMilli: () => number,
+		toDate(): Date,
+		toEpochMilli(): number,
 	};
 
 	declare function use(plugin: Function): any;
