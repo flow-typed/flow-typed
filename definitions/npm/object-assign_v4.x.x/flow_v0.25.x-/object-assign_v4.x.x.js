@@ -1,3 +1,3 @@
 declare module "object-assign" {
-  declare module.exports: (target: any, ...sources: Array<any>) => Object;
+  declare module.exports: Object$Assign;
 }
