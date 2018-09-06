@@ -1,9 +1,36 @@
 // @flow
 
-import objectAssign from 'object-assign';
+import objectAssign from "object-assign";
 
-const result1: Object = objectAssign({}, null, 2, {}, []);
-const result2: Object = objectAssign(null);
+const extendsExistingFields: { a: number, b: string } = objectAssign(
+  {},
+  { a: 1 },
+  { b: "hi" }
+);
 
 // $ExpectError
-const result3: string = objectAssign();
+const extendsExistingFieldsSoundly: { a: number, b: string } = objectAssign(
+  {},
+  { a: "one" },
+  { b: "hi" }
+);
+
+// $ExpectError
+const resultIsObject: string = objectAssign({});
+
+// TODO(facebook/flow#6856): The following should be valid, but is not,
+// due to a bug in Flow. The same behavior occurs with `Object.assign`.
+// If this is fixed, then this expect-success test case should be
+// reinstated.
+/*
+const sourcesMayHaveVaryingType = objectAssign({}, null, 2, {}, []);
+*/
+
+// TODO(facebook/flow#6857): The following should raise a type error
+// (because it raises a runtime error), but does not, due to a bug in
+// Flow. The same behavior occurs with `Object.assign`. If this is
+// fixed, then this expect-error test case should be reinstated.
+/*
+const nullTargetDisallowed = objectAssign(null);
+const voidTargetDisallowed = objectAssign(undefined);
+*/
