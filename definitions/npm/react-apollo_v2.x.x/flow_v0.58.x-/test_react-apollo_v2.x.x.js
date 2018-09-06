@@ -271,13 +271,9 @@ describe("<Query />", () => {
           if (result.loading || result.error) {
             return;
           }
-          const d1: Res = result.data;
-          // $ExpectError Cannot get `data.res` because property `res` is missing in object type
-          const s: string = data.res;
-          if (d1.res) {
-            const d2: Res = d1;
-            const s: string = d1.res;
-          }
+          const { data } = result
+          const d1: Res = data;
+          const s: string = d1.res;
         }}
       </Query>
     );
