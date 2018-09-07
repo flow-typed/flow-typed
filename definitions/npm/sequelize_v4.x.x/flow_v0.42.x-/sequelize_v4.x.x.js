@@ -1338,7 +1338,7 @@ declare module "sequelize" {
      * A string or a data type
      */
     type: DataTypeAbstract,
-    
+
     allowNull?: boolean,
 
     values?: Array<any>,
@@ -2142,7 +2142,7 @@ declare module "sequelize" {
     /**
      * Transaction to run query under
      */
-    transaction?: Transaction,
+    transaction?: ?Transaction,
 
     /**
      * An optional parameter to specify the schema search_path (Postgres only)
@@ -2163,7 +2163,7 @@ declare module "sequelize" {
     /**
      * Transaction to run query under
      */
-    transaction?: Transaction
+    transaction?: ?Transaction
   }
 
 
@@ -2184,7 +2184,7 @@ declare module "sequelize" {
     /**
      * Transaction to run the query in
      */
-    transaction?: Transaction
+    transaction?: ?Transaction
   }
 
 
@@ -2244,7 +2244,7 @@ declare module "sequelize" {
     /**
      * Transaction to run query under
      */
-    transaction?: Transaction,
+    transaction?: ?Transaction,
 
     /**
      * An optional parameter to specify the schema search_path (Postgres only)
@@ -2938,7 +2938,7 @@ declare module "sequelize" {
     /**
      * Transaction to run query under
      */
-    transaction?: Transaction
+    transaction?: ?Transaction
   } & LoggingOptions
 
   /**
@@ -2980,7 +2980,7 @@ declare module "sequelize" {
     /**
      * Transaction to run query under
      */
-    transaction?: Transaction,
+    transaction?: ?Transaction,
 
     /**
      * If true, the updatedAt timestamp will not be updated.
@@ -3028,7 +3028,7 @@ declare module "sequelize" {
     /**
      * Transaction to run query under
      */
-    transaction?: Transaction,
+    transaction?: ?Transaction,
 
     /**
      * If true, the updatedAt timestamp will not be updated.
@@ -3061,7 +3061,7 @@ declare module "sequelize" {
     /**
      * The transaction that the query should be executed under
      */
-    transaction?: Transaction,
+    transaction?: ?Transaction,
 
     /**
      * When `true`, the first returned value of `aggregateFunction` is cast to `dataType` and returned.
@@ -7441,4 +7441,3 @@ declare module "sequelize" {
     logic: string | Object
   }
 }
-
