@@ -2015,7 +2015,7 @@ declare module "@material-ui/core/styles/createMuiTheme" {
     zIndex: ZIndex
   };
 
-  declare module.exports: (options: ThemeOptions) => Theme;
+  declare module.exports: (options?: ThemeOptions) => Theme;
 }
 
 declare module "@material-ui/core/styles/createPalette" {

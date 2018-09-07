@@ -249,3 +249,8 @@ const createMuiCustomThemeInvalidNestedOptions = () => (
     },
   })
 )
+
+// createMuiTheme test without any options
+const createMuiCustomThemeWithoutAnyOptions = () => (
+  createMuiTheme()
+)
