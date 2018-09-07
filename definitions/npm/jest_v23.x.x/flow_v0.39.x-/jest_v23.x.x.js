@@ -14,7 +14,12 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
      * An array that contains all the object instances that have been
      * instantiated from this mock function.
      */
-    instances: Array<TReturn>
+    instances: Array<TReturn>,
+    /**
+     * An array that contains all the object results that have been
+     * returned by this mock function call
+     */
+    results: Array<{ isThrow: boolean, value: TReturn }>
   },
   /**
    * Resets all information stored in the mockFn.mock.calls and
