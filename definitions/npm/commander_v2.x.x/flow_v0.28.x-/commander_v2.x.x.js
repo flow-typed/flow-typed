@@ -272,7 +272,7 @@ declare module "commander" {
   }
 
   declare module.exports: Command & {
-    Command: Command,
-    Option: Option
+    Command: (name?: string) => Command;
+    Options: (flags: string, description?: string) => Option;
   };
 }

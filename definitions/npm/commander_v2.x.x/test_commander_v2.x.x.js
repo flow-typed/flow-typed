@@ -1,5 +1,7 @@
 import program from 'commander';
 
+new program.Command('support to use class');
+
 program
   .version('1.0.0')
   .arguments('<cmd> [env]')
