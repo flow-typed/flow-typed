@@ -1821,7 +1821,7 @@ declare module "rxjs/Subscription" {
   };
 }
 
-declare module "rxjs/testing/TestScheduler" {
+declare module "rxjs/testing" {
   declare module.exports: {
     TestScheduler: typeof rxjs$SchedulerClass
   };
