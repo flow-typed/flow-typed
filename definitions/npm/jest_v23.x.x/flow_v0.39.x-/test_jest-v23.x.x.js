@@ -75,6 +75,11 @@ mockedDoStuff.mock.instances[0] > 5;
 // $ExpectError function `doesntExist` not found in number.
 mockedDoStuff.mock.instances[0].indexOf("a");
 
+expect(mockedDoStuff.mock.results[0].isThrow).toBe(false);
+expect(mockedDoStuff.mock.results[0].value).toBe(10);
+// $ExpectError
+mockedDoStuff.mock.results[0].foo;
+
 expect(1).toEqual(1);
 expect(true).toBe(true);
 expect(5).toBeGreaterThan(3);
