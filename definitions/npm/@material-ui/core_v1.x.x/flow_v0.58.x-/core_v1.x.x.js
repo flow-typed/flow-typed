@@ -2,7 +2,7 @@ declare module "@material-ui/core/AppBar/AppBar" {
   import type {ComponentType, Node} from "react";
 
   declare type Color = "inherit" | "primary" | "secondary" | "default";
-  declare type Position = "fixed" | "absolute" | "sticky" | "static";
+  declare type Position = "fixed" | "absolute" | "sticky" | "static" | "relative";
 
   declare module.exports: ComponentType<{
     children?: Node,
