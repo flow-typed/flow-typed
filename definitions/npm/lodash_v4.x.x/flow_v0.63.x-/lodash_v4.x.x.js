@@ -302,7 +302,7 @@ declare module "lodash" {
     ): Array<T>;
     join<T>(array: Array<T>, separator?: ?string): string;
     join<T>(array: void | null, separator?: ?string): '';
-    last<T>(array: ?$ReadOnlyArray<T>): T;
+    last<T>(array: ?$ReadOnlyArray<T>): ?T;
     lastIndexOf<T>(array: Array<T>, value?: ?T, fromIndex?: ?number): number;
     lastIndexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
     nth<T>(array: T[], n?: ?number): T;
@@ -1770,7 +1770,7 @@ declare module "lodash/fp" {
     ): Array<T>;
     join<T>(separator: string): (array: Array<T>) => string;
     join<T>(separator: string, array: Array<T>): string;
-    last<T>(array: Array<T>): T;
+    last<T>(array: Array<T>): ?T;
     lastIndexOf<T>(value: T): (array: Array<T>) => number;
     lastIndexOf<T>(value: T, array: Array<T>): number;
     lastIndexOfFrom<T>(
