@@ -981,7 +981,7 @@ declare module "react-apollo" {
   declare export type MutationFunction<
     TData = any,
     TVariables = OperationVariables
-  > = (options: {
+  > = (options?: {
     variables?: TVariables,
     optimisticResponse?: Object,
     refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
