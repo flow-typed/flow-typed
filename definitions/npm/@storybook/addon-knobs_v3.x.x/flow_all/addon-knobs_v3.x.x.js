@@ -1,5 +1,7 @@
 declare module "@storybook/addon-knobs/react" {
-  declare type Renderable = React$Element<any>;
+  declare type Context = { kind: string, story: string };
+  declare type Renderable = React$Element<*>;
+  declare type RenderFunction = () => Renderable | Array<Renderable>;
   declare type GroupId = string;
 
   declare function array<T>(string, (Array<mixed> | {}), ?string, ?GroupId): Array<string>;
@@ -12,5 +14,8 @@ declare module "@storybook/addon-knobs/react" {
   declare function select<T>(string, Array<T> | { [T]: string }, T, ?GroupId): T;
   declare function selectV2<T>(string, Array<T> | { [string]: T }, T, ?GroupId): T;
   declare function text(string, string, ?GroupId): string;
-  declare function withKnobs(() => Renderable, { kind: string, story: string }): Renderable;
+  declare function withKnobs(
+    story: RenderFunction,
+    context: Context
+  ): Renderable | null;
 }
