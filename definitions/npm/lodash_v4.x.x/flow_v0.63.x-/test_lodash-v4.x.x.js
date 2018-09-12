@@ -21,6 +21,7 @@ import intersectionBy from "lodash/intersectionBy";
 import isEqual from "lodash/isEqual";
 import isString from "lodash/isString";
 import keyBy from "lodash/keyBy";
+import last from "lodash/last";
 import map from "lodash/map";
 import memoize from "lodash/memoize";
 import noop from "lodash/noop";
@@ -480,3 +481,15 @@ pairs = toPairsIn({ a: 12, b: 100 });
 (omitBy(null, num => num % 2): {});
 (omitBy(undefined, num => num % 2): {});
 (omitBy({[1]: 1, [2]: 2}, num => num === 2): {[prop: number]: number});
+
+/**
+ * _.last
+ */
+
+(last([1]): ?number);
+(last(['test']): ?string);
+type Item = { a: boolean };
+var items: Array<Item> = [{ a: true }, { a: false }];
+(last(items): ?Item);
+var items: Array<Item> = [];
+(last(items): ?Item);
