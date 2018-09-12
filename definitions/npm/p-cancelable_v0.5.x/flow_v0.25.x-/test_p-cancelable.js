@@ -65,7 +65,9 @@ it('PCancelable.CancelError', () => {
 })
 
 it('PCancelable.fn', () => {
-  const fn = PCancelable.fn<string, number>((input: string, onCancel) => {
+  type OnCancel = (handler: () => void) => void
+
+  const fn = PCancelable.fn((input: string, onCancel: OnCancel) => {
     onCancel(() => {})
     // $ExpectError
     onCancel()
