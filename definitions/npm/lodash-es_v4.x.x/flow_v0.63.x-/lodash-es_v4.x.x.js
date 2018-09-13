@@ -444,16 +444,16 @@ declare module "lodash-es" {
     a4: Array<T>,
     comparator?: Comparator<T>
   ): Array<T>;
-  declare export function zip<A, B>(a1?: ?A[], a2?: ?B[]): Array<[A, B]>;
-  declare export function zip<A, B, C>(a1: A[], a2: B[], a3: C[]): Array<[A, B, C]>;
-  declare export function zip<A, B, C, D>(a1: A[], a2: B[], a3: C[], a4: D[]): Array<[A, B, C, D]>;
+  declare export function zip<A, B>(a1?: ?A[], a2?: ?B[]): Array<[?A, ?B]>;
+  declare export function zip<A, B, C>(a1: A[], a2: B[], a3: C[]): Array<[?A, ?B, ?C]>;
+  declare export function zip<A, B, C, D>(a1: A[], a2: B[], a3: C[], a4: D[]): Array<[?A, ?B, ?C, ?D]>;
   declare export function zip<A, B, C, D, E>(
     a1: A[],
     a2: B[],
     a3: C[],
     a4: D[],
     a5: E[]
-  ): Array<[A, B, C, D, E]>;
+  ): Array<[?A, ?B, ?C, ?D, ?E]>;
 
   declare export function zipObject<K, V>(props: Array<K>, values?: ?Array<V>): { [key: K]: V };
   declare export function zipObject<K, V>(props: void | null, values?: ?Array<V>): {};
