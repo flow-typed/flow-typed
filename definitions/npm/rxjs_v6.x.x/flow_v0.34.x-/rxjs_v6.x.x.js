@@ -1252,8 +1252,8 @@ declare module "rxjs/operators" {
   };
 }
 
-interface rxjs$Operators$withLatestFrom {
-  <+T, A, B, C, D, E, F, G, H>(
+type rxjs$Operators$withLatestFrom = {
+  <T, A, B, C, D, E, F, G, H>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
@@ -1264,7 +1264,7 @@ interface rxjs$Operators$withLatestFrom {
     resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F, g: G) => H
   ): rxjs$Observable<T> => rxjs$Observable<H>;
 
-  <+T, A, B, C, D, E, F, G>(
+  <T, A, B, C, D, E, F, G>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
@@ -1274,7 +1274,7 @@ interface rxjs$Operators$withLatestFrom {
     resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E, f: F) => G
   ): rxjs$Observable<T> => rxjs$Observable<G>;
 
-  <+T, A, B, C, D, E, F>(
+  <T, A, B, C, D, E, F>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
@@ -1283,7 +1283,7 @@ interface rxjs$Operators$withLatestFrom {
     resultSelector: (t: T, a: A, b: B, c: C, d: D, e: E) => F
   ): rxjs$Observable<T> => rxjs$Observable<F>;
 
-  <+T, A, B, C, D, E>(
+  <T, A, B, C, D, E>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
@@ -1291,29 +1291,29 @@ interface rxjs$Operators$withLatestFrom {
     resultSelector: (t: T, a: A, b: B, c: C, d: D) => E
   ): rxjs$Observable<T> => rxjs$Observable<E>;
 
-  <+T, A, B, C, D>(
+  <T, A, B, C, D>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
     resultSelector: (t: T, a: A, b: B, c: C) => D
   ): rxjs$Observable<T> => rxjs$Observable<D>;
 
-  <+T, A, B, C>(
+  <T, A, B, C>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     resultSelector: (t: T, a: A, b: B) => C
   ): rxjs$Observable<T> => rxjs$Observable<C>;
 
-  <+T, A, B>(
+  <T, A, B>(
     a: rxjs$Observable<A>,
     resultSelector: (t: T, a: A) => B
   ): rxjs$Observable<T> => rxjs$Observable<B>;
 
-  <+T, A>(
+  <T, A>(
     resultSelector: (t: T) => A
   ): rxjs$Observable<T> => rxjs$Observable<A>;
 
-  <+T, A, B, C, D, E, F, G>(
+  <T, A, B, C, D, E, F, G>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
@@ -1324,7 +1324,7 @@ interface rxjs$Operators$withLatestFrom {
     _: void
   ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, E, F, G]>;
 
-  <+T, A, B, C, D, E, F>(
+  <T, A, B, C, D, E, F>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
@@ -1334,7 +1334,7 @@ interface rxjs$Operators$withLatestFrom {
     _: void
   ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E, F]>;
 
-  <+T, A, B, C, D, E>(
+  <T, A, B, C, D, E>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
@@ -1343,7 +1343,7 @@ interface rxjs$Operators$withLatestFrom {
     _: void
   ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D, E]>;
 
-  <+T, A, B, C, D>(
+  <T, A, B, C, D>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
@@ -1351,26 +1351,26 @@ interface rxjs$Operators$withLatestFrom {
     _: void
   ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C, D]>;
 
-  <+T, A, B, C>(
+  <T, A, B, C>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     c: rxjs$Observable<C>,
     _: void
   ): rxjs$Observable<T> => rxjs$Observable<[T, A, B, C]>;
 
-  <+T, A, B>(
+  <T, A, B>(
     a: rxjs$Observable<A>,
     b: rxjs$Observable<B>,
     _: void
   ): rxjs$Observable<T> => rxjs$Observable<[T, A, B]>;
 
-  <+T, A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<T> => rxjs$Observable<[T, A]>;
+  <T, A>(a: rxjs$Observable<A>, _: void): rxjs$Observable<T> => rxjs$Observable<[T, A]>;
 
-  <+T, R>(
+  <T, R>(
     ...args: rxjs$Observable<any>[]
   ): rxjs$Observable<T> => rxjs$Observable<any[]>;
 
-  <+T, R>(
+  <T, R>(
     ...args: (rxjs$Observable<any> | (t: T, ...obs: any[]) => R)[]
   ): rxjs$Observable<T> => rxjs$Observable<R>;
 }
