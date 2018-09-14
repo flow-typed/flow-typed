@@ -3,6 +3,8 @@ import { it, describe } from 'flow-typed-test'
 import {
   Alert,
   Avatar,
+  AutoComplete,
+  Badge,
   Button,
   Card,
   Cascader,
@@ -45,6 +47,18 @@ describe('Avatar', () => {
   })
 })
 
+describe('AutoComplete', () => {
+  it('is a react component', () => {
+    const autocomplete = <AutoComplete/>
+  })
+})
+
+describe('Badge', () => {
+  it('is a react component', () => {
+    const badge = <Badge/>
+  })
+})
+
 describe('Button', () => {
   it('is a react component', () => {
     const button = <Button />
@@ -64,7 +78,7 @@ describe('Card', () => {
       </Card>
     )
   })
-  
+
   it('with Card.Grid', () => {
     const card = (
       <Card title="Card Title">
@@ -78,16 +92,16 @@ describe('Card', () => {
   it('with Card.Meta', () => {
     const card =  (
       <Card
-          hoverable
+        hoverable
           style={{ width: 240 }}
           cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-        >
-          <Card.Meta
+      >
+        <Card.Meta
             avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-            title="Europe Street beat"
-            description="www.instagram.com"
-          />
-        </Card>
+          title="Europe Street beat"
+          description="www.instagram.com"
+        />
+      </Card>
     )
   })
 })
@@ -141,85 +155,85 @@ describe('DatePicker', () => {
 
 describe('Dropdown', () => {
   it('is a react component', () => {
-    const dropdown = <Dropdown />
+    const dropdown = <Dropdown/>
   })
 })
 
 describe('Form', () => {
   it('is a react component', () => {
-    const form = <Form />
+    const form = <Form/>
   })
 })
 
 describe('Form.Item', () => {
   it('is a react component', () => {
-    const formItem = <Form.Item />
+    const formItem = <Form.Item/>
   })
 })
 
 describe('Icon', () => {
   it('is a react component', () => {
-    const icon = <Icon />
+    const icon = <Icon/>
   })
 })
 
 describe('Input', () => {
   it('is a react component', () => {
-    const input = <Input />
+    const input = <Input/>
   })
 })
 
 describe('Input.Search', () => {
   it('is a react component', () => {
-    const inputSearch = <Input.Search />
+    const inputSearch = <Input.Search/>
   })
 })
 
 describe('Input.TextArea', () => {
   it('is a react component', () => {
-    const inputTextArea = <Input.TextArea />
+    const inputTextArea = <Input.TextArea/>
   })
 })
 
 describe('Layout', () => {
   it('is a react component', () => {
-    const layout = <Layout />
+    const layout = <Layout/>
   })
 })
 
 describe('Layout.Content', () => {
   it('is a react component', () => {
-    const layoutContent = <Layout.Content />
+    const layoutContent = <Layout.Content/>
   })
 })
 
 describe('Layout.Header', () => {
   it('is a react component', () => {
-    const layoutHeader = <Layout.Header />
+    const layoutHeader = <Layout.Header/>
   })
 })
 
 describe('LocaleProvider', () => {
   it('is a react component', () => {
-    const localeProvider = <LocaleProvider />
+    const localeProvider = <LocaleProvider/>
   })
 })
 
 describe('Menu', () => {
   it('is a react component', () => {
-    const menu = <Menu />
+    const menu = <Menu/>
   })
 })
 
 describe('Menu.Item', () => {
   it('is a react component', () => {
-    const menuItem = <Menu.Item />
+    const menuItem = <Menu.Item/>
   })
 })
 
 describe('Menu.SubMenu', () => {
   it('is a react component', () => {
-    const menuSubMenu = <Menu.SubMenu />
+    const menuSubMenu = <Menu.SubMenu/>
   })
 })
 
@@ -255,7 +269,7 @@ describe('message', () => {
 
 describe('Modal', () => {
   it('is a react component', () => {
-    const modal = <Modal />
+    const modal = <Modal/>
   })
   it('have an info method', () => {
     const ref = Modal.info({
@@ -301,63 +315,63 @@ describe('Modal', () => {
 
 describe('Popconfirm', () => {
   it('is a react component', () => {
-    const popconfirm = <Popconfirm />
+    const popconfirm = <Popconfirm/>
   })
 })
 
 describe('Radio', () => {
   it('is a react component', () => {
-    const radio = <Radio />
+    const radio = <Radio/>
   })
 })
 
 describe('Radio.Group', () => {
   it('is a react component', () => {
-    const radioGroup = <Radio.Group />
+    const radioGroup = <Radio.Group/>
   })
 })
 
 describe('Row', () => {
   it('is a react component', () => {
-    const row = <Row />
+    const row = <Row/>
   })
 })
 
 describe('Select', () => {
   it('is a react component', () => {
-    const select = <Select />
+    const select = <Select/>
   })
 })
 
 describe('Select.Option', () => {
   it('is a react component', () => {
-    const selectOption = <Select.Option />
+    const selectOption = <Select.Option/>
   })
 })
 
 describe('Slider', () => {
   it('is a react component', () => {
-    const slider = <Slider />
+    const slider = <Slider/>
   })
 })
 
 describe('Spin', () => {
   it('is a react component', () => {
-    const spin = <Spin />
+    const spin = <Spin/>
   })
 })
 
 describe('Steps', () => {
   it('is a react component', () => {
-    const steps = <Steps />
+    const steps = <Steps/>
   })
 
   it('with Steps.Step', () => {
     const steps = (
       <Steps size="small" current={1}>
-        <Steps.Step title="Finished" description="This is a description." />
-        <Steps.Step stats="process" title="In Progress" description="This is a description." />
-        <Steps.Step status="wait" title="Waiting" description="This is a description." />
+        <Steps.Step title="Finished" description="This is a description."/>
+        <Steps.Step stats="process" title="In Progress" description="This is a description."/>
+        <Steps.Step status="wait" title="Waiting" description="This is a description."/>
       </Steps>
     )
   })
@@ -365,42 +379,42 @@ describe('Steps', () => {
 
 describe('Table', () => {
   it('is a react component', () => {
-    const table = <Table />
+    const table = <Table/>
   })
 })
 
 describe('Tabs', () => {
   it('is a react component', () => {
-    const tabs = <Tabs />
+    const tabs = <Tabs/>
   })
 })
 
 describe('Tabs.TabPane', () => {
   it('is a react component', () => {
-    const tabPane = <Tabs.TabPane />
+    const tabPane = <Tabs.TabPane/>
   })
 })
 
 describe('Tag', () => {
   it('is a react component', () => {
-    const tag = <Tag />
+    const tag = <Tag/>
   })
 })
 
 describe('Tooltip', () => {
   it('is a react component', () => {
-    const tooltip = <Tooltip title="hello" />
+    const tooltip = <Tooltip title="hello"/>
   })
 })
 
 describe('TreeSelect', () => {
   it('is a react component', () => {
-    const treeSelect = <TreeSelect />
+    const treeSelect = <TreeSelect/>
   })
 })
 
 describe('TreeSelect.TreeNode', () => {
   it('is a react component', () => {
-    const treeNode = <TreeSelect.TreeNode />
+    const treeNode = <TreeSelect.TreeNode/>
   })
 })
