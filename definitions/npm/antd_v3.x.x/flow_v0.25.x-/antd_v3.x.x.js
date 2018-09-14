@@ -1,4 +1,4 @@
-import {ListItemProps} from "antd";
+import {Component, Node} from 'react';
 
 declare module 'antd' {
 
@@ -7,58 +7,58 @@ declare module 'antd' {
   }
 
   declare function messageFn<TReturn>(
-    content: React$Node,
+    content: Node,
     duration?: number,
     onClose?: () => mixed
   ): TReturn
 
-  declare type modalFnArguments = { title?: string, content?: React$Node, onOk?: () => mixed };
+  declare type modalFnArguments = { title?: string, content?: Node, onOk?: () => mixed };
 
   declare function modalFn(args: modalFnArguments): ModalReference;
 
-  declare export class Alert extends React$Component<{}> {}
-  declare export class Avatar extends React$Component<{}> {}
-  declare export class AutoComplete extends React$Component<{}> {}
-  declare export class Badge extends React$Component<{}> {}
-  declare export class Button extends React$Component<{}> {}
-  declare export class Card extends React$Component<{}> {}
-  declare export class Checkbox extends React$Component<{}> {}
-  declare export class Divider extends React$Component<{}> {}
-  declare export class Col extends React$Component<{}> {}
+  declare export class Alert extends Component<{}> {}
+  declare export class Avatar extends Component<{}> {}
+  declare export class AutoComplete extends Component<{}> {}
+  declare export class Badge extends Component<{}> {}
+  declare export class Button extends Component<{}> {}
+  declare export class Card extends Component<{}> {}
+  declare export class Checkbox extends Component<{}> {}
+  declare export class Divider extends Component<{}> {}
+  declare export class Col extends Component<{}> {}
 
   declare export type DatePickerProps = {};
-  declare export class DatePicker extends React$Component<DatePickerProps> {
+  declare export class DatePicker extends Component<DatePickerProps> {
     static RangePicker: typeof DatePicker$RangePicker;
   }
 
-  declare export class Dropdown extends React$Component<{}> {}
+  declare export class Dropdown extends Component<{}> {}
 
-  declare export class Grid extends React$Component<{
+  declare export class Grid extends Component<{
     className?: string,
     style?: $Shape<CSSStyleDeclaration>,
   }> {}
 
-  declare export class Meta extends React$Component<{
-    avatar?: React$Node,
+  declare export class Meta extends Component<{
+    avatar?: Node,
     className?: string,
-    description?: React$Node,
+    description?: Node,
     style?: $Shape<CSSStyleDeclaration>,
-    title?: React$Node,
+    title?: Node,
   }> {}
 
-  declare export class Card extends React$Component<{
-    actions?: Array<React$Node>,
+  declare export class Card extends Component<{
+    actions?: Array<Node>,
     activeTabKey?: string,
     headStyle?: $Shape<CSSStyleDeclaration>,
     bodyStyle?: $Shape<CSSStyleDeclaration>,
     bordered?: boolean,
-    cover?: React$Node,
+    cover?: Node,
     defaultActiveTabKey?: string,
-    extra?: string | React$Node,
+    extra?: string | Node,
     hoverable?: boolean,
     loading?: boolean,
-    tabList?: Array<{ key: string, tab: React$Node }>,
-    title?: string | React$Node,
+    tabList?: Array<{ key: string, tab: Node }>,
+    title?: string | Node,
     type?: 'inner',
     onTabChange?: (key: string) => void,
   }> {
@@ -91,25 +91,25 @@ declare module 'antd' {
     value?: string[]
   }
 
-  declare export class Cascader extends React$Component<CascaderProps> {}
+  declare export class Cascader extends Component<CascaderProps> {}
 
-  declare export class Checkbox extends React$Component<{}> {}
+  declare export class Checkbox extends Component<{}> {}
 
-  declare export class Col extends React$Component<{}> {}
+  declare export class Col extends Component<{}> {}
 
   declare export type CollapsePanelProps = {}
 
-  declare class CollapsePanel extends React$Component<CollapsePanelProps> {}
+  declare class CollapsePanel extends Component<CollapsePanelProps> {}
 
   declare export type CollapseProps = {}
 
-  declare export class Collapse extends React$Component<CollapseProps> {
+  declare export class Collapse extends Component<CollapseProps> {
     static Panel: typeof CollapsePanel
   }
 
-  declare export class DatePicker extends React$Component<{}> {}
+  declare export class DatePicker extends Component<{}> {}
 
-  declare export class Dropdown extends React$Component<{}> {}
+  declare export class Dropdown extends Component<{}> {}
 
   declare type ValidationRule = {
     enum?: string | string[],
@@ -141,7 +141,7 @@ declare module 'antd' {
     getFieldDecorator(
       id: string,
       options?: GetFieldDecoratorOptions,
-    ): (node: React$Node) => React$Node,
+    ): (node: Node) => Node,
     getFieldError(name: string): Object[],
     getFieldsError(names?: Array<string>): Object,
     getFieldsValue(fieldNames?: Array<string>): Object,
@@ -186,78 +186,78 @@ declare module 'antd' {
     withRef?: boolean;
   }
 
-  declare export class Form extends React$Component<FormProps> {
+  declare export class Form extends Component<FormProps> {
     static Item: typeof FormItem;
     static create: <TOwnProps>(options?: FormCreateOption<TOwnProps>) => mixed;
   }
 
   declare export type FormItemProps = {
-    help?: React$Node,
-    extra?: React$Node,
+    help?: Node,
+    extra?: Node,
     validateStatus?: 'success' | 'warning' | 'error' | 'validating' | ''
   }
-  declare class FormItem extends React$Component<FormItemProps> {}
+  declare class FormItem extends Component<FormItemProps> {}
 
   declare export type RangePickerProps = {};
-  declare export class DatePicker$RangePicker extends React$Component<RangePickerProps> {}
+  declare export class DatePicker$RangePicker extends Component<RangePickerProps> {}
 
-  declare export class Icon extends React$Component<{}> {}
+  declare export class Icon extends Component<{}> {}
 
-  declare export class InputNumber extends React$Component<{}> {}
+  declare export class InputNumber extends Component<{}> {}
   declare type InputProps = {
     onBlur?: (event: SyntheticFocusEvent<HTMLInputElement>) => mixed,
     onChange?: (event: SyntheticKeyboardEvent<HTMLInputElement>) => mixed,
   }
-  declare export class Input extends React$Component<InputProps> {
+  declare export class Input extends Component<InputProps> {
     static Search: typeof InputSearch;
     static TextArea: typeof InputTextArea;
   }
 
-  declare class InputSearch extends React$Component<{}> {
+  declare class InputSearch extends Component<{}> {
     input: { input: HTMLInputElement }
   }
 
-  declare class InputTextArea extends React$Component<{}> {}
+  declare class InputTextArea extends Component<{}> {}
 
-  declare export class Layout extends React$Component<{}> {
+  declare export class Layout extends Component<{}> {
     static Content: typeof LayoutContent;
     static Header: typeof LayoutHeader;
     static Sider: typeof LayoutSider;
   }
 
-  declare class LayoutContent extends React$Component<{}> {}
+  declare class LayoutContent extends Component<{}> {}
 
-  declare class LayoutHeader extends React$Component<{}> {}
+  declare class LayoutHeader extends Component<{}> {}
 
-  declare class LayoutSider extends React$Component<{}> {}
+  declare class LayoutSider extends Component<{}> {}
 
   declare export type ListItemProps = {};
-  declare export class ListItem extends React$Component<ListItemProps> {}
-  declare export class List extends React$Component<{}> {
+  declare export class ListItem extends Component<ListItemProps> {}
+  declare export class List extends Component<{}> {
     static Item: typeof ListItem;
   }
 
 
 
-  declare export class LocaleProvider extends React$Component<{}> {}
+  declare export class LocaleProvider extends Component<{}> {}
 
   declare export type MenuProps = {
     onClick?: ({
                  domEvent: SyntheticMouseEvent<HTMLElement>,
-                 item: React$Component<MenuItem>,
+                 item: Component<MenuItem>,
                  key: string,
                  keyPath: string[],
                }) => mixed
   }
 
-  declare export class Menu extends React$Component<MenuProps> {
+  declare export class Menu extends Component<MenuProps> {
     static Item: typeof MenuItem;
     static SubMenu: typeof MenuSubMenu;
   }
 
-  declare class MenuItem extends React$Component<{}> {}
+  declare class MenuItem extends Component<{}> {}
 
-  declare class MenuSubMenu extends React$Component<{}> {}
+  declare class MenuSubMenu extends Component<{}> {}
 
   declare export class message {
     static config({
@@ -273,7 +273,7 @@ declare module 'antd' {
     static loading: messageFn<() => void>;
   }
 
-  declare export class Modal extends React$Component<{}> {
+  declare export class Modal extends Component<{}> {
     static info:    typeof modalFn;
     static success: typeof modalFn;
     static error:   typeof modalFn;
@@ -281,18 +281,18 @@ declare module 'antd' {
     static confirm: typeof modalFn;
   }
 
-  declare export class Popconfirm extends React$Component<{}> {}
+  declare export class Popconfirm extends Component<{}> {}
 
-  declare export class Radio extends React$Component<{}> {
+  declare export class Radio extends Component<{}> {
     static Group: typeof RadioGroup;
     static Button: typeof RadioButton;
   }
 
-  declare class RadioGroup extends React$Component<{}> {}
+  declare class RadioGroup extends Component<{}> {}
 
-  declare class RadioButton extends React$Component<{}> {}
+  declare class RadioButton extends Component<{}> {}
 
-  declare export class Row extends React$Component<{}> {}
+  declare export class Row extends Component<{}> {}
 
   declare export type SelectProps = {
     expandTrigger?: 'click' | 'hover',
@@ -302,13 +302,13 @@ declare module 'antd' {
     showSearch?: boolean,
   }
 
-  declare export class Select extends React$Component<SelectProps> {
+  declare export class Select extends Component<SelectProps> {
     static Option: typeof SelectOption;
   }
 
-  declare class SelectOption extends React$Component<{}> {}
+  declare class SelectOption extends Component<{}> {}
 
-  declare export class Slider extends React$Component<{}> {}
+  declare export class Slider extends Component<{}> {}
 
   declare export type SpinProps = {
     delay?: number,
@@ -317,57 +317,57 @@ declare module 'antd' {
     tip?: string,
   }
 
-  declare export class Spin extends React$Component<SpinProps> {}
+  declare export class Spin extends Component<SpinProps> {}
 
-  declare export class Step extends React$Component<{
-    description?: string | React$Node,
-    icon?: string | React$Node,
+  declare export class Step extends Component<{
+    description?: string | Node,
+    icon?: string | Node,
     status?: 'wait' | 'process' | 'finish' | 'error',
-    title?: string | React$Node,
+    title?: string | Node,
   }> {}
 
-  declare export class Steps extends React$Component<{
+  declare export class Steps extends Component<{
     current?: number,
     direction?: 'horizontal' | 'vertical',
     labelPlacement?: 'horizontal' | 'vertical',
     progressDot?:
       | boolean
       | ((
-      iconDot: React$Node,
+      iconDot: Node,
       {
         index: number,
         status: 'wait' | 'process' | 'finish' | 'error',
-        title: string | React$Node,
-        description: string | React$Node,
+        title: string | Node,
+        description: string | Node,
       }
-    ) => React$Node),
+    ) => Node),
     size?: 'default' | 'small',
     status?: 'wait' | 'process' | 'finish' | 'error',
   }> {
     static Step: typeof Step;
   }
 
-  declare export class Switch extends React$Component<{}> {}
+  declare export class Switch extends Component<{}> {}
 
-  declare export class Table extends React$Component<{}> {}
+  declare export class Table extends Component<{}> {}
 
-  declare export class Tabs extends React$Component<{}> {
+  declare export class Tabs extends Component<{}> {
     static TabPane: typeof TabsTabPane;
   }
 
-  declare export class TabsTabPane extends React$Component<{}> {}
+  declare export class TabsTabPane extends Component<{}> {}
 
-  declare export class Tag extends React$Component<{}> {}
+  declare export class Tag extends Component<{}> {}
 
   declare export type TooltipProps = {
     title: string
   }
 
-  declare export class Tooltip extends React$Component<TooltipProps> {}
+  declare export class Tooltip extends Component<TooltipProps> {}
 
-  declare export class TreeSelect extends React$Component<{}> {
+  declare export class TreeSelect extends Component<{}> {
     static TreeNode: typeof TreeSelectTreeNode
   }
 
-  declare export class TreeSelectTreeNode extends React$Component<{}> {}
+  declare export class TreeSelectTreeNode extends Component<{}> {}
 }
