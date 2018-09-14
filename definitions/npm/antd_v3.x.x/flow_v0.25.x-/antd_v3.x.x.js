@@ -1,3 +1,5 @@
+import {ListItemProps} from "antd";
+
 declare module 'antd' {
 
   declare type ModalReference = {
@@ -10,17 +12,27 @@ declare module 'antd' {
     onClose?: () => mixed
   ): TReturn
 
-  declare function modalFn({
-    title?: string,
-    content?: React$Node,
-    onOk?: () => mixed
-  }): ModalReference
+  declare type modalFnArguments = { title?: string, content?: React$Node, onOk?: () => mixed };
+
+  declare function modalFn(args: modalFnArguments): ModalReference;
 
   declare export class Alert extends React$Component<{}> {}
-
   declare export class Avatar extends React$Component<{}> {}
+  declare export class AutoComplete extends React$Component<{}> {}
+  declare export class Badge extends React$Component<{}> {}
   declare export class Button extends React$Component<{}> {}
-  
+  declare export class Card extends React$Component<{}> {}
+  declare export class Checkbox extends React$Component<{}> {}
+  declare export class Divider extends React$Component<{}> {}
+  declare export class Col extends React$Component<{}> {}
+
+  declare export type DatePickerProps = {};
+  declare export class DatePicker extends React$Component<DatePickerProps> {
+    static RangePicker: typeof DatePicker$RangePicker;
+  }
+
+  declare export class Dropdown extends React$Component<{}> {}
+
   declare export class Grid extends React$Component<{
     className?: string,
     style?: $Shape<CSSStyleDeclaration>,
@@ -99,9 +111,84 @@ declare module 'antd' {
 
   declare export class Dropdown extends React$Component<{}> {}
 
-  declare export type FormProps = {}
+  declare type ValidationRule = {
+    enum?: string | string[],
+    len?: number,
+    max?: number,
+    message?: string,
+    min?: number,
+    pattern?: RegExp,
+    required?: boolean,
+    transform?: (value: mixed) => mixed,
+    type?: string,
+    validator?: (rule: mixed, value: mixed, callback: mixed, source?: mixed, options?: mixed) => mixed,
+    whitespace?: boolean,
+  };
+  declare type ValidateCallback = (erros: mixed, values: mixed) => void;
+  declare type GetFieldDecoratorOptions = {
+    exclusive?: boolean,
+    getValueFromEvent?: (...args: mixed[]) => mixed,
+    initialValue?: mixed,
+    normalize?: (value: mixed, prevValue: mixed, allValues: mixed) => mixed,
+    rules?: ValidationRule[],
+    trigger?: string,
+    validateFirst?: boolean,
+    validateTrigger?: string | string[],
+    valuePropName?: string,
+  };
+
+  declare type WrappedFormUtils = {
+    getFieldDecorator(
+      id: string,
+      options?: GetFieldDecoratorOptions,
+    ): (node: React$Node) => React$Node,
+    getFieldError(name: string): Object[],
+    getFieldsError(names?: Array<string>): Object,
+    getFieldsValue(fieldNames?: Array<string>): Object,
+    getFieldValue(fieldName: string): mixed,
+    isFieldsTouched(names?: Array<string>): boolean,
+    isFieldTouched(name: string): boolean,
+    isFieldValidating(name: string): boolean,
+    resetFields(names?: Array<string>): void,
+    setFields(obj: Object): void,
+    setFieldsValue(obj: Object): void,
+    validateFields(callback: ValidateCallback): mixed,
+    validateFields(fieldNames: Array<string>, callback: ValidateCallback): mixed,
+    validateFields(fieldNames: Array<string>, options: Object, callback: ValidateCallback): mixed,
+    validateFields(options: Object, callback: ValidateCallback): mixed,
+    validateFieldsAndScroll(
+      fieldNames?: Array<string>,
+      options?: Object,
+      callback?: ValidateCallback,
+    ): void,
+    validateFieldsAndScroll(callback?: ValidateCallback): void,
+    validateFieldsAndScroll(fieldNames?: Array<string>, callback?: ValidateCallback): void,
+    validateFieldsAndScroll(options?: Object, callback?: ValidateCallback): void,
+  };
+
+  declare export type FormProps = {
+    className?: string;
+    form?: WrappedFormUtils;
+    hideRequiredMark?: boolean;
+    horizontal?: boolean,
+    inline?: boolean;
+    layout?: 'horizontal' | 'inline' | 'vertical';
+    onSubmit?: (e: SyntheticEvent<HTMLFormElement>) => void;
+    prefixCls?: string;
+    style?: Object;
+    vertical?: boolean;
+  }
+
+  declare export type FormCreateOption<T> = {
+    onFieldsChange?: (props: T, fields: Array<mixed>) => void;
+    onValuesChange?: (props: T, values: mixed) => void;
+    mapPropsToFields?: (props: T) => void;
+    withRef?: boolean;
+  }
+
   declare export class Form extends React$Component<FormProps> {
     static Item: typeof FormItem;
+    static create: <TOwnProps>(options?: FormCreateOption<TOwnProps>) => mixed;
   }
 
   declare export type FormItemProps = {
@@ -111,13 +198,16 @@ declare module 'antd' {
   }
   declare class FormItem extends React$Component<FormItemProps> {}
 
+  declare export type RangePickerProps = {};
+  declare export class DatePicker$RangePicker extends React$Component<RangePickerProps> {}
+
   declare export class Icon extends React$Component<{}> {}
 
+  declare export class InputNumber extends React$Component<{}> {}
   declare type InputProps = {
     onBlur?: (event: SyntheticFocusEvent<HTMLInputElement>) => mixed,
     onChange?: (event: SyntheticKeyboardEvent<HTMLInputElement>) => mixed,
   }
-
   declare export class Input extends React$Component<InputProps> {
     static Search: typeof InputSearch;
     static TextArea: typeof InputTextArea;
@@ -132,21 +222,32 @@ declare module 'antd' {
   declare export class Layout extends React$Component<{}> {
     static Content: typeof LayoutContent;
     static Header: typeof LayoutHeader;
+    static Sider: typeof LayoutSider;
   }
 
   declare class LayoutContent extends React$Component<{}> {}
 
   declare class LayoutHeader extends React$Component<{}> {}
 
+  declare class LayoutSider extends React$Component<{}> {}
+
+  declare export type ListItemProps = {};
+  declare export class ListItem extends React$Component<ListItemProps> {}
+  declare export class List extends React$Component<{}> {
+    static Item: typeof ListItem;
+  }
+
+
+
   declare export class LocaleProvider extends React$Component<{}> {}
 
   declare export type MenuProps = {
     onClick?: ({
-      domEvent: SyntheticMouseEvent<HTMLElement>,
-      item: React$Component<MenuItem>,
-      key: string,
-      keyPath: string[],
-    }) => mixed
+                 domEvent: SyntheticMouseEvent<HTMLElement>,
+                 item: React$Component<MenuItem>,
+                 key: string,
+                 keyPath: string[],
+               }) => mixed
   }
 
   declare export class Menu extends React$Component<MenuProps> {
@@ -160,10 +261,10 @@ declare module 'antd' {
 
   declare export class message {
     static config({
-      duration?: number,
-      getContainer?: () => HTMLElement,
-      top?: number
-    }): void;
+                    duration?: number,
+                    getContainer?: () => HTMLElement,
+                    top?: number
+                  }): void;
     static success: messageFn<mixed>;
     static error:   messageFn<mixed>;
     static info:    messageFn<mixed>;
@@ -184,9 +285,12 @@ declare module 'antd' {
 
   declare export class Radio extends React$Component<{}> {
     static Group: typeof RadioGroup;
+    static Button: typeof RadioButton;
   }
 
   declare class RadioGroup extends React$Component<{}> {}
+
+  declare class RadioButton extends React$Component<{}> {}
 
   declare export class Row extends React$Component<{}> {}
 
@@ -229,19 +333,21 @@ declare module 'antd' {
     progressDot?:
       | boolean
       | ((
-          iconDot: React$Node,
-          {
-            index: number,
-            status: 'wait' | 'process' | 'finish' | 'error',
-            title: string | React$Node,
-            description: string | React$Node,
-          }
-        ) => React$Node),
+      iconDot: React$Node,
+      {
+        index: number,
+        status: 'wait' | 'process' | 'finish' | 'error',
+        title: string | React$Node,
+        description: string | React$Node,
+      }
+    ) => React$Node),
     size?: 'default' | 'small',
     status?: 'wait' | 'process' | 'finish' | 'error',
   }> {
     static Step: typeof Step;
   }
+
+  declare export class Switch extends React$Component<{}> {}
 
   declare export class Table extends React$Component<{}> {}
 
