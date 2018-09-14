@@ -804,7 +804,7 @@ declare module "react-apollo" {
 
   declare export interface OptionProps<TProps, TResult, TVariables> {
     ownProps: TProps;
-    data: GraphqlData<TResult, TVariables>;
+    data?: GraphqlData<TResult, TVariables>;
     mutate: MutationFunc<TResult, TVariables>;
   }
 
