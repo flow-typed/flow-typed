@@ -1,4 +1,4 @@
-// @flow
+import { Orientations } from "react-native-orientation";
 
 declare module "react-native-orientation" {
   declare export type Orientations =
@@ -14,29 +14,24 @@ declare module "react-native-orientation" {
     | "PORTRAITUPSIDEDOWN"
     | "UNKNOWN";
 
-  declare export type CallbackFn = <ReturnValue>(
-    error: ?Error,
-    payload?: ReturnValue
-  ) => void;
-
-  declare export type HandlerFn = <ReturnValue>(payload?: ReturnValue) => void;
-
   declare module.exports: {
     getInitialOrientation(): ?Orientations,
-    getOrientation(callback: CallbackFn<Orientations>): void,
-    getSpecificOrientation(callback: CallbackFn<SpecificOrientations>): void,
+    getOrientation((error: ?Error, payload?: Orientations) => void): void,
+    getSpecificOrientation(
+      (error: ?Error, payload?: SpecificOrientations) => void
+    ): void,
     lockToPortrait(): void,
     lockToLandscape(): void,
     lockToLandscapeRight(): void,
     lockToLandscapeLeft(): void,
     unlockAllOrientations(): void,
-    addOrientationListener(handler: HandlerFn<Orientations>): void,
-    removeOrientationListener(handler: HandlerFn<Orientations>): void,
+    addOrientationListener((payload?: Orientations) => void): void,
+    removeOrientationListener((payload?: Orientations) => void): void,
     addSpecificOrientationListener(
-      handler: HandlerFn<SpecificOrientations>
+      (payload?: SpecificOrientations) => void
     ): void,
     removeSpecificOrientationListener(
-      handler: HandlerFn<SpecificOrientations>
+      (payload?: SpecificOrientations) => void
     ): void
   };
 }

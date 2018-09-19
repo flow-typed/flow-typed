@@ -18,14 +18,14 @@ import {
 } from "react-native-orientation";
 
 var initialOrientation = getInitialOrientation();
-(initialOrientation: Orientations | null);
+(initialOrientation: ?Orientations);
 
-getOrientation((error: Error, orientation: Orientations) => {});
-getSpecificOrientation((error: Error, orientation: SpecificOrientations) => {});
-addOrientationListener((orientation: Orientations) => {});
-removeOrientationListener((orientation: Orientations) => {});
-addSpecificOrientationListener((orientation: SpecificOrientations) => {});
-removeSpecificOrientationListener((orientation: SpecificOrientations) => {});
+getOrientation((error: ?Error, orientation: ?Orientations) => {});
+getSpecificOrientation((error: ?Error, orientation: ?SpecificOrientations) => {});
+addOrientationListener((orientation: ?Orientations) => {});
+removeOrientationListener((orientation: ?Orientations) => {});
+addSpecificOrientationListener((orientation: ?SpecificOrientations) => {});
+removeSpecificOrientationListener((orientation: ?SpecificOrientations) => {});
 
 // $ExpectError
 getOrientation();
