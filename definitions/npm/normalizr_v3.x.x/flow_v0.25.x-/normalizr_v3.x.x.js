@@ -66,7 +66,7 @@ declare module 'normalizr' {
     entities: Collections,
   |}
 
-  declare export function normalize<Result, Collections>(raw: Array<mixed> | Object, schema: Schema): NormalizeResult<Result, Collections>;
+  declare export function normalize<Result, Collections>(raw: $ReadOnlyArray<mixed> | Object, schema: Schema): NormalizeResult<Result, Collections>;
   declare export function denormalize(
     input: mixed,
     schema: Schema,
