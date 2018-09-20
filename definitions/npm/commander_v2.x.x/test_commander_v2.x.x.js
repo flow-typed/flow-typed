@@ -38,5 +38,5 @@ const programName: string = program.name();
 
 const opts: { [key: string]: any } = program.opts();
 
-program.outputHelp();
+program.outputHelp((defaultHelp: string) => `output: ${defaultHelp}`);
 program.help();

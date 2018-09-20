@@ -243,7 +243,7 @@ declare module "commander" {
      *
      * @api public
      */
-    outputHelp(): void;
+    outputHelp((defaultHelp: string) => string): void;
 
     /**
      * Output help information and exit.
