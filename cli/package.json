@@ -53,8 +53,7 @@
     "eslint-plugin-prettier": "^2.6.2",
     "flow-bin": "0.64.0",
     "jest": "^22.1.4",
-    "prettier": "^1.14.3",
-    "regenerator-runtime": "^0.11.1"
+    "prettier": "^1.14.3"
   },
   "keywords": [
     "flow",
