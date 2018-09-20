@@ -18,9 +18,9 @@
     "clean": "rimraf dist",
     "flow": "flow",
     "lint": "eslint .; exit 0",
-    "prepublish": "mkdirp dist && npm run test",
-    "test": "npm run clean && npm run build && npm run test-quick",
-    "test-quick": "jest && npm run lint",
+    "prepublish": "mkdirp dist && yarn test",
+    "test": "yarn clean && yarn build && yarn test-quick",
+    "test-quick": "jest && yarn lint",
     "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
   "dependencies": {
