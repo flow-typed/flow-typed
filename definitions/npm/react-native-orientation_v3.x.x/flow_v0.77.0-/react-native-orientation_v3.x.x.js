@@ -1,5 +1,3 @@
-import { Orientations } from "react-native-orientation";
-
 declare module "react-native-orientation" {
   declare export type Orientations =
     | "LANDSCAPE"

@@ -17,31 +17,47 @@ import {
   type SpecificOrientations
 } from "react-native-orientation";
 
-var initialOrientation = getInitialOrientation();
-(initialOrientation: ?Orientations);
+it("must return Orientations type or void", () => {
+  var initialOrientation = getInitialOrientation();
+  (initialOrientation: ?Orientations);
+});
 
-getOrientation((error: ?Error, orientation: ?Orientations) => {});
-getSpecificOrientation((error: ?Error, orientation: ?SpecificOrientations) => {});
-addOrientationListener((orientation: ?Orientations) => {});
-removeOrientationListener((orientation: ?Orientations) => {});
-addSpecificOrientationListener((orientation: ?SpecificOrientations) => {});
-removeSpecificOrientationListener((orientation: ?SpecificOrientations) => {});
+describe("async function", () => {
+  it("must call methods without error when send callback function", () => {
+    getOrientation((error: ?Error, orientation: ?Orientations) => {});
+    getSpecificOrientation(
+      (error: ?Error, orientation: ?SpecificOrientations) => {}
+    );
+    addOrientationListener((orientation: ?Orientations) => {});
+    removeOrientationListener((orientation: ?Orientations) => {});
+    addSpecificOrientationListener((orientation: ?SpecificOrientations) => {});
+    removeSpecificOrientationListener(
+      (orientation: ?SpecificOrientations) => {}
+    );
+  });
 
-// $ExpectError
-getOrientation();
-// $ExpectError
-getSpecificOrientation();
-// $ExpectError
-addOrientationListener();
-// $ExpectError
-removeOrientationListener();
-// $ExpectError
-addSpecificOrientationListener();
-// $ExpectError
-removeSpecificOrientationListener();
+  it("must throw error when call async function without callback fn", () => {
+    // $ExpectError
+    getOrientation();
+    // $ExpectError
+    getSpecificOrientation();
+    // $ExpectError
+    addOrientationListener();
+    // $ExpectError
+    removeOrientationListener();
+    // $ExpectError
+    addSpecificOrientationListener();
+    // $ExpectError
+    removeSpecificOrientationListener();
+  });
+});
 
-lockToPortrait();
-lockToLandscape();
-lockToLandscapeRight();
-lockToLandscapeLeft();
-unlockAllOrientations();
+describe("lock methods", () => {
+  it("must haven't some an error", () => {
+    lockToPortrait();
+    lockToLandscape();
+    lockToLandscapeRight();
+    lockToLandscapeLeft();
+    unlockAllOrientations();
+  });
+});
