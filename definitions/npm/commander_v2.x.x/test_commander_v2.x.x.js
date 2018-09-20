@@ -43,4 +43,6 @@ const programName: string = program.name();
 const opts: { [key: string]: any } = program.opts();
 
 program.outputHelp((defaultHelp: string) => `output: ${defaultHelp}`);
+program.outputHelp();
+program.outputHelp(() => `output`);
 program.help();

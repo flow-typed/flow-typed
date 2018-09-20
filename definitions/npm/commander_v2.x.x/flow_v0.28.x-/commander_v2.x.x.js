@@ -159,8 +159,7 @@ declare module "commander" {
      * @return {Command} for chaining
      * @api public
      */
-    parse(argv: Array<string>): {
-      ...this,
+    parse(argv: Array<string>): this & {
       args: Array<string>,
       rawArgs: Array<string>,
       [string]: any,
@@ -248,7 +247,7 @@ declare module "commander" {
      *
      * @api public
      */
-    outputHelp((defaultHelp: string) => string): void;
+    outputHelp(cb?: ?(defaultHelp: string) => string): void;
 
     /**
      * Output help information and exit.
