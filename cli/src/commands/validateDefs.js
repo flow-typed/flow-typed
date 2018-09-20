@@ -21,7 +21,7 @@ export async function run(args: Args) {
   }
   const defsDirPath = args._[1];
 
-  if (!await fs.exists(defsDirPath)) {
+  if (!(await fs.exists(defsDirPath))) {
     console.error('Error: Path does not exist: %s', defsDirPath);
     return 1;
   }

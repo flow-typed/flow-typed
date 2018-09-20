@@ -89,7 +89,7 @@ export async function ensureCacheRepo(
     (async function() {
       const repoDirExists = fs.exists(getCacheRepoDir());
       const repoGitDirExists = fs.exists(getCacheRepoGitDir());
-      if (!await repoDirExists || !await repoGitDirExists) {
+      if (!(await repoDirExists) || !(await repoGitDirExists)) {
         console.log(`• flow-typed cache not found, fetching from GitHub...`);
         await cloneCacheRepo();
       } else {
