@@ -27,6 +27,7 @@
     "@babel/polyfill": "^7.0.0",
     "@octokit/rest": "^15.2.6",
     "colors": "^1.1.2",
+    "flow-typed": "^2.5.1",
     "fs-extra": "^5.0.0",
     "glob": "^7.1.2",
     "got": "^7.1.0",
@@ -51,7 +52,7 @@
     "eslint": "^5.6.0",
     "eslint-plugin-flowtype": "^2.50.1",
     "eslint-plugin-prettier": "^2.6.2",
-    "flow-bin": "0.64.0",
+    "flow-bin": "^0.81.0",
     "jest": "^22.1.4",
     "prettier": "^1.14.3"
   },

@@ -47,15 +47,15 @@ export const name = 'install';
 export const description = 'Installs libdefs into the ./flow-typed directory';
 export type Args = {
   _: Array<string>,
-  flowVersion?: string,
-  overwrite: boolean,
-  skip: boolean,
-  verbose: boolean,
-  libdefDir?: string,
-  cacheDir?: string,
-  packageDir?: string,
-  ignoreDeps?: Array<string>,
-  rootDir?: string,
+  flowVersion?: mixed, // string
+  overwrite: mixed, // boolean
+  skip: mixed, // boolean
+  verbose: mixed, // boolean
+  libdefDir?: mixed, // string
+  cacheDir?: mixed, // string
+  packageDir?: mixed, // string
+  ignoreDeps?: mixed, // Array<string>
+  rootDir?: mixed, // string
 };
 export function setup(yargs: Yargs) {
   return yargs.usage(`$0 ${name} - ${description}`).options({
@@ -107,12 +107,28 @@ export function setup(yargs: Yargs) {
   });
 }
 export async function run(args: Args) {
-  const cwd = args.rootDir ? path.resolve(args.rootDir) : process.cwd();
-  const packageDir = args.packageDir ? path.resolve(args.packageDir) : cwd;
-  const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
-  const libdefDir = args.libdefDir || 'flow-typed';
+  const cwd =
+    typeof args.rootDir === 'string'
+      ? path.resolve(args.rootDir)
+      : process.cwd();
+  const packageDir =
+    typeof args.packageDir === 'string' ? path.resolve(args.packageDir) : cwd;
+  const flowVersion = await determineFlowVersion(
+    packageDir,
+    String(args.flowVersion),
+  );
+
+  const libdefDir = String(args.libdefDir) || 'flow-typed';
   const explicitLibDefs = args._.slice(1);
-  const ignoreDeps = args.ignoreDeps || [];
+  if (args.ignoreDeps !== undefined && !Array.isArray(args.ignoreDeps)) {
+    throw new Error('ignoreDeps is not array');
+  }
+  const ignoreDeps = (args.ignoreDeps || []).map(dep => {
+    if (typeof dep !== 'string') {
+      throw new Error('ignoreDeps should be array of strings');
+    }
+    return dep;
+  });
 
   const coreLibDefResult = await installCoreLibDefs();
   if (coreLibDefResult !== 0) {
@@ -120,7 +136,7 @@ export async function run(args: Args) {
   }
 
   if (args.cacheDir) {
-    const cacheDir = path.resolve(args.cacheDir);
+    const cacheDir = path.resolve(String(args.flowVersion));
     console.log('• Setting cache dir', cacheDir);
     setCustomCacheDir(cacheDir);
   }
@@ -130,9 +146,9 @@ export async function run(args: Args) {
     flowVersion,
     explicitLibDefs,
     libdefDir: libdefDir,
-    verbose: args.verbose,
-    overwrite: args.overwrite,
-    skip: args.skip,
+    verbose: Boolean(args.verbose),
+    overwrite: Boolean(args.overwrite),
+    skip: Boolean(args.skip),
     ignoreDeps: ignoreDeps,
   });
   if (npmLibDefResult !== 0) {
