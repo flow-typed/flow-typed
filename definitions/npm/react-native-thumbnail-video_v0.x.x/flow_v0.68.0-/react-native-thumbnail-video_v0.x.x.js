@@ -1,26 +1,21 @@
-// @flow
-
-type PreviewTypes = $ReadOnly<{|
-  default: "default",
-  high: "hqdefault",
-  medium: "mqdefault",
-  standard: "sddefault",
-  maximum: "maxresdefault"
-|}>;
-
-type Units = number | string;
-
 declare module "react-native-thumbnail-video" {
-  declare export type TYPES = PreviewTypes;
-  declare export type UnitLength = Units;
+  declare export type PreviewTypes = $ReadOnly<{|
+    default: "default",
+    high: "hqdefault",
+    medium: "mqdefault",
+    standard: "sddefault",
+    maximum: "maxresdefault"
+  |}>;
+
+  declare export type Dimension = number | string;
 
   declare export type ThumbnailProps = $ReadOnly<{
     url: string,
     children?: ?React$Node,
     containerStyle?: ?Object,
     iconStyle?: ?Object,
-    imageHeight?: ?Units,
-    imageWidth?: ?Units,
+    imageHeight?: ?Dimension,
+    imageWidth?: ?Dimension,
     onPress?: ?(event?: any) => void,
     onPressError?: ?(?Error) => void,
     style?: ?Object,
