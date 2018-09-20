@@ -113,12 +113,9 @@ export async function run(args: Args) {
       : process.cwd();
   const packageDir =
     typeof args.packageDir === 'string' ? path.resolve(args.packageDir) : cwd;
-  const flowVersion = await determineFlowVersion(
-    packageDir,
-    String(args.flowVersion),
-  );
-
-  const libdefDir = String(args.libdefDir) || 'flow-typed';
+  const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
+  const libdefDir =
+    typeof args.libdefDir === 'string' ? args.libdefDir : 'flow-typed';
   const explicitLibDefs = args._.slice(1);
   if (args.ignoreDeps !== undefined && !Array.isArray(args.ignoreDeps)) {
     throw new Error('ignoreDeps is not array');
@@ -136,7 +133,7 @@ export async function run(args: Args) {
   }
 
   if (args.cacheDir) {
-    const cacheDir = path.resolve(String(args.flowVersion));
+    const cacheDir = path.resolve(String(args.cacheDir));
     console.log('• Setting cache dir', cacheDir);
     setCustomCacheDir(cacheDir);
   }
@@ -157,8 +154,8 @@ export async function run(args: Args) {
   return 0;
 }
 
-async function determineFlowVersion(cwd: string, flowVersionArg?: string) {
-  if (flowVersionArg != null) {
+async function determineFlowVersion(cwd: string, flowVersionArg?: mixed) {
+  if (flowVersionArg && typeof flowVersionArg === 'string') {
     // Be permissive if the prefix 'v' is left off
     let flowVersionStr =
       flowVersionArg[0] === 'v' ? flowVersionArg : `v${flowVersionArg}`;
