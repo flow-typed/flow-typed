@@ -296,3 +296,10 @@ firebase
   .firestore()
   .collection('/foo')
   .get({ source: 'cache' })
+
+// #30
+firebase
+  .firestore()
+  .getAll(
+    firebase.firestore().doc('col/doc1'), 
+    firebase.firestore().doc('col/doc2'));
