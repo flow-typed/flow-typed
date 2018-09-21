@@ -45,11 +45,11 @@ export function setup(yargs: Object) {
 }
 
 type Args = {
-  overwrite: boolean,
-  maxDepth?: number,
-  libdefDir?: string,
+  overwrite: mixed, // boolean
+  maxDepth?: mixed, // number
+  libdefDir?: mixed, // string
   _: Array<string>,
-  rootDir?: string,
+  rootDir?: mixed, // string
 };
 
 function failWithMessage(message: string) {
@@ -64,7 +64,10 @@ export async function run(args: Args): Promise<number> {
     );
   }
   const packages = args._.slice(1);
-  const cwd = args.rootDir ? path.resolve(args.rootDir) : process.cwd();
+  const cwd =
+    typeof args.rootDir === 'string'
+      ? path.resolve(args.rootDir)
+      : process.cwd();
 
   // Find the project root
   const projectRoot = await findFlowRoot(cwd);
@@ -102,9 +105,9 @@ export async function run(args: Args): Promise<number> {
         projectRoot,
         packageName,
         version,
-        args.overwrite,
-        args.libdefDir,
-        args.maxDepth,
+        Boolean(args.overwrite),
+        String(args.libdefDir),
+        Number(args.maxDepth),
       );
     }),
   );
