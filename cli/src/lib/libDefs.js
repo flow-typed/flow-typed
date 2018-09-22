@@ -13,7 +13,7 @@ import {
   toDirString as flowVerToDirString,
 } from './flowVersion.js';
 import type {FlowVersion} from './flowVersion.js';
-import {ValidationError} from './validationErrors';
+import {ValidationError} from './ValidationError';
 
 const P = Promise;
 

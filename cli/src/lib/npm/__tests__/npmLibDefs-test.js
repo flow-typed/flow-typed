@@ -12,7 +12,7 @@ import {
 } from '../npmLibDefs';
 
 import path from 'path';
-import {ValidationError} from '../../validationErrors';
+import {ValidationError} from '../../ValidationError';
 
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__npmLibDefs-fixtures__');
 

@@ -31,7 +31,7 @@ import semver from 'semver';
 
 import got from 'got';
 
-import {ValidationError} from '../validationErrors';
+import {ValidationError} from '../ValidationError';
 import {TEST_FILE_NAME_RE} from '../libDefs';
 
 const P = Promise;

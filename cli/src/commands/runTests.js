@@ -13,7 +13,7 @@ import * as semver from 'semver';
 import * as unzip from 'unzipper';
 import typeof Yargs from 'yargs';
 import type {FlowVersion} from '../lib/flowVersion.js';
-import {ValidationError} from '../lib/validationErrors';
+import {ValidationError} from '../lib/ValidationError';
 
 export type Args = {
   _: Array<string>,
