@@ -177,7 +177,7 @@ function parsePkgNameVer(pkgNameVer: string) {
   if (pkgNameVerMatches == null) {
     throw new ValidationError(
       `Malformed npm package name! ` +
-        `Expected the name to be formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>`,
+        `Expected the name to be formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH> but instead got ${pkgNameVer}`,
     );
   }
 

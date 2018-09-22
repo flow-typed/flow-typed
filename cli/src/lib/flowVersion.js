@@ -149,7 +149,7 @@ function _parseVersion(
 export function parseDirString(verStr: string): FlowVersion {
   if (verStr.substr(0, 'flow_'.length) !== 'flow_') {
     throw new ValidationError(
-      'Flow versions must start with `flow_`, instead got ' + verStr,
+      'Flow versions must start with `flow_` but instead got ' + verStr,
     );
   }
 

@@ -106,7 +106,7 @@ describe('npmLibDefs', () => {
         extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1'),
       ).rejects.toThrow(
         'Malformed npm package name! Expected the name to be ' +
-          'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>',
+          'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH> but instead got underscore_v1',
       );
     });
 
@@ -121,7 +121,7 @@ describe('npmLibDefs', () => {
       await expect(
         extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1.x.x'),
       ).rejects.toThrow(
-        'Flow versions must start with `flow_`, instead got asdfdir',
+        'Flow versions must start with `flow_` but instead got asdfdir',
       );
     });
 
@@ -429,7 +429,7 @@ describe('npmLibDefs', () => {
     it('errors on wildcard major', () => {
       expect(() => parsePkgNameVer('lib_vx.x.x')).toThrow(
         'Malformed npm package name! Expected the name to be ' +
-          'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>',
+          'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH> but instead got lib_vx.x.x',
       );
     });
   });
