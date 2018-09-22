@@ -18,10 +18,7 @@ import {
   filterLibDefs,
   updateCacheRepo,
 } from '../libDefs.js';
-import {
-  parseDirString as parseFlowDirString,
-  toSemverString,
-} from '../flowVersion';
+import {parseDirString as parseFlowDirString} from '../flowVersion';
 import {cloneInto, rebaseRepoMaster} from '../git.js';
 
 /**
@@ -117,10 +114,6 @@ describe('libDefs', () => {
 
   describe('filterLibDefs', () => {
     function _generateMockLibdef(name, verStr, flowVerStr) {
-      const flowVersion = parseFlowDirString(
-        flowVerStr,
-        `${name}_${verStr}/${flowVerStr}`,
-      );
       return {
         pkgName: name,
         pkgVersionStr: verStr,
@@ -128,7 +121,7 @@ describe('libDefs', () => {
           flowVerStr,
           `${name}_${verStr}/${flowVerStr}`,
         ),
-        flowVersionStr: toSemverString(flowVersion),
+        flowVersionStr: flowVerStr,
         path: '',
         testFilePaths: [],
       };

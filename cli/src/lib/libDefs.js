@@ -546,7 +546,10 @@ export function filterLibDefs(
                 semver.satisfies(filterFlowVerStr, upperSpecificSemver)
               );
             } else {
-              return semver.satisfies(filterFlowVerStr, def.flowVersionStr);
+              return semver.satisfies(
+                filterFlowVerStr,
+                flowVerToSemver(def.flowVersion),
+              );
             }
 
           default:
