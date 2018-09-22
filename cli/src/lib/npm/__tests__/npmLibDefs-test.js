@@ -12,6 +12,7 @@ import {
 } from '../npmLibDefs';
 
 import path from 'path';
+import {ValidationError} from '../../validationErrors';
 
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__npmLibDefs-fixtures__');
 
@@ -356,9 +357,11 @@ describe('npmLibDefs', () => {
         'definitions',
       );
 
-      await expect(getNpmLibDefs(FIXTURE_DIR)).rejects.toThrow(
-        `Expected only directories to be present in this directory.`,
-      );
+      await expect(getNpmLibDefs(FIXTURE_DIR)).rejects.toEqual([
+        new ValidationError(
+          `Expected only directories to be present in this directory.`,
+        ),
+      ]);
     });
   });
 

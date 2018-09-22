@@ -31,7 +31,6 @@ import semver from 'semver';
 
 import got from 'got';
 
-import type {ValidationErrors as VErrors} from '../validationErrors';
 import {ValidationError} from '../validationErrors';
 import {TEST_FILE_NAME_RE} from '../libDefs';
 
@@ -134,7 +133,7 @@ async function extractLibDefsFromNpmPkgDir(
           }
 
           throw new ValidationError(
-            `Unexpected file. This directory can only contain test files ` +
+            `Unexpected file: ${libDefFileName}. This directory can only contain test files ` +
               `or a libdef file named ${'`' + libDefFileName + '`'}.`,
           );
         } else {
@@ -421,64 +420,78 @@ export async function getInstalledNpmLibDefs(
 }
 
 /**
+ * Retrieve single libdef.
+ */
+async function getItem(
+  itemName: string,
+  npmDefsDirPath: string,
+  validating?: boolean,
+): Promise<Array<NpmLibDef>> {
+  const itemPath = path.join(npmDefsDirPath, itemName);
+  const itemStat = await fs.stat(itemPath);
+  if (itemStat.isDirectory()) {
+    if (itemName[0] === '@') {
+      // This must be a scoped npm package, so go one directory deeper
+      const scope = itemName;
+      const scopeDirItems = await fs.readdir(itemPath);
+      const settled = await P.all(
+        scopeDirItems.map(async itemName => {
+          const itemPath = path.join(npmDefsDirPath, scope, itemName);
+          const itemStat = await fs.stat(itemPath);
+          if (itemStat.isDirectory()) {
+            return await extractLibDefsFromNpmPkgDir(
+              itemPath,
+              scope,
+              itemName,
+              validating,
+            );
+          } else {
+            throw new ValidationError(
+              `Expected only sub-directories in this dir!`,
+            );
+          }
+        }),
+      );
+      return [].concat(...settled);
+    } else {
+      // itemPath must be a package dir
+      return await extractLibDefsFromNpmPkgDir(
+        itemPath,
+        null, // No scope
+        itemName,
+        validating,
+      );
+    }
+  } else {
+    throw new ValidationError(
+      `Expected only directories to be present in this directory.`,
+    );
+  }
+}
+
+/**
  * Retrieve a list of *all* npm libdefs.
  */
 export async function getNpmLibDefs(
   defsDirPath: string,
-  validationErrors?: VErrors,
   validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
-  const npmLibDefs: Array<NpmLibDef> = [];
-
   const npmDefsDirPath = path.join(defsDirPath, 'npm');
   const dirItems = await fs.readdir(npmDefsDirPath);
-  await P.all(
-    dirItems.map(async itemName => {
-      const itemPath = path.join(npmDefsDirPath, itemName);
-      const itemStat = await fs.stat(itemPath);
-      if (itemStat.isDirectory()) {
-        if (itemName[0] === '@') {
-          // This must be a scoped npm package, so go one directory deeper
-          const scope = itemName;
-          const scopeDirItems = await fs.readdir(itemPath);
-          await P.all(
-            scopeDirItems.map(async itemName => {
-              const itemPath = path.join(npmDefsDirPath, scope, itemName);
-              const itemStat = await fs.stat(itemPath);
-              if (itemStat.isDirectory()) {
-                const libDefs = await extractLibDefsFromNpmPkgDir(
-                  itemPath,
-                  scope,
-                  itemName,
-                  validating,
-                );
-                libDefs.forEach(libDef => npmLibDefs.push(libDef));
-              } else {
-                throw new ValidationError(
-                  `Expected only sub-directories in this dir!`,
-                );
-              }
-            }),
-          );
-        } else {
-          // itemPath must be a package dir
-          const libDefs = await extractLibDefsFromNpmPkgDir(
-            itemPath,
-            null, // No scope
-            itemName,
-            validating,
-          );
-          libDefs.forEach(libDef => npmLibDefs.push(libDef));
-        }
-      } else {
-        throw new ValidationError(
-          `Expected only directories to be present in this directory.`,
-        );
-      }
-    }),
-  );
+  const errors = [];
+  const proms = dirItems.map(async itemName => {
+    try {
+      return await getItem(itemName, npmDefsDirPath, validating);
+    } catch (e) {
+      errors.push(e);
+    }
+  });
 
-  return npmLibDefs;
+  const settled = await P.all(proms);
+  if (errors.length) {
+    throw errors;
+  }
+  return [].concat(...settled).filter(Boolean);
 }
 
 export async function getNpmLibDefVersionHash(
