@@ -192,7 +192,7 @@ export async function getLibDefs(defsDir: string) {
         }
       } else {
         const error = `Expected only directories in the 'definitions/npm' directory!`;
-        throw new Error(error);
+        throw new ValidationError(error);
       }
     }),
   );
