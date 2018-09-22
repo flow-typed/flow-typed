@@ -64,14 +64,14 @@ describe('flowVersion', () => {
 
     it('errors on `x` major version', () => {
       expect(() => parseVersion('vx.1.2', 'testContext', false)).toThrow(
-        'testContext: The major version of a Flow version string cannot be ' +
+        'The major version of a Flow version string cannot be ' +
           '`x`, it must be a number!',
       );
     });
 
     it('errors on missing minor version', () => {
       expect(() => parseVersion('v1', 'testContext', false)).toThrow(
-        'testContext: Flow versions must be a non-range semver with an exact ' +
+        'Flow versions must be a non-range semver with an exact ' +
           'major version and either an exact minor version or an `x` minor ver.',
       );
     });
