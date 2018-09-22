@@ -72,7 +72,7 @@ describe('flowVersion', () => {
     it('errors on missing minor version', () => {
       expect(() => parseVersion('v1', 'testContext', false)).toThrow(
         'Flow versions must be a non-range semver with an exact ' +
-          'major version and either an exact minor version or an `x` minor ver.',
+          'major version and either an exact minor version or an `x` minor ver. Instead got: v1',
       );
     });
 

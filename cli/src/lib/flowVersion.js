@@ -69,8 +69,9 @@ function _parseVersion(
       );
     } else {
       throw new ValidationError(
-        'Flow versions must be a non-range semver with an exact major ' +
-          'version and either an exact minor version or an `x` minor ver.',
+        'Flow versions must be a non-range semver with an exact major version ' +
+          'and either an exact minor version or an `x` minor ver. Instead got: ' +
+          verStr,
       );
     }
   } else {
