@@ -13,6 +13,7 @@ import {
   toDirString as flowVerToDirString,
 } from './flowVersion.js';
 import type {FlowVersion} from './flowVersion.js';
+import {ValidationError} from './validationErrors';
 
 const P = Promise;
 
@@ -182,7 +183,7 @@ export async function getLibDefs(defsDir: string) {
                 await addLibDefs(itemPath, libDefs);
               } else {
                 const error = `Expected only directories in the 'definitions/npm/@<scope>' directory!`;
-                throw new Error(error);
+                throw new ValidationError(error);
               }
             }),
           );
@@ -235,16 +236,16 @@ async function parseLibDefsFromPkgDir(
     } else if (pkgDirItemStat.isDirectory()) {
       flowDirs.push([pkgDirItemPath, parsePkgFlowDirVersion(pkgDirItemPath)]);
     } else {
-      throw new Error('Unexpected directory item');
+      throw new ValidationError('Unexpected directory item: ' + pkgDirItemPath);
     }
   });
 
   if (!disjointVersionsAll(flowDirs.map(([_, ver]) => ver))) {
-    throw new Error('Flow versions not disjoint!');
+    throw new ValidationError('Flow versions not disjoint!');
   }
 
   if (flowDirs.length === 0) {
-    throw new Error('No libdef files found!');
+    throw new ValidationError('No libdef files found!');
   }
 
   const libDefs = [];
@@ -280,8 +281,8 @@ async function parseLibDefsFromPkgDir(
             testFilePaths.push(flowDirItemPath);
           }
         } else {
-          const error = 'Unexpected directory item';
-          throw new Error(error);
+          const error = 'Unexpected directory item: ' + flowDirItemPath;
+          throw new ValidationError(error);
         }
       });
 
@@ -289,7 +290,7 @@ async function parseLibDefsFromPkgDir(
         libDefFilePath = path.join(flowDirPath, libDefFileName);
         if (pkgName !== 'ERROR') {
           const error = 'No libdef file found!';
-          throw new Error(error);
+          throw new ValidationError(error);
         }
         return;
       }
@@ -319,7 +320,7 @@ export function parseRepoDirItem(dirItemPath: string) {
     const error =
       `'${dirItem}' is a malformed definitions/npm/ directory name! ` +
       `Expected the name to be formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>`;
-    throw new Error(error);
+    throw new ValidationError(error);
   }
 
   let [_, pkgName, major, minor, patch, prerel] = itemMatches;
@@ -357,7 +358,7 @@ function validateVersionNumPart(part, partName, context) {
   const num = parseInt(part, 10);
   if (String(num) !== part) {
     const error = `'${context}': Invalid ${partName} number: '${part}'. Expected a number.`;
-    throw new Error(error);
+    throw new ValidationError(error);
   }
   return num;
 }

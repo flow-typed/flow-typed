@@ -1,5 +1,7 @@
 // @flow
 
+import {ValidationError} from './validationErrors';
+
 export type FlowSpecificVer = {|
   major: number,
   minor: number | 'x',
@@ -23,7 +25,7 @@ function _parseVerNum(
 ): number {
   const num = parseInt(numStr, 10);
   if (String(num) !== numStr) {
-    throw new Error(
+    throw new ValidationError(
       `'${context}': Invalid ${verName} number: '${numStr}'. Expected a number.`,
     );
   }
@@ -52,7 +54,7 @@ function _parseVersion(
   expectPossibleRangeUpper: boolean,
 ): [number, FlowSpecificVer] {
   if (verStr[0] !== 'v') {
-    throw new Error('Flow version ranges must start with a `v`!');
+    throw new ValidationError('Flow version ranges must start with a `v`!');
   }
 
   const verParts = verStr
@@ -61,12 +63,12 @@ function _parseVersion(
   let majorStr, minorStr, patchStr;
   if (verParts == null) {
     if (verStr[1] === 'x') {
-      throw new Error(
+      throw new ValidationError(
         'The major version of a Flow version string cannot be `x`, it must ' +
           'be a number!',
       );
     } else {
-      throw new Error(
+      throw new ValidationError(
         'Flow versions must be a non-range semver with an exact major ' +
           'version and either an exact minor version or an `x` minor ver.',
       );
@@ -146,7 +148,7 @@ function _parseVersion(
 
 export function parseDirString(verStr: string, context: string): FlowVersion {
   if (verStr.substr(0, 'flow_'.length) !== 'flow_') {
-    throw new Error(
+    throw new ValidationError(
       'Flow versions must start with `flow_`, instead got ' + verStr,
     );
   }
@@ -179,7 +181,7 @@ export function parseDirString(verStr: string, context: string): FlowVersion {
         upper: upperVer,
       };
     } else {
-      throw new Error(
+      throw new ValidationError(
         `Unexpected trailing characters: ${afterPrefix.substr(offset)}`,
       );
     }
@@ -196,7 +198,7 @@ export function parseFlowSpecificVer(
       return flowVer.ver;
     case 'all':
     case 'ranged':
-      throw new Error(`This is not a specific Flow version.`);
+      throw new ValidationError(`This is not a specific Flow version.`);
     default:
       (flowVer: empty);
   }

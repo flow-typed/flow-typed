@@ -32,6 +32,7 @@ import semver from 'semver';
 import got from 'got';
 
 import type {ValidationErrors as VErrors} from '../validationErrors';
+import {ValidationError} from '../validationErrors';
 import {TEST_FILE_NAME_RE} from '../libDefs';
 
 const P = Promise;
@@ -75,7 +76,7 @@ async function extractLibDefsFromNpmPkgDir(
       .catch(error => {
         // Only fail spen on 404, not on timeout
         if (error.statusCode === 404) {
-          throw new Error(`Package does not exist on npm!`);
+          throw new ValidationError(`Package does not exist on npm!`);
         }
       });
   }
@@ -96,16 +97,16 @@ async function extractLibDefsFromNpmPkgDir(
       );
       parsedFlowDirs.push([pkgDirItemPath, parsedFlowDir]);
     } else {
-      throw new Error('Unexpected directory item');
+      throw new ValidationError('Unexpected directory item');
     }
   });
 
   if (!disjointFlowVersionsAll(parsedFlowDirs.map(([_, ver]) => ver))) {
-    throw new Error('Flow versions not disjoint!');
+    throw new ValidationError('Flow versions not disjoint!');
   }
 
   if (parsedFlowDirs.length === 0) {
-    throw new Error('No libdef files found!');
+    throw new ValidationError('No libdef files found!');
   }
 
   const libDefs = [];
@@ -135,12 +136,12 @@ async function extractLibDefsFromNpmPkgDir(
             return;
           }
 
-          throw new Error(
+          throw new ValidationError(
             `Unexpected file. This directory can only contain test files ` +
               `or a libdef file named ${'`' + libDefFileName + '`'}.`,
           );
         } else {
-          throw new Error(
+          throw new ValidationError(
             `Unexpected sub-directory. This directory can only contain test ` +
               `files or a libdef file named ${'`' + libDefFileName + '`'}.`,
           );
@@ -149,7 +150,7 @@ async function extractLibDefsFromNpmPkgDir(
 
       if (libDefFilePath === null) {
         libDefFilePath = path.join(flowDirPath, libDefFileName);
-        throw new Error(
+        throw new ValidationError(
           `No libdef file found. Looking for a file named ${libDefFileName}`,
         );
       }
@@ -178,7 +179,7 @@ const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
 function parsePkgNameVer(pkgNameVer: string) {
   const pkgNameVerMatches = pkgNameVer.match(PKG_NAMEVER_RE);
   if (pkgNameVerMatches == null) {
-    throw new Error(
+    throw new ValidationError(
       `Malformed npm package name! ` +
         `Expected the name to be formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>`,
     );
@@ -214,7 +215,7 @@ function validateVersionPart(part: string, partName: string): number | 'x' {
 function validateVersionNumPart(part: string, partName: string): number {
   const num = parseInt(part, 10);
   if (String(num) !== part) {
-    throw new Error(
+    throw new ValidationError(
       `Invalid ${partName} number: '${part}'. Expected a number.`,
     );
   }
@@ -457,7 +458,9 @@ export async function getNpmLibDefs(
                 );
                 libDefs.forEach(libDef => npmLibDefs.push(libDef));
               } else {
-                throw new Error(`Expected only sub-directories in this dir!`);
+                throw new ValidationError(
+                  `Expected only sub-directories in this dir!`,
+                );
               }
             }),
           );
@@ -472,7 +475,7 @@ export async function getNpmLibDefs(
           libDefs.forEach(libDef => npmLibDefs.push(libDef));
         }
       } else {
-        throw new Error(
+        throw new ValidationError(
           `Expected only directories to be present in this directory.`,
         );
       }
