@@ -509,6 +509,20 @@ class UpdateHeroMutationComp extends Mutation<
 > {}
 
 describe("<Mutation />", () => {
+  it("mutate() args are optional", () => {
+    type Vars = {| foo: string |};
+    type Res = {| res: string |};
+    const vars: Vars = { foo: "bar" };
+    const q = (
+      <Mutation variables={vars} mutation={HERO_QUERY}>
+        {mutate => {
+          mutate();
+        }}
+      </Mutation>
+    );
+  });
+
+
   it("works", () => {
     type Vars = {| foo: string |};
     type Res = {| res: string |};
