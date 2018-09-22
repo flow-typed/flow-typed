@@ -459,7 +459,6 @@ async function runTestGroup(
   testGroup: TestGroup,
   orderedFlowVersions: Array<string>,
 ): Promise<Array<string>> {
-  const errors = [];
   // Some older versions of Flow choke on ">"/"<"/"="
   const testDirName = testGroup.id
     .replace(/\//g, '--')
@@ -524,7 +523,6 @@ async function runTestGroup(
       testDirPath,
     );
 
-    errors.push(...flowErrors);
     const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
       repoDirPath,
       orderedFlowVersions,
@@ -540,7 +538,7 @@ async function runTestGroup(
         Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
     }
 
-    return errors;
+    return flowErrors;
   } finally {
     if (await fs.exists(testDirPath)) {
       await recursiveRmdir(testDirPath);
