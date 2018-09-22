@@ -50,7 +50,6 @@ function _parseVerNumOrX(
 
 function _parseVersion(
   verStr: string,
-  context: string,
   expectPossibleRangeUpper: boolean,
 ): [number, FlowSpecificVer] {
   if (verStr[0] !== 'v') {
@@ -104,7 +103,7 @@ function _parseVersion(
       // This is excitingly inefficient but because it operates on tiny inputs
       // (and only sometimes) it shouldn't be an issue in practice.
       try {
-        _parseVersion(verAfterParts.substr(1), context, false);
+        _parseVersion(verAfterParts.substr(1), false);
         return [verParts[0].length + 1, {major, minor, patch, prerel: null}];
       } catch (e) {
         // It's possible that a prerel *and* a range co-exist!
@@ -113,7 +112,7 @@ function _parseVersion(
         let prerel = prerelParts.shift(); // 'prerel'
         while (prerelParts.length > 0) {
           try {
-            _parseVersion(prerelParts.join('-'), context, false);
+            _parseVersion(prerelParts.join('-'), false);
             break;
           } catch (e) {
             prerel += '-' + prerelParts.shift();
@@ -147,7 +146,7 @@ function _parseVersion(
   }
 }
 
-export function parseDirString(verStr: string, context: string): FlowVersion {
+export function parseDirString(verStr: string): FlowVersion {
   if (verStr.substr(0, 'flow_'.length) !== 'flow_') {
     throw new ValidationError(
       'Flow versions must start with `flow_`, instead got ' + verStr,
@@ -162,10 +161,10 @@ export function parseDirString(verStr: string, context: string): FlowVersion {
     return {
       kind: 'ranged',
       lower: null,
-      upper: _parseVersion(verStr.substr('flow_-'.length), context, false)[1],
+      upper: _parseVersion(verStr.substr('flow_-'.length), false)[1],
     };
   } else {
-    const [offset, lowerVer] = _parseVersion(afterPrefix, context, true);
+    const [offset, lowerVer] = _parseVersion(afterPrefix, true);
     if (offset === afterPrefix.length) {
       return {
         kind: 'specific',
@@ -175,7 +174,7 @@ export function parseDirString(verStr: string, context: string): FlowVersion {
       const upperVer =
         offset + 1 === afterPrefix.length
           ? null
-          : _parseVersion(afterPrefix.substr(offset + 1), context, false)[1];
+          : _parseVersion(afterPrefix.substr(offset + 1), false)[1];
       return {
         kind: 'ranged',
         lower: lowerVer,
@@ -189,11 +188,8 @@ export function parseDirString(verStr: string, context: string): FlowVersion {
   }
 }
 
-export function parseFlowSpecificVer(
-  verStr: string,
-  context: string,
-): FlowSpecificVer {
-  const flowVer = parseDirString(`flow_${verStr}`, context);
+export function parseFlowSpecificVer(verStr: string): FlowSpecificVer {
+  const flowVer = parseDirString(`flow_${verStr}`);
   switch (flowVer.kind) {
     case 'specific':
       return flowVer.ver;

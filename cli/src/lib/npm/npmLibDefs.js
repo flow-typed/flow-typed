@@ -91,10 +91,7 @@ async function extractLibDefsFromNpmPkgDir(
       const isValidTestFile = TEST_FILE_NAME_RE.test(pkgDirItem);
       if (isValidTestFile) commonTestFiles.push(pkgDirItemPath);
     } else if (pkgDirItemStat.isDirectory()) {
-      const parsedFlowDir = parseFlowDirString(
-        pkgDirItem,
-        `${pkgNameVer}/${pkgDirItem}`,
-      );
+      const parsedFlowDir = parseFlowDirString(pkgDirItem);
       parsedFlowDirs.push([pkgDirItemPath, parsedFlowDir]);
     } else {
       throw new ValidationError('Unexpected directory item');
@@ -399,11 +396,10 @@ export async function getInstalledNpmLibDefs(
                   ? flowVerMatches[2]
                   : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
             const flowDirStr = `flow_${flowVerStr}`;
-            const context = `${nameVer}/${flowDirStr}`;
             const flowVer =
               flowVerMatches == null
-                ? parseFlowDirString(flowDirStr, context)
-                : parseFlowDirString(flowDirStr, context);
+                ? parseFlowDirString(flowDirStr)
+                : parseFlowDirString(flowDirStr);
 
             installedLibDefs.set(terseFilePath, {
               kind: 'LibDef',
