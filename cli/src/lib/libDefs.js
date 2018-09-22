@@ -2,7 +2,7 @@
 
 import semver from 'semver';
 
-import {cloneInto, findLatestFileCommitHash, rebaseRepoMaster} from './git.js';
+import {cloneInto, rebaseRepoMaster} from './git.js';
 import {mkdirp} from './fileUtils.js';
 import {fs, path, os} from './node.js';
 import {versionToString} from './semver.js';
@@ -30,7 +30,6 @@ export const TEST_FILE_NAME_RE = /^test_.*\.js$/;
 
 const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
-const GIT_REPO_DIR = path.join(__dirname, '..', '..', '..');
 
 const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
 const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
@@ -410,46 +409,6 @@ function writeVerbose(stream, msg, writeNewline = true) {
   }
 }
 
-const NAMESPACE_DIR_EXCEPTIONS = [
-  '.cli-metadata.json',
-  'node_modules',
-  'package.json',
-  '.eslintrc',
-];
-async function getLibDefNamespaces(defsDirPath: string) {
-  const namespaces: Array<string> = [];
-  const defsDirItems = await fs.readdir(defsDirPath);
-  await P.all(
-    defsDirItems.map(async item => {
-      if (NAMESPACE_DIR_EXCEPTIONS.indexOf(item) !== -1) {
-        return;
-      }
-      namespaces.push(item);
-    }),
-  );
-  return namespaces;
-}
-
-/**
- * Get a list of LibDefs from the local repo.
- *
- * Note that this is mainly only useful while working on the flow-typed repo
- * itself. It is useless when running the npm-install CLI.
- */
-const GIT_REPO_DEFS_DIR = path.join(GIT_REPO_DIR, 'definitions');
-export async function getLocalLibDefs() {
-  await verifyCLIVersion(path.join(GIT_REPO_DIR, 'definitions'));
-  const namespaces = await getLibDefNamespaces(GIT_REPO_DEFS_DIR);
-  let libDefs: Array<LibDef> = [];
-  await P.all(
-    namespaces.map(async ns => {
-      const nsLibdefs = await getLibDefs(path.join(GIT_REPO_DEFS_DIR, ns));
-      libDefs = libDefs.concat(nsLibdefs);
-    }),
-  );
-  return libDefs;
-}
-
 /**
  * Get a list of LibDefs from the flow-typed cache repo checkout.
  *
@@ -463,20 +422,6 @@ export async function getCacheLibDefs(
   await ensureCacheRepo(verbose);
   await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
   return getLibDefs(CACHE_REPO_DEFS_DIR);
-}
-
-export async function getCacheLibDefVersion(libDef: LibDef) {
-  await ensureCacheRepo();
-  await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
-  const latestCommitHash = await findLatestFileCommitHash(
-    CACHE_REPO_DIR,
-    path.relative(CACHE_REPO_DIR, libDef.path),
-  );
-  return (
-    `${latestCommitHash.substr(0, 10)}/` +
-    `${libDef.pkgName}_${libDef.pkgVersionStr}/` +
-    `flow_${libDef.flowVersionStr}`
-  );
 }
 
 function packageNameMatch(a: string, b: string): boolean {
