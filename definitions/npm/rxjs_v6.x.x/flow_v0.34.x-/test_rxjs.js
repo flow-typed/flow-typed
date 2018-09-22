@@ -6,6 +6,7 @@ import {
   concat,
   of,
   from,
+  defer,
   timer,
   interval,
   never,
@@ -13,6 +14,7 @@ import {
   range,
   merge,
   fromEvent,
+  combineLatest,
   AnonymousSubject,
   Observer,
   Scheduler,
@@ -20,6 +22,7 @@ import {
   Subscriber
 } from "rxjs";
 import {
+  map,
   distinct,
   startWith,
   repeat,
@@ -34,6 +37,9 @@ import {
   exhaustMap,
   bufferWhen,
   bufferToggle,
+  withLatestFrom,
+  zip as zipOp,
+  combineLatest as combineLatestOp,
 } from 'rxjs/operators'
 
 const numbers = of(1);
@@ -169,3 +175,76 @@ var buffered = clicks.pipe(bufferWhen(() =>
 // $ExpectError
 click.pipe(bufferWhen(() => true));
 buffered.subscribe(x => console.log(x));
+
+(defer(() => Promise.resolve(1)): rxjs$Observable<number>);
+(defer(() => of(1)): rxjs$Observable<number>);
+(defer(() => null): rxjs$Observable<empty>);
+
+(of(1).pipe(
+  map(x => (x: number).toString(10)),
+  map(x => (x: string) === '1'),
+  map(x => ({ v: (x: boolean) })),
+  map(x => (x: { v: boolean }))
+): rxjs$Observable<{ v: boolean }>);
+
+(of(true).pipe(map((x, i) => (i: number))): rxjs$Observable<number>);
+
+of(true).pipe(map(function(x){
+  (x: boolean);
+  return this.v;
+}, { v: 123 }));
+
+(of(1).pipe(withLatestFrom(of('a'), of(true))): rxjs$Observable<[number, string, boolean]>);
+(of(1).pipe(withLatestFrom(of('a'), of(true), (a, b, c) => ({ a, b, c }))): rxjs$Observable<{ a: number, b: string, c: boolean }>);
+of(1).pipe(
+  withLatestFrom(
+    of('a'),
+    of(true),
+    of(1),
+    of('a'),
+    of(true),
+    of(1),
+    of('a'),
+    of(true)
+  ),
+  map(x => (x: Array<any>))
+);
+of(1).pipe(
+  withLatestFrom(
+    of('a'),
+    of(true),
+    of(1),
+    of('a'),
+    of(true),
+    of(1),
+    of('a'),
+    of(true),
+    (...values) => values.length
+  ),
+  map(x => (x: number))
+);
+
+(of(1).pipe(zipOp(of('a'), of(true))): rxjs$Observable<[number, string, boolean]>);
+(of(1).pipe(zipOp(of('a'), of(true), (a, b, c) => ({ a, b, c }))): rxjs$Observable<{ a: number, b: string, c: boolean }>);
+
+(of(1).pipe(combineLatestOp(of('a'), of(true))): rxjs$Observable<[number, string, boolean]>);
+(of(1).pipe(combineLatestOp(of('a'), of(true), (a, b, c) => ({ a, b, c }))): rxjs$Observable<{ a: number, b: string, c: boolean }>);
+
+// must accept unlimited argument
+declare function identity<T>(x: T): T;
+of(1).pipe(
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+  identity,
+);
+
+(combineLatest(of(1), of(2), of(3)): rxjs$Observable<[number, number, number]>);
+(combineLatest(of(1), of(2), of(3), (a, b, c) => ({ a, b, c })): rxjs$Observable<{ a: number, b: number, c: number }>);
