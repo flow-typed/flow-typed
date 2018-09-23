@@ -24,11 +24,14 @@ declare module "react-native-video" {
     bufferForPlaybackAfterRebufferMs?: ?number
   |};
 
-  declare export type Event<T: {}> = { +target: number } & T;
+  declare export type Event<T: {}> = $ReadOnly<{|
+    target: number,
+    ...$Exact<T>
+  |}>;
 
   declare export type LoadEvent = Event<
     $ReadOnly<{
-      audioTracks: Array<TrackDescriptor>,
+      audioTracks: $ReadOnlyArray<TrackDescriptor>,
       canPlayFastForward: boolean,
       canPlayReverse: boolean,
       canPlaySlowForward: boolean,
@@ -42,14 +45,14 @@ declare module "react-native-video" {
         orientation: string,
         width: number
       |}>,
-      textTracks: Array<TrackDescriptor>
+      textTracks: $ReadOnlyArray<TrackDescriptor>
     }>
   >;
 
   declare export type ProgressEvent = Event<{|
-    currentTime: number,
-    playableDuration: number,
-    seekableDuration: number
+    +currentTime: number,
+    +playableDuration: number,
+    +seekableDuration: number
   |}>;
 
   declare export type AudioFocusChangedEvent = Event<{
@@ -58,36 +61,18 @@ declare module "react-native-video" {
 
   declare export type BufferEvent = Event<{ +isBuffering: boolean }>;
 
-  declare export type LoadStartEvent = Event<{|
-    isNetwork: boolean,
-    type: string,
-    uri: string
-  |}>;
+  declare export type LoadStartEvent = Event<{
+    +isNetwork: boolean,
+    +type: string,
+    +uri: string
+  }>;
 
-  declare export type TimedMetadataEvent = Event<{|
-    metadata: Array<{| value: string, identifier: string |}>
-  |}>;
+  declare export type TimedMetadata = {| +value: string, +identifier: string |};
+  declare export type TimedMetadataEvent = Event<{
+    +metadata: $ReadOnlyArray<TimedMetadata>
+  }>;
 
   declare export type VideoProps = $ReadOnly<{
-    /* Native only */
-    src?: ?Object,
-    seek?: ?(number | Object),
-    fullscreen?: ?boolean,
-    onVideoLoadStart?: ?Function,
-    onVideoLoad?: ?Function,
-    onVideoBuffer?: ?Function,
-    onVideoError?: ?Function,
-    onVideoProgress?: ?Function,
-    onVideoSeek?: ?Function,
-    onVideoEnd?: ?Function,
-    onTimedMetadata?: ?(?TimedMetadataEvent) => void,
-    onVideoAudioBecomingNoisy?: ?Function,
-    onVideoFullscreenPlayerWillPresent?: ?Function,
-    onVideoFullscreenPlayerDidPresent?: ?Function,
-    onVideoFullscreenPlayerWillDismiss?: ?Function,
-    onVideoFullscreenPlayerDidDismiss?: ?Function,
-
-    /* Wrapper component */
     source: number | {| uri: string |},
     // https://github.com/react-native-community/react-native-video/blob/master/VideoResizeMode.js#L4-L6
     resizeMode?: ?("contain" | "cover" | "stretch"),
@@ -96,8 +81,8 @@ declare module "react-native-video" {
     posterResizeMode?: ?("cover" | "contain" | "stretch" | "repeat" | "center"),
     repeat?: ?boolean,
     allowsExternalPlayback?: ?boolean,
-    selectedAudioTrack?: ?SelectedTrackDescriptor,
-    selectedTextTrack?: ?SelectedTrackDescriptor,
+    selectedAudioTrack?: SelectedTrackDescriptor,
+    selectedTextTrack?: SelectedTrackDescriptor,
     textTracks?: Array<TrackDescriptor>,
     paused?: ?boolean,
     muted?: ?boolean,
@@ -114,11 +99,11 @@ declare module "react-native-video" {
     currentTime?: ?number,
     progressUpdateInterval?: ?number,
     useTextureView?: ?boolean,
-    onLoadStart?: ?(?LoadStartEvent) => void,
-    onLoad?: ?(?LoadEvent) => void,
-    onBuffer?: ?(?BufferEvent) => void,
+    onLoadStart?: ?(LoadStartEvent) => void,
+    onLoad?: ?(LoadEvent) => void,
+    onBuffer?: ?(BufferEvent) => void,
     onError?: ?Function,
-    onProgress?: ?(?ProgressEvent) => void,
+    onProgress?: ?(ProgressEvent) => void,
     onSeek?: ?Function,
     onEnd?: ?Function,
     onFullscreenPlayerWillPresent?: ?Function,
@@ -129,8 +114,9 @@ declare module "react-native-video" {
     onPlaybackStalled?: ?Function,
     onPlaybackResume?: ?Function,
     onPlaybackRateChange?: ?Function,
-    onAudioFocusChanged?: ?(?AudioFocusChangedEvent) => void,
+    onAudioFocusChanged?: ?(AudioFocusChangedEvent) => void,
     onAudioBecomingNoisy?: ?Function,
+    onTimedMetadata?: ?(TimedMetadataEvent) => void,
 
     /* Required by react-native */
     scaleX?: ?number,
