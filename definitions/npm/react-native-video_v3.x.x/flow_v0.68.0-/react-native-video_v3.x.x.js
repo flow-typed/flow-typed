@@ -1,9 +1,16 @@
 declare module "react-native-video" {
   // https://github.com/react-native-community/react-native-video/blob/master/TextTrackType.js#L3-L6
-  declare export type TrackType =
-    | "application/x-subrip"
-    | "application/ttml+xml"
-    | "text/vtt";
+
+  // iOS only supports VTT, Android ExoPlayer supports all 3
+  declare export type TextTrackTypes = {
+    SRT: "application/x-subrip",
+    TTML: "application/ttml+xml",
+    VTT: "text/vtt"
+  };
+
+  declare export var TextTrackType: TextTrackTypes;
+
+  declare export type TrackType = $Values<TextTrackTypes>;
 
   declare export type TrackDescriptor = {|
     title?: ?string,
@@ -12,10 +19,28 @@ declare module "react-native-video" {
     language: string
   |};
 
-  declare export type SelectedTrackDescriptor = {|
-    type: string,
-    value?: ?(string | number)
-  |};
+  // https://github.com/react-native-community/react-native-video#selectedaudiotrack
+  declare export type SelectedTrackDescriptor =
+    | {|
+        type: "system",
+        value?: any
+      |}
+    | {|
+        type: "disabled",
+        value?: any
+      |}
+    | {|
+        type: "title",
+        value: string
+      |}
+    | {|
+        type: "language",
+        value: string
+      |}
+    | {|
+        type: "index",
+        value: number
+      |};
 
   declare export type BufferConfigDescriptor = {|
     minBufferMs?: ?number,
@@ -125,8 +150,6 @@ declare module "react-native-video" {
     translateY?: ?number,
     rotation?: ?number
   }>;
-
-  declare export var TextTrackType: { +[key: string]: TrackType };
 
   declare export default class Video extends React$Component<VideoProps> {
     dismissFullscreenPlayer(): void;

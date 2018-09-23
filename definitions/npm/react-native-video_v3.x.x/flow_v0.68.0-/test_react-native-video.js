@@ -2,9 +2,69 @@
 import * as React from "react";
 import { describe, it } from "flow-typed-test";
 import Video, {
+  TextTrackType,
   type TimedMetadata,
   type TrackDescriptor
 } from "react-native-video";
+
+describe("selectedAudioTrack & selectedTextTrack", () => {
+  it("must passes when used properly", () => {
+    <Video
+      source={0}
+      selectedAudioTrack={{ type: "system" }}
+      selectedTextTrack={{ type: "system" }}
+    />;
+
+    <Video
+      source={0}
+      selectedAudioTrack={{ type: "disabled", value: undefined }}
+      selectedTextTrack={{ type: "disabled", value: undefined }}
+    />;
+
+    <Video
+      source={0}
+      selectedAudioTrack={{ type: "title", value: "French 1" }}
+      selectedTextTrack={{ type: "title", value: "French 1" }}
+    />;
+
+    <Video
+      source={0}
+      selectedAudioTrack={{ type: "language", value: "fr" }}
+      selectedTextTrack={{ type: "language", value: "fr" }}
+    />;
+
+    <Video
+      source={0}
+      selectedAudioTrack={{ type: "index", value: 0 }}
+      selectedTextTrack={{ type: "index", value: 0 }}
+    />;
+  });
+
+  it("raises error when passed an unrecognized value key", () => {
+    // $ExpectError
+    <Video
+      source={0}
+      selectedAudioTrack={{ type: "index", value: "notNumber" }}
+    />;
+
+    // $ExpectError
+    <Video source={0} selectedTextTrack={{ type: "language", value: 69 }} />;
+
+    // $ExpectError
+    <Video source={0} selectedTextTrack={{ type: "unsutortedType" }} />;
+
+    // $ExpectError
+    <Video source={0} selectedAudioTrack={{ type: "title", value: 13 }} />;
+  });
+});
+
+describe("TextTrackType", () => {
+  it("must has values", () => {
+    (TextTrackType.SRT: "application/x-subrip");
+    (TextTrackType.TTML: "application/ttml+xml");
+    (TextTrackType.VTT: "text/vtt");
+  });
+});
 
 describe("public class methods", () => {
   var video = new Video();
