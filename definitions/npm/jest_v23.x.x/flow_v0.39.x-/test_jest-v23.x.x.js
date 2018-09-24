@@ -339,15 +339,41 @@ import { shallow } from "enzyme";
 const Dummy = () => <div />;
 const wrapper = shallow(<Dummy />);
 
-expect(wrapper).toBeChecked();
-
-expect(wrapper).toBeDisabled();
+// 5.x
 
 expect(wrapper).toBeEmpty();
-
-expect(wrapper).toBeEmptyRender();
+// $ExpectError
+expect(wrapper).toBeEmpty(true);
 
 expect(wrapper).toBePresent();
+// $ExpectError
+expect(wrapper).toBePresent(true);
+
+// 6.x
+
+expect(wrapper).toBeChecked();
+// $ExpectError
+expect(wrapper).toBeChecked(true);
+
+expect(wrapper).toBeEmptyRender();
+// $ExpectError
+expect(wrapper).toBeEmptyRender(true);
+
+expect(wrapper).toBeEmptyRender();
+// $ExpectError
+expect(wrapper).toBeEmptyRender(true);
+
+expect(wrapper).toContainMatchingElement('span');
+// $ExpectError
+expect(wrapper).toContainMatchingElement(true);
+
+expect(wrapper).toContainMatchingElements(2, 'span');
+// $ExpectError
+expect(wrapper).toContainMatchingElements('span', true);
+
+expect(wrapper).toContainExactlyOneMatchingElement('span');
+// $ExpectError
+expect(wrapper).toContainExactlyOneMatchingElement(true);
 
 expect(wrapper).toContainReact(<Dummy />);
 // $ExpectError
@@ -356,6 +382,8 @@ expect(wrapper).toContainReact();
 expect(wrapper).toContainReact("string");
 
 expect(wrapper).toExist();
+// $ExpectError
+expect(wrapper).toExist(true);
 
 expect(wrapper).toHaveClassName("class");
 // $ExpectError
@@ -390,7 +418,6 @@ expect(wrapper).toHaveState("test", "test");
 expect(wrapper).toHaveState({ test: "test" });
 // $ExpectError
 expect(wrapper).toHaveState({ test: "test" }, "test");
-
 // $ExpectError
 expect(wrapper).toHaveState();
 // $ExpectError
@@ -401,7 +428,6 @@ expect(wrapper).toHaveStyle("color", "#ccc");
 expect(wrapper).toHaveStyle({ color: "#ccc" });
 // $ExpectError
 expect(wrapper).toHaveStyle({ color: "#ccc" }, "test");
-
 // $ExpectError
 expect(wrapper).toHaveStyle();
 // $ExpectError
@@ -419,19 +445,24 @@ expect(wrapper).toHaveText();
 // $ExpectError
 expect(wrapper).toHaveText(true);
 
+expect(wrapper).toHaveValue("test");
+
 expect(wrapper).toIncludeText("test");
 // $ExpectError
 expect(wrapper).toIncludeText();
 // $ExpectError
 expect(wrapper).toIncludeText(true);
 
-expect(wrapper).toHaveValue("test");
-
 expect(wrapper).toMatchElement(<Dummy />);
+expect(wrapper).toMatchElement(<Dummy />, { ignoreProps: true });
 // $ExpectError
 expect(wrapper).toMatchElement();
 // $ExpectError
 expect(wrapper).toMatchElement(true);
+// $ExpectError
+expect(wrapper).toMatchElement(<Dummy />, { ignoreProps: 123 });
+// $ExpectError
+expect(wrapper).toMatchElement(<Dummy />, { foobar: true });
 
 expect(wrapper).toMatchSelector("span");
 // $ExpectError
@@ -439,7 +470,10 @@ expect(wrapper).toMatchSelector();
 // $ExpectError
 expect(wrapper).toMatchSelector(true);
 
-// dom-testing-library
+
+/**
+ * dom-testing-library
+ */
 {
   const element = document.createElement('div');
 
