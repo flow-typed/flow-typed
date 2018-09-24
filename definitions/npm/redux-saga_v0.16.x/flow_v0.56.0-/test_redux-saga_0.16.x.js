@@ -99,6 +99,29 @@ function* s6(
 ): Saga<number> {
   return 1;
 }
+function* s7(
+  a: string,
+  b: number,
+  c: string,
+  d: number,
+  e: string,
+  f: number,
+  g: string
+): Saga<number> {
+  return 1;
+}
+function* s8(
+  a: string,
+  b: number,
+  c: string,
+  d: number,
+  e: string,
+  f: number,
+  g: string,
+  h: number
+): Saga<number> {
+  return 1;
+}
 function* sSpread(...args: $ReadOnlyArray<number>): Saga<string> {
   return "";
 }
@@ -125,6 +148,25 @@ const fn6 = (
   d: number,
   e: string,
   f: number
+): Promise<number> => Promise.resolve(1);
+const fn7 = (
+  a: string,
+  b: number,
+  c: string,
+  d: number,
+  e: string,
+  f: number,
+  g: string
+): Promise<number> => Promise.resolve(1);
+const fn8 = (
+  a: string,
+  b: number,
+  c: string,
+  d: number,
+  e: string,
+  f: number,
+  g: string,
+  h: number
 ): Promise<number> => Promise.resolve(1);
 const fnSpread = (...args: $ReadOnlyArray<number>): Promise<string> =>
   Promise.resolve("");
@@ -162,6 +204,27 @@ function cpsfn6(
   f: number,
   cb: NodeCallback<number>
 ): void {}
+function cpsfn7(
+  a: string,
+  b: number,
+  c: string,
+  d: number,
+  e: string,
+  f: number,
+  g: string,
+  cb: NodeCallback<number>
+): void {}
+function cpsfn8(
+  a: string,
+  b: number,
+  c: string,
+  d: number,
+  e: string,
+  f: number,
+  g: string,
+  h: number,
+  cb: NodeCallback<number>
+): void {}
 
 function nfn0(): number {
   return 1;
@@ -188,6 +251,29 @@ function nfn6(
   d: string,
   e: number,
   f: boolean
+): number {
+  return 1;
+}
+function nfn7(
+  a: string,
+  b: number,
+  c: boolean,
+  d: string,
+  e: number,
+  f: boolean,
+  g: string
+): number {
+  return 1;
+}
+function nfn8(
+  a: string,
+  b: number,
+  c: boolean,
+  d: string,
+  e: number,
+  f: boolean,
+  g: string,
+  h: number
 ): number {
   return 1;
 }
@@ -327,6 +413,8 @@ function callTest() {
   const c4 = call(fn4, "1", 2, "3", 4);
   const c5 = call(fn5, "1", 2, "3", 4, "5");
   const c6 = call(fn6, "1", 2, "3", 4, "5", 6);
+  const c7 = call(fn7, "1", 2, "3", 4, "5", 6, "7");
+  const c8 = call(fn8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // $ExpectError: Too few arguments
   call(fn6, "1", 2, "3", 4);
@@ -344,6 +432,8 @@ function callTest() {
   (c4.CALL.args: [string, number, string, number]);
   (c5.CALL.args: [string, number, string, number, string]);
   (c6.CALL.args: [string, number, string, number, string, number]);
+  (c7.CALL.args: [string, number, string, number, string, number, string]);
+  (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
@@ -355,6 +445,8 @@ function callTest() {
   (c4.CALL.fn: typeof fn4);
   (c5.CALL.fn: typeof fn5);
   (c6.CALL.fn: typeof fn6);
+  (c7.CALL.fn: typeof fn7);
+  (c8.CALL.fn: typeof fn8);
 
   // NOTE: This should actually fail, but apparently more parameter are fine..
   (c1.CALL.fn: typeof fn6);
@@ -375,6 +467,8 @@ function callTest() {
   (c4.CALL.context: null);
   (c5.CALL.context: null);
   (c6.CALL.context: null);
+  (c7.CALL.context: null);
+  (c8.CALL.context: null);
 
   // $ExpectError
   (c1.CALL.context: Object);
@@ -388,6 +482,8 @@ function callNormalFunctionTest() {
   const c4 = call(nfn4, "1", 2, true, "4");
   const c5 = call(nfn5, "1", 2, true, "4", 5);
   const c6 = call(nfn6, "1", 2, true, "4", 5, false);
+  const c7 = call(nfn7, "1", 2, true, "4", 5, false, "7");
+  const c8 = call(nfn8, "1", 2, true, "4", 5, false, "7", 8);
 
   // $ExpectError: Too few arguments
   call(nfn6, "1", 2, true, "4");
@@ -405,6 +501,8 @@ function callNormalFunctionTest() {
   (c4.CALL.args: [string, number, boolean, string]);
   (c5.CALL.args: [string, number, boolean, string, number]);
   (c6.CALL.args: [string, number, boolean, string, number, boolean]);
+  (c7.CALL.args: [string, number, boolean, string, number, boolean, string]);
+  (c8.CALL.args: [string, number, boolean, string, number, boolean, string, number]);
 
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
@@ -416,6 +514,8 @@ function callNormalFunctionTest() {
   (c4.CALL.fn: typeof nfn4);
   (c5.CALL.fn: typeof nfn5);
   (c6.CALL.fn: typeof nfn6);
+  (c7.CALL.fn: typeof nfn7);
+  (c8.CALL.fn: typeof nfn8);
 
   // $ExpectError: fn returns a number not string
   (c1.CALL.fn: (a: boolean) => string);
@@ -436,6 +536,8 @@ function callNormalFunctionTest() {
   (c4.CALL.context: null);
   (c5.CALL.context: null);
   (c6.CALL.context: null);
+  (c7.CALL.context: null);
+  (c8.CALL.context: null);
 
   // $ExpectError
   (c1.CALL.context: Object);
@@ -449,6 +551,8 @@ function callSagaFunctionTest() {
   const c4 = call(s4, "1", 2, "3", 4);
   const c5 = call(s5, "1", 2, "3", 4, "5");
   const c6 = call(s6, "1", 2, "3", 4, "5", 6);
+  const c7 = call(s7, "1", 2, "3", 4, "5", 6, "7");
+  const c8 = call(s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // $ExpectError: Too few arguments
   call(s6, "1", 2, "3", 4);
@@ -466,6 +570,8 @@ function callSagaFunctionTest() {
   (c4.CALL.args: [string, number, string, number]);
   (c5.CALL.args: [string, number, string, number, string]);
   (c6.CALL.args: [string, number, string, number, string, number]);
+  (c7.CALL.args: [string, number, string, number, string, number, string]);
+  (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
@@ -477,6 +583,8 @@ function callSagaFunctionTest() {
   (c4.CALL.fn: typeof s4);
   (c5.CALL.fn: typeof s5);
   (c6.CALL.fn: typeof s6);
+  (c7.CALL.fn: typeof s7);
+  (c8.CALL.fn: typeof s8);
 
   // $ExpectError: fn returns a Saga<number> not Saga<string>
   (c1.CALL.fn: (a: string) => Saga<string>);
@@ -497,6 +605,8 @@ function callSagaFunctionTest() {
   (c4.CALL.context: null);
   (c5.CALL.context: null);
   (c6.CALL.context: null);
+  (c7.CALL.context: null);
+  (c8.CALL.context: null);
 
   // $ExpectError
   (c1.CALL.context: Object);
@@ -510,6 +620,8 @@ function contextCallTest() {
   const c4 = call([context, fn4], "1", 2, "3", 4);
   const c5 = call([context, fn5], "1", 2, "3", 4, "5");
   const c6 = call([context, fn6], "1", 2, "3", 4, "5", 6);
+  const c7 = call([context, fn7], "1", 2, "3", 4, "5", 6, "7");
+  const c8 = call([context, fn8], "1", 2, "3", 4, "5", 6, "7", 8);
   const cClass = call([classContext, fn1], "1");
 
   // $ExpectError: Too few arguments
@@ -528,6 +640,8 @@ function contextCallTest() {
   (c4.CALL.args: [string, number, string, number]);
   (c5.CALL.args: [string, number, string, number, string]);
   (c6.CALL.args: [string, number, string, number, string, number]);
+  (c7.CALL.args: [string, number, string, number, string, number, string]);
+  (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
@@ -539,6 +653,8 @@ function contextCallTest() {
   (c4.CALL.fn: typeof fn4);
   (c5.CALL.fn: typeof fn5);
   (c6.CALL.fn: typeof fn6);
+  (c7.CALL.fn: typeof fn7);
+  (c8.CALL.fn: typeof fn8);
 
   // NOTE: This should actually fail, but apparently more parameter are fine..
   (c1.CALL.fn: typeof fn6);
@@ -559,6 +675,8 @@ function contextCallTest() {
   (c4.CALL.context: typeof context);
   (c5.CALL.context: typeof context);
   (c6.CALL.context: typeof context);
+  (c7.CALL.context: typeof context);
+  (c8.CALL.context: typeof context);
 
   // $ExpectError
   (c1.CALL.context: null);
@@ -572,6 +690,8 @@ function contextCallNormalFunctionTest() {
   const c4 = call([context, nfn4], "1", 2, true, "4");
   const c5 = call([context, nfn5], "1", 2, true, "4", 5);
   const c6 = call([context, nfn6], "1", 2, true, "4", 5, false);
+  const c7 = call([context, nfn7], "1", 2, true, "4", 5, false, "7");
+  const c8 = call([context, nfn8], "1", 2, true, "4", 5, false, "7", 8);
   const cClass = call([classContext, nfn1], "1");
 
   // TODO: For weird reasons I do not understand, these tests fail in the wrong place - ExpectError: Too few arguments
@@ -590,6 +710,8 @@ function contextCallNormalFunctionTest() {
   (c4.CALL.args: [string, number, boolean, string]);
   (c5.CALL.args: [string, number, boolean, string, number]);
   (c6.CALL.args: [string, number, boolean, string, number, boolean]);
+  (c7.CALL.args: [string, number, boolean, string, number, boolean, string]);
+  (c8.CALL.args: [string, number, boolean, string, number, boolean, string, number]);
 
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
@@ -601,6 +723,8 @@ function contextCallNormalFunctionTest() {
   (c4.CALL.fn: typeof nfn4);
   (c5.CALL.fn: typeof nfn5);
   (c6.CALL.fn: typeof nfn6);
+  (c7.CALL.fn: typeof nfn7);
+  (c8.CALL.fn: typeof nfn8);
 
   // $ExpectError: fn returns a number not string
   (c1.CALL.fn: (a: boolean) => string);
@@ -621,6 +745,8 @@ function contextCallNormalFunctionTest() {
   (c4.CALL.context: typeof context);
   (c5.CALL.context: typeof context);
   (c6.CALL.context: typeof context);
+  (c7.CALL.context: typeof context);
+  (c7.CALL.context: typeof context);
 
   // $ExpectError
   (c1.CALL.context: null);
@@ -634,6 +760,8 @@ function contextCallSagaFunctionTest() {
   const c4 = call([context, s4], "1", 2, "3", 4);
   const c5 = call([context, s5], "1", 2, "3", 4, "5");
   const c6 = call([context, s6], "1", 2, "3", 4, "5", 6);
+  const c7 = call([context, s7], "1", 2, "3", 4, "5", 6, "7");
+  const c8 = call([context, s8], "1", 2, "3", 4, "5", 6, "7", 8);
   const cClass = call([classContext, s1], "1");
 
   // TODO: For weird reasons I do not understand, these tests fail in the wrong place - ExpectError: Too few arguments
@@ -652,6 +780,8 @@ function contextCallSagaFunctionTest() {
   (c4.CALL.args: [string, number, string, number]);
   (c5.CALL.args: [string, number, string, number, string]);
   (c6.CALL.args: [string, number, string, number, string, number]);
+  (c7.CALL.args: [string, number, string, number, string, number, string]);
+  (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
@@ -663,6 +793,8 @@ function contextCallSagaFunctionTest() {
   (c4.CALL.fn: typeof s4);
   (c5.CALL.fn: typeof s5);
   (c6.CALL.fn: typeof s6);
+  (c7.CALL.fn: typeof s7);
+  (c8.CALL.fn: typeof s8);
 
   // $ExpectError: fn returns a Saga<number> not Saga<string>
   (c1.CALL.fn: (a: string) => Saga<string>);
@@ -683,6 +815,8 @@ function contextCallSagaFunctionTest() {
   (c4.CALL.context: typeof context);
   (c5.CALL.context: typeof context);
   (c6.CALL.context: typeof context);
+  (c7.CALL.context: typeof context);
+  (c8.CALL.context: typeof context);
 
   // $ExpectError
   (c1.CALL.context: null);
@@ -696,6 +830,8 @@ function applyTest() {
   const c4 = apply(context, fn4, "1", 2, "3", 4);
   const c5 = apply(context, fn5, "1", 2, "3", 4, "5");
   const c6 = apply(context, fn6, "1", 2, "3", 4, "5", 6);
+  const c7 = apply(context, fn6, "1", 2, "3", 4, "5", 6, "7");
+  const c8 = apply(context, fn6, "1", 2, "3", 4, "5", 6, "7", 8);
   const cClass = apply(classContext, fn1, "1");
 
   // $ExpectError: Too few arguments
@@ -714,6 +850,8 @@ function applyTest() {
   (c4.CALL.args: [string, number, string, number]);
   (c5.CALL.args: [string, number, string, number, string]);
   (c6.CALL.args: [string, number, string, number, string, number]);
+  (c7.CALL.args: [string, number, string, number, string, number, string]);
+  (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
@@ -725,6 +863,8 @@ function applyTest() {
   (c4.CALL.fn: typeof fn4);
   (c5.CALL.fn: typeof fn5);
   (c6.CALL.fn: typeof fn6);
+  (c7.CALL.fn: typeof fn7);
+  (c8.CALL.fn: typeof fn8);
 
   // NOTE: This should actually fail, but apparently more parameter are fine..
   (c1.CALL.fn: typeof fn6);
@@ -745,6 +885,8 @@ function applyTest() {
   (c4.CALL.context: typeof context);
   (c5.CALL.context: typeof context);
   (c6.CALL.context: typeof context);
+  (c7.CALL.context: typeof context);
+  (c8.CALL.context: typeof context);
 
   // $ExpectError
   (c1.CALL.context: null);
@@ -758,6 +900,8 @@ function applyNormalFunctionTest() {
   const c4 = apply(context, nfn4, "1", 2, true, "4");
   const c5 = apply(context, nfn5, "1", 2, true, "4", 5);
   const c6 = apply(context, nfn6, "1", 2, true, "4", 5, false);
+  const c7 = apply(context, nfn7, "1", 2, true, "4", 5, false, "7");
+  const c8 = apply(context, nfn8, "1", 2, true, "4", 5, false, "7", 8);
   const cClass = apply(classContext, nfn1, "1");
 
   // $ExpectError: Too few arguments
@@ -776,6 +920,8 @@ function applyNormalFunctionTest() {
   (c4.CALL.args: [string, number, boolean, string]);
   (c5.CALL.args: [string, number, boolean, string, number]);
   (c6.CALL.args: [string, number, boolean, string, number, boolean]);
+  (c7.CALL.args: [string, number, boolean, string, number, boolean, string]);
+  (c8.CALL.args: [string, number, boolean, string, number, boolean, string, number]);
 
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
@@ -787,6 +933,8 @@ function applyNormalFunctionTest() {
   (c4.CALL.fn: typeof nfn4);
   (c5.CALL.fn: typeof nfn5);
   (c6.CALL.fn: typeof nfn6);
+  (c7.CALL.fn: typeof nfn7);
+  (c8.CALL.fn: typeof nfn8);
 
   // $ExpectError: fn returns a number not string
   (c1.CALL.fn: (a: boolean) => string);
@@ -807,6 +955,8 @@ function applyNormalFunctionTest() {
   (c4.CALL.context: typeof context);
   (c5.CALL.context: typeof context);
   (c6.CALL.context: typeof context);
+  (c7.CALL.context: typeof context);
+  (c8.CALL.context: typeof context);
 
   // $ExpectError
   (c1.CALL.context: null);
@@ -820,6 +970,8 @@ function applySagaFunctionTest() {
   const c4 = apply(context, s4, "1", 2, "3", 4);
   const c5 = apply(context, s5, "1", 2, "3", 4, "5");
   const c6 = apply(context, s6, "1", 2, "3", 4, "5", 6);
+  const c7 = apply(context, s7, "1", 2, "3", 4, "5", 6, "7");
+  const c8 = apply(context, s8, "1", 2, "3", 4, "5", 6, "7", 8);
   const cClass = apply(classContext, s1, "1");
 
   // $ExpectError: Too few arguments
@@ -838,6 +990,8 @@ function applySagaFunctionTest() {
   (c4.CALL.args: [string, number, string, number]);
   (c5.CALL.args: [string, number, string, number, string]);
   (c6.CALL.args: [string, number, string, number, string, number]);
+  (c7.CALL.args: [string, number, string, number, string, number, string]);
+  (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
   // $ExpectError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
@@ -849,6 +1003,8 @@ function applySagaFunctionTest() {
   (c4.CALL.fn: typeof s4);
   (c5.CALL.fn: typeof s5);
   (c6.CALL.fn: typeof s6);
+  (c7.CALL.fn: typeof s7);
+  (c8.CALL.fn: typeof s8);
 
   // $ExpectError: fn returns a Saga<number> not Saga<string>
   (c1.CALL.fn: (a: string) => Saga<string>);
@@ -869,6 +1025,8 @@ function applySagaFunctionTest() {
   (c4.CALL.context: typeof context);
   (c5.CALL.context: typeof context);
   (c6.CALL.context: typeof context);
+  (c7.CALL.context: typeof context);
+  (c8.CALL.context: typeof context);
 
   // $ExpectError
   (c1.CALL.context: null);
@@ -882,6 +1040,8 @@ function forkTest() {
   const e4 = fork(fn4, "1", 2, "3", 4);
   const e5 = fork(fn5, "1", 2, "3", 4, "5");
   const e6 = fork(fn6, "1", 2, "3", 4, "5", 6);
+  const e7 = fork(fn7, "1", 2, "3", 4, "5", 6, "7");
+  const e8 = fork(fn8, "1", 2, "3", 4, "5", 6, "7", 8);
   const eClass = fork(fn1, "1");
   const eSaga = fork(s1, "1");
 
@@ -893,6 +1053,8 @@ function forkTest() {
   (e4.FORK.args: [string, number, string, number]);
   (e5.FORK.args: [string, number, string, number, string]);
   (e6.FORK.args: [string, number, string, number, string, number]);
+  (e7.FORK.args: [string, number, string, number, string, number, string]);
+  (e8.FORK.args: [string, number, string, number, string, number, string, number]);
 
   // Context Test
   (e1.FORK.context: null);
@@ -901,6 +1063,8 @@ function forkTest() {
   (e4.FORK.context: null);
   (e5.FORK.context: null);
   (e6.FORK.context: null);
+  (e7.FORK.context: null);
+  (e8.FORK.context: null);
   (eSaga.FORK.context: null);
 
   // Fn Test
@@ -910,6 +1074,8 @@ function forkTest() {
   (e4.FORK.fn: typeof fn4);
   (e5.FORK.fn: typeof fn5);
   (e6.FORK.fn: typeof fn6);
+  (e7.FORK.fn: typeof fn7);
+  (e8.FORK.fn: typeof fn8);
   (eSaga.FORK.fn: typeof s1);
 
   // $ExpectError: wrong fn
@@ -924,6 +1090,8 @@ function contextForkTest() {
   const e4 = fork([context, fn4], "1", 2, "3", 4);
   const e5 = fork([context, fn5], "1", 2, "3", 4, "5");
   const e6 = fork([context, fn6], "1", 2, "3", 4, "5", 6);
+  const e7 = fork([context, fn7], "1", 2, "3", 4, "5", 6, "7");
+  const e8 = fork([context, fn8], "1", 2, "3", 4, "5", 6, "7", 8);
   const eClass = fork([context, fn1], "1");
   const eSaga = fork([context, s1], "1");
 
@@ -935,6 +1103,8 @@ function contextForkTest() {
   (e4.FORK.args: [string, number, string, number]);
   (e5.FORK.args: [string, number, string, number, string]);
   (e6.FORK.args: [string, number, string, number, string, number]);
+  (e7.FORK.args: [string, number, string, number, string, number, string]);
+  (e8.FORK.args: [string, number, string, number, string, number, string, number]);
 
   // Context Test
   (e1.FORK.context: typeof context);
@@ -943,6 +1113,8 @@ function contextForkTest() {
   (e4.FORK.context: typeof context);
   (e5.FORK.context: typeof context);
   (e6.FORK.context: typeof context);
+  (e7.FORK.context: typeof context);
+  (e8.FORK.context: typeof context);
   (eSaga.FORK.context: typeof context);
 
   // Fn Test
@@ -952,6 +1124,8 @@ function contextForkTest() {
   (e4.FORK.fn: typeof fn4);
   (e5.FORK.fn: typeof fn5);
   (e6.FORK.fn: typeof fn6);
+  (e7.FORK.fn: typeof fn7);
+  (e8.FORK.fn: typeof fn8);
   (eSaga.FORK.fn: typeof s1);
 
   // $ExpectError: wrong fn
@@ -966,6 +1140,8 @@ function cpsTest() {
   const e4 = cps(cpsfn4, "1", 2, "3", 4);
   const e5 = cps(cpsfn5, "1", 2, "3", 4, "5");
   const e6 = cps(cpsfn6, "1", 2, "3", 4, "5", 6);
+  const e7 = cps(cpsfn7, "1", 2, "3", 4, "5", 6, "7");
+  const e8 = cps(cpsfn8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // Args Test
   (e0.CPS.args: []);
@@ -975,6 +1151,8 @@ function cpsTest() {
   (e4.CPS.args: [string, number, string, number]);
   (e5.CPS.args: [string, number, string, number, string]);
   (e6.CPS.args: [string, number, string, number, string, number]);
+  (e7.CPS.args: [string, number, string, number, string, number, string]);
+  (e8.CPS.args: [string, number, string, number, string, number, string, number]);
 
   // Context Test
   (e1.CPS.context: null);
@@ -983,6 +1161,8 @@ function cpsTest() {
   (e4.CPS.context: null);
   (e5.CPS.context: null);
   (e6.CPS.context: null);
+  (e7.CPS.context: null);
+  (e8.CPS.context: null);
 
   // Fn Test
   (e1.CPS.fn: typeof cpsfn1);
@@ -991,6 +1171,8 @@ function cpsTest() {
   (e4.CPS.fn: typeof cpsfn4);
   (e5.CPS.fn: typeof cpsfn5);
   (e6.CPS.fn: typeof cpsfn6);
+  (e7.CPS.fn: typeof cpsfn7);
+  (e8.CPS.fn: typeof cpsfn8);
 
   // $ExpectError: wrong fn
   (e6.CPS.fn: typeof cpsfn1);
@@ -1004,6 +1186,8 @@ function contextCpsTest() {
   const e4 = cps([context, cpsfn4], "1", 2, "3", 4);
   const e5 = cps([context, cpsfn5], "1", 2, "3", 4, "5");
   const e6 = cps([context, cpsfn6], "1", 2, "3", 4, "5", 6);
+  const e7 = cps([context, cpsfn7], "1", 2, "3", 4, "5", 6, "7");
+  const e8 = cps([context, cpsfn8], "1", 2, "3", 4, "5", 6, "7", 8);
   const eClass = cps([classContext, cpsfn1], "1");
 
   // Args Test
@@ -1014,6 +1198,8 @@ function contextCpsTest() {
   (e4.CPS.args: [string, number, string, number]);
   (e5.CPS.args: [string, number, string, number, string]);
   (e6.CPS.args: [string, number, string, number, string, number]);
+  (e7.CPS.args: [string, number, string, number, string, number, string]);
+  (e8.CPS.args: [string, number, string, number, string, number, string, number]);
 
   // Context Test
   (e1.CPS.context: typeof context);
@@ -1022,6 +1208,8 @@ function contextCpsTest() {
   (e4.CPS.context: typeof context);
   (e5.CPS.context: typeof context);
   (e6.CPS.context: typeof context);
+  (e7.CPS.context: typeof context);
+  (e8.CPS.context: typeof context);
   (eClass.CPS.context: typeof classContext);
 
   // Fn Test
@@ -1031,6 +1219,8 @@ function contextCpsTest() {
   (e4.CPS.fn: typeof cpsfn4);
   (e5.CPS.fn: typeof cpsfn5);
   (e6.CPS.fn: typeof cpsfn6);
+  (e7.CPS.fn: typeof cpsfn7);
+  (e8.CPS.fn: typeof cpsfn8);
 
   // $ExpectError: wrong fn
   (e6.CPS.fn: typeof cpsfn1);
@@ -1044,6 +1234,8 @@ function spawnTest() {
   const e4 = spawn(fn4, "1", 2, "3", 4);
   const e5 = spawn(fn5, "1", 2, "3", 4, "5");
   const e6 = spawn(fn6, "1", 2, "3", 4, "5", 6);
+  const e7 = spawn(fn7, "1", 2, "3", 4, "5", 6, "7");
+  const e8 = spawn(fn8, "1", 2, "3", 4, "5", 6, "7", 8);
   const eClass = spawn(fn1, "1");
   const eSaga = spawn(s1, "1");
 
@@ -1055,6 +1247,8 @@ function spawnTest() {
   (e4.SPAWN.args: [string, number, string, number]);
   (e5.SPAWN.args: [string, number, string, number, string]);
   (e6.SPAWN.args: [string, number, string, number, string, number]);
+  (e7.SPAWN.args: [string, number, string, number, string, number, string]);
+  (e8.SPAWN.args: [string, number, string, number, string, number, string, number]);
 
   // Context Test
   (e1.SPAWN.context: null);
@@ -1063,6 +1257,8 @@ function spawnTest() {
   (e4.SPAWN.context: null);
   (e5.SPAWN.context: null);
   (e6.SPAWN.context: null);
+  (e7.SPAWN.context: null);
+  (e8.SPAWN.context: null);
   (eSaga.SPAWN.context: null);
 
   // Fn Test
@@ -1072,6 +1268,8 @@ function spawnTest() {
   (e4.SPAWN.fn: typeof fn4);
   (e5.SPAWN.fn: typeof fn5);
   (e6.SPAWN.fn: typeof fn6);
+  (e7.SPAWN.fn: typeof fn7);
+  (e8.SPAWN.fn: typeof fn8);
   (eSaga.SPAWN.fn: typeof s1);
 
   // $ExpectError: wrong fn
@@ -1086,6 +1284,8 @@ function contextSpawnTest() {
   const e4 = spawn([context, fn4], "1", 2, "3", 4);
   const e5 = spawn([context, fn5], "1", 2, "3", 4, "5");
   const e6 = spawn([context, fn6], "1", 2, "3", 4, "5", 6);
+  const e7 = spawn([context, fn7], "1", 2, "3", 4, "5", 6, "7");
+  const e8 = spawn([context, fn8], "1", 2, "3", 4, "5", 6, "7", 8);
   const eClass = spawn([context, fn1], "1");
   const eSaga = spawn([context, s1], "1");
 
@@ -1097,6 +1297,8 @@ function contextSpawnTest() {
   (e4.SPAWN.args: [string, number, string, number]);
   (e5.SPAWN.args: [string, number, string, number, string]);
   (e6.SPAWN.args: [string, number, string, number, string, number]);
+  (e7.SPAWN.args: [string, number, string, number, string, number, string]);
+  (e8.SPAWN.args: [string, number, string, number, string, number, string, number]);
 
   // Context Test
   (e1.SPAWN.context: typeof context);
@@ -1105,6 +1307,8 @@ function contextSpawnTest() {
   (e4.SPAWN.context: typeof context);
   (e5.SPAWN.context: typeof context);
   (e6.SPAWN.context: typeof context);
+  (e7.SPAWN.context: typeof context);
+  (e8.SPAWN.context: typeof context);
   (eSaga.SPAWN.context: typeof context);
 
   // Fn Test
@@ -1114,6 +1318,8 @@ function contextSpawnTest() {
   (e4.SPAWN.fn: typeof fn4);
   (e5.SPAWN.fn: typeof fn5);
   (e6.SPAWN.fn: typeof fn6);
+  (e7.SPAWN.fn: typeof fn7);
+  (e8.SPAWN.fn: typeof fn8);
   (eSaga.SPAWN.fn: typeof s1);
 
   // $ExpectError: wrong fn
@@ -1219,6 +1425,27 @@ function selectTest() {
     e: string,
     f: number
   ) => ({});
+  const s7 = (
+    state: Object,
+    a: string,
+    b: number,
+    c: string,
+    d: number,
+    e: string,
+    f: number,
+    g: string
+  ) => ({});
+  const s8 = (
+    state: Object,
+    a: string,
+    b: number,
+    c: string,
+    d: number,
+    e: string,
+    f: number,
+    g: string,
+    h: number
+  ) => ({});
   const sSpread = (state: Object, ...args: Array<string>): Object => ({});
 
   const eVoid = select();
@@ -1229,6 +1456,8 @@ function selectTest() {
   const e4 = select(s4, "1", 2, "3", 4);
   const e5 = select(s5, "1", 2, "3", 4, "5");
   const e6 = select(s6, "1", 2, "3", 4, "5", 6);
+  const e7 = select(s7, "1", 2, "3", 4, "5", 6, "7");
+  const e8 = select(s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // Args test
   (eVoid.SELECT.args: []);
@@ -1239,6 +1468,8 @@ function selectTest() {
   (e4.SELECT.args: [string, number, string, number]);
   (e5.SELECT.args: [string, number, string, number, string]);
   (e6.SELECT.args: [string, number, string, number, string, number]);
+  (e7.SELECT.args: [string, number, string, number, string, number, string]);
+  (e8.SELECT.args: [string, number, string, number, string, number, string, number]);
 
   // $ExpectError: second args is not a boolean
   (e3.SELECT.args: [string, boolean, string]);
@@ -1252,6 +1483,8 @@ function selectTest() {
   (e4.SELECT.selector: typeof s4);
   (e5.SELECT.selector: typeof s5);
   (e6.SELECT.selector: typeof s6);
+  (e7.SELECT.selector: typeof s7);
+  (e8.SELECT.selector: typeof s8);
 
   // $ExpectError: args.a should actually be a string
   (e1.SELECT.selector: (state: Object, a: number) => Object);
@@ -1265,6 +1498,8 @@ function takeEveryTest() {
   const e4 = takeEvery("FOO", s4, "1", 2, "3", 4);
   const e5 = takeEvery("FOO", s5, "1", 2, "3", 4, "5");
   const e6 = takeEvery("FOO", s6, "1", 2, "3", 4, "5", 6);
+  const e7 = takeEvery("FOO", s7, "1", 2, "3", 4, "5", 6, "7");
+  const e8 = takeEvery("FOO", s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // Context Test
   (e1.FORK.context: null);
@@ -1273,6 +1508,8 @@ function takeEveryTest() {
   (e4.FORK.context: null);
   (e5.FORK.context: null);
   (e6.FORK.context: null);
+  (e7.FORK.context: null);
+  (e8.FORK.context: null);
 }
 
 function takeEveryFromChannelTest() {
@@ -1283,6 +1520,8 @@ function takeEveryFromChannelTest() {
   const e4 = takeEvery(myChannel, s4, "1", 2, "3", 4);
   const e5 = takeEvery(myChannel, s5, "1", 2, "3", 4, "5");
   const e6 = takeEvery(myChannel, s6, "1", 2, "3", 4, "5", 6);
+  const e7 = takeEvery(myChannel, s7, "1", 2, "3", 4, "5", 6, "7");
+  const e8 = takeEvery(myChannel, s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // Context Test
   (e1.FORK.context: null);
@@ -1291,6 +1530,8 @@ function takeEveryFromChannelTest() {
   (e4.FORK.context: null);
   (e5.FORK.context: null);
   (e6.FORK.context: null);
+  (e7.FORK.context: null);
+  (e8.FORK.context: null);
 }
 
 function takeLatestTest() {
@@ -1301,6 +1542,8 @@ function takeLatestTest() {
   const e4 = takeLatest("FOO", s4, "1", 2, "3", 4);
   const e5 = takeLatest("FOO", s5, "1", 2, "3", 4, "5");
   const e6 = takeLatest("FOO", s6, "1", 2, "3", 4, "5", 6);
+  const e7 = takeLatest("FOO", s7, "1", 2, "3", 4, "5", 6, "7");
+  const e8 = takeLatest("FOO", s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // Context Test
   (e1.FORK.context: null);
@@ -1309,6 +1552,8 @@ function takeLatestTest() {
   (e4.FORK.context: null);
   (e5.FORK.context: null);
   (e6.FORK.context: null);
+  (e7.FORK.context: null);
+  (e8.FORK.context: null);
 }
 
 function takeLatestFromChannelTest() {
@@ -1319,6 +1564,8 @@ function takeLatestFromChannelTest() {
   const e4 = takeLatest(myChannel, s4, "1", 2, "3", 4);
   const e5 = takeLatest(myChannel, s5, "1", 2, "3", 4, "5");
   const e6 = takeLatest(myChannel, s6, "1", 2, "3", 4, "5", 6);
+  const e7 = takeLatest(myChannel, s7, "1", 2, "3", 4, "5", 6, "7");
+  const e8 = takeLatest(myChannel, s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // Context Test
   (e1.FORK.context: null);
@@ -1327,6 +1574,8 @@ function takeLatestFromChannelTest() {
   (e4.FORK.context: null);
   (e5.FORK.context: null);
   (e6.FORK.context: null);
+  (e7.FORK.context: null);
+  (e8.FORK.context: null);
 }
 
 function throttleTests() {
@@ -1337,6 +1586,8 @@ function throttleTests() {
   const e4 = throttle(150, "FOO", s4, "1", 2, "3", 4);
   const e5 = throttle(150, "FOO", s5, "1", 2, "3", 4, "5");
   const e6 = throttle(150, "FOO", s6, "1", 2, "3", 4, "5", 6);
+  const e7 = throttle(150, "FOO", s7, "1", 2, "3", 4, "5", 6, "7");
+  const e8 = throttle(150, "FOO", s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // Context Test
   (e1.FORK.context: null);
@@ -1345,6 +1596,8 @@ function throttleTests() {
   (e4.FORK.context: null);
   (e5.FORK.context: null);
   (e6.FORK.context: null);
+  (e7.FORK.context: null);
+  (e8.FORK.context: null);
 }
 
 function runSagaTest() {
@@ -1355,6 +1608,8 @@ function runSagaTest() {
   (runSaga({}, s4, "1", 2, "3", 4): Task<number>);
   (runSaga({}, s5, "1", 2, "3", 4, "5"): Task<number>);
   (runSaga({}, s6, "1", 2, "3", 4, "5", 6): Task<number>);
+  (runSaga({}, s7, "1", 2, "3", 4, "5", 6, "7"): Task<number>);
+  (runSaga({}, s8, "1", 2, "3", 4, "5", 6, "7", 8): Task<number>);
 
   // $ExpectError: too few args
   (runSaga({}, s6, "1", 2): Task<number>);
@@ -1408,6 +1663,8 @@ function createSagaMiddlewareTest() {
   middleware.run(s4, "1", 2, "3", 4);
   middleware.run(s5, "1", 2, "3", 4, "5");
   middleware.run(s6, "1", 2, "3", 4, "5", 6);
+  middleware.run(s7, "1", 2, "3", 4, "5", 6, "7");
+  middleware.run(s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
   // $ExpectError: Boolean argument should be string
   middleware.run(s3, true, 2, "3");
