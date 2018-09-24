@@ -108,8 +108,34 @@ a short grace period during a libdef installation, but sometimes it is useful to
 do this update manually. Use this command if you want to download the most
 recent definitions into the cache for yourself.
 
+## Tips
+
+#### Update `flow-typed` automatically
+
+To automate the process of updating `flow-typed` whenever you add, remove, or 
+upgrade modules, ensure [`yarn`][1] and [`npx`][2] are present in your $PATH and
+add the following bash scripts to your **`package.json`**:
+
+```
+"scripts": {
+    "install:all": "yarn install; for script in {flow}; do yarn install:$script; done",
+    "install:flow": "npx flow-typed install",
+    "upgrade:all": "yarn upgrade; for script in {flow}; do yarn upgrade:$script; done",
+    "upgrade:flow": "npx flow-typed update-cache; npx flow-typed install",
+  },
+```
+
+###### Note: These are `bash` commands, which means if you're not using Linux or OS X, you'll need a bash interpreter.
+
+Now instead of running `yarn install` or `yarn upgrade`, run `yarn install:all` and `yarn upgrade:all`. 
+These scripts are also easily extended to support additional update commands. 
+
 ## Active Maintenance Team
 
 [![Andrew Smith](https://github.com/andrewsouthpaw.png?size=100)](https://github.com/andrewsouthpaw) | [![Georges-Antoine Assi](https://github.com/gantoine.png?size=100)](https://github.com/gantoine) | [![Ville Saukkonen](https://github.com/villesau.png?size=100)](https://github.com/villesau)
 :---:|:---:|:---:
 [@AndrewSouthpaw](https://github.com/andrewsouthpaw) | [@GAntoine](https://github.com/gantoine) | [@villesau](https://github.com/villesau)
+
+[1]: https://yarnpkg.com
+[2]: https://github.com/zkat/npx
+
