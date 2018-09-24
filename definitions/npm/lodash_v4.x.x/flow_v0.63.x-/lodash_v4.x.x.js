@@ -519,7 +519,7 @@ declare module "lodash" {
     every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
     every<T: Object>(object: T, iteratee?: OIteratee<T>): boolean;
     filter<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
-    filter<A, T: { [id: string]: A }>(
+    filter<A, T: { [id: any]: A }>(
       object: T,
       predicate?: OPredicate<A, T>
     ): Array<A>;
@@ -533,7 +533,7 @@ declare module "lodash" {
       predicate?: ?Predicate<T>,
       fromIndex?: ?number
     ): void;
-    find<V, A, T: { [id: string]: A }>(
+    find<V, A, T: { [id: any]: A }>(
       object: T,
       predicate?: OPredicate<A, T>,
       fromIndex?: number
@@ -543,7 +543,7 @@ declare module "lodash" {
       predicate?: ?Predicate<T>,
       fromIndex?: ?number
     ): T | void;
-    findLast<V, A, T: { [id: string]: A }>(
+    findLast<V, A, T: { [id: any]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
     ): V;
@@ -587,7 +587,7 @@ declare module "lodash" {
       array: void | null,
       iteratee?: ?ValueOnlyIteratee<any>
     ): {};
-    groupBy<V, A, T: { [id: string]: A }>(
+    groupBy<V, A, T: { [id: any]: A }>(
       object: T,
       iteratee?: ValueOnlyIteratee<A>
     ): { [key: V]: Array<A> };
@@ -649,7 +649,7 @@ declare module "lodash" {
       array?: ?Array<T>,
       predicate?: ?Predicate<T>
     ): [Array<T>, Array<T>];
-    partition<V, A, T: { [id: string]: A }>(
+    partition<V, A, T: { [id: any]: A }>(
       object: T,
       predicate?: OPredicate<A, T>
     ): [Array<V>, Array<V>];
@@ -704,7 +704,7 @@ declare module "lodash" {
       accumulator?: ?U
     ): U;
     reject<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): Array<T>;
-    reject<V: Object, A, T: { [id: string]: A }>(
+    reject<V: Object, A, T: { [id: any]: A }>(
       object?: ?T,
       predicate?: ?OPredicate<A, T>
     ): Array<V>;
@@ -717,7 +717,7 @@ declare module "lodash" {
     size(collection: $ReadOnlyArray<any> | Object | string): number;
     some<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): boolean;
     some<T>(array: void | null, predicate?: ?Predicate<T>): false;
-    some<A, T: { [id: string]: A }>(
+    some<A, T: { [id: any]: A }>(
       object?: ?T,
       predicate?: OPredicate<A, T>
     ): boolean;
@@ -1099,19 +1099,19 @@ declare module "lodash" {
         source: A | B | C | D
       ) => any | void
     ): Object;
-    findKey<A, T: { [id: string]: A }>(
+    findKey<A, T: { [id: any]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
     ): string | void;
-    findKey<A, T: { [id: string]: A }>(
+    findKey<A, T: { [id: any]: A }>(
       object: void | null,
       predicate?: ?OPredicate<A, T>
     ): void;
-    findLastKey<A, T: { [id: string]: A }>(
+    findLastKey<A, T: { [id: any]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
     ): string | void;
-    findLastKey<A, T: { [id: string]: A }>(
+    findLastKey<A, T: { [id: any]: A }>(
       object: void | null,
       predicate?: ?OPredicate<A, T>
     ): void;
@@ -1205,7 +1205,7 @@ declare module "lodash" {
     ): Object;
     omit(object?: ?Object, ...props: Array<string>): Object;
     omit(object?: ?Object, props: Array<string>): Object;
-    omitBy<A, T: { [id: string]: A }|{ [id: number]: A }>(
+    omitBy<A, T: { [id: any]: A }|{ [id: number]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
     ): Object;
@@ -1215,7 +1215,7 @@ declare module "lodash" {
     ): {};
     pick(object?: ?Object, ...props: Array<string>): Object;
     pick(object?: ?Object, props: Array<string>): Object;
-    pickBy<A, T: { [id: string]: A }|{ [id: number]: A }>(
+    pickBy<A, T: { [id: any]: A }|{ [id: number]: A }>(
       object: T,
       predicate?: ?OPredicate<A, T>
     ): Object;
