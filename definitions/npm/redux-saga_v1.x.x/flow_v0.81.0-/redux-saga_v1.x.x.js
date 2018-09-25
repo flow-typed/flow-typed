@@ -3,7 +3,7 @@ declare module "redux-saga/effects" {
   declare export type CallEffect<
     Context,
     Fn: Function,
-    Args: $ReadonlyArray<*>
+    Args: $ReadOnlyArray<*>
   > = $ReadOnly<{|
     type: "CALL",
     payload: $ReadOnly<{|
