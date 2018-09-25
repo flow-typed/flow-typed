@@ -77,35 +77,10 @@ type $npm$styledComponents$ReactComponentStyledTaggedTemplateLiteralWithComponen
   & $npm$styledComponents$TaggedTemplateLiteral<$npm$styledComponents$ReactComponentStyled<Props, ComponentList>>
 
 // ---- WITHTHEME ----
-type $npm$styledComponents$WithThemeReactComponentClass = <
-  InputProps: { theme: $npm$styledComponents$Theme },
-  InputDefaultProps: {},
-  OutputProps: $Diff<InputProps, { theme: $npm$styledComponents$Theme }>,
-  OutputDefaultProps: InputDefaultProps & { theme: $npm$styledComponents$Theme },
->($npm$styledComponents$ReactComponentClass<InputProps, InputDefaultProps>) => $npm$styledComponents$ReactComponentClass<OutputProps, OutputDefaultProps>
-
-type $npm$styledComponents$WithThemeReactComponentClassUndefinedDefaultProps = <
-  InputProps: { theme: $npm$styledComponents$Theme },
-  OutputProps: $Diff<InputProps, { theme: $npm$styledComponents$Theme }>,
->($npm$styledComponents$ReactComponentClassUndefinedDefaultProps<InputProps>) => $npm$styledComponents$ReactComponentClass<OutputProps, { theme: $npm$styledComponents$Theme }>
-
-type $npm$styledComponents$WithThemeReactComponentFunctional = <
-  InputProps: { theme: $npm$styledComponents$Theme },
-  InputDefaultProps: {},
-  OutputProps: $Diff<InputProps, { theme: $npm$styledComponents$Theme }>,
-  OutputDefaultProps: InputDefaultProps & { theme: $npm$styledComponents$Theme },
->($npm$styledComponents$ReactComponentFunctional<InputProps, InputDefaultProps>) => $npm$styledComponents$ReactComponentFunctional<OutputProps, OutputDefaultProps>
-
-type $npm$styledComponents$WithThemeReactComponentFunctionalUndefinedDefaultProps = <
-  InputProps: { theme: $npm$styledComponents$Theme },
-  OutputProps: $Diff<InputProps, { theme: $npm$styledComponents$Theme }>
->($npm$styledComponents$ReactComponentFunctionalUndefinedDefaultProps<InputProps>) => $npm$styledComponents$ReactComponentFunctional<OutputProps, { theme: $npm$styledComponents$Theme }>
-
-type $npm$styledComponents$WithTheme =
-  & $npm$styledComponents$WithThemeReactComponentClass
-  & $npm$styledComponents$WithThemeReactComponentClassUndefinedDefaultProps
-  & $npm$styledComponents$WithThemeReactComponentFunctional
-  & $npm$styledComponents$WithThemeReactComponentFunctionalUndefinedDefaultProps
+type $npm$styledComponents$WithTheme = <
+  InputProps: {},
+  Component: React$ComponentType<InputProps>,
+>(React$ComponentType<InputProps>) => React$ComponentType<$Diff<React$ElementConfig<Component>, { theme: $npm$styledComponents$Theme} >>
 
 // ---- MISC ----
 type $npm$styledComponents$Theme = $ReadOnly<{[key: string]: mixed}>;
