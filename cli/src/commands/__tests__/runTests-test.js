@@ -10,6 +10,7 @@ describe('run-tests (command)', () => {
       (console: any).log = jest.fn();
       const args = {
         _: ['run-tests', 'regression-1385_v1.x.x'],
+        numberOfFlowVersions: 1,
         path: path.join(__dirname, '__runTests-fixtures__'),
       };
       status = await run(args);

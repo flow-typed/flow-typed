@@ -16,9 +16,9 @@ import type {FlowVersion} from '../lib/flowVersion.js';
 
 export type Args = {
   _: Array<string>,
-  path?: string,
-  onlyChanged?: boolean,
-  numberOfFlowVersions?: number,
+  path?: mixed, // string
+  onlyChanged?: mixed, //boolean
+  numberOfFlowVersions?: mixed, // number
 };
 
 // Used to decide which binary to fetch for each version of Flow

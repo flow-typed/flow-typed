@@ -22,29 +22,35 @@ export const fs = {
   createReadStream: node_fs.createReadStream,
   createWriteStream: node_fs.createWriteStream,
   // $FlowFixMe
-  exists: jest.fn((dirOrFilePath: string): Promise<boolean> => {
-    return new Promise(resolve => {
-      process.nextTick(() =>
-        resolve(fs.mockFiles[dirOrFilePath] !== undefined),
-      );
-    });
-  }),
+  exists: jest.fn(
+    (dirOrFilePath: string): Promise<boolean> => {
+      return new Promise(resolve => {
+        process.nextTick(() =>
+          resolve(fs.mockFiles[dirOrFilePath] !== undefined),
+        );
+      });
+    },
+  ),
   mkdir: node_fs.mkdir,
   readdir: node_fs.readdir,
   // $FlowFixMe
-  readFile: jest.fn((filePath: string): Promise<Buffer> => {
-    return new Promise((resolve, reject) => {
-      process.nextTick(() => {
-        if (fs.mockFiles[filePath]) {
-          resolve(fs.mockFiles[filePath]);
-        } else {
-          reject(
-            new Error(`ENOENT: no such file or directory, open '${filePath}'`),
-          );
-        }
+  readFile: jest.fn(
+    (filePath: string): Promise<Buffer> => {
+      return new Promise((resolve, reject) => {
+        process.nextTick(() => {
+          if (fs.mockFiles[filePath]) {
+            resolve(fs.mockFiles[filePath]);
+          } else {
+            reject(
+              new Error(
+                `ENOENT: no such file or directory, open '${filePath}'`,
+              ),
+            );
+          }
+        });
       });
-    });
-  }),
+    },
+  ),
   rename: node_fs.rename,
   rmdir: node_fs.rmdir,
   stat: node_fs.stat,

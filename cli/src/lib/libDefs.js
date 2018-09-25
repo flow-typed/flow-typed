@@ -104,7 +104,7 @@ async function ensureCacheRepo(
     (async function() {
       const repoDirExists = fs.exists(CACHE_REPO_DIR);
       const repoGitDirExists = fs.exists(CACHE_REPO_GIT_DIR);
-      if (!await repoDirExists || !await repoGitDirExists) {
+      if (!(await repoDirExists) || !(await repoGitDirExists)) {
         writeVerbose(
           verbose,
           '• flow-typed cache not found, fetching from GitHub...',

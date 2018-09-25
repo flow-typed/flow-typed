@@ -477,6 +477,9 @@ declare class $npm$firebase$firestore$Firestore {
   runTransaction(updateFunction: (transaction: $npm$firebase$firestore$Transaction) => Promise<any>): Promise<mixed>;
   setLogLevel(logLevel: 'debug' | 'error' | 'silent'): void;
   settings(settings: $npm$firebase$firestore$Settings): void;
+  getAll(
+    ...docs: Array<$npm$firebase$firestore$DocumentReference>
+  ): Promise<Array<$npm$firebase$firestore$DocumentSnapshot>>;
 }
 
 declare interface $npm$firebase$firestore$Blob {
