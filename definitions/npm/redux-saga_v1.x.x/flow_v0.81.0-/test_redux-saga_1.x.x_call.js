@@ -1,37 +1,6 @@
 // @flow
 import { describe, it } from "flow-typed-test";
-// import createSagaMiddleware from "redux-saga";
-// buffers,
-// CANCEL,
-// channel,
-// detach,
-// effects,
-// END,
-// eventChannel,
-// multicastChannel,
-// runSaga,
-// stdChannel,
-// utils
-import {
-  // actionChannel,
-  // all,
-  // apply,
-  call
-  // cancel,
-  // cancelled,
-  // cps,
-  // debounce,
-  // delay,
-  // flush,
-  // getContext,
-  // join,
-  // race,
-  // retry,
-  // select,
-  // setContext,
-  // takeEvery,
-  // throttle
-} from "redux-saga/effects";
+import { call } from "redux-saga/effects";
 
 // Note: Without the return annotation, flow cannot determine the union case properly
 const fn0 = (): Promise<number> => Promise.resolve(1);
