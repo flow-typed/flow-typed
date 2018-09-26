@@ -109,7 +109,7 @@ Object {
 }
 `,
 );
-// $ExpectError
+
 expect({ foo: 1 }).toMatchInlineSnapshot([]);
 expect({ foo: "bar" }).toMatchObject({ baz: "qux" });
 expect("foobar").toMatch(/foo/);
