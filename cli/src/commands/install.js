@@ -166,7 +166,7 @@ async function determineFlowVersion(cwd: string, flowVersionArg?: mixed) {
 
     return {
       kind: 'specific',
-      ver: parseFlowSpecificVer(flowVersionStr, flowVersionArg),
+      ver: parseFlowSpecificVer(flowVersionStr),
     };
   } else {
     return {

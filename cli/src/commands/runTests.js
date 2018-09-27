@@ -13,6 +13,7 @@ import * as semver from 'semver';
 import * as unzip from 'unzipper';
 import typeof Yargs from 'yargs';
 import type {FlowVersion} from '../lib/flowVersion.js';
+import {ValidationError} from '../lib/ValidationError';
 
 export type Args = {
   _: Array<string>,
@@ -715,12 +716,22 @@ export async function run(argv: Args): Promise<number> {
     );
   }
 
-  const results = await runTests(
-    repoDirPath,
-    testPatterns,
-    onlyChanged,
-    numberOfFlowVersions,
-  );
+  let results;
+  try {
+    results = await runTests(
+      repoDirPath,
+      testPatterns,
+      onlyChanged,
+      numberOfFlowVersions,
+    );
+  } catch (e) {
+    if (e instanceof ValidationError) {
+      console.error(e.message);
+      return 1;
+    } else {
+      throw e;
+    }
+  }
   console.log(' ');
   Array.from(results).forEach(([testGroupName, errors]) => {
     console.log('ERROR: %s', testGroupName);

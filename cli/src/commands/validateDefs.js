@@ -4,8 +4,6 @@ import {fs} from '../lib/node';
 
 import {getNpmLibDefs} from '../lib/npm/npmLibDefs';
 
-import {printValidationErrors} from '../lib/validationErrors';
-
 export const name = 'validate-defs';
 export const description = 'Validate the structure of the /definitions dir';
 export type Args = {
@@ -31,18 +29,21 @@ export async function run(args: Args) {
     console.error('Error: Path is not a directory: %s', defsDirPath);
     return 1;
   }
-
-  const validationErrors = new Map();
-  const npmLibDefs = await getNpmLibDefs(defsDirPath, validationErrors, true);
-
-  if (validationErrors.size === 0) {
+  try {
+    const npmLibDefs = await getNpmLibDefs(defsDirPath, true);
     console.log(
       'All libdefs are named and structured correctly. ' +
         `(Found ${npmLibDefs.length})`,
     );
     return 0;
+  } catch (errors) {
+    if (Array.isArray(errors)) {
+      errors.forEach(error => {
+        console.log('  • ' + error.message);
+      });
+      return 1;
+    } else {
+      throw errors;
+    }
   }
-
-  printValidationErrors(validationErrors);
-  return 1;
 }

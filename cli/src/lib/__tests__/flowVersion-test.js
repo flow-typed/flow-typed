@@ -10,7 +10,7 @@ import {
 describe('flowVersion', () => {
   describe('parseVersion', () => {
     it('parses an exact flow version, no pre-rel', () => {
-      expect(parseVersion('v0.1.2', 'testContext', false)).toEqual([
+      expect(parseVersion('v0.1.2', false)).toEqual([
         6,
         {
           major: 0,
@@ -22,9 +22,7 @@ describe('flowVersion', () => {
     });
 
     it('parses an exact flow version, with pre-rel', () => {
-      expect(
-        parseVersion('v0.1.2-prerel-secondpart', 'testContext', false),
-      ).toEqual([
+      expect(parseVersion('v0.1.2-prerel-secondpart', false)).toEqual([
         25,
         {
           major: 0,
@@ -36,7 +34,7 @@ describe('flowVersion', () => {
     });
 
     it('parses an exact flow version, no patch no pre-rel', () => {
-      expect(parseVersion('v0.1', 'testContext', false)).toEqual([
+      expect(parseVersion('v0.1', false)).toEqual([
         4,
         {
           major: 0,
@@ -51,7 +49,7 @@ describe('flowVersion', () => {
       // Note that, in semver, a pre-rel identifier can only come after a
       // patch version! That means if the user leaves off a patch version,
       // parseVersion() should stop parsing after the minor
-      expect(parseVersion('v0.1-ignoredprerel', 'testContext', false)).toEqual([
+      expect(parseVersion('v0.1-ignoredprerel', false)).toEqual([
         4,
         {
           major: 0,
@@ -63,21 +61,21 @@ describe('flowVersion', () => {
     });
 
     it('errors on `x` major version', () => {
-      expect(() => parseVersion('vx.1.2', 'testContext', false)).toThrow(
-        'testContext: The major version of a Flow version string cannot be ' +
+      expect(() => parseVersion('vx.1.2', false)).toThrow(
+        'The major version of a Flow version string cannot be ' +
           '`x`, it must be a number!',
       );
     });
 
     it('errors on missing minor version', () => {
-      expect(() => parseVersion('v1', 'testContext', false)).toThrow(
-        'testContext: Flow versions must be a non-range semver with an exact ' +
-          'major version and either an exact minor version or an `x` minor ver.',
+      expect(() => parseVersion('v1', false)).toThrow(
+        'Flow versions must be a non-range semver with an exact ' +
+          'major version and either an exact minor version or an `x` minor ver. Instead got: v1',
       );
     });
 
     it('parses wildcard minor versions', () => {
-      expect(parseVersion('v0.x', 'testContext', false)).toEqual([
+      expect(parseVersion('v0.x', false)).toEqual([
         4,
         {
           major: 0,
@@ -89,7 +87,7 @@ describe('flowVersion', () => {
     });
 
     it('parses wildcard patch versions', () => {
-      expect(parseVersion('v0.1.x', 'testContext', false)).toEqual([
+      expect(parseVersion('v0.1.x', false)).toEqual([
         6,
         {
           major: 0,
@@ -101,7 +99,7 @@ describe('flowVersion', () => {
     });
 
     it('parses prerel when range upper is possible', () => {
-      expect(parseVersion('v0.1.x-prerel', 'testContext', true)).toEqual([
+      expect(parseVersion('v0.1.x-prerel', true)).toEqual([
         13,
         {
           major: 0,
@@ -113,7 +111,7 @@ describe('flowVersion', () => {
     });
 
     it('doesnt parse prerel when range upper is possible and present', () => {
-      expect(parseVersion('v0.1.x-v0.1', 'testContext', true)).toEqual([
+      expect(parseVersion('v0.1.x-v0.1', true)).toEqual([
         6,
         {
           major: 0,
@@ -125,9 +123,7 @@ describe('flowVersion', () => {
     });
 
     it('parses prerel on lower bound but excludes upper-range version', () => {
-      expect(
-        parseVersion('v0.1.x-prerel-prerel2-v0.1', 'testContext', true),
-      ).toEqual([
+      expect(parseVersion('v0.1.x-prerel-prerel2-v0.1', true)).toEqual([
         21,
         {
           major: 0,
@@ -141,11 +137,11 @@ describe('flowVersion', () => {
 
   describe('parseDirString', () => {
     it('parses a flow-all version', () => {
-      expect(parseDirString('flow_all', 'testContext')).toEqual({kind: 'all'});
+      expect(parseDirString('flow_all')).toEqual({kind: 'all'});
     });
 
     it('parses an upper-bounded range', () => {
-      expect(parseDirString('flow_-v0.1.2', 'testContext')).toEqual({
+      expect(parseDirString('flow_-v0.1.2')).toEqual({
         kind: 'ranged',
         lower: null,
         upper: {
@@ -158,7 +154,7 @@ describe('flowVersion', () => {
     });
 
     it('parses a fully-bounded range', () => {
-      expect(parseDirString('flow_v0.1.2-v0.2.3', 'testContext')).toEqual({
+      expect(parseDirString('flow_v0.1.2-v0.2.3')).toEqual({
         kind: 'ranged',
         lower: {
           major: 0,
@@ -176,7 +172,7 @@ describe('flowVersion', () => {
     });
 
     it('parses a lower-bounded range', () => {
-      expect(parseDirString('flow_v0.1.2-', 'testContext')).toEqual({
+      expect(parseDirString('flow_v0.1.2-')).toEqual({
         kind: 'ranged',
         upper: null,
         lower: {
