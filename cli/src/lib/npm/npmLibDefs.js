@@ -422,7 +422,7 @@ export async function getInstalledNpmLibDefs(
 /**
  * Retrieve single libdef.
  */
-async function getItem(
+async function getSingleLibdef(
   itemName: string,
   npmDefsDirPath: string,
   validating?: boolean,
@@ -481,7 +481,7 @@ export async function getNpmLibDefs(
   const errors = [];
   const proms = dirItems.map(async itemName => {
     try {
-      return await getItem(itemName, npmDefsDirPath, validating);
+      return await getSingleLibdef(itemName, npmDefsDirPath, validating);
     } catch (e) {
       errors.push(e);
     }
