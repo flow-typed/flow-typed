@@ -4020,7 +4020,7 @@ declare module "sequelize" {
      If changed is called without an argument and no keys have changed, it will return `false`.
      */
     changed(key: $Keys<TAttributes>): boolean,
-    changed(): boolean | string[],
+    changed(): boolean | Array<$Keys<TAttributes>>,
 
     /**
      * Returns the previous value for key from `_previousDataValues`.
