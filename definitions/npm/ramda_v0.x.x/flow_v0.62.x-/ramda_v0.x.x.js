@@ -1307,17 +1307,17 @@ declare module ramda {
   ): { [k: string]: T } & S;
 
   declare function assocPath<T, S>(
-    key: Array<string>,
+    key: Array<string | number>,
     ...args: Array<void>
   ): ((val: T) => (src: S) => { [k: string]: T }) &
     ((val: T) => (src: S) => { [k: string]: T } & S);
   declare function assocPath<T, S>(
-    key: Array<string>,
+    key: Array<string | number>,
     val: T,
     ...args: Array<void>
   ): (src: S) => { [k: string]: T } & S;
   declare function assocPath<T, S>(
-    key: Array<string>,
+    key: Array<string | number>,
     val: T,
     src: S
   ): { [k: string]: T } & S;
