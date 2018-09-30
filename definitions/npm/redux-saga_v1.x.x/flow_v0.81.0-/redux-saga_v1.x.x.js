@@ -53,7 +53,7 @@ declare module "redux-saga" {
   declare export var channel: (buffer?: Buffer) => Channel;
   declare export var SAGA_LOCATION: "@@redux-saga/LOCATION";
   declare export var CANCEL: "@@redux-saga/CANCEL_PROMISE";
-  declare export var END: {| +type: typeof SAGA_LOCATION |};
+  declare export var END: {| +type: "@@redux-saga/CHANNEL_END" |};
 
   declare export function isEnd(input: any): boolean;
 
