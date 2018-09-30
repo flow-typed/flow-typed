@@ -53,11 +53,8 @@ declare module "redux-saga" {
   declare export var channel: (buffer?: Buffer) => Channel;
   declare export var SAGA_LOCATION: "@@redux-saga/LOCATION";
   declare export var CANCEL: "@@redux-saga/CANCEL_PROMISE";
-  declare export var END: {| +type: SAGA_LOCATION |};
+  declare export var END: {| +type: typeof SAGA_LOCATION |};
 
-  declare export function detach<T1, T2, T2, T3>(
-    effect: ForkEffect<T1, T2, T2, T3>
-  ): ForkEffect<T1, T2, T2, true>;
   declare export function isEnd(input: any): boolean;
 
   declare type RunSagaOptions = {
@@ -336,12 +333,16 @@ declare module "redux-saga" {
     |}>
   >;
 
-  declare export type PutEffect<A: Object, C: Channel | null> = IEffect<
+  declare export type PutEffect<
+    A: Object,
+    C: Channel | null,
+    R: { resolve: true } | void
+  > = IEffect<
     "PUT",
     $ReadOnly<{|
       action: A,
       channel: C,
-      resolve?: true
+      ...$Exact<R>
     |}>
   >;
 
@@ -361,7 +362,7 @@ declare module "redux-saga" {
   declare export type ForkEffect<
     Ctx,
     Fn: Function,
-    D: ?boolean,
+    D: { detached: true } | void,
     Args: $ReadOnlyArray<*>
   > = IEffect<
     "FORK",
@@ -369,9 +370,13 @@ declare module "redux-saga" {
       context: Ctx,
       fn: Fn,
       args: Args,
-      detached: D
+      ...$Exact<D>
     |}>
   >;
+
+  declare export function detach<T1, T2, T3>(
+    effect: ForkEffect<T1, T2, *, T3>
+  ): ForkEffect<T1, T2, { detached: true }, T3>;
 
   declare export type CpsEffect<
     Ctx,
@@ -436,7 +441,7 @@ declare module "redux-saga" {
 
   declare export type Effect =
     | TakeEffect<*, *, *>
-    | PutEffect<*, *>
+    | PutEffect<*, *, *>
     | CallEffect<*, *, *>
     | ForkEffect<*, *, *, *>
     | CpsEffect<*, *, *>
@@ -474,8 +479,7 @@ declare module "redux-saga/effects" {
     SelectEffect,
     SetContextEffect,
     TakeEffect,
-    Task,
-    PutResolveEffect
+    Task
   } from "redux-saga";
 
   declare export var retry: {
@@ -670,13 +674,16 @@ declare module "redux-saga/effects" {
   };
 
   declare export var put: {
-    <A: Object>(action: A): PutEffect<A, null>,
-    <A: Object>(channel: Channel, action: A): PutEffect<A, Channel>
+    <A: Object>(action: A): PutEffect<A, null, void>,
+    <A: Object>(channel: Channel, action: A): PutEffect<A, Channel, void>
   };
 
   declare export var putResolve: {
-    <A: Object>(action: A): PutResolveEffect<A, null>,
-    <A: Object>(channel: Channel, action: A): PutResolveEffect<A, Channel>
+    <A: Object>(action: A): PutEffect<A, null, { resolve: true }>,
+    <A: Object>(
+      channel: Channel,
+      action: A
+    ): PutEffect<A, Channel, { resolve: true }>
   };
 
   declare export var call: {
@@ -1824,7 +1831,7 @@ declare module "redux-saga/effects" {
   };
 
   declare export var flush: {
-    (channel: Channel): FlushEffect
+    <T: Channel>(channel: T): FlushEffect<T>
   };
 
   declare export var cancelled: {
@@ -1836,7 +1843,7 @@ declare module "redux-saga/effects" {
   };
 
   declare export var getContext: {
-    (prop: string): GetContextEffect
+    <T: string>(prop: T): GetContextEffect<T>
   };
 
   declare export var race: {
