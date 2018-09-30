@@ -53,12 +53,26 @@ declare module "redux-saga" {
   declare export var channel: (buffer?: Buffer) => Channel;
   declare export var SAGA_LOCATION: "@@redux-saga/LOCATION";
   declare export var CANCEL: "@@redux-saga/CANCEL_PROMISE";
-  declare export var END: {| +type: "@@redux-saga/CHANNEL_END" |};
+  declare export type TypeEND = {| +type: "@@redux-saga/CHANNEL_END" |};
+  declare export var END: TypeEND;
 
-  declare export var isEnd: {
-    (input: typeof END): true,
+
+    declare export var isEnd: {
+    (input: TypeEND): true,
     (input: mixed): false
   };
+
+  declare export type Predicate<T> = (arg: T) => boolean;
+
+  declare export type MulticastChannel<T> = $ReadOnly<{|
+    take(cb: (message: T | TypeEND) => void, matcher?: Predicate<T>): void;
+    put(message: T | TypeEND): void;
+    close(): void;
+  |}>;
+
+  declare export function multicastChannel<T>(): MulticastChannel<T>;
+
+  declare export function stdChannel<T>(): MulticastChannel<T>;
 
   declare type RunSagaOptions = {
     +subscribe?: (emit: (input: any) => any) => () => void,
