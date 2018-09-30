@@ -1,9 +1,28 @@
 declare module "redux-saga" {
-  declare export interface Channel {
-    take: (cb: (msg: mixed) => void) => void;
-    put: (msg: mixed) => void;
-    flush: (cb: (msgs: mixed) => void) => void;
-    close: () => void;
+  declare export var SAGA_LOCATION: "@@redux-saga/LOCATION";
+  declare export var CANCEL: "@@redux-saga/CANCEL_PROMISE";
+
+  declare export type TEnd = {| +type: "@@redux-saga/CHANNEL_END" |};
+  declare export var END: TEnd;
+
+  declare export var isEnd: {
+    (input: TEnd): true,
+    (input: mixed): false
+  };
+
+  declare export type Predicate<T> = (arg: T) => boolean;
+
+  declare export type MulticastChannel<T> = $ReadOnly<{|
+    take(cb: (message: T | TEnd) => void, matcher?: Predicate<T>): void,
+    put(message: T | TEnd): void,
+    close(): void
+  |}>;
+
+  declare export interface Buffer<T> {
+    isEmpty(): boolean;
+    put(message: T): void;
+    take(): T | void;
+    flush(): Array<T>;
   }
 
   declare export interface Task<T> {
@@ -13,12 +32,6 @@ declare module "redux-saga" {
     error: () => Error | void;
     cancel: () => void;
     done: Promise<T>;
-  }
-
-  declare export interface Buffer {
-    isEmpty: () => boolean;
-    put: (msg: mixed) => void;
-    take(): mixed;
   }
 
   declare export interface SagaMonitor {
@@ -36,38 +49,33 @@ declare module "redux-saga" {
 
   declare export type Saga<T> = Generator<Effect, T, any>;
 
-  declare export var eventChannel: (
-    sub: (emit: (msg: any) => void) => () => void,
-    buffer?: Buffer,
-    matcher?: (msg: mixed) => boolean
-  ) => Channel;
+  declare export type Unsubscribe = () => void;
+
+  declare export type Subscribe<T> = (
+    cb: (input: T | TEnd) => void
+  ) => Unsubscribe;
+
+  declare export interface EventChannel<T> {
+    take(cb: (message: T | TEnd) => void): void;
+    flush(cb: (items: Array<T> | TEnd) => void): void;
+    close(): void;
+  }
+
+  declare export var eventChannel: <T>(
+    subscribe: Subscribe<T>,
+    buffer?: Buffer<T>
+  ) => EventChannel<T>;
+
+  // declare export var channel: (buffer?: Buffer<>) => Channel;
+
+  declare export type Channel = {}; // TODO REMOVE this
 
   declare export var buffers: $ReadOnly<{|
-    none: () => Buffer,
-    fixed: (limit?: number) => Buffer,
-    dropping: (limit?: number) => Buffer,
-    sliding: (limit?: number) => Buffer,
-    expanding: (initialSize?: number) => Buffer
-  |}>;
-
-  declare export var channel: (buffer?: Buffer) => Channel;
-  declare export var SAGA_LOCATION: "@@redux-saga/LOCATION";
-  declare export var CANCEL: "@@redux-saga/CANCEL_PROMISE";
-  declare export type TypeEND = {| +type: "@@redux-saga/CHANNEL_END" |};
-  declare export var END: TypeEND;
-
-
-    declare export var isEnd: {
-    (input: TypeEND): true,
-    (input: mixed): false
-  };
-
-  declare export type Predicate<T> = (arg: T) => boolean;
-
-  declare export type MulticastChannel<T> = $ReadOnly<{|
-    take(cb: (message: T | TypeEND) => void, matcher?: Predicate<T>): void;
-    put(message: T | TypeEND): void;
-    close(): void;
+    none: <T>() => Buffer<T>,
+    fixed: <T>(limit?: number) => Buffer<T>,
+    dropping: <T>(limit?: number) => Buffer<T>,
+    sliding: <T>(limit?: number) => Buffer<T>,
+    expanding: <T>(initialSize?: number) => Buffer<T>
   |}>;
 
   declare export function multicastChannel<T>(): MulticastChannel<T>;
@@ -429,8 +437,9 @@ declare module "redux-saga" {
   >;
 
   declare export type ActionChannelEffect<
+    T,
     P: Pattern,
-    B: Buffer | void
+    B: Buffer<T> | void
   > = IEffect<
     "ACTION_CHANNEL",
     $ReadOnly<{|
@@ -1844,7 +1853,7 @@ declare module "redux-saga/effects" {
 
   declare export var actionChannel: {
     <P: Pattern>(pattern: P): ActionChannelEffect<P, void>,
-    <P: Pattern, B: Buffer>(pattern: P, buffer: B): ActionChannelEffect<P, B>
+    <T, P: Pattern, B: Buffer<T>>(pattern: P, buffer: B): ActionChannelEffect<P, B>
   };
 
   declare export var flush: {
