@@ -66,9 +66,14 @@ declare module "redux-saga" {
     buffer?: Buffer<T>
   ) => EventChannel<T>;
 
-  // declare export var channel: (buffer?: Buffer<>) => Channel;
+  declare export interface Channel<T> {
+    take(cb: (message: T | TEnd) => void): void;
+    put(message: T | TEnd): void;
+    flush(cb: (items: Array<T> | TEnd) => void): void;
+    close(): void;
+  }
 
-  declare export type Channel = {}; // TODO REMOVE this
+  declare export function channel<T>(buffer?: Buffer<T>): Channel<T>;
 
   declare export var buffers: $ReadOnly<{|
     none: <T>() => Buffer<T>,
@@ -347,7 +352,7 @@ declare module "redux-saga" {
 
   declare export type TakeEffect<
     P: Pattern | void,
-    C: Channel | void,
+    C: Channel<*> | void,
     M: true | void
   > = IEffect<
     "TAKE",
@@ -360,7 +365,7 @@ declare module "redux-saga" {
 
   declare export type PutEffect<
     A: Object,
-    C: Channel | null,
+    C: Channel<*> | null,
     R: { resolve: true } | void
   > = IEffect<
     "PUT",
@@ -448,7 +453,7 @@ declare module "redux-saga" {
     |}>
   >;
 
-  declare export type FlushEffect<T: Channel | void> = IEffect<"FLUSH", T>;
+  declare export type FlushEffect<T: Channel<*> | void> = IEffect<"FLUSH", T>;
 
   declare export type CancelledEffect = IEffect<"CANCELLED", {}>;
 
@@ -692,24 +697,24 @@ declare module "redux-saga/effects" {
 
   declare export var take: {
     <P: Pattern>(pattern: P): TakeEffect<P, void, void>,
-    (channel: Channel): TakeEffect<void, Channel, void>,
+    (channel: Channel<*>): TakeEffect<void, Channel<*>, void>,
     +maybe: {
       <P: Pattern>(pattern: P): TakeEffect<P, void, true>,
-      (channel: Channel): TakeEffect<void, Channel, true>
+      (channel: Channel<*>): TakeEffect<void, Channel<*>, true>
     }
   };
 
   declare export var put: {
     <A: Object>(action: A): PutEffect<A, null, void>,
-    <A: Object>(channel: Channel, action: A): PutEffect<A, Channel, void>
+    <A: Object>(channel: Channel<*>, action: A): PutEffect<A, Channel<*>, void>
   };
 
   declare export var putResolve: {
     <A: Object>(action: A): PutEffect<A, null, { resolve: true }>,
     <A: Object>(
-      channel: Channel,
+      channel: Channel<*>,
       action: A
-    ): PutEffect<A, Channel, { resolve: true }>
+    ): PutEffect<A, Channel<*>, { resolve: true }>
   };
 
   declare export var call: {
@@ -1853,11 +1858,14 @@ declare module "redux-saga/effects" {
 
   declare export var actionChannel: {
     <P: Pattern>(pattern: P): ActionChannelEffect<P, void>,
-    <T, P: Pattern, B: Buffer<T>>(pattern: P, buffer: B): ActionChannelEffect<P, B>
+    <T, P: Pattern, B: Buffer<T>>(
+      pattern: P,
+      buffer: B
+    ): ActionChannelEffect<P, B>
   };
 
   declare export var flush: {
-    <T: Channel>(channel: T): FlushEffect<T>
+    <T: Channel<*>>(channel: T): FlushEffect<T>
   };
 
   declare export var cancelled: {
@@ -2029,22 +2037,22 @@ declare module "redux-saga/effects" {
 
     // with channel
     <A, R, Fn: (action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn
     ): ForkEffect<null, Function, void, $ReadOnlyArray<any>>,
     <A, R, T1, Fn: (t1: T1, action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1
     ): ForkEffect<null, Function, void, $ReadOnlyArray<any>>,
     <A, R, T1, T2, Fn: (t1: T1, t2: T2, action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2
     ): ForkEffect<null, Function, void, $ReadOnlyArray<any>>,
     <A, R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3, action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2059,7 +2067,7 @@ declare module "redux-saga/effects" {
       T4,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, action: A) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2076,7 +2084,7 @@ declare module "redux-saga/effects" {
       T5,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, action: A) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2095,7 +2103,7 @@ declare module "redux-saga/effects" {
       T6,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, action: A) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2125,7 +2133,7 @@ declare module "redux-saga/effects" {
         action: A
       ) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2158,7 +2166,7 @@ declare module "redux-saga/effects" {
         action: A
       ) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2317,22 +2325,22 @@ declare module "redux-saga/effects" {
 
     // with channel
     <A, R, Fn: (action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn
     ): ForkEffect<null, Function, void, $ReadOnlyArray<any>>,
     <A, R, T1, Fn: (t1: T1, action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1
     ): ForkEffect<null, Function, void, $ReadOnlyArray<any>>,
     <A, R, T1, T2, Fn: (t1: T1, t2: T2, action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2
     ): ForkEffect<null, Function, void, $ReadOnlyArray<any>>,
     <A, R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3, action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2347,7 +2355,7 @@ declare module "redux-saga/effects" {
       T4,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, action: A) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2364,7 +2372,7 @@ declare module "redux-saga/effects" {
       T5,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, action: A) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2383,7 +2391,7 @@ declare module "redux-saga/effects" {
       T6,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, action: A) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2413,7 +2421,7 @@ declare module "redux-saga/effects" {
         action: A
       ) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2446,7 +2454,7 @@ declare module "redux-saga/effects" {
         action: A
       ) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2605,22 +2613,22 @@ declare module "redux-saga/effects" {
 
     // with channel
     <A, R, Fn: (action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn
     ): ForkEffect<null, Function, void, $ReadOnlyArray<any>>,
     <A, R, T1, Fn: (t1: T1, action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1
     ): ForkEffect<null, Function, void, $ReadOnlyArray<any>>,
     <A, R, T1, T2, Fn: (t1: T1, t2: T2, action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2
     ): ForkEffect<null, Function, void, $ReadOnlyArray<any>>,
     <A, R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3, action: A) => Saga<R>>(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2635,7 +2643,7 @@ declare module "redux-saga/effects" {
       T4,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, action: A) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2652,7 +2660,7 @@ declare module "redux-saga/effects" {
       T5,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, action: A) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2671,7 +2679,7 @@ declare module "redux-saga/effects" {
       T6,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, action: A) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2701,7 +2709,7 @@ declare module "redux-saga/effects" {
         action: A
       ) => Saga<R>
     >(
-      channel: Channel,
+      channel: Channel<*>,
       fn: Fn,
       t1: T1,
       t2: T2,

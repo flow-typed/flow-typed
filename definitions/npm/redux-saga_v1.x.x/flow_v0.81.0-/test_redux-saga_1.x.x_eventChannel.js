@@ -11,21 +11,17 @@ describe("eventChannel", () => {
   it("returned Channel must be read only object", () => {
     const ch = eventChannel(simpleSubscribeFn);
 
-    // $ExpectError
-    ch.none = "hi belarus";
-    // $ExpectError
-    ch.fixed = "hi belarus";
-    // $ExpectError
-    ch.dropping = "hi belarus";
-    // $ExpectError
-    ch.sliding = "hi belarus";
-    // $ExpectError
-    ch.expanding = "hi belarus";
+    // $ExpectError - read-only
+    ch.close = "hi belarus";
+    // $ExpectError - read-only
+    ch.take = "hi belarus";
+    // $ExpectError - read-only
+    ch.flush = "hi belarus";
   });
 
   it("returned Channel must be exact type", () => {
     const ch = eventChannel(simpleSubscribeFn);
-    // $ExpectError
+    // $ExpectError- exact type
     ch.anyOtherProp = "anyValue";
   });
 
