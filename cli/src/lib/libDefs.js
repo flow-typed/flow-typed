@@ -152,9 +152,15 @@ export {
 };
 
 async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>) {
-  const parsedDirItem = parseRepoDirItem(pkgDirPath);
-  (await parseLibDefsFromPkgDir(parsedDirItem, pkgDirPath)).forEach(libDef =>
-    libDefs.push(libDef),
+  const versionedRepoDirs = await fs.readdir(pkgDirPath);
+  const parsedDirItems = versionedRepoDirs
+    .map(dir => path.join(pkgDirPath, dir))
+    .map(parseRepoDirItem);
+  await Promise.all(
+    parsedDirItems.map(async parsedDirItem => {
+      const libdefs = await parseLibDefsFromPkgDir(parsedDirItem);
+      libdefs.forEach(libDef => libDefs.push(libDef));
+    }),
   );
 }
 
@@ -209,10 +215,11 @@ function parsePkgFlowDirVersion(pkgFlowDirPath): FlowVersion {
  * on disk, scan the directory and generate a list of LibDefs for each
  * flow-versioned definition file.
  */
-async function parseLibDefsFromPkgDir(
-  {pkgName, pkgVersion},
-  pkgDirPath,
-): Promise<Array<LibDef>> {
+async function parseLibDefsFromPkgDir({
+  pkgName,
+  pkgVersion,
+  path: pkgDirPath,
+}): Promise<Array<LibDef>> {
   const pkgVersionStr = versionToString(pkgVersion);
   const pkgDirItems = await fs.readdir(pkgDirPath);
 
@@ -251,9 +258,7 @@ async function parseLibDefsFromPkgDir(
   await P.all(
     flowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
-      const basePkgName =
-        pkgName.charAt(0) === '@' ? pkgName.split(path.sep).pop() : pkgName;
-      const libDefFileName = `${basePkgName}_${pkgVersionStr}.js`;
+      const libDefFileName = `index.js`;
       let libDefFilePath;
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
@@ -338,7 +343,11 @@ export function parseRepoDirItem(dirItemPath: string) {
     prerel = prerel.substr(1);
   }
 
-  return {pkgName, pkgVersion: {major, minor, patch, prerel}};
+  return {
+    pkgName,
+    pkgVersion: {major, minor, patch, prerel},
+    path: dirItemPath,
+  };
 }
 
 /**
