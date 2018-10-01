@@ -663,10 +663,10 @@ export async function run(argv: Args): Promise<number> {
 
   const cwd = process.cwd();
   const basePath = argv.path ? String(argv.path) : cwd;
-  const cwdDefsNPMPath = path.join(basePath, 'definitions', 'npm');
+  const cwdDefsNPMPath = path.join(basePath, 'experimental', 'definitions');
   let repoDirPath = (await fs.exists(cwdDefsNPMPath))
     ? cwdDefsNPMPath
-    : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
+    : path.join(__dirname, '..', '..', '..', 'experimental', 'definitions');
 
   if (onlyChanged) {
     console.log(
