@@ -1,11 +1,11 @@
-import React from 'react';
-declare module 'react-body-classname' {
+import React from "react";
+declare module "react-body-classname" {
   declare type Props = {
     children?: React.ChildrenArray<any>,
-    className: string,
+    className: string
   };
   declare class BodyClassName extends React$Component<Props> {
     static rewind(): string;
   }
-  declare var exports: typeof BodyClassName;
+  declare module.exports: typeof BodyClassName;
 }

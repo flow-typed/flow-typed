@@ -68,7 +68,10 @@ async function rebaseCacheRepo() {
  * Ensure that the CACHE_REPO_DIR exists and is recently rebased.
  * (else: create/rebase it)
  */
-const cacheRepoEnsureToken = {
+const cacheRepoEnsureToken: {
+  lastEnsured: number,
+  pendingEnsurance: Promise<*>,
+} = {
   lastEnsured: 0,
   pendingEnsurance: Promise.resolve(),
 };
@@ -86,7 +89,7 @@ export async function ensureCacheRepo(
     (async function() {
       const repoDirExists = fs.exists(getCacheRepoDir());
       const repoGitDirExists = fs.exists(getCacheRepoGitDir());
-      if (!await repoDirExists || !await repoGitDirExists) {
+      if (!(await repoDirExists) || !(await repoGitDirExists)) {
         console.log(`• flow-typed cache not found, fetching from GitHub...`);
         await cloneCacheRepo();
       } else {

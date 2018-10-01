@@ -215,7 +215,14 @@ declare module "raven-js" {
     setShouldSendCallback(data: any, orig?: any): this,
 
     /** Show Sentry user feedback dialog */
-    showReportDialog(options: Object): void,
+    showReportDialog(options?: { 
+      eventId?: string, 
+      dsn?: string, 
+      user?: { 
+        name?: string, 
+        email?: string 
+      } 
+    }): void,
 
     /** Configure Raven DSN */
     setDSN(dsn: string): void

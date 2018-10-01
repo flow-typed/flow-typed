@@ -82,7 +82,7 @@ export function getPackageJsonDependencies(
     if (contentSection) {
       Object.keys(contentSection).forEach(pkgName => {
         if (deps[pkgName]) {
-          throw new Error(`Found ${pkgName} listed twice in package.json!`);
+          console.warn(`Found ${pkgName} listed twice in package.json!`);
         }
         deps[pkgName] = contentSection[pkgName];
       });

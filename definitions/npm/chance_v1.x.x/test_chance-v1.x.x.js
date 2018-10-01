@@ -2,6 +2,10 @@
 import Chance from 'chance';
 
 const chance: Chance = Chance();
+const chanceStaticWithSeed: Chance = Chance(12345);
+
+const chanceConstructed: Chance = new Chance();
+const chanceConstructedWithSeed: Chance = new Chance(12345);
 
 (chance.gender(): string);
 (chance.birthday({ type: 'teen' }): Date);

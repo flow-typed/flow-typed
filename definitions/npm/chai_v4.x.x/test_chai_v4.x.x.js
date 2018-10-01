@@ -96,6 +96,7 @@ expect(1).to.satisfy((x, y) => x * y);
 expect(0.3 - 0.2).to.be.closeTo(0.1, 1e-3);
 
 expect([1, 2, 3]).to.include.members([3, 2]);
+expect([1, 2, 3]).to.have.ordered.members([1, 2, 3]);
 
 expect("a").to.be.oneOf(["a", "b", "c"]);
 
@@ -185,3 +186,11 @@ expect({ }).to.have.data('key', 1);
 expect({ }).to.have.prop('key', 1);
 expect({ }).to.have.state('key', 1);
 expect({ }).to.have.value('val');
+
+//chai-karma-snapshot
+expect('test').to.matchSnapshot();
+expect('<div></div>').to.matchSnapshot('html');
+expect('<div></div>').to.matchSnapshot('html', true);
+expect('<div></div>').to.matchSnapshot('html', true, 'Message');
+// $ExpectError
+expect('<div></div>').to.matchSnapshot('html', 'not_boolean', 'Message');

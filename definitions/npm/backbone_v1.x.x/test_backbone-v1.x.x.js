@@ -1,5 +1,5 @@
 // @flow
-import Backbone, { Model, Collection } from "backbone";
+import Backbone, { Model, Collection, Events } from "backbone";
 
 const otherBackbone: typeof Backbone = Backbone.noConflict();
 
@@ -88,3 +88,22 @@ router.route("/create", "delete", null);
 Backbone.history.start({ root: false });
 
 Backbone.history.start({ pushState: true });
+
+// inherits Events methods
+Backbone.history.on('click', () => true);
+router.on('click', () => true);
+instance.on('click', () => true);
+tasks.on('click', () => true);
+
+// constructor accepts options
+class MyView extends Backbone.View {
+}
+
+const myView = new MyView({ el: '.some-selector' });
+
+// initialize does not need a return
+class MyView2 extends Backbone.View {
+  initialize() {
+    // code
+  }
+}

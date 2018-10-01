@@ -84,12 +84,6 @@ Effects.batch([
   Effects.promise(asyncActionCreator, 'one', 2),
 ])
 
-// $ExpectError
-Effects.batch([
-  zeroArg,
-  numberString(1, 'two'),
-])
-
 
 //
 // Effects.lift

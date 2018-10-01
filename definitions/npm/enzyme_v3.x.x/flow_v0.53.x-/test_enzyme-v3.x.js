@@ -47,6 +47,18 @@ shallowWrapper.instance();
 shallowWrapper.find("someSelector");
 shallowWrapper.prop("foo");
 shallowWrapper.props().foo;
+shallowWrapper.slice()
+shallowWrapper.slice(0)
+shallowWrapper.slice(0, 1)
+
+// shallow's getNode(s) was replaced by getElement(s) in enzyme v3
+// $ExpectError
+shallowWrapper.getNode();
+// $ExpectError
+shallowWrapper.getNodes();
+
+shallowWrapper.getElement();
+shallowWrapper.getElements();
 
 (mount(<div />).map(node => true): Array<boolean>);
 
@@ -56,6 +68,13 @@ shallowWrapper.props().foo;
 (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<number>);
 // $ExpectError
 (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
+
+
+// mount's getNode(s) were removed in enzyme v3
+// $ExpectError
+mount(<div />).getNode();
+// $ExpectError
+mount(<div />).getNodes();
 
 // Cheerio
 render(<div />).contents();

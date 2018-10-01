@@ -18,6 +18,7 @@ declare module "node-polyglot" {
     unset(idOrPhrases: string | Object): void,
     clear(): void,
     replace(phrases: Object): void,
+    has(key: string): boolean,
 
     static transformPhrase(
       phrase: string,

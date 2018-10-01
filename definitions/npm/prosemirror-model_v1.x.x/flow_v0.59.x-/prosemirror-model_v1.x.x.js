@@ -432,8 +432,18 @@ declare module "prosemirror-model" {
     static fromSchema(schema: Schema): DOMSerializer
   }
 
-  // The real type of this is something like [string, Object, ...(DOMOutputSpec | 0)]
-  declare export type DOMOutputSpec = Array<
-    string | Object | DOMOutputSpec | 0
-  >;
+  declare type Attributes = { [string]: ?string }
+
+  declare export type DOMOutputSpec =
+    | string // node.text
+    | Element // document.createElement("div")
+    | [string] // ["br"]
+    // ["p", 0]
+    // ["img", node.attrs]
+    // ["div", ["hr"]]
+    | [string, 0 | Attributes | DOMOutputSpec | DOMOutputSpec[]]
+    // ["ul", { "data-tight": node.attrs.tight ? "true" : null }, 0]
+    // ["pre", node.attrs.params ? {"data-params": node.attrs.params} : {}, ["code", 0]]
+    // ["li", { "data-task": "true" }, [["input", {"type":"checkbox"}], 0]]
+    | [string, Attributes, 0 | DOMOutputSpec | DOMOutputSpec[]]
 }

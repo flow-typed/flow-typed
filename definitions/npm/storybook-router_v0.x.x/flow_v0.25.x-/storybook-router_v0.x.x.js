@@ -1,5 +1,3 @@
-import type { Element } from "react";
-
 type LocationShape = {
   pathname?: string,
   search?: string,
@@ -12,11 +10,16 @@ type GetUserConfirmation = (
   callback: (confirmed: boolean) => void
 ) => void;
 
-type Renderable = Element<*>;
-type RenderFunction = () => Renderable;
-type StoryDecorator = (story: RenderFunction) => Renderable;
-
 declare module "storybook-router" {
+  declare type Context = { kind: string, story: string };
+  declare type Renderable = React$Element<*>;
+  declare type RenderFunction = () => Renderable | Array<Renderable>;
+
+  declare type StoryDecorator = (
+    story: RenderFunction,
+    context: Context
+  ) => Renderable | null;
+
   declare type Links = {
     [key: string]: (kind: string, story: string) => Function
   };
@@ -28,7 +31,7 @@ declare module "storybook-router" {
     initialIndex?: number,
     getUserConfirmation?: GetUserConfirmation,
     keyLength?: number,
-    children?: Element<*>
+    children?: React$Element<*>
   };
 
   declare module.exports: {

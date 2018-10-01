@@ -21,28 +21,36 @@ export const fs = {
 
   createReadStream: node_fs.createReadStream,
   createWriteStream: node_fs.createWriteStream,
-  exists: jest.fn(async (dirOrFilePath: string): Promise<boolean> => {
-    return new Promise(resolve => {
-      process.nextTick(() =>
-        resolve(fs.mockFiles[dirOrFilePath] !== undefined),
-      );
-    });
-  }),
+  // $FlowFixMe
+  exists: jest.fn(
+    (dirOrFilePath: string): Promise<boolean> => {
+      return new Promise(resolve => {
+        process.nextTick(() =>
+          resolve(fs.mockFiles[dirOrFilePath] !== undefined),
+        );
+      });
+    },
+  ),
   mkdir: node_fs.mkdir,
   readdir: node_fs.readdir,
-  readFile: jest.fn(async (filePath: string): Promise<Buffer> => {
-    return new Promise((resolve, reject) => {
-      process.nextTick(() => {
-        if (fs.mockFiles[filePath]) {
-          resolve(fs.mockFiles[filePath]);
-        } else {
-          reject(
-            new Error(`ENOENT: no such file or directory, open '${filePath}'`),
-          );
-        }
+  // $FlowFixMe
+  readFile: jest.fn(
+    (filePath: string): Promise<Buffer> => {
+      return new Promise((resolve, reject) => {
+        process.nextTick(() => {
+          if (fs.mockFiles[filePath]) {
+            resolve(fs.mockFiles[filePath]);
+          } else {
+            reject(
+              new Error(
+                `ENOENT: no such file or directory, open '${filePath}'`,
+              ),
+            );
+          }
+        });
       });
-    });
-  }),
+    },
+  ),
   rename: node_fs.rename,
   rmdir: node_fs.rmdir,
   stat: node_fs.stat,

@@ -11,6 +11,7 @@ declare module 'prop-types' {
   declare var number: React$PropType$Primitive<number>;
   declare var object: React$PropType$Primitive<Object>;
   declare var string: React$PropType$Primitive<string>;
+  declare var symbol: React$PropType$Primitive<Symbol>;
   declare var any: React$PropType$Primitive<any>;
   declare var arrayOf: React$PropType$ArrayOf;
   declare var element: React$PropType$Primitive<any>; /* TODO */

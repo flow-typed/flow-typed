@@ -161,26 +161,25 @@ declare module "yargs" {
     implies(keys: { [key: string]: string | Array<string> }): this;
 
     locale(
-      locale:
-        | "de"
-        | "en"
-        | "es"
-        | "fr"
-        | "hi"
-        | "hu"
-        | "id"
-        | "it"
-        | "ja"
-        | "ko"
-        | "nb"
-        | "pirate"
-        | "pl"
-        | "pt"
-        | "pt_BR"
-        | "ru"
-        | "th"
-        | "tr"
-        | "zh_CN"
+      locale: | "de"
+      | "en"
+      | "es"
+      | "fr"
+      | "hi"
+      | "hu"
+      | "id"
+      | "it"
+      | "ja"
+      | "ko"
+      | "nb"
+      | "pirate"
+      | "pl"
+      | "pt"
+      | "pt_BR"
+      | "ru"
+      | "th"
+      | "tr"
+      | "zh_CN"
     ): this;
     locale(): string;
 
@@ -249,5 +248,5 @@ declare module "yargs" {
     wrap(columns: number | null): this;
   }
 
-  declare var exports: Yargs;
+  declare module.exports: Yargs;
 }

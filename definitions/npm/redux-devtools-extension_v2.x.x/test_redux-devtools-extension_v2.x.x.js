@@ -81,6 +81,5 @@ const options2: OptionsLogProd = {
  */
 type SelfFn<A> = A => A;
 
-// $ExpectError
 enhancer();
 (enhancer(options1): SelfFn<*>);

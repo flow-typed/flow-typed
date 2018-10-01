@@ -21,16 +21,28 @@ const userManagerConfig = {
   response_type: "token id_token",
   scope: "openid profile email",
   loadUserInfo: false,
-  automaticSilentRenew: true,
   silent_redirect_uri: "http://base/oidc-silent-renew.html",
-  accessTokenExpiringNotificationTime: 598
+  automaticSilentRenew: true,
+  accessTokenExpiringNotificationTime: 598,
+  silentRequestTimeout: 10,
+  filterProtocolClaims: true,
+  post_logout_redirect_uri: "http://base/login"
 };
 
 const userManager = reduxOidc.createUserManager(userManagerConfig);
 
-// The UserManager can do redirects for signins/outs.
+// The UserManager can do different signins/outs and has other helpers.
+userManager.getUser();
+userManager.removeUser();
 userManager.signinRedirect();
+userManager.signinSilent();
+userManager.signinPopup();
 userManager.signoutRedirect();
+userManager.signoutPopup();
+userManager.querySessionStatus();
+userManager.startSilentRenew();
+userManager.stopSilentRenew();
+userManager.clearStaleState();
 
 userManager.signinRedirect({
   data: { redirectUrl: "https://www.duckduckgo.com" }

@@ -25,6 +25,10 @@ function test_createAction() {
     // $ExpectError
     assert(a.payload, (x: number) => {});
   }
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 function test_createAction_givenPayloadType() {
@@ -46,6 +50,10 @@ function test_createAction_givenPayloadType() {
 
   // $ExpectError
   assert(a2.meta, (x: string) => {});
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 function test_createAction_withPayloadCreator() {
@@ -64,10 +72,27 @@ function test_createAction_withPayloadCreator() {
   ]);
   const a2 = action2("foo", 2, 3);
 
-  assert(a.payload, (x: [string, string]) => {});
+  assert(a2.payload, (x: [string, string]) => {});
 
   // $ExpectError
-  assert(a.payload, (x: string) => {});
+  assert(a2.payload, (x: string) => {});
+
+  // In case redux-actions is used in combination with redux-thunk,
+  // the `payloadCreator` can return a promise.
+  const action3 = createAction(INCREMENT, (x: string, y: number, z: number) => Promise.resolve([
+    x,
+    x
+  ]));
+  const a3 = action3("foo", 2, 3);
+
+  assert(a3.payload, (x: [string, string]) => {});
+
+  // $ExpectError
+  assert(a3.payload, (x: string) => {});
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 function test_createAction_withPayloadCreatorAndMeta() {
@@ -78,6 +103,10 @@ function test_createAction_withPayloadCreatorAndMeta() {
 
   // $ExpectError
   assert(a.meta, (x: string) => {});
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 function test_createAction_withMeta() {
@@ -88,6 +117,10 @@ function test_createAction_withMeta() {
 
   // $ExpectError
   assert(a.meta, (x: string) => {});
+
+  (action.toString(): 'INCREMENT');
+  // $ExpectError wrong type
+  (action.toString(): 'DECREMENT');
 }
 
 // Helper to assert that the type of the first argument is compatible with the

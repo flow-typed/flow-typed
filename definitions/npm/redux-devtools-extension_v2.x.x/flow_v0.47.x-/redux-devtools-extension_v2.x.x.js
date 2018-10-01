@@ -93,7 +93,7 @@ declare function $npm$ReduxDevtoolsExtension$composeWithDevTools<A, B, C, D, E, 
   ab: A => B
 ): A => H;
 
-declare function $npm$ReduxDevtoolsExtension$devToolsEnhancer<S, A>(options: $npm$ReduxDevtoolsExtension$DevToolsOptions): StoreEnhancer<S, A>;
+declare function $npm$ReduxDevtoolsExtension$devToolsEnhancer<S, A>(options?: $npm$ReduxDevtoolsExtension$DevToolsOptions): StoreEnhancer<S, A>;
 
 declare module 'redux-devtools-extension' {
   declare export type DevToolsOptions = $npm$ReduxDevtoolsExtension$DevToolsOptions;

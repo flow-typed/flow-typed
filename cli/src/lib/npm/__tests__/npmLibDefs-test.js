@@ -8,9 +8,11 @@ import {
   getInstalledNpmLibDefs,
   getNpmLibDefs,
   findNpmLibDef,
+  getScopedPackageName,
 } from '../npmLibDefs';
 
 import path from 'path';
+import {ValidationError} from '../../ValidationError';
 
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__npmLibDefs-fixtures__');
 
@@ -29,14 +31,11 @@ describe('npmLibDefs', () => {
         'npm',
         'underscore_v1.x.x',
       );
-      const errs = new Map();
       const defs = await extractLibDefsFromNpmPkgDir(
         UNDERSCORE_PATH,
         null,
         'underscore_v1.x.x',
-        errs,
       );
-      expect([...errs.entries()]).toEqual([]);
       expect(defs).toEqual(
         expect.arrayContaining([
           {
@@ -103,39 +102,12 @@ describe('npmLibDefs', () => {
         'npm',
         'underscore_v1',
       );
-      const defsPromise1 = extractLibDefsFromNpmPkgDir(
-        UNDERSCORE_PATH,
-        null,
-        'underscore_v1',
+      await expect(
+        extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1'),
+      ).rejects.toThrow(
+        'Malformed npm package name! Expected the name to be ' +
+          'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH> but instead got underscore_v1',
       );
-      let err = null;
-      try {
-        await defsPromise1;
-      } catch (e) {
-        err = e;
-      }
-      expect(err && err.message).toBe(
-        'underscore_v1: Malformed npm package name! Expected the name to be ' +
-          'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>',
-      );
-
-      const errs = new Map();
-      const defsPromise2 = extractLibDefsFromNpmPkgDir(
-        UNDERSCORE_PATH,
-        null,
-        'underscore_v1',
-        errs,
-      );
-      expect(await defsPromise2).toEqual([]);
-      expect([...errs.entries()]).toEqual([
-        [
-          'underscore_v1',
-          [
-            'Malformed npm package name! Expected the name to be formatted as ' +
-              '<PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>',
-          ],
-        ],
-      ]);
     });
 
     it('fails on unexpected files', async () => {
@@ -146,58 +118,11 @@ describe('npmLibDefs', () => {
         'npm',
         'underscore_v1.x.x',
       );
-      const defsPromise1 = extractLibDefsFromNpmPkgDir(
-        UNDERSCORE_PATH,
-        null,
-        'underscore_v1.x.x',
+      await expect(
+        extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1.x.x'),
+      ).rejects.toThrow(
+        'Flow versions must start with `flow_` but instead got asdfdir',
       );
-      let err = null;
-      try {
-        await defsPromise1;
-      } catch (e) {
-        err = e;
-      }
-      expect(err && err.message).toBe(
-        path.join('underscore_v1.x.x', 'asdf') +
-          ': Unexpected file name. This directory can ' +
-          'only contain test files or a libdef file named `underscore_v1.x.x.js`.',
-      );
-
-      const errs = new Map();
-      const defsPromise2 = extractLibDefsFromNpmPkgDir(
-        UNDERSCORE_PATH,
-        null,
-        'underscore_v1.x.x',
-        errs,
-      );
-      expect((await defsPromise2).length).toBe(2);
-      expect([...errs.entries()]).toEqual([
-        [
-          path.join('underscore_v1.x.x', 'asdf'),
-          [
-            'Unexpected file name. This directory can only contain test files ' +
-              'or a libdef file named `underscore_v1.x.x.js`.',
-          ],
-        ],
-        [
-          'underscore_v1.x.x/asdfdir',
-          ['Flow versions must start with `flow_`'],
-        ],
-        [
-          path.join('underscore_v1.x.x', 'flow_v0.38.x-', 'asdf2'),
-          [
-            'Unexpected file. This directory can only contain test files or a ' +
-              'libdef file named `underscore_v1.x.x.js`.',
-          ],
-        ],
-        [
-          path.join('underscore_v1.x.x', 'flow_v0.38.x-', 'asdf2dir'),
-          [
-            'Unexpected sub-directory. This directory can only contain test ' +
-              'files or a libdef file named `underscore_v1.x.x.js`.',
-          ],
-        ],
-      ]);
     });
 
     it('fails if flow versions overlap', async () => {
@@ -208,32 +133,10 @@ describe('npmLibDefs', () => {
         'npm',
         'underscore_v1.x.x',
       );
-      const defsPromise1 = extractLibDefsFromNpmPkgDir(
-        UNDERSCORE_PATH,
-        null,
-        'underscore_v1.x.x',
-      );
-      let err = null;
-      try {
-        await defsPromise1;
-      } catch (e) {
-        err = e;
-      }
-      expect(err && err.message).toBe(
-        'npm/underscore_v1.x.x: Flow versions not disjoint!',
-      );
 
-      const errs = new Map();
-      const defsPromise2 = extractLibDefsFromNpmPkgDir(
-        UNDERSCORE_PATH,
-        null,
-        'underscore_v1.x.x',
-        errs,
-      );
-      expect((await defsPromise2).length).toBe(2);
-      expect([...errs.entries()]).toEqual([
-        ['npm/underscore_v1.x.x', ['Flow versions not disjoint!']],
-      ]);
+      await expect(
+        extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1.x.x'),
+      ).rejects.toThrow('Flow versions not disjoint!');
     });
 
     it('fails if no libdefs are found', async () => {
@@ -244,32 +147,9 @@ describe('npmLibDefs', () => {
         'npm',
         'underscore_v1.x.x',
       );
-      const defsPromise1 = extractLibDefsFromNpmPkgDir(
-        UNDERSCORE_PATH,
-        null,
-        'underscore_v1.x.x',
-      );
-      let err = null;
-      try {
-        await defsPromise1;
-      } catch (e) {
-        err = e;
-      }
-      expect(err && err.message).toBe(
-        'npm/underscore_v1.x.x: No libdef files found!',
-      );
-
-      const errs = new Map();
-      const defsPromise2 = extractLibDefsFromNpmPkgDir(
-        UNDERSCORE_PATH,
-        null,
-        'underscore_v1.x.x',
-        errs,
-      );
-      expect(await defsPromise2).toEqual([]);
-      expect([...errs.entries()]).toEqual([
-        ['npm/underscore_v1.x.x', ['No libdef files found!']],
-      ]);
+      await expect(
+        extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1.x.x'),
+      ).rejects.toThrow('No libdef files found!');
     });
 
     // Fails at random (see #1229)
@@ -300,21 +180,22 @@ describe('npmLibDefs', () => {
   describe('findNpmLibDef', () => {
     describe('when no cached libDefs found', () => {
       it('returns null', async () => {
+        jest.setTimeout(10000);
         const pkgName = 'jest-test-npm-package';
         const pkgVersion = 'v1.0.0';
-        const flowVersion = { kind: 'all' };
+        const flowVersion = {kind: 'all'};
 
-        const filtered = await findNpmLibDef(pkgName, pkgVersion, flowVersion);
-
-        expect(filtered).toBeNull();
+        await expect(
+          findNpmLibDef(pkgName, pkgVersion, flowVersion),
+        ).resolves.toEqual(null);
       });
     });
 
     describe('when non-semver package provided', () => {
-      it('doesn\'t throw error', async () => {
+      it("doesn't throw error", async () => {
         const pkgName = 'flow-bin';
         const pkgVersion = 'github:flowtype/flow-bin';
-        const flowVersion = { kind: 'all' };
+        const flowVersion = {kind: 'all'};
 
         let filtered;
         let error;
@@ -408,6 +289,9 @@ describe('npmLibDefs', () => {
             testFilePaths: [],
             version: 'v1.x.x',
           });
+          expect(getScopedPackageName(semverLibDef.libDef)).toEqual(
+            '@kadira/storybook',
+          );
         }
       }
     });
@@ -472,33 +356,18 @@ describe('npmLibDefs', () => {
         'unexpected-file',
         'definitions',
       );
-      let err = null;
-      try {
-        await getNpmLibDefs(FIXTURE_DIR);
-      } catch (e) {
-        err = e;
-      }
-      const UNEXPECTED_FILE = path.join(FIXTURE_DIR, 'npm', 'unexpected-file');
-      expect(err && err.message).toBe(
-        `${UNEXPECTED_FILE}: Expected only directories to be present in this ` +
-          `directory.`,
-      );
 
-      const errs = new Map();
-      const libDefs = await getNpmLibDefs(FIXTURE_DIR, errs);
-      expect(libDefs.length).toEqual(2);
-      expect([...errs.entries()]).toEqual([
-        [
-          UNEXPECTED_FILE,
-          ['Expected only directories to be present in this directory.'],
-        ],
+      await expect(getNpmLibDefs(FIXTURE_DIR)).rejects.toEqual([
+        new ValidationError(
+          `Expected only directories to be present in this directory.`,
+        ),
       ]);
     });
   });
 
   describe('parsePkgNameVer', () => {
     it('parses non-wildcard libs', () => {
-      expect(parsePkgNameVer('lib_v1.2.3', 'contexthere')).toEqual({
+      expect(parsePkgNameVer('lib_v1.2.3')).toEqual({
         pkgName: 'lib',
         pkgVersion: {
           major: 1,
@@ -506,7 +375,7 @@ describe('npmLibDefs', () => {
           patch: 3,
         },
       });
-      expect(parsePkgNameVer('lib_v1.2.3-asdf', 'contexthere')).toEqual({
+      expect(parsePkgNameVer('lib_v1.2.3-asdf')).toEqual({
         pkgName: 'lib',
         pkgVersion: {
           major: 1,
@@ -518,7 +387,7 @@ describe('npmLibDefs', () => {
     });
 
     it('parses wildcard minor libs', () => {
-      expect(parsePkgNameVer('lib_v1.x.x', 'contexthere')).toEqual({
+      expect(parsePkgNameVer('lib_v1.x.x')).toEqual({
         pkgName: 'lib',
         pkgVersion: {
           major: 1,
@@ -526,7 +395,7 @@ describe('npmLibDefs', () => {
           patch: 'x',
         },
       });
-      expect(parsePkgNameVer('lib_v1.x.x-asdf', 'contexthere')).toEqual({
+      expect(parsePkgNameVer('lib_v1.x.x-asdf')).toEqual({
         pkgName: 'lib',
         pkgVersion: {
           major: 1,
@@ -538,7 +407,7 @@ describe('npmLibDefs', () => {
     });
 
     it('parses wildcard patch libs', () => {
-      expect(parsePkgNameVer('lib_v1.2.x', 'contexthere')).toEqual({
+      expect(parsePkgNameVer('lib_v1.2.x')).toEqual({
         pkgName: 'lib',
         pkgVersion: {
           major: 1,
@@ -546,7 +415,7 @@ describe('npmLibDefs', () => {
           patch: 'x',
         },
       });
-      expect(parsePkgNameVer('lib_v1.2.x-asdf', 'contexthere')).toEqual({
+      expect(parsePkgNameVer('lib_v1.2.x-asdf')).toEqual({
         pkgName: 'lib',
         pkgVersion: {
           major: 1,
@@ -558,50 +427,27 @@ describe('npmLibDefs', () => {
     });
 
     it('errors on wildcard major', () => {
-      expect(() => parsePkgNameVer('lib_vx.x.x', 'contexthere')).toThrow(
-        'lib_vx.x.x: Malformed npm package name! Expected the name to be ' +
-          'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>',
+      expect(() => parsePkgNameVer('lib_vx.x.x')).toThrow(
+        'Malformed npm package name! Expected the name to be ' +
+          'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH> but instead got lib_vx.x.x',
       );
-
-      const errs = new Map();
-      expect(parsePkgNameVer('lib_vx.x.x', 'contexthere', errs)).toEqual(null);
-      expect([...errs.entries()]).toEqual([
-        [
-          'lib_vx.x.x',
-          [
-            'Malformed npm package name! Expected the name to be ' +
-              'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH>',
-          ],
-        ],
-      ]);
     });
   });
 
   describe('validateVersionNumPart', () => {
     it('returns a number when a string-number is given', () => {
-      expect(validateVersionNumPart('42', '', '')).toBe(42);
+      expect(validateVersionNumPart('42', '')).toBe(42);
     });
 
     it('errors when a non-number-string is given', () => {
-      const errmsg =
-        "contexthere: Invalid major number: 'x'. Expected a number.";
-      expect(() => validateVersionNumPart('x', 'major', 'contexthere')).toThrow(
-        errmsg,
-      );
-
-      const errs = new Map();
-      expect(validateVersionNumPart('x', 'major', 'contexthere', errs)).toEqual(
-        -1,
-      );
-      expect([...errs.entries()]).toEqual([
-        ['contexthere', ["Invalid major number: 'x'. Expected a number."]],
-      ]);
+      const errmsg = "Invalid major number: 'x'. Expected a number.";
+      expect(() => validateVersionNumPart('x', 'major')).toThrow(errmsg);
     });
   });
 
   describe('validateVersionPart', () => {
     it('returns "x" when given "x"', () => {
-      expect(validateVersionPart('x', '', '')).toBe('x');
+      expect(validateVersionPart('x', '')).toBe('x');
     });
   });
 });

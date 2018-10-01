@@ -872,6 +872,8 @@ declare class webdriver$TargetLocator {
 
 // WIP
 declare class webdriver$By {
+  using: string;
+  value: string;
   constructor(using: string, value: string): this;
   static className(name: string): this;
   static css(selector: string): this;
@@ -887,7 +889,7 @@ declare class webdriver$By {
 declare class webdriver$WebElement {
   constructor(
     driver: webdriver$WebDriver,
-    id: webdriver$Promise<{ ELEMENT: string }> | { ELEMENT: string }
+    id: webdriver$Promise<string> | string
   ): webdriver$WebElement;
   serialize(): { ELEMENT: string } | webdriver$Promise<{ ELEMENT: string }>;
   static Id: { ELEMENT: string };
@@ -914,7 +916,7 @@ declare class webdriver$WebElement {
   clear(): webdriver$Promise<void>;
   isDisplayed(): webdriver$Promise<boolean>;
   getOuterHtml(): webdriver$Promise<string>;
-  getId(): webdriver$Promise<{ ELEMENT: string }>;
+  getId(): webdriver$Promise<string>;
   getRawId(): webdriver$Promise<string>;
   getInnerHtml(): webdriver$Promise<string>;
   static equals(
@@ -924,7 +926,7 @@ declare class webdriver$WebElement {
 }
 
 // WIP
-declare class webdriver$WebElementPromise {}
+declare class webdriver$WebElementPromise extends webdriver$WebElement mixins Promise<webdriver$WebElement> {}
 
 // WIP
 declare class webdriver$promise {
@@ -1045,4 +1047,35 @@ declare module "selenium-webdriver/testing" {
   declare function beforeEach(method: webdriver_testing$TestFunction): void;
   declare function after(method: webdriver_testing$TestFunction): void;
   declare function afterEach(method: webdriver_testing$TestFunction): void;
+}
+
+declare type webdriver_remote$ServiceOptions = {
+  loopback?: boolean;
+  port?: number | Promise<number>;
+  args?: Array<string> | Promise<Array<string>>;
+  jvmArgs?: Array<string> | Promise<Array<string>>;
+  env?: {[string]: string};
+  stdio?: string | Array<string|number|stream$Writable>;
+};
+
+declare class webdriver_remote$DriverService {
+  constructor(
+    executable: string,
+    options: webdriver_remote$ServiceOptions,
+  ): this;
+
+  address(): Promise<string>;
+  isRunning(): boolean;
+  kill(): Promise<void>;
+  start(opt_timeoutMs?: number): Promise<string>;
+  stop(): Promise<void>;
+
+  static DEFAULT_START_TIMEOUT_MS: number;
+}
+
+declare class webdriver_remote$SeleniumServer extends webdriver_remote$DriverService {}
+
+declare module "selenium-webdriver/remote" {
+  declare export var DriverService: Class<webdriver_remote$DriverService>;
+  declare export var SeleniumServer: Class<webdriver_remote$SeleniumServer>;
 }

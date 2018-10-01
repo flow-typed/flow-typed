@@ -1,27 +1,27 @@
-declare module 'react-modal' {
+declare module "react-modal" {
   declare type DefaultProps = {
-    isOpen: bool,
-    ariaHideApp: bool,
+    isOpen: boolean,
+    ariaHideApp: boolean,
     closeTimeoutMS: number,
-    shouldCloseOnOverlayClick: bool,
-  }
+    shouldCloseOnOverlayClick: boolean
+  };
   declare type Props = {
-    isOpen: bool,
+    isOpen: boolean,
     style?: {
       content?: Object,
-      overlay?: Object,
+      overlay?: Object
     },
     appElement?: HTMLElement,
-    ariaHideApp: bool,
+    ariaHideApp: boolean,
     closeTimeoutMS: number,
     onAfterOpen?: () => mixed,
     onRequestClose?: (event: Event) => mixed,
-    shouldCloseOnOverlayClick: bool,
-  }
+    shouldCloseOnOverlayClick: boolean
+  };
   declare class Modal extends React$Component {
     static setAppElement(element: HTMLElement | string): void;
     static defaultProps: DefaultProps;
     props: Props;
   }
-  declare var exports: typeof Modal;
+  declare module.exports: typeof Modal;
 }

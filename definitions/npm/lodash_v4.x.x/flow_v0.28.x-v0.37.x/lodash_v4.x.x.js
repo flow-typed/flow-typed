@@ -373,7 +373,7 @@ declare module "lodash" {
       path: ((value: any) => Array<string> | string) | Array<string> | string,
       ...args?: Array<any>
     ): Array<any>;
-    keyBy<T, V>(array: ?Array<T>, iteratee?: Iteratee2<T, V>): { [key: V]: ?T };
+    keyBy<T, V>(array: ?Array<T>, iteratee?: Iteratee2<T, V>): { [key: V]: T };
     keyBy<V, T: Object>(object: T, iteratee?: OIteratee<T>): Object;
     map<T, U>(array: ?Array<T>, iteratee?: MapIterator<T, U>): Array<U>;
     map<V, T: Object, U>(
@@ -722,9 +722,9 @@ declare module "lodash" {
     defaults(object?: ?Object, ...sources?: Array<Object>): Object;
     defaultsDeep(object?: ?Object, ...sources?: Array<Object>): Object;
     // alias for _.toPairs
-    entries(object?: ?Object): NestedArray<any>;
+    entries(object?: ?Object): Array<[string, any]>;
     // alias for _.toPairsIn
-    entriesIn(object?: ?Object): NestedArray<any>;
+    entriesIn(object?: ?Object): Array<[string, any]>;
     // alias for _.assignIn
     extend<A, B>(a: A, b: B): A & B;
     extend<A, B, C>(a: A, b: B, c: C): A & B & C;
@@ -888,8 +888,8 @@ declare module "lodash" {
       value: any,
       customizer?: (nsValue: any, key: string, nsObject: T) => any
     ): Object;
-    toPairs(object?: ?Object | Array<*>): NestedArray<any>;
-    toPairsIn(object?: ?Object): NestedArray<any>;
+    toPairs(object?: ?Object | Array<*>): Array<[string, any]>;
+    toPairsIn(object?: ?Object): Array<[string, any]>;
     transform(
       collection: Object | Array<any>,
       iteratee?: OIteratee<*>,
@@ -1015,5 +1015,5 @@ declare module "lodash" {
     templateSettings: TemplateSettings;
   }
 
-  declare var exports: Lodash;
+  declare module.exports: Lodash;
 }

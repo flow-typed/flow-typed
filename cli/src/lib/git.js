@@ -75,7 +75,7 @@ export async function getDiff() {
       // We are probably already on master, so compare to the last commit.
       const {stdout: headDiff} = await child_process.spawnP(gitPath, [
         'diff',
-        'HEAD~2',
+        'HEAD~1',
         '--name-only',
       ]);
       stdout = headDiff;

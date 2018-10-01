@@ -22,7 +22,7 @@ declare module 'redux' {
     replaceReducer(nextReducer: Reducer<S, A>): void
   };
 
-  declare type Reducer<S, A> = (state: S, action: A) => S;
+  declare type Reducer<S, A> = (state: S | void, action: A) => S;
 
   declare type Middleware<S, A> =
     (api: MiddlewareAPI<S, A>) =>
@@ -36,7 +36,7 @@ declare module 'redux' {
   declare type StoreEnhancer<S, A> = (next: StoreCreator<S, A>) => StoreCreator<S, A>;
 
   declare function createStore<S, A>(reducer: Reducer<S, A>, enhancer?: StoreEnhancer<S, A>): Store<S, A>;
-  declare function createStore<S, A>(reducer: Reducer<S, A>, preloadedState: S, enhancer?: StoreEnhancer<S, A>): Store<S, A>;
+  declare function createStore<S, A>(reducer: Reducer<S, A>, preloadedState?: S, enhancer?: StoreEnhancer<S, A>): Store<S, A>;
 
   declare function applyMiddleware<S, A>(...middlewares: Array<Middleware<S, A>>): StoreEnhancer<S, A>;
 

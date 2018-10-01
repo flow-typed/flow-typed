@@ -24,7 +24,7 @@ declare type awilix$MergedRegistrations<T1, T2> = awilix$Container<
   T1 & $ObjMap<T2, <T>(awilix$Registration<T>) => T>
 >;
 
-declare class awilix$Container<R> {
+declare class awilix$Container<R = { [string]: * }> {
   cradle: R;
   registrations: awilix$Registration<$Values<R>>[];
   options: awilix$ContainerOptions;
@@ -35,10 +35,12 @@ declare class awilix$Container<R> {
     name: Name,
     registration: awilix$Registration<T>
   ): awilix$MergedRegistrations<R, { [Name]: T }>;
-  register<RegistrationMap: *>(
+  register<RegistrationMap>(
     registrations: RegistrationMap,
     opts?: awilix$ContainerRegOptions<RegistrationMap>
-  ): awilix$MergedRegistrations<R, RegistrationMap>;
+  ): awilix$Container<
+    R & $ObjMap<RegistrationMap, <T>(awilix$Registration<T>) => T>
+  >;
 
   registerClass<T>(
     className: Class<T>
@@ -171,12 +173,12 @@ declare type awilix$ContainerOptions = {|
 declare type awilix$ContainerRegOptions<T> =
   | string
   | {|
-      name?: string,
-      lifetime?: awilix$Lifetime,
-      resolutionMode?: awilix$ResolutionMode,
-      injector?: awilix$InjectorFunction<T>,
-      register?: awilix$AsProviderFunction
-    |};
+  name?: string,
+  lifetime?: awilix$Lifetime,
+  resolutionMode?: awilix$ResolutionMode,
+  injector?: awilix$InjectorFunction<T>,
+  register?: awilix$AsProviderFunction
+|};
 
 declare class awilix$Lifetime {
   static SCOPED: awilix$Lifetime;

@@ -1,4 +1,4 @@
-declare module 'react-body-classname' {
+declare module "react-body-classname" {
   declare class BodyClassName extends React$Component {
     props: {
       children?: any,
@@ -6,5 +6,5 @@ declare module 'react-body-classname' {
     };
     static rewind(): string;
   }
-  declare var exports: typeof BodyClassName;
+  declare module.exports: typeof BodyClassName;
 }

@@ -111,7 +111,6 @@ const dndKnight: DndKnight = (null: any);
 
 (<DndKnight title="foo" color="red" />: React.Element<typeof DndKnight>);
 
-// $ExpectError: Invalid default prop
 (<DndKnight title="foo" color={3} />: React.Element<typeof DndKnight>);
 
 (<DndKnight title="foo" color="red" extra="x" />: React.Element<
@@ -131,7 +130,6 @@ const dndKnight: DndKnight = (null: any);
   typeof DndKnight
 >);
 
-// $ExpectError: Invalid collect prop
 (<DndKnight title="foo" color="red" isDragging="false" />: React.Element<
   typeof DndKnight
 >);
@@ -225,7 +223,6 @@ const dndKnight2: DndKnight2 = (null: any);
   typeof DndKnight2
 >);
 
-// $ExpectError: Invalid collect prop
 (<DndKnight2 title="foo" color="red" isDragging="false" />: React.Element<
   typeof DndKnight2
 >);
@@ -288,7 +285,6 @@ const dndKnight3: DndKnight3 = (null: any);
   typeof DndKnight3
 >);
 
-// $ExpectError: Invalid collect prop
 (<DndKnight3 title="foo" color="red" isDragging="false" />: React.Element<
   typeof DndKnight3
 >);
@@ -410,7 +406,6 @@ const DndBoardSquare = DropTarget(
 
 (<DndBoardSquare y={5} x={5} />: React.Element<typeof DndBoardSquare>);
 
-// $ExpectError: Invalid default prop
 (<DndBoardSquare y={5} x="5" />: React.Element<typeof DndBoardSquare>);
 
 (<DndBoardSquare y={5} count={5} />: React.Element<typeof DndBoardSquare>);

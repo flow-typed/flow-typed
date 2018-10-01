@@ -30,8 +30,8 @@ source.token.promise.then((cancel: Cancel) => {
 client.get('/something', {
   cancelToken: source.token,
 });
+// $ExpectError
 client.get('/something', {
-  // $ExpectError
   cancelToken: source,
 });
 

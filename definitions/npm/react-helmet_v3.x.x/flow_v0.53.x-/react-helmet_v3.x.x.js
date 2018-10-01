@@ -1,4 +1,4 @@
-declare module 'react-helmet' {
+declare module "react-helmet" {
   declare type Props = {
     htmlAttributes?: Object,
     title?: string,
@@ -10,7 +10,11 @@ declare module 'react-helmet' {
     script?: Array<Object>,
     noscript?: Array<Object>,
     style?: Array<Object>,
-    onChangeClientState?: (newState: Object, addedTags: Object, removeTags: Object) => void | mixed,
+    onChangeClientState?: (
+      newState: Object,
+      addedTags: Object,
+      removeTags: Object
+    ) => void | mixed
   };
   declare interface HeadAttribute {
     toString(): string;
@@ -29,5 +33,5 @@ declare module 'react-helmet' {
   declare class Helmet extends React$Component<Props> {
     static rewind(): Head;
   }
-  declare var exports: typeof Helmet;
+  declare module.exports: typeof Helmet;
 }

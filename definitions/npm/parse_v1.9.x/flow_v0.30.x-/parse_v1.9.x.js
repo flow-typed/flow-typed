@@ -201,8 +201,8 @@ declare type $npm$parse$ByIdMap = { [userId: string]: $npm$parse$PermissionsMap 
 
 declare class $npm$parse$ParseACL {
   permissionsById: $npm$parse$ByIdMap,
-  static(arg1: $npm$parse$ParseUser | $npm$parse$ByIdMap): $npm$parse$ParseACL,
-  constructor(arg1: $npm$parse$ParseUser | $npm$parse$ByIdMap): $npm$parse$ParseACL,
+  static(arg1?: $npm$parse$ParseUser | $npm$parse$ByIdMap): $npm$parse$ParseACL,
+  constructor(arg1?: $npm$parse$ParseUser | $npm$parse$ByIdMap): $npm$parse$ParseACL,
   toJSON(): $npm$parse$ByIdMap,
   equals(other: $npm$parse$ParseACL): boolean,
   setReadAccess(userId: $npm$parse$ParseUser | $npm$parse$ParseRole | string, allowed: boolean): void,
@@ -226,6 +226,9 @@ declare class $npm$parse$ParseObject {
   static(className: ?string | { className: string, [attr: string]: mixed }, attributes?: { [attr: string]: mixed }, options?: { ignoreValidation: boolean }): $npm$parse$ParseObject,
   constructor(className: ?string | { className: string, [attr: string]: mixed }, attributes?: { [attr: string]: mixed }, options?: { ignoreValidation: boolean }): $npm$parse$ParseObject,
   id: string,
+  createdAt: Date,
+  updatedAt: Date,
+  attributes: Object,
   className: string,
   toJSON(seen: Array<any> | void): $npm$parse$AttributeMap,
   equals(other: mixed): boolean,

@@ -1,7 +1,7 @@
-declare module 'react-typekit' {
+declare module "react-typekit" {
   declare class Typekit extends React$Component<{
-    kitId: string,
+    kitId: string
   }> {}
 
-  declare var exports: typeof Typekit
+  declare module.exports: typeof Typekit;
 }

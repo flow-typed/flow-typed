@@ -29,6 +29,8 @@ import defaultTo from 'lodash/defaultTo';
 import tap from 'lodash/tap';
 import thru from 'lodash/thru';
 import times from 'lodash/times';
+import toPairs from "lodash/toPairs";
+import toPairsIn from "lodash/toPairsIn";
 import flatMap from 'lodash/flatMap';
 
 /**
@@ -168,7 +170,7 @@ var keyByTest_map: KeyByTest$ByNumber<KeyByTest$Record> = {
   [keyByTest_array[2].id]: keyByTest_array[2],
 }
 
-var keyByTest_map2: KeyByTest$ByNumberMaybe<?KeyByTest$Record> = keyBy(keyByTest_map, 'id')
+var keyByTest_map2: KeyByTest$ByNumberMaybe<KeyByTest$Record> = keyBy(keyByTest_map, 'id')
 
 
 /**
@@ -399,3 +401,10 @@ noop('a', 2, [], null);
 (noop: (number, string) => void);
 // $ExpectError functions are contravariant in return types
 (noop: (string) => string);
+
+/**
+ * _.toPairs / _.toPairsIn
+ */
+var pairs: [string, number][];
+pairs = toPairs({ a: 12, b: 100 });
+pairs = toPairsIn({ a: 12, b: 100 });

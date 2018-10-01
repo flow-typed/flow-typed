@@ -1,4 +1,4 @@
-declare module 'radium' {
+declare module "radium" {
   declare type PluginResult = {
     // Merged into the component directly. Useful for storing things for which you
     // don't need to re-render, event subscriptions, for instance.
@@ -12,15 +12,15 @@ declare module 'radium' {
     props?: ?Object,
 
     // Replaces (not merged into) the rendered element's style property.
-    style?: ?Object,
+    style?: ?Object
   };
 
   declare type PluginConfig = {
     // Adds a chunk of css to the root style sheet
-    addCSS: (css: string) => {remove: () => void},
+    addCSS: (css: string) => { remove: () => void },
 
     // Helper function when adding CSS
-    appendImportantToEachValue: (style: Object) => Object;
+    appendImportantToEachValue: (style: Object) => Object,
 
     // May not be readable if code has been minified
     componentName: string,
@@ -32,7 +32,7 @@ declare module 'radium' {
     cssRuleSetToString: (
       selector: string,
       rules: Object,
-      userAgent: ?string,
+      userAgent: ?string
     ) => string,
 
     // Retrieve the value of a field on the component
@@ -51,7 +51,7 @@ declare module 'radium' {
     hash: (data: string) => string,
 
     // Returns true if the value is a nested style object
-    isNestedStyle: (value: mixed) => bool,
+    isNestedStyle: (value: mixed) => boolean,
 
     // Access to the mergeStyles utility
     mergeStyles: (styles: Array<Object>) => Object,
@@ -72,17 +72,17 @@ declare module 'radium' {
 
     // uses the exenv npm module
     ExecutionEnvironment: {
-      canUseEventListeners: bool,
-      canUseDOM: bool,
+      canUseEventListeners: boolean,
+      canUseDOM: boolean
     }
   };
 
   declare type MediaQueryListListener = (mql: MediaQueryList) => mixed;
 
   declare type MediaQueryList = {
-    matches: bool;
-    addListener(listener: MediaQueryListListener): void;
-    removeListener(listener: MediaQueryListListener): void;
+    matches: boolean,
+    addListener(listener: MediaQueryListListener): void,
+    removeListener(listener: MediaQueryListListener): void
   };
 
   declare type Plugin = (pluginConfig: PluginConfig) => ?PluginResult;
@@ -91,29 +91,44 @@ declare module 'radium' {
   declare type RadiumConfig = {
     matchMedia?: MatchMediaType,
     plugins?: Array<Plugin>,
-    userAgent?: string,
+    userAgent?: string
   };
 
-  declare type FunctionComponent<P, Context> = (props: P, context: Context) => ?React$Element<any>;
+  declare type FunctionComponent<P, Context> = (
+    props: P,
+    context: Context
+  ) => ?React$Element<any>;
   declare type ClassComponent<Def, P, St> = Class<React$Component<Def, P, St>>;
 
   declare class ConfiguredRadium {
-      <P, Context>(component: FunctionComponent<P, Context>): FunctionComponent<P, Context>;
-      <Def, P, St>(component: ClassComponent<Def, P, St>): ClassComponent<Def, P, St>;
-      (elem: React$Element<any>): React$Element<any>;
+    <P, Context>(
+      component: FunctionComponent<P, Context>
+    ): FunctionComponent<P, Context>;
+    <Def, P, St>(
+      component: ClassComponent<Def, P, St>
+    ): ClassComponent<Def, P, St>;
+    (elem: React$Element<any>): React$Element<any>;
   }
 
   declare class Radium {
-    <P, Context>(component: FunctionComponent<P, Context>): FunctionComponent<P, Context>;
-    <Def, P, St>(component: ClassComponent<Def, P, St>): ClassComponent<Def, P, St>;
+    <P, Context>(
+      component: FunctionComponent<P, Context>
+    ): FunctionComponent<P, Context>;
+    <Def, P, St>(
+      component: ClassComponent<Def, P, St>
+    ): ClassComponent<Def, P, St>;
     (elem: React$Element<any>): React$Element<any>;
     (config: RadiumConfig): ConfiguredRadium;
     Plugins: Object;
     Style: ClassComponent<any, any, any>;
     StyleRoot: ClassComponent<any, any, any>;
-    getState(state: Object, elementKey: string, value: ':active' | ':hover' | ':focus'): boolean;
+    getState(
+      state: Object,
+      elementKey: string,
+      value: ":active" | ":hover" | ":focus"
+    ): boolean;
     keyframes(animationObject: Object, name?: string): string;
   }
 
-  declare var exports: Radium
+  declare module.exports: Radium;
 }

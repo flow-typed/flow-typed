@@ -1,19 +1,19 @@
 //@flow
 
-const awilix = require('awilix');
+const awilix = require("awilix");
 
 function emptyContainer() {
   const container = awilix.createContainer();
 
   // $ExpectError
-  container.cradle.foo = 'bar';
+  container.cradle.foo = "bar";
 }
 
 function containerOptions() {
   awilix.createContainer({});
   // $ExpectError
   awilix.createContainer({
-    name: 'test'
+    name: "test"
   });
   awilix.createContainer({ require });
   awilix.createContainer({
@@ -24,42 +24,48 @@ function containerOptions() {
 
 function register() {
   const validOpts = [
-    { name: 'test' },
-    { name: 'test', lifetime: awilix.Lifetime.SCOPED },
+    { name: "test" },
+    { name: "test", lifetime: awilix.Lifetime.SCOPED },
     {
-      name: 'test', lifetime: awilix.Lifetime.SCOPED,
+      name: "test",
+      lifetime: awilix.Lifetime.SCOPED,
       resolutionMode: awilix.ResolutionMode.PROXY
     },
     {
-      name: 'test', lifetime: awilix.Lifetime.SCOPED,
+      name: "test",
+      lifetime: awilix.Lifetime.SCOPED,
       resolutionMode: awilix.ResolutionMode.PROXY,
-      injector: (container) => ({}),
+      injector: container => ({})
     },
     {
-      name: 'test', lifetime: awilix.Lifetime.SCOPED,
+      name: "test",
+      lifetime: awilix.Lifetime.SCOPED,
       resolutionMode: awilix.ResolutionMode.PROXY,
-      injector: (container) => ({}),
+      injector: container => ({}),
       register: awilix.asClass
-    },
+    }
   ];
 
   const asValue = awilix.asValue;
   let container = awilix.createContainer();
 
   for (let i = 0; i < validOpts.length; i++) {
-    container.register({
-      foo: asValue('bar')
-    }, validOpts[i]);
+    container.register(
+      {
+        foo: asValue("bar")
+      },
+      validOpts[i]
+    );
   }
 
   // $ExpectError
-  container.cradle.foo = 'baz';
+  container.cradle.foo = "baz";
 
   container = container.register({
-    foo: asValue('bar')
+    foo: asValue("bar")
   });
 
-  container.cradle.foo = 'baz';
+  container.cradle.foo = "baz";
 
   // $ExpectError
   container.cradle.num += 123;
@@ -79,7 +85,7 @@ function register() {
         is: {
           deeply: {
             nested: 2,
-            nestedString: 'foo'
+            nestedString: "foo"
           }
         }
       }
@@ -105,16 +111,11 @@ function registerClass() {
   let container = awilix.createContainer();
   const asClass = awilix.asClass;
 
-  class TestOne {
+  class TestOne {}
 
-  }
+  class TestTwo {}
 
-  class TestTwo {
-
-  }
-
-  class TestThree {
-  }
+  class TestThree {}
 
   let test: TestOne;
 
@@ -130,11 +131,11 @@ function registerClass() {
   // $ExpectError
   test2 = container.cradle.TestTwo;
 
-  container = container.registerClass('TestDos', TestTwo);
+  container = container.registerClass("TestDos", TestTwo);
 
   test2 = container.cradle.TestDos;
 
-  container = container.registerClass('TestTres', [TestTwo, {}]);
+  container = container.registerClass("TestTres", [TestTwo, {}]);
 
   test2 = container.cradle.TestTres;
 
@@ -146,7 +147,6 @@ function registerClass() {
   container = container.registerClass([TestThree, {}]);
 
   test3 = container.cradle.TestThree;
-
 }
 
 function registerFunction() {
@@ -168,13 +168,13 @@ function registerFunction() {
   // $ExpectError
   let test2: boolean = container.cradle.boo;
 
-  container = container.registerFunction('boo2', boo);
+  container = container.registerFunction("boo2", boo);
 
   test1 = container.cradle.boo2;
   // $ExpectError
   test2 = container.cradle.boo2;
 
-  container = container.registerFunction('boo3', boo);
+  container = container.registerFunction("boo3", boo);
 
   test1 = container.cradle.boo3;
   // $ExpectError
@@ -191,41 +191,40 @@ function registerFunction() {
 
 function registerValue() {
   let container = awilix.createContainer();
-  container = container.registerValue('foo', 'bar');
+  container = container.registerValue("foo", "bar");
 
   // $ExpectError
   let a: boolean = container.cradle.foo;
 
-  let b: 'bar' = container.cradle.foo;
+  let b: "bar" = container.cradle.foo;
 
-  container = container.registerValue({ foo2: 'bar2' });
+  container = container.registerValue({ foo2: "bar2" });
 
   // $ExpectError
   a = container.cradle.foo2;
 
-  let b2: 'bar2' = container.cradle.foo2;
+  let b2: "bar2" = container.cradle.foo2;
 }
 
 function resolve() {
   let container = awilix.createContainer();
   let { asValue, asFunction, asClass } = awilix;
 
-  class FooClass {
-  }
+  class FooClass {}
 
   function fn(): 123 {
     return 123;
   }
 
   container = container.register({
-    foo: asValue('bar'),
+    foo: asValue("bar"),
     inst: asClass(FooClass),
     fn: asFunction(fn)
   });
 
-  let foo: 'bar' = container.cradle.foo;
+  let foo: "bar" = container.cradle.foo;
   // $ExpectError
-  let foo: 'bar2' = container.cradle.foo;
+  let foo: "bar2" = container.cradle.foo;
   let inst: FooClass = container.cradle.inst;
   // $ExpectError
   let inst2: Class<FooClass> = container.cradle.inst;
@@ -233,9 +232,9 @@ function resolve() {
   // $ExpectError
   let fn3: 122 = container.cradle.fn;
 
-  let fn4: 123 = container.resolve('fn');
+  let fn4: 123 = container.resolve("fn");
   // $ExpectError
-  let fn5: 124 = container.resolve('fn');
+  let fn5: 124 = container.resolve("fn");
 }
 
 function build() {
@@ -250,8 +249,7 @@ function build() {
   // $ExpectError
   t = container.build(true);
 
-  class Foo {
-  }
+  class Foo {}
 
   let f: Foo = container.build(Foo);
 }
