@@ -105,8 +105,6 @@ declare module "antd" {
 
   declare export class Cascader extends React$Component<CascaderProps> {}
 
-  declare export class Checkbox extends React$Component<{}> {}
-
   declare export class Col extends React$Component<{}> {}
 
   declare export type CollapsePanelProps = {};
