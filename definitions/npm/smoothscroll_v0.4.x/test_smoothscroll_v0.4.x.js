@@ -4,7 +4,7 @@ import smoothScroll from "smoothscroll";
 
 const target = document.createElement("div");
 const context = document.createElement("div");
-const callback = (x: number | Element) => void;
+const callback = (x: number | Element) => {};
 
 smoothScroll(target);
 smoothScroll(0);
