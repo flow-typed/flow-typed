@@ -122,3 +122,11 @@ n = m.utcOffset(0, true, true).utcOffset();
 const getLocale: string = moment.locale();
 const setLocale: string = moment.locale("en");
 const setArrayLocale: string = moment.locale(["en", "de"]);
+
+// Customize
+moment.defineLocale('fakeLocale');
+moment.defineLocale('fakeLocale', { parentLocale: 'xyz' });
+// $ExpectError
+moment.defineLocale('fakeLocale', 'not an object');
+// $ExpectError
+moment.defineLocale(); // no arguments
