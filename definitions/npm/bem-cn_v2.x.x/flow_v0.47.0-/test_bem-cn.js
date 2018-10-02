@@ -25,9 +25,9 @@ element(1);
 
 modifier();
 
-block.toString();
-element.toString();
-modifier.toString();
+var s: string = block.toString();
+s = element.toString();
+s = modifier.toString();
 
 block.state({ modifier: true });
 // $ExpectError

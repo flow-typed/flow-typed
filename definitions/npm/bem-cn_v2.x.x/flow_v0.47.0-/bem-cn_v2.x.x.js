@@ -21,7 +21,7 @@ declare module "bem-cn" {
   // Flow allows everything.
   declare type InnerFunction = {
     (nameOrModifiers: string | Modifiers, modifiers?: Modifiers): BemFunction,
-    toString: ToStringFunction,
+    toString: typeof ToStringFunction,
     mix(additionalClasses: string | Array<string>): BemFunction,
     has: typeof StateFunction,
     state: typeof StateFunction,
