@@ -148,7 +148,7 @@ type marked$Marked = {
   Lexer: typeof marked$Lexer;
   lexer: typeof marked$Lexer.lexer;
   InlineLexer: typeof marked$InlineLexer;
-  inlinelexer: marked$InlineLexer.output;
+  inlinelexer: typeof marked$InlineLexer.output;
   Renderer: typeof marked$Renderer;
   parse: marked$Marked;
 }
@@ -157,4 +157,3 @@ type marked$Marked = {
 declare module marked {
   declare export default marked$Marked;
 }
-
