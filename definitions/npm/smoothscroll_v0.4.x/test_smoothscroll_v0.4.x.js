@@ -4,7 +4,7 @@ import smoothScroll from "smoothscroll";
 
 const target = document.createElement("div");
 const context = document.createElement("div");
-const callback = (x: number) => x;
+const callback = (x: number | Element) => void;
 
 smoothScroll(target);
 smoothScroll(0);
@@ -23,8 +23,6 @@ smoothScroll(target, "string");
 
 smoothScroll(target, 123, callback);
 smoothScroll(target, null, callback);
-smoothScroll(target, 123, (x: Element) => x);
-smoothScroll(target, null, (x: Element) => x);
 
 // $ExpectError
 smoothScroll(target, 123, (x: string) => x);
