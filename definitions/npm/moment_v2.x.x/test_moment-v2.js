@@ -27,6 +27,18 @@ describe('toISOString', () => {
 // $ExpectError
 moment().millisecond().seconds();
 moment().milliseconds(100).seconds();
+(moment().weekday(): number);
+moment().weekday(1);
+// $ExpectError weekday does not take string arguments
+moment().weekday("monday");
+(moment().isoWeekday(): number);
+moment().isoWeekday(1);
+// ...but isoWeekday does accept string argument
+moment().isoWeekday("monday");
+moment().dayOfYear();
+moment().dayOfYear(1);
+// $ExpectError dayOfYear does not accept string arguments
+moment().dayOfYear("what");
 
 // Manipulate
 const m1: moment = moment().add(2, "day");

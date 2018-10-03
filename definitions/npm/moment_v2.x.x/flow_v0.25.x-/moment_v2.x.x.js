@@ -169,11 +169,11 @@ declare class moment$Moment {
   days(day: number | string): this;
   day(): number;
   days(): number;
-  weekday(day: number | string): this;
+  weekday(number: number): this;
   weekday(): number;
   isoWeekday(day: number | string): this;
   isoWeekday(): number;
-  dayOfYear(number: number): this;
+  dayOfYear(day: number): this;
   dayOfYear(): number;
   week(number: number): this;
   weeks(number: number): this;
