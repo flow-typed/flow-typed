@@ -245,7 +245,7 @@ declare class moment$Moment {
   toDate(): Date;
   toArray(): Array<number>;
   toJSON(): string;
-  toISOString(): string;
+  toISOString(keepOffset?: boolean): string;
   toObject(): moment$MomentObject;
   isBefore(
     date?: moment$Moment | string | number | Date | Array<number>,
