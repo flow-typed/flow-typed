@@ -140,7 +140,23 @@ declare class moment$Moment {
   ): moment$Moment;
   static utc(moment: moment$Moment): moment$Moment;
   static utc(date: Date): moment$Moment;
+  static parseZone(): moment$Moment;
   static parseZone(rawDate: string): moment$Moment;
+  static parseZone(
+    rawDate: string,
+    format: string | Array<string>
+  ): moment$Moment;
+  static parseZone(
+    rawDate: string,
+    format: string,
+    strict: boolean
+  ): moment$Moment;
+  static parseZone(
+    rawDate: string,
+    format: string,
+    locale: string,
+    strict: boolean
+  ): moment$Moment;
   isValid(): boolean;
   invalidAt(): 0 | 1 | 2 | 3 | 4 | 5 | 6;
   creationData(): moment$MomentCreationData;
