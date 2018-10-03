@@ -117,6 +117,9 @@ declare class moment$MomentDuration {
 declare class moment$Moment {
   static ISO_8601: string;
   static (
+    initDate: ?Object | number | Date | Array<number> | moment$Moment | string
+  ): moment$Moment;
+  static (
     string?: string,
     format?: string | Array<string>,
     strict?: boolean
@@ -126,9 +129,6 @@ declare class moment$Moment {
     format?: string | Array<string>,
     locale?: string,
     strict?: boolean
-  ): moment$Moment;
-  static (
-    initDate: ?Object | number | Date | Array<number> | moment$Moment | string
   ): moment$Moment;
   static unix(seconds: number): moment$Moment;
   static utc(): moment$Moment;
@@ -296,8 +296,8 @@ declare class moment$Moment {
   clone(): moment$Moment;
   static isMoment(obj: any): boolean;
   static isDate(obj: any): boolean;
-  static locale(locale: string, localeData?: Object): string;
   static updateLocale(locale: string, localeData?: ?Object): void;
+  static locale(locale: string, localeData?: Object): string;
   static locale(locales: Array<string>): string;
   locale(locale: string, customization?: Object | null): moment$Moment;
   locale(): string;
