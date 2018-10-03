@@ -17,6 +17,15 @@ moment("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', true);
 moment("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', 1);
 // https://momentjs.com/docs/#/parsing/object/
 moment({ hour: 15, minute: 10 });
+moment([2015, 0]); // This would equal 2015-01-01
+// $ExpectError only string values can have formatting parameters
+moment([2015, 0], "MM-DD-YYYY");
+// $ExpectError
+moment([2015, 0], "MM-DD-YYYY", true);
+// $ExpectError
+moment([2015, 0], moment.ISO_8601);
+// $ExpectError
+moment({ hour: 15, minute: 10 }, "MM-DD-YYYY");
 // // https://momentjs.com/docs/#/parsing/special-formats/
 moment("2010-01-01T05:06:07", moment.ISO_8601);
 moment("2010-01-01T05:06:07", ["YYYY", moment.ISO_8601]);
