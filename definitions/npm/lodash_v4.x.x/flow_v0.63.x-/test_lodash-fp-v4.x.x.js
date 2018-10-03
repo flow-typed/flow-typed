@@ -4,6 +4,8 @@ import assignIn from "lodash/fp/assignIn";
 import extend from "lodash/fp/extend";
 import sortedLastIndexBy from "lodash/fp/sortedLastIndexBy";
 import sortedIndexBy from "lodash/fp/sortedIndexBy";
+import sortedUniq from "lodash/fp/sortedUniq";
+import sortedUniqBy from "lodash/fp/sortedUniqBy";
 import range from "lodash/fp/range";
 import isEqual from "lodash/fp/isEqual";
 import clone from "lodash/fp/clone";
@@ -285,6 +287,18 @@ sortedLastIndexBy(
   [{ x: 4 }, { x: 5 }]
 );
 sortedLastIndexBy("x", { x: 4 }, [{ x: 4 }, { x: 5 }]);
+
+/**
+ * sortedUniq
+ */
+sortedUniq([1, 1, 2]);
+sortedUniq(["a", "b", "b"]);
+
+/**
+ * sortedUniqBy
+ */
+sortedUniqBy(Math.floor, [1.2, 2.1, 2.3]);
+sortedUniqBy("x", [{ x: 1 }, { x: 1 }, { x: 2 }]);
 
 /**
  * extend

@@ -30,6 +30,8 @@ import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
 import sortedIndexBy from "lodash/sortedIndexBy";
 import sortedLastIndexBy from "lodash/sortedLastIndexBy";
+import sortedUniq from "lodash/sortedUniq";
+import sortedUniqBy from "lodash/sortedUniqBy";
 import tap from "lodash/tap";
 import thru from "lodash/thru";
 import times from "lodash/times";
@@ -299,6 +301,18 @@ sortedLastIndexBy([{ x: 4 }, { x: 5 }], { x: 4 }, function(o) {
   return o.x;
 });
 sortedLastIndexBy([{ x: 4 }, { x: 5 }], { x: 4 }, "x");
+
+/**
+ * _.sortedUniq
+ */
+sortedUniq([1, 2, 2]);
+sortedUniq(["a", "b", "b"]);
+
+/**
+ * _.sortedUniqBy
+ */
+sortedUniqBy([1.2, 2.1, 2.3], Math.floor);
+sortedUniqBy([{ x: 1 }, { x: 1 }, { x: 2 }], "x");
 
 /**
  * _.extend
