@@ -119,16 +119,18 @@ declare class moment$MomentDuration {
 declare class moment$Moment {
   static ISO_8601: string;
   static (
+    initDate: ?Object | number | Date | Array<number> | moment$Moment | string
+  ): moment$Moment;
+  static (
+    string?: string,
+    format?: string | Array<string>,
+    strict?: boolean
+  ): moment$Moment;
+  static (
     string?: string,
     format?: string | Array<string>,
     locale?: string,
     strict?: boolean
-  ): moment$Moment;
-  static (
-    initDate: ?Object | number | Date | Array<number> | moment$Moment | string,
-    validFormats?: ?Array<string> | string,
-    locale?: ?boolean | string,
-    strict?: ?boolean | string
   ): moment$Moment;
   static unix(seconds: number): moment$Moment;
   static utc(): moment$Moment;
