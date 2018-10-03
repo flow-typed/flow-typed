@@ -384,7 +384,7 @@ declare module "lodash" {
     sortedUniq<T>(array?: ?Array<T>): Array<T>;
     sortedUniqBy<T>(
       array?: ?Array<T>,
-      iteratee?: ?(value: T) => mixed
+      iteratee?: ?ValueOnlyIteratee<T>
     ): Array<T>;
     tail<T>(array?: ?Array<T>): Array<T>;
     take<T>(array?: ?Array<T>, n?: ?number): Array<T>;
@@ -1884,10 +1884,7 @@ declare module "lodash/fp" {
     sortedLastIndexOf<T>(value: T): (array: Array<T>) => number;
     sortedLastIndexOf<T>(value: T, array: Array<T>): number;
     sortedUniq<T>(array: Array<T>): Array<T>;
-    sortedUniqBy<T>(
-      iteratee: (value: T) => mixed
-    ): (array: Array<T>) => Array<T>;
-    sortedUniqBy<T>(iteratee: (value: T) => mixed, array: Array<T>): Array<T>;
+    sortedUniqBy<T>(iteratee: ValueOnlyIteratee<T>, array: Array<T>): Array<T>;
     tail<T>(array: Array<T>): Array<T>;
     take<T>(n: number): (array: Array<T>) => Array<T>;
     take<T>(n: number, array: Array<T>): Array<T>;
