@@ -67,6 +67,7 @@ declare type $winstonFormatSubModule = {
   label: (config?: Object) => $winstonFormat,
   prettyPrint: () => $winstonFormat,
   simple: () => $winstonFormat,
+  splat: () => $winstonFormat,
   timestamp: () => $winstonFormat,
   colorize: () => $winstonFormat,
   logstash: () => $winstonFormat,
