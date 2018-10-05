@@ -7,7 +7,7 @@ declare module "react-collapsible" {
     open?: boolean,
     classParentString?: string,
     openedClassName?: string,
-    triggerStyle?: object,
+    triggerStyle?: Object,
     triggerClassName?: string,
     triggerOpenedClassName?: string,
     contentOuterClassName?: string,
