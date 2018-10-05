@@ -1501,21 +1501,21 @@ declare module ramda {
 
   declare type MergeWithKey = (<
     S: string,
+    T,
     A: { [k: string]: T },
-    B: { [k: string]: T },
-    T
+    B: { [k: string]: T }
   >(
     fn: (s: S, a: T, b: T) => T,
     a: A,
     b: B
   ) => A & B) &
-    (<S: string, A: { [k: string]: T }, B: { [k: string]: T }, T>(
+    (<S: string, T, A: { [k: string]: T }, B: { [k: string]: T }>(
       fn: (s: S, a: T, b: T) => T,
     ) => (a: A, b: B) => A & B) &
-    (<S: string, A: { [k: string]: T }, B: { [k: string]: T }, T>(
+    (<S: string, T, A: { [k: string]: T }, B: { [k: string]: T }>(
       fn: (s: S, a: T, b: T) => T,
     ) => (a: A) => (b: B) => A & B) &
-    (<S: string, A: { [k: string]: T }, B: { [k: string]: T }, T>(
+    (<S: string, T, A: { [k: string]: T }, B: { [k: string]: T }>(
       fn: (s: S, a: T, b: T) => T,
       a: A,
     ) => (b: B) => A & B);
