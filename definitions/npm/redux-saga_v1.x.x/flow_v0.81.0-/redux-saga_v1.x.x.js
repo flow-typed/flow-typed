@@ -18,6 +18,10 @@ declare module "redux-saga" {
     close(): void
   |}>;
 
+  declare export type PredicateTakeableChannel<T> = {|
+    take(cb: (message: T | TEnd) => void, matcher?: Predicate<T>): void
+  |};
+
   declare export interface Buffer<T> {
     isEmpty(): boolean;
     put(message: T): void;
@@ -25,26 +29,29 @@ declare module "redux-saga" {
     flush(): Array<T>;
   }
 
-  declare export interface Task<T> {
+  declare export interface Task<RT> {
     isRunning: () => boolean;
     isCancelled: () => boolean;
-    result: () => T | void;
+    result: () => RT | void;
     error: () => Error | void;
     cancel: () => void;
-    done: Promise<T>;
+    toPromise(): Promise<RT>;
+    setContext<C: Object>(props: $Shape<C>): void;
   }
 
   declare export interface SagaMonitor {
-    effectTriggered: (options: {
+    effectTriggered?: (desc: {
       +effectId: number,
       +parentEffectId: number,
       +label: string,
+      +root?: boolean,
       +effect: Effect
     }) => void;
-    effectResolved: (effectId: number, result: mixed) => void;
-    effectRejected: (effectId: number, error: Error) => void;
-    effectCancelled: (effectId: number) => void;
-    actionDispatched: (action: mixed) => void;
+    effectResolved?: (effectId: number, result: mixed) => void;
+    effectRejected?: (effectId: number, error: any) => void;
+    effectCancelled?: (effectId: number) => void;
+    // Must to be Action type from redux
+    actionDispatched?: (action: mixed) => void;
   }
 
   declare export type Saga<T> = Generator<Effect, T, any>;
@@ -87,40 +94,51 @@ declare module "redux-saga" {
 
   declare export function stdChannel<T>(): MulticastChannel<T>;
 
-  declare type RunSagaOptions = {
-    +subscribe?: (emit: (input: any) => any) => () => void,
-    +dispatch?: (output: any) => any,
-    +getState?: () => any,
-    +sagaMonitor?: SagaMonitor,
-    +logger?: (
-      level: "info" | "warning" | "error",
-      ...args: Array<any>
-    ) => void,
-    +onError?: (error: Error) => void
-  };
+  declare export type Logger = (
+    level: "info" | "warning" | "error",
+    ...args: Array<any>
+  ) => void;
+
+  declare export type EffectMiddleware = (
+    next: (effect: mixed) => void
+  ) => (effect: mixed) => void;
+
+  declare type RunSagaOptions<A, S> = {|
+    channel?: PredicateTakeableChannel<A>,
+    dispatch?: (input: A) => mixed,
+    getState?: () => S,
+    context?: Object,
+    sagaMonitor?: SagaMonitor,
+    logger?: Logger,
+    effectMiddlewares?: Array<EffectMiddleware>,
+    onError?: (error: Error) => void
+  |};
 
   declare export var runSaga: {
-    <R, Fn: () => Saga<R>>(options: RunSagaOptions, saga: Fn): Task<R>,
-    <R, T1, Fn: (t1: T1) => Saga<R>>(
-      options: RunSagaOptions,
+    <A, S, R, Fn: () => Saga<R>>(
+      options: RunSagaOptions<A, S>,
+      saga: Fn
+    ): Task<R>,
+    <A, S, R, T1, Fn: (t1: T1) => Saga<R>>(
+      options: RunSagaOptions<A, S>,
       saga: Fn,
       t1: T1
     ): Task<R>,
-    <R, T1, T2, Fn: (t1: T1, t2: T2) => Saga<R>>(
-      options: RunSagaOptions,
+    <A, S, R, T1, T2, Fn: (t1: T1, t2: T2) => Saga<R>>(
+      options: RunSagaOptions<A, S>,
       saga: Fn,
       t1: T1,
       t2: T2
     ): Task<R>,
-    <R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3) => Saga<R>>(
-      options: RunSagaOptions,
+    <A, S, R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3) => Saga<R>>(
+      options: RunSagaOptions<A, S>,
       saga: Fn,
       t1: T1,
       t2: T2,
       t3: T3
     ): Task<R>,
-    <R, T1, T2, T3, T4, Fn: (t1: T1, t2: T2, t3: T3, t4: T4) => Saga<R>>(
-      options: RunSagaOptions,
+    <A, S, R, T1, T2, T3, T4, Fn: (t1: T1, t2: T2, t3: T3, t4: T4) => Saga<R>>(
+      options: RunSagaOptions<A, S>,
       saga: Fn,
       t1: T1,
       t2: T2,
@@ -128,6 +146,8 @@ declare module "redux-saga" {
       t4: T4
     ): Task<R>,
     <
+      A,
+      S,
       R,
       T1,
       T2,
@@ -136,7 +156,7 @@ declare module "redux-saga" {
       T5,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => Saga<R>
     >(
-      options: RunSagaOptions,
+      options: RunSagaOptions<A, S>,
       saga: Fn,
       t1: T1,
       t2: T2,
@@ -145,6 +165,8 @@ declare module "redux-saga" {
       t5: T5
     ): Task<R>,
     <
+      A,
+      S,
       R,
       T1,
       T2,
@@ -154,7 +176,7 @@ declare module "redux-saga" {
       T6,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => Saga<R>
     >(
-      options: RunSagaOptions,
+      options: RunSagaOptions<A, S>,
       saga: Fn,
       t1: T1,
       t2: T2,
@@ -164,6 +186,8 @@ declare module "redux-saga" {
       t6: T6
     ): Task<R>,
     <
+      A,
+      S,
       R,
       T1,
       T2,
@@ -174,7 +198,7 @@ declare module "redux-saga" {
       T7,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7) => Saga<R>
     >(
-      options: RunSagaOptions,
+      options: RunSagaOptions<A, S>,
       saga: Fn,
       t1: T1,
       t2: T2,
@@ -185,6 +209,8 @@ declare module "redux-saga" {
       t7: T7
     ): Task<R>,
     <
+      A,
+      S,
       R,
       T1,
       T2,
@@ -205,7 +231,7 @@ declare module "redux-saga" {
         t8: T8
       ) => Saga<R>
     >(
-      options: RunSagaOptions,
+      options: RunSagaOptions<A, S>,
       saga: Fn,
       t1: T1,
       t2: T2,
