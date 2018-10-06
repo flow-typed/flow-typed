@@ -39,7 +39,7 @@ describe("channel", () => {
     (ch2: Channel<*>);
   });
 
-  it("must raise an error first argument isn't buffer or nothing", () => {
+  it("must raises an error first argument isn't buffer or nothing", () => {
     // $ExpectError number isn't Buffer
     const ch = channel(1);
 
@@ -66,7 +66,7 @@ describe("channel", () => {
     (ch.put(END): void);
   });
 
-  it("must raise an error when passed incompatible types", () => {
+  it("must raises an error when passed incompatible types", () => {
     type T = number;
 
     declare var buffer: Buffer<T>;
@@ -87,21 +87,21 @@ describe("channel", () => {
     (ch.put("oppsss"): void);
   });
 
-  it("must raise an error when call 'take' without args", () => {
+  it("must raises an error when call 'take' without args", () => {
     const ch = channel();
 
     // $ExpectError
     ch.take();
   });
 
-  it("must raise an error when call 'flush' without args", () => {
+  it("must raises an error when call 'flush' without args", () => {
     const ch = channel();
 
     // $ExpectError
     ch.flush();
   });
 
-  it("must raise an error when call 'put' without args", () => {
+  it("must raises an error when call 'put' without args", () => {
     declare var buffer: Buffer<number>;
     const ch = channel(buffer);
 

@@ -62,7 +62,7 @@ describe("call() effect", () => {
         (c6.payload.context: null);
       });
 
-      it("must raises error when lead context to Object", () => {
+      it("must raises an error when lead context to Object", () => {
         // $ExpectError
         (c1.payload.context: Object);
       });
@@ -79,17 +79,17 @@ describe("call() effect", () => {
         (c6.payload.args: [string, number, string, number, string, number]);
       });
 
-      it("must raises error when passed number but need string", () => {
+      it("must raises an error when passed number but need string", () => {
         // $ExpectError: First parameter is a string, not a number
         (c1.payload.args: [number]);
       });
 
-      it("must raises error when passed too few arguments", () => {
+      it("must raises an error when passed too few arguments", () => {
         // $ExpectError: too few arguments
         call(fn6, "1", 2, "3", 4);
       });
 
-      it("must raises error when passed wrong argument types", () => {
+      it("must raises an error when passed wrong argument types", () => {
         // $ExpectError: wrong argument types
         call(fn1, 1);
       });
@@ -109,17 +109,17 @@ describe("call() effect", () => {
         (c1.payload.fn: typeof fn6);
       });
 
-      it("must raises error when Function return no Promise<number>", () => {
+      it("must raises an error when Function return no Promise<number>", () => {
         // $ExpectError: fn returns a Promise<string> not Promise<number>
         (c1.payload.fn: (a: boolean) => Promise<number>);
       });
 
-      it('must raises error when "a" argument isn\'t string', () => {
+      it('must raises an error when "a" argument isn\'t string', () => {
         // $ExpectError: 'a' is actually of type string
         (c4.payload.fn: (a: number, b: number) => Promise<string>);
       });
 
-      it("must raises error when less parameter are noticed", () => {
+      it("must raises an error when less parameter are noticed", () => {
         // $ExpectError: Less parameter are noticed
         (c6.payload.fn: typeof fn1);
       });

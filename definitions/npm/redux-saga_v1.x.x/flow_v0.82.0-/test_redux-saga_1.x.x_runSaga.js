@@ -80,7 +80,7 @@ describe("runSaga", () => {
       (runSaga({}, s8, "1", 2, "3", 4, "5", 6, "7", 8): Task<number>);
     });
 
-    it("must raise as error when passed invalid arguments", () => {
+    it("must raises an error when passed invalid arguments", () => {
       // $ExpectError: too few args
       (runSaga({}, s6, "1", 2): Task<number>);
 
@@ -88,7 +88,7 @@ describe("runSaga", () => {
       (runSaga({}, s1, 1): Task<number>);
     });
 
-    it("must raise as error", () => {
+    it("must raises an error", () => {
       // $ExpectError: wrong return type
       (runSaga({}, s1, 1): Task<string>);
     });
@@ -118,7 +118,7 @@ describe("runSaga", () => {
 
 
 
-    // TODO: How i can help Flow to understand with case to select ???
+    // $ExpectError: TODO: How i can help Flow to understand with case to select ???
     runSaga({ channel }, s1, "");
   });
 });

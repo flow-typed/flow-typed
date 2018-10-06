@@ -41,7 +41,7 @@ describe("eventChannel", () => {
     (ch.flush(cbFlush): void);
   });
 
-  it("must raise an error when passed incompatible types", () => {
+  it("must raises an error when passed incompatible types", () => {
     type T = string;
 
     declare var subscribeFn: Subscribe<T>;
@@ -57,7 +57,7 @@ describe("eventChannel", () => {
     (ch.flush(cbFlush): void);
   });
 
-  it("must raise an error when call 'take' without args", () => {
+  it("must raises an error when call 'take' without args", () => {
     declare var subscribeFn: Subscribe<string>;
 
     const ch = eventChannel(subscribeFn, buffers.none());
@@ -66,7 +66,7 @@ describe("eventChannel", () => {
     ch.take();
   });
 
-  it("must raise an error when call 'flush' without args", () => {
+  it("must raises an error when call 'flush' without args", () => {
     declare var subscribeFn: Subscribe<string>;
 
     const ch = eventChannel(subscribeFn, buffers.none());

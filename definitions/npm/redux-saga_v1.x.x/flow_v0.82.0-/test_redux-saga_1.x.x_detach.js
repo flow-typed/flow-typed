@@ -15,7 +15,7 @@ describe("detach(ForkEffect): ForkEffect*", () => {
     (detachedForkEffect.payload.detached: true);
   });
 
-  it("must raise an error when first argument isn't ForkEffect", () => {
+  it("must raises an error when first argument isn't ForkEffect", () => {
     // $ExpectError
     detach({ type: "FORK" });
   });

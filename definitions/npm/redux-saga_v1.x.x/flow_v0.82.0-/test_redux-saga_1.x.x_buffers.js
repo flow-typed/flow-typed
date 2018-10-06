@@ -36,7 +36,7 @@ describe("buffers", () => {
       (buffers.fixed(5): Buffer<*>);
     });
 
-    it("must raise an error when first argument isn't number", () => {
+    it("must raises an error when first argument isn't number", () => {
       // $ExpectError: limit parameter must be given as a number
       (buffers.fixed("five"): Buffer<*>);
     });
@@ -51,7 +51,7 @@ describe("buffers", () => {
       (buffers.dropping(6): Buffer<*>);
     });
 
-    it("must raise an error when first argument isn't number", () => {
+    it("must raises an error when first argument isn't number", () => {
       // $ExpectError: limit parameter must be given as a number
       (buffers.dropping("six"): Buffer<*>);
     });
@@ -66,7 +66,7 @@ describe("buffers", () => {
       (buffers.sliding(7): Buffer<*>);
     });
 
-    it("must raise an error when first argument isn't number", () => {
+    it("must raises an error when first argument isn't number", () => {
       // $ExpectError: limit parameter must be given as a number
       (buffers.sliding("seven"): Buffer<*>);
     });
@@ -81,7 +81,7 @@ describe("buffers", () => {
       (buffers.expanding(8): Buffer<*>);
     });
 
-    it("must raise an error when first argument isn't number", () => {
+    it("must raises an error when first argument isn't number", () => {
       // $ExpectError: limit parameter must be given as a number
       (buffers.expanding("eight"): Buffer<*>);
     });
