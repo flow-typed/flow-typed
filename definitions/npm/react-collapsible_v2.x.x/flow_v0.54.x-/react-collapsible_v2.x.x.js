@@ -18,8 +18,8 @@ declare module "react-collapsible" {
     onClose?: () => void,
     onOpening?: () => void,
     onClosing?: () => void,
-    trigger?: string | React$Node,
-    triggerWhenOpen?: string | React$Node,
+    trigger: string | React$Element<*>,
+    triggerWhenOpen?: string | React$Element<*>,
     triggerDisabled?: boolean,
     lazyRender?: boolean,
     overflowWhenOpen?:
@@ -30,7 +30,7 @@ declare module "react-collapsible" {
       | "inherit"
       | "initial"
       | "unset",
-    triggerSibling?: React$Node | string | (() => void),
+    triggerSibling?: string | React$Element<*> | (() => React$Node),
     tabIndex?: number
   };
 
