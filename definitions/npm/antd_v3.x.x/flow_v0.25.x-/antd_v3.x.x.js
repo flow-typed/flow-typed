@@ -5,11 +5,11 @@ declare module "antd" {
     destroy: () => void
   };
 
-  declare function messageFn<TReturn>(
+  declare type messageFn<TReturn> = (
     content: React$Node,
     duration?: number,
     onClose?: () => mixed
-  ): TReturn;
+  ) => TReturn;
 
   declare type modalFnArguments = {
     title?: string,
