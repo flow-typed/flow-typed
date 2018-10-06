@@ -13,6 +13,14 @@ describe("react-collapsible", () => {
   });
 
   describe("should throw an error when", () => {
+    it("trigger prop is missing", () => {
+      // $ExpectError
+      var error = (
+        <Collapsible>
+          <p>I have no trigger prop</p>
+        </Collapsible>
+      );
+    });
     it("overflowWhenOpen prop has the wrong value", () => {
       // $ExpectError
       var error = <Collapsible overflowWhenOpen="cool" />;
