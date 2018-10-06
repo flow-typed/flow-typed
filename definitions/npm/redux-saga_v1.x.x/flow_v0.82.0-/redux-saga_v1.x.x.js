@@ -18,10 +18,6 @@ declare module "redux-saga" {
     close(): void
   |}>;
 
-  declare export type PredicateTakeableChannel<T> = {|
-    take(cb: (message: T | TEnd) => void, matcher?: Predicate<T>): void
-  |};
-
   declare export interface Buffer<T> {
     isEmpty(): boolean;
     put(message: T): void;
@@ -102,6 +98,10 @@ declare module "redux-saga" {
   declare export type EffectMiddleware = (
     next: (effect: mixed) => void
   ) => (effect: mixed) => void;
+
+  declare export interface PredicateTakeableChannel<T> {
+    take(cb: (message: T | TEnd) => void, matcher?: Predicate<T>): void;
+  }
 
   declare type RunSagaOptions<A, S> = {|
     channel?: PredicateTakeableChannel<A>,

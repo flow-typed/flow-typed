@@ -1,6 +1,12 @@
 // @flow
 import { describe, it } from "flow-typed-test";
-import { runSaga, type Saga, type Task } from "redux-saga";
+import {
+  runSaga,
+  stdChannel,
+  type Saga,
+  type Task,
+  type SagaMonitor
+} from "redux-saga";
 
 describe("runSaga", () => {
   function* s0(): Saga<number> {
@@ -61,54 +67,58 @@ describe("runSaga", () => {
     return 1;
   }
 
-  (runSaga({}, s0): Task<number>);
-  (runSaga({}, s1, "1"): Task<number>);
-  (runSaga({}, s2, "1", 2): Task<number>);
-  (runSaga({}, s3, "1", 2, "3"): Task<number>);
-  (runSaga({}, s4, "1", 2, "3", 4): Task<number>);
-  (runSaga({}, s5, "1", 2, "3", 4, "5"): Task<number>);
-  (runSaga({}, s6, "1", 2, "3", 4, "5", 6): Task<number>);
-  (runSaga({}, s7, "1", 2, "3", 4, "5", 6, "7"): Task<number>);
-  (runSaga({}, s8, "1", 2, "3", 4, "5", 6, "7", 8): Task<number>);
+  describe("test arguments", () => {
+    it("must passes when used properly", () => {
+      (runSaga({}, s0): Task<number>);
+      (runSaga({}, s1, "1"): Task<number>);
+      (runSaga({}, s2, "1", 2): Task<number>);
+      (runSaga({}, s3, "1", 2, "3"): Task<number>);
+      (runSaga({}, s4, "1", 2, "3", 4): Task<number>);
+      (runSaga({}, s5, "1", 2, "3", 4, "5"): Task<number>);
+      (runSaga({}, s6, "1", 2, "3", 4, "5", 6): Task<number>);
+      (runSaga({}, s7, "1", 2, "3", 4, "5", 6, "7"): Task<number>);
+      (runSaga({}, s8, "1", 2, "3", 4, "5", 6, "7", 8): Task<number>);
+    });
 
-  // $ExpectError: too few args
-  (runSaga({}, s6, "1", 2): Task<number>);
+    it("must raise as error when passed invalid arguments", () => {
+      // $ExpectError: too few args
+      (runSaga({}, s6, "1", 2): Task<number>);
 
-  // $ExpectError: wrong argument type
-  (runSaga({}, s1, 1): Task<number>);
+      // $ExpectError: wrong argument type
+      (runSaga({}, s1, 1): Task<number>);
+    });
 
-  // $ExpectError: wrong return type
-  (runSaga({}, s1, 1): Task<string>);
+    it("must raise as error", () => {
+      // $ExpectError: wrong return type
+      (runSaga({}, s1, 1): Task<string>);
+    });
+  });
 
-  const cb = input => {};
-  const subscribe = cb => {
-    cb("");
-    return () => {}; // unsubscribe fn
-  };
+  describe("runSaga(RunSagaOptions)", () => {
+    const channel = stdChannel();
+    const sagaMonitor: SagaMonitor = {
+      effectTriggered: _ => {},
+      effectResolved: (_, _2) => {},
+      effectRejected: (_, _2) => {},
+      effectCancelled: _ => {},
+      actionDispatched: _ => {}
+    };
 
-  const invalidSubscribe = cb => {
-    // $ExpectError: cb is a function
-    cb + 2;
+    const dispatch = output => {};
+    const getState = () => ({});
+    const logger = level => {};
 
-    return "";
-  };
+    runSaga({ dispatch }, s0);
+    runSaga({ getState }, s0);
+    runSaga({ sagaMonitor }, s0);
+    runSaga({ logger }, s0);
 
-  // $ExpectError: error level is a string enum
-  const invalidLogger = (level: number) => {};
+    // $ExpectError: error level is a string enum
+    runSaga({ logger: (level: number) => {} }, s0);
 
-  const dispatch = output => {};
-  const getState = () => ({});
-  const logger = level => {};
 
-  // Should be fine
-  runSaga({ subscribe }, s0);
-  runSaga({ dispatch }, s0);
-  runSaga({ getState }, s0);
-  runSaga({ sagaMonitor }, s0);
-  runSaga({ logger }, s0);
 
-  // Invalid instantiations
-  runSaga({ logger: invalidLogger }, s0);
-  // $ExpectError: return needs to be a subscribe fn
-  runSaga({ subscribe: invalidSubscribe }, s0);
+    // TODO: How i can help Flow to understand with case to select ???
+    runSaga({ channel }, s1, "");
+  });
 });
