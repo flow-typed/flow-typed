@@ -487,7 +487,7 @@ declare module "redux-saga" {
 
   declare export type SELF_CANCELLATION = "@@redux-saga/SELF_CANCELLATION"; // Symbol
 
-  declare export type CancelEffect<T: Task<*> | SELF_CANCELLATION> = IEffect<
+  declare export type CancelEffect<T: Task<*>| $ReadOnlyArray<Task<*>> | SELF_CANCELLATION> = IEffect<
     "CANCEL",
     T
   >;
@@ -1789,7 +1789,7 @@ declare module "redux-saga/effects" {
   declare export var cancel: {
     (): CancelEffect<"@@redux-saga/SELF_CANCELLATION">,
     <T: Task<*>>(task: T): CancelEffect<T>,
-    (task: Task<*>, ...tasks: $ReadOnlyArray<Task<any>>): AllEffect
+    <T: Task<*>>(tasks: Array<T>): CancelEffect<$ReadOnlyArray<T>>
   };
 
   declare export var select: {
