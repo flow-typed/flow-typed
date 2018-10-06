@@ -1,4 +1,25 @@
 declare module "redux-saga" {
+  // These types are copied directly from the redux libdef.
+  // Importing them in this libdef causes a loss in type coverage.
+
+  // * uncomment next line:
+  // import type { Middleware} from 'redux';
+
+  // * remove next types
+  declare type DispatchAPI<A> = (action: A) => A;
+  declare type Dispatch<A: { type: $Subtype<string> }> = DispatchAPI<A>;
+
+  declare type MiddlewareAPI<S, A, D = Dispatch<A>> = {
+    dispatch: D,
+    getState(): S
+  };
+
+  declare type Middleware<S, A, D = Dispatch<A>> = (
+    api: MiddlewareAPI<S, A, D>
+  ) => (next: D) => D;
+
+  ///////////////////////////////////////////////////////////////////////////
+
   declare export var SAGA_LOCATION: "@@redux-saga/LOCATION";
   declare export var CANCEL: "@@redux-saga/CANCEL_PROMISE";
 
@@ -46,8 +67,8 @@ declare module "redux-saga" {
     effectResolved?: (effectId: number, result: mixed) => void;
     effectRejected?: (effectId: number, error: any) => void;
     effectCancelled?: (effectId: number) => void;
-    // Must to be Action type from redux
-    actionDispatched?: (action: mixed) => void;
+
+    actionDispatched?: <A>(action: A) => void;
   }
 
   declare export type Saga<T> = Generator<Effect, T, any>;
@@ -244,128 +265,143 @@ declare module "redux-saga" {
     ): Task<R>
   };
 
-  declare interface SagaMiddleware {
-    // TODO: This should be aligned with the official redux typings sometime
-    (api: any): (next: any) => any;
-    run: {
-      <R, Fn: () => Saga<R>>(saga: Fn): Task<R>,
-      <R, T1, Fn: (t1: T1) => Saga<R>>(saga: Fn, t1: T1): Task<R>,
-      <R, T1, T2, Fn: (t1: T1, t2: T2) => Saga<R>>(
-        saga: Fn,
-        t1: T1,
-        t2: T2
-      ): Task<R>,
-      <R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3) => Saga<R>>(
-        saga: Fn,
-        t1: T1,
-        t2: T2,
-        t3: T3
-      ): Task<R>,
-      <R, T1, T2, T3, T4, Fn: (t1: T1, t2: T2, t3: T3, t4: T4) => Saga<R>>(
-        saga: Fn,
-        t1: T1,
-        t2: T2,
-        t3: T3,
-        t4: T4
-      ): Task<R>,
-      <
-        R,
-        T1,
-        T2,
-        T3,
-        T4,
-        T5,
-        Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => Saga<R>
-      >(
-        saga: Fn,
-        t1: T1,
-        t2: T2,
-        t3: T3,
-        t4: T4,
-        t5: T5
-      ): Task<R>,
-      <
-        R,
-        T1,
-        T2,
-        T3,
-        T4,
-        T5,
-        T6,
-        Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => Saga<R>
-      >(
-        saga: Fn,
-        t1: T1,
-        t2: T2,
-        t3: T3,
-        t4: T4,
-        t5: T5,
-        t6: T6
-      ): Task<R>,
-      <
-        R,
-        T1,
-        T2,
-        T3,
-        T4,
-        T5,
-        T6,
-        T7,
-        Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7) => Saga<R>
-      >(
-        saga: Fn,
-        t1: T1,
-        t2: T2,
-        t3: T3,
-        t4: T4,
-        t5: T5,
-        t6: T6,
-        t7: T7
-      ): Task<R>,
-      <
-        R,
-        T1,
-        T2,
-        T3,
-        T4,
-        T5,
-        T6,
-        T7,
-        T8,
-        Fn: (
-          t1: T1,
-          t2: T2,
-          t3: T3,
-          t4: T4,
-          t5: T5,
-          t6: T6,
-          t7: T7,
-          t8: T8
-        ) => Saga<R>
-      >(
-        saga: Fn,
-        t1: T1,
-        t2: T2,
-        t3: T3,
-        t4: T4,
-        t5: T5,
-        t6: T6,
-        t7: T7,
-        t8: T8
-      ): Task<R>
-    };
-  }
+  declare export type SagaMiddleware<C: {}> =
+    | Middleware<*, *>
+    | {
+        run: {
+          <R, Fn: () => Saga<R>>(saga: Fn): Task<R>,
+          <R, T1, Fn: (t1: T1) => Saga<R>>(saga: Fn, t1: T1): Task<R>,
+          <R, T1, T2, Fn: (t1: T1, t2: T2) => Saga<R>>(
+            saga: Fn,
+            t1: T1,
+            t2: T2
+          ): Task<R>,
+          <R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3) => Saga<R>>(
+            saga: Fn,
+            t1: T1,
+            t2: T2,
+            t3: T3
+          ): Task<R>,
+          <R, T1, T2, T3, T4, Fn: (t1: T1, t2: T2, t3: T3, t4: T4) => Saga<R>>(
+            saga: Fn,
+            t1: T1,
+            t2: T2,
+            t3: T3,
+            t4: T4
+          ): Task<R>,
+          <
+            R,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => Saga<R>
+          >(
+            saga: Fn,
+            t1: T1,
+            t2: T2,
+            t3: T3,
+            t4: T4,
+            t5: T5
+          ): Task<R>,
+          <
+            R,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => Saga<R>
+          >(
+            saga: Fn,
+            t1: T1,
+            t2: T2,
+            t3: T3,
+            t4: T4,
+            t5: T5,
+            t6: T6
+          ): Task<R>,
+          <
+            R,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            Fn: (
+              t1: T1,
+              t2: T2,
+              t3: T3,
+              t4: T4,
+              t5: T5,
+              t6: T6,
+              t7: T7
+            ) => Saga<R>
+          >(
+            saga: Fn,
+            t1: T1,
+            t2: T2,
+            t3: T3,
+            t4: T4,
+            t5: T5,
+            t6: T6,
+            t7: T7
+          ): Task<R>,
+          <
+            R,
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            Fn: (
+              t1: T1,
+              t2: T2,
+              t3: T3,
+              t4: T4,
+              t5: T5,
+              t6: T6,
+              t7: T7,
+              t8: T8
+            ) => Saga<R>
+          >(
+            saga: Fn,
+            t1: T1,
+            t2: T2,
+            t3: T3,
+            t4: T4,
+            t5: T5,
+            t6: T6,
+            t7: T7,
+            t8: T8
+          ): Task<R>
+        },
+        setContext: (props: $Shape<C>) => void
+      };
 
-  declare type createSagaMiddleware = (options?: {
-    +sagaMonitor?: SagaMonitor,
-    +logger?: (
-      level: "info" | "warning" | "error",
-      ...args: Array<any>
-    ) => void,
-    +onError?: (error: Error) => void
-  }) => SagaMiddleware;
+  declare export type Emit<T> = (input: T) => void;
 
-  declare export default createSagaMiddleware;
+  declare export type SagaMiddlewareOptions<C: {}> = {|
+    context?: C,
+    sagaMonitor?: SagaMonitor,
+    logger?: Logger,
+    effectMiddlewares?: Array<EffectMiddleware>,
+    emitter?: <A>(emit: Emit<A>) => Emit<any>,
+    onError?: (error: Error) => void
+  |};
+
+  declare function sagaMiddlewareFactory<C>(
+    options?: SagaMiddlewareOptions<C>
+  ): SagaMiddleware<C>;
+
+  declare export default typeof sagaMiddlewareFactory;
 
   // Effect types
   declare export type PatternPart = string | (any => boolean);
