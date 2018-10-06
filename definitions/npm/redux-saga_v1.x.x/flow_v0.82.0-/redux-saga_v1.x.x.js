@@ -404,7 +404,7 @@ declare module "redux-saga" {
   declare export default typeof sagaMiddlewareFactory;
 
   // Effect types
-  declare export type PatternPart = string | (any => boolean);
+  declare export type PatternPart = string | (mixed => boolean);
   declare export type Pattern = PatternPart | $ReadOnlyArray<PatternPart>;
 
   declare export interface IEffect<T, P> {
@@ -505,7 +505,7 @@ declare module "redux-saga" {
 
   declare export type ActionChannelEffect<
     T,
-    P: Pattern,
+    P: Pattern | void,
     B: Buffer<T> | void
   > = IEffect<
     "ACTION_CHANNEL",
@@ -541,7 +541,7 @@ declare module "redux-saga" {
     | JoinEffect<*>
     | CancelEffect<*>
     | SelectEffect<*, *>
-    | ActionChannelEffect<*, *>
+    | ActionChannelEffect<*, *, *>
     | FlushEffect<*>
     | CancelledEffect
     | SetContextEffect<*>
@@ -1919,11 +1919,12 @@ declare module "redux-saga/effects" {
   };
 
   declare export var actionChannel: {
-    <P: Pattern>(pattern: P): ActionChannelEffect<P, void>,
-    <T, P: Pattern, B: Buffer<T>>(
+    <BT>(): ActionChannelEffect<BT, void, void>,
+    <BT, P: Pattern>(pattern: P): ActionChannelEffect<BT, P, void>,
+    <BT, T, P: Pattern, B: Buffer<T>>(
       pattern: P,
       buffer: B
-    ): ActionChannelEffect<P, B>
+    ): ActionChannelEffect<BT, P, B>
   };
 
   declare export var flush: {
