@@ -440,7 +440,7 @@ declare module "redux-saga" {
 
   declare export type CallEffect<
     Ctx,
-    Fn: Function,
+    Fn: Function | string,
     Args: $ReadOnlyArray<*>
   > = IEffect<
     "CALL",
@@ -869,7 +869,7 @@ declare module "redux-saga/effects" {
       t8: T8
     ): CallEffect<null, Fn, [T1, T2, T3, T4, T5, T6, T7, T8]>,
 
-    // with context
+    // With context call([context, fn], ...args)
     <Ctx, R, Fn: () => R>(cfn: [Ctx, Fn]): CallEffect<Ctx, Fn, []>,
     <Ctx, R, T1, Fn: (t1: T1) => R>(
       cfn: [Ctx, Fn],
@@ -964,6 +964,250 @@ declare module "redux-saga/effects" {
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7, t8: T8) => R
     >(
       cfn: [Ctx, Fn],
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5,
+      t6: T6,
+      t7: T7,
+      t8: T8
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4, T5, T6, T7, T8]>,
+
+    // With context call([context, fnName], ...args)
+    <R, FnName: string, Fn: () => R, Ctx: { [FnName]: Fn }>(
+      cfn: [Ctx, FnName]
+    ): CallEffect<Ctx, Fn, []>,
+    <R, FnName: string, T1, Fn: (t1: T1) => R, Ctx: { [FnName]: Fn }>(
+      cfn: [Ctx, FnName],
+      t1: T1
+    ): CallEffect<Ctx, Fn, [T1]>,
+    <
+      R,
+      FnName: string,
+      T1,
+      T2,
+      Fn: (t1: T1, t2: T2) => R,
+      Ctx: { [FnName]: Fn }
+    >(
+      cfn: [Ctx, FnName],
+      t1: T1,
+      t2: T2
+    ): CallEffect<Ctx, Fn, [T1, T2]>,
+    <
+      R,
+      FnName: string,
+      T1,
+      T2,
+      T3,
+      Fn: (t1: T1, t2: T2, t3: T3) => R,
+      Ctx: { [FnName]: Fn }
+    >(
+      cfn: [Ctx, FnName],
+      t1: T1,
+      t2: T2,
+      t3: T3
+    ): CallEffect<Ctx, Fn, [T1, T2, T3]>,
+    <
+      R,
+      FnName: string,
+      T1,
+      T2,
+      T3,
+      T4,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4) => R,
+      Ctx: { [FnName]: Fn }
+    >(
+      cfn: [Ctx, FnName],
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4]>,
+    <
+      R,
+      FnName: string,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => R,
+      Ctx: { [FnName]: Fn }
+    >(
+      cfn: [Ctx, FnName],
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4, T5]>,
+    <
+      R,
+      FnName: string,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => R,
+      Ctx: { [FnName]: Fn }
+    >(
+      cfn: [Ctx, FnName],
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5,
+      t6: T6
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4, T5, T6]>,
+    <
+      R,
+      FnName: string,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      T7,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7) => R,
+      Ctx: { [FnName]: Fn }
+    >(
+      cfn: [Ctx, FnName],
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5,
+      t6: T6,
+      t7: T7
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4, T5, T6, T7]>,
+    <
+      R,
+      FnName: string,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      T7,
+      T8,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7, t8: T8) => R,
+      Ctx: { [FnName]: Fn }
+    >(
+      cfn: [Ctx, FnName],
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5,
+      t6: T6,
+      t7: T7,
+      t8: T8
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4, T5, T6, T7, T8]>,
+
+    // With context call({context, fn}, ...args)
+    <Ctx, R, Fn: () => R>(cfn: { context: Ctx, fn: Fn }): CallEffect<
+      Ctx,
+      Fn,
+      []
+    >,
+    <Ctx, R, T1, Fn: (t1: T1) => R>(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1
+    ): CallEffect<Ctx, Fn, [T1]>,
+    <Ctx, R, T1, T2, Fn: (t1: T1, t2: T2) => R>(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2
+    ): CallEffect<Ctx, Fn, [T1, T2]>,
+    <Ctx, R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3) => R>(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3
+    ): CallEffect<Ctx, Fn, [T1, T2, T3]>,
+    <Ctx, R, T1, T2, T3, T4, Fn: (t1: T1, t2: T2, t3: T3, t4: T4) => R>(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => R
+    >(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4, T5]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => R
+    >(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5,
+      t6: T6
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4, T5, T6]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      T7,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7) => R
+    >(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5,
+      t6: T6,
+      t7: T7
+    ): CallEffect<Ctx, Fn, [T1, T2, T3, T4, T5, T6, T7]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      T7,
+      T8,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7, t8: T8) => R
+    >(
+      cfn: { context: Ctx, fn: Fn },
       t1: T1,
       t2: T2,
       t3: T3,
@@ -1230,7 +1474,7 @@ declare module "redux-saga/effects" {
       t8: T8
     ): CpsEffect<null, Fn, [T1, T2, T3, T4, T5, T6, T7, T8]>,
 
-    // with context
+    // With context, cps([context, fn], ...args)
     <Ctx, R, Fn: (cb: NodeCallback<R>) => void>(
       cfn: [Ctx, Fn]
     ): CpsEffect<Ctx, Fn, []>,
@@ -1369,6 +1613,156 @@ declare module "redux-saga/effects" {
       ) => void
     >(
       cfn: [Ctx, Fn],
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5,
+      t6: T6,
+      t7: T7,
+      t8: T8
+    ): CpsEffect<Ctx, Fn, [T1, T2, T3, T4, T5, T6, T7, T8]>,
+
+    // With context, cps({context, fn}, ...args)
+    <Ctx, R, Fn: (cb: NodeCallback<R>) => void>(cfn: {
+      context: Ctx,
+      fn: Fn
+    }): CpsEffect<Ctx, Fn, []>,
+    <Ctx, R, T1, Fn: (t1: T1, cb: NodeCallback<R>) => void>(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1
+    ): CpsEffect<Ctx, Fn, [T1]>,
+    <Ctx, R, T1, T2, Fn: (t1: T1, t2: T2, cb: NodeCallback<R>) => void>(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2
+    ): CpsEffect<Ctx, Fn, [T1, T2]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      Fn: (t1: T1, t2: T2, t3: T3, cb: NodeCallback<R>) => void
+    >(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3
+    ): CpsEffect<Ctx, Fn, [T1, T2, T3]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, cb: NodeCallback<R>) => void
+    >(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4
+    ): CpsEffect<Ctx, Fn, [T1, T2, T3, T4]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, cb: NodeCallback<R>) => void
+    >(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5
+    ): CpsEffect<Ctx, Fn, [T1, T2, T3, T4, T5]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      Fn: (
+        t1: T1,
+        t2: T2,
+        t3: T3,
+        t4: T4,
+        t5: T5,
+        t6: T6,
+        cb: NodeCallback<R>
+      ) => void
+    >(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5,
+      t6: T6
+    ): CpsEffect<Ctx, Fn, [T1, T2, T3, T4, T5, T6]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      T7,
+      Fn: (
+        t1: T1,
+        t2: T2,
+        t3: T3,
+        t4: T4,
+        t5: T5,
+        t6: T6,
+        t7: T7,
+        cb: NodeCallback<R>
+      ) => void
+    >(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1,
+      t2: T2,
+      t3: T3,
+      t4: T4,
+      t5: T5,
+      t6: T6,
+      t7: T7
+    ): CpsEffect<Ctx, Fn, [T1, T2, T3, T4, T5, T6, T7]>,
+    <
+      Ctx,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      T6,
+      T7,
+      T8,
+      Fn: (
+        t1: T1,
+        t2: T2,
+        t3: T3,
+        t4: T4,
+        t5: T5,
+        t6: T6,
+        t7: T7,
+        t8: T8,
+        cb: NodeCallback<R>
+      ) => void
+    >(
+      cfn: { context: Ctx, fn: Fn },
       t1: T1,
       t2: T2,
       t3: T3,
