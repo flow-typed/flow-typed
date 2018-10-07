@@ -23,7 +23,7 @@ describe("react-collapsible", () => {
     });
     it("overflowWhenOpen prop has the wrong value", () => {
       // $ExpectError
-      var error = <Collapsible overflowWhenOpen="cool" />;
+      var error = <Collapsible trigger="Click me" overflowWhenOpen="cool" />;
     });
   });
 });
