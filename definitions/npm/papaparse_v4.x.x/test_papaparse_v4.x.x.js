@@ -14,6 +14,17 @@ res.errors[0].code;
   }
 }): PapaParse$ParseResult);
 
+(Papa.parse("3,3,3", {
+  delimiter: ';',
+  comments: false,
+  skipEmptyLines: 'greedy',
+
+  step: function(results, p) {
+    p.abort();
+    results.data.length;
+  }
+}): PapaParse$ParseResult);
+
 // $ExpectError
 (Papa.parse(['data']): PapaParse$ParseResult);
 
@@ -65,8 +76,8 @@ Papa.unparse({
 Papa.unparse({
   fields: ["3"],
   data: ["3"]
-}, { 
-  quotes: true 
+}, {
+  quotes: true
 });
 
 Papa.SCRIPT_PATH;
