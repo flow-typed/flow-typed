@@ -194,7 +194,7 @@ describe("The `ensureDirSync` function", () => {
 });
 
 describe("The `exists` function", () => {
-  it("take in string and options object", () => {
+  it("take in string", () => {
     (fs.exists('str'): Promise<boolean>);
     // $ExpectError number not allowed
     fs.exists(123);
