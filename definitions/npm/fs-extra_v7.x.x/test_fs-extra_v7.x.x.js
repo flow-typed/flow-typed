@@ -199,7 +199,7 @@ describe("The `exists` function", () => {
     // $ExpectError number not allowed
     fs.exists(123);
 
-    fs.exists(123, (exists) => {(exists: boolean)})
+    fs.exists('str', (exists) => {(exists: boolean)})
   });
 });
 
