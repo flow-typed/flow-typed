@@ -211,6 +211,29 @@ declare module "redis" {
       timeout: number,
       callback?: (error: ?Error, timeoutWasSet: number) => void
     ) => void;
+    incr: (
+      key: string,
+      callback: (error: ?Error, result: ?number) => void
+    ) => void;
+    incrby: (
+      key: string,
+      increment: number,
+      callback: (error: ?Error, result: ?number) => void
+    ) => void;
+    incrbyfloat: (
+      key: string,
+      increment: number,
+      callback: (error: ?Error, result: ?string) => void
+    ) => void;
+    decr: (
+      key: string,
+      callback: (error: ?Error, result: ?number) => void
+    ) => void;
+    decrby: (
+      key: string,
+      decrement: number,
+      callback: (error: ?Error, result: ?number) => void
+    ) => void;
   }
 
   declare class RedisClientPromisified extends RedisClient {
