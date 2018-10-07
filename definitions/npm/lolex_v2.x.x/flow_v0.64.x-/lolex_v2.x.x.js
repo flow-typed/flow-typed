@@ -15,7 +15,7 @@ declare module 'lolex' {
     timers: Object,
     withGlobal(global: Object): lolex,
   };
-  declare class Clock {
+  declare type Clock = {
     setTimeout: typeof setTimeout;
     clearTimeout: typeof clearTimeout;
     setInterval: typeof setInterval;
