@@ -2,7 +2,7 @@
 import { describe, it } from "flow-typed-test";
 import { call } from "redux-saga/effects";
 
-describe("call() effect", () => {
+describe("call effect", () => {
   describe("structure", () => {
     const c = call(() => {});
 
