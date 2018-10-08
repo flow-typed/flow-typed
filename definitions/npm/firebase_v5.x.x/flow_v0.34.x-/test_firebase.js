@@ -314,9 +314,9 @@ firebase
   .where("id", "array-contains", "5")
   .get({ source: "cache" });
 
-// $ExpectError
 firebase
   .firestore()
   .collection("/foo")
+  // $ExpectError
   .where("id", "lte", "5")
   .get({ source: "cache" });
