@@ -8,15 +8,15 @@ const success = (
   </Collapsible>
 );
 
-// $ExpectError
 const missingTriggerProp = (
+  // $ExpectError
   <Collapsible>
     <p>I don't have a trigger prop</p>
   </Collapsible>
 );
 
-// $ExpectError
 const wrongOverflowWhenOpen = (
+  // $ExpectError
   <Collapsible trigger="Click me" overflowWhenOpen="cool">
     <p>I don't have a trigger prop</p>
   </Collapsible>
