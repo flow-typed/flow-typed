@@ -113,7 +113,8 @@ type dompurify$htmlTags =
   | 'ul'
   | 'var'
   | 'video'
-  | 'wbr';
+  | 'wbr'
+  | '#text';
 
 type dompurify$htmlAttrs =
   | 'accept'
@@ -543,9 +544,9 @@ type dompurify$mathMlAttrs =
 
 type dompurify$tags = dompurify$htmlTags | dompurify$svgTags | dompurify$svgFilters | dompurify$mathMlTags;
 
-type dompurify$attrs = dompurify$htmlAttrs | dompurify$svgAttrs | dompurify$mathMlAttrs;
+type dompurify$attr = dompurify$htmlAttrs | dompurify$svgAttrs | dompurify$mathMlAttrs;
 
-type dompurify$configBase = {
+type dompurify$configBase = {|
   /**
    * make output safe for usage in jQuery's $()/html() method (default is false)
    */
@@ -561,7 +562,7 @@ type dompurify$configBase = {
   /**
    * allow only attrs
    */
-  ALLOWED_ATTR: Array<dompurify$attrs>,
+  ALLOWED_ATTR: Array<dompurify$attr>,
   /**
    * allow all safe elements of different types
    */
@@ -578,7 +579,7 @@ type dompurify$configBase = {
   /**
    * leave all as it is but forbid specified attrs
    */
-  FORBID_ATTR: Array<dompurify$attrs>,
+  FORBID_ATTR: Array<dompurify$attr>,
   /**
    * extend the existing array of allowed tags
    */
@@ -636,9 +637,7 @@ type dompurify$configBase = {
    * use the IN_PLACE mode to sanitize a node "in place", which is much faster depending on how you use DOMpurify
    */
   IN_PLACE: boolean,
-};
-
-declare type dompurify$config = $Shape<dompurify$configBase>;
+|};
 
 type dompurify$hookType =
   | 'beforeSanitizeElements'
@@ -652,18 +651,17 @@ type dompurify$hookType =
   | 'afterSanitizeShadowDOM';
 
 type dompurify$hookEvent = {
-  tagName: ?$Subtype<dompurify$tags>,
-  allowedTags: ?$Subtype<dompurify$tags>,
-  allowedAttributes: ?$Subtype<dompurify$attrs>,
-  attrName: ?$Subtype<dompurify$attrs>,
-  attrValue: ?string,
-  keepAttr: ?boolean,
+  +tagName: ?$Subtype<dompurify$tags>,
+  +allowedTags: ?{ [$Subtype<dompurify$tags>]: boolean },
+  +allowedAttributes: ?{ [$Subtype<dompurify$attr>]: boolean },
+  +attrName: ?$Subtype<dompurify$attr>,
+  +attrValue: ?string,
+  +keepAttr: ?boolean,
 };
 
-type dompurify$hook = (
-  node: $Subtype<Node>,
-  data: ?dompurify$hookEvent,
-  config?: dompurify$config) => $Subtype<Node>;
+declare type dompurify$config = $Shape<dompurify$configBase>;
+
+type dompurify$hook = (node: $Subtype<Node>, data: ?dompurify$hookEvent, config?: dompurify$config) => $Subtype<Node>;
 
 interface dompurify$sanitizer {
   (dirty: string, config: $Shape<$Diff<dompurify$configBase, { RETURN_DOM: boolean, RETURN_DOM_FRAGMENT: boolean }>>): string,
@@ -673,10 +671,21 @@ interface dompurify$sanitizer {
   (dirty: string): string,
 }
 
-type dompurify$creator = (window?: any) => {|
+type dompurify$instance = {|
+  +version: string,
+  +removed: Array<{ element: $Subtype<Node> } | { attribute: ?Attr, from: $Subtype<Node> }>,
+  +isSupported: boolean,
   sanitize: dompurify$sanitizer,
+  setConfig: (config: dompurify$config) => void,
+  clearConfig: () => void,
+  isValidAttribute: (tag: string, attr: string, value: string) => boolean,
   addHook: (dompurify$hookType, dompurify$hook) => void,
+  removeHook: (dompurify$hookType) => void,
+  removeHooks: (dompurify$hookType) => void,
+  removeAllHooks: () => void,
 |};
+
+type dompurify$creator = (window?: any) => dompurify$instance;
 
 declare module 'dompurify' {
   declare module.exports: dompurify$creator;
@@ -694,7 +703,6 @@ declare module 'dompurify/dist/purify.min' {
   declare module.exports: dompurify$creator;
 }
 
-// Filename aliases
 declare module 'dompurify/dist/purify.cjs.js' {
   declare module.exports: $Exports<'dompurify/dist/purify.cjs'>;
 }

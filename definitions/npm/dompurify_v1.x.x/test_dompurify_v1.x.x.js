@@ -12,7 +12,7 @@ const dirty = `
 </div>`;
 
 describe('#createDOMPurify', () => {
-  it('should add hook', () => {
+  it('should add/remove hook', () => {
     DOMPurify.addHook('beforeSanitizeElements', (currentNode, data, config) => {
       return currentNode;
     });
@@ -21,11 +21,15 @@ describe('#createDOMPurify', () => {
     DOMPurify.addHook('invalidHookName', (currentNode, data, config) => {
       return currentNode;
     });
+
+    DOMPurify.removeHook('beforeSanitizeElements');
+    DOMPurify.removeHooks('beforeSanitizeElements');
+    DOMPurify.removeAllHooks();
   });
 
   it('should sanitize', () => {
     const clean = DOMPurify.sanitize(dirty);
-    clean.toLowerCase();
+    console.log(clean.toLowerCase());
   });
 
   it('should sanitize to string', () => {
@@ -43,18 +47,19 @@ describe('#createDOMPurify', () => {
       ALLOWED_ATTR: ['href', 'src'],
       ALLOWED_TAGS: ['a', 'img', 'h1'],
     });
-    clean.toUpperCase();
+    console.log(typeof clean === 'string');
+    console.log(clean.toUpperCase());
   });
 
   it('should sanitize to HTMLBodyElement', () => {
     const clean = DOMPurify.sanitize(dirty, { RETURN_DOM: true });
-    clean.childNodes;
+    console.log(clean.nodeType === 1);
+    console.log(clean.tagName === 'BODY');
+    console.log(clean.childNodes);
   });
 
   it('should sanitize to DocumentFragment', () => {
     const clean = DOMPurify.sanitize(dirty, { RETURN_DOM_FRAGMENT: true });
-
-    const rootNode = window.document.createElement('div');
-    rootNode.appendChild(clean);
+    console.log(clean.nodeType === 11);
   });
 });
