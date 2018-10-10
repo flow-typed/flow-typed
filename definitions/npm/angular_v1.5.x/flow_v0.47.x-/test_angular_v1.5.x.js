@@ -1,5 +1,5 @@
 // @flow
-
+import { describe, it } from 'flow-typed-test';
 import type {
   AngularPromise,
   AngularQ,
@@ -13,14 +13,6 @@ import type {
 
 ("use strict");
 const angular = require("angular");
-
-function describe(tag, fn) {
-  fn();
-}
-
-function it(tag, fn) {
-  fn();
-}
 
 describe("Angular modules", () => {
   it("can be declared", () => {
@@ -64,11 +56,11 @@ describe("directives", () => {
   });
 
   it("requires proper restrict when defined", () => {
+    // $ExpectError
     angular.module("foo", []).directive("foo", [
       "bar",
       "bazz",
       (bar, bazz) => {
-        // $ExpectError
         return {
           restrict: "fails to this",
           templateUrl: "foo.html"
@@ -165,9 +157,9 @@ describe("factory", () => {
   });
 
   it("requires a return value of some kind", () => {
-    // $ExpectError undefined. This type is incompatible with
     angular
       .module("foo", [])
+      // $ExpectError undefined. This type is incompatible with
       .factory("foo", ["bar", "bazz", (bar, bazz) => undefined]);
   });
 });
@@ -182,7 +174,7 @@ describe("controller", () => {
 
 describe("config", () => {
   it("can be declared", () => {
-    angular.module("foo", []).config("foo", ["bar", "bazz", (bar, bazz) => {}]);
+    angular.module("foo", []).config(["bar", "bazz", (bar, bazz) => {}]);
   });
 });
 
