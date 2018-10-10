@@ -20,3 +20,8 @@ store.update('hasItem');
 store.push('items', '1');
 // $ExpectError
 store.push('items');
+
+store.keys();
+
+store.delete("foo");
+store.delete(["foo", "bar"]);
