@@ -51,6 +51,7 @@ declare module "chai" {
     lengthOf: (value: number) => ExpectChain<T>,
 
     match: (regex: RegExp) => ExpectChain<T>,
+    matches: (regex: RegExp) => ExpectChain<T>,
     string: (string: string) => ExpectChain<T>,
 
     key: (key: string) => ExpectChain<T>,
