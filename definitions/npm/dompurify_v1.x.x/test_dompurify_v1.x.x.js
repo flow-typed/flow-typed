@@ -28,8 +28,7 @@ describe('#createDOMPurify', () => {
   });
 
   it('should sanitize', () => {
-    const clean = DOMPurify.sanitize(dirty);
-    console.log(clean.toLowerCase());
+    const clean: string = DOMPurify.sanitize(dirty);
   });
 
   it('should sanitize to string', () => {
@@ -43,23 +42,17 @@ describe('#createDOMPurify', () => {
       INVALID_ARG: 42,
     });
 
-    const clean = DOMPurify.sanitize(dirty, {
+    const clean: string = DOMPurify.sanitize(dirty, {
       ALLOWED_ATTR: ['href', 'src'],
       ALLOWED_TAGS: ['a', 'img', 'h1'],
     });
-    console.log(typeof clean === 'string');
-    console.log(clean.toUpperCase());
   });
 
   it('should sanitize to HTMLBodyElement', () => {
-    const clean = DOMPurify.sanitize(dirty, { RETURN_DOM: true });
-    console.log(clean.nodeType === 1);
-    console.log(clean.tagName === 'BODY');
-    console.log(clean.childNodes);
+    const clean: HTMLBodyElement = DOMPurify.sanitize(dirty, { RETURN_DOM: true });
   });
 
   it('should sanitize to DocumentFragment', () => {
-    const clean = DOMPurify.sanitize(dirty, { RETURN_DOM_FRAGMENT: true });
-    console.log(clean.nodeType === 11);
+    const clean: DocumentFragment = DOMPurify.sanitize(dirty, { RETURN_DOM_FRAGMENT: true });
   });
 });
