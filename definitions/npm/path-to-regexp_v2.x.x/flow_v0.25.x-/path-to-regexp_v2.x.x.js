@@ -29,6 +29,8 @@ declare module "path-to-regexp" {
 
   declare export type Token = string | Key;
 
+  declare export type Path = string | RegExp | Array<string | RegExp>;
+
   declare export type PathFunction = (
     data?: {},
     options?: PathFunctionOptions
@@ -44,5 +46,11 @@ declare module "path-to-regexp" {
     tokens: Token[],
     keys?: Key[],
     options?: RegExpOptions
+  ) => RegExp;
+
+  declare export default (
+    path: Path,
+    keys?: Key[],
+    options?: RegExpOptions & ParseOptions
   ) => RegExp;
 }
