@@ -51,6 +51,12 @@ declare type $Promisable<T> = Promise<T> | T;
 declare class Bluebird$Disposable<R> {}
 
 declare class Bluebird$Promise<+R> extends Promise<R> {
+  static RangeError: Class<Bluebird$RangeError>;
+  static CancellationErrors: Class<Bluebird$CancellationErrors>;
+  static TimeoutError: Class<Bluebird$TimeoutError>;
+  static RejectionError: Class<Bluebird$RejectionError>;
+  static OperationalError: Class<Bluebird$OperationalError>;
+  
   static Defer: Class<Bluebird$Defer>;
   static PromiseInspection: Class<Bluebird$PromiseInspection<*>>;
 

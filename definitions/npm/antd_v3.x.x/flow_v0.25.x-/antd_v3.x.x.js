@@ -5,11 +5,11 @@ declare module "antd" {
     destroy: () => void
   };
 
-  declare function messageFn<TReturn>(
+  declare type messageFn<TReturn> = (
     content: React$Node,
     duration?: number,
     onClose?: () => mixed
-  ): TReturn;
+  ) => TReturn;
 
   declare type modalFnArguments = {
     title?: string,
@@ -104,8 +104,6 @@ declare module "antd" {
   };
 
   declare export class Cascader extends React$Component<CascaderProps> {}
-
-  declare export class Checkbox extends React$Component<{}> {}
 
   declare export class Col extends React$Component<{}> {}
 

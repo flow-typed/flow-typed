@@ -2968,6 +2968,7 @@ declare module "@material-ui/core/Typography/Typography" {
     | "inherit"
     | "primary"
     | "secondary"
+    | "textPrimary"
     | "textSecondary"
     | "error"
     | "default";

@@ -37,8 +37,13 @@ function testForEach() {
     (val: number)
   });
 
-  // key is string
+  // key is number if array
   angular.forEach([1,2,3], (val, key) => {
+    (key: number)
+  });
+
+  // key is  string if object
+  angular.forEach({a: 123}, (val, key) => {
     (key: string)
   });
 }
