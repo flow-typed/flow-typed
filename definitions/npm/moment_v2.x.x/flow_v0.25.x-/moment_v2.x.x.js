@@ -299,6 +299,7 @@ declare class moment$Moment {
   static isMoment(obj: any): boolean;
   static isDate(obj: any): boolean;
   static updateLocale(locale: string, localeData?: ?Object): void;
+  static defineLocale(locale: string, localeData?: ?Object): void,
   static locale(locale?: string, localeData?: Object): string;
   static locale(locales: Array<string>): string;
   locale(locale: string, customization?: Object | null): moment$Moment;
