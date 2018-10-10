@@ -147,10 +147,8 @@ async function getOrderedFlowBinVersions(
           return false;
         }
 
-        // We only test against versions since 0.15.0 because it has proper
-        // [ignore] fixes (which are necessary to run tests)
-        // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
-        if (semver.lt(rel.tag_name, IS_WINDOWS ? '0.30.0' : '0.15.0')) {
+        // We only support flow 0.53.0 and newer
+        if (semver.lt(rel.tag_name, '0.53.0')) {
           return false;
         }
 
@@ -300,12 +298,7 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(
-  repoDirPath,
-  testDirPath,
-  libDefPath,
-  includeWarnings,
-) {
+async function writeFlowConfig(repoDirPath, testDirPath, libDefPath) {
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
 
   const flowConfigData = [
@@ -315,7 +308,7 @@ async function writeFlowConfig(
     '',
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
-    includeWarnings ? 'include_warnings=true' : '',
+    'include_warnings=true',
     '',
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
@@ -438,23 +431,11 @@ async function findLowestCapableFlowVersion(
     return semver.lt(flowVer, lowestFlowVersionRan);
   });
   lowerFlowVersionsToRun.reverse();
-  const lowerLowVersions = lowerFlowVersionsToRun.filter(flowVer =>
-    semver.lt(flowVer, '0.53.0'),
-  );
-  const higherLowVersions = lowerFlowVersionsToRun.filter(flowVer =>
-    semver.gte(flowVer, '0.53.0'),
-  );
-  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, true);
-  const lowestOfHigherVersions = await testLowestCapableFlowVersion(
-    higherLowVersions,
+  await writeFlowConfig(repoDirPath, testDirPath, libDefPath);
+  return await testLowestCapableFlowVersion(
+    lowerFlowVersionsToRun,
     testDirPath,
     lowestFlowVersionRan,
-  );
-  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, false);
-  return await testLowestCapableFlowVersion(
-    lowerLowVersions,
-    testDirPath,
-    lowestOfHigherVersions,
   );
 }
 
@@ -479,7 +460,6 @@ async function runTestGroup(
   testGroup: TestGroup,
   orderedFlowVersions: Array<string>,
 ): Promise<Array<string>> {
-  const errors = [];
   // Some older versions of Flow choke on ">"/"<"/"="
   const testDirName = testGroup.id
     .replace(/\//g, '--')
@@ -537,34 +517,13 @@ async function runTestGroup(
       return [];
     }
     let lowestFlowVersionRan = flowVersionsToRun[0];
-
-    const lowerVersions = flowVersionsToRun.filter(flowVer =>
-      semver.lt(flowVer, '0.53.0'),
-    );
-    const higherVersions = flowVersionsToRun.filter(flowVer =>
-      semver.gte(flowVer, '0.53.0'),
-    );
-
-    await writeFlowConfig(
-      repoDirPath,
-      testDirPath,
-      testGroup.libDefPath,
-      false,
-    );
-    const lowerVersionErrors = await runFlowTypeDefTests(
-      lowerVersions,
+    await writeFlowConfig(repoDirPath, testDirPath, testGroup.libDefPath);
+    const flowErrors = await runFlowTypeDefTests(
+      flowVersionsToRun,
       testGroup.id,
       testDirPath,
     );
 
-    await writeFlowConfig(repoDirPath, testDirPath, testGroup.libDefPath, true);
-    const higherVersionErrors = await runFlowTypeDefTests(
-      higherVersions,
-      testGroup.id,
-      testDirPath,
-    );
-
-    errors.push(...higherVersionErrors, ...lowerVersionErrors);
     const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
       repoDirPath,
       orderedFlowVersions,
@@ -580,7 +539,7 @@ async function runTestGroup(
         Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
     }
 
-    return errors;
+    return flowErrors;
   } finally {
     if (await fs.exists(testDirPath)) {
       await recursiveRmdir(testDirPath);
