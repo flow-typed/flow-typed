@@ -35,6 +35,10 @@ describe('Parse, moment()', () => {
   moment("2010-01-01T05:06:07", ["YYYY", moment.ISO_8601]);
   // https://momentjs.com/docs/#/parsing/unix-timestamp-milliseconds/
   moment(1318781876406);
+  // https://momentjs.com/docs/#/parsing/date/
+  moment(new Date());
+  // https://momentjs.com/docs/#/parsing/moment-clone/
+  moment(moment());
 });
 
 describe('Parse, moment.unix()', () => {
