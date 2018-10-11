@@ -51,6 +51,10 @@ describe('Parse, moment.unix()', () => {
   moment.unix();
 });
 
+describe('Parse, moment.utc()', () => {
+  const m: moment = moment.utc();
+});
+
 // Display
 const A: Date = moment().toDate();
 describe('toISOString', () => {
@@ -88,7 +92,6 @@ const m1: moment = moment().add(2, "day");
 moment().add({ day: 1 });
 const m2: moment = moment().subtract(1, "s");
 moment().subtract({ day: 1 });
-const m: moment = moment.utc();
 
 // Query
 moment().isBefore();
