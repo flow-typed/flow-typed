@@ -933,7 +933,7 @@ declare module "react-apollo" {
     QueryRenderProps<TData, TVariables>
   ) => Node;
 
-  declare export class Query<TData, TVariables> extends React$Component<{
+  declare export type QueryComponentProps<TData, TVariables> = {
     query: DocumentNode,
     children: QueryRenderPropFunction<TData, TVariables>,
     variables?: TVariables,
@@ -945,7 +945,9 @@ declare module "react-apollo" {
     displayName?: string,
     delay?: boolean,
     context?: { [string]: any }
-  }> {}
+  };
+
+  declare export class Query<TData, TVariables> extends React$Component<QueryComponentProps<TData, TVariables>> {}
 
   declare export type SubscriptionResult<TData, TVariables = OperationVariables> = {
     loading: boolean,
