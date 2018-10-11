@@ -21,6 +21,8 @@ describe('Parse, moment()', () => {
   moment([2015, 0]); // This would equal 2015-01-01
   // $ExpectError only numbers are valid for Array API
   moment(["2015"]);
+  // $ExpectError needs a format string before the strictness flag
+  moment('2015-01-01', true);
 
   // $ExpectError only string values can have formatting parameters
   moment([2015, 0], "MM-DD-YYYY");
@@ -71,6 +73,8 @@ describe('Parse, moment.utc()', () => {
   moment.utc("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', true);
   // $ExpectError
   moment.utc("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', 1);
+  // $ExpectError needs a format string before the strictness flag
+  moment.utc('2015-01-01', true);
 
   moment.utc({ hour: 15, minute: 10 });
 
@@ -102,6 +106,9 @@ describe('Parse, moment.parseZone()', () => {
   moment.parseZone("2013 01 01 -13:00", "YYYY MM DD ZZ", "fr", true);
   moment.parseZone("2013 01 01 -13:00", ["DD MM YYYY ZZ", "YYYY MM DD ZZ"], true);
   moment.parseZone("2013 01 01 -13:00", ["DD MM YYYY ZZ", "YYYY MM DD ZZ"], "fr", true);
+
+  // $ExpectError needs a format string before the strictness flag
+  moment.parseZone("2013-01-01T00:00:00-13:00", true);
 
   it('is invalid to use special, undocumented formats', () => {
     // The following cases do generate valid moment objects, but this
