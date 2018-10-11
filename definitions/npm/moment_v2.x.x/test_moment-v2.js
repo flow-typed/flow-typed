@@ -53,8 +53,41 @@ describe('Parse, moment.unix()', () => {
 });
 
 // https://momentjs.com/docs/#/parsing/utc/
+// Basically all the same things as moment(), as the docs say:
+// "If you want to parse or display a moment in UTC, you can use moment.utc() instead of moment()."
 describe('Parse, moment.utc()', () => {
   const m: moment = moment.utc();
+  moment.utc(1318781876406);
+  moment.utc([2015, 0]);
+  // $ExpectError only numbers allowed with Array API
+  moment.utc(["2015", "0"]);
+
+  moment.utc('2015-01-01');
+  moment.utc("12-25-1995", "MM-DD-YYYY");
+  moment.utc('It is 2012-05-25', 'YYYY-MM-DD', true);
+  moment.utc("12-25-1995", ["MM-DD-YYYY", "YYYY-MM-DD"]);
+  moment.utc("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr');
+  moment.utc("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], true);
+  moment.utc("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', true);
+  // $ExpectError
+  moment.utc("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', 1);
+
+  moment.utc({ hour: 15, minute: 10 });
+
+  // $ExpectError only string values can have formatting parameters
+  moment.utc([2015, 0], "MM-DD-YYYY");
+  // $ExpectError
+  moment.utc([2015, 0], "MM-DD-YYYY", true);
+  // $ExpectError
+  moment.utc([2015, 0], moment.ISO_8601);
+  // $ExpectError
+  moment.utc({ hour: 15, minute: 10 }, "MM-DD-YYYY");
+
+  // Special formatting
+  moment.utc("2010-01-01T05:06:07", moment.ISO_8601);
+  moment.utc("2010-01-01T05:06:07", ["YYYY", moment.ISO_8601]);
+  moment.utc(new Date());
+  moment.utc(moment());
 });
 
 // Display
