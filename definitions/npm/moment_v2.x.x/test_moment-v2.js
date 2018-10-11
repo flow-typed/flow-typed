@@ -102,6 +102,23 @@ describe('Parse, moment.parseZone()', () => {
   moment.parseZone("2013 01 01 -13:00", "YYYY MM DD ZZ", "fr", true);
   moment.parseZone("2013 01 01 -13:00", ["DD MM YYYY ZZ", "YYYY MM DD ZZ"], true);
   moment.parseZone("2013 01 01 -13:00", ["DD MM YYYY ZZ", "YYYY MM DD ZZ"], "fr", true);
+
+  it('is invalid to use special, undocumented formats', () => {
+    // The following cases do generate valid moment objects, but this
+    // seems to be an undocumented API. If the moment project decides to
+    // document some of these APIs, then the types can be changed.
+
+    // $ExpectError
+    moment.parseZone(new Date());
+    // $ExpectError
+    moment.parseZone(moment());
+    // $ExpectError
+    moment.parseZone({ hour: 15, minute: 10 });
+    // $ExpectError
+    moment.parseZone(1318781876406);
+    // $ExpectError
+    moment.parseZone([2015, 0]);
+  });
 });
 
 // Display
