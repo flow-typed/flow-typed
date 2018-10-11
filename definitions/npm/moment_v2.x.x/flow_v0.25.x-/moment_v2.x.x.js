@@ -118,34 +118,50 @@ declare class moment$MomentDuration {
 }
 declare class moment$Moment {
   static ISO_8601: string;
+  static (): moment$Moment;
   static (
     initDate: ?Object | number | Date | Array<number> | moment$Moment | string
   ): moment$Moment;
+  static (string: string): moment$Moment;
+  static (string: string, format: string | Array<string>): moment$Moment;
   static (
-    string?: string,
-    format?: string | Array<string>,
-    strict?: boolean
+    string: string,
+    format: string | Array<string>,
+    strict: boolean
   ): moment$Moment;
   static (
-    string?: string,
-    format?: string | Array<string>,
-    locale?: string,
-    strict?: boolean
+    string: string,
+    format: string | Array<string>,
+    locale: string
+  ): moment$Moment;
+  static (
+    string: string,
+    format: string | Array<string>,
+    locale: string,
+    strict: boolean
   ): moment$Moment;
   static unix(seconds: number): moment$Moment;
+  static utc(): moment$Moment;
   static utc(
     initDate: ?Object | number | Date | Array<number> | moment$Moment | string
   ): moment$Moment;
+  static utc(string: string): moment$Moment;
+  static utc(string: string, format: string | Array<string>): moment$Moment;
   static utc(
-    string?: string,
-    format?: string | Array<string>,
-    strict?: boolean
+    string: string,
+    format: string | Array<string>,
+    strict: boolean
   ): moment$Moment;
   static utc(
-    string?: string,
-    format?: string | Array<string>,
-    locale?: string,
-    strict?: boolean
+    string: string,
+    format: string | Array<string>,
+    locale: string
+  ): moment$Moment;
+  static utc(
+    string: string,
+    format: string | Array<string>,
+    locale: string,
+    strict: boolean
   ): moment$Moment;
   static parseZone(): moment$Moment;
   static parseZone(rawDate: string): moment$Moment;
