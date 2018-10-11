@@ -2,38 +2,41 @@
 import moment from "moment";
 import { describe, it } from 'flow-typed-test';
 
-// Parse
-const m3: moment = moment([123, 123]);
-moment();
-moment('2015-01-01');
-moment("12-25-1995", "MM-DD-YYYY");
-moment('It is 2012-05-25', 'YYYY-MM-DD', true);
-// https://momentjs.com/docs/#/parsing/string-formats/
-moment("12-25-1995", ["MM-DD-YYYY", "YYYY-MM-DD"]);
-moment("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr');
-moment("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], true);
-moment("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', true);
-// $ExpectError
-moment("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', 1);
-// https://momentjs.com/docs/#/parsing/object/
-moment({ hour: 15, minute: 10 });
-moment([2015, 0]); // This would equal 2015-01-01
-// $ExpectError only string values can have formatting parameters
-moment([2015, 0], "MM-DD-YYYY");
-// $ExpectError
-moment([2015, 0], "MM-DD-YYYY", true);
-// $ExpectError
-moment([2015, 0], moment.ISO_8601);
-// $ExpectError
-moment({ hour: 15, minute: 10 }, "MM-DD-YYYY");
-// // https://momentjs.com/docs/#/parsing/special-formats/
-moment("2010-01-01T05:06:07", moment.ISO_8601);
-moment("2010-01-01T05:06:07", ["YYYY", moment.ISO_8601]);
-// https://momentjs.com/docs/#/parsing/unix-timestamp-milliseconds/
-moment(1318781876406);
+describe('Parse, moment()', () => {
+  const m3: moment = moment([123, 123]);
+  moment();
+  moment('2015-01-01');
+  moment("12-25-1995", "MM-DD-YYYY");
+  moment('It is 2012-05-25', 'YYYY-MM-DD', true);
+  // https://momentjs.com/docs/#/parsing/string-formats/
+  moment("12-25-1995", ["MM-DD-YYYY", "YYYY-MM-DD"]);
+  moment("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr');
+  moment("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], true);
+  moment("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', true);
+  // $ExpectError
+  moment("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', 1);
+  // https://momentjs.com/docs/#/parsing/object/
+  moment({ hour: 15, minute: 10 });
+  moment([2015, 0]); // This would equal 2015-01-01
+  // $ExpectError only string values can have formatting parameters
+  moment([2015, 0], "MM-DD-YYYY");
+  // $ExpectError
+  moment([2015, 0], "MM-DD-YYYY", true);
+  // $ExpectError
+  moment([2015, 0], moment.ISO_8601);
+  // $ExpectError
+  moment({ hour: 15, minute: 10 }, "MM-DD-YYYY");
+  // // https://momentjs.com/docs/#/parsing/special-formats/
+  moment("2010-01-01T05:06:07", moment.ISO_8601);
+  moment("2010-01-01T05:06:07", ["YYYY", moment.ISO_8601]);
+  // https://momentjs.com/docs/#/parsing/unix-timestamp-milliseconds/
+  moment(1318781876406);
+});
 
-// $ExpectError
-moment.unix("1234");
+describe('Parse, moment.unix()', () => {
+  // $ExpectError
+  moment.unix("1234");
+});
 
 // Display
 const A: Date = moment().toDate();
