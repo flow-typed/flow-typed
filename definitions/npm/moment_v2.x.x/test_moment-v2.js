@@ -41,6 +41,7 @@ describe('Parse, moment()', () => {
   moment(moment());
 });
 
+// https://momentjs.com/docs/#/parsing/unix-timestamp/
 describe('Parse, moment.unix()', () => {
   moment.unix(123);
   // $ExpectError
@@ -51,6 +52,7 @@ describe('Parse, moment.unix()', () => {
   moment.unix();
 });
 
+// https://momentjs.com/docs/#/parsing/utc/
 describe('Parse, moment.utc()', () => {
   const m: moment = moment.utc();
 });
