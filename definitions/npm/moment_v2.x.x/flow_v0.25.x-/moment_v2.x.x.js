@@ -133,15 +133,20 @@ declare class moment$Moment {
     strict?: boolean
   ): moment$Moment;
   static unix(seconds: number): moment$Moment;
-  static utc(): moment$Moment;
-  static utc(number: number | Array<number>): moment$Moment;
   static utc(
-    str: string,
-    str2?: string | Array<string>,
-    str3?: string
+    initDate: ?Object | number | Date | Array<number> | moment$Moment | string
   ): moment$Moment;
-  static utc(moment: moment$Moment): moment$Moment;
-  static utc(date: Date): moment$Moment;
+  static utc(
+    string?: string,
+    format?: string | Array<string>,
+    strict?: boolean
+  ): moment$Moment;
+  static utc(
+    string?: string,
+    format?: string | Array<string>,
+    locale?: string,
+    strict?: boolean
+  ): moment$Moment;
   static parseZone(): moment$Moment;
   static parseZone(rawDate: string): moment$Moment;
   static parseZone(
