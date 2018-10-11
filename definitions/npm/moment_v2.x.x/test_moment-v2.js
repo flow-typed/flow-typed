@@ -90,6 +90,19 @@ describe('Parse, moment.utc()', () => {
   moment.utc(moment());
 });
 
+describe('Parse, moment.parseZone()', () => {
+  const m: moment = moment.parseZone();
+  moment.parseZone("2013-01-01T00:00:00-13:00");
+  moment.parseZone("2013 01 01 05 -13:00", "YYYY MM DD HH ZZ");
+  moment.parseZone("2013-01-01-13:00", ["DD MM YYYY ZZ", "YYYY MM DD ZZ"]);
+  moment.parseZone("2013 01 01 05 -13:00", "YYYY MM DD HH ZZ", true);
+  moment.parseZone("2013 01 01 -13:00", "YYYY MM DD ZZ", true);
+  moment.parseZone("2013 01 01 -13:00", "YYYY MM DD ZZ", "fr");
+  moment.parseZone("2013 01 01 -13:00", "YYYY MM DD ZZ", "fr", true);
+  moment.parseZone("2013 01 01 -13:00", ["DD MM YYYY ZZ", "YYYY MM DD ZZ"], true);
+  moment.parseZone("2013 01 01 -13:00", ["DD MM YYYY ZZ", "YYYY MM DD ZZ"], "fr", true);
+});
+
 // Display
 const A: Date = moment().toDate();
 describe('toISOString', () => {
