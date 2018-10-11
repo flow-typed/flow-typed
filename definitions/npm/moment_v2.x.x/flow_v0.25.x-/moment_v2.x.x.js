@@ -120,7 +120,7 @@ declare class moment$Moment {
   static ISO_8601: string;
   static (): moment$Moment;
   static (
-    initDate: ?Object | number | Date | Array<number> | moment$Moment | string
+    initDate: moment$MomentOptions | number | Date | Array<number> | moment$Moment | string
   ): moment$Moment;
   static (string: string): moment$Moment;
   static (string: string, format: string | Array<string>): moment$Moment;
@@ -143,7 +143,7 @@ declare class moment$Moment {
   static unix(seconds: number): moment$Moment;
   static utc(): moment$Moment;
   static utc(
-    initDate: ?Object | number | Date | Array<number> | moment$Moment | string
+    initDate: moment$MomentOptions | number | Date | Array<number> | moment$Moment | string
   ): moment$Moment;
   static utc(string: string): moment$Moment;
   static utc(string: string, format: string | Array<string>): moment$Moment;
