@@ -127,16 +127,16 @@ moment().calendar(null, {
 // UTC offsets
 let n: number;
 n = moment().utcOffset();
-n = m.utcOffset(0).utcOffset();
-n = m.utcOffset(-1.5).utcOffset();
-n = m.utcOffset(-90).utcOffset();
-n = m.utcOffset("-01:30").utcOffset();
-n = m.utcOffset("+00:10").utcOffset();
+n = moment().utcOffset(0).utcOffset();
+n = moment().utcOffset(-1.5).utcOffset();
+n = moment().utcOffset(-90).utcOffset();
+n = moment().utcOffset("-01:30").utcOffset();
+n = moment().utcOffset("+00:10").utcOffset();
 
 // Optional 2nd and 3rd arguments
-n = m.utcOffset(0, true).utcOffset();
-n = m.utcOffset(0, false).utcOffset();
-n = m.utcOffset(0, true, true).utcOffset();
+n = moment().utcOffset(0, true).utcOffset();
+n = moment().utcOffset(0, false).utcOffset();
+n = moment().utcOffset(0, true, true).utcOffset();
 
 const getLocale: string = moment.locale();
 const setLocale: string = moment.locale("en");
