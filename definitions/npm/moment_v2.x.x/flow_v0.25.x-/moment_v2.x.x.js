@@ -155,12 +155,17 @@ declare class moment$Moment {
   ): moment$Moment;
   static parseZone(
     rawDate: string,
-    format: string,
+    format: string | Array<string>,
     strict: boolean
   ): moment$Moment;
   static parseZone(
     rawDate: string,
-    format: string,
+    format: string | Array<string>,
+    locale: string
+  ): moment$Moment;
+  static parseZone(
+    rawDate: string,
+    format: string | Array<string>,
     locale: string,
     strict: boolean
   ): moment$Moment;
