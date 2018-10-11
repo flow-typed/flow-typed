@@ -4,7 +4,11 @@ import { describe, it } from 'flow-typed-test';
 
 describe('Parse, moment()', () => {
   const m3: moment = moment([123, 123]);
+  // https://momentjs.com/docs/#/parsing/now/
   moment();
+  moment([]);
+  moment({});
+
   moment('2015-01-01');
   moment("12-25-1995", "MM-DD-YYYY");
   moment('It is 2012-05-25', 'YYYY-MM-DD', true);
