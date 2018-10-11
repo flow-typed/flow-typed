@@ -34,8 +34,13 @@ describe('Parse, moment()', () => {
 });
 
 describe('Parse, moment.unix()', () => {
+  moment.unix(123);
   // $ExpectError
   moment.unix("1234");
+  // $ExpectError
+  moment.unix(undefined);
+  // $ExpectError
+  moment.unix();
 });
 
 // Display
