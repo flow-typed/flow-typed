@@ -19,6 +19,9 @@ describe('Parse, moment()', () => {
   moment({ hour: 15, minute: 10 });
   // https://momentjs.com/docs/#/parsing/array/
   moment([2015, 0]); // This would equal 2015-01-01
+  // $ExpectError only numbers are valid for Array API
+  moment(["2015"]);
+
   // $ExpectError only string values can have formatting parameters
   moment([2015, 0], "MM-DD-YYYY");
   // $ExpectError
