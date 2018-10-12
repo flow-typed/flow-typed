@@ -3,7 +3,7 @@ import { describe, it } from "flow-typed-test";
 import { type Task } from "redux-saga";
 import { join } from "redux-saga/effects";
 
-describe("apply(context, fn, [args])", () => {
+describe("join effect", () => {
   describe("structure", () => {
     declare var t: Task<number>;
     const c = join(t);
@@ -28,6 +28,7 @@ describe("apply(context, fn, [args])", () => {
   it("must passes when used properly", () => {
     declare var task1: Task<string>;
     declare var task2: Task<number>;
+
     const arrTasks = [task1, task2];
     const j1 = join(task1);
     const j2 = join(arrTasks);
