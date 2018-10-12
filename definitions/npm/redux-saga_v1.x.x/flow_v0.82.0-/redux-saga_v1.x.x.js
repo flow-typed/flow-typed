@@ -409,7 +409,7 @@ declare module "redux-saga" {
     |}>
   >;
 
-  declare export type JoinEffect<T: Task<*>> = IEffect<"JOIN", T>;
+  declare export type JoinEffect<T: Task<*> | Array<Task<*>>> = IEffect<"JOIN", T>;
 
   declare export type SELF_CANCELLATION = "@@redux-saga/SELF_CANCELLATION"; // Symbol
 
@@ -1882,7 +1882,7 @@ declare module "redux-saga/effects" {
 
   declare export var join: {
     <T: Task<*>>(task: T): JoinEffect<T>,
-    (task: Task<*>, ...tasks: $ReadOnlyArray<Task<any>>): AllEffect
+    <T: Array<Task<*>>>(tasks: T): JoinEffect<T>
   };
 
   declare export var cancel: {
