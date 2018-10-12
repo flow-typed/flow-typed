@@ -343,7 +343,7 @@ declare class $npm$firebase$database$DataSnapshot {
   child(path?: string): $npm$firebase$database$DataSnapshot;
   exists(): boolean;
   exportVal(): $npm$firebase$database$Value;
-  forEach(action: ($npm$firebase$database$DataSnapshot) => boolean): boolean;
+  forEach(action: ($npm$firebase$database$DataSnapshot) => ?boolean): boolean;
   getPriority(): $npm$firebase$database$Priority;
   hasChild(path: string): boolean;
   hasChildren(): boolean;
