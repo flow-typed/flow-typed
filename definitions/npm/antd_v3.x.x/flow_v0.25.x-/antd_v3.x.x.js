@@ -265,7 +265,9 @@ declare module "antd" {
 
   declare export type ListItemProps = {};
 
-  declare export class ListItem extends React$Component<ListItemProps> {}
+  declare export class ListItem extends React$Component<ListItemProps> {
+    static Meta: typeof Meta;
+  }
 
   declare export class List extends React$Component<{}> {
     static Item: typeof ListItem;
