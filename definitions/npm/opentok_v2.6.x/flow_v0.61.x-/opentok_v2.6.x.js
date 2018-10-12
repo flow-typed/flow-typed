@@ -67,7 +67,7 @@ declare module 'opentok' {
     hasAudio: boolean;
     hasVideo: boolean;
     outputMode: ArchiveOutputMode;
-    url: string;
+    url: ?string;
     delete(callback: (?Error) => any): void;
     stop(callback: (?Error, ?Archive) => any): void;
   }
