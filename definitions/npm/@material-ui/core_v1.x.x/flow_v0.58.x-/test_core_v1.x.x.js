@@ -45,6 +45,7 @@ class TestComponent extends React.Component<{
 }> {
   render() {
     const root = this.props.classes.root
+    return null;
   }
 }
 const StyledTestComponent = withStyles(styles)(TestComponent);
