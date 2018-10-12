@@ -30,7 +30,7 @@ describe("call() effect with async functions and context", () => {
     const c6 = call([context, fn6], "1", 2, "3", 4, "5", 6);
 
     describe("context tests", () => {
-      it("must haven't context", () => {
+      it("must have context", () => {
         (c1.payload.context: typeof context);
         (c2.payload.context: typeof context);
         (c3.payload.context: typeof context);
@@ -149,7 +149,7 @@ describe("call() effect with async functions and context", () => {
     const c6 = call([context6, 'someFn6'], "1", 2, "3", 4, "5", 6);
 
     describe("context tests", () => {
-      it("must haven't context", () => {
+      it("must have context", () => {
         (c1.payload.context: typeof context1);
         (c2.payload.context: typeof context2);
         (c3.payload.context: typeof context3);
@@ -250,7 +250,7 @@ describe("call() effect with async functions and context", () => {
     const c6 = call({ context, fn: fn6 }, "1", 2, "3", 4, "5", 6);
 
     describe("context tests", () => {
-      it("must haven't context", () => {
+      it("must have context", () => {
         (c1.payload.context: typeof context);
         (c2.payload.context: typeof context);
         (c3.payload.context: typeof context);

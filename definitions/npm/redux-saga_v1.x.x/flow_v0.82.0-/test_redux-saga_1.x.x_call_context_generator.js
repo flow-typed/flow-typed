@@ -127,7 +127,7 @@ describe("call() effect with normal function and without context", () => {
     });
 
     describe("context tests", () => {
-      it("must haven't context", () => {
+      it("must have context", () => {
         (c1.payload.context: typeof context);
         (c2.payload.context: typeof context);
         (c3.payload.context: typeof context);
@@ -293,7 +293,7 @@ describe("call() effect with normal function and without context", () => {
     });
 
     describe("context tests", () => {
-      it("must haven't context", () => {
+      it("must have context", () => {
         (c1.payload.context: typeof context1);
         (c2.payload.context: typeof context2);
         (c3.payload.context: typeof context3);
@@ -434,7 +434,7 @@ describe("call() effect with normal function and without context", () => {
     });
 
     describe("context tests", () => {
-      it("must haven't context", () => {
+      it("must have context", () => {
         (c1.payload.context: typeof context);
         (c2.payload.context: typeof context);
         (c3.payload.context: typeof context);
