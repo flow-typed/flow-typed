@@ -3,19 +3,19 @@
 declare module 'opentok' {
 
   // https://tokbox.com/developer/sdks/node/reference/OpenTok.html#createSession
-  declare type SessionOptions = {|
+  declare export type SessionOptions = {|
     location?: string,
     mediaMode?: 'routed' | 'relayed',
     archiveMode?: 'always' | 'manual'
   |};
 
   // https://tokbox.com/developer/sdks/node/reference/Session.html
-  declare type Session = {
+  declare export type Session = {
     sessionId: string
   };
 
   // https://tokbox.com/developer/sdks/node/reference/OpenTok.html#generateToken
-  declare type GenerateTokenOptions = {|
+  declare export type GenerateTokenOptions = {|
     role?: 'subscriber' | 'publisher' | 'moderator',
     expireTime?: number,
     data?: string,
@@ -23,15 +23,15 @@ declare module 'opentok' {
   |};
 
   // https://tokbox.com/developer/sdks/node/reference/OpenTok.html#getArchive
-  declare type ListArchivesOptions = {|
+  declare export type ListArchivesOptions = {|
     count?: number,
     offset?: number,
     sessionId?: string
   |};
 
   // https://tokbox.com/developer/sdks/node/reference/OpenTok.html#startArchive
-  declare type ArchiveOutputMode = 'composed' | 'individual';
-  declare type StartArchiveOptions = {|
+  declare export type ArchiveOutputMode = 'composed' | 'individual';
+  declare export type StartArchiveOptions = {|
     name?: string,
     hasAudio?: boolean,
     hasVideo?: boolean,
@@ -39,7 +39,7 @@ declare module 'opentok' {
   |};
 
   // https://tokbox.com/developer/sdks/node/reference/OpenTok.html#dial
-  declare type DialOptions = {|
+  declare export type DialOptions = {|
     headers?: {[string]: any},
     auth?: {
       username: string,
@@ -47,14 +47,14 @@ declare module 'opentok' {
     },
     secure?: boolean
   |};
-  declare type SipInterconnect = {
+  declare export type SipInterconnect = {
     id: string,
     connectionId: string,
     streamId: string
   };
 
   // https://tokbox.com/developer/sdks/node/reference/Archive.html
-  declare class Archive {
+  declare export class Archive {
     createdAt: number;
     duration: string;
     id: string;
