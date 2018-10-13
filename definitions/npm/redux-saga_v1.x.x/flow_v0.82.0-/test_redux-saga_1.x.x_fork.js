@@ -402,7 +402,7 @@ describe("fork effect", () => {
         (c8.payload.fn: typeof nfn8);
       });
 
-      it("should actually fail, but apparently more parameter are fine", () => {
+      it("must actually fail, but apparently more parameter are fine", () => {
         (c1.payload.fn: typeof nfn6);
       });
 
