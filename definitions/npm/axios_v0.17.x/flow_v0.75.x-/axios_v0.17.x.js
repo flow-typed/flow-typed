@@ -90,7 +90,7 @@ declare module "axios" {
   declare type AxiosPromise<T> = Promise<AxiosXHR<T>>;
   declare class Axios {
     constructor<T>(config?: AxiosXHRConfigBase<T>): void;
-    [[call]]<T>(
+    static <T>(
       config: AxiosXHRConfig<T> | string,
       config?: AxiosXHRConfig<T>
     ): AxiosPromise<T>;
@@ -130,7 +130,7 @@ declare module "axios" {
   declare type $AxiosError<T> = AxiosError<T>;
 
   declare interface AxiosExport extends Axios {
-    [[call]]<T>(
+    <T>(
       config: AxiosXHRConfig<T> | string,
       config?: AxiosXHRConfig<T>
     ): AxiosPromise<T>;
