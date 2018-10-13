@@ -18,7 +18,6 @@
   "devDependencies": {
     "babel-eslint": "^10.0.1",
     "eslint": "^5.7.0",
-    "eslint-plugin-flow-typed": "^1.0.1",
     "eslint-plugin-flowtype": "^2.50.3",
     "eslint-plugin-prettier": "^3.0.0"
   },
