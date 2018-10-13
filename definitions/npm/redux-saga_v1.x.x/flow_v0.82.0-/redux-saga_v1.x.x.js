@@ -2005,7 +2005,7 @@ declare module "redux-saga/effects" {
   };
 
   declare export var setContext: {
-    <T>(ctx: T): SetContextEffect<T>
+    <T: Object>(props: T): SetContextEffect<T>
   };
 
   declare export var getContext: {
