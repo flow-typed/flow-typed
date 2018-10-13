@@ -635,9 +635,10 @@ declare module "redux-saga/effects" {
     ): ForkEffect<null, Function, void, [MS, P, Fn, T1, T2, T3, T4, T5, T6]>
   };
 
-  declare export function delay<T1: number>(
-    timeout: T1
-  ): CallEffect<null, (ms: T1) => Promise<true>, [T1]>;
+  declare export var delay: {
+    <T1: number>(timeout: T1): CallEffect<null, (ms: T1) => Promise<true>, [T1]>,
+    <T1: number, T2>(timeout: T1, T2): CallEffect<null, (ms: T1) => Promise<true>, [T1, T2]>
+  };
 
   declare export var take: {
     <P: Pattern>(pattern: P): TakeEffect<P, void, void>,
@@ -1631,28 +1632,31 @@ declare module "redux-saga/effects" {
     ): ForkEffect<Ctx, Fn, void, [T1, T2, T3, T4, T5, T6, T7, T8]>,
 
     // with context fork({context, fn}, ...args)
-    <Ctx, R, Fn: () => R>(cfn: {context: Ctx, fn: Fn}): ForkEffect<Ctx, Fn, void, []>,
-    <Ctx, R, T1, Fn: (t1: T1) => R>(cfn: {context: Ctx, fn: Fn}, t1: T1): ForkEffect<Ctx, Fn, void, [T1]>,
+    <Ctx, R, Fn: () => R>(cfn: { context: Ctx, fn: Fn }): ForkEffect<Ctx, Fn, void, []>,
+    <Ctx, R, T1, Fn: (t1: T1) => R>(
+      cfn: { context: Ctx, fn: Fn },
+      t1: T1
+    ): ForkEffect<Ctx, Fn, void, [T1]>,
     <Ctx, R, T1, T2, Fn: (t1: T1, t2: T2) => R>(
-      cfn: {context: Ctx, fn: Fn},
+      cfn: { context: Ctx, fn: Fn },
       t1: T1,
       t2: T2
     ): ForkEffect<Ctx, Fn, void, [T1, T2]>,
     <Ctx, R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3) => R>(
-      cfn: {context: Ctx, fn: Fn},
+      cfn: { context: Ctx, fn: Fn },
       t1: T1,
       t2: T2,
       t3: T3
     ): ForkEffect<Ctx, Fn, void, [T1, T2, T3]>,
     <Ctx, R, T1, T2, T3, T4, Fn: (t1: T1, t2: T2, t3: T3, t4: T4) => R>(
-      cfn: {context: Ctx, fn: Fn},
+      cfn: { context: Ctx, fn: Fn },
       t1: T1,
       t2: T2,
       t3: T3,
       t4: T4
     ): ForkEffect<Ctx, Fn, void, [T1, T2, T3, T4]>,
     <Ctx, R, T1, T2, T3, T4, T5, Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5) => R>(
-      cfn: {context: Ctx, fn: Fn},
+      cfn: { context: Ctx, fn: Fn },
       t1: T1,
       t2: T2,
       t3: T3,
@@ -1660,7 +1664,7 @@ declare module "redux-saga/effects" {
       t5: T5
     ): ForkEffect<Ctx, Fn, void, [T1, T2, T3, T4, T5]>,
     <Ctx, R, T1, T2, T3, T4, T5, T6, Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6) => R>(
-      cfn: {context: Ctx, fn: Fn},
+      cfn: { context: Ctx, fn: Fn },
       t1: T1,
       t2: T2,
       t3: T3,
@@ -1679,8 +1683,8 @@ declare module "redux-saga/effects" {
       T6,
       T7,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7) => R
-      >(
-      cfn: {context: Ctx, fn: Fn},
+    >(
+      cfn: { context: Ctx, fn: Fn },
       t1: T1,
       t2: T2,
       t3: T3,
@@ -1701,8 +1705,8 @@ declare module "redux-saga/effects" {
       T7,
       T8,
       Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7, t8: T8) => R
-      >(
-      cfn: {context: Ctx, fn: Fn},
+    >(
+      cfn: { context: Ctx, fn: Fn },
       t1: T1,
       t2: T2,
       t3: T3,
