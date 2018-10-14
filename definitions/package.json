@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "test": "eslint **/**/test_*"
+    "test": "eslint **/**/test_* --quiet"
   },
   "dependencies": {
     "husky": "^0.14.3",
