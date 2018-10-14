@@ -455,12 +455,15 @@ expect(wrapper).toIncludeText(true);
 
 expect(wrapper).toMatchElement(<Dummy />);
 expect(wrapper).toMatchElement(<Dummy />, { ignoreProps: true });
+expect(wrapper).toMatchElement(<Dummy />, { verbose: true });
 // $ExpectError
 expect(wrapper).toMatchElement();
 // $ExpectError
 expect(wrapper).toMatchElement(true);
 // $ExpectError
 expect(wrapper).toMatchElement(<Dummy />, { ignoreProps: 123 });
+// $ExpectError
+expect(wrapper).toMatchElement(<Dummy />, { verbose: 123 });
 // $ExpectError
 expect(wrapper).toMatchElement(<Dummy />, { foobar: true });
 
@@ -469,6 +472,14 @@ expect(wrapper).toMatchSelector("span");
 expect(wrapper).toMatchSelector();
 // $ExpectError
 expect(wrapper).toMatchSelector(true);
+
+// 7.x
+
+expect(wrapper).toHaveDisplayName("marquee");
+// $ExpectError
+expect(wrapper).toHaveDisplayName();
+// $ExpectError
+expect(wrapper).toHaveDisplayName(true);
 
 
 /**

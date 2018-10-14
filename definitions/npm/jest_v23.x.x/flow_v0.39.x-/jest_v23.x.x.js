@@ -196,9 +196,11 @@ type EnzymeMatchersType = {
   toIncludeText(text: string): void,
   toMatchElement(
     element: React$Element<any>,
-    options?: {| ignoreProps?: boolean |},
+    options?: {| ignoreProps?: boolean, verbose?: boolean |},
   ): void,
-  toMatchSelector(selector: string): void
+  toMatchSelector(selector: string): void,
+  // 7.x
+  toHaveDisplayName(name: string): void,
 };
 
 // DOM testing library extensions https://github.com/kentcdodds/dom-testing-library#custom-jest-matchers
