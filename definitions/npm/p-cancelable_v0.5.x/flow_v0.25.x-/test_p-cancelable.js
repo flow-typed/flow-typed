@@ -67,15 +67,17 @@ it('PCancelable.CancelError', () => {
 it('PCancelable.fn', () => {
   type OnCancel = (handler: () => void) => void
 
-  const fn = PCancelable.fn((input: string, onCancel: OnCancel) => {
-    onCancel(() => {})
-    // $ExpectError
-    onCancel()
-    // $ExpectError
-    onCancel(1)
+  const fn = PCancelable.fn(
+    (input: string, onCancel: OnCancel): Promise<number> => {
+      onCancel(() => {})
+      // $ExpectError
+      onCancel()
+      // $ExpectError
+      onCancel(1)
 
-    return Promise.resolve<number>(1)
-  })
+      return Promise.resolve<number>(1)
+    }
+  )
   ;(fn('input'): PCancelable<number>)
   // $ExpectError The promise resolves to a number
   ;(fn('input'): PCancelable<string>)
