@@ -1,4 +1,4 @@
-import type { Server } from 'http';
+import type { Server as HttpNodeServer } from 'http';
 import type { Socket } from 'net';
 
 declare type express$RouterOptions = {
@@ -165,11 +165,11 @@ declare class express$Application extends express$Router mixins events$EventEmit
   constructor(): void;
   locals: {[name: string]: mixed};
   mountpath: string;
-  listen(port: number, hostname?: string, backlog?: number, callback?: (err?: ?Error) => mixed): ?Server;
-  listen(port: number, hostname?: string, callback?: (err?: ?Error) => mixed): ?Server;
-  listen(port: number, callback?: (err?: ?Error) => mixed): ?Server;
-  listen(path: string, callback?: (err?: ?Error) => mixed): ?Server;
-  listen(handle: Object, callback?: (err?: ?Error) => mixed): ?Server;
+  listen(port: number, hostname?: string, backlog?: number, callback?: (err?: ?Error) => mixed): ?HttpNodeServer;
+  listen(port: number, hostname?: string, callback?: (err?: ?Error) => mixed): ?HttpNodeServer;
+  listen(port: number, callback?: (err?: ?Error) => mixed): ?HttpNodeServer;
+  listen(path: string, callback?: (err?: ?Error) => mixed): ?HttpNodeServer;
+  listen(handle: Object, callback?: (err?: ?Error) => mixed): ?HttpNodeServer;
   disable(name: string): void;
   disabled(name: string): boolean;
   enable(name: string): express$Application;

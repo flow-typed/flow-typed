@@ -216,7 +216,7 @@ declare class express$Application extends express$Router mixins events$EventEmit
     hostname?: string,
     backlog?: number,
     callback?: (err?: ?Error) => mixed
-  ): ?Server;
+  ): ?HttpNodeServer;
   listen(
     port: number,
     hostname?: string,
