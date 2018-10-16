@@ -58,6 +58,28 @@ function doesNotRequireDefinedComponentToTypeCheck1case() {
 
 function doesNotRequireDefinedComponentToTypeCheck2case() {
   type Props = {
+    stringProp: string,
+  };
+
+  const Component = ({ stringProp }: Props) => {
+    return <span>{stringProp}</span>;
+  };
+
+  // This is actually required to reproduce an issue with Flow and the `*` type.
+  function getBoolean() {
+    return false;
+  }
+
+  const mapStateToProps = (state: {}) => ({
+    // $ExpectError wrong type for numProp
+    numProp: getBoolean()
+  });
+
+  connect(mapStateToProps)(Component);
+}
+
+function doesNotRequireDefinedComponentToTypeCheck3case() {
+  type Props = {
     numProp: string,
   };
 
@@ -73,7 +95,7 @@ function doesNotRequireDefinedComponentToTypeCheck2case() {
   connect(null, mapDispatchToProps)(Component);
 }
 
-function doesNotRequireDefinedComponentToTypeCheck3case() {
+function doesNotRequireDefinedComponentToTypeCheck4case() {
   type Props = {
     stringProp: string,
     numProp: number
@@ -96,7 +118,7 @@ function doesNotRequireDefinedComponentToTypeCheck3case() {
   connect(mapStateToProps, mapDispatchToProps)(Component);
 }
 
-function doesNotRequireDefinedComponentToTypeCheck4case() {
+function doesNotRequireDefinedComponentToTypeCheck5case() {
   type Props = {
     stringProp: string,
   };
@@ -113,7 +135,7 @@ function doesNotRequireDefinedComponentToTypeCheck4case() {
   connect(mapStateToProps, {})(Component);
 }
 
-function doesNotRequireDefinedComponentToTypeCheck5case() {
+function doesNotRequireDefinedComponentToTypeCheck6case() {
   type Props = {
     stringProp: string
   };
