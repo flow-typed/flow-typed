@@ -1,11 +1,5 @@
 /* @flow */
-import express, { 
-  Router,
-  type $Request,
-  type $Response,
-  type $Application,
-  type NextFunction
-} from "express";
+import express, { Router } from "express";
 
 const app = express();
 
@@ -24,7 +18,7 @@ const myRouter = new express.Router();
 
 myRouter.use(
   "/dang",
-  (req, res: $Response, next: NextFunction) => {
+  (req, res: express$Response, next: express$NextFunction) => {
     res.set("My Header", "Value");
     res.header("Another-Header", "different value");
     res.set({ "third-header": "123", "forth-header": "abc" });
@@ -42,9 +36,9 @@ myRouter.use(
 );
 
 function handleRequest<MiddleWare>(
-  req: $Request,
-  res: $Response,
-  next: NextFunction
+  req: express$Request,
+  res: express$Response,
+  next: express$NextFunction
 ): void {
   (Math.random() >= 0.5
     ? Promise.resolve({ books: ["Catcher and the Rye"] })
@@ -62,22 +56,22 @@ myRouter.use(
   handleRequest,
   (
     err: Error,
-    req: $Request,
-    res: $Response,
-    next: NextFunction
+    req: express$Request,
+    res: express$Response,
+    next: express$NextFunction
   ): void => {
     console.error(err);
     next(err);
   }
 );
 
-app.on("mount", (parent: $Application) => {
+app.on("mount", (parent: express$Application) => {
   console.log("Parent Loaded", parent);
   // $ExpectError
   parent.fail();
 });
 
-app.use("/foo", (req: $Request, res: $Response, next) => {
+app.use("/foo", (req: express$Request, res: express$Response, next) => {
   // $ExpectError
   res.status("400");
   res.send("should work").status(300);
@@ -85,7 +79,7 @@ app.use("/foo", (req: $Request, res: $Response, next) => {
 
 const bar: express$Router = new Router();
 
-bar.get("/", (req: $Request, res: $Response): void => {
+bar.get("/", (req: express$Request, res: express$Response): void => {
   // $ExpectError should be of type object
   const locals: Array<any> = res.locals;
   res.locals.title = "Home Page";
@@ -123,7 +117,7 @@ app.enable(100);
 // $ExpectError
 const f: number = app.enabled("100");
 
-const g: $Application = app.enable("foo");
+const g: express$Application = app.enable("foo");
 
 app.render(
   "view",
@@ -134,30 +128,30 @@ app.render(
   }
 );
 
-app.use("/somewhere", (req: $Request, res: $Response) => {
+app.use("/somewhere", (req: express$Request, res: express$Response) => {
   res.redirect("/somewhere-else");
 });
 
-app.use("/again", (req: $Request, res: $Response) => {
+app.use("/again", (req: express$Request, res: express$Response) => {
   res.redirect(200, "/different");
 });
 
-app.use("/something", (req: $Request, res: $Response) => {
+app.use("/something", (req: express$Request, res: express$Response) => {
   // $ExpectError
   res.redirect("/different", 200);
 });
 
 // False positive since 0.39
-// app.use('/failure', (req: $Request, res: $Response) => {
+// app.use('/failure', (req: express$Request, res: express$Response) => {
 //   res.redirect();
 // });
 
 app.use(
   (
     err: Error,
-    req: $Request,
-    res: $Response,
-    next: NextFunction
+    req: express$Request,
+    res: express$Response,
+    next: express$NextFunction
   ) => {
     // test req
     req.accepts("accepted/type");
@@ -181,7 +175,7 @@ validPath = new RegExp("some.*regexp");
 
 const validPaths = ["string", "pattern?", /a[b-f]+g/];
 
-app.get(validPaths, (req: $Request, res: $Response) => {
+app.get(validPaths, (req: express$Request, res: express$Response) => {
   res.end();
 });
 
