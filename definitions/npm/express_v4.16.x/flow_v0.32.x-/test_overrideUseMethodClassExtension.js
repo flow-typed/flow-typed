@@ -2,7 +2,7 @@
 import express, {
   type $Request,
   type $Response,
-  type $Application
+  type $Application,
   type NextFunction
 } from "express";
 
