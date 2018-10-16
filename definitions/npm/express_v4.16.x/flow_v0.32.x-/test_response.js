@@ -1,11 +1,19 @@
 // @flow
 
-import express, { Router } from "express";
+import express, { 
+  Router,
+  type $Request,
+  type $Response,
+  type $Application
+  type NextFunction
+} from "express";
+
 import http from "http";
+
 
 const app = express();
 
-app.use("/response_api", (req: express$Request, res: express$Response) => {
+app.use("/response_api", (req: $Request, res: $Response) => {
   const contentLength = String(2);
   res.set("Content-Length", contentLength);
   res.set("Content-Type", "application/json");
@@ -21,7 +29,7 @@ app.use("/response_api", (req: express$Request, res: express$Response) => {
 const router = new Router();
 app.use(
   "/router",
-  (req: express$Request, res: express$Response, next: express$NextFunction) => {
+  (req: $Request, res: $Response, next: NextFunction) => {
     router.handle(req, res, next);
   }
 );

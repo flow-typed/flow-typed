@@ -1,18 +1,23 @@
 // @flow
-import express from "express";
+import express, {
+  type $Request,
+  type $Response,
+  type $Application
+  type NextFunction
+} from "express";
 
 // Class Extensions: Global Class/Type Declarations (prefixed to prevent name clashes)
 // Use method needs to be covarient: https://github.com/facebook/flow/issues/2770#issuecomment-258955097
-declare class test_express$CustomRequest extends express$Request {
+declare class test_express$CustomRequest extends $Request {
   foo: string;
 }
-declare class test_express$CustomResponse extends express$Response {
+declare class test_express$CustomResponse extends $Response {
   bar: string;
 }
 
 declare type test_express$CustomPath = string | RegExp;
 
-declare type test_express$CustomNextFunction = express$NextFunction;
+declare type test_express$CustomNextFunction = NextFunction;
 
 declare type test_express$CustomMiddleware =
   | ((
@@ -27,8 +32,8 @@ declare type test_express$CustomMiddleware =
       next: test_express$CustomNextFunction
     ) => mixed);
 
-declare class test_express$CustomApplication extends express$Application {
-  constructor(expressConstructor: () => express$Application): this;
+declare class test_express$CustomApplication extends $Application {
+  constructor(expressConstructor: () => $Application): this;
   use(middleware: test_express$CustomMiddleware): this;
   use(...middleware: Array<test_express$CustomMiddleware>): this;
   use(
@@ -40,10 +45,10 @@ declare class test_express$CustomApplication extends express$Application {
 
 // Class Extensions: Test Functions
 function test_express$CustomApplication(
-  expressConstructor: () => express$Application
+  expressConstructor: () => $Application
 ) {
   const express = expressConstructor();
-  express.use((req: any, res: any, next: express$NextFunction) => {
+  express.use((req: any, res: any, next: NextFunction) => {
     // Private Constructor Mutation: Add new properties
     req.foo = "hello";
     res.bar = "goodbye";
@@ -60,7 +65,7 @@ const customApp_error = new test_express$CustomApplication();
 
 customApp.use(
   "/something",
-  (req: express$Request, res: express$Response, next: express$NextFunction) => {
+  (req: $Request, res: $Response, next: NextFunction) => {
     // $ExpectError
     req.foo;
     // $ExpectError
