@@ -520,7 +520,7 @@ declare class $npm$firebase$firestore$Query {
   ): $npm$firebase$firestore$Query;
   startAfter(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
   startAt(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
-  where(fieldPath: string, opStr: '<' | '<=' | '==' | '>' | '>=', value: any): $npm$firebase$firestore$Query;
+  where(fieldPath: string, opStr: '<' | '<=' | '==' | 'array-contains' | '>' | '>=', value: any): $npm$firebase$firestore$Query;
 }
 
 declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$firestore$Query {
