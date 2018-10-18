@@ -38,13 +38,13 @@ declare type $npm$nock$InterceptorOptions = {
 };
 
 declare class $npm$nock$NockBack {
-  [[call]](path: string, cb: (cb: Function) => any): void;
+  static (path: string, cb: (cb: Function) => any): void;
   fixtures: string;
   setMode(mode: string): void;
 }
 
 declare class $npm$nock$Nock {
-  static [[call]](
+  static (
     url: string | RegExp,
     options?: {
       reqheaders?: Object,
