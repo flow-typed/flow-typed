@@ -936,10 +936,11 @@ declare var describe: {
    * @param {table} table of Test
    */
   each(
-    table: Array<Array<mixed> | mixed>
+    ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
   ): (
     name: JestTestName,
-    fn?: (...args: Array<any>) => ?Promise<mixed>
+    fn?: (...args: Array<any>) => ?Promise<mixed>,
+    timeout?: number
   ) => void,
 };
 
@@ -957,17 +958,7 @@ declare var it: {
     fn?: (done: () => void) => ?Promise<mixed>,
     timeout?: number
   ): void,
-  /**
-   * each runs this test against array of argument arrays per each run
-   *
-   * @param {table} table of Test
-   */
-  each(
-    table: Array<Array<mixed> | mixed>
-  ): (
-    name: JestTestName,
-    fn?: (...args: Array<any>) => ?Promise<mixed>
-  ) => void,
+
   /**
    * Only run this test
    *
@@ -981,12 +972,14 @@ declare var it: {
     timeout?: number
   ): {
     each(
-      table: Array<Array<mixed> | mixed>
+      ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
     ): (
       name: JestTestName,
-      fn?: (...args: Array<any>) => ?Promise<mixed>
+      fn?: (...args: Array<any>) => ?Promise<mixed>,
+      timeout?: number
     ) => void,
   },
+
   /**
    * Skip running this test
    *
@@ -999,6 +992,7 @@ declare var it: {
     fn?: (done: () => void) => ?Promise<mixed>,
     timeout?: number
   ): void,
+
   /**
    * Run the test concurrently
    *
@@ -1011,18 +1005,21 @@ declare var it: {
     fn?: (done: () => void) => ?Promise<mixed>,
     timeout?: number
   ): void,
+
   /**
    * each runs this test against array of argument arrays per each run
    *
    * @param {table} table of Test
    */
   each(
-    table: Array<Array<mixed> | mixed>
+    ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
   ): (
     name: JestTestName,
-    fn?: (...args: Array<any>) => ?Promise<mixed>
+    fn?: (...args: Array<any>) => ?Promise<mixed>,
+    timeout?: number
   ) => void,
 };
+
 declare function fit(
   name: JestTestName,
   fn: (done: () => void) => ?Promise<mixed>,

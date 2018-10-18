@@ -137,6 +137,16 @@ describe.only(AClass, () => {});
 describe.only(aFunction, () => {});
 describe.each([['arg1', 2, true], ['arg2', 3, false]])("test", () => expect("foo").toMatchSnapshot());
 describe.each(['arg1', 2, true])("test", () => expect("foo").toMatchSnapshot());
+describe.each`
+  a    | b    | expected
+  ${1} | ${1} | ${2}
+  ${1} | ${2} | ${3}
+  ${2} | ${1} | ${3}
+`('$a + $b', ({a, b, expected}) => {
+  test(`returns ${expected}`, () => {
+    expect(a + b).toBe(expected);
+  });
+});
 
 describe.skip("name", () => {});
 describe.skip(AClass, () => {});
@@ -151,6 +161,14 @@ test.only.each([['arg1', 2, true], ['arg2', 3, false]])("test", () => expect("fo
 test.only.each(['arg1', 2, true])("test", () => expect("foo").toMatchSnapshot());
 test.only("test", () => expect("foo").toMatchSnapshot());
 test.skip("test", () => expect("foo").toMatchSnapshot());
+test.each`
+  a    | b    | expected
+  ${1} | ${1} | ${2}
+  ${1} | ${2} | ${3}
+  ${2} | ${1} | ${3}
+`('returns $expected when $a is added $b', ({a, b, expected}) => {
+  expect(a + b).toBe(expected);
+});
 
 // $ExpectError property `fonly` not found in object type
 test.fonly("test", () => expect("foo").toMatchSnapshot());
