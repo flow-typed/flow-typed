@@ -122,7 +122,6 @@ declare class moment$Moment {
   static (
     initDate: moment$MomentOptions | number | Date | Array<number> | moment$Moment | string
   ): moment$Moment;
-  static (string: string): moment$Moment;
   static (string: string, format: string | Array<string>): moment$Moment;
   static (
     string: string,
@@ -145,7 +144,6 @@ declare class moment$Moment {
   static utc(
     initDate: moment$MomentOptions | number | Date | Array<number> | moment$Moment | string
   ): moment$Moment;
-  static utc(string: string): moment$Moment;
   static utc(string: string, format: string | Array<string>): moment$Moment;
   static utc(
     string: string,
