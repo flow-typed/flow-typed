@@ -1,5 +1,7 @@
 declare module "react-apollo" {
   import type { ComponentType, Element, Node } from 'react';
+
+  declare type MakeOptional = <V>(V) => ?V;
   /**
    * Copied types from Apollo Client libdef
    * Please update apollo-client libdef as well if updating these types
@@ -903,7 +905,7 @@ declare module "react-apollo" {
     TData = any,
     TVariables = OperationVariables
   > = {
-    data: TData | {||} | void,
+    data: $ObjMap<TData, MakeOptional> | void,
     loading: boolean,
     error?: ApolloError,
     variables: TVariables,
