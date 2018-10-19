@@ -342,7 +342,7 @@ declare module ramda {
       bc: UnaryFn<B, C>,
     ) => UnaryFn<A, C>) &
     (<A, B>(ab: UnaryFn<A, B>) => UnaryFn<A, B>);
-  
+
   declare type PipeK = (<A, B, C, D, E, F, G, H, I, J, K, L: Monad<K>>(
         ab: UnaryMonadFn<A, B>,
         bc: UnaryMonadFn<B, C>,
@@ -828,13 +828,13 @@ declare module ramda {
     x: E,
   ): (xs: Array<E>) => number;
 
-  declare function map<T, R>(fn: (x: T) => R, xs: Array<T>): Array<R>;
-  declare function map<T, R>(fn: (x: T) => R): (xs: Array<T>) => Array<R>;
-  declare function map<T, R, S: { map: Function }>(fn: (x: T) => R, xs: S): S;
   declare function map<T, R>(
     fn: (x: T) => R,
   ): ((xs: { [key: string]: T }) => { [key: string]: R }) &
     ((xs: Array<T>) => Array<R>);
+  declare function map<T, R>(fn: (x: T) => R, xs: Array<T>): Array<R>;
+  declare function map<T, R>(fn: (x: T) => R): (xs: Array<T>) => Array<R>;
+  declare function map<T, R, S: { map: Function }>(fn: (x: T) => R, xs: S): S;
   declare function map<T, R, S: { map: Function }>(
     fn: (x: T) => R,
   ): ((xs: S) => S) & ((xs: S) => S);

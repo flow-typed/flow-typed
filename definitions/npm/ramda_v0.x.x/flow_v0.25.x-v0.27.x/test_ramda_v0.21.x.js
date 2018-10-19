@@ -189,6 +189,10 @@ describe("List", () => {
     //$ExpectError
     const ys1: Array<number> = _.map(x => x.toString(), [1, 2, 3]);
     const ys2: Array<string> = _.map(x => x.toString())([1, 2, 3]);
+
+    const someObj: { a: string, b: number } = { a: 'a', b: 2 }
+    const someMap: { [string]: { a: string, b: number } } = { so: someObj }
+    const mapObj: { [string]: string } = _.map((x: { a: string, b: number }): string => x.a)(someMap)
   });
   it("should typecheck mapAccum", () => {
     let digits = ["1", "2", "3", "4"];
