@@ -1,17 +1,20 @@
 // @flow
+import { describe, it } from 'flow-typed-test';
 import Backbone, { Collection } from "backbone-collection";
 
-// $ExpectError
-(Backbone.$: any);
+describe('backbone-collection', () => {
+  it('Migrated from old format', () => {
+    // $ExpectError
+    (Backbone.$: any);
 
-// $ExpectError
-(Backbone._: any);
+  // $ExpectError
+  (Backbone._: any);
 
 // $ExpectError
 (Backbone.Events.on: Function);
 
 // Model setup
-class Model {}
+class Model { }
 
 class TasksCollection extends Collection<Model> {
   model: Model;
@@ -33,4 +36,7 @@ tasks.length = false;
 (task.pluck(2): Array<any>);
 
 (tasks.forEach: Function);
-(tasks.sync(): Function);
+(tasks.sync: Function);
+
+  });
+});
