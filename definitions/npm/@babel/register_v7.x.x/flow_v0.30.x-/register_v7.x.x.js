@@ -8,6 +8,7 @@ declare module '@babel/register' {
     code?: boolean,
     comments?: boolean,
     compact?: 'auto' | boolean,
+    configFile?: string | boolean,
     env?: Object,
     extends?: ?string,
     extensions?: Array<string>,
