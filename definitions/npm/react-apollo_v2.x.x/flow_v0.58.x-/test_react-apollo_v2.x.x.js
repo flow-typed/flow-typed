@@ -269,15 +269,14 @@ describe("<Query />", () => {
           // $ExpectError Cannot get `data.res`
           data.res;
           if (!data) {
-            return;
+            return <div />;
           }
-          const d1: Res | {||} = data;
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
-          if (d1.res) {
-            const d2: Res = d1;
-            const s: string = d1.res;
+          if (data.res) {
+            const s: string = data.res;
           }
+          return <div />
         }}
       </Query>
     );
@@ -291,7 +290,7 @@ describe("<Query />", () => {
         // $ExpectError Cannot get `data.hero`. data may be undefined
         data.hero;
         if (!data || !data.hero) {
-          return;
+          return <div />
         }
         const hero = data.hero;
 
@@ -429,6 +428,7 @@ describe("<Query />", () => {
             const { variables } = options
             return { ...previousResult, name: newName }
           })
+          return <div />
         }}
       </HeroQueryComp>;
     })
@@ -454,7 +454,7 @@ describe("<Subscription />", () => {
           // $ExpectError Cannot get `data.res`
           data.res;
           if (!data) {
-            return;
+            return <div/>
           }
           const d1: Res | {||} = data;
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
@@ -463,6 +463,7 @@ describe("<Subscription />", () => {
             const d2: Res = d1;
             const s: string = d1.res;
           }
+          return <div/>
         }}
       </Subscription>
     );
@@ -475,7 +476,7 @@ describe("<Subscription />", () => {
         // $ExpectError Cannot get `data.hero`. data may be undefined
         data.hero;
         if (!data || !data.hero) {
-          return;
+          return <div />
         }
         const hero = data.hero;
 
@@ -517,6 +518,7 @@ describe("<Mutation />", () => {
       <Mutation variables={vars} mutation={HERO_QUERY}>
         {mutate => {
           mutate();
+          return <div />
         }}
       </Mutation>
     );
@@ -536,11 +538,12 @@ describe("<Mutation />", () => {
           // $ExpectError Cannot get `data.res`
           data.res;
           if (!data) {
-            return;
+            return <div />
           }
           const d1: Res = data;
           const s: string = data.res;
           client;
+          return <div />
         }}
       </Mutation>
     );
