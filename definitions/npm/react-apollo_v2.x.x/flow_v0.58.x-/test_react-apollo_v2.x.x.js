@@ -22,7 +22,7 @@ import {
   type RefetchQueryDescription,
 } from "react-apollo";
 
-const gql = (strings, ...args) => {}; // graphql-tag stub
+const gql = (strings, ...args) => { }; // graphql-tag stub
 
 const query = gql`
   {
@@ -80,31 +80,31 @@ it("works with class component, this requires a stricter definition", () => {
 
 it("works with class component with it's own variable", () => {
   type CmplxOwnProps = {| faz: string |};
-  type CmplxComponentProps = {
-    data: GraphqlQueryControls<> & IQuery,
-    mutate: any // The mutation is actually required or we get a error at the withData
-  } & CmplxOwnProps;
-  class CmplxComponent extends React.Component<CmplxComponentProps> {
-    render() {
-      const { data: { loading, error, bar, foo }, faz } = this.props;
-      if (loading) return <div>Loading</div>;
-      if (error) return <h1>ERROR</h1>;
+type CmplxComponentProps = {
+  data: GraphqlQueryControls<> & IQuery,
+  mutate: any // The mutation is actually required or we get a error at the withData
+} & CmplxOwnProps;
+class CmplxComponent extends React.Component<CmplxComponentProps> {
+  render() {
+    const { data: { loading, error, bar, foo }, faz } = this.props;
+    if (loading) return <div>Loading</div>;
+    if (error) return <h1>ERROR</h1>;
 
-      // $ExpectError string type being treated as numerical
-      if (bar > 1) return null;
+    // $ExpectError string type being treated as numerical
+    if (bar > 1) return null;
 
-      // The below works as expected
-      return (
-        <div>
-          {foo.length} string length compared to faz {faz.length} length
+    // The below works as expected
+    return (
+      <div>
+        {foo.length} string length compared to faz {faz.length} length
         </div>
-      );
-    }
+    );
   }
-  const withFancyData: OperationComponent<IQuery, CmplxOwnProps> = graphql(
-    query
-  );
-  const CmplxWithData = withFancyData(CmplxComponent);
+}
+const withFancyData: OperationComponent<IQuery, CmplxOwnProps> = graphql(
+  query
+);
+const CmplxWithData = withFancyData(CmplxComponent);
 });
 
 it("works with class component with it's own variable Props specified at the end", () => {
@@ -136,7 +136,7 @@ it("works with class component with it's own variable Props specified at the end
     Cmplx2OwnProps,
     *,
     Cmplx2ComponentProps
-  > = graphql(query);
+    > = graphql(query);
   const Cmplx2WithData = withFancyData2(Cmplx2Component);
 });
 
@@ -206,25 +206,25 @@ it("works with Variables specified", () => {
     InputProps,
     Variables,
     Props
-  > = graphql(HERO_QUERY, {
-    options: ({ episode }) => {
-      // $ExpectError [string] The operand of an arithmetic operation must be a number
-      episode * 10;
-      return {
-        // $ExpectError [number] This type is incompatible with string
-        variables: { episode: 10 }
-      };
-    },
-    props: ({ data, ownProps }) => ({
-      ...data,
-      // $ExpectError [string] This type cannot be compared to number
-      episode: ownProps.episode > 1,
-      // $ExpectError property `isHero`. Property not found on object type
-      isHero: data && data.hero && data.hero.isHero,
-      // $ExpectError Property `someProp`. This type is incompatible with string
-      someProp: 1
-    })
-  });
+    > = graphql(HERO_QUERY, {
+      options: ({ episode }) => {
+        // $ExpectError [string] The operand of an arithmetic operation must be a number
+        episode * 10;
+        return {
+          // $ExpectError [number] This type is incompatible with string
+          variables: { episode: 10 }
+        };
+      },
+      props: ({ data, ownProps }) => ({
+        ...data,
+        // $ExpectError [string] This type cannot be compared to number
+        episode: ownProps.episode > 1,
+        // $ExpectError property `isHero`. Property not found on object type
+        isHero: data && data.hero && data.hero.isHero,
+        // $ExpectError Property `someProp`. This type is incompatible with string
+        someProp: 1
+      })
+    });
 
   withCharacter(({ loading, hero, error }) => {
     if (loading) return <div>Loading</div>;
@@ -261,7 +261,7 @@ type HeroQueryVariables = {
 class HeroQueryComp extends Query<
   { hero: ?Hero },
   { episode: string, offset?: ?number }
-> {}
+  > { }
 
 describe("<Query />", () => {
   it("works", () => {
@@ -284,7 +284,7 @@ describe("<Query />", () => {
           return <div />
         }}
       </Query>
-    );
+);
   });
 
   it("works when extending Query with types", () => {
@@ -299,109 +299,128 @@ describe("<Query />", () => {
         }
         const hero = data.hero;
 
-        const nameAgain: string = hero.name;
-        // $ExpectError unknown is not a property on Hero
-        const unknown = hero.unknown;
+      const nameAgain: string = hero.name;
+      // $ExpectError unknown is not a property on Hero
+      const unknown = hero.unknown;
 
-        return <div>{nameAgain}</div>;
-      }}
-    </HeroQueryComp>;
-  });
+      return <div>{nameAgain}</div>;
+    }}
+  </HeroQueryComp>;
+});
 
-  it("raises an error if accessing a prop in children function that doesnt exist", () => {
-    <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
-      {// $ExpectError cannot render HeroQueryComp becuase errors is missing in children function (should be error instead of errors)
+it("raises an error if accessing a prop in children function that doesnt exist", () => {
+  <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
+    {// $ExpectError cannot render HeroQueryComp becuase errors is missing in children function (should be error instead of errors)
       ({ data, loading, errors }) => {
         if (loading) return "Loading....";
         if (errors) return "Error!";
         return String(data);
       }}
+  </HeroQueryComp>;
+});
+
+describe("refetch", () => {
+  it("works if passed variablees that match the query", () => {
+    <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
+      {({ data, refetch }) => {
+        const onClick = () => {
+          refetch();
+          refetch({ episode: "otherEpisode" });
+          // $ExpectError refetch variables do not match variables for query
+          refetch({ notEpisode: "otherEpisode" });
+        };
+        return <button onClick={onClick}>Click!</button>;
+      }}
+    </HeroQueryComp>;
+  });
+});
+
+describe("fetchMore", () => {
+  it("works when passed valid options", () => {
+    <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
+      {({ data, fetchMore }) => {
+        const onClick = () => {
+          fetchMore({
+            variables: { episode: "episode2" },
+            updateQuery: (prev, options) => {
+              if (!options.fetchMoreResult) return prev;
+              return {
+                hero: options.fetchMoreResult.hero
+              };
+            }
+          });
+
+          const variables: $Shape<HeroQueryVariables> = { offset: 1 };
+          fetchMore({
+            variables: variables,
+            updateQuery: (prev, options) => {
+              if (!options.fetchMoreResult) return prev;
+              return {
+                hero: options.fetchMoreResult.hero
+              };
+            }
+          });
+
+          const otherVariables = { other: "1234" };
+          fetchMore({
+            query: OTHER_QUERY,
+            variables: otherVariables,
+            updateQuery: (prev, options) => {
+              if (!options.fetchMoreResult) return prev;
+              return {
+                other: options.fetchMoreResult.other
+              };
+            }
+          });
+        };
+        return <button onClick={onClick}>Click!</button>;
+      }}
     </HeroQueryComp>;
   });
 
-  describe("refetch", () => {
-    it("works if passed variablees that match the query", () => {
-      <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
-        {({ data, refetch }) => {
-          const onClick = () => {
-            refetch();
-            refetch({ episode: "otherEpisode" });
-            // $ExpectError refetch variables do not match variables for query
-            refetch({ notEpisode: "otherEpisode" });
-          };
-          return <button onClick={onClick}>Click!</button>;
-        }}
-      </HeroQueryComp>;
-    });
+  it("raises an error when passed invalid options", () => {
+    <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
+      {({ data, fetchMore }) => {
+        const onClick = () => {
+          // $ExpectError variables must match $Shape of query variables
+          fetchMore({
+            variables: { other: "hello" },
+            updateQuery: (prev, options) => {
+              if (!options.fetchMoreResult) return prev;
+              return {
+                hero: options.fetchMoreResult.hero
+              };
+            }
+          });
+
+          // $ExpectError must pass query option if passing different variables than query
+          fetchMore({
+            variables: { other: "1234" },
+            updateQuery: (prev, options) => {
+              if (!options.fetchMoreResult) return prev;
+              return {
+                other: options.fetchMoreResult.other
+              };
+            }
+          });
+
+          fetchMore({
+            variables: { episode: "episode2" },
+            updateQuery: (prev, options) => {
+              if (!options.fetchMoreResult) return prev;
+              // $ExpectError updateQuery return type must match query response type
+              return {
+                other: options.fetchMoreResult.hero
+              };
+            }
+          });
+        };
+        return <button onClick={onClick}>Click!</button>;
+      }}
+    </HeroQueryComp>;
   });
+});
 
-  describe("fetchMore", () => {
-    it("works when passed valid options", () => {
-      <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
-        {({ data, fetchMore }) => {
-          const onClick = () => {
-            fetchMore({
-              variables: { episode: "episode2" },
-              updateQuery: (prev, options) => {
-                if (!options.fetchMoreResult) return prev;
-                return {
-                  hero: options.fetchMoreResult.hero
-                };
-              }
-            });
-
-            const variables: $Shape<HeroQueryVariables> = { offset: 1 };
-            fetchMore({
-              variables: variables,
-              updateQuery: (prev, options) => {
-                if (!options.fetchMoreResult) return prev;
-                return {
-                  hero: options.fetchMoreResult.hero
-                };
-              }
-            });
-
-            const otherVariables = { other: "1234" };
-            fetchMore({
-              query: OTHER_QUERY,
-              variables: otherVariables,
-              updateQuery: (prev, options) => {
-                if (!options.fetchMoreResult) return prev;
-                return {
-                  other: options.fetchMoreResult.other
-                };
-              }
-            });
-          };
-          return <button onClick={onClick}>Click!</button>;
-        }}
-      </HeroQueryComp>;
-    });
-
-    it("raises an error when passed invalid options", () => {
-      <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
-        {({ data, fetchMore }) => {
-          const onClick = () => {
-            // $ExpectError variables must match $Shape of query variables
-            fetchMore({
-              variables: { other: "hello" },
-              updateQuery: (prev, options) => {
-                if (!options.fetchMoreResult) return prev;
-                return {
-                  hero: options.fetchMoreResult.hero
-                };
-              }
-            });
-
-            // $ExpectError must pass query option if passing different variables than query
-            fetchMore({
-              variables: { other: "1234" },
-              updateQuery: (prev, options) => {
-                if (!options.fetchMoreResult) return prev;
-                return {
-                  other: options.fetchMoreResult.other
-                };
-              }
             });
 
             fetchMore({
@@ -436,8 +455,8 @@ describe("<Query />", () => {
           return <div />
         }}
       </HeroQueryComp>;
-    })
   })
+})
 });
 
 type HeroSubcriptionVariables = {
@@ -446,7 +465,7 @@ type HeroSubcriptionVariables = {
 class HeroSubscriptionComp extends Subscription<
   { hero: ?Hero },
   HeroSubcriptionVariables
-> {}
+  > { }
 
 describe("<Subscription />", () => {
   it("works", () => {
@@ -471,7 +490,7 @@ describe("<Subscription />", () => {
           return <div/>
         }}
       </Subscription>
-    );
+);
   });
   it("works when extending Subscription with types", () => {
     <HeroSubscriptionComp subscription={HERO_SUBSCRIPTION} variables={{ heroId: "123" }}>
@@ -485,24 +504,24 @@ describe("<Subscription />", () => {
         }
         const hero = data.hero;
 
-        const nameAgain: string = hero.name;
-        // $ExpectError unknown is not a property on Hero
-        const unknown = hero.unknown;
+      const nameAgain: string = hero.name;
+      // $ExpectError unknown is not a property on Hero
+      const unknown = hero.unknown;
 
-        return <div>{nameAgain}</div>;
+      return <div>{nameAgain}</div>;
+    }}
+  </HeroSubscriptionComp>;
+});
+it("errors if wrong variables passed", () => {
+  type Vars = {| foo: string |};
+type Res = {| res: string |};
+const q = (
+  <Subscription variables={{ foo: 1 }} subscription={HERO_SUBSCRIPTION}>
+    { // $ExpectError variables must match shape of query variables
+      ({ data }: SubscriptionResult<Res, Vars>) => {
       }}
-    </HeroSubscriptionComp>;
-  });
-  it("errors if wrong variables passed", () => {
-    type Vars = {| foo: string |};
-    type Res = {| res: string |};
-    const q = (
-      <Subscription variables={{ foo: 1 }} subscription={HERO_SUBSCRIPTION}>
-        { // $ExpectError variables must match shape of query variables
-          ({ data }: SubscriptionResult<Res, Vars>) => {
-        }}
-      </Subscription>
-    );
+  </Subscription>
+);
   });
 });
 
@@ -512,7 +531,7 @@ type UpdateHeroMutationVariables = {
 class UpdateHeroMutationComp extends Mutation<
   { updateHero?: ?{ hero: ?Hero } },
   UpdateHeroMutationVariables
-> {}
+  > { }
 
 describe("<Mutation />", () => {
   it("mutate() args are optional", () => {
@@ -554,231 +573,231 @@ describe("<Mutation />", () => {
     );
   });
 
-  it("works when extending Mutation with types", () => {
+it("works when extending Mutation with types", () => {
+  <UpdateHeroMutationComp mutation={HERO_MUTATION}>
+    {(updateHero, { loading, error, data, called }) => {
+      const onClick = () => {
+        updateHero({
+          variables: { input: { id: "1", name: "hero1" } }
+        });
+        // $ExpectError variables must match Mutation variables
+        updateHero({
+          variables: { id: "1", name: "hero1" }
+        });
+      };
+      return (
+        <div>
+          <button disabled={loading} onClick={onClick}>
+            Click
+            </button>
+          {error && error.message}
+        </div>
+      );
+    }}
+  </UpdateHeroMutationComp>;
+});
+
+describe("optimisticResponse", () => {
+  it("works when passed an optimisticResponse object", () => {
     <UpdateHeroMutationComp mutation={HERO_MUTATION}>
-      {(updateHero, { loading, error, data, called }) => {
+      {updateHero => {
+        const optimisticResponse = {
+          updateHero: {
+            __typename: "UpdateHeroPayload",
+            hero: {
+              __typename: "Hero",
+              name: "Hero1",
+              id: "1"
+            }
+          }
+        };
+        const onClick = () => {
+          updateHero({
+            optimisticResponse,
+            variables: { input: { id: "1", name: "hero1" } }
+          });
+
+          // $ExpectError optimisticResponse must be an object
+          updateHero({
+            optimisticResponse: "optimisticResponse",
+            variables: { input: { id: "1", name: "hero1" } }
+          });
+        };
+        return <button onClick={onClick}>Click</button>;
+      }}
+    </UpdateHeroMutationComp>;
+  });
+});
+
+describe("refetchQueries", () => {
+  it("works when passed refetchQueries to Mutation component", () => {
+    const queryOption = {
+      query: HERO_QUERY,
+      variables: { episode: "episode" }
+    };
+    const refetchQueries: RefetchQueryDescription = [queryOption, 'foo'];
+
+    <UpdateHeroMutationComp
+      mutation={HERO_MUTATION}
+      refetchQueries={refetchQueries}
+    >
+      {updateHero => {
         const onClick = () => {
           updateHero({
             variables: { input: { id: "1", name: "hero1" } }
           });
-          // $ExpectError variables must match Mutation variables
+        };
+        return <button onClick={onClick}>Click</button>;
+      }}
+    </UpdateHeroMutationComp>;
+
+    // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
+    <UpdateHeroMutationComp
+      mutation={HERO_MUTATION}
+      refetchQueries={queryOption}
+    >
+      {updateHero => {
+        const onClick = () => {
           updateHero({
-            variables: { id: "1", name: "hero1" }
+            variables: { input: { id: "1", name: "hero1" } }
           });
         };
-        return (
-          <div>
-            <button disabled={loading} onClick={onClick}>
-              Click
-            </button>
-            {error && error.message}
-          </div>
-        );
+        return <button onClick={onClick}>Click</button>;
       }}
     </UpdateHeroMutationComp>;
   });
 
-  describe("optimisticResponse", () => {
-    it("works when passed an optimisticResponse object", () => {
-      <UpdateHeroMutationComp mutation={HERO_MUTATION}>
-        {updateHero => {
-          const optimisticResponse = {
-            updateHero: {
-              __typename: "UpdateHeroPayload",
-              hero: {
-                __typename: "Hero",
-                name: "Hero1",
-                id: "1"
-              }
-            }
+  it("works when passed refetchQueries to mutation function", () => {
+    <UpdateHeroMutationComp mutation={HERO_MUTATION}>
+      {updateHero => {
+        const onClick = () => {
+          const queryOption = {
+            query: HERO_QUERY,
+            variables: { episode: "episode" }
           };
-          const onClick = () => {
-            updateHero({
-              optimisticResponse,
-              variables: { input: { id: "1", name: "hero1" } }
-            });
+          const refetchQueries: PureQueryOptions[] = [queryOption];
+          updateHero({
+            variables: { input: { id: "1", name: "hero1" } },
+            refetchQueries
+          });
+          updateHero({
+            variables: { input: { id: "1", name: "hero1" } },
+            refetchQueries: () => refetchQueries
+          });
 
-            // $ExpectError optimisticResponse must be an object
-            updateHero({
-              optimisticResponse: "optimisticResponse",
-              variables: { input: { id: "1", name: "hero1" } }
-            });
-          };
-          return <button onClick={onClick}>Click</button>;
-        }}
-      </UpdateHeroMutationComp>;
-    });
-  });
-
-  describe("refetchQueries", () => {
-    it("works when passed refetchQueries to Mutation component", () => {
-      const queryOption = {
-        query: HERO_QUERY,
-        variables: { episode: "episode" }
-      };
-      const refetchQueries: RefetchQueryDescription = [queryOption, 'foo'];
-
-      <UpdateHeroMutationComp
-        mutation={HERO_MUTATION}
-        refetchQueries={refetchQueries}
-      >
-        {updateHero => {
-          const onClick = () => {
-            updateHero({
-              variables: { input: { id: "1", name: "hero1" } }
-            });
-          };
-          return <button onClick={onClick}>Click</button>;
-        }}
-      </UpdateHeroMutationComp>;
-
-      // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
-      <UpdateHeroMutationComp
-        mutation={HERO_MUTATION}
-        refetchQueries={queryOption}
-      >
-        {updateHero => {
-          const onClick = () => {
-            updateHero({
-              variables: { input: { id: "1", name: "hero1" } }
-            });
-          };
-          return <button onClick={onClick}>Click</button>;
-        }}
-      </UpdateHeroMutationComp>;
-    });
-
-    it("works when passed refetchQueries to mutation function", () => {
-      <UpdateHeroMutationComp mutation={HERO_MUTATION}>
-        {updateHero => {
-          const onClick = () => {
-            const queryOption = {
-              query: HERO_QUERY,
-              variables: { episode: "episode" }
-            };
-            const refetchQueries: PureQueryOptions[] = [queryOption];
-            updateHero({
-              variables: { input: { id: "1", name: "hero1" } },
-              refetchQueries
-            });
-            updateHero({
-              variables: { input: { id: "1", name: "hero1" } },
-              refetchQueries: () => refetchQueries
-            });
-
-            updateHero({
-              variables: { input: { id: "1", name: "hero1" } },
-              // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
-              refetchQueries: () => queryOption
-            });
+          updateHero({
+            variables: { input: { id: "1", name: "hero1" } },
             // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
-            updateHero({
-              variables: { input: { id: "1", name: "hero1" } },
-              refetchQueries: queryOption
-            });
-          };
-          return <button onClick={onClick}>Click</button>;
-        }}
-      </UpdateHeroMutationComp>;
-    });
+            refetchQueries: () => queryOption
+          });
+          // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
+          updateHero({
+            variables: { input: { id: "1", name: "hero1" } },
+            refetchQueries: queryOption
+          });
+        };
+        return <button onClick={onClick}>Click</button>;
+      }}
+    </UpdateHeroMutationComp>;
+  });
+});
+
+describe("update", () => {
+  it("can manually update the cache after a mutation by passing update prop to the Mutation component", () => {
+    <UpdateHeroMutationComp
+      mutation={HERO_MUTATION}
+      update={(cache, { data }) => {
+        // $ExpectError data may be undefined
+        data.updateHero;
+        if (data && data.updateHero) {
+          const hero = cache.readQuery({
+            query: HERO_QUERY,
+            variables: { episoe: "episode" }
+          });
+          cache.writeQuery({
+            query: HERO_QUERY,
+            variables: { episode: "episode" },
+            data: { hero: data.updateHero }
+          });
+        }
+      }}
+    >
+      {updateHero => {
+        const onClick = () => {
+          updateHero({
+            variables: { input: { id: "1", name: "hero1" } }
+          });
+        };
+        return <button onClick={onClick}>Click</button>;
+      }}
+    </UpdateHeroMutationComp>;
   });
 
-  describe("update", () => {
-    it("can manually update the cache after a mutation by passing update prop to the Mutation component", () => {
-      <UpdateHeroMutationComp
-        mutation={HERO_MUTATION}
-        update={(cache, { data }) => {
-          // $ExpectError data may be undefined
-          data.updateHero;
-          if (data && data.updateHero) {
-            const hero = cache.readQuery({
-              query: HERO_QUERY,
-              variables: { episoe: "episode" }
-            });
-            cache.writeQuery({
-              query: HERO_QUERY,
-              variables: { episode: "episode" },
-              data: { hero: data.updateHero }
-            });
-          }
-        }}
-      >
-        {updateHero => {
-          const onClick = () => {
-            updateHero({
-              variables: { input: { id: "1", name: "hero1" } }
-            });
-          };
-          return <button onClick={onClick}>Click</button>;
-        }}
-      </UpdateHeroMutationComp>;
-    });
+  it("can manually update the cache after a mutation using update on the mutation function", () => {
+    <UpdateHeroMutationComp mutation={HERO_MUTATION}>
+      {updateHero => {
+        const onClick = () => {
+          updateHero({
+            variables: { input: { id: "1", name: "hero1" } },
+            update: (cache, { data }) => {
+              // $ExpectError data may be undefined
+              data.updateHero;
 
-    it("can manually update the cache after a mutation using update on the mutation function", () => {
-      <UpdateHeroMutationComp mutation={HERO_MUTATION}>
-        {updateHero => {
-          const onClick = () => {
-            updateHero({
-              variables: { input: { id: "1", name: "hero1" } },
-              update: (cache, { data }) => {
-                // $ExpectError data may be undefined
-                data.updateHero;
-
-                if (data && data.updateHero) {
-                  const hero = cache.readQuery({
-                    query: HERO_QUERY,
-                    variables: { episoe: "episode" }
-                  });
-                  cache.writeQuery({
-                    query: HERO_QUERY,
-                    variables: { episode: "episode" },
-                    data: { hero: data.updateHero }
-                  });
-                  if (data.updateHero && data.updateHero.hero) {
-                    cache.writeFragment({
-                      id: "1",
-                      fragment: gql`
+              if (data && data.updateHero) {
+                const hero = cache.readQuery({
+                  query: HERO_QUERY,
+                  variables: { episoe: "episode" }
+                });
+                cache.writeQuery({
+                  query: HERO_QUERY,
+                  variables: { episode: "episode" },
+                  data: { hero: data.updateHero }
+                });
+                if (data.updateHero && data.updateHero.hero) {
+                  cache.writeFragment({
+                    id: "1",
+                    fragment: gql`
                         fragment myHero on Hero {
                           name
                         }
                       `,
-                      data: {
-                        name: data.updateHero.hero.name
-                      }
-                    });
-                  }
+                    data: {
+                      name: data.updateHero.hero.name
+                    }
+                  });
+                }
 
-                  // $ExpectError readQuery requires query
-                  cache.readQuery({
-                    variables: { episode: "episode" }
-                  });
-                  // $ExpectError writeQuery requires data
-                  cache.writeQuery({
-                    query: HERO_QUERY,
-                    variables: { episode: "episode" }
-                  });
-                  // $ExpectError writeFragment requires id
-                  cache.writeFragment({
-                    fragment: gql`
+                // $ExpectError readQuery requires query
+                cache.readQuery({
+                  variables: { episode: "episode" }
+                });
+                // $ExpectError writeQuery requires data
+                cache.writeQuery({
+                  query: HERO_QUERY,
+                  variables: { episode: "episode" }
+                });
+                // $ExpectError writeFragment requires id
+                cache.writeFragment({
+                  fragment: gql`
                       fragment myHero on Hero {
                         name
                       }
                     `,
-                    data: {
-                      name: "name"
-                    }
-                  });
-                  // $ExpectError cannot call unknownFunction on cache
-                  cache.unknwonFunction();
-                }
+                  data: {
+                    name: "name"
+                  }
+                });
+                // $ExpectError cannot call unknownFunction on cache
+                cache.unknwonFunction();
               }
-            });
-          };
-          return <button onClick={onClick}>Click</button>;
-        }}
-      </UpdateHeroMutationComp>;
-    });
+            }
+          });
+        };
+        return <button onClick={onClick}>Click</button>;
+      }}
+    </UpdateHeroMutationComp>;
   });
+});
 });
 
 describe("<ApolloProvider />", () => {
