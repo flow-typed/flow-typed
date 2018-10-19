@@ -1,7 +1,7 @@
 /* @flow */
 
 import { loop, Effects } from 'redux-loop'
-import * as L            from 'redux-loop'
+import * as L from 'redux-loop'
 
 import type { Effect, Reducer } from 'redux-loop'
 
@@ -18,7 +18,7 @@ type Action =
 
 // ok
 const reducer: Reducer<State, Action> = (state: State, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'FIRST':
       return loop(
         { ...state, first: true },
@@ -47,9 +47,9 @@ const lifted: [State, Effect] = L.liftState({ first: true, second: false })
 // loop accessors
 //
 
-const state = { first: true, second: false }
+const state: State = { first: true, second: false }
 
-const loopState = loop(
+const loopState: [State, Effect] = loop(
   { first: true, second: false },
   Effects.constant({ type: 'SECOND' })
 )
@@ -61,10 +61,10 @@ const model1: State = L.getModel(loopState)
 const model2: State = L.getModel(state)
 
 // ok
-const effect1: ?Effect = L.getEffect(loopState)
+const effect1: Effect = L.getEffect(loopState)
 
 // ok
-const effect2: ?Effect = L.getEffect(state)
+const effect2: null = L.getEffect(state)
 
 // $ExpectError
 const effect3: Effect = L.getEffect(state)
