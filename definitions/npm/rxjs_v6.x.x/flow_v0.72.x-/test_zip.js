@@ -18,18 +18,6 @@ it("should support mixed observables and promises", () => {
   const o1 = zip(a, b, c, d);
 });
 
-it("should support arrays of promises", () => {
-  const a = [Promise.resolve(1)];
-  const o1 = zip(a);
-  const o2 = zip(...a);
-});
-
-it("should support arrays of observables", () => {
-  const a = [of(1)];
-  const o1 = zip(a);
-  const o2 = zip(...a);
-});
-
 it("should return Array<T> when given a single promise", () => {
   const a = Promise.resolve(1);
   const o1 = zip(a);
