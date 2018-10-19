@@ -1,17 +1,17 @@
 declare module "awilix" {
   declare module.exports: {
-    createContainer(?awilix$ContainerOptions): awilix$Container<{}>,
-    ResolutionMode: Class<awilix$ResolutionMode>,
-    Lifetime: Class<awilix$Lifetime>,
-    asValue: awilix$asValue,
-    asClass: awilix$asClass,
-    asFunction: awilix$asFunction,
-    AwilixResolutionError: awilix$ResolutionError,
-    listModules: awilix$listModules
+    createContainer(?awilix$ContainerOptions): awilix$Container < {} >,
+      ResolutionMode: Class < awilix$ResolutionMode >,
+        Lifetime: Class < awilix$Lifetime >,
+          asValue: awilix$asValue,
+            asClass: awilix$asClass,
+              asFunction: awilix$asFunction,
+                AwilixResolutionError: awilix$ResolutionError,
+                  listModules: awilix$listModules
   };
 }
 
-declare class awilix$ResolutionError extends Error {}
+declare class awilix$ResolutionError extends Error { }
 
 declare type awilix$POJO<T> = { [string]: T };
 declare type awilix$Name<T> = $PropertyType<T, "name">;
@@ -21,7 +21,7 @@ declare type awilix$FnIdx<T> = { [awilix$Name<T>]: awilix$Return<T> };
 declare type awilix$derefReturn = <V>(() => V) => V;
 declare type awilix$Return<F> = $Call<awilix$derefReturn, F>;
 declare type awilix$MergedRegistrations<T1, T2> = awilix$Container<
-  T1 & $ObjMap<T2, <T>(awilix$Registration<T>) => T>
+  T1 & $ObjMap<T2, <T>(awilix$Registration<T>) => T >
 >;
 
 declare class awilix$Container<R = { [string]: * }> {
@@ -39,66 +39,66 @@ declare class awilix$Container<R = { [string]: * }> {
     registrations: RegistrationMap,
     opts?: awilix$ContainerRegOptions<RegistrationMap>
   ): awilix$Container<
-    R & $ObjMap<RegistrationMap, <T>(awilix$Registration<T>) => T>
+  R & $ObjMap<RegistrationMap, <T>(awilix$Registration<T>) => T>
   >;
 
-  registerClass<T>(
-    className: Class<T>
+registerClass<T>(
+  className: Class<T>
   ): awilix$Container<R & { [awilix$ClassName<T>]: T }>;
-  registerClass<T, Name: string>(
-    name: Name,
-    clazz: Class<T>,
-    opts?: awilix$ContainerRegOptions<T>
+registerClass < T, Name: string > (
+  name: Name,
+    clazz: Class < T >,
+      opts ?: awilix$ContainerRegOptions<T>
   ): awilix$Container<{ [Name]: T } & R>;
-  registerClass<T, Name: string>(
-    name: Name,
-    ctorAndOptionsPair: [Class<T>, awilix$ContainerRegOptions<T>]
+registerClass < T, Name: string > (
+  name: Name,
+    ctorAndOptionsPair: [Class < T >, awilix$ContainerRegOptions<T>]
   ): awilix$Container<{ [Name]: T } & R>;
-  registerClass<T>(
-    ctorAndOptionsPair: [Class<T>, awilix$ContainerRegOptions<T>]
-  ): awilix$Container<awilix$ClassIdx<T> & R>;
+registerClass<T>(
+  ctorAndOptionsPair: [Class < T >, awilix$ContainerRegOptions<T>]
+): awilix$Container<awilix$ClassIdx<T> & R>;
 
-  registerFunction<F: () => *>(
-    fn: F,
-    opts?: awilix$ContainerRegOptions<awilix$Return<F>>
+registerFunction < F: () => *> (
+  fn: F,
+    opts ?: awilix$ContainerRegOptions<awilix$Return<F>>
   ): awilix$Container<awilix$FnIdx<F> & R>;
-  registerFunction<F: () => *>(
-    fn: F,
-    opts?: awilix$ContainerRegOptions<awilix$Return<F>>
+registerFunction < F: () => *> (
+  fn: F,
+    opts ?: awilix$ContainerRegOptions<awilix$Return<F>>
   ): awilix$Container<awilix$FnIdx<F> & R>;
-  registerFunction<Name: string, F: () => *>(
-    name: Name,
+registerFunction < Name: string, F: () => *> (
+  name: Name,
     fn: F,
-    opts?: awilix$ContainerRegOptions<awilix$Return<F>>
+      opts ?: awilix$ContainerRegOptions<awilix$Return<F>>
   ): awilix$Container<{ [Name]: awilix$Return<F> } & R>;
-  registerFunction<Name: string, F: () => *>(
-    name: string,
+registerFunction < Name: string, F: () => *> (
+  name: string,
     funcAndOptionsPair: [Function, awilix$ContainerRegOptions<awilix$Return<F>>]
   ): awilix$Container<{ [Name]: awilix$Return<F> } & R>;
-  registerFunction<F: () => *, RegistrationMap: awilix$RegistrationMap<F>>(
-    registrations: RegistrationMap
+registerFunction < F: () => *, RegistrationMap: awilix$RegistrationMap < F >> (
+  registrations: RegistrationMap
   ): awilix$MergedRegistrations<
-    R,
-    $ObjMap<RegistrationMap, awilix$derefReturn>
+  R,
+  $ObjMap<RegistrationMap, awilix$derefReturn>
   >;
 
-  registerValue<Name: string, T>(
-    name: Name,
+registerValue < Name: string, T > (
+  name: Name,
     value: T
   ): awilix$Container<{ [Name]: T } & R>;
-  registerValue<Registrations: { [string]: * }>(
-    Registrations
-  ): awilix$Container<Registrations & R>;
+registerValue < Registrations: { [string]: * }> (
+  Registrations
+): awilix$Container<Registrations & R>;
 
-  resolve<Name: string>(name: Name): $ElementType<R, Name>;
+resolve < Name: string > (name: Name): $ElementType<R, Name>;
 
-  loadModules(
-    globPatterns: string[] | Array<awilix$LoadModulesTuple<*>>,
-    options?: awilix$LoadModulesOptions<*>
+loadModules(
+  globPatterns: string[] | Array < awilix$LoadModulesTuple <*>>,
+  options ?: awilix$LoadModulesOptions<*>
   ): awilix$Container<R>;
 
-  build<T: Function>(target: T | awilix$Registration<T>): awilix$Return<T>;
-  build<T>(target: Class<T> | awilix$Registration<T>): T;
+build < T: Function > (target: T | awilix$Registration<T>): awilix$Return<T>;
+build<T>(target: Class<T> | awilix$Registration<T>): T;
 }
 
 declare type awilix$listModules = (
@@ -111,7 +111,7 @@ declare type awilix$RegistrationMap<F> = {
 };
 
 declare type awilix$LoadModulesTuple<T> =
-  | [string]
+  |[string]
   | [string, awilix$ContainerRegOptions<T>];
 declare type awilix$LoadModulesOptions<T> = {
   cwd?: string,
@@ -131,12 +131,12 @@ declare type awilix$NameFormatter = (
   descriptor: awilix$ModuleDescriptor
 ) => string;
 
-declare interface awilix$AsProviderFunction {}
+declare interface awilix$AsProviderFunction { }
 
 declare interface awilix$asFunction extends awilix$AsProviderFunction {
-  <F: () => *>(
+  <F: () => *> (
     fn: F,
-    options?: awilix$ContainerRegOptions<awilix$Return<F>>
+      options ?: awilix$ContainerRegOptions<awilix$Return<F>>
   ): awilix$FluidRegistration<awilix$Return<F>>;
 }
 
@@ -167,18 +167,18 @@ declare interface awilix$FluidRegistration<T> extends awilix$Registration<T> {
 
 declare type awilix$ContainerOptions = {|
   require?: typeof require,
-  resolutionMode?: awilix$ResolutionMode
-|};
+    resolutionMode ?: awilix$ResolutionMode
+      |};
 
 declare type awilix$ContainerRegOptions<T> =
   | string
   | {|
   name?: string,
-  lifetime?: awilix$Lifetime,
-  resolutionMode?: awilix$ResolutionMode,
-  injector?: awilix$InjectorFunction<T>,
-  register?: awilix$AsProviderFunction
-|};
+    lifetime ?: awilix$Lifetime,
+    resolutionMode ?: awilix$ResolutionMode,
+    injector ?: awilix$InjectorFunction < T >,
+    register ?: awilix$AsProviderFunction
+      |};
 
 declare class awilix$Lifetime {
   static SCOPED: awilix$Lifetime;
