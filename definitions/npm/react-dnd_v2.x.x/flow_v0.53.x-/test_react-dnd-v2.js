@@ -17,8 +17,8 @@ type KnightOrigProps = KnightDefaultProps & {
 };
 
 type KnightCollectProps = {
-  connectDragSource: (e: React.Element<any>) => ?React.Element<any>,
-  connectDragPreview: (e: Image) => ?Image,
+  connectDragSource: (e: React.Element<any>) => null | React.Node,
+  connectDragPreview: (e: Image) =>?Image,
   isDragging: boolean
 };
 
@@ -115,24 +115,24 @@ const dndKnight: DndKnight = (null: any);
 
 (<DndKnight title="foo" color="red" extra="x" />: React.Element<
   typeof DndKnight
->);
+  >);
 
 (<DndKnight title="foo" color="red" count={3} />: React.Element<
   typeof DndKnight
->);
+  >);
 
 // $ExpectError: Invalid optional prop
 (<DndKnight title="foo" color="red" count="x" />: React.Element<
   typeof DndKnight
->);
+  >);
 
 (<DndKnight title="foo" color="red" isDragging={false} />: React.Element<
   typeof DndKnight
->);
+  >);
 
 (<DndKnight title="foo" color="red" isDragging="false" />: React.Element<
   typeof DndKnight
->);
+  >);
 
 // Test Drag Source Component without default props
 // ----------------------------------------------------------------------
@@ -208,24 +208,24 @@ const dndKnight2: DndKnight2 = (null: any);
 
 (<DndKnight2 title="foo" color="red" extra="x" />: React.Element<
   typeof DndKnight2
->);
+  >);
 
 (<DndKnight2 title="foo" color="red" count={3} />: React.Element<
   typeof DndKnight2
->);
+  >);
 
 // $ExpectError: Invalid optional prop
 (<DndKnight2 title="foo" color="red" count="x" />: React.Element<
   typeof DndKnight2
->);
+  >);
 
 (<DndKnight2 title="foo" color="red" isDragging={false} />: React.Element<
   typeof DndKnight2
->);
+  >);
 
 (<DndKnight2 title="foo" color="red" isDragging="false" />: React.Element<
   typeof DndKnight2
->);
+  >);
 
 // Test Drag Source Functional Component
 // ----------------------------------------------------------------------
@@ -246,7 +246,7 @@ const Knight3 = ({ color, title, isDragging }: KnightProps) =>
 
 const DndKnight3 = DragSource("knight", knightSource, knightCollect)(Knight3);
 
-(DndKnight3.DecoratedComponent: Knight3);
+(DndKnight3.DecoratedComponent: typeof Knight3);
 
 const dndKnight3: DndKnight3 = (null: any);
 
@@ -270,29 +270,29 @@ const dndKnight3: DndKnight3 = (null: any);
 
 (<DndKnight3 title="foo" color="red" extra="x" />: React.Element<
   typeof DndKnight3
->);
+  >);
 
 (<DndKnight3 title="foo" color="red" count={3} />: React.Element<
   typeof DndKnight3
->);
+  >);
 
 // $ExpectError: Invalid optional prop
 (<DndKnight3 title="foo" color="red" count="x" />: React.Element<
   typeof DndKnight3
->);
+  >);
 
 (<DndKnight3 title="foo" color="red" isDragging={false} />: React.Element<
   typeof DndKnight3
->);
+  >);
 
 (<DndKnight3 title="foo" color="red" isDragging="false" />: React.Element<
   typeof DndKnight3
->);
+  >);
 
 // Test Drop Target
 // ----------------------------------------------------------------------
 
-function moveKnight(toX: number, toY: number) {}
+function moveKnight(toX: number, toY: number) { }
 
 function canMoveKnight(toX: number, toY: number) {
   return true;
@@ -322,7 +322,7 @@ type BoardSquareDefaultProps = {
 type BoardSquareProps = BoardSquareDefaultProps & {
   y: number,
   count?: number,
-  connectDropTarget: (e: React.Element<any>) => ?React.Element<any>,
+  connectDropTarget: (e: React.Element<any>) => null | React.Node,
   isOver: boolean,
   canDrop: boolean
 };
