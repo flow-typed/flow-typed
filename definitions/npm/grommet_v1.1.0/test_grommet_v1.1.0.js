@@ -62,7 +62,7 @@ import Value from 'grommet/components/Value';
 import Video from 'grommet/components/Video';
 import WorldMap from 'grommet/components/WorldMap';
 
-class FailingApp extends Component {
+class FailingApp extends Component<{}> {
   render() {
     return (
       // $ExpectError This type is incompatible with boolean
@@ -76,7 +76,7 @@ class FailingApp extends Component {
   }
 }
 
-class ExampleApp extends Component {
+class ExampleApp extends Component<{}> {
   handleClick() {
     return "foo";
   }
@@ -96,12 +96,12 @@ class ExampleApp extends Component {
           <source src='/video/test.mp4'
             type='video/mp4' />
         </Video>
-        <Box pad={{between: "medium"}}
+        <Box pad={{ between: "medium" }}
           align='center'>
           <Button label='Leave'
             primary={true}
             onClick={this.handleClick} />
-          <Animate enter={{ animation: "fade", duration: 1000, delay: 0}} keep={true}>
+          <Animate enter={{ animation: "fade", duration: 1000, delay: 0 }} keep={true}>
             <Box direction='row'>
               <Box
                 colorIndex='light-2'
@@ -137,7 +137,7 @@ class ExampleApp extends Component {
         />
         <Topology
           a11yTitle='Server Topology'
-          links={[{colorIndex: "graph-1", ids: ["s1p1", "s2p1"]}, {colorIndex: "graph-1", ids: ["s1p1", "s2p1"]}]}
+          links={[{ colorIndex: "graph-1", ids: ["s1p1", "s2p1"] }, { colorIndex: "graph-1", ids: ["s1p1", "s2p1"] }]}
         />
         <Box>
           <Value value={40}
@@ -148,7 +148,7 @@ class ExampleApp extends Component {
         </Box>
         <Box direction='row'
           align='center'
-          pad={{between: "medium"}}>
+          pad={{ between: "medium" }}>
           <SunBurst
             data={[{
               value: 50,
@@ -160,8 +160,8 @@ class ExampleApp extends Component {
                   colorIndex: "neutral-1",
                   total: 10,
                   children: [
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-                {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
+                    { label: "leaf-1", value: 5, colorIndex: "neutral-1" },
+                    { label: "leaf-1", value: 5, colorIndex: "neutral-1" }
                   ]
                 }
               ]
@@ -169,23 +169,23 @@ class ExampleApp extends Component {
               value: 30,
               colorIndex: "neutral-2",
               children: [
-              {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-              {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
+                { label: "leaf-1", value: 5, colorIndex: "neutral-1" },
+                { label: "leaf-1", value: 5, colorIndex: "neutral-1" }
               ]
             }, {
               value: 20,
               colorIndex: "neutral-3",
               children: [
-              {label: "leaf-1", value: 5, colorIndex: "neutral-1"},
-              {label: "leaf-1", value: 5, colorIndex: "neutral-1"}
+                { label: "leaf-1", value: 5, colorIndex: "neutral-1" },
+                { label: "leaf-1", value: 5, colorIndex: "neutral-1" }
               ]
             }]}
             onActive={this.handleClick}
             onClick={this.handleClick}
           />
-          <Legend series={[{label: "on target", colorIndex: "neutral-1"}, {label: "over", colorIndex: "neutral-2"}]} />
+          <Legend series={[{ label: "on target", colorIndex: "neutral-1" }, { label: "over", colorIndex: "neutral-2" }]} />
         </Box>
-        <Legend series={[{label: "Americas", value: 40, colorIndex: "graph-1", onClick: this.handleClick}]} />
+        <Legend series={[{ label: "Americas", value: 40, colorIndex: "graph-1", onClick: this.handleClick }]} />
         <Map
           data={{
             categories: [
@@ -193,17 +193,17 @@ class ExampleApp extends Component {
                 id: "category-3",
                 label: "Third category",
                 items: [
-              {id: "item-3-1", label: "Sixth item"},
-              {id: "item-3-2", label: "Seventh item"}
+                  { id: "item-3-1", label: "Sixth item" },
+                  { id: "item-3-2", label: "Seventh item" }
                 ]
               }
             ],
             links: [
-            {parentId: "item-1-1", childId: "item-2-2"}
+              { parentId: "item-1-1", childId: "item-2-2" }
             ]
           }}
         />
-        <Distribution series={[{label: "First", value: 40, colorIndex: "graph-1"}, {label: "Second", value: 30, colorIndex: "accent-2"}]} />
+        <Distribution series={[{ label: "First", value: 40, colorIndex: "graph-1" }, { label: "Second", value: 30, colorIndex: "accent-2" }]} />
         <Tiles
           onMore={this.handleClick}
           selectable={true}
@@ -737,7 +737,7 @@ class ExampleApp extends Component {
           </Paragraph>
           <Menu direction='row'
             size='small'
-            dropAlign={{ right: "right"}}>
+            dropAlign={{ right: "right" }}>
             <Anchor href='#'>
               First
             </Anchor>
@@ -773,7 +773,7 @@ class ExampleApp extends Component {
           </Paragraph>
           <Menu direction='row'
             size='small'
-            dropAlign={{ right: "right"}}>
+            dropAlign={{ right: "right" }}>
             <Anchor href='#'>
               First
             </Anchor>
