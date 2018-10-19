@@ -1,10 +1,10 @@
 /* START copied over from marked libdef */
-type marked$AlignFlag = 'left' | 'right' | 'center'
+type marked$AlignFlag = 'left' | 'right' | 'center';
 
-type marked$NodeCallback<T> = (e: ?Error, d: ?T) => void
+type marked$NodeCallback<T> = (e: ?Error, d: ?T) => void;
 
-class marked$Renderer {
-  constructor: (o?: marked$MarkedOptions) => marked$Renderer
+declare class marked$Renderer {
+  constructor(o?: marked$MarkedOptions): marked$Renderer;
   options: marked$MarkedOptions;
   code: (c: string, l: string) => string;
   blockquote: (q: string) => string;
@@ -26,6 +26,7 @@ class marked$Renderer {
   link: (h: string, ti: string, te: string) => string;
   image: (h: string, ti: string, te: string) => string;
   text: (t: string) => string;
+
 }
 
 type marked$HighlightFunction =
@@ -52,7 +53,7 @@ type marked$MarkedOptions = {
 type marked$Space = { type: 'space'; }
 type marked$Code = { type: 'code'; text: string; lang?: string; }
 type marked$Heading = { type: 'heading'; depth: number; text: string; }
-type marked$Table = { type: 'table'; header: string; align: Array<marked$AlignFlag> ; cells: Array<Array<string>> }
+type marked$Table = { type: 'table'; header: string; align: Array<marked$AlignFlag>; cells: Array<Array<string>> }
 type marked$Hr = { type: 'hr'; }
 type marked$BlockquoteStart = { type: 'blockquote_start' }
 type marked$BlockquoteEnd = { type: 'blockquote_end' }
@@ -92,19 +93,19 @@ type marked$Rule = RegExp | marked$NoopRule
 
 type marked$lex = (t: string) => marked$Tokens;
 
-class marked$Lexer {
+declare class marked$Lexer {
   static lexer: (t: string, o?: marked$MarkedOptions) => marked$Tokens;
   static rules: { [key: string]: marked$Rule };
   rules: { [key: string]: marked$Rule };
-  constructor: (o?: marked$MarkedOptions) => marked$Lexer;
+  constructor(o?: marked$MarkedOptions): marked$Lexer;
   lex: marked$lex;
   tokens: marked$Tokens;
   options: marked$MarkedOptions;
 }
 
-class marked$Parser {
+declare class marked$Parser {
   static parse: (t: marked$Tokens, o?: marked$MarkedOptions) => string;
-  constructor: (o?: marked$MarkedOptions) => marked$Parser;
+  constructor(o?: marked$MarkedOptions): marked$Parser;
   parse: (t: marked$Tokens) => string;
   next: () => marked$Token;
   peek: () => marked$Token;
@@ -116,10 +117,10 @@ class marked$Parser {
   renderer: marked$Renderer;
 }
 
-class marked$InlineLexer {
+declare class marked$InlineLexer {
   static rules: Array<marked$Rule>;
   static output: (s: string, l: Array<marked$Link>, o?: marked$MarkedOptions) => string;
-  constructor: (l: Array<marked$Link>, o?: marked$MarkedOptions) => marked$InlineLexer;
+  constructor(l: Array<marked$Link>, o?: marked$MarkedOptions): marked$InlineLexer;
   output: (s: string) => string;
   outputmarked$Link: (c: Array<string>, l: marked$Link) => string;
   smartypants: (t: string) => string;
@@ -141,7 +142,7 @@ type marked$Marked = {
   Lexer: typeof marked$Lexer;
   lexer: typeof marked$Lexer.lexer;
   InlineLexer: typeof marked$InlineLexer;
-  inlinelexer: marked$InlineLexer.output;
+  inlinelexer: typeof marked$InlineLexer.output;
   Renderer: typeof marked$Renderer;
   parse: marked$Marked;
 }
@@ -156,25 +157,24 @@ declare module 'marked-man' {
    */
   declare type MarkedManOptions = {|
     format?: "html" | "roff";
-    name?: string;
-    date?: Date;
-    section?: string;
-    version?: string;
-    manual?: string;
-    gfm?: boolean;
-    breaks?: boolean;
-    sanitize?: boolean;
-    ronn?: boolean;
+  name ?: string;
+  date ?: Date;
+  section ?: string;
+  version ?: string;
+  manual ?: string;
+  gfm ?: boolean;
+  breaks ?: boolean;
+  sanitize ?: boolean;
+  ronn ?: boolean;
   |}
 
-  declare type MarkedMan = {
-    (md: string, o: MarkedManOptions, cb: marked$NodeCallback<string>): void;
-    (md: string, cb: marked$NodeCallback<string>): void;
-    (md: string, o?: MarkedManOptions): string;
-    setOptions: (o: MarkedManOptions) => void;
-    defaults: MarkedManOptions;
-  }
-
-  declare export default MarkedMan;
+declare type MarkedMan = {
+  (md: string, o: MarkedManOptions, cb: marked$NodeCallback<string>): void;
+  (md: string, cb: marked$NodeCallback<string>): void;
+  (md: string, o?: MarkedManOptions): string;
+  setOptions: (o: MarkedManOptions) => void;
+  defaults: MarkedManOptions;
 }
 
+declare export default MarkedMan;
+}
