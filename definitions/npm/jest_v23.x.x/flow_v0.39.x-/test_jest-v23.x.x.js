@@ -506,14 +506,16 @@ expect(wrapper).toHaveDisplayName(true);
 {
   const element = document.createElement('div');
 
-  expect(element).toHaveTextContent('123');
-  // $ExpectError: expected text content should be present
-  expect(element).toHaveTextContent();
-  // $ExpectError: expected text content should be a string
-  expect(element).toHaveTextContent(1);
-
-  expect(element).toBeInTheDOM();
-
+  expect(element).toBeDisabled();
+  expect(element).toBeEmpty();
+  expect(element).toBeInTheDocument();
+  expect(element).toBeVisible();
+  // $ExpectError
+  expect(element).toContainElement();
+  expect(element).toContainElement(element);
+  // $ExpectError
+  expect(element).toContainHTML();
+  expect(element).toContainHTML('<div></div>');
   expect(element).toHaveAttribute('foo');
   expect(element).toHaveAttribute('foo', 'bar');
   // $ExpectError: attribute name should be present
@@ -522,6 +524,23 @@ expect(wrapper).toHaveDisplayName(true);
   expect(element).toHaveAttribute(1);
   // $ExpectError: expected attribute value should be a string
   expect(element).toHaveAttribute('foo', 1);
+  // $ExpectError
+  expect(element).toHaveClass(1);
+  expect(element).toHaveClass('foo');
+  expect(element).toHaveFocus();
+  // $ExpectError
+  expect(element).toHaveFormValues();
+  expect(element).toHaveFormValues({ foo: 'bar' });
+  // $ExpectError
+  expect(element).toHaveStyle();
+  expect(element).toHaveStyle('foo');
+  expect(element).toHaveTextContent('123');
+  // $ExpectError: expected text content should be present
+  expect(element).toHaveTextContent();
+  // $ExpectError: expected text content should be a string
+  expect(element).toHaveTextContent(1);
+
+  expect(element).toBeInTheDOM();
 }
 
 {
