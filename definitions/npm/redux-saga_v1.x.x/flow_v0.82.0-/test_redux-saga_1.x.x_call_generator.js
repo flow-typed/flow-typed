@@ -19,23 +19,10 @@ describe("call() effect with normal function and without context", () => {
   function* s4(a: string, b: number, c: string, d: number): Saga<number> {
     return 1;
   }
-  function* s5(
-    a: string,
-    b: number,
-    c: string,
-    d: number,
-    e: string
-  ): Saga<number> {
+  function* s5(a: string, b: number, c: string, d: number, e: string): Saga<number> {
     return 1;
   }
-  function* s6(
-    a: string,
-    b: number,
-    c: string,
-    d: number,
-    e: string,
-    f: number
-  ): Saga<number> {
+  function* s6(a: string, b: number, c: string, d: number, e: string, f: number): Saga<number> {
     return 1;
   }
   function* s7(
@@ -81,25 +68,8 @@ describe("call() effect with normal function and without context", () => {
       (c4.payload.args: [string, number, string, number]);
       (c5.payload.args: [string, number, string, number, string]);
       (c6.payload.args: [string, number, string, number, string, number]);
-      (c7.payload.args: [
-        string,
-        number,
-        string,
-        number,
-        string,
-        number,
-        string
-      ]);
-      (c8.payload.args: [
-        string,
-        number,
-        string,
-        number,
-        string,
-        number,
-        string,
-        number
-      ]);
+      (c7.payload.args: [string, number, string, number, string, number, string]);
+      (c8.payload.args: [string, number, string, number, string, number, string, number]);
     });
 
     it("must raises an error when passed number but need string", () => {

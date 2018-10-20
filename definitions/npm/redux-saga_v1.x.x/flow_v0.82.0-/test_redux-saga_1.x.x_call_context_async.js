@@ -140,13 +140,13 @@ describe("call() effect with async functions and context", () => {
       }
     };
 
-    const c0 = call([context0, 'someFn0']);
-    const c1 = call([context1, 'someFn1'], "1");
-    const c2 = call([context2, 'someFn2'], "1", 2);
-    const c3 = call([context3, 'someFn3'], "1", 2, "3");
-    const c4 = call([context4, 'someFn4'], "1", 2, "3", 4);
-    const c5 = call([context5, 'someFn5'], "1", 2, "3", 4, "5");
-    const c6 = call([context6, 'someFn6'], "1", 2, "3", 4, "5", 6);
+    const c0 = call([context0, "someFn0"]);
+    const c1 = call([context1, "someFn1"], "1");
+    const c2 = call([context2, "someFn2"], "1", 2);
+    const c3 = call([context3, "someFn3"], "1", 2, "3");
+    const c4 = call([context4, "someFn4"], "1", 2, "3", 4);
+    const c5 = call([context5, "someFn5"], "1", 2, "3", 4, "5");
+    const c6 = call([context6, "someFn6"], "1", 2, "3", 4, "5", 6);
 
     describe("context tests", () => {
       it("must have context", () => {

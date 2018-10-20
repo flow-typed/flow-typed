@@ -6,25 +6,12 @@ describe("call() effect with async functions and without context", () => {
   const fn0 = (): Promise<number> => Promise.resolve(1);
   const fn1 = (a: string): Promise<number> => Promise.resolve(1);
   const fn2 = (a: string, b: number): Promise<number> => Promise.resolve(1);
-  const fn3 = (a: string, b: number, c: string): Promise<number> =>
+  const fn3 = (a: string, b: number, c: string): Promise<number> => Promise.resolve(1);
+  const fn4 = (a: string, b: number, c: string, d: number): Promise<number> => Promise.resolve(1);
+  const fn5 = (a: string, b: number, c: string, d: number, e: string): Promise<number> =>
     Promise.resolve(1);
-  const fn4 = (a: string, b: number, c: string, d: number): Promise<number> =>
+  const fn6 = (a: string, b: number, c: string, d: number, e: string, f: number): Promise<number> =>
     Promise.resolve(1);
-  const fn5 = (
-    a: string,
-    b: number,
-    c: string,
-    d: number,
-    e: string
-  ): Promise<number> => Promise.resolve(1);
-  const fn6 = (
-    a: string,
-    b: number,
-    c: string,
-    d: number,
-    e: string,
-    f: number
-  ): Promise<number> => Promise.resolve(1);
 
   const c0 = call(fn0);
   const c1 = call(fn1, "1");

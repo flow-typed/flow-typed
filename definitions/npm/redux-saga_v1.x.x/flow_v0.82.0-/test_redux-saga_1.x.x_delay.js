@@ -25,8 +25,8 @@ describe("delay effect", () => {
   });
 
   describe("delay(ms, [val])", () => {
-    it('must passes when used properly', () => {
-      const callEffect = delay(1, 'returnValue');
+    it("must passes when used properly", () => {
+      const callEffect = delay(1, "returnValue");
 
       (callEffect.type: "CALL");
       (callEffect.payload.context: null);

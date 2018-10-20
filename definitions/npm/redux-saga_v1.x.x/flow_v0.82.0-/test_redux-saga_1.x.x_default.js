@@ -24,23 +24,10 @@ describe("sagaMiddlewareFactory", () => {
   function* s4(a: string, b: number, c: string, d: number): Saga<number> {
     return 1;
   }
-  function* s5(
-    a: string,
-    b: number,
-    c: string,
-    d: number,
-    e: string
-  ): Saga<number> {
+  function* s5(a: string, b: number, c: string, d: number, e: string): Saga<number> {
     return 1;
   }
-  function* s6(
-    a: string,
-    b: number,
-    c: string,
-    d: number,
-    e: string,
-    f: number
-  ): Saga<number> {
+  function* s6(a: string, b: number, c: string, d: number, e: string, f: number): Saga<number> {
     return 1;
   }
   function* s7(
@@ -108,9 +95,7 @@ describe("sagaMiddlewareFactory", () => {
       actionDispatched: _ => {}
     };
 
-    const simpleEffectMiddleware: EffectMiddleware = (
-      next: (e: mixed) => void
-    ) => effect => {};
+    const simpleEffectMiddleware: EffectMiddleware = (next: (e: mixed) => void) => effect => {};
 
     it("must passes when used properly", () => {
       const logger = level => {};

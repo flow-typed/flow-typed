@@ -25,8 +25,8 @@ describe("race effect", () => {
 
   describe("race(Array<Effect>)", () => {
     it("should recognize the payload data structure", () => {
-      const e1 = take("FOO");
-      const e2 = put({ type: "BAR" });
+      const e1 = take("LOG_OUT");
+      const e2 = put({ type: "FETCH_USER" });
 
       const r = race([e1, e2]);
 

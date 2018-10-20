@@ -1802,7 +1802,10 @@ declare module "redux-saga/effects" {
 
     // with context
     <Ctx, R, Fn: () => R>(cfn: [Ctx, Fn]): ForkEffect<Ctx, Fn, { detached: true }, []>,
-    <Ctx, R, T1, Fn: (t1: T1) => R>(cfn: [Ctx, Fn], t1: T1): ForkEffect<Ctx, Fn, { detached: true }, [T1]>,
+    <Ctx, R, T1, Fn: (t1: T1) => R>(
+      cfn: [Ctx, Fn],
+      t1: T1
+    ): ForkEffect<Ctx, Fn, { detached: true }, [T1]>,
     <Ctx, R, T1, T2, Fn: (t1: T1, t2: T2) => R>(
       cfn: [Ctx, Fn],
       t1: T1,

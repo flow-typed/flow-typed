@@ -32,19 +32,8 @@ describe("cps effect", () => {
     function cpsfn0(cb: NodeCallback<number>): void {}
     function cpsfn1(a: string, cb: NodeCallback<number>): void {}
     function cpsfn2(a: string, b: number, cb: NodeCallback<number>): void {}
-    function cpsfn3(
-      a: string,
-      b: number,
-      c: string,
-      cb: NodeCallback<number>
-    ): void {}
-    function cpsfn4(
-      a: string,
-      b: number,
-      c: string,
-      d: number,
-      cb: NodeCallback<number>
-    ): void {}
+    function cpsfn3(a: string, b: number, c: string, cb: NodeCallback<number>): void {}
+    function cpsfn4(a: string, b: number, c: string, d: number, cb: NodeCallback<number>): void {}
     function cpsfn5(
       a: string,
       b: number,
@@ -103,25 +92,8 @@ describe("cps effect", () => {
         (e4.payload.args: [string, number, string, number]);
         (e5.payload.args: [string, number, string, number, string]);
         (e6.payload.args: [string, number, string, number, string, number]);
-        (e7.payload.args: [
-          string,
-          number,
-          string,
-          number,
-          string,
-          number,
-          string
-        ]);
-        (e8.payload.args: [
-          string,
-          number,
-          string,
-          number,
-          string,
-          number,
-          string,
-          number
-        ]);
+        (e7.payload.args: [string, number, string, number, string, number, string]);
+        (e8.payload.args: [string, number, string, number, string, number, string, number]);
       });
 
       it("must passes when context is null", () => {
@@ -170,25 +142,8 @@ describe("cps effect", () => {
         (e4.payload.args: [string, number, string, number]);
         (e5.payload.args: [string, number, string, number, string]);
         (e6.payload.args: [string, number, string, number, string, number]);
-        (e7.payload.args: [
-          string,
-          number,
-          string,
-          number,
-          string,
-          number,
-          string
-        ]);
-        (e8.payload.args: [
-          string,
-          number,
-          string,
-          number,
-          string,
-          number,
-          string,
-          number
-        ]);
+        (e7.payload.args: [string, number, string, number, string, number, string]);
+        (e8.payload.args: [string, number, string, number, string, number, string, number]);
       });
 
       it("must passes when context isn't null", () => {
@@ -240,25 +195,8 @@ describe("cps effect", () => {
         (e4.payload.args: [string, number, string, number]);
         (e5.payload.args: [string, number, string, number, string]);
         (e6.payload.args: [string, number, string, number, string, number]);
-        (e7.payload.args: [
-          string,
-          number,
-          string,
-          number,
-          string,
-          number,
-          string
-        ]);
-        (e8.payload.args: [
-          string,
-          number,
-          string,
-          number,
-          string,
-          number,
-          string,
-          number
-        ]);
+        (e7.payload.args: [string, number, string, number, string, number, string]);
+        (e8.payload.args: [string, number, string, number, string, number, string, number]);
       });
 
       it("must passes when context isn't null", () => {

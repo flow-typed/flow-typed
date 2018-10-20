@@ -8,25 +8,12 @@ describe("apply(context, fn, [args])", () => {
   const fn0 = (): Promise<number> => Promise.resolve(1);
   const fn1 = (a: string): Promise<number> => Promise.resolve(1);
   const fn2 = (a: string, b: number): Promise<number> => Promise.resolve(1);
-  const fn3 = (a: string, b: number, c: string): Promise<number> =>
+  const fn3 = (a: string, b: number, c: string): Promise<number> => Promise.resolve(1);
+  const fn4 = (a: string, b: number, c: string, d: number): Promise<number> => Promise.resolve(1);
+  const fn5 = (a: string, b: number, c: string, d: number, e: string): Promise<number> =>
     Promise.resolve(1);
-  const fn4 = (a: string, b: number, c: string, d: number): Promise<number> =>
+  const fn6 = (a: string, b: number, c: string, d: number, e: string, f: number): Promise<number> =>
     Promise.resolve(1);
-  const fn5 = (
-    a: string,
-    b: number,
-    c: string,
-    d: number,
-    e: string
-  ): Promise<number> => Promise.resolve(1);
-  const fn6 = (
-    a: string,
-    b: number,
-    c: string,
-    d: number,
-    e: string,
-    f: number
-  ): Promise<number> => Promise.resolve(1);
   const fn7 = (
     a: string,
     b: number,
@@ -66,25 +53,8 @@ describe("apply(context, fn, [args])", () => {
       (c4.payload.args: [string, number, string, number]);
       (c5.payload.args: [string, number, string, number, string]);
       (c6.payload.args: [string, number, string, number, string, number]);
-      (c7.payload.args: [
-        string,
-        number,
-        string,
-        number,
-        string,
-        number,
-        string
-      ]);
-      (c8.payload.args: [
-        string,
-        number,
-        string,
-        number,
-        string,
-        number,
-        string,
-        number
-      ]);
+      (c7.payload.args: [string, number, string, number, string, number, string]);
+      (c8.payload.args: [string, number, string, number, string, number, string, number]);
     });
 
     it("must raises an error", () => {

@@ -1,13 +1,6 @@
 // @flow
 import { describe, it } from "flow-typed-test";
-import {
-  channel,
-  buffers,
-  END,
-  type TEnd,
-  type Channel,
-  type Buffer
-} from "redux-saga";
+import { channel, buffers, END, type TEnd, type Channel, type Buffer } from "redux-saga";
 
 describe("channel", () => {
   it("returned Channel must be read only object", () => {

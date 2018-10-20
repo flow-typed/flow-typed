@@ -18,23 +18,10 @@ describe("call() effect with normal function and without context", () => {
   function nfn4(a: string, b: number, c: boolean, d: string): number {
     return 1;
   }
-  function nfn5(
-    a: string,
-    b: number,
-    c: boolean,
-    d: string,
-    e: number
-  ): number {
+  function nfn5(a: string, b: number, c: boolean, d: string, e: number): number {
     return 1;
   }
-  function nfn6(
-    a: string,
-    b: number,
-    c: boolean,
-    d: string,
-    e: number,
-    f: boolean
-  ): number {
+  function nfn6(a: string, b: number, c: boolean, d: string, e: number, f: boolean): number {
     return 1;
   }
   function nfn7(
@@ -80,25 +67,8 @@ describe("call() effect with normal function and without context", () => {
       (c4.payload.args: [string, number, boolean, string]);
       (c5.payload.args: [string, number, boolean, string, number]);
       (c6.payload.args: [string, number, boolean, string, number, boolean]);
-      (c7.payload.args: [
-        string,
-        number,
-        boolean,
-        string,
-        number,
-        boolean,
-        string
-      ]);
-      (c8.payload.args: [
-        string,
-        number,
-        boolean,
-        string,
-        number,
-        boolean,
-        string,
-        number
-      ]);
+      (c7.payload.args: [string, number, boolean, string, number, boolean, string]);
+      (c8.payload.args: [string, number, boolean, string, number, boolean, string, number]);
     });
 
     it("must raises an error when passed number but need string", () => {

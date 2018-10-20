@@ -56,7 +56,6 @@ describe("actionChannel(Pattern, ?Buffer) effect", () => {
   describe("actionChannel(Pattern, Buffer)", () => {
     const ach0 = actionChannel("TEST", buffers.none());
 
-
     it("must passes when used properly", () => {
       (ach0.payload.buffer: Buffer<*>);
       (ach0.payload.pattern: string);
