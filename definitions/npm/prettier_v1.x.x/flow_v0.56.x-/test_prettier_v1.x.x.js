@@ -1,4 +1,4 @@
-import prettier from "prettier";
+import prettier, { type Options } from "prettier";
 
 const code = "let x =  10";
 
@@ -13,6 +13,10 @@ prettier.format(code, { printWidth: 80 });
 // $ExpectError (Options should have proper types)
 prettier.format(code, { parser: "flo" });
 prettier.format(code, { parser: "flow" });
+
+// $ExpectError (Same as above, but with explicit annotation)
+const badOptions: Options = { parser: "flo" };
+const goodOptions: Options = { parser: "flow" };
 
 // $ExpectError (Must pass in some source code)
 prettier.check();
