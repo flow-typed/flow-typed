@@ -452,21 +452,21 @@ declare module "redux-saga" {
   >;
 
   declare export type Effect =
-    | TakeEffect<*, *, *>
-    | PutEffect<*, *, *>
-    | CallEffect<*, *, *>
-    | ForkEffect<*, *, *, *>
-    | CpsEffect<*, *, *>
-    | JoinEffect<*>
-    | CancelEffect<*>
-    | SelectEffect<*, *>
     | ActionChannelEffect<*, *, *>
-    | FlushEffect<*>
+    | AllEffect
+    | CallEffect<*, *, *>
+    | CancelEffect<*>
     | CancelledEffect
-    | SetContextEffect<*>
+    | CpsEffect<*, *, *>
+    | FlushEffect<*>
+    | ForkEffect<*, *, *, *>
     | GetContextEffect<*>
+    | JoinEffect<*>
+    | PutEffect<*, *, *>
     | RaceEffect<*>
-    | AllEffect;
+    | SelectEffect<*, *>
+    | SetContextEffect<*>
+    | TakeEffect<*, *, *>;
 }
 
 declare module "redux-saga/effects" {
