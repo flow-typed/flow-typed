@@ -2668,53 +2668,84 @@ declare module "redux-saga/effects" {
   };
 
   declare export var throttle: {
-    // normal calls
-    <A, R, Fn: (action: A) => Saga<R>>(
-      ms: number,
-      pattern: Pattern,
+    <MS: number, P: Pattern | Channel<*>, A, R, Fn: (action: A) => R>(
+      ms: MS,
+      patternOrChannel: P,
       fn: Fn
-    ): ForkEffect<null, Function, void, []>,
-    <A, R, T1, Fn: (t1: T1, action: A) => Saga<R>>(
-      ms: number,
-      pattern: Pattern,
+    ): ForkEffect<null, Function, void, [MS, P, Fn]>,
+    <MS: number, P: Pattern | Channel<*>, A, R, T1, Fn: (t1: T1, action: A) => R>(
+      ms: MS,
+      patternOrChannel: P,
       fn: Fn,
       t1: T1
-    ): ForkEffect<null, Function, void, [T1]>,
-    <A, R, T1, T2, Fn: (t1: T1, t2: T2, action: A) => Saga<R>>(
-      ms: number,
-      pattern: Pattern,
+    ): ForkEffect<null, Function, void, [MS, P, Fn, T1]>,
+    <MS: number, P: Pattern | Channel<*>, A, R, T1, T2, Fn: (t1: T1, t2: T2, action: A) => R>(
+      ms: MS,
+      patternOrChannel: P,
       fn: Fn,
       t1: T1,
       t2: T2
-    ): ForkEffect<null, Function, void, [T1, T2]>,
-    <A, R, T1, T2, T3, Fn: (t1: T1, t2: T2, t3: T3, action: A) => Saga<R>>(
-      ms: number,
-      pattern: Pattern,
+    ): ForkEffect<null, Function, void, [MS, P, Fn, T1, T2]>,
+    <
+      MS: number,
+      P: Pattern | Channel<*>,
+      A,
+      R,
+      T1,
+      T2,
+      T3,
+      Fn: (t1: T1, t2: T2, t3: T3, action: A) => R
+    >(
+      ms: MS,
+      patternOrChannel: P,
       fn: Fn,
       t1: T1,
       t2: T2,
       t3: T3
-    ): ForkEffect<null, Function, void, [T1, T2, T3]>,
-    <A, R, T1, T2, T3, T4, Fn: (t1: T1, t2: T2, t3: T3, t4: T4, action: A) => Saga<R>>(
-      ms: number,
-      pattern: Pattern,
+    ): ForkEffect<null, Function, void, [MS, P, Fn, T1, T2, T3]>,
+    <
+      MS: number,
+      P: Pattern | Channel<*>,
+      A,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, action: A) => R
+    >(
+      ms: MS,
+      patternOrChannel: P,
       fn: Fn,
       t1: T1,
       t2: T2,
       t3: T3,
       t4: T4
-    ): ForkEffect<null, Function, void, [T1, T2, T3, T4]>,
-    <A, R, T1, T2, T3, T4, T5, Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, action: A) => Saga<R>>(
-      ms: number,
-      pattern: Pattern,
+    ): ForkEffect<null, Function, void, [MS, P, Fn, T1, T2, T3, T4]>,
+    <
+      MS: number,
+      P: Pattern | Channel<*>,
+      A,
+      R,
+      T1,
+      T2,
+      T3,
+      T4,
+      T5,
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, action: A) => R
+    >(
+      ms: MS,
+      patternOrChannel: P,
       fn: Fn,
       t1: T1,
       t2: T2,
       t3: T3,
       t4: T4,
       t5: T5
-    ): ForkEffect<null, Function, void, [T1, T2, T3, T4, T5]>,
+    ): ForkEffect<null, Function, void, [MS, P, Fn, T1, T2, T3, T4, T5]>,
     <
+      MS: number,
+      P: Pattern | Channel<*>,
       A,
       R,
       T1,
@@ -2723,10 +2754,10 @@ declare module "redux-saga/effects" {
       T4,
       T5,
       T6,
-      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, action: A) => Saga<R>
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, action: A) => R
     >(
-      ms: number,
-      pattern: Pattern,
+      ms: MS,
+      patternOrChannel: P,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2734,8 +2765,10 @@ declare module "redux-saga/effects" {
       t4: T4,
       t5: T5,
       t6: T6
-    ): ForkEffect<null, Function, void, [T1, T2, T3, T4, T5, T6]>,
+    ): ForkEffect<null, Function, void, [MS, P, Fn, T1, T2, T3, T4, T5, T6]>,
     <
+      MS: number,
+      P: Pattern | Channel<*>,
       A,
       R,
       T1,
@@ -2745,10 +2778,10 @@ declare module "redux-saga/effects" {
       T5,
       T6,
       T7,
-      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7, action: A) => Saga<R>
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7, action: A) => R
     >(
-      ms: number,
-      pattern: Pattern,
+      ms: MS,
+      pattern: P,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2757,8 +2790,10 @@ declare module "redux-saga/effects" {
       t5: T5,
       t6: T6,
       t7: T7
-    ): ForkEffect<null, Function, void, [T1, T2, T3, T4, T5, T6, T7]>,
+    ): ForkEffect<null, Function, void, [MS, P, Fn, T1, T2, T3, T4, T5, T6, T7]>,
     <
+      MS: number,
+      P: Pattern | Channel<*>,
       A,
       R,
       T1,
@@ -2769,10 +2804,10 @@ declare module "redux-saga/effects" {
       T6,
       T7,
       T8,
-      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7, t8: T8, action: A) => Saga<R>
+      Fn: (t1: T1, t2: T2, t3: T3, t4: T4, t5: T5, t6: T6, t7: T7, t8: T8, action: A) => R
     >(
-      ms: number,
-      pattern: Pattern,
+      ms: MS,
+      pattern: P,
       fn: Fn,
       t1: T1,
       t2: T2,
@@ -2782,6 +2817,6 @@ declare module "redux-saga/effects" {
       t6: T6,
       t7: T7,
       t8: T8
-    ): ForkEffect<null, Function, void, [T1, T2, T3, T4, T5, T6, T7, T8]>
+    ): ForkEffect<null, Function, void, [MS, P, Fn, T1, T2, T3, T4, T5, T6, T7, T8]>
   };
 }
