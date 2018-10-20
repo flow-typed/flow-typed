@@ -42,6 +42,13 @@ prettier.formatWithCursor(code, { cursorOffset: 10 });
 prettier.resolveConfig();
 prettier.resolveConfig("/path");
 
+const asyncConfig = prettier.resolveConfig("/path");
+if (asyncConfig != null) {
+  // $ExpectError (Returns promise)
+  (asyncConfig.printWidth: number);
+}
+(prettier.resolveConfig("/path"): Promise<?{ printWidth?: number }>);
+
 // $ExpectError (Options should have proper types)
 prettier.resolveConfig("/path", { useCache: "true" });
 prettier.resolveConfig("/path", { useCache: true });
@@ -49,6 +56,13 @@ prettier.resolveConfig("/path", { useCache: true });
 // $ExpectError (Must include filePath)
 prettier.resolveConfig.sync();
 prettier.resolveConfig.sync("/path");
+
+const syncConfig = prettier.resolveConfig.sync("/path");
+if (syncConfig != null) {
+  (syncConfig.printWidth: void | number);
+}
+// $ExpectError (Does not return promise)
+(syncConfig: Promise<?{ printWidth?: number }>);
 
 // $ExpectError (Options should have proper types)
 prettier.resolveConfig.sync("/path", { useCache: "true" });
