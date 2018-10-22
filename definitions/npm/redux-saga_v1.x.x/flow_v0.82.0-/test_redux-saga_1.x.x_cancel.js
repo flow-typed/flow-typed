@@ -20,7 +20,7 @@ describe("cancel(task)", () => {
 
     it("returned object must be exact", () => {
       // $ExpectError: exact type
-      c.abc = 666;
+      c.abc = 69;
     });
   });
 

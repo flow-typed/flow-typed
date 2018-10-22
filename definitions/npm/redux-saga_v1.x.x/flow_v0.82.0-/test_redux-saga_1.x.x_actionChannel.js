@@ -20,7 +20,7 @@ describe("actionChannel(Pattern, ?Buffer) effect", () => {
 
     it("returned object must be exact", () => {
       // $ExpectError: exact type
-      ach.abc = 666;
+      ach.abc = 69;
     });
   });
 

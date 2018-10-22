@@ -19,7 +19,7 @@ describe("retry effect", () => {
 
     it("returned object must be exact", () => {
       // $ExpectError: exact type
-      c.abc = 666;
+      c.abc = 69;
     });
   });
 
@@ -45,6 +45,29 @@ describe("retry effect", () => {
     function nfn6(a: string, b: number, c: boolean, d: string, e: number, f: boolean): number {
       return 1;
     }
+    function nfn7(
+      a: string,
+      b: number,
+      c: boolean,
+      d: string,
+      e: number,
+      f: boolean,
+      g: string
+    ): number {
+      return 1;
+    }
+    function nfn8(
+      a: string,
+      b: number,
+      c: boolean,
+      d: string,
+      e: number,
+      f: boolean,
+      g: string,
+      h: number
+    ): number {
+      return 1;
+    }
 
     const [maxTries, delayMs] = [0, 0];
 
@@ -55,6 +78,8 @@ describe("retry effect", () => {
     const c4 = retry(maxTries, delayMs, nfn4, "1", 2, true, "4");
     const c5 = retry(maxTries, delayMs, nfn5, "1", 2, true, "4", 5);
     const c6 = retry(maxTries, delayMs, nfn6, "1", 2, true, "4", 5, false);
+    const c7 = retry(maxTries, delayMs, nfn6, "1", 2, true, "4", 5, false, "7");
+    const c8 = retry(maxTries, delayMs, nfn6, "1", 2, true, "4", 5, false, "8", 8);
 
     describe("arguments tests", () => {
       it("must passes when used properly", () => {
@@ -74,6 +99,31 @@ describe("retry effect", () => {
           string,
           number,
           boolean
+        ]);
+        (c7.payload.args: [
+          number,
+          number,
+          typeof nfn7,
+          string,
+          number,
+          boolean,
+          string,
+          number,
+          boolean,
+          string
+        ]);
+        (c8.payload.args: [
+          number,
+          number,
+          typeof nfn8,
+          string,
+          number,
+          boolean,
+          string,
+          number,
+          boolean,
+          string,
+          number
         ]);
       });
 
@@ -100,6 +150,8 @@ describe("retry effect", () => {
       (c4.payload.fn: Function);
       (c5.payload.fn: Function);
       (c6.payload.fn: Function);
+      (c7.payload.fn: Function);
+      (c8.payload.fn: Function);
     });
 
     it("must haven't context", () => {
@@ -109,6 +161,8 @@ describe("retry effect", () => {
       (c4.payload.context: null);
       (c5.payload.context: null);
       (c6.payload.context: null);
+      (c7.payload.context: null);
+      (c8.payload.context: null);
     });
   });
 });
