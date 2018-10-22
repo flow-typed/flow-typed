@@ -6935,10 +6935,10 @@ declare module "sequelize" {
      * @param options These options are merged with the default define options provided to the Sequelize
     constructor
     */
-    define<TAttributes, TPlainAttributes, TInstance: Model<TAttributes, TPlainAttributes>>(
+    define<TAttributes, TPlainAttributes>(
       modelName: string,
       attributes: DefineAttributes,
-      options?: DefineOptions<TInstance>): Class<TInstance>,
+      options?: DefineOptions<Model<TAttributes, TPlainAttributes>>): Class<Model<TAttributes, TPlainAttributes>>,
 
     /**
      * Fetch a Model which is already defined
