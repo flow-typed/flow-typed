@@ -3,8 +3,7 @@ import { describe, it } from "flow-typed-test";
 import { END } from "redux-saga";
 
 describe("END", () => {
-  it("must import END object with type symbol", () => {
-    // I use string because Symbol don't supported flow.js
+  it("must import END object with type property", () => {
     (END.type: "@@redux-saga/CHANNEL_END");
   });
 

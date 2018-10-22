@@ -335,7 +335,7 @@ declare module "redux-saga" {
 
   declare export type JoinEffect<T: Task<*> | Array<Task<*>>> = IEffect<"JOIN", T>;
 
-  declare export type SELF_CANCELLATION = "@@redux-saga/SELF_CANCELLATION"; // Symbol
+  declare export type SELF_CANCELLATION = "@@redux-saga/SELF_CANCELLATION";
 
   declare export type CancelEffect<
     T: Task<*> | $ReadOnlyArray<Task<*>> | SELF_CANCELLATION
