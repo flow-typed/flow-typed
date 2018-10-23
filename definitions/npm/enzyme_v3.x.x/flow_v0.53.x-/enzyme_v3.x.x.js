@@ -23,7 +23,7 @@ declare module "enzyme" {
     containsAllMatchingElements(nodes: NodeOrNodes): boolean,
     containsAnyMatchingElements(nodes: NodeOrNodes): boolean,
     dive(option?: { context?: Object }): this,
-    exists(selector: EnzymeSelector): boolean,
+    exists(selector?: EnzymeSelector): boolean,
     isEmptyRender(): boolean,
     matchesElement(node: React.Node): boolean,
     hasClass(className: string): boolean,
