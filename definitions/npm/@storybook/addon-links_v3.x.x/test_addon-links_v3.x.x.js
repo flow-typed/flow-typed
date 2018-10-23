@@ -6,6 +6,23 @@ import React from 'react';
 import { linkTo, hrefTo } from '@storybook/addon-links';
 import LinkTo from '@storybook/addon-links/react';
 
+const Button = (props: {
+  onClick: (SyntheticMouseEvent<HTMLButtonElement>) => void,
+}) => (
+  <button type="button" {...props}>
+    Click me
+  </button>
+);
+
+const Select = (props: {
+  onChange: (SyntheticInputEvent<HTMLSelectElement>) => void,
+}) => (
+  <select {...props}>
+    <option>First</option>
+    <option>Second</option>
+  </select>
+);
+
 describe('The `linkTo` function', () => {
   it('should accept string arguments', () => {
     linkTo('');
@@ -18,7 +35,13 @@ describe('The `linkTo` function', () => {
   });
 
   it('should returns an event handler', () => {
-    <div onClick={linkTo('', '')} />;
+    <button onClick={linkTo('', '')} />;
+    <Button onClick={linkTo('', '')} />;
+    <select onChange={linkTo('', e => e.currentTarget.value)}>
+      <option>First</option>
+      <option>Second</option>
+    </select>;
+    <Select onChange={linkTo('', e => e.currentTarget.value)} />;
   });
 
   it('should error on invalid args', () => {
