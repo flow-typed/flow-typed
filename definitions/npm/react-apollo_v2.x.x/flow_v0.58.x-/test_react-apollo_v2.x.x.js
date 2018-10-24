@@ -4,6 +4,7 @@ import { it, describe } from "flow-typed-test";
 import {
   ApolloProvider,
   ApolloConsumer,
+  compose,
   Query,
   Mutation,
   Subscription,
@@ -47,6 +48,10 @@ type IQuery = {
 };
 
 const withData: OperationComponent<IQuery> = graphql(query);
+
+// Compose exists and passes type checking
+const noop = (val) => val;
+compose(noop, noop)(true);
 
 it("works with functional component", () => {
   const FunctionalWithData = withData(({ data }) => {
