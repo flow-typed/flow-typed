@@ -613,103 +613,99 @@ declare module "rxjs" {
       scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<number>,
     merge: (<T>(
-      v1: rxjs$ObservableInput<T>,
-      scheduler?: rxjs$SchedulerLike
+      ...observables: (rxjs$ObservableInput<T> | rxjs$SchedulerLike | number)[]
     ) => rxjs$Observable<T>) &
-      (<T>(
-        v1: rxjs$ObservableInput<T>,
-        concurrent?: number,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T>) &
-      (<T, T2>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2>) &
-      (<T, T2>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        concurrent?: number,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2>) &
-      (<T, T2, T3>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        v3: rxjs$ObservableInput<T3>,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2 | T3>) &
-      (<T, T2, T3>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        v3: rxjs$ObservableInput<T3>,
-        concurrent?: number,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2 | T3>) &
-      (<T, T2, T3, T4>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        v3: rxjs$ObservableInput<T3>,
-        v4: rxjs$ObservableInput<T4>,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2 | T3 | T4>) &
-      (<T, T2, T3, T4>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        v3: rxjs$ObservableInput<T3>,
-        v4: rxjs$ObservableInput<T4>,
-        concurrent?: number,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2 | T3 | T4>) &
-      (<T, T2, T3, T4, T5>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        v3: rxjs$ObservableInput<T3>,
-        v4: rxjs$ObservableInput<T4>,
-        v5: rxjs$ObservableInput<T5>,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2 | T3 | T4 | T5>) &
-      (<T, T2, T3, T4, T5>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        v3: rxjs$ObservableInput<T3>,
-        v4: rxjs$ObservableInput<T4>,
-        v5: rxjs$ObservableInput<T5>,
-        concurrent?: number,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2 | T3 | T4 | T5>) &
-      (<T, T2, T3, T4, T5, T6>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        v3: rxjs$ObservableInput<T3>,
-        v4: rxjs$ObservableInput<T4>,
-        v5: rxjs$ObservableInput<T5>,
-        v6: rxjs$ObservableInput<T6>,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2 | T3 | T4 | T5 | T6>) &
-      (<T, T2, T3, T4, T5, T6>(
-        v1: rxjs$ObservableInput<T>,
-        v2: rxjs$ObservableInput<T2>,
-        v3: rxjs$ObservableInput<T3>,
-        v4: rxjs$ObservableInput<T4>,
-        v5: rxjs$ObservableInput<T5>,
-        v6: rxjs$ObservableInput<T6>,
-        concurrent?: number,
-        scheduler?: rxjs$SchedulerLike
-      ) => rxjs$Observable<T | T2 | T3 | T4 | T5 | T6>) &
-      (<T>(
-        ...observables: (
-          | rxjs$ObservableInput<T>
-          | rxjs$SchedulerLike
-          | number
-        )[]
-      ) => rxjs$Observable<T>) &
       (<T, R>(
         ...observables: (
           | rxjs$ObservableInput<any>
           | rxjs$SchedulerLike
           | number
         )[]
-      ) => rxjs$Observable<R>),
+      ) => rxjs$Observable<R>) &
+      (<T>(
+        v1: rxjs$ObservableInput<T>,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T>) &
+      (<T>(
+        v1: rxjs$ObservableInput<T>,
+        concurrent?: number,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T>) &
+      (<T, T2>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2>) &
+      (<T, T2>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        concurrent?: number,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2>) &
+      (<T, T2, T3>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        v3: rxjs$ObservableInput<T3>,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2 | T3>) &
+      (<T, T2, T3>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        v3: rxjs$ObservableInput<T3>,
+        concurrent?: number,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2 | T3>) &
+      (<T, T2, T3, T4>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        v3: rxjs$ObservableInput<T3>,
+        v4: rxjs$ObservableInput<T4>,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2 | T3 | T4>) &
+      (<T, T2, T3, T4>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        v3: rxjs$ObservableInput<T3>,
+        v4: rxjs$ObservableInput<T4>,
+        concurrent?: number,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2 | T3 | T4>) &
+      (<T, T2, T3, T4, T5>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        v3: rxjs$ObservableInput<T3>,
+        v4: rxjs$ObservableInput<T4>,
+        v5: rxjs$ObservableInput<T5>,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2 | T3 | T4 | T5>) &
+      (<T, T2, T3, T4, T5>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        v3: rxjs$ObservableInput<T3>,
+        v4: rxjs$ObservableInput<T4>,
+        v5: rxjs$ObservableInput<T5>,
+        concurrent?: number,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2 | T3 | T4 | T5>) &
+      (<T, T2, T3, T4, T5, T6>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        v3: rxjs$ObservableInput<T3>,
+        v4: rxjs$ObservableInput<T4>,
+        v5: rxjs$ObservableInput<T5>,
+        v6: rxjs$ObservableInput<T6>,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2 | T3 | T4 | T5 | T6>) &
+      (<T, T2, T3, T4, T5, T6>(
+        v1: rxjs$ObservableInput<T>,
+        v2: rxjs$ObservableInput<T2>,
+        v3: rxjs$ObservableInput<T3>,
+        v4: rxjs$ObservableInput<T4>,
+        v5: rxjs$ObservableInput<T5>,
+        v6: rxjs$ObservableInput<T6>,
+        concurrent?: number,
+        scheduler?: rxjs$SchedulerLike
+      ) => rxjs$Observable<T | T2 | T3 | T4 | T5 | T6>),
     of: (<T>(a: T, scheduler?: rxjs$SchedulerLike) => rxjs$Observable<T>) &
       (<T, T2>(
         a: T,
