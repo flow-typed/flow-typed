@@ -2,16 +2,18 @@
 
 import RoutesBuiler, { type Routes } from 'next-routes';
 
-const Router: Routes = RoutesBuiler();
+const routes: Routes = RoutesBuiler();
 
 // $ExpectError
-Router.add();
+routes.add();
 
-const routerV2: Routes = Router.add('about')
-.add('blog', '/blog/:slug')
-.add('user', '/user/:id', 'profile')
-.add('/:noname/:lang(en|es)/:wow+', 'complex')
-.add({name: 'beta', pattern: '/v3', page: 'v3'});
+const routesV2: Routes = routes.add('about')
+  .add('blog', '/blog/:slug')
+  .add('user', '/user/:id', 'profile')
+  .add('/:noname/:lang(en|es)/:wow+', 'complex')
+  .add({name: 'beta', pattern: '/v3', page: 'v3'});
+
+const Router = routes.Router;
 
 Router.pushRoute('blog', {slug: 'hello-world'});
 Router.pushRoute('/blog/hello-world');
@@ -36,3 +38,16 @@ Router.replaceRoute();
 
 // $ExpectError
 Router.prefetchRoute();
+
+// $ExpectError
+Router.events.on('unknown', (url: string) => {});
+// $ExpectError
+Router.events.off('unknown', (url: string) => {});
+
+Router.events.on('routeChangeStart', (url: string) => {});
+Router.events.off('routeChangeStart', (url: string) => {});
+
+Router.events
+  .on("routeChangeStart", (url: string) => {})
+  .on("routeChangeComplete", (url: string) => {})
+  .on("routeChangeError", () => {});

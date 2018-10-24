@@ -56,9 +56,9 @@ declare module "next" {
   declare export type Page<T, S> = {
     ...React$Component<T, S>,
     getInitialProps: (ctx: Context) => Promise<*>
-  }
+  };
 
-  declare export default (opts: Options) => NextApp
+  declare export default (opts: Options) => NextApp;
 }
 
 declare module "next/head" {
@@ -91,7 +91,7 @@ declare module "next/link" {
     passHref?: boolean
   };
 
-  declare export default Class<React$Component<Props>>
+  declare export default Class<React$Component<Props>>;
 }
 
 declare module "next/router" {
@@ -102,9 +102,20 @@ declare module "next/router" {
     url: string
   ) => void;
 
-  declare export type EventEmitter = {
-    on: (event: string, cb: RouteCallback | RouteErrorCallback) => EventEmitter,
-    off: (event: string, cb: RouteCallback | RouteErrorCallback) => EventEmitter
+  declare export interface RouterEvents {
+    on(event: "routeChangeStart", cb: RouteCallback): RouterEvents,
+    on(event: "routeChangeComplete", cb: RouteCallback): RouterEvents,
+    on(event: "routeChangeError", cb: RouteErrorCallback): RouterEvents,
+    on(event: "beforeHistoryChange", cb: RouteCallback): RouterEvents,
+    on(event: "hashChangeStart", cb: RouteCallback): RouterEvents,
+    on(event: "hashChangeComplete", cb: RouteCallback): RouterEvents,
+
+    off(event: "routeChangeStart", cb: RouteCallback): RouterEvents,
+    off(event: "routeChangeComplete", cb: RouteCallback): RouterEvents,
+    off(event: "routeChangeError", cb: RouteErrorCallback): RouterEvents,
+    off(event: "beforeHistoryChange", cb: RouteCallback): RouterEvents,
+    off(event: "hashChangeStart", cb: RouteCallback): RouterEvents,
+    off(event: "hashChangeComplete", cb: RouteCallback): RouterEvents
   }
 
   declare export type EventChangeOptions = {
@@ -116,14 +127,14 @@ declare module "next/router" {
     url: string,
     as: ?string,
     options: EventChangeOptions
-  }) => boolean
+  }) => boolean;
 
   declare export type Router = {
     +route: string,
     +pathname: string,
     +asPath: string,
     +query: Object,
-    events: EventEmitter,
+    events: RouterEvents,
     push(
       url: string,
       as: ?string,
@@ -142,7 +153,7 @@ declare module "next/router" {
     Component: React$ComponentType<T & { router: Router }>
   ): Class<React$Component<T>>;
 
-  declare export default Router
+  declare export default Router;
 }
 
 declare module "next/document" {
@@ -154,12 +165,12 @@ declare module "next/document" {
   declare export default Class<React$Component<any, any>> & {
     getInitialProps: (ctx: Context) => Promise<*>,
     renderPage(cb: Function): void
-  }
+  };
 }
 
 declare module "next/app" {
   import type { Context, Page } from "next";
-  import type { Router } from "next/router"
+  import type { Router } from "next/router";
 
   declare export var Container: Class<React$Component<any, any>>;
 
@@ -167,33 +178,38 @@ declare module "next/app" {
     Component: Page<any, any>,
     router: Router,
     ctx: Context
-  }
+  };
 
   declare export default Class<React$Component<any, any>> & {
     getInitialProps: (appInitialProps: AppInitialProps) => Promise<*>
-  }
+  };
 }
 
 declare module "next/dynamic" {
-
-  declare type ImportedComponent = Promise<null|React$ElementType>
-  declare type ComponentMapping = {[componentName: string]: ImportedComponent}
+  declare type ImportedComponent = Promise<null | React$ElementType>;
+  declare type ComponentMapping = {
+    [componentName: string]: ImportedComponent
+  };
 
   declare type NextDynamicOptions = {
-    loader?: ComponentMapping | () => ImportedComponent,
+    loader?: ComponentMapping | (() => ImportedComponent),
     loading?: React$ElementType,
     timeout?: number,
     delay?: number,
     ssr?: boolean,
-    render?: (props: any, loaded: {[componentName: string]: React$ElementType}) => React$ElementType,
+    render?: (
+      props: any,
+      loaded: { [componentName: string]: React$ElementType }
+    ) => React$ElementType,
     modules?: () => ComponentMapping,
     loadableGenerated?: {
       webpack?: any,
       modules?: any
     }
-  }
+  };
 
   declare export default function dynamic(
     dynamicOptions: any,
-    options: ?NextDynamicOptions): Object
+    options: ?NextDynamicOptions
+  ): Object;
 }
