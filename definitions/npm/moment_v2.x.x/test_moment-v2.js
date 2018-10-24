@@ -85,6 +85,13 @@ describe('Parse, moment()', () => {
   moment(new Date());
   // https://momentjs.com/docs/#/parsing/moment-clone/
   moment(moment());
+
+  // Moment project also allows null and undefined to be passed in,
+  // at least if you look at their TypeScript definitions.
+  // https://github.com/moment/moment/commit/c891a4fcb0492539184eac73229b7a8053a5bbf8
+  // https://github.com/moment/moment/blob/2.22.2/moment.d.ts#L400
+  moment(null);
+  moment(undefined);
 });
 
 // https://momentjs.com/docs/#/parsing/unix-timestamp/
@@ -136,6 +143,12 @@ describe('Parse, moment.utc()', () => {
   moment.utc("2010-01-01T05:06:07", ["YYYY", moment.ISO_8601]);
   moment.utc(new Date());
   moment.utc(moment());
+
+  // null and undefined allowed as per moment TypeScript definitions
+  // https://github.com/moment/moment/blob/2.22.2/moment.d.ts#L400
+  // https://github.com/moment/moment/blob/2.22.2/moment.d.ts#L622
+  moment.utc(null);
+  moment.utc(undefined);
 });
 
 // https://momentjs.com/docs/#/parsing/parse-zone/
@@ -153,6 +166,12 @@ describe('Parse, moment.parseZone()', () => {
 
   // $ExpectError needs a format string before the strictness flag
   moment.parseZone("2013-01-01T00:00:00-13:00", true);
+
+  // null and undefined allowed as per moment TypeScript definitions
+  // https://github.com/moment/moment/blob/2.22.2/moment.d.ts#L400
+  // https://github.com/moment/moment/blob/2.22.2/moment.d.ts#L650
+  moment.parseZone(null);
+  moment.parseZone(undefined);
 
   it('is invalid to use special, undocumented formats', () => {
     // The following cases do generate valid moment objects, but this
