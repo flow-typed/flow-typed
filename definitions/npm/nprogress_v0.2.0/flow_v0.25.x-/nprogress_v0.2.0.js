@@ -2,21 +2,21 @@ declare module "nprogress" {
   declare type NProgressStatic = {
     /**
      * Shows the progress bar and begins trickling progress.
-     * @returns {NProgressConfigureOptions} The current NProgress object, useful for chaining.
+     * @returns {NProgressStatic} The current NProgress object, useful for chaining.
      */
     start(): NProgressStatic,
 
     /**
      * Finishes loading by transitioning it to 100%, then fading out.
      * @param {boolean} forceShow Forces the progress bar to show, even if it's not being shown. (The default behavior is that .done() will not do anything if .start() isn't called.)
-     * @returns {NProgressConfigureOptions} The current NProgress object, useful for chaining.
+     * @returns {NProgressStatic} The current NProgress object, useful for chaining.
      */
     done(forceShow?: boolean): NProgressStatic,
 
     /**
      * Increments the progress bar with a set amount, or a random amount if not provided.
      * @param {number} amount This will get the current status value and adds the value until status is max 0.994
-     * @returns {NProgressConfigureOptions} The current NProgress object, useful for chaining.
+     * @returns {NProgressStatic} The current NProgress object, useful for chaining.
      */
     inc(amount?: number): NProgressStatic,
 
@@ -28,14 +28,14 @@ declare module "nprogress" {
     /**
      * Sets the progress percentage.
      * @param {number} progressPercent A number between 0.0 and 1.0 that represents the progress percentage.
-     * @returns {NProgressConfigureOptions} The current NProgress object, useful for chaining.
+     * @returns {NProgressStatic} The current NProgress object, useful for chaining.
      */
     set(progressPercent: number): NProgressStatic,
 
     /**
      * Configures the progress indicator.
      * @param {NProgressConfigureOptions} options An object containing the configuration options.
-     * @returns {NProgressConfigureOptions} The current NProgress object, useful for chaining.
+     * @returns {NProgressStatic} The current NProgress object, useful for chaining.
      */
     configure(options: NProgressConfigureOptions): NProgressStatic,
 
