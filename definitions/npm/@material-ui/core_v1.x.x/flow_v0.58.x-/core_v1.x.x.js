@@ -2178,13 +2178,15 @@ declare module "@material-ui/core/styles/createTypography" {
   };
 
   declare type TypographyUtils = {
-    pxToRem: (px: number) => string,
-    useNextVariants: boolean
+    pxToRem: (px: number) => string
   };
 
   declare export type Typography = { [style: TextStyle]:  $Shape<TypographyStyle> } & FontStyle & TypographyUtils;
 
-  declare export type TypographyOptions = $Shape<{ [style: TextStyle]:  $Shape<TypographyStyle> } & FontStyle>;
+  declare export type TypographyOptions = $Shape<{
+    [style: TextStyle]:  $Shape<TypographyStyle>,
+    useNextVariants: boolean
+  } & FontStyle>;
 
   declare module.exports: (
     palette: Palette,
