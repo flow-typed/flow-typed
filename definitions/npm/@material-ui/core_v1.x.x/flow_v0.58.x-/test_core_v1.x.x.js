@@ -186,6 +186,9 @@ const customTheme = () => (
       type: 'dark',
       primary: {main: '#0707f8'},
       tonalOffset: 0.15,
+    },
+    typography: {
+      useNextVariants: true
     }
   })
 )
