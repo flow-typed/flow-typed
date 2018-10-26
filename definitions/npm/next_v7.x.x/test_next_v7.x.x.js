@@ -62,6 +62,11 @@ app.setAssetPrefix('');
 // $ExpectError
 Router.onRouteChangeStart = {};
 
+// $ExpectError
+Router.events.on('unknown', (url: string) => {});
+// $ExpectError
+Router.events.off('unknown', (url: string) => {});
+
 Router.events.on('routeChangeStart', (url: string) => {});
 Router.events.off('routeChangeStart', (url: string) => {});
 
