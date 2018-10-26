@@ -1018,4 +1018,6 @@ declare module "react-apollo" {
     onError?: (error: ApolloError) => mixed,
     context?: { [string]: any }
   }> {}
+
+  declare export var compose: $Compose;
 }
