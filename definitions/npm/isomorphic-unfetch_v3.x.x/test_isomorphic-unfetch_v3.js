@@ -32,9 +32,9 @@ isoUnfetch('foo').then(res => {
     // $ExpectError
     (res.headers.delete(5): void);
     (res.headers.entries(): Iterator<*>);
-    (res.headers.get('test'): string);
+    (res.headers.get('test'): null | string);
     // $ExpectError
-    (res.headers.get(5): string);
+    (res.headers.get(5): null | string);
     (res.headers.has('foo'): boolean);
     // $ExpectError
     (res.headers.has(5): boolean);
