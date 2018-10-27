@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
 import withTheme from "@material-ui/core/styles/withTheme";
+import withMobileDialog from "@material-ui/core/withMobileDialog";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { createMuiTheme } from "@material-ui/core";
@@ -258,3 +259,41 @@ const createMuiCustomThemeInvalidNestedOptions = () => (
 const createMuiCustomThemeWithoutAnyOptions = () => (
   createMuiTheme()
 )
+
+// ****** TEST withMobileDialog ********
+class WithMobileComponent extends React.Component<{
+  fullScreen: boolean,
+  requiredProp: string
+}> {
+  render() {
+    return null;
+  }
+}
+
+const ResponsiveComponent = withMobileDialog()(WithMobileComponent)
+function renderResponsiveComponent () {
+  return (
+    <ResponsiveComponent requiredProp='it works' />
+  )
+}
+
+function renderResponsiveComponentWithError () {
+  return (
+    // $ExpectError is missing required prop
+    <ResponsiveComponent />
+  )
+}
+
+// it should support chained with other HOC
+// test with typical use case: withStyles
+const ChainedWithMobileComponent = withStyles({})(ResponsiveComponent);
+function renderChainedWithMobileComponent () {
+  return (
+    [
+      // doesn't require the prop "fullScreen"
+      <ChainedWithMobileComponent requiredProp='test' />,
+      // $ExpectError - but still requires other defined props
+      <ChainedWithMobileComponent />
+    ]
+  )
+}
