@@ -492,7 +492,7 @@ declare module "@material-ui/core/withMobileDialog/withMobileDialog" {
   import type { WithWidth } from '@material-ui/core/withWidth/withWidth';
 
   declare type WithMobileDialog = {
-    fullScreen: void | boolean
+    fullScreen?: boolean
   } & WithWidth
 
   declare module.exports: (
@@ -3098,8 +3098,8 @@ declare module "@material-ui/core/withWidth/withWidth" {
   import type {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
 
   declare export type WithWidth = {
-    width: void | Breakpoint,
-    innerRef: void | (React$Ref<any> | {current: React$ElementRef<any> | null})
+    width?: Breakpoint,
+    innerRef?: (React$Ref<any> | {current: React$ElementRef<any> | null})
   }
 
   declare module.exports: (options?: {|
