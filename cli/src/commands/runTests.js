@@ -87,6 +87,16 @@ async function getTestGroups(
   });
 }
 
+function printSkipMessage(flowVersion, githubUrl) {
+  console.log(
+    '==========================================================================================',
+  );
+  console.log(`We are temporarily skipping ${flowVersion} due to ${githubUrl}`);
+  console.log(
+    '==========================================================================================',
+  );
+}
+
 /**
  * Memoized function that queries the GitHub releases for Flow, downloads the
  * zip for each version, extracts the zip, and moves the binary to
@@ -117,48 +127,34 @@ async function getOrderedFlowBinVersions(
 
     const flowBins = apiPayload.data
       .filter(rel => {
-        // Temporary fix for https://github.com/facebook/flow/issues/5922
-        if (rel.tag_name === 'v0.67.0') {
-          console.log(
-            '==========================================================================================',
-          );
-          console.log(
-            'We are temporarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
-          );
-          console.log(
-            '==========================================================================================',
+        if (rel.tag_name === 'v0.84.0') {
+          printSkipMessage(
+            rel.tag_name,
+            'https://github.com/facebook/flow/issues/7108',
           );
           return false;
-        }
-
-        // Temporary fixes for https://github.com/flowtype/flow-typed/issues/2422
-        if (rel.tag_name === 'v0.63.0' || rel.tag_name === 'v0.70.0') {
-          console.log(
-            '==========================================================================================',
-          );
-          console.log(
-            `We are temporarily skipping ${
-              rel.tag_name
-            } due to https://github.com/flowtype/flow-typed/issues/2422`,
-          );
-          console.log(
-            '==========================================================================================',
+        } else if (rel.tag_name === 'v0.67.0') {
+          printSkipMessage(
+            rel.tag_name,
+            'https://github.com/facebook/flow/issues/5922',
           );
           return false;
-        }
-
-        // We only support flow 0.53.0 and newer
-        if (semver.lt(rel.tag_name, '0.53.0')) {
+        } else if (rel.tag_name === 'v0.63.0' || rel.tag_name === 'v0.70.0') {
+          printSkipMessage(
+            rel.tag_name,
+            'https://github.com/flowtype/flow-typed/issues/2422',
+          );
           return false;
-        }
-
-        // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
-        if (
+        } else if (semver.lt(rel.tag_name, '0.53.0')) {
+          console.log('flow-typed only supports flow 0.53.0 and newer');
+          return false;
+        } else if (
           IS_WINDOWS &&
           (semver.eq(rel.tag_name, '0.57.0') ||
             semver.eq(rel.tag_name, '0.57.1') ||
             semver.eq(rel.tag_name, '0.57.2'))
         ) {
+          // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
           return false;
         }
         return true;
