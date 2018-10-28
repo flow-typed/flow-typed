@@ -490,6 +490,8 @@ if (date.equals(new Date())) {
 (date.setLocale("de-DE"): DateTime);
 
 (date.setZone("America/Detroit"): DateTime);
+(date.setZone("America/Detroit", {keepCalendarTime: true}): DateTime); // Support deprecated name for keepLocalTime
+(date.setZone("America/Detroit", {keepLocalTime: true}): DateTime);
 (date.setZone(new CustomZone()): DateTime);
 
 (date.toBSON(): Date);
@@ -580,7 +582,8 @@ date.toObject({ includeConfig: false }).numberingSystem;
 
 (date.toUTC(): DateTime);
 (date.toUTC(32): DateTime);
-(date.toUTC(32, { keepCalendarTime: true }): DateTime);
+(date.toUTC(32, { keepCalendarTime: true }): DateTime); // Support deprecated name for keepLocalTime
+(date.toUTC(32, { keepLocalTime: true }): DateTime);
 
 (date.until(DateTime.utc()): Duration);
 
