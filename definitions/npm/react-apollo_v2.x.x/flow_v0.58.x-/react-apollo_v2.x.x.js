@@ -781,7 +781,8 @@ declare module "react-apollo" {
     fetchPolicy?: FetchPolicy,
     pollInterval?: number,
     skip?: boolean,
-    errorPolicy?: ErrorPolicy
+    errorPolicy?: ErrorPolicy,
+    context?: { [key: string]: any }
   |};
 
   declare export interface GraphqlQueryControls<
