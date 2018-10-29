@@ -17,6 +17,6 @@ describe("math-random", () => {
   });
 
   it('provides a property to check if random is "cryptographic"', () => {
-    (random.cryptographic: boolean);
+    (random.cryptographic: ?boolean);
   });
 });
