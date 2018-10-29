@@ -1,4 +1,4 @@
-import type { Server } from "http";
+import * as http from "http";
 import type { Socket } from "net";
 
 declare type express$RouterOptions = {
@@ -216,15 +216,15 @@ declare class express$Application extends express$Router mixins events$EventEmit
     hostname?: string,
     backlog?: number,
     callback?: (err?: ?Error) => mixed
-  ): ?Server;
+  ): ?http.Server;
   listen(
     port: number,
     hostname?: string,
     callback?: (err?: ?Error) => mixed
-  ): ?Server;
-  listen(port: number, callback?: (err?: ?Error) => mixed): ?Server;
-  listen(path: string, callback?: (err?: ?Error) => mixed): ?Server;
-  listen(handle: Object, callback?: (err?: ?Error) => mixed): ?Server;
+  ): ?http.Server;
+  listen(port: number, callback?: (err?: ?Error) => mixed): ?http.Server;
+  listen(path: string, callback?: (err?: ?Error) => mixed): ?http.Server;
+  listen(handle: Object, callback?: (err?: ?Error) => mixed): ?http.Server;
   disable(name: string): void;
   disabled(name: string): boolean;
   enable(name: string): express$Application;
