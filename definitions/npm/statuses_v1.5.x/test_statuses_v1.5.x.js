@@ -17,15 +17,15 @@ describe("statuses ", () => {
   });
 
   it("contains redirect, empty, and retry objects", () => {
-    status.empty(404);
-    status.retry(404);
-    status.redirect(404);
+    status.empty[404];
+    status.retry[404];
+    status.redirect[404];
     // $ExpectError
-    status.empty("zxc");
+    status.empty["zxc"];
     // $ExpectError
-    status.retry("qwe");
+    status.retry["qwe"];
     // $ExpectError
-    status.redirect("asd");
+    status.redirect["asd"];
   });
 
   it("provides maps with codes and messages", () => {
