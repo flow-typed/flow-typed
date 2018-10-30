@@ -24,10 +24,14 @@ import keyBy from "lodash/keyBy";
 import map from "lodash/map";
 import memoize from "lodash/memoize";
 import noop from "lodash/noop";
+import omitBy from "lodash/omitBy";
+import pickBy from "lodash/pickBy";
 import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
 import sortedIndexBy from "lodash/sortedIndexBy";
 import sortedLastIndexBy from "lodash/sortedLastIndexBy";
+import sortedUniq from "lodash/sortedUniq";
+import sortedUniqBy from "lodash/sortedUniqBy";
 import tap from "lodash/tap";
 import thru from "lodash/thru";
 import times from "lodash/times";
@@ -56,8 +60,15 @@ countBy(["one", "two", "three"], "length");
 /**
  * _.difference
  */
-difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>));
-difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>), (["a"]: $ReadOnlyArray<string>));
+difference(
+  (["a", "b"]: $ReadOnlyArray<string>),
+  (["b"]: $ReadOnlyArray<string>)
+);
+difference(
+  (["a", "b"]: $ReadOnlyArray<string>),
+  (["b"]: $ReadOnlyArray<string>),
+  (["a"]: $ReadOnlyArray<string>)
+);
 
 /**
  * _.differenceBy
@@ -90,6 +101,10 @@ find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.x == 3);
 find({ x: 1, y: 2 }, (a: number, b: string) => a);
 find({ x: 1, y: 2 }, { x: 3 });
 find((["a", "b"]: $ReadOnlyArray<string>), "c");
+// opaque types are allowed as keys of objects
+opaque type O = string;
+const v: { [O]: number } = { x: 1, y: 2 };
+find(v, { x: 3 });
 
 // $ExpectError undefined. This type is incompatible with object type.
 var result: Object = find(users, "active");
@@ -161,17 +176,15 @@ get(exampleObjectForGetTest, "a.b.c", "default");
 
 // Array — not documented, but _.get does support arrays
 get([1, 2, 3], "0");
+get([1, 2, 3], 0);
+get([1, 2, 3], [0]);
 get(["foo", "bar", "baz"], "[1]");
 get([{ a: "foo" }, { b: "bar" }, { c: "baz" }], "2");
 get([[1, 2], [3, 4], [5, 6], [7, 8]], "3");
 
 // Nil - it is safe to perform on nil root values, just like nil values along the "get" path
-get(null, 'thing');
-get(undefined, 'data');
-
-// Second argument must be string when looking for array items by index
-// $ExpectError number This type is incompatible with union: ?array type | string
-get([1, 2, 3], 0);
+get(null, "thing");
+get(undefined, "data");
 
 /**
  * _.keyBy
@@ -196,7 +209,7 @@ var keyByTest_map: KeyByTest$ByNumber<KeyByTest$Record> = {
   [keyByTest_array[2].id]: keyByTest_array[2]
 };
 
-var keyByTest_map2: KeyByTest$ByNumberMaybe<?KeyByTest$Record> = keyBy(
+var keyByTest_map2: KeyByTest$ByNumberMaybe<KeyByTest$Record> = keyBy(
   keyByTest_map,
   "id"
 );
@@ -288,6 +301,18 @@ sortedLastIndexBy([{ x: 4 }, { x: 5 }], { x: 4 }, function(o) {
   return o.x;
 });
 sortedLastIndexBy([{ x: 4 }, { x: 5 }], { x: 4 }, "x");
+
+/**
+ * _.sortedUniq
+ */
+sortedUniq([1, 2, 2]);
+sortedUniq(["a", "b", "b"]);
+
+/**
+ * _.sortedUniqBy
+ */
+sortedUniqBy([1.2, 2.1, 2.3], Math.floor);
+sortedUniqBy([{ x: 1 }, { x: 1 }, { x: 2 }], "x");
 
 /**
  * _.extend
@@ -464,3 +489,19 @@ debounced = debounce(() => {});
 var pairs: [string, number][];
 pairs = toPairs({ a: 12, b: 100 });
 pairs = toPairsIn({ a: 12, b: 100 });
+
+/**
+ * _.pickBy
+ */
+(pickBy({ a: 2, b: 3, c: 4 }, num => num % 2): { [prop: string]: number });
+(pickBy(null, num => num % 2): {});
+(pickBy(undefined, num => num % 2): {});
+(pickBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number });
+
+/**
+ * _.omitBy
+ */
+(omitBy({ a: 2, b: 3, c: 4 }, num => num % 2): { [prop: string]: number });
+(omitBy(null, num => num % 2): {});
+(omitBy(undefined, num => num % 2): {});
+(omitBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number });

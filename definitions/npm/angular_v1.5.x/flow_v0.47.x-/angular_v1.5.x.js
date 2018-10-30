@@ -1,5 +1,3 @@
-// @flow
-
 /**
  * Credit to @faceleg for some of the typedefs seen here:
  * https://github.com/solnet-aquarium/flow-interfaces-angular/blob/master/interfaces/angular.js
@@ -91,7 +89,6 @@ declare module angular {
   ) => AngularModule
 
   declare type ConfigDeclaration = (
-    name: string,
     di: $npm$angular$DependencyInjection<(...a: Array<*>) => void>,
   ) => AngularModule
 
@@ -145,18 +142,21 @@ declare module angular {
     deps?: ?Array<Dependency>
   ): AngularModule
 
-  declare function element(html: string | Element | Document): JqliteElement
-  declare function copy<T>(object: T): T
-
+  declare function element(html: string | Element | Document): JqliteElement;
+  declare function copy<T>(object: T): T;
   declare function extend<A, B>(a: A, b: B): A & B;
   declare function extend<A, B, C>(a: A, b: B, c: C): A & B & C;
   declare function extend<A, B, C, D>(a: A, b: B, c: C, d: D): A & B & C & D;
   declare function extend<A, B, C, D, E>(a: A, b: B, c: C, d: D, e: E): A & B & C & D & E;
 
-  declare function forEach<T>(obj: Object | Array<T>, iterator: (value: T, key: string) => void): void;
+  declare function forEach<T>(obj: Object, iterator: (value: T, key: string) => void): void;
+  declare function forEach<T>(obj: Array<T>, iterator: (value: T, key: number) => void): void;
   declare function fromJson(json: string): Object | Array<*> | string | number;
   declare function toJson(obj: Object | Array<any> | string | Date | number | boolean, pretty?: boolean | number): string;
   declare function isDefined(val: any): boolean;
+  declare function isArray(value: Array<any>): true;
+  declare function isArray(value: any): false;
+  declare function noop(): void;
   declare type AngularQ = {
     when: <T>(value: T) => AngularPromise<T>,
   }
@@ -175,7 +175,23 @@ declare module angular {
     inject: (...a: Array<*>) => Function,
     module: (...a: Array<string | Function | Object>) => () => void
   }
-  declare var mock: AngularMock
+  declare var mock: AngularMock;
+
+  declare type StateProviderParams = {
+    url?: string,
+    abstract?: boolean,
+    params?: Object,
+    views?: Object,
+    data?: Object,
+    templateUrl?: string,
+    template?: string,
+    controller?: string | ControllerFunction,
+    resolve?: Object
+  };
+
+  declare type $StateProvider = {
+    state: (name: string, conf: StateProviderParams) => $StateProvider
+  }
 
   //----------------------------------------------------------------------------
   // Service specific stuff
@@ -185,8 +201,7 @@ declare module angular {
     post: AngularHttpPost<*>
   }
 
-  declare function AngularHttpPost<T>(url: string, data: mixed):
-  AngularPromise<T>
+  declare type AngularHttpPost<T> = (url: string, data: mixed) => AngularPromise<T>
 
   declare type AngularResourceResult<T> = {
     $promise: AngularPromise<T>,

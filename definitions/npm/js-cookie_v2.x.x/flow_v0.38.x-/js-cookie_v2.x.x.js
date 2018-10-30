@@ -16,7 +16,7 @@ declare module 'js-cookie' {
         get(...args: Array<void>): { [key: string]: string };
         get(name: string, ...args: Array<void>): string | void;
         remove(name: string, options?: CookieOptions): void;
-        getJSON(name: string): mixed;
+        getJSON(name: string): Object;
         withConverter(converter: ConverterFunc | ConverterObj): this;
         noConflict(): this;
     }

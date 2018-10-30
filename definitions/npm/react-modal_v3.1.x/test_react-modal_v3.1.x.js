@@ -76,6 +76,7 @@ ReactModal.setAppElement(1);
 <ReactModal onAfterOpen={1} />;
 
 <ReactModal onRequestClose={() => { }} />;
+<ReactModal onRequestClose={e => { }} />;
 // $ExpectError
 <ReactModal onRequestClose={1} />;
 

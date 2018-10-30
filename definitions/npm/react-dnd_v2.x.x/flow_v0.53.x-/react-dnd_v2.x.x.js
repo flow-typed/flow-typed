@@ -198,6 +198,16 @@ declare module "react-dnd" {
   // Drag Drop Context
   // ----------------------------------------------------------------------
 
+  declare type ProviderProps = {
+    backend: mixed,
+    children: React$Element<any>,
+    window?: Object
+  };
+
+  declare class DragDropContextProvider<ProviderProps> extends React$Component<ProviderProps> {
+    props: ProviderProps;
+  }
+
   declare function DragDropContext<OP: {}, CP: {}>(
     backend: mixed
   ): Connector<$Supertype<OP & CP>, CP>;

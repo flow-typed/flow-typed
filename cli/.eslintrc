@@ -13,7 +13,13 @@
   "globals": {
   },
   "rules": {
-    "prettier/prettier": ["error", "fb"],
+    "prettier/prettier": [
+      "error",
+      { "singleQuote": true,
+        "bracketSpacing": false,
+        "trailingComma": "all",
+      }
+    ],
     "eqeqeq": [2, "smart"],
     "semi": 2,
     "no-unused-vars": ["error", {

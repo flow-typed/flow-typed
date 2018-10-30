@@ -3,6 +3,7 @@ declare module 'react-loadable' {
     isLoading: boolean,
     pastDelay: boolean,
     timedOut: boolean,
+    retry: () => void,
     error: ?Error
   };
 

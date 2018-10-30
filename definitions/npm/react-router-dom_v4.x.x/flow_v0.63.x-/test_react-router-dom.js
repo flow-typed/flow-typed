@@ -6,7 +6,9 @@ import {
   Link,
   NavLink,
   matchPath,
-  withRouter
+  withRouter,
+  Redirect,
+  Route
 } from "react-router-dom";
 import type {
   ContextRouter,
@@ -80,6 +82,19 @@ describe("react-router-dom", () => {
       </Link>;
     });
 
+    it("allows attributes of <a> element", () => {
+      <Link
+        to="/about"
+        download
+        hreflang="de"
+        ping="https://www.example.com"
+        referrerpolicy="no-referrer"
+        target="_self"
+        type="foo"
+        onClick={() => {}}
+      >About</Link>;
+    });
+
     it("raises error if passed incorrect props", () => {
       // $ExpectError - to prop is required
       <Link />;
@@ -116,6 +131,19 @@ describe("react-router-dom", () => {
       >
         About
       </NavLink>;
+    });
+
+    it("allows attributes of <a> element", () => {
+      <NavLink
+        to="/about"
+        download
+        hreflang="de"
+        ping="https://www.example.com"
+        referrerpolicy="no-referrer"
+        target="_self"
+        type="foo"
+        onClick={() => {}}
+      >About</NavLink>;
     });
 
     it("raises error if passed incorrect props", () => {
@@ -170,6 +198,9 @@ describe("react-router-dom", () => {
         }: Props) => <div />;
         const WrappedComp = withRouter(Comp);
         <WrappedComp s="" />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        <ChainedHOC s="" />;
       });
 
       it("errors if the component is not passed correct props", () => {
@@ -185,6 +216,12 @@ describe("react-router-dom", () => {
         <WrappedComp />;
         // $ExpectError - wrong type
         <WrappedComp s={1} />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        // $ExpectError - missing prop "s"
+        <ChainedHOC />;
+        // $ExpectError - wrong type
+        <ChainedHOC s={1} />;
       });
 
       it("errors if trying to access a prop that withRouter does not supply", () => {
@@ -204,6 +241,9 @@ describe("react-router-dom", () => {
         }
         const WrappedComp = withRouter(Comp);
         <WrappedComp s="" />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        <ChainedHOC s="" />;
       });
 
       it("errors if the component is not passed the correct props", () => {
@@ -217,6 +257,12 @@ describe("react-router-dom", () => {
         <WrappedComp />;
         // $ExpectError - wrong type
         <WrappedComp s={1} />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        // $ExpectError - missing prop "s"
+        <ChainedHOC />;
+        // $ExpectError - wrong type
+        <ChainedHOC s={1} />;
       });
 
       it("passes if a required prop is handled by defaultProps", () => {
@@ -231,6 +277,10 @@ describe("react-router-dom", () => {
         const WrappedComp = withRouter(Comp);
         <WrappedComp />;
         <WrappedComp s="" />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        <ChainedHOC />;
+        <ChainedHOC s="" />;
       });
 
       it("errors if a required prop that has a defaultProp is passed the wrong type", () => {
@@ -245,7 +295,73 @@ describe("react-router-dom", () => {
         const WrappedComp = withRouter(Comp);
         // $ExpectError - wrong type
         <WrappedComp s={123} />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        // $ExpectError - wrong type
+        <ChainedHOC s={123} />;
       });
     });
   });
+
+  describe("Redirect", () => {
+    it("works", () => {
+      <Redirect to="/login" />;
+
+      <Redirect exact strict to="/new-path" from="/old-Path" />;
+
+      <Redirect
+        to={{
+          pathname: "/courses",
+          search: "?sort=name",
+          hash: "#the-hash",
+          state: { fromDashboard: true }
+        }}
+        from="/x"
+        push
+      />;
+    });
+
+    it("raises error if passed incorrect props", () => {
+      // $ExpectError - to prop is required
+      <Redirect />;
+
+      // $ExpectError - to prop must be a string or LocationShape
+      <Redirect to={[]} />;
+
+      // $ExpectError - unexpected prop xxx
+      <Redirect to='/x' xxx="1"/>;
+    });
+  });
+
+  describe("Route", () => {
+    it("works", () => {
+      const Component = ({}) => <div>Hi!</div>;
+      <Route path="/login" />;
+
+      <Route path="/login" component={Component} />;
+
+      <Route path="/login" render={(context: ContextRouter) => <Component />} />;
+
+      <Route path="/login" children={(context: ContextRouter) => <Component />} />;
+
+      <Route
+        location={{
+          pathname: "/courses",
+          search: "?sort=name",
+          hash: "#the-hash"
+        }}
+        exact
+        strict
+        sensitive
+      />;
+    });
+
+    it("raises error if passed incorrect props", () => {
+      // $ExpectError - prop must be a string
+      <Route path={123} />;
+
+      // $ExpectError - unexpected prop xxx
+      <Route xxx="1" />;
+    });
+  })
 });

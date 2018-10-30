@@ -4,8 +4,10 @@ import { it, describe } from "flow-typed-test";
 import {
   ApolloProvider,
   ApolloConsumer,
+  compose,
   Query,
   Mutation,
+  Subscription,
   graphql,
   withApollo,
   type MutationFunction,
@@ -15,7 +17,9 @@ import {
   type GraphqlQueryControls,
   type ChildProps,
   type GraphqlData,
-  type PureQueryOptions
+  type PureQueryOptions,
+  type SubscriptionResult,
+  type RefetchQueryDescription,
 } from "react-apollo";
 
 const gql = (strings, ...args) => {}; // graphql-tag stub
@@ -44,6 +48,10 @@ type IQuery = {
 };
 
 const withData: OperationComponent<IQuery> = graphql(query);
+
+// Compose exists and passes type checking
+const noop = (val) => val;
+compose(noop, noop)(true);
 
 it("works with functional component", () => {
   const FunctionalWithData = withData(({ data }) => {
@@ -165,6 +173,17 @@ const HERO_MUTATION = gql`
   }
 `;
 
+const HERO_SUBSCRIPTION = gql`
+  mutation onHeroUpdate($heroId: ID!) {
+    heroUpdated(heroId: $heroId) {
+      hero {
+        name
+        id
+      }
+    }
+  }
+`;
+
 it("works with Variables specified", () => {
   type Response = {
     hero: Hero
@@ -255,15 +274,14 @@ describe("<Query />", () => {
           // $ExpectError Cannot get `data.res`
           data.res;
           if (!data) {
-            return;
+            return <div />;
           }
-          const d1: Res | {||} = data;
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
-          if (d1.res) {
-            const d2: Res = d1;
-            const s: string = d1.res;
+          if (data.res) {
+            const s: string = data.res;
           }
+          return <div />
         }}
       </Query>
     );
@@ -277,7 +295,7 @@ describe("<Query />", () => {
         // $ExpectError Cannot get `data.hero`. data may be undefined
         data.hero;
         if (!data || !data.hero) {
-          return;
+          return <div />
         }
         const hero = data.hero;
 
@@ -402,6 +420,90 @@ describe("<Query />", () => {
       </HeroQueryComp>;
     });
   });
+
+  describe("updateQuery", () => {
+    it("works", () => {
+      <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
+        {({ updateQuery }) => {
+          // $ExpectError updateQuery return type must match previous result type
+          updateQuery((previousResult, options) => ({ hello: 'flow' }))
+          const renameHero = (newName: string) => updateQuery((previousResult, options) => {
+            // $ExpectError Cannot get `options.unknownProperty` because property `unknownProperty` is missing in options
+            const a = options.unknownProperty
+            const { variables } = options
+            return { ...previousResult, name: newName }
+          })
+          return <div />
+        }}
+      </HeroQueryComp>;
+    })
+  })
+});
+
+type HeroSubcriptionVariables = {
+  heroId: string
+};
+class HeroSubscriptionComp extends Subscription<
+  { hero: ?Hero },
+  HeroSubcriptionVariables
+> {}
+
+describe("<Subscription />", () => {
+  it("works", () => {
+    type Vars = {| foo: string |};
+    type Res = {| res: string |};
+    const vars: Vars = { foo: "1" };
+    const q = (
+      <Subscription variables={vars} subscription={HERO_SUBSCRIPTION}>
+        {({ data }: SubscriptionResult<Res, Vars>) => {
+          // $ExpectError Cannot get `data.res`
+          data.res;
+          if (!data) {
+            return <div/>
+          }
+          const d1: Res | {||} = data;
+          // $ExpectError Cannot get `data.res` because property `res` is missing in object type
+          const s: string = data.res;
+          if (d1.res) {
+            const d2: Res = d1;
+            const s: string = d1.res;
+          }
+          return <div/>
+        }}
+      </Subscription>
+    );
+  });
+  it("works when extending Subscription with types", () => {
+    <HeroSubscriptionComp subscription={HERO_SUBSCRIPTION} variables={{ heroId: "123" }}>
+      {({ data, loading, error }) => {
+        if (loading) return "Loading....";
+        if (error) return "Error!";
+        // $ExpectError Cannot get `data.hero`. data may be undefined
+        data.hero;
+        if (!data || !data.hero) {
+          return <div />
+        }
+        const hero = data.hero;
+
+        const nameAgain: string = hero.name;
+        // $ExpectError unknown is not a property on Hero
+        const unknown = hero.unknown;
+
+        return <div>{nameAgain}</div>;
+      }}
+    </HeroSubscriptionComp>;
+  });
+  it("errors if wrong variables passed", () => {
+    type Vars = {| foo: string |};
+    type Res = {| res: string |};
+    const q = (
+      <Subscription variables={{ foo: 1 }} subscription={HERO_SUBSCRIPTION}>
+        { // $ExpectError variables must match shape of query variables
+          ({ data }: SubscriptionResult<Res, Vars>) => {
+        }}
+      </Subscription>
+    );
+  });
 });
 
 type UpdateHeroMutationVariables = {
@@ -413,6 +515,21 @@ class UpdateHeroMutationComp extends Mutation<
 > {}
 
 describe("<Mutation />", () => {
+  it("mutate() args are optional", () => {
+    type Vars = {| foo: string |};
+    type Res = {| res: string |};
+    const vars: Vars = { foo: "bar" };
+    const q = (
+      <Mutation variables={vars} mutation={HERO_QUERY}>
+        {mutate => {
+          mutate();
+          return <div />
+        }}
+      </Mutation>
+    );
+  });
+
+
   it("works", () => {
     type Vars = {| foo: string |};
     type Res = {| res: string |};
@@ -421,15 +538,17 @@ describe("<Mutation />", () => {
       <Mutation variables={vars} mutation={HERO_QUERY}>
         {(
           update: MutationFunction<Res, Vars>,
-          { data }: MutationResult<Res>
+          { data, client }: MutationResult<Res>
         ) => {
           // $ExpectError Cannot get `data.res`
           data.res;
           if (!data) {
-            return;
+            return <div />
           }
           const d1: Res = data;
           const s: string = data.res;
+          client;
+          return <div />
         }}
       </Mutation>
     );
@@ -497,7 +616,7 @@ describe("<Mutation />", () => {
         query: HERO_QUERY,
         variables: { episode: "episode" }
       };
-      const refetchQueries: PureQueryOptions[] = [queryOption];
+      const refetchQueries: RefetchQueryDescription = [queryOption, 'foo'];
 
       <UpdateHeroMutationComp
         mutation={HERO_MUTATION}

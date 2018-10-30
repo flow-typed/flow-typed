@@ -47,6 +47,9 @@ shallowWrapper.instance();
 shallowWrapper.find("someSelector");
 shallowWrapper.prop("foo");
 shallowWrapper.props().foo;
+shallowWrapper.slice()
+shallowWrapper.slice(0)
+shallowWrapper.slice(0, 1)
 
 // shallow's getNode(s) was replaced by getElement(s) in enzyme v3
 // $ExpectError

@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import type { Connector } from "react-redux";
 
@@ -186,4 +186,4 @@ const CC10 = connector10(C3);
 //
 // ConnectedComponent
 //
-(CC1.WrappedComponent: C1);
+(CC1.WrappedComponent: React.ComponentType<React.ElementProps<typeof C1>>);

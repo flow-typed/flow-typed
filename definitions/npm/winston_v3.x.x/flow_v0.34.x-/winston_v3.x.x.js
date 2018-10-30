@@ -12,6 +12,7 @@ declare type $winstonNpmLogLevels = {
 };
 
 declare type $winstonInfo<T: $winstonLevels> = {
+  [optionName: string]: any,
   level: $Keys<T>,
   message: string
 };
@@ -23,7 +24,10 @@ declare type $winstonFileTransportConfig<T: $winstonLevels> = {
   level?: $Keys<T>
 };
 
-declare class $winstonTransport {}
+declare class $winstonTransport {
+  level?: string;
+  silent?: boolean;
+}
 
 declare class $winstonFileTransport<T> extends $winstonTransport {
   constructor($winstonFileTransportConfig<T>): $winstonFileTransport<T>;
@@ -48,7 +52,7 @@ declare type $winstonLoggerConfig<T: $winstonLevels> = {
 };
 
 declare type $winstonLogger<T: $winstonLevels> = {
-  [$Keys<T>]: (message: string) => void,
+  [$Keys<T>]: (message: string, meta?: Object) => void,
   add: $winstonTransport => void,
   clear: () => void,
   configure: ($winstonLoggerConfig<T>) => void,
@@ -63,9 +67,15 @@ declare type $winstonConfigSubModule = {
 declare type $winstonFormatSubModule = {
   combine: (...args: Array<$winstonFormat>) => $winstonFormat,
   json: () => $winstonFormat,
+  label: (config?: Object) => $winstonFormat,
+  metadata: () => $winstonFormat,
   prettyPrint: () => $winstonFormat,
   simple: () => $winstonFormat,
-  timestamp: () => $winstonFormat
+  splat: () => $winstonFormat,
+  timestamp: (?{ alias?: string, format?: string }) => $winstonFormat,
+  colorize: () => $winstonFormat,
+  logstash: () => $winstonFormat,
+  printf: ((args: $winstonInfo<Object>) => string) => $winstonFormat
 };
 
 declare type $winstonDefaultLogger = $winstonLogger<$winstonNpmLogLevels>;

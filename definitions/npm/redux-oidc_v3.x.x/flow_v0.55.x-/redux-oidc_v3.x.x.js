@@ -2,12 +2,21 @@ import type { Reducer, Store } from "redux";
 
 declare module "redux-oidc" {
   declare type UserManager = {
+    getUser: () => Promise<User<*>>,
+    removeUser: () => Promise<*>,
     signinRedirect: (data?: {
       data: {
         redirectUrl: string
       }
     }) => Promise<*>,
-    signoutRedirect: () => Promise<*>
+    signinSilent: () => Promise<*>,
+    signinPopup: () => Promise<*>,
+    signoutRedirect: () => Promise<*>,
+    signoutPopup: () => Promise<*>,
+    querySessionStatus: () => Promise<*>,
+    startSilentRenew: () => Promise<*>,
+    stopSilentRenew: () => Promise<*>,
+    clearStaleState: () => Promise<*>
   };
   declare type User<P> = {
     id_token: string,
@@ -34,7 +43,8 @@ declare module "redux-oidc" {
     automaticSilentRenew?: boolean,
     accessTokenExpiringNotificationTime?: number,
     silentRequestTimeout?: number,
-    filterProtocolClaims?: boolean
+    filterProtocolClaims?: boolean,
+    post_logout_redirect_uri?: string
   |};
   declare type OidcReducerState = {
     user: ?User<*>

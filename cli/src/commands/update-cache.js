@@ -11,7 +11,7 @@ export const name = 'update-cache';
 export const description = 'Update the flow-typed definitions cache';
 
 export type Args = {
-  cacheDir?: string,
+  cacheDir?: mixed,
 };
 export function setup(yargs: Yargs) {
   return yargs.usage(`$0 ${name} - ${description}`).options({
@@ -27,7 +27,7 @@ export function setup(yargs: Yargs) {
 
 export async function run(args: Args): Promise<number> {
   try {
-    if (args.cacheDir) {
+    if (typeof args.cacheDir === 'string') {
       const cacheDir = path.resolve(args.cacheDir);
       console.log('• Setting cache dir', cacheDir);
       setCustomCacheDir(cacheDir);

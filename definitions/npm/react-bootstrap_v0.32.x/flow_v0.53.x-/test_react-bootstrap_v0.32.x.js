@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dropdown, Overlay, FormControl, Checkbox, Radio } from 'react-bootstrap';
+import { Checkbox, Dropdown, FormControl, Glyphicon, Overlay, Radio } from 'react-bootstrap';
 
 
 // normal components works
@@ -13,3 +13,5 @@ import { Dropdown, Overlay, FormControl, Checkbox, Radio } from 'react-bootstrap
 (<FormControl inputRef={(ref) => {(ref: ?HTMLInputElement)}}/>: React.Node);
 (<Checkbox inputRef={(ref) => {(ref: ?HTMLInputElement)}} />: React.Node);
 (<Radio inputRef={(ref) => {(ref: ?HTMLInputElement)}} />: React.Node);
+
+(<Glyphicon glyph="string" />: React.Node);

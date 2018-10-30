@@ -25,6 +25,8 @@ let slot1 = googletag.pubads().display("/1234567/sports", [728, 90], "div-1");
 let slot2 = googletag.pubads().display("/1234567/news", [160, 600], "div-2");
 let slot3 = googletag.pubads().display("/1234567/weather", [160, 600], "div-3");
 
+googletag.pubads().enableLazyLoad();
+
 // This call to destroy only slot1.
 googletag.destroySlots([slot1]);
 

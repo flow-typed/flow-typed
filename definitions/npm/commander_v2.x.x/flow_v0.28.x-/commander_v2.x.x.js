@@ -159,7 +159,11 @@ declare module "commander" {
      * @return {Command} for chaining
      * @api public
      */
-    parse(argv: Array<string>): this;
+    parse(argv: Array<string>): this & {
+      args: Array<string>,
+      rawArgs: Array<string>,
+      [string]: any,
+    };
 
     /**
      * Parse options from `argv` returning `argv`
@@ -243,7 +247,7 @@ declare module "commander" {
      *
      * @api public
      */
-    outputHelp(): void;
+    outputHelp(cb?: ?(defaultHelp: string) => string): void;
 
     /**
      * Output help information and exit.
@@ -272,7 +276,7 @@ declare module "commander" {
   }
 
   declare module.exports: Command & {
-    Command: Command,
-    Option: Option
+    Command: (name?: string) => Command;
+    Options: (flags: string, description?: string) => Option;
   };
 }

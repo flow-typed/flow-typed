@@ -1,5 +1,5 @@
 // @flow
-import Backbone, { Model, Collection, Events } from "backbone";
+import Backbone, {Model, Collection, Events} from "backbone";
 
 const otherBackbone: typeof Backbone = Backbone.noConflict();
 
@@ -24,7 +24,7 @@ interface Fooable extends Model {
 const TaskModel: Class<Fooable> = Backbone.Model.extend({
   foo(): string {
     return "";
-  }
+  },
 });
 
 const instance = new TaskModel();
@@ -50,7 +50,7 @@ tasks.length = false;
 (task.pluck(2): Array<any>);
 
 (tasks.forEach: Function);
-(tasks.sync(): Function);
+(tasks.sync: Function);
 // $ExpectError
 instance.fetch(null);
 // $ExpectError
@@ -72,7 +72,7 @@ class TasksRouter extends Backbone.Router {
     super();
     this.routes = {
       // $ExpectError
-      "10": false
+      "10": false,
     };
   }
 }
@@ -85,21 +85,20 @@ router.route("/create", "createRoute");
 router.route("/create", "delete", null);
 
 // $ExpectError
-Backbone.history.start({ root: false });
+Backbone.history.start({root: false});
 
-Backbone.history.start({ pushState: true });
+Backbone.history.start({pushState: true});
 
 // inherits Events methods
-Backbone.history.on('click', () => true);
-router.on('click', () => true);
-instance.on('click', () => true);
-tasks.on('click', () => true);
+Backbone.history.on("click", () => true);
+router.on("click", () => true);
+instance.on("click", () => true);
+tasks.on("click", () => true);
 
 // constructor accepts options
-class MyView extends Backbone.View {
-}
+class MyView extends Backbone.View {}
 
-const myView = new MyView({ el: '.some-selector' });
+const myView = new MyView({el: ".some-selector"});
 
 // initialize does not need a return
 class MyView2 extends Backbone.View {

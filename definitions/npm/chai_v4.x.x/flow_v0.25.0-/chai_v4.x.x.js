@@ -83,6 +83,7 @@ declare module "chai" {
     decrease: (obj: mixed, key: string, message?: string) => ExpectChain<T>,
 
     by: (delta: number, message?: string) => ExpectChain<T>,
+    ordered: ExpectChain<T>,
 
     // dirty-chai
     ok: () => ExpectChain<T>,
@@ -109,9 +110,15 @@ declare module "chai" {
     calledThrice: () => ExpectChain<T>,
     calledBefore: (spy: mixed) => ExpectChain<T>,
     calledAfter: (spy: mixed) => ExpectChain<T>,
+    calledImmediatelyBefore: (spy: mixed) => ExpectChain<T>,
+    calledImmediatelyAfter: (spy: mixed) => ExpectChain<T>,
     calledWith: (...args: Array<mixed>) => ExpectChain<T>,
+    calledOnceWith: (...args: Array<mixed>) => ExpectChain<T>,
     calledWithMatch: (...args: Array<mixed>) => ExpectChain<T>,
     calledWithExactly: (...args: Array<mixed>) => ExpectChain<T>,
+    calledOnceWithExactly: (...args: Array<mixed>) => ExpectChain<T>,
+    returned: (returnVal: mixed) => ExpectChain<T>,
+    alwaysReturned: (returnVal: mixed) => ExpectChain<T>,
 
     // chai-as-promised
     eventually: ExpectChain<T>,
@@ -159,6 +166,11 @@ declare module "chai" {
 
     static isOk(object: mixed, message?: string): void;
     static isNotOk(object: mixed, message?: string): void;
+
+    static empty(object: mixed, message?: string): void;
+    static isEmpty(object: mixed, message?: string): void;
+    static notEmpty(object: mixed, message?: string): void;
+    static isNotEmpty(object: mixed, message?: string): void;
 
     static equal(actual: mixed, expected: mixed, message?: string): void;
     static notEqual(actual: mixed, expected: mixed, message?: string): void;

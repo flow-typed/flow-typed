@@ -5,9 +5,11 @@ import type { ActionType, Reducer } from "redux-actions";
 
 const INCREMENT = "INCREMENT";
 const INCREMENT2 = "INCREMENT2";
+const INCREMENT3 = "INCREMENT3";
 
 const increment = createAction(INCREMENT, (x: number) => x);
 const increment2 = createAction(INCREMENT2, (x: number, y: string) => x);
+const increment3 = createAction(INCREMENT3, (x: number, y: string) => Promise.resolve(x));
 const decrement = createAction("DECREMENT", (x: number) => x);
 
 type StateType = { count: number };
@@ -21,6 +23,13 @@ function test_handleActions() {
       },
 
       [String(increment2)]: (state: StateType, action: ActionType<typeof increment2>): StateType => {
+        assert(action.payload, (x: number) => {});
+        return {
+          count: state.count + action.payload
+        };
+      },
+
+      [INCREMENT3]: (state: StateType, action: ActionType<typeof increment3>): StateType => {
         assert(action.payload, (x: number) => {});
         return {
           count: state.count + action.payload

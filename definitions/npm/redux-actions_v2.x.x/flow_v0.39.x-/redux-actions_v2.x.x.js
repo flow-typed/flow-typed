@@ -30,13 +30,13 @@ declare module "redux-actions" {
 
   declare function createAction<T, A, P>(
     type: T,
-    payloadCreator: (...rest: A) => P,
+    payloadCreator: (...rest: A) => Promise<P> | P,
     $?: empty
   ): {(...rest: A): { type: T, payload: P, error?: boolean }, +toString: () => T};
 
   declare function createAction<T, A, P, M>(
     type: T,
-    payloadCreator: (...rest: A) => P,
+    payloadCreator: (...rest: A) => Promise<P> | P,
     metaCreator: (...rest: A) => M
   ): {(...rest: A): { type: T, payload: P, error?: boolean, meta: M }, +toString: () => T};
 

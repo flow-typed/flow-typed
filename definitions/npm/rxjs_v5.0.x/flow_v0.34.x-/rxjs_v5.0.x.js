@@ -324,6 +324,8 @@ declare class rxjs$Observable<+T> {
 
   static of(...values: T[]): rxjs$Observable<T>;
 
+  static race(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>;
+
   static range(
     start?: number,
     count?: number,
@@ -725,6 +727,9 @@ declare class rxjs$Observable<+T> {
     onError: ?(error: any) => mixed,
     onCompleted: ?() => mixed
   ): rxjs$Subscription;
+
+  combineAll<U>(): rxjs$Observable<U>;
+  combineAll<U>(project: (...values: any[]) => U): rxjs$Observable<U>;
 
   static combineLatest<A, B>(
     a: rxjs$Observable<A>,

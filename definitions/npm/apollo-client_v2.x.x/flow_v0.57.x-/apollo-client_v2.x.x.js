@@ -299,6 +299,8 @@ declare module "apollo-client" {
     variables?: any;
   }
 
+  declare export type MutationOperation<T = Object> = (options: MutationBaseOptions<T>) => Promise<FetchResult<T>>
+
   declare export interface MutationOptions<T = { [key: string]: any }>
     extends MutationBaseOptions<T> {
     mutation: DocumentNode;
@@ -413,7 +415,7 @@ declare module "apollo-client" {
     +mutate?: MutationBaseOptions<>;
   }
 
-  declare type ApolloClientOptions<TCacheShape> = {
+  declare export type ApolloClientOptions<TCacheShape> = {
     link: ApolloLink,
     cache: ApolloCache<TCacheShape>,
     ssrMode?: boolean,

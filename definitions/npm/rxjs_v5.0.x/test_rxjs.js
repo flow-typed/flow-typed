@@ -37,6 +37,11 @@ strings.elementAt(1, 5);
 // $ExpectError -- need the typecast or the error appears at the declaration site
 numbers.merge((strings: Observable<string>));
 
+(Observable.race(
+  Observable.timer(0, 100),
+  Observable.timer(0, 200)
+): Observable<number>);
+
 numbers.let(_numbers => strings);
 numbers.letBind(_numbers => strings);
 // $ExpectError -- need to return an observable
@@ -47,6 +52,12 @@ numbers.letBind(_numbers => 3);
 (numbers.map(number => Observable.of(number)).switch(): Observable<number>);
 // $ExpectError -- .switch can't assert that it's operating on observables, but it can at least trace the type.
 (numbers.map(number => Observable.of(number)).switch(): Observable<string>);
+
+let dualNumbers = Observable.of(numbers, numbers);
+(dualNumbers.combineAll(): Observable<[number, number]>);
+// $ExpectError -- should return an Observable<string>
+(dualNumbers.combineAll((a, b) => `${a}-${b}`): Observable<number>);
+(dualNumbers.combineAll((a, b) => `${a}-${b}`): Observable<string>);
 
 const combined: Observable<{ n: number, s: string }> = Observable.combineLatest(
   numbers,

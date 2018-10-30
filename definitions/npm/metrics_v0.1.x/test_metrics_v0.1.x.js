@@ -10,6 +10,7 @@ import {
 import type { Metric } from 'metrics';
 
 const meter: Meter = new Meter();
+meter.mark();
 meter.mark(3);
 // $ExpectError wrong argument type
 meter.mark('hello');

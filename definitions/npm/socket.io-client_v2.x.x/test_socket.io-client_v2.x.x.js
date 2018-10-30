@@ -37,7 +37,7 @@ socket
   .once("event", cb => {})
   .off("event", cb => {})
   .removeListener("event", cb => {})
-  .removeAllListeners("event", cb => {})
+  .removeAllListeners("event")
   .removeEventListener("event", cb => {});
 
 // test Manager
@@ -58,6 +58,6 @@ manager
   .once("event", cb => {})
   .off("event", cb => {})
   .removeListener("event", cb => {})
-  .removeAllListeners("event", cb => {})
+  .removeAllListeners("event")
   .removeEventListener("event", cb => {})
   .emit("event", { payload: true });

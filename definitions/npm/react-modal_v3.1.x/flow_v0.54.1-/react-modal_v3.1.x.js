@@ -33,7 +33,7 @@ declare module 'react-modal' {
     },
     appElement?: HTMLElement | string | null,
     onAfterOpen?: () => void | Promise<void>,
-    onRequestClose?: () => void,
+    onRequestClose?: (SyntheticEvent<>) => void,
     aria?: {
       [key: string]: string
     },
