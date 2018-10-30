@@ -1,5 +1,5 @@
 /* START copied over from marked libdef */
-type marked$AlignFlag = 'left' | 'right' | 'center';
+type marked$AlignFlag = "left" | "right" | "center";
 
 type marked$NodeCallback<T> = (e: ?Error, d: ?T) => void;
 
@@ -26,45 +26,49 @@ declare class marked$Renderer {
   link: (h: string, ti: string, te: string) => string;
   image: (h: string, ti: string, te: string) => string;
   text: (t: string) => string;
-
 }
 
 type marked$HighlightFunction =
-  ((c: string, l: string, cb: marked$NodeCallback<string>) => void)
+  | ((c: string, l: string, cb: marked$NodeCallback<string>) => void)
   | ((c: string, cb: marked$NodeCallback<string>) => void)
-  | ((c: string, l?: string) => string)
+  | ((c: string, l?: string) => string);
 
 type marked$MarkedOptions = {
-  highlight?: marked$HighlightFunction;
-  renderer?: marked$Renderer;
-  gfm?: boolean;
-  tables?: boolean;
-  breaks?: boolean;
-  pedantic?: boolean;
-  sanitize?: boolean;
-  smartLists?: boolean;
-  smartypants?: boolean;
-}
+  highlight?: marked$HighlightFunction,
+  renderer?: marked$Renderer,
+  gfm?: boolean,
+  tables?: boolean,
+  breaks?: boolean,
+  pedantic?: boolean,
+  sanitize?: boolean,
+  smartLists?: boolean,
+  smartypants?: boolean
+};
 
 /*
  * marked$Tokens
  */
 
-type marked$Space = { type: 'space'; }
-type marked$Code = { type: 'code'; text: string; lang?: string; }
-type marked$Heading = { type: 'heading'; depth: number; text: string; }
-type marked$Table = { type: 'table'; header: string; align: Array<marked$AlignFlag>; cells: Array<Array<string>> }
-type marked$Hr = { type: 'hr'; }
-type marked$BlockquoteStart = { type: 'blockquote_start' }
-type marked$BlockquoteEnd = { type: 'blockquote_end' }
-type marked$ListStart = { type: 'list_start' }
-type marked$ListEnd = { type: 'list_end' }
-type marked$Paragraph = { type: 'paragraph'; pre: boolean; text: string; }
-type marked$Html = { type: 'paragraph'; pre: boolean; text: string; }
-type marked$Text = { type: 'text'; text: string; }
+type marked$Space = { type: "space" };
+type marked$Code = { type: "code", text: string, lang?: string };
+type marked$Heading = { type: "heading", depth: number, text: string };
+type marked$Table = {
+  type: "table",
+  header: string,
+  align: Array<marked$AlignFlag>,
+  cells: Array<Array<string>>
+};
+type marked$Hr = { type: "hr" };
+type marked$BlockquoteStart = { type: "blockquote_start" };
+type marked$BlockquoteEnd = { type: "blockquote_end" };
+type marked$ListStart = { type: "list_start" };
+type marked$ListEnd = { type: "list_end" };
+type marked$Paragraph = { type: "paragraph", pre: boolean, text: string };
+type marked$Html = { type: "paragraph", pre: boolean, text: string };
+type marked$Text = { type: "text", text: string };
 
 type marked$Token =
-  marked$Space
+  | marked$Space
   | marked$Code
   | marked$Heading
   | marked$Table
@@ -75,21 +79,21 @@ type marked$Token =
   | marked$ListEnd
   | marked$Paragraph
   | marked$Html
-  | marked$Text
+  | marked$Text;
 
 type marked$Link = {
-  title: ?string;
-  href: string;
-}
+  title: ?string,
+  href: string
+};
 
 type marked$Tokens = { links: Array<marked$Link> } & Array<marked$Token>;
 
 type marked$NoopRule = {
-  (i: mixed): void;
-  exec: (i: mixed) => void;
-}
+  (i: mixed): void,
+  exec: (i: mixed) => void
+};
 
-type marked$Rule = RegExp | marked$NoopRule
+type marked$Rule = RegExp | marked$NoopRule;
 
 type marked$lex = (t: string) => marked$Tokens;
 
@@ -119,8 +123,15 @@ declare class marked$Parser {
 
 declare class marked$InlineLexer {
   static rules: Array<marked$Rule>;
-  static output: (s: string, l: Array<marked$Link>, o?: marked$MarkedOptions) => string;
-  constructor(l: Array<marked$Link>, o?: marked$MarkedOptions): marked$InlineLexer;
+  static output: (
+    s: string,
+    l: Array<marked$Link>,
+    o?: marked$MarkedOptions
+  ) => string;
+  constructor(
+    l: Array<marked$Link>,
+    o?: marked$MarkedOptions
+  ): marked$InlineLexer;
   output: (s: string) => string;
   outputmarked$Link: (c: Array<string>, l: marked$Link) => string;
   smartypants: (t: string) => string;
@@ -132,49 +143,49 @@ declare class marked$InlineLexer {
 }
 
 type marked$Marked = {
-  (md: string, o: marked$MarkedOptions, cb: marked$NodeCallback<string>): void;
-  (md: string, cb: marked$NodeCallback<string>): void;
-  (md: string, o?: marked$MarkedOptions): string;
-  setOptions: (o: marked$MarkedOptions) => void;
-  defaults: marked$MarkedOptions;
-  Parser: typeof marked$Parser;
-  parser: typeof marked$Parser.parse;
-  Lexer: typeof marked$Lexer;
-  lexer: typeof marked$Lexer.lexer;
-  InlineLexer: typeof marked$InlineLexer;
-  inlinelexer: typeof marked$InlineLexer.output;
-  Renderer: typeof marked$Renderer;
-  parse: marked$Marked;
-}
+  (md: string, o: marked$MarkedOptions, cb: marked$NodeCallback<string>): void,
+  (md: string, cb: marked$NodeCallback<string>): void,
+  (md: string, o?: marked$MarkedOptions): string,
+  setOptions: (o: marked$MarkedOptions) => void,
+  defaults: marked$MarkedOptions,
+  Parser: typeof marked$Parser,
+  parser: typeof marked$Parser.parse,
+  Lexer: typeof marked$Lexer,
+  lexer: typeof marked$Lexer.lexer,
+  InlineLexer: typeof marked$InlineLexer,
+  inlinelexer: typeof marked$InlineLexer.output,
+  Renderer: typeof marked$Renderer,
+  parse: marked$Marked
+};
 /* END copied over from marked libdef */
 
 /* FIXME This should be an intersection with marked. Since intersections with objects aren't yet supported,
  * it would break type checking.
  */
-declare module 'marked-man' {
+declare module "marked-man" {
   /* FIXME This should really be an intersect with marked$options, but since intersects aren't yet supported,
    * it does more harm than good.
    */
   declare type MarkedManOptions = {|
-    format?: "html" | "roff";
-  name ?: string;
-  date ?: Date;
-  section ?: string;
-  version ?: string;
-  manual ?: string;
-  gfm ?: boolean;
-  breaks ?: boolean;
-  sanitize ?: boolean;
-  ronn ?: boolean;
-  |}
+    format?: "html" | "roff",
+    name?: string,
+    date?: Date,
+    section?: string,
+    version?: string,
+    manual?: string,
+    gfm?: boolean,
+    breaks?: boolean,
+    sanitize?: boolean,
+    ronn?: boolean
+  |};
 
-declare type MarkedMan = {
-  (md: string, o: MarkedManOptions, cb: marked$NodeCallback<string>): void;
-  (md: string, cb: marked$NodeCallback<string>): void;
-  (md: string, o?: MarkedManOptions): string;
-  setOptions: (o: MarkedManOptions) => void;
-  defaults: MarkedManOptions;
-}
+  declare type MarkedMan = {
+    (md: string, o: MarkedManOptions, cb: marked$NodeCallback<string>): void,
+    (md: string, cb: marked$NodeCallback<string>): void,
+    (md: string, o?: MarkedManOptions): string,
+    setOptions: (o: MarkedManOptions) => void,
+    defaults: MarkedManOptions
+  };
 
-declare export default MarkedMan;
+  declare export default MarkedMan;
 }

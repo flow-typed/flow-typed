@@ -20,11 +20,11 @@ declare module "react-dnd" {
   declare type InstanceOf<C> = _InstanceOf<*, C>;
 
   declare class ConnectedComponent<C, I, P> extends React$Component<P> {
-    static DecoratedComponent: C,
-    getDecoratedComponentInstance(): I,
-    getHandlerId(): Identifier,
-    props: P,
-    state: void
+    static DecoratedComponent: C;
+    getDecoratedComponentInstance(): I;
+    getHandlerId(): Identifier;
+    props: P;
+    state: void;
   }
 
   declare type Connector<SP: {}, CP: {}> = (<
@@ -204,7 +204,9 @@ declare module "react-dnd" {
     window?: Object
   };
 
-  declare class DragDropContextProvider<ProviderProps> extends React$Component<ProviderProps> {
+  declare class DragDropContextProvider<ProviderProps> extends React$Component<
+    ProviderProps
+  > {
     props: ProviderProps;
   }
 

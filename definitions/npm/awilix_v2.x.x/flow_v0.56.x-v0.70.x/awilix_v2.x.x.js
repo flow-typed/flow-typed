@@ -1,4 +1,4 @@
-declare module 'awilix' {
+declare module "awilix" {
   declare module.exports: {
     createContainer(?awilix$ContainerOptions): awilix$Container<{}>,
     ResolutionMode: Class<awilix$ResolutionMode>,
@@ -14,7 +14,7 @@ declare module 'awilix' {
 declare class awilix$ResolutionError extends Error {}
 
 declare type awilix$POJO<T> = { [string]: T };
-declare type awilix$Name<T> = $PropertyType<T, 'name'>;
+declare type awilix$Name<T> = $PropertyType<T, "name">;
 declare type awilix$ClassName<T> = awilix$Name<Class<T>>;
 declare type awilix$ClassIdx<T> = { [awilix$ClassName<T>]: T };
 declare type awilix$FnIdx<T> = { [awilix$Name<T>]: awilix$Return<T> };
@@ -124,7 +124,7 @@ declare type awilix$ModuleDescriptor = {
   path: string
 };
 
-declare type awilix$BuiltInNameFormatters = 'camelCase';
+declare type awilix$BuiltInNameFormatters = "camelCase";
 
 declare type awilix$NameFormatter = (
   name: string,

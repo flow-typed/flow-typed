@@ -13,11 +13,11 @@ declare type $algolia$SearchIndexResponse = {|
   processingTimeMS: number,
   query: string,
   parsed_query: string,
-  params: string,
+  params: string
 |};
 
 declare type $algolia$SearchIndexMultiResponse = {|
-  results: Array<$algolia$SearchIndexResponse>,
+  results: Array<$algolia$SearchIndexResponse>
 |};
 
 declare type $algoliasearch$Settings = {|
@@ -26,7 +26,7 @@ declare type $algoliasearch$Settings = {|
   searchableAttributes?: Array<string>,
   attributesForFaceting?: Array<string>,
   unretrievableAttributes?: Array<string>,
-  attributesToRetrieve?: Array<string> | '*',
+  attributesToRetrieve?: Array<string> | "*",
 
   // Ranking
   ranking?: Array<string>,
@@ -56,17 +56,17 @@ declare type $algoliasearch$Settings = {|
   ignorePlurals?: boolean,
   disableTypoToleranceOnAttributes?: boolean,
   disableTypoToleranceOnWords?: boolean,
-  separatorsToIndex?: string,
+  separatorsToIndex?: string
 |};
 
 declare type $algoliasearch$ClientOptions = {|
   timeout?: number,
-  protocol?: 'http:' | 'https:',
+  protocol?: "http:" | "https:",
   httpClient?: HTTPClient,
   hosts?: {|
     read?: string,
-    write?: string,
-  |},
+    write?: string
+  |}
 |};
 
 declare type $algoliasearch$QueryParameters =
@@ -80,7 +80,7 @@ declare type $algoliasearch$QueryParameters =
       aroundLatLng?: string,
       aroundLatLngViaIP?: string,
       aroundPrecision?: number,
-      aroundRadius?: number | 'all',
+      aroundRadius?: number | "all",
       attributesToHighlight?: Array<string>,
       attributesToRetrieve?: Array<string>,
       attributesToSnippet?: Array<string>,
@@ -119,89 +119,77 @@ declare type $algoliasearch$QueryParameters =
       snippetEllipsisText?: string,
       synonyms?: boolean,
       tagFilters?: string,
-      typoTolerance?: boolean,
+      typoTolerance?: boolean
     };
 
 declare type $algoliasearch$QueryMultiParameters = Array<{|
   indexName: string,
-  params: $algoliasearch$QueryParameters,
+  params: $algoliasearch$QueryParameters
 |}>;
 
 declare interface $algoliasearch$Client {
-  clearCache(): void,
-  initIndex(s: string): $algoliasearch$Index,
-};
+  clearCache(): void;
+  initIndex(s: string): $algoliasearch$Index;
+}
 
 declare interface $algoliasearch$IndexLite {
-  clearCache(): void,
+  clearCache(): void;
   // Single
   search(
     s: $algoliasearch$QueryParameters,
     callback: Callback<$algolia$SearchIndexResponse>
-  ): void,
+  ): void;
   search(
     s: $algoliasearch$QueryParameters
-  ): Promise<$algolia$SearchIndexResponse>,
+  ): Promise<$algolia$SearchIndexResponse>;
   // Multi
   search(
     queries: Array<$algoliasearch$QueryMultiParameters>,
     callback: Callback<$algolia$SearchIndexMultiResponse>
-  ): void,
+  ): void;
   search(
     queries: Array<$algoliasearch$QueryMultiParameters>
-  ): Promise<$algolia$SearchIndexMultiResponse>,
-  setSettings(settings: $algoliasearch$Settings, callback: Callback<any>): void,
-  setSettings(settings: $algoliasearch$Settings): Promise<any>,
-};
+  ): Promise<$algolia$SearchIndexMultiResponse>;
+  setSettings(settings: $algoliasearch$Settings, callback: Callback<any>): void;
+  setSettings(settings: $algoliasearch$Settings): Promise<any>;
+}
 
 declare interface $algoliasearch$Index extends $algoliasearch$IndexLite {
-  addObjects(o: JSONObject, callback: Callback<any>): void,
-  addObjects(o: JSONObject): Promise<any>,
-};
+  addObjects(o: JSONObject, callback: Callback<any>): void;
+  addObjects(o: JSONObject): Promise<any>;
+}
 
 declare interface $algoliasearch$ClientLite {
-  clearCache(): void,
-  initIndex(s: string): $algoliasearch$IndexLite,
-};
+  clearCache(): void;
+  initIndex(s: string): $algoliasearch$IndexLite;
+}
 
-declare module 'algoliasearch' {
+declare module "algoliasearch" {
   declare type Client = $algoliasearch$Client;
   declare type ClientOptions = $algoliasearch$ClientOptions;
   declare type Index = $algoliasearch$Index;
   declare type Settings = $algoliasearch$Settings;
   declare module.exports: {
-    (
-      applicationID: string,
-      apiKey: string,
-      options?: ClientOptions
-    ): Client;
-  }
+    (applicationID: string, apiKey: string, options?: ClientOptions): Client
+  };
 }
 
-declare module 'algoliasearch/reactnative' {
+declare module "algoliasearch/reactnative" {
   declare type Client = $algoliasearch$Client;
   declare type ClientOptions = $algoliasearch$ClientOptions;
   declare type Index = $algoliasearch$Index;
   declare type Settings = $algoliasearch$Settings;
   declare module.exports: {
-    (
-      applicationID: string,
-      apiKey: string,
-      options?: ClientOptions
-    ): Client;
-  }
+    (applicationID: string, apiKey: string, options?: ClientOptions): Client
+  };
 }
 
-declare module 'algoliasearch/lite' {
+declare module "algoliasearch/lite" {
   declare type Client = $algoliasearch$ClientLite;
   declare type ClientOptions = $algoliasearch$ClientOptions;
   declare type Index = $algoliasearch$IndexLite;
   declare type Settings = $algoliasearch$Settings;
   declare module.exports: {
-    (
-      applicationID: string,
-      apiKey: string,
-      options?: ClientOptions
-    ): Client;
-  }
+    (applicationID: string, apiKey: string, options?: ClientOptions): Client
+  };
 }

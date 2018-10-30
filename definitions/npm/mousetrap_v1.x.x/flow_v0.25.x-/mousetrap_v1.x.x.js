@@ -4,14 +4,14 @@ declare module "mousetrap" {
       e: KeyboardEvent,
       element: Element,
       combo: string
-    ) => boolean;
+    ) => boolean,
     bind(
-      key: string | Array < string >,
+      key: string | Array<string>,
       fn: (e: Event, combo?: string) => mixed,
-      eventType ?: string
-    ): void;
-    unbind(key: string | Array<string>): void;
-    trigger(key: string): void;
-    reset(): void;
-  }
+      eventType?: string
+    ): void,
+    unbind(key: string | Array<string>): void,
+    trigger(key: string): void,
+    reset(): void
+  };
 }

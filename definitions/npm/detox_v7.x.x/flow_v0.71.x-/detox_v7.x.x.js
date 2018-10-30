@@ -18,7 +18,7 @@ declare type initFunc = (config: config, initGlobals?: initGlobals) => void;
 
 declare type permissionValues = "YES" | "NO" | "unset";
 declare type locationPermissionValues = "always" | "inuse" | "never" | "unset";
-declare type orientationTypes = 'portrait' | 'landscape'
+declare type orientationTypes = "portrait" | "landscape";
 declare type launchParamsType = {
   newInstance?: boolean,
   permissions?: permissionsType,
@@ -26,7 +26,7 @@ declare type launchParamsType = {
   userNotification?: {},
   delete?: boolean,
   launchArgs?: {}
-}
+};
 declare type permissionsType = {
   calendar?: permissionValues,
   camera?: permissionValues,
@@ -42,11 +42,11 @@ declare type permissionsType = {
   reminders?: permissionValues,
   siri?: permissionValues,
   speech?: permissionValues
-}
+};
 declare type openURLType = {
   url: string,
   sourceApp?: string
-}
+};
 declare type notificationType = {
   trigger: {
     type: "push" | "calendar" | "timeInterval" | "location",
@@ -57,7 +57,6 @@ declare type notificationType = {
       radius: number,
       notifyOnEntry?: boolean,
       notifyOnExit?: boolean
-
     },
     repeats?: boolean
   },
@@ -70,22 +69,22 @@ declare type notificationType = {
   "user-text"?: string,
   "content-available"?: number,
   "action-identifier"?: string
-}
+};
 
 declare type deviceMethods = {
   disableSynchronization: () => Promise<void>,
   enableSynchronization: () => Promise<void>,
   getPlatform: () => Promise<void>,
   installApp: (path?: string) => Promise<void>,
-  launchApp: (launchParamsType) => Promise<void>,
-  openURL: (openURLType) => Promise<void>,
+  launchApp: launchParamsType => Promise<void>,
+  openURL: openURLType => Promise<void>,
   relaunchApp: () => Promise<void>,
   reloadReactNative: () => Promise<void>,
   resetContentAndSettings: () => Promise<void>,
   sendToHome: () => Promise<void>,
-  sendUserNotification: (notificationType) => Promise<void>,
+  sendUserNotification: notificationType => Promise<void>,
   setLocation: (lat: number, lon: number) => Promise<void>,
-  setOrientation: (orientationTypes) => Promise<void>,
+  setOrientation: orientationTypes => Promise<void>,
   setURLBlacklist: (urls: string[]) => Promise<void>,
   terminateApp: (bundleID?: string) => Promise<void>,
   uninstallApp: (bundleID?: string) => Promise<void>
@@ -120,7 +119,7 @@ declare module "detox" {
     value: inputString
   };
 
-  declare class Matcher { }
+  declare class Matcher {}
 
   declare class Element {
     clearText(): () => Promise<void>;
@@ -130,7 +129,11 @@ declare module "detox" {
     replaceText(string): Promise<void>;
     scroll(pixels: number, direction: directionTypes): Promise<void>;
     scrollTo(edgeTypes): Promise<void>;
-    swipe(directionTypes, speed: speedTypes, percentage?: number): Promise<void>;
+    swipe(
+      directionTypes,
+      speed: speedTypes,
+      percentage?: number
+    ): Promise<void>;
     tap(): Promise<void>;
     tapAtPoint(coordinateTypes): Promise<void>;
     typeText(string): Promise<void>;
@@ -168,14 +171,14 @@ declare module "detox" {
   }
 
   declare module.exports: {
-    afterEach: typeof afterEach;
-    beforeEach: typeof beforeEach;
-    by: byTypes;
-    cleanup: typeof cleanup;
-    device: deviceMethods;
-    element: (matcher: Matcher) => Element;
-    expect: (element: Element) => ExpectElement;
-    init: initFunc;
-    waitFor: (element: Element) => WaitForElement;
+    afterEach: typeof afterEach,
+    beforeEach: typeof beforeEach,
+    by: byTypes,
+    cleanup: typeof cleanup,
+    device: deviceMethods,
+    element: (matcher: Matcher) => Element,
+    expect: (element: Element) => ExpectElement,
+    init: initFunc,
+    waitFor: (element: Element) => WaitForElement
   };
 }

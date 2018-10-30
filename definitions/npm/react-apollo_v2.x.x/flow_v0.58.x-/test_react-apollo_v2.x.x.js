@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react';
-import { it, describe } from 'flow-typed-test';
+import * as React from "react";
+import { it, describe } from "flow-typed-test";
 import {
   ApolloProvider,
   ApolloConsumer,
@@ -20,7 +20,7 @@ import {
   type PureQueryOptions,
   type SubscriptionResult,
   type RefetchQueryDescription
-} from 'react-apollo';
+} from "react-apollo";
 
 const gql = (strings, ...args) => {}; // graphql-tag stub
 
@@ -50,8 +50,11 @@ type IQuery = {
 const withData: OperationComponent<IQuery> = graphql(query);
 
 // Compose exists and passes type checking
-const noop = (val) => val;
-compose(noop, noop)(true);
+const noop = val => val;
+compose(
+  noop,
+  noop
+)(true);
 
 it("works with functional component", () => {
   const FunctionalWithData = withData(({ data }) => {
@@ -62,7 +65,7 @@ it("works with functional component", () => {
   });
 });
 
-it('works with class component, this requires a stricter definition', () => {
+it("works with class component, this requires a stricter definition", () => {
   type BasicComponentProps = ChildProps<{}, IQuery>;
   class BasicComponent extends React.Component<BasicComponentProps> {
     render() {
@@ -190,7 +193,7 @@ const HERO_SUBSCRIPTION = gql`
   }
 `;
 
-it('works with Variables specified', () => {
+it("works with Variables specified", () => {
   type Response = {
     hero: Hero
   };
@@ -249,7 +252,7 @@ it('works with Variables specified', () => {
   const CharacterWithData = withCharacter(Character);
 });
 
-it('works with withApollo HOC', () => {
+it("works with withApollo HOC", () => {
   const Manual = withApollo(({ client }) => {
     // XXX please don't ever actually do this
     client.query({ query: HERO_QUERY });
@@ -269,11 +272,11 @@ class HeroQueryComp extends Query<
   { episode: string, offset?: ?number }
 > {}
 
-describe('<Query />', () => {
-  it('works', () => {
+describe("<Query />", () => {
+  it("works", () => {
     type Vars = {| foo: string |};
     type Res = {| res: string |};
-    const vars: Vars = { foo: 'bar' };
+    const vars: Vars = { foo: "bar" };
     const q = (
       <Query variables={vars} query={HERO_QUERY}>
         {({ data }: QueryRenderProps<Res, Vars>) => {
@@ -293,11 +296,11 @@ describe('<Query />', () => {
     );
   });
 
-  it('works when extending Query with types', () => {
-    <HeroQueryComp query={HERO_QUERY} variables={{ episode: 'episode' }}>
+  it("works when extending Query with types", () => {
+    <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
       {({ data, loading, error }) => {
-        if (loading) return 'Loading....';
-        if (error) return 'Error!';
+        if (loading) return "Loading....";
+        if (error) return "Error!";
         // $ExpectError Cannot get `data.hero`. data may be undefined
         data.hero;
         if (!data || !data.hero) {
@@ -314,26 +317,26 @@ describe('<Query />', () => {
     </HeroQueryComp>;
   });
 
-  it('raises an error if accessing a prop in children function that doesnt exist', () => {
-    <HeroQueryComp query={HERO_QUERY} variables={{ episode: 'episode' }}>
+  it("raises an error if accessing a prop in children function that doesnt exist", () => {
+    <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
       {// $ExpectError cannot render HeroQueryComp becuase errors is missing in children function (should be error instead of errors)
       ({ data, loading, errors }) => {
-        if (loading) return 'Loading....';
-        if (errors) return 'Error!';
+        if (loading) return "Loading....";
+        if (errors) return "Error!";
         return String(data);
       }}
     </HeroQueryComp>;
   });
 
-  describe('refetch', () => {
-    it('works if passed variablees that match the query', () => {
-      <HeroQueryComp query={HERO_QUERY} variables={{ episode: 'episode' }}>
+  describe("refetch", () => {
+    it("works if passed variablees that match the query", () => {
+      <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
         {({ data, refetch }) => {
           const onClick = () => {
             refetch();
-            refetch({ episode: 'otherEpisode' });
+            refetch({ episode: "otherEpisode" });
             // $ExpectError refetch variables do not match variables for query
-            refetch({ notEpisode: 'otherEpisode' });
+            refetch({ notEpisode: "otherEpisode" });
           };
           return <button onClick={onClick}>Click!</button>;
         }}
@@ -341,13 +344,13 @@ describe('<Query />', () => {
     });
   });
 
-  describe('fetchMore', () => {
-    it('works when passed valid options', () => {
-      <HeroQueryComp query={HERO_QUERY} variables={{ episode: 'episode' }}>
+  describe("fetchMore", () => {
+    it("works when passed valid options", () => {
+      <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
         {({ data, fetchMore }) => {
           const onClick = () => {
             fetchMore({
-              variables: { episode: 'episode2' },
+              variables: { episode: "episode2" },
               updateQuery: (prev, options) => {
                 if (!options.fetchMoreResult) return prev;
                 return {
@@ -367,7 +370,7 @@ describe('<Query />', () => {
               }
             });
 
-            const otherVariables = { other: '1234' };
+            const otherVariables = { other: "1234" };
             fetchMore({
               query: OTHER_QUERY,
               variables: otherVariables,
@@ -384,13 +387,13 @@ describe('<Query />', () => {
       </HeroQueryComp>;
     });
 
-    it('raises an error when passed invalid options', () => {
-      <HeroQueryComp query={HERO_QUERY} variables={{ episode: 'episode' }}>
+    it("raises an error when passed invalid options", () => {
+      <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
         {({ data, fetchMore }) => {
           const onClick = () => {
             // $ExpectError variables must match $Shape of query variables
             fetchMore({
-              variables: { other: 'hello' },
+              variables: { other: "hello" },
               updateQuery: (prev, options) => {
                 if (!options.fetchMoreResult) return prev;
                 return {
@@ -401,7 +404,7 @@ describe('<Query />', () => {
 
             // $ExpectError must pass query option if passing different variables than query
             fetchMore({
-              variables: { other: '1234' },
+              variables: { other: "1234" },
               updateQuery: (prev, options) => {
                 if (!options.fetchMoreResult) return prev;
                 return {
@@ -411,7 +414,7 @@ describe('<Query />', () => {
             });
 
             fetchMore({
-              variables: { episode: 'episode2' },
+              variables: { episode: "episode2" },
               updateQuery: (prev, options) => {
                 if (!options.fetchMoreResult) return prev;
                 // $ExpectError updateQuery return type must match query response type
@@ -427,12 +430,12 @@ describe('<Query />', () => {
     });
   });
 
-  describe('updateQuery', () => {
-    it('works', () => {
-      <HeroQueryComp query={HERO_QUERY} variables={{ episode: 'episode' }}>
+  describe("updateQuery", () => {
+    it("works", () => {
+      <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
         {({ updateQuery }) => {
           // $ExpectError updateQuery return type must match previous result type
-          updateQuery((previousResult, options) => ({ hello: 'flow' }));
+          updateQuery((previousResult, options) => ({ hello: "flow" }));
           const renameHero = (newName: string) =>
             updateQuery((previousResult, options) => {
               // $ExpectError Cannot get `options.unknownProperty` because property `unknownProperty` is missing in options
@@ -455,11 +458,11 @@ class HeroSubscriptionComp extends Subscription<
   HeroSubcriptionVariables
 > {}
 
-describe('<Subscription />', () => {
-  it('works', () => {
+describe("<Subscription />", () => {
+  it("works", () => {
     type Vars = {| foo: string |};
     type Res = {| res: string |};
-    const vars: Vars = { foo: '1' };
+    const vars: Vars = { foo: "1" };
     const q = (
       <Subscription variables={vars} subscription={HERO_SUBSCRIPTION}>
         {({ data }: SubscriptionResult<Res, Vars>) => {
@@ -480,14 +483,14 @@ describe('<Subscription />', () => {
       </Subscription>
     );
   });
-  it('works when extending Subscription with types', () => {
+  it("works when extending Subscription with types", () => {
     <HeroSubscriptionComp
       subscription={HERO_SUBSCRIPTION}
-      variables={{ heroId: '123' }}
+      variables={{ heroId: "123" }}
     >
       {({ data, loading, error }) => {
-        if (loading) return 'Loading....';
-        if (error) return 'Error!';
+        if (loading) return "Loading....";
+        if (error) return "Error!";
         // $ExpectError Cannot get `data.hero`. data may be undefined
         data.hero;
         if (!data || !data.hero) {
@@ -503,7 +506,7 @@ describe('<Subscription />', () => {
       }}
     </HeroSubscriptionComp>;
   });
-  it('errors if wrong variables passed', () => {
+  it("errors if wrong variables passed", () => {
     type Vars = {| foo: string |};
     type Res = {| res: string |};
     const q = (
@@ -523,11 +526,11 @@ class UpdateHeroMutationComp extends Mutation<
   UpdateHeroMutationVariables
 > {}
 
-describe('<Mutation />', () => {
-  it('mutate() args are optional', () => {
+describe("<Mutation />", () => {
+  it("mutate() args are optional", () => {
     type Vars = {| foo: string |};
     type Res = {| res: string |};
-    const vars: Vars = { foo: 'bar' };
+    const vars: Vars = { foo: "bar" };
     const q = (
       <Mutation variables={vars} mutation={HERO_QUERY}>
         {mutate => {
@@ -538,10 +541,10 @@ describe('<Mutation />', () => {
     );
   });
 
-  it('works', () => {
+  it("works", () => {
     type Vars = {| foo: string |};
     type Res = {| res: string |};
-    const vars: Vars = { foo: 'bar' };
+    const vars: Vars = { foo: "bar" };
     const q = (
       <Mutation variables={vars} mutation={HERO_QUERY}>
         {(
@@ -562,16 +565,16 @@ describe('<Mutation />', () => {
     );
   });
 
-  it('works when extending Mutation with types', () => {
+  it("works when extending Mutation with types", () => {
     <UpdateHeroMutationComp mutation={HERO_MUTATION}>
       {(updateHero, { loading, error, data, called }) => {
         const onClick = () => {
           updateHero({
-            variables: { input: { id: '1', name: 'hero1' } }
+            variables: { input: { id: "1", name: "hero1" } }
           });
           // $ExpectError variables must match Mutation variables
           updateHero({
-            variables: { id: '1', name: 'hero1' }
+            variables: { id: "1", name: "hero1" }
           });
         };
         return (
@@ -586,30 +589,30 @@ describe('<Mutation />', () => {
     </UpdateHeroMutationComp>;
   });
 
-  describe('optimisticResponse', () => {
-    it('works when passed an optimisticResponse object', () => {
+  describe("optimisticResponse", () => {
+    it("works when passed an optimisticResponse object", () => {
       <UpdateHeroMutationComp mutation={HERO_MUTATION}>
         {updateHero => {
           const optimisticResponse = {
             updateHero: {
-              __typename: 'UpdateHeroPayload',
+              __typename: "UpdateHeroPayload",
               hero: {
-                __typename: 'Hero',
-                name: 'Hero1',
-                id: '1'
+                __typename: "Hero",
+                name: "Hero1",
+                id: "1"
               }
             }
           };
           const onClick = () => {
             updateHero({
               optimisticResponse,
-              variables: { input: { id: '1', name: 'hero1' } }
+              variables: { input: { id: "1", name: "hero1" } }
             });
 
             // $ExpectError optimisticResponse must be an object
             updateHero({
-              optimisticResponse: 'optimisticResponse',
-              variables: { input: { id: '1', name: 'hero1' } }
+              optimisticResponse: "optimisticResponse",
+              variables: { input: { id: "1", name: "hero1" } }
             });
           };
           return <button onClick={onClick}>Click</button>;
@@ -618,13 +621,13 @@ describe('<Mutation />', () => {
     });
   });
 
-  describe('refetchQueries', () => {
-    it('works when passed refetchQueries to Mutation component', () => {
+  describe("refetchQueries", () => {
+    it("works when passed refetchQueries to Mutation component", () => {
       const queryOption = {
         query: HERO_QUERY,
-        variables: { episode: 'episode' }
+        variables: { episode: "episode" }
       };
-      const refetchQueries: RefetchQueryDescription = [queryOption, 'foo'];
+      const refetchQueries: RefetchQueryDescription = [queryOption, "foo"];
 
       <UpdateHeroMutationComp
         mutation={HERO_MUTATION}
@@ -633,7 +636,7 @@ describe('<Mutation />', () => {
         {updateHero => {
           const onClick = () => {
             updateHero({
-              variables: { input: { id: '1', name: 'hero1' } }
+              variables: { input: { id: "1", name: "hero1" } }
             });
           };
           return <button onClick={onClick}>Click</button>;
@@ -648,7 +651,7 @@ describe('<Mutation />', () => {
         {updateHero => {
           const onClick = () => {
             updateHero({
-              variables: { input: { id: '1', name: 'hero1' } }
+              variables: { input: { id: "1", name: "hero1" } }
             });
           };
           return <button onClick={onClick}>Click</button>;
@@ -656,32 +659,32 @@ describe('<Mutation />', () => {
       </UpdateHeroMutationComp>;
     });
 
-    it('works when passed refetchQueries to mutation function', () => {
+    it("works when passed refetchQueries to mutation function", () => {
       <UpdateHeroMutationComp mutation={HERO_MUTATION}>
         {updateHero => {
           const onClick = () => {
             const queryOption = {
               query: HERO_QUERY,
-              variables: { episode: 'episode' }
+              variables: { episode: "episode" }
             };
             const refetchQueries: PureQueryOptions[] = [queryOption];
             updateHero({
-              variables: { input: { id: '1', name: 'hero1' } },
+              variables: { input: { id: "1", name: "hero1" } },
               refetchQueries
             });
             updateHero({
-              variables: { input: { id: '1', name: 'hero1' } },
+              variables: { input: { id: "1", name: "hero1" } },
               refetchQueries: () => refetchQueries
             });
 
             updateHero({
-              variables: { input: { id: '1', name: 'hero1' } },
+              variables: { input: { id: "1", name: "hero1" } },
               // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
               refetchQueries: () => queryOption
             });
             // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
             updateHero({
-              variables: { input: { id: '1', name: 'hero1' } },
+              variables: { input: { id: "1", name: "hero1" } },
               refetchQueries: queryOption
             });
           };
@@ -691,8 +694,8 @@ describe('<Mutation />', () => {
     });
   });
 
-  describe('update', () => {
-    it('can manually update the cache after a mutation by passing update prop to the Mutation component', () => {
+  describe("update", () => {
+    it("can manually update the cache after a mutation by passing update prop to the Mutation component", () => {
       <UpdateHeroMutationComp
         mutation={HERO_MUTATION}
         update={(cache, { data }) => {
@@ -701,11 +704,11 @@ describe('<Mutation />', () => {
           if (data && data.updateHero) {
             const hero = cache.readQuery({
               query: HERO_QUERY,
-              variables: { episoe: 'episode' }
+              variables: { episoe: "episode" }
             });
             cache.writeQuery({
               query: HERO_QUERY,
-              variables: { episode: 'episode' },
+              variables: { episode: "episode" },
               data: { hero: data.updateHero }
             });
           }
@@ -714,7 +717,7 @@ describe('<Mutation />', () => {
         {updateHero => {
           const onClick = () => {
             updateHero({
-              variables: { input: { id: '1', name: 'hero1' } }
+              variables: { input: { id: "1", name: "hero1" } }
             });
           };
           return <button onClick={onClick}>Click</button>;
@@ -722,12 +725,12 @@ describe('<Mutation />', () => {
       </UpdateHeroMutationComp>;
     });
 
-    it('can manually update the cache after a mutation using update on the mutation function', () => {
+    it("can manually update the cache after a mutation using update on the mutation function", () => {
       <UpdateHeroMutationComp mutation={HERO_MUTATION}>
         {updateHero => {
           const onClick = () => {
             updateHero({
-              variables: { input: { id: '1', name: 'hero1' } },
+              variables: { input: { id: "1", name: "hero1" } },
               update: (cache, { data }) => {
                 // $ExpectError data may be undefined
                 data.updateHero;
@@ -735,16 +738,16 @@ describe('<Mutation />', () => {
                 if (data && data.updateHero) {
                   const hero = cache.readQuery({
                     query: HERO_QUERY,
-                    variables: { episoe: 'episode' }
+                    variables: { episoe: "episode" }
                   });
                   cache.writeQuery({
                     query: HERO_QUERY,
-                    variables: { episode: 'episode' },
+                    variables: { episode: "episode" },
                     data: { hero: data.updateHero }
                   });
                   if (data.updateHero && data.updateHero.hero) {
                     cache.writeFragment({
-                      id: '1',
+                      id: "1",
                       fragment: gql`
                         fragment myHero on Hero {
                           name
@@ -758,12 +761,12 @@ describe('<Mutation />', () => {
 
                   // $ExpectError readQuery requires query
                   cache.readQuery({
-                    variables: { episode: 'episode' }
+                    variables: { episode: "episode" }
                   });
                   // $ExpectError writeQuery requires data
                   cache.writeQuery({
                     query: HERO_QUERY,
-                    variables: { episode: 'episode' }
+                    variables: { episode: "episode" }
                   });
                   // $ExpectError writeFragment requires id
                   cache.writeFragment({
@@ -773,7 +776,7 @@ describe('<Mutation />', () => {
                       }
                     `,
                     data: {
-                      name: 'name'
+                      name: "name"
                     }
                   });
                   // $ExpectError cannot call unknownFunction on cache
@@ -789,8 +792,8 @@ describe('<Mutation />', () => {
   });
 });
 
-describe('<ApolloProvider />', () => {
-  it('works when passed client', () => {
+describe("<ApolloProvider />", () => {
+  it("works when passed client", () => {
     // Should be an instance of ApolloClient
     const client = {};
     <ApolloProvider client={client}>
@@ -798,14 +801,14 @@ describe('<ApolloProvider />', () => {
     </ApolloProvider>;
   });
 
-  it('raises an error when not passed a client', () => {
+  it("raises an error when not passed a client", () => {
     // $ExpectError ApolloPrivder requires client prop
     <ApolloProvider>
       <div />
     </ApolloProvider>;
   });
 
-  it('raises an error when not passed children', () => {
+  it("raises an error when not passed children", () => {
     // Should be an instance of ApolloClient
     const client = {};
 
@@ -814,8 +817,8 @@ describe('<ApolloProvider />', () => {
   });
 });
 
-describe('<ApolloConsumer />', () => {
-  it('passes ApolloClient to the consumer children', () => {
+describe("<ApolloConsumer />", () => {
+  it("passes ApolloClient to the consumer children", () => {
     <ApolloConsumer>
       {client => {
         const onClick = () => {
@@ -823,7 +826,7 @@ describe('<ApolloConsumer />', () => {
           client.query({ query: HERO_QUERY });
           client.readQuery({
             query: HERO_QUERY,
-            variables: { episode: 'episode' }
+            variables: { episode: "episode" }
           });
           // $ExpectError doSomethingElse is not a method of ApolloClient
           client.doSomethingElse();

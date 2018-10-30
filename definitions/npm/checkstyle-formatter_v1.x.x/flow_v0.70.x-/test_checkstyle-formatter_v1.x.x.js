@@ -1,24 +1,22 @@
 // @flow
-import { describe, it } from 'flow-typed-test';
-import checkstyleFormatter from 'checkstyle-formatter'
+import { describe, it } from "flow-typed-test";
+import checkstyleFormatter from "checkstyle-formatter";
 
-describe('checkstyle-formatter', () => {
-  it('converted from old format', () => {
-
-
+describe("checkstyle-formatter", () => {
+  it("converted from old format", () => {
     const results = [
       {
-        filename: 'foo.js',
+        filename: "foo.js",
         messages: [
-          { line: 1, column: 2, severity: 'warning', message: 'the quick' },
-          { line: 3, column: 4, severity: 'error', message: 'brown fox' }
+          { line: 1, column: 2, severity: "warning", message: "the quick" },
+          { line: 3, column: 4, severity: "error", message: "brown fox" }
         ]
       },
       {
-        filename: 'bar.js',
+        filename: "bar.js",
         messages: [
-          { line: 5, column: 6, severity: 'warning', message: 'jumped over' },
-          { line: 7, column: 8, severity: 'error', message: 'the lazy dog' }
+          { line: 5, column: 6, severity: "warning", message: "jumped over" },
+          { line: 7, column: 8, severity: "error", message: "the lazy dog" }
         ]
       }
     ];
@@ -30,9 +28,9 @@ describe('checkstyle-formatter', () => {
 
     const wrongResultFormat1 = [
       {
-        filename: 'foo.js',
-        messages: ''
-      },
+        filename: "foo.js",
+        messages: ""
+      }
     ];
 
     // $ExpectError
@@ -40,13 +38,13 @@ describe('checkstyle-formatter', () => {
 
     const wrongResultFormat2 = [
       {
-        filename: 'foo.js',
+        filename: "foo.js",
         // $ExpectError
-        messages: [{ line: 1, column: 2, severity: 'unknown' }]
-      },
+        messages: [{ line: 1, column: 2, severity: "unknown" }]
+      }
     ];
 
     // $ExpectError
     checkstyleFormatter(wrongResultFormat2);
-  })
-})
+  });
+});
