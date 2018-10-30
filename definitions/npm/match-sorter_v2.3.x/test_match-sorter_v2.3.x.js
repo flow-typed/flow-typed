@@ -1,6 +1,7 @@
 // @flow
 
 import matchSorter, { rankings, caseRankings } from 'match-sorter';
+import { describe, it } from 'flow-typed-test';
 
 describe('rankings', () => {
   it('should be a number', () => {
