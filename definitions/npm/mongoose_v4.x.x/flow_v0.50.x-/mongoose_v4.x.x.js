@@ -305,7 +305,7 @@ declare class Mongoose$Document {
   markModified(path: string): void;
   modifiedPaths(): string[];
 
-  populate(path?: string | Object, cb?: (err: Error, doc: this) => void): void;
+  populate(path?: string | Object, cb?: (err: Error, doc: this) => void): this;
   execPopulate(): Promise<this>;
   populated(path: string): ?MongoId;
   toJSON(options?: ToObjectOpts<this>): Object;

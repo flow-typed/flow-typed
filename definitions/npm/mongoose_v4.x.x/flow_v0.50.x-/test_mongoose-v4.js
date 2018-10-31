@@ -120,16 +120,28 @@ export const UserSchema: Mongoose$Schema<Mongoose$Document> = new Schema(
       set: (v: string) => v.toLowerCase().trim(),
       required: true
     },
-    name: String
+    name: String,
+    admin: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin"
+    }
   },
   {
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at"
     },
-    collection: "admin"
+    collection: "user"
   }
 );
+
+const User = mongoose.model("User", UserSchema);
+
+User.findOne({}).exec().then( user => {
+  if (user) {
+    user.populate("admin").execPopulate();
+  }
+})
 
 mongoose.disconnect(err => console.log("err"));
 
