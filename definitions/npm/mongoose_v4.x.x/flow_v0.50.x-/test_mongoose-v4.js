@@ -2,7 +2,7 @@
 
 import mongoose, { Schema } from "mongoose";
 
-export const AdminSchema = new Schema(
+export const AdminSchema: Mongoose$Schema<AdminDoc> = new Schema(
   {
     _id: String,
     email: {
@@ -112,7 +112,7 @@ const a2 = new Admin({ email: 123, token: "www" });
 Admin.aggregate([ { $project : { email : 1 } } ]).allowDiskUse(true).exec()
 
 //
-export const UserSchema = new Schema(
+export const UserSchema: Mongoose$Schema<Mongoose$Document> = new Schema(
   {
     email: {
       type: String,
