@@ -488,7 +488,20 @@ declare module "@material-ui/core/DialogTitle/DialogTitle" {
 }
 
 declare module "@material-ui/core/withMobileDialog/withMobileDialog" {
-  declare module.exports: any;
+  import type { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+  import type { WithWidth } from '@material-ui/core/withWidth/withWidth';
+
+  declare type WithMobileDialog = {
+    fullScreen?: boolean
+  } & WithWidth
+
+  declare module.exports: (
+    options?: {
+      breakpoint: Breakpoint
+    }
+  ) => <Props: {}, WrappedComponent: React$ComponentType<Props>>(
+    Component: WrappedComponent
+  ) => React$ComponentType<$Diff<React$ElementConfig<$Supertype<WrappedComponent>>, WithMobileDialog>>;
 }
 
 declare module "@material-ui/core/Dialog" {
@@ -1918,7 +1931,7 @@ declare module "@material-ui/core/styles/colorManipulator" {
 }
 
 declare module "@material-ui/core/styles/createBreakpoints" {
-  declare type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
+  declare export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
 
   declare export type BreakpointValues = { [key: Breakpoint]: number };
   declare export type Breakpoints = {
@@ -3082,16 +3095,23 @@ declare module "@material-ui/core/utils/requirePropFactory" {
 
 declare module "@material-ui/core/withWidth/withWidth" {
   import type {ComponentType} from "react";
-
   import type {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
+
+  declare export type WithWidth = {
+    width?: Breakpoint,
+    innerRef?: (React$Ref<any> | {current: React$ElementRef<any> | null})
+  }
+
   declare module.exports: (options?: {|
     withTheme?: boolean,
     noSSR?: boolean,
     initialWidth?: Breakpoint,
     resizeInterval?: number
-  |}) => <Props: { width: Breakpoint }>(
+  |}) => <Props: WithWidth>(
     Component: ComponentType<Props>
-  ) => ComponentType<$Diff<Props, { width: Breakpoint }>>;
+  ) => <Props: {}, WrappedComponent: React$ComponentType<Props>>(
+    Component: WrappedComponent
+  ) => React$ComponentType<$Diff<React$ElementConfig<$Supertype<WrappedComponent>>,WithWidth>>;
 }
 
 declare module "@material-ui/core/colors" {
