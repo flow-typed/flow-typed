@@ -2,13 +2,7 @@
 
 import mongoose, { Schema } from "mongoose";
 
-mongoose.connect('mongodb://host:port/dbname', error => {
-  console.log(error)
-})
-
-mongoose.connect('mongodb://host:port/dbname').then(data => (data: Mongoose$Connection))
-
-export const AdminSchema = new Schema(
+export const AdminSchema: Mongoose$Schema<AdminDoc> = new Schema(
   {
     _id: String,
     email: {
@@ -118,7 +112,7 @@ const a2 = new Admin({ email: 123, token: "www" });
 Admin.aggregate([ { $project : { email : 1 } } ]).allowDiskUse(true).exec()
 
 //
-export const UserSchema = new Schema(
+export const UserSchema: Mongoose$Schema<Mongoose$Document> = new Schema(
   {
     email: {
       type: String,
@@ -126,16 +120,28 @@ export const UserSchema = new Schema(
       set: (v: string) => v.toLowerCase().trim(),
       required: true
     },
-    name: String
+    name: String,
+    admin: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin"
+    }
   },
   {
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at"
     },
-    collection: "admin"
+    collection: "user"
   }
 );
+
+const User = mongoose.model("User", UserSchema);
+
+User.findOne({}).exec().then( user => {
+  if (user) {
+    user.populate("admin").execPopulate();
+  }
+})
 
 mongoose.disconnect(err => console.log("err"));
 
