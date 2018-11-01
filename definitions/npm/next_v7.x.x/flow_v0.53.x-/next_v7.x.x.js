@@ -65,21 +65,21 @@ declare module "next/head" {
   declare module.exports: Class<React$Component<any, any>>;
 }
 
-declare module "next/link" {
-  declare export type URLObject = {
-    +href?: string,
-    +protocol?: string,
-    +slashes?: boolean,
-    +auth?: string,
-    +hostname?: string,
-    +port?: string | number,
-    +host?: string,
-    +pathname?: string,
-    +search?: string,
-    +query?: Object,
-    +hash?: string
-  };
+declare type URLObject = {
+  +href?: string,
+  +protocol?: string,
+  +slashes?: boolean,
+  +auth?: string,
+  +hostname?: string,
+  +port?: string | number,
+  +host?: string,
+  +pathname?: string,
+  +search?: string,
+  +query?: Object,
+  +hash?: string
+};
 
+declare module "next/link" {
   declare export type Props = {
     prefetch?: boolean,
     shallow?: boolean,
@@ -136,13 +136,13 @@ declare module "next/router" {
     +query: Object,
     events: RouterEvents,
     push(
-      url: string,
-      as: ?string,
+      url: string | URLObject,
+      as: ?(string | URLObject),
       options?: EventChangeOptions
     ): Promise<boolean>,
     replace(
-      url: string,
-      as: ?string,
+      url: string | URLObject,
+      as: ?(string | URLObject),
       options?: EventChangeOptions
     ): Promise<boolean>,
     prefetch(url: string): Promise<*>,
