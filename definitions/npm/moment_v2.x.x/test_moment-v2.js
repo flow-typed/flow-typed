@@ -9,6 +9,12 @@ describe('Parse, moment()', () => {
   moment([]);
   moment({});
 
+  const maybeString: ?string = '2015-01-01'
+  moment(maybeString)
+
+  const voidString: string | void = '2015-01-01'
+  moment(voidString)
+
   moment('2015-01-01');
   moment("12-25-1995", "MM-DD-YYYY");
   moment('It is 2012-05-25', 'YYYY-MM-DD', true);
