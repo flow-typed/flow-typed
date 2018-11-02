@@ -38,3 +38,4 @@ cli/package-lock.json
 # Editors
 .vscode
 .idea
+*.iml
