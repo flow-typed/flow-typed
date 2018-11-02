@@ -1,6 +1,16 @@
 declare module "react-native-video" {
-  // https://github.com/react-native-community/react-native-video/blob/master/TextTrackType.js#L3-L6
+  // import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
 
+  /*
+    To create an exact type,
+     uncomment the import that is higher,
+     after that find "VideoProps"
+     and uncomment the spread operator and  exact notation `{|  | }`
+
+    More info: https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md#dont-import-types-from-other-libdefs
+ */
+
+  // https://github.com/react-native-community/react-native-video/blob/master/TextTrackType.js#L3-L6
   // iOS only supports VTT, Android ExoPlayer supports all 3
   declare export type TextTrackTypes = {
     SRT: "application/x-subrip",
@@ -98,6 +108,8 @@ declare module "react-native-video" {
   }>;
 
   declare export type VideoProps = $ReadOnly<{
+    /*|
+    ...ViewProps,*/
     source: number | {| uri: string |},
     // https://github.com/react-native-community/react-native-video/blob/master/VideoResizeMode.js#L4-L6
     resizeMode?: ?("contain" | "cover" | "stretch"),
@@ -149,6 +161,7 @@ declare module "react-native-video" {
     translateX?: ?number,
     translateY?: ?number,
     rotation?: ?number
+    /*|*/
   }>;
 
   declare export default class Video extends React$Component<VideoProps> {
