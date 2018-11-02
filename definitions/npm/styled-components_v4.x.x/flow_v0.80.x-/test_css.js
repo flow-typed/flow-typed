@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {
   css,
+  keyframes,
   type CSSRules
 } from 'styled-components'
 
@@ -13,13 +14,22 @@ const styles2 = css`
   color: ${{}};
 `
 
-// OK
-const styles3 = css(['color: '], 'pink')
-const styles4 = css(['color: '], () => 'salmon')
+const anim = keyframes`
+  from {}
+  to {}
+`
 
-// $ExpectError - array is not a valid interpolation
-const styles5 = css(['color: '], [])
+const additonalStyles = css`
+  background: ${'pink'};
+`
+
+// OK
+const styles3 = css(['color: ', ';'], 'pink')
+const styles4 = css(['color: ', ';'], () => 'salmon')
+const styles5 = css(['animation: ', ';'], anim)
+const styles6 = css(['color: ', ';'], 'pink', additonalStyles)
+
 // $ExpectError - object is not a valid inerpolation
-const styles6 = css(['color: '], {})
+const styles7 = css(['color: ', ';'], {})
 
 // @NOTE not sure what better way to test this...

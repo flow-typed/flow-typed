@@ -4,6 +4,8 @@ declare module 'styled-components' {
 
   declare export type Interpolation =
                                     | (<P: {}>(executionContext: P) => string)
+                                    | CSSRules
+                                    | KeyFrames
                                     | string
                                     | number
 
