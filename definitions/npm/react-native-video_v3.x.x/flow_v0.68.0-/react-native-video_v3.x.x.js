@@ -1,6 +1,6 @@
-declare module "react-native-video" {
-  // import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
+// import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
 
+declare module "react-native-video" {
   /*
     To create an exact type,
      uncomment the import that is higher,
