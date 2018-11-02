@@ -47,11 +47,11 @@ declare module 'react-loadable' {
   };
   
   /**
-  * A type level function of
+  * A type level function like
   * <T>({ [string]: () => Promise<T> }) -> ({ [string]: T })
-  * It would be helpful to applicate type arguments into ReactLoadable.Map like below.
+  * It would be helpful to apply type arguments to Loadable.Map<> like below.
   * 
-  * ReactLoadable.Map<Props, typeof { A: () => import("a") }>({...});
+  * Loadable.Map<Props, typeof { A: () => import("a") }>({...});
   */
   declare type MapModules<L> = $ObjMap<L, <P>(P) => $Await<*, $Call<P>>>;
 
