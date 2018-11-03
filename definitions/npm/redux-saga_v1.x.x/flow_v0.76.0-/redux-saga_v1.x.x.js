@@ -16,7 +16,7 @@ declare module "redux-saga" {
 
   declare type Middleware<S, A, D = Dispatch<A>> = (api: MiddlewareAPI<S, A, D>) => (next: D) => D;
 
-  ///////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////
 
   declare export var SAGA_LOCATION: "@@redux-saga/LOCATION";
   declare export var CANCEL: "@@redux-saga/CANCEL_PROMISE";

@@ -1,6 +1,13 @@
 // @flow
 import { describe, it } from "flow-typed-test";
-import { runSaga, stdChannel, type Saga, type Task, type SagaMonitor } from "redux-saga";
+import {
+  runSaga,
+  stdChannel,
+  type Saga,
+  type Task,
+  type SagaMonitor,
+  type MulticastChannel
+} from "redux-saga";
 
 describe("runSaga", () => {
   function* s0(): Saga<number> {
@@ -76,7 +83,7 @@ describe("runSaga", () => {
   });
 
   describe("runSaga(RunSagaOptions)", () => {
-    const channel = stdChannel();
+    const channel: MulticastChannel<number> = stdChannel();
     const sagaMonitor: SagaMonitor = {
       effectTriggered: _ => {},
       effectResolved: (_, _2) => {},
@@ -97,7 +104,6 @@ describe("runSaga", () => {
     // $ExpectError: error level is a string enum
     runSaga({ logger: (level: number) => {} }, s0);
 
-    // $ExpectError: TODO: How i can help Flow to understand with case to select ???
     runSaga({ channel }, s1, "");
   });
 });
