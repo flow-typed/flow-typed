@@ -64,7 +64,7 @@ describe('Parse, moment()', () => {
     seconds: "3",
     milliseconds: "123"
   }); // from 2.11.0
-  // $ExpectError hour is invalid type
+
   moment({ hour: null, minute: 10 });
 
   // https://momentjs.com/docs/#/parsing/array/

@@ -129,7 +129,11 @@ declare class moment$Moment {
       | string
       | null
       | void
+      | []
+      | {}
   ): moment$Moment;
+  static (array: []): moment$Moment;
+  static (object: {}): moment$Moment;
   static (string: ?string, format: string | Array<string>): moment$Moment;
   static (
     string: ?string,
