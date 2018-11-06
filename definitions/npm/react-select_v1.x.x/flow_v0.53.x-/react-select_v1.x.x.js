@@ -1,13 +1,6 @@
 declare module 'react-select' {
-  declare type SelectOption = {
-    value: string | number,
-    label: string,
-    clearableValue?: boolean,
-  };
-
-  declare type Option = {
-    [key: string]: any,
-  };
+  declare type OptionType = Object
+  declare type OptionsType = OptionType[]
 
   declare type Props = {
     // html id(s) of element(s) that should be used to describe this input (for assistive tech)
@@ -51,16 +44,16 @@ declare module 'react-select' {
     // whether escape clears the value when the menu is closed
     escapeClearsValue?: boolean,
     // method to filter a single option (option, filterString)
-    filterOption?: (option: Option, filterString: string) => boolean,
+    filterOption?: (option: OptionType, filterString: string) => boolean,
     // boolean to enable default filtering or function to filter the options array ([options], filterString, [values])
     filterOptions?:
       | boolean
       | ((
-          options: Array<Option>,
+          options: OptionsType,
           filterValue: string,
           excludeOptions: Array<{}>,
           props: {}
-        ) => Array<{}>),
+        ) => OptionsType),
     // whether to strip diacritics when filtering
     ignoreAccents?: boolean,
     // whether to perform case-insensitive filtering
@@ -127,12 +120,12 @@ declare module 'react-select' {
     optionComponent?: React$ComponentType<{}>,
     // optionRenderer: function (option) {}
     optionRenderer?: (
-      option: Option,
+      option: OptionType,
       idx: number,
       inputValue: any
     ) => React$Node,
     // array of options
-    options?: Array<SelectOption>,
+    options?: OptionsType,
     // number of entries to page when using page up/down keys
     pageSize?: number,
     // field placeholder, displayed when there's no value
@@ -160,7 +153,7 @@ declare module 'react-select' {
     // path of the label value in option objects
     valueKey?: string,
     // valueRenderer: function (option) {}
-    valueRenderer?: (option: Option, idx?: number) => React$Node,
+    valueRenderer?: (option: OptionType, idx?: number) => React$Node,
     // optional style to apply to the component wrapper
     wrapperStyle?: {},
   };
