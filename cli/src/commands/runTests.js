@@ -127,13 +127,7 @@ async function getOrderedFlowBinVersions(
 
     const flowBins = apiPayload.data
       .filter(rel => {
-        if (rel.tag_name === 'v0.84.0') {
-          printSkipMessage(
-            rel.tag_name,
-            'https://github.com/facebook/flow/issues/7108',
-          );
-          return false;
-        } else if (rel.tag_name === 'v0.67.0') {
+        if (rel.tag_name === 'v0.67.0') {
           printSkipMessage(
             rel.tag_name,
             'https://github.com/facebook/flow/issues/5922',
