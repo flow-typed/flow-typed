@@ -305,6 +305,8 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath) {
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
     'include_warnings=true',
+    'sharedmemory.dep_table_pow=19',
+    'sharedmemory.hash_table_pow=21',
     '',
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
