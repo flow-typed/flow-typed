@@ -1,5 +1,4 @@
 // @flow
-import * as React from "react";
 import { describe, it } from "flow-typed-test";
 import FingerprintScanner, {
   type FingerprintScannerError
