@@ -1,5 +1,5 @@
 // @flow
-import { describe, it } from 'flow-typed-test';
+import { describe, it } from "flow-typed-test";
 import type {
   AngularPromise,
   AngularQ,

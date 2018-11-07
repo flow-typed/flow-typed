@@ -24,18 +24,19 @@ const output: string = checkstyleFormatter(results);
 const n: number = checkstyleFormatter(results);
 
 const wrongResultFormat1 = [
+  // $ExpectError
   {
     filename: "foo.js",
     messages: ""
   }
 ];
 
-// $ExpectError
 checkstyleFormatter(wrongResultFormat1);
 
 const wrongResultFormat2 = [
   {
     filename: "foo.js",
+    // $ExpectError
     messages: [{ line: 1, column: 2, severity: "unknown" }]
   }
 ];

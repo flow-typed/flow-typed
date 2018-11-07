@@ -2,7 +2,6 @@
 
 var inquirer = require('inquirer');
 
-// $ExpectError: Array.apply is missing in flow? 
 var choices = Array.apply(0, new Array(26)).map(function (x, y) {
   return String.fromCharCode(y + 65);
 });
