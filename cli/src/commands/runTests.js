@@ -127,13 +127,7 @@ async function getOrderedFlowBinVersions(
 
     const flowBins = apiPayload.data
       .filter(rel => {
-        if (rel.tag_name === 'v0.84.0') {
-          printSkipMessage(
-            rel.tag_name,
-            'https://github.com/facebook/flow/issues/7108',
-          );
-          return false;
-        } else if (rel.tag_name === 'v0.67.0') {
+        if (rel.tag_name === 'v0.67.0') {
           printSkipMessage(
             rel.tag_name,
             'https://github.com/facebook/flow/issues/5922',
@@ -305,6 +299,7 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath) {
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
     'include_warnings=true',
+    'server.max_workers=0',
     '',
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
