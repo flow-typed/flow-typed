@@ -115,7 +115,7 @@ declare module 'zipkin' {
         setIpv4(ipv4: string): void;
         setPort(port: number): void;
 
-        isEmpty(): void;
+        isEmpty(): boolean;
     }
 
     declare interface model$Annotation {
