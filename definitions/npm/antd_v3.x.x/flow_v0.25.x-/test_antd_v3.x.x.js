@@ -145,6 +145,12 @@ describe("Checkbox", () => {
   });
 });
 
+describe("Checkbox.Group", () => {
+  it("is a react component", () => {
+    const group = <Checkbox.Group />;
+  });
+});
+
 describe("Col", () => {
   it("is a react component", () => {
     const col = <Col />;
