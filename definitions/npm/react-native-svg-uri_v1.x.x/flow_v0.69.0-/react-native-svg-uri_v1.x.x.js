@@ -1,5 +1,8 @@
 declare module "react-native-svg-uri" {
-  // import type {ImageSource} from 'react-native/Libraries/Image/ImageSource.js'
+  // These types are copied directly from the react-native.
+  // Importing them in this libdef causes a loss in type coverage.
+
+  // https://github.com/facebook/react-native/blob/e7ddc59019f737f98b7be6e9abc7106be3a6cdde/Libraries/Image/ImageSource.js#L91
 
   declare export type ImageURISource = { uri?: ?string };
 
@@ -7,10 +10,6 @@ declare module "react-native-svg-uri" {
     | number
     | ImageURISource
     | Array<ImageURISource>;
-
-  // These types are copied directly from the react-native.
-  // Importing them in this libdef causes a loss in type coverage.
-  // https://github.com/facebook/react-native/blob/e7ddc59019f737f98b7be6e9abc7106be3a6cdde/Libraries/Image/ImageSource.js#L91
 
   ///////////////////////////////////////////////////////////////////////////////////////////
 

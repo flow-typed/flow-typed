@@ -56,7 +56,7 @@ describe("<SvgUri />", () => {
         />;
       });
 
-      it("raises an error when width or height invalid", () => {
+      it("raises an error when svgXmlData invalid", () => {
         // $ExpectError
         <SvgUri svgXmlData={{}} />;
       });
@@ -67,7 +67,7 @@ describe("<SvgUri />", () => {
         <SvgUri fill="red" />;
       });
 
-      it("raises an error when width or height invalid", () => {
+      it("raises an error when fill invalid", () => {
         // $ExpectError
         <SvgUri fill={{}} />;
       });
@@ -78,7 +78,7 @@ describe("<SvgUri />", () => {
         <SvgUri onLoad={() => console.log("ready")} />;
       });
 
-      it("raises an error when width or height invalid", () => {
+      it("raises an error when onLoad invalid", () => {
         // $ExpectError
         <SvgUri onLoad="ops" />;
       });
