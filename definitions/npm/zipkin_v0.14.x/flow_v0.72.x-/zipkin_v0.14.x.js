@@ -14,7 +14,7 @@ declare module 'zipkin' {
         letContext<V>(ctx: T, callback: () => V): V;
     }
 
-    declare interface $Sampler {
+    declare export interface $Sampler {
         shouldSample(traceId: TraceId): option$Option<boolean>;
     }
 
@@ -348,9 +348,8 @@ declare module 'zipkin' {
         ServerAddr: Class<Annotation$ServerAddr>,
         LocalAddr: Class<Annotation$LocalAddr>,
         BinaryAnnotation: Class<Annotation$BinaryAnnotation>,
-   }
+    }
 
-    declare export type Sampler = $Sampler
     declare export var sampler: {
         Sampler: Class<sampler$Sampler>,
         CountingSampler: Class<sampler$CountingSampler>,
