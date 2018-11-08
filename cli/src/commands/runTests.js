@@ -362,12 +362,10 @@ async function runFlowTypeDefTests(flowVersionsToRun, groupId, testDirPath) {
         } else if (!stdErrOut.endsWith('Found 0 errors\n')) {
           errors.push(
             testRunId +
-              ': Unexpected Flow errors(' +
+              ': Unexpected Flow errors (' +
               String(errCode) +
-              '):\n' +
-              stdErrOut +
-              '\n' +
-              String(execError),
+              '):\n\n' +
+              stdErrOut,
           );
         }
       }),
@@ -687,11 +685,11 @@ export async function run(argv: Args): Promise<number> {
     console.log('ERROR: %s', testGroupName);
     errors.forEach(err =>
       console.log(
-        ' * %s\n',
+        '* %s\n',
         err
           .split('\n')
           .map((line, idx) => {
-            return idx === 0 ? line : '   ' + line;
+            return idx === 0 ? line : '    ' + line;
           })
           .join('\n'),
       ),
