@@ -127,57 +127,57 @@ declare module 'amqplib' {
   declare export class Channel {
     close: () => Promise<void>,
 
-      on:
+    on:
       & (('close', (() => mixed)) => void)
       & (('error', ((err: any) => mixed)) => void)
       & (('return', ((msg: Message) => mixed)) => void)
       & (('drain', (() => mixed)) => void),
 
-      assertQueue: (queue: string, options?: AssertQueueOptions) => Promise<QueueOKReply>,
+    assertQueue: (queue: string, options?: AssertQueueOptions) => Promise<QueueOKReply>,
 
-      checkQueue: (queue: string) => Promise<QueueOKReply>,
+    checkQueue: (queue: string) => Promise<QueueOKReply>,
 
-      deleteQueue: (queue: string, options?: DeleteQueueOptions) => Promise<OKReply>,
+    deleteQueue: (queue: string, options?: DeleteQueueOptions) => Promise<OKReply>,
 
-      purgeQueue: (queue: string) => Promise<OKReply>,
+    purgeQueue: (queue: string) => Promise<OKReply>,
 
-      bindQueue: (queue: string, source: string, pattern: string, args?: Object) => Promise<void>,
+    bindQueue: (queue: string, source: string, pattern: string, args?: Object) => Promise<void>,
 
-      unbindQueue: (queue: string, source: string, pattern: string, args?: Object) => Promise<void>,
+    unbindQueue: (queue: string, source: string, pattern: string, args?: Object) => Promise<void>,
 
-      assertExchange: (exchange: string, type: string, options?: AssertExchangeOptions) => Promise<ExchangeOKReply>,
+    assertExchange: (exchange: string, type: string, options?: AssertExchangeOptions) => Promise<ExchangeOKReply>,
 
-      checkExchange: (exchange: string) => Promise<void>,
+    checkExchange: (exchange: string) => Promise<void>,
 
-      deleteExchange: (name: string, options?: DeleteExchangeOptions) => Promise<void>,
+    deleteExchange: (name: string, options?: DeleteExchangeOptions) => Promise<void>,
 
-      bindExchange: (destination: string, source: string, pattern: string, args?: Object) => Promise<void>,
+    bindExchange: (destination: string, source: string, pattern: string, args?: Object) => Promise<void>,
 
-      unbindExchange: (destination: string, source: string, pattern: string, args?: Object) => Promise<void>,
+    unbindExchange: (destination: string, source: string, pattern: string, args?: Object) => Promise<void>,
 
-      publish: (exchange: string, routingKey: string, content: Buffer, options?: PublishOptions) => boolean,
+    publish: (exchange: string, routingKey: string, content: Buffer, options?: PublishOptions) => boolean,
 
-      sendToQueue: (queue: string, content: Buffer, options?: PublishOptions) => boolean,
+    sendToQueue: (queue: string, content: Buffer, options?: PublishOptions) => boolean,
 
-      consume: (queue: string, (msg: ?Message) => mixed, options?: ConsumeOptions) => Promise<ConsumeOKReply>,
+    consume: (queue: string, (msg: ?Message) => mixed, options?: ConsumeOptions) => Promise<ConsumeOKReply>,
 
-      cancel: (consumerTag: string) => Promise<void>,
+    cancel: (consumerTag: string) => Promise<void>,
 
-      get: (queue: string, options?: GetOptions) => Promise<Message | false>,
+    get: (queue: string, options?: GetOptions) => Promise<Message | false>,
 
-      ack: (message: Message, allUpTo?: boolean) => void,
+    ack: (message: Message, allUpTo?: boolean) => void,
 
-      ackAll: () => void,
+    ackAll: () => void,
 
-      nack: (message: Message, allUpTo?: boolean, requeue?: boolean) => void,
+    nack: (message: Message, allUpTo?: boolean, requeue?: boolean) => void,
 
-      nackAll: (requeue?: boolean) => void,
+    nackAll: (requeue?: boolean) => void,
 
-      reject: (message: Message, requeue?: boolean) => void,
+    reject: (message: Message, requeue?: boolean) => void,
 
-      prefetch: (count: number, global?: boolean) => void,
+    prefetch: (count: number, global?: boolean) => void,
 
-      recover: () => Promise<void>,
+    recover: () => Promise<void>,
   }
 
   declare export class ConfirmChannel extends Channel {
@@ -215,57 +215,58 @@ declare module 'amqplib/callback_api' {
 
   declare export class Channel {
     close: (?(?AMQPError => void)) => void,
-      on:
+
+    on:
       & (('close', (() => mixed)) => void)
       & (('error', ((err:?AMQPError) => mixed)) => void)
       & (('return', ((msg: Message) => mixed)) => void)
       & (('drain', (() => mixed)) => void),
 
-      assertQueue: (queue: string, options: ?AssertQueueOptions, ?(?AMQPError , QueueOKReply) => mixed) => void,
+    assertQueue: (queue: string, options: ?AssertQueueOptions, ?(?AMQPError , QueueOKReply) => mixed) => void,
 
-      checkQueue: (queue: string, ?(?AMQPError , QueueOKReply) => mixed) => void,
+    checkQueue: (queue: string, ?(?AMQPError , QueueOKReply) => mixed) => void,
 
-      deleteQueue: (queue: string, options: ?DeleteQueueOptions, ?(?AMQPError , OKReply) => mixed) => void,
+    deleteQueue: (queue: string, options: ?DeleteQueueOptions, ?(?AMQPError , OKReply) => mixed) => void,
 
-      purgeQueue: (queue: string, ?(?AMQPError , OKReply) => mixed) => void,
+    purgeQueue: (queue: string, ?(?AMQPError , OKReply) => mixed) => void,
 
-      bindQueue: (queue: string, source: string, pattern: string, args: ?Object, ?(?AMQPError , void) => mixed) => void,
+    bindQueue: (queue: string, source: string, pattern: string, args: ?Object, ?(?AMQPError , void) => mixed) => void,
 
-      unbindQueue: (queue: string, source: string, pattern: string, args: ?Object, ?(?AMQPError , void) => mixed) => void,
+    unbindQueue: (queue: string, source: string, pattern: string, args: ?Object, ?(?AMQPError , void) => mixed) => void,
 
-      assertExchange: (exchange: string, type: string, options: ?AssertExchangeOptions, ?(?AMQPError , ExchangeOKReply) => mixed) => void,
+    assertExchange: (exchange: string, type: string, options: ?AssertExchangeOptions, ?(?AMQPError , ExchangeOKReply) => mixed) => void,
 
-      checkExchange: (?(exchange: string) => void) => void,
+    checkExchange: (?(exchange: string) => void) => void,
 
-      deleteExchange: (name: string, options: ?DeleteExchangeOptions, ?(?AMQPError , void) => mixed) => void,
+    deleteExchange: (name: string, options: ?DeleteExchangeOptions, ?(?AMQPError , void) => mixed) => void,
 
-      bindExchange: (destination: string, source: string, pattern: string, args: ?Object, ?(?AMQPError , void) => mixed) => void,
+    bindExchange: (destination: string, source: string, pattern: string, args: ?Object, ?(?AMQPError , void) => mixed) => void,
 
-      unbindExchange: (destination: string, source: string, pattern: string, args: ?Object, ?(?AMQPError , void) => mixed) => void,
+    unbindExchange: (destination: string, source: string, pattern: string, args: ?Object, ?(?AMQPError , void) => mixed) => void,
 
-      publish: (exchange: string, routingKey: string, content: Buffer, options?: PublishOptions) => boolean,
+    publish: (exchange: string, routingKey: string, content: Buffer, options?: PublishOptions) => boolean,
 
-      sendToQueue: (queue: string, content: Buffer, options?: PublishOptions) => boolean,
+    sendToQueue: (queue: string, content: Buffer, options?: PublishOptions) => boolean,
 
-      consume: (queue: string, (msg: ?Message) => mixed, options: ?ConsumeOptions, ?(?AMQPError , ConsumeOKReply) => mixed) => void,
+    consume: (queue: string, (msg: ?Message) => mixed, options: ?ConsumeOptions, ?(?AMQPError , ConsumeOKReply) => mixed) => void,
 
-      cancel: (consumerTag: string, ?(?AMQPError , void) => mixed) => void,
+    cancel: (consumerTag: string, ?(?AMQPError , void) => mixed) => void,
 
-      get: (queue: string, options: ?GetOptions, ?(?AMQPError , Message | false) => mixed) => void,
+    get: (queue: string, options: ?GetOptions, ?(?AMQPError , Message | false) => mixed) => void,
 
-      ack: (message: Message, allUpTo?: boolean) => void,
+    ack: (message: Message, allUpTo?: boolean) => void,
 
-      ackAll: () => void,
+    ackAll: () => void,
 
-      nack: (message: Message, allUpTo?: boolean, requeue?: boolean) => void,
+    nack: (message: Message, allUpTo?: boolean, requeue?: boolean) => void,
 
-      nackAll: (requeue?: boolean) => void,
+    nackAll: (requeue?: boolean) => void,
 
-      reject: (message: Message, requeue?: boolean) => void,
+    reject: (message: Message, requeue?: boolean) => void,
 
-      prefetch: (count: number, global?: boolean) => void,
+    prefetch: (count: number, global?: boolean) => void,
 
-      recover: ((?AMQPError , void) => mixed) => void,
+    recover: ((?AMQPError , void) => mixed) => void,
   }
 
   declare export class ConfirmChannel extends Channel {
@@ -275,9 +276,9 @@ declare module 'amqplib/callback_api' {
   declare export class Connection {
     createChannel: ((?AMQPError, Channel) => mixed) => void,
 
-      createConfirmChannel: ((?AMQPError, ConfirmChannel) => mixed) => void,
+    createConfirmChannel: ((?AMQPError, ConfirmChannel) => mixed) => void,
 
-      close: (?(?AMQPError => void)) => void,
+    close: (?(?AMQPError => void)) => void,
   }
 
   declare export var connect:
