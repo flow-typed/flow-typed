@@ -182,14 +182,22 @@ declare module 'amqplib' {
 
   declare export class ConfirmChannel extends Channel {
     waitForConfirms: () => Promise<void>,
+
+    publish: (exchange: string, routingKey: string, content: Buffer, options?: PublishOptions, ((?AMQPError , boolean) => mixed)) => void,
+
+    sendToQueue: (queue: string, content: Buffer, options?: PublishOptions, ((?AMQPError , boolean) => mixed)) => void,
   }
 
   declare export class Connection {
+    on:
+      & (('close', (() => mixed)) => void)
+      & (('error', ((err: any) => mixed)) => void),
+
     createChannel: () => Promise<Channel>,
 
-      createConfirmChannel: () => Promise<ConfirmChannel>,
+    createConfirmChannel: () => Promise<ConfirmChannel>,
 
-      close: () => Promise<void>,
+    close: () => Promise<void>,
   }
 
   declare export var connect: (url?: string | ConnectOptions, socketOptions?: Object) => Promise<Connection>
@@ -271,9 +279,17 @@ declare module 'amqplib/callback_api' {
 
   declare export class ConfirmChannel extends Channel {
     waitForConfirms: (?(?AMQPError ) => void) => void,
+
+    publish: (exchange: string, routingKey: string, content: Buffer, options?: PublishOptions, ((?AMQPError , boolean) => mixed)) => void,
+
+    sendToQueue: (queue: string, content: Buffer, options?: PublishOptions, ((?AMQPError , boolean) => mixed)) => void,
   }
 
   declare export class Connection {
+    on:
+      & (('close', (() => mixed)) => void)
+      & (('error', ((err: any) => mixed)) => void),
+
     createChannel: ((?AMQPError, Channel) => mixed) => void,
 
     createConfirmChannel: ((?AMQPError, ConfirmChannel) => mixed) => void,
