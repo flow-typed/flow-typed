@@ -600,6 +600,7 @@ declare module "mongoose" {
     connections: Mongoose$Connection[],
     Query: typeof Mongoose$Query,
     disconnect: (fn?: (error: any) => void) => Promise<void>,
-    Model: typeof Mongoose$Document
+    Model: typeof Mongoose$Document,
+    plugin<Opts>(plugin: Mongoose$SchemaPlugin<Opts>, opts: Opts): void
   };
 }
