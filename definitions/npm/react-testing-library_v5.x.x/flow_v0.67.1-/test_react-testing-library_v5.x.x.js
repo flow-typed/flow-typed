@@ -41,6 +41,13 @@ describe('waitForElement', () => {
       timeout: 100,
     });
   });
+
+  it('should return a usable value.', async (n) => {
+    const usernameElement = await waitForElement(
+      () => document.createElement('input'));
+
+    usernameElement.value = 'chucknorris';
+  })
 });
 
 describe('render', () => {
@@ -325,9 +332,11 @@ describe('text matching API', () => {
     getByTestId,
     queryByText,
     getByText,
+    getAllByText,
     queryByPlaceholderText,
     getByPlaceholderText,
     queryByLabelText,
+    getAllByLabelText,
     getByLabelText,
     queryByAltText,
     getByAltText,
@@ -385,6 +394,14 @@ describe('text matching API', () => {
       collapseWhitespace: true,
       exact: true,
     });
+  });
+
+  it('getAllByText should return array value.', () => {
+    const result: HTMLElement[] = getAllByText('1');
+  });
+
+  it('getAllByLabelText should return array value.', () => {
+    const result: HTMLElement[] = getAllByLabelText('1');
   });
 
   it('queryByPlaceholderText should accept text match arguments', () => {

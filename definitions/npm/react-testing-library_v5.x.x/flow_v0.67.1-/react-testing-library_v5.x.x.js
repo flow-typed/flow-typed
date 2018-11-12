@@ -10,11 +10,23 @@ declare module 'react-testing-library' {
     collapseWhitespace?: boolean,
   };
 
+  declare type SelectorMatchOptions = {selector?: string} & TextMatchOptions;
+
+  declare type AllByText = (
+    text: TextMatch,
+    options?: TextMatchOptions
+  ) => Array<HTMLElement>;
+
+  declare type QueryByText = (
+      text: TextMatch,
+      options?: TextMatchOptions,
+    ) => ?HTMLElement;
+
   declare type GetsAndQueries = {|
     getByTestId: (id: TextMatch, options?: TextMatchOptions) => HTMLElement,
     getByText: (
       text: TextMatch,
-      options?: {selector?: string} & TextMatchOptions,
+      options?: SelectorMatchOptions,
     ) => HTMLElement,
     getByPlaceholderText: (
       text: TextMatch,
@@ -22,24 +34,17 @@ declare module 'react-testing-library' {
     ) => HTMLElement,
     getByLabelText: (
       text: TextMatch,
-      options?: {selector?: string} & TextMatchOptions,
+      options?: SelectorMatchOptions,
     ) => HTMLElement,
+    getAllByLabelText: AllByText,
     getByAltText: (text: TextMatch, options?: TextMatchOptions) => HTMLElement,
     getAll: (text: TextMatch, options?: TextMatchOptions) => Array<HTMLElement>,
+    getAllByText: AllByText,
     queryByTestId: (id: TextMatch, options?: TextMatchOptions) => ?HTMLElement,
     queryByText: (text: TextMatch, options?: TextMatchOptions) => ?HTMLElement,
-    queryByPlaceholderText: (
-      text: TextMatch,
-      options?: TextMatchOptions,
-    ) => ?HTMLElement,
-    queryByLabelText: (
-      text: TextMatch,
-      options?: TextMatchOptions,
-    ) => ?HTMLElement,
-    queryByAltText: (
-      text: TextMatch,
-      options?: TextMatchOptions,
-    ) => ?HTMLElement,
+    queryByPlaceholderText: QueryByText,
+    queryByLabelText: QueryByText,
+    queryByAltText: QueryByText,
     queryAll: (
       text: TextMatch,
       options?: TextMatchOptions,
@@ -82,7 +87,7 @@ declare module 'react-testing-library' {
         timeout?: number,
         mutationObserverOptions?: MutationObserverInit,
       },
-    ) => Promise<T | void>,
+    ) => Promise<T>,
 
     within: (
       element: HTMLElement,
