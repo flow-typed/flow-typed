@@ -415,7 +415,7 @@ declare module "apollo-client" {
     +mutate?: MutationBaseOptions<>;
   }
 
-  declare type ApolloClientOptions<TCacheShape> = {
+  declare export type ApolloClientOptions<TCacheShape> = {
     link: ApolloLink,
     cache: ApolloCache<TCacheShape>,
     ssrMode?: boolean,

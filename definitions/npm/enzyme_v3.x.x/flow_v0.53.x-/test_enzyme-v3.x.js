@@ -69,6 +69,15 @@ shallowWrapper.getElements();
 // $ExpectError
 (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
 
+(mount(<div />).setProps({}, () => {}): ReactWrapper);
+// $ExpectError
+(mount(<div />).setProps({}, null): ReactWrapper);
+(mount(<div />).setProps({}): ReactWrapper);
+// $ExpectError
+(mount(<div />).setProps(): ReactWrapper);
+// $ExpectError
+(mount(<div />).setProps(null): ReactWrapper);
+
 
 // mount's getNode(s) were removed in enzyme v3
 // $ExpectError

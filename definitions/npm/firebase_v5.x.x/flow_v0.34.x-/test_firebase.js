@@ -303,3 +303,23 @@ firebase
   .getAll(
     firebase.firestore().doc('col/doc1'), 
     firebase.firestore().doc('col/doc2'));
+
+// #31
+firebase
+  .firestore()
+  .collection('/foo')
+  .where('id', '==', '5')
+  .get({ source: 'cache' });
+
+firebase
+ .firestore()
+ .collection('/foo')
+ .where('id', 'array-contains', '5')
+ .get({ source: 'cache' });
+
+firebase
+ .firestore()
+ .collection('/foo')
+ // $ExpectError
+ .where('id', 'lte', '5')
+ .get({ source: 'cache' });
