@@ -31,7 +31,11 @@ declare module "antd" {
 
   declare export class Card extends React$Component<{}> {}
 
-  declare export class Checkbox extends React$Component<{}> {}
+  declare export class Checkbox extends React$Component<{}> {
+    static Group: typeof CheckboxGroup;
+  }
+
+  declare class CheckboxGroup extends React$Component<{}> {}
 
   declare export class Divider extends React$Component<{}> {}
 
