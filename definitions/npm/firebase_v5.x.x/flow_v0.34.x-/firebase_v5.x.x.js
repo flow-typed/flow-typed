@@ -539,7 +539,7 @@ declare class $npm$firebase$firestore$DocumentReference {
   firestore: $npm$firebase$firestore$Firestore;
   id: string;
   parent: typeof $npm$firebase$firestore$CollectionReference;
-  collection(collectionPath: string): typeof $npm$firebase$firestore$CollectionReference;
+  collection(collectionPath: string): $npm$firebase$firestore$CollectionReference;
   delete(): Promise<void>;
   get(): Promise<$npm$firebase$firestore$DocumentSnapshot>;
   onSnapshot(
@@ -549,7 +549,7 @@ declare class $npm$firebase$firestore$DocumentReference {
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
   ): Function;
-  set(data: Object, options?: { merge: boolean } | null): Promise<void>;
+  set(data: Object, options?: {| merge?: boolean, mergeFields?: string[] |} | null): Promise<void>;
   update(...args: Array<any>): Promise<void>;
 }
 
