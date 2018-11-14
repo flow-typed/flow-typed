@@ -474,7 +474,7 @@ declare class $npm$firebase$firestore$Firestore {
   collection(collectionPath: string): $npm$firebase$firestore$CollectionReference;
   doc(documentPath: string): $npm$firebase$firestore$DocumentReference;
   enablePersistence(): Promise<void>;
-  runTransaction(updateFunction: (transaction: $npm$firebase$firestore$Transaction) => Promise<any>): Promise<mixed>;
+  runTransaction(updateFunction: (transaction: $npm$firebase$firestore$Transaction) => Promise<any>): Promise<any>;
   setLogLevel(logLevel: 'debug' | 'error' | 'silent'): void;
   settings(settings: $npm$firebase$firestore$Settings): void;
   getAll(
@@ -527,7 +527,7 @@ declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$
   constructor(): $npm$firebase$firestore$CollectionReference;
   id: string;
   parent: $npm$firebase$firestore$DocumentReference | null;
-  add(data: Object): Promise<mixed>;
+  add(data: Object): Promise<$npm$firebase$firestore$DocumentReference>;
   doc(documentPath?: string): $npm$firebase$firestore$DocumentReference;
 }
 
