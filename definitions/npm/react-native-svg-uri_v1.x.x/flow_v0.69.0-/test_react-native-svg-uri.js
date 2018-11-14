@@ -4,7 +4,7 @@ import { describe, it } from "flow-typed-test";
 import SvgUri from "react-native-svg-uri";
 
 describe("<SvgUri />", () => {
-  it("", () => {
+  it("should return react element of SvgUri", () => {
     (<SvgUri />: React$Element<typeof SvgUri>);
   });
 
