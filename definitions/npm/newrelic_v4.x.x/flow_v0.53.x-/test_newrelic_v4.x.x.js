@@ -49,7 +49,21 @@ describe('newrelic', () => {
   })
 
   it('should start segment', () => {
-    const seg: Promise<string> = newrelic.startSegment('sqg', true, (cb) => cb(''))
+    const seg = newrelic.startSegment(
+      'seg',
+      true,
+      (cb) => {
+        cb && cb()
+        return 'return'
+      },
+      () => {}
+    )
+
+    const seg2 = newrelic.startSegment(
+      'seg2',
+      true,
+      () => 'return'
+    )
   })
 
   it('should instrument', () => {

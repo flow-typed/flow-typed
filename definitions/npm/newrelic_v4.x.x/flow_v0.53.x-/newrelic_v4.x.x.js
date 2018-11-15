@@ -35,7 +35,7 @@ declare module 'newrelic' {
     instrumentMessages: Instrument,
     startWebTransaction: (url: string, handle: () => any) => any,
     startBackgroundTransaction: (name: string, group?: string, handle: () => any) => any;
-    startSegment: <T>(name: string, record: boolean, handler: (cd: T => any) => T | Promise<T>) => Promise<T>,
+    startSegment: <T>(name: string, record: boolean, handler: (cb: Function) => T, callback?: Function) => T;
     getTransaction: () => TransactionHandle,
     endTransaction: () => void,
 
