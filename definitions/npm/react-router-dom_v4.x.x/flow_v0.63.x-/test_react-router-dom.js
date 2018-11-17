@@ -338,6 +338,8 @@ describe("react-router-dom", () => {
       const Component = ({}) => <div>Hi!</div>;
       <Route path="/login" />;
 
+      <Route path={["/login", "/logout"]} />;
+
       <Route path="/login" component={Component} />;
 
       <Route path="/login" render={(context: ContextRouter) => <Component />} />;
