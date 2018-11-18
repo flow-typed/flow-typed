@@ -753,13 +753,15 @@ declare module ramda {
   ): (xs: Array<E>) => number;
 
   declare var map: {
-    <T, R, FN: (x: T) => R>(fn: FN):
-      ((xs: { [key: string]: T }) => { [key: string]: R })
-      & ((xs: { +[key: string]: T }) => { +[key: string]: R })
-      & ((xs: Array<T>) => Array<R>)
-      & ((xs: $ReadOnlyArray<T>) => $ReadOnlyArray<R>)
-      & <SR, S: {map: (FN) => SR}>(xs: S) => SR,
+    <T, R, R, FN: (x: T) => R, SR, S: { +map: FN => SR }>(fn: FN, xs: S): SR,
 
+    <T, R, FN: (x: T) => R>(
+      fn: FN
+    ): (<SR, S: { +map: FN => SR }>(xs: S) => SR) &
+      ((xs: { [key: string]: T }) => { [key: string]: R }) &
+      ((xs: { +[key: string]: T }) => { +[key: string]: R }) &
+      ((xs: Array<T>) => Array<R>) &
+      ((xs: $ReadOnlyArray<T>) => $ReadOnlyArray<R>),
 
     <T, R>(fn: (x: T) => R, xs: Array<T>): Array<R>,
     <T, R>(fn: (x: T) => R, xs: $ReadOnlyArray<T>): $ReadOnlyArray<R>,
@@ -767,10 +769,8 @@ declare module ramda {
     <T, R>(fn: (x: T) => R): (xs: Array<T>) => Array<R>,
     <T, R>(fn: (x: T) => R): (xs: $ReadOnlyArray<T>) => $ReadOnlyArray<R>,
 
-    <T, R, R, FN: (x: T) => R , SR,S: { map: (FN) => SR }>(fn: FN, xs: S): SR,
-
     <T, R>(fn: (x: T) => R, xs: { [key: string]: T }): { [key: string]: R },
-    <T, R>(fn: (x: T) => R, xs: { +[key: string]: T }): { +[key: string]: R },
+    <T, R>(fn: (x: T) => R, xs: { +[key: string]: T }): { +[key: string]: R }
   };
 
 
