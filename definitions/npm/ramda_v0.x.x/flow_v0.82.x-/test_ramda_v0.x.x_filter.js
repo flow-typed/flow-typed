@@ -41,59 +41,37 @@ describe("filter", () => {
     const ns: Array<number> = (filter: RefineFilter)(isNumber, ["1", 2]);
   });
 
-  describe("R.filter(fn, { filter(fn): boolean })", () => {
-    class SomeFilterableClass<T: Array<*> | $ReadOnlyArray<*>> {
-      values: T;
+  describe("read only", () => {
+    it("should return readonly Array<number>", () => {
+      const readOnlyArrNumbers: $ReadOnlyArray<number> = Object.freeze([1, 2, 3]);
 
-      constructor(v: T) {
-        this.values = v;
-      }
+      (filter(x => x > 1, readOnlyArrNumbers): $ReadOnlyArray<number>);
 
-      filter(fn: number => boolean): T {
-        return this.values.filter(fn);
-      }
-    }
-
-    describe("not read only", () => {
-      const ListNumbers = new SomeFilterableClass([1, 2, 3]);
-
-      it("should return Array<number>", () => {
-        const fn = (v: number) => v % 2 === 0;
-
-        (R.filter(fn, ListNumbers): Array<number>);
-        (R.filter(fn)(ListNumbers): Array<number>);
-      });
-
-      it("raises an error when fn argument type incompatible with filter function argument", () => {
-        const fn = (s: string): boolean => s === "";
-
-        // $ExpectError
-        (R.filter(fn, ListNumbers): Array<number>);
-
-        // $ExpectError
-        (R.filter(fn)(ListNumbers): Array<number>);
-      });
+      (filter(x => x > 1)(readOnlyArrNumbers): $ReadOnlyArray<number>);
     });
 
-    describe("read only", () => {
-      const ReadOnlyListNumbers = new SomeFilterableClass(Object.freeze([1, 2, 3]));
-
-      it("should return Read Only Array<number>", () => {
-        const fn = (v: number) => v % 2 === 0;
-
-        (R.filter(fn, ReadOnlyListNumbers): $ReadOnlyArray<number>);
-        (R.filter(fn)(ReadOnlyListNumbers): $ReadOnlyArray<number>);
+    it("should return readonly Object", () => {
+      type O = {| key: number |};
+      const readOnlyObj: { +[k: string]: O } = Object.freeze({
+        a: { key: 1 },
+        c: { key: 2 },
+        d: { key: 3 }
       });
 
-      it("raises an error when fn argument type incompatible with filter function argument", () => {
-        const fn = (s: string): boolean => s === "";
+      (filter(
+        R.pipe(
+          R.prop("key"),
+          (v: number) => v === 0
+        ),
+        readOnlyObj
+      ): $ReadOnly<{ [k: string]: O }>);
 
-        // $ExpectError
-        (R.filter(fn, ReadOnlyListNumbers): $ReadOnlyArray<number>);
-
-        // $ExpectError
-        (R.filter(fn)(ReadOnlyListNumbers): $ReadOnlyArray<number>);
-      });
+      (filter(
+        R.pipe(
+          R.prop("key"),
+          (v: number) => v === 0
+        )
+      )(readOnlyObj): { +[k: string]: O });
     });
   });
 });

@@ -411,30 +411,37 @@ declare module ramda {
 
   // This kind of filter allows us to do type refinement on the result, but we
   // still need Filter so that non-refining predicates still pass a type check.
-  declare type RefineFilter =
-    & (<K, V, P: $Pred<1>, T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { +[key: K]: V }>(
-      fn: P,
-      xs: T
-    ) => Array<$Refine<V, P, 1>>)
-    & (<K, V, P: $Pred<1>, T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { +[key: K]: V }>(
-      fn: P
-    ) => (xs: T) => Array<$Refine<V, P, 1>>)
+  declare type RefineFilter = (<
+    K,
+    V,
+    P: $Pred<1>,
+    T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { + [key: K]: V }
+    > (
+    fn: P,
+    xs: T
+  ) => Array<$Refine<V, P, 1>>) &
+    (<
+    K,
+    V,
+    P: $Pred< 1 >,
+    T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { + [key: K]: V }
+    > (
+    fn: P
+  ) =>(xs: T) => Array<$Refine<V, P, 1>>);
 
-  declare type Filter =
-    & (<R, K, V, FN: K => V, T:  { +filter: FN => R }>(
-      fn: FN,
-      xs: T
-    ) => R)
-    & (<R, K, V, FN: K => V, T:  { +filter: FN => R }>(
-      fn: FN
-    ) => T => R)
-    & (<K, V, T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { +[key: K]: V }>(
-      fn: UnaryPredicateFn<V>,
-      xs: T
-    ) => T)
-    & (<K, V, T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { +[key: K]: V }>(
-      fn: UnaryPredicateFn<V>,
-    ) => (xs: T) => T)
+  declare type Filter = (<
+    K,
+    V,
+    T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { +[key: K]: V }
+    > (
+    fn: UnaryPredicateFn < V >,
+    xs: T
+  ) => T) &
+    (<K, V, T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { + [key: K]: V }> (
+    fn: UnaryPredicateFn<V>
+  ) =>(xs: T) => T);
+
+
 
   declare interface Monad<A> {
     chain<B>(f: A => Monad<B>): Monad<B>;
