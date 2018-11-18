@@ -40,4 +40,60 @@ describe("filter", () => {
     // $ExpectError
     const ns: Array<number> = (filter: RefineFilter)(isNumber, ["1", 2]);
   });
+
+  describe("R.filter(fn, { filter(fn): boolean })", () => {
+    class SomeFilterableClass<T: Array<*> | $ReadOnlyArray<*>> {
+      values: T;
+
+      constructor(v: T) {
+        this.values = v;
+      }
+
+      filter(fn: number => boolean): T {
+        return this.values.filter(fn);
+      }
+    }
+
+    describe("not read only", () => {
+      const ListNumbers = new SomeFilterableClass([1, 2, 3]);
+
+      it("should return Array<number>", () => {
+        const fn = (v: number) => v % 2 === 0;
+
+        (R.filter(fn, ListNumbers): Array<number>);
+        (R.filter(fn)(ListNumbers): Array<number>);
+      });
+
+      it("raises an error when fn argument type incompatible with filter function argument", () => {
+        const fn = (s: string): boolean => s === "";
+
+        // $ExpectError
+        (R.filter(fn, ListNumbers): Array<number>);
+
+        // $ExpectError
+        (R.filter(fn)(ListNumbers): Array<number>);
+      });
+    });
+
+    describe("read only", () => {
+      const ReadOnlyListNumbers = new SomeFilterableClass(Object.freeze([1, 2, 3]));
+
+      it("should return Read Only Array<number>", () => {
+        const fn = (v: number) => v % 2 === 0;
+
+        (R.filter(fn, ReadOnlyListNumbers): $ReadOnlyArray<number>);
+        (R.filter(fn)(ReadOnlyListNumbers): $ReadOnlyArray<number>);
+      });
+
+      it("raises an error when fn argument type incompatible with filter function argument", () => {
+        const fn = (s: string): boolean => s === "";
+
+        // $ExpectError
+        (R.filter(fn, ReadOnlyListNumbers): $ReadOnlyArray<number>);
+
+        // $ExpectError
+        (R.filter(fn)(ReadOnlyListNumbers): $ReadOnlyArray<number>);
+      });
+    });
+  });
 });

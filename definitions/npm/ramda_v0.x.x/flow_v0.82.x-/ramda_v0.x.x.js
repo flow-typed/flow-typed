@@ -421,6 +421,13 @@ declare module ramda {
     ) => (xs: T) => Array<$Refine<V, P, 1>>)
 
   declare type Filter =
+    & (<R, K, V, FN: K => V, T:  { +filter: FN => R }>(
+      fn: FN,
+      xs: T
+    ) => R)
+    & (<R, K, V, FN: K => V, T:  { +filter: FN => R }>(
+      fn: FN
+    ) => T => R)
     & (<K, V, T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { +[key: K]: V }>(
       fn: UnaryPredicateFn<V>,
       xs: T
