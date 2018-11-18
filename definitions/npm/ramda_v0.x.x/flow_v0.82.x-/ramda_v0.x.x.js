@@ -752,20 +752,27 @@ declare module ramda {
     x: E,
   ): (xs: Array<E>) => number;
 
-  declare function map<T, R>(
-    fn: (x: T) => R,
-  ): ((xs: { [key: string]: T }) => { [key: string]: R }) &
-    ((xs: Array<T>) => Array<R>);
-  declare function map<T, R>(fn: (x: T) => R, xs: Array<T>): Array<R>;
-  declare function map<T, R>(fn: (x: T) => R): (xs: Array<T>) => Array<R>;
-  declare function map<T, R, S: { map: Function }>(fn: (x: T) => R, xs: S): S;
-  declare function map<T, R, S: { map: Function }>(
-    fn: (x: T) => R,
-  ): ((xs: S) => S) & ((xs: S) => S);
-  declare function map<T, R>(
-    fn: (x: T) => R,
-    xs: { [key: string]: T }
-  ): { [key: string]: R };
+  declare var map: {
+    <T, R, FN: (x: T) => R>(fn: FN):
+      ((xs: { [key: string]: T }) => { [key: string]: R })
+      & ((xs: { +[key: string]: T }) => { +[key: string]: R })
+      & ((xs: Array<T>) => Array<R>)
+      & ((xs: $ReadOnlyArray<T>) => $ReadOnlyArray<R>)
+      & <SR, S: {map: (FN) => SR}>(xs: S) => SR,
+
+
+    <T, R>(fn: (x: T) => R, xs: Array<T>): Array<R>,
+    <T, R>(fn: (x: T) => R, xs: $ReadOnlyArray<T>): $ReadOnlyArray<R>,
+
+    <T, R>(fn: (x: T) => R): (xs: Array<T>) => Array<R>,
+    <T, R>(fn: (x: T) => R): (xs: $ReadOnlyArray<T>) => $ReadOnlyArray<R>,
+
+    <T, R, R, FN: (x: T) => R , SR,S: { map: (FN) => SR }>(fn: FN, xs: S): SR,
+
+    <T, R>(fn: (x: T) => R, xs: { [key: string]: T }): { [key: string]: R },
+    <T, R>(fn: (x: T) => R, xs: { +[key: string]: T }): { +[key: string]: R },
+  };
+
 
   declare type AccumIterator<A, B, R> = (acc: R, x: A) => [R, B];
   declare function mapAccum<A, B, R>(
