@@ -2,13 +2,8 @@
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 "use strict";
 const _ = require("ramda");
-function describe(tag, fn) {
-  fn();
-}
 
-function it(tag, fn) {
-  fn();
-}
+import { describe, it } from 'flow-typed-test';
 
 describe("Functions", () => {
   it("T and F", () => {
@@ -403,6 +398,10 @@ describe("Function", function() {
   it("should typecheck is", function() {
     const x = _.is(Number, 1);
   });
+  it('does not allow non-types for the first argument', () => {
+    // $ExpectError
+    const x = _.is({}, 1)
+  })
 });
 
 describe("transducers", () => {
