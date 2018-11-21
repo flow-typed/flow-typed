@@ -597,13 +597,13 @@ declare module ramda {
   declare var startsWith: EdgeWith<*>;
   declare var endsWith: EdgeWith<*>;
   declare function toLower(a: string): string;
-  declare function toString(x: any): string;
+  declare function toString(x: mixed): string;
   declare function toUpper(a: string): string;
   declare function trim(a: string): string;
 
   // *Type
-  declare function is<T>(t: T): (v: any) => boolean;
-  declare function is<T>(t: T, v: any): boolean;
+  declare function is<T: Class<mixed>>(t: T): (v: mixed) => boolean;
+  declare function is<T: Class<mixed>>(t: T, v: mixed): boolean;
   declare var propIs: CurriedFunction3<any, string, Object, boolean>;
   declare function type(x: ?any): string;
   declare function isArrayLike(x: any): boolean;
