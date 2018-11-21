@@ -622,7 +622,7 @@ declare module 'react-navigation' {
     State: NavigationState,
     Options: {},
     Props: {}
-  > = React$ComponentType<{
+  > = React$StatelessFunctionalComponent<{
     ...Props,
     ...NavigationContainerProps<State, Options>,
   }> &
