@@ -426,37 +426,16 @@ declare module ramda {
 
   // This kind of filter allows us to do type refinement on the result, but we
   // still need Filter so that non-refining predicates still pass a type check.
-  declare type RefineFilter = (<
-    K,
-    V,
-    P: $Pred<1>,
-    T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { + [key: K]: V }
-    > (
-    fn: P,
-    xs: T
-  ) => Array<$Refine<V, P, 1>>) &
-    (<
-    K,
-    V,
-    P: $Pred< 1 >,
-    T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { + [key: K]: V }
-    > (
-    fn: P
-  ) =>(xs: T) => Array<$Refine<V, P, 1>>);
+  declare type RefineFilter =
+    & (<K, V, P: $Pred<1>, T: Array<V> | $ReadOnlyArray<V>> (fn: P, xs: T) => Array<$Refine<V, P, 1>>)
+    & (<K, V, P: $Pred<1>, T: Array<V> | $ReadOnlyArray<V>> (fn: P) => (xs: T) => Array<$Refine<V, P, 1>>);
 
-  declare type Filter = (<
-    K,
-    V,
-    T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { +[key: K]: V }
-    > (
-    fn: UnaryPredicateFn < V >,
-    xs: T
-  ) => T) &
-    (<K, V, T: Array<V> | $ReadOnlyArray<V> | { [key: K]: V } | { + [key: K]: V }> (
-    fn: UnaryPredicateFn<V>
-  ) =>(xs: T) => T);
+  declare type Filter =
+    & (<K, V, T: $ReadOnlyArray<V> | { +[key: K]: V }>  (fn: UnaryPredicateFn<V>, xs: T) => T)
+    & (<K, V, T: { [key: K]: V } | Array<V>>   (fn: UnaryPredicateFn<V>, xs: T) => T)
 
-
+    & (<K, V, T: $ReadOnlyArray<V> | { +[key: K]: V }>  (fn: UnaryPredicateFn<V>) =>(xs: T) => T)
+    & (<K, V, T: Array<V> | { [key: K]: V }>   (fn: UnaryPredicateFn<V>) =>(xs: T) => T)
 
   declare interface Monad<A> {
     chain<B>(f: A => Monad<B>): Monad<B>;
@@ -786,9 +765,8 @@ declare module ramda {
   declare var map: {
     <T, R, R, FN: (x: T) => R, SR, S: { +map: FN => SR }>(fn: FN, xs: S): SR,
 
-    <T, R, FN: (x: T) => R>(
-      fn: FN
-    ): (<SR, S: { +map: FN => SR }>(xs: S) => SR) &
+    <T, R, FN: (x: T) => R>(fn: FN):
+      (<SR, S: { +map: FN => SR }>(xs: S) => SR) &
       ((xs: { [key: string]: T }) => { [key: string]: R }) &
       ((xs: { +[key: string]: T }) => { +[key: string]: R }) &
       ((xs: Array<T>) => Array<R>) &
@@ -796,10 +774,6 @@ declare module ramda {
 
     <T, R>(fn: (x: T) => R, xs: Array<T>): Array<R>,
     <T, R>(fn: (x: T) => R, xs: $ReadOnlyArray<T>): $ReadOnlyArray<R>,
-
-    <T, R>(fn: (x: T) => R): (xs: Array<T>) => Array<R>,
-    <T, R>(fn: (x: T) => R): (xs: $ReadOnlyArray<T>) => $ReadOnlyArray<R>,
-
     <T, R>(fn: (x: T) => R, xs: { [key: string]: T }): { [key: string]: R },
     <T, R>(fn: (x: T) => R, xs: { +[key: string]: T }): { +[key: string]: R }
   };
