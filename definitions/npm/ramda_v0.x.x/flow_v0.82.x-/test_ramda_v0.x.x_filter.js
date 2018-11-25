@@ -45,9 +45,26 @@ describe("filter", () => {
     it("should return readonly Array<number>", () => {
       const readOnlyArrNumbers: $ReadOnlyArray<number> = Object.freeze([1, 2, 3]);
 
-      (filter(x => x > 1, readOnlyArrNumbers): $ReadOnlyArray<number>);
+      const result1 = filter(x => x > 1, readOnlyArrNumbers);
+      (result1: $ReadOnlyArray<number>);
 
-      (filter(x => x > 1)(readOnlyArrNumbers): $ReadOnlyArray<number>);
+      // $ExpectError
+      (result1: { +[key: string]: number });
+      // $ExpectError
+      (result1: { [key: string]: number });
+      // $ExpectError
+      (result1: Array<number>);
+
+      const result2 = filter(x => x > 1)(readOnlyArrNumbers);
+
+      (result2: $ReadOnlyArray<number>);
+
+      // $ExpectError
+      (result2: { +[key: string]: number });
+      // $ExpectError
+      (result2: { [key: string]: number });
+      // $ExpectError
+      (result2: Array<number>);
     });
 
     it("should return readonly Object", () => {
