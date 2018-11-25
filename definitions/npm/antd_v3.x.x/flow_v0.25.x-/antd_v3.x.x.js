@@ -319,6 +319,30 @@ declare module "antd" {
     static confirm: typeof modalFn;
   }
 
+  declare export type PaginationProps = {
+    current?: number,
+    defaultCurrent?: number,
+    defaultPageSize?: number,
+    hideOnSinglePage?: boolean,
+    itemRender?: (
+      page: number, 
+      type: "page" | "prev" | "next", 
+      originalElement: React$Node
+    ) => React$Node,
+    pageSize?: number,
+    pageSizeOptions?: string[],
+    showQuickJumper?: boolean,
+    showSizeChanger?: boolean,
+    showTotal?: (total: number, range: number[]) => React$Node,
+    simple?: boolean,
+    size?: string,
+    total?: number,
+    onChange?: (page: number, pageSize: number) => void,
+    onShowSizeChange?: (current: number, size: number) => void
+  };
+
+  declare export class Pagination extends React$Component<PaginationProps> {}
+
   declare export class Popconfirm extends React$Component<{}> {}
 
   declare export class Radio extends React$Component<{}> {

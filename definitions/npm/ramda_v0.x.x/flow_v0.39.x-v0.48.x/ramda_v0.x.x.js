@@ -383,8 +383,8 @@ declare module ramda {
   declare function trim(a: string): string;
 
   // *Type
-  declare function is<T>(t: T, ...rest: Array<void>): (v: any) => boolean;
-  declare function is<T>(t: T, v: any): boolean;
+  declare function is<T: Class<mixed>>(t: T): (v: mixed) => boolean;
+  declare function is<T: Class<mixed>>(t: T, v: mixed): boolean;
   declare var propIs: CurriedFunction3<any, string, Object, boolean>;
   declare function type(x: ?any): string;
   declare function isArrayLike(x: any): boolean;

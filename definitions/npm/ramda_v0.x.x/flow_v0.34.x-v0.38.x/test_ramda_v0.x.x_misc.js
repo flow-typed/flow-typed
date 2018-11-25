@@ -1,6 +1,17 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, curry, filter, find, repeat, zipWith } from 'ramda'
+import _, {
+  compose,
+  curry,
+  filter,
+  find,
+  is,
+  pipe,
+  repeat,
+  zipWith,
+} from 'ramda'
+
+import { describe, it } from 'flow-typed-test';
 
 const ns: Array<number> = [ 1, 2, 3, 4, 5 ]
 const ss: Array<string> = [ 'one', 'two', 'three', 'four' ]
@@ -36,9 +47,28 @@ const str: string = 'hello world'
 }
 //Type
 {
-  const x: boolean = _.is(Number, 1)
   const x1: false = _.isNil(1)
   const x1a: true = _.isNil()
   const x1b: true = _.isNil(null)
   const x2: boolean = _.propIs(1, 'num', { num: 1 })
 }
+
+describe('is', () => {
+  it('allows testing a value against a type', () => {
+    // Lifted right out of the examples.
+    // See https://ramdajs.com/docs/#is
+    is(Object, {}); //=> true
+    is(Number, 1); //=> true
+    is(Object, 1); //=> false
+    is(String, 's'); //=> true
+    is(String, new String('')); //=> true
+    is(Object, new String('')); //=> true
+    is(Object, 's'); //=> false
+    is(Number, {}); //=> false
+  })
+
+  it('does not allow non-types for the first argument', () => {
+    // $ExpectError
+    is({}, 1)
+  })
+})

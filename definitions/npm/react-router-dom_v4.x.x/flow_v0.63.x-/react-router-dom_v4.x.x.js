@@ -142,7 +142,7 @@ declare module "react-router-dom" {
     component?: ComponentType<*>,
     render?: (router: ContextRouter) => Node,
     children?: ComponentType<ContextRouter> | Node,
-    path?: string,
+    path?: string | Array<string>,
     exact?: boolean,
     strict?: boolean,
     location?: LocationShape,

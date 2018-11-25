@@ -19,7 +19,42 @@ let options = [
 let ValueComponent = (props: {}) => <span />;
 let ValueRenderer = (option: { label: string }) => option.label;
 
-describe('The `Select` component', () => {
+type ParentType = {
+  type: "parent",
+  disabled: true,
+  commonData: string
+}
+
+type ChildType = {
+  type: "child",
+  disabled: false,
+  commonData: string,
+  childData: string,
+}
+
+type OptionType = ParentType | ChildType
+
+let customOptions: OptionType[] =[
+  {
+    type: "parent",
+    disabled: true,
+    commonData: "data"
+  },
+  {
+    type: "child",
+    disabled: false,
+    commonData: "data",
+    childData: "child data 1"
+  },
+  {
+    type: "child",
+    disabled: false,
+    commonData: "data",
+    childData: "child data 2"
+  }
+];
+
+  describe('The `Select` component', () => {
   it('should validate on proper props usage', () => {
     <Select
       addLabelText="Add label, plz"
@@ -101,4 +136,50 @@ describe('The `Select` component', () => {
     // $ExpectError addLabelText cannot be number
     <Select addLabelText={123} />;
   });
+
+  it('should handle custom options', () => {
+    let customOptionRenderer = (o: OptionType) => <span/>;
+    let customFilterOption = (options: OptionType[], filterValue: string) => options;
+    <Select
+      name="name"
+      autoFocus
+      placeholder="Enter data"
+      valueKey="id"
+      labelKey="data"
+      options={customOptions}
+      value=""
+      optionRenderer={customOptionRenderer}
+      filterOptions={customFilterOption}
+    />
+  })
+
+  it('should error when optionRenderer option param type is not the same as options element type', () => {
+    let invalidRenderer = (o: string) => <span/>;
+    // $ExpectError
+    <Select
+      name="name"
+      autoFocus
+      placeholder="Enter data"
+      valueKey="id"
+      labelKey="data"
+      options={customOptions}
+      value=""
+      optionRenderer={invalidRenderer}
+    />
+  })
+
+  it('should error when filterOptions options param type is not an array of options element type', () => {
+    let invalidFilterOptions = (o: string) => <span/>;
+    // $ExpectError
+    <Select
+      name="name"
+      autoFocus
+      placeholder="Enter data"
+      valueKey="id"
+      labelKey="data"
+      options={customOptions}
+      value=""
+      filterOptions={invalidFilterOptions}
+    />
+  })
 });
