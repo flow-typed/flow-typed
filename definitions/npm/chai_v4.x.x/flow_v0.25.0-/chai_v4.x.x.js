@@ -1,4 +1,5 @@
 declare module "chai" {
+  declare module.exports: any;
   declare type ExpectChain<T> = {
     and: ExpectChain<T>,
     at: ExpectChain<T>,
