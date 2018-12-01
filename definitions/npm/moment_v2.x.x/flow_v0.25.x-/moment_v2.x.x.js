@@ -359,6 +359,7 @@ declare class moment$Moment {
   static weekdaysShort(): string;
   static weekdaysMin(): string;
   static localeData(key?: string): moment$LocaleData;
+  localeData(): moment$LocaleData;
   static duration(
     value: number | Object | string,
     unit?: string

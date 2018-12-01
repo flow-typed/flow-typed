@@ -284,6 +284,9 @@ const getLocale: string = moment.locale();
 const setLocale: string = moment.locale("en");
 const setArrayLocale: string = moment.locale(["en", "de"]);
 
+// Locales
+const localeData = moment().locale('fr').localeData();
+
 // Customize
 moment.defineLocale('fakeLocale');
 moment.defineLocale('fakeLocale', { parentLocale: 'xyz' });
