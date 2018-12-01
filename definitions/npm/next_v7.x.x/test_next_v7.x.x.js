@@ -79,7 +79,6 @@ Router.events.on('routeChangeError', (err: RouteError, url: string) => {
   }
 });
 
-// $ExpectError
 Router.push({});
 
 Router.push("/about");
