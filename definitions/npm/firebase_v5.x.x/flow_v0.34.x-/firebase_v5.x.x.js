@@ -638,7 +638,7 @@ declare interface $npm$firebase$firestore$WriteBatch {
 /** **** messaging ******/
 declare class $npm$firebase$messaging$Messaging {
   deleteToken(token: string): Promise<any>;
-  getToken(): Promise<string>;
+  getToken(): Promise<?string>;
   onMessage(nextOrObserver: ({}) => void | {}): () => void;
   onTokenRefresh(nextOrObserver: ({}) => void | {}): () => void;
   requestPermission(): Promise<any>;
