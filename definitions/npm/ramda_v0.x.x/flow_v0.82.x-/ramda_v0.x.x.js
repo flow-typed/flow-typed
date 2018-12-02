@@ -1302,21 +1302,21 @@ declare module ramda {
   ): Array<T>;
 
   // *Object
-  declare function assoc<T, S>(
-    key: string,
-    ...args: Array<void>
-  ): ((val: T) => (src: S) => { [k: string]: T }) &
-    ((val: T, src: S) => { [k: string]: T } & S);
-  declare function assoc<T, S>(
-    key: string,
-    val: T,
-    ...args: Array<void>
-  ): (src: S) => { [k: string]: T } & S;
-  declare function assoc<T, S>(
-    key: string,
-    val: T,
-    src: S
-  ): { [k: string]: T } & S;
+  declare var assoc: {
+    <T, S>(
+      key: string,
+      ...args: Array<void>
+    ):
+      & ((val: T) => (src: S) => ({ [k: string]: T }))
+      & ((val: T, src: S) => ({ [k: string]: T } & S)),
+    <T, S>(
+      key: string,
+      val: T,
+      ...args: Array<void>
+    ): (src: S) => ({ [k: string]: T } & S),
+    <T, S: Object, K: $Subtype<$Keys<S>>> (key: K, val: T, src: S):      ({ [k: string]: T } & S),
+    <T, S: Object>                        (key: string, val: T, src: S): ({ [k: string]: T, ...$Exact<S> })
+  };
 
   declare function assocPath<T, S>(
     key: Array<string>,
