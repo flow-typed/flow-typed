@@ -97,7 +97,10 @@ declare module 'styled-components' {
   //       I don't think there _is_ a good way, currently.
   // @NOTE Also not too sure about the naming of this...
   declare export type StyledElementType<T> = T;
-  declare export type StyledComponentType<C> = TaggedTemplateLiteral<C>
+  declare export type StyledComponentType<C> = {
+    [[call]]: TaggedTemplateLiteral<C>,
+    +attrs: <A: {}>(attributes: A) => TaggedTemplateLiteral<React$ComponentType<$Diff<React$ElementConfig<C>, A>>>
+  };
 
   declare type StyledComponentList = {
     a:                        StyledComponentType<StyledElementType<'a'>>,
@@ -341,7 +344,10 @@ declare module 'styled-components/native' {
   //       I don't think there _is_ a good way, currently.
   // @NOTE Also not too sure about the naming of this...
   declare export type StyledElementType<T> = T;
-  declare export type StyledComponentType<C> = TaggedTemplateLiteral<C>
+  declare export type StyledComponentType<C> = {
+    [[call]]: TaggedTemplateLiteral<C>,
+    +attrs: <A: {}>(attributes: A) => TaggedTemplateLiteral<React$ComponentType<$Diff<React$ElementConfig<C>, A>>>
+  };
 
   declare type StyledComponentList = {
     ActivityIndicator:             StyledComponentType<React$ComponentType<{}>>,

@@ -206,3 +206,36 @@ describe('wrapping class component', () => {
     const hello2 : React.Element<typeof Hello> = <StyledHello name={3} />
   })
 })
+
+describe('attrs API', () => {
+  type Props = {
+    name : string,
+    what?: number // Random, I know.
+  }
+
+  const Hello = (p : Props) =>
+    <div>Hello {p.name}</div>
+
+  it('detects required props have been passed via attrs', () => {
+    const StyledHello = styled(Hello).attrs({name: 'World'})``
+    const hello = <StyledHello />
+  })
+
+
+  it('errors on invalid attributes', () => {
+    // $ExpectError - number is not a string
+    const StyledHello1 = styled(Hello).attrs({name: 10})``
+    const hello1 = <StyledHello1 />
+
+    // $ExpectError - string is not a number
+    const StyledHello2 = styled(Hello).attrs({what: 'the heck', name: 'World'})``
+    const hello2 = <StyledHello2 />
+  })
+
+  it('errors when props are missing', () => {
+    const StyledHello = styled(Hello).attrs({})``
+
+    // $ExpectError - name is missing in props
+    const hello = <StyledHello />
+  })
+})
