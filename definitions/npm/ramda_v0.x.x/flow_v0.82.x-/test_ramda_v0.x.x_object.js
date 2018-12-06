@@ -19,13 +19,29 @@ const objMixed: { [k: string]: mixed } = { a: 1, c: "d" };
 const os: Array<{ [k: string]: * }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
-// Object
-const a: { [k: string]: number | string } = _.assoc("c", "s", { a: 1, b: 2 });
-const mixedA: { x: { [string]: number }, y: Array<string> } = _.assoc(
-  "x",
-  { x1: 11 },
-  { y: ["y1"] }
-);
+describe("Object", () => {
+  describe("assoc", () => {
+    it("should return more exact type when passed key hasn't in passed object", () => {
+      (_.assoc("c", "s", { a: 1, b: 2 }): {
+        a: number,
+        b: number,
+        c: string
+      });
+
+      (_.assoc("x", { x1: 11 }, { y: ["y1"] }): {
+        x: { [string]: number },
+        y: Array<string>
+      });
+    });
+
+    it("should return sum types when passed key already has in passed object", () => {
+      (_.assoc("a", "s", { a: 1, b: 2 }): {
+        a: number | string,
+        b: number | string
+      });
+    });
+  });
+});
 
 const apath: { [k: string]: number | string | Object } = _.assocPath(
   ["a", "b", "c"],
