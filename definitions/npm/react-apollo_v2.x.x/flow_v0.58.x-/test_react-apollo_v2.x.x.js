@@ -10,6 +10,7 @@ import {
   Subscription,
   graphql,
   withApollo,
+  type ApolloClient,
   type MutationFunction,
   type MutationResult,
   type QueryRenderProps,
@@ -514,6 +515,25 @@ describe("<Subscription />", () => {
         {// $ExpectError variables must match shape of query variables
         ({ data }: SubscriptionResult<Res, Vars>) => {}}
       </Subscription>
+    );
+  });
+  it("supports onSubscriptionData prop", function() {
+    const q = (
+      <Subscription
+        subscription={HERO_SUBSCRIPTION}
+        onSubscriptionData={({
+          client,
+          subscriptionData
+        }: {
+          client: ApolloClient<any>,
+          subscriptionData: SubscriptionResult<{ hero: ?Hero }>
+        }) => {
+          const hero: ?Hero =
+            subscriptionData.data && subscriptionData.data.hero
+              ? subscriptionData.data.hero
+              : null;
+        }}
+      />
     );
   });
 });
