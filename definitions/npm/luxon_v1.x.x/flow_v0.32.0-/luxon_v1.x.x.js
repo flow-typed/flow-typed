@@ -417,6 +417,10 @@ declare module "luxon" {
       millseconds: number,
       options?: DateTimeFromOptions
     ): DateTime;
+    static fromSeconds(
+      seconds: number,
+      options?: DateTimeFromOptions
+    ): DateTime;
     static fromRFC2822(text: string, options?: DateTimeFromOptions): DateTime;
     static fromSQL(text: string, options?: DateTimeFromOptions): DateTime;
     static fromFormat(
