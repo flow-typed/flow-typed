@@ -472,13 +472,9 @@ describe("<Subscription />", () => {
           if (!data) {
             return <div />;
           }
-          const d1: Res | {||} = data;
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
-          if (d1.res) {
-            const d2: Res = d1;
-            const s: string = d1.res;
-          }
+          const s: ?string = data.res;
           return <div />;
         }}
       </Subscription>
