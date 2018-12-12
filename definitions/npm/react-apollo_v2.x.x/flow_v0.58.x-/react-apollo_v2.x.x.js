@@ -2,7 +2,10 @@ declare module "react-apollo" {
   import type { ComponentType, Element, Node } from "react";
 
   declare type MakeOptional = <V>(V) => ?V;
-  declare type MakeDataOptional<TData> = $ObjMap<TData, MakeOptional> | void;
+  declare type MakeDataOptional<TData: Object> = $ObjMap<
+    TData,
+    MakeOptional
+  > | void;
   /**
    * Copied types from Apollo Client libdef
    * Please update apollo-client libdef as well if updating these types
@@ -235,7 +238,7 @@ declare module "react-apollo" {
     ): void;
   }
 
-  declare export interface FetchMoreOptions<TData, TVariables> {
+  declare export interface FetchMoreOptions<TData: Object, TVariables> {
     updateQuery: (
       previousQueryResult: TData,
       options: {
@@ -317,7 +320,7 @@ declare module "react-apollo" {
   }
 
   declare export type SubscribeToMoreOptions<
-    TData,
+    TData: Object,
     TSubscriptionData,
     TSubscriptionVariables = void
   > = {
@@ -900,7 +903,7 @@ declare module "react-apollo" {
   declare export function cleanupApolloState(apolloState: any): void;
 
   declare export type QueryRenderProps<
-    TData = any,
+    TData: Object = any,
     TVariables = OperationVariables
   > = {
     data: MakeDataOptional<TData>,
@@ -932,11 +935,14 @@ declare module "react-apollo" {
     client: ApolloClient<any>
   };
 
-  declare export type QueryRenderPropFunction<TData, TVariables> = (
+  declare export type QueryRenderPropFunction<TData: Object, TVariables> = (
     QueryRenderProps<TData, TVariables>
   ) => Node;
 
-  declare export class Query<TData, TVariables> extends React$Component<{
+  declare export class Query<
+    TData: Object,
+    TVariables
+  > extends React$Component<{
     query: DocumentNode,
     children: QueryRenderPropFunction<TData, TVariables>,
     variables?: TVariables,
@@ -951,7 +957,7 @@ declare module "react-apollo" {
   }> {}
 
   declare export type SubscriptionResult<
-    TData,
+    TData: Object,
     TVariables = OperationVariables
   > = {
     loading: boolean,
@@ -959,16 +965,20 @@ declare module "react-apollo" {
     error?: ApolloError
   };
 
-  declare export type SubscriptionRenderPropFunction<TData, TVariables> = (
-    result: SubscriptionResult<TData, TVariables>
-  ) => Node;
+  declare export type SubscriptionRenderPropFunction<
+    TData: Object,
+    TVariables
+  > = (result: SubscriptionResult<TData, TVariables>) => Node;
 
-  declare export type OnSubscriptionDataOptions<TData> = {
+  declare export type OnSubscriptionDataOptions<TData: Object> = {
     client: ApolloClient<any>,
     subscriptionData: SubscriptionResult<TData>
   };
 
-  declare type SubscriptionProps<TData, TVariables = OperationVariables> = {
+  declare type SubscriptionProps<
+    TData: Object,
+    TVariables = OperationVariables
+  > = {
     subscription: DocumentNode,
     variables?: TVariables,
     shouldResubscribe?:
@@ -981,14 +991,15 @@ declare module "react-apollo" {
     children?: SubscriptionRenderPropFunction<TData, TVariables>
   };
 
-  declare export class Subscription<TData, TVariables> extends React$Component<
-    SubscriptionProps<TData, TVariables>
-  > {}
+  declare export class Subscription<
+    TData: Object,
+    TVariables
+  > extends React$Component<SubscriptionProps<TData, TVariables>> {}
 
   declare type OperationVariables = { [key: string]: any };
 
   declare export type MutationFunction<
-    TData = any,
+    TData: Object = any,
     TVariables = OperationVariables
   > = (options?: {
     variables?: TVariables,
@@ -997,7 +1008,7 @@ declare module "react-apollo" {
     update?: MutationUpdaterFn<TData>
   }) => Promise<void | FetchResult<TData>>;
 
-  declare export type MutationResult<TData = { [string]: any }> = {
+  declare export type MutationResult<TData: Object = { [string]: any }> = {
     loading: boolean,
     error?: ApolloError,
     data?: TData,
@@ -1005,13 +1016,13 @@ declare module "react-apollo" {
     client: ApolloClient<any>
   };
 
-  declare export type MutationRenderPropFunction<TData, TVariables> = (
+  declare export type MutationRenderPropFunction<TData: Object, TVariables> = (
     mutate: MutationFunction<TData, TVariables>,
     result: MutationResult<TData>
   ) => Node;
 
   declare export class Mutation<
-    TData,
+    TData: Object,
     TVariables = void
   > extends React$Component<{
     mutation: DocumentNode,
