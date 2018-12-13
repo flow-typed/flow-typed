@@ -1303,6 +1303,7 @@ declare module "lodash" {
       updater?: ?Function,
       customizer?: ?Function
     ): T;
+    values<K, V>(object?: ?{[K]: V}): Array<V>;
     values(object?: ?Object): Array<any>;
     valuesIn(object?: ?Object): Array<any>;
 
