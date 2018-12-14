@@ -1,5 +1,5 @@
 declare module 'react-select' {
-  declare type OptionType = Object;
+  declare type OptionType = { [string]: any };
   declare type OptionsType = OptionType[];
 
   declare type Props = {|

@@ -19,20 +19,7 @@ let options = [
 let ValueComponent = (props: {}) => <span />;
 let ValueRenderer = (option: { label: string }) => option.label;
 
-type ParentType = {
-  type: 'parent',
-  disabled: true,
-  commonData: string
-};
-
-type ChildType = {
-  type: 'child',
-  disabled: false,
-  commonData: string,
-  childData: string
-};
-
-type OptionType = ParentType | ChildType;
+type OptionType = { [string]: any };
 
 let customOptions: OptionType[] = [
   {
