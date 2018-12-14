@@ -170,4 +170,17 @@ describe('The `Select` component', () => {
       filterOptions={invalidFilterOptions}
     />;
   });
+
+  it('should error when given non-existent prop', () => {
+    // $ExpectError
+    <Select
+      name="name"
+      autoFocus
+      placeholder="Enter data"
+      valueKey="id"
+      labelKey="data"
+      options={customOptions}
+      value=""
+    />;
+  });
 });
