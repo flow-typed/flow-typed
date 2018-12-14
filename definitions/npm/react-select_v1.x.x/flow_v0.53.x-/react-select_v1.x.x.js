@@ -1,14 +1,14 @@
-declare module "react-select" {
+declare module 'react-select' {
   declare type OptionType = Object;
   declare type OptionsType = OptionType[];
 
   declare type Props = {|
     // html id(s) of element(s) that should be used to describe this input (for assistive tech)
-    "aria-describedby"?: string,
+    'aria-describedby'?: string,
     // aria label (for assistive tech)
-    "aria-label"?: string,
+    'aria-label'?: string,
     // html id of an element that should be used as the label (for assistive tech)
-    "aria-labelledby"?: string,
+    'aria-labelledby'?: string,
     // placeholder displayed when you want to add a label on a multi-value input
     addLabelText?: string,
     // Create drop-down caret element
@@ -71,9 +71,9 @@ declare module "react-select" {
     // path of the label value in option objects
     labelKey?: string,
     // (any|start) match the start or entire string when filtering
-    matchPos?: "any" | "start",
+    matchPos?: 'any' | 'start',
     // (any|label|value) which option property to filter on
-    matchProp?: "any" | "label" | "value",
+    matchProp?: 'any' | 'label' | 'value',
     // optional buffer (in px) between the bottom of the viewport and the bottom of the menu
     menuBuffer?: number,
     // optional style to apply to the menu container
