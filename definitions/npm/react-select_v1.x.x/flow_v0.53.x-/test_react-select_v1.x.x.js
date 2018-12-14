@@ -1,8 +1,8 @@
 // @flow
 
-import { describe, it } from "flow-typed-test";
-import React from "react";
-import Select from "react-select";
+import { describe, it } from 'flow-typed-test';
+import React from 'react';
+import Select from 'react-select';
 
 let ArrowRenderer = () => <span />;
 let ClearRenderer = () => <span />;
@@ -12,21 +12,21 @@ let MenuRenderer = (props: {}) => [<span />];
 let OptionComponent = (props: {}) => <span />;
 let OptionRenderer = () => <span />;
 let options = [
-  { value: 123, label: "first item" },
-  { value: 345, label: "second item" },
-  { value: "foo", label: "third item", clearableValue: true }
+  { value: 123, label: 'first item' },
+  { value: 345, label: 'second item' },
+  { value: 'foo', label: 'third item', clearableValue: true }
 ];
 let ValueComponent = (props: {}) => <span />;
 let ValueRenderer = (option: { label: string }) => option.label;
 
 type ParentType = {
-  type: "parent",
+  type: 'parent',
   disabled: true,
   commonData: string
 };
 
 type ChildType = {
-  type: "child",
+  type: 'child',
   disabled: false,
   commonData: string,
   childData: string
@@ -36,26 +36,26 @@ type OptionType = ParentType | ChildType;
 
 let customOptions: OptionType[] = [
   {
-    type: "parent",
+    type: 'parent',
     disabled: true,
-    commonData: "data"
+    commonData: 'data'
   },
   {
-    type: "child",
+    type: 'child',
     disabled: false,
-    commonData: "data",
-    childData: "child data 1"
+    commonData: 'data',
+    childData: 'child data 1'
   },
   {
-    type: "child",
+    type: 'child',
     disabled: false,
-    commonData: "data",
-    childData: "child data 2"
+    commonData: 'data',
+    childData: 'child data 2'
   }
 ];
 
-describe("The `Select` component", () => {
-  it("should validate on proper props usage", () => {
+describe('The `Select` component', () => {
+  it('should validate on proper props usage', () => {
     <Select
       addLabelText="Add label, plz"
       aria-describedby="aria-describedby"
@@ -89,9 +89,9 @@ describe("The `Select` component", () => {
       matchPos="start"
       matchProp="label"
       menuBuffer={10}
-      menuContainerStyle={{ color: "green" }}
+      menuContainerStyle={{ color: 'green' }}
       menuRenderer={MenuRenderer}
-      menuStyle={{ color: "green" }}
+      menuStyle={{ color: 'green' }}
       multi={false}
       name="fance name"
       noResultsText="No results found. I'm so terribly sorry. I'll just go now. :´("
@@ -102,7 +102,7 @@ describe("The `Select` component", () => {
       onCloseResetsInput={false}
       onFocus={event => {}}
       onInputChange={(value: any) => {
-        return "foo";
+        return 'foo';
       }}
       onInputKeyDown={event => {}}
       onMenuScrollToBottom={(): void => {}}
@@ -121,23 +121,23 @@ describe("The `Select` component", () => {
       scrollMenuIntoView={false}
       searchable={true}
       simpleValue={false}
-      style={{ color: "gray" }}
+      style={{ color: 'gray' }}
       tabIndex={-1}
       tabSelectsValue={false}
       value={0}
       valueComponent={ValueComponent}
       valueKey="valueKey"
       valueRenderer={ValueRenderer}
-      wrapperStyle={{ backgroundColor: "white" }}
+      wrapperStyle={{ backgroundColor: 'white' }}
     />;
   });
 
-  it("should error on invalid props usage", () => {
+  it('should error on invalid props usage', () => {
     // $ExpectError addLabelText cannot be number
     <Select addLabelText={123} />;
   });
 
-  it("should handle custom options", () => {
+  it('should handle custom options', () => {
     let customOptionRenderer = (o: OptionType) => <span />;
     let customFilterOption = (options: OptionType[], filterValue: string) =>
       options;
@@ -154,7 +154,7 @@ describe("The `Select` component", () => {
     />;
   });
 
-  it("should error when optionRenderer option param type is not the same as options element type", () => {
+  it('should error when optionRenderer option param type is not the same as options element type', () => {
     let invalidRenderer = (o: string) => <span />;
     // $ExpectError
     <Select
@@ -169,7 +169,7 @@ describe("The `Select` component", () => {
     />;
   });
 
-  it("should error when filterOptions options param type is not an array of options element type", () => {
+  it('should error when filterOptions options param type is not an array of options element type', () => {
     let invalidFilterOptions = (o: string) => <span />;
     // $ExpectError
     <Select
