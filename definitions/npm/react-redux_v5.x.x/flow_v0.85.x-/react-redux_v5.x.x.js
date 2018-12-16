@@ -61,7 +61,9 @@ declare module "react-redux" {
 
   // The connector function actaully perfoms the wrapping,
   // returning a connected component.
-  declare type Connector<OP, WC> = (WC) => Class<ConnectedComponent<OP, WC>>;
+  declare type Connector<OP, C> = <WC: C>(
+    WC,
+  ) => Class<React$Component<OP>> & WC;
 
   // Putting it all together.
   // Adding $Shape<P> everywhere makes error messages clearer.
