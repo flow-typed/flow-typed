@@ -24,7 +24,10 @@
 */
 
 declare module "react-redux" {
+  // ------------------------------------------------------------
   // Typings for connect()
+  // ------------------------------------------------------------
+
   declare type Equal<T: {}> = (next: T, prev: T) => boolean;
   declare export type Options<S, OP, SP, MP> = {|
     pure?: boolean,
@@ -52,13 +55,6 @@ declare module "react-redux" {
     ownProps: OP,
   ) => DP;
 
-  declare type MergeProps<
-    +P,
-    -OP: $Shape<P>,
-    -SP: $Shape<P>,
-    -DP: $Shape<P>,
-  > = (stateProps: SP, dispatchProps: DP, ownProps: OP) => P;
-
   // The connector function actaully perfoms the wrapping,
   // returning a connected component.
   declare type Connector<OP, C> = <WC: C>(
@@ -68,12 +64,16 @@ declare module "react-redux" {
   // Putting it all together.
   // Adding $Shape<P> everywhere makes error messages clearer.
 
+  // ------------------------------------------------------------
+  // Simple case without the super powered `mergeProps` argument
+  // ------------------------------------------------------------
+
   // Own Props only.
 
   declare export function connect<-P, -A>(
     mapStateToProps?: null,
     mapDispatchToProps?: null,
-    mergeProps?: ?MergeProps<P, P, {||}, {||}>,
+    mergeProps?: null,
     options?: ?Options<{||}, P, {||}, P>,
   ): Connector<$Diff<P, { dispatch: Dispatch<A> }>, React$ComponentType<P>>;
 
@@ -82,7 +82,7 @@ declare module "react-redux" {
   declare export function connect<-P, -S, SP: $Shape<P>>(
     mapStateToProps: MapStateToProps<S, $Diff<P, SP>, SP>,
     mapDispatchToProps?: null,
-    mergeProps?: ?MergeProps<P, $Diff<P, SP>, SP, {||}>,
+    mergeProps?: null,
     options?: ?Options<S, $Diff<P, SP>, SP, P>,
   ): Connector<$Diff<P, SP>, React$ComponentType<P>>;
 
@@ -98,7 +98,7 @@ declare module "react-redux" {
   >(
     mapStateToProps: MapStateToProps<S, $Diff<$Diff<P, SP>, DP>, SP>,
     mapDispatchToProps: DP,
-    mergeProps?: ?MergeProps<P, $Diff<$Diff<P, SP>, DP>, SP, DP>,
+    mergeProps?: null,
     options?: ?Options<S, $Diff<$Diff<P, SP>, DP>, SP, P>,
   ): Connector<$Diff<$Diff<P, SP>, DP>, React$ComponentType<P>>;
 
@@ -112,7 +112,7 @@ declare module "react-redux" {
   >(
     mapStateToProps: MapStateToProps<S, $Diff<$Diff<P, SP>, DP>, SP>,
     mapDispatchToProps: MapDispatchToPropsFn<A, $Diff<$Diff<P, SP>, DP>, DP>,
-    mergeProps?: ?MergeProps<P, $Diff<$Diff<P, SP>, DP>, SP, DP>,
+    mergeProps?: null,
     options?: ?Options<S, $Diff<$Diff<P, SP>, DP>, SP, P>,
   ): Connector<$Diff<$Diff<P, SP>, DP>, React$ComponentType<P>>;
 
@@ -126,7 +126,7 @@ declare module "react-redux" {
   >(
     mapStateToProps: null,
     mapDispatchToProps: DP,
-    mergeProps?: ?MergeProps<P, $Diff<P, DP>, {||}, DP>,
+    mergeProps?: null,
     options?: ?Options<{||}, $Diff<P, DP>, {||}, P>,
   ): Connector<$Diff<P, DP>, React$ComponentType<P>>;
 
@@ -138,11 +138,102 @@ declare module "react-redux" {
   >(
     mapStateToProps: null,
     mapDispatchToProps: MapDispatchToPropsFn<A, $Diff<P, DP>, DP>,
-    mergeProps?: ?MergeProps<P, $Diff<P, DP>, {||}, DP>,
+    mergeProps?: null,
     options?: ?Options<{||}, $Diff<P, DP>, {||}, P>,
   ): Connector<$Diff<P, DP>, React$ComponentType<P>>;
 
+  // ------------------------------------------------------------
+  // Harder case with the super powered `mergeProps` argument
+  // ------------------------------------------------------------
+
+  declare type MergeProps<+P, -OP: {}, -SP: {}, -DP: {}> = (
+    stateProps: SP,
+    dispatchProps: DP,
+    ownProps: OP,
+  ) => P;
+
+  // Own Props only.
+
+  declare export function connect<-P, -OP: {}, -A: {}>(
+    mapStateToProps?: null,
+    mapDispatchToProps?: null,
+    mergeProps: MergeProps<P, OP, {||}, {||}>,
+    options?: ?Options<{||}, P, {||}, P>,
+  ): Connector<P, React$ComponentType<P>>;
+
+  // State only.
+
+  declare export function connect<-P: {}, -OP: {}, -S, SP: {}>(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps?: null,
+    mergeProps: MergeProps<P, OP, SP, {||}>,
+    options?: ?Options<S, OP, SP, P>,
+  ): Connector<OP, React$ComponentType<P>>;
+
+  // State and dispatch.
+
+  // map version
+  declare export function connect<
+    -P: {},
+    -OP: {},
+    -S,
+    -A,
+    SP: {},
+    DP: { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: DP,
+    mergeProps: MergeProps<P, OP, SP, DP>,
+    options?: ?Options<S, OP, SP, P>,
+  ): Connector<OP, React$ComponentType<P>>;
+
+  // function version
+  declare export function connect<
+    -P: {},
+    -OP: {},
+    -S,
+    -A,
+    SP: {},
+    DP: { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP>,
+    mergeProps: MergeProps<P, OP, SP, DP>,
+    options?: ?Options<S, OP, SP, P>,
+  ): Connector<OP, React$ComponentType<P>>;
+
+  // Dispatch only.
+
+  // map version
+  declare export function connect<
+    -P: {},
+    -OP: {},
+    -A,
+    DP: $Shape<P> & { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: null,
+    mapDispatchToProps: DP,
+    mergeProps: MergeProps<P, OP, {||}, DP>,
+    options?: ?Options<{||}, OP, {||}, P>,
+  ): Connector<OP, React$ComponentType<P>>;
+
+  // function version
+  declare export function connect<
+    -P: {},
+    -OP: {},
+    -A,
+    DP: $Shape<P> & { [string]: (...Array<any>) => A },
+  >(
+    mapStateToProps: null,
+    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP>,
+    mergeProps: MergeProps<P, OP, {||}, DP>,
+    options?: ?Options<{||}, OP, {||}, P>,
+  ): Connector<OP, React$ComponentType<P>>;
+
+  // ------------------------------------------------------------
   // Typings for Provider
+  // ------------------------------------------------------------
+
   declare export class Provider<Store> extends React$Component<{
     store: Store,
     children?: React$Node,
@@ -153,7 +244,10 @@ declare module "react-redux" {
     subKey?: string,
   ): Class<Provider<*>>;
 
+  // ------------------------------------------------------------
   // Typings for connectAdvanced()
+  // ------------------------------------------------------------
+
   declare type ConnectAdvancedOptions = {
     getDisplayName?: (name: string) => string,
     methodName?: string,
