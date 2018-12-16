@@ -28,6 +28,7 @@ declare module "react-redux" {
   declare type Equal<T: {}> = (next: T, prev: T) => boolean;
   declare export type Options<S, OP, SP, MP> = {|
     pure?: boolean,
+    withRef?: boolean,
     areStatesEqual?: Equal<S>,
     areOwnPropsEqual?: Equal<OP>,
     areStatePropsEqual?: Equal<SP>,
