@@ -3,7 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 function testPassingPropsToConnectedComponent() {
-  type Props = {passthrough: number, passthroughWithDefaultProp: number, fromStateToProps: string};
+  type OwnProps = {|
+    passthrough: number,
+    passthroughWithDefaultProp?: number,
+    forMapStateToProps: string
+  |}
+  type Props = { ...OwnProps, fromStateToProps: string};
   class Com extends React.Component<Props> {
     static defaultProps = { passthroughWithDefaultProp: 123 };
     render() {
@@ -21,7 +26,7 @@ function testPassingPropsToConnectedComponent() {
     }
   };
 
-  const Connected = connect(mapStateToProps)(Com);
+  const Connected = connect<Props, OwnProps, _,_,_,_>(mapStateToProps)(Com);
   <Connected passthrough={123} forMapStateToProps={'data'} passthroughWithDefaultProp={123}/>;
   // OK without passthroughWithDefaultProp
   <Connected passthrough={123} forMapStateToProps={'data'}/>;
@@ -53,7 +58,7 @@ function doesNotRequireDefinedComponentToTypeCheck1case() {
     stringProp: false,
   });
 
-  connect(mapStateToProps)(Component);
+  connect<Props, {||}, _,_,_,_>(mapStateToProps)(Component);
 }
 
 function doesNotRequireDefinedComponentToTypeCheck2case() {
@@ -70,7 +75,7 @@ function doesNotRequireDefinedComponentToTypeCheck2case() {
     numProp: false,
   });
 
-  connect(null, mapDispatchToProps)(Component);
+  connect<Props, {||}, _,_,_,_>(null, mapDispatchToProps)(Component);
 }
 
 function doesNotRequireDefinedComponentToTypeCheck3case() {
@@ -93,7 +98,7 @@ function doesNotRequireDefinedComponentToTypeCheck3case() {
     numProp: false,
   });
 
-  connect(mapStateToProps, mapDispatchToProps)(Component);
+  connect<Props, {||}, _,_,_,_>(mapStateToProps, mapDispatchToProps)(Component);
 }
 
 function doesNotRequireDefinedComponentToTypeCheck4case() {
@@ -110,7 +115,7 @@ function doesNotRequireDefinedComponentToTypeCheck4case() {
     stringProp: false,
   });
 
-  connect(mapStateToProps, {})(Component);
+  connect<Props, {||}, _,_,_,_>(mapStateToProps, {})(Component);
 }
 
 function doesNotRequireDefinedComponentToTypeCheck5case() {
