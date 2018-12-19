@@ -158,7 +158,7 @@ declare module "lodash" {
 
   declare type NestedArray<T> = Array<Array<T>>;
 
-  declare type matchesIterateeShorthand = {[id: any]: any};
+  declare type matchesIterateeShorthand = {[key: any]: any};
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -791,8 +791,8 @@ declare module "lodash" {
     overArgs(func?: ?Function, ...transforms?: Array<Function>): Function;
     overArgs(func?: ?Function, transforms?: ?Array<Function>): Function;
     partial<R>(func: (...any[]) => R, ...partials: any[]): (...any[]) => R;
-    partialRight(func: (...any[]) => any, ...partials: Array<any>): Function;
-    partialRight(func: Function, partials: Array<any>): Function;
+    partialRight<R>(func: (...any[]) => R, ...partials: Array<any>): (...any[]) => R;
+    partialRight<R>(func: (...any[]) => R, partials: Array<any>): (...any[]) => R;
     rearg(func: Function, ...indexes: Array<number>): Function;
     rearg(func: Function, indexes: Array<number>): Function;
     rest(func: Function, start?: number): Function;
