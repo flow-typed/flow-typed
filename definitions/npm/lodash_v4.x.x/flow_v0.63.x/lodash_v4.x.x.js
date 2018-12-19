@@ -158,7 +158,7 @@ declare module "lodash" {
 
   declare type NestedArray<T> = Array<Array<T>>;
 
-  declare type matchesIterateeShorthand = Object;
+  declare type matchesIterateeShorthand = {[id: any]: any};
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -746,8 +746,8 @@ declare module "lodash" {
     shuffle<T>(array: ?Array<T>): Array<T>;
     shuffle<V, T: Object>(object: T): Array<V>;
     size(collection: $ReadOnlyArray<any> | Object | string): number;
-    some<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): boolean;
     some<T>(array: void | null, predicate?: ?Predicate<T>): false;
+    some<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): boolean;
     some<A, T: { [id: any]: A }>(
       object?: ?T,
       predicate?: OPredicate<A, T>
@@ -776,22 +776,22 @@ declare module "lodash" {
     after(n: number, fn: Function): Function;
     ary(func: Function, n?: number): Function;
     before(n: number, fn: Function): Function;
-    bind(func: Function, thisArg: any, ...partials: Array<any>): Function;
+    bind<R>(func: (...any[]) => R, thisArg: any, ...partials: Array<any>): (...any[]) => R;
     bindKey(obj?: ?Object, key?: ?string, ...partials?: Array<?any>): Function;
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
     debounce<F: Function>(func: F, wait?: number, options?: DebounceOptions): F;
-    defer(func: Function, ...args?: Array<any>): TimeoutID;
+    defer(func: (...any[]) => any, ...args?: Array<any>): TimeoutID;
     delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
-    flip(func: Function): Function;
-    memoize<F: Function>(func: F, resolver?: Function): F;
-    negate(predicate: Function): Function;
-    once(func: Function): Function;
+    flip<R>(func: (...any[]) => R): (...any[]) => R;
+    memoize<A, R>(func: (...A) => R, resolver?: (...A) => mixed): (...A) => R;
+    negate<A, R>(predicate: (...A) => R): (...A) => boolean;
+    once<A, R>(func: (...A) => R): (...A) => R;
     overArgs(func?: ?Function, ...transforms?: Array<Function>): Function;
     overArgs(func?: ?Function, transforms?: ?Array<Function>): Function;
-    partial(func: Function, ...partials: any[]): Function;
-    partialRight(func: Function, ...partials: Array<any>): Function;
+    partial<R>(func: (...any[]) => R, ...partials: any[]): (...any[]) => R;
+    partialRight(func: (...any[]) => any, ...partials: Array<any>): Function;
     partialRight(func: Function, partials: Array<any>): Function;
     rearg(func: Function, ...indexes: Array<number>): Function;
     rearg(func: Function, indexes: Array<number>): Function;
@@ -802,7 +802,7 @@ declare module "lodash" {
       wait?: number,
       options?: ThrottleOptions
     ): Function;
-    unary(func: Function): Function;
+    unary<T, R>(func: (T, ...any[]) => R): T => R;
     wrap(value?: any, wrapper?: ?Function): Function;
 
     // Lang
@@ -891,12 +891,10 @@ declare module "lodash" {
     isNull(value: any): false;
     isNumber(value: number): true;
     isNumber(value: any): false;
-    isObject(value: Object): true;
-    isObject(value: any): false;
+    isObject(value: any): boolean;
     isObjectLike(value: void | null): false;
     isObjectLike(value: any): boolean;
-    isPlainObject(value: Object): true;
-    isPlainObject(value: any): false;
+    isPlainObject(value: any): boolean;
     isRegExp(value: RegExp): true;
     isRegExp(value: any): false;
     isSafeInteger(value: number): boolean;
@@ -1066,6 +1064,7 @@ declare module "lodash" {
     ): Object;
     at(object?: ?Object, ...paths: Array<string>): Array<any>;
     at(object?: ?Object, paths: Array<string>): Array<any>;
+    create(prototype: void | null, properties: void | null): {};
     create<T>(prototype: T, properties: Object): $Supertype<T>;
     create(prototype: any, properties: void | null): {};
     defaults(object?: ?Object, ...sources?: Array<?Object>): Object;
@@ -1283,8 +1282,8 @@ declare module "lodash" {
       iteratee?: ?OIteratee<*>,
       accumulator?: ?any
     ): {};
-    unset(object: Object, path?: ?Array<string> | ?string): boolean;
     unset(object: void | null, path?: ?Array<string> | ?string): true;
+    unset(object: Object, path?: ?Array<string> | ?string): boolean;
     update(object: Object, path: string[] | string, updater: Function): Object;
     update<T: void | null>(
       object: T,
@@ -1393,13 +1392,13 @@ declare module "lodash" {
     cond(pairs?: ?NestedArray<Function>): Function;
     conforms(source?: ?Object): Function;
     constant<T>(value: T): () => T;
-    defaultTo<T1: string | boolean | Object, T2>(
+    defaultTo<T1: void | null, T2>(value: T1, defaultValue: T2): T2;
+    defaultTo<T1: string | boolean, T2>(
       value: T1,
       defaultValue: T2
     ): T1;
     // NaN is a number instead of its own type, otherwise it would behave like null/void
     defaultTo<T1: number, T2>(value: T1, defaultValue: T2): T1 | T2;
-    defaultTo<T1: void | null, T2>(value: T1, defaultValue: T2): T2;
     flow: $ComposeReverse & ((funcs: Array<Function>) => Function);
     flowRight: $Compose & ((funcs: Array<Function>) => Function);
     identity<T>(value: T): T;
@@ -1608,7 +1607,7 @@ declare module "lodash/fp" {
 
   declare type NestedArray<T> = Array<Array<T>>;
 
-  declare type matchesIterateeShorthand = Object;
+  declare type matchesIterateeShorthand = {[string | number]: any};
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -2358,7 +2357,7 @@ declare module "lodash/fp" {
     delay(wait: number, func: Function): TimeoutID;
     flip(func: Function): Function;
     memoize<F: Function>(func: F): F;
-    negate(predicate: Function): Function;
+    negate<A, R>(predicate: (...A) => R): (...A) => R;
     complement(predicate: Function): Function;
     once(func: Function): Function;
     overArgs(func: Function): (transforms: Array<Function>) => Function;
@@ -2381,7 +2380,7 @@ declare module "lodash/fp" {
     spreadFrom(start: number, func: Function): Function;
     throttle(wait: number): (func: Function) => Function;
     throttle(wait: number, func: Function): Function;
-    unary(func: Function): Function;
+    unary<T, R>(func: (T, ...any[]) => R): (T) => R;
     wrap(wrapper: Function): (value: any) => Function;
     wrap(wrapper: Function, value: any): Function;
 
@@ -2482,8 +2481,7 @@ declare module "lodash/fp" {
     ): boolean;
     isError(value: any): boolean;
     isFinite(value: any): boolean;
-    isFunction(value: Function): true;
-    isFunction(value: number | string | void | null | Object): false;
+    isFunction(value: any): boolean;
     isInteger(value: any): boolean;
     isLength(value: any): boolean;
     isMap(value: any): boolean;
@@ -3154,18 +3152,18 @@ declare module "lodash/fp" {
     cond(pairs: NestedArray<Function>): Function;
     constant<T>(value: T): () => T;
     always<T>(value: T): () => T;
-    defaultTo<T1: string | boolean | Object, T2>(
+    defaultTo<T1: void | null, T2>(defaultValue: T2): (value: T1) => T2;
+    defaultTo<T1: void | null, T2>(defaultValue: T2, value: T1): T2;
+    defaultTo<T1: string | boolean, T2>(
       defaultValue: T2
     ): (value: T1) => T1;
-    defaultTo<T1: string | boolean | Object, T2>(
+    defaultTo<T1: string | boolean, T2>(
       defaultValue: T2,
       value: T1
     ): T1;
     // NaN is a number instead of its own type, otherwise it would behave like null/void
     defaultTo<T1: number, T2>(defaultValue: T2): (value: T1) => T1 | T2;
     defaultTo<T1: number, T2>(defaultValue: T2, value: T1): T1 | T2;
-    defaultTo<T1: void | null, T2>(defaultValue: T2): (value: T1) => T2;
-    defaultTo<T1: void | null, T2>(defaultValue: T2, value: T1): T2;
     flow: $ComposeReverse & ((funcs: Array<Function>) => Function);
     pipe: $ComposeReverse & ((funcs: Array<Function>) => Function);
     flowRight: $Compose & ((funcs: Array<Function>) => Function);
@@ -6081,3 +6079,4 @@ declare module "lodash/fp/toPath" {
 declare module "lodash/fp/uniqueId" {
   declare module.exports: $PropertyType<$Exports<"lodash/fp">, "uniqueId">;
 }
+// lol
