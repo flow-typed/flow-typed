@@ -68,167 +68,70 @@ declare module "react-redux" {
   // Simple case without the super powered `mergeProps` argument
   // ------------------------------------------------------------
 
-  // Own Props only.
+  declare type Connector2<OP, MP> = <WC: React$ComponentType<MP>>(
+    WC,
+  ) => Class<React$Component<OP>> & WC;
 
-  declare export function connect<-P, -A>(
-    mapStateToProps?: null,
-    mapDispatchToProps?: null,
-    mergeProps?: null,
-    options?: ?Options<{||}, P, {||}, P>,
-  ): Connector<$Diff<P, { dispatch: Dispatch<A> }>, React$ComponentType<P>>;
+  declare type ExtendProps<P, MP: P> = P;
 
-  // State only.
+  declare export function connect<-P, -OP, -SP: {||}, -DP: {||}, -S, -A>(
+    mapStateToProps?: null | void,
+    mapDispatchToProps?: null | void,
+    mergeProps?: null | void,
+    options?: ?Options<S, OP, {||}, {| ...OP, dispatch: Dispatch<A> |}>,
+  ): Connector2<OP, ExtendProps<P, {| ...OP, dispatch: Dispatch<A> |}>>;
 
-  declare export function connect<-P, -S, SP: $Shape<P>>(
-    mapStateToProps: MapStateToProps<S, $Diff<P, SP>, SP>,
-    mapDispatchToProps?: null,
-    mergeProps?: null,
-    options?: ?Options<S, $Diff<P, SP>, SP, P>,
-  ): Connector<$Diff<P, SP>, React$ComponentType<P>>;
+  declare export function connect<-P, -OP, -SP, -DP: {||}, -S, -A>(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps?: null | void,
+    mergeProps?: null | void,
+    options?: ?Options<S, OP, SP, {| ...OP, ...SP |}>,
+  ): Connector2<OP, ExtendProps<P, {| ...OP, ...SP |}>>;
 
-  // State and dispatch.
+  declare export function connect<-P, -OP, -SP, -DP, S, A>(
+    mapStateToProps: null | void,
+    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
+    mergeProps?: null | void,
+    options?: ?Options<S, OP, {||}, {| ...OP, ...DP |}>,
+  ): Connector2<OP, ExtendProps<P, {| ...OP, ...DP |}>>;
 
-  // map version
-  declare export function connect<
-    -P,
-    -S,
-    -A,
-    SP: $Shape<P>,
-    DP: $Shape<P> & { [string]: (...Array<any>) => A },
-  >(
-    mapStateToProps: MapStateToProps<S, $Diff<$Diff<P, SP>, DP>, SP>,
-    mapDispatchToProps: DP,
-    mergeProps?: null,
-    options?: ?Options<S, $Diff<$Diff<P, SP>, DP>, SP, P>,
-  ): Connector<$Diff<$Diff<P, SP>, DP>, React$ComponentType<P>>;
-
-  // function version
-  declare export function connect<
-    -P,
-    -S,
-    -A,
-    SP: $Shape<P>,
-    DP: $Shape<P> & { [string]: (...Array<any>) => A },
-  >(
-    mapStateToProps: MapStateToProps<S, $Diff<$Diff<P, SP>, DP>, SP>,
-    mapDispatchToProps: MapDispatchToPropsFn<A, $Diff<$Diff<P, SP>, DP>, DP>,
-    mergeProps?: null,
-    options?: ?Options<S, $Diff<$Diff<P, SP>, DP>, SP, P>,
-  ): Connector<$Diff<$Diff<P, SP>, DP>, React$ComponentType<P>>;
-
-  // Dispatch only.
-
-  // map version
-  declare export function connect<
-    -P,
-    -A,
-    DP: $Shape<P> & { [string]: (...Array<any>) => A },
-  >(
-    mapStateToProps: null,
-    mapDispatchToProps: DP,
-    mergeProps?: null,
-    options?: ?Options<{||}, $Diff<P, DP>, {||}, P>,
-  ): Connector<$Diff<P, DP>, React$ComponentType<P>>;
-
-  // function version
-  declare export function connect<
-    -P,
-    -A,
-    DP: $Shape<P> & { [string]: (...Array<any>) => A },
-  >(
-    mapStateToProps: null,
-    mapDispatchToProps: MapDispatchToPropsFn<A, $Diff<P, DP>, DP>,
-    mergeProps?: null,
-    options?: ?Options<{||}, $Diff<P, DP>, {||}, P>,
-  ): Connector<$Diff<P, DP>, React$ComponentType<P>>;
+  declare export function connect<-P, -OP, -SP, -DP, S, A>(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
+    mergeProps?: null | void,
+    options?: ?Options<S, OP, SP, {| ...OP, ...SP, ...DP |}>,
+  ): Connector2<OP, ExtendProps<P, {| ...OP, ...SP, ...DP |}>>;
 
   // ------------------------------------------------------------
   // Harder case with the super powered `mergeProps` argument
   // ------------------------------------------------------------
 
-  declare type MergeProps<+P, -OP: {}, -SP: {}, -DP: {}> = (
+  declare type MergeProps<+P, -OP, -SP, -DP> = (
     stateProps: SP,
     dispatchProps: DP,
     ownProps: OP,
   ) => P;
 
-  // Own Props only.
-
-  declare export function connect<-P, -OP: {}, -A: {}>(
-    mapStateToProps?: null,
-    mapDispatchToProps?: null,
-    mergeProps: MergeProps<P, OP, {||}, {||}>,
-    options?: ?Options<{||}, P, {||}, P>,
-  ): Connector<P, React$ComponentType<P>>;
-
-  // State only.
-
-  declare export function connect<-P: {}, -OP: {}, -S, SP: {}>(
+  declare export function connect<-P, -OP, -S, -A, SP, DP: {||}>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps?: null,
-    mergeProps: MergeProps<P, OP, SP, {||}>,
-    options?: ?Options<S, OP, SP, P>,
-  ): Connector<OP, React$ComponentType<P>>;
-
-  // State and dispatch.
-
-  // map version
-  declare export function connect<
-    -P: {},
-    -OP: {},
-    -S,
-    -A,
-    SP: {},
-    DP: { [string]: (...Array<any>) => A },
-  >(
-    mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: DP,
+    mapDispatchToProps: null | void,
     mergeProps: MergeProps<P, OP, SP, DP>,
     options?: ?Options<S, OP, SP, P>,
-  ): Connector<OP, React$ComponentType<P>>;
+  ): Connector2<OP, P>;
 
-  // function version
-  declare export function connect<
-    -P: {},
-    -OP: {},
-    -S,
-    -A,
-    SP: {},
-    DP: { [string]: (...Array<any>) => A },
-  >(
-    mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP>,
+  declare export function connect<-P, -OP, -S, -A, SP: {||}, DP>(
+    mapStateToProps: null | void,
+    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
     mergeProps: MergeProps<P, OP, SP, DP>,
     options?: ?Options<S, OP, SP, P>,
-  ): Connector<OP, React$ComponentType<P>>;
+  ): Connector2<OP, P>;
 
-  // Dispatch only.
-
-  // map version
-  declare export function connect<
-    -P: {},
-    -OP: {},
-    -A,
-    DP: $Shape<P> & { [string]: (...Array<any>) => A },
-  >(
-    mapStateToProps: null,
-    mapDispatchToProps: DP,
-    mergeProps: MergeProps<P, OP, {||}, DP>,
-    options?: ?Options<{||}, OP, {||}, P>,
-  ): Connector<OP, React$ComponentType<P>>;
-
-  // function version
-  declare export function connect<
-    -P: {},
-    -OP: {},
-    -A,
-    DP: $Shape<P> & { [string]: (...Array<any>) => A },
-  >(
-    mapStateToProps: null,
-    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP>,
-    mergeProps: MergeProps<P, OP, {||}, DP>,
-    options?: ?Options<{||}, OP, {||}, P>,
-  ): Connector<OP, React$ComponentType<P>>;
+  declare export function connect<-P, -OP, -S, -A, SP, DP>(
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
+    mergeProps: MergeProps<P, OP, SP, DP>,
+    options?: ?Options<S, OP, SP, P>,
+  ): Connector2<OP, P>;
 
   // ------------------------------------------------------------
   // Typings for Provider
