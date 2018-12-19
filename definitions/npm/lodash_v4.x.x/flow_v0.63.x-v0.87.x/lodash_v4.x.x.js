@@ -1066,7 +1066,6 @@ declare module "lodash" {
     ): Object;
     at(object?: ?Object, ...paths: Array<string>): Array<any>;
     at(object?: ?Object, paths: Array<string>): Array<any>;
-    create(prototype: void | null, properties: void | null): {};
     create<T>(prototype: T, properties: Object): $Supertype<T>;
     create(prototype: any, properties: void | null): {};
     defaults(object?: ?Object, ...sources?: Array<?Object>): Object;
@@ -6082,4 +6081,3 @@ declare module "lodash/fp/toPath" {
 declare module "lodash/fp/uniqueId" {
   declare module.exports: $PropertyType<$Exports<"lodash/fp">, "uniqueId">;
 }
-// lol
