@@ -781,7 +781,7 @@ declare module "lodash" {
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce<F: Function>(func: F, wait?: number, options?: DebounceOptions): F;
+    debounce<A, R>(func: (...A) => R, wait?: number, options?: DebounceOptions): (...A) => R;
     defer(func: (...any[]) => any, ...args?: Array<any>): TimeoutID;
     delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
     flip<R>(func: (...any[]) => R): (...any[]) => R;
@@ -797,11 +797,11 @@ declare module "lodash" {
     rearg(func: Function, indexes: Array<number>): Function;
     rest(func: Function, start?: number): Function;
     spread(func: Function): Function;
-    throttle(
-      func: Function,
+    throttle<A, R>(
+      func: (...A) => R,
       wait?: number,
       options?: ThrottleOptions
-    ): Function;
+    ): (...A) => R;
     unary<T, R>(func: (T, ...any[]) => R): T => R;
     wrap(value?: any, wrapper?: ?Function): Function;
 
@@ -2350,9 +2350,9 @@ declare module "lodash/fp" {
     curryRight(func: Function): Function;
     curryRightN(arity: number): (func: Function) => Function;
     curryRightN(arity: number, func: Function): Function;
-    debounce(wait: number): <F: Function>(func: F) => F;
-    debounce<F: Function>(wait: number, func: F): F;
-    defer(func: Function): TimeoutID;
+    debounce(wait: number): <A, R>(func: (...A) => R) => (...A) => R;
+    debounce<A, R>(wait: number, func: (...A) => R): (...A) => R;
+    defer(func: (...any[]) => any): TimeoutID;
     delay(wait: number): (func: Function) => TimeoutID;
     delay(wait: number, func: Function): TimeoutID;
     flip(func: Function): Function;
@@ -2378,8 +2378,8 @@ declare module "lodash/fp" {
     apply(func: Function): Function;
     spreadFrom(start: number): (func: Function) => Function;
     spreadFrom(start: number, func: Function): Function;
-    throttle(wait: number): (func: Function) => Function;
-    throttle(wait: number, func: Function): Function;
+    throttle<A, R>(wait: number): (func: (...A) => R) => (...A) => R;
+    throttle<A, R>(wait: number, func: (...A) => R): (...A) => R;
     unary<T, R>(func: (T, ...any[]) => R): (T) => R;
     wrap(wrapper: Function): (value: any) => Function;
     wrap(wrapper: Function, value: any): Function;
