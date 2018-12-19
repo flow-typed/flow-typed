@@ -28,7 +28,7 @@ declare module "react-redux" {
   // Typings for connect()
   // ------------------------------------------------------------
 
-  declare type Equal<T: {}> = (next: T, prev: T) => boolean;
+  declare type Equal<T> = (next: T, prev: T) => boolean;
   declare export type Options<S, OP, SP, MP> = {|
     pure?: boolean,
     withRef?: boolean,
@@ -111,6 +111,13 @@ declare module "react-redux" {
     dispatchProps: DP,
     ownProps: OP,
   ) => P;
+
+  declare export function connect<-P, -OP, -S, -A, SP: {||}, DP: {||}>(
+    mapStateToProps: null | void,
+    mapDispatchToProps: null | void,
+    mergeProps: MergeProps<P, OP, SP, DP>,
+    options?: ?Options<S, OP, SP, P>,
+  ): Connector2<OP, P>;
 
   declare export function connect<-P, -OP, -S, -A, SP, DP: {||}>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
