@@ -3,7 +3,7 @@ declare module 'react-media' {
     [prop: string]: string | number | boolean
   };
 
-  declare module.exports: React$ComponentType<{
+  declare type Props = {
     defaultMatches?: boolean,
     query?: string | ReactMediaQueryObject | Array<ReactMediaQueryObject>,
     render?: () => React$Node,
@@ -11,5 +11,7 @@ declare module 'react-media' {
     targetWindow?: {
       matchMedia(query: string): void
     }
-  }>;
+  };
+
+  declare module.exports: React$ComponentType<Props>;
 }

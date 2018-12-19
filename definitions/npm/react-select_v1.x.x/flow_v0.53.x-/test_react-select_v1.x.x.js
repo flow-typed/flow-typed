@@ -14,47 +14,34 @@ let OptionRenderer = () => <span />;
 let options = [
   { value: 123, label: 'first item' },
   { value: 345, label: 'second item' },
-  { value: 'foo', label: 'third item', clearableValue: true },
+  { value: 'foo', label: 'third item', clearableValue: true }
 ];
 let ValueComponent = (props: {}) => <span />;
 let ValueRenderer = (option: { label: string }) => option.label;
 
-type ParentType = {
-  type: "parent",
-  disabled: true,
-  commonData: string
-}
+type OptionType = { [string]: any };
 
-type ChildType = {
-  type: "child",
-  disabled: false,
-  commonData: string,
-  childData: string,
-}
-
-type OptionType = ParentType | ChildType
-
-let customOptions: OptionType[] =[
+let customOptions: OptionType[] = [
   {
-    type: "parent",
+    type: 'parent',
     disabled: true,
-    commonData: "data"
+    commonData: 'data'
   },
   {
-    type: "child",
+    type: 'child',
     disabled: false,
-    commonData: "data",
-    childData: "child data 1"
+    commonData: 'data',
+    childData: 'child data 1'
   },
   {
-    type: "child",
+    type: 'child',
     disabled: false,
-    commonData: "data",
-    childData: "child data 2"
+    commonData: 'data',
+    childData: 'child data 2'
   }
 ];
 
-  describe('The `Select` component', () => {
+describe('The `Select` component', () => {
   it('should validate on proper props usage', () => {
     <Select
       addLabelText="Add label, plz"
@@ -138,11 +125,12 @@ let customOptions: OptionType[] =[
   });
 
   it('should handle custom options', () => {
-    let customOptionRenderer = (o: OptionType) => <span/>;
-    let customFilterOption = (options: OptionType[], filterValue: string) => options;
+    let customOptionRenderer = (o: OptionType) => <span />;
+    let customFilterOption = (options: OptionType[], filterValue: string) =>
+      options;
     <Select
       name="name"
-      autoFocus
+      autofocus
       placeholder="Enter data"
       valueKey="id"
       labelKey="data"
@@ -150,26 +138,40 @@ let customOptions: OptionType[] =[
       value=""
       optionRenderer={customOptionRenderer}
       filterOptions={customFilterOption}
-    />
-  })
+    />;
+  });
 
   it('should error when optionRenderer option param type is not the same as options element type', () => {
-    let invalidRenderer = (o: string) => <span/>;
+    let invalidRenderer = (o: string) => <span />;
     // $ExpectError
     <Select
       name="name"
-      autoFocus
+      autofocus
       placeholder="Enter data"
       valueKey="id"
       labelKey="data"
       options={customOptions}
       value=""
       optionRenderer={invalidRenderer}
-    />
-  })
+    />;
+  });
 
   it('should error when filterOptions options param type is not an array of options element type', () => {
-    let invalidFilterOptions = (o: string) => <span/>;
+    let invalidFilterOptions = (o: string) => <span />;
+    // $ExpectError
+    <Select
+      name="name"
+      autofocus
+      placeholder="Enter data"
+      valueKey="id"
+      labelKey="data"
+      options={customOptions}
+      value=""
+      filterOptions={invalidFilterOptions}
+    />;
+  });
+
+  it('should error when given non-existent prop', () => {
     // $ExpectError
     <Select
       name="name"
@@ -179,7 +181,6 @@ let customOptions: OptionType[] =[
       labelKey="data"
       options={customOptions}
       value=""
-      filterOptions={invalidFilterOptions}
-    />
-  })
+    />;
+  });
 });
