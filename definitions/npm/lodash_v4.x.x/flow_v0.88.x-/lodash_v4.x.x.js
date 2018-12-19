@@ -158,7 +158,7 @@ declare module "lodash" {
 
   declare type NestedArray<T> = Array<Array<T>>;
 
-  declare type matchesIterateeShorthand = Object;
+  declare type matchesIterateeShorthand = {[id: any]: any};
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -776,22 +776,22 @@ declare module "lodash" {
     after(n: number, fn: Function): Function;
     ary(func: Function, n?: number): Function;
     before(n: number, fn: Function): Function;
-    bind(func: Function, thisArg: any, ...partials: Array<any>): Function;
+    bind<R>(func: (...any[]) => R, thisArg: any, ...partials: Array<any>): (...any[]) => R;
     bindKey(obj?: ?Object, key?: ?string, ...partials?: Array<?any>): Function;
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
     debounce<F: Function>(func: F, wait?: number, options?: DebounceOptions): F;
-    defer(func: Function, ...args?: Array<any>): TimeoutID;
+    defer(func: (...any[]) => any, ...args?: Array<any>): TimeoutID;
     delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
-    flip(func: Function): Function;
-    memoize<F: Function>(func: F, resolver?: Function): F;
-    negate(predicate: Function): Function;
-    once(func: Function): Function;
+    flip<R>(func: (...any[]) => R): (...any[]) => R;
+    memoize<A, R>(func: (...A) => R, resolver?: (...A) => mixed): (...A) => R;
+    negate<A, R>(predicate: (...A) => R): (...A) => boolean;
+    once<A, R>(func: (...A) => R): (...A) => R;
     overArgs(func?: ?Function, ...transforms?: Array<Function>): Function;
     overArgs(func?: ?Function, transforms?: ?Array<Function>): Function;
-    partial(func: Function, ...partials: any[]): Function;
-    partialRight(func: Function, ...partials: Array<any>): Function;
+    partial<R>(func: (...any[]) => R, ...partials: any[]): (...any[]) => R;
+    partialRight(func: (...any[]) => any, ...partials: Array<any>): Function;
     partialRight(func: Function, partials: Array<any>): Function;
     rearg(func: Function, ...indexes: Array<number>): Function;
     rearg(func: Function, indexes: Array<number>): Function;
@@ -802,7 +802,7 @@ declare module "lodash" {
       wait?: number,
       options?: ThrottleOptions
     ): Function;
-    unary(func: Function): Function;
+    unary<T, R>(func: (T, ...any[]) => R): T => R;
     wrap(value?: any, wrapper?: ?Function): Function;
 
     // Lang
@@ -1607,7 +1607,7 @@ declare module "lodash/fp" {
 
   declare type NestedArray<T> = Array<Array<T>>;
 
-  declare type matchesIterateeShorthand = Object;
+  declare type matchesIterateeShorthand = {[string | number]: any};
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -2357,7 +2357,7 @@ declare module "lodash/fp" {
     delay(wait: number, func: Function): TimeoutID;
     flip(func: Function): Function;
     memoize<F: Function>(func: F): F;
-    negate(predicate: Function): Function;
+    negate<A, R>(predicate: (...A) => R): (...A) => R;
     complement(predicate: Function): Function;
     once(func: Function): Function;
     overArgs(func: Function): (transforms: Array<Function>) => Function;
@@ -2380,7 +2380,7 @@ declare module "lodash/fp" {
     spreadFrom(start: number, func: Function): Function;
     throttle(wait: number): (func: Function) => Function;
     throttle(wait: number, func: Function): Function;
-    unary(func: Function): Function;
+    unary<T, R>(func: (T, ...any[]) => R): (T) => R;
     wrap(wrapper: Function): (value: any) => Function;
     wrap(wrapper: Function, value: any): Function;
 
