@@ -10,7 +10,7 @@ describe('Provider', () => {
     <Provider />;
 
     // Also for custom providers
-    const CustomProvider: Provider<*, *, *> = createProvider("ikea");
+    const CustomProvider: Class<Provider<*>> = createProvider("ikea");
 
     // $ExpectError
     <CustomProvider />;
