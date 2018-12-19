@@ -2357,7 +2357,7 @@ declare module "lodash/fp" {
     delay(wait: number, func: Function): TimeoutID;
     flip(func: Function): Function;
     memoize<F: Function>(func: F): F;
-    negate<A, R>(predicate: (...A) => R): (...A) => R;
+    negate<A, R>(predicate: (...A) => R): (...A) => boolean;
     complement(predicate: Function): Function;
     once(func: Function): Function;
     overArgs(func: Function): (transforms: Array<Function>) => Function;
