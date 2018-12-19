@@ -1,8 +1,8 @@
 declare module 'react-select' {
-  declare type OptionType = Object
-  declare type OptionsType = OptionType[]
+  declare type OptionType = { [string]: any };
+  declare type OptionsType = OptionType[];
 
-  declare type Props = {
+  declare type Props = {|
     // html id(s) of element(s) that should be used to describe this input (for assistive tech)
     'aria-describedby'?: string,
     // aria label (for assistive tech)
@@ -13,7 +13,7 @@ declare module 'react-select' {
     addLabelText?: string,
     // Create drop-down caret element
     arrowRenderer?: React$ComponentType<{
-      onMouseDown?: SyntheticMouseEvent<*>,
+      onMouseDown?: SyntheticMouseEvent<*>
     }>,
     // automatically blur the component when an option is selected
     autoBlur?: boolean,
@@ -156,9 +156,24 @@ declare module 'react-select' {
     valueRenderer?: (option: OptionType, idx?: number) => React$Node,
     // optional style to apply to the component wrapper
     wrapperStyle?: {},
-  };
+    isSearchable?: boolean
+  |};
 
-  declare class Select extends React$Component<Props> {}
+  declare type AsyncProps = {|
+    /* The default set of options to show before the user starts searching. When
+     set to `true`, the results for loadOptions('') will be autoloaded. */
+    defaultOptions?: OptionsType | boolean,
+    /* Function that returns a promise, which is the set of options to be used
+     once the promise resolves. */
+    loadOptions: (string, (OptionsType) => void) => Promise<*> | void,
+    /* If cacheOptions is truthy, then the loaded data will be cached. The cache
+     will remain until `cacheOptions` changes value. */
+    cacheOptions?: any
+  |};
 
-  declare module.exports: typeof Select;
+  declare export default class Select extends React$Component<Props> {}
+  declare export class Async extends React$Component<{|
+    ...Props,
+    ...AsyncProps
+  |}> {}
 }
