@@ -90,7 +90,7 @@ const psatPart2 = _.pathSatisfies(y => typeof y === "number" && y > 0, [
 const psat3: boolean = psatPart2({ x: { y: 2 }, z: true });
 
 const propSat: boolean = _.propSatisfies(x => x > 0, "x", { x: 1, y: 2 });
-const coerceArray = _.unless(_.isArrayLike, _.of);
+const coerceArray = _.unless(_.is(Array), _.of);
 const coer: Array<number | Array<number>> | number = coerceArray([1, 2, 3]);
 const coer1: Array<number | Array<number>> | number = coerceArray(1);
 

@@ -537,7 +537,6 @@ declare module ramda {
   declare function is<T>(t: T, v: any): boolean;
   declare var propIs: CurriedFunction3<any, string, Object, boolean>;
   declare function type(x: ?any): string;
-  declare function isArrayLike(x: any): boolean;
 
   declare function isNil(x: mixed): boolean %checks(x === undefined ||
     x === null);
