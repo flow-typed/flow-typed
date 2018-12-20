@@ -1390,16 +1390,17 @@ declare module ramda {
     ...args: Array<void>
   ): (o: { [key: string]: A }) => { [key: string]: B };
 
-  declare type Merge = (<A, B>(a: A, b: B) => A & B) &
-    (<A, B>(a: A) => (b: B) => A & B);
+  declare type Merge =
+    (<A, B>(a: A) => (b: B) => A & B) &
+    (<A, B>(a: A, b: B) => A & B);
 
   declare var merge: Merge;
+  declare var mergeLeft: Merge;
+  declare var mergeDeepLeft: Merge;
 
   declare function mergeAll<T>(
     os: Array<{ [k: string]: T }>
   ): { [k: string]: T };
-
-  declare var mergeDeepLeft: Merge;
 
   declare var mergeDeepRight: (<A, B>(a: A, b: B) => B & A) &
     (<A, B>(a: A) => (b: B) => B & A);
