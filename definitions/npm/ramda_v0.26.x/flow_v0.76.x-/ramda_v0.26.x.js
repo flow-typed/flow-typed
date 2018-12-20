@@ -1139,15 +1139,15 @@ declare module ramda {
     (<T>(prop: number, val: mixed, obj: Array<*>) => boolean);
   declare var propEq: PropEq;
 
-  declare function pathEq(
-    path: Array<string>,
-  ): ((val: any) => (o: Object) => boolean) &
-    ((val: any, o: Object) => boolean);
-  declare function pathEq(
-    path: Array<string>,
-    val: any,
+  declare function pathEq<T: string | number>(
+    path: Array<T>,
+  ): ((val: mixed) => (o: Object) => boolean) &
+    ((val: mixed, o: Object) => boolean);
+  declare function pathEq<T: string | number>(
+    path: Array<T>,
+    val: mixed,
   ): (o: Object) => boolean;
-  declare function pathEq(path: Array<string>, val: any, o: Object): boolean;
+  declare function pathEq<T: string | number>(path: Array<T>, val: mixed, o: Object): boolean;
 
   declare function clamp<T: number | string | Date>(
     min: T,

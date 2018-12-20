@@ -6,6 +6,7 @@ const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
 const obj: { [k: string]: number } = { a: 1, c: 2 };
 const objMixed: { [k: string]: mixed } = { a: 1, c: "d" };
+const objArr: { [k: string]: mixed } = { a: 1, b: [1,2,3], c: "d"};
 const os: Array<{ [k: string]: * }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
@@ -60,8 +61,8 @@ const inters: Array<number> = _.intersection(ns, ns);
 
 const interBy: Array<number> = _.intersectionWith(_.eqBy(Math.abs), ns, ns);
 
-const pathEqObj: boolean = _.pathEq(["hello"], 1, obj);
-const pathEqObj2: boolean = _.pathEq(["hello"])(1)(obj);
+const pathEqObj: boolean = _.pathEq(["b", 1], 1, objArr);
+const pathEqObj2: boolean = _.pathEq(["b", 1])(1)(objArr);
 
 // It's good to test this with multiple params since $Keys<T> is a union.
 type PropEqObj = { bar: number, baz: string };
