@@ -398,6 +398,13 @@ declare module 'webpack' {
     warningsFilter?: FilterTypes,
   };
 
+  declare type WatchOptions = {
+    aggregateTimeout?: number,
+    ignored?: { [k: string]: any },
+    poll?: boolean | number,
+    stdin?: boolean
+  };
+
   declare type WebpackOptions = {
     amd?: { [k: string]: any },
     bail?: boolean,
@@ -487,12 +494,7 @@ declare module 'webpack' {
       | 'electron-renderer'
       | ((compiler: WebpackCompiler) => void),
     watch?: boolean,
-    watchOptions?: {
-      aggregateTimeout?: number,
-      ignored?: { [k: string]: any },
-      poll?: boolean | number,
-      stdin?: boolean,
-    },
+    watchOptions?: WatchOptions,
   };
 
   declare module.exports: (
