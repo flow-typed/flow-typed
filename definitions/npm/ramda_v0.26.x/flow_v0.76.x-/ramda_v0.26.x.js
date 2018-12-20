@@ -1479,18 +1479,18 @@ declare module ramda {
     lens: Lens,
   ): ((x: (any) => mixed) => (val: V) => U) & ((x: (any) => mixed, val: V) => U);
 
-  declare function path<V>(
-    p: Array<mixed>,
+  declare function path<T: string | number, V>(
+    p: Array<T>,
   ): (o: NestedObject<V>) => V;
-  declare function path<V>(
-    p: Array<mixed>,
+  declare function path<T: string | number, V>(
+    p: Array<T>,
   ): (o: null | void) => void;
-  declare function path<V>(
-    p: Array<mixed>,
+  declare function path<T: string | number, V>(
+    p: Array<T>,
   ): (o: mixed) => ?V;
-  declare function path<V, A: NestedObject<V>>(p: Array<mixed>, o: A): V;
-  declare function path<V, A: null | void>(p: Array<mixed>, o: A): void;
-  declare function path<V, A: mixed>(p: Array<mixed>, o: A): ?V;
+  declare function path<T: string | number, V, A: NestedObject<V>>(p: Array<T>, o: A): V;
+  declare function path<T: string | number, V, A: null | void>(p: Array<T>, o: A): void;
+  declare function path<T: string | number, V, A>(p: Array<T>, o: A): ?V;
 
   declare function path<V>(
     p: Array<string>,
