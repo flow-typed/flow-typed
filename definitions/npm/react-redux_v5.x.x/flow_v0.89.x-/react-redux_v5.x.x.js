@@ -1,8 +1,17 @@
-// see here for details
-// https://medium.com/@samgoldman/ville-saukkonen-thanks-and-thanks-for-your-thoughtful-questions-24aedcfed518
-// https://github.com/facebook/flow/issues/7125
+/**
+The order of type arguments for connect() is as follows:
 
-/*
+connect<Props, OwnProps, StateProps, DispatchProps, State, Action>(…)
+
+In Flow v0.89 only the first two are mandatory to specify. Other 4 can be repaced with the new awesome type placeholder:
+
+connect<Props, OwnProps, _, _, _, _>(…)
+
+But beware, in case of weird type errors somewhere in random places
+just type everything and get to a green field and only then try to
+remove the definitions you see bogus.
+
+Decrypting the abbreviations:
   WC = Component being wrapped
   S = State
   A = Action
