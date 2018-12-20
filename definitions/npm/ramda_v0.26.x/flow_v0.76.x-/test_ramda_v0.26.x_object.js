@@ -44,9 +44,9 @@ describe("Object", () => {
 });
 
 const apath: { [k: string]: number | string | Object } = _.assocPath(
-  ["a", "b", "c"],
+  ["a", 0, "c"],
   "s",
-  { a: { b: { c: 0 } } }
+  { a: [ { c: 0 } ] }
 );
 
 const tomato = {

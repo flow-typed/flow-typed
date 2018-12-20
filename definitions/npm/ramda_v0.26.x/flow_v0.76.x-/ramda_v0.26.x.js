@@ -1318,21 +1318,21 @@ declare module ramda {
     <T, S: Object>                        (key: string, val: T, src: S): ({ [k: string]: T, ...$Exact<S> })
   };
 
-  declare function assocPath<T, S>(
-    key: Array<string>,
+  declare function assocPath<T: string | number, S, V>(
+    key: Array<T>,
     ...args: Array<void>
-  ): ((val: T) => (src: S) => { [k: string]: T }) &
-    ((val: T) => (src: S) => { [k: string]: T } & S);
-  declare function assocPath<T, S>(
-    key: Array<string>,
-    val: T,
+  ): ((val: V) => (src: S) => { [k: string]: V }) &
+    ((val: V) => (src: S) => { [k: string]: V } & S);
+  declare function assocPath<T: string | number, S, V>(
+    key: Array<T>,
+    val: V,
     ...args: Array<void>
-  ): (src: S) => { [k: string]: T } & S;
-  declare function assocPath<T, S>(
-    key: Array<string>,
-    val: T,
+  ): (src: S) => { [k: string]: V } & S;
+  declare function assocPath<T: string | number, S, V>(
+    key: Array<T>,
+    val: V,
     src: S
-  ): { [k: string]: T } & S;
+  ): { [k: string]: V } & S;
 
   declare function clone<T>(src: T): $Shape<T>;
 
