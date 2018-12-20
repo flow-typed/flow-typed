@@ -1213,7 +1213,7 @@ User.update( {
 User.unscoped().find( { where : { username : 'bob' } } );
 User.unscoped().count();
 
-// 
+//
 //  Model Statics
 // ~~~~~~~~~~~~~~~
 //
@@ -1925,6 +1925,12 @@ s.transaction( { type : s.Transaction.TYPES.EXCLUSIVE }, (t) => Promise.resolve(
 // promise transaction
 let asyncAutoCallback = async (t: Transaction):Promise<string> => 'a'
 s.transaction( asyncAutoCallback ).then( callbackValidator );
+
+// afterCommit hook
+s.transaction(async (t: Transaction): Promise<void> => {
+  t.afterCommit(async (t: Transaction): Promise<void> => {
+  });
+});
 
 // sync options types
 s.sync({

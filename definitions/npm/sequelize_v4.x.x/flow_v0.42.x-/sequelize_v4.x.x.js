@@ -7208,6 +7208,11 @@ declare module "sequelize" {
     rollback(): Promise<void>,
 
     /**
+     * A hook that is run after a transaction is committed
+     */
+    afterCommit(hook: (transaction: Transaction) => Promise<void>): void,
+
+    /**
      * Isolations levels can be set per-transaction by passing `options.isolationLevel` to
      * `sequelize.transaction`. Default to `REPEATABLE_READ` but you can override the default isolation level
      by passing
