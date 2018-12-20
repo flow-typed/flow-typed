@@ -256,8 +256,8 @@ const path2: Object | number = _.path(["a", 1], { a: { "1": 2 } });
 const path3: ?Object = _.path(["a", "b"], { c: { b: 2 } });
 const path4: void = _.path(["a"], null);
 
-const pathOr: string | Object | number = _.pathOr("N/A", ["a", "b"], {
-  a: { b: 2 }
+const pathOr: string | Object | number = _.pathOr("N/A", ["a", "b", 0], {
+  a: { b: [2] }
 });
 
 const pck: Object = _.pick(["a", "d"], { a: 1, b: 2, c: 3, d: 4 });

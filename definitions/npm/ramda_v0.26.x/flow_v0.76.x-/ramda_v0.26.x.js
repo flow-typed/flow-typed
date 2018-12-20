@@ -1505,17 +1505,17 @@ declare module ramda {
   declare function path<V, A: null | void>(p: Array<string>, o: A): void;
   declare function path<V, A: mixed>(p: Array<string>, o: A): ?V;
 
-  declare function pathOr<T, V, A: NestedObject<V>>(
+  declare function pathOr<T, U: string | number, V, A: NestedObject<V>>(
     or: T,
-  ): ((p: Array<string>) => (o: ?A) => V | T) &
-    ((p: Array<string>, o: ?A) => V | T);
-  declare function pathOr<T, V, A: NestedObject<V>>(
+  ): ((p: Array<U>) => (o: ?A) => V | T) &
+    ((p: Array<U>, o: ?A) => V | T);
+  declare function pathOr<T, U: string | number, V, A: NestedObject<V>>(
     or: T,
-    p: Array<string>,
+    p: Array<U>,
   ): (o: ?A) => V | T;
-  declare function pathOr<T, V, A: NestedObject<V>>(
+  declare function pathOr<T, U: string | number, V, A: NestedObject<V>>(
     or: T,
-    p: Array<string>,
+    p: Array<U>,
     o: ?A
   ): V | T;
 
