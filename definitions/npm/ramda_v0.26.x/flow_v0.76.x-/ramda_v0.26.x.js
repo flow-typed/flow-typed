@@ -1949,7 +1949,7 @@ declare module ramda {
 
   declare var pathSatisfies: CurriedFunction3<
     UnaryPredicateFn<any>,
-    string[],
+    Array<string | number>,
     Object,
     boolean
   >;
