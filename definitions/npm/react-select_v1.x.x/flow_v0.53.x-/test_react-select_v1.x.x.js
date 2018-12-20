@@ -50,7 +50,7 @@ describe('The `Select` component', () => {
       aria-labelledby="aria-labelledby"
       arrowRenderer={ArrowRenderer}
       autoBlur={false}
-      autofocus={false}
+      autoFocus={false}
       autosize={false}
       backspaceRemoves={false}
       backspaceToRemoveMessage="Click backspace to remove"
@@ -130,7 +130,7 @@ describe('The `Select` component', () => {
       options;
     <Select
       name="name"
-      autofocus
+      autoFocus
       placeholder="Enter data"
       valueKey="id"
       labelKey="data"
@@ -146,7 +146,7 @@ describe('The `Select` component', () => {
     // $ExpectError
     <Select
       name="name"
-      autofocus
+      autoFocus
       placeholder="Enter data"
       valueKey="id"
       labelKey="data"
@@ -161,7 +161,7 @@ describe('The `Select` component', () => {
     // $ExpectError
     <Select
       name="name"
-      autofocus
+      autoFocus
       placeholder="Enter data"
       valueKey="id"
       labelKey="data"
@@ -172,10 +172,11 @@ describe('The `Select` component', () => {
   });
 
   it('should error when given non-existent prop', () => {
+    // Deprecated autofocus
     // $ExpectError
     <Select
       name="name"
-      autoFocus
+      autofocus
       placeholder="Enter data"
       valueKey="id"
       labelKey="data"
