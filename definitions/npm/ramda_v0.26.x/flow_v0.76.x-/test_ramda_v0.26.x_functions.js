@@ -354,15 +354,6 @@ const unap: string = _.unapply(JSON.stringify)(1, 2, 3);
 
 const greetName = name => "Hello " + name;
 
-const shoutedGreet: boolean = _.wrap(
-  greetName,
-  (gr, name) => gr(name) === "Hello Anna"
-)("Anna");
-const shoutedGreet2: string = _.wrap(
-  greetName,
-  (gr, name) => name && "Hello Anna"
-)(true);
-
 // Uncurry
 const needs3: string => string => string => string = a => b => c => a + b + c;
 

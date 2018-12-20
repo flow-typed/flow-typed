@@ -1885,11 +1885,6 @@ declare module ramda {
 
   //TODO useWith
 
-  declare function wrap<A, B, C, D, F: (...args: Array<A>) => B>(
-    fn: F,
-    fn2: (fn: F, ...args: Array<C>) => D
-  ): (...args: Array<A | C>) => D;
-
   // *Logic
 
   declare function allPass<T>(
