@@ -1,3 +1,6 @@
+import * as http from 'http'
+import fs from 'fs'
+
 declare module 'webpack' {
   declare class WebpackError extends Error {
     constructor(message: string): WebpackError;
@@ -414,7 +417,75 @@ declare module 'webpack' {
     cache?: boolean | { [k: string]: any },
     context?: string,
     dependencies?: Array<string>,
-    devServer?: { [k: string]: any },
+    devServer?: {
+      after?: (app: any, server: http.Server) => void,
+      allowedHosts?: string[],
+      before?: (app: any, server: http.Server) => void,
+      bonjour?: boolean,
+      clientLogLevel?: 'none' | 'info' | 'error' | 'warning',
+      compress?: boolean,
+      contentBase?: false | string | string[] | number,
+      disableHostCheck?: boolean,
+      filename?: string,
+      headers?: { [key: string]: string },
+      historyApiFallback?:
+        | boolean
+        | {
+            rewrites?: Array<{ from: string, to: string }>,
+            disableDotRule?: boolean
+          },
+      host?: string,
+      hot?: boolean,
+      hotOnly?: boolean,
+      https?:
+        | boolean
+        | {
+            key: string,
+            cert: string,
+            ca?: string
+          },
+      index?: string,
+      inline?: boolean,
+      lazy?: boolean,
+      noInfo?: boolean,
+      open?: boolean | string,
+      openPage?: string,
+      overlay?:
+        | boolean
+        | {
+            errors?: boolean,
+            warnings?: boolean
+          },
+      pfx?: string,
+      pfxPassphrase?: string,
+      port?: number,
+      proxy?: Object | Array<Object | Function>,
+      public?: string,
+      publicPath?: string,
+      quiet?: boolean,
+      socket?: string,
+      staticOptions?: {
+        dotfiles?: string,
+        etag?: boolean,
+        extensions?: false | string[],
+        fallthrough?: boolean,
+        immutable?: boolean,
+        index?: false | string,
+        lastModified?: boolean,
+        maxAge?: number,
+        redirect?: boolean,
+        setHeaders?: (
+          res: http.OutgoingMessage,
+          path: string,
+          stat: fs.Stat
+        ) => void
+      },
+      stats?: StatsOptions,
+      useLocalIp?: boolean,
+      watchContentBase?: boolean,
+      watchOptions?: WatchOptions,
+      publicPath?: string
+    },
     devtool?:
       | '@cheap-eval-source-map'
       | '@cheap-module-eval-source-map'
