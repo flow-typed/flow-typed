@@ -59,8 +59,6 @@ const _innerJoin: Array<{ [k: string]: mixed }> = _.innerJoin(
 
 const inters: Array<number> = _.intersection(ns, ns);
 
-const interBy: Array<number> = _.intersectionWith(_.eqBy(Math.abs), ns, ns);
-
 const pathEqObj: boolean = _.pathEq(["b", 1], 1, objArr);
 const pathEqObj2: boolean = _.pathEq(["b", 1])(1)(objArr);
 
