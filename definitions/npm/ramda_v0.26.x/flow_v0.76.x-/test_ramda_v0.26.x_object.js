@@ -95,12 +95,15 @@ const dissocPathd: { a: { b: number } } = _.dissocPath(["a", "c"], {
 const dissocPathd2: { a: { b: number } } = _.dissocPath(["a", "c"])({
   a: { b: 1, c: 2 }
 });
+const dissocPathd3: { a: { b: number } } = _.dissocPath(["a", "c", 0])({
+  a: { b: 1, c: [2] }
+});
 //$ExpectError
-const dissocPathd3: { a: { b: string } } = _.dissocPath(["a", "c"], {
+const dissocPathd4: { a: { b: string } } = _.dissocPath(["a", "c"], {
   a: { b: 1, c: 2 }
 });
 //$ExpectError
-const dissocPathd4: { a: { b: string } } = _.dissocPath(["a", "c"])({
+const dissocPathd5: { a: { b: string } } = _.dissocPath(["a", "c"])({
   a: { b: 1, c: 2 }
 });
 

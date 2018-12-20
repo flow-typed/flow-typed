@@ -1344,14 +1344,14 @@ declare module ramda {
     src: { [k: string]: T }
   ): { [k: string]: T };
 
-  declare function dissocPath<T>(
-    key: Array<string>,
+  declare function dissocPath<T: string | number, U>(
+    key: Array<T>,
     ...args: Array<void>
-  ): (src: { [k: string]: T }) => { [k: string]: T };
-  declare function dissocPath<T>(
-    key: Array<string>,
-    src: { [k: string]: T }
-  ): { [k: string]: T };
+  ): (src: { [k: string]: U }) => { [k: string]: U };
+  declare function dissocPath<T: string | number, U>(
+    key: Array<T>,
+    src: { [k: string]: U }
+  ): { [k: string]: U };
 
   declare function evolve<A: Object>(NestedObject<Function>): A => A;
   declare function evolve<A: Object>(NestedObject<Function>, A): A;
