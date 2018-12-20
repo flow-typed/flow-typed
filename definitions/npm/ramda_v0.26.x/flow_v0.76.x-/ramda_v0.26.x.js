@@ -1216,20 +1216,6 @@ declare module ramda {
   declare function intersection<T>(x: Array<T>, y: Array<T>): Array<T>;
   declare function intersection<T>(x: Array<T>): (y: Array<T>) => Array<T>;
 
-  declare function intersectionWith<T>(
-    fn: BinaryPredicateFn<T>,
-  ): ((x: Array<T>, y: Array<T>) => Array<T>) &
-    ((x: Array<T>) => (y: Array<T>) => Array<T>);
-  declare function intersectionWith<T>(
-    fn: BinaryPredicateFn<T>,
-    x: Array<T>,
-  ): (y: Array<T>) => Array<T>;
-  declare function intersectionWith<T>(
-    fn: BinaryPredicateFn<T>,
-    x: Array<T>,
-    y: Array<T>
-  ): Array<T>;
-
   declare function lt<T>(x: T): (y: T) => boolean;
   declare function lt<T>(x: T, y: T): boolean;
 
@@ -1725,8 +1711,6 @@ declare module ramda {
   // TODO lift
 
   // TODO liftN
-
-  declare function memoize<A, B, T: (...args: Array<A>) => B>(fn: T): T;
 
   declare function memoizeWith<A, B, C>(
     keyFn: (...args: Array<A>) => C

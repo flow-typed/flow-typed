@@ -328,12 +328,6 @@ const stuffDone: number = doStuff("dd", 1, true, obb);
 const range = _.juxt([_.toString, Math.min, Math.max]);
 const ju: Array<number | string> = range(3, 4, 9, -3);
 
-let _memoize = 0;
-const _memoizeFactorial = _.memoize(n => {
-  _memoize += 1;
-  return _.product(_.range(1, n + 1));
-});
-const mem: number = _memoizeFactorial(5);
 
 let _memoizeWith = 0;
 const _memoizeWithFactorial = _.memoizeWith(_.identity, n => {
