@@ -27,6 +27,7 @@ function testPassingPropsToConnectedComponent() {
   };
 
   const Connected = connect<Props, OwnProps, _,_,_,_>(mapStateToProps)(Com);
+  Connected.WrappedComponent;
   <Connected passthrough={123} forMapStateToProps={'data'} passthroughWithDefaultProp={123}/>;
   // OK without passthroughWithDefaultProp
   <Connected passthrough={123} forMapStateToProps={'data'}/>;

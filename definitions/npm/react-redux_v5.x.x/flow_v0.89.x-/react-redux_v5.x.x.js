@@ -43,11 +43,6 @@ declare module "react-redux" {
     storeKey?: string,
   |};
 
-  declare class ConnectedComponent<OP, +WC> extends React$Component<OP> {
-    static +WrappedComponent: WC;
-    getWrappedInstance(): React$ElementRef<WC>;
-  }
-
   declare type Dispatch<A> = (action: A) => A;
 
   declare type MapStateToProps<-S, -OP, +SP> =
@@ -71,13 +66,15 @@ declare module "react-redux" {
         ownProps: OP,
       ) => (dispatch: Dispatch<A>, ownProps: OP) => DP);
 
-  declare type Connector<OP, MP> = <WC: React$ComponentType<MP>>(
+  declare class ConnectedComponent<P, +WC> extends React$Component<P> {
+    static +WrappedComponent: WC;
+    getWrappedInstance(): React$ElementRef<WC>;
+  }
+  declare type Connector<P, OP, MP: P> = <WC: React$ComponentType<P>>(
     WC,
-  ) => Class<React$Component<OP>> & WC;
+  ) => Class<ConnectedComponent<OP, WC>> & WC;
 
   // No `mergeProps` argument
-
-  declare type ExtendProps<P, MP: P> = P;
 
   declare export function connect<-P, -OP, -SP, -DP, -S, -A>(
     mapStateToProps?: null | void,
@@ -86,7 +83,7 @@ declare module "react-redux" {
     options?: ?Options<S, OP, {||}, {| ...OP, dispatch: Dispatch<A> |}>,
     // Got error like inexact OwnProps is incompatible with exact object type?
     // Just make your OP parameter an exact object.
-  ): Connector<OP, ExtendProps<P, {| ...OP, dispatch: Dispatch<A> |}>>;
+  ): Connector<P, OP, {| ...OP, dispatch: Dispatch<A> |}>;
 
   declare export function connect<-P, -OP, -SP, -DP, -S, -A>(
     // If you get error here try adding return type to you mapStateToProps function
@@ -96,7 +93,7 @@ declare module "react-redux" {
     options?: ?Options<S, OP, SP, {| ...OP, ...SP |}>,
     // Got error like inexact OwnProps is incompatible with exact object type?
     // Just make your OP parameter an exact object.
-  ): Connector<OP, ExtendProps<P, {| ...OP, ...SP |}>>;
+  ): Connector<P, OP, {| ...OP, ...SP |}>;
 
   declare export function connect<-P, -OP, -SP, -DP, S, A>(
     mapStateToProps: null | void,
@@ -105,7 +102,7 @@ declare module "react-redux" {
     options?: ?Options<S, OP, {||}, {| ...OP, ...DP |}>,
     // Got error like inexact OwnProps is incompatible with exact object type?
     // Just make your OP parameter an exact object.
-  ): Connector<OP, ExtendProps<P, {| ...OP, ...DP |}>>;
+  ): Connector<P, OP, {| ...OP, ...DP |}>;
 
   declare export function connect<-P, -OP, -SP, -DP, S, A>(
     // If you get error here try adding return type to you mapStateToProps function
@@ -115,7 +112,7 @@ declare module "react-redux" {
     options?: ?Options<S, OP, SP, {| ...OP, ...SP, ...DP |}>,
     // Got error like inexact OwnProps is incompatible with exact object type?
     // Just make your OP parameter an exact object.
-  ): Connector<OP, ExtendProps<P, {| ...OP, ...SP, ...DP |}>>;
+  ): Connector<P, OP, {| ...OP, ...SP, ...DP |}>;
 
   // With `mergeProps` argument
 
@@ -131,7 +128,7 @@ declare module "react-redux" {
     // If you get error here try adding return type to you mapStateToProps function
     mergeProps: MergeProps<P, OP, SP, DP>,
     options?: ?Options<S, OP, SP, P>,
-  ): Connector<OP, P>;
+  ): Connector<P, OP, P>;
 
   declare export function connect<-P, -OP, -S, -A, SP, DP>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
@@ -139,21 +136,21 @@ declare module "react-redux" {
     // If you get error here try adding return type to you mapStateToProps function
     mergeProps: MergeProps<P, OP, SP, DP>,
     options?: ?Options<S, OP, SP, P>,
-  ): Connector<OP, P>;
+  ): Connector<P, OP, P>;
 
   declare export function connect<-P, -OP, -S, -A, SP, DP>(
     mapStateToProps: null | void,
     mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
     mergeProps: MergeProps<P, OP, SP, DP>,
     options?: ?Options<S, OP, SP, P>,
-  ): Connector<OP, P>;
+  ): Connector<P, OP, P>;
 
   declare export function connect<-P, -OP, -S, -A, SP, DP>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
     mergeProps: MergeProps<P, OP, SP, DP>,
     options?: ?Options<S, OP, SP, P>,
-  ): Connector<OP, P>;
+  ): Connector<P, OP, P>;
 
   // ------------------------------------------------------------
   // Typings for Provider
