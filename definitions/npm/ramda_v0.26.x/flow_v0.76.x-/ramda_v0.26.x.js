@@ -1397,6 +1397,7 @@ declare module ramda {
   declare var merge: Merge;
   declare var mergeLeft: Merge;
   declare var mergeDeepLeft: Merge;
+  declare var mergeRight: Merge;
 
   declare function mergeAll<T>(
     os: Array<{ [k: string]: T }>
