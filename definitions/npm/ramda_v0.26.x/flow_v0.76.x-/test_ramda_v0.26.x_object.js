@@ -152,8 +152,11 @@ const evolved5: number = evolved4.foo;
 //$ExpectError
 const evolved6 = _.evolve(["foo"]);
 
-const hasid = _.has("id");
-const has: boolean = hasid(tomato);
+const has: boolean = _.has("id", tomato);
+const has2: boolean = _.has("id")(tomato);
+
+const hasPath1: boolean = _.hasPath(['a', 'b'], {a: {b: 2}});
+const hasPath2: boolean = _.hasPath(['a', 0, 'c'])({a: [{c: 2}]});
 
 function Rectangle(width, height) {
   this.width = width;

@@ -1359,6 +1359,9 @@ declare module ramda {
   declare function has(key: string): (o: Object) => boolean;
   declare function has(key: string, o: Object): boolean;
 
+  declare function hasPath<T: string | number>(path: Array<T>): (o: Object) => boolean;
+  declare function hasPath<T: string | number>(path: Array<T>, o: Object): boolean;
+
   declare function hasIn(key: string, o: Object): boolean;
   declare function hasIn(key: string): (o: Object) => boolean;
 
