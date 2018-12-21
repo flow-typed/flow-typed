@@ -947,7 +947,7 @@ declare module "lodash" {
     round(number: number, precision?: number): number;
     subtract(minuend: number, subtrahend: number): number;
     sum(array: Array<*>): number;
-    sumBy<T>(array: Array<T>, iteratee?: Iteratee<T>): number;
+    sumBy<T>(array: $ReadOnlyArray<T>, iteratee?: Iteratee<T>): number;
 
     // number
     clamp(number?: number, lower?: ?number, upper?: ?number): number;
