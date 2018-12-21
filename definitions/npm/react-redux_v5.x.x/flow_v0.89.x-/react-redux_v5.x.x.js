@@ -53,7 +53,7 @@ declare module "react-redux" {
   declare type MapStateToProps<-S, -OP, +SP> =
     | ((state: S, ownProps: OP) => SP)
     // If you want to use the factory function but get a strange error
-    // like "function is not an object" then just type the factiry function
+    // like "function is not an object" then just type the factory function
     // like this:
     // const factory: (State, OwnProps) => (State, OwnProps) => StateProps
     // and provide the StateProps type to the SP type parameter.
@@ -62,7 +62,7 @@ declare module "react-redux" {
   declare type MapDispatchToPropsFn<A, -OP, +DP> =
     | ((dispatch: Dispatch<A>, ownProps: OP) => DP)
     // If you want to use the factory function but get a strange error
-    // like "function is not an object" then just type the factiry function
+    // like "function is not an object" then just type the factory function
     // like this:
     // const factory: (Dispatch, OwnProps) => (Dispatch, OwnProps) => DispatchProps
     // and provide the DispatchProps type to the DP type parameter.
