@@ -46,6 +46,10 @@ const str: string = "hello world";
   const concatxs2: string = _.concat("ABC", "DEF");
 
   const cont1: boolean = _.contains("s", ss);
+  const cont2: boolean = _.contains("s")(ss);
+
+  const inc1: boolean = _.includes("s", ss);
+  const inc2: boolean = _.includes("s")(ss);
 
   const dropxs: Array<string> = _.drop(4, ss);
   const dropxs1: string = _.drop(3)(str);

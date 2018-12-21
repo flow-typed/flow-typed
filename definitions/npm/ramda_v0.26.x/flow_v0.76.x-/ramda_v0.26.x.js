@@ -589,10 +589,12 @@ declare module ramda {
   declare function concat(x: string, y: string): string;
   declare function concat(x: string): (y: string) => string;
 
-  declare function contains<E, T: Array<E> | string>(x: E, xs: T): boolean;
-  declare function contains<E, T: Array<E> | string>(
-    x: E,
-  ): (xs: T) => boolean;
+  declare type Includes =
+  (<A, T: Array<A> | string>(a: A) => (b: T) => boolean) &
+  (<A, T: Array<A> | string>(a: A, b: T) => boolean);
+
+  declare var contains: Includes;
+  declare var includes: Includes;
 
   declare function drop<V, T: Array<V> | string>(
     n: number,
