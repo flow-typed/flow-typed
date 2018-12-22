@@ -27,7 +27,7 @@ describe('Custom Store (eg for ThunkActions)', () => {
   // ReduxStore should be imported from 'redux' but we can't do this with this
   // test environment, so let's copy them once again...
   declare type Redux$DispatchAPI<A> = (action: A) => A;
-  declare type Redux$Dispatch<A: { type: $Subtype<string> }> = Redux$DispatchAPI<A>;
+  declare type Redux$Dispatch<A: { type: string }> = Redux$DispatchAPI<A>;
   declare type Redux$Reducer<S, A> = (state: S | void, action: A) => S;
   declare type Redux$Store<S, A, D = Redux$Dispatch<A>> = {
     dispatch: D;
