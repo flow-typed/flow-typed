@@ -405,7 +405,48 @@ declare module 'webpack' {
     context?: string,
     dependencies?: Array<string>,
     devServer?: { [k: string]: any },
-    devtool?: string | false,
+    devtool?:
+      | '@cheap-eval-source-map'
+      | '@cheap-module-eval-source-map'
+      | '@cheap-module-source-map'
+      | '@cheap-source-map'
+      | '@eval-source-map'
+      | '@eval'
+      | '@hidden-source-map'
+      | '@inline-source-map'
+      | '@nosources-source-map'
+      | '@source-map'
+      | '#@cheap-eval-source-map'
+      | '#@cheap-module-eval-source-map'
+      | '#@cheap-module-source-map'
+      | '#@cheap-source-map'
+      | '#@eval-source-map'
+      | '#@eval'
+      | '#@hidden-source-map'
+      | '#@inline-source-map'
+      | '#@nosources-source-map'
+      | '#@source-map'
+      | '#cheap-eval-source-map'
+      | '#cheap-module-eval-source-map'
+      | '#cheap-module-source-map'
+      | '#cheap-source-map'
+      | '#eval-source-map'
+      | '#eval'
+      | '#hidden-source-map'
+      | '#inline-source-map'
+      | '#nosources-source-map'
+      | '#source-map'
+      | 'cheap-eval-source-map'
+      | 'cheap-module-eval-source-map'
+      | 'cheap-module-source-map'
+      | 'cheap-source-map'
+      | 'eval-source-map'
+      | 'eval'
+      | 'hidden-source-map'
+      | 'inline-source-map'
+      | 'nosources-source-map'
+      | 'source-map'
+      | false,
     entry?: Entry,
     externals?: Externals,
     loader?: { [k: string]: any },
