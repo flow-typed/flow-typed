@@ -1560,19 +1560,90 @@ declare module ramda {
   ): (key: T) => $ElementType<O, T>;
   declare function prop<T: string, O>(key: T, o: O): $ElementType<O, T>;
 
-  declare function propOr<T, V, A: { [k: string]: V }>(
+  // propOr 1 argument => (function (2 arguments) or (function (1 argument) => function (1 argument)))
+  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
     or: T,
-  ): ((p: string) => (o: A) => V | T) &
-    ((p: string, o: A) => V | T);
-  declare function propOr<T, V, A: { [k: string]: V }>(
+  ): (
+        (
+          (p: V) => (
+            (o: J) => T) &
+            (o: A) => $ElementType<{ [V]: T, ...A }, V>
+
+        ) &
+        (
+          ((p: V, o: J) => T) &
+          ((p: V, o: A) => $ElementType<{ [V]: T, ...A }, V>)
+        )
+      );
+
+  // propOr 2 arguments => function (1 argument)
+  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
     or: T,
-    p: string,
-  ): (o: A) => V | T;
-  declare function propOr<T, V, A: { [k: string]: V }>(
+    p: $npm$ramda$Placeholder,
+  ): (p: V) => (
+    ((o: J) => T) &
+    ((o: A) => $ElementType<{ [V]: T, ...A }, V>)
+  );
+
+  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
+    or: $npm$ramda$Placeholder,
+    p: V,
+  ): (or: T) => (
+      ((o: J) => T) &
+      ((o: A) => $ElementType<{ [V]: T, ...A }, V>)
+    );
+
+  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
     or: T,
-    p: string,
-    o: A
-  ): V | T;
+    p: V,
+  ): (
+      ((o: J) => T) &
+      ((o: A) => $ElementType<{ [V]: T, ...A }, V>)
+    );
+
+  // propOr 3 arguments
+  //propOr(default, __, obj)
+  declare function propOr<T, V: string, A: (string | number | void | null)>(
+    or: T,
+    p: $npm$ramda$Placeholder,
+    o: A,
+  ): (p: V) => T;
+  declare function propOr<T, V: string, A: (Object | void | null )>(
+    or: T,
+    p: $npm$ramda$Placeholder,
+    o: A,
+  ): (p: V) => $ElementType<{ [V]: T, ...A }, V>;
+  //propOr(default, key, __)
+  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
+    or: T,
+    p: V,
+    o: $npm$ramda$Placeholder,
+  ): (
+    ((p: J) => T) &
+    ((p: A) => $ElementType<{ [V]: T, ...A }, V>)
+  );
+  //propOr(__, key, obj)
+  declare function propOr<T, V: string, A: (string | number | void | null)>(
+    or: $npm$ramda$Placeholder,
+    p: V,
+    o: A,
+  ): (or: T) => T;
+  declare function propOr<T, V: string, A: Object>(
+    or: $npm$ramda$Placeholder,
+    p: V,
+    o: A,
+  ): (or: T) => $ElementType<{ [V]: T, ...A }, V>;
+  //propOr(default, key, obj)
+  declare function propOr<T, V: string, A: (string | number | void | null)>(
+    or: T,
+    p: V,
+    o: A,
+  ): T;
+  declare function propOr<T, V: string, A: Object>(
+    or: T,
+    p: V,
+    o: A,
+  ): $ElementType<{ [V]: T, ...A }, V>;
 
   declare function keysIn(o: Object): Array<string>;
 
