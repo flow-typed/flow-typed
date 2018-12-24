@@ -66,7 +66,7 @@ declare module "react-redux" {
         ownProps: OP,
       ) => (dispatch: Dispatch<A>, ownProps: OP) => DP);
 
-  declare class ConnectedComponent<P, +WC> extends React$Component<P> {
+  declare class ConnectedComponent<OP, +WC> extends React$Component<OP> {
     static +WrappedComponent: WC;
     getWrappedInstance(): React$ElementRef<WC>;
   }
@@ -86,7 +86,7 @@ declare module "react-redux" {
   ): Connector<P, OP, {| ...OP, dispatch: Dispatch<A> |}>;
 
   declare export function connect<-P, -OP, -SP, -DP, -S, -A>(
-    // If you get error here try adding return type to you mapStateToProps function
+    // If you get error here try adding return type to your mapStateToProps function
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps?: null | void,
     mergeProps?: null | void,
@@ -105,7 +105,7 @@ declare module "react-redux" {
   ): Connector<P, OP, {| ...OP, ...DP |}>;
 
   declare export function connect<-P, -OP, -SP, -DP, S, A>(
-    // If you get error here try adding return type to you mapStateToProps function
+    // If you get error here try adding return type to your mapStateToProps function
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
     mergeProps?: null | void,
