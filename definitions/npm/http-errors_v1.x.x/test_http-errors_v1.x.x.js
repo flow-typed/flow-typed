@@ -7,6 +7,7 @@ const C: HttpErrors.HttpError = HttpErrors(200, 'foo', {});
 const D: HttpErrors.HttpError = HttpErrors('500');
 const E: HttpErrors.NotFound = new HttpErrors.NotFound();
 const F: HttpErrors.HttpError = new HttpErrors.LengthRequired;
+const F: HttpErrors.HttpError = new HttpErrors.HttpError('foo');
 
 (F.expose: bool);
 (F.message: string);
