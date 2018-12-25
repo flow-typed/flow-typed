@@ -37,6 +37,7 @@ function testPassingPropsToConnectedComponent() {
   <Connected passthrough={123} forMapStateToProps={321} passthroughWithDefaultProp={123}/>;
   //$ExpectError wrong type for  passthroughWithDefaultProp
   <Connected passthrough={123} forMapStateToProps={'data'} passthroughWithDefaultProp={''}/>;
+  // Flow also erroneously complains about fromStateToProps
   //$ExpectError passthrough missing
   <Connected forMapStateToProps={'data'} />;
   //$ExpectError forMapStateToProps missing
@@ -55,10 +56,14 @@ function doesNotRequireDefinedComponentToTypeCheck1case() {
   };
 
   const mapStateToProps = (state: {}) => ({
+    // Flow shows the main error in libdefs,
+    // but putting the suppression here does the trick
     // $ExpectError wrong type for stringProp
     stringProp: false,
   });
 
+  // in this case the explicit type arguments are required,
+  // otherwise Flow does not see the error
   connect<Props, {||}, _,_,_,_>(mapStateToProps)(Component);
 }
 
@@ -72,10 +77,14 @@ function doesNotRequireDefinedComponentToTypeCheck2case() {
   };
 
   const mapDispatchToProps = () => ({
+    // Flow shows the main error in libdefs,
+    // but putting the suppression here does the trick
     // $ExpectError wrong type for numProp
     numProp: false,
   });
 
+  // in this case the explicit type arguments are required,
+  // otherwise Flow does not see the error
   connect<Props, {||}, _,_,_,_>(null, mapDispatchToProps)(Component);
 }
 
@@ -90,15 +99,21 @@ function doesNotRequireDefinedComponentToTypeCheck3case() {
   };
 
   const mapStateToProps = (state: {}) => ({
+    // Flow shows the main error in libdefs,
+    // but putting the suppression here does the trick
     // $ExpectError wrong type for stringProp
     stringProp: false,
   });
 
   const mapDispatchToProps = () => ({
+    // Flow shows the main error in libdefs,
+    // but putting the suppression here does the trick
     // $ExpectError wrong type for numProp
     numProp: false,
   });
 
+  // in this case the explicit type arguments are required,
+  // otherwise Flow does not see the error
   connect<Props, {||}, _,_,_,_>(mapStateToProps, mapDispatchToProps)(Component);
 }
 
@@ -112,10 +127,14 @@ function doesNotRequireDefinedComponentToTypeCheck4case() {
   };
 
   const mapStateToProps = (state: {}) => ({
+    // Flow shows the main error in libdefs,
+    // but putting the suppression here does the trick
     // $ExpectError wrong type for stringProp
     stringProp: false,
   });
 
+  // in this case the explicit type arguments are required,
+  // otherwise Flow does not see the error
   connect<Props, {||}, _,_,_,_>(mapStateToProps, {})(Component);
 }
 
@@ -194,10 +213,16 @@ function testWithStatelessFunctionalComponent() {
 
   const Connected = connect(mapStateToProps)(Com);
   <Connected passthrough={123} forMapStateToProps={'data'}/>;
+  // Here Flow reports that `fromStateToProps` is missing from props,
+  // while the real error is still the wrong type for passthroug,
+  // giving passthrough a number fixes the wrongly titled error.
   //$ExpectError wrong type for passthrough
   <Connected passthrough={''} forMapStateToProps={'data'}/>;
   //$ExpectError wrong type for forMapStateToProps
   <Connected passthrough={123} forMapStateToProps={321} />;
+  // Here Flow reports that `fromStateToProps` is missing from props,
+  // while the real error is still the missing passthroug property,
+  // giving the passthrough property fixes the wrongly titled error.
   //$ExpectError passthrough missing
   <Connected forMapStateToProps={'data'} />;
   //$ExpectError forMapStateToProps missing
@@ -223,6 +248,9 @@ function testMapStateToPropsDoesNotNeedProps() {
 
   const Connected = connect(mapStateToProps)(Com);
   <Connected passthrough={123}/>;
+  // Here Flow reports that `fromStateToProps` is missing from props,
+  // while the real error is still the missing passthroug property,
+  // giving the passthrough property fixes the wrongly titled error.
   //$ExpectError component property passthrough not found
   <Connected />;
 }
@@ -256,6 +284,9 @@ function testMapDispatchToProps() {
   }
   const Connected = connect(mapStateToProps, mapDispatchToProps)(Com);
   <Connected passthrough={123} forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
+  // Here Flow reports that `fromStateToProps` is missing from props,
+  // while the real error is still the missing passthroug property,
+  // giving the passthrough property fixes the wrongly titled error.
   //$ExpectError passthrough missing
   <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
   //$ExpectError forMapStateToProps missing
@@ -284,6 +315,9 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
   }
   const Connected = connect(null, mapDispatchToProps)(Com);
   <Connected passthrough={123} forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
+  // Here Flow reports that `fromStateToProps` is missing from props,
+  // while the real error is still the missing passthroug property,
+  // giving the passthrough property fixes the wrongly titled error.
   //$ExpectError passthrough missing
   <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
   //$ExpectError forMapDispatchToProps missing
@@ -308,6 +342,10 @@ function testMapDispatchToPropsPassesActionCreators() {
   };
   const Connected = connect(null, mapDispatchToProps)(Com);
   <Connected passthrough={123}/>;
+  // Here Flow reports that `dispatch1` is missing from props,
+  // while the real error is still the missing passthroug property,
+  // giving the passthrough property fixes the wrongly titled error.
+  //$ExpectError no passthrough
   //$ExpectError no passthrough
   <Connected/>;
 
@@ -315,15 +353,22 @@ function testMapDispatchToPropsPassesActionCreators() {
     dispatch1: (num: number) => {}
   };
   const Connected2 = connect(null, mapDispatchToPropsWithoutDispatch2)(Com);
+  // Here Flow reports that `dispatch1` is missing from props,
+  // while the real error is still the missing `dispatch2`,
+  // giving the `mapDispatchToProps` to connect above
+  // fixes the wrongly titled error.
   //$ExpectError no dispatch2
   <Connected2 passthrough={123}/>;
 
   const mapDispatchToPropsWithWrongDispatch1 = {
-    //$ExpectError dispatch1 should be number
     dispatch1: (num: string) => {},
     dispatch2: () => {}
   };
   const Connected3 = connect(null, mapDispatchToPropsWithWrongDispatch1)(Com);
+  // Here Flow reports that `dispatch1` is missing from props,
+  // while the real error is still the wrong type of `dispatch1`,
+  // giving `num` the correct type fixes the wrongly titled error.
+  //$ExpectError dispatch1 should be number
   <Connected3 passthrough={123}/>;
 }
 
@@ -352,6 +397,9 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
   };
   const Connected = connect(mapStateToProps, mapDispatchToProps)(Com);
   <Connected passthrough={123} forMapStateToProps="str"/>;
+  // Here Flow reports that `fromStateToProps` is missing from props,
+  // while the real error is still the missing passthroug property,
+  // giving the passthrough property fixes the wrongly titled error.
   //$ExpectError no passthrough
   <Connected/>;
 
@@ -359,6 +407,9 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
     dispatch1: () => {}
   };
   const Connected2 = connect(mapStateToProps, mapDispatchToProps2)(Com);
+  // Here Flow reports that `dispatch1` is missing from props,
+  // while the real error is still the missing `dispatch2`,
+  // fixing the original issue fixes the wrongly titled error.
   //$ExpectError no dispatch2
   <Connected2 passthrough={123} forMapStateToProps="str"/>;
 }
@@ -392,6 +443,9 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToPropsAndMergePr
   }
   const Connected = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Com);
   <Connected passthrough={123} forMapStateToProps="str" forMergeProps={1234}/>;
+  // Here Flow reports that `forMapStateToProps` is missing from props,
+  // while the real error is still the missing `passthrough`,
+  // fixing the original issue fixes the wrongly titled error.
   //$ExpectError no passthrough
   <Connected/>;
   //$ExpectError forMapStateToProps missing
@@ -405,6 +459,9 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToPropsAndMergePr
     dispatch1: () => {}
   };
   const Connected2 = connect(mapStateToProps, mapDispatchToProps2)(Com);
+  // Here Flow reports that `dispatch1` is missing from props,
+  // while the real error is still the missing `dispatch2`,
+  // fixing the original issue fixes the wrongly titled error.
   //$ExpectError no dispatch2
   <Connected2 passthrough={123} forMapStateToProps="str"/>;
 }
