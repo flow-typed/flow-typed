@@ -346,7 +346,6 @@ function testMapDispatchToPropsPassesActionCreators() {
   // while the real error is still the missing passthroug property,
   // giving the passthrough property fixes the wrongly titled error.
   //$ExpectError no passthrough
-  //$ExpectError no passthrough
   <Connected/>;
 
   const mapDispatchToPropsWithoutDispatch2 = {
