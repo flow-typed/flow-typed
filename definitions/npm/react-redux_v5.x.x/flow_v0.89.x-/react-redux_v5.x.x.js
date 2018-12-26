@@ -1,7 +1,7 @@
 /**
 The order of type arguments for connect() is as follows:
 
-connect<Props, OwnProps, StateProps, DispatchProps, State, Action>(…)
+connect<Props, OwnProps, StateProps, DispatchProps, State, Dispatch>(…)
 
 In Flow v0.89 only the first two are mandatory to specify. Other 4 can be repaced with the new awesome type placeholder:
 
@@ -14,7 +14,7 @@ remove the definitions you see bogus.
 Decrypting the abbreviations:
   WC = Component being wrapped
   S = State
-  A = Action
+  D = Dispatch
   OP = OwnProps
   SP = StateProps
   DP = DispatchProps
@@ -43,8 +43,6 @@ declare module "react-redux" {
     storeKey?: string,
   |};
 
-  declare type Dispatch<A> = (action: A) => A;
-
   declare type MapStateToProps<-S, -OP, +SP> =
     | ((state: S, ownProps: OP) => SP)
     // If you want to use the factory function but get a strange error
@@ -54,17 +52,14 @@ declare module "react-redux" {
     // and provide the StateProps type to the SP type parameter.
     | ((state: S, ownProps: OP) => (state: S, ownProps: OP) => SP);
 
-  declare type MapDispatchToPropsFn<A, -OP, +DP> =
-    | ((dispatch: Dispatch<A>, ownProps: OP) => DP)
+  declare type MapDispatchToPropsFn<D, -OP, +DP> =
+    | ((dispatch: D, ownProps: OP) => DP)
     // If you want to use the factory function but get a strange error
     // like "function is not an object" then just type the factory function
     // like this:
     // const factory: (Dispatch, OwnProps) => (Dispatch, OwnProps) => DispatchProps
     // and provide the DispatchProps type to the DP type parameter.
-    | ((
-        dispatch: Dispatch<A>,
-        ownProps: OP,
-      ) => (dispatch: Dispatch<A>, ownProps: OP) => DP);
+    | ((dispatch: D, ownProps: OP) => (dispatch: D, ownProps: OP) => DP);
 
   declare class ConnectedComponent<OP, +WC> extends React$Component<OP> {
     static +WrappedComponent: WC;
@@ -76,16 +71,16 @@ declare module "react-redux" {
 
   // No `mergeProps` argument
 
-  declare export function connect<-P, -OP, -SP, -DP, -S, -A>(
+  declare export function connect<-P, -OP, -SP, -DP, -S, -D>(
     mapStateToProps?: null | void,
     mapDispatchToProps?: null | void,
     mergeProps?: null | void,
-    options?: ?Options<S, OP, {||}, {| ...OP, dispatch: Dispatch<A> |}>,
+    options?: ?Options<S, OP, {||}, {| ...OP, dispatch: D |}>,
     // Got error like inexact OwnProps is incompatible with exact object type?
     // Just make your OP parameter an exact object.
-  ): Connector<P, OP, {| ...OP, dispatch: Dispatch<A> |}>;
+  ): Connector<P, OP, {| ...OP, dispatch: D |}>;
 
-  declare export function connect<-P, -OP, -SP, -DP, -S, -A>(
+  declare export function connect<-P, -OP, -SP, -DP, -S, -D>(
     // If you get error here try adding return type to your mapStateToProps function
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps?: null | void,
@@ -95,19 +90,19 @@ declare module "react-redux" {
     // Just make your OP parameter an exact object.
   ): Connector<P, OP, {| ...OP, ...SP |}>;
 
-  declare export function connect<-P, -OP, -SP, -DP, S, A>(
+  declare export function connect<-P, -OP, -SP, -DP, S, D>(
     mapStateToProps: null | void,
-    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
+    mapDispatchToProps: MapDispatchToPropsFn<D, OP, DP> | DP,
     mergeProps?: null | void,
     options?: ?Options<S, OP, {||}, {| ...OP, ...DP |}>,
     // Got error like inexact OwnProps is incompatible with exact object type?
     // Just make your OP parameter an exact object.
   ): Connector<P, OP, {| ...OP, ...DP |}>;
 
-  declare export function connect<-P, -OP, -SP, -DP, S, A>(
+  declare export function connect<-P, -OP, -SP, -DP, S, D>(
     // If you get error here try adding return type to your mapStateToProps function
     mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
+    mapDispatchToProps: MapDispatchToPropsFn<D, OP, DP> | DP,
     mergeProps?: null | void,
     options?: ?Options<S, OP, SP, {| ...OP, ...SP, ...DP |}>,
     // Got error like inexact OwnProps is incompatible with exact object type?
@@ -122,7 +117,7 @@ declare module "react-redux" {
     ownProps: OP,
   ) => P;
 
-  declare export function connect<-P, -OP, -S, -A, SP, DP>(
+  declare export function connect<-P, -OP, -S, -D, SP, DP>(
     mapStateToProps: null | void,
     mapDispatchToProps: null | void,
     // If you get error here try adding return type to you mapStateToProps function
@@ -130,7 +125,7 @@ declare module "react-redux" {
     options?: ?Options<S, OP, SP, P>,
   ): Connector<P, OP, P>;
 
-  declare export function connect<-P, -OP, -S, -A, SP, DP>(
+  declare export function connect<-P, -OP, -S, -D, SP, DP>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: null | void,
     // If you get error here try adding return type to you mapStateToProps function
@@ -138,16 +133,16 @@ declare module "react-redux" {
     options?: ?Options<S, OP, SP, P>,
   ): Connector<P, OP, P>;
 
-  declare export function connect<-P, -OP, -S, -A, SP, DP>(
+  declare export function connect<-P, -OP, -S, -D, SP, DP>(
     mapStateToProps: null | void,
-    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
+    mapDispatchToProps: MapDispatchToPropsFn<D, OP, DP> | DP,
     mergeProps: MergeProps<P, OP, SP, DP>,
     options?: ?Options<S, OP, SP, P>,
   ): Connector<P, OP, P>;
 
-  declare export function connect<-P, -OP, -S, -A, SP, DP>(
+  declare export function connect<-P, -OP, -S, -D, SP, DP>(
     mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: MapDispatchToPropsFn<A, OP, DP> | DP,
+    mapDispatchToProps: MapDispatchToPropsFn<D, OP, DP> | DP,
     mergeProps: MergeProps<P, OP, SP, DP>,
     options?: ?Options<S, OP, SP, P>,
   ): Connector<P, OP, P>;
@@ -210,14 +205,14 @@ declare module "react-redux" {
 
   declare export function connectAdvanced<
     Com: React$ComponentType<*>,
-    A,
+    D,
     S: Object,
     OP: Object,
     CP: Object,
     EFO: Object,
     ST: { [_: $Keys<Com>]: any },
   >(
-    selectorFactory: SelectorFactory<Com, A, S, OP, EFO, CP>,
+    selectorFactory: SelectorFactory<Com, D, S, OP, EFO, CP>,
     connectAdvancedOptions: ?(ConnectAdvancedOptions & EFO),
   ): (component: Com) => React$ComponentType<OP> & $Shape<ST>;
 }
