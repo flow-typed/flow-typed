@@ -721,7 +721,7 @@ function testDispatchFnThunk() {
   <Connected />;
 }
 
-function testDispatchThunk() {
+function testDispatchThunk_onlyDispatchObject_differentDispatchPropsAreOK() {
   type State = {||}
   type Action = {|
     type: 'action'
@@ -734,195 +734,301 @@ function testDispatchThunk() {
   const action = (): Action => ({ type: 'action' });
   const thunk = (): Thunk => (d: Dispatch) => Promise.resolve(1);
 
-  function differentDispatchPropsAreOK() {
-    type DispatchProps = {|
-      action: typeof action,
-      // here the property returns a thunk...
-      thunk: () => Thunk,
-    |};
-    const mapDispatchToProps = {
-      action,
-      thunk
-    };
+  type DispatchProps = {|
+    action: typeof action,
+    // here the property returns a thunk...
+    thunk: () => Thunk,
+  |};
+  const mapDispatchToProps = {
+    action,
+    thunk
+  };
 
-    type Props = {
-      action: typeof action,
-      // ... and here the property returns a return value of thunk
-      // as dispatch calls it for us with `dispatch` and `getState`
-      thunk: () => Promise<number>,
-    };
-    class Com extends React.Component<Props> {}
+  type Props = {
+    action: typeof action,
+    // ... and here the property returns a return value of thunk
+    // as dispatch calls it for us with `dispatch` and `getState`
+    thunk: () => Promise<number>,
+  };
+  class Com extends React.Component<Props> {}
 
-    const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(null, mapDispatchToProps)(Com);
-    e.push(Connected);
-    <Connected />;
-  }
-
-  function sameDispatchPropsAreErroneous() {
-    type DispatchProps = {|
-      action: typeof action,
-      //$ExpectError here the property returns a thunk...
-      thunk: () => Thunk,
-    |};
-    const mapDispatchToProps = {
-      action,
-      thunk
-    };
-
-    type Props = {
-      // trying to pass the not passed to dispatch types (against the redux dispatch monad)
-      ...DispatchProps,
-    };
-    class Com extends React.Component<Props> {}
-
-    const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(null, mapDispatchToProps)(Com);
-    e.push(Connected);
-    <Connected />;
-  }
+  const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(null, mapDispatchToProps)(Com);
+  e.push(Connected);
+  <Connected />;
 }
 
-function testMergePropsWithOnlyOwnProps() {
+function testDispatchThunk_onlyDispatchObject_sameDispatchPropsAreErroneous() {
+  type State = {||}
+  type Action = {|
+    type: 'action'
+  |};
+  type DispatchAction = Action => Action;
+  type Thunk = (Dispatch, State) => Promise<number>
+  type DispatchThunk = Thunk => Promise<number>
+  type Dispatch = DispatchAction & DispatchThunk
+
+  const action = (): Action => ({ type: 'action' });
+  const thunk = (): Thunk => (d: Dispatch) => Promise.resolve(1);
+
+  type DispatchProps = {|
+    action: typeof action,
+    //$ExpectError here the property returns a thunk...
+    thunk: () => Thunk,
+  |};
+  const mapDispatchToProps = {
+    action,
+    thunk
+  };
+
+  type Props = {
+    // trying to pass the not passed to dispatch types (against the redux dispatch monad)
+    ...DispatchProps,
+  };
+  class Com extends React.Component<Props> {}
+
+  const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(null, mapDispatchToProps)(Com);
+  e.push(Connected);
+  <Connected />;
+}
+
+function testDispatchThunk_StateAndDispatchObject_differentDispatchPropsAreOK() {
+  type State = {|
+    state1: 'state1'
+  |}
+  type Action = {|
+    type: 'action'
+  |};
+  type DispatchAction = Action => Action;
+  type Thunk = (Dispatch, State) => Promise<number>
+  type DispatchThunk = Thunk => Promise<number>
+  type Dispatch = DispatchAction & DispatchThunk
+
+  const action = (): Action => ({ type: 'action' });
+  const thunk = (): Thunk => (d: Dispatch) => Promise.resolve(1);
+
+  type StateProps = {|
+    state1: 'state1',
+  |};
+  const mapStateToProps = state => ({
+    state1: state.state1
+  })
+
+  type DispatchProps = {|
+    action: typeof action,
+    // here the property returns a thunk...
+    thunk: () => Thunk,
+  |};
+  const mapDispatchToProps = {
+    action,
+    thunk
+  };
+
+  type Props = {
+    ...StateProps,
+    action: typeof action,
+    // ... and here the property returns a return value of thunk
+    // as dispatch calls it for us with `dispatch` and `getState`
+    thunk: () => Promise<number>,
+  };
+  class Com extends React.Component<Props> {}
+
+  const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(mapStateToProps, mapDispatchToProps)(Com);
+  e.push(Connected);
+  <Connected />;
+}
+
+function testDispatchThunk_StateAndDispatchObject_sameDispatchPropsAreErroneous() {
+  type State = {||}
+  type Action = {|
+    type: 'action'
+  |};
+  type DispatchAction = Action => Action;
+  type Thunk = (Dispatch, State) => Promise<number>
+  type DispatchThunk = Thunk => Promise<number>
+  type Dispatch = DispatchAction & DispatchThunk
+
+  const action = (): Action => ({ type: 'action' });
+  const thunk = (): Thunk => (d: Dispatch) => Promise.resolve(1);
+
+  type StateProps = {|
+    state1: 'state1',
+  |};
+  const mapStateToProps = state => ({
+    state1: state.state1
+  })
+
+  type DispatchProps = {|
+    action: typeof action,
+    //$ExpectError here the property returns a thunk...
+    thunk: () => Thunk,
+  |};
+  const mapDispatchToProps = {
+    action,
+    thunk
+  };
+
+  type Props = {
+    ...StateProps,
+    // trying to pass the not passed to dispatch types (against the redux dispatch monad)
+    ...DispatchProps,
+  };
+  class Com extends React.Component<Props> {}
+
+  const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(mapStateToProps, mapDispatchToProps)(Com);
+  e.push(Connected);
+  <Connected />;
+}
+
+function testMergeProps_OnlyOwnProps_ok() {
   opaque type Action = 'action';
   type Dispatch = Action => Action;
 
-  function ok() {
-    type OwnProps = {|
-      passthrough: string
-    |}
-    type Props = {
-      ...OwnProps
-    };
-    class Com extends React.Component<Props> {}
+  type OwnProps = {|
+    passthrough: string
+  |}
+  type Props = {
+    ...OwnProps
+  };
+  class Com extends React.Component<Props> {}
 
-    const mergeProps = (stateProps: {||}, dispatchProps: {|dispatch: Dispatch|}, ownProps: OwnProps) => {
-      return {
-        ...ownProps
-      }
+  const mergeProps = (stateProps: {||}, dispatchProps: {|dispatch: Dispatch|}, ownProps: OwnProps) => {
+    return {
+      ...ownProps
     }
-
-    const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(null, null, mergeProps)(Com);
-    e.push(Connected);
-    <Connected passthrough="foo" />;
   }
 
-  function wrongDispatch() {
-    type OwnProps = {|
-      passthrough: string
-    |}
-    type Props = {
-      ...OwnProps
-    };
-    class Com extends React.Component<Props> {}
-
-    const mergeProps = (stateProps: {||}, dispatchProps: {|dispatch: string|}, ownProps: OwnProps) => {
-      return {
-        ...ownProps
-      }
-    }
-
-    const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
-      null,
-      null,
-      //$ExpectError string [1] is incompatible with  `Dispatch` [2] in property `dispatch`
-      mergeProps
-    )(Com);
-    e.push(Connected);
-    <Connected passthrough="foo" />;
-  }
-
-  function noPassthrough() {
-    type OwnProps = {|
-      passthrough: string
-    |}
-    type Props = {
-      ...OwnProps
-    };
-    class Com extends React.Component<Props> {}
-
-    const mergeProps = (stateProps: {||}, dispatchProps: {|dispatch: Dispatch|}, ownProps: OwnProps) => {
-      return {
-        a: 1
-      }
-    }
-
-    const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
-      null,
-      null,
-      //$ExpectError property `passthrough` is missing in object literal [1] but exists in `OwnProps` [2]
-      mergeProps
-    )(Com);
-    e.push(Connected);
-    <Connected passthrough="foo" />;
-  }
+  const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(null, null, mergeProps)(Com);
+  e.push(Connected);
+  <Connected passthrough="foo" />;
 }
 
-function testMergePropsWithOnlyStateProps() {
+function testMergeProps_OnlyOwnProps_wrongDispatch() {
+  opaque type Action = 'action';
+  type Dispatch = Action => Action;
+
+  type OwnProps = {|
+    passthrough: string
+  |}
+  type Props = {
+    ...OwnProps
+  };
+  class Com extends React.Component<Props> {}
+
+  const mergeProps = (stateProps: {||}, dispatchProps: {|dispatch: string|}, ownProps: OwnProps) => {
+    return {
+      ...ownProps
+    }
+  }
+
+  const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
+    null,
+    null,
+    //$ExpectError string [1] is incompatible with  `Dispatch` [2] in property `dispatch`
+    mergeProps
+  )(Com);
+  e.push(Connected);
+  <Connected passthrough="foo" />;
+}
+
+function testMergeProps_OnlyOwnProps_noPassthrough() {
+  opaque type Action = 'action';
+  type Dispatch = Action => Action;
+
+  type OwnProps = {|
+    passthrough: string
+  |}
+  type Props = {
+    ...OwnProps
+  };
+  class Com extends React.Component<Props> {}
+
+  const mergeProps = (stateProps: {||}, dispatchProps: {|dispatch: Dispatch|}, ownProps: OwnProps) => {
+    return {
+      a: 1
+    }
+  }
+
+  const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
+    null,
+    null,
+    //$ExpectError property `passthrough` is missing in object literal [1] but exists in `OwnProps` [2]
+    mergeProps
+  )(Com);
+  e.push(Connected);
+  <Connected passthrough="foo" />;
+}
+
+function testMergeProps_OnlyStateProps_ok() {
   type State = {|
     +state1: 'state1'
   |}
   opaque type Action = 'action';
   type Dispatch = Action => Action;
 
-  function ok() {
-    type OwnProps = {|
-      passthrough: string
-    |}
-    type StateProps = {|
-      state1: 'state1'
-    |}
-    type Props = {
-      ...OwnProps,
-      ...StateProps,
-    };
-    class Com extends React.Component<Props> {}
+  type OwnProps = {|
+    passthrough: string
+  |}
+  type StateProps = {|
+    state1: 'state1'
+  |}
+  type Props = {
+    ...OwnProps,
+    ...StateProps,
+  };
+  class Com extends React.Component<Props> {}
 
-    const mapStateToProps = state => ({state1: state.state1})
+  const mapStateToProps = state => ({state1: state.state1})
 
-    const mergeProps = (stateProps: StateProps, dispatchProps: {|dispatch: Dispatch|}, ownProps: OwnProps) => {
-      return {
-        ...ownProps,
-        ...stateProps,
-      }
+  const mergeProps = (stateProps: StateProps, dispatchProps: {|dispatch: Dispatch|}, ownProps: OwnProps) => {
+    return {
+      ...ownProps,
+      ...stateProps,
     }
-
-    const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(mapStateToProps, null, mergeProps)(Com);
-    e.push(Connected);
-    <Connected passthrough="foo" />;
   }
 
-  function wrongDispatch() {
-    type OwnProps = {|
-      passthrough: string
-    |}
-    type StateProps = {|
-      state1: 'state1'
-    |}
-    type Props = {
-      ...OwnProps,
-      ...StateProps
-    };
-    class Com extends React.Component<Props> {}
+  const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(mapStateToProps, null, mergeProps)(Com);
+  e.push(Connected);
+  <Connected passthrough="foo" />;
+}
 
-    const mapStateToProps = state => ({
-      state1: state.state1
-    })
+function testMergeProps_OnlyStateProps_wrongDispatch() {
+  type State = {|
+    +state1: 'state1'
+  |}
+  opaque type Action = 'action';
+  type Dispatch = Action => Action;
 
-    const mergeProps = (stateProps: StateProps, dispatchProps: {|dispatch: string|}, ownProps: OwnProps) => {
-      return {
-        ...ownProps,
-        ...stateProps
-      }
+  type OwnProps = {|
+    passthrough: string
+  |}
+  type StateProps = {|
+    state1: 'state1'
+  |}
+  type Props = {
+    ...OwnProps,
+    ...StateProps
+  };
+  class Com extends React.Component<Props> {}
+
+  const mapStateToProps = state => ({
+    state1: state.state1
+  })
+
+  const mergeProps = (stateProps: StateProps, dispatchProps: {|dispatch: string|}, ownProps: OwnProps) => {
+    return {
+      ...ownProps,
+      ...stateProps
     }
-
-    const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
-      mapStateToProps,
-      null,
-      //$ExpectError string [1] is incompatible with  `Dispatch` [2] in property `dispatch`
-      mergeProps
-    )(Com);
-    e.push(Connected);
-    <Connected passthrough="foo" />;
   }
+
+  const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
+    mapStateToProps,
+    null,
+    //$ExpectError string [1] is incompatible with  `Dispatch` [2] in property `dispatch`
+    mergeProps
+  )(Com);
+  e.push(Connected);
+  <Connected passthrough="foo" />;
 }
 
 function testMergeProps_OnlyDispatchPropsObject_ok() {

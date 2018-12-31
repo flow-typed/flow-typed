@@ -118,12 +118,22 @@ declare module "react-redux" {
   declare export function connect<-P, -OP, -SP, -DP, S, D>(
     // If you get error here try adding return type to your mapStateToProps function
     mapStateToProps: MapStateToProps<S, OP, SP>,
-    mapDispatchToProps: MapDispatchToPropsFn<D, OP, DP> | DP,
+    mapDispatchToProps: MapDispatchToPropsFn<D, OP, DP>,
     mergeProps?: null | void,
     options?: ?Options<S, OP, SP, {| ...OP, ...SP, ...DP |}>,
     // Got error like inexact OwnProps is incompatible with exact object type?
     // Just make your OP parameter an exact object.
   ): Connector<P, OP, {| ...OP, ...SP, ...DP |}>;
+
+  declare export function connect<-P, -OP, -SP, -DP, S, D>(
+    // If you get error here try adding return type to your mapStateToProps function
+    mapStateToProps: MapStateToProps<S, OP, SP>,
+    mapDispatchToProps: DP,
+    mergeProps?: null | void,
+    options?: ?Options<S, OP, SP, {| ...OP, ...SP, ...DP |}>,
+    // Got error like inexact OwnProps is incompatible with exact object type?
+    // Just make your OP parameter an exact object.
+  ): Connector<P, OP, {| ...OP, ...SP, ...$ObjMap<DP, Bind<D>> |}>;
 
   // With `mergeProps` argument
 
