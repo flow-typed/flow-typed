@@ -602,6 +602,56 @@ function testHoistConnectedComponent() {
   Connected.myStatic;
 }
 
+function itsOkToReturnMoreThanNeededPropsFromMapStateToProps() {
+  type Props = {
+    stringProp: string,
+  };
+
+  const Component = ({ stringProp }: Props) => {
+    return <span>{stringProp}</span>;
+  };
+
+  // This is actually required to reproduce an issue with Flow and the `*` type.
+  function getBoolean() {
+    return false;
+  }
+
+  const mapStateToProps = () => ({
+    stringProp: 'foo',
+    numProp: getBoolean()
+  });
+
+  const Connected = connect<Props, {||}, _,_,_,_>(mapStateToProps)(Component);
+  <Connected />;
+  e.push(Connected)
+}
+
+function doesNotRequireDefinedComponentToTypeCheck2case() {
+  type Props = {
+    stringProp: string,
+    numProp: number
+  };
+
+  const Component = ({ stringProp }: Props) => {
+    return <span>{stringProp}</span>;
+  };
+
+  // This is actually required to reproduce an issue with Flow and the `*` type.
+  function getBoolean() {
+    //$ExpectError boolean [1] is incompatible with number [2]
+    return false;
+  }
+
+  const mapStateToProps = () => ({
+    stringProp: 'foo',
+    numProp: getBoolean()
+  });
+
+  const Connected = connect<Props, {||}, _,_,_,_>(mapStateToProps)(Component);
+  <Connected />;
+  e.push(Connected)
+}
+
 function testState() {
   type Props = {};
   class Com extends React.Component<Props> {}
@@ -1414,6 +1464,7 @@ function testMergeProps_returnsTotallyDifferentProps() {
       a: 1,
       b: 2,
       c: 3,
+      d: 4
     }
   }
 
