@@ -652,6 +652,33 @@ function doesNotRequireDefinedComponentToTypeCheck2case() {
   e.push(Connected)
 }
 
+function checkIfStateTypeIsRespectedAgain() {
+  type State = {
+    //$ExpectError number [1] is incompatible with string [2] in property `str`
+    num: number
+  };
+
+  const mapStateToProps = (state: State) => {
+    return {
+      str: state.num
+    }
+  };
+
+  type Props = {
+    str: string
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  const Connected = connect<Props, {||}, _,_,_,_>(mapStateToProps)(Com);
+  <Connected />;
+  e.push(Connected);
+}
+
 function testState() {
   type Props = {};
   class Com extends React.Component<Props> {}
