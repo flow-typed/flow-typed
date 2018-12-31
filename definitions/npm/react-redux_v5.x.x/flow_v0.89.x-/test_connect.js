@@ -578,3 +578,110 @@ function checkIfStateTypeIsRespectedAgain() {
   //$ExpectError
   <Connected />;
 }
+
+
+
+function testAllowsKnownPropInMapStateToProps() {
+  type Props = {
+    str: string
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToProps = (state: State) => {
+    return {
+      str: state.str
+    }
+  };
+
+  const Connected = connect(mapStateToProps)(Com);
+  <Connected />;
+}
+
+function testForbidsLiteralOfInvalidTypeInMapStateToProps() {
+  type Props = {
+    //$ExpectError string is incompatible with number
+    str: string
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToPropsWithLiteralOfInvalidType = (state: State) => {
+    return {
+      str: 123
+    }
+  };
+
+  const Connected = connect(mapStateToPropsWithLiteralOfInvalidType)(Com);
+  <Connected />
+}
+
+function testForbidsStateProperyOfInvalidTypeInMapStateToProps() {
+  type Props = {
+    str: string
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  const mapStateToPropsWithStatePropertyOfInvalidType = (state: State) => {
+    return {
+      str: state.num
+    }
+  };
+
+  const Connected = connect(mapStateToPropsWithStatePropertyOfInvalidType)(Com);
+  // Here Flow reports that `str` is missing from props,
+  // while the real error is still the type mismatch,
+  // fixing the original issue fixes the wrongly titled error.
+  //$ExpectError
+  <Connected />;
+}
+
+function testForbidsSelectorWithInvalidReturnTypeInMapStateToProps() {
+  type Props = {
+    str: string
+  };
+
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.str}</div>;
+    }
+  }
+
+  type State = {num: number, str: string};
+
+  function selectorReturningNumber(state: State) {
+    return state.num
+  }
+
+  const mapStateToPropsWithSelectorWithInvalidTypeReturnValue = (state: State) => {
+    return {
+      str: selectorReturningNumber(state)
+    }
+  };
+
+  const Connected = connect(mapStateToPropsWithSelectorWithInvalidTypeReturnValue)(Com);
+  // Here Flow reports that `str` is missing from props,
+  // while the real error is still the type mismatch,
+  // fixing the original issue fixes the wrongly titled error.
+  //$ExpectError
+  <Connected />
+}
