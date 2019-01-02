@@ -776,18 +776,18 @@ declare module "lodash" {
     after(n: number, fn: Function): Function;
     ary(func: Function, n?: number): Function;
     before(n: number, fn: Function): Function;
-    bind<F:(...mixed[]) => mixed>(func: F, thisArg: any, ...partials: Array<any>): F;
+    bind<F:(...any[]) => any>(func: F, thisArg: any, ...partials: Array<any>): F;
     bindKey(obj?: ?Object, key?: ?string, ...partials?: Array<?any>): Function;
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce<F: (...mixed[]) => mixed>(func: F, wait?: number, options?: DebounceOptions): F;
+    debounce<F: (...any[]) => any>(func: F, wait?: number, options?: DebounceOptions): F;
     defer(func: (...any[]) => any, ...args?: Array<any>): TimeoutID;
     delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
     flip<R>(func: (...any[]) => R): (...any[]) => R;
-    memoize<A, R>(func: (...A) => R, resolver?: (...A) => mixed): (...A) => R;
+    memoize<A, R>(func: (...A) => R, resolver?: (...A) => any): (...A) => R;
     negate<A, R>(predicate: (...A) => R): (...A) => boolean;
-    once<F: (...mixed[]) => mixed>(func: F): F;
+    once<F: (...any[]) => any>(func: F): F;
     overArgs(func?: ?Function, ...transforms?: Array<Function>): Function;
     overArgs(func?: ?Function, transforms?: ?Array<Function>): Function;
     partial<R>(func: (...any[]) => R, ...partials: any[]): (...any[]) => R;
@@ -797,12 +797,12 @@ declare module "lodash" {
     rearg(func: Function, indexes: Array<number>): Function;
     rest(func: Function, start?: number): Function;
     spread(func: Function): Function;
-    throttle<F: (...mixed[]) => mixed>(
+    throttle<F: (...any[]) => any>(
       func: F,
       wait?: number,
       options?: ThrottleOptions
     ): F;
-    unary<F: (...mixed[]) => mixed>(func: F): F;
+    unary<F: (...any[]) => any>(func: F): F;
     wrap(value?: any, wrapper?: ?Function): Function;
 
     // Lang
