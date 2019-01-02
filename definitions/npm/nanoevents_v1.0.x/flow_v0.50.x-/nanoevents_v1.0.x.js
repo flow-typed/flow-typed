@@ -1,9 +1,9 @@
 declare module "nanoevents" {
-  declare export default class NanoEvents {
-    constructor(): NanoEvents,
+  declare export default class NanoEvents<T> {
+    constructor(): NanoEvents<T>,
 
-    on(event: string, cb: (any) => void): void,
+    on<K: $Keys<T>>(event: K, cb: ($ElementType<T, K>) => void): void,
 
-    emit(event: string, data?: any): void
+    emit<K: $Keys<T>>(event: K, data?: $ElementType<T, K>): void
   }
 }
