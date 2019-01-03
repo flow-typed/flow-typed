@@ -39,6 +39,7 @@ import toPairs from "lodash/toPairs";
 import toPairsIn from "lodash/toPairsIn";
 import unionBy from "lodash/unionBy";
 import uniqBy from "lodash/uniqBy";
+import values from "lodash/values";
 import xorBy from "lodash/xorBy";
 import zip from "lodash/zip";
 import zipWith from "lodash/zipWith";
@@ -502,3 +503,9 @@ pairs = toPairsIn({ a: 12, b: 100 });
 (omitBy(null, num => num % 2): {});
 (omitBy(undefined, num => num % 2): {});
 (omitBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number });
+
+/**
+ * _.values
+ */
+// $ExpectError values retains the type of value
+(values(({ a: 2 }: {[string]: number })): Array<string>);
