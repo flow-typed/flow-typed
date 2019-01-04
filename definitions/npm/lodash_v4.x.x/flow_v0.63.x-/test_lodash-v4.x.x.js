@@ -412,7 +412,7 @@ directSquares = map(nums, function(num) {
   return num * num;
 });
 
-num = first(nums);
+num = first(nums) || 0;
 
 // return type of iterator is reflected in result and chain
 nativeStrings = nums.map(function(num) {
@@ -511,35 +511,35 @@ pairs = toPairsIn({ a: 12, b: 100 });
 /**
  * _.first
  */
-(first([3, 2, 1]): number);
-(first([]): void);
+(first([3, 2, 1]): number | void);
+(first([]): number | void);
 
 /**
  * _.last
  */
-(last([3, 2, 1]): number);
-(last([]): void);
+(last([3, 2, 1]): number | void);
+(last([]): number | void);
 
 /**
  * _.min
  */
-(min([3, 2, 1]): number);
-(min([]): void);
+(min([3, 2, 1]): number | void);
+(min([]): number | void);
 
 /**
  * _.minBy
  */
-(minBy([3, 2, 1], x => x): number);
-(minBy([], x => x): void);
+(minBy([3, 2, 1], x => x): number | void);
+(minBy([], x => x): number | void);
 
 /**
  * _.max
  */
-(max([3, 2, 1]): number);
-(max([]): void);
+(max([3, 2, 1]): number | void);
+(max([]): number | void);
 
 /**
  * _.maxBy
  */
-(maxBy([3, 2, 1], x => x): number);
-(maxBy([], x => x): void);
+(maxBy([3, 2, 1], x => x): number | void);
+(maxBy([], x => x): number | void);
