@@ -21,8 +21,13 @@ import intersectionBy from "lodash/intersectionBy";
 import isEqual from "lodash/isEqual";
 import isString from "lodash/isString";
 import keyBy from "lodash/keyBy";
+import last from "lodash/last";
 import map from "lodash/map";
+import max from "lodash/max";
+import maxBy from "lodash/maxBy";
 import memoize from "lodash/memoize";
+import min from "lodash/min";
+import minBy from "lodash/minBy";
 import noop from "lodash/noop";
 import omitBy from "lodash/omitBy";
 import pickBy from "lodash/pickBy";
@@ -502,3 +507,39 @@ pairs = toPairsIn({ a: 12, b: 100 });
 (omitBy(null, num => num % 2): {});
 (omitBy(undefined, num => num % 2): {});
 (omitBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number });
+
+/**
+ * _.first
+ */
+(first([3, 2, 1]): number);
+(first([]): void);
+
+/**
+ * _.last
+ */
+(last([3, 2, 1]): number);
+(last([]): void);
+
+/**
+ * _.min
+ */
+(min([3, 2, 1]): number);
+(min([]): void);
+
+/**
+ * _.minBy
+ */
+(minBy([3, 2, 1], x => x): number);
+(minBy([], x => x): void);
+
+/**
+ * _.max
+ */
+(max([3, 2, 1]): number);
+(max([]): void);
+
+/**
+ * _.maxBy
+ */
+(maxBy([3, 2, 1], x => x): number);
+(maxBy([], x => x): void);

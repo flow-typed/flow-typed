@@ -260,7 +260,7 @@ declare module "lodash" {
       fromIndex?: ?number
     ): -1;
     // alias of _.head
-    first<T>(array: ?$ReadOnlyArray<T>): T;
+    first<T>(array: ?$ReadOnlyArray<T>): T | void;
     flatten<T, X>(array?: ?Array<Array<T> | X>): Array<T | X>;
     flattenDeep<T>(array?: ?(any[])): Array<T>;
     flattenDepth(array?: ?(any[]), depth?: ?number): any[];
@@ -318,7 +318,7 @@ declare module "lodash" {
     ): Array<T>;
     join<T>(array: Array<T>, separator?: ?string): string;
     join<T>(array: void | null, separator?: ?string): "";
-    last<T>(array: ?$ReadOnlyArray<T>): T;
+    last<T>(array: ?$ReadOnlyArray<T>): T | void;
     lastIndexOf<T>(array: Array<T>, value?: ?T, fromIndex?: ?number): number;
     lastIndexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
     nth<T>(array: T[], n?: ?number): T;
@@ -935,12 +935,12 @@ declare module "lodash" {
     ceil(number: number, precision?: number): number;
     divide(dividend: number, divisor: number): number;
     floor(number: number, precision?: number): number;
-    max<T>(array: ?Array<T>): T;
-    maxBy<T>(array: ?$ReadOnlyArray<T>, iteratee?: Iteratee<T>): T;
+    max<T>(array: ?Array<T>): T | void;
+    maxBy<T>(array: ?$ReadOnlyArray<T>, iteratee?: Iteratee<T>): T | void;
     mean(array: Array<*>): number;
     meanBy<T>(array: Array<T>, iteratee?: Iteratee<T>): number;
-    min<T>(array: ?Array<T>): T;
-    minBy<T>(array: ?$ReadOnlyArray<T>, iteratee?: Iteratee<T>): T;
+    min<T>(array: ?Array<T>): T | void;
+    minBy<T>(array: ?$ReadOnlyArray<T>, iteratee?: Iteratee<T>): T | void;
     multiply(multiplier: number, multiplicand: number): number;
     round(number: number, precision?: number): number;
     subtract(minuend: number, subtrahend: number): number;
@@ -1752,7 +1752,7 @@ declare module "lodash/fp" {
       array: $ReadOnlyArray<T>
     ): number;
     // alias of _.head
-    first<T>(array: $ReadOnlyArray<T>): T;
+    first<T>(array: $ReadOnlyArray<T>): T | void;
     flatten<T, X>(array: Array<Array<T> | X>): Array<T | X>;
     unnest<T, X>(array: Array<Array<T> | X>): Array<T | X>;
     flattenDeep<T>(array: any[]): Array<T>;
@@ -1800,7 +1800,7 @@ declare module "lodash/fp" {
     ): Array<T>;
     join<T>(separator: string): (array: Array<T>) => string;
     join<T>(separator: string, array: Array<T>): string;
-    last<T>(array: Array<T>): T;
+    last<T>(array: Array<T>): T | void;
     lastIndexOf<T>(value: T): (array: Array<T>) => number;
     lastIndexOf<T>(value: T, array: Array<T>): number;
     lastIndexOfFrom<T>(
@@ -2558,15 +2558,15 @@ declare module "lodash/fp" {
     divide(dividend: number): (divisor: number) => number;
     divide(dividend: number, divisor: number): number;
     floor(number: number): number;
-    max<T>(array: Array<T>): T;
-    maxBy<T>(iteratee: Iteratee<T>): (array: Array<T>) => T;
-    maxBy<T>(iteratee: Iteratee<T>, array: Array<T>): T;
+    max<T>(array: Array<T>): T | void;
+    maxBy<T>(iteratee: Iteratee<T>): (array: Array<T>) => T | void;
+    maxBy<T>(iteratee: Iteratee<T>, array: Array<T>): T | void;
     mean(array: Array<*>): number;
     meanBy<T>(iteratee: Iteratee<T>): (array: Array<T>) => number;
     meanBy<T>(iteratee: Iteratee<T>, array: Array<T>): number;
-    min<T>(array: Array<T>): T;
-    minBy<T>(iteratee: Iteratee<T>): (array: Array<T>) => T;
-    minBy<T>(iteratee: Iteratee<T>, array: Array<T>): T;
+    min<T>(array: Array<T>): T | void;
+    minBy<T>(iteratee: Iteratee<T>): (array: Array<T>) => T | void;
+    minBy<T>(iteratee: Iteratee<T>, array: Array<T>): T | void;
     multiply(multiplier: number): (multiplicand: number) => number;
     multiply(multiplier: number, multiplicand: number): number;
     round(number: number): number;
