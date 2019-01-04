@@ -398,7 +398,7 @@ directSquares = map(function(num) {
   return num * num;
 }, nums);
 
-num = first(nums);
+num = first(nums) || 0;
 
 // return type of iterator is reflected in result and chain
 nativeStrings = nums.map(function(num) {
