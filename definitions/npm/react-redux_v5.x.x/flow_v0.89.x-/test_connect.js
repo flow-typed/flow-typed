@@ -548,7 +548,7 @@ function testHoistConnectedComponent() {
   <Connected passthrough={123} passthroughWithDefaultProp={456} forMapStateToProps={'data'}/>;
   // OK with declared static property
   Connected.myStatic;
-  //$ExpectError property `myStatic1` is missing in statics
+  //$ExpectError property `notStatic` is missing in statics
   Connected.notStatic;
 }
 
