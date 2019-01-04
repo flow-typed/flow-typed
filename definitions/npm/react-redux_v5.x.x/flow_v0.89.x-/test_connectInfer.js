@@ -1,3 +1,8 @@
+/*
+  Keep here examples which still work without type parameters specified,
+  even if the current Flow verion still reports misleading errors.
+  This helps keep the usage of Flow amazing type inferent on the good level.
+*/
 // @flow
 import React from "react";
 import { connect } from "react-redux";
@@ -26,15 +31,19 @@ function testPassingPropsToConnectedComponent() {
     }
   };
 
-  const Connected = connect<Props, OwnProps, _,_,_,_>(mapStateToProps)(Com);
+  const Connected = connect(mapStateToProps)(Com);
   Connected.WrappedComponent;
   <Connected passthrough={123} forMapStateToProps={'data'} passthroughWithDefaultProp={123}/>;
   // OK without passthroughWithDefaultProp
   <Connected passthrough={123} forMapStateToProps={'data'}/>;
+  // Flow erroneously complains about `fromStateToProps`
+  // fixing the original issue fixes the wrongly titled error.
   //$ExpectError wrong type for passthrough
   <Connected passthrough={''} forMapStateToProps={'data'} passthroughWithDefaultProp={123}/>;
   //$ExpectError wrong type for forMapStateToProps
   <Connected passthrough={123} forMapStateToProps={321} passthroughWithDefaultProp={123}/>;
+  // Flow erroneously complains about `fromStateToProps`
+  // fixing the original issue fixes the wrongly titled error.
   //$ExpectError wrong type for  passthroughWithDefaultProp
   <Connected passthrough={123} forMapStateToProps={'data'} passthroughWithDefaultProp={''}/>;
   // Flow also erroneously complains about fromStateToProps
@@ -44,98 +53,6 @@ function testPassingPropsToConnectedComponent() {
   <Connected passthrough={123}/>;
   //$ExpectError takes in only React components
   connect(mapStateToProps)('');
-}
-
-function doesNotRequireDefinedComponentToTypeCheck1case() {
-  type Props = {
-    stringProp: string,
-  };
-
-  const Component = ({ stringProp }: Props) => {
-    return <span>{stringProp}</span>;
-  };
-
-  const mapStateToProps = (state: {}) => ({
-    // Flow shows the main error in libdefs,
-    // but putting the suppression here does the trick
-    // $ExpectError wrong type for stringProp
-    stringProp: false,
-  });
-
-  // in this case the explicit type arguments are required,
-  // otherwise Flow does not see the error
-  connect<Props, {||}, _,_,_,_>(mapStateToProps)(Component);
-}
-
-function doesNotRequireDefinedComponentToTypeCheck2case() {
-  type Props = {
-    numProp: string,
-  };
-
-  const Component = ({ numProp }: Props) => {
-    return <span>{numProp}</span>;
-  };
-
-  const mapDispatchToProps = () => ({
-    // Flow shows the main error in libdefs,
-    // but putting the suppression here does the trick
-    // $ExpectError wrong type for numProp
-    numProp: false,
-  });
-
-  // in this case the explicit type arguments are required,
-  // otherwise Flow does not see the error
-  connect<Props, {||}, _,_,_,_>(null, mapDispatchToProps)(Component);
-}
-
-function doesNotRequireDefinedComponentToTypeCheck3case() {
-  type Props = {
-    stringProp: string,
-    numProp: number
-  };
-
-  const Component = ({ stringProp }: Props) => {
-    return <span>{stringProp}</span>;
-  };
-
-  const mapStateToProps = (state: {}) => ({
-    // Flow shows the main error in libdefs,
-    // but putting the suppression here does the trick
-    // $ExpectError wrong type for stringProp
-    stringProp: false,
-  });
-
-  const mapDispatchToProps = () => ({
-    // Flow shows the main error in libdefs,
-    // but putting the suppression here does the trick
-    // $ExpectError wrong type for numProp
-    numProp: false,
-  });
-
-  // in this case the explicit type arguments are required,
-  // otherwise Flow does not see the error
-  connect<Props, {||}, _,_,_,_>(mapStateToProps, mapDispatchToProps)(Component);
-}
-
-function doesNotRequireDefinedComponentToTypeCheck4case() {
-  type Props = {
-    stringProp: string,
-  };
-
-  const Component = ({ stringProp }: Props) => {
-    return <span>{stringProp}</span>;
-  };
-
-  const mapStateToProps = (state: {}) => ({
-    // Flow shows the main error in libdefs,
-    // but putting the suppression here does the trick
-    // $ExpectError wrong type for stringProp
-    stringProp: false,
-  });
-
-  // in this case the explicit type arguments are required,
-  // otherwise Flow does not see the error
-  connect<Props, {||}, _,_,_,_>(mapStateToProps, {})(Component);
 }
 
 function doesNotRequireDefinedComponentToTypeCheck5case() {
