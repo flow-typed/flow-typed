@@ -441,6 +441,7 @@ declare module "react-apollo" {
     __actionHookForDevTools(cb: () => mixed): void;
     __requestRaw(payload: GraphQLRequest): Observable<ExecutionResult<>>;
     initQueryManager(): void;
+    clearStore(): Promise<void | null>;
     resetStore(): Promise<Array<ApolloQueryResult<any>> | null>;
     onResetStore(cb: () => Promise<any>): () => void;
     reFetchObservableQueries(
