@@ -106,9 +106,6 @@ opaque type O = string;
 const v: { [O]: number } = { x: 1, y: 2 };
 find(v, { x: 3 });
 
-// $ExpectError undefined. This type is incompatible with object type.
-var result: Object = find(users, "active");
-
 /**
  * _.find examples from the official doc
  */
@@ -377,9 +374,9 @@ boolTrue = isString(undefined);
 /**
  * _.find
  */
-find([1, 2, 3], x => x == 1);
+(find([1, 2, 3], x => x == 1): void | number);
 // $ExpectError number. This type is incompatible with function type.
-find([1, 2, 3], 1);
+(find([1, 2, 3], 1): void | number);
 
 // Copy pasted tests from iflow-lodash
 var nums: number[] = [1, 2, 3, 4, 5, 6];

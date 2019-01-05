@@ -17,8 +17,8 @@ declare module 'react-select' {
     }>,
     // automatically blur the component when an option is selected
     autoBlur?: boolean,
-    // autofocus the component on mount
-    autofocus?: boolean,
+    // autoFocus the component on mount, autofocus deprecated; use autoFocus instead
+    autoFocus?: boolean,
     // whether to enable autosizing or not
     autosize?: boolean,
     // whether backspace removes an item if there is no text input
@@ -35,6 +35,8 @@ declare module 'react-select' {
     clearValueText?: string | React$Element<*>,
     // should it be possible to reset value
     clearable?: boolean,
+    // whether to close the menu when a value is selected
+    closeOnSelect?: boolean,
     // whether backspace removes an item if there is no text input
     deleteRemoves?: boolean,
     // delimiter to use to join multiple values for the hidden field value
@@ -54,6 +56,8 @@ declare module 'react-select' {
           excludeOptions: Array<{}>,
           props: {}
         ) => OptionsType),
+    // html id to set on the input element for accessibility or tests
+    id?: string,
     // whether to strip diacritics when filtering
     ignoreAccents?: boolean,
     // whether to perform case-insensitive filtering
@@ -108,10 +112,14 @@ declare module 'react-select' {
     onMenuScrollToBottom?: () => void,
     // fires when the menu is opened
     onOpen?: () => void,
+    // whether input is cleared on select (works only for multiselect)
+    onSelectResetsInput?: boolean,
     // onClick handler for value labels: function (value, event) {}
     onValueClick?: (value: string, event: Event) => void,
     // boolean to enable opening dropdown when focused
     openAfterFocus?: boolean,
+    // boolean to control opening the menu when the control is clicked
+    openOnClick?: boolean,
     // always open options menu on focus
     openOnFocus?: boolean,
     // additional class(es) to apply to the <Option /> elements
@@ -130,10 +138,14 @@ declare module 'react-select' {
     pageSize?: number,
     // field placeholder, displayed when there's no value
     placeholder?: string | React$Element<*>,
+    // whether the selected option is removed from the dropdown on multi selects
+    removeSelected?: boolean,
     // applies HTML5 required attribute when needed
     required?: boolean,
     // value to use when you clear the control
     resetValue?: any,
+    // set to true in order to use react-select in right-to-left direction
+    rtl?: boolean,
     // boolean to enable the viewport to shift so that the full menu fully visible when engaged
     scrollMenuIntoView?: boolean,
     // whether to enable searching feature or not
@@ -146,6 +158,8 @@ declare module 'react-select' {
     tabIndex?: number,
     // whether to treat tabbing out while focused to be value selection
     tabSelectsValue?: boolean,
+    // whether to trim whitespace around filter value
+    trimFilter?: boolean,
     // initial field value
     value?: any,
     // value component to render

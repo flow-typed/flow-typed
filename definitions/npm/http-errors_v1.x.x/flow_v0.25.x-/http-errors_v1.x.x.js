@@ -1,6 +1,6 @@
 declare module 'http-errors' {
   declare class SpecialHttpError extends HttpError {
-    constructor(): SpecialHttpError;
+    constructor(message?: string): SpecialHttpError;
   }
   declare class HttpError extends Error {
     expose: bool;

@@ -1141,8 +1141,8 @@ declare module ramda {
 
   declare function pathEq(
     path: Array<string>,
-  ): ((val: any, o: Object) => boolean) &
-    ((val: any) => (o: Object) => boolean);
+  ): ((val: any) => (o: Object) => boolean) &
+    ((val: any, o: Object) => boolean);
   declare function pathEq(
     path: Array<string>,
     val: any,
@@ -1354,8 +1354,8 @@ declare module ramda {
     src: { [k: string]: T }
   ): { [k: string]: T };
 
-  declare function evolve<A: Object>(NestedObject<Function>, A): A;
   declare function evolve<A: Object>(NestedObject<Function>): A => A;
+  declare function evolve<A: Object>(NestedObject<Function>, A): A;
 
   declare function eqProps(
     key: string,
@@ -1369,8 +1369,8 @@ declare module ramda {
   ): (o2: Object) => boolean;
   declare function eqProps(key: string, o1: Object, o2: Object): boolean;
 
-  declare function has(key: string, o: Object): boolean;
   declare function has(key: string): (o: Object) => boolean;
+  declare function has(key: string, o: Object): boolean;
 
   declare function hasIn(key: string, o: Object): boolean;
   declare function hasIn(key: string): (o: Object) => boolean;
