@@ -543,15 +543,15 @@ declare module ramda {
 
   // *List
   declare function adjust<T>(
-    fn: (a: T) => T,
-  ): (index: number) => (src: Array<T>) => Array<T>;
-  declare function adjust<T>(
-    fn: (a: T) => T,
     index: number,
+  ): (fn: (a: T) => T) => (src: Array<T>) => Array<T>;
+  declare function adjust<T>(
+    index: number,
+    fn: (a: T) => T,
   ): (src: Array<T>) => Array<T>;
   declare function adjust<T>(
-    fn: (a: T) => T,
     index: number,
+    fn: (a: T) => T,
     src: Array<T>
   ): Array<T>;
 

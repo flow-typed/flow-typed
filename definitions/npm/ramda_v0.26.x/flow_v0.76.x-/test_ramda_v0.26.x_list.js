@@ -27,10 +27,10 @@ const str: string = "hello world";
 
 // List
 {
-  const xs: Array<number> = _.adjust(x => x + 1, 2, ns);
-  const xs1: Array<number> = _.adjust(x => x + 1, 2)(ns);
+  const xs: Array<number> = _.adjust(2, x => x + 1, ns);
+  const xs1: Array<number> = _.adjust(2, x => x + 1)(ns);
   //$ExpectError
-  const xs3: Array<string> = _.adjust(x => x + 1)(2)(ns);
+  const xs3: Array<string> = _.adjust(2)(x => x + 1)(ns);
 
   const as: boolean = _.all(x => x > 1, ns);
   const asf: (s: Array<string>) => boolean = _.any(x => x.length > 1);
