@@ -1,5 +1,3 @@
-// @flow strict
-
 /**
  * Flow libdef for 'randomatic'
  * See https://www.npmjs.com/package/randomatic
