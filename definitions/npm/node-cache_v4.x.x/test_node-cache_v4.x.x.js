@@ -1,11 +1,18 @@
 // @flow strict
 
-import nodeCache from "node-cache";
+import NodeCache from "node-cache";
+import { describe, it } from "flow-typed-test";
 
-// $ExpectError
-new NodeCache({ nonexisting: 1 });
+describe("node-cache", () => {
+  it("errors", () => {
+    // $ExpectError
+    new NodeCache({ nonexisting: 1 });
+  });
 
-const cache = new NodeCache({ stdTTL: 60 });
-cache.set("foo", 42);
-cache.set("foo", "this is fine");
-(cache.get("foo"): mixed);
+  it("works", () => {
+    const cache = new NodeCache({ stdTTL: 60 });
+    cache.set("foo", 42);
+    cache.set("foo", "this is fine");
+    (cache.get("foo"): mixed);
+  });
+});
