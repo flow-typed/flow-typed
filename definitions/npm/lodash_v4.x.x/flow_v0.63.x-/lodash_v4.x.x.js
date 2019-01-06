@@ -263,7 +263,7 @@ declare module "lodash" {
     first<T>(array: ?$ReadOnlyArray<T>): T | void;
     flatten<T, X>(array?: ?Array<Array<T> | X>): Array<T | X>;
     flattenDeep<T>(array?: ?(any[])): Array<T>;
-    flattenDepth(array?: ?(any[]), depth?: ?number): any[];
+    flattenDepth(array?: ?(any[]), depth?: ?number): Array<mixed>;
     fromPairs<A, B>(pairs?: ?Array<[A, B]>): { [key: A]: B };
     head<T>(array: ?$ReadOnlyArray<T>): T;
     indexOf<T>(array: Array<T>, value: T, fromIndex?: number): number;
@@ -633,12 +633,12 @@ declare module "lodash" {
       array?: ?$ReadOnlyArray<T>,
       path?: ?((value: T) => Array<string> | string) | Array<string> | string,
       ...args?: Array<any>
-    ): Array<any>;
+    ): Array<mixed>;
     invokeMap<T: Object>(
       object: T,
       path: ((value: any) => Array<string> | string) | Array<string> | string,
       ...args?: Array<any>
-    ): Array<any>;
+    ): Array<mixed>;
     keyBy<T, V>(
       array: $ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
@@ -806,7 +806,7 @@ declare module "lodash" {
     wrap(value?: any, wrapper?: ?Function): Function;
 
     // Lang
-    castArray(value: *): any[];
+    castArray(value: *): Array<mixed>;
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
     cloneDeepWith<T, U>(
@@ -915,7 +915,7 @@ declare module "lodash" {
     isWeakSet(value: any): false;
     lt(value: any, other: any): boolean;
     lte(value: any, other: any): boolean;
-    toArray(value: any): Array<any>;
+    toArray(value: any): Array<mixed>;
     toFinite(value: void | null): 0;
     toFinite(value: any): number;
     toInteger(value: void | null): 0;
@@ -1062,8 +1062,8 @@ declare module "lodash" {
         source: A | B | C | D
       ) => any | void
     ): Object;
-    at(object?: ?Object, ...paths: Array<string>): Array<any>;
-    at(object?: ?Object, paths: Array<string>): Array<any>;
+    at(object?: ?Object, ...paths: Array<string>): Array<mixed>;
+    at(object?: ?Object, paths: Array<string>): Array<mixed>;
     create(prototype: void | null, properties: void | null): {};
     create<T>(prototype: T, properties: Object): $Supertype<T>;
     create(prototype: any, properties: void | null): {};
@@ -1302,8 +1302,8 @@ declare module "lodash" {
       updater?: ?Function,
       customizer?: ?Function
     ): T;
-    values(object?: ?Object): Array<any>;
-    valuesIn(object?: ?Object): Array<any>;
+    values(object?: ?Object): Array<mixed>;
+    valuesIn(object?: ?Object): Array<mixed>;
 
     // Seq
     // harder to read, but this is _()
@@ -1756,8 +1756,8 @@ declare module "lodash/fp" {
     flatten<T, X>(array: Array<Array<T> | X>): Array<T | X>;
     unnest<T, X>(array: Array<Array<T> | X>): Array<T | X>;
     flattenDeep<T>(array: any[]): Array<T>;
-    flattenDepth(depth: number): (array: any[]) => any[];
-    flattenDepth(depth: number, array: any[]): any[];
+    flattenDepth(depth: number): (array: any[]) => Array<mixed>;
+    flattenDepth(depth: number, array: any[]): Array<mixed>;
     fromPairs<A, B>(pairs: Array<[A, B]>): { [key: A]: B };
     head<T>(array: $ReadOnlyArray<T>): T;
     indexOf<T>(value: T): (array: Array<T>) => number;
@@ -1989,7 +1989,7 @@ declare module "lodash/fp" {
     ): Array<T>;
     zip<A, B>(a1: A[]): (a2: B[]) => Array<[A, B]>;
     zip<A, B>(a1: A[], a2: B[]): Array<[A, B]>;
-    zipAll(arrays: Array<Array<any>>): Array<any>;
+    zipAll(arrays: Array<Array<any>>): Array<mixed>;
     zipObject<K, V>(props?: Array<K>): (values?: Array<V>) => { [key: K]: V };
     zipObject<K, V>(props?: Array<K>, values?: Array<V>): { [key: K]: V };
     zipObj(props: Array<any>): (values: Array<any>) => Object;
@@ -2181,11 +2181,11 @@ declare module "lodash/fp" {
     includesFrom<T>(value: T, fromIndex: number, collection: Array<T>): boolean;
     invokeMap<T>(
       path: ((value: T) => Array<string> | string) | Array<string> | string
-    ): (collection: Array<T> | { [id: any]: T }) => Array<any>;
+    ): (collection: Array<T> | { [id: any]: T }) => Array<mixed>;
     invokeMap<T>(
       path: ((value: T) => Array<string> | string) | Array<string> | string,
       collection: Array<T> | { [id: any]: T }
-    ): Array<any>;
+    ): Array<mixed>;
     invokeArgsMap<T>(
       path: ((value: T) => Array<string> | string) | Array<string> | string
     ): ((
@@ -2198,12 +2198,12 @@ declare module "lodash/fp" {
     invokeArgsMap<T>(
       path: ((value: T) => Array<string> | string) | Array<string> | string,
       collection: Array<T> | { [id: any]: T }
-    ): (args: Array<any>) => Array<any>;
+    ): (args: Array<any>) => Array<mixed>;
     invokeArgsMap<T>(
       path: ((value: T) => Array<string> | string) | Array<string> | string,
       collection: Array<T> | { [id: any]: T },
       args: Array<any>
-    ): Array<any>;
+    ): Array<mixed>;
     keyBy<T, V>(
       iteratee: ValueOnlyIteratee<T>
     ): (collection: $ReadOnlyArray<T> | { [id: any]: T }) => { [key: V]: T };
@@ -2385,7 +2385,7 @@ declare module "lodash/fp" {
     wrap(wrapper: Function, value: any): Function;
 
     // Lang
-    castArray(value: *): any[];
+    castArray(value: *): Array<mixed>;
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
     cloneDeepWith<T, U>(
@@ -2542,7 +2542,7 @@ declare module "lodash/fp" {
     lt(value: any, other: any): boolean;
     lte(value: any): (other: any) => boolean;
     lte(value: any, other: any): boolean;
-    toArray(value: any): Array<any>;
+    toArray(value: any): Array<mixed>;
     toFinite(value: any): number;
     toInteger(value: any): number;
     toLength(value: any): number;
@@ -2717,12 +2717,12 @@ declare module "lodash/fp" {
       ) => any | void,
       objects: Array<Object>
     ): Object;
-    at(paths: Array<string>): (object: Object) => Array<any>;
-    at(paths: Array<string>, object: Object): Array<any>;
-    props(paths: Array<string>): (object: Object) => Array<any>;
-    props(paths: Array<string>, object: Object): Array<any>;
-    paths(paths: Array<string>): (object: Object) => Array<any>;
-    paths(paths: Array<string>, object: Object): Array<any>;
+    at(paths: Array<string>): (object: Object) => Array<mixed>;
+    at(paths: Array<string>, object: Object): Array<mixed>;
+    props(paths: Array<string>): (object: Object) => Array<mixed>;
+    props(paths: Array<string>, object: Object): Array<mixed>;
+    paths(paths: Array<string>): (object: Object) => Array<mixed>;
+    paths(paths: Array<string>, object: Object): Array<mixed>;
     create<T>(prototype: T): $Supertype<T>;
     defaults(source: Object): (object: Object) => Object;
     defaults(source: Object, object: Object): Object;
@@ -3055,8 +3055,8 @@ declare module "lodash/fp" {
       updater: Function,
       object: Object
     ): Object;
-    values(object: Object): Array<any>;
-    valuesIn(object: Object): Array<any>;
+    values(object: Object): Array<mixed>;
+    valuesIn(object: Object): Array<mixed>;
 
     tap<T>(interceptor: (value: T) => any): (value: T) => T;
     tap<T>(interceptor: (value: T) => any, value: T): T;
