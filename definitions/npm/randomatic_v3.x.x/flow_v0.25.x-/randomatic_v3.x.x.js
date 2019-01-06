@@ -6,15 +6,15 @@
  * by Vincent Driessen, 2018-12-21
  */
 
-type $npm$randomatic$Options = {|
-  chars?: string,
-  exclude?: string,
-|};
+declare module "randomatic" {
+  declare type Options = {|
+    chars?: string,
+    exclude?: string
+  |};
 
-declare module 'randomatic' {
-  declare module.exports: (
+  declare export default (
     pattern: string,
     length?: number,
-    options?: $npm$randomatic$Options,
+    options?: Options
   ) => string;
 }
