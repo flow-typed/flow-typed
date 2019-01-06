@@ -20,5 +20,5 @@ declare module "node-cache" {
     set(key: string, val: mixed, ttl?: number): boolean;
   }
 
-  declare module.exports: Class<NodeCache>;
+  declare export default Class<NodeCache>;
 }
