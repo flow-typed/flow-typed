@@ -1,5 +1,3 @@
-// @flow strict
-
 /**
  * Flow libdef for node-cache
  * by Vincent Driessen, 2018-12-19
