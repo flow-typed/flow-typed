@@ -4,8 +4,6 @@
  * by Vincent Driessen, 2018-12-21
  */
 
-// @flow strict
-
 declare module "object-hash" {
   declare type Options = {|
     algorithm?: "sha1" | "sha256" | "md5",
