@@ -14,7 +14,7 @@ type $npm$randomatic$Options = {|
 declare module 'randomatic' {
   declare module.exports: (
     pattern: string,
-    length: number,
+    length?: number,
     options?: $npm$randomatic$Options,
   ) => string;
 }
