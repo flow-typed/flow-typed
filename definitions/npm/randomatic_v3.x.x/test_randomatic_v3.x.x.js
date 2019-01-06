@@ -1,10 +1,17 @@
 // @flow strict
 
-import randomize from 'randomatic';
+import { describe, it } from "flow-typed-test";
+import randomize from "randomatic";
 
-// $ExpectError
-randomize();
+describe("randomatic", () => {
+  it("errors", () => {
+    // $ExpectError
+    randomize();
+  });
 
-(randomize('00'): string);
-(randomize('*', 10): string);
-(randomize('Aa0!', 10): string);
+  it("works", () => {
+    (randomize("00"): string);
+    (randomize("*", 10): string);
+    (randomize("Aa0!", 10): string);
+  });
+});
