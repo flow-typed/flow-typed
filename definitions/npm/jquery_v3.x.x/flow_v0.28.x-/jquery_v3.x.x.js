@@ -361,6 +361,13 @@ declare class JQueryGenericPromise<T> {
     failFilter?: (...reasons: any[]) => any,
     progressFilter?: (...progression: any[]) => any
   ): JQueryPromise<void>;
+
+  /**
+   * Add handlers to be called when the Deferred object is rejected.
+   *
+   * @param  failFilter An function that is called when the Deferred is rejected.
+   */
+  catch(failFilter: (...reasons: any[]) => any): JQueryPromise<T>;
 }
 
 /**
