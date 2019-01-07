@@ -1067,6 +1067,7 @@ User.findAll( { rejectOnEmpty: true });
 
 
 User.findById( 'a string' );
+User.findByPk( 'a string' );
 
 User.findOne( { where : { username : 'foo' } } );
 User.findOne( { where : { id : 1 }, attributes : ['id', ['username', 'name']] } );

@@ -3272,6 +3272,9 @@ declare module "sequelize" {
     static findByPrimary<TCustomAttributes>(
       identifier?: number | string,
       options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?this>,
+    static findByPk<TCustomAttributes>(
+      identifier?: number | string,
+      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?this>,
 
     /**
      * Search for a single instance. This applies LIMIT 1, so the listener will always be called with a single
