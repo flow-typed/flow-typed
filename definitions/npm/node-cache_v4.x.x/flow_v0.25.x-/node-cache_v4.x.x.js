@@ -4,7 +4,7 @@
  */
 
 declare module "node-cache" {
-  declare type Options = {|
+  declare export type Options = {|
     stdTTL?: number,
     checkperiod?: number,
     errorOnMissing?: boolean,
