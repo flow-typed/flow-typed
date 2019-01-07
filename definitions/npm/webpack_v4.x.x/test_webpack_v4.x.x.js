@@ -1,6 +1,9 @@
 import type { WebpackOptions } from 'webpack';
 
 const options: WebpackOptions = {
+  devServer: {
+    compress: true
+  },
   output: {
     filename: '[name].bundle.js',
   },
