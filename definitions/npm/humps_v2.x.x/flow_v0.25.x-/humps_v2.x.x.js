@@ -33,4 +33,15 @@ declare module "humps" {
     { +[string]: mixed },
     options?: Options
   ): { [string]: mixed };
+
+  declare export default {|
+    camelize: typeof camelize,
+    pascalize: typeof pascalize,
+    decamelize: typeof decamelize,
+    depascalize: typeof depascalize,
+    camelizeKeys: typeof camelizeKeys,
+    pascalizeKeys: typeof pascalizeKeys,
+    decamelizeKeys: typeof decamelizeKeys,
+    depascalizeKeys: typeof depascalizeKeys
+  |};
 }
