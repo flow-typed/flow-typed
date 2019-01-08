@@ -15,6 +15,7 @@ describe("node-cache", () => {
     cache.set("foo", "this is fine");
     (cache.get("foo"): mixed);
     cache.del("foo");
+    cache.del(["foo"]);
     cache.flushAll();
   });
 });
