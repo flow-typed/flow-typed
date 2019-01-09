@@ -265,4 +265,11 @@ declare module "react-redux" {
     selectorFactory: SelectorFactory<Com, D, S, OP, EFO, CP>,
     connectAdvancedOptions: ?(ConnectAdvancedOptions & EFO),
   ): (component: Com) => React$ComponentType<OP> & $Shape<ST>;
+
+  declare export default {
+    Provider: typeof Provider,
+    createProvider: typeof createProvider,
+    connect: typeof connect,
+    connectAdvanced: typeof connectAdvanced,
+  };
 }
