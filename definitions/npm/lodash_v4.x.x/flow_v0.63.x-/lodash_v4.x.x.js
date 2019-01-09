@@ -435,9 +435,9 @@ declare module "lodash" {
       a4: $ReadOnlyArray<T>,
       comparator?: Comparator<T>
     ): Array<T>;
-    uniq<T>(array?: ?Array<T>): Array<T>;
-    uniqBy<T>(array?: ?Array<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
-    uniqWith<T>(array?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
+    uniq<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
+    uniqBy<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
+    uniqWith<T>(array?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
     unzip<T>(array?: ?Array<T>): Array<T>;
     unzipWith<T>(array: ?Array<T>, iteratee?: ?Iteratee<T>): Array<T>;
     without<T>(array?: ?$ReadOnlyArray<T>, ...values?: Array<?T>): Array<T>;
@@ -677,7 +677,7 @@ declare module "lodash" {
       orders?: $ReadOnlyArray<"asc" | "desc"> | string
     ): Array<V>;
     partition<T>(
-      array?: ?Array<T>,
+      array?: ?$ReadOnlyArray<T>,
       predicate?: ?Predicate<T>
     ): [Array<T>, Array<T>];
     partition<V, A, T: { [id: any]: A }>(
