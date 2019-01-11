@@ -9,7 +9,7 @@ declare module 'react-datepicker' {
     children?: Node,
     className?: string,
     clearButtonTitle?: string,
-    customInput?: Node | React$Element,
+    customInput?: Node | React$Element<*>,
     customInputRef?: string,
     dateFormat?: string | Array<string>,
     dateFormatCalendar?: string,
