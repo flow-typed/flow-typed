@@ -1065,7 +1065,7 @@ declare module "lodash" {
     at(object?: ?Object, ...paths: Array<string>): Array<any>;
     at(object?: ?Object, paths: Array<string>): Array<any>;
     create(prototype: void | null, properties: void | null): {};
-    create<T>(prototype: T, properties: Object): $Supertype<T>;
+    create<T>(prototype: T, properties: Object): T;
     create(prototype: any, properties: void | null): {};
     defaults(object?: ?Object, ...sources?: Array<?Object>): Object;
     defaultsDeep(object?: ?Object, ...sources?: Array<?Object>): Object;
@@ -2723,7 +2723,7 @@ declare module "lodash/fp" {
     props(paths: Array<string>, object: Object): Array<any>;
     paths(paths: Array<string>): (object: Object) => Array<any>;
     paths(paths: Array<string>, object: Object): Array<any>;
-    create<T>(prototype: T): $Supertype<T>;
+    create<T>(prototype: T): T;
     defaults(source: Object): (object: Object) => Object;
     defaults(source: Object, object: Object): Object;
     defaultsAll(objects: Array<Object>): Object;
