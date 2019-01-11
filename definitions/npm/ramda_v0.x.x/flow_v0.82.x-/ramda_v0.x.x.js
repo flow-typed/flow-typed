@@ -1392,7 +1392,7 @@ declare module ramda {
 
   declare function lensIndex(n: number): Lens;
 
-  declare function lensPath(a: Array<string | number>): Lens;
+  declare function lensPath(a: $ReadOnlyArray<string | number>): Lens;
 
   declare function lensProp(str: string): Lens;
 
