@@ -1602,7 +1602,7 @@ declare class JQuery {
   /**
    * Get the current value of the first element in the set of matched elements.
    */
-  val(_: void): string | number | Array<string>;
+  val(): string | string[] | number;
   /**
    * Set the value of each element in the set of matched elements.
    *
