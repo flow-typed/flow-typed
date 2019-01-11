@@ -1,6 +1,7 @@
 // Based on https://github.com/Hacker0x01/react-datepicker/blob/master/docs/datepicker.md
 
 declare module 'react-datepicker' {
+  declare type moment$Moment = Object;
   declare type Props = {|
     allowSameDay?: boolean,
     autoComplete?: string,
