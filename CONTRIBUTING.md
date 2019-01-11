@@ -132,13 +132,6 @@ declare module 'other-module' {
 
 ...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
 
-However, you can import types from Flow core libs as long as you do it inside module declaration:
-
-```
-declare module "my-module" {
-  import type { Socket } from 'net'; // this is fine!
-}
-```
 
 **But wait, I want my React types!**
 
