@@ -21,7 +21,6 @@ const datepicker = (
 const invalidDatepicker = (
   <DatePicker
     // $ExpectError
-    fixedHeight="not-a-boolean"
-    onChange={() => console.log('change')}
+    onChange={{ foo: 'bar' }}
   />
 );
