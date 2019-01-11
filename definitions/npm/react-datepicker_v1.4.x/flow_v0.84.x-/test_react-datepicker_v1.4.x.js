@@ -13,7 +13,7 @@ const datepicker = (
         enabled: false
       }
     }}
-    selected={Date.now()}
+    selected={new Date()}
     onChange={() => console.log('change')}
   />
 );
