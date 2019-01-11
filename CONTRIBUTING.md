@@ -13,7 +13,7 @@ to existing libdefs.
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
   * [Avoid `any` when possible](#avoid-any-when-possible)
   * [Exporting modules](#exporting-modules)
-  * [Avoid global variables](#avoid-global-variables)
+  * [Avoid global types](#avoid-global-types)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
 
