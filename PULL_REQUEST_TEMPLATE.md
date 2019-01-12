@@ -1,5 +1,5 @@
 - Links to documentation:
-- Link to NPM: 
+- Link to GitHub or NPM: 
 
 Other notes:
 
