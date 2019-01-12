@@ -231,7 +231,7 @@ When you export a module, you have a choice to use CommonJS or ES6 syntax. We ge
 
 ### Avoid global types
 
-Sometimes you see global definitions like `$npm$ModuleName$`. This is due to fact that in the past Flow didn't support private types. **Global types should not be used anymore**. Since then Flow has added support for `declare export` which defines that every type which doesn't have it are defined as private and can't be imported, see https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module for details. 
+Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the fact that in the past Flow didn't support private types. **Global types should not be used anymore**. Since then Flow has added support for `declare export` which means that every type which doesn't have it are defined as private and can't be imported, see https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module for details. 
 
 ## Writing tests
 
