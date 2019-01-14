@@ -433,7 +433,8 @@ testSelector = $('div').toggleClass(function() {
   return $(this).parent().is('.bar') ? 'happy' : '';
 });
 
-//val(_: void): any;
+//val(_: void): string | string[] | number;
+// $ExpectError
 testString = testSelector.val();
 
 //val(value: string | string[] | number): JQuery;
