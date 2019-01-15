@@ -5,6 +5,7 @@ const glob = require('glob');
 const mkdirp = require('mkdirp');
 const path = require('path');
 const rimraf = require('rimraf');
+const semver = require('semver');
 
 /**
  * Create a structure like the following in `experimental/definitions`. This is
@@ -36,7 +37,10 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
     }
 
     const [libraryNameAndVersionRange, flowVersionRange] = parts;
-    const libraryName = libraryNameAndVersionRange.split('_v')[0];
+    const [libraryName, versionRange] = libraryNameAndVersionRange.split('_v');
+    const libdefBase = path.join(srcDefinitionsRoot, libraryNameAndVersionRange)
+    const tests = glob.sync('**/test_*.js', { cwd: libdefBase })
+      .filter(test => test.includes('/') ? test.startsWith(flowVersionRange) : true);
 
     // Create a dir like `experimental/definitions/yargs/yargs_v10.x.x/flow_v0.54.x-`.
     const libDefDir = path.join(
@@ -45,13 +49,27 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
       libraryNameAndVersionRange,
       flowVersionRange,
     );
-
+    const range = new semver.Range(versionRange);
+    const lowerVersion = range.set[0][0].semver.version;
     mkdirp.sync(libDefDir);
-
+    const packageJson =
+`{
+  "name": "${libraryNameAndVersionRange}-${flowVersionRange}",
+  "version": "${lowerVersion}",
+  "dependencies": {}
+}`;
     // Create a libdef like `yelp-flow-typed/definitions/yargs/yargs_v10.x.x/flow_v0.54.x-/index.js`.
+    fs.writeFileSync(path.join(libDefDir, 'package.json'), packageJson);
     fs.writeFileSync(path.join(libDefDir, 'index.js'),
       fs.readFileSync(`${srcDefinitionsRoot}/${libdef}`).toString(),
     );
+    mkdirp.sync(path.join(libDefDir, 'tests'));
+    tests.forEach(test => {
+      const testParts = test.split('/');
+      fs.writeFileSync(path.join(libDefDir, 'tests', testParts.pop()),
+        fs.readFileSync(`${libdefBase}/${test}`).toString(),
+      );
+    })
   });
 }
 
@@ -66,7 +84,7 @@ function main() {
   // a better solution for these cases for when we have monorepo things set up.
   rimraf.sync(destDefinitionsRoot);
 
-  copyLibdefs(browserDefinitionsRoot, destDefinitionsRoot);
+  // copyLibdefs(browserDefinitionsRoot, destDefinitionsRoot);
   copyLibdefs(npmDefinitionsRoot, destDefinitionsRoot);
 }
 
