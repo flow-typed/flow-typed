@@ -10,7 +10,7 @@ declare module 'react-testing-library' {
     collapseWhitespace?: boolean,
   };
 
-  declare type SelectorMatchOptions = {selector?: string} & TextMatchOptions;
+  declare type SelectorMatchOptions = { selector?: string } & TextMatchOptions;
 
   declare type AllByText = (
     text: TextMatch,
@@ -18,23 +18,20 @@ declare module 'react-testing-library' {
   ) => Array<HTMLElement>;
 
   declare type QueryByText = (
-      text: TextMatch,
-      options?: TextMatchOptions,
-    ) => ?HTMLElement;
+    text: TextMatch,
+    options?: TextMatchOptions
+  ) => ?HTMLElement;
 
   declare type GetsAndQueries = {|
     getByTestId: (id: TextMatch, options?: TextMatchOptions) => HTMLElement,
-    getByText: (
-      text: TextMatch,
-      options?: SelectorMatchOptions,
-    ) => HTMLElement,
+    getByText: (text: TextMatch, options?: SelectorMatchOptions) => HTMLElement,
     getByPlaceholderText: (
       text: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => HTMLElement,
     getByLabelText: (
       text: TextMatch,
-      options?: SelectorMatchOptions,
+      options?: SelectorMatchOptions
     ) => HTMLElement,
     getAllByLabelText: AllByText,
     getByAltText: (text: TextMatch, options?: TextMatchOptions) => HTMLElement,
@@ -47,7 +44,7 @@ declare module 'react-testing-library' {
     queryByAltText: QueryByText,
     queryAll: (
       text: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => Array<HTMLElement>,
   |};
 
@@ -61,13 +58,13 @@ declare module 'react-testing-library' {
 
   declare type FireEvent<TInit> = (
     element: HTMLElement,
-    eventProperties?: TInit,
+    eventProperties?: TInit
   ) => boolean;
 
   declare module.exports: {
     render: (
       ui: React$Element<*>,
-      options?: {container: HTMLElement, baseElement?: HTMLElement},
+      options?: { container: HTMLElement, baseElement?: HTMLElement }
     ) => RenderResult,
 
     cleanup: () => void,
@@ -77,7 +74,7 @@ declare module 'react-testing-library' {
       options?: {
         timeout?: number,
         interval?: number,
-      },
+      }
     ) => Promise<void>,
 
     waitForElement: <T>(
@@ -86,12 +83,12 @@ declare module 'react-testing-library' {
         container?: HTMLElement,
         timeout?: number,
         mutationObserverOptions?: MutationObserverInit,
-      },
+      }
     ) => Promise<T>,
 
     within: (
       element: HTMLElement,
-      queriesToBind?: GetsAndQueries | Array<GetsAndQueries>,
+      queriesToBind?: GetsAndQueries | Array<GetsAndQueries>
     ) => GetsAndQueries,
 
     fireEvent: {|
@@ -172,52 +169,52 @@ declare module 'react-testing-library' {
     queryByTestId: (
       container: HTMLElement,
       id: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => ?HTMLElement,
     getByTestId: (
       container: HTMLElement,
       id: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => HTMLElement,
     queryByText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => ?HTMLElement,
     getByText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: {selector?: string} & TextMatchOptions,
+      options?: { selector?: string } & TextMatchOptions
     ) => HTMLElement,
     queryByPlaceholderText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => ?HTMLElement,
     getByPlaceholderText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => HTMLElement,
     queryByLabelText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => ?HTMLElement,
     getByLabelText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: {selector?: string} & TextMatchOptions,
+      options?: { selector?: string } & TextMatchOptions
     ) => HTMLElement,
     queryByAltText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => ?HTMLElement,
     getByAltText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: TextMatchOptions,
+      options?: TextMatchOptions
     ) => HTMLElement,
   };
 }

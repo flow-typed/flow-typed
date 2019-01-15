@@ -9,8 +9,8 @@ import {
   waitForElement,
   within,
 } from 'react-testing-library';
-import {describe, it} from 'flow-typed-test';
-import {domainToASCII} from 'url';
+import { describe, it } from 'flow-typed-test';
+import { domainToASCII } from 'url';
 
 describe('wait', () => {
   it('should fail on invalid inputs', () => {
@@ -22,7 +22,7 @@ describe('wait', () => {
 
   it('should pass on correct inputs', () => {
     wait(() => {});
-    wait(() => {}, {timeout: 1});
+    wait(() => {}, { timeout: 1 });
   });
 });
 
@@ -42,12 +42,13 @@ describe('waitForElement', () => {
     });
   });
 
-  it('should return a usable value.', async (n) => {
-    const usernameElement = await waitForElement(
-      () => document.createElement('input'));
+  it('should return a usable value.', async n => {
+    const usernameElement = await waitForElement(() =>
+      document.createElement('input')
+    );
 
     usernameElement.value = 'chucknorris';
-  })
+  });
 });
 
 describe('render', () => {
@@ -175,7 +176,7 @@ describe('cleanup', () => {
 
 describe('within', () => {
   class Component extends React.Component<{}> {}
-  const {container} = render(<Component />);
+  const { container } = render(<Component />);
 
   it('should has html element as argument', () => {
     // $ExpectError
@@ -241,7 +242,7 @@ describe('fireEvent', () => {
       new MouseEvent('click', {
         bubbles: true,
         cancelable: true,
-      }),
+      })
     );
   });
 
@@ -346,9 +347,9 @@ describe('text matching API', () => {
 
   it('queryByTestId should accept text match arguments', () => {
     queryByTestId('1');
-    queryByTestId('1', {trim: true, collapseWhitespace: true, exact: true});
+    queryByTestId('1', { trim: true, collapseWhitespace: true, exact: true });
     queryByTestId(/1/);
-    queryByTestId(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    queryByTestId(/1/, { trim: true, collapseWhitespace: true, exact: true });
     queryByTestId((content: string, element) => true);
     queryByTestId((content: string, element) => true, {
       trim: true,
@@ -359,9 +360,9 @@ describe('text matching API', () => {
 
   it('getByTestId should accept text match arguments', () => {
     getByTestId('1');
-    getByTestId('1', {trim: true, collapseWhitespace: true, exact: true});
+    getByTestId('1', { trim: true, collapseWhitespace: true, exact: true });
     getByTestId(/1/);
-    getByTestId(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    getByTestId(/1/, { trim: true, collapseWhitespace: true, exact: true });
     getByTestId((content: string, element) => true);
     getByTestId((content: string, element) => true, {
       trim: true,
@@ -372,9 +373,9 @@ describe('text matching API', () => {
 
   it('queryByText should accept text match arguments', () => {
     queryByText('1');
-    queryByText('1', {trim: true, collapseWhitespace: true, exact: true});
+    queryByText('1', { trim: true, collapseWhitespace: true, exact: true });
     queryByText(/1/);
-    queryByText(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    queryByText(/1/, { trim: true, collapseWhitespace: true, exact: true });
     queryByText((content: string, element) => true);
     queryByText((content: string, element) => true, {
       trim: true,
@@ -385,9 +386,9 @@ describe('text matching API', () => {
 
   it('getByText should accept text match arguments', () => {
     getByText('1');
-    getByText('1', {trim: true, collapseWhitespace: true, exact: true});
+    getByText('1', { trim: true, collapseWhitespace: true, exact: true });
     getByText(/1/);
-    getByText(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    getByText(/1/, { trim: true, collapseWhitespace: true, exact: true });
     getByText((content: string, element) => true);
     getByText((content: string, element) => true, {
       trim: true,
@@ -448,9 +449,17 @@ describe('text matching API', () => {
 
   it('queryByLabelText should accept text match arguments', () => {
     queryByLabelText('1');
-    queryByLabelText('1', {trim: true, collapseWhitespace: true, exact: true});
+    queryByLabelText('1', {
+      trim: true,
+      collapseWhitespace: true,
+      exact: true,
+    });
     queryByLabelText(/1/);
-    queryByLabelText(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    queryByLabelText(/1/, {
+      trim: true,
+      collapseWhitespace: true,
+      exact: true,
+    });
     queryByLabelText((content: string, element) => true);
     queryByLabelText((content: string, element) => true, {
       trim: true,
@@ -461,9 +470,9 @@ describe('text matching API', () => {
 
   it('getByLabelText should accept text match arguments', () => {
     getByLabelText('1');
-    getByLabelText('1', {trim: true, collapseWhitespace: true, exact: true});
+    getByLabelText('1', { trim: true, collapseWhitespace: true, exact: true });
     getByLabelText(/1/);
-    getByLabelText(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    getByLabelText(/1/, { trim: true, collapseWhitespace: true, exact: true });
     getByLabelText((content: string, element) => true);
     getByLabelText((content: string, element) => true, {
       trim: true,
@@ -474,9 +483,9 @@ describe('text matching API', () => {
 
   it('queryByAltText should accept text match arguments', () => {
     queryByAltText('1');
-    queryByAltText('1', {trim: true, collapseWhitespace: true, exact: true});
+    queryByAltText('1', { trim: true, collapseWhitespace: true, exact: true });
     queryByAltText(/1/);
-    queryByAltText(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    queryByAltText(/1/, { trim: true, collapseWhitespace: true, exact: true });
     queryByAltText((content: string, element) => true);
     queryByAltText((content: string, element) => true, {
       trim: true,
@@ -487,9 +496,9 @@ describe('text matching API', () => {
 
   it('getByAltText should accept text match arguments', () => {
     getByAltText('1');
-    getByAltText('1', {trim: true, collapseWhitespace: true, exact: true});
+    getByAltText('1', { trim: true, collapseWhitespace: true, exact: true });
     getByAltText(/1/);
-    getByAltText(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    getByAltText(/1/, { trim: true, collapseWhitespace: true, exact: true });
     getByAltText((content: string, element) => true);
     getByAltText((content: string, element) => true, {
       trim: true,
@@ -500,9 +509,9 @@ describe('text matching API', () => {
 
   it('queryAll should accept text match arguments', () => {
     queryAll('1');
-    queryAll('1', {trim: true, collapseWhitespace: true, exact: true});
+    queryAll('1', { trim: true, collapseWhitespace: true, exact: true });
     queryAll(/1/);
-    queryAll(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    queryAll(/1/, { trim: true, collapseWhitespace: true, exact: true });
     queryAll((content: string, element) => true);
     queryAll((content: string, element) => true, {
       trim: true,
@@ -513,9 +522,9 @@ describe('text matching API', () => {
 
   it('getAll should accept text match arguments', () => {
     getAll('1');
-    getAll('1', {trim: true, collapseWhitespace: true, exact: true});
+    getAll('1', { trim: true, collapseWhitespace: true, exact: true });
     getAll(/1/);
-    getAll(/1/, {trim: true, collapseWhitespace: true, exact: true});
+    getAll(/1/, { trim: true, collapseWhitespace: true, exact: true });
     getAll((content: string, element) => true);
     getAll((content: string, element) => true, {
       trim: true,
