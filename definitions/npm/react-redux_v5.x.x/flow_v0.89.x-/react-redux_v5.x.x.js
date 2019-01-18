@@ -67,30 +67,36 @@ declare module "react-redux" {
     static +WrappedComponent: WC;
     getWrappedInstance(): React$ElementRef<WC>;
   }
+  // The connection of the Wrapped Component and the Connected Component
+  // happens here in `MP: P`. It means that type wise MP belongs to P,
+  // so to say MP >= P.
   declare type Connector<P, OP, MP: P> = <WC: React$ComponentType<P>>(
     WC,
   ) => Class<ConnectedComponent<OP, WC>> & WC;
 
   // No `mergeProps` argument
 
+  // Got error like inexact OwnProps is incompatible with exact object type?
+  // Just make the OP parameter for `connect()` an exact object.
+  declare type MergeOP<OP, D> = {| ...$Exact<OP>, dispatch: D |};
+  declare type MergeOPSP<OP, SP> = {| ...$Exact<OP>, ...SP |};
+  declare type MergeOPDP<OP, DP> = {| ...$Exact<OP>, ...DP |};
+  declare type MergeOPSPDP<OP, SP, DP> = {| ...$Exact<OP>, ...SP, ...DP |};
+
   declare export function connect<-P, -OP, -SP, -DP, -S, -D>(
     mapStateToProps?: null | void,
     mapDispatchToProps?: null | void,
     mergeProps?: null | void,
-    options?: ?Options<S, OP, {||}, {| ...OP, dispatch: D |}>,
-    // Got error like inexact OwnProps is incompatible with exact object type?
-    // Just make your OP parameter an exact object.
-  ): Connector<P, OP, {| ...OP, dispatch: D |}>;
+    options?: ?Options<S, OP, {||}, MergeOP<OP, D>>,
+  ): Connector<P, OP, MergeOP<OP, D>>;
 
   declare export function connect<-P, -OP, -SP, -DP, -S, -D>(
     // If you get error here try adding return type to your mapStateToProps function
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps?: null | void,
     mergeProps?: null | void,
-    options?: ?Options<S, OP, SP, {| ...OP, ...SP |}>,
-    // Got error like inexact OwnProps is incompatible with exact object type?
-    // Just make your OP parameter an exact object.
-  ): Connector<P, OP, {| ...OP, ...SP |}>;
+    options?: ?Options<S, OP, SP, MergeOPSP<OP, SP>>,
+  ): Connector<P, OP, MergeOPSP<OP, SP>>;
 
   // In this case DP is an object of functions which has been bound to dispatch
   // by the given mapDispatchToProps function.
@@ -98,10 +104,8 @@ declare module "react-redux" {
     mapStateToProps: null | void,
     mapDispatchToProps: MapDispatchToPropsFn<D, OP, DP>,
     mergeProps?: null | void,
-    options?: ?Options<S, OP, {||}, {| ...OP, ...DP |}>,
-    // Got error like inexact OwnProps is incompatible with exact object type?
-    // Just make your OP parameter an exact object.
-  ): Connector<P, OP, {| ...OP, ...DP |}>;
+    options?: ?Options<S, OP, {||}, MergeOPDP<OP, DP>>,
+  ): Connector<P, OP, MergeOPDP<OP, DP>>;
 
   // In this case DP is an object of action creators not yet bound to dispatch,
   // this difference is not important in the vanila redux,
@@ -110,10 +114,8 @@ declare module "react-redux" {
     mapStateToProps: null | void,
     mapDispatchToProps: DP,
     mergeProps?: null | void,
-    options?: ?Options<S, OP, {||}, {| ...OP, ...DP |}>,
-    // Got error like inexact OwnProps is incompatible with exact object type?
-    // Just make your OP parameter an exact object.
-  ): Connector<P, OP, {| ...OP, ...$ObjMap<DP, Bind<D>> |}>;
+    options?: ?Options<S, OP, {||}, MergeOPDP<OP, DP>>,
+  ): Connector<P, OP, MergeOPDP<OP, $ObjMap<DP, Bind<D>>>>;
 
   declare export function connect<-P, -OP, -SP, -DP, S, D>(
     // If you get error here try adding return type to your mapStateToProps function
@@ -121,8 +123,6 @@ declare module "react-redux" {
     mapDispatchToProps: MapDispatchToPropsFn<D, OP, DP>,
     mergeProps?: null | void,
     options?: ?Options<S, OP, SP, {| ...OP, ...SP, ...DP |}>,
-    // Got error like inexact OwnProps is incompatible with exact object type?
-    // Just make your OP parameter an exact object.
   ): Connector<P, OP, {| ...OP, ...SP, ...DP |}>;
 
   declare export function connect<-P, -OP, -SP, -DP, S, D>(
@@ -130,10 +130,8 @@ declare module "react-redux" {
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps: DP,
     mergeProps?: null | void,
-    options?: ?Options<S, OP, SP, {| ...OP, ...SP, ...DP |}>,
-    // Got error like inexact OwnProps is incompatible with exact object type?
-    // Just make your OP parameter an exact object.
-  ): Connector<P, OP, {| ...OP, ...SP, ...$ObjMap<DP, Bind<D>> |}>;
+    options?: ?Options<S, OP, SP, MergeOPSPDP<OP, SP, DP>>,
+  ): Connector<P, OP, MergeOPSPDP<OP, SP, $ObjMap<DP, Bind<D>>>>;
 
   // With `mergeProps` argument
 
