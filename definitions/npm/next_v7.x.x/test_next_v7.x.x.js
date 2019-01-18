@@ -6,6 +6,7 @@ import Router, {type RouteError} from "next/router";
 import Document, {Head as DocumentHead, Main, NextScript} from "next/document";
 import App, {type AppInitialProps, Container} from "next/app";
 import dynamic from "next/dynamic";
+import getConfig from "next/config";
 
 const { createServer } = require("http");
 const { parse } = require("url");
@@ -49,6 +50,18 @@ app.prepare().then(() => {
 });
 
 app.setAssetPrefix('');
+
+class ConfigAwareComponent extends React.Component<*> {
+  render() {
+    const { publicRuntimeConfig, serverRuntimeConfig } = getConfig();
+    return (
+      <div>
+        {publicRuntimeConfig.publicConfigVar}
+        {serverRuntimeConfig.privateConfigVar}
+      </div>
+    );
+  }
+}
 
 <Head>
   <meta charSet="utf-8" />
