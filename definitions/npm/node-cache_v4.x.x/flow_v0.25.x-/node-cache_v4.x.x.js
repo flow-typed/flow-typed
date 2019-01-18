@@ -16,6 +16,8 @@ declare module "node-cache" {
     constructor(options?: Options): NodeCache;
     get(key: string): mixed | void;
     set(key: string, val: mixed, ttl?: number): boolean;
+    del(key: string | string[]): number;
+    flushAll(): void;
   }
 
   declare export default Class<NodeCache>;
