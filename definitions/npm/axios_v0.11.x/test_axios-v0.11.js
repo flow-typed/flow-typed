@@ -9,3 +9,5 @@ import axios from 'axios';
 }): Promise<*>);
 // $ExpectError
 (axios.post(123): Promise<*>)
+
+axios({method: 'post', url: 'https://foo.bar'})
