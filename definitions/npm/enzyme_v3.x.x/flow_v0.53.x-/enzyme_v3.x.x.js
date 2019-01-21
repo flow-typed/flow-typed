@@ -36,6 +36,7 @@ declare module "enzyme" {
     parent(): this,
     closest(selector: EnzymeSelector): this,
     render(): CheerioWrapper,
+    renderProp(propName: string): (...args: Array<any>) => this,
     unmount(): this,
     text(): string,
     html(): string,
