@@ -51,6 +51,16 @@ shallowWrapper.slice()
 shallowWrapper.slice(0)
 shallowWrapper.slice(0, 1)
 
+shallowWrapper
+  .renderProp("render")(1, "hi")
+  .find("SomeSelector");
+
+// Need to invoke the returned renderProp fn
+// $ExpectError
+shallowWrapper
+  .renderProp("render")
+  .find("SomeSelector")
+
 // shallow's getNode(s) was replaced by getElement(s) in enzyme v3
 // $ExpectError
 shallowWrapper.getNode();
@@ -78,6 +88,7 @@ shallowWrapper.getElements();
 // $ExpectError
 (mount(<div />).setProps(null): ReactWrapper);
 
+(mount(<div />).renderProp("render")(1, "hi"): ReactWrapper);
 
 // mount's getNode(s) were removed in enzyme v3
 // $ExpectError

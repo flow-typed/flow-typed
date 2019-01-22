@@ -65,6 +65,13 @@ declare module "next/head" {
   declare module.exports: Class<React$Component<any, any>>;
 }
 
+declare module "next/config" {
+  declare module.exports: () => {
+    publicRuntimeConfig: { [string]: string },
+    serverRuntimeConfig: { [string]: string }
+  };
+}
+
 declare type URLObject = {
   +href?: string,
   +protocol?: string,

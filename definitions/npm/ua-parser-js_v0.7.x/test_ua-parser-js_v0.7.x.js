@@ -48,3 +48,7 @@ const parserResult = parser.getResult();
 });
 
 (parser.getUA(): string);
+
+// Alternative API - invoke it as a function and immediately obtain parsed
+// results
+(UAParser('Dummy user agent').os.name: string);

@@ -295,7 +295,7 @@ declare interface TestCafe$RequestLoggerOptions {
 interface TestCafe$RequestMock {
     onRequestTo(filter: string | RegExp | Object | (req: TestCafe$RequestData, res: TestCafe$ResponseData) => boolean): TestCafe$RequestMock;
 
-    respond(body?: Object | string | (req: TestCafe$RequestData, res: TestCafe$ResponseData) => any, statusCode?: number, headers?: Object): TestCafe$RequestMock;
+    respond(body?: null | Object | string | (req: TestCafe$RequestData, res: TestCafe$ResponseData) => any, statusCode?: number, headers?: Object): TestCafe$RequestMock;
 }
 
 interface TestCafe$Request {
@@ -681,12 +681,12 @@ declare module 'testcafe' {
         (hostname: string, port1: number, port2: number): Promise<TestCafe>,
 
         Selector(init: TestCafe$SelectorParameter, options?: TestCafe$SelectorOptions): TestCafe$SelectorFn,
-        ClientFunction(fn: Function, options?: TestCafe$ClientFunctionOptions): TestCafe$ClientFunctionFn,
+        ClientFunction(fn: (...args: any) => any, options?: TestCafe$ClientFunctionOptions): TestCafe$ClientFunctionFn,
 
         Role: TestCafe$RoleFn,
         
-        RequestMock: TestCafe$RequestMockFn,
-        RequestLogger: TestCafe$RequestLoggerFn,
+        RequestMock: typeof TestCafe$RequestMockFn,
+        RequestLogger: typeof TestCafe$RequestLoggerFn,
         RequestHook: Class<TestCafe$RequestHookClass>,
         
         t: TestCafe$TestController
