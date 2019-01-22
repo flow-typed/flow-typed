@@ -99,7 +99,7 @@ declare module 'styled-components' {
   declare export type StyledElementType<T> = T;
   declare export type StyledComponentType<C> = {
     [[call]]: TaggedTemplateLiteral<C>,
-    +attrs: <A: {}>(attributes: A) => TaggedTemplateLiteral<React$ComponentType<$Diff<React$ElementConfig<C>, A>>>
+    +attrs: <A: {}>(attributes: A | (props: React$ElementConfig<C>) => A) => TaggedTemplateLiteral<React$ComponentType<$Diff<React$ElementConfig<C>, A>>>
   };
 
   declare type StyledComponentList = {
