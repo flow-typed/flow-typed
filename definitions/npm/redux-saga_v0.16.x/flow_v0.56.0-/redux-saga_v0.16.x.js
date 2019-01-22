@@ -476,11 +476,11 @@ declare module "redux-saga/effects" {
   };
 
   declare export var put: {
-    <A: Object>(action: A): PutEffect<A, null>,
-    <A: Object>(channel: Channel, action: A): PutEffect<A, Channel>,
+    <A: {}>(action: A): PutEffect<A, null>,
+    <A: {}>(channel: Channel, action: A): PutEffect<A, Channel>,
     resolve: {
-      <A: Object>(action: A): PutEffect<A, null>,
-      <A: Object>(channel: Channel, action: A): PutEffect<A, Channel>,
+      <A: {}>(action: A): PutEffect<A, null>,
+      <A: {}>(channel: Channel, action: A): PutEffect<A, Channel>,
     }
   };
 

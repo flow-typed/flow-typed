@@ -53,7 +53,7 @@ declare module "redux-saga" {
     error: () => Error | void;
     cancel: () => void;
     toPromise(): Promise<RT>;
-    setContext<C: Object>(props: $Shape<C>): void;
+    setContext<C: {}>(props: $Shape<C>): void;
   }
 
   declare export interface SagaMonitor {
@@ -121,7 +121,7 @@ declare module "redux-saga" {
     channel?: PredicateTakeableChannel<A>,
     dispatch?: (input: A) => mixed,
     getState?: () => S,
-    context?: Object,
+    context?: {},
     sagaMonitor?: SagaMonitor,
     logger?: Logger,
     effectMiddlewares?: Array<EffectMiddleware>,
@@ -288,7 +288,7 @@ declare module "redux-saga" {
   >;
 
   declare export type PutEffect<
-    A: Object,
+    A: {},
     C: Channel<*> | null,
     R: { resolve: true } | void
   > = IEffect<
@@ -449,13 +449,13 @@ declare module "redux-saga/effects" {
   |}>;
 
   declare export var put: {
-    <A: Object>(action: A): PutEffect<A, null, void>,
-    <A: Object>(channel: Channel<*>, action: A): PutEffect<A, Channel<*>, void>
+    <A: {}>(action: A): PutEffect<A, null, void>,
+    <A: {}>(channel: Channel<*>, action: A): PutEffect<A, Channel<*>, void>
   };
 
   declare export var putResolve: {
-    <A: Object>(action: A): PutEffect<A, null, { resolve: true }>,
-    <A: Object>(channel: Channel<*>, action: A): PutEffect<A, Channel<*>, { resolve: true }>
+    <A: {}>(action: A): PutEffect<A, null, { resolve: true }>,
+    <A: {}>(channel: Channel<*>, action: A): PutEffect<A, Channel<*>, { resolve: true }>
   };
 
   declare export var call: {
@@ -1398,7 +1398,7 @@ declare module "redux-saga/effects" {
 
   declare export var setContext: {
     // setContext(props)
-    <T: Object>(props: T): SetContextEffect<T>
+    <T: {}>(props: T): SetContextEffect<T>
   };
 
   declare export var getContext: {
