@@ -11,6 +11,10 @@ describe("all effect", () => {
       (c.type: "ALL");
     });
 
+    it('combinator must be equal true', () => {
+      (c.combinator: true);
+    });
+
     it("returned object must be read only", () => {
       // $ExpectError: read-only  property
       c.type = "anyType";

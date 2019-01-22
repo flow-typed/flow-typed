@@ -10,6 +10,10 @@ describe("race effect", () => {
       (c.type: "RACE");
     });
 
+    it('combinator must be equal true', () => {
+      (c.combinator: true);
+    });
+
     it("returned object must be read only", () => {
       // $ExpectError: read-only  property
       c.type = "anyType";
