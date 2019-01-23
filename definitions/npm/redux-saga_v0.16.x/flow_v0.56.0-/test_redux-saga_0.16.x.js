@@ -471,7 +471,7 @@ function callTest() {
   (c8.CALL.context: null);
 
   // $ExpectError
-  (c1.CALL.context: Object);
+  (c1.CALL.context: {});
 }
 
 function callNormalFunctionTest() {
@@ -540,7 +540,7 @@ function callNormalFunctionTest() {
   (c8.CALL.context: null);
 
   // $ExpectError
-  (c1.CALL.context: Object);
+  (c1.CALL.context: {});
 }
 
 function callSagaFunctionTest() {
@@ -609,7 +609,7 @@ function callSagaFunctionTest() {
   (c8.CALL.context: null);
 
   // $ExpectError
-  (c1.CALL.context: Object);
+  (c1.CALL.context: {});
 }
 
 function contextCallTest() {

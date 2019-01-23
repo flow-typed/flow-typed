@@ -19,9 +19,11 @@ declare module "redux-saga" {
   //////////////////////////////////////////////////////////////////////////
 
   declare export var SAGA_LOCATION: "@@redux-saga/LOCATION";
+
   declare export var CANCEL: "@@redux-saga/CANCEL_PROMISE";
 
   declare export type TEnd = {| +type: "@@redux-saga/CHANNEL_END" |};
+
   declare export var END: TEnd;
 
   declare export var isEnd: {
@@ -51,7 +53,7 @@ declare module "redux-saga" {
     error: () => Error | void;
     cancel: () => void;
     toPromise(): Promise<RT>;
-    setContext<C: Object>(props: $Shape<C>): void;
+    setContext<C: {}>(props: $Shape<C>): void;
   }
 
   declare export interface SagaMonitor {
@@ -119,7 +121,7 @@ declare module "redux-saga" {
     channel?: PredicateTakeableChannel<A>,
     dispatch?: (input: A) => mixed,
     getState?: () => S,
-    context?: Object,
+    context?: {},
     sagaMonitor?: SagaMonitor,
     logger?: Logger,
     effectMiddlewares?: Array<EffectMiddleware>,
@@ -265,9 +267,10 @@ declare module "redux-saga" {
 
   declare export type Pattern = PatternPart | $ReadOnlyArray<PatternPart>;
 
-  declare export interface IEffect<T, P> {
+  declare export interface IEffect<T, P, C: boolean> {
     +type: T;
     +payload: P;
+    +combinator: C;
   }
 
   declare export type TakeEffect<
@@ -280,11 +283,12 @@ declare module "redux-saga" {
       ...$Exact<P>,
       ...$Exact<C>,
       ...$Exact<M>
-    |}>
+    |}>,
+    false
   >;
 
   declare export type PutEffect<
-    A: Object,
+    A: {},
     C: Channel<*> | null,
     R: { resolve: true } | void
   > = IEffect<
@@ -293,7 +297,8 @@ declare module "redux-saga" {
       action: A,
       channel: C,
       ...$Exact<R>
-    |}>
+    |}>,
+    false
   >;
 
   declare export type CallEffect<Ctx, Fn: Function | string, Args: $ReadOnlyArray<*>> = IEffect<
@@ -302,7 +307,8 @@ declare module "redux-saga" {
       context: Ctx,
       fn: Fn,
       args: Args
-    |}>
+    |}>,
+    false
   >;
 
   declare export type ForkEffect<
@@ -317,7 +323,8 @@ declare module "redux-saga" {
       fn: Fn,
       args: Args,
       ...$Exact<D>
-    |}>
+    |}>,
+    false
   >;
 
   declare export function detach<T1, T2, T3>(
@@ -330,23 +337,25 @@ declare module "redux-saga" {
       context: Ctx,
       fn: Fn,
       args: Args
-    |}>
+    |}>,
+    false
   >;
 
-  declare export type JoinEffect<T: Task<*> | Array<Task<*>>> = IEffect<"JOIN", T>;
+  declare export type JoinEffect<T: Task<*> | Array<Task<*>>> = IEffect<"JOIN", T, false>;
 
   declare export type SELF_CANCELLATION = "@@redux-saga/SELF_CANCELLATION";
 
   declare export type CancelEffect<
     T: Task<*> | $ReadOnlyArray<Task<*>> | SELF_CANCELLATION
-  > = IEffect<"CANCEL", T>;
+  > = IEffect<"CANCEL", T, false>;
 
   declare export type SelectEffect<Fn: Function | void, Args: $ReadOnlyArray<*>> = IEffect<
     "SELECT",
     $ReadOnly<{|
       selector: Fn,
       args: Args
-    |}>
+    |}>,
+    false
   >;
 
   declare export type ActionChannelEffect<T, P: Pattern | void, B: Buffer<T> | void> = IEffect<
@@ -354,25 +363,28 @@ declare module "redux-saga" {
     $ReadOnly<{|
       buffer: B,
       pattern: P
-    |}>
+    |}>,
+    false
   >;
 
-  declare export type FlushEffect<T: Channel<*> | void> = IEffect<"FLUSH", T>;
+  declare export type FlushEffect<T: Channel<*> | void> = IEffect<"FLUSH", T, false>;
 
-  declare export type CancelledEffect = IEffect<"CANCELLED", {||}>;
+  declare export type CancelledEffect = IEffect<"CANCELLED", {||}, false>;
 
-  declare export type SetContextEffect<T: {}> = IEffect<"SET_CONTEXT", T>;
+  declare export type SetContextEffect<T: {}> = IEffect<"SET_CONTEXT", T, false>;
 
-  declare export type GetContextEffect<T> = IEffect<"GET_CONTEXT", T>;
+  declare export type GetContextEffect<T> = IEffect<"GET_CONTEXT", T, false>;
 
   declare export type RaceEffect<R: { +[name: string]: Effect } | $ReadOnlyArray<Effect>> = IEffect<
     "RACE",
-    R
+    R,
+    true
   >;
 
   declare export type AllEffect = IEffect<
     "ALL",
-    { +[name: string]: Effect } | $ReadOnlyArray<Effect>
+    { +[name: string]: Effect } | $ReadOnlyArray<Effect>,
+    true
   >;
 
   declare export type Effect =
@@ -418,14 +430,32 @@ declare module "redux-saga/effects" {
     Task
   } from "redux-saga";
 
+  declare export var effectTypes: $ReadOnly<{|
+    TAKE: 'TAKE',
+    PUT: 'PUT',
+    ALL: 'ALL',
+    RACE: 'RACE',
+    CALL: 'CALL',
+    CPS: 'CPS',
+    FORK: 'FORK',
+    JOIN: 'JOIN',
+    CANCEL: 'CANCEL',
+    SELECT: 'SELECT',
+    ACTION_CHANNEL: 'ACTION_CHANNEL',
+    CANCELLED: 'CANCELLED',
+    FLUSH: 'FLUSH',
+    GET_CONTEXT: 'GET_CONTEXT',
+    SET_CONTEXT: 'SET_CONTEXT'
+  |}>;
+
   declare export var put: {
-    <A: Object>(action: A): PutEffect<A, null, void>,
-    <A: Object>(channel: Channel<*>, action: A): PutEffect<A, Channel<*>, void>
+    <A: {}>(action: A): PutEffect<A, null, void>,
+    <A: {}>(channel: Channel<*>, action: A): PutEffect<A, Channel<*>, void>
   };
 
   declare export var putResolve: {
-    <A: Object>(action: A): PutEffect<A, null, { resolve: true }>,
-    <A: Object>(channel: Channel<*>, action: A): PutEffect<A, Channel<*>, { resolve: true }>
+    <A: {}>(action: A): PutEffect<A, null, { resolve: true }>,
+    <A: {}>(channel: Channel<*>, action: A): PutEffect<A, Channel<*>, { resolve: true }>
   };
 
   declare export var call: {
@@ -1368,7 +1398,7 @@ declare module "redux-saga/effects" {
 
   declare export var setContext: {
     // setContext(props)
-    <T: Object>(props: T): SetContextEffect<T>
+    <T: {}>(props: T): SetContextEffect<T>
   };
 
   declare export var getContext: {
@@ -1393,15 +1423,16 @@ declare module "redux-saga/effects" {
   declare export var take: {
     // take(pattern)
     // take(channel)
-    <P: Pattern>(pattern: P): TakeEffect<{ pattern: P }, void, void>,
-    <C: Channel<*>>(channel: C): TakeEffect<void, { channel: C }, void>
+    <C: Channel<*>>(channel: C): TakeEffect<void, { channel: C }, void>,
+    <P: Pattern>(pattern: P): TakeEffect<{ pattern: P }, void, void>
+
   };
 
   declare export var takeMaybe: {
     // takeMaybe(pattern)
     // takeMaybe(channel)
-    <P: Pattern>(pattern: P): TakeEffect<{ pattern: P }, void, { maybe: true }>,
-    <C: Channel<*>>(channel: C): TakeEffect<void, { channel: C }, { maybe: true }>
+    <C: Channel<*>>(channel: C): TakeEffect<void, { channel: C }, { maybe: true }>,
+    <P: Pattern>(pattern: P): TakeEffect<{ pattern: P }, void, { maybe: true }>
   };
 
   declare export var takeEvery: {

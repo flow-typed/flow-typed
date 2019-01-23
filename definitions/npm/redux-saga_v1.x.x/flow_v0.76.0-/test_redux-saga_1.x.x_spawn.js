@@ -157,7 +157,7 @@ describe("spawn effect", () => {
 
       it("must raises an error when lead context to Object", () => {
         // $ExpectError
-        (c1.payload.context: Object);
+        (c1.payload.context: {});
       });
     });
   });
