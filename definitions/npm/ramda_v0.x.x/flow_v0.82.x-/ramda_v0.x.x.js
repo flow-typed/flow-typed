@@ -6,6 +6,8 @@ type Transformer<A, B> = {
   "@@transducer/result": (result: *) => B
 };
 
+type Primitives = string | number | null | void | boolean;
+
 declare type $npm$ramda$Placeholder = { "@@functional/placeholder": true };
 
 declare opaque type $npm$ramda$Reduced<T>;
@@ -1560,19 +1562,90 @@ declare module ramda {
   ): (key: T) => $ElementType<O, T>;
   declare function prop<T: string, O>(key: T, o: O): $ElementType<O, T>;
 
-  declare function propOr<T, V, A: { [k: string]: V }>(
-    or: T,
-  ): ((p: string) => (o: A) => V | T) &
-    ((p: string, o: A) => V | T);
-  declare function propOr<T, V, A: { [k: string]: V }>(
-    or: T,
-    p: string,
-  ): (o: A) => V | T;
-  declare function propOr<T, V, A: { [k: string]: V }>(
-    or: T,
-    p: string,
-    o: A
-  ): V | T;
+  // propOr 1 argument => (function (2 arguments) or (function (1 argument) => function (1 argument)))
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+  ): (
+        (
+          (property: Property) => (
+            (object: Primitives) => DefaultValue) &
+            (object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>
+
+        ) &
+        (
+          ((property: Property, object: Primitives) => DefaultValue) &
+          ((property: Property, object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
+        )
+      );
+
+  // propOr 2 arguments => function (1 argument)
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: $npm$ramda$Placeholder,
+  ): (property: Property) => (
+    ((object: Primitives) => DefaultValue) &
+    ((object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
+  );
+
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: $npm$ramda$Placeholder,
+    property: Property,
+  ): (defaultValue: DefaultValue) => (
+      ((object: Primitives) => DefaultValue) &
+      ((object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
+    );
+
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: Property,
+  ): (
+      ((object: Primitives) => DefaultValue) &
+      ((object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
+    );
+
+  // propOr 3 arguments
+  //propOr(defaultValue, __, object)
+  declare function propOr<DefaultValue, Property: string>(
+    defaultValue: DefaultValue,
+    property: $npm$ramda$Placeholder,
+    object: Primitives,
+  ): (p: Property) => DefaultValue;
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: $npm$ramda$Placeholder,
+    object: Obj,
+  ): (property: Property) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>;
+  //propOr(defaultValue, property, __)
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: Property,
+    object: $npm$ramda$Placeholder,
+  ): (
+    ((property: Primitives) => DefaultValue) &
+    ((property: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
+  );
+  //propOr(__, property, object)
+  declare function propOr<DefaultValue, Property: string>(
+    defaultValue: $npm$ramda$Placeholder,
+    property: Property,
+    object: Primitives,
+  ): (defaultValue: DefaultValue) => DefaultValue;
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: $npm$ramda$Placeholder,
+    property: Property,
+    object: Obj,
+  ): (defaultValue: DefaultValue) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>;
+  //propOr(defaultValue, property, object)
+  declare function propOr<DefaultValue, Property: string>(
+    defaultValue: DefaultValue,
+    property: Property,
+    object: Primitives,
+  ): DefaultValue;
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: Property,
+    object: Obj,
+  ): $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>;
 
   declare function keysIn(o: Object): Array<string>;
 
