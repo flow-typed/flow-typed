@@ -44,13 +44,13 @@ describe("Object", () => {
     });
   });
 
-  describe("pathOr", () => {
+  describe('propOr', () => {
     const testObj = {
       name: 'Wilson'
     };
 
     describe('should return default', () => {
-      it("with __", () => {
+      it('with __', () => {
         const def1_1: number = propOr(__, 'age', testObj)(32);
         const def1_2: number = propOr(__, 'age', null)(32);
         const def1_3: number = propOr(__, 'age', undefined)(32);
@@ -82,7 +82,7 @@ describe("Object", () => {
         const def5_5: number = propOr(32, __)('age')(50);
       });
 
-      it("without __", () => {
+      it('without __', () => {
         const def1_1: number = propOr(32, 'age', testObj);
         const def1_2: number = propOr(32, 'age', null);
         const def1_3: number = propOr(32, 'age', undefined);
@@ -110,14 +110,14 @@ describe("Object", () => {
     });
 
     describe('should return type from testObj', () => {
-      it("without __", () => {
+      it('without __', () => {
         const objType1: string = propOr(32, 'name', testObj);
         const objType2: string = propOr(32, 'name')(testObj);
         const objType3: string = propOr(32)('name', testObj);
         const objType4: string = propOr(32)('name')(testObj);
       });
 
-      it("with __", () => {
+      it('with __', () => {
         const objType1: string = propOr(__, 'name', testObj)(32);
         const objType2: string = propOr(32, __, testObj)('name');
         const objType3: string = propOr(32, 'name', __)(testObj);

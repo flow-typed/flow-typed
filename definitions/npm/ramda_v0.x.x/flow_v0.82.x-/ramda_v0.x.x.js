@@ -6,6 +6,8 @@ type Transformer<A, B> = {
   "@@transducer/result": (result: *) => B
 };
 
+type Primitives = string | number | null | void | boolean;
+
 declare type $npm$ramda$Placeholder = { "@@functional/placeholder": true };
 
 declare opaque type $npm$ramda$Reduced<T>;
@@ -1561,89 +1563,89 @@ declare module ramda {
   declare function prop<T: string, O>(key: T, o: O): $ElementType<O, T>;
 
   // propOr 1 argument => (function (2 arguments) or (function (1 argument) => function (1 argument)))
-  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
-    or: T,
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
   ): (
         (
-          (p: V) => (
-            (o: J) => T) &
-            (o: A) => $ElementType<{ [V]: T, ...A }, V>
+          (property: Property) => (
+            (object: Primitives) => DefaultValue) &
+            (object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>
 
         ) &
         (
-          ((p: V, o: J) => T) &
-          ((p: V, o: A) => $ElementType<{ [V]: T, ...A }, V>)
+          ((property: Property, object: Primitives) => DefaultValue) &
+          ((property: Property, object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
         )
       );
 
   // propOr 2 arguments => function (1 argument)
-  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
-    or: T,
-    p: $npm$ramda$Placeholder,
-  ): (p: V) => (
-    ((o: J) => T) &
-    ((o: A) => $ElementType<{ [V]: T, ...A }, V>)
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: $npm$ramda$Placeholder,
+  ): (property: Property) => (
+    ((object: Primitives) => DefaultValue) &
+    ((object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
   );
 
-  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
-    or: $npm$ramda$Placeholder,
-    p: V,
-  ): (or: T) => (
-      ((o: J) => T) &
-      ((o: A) => $ElementType<{ [V]: T, ...A }, V>)
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: $npm$ramda$Placeholder,
+    property: Property,
+  ): (defaultValue: DefaultValue) => (
+      ((object: Primitives) => DefaultValue) &
+      ((object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
     );
 
-  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
-    or: T,
-    p: V,
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: Property,
   ): (
-      ((o: J) => T) &
-      ((o: A) => $ElementType<{ [V]: T, ...A }, V>)
+      ((object: Primitives) => DefaultValue) &
+      ((object: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
     );
 
   // propOr 3 arguments
-  //propOr(default, __, obj)
-  declare function propOr<T, V: string, A: (string | number | void | null)>(
-    or: T,
-    p: $npm$ramda$Placeholder,
-    o: A,
-  ): (p: V) => T;
-  declare function propOr<T, V: string, A: (Object | void | null )>(
-    or: T,
-    p: $npm$ramda$Placeholder,
-    o: A,
-  ): (p: V) => $ElementType<{ [V]: T, ...A }, V>;
-  //propOr(default, key, __)
-  declare function propOr<T, V: string, A: Object, J: (string | number | null | void)>(
-    or: T,
-    p: V,
-    o: $npm$ramda$Placeholder,
+  //propOr(defaultValue, __, object)
+  declare function propOr<DefaultValue, Property: string>(
+    defaultValue: DefaultValue,
+    property: $npm$ramda$Placeholder,
+    object: Primitives,
+  ): (p: Property) => DefaultValue;
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: $npm$ramda$Placeholder,
+    object: Obj,
+  ): (property: Property) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>;
+  //propOr(defaultValue, property, __)
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: Property,
+    object: $npm$ramda$Placeholder,
   ): (
-    ((p: J) => T) &
-    ((p: A) => $ElementType<{ [V]: T, ...A }, V>)
+    ((property: Primitives) => DefaultValue) &
+    ((property: Obj) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>)
   );
-  //propOr(__, key, obj)
-  declare function propOr<T, V: string, A: (string | number | void | null)>(
-    or: $npm$ramda$Placeholder,
-    p: V,
-    o: A,
-  ): (or: T) => T;
-  declare function propOr<T, V: string, A: Object>(
-    or: $npm$ramda$Placeholder,
-    p: V,
-    o: A,
-  ): (or: T) => $ElementType<{ [V]: T, ...A }, V>;
-  //propOr(default, key, obj)
-  declare function propOr<T, V: string, A: (string | number | void | null)>(
-    or: T,
-    p: V,
-    o: A,
-  ): T;
-  declare function propOr<T, V: string, A: Object>(
-    or: T,
-    p: V,
-    o: A,
-  ): $ElementType<{ [V]: T, ...A }, V>;
+  //propOr(__, property, object)
+  declare function propOr<DefaultValue, Property: string>(
+    defaultValue: $npm$ramda$Placeholder,
+    property: Property,
+    object: Primitives,
+  ): (defaultValue: DefaultValue) => DefaultValue;
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: $npm$ramda$Placeholder,
+    property: Property,
+    object: Obj,
+  ): (defaultValue: DefaultValue) => $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>;
+  //propOr(defaultValue, property, object)
+  declare function propOr<DefaultValue, Property: string>(
+    defaultValue: DefaultValue,
+    property: Property,
+    object: Primitives,
+  ): DefaultValue;
+  declare function propOr<DefaultValue, Property: string, Obj: Object>(
+    defaultValue: DefaultValue,
+    property: Property,
+    object: Obj,
+  ): $ElementType<{ [Property]: DefaultValue, ...Obj }, Property>;
 
   declare function keysIn(o: Object): Array<string>;
 
