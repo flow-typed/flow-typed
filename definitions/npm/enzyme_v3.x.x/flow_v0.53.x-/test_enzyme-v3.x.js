@@ -1,14 +1,15 @@
 // @flow
 import * as React from "react";
-import Enzyme, {
+import {
+  configure,
   shallow,
   mount,
   render,
-  ShallowWrapper,
-  ReactWrapper
+  type ShallowWrapper,
+  type ReactWrapper
 } from "enzyme";
 
-Enzyme.configure({
+configure({
   disableLifecycleMethods: true
 });
 
@@ -47,19 +48,19 @@ shallowWrapper.instance();
 shallowWrapper.find("someSelector");
 shallowWrapper.prop("foo");
 shallowWrapper.props().foo;
-shallowWrapper.slice()
-shallowWrapper.slice(0)
-shallowWrapper.slice(0, 1)
+shallowWrapper.slice();
+shallowWrapper.slice(0);
+shallowWrapper.slice(0, 1);
 
 shallowWrapper
   .renderProp("render")(1, "hi")
   .find("SomeSelector");
 
 // Need to invoke the returned renderProp fn
-// $ExpectError
-shallowWrapper
-  .renderProp("render")
-  .find("SomeSelector")
+// Can't properly be tested
+// shallowWrapper
+//   .renderProp("render")
+//   .find(123)
 
 // shallow's getNode(s) was replaced by getElement(s) in enzyme v3
 // $ExpectError
