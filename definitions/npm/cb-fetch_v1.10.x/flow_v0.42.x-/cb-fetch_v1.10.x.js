@@ -48,18 +48,9 @@ declare module 'cb-fetch' {
   declare type JSONValue = null | void | string | number | boolean | $Shape<{ [string]: JSONValue }> | Array<JSONValue>
   declare class AnonXMLHttpRequest extends XMLHttpRequest {}
 
-  declare type SuccessResponse = {|
+  declare type NormalizedResponse<T> = {|
     body: JSONValue | Blob | Document | FormData | ReadableStream | ArrayBuffer;
-    headers: { [string]: string };
-    instance: XMLHttpRequest | XDomainRequest | Response | AnonXMLHttpRequest;
-    statusCode?: number;
-    statusText?: string;
-    url?: string;
-  |}
-
-  declare type ErrorResponse = {|
-    body?: JSONValue | Blob | Document | FormData | ReadableStream | ArrayBuffer;
-    headers?: { [string]: string };
+    headers: { [string]: string } | T;
     instance: XMLHttpRequest | XDomainRequest | Response | AnonXMLHttpRequest;
     statusCode?: number;
     statusText?: string;
@@ -74,8 +65,8 @@ declare module 'cb-fetch' {
     lengthComputable: boolean;
   |}
 
-  declare type onSuccess = (response: SuccessResponse) => any;
-  declare type onError   = (response: ErrorResponse) => any;
+  declare type onSuccess = (response: NormalizedResponse<empty>) => any;
+  declare type onError   = (response: NormalizedResponse<void>) => any;
   declare type Abort     = () => void
 
   declare interface Done {
