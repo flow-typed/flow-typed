@@ -14,6 +14,8 @@ to existing libdefs.
   * [Avoid `any` when possible](#avoid-any-when-possible)
   * [Exporting modules](#exporting-modules)
   * [Avoid global types](#avoid-global-types)
+  * [Prefer immutability](#prefer-immutability)
+  * [Prefer exactness](#prefer-exactness)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
 
@@ -232,6 +234,18 @@ When you export a module, you have a choice to use CommonJS or ES6 syntax. We ge
 ### Avoid global types
 
 Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the fact that in the past Flow didn't support private types. **Global types should not be used anymore**. Since then Flow has added support for `declare export` which means that every type which doesn't have it are defined as private and can't be imported, see https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module for details. 
+
+### Prefer immutability
+
+If the function does not mutate input values, always prefer immutable types.
+This is imporant since immutable types accepts mutable types in, but mutable types does not accept immutable types in, see [good example](https://flow.org/try/#0PTAEAEDMBsHsHcBQiAmBTAxtAhgJzaJAK4B2GALgJawmjloDO5AFJSQA5HkBcoAJACU02FAHkS0AJ4BBXLmySAPCSIBbAEZpcAPgCUvAG6xKKANzIMNJoVoBeUMzy5es+UpUate0Le2gA3oigoACQTgB0nAwAFswAjABMAMy6iCH0TI5yuuYAvohAA) and [bad example](https://flow.org/try/#0PTAEAEDMBsHsHcBQiAmBTAxtAhgJzaJAK4B2GALgJawmjloDO5AFJSQA5HkBcoAgrlzYAngB4SRALYAjNLgB8ASl4A3WJRQBuZBhpNCtALyhmeXLwAkAJTTYUAeRLRhAoWIky5S0IfmgA3ogAkPRMpoKK2gC+iEA)
+- Instead of `Array<string>` use `$readOnlyArray<string>`
+- Instead of `{ value: string }` prefer `{ +value: string }` [$ReadOnly<{ value: string }>](https://flow.org/en/docs/types/utilities/#toc-readonly)
+
+### Prefer exactness
+
+If the object has known set of properties, always define them as exact:
+- Instead of `{ +value: string }` prefer `{| +value: string |}`
 
 ## Writing tests
 
