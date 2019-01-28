@@ -64,8 +64,8 @@ declare type $algoliasearch$ClientOptions = {|
   protocol?: "http:" | "https:",
   httpClient?: HTTPClient,
   hosts?: {|
-    read?: string | Array<string>,
-    write?: string | Array<string>
+    read?: Array<string>,
+    write?: Array<string>
   |}
 |};
 
