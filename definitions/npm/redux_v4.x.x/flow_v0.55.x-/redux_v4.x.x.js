@@ -24,7 +24,7 @@ declare module 'redux' {
     replaceReducer(nextReducer: Reducer<S, A>): void
   };
 
-  declare export type Reducer<S, A> = (state: S | void, action: A) => S;
+  declare export type Reducer<S, -A> = (state: S | void, action: A) => S;
 
   declare export type CombinedReducer<S, A> = (state: $Shape<S> & {} | void, action: A) => S;
 
