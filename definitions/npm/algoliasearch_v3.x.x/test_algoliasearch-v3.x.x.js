@@ -9,6 +9,26 @@ describe("algoliasearch", () => {
     searchIndex.search("test").then(result => result.hits);
   });
 
+  it("works with provided hosts", () => {
+    const algoliasearch = require("algoliasearch");
+    const options = {
+      hosts: {
+        read: [
+          '-1.algolianet.com',
+          '-2.algolianet.com',
+          '-3.algolianet.com',
+        ],
+        write: [
+          '-1.algolianet.com',
+          '-2.algolianet.com',
+          '-3.algolianet.com',
+        ],
+      },
+    };
+    const searchIndex = algoliasearch("", "", options).initIndex("");
+    searchIndex.search("test").then(result => result.hits);
+  });
+
   it("works with `import` syntax", () => {
     const searchIndex = algoliasearchImport("", "").initIndex("");
     searchIndex.search("test").then(result => result.hits);
