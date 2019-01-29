@@ -7,7 +7,7 @@ declare module "redux-saga" {
 
   // * remove next types
   declare type DispatchAPI<A> = (action: A) => A;
-  declare type Dispatch<A: { type: $Subtype<string> }> = DispatchAPI<A>;
+  declare type Dispatch<A: { type: string }> = DispatchAPI<A>;
 
   declare type MiddlewareAPI<S, A, D = Dispatch<A>> = {
     dispatch: D,
@@ -197,8 +197,8 @@ declare module "redux-saga" {
   };
 
   declare export type SagaMiddleware<C: {}> =
-    | Middleware<*, *>
-    | {
+    {
+        <S, A, D>(api: MiddlewareAPI<S, A, D>): (next: D) => D,
         run: {
           <R, Fn: () => Saga<R>>(saga: Fn): Task<R>,
           <R, T1, Fn: T1 => Saga<R>>(saga: Fn, T1): Task<R>,
