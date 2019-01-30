@@ -212,7 +212,7 @@ declare module 'react-native-video' {
     // Event props
     onAudioFocusChanged?: AudioFocusChangedEvent => void,
     onBandwidthUpdate?: BandwidthUpdateEvent => void,
-    onBuffer?: BufferEvent => void, // need docs
+    onBuffer?: BufferEvent => void,
     onEnd?: EventWithoutData => void,
     onError?: ErrorEvent => void,
     onExternalPlaybackChange?: ExternalPlaybackActiveEvent => void,
@@ -222,15 +222,15 @@ declare module 'react-native-video' {
     onFullscreenPlayerWillPresent?: EventWithoutData => void,
     onLoad?: LoadEvent => void,
     onLoadStart?: LoadStartEvent => void,
-    onPlaybackRateChange?: PlaybackRateEvent => void, // need doc
+    onPlaybackRateChange?: PlaybackRateEvent => void,
     onProgress?: ProgressEvent => void,
-    onReadyForDisplay?: EventWithoutData => void, // need doc
+    onReadyForDisplay?: EventWithoutData => void,
     onSeek?: SeekEvent => void,
     onTimedMetadata?: TimedMetadataEvent => void,
 
     onAudioBecomingNoisy?: () => void,
-    onPlaybackResume?: () => void, // need doc
-    onPlaybackStalled?: () => void, // need doc
+    onPlaybackResume?: () => void,
+    onPlaybackStalled?: () => void,
 
     // For test
     testID?: string,
