@@ -27,10 +27,10 @@ const B: boolean = render(<div />, { context: { foo: true } })
 // $ExpectError
 (shallow(<div />).children(): boolean);
 
-(shallow(<div />).children(): ShallowWrapper);
+(shallow(<div />).children(): ShallowWrapper<'div'>);
 
 // Test PredicateFunction
-shallow(<div />).findWhere((x: ShallowWrapper) => true);
+shallow(<div />).findWhere((x: ShallowWrapper<'div'>) => true);
 
 // Test selector functionality
 
@@ -80,16 +80,16 @@ shallowWrapper.getElements();
 // $ExpectError
 (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
 
-(mount(<div />).setProps({}, () => {}): ReactWrapper);
+(mount(<div />).setProps({}, () => {}): ReactWrapper<'div'>);
 // $ExpectError
-(mount(<div />).setProps({}, null): ReactWrapper);
-(mount(<div />).setProps({}): ReactWrapper);
+(mount(<div />).setProps({}, null): ReactWrapper<'div'>);
+(mount(<div />).setProps({}): ReactWrapper<'div'>);
 // $ExpectError
-(mount(<div />).setProps(): ReactWrapper);
+(mount(<div />).setProps(): ReactWrapper<'div'>);
 // $ExpectError
-(mount(<div />).setProps(null): ReactWrapper);
+(mount(<div />).setProps(null): ReactWrapper<'div'>);
 
-(mount(<div />).renderProp("render")(1, "hi"): ReactWrapper);
+(mount(<div />).renderProp("render")(1, "hi"): ReactWrapper<'div'>);
 
 // mount's getNode(s) were removed in enzyme v3
 // $ExpectError
@@ -104,3 +104,17 @@ render(<div />).contents();
 // http://airbnb.io/enzyme/docs/api/
 // https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md#shallow-rendering-api
 (shallow(<div />).length: number);
+
+class TestInstance extends React.Component<*> {
+  method = () => 'test';
+}
+
+// $ExpectError
+(mount(<TestInstance />).instance().method: string);
+mount(<TestInstance />).instance().method();
+(mount(<TestInstance />).instance().method: () => 'test');
+
+// $ExpectError
+(shallow(<TestInstance />).instance().method: string);
+shallow(<TestInstance />).instance().method();
+(shallow(<TestInstance />).instance().method: () => 'test');
