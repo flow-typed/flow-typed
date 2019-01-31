@@ -32,6 +32,16 @@ stringify("test");
 // $ExpectError: true is not a stringify option
 stringify({ test: null }, { test: true });
 
+stringify({ test: 1 });
+
+stringify({ test: [1, 2, 3] });
+
+stringify({ test: false });
+
+stringify({ test: null });
+
+stringify({ test: undefined });
+
 parseUrl("test");
 
 parseUrl("test", { arrayFormat: "bracket" });
