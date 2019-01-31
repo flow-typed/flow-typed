@@ -79,21 +79,21 @@ declare module 'execa' {
   }
 
   declare interface Execa {
-    (file: string, args?: $ReadOnlyArray<string>, options?: Options): ThenableChildProcess;
-    (file: string, options?: Options): ThenableChildProcess;
+    (file: string, args?: $ReadOnlyArray<string>, options?: $ReadOnly<Options>): ThenableChildProcess;
+    (file: string, options?: $ReadOnly<Options>): ThenableChildProcess;
 
-    stdout(file: string, args?: $ReadOnlyArray<string>, options?: Options): Promise<string>;
-    stdout(file: string, options?: Options): Promise<string>;
+    stdout(file: string, args?: $ReadOnlyArray<string>, options?: $ReadOnly<Options>): Promise<string>;
+    stdout(file: string, options?: $ReadOnly<Options>): Promise<string>;
 
-    stderr(file: string, args?: $ReadOnlyArray<string>, options?: Options): Promise<string>;
-    stderr(file: string, options?: Options): Promise<string>;
+    stderr(file: string, args?: $ReadOnlyArray<string>, options?: $ReadOnly<Options>): Promise<string>;
+    stderr(file: string, options?: $ReadOnly<Options>): Promise<string>;
 
-    shell(command: string, options?: Options): ThenableChildProcess;
+    shell(command: string, options?: $ReadOnly<Options>): ThenableChildProcess;
 
-    sync(file: string, args?: $ReadOnlyArray<string>, options?: SyncOptions): SyncResult;
-    sync(file: string, options?: SyncOptions): SyncResult;
+    sync(file: string, args?: $ReadOnlyArray<string>, options?: $ReadOnly<SyncOptions>): SyncResult;
+    sync(file: string, options?: $ReadOnly<SyncOptions>): SyncResult;
 
-    shellSync(command: string, options?: Options): SyncResult;
+    shellSync(command: string, options?: $ReadOnly<Options>): SyncResult;
   }
 
   declare module.exports: Execa;
