@@ -73,7 +73,15 @@ async function extractLibDefsFromNpmPkgDir(
     await _npmExists(fullPkgName)
       .then()
       .catch(error => {
-        // Only fail spen on 404, not on timeout
+        if (error.statusCode === 404) {
+          // Some times NPM returns 404 even though the package exists.
+          // Try to avoid false negatives by retrying
+          return _npmExists(fullPkgName);
+        }
+      })
+      .then()
+      .catch(error => {
+        // Only fail on 404, not on timeout
         if (error.statusCode === 404) {
           throw new ValidationError(`Package does not exist on npm!`);
         }
@@ -392,8 +400,8 @@ export async function getInstalledNpmLibDefs(
               flowVerMatches == null
                 ? matches[3]
                 : flowVerMatches[3] == null
-                  ? flowVerMatches[2]
-                  : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
+                ? flowVerMatches[2]
+                : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
             const flowDirStr = `flow_${flowVerStr}`;
             const flowVer =
               flowVerMatches == null
