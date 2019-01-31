@@ -1,6 +1,5 @@
 // @flow
 
-
 declare module 'diskusage' {
     declare type DiskUsage = {|
         available: number,
