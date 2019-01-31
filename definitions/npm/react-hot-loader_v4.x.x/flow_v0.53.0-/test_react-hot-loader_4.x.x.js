@@ -2,7 +2,7 @@
 import * as React from "react";
 import { describe, it } from "flow-typed-test";
 
-import { AppContainer, hot } from "react-hot-loader";
+import { AppContainer, hot, setConfig } from "react-hot-loader";
 
 describe("react-hot-loader", () => {
   describe("hot", () => {
@@ -111,6 +111,14 @@ describe("react-hot-loader", () => {
       <AppContainer errorReporter={ErrorReporter}>
         <div />
       </AppContainer>;
+    });
+
+    it('can use setConfig', () => {
+      setConfig({
+        logLevel: 'error',
+        errorReporter: ({ error }: { error: Error }) => <div />,
+        ErrorOverlay: () => null,
+      });
     });
   });
 });
