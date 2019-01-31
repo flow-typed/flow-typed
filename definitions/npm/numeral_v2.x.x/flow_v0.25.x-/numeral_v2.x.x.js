@@ -39,8 +39,8 @@ declare interface Numeral {
     /**
      * Registers a language definition or a custom format definition.
      * @param what Allowed values are: either 'format' or 'locale'
-     * @param key The key of the registerd type, e.g. 'de' for a german locale definition
-     * @param value The locale definition or the format definitiion
+     * @param key The key of the registered type, e.g. 'de' for a german locale definition
+     * @param value The locale definition or the format definition
      */
     register(
         what: RegisterType,
