@@ -76,7 +76,13 @@ async function extractLibDefsFromNpmPkgDir(
         if (error.statusCode === 404) {
           // Some times NPM returns 404 even though the package exists.
           // Try to avoid false negatives by retrying
-          return _npmExists(fullPkgName);
+          return new Promise((resolve, reject) =>
+            setTimeout(() => {
+              _npmExists(fullPkgName)
+                .then(resolve)
+                .catch(reject);
+            }, 1000),
+          );
         }
       })
       .then()
