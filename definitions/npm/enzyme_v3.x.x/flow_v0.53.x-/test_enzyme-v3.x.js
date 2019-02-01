@@ -120,6 +120,8 @@ shallow(<TestInstance />).instance().method();
 (shallow(<TestInstance />).instance().method: () => 'test');
 
 (mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
+// $ExpectError
 (mount(<div />).simulateError('error'): ReactWrapper<'div'>);
 (shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
+// $ExpectError
 (shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
