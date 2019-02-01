@@ -8,7 +8,7 @@ to existing libdefs.
 
 * [Running libdef tests](#running-libdef-tests)
 * [Creating a new library definition](#creating-a-new-library-definition)
-* [Writing libdefs tips](#writing-libdefs-tips)
+* [Writing libdefs best practices](#writing-libdefs-best-practices)
   * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
   * [Avoid `any` when possible](#avoid-any-when-possible)
@@ -115,7 +115,7 @@ You may also leave off the argument `left-pad` to run *all* tests (this takes a 
 
 You know how to do it.
 
-## Writing libdefs tips
+## Writing libdefs best practices
 
 ### Read flow docs
 
