@@ -34,6 +34,14 @@ describe("take effect", () => {
     });
   });
 
+  describe("take()", () => {
+    it("must passes when call effect without any arguments", () => {
+      const t = take();
+
+      (t.payload.pattern: '*');
+    });
+  });
+
   describe("take(pattern)", () => {
     it("must passes when used properly", () => {
       take(action => action.type === "foo");

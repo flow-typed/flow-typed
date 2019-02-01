@@ -276,15 +276,26 @@ declare module "redux-saga" {
   declare export default typeof sagaMiddlewareFactory;
 
   // Effect types
-  declare export type PatternPart = string | (any => boolean);
+  declare export type SubPattern = string | (any => boolean);
 
-  declare export type Pattern = PatternPart | $ReadOnlyArray<PatternPart>;
+  declare export type Pattern = SubPattern | Array<SubPattern>;
 
   declare export interface IEffect<T, P, C: boolean> {
     +type: T;
     +payload: P;
     +combinator: C;
   }
+
+  declare export type AllTakeEffect<
+    M: { maybe: true } | void
+  > = IEffect<
+    "TAKE",
+    $ReadOnly<{|
+      pattern: '*',
+      ...$Exact<M>
+    |}>,
+    false
+  >;
 
   declare export type TakeEffect<
     P: { pattern: Pattern } | void,
@@ -415,7 +426,8 @@ declare module "redux-saga" {
     | RaceEffect<*>
     | SelectEffect<*, *>
     | SetContextEffect<*>
-    | TakeEffect<*, *, *>;
+    | TakeEffect<*, *, *>
+    | AllTakeEffect<*>;
 }
 
 declare module "redux-saga/effects" {
@@ -444,6 +456,7 @@ declare module "redux-saga/effects" {
     TakeableChannel,
     PuttableChannel,
     FlushableChannel,
+    AllTakeEffect,
   } from "redux-saga";
 
   declare export var effectTypes: $ReadOnly<{|
@@ -1439,6 +1452,7 @@ declare module "redux-saga/effects" {
   declare export var take: {
     // take(pattern)
     // take(channel)
+    (): AllTakeEffect<void>,
     <T, CH: TakeableChannel<T>>(channel: CH): TakeEffect<void, { channel: CH }, void>,
     <P: Pattern>(pattern: P): TakeEffect<{ pattern: P }, void, void>
   };
@@ -1446,6 +1460,7 @@ declare module "redux-saga/effects" {
   declare export var takeMaybe: {
     // takeMaybe(pattern)
     // takeMaybe(channel)
+    (): AllTakeEffect<{ maybe: true }>,
     <T, CH: TakeableChannel<T>>(channel: CH): TakeEffect<void, { channel: CH }, { maybe: true }>,
     <P: Pattern>(pattern: P): TakeEffect<{ pattern: P }, void, { maybe: true }>
   };

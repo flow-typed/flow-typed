@@ -33,6 +33,14 @@ describe("takeMaybe effect", () => {
     });
   });
 
+  describe("takeMaybe()", () => {
+    it("must passes when call effect without any arguments", () => {
+      const t = takeMaybe();
+
+      (t.payload.pattern: '*');
+    });
+  });
+
   describe("takeMaybe(pattern)", () => {
     it("must passes when used properly", () => {
       takeMaybe(action => action.type === "foo");
