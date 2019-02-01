@@ -118,3 +118,8 @@ mount(<TestInstance />).instance().method();
 (shallow(<TestInstance />).instance().method: string);
 shallow(<TestInstance />).instance().method();
 (shallow(<TestInstance />).instance().method: () => 'test');
+
+(mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
+(mount(<div />).simulateError('error'): ReactWrapper<'div'>);
+(shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
+(shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
