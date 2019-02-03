@@ -1016,6 +1016,13 @@ declare var it: {
   ): void,
 
   /**
+   * Highlight planned tests in the summary output
+   *
+   * @param {String} Name of Test to do
+   */
+  todo(name: string): void,
+
+  /**
    * Run the test concurrently
    *
    * @param {JestTestName} Name of Test
