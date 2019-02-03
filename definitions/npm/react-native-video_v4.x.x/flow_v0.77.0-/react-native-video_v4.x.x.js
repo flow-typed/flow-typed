@@ -120,17 +120,17 @@ declare module 'react-native-video' {
     }>
   >;
 
-  declare export type ProgressEvent = VideoEvent<{|
+  declare export type ProgressEvent = VideoEvent<{
     +currentTime: number,
     +playableDuration: number,
     +seekableDuration: number,
-  |}>;
+  }>;
 
-  declare export type AudioFocusChangedEvent = VideoEvent<{|
+  declare export type AudioFocusChangedEvent = VideoEvent<{
     +hasAudioFocus: boolean,
-  |}>;
+  }>;
 
-  declare export type BufferEvent = VideoEvent<{| +isBuffering: boolean |}>;
+  declare export type BufferEvent = VideoEvent<{ +isBuffering: boolean }>;
 
   declare export type LoadStartEvent = VideoEvent<{
     +isNetwork: boolean,
@@ -138,39 +138,39 @@ declare module 'react-native-video' {
     +uri: string,
   }>;
 
-  declare export type PlaybackRateEvent = VideoEvent<{|
+  declare export type PlaybackRateEvent = VideoEvent<{
     +playbackRate: number,
-  |}>;
+  }>;
 
-  declare export type ErrorEvent = VideoEvent<{|
+  declare export type ErrorEvent = VideoEvent<{
     +error: {|
       +domain: string,
       +code: number,
     |},
-  |}>;
+  }>;
 
-  declare export type BandwidthUpdateEvent = VideoEvent<{|
+  declare export type BandwidthUpdateEvent = VideoEvent<{
     +bitrate: number,
-  |}>;
+  }>;
 
-  declare export type SeekEvent = VideoEvent<{|
+  declare export type SeekEvent = VideoEvent<{
     +currentTime: number,
     +seekTime: number,
-  |}>;
+  }>;
 
   declare export type TimedMetadata = {| +value: string, +identifier: string |};
 
-  declare export type TimedMetadataEvent = VideoEvent<{|
+  declare export type TimedMetadataEvent = VideoEvent<{
     +metadata: $ReadOnlyArray<TimedMetadata>,
-  |}>;
+  }>;
 
-  declare export type ExternalPlaybackActiveEvent = VideoEvent<{|
+  declare export type ExternalPlaybackActiveEvent = VideoEvent<{
     +isExternalPlaybackActive: boolean,
-  |}>;
+  }>;
 
-  declare export type EventWithoutData = VideoEvent<{||}>;
+  declare export type EventWithoutData = VideoEvent<{}>;
 
-  declare export type VideoProps = $ReadOnly<{|
+  declare export type VideoProps = $ReadOnly<{
     source: VideoSource, // Required prop
 
     audioOnly?: boolean,
@@ -231,10 +231,7 @@ declare module 'react-native-video' {
     onAudioBecomingNoisy?: () => void,
     onPlaybackResume?: () => void,
     onPlaybackStalled?: () => void,
-
-    // For test
-    testID?: string,
-  |}>;
+  }>;
 
   declare export type VideoState = {|
     showPoster: boolean,
