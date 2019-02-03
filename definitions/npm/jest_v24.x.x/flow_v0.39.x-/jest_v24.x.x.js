@@ -841,6 +841,13 @@ type JestObjectType = {
   resetModules(): JestObjectType,
 
   /**
+   * Creates a sandbox registry for the modules that are loaded inside the
+   * callback function. This is useful to isolate specific modules for every
+   * test so that local module state doesn't conflict between tests.
+   */
+  isolateModules(fn: () => void): JestObjectType,
+
+  /**
    * Exhausts the micro-task queue (usually interfaced in node via
    * process.nextTick).
    */
