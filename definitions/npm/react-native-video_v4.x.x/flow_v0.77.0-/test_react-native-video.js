@@ -154,7 +154,7 @@ describe('source prop', () => {
   });
 });
 
-it('should passed when pass View props', () => {
+it('should passes when passed View props', () => {
   // https://github.com/react-native-community/react-native-video/blob/80391d4e2ae639bb4079b2595a5d7ca27ebaeb7b/Video.js#L433
   <Video source={0} style={{ color: 'sexy' }} testID="video" />;
 });
