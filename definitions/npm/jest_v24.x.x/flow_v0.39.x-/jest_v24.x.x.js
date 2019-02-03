@@ -785,6 +785,10 @@ type JestObjectType = {
    */
   clearAllTimers(): void,
   /**
+   * Returns the number of fake timers still left to run.
+   */
+  getTimerCount(): number,
+  /**
    * The same as `mock` but not moved to the top of the expectation by
    * babel-jest.
    */

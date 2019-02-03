@@ -274,6 +274,10 @@ expect(() => {}).toThrow('err');
 expect(() => {}).toThrow(/err/);
 expect(() => {}).toThrow(err);
 
+(jest.getTimerCount(): number);
+// $ExpectError
+jest.getTimerCount(3);
+
 // Test method chaining fixes
 jest.doMock('testModule1', () => {}).doMock('testModule2', () => {});
 
