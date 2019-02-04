@@ -1,34 +1,33 @@
 // @flow
-declare type ErrorReporterProps = {|
-  error: any,
+declare type errorReporterProps = {|
+  error: Error,
+  errorInfo: { componentStack: string }
 |}
 
-declare type AppContainerProps = {|
+declare type ContainerProps = {|
+  children: React$Element<any>,
   errorBoundary?: boolean,
-  errorReporter?: React$ComponentType<ErrorReporterProps>,
+  errorReporter?: React$ComponentType<errorReporterProps>,
 |}
 
 declare module "react-hot-loader" {
   declare type Module = {
-    id: string
+    id: string,
   };
 
-  declare type AppChildren = {|
-    children?: React$Element<any>
-  |}
+  declare export class AppContainer extends React$Component<ContainerProps> {}
 
-  declare export class AppContainer extends React$Component<AppContainerProps & AppChildren> {}
-
-  declare export function hot(module: Module): <T: React$ComponentType<any>>(Component: T, props?: AppContainerProps) => T
+  declare export function hot(module: Module): <T: React$ComponentType<any>>(
+    Component: T,
+    props?: $Diff<ContainerProps, { children: React$Element<any> }>
+  ) => T
 
   declare export function cold<T: React$ComponentType<any>>(component: T): T
 
-  declare export function areComponentsEqual<T>(typeA: React$ComponentType<T>, typeB: React$ComponentType<T>): boolean
-
-  declare type HotError = {|
-    error: Error,
-    errorInfo?: { componentStack: string },
-  |}
+  declare export function areComponentsEqual<T>(
+    typeA: React$ComponentType<T>,
+    typeB: React$ComponentType<T>
+  ): boolean
 
   declare type Config = {|
     logLevel: 'debug' | 'log' | 'warn' | 'error',
@@ -39,8 +38,8 @@ declare module "react-hot-loader" {
     disableHotRendererWhenInjected: boolean,
     ignoreSFC: boolean,
     ignoreComponents: boolean,
-    errorReporter: React$ComponentType<HotError>,
-    ErrorOverlay: React$ComponentType<{ errors: Array<HotError> }>,
+    errorReporter: React$ComponentType<errorReporterProps>,
+    ErrorOverlay: React$ComponentType<{ errors: Array<errorReporterProps> }>,
     onComponentRegister: (type: any, uniqueLocalName: string, fileName: string) => any,
     onComponentCreate: (type: any, displayName: string) => any,
   |}
@@ -51,6 +50,6 @@ declare module "react-hot-loader" {
 declare module "react-hot-loader/root" {
   declare export function hot<T: React$ComponentType<any>>(
     Component: T,
-    props?: AppContainerProps
+    props?: $Diff<ContainerProps, { children: React$Element<any> }>
   ): T;
 }
