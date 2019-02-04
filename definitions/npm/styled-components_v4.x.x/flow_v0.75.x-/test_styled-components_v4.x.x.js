@@ -238,4 +238,10 @@ describe('attrs API', () => {
     // $ExpectError - name is missing in props
     const hello = <StyledHello />
   })
+
+  it('does not error when used again in a styled component', () => {
+    const One = styled.div.attrs((props)=> ({}))``
+    const Two = styled(One)``
+  })
+
 })
