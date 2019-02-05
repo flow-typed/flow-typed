@@ -1,10 +1,17 @@
 import isNumber from 'is-number';
+import { describe, it } from 'flow-typed-test';
 
-const a: boolean = isNumber(4);
-//=> true
+describe('is-number', () => {
+  it('should be boolean', () => {
+    const a: boolean = isNumber(4);
+    //=> true
 
-const b: boolean = isNumber(Infinity);
-//=> false
+    const b: boolean = isNumber(Infinity);
+    //=> false
+  });
 
-// $ExpectError
-(isNumber(4): string);
+  it('should error', () => {
+    // $ExpectError
+    (isNumber(4): string);
+  });
+});
