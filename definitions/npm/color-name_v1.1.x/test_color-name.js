@@ -1,3 +1,6 @@
 import { aliceblue, type RGB } from 'color-name';
+import { it } from 'flow-typed-test';
 
-(aliceblue: RGB);
+it('should be RGB', () => {
+  const color: RGB = aliceblue;
+});
