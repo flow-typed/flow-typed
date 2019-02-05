@@ -1,6 +1,11 @@
 // @flow
 import { describe, it } from "flow-typed-test";
-import { channel } from "redux-saga";
+import {
+  channel,
+  eventChannel,
+  multicastChannel,
+  stdChannel,
+} from "redux-saga";
 import { take } from "redux-saga/effects";
 
 describe("take effect", () => {
@@ -29,6 +34,14 @@ describe("take effect", () => {
     });
   });
 
+  describe("take()", () => {
+    it("must passes when call effect without any arguments", () => {
+      const t = take();
+
+      (t.payload.pattern: '*');
+    });
+  });
+
   describe("take(pattern)", () => {
     it("must passes when used properly", () => {
       take(action => action.type === "foo");
@@ -48,18 +61,30 @@ describe("take effect", () => {
   });
 
   describe("take(channel)", () => {
-    it("must passes when used properly", () => {
+    it("must passes when pass Channel", () => {
       const myChannel = channel();
 
       take(myChannel);
     });
 
+    it("must passes when pass EventChannel", () => {
+      const myEventChannel = eventChannel(emitter => {
+        emitter("test");
+
+        return () => {};
+      });
+
+      take(myEventChannel);
+    });
+
+    it("must passes when pass MulticastChannel", () => {
+      take(multicastChannel());
+      take(stdChannel());
+    });
+
     it("must raises an error when passed invalid channel", () => {
       // $ExpectError: Channels must have take prop
       take({ close: () => {}, put: msg => {} });
-
-      // $ExpectError: Channels must have close prop
-      take({ take: cb => {}, put: msg => {} });
     });
   });
 });

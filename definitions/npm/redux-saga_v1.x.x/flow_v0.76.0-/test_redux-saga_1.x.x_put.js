@@ -1,6 +1,6 @@
 // @flow
 import { describe, it } from "flow-typed-test";
-import { channel } from "redux-saga";
+import { channel, eventChannel, multicastChannel } from "redux-saga";
 import { put } from "redux-saga/effects";
 
 describe("put effect", () => {
@@ -40,13 +40,29 @@ describe("put effect", () => {
   });
 
   describe("put(channel, action)", () => {
-    const myChannel = channel();
-    const myAction = { type: "test" };
-
-    it("must passes when used properly", () => {
+    it("must passes when used properly Channel and Action", () => {
+      const myChannel = channel();
+      const myAction = { type: "test" };
       const p = put(myChannel, myAction);
 
       (p.payload.channel: typeof myChannel);
+      (p.payload.action: typeof myAction);
+    });
+
+    it("must raises an error when pass EventChannel", () => {
+      const myEventChannel = eventChannel(emitter => () => {});
+      const myAction = { type: "test" };
+
+      // $ExpectError: event channel hasn"t a put() property
+      put(myEventChannel, myAction);
+    });
+
+    it("must passes when used properly MulticastChannel and Action", () => {
+      const myMultiChannel = multicastChannel();
+      const myAction = { type: "test" };
+      const p = put(myMultiChannel, myAction);
+
+      (p.payload.channel: typeof myMultiChannel);
       (p.payload.action: typeof myAction);
     });
 

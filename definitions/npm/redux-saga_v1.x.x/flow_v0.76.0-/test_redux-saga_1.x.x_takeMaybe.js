@@ -1,6 +1,11 @@
 // @flow
 import { describe, it } from "flow-typed-test";
-import { channel } from "redux-saga";
+import {
+  channel,
+  eventChannel,
+  multicastChannel,
+  stdChannel,
+} from "redux-saga";
 import { takeMaybe } from "redux-saga/effects";
 
 describe("takeMaybe effect", () => {
@@ -28,10 +33,21 @@ describe("takeMaybe effect", () => {
     });
   });
 
+  describe("takeMaybe()", () => {
+    it("must passes when call effect without any arguments", () => {
+      const t = takeMaybe();
+
+      (t.payload.pattern: '*');
+    });
+  });
+
   describe("takeMaybe(pattern)", () => {
     it("must passes when used properly", () => {
       takeMaybe(action => action.type === "foo");
-      takeMaybe([action => action.type === "foo", action => action.type === "foo"]);
+      takeMaybe([
+        action => action.type === "foo",
+        action => action.type === "foo",
+      ]);
 
       takeMaybe("ACTION_1");
       takeMaybe(["ACTION_1", "ACTION_2"]);
@@ -47,18 +63,30 @@ describe("takeMaybe effect", () => {
   });
 
   describe("takeMaybe(channel)", () => {
-    it("must passes when used properly", () => {
+    it("must passes when pass Channel", () => {
       const myChannel = channel();
 
       takeMaybe(myChannel);
     });
 
+    it("must passes when pass EventChannel", () => {
+      const myEventChannel = eventChannel(emitter => {
+        emitter("test");
+
+        return () => {};
+      });
+
+      takeMaybe(myEventChannel);
+    });
+
+    it("must passes when pass MulticastChannel", () => {
+      takeMaybe(multicastChannel());
+      takeMaybe(stdChannel());
+    });
+
     it("must raises an error when passed invalid channel", () => {
       // $ExpectError: Channels must have take prop
       takeMaybe({ close: () => {}, put: msg => {} });
-
-      // $ExpectError: Channels must have close prop
-      takeMaybe({ take: cb => {}, put: msg => {} });
     });
   });
 });

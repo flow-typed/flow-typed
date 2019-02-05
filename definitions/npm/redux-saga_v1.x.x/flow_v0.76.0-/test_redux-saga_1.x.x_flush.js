@@ -1,6 +1,11 @@
 // @flow
 import { describe, it } from "flow-typed-test";
-import { channel } from "redux-saga";
+import {
+  channel,
+  eventChannel,
+  multicastChannel,
+  stdChannel,
+} from "redux-saga";
 import { flush } from "redux-saga/effects";
 
 describe("flush effect", () => {
@@ -25,12 +30,28 @@ describe("flush effect", () => {
   });
 
   describe("flush(channel)", () => {
-    it("must passes when used properly", () => {
+    it("must passes when pass Channel", () => {
       const myChannel = channel();
 
-      const f = flush(myChannel);
+      flush(myChannel);
+    });
 
-      (f.payload: typeof myChannel);
+    it("must passes when pass EventChannel", () => {
+      const myEventChannel = eventChannel(emitter => {
+        emitter("test");
+
+        return () => {};
+      });
+
+      flush(myEventChannel);
+    });
+
+    it("must raises an error when pass MulticastChannel", () => {
+      // $ExpectError: MulticastChannel haven"t a flush property
+      flush(multicastChannel());
+
+      // $ExpectError: MulticastChannel haven"t a flush property
+      flush(stdChannel());
     });
 
     it("must raises an error when passed invalid arguments", () => {
