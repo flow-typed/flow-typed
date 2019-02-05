@@ -1,4 +1,7 @@
 import { Buffer as SafeBuffer } from 'safe-buffer';
+import { it } from 'flow-typed-test';
 
-const d: Buffer = new SafeBuffer('hey');
-const d1: Buffer = SafeBuffer.from('hey');
+it('should be node buffer', () => {
+  const d: Buffer = new SafeBuffer('hey');
+  const d1: Buffer = SafeBuffer.from('hey');
+});
