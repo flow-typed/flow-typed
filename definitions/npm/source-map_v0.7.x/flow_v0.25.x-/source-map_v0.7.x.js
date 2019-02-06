@@ -1,75 +1,76 @@
 declare module 'source-map' {
   declare export type SourceMapUrl = string;
-  declare export type StartOfSourceMap = {
-    file?: string,
-    sourceRoot?: string,
-    skipValidation?: boolean,
-  };
-  declare export type RawSourceMap = {
-    version: number,
-    sources: string[],
-    names: string[],
-    sourceRoot?: string,
-    sourcesContent?: string[],
-    mappings: string,
-    file: string,
-  };
-  declare export type RawIndexMap = {
-    file?: string,
-    sourceRoot?: string,
-    skipValidation?: boolean,
-    version: number,
-    sections: RawSection[],
-  };
+  declare export type StartOfSourceMap = {|
+    +file?: string,
+    +sourceRoot?: string,
+    +skipValidation?: boolean,
+  |};
+  declare export type RawSourceMap = {|
+    +version: number,
+    +sources: string[],
+    +names: string[],
+    +sourceRoot?: string,
+    +sourcesContent?: string[],
+    +mappings: string,
+    +file: string,
+  |};
+  declare export type RawIndexMap = {|
+    +file?: string,
+    +sourceRoot?: string,
+    +skipValidation?: boolean,
+    +version: number,
+    +sections: RawSection[],
+  |};
 
-  declare export type RawSection = {
-    offset: Position,
-    map: RawSourceMap,
-  };
-  declare export type Position = {
-    line: number,
-    column: number,
-  };
-  declare export type NullablePosition = {
-    line: number | null,
-    column: number | null,
-    lastColumn: number | null,
-  };
-  declare export type MappedPosition = {
-    source: string,
-    line: number,
-    column: number,
-    name?: string,
-  };
-  declare export type NullableMappedPosition = {
-    source: string | null,
-    line: number | null,
-    column: number | null,
-    name: string | null,
-  };
-  declare export type MappingItem = {
-    source: string,
-    generatedLine: number,
-    generatedColumn: number,
-    originalLine: number,
-    originalColumn: number,
-    name: string,
-  };
-  declare export type Mapping = {
-    generated: Position,
-    original: Position,
-    source: string,
-    name?: string,
-  };
-  declare export type CodeWithSourceMap = {
-    code: string,
-    map: SourceMapGenerator,
-  };
+  declare export type RawSection = {|
+    +offset: Position,
+    +map: RawSourceMap,
+  |};
+  declare export type Position = {|
+    +line: number,
+    +column: number,
+  |};
+  declare export type NullablePosition = {|
+    +line: number | null,
+    +column: number | null,
+    +lastColumn: number | null,
+  |};
+  declare export type MappedPosition = {|
+    +source: string,
+    +line: number,
+    +column: number,
+    +name?: string,
+  |};
+  declare export type NullableMappedPosition = {|
+    +source: string | null,
+    +line: number | null,
+    +column: number | null,
+    +name: string | null,
+  |};
+  declare export type MappingItem = {|
+    +source: string,
+    +generatedLine: number,
+    +generatedColumn: number,
+    +lastGeneratedColumn?: number,
+    +originalLine: number,
+    +originalColumn: number,
+    +name: string,
+  |};
+  declare export type Mapping = {|
+    +generated: Position,
+    +original: Position,
+    +source: string,
+    +name?: string,
+  |};
+  declare export type CodeWithSourceMap = {|
+    +code: string,
+    +map: SourceMapGenerator,
+  |};
   declare export class SourceMapConsumer {
-    static GENERATED_ORDER: number;
-    static ORIGINAL_ORDER: number;
-    static GREATEST_LOWER_BOUND: number;
-    static LEAST_UPPER_BOUND: number;
+    static +GENERATED_ORDER: number;
+    static +ORIGINAL_ORDER: number;
+    static +GREATEST_LOWER_BOUND: number;
+    static +LEAST_UPPER_BOUND: number;
     constructor(
       rawSourceMap: RawSourceMap,
       sourceMapUrl?: SourceMapUrl
@@ -252,10 +253,10 @@ declare module 'source-map' {
   }
 
   declare export class BasicSourceMapConsumer mixins SourceMapConsumer {
-    file: string;
-    sourceRoot: string;
-    sources: string[];
-    sourcesContent: string[];
+    +file: string;
+    +sourceRoot: string;
+    +sources: string[];
+    +sourcesContent: string[];
 
     constructor(
       rawSourceMap: RawSourceMap | string
@@ -270,7 +271,7 @@ declare module 'source-map' {
     ): Promise<BasicSourceMapConsumer>;
   }
   declare export class IndexedSourceMapConsumer mixins SourceMapConsumer {
-    sources: string[];
+    +sources: string[];
     constructor(
       rawSourceMap: RawIndexMap | string
     ): Promise<IndexedSourceMapConsumer>;
@@ -327,12 +328,13 @@ declare module 'source-map' {
     toJSON(): RawSourceMap;
   }
   declare export class SourceNode {
-    children: SourceNode[];
-    sourceContents: any;
-    line: number;
-    column: number;
-    source: string;
-    name: string;
+    +children: SourceNode[];
+    +sourceContents: any;
+    +line: number;
+    +column: number;
+    +source: string;
+    +name: string;
+
     constructor(): this;
     constructor(
       line: number | null,
@@ -341,6 +343,7 @@ declare module 'source-map' {
       chunks?: Array<string | SourceNode> | SourceNode | string,
       name?: string
     ): this;
+
     static fromStringWithSourceMap(
       code: string,
       sourceMapConsumer: SourceMapConsumer,
@@ -354,7 +357,7 @@ declare module 'source-map' {
     walk(fn: (chunk: string, mapping: MappedPosition) => void): void;
     walkSourceContents(fn: (file: string, content: string) => void): void;
     join(sep: string): SourceNode;
-    replaceRight(pattern: string, replacement: string): SourceNode;
+    replaceRight(pattern: RegExp | string, replacement: string): SourceNode;
     toString(): string;
     toStringWithSourceMap(
       startOfSourceMap?: StartOfSourceMap
