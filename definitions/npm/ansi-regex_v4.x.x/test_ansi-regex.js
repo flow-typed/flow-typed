@@ -3,27 +3,27 @@ import { describe, it } from 'flow-typed-test';
 
 describe('ansi-regex', () => {
   it('should be RegExp', () => {
-    ansiRegex(); // $ExpectType RegExp
+    const regexp: RegExp = ansiRegex();
   });
 
   it('should be boolean', () => {
     // From the ansi-regex README.md
-    ansiRegex().test('\u001B[4mcake\u001B[0m'); // $ExpectType boolean
+    const bool: boolean = ansiRegex().test('\u001B[4mcake\u001B[0m');
     // => true
   });
 
   it('should be false boolean', () => {
-    ansiRegex().test('cake'); // $ExpectType boolean
+    const bool: boolean = ansiRegex().test('cake');
     // => false
   });
 
   it('should be false boolean 2', () => {
-    ansiRegex({ onlyFirst: true }).test('cake'); // $ExpectType boolean
+    const bool: boolean = ansiRegex({ onlyFirst: true }).test('cake');
     // => false
   });
 
   it('should be RegExpMatchArray | null', () => {
-    '\u001B[4mcake\u001B[0m'.match(ansiRegex()); // $ExpectType RegExpMatchArray | null
+    const array: ?Array<string> = '\u001B[4mcake\u001B[0m'.match(ansiRegex());
     // => ['\u001B[4m', '\u001B[0m']
   });
 });
