@@ -5,9 +5,9 @@ import type {
 } from 'react-navigation';
 
 import {
-  TabNavigator,
-  StackNavigator,
-  DrawerNavigator,
+  createBottomTabNavigator,
+  createStackNavigator,
+  createDrawerNavigator,
 } from 'react-navigation';
 import React from 'react';
 
@@ -20,7 +20,7 @@ const FunctionalScreenComponent = (
 ) => {
   return "Test";
 };
-TabNavigator({
+createBottomTabNavigator({
   Test1: { screen: FunctionalScreenComponent },
 });
 
@@ -29,21 +29,21 @@ class ClassScreenComponent extends React.Component<*> {
     return "Test";
   }
 }
-StackNavigator({
+createStackNavigator({
   Test1: { screen: ClassScreenComponent },
 });
 
 // $ExpectError numbers can never be components
-StackNavigator({
+createStackNavigator({
   Test1: { screen: 5 },
 });
 
 // $ExpectError you need a screen!
-TabNavigator({
+createBottomTabNavigator({
   Test1: { blah: "test" },
 });
 
-DrawerNavigator({
+createDrawerNavigator({
   Test1: { getScreen: () => FunctionalScreenComponent },
 });
 
@@ -51,7 +51,7 @@ DrawerNavigator({
  * Configs
  */
 
-StackNavigator(
+createStackNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
@@ -61,7 +61,7 @@ StackNavigator(
   },
 );
 
-StackNavigator(
+createStackNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
@@ -72,7 +72,7 @@ StackNavigator(
   },
 );
 
-TabNavigator(
+createBottomTabNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
@@ -82,7 +82,7 @@ TabNavigator(
   },
 );
 
-TabNavigator(
+createBottomTabNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
@@ -91,7 +91,7 @@ TabNavigator(
   },
 );
 
-DrawerNavigator(
+createDrawerNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
@@ -100,7 +100,7 @@ DrawerNavigator(
   },
 );
 
-DrawerNavigator(
+createDrawerNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
@@ -114,7 +114,7 @@ DrawerNavigator(
  * Nav options
  */
 
-StackNavigator({
+createStackNavigator({
   Test1: {
     screen: FunctionalScreenComponent,
     navigationOptions: {
@@ -131,7 +131,7 @@ class ComponentWithNavOptions extends React.Component<*> {
     return "Test";
   }
 }
-StackNavigator({
+createStackNavigator({
   Test1: { screen: ComponentWithNavOptions },
 });
 
@@ -150,10 +150,10 @@ class ComponentWithFunctionalNavOptions extends React.Component<*> {
  * Nested
  */
 
-const nestedNavigator = TabNavigator({
+const nestedNavigator = createBottomTabNavigator({
   Test1: { screen: FunctionalScreenComponent },
 });
-StackNavigator({
+createStackNavigator({
   Test2: { screen: nestedNavigator },
   Test3: { screen: ClassScreenComponent },
 });
