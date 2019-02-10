@@ -151,7 +151,7 @@ it("works with class component with it's own variable Props specified at the end
 });
 
 const HERO_QUERY = gql`
-  query GetCharacter($episode: String!, offset: Int) {
+  query GetCharacter($episode: String!, $offset: Int) {
     hero(episode: $episode, offset: $offset) {
       name
       id
