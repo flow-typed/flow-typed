@@ -79,7 +79,7 @@ declare module "react-redux" {
   // Got error like inexact OwnProps is incompatible with exact object type?
   // Just make the OP parameter for `connect()` an exact object.
   declare type MergeOP<OP, D> = {| ...$Exact<OP>, dispatch: D |};
-  declare type MergeOPSP<OP, SP> = {| ...$Exact<OP>, ...SP |};
+  declare type MergeOPSP<OP, SP, D> = {| ...$Exact<OP>, ...SP, dispatch: D |};
   declare type MergeOPDP<OP, DP> = {| ...$Exact<OP>, ...DP |};
   declare type MergeOPSPDP<OP, SP, DP> = {| ...$Exact<OP>, ...SP, ...DP |};
 
@@ -95,8 +95,8 @@ declare module "react-redux" {
     mapStateToProps: MapStateToProps<S, OP, SP>,
     mapDispatchToProps?: null | void,
     mergeProps?: null | void,
-    options?: ?Options<S, OP, SP, MergeOPSP<OP, SP>>,
-  ): Connector<P, OP, MergeOPSP<OP, SP>>;
+    options?: ?Options<S, OP, SP, MergeOPSP<OP, SP, D>>,
+  ): Connector<P, OP, MergeOPSP<OP, SP, D>>;
 
   // In this case DP is an object of functions which has been bound to dispatch
   // by the given mapDispatchToProps function.

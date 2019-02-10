@@ -154,13 +154,15 @@ function doesNotRequireDefinedComponentToTypeCheck5case() {
 }
 
 function testExactProps() {
+  type Dispatch = () => void;
   type OwnProps = {|
     passthrough: number,
     forMapStateToProps: string,
   |};
   type Props = {|
     ...OwnProps,
-    fromStateToProps: string
+    fromStateToProps: string,
+    dispatch: Dispatch,
   |};
 
   class Com extends React.Component<Props> {
@@ -721,4 +723,24 @@ function checkIfStateTypeIsRespectedAgain() {
   const Connected = connect<Props, {||}, _,_,_,_>(mapStateToProps)(Com);
   <Connected />;
   e.push(Connected);
+}
+
+function testPassingDispatchPropWithoutDispatchFunction() {
+  type OwnProps = {||}
+  type Props = {| ...OwnProps, dispatch: any |};
+  class Com extends React.Component<Props> {
+    render() {
+      return <div />;
+    }
+  }
+
+  type State = {a: number};
+  type InputProps = {};
+  const mapStateToProps = (state: State, props: InputProps) => {
+    return {}
+  };
+
+  const Connected = connect<Props, OwnProps, _,_,_,_>(mapStateToProps)(Com);
+  e.push(Connected);
+  <Connected />;
 }
