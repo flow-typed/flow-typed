@@ -4,7 +4,7 @@ declare module "enzyme" {
     index: number
   ) => boolean;
   declare type NodeOrNodes = React$Node | Array<React$Node>;
-  declare type EnzymeSelector = string | Class<React$Component<*, *>> | {};
+  declare type EnzymeSelector = string | {} | React$ElementType;
 
   // CheerioWrapper is a type alias for an actual cheerio instance
   // TODO: Reference correct type from cheerio's type declarations
