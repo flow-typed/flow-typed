@@ -8,6 +8,8 @@ import {
   createBottomTabNavigator,
   createStackNavigator,
   createDrawerNavigator,
+  StackRouter,
+  TabRouter,
 } from 'react-navigation';
 import React from 'react';
 
@@ -150,10 +152,44 @@ class ComponentWithFunctionalNavOptions extends React.Component<*> {
  * Nested
  */
 
-const nestedNavigator = createBottomTabNavigator({
+const innerRouteConfig = {
   Test1: { screen: FunctionalScreenComponent },
-});
-createStackNavigator({
+};
+const nestedNavigator = createBottomTabNavigator(innerRouteConfig);
+const outerRouteConfig = {
   Test2: { screen: nestedNavigator },
   Test3: { screen: ClassScreenComponent },
-});
+};
+createStackNavigator(outerRouteConfig);
+
+/**
+ * StackRouter
+ */
+
+const stackRouter = StackRouter(outerRouteConfig);
+const stackNavigateAction = {
+  type: "Navigation/NAVIGATE",
+  routeName: "Test3",
+};
+stackRouter.getStateForAction(stackNavigateAction, null);
+
+/**
+ * TabRouter
+ */
+
+const tabRouteConfig = {
+  Test1: { screen: FunctionalScreenComponent },
+};
+const tabRouter = TabRouter(tabRouteConfig);
+const tabNavigateAction = {
+  type: "Navigation/NAVIGATE",
+  routeName: "Test1",
+};
+tabRouter.getStateForAction(tabNavigateAction, null);
+
+const fakeNavigateAction = {
+  fake: "Navigation/NAVIGATE",
+  blah: "Test1",
+};
+// $ExpectError not a valid action!
+tabRouter.getStateForAction(fakeNavigateAction, null);
