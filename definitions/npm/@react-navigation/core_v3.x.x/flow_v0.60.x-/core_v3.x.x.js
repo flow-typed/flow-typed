@@ -85,15 +85,6 @@ declare module '@react-navigation/core' {
     track(tracking: AnimatedTracking): void;
   }
 
-  declare type HeaderForceInset = {
-    horizontal?: string,
-    vertical?: string,
-    left?: string,
-    right?: string,
-    top?: string,
-    bottom?: string,
-  };
-
   /**
    * Next, all the type declarations
    */
@@ -422,7 +413,7 @@ declare module '@react-navigation/core' {
     headerPressColorAndroid?: string,
     headerRight?: React$Node,
     headerStyle?: ViewStyleProp,
-    headerForceInset?: HeaderForceInset,
+    headerForceInset?: _SafeAreaViewInsets,
     headerBackground?: React$Node | React$ElementType,
     gesturesEnabled?: boolean,
     gestureResponseDistance?: { vertical?: number, horizontal?: number },
@@ -778,6 +769,16 @@ declare module '@react-navigation/core' {
     routeConfigs: NavigationRouteConfigMap,
     config?: NavigationTabRouterConfig
   ): NavigationRouter<*, *>;
+
+  declare type _SafeAreaViewForceInsetValue = 'always' | 'never' | number;
+  declare type _SafeAreaViewInsets = $Shape<{|
+    top: _SafeAreaViewForceInsetValue,
+    bottom: _SafeAreaViewForceInsetValue,
+    left: _SafeAreaViewForceInsetValue,
+    right: _SafeAreaViewForceInsetValue,
+    vertical: _SafeAreaViewForceInsetValue,
+    horizontal: _SafeAreaViewForceInsetValue,
+  |}>;
 
   declare export function withNavigation<Props: {}, ComponentType: React$ComponentType<Props>>(
     Component: ComponentType
