@@ -166,7 +166,7 @@ createStackNavigator(outerRouteConfig);
  * StackRouter
  */
 
-const stackRouter = StackRouter(outerRouteConfig);
+const stackRouter = StackRouter(innerRouteConfig);
 const stackNavigateAction = {
   type: "Navigation/NAVIGATE",
   routeName: "Test3",
@@ -177,10 +177,7 @@ stackRouter.getStateForAction(stackNavigateAction, null);
  * TabRouter
  */
 
-const tabRouteConfig = {
-  Test1: { screen: FunctionalScreenComponent },
-};
-const tabRouter = TabRouter(tabRouteConfig);
+const tabRouter = TabRouter(innerRouteConfig);
 const tabNavigateAction = {
   type: "Navigation/NAVIGATE",
   routeName: "Test1",
