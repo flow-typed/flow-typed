@@ -54,6 +54,15 @@ type moment$CalendarFormats = {
 
 type moment$Inclusivity = "()" | "[)" | "()" | "(]" | "[]";
 
+type moment$MomentInput =
+  | moment$Moment
+  | Date
+  | string
+  | number
+  | (number | string)[]
+  | moment$MomentOptions
+  | void;
+
 declare class moment$LocaleData {
   months(moment: moment$Moment): string;
   monthsShort(moment: moment$Moment): string;
@@ -119,19 +128,7 @@ declare class moment$MomentDuration {
 declare class moment$Moment {
   static ISO_8601: string;
   static (string?: ?string): moment$Moment;
-  static (
-    initDate:
-      | moment$MomentOptions
-      | number
-      | Date
-      | Array<number>
-      | moment$Moment
-      | string
-      | null
-      | void
-      | []
-      | {}
-  ): moment$Moment;
+  static (initDate: moment$MomentInput): moment$Moment;
   static (array: []): moment$Moment;
   static (object: {}): moment$Moment;
   static (string: ?string, format: string | Array<string>): moment$Moment;
