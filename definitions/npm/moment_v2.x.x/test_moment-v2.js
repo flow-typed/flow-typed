@@ -294,3 +294,17 @@ moment.defineLocale('fakeLocale', { parentLocale: 'xyz' });
 moment.defineLocale('fakeLocale', 'not an object');
 // $ExpectError
 moment.defineLocale(); // no arguments
+
+describe('now', () => {
+  it('takes no parameter', () => {
+    moment.now()
+    // $ExpectError
+    moment.now('Lorem')
+  });
+
+  it('returns a number', () => {
+    const a: number = moment.now()
+    // $ExpectError
+    const b: string = moment.now()
+  })
+});
