@@ -154,13 +154,15 @@ function doesNotRequireDefinedComponentToTypeCheck5case() {
 }
 
 function testExactProps() {
+  type Dispatch = () => void;
   type OwnProps = {|
     passthrough: number,
     forMapStateToProps: string,
   |};
   type Props = {|
     ...OwnProps,
-    fromStateToProps: string
+    fromStateToProps: string,
+    dispatch: Dispatch,
   |};
 
   class Com extends React.Component<Props> {
@@ -181,7 +183,7 @@ function testExactProps() {
     }
   };
 
-  const Connected = connect<Props, OwnProps, _,_,_,_>(mapStateToProps)(Com);
+  const Connected = connect<Props, OwnProps,_,_,_,Dispatch>(mapStateToProps)(Com);
   e.push(Connected);
   <Connected passthrough={123} forMapStateToProps={'data'} />;
   //$ExpectError extraProp what exact props does not allow
@@ -193,7 +195,7 @@ function testExactProps() {
   //$ExpectError forMapStateToProps missing
   <Connected passthrough={123}/>;
   //$ExpectError takes in only React components
-  const Connected2 = connect<Props, OwnProps, _,_,_,_>(mapStateToProps)('');
+  const Connected2 = connect<Props, OwnProps,_,_,_,Dispatch>(mapStateToProps)('');
   e.push(Connected2);
 }
 
@@ -347,6 +349,26 @@ function testMapDispatchToProps() {
   <Connected passthrough={123} forMapDispatchToProps={'more data'} />;
   //$ExpectError forMapDispatchToProps missing
   <Connected passthrough={123} forMapStateToProps={'data'} />;
+}
+
+function testMapDispatchToPropsDoesNotPassDispatch() {
+  type Dispatch = () => void;
+  type OwnProps = {||};
+  type Props = {| ...OwnProps, fromMapDispatchToProps: string, dispatch: Dispatch |};
+  class Com extends React.Component<Props> {
+    render() {
+      return <div>{this.props.fromMapDispatchToProps}</div>;
+    }
+  }
+
+  const mapStateToProps = (state: *, props: *) => ({})
+  const mapDispatchToProps = (dispatch: *, ownProps: *) => {
+    return {fromMapDispatchToProps: 'yo'}
+  }
+  // $ExpectError dispatch should not be provided in Props when mapDispatchToProps is present
+  const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(mapStateToProps, mapDispatchToProps)(Com);
+  e.push(Connected);
+  <Connected />;
 }
 
 function testMapDispatchToPropsWithoutMapStateToProps() {
@@ -721,4 +743,43 @@ function checkIfStateTypeIsRespectedAgain() {
   const Connected = connect<Props, {||}, _,_,_,_>(mapStateToProps)(Com);
   <Connected />;
   e.push(Connected);
+}
+
+function testPassingDispatchPropWithoutDispatchFunction() {
+  type Dispatch = () => void;
+  type OwnProps = {||}
+  type Props = {| ...OwnProps, dispatch: Dispatch |};
+  class Com extends React.Component<Props> {
+    render() {
+      return <div />;
+    }
+  }
+
+  type State = {a: number};
+  type InputProps = {};
+  const mapStateToProps = (state: State, props: InputProps) => {
+    return {}
+  };
+
+  const Connected = connect<Props, OwnProps,_,_,_,Dispatch>(mapStateToProps)(Com);
+  e.push(Connected);
+  <Connected />;
+}
+
+function testPassingDispatchTypeIsPassedThrough() {
+  type Dispatch = () => void;
+  type OwnProps = {||}
+  type Props = {| ...OwnProps, dispatch: string |};
+  class Com extends React.Component<Props> {
+    render() {
+      return <div />;
+    }
+  }
+
+  const mapStateToProps = (state: *, props: *) => ({});
+
+  // $ExpectError dispatch mismatched from type Dispatch
+  const Connected = connect<Props, OwnProps,_,_,_,Dispatch>(mapStateToProps)(Com);
+  e.push(Connected);
+  <Connected />;
 }

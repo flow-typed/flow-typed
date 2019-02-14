@@ -75,45 +75,6 @@ function doesNotRequireDefinedComponentToTypeCheck5case() {
   connect(mapStateToProps, mapDispatchToProps, mergeProps)(Component);
 }
 
-function testExactProps() {
-  type Props = {|
-    forMapStateToProps: string,
-    passthrough: number,
-    fromStateToProps: string
-  |};
-
-  class Com extends React.Component<Props> {
-    render() {
-      return <div>{this.props.passthrough} {this.props.fromStateToProps}</div>;
-    }
-  }
-
-  type State = {a: number};
-  type InputProps = {|
-    forMapStateToProps: string,
-    passthrough: number,
-  |};
-
-  const mapStateToProps = (state: State, props: InputProps) => {
-    return {
-      fromStateToProps: 'str' + state.a
-    }
-  };
-
-  const Connected = connect(mapStateToProps)(Com);
-  <Connected passthrough={123} forMapStateToProps={'data'} />;
-  //$ExpectError extra prop what exact props does not allow
-  <Connected passthrough={123} forMapStateToProps={321} extraProp={123}/>;
-  //$ExpectError wrong type for forMapStateToProps
-  <Connected passthrough={123} forMapStateToProps={321}/>;
-  //$ExpectError passthrough missing
-  <Connected forMapStateToProps={'data'} />;
-  //$ExpectError forMapStateToProps missing
-  <Connected passthrough={123}/>;
-  //$ExpectError takes in only React components
-  connect(mapStateToProps)('');
-}
-
 function testWithStatelessFunctionalComponent() {
   type Props = {passthrough: number, fromStateToProps: string};
   const Com = (props: Props) => <div>{props.passthrough} {props.fromStateToProps}</div>
