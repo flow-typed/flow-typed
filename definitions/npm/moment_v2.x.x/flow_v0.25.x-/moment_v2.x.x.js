@@ -350,6 +350,7 @@ declare class moment$Moment {
   locale(): string;
   static months(): Array<string>;
   static monthsShort(): Array<string>;
+  static now(): number;
   static weekdays(): Array<string>;
   static weekdaysShort(): Array<string>;
   static weekdaysMin(): Array<string>;
