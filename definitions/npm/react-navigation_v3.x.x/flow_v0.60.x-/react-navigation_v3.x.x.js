@@ -1079,14 +1079,14 @@ declare module 'react-navigation' {
   declare export var Card: React$ComponentType<_CardProps>;
 
   declare type _SafeAreaViewForceInsetValue = 'always' | 'never' | number;
-  declare type _SafeAreaViewInsets = $Shape<{|
+  declare type _SafeAreaViewInsets = $Shape<{
     top: _SafeAreaViewForceInsetValue,
     bottom: _SafeAreaViewForceInsetValue,
     left: _SafeAreaViewForceInsetValue,
     right: _SafeAreaViewForceInsetValue,
     vertical: _SafeAreaViewForceInsetValue,
     horizontal: _SafeAreaViewForceInsetValue,
-  |}>;
+  }>;
   declare type _SafeAreaViewProps = {
     forceInset?: _SafeAreaViewInsets,
     children?: React$Node,
