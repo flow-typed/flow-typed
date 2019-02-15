@@ -1,4 +1,4 @@
-declare module "bunyan" {
+declare module 'bunyan' {
   declare var TRACE: 10;
   declare var DEBUG: 20;
   declare var INFO: 30;
@@ -27,12 +27,12 @@ declare module "bunyan" {
       name: string,
       code: any,
       signal: any,
-      stack: string
+      stack: string,
     },
-    [key: string]: any
+    [key: string]: any,
   };
   declare type Writable = {
-    write(rec: BunyanRecord): void
+    write(rec: BunyanRecord): void,
   };
   declare class Logger extends events$EventEmitter {
     constructor(options: LoggerOptions): any;
@@ -81,7 +81,7 @@ declare module "bunyan" {
         url: string,
         headers: mixed,
         remoteAddress: string,
-        remotePort: number
+        remotePort: number,
       },
       res: (
         res: http$IncomingMessage
@@ -93,8 +93,8 @@ declare module "bunyan" {
         name: string,
         stack: string,
         code: string,
-        signal: string
-      }
+        signal: string,
+      },
     };
   }
   declare interface LoggerOptions {
@@ -105,7 +105,7 @@ declare module "bunyan" {
     src?: boolean;
   }
   declare type Serializers = {
-    [key: string]: (input: any) => mixed
+    [key: string]: (input: any) => mixed,
   };
   declare type Stream = {
     type?: string,
@@ -114,7 +114,7 @@ declare module "bunyan" {
     stream?: stream$Writable | tty$WriteStream | Stream | Writable,
     closeOnExit?: boolean,
     period?: string,
-    count?: number
+    count?: number,
   };
   declare var stdSerializers: Serializers;
   declare function resolveLevel(value: number | string): number;
@@ -143,10 +143,10 @@ declare module "bunyan" {
     info: typeof INFO,
     warn: typeof WARN,
     error: typeof ERROR,
-    fatal: typeof FATAL
+    fatal: typeof FATAL,
   };
   declare var nameFromLevel: {
-    [key: BunyanLogLevels]: string
+    [key: BunyanLogLevels]: string,
   };
   declare var VERSION: string;
   declare var LOG_VERSION: string;
