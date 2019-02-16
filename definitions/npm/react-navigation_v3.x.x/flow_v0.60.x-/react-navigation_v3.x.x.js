@@ -107,15 +107,6 @@ declare module 'react-navigation' {
     track(tracking: AnimatedTracking): void;
   }
 
-  declare type HeaderForceInset = {
-    horizontal?: string,
-    vertical?: string,
-    left?: string,
-    right?: string,
-    top?: string,
-    bottom?: string,
-  };
-
   /**
    * Next, all the type declarations
    */
@@ -444,7 +435,7 @@ declare module 'react-navigation' {
     headerPressColorAndroid?: string,
     headerRight?: React$Node,
     headerStyle?: ViewStyleProp,
-    headerForceInset?: HeaderForceInset,
+    headerForceInset?: _SafeAreaViewInsets,
     headerBackground?: React$Node | React$ElementType,
     gesturesEnabled?: boolean,
     gestureResponseDistance?: { vertical?: number, horizontal?: number },
@@ -737,8 +728,8 @@ declare module 'react-navigation' {
     // The value that represents the progress of the transition when navigation
     // state changes from one to another. Its numeric value will range from 0
     // to 1.
-    //  progress.__getAnimatedValue() < 1 : transtion is happening.
-    //  progress.__getAnimatedValue() == 1 : transtion completes.
+    //  progress.__getAnimatedValue() < 1 : transition is happening.
+    //  progress.__getAnimatedValue() == 1 : transition completes.
     progress: AnimatedValue,
 
     // All the scenes of the transitioner.
@@ -1088,15 +1079,16 @@ declare module 'react-navigation' {
   declare export var Card: React$ComponentType<_CardProps>;
 
   declare type _SafeAreaViewForceInsetValue = 'always' | 'never' | number;
+  declare type _SafeAreaViewInsets = $Shape<{
+    top: _SafeAreaViewForceInsetValue,
+    bottom: _SafeAreaViewForceInsetValue,
+    left: _SafeAreaViewForceInsetValue,
+    right: _SafeAreaViewForceInsetValue,
+    vertical: _SafeAreaViewForceInsetValue,
+    horizontal: _SafeAreaViewForceInsetValue,
+  }>;
   declare type _SafeAreaViewProps = {
-    forceInset?: {
-      top?: _SafeAreaViewForceInsetValue,
-      bottom?: _SafeAreaViewForceInsetValue,
-      left?: _SafeAreaViewForceInsetValue,
-      right?: _SafeAreaViewForceInsetValue,
-      vertical?: _SafeAreaViewForceInsetValue,
-      horizontal?: _SafeAreaViewForceInsetValue,
-    },
+    forceInset?: _SafeAreaViewInsets,
     children?: React$Node,
     style?: AnimatedViewStyleProp,
   };
