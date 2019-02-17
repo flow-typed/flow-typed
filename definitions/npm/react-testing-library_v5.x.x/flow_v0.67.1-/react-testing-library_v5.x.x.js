@@ -98,6 +98,7 @@ declare module 'react-testing-library' {
     container: HTMLDivElement,
     unmount: () => void,
     baseElement: HTMLElement,
+    asFragment: () => DocumentFragment,
     debug: (baseElement?: HTMLElement) => void,
     rerender: (ui: React$Element<*>) => void,
   |} & GetsAndQueries;
