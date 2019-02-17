@@ -1,5 +1,7 @@
 // @flow
 
+import http from 'http';
+import https from 'https';
 import nodeFetch, { type Headers, type Response } from 'node-fetch';
 import type { Readable } from 'stream';
 
@@ -17,12 +19,15 @@ nodeFetch('foo', {
 });
 
 nodeFetch('foo', {
-    body: 'bar'
+    body: 'bar',
+    agent: new http.Agent({}),
 });
 
 nodeFetch('foo', {
     // $ExpectError number is not a valid body type
-    body: 5
+    body: 5,
+    // $ExpectError number is not a valid agent type
+    agent: 5,
 });
 
 // Response tests
