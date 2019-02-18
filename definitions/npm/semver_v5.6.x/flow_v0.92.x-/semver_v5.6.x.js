@@ -139,7 +139,7 @@ declare module "semver" {
     options?: Options
   ): -1 | 0 | 1;
   declare function diff(v1: string | SemVer, v2: string | SemVer): ?Release;
-  declare function intersects(comparator: Comparator: boolean);
+  declare function intersects(comparator: Comparator): boolean;
   declare function sort(
     list: Array<string | SemVer>,
     options?: Options
