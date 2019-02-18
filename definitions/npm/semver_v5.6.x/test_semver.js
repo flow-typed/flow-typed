@@ -45,7 +45,7 @@ describe('semver', () => {
     (semver.patch('1.2.3'): number);
     (semver.patch(new SemVer('1.2.3')): number);
     // According to the docs, this function takes 'loose' instead oy 'options'
-    (semver.intersects('1.2.3', SemVer('2.9.2'), false) : boolean);
+    (semver.intersects('1.2.3', new SemVer('2.9.2'), false) : boolean);
     (semver.intersects(new Range('3.x || 4.x')) : boolean);
     semver.sort(['9.8.7', new SemVer('1.2.3')]).forEach(x => console.log(x));
     semver.rsort(['9.8.7', new SemVer('1.2.3')]).forEach(x => console.log(x));
