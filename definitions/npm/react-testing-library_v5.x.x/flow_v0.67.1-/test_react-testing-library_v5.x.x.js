@@ -72,6 +72,7 @@ describe('render', () => {
     container,
     unmount,
     baseElement,
+    asFragment,
     debug,
     rerender,
     getByAltText,
@@ -133,6 +134,12 @@ describe('render', () => {
     const a: number = baseElement;
     const b: HTMLElement = baseElement;
   });
+
+  it('asFragment should return a document fragment', () => {
+    // $ExpectError
+    const a: HTMLElement = asFragment();
+    const b: DocumentFragment = asFragment();
+  })
 
   it('debug maybe has 1 argument an html element', () => {
     // $ExpectError
