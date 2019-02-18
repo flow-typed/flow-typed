@@ -44,7 +44,8 @@ describe('semver', () => {
     (semver.minor(new SemVer('1.2.3')): number);
     (semver.patch('1.2.3'): number);
     (semver.patch(new SemVer('1.2.3')): number);
-    (semver.intersects('1.2.3', Semver('2.9.2'), optionTwo) : boolean);
+    // According to the docs, this function takes 'loose' instead oy 'options'
+    (semver.intersects('1.2.3', SemVer('2.9.2'), false) : boolean);
     (semver.intersects(new Range('3.x || 4.x')) : boolean);
     semver.sort(['9.8.7', new SemVer('1.2.3')]).forEach(x => console.log(x));
     semver.rsort(['9.8.7', new SemVer('1.2.3')]).forEach(x => console.log(x));
@@ -70,7 +71,7 @@ describe('semver', () => {
     semver.toComparators('3.x || 4.x');
     semver.toComparators(new Range('3.x || 4.x'), optionTwo);
 
-    (semver.coerce('4.6.3.9.2-alpha2'): SemVer);
+    (semver.coerce('4.6.3.9.2-alpha2'): ?SemVer);
 
     // $ExpectError
     semver.cmp('1.2.3', '> ', '1.2.4');
