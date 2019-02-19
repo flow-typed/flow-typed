@@ -3,12 +3,11 @@
 declare module 'styled-components' {
 
   declare export type Interpolation =
-                                    | (<P: {}>(executionContext: P) => string)
+                                    | (<P: { theme: Theme }>(executionContext: P) => Interpolation)
                                     | CSSRules
                                     | KeyFrames
                                     | string
                                     | number
-
 
   declare export type CSSRules = Interpolation[]
 
@@ -67,6 +66,14 @@ declare module 'styled-components' {
     toReactElements() : React$ElementType[];
   }
 
+  declare export class ServerStyleSheet {
+    instance: StyleSheet;
+    collectStyles: (children: any) => React$Node;
+    getStyleTags: () => string;
+    getStyleElement: () => React$Node;
+    interleaveWithNodeStream: (readableStream: stream$Readable) => stream$Readable;
+  }
+
   declare export class KeyFrames {
     id : string;
     name : string;
@@ -88,7 +95,7 @@ declare module 'styled-components' {
   declare export var ThemeProvider : React$ComponentType<{children?: ?React$Node, theme : Theme | (Theme) => Theme}>
 
   // This is a bit hard to read. Not sure how to make it more readable. I think adding line-breaks makes it worse.
-  declare type InjectedProps = { theme : Theme | void }
+  declare export type InjectedProps = { theme : Theme }
   declare  export function withTheme<Props : {}, Component: React$ComponentType<Props>>(WrappedComponent: Component) : React$ComponentType<$Diff<React$ElementConfig<$Supertype<Component>>, InjectedProps>>;
 
 
