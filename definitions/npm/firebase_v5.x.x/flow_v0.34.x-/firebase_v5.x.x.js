@@ -567,9 +567,12 @@ declare class $npm$firebase$firestore$FieldPath {
   documentId(): typeof $npm$firebase$firestore$FieldPath;
 }
 
-declare interface $npm$firebase$firestore$FieldValue {
-  delete(): $npm$firebase$firestore$FieldValue;
-  serverTimestamp(): $npm$firebase$firestore$FieldValue;
+declare class $npm$firebase$firestore$FieldValue {
+  static delete(): $npm$firebase$firestore$FieldValue;
+  static serverTimestamp(): $npm$firebase$firestore$FieldValue;
+  static arrayUnion(...elements: any[]): $npm$firebase$firestore$FieldValue;
+  static arrayRemove(...elements: any[]): $npm$firebase$firestore$FieldValue;
+  isEqual(other: $npm$firebase$firestore$FieldPath): boolean;
 }
 
 declare type $npm$firebase$firestore$FirestoreError =
