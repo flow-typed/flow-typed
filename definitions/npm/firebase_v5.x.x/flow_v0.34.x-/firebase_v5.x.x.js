@@ -871,7 +871,7 @@ declare module '@firebase/firestore' {
     DocumentReference: typeof $npm$firebase$firestore$DocumentReference,
     DocumentSnapshot: typeof $npm$firebase$firestore$DocumentSnapshot,
     FieldPath: typeof $npm$firebase$firestore$FieldPath,
-    FieldValue: $npm$firebase$firestore$FieldValue,
+    FieldValue: typeof $npm$firebase$firestore$FieldValue,
     Firestore: typeof $npm$firebase$firestore$Firestore,
     FirestoreError: $npm$firebase$firestore$FirestoreError,
     GeoPoint: typeof $npm$firebase$firestore$GeoPoint,
