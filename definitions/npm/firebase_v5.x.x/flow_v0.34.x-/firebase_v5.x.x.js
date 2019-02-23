@@ -533,6 +533,9 @@ declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$
 
 declare interface $npm$firebase$firestore$DocumentChange {
   type: 'added' | 'removed' | 'modified';
+  doc: $npm$firebase$firestore$DocumentSnapshot;
+  oldIndex: number;
+  newIndex: number;
 }
 
 declare class $npm$firebase$firestore$DocumentReference {
