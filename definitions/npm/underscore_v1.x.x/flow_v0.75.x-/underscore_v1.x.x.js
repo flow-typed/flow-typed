@@ -673,7 +673,7 @@ declare module "underscore" {
     isEqual(other: Array<T>): boolean;
   }
 
-  // Have to use a type with $call instead of function type because otherwise this will cause us to lose type
+  // Have to use a type with [[call]] instead of function type because otherwise this will cause us to lose type
   // information. see: https://github.com/facebook/flow/issues/3781
   declare type WrappedExports = {
     [[call]]:
