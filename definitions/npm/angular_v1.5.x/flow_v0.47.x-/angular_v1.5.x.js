@@ -100,12 +100,12 @@ declare module angular {
 
   declare type FilterDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<*>) => ((...args: Array<*>) => *)>
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => ((*) => *)>
   ) => AngularModule;
 
   declare type ServiceDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<*>) => ((...args: Array<*>) => *) | {}>
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => ((*) => *) | {}>
   ) => AngularModule;
 
   declare type RunDeclaration = (
@@ -185,7 +185,7 @@ declare module angular {
   //****************************************************************************
 
   declare type AngularMock = {
-    inject: (...a: Array<*>) => ((...args: Array<*>) => *),
+    inject: (...a: Array<*>) => ((*) => *),
     module: (...a: Array<string | ((...args: Array<*>) => *) | {}>) => () => void
   };
   declare var mock: AngularMock;
@@ -284,7 +284,7 @@ declare module angular {
   |} & T;
 
   declare type $Timeout = (
-    fn?: (...args: Array<*>) => *,
+    fn?: (*) => *,
     delay?: number,
     invokeApply?: boolean,
     additionalParams?: *
@@ -299,7 +299,7 @@ declare module angular {
   |};
 
   declare type $Interval = (
-    fn: (...args: Array<*>) => *,
+    fn: (*) => *,
     delay: number,
     count?: number,
     invokeApply?: boolean,
