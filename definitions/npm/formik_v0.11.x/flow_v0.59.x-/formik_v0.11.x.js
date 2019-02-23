@@ -277,7 +277,7 @@ declare module "formik" {
   declare export function withFormik<
     Props,
     Values,
-  >(WithFormikConfig<React$ComponentType<Props>, Values>): (
+  >(WithFormikConfig<Props, Values>): (
     Component: React$ComponentType<Props>
   ) => React$ComponentType<$Diff<Props, $ObjMap<FormikProps<Values>, TypeOrVoid>>>;
 }

@@ -95,6 +95,15 @@ describe("public class methods", () => {
   describe("must call presentFullscreenPlayer", () => {
     video.presentFullscreenPlayer();
   });
+
+  describe("setNativeProps", () => {
+    it("must call with valid props", () => {
+      video.setNativeProps({ paused: true });
+
+      // $ExpectError
+      video.setNativeProps({ foo: 'bar' });
+    });
+  });
 });
 
 describe("props", () => {

@@ -134,6 +134,10 @@ const str: string = "hello world";
 
   const mapxs: Array<number> = _.map(x => x + 1, ns);
 
+  const someObj: { a: string, b: number } = { a: 'a', b: 2 }
+  const someMap: { [string]: { a: string, b: number } } = { so: someObj }
+  const mapObj: { [string]: string } = _.map((x: { a: string, b: number }): string => x.a)(someMap)
+
   const functor = {
     x: 1,
     map(f) {

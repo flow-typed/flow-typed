@@ -97,7 +97,7 @@ declare module "react-native-video" {
     +metadata: $ReadOnlyArray<TimedMetadata>
   }>;
 
-  declare export type VideoProps = $ReadOnly<{
+  declare export type VideoProps = {
     source: number | {| uri: string |},
     // https://github.com/react-native-community/react-native-video/blob/master/VideoResizeMode.js#L4-L6
     resizeMode?: ?("contain" | "cover" | "stretch"),
@@ -149,12 +149,13 @@ declare module "react-native-video" {
     translateX?: ?number,
     translateY?: ?number,
     rotation?: ?number
-  }>;
+  };
 
   declare export default class Video extends React$Component<VideoProps> {
     dismissFullscreenPlayer(): void;
     presentFullscreenPlayer(): void;
     // Tolerance is the max distance in milliseconds from the seconds position that's allowed. (tolerance supported on iOS)
     seek(seconds: number, toleranceIOS?: number): void;
+    setNativeProps(params: $Shape<VideoProps>): void;
   }
 }

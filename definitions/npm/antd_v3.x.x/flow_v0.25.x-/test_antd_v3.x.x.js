@@ -21,6 +21,7 @@ import {
   Menu,
   message,
   Modal,
+  Pagination,
   Popconfirm,
   Radio,
   Row,
@@ -142,6 +143,12 @@ describe("Cascader", () => {
 describe("Checkbox", () => {
   it("is a react component", () => {
     const checkbox = <Checkbox />;
+  });
+});
+
+describe("Checkbox.Group", () => {
+  it("is a react component", () => {
+    const group = <Checkbox.Group />;
   });
 });
 
@@ -326,6 +333,12 @@ describe("Modal", () => {
       onOk: () => 42
     });
     ref.destroy();
+  });
+});
+
+describe("Pagination", () => {
+  it("is a react component", () => {
+    const pagination = <Pagination />;
   });
 });
 

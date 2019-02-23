@@ -24,6 +24,9 @@ let testSelector: JQuery = $('div');
 let testCoordinates: JQueryCoordinates;
 let testEventObject: JQueryEventObject;
 let testAnimationOptions: JQueryAnimationOptions;
+let testDeferred = new $.Deferred(function (promise) {
+  promise.resolve();
+});
 let testCallbackEventObject = function(eventObject: JQueryEventObject) {
   return false;
 };
@@ -430,7 +433,8 @@ testSelector = $('div').toggleClass(function() {
   return $(this).parent().is('.bar') ? 'happy' : '';
 });
 
-//val(_: void): any;
+//val(_: void): string | string[] | number;
+// $ExpectError
 testString = testSelector.val();
 
 //val(value: string | string[] | number): JQuery;
@@ -1274,3 +1278,34 @@ testSelector = $('div').queue('queue', [() => false]);
 
 //queue(queueName: string, callback: Function): JQuery;
 testSelector = $('div').queue('queue', () => false);
+
+
+/********************************************************************************
+ * Memebers of Deferred instances and promises
+ */
+
+testDeferred
+  .then(function ():void {
+
+  })
+  .then(function ():void {
+
+  }, function () {
+
+  })
+  .catch(function () {
+
+  });
+
+testDeferred.promise
+  .then(function ():void {
+
+  })
+  .then(function ():void {
+
+  }, function () {
+
+  })
+  .catch(function () {
+
+  });

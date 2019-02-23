@@ -95,5 +95,5 @@ declare module "pino" {
     stream: stream$Writable | stream$Duplex | stream$Transform
   ): Logger;
 
-  declare module.exports: P;
+  declare module.exports: typeof P;
 }

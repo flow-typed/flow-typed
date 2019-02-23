@@ -3272,6 +3272,9 @@ declare module "sequelize" {
     static findByPrimary<TCustomAttributes>(
       identifier?: number | string,
       options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?this>,
+    static findByPk<TCustomAttributes>(
+      identifier?: number | string,
+      options?: FindOptions<TAttributes & TCustomAttributes>): Promise<?this>,
 
     /**
      * Search for a single instance. This applies LIMIT 1, so the listener will always be called with a single
@@ -7206,6 +7209,11 @@ declare module "sequelize" {
      * Rollback (abort) the transaction
      */
     rollback(): Promise<void>,
+
+    /**
+     * A hook that is run after a transaction is committed
+     */
+    afterCommit(hook: (transaction: Transaction) => Promise<void>): void,
 
     /**
      * Isolations levels can be set per-transaction by passing `options.isolationLevel` to

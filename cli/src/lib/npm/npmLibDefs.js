@@ -73,7 +73,21 @@ async function extractLibDefsFromNpmPkgDir(
     await _npmExists(fullPkgName)
       .then()
       .catch(error => {
-        // Only fail spen on 404, not on timeout
+        if (error.statusCode === 404) {
+          // Some times NPM returns 404 even though the package exists.
+          // Try to avoid false negatives by retrying
+          return new Promise((resolve, reject) =>
+            setTimeout(() => {
+              _npmExists(fullPkgName)
+                .then(resolve)
+                .catch(reject);
+            }, 1000),
+          );
+        }
+      })
+      .then()
+      .catch(error => {
+        // Only fail on 404, not on timeout
         if (error.statusCode === 404) {
           throw new ValidationError(`Package does not exist on npm!`);
         }

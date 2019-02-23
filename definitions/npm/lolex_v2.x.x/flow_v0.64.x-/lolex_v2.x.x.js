@@ -12,9 +12,10 @@ declare module 'lolex' {
   declare type lolex = {
     createClock(now?: number, loopLimit?: number): Clock,
     install(config?: installConfig): Clock,
+    timers: Object,
     withGlobal(global: Object): lolex,
   };
-  declare class Clock {
+  declare type Clock = {
     setTimeout: typeof setTimeout;
     clearTimeout: typeof clearTimeout;
     setInterval: typeof setInterval;
@@ -25,7 +26,8 @@ declare module 'lolex' {
     cancelAnimationFrame: typeof cancelAnimationFrame;
     hrtime: typeof process.hrtime;
     nextTick: typeof process.nextTick;
-    performace: {
+    now: number;
+    performance?: {
       now: typeof performance.now,
     };
     tick(time: number | string): void;
@@ -35,8 +37,8 @@ declare module 'lolex' {
     runMicrotasks(): void;
     runToFrame(): void;
     runToLast(): void;
-    setSystemTime(now?: Date): void;
-    uninstall(): void;
+    setSystemTime(now?: number | Date): void;
+    uninstall(): Object[];
     Date: typeof Date;
     Performance: typeof Performance;
   }

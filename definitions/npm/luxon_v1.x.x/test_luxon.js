@@ -243,6 +243,35 @@ DateTime.fromMillis(123412323, { outputCalendar: 2 });
 // $ExpectError
 DateTime.fromMillis(123412323, { numberingSystem: 2 });
 
+var date: DateTime = DateTime.fromSeconds(123412323);
+DateTime.fromSeconds(123412323, {});
+DateTime.fromSeconds(123412323, { zone: "America/Chicago" });
+DateTime.fromSeconds(123412323, { zone: new CustomZone() });
+DateTime.fromSeconds(123412323, { locale: "en-US" });
+DateTime.fromSeconds(123412323, {
+  zone: "America/Chicago",
+  setZone: true,
+  locale: "en-US",
+  outputCalendar: "gregory",
+  numberingSystem: "buddhist"
+});
+// $ExpectError
+DateTime.fromSeconds();
+// $ExpectError
+DateTime.fromSeconds("1234234123");
+// $ExpectError
+DateTime.fromSeconds(123412323, { foo: "bar" });
+// $ExpectError
+DateTime.fromSeconds(123412323, { zone: 2 });
+// $ExpectError
+DateTime.fromSeconds(123412323, { locale: 2 });
+// $ExpectError
+DateTime.fromSeconds(123412323, { setZone: "yes" });
+// $ExpectError
+DateTime.fromSeconds(123412323, { outputCalendar: 2 });
+// $ExpectError
+DateTime.fromSeconds(123412323, { numberingSystem: 2 });
+
 var date: DateTime = DateTime.fromRFC2822("12/15/2017, 12:47:25 PM");
 DateTime.fromRFC2822("12/15/2017, 12:47:25 PM", {});
 DateTime.fromRFC2822("12/15/2017, 12:47:25 PM", { zone: "America/Chicago" });
@@ -490,6 +519,8 @@ if (date.equals(new Date())) {
 (date.setLocale("de-DE"): DateTime);
 
 (date.setZone("America/Detroit"): DateTime);
+(date.setZone("America/Detroit", {keepCalendarTime: true}): DateTime); // Support deprecated name for keepLocalTime
+(date.setZone("America/Detroit", {keepLocalTime: true}): DateTime);
 (date.setZone(new CustomZone()): DateTime);
 
 (date.toBSON(): Date);
@@ -580,7 +611,8 @@ date.toObject({ includeConfig: false }).numberingSystem;
 
 (date.toUTC(): DateTime);
 (date.toUTC(32): DateTime);
-(date.toUTC(32, { keepCalendarTime: true }): DateTime);
+(date.toUTC(32, { keepCalendarTime: true }): DateTime); // Support deprecated name for keepLocalTime
+(date.toUTC(32, { keepLocalTime: true }): DateTime);
 
 (date.until(DateTime.utc()): Duration);
 

@@ -31,7 +31,11 @@ declare module "antd" {
 
   declare export class Card extends React$Component<{}> {}
 
-  declare export class Checkbox extends React$Component<{}> {}
+  declare export class Checkbox extends React$Component<{}> {
+    static Group: typeof CheckboxGroup;
+  }
+
+  declare class CheckboxGroup extends React$Component<{}> {}
 
   declare export class Divider extends React$Component<{}> {}
 
@@ -120,6 +124,8 @@ declare module "antd" {
   declare export class DatePicker extends React$Component<{}> {}
 
   declare export class Dropdown extends React$Component<{}> {}
+
+  declare export class Drawer extends React$Component<{}> {}
 
   declare type ValidationRule = {
     enum?: string | string[],
@@ -265,7 +271,9 @@ declare module "antd" {
 
   declare export type ListItemProps = {};
 
-  declare export class ListItem extends React$Component<ListItemProps> {}
+  declare export class ListItem extends React$Component<ListItemProps> {
+    static Meta: typeof Meta;
+  }
 
   declare export class List extends React$Component<{}> {
     static Item: typeof ListItem;
@@ -313,7 +321,33 @@ declare module "antd" {
     static confirm: typeof modalFn;
   }
 
+  declare export type PaginationProps = {
+    current?: number,
+    defaultCurrent?: number,
+    defaultPageSize?: number,
+    hideOnSinglePage?: boolean,
+    itemRender?: (
+      page: number, 
+      type: "page" | "prev" | "next", 
+      originalElement: React$Node
+    ) => React$Node,
+    pageSize?: number,
+    pageSizeOptions?: string[],
+    showQuickJumper?: boolean,
+    showSizeChanger?: boolean,
+    showTotal?: (total: number, range: number[]) => React$Node,
+    simple?: boolean,
+    size?: string,
+    total?: number,
+    onChange?: (page: number, pageSize: number) => void,
+    onShowSizeChange?: (current: number, size: number) => void
+  };
+
+  declare export class Pagination extends React$Component<PaginationProps> {}
+
   declare export class Popconfirm extends React$Component<{}> {}
+
+  declare export class Progress extends React$Component<{}> {}
 
   declare export class Radio extends React$Component<{}> {
     static Group: typeof RadioGroup;
@@ -392,7 +426,7 @@ declare module "antd" {
   declare export class Tag extends React$Component<{}> {}
 
   declare export type TooltipProps = {
-    title: string
+    title: string | React$Node | () => React$Node
   };
 
   declare export class Tooltip extends React$Component<TooltipProps> {}
@@ -402,4 +436,10 @@ declare module "antd" {
   }
 
   declare export class TreeSelectTreeNode extends React$Component<{}> {}
+
+  declare export class Upload extends React$Component<{}> {
+    static Dragger: typeof UploadDragger;
+  }
+
+  declare export class UploadDragger extends React$Component<{}> {}
 }

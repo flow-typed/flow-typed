@@ -63,7 +63,7 @@ declare class BeeQueue$Queue extends events$EventEmitter {
   process(handler: BeeQueue$Handler): void,
   process(concurrency: number, handler: BeeQueue$Handler): void,
 	ready(): Promise<*>,
-	ready(cb: function): void,
+	ready(cb: Function): void,
   removeJob(jobId: number): Promise<*>,
   removeJob(jobId: number, callback: (err: ?Error) => void): void,
   settings: {}

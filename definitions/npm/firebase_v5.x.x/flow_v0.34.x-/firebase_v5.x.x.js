@@ -343,7 +343,7 @@ declare class $npm$firebase$database$DataSnapshot {
   child(path?: string): $npm$firebase$database$DataSnapshot;
   exists(): boolean;
   exportVal(): $npm$firebase$database$Value;
-  forEach(action: ($npm$firebase$database$DataSnapshot) => boolean): boolean;
+  forEach(action: ($npm$firebase$database$DataSnapshot) => ?boolean): boolean;
   getPriority(): $npm$firebase$database$Priority;
   hasChild(path: string): boolean;
   hasChildren(): boolean;
@@ -474,7 +474,7 @@ declare class $npm$firebase$firestore$Firestore {
   collection(collectionPath: string): $npm$firebase$firestore$CollectionReference;
   doc(documentPath: string): $npm$firebase$firestore$DocumentReference;
   enablePersistence(): Promise<void>;
-  runTransaction(updateFunction: (transaction: $npm$firebase$firestore$Transaction) => Promise<any>): Promise<mixed>;
+  runTransaction(updateFunction: (transaction: $npm$firebase$firestore$Transaction) => Promise<any>): Promise<any>;
   setLogLevel(logLevel: 'debug' | 'error' | 'silent'): void;
   settings(settings: $npm$firebase$firestore$Settings): void;
   getAll(
@@ -520,26 +520,29 @@ declare class $npm$firebase$firestore$Query {
   ): $npm$firebase$firestore$Query;
   startAfter(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
   startAt(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
-  where(fieldPath: string, opStr: '<' | '<=' | '==' | '>' | '>=', value: any): $npm$firebase$firestore$Query;
+  where(fieldPath: string, opStr: '<' | '<=' | '==' | 'array-contains' | '>' | '>=', value: any): $npm$firebase$firestore$Query;
 }
 
 declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$firestore$Query {
   constructor(): $npm$firebase$firestore$CollectionReference;
   id: string;
   parent: $npm$firebase$firestore$DocumentReference | null;
-  add(data: Object): Promise<mixed>;
+  add(data: Object): Promise<$npm$firebase$firestore$DocumentReference>;
   doc(documentPath?: string): $npm$firebase$firestore$DocumentReference;
 }
 
 declare interface $npm$firebase$firestore$DocumentChange {
   type: 'added' | 'removed' | 'modified';
+  doc: $npm$firebase$firestore$DocumentSnapshot;
+  oldIndex: number;
+  newIndex: number;
 }
 
 declare class $npm$firebase$firestore$DocumentReference {
   firestore: $npm$firebase$firestore$Firestore;
   id: string;
   parent: typeof $npm$firebase$firestore$CollectionReference;
-  collection(collectionPath: string): typeof $npm$firebase$firestore$CollectionReference;
+  collection(collectionPath: string): $npm$firebase$firestore$CollectionReference;
   delete(): Promise<void>;
   get(): Promise<$npm$firebase$firestore$DocumentSnapshot>;
   onSnapshot(
@@ -549,7 +552,7 @@ declare class $npm$firebase$firestore$DocumentReference {
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
   ): Function;
-  set(data: Object, options?: { merge: boolean } | null): Promise<void>;
+  set(data: Object, options?: {| merge?: boolean, mergeFields?: string[] |} | null): Promise<void>;
   update(...args: Array<any>): Promise<void>;
 }
 
@@ -567,9 +570,12 @@ declare class $npm$firebase$firestore$FieldPath {
   documentId(): typeof $npm$firebase$firestore$FieldPath;
 }
 
-declare interface $npm$firebase$firestore$FieldValue {
-  delete(): $npm$firebase$firestore$FieldValue;
-  serverTimestamp(): $npm$firebase$firestore$FieldValue;
+declare class $npm$firebase$firestore$FieldValue {
+  static delete(): $npm$firebase$firestore$FieldValue;
+  static serverTimestamp(): $npm$firebase$firestore$FieldValue;
+  static arrayUnion(...elements: any[]): $npm$firebase$firestore$FieldValue;
+  static arrayRemove(...elements: any[]): $npm$firebase$firestore$FieldValue;
+  isEqual(other: $npm$firebase$firestore$FieldPath): boolean;
 }
 
 declare type $npm$firebase$firestore$FirestoreError =
@@ -638,7 +644,7 @@ declare interface $npm$firebase$firestore$WriteBatch {
 /** **** messaging ******/
 declare class $npm$firebase$messaging$Messaging {
   deleteToken(token: string): Promise<any>;
-  getToken(): Promise<string>;
+  getToken(): Promise<?string>;
   onMessage(nextOrObserver: ({}) => void | {}): () => void;
   onTokenRefresh(nextOrObserver: ({}) => void | {}): () => void;
   requestPermission(): Promise<any>;
@@ -868,7 +874,7 @@ declare module '@firebase/firestore' {
     DocumentReference: typeof $npm$firebase$firestore$DocumentReference,
     DocumentSnapshot: typeof $npm$firebase$firestore$DocumentSnapshot,
     FieldPath: typeof $npm$firebase$firestore$FieldPath,
-    FieldValue: $npm$firebase$firestore$FieldValue,
+    FieldValue: typeof $npm$firebase$firestore$FieldValue,
     Firestore: typeof $npm$firebase$firestore$Firestore,
     FirestoreError: $npm$firebase$firestore$FirestoreError,
     GeoPoint: typeof $npm$firebase$firestore$GeoPoint,

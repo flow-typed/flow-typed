@@ -1,14 +1,14 @@
 // @flow
 
-import markedMan from 'marked-man'
+import markedMan from "marked-man";
 
 markedMan.setOptions({
-  format: 'html',
-  name: '',
-  date: new Date,
-  section: '',
-  version: '',
-  manual: '',
+  format: "html",
+  name: "",
+  date: new Date(),
+  section: "",
+  version: "",
+  manual: "",
   gfm: true,
   breaks: true,
   sanitize: true,
@@ -16,24 +16,23 @@ markedMan.setOptions({
 });
 
 // $ExpectError
-markedMan.setOptions([ 'yoloism', true ])
+markedMan.setOptions(["yoloism", true]);
 
-markedMan('', (err, content) => {
+markedMan("", (err, content) => {
   if (err) throw err;
 });
 
 // $ExpectError
-markedMan(24, function (err, content) {
+markedMan(24, function(err, content) {
   if (err) throw err;
   console.log(content);
 });
 
-const x: string = markedMan('');
+const x: string = markedMan("");
 // $ExpectError
-markedMan('', { tables: false })
+markedMan("", { tables: false });
 
 // $ExpectError
-markedMan('up', 'top')
+markedMan("up", "top");
 // $ExpectError
 const y: string = markedMan(23);
-

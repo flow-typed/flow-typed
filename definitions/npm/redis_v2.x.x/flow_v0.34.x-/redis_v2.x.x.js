@@ -234,6 +234,18 @@ declare module "redis" {
       decrement: number,
       callback: (error: ?Error, result: ?number) => void
     ) => void;
+    hincrby: (
+      key: string,
+      field: string,
+      increment: number,
+      callback: (error: ?Error, result: ?number) => void
+    ) => void;
+    hincrbyfloat: (
+      key: string,
+      field: string,
+      increment: number,
+      callback: (error: ?Error, result: ?string) => void
+    ) => void;
   }
 
   declare class RedisClientPromisified extends RedisClient {

@@ -43,7 +43,7 @@ declare module 'metalsmith' {
   declare type IgnoreFunc = (path: string, lstat: Stats) => boolean;
 
   declare class Metalsmith {
-    static [[call]](directory: string): Metalsmith;
+    static (directory: string): Metalsmith;
 
     constructor(directory: string): this;
 
