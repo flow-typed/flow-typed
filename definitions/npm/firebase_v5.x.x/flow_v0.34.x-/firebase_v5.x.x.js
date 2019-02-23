@@ -533,6 +533,9 @@ declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$
 
 declare interface $npm$firebase$firestore$DocumentChange {
   type: 'added' | 'removed' | 'modified';
+  doc: $npm$firebase$firestore$DocumentSnapshot;
+  oldIndex: number;
+  newIndex: number;
 }
 
 declare class $npm$firebase$firestore$DocumentReference {
@@ -567,9 +570,12 @@ declare class $npm$firebase$firestore$FieldPath {
   documentId(): typeof $npm$firebase$firestore$FieldPath;
 }
 
-declare interface $npm$firebase$firestore$FieldValue {
-  delete(): $npm$firebase$firestore$FieldValue;
-  serverTimestamp(): $npm$firebase$firestore$FieldValue;
+declare class $npm$firebase$firestore$FieldValue {
+  static delete(): $npm$firebase$firestore$FieldValue;
+  static serverTimestamp(): $npm$firebase$firestore$FieldValue;
+  static arrayUnion(...elements: any[]): $npm$firebase$firestore$FieldValue;
+  static arrayRemove(...elements: any[]): $npm$firebase$firestore$FieldValue;
+  isEqual(other: $npm$firebase$firestore$FieldPath): boolean;
 }
 
 declare type $npm$firebase$firestore$FirestoreError =
@@ -868,7 +874,7 @@ declare module '@firebase/firestore' {
     DocumentReference: typeof $npm$firebase$firestore$DocumentReference,
     DocumentSnapshot: typeof $npm$firebase$firestore$DocumentSnapshot,
     FieldPath: typeof $npm$firebase$firestore$FieldPath,
-    FieldValue: $npm$firebase$firestore$FieldValue,
+    FieldValue: typeof $npm$firebase$firestore$FieldValue,
     Firestore: typeof $npm$firebase$firestore$Firestore,
     FirestoreError: $npm$firebase$firestore$FirestoreError,
     GeoPoint: typeof $npm$firebase$firestore$GeoPoint,

@@ -301,7 +301,7 @@ firebase
 firebase
   .firestore()
   .getAll(
-    firebase.firestore().doc('col/doc1'), 
+    firebase.firestore().doc('col/doc1'),
     firebase.firestore().doc('col/doc2'));
 
 // #31
@@ -352,3 +352,17 @@ firebase
   .then(object => {
     const foo = object.foo
   })
+
+// #37
+firebase
+  .firestore()
+  .collection('/foo')
+  .doc('bar')
+  .update({ regions: firebase.firestore.FieldValue.arrayUnion("east_coast") });
+
+// #38
+firebase
+  .firestore()
+  .collection('/foo')
+  .doc('bar')
+  .update({ regions: firebase.firestore.FieldValue.arrayRemove("east_coast") });
