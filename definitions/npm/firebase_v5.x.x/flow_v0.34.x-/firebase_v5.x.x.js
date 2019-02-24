@@ -563,7 +563,7 @@ declare class $npm$firebase$firestore$DocumentReference {
 }
 
 declare class $npm$firebase$firestore$DocumentSnapshot {
-  data(): Object | void;
+  data(): {| +[string]: any |};
   get(fieldpath: typeof $npm$firebase$firestore$FieldPath): any;
   isEqual(other: $npm$firebase$firestore$DocumentSnapshot): boolean;
   exists: boolean;
