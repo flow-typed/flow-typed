@@ -407,7 +407,6 @@ firebase
   .firestore()
   .collection('listened-collection')
   .onSnapshot((snapshot) => {
-    // te
     snapshot.docChanges().forEach(c => {
       // test the newly added typedef for doc change
       (c.type: string);

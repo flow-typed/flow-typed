@@ -530,7 +530,7 @@ declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$
   constructor(): $npm$firebase$firestore$CollectionReference;
   id: string;
   parent: $npm$firebase$firestore$DocumentReference | null;
-  add(data: Object): Promise<$npm$firebase$firestore$DocumentReference>;
+  add(data: { +[string]: mixed }): Promise<$npm$firebase$firestore$DocumentReference>;
   doc(documentPath?: string): $npm$firebase$firestore$DocumentReference;
 }
 
@@ -558,7 +558,7 @@ declare class $npm$firebase$firestore$DocumentReference {
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
   ): () => void;
-  set(data: Object, options?: {| merge?: boolean, mergeFields?: string[] |} | null): Promise<void>;
+  set(data: { +[string]: mixed }, options?: {| merge?: boolean, mergeFields?: string[] |} | null): Promise<void>;
   update(...args: Array<any>): Promise<void>;
 }
 
@@ -643,7 +643,7 @@ declare interface $npm$firebase$firestore$Transaction {
   get(documentRef: $npm$firebase$firestore$DocumentReference): Promise<$npm$firebase$firestore$DocumentSnapshot>;
   set(
     documentRef: $npm$firebase$firestore$DocumentReference,
-    data: Object,
+    data: { +[string]: mixed },
     options?: { merge: boolean }
   ): $npm$firebase$firestore$Transaction;
   update(documentRef: $npm$firebase$firestore$DocumentReference, ...args: Array<any>): $npm$firebase$firestore$Transaction;
@@ -654,7 +654,7 @@ declare interface $npm$firebase$firestore$WriteBatch {
   delete(documentRef: $npm$firebase$firestore$DocumentReference): $npm$firebase$firestore$WriteBatch;
   set(
     documentRef: $npm$firebase$firestore$DocumentReference,
-    data: Object,
+    data: { +[string]: mixed },
     options?: { merge: boolean }
   ): $npm$firebase$firestore$WriteBatch;
   update(documentRef: $npm$firebase$firestore$DocumentReference, ...args: Array<any>): $npm$firebase$firestore$WriteBatch;
