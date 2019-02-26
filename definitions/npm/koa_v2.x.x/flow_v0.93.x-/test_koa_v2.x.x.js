@@ -86,7 +86,7 @@ function test_response() {
   // $ExpectError
   const _request: number = response.request;
 
-  const body: string|Buffer|stream$Stream|Object|null|Array<mixed> = response.body;
+  const body: $PropertyType<Response, 'body'> = response.body;
   // $ExpectError
   const _body: number = response.body;
   const etag: string = response.etag;
@@ -333,6 +333,8 @@ function test_index_md() {
   const _app:number = new Koa();
   app.use((ctx) => {
     ctx.body = 'Hello World';
+    ctx.body = { key: 'value' };
+    ctx.body = ['Hello word'];
     // $ExpectError
     ctx.body = 1;
   });

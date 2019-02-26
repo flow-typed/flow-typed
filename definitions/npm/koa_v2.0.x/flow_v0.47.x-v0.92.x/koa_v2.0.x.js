@@ -8,7 +8,7 @@ declare module 'koa' {
   declare class Server extends net$Server {
     listen(port?: number, hostname?: string, backlog?: number, callback?: Function): Server,
     listen(path: string, callback?: Function): Server,
-    listen(handle: Object, callback?: Function): Server,
+    listen(handle: {}, callback?: Function): Server,
     close(callback?: Function): Server,
     maxHeadersCount: number,
     setTimeout(msecs: number, callback: Function): Server,
@@ -137,7 +137,7 @@ declare module 'koa' {
     request: Request,
 
     // docs/api/response.md#L113.
-    body: string|Buffer|stream$Stream|Object|null, // JSON contains null
+    body: string | Buffer | stream$Stream | JSONObject | null, // JSON contains null
     etag: string,
     header: SimpleHeader,
     headers: SimpleHeader, // alias as header
@@ -217,7 +217,7 @@ declare module 'koa' {
     res: http$ServerResponse,
     respond?: boolean, // should not be used, allow bypassing koa application.js#L193
     response: Response,
-    state: Object,
+    state: {},
 
     // context.js#L55
     assert: (test: mixed, status: number, message?: string, opts?: mixed) => void,
@@ -226,7 +226,7 @@ declare module 'koa' {
     onerror: (err?: mixed) => void,
     // context.js#L70
     throw: (( statusOrErr: string|number|Error, errOrStatus?: string|number|Error,
-      opts?: Object) => void) &
+      opts?: {}) => void) &
       (( statusOrErr: string|number|Error, opts?: Object) => void),
     toJSON(): ContextJSON,
     inspect(): ContextJSON,
