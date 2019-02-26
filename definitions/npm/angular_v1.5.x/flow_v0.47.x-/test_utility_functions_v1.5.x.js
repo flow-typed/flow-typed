@@ -33,7 +33,7 @@ function testForEach() {
   //accepts object
   angular.forEach({}, () => {});
   // accepts array
-  angular.forEach([], () => {});
+  angular.forEach([], (val: mixed, key: number) => {});
   //$ExpectError does not accept anything else
   angular.forEach(123, () => {});
 
@@ -43,7 +43,7 @@ function testForEach() {
   });
 
   // key is number if array
-  angular.forEach([1, 2, 3], (val, key) => {
+  angular.forEach([1, 2, 3], (val: number, key: number) => {
     (key: number);
   });
 
