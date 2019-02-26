@@ -19,10 +19,10 @@ function test_Application() {
   const context: Context = app.context;
   // $ExpectError
   const _context: number = app.context;
-  const callback: () => (req: http$IncomingMessage, res: http$ServerResponse) => void = app.callback;
-  const handler: (req: http$IncomingMessage, res: http$ServerResponse) => void = app.callback();
+  const callback: () => (req: http$IncomingMessage<>, res: http$ServerResponse) => void = app.callback;
+  const handler: (req: http$IncomingMessage<>, res: http$ServerResponse) => void = app.callback();
   // $ExpectError
-  const _callback: (req: http$IncomingMessage, res: http$ServerResponse) => void = app.callback;
+  const _callback: (req: http$IncomingMessage<>, res: http$ServerResponse) => void = app.callback;
   const env: string = app.env;
   // $ExpectError
   const _env: number = app.env;
@@ -73,7 +73,7 @@ function test_Application() {
 
 function test_response() {
   declare var response:Response;
-  const req: http$IncomingMessage = response.req;
+  const req: http$IncomingMessage<> = response.req;
   // $ExpectError
   const _req: number = response.req;
   const res: http$ServerResponse = response.res;
@@ -86,7 +86,7 @@ function test_response() {
   // $ExpectError
   const _request: number = response.request;
 
-  const body: string|Buffer|stream$Stream|Object|null|Array<mixed> = response.body;
+  const body: $PropertyType<Response, 'body'> = response.body;
   // $ExpectError
   const _body: number = response.body;
   const etag: string = response.etag;
@@ -173,7 +173,7 @@ function test_response() {
 
 function test_request() {
   declare var request:Request;
-  const req: http$IncomingMessage = request.req;
+  const req: http$IncomingMessage<> = request.req;
   // $ExpectError
   const _req: number = request.req;
   const res: http$ServerResponse = request.res;
@@ -333,6 +333,8 @@ function test_index_md() {
   const _app:number = new Koa();
   app.use((ctx) => {
     ctx.body = 'Hello World';
+    ctx.body = { key: 'value' };
+    ctx.body = ['Hello word'];
     // $ExpectError
     ctx.body = 1;
   });
