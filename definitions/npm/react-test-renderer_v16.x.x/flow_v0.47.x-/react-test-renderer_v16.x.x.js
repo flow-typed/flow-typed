@@ -44,6 +44,10 @@ type TestRendererOptions = {
   createNodeMock(element: React$Element<any>): any
 };
 
+type Thenable = {
+  then(resolve: () => mixed, reject?: () => mixed): mixed,
+};
+
 declare module "react-test-renderer" {
   declare export type ReactTestRenderer = {
     toJSON(): null | ReactTestRendererJSON,
@@ -58,6 +62,8 @@ declare module "react-test-renderer" {
     nextElement: React$Element<any>,
     options?: TestRendererOptions
   ): ReactTestRenderer;
+
+  declare function act(callback: () => void): Thenable;
 }
 
 declare module "react-test-renderer/shallow" {
