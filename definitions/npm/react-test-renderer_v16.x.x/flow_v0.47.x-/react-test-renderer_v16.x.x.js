@@ -54,7 +54,7 @@ declare module "react-test-renderer" {
     root: ReactTestInstance
   };
 
-  type Thenable = {
+  declare type Thenable = {
     then(resolve: () => mixed, reject?: () => mixed): mixed,
   };
 
