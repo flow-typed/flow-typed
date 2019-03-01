@@ -563,6 +563,6 @@ declare module 'webpack' {
 
   declare module.exports: (
     options: WebpackOptions,
-    callback: (error: WebpackError, stats: WebpackStats) => void
+    callback?: (error: WebpackError, stats: WebpackStats) => void
   ) => WebpackCompiler | WebpackMultiCompiler;
 }
