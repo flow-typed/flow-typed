@@ -1,6 +1,11 @@
 /*
  * Type def from from source code of koa.
- * this: https://github.com/koajs/koa/commit/fabf5864c6a5dca0782b867a263b1b0825a05bf9
+ * this: https://github.com/koajs/koa/commit/08eb1a20c3975230aa1fe1c693b0cd1ac7a0752b
+ * previous: https://github.com/koajs/koa/commit/fabf5864c6a5dca0782b867a263b1b0825a05bf9
+ *
+ * Changelog
+ * breaking: remove unused app.name
+ * breaking: ctx.throw([status], [msg], [properties]) (caused by http-errors (#957) )
 **/
 declare module 'koa' {
   // Currently, import type doesn't work well ?
@@ -8,7 +13,7 @@ declare module 'koa' {
   declare class Server extends net$Server {
     listen(port?: number, hostname?: string, backlog?: number, callback?: Function): Server,
     listen(path: string, callback?: Function): Server,
-    listen(handle: Object, callback?: Function): Server,
+    listen(handle: {}, callback?: Function): Server,
     close(callback?: Function): Server,
     maxHeadersCount: number,
     setTimeout(msecs: number, callback: Function): Server,
@@ -137,7 +142,7 @@ declare module 'koa' {
     request: Request,
 
     // docs/api/response.md#L113.
-    body: string|Buffer|stream$Stream|Object|null, // JSON contains null
+    body: string | Buffer | stream$Stream | JSONObject | JSONArray | null, // JSON contains null
     etag: string,
     header: SimpleHeader,
     headers: SimpleHeader, // alias as header
@@ -217,17 +222,15 @@ declare module 'koa' {
     res: http$ServerResponse,
     respond?: boolean, // should not be used, allow bypassing koa application.js#L193
     response: Response,
-    state: Object,
+    state: {},
 
     // context.js#L55
     assert: (test: mixed, status: number, message?: string, opts?: mixed) => void,
     // context.js#L107
     // if (!(err instanceof Error)) err = new Error(`non-error thrown: ${err}`);
     onerror: (err?: mixed) => void,
-    // context.js#L70
-    throw: (( statusOrErr: string|number|Error, errOrStatus?: string|number|Error,
-      opts?: Object) => void) &
-      (( statusOrErr: string|number|Error, opts?: Object) => void),
+    // context.md#L88
+    throw: ( status: number, msg?: string, opts?: {}) => void,
     toJSON(): ContextJSON,
     inspect(): ContextJSON,
 
@@ -280,7 +283,7 @@ declare module 'koa' {
     ips: $PropertyType<Request, 'ips'>,
     ip: $PropertyType<Request, 'ip'>,
 
-    [key: string]: mixed, // props added by middlewares.
+    [key: string]: any, // props added by middlewares.
   }
 
   declare type Middleware =
@@ -297,7 +300,6 @@ declare module 'koa' {
     env: string,
     keys?: Array<string>|Object, // https://github.com/crypto-utils/keygrip
     middleware: Array<Middleware>,
-    name?: string, // optionally give your application a name
     proxy: boolean, // when true proxy header fields will be trusted
     request: Request,
     response: Response,

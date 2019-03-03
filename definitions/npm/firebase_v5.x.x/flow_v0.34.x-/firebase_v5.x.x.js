@@ -85,9 +85,9 @@ declare type $npm$firebase$auth$Auth$Persistence = {
   +LOCAL: 'local',
   +SESSION: 'session',
   +NONE: 'none',
-}
+};
 
-declare type $npm$firebase$auth$Auth$Persistence$Enum = $Values<$npm$firebase$auth$Auth$Persistence>
+declare type $npm$firebase$auth$Auth$Persistence$Enum = $Values<$npm$firebase$auth$Auth$Persistence>;
 
 declare class $npm$firebase$auth$Auth {
   static Persistence: $npm$firebase$auth$Auth$Persistence;
@@ -473,7 +473,9 @@ declare class $npm$firebase$firestore$Firestore {
   batch(): $npm$firebase$firestore$WriteBatch;
   collection(collectionPath: string): $npm$firebase$firestore$CollectionReference;
   doc(documentPath: string): $npm$firebase$firestore$DocumentReference;
-  enablePersistence(): Promise<void>;
+  enableNetwork(): Promise<void>;
+  disableNetwork(): Promise<void>;
+  enablePersistence(settings?: $npm$firebase$firestore$PersistenceSettings): Promise<void>;
   runTransaction(updateFunction: (transaction: $npm$firebase$firestore$Transaction) => Promise<any>): Promise<any>;
   setLogLevel(logLevel: 'debug' | 'error' | 'silent'): void;
   settings(settings: $npm$firebase$firestore$Settings): void;
@@ -506,6 +508,7 @@ declare class $npm$firebase$firestore$Query {
   endAt(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
   endBefore(snapshotOrVarArgs: $npm$firebase$firestore$DocumentSnapshot | {}): $npm$firebase$firestore$Query;
   get(getOptions?: $npm$firebase$firestore$GetOptions): Promise<$npm$firebase$firestore$QuerySnapshot>;
+  isEqual(other: $npm$firebase$firestore$Query): boolean;
   limit(limit: number): $npm$firebase$firestore$Query;
   onSnapshot(
     optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$queryObserver,
@@ -513,7 +516,7 @@ declare class $npm$firebase$firestore$Query {
     | $npm$firebase$firestore$queryObserver
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
-  ): Function;
+  ): () => void;
   orderBy(
     fieldPath: $npm$firebase$firestore$FieldPath | string,
     directionStr: 'asc' | 'desc'
@@ -527,35 +530,42 @@ declare class $npm$firebase$firestore$CollectionReference extends $npm$firebase$
   constructor(): $npm$firebase$firestore$CollectionReference;
   id: string;
   parent: $npm$firebase$firestore$DocumentReference | null;
-  add(data: Object): Promise<$npm$firebase$firestore$DocumentReference>;
+  add(data: { +[string]: mixed }): Promise<$npm$firebase$firestore$DocumentReference>;
   doc(documentPath?: string): $npm$firebase$firestore$DocumentReference;
 }
 
 declare interface $npm$firebase$firestore$DocumentChange {
   type: 'added' | 'removed' | 'modified';
+  doc: $npm$firebase$firestore$DocumentSnapshot;
+  oldIndex: number;
+  newIndex: number;
 }
 
 declare class $npm$firebase$firestore$DocumentReference {
   firestore: $npm$firebase$firestore$Firestore;
   id: string;
+  path: string;
   parent: typeof $npm$firebase$firestore$CollectionReference;
   collection(collectionPath: string): $npm$firebase$firestore$CollectionReference;
   delete(): Promise<void>;
   get(): Promise<$npm$firebase$firestore$DocumentSnapshot>;
+  isEqual(other: $npm$firebase$firestore$DocumentReference): boolean;
   onSnapshot(
-    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$documentObserver,
+    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions
+    | $npm$firebase$firestore$documentObserver,
     observerOrOnNextOrOnError?: | $npm$firebase$firestore$QueryListenOptions
     | $npm$firebase$firestore$documentObserver
     | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
-  ): Function;
-  set(data: Object, options?: {| merge?: boolean, mergeFields?: string[] |} | null): Promise<void>;
+  ): () => void;
+  set(data: { +[string]: mixed }, options?: {| merge?: boolean, mergeFields?: string[] |} | null): Promise<void>;
   update(...args: Array<any>): Promise<void>;
 }
 
 declare class $npm$firebase$firestore$DocumentSnapshot {
-  data(): Object;
+  data(): {| +[string]: any |};
   get(fieldpath: typeof $npm$firebase$firestore$FieldPath): any;
+  isEqual(other: $npm$firebase$firestore$DocumentSnapshot): boolean;
   exists: boolean;
   id: string;
   metadata: $npm$firebase$firestore$SnapshotMetadata;
@@ -564,12 +574,16 @@ declare class $npm$firebase$firestore$DocumentSnapshot {
 
 declare class $npm$firebase$firestore$FieldPath {
   constructor(...args: Array<any>): $npm$firebase$firestore$FieldPath;
-  documentId(): typeof $npm$firebase$firestore$FieldPath;
+  static documentId(): typeof $npm$firebase$firestore$FieldPath;
+  isEqual(other: $npm$firebase$firestore$FieldPath): boolean;
 }
 
-declare interface $npm$firebase$firestore$FieldValue {
-  delete(): $npm$firebase$firestore$FieldValue;
-  serverTimestamp(): $npm$firebase$firestore$FieldValue;
+declare class $npm$firebase$firestore$FieldValue {
+  static delete(): $npm$firebase$firestore$FieldValue;
+  static serverTimestamp(): $npm$firebase$firestore$FieldValue;
+  static arrayUnion(...elements: any[]): $npm$firebase$firestore$FieldValue;
+  static arrayRemove(...elements: any[]): $npm$firebase$firestore$FieldValue;
+  isEqual(other: $npm$firebase$firestore$FieldPath): boolean;
 }
 
 declare type $npm$firebase$firestore$FirestoreError =
@@ -594,6 +608,7 @@ declare class $npm$firebase$firestore$GeoPoint {
   constructor(latitude: number, longitude: number): $npm$firebase$firestore$GeoPoint;
   latitude: number;
   longitude: number;
+  isEqual(other: $npm$firebase$firestore$GeoPoint): boolean;
 }
 
 declare class $npm$firebase$firestore$QuerySnapshot {
@@ -604,9 +619,19 @@ declare class $npm$firebase$firestore$QuerySnapshot {
   query: $npm$firebase$firestore$Query;
   size: number;
   forEach((snapshot: $npm$firebase$firestore$DocumentSnapshot, thisArg?: any) => void): void;
+  isEqual(other: $npm$firebase$firestore$QuerySnapshot): boolean;
 }
 
-declare interface $npm$firebase$firestore$Settings {}
+declare type $npm$firebase$firestore$Settings = {|
+  +host?: string;
+  +ssl?: boolean;
+  +timestampsInSnapshots?: boolean;
+  +cacheSizeBytes?: number;
+|};
+
+declare type $npm$firebase$firestore$PersistenceSettings = {|
+  +experimentalTabSynchronization?: boolean;
+|};
 
 declare interface $npm$firebase$firestore$SnapshotMetadata {
   fromCache: boolean;
@@ -618,7 +643,7 @@ declare interface $npm$firebase$firestore$Transaction {
   get(documentRef: $npm$firebase$firestore$DocumentReference): Promise<$npm$firebase$firestore$DocumentSnapshot>;
   set(
     documentRef: $npm$firebase$firestore$DocumentReference,
-    data: Object,
+    data: { +[string]: mixed },
     options?: { merge: boolean }
   ): $npm$firebase$firestore$Transaction;
   update(documentRef: $npm$firebase$firestore$DocumentReference, ...args: Array<any>): $npm$firebase$firestore$Transaction;
@@ -629,7 +654,7 @@ declare interface $npm$firebase$firestore$WriteBatch {
   delete(documentRef: $npm$firebase$firestore$DocumentReference): $npm$firebase$firestore$WriteBatch;
   set(
     documentRef: $npm$firebase$firestore$DocumentReference,
-    data: Object,
+    data: { +[string]: mixed },
     options?: { merge: boolean }
   ): $npm$firebase$firestore$WriteBatch;
   update(documentRef: $npm$firebase$firestore$DocumentReference, ...args: Array<any>): $npm$firebase$firestore$WriteBatch;
@@ -868,7 +893,7 @@ declare module '@firebase/firestore' {
     DocumentReference: typeof $npm$firebase$firestore$DocumentReference,
     DocumentSnapshot: typeof $npm$firebase$firestore$DocumentSnapshot,
     FieldPath: typeof $npm$firebase$firestore$FieldPath,
-    FieldValue: $npm$firebase$firestore$FieldValue,
+    FieldValue: typeof $npm$firebase$firestore$FieldValue,
     Firestore: typeof $npm$firebase$firestore$Firestore,
     FirestoreError: $npm$firebase$firestore$FirestoreError,
     GeoPoint: typeof $npm$firebase$firestore$GeoPoint,

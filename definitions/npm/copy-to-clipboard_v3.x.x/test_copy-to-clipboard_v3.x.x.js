@@ -24,3 +24,6 @@ copyToClipboard({});
 
 // $ExpectError
 copyToClipboard('a string to copy', null);
+
+// $ExpectError
+copyToClipboard('a string to copy', { test: '' });

@@ -1,4 +1,6 @@
+
 declare module "lodash" {
+  declare type Path = $ReadOnlyArray<string | number> | string | number;
   declare type TemplateSettings = {
     escape?: RegExp,
     evaluate?: RegExp,
@@ -381,12 +383,12 @@ declare module "lodash" {
     includes(str: string, value: string, fromIndex?: number): boolean;
     invokeMap<T>(
       array: ?Array<T>,
-      path: ((value: T) => Array<string> | string) | Array<string> | string,
+      path: ((value: T) => Path) | Path,
       ...args?: Array<any>
     ): Array<any>;
     invokeMap<T: Object>(
       object: T,
-      path: ((value: any) => Array<string> | string) | Array<string> | string,
+      path: ((value: any) => Path) | Path,
       ...args?: Array<any>
     ): Array<any>;
     keyBy<T, V>(
@@ -819,16 +821,16 @@ declare module "lodash" {
     functionsIn(object?: ?Object): Array<string>;
     get(
       object?: ?Object | ?Array<any>,
-      path?: ?Array<string> | string,
+      path?: ?Path,
       defaultValue?: any
     ): any;
-    has(object?: ?Object, path?: ?Array<string> | string): boolean;
-    hasIn(object?: ?Object, path?: ?Array<string> | string): boolean;
+    has(object?: ?Object, path?: ?Path): boolean;
+    hasIn(object?: ?Object, path?: ?Path): boolean;
     invert(object?: ?Object, multiVal?: boolean): Object;
     invertBy(object: ?Object, iteratee?: Function): Object;
     invoke(
       object?: ?Object,
-      path?: ?Array<string> | string,
+      path?: ?Path,
       ...args?: Array<any>
     ): any;
     keys<K>(object?: ?{ [key: K]: any }): Array<K>;
@@ -900,13 +902,13 @@ declare module "lodash" {
     ): Object;
     result(
       object?: ?Object,
-      path?: ?Array<string> | string,
+      path?: ?Path,
       defaultValue?: any
     ): any;
-    set(object?: ?Object, path?: ?Array<string> | string, value: any): Object;
+    set(object?: ?Object, path?: ?Path, value: any): Object;
     setWith<T>(
       object: T,
-      path?: ?Array<string> | string,
+      path?: ?Path,
       value: any,
       customizer?: (nsValue: any, key: string, nsObject: T) => any
     ): Object;
@@ -917,11 +919,11 @@ declare module "lodash" {
       iteratee?: OIteratee<*>,
       accumulator?: any
     ): any;
-    unset(object?: ?Object, path?: ?Array<string> | string): boolean;
-    update(object: Object, path: string[] | string, updater: Function): Object;
+    unset(object?: ?Object, path?: ?Path): boolean;
+    update(object: Object, path: Path, updater: Function): Object;
     updateWith(
       object: Object,
-      path: string[] | string,
+      path: Path,
       updater: Function,
       customizer?: Function
     ): Object;
@@ -997,8 +999,8 @@ declare module "lodash" {
     identity<T>(value: T): T;
     iteratee(func?: any): Function;
     matches(source: Object): Function;
-    matchesProperty(path?: ?Array<string> | string, srcValue: any): Function;
-    method(path?: ?Array<string> | string, ...args?: Array<any>): Function;
+    matchesProperty(path?: ?Path, srcValue: any): Function;
+    method(path?: ?Path, ...args?: Array<any>): Function;
     methodOf(object?: ?Object, ...args?: Array<any>): Function;
     mixin<T: Function | Object>(
       object?: T,
@@ -1014,7 +1016,7 @@ declare module "lodash" {
     overEvery(predicates: Array<Function>): Function;
     overSome(...predicates: Array<Function>): Function;
     overSome(predicates: Array<Function>): Function;
-    property(path?: ?Array<string> | string): Function;
+    property(path?: ?Path): Function;
     propertyOf(object?: ?Object): Function;
     range(start: number, end: number, step?: number): Array<number>;
     range(end: number, step?: number): Array<number>;

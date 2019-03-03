@@ -95,17 +95,17 @@ declare module angular {
 
   declare type FactoryDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Object>
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => {}>
   ) => AngularModule;
 
   declare type FilterDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Function>
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => ((*) => *)>
   ) => AngularModule;
 
   declare type ServiceDeclaration = (
     name: string,
-    di: $npm$angular$DependencyInjection<(...a: Array<*>) => Function | Object>
+    di: $npm$angular$DependencyInjection<(...a: Array<*>) => ((*) => *) | {}>
   ) => AngularModule;
 
   declare type RunDeclaration = (
@@ -154,16 +154,16 @@ declare module angular {
   ): A & B & C & D & E;
 
   declare function forEach<T>(
-    obj: Object,
+    obj: {},
     iterator: (value: T, key: string) => void
   ): void;
   declare function forEach<T>(
     obj: Array<T>,
     iterator: (value: T, key: number) => void
   ): void;
-  declare function fromJson(json: string): Object | Array<*> | string | number;
+  declare function fromJson(json: string): {} | Array<*> | string | number;
   declare function toJson(
-    obj: Object | Array<any> | string | Date | number | boolean,
+    obj: {} | Array<any> | string | Date | number | boolean,
     pretty?: boolean | number
   ): string;
   declare function isDefined(val: any): boolean;
@@ -185,21 +185,21 @@ declare module angular {
   //****************************************************************************
 
   declare type AngularMock = {
-    inject: (...a: Array<*>) => Function,
-    module: (...a: Array<string | Function | Object>) => () => void
+    inject: (...a: Array<*>) => ((*) => *),
+    module: (...a: Array<string | ((...args: Array<*>) => *) | {}>) => () => void
   };
   declare var mock: AngularMock;
 
   declare type StateProviderParams = {
     url?: string,
     abstract?: boolean,
-    params?: Object,
-    views?: Object,
-    data?: Object,
+    params?: {},
+    views?: {},
+    data?: {},
     templateUrl?: string,
     template?: string,
     controller?: string | ControllerFunction,
-    resolve?: Object
+    resolve?: {}
   };
 
   declare type $StateProvider = {
@@ -224,14 +224,14 @@ declare module angular {
   };
 
   declare type AngularResource = {
-    get: <T>(options?: Object, callback?: Function) => AngularResourceResult<T>
+    get: <T>(options?: {}, callback?: Function) => AngularResourceResult<T>
   };
 
   declare function AngularResourceFactory(
     url: string,
-    defaultParams?: Object,
-    actions?: Object,
-    options?: Object
+    defaultParams?: {},
+    actions?: {},
+    options?: {}
   ): AngularResource;
 
   declare function AngularCompileService(a: JqliteElement): JqliteElement;
@@ -255,7 +255,7 @@ declare module angular {
     objectEquality?: boolean
   ) => () => void;
 
-  declare type $Scope<T: Object> = {|
+  declare type $Scope<T: {}> = {|
     $new(isolate: boolean, parent: $Scope<T>): $Scope<T>,
     $watch: _Watch1<T> & _Watch2<T>,
     $watchGroup(
@@ -268,8 +268,8 @@ declare module angular {
     ): () => void,
     $digest(): void,
     $destroy(): void,
-    $eval(expression: EvalExpression, locals?: Object): void,
-    $evalAsync(expression: EvalExpression, locals?: Object): void,
+    $eval(expression: EvalExpression, locals?: {}): void,
+    $evalAsync(expression: EvalExpression, locals?: {}): void,
     $apply(expression?: ApplyExpression): void,
     $applyAsync(expression?: ApplyExpression): void,
     $on(name: string, listener: (event: *, ...Array<*>) => void): () => void,
@@ -284,9 +284,25 @@ declare module angular {
   |} & T;
 
   declare type $Timeout = (
-    fn?: Function,
+    fn?: (*) => *,
     delay?: number,
     invokeApply?: boolean,
     additionalParams?: *
+  ) => AngularPromise<*>;
+
+  declare type $Log = {|
+    log(a: *): void,
+    info(a: *): void,
+    warn(a: *): void,
+    error(a: *): void,
+    debug(a: *): void,
+  |};
+
+  declare type $Interval = (
+    fn: (*) => *,
+    delay: number,
+    count?: number,
+    invokeApply?: boolean,
+    ...pass: *
   ) => AngularPromise<*>;
 }
