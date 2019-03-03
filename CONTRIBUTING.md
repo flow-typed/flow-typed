@@ -63,9 +63,9 @@ library-definition test runner.
 
 This specifies that the definition you are contributing is compatible with the
 version range of the directiry. You MUST specify a version range with names like
-`flow_v0.25.x-` ("any version at or after v0.22.x") or
-`flow_-v0.25.x` ("any version at or before v0.22.x") or
-`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.22.x and
+`flow_v0.25.x-` ("any version at or after v0.25.x") or
+`flow_-v0.25.x` ("any version at or before v0.25.x") or
+`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.25.x and
 v0.28.x").
 
 If you aren't sure which versions of Flow your definition is compatible with,
