@@ -39,8 +39,8 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   whereNotIn(column: string, values: any[]): this;
   whereNull(column: string): this;
   whereNotNull(column: string): this;
-  whereExists(column: string): this;
-  whereNotExists(column: string): this;
+  whereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  whereNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
   whereBetween<T>(column: string, range: [T, T]): this;
   whereNotBetween<T>(column: string, range: [T, T]): this;
   whereRaw(sql: string, bindings?: Knex$RawBindings): this;
