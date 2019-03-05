@@ -1,5 +1,5 @@
-import * as http from 'http'
-import fs from 'fs'
+import * as http from 'http';
+import fs from 'fs';
 
 declare module 'webpack' {
   declare class WebpackError extends Error {
@@ -7,12 +7,29 @@ declare module 'webpack' {
     inspect(): string;
   }
 
+  declare interface Stats {
+    hasErrors(): boolean;
+    hasWarnings(): boolean;
+    toJson(options?: StatsOptions): any;
+    toString(options?: StatsOptions & { colors?: boolean }): string;
+  }
+
+  declare type Callback = (error: WebpackError, stats: Stats) => void;
+  declare type WatchHandler = (error: WebpackError, stats: Stats) => void;
+
+  declare type Watching = {
+    close(): void,
+    invalidate(): void,
+  };
+
   declare type WebpackCompiler = {
-    // <...>
+    run(callback: Callback): void,
+    watch(options: WatchOptions, handler: WatchHandler): Watching,
   };
 
   declare type WebpackMultiCompiler = {
-    // <...>
+    run(callback: Callback): void,
+    watch(options: WatchOptions, handler: WatchHandler): Watching,
   };
 
   declare class WebpackCompilation {
@@ -408,7 +425,7 @@ declare module 'webpack' {
     aggregateTimeout?: number,
     ignored?: { [k: string]: any },
     poll?: boolean | number,
-    stdin?: boolean
+    stdin?: boolean,
   };
 
   declare type WebpackOptions = {
@@ -432,7 +449,7 @@ declare module 'webpack' {
         | boolean
         | {
             rewrites?: Array<{ from: string, to: string }>,
-            disableDotRule?: boolean
+            disableDotRule?: boolean,
           },
       host?: string,
       hot?: boolean,
@@ -442,7 +459,7 @@ declare module 'webpack' {
         | {
             key: string,
             cert: string,
-            ca?: string
+            ca?: string,
           },
       index?: string,
       inline?: boolean,
@@ -454,7 +471,7 @@ declare module 'webpack' {
         | boolean
         | {
             errors?: boolean,
-            warnings?: boolean
+            warnings?: boolean,
           },
       pfx?: string,
       pfxPassphrase?: string,
@@ -478,13 +495,13 @@ declare module 'webpack' {
           res: http.OutgoingMessage,
           path: string,
           stat: fs.Stat
-        ) => void
+        ) => void,
       },
       stats?: StatsOptions,
       useLocalIp?: boolean,
       watchContentBase?: boolean,
       watchOptions?: WatchOptions,
-      publicPath?: string
+      publicPath?: string,
     },
     devtool?:
       | '@cheap-eval-source-map'
@@ -561,8 +578,14 @@ declare module 'webpack' {
     watchOptions?: WatchOptions,
   };
 
-  declare module.exports: (
+  declare function builder(
     options: WebpackOptions,
-    callback?: (error: WebpackError, stats: WebpackStats) => void
-  ) => WebpackCompiler | WebpackMultiCompiler;
+    callback?: Callback
+  ): WebpackCompiler;
+  declare function builder(
+    options: WebpackOptions[],
+    callback?: Callback
+  ): WebpackMultiCompiler;
+
+  declare module.exports: typeof builder;
 }
