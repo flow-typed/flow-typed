@@ -317,14 +317,15 @@ zip(["a", "b", "c"], ["d", "e", "f"])[0].length;
 zip(["a", "b", "c"], [1, 2, 3])[0].length;
 
 var tupleA = zip(["a", "b", "c"], [1, 2, 3])[0];
-tupleA && tupleA[0] + "a";
+tupleA[0] && tupleA[0] + "a";
 
 var tupleB = zip(["a", "b", "c"], [1, 2, 3])[0];
-tupleB && tupleB[1] * 10;
+tupleB[1] && tupleB[1] * 10;
 // $ExpectError `x` property not found in Array
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0].x;
 // $ExpectError `y` property not found in object literal
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][0].y;
+// $ExpectError `y` is missing in null or undefined
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][1].y;
 // $ExpectError Flow could potentially catch this -- the tuple only has two elements.
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
