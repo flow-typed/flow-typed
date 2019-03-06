@@ -107,10 +107,14 @@ the test-runner for *all* versions of Flow the package version supports. If you
 ever need to write a test for a particular version of Flow, you can put the
 `test_` file in the appropriate flow version directory.
 
-#### 5) Run your tests with `flow-typed validate-defs definitions && flow-typed run-tests left-pad`
-
+#### 5) Run your tests using one of the following:
+- globally installed `'flow-typed'`:
 ```
-cd ../cli && \
+flow-typed validate-defs definitions && flow-typed run-tests left-pad
+```
+- local flow-typed CLI that we've built before (see instructions about `'./build_and_test_cli.sh'` above):
+```
+# assuming current directory is './cli'
 node dist/cli.js validate-defs ../definitions && \
 node dist/cli.js run-tests left-pad
 ```
