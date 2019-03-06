@@ -2,15 +2,15 @@
  * This is an libdef for:
  *
  *   'koa-bunyan-logger'
- * 
- * NOTE: once import types from modules is working, 
+ *
+ * NOTE: once import types from modules is working,
  * remove types redeclaration from bunyan and koa
  *
  */
 
 declare module 'koa-bunyan-logger' {
-  /** 
-   * copy from bunyan library, import type does not work here? 
+  /**
+   * copy from bunyan library, import type does not work here?
    * import type bunyan, { Logger, LoggerOptions, BunyanLogLevels } from 'bunyan';
   **/
   declare type BunyanLogLevels =
@@ -19,7 +19,7 @@ declare module 'koa-bunyan-logger' {
     40 | // warn
     30 | // info
     20 | // debug
-    10;  // info
+    10;  // trace
   declare type BunyanRecord = {
       v: number,
       level: BunyanLogLevels,
@@ -116,8 +116,8 @@ declare module 'koa-bunyan-logger' {
     }
   };
 
-  /** 
-   * copy from koa library, import type does not work 
+  /**
+   * copy from koa library, import type does not work
    * import type { Middleware } from 'koa';
   **/
   declare type Middleware =
@@ -154,7 +154,7 @@ declare module 'koa-bunyan-logger' {
 
   declare module.exports: {
     requestIdContext(options?: RequestIdOptions): MiddlewareType;
-    requestLogger(options: RequestLogger$Options): MiddlewareType;
+    requestLogger(options?: RequestLogger$Options): MiddlewareType;
     timeContext(options: TimeContext$Options): MiddlewareType;
     (options?: LoggerFactoryOptions | Logger): MiddlewareType;
     bunyan: {

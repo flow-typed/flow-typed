@@ -54,10 +54,16 @@ declare module "react-test-renderer" {
     root: ReactTestInstance
   };
 
+  declare type Thenable = {
+    then(resolve: () => mixed, reject?: () => mixed): mixed,
+  };
+
   declare function create(
     nextElement: React$Element<any>,
     options?: TestRendererOptions
   ): ReactTestRenderer;
+
+  declare function act(callback: () => void): Thenable;
 }
 
 declare module "react-test-renderer/shallow" {

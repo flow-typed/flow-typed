@@ -5,7 +5,7 @@ declare module '@storybook/addon-links' {
     linkTo<T>(
       book: string | LinkToFunction,
       kind?: string | LinkToFunction
-    ): SyntheticMouseEvent<T>,
+    ): (evt: SyntheticEvent<T>) => void,
     hrefTo(kind: string, story: string): Promise<string>,
   };
 }

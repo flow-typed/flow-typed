@@ -1,4 +1,4 @@
-import prettier from "prettier";
+import prettier, { type Options } from "prettier";
 
 const code = "let x =  10";
 
@@ -13,6 +13,10 @@ prettier.format(code, { printWidth: 80 });
 // $ExpectError (Options should have proper types)
 prettier.format(code, { parser: "flo" });
 prettier.format(code, { parser: "flow" });
+
+// $ExpectError (Same as above, but with explicit annotation)
+const badOptions: Options = { parser: "flo" };
+const goodOptions: Options = { parser: "flow" };
 
 // $ExpectError (Must pass in some source code)
 prettier.check();
@@ -38,6 +42,13 @@ prettier.formatWithCursor(code, { cursorOffset: 10 });
 prettier.resolveConfig();
 prettier.resolveConfig("/path");
 
+const asyncConfig = prettier.resolveConfig("/path");
+if (asyncConfig != null) {
+  // $ExpectError (Returns promise)
+  (asyncConfig.printWidth: number);
+}
+(prettier.resolveConfig("/path"): Promise<?{ printWidth?: number }>);
+
 // $ExpectError (Options should have proper types)
 prettier.resolveConfig("/path", { useCache: "true" });
 prettier.resolveConfig("/path", { useCache: true });
@@ -45,6 +56,13 @@ prettier.resolveConfig("/path", { useCache: true });
 // $ExpectError (Must include filePath)
 prettier.resolveConfig.sync();
 prettier.resolveConfig.sync("/path");
+
+const syncConfig = prettier.resolveConfig.sync("/path");
+if (syncConfig != null) {
+  (syncConfig.printWidth: void | number);
+}
+// $ExpectError (Does not return promise)
+(syncConfig: Promise<?{ printWidth?: number }>);
 
 // $ExpectError (Options should have proper types)
 prettier.resolveConfig.sync("/path", { useCache: "true" });

@@ -4,11 +4,13 @@ import { it, describe } from "flow-typed-test";
 import {
   ApolloProvider,
   ApolloConsumer,
+  compose,
   Query,
   Mutation,
   Subscription,
   graphql,
   withApollo,
+  type ApolloClient,
   type MutationFunction,
   type MutationResult,
   type QueryRenderProps,
@@ -18,7 +20,7 @@ import {
   type GraphqlData,
   type PureQueryOptions,
   type SubscriptionResult,
-  type RefetchQueryDescription,
+  type RefetchQueryDescription
 } from "react-apollo";
 
 const gql = (strings, ...args) => {}; // graphql-tag stub
@@ -47,6 +49,13 @@ type IQuery = {
 };
 
 const withData: OperationComponent<IQuery> = graphql(query);
+
+// Compose exists and passes type checking
+const noop = val => val;
+compose(
+  noop,
+  noop
+)(true);
 
 it("works with functional component", () => {
   const FunctionalWithData = withData(({ data }) => {
@@ -81,7 +90,10 @@ it("works with class component with it's own variable", () => {
   } & CmplxOwnProps;
   class CmplxComponent extends React.Component<CmplxComponentProps> {
     render() {
-      const { data: { loading, error, bar, foo }, faz } = this.props;
+      const {
+        data: { loading, error, bar, foo },
+        faz
+      } = this.props;
       if (loading) return <div>Loading</div>;
       if (error) return <h1>ERROR</h1>;
 
@@ -111,7 +123,10 @@ it("works with class component with it's own variable Props specified at the end
   } & Cmplx2OwnProps;
   class Cmplx2Component extends React.Component<Cmplx2ComponentProps> {
     render() {
-      const { data: { loading, error, bar, foo }, faz } = this.props;
+      const {
+        data: { loading, error, bar, foo },
+        faz
+      } = this.props;
       if (loading) return <div>Loading</div>;
       if (error) return <h1>ERROR</h1>;
 
@@ -136,7 +151,7 @@ it("works with class component with it's own variable Props specified at the end
 });
 
 const HERO_QUERY = gql`
-  query GetCharacter($episode: String!, offset: Int) {
+  query GetCharacter($episode: String!, $offset: Int) {
     hero(episode: $episode, offset: $offset) {
       name
       id
@@ -269,15 +284,14 @@ describe("<Query />", () => {
           // $ExpectError Cannot get `data.res`
           data.res;
           if (!data) {
-            return;
+            return <div />;
           }
-          const d1: Res | {||} = data;
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
-          if (d1.res) {
-            const d2: Res = d1;
-            const s: string = d1.res;
+          if (data.res) {
+            const s: string = data.res;
           }
+          return <div />;
         }}
       </Query>
     );
@@ -291,7 +305,7 @@ describe("<Query />", () => {
         // $ExpectError Cannot get `data.hero`. data may be undefined
         data.hero;
         if (!data || !data.hero) {
-          return;
+          return <div />;
         }
         const hero = data.hero;
 
@@ -422,17 +436,19 @@ describe("<Query />", () => {
       <HeroQueryComp query={HERO_QUERY} variables={{ episode: "episode" }}>
         {({ updateQuery }) => {
           // $ExpectError updateQuery return type must match previous result type
-          updateQuery((previousResult, options) => ({ hello: 'flow' }))
-          const renameHero = (newName: string) => updateQuery((previousResult, options) => {
-            // $ExpectError Cannot get `options.unknownProperty` because property `unknownProperty` is missing in options
-            const a = options.unknownProperty
-            const { variables } = options
-            return { ...previousResult, name: newName }
-          })
+          updateQuery((previousResult, options) => ({ hello: "flow" }));
+          const renameHero = (newName: string) =>
+            updateQuery((previousResult, options) => {
+              // $ExpectError Cannot get `options.unknownProperty` because property `unknownProperty` is missing in options
+              const a = options.unknownProperty;
+              const { variables } = options;
+              return { ...previousResult, name: newName };
+            });
+          return <div />;
         }}
       </HeroQueryComp>;
-    })
-  })
+    });
+  });
 });
 
 type HeroSubcriptionVariables = {
@@ -454,28 +470,28 @@ describe("<Subscription />", () => {
           // $ExpectError Cannot get `data.res`
           data.res;
           if (!data) {
-            return;
+            return <div />;
           }
-          const d1: Res | {||} = data;
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
-          if (d1.res) {
-            const d2: Res = d1;
-            const s: string = d1.res;
-          }
+          const s: ?string = data.res;
+          return <div />;
         }}
       </Subscription>
     );
   });
   it("works when extending Subscription with types", () => {
-    <HeroSubscriptionComp subscription={HERO_SUBSCRIPTION} variables={{ heroId: "123" }}>
+    <HeroSubscriptionComp
+      subscription={HERO_SUBSCRIPTION}
+      variables={{ heroId: "123" }}
+    >
       {({ data, loading, error }) => {
         if (loading) return "Loading....";
         if (error) return "Error!";
         // $ExpectError Cannot get `data.hero`. data may be undefined
         data.hero;
         if (!data || !data.hero) {
-          return;
+          return <div />;
         }
         const hero = data.hero;
 
@@ -492,10 +508,28 @@ describe("<Subscription />", () => {
     type Res = {| res: string |};
     const q = (
       <Subscription variables={{ foo: 1 }} subscription={HERO_SUBSCRIPTION}>
-        { // $ExpectError variables must match shape of query variables
-          ({ data }: SubscriptionResult<Res, Vars>) => {
-        }}
+        {// $ExpectError variables must match shape of query variables
+        ({ data }: SubscriptionResult<Res, Vars>) => {}}
       </Subscription>
+    );
+  });
+  it("supports onSubscriptionData prop", function() {
+    const q = (
+      <Subscription
+        subscription={HERO_SUBSCRIPTION}
+        onSubscriptionData={({
+          client,
+          subscriptionData
+        }: {
+          client: ApolloClient<any>,
+          subscriptionData: SubscriptionResult<{ hero: ?Hero }>
+        }) => {
+          const hero: ?Hero =
+            subscriptionData.data && subscriptionData.data.hero
+              ? subscriptionData.data.hero
+              : null;
+        }}
+      />
     );
   });
 });
@@ -509,6 +543,20 @@ class UpdateHeroMutationComp extends Mutation<
 > {}
 
 describe("<Mutation />", () => {
+  it("mutate() args are optional", () => {
+    type Vars = {| foo: string |};
+    type Res = {| res: string |};
+    const vars: Vars = { foo: "bar" };
+    const q = (
+      <Mutation variables={vars} mutation={HERO_QUERY}>
+        {mutate => {
+          mutate();
+          return <div />;
+        }}
+      </Mutation>
+    );
+  });
+
   it("works", () => {
     type Vars = {| foo: string |};
     type Res = {| res: string |};
@@ -522,11 +570,12 @@ describe("<Mutation />", () => {
           // $ExpectError Cannot get `data.res`
           data.res;
           if (!data) {
-            return;
+            return <div />;
           }
           const d1: Res = data;
           const s: string = data.res;
           client;
+          return <div />;
         }}
       </Mutation>
     );
@@ -594,7 +643,7 @@ describe("<Mutation />", () => {
         query: HERO_QUERY,
         variables: { episode: "episode" }
       };
-      const refetchQueries: RefetchQueryDescription = [queryOption, 'foo'];
+      const refetchQueries: RefetchQueryDescription = [queryOption, "foo"];
 
       <UpdateHeroMutationComp
         mutation={HERO_MUTATION}

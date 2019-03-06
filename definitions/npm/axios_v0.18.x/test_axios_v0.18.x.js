@@ -1,4 +1,5 @@
 // @flow
+import { describe, it } from 'flow-typed-test';
 import axios from 'axios';
 import type {
   $AxiosXHR,
@@ -99,3 +100,10 @@ const promise2: AxiosPromise<{ foo: number }> = axios({ url: '/', method: 'post'
 promise2.then(({ data }) => {
   data.foo + 1;
 });
+
+describe('create', () => {
+  it('returns a callable axios instance', () => {
+    const a = axios.create();
+    a({ method: 'post', url: 'https://foo.bar' })
+  })
+})

@@ -149,6 +149,33 @@ expect(Promise.resolve(true))
   .then(function() {})
   .catch(function() {});
 
+expect(Promise.resolve(true))
+  .to.eventually.be.rejectedWith(Error, 'this is a test')
+  .then(function() {})
+  .catch(function() {});
+
+expect(Promise.resolve(true))
+  .to.eventually.be.rejectedWith(Error, 'this is a test', 'blah')
+  .then(function() {})
+  .catch(function() {});
+
+expect(Promise.resolve(true))
+  .to.eventually.be.rejectedWith(Error, /this is a test/, 'blah')
+  .then(function() {})
+  .catch(function() {});
+
+expect(Promise.resolve(true))
+  // $ExpectError
+  .to.eventually.be.rejectedWith(Error, 2)
+  .then(function() {})
+  .catch(function() {});
+
+expect(Promise.resolve(true))
+  // $ExpectError
+  .to.eventually.be.rejectedWith(Error, 'this is a test', {})
+  .then(function() {})
+  .catch(function() {});
+
 // tests for chai-subset
 expect({}).to.containSubset({});
 expect([{}]).to.containSubset([{}]);

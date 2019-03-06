@@ -1,36 +1,41 @@
 // @flow
+import { describe, it } from "flow-typed-test";
 import Backbone, { Collection } from "backbone-collection";
 
-// $ExpectError
-(Backbone.$: any);
+describe("backbone-collection", () => {
+  it("Migrated from old format", () => {
+    // $ExpectError
+    (Backbone.$: any);
 
-// $ExpectError
-(Backbone._: any);
+    // $ExpectError
+    (Backbone._: any);
 
-// $ExpectError
-(Backbone.Events.on: Function);
+    // $ExpectError
+    (Backbone.Events.on: Function);
 
-// Model setup
-class Model {}
+    // Model setup
+    class Model {}
 
-class TasksCollection extends Collection<Model> {
-  model: Model;
-}
+    class TasksCollection extends Collection<Model> {
+      model: Model;
+    }
 
-const tasks = new TasksCollection();
+    const tasks = new TasksCollection();
 
-// $ExpectError
-tasks.toJSON([]);
+    // $ExpectError
+    tasks.toJSON([]);
 
-(tasks.length: number);
+    (tasks.length: number);
 
-// $ExpectError should not allow to be non number
-tasks.length = false;
+    // $ExpectError should not allow to be non number
+    tasks.length = false;
 
-(tasks.pluck("name"): Array<any>);
+    (tasks.pluck("name"): Array<any>);
 
-// $ExpectError
-(task.pluck(2): Array<any>);
+    // $ExpectError
+    (task.pluck(2): Array<any>);
 
-(tasks.forEach: Function);
-(tasks.sync(): Function);
+    (tasks.forEach: Function);
+    (tasks.sync: Function);
+  });
+});

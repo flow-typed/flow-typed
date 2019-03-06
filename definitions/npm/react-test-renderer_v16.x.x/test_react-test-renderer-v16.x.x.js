@@ -18,3 +18,6 @@ renderer.create(NaN);
 const shallowRenderer = new ShallowRenderer()
 const shallowWrapper = shallowRenderer.render(<Example />)
 const shallowInstance = shallowRenderer.getRenderOutput()
+
+// Act
+renderer.act(() => {});

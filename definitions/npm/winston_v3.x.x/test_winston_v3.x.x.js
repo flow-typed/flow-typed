@@ -43,6 +43,10 @@ logger.log({
 logger.clear();
 
 const consoleTransport = new winston.transports.Console();
+
+consoleTransport.level = 'debug';
+consoleTransport.silent = true;
+
 logger.add(consoleTransport);
 logger.remove(consoleTransport);
 

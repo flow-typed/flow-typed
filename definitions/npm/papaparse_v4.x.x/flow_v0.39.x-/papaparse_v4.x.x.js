@@ -31,7 +31,8 @@ declare interface PapaParse$ParseConfig {
     worker?: boolean,
     comments?: boolean,
     download?: boolean,
-    skipEmptyLines?: boolean,
+    // + is required see https://github.com/facebook/flow/issues/3876
+    +skipEmptyLines?: boolean | 'greedy',
     fastMode?: boolean,
     withCredentials?: boolean,
     step?: Function,

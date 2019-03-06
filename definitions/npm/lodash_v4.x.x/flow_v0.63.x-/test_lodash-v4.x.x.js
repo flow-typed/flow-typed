@@ -30,6 +30,8 @@ import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
 import sortedIndexBy from "lodash/sortedIndexBy";
 import sortedLastIndexBy from "lodash/sortedLastIndexBy";
+import sortedUniq from "lodash/sortedUniq";
+import sortedUniqBy from "lodash/sortedUniqBy";
 import tap from "lodash/tap";
 import thru from "lodash/thru";
 import times from "lodash/times";
@@ -58,8 +60,15 @@ countBy(["one", "two", "three"], "length");
 /**
  * _.difference
  */
-difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>));
-difference((["a", "b"]: $ReadOnlyArray<string>), (["b"]: $ReadOnlyArray<string>), (["a"]: $ReadOnlyArray<string>));
+difference(
+  (["a", "b"]: $ReadOnlyArray<string>),
+  (["b"]: $ReadOnlyArray<string>)
+);
+difference(
+  (["a", "b"]: $ReadOnlyArray<string>),
+  (["b"]: $ReadOnlyArray<string>),
+  (["a"]: $ReadOnlyArray<string>)
+);
 
 /**
  * _.differenceBy
@@ -92,9 +101,10 @@ find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.x == 3);
 find({ x: 1, y: 2 }, (a: number, b: string) => a);
 find({ x: 1, y: 2 }, { x: 3 });
 find((["a", "b"]: $ReadOnlyArray<string>), "c");
-
-// $ExpectError undefined. This type is incompatible with object type.
-var result: Object = find(users, "active");
+// opaque types are allowed as keys of objects
+opaque type O = string;
+const v: { [O]: number } = { x: 1, y: 2 };
+find(v, { x: 3 });
 
 /**
  * _.find examples from the official doc
@@ -170,8 +180,8 @@ get([{ a: "foo" }, { b: "bar" }, { c: "baz" }], "2");
 get([[1, 2], [3, 4], [5, 6], [7, 8]], "3");
 
 // Nil - it is safe to perform on nil root values, just like nil values along the "get" path
-get(null, 'thing');
-get(undefined, 'data');
+get(null, "thing");
+get(undefined, "data");
 
 /**
  * _.keyBy
@@ -290,6 +300,18 @@ sortedLastIndexBy([{ x: 4 }, { x: 5 }], { x: 4 }, function(o) {
 sortedLastIndexBy([{ x: 4 }, { x: 5 }], { x: 4 }, "x");
 
 /**
+ * _.sortedUniq
+ */
+sortedUniq([1, 2, 2]);
+sortedUniq(["a", "b", "b"]);
+
+/**
+ * _.sortedUniqBy
+ */
+sortedUniqBy([1.2, 2.1, 2.3], Math.floor);
+sortedUniqBy([{ x: 1 }, { x: 1 }, { x: 2 }], "x");
+
+/**
  * _.extend
  */
 extend({ a: 1 }, { b: 2 }).a;
@@ -352,9 +374,9 @@ boolTrue = isString(undefined);
 /**
  * _.find
  */
-find([1, 2, 3], x => x == 1);
+(find([1, 2, 3], x => x == 1): void | number);
 // $ExpectError number. This type is incompatible with function type.
-find([1, 2, 3], 1);
+(find([1, 2, 3], 1): void | number);
 
 // Copy pasted tests from iflow-lodash
 var nums: number[] = [1, 2, 3, 4, 5, 6];
@@ -468,15 +490,15 @@ pairs = toPairsIn({ a: 12, b: 100 });
 /**
  * _.pickBy
  */
-(pickBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
+(pickBy({ a: 2, b: 3, c: 4 }, num => num % 2): { [prop: string]: number });
 (pickBy(null, num => num % 2): {});
 (pickBy(undefined, num => num % 2): {});
-(pickBy({[1]: 1, [2]: 2}, num => num === 2): {[prop: number]: number});
+(pickBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number });
 
 /**
  * _.omitBy
  */
-(omitBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
+(omitBy({ a: 2, b: 3, c: 4 }, num => num % 2): { [prop: string]: number });
 (omitBy(null, num => num % 2): {});
 (omitBy(undefined, num => num % 2): {});
-(omitBy({[1]: 1, [2]: 2}, num => num === 2): {[prop: number]: number});
+(omitBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number });

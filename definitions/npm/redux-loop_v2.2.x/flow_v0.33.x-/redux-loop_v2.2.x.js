@@ -1,16 +1,20 @@
 declare module "redux-loop" {
-  declare type Effect = $Subtype<{}>
+  declare type Effect = $Subtype<{}>;
 
-  declare type Reducer<S, A> = (state: S, action: A) => (S | [S, Effect])
+  declare type Reducer<S, A> = (state: S, action: A) => S | [S, Effect];
 
-  declare type ExtractStateType = <S, A>(r: (state: S, action: A) => any) => S
+  declare type ExtractStateType = <S, A>(r: (state: S, action: A) => any) => S;
 
-  declare function combineReducers<Reducers: Object, State: $ObjMap<Reducers, ExtractStateType>, Action>(
-    reducersMap:   Reducers,
+  declare function combineReducers<
+    Reducers: Object,
+    State: $ObjMap<Reducers, ExtractStateType>,
+    Action
+  >(
+    reducersMap: Reducers,
     initialState?: $Shape<State>,
-    accessor?:     (state: State, key: $Keys<State>) => any,
-    modifier?:     (state: State, key: $Keys<State>, value: any) => any,
-  ): (state: State, action: Action) => [State, Effect]
+    accessor?: (state: State, key: $Keys<State>) => any,
+    modifier?: (state: State, key: $Keys<State>, value: any) => any
+  ): (state: State, action: Action) => [State, Effect];
 
   declare var Effects: {
     batch: (effects: Effect[]) => Effect,
@@ -26,7 +30,14 @@ declare module "redux-loop" {
     // - Flow will not report an error if the caller does not supply all of the
     // arguments that the callback requires
 
-    call: <Action: { type: $Subtype<string> }, A, B, C, D, E>(actionFactory: (a: A, b: B, c: C, d: D, e: E) => Action, a?: A, b?: B, c?: C, d?: D, e?: E) => Effect,
+    call: <Action: { type: $Subtype<string> }, A, B, C, D, E>(
+      actionFactory: (a: A, b: B, c: C, d: D, e: E) => Action,
+      a?: A,
+      b?: B,
+      c?: C,
+      d?: D,
+      e?: E
+    ) => Effect,
 
     constant: <A: { type: $Subtype<string> }>(action: A) => Effect,
 
@@ -38,16 +49,32 @@ declare module "redux-loop" {
     // problem during type-checking if the caller guesses wrong.
     // Unfortunately I do not know how to accomplish that consistently.
 
-    lift: <Action1, Action2: { type: $Subtype<string> }, A, B, C, D, E>(effect: Effect, f: (a: A, b: B, c: C, d: D, e: E, action: Action1) => Action2, a?: A, b?: B, c?: C, d?: D, e?: E) => Effect,
+    lift: <Action1, Action2: { type: $Subtype<string> }, A, B, C, D, E>(
+      effect: Effect,
+      f: (a: A, b: B, c: C, d: D, e: E, action: Action1) => Action2,
+      a?: A,
+      b?: B,
+      c?: C,
+      d?: D,
+      e?: E
+    ) => Effect,
 
-    promise: <Action: { type: $Subtype<string> }, A, B, C, D, E>(actionFactory: (a: A, b: B, c: C, d: D, e: E) => Promise<Action>, a?: A, b?: B, c?: C, d?: D, e?: E) => Effect,
+    promise: <Action: { type: $Subtype<string> }, A, B, C, D, E>(
+      actionFactory: (a: A, b: B, c: C, d: D, e: E) => Promise<Action>,
+      a?: A,
+      b?: B,
+      c?: C,
+      d?: D,
+      e?: E
+    ) => Effect,
 
-    none: () => Effect,
+    none: () => Effect
   };
 
-  declare function getEffect<S>(loop: S | [S, Effect]): Effect | null;
+  declare function getEffect<S>(loop: [S, Effect]): Effect;
+  declare function getEffect<S>(loop: S): null;
 
-  declare function getModel<S>(loop: S | [S, Effect]): S;
+  declare function getModel<S>(loop: [S, Effect] | S): S;
 
   // TODO: When we are able to import type definitions from other libdefs, this
   // declaration should be changed to:

@@ -16,7 +16,7 @@ declare module 're-reselect' {
     & InputSelector<TState, TProps, TResult>
     & {
       recomputations(): number,
-      resetRecomputations(): void,
+      resetRecomputations(): number,
       resultFunc(state: TState, props: TProps, ...rest: Array<any>): TResult,
     };
 

@@ -19,3 +19,5 @@ script: ./travis.sh
 cache:
   directories:
   - cli/.flow-bins-cache
+  - $HOME/.flow-typed
+  - $HOME/.cache/yarn

@@ -166,5 +166,5 @@ declare module "pino" {
       | stream$Transform
   ): Logger;
 
-  declare module.exports: P;
+  declare module.exports: typeof P;
 }

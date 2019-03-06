@@ -2,6 +2,12 @@
 
 import mongoose, { Schema } from "mongoose";
 
+mongoose.connect('mongodb://host:port/dbname', error => {
+  console.log(error)
+})
+
+mongoose.connect('mongodb://host:port/dbname').then(data => (data: Mongoose$Connection))
+
 export const AdminSchema = new Schema(
   {
     _id: String,

@@ -163,7 +163,7 @@ declare module "@material-ui/core/ButtonBase/createRippleHandler" {
     eventName: string,
     action: string,
     cb: ?Function
-  ) => handleEvent;
+  ) => typeof handleEvent;
 }
 
 declare module "@material-ui/core/ButtonBase" {
@@ -488,7 +488,20 @@ declare module "@material-ui/core/DialogTitle/DialogTitle" {
 }
 
 declare module "@material-ui/core/withMobileDialog/withMobileDialog" {
-  declare module.exports: any;
+  import type { Breakpoint } from "@material-ui/core/styles/createBreakpoints";
+  import type { WithWidth } from '@material-ui/core/withWidth/withWidth';
+
+  declare type WithMobileDialog = {
+    fullScreen?: boolean
+  } & WithWidth
+
+  declare module.exports: (
+    options?: {
+      breakpoint: Breakpoint
+    }
+  ) => <Props: {}, WrappedComponent: React$ComponentType<Props>>(
+    Component: WrappedComponent
+  ) => React$ComponentType<$Diff<React$ElementConfig<$Supertype<WrappedComponent>>, WithMobileDialog>>;
 }
 
 declare module "@material-ui/core/Dialog" {
@@ -1918,7 +1931,7 @@ declare module "@material-ui/core/styles/colorManipulator" {
 }
 
 declare module "@material-ui/core/styles/createBreakpoints" {
-  declare type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
+  declare export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
 
   declare export type BreakpointValues = { [key: Breakpoint]: number };
   declare export type Breakpoints = {
@@ -2133,6 +2146,23 @@ declare module "@material-ui/core/styles/createTypography" {
   import type {Palette} from "@material-ui/core/styles/createPalette";
 
   declare export type TextStyle =
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "subtitle1"
+    | "subtitle2"
+    | "body1"
+    | "body2"
+    | "caption"
+    | "button"
+    | "overline"
+    | "srOnly"
+    | "inherit"
+
+    // deprecated
     | "display1"
     | "display2"
     | "display3"
@@ -2140,11 +2170,6 @@ declare module "@material-ui/core/styles/createTypography" {
     | "headline"
     | "title"
     | "subheading"
-    | "body1"
-    | "body2"
-    | "caption";
-
-  declare export type Style = TextStyle | "button";
 
   declare type FontStyle = {
     fontFamily: $PropertyType<CSSProperties, "fontFamily">,
@@ -2169,9 +2194,12 @@ declare module "@material-ui/core/styles/createTypography" {
     pxToRem: (px: number) => string
   };
 
-  declare export type Typography = { [style: Style]:  $Shape<TypographyStyle> } & FontStyle & TypographyUtils;
+  declare export type Typography = { [style: TextStyle]:  $Shape<TypographyStyle> } & FontStyle & TypographyUtils;
 
-  declare export type TypographyOptions = $Shape<{ [style: Style]:  $Shape<TypographyStyle> } & FontStyle>;
+  declare export type TypographyOptions = $Shape<{
+    [style: TextStyle]:  $Shape<TypographyStyle>,
+    useNextVariants: boolean
+  } & FontStyle>;
 
   declare module.exports: (
     palette: Palette,
@@ -2962,27 +2990,17 @@ declare module "@material-ui/core/Typography" {
 
 declare module "@material-ui/core/Typography/Typography" {
   import type {ComponentType, ElementType, Node} from "react";
+  import type {TextStyle as Variant} from "@material-ui/core/styles/createTypography"
 
   declare type Align = "inherit" | "left" | "center" | "right" | "justify";
   declare type Color =
     | "inherit"
     | "primary"
     | "secondary"
+    | "textPrimary"
     | "textSecondary"
     | "error"
     | "default";
-  declare type Variant =
-    | "display4"
-    | "display3"
-    | "display2"
-    | "display1"
-    | "headline"
-    | "title"
-    | "subheading"
-    | "body2"
-    | "body1"
-    | "caption"
-    | "button";
 
   declare module.exports: ComponentType<{
     align?: Align,
@@ -3077,16 +3095,23 @@ declare module "@material-ui/core/utils/requirePropFactory" {
 
 declare module "@material-ui/core/withWidth/withWidth" {
   import type {ComponentType} from "react";
-
   import type {Breakpoint} from "@material-ui/core/styles/createBreakpoints";
+
+  declare export type WithWidth = {
+    width?: Breakpoint,
+    innerRef?: (React$Ref<any> | {current: React$ElementRef<any> | null})
+  }
+
   declare module.exports: (options?: {|
     withTheme?: boolean,
     noSSR?: boolean,
     initialWidth?: Breakpoint,
     resizeInterval?: number
-  |}) => <Props: { width: Breakpoint }>(
+  |}) => <Props: WithWidth>(
     Component: ComponentType<Props>
-  ) => ComponentType<$Diff<Props, { width: Breakpoint }>>;
+  ) => <Props: {}, WrappedComponent: React$ComponentType<Props>>(
+    Component: WrappedComponent
+  ) => React$ComponentType<$Diff<React$ElementConfig<$Supertype<WrappedComponent>>,WithWidth>>;
 }
 
 declare module "@material-ui/core/colors" {

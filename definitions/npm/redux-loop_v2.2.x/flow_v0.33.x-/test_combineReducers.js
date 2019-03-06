@@ -1,48 +1,49 @@
 /* @flow */
 
-import { combineReducers } from 'redux-loop'
+import { combineReducers } from "redux-loop";
 
-import type { Effect, Reducer } from 'redux-loop'
+import type { Effect, Reducer } from "redux-loop";
 
-type StateA = number
-type StateB = string
-type StateC = boolean
+type StateA = number;
+type StateB = string;
+type StateC = boolean;
 
-type State = { a: StateA, b: StateB, c: StateC }
+type State = { a: StateA, b: StateB, c: StateC };
 
-const action = { type: 'ACTION' }
+const action = { type: "ACTION" };
 
 function testCombineReducers<Action>(
   a: Reducer<StateA, Action>,
   b: (state: StateB, action: Action) => StateB,
-  c: (state: StateC, action: Action) => (StateC | [StateC, Effect])
+  c: (state: StateC, action: Action) => StateC | [StateC, Effect]
 ) {
   // ok
-  const reducer = combineReducers({ a, b, c }, { a: 1, b: 'two', c: false })
+  const reducer = combineReducers({ a, b, c }, { a: 1, b: "two", c: false });
 
   // ok
-  const reducer2: Reducer<State, Action> = combineReducers({ a, b, c }, { a: 1, b: 'two', c: false })
+  const reducer2: Reducer<State, Action> = combineReducers(
+    { a, b, c },
+    { a: 1, b: "two", c: false }
+  );
 
   // ok
-  const result: [State, Effect] = reducer({ a: 1, b: 'two', c: false }, action)
-
+  const result: [State, Effect] = reducer({ a: 1, b: "two", c: false }, action);
 
   //
   // Checks type of state input to reducer
   //
 
   // $ExpectError
-  reducer({}, action)
+  reducer({}, action);
 
   // $ExpectError
-  reducer({ a: 'badvalue', b: 'two', c: false }, action)
-  
-  // $ExpectError
-  reducer({ a: 1, b: 2, c: false }, action)
+  reducer({ a: "badvalue", b: "two", c: false }, action);
 
   // $ExpectError
-  reducer({ a: 1, b: 'two', c: new Date() }, action)
+  reducer({ a: 1, b: 2, c: false }, action);
 
+  // $ExpectError
+  reducer({ a: 1, b: "two", c: new Date() }, action);
 
   //
   // Checks shape of initial state
@@ -53,7 +54,6 @@ function testCombineReducers<Action>(
   //
   // combineReducers({ a, b, c }, { a: 'one' })
 
-
   //
   // State accessor and modifier
   //
@@ -63,6 +63,6 @@ function testCombineReducers<Action>(
     { a, b, c },
     {},
     (state, key) => state[key],
-    (state, key, value) => state[key] = value,
-  )
+    (state, key, value) => (state[key] = value)
+  );
 }

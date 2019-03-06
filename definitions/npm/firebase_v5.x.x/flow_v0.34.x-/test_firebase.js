@@ -296,3 +296,122 @@ firebase
   .firestore()
   .collection('/foo')
   .get({ source: 'cache' })
+
+// #30
+firebase
+  .firestore()
+  .getAll(
+    firebase.firestore().doc('col/doc1'),
+    firebase.firestore().doc('col/doc2'));
+
+// #31
+firebase
+  .firestore()
+  .collection('/foo')
+  .where('id', '==', '5')
+  .get({ source: 'cache' });
+
+// #32
+firebase
+ .firestore()
+ .collection('/foo')
+ .where('id', 'array-contains', '5')
+ .get({ source: 'cache' });
+
+// #33
+firebase
+ .firestore()
+ .collection('/foo')
+ // $ExpectError
+ .where('id', 'lte', '5')
+ .get({ source: 'cache' });
+
+// #34
+firebase
+  .firestore()
+  .collection('/foo')
+  .add({foo: 'bar'})
+  .then(document => {
+    const id = document.id
+  })
+
+// #35
+firebase
+  .firestore()
+  .collection('/foo')
+  .add({foo: 'bar'})
+  .then(document => {
+    // $ExpectError
+    const foo = document.foo
+  })
+
+// #36
+firebase
+  .firestore()
+  .runTransaction((transaction) => Promise.resolve({foo: 'bar'}))
+  .then(object => {
+    const foo = object.foo
+  })
+
+// #37
+firebase
+  .firestore()
+  .collection('/foo')
+  .doc('bar')
+  .update({ regions: firebase.firestore.FieldValue.arrayUnion('east_coast') });
+
+// #38
+firebase
+  .firestore()
+  .collection('/foo')
+  .doc('bar')
+  .update({ regions: firebase.firestore.FieldValue.arrayRemove('east_coast') });
+
+// #39
+firebase
+  .firestore()
+  .enableNetwork()
+  .then(() => {});
+
+// #40
+firebase
+  .firestore()
+  .disableNetwork()
+  .then(() => {});
+
+// #41
+firebase
+  .firestore()
+  .settings({ /* empty settings option */ });
+
+// #42
+firebase
+  .firestore()
+  .settings({ host: 'random_host', ssl: true, timestampsInSnapshots: false, cacheSizeBytes: 0 });
+
+// #43
+firebase
+  .firestore()
+  .enablePersistence()
+  .then(() => {});
+
+// #44
+firebase
+  .firestore()
+  .enablePersistence({ experimentalTabSynchronization: true })
+  .then(() => {});
+
+// #45
+
+firebase
+  .firestore()
+  .collection('listened-collection')
+  .onSnapshot((snapshot) => {
+    snapshot.docChanges().forEach(c => {
+      // test the newly added typedef for doc change
+      (c.type: string);
+      (c.doc.id: string);
+      (c.oldIndex: number);
+      (c.newIndex: number);
+    });
+  });

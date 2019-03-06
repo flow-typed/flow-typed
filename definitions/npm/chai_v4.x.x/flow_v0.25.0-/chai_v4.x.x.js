@@ -110,15 +110,25 @@ declare module "chai" {
     calledThrice: () => ExpectChain<T>,
     calledBefore: (spy: mixed) => ExpectChain<T>,
     calledAfter: (spy: mixed) => ExpectChain<T>,
+    calledImmediatelyBefore: (spy: mixed) => ExpectChain<T>,
+    calledImmediatelyAfter: (spy: mixed) => ExpectChain<T>,
     calledWith: (...args: Array<mixed>) => ExpectChain<T>,
+    calledOnceWith: (...args: Array<mixed>) => ExpectChain<T>,
     calledWithMatch: (...args: Array<mixed>) => ExpectChain<T>,
     calledWithExactly: (...args: Array<mixed>) => ExpectChain<T>,
+    calledOnceWithExactly: (...args: Array<mixed>) => ExpectChain<T>,
+    returned: (returnVal: mixed) => ExpectChain<T>,
+    alwaysReturned: (returnVal: mixed) => ExpectChain<T>,
 
     // chai-as-promised
     eventually: ExpectChain<T>,
     resolvedWith: (value: mixed) => Promise<mixed> & ExpectChain<T>,
     resolved: () => Promise<mixed> & ExpectChain<T>,
-    rejectedWith: (value: mixed) => Promise<mixed> & ExpectChain<T>,
+    rejectedWith: (
+      value: mixed,
+      errMsgMatcher?: RegExp | string,
+      msg?: string
+    ) => Promise<mixed> & ExpectChain<T>,
     rejected: () => Promise<mixed> & ExpectChain<T>,
     notify: (callback: () => mixed) => ExpectChain<T>,
     fulfilled: () => Promise<mixed> & ExpectChain<T>,

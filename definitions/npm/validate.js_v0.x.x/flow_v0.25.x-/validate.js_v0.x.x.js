@@ -1,10 +1,10 @@
-declare module "validate.js" {
-  declare type Attributes = any;
+declare module 'validate.js' {
+  declare type Attributes = mixed;
   declare type Constraint = Object;
   declare type Constraints = { [k: string]: null | Constraint };
   declare type Options = Object;
   declare type ValidatorFunction = (
-    value: any,
+    value: mixed,
     options: Options,
     key: string,
     attributes: Attributes,
@@ -15,33 +15,37 @@ declare module "validate.js" {
     (
       attributes: Attributes,
       constraints: Constraints,
-      options: { format: "flat" } & Options
+      options: { format: 'flat' } & Options
     ): Array<string>,
     (
       attributes: Attributes,
       constraints: Constraints,
-      options: { format: "grouped" } & Options
+      options: { format: 'grouped' } & Options
     ): { [key: string]: Array<string> },
     (
       attributes: Attributes,
       constraints: Constraints,
-      options: { format: "detailed" } & Options
+      options: { format: 'detailed' } & Options
     ): Array<{
       attribute: string,
-      value: any,
+      value: mixed,
       validator: string,
       globalOptions: Object,
       attributes: Attributes,
       options: Object,
-      error: string
+      error: string,
     }>,
-    (attributes: Attributes, constraints: Constraints, options?: Options): any,
+    (
+      attributes: Attributes,
+      constraints: Constraints,
+      options?: Options
+    ): mixed,
 
     async(
       attributes: Attributes,
       constraints: Constraints,
       options?: Options
-    ): Promise<any>,
+    ): Promise<mixed>,
     Promise: typeof Promise,
     capitalize(s: string): string,
     cleanAttributes(
@@ -53,37 +57,37 @@ declare module "validate.js" {
       options?: { nullify?: boolean, trim?: boolean }
     ): { [k: string]: void | null | string | boolean },
     contains<V>(collection: Array<V> | { [k: string]: V }, v: V): boolean,
-    extend(o1: any, ...otherObjects: Array<any>): any,
-    format(formatString: string, values: { [k: string]: any }): string,
-    getDeepObjectValue(object: Object, keypath: string): any,
-    isArray(value: Array<any>): true,
-    isArray(value: any): false,
+    extend(o1: mixed, ...otherObjects: Array<mixed>): mixed,
+    format(formatString: string, values: { [k: string]: mixed }): string,
+    getDeepObjectValue(object: Object, keypath: string): mixed,
+    isArray(value: Array<mixed>): true,
+    isArray(value: mixed): false,
     isBoolean(value: boolean): true,
-    isBoolean(value: any): false,
+    isBoolean(value: mixed): false,
     isDate(value: Date): true,
-    isDate(value: any): false,
+    isDate(value: mixed): false,
     isDefined(value: void | null): false,
-    isDefined(value: any): true,
+    isDefined(value: mixed): true,
     isDomElement(value: Element): true,
-    isDomElement(value: any): false,
-    isEmpty(value: void | null | ""): true,
-    isEmpty(value: any): boolean,
+    isDomElement(value: mixed): false,
+    isEmpty(value: void | null | ''): true,
+    isEmpty(value: mixed): boolean,
     isFunction(value: Function): true,
-    isFunction(value: any): false,
+    isFunction(value: mixed): false,
     isHash(value: {}): true,
-    isHash(value: any): false,
-    isInteger(value: any): boolean,
+    isHash(value: mixed): false,
+    isInteger(value: mixed): boolean,
     isNumber(value: number): true,
-    isNumber(value: any): false,
+    isNumber(value: mixed): false,
     isPromise(value: { then: Function }): true,
-    isPromise(value: any): false,
+    isPromise(value: mixed): false,
     isString(value: string): true,
-    isString(value: any): false,
+    isString(value: mixed): false,
     prettify(string: string): string,
-    result(value: any, ...args: Array<any>): any,
-    single(value: any, constraint: Constraint, options?: Options): any,
-    validators: { [key: string]: ValidatorFunction }
+    result(value: mixed, ...args: Array<mixed>): mixed,
+    single(value: mixed, constraint: Constraint, options?: Options): mixed,
+    validators: { [key: string]: ValidatorFunction },
   };
 
-  declare module.exports: ValidateFunction;
+  declare export default ValidateFunction;
 }

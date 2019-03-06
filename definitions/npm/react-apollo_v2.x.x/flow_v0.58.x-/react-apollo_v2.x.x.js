@@ -1,5 +1,8 @@
 declare module "react-apollo" {
-  import type { ComponentType, Element, Node } from 'react';
+  import type { ComponentType, Element, Node } from "react";
+
+  declare type MakeOptional = <V>(V) => ?V;
+  declare type MakeDataOptional<TData> = $ObjMap<TData, MakeOptional> | void;
   /**
    * Copied types from Apollo Client libdef
    * Please update apollo-client libdef as well if updating these types
@@ -271,7 +274,9 @@ declare module "react-apollo" {
     context?: any;
   }
 
-  declare export type RefetchQueryDescription = $ReadOnlyArray<string | PureQueryOptions>;
+  declare export type RefetchQueryDescription = $ReadOnlyArray<
+    string | PureQueryOptions
+  >;
 
   declare interface MutationBaseOptions<T = { [key: string]: any }> {
     optimisticResponse?: Object | Function;
@@ -436,6 +441,7 @@ declare module "react-apollo" {
     __actionHookForDevTools(cb: () => mixed): void;
     __requestRaw(payload: GraphQLRequest): Observable<ExecutionResult<>>;
     initQueryManager(): void;
+    clearStore(): Promise<void | null>;
     resetStore(): Promise<Array<ApolloQueryResult<any>> | null>;
     onResetStore(cb: () => Promise<any>): () => void;
     reFetchObservableQueries(
@@ -763,7 +769,7 @@ declare module "react-apollo" {
 
   declare export type RefetchQueriesProviderFn = (
     ...args: any[]
-  ) => RefetchQueryDescription
+  ) => RefetchQueryDescription;
 
   declare export type MutationOpts<TVariables> = {|
     variables?: TVariables,
@@ -779,7 +785,8 @@ declare module "react-apollo" {
     fetchPolicy?: FetchPolicy,
     pollInterval?: number,
     skip?: boolean,
-    errorPolicy?: ErrorPolicy
+    errorPolicy?: ErrorPolicy,
+    context?: { [key: string]: any }
   |};
 
   declare export interface GraphqlQueryControls<
@@ -804,7 +811,7 @@ declare module "react-apollo" {
 
   declare export interface OptionProps<TProps, TResult, TVariables> {
     ownProps: TProps;
-    data: GraphqlData<TResult, TVariables>;
+    data?: GraphqlData<TResult, TVariables>;
     mutate: MutationFunc<TResult, TVariables>;
   }
 
@@ -840,9 +847,7 @@ declare module "react-apollo" {
     TVariables: Object = {},
     TMergedProps: Object = ChildProps<TOwnProps, TResult, TVariables>
   > {
-    (
-      component: ComponentType<TMergedProps>
-    ): ComponentType<TOwnProps>;
+    (component: ComponentType<TMergedProps>): ComponentType<TOwnProps>;
   }
 
   declare export function graphql<TResult, TProps, TVariables, TChildProps>(
@@ -880,11 +885,7 @@ declare module "react-apollo" {
   declare export function walkTree(
     element: Node,
     context: Context,
-    visitor: (
-      element: Node,
-      instance: any,
-      context: Context
-    ) => boolean | void
+    visitor: (element: Node, instance: any, context: Context) => boolean | void
   ): void;
 
   declare export function getDataFromTree(
@@ -903,7 +904,7 @@ declare module "react-apollo" {
     TData = any,
     TVariables = OperationVariables
   > = {
-    data: TData | {||} | void,
+    data: MakeDataOptional<TData>,
     loading: boolean,
     error?: ApolloError,
     variables: TVariables,
@@ -924,7 +925,10 @@ declare module "react-apollo" {
       options: SubscribeToMoreOptions<TData, any, any>
     ) => () => void,
     updateQuery: (
-      mapFn: (previousResult: TData, options: { variables: TVariables }) => TData
+      mapFn: (
+        previousResult: TData,
+        options: { variables: TVariables }
+      ) => TData
     ) => mixed,
     client: ApolloClient<any>
   };
@@ -947,20 +951,25 @@ declare module "react-apollo" {
     context?: { [string]: any }
   }> {}
 
-  declare export type SubscriptionResult<TData, TVariables = OperationVariables> = {
+  declare export type SubscriptionResult<
+    TData,
+    TVariables = OperationVariables
+  > = {
     loading: boolean,
-    data?: TData | {||} | void,
+    data?: MakeDataOptional<TData>,
     error?: ApolloError
   };
 
   declare export type SubscriptionRenderPropFunction<TData, TVariables> = (
     result: SubscriptionResult<TData, TVariables>
-  ) => Node
+  ) => Node;
 
-  declare type SubscriptionProps<
-    TData,
-    TVariables = OperationVariables
-  > = {
+  declare export type OnSubscriptionDataOptions<TData> = {
+    client: ApolloClient<any>,
+    subscriptionData: SubscriptionResult<TData>
+  };
+
+  declare type SubscriptionProps<TData, TVariables = OperationVariables> = {
     subscription: DocumentNode,
     variables?: TVariables,
     shouldResubscribe?:
@@ -969,7 +978,8 @@ declare module "react-apollo" {
           SubscriptionProps<TData, TVariables>,
           SubscriptionProps<TData, TVariables>
         ) => boolean),
-    children: SubscriptionRenderPropFunction<TData, TVariables>
+    onSubscriptionData?: (OnSubscriptionDataOptions<TData>) => any,
+    children?: SubscriptionRenderPropFunction<TData, TVariables>
   };
 
   declare export class Subscription<TData, TVariables> extends React$Component<
@@ -981,7 +991,7 @@ declare module "react-apollo" {
   declare export type MutationFunction<
     TData = any,
     TVariables = OperationVariables
-  > = (options: {
+  > = (options?: {
     variables?: TVariables,
     optimisticResponse?: Object,
     refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
@@ -1016,4 +1026,6 @@ declare module "react-apollo" {
     onError?: (error: ApolloError) => mixed,
     context?: { [string]: any }
   }> {}
+
+  declare export var compose: $Compose;
 }
