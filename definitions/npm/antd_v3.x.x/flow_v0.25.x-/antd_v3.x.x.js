@@ -27,7 +27,11 @@ declare module "antd" {
 
   declare export class Badge extends React$Component<{}> {}
 
-  declare export class Button extends React$Component<{}> {}
+  declare export class Button extends React$Component<{}> {
+    static Group: typeof ButtonGroup
+  }
+
+  declare class ButtonGroup extends React$Component<{}> {}
 
   declare export class Card extends React$Component<{}> {}
 
@@ -327,8 +331,8 @@ declare module "antd" {
     defaultPageSize?: number,
     hideOnSinglePage?: boolean,
     itemRender?: (
-      page: number, 
-      type: "page" | "prev" | "next", 
+      page: number,
+      type: "page" | "prev" | "next",
       originalElement: React$Node
     ) => React$Node,
     pageSize?: number,
@@ -346,6 +350,8 @@ declare module "antd" {
   declare export class Pagination extends React$Component<PaginationProps> {}
 
   declare export class Popconfirm extends React$Component<{}> {}
+
+  declare export class Popover extends React$Component<{}> {}
 
   declare export class Progress extends React$Component<{}> {}
 

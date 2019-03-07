@@ -23,6 +23,7 @@ import {
   Modal,
   Pagination,
   Popconfirm,
+  Popover,
   Radio,
   Row,
   Select,
@@ -63,6 +64,12 @@ describe("Badge", () => {
 describe("Button", () => {
   it("is a react component", () => {
     const button = <Button />;
+  });
+});
+
+describe("Button.Group", () => {
+  it("is a react component", () => {
+    const group = <Button.Group />;
   });
 });
 
@@ -345,6 +352,12 @@ describe("Pagination", () => {
 describe("Popconfirm", () => {
   it("is a react component", () => {
     const popconfirm = <Popconfirm />;
+  });
+});
+
+describe("Popover", () => {
+  it("is a react component", () => {
+    const popover = <Popover />;
   });
 });
 
