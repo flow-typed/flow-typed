@@ -60,14 +60,20 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   orWhereNotBetween<T>(column: string, range: [T, T]): this;
   orWhereRaw(sql: string, bindings?: Knex$RawBindings): this;
   join(table: string, c1: string, operator: string, c2: string): this;
-  innerJoin(table: string, c1: string, operator: string, c2: string): this;
+  join(table: string, c1: string, c2: string): this;
+  join(
+    builder: Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>,
+    c1?: string,
+    c2?: string
+  ): this;
+  join(table: string, builder: Knex$QueryBuilderFn<R>): this;
+  join(table: string, c1: string, operator: string, c2: string): this;
   innerJoin(table: string, c1: string, c2: string): this;
   innerJoin(
     builder: Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>,
     c1?: string,
     c2?: string
   ): this;
-  join(table: string, c1: string, operator: string, c2: string): this;
   innerJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
   leftJoin(table: string, c1: string, operator: string, c2: string): this;
   leftJoin(table: string, c1: string, c2: string): this;
@@ -117,14 +123,14 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   havingRaw(raw: string, bindings?: Knex$RawBindings): this;
   union(): this;
   unionAll(): this;
-  count(column?: string): this;
-  countDistinct(column?: string): this;
-  min(column?: string): this;
-  max(column?: string): this;
-  sum(column?: string): this;
-  sumDistinct(column?: string): this;
-  avg(column?: string): this;
-  avgDistinct(column?: string): this;
+  count(column?: string | string[] | any): this;
+  countDistinct(column?: string | string[] | any): this;
+  min(column?: string | string[] | any): this;
+  max(column?: string | string[] | any): this;
+  sum(column?: string | string[] | any): this;
+  sumDistinct(column?: string | string[] | any): this;
+  avg(column?: string | string[] | any): this;
+  avgDistinct(column?: string | string[] | any): this;
   pluck(column: string): this;
   first(key?: string[]): this;
   first(...key: string[]): this;
