@@ -6,6 +6,11 @@ declare class Knex$Transaction<R>
   savepoint(connection?: any): Promise<R>;
 }
 
+declare class Knex$Raw<R>
+  mixins events$EventEmitter, Promise<R> {
+    wrap(before: string, after: string): this
+}
+
 declare type Knex$QueryBuilderFn<R> = (
   qb: Knex$QueryBuilder<R>
 ) => Knex$QueryBuilder<R> | void;
@@ -123,14 +128,14 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   havingRaw(raw: string, bindings?: Knex$RawBindings): this;
   union(): this;
   unionAll(): this;
-  count(column?: string | string[] | any): this;
-  countDistinct(column?: string | string[] | any): this;
-  min(column?: string | string[] | any): this;
-  max(column?: string | string[] | any): this;
-  sum(column?: string | string[] | any): this;
-  sumDistinct(column?: string | string[] | any): this;
-  avg(column?: string | string[] | any): this;
-  avgDistinct(column?: string | string[] | any): this;
+  count(column?: string | string[] | { [key: [string]]: string | string[] } | Knex$Raw<R>): this;
+  countDistinct(column?: string | string[] | { [key: string]: string | string[] } | Knex$Raw<R>): this;
+  max(column?: string | string[] | { [key: string]: string | string[] } | Knex$Raw<R>): this;
+  sum(column?: string | string[] | { [key: string]: string | string[] } | Knex$Raw<R>): this;
+  min(column?: string | string[] | { [key: string]: string | string[] } | Knex$Raw<R>): this;
+  sumDistinct(column?: string | string[] | { [key: string]: string | string[] } | Knex$Raw<R>): this;
+  avg(column?: string | string[] | { [key: string]: string | string[] } | Knex$Raw<R>): this;
+  avgDistinct(column?: string | string[] | { [key: string]: string | string[] } | Knex$Raw<R>): this;
   pluck(column: string): this;
   first(key?: string[]): this;
   first(...key: string[]): this;
@@ -171,7 +176,7 @@ declare class Knex$Knex<R>
   static (config: Knex$Config): Knex$Knex<R>;
   static QueryBuilder: typeof Knex$QueryBuilder;
   [[call]]: (tableName: string) => Knex$QueryBuilder<R>;
-  raw(sqlString: string, bindings?: Knex$RawBindings): any;
+  raw(sqlString: string, bindings?: Knex$RawBindings): Knex$Raw<R>;
   batchInsert: (
     tableName: string,
     rows: Array<Object>,
