@@ -66,6 +66,12 @@ describe("Button", () => {
   it("is a react component", () => {
     const button = <Button />;
   });
+  it("should accept nullary or unary onClick handler", () => {
+    const good0 = <Button onClick={() => undefined} />
+    const good1 = <Button onClick={(event) => undefined} />
+    // $ExpectError
+    const bad = <Button onClick='bad' />
+  });
 });
 
 describe("Button.Group", () => {
