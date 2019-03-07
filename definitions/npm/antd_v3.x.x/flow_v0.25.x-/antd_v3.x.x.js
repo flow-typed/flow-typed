@@ -385,8 +385,8 @@ declare module "antd" {
     okText?: string,
     okType?: 'primary' | 'dashed' | 'ghost' | 'danger' | 'default',
     title?: 'string' | React$Node,
-    onCancel?: (SyntheticEvent<HTMLElement>) => void,
-    onConfirm?: (SyntheticEvent<HTMLElement>) => void,
+    onCancel?: (event?: SyntheticEvent<HTMLElement>) => void,
+    onConfirm?: (event?: SyntheticEvent<HTMLElement>) => void,
     icon?: React$Node
   } & TooltipSharedProps
 
