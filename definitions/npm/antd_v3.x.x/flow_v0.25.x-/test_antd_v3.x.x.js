@@ -354,11 +354,26 @@ describe("Popconfirm", () => {
   it("is a react component", () => {
     const popconfirm = <Popconfirm />;
   });
+  it("should accept only certain strings for placement prop", () => {
+    // Testing placement prop in particular just to verify sharing between
+    // Popconfirm, Popover, and Tooltip is working.
+    const good = <Popconfirm placement='top' />;
+    // $ExpectError
+    const bad = <Popconfirm placement='topCenter' />;
+  });
 });
 
 describe("Popover", () => {
   it("is a react component", () => {
     const popover = <Popover />;
+  });
+
+  it("should accept only certain strings for placement prop", () => {
+    // Testing placement prop in particular just to verify sharing between
+    // Popconfirm, Popover, and Tooltip is working.
+    const good = <Popover placement='top' />;
+    // $ExpectError
+    const bad = <Popover placement='topCenter' />;
   });
 });
 
@@ -455,6 +470,13 @@ describe("Tag", () => {
 describe("Tooltip", () => {
   it("is a react component", () => {
     const tooltip = <Tooltip title="hello" />;
+  });
+  it("should accept only certain strings for placement prop", () => {
+    // Testing placement prop in particular just to verify sharing between
+    // Popconfirm, Popover, and Tooltip is working.
+    const good = <Popover placement='top' />;
+    // $ExpectError
+    const bad = <Popover placement='topCenter' />;
   });
 });
 
