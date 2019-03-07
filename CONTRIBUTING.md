@@ -63,9 +63,9 @@ library-definition test runner.
 
 This specifies that the definition you are contributing is compatible with the
 version range of the directiry. You MUST specify a version range with names like
-`flow_v0.25.x-` ("any version at or after v0.22.x") or
-`flow_-v0.25.x` ("any version at or before v0.22.x") or
-`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.22.x and
+`flow_v0.25.x-` ("any version at or after v0.25.x") or
+`flow_-v0.25.x` ("any version at or before v0.25.x") or
+`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.25.x and
 v0.28.x").
 
 If you aren't sure which versions of Flow your definition is compatible with,
@@ -107,9 +107,19 @@ the test-runner for *all* versions of Flow the package version supports. If you
 ever need to write a test for a particular version of Flow, you can put the
 `test_` file in the appropriate flow version directory.
 
-#### 5) Run your tests with `flow-typed validate-defs definitions && flow-typed run-tests left-pad`
+#### 5) Run your tests using one of the following:
+- globally installed `'flow-typed'`:
+```
+flow-typed validate-defs definitions && flow-typed run-tests left-pad
+```
+- local flow-typed CLI that we've built before (see instructions about `'./build_and_test_cli.sh'` above):
+```
+# assuming current directory is './cli'
+node dist/cli.js validate-defs ../definitions && \
+node dist/cli.js run-tests left-pad
+```
 
-You may also leave off the argument `left-pad` to run *all* tests (this takes a while). Please note that this test (and the one on Travis-CI) only will be able to run if the name of the repo folder is still "flow-typed".
+You may also leave off the argument `left-pad` to run *all* tests (this takes a while).
 
 #### 6) Send a pull request
 
