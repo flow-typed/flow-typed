@@ -1,6 +1,6 @@
 declare class Knex$Transaction<R>
   mixins Knex$QueryBuilder<R>, events$EventEmitter, Promise<R> {
-  [[call]]:(tableName: string) => Knex$QueryBuilder<R>;
+  [[call]]: (tableName: string) => Knex$QueryBuilder<R>;
   commit(connection?: any, value?: any): Promise<R>;
   rollback(?Error): Promise<R>;
   savepoint(connection?: any): Promise<R>;
@@ -13,6 +13,8 @@ declare type Knex$QueryBuilderFn<R> = (
 declare class Knex$QueryBuilder<R> mixins Promise<R> {
   clearSelect(): this;
   clearWhere(): this;
+  clearOrder(): this;
+  clearCounters(): this;
   select(key?: string[]): this;
   select(...key: string[]): this;
   timeout(ms: number, options?: { cancel: boolean }): this;
@@ -37,10 +39,10 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   whereNotIn(column: string, values: any[]): this;
   whereNull(column: string): this;
   whereNotNull(column: string): this;
-  whereExists(column: string): this;
-  whereNotExists(column: string): this;
-  whereBetween(column: string, range: number[]): this;
-  whereNotBetween(column: string, range: number[]): this;
+  whereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  whereNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  whereBetween<T>(column: string, range: [T, T]): this;
+  whereNotBetween<T>(column: string, range: [T, T]): this;
   whereRaw(sql: string, bindings?: Knex$RawBindings): this;
   orWhere(builder: Knex$QueryBuilderFn<R>): this;
   orWhere(column: string, value: any): this;
@@ -54,9 +56,10 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   orWhereNotNull(column: string): this;
   orWhereExists(column: string): this;
   orWhereNotExists(column: string): this;
-  orWhereBetween(column: string, range: number[]): this;
-  orWhereNotBetween(column: string, range: number[]): this;
+  orWhereBetween<T>(column: string, range: [T, T]): this;
+  orWhereNotBetween<T>(column: string, range: [T, T]): this;
   orWhereRaw(sql: string, bindings?: Knex$RawBindings): this;
+  join(table: string, c1: string, operator: string, c2: string): this;
   innerJoin(table: string, c1: string, operator: string, c2: string): this;
   innerJoin(table: string, c1: string, c2: string): this;
   innerJoin(
@@ -64,6 +67,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
     c1?: string,
     c2?: string
   ): this;
+  join(table: string, c1: string, operator: string, c2: string): this;
   innerJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
   leftJoin(table: string, c1: string, operator: string, c2: string): this;
   leftJoin(table: string, c1: string, c2: string): this;
@@ -91,7 +95,11 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   distinct(): this;
   groupBy(column: string): this;
   groupByRaw(sql: string, bindings?: Knex$RawBindings): this;
-  orderBy(column: string | Array<string | { column: string, order?: string }>, direction?: "desc" | "asc"): this;
+  orderBy(
+    column: string | Array<string | { column: string, order?: string }>,
+    direction?: 'desc' | 'asc'
+  ): this;
+
   orderByRaw(sql: string, bindings?: Knex$RawBindings): this;
   offset(offset: number): this;
   limit(limit: number): this;
@@ -121,7 +129,10 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   first(key?: string[]): this;
   first(...key: string[]): this;
   clone(): this;
-  modify(fn: (queryBuilder: Knex$QueryBuilder<R>, ...args: [any]) => this, ...args: [any]): this;
+  modify(
+    fn: (queryBuilder: Knex$QueryBuilder<R>, ...args: [any]) => this,
+    ...args: [any]
+  ): this;
   connection(dbConnection: any): this;
 
   table(table: string, options?: Object): this;
@@ -146,28 +157,32 @@ type MigrateConfig = {|
   extension?: string,
   tableName?: string,
   disableTransactions?: boolean,
-  loadExtensions?: Array<string>
+  loadExtensions?: Array<string>,
 |};
 
 declare class Knex$Knex<R>
   mixins Knex$QueryBuilder<R>, Promise<R>, events$EventEmitter {
   static (config: Knex$Config): Knex$Knex<R>;
   static QueryBuilder: typeof Knex$QueryBuilder;
-  [[call]]:(tableName: string) => Knex$QueryBuilder<R>;
+  [[call]]: (tableName: string) => Knex$QueryBuilder<R>;
   raw(sqlString: string, bindings?: Knex$RawBindings): any;
-  batchInsert: (tableName: string, rows: Array<Object>, chunkSize?: number) => Knex$QueryBuilder<R>;
+  batchInsert: (
+    tableName: string,
+    rows: Array<Object>,
+    chunkSize?: number
+  ) => Knex$QueryBuilder<R>;
   migrate: {
     make: (name: string, config?: MigrateConfig) => Promise<string>,
     latest: (config?: MigrateConfig) => Promise<void>,
     rollback: (config?: MigrateConfig) => Promise<void>,
-    currentVersion: (config?: MigrateConfig) => Promise<string>
+    currentVersion: (config?: MigrateConfig) => Promise<string>,
   };
   client: any;
   destroy(): Promise<void>;
 }
 
 declare type Knex$PostgresConfig = {
-  client?: "pg",
+  client?: 'pg',
   connection?:
     | string
     | {
@@ -175,7 +190,7 @@ declare type Knex$PostgresConfig = {
         user?: string,
         password?: string,
         database?: string,
-        charset?: string
+        charset?: string,
       },
   searchPath?: string,
 };
@@ -183,7 +198,7 @@ declare type Knex$PostgresConfig = {
 declare type Knex$RawBindings = Array<mixed> | { [key: string]: mixed };
 
 declare type Knex$Mysql2Config = {
-  client?: "mysql2",
+  client?: 'mysql2',
   connection?:
     | string
     | {
@@ -191,25 +206,25 @@ declare type Knex$Mysql2Config = {
         user?: string,
         password?: string,
         database?: string,
-        charset?: string
-      }
+        charset?: string,
+      },
 };
 
 declare type Knex$MysqlConfig = {
-  client?: "mysql",
+  client?: 'mysql',
   connection?: {
     host?: string,
     user?: string,
     password?: string,
-    database?: string
-  }
+    database?: string,
+  },
 };
 
 declare type Knex$SqliteConfig = {
-  client?: "sqlite3",
+  client?: 'sqlite3',
   connection?: {
-    filename?: string
-  }
+    filename?: string,
+  },
 };
 declare type Knex$Config =
   | Knex$PostgresConfig
@@ -217,7 +232,7 @@ declare type Knex$Config =
   | Knex$Mysql2Config
   | Knex$SqliteConfig;
 
-declare module "knex" {
+declare module 'knex' {
   declare type Error = {
     name: string,
     length: number,
@@ -236,7 +251,7 @@ declare module "knex" {
     constraint?: string,
     file: string,
     line: string,
-    routine: string
+    routine: string,
   };
   declare type Knex = Knex$Knex<any>;
   declare type $QueryBuilder<R> = Knex$QueryBuilder<R>;
