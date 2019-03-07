@@ -27,7 +27,21 @@ declare module "antd" {
 
   declare export class Badge extends React$Component<{}> {}
 
-  declare export class Button extends React$Component<{}> {
+  declare export type ButtonProps = {
+    disabled?: boolean,
+    ghost?: boolean,
+    href?: boolean,
+    htmlType?: string,
+    icon?: string,
+    loading?: boolean | { delay: number },
+    shape?: 'circle' | 'round',
+    size?: 'small' | 'large',
+    type?: 'primary' | 'ghost' | 'dashed' | 'danger' | 'default',
+    onClick?: (SyntheticEvent<HTMLButtonElement>) => void,
+    block?: boolean
+  }
+
+  declare export class Button extends React$Component<ButtonProps> {
     static Group: typeof ButtonGroup
   }
 
