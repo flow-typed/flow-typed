@@ -37,7 +37,7 @@ declare module "antd" {
     shape?: 'circle' | 'round',
     size?: 'small' | 'large',
     type?: 'primary' | 'ghost' | 'dashed' | 'danger' | 'default',
-    onClick?: (SyntheticEvent<HTMLButtonElement>) => void,
+    onClick?: (event?: SyntheticEvent<HTMLButtonElement>) => void,
     block?: boolean
   }
 
@@ -368,7 +368,7 @@ declare module "antd" {
     arrowPointAtCenter?: boolean,
     autoAdjustOverflow?: boolean,
     defaultVisible?: boolean,
-    getPopupContainer?: (?HTMLElement) => HTMLElement,
+    getPopupContainer?: (element?: HTMLElement) => HTMLElement,
     mouseEnterDelay?: number,
     mouseLeaveDelay?: number,
     overlayClassName?: string,
@@ -376,7 +376,7 @@ declare module "antd" {
     placement?: 'top' | 'left' | 'right' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom',
     trigger?: 'hover' | 'focus' | 'click' | 'contextMenu',
     visible?: boolean,
-    onVisibleChange?: (visible: boolean) => void,
+    onVisibleChange?: (visible?: boolean) => void,
     align?: Object
   }
 
