@@ -17,6 +17,7 @@ knex
   .orWhere('bar', 'foo')
   .whereNot('asd', 1)
   .whereIn('batz', [1, 2]);
+// $ExpectError - raw is not accepted as an input type
 knex.select(knex.raw(''));
 
 knex.innerJoin('bar', function() {
@@ -98,6 +99,7 @@ knex('foo').havingNull(null);
 knex('foo').havingExists(function() {
   this.select('*');
 });
+// $ExpectError - raw is not accepted as an input type
 knex('foo').havingExists(knex.raw(''));
 knex('foo').havingBetween('count', [1, 5]);
 // $ExpectError
@@ -116,6 +118,7 @@ knex('foo').whereNull(null);
 knex('foo').whereExists(function() {
   this.select('*');
 });
+// $ExpectError - raw is not accepted as an input type
 knex('foo').whereExists(knex.raw(''));
 knex('foo').whereBetween('count', [1, 5]);
 // $ExpectError
