@@ -349,9 +349,41 @@ declare module "antd" {
 
   declare export class Pagination extends React$Component<PaginationProps> {}
 
-  declare export class Popconfirm extends React$Component<{}> {}
+  // These props are shared by Tooltip, Popconfirm, and Poopover
+  declare type TooltipSharedProps = {
+    arrowPointAtCenter?: boolean,
+    autoAdjustOverflow?: boolean,
+    defaultVisible?: boolean,
+    getPopupContainer?: (?HTMLElement) => HTMLElement,
+    mouseEnterDelay?: number,
+    mouseLeaveDelay?: number,
+    overlayClassName?: string,
+    overlayStyle?: Object,
+    placement?: 'top' | 'left' | 'right' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom',
+    trigger?: 'hover' | 'focus' | 'click' | 'contextMenu',
+    visible?: boolean,
+    onVisibleChange?: (visible: boolean) => void,
+    align?: Object
+  }
 
-  declare export class Popover extends React$Component<{}> {}
+  declare export type PopconfirmProps = {
+    cancelText?: string,
+    okText?: string,
+    okType?: 'primary' | 'dashed' | 'ghost' | 'danger' | 'default',
+    title?: 'string' | React$Node,
+    onCancel?: (SyntheticEvent<HTMLElement>) => void,
+    onConfirm?: (SyntheticEvent<HTMLElement>) => void,
+    icon?: React$Node
+  } & TooltipSharedProps
+
+  declare export class Popconfirm extends React$Component<PopconfirmProps> {}
+
+  declare export type PopoverProps = {
+    content?: 'string' | React$Node,
+    title?: 'string' | React$Node,
+  } & TooltipSharedProps
+
+  declare export class Popover extends React$Component<PopoverProps> {}
 
   declare export class Progress extends React$Component<{}> {}
 
@@ -433,7 +465,7 @@ declare module "antd" {
 
   declare export type TooltipProps = {
     title: string | React$Node | () => React$Node
-  };
+  } & TooltipSharedProps
 
   declare export class Tooltip extends React$Component<TooltipProps> {}
 
