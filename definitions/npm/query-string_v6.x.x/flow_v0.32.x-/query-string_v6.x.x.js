@@ -13,9 +13,9 @@ declare module 'query-string' {
 
   declare type ObjectParameter = string | number | boolean | null | void;
 
-  declare type ObjectParameters = {
+  declare type ObjectParameters = $ReadOnly<{
     [string]: ObjectParameter | $ReadOnlyArray<ObjectParameter>
-  }
+  }>
 
   declare type QueryParameters = {
     [string]: string | Array<string> | null
