@@ -89,11 +89,11 @@ declare module "antd" {
     bordered?: boolean,
     cover?: React$Node,
     defaultActiveTabKey?: string,
-    extra?: string | React$Node,
+    extra?: React$Node,
     hoverable?: boolean,
     loading?: boolean,
     tabList?: Array<{ key: string, tab: React$Node }>,
-    title?: string | React$Node,
+    title?: React$Node,
     type?: "inner",
     onTabChange?: (key: string) => void
   }> {
@@ -439,10 +439,10 @@ declare module "antd" {
   declare export class Spin extends React$Component<SpinProps> {}
 
   declare export class Step extends React$Component<{
-    description?: string | React$Node,
-    icon?: string | React$Node,
+    description?: React$Node,
+    icon?: React$Node,
     status?: "wait" | "process" | "finish" | "error",
-    title?: string | React$Node
+    title?: React$Node
   }> {}
 
   declare export class Steps extends React$Component<{
@@ -456,8 +456,8 @@ declare module "antd" {
           {
             index: number,
             status: "wait" | "process" | "finish" | "error",
-            title: string | React$Node,
-            description: string | React$Node
+            title: React$Node,
+            description: React$Node
           }
         ) => React$Node),
     size?: "default" | "small",
@@ -479,7 +479,7 @@ declare module "antd" {
   declare export class Tag extends React$Component<{}> {}
 
   declare export type TooltipProps = {
-    title: string | React$Node | () => React$Node
+    title: React$Node | () => React$Node
   } & TooltipSharedProps
 
   declare export class Tooltip extends React$Component<TooltipProps> {}
