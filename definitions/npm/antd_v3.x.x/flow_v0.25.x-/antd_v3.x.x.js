@@ -30,12 +30,13 @@ declare module "antd" {
   declare export type ButtonProps = {
     disabled?: boolean,
     ghost?: boolean,
-    href?: boolean,
+    href?: string,
     htmlType?: string,
     icon?: string,
     loading?: boolean | { delay: number },
     shape?: 'circle' | 'round',
     size?: 'small' | 'large',
+    target?: string,
     type?: 'primary' | 'ghost' | 'dashed' | 'danger' | 'default',
     onClick?: (event?: SyntheticEvent<HTMLButtonElement>) => void,
     block?: boolean
