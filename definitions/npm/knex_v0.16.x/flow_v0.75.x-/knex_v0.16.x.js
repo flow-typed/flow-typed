@@ -6,6 +6,11 @@ declare class Knex$Transaction<R>
   savepoint(connection?: any): Promise<R>;
 }
 
+declare class Knex$Raw<R>
+  mixins events$EventEmitter, Promise<R> {
+    wrap(before: string, after: string): this
+}
+
 declare type Knex$QueryBuilderFn<R> = (
   qb: Knex$QueryBuilder<R>
 ) => Knex$QueryBuilder<R> | void;
@@ -47,6 +52,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   orWhere(builder: Knex$QueryBuilderFn<R>): this;
   orWhere(column: string, value: any): this;
   orWhere(column: string, operator: string, value: any): this;
+  orWhere(object: { [string]: any }): this;
   orWhereNot(builder: Knex$QueryBuilderFn<R>): this;
   orWhereNot(column: string, value: any): this;
   orWhereNot(column: string, operator: string, value: any): this;
@@ -54,20 +60,25 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   orWhereNotIn(column: string, values: any[]): this;
   orWhereNull(column: string): this;
   orWhereNotNull(column: string): this;
-  orWhereExists(column: string): this;
-  orWhereNotExists(column: string): this;
+  orWhereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  orWhereNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
   orWhereBetween<T>(column: string, range: [T, T]): this;
   orWhereNotBetween<T>(column: string, range: [T, T]): this;
-  orWhereRaw(sql: string, bindings?: Knex$RawBindings): this;
   join(table: string, c1: string, operator: string, c2: string): this;
-  innerJoin(table: string, c1: string, operator: string, c2: string): this;
+  join(table: string, c1: string, c2: string): this;
+  join(
+    builder: Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>,
+    c1?: string,
+    c2?: string
+  ): this;
+  join(table: string, builder: Knex$QueryBuilderFn<R>): this;
+  join(table: string, c1: string, operator: string, c2: string): this;
   innerJoin(table: string, c1: string, c2: string): this;
   innerJoin(
     builder: Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>,
     c1?: string,
     c2?: string
   ): this;
-  join(table: string, c1: string, operator: string, c2: string): this;
   innerJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
   leftJoin(table: string, c1: string, operator: string, c2: string): this;
   leftJoin(table: string, c1: string, c2: string): this;
@@ -117,14 +128,14 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   havingRaw(raw: string, bindings?: Knex$RawBindings): this;
   union(): this;
   unionAll(): this;
-  count(column?: string): this;
-  countDistinct(column?: string): this;
-  min(column?: string): this;
-  max(column?: string): this;
-  sum(column?: string): this;
-  sumDistinct(column?: string): this;
-  avg(column?: string): this;
-  avgDistinct(column?: string): this;
+  count(column?: string | string[] |  { [string]: any } | Knex$Raw<R>): this;
+  countDistinct(column?: string | string[] |  { [string]: any } | Knex$Raw<R>): this;
+  max(column?: string | string[] |  { [string]: any } | Knex$Raw<R>): this;
+  sum(column?: string | string[] |  { [string]: any } | Knex$Raw<R>): this;
+  min(column?: string | string[] |  { [string]: any } | Knex$Raw<R>): this;
+  sumDistinct(column?: string | string[] |  { [string]: any } | Knex$Raw<R>): this;
+  avg(column?: string | string[] |  { [string]: any } | Knex$Raw<R>): this;
+  avgDistinct(column?: string | string[] |  { [string]: any } | Knex$Raw<R>): this;
   pluck(column: string): this;
   first(key?: string[]): this;
   first(...key: string[]): this;
@@ -165,7 +176,7 @@ declare class Knex$Knex<R>
   static (config: Knex$Config): Knex$Knex<R>;
   static QueryBuilder: typeof Knex$QueryBuilder;
   [[call]]: (tableName: string) => Knex$QueryBuilder<R>;
-  raw(sqlString: string, bindings?: Knex$RawBindings): any;
+  raw(sqlString: string, bindings?: Knex$RawBindings): Knex$Raw<R>;
   batchInsert: (
     tableName: string,
     rows: Array<Object>,
