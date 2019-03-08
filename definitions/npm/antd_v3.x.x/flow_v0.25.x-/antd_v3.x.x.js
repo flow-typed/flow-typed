@@ -226,7 +226,7 @@ declare module "antd" {
     layout?: "horizontal" | "inline" | "vertical",
     onSubmit?: (e: SyntheticEvent<HTMLFormElement>) => void,
     prefixCls?: string,
-    style?: Object,
+    style?: $Shape<CSSStyleDeclaration>,
     vertical?: boolean
   };
 
@@ -373,13 +373,25 @@ declare module "antd" {
     mouseEnterDelay?: number,
     mouseLeaveDelay?: number,
     overlayClassName?: string,
-    overlayStyle?: Object,
+    overlayStyle?: $Shape<CSSStyleDeclaration>,
     placement?: 'top' | 'left' | 'right' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom',
     trigger?: 'hover' | 'focus' | 'click' | 'contextMenu',
     visible?: boolean,
     onVisibleChange?: (visible?: boolean) => void,
-    align?: Object
+    align?: AlignConfig
   }
+
+  // for alignConfig value, antd documentation points to rc-tooltip docs,
+  // which poits to https://github.com/yiminghe/dom-align
+  declare type AlignConfig = {|
+    points?: string,
+    offset?: number | string,
+    targetOffset?: number | string,
+    overflow?: {| adjustX?: boolean, adjustY?: boolean |},
+    useCssRight?: boolean,
+    useCssBottom?: boolean,
+    useCssTransform:? boolean
+  |}
 
   declare export type PopconfirmProps = {
     cancelText?: string,
