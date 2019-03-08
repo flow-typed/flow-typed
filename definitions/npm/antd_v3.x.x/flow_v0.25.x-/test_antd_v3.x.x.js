@@ -480,9 +480,9 @@ describe("Tooltip", () => {
   it("should accept only certain strings for placement prop", () => {
     // Testing placement prop in particular just to verify sharing between
     // Popconfirm, Popover, and Tooltip is working.
-    const good = <Tooltip placement='top' />;
+    const good = <Tooltip title='tooltip' placement='top' />;
     // $ExpectError
-    const bad = <Tooltip placement='topCenter' />;
+    const bad = <Tooltip title='tooltip' placement='topCenter' />;
   });
 });
 
