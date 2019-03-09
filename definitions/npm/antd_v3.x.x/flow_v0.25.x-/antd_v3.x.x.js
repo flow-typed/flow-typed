@@ -27,7 +27,26 @@ declare module "antd" {
 
   declare export class Badge extends React$Component<{}> {}
 
-  declare export class Button extends React$Component<{}> {}
+  declare export type ButtonProps = {
+    disabled?: boolean,
+    ghost?: boolean,
+    href?: string,
+    htmlType?: string,
+    icon?: string,
+    loading?: boolean | { delay: number },
+    shape?: 'circle' | 'round',
+    size?: 'small' | 'large',
+    target?: string,
+    type?: 'primary' | 'ghost' | 'dashed' | 'danger' | 'default',
+    onClick?: (event?: SyntheticEvent<HTMLButtonElement>) => void,
+    block?: boolean
+  }
+
+  declare export class Button extends React$Component<ButtonProps> {
+    static Group: typeof ButtonGroup
+  }
+
+  declare class ButtonGroup extends React$Component<{}> {}
 
   declare export class Card extends React$Component<{}> {}
 
@@ -70,11 +89,11 @@ declare module "antd" {
     bordered?: boolean,
     cover?: React$Node,
     defaultActiveTabKey?: string,
-    extra?: string | React$Node,
+    extra?: React$Node,
     hoverable?: boolean,
     loading?: boolean,
     tabList?: Array<{ key: string, tab: React$Node }>,
-    title?: string | React$Node,
+    title?: React$Node,
     type?: "inner",
     onTabChange?: (key: string) => void
   }> {
@@ -207,7 +226,7 @@ declare module "antd" {
     layout?: "horizontal" | "inline" | "vertical",
     onSubmit?: (e: SyntheticEvent<HTMLFormElement>) => void,
     prefixCls?: string,
-    style?: Object,
+    style?: $Shape<CSSStyleDeclaration>,
     vertical?: boolean
   };
 
@@ -327,8 +346,8 @@ declare module "antd" {
     defaultPageSize?: number,
     hideOnSinglePage?: boolean,
     itemRender?: (
-      page: number, 
-      type: "page" | "prev" | "next", 
+      page: number,
+      type: "page" | "prev" | "next",
       originalElement: React$Node
     ) => React$Node,
     pageSize?: number,
@@ -345,7 +364,53 @@ declare module "antd" {
 
   declare export class Pagination extends React$Component<PaginationProps> {}
 
-  declare export class Popconfirm extends React$Component<{}> {}
+  // These props are shared by Tooltip, Popconfirm, and Poopover
+  declare type TooltipSharedProps = {
+    arrowPointAtCenter?: boolean,
+    autoAdjustOverflow?: boolean,
+    defaultVisible?: boolean,
+    getPopupContainer?: (element?: HTMLElement) => HTMLElement,
+    mouseEnterDelay?: number,
+    mouseLeaveDelay?: number,
+    overlayClassName?: string,
+    overlayStyle?: $Shape<CSSStyleDeclaration>,
+    placement?: 'top' | 'left' | 'right' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom',
+    trigger?: 'hover' | 'focus' | 'click' | 'contextMenu',
+    visible?: boolean,
+    onVisibleChange?: (visible?: boolean) => void,
+    align?: AlignConfig
+  }
+
+  // for alignConfig value, antd documentation points to rc-tooltip docs,
+  // which poits to https://github.com/yiminghe/dom-align
+  declare type AlignConfig = {|
+    points?: string,
+    offset?: number | string,
+    targetOffset?: number | string,
+    overflow?: {| adjustX?: boolean, adjustY?: boolean |},
+    useCssRight?: boolean,
+    useCssBottom?: boolean,
+    useCssTransform:? boolean
+  |}
+
+  declare export type PopconfirmProps = {
+    cancelText?: string,
+    okText?: string,
+    okType?: 'primary' | 'dashed' | 'ghost' | 'danger' | 'default',
+    title?: 'string' | React$Node,
+    onCancel?: (event?: SyntheticEvent<HTMLElement>) => void,
+    onConfirm?: (event?: SyntheticEvent<HTMLElement>) => void,
+    icon?: React$Node
+  } & TooltipSharedProps
+
+  declare export class Popconfirm extends React$Component<PopconfirmProps> {}
+
+  declare export type PopoverProps = {
+    content?: 'string' | React$Node,
+    title?: 'string' | React$Node,
+  } & TooltipSharedProps
+
+  declare export class Popover extends React$Component<PopoverProps> {}
 
   declare export class Progress extends React$Component<{}> {}
 
@@ -386,10 +451,10 @@ declare module "antd" {
   declare export class Spin extends React$Component<SpinProps> {}
 
   declare export class Step extends React$Component<{
-    description?: string | React$Node,
-    icon?: string | React$Node,
+    description?: React$Node,
+    icon?: React$Node,
     status?: "wait" | "process" | "finish" | "error",
-    title?: string | React$Node
+    title?: React$Node
   }> {}
 
   declare export class Steps extends React$Component<{
@@ -403,8 +468,8 @@ declare module "antd" {
           {
             index: number,
             status: "wait" | "process" | "finish" | "error",
-            title: string | React$Node,
-            description: string | React$Node
+            title: React$Node,
+            description: React$Node
           }
         ) => React$Node),
     size?: "default" | "small",
@@ -426,8 +491,8 @@ declare module "antd" {
   declare export class Tag extends React$Component<{}> {}
 
   declare export type TooltipProps = {
-    title: string | React$Node | () => React$Node
-  };
+    title: React$Node | () => React$Node
+  } & TooltipSharedProps
 
   declare export class Tooltip extends React$Component<TooltipProps> {}
 
