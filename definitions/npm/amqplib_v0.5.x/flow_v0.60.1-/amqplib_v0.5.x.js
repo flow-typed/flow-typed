@@ -187,9 +187,14 @@ declare module 'amqplib' {
   declare export class Connection {
     createChannel: () => Promise<Channel>,
 
-      createConfirmChannel: () => Promise<ConfirmChannel>,
+    createConfirmChannel: () => Promise<ConfirmChannel>,
 
-      close: () => Promise<void>,
+    close: () => Promise<void>,
+    on:
+      & (('close', (() => mixed)) => void)
+      & (('error', ((err:?AMQPError) => mixed)) => void)
+      & (('blocked', ((reason: string) => mixed)) => void)
+      & (('unblocked', (() => mixed)) => void),
   }
 
   declare export var connect: (url?: string | ConnectOptions, socketOptions?: Object) => Promise<Connection>
@@ -275,9 +280,14 @@ declare module 'amqplib/callback_api' {
   declare export class Connection {
     createChannel: ((?AMQPError, Channel) => mixed) => void,
 
-      createConfirmChannel: ((?AMQPError, ConfirmChannel) => mixed) => void,
+    createConfirmChannel: ((?AMQPError, ConfirmChannel) => mixed) => void,
 
-      close: (?(?AMQPError => void)) => void,
+    close: (?(?AMQPError => void)) => void,
+    on:
+      & (('close', (() => mixed)) => void)
+      & (('error', ((err:?AMQPError) => mixed)) => void)
+      & (('blocked', ((reason: string) => mixed)) => void)
+      & (('unblocked', (() => mixed)) => void),
   }
 
   declare export var connect:
