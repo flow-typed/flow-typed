@@ -38,7 +38,7 @@ declare module "antd" {
     size?: 'small' | 'large',
     target?: string,
     type?: 'primary' | 'ghost' | 'dashed' | 'danger' | 'default',
-    onClick?: (event?: SyntheticEvent<HTMLButtonElement>) => void,
+    onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void,
     block?: boolean
   }
 
@@ -377,7 +377,7 @@ declare module "antd" {
     placement?: 'top' | 'left' | 'right' | 'bottom' | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight' | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom',
     trigger?: 'hover' | 'focus' | 'click' | 'contextMenu',
     visible?: boolean,
-    onVisibleChange?: (visible?: boolean) => void,
+    onVisibleChange?: (visible: boolean) => void,
     align?: AlignConfig
   }
 
@@ -398,8 +398,8 @@ declare module "antd" {
     okText?: string,
     okType?: 'primary' | 'dashed' | 'ghost' | 'danger' | 'default',
     title?: 'string' | React$Node,
-    onCancel?: (event?: SyntheticEvent<HTMLElement>) => void,
-    onConfirm?: (event?: SyntheticEvent<HTMLElement>) => void,
+    onCancel?: (event: SyntheticEvent<>) => void,
+    onConfirm?: (event: SyntheticEvent<>) => void,
     icon?: React$Node
   } & TooltipSharedProps
 
