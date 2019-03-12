@@ -5,7 +5,8 @@ declare module "lru-cache" {
     peek: (key: K) => V,
     del: (key: K) => void,
     reset: () => void,
-    has: (key: K) => boolean
+    has: (key: K) => boolean,
+    prune: () => void
     // TODO add the rest of the things documented at https://www.npmjs.com/package/lru-cache
   };
 
