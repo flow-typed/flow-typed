@@ -24,7 +24,10 @@ declare type $winstonFileTransportConfig<T: $winstonLevels> = {
   level?: $Keys<T>
 };
 
-declare class $winstonTransport {}
+declare class $winstonTransport {
+  level?: string;
+  silent?: boolean;
+}
 
 declare class $winstonFileTransport<T> extends $winstonTransport {
   constructor($winstonFileTransportConfig<T>): $winstonFileTransport<T>;
@@ -65,6 +68,7 @@ declare type $winstonFormatSubModule = {
   combine: (...args: Array<$winstonFormat>) => $winstonFormat,
   json: () => $winstonFormat,
   label: (config?: Object) => $winstonFormat,
+  metadata: () => $winstonFormat,
   prettyPrint: () => $winstonFormat,
   simple: () => $winstonFormat,
   splat: () => $winstonFormat,

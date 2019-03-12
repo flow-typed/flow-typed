@@ -1,5 +1,5 @@
 // @flow
-import { describe, it } from 'flow-typed-test';
+import { describe, it } from "flow-typed-test";
 import type {
   AngularPromise,
   AngularQ,
@@ -108,7 +108,7 @@ describe("service", () => {
       "bar",
       "bazz",
       (bar, bazz) => {
-        return a => a + 1;
+        return { foo: "bar" };
       }
     ]);
   });

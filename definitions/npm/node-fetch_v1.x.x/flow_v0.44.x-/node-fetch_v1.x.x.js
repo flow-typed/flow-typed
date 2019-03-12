@@ -1,4 +1,7 @@
 declare module 'node-fetch' {
+  import type http from 'http';
+  import type https from 'https';
+
   declare export class Request mixins Body {
     constructor(input: string | Request, init?: RequestInit): this;
     method: string;
@@ -10,7 +13,7 @@ declare module 'node-fetch' {
 
     // node-fetch extensions
     compress: boolean;
-    agent: http$Agent;
+    agent: http.Agent | https.Agent;
     counter: number;
     follow: number;
     hostname: string;
@@ -34,7 +37,7 @@ declare module 'node-fetch' {
     timeout?: number,
     compress?: boolean,
     size?: number,
-    agent?: http$Agent,
+    agent?: http.Agent | https.Agent,
     follow?: number
   }
 

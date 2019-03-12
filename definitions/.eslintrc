@@ -4,6 +4,7 @@
     "flowtype"
   ],
   "rules": {
-    "flowtype/no-weak-types": 1
+    "flowtype/no-weak-types": 1,
+    "no-warning-comments":  [2, { "terms": ["flow-typed signature", "flow-typed version"], "location": "start"}]
   }
 }

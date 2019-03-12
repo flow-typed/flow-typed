@@ -160,6 +160,26 @@ describe("The `ensureDir` function", () => {
   });
 });
 
+describe("The `createReadStream` function", () => {
+  it("take in string and options object", () => {
+    fs.createReadStream('str', {});
+    // $ExpectError number not allowed
+    fs.createReadStream(123, {});
+    // $ExpectError options should be object
+    fs.createReadStream('str', 123);
+  });
+});
+
+describe("The `createWriteStream` function", () => {
+  it("take in string and options object", () => {
+    fs.createWriteStream('str', {});
+    // $ExpectError number not allowed
+    fs.createWriteStream(123, {});
+    // $ExpectError options should be object
+    fs.createWriteStream('str', 123);
+  });
+});
+
 describe("The `ensureDirSync` function", () => {
   it("should validate on proper usage", () => {
     fs.ensureDirSync(path);
@@ -170,6 +190,16 @@ describe("The `ensureDirSync` function", () => {
     fs.ensureDirSync();
     // $ExpectError
     fs.ensureDirSync(path).then(() => {});
+  });
+});
+
+describe("The `exists` function", () => {
+  it("take in string", () => {
+    (fs.exists('str'): Promise<boolean>);
+    // $ExpectError number not allowed
+    fs.exists(123);
+
+    fs.exists('str', (exists) => {(exists: boolean)})
   });
 });
 

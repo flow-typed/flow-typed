@@ -1,14 +1,15 @@
 // @flow
 import * as React from "react";
-import Enzyme, {
+import {
+  configure,
   shallow,
   mount,
   render,
-  ShallowWrapper,
-  ReactWrapper
+  type ShallowWrapper,
+  type ReactWrapper
 } from "enzyme";
 
-Enzyme.configure({
+configure({
   disableLifecycleMethods: true
 });
 
@@ -26,10 +27,10 @@ const B: boolean = render(<div />, { context: { foo: true } })
 // $ExpectError
 (shallow(<div />).children(): boolean);
 
-(shallow(<div />).children(): ShallowWrapper);
+(shallow(<div />).children(): ShallowWrapper<'div'>);
 
 // Test PredicateFunction
-shallow(<div />).findWhere((x: ShallowWrapper) => true);
+shallow(<div />).findWhere((x: ShallowWrapper<'div'>) => true);
 
 // Test selector functionality
 
@@ -47,9 +48,19 @@ shallowWrapper.instance();
 shallowWrapper.find("someSelector");
 shallowWrapper.prop("foo");
 shallowWrapper.props().foo;
-shallowWrapper.slice()
-shallowWrapper.slice(0)
-shallowWrapper.slice(0, 1)
+shallowWrapper.slice();
+shallowWrapper.slice(0);
+shallowWrapper.slice(0, 1);
+
+shallowWrapper
+  .renderProp("render")(1, "hi")
+  .find("SomeSelector");
+
+// Need to invoke the returned renderProp fn
+// Can't properly be tested
+// shallowWrapper
+//   .renderProp("render")
+//   .find(123)
 
 // shallow's getNode(s) was replaced by getElement(s) in enzyme v3
 // $ExpectError
@@ -69,6 +80,16 @@ shallowWrapper.getElements();
 // $ExpectError
 (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
 
+(mount(<div />).setProps({}, () => {}): ReactWrapper<'div'>);
+// $ExpectError
+(mount(<div />).setProps({}, null): ReactWrapper<'div'>);
+(mount(<div />).setProps({}): ReactWrapper<'div'>);
+// $ExpectError
+(mount(<div />).setProps(): ReactWrapper<'div'>);
+// $ExpectError
+(mount(<div />).setProps(null): ReactWrapper<'div'>);
+
+(mount(<div />).renderProp("render")(1, "hi"): ReactWrapper<'div'>);
 
 // mount's getNode(s) were removed in enzyme v3
 // $ExpectError
@@ -83,3 +104,42 @@ render(<div />).contents();
 // http://airbnb.io/enzyme/docs/api/
 // https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md#shallow-rendering-api
 (shallow(<div />).length: number);
+
+class TestInstance extends React.Component<*> {
+  method = () => 'test';
+}
+
+// $ExpectError
+(mount(<TestInstance />).instance().method: string);
+mount(<TestInstance />).instance().method();
+(mount(<TestInstance />).instance().method: () => 'test');
+
+// $ExpectError
+(shallow(<TestInstance />).instance().method: string);
+shallow(<TestInstance />).instance().method();
+(shallow(<TestInstance />).instance().method: () => 'test');
+
+(mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
+// $ExpectError
+(mount(<div />).simulateError('error'): ReactWrapper<'div'>);
+(shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
+// $ExpectError
+(shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
+
+class DeepInstance extends React.Component<{onChange: () => void}> {}
+mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChange();
+mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChange();
+mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChange();
+mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChange();
+mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChange();
+
+// $ExpectError
+mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChangeX();
+// $ExpectError
+mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChangeX();
+// $ExpectError
+mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChangeX();
+// $ExpectError
+mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChangeX();
+// $ExpectError
+mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChangeX();

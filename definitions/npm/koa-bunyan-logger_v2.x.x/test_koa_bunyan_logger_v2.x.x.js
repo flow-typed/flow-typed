@@ -50,20 +50,7 @@ let middleware: MiddlewareType = koaBunyanLogger.requestIdContext({
 
 middleware = koaBunyanLogger.requestIdContext();
 
-// $ExpectError
-middleware = koaBunyanLogger.requestLogger({
-    updateLogFields: (req) => "object expected"
-});
-
-// $ExpectError
-middleware = koaBunyanLogger.requestLogger({
-    updateRequestLogFields: (req) => "object expected"
-});
-
-// $ExpectError
-middleware = koaBunyanLogger.requestLogger({
-    updateResponseLogFields: (res) => "object expected"
-});
+middleware = koaBunyanLogger.requestLogger();
 
 // $ExpectError
 middleware = koaBunyanLogger.requestLogger({

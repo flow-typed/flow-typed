@@ -6,7 +6,7 @@ declare module 'hoist-non-react-statics' {
   */
   declare module.exports: <TP, SP, S>(
     target: React$ComponentType<TP>,
-    source: React$ComponentType<TP & SP> & S,
+    source: React$ComponentType<SP> & S,
     blacklist?: { [key: $Keys<S>]: boolean }
   ) => React$ComponentType<TP> & $Shape<S>;
 }

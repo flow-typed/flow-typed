@@ -10,6 +10,8 @@ import _, {
   repeat,
   values,
   zipWith,
+  propOr,
+  __
 } from "ramda";
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
@@ -19,13 +21,112 @@ const objMixed: { [k: string]: mixed } = { a: 1, c: "d" };
 const os: Array<{ [k: string]: * }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
-// Object
-const a: { [k: string]: number | string } = _.assoc("c", "s", { a: 1, b: 2 });
-const mixedA: { x: { [string]: number }, y: Array<string> } = _.assoc(
-  "x",
-  { x1: 11 },
-  { y: ["y1"] }
-);
+describe("Object", () => {
+  describe("assoc", () => {
+    it("should return more exact type when passed key hasn't in passed object", () => {
+      (_.assoc("c", "s", { a: 1, b: 2 }): {
+        a: number,
+        b: number,
+        c: string
+      });
+
+      (_.assoc("x", { x1: 11 }, { y: ["y1"] }): {
+        x: { [string]: number },
+        y: Array<string>
+      });
+    });
+
+    it("should return sum types when passed key already has in passed object", () => {
+      (_.assoc("a", "s", { a: 1, b: 2 }): {
+        a: number | string,
+        b: number | string
+      });
+    });
+  });
+
+  describe('propOr', () => {
+    const testObj = {
+      name: 'Wilson'
+    };
+
+    describe('should return default', () => {
+      it('with __', () => {
+        const def1_1: number = propOr(__, 'age', testObj)(32);
+        const def1_2: number = propOr(__, 'age', null)(32);
+        const def1_3: number = propOr(__, 'age', undefined)(32);
+        const def1_4: number = propOr(__, 'age', 'string')(32);
+        const def1_5: number = propOr(__, 'age', 50)(32);
+
+        const def2_1: number = propOr(32, __, testObj)('age');
+        const def2_2: number = propOr(32, __, null)('age');
+        const def2_3: number = propOr(32, __, undefined)('age');
+        const def2_4: number = propOr(32, __, 'string')('age');
+        const def2_5: number = propOr(32, __, 50)('age');
+
+        const def3_1: number = propOr(32, 'age', __)(testObj);
+        const def3_2: number = propOr(32, 'age', __)(null);
+        const def3_3: number = propOr(32, 'age', __)(undefined);
+        const def3_4: number = propOr(32, 'age', __)('string');
+        const def3_5: number = propOr(32, 'age', __)(50);
+
+        const def4_1: number = propOr(__, 'age')(32)(testObj);
+        const def4_2: number = propOr(__, 'age')(32)(null);
+        const def4_3: number = propOr(__, 'age')(32)(undefined);
+        const def4_4: number = propOr(__, 'age')(32)('string');
+        const def4_5: number = propOr(__, 'age')(32)(50);
+
+        const def5_1: number = propOr(32, __)('age')(testObj);
+        const def5_2: number = propOr(32, __)('age')(null);
+        const def5_3: number = propOr(32, __)('age')(undefined);
+        const def5_4: number = propOr(32, __)('age')('string');
+        const def5_5: number = propOr(32, __)('age')(50);
+      });
+
+      it('without __', () => {
+        const def1_1: number = propOr(32, 'age', testObj);
+        const def1_2: number = propOr(32, 'age', null);
+        const def1_3: number = propOr(32, 'age', undefined);
+        const def1_4: number = propOr(32, 'age', 'string');
+        const def1_5: number = propOr(32, 'age', 50);
+
+        const def2_1: number = propOr(32, 'age')(testObj);
+        const def2_2: number = propOr(32, 'age')(null);
+        const def2_3: number = propOr(32, 'age')(undefined);
+        const def2_4: number = propOr(32, 'age')('string');
+        const def2_5: number = propOr(32, 'age')(50);
+
+        const def3_1: number = propOr(32)('age', testObj);
+        const def3_2: number = propOr(32)('age', null);
+        const def3_3: number = propOr(32)('age', undefined);
+        const def3_4: number = propOr(32)('age', 'string');
+        const def3_5: number = propOr(32)('age', 50);
+
+        const def4_1: number = propOr(32)('age')(testObj);
+        const def4_2: number = propOr(32)('age')(null);
+        const def4_3: number = propOr(32)('age')(undefined);
+        const def4_4: number = propOr(32)('age')('string');
+        const def4_5: number = propOr(32)('age')(50);
+      });
+    });
+
+    describe('should return type from testObj', () => {
+      it('without __', () => {
+        const objType1: string = propOr(32, 'name', testObj);
+        const objType2: string = propOr(32, 'name')(testObj);
+        const objType3: string = propOr(32)('name', testObj);
+        const objType4: string = propOr(32)('name')(testObj);
+      });
+
+      it('with __', () => {
+        const objType1: string = propOr(__, 'name', testObj)(32);
+        const objType2: string = propOr(32, __, testObj)('name');
+        const objType3: string = propOr(32, 'name', __)(testObj);
+        const objType4: string = propOr(__, 'name')(32)(testObj);
+        const objType5: string = propOr(32, __)('name')(testObj);
+      });
+    });
+  });
+});
 
 const apath: { [k: string]: number | string | Object } = _.assocPath(
   ["a", "b", "c"],

@@ -137,6 +137,16 @@ describe.only(AClass, () => {});
 describe.only(aFunction, () => {});
 describe.each([['arg1', 2, true], ['arg2', 3, false]])("test", () => expect("foo").toMatchSnapshot());
 describe.each(['arg1', 2, true])("test", () => expect("foo").toMatchSnapshot());
+describe.each`
+  a    | b    | expected
+  ${1} | ${1} | ${2}
+  ${1} | ${2} | ${3}
+  ${2} | ${1} | ${3}
+`('$a + $b', ({a, b, expected}) => {
+  test(`returns ${expected}`, () => {
+    expect(a + b).toBe(expected);
+  });
+});
 
 describe.skip("name", () => {});
 describe.skip(AClass, () => {});
@@ -151,6 +161,14 @@ test.only.each([['arg1', 2, true], ['arg2', 3, false]])("test", () => expect("fo
 test.only.each(['arg1', 2, true])("test", () => expect("foo").toMatchSnapshot());
 test.only("test", () => expect("foo").toMatchSnapshot());
 test.skip("test", () => expect("foo").toMatchSnapshot());
+test.each`
+  a    | b    | expected
+  ${1} | ${1} | ${2}
+  ${1} | ${2} | ${3}
+  ${2} | ${1} | ${3}
+`('returns $expected when $a is added $b', ({a, b, expected}) => {
+  expect(a + b).toBe(expected);
+});
 
 // $ExpectError property `fonly` not found in object type
 test.fonly("test", () => expect("foo").toMatchSnapshot());
@@ -455,12 +473,15 @@ expect(wrapper).toIncludeText(true);
 
 expect(wrapper).toMatchElement(<Dummy />);
 expect(wrapper).toMatchElement(<Dummy />, { ignoreProps: true });
+expect(wrapper).toMatchElement(<Dummy />, { verbose: true });
 // $ExpectError
 expect(wrapper).toMatchElement();
 // $ExpectError
 expect(wrapper).toMatchElement(true);
 // $ExpectError
 expect(wrapper).toMatchElement(<Dummy />, { ignoreProps: 123 });
+// $ExpectError
+expect(wrapper).toMatchElement(<Dummy />, { verbose: 123 });
 // $ExpectError
 expect(wrapper).toMatchElement(<Dummy />, { foobar: true });
 
@@ -470,6 +491,14 @@ expect(wrapper).toMatchSelector();
 // $ExpectError
 expect(wrapper).toMatchSelector(true);
 
+// 7.x
+
+expect(wrapper).toHaveDisplayName("marquee");
+// $ExpectError
+expect(wrapper).toHaveDisplayName();
+// $ExpectError
+expect(wrapper).toHaveDisplayName(true);
+
 
 /**
  * dom-testing-library
@@ -477,14 +506,16 @@ expect(wrapper).toMatchSelector(true);
 {
   const element = document.createElement('div');
 
-  expect(element).toHaveTextContent('123');
-  // $ExpectError: expected text content should be present
-  expect(element).toHaveTextContent();
-  // $ExpectError: expected text content should be a string
-  expect(element).toHaveTextContent(1);
-
-  expect(element).toBeInTheDOM();
-
+  expect(element).toBeDisabled();
+  expect(element).toBeEmpty();
+  expect(element).toBeInTheDocument();
+  expect(element).toBeVisible();
+  // $ExpectError
+  expect(element).toContainElement();
+  expect(element).toContainElement(element);
+  // $ExpectError
+  expect(element).toContainHTML();
+  expect(element).toContainHTML('<div></div>');
   expect(element).toHaveAttribute('foo');
   expect(element).toHaveAttribute('foo', 'bar');
   // $ExpectError: attribute name should be present
@@ -493,6 +524,23 @@ expect(wrapper).toMatchSelector(true);
   expect(element).toHaveAttribute(1);
   // $ExpectError: expected attribute value should be a string
   expect(element).toHaveAttribute('foo', 1);
+  // $ExpectError
+  expect(element).toHaveClass(1);
+  expect(element).toHaveClass('foo');
+  expect(element).toHaveFocus();
+  // $ExpectError
+  expect(element).toHaveFormValues();
+  expect(element).toHaveFormValues({ foo: 'bar' });
+  // $ExpectError
+  expect(element).toHaveStyle();
+  expect(element).toHaveStyle('foo');
+  expect(element).toHaveTextContent('123');
+  // $ExpectError: expected text content should be present
+  expect(element).toHaveTextContent();
+  // $ExpectError: expected text content should be a string
+  expect(element).toHaveTextContent(1);
+
+  expect(element).toBeInTheDOM();
 }
 
 {

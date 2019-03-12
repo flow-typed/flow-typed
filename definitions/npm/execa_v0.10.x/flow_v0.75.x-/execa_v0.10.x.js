@@ -79,8 +79,8 @@ declare module 'execa' {
   }
 
   declare interface Execa {
-    [[call]](file: string, args?: $ReadOnlyArray<string>, options?: Options): ThenableChildProcess;
-    [[call]](file: string, options?: Options): ThenableChildProcess;
+    (file: string, args?: $ReadOnlyArray<string>, options?: Options): ThenableChildProcess;
+    (file: string, options?: Options): ThenableChildProcess;
 
     stdout(file: string, args?: $ReadOnlyArray<string>, options?: Options): Promise<string>;
     stdout(file: string, options?: Options): Promise<string>;

@@ -17,7 +17,7 @@ type KnightOrigProps = KnightDefaultProps & {
 };
 
 type KnightCollectProps = {
-  connectDragSource: (e: React.Element<any>) => ?React.Element<any>,
+  connectDragSource: (e: React.Element<any>) => null | React.Node,
   connectDragPreview: (e: Image) => ?Image,
   isDragging: boolean
 };
@@ -230,7 +230,7 @@ const dndKnight2: DndKnight2 = (null: any);
 // Test Drag Source Functional Component
 // ----------------------------------------------------------------------
 
-const Knight3 = ({ color, title, isDragging }: KnightProps) =>
+const Knight3 = ({ color, title, isDragging }: KnightProps) => (
   <div
     title={title}
     style={{
@@ -242,11 +242,12 @@ const Knight3 = ({ color, title, isDragging }: KnightProps) =>
     }}
   >
     ♘
-  </div>;
+  </div>
+);
 
 const DndKnight3 = DragSource("knight", knightSource, knightCollect)(Knight3);
 
-(DndKnight3.DecoratedComponent: Knight3);
+(DndKnight3.DecoratedComponent: typeof Knight3);
 
 const dndKnight3: DndKnight3 = (null: any);
 
@@ -322,7 +323,7 @@ type BoardSquareDefaultProps = {
 type BoardSquareProps = BoardSquareDefaultProps & {
   y: number,
   count?: number,
-  connectDropTarget: (e: React.Element<any>) => ?React.Element<any>,
+  connectDropTarget: (e: React.Element<any>) => null | React.Node,
   isOver: boolean,
   canDrop: boolean
 };

@@ -19,7 +19,7 @@ execa('ls').then(res => res.foo);
 execa('foo').catch(err => {
   (err.cmd: string);
   (err.code: ?string);
-  (err.errno: ?number);
+  (err.errno: $PropertyType<ErrnoError, 'errno'>);
 });
 // $ExpectError
 execa('foo').catch(err => err.foo);

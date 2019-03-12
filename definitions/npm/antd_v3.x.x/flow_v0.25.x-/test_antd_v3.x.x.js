@@ -1,3 +1,4 @@
+// @flow
 import * as React from "react";
 import { describe, it } from "flow-typed-test";
 import {
@@ -21,7 +22,9 @@ import {
   Menu,
   message,
   Modal,
+  Pagination,
   Popconfirm,
+  Popover,
   Radio,
   Row,
   Select,
@@ -62,6 +65,18 @@ describe("Badge", () => {
 describe("Button", () => {
   it("is a react component", () => {
     const button = <Button />;
+  });
+  it("should accept nullary or unary onClick handler", () => {
+    const good0 = <Button onClick={() => undefined} />
+    const good1 = <Button onClick={(event: SyntheticEvent<HTMLButtonElement>) => undefined} />
+    // $ExpectError
+    const bad = <Button onClick='bad' />
+  });
+});
+
+describe("Button.Group", () => {
+  it("is a react component", () => {
+    const group = <Button.Group />;
   });
 });
 
@@ -142,6 +157,12 @@ describe("Cascader", () => {
 describe("Checkbox", () => {
   it("is a react component", () => {
     const checkbox = <Checkbox />;
+  });
+});
+
+describe("Checkbox.Group", () => {
+  it("is a react component", () => {
+    const group = <Checkbox.Group />;
   });
 });
 
@@ -329,9 +350,36 @@ describe("Modal", () => {
   });
 });
 
+describe("Pagination", () => {
+  it("is a react component", () => {
+    const pagination = <Pagination />;
+  });
+});
+
 describe("Popconfirm", () => {
   it("is a react component", () => {
     const popconfirm = <Popconfirm />;
+  });
+  it("should accept only certain strings for placement prop", () => {
+    // Testing placement prop in particular just to verify sharing between
+    // Popconfirm, Popover, and Tooltip is working.
+    const good = <Popconfirm placement='top' />;
+    // $ExpectError
+    const bad = <Popconfirm placement='topCenter' />;
+  });
+});
+
+describe("Popover", () => {
+  it("is a react component", () => {
+    const popover = <Popover />;
+  });
+
+  it("should accept only certain strings for placement prop", () => {
+    // Testing placement prop in particular just to verify sharing between
+    // Popconfirm, Popover, and Tooltip is working.
+    const good = <Popover placement='top' />;
+    // $ExpectError
+    const bad = <Popover placement='topCenter' />;
   });
 });
 
@@ -428,6 +476,13 @@ describe("Tag", () => {
 describe("Tooltip", () => {
   it("is a react component", () => {
     const tooltip = <Tooltip title="hello" />;
+  });
+  it("should accept only certain strings for placement prop", () => {
+    // Testing placement prop in particular just to verify sharing between
+    // Popconfirm, Popover, and Tooltip is working.
+    const good = <Tooltip title='tooltip' placement='top' />;
+    // $ExpectError
+    const bad = <Tooltip title='tooltip' placement='topCenter' />;
   });
 });
 

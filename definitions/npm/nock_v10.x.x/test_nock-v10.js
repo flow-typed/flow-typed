@@ -1,8 +1,7 @@
 import nock from 'nock';
 
 const n = nock('http://localhost');
-n.get('foo')
-.reply(200, '');
+n.get('foo').reply(200, '');
 n.reply(200, {});
 n.reply((uri: string, body) => {});
 n.post('foo');
@@ -36,9 +35,10 @@ n.delayBody(200);
 n.delayConnection(200);
 n.optionally();
 n.optionally(true);
+// $ExpectError
+n.optionally('yes');
 n.persist();
-(n.isDone(): bool)
-
+(n.isDone(): boolean);
 
 // $ExpectError
 nock();
