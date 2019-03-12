@@ -54,9 +54,12 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
     mkdirp.sync(libDefDir);
     const packageJson =
 `{
-  "name": "${libraryNameAndVersionRange}-${flowVersionRange}",
+  "name": "@flowtyped/${libraryName}",
   "version": "${lowerVersion}",
-  "dependencies": {}
+  "dependencies": {},
+  "publishConfig": {
+    "tag": "${flowVersionRange.endsWith('-') ? 'latest' : flowVersionRange}"
+  }
 }`;
     // Create a libdef like `yelp-flow-typed/definitions/yargs/yargs_v10.x.x/flow_v0.54.x-/index.js`.
     fs.writeFileSync(path.join(libDefDir, 'package.json'), packageJson);
