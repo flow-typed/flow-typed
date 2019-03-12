@@ -3,7 +3,6 @@ declare module "enzyme" {
     wrapper: T,
     index: number
   ) => boolean;
-  declare type NodeOrNodes = React$Node | Array<React$Node>;
   declare type UntypedSelector = string | {[key: string]: number|string|boolean};
   declare type EnzymeSelector = UntypedSelector | React$ElementType;
 
@@ -19,10 +18,10 @@ declare module "enzyme" {
     filter<T: React$ElementType>(selector: T): ReactWrapper<T>,
     filterWhere(predicate: PredicateFunction<this>): this,
     hostNodes(): this,
-    contains(nodeOrNodes: NodeOrNodes): boolean,
+    contains(nodes: React$Node): boolean,
     containsMatchingElement(node: React$Node): boolean,
-    containsAllMatchingElements(nodes: NodeOrNodes): boolean,
-    containsAnyMatchingElements(nodes: NodeOrNodes): boolean,
+    containsAllMatchingElements(nodes: React$Node): boolean,
+    containsAnyMatchingElements(nodes: React$Node): boolean,
     dive(option?: { context?: Object }): this,
     exists(selector?: EnzymeSelector): boolean,
     isEmptyRender(): boolean,

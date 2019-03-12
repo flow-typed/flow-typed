@@ -143,3 +143,12 @@ mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).inst
 mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChangeX();
 // $ExpectError
 mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChangeX();
+
+
+(mount(<div />).contains(<div />): boolean);
+(mount(<div />).contains([<div />, <div />]): boolean);
+(mount(<div />).containsMatchingElement(<div />): boolean);
+(mount(<div />).containsAllMatchingElements(<div />): boolean);
+(mount(<div />).containsAllMatchingElements([<div />, <div />]): boolean);
+(mount(<div />).containsAnyMatchingElements(<div />): boolean);
+(mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
