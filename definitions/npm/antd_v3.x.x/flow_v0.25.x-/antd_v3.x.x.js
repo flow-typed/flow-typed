@@ -278,11 +278,14 @@ declare module "antd" {
 
   declare export class Layout extends React$Component<{}> {
     static Content: typeof LayoutContent;
+    static Footer: typeof LayoutFooter;
     static Header: typeof LayoutHeader;
     static Sider: typeof LayoutSider;
   }
 
   declare class LayoutContent extends React$Component<{}> {}
+
+  declare class LayoutFooter extends React$Component<{}> {}
 
   declare class LayoutHeader extends React$Component<{}> {}
 

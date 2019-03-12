@@ -244,6 +244,12 @@ describe("Layout.Content", () => {
   });
 });
 
+describe("Layout.Footer", () => {
+  it("is a react component", () => {
+    const layoutFooter = <Layout.Footer />;
+  });
+});
+
 describe("Layout.Header", () => {
   it("is a react component", () => {
     const layoutHeader = <Layout.Header />;
