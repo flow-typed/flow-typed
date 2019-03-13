@@ -18,6 +18,7 @@ declare module "chai" {
     deep: ExpectChain<T>,
     any: ExpectChain<T>,
     all: ExpectChain<T>,
+    own: ExpectChain<T>,
 
     a: ExpectChain<T> & ((type: string, message?: string) => ExpectChain<T>),
     an: ExpectChain<T> & ((type: string, message?: string) => ExpectChain<T>),
