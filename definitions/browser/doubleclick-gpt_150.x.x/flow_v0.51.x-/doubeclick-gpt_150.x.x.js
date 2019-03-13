@@ -115,6 +115,11 @@ interface PubAdsService extends Service {
     opt_clickUrl?: string
   ): Slot;
   enableAsyncRendering(): boolean;
+  enableLazyLoad(opt_config?: {
+        fetchMarginPercent?: number,
+        renderMarginPercent?: number,
+        mobileScaling?: number
+    }): PubAdsService;
   enableSingleRequest(): boolean;
   enableSyncRendering(): boolean;
   enableVideoAds(): void;

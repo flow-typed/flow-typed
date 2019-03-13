@@ -1,6 +1,6 @@
 declare module "jsuri" {
   declare class URI {
-    constructor: (path: ?string) => this;
+    constructor(path: ?string): this;
 
     addQueryParam: (key: string, val: string, index: ?number) => this;
     deleteQueryParam: (key: string, val: ?string) => this;

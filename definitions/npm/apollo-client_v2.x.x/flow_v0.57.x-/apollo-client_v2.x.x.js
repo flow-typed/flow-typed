@@ -415,7 +415,7 @@ declare module "apollo-client" {
     +mutate?: MutationBaseOptions<>;
   }
 
-  declare type ApolloClientOptions<TCacheShape> = {
+  declare export type ApolloClientOptions<TCacheShape> = {
     link: ApolloLink,
     cache: ApolloCache<TCacheShape>,
     ssrMode?: boolean,
@@ -511,7 +511,7 @@ declare module "apollo-client" {
     toKey: () => string;
   }
 
-  declare type FetchResult<
+  declare export type FetchResult<
     C = { [key: string]: any },
     E = { [key: string]: any }
   > = ExecutionResult<C> & { extension?: E, context?: C };

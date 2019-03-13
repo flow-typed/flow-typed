@@ -40,6 +40,17 @@ declare module 'ua-parser-js' {
   };
 
   declare class UAParser {
+    /**
+     * NOTE: It's a bit of a weird API, but the main export (UAParser) can be
+     * instantiated as a class (option 2) - which forces the called to
+     * subsequently call .setUA() and then .getResult() to obtain the parsed
+     * result, or be invoked like a function, which directly the parsed result.
+     */
+
+    // Option 1: When used as a function
+    static (userAgent?: string): UAResult;
+
+    // Option 2: When used as a class
     constructor(): UAParser;
     getBrowser(): UABrowser;
     getCPU(): UACpu;

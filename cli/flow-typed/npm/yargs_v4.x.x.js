@@ -1,15 +1,15 @@
 // flow-typed signature: 4b70bfab4258aa3e2fc116dbf13fd495
 // flow-typed version: da30fe6876/yargs_v4.x.x/flow_>=v0.25.x
 
-declare module 'yargs' {
-  declare type Argv = {_: Array<string>, [key: string]: mixed};
+declare module "yargs" {
+  declare type Argv = { _: Array<string>, [key: string]: mixed };
 
   declare type Options = $Shape<{
     alias: string,
     array: boolean,
     choices: Array<any>,
     config: boolean,
-    configParser: (configPath: string) => {[key: string]: mixed},
+    configParser: (configPath: string) => { [key: string]: mixed },
     count: boolean,
     default: boolean,
     defaultDescription: string,
@@ -26,7 +26,7 @@ declare module 'yargs' {
     required: boolean,
     requiresArg: boolean,
     string: boolean,
-    type: 'array' | 'boolean' | 'count' | 'number' | 'string',
+    type: "array" | "boolean" | "count" | "number" | "string"
   }>;
 
   declare type DescParseFn = (configPath: string) => Object;
@@ -34,8 +34,8 @@ declare module 'yargs' {
   declare type ModuleObject = {
     command: string,
     describe: string,
-    builder: {[key: string]: Options} | ((yargsInstance: Yargs) => mixed),
-    handler: (argv: Argv) => void,
+    builder: { [key: string]: Options } | ((yargsInstance: Yargs) => mixed),
+    handler: (argv: Argv) => void
   };
 
   declare class Yargs {
@@ -49,8 +49,8 @@ declare module 'yargs' {
     command(
       cmd: string,
       desc: string | false,
-      builder?: {[key: string]: Options} | ((yargsInstance: Yargs) => mixed),
-      handler?: Function,
+      builder?: { [key: string]: Options } | ((yargsInstance: Yargs) => mixed),
+      handler?: Function
     ): this;
 
     command(cmd: string, desc: string | false, module: ModuleObject): this;
@@ -63,19 +63,19 @@ declare module 'yargs' {
       fn?: (
         current: string,
         argv: Object,
-        done: (competion: Array<string>) => void,
-      ) => ?(Array<string> | Promise<Array<string>>),
+        done: (competion: Array<string>) => void
+      ) => ?(Array<string> | Promise<Array<string>>)
     ): this;
 
     config(
       key: string,
       description?: string | DescParseFn,
-      parseFn?: DescParseFn,
+      parseFn?: DescParseFn
     ): this;
 
     count(name: string): this;
 
-    default(defaultObject: {[paramter: string]: any}): this;
+    default(defaultObject: { [paramter: string]: any }): this;
     default(parameter: string, value: any): this;
 
     // Alias of require()!
@@ -83,7 +83,7 @@ declare module 'yargs' {
     demand(count: number, max?: number, msg?: string | boolean): this;
 
     describe(key: string, desc: string): this;
-    describe(describeObject: {[key: string]: string}): this;
+    describe(describeObject: { [key: string]: string }): this;
 
     detectLocale(shouldI: boolean): this;
 
@@ -105,24 +105,24 @@ declare module 'yargs' {
     help(option?: string, desc?: string): this;
 
     implies(keyA: string, keyB: string): this;
-    implies(keys: {[key: string]: string}): this;
+    implies(keys: { [key: string]: string }): this;
 
     locale(
-      locale: | 'de'
-      | 'en'
-      | 'es'
-      | 'fr'
-      | 'id'
-      | 'it'
-      | 'ja'
-      | 'ko'
-      | 'nb'
-      | 'pirate'
-      | 'pl'
-      | 'pt'
-      | 'pt_BR'
-      | 'tr'
-      | 'zh',
+      locale: | "de"
+      | "en"
+      | "es"
+      | "fr"
+      | "id"
+      | "it"
+      | "ja"
+      | "ko"
+      | "nb"
+      | "pirate"
+      | "pl"
+      | "pt"
+      | "pt_BR"
+      | "tr"
+      | "zh"
     ): this;
     locale(): string;
 
@@ -133,10 +133,10 @@ declare module 'yargs' {
     number(key: string | Array<string>): this;
 
     option(key: string, options: Options): this;
-    option(optionMap: {[key: string]: Options}): this;
+    option(optionMap: { [key: string]: Options }): this;
 
     options(key: string, options: Options): this;
-    options(optionMap: {[key: string]: Options}): this;
+    options(optionMap: { [key: string]: Options }): this;
 
     parse(args: string | Array<string>): Argv;
 
@@ -152,7 +152,7 @@ declare module 'yargs' {
 
     showCompletionScript(): this;
 
-    showHelp(consoleLevel: 'error' | 'log' | 'warn'): this;
+    showHelp(consoleLevel: "error" | "log" | "warn"): this;
 
     showHelpOnFail(enable: boolean, message?: string): this;
 
@@ -160,15 +160,15 @@ declare module 'yargs' {
 
     string(key: string | Array<string>): this;
 
-    updateLocale(obj: {[key: string]: string}): this;
-    updateStrings(obj: {[key: string]: string}): this;
+    updateLocale(obj: { [key: string]: string }): this;
+    updateStrings(obj: { [key: string]: string }): this;
 
-    usage(message: string, opts?: {[key: string]: Options}): this;
+    usage(message: string, opts?: { [key: string]: Options }): this;
 
     version(
       option?: string | (() => string),
       description?: string | Function,
-      version?: string | Function,
+      version?: string | Function
     ): this;
 
     wrap(columns: number | null): this;

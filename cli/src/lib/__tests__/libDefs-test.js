@@ -117,10 +117,7 @@ describe('libDefs', () => {
       return {
         pkgName: name,
         pkgVersionStr: verStr,
-        flowVersion: parseFlowDirString(
-          flowVerStr,
-          `${name}_${verStr}/${flowVerStr}`,
-        ),
+        flowVersion: parseFlowDirString(flowVerStr),
         flowVersionStr: flowVerStr,
         path: '',
         testFilePaths: [],
@@ -130,8 +127,8 @@ describe('libDefs', () => {
     describe('fuzzy filter', () => {
       it('filters on exact name', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.18.x-'),
         ];
         const filtered = filterLibDefs(fixture, {type: 'fuzzy', term: 'mori'});
         expect(filtered).toEqual([fixture[1], fixture[0]]);
@@ -139,8 +136,8 @@ describe('libDefs', () => {
 
       it('filters on differently-cased name', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.18.x-'),
         ];
         const filtered = filterLibDefs(fixture, {type: 'fuzzy', term: 'Mori'});
         expect(filtered).toEqual([fixture[1], fixture[0]]);
@@ -148,9 +145,9 @@ describe('libDefs', () => {
 
       it('filters on partial name', () => {
         const fixture = [
-          _generateMockLibdef('**mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori**', 'v0.3.x', '>=v0.18.x'),
-          _generateMockLibdef('mo**ri', 'v0.3.x', '>=v0.18.x'),
+          _generateMockLibdef('**mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori**', 'v0.3.x', 'flow_v0.18.x-'),
+          _generateMockLibdef('mo**ri', 'v0.3.x', 'flow_v0.18.x-'),
         ];
         const filtered = filterLibDefs(fixture, {type: 'fuzzy', term: 'mori'});
         expect(filtered).toEqual([fixture[1], fixture[0]]);
@@ -158,8 +155,8 @@ describe('libDefs', () => {
 
       it('filters on flow version', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.18.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'fuzzy',
@@ -173,8 +170,8 @@ describe('libDefs', () => {
     describe('exact-name filter', () => {
       it('filters on exact name', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.18.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact-name',
@@ -185,8 +182,8 @@ describe('libDefs', () => {
 
       it('filters on differently-cased name', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.18.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact-name',
@@ -197,9 +194,9 @@ describe('libDefs', () => {
 
       it('DOES NOT filter on partial name', () => {
         const fixture = [
-          _generateMockLibdef('**mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
-          _generateMockLibdef('mo**ri', 'v0.3.x', '>=v0.18.x'),
+          _generateMockLibdef('**mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.18.x-'),
+          _generateMockLibdef('mo**ri', 'v0.3.x', 'flow_v0.18.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact-name',
@@ -210,8 +207,8 @@ describe('libDefs', () => {
 
       it('filters on flow version', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.18.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact-name',
@@ -225,8 +222,8 @@ describe('libDefs', () => {
     describe('exact filter', () => {
       it('filters on exact name', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('notmori', 'v0.3.x', '>=v0.22.x'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('notmori', 'v0.3.x', 'flow_v0.22.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact',
@@ -239,8 +236,8 @@ describe('libDefs', () => {
 
       it('filters on differently-cased name', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('notmori', 'v0.3.x', '>=v0.22.x'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('notmori', 'v0.3.x', 'flow_v0.22.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact',
@@ -253,10 +250,10 @@ describe('libDefs', () => {
 
       it('DOES NOT filter on partial name', () => {
         const fixture = [
-          _generateMockLibdef('**mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori**', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mo**ri', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
+          _generateMockLibdef('**mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori**', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mo**ri', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact',
@@ -269,8 +266,8 @@ describe('libDefs', () => {
 
       it('filters on flow version', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v0.3.x', '>=v0.18.x'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.18.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact',
@@ -283,10 +280,10 @@ describe('libDefs', () => {
 
       it('filters and orders from highest to lowest version', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v2.x.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v3.x.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v2.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', 'v2.1.x', '>=v0.22.x'),
+          _generateMockLibdef('mori', 'v2.x.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v3.x.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v2.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', 'v2.1.x', 'flow_v0.22.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact',
@@ -299,8 +296,8 @@ describe('libDefs', () => {
 
       it('filters using default (implied ^) and equals libdef versions', () => {
         const fixture = [
-          _generateMockLibdef('mori', 'v2.3.x', '>=v0.22.x'),
-          _generateMockLibdef('mori', '=v2.3.x', '>=v0.22.x'),
+          _generateMockLibdef('mori', 'v2.3.x', 'flow_v0.22.x-'),
+          _generateMockLibdef('mori', '=v2.3.x', 'flow_v0.22.x-'),
         ];
         const filtered = filterLibDefs(fixture, {
           type: 'exact',
@@ -314,8 +311,8 @@ describe('libDefs', () => {
       describe('given a package range', () => {
         it('DOES NOT match when libdef range does not intersect package range', () => {
           const fixture = [
-            _generateMockLibdef('mori', 'v0.2.x', '>=v0.22.x'),
-            _generateMockLibdef('mori', 'v0.4.x', '>=v0.22.x'),
+            _generateMockLibdef('mori', 'v0.2.x', 'flow_v0.22.x-'),
+            _generateMockLibdef('mori', 'v0.4.x', 'flow_v0.22.x-'),
           ];
           const filtered = filterLibDefs(fixture, {
             type: 'exact',
@@ -331,7 +328,7 @@ describe('libDefs', () => {
             'versions than libdef',
           () => {
             const fixture = [
-              _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
+              _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
             ];
             const filtered = filterLibDefs(fixture, {
               type: 'exact',
@@ -345,8 +342,8 @@ describe('libDefs', () => {
 
         it('matches when ranges intersect and libdef supports older versions', () => {
           const fixture = [
-            _generateMockLibdef('mori', 'v0.3.x', '>=v0.22.x'),
-            _generateMockLibdef('mori', 'v0.3.8', '>=v0.22.x'),
+            _generateMockLibdef('mori', 'v0.3.x', 'flow_v0.22.x-'),
+            _generateMockLibdef('mori', 'v0.3.8', 'flow_v0.22.x-'),
           ];
           const filtered = filterLibDefs(fixture, {
             type: 'exact',

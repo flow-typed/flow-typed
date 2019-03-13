@@ -2,7 +2,7 @@
 // @flow
 
 if (!global.__flowTypedBabelPolyfill) {
-  require('babel-polyfill');
+  require('@babel/polyfill');
   global.__flowTypedBabelPolyfill = true;
 }
 

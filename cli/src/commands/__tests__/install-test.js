@@ -116,7 +116,7 @@ describe('install (command)', () => {
       return testProject(async ROOT_DIR => {
         const result = await installNpmLibDefs({
           cwd: ROOT_DIR,
-          flowVersion: parseFlowDirString('flow_v0.40.0', 'testContext'),
+          flowVersion: parseFlowDirString('flow_v0.40.0'),
           explicitLibDefs: [],
           libdefDir: 'flow-typed',
           verbose: false,
@@ -149,7 +149,7 @@ describe('install (command)', () => {
           });
           const result = await installNpmLibDefs({
             cwd: ROOT_DIR,
-            flowVersion: parseFlowDirString('flow_v0.40.0', 'testContext'),
+            flowVersion: parseFlowDirString('flow_v0.40.0'),
             explicitLibDefs: ['INVALID'],
             libdefDir: 'flow-typed',
             verbose: false,
@@ -178,7 +178,7 @@ describe('install (command)', () => {
         ]);
         const result = await installNpmLibDefs({
           cwd: ROOT_DIR,
-          flowVersion: parseFlowDirString('flow_v0.40.0', 'testContext'),
+          flowVersion: parseFlowDirString('flow_v0.40.0'),
           explicitLibDefs: [],
           libdefDir: 'flow-typed',
           verbose: false,

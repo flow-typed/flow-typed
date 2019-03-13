@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import Loadable from 'react-loadable';
+import Loadable, { type MapModules } from 'react-loadable';
 import { describe, it } from 'flow-typed-test';
 
 type Props = { a: string };
@@ -163,6 +163,27 @@ it('Loadable.Map() should work', () => {
       b: () => Promise.resolve(1)
     },
     render: (loaded: { Cmp: { foo: React$ComponentType<{ a: string, b: number }> }, b: number }, props: { a: string }) => <loaded.Cmp.foo a={props.a} b={loaded.b} />
+  });
+
+  <LoadableMap a="foo" />
+});
+
+it('Loadable.Map() can infer type of modules', () => {
+  class Component extends React.Component<{ a: string, b: number }> {}
+  const loader = {
+    Cmp: () => Promise.resolve({ foo: Component }),
+    b: () => Promise.resolve(1)
+  };
+
+  const LoadableMap = Loadable.Map<*, MapModules<typeof loader>>({
+    loading: () => null,
+    loader,
+    render: (loaded, props) => {
+      // $ExpectError
+      (loaded: empty);
+      (loaded: { Cmp: { foo: React$ComponentType<{ a: string, b: number }> }, b: number });
+      return <loaded.Cmp.foo a={props.a} b={loaded.b} />;
+    }
   });
 
   <LoadableMap a="foo" />

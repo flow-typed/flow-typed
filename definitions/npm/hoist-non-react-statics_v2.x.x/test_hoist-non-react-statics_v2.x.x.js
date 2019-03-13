@@ -32,12 +32,12 @@ C2.bar = 2;
 C1 = hoistNonReactStatics(C1, C2, { foo: true });
 C1.bar;
 
-class A extends React.Component<{}> {
+class A extends React.Component<{a: number}> {
   static foo() { return 123; }
 }
 
-class B extends React.Component<{}> {
-  render() { return <A />; }
+class B extends React.Component<{b: string}> {
+  render() { return <A a={1} />; }
 }
 
 const C = hoistNonReactStatics(B, A);

@@ -62,7 +62,8 @@ type SchemaOpts<Doc> = {
   read?: string,
   safe?: boolean,
   shardKey?: boolean,
-  strict?: boolean,
+  strict?: boolean | 'throw',
+  strictQuery?: boolean | 'throw',
   toJSON?: ToObjectOpts<Doc>,
   toObject?: ToObjectOpts<Doc>,
   typeKey?: string,
@@ -543,7 +544,7 @@ type ConnectionEventTypes = "error" | "open" | "disconnected" | string;
 declare class Mongoose$Connection {
   constructor(): this;
   close(): Promise<any>;
-  connect(uri: string, opts?: ConnectionConnectOpts): void;
+  connect(uri: string, opts?: ConnectionConnectOpts, fn?: (error: any) => void): Promise<Mongoose$Connection>;
   openUri(uri: string, opts?: ConnectionConnectOpts): void;
   model<Doc>(
     name: string | Doc,
@@ -594,7 +595,7 @@ declare module "mongoose" {
     model: $PropertyType<Mongoose$Connection, "model">,
     createConnection(uri?: string, options?: Object): Mongoose$Connection,
     set: (key: string, value: string | Function | boolean) => void,
-    connect: (uri: string, options?: Object) => void,
+    connect: (uri: string, options?: ConnectionConnectOpts, fn?: (error: any) => void) => Promise<Mongoose$Connection>,
     connection: Mongoose$Connection,
     connections: Mongoose$Connection[],
     Query: typeof Mongoose$Query,

@@ -40,11 +40,28 @@ declare module 'next-routes' {
     [key: string]: any
   };
 
+  declare export interface RouterEvents {
+    on(event: "routeChangeStart", cb: RouteCallback): RouterEvents,
+    on(event: "routeChangeComplete", cb: RouteCallback): RouterEvents,
+    on(event: "routeChangeError", cb: RouteErrorCallback): RouterEvents,
+    on(event: "beforeHistoryChange", cb: RouteCallback): RouterEvents,
+    on(event: "hashChangeStart", cb: RouteCallback): RouterEvents,
+    on(event: "hashChangeComplete", cb: RouteCallback): RouterEvents,
+
+    off(event: "routeChangeStart", cb: RouteCallback): RouterEvents,
+    off(event: "routeChangeComplete", cb: RouteCallback): RouterEvents,
+    off(event: "routeChangeError", cb: RouteErrorCallback): RouterEvents,
+    off(event: "beforeHistoryChange", cb: RouteCallback): RouterEvents,
+    off(event: "hashChangeStart", cb: RouteCallback): RouterEvents,
+    off(event: "hashChangeComplete", cb: RouteCallback): RouterEvents
+  }
+
   declare export type NextRouter = {
     +route: string,
     +pathname: string,
     +asPath: string,
     +query: Object,
+    events: RouterEvents,
     onRouteChangeStart: ?RouteCallback,
     onRouteChangeComplete: ?RouteCallback,
     onRouteChangeError: ?RouteErrorCallback,
@@ -59,7 +76,23 @@ declare module 'next-routes' {
       url: string,
       as: ?string,
       options?: EventChangeOptions
-    ): Promise<boolean>
+    ): Promise<boolean>,
+    prefetch(url: string): Promise<*>,
+    pushRoute(
+      route: string,
+      params?: { [name: string]: string },
+      options?: any
+    ): Promise<boolean>,
+    replaceRoute(
+      route: string,
+      params?: { [name: string]: string },
+      options?: any
+    ): Promise<boolean>,
+    prefetchRoute(
+      route: string,
+      params?: { [name: string]: string },
+      options?: any
+    ): Promise<*>,
   };
 
   declare type RoutesOpt = {
@@ -80,21 +113,6 @@ declare module 'next-routes' {
     add(pattern: string, page: string): Routes;
     add(name: string, pattern: string, page: string): Routes;
     getRequestHandler(app: Object, customHandler?: (any) => any): Function;
-    pushRoute(
-      route: string,
-      params?: { [name: string]: string },
-      options?: any
-    ): void;
-    replaceRoute(
-      route: string,
-      params?: { [name: string]: string },
-      options?: any
-    ): void;
-    prefetchRoute(
-      route: string,
-      params?: { [name: string]: string },
-      options?: any
-    ): void;
   }
 
   declare module.exports: (opt?: RoutesOpt) => Routes;

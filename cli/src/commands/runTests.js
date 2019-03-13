@@ -13,12 +13,13 @@ import * as semver from 'semver';
 import * as unzip from 'unzipper';
 import typeof Yargs from 'yargs';
 import type {FlowVersion} from '../lib/flowVersion.js';
+import {ValidationError} from '../lib/ValidationError';
 
 export type Args = {
   _: Array<string>,
-  path?: string,
-  onlyChanged?: boolean,
-  numberOfFlowVersions?: number,
+  path?: mixed, // string
+  onlyChanged?: mixed, //boolean
+  numberOfFlowVersions?: mixed, // number
 };
 
 // Used to decide which binary to fetch for each version of Flow
@@ -86,6 +87,16 @@ async function getTestGroups(
   });
 }
 
+function printSkipMessage(flowVersion, githubUrl) {
+  console.log(
+    '==========================================================================================',
+  );
+  console.log(`We are temporarily skipping ${flowVersion} due to ${githubUrl}`);
+  console.log(
+    '==========================================================================================',
+  );
+}
+
 /**
  * Memoized function that queries the GitHub releases for Flow, downloads the
  * zip for each version, extracts the zip, and moves the binary to
@@ -116,50 +127,28 @@ async function getOrderedFlowBinVersions(
 
     const flowBins = apiPayload.data
       .filter(rel => {
-        // Temporary fix for https://github.com/facebook/flow/issues/5922
         if (rel.tag_name === 'v0.67.0') {
-          console.log(
-            '==========================================================================================',
-          );
-          console.log(
-            'We are temporarily skipping v0.67.0 due to https://github.com/facebook/flow/issues/5922',
-          );
-          console.log(
-            '==========================================================================================',
+          printSkipMessage(
+            rel.tag_name,
+            'https://github.com/facebook/flow/issues/5922',
           );
           return false;
-        }
-
-        // Temporary fixes for https://github.com/flowtype/flow-typed/issues/2422
-        if (rel.tag_name === 'v0.63.0' || rel.tag_name === 'v0.70.0') {
-          console.log(
-            '==========================================================================================',
-          );
-          console.log(
-            `We are temporarily skipping ${
-              rel.tag_name
-            } due to https://github.com/flowtype/flow-typed/issues/2422`,
-          );
-          console.log(
-            '==========================================================================================',
+        } else if (rel.tag_name === 'v0.63.0' || rel.tag_name === 'v0.70.0') {
+          printSkipMessage(
+            rel.tag_name,
+            'https://github.com/flowtype/flow-typed/issues/2422',
           );
           return false;
-        }
-
-        // We only test against versions since 0.15.0 because it has proper
-        // [ignore] fixes (which are necessary to run tests)
-        // Because Windows was only supported starting with version 0.30.0, we also skip version prior to that when running on windows.
-        if (semver.lt(rel.tag_name, IS_WINDOWS ? '0.30.0' : '0.15.0')) {
+        } else if (semver.lt(rel.tag_name, '0.53.0')) {
+          console.log('flow-typed only supports flow 0.53.0 and newer');
           return false;
-        }
-
-        // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
-        if (
+        } else if (
           IS_WINDOWS &&
           (semver.eq(rel.tag_name, '0.57.0') ||
             semver.eq(rel.tag_name, '0.57.1') ||
             semver.eq(rel.tag_name, '0.57.2'))
         ) {
+          // Because flow 0.57 was broken before 0.57.3 on the Windows platform, we also skip those versions when running on windows.
           return false;
         }
         return true;
@@ -299,12 +288,7 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(
-  repoDirPath,
-  testDirPath,
-  libDefPath,
-  includeWarnings,
-) {
+async function writeFlowConfig(repoDirPath, testDirPath, libDefPath) {
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
 
   const flowConfigData = [
@@ -314,7 +298,8 @@ async function writeFlowConfig(
     '',
     '[options]',
     'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
-    includeWarnings ? 'include_warnings=true' : '',
+    'include_warnings=true',
+    'server.max_workers=0',
     '',
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
@@ -377,12 +362,10 @@ async function runFlowTypeDefTests(flowVersionsToRun, groupId, testDirPath) {
         } else if (!stdErrOut.endsWith('Found 0 errors\n')) {
           errors.push(
             testRunId +
-              ': Unexpected Flow errors(' +
+              ': Unexpected Flow errors (' +
               String(errCode) +
-              '):\n' +
-              stdErrOut +
-              '\n' +
-              String(execError),
+              '):\n\n' +
+              stdErrOut,
           );
         }
       }),
@@ -437,23 +420,11 @@ async function findLowestCapableFlowVersion(
     return semver.lt(flowVer, lowestFlowVersionRan);
   });
   lowerFlowVersionsToRun.reverse();
-  const lowerLowVersions = lowerFlowVersionsToRun.filter(flowVer =>
-    semver.lt(flowVer, '0.53.0'),
-  );
-  const higherLowVersions = lowerFlowVersionsToRun.filter(flowVer =>
-    semver.gte(flowVer, '0.53.0'),
-  );
-  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, true);
-  const lowestOfHigherVersions = await testLowestCapableFlowVersion(
-    higherLowVersions,
+  await writeFlowConfig(repoDirPath, testDirPath, libDefPath);
+  return await testLowestCapableFlowVersion(
+    lowerFlowVersionsToRun,
     testDirPath,
     lowestFlowVersionRan,
-  );
-  await writeFlowConfig(repoDirPath, testDirPath, libDefPath, false);
-  return await testLowestCapableFlowVersion(
-    lowerLowVersions,
-    testDirPath,
-    lowestOfHigherVersions,
   );
 }
 
@@ -478,7 +449,6 @@ async function runTestGroup(
   testGroup: TestGroup,
   orderedFlowVersions: Array<string>,
 ): Promise<Array<string>> {
-  const errors = [];
   // Some older versions of Flow choke on ">"/"<"/"="
   const testDirName = testGroup.id
     .replace(/\//g, '--')
@@ -536,34 +506,13 @@ async function runTestGroup(
       return [];
     }
     let lowestFlowVersionRan = flowVersionsToRun[0];
-
-    const lowerVersions = flowVersionsToRun.filter(flowVer =>
-      semver.lt(flowVer, '0.53.0'),
-    );
-    const higherVersions = flowVersionsToRun.filter(flowVer =>
-      semver.gte(flowVer, '0.53.0'),
-    );
-
-    await writeFlowConfig(
-      repoDirPath,
-      testDirPath,
-      testGroup.libDefPath,
-      false,
-    );
-    const lowerVersionErrors = await runFlowTypeDefTests(
-      lowerVersions,
+    await writeFlowConfig(repoDirPath, testDirPath, testGroup.libDefPath);
+    const flowErrors = await runFlowTypeDefTests(
+      flowVersionsToRun,
       testGroup.id,
       testDirPath,
     );
 
-    await writeFlowConfig(repoDirPath, testDirPath, testGroup.libDefPath, true);
-    const higherVersionErrors = await runFlowTypeDefTests(
-      higherVersions,
-      testGroup.id,
-      testDirPath,
-    );
-
-    errors.push(...higherVersionErrors, ...lowerVersionErrors);
     const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
       repoDirPath,
       orderedFlowVersions,
@@ -579,7 +528,7 @@ async function runTestGroup(
         Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
     }
 
-    return errors;
+    return flowErrors;
   } finally {
     if (await fs.exists(testDirPath)) {
       await recursiveRmdir(testDirPath);
@@ -715,22 +664,32 @@ export async function run(argv: Args): Promise<number> {
     );
   }
 
-  const results = await runTests(
-    repoDirPath,
-    testPatterns,
-    onlyChanged,
-    numberOfFlowVersions,
-  );
+  let results;
+  try {
+    results = await runTests(
+      repoDirPath,
+      testPatterns,
+      onlyChanged,
+      numberOfFlowVersions,
+    );
+  } catch (e) {
+    if (e instanceof ValidationError) {
+      console.error(e.message);
+      return 1;
+    } else {
+      throw e;
+    }
+  }
   console.log(' ');
   Array.from(results).forEach(([testGroupName, errors]) => {
     console.log('ERROR: %s', testGroupName);
     errors.forEach(err =>
       console.log(
-        ' * %s\n',
+        '* %s\n',
         err
           .split('\n')
           .map((line, idx) => {
-            return idx === 0 ? line : '   ' + line;
+            return idx === 0 ? line : '    ' + line;
           })
           .join('\n'),
       ),

@@ -1,6 +1,3 @@
-// flow-typed signature: 7d75bac2d24a91e205a306c0cac0d283
-// flow-typed version: <<STUB>>/node-dogstatsd_v0.0.6/flow_v0.48.0
-
 import type { Socket } from 'net';
 
 declare module 'node-dogstatsd' {

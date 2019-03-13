@@ -285,7 +285,8 @@ declare module "luxon" {
   |};
 
   declare type SetZoneOptions = {|
-    keepCalendarTime?: ?boolean
+    keepCalendarTime?: ?boolean, // Support deprecated name for keepLocalTime
+    keepLocalTime?: ?boolean,
   |};
 
   declare type DateTimeFieldsOptions = {|
@@ -414,6 +415,10 @@ declare module "luxon" {
     static fromJSDate(date: Date, options?: DateTimeFromOptions): DateTime;
     static fromMillis(
       millseconds: number,
+      options?: DateTimeFromOptions
+    ): DateTime;
+    static fromSeconds(
+      seconds: number,
       options?: DateTimeFromOptions
     ): DateTime;
     static fromRFC2822(text: string, options?: DateTimeFromOptions): DateTime;

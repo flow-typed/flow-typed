@@ -8,12 +8,14 @@ to existing libdefs.
 
 * [Running libdef tests](#running-libdef-tests)
 * [Creating a new library definition](#creating-a-new-library-definition)
-* [Writing libdefs tips](#writing-libdefs-tips)
+* [Writing libdefs best practices](#writing-libdefs-best-practices)
   * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
   * [Avoid `any` when possible](#avoid-any-when-possible)
   * [Exporting modules](#exporting-modules)
-  * [Always prefix global variables that aren't really meant to be global](#prefix-global-variables-that-arent-really-meant-to-be-global)
+  * [Avoid global types](#avoid-global-types)
+  * [Prefer immutability](#prefer-immutability)
+  * [Prefer exactness](#prefer-exactness)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
 
@@ -61,9 +63,9 @@ library-definition test runner.
 
 This specifies that the definition you are contributing is compatible with the
 version range of the directiry. You MUST specify a version range with names like
-`flow_v0.25.x-` ("any version at or after v0.22.x") or
-`flow_-v0.25.x` ("any version at or before v0.22.x") or
-`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.22.x and
+`flow_v0.25.x-` ("any version at or after v0.25.x") or
+`flow_-v0.25.x` ("any version at or before v0.25.x") or
+`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.25.x and
 v0.28.x").
 
 If you aren't sure which versions of Flow your definition is compatible with,
@@ -105,15 +107,25 @@ the test-runner for *all* versions of Flow the package version supports. If you
 ever need to write a test for a particular version of Flow, you can put the
 `test_` file in the appropriate flow version directory.
 
-#### 5) Run your tests with `flow-typed validate-defs definitions && flow-typed run-tests left-pad`
+#### 5) Run your tests using one of the following:
+- globally installed `'flow-typed'`:
+```
+flow-typed validate-defs definitions && flow-typed run-tests left-pad
+```
+- local flow-typed CLI that we've built before (see instructions about `'./build_and_test_cli.sh'` above):
+```
+# assuming current directory is './cli'
+node dist/cli.js validate-defs ../definitions && \
+node dist/cli.js run-tests left-pad
+```
 
-You may also leave off the argument `left-pad` to run *all* tests (this takes a while). Please note that this test (and the one on Travis-CI) only will be able to run if the name of the repo folder is still "flow-typed".
+You may also leave off the argument `left-pad` to run *all* tests (this takes a while).
 
 #### 6) Send a pull request
 
 You know how to do it.
 
-## Writing libdefs tips
+## Writing libdefs best practices
 
 ### Read flow docs
 
@@ -229,22 +241,21 @@ Using `mixed` in place of `any` for the return type of a function or the type of
 
 When you export a module, you have a choice to use CommonJS or ES6 syntax. We generally recommend to use ES6 syntax. As [discussed here](https://github.com/flow-typed/flow-typed/issues/1859#issuecomment-374575368), if you need both named exports and a default export, then you need to use the ES6 syntax.
 
-### Prefix global variables that aren't really meant to be global
+### Avoid global types
 
-Right now we don't have a good way to write types inside `declare module {}` bodies that *aren't* exported. This problem is being worked on, but in the meantime the best option is to just put a declaration outside the `declare module {}` and reference it.
+Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the fact that in the past Flow didn't support private types. **Global types should not be used anymore**. Since then Flow has added support for `declare export` which means that every type which doesn't have it are defined as private and can't be imported, see https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module for details. 
 
-Because this effectively creates a global type, please be sure to namespace these types with something like `$npm$ModuleName$`:
+### Prefer immutability
 
-```js
-type $npm$MyModule$Options = {
-  option1: number,
-  option2: string,
-};
+If the function does not mutate input values, always prefer immutable types.
+This is imporant since immutable types accepts mutable types in, but mutable types does not accept immutable types in, see [good example](https://flow.org/try/#0PTAEAEDMBsHsHcBQiAmBTAxtAhgJzaJAK4B2GALgJawmjloDO5AFJSQA5HkBcoAJACU02FAHkS0AJ4BBXLmySAPCSIBbAEZpcAPgCUvAG6xKKANzIMNJoVoBeUMzy5es+UpUate0Le2gA3oigoACQTgB0nAwAFswAjABMAMy6iCH0TI5yuuYAvohAA) and [bad example](https://flow.org/try/#0PTAEAEDMBsHsHcBQiAmBTAxtAhgJzaJAK4B2GALgJawmjloDO5AFJSQA5HkBcoAgrlzYAngB4SRALYAjNLgB8ASl4A3WJRQBuZBhpNCtALyhmeXLwAkAJTTYUAeRLRhAoWIky5S0IfmgA3ogAkPRMpoKK2gC+iEA)
+- Instead of `Array<string>` use `$readOnlyArray<string>`
+- Instead of `{ value: string }` prefer `{ +value: string }` [$ReadOnly<{ value: string }>](https://flow.org/en/docs/types/utilities/#toc-readonly)
 
-declare module "MyModule" {
-  declare function doStuff(options: $npm$MyModule$Options): void;
-}
-```
+### Prefer exactness
+
+If the object has known set of properties, always define them as exact:
+- Instead of `{ +value: string }` prefer `{| +value: string |}`
 
 ## Writing tests
 
