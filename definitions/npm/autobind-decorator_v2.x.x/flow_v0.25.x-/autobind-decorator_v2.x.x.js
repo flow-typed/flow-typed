@@ -1,7 +1,8 @@
-// types are copied from https://github.com/andreypopp/autobind-decorator
-declare const autobind: ClassDecorator & MethodDecorator;
+declare module 'autobind-decorator' {
+    declare var autobind: ClassDecorator & MethodDecorator;
 
-export declare const boundMethod: MethodDecorator;
-export declare const boundClass: ClassDecorator;
+    declare export var boundMethod: MethodDecorator;
+    declare export var boundClass: ClassDecorator;
 
-export default autobind;
+    declare export default typeof autobind;
+}
