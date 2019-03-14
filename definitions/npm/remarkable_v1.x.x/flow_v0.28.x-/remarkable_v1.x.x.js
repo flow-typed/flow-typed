@@ -7,7 +7,7 @@ declare module 'remarkable' {
 
   declare type RemarkablePlugin<Option> = (md: Remarkable, option: Option) => void;
 
-  declare type RemarkableOptions = {
+  declare export type RemarkableOptions = {
     html: boolean; // Enable HTML tags in source
     xhtmlOut: boolean; // Use '/' to close single tags (<br />)
     breaks: boolean; // Convert '\n' in paragraphs into <br>
@@ -23,6 +23,7 @@ declare module 'remarkable' {
     // or '' if the source string is not changed
     highlight: (str: string, lang: string) => string;
   };
+
   declare type RemarkableSettings = 'default' | 'commonmark' | 'full' | $Shape<RemarkableOptions>;
 
   declare type Parser = {
