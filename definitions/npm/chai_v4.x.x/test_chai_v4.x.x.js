@@ -72,6 +72,7 @@ expect([1, 2, 3]).to.have.length(3);
 expect([1, 2, 3]).to.have.length("three");
 
 expect("abc").to.match(/[a-z]{3}/);
+expect("abc").to.be.a("string").that.matches(/[a-z]{3}/);
 expect("abc").to.have.string("b");
 
 expect({ a: 1, b: 2 }).to.have.key("a");

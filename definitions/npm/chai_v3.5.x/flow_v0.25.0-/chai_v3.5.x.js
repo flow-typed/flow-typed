@@ -51,6 +51,7 @@ declare module "chai" {
     lengthOf: (value: number) => ExpectChain<T>,
 
     match: (regex: RegExp) => ExpectChain<T>,
+    matches: (regex: RegExp) => ExpectChain<T>,
     string: (string: string) => ExpectChain<T>,
 
     key: (key: string) => ExpectChain<T>,
@@ -116,11 +117,11 @@ declare module "chai" {
     notify: (callback: () => mixed) => ExpectChain<T>,
 
     // chai-subset
-    containSubset: (obj: Object | Object[]) => ExpectChain<T>,
+    containSubset: (obj: {} | Array< {} >) => ExpectChain<T>,
 
     // chai-redux-mock-store
     dispatchedActions: (
-      actions: Array<Object | ((action: Object) => any)>
+      actions: Array<{} | ((action: {}) => any)>
     ) => ExpectChain<T>,
     dispatchedTypes: (actions: Array<string>) => ExpectChain<T>
   };
@@ -192,8 +193,8 @@ declare module "chai" {
     static typeOf(val: mixed, type: string, msg?: string): void;
     static notTypeOf(val: mixed, type: string, msg?: string): void;
 
-    static instanceOf(val: mixed, constructor: Function, msg?: string): void;
-    static notInstanceOf(val: mixed, constructor: Function, msg?: string): void;
+    static instanceOf(val: mixed, constructor: Class< * >, msg?: string): void;
+    static notInstanceOf(val: mixed, constructor: Class< * >, msg?: string): void;
 
     static include(exp: string, inc: mixed, msg?: string): void;
     static include<T>(exp: Array<T>, inc: T, msg?: string): void;
