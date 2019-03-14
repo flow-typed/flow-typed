@@ -4,7 +4,7 @@ declare module "@storybook/addon-knobs/react" {
   declare type RenderFunction = () => Renderable | Array<Renderable>;
   declare type GroupId = string;
 
-  declare function array<T>(string, (Array<mixed> | {}), ?string, ?GroupId): Array<string>;
+  declare function array<T>(string, (Array<T> | {[string]: T}), ?string, ?GroupId): Array<T>;
   declare function boolean(string, boolean, ?GroupId): boolean;
   declare function button(string, ((?{}) => void), ?GroupId): void;
   declare function color(string, string, ?GroupId): string;

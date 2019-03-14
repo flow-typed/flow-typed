@@ -16,14 +16,16 @@ import {
 let arrayVal: Array<string>;
 arrayVal = array("Array", ["one", "two"]);
 arrayVal = array("Array with separator", ["one", "two"], ",");
-arrayVal = array("Array with non-string array default", [1, 2]);
+arrayVal = array("Array with object default", { one: "one", two: "two" });
+let numArrayVal: Array<number> = array("Array assigned to non-string array variable", [1, 2]);
+// $ExpectError
 arrayVal = array("Array with object default", { one: 1, two: 2 });
+// $ExpectError
+arrayVal = array("Array with non-string array default", [1, 2]);
 // $ExpectError
 arrayVal = array("Array with non-array and non-object default", "one");
 // $ExpectError
 arrayVal = array("Array with non-string separator", ["one", "two"], 0);
-// $ExpectError
-let badArrayVal: Array<number> = array("Array assigned to non-string array variable", [1, 2]);
 
 // boolean
 let boolVal: boolean;
