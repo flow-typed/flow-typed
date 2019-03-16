@@ -56,7 +56,7 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
   static TimeoutError: Class<Bluebird$TimeoutError>;
   static RejectionError: Class<Bluebird$RejectionError>;
   static OperationalError: Class<Bluebird$OperationalError>;
-  
+
   static Defer: Class<Bluebird$Defer>;
   static PromiseInspection: Class<Bluebird$PromiseInspection<*>>;
 
@@ -189,7 +189,8 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
   constructor(
     callback: (
       resolve: (result?: $Promisable<R>) => void,
-      reject: (error?: any) => void
+      reject: (error?: any) => void,
+      onCancel?: (fn?: () => void) => void,
     ) => mixed
   ): void;
   then(onFulfill: null | void, onReject: null | void): Bluebird$Promise<R>;
@@ -308,7 +309,7 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
     disposable: Bluebird$Disposable<T>,
     handler: (value: T) => $Promisable<A>
   ): Bluebird$Promise<A>;
-  
+
   suppressUnhandledRejections(): void;
 }
 
