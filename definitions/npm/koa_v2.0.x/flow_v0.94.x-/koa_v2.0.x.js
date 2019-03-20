@@ -3,19 +3,6 @@
  * this: https://github.com/koajs/koa/commit/fabf5864c6a5dca0782b867a263b1b0825a05bf9
 **/
 declare module 'koa' {
-  // Currently, import type doesn't work well ?
-  // so copy `Server` from flow/lib/node.js#L820
-  declare class Server extends net$Server {
-    listen(port?: number, hostname?: string, backlog?: number, callback?: Function): Server,
-    listen(path: string, callback?: Function): Server,
-    listen(handle: {}, callback?: Function): Server,
-    close(callback?: Function): Server,
-    maxHeadersCount: number,
-    setTimeout(msecs: number, callback: Function): Server,
-    timeout: number,
-  }
-  declare type ServerType = Server;
-
   declare type JSON = | string | number | boolean | null | JSONObject | JSONArray;
   declare type JSONObject = { [key: string]: JSON };
   declare type JSONArray = Array<JSON>;
@@ -301,10 +288,10 @@ declare module 'koa' {
     proxy: boolean, // when true proxy header fields will be trusted
     request: Request,
     response: Response,
-    server: Server,
+    server: http$Server,
     subdomainOffset: number,
 
-    listen: $PropertyType<Server, 'listen'>,
+    listen: $PropertyType<http$Server, 'listen'>,
     toJSON(): ApplicationJSON,
     inspect(): ApplicationJSON,
     use(fn: Middleware): this,

@@ -5,7 +5,6 @@ import type {
   Context,
   Request,
   Response,
-  ServerType,
   ApplicationJSON,
   ResponseJSON,
   ResponseInspect,
@@ -41,13 +40,13 @@ function test_Application() {
   const response: Response = app.response;
   // $ExpectError
   const _response: number = app.response;
-  const server: ServerType = app.server;
+  const server: http$Server = app.server;
   // $ExpectError
   const _server: number = app.server;
   const subdomainOffset: number = app.subdomainOffset;
   // $ExpectError
   const _subdomainOffset: string = app.subdomainOffset;
-  const listen: $PropertyType<ServerType, 'listen'> = app.listen;
+  const listen: $PropertyType<http$Server, 'listen'> = app.listen;
   // $ExpectError
   const _listen: () => string = app.listen;
   const toJSON: () => ApplicationJSON = app.toJSON;
@@ -339,8 +338,7 @@ function test_index_md() {
     ctx.body = 1;
   });
   app.listen(3000);
-  // $ExpectError
-  app.listen(true);
+  app.listen(3000, () => {});
 
   function test_cascading() {
     // x-response-time
@@ -371,7 +369,6 @@ function test_index_md() {
     });
 
     app.listen(3000);
-    // $ExpectError
-    app.listen(true);
+    app.listen(3000, () => {});
   }
 }
