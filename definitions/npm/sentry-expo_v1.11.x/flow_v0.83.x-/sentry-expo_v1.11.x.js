@@ -1,3 +1,7 @@
+/**
+ * sentry-expo primarily delegates to the `react-native-sentry` package.
+ * Definitions pulled from https://github.com/getsentry/react-native-sentry/blob/master/lib/Sentry.d.ts.
+ */
 declare module "sentry-expo" {
   declare type SentryBreadcrumbType = "navigation" | "http";
 
