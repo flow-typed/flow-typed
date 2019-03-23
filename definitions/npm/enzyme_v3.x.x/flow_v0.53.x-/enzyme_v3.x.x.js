@@ -11,6 +11,7 @@ declare module "enzyme" {
   declare type CheerioWrapper = any;
 
   declare class Wrapper<RootComponent> {
+    equals(node: React$Element<any>): boolean,
     find(selector: UntypedSelector): this,
     find<T: React$ElementType>(selector: T): ReactWrapper<T>,
     findWhere(predicate: PredicateFunction<this>): this,
