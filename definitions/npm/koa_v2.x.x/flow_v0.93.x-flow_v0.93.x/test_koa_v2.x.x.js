@@ -375,7 +375,7 @@ function test_index_md() {
       (ctx.foo(): string);
     });
 
-    // $ExpectError 
+    // $ExpectError
     app.use<number>(async (ctx, next) => {
     });
 

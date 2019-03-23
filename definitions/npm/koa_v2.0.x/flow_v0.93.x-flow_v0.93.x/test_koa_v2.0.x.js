@@ -59,7 +59,7 @@ function test_Application() {
   const inspect: () => ApplicationJSON = app.inspect;
   // $ExpectError
   const _inspect: () => string = app.inspect;
-  app.use( (ctx, next) => {
+  app.use<{}>( (ctx, next) => {
     const ctx1: Context = ctx;
     // $ExpectError
     const _ctx1: number = ctx;
@@ -68,7 +68,7 @@ function test_Application() {
     const _next1: () => Promise<string> = next;
     return;
   });
-  app.use(async (ctx, next) => {
+  app.use<{}>(async (ctx, next) => {
     // $ExpectError
     return 'hello';
   });
@@ -334,7 +334,7 @@ function test_index_md() {
   const app:Koa = new Koa();
   // $ExpectError
   const _app:number = new Koa();
-  app.use((ctx) => {
+  app.use<{}>((ctx) => {
     ctx.body = 'Hello World';
     ctx.body = { key: 'value' };
     // $ExpectError
@@ -346,7 +346,7 @@ function test_index_md() {
 
   function test_cascading() {
     // x-response-time
-    app.use(async function(ctx, next) {
+    app.use<{}>(async function(ctx, next) {
       const start = new Date();
       await next();
       const ms = new Date() - start;
@@ -358,7 +358,7 @@ function test_index_md() {
     });
 
     // logger
-    app.use(async function (ctx, next) {
+    app.use<{}>(async function (ctx, next) {
       const start = new Date();
       await next();
       const ms = new Date() - start;
@@ -378,11 +378,11 @@ function test_index_md() {
     });
 
     // $ExpectError
-   app.use<number>(async (ctx, next) => {
-   });
+    app.use<number>(async (ctx, next) => {
+    });
 
     // response
-    app.use(ctx => {
+    app.use<{}>(ctx => {
       ctx.body = 'Hello World';
       // $ExpectError
       ctx.body = 1;
