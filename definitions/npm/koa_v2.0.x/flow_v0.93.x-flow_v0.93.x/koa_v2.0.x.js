@@ -305,7 +305,7 @@ declare module 'koa' {
     listen: $PropertyType<Server, 'listen'>,
     toJSON(): ApplicationJSON,
     inspect(): ApplicationJSON,
-    use<C>(fn: Middleware<C>): this,
+    use<C: {}>(fn: Middleware<C>): this,
   }
 
   declare module.exports: Class<Application>;
