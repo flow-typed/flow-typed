@@ -23,7 +23,37 @@ declare module "antd" {
 
   declare export class Avatar extends React$Component<{}> {}
 
-  declare export class AutoComplete extends React$Component<{}> {}
+  declare export type AutoCompleteDataItem =
+    | string
+    | { value: string, text: string }
+    | React$Element<typeof SelectOption>
+    | React$Element<typeof SelectOptGroup>;
+
+  declare export type AutoCompleteProps<T = SelectValue> = {
+    allowClear?: boolean,
+    autoFocus?: boolean,
+    backfill?: boolean,
+    dataSource: AutoCompleteDataItem[],
+    defaultActiveFirstOption?: boolean,
+    defaultValue?: T,
+    disabled?: boolean,
+    filterOption?: boolean | (input: string, option: React$Element<mixed>) => boolean,
+    open?: boolean,
+    optionLabelProp?: string,
+    placeholder?: string,
+    value?: T,
+    onBlur?: () => void,
+    onChange?: (value: T) => void,
+    onDropdownVisibleChange?: (open: boolean) => void,
+    onFocus?: () => void,
+    onSearch?: (value: string) => void,
+    onSelect?: (value: T, option: React$Element<mixed>) => void
+  }
+
+  declare export class AutoComplete<T = SelectValue> extends React$Component<AutoCompleteProps<T>> {
+    static Option: typeof SelectOption;
+    static OptGroup: typeof SelectOptGroup;
+  }
 
   declare export class Badge extends React$Component<{}> {}
 
@@ -427,20 +457,71 @@ declare module "antd" {
   declare class RadioButton extends React$Component<{}> {}
 
   declare export class Row extends React$Component<{}> {}
+  
+  declare export type SelectValue = string | string[] | number | number[];
 
-  declare export type SelectProps = {
-    expandTrigger?: "click" | "hover",
-    filterOption?: (input: string, option: React$Element<mixed>) => boolean,
-    onFocus?: () => mixed,
-    popupVisible?: boolean,
-    showSearch?: boolean
+  declare export type SelectProps<T = SelectValue> = {
+    allowClear?: boolean,
+    autoClearSearchValue?: boolean,
+    autoFocus?: boolean,
+    defaultActiveFirstOption?: boolean,
+    defaultOpen?: boolean,
+    defaultValue?: T,
+    disabled?: boolean,
+    dropdownClassName?: string,
+    dropdownMatchSelectWidth?: boolean,
+    filterOption?: boolean | (input: string, option: React$Element<mixed>) => boolean,
+    firstActiveValue?: string | string[],
+    labelInValue?: boolean,
+    loading?: boolean,
+    maxTagCount?: number,
+    mode?: 'default' | 'multiple' | 'tags',
+    notFoundContent?: string,
+    open?: boolean,
+    optionFilterProp?: string,
+    optionLabelProp?: string,
+    placeholder?: string | React$Node,
+    showArrow?: boolean,
+    showSearch?: boolean,
+    size?: 'default' | 'small' | 'large' | string,
+    suffixIcon?: React$Node,
+    removeIcon?: React$Node,
+    clearIcon?: React$Node,
+    menuItemSelectedIcon?: React$Node,
+    tokenSeparators?: string[],
+    value?: T,
+    onBlur?: () => void,
+    onChange?: (value: T, option: React$Element<mixed> | React$Element<mixed>[]) => void,
+    onDeselect?: (value: T, option: React$Element<mixed>) => void,
+    onDropdownVisibleChange?: (open: boolean) => void,
+    onFocus?: () => void,
+    onSearch?: (value: string) => void,
+    onSelect?: (value: T, option: React$Element<mixed>) => void
   };
 
-  declare export class Select extends React$Component<SelectProps> {
+  declare export class Select<T = SelectValue> extends React$Component<SelectProps<T>> {
     static Option: typeof SelectOption;
+    static OptGroup: typeof SelectOptGroup;
+    blur: () => void;
+    focus: () => void;
   }
 
-  declare class SelectOption extends React$Component<{}> {}
+  declare export type SelectOptionProps = {
+    className?: string,
+    disabled?: boolean,
+    key?: string,
+    title?: string,
+    value?: string | number
+  };
+
+  declare class SelectOption extends React$Component<SelectOptionProps> {}
+
+  declare export type SelectOptGroupProps = {
+    key?: string,
+    label?: string | React$Node
+  };
+
+  declare class SelectOptGroup extends React$Component<SelectOptGroupProps> {}
 
   declare export class Slider extends React$Component<{}> {}
 
