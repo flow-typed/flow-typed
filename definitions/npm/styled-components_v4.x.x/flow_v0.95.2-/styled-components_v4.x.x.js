@@ -243,37 +243,42 @@ declare module 'styled-components' {
 
   // I think any is appropriate here?
   // eslint-disable-next-line flowtype/no-weak-types
-  declare export type Theme = {+[string] : any}
-
   declare export var css : CSSConstructor;
   declare export var keyframes : KeyFramesConstructor;
   declare export var createGlobalStyle : CreateGlobalStyleConstructor
-  declare export var ThemeProvider : React$ComponentType<{children?: ?React$Node, theme : Theme | (Theme) => Theme}>
+  declare export var ThemeProvider: React$ComponentType<{children?: ?React$Node, theme: mixed | (mixed) => mixed}>
 
   // This is a bit hard to read. Not sure how to make it more readable. I think adding line-breaks makes it worse.
-  declare type ThemeProps<T: Theme> = {
+  declare type ThemeProps<T> = {
     theme: T
   }
 
   declare export function withTheme<Theme, Config: {}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<$Diff<Props, ThemeProps<Theme>>, Instance>
+  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance>
   declare interface StyledFactory<StyleProps, OwnProps, Theme, Instance> {
-    [[call]]: TaggedTemplateLiteral<StyleProps & OwnProps & ThemeProps<Theme>, StyledComponent<StyleProps, OwnProps, Theme, Instance>>;
+    [[call]]: TaggedTemplateLiteral<StyleProps & OwnProps & ThemeProps<Theme>, StyledComponent<StyleProps & OwnProps, Theme, Instance>>;
     +attrs: <A: {}>(A | (OwnProps & StyleProps) => A) => React$AbstractComponent<$Diff<OwnProps & StyleProps, A>, Instance>;
   }
 
-  declare type StyledShorthands = {
-    div: <S, O, T>(string[], ...Interpolation<S & O & ThemeProps<T>>[]) => StyledComponent<S & O, BuiltinElementType<'div'>>,
-    span: <S, O, T>(string[], ...Interpolation<S & O & ThemeProps<T>>[]) => StyledComponent<S & O, BuiltinElementType<'span'>>
+
+  declare type ConvenientShorthands = $ObjMap<
+    BuiltinElementInstances,
+    <V>(V) =>
+      // TODO: Figre out how to add support for `attrs` API here
+      // TODO: Would be nice if we could find a way to use `StyledFactory` here, but I am too dumb to figure it out.
+      <P, Th>(string[], ...Interpolation<P & ThemeProps<Th>>[]) => StyledComponent<P, Th, V>
+   >
+
+  declare interface Styled {
+    <P, Th, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<P, {}, Th, BuiltinElementType<ElementName>>;
   }
 
-  declare export type SimpleStyledComponent<ElementName: string, StyleProps: {}> = StyledComponent<StyleProps, {}, BuiltinElementType<ElementName>>
-
-  declare export default StyledShorthands & interface {
-    [[call]]: <S: string>(S) => $ElementType<StyledShorthands, S>,
-    [[call]]: <StyleProps: {}, Component: React$ComponentType<any>, Theme, Instance>(Component) => StyledFactory<StyleProps, React$ElementConfig<Component>, Theme, Instance>
-  };
+  declare export default Styled & ConvenientShorthands
+  // declare export default StyledShorthands & interface {
+  //   [[call]]: <S: string>(S) => $ElementType<StyledShorthands, S>,
+  //   [[call]]: <StyleProps: {}, Component: React$ComponentType<any>, Theme, Instance>(Component) => StyledFactory<StyleProps, React$ElementConfig<Component>, Theme, Instance>
+  // };
 }
 
 

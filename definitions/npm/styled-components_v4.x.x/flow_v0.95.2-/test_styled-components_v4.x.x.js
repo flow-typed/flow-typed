@@ -16,40 +16,40 @@ import styled, {
 } from 'styled-components'
 
 
-describe('styled', () => {
+describe('styled builtins', () => {
   it('should map to correct element', () => {
-    const Span1: StyledComponent<*, *, *> = styled.span``
-    const Span2: StyledComponent<{}, {}, HTMLSpanElement> = styled('span')``
+    const Span1: StyledComponent<{}, {}, HTMLSpanElement> = styled.span``
+    const Div1: StyledComponent<{}, {}, HTMLDivElement> = styled.div``
 
-    const Span3 = styled.span``
-    const Span4 = styled('span')``
+    const Span2: StyledComponent<{}, {}, HTMLSpanElement> = styled('span')``
+    const Div2: StyledComponent<{}, {}, HTMLDivElement> = styled('div')``
   })
 
-  it('should\'t map incorrectly', () => {
-    // $ExpectError - Wrong component type, should be Div
+  it('should not map to incorrect element', () => {
+    // $ExpectError - should be HTMLSpanElement
+    const Span1: StyledComponent<{}, {}, HTMLDivElement> = styled.span``
+
+    // $ExpectError - should be HTMLDivElement
     const Div1: StyledComponent<{}, {}, HTMLSpanElement> = styled.div``
-    // $ExpectError - Wrong component type, should be Div
+
+    // $ExpectError - Should be HTMLSpanElement 
+    const Span2: StyledComponent<{}, {}, HTMLDivElement> = styled('span')``
+
+    // $ExpectError - should be HTMLDivElement
     const Div2: StyledComponent<{}, {}, HTMLSpanElement> = styled('div')``
   })
 
-  it('renders as the correct element', () => {
+  it('should render as the correct element', () => {
     const Span: StyledComponent<{}, {}, HTMLSpanElement> = styled.span``
-    const Div: StyledComponent<{}, {}, HTMLDivElement> = styled('div')``
+    const Div: StyledComponent<{}, {}, HTMLDivElement> = styled.div``
 
     const span1: React.Element<React.AbstractComponent<{}, HTMLSpanElement>> = <Span />
 
-    // $ExpectError - Should be HTMLDivElement
+    // $ExpectError - should be HTMLDivElement
     const div1: React.Element<React.AbstractComponent<{}, HTMLSpanElement>> = <Div />
   })
 
-  it('shouldn\'t create invalid elements', () => {
-    // $ExpectError - test for non-existent element
-    const derp1 = styled.derp``
-
-    // $ExpectError - test for non-existent element
-    const derp2 = styled('derp')``
-  })
-
+  
   it('shouldn\'t style something impossible', () => {
     // $ExpectError
     const derp1 = styled(null)``
@@ -59,26 +59,64 @@ describe('styled', () => {
 
     // $ExpectError
     const derp3 = styled(1)``
+
+    // $ExpectError
+    const derp4 = styled.derp``
+    
+    // $ExpectError
+    const derp5 = styled('derp')``
   })
 
-  it('should validate props', () => {
+  it('should accept style props', () => {
     const Span: StyledComponent<{color: string}, *, *> = styled.span`
       color: ${props => props.color};
     `
 
-    // $ExpectError - background is not in props
-    const Span2: StyledComponent<{color: string}, *, *> = styled.span`
-      background: ${props => props.background};
+    const span1 = <Span color="maroon" />
+
+    const Div: StyledComponent<{color: string, background?: string}, *, *> = styled.div`
+      color: ${props => props.color};
     `
 
-    const Span3: StyledComponent<{color: string}, {accent: string}, *> = styled.span`
-      color: ${props => props.theme.accent};
-    `
-
-    const span1 = <Span color="pink" />
-    const span2 = <Span2 color="pink" background="maroon" />
-    const span3 = <Span3 color="pink" background="maroon" />
+    const div1 = <Div color="maroon" />
+    const div2 = <Div color="maroon" background="salmon" />
   })
+  
+  it('should respect strict props', () => {
+    // {| ... |} breaks syntax highlighting in vs code
+    // if all on one line, so put here instead of inlined
+    type Props = {|
+      color?: string
+    |}
+
+    const Span: StyledComponent<Props, *, *> = styled.span`
+      color: ${props => props.color || 'pink'};
+    `
+
+    // $ExpectError - typo; someone used the British spelling by accident
+    const span1 = <Span colour="maroon" />
+  })
+
+  it('should validate template props', () => {
+    // $ExpectError - background is not in props
+    const Span: StyledComponent<{color: string}, *, *> = styled.span`
+      color: ${props => props.background};
+    `
+  })
+  
+  it('should inject theme', () => {
+    const Span: StyledComponent<{color?: string}, {accent: string}, *> = styled.span`
+      color: ${props => props.color || props.theme.accent};
+    `
+  })
+  
+  it('should validate theme', () => {
+    // $ExpectError - oops, someone meant accent, not primary
+    const Span: StyledComponent<{color?: string}, {accent: string}, *> = styled.span`
+      color: ${props => props.color || props.theme.primary};
+    `
+  })
+
 })
 
 // @NOTE: Not sure how to better test this
@@ -93,8 +131,6 @@ describe('createGlobalStyle & GlobalStyles', () => {
   })
 })
 
-
-// @NOTE: Not sure how to better test this
 describe('css generator', () => {
   it('can be used', () => {
     const styles: CSSRules = css`
