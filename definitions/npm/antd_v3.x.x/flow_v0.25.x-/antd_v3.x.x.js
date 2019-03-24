@@ -33,7 +33,7 @@ declare module "antd" {
     allowClear?: boolean,
     autoFocus?: boolean,
     backfill?: boolean,
-    dataSource: AutoCompleteDataItem[],
+    dataSource?: AutoCompleteDataItem[],
     defaultActiveFirstOption?: boolean,
     defaultValue?: T,
     disabled?: boolean,
