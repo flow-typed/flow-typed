@@ -29,9 +29,9 @@ function test_Application() {
   const keys: void|Array<string>|Object = app.keys;
   // $ExpectError
   const _keys: null = app.keys;
-  const middleware: Array<Middleware<>> = app.middleware;
+  const middleware: Array<Middleware> = app.middleware;
   // $ExpectError
-  const _middleware: Middleware<> = app.middleware;
+  const _middleware: Middleware = app.middleware;
   const proxy: boolean = app.proxy;
   // $ExpectError
   const _proxy: number = app.proxy;
@@ -56,7 +56,7 @@ function test_Application() {
   const inspect: () => ApplicationJSON = app.inspect;
   // $ExpectError
   const _inspect: () => string = app.inspect;
-  app.use((ctx, next) => {
+  app.use( (ctx, next) => {
     const ctx1: Context = ctx;
     // $ExpectError
     const _ctx1: number = ctx;
@@ -361,22 +361,6 @@ function test_index_md() {
       await next();
       const ms = new Date() - start;
       console.log(`${ctx.method} ${ctx.url} - ${ms}`);
-    });
-
-    // support custom middleware
-    app.use<{
-      foo: () => number,
-    }>(async (ctx, next) => {
-      (ctx: Context & {
-        foo: () => number,
-      });
-      (ctx.foo(): number);
-      // $ExpectError
-      (ctx.foo(): string);
-    });
-
-    // $ExpectError 
-    app.use<number>(async (ctx, next) => {
     });
 
     // response
