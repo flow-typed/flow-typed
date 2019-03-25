@@ -102,6 +102,13 @@ describe('styled builtins', () => {
       color: ${props => props.background};
     `
   })
+
+  it('should reject wrong interpolation output', () => {
+    // $ExpectError - shouldn't return undefined from interpolation function
+    const Span: StyledComponent<{color?: string}, *, *> = styled.span`
+      color: ${props => props.color};
+    `
+  })
   
   it('should inject theme', () => {
     const Span: StyledComponent<{color?: string}, {accent: string}, *> = styled.span`
@@ -279,12 +286,16 @@ describe('withTheme', () => {
 
 describe('wrapping components', () => {
   type Props = {name : string}
+  type StyleProps = {color?: string}
+  type Theme = {
+    accent: string
+  }
 
   const Hello = (p: Props) =>
     <div>Hello {p.name}</div>
 
-  const StyledHello = styled<{color?: string}, {}, Props, *>(Hello)`
-    color: ${props => props.color || 'rebeccapurple'};
+  const StyledHello = styled<StyleProps, Theme, Props, *>(Hello)`
+    color: ${props => props.color || props.theme.accent};
   `
 
   it('understands props that the wrapped component wants', () => {

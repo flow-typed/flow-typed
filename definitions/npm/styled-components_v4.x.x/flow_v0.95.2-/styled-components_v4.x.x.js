@@ -169,7 +169,7 @@ declare module 'styled-components' {
   declare type BuiltinElementType<ElementName: string> = $ElementType<BuiltinElementInstances, ElementName>
 
   declare export type Interpolation<P> =
-                                       | ((executionContext: P) => string)
+                                       | ((executionContext: P) => Interpolation<any>)
                                        | CSSRules
                                        | KeyFrames
                                        | string
@@ -280,10 +280,6 @@ declare module 'styled-components' {
   }
 
   declare export default Styled & ConvenientShorthands
-  // declare export default StyledShorthands & interface {
-  //   [[call]]: <S: string>(S) => $ElementType<StyledShorthands, S>,
-  //   [[call]]: <StyleProps: {}, Component: React$ComponentType<any>, Theme, Instance>(Component) => StyledFactory<StyleProps, React$ElementConfig<Component>, Theme, Instance>
-  // };
 }
 
 
