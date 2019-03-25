@@ -491,7 +491,7 @@ declare module "antd" {
     tokenSeparators?: string[],
     value?: T,
     onBlur?: () => void,
-    onChange?: (value: T, option: React$Node | React$Node[]) => void,
+    onChange?: (value: T, option: React$Node) => void,
     onDeselect?: (value: T, option: React$Node) => void,
     onDropdownVisibleChange?: (open: boolean) => void,
     onFocus?: () => void,
