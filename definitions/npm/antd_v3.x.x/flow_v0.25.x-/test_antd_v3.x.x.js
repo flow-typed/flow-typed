@@ -411,6 +411,202 @@ describe("Select", () => {
   it("is a react component", () => {
     const select = <Select />;
   });
+
+  it("with prop allowClear", () => {
+    const select1 = <Select allowClear={false} />;
+    const select2 = <Select allowClear={true} />;
+    const select3 = <Select allowClear />;
+  });
+
+  it("with prop autoClearSearchValue", () => {
+    const select1 = <Select autoClearSearchValue={false} />;
+    const select2 = <Select autoClearSearchValue={true} />;
+    const select3 = <Select autoClearSearchValue />;
+  });
+
+  it("with prop autoFocus", () => {
+    const select1 = <Select autoFocus={false} />;
+    const select2 = <Select autoFocus={true} />;
+    const select3 = <Select autoFocus />;
+  });
+
+  it("with prop defaultActiveFirstOption", () => {
+    const select1 = <Select defaultActiveFirstOption={false} />;
+    const select2 = <Select defaultActiveFirstOption={true} />;
+    const select3 = <Select defaultActiveFirstOption />;
+  });
+
+  it("with prop defaultOpen", () => {
+    const select1 = <Select defaultOpen={false} />;
+    const select2 = <Select defaultOpen={true} />;
+    const select3 = <Select defaultOpen />;
+  });
+
+  it("with prop defaultValue", () => {
+    const select1 = <Select defaultValue="key-123" />;
+    const select2 = <Select defaultValue={["key-123", "key-456"]} />;
+    const select3 = <Select defaultValue={123} />;
+    const select4 = <Select defaultValue={[123, 456]} />;
+  });
+
+  it("with prop disabled", () => {
+    const select1 = <Select disabled={false} />;
+    const select2 = <Select disabled={true} />;
+    const select3 = <Select disabled />;
+  });
+
+  it("with prop dropdownClassName", () => {
+    const select = <Select dropdownClassName="dropdown-css-class" />;
+  });
+
+  it("with prop dropdownMatchSelectWidth", () => {
+    const select1 = <Select dropdownMatchSelectWidth={false} />;
+    const select2 = <Select dropdownMatchSelectWidth={true} />;
+    const select3 = <Select dropdownMatchSelectWidth />;
+  });
+
+  it("with prop filterOption", () => {
+    const select1 = <Select filterOption={true} />;
+    const select2 = <Select filterOption={(input: string, option: React$Element<mixed>) => true} />;
+  });
+
+  it("with prop firstActiveValue", () => {
+    const select1 = <Select firstActiveValue="key-123" />;
+    const select2 = <Select firstActiveValue={["key-123", "key-456", "key-789"]} />;
+  });
+
+  it("with prop labelInValue", () => {
+    const select1 = <Select labelInValue={false} />;
+    const select2 = <Select labelInValue={true} />;
+    const select3 = <Select labelInValue />;
+  });
+
+  it("with prop loading", () => {
+    const select1 = <Select loading={false} />;
+    const select2 = <Select loading={true} />;
+    const select3 = <Select loading />;
+  });
+
+  it("with prop maxTagCount", () => {
+    const select = <Select maxTagCount={10} />;
+  });
+
+  it("with prop mode", () => {
+    const select1 = <Select mode="default" />;
+    const select2 = <Select mode="multiple" />;
+    const select3 = <Select mode="tags" />;
+    // $ExpectError
+    const select4 = <Select mode="notARealOption" />;
+  });
+
+  it("with prop notFoundContent", () => {
+    const select = <Select notFoundContent="No Items" />;
+  });
+
+  it("with prop open", () => {
+    const select1 = <Select open={false} />;
+    const select2 = <Select open={true} />;
+    const select3 = <Select open />;
+  });
+
+  it("with prop optionFilterProp", () => {
+    const select = <Select optionFilterProp="id" />;
+  });
+
+  it("with prop optionLabelProp", () => {
+    const select = <Select optionLabelProp="name" />;
+  });
+
+  it("with prop placeholder", () => {
+    const select1 = <Select placeholder="Please select..." />;
+    const select2 = <Select placeholder={<span>Please select...</span>} />;
+  });
+
+  it("with prop showArrow", () => {
+    const select1 = <Select showArrow={false} />;
+    const select2 = <Select showArrow={true} />;
+    const select3 = <Select showArrow />;
+  });
+
+  it("with prop showSearch", () => {
+    const select1 = <Select showSearch={false} />;
+    const select2 = <Select showSearch={true} />;
+    const select3 = <Select showSearch />;
+  });
+
+  it("with prop size", () => {
+    const select1 = <Select size="default" />;
+    const select2 = <Select size="small" />;
+    const select3 = <Select size="large" />;
+    const select4 = <Select size="32px" />;
+  });
+
+  it("with prop suffixIcon", () => {
+    const select = <Select suffixIcon={<Icon />} />;
+  });
+
+  it("with prop removeIcon", () => {
+    const select = <Select removeIcon={<Icon />} />;
+  });
+
+  it("with prop clearIcon", () => {
+    const select = <Select clearIcon={<Icon />} />;
+  });
+
+  it("with prop menuItemSelectedIcon", () => {
+    const select = <Select menuItemSelectedIcon={<Icon />} />;
+  });
+
+  it("with prop tokenSeparators", () => {
+    const select = <Select tokenSeparators={[",", "|"]} />;
+  });
+
+  it("with prop value", () => {
+    const select1 = <Select value="key-123" />;
+    const select2 = <Select value={["key-123", "key-456"]} />;
+    const select3 = <Select value={123} />;
+    const select4 = <Select value={[123, 456]} />;
+  });
+
+  it("with prop onBlur", () => {
+    const select = <Select onBlur={() => undefined} />;
+  });
+
+  it("with prop onChange", () => {
+    const select1 = <Select onChange={() => undefined} />;
+    const select2 = <Select value="key-123" onChange={(value: string) => undefined} />;
+    const select3 = <Select value={["key-123", "key-456"]} onChange={(value: string[]) => undefined} />;
+    const select4 = <Select value={123} onChange={(value: number) => undefined} />;
+    const select5 = <Select value={[123, 456]} onChange={(value: number[]) => undefined} />;
+  });
+
+  it("with prop onDeselect", () => {
+    const select1 = <Select onDeselect={() => undefined} />;
+    const select2 = <Select value="key-123" onDeselect={(value: string) => undefined} />;
+    const select3 = <Select value={["key-123", "key-456"]} onDeselect={(value: string[]) => undefined} />;
+    const select4 = <Select value={123} onDeselect={(value: number) => undefined} />;
+    const select5 = <Select value={[123, 456]} onDeselect={(value: number[]) => undefined} />;
+  });
+
+  it("with prop onDropdownVisibleChange", () => {
+    const select = <Select onDropdownVisibleChange={(open: boolean) => undefined} />;
+  });
+
+  it("with prop onFocus", () => {
+    const select = <Select onFocus={() => undefined} />;
+  });
+
+  it("with prop onSearch", () => {
+    const select = <Select onSearch={(value: string) => undefined} />;
+  });
+
+  it("with prop onSelect", () => {
+    const select1 = <Select onSelect={() => undefined} />;
+    const select2 = <Select value="key-123" onSelect={(value: string) => undefined} />;
+    const select3 = <Select value={["key-123", "key-456"]} onSelect={(value: string[]) => undefined} />;
+    const select4 = <Select value={123} onSelect={(value: number) => undefined} />;
+    const select5 = <Select value={[123, 456]} onSelect={(value: number[]) => undefined} />;
+  });
 });
 
 describe("Select.Option", () => {
