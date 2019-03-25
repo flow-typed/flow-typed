@@ -41,6 +41,7 @@ knex.crossJoin("bar", function() {
 knex("foo").insert({
   a: 1
 });
+knex('foo').truncate();
 knex("bar").del();
 // $ExpectError
 knex.from();
