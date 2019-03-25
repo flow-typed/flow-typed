@@ -54,6 +54,101 @@ describe("AutoComplete", () => {
   it("is a react component", () => {
     const autocomplete = <AutoComplete />;
   });
+
+  it("with prop allowClear", () => {
+    const autocomplete1 = <AutoComplete allowClear={false} />;
+    const autocomplete2 = <AutoComplete allowClear={true} />;
+    const autocomplete3 = <AutoComplete allowClear />;
+  });
+
+  it("with prop autoFocus", () => {
+    const autocomplete1 = <AutoComplete autoFocus={false} />;
+    const autocomplete2 = <AutoComplete autoFocus={true} />;
+    const autocomplete3 = <AutoComplete autoFocus />;
+  });
+
+  it("with prop backfill", () => {
+    const autocomplete1 = <AutoComplete backfill={false} />;
+    const autocomplete2 = <AutoComplete backfill={true} />;
+    const autocomplete3 = <AutoComplete backfill />;
+  });
+
+  it("with prop defaultActiveFirstOption", () => {
+    const autocomplete1 = <AutoComplete defaultActiveFirstOption={false} />;
+    const autocomplete2 = <AutoComplete defaultActiveFirstOption={true} />;
+    const autocomplete3 = <AutoComplete defaultActiveFirstOption />;
+  });
+
+  it("with prop defaultValue", () => {
+    const autocomplete1 = <AutoComplete defaultValue="key-123" />;
+    const autocomplete2 = <AutoComplete defaultValue={["key-123", "key-456"]} />;
+    const autocomplete3 = <AutoComplete defaultValue={123} />;
+    const autocomplete4 = <AutoComplete defaultValue={[123, 456]} />;
+  });
+
+  it("with prop disabled", () => {
+    const autocomplete1 = <AutoComplete disabled={false} />;
+    const autocomplete2 = <AutoComplete disabled={true} />;
+    const autocomplete3 = <AutoComplete disabled />;
+  });
+
+  it("with prop filterOption", () => {
+    const autocomplete1 = <AutoComplete filterOption={true} />;
+    const autocomplete2 = <AutoComplete filterOption={(input: string, option: React$Element<mixed>) => true} />;
+  });
+
+  it("with prop open", () => {
+    const autocomplete1 = <AutoComplete open={false} />;
+    const autocomplete2 = <AutoComplete open={true} />;
+    const autocomplete3 = <AutoComplete open />;
+  });
+
+  it("with prop optionLabelProp", () => {
+    const autocomplete = <AutoComplete optionLabelProp="name" />;
+  });
+
+  it("with prop placeholder", () => {
+    const autocomplete = <AutoComplete placeholder="Please select..." />;
+  });
+
+  it("with prop value", () => {
+    const autocomplete1 = <AutoComplete value="key-123" />;
+    const autocomplete2 = <AutoComplete value={["key-123", "key-456"]} />;
+    const autocomplete3 = <AutoComplete value={123} />;
+    const autocomplete4 = <AutoComplete value={[123, 456]} />;
+  });
+
+  it("with prop onBlur", () => {
+    const autocomplete = <AutoComplete onBlur={() => undefined} />;
+  });
+
+  it("with prop onChange", () => {
+    const autocomplete1 = <AutoComplete onChange={() => undefined} />;
+    const autocomplete2 = <AutoComplete value="key-123" onChange={(value: string) => undefined} />;
+    const autocomplete3 = <AutoComplete value={["key-123", "key-456"]} onChange={(value: string[]) => undefined} />;
+    const autocomplete4 = <AutoComplete value={123} onChange={(value: number) => undefined} />;
+    const autocomplete5 = <AutoComplete value={[123, 456]} onChange={(value: number[]) => undefined} />;
+  });
+
+  it("with prop onDropdownVisibleChange", () => {
+    const autocomplete = <AutoComplete onDropdownVisibleChange={(open: boolean) => undefined} />;
+  });
+
+  it("with prop onFocus", () => {
+    const autocomplete = <AutoComplete onFocus={() => undefined} />;
+  });
+
+  it("with prop onSearch", () => {
+    const autocomplete = <AutoComplete onSearch={(value: string) => undefined} />;
+  });
+
+  it("with prop onSelect", () => {
+    const autocomplete1 = <AutoComplete onSelect={() => undefined} />;
+    const autocomplete2 = <AutoComplete value="key-123" onSelect={(value: string) => undefined} />;
+    const autocomplete3 = <AutoComplete value={["key-123", "key-456"]} onSelect={(value: string[]) => undefined} />;
+    const autocomplete4 = <AutoComplete value={123} onSelect={(value: number) => undefined} />;
+    const autocomplete5 = <AutoComplete value={[123, 456]} onSelect={(value: number[]) => undefined} />;
+  });
 });
 
 describe("AutoComplete.Option", () => {
