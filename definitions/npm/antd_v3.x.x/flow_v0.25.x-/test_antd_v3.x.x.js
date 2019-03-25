@@ -62,6 +62,12 @@ describe("AutoComplete.Option", () => {
   });
 });
 
+describe("AutoComplete.OptGroup", () => {
+  it("is a react component", () => {
+    const group = <AutoComplete.OptGroup />;
+  });
+});
+
 describe("Badge", () => {
   it("is a react component", () => {
     const badge = <Badge />;
