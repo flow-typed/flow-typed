@@ -3,6 +3,8 @@
  * Definitions pulled from https://github.com/getsentry/react-native-sentry/blob/master/lib/Sentry.d.ts.
  */
 declare module "sentry-expo" {
+  declare type CallbackFn = (...args: any[]) => void
+
   declare type SentryBreadcrumbType = "navigation" | "http";
 
   declare export type SentryBreadcrumb = {
@@ -26,8 +28,8 @@ declare module "sentry-expo" {
     logLevel?: SentryLog;
     instrument?: boolean;
     disableNativeIntegration?: boolean;
-    ignoreModulesExclude?: [string];
-    ignoreModulesInclude?: [string];
+    ignoreModulesExclude?: string[];
+    ignoreModulesInclude?: string[];
   }
 
   declare export default class Sentry {
@@ -41,11 +43,11 @@ declare module "sentry-expo" {
 
     static nativeCrash(): void;
 
-    static setEventSentSuccessfully(callback: Function): void;
+    static setEventSentSuccessfully(callback: CallbackFn): void;
 
-    static setShouldSendCallback(callback: Function): void;
+    static setShouldSendCallback(callback: CallbackFn): void;
 
-    static setDataCallback(callback: Function): void;
+    static setDataCallback(callback: CallbackFn): void;
 
     static setUserContext(user: {
       id?: string;
@@ -66,11 +68,11 @@ declare module "sentry-expo" {
 
     static clearContext(): Promise<void>;
 
-    static context(func: Function, ...args: any[]): void;
-    static context(options: {}, func: Function, ...args: any[]): void;
+    static context(func: CallbackFn, ...args: any[]): void;
+    static context(options: {}, func: CallbackFn, ...args: any[]): void;
 
-    static wrap(func: Function): Function;
-    static wrap(options: {}, func: Function): Function;
+    static wrap(func: CallbackFn): CallbackFn;
+    static wrap(options: {}, func: CallbackFn): CallbackFn;
 
     static lastException(): {};
     static lastException(): null;
