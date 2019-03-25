@@ -56,6 +56,12 @@ describe("AutoComplete", () => {
   });
 });
 
+describe("AutoComplete.Option", () => {
+  it("is a react component", () => {
+    const option = <AutoComplete.Option />;
+  });
+});
+
 describe("Badge", () => {
   it("is a react component", () => {
     const badge = <Badge />;
