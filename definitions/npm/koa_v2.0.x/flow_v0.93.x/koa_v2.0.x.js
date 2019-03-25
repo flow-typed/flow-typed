@@ -279,10 +279,12 @@ declare module 'koa' {
     fresh: $PropertyType<Request, 'fresh'>,
     ips: $PropertyType<Request, 'ips'>,
     ip: $PropertyType<Request, 'ip'>,
+
+    [key: string]: mixed, // props added by middlewares.
   }
 
-  declare type Middleware<C = {}> =
-    (ctx: Context & C, next: () => Promise<void>) => Promise<void>|void;
+  declare type Middleware =
+    (ctx: Context, next: () => Promise<void>) => Promise<void>|void;
   declare type ApplicationJSON = {
     'subdomainOffset': mixed,
     'proxy': mixed,
@@ -294,7 +296,7 @@ declare module 'koa' {
     callback: () => (req: http$IncomingMessage<>, res: http$ServerResponse) => void,
     env: string,
     keys?: Array<string>|Object, // https://github.com/crypto-utils/keygrip
-    middleware: Array<Middleware<>>,
+    middleware: Array<Middleware>,
     name?: string, // optionally give your application a name
     proxy: boolean, // when true proxy header fields will be trusted
     request: Request,
@@ -305,7 +307,7 @@ declare module 'koa' {
     listen: $PropertyType<Server, 'listen'>,
     toJSON(): ApplicationJSON,
     inspect(): ApplicationJSON,
-    use<C: {}>(fn: Middleware<C>): this,
+    use(fn: Middleware): this,
   }
 
   declare module.exports: Class<Application>;
