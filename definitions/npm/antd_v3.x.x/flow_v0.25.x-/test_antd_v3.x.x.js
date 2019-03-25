@@ -417,6 +417,29 @@ describe("Select.Option", () => {
   it("is a react component", () => {
     const selectOption = <Select.Option />;
   });
+
+  it("with prop className", () => {
+    const selectOption = <Select.Option className="my-option" />;
+  })
+
+  it("with prop disabled", () => {
+    const selectOption1 = <Select.Option disabled={false} />;
+    const selectOption2 = <Select.Option disabled={true} />;
+    const selectOption3 = <Select.Option disabled />;
+  })
+
+  it("with prop key", () => {
+    const selectOption = <Select.Option key="key-123" />;
+  })
+
+  it("with prop title", () => {
+    const selectOption = <Select.Option title="This is a test title." />;
+  })
+
+  it("with prop value", () => {
+    const selectOption1 = <Select.Option value="value-123" />;
+    const selectOption2 = <Select.Option value={123} />;
+  })
 });
 
 describe("Select.OptGroup", () => {
