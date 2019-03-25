@@ -419,6 +419,12 @@ describe("Select.Option", () => {
   });
 });
 
+describe("Select.OptGroup", () => {
+  it("is a react component", () => {
+    const selectOptGroup = <Select.OptGroup />;
+  })
+})
+
 describe("Slider", () => {
   it("is a react component", () => {
     const slider = <Slider />;
