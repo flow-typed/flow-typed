@@ -1,6 +1,10 @@
 // @flow
 
 declare module 'styled-components' {
+  // Could this use `React$ElementRef<>` instead?
+  // It might be more correct and future-proof
+  // Since it won't rely on us keeping this up to date
+  // TODO: Experiment/Look into this
   declare type BuiltinElementInstances = {
     a: HTMLAnchorElement,
     abbr: HTMLElement,
@@ -272,6 +276,7 @@ declare module 'styled-components' {
 
   declare interface Styled {
     <P, Th, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<P, {}, Th, BuiltinElementType<ElementName>>;
+    <SP, Th, OP: {}, C: React$ComponentType<OP>>(C): StyledFactory<SP, OP, Th, React$ComponentType<C>>;
   }
 
   declare export default Styled & ConvenientShorthands

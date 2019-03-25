@@ -6,11 +6,10 @@ import styled, {
   createGlobalStyle,
   css,
   keyframes,
-  // withTheme,
+  withTheme,
 
   type CSSRules,
   type KeyFrames,
-  // type Theme,
 
   type StyledComponent,
 } from 'styled-components'
@@ -204,5 +203,95 @@ describe('css generator', () => {
 describe('keyframes generator', () => {
   it('can be created', () => {
     const animation: KeyFrames = keyframes``
+  })
+})
+
+describe('refs', () => {
+  it('correctly detects the component type', () => {
+    const ref1: {current: HTMLInputElement | null} = React.createRef()
+    const Input = styled.input``
+    const input = <Input ref={ref1} />
+  })
+
+  it('errors on wrong component type', () => {
+    const ref1: {current: HTMLInputElement | null} = React.createRef()
+    const Section = styled.section``
+    // $ExpectError - Complain about HTMLElement not being compatible wiht HTMLInputElement
+    const section = <Section ref={ref1} />
+  })
+
+  // Commented this test, because it also generates an error on line 21
+  // When the reference type is wrong.
+  // I think because Flow is trying to dome inference crazyness
+  // it('errors on wrong component type', () => {
+  //   const ref1: {current: HTMLInputElement | null} = React.createRef()
+  //   const Span = styled.span``
+
+  // Used £ instead of $ so it doesn't trigger supression warnings
+  //   // £ExpectError - Complain about HTMLSpanElement not being compatible wiht HTMLInputElement
+  //   const span = <Span ref={ref1} />
+  // })
+})
+
+describe('withTheme', () => {
+  type Theme = {
+    accent: string
+  }
+
+  type Props = {
+    ownProp : string,
+    theme : Theme
+  }
+
+  const MyComp = (props: Props) =>
+    <div>
+      {props.ownProp}
+    </div>
+
+  const MyCompWT = withTheme(MyComp)
+  const MyCompWT2 = withTheme(MyCompWT)
+
+  it('doesn\'t interfere with component\'s own props', () => {
+    // $ExpectError - wrong prop
+    const mcwt2 = <MyCompWT ownProp={0} />
+  })
+
+  it('errors when theme should be there but isn\'t', () => {
+    // $ExpectError - missing theme prop
+    const mc = <MyComp ownProp="own prop" />
+  })
+
+
+  it('detects theme is passed in', () => {
+    const mcwt = <MyCompWT ownProp="own prop" />
+  })
+
+  // I think this is no longer relevant probably, since Flow has
+  // deperacted $Supertype and $Subtype, but it can't hurt to have them
+  it('preserves props when wrapped in two HOCs', () => {
+    const mcwt1 = <MyCompWT2 ownProp="own prop" />
+
+    // $ExpectError - wrong prop
+    const mcwt2 = <MyCompWT2 ownProp={0} />
+  })
+})
+
+
+describe('wrapping components', () => {
+  type Props = {name : string}
+
+  const Hello = (p: Props) =>
+    <div>Hello {p.name}</div>
+
+  const StyledHello = styled<{color?: string}, {}, Props, *>(Hello)`
+    color: ${props => props.color || 'rebeccapurple'};
+  `
+
+  it('understands props that the wrapped component wants', () => {
+    const hello1 = <StyledHello name="World" />
+    const hello2 = <StyledHello name="World" color="maroon" />
+
+    // $ExpectError - Invalid prop type
+    const hello3 = <StyledHello name={3} />
   })
 })
