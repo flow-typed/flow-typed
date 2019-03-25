@@ -37,7 +37,7 @@ declare module "antd" {
     defaultActiveFirstOption?: boolean,
     defaultValue?: T,
     disabled?: boolean,
-    filterOption?: boolean | (input: string, option: React$Element<mixed>) => boolean,
+    filterOption?: boolean | (input: string, option: React$Node) => boolean,
     open?: boolean,
     optionLabelProp?: string,
     placeholder?: string,
@@ -47,7 +47,7 @@ declare module "antd" {
     onDropdownVisibleChange?: (open: boolean) => void,
     onFocus?: () => void,
     onSearch?: (value: string) => void,
-    onSelect?: (value: T, option: React$Element<mixed>) => void
+    onSelect?: (value: T, option: React$Node) => void
   }
 
   declare export class AutoComplete<T = SelectValue> extends React$Component<AutoCompleteProps<T>> {
@@ -470,7 +470,7 @@ declare module "antd" {
     disabled?: boolean,
     dropdownClassName?: string,
     dropdownMatchSelectWidth?: boolean,
-    filterOption?: boolean | (input: string, option: React$Element<mixed>) => boolean,
+    filterOption?: boolean | (input: string, option: React$Node) => boolean,
     firstActiveValue?: string | string[],
     labelInValue?: boolean,
     loading?: boolean,
@@ -491,12 +491,12 @@ declare module "antd" {
     tokenSeparators?: string[],
     value?: T,
     onBlur?: () => void,
-    onChange?: (value: T, option: React$Element<mixed> | React$Element<mixed>[]) => void,
-    onDeselect?: (value: T, option: React$Element<mixed>) => void,
+    onChange?: (value: T, option: React$Node | React$Node[]) => void,
+    onDeselect?: (value: T, option: React$Node) => void,
     onDropdownVisibleChange?: (open: boolean) => void,
     onFocus?: () => void,
     onSearch?: (value: string) => void,
-    onSelect?: (value: T, option: React$Element<mixed>) => void
+    onSelect?: (value: T, option: React$Node) => void
   };
 
   declare export class Select<T = SelectValue> extends React$Component<SelectProps<T>> {

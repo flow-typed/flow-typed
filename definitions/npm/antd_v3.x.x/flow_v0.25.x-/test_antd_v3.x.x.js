@@ -94,7 +94,7 @@ describe("AutoComplete", () => {
 
   it("with prop filterOption", () => {
     const autocomplete1 = <AutoComplete filterOption={true} />;
-    const autocomplete2 = <AutoComplete filterOption={(input: string, option: React$Element<mixed>) => true} />;
+    const autocomplete2 = <AutoComplete filterOption={(input: string, option: React$Node) => true} />;
   });
 
   it("with prop open", () => {
@@ -574,7 +574,7 @@ describe("Select", () => {
 
   it("with prop filterOption", () => {
     const select1 = <Select filterOption={true} />;
-    const select2 = <Select filterOption={(input: string, option: React$Element<mixed>) => true} />;
+    const select2 = <Select filterOption={(input: string, option: React$Node) => true} />;
   });
 
   it("with prop firstActiveValue", () => {
