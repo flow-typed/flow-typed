@@ -423,6 +423,14 @@ describe("Select.OptGroup", () => {
   it("is a react component", () => {
     const selectOptGroup = <Select.OptGroup />;
   })
+
+  it("with prop key", () => {
+    const selectOptGroup = <Select.OptGroup key="key-123" />;
+  })
+
+  it("with prop label", () => {
+    const selectOptGroup = <Select.OptGroup label="This is a test label." />;
+  })
 })
 
 describe("Slider", () => {
