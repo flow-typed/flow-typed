@@ -126,7 +126,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
     builder: Knex$QueryBuilderFn<R> | Knex$Knex<R> | Knex$QueryBuilder<R>
   ): this;
   into(table: string, options?: Object): this;
-
+  truncate(): this;
   insert(val: Object | Object[]): this;
   del(): this;
   delete(): this;
