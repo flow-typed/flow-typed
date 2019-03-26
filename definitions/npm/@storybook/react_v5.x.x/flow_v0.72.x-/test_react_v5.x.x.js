@@ -56,6 +56,18 @@ describe('The `add` method', () => {
     ]);
   });
 
+  it('should validate on default usage (string)', () => {
+    storiesOf('', module).add('', () => '');
+  });
+
+  it('should validate on default usage (number)', () => {
+    storiesOf('', module).add('', () => 0);
+  });
+
+  it('should validate on default usage (null)', () => {
+    storiesOf('', module).add('', () => null);
+  });
+
   it('should validate on default usage (parameters)', () => {
     storiesOf('', module).add('', () => <Button>test</Button>, {
       param: 'test',
@@ -71,9 +83,9 @@ describe('The `add` method', () => {
 
   it('should error on invalid default usage', () => {
     // $ExpectError
-    storiesOf('', module).add('', () => '');
+    storiesOf('', module).add('', () => () => null);
     // $ExpectError
-    storiesOf('', module).add('', () => null);
+    storiesOf('', module).add('', () => Button);
   });
 
   it('should validate when unwrapping arguments', () => {
