@@ -645,7 +645,7 @@ declare module ramda {
     fn: BinaryPredicateFn<T>,
   ): (xs: V) => Array<V>;
 
-  declare function head<T, V: Array<T>>(xs: V): ?T;
+  declare function head<T, V: Array<T>>(xs: V): $ElementType<V, 0>;
   declare function head<T, V: string>(xs: V): V;
 
   declare function into<I, T, A: Array<T>, R: Array<*> | string | Object>(
