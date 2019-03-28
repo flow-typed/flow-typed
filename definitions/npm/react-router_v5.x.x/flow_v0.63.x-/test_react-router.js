@@ -106,6 +106,10 @@ describe('Redirect', () => {
 
 describe('Route', () => {
   const User = () => <div />;
+  <Route
+    path={['/', '/user/:username']}
+    children={({ match }) => <div className={match ? 'active' : ''} />}
+  />;
   <Route path="/user/:username" component={User} exact={true} strict={true} />;
   <Route path="/home" render={({ match }) => <div>Home {match.path}</div>} />;
   <Route
@@ -147,8 +151,8 @@ describe('withRouter', () => {
   // $ExpectError
   withRouter('nope');
 
-  // const FooWithRouterError = withRouter(Foo);
-  // <FooWithRouterError name={3} />;
+  const FooWithRouterError = withRouter(Foo);
+  <FooWithRouterError name="3" />;
 
   const BarWithRouterError = withRouter(Bar);
   // $ExpectError
