@@ -304,6 +304,11 @@ const str: string = "hello world";
 
   const pl: Array<number | string> = _.pluck("a")([{ a: "1" }, { a: 2 }]);
   const pl1: Array<number> = _.pluck(0)([[1, 2], [3, 4]]);
+  const pl2: number[] = _.pluck('key', [{ key: 42 }, { key: 28, other: 'string' }]);
+  //$ExpectError
+  const pl3 = _.pluck('notExistingKey', [{ key: 42 }, { key: 28, other: 'string' }]);
+  //$ExpectError
+  const pl4: number[] = _.pluck('key', [{ key: 42 }, { key: 'string', other: 'string' }]);
 
   const rxs: Array<number> = _.range(1, 10);
 

@@ -816,15 +816,21 @@ declare module ramda {
   ): (xs: T) => [T, T];
 
   declare function pluck<
-    V,
-    K: string | number,
-    T: Array<Array<V> | { [key: string]: V }>
-  >(k: K, xs: T): Array<V>;
+    V: Object,
+    K: $Keys<V>,
+  >(key: K, list: V[]): Array<$ElementType<V, K>>;
   declare function pluck<
-    V,
-    K: string | number,
-    T: Array<Array<V> | { [key: string]: V }>
-  >(k: K): (xs: T) => Array<V>;
+    V: Object,
+    K: $Keys<V>,
+  >(key: K): (list: V[]) => Array<$ElementType<V, K>>;
+  declare function pluck<
+    T,
+    V: T[],
+  >(key: number, list: V[]): Array<$ElementType<V, number>>;
+  declare function pluck<
+    T,
+    V: T[],
+  >(key: number): (list: V[]) => Array<$ElementType<V, number>>;
 
   declare var range: CurriedFunction2<number, number, Array<number>>;
 
