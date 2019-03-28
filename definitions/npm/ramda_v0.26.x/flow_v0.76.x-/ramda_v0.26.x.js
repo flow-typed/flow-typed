@@ -1945,18 +1945,18 @@ declare module ramda {
   >;
 
   declare function propSatisfies<T>(
-    cond: (x: T) => boolean,
-    prop: string,
-    o: NestedObject<T>
+    cond: (x: $Values<T>) => boolean,
+    prop: $Keys<T>,
+    o: T
   ): boolean;
   declare function propSatisfies<T>(
-    cond: (x: T) => boolean,
-    prop: string,
-  ): (o: NestedObject<T>) => boolean;
+    cond: (x: $Values<T>) => boolean,
+    prop: $Keys<T>,
+  ): (o: T) => boolean;
   declare function propSatisfies<T>(
-    cond: (x: T) => boolean,
-  ): ((prop: string) => (o: NestedObject<T>) => boolean) &
-    ((prop: string, o: NestedObject<T>) => boolean);
+    cond: (x: $Values<T>) => boolean,
+  ): ((prop:  $Keys<T>) => (o: T) => boolean) &
+    ((prop:  $Keys<T>, o: T) => boolean);
 
   declare function unless<T, V, S>(
     pred: UnaryPredicateFn<T>,
