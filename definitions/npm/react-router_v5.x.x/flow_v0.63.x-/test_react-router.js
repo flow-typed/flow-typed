@@ -151,8 +151,9 @@ describe('withRouter', () => {
   // $ExpectError
   withRouter('nope');
 
-  // const FooWithRouterError = withRouter(Foo);
-  // <FooWithRouterError name={3} />;
+  const FooWithRouterError = withRouter(Foo);
+  // $ExpectError
+  <FooWithRouterError name={3} />;
 
   const BarWithRouterError = withRouter(Bar);
   // $ExpectError

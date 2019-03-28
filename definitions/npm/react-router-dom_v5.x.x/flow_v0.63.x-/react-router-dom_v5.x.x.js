@@ -25,8 +25,8 @@ declare module "react-router-dom" {
     to: string | LocationShape,
     activeClassName?: string,
     className?: string,
-    activeStyle?: Object,
-    style?: Object,
+    activeStyle?: CSSStyleDeclaration,
+    style?: CSSStyleDeclaration,
     isActive?: (match: Match, location: Location) => boolean,
     children?: React$Node,
     exact?: boolean,
@@ -152,7 +152,9 @@ declare module "react-router-dom" {
     location?: Location
   |}>
 
-  declare export function withRouter<Props : {}, Component: React$ComponentType<Props>>(WrappedComponent: Component) : React$ComponentType<$Diff<React$ElementConfig<$Supertype<Component>>, ContextRouterVoid>>;
+  declare export function withRouter<Config: {}, Instance>(
+    WrappedComponent: React$AbstractComponent<Config, Instance>
+  ): React$AbstractComponent<$Diff<Config, ContextRouterVoid>, Instance>;
 
   declare type MatchPathOptions = {
     path?: string,
@@ -167,5 +169,5 @@ declare module "react-router-dom" {
     parent?: Match
   ): null | Match;
 
-  declare export function generatePath(pattern?: string, params?: Object): string;
+  declare export function generatePath(pattern?: string, params?: { +[string]: mixed }): string;
 }
