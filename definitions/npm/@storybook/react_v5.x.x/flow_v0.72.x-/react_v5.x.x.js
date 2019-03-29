@@ -9,7 +9,7 @@ declare module '@storybook/react' {
     | Iterable<?Renderable>;
   declare type RenderCallback = (
     context: Context
-  ) => React$Node;
+  ) => Renderable;
   declare type RenderFunction = () => Renderable;
 
   declare type StoryDecorator = (
