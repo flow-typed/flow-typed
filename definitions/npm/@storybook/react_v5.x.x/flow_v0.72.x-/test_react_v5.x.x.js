@@ -64,10 +64,6 @@ describe('The `add` method', () => {
     storiesOf('', module).add('', () => 0);
   });
 
-  it('should validate on default usage (null)', () => {
-    storiesOf('', module).add('', () => null);
-  });
-
   it('should validate on default usage (parameters)', () => {
     storiesOf('', module).add('', () => <Button>test</Button>, {
       param: 'test',
@@ -86,6 +82,8 @@ describe('The `add` method', () => {
     storiesOf('', module).add('', () => () => null);
     // $ExpectError
     storiesOf('', module).add('', () => Button);
+    // $ExpectError
+    storiesOf('', module).add('', () => null);
   });
 
   it('should validate when unwrapping arguments', () => {
