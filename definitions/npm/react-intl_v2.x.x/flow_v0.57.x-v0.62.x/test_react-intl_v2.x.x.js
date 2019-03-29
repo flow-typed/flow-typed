@@ -61,6 +61,17 @@ const msg1:MessageDescriptor = messageDescriptorMap.messagekey1;
 const msg2:MessageDescriptor = messageDescriptorMap.messagekey2_foo;
 const msg3:MessageDescriptor = messageDescriptorMap.messagekey3;
 
+// $ExpectError defineMessages accepts exact $npm$ReactIntl$MessageDescriptor
+const messageDescriptorMap5 = defineMessages({
+  message: {
+    id: "message5",
+    defaultMessage: "Hello",
+    values: {
+      value: 1
+    }
+  }
+});
+
 class TestComponent extends React.Component<{ name: string, intl: IntlShape }> {
   render() {
     return React.createElement("div", {}, `Hello ${this.props.name}`);
