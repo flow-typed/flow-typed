@@ -19,7 +19,7 @@ describe('boundClass', () => {
   });
 
   it('errors when types incompatible', () => {
-    //$ExpectError BarCtor is incompatible with Foo
+    // $ExpectError BarCtor is incompatible with Foo
     (boundClass(BarCtor): typeof (Foo));
 
     // $ExpectError Foo is incompatible with string

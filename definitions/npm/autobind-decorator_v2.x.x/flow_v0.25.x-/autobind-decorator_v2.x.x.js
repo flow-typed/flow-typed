@@ -8,7 +8,8 @@ declare module 'autobind-decorator' {
       set?: (value: T) => void;
     }
 
-    declare export type ClassDecorator = <TFunction: Function>(target: TFunction) => TFunction;
+    declare export type ConstructorFunction = () => void;
+    declare export type ClassDecorator = <T: Class<{}> | ConstructorFunction>(target: T) => T;
     declare export type MethodDecorator = <T>(target: {}, propertyKey: string | Symbol, descriptor: TypedPropertyDescriptor<T>) => TypedPropertyDescriptor<T>;
 
     declare var autobind: ClassDecorator & MethodDecorator;
