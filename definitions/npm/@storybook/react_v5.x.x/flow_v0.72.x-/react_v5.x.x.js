@@ -2,16 +2,20 @@ type NodeModule = typeof module;
 
 declare module '@storybook/react' {
   declare type Context = { kind: string, story: string };
-  declare type Renderable = React$Element<*>;
+  declare type Renderable =
+    | string
+    | number
+    | React$Element<any>
+    | Iterable<?Renderable>;
   declare type RenderCallback = (
     context: Context
-  ) => Renderable | Array<Renderable>;
-  declare type RenderFunction = () => Renderable | Array<Renderable>;
+  ) => Renderable;
+  declare type RenderFunction = () => Renderable;
 
   declare type StoryDecorator = (
     story: RenderFunction,
     context: Context
-  ) => Renderable | null;
+  ) => Renderable;
 
   declare type DecoratorParameters = {
     [key: string]: any,
