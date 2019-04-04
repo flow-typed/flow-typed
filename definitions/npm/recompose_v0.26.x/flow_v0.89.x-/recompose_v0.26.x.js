@@ -12,9 +12,9 @@ declare module 'recompose' {
 
   declare type Void<T> = Void_<*, *, *, *, *, T>;
 
-  declare type ExtractStateHandlersCodomain = <State, Enhanced, V>(
-    v: (state: State, props: Enhanced) => V
-  ) => Void<V>;
+  declare type ExtractStateHandlersCodomain = <State, Props, HandlerFn>(
+    v: (state: State, props: Props) => HandlerFn
+  ) => Void<HandlerFn>;
 
   declare type ExtractHandlersCodomain = <Enhanced, V>(
     v: (props: Enhanced) => V
@@ -55,24 +55,23 @@ declare module 'recompose' {
   };
 
   declare export function withStateHandlers<
-    State,
-    Enhanced,
+    Props,
+    State: {},
     StateHandlers: {
-      [key: string]: (
-        state: State,
-        props: Enhanced
-      ) => (...payload: any[]) => $Shape<State>,
+      [key: string]: (State, Props) => (...args: Array<any>) => $Shape<State>,
     }
   >(
-    initialState: ((props: Enhanced) => State) | State,
+    initialState: ((props: Props) => State) | State,
     stateUpdaters: StateHandlers
   ): HOC<
-    {
-      ...$Exact<Enhanced>,
-      ...$Exact<State>,
-      ...$ObjMap<StateHandlers, ExtractStateHandlersCodomain>,
-    },
-    Enhanced
+    Props,
+    $Diff<
+      Props,
+      {
+        ...State,
+        ...$ObjMap<StateHandlers, ExtractStateHandlersCodomain>,
+      }
+    >
   >;
 
   declare export function withHandlers<
