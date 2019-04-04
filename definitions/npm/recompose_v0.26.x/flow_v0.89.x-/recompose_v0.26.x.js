@@ -41,7 +41,7 @@ declare module 'recompose' {
     defProps: Default
   ): HOC<Props, React$Config<Props, Default>>;
 
-  declare export function mapProps<Base, Enhanced>(
+  declare export function mapProps<Base: {}, Enhanced: {}>(
     propsMapper: (ownerProps: Enhanced) => Base
   ): HOC<Base, Enhanced>;
 
