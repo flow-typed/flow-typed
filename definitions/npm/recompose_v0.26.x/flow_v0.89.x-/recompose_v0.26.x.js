@@ -37,17 +37,22 @@ declare module 'recompose' {
 
   // ---------------------------------------------------------------------------
 
-  declare export function defaultProps<Default: {}, Props>(
-    defProps: Default
-  ): HOC<Props, React$Config<Props, Default>>;
+  declare export function defaultProps<Props: {}, DefaultProps: {}>(
+    defProps: DefaultProps
+  ): HOC<Props, React$Config<Props, DefaultProps>>;
 
-  declare export function mapProps<Base: {}, Enhanced: {}>(
-    propsMapper: (ownerProps: Enhanced) => Base
-  ): HOC<Base, Enhanced>;
+  declare export function mapProps<Props, MapProps: {}>(
+    fn: (Props) => MapProps
+  ): HOC<MapProps, Props>;
 
-  declare export function withProps<BaseAdd, Enhanced>(
-    propsMapper: ((ownerProps: Enhanced) => BaseAdd) | BaseAdd
-  ): HOC<{ ...$Exact<Enhanced>, ...BaseAdd }, Enhanced>;
+  declare export var withProps: {
+    <Props, InjectedProps: {}>(
+      fn: (Props) => InjectedProps
+    ): HOC<Props, $Diff<Props, InjectedProps>>,
+    <Props, InjectedProps: {}>(
+      InjectedProps
+    ): HOC<Props, $Diff<Props, InjectedProps>>,
+  };
 
   declare export function withStateHandlers<
     State,
