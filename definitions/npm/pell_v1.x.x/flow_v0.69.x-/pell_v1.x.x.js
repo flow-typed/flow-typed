@@ -1,5 +1,5 @@
 declare module 'pell' {
-  declare type pell$defaultActions =
+  declare type DefaultAction =
     | 'bold'
     | 'italic'
     | 'underline'
@@ -15,11 +15,11 @@ declare module 'pell' {
     | 'link'
     | 'image';
 
-  declare type pell$customAction = {|
+  declare type CustomAction = {|
     /**
      * Only required if overwriting
      */
-    name?: pell$defaultActions,
+    name?: DefaultAction,
     /**
      * Optional if overwriting, required if custom action
      */
@@ -33,16 +33,16 @@ declare module 'pell' {
     state?: () => boolean,
   |};
 
-  declare type pell$action = pell$defaultActions | pell$customAction;
+  declare type Action = DefaultAction | CustomAction;
 
-  declare type pell$classes = $Shape<{|
+  declare type ClassNames = $Shape<{|
     actionbar: string,
     button: string,
     content: string,
     selected: string,
   |}>;
 
-  declare type pell$options = {|
+  declare type Options = {|
     /**
      * <HTMLElement>, required
      */
@@ -64,14 +64,14 @@ declare module 'pell' {
     /**
      * Specify the actions you specifically want (in order)
      */
-    actions?: Array<pell$action>,
+    actions?: Array<Action>,
     /**
      * Choose your custom class names
      */
-    classes?: pell$classes,
+    classes?: ClassNames,
   |};
 
-  declare type pell$element = HTMLElement & {
+  declare type Element = HTMLElement & {
     content: HTMLElement,
   };
 
@@ -80,18 +80,16 @@ declare module 'pell' {
    * https://developer.mozilla.org/en/docs/Web/API/Document/execCommand
    * this is just `document.execCommand(command, false, value)`
    */
-  declare type pell$exec = (command: string, value?: string) => void;
+  declare type Exec = (command: string, value?: string) => void;
 
-  declare type pell$init = pell$options => pell$element;
+  declare type Init = (Options) => Element;
 
-  declare type pell$module = {|
-    exec: pell$exec,
-    init: pell$init,
+  declare export var exec: Exec;
+  declare export var init: Init;
+  declare export default {|
+    exec: Exec,
+    init: Init,
   |};
-
-  declare export var exec: pell$exec;
-  declare export var init: pell$init;
-  declare export default pell$module;
 }
 
 declare module 'pell/dist/pell' {

@@ -40,8 +40,8 @@ describe('#pell', () => {
           result: () => {
             $output.style.border = '1px solid red';
             return false;
-          }
-        }
+          },
+        },
       ],
       classes: {
         actionbar: 'custom-action-bar',
@@ -84,9 +84,7 @@ describe('#pell', () => {
     pell.init({
       onChange: () => {},
       element: $element,
-      actions: [
-        'invalid_action',
-      ]
+      actions: ['invalid_action'],
     });
 
     //$ExpectError
@@ -96,8 +94,8 @@ describe('#pell', () => {
       actions: [
         {
           name: 'invalid_action',
-        }
-      ]
+        },
+      ],
     });
   });
 });
