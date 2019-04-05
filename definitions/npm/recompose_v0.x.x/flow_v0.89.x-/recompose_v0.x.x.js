@@ -95,7 +95,8 @@ declare module 'recompose' {
     Enhanced
   >;
 
-  declare export function pure<A>(a: Component<A>): Component<A>;
+  declare export function pure<A>(Component<A>): Component<A>;
+
   declare export function onlyUpdateForPropTypes<A>(
     a: Component<A>
   ): Component<A>;
