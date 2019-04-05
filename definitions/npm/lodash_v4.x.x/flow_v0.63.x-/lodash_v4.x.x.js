@@ -672,7 +672,7 @@ declare module "lodash" {
       iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
       orders?: ?$ReadOnlyArray<"asc" | "desc"> | ?string
     ): Array<T>;
-    orderBy<V, T: Object>(
+    orderBy<V, T: {}>(
       object: T,
       iteratees?: $ReadOnlyArray<OIteratee<*>> | string,
       orders?: $ReadOnlyArray<"asc" | "desc"> | string
