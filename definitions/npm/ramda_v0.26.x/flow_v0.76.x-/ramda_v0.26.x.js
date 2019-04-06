@@ -816,11 +816,11 @@ declare module ramda {
   ): (xs: T) => [T, T];
 
   declare function pluck<
-    V: Object,
+    V,
     K: $Keys<V>,
   >(key: K, list: V[]): Array<$ElementType<V, K>>;
   declare function pluck<
-    V: Object,
+    V,
     K: $Keys<V>,
   >(key: K): (list: V[]) => Array<$ElementType<V, K>>;
   declare function pluck<
