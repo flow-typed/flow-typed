@@ -28,7 +28,7 @@ declare module "jsuri" {
 
     getQueryParamValues: (key: string) => Array<string>;
     getQueryParamValue: (key: string) => string;
-    hasQueryParam: () => boolean;
+    hasQueryParam: (key: string) => boolean;
     clone: () => URI;
     origin: () => string;
     scheme: () => string;

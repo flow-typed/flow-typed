@@ -1881,8 +1881,8 @@ declare module ramda {
     fns: Array<(...args: Array<T>) => boolean>
   ): (...args: Array<T>) => boolean;
 
-  declare function and(x: boolean): (y: boolean) => boolean;
-  declare function and(x: boolean, y: boolean): boolean;
+  declare function and<X, Y>(x: X): (y: Y) => X | Y;
+  declare function and<X, Y>(x: X, y: Y): X | Y;
 
   declare function anyPass<T>(
     fns: Array<(...args: Array<T>) => boolean>
@@ -1934,8 +1934,8 @@ declare module ramda {
 
   declare function not(x: boolean): boolean;
 
-  declare function or(x: boolean, y: boolean): boolean;
-  declare function or(x: boolean): (y: boolean) => boolean;
+  declare function or<X, Y>(x: X): (y: Y) => X | Y;
+  declare function or<X, Y>(x: X, y: Y): X | Y;
 
   declare var pathSatisfies: CurriedFunction3<
     UnaryPredicateFn<any>,

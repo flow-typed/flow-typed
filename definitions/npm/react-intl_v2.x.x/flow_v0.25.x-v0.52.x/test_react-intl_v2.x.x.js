@@ -55,6 +55,17 @@ const messageDescriptorMap3: Array<string> = defineMessages(messages);
 // $ExpectError string. This type is incompatible with MessageDescriptorMap
 const messageDescriptorMap4: string = defineMessages(messages);
 
+// $ExpectError defineMessages accepts exact $npm$ReactIntl$MessageDescriptor
+const messageDescriptorMap5 = defineMessages({
+  message: {
+    id: "message5",
+    defaultMessage: "Hello",
+    values: {
+      value: 1
+    }
+  }
+});
+
 class TestComponent extends Component {
   render() {
     return React.createElement("div", null, `Hello ppl`);
