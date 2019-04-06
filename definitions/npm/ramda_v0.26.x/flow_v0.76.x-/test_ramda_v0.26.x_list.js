@@ -227,6 +227,18 @@ const str: string = "hello world";
           }
         }
       });
+      it('should works with mixed-type arrays', () => {
+        const fn = (arr: Array<number|string>) => {
+          const xOfXs: ?(number|string) = _.head(arr);
+          //$ExpectError
+          const xOfXs: ?number = _.head(arr);
+          if (arr.length > 0) {
+            const xOfXs: number|string = _.head(arr);
+            //$ExpectError
+            const xOfXs: number = _.head(arr);
+          }
+        }
+      });
     });
     describe('with string', () => {
       it('should works', () => {
