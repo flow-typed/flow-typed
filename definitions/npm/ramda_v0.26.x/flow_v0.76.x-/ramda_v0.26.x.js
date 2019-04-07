@@ -311,49 +311,50 @@ declare module ramda {
       args: [A, B, C, D, E, F, G, H, I]
     ) => () => R);
 
+  declare type $MakePipeFn = <Args,Return>(
+    (...args: Args) => any,
+    UnaryFn<any, Return>
+  ) => ((...args: Args) => Return);
+
+  declare type $PipeFn<FirstFn, LastFn> = $Call<$MakePipeFn, FirstFn, LastFn>;
+
   declare var pipe: {
-    <A, B, C, D, E, F, G>(ab: UnaryFn<A, B>, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>, fg: UnaryFn<F, G>): UnaryFn<A, G>,
-    <A0, A1, B, C, D, E, F, G>(ab: (A0, A1) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>, fg: UnaryFn<F, G>): (A0, A1) => G,
-    <A0, A1, A2, B, C, D, E, F, G>(ab: (A0, A1, A2) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>, fg: UnaryFn<F, G>): (A0, A1, A2) => G,
-    <A0, A1, A2, A3, B, C, D, E, F, G>(ab: (A0, A1, A2, A3) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>, fg: UnaryFn<F, G>): (A0, A1, A2, A3) => G,
-    <A0, A1, A2, A3, A4, B, C, D, E, F, G>(ab: (A0, A1, A2, A3, A4) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>, fg: UnaryFn<F, G>): (A0, A1, A2, A3, A4) => G,
-    <A0, A1, A2, A3, A4, A5, B, C, D, E, F, G>(ab: (A0, A1, A2, A3, A4, A5) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>, fg: UnaryFn<F, G>): (A0, A1, A2, A3, A4, A5) => G,
+    <B, C, D, E, F, FN1: (...a: *) => B, FN6: UnaryFn<F, *>>(
+      ab: FN1,
+      bc: UnaryFn<B, C>,
+      cd: UnaryFn<C, D>,
+      de: UnaryFn<D, E>,
+      ef: UnaryFn<E, F>,
+      fg: FN6,
+    ): $PipeFn<FN1, FN6>,
 
-    <A, B, C, D, E, F>(ab: UnaryFn<A, B>, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>): UnaryFn<A, F>,
-    <A0, A1, B, C, D, E, F>(ab: (A0, A1) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>): (A0, A1) => F,
-    <A0, A1, A2, B, C, D, E, F>(ab: (A0, A1, A2) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>): (A0, A1, A2) => F,
-    <A0, A1, A2, A3, B, C, D, E, F>(ab: (A0, A1, A2, A3) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>): (A0, A1, A2, A3) => F,
-    <A0, A1, A2, A3, A4, B, C, D, E, F>(ab: (A0, A1, A2, A3, A4) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>): (A0, A1, A2, A3, A4) => F,
-    <A0, A1, A2, A3, A4, A5, B, C, D, E, F>(ab: (A0, A1, A2, A3, A4, A5) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>, ef: UnaryFn<E, F>): (A0, A1, A2, A3, A4, A5) => F,
+    <B, C, D, E, FN1: (...a: *) => B, FN5: UnaryFn<E, *>>(
+      ab: FN1,
+      bc: UnaryFn<B, C>,
+      cd: UnaryFn<C, D>,
+      de: UnaryFn<D, E>,
+      ef: FN5,
+    ): $PipeFn<FN1, FN5>,
 
-    <A, B, C, D, E>(ab: UnaryFn<A, B>, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>): UnaryFn<A, E>,
-    <A0, A1, B, C, D, E>(ab: (A0, A1) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>): (A0, A1) => E,
-    <A0, A1, A2, B, C, D, E>(ab: (A0, A1, A2) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>): (A0, A1, A2) => E,
-    <A0, A1, A2, A3, B, C, D, E>(ab: (A0, A1, A2, A3) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>): (A0, A1, A2, A3) => E,
-    <A0, A1, A2, A3, A4, B, C, D, E>(ab: (A0, A1, A2, A3, A4) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>): (A0, A1, A2, A3, A4) => E,
-    <A0, A1, A2, A3, A4, A5, B, C, D, E>(ab: (A0, A1, A2, A3, A4, A5) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>, de: UnaryFn<D, E>): (A0, A1, A2, A3, A4, A5) => E,
+    <B, C, D, FN1: (...a: *) => B, FN4: UnaryFn<D, *>>(
+      ab: FN1,
+      bc: UnaryFn<B, C>,
+      cd: UnaryFn<C, D>,
+      de: FN4,
+    ): $PipeFn<FN1, FN4>,
 
-    <A, B, C, D>(ab: UnaryFn<A, B>, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>): UnaryFn<A, D>,
-    <A0, A1, B, C, D>(ab: (A0, A1) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>): (A0, A1) => D,
-    <A0, A1, A2, B, C, D>(ab: (A0, A1, A2) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>): (A0, A1, A2) => D,
-    <A0, A1, A2, A3, B, C, D>(ab: (A0, A1, A2, A3) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>): (A0, A1, A2, A3) => D,
-    <A0, A1, A2, A3, A4, B, C, D>(ab: (A0, A1, A2, A3, A4) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>): (A0, A1, A2, A3, A4) => D,
-    <A0, A1, A2, A3, A4, A5, B, C, D>(ab: (A0, A1, A2, A3, A4, A5) => B, bc: UnaryFn<B, C>, cd: UnaryFn<C, D>): (A0, A1, A2, A3, A4, A5) => D,
+    <B, C, FN1: (...a: *) => B, FN3: UnaryFn<C, *>>(
+      ab: FN1,
+      bc: UnaryFn<B, C>,
+      cd: FN3,
+    ): $PipeFn<FN1, FN3>,
 
-    <A, B, C>(ab: UnaryFn<A, B>, bc: UnaryFn<B, C>): UnaryFn<A, C>,
-    <A0, A1, B, C>(ab: (A0, A1) => B, bc: UnaryFn<B, C>): (A0, A1) => C,
-    <A0, A1, A2, B, C>(ab: (A0, A1, A2) => B, bc: UnaryFn<B, C>): (A0, A1, A2) => C,
-    <A0, A1, A2, A3, B, C>(ab: (A0, A1, A2, A3) => B, bc: UnaryFn<B, C>): (A0, A1, A2, A3) => C,
-    <A0, A1, A2, A3, A4, B, C>(ab: (A0, A1, A2, A3, A4) => B, bc: UnaryFn<B, C>): (A0, A1, A2, A3, A4) => C,
-    <A0, A1, A2, A3, A4, A5, B, C>(ab: (A0, A1, A2, A3, A4, A5) => B, bc: UnaryFn<B, C>): (A0, A1, A2, A3, A4, A5) => C,
-
+    <B, FN1: (...a: *) => B, FN2: UnaryFn<B, *>>(
+      ab: FN1,
+      bc: FN2,
+    ): $PipeFn<FN1, FN2>,
 
     <A, B>(ab: UnaryFn<A, B>): UnaryFn<A, B>,
-    <A0, A1, B>(ab: (A0, A1) => B): (A0, A1) => B,
-    <A0, A1, A2, B>(ab: (A0, A1, A2) => B): (A0, A1, A2) => B,
-    <A0, A1, A2, A3, B>(ab: (A0, A1, A2, A3) => B): (A0, A1, A2, A3) => B,
-    <A0, A1, A2, A3, A4, B>(ab: (A0, A1, A2, A3, A4) => B): (A0, A1, A2, A3, A4) => B,
-    <A0, A1, A2, A3, A4, A5, B>(ab: (A0, A1, A2, A3, A4, A5) => B): (A0, A1, A2, A3, A4, A5) => B,
   };
 
   declare type Pipe = typeof pipe;
