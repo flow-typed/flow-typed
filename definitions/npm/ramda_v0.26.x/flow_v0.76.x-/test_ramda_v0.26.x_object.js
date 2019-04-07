@@ -280,7 +280,21 @@ const pathOr: string | Object | number = _.pathOr("N/A", ["a", "b", 0], {
   a: { b: [2] }
 });
 
-const pck: Object = _.pick(["a", "d"], { a: 1, b: 2, c: 3, d: 4 });
+describe('pick', () => {
+  it('should works', () => {
+    const pck = _.pick(["a", "d"], { a: 1, b: 2, c: 3, d: '4' });
+    const a: number = pck.a;
+    const d: string = pck.d;
+
+    //$ExpectError
+    const e = pck.e;
+  });
+  it('should fail with not existing props', () => {
+    //$ExpectError
+    const pck = _.pick(["b", "r"], { a: 1, b: 2, c: 3, d: '4' });
+  });
+});
+
 
 const ooo = { a: 1, b: 2, A: 3, B: 4 };
 const isUpperCase = (val, key) => key.toUpperCase() === key;

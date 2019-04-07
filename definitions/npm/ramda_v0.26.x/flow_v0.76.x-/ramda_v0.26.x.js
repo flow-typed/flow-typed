@@ -1511,13 +1511,13 @@ declare module ramda {
     o: ?A
   ): V | T;
 
-  declare function pick<A>(
-    keys: Array<string>,
-  ): (val: { [key: string]: A }) => { [key: string]: A };
-  declare function pick<A>(
-    keys: Array<string>,
-    val: { [key: string]: A }
-  ): { [key: string]: A };
+  declare function pick<O, K: $ReadOnlyArray<$Keys<O>>>(
+    keys: K,
+  ): (val: O) => O;
+  declare function pick<O, K: $ReadOnlyArray<$Keys<O>>>(
+    keys: K,
+    val: O
+  ): O;
 
   declare function pickAll<A>(
     keys: Array<string>,
