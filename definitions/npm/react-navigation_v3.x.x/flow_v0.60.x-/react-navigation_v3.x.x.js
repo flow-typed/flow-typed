@@ -1182,7 +1182,7 @@ declare module 'react-navigation' {
   };
   declare export var TabView: React$ComponentType<_TabViewProps>;
 
-  declare type _TabBarTopProps = {
+  declare type _MaterialTopTabBarProps = {
     activeTintColor: string,
     inactiveTintColor: string,
     showIcon: boolean,
@@ -1206,9 +1206,18 @@ declare module 'react-navigation' {
     labelStyle?: TextStyleProp,
     iconStyle?: ViewStyleProp,
   };
-  declare export var TabBarTop: React$ComponentType<_TabBarTopProps>;
+  declare export var MaterialTopTabBar: React$ComponentType<
+    _MaterialTopTabBarProps
+  >;
 
-  declare type _TabBarBottomProps = {
+  declare type _BottomTabBarButtonComponentProps = {
+    onPress: () => void,
+    onLongPress: () => void,
+    testID: string,
+    accessibilityLabel: string,
+    style: ViewStyleProp,
+  };
+  declare type _BottomTabBarProps = {
     activeTintColor: string,
     activeBackgroundColor: string,
     adaptive?: boolean,
@@ -1231,13 +1240,16 @@ declare module 'react-navigation' {
     }) => void,
     getTestIDProps: (scene: TabScene) => (scene: TabScene) => any,
     renderIcon: (scene: TabScene) => React$Node,
+    getButtonComponent: (
+      scene: TabScene
+    ) => React$ComponentType<_BottomTabBarButtonComponentProps>,
     style?: ViewStyleProp,
     animateStyle?: ViewStyleProp,
     labelStyle?: TextStyleProp,
     tabStyle?: ViewStyleProp,
     showIcon?: boolean,
   };
-  declare export var TabBarBottom: React$ComponentType<_TabBarBottomProps>;
+  declare export var BottomTabBar: React$ComponentType<_BottomTabBarProps>;
 
   declare export function withNavigation<Props: {}, ComponentType: React$ComponentType<Props>>(
     Component: ComponentType
