@@ -1,10 +1,25 @@
 // @flow
 import type {Action} from 'redux'
+import { describe, it } from 'flow-typed-test';
 
-const action1: Action<"increment"> = { type: "increment" };
+describe('Action<T>', () => {
 
-// $ExpectError
-const action2: Action<"increment"> = { type: "decrement" };
+  it('passes when used properly', () => {
+    const action: Action<"increment"> = { type: "increment" };
+  });
 
-// $ExpectError
-const action3: Action<string> = { payload: 1 };
+  it('raises an error when passed an invalid type parameter', () => {
+    // $ExpectError
+    const action: Action<"increment"> = { type: "decrement" };
+  });
+
+  it('raises an error when missed the type property', () => {
+    // $ExpectError
+    const action: Action<string> = { payload: 1 };
+  });
+
+});
+
+
+
+
