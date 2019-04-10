@@ -238,6 +238,7 @@ declare module 'react-navigation' {
      */
     index: number,
     routes: Array<NavigationRoute>,
+    isTransitioning?: bool,
   };
 
   declare export type NavigationRoute =
@@ -468,10 +469,10 @@ declare module 'react-navigation' {
     disableKeyboardHandling?: boolean,
   |};
 
-  declare export type StackNavigatorConfig = {|
+  declare export type StackNavigatorConfig = $Shape<{|
     ...NavigationStackViewConfig,
     ...NavigationStackRouterConfig,
-  |};
+  |}>;
 
   /**
    * Switch Navigator
@@ -713,6 +714,7 @@ declare module 'react-navigation' {
     isStale: boolean,
     key: string,
     route: NavigationRoute,
+    descriptor: ?NavigationDescriptor,
   };
 
   declare export type NavigationTransitionProps = $Shape<{
@@ -924,9 +926,9 @@ declare module 'react-navigation' {
     router: NavigationRouter<S, O>,
   };
 
-  declare type NavigationDescriptor = {
+  declare export type NavigationDescriptor = {
     key: string,
-    state: NavigationLeafRoute | NavigationStateRoute,
+    state: NavigationRoute,
     navigation: NavigationScreenProp<*>,
     getComponent: () => React$ComponentType<{}>,
   };
