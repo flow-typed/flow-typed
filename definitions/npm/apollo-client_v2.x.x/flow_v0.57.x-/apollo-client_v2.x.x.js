@@ -270,7 +270,7 @@ declare module "apollo-client" {
   };
 
   declare interface ModifiableWatchQueryOptions {
-    variables?: { [key: string]: any };
+    variables?: any;
     pollInterval?: number;
     fetchPolicy?: FetchPolicy;
     errorPolicy?: ErrorPolicy;
@@ -310,7 +310,7 @@ declare module "apollo-client" {
 
   declare export interface SubscriptionOptions {
     query: DocumentNode;
-    variables?: { [key: string]: any };
+    variables?: any;
   }
 
   declare export type FetchPolicy =
@@ -368,7 +368,7 @@ declare module "apollo-client" {
 
   declare export type PureQueryOptions = {
     query: DocumentNode,
-    variables?: { [key: string]: any }
+    variables?: any,
   };
 
   declare export type ApolloQueryResult<T> = {
@@ -495,7 +495,7 @@ declare module "apollo-client" {
 
   declare interface GraphQLRequest {
     query: DocumentNode;
-    variables?: { [key: string]: any };
+    variables?: any;
     operationName?: string;
     context?: { [key: string]: any };
     extensions?: { [key: string]: any };
