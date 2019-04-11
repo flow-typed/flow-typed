@@ -463,8 +463,14 @@ declare module 'react-navigation' {
       prevTransitionProps: ?NavigationTransitionProps,
       isModal: boolean
     ) => TransitionConfig,
-    onTransitionStart?: () => void,
-    onTransitionEnd?: () => void,
+    onTransitionStart?: (
+      transitionProps: NavigationTransitionProps,
+      prevTransitionProps: ?NavigationTransitionProps,
+    ) => void,
+    onTransitionEnd?: (
+      transitionProps: NavigationTransitionProps,
+      prevTransitionProps: ?NavigationTransitionProps,
+    ) => void,
     transparentCard?: boolean,
     disableKeyboardHandling?: boolean,
   |};
