@@ -942,6 +942,7 @@ declare module 'react-navigation' {
   declare type NavigationView<O, S> = React$ComponentType<{
     descriptors: { [key: string]: NavigationDescriptor },
     navigation: NavigationScreenProp<S>,
+    navigationConfig: *,
   }>;
 
   declare export function createNavigator<O: *, S: *, NavigatorConfig: *>(
