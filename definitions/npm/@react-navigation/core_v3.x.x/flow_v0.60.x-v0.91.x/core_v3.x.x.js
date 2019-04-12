@@ -508,7 +508,7 @@ declare module '@react-navigation/core' {
       >,
       ParamName
     >,
-    dangerouslyGetParent: () => NavigationScreenProp<*>,
+    dangerouslyGetParent: () => ?NavigationScreenProp<NavigationState>,
     isFocused: () => boolean,
     // Shared action creators that exist for all routers
     goBack: (routeKey?: ?string) => boolean,
@@ -754,6 +754,7 @@ declare module '@react-navigation/core' {
   declare type NavigationView<O, S> = React$ComponentType<{
     descriptors: { [key: string]: NavigationDescriptor },
     navigation: NavigationScreenProp<S>,
+    navigationConfig: *,
   }>;
 
   declare export function createNavigator<O: *, S: *, NavigatorConfig: *>(
