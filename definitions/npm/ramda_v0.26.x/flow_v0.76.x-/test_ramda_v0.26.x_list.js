@@ -302,8 +302,32 @@ const str: string = "hello world";
     { [k: string]: string }
   ] = _.partition(_.contains("s"), { a: "sss", b: "ttt", foo: "bars" });
 
-  const pl: Array<number | string> = _.pluck("a")([{ a: "1" }, { a: 2 }]);
-  const pl1: Array<number> = _.pluck(0)([[1, 2], [3, 4]]);
+  describe('pluck', () => {
+    it('should works on array of objects as maps', () => {
+      const arr: Array<{ [string]: number | string }> = [{ a: "1" }, { a: 2 }];
+      const pl: Array<number | string> = _.pluck("a")(arr);
+      const p2: Array<number | string> = _.pluck("b")(arr);
+    });
+    it('should works on array of arrays', () => {
+      const pl: Array<number> = _.pluck(0)([[1, 2], [3, 4]]);
+    });
+    it('should works on array of objects', () => {
+      const arr: Array<{ key: number, other?: string }> = [{ key: 42 }, { key: 28, other: 'string' }];
+      const pl: number[] = _.pluck('key', arr);
+    });
+    it('should fails on non existing property', () => {
+      //$ExpectError
+      const pl = _.pluck('notExistingKey', [{ key: 42 }, { key: 28, other: 'string' }]);
+      //$ExpectError
+      const pl = _.pluck('other', [{ key: 42 }, { key: 28, other: 'string' }]);
+    });
+    it('should returns union type of selected property', () => {
+      const arr = [{ key: 42 }, { key: 'string', other: 'string' }];
+      const pl: Array<number | string> = _.pluck('key', arr);
+      //$ExpectError
+      const pl: number[] = _.pluck('key', arr);
+    });
+  });
 
   const rxs: Array<number> = _.range(1, 10);
 
