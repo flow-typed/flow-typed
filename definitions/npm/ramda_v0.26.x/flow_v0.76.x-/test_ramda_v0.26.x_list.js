@@ -211,9 +211,41 @@ const str: string = "hello world";
   const groupedWith: Array<Array<number>> = _.groupWith(x => x > 1, ns);
   const groupedWith1: Array<Array<string>> = _.groupWith(x => x === "one")(ss);
 
-  const xOfXs: ?number = _.head(ns);
-  const xOfXs2: ?number = _.head(ns);
-  const xOfStr: string = _.head(str);
+  describe('head', () => {
+    describe('with array', () => {
+      it('should returns MaybeOf element type', () => {
+        const fn = (arr: number[]) => {
+          const xOfXs: ?number = _.head(arr);
+          //$ExpectError
+          const xOfXs: number = _.head(arr);
+        }
+      });
+      it('should works with refinement', () => {
+        const fn = (arr: number[]) => {
+          if (arr.length > 0) {
+            const xOfXs: number = _.head(arr);
+          }
+        }
+      });
+      it('should works with mixed-type arrays', () => {
+        const fn = (arr: Array<number|string>) => {
+          const xOfXs: ?(number|string) = _.head(arr);
+          //$ExpectError
+          const xOfXs: ?number = _.head(arr);
+          if (arr.length > 0) {
+            const xOfXs: number|string = _.head(arr);
+            //$ExpectError
+            const xOfXs: number = _.head(arr);
+          }
+        }
+      });
+    });
+    describe('with string', () => {
+      it('should works', () => {
+        const xOfStr: string = _.head(str);
+      });
+    })
+  });
 
   const transducer = _.compose(_.map(_.add(1)), _.take(2));
 
