@@ -1,5 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
+import { describe, it } from 'flow-typed-test';
 import _, { compose, pipe, curry, filter, find, repeat, zipWith } from 'ramda';
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
@@ -99,7 +100,28 @@ const psatPart2 = _.pathSatisfies(y => typeof y === 'number' && y > 0, [
 ]);
 const psat3: boolean = psatPart2({ x: { y: 2 }, z: true });
 
-const propSat: boolean = _.propSatisfies(x => x > 0, 'x', { x: 1, y: 2 });
+describe('propSatisfies', () => {
+  describe('with object', () => {
+    it('should works with object', () => {
+      const propSat: boolean = _.propSatisfies(x => x > 0, 'x', { x: 1, y: 2 });
+    });
+    it('should error when property does not exist', () => {
+      //$ExpectError
+      const propSat3: boolean = _.propSatisfies((x: number) => x > 0, 'z', { x: 1, y: 2 });
+    });
+  });
+  describe('with object as maps', () => {
+    const o: { [string]: number } = { x: 1, y: 2 };
+    it('should works with object map', () => {
+      const propSat: boolean = _.propSatisfies((x: number) => x > 0, 'x', o);
+    });
+    it('should error when condition param does not match property type', () => {
+      //$ExpectError
+      const propSat2: boolean = _.propSatisfies((x: string) => x > 0, 'x', o);
+    });
+  });
+});
+
 const coerceArray = _.unless(_.is(Array), _.of);
 const coer: Array<number | Array<number>> | number = coerceArray([1, 2, 3]);
 const coer1: Array<number | Array<number>> | number = coerceArray(1);
