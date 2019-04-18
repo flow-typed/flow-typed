@@ -278,7 +278,8 @@ declare module "apollo-client" {
     notifyOnNetworkStatusChange?: boolean;
   }
 
-  declare export type WatchQueryOptions = ModifiableWatchQueryOptions & {
+  declare export type WatchQueryOptions = {
+    ...$Exact<ModifiableWatchQueryOptions>,
     query: DocumentNode;
     metadata?: any;
     context?: any;
@@ -494,7 +495,7 @@ declare module "apollo-client" {
 
   declare interface GraphQLRequest {
     query: DocumentNode;
-    variables?: any;
+    variables?: { [key: string]: any };
     operationName?: string;
     context?: { [key: string]: any };
     extensions?: { [key: string]: any };
