@@ -64,7 +64,7 @@ declare module 'winston' {
   };
 
   declare export type $winstonFormatSubModule = {
-    ((info: Object) => Object): $winstonFormat,
+    ((info: Object) => Object): () => $winstonFormat,
     combine: (...args: Array<$winstonFormat>) => $winstonFormat,
     json: () => $winstonFormat,
     label: (config?: Object) => $winstonFormat,
