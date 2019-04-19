@@ -485,8 +485,8 @@ declare module '@react-navigation/core' {
       fallback?: $ElementType<
         $PropertyType<
           {|
+            ...{| params: { } |},
             ...$Exact<S>,
-            ...{| params: {| [ParamName]: void |} |},
           |},
           'params'
         >,
@@ -495,8 +495,8 @@ declare module '@react-navigation/core' {
     ) => $ElementType<
       $PropertyType<
         {|
+          ...{| params: { } |},
           ...$Exact<S>,
-          ...{| params: {| [ParamName]: void |} |},
         |},
         'params'
       >,
