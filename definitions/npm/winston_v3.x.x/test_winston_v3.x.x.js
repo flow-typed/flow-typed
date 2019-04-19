@@ -10,11 +10,15 @@ winston.nonExistantLevel("default logger nonExistantLevel message");
 
 // See example:
 // https://github.com/winstonjs/winston/blob/c868f0ccdc6ddc45e586c9808d99ebae8351113b/README.md#formats
+const customFormat = winston.format(info => info);
+
 const customPrintf = winston.format.printf(info => {
   return `${info.level}: ${info.message}`;
 });
+
 let logger = winston.createLogger({
   format: winston.format.combine(
+    customFormat(),
     winston.format.json(),
     winston.format.label({label: 'label'}),
     winston.format.colorize(),
@@ -75,6 +79,7 @@ logger = winston.loggers.add("categoryOneId", {
   level: "debug",
   transports: [new winston.transports.Console()]
 });
+const hasCategoryOneId = winston.loggers.has("categoryOneId");
 
 logger.debug("categoryOneId debug message");
 
@@ -83,8 +88,12 @@ const container = new winston.Container({
   level: "debug",
   transports: [new winston.transports.File({ filename: "new-container.log" })]
 });
+
 container.add("categoryTwoId");
+const hasCategoryTwoId = container.has("categoryTwoId");
+
 container.add("categoryThreeId");
+const hasCategoryThreeId = container.has("categoryThreeId");
 
 logger = container.get("categoryTwoId");
 
