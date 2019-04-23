@@ -1,4 +1,5 @@
 import winston from "winston";
+import type { $WinstonLogger, $WinstonLevels, $WinstonFormat, $WinstonConsoleTransport, $WinstonContainer } from "winston";
 
 winston.log({
   level: "info",
@@ -12,11 +13,11 @@ winston.nonExistantLevel("default logger nonExistantLevel message");
 // https://github.com/winstonjs/winston/blob/c868f0ccdc6ddc45e586c9808d99ebae8351113b/README.md#formats
 const customFormat = winston.format(info => info);
 
-const customPrintf = winston.format.printf(info => {
+const customPrintf: $WinstonFormat = winston.format.printf(info => {
   return `${info.level}: ${info.message}`;
 });
 
-let logger = winston.createLogger({
+let logger: $WinstonLogger<$WinstonLevels> = winston.createLogger({
   format: winston.format.combine(
     customFormat(),
     winston.format.json(),
@@ -46,7 +47,7 @@ logger.log({
 
 logger.clear();
 
-const consoleTransport = new winston.transports.Console();
+const consoleTransport: $WinstonConsoleTransport<$WinstonLevels> = new winston.transports.Console();
 
 consoleTransport.level = 'debug';
 consoleTransport.silent = true;
@@ -79,21 +80,21 @@ logger = winston.loggers.add("categoryOneId", {
   level: "debug",
   transports: [new winston.transports.Console()]
 });
-const hasCategoryOneId = winston.loggers.has("categoryOneId");
+const hasCategoryOneId: boolean = winston.loggers.has("categoryOneId");
 
 logger.debug("categoryOneId debug message");
 
-const container = new winston.Container({
+const container: $WinstonContainer<$WinstonLevels> = new winston.Container({
   format: winston.format.json(),
   level: "debug",
   transports: [new winston.transports.File({ filename: "new-container.log" })]
 });
 
 container.add("categoryTwoId");
-const hasCategoryTwoId = container.has("categoryTwoId");
+const hasCategoryTwoId: boolean = container.has("categoryTwoId");
 
 container.add("categoryThreeId");
-const hasCategoryThreeId = container.has("categoryThreeId");
+const hasCategoryThreeId: boolean = container.has("categoryThreeId");
 
 logger = container.get("categoryTwoId");
 
