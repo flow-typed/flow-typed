@@ -89,21 +89,21 @@ declare class $winstonContainer<T> {
 }
 
 declare module "winston" {
-  declare export type $WinstonLevels = $winstonLevels;
-  declare export type $WinstonNpmLogLevels = $winstonNpmLogLevels;
-  declare export type $WinstonInfo<T: $WinstonLevels > = $winstonInfo<T>;
-  declare export type $WinstonFormat = $winstonFormat;
-  declare export type $WinstonFileTransportConfig<T: $WinstonLevels> = $winstonFileTransportConfig<T>;
-  declare export type $WinstonTransport = typeof $winstonTransport;
-  declare export type $WinstonFileTransport<T: $WinstonLevels> = $winstonFileTransport<T>;
-  declare export type $WinstonConsoleTransportConfig<T: $WinstonLevels> = $winstonConsoleTransportConfig<T>;
-  declare export type $WinstonConsoleTransport<T: $WinstonLevels> = $winstonConsoleTransport<T>;
-  declare export type $WinstonLoggerConfig<T: $WinstonLevels> = $winstonLoggerConfig<T>;
-  declare export type $WinstonLogger<T: $WinstonLevels> = $winstonLogger<T>;
-  declare export type $WinstonConfigSubModule = $winstonConfigSubModule;
-  declare export type $WinstonFormatSubModule = $winstonFormatSubModule;
-  declare export type $WinstonDefaultLogger = $winstonDefaultLogger;
-  declare export type $WinstonContainer<T: $WinstonLevels> = $winstonContainer<T>;
+  declare export type Levels = $winstonLevels;
+  declare export type NpmLogLevels = $winstonNpmLogLevels;
+  declare export type Info<T: Levels > = $winstonInfo<T>;
+  declare export type Format = $winstonFormat;
+  declare export type FileTransportConfig<T: Levels> = $winstonFileTransportConfig<T>;
+  declare export type Transport = typeof $winstonTransport;
+  declare export type FileTransport<T: Levels> = $winstonFileTransport<T>;
+  declare export type ConsoleTransportConfig<T: Levels> = $winstonConsoleTransportConfig<T>;
+  declare export type ConsoleTransport<T: Levels> = $winstonConsoleTransport<T>;
+  declare export type LoggerConfig<T: Levels> = $winstonLoggerConfig<T>;
+  declare export type Logger<T: Levels> = $winstonLogger<T>;
+  declare export type ConfigSubModule = $winstonConfigSubModule;
+  declare export type FormatSubModule = $winstonFormatSubModule;
+  declare export type DefaultLogger = $winstonDefaultLogger;
+  declare export type Container<T: Levels> = $winstonContainer<T>;
 
   declare module.exports: $winstonDefaultLogger & {
     format: $winstonFormatSubModule,
