@@ -5275,7 +5275,7 @@ declare module "sequelize" {
    * @see  DefineOptions
    */
   declare export type DefineScopeOptions = {
-    [scopeName: string]: AnyFindOptions | Function
+    [scopeName: string]: AnyFindOptions | (...a: any) => mixed
   }
 
 
