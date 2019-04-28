@@ -9,9 +9,9 @@ type $npm$propTypes$ReactPropsCheckType = (
 declare module 'prop-types' {
   declare var array: React$PropType$Primitive<Array<any>>;
   declare var bool: React$PropType$Primitive<boolean>;
-  declare var func: React$PropType$Primitive<Function>;
+  declare var func: React$PropType$Primitive<(...a: Array<any>) => mixed>;
   declare var number: React$PropType$Primitive<number>;
-  declare var object: React$PropType$Primitive<Object>;
+  declare var object: React$PropType$Primitive<{ +[string]: mixed }>;
   declare var string: React$PropType$Primitive<string>;
   declare var symbol: React$PropType$Primitive<Symbol>;
   declare var any: React$PropType$Primitive<any>;
