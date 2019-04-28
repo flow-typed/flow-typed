@@ -11,7 +11,12 @@ import {
   withRouter,
   matchPath
 } from "react-router";
-import type { Location, Match, ContextRouter } from "react-router";
+import type {
+  Location,
+  Match,
+  ContextRouter,
+  RouterHistory
+} from "react-router";
 
 // Location
 var locationOK: Location = {
@@ -153,6 +158,18 @@ const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
       {name}
     </div>
   );
+};
+
+const IncorrectHistoryBlockUsage = (history: RouterHistory) => {
+  // Wrong arguments here
+  // $ExpectError
+  history.block(false);
+
+  // These are valid
+  history.block('Are you sure you want to leave this page?');
+  history.block((location, action) => {
+    return 'Are you sure you want to leave this page?';
+  });
 };
 
 // matchPath
