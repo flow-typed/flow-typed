@@ -41,7 +41,7 @@ describe('checkPropTypes()', () => {
     );
   });
 
-  it('rises an error when do not pass all required arguments', () => {
+  it('raises an error when do not pass all required arguments', () => {
     // $ExpectError missing arguments
     PropTypes.checkPropTypes({ foo: PropTypes.string }, { foo: 'foo' });
     // $ExpectError missing argument
@@ -52,7 +52,7 @@ describe('checkPropTypes()', () => {
     );
   });
 
-  it("rises an error when passed `values` object don't same props in `propTypes` object", () => {
+  it("raises an error when passed `values` object don't same props in `propTypes` object", () => {
     const propTypes = { bar: PropTypes.string };
     const values = { foo: 'foo' };
 
@@ -66,7 +66,7 @@ describe('checkPropTypes()', () => {
   });
 
   describe('fifth argument, getStack function ', () => {
-    it('rises an error when a getStack function do not return ?string', () => {
+    it('raises an error when a getStack function do not return ?string', () => {
       PropTypes.checkPropTypes(
         { foo: PropTypes.string },
         { foo: 'foo' },
