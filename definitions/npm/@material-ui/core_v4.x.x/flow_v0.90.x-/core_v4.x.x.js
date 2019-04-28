@@ -1,24 +1,24 @@
 declare module "@material-ui/core/colors" {
-  declare export var amber: $ElementType<$Exports<"@material-ui/core/colors/amber">, "default">;
-  declare export var blue: $ElementType<$Exports<"@material-ui/core/colors/blue">, "default">;
-  declare export var blueGrey: $ElementType<$Exports<"@material-ui/core/colors/blueGrey">, "default">;
-  declare export var brown: $ElementType<$Exports<"@material-ui/core/colors/brown">, "default">;
-  declare export var common: $ElementType<$Exports<"@material-ui/core/colors/common">, "default">;
-  declare export var cyan: $ElementType<$Exports<"@material-ui/core/colors/cyan">, "default">;
-  declare export var deepOrange: $ElementType<$Exports<"@material-ui/core/colors/deepOrange">, "default">;
-  declare export var deepPurple: $ElementType<$Exports<"@material-ui/core/colors/deepPurple">, "default">;
-  declare export var green: $ElementType<$Exports<"@material-ui/core/colors/green">, "default">;
-  declare export var grey: $ElementType<$Exports<"@material-ui/core/colors/grey">, "default">;
-  declare export var indigo: $ElementType<$Exports<"@material-ui/core/colors/indigo">, "default">;
-  declare export var lightBlue: $ElementType<$Exports<"@material-ui/core/colors/lightBlue">, "default">;
-  declare export var lightGreen: $ElementType<$Exports<"@material-ui/core/colors/lightGreen">, "default">;
-  declare export var lime: $ElementType<$Exports<"@material-ui/core/colors/lime">, "default">;
-  declare export var orange: $ElementType<$Exports<"@material-ui/core/colors/orange">, "default">;
-  declare export var pink: $ElementType<$Exports<"@material-ui/core/colors/pink">, "default">;
-  declare export var purple: $ElementType<$Exports<"@material-ui/core/colors/purple">, "default">;
-  declare export var red: $ElementType<$Exports<"@material-ui/core/colors/red">, "default">;
-  declare export var teal: $ElementType<$Exports<"@material-ui/core/colors/teal">, "default">;
-  declare export var yellow: $ElementType<$Exports<"@material-ui/core/colors/yellow">, "default">;
+  declare export { default as amber } from "@material-ui/core/colors/amber";
+  declare export { default as blue } from "@material-ui/core/colors/blue";
+  declare export { default as blueGrey } from "@material-ui/core/colors/blueGrey";
+  declare export { default as brown } from "@material-ui/core/colors/brown";
+  declare export { default as common } from "@material-ui/core/colors/common";
+  declare export { default as cyan } from "@material-ui/core/colors/cyan";
+  declare export { default as deepOrange } from "@material-ui/core/colors/deepOrange";
+  declare export { default as deepPurple } from "@material-ui/core/colors/deepPurple";
+  declare export { default as green } from "@material-ui/core/colors/green";
+  declare export { default as grey } from "@material-ui/core/colors/grey";
+  declare export { default as indigo } from "@material-ui/core/colors/indigo";
+  declare export { default as lightBlue } from "@material-ui/core/colors/lightBlue";
+  declare export { default as lightGreen } from "@material-ui/core/colors/lightGreen";
+  declare export { default as lime } from "@material-ui/core/colors/lime";
+  declare export { default as orange } from "@material-ui/core/colors/orange";
+  declare export { default as pink } from "@material-ui/core/colors/pink";
+  declare export { default as purple } from "@material-ui/core/colors/purple";
+  declare export { default as red } from "@material-ui/core/colors/red";
+  declare export { default as teal } from "@material-ui/core/colors/teal";
+  declare export { default as yellow } from "@material-ui/core/colors/yellow";
 }
 declare module "@material-ui/core/colors/amber" {
   import type { Color } from "@material-ui/core";
@@ -103,6 +103,47 @@ declare module "@material-ui/core/colors/teal" {
 declare module "@material-ui/core/colors/yellow" {
   import type { Color } from "@material-ui/core";
   declare export default Color;
+}
+
+declare module "@material-ui/core/utils" {
+  declare export * from "@material-ui/core/utils/helpers"
+  declare export * from "@material-ui/core/utils/reactHelpers"
+  declare export { default as requirePropFactory } from "@material-ui/core/utils/requirePropFactory";
+  declare export { default as ownerWindow } from "@material-ui/core/utils/ownerWindow";
+}
+
+declare module "@material-ui/core/utils/helpers" {
+  declare export type ChainedFunction = ((...args: Array<any>) => mixed) | void | null;
+
+  declare export function capitalize(str: string): string;
+
+  declare export function contains(obj: {}, pred: {}): boolean;
+
+  declare export function createChainedFunction(...args: Array<ChainedFunction>): (...args: any[]) => mixed;
+}
+
+declare module "@material-ui/core/utils/ownerWindow" {
+  // https://github.com/facebook/flow/blob/e812492d9f642c0345e70407e77d16768a55be81/lib/bom.js#L36
+  declare type $Window = any;
+
+  declare export default (node: Node, fallback?: $Window) => $Window;
+}
+declare module "@material-ui/core/utils/reactHelpers" {
+  declare export type NamedMuiComponent = React$ComponentType<any> & { muiName: string };
+
+  declare export type NamedMuiElement = {
+    type: NamedMuiComponent,
+    // TODO: need StandardProps
+    props: any,
+    key: string | number | null
+  };
+
+  declare export function isMuiElement(element: any, muiNames: Array<string>): boolean;
+
+  declare export function setRef<T>(ref: React$Ref<T>, value: T | null): void;
+}
+declare module "@material-ui/core/utils/requirePropFactory" {
+  declare export default (componentNameInError: string) => any;
 }
 
 declare module "@material-ui/core" {
