@@ -46,123 +46,123 @@ import yellowColor from "@material-ui/core/colors/yellow";
 
 describe("other colors", () => {
   it("should passes when used properly", () => {
-    (amberColor["50"]: string);
-    (amber["400"]: string);
-    (blueColor["100"]: string);
-    (blue["50"]: string);
-    (blueGreyColor["200"]: string);
-    (blueGrey["100"]: string);
-    (brownColor["300"]: string);
-    (brown["200"]: string);
-    (cyanColor["400"]: string);
-    (cyan["300"]: string);
-    (deepOrangeColor["500"]: string);
-    (deepOrange["400"]: string);
-    (deepPurpleColor["600"]: string);
-    (deepPurple["500"]: string);
-    (greenColor["700"]: string);
-    (green["600"]: string);
-    (greyColor["800"]: string);
-    (grey["700"]: string);
-    (indigoColor["900"]: string);
-    (indigo["800"]: string);
-    (lightBlueColor["A100"]: string);
-    (lightBlue["900"]: string);
-    (lightGreenColor["A200"]: string);
-    (lightGreen["A100"]: string);
-    (limeColor["A400"]: string);
-    (lime["A200"]: string);
-    (orangeColor["A700"]: string);
-    (orange["A400"]: string);
-    (pinkColor["50"]: string);
-    (pink["A700"]: string);
-    (purpleColor["100"]: string);
-    (purple["50"]: string);
-    (redColor["200"]: string);
-    (red["100"]: string);
-    (tealColor["300"]: string);
-    (teal["200"]: string);
-    (yellowColor["400"]: string);
-    (yellow["300"]: string);
+    (amberColor[50]: string);
+    (amber[400]: string);
+    (blueColor[100]: string);
+    (blue[50]: string);
+    (blueGreyColor[200]: string);
+    (blueGrey[100]: string);
+    (brownColor[300]: string);
+    (brown[200]: string);
+    (cyanColor[400]: string);
+    (cyan[300]: string);
+    (deepOrangeColor[500]: string);
+    (deepOrange[400]: string);
+    (deepPurpleColor[600]: string);
+    (deepPurple[500]: string);
+    (greenColor[700]: string);
+    (green[600]: string);
+    (greyColor[800]: string);
+    (grey[700]: string);
+    (indigoColor[900]: string);
+    (indigo[800]: string);
+    (lightBlueColor.A100: string);
+    (lightBlue[900]: string);
+    (lightGreenColor.A200: string);
+    (lightGreen.A100: string);
+    (limeColor.A400: string);
+    (lime.A200: string);
+    (orangeColor.A700: string);
+    (orange.A400: string);
+    (pinkColor[50]: string);
+    (pink.A700: string);
+    (purpleColor[100]: string);
+    (purple[50]: string);
+    (redColor[200]: string);
+    (red[100]: string);
+    (tealColor[300]: string);
+    (teal[200]: string);
+    (yellowColor[400]: string);
+    (yellow[300]: string);
   });
 
   it("should raises an error when compare with an invalid type", () => {
     // $ExpectError
-    (amberColor["50"]: number);
+    (amberColor[50]: number);
     // $ExpectError
-    (amber["400"]: number);
+    (amber[400]: number);
     // $ExpectError
-    (blueColor["100"]: number);
+    (blueColor[100]: number);
     // $ExpectError
-    (blue["50"]: number);
+    (blue[50]: number);
     // $ExpectError
-    (blueGreyColor["200"]: number);
+    (blueGreyColor[200]: number);
     // $ExpectError
-    (blueGrey["100"]: number);
+    (blueGrey[100]: number);
     // $ExpectError
-    (brownColor["300"]: number);
+    (brownColor[300]: number);
     // $ExpectError
-    (brown["200"]: number);
+    (brown[200]: number);
     // $ExpectError
-    (cyanColor["400"]: number);
+    (cyanColor[400]: number);
     // $ExpectError
-    (cyan["300"]: number);
+    (cyan[300]: number);
     // $ExpectError
-    (deepOrangeColor["500"]: number);
+    (deepOrangeColor[500]: number);
     // $ExpectError
-    (deepOrange["400"]: number);
+    (deepOrange[400]: number);
     // $ExpectError
-    (deepPurpleColor["600"]: number);
+    (deepPurpleColor[600]: number);
     // $ExpectError
-    (deepPurple["500"]: number);
+    (deepPurple[500]: number);
     // $ExpectError
-    (greenColor["700"]: number);
+    (greenColor[700]: number);
     // $ExpectError
-    (green["600"]: number);
+    (green[600]: number);
     // $ExpectError
-    (greyColor["800"]: number);
+    (greyColor[800]: number);
     // $ExpectError
-    (grey["700"]: number);
+    (grey[700]: number);
     // $ExpectError
-    (indigoColor["900"]: number);
+    (indigoColor[900]: number);
     // $ExpectError
-    (indigo["800"]: number);
+    (indigo[800]: number);
     // $ExpectError
-    (lightBlueColor["A100"]: number);
+    (lightBlueColor.A100: number);
     // $ExpectError
-    (lightBlue["900"]: number);
+    (lightBlue[900]: number);
     // $ExpectError
-    (lightGreenColor["A200"]: number);
+    (lightGreenColor.A200: number);
     // $ExpectError
-    (lightGreen["A100"]: number);
+    (lightGreen.A100: number);
     // $ExpectError
-    (limeColor["A400"]: number);
+    (limeColor.A400: number);
     // $ExpectError
-    (lime["A200"]: number);
+    (lime.A200: number);
     // $ExpectError
-    (orangeColor["A700"]: number);
+    (orangeColor.A700: number);
     // $ExpectError
-    (orange["A400"]: number);
+    (orange.A400: number);
     // $ExpectError
-    (pinkColor["50"]: number);
+    (pinkColor[50]: number);
     // $ExpectError
-    (pink["A700"]: number);
+    (pink.A700: number);
     // $ExpectError
-    (purpleColor["100"]: number);
+    (purpleColor[100]: number);
     // $ExpectError
-    (purple["50"]: number);
+    (purple[50]: number);
     // $ExpectError
-    (redColor["200"]: number);
+    (redColor[200]: number);
     // $ExpectError
-    (red["100"]: number);
+    (red[100]: number);
     // $ExpectError
-    (tealColor["300"]: number);
+    (tealColor[300]: number);
     // $ExpectError
-    (teal["200"]: number);
+    (teal[200]: number);
     // $ExpectError
-    (yellowColor["400"]: number);
+    (yellowColor[400]: number);
     // $ExpectError
-    (yellow["300"]: number);
+    (yellow[300]: number);
   });
 });
 
