@@ -118,7 +118,7 @@ declare module "react-intl" {
     data: $npm$ReactIntl$LocaleData | Array<$npm$ReactIntl$LocaleData>
   ): void;
   declare function defineMessages<
-    T: { [key: string]: $npm$ReactIntl$MessageDescriptor }
+    T: { [key: string]: $Exact<$npm$ReactIntl$MessageDescriptor> }
   >(
     messageDescriptors: T
   ): T;

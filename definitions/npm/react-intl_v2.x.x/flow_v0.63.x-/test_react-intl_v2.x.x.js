@@ -62,6 +62,17 @@ const msg1:MessageDescriptor = messageDescriptorMap.messagekey1;
 const msg2:MessageDescriptor = messageDescriptorMap.messagekey2_foo;
 const msg3:MessageDescriptor = messageDescriptorMap.messagekey3;
 
+// $ExpectError defineMessages accepts exact $npm$ReactIntl$MessageDescriptor
+const messageDescriptorMap5 = defineMessages({
+  message: {
+    id: "message5",
+    defaultMessage: "Hello",
+    values: {
+      value: 1
+    }
+  }
+});
+
 
 // Components
 <FormattedMessage
@@ -111,7 +122,7 @@ class TestComponent extends React.Component<{ name: string, intl: IntlShape }> {
     );
   }
 }
-    
+
 class TestComponentWithExactProps extends React.Component<{| name: string, intl: IntlShape, |}> {
   render() {
     const { formatMessage } = this.props.intl;
@@ -161,7 +172,7 @@ describe("react-intl", () => {
   describe("injectIntl", () => {
     describe('Component with single required prop "name"', () => {
       const Component = injectIntl(TestComponent);
-      
+
       it('works', () => {
         <Component name="test" />;
       });
@@ -184,7 +195,7 @@ describe("react-intl", () => {
 
     describe('withRef=true', () => {
       const Component = injectIntl(TestComponent, { withRef: true });
-      
+
       it('works', () => {
         <Component name="test" />;
       });
@@ -207,7 +218,7 @@ describe("react-intl", () => {
 
     describe('Component with exact props', () => {
       const Component = injectIntl(TestComponentWithExactProps);
-      
+
       it('works', () => {
         <Component name="test" />;
       });
@@ -230,7 +241,7 @@ describe("react-intl", () => {
 
     describe('Component with default props', () => {
       const Component = injectIntl(TestComponentWithDefaultProps);
-      
+
       it('works', () => {
         <Component name="test" />;
       });
@@ -251,7 +262,7 @@ describe("react-intl", () => {
 
     describe('Component with with maybe prop', () => {
       const Component = injectIntl(TestComponentWithMaybeProp);
-      
+
       it('works', () => {
         <Component name="test" />;
       });
@@ -283,7 +294,7 @@ describe("react-intl", () => {
           );
         }
       );
-      
+
       it('works', () => {
         <Component name="test" />;
       });
@@ -321,7 +332,7 @@ describe("react-intl", () => {
       };
 
       const Component = injectIntl(FuncComponent);
-      
+
       it('works', () => {
         <Component name="test" />;
       });
@@ -393,7 +404,7 @@ describe("react-intl", () => {
 
         <NumberComponent />;
       });
-      
+
       it('formatNumber', () => {
         const PluralComponent: React.ComponentType<{}> = injectIntl((props: { intl: IntlShape }) => {
           const { formatPlural } = props.intl;

@@ -62,7 +62,7 @@ declare module 'react-native-navigation' {
     | 'overFullScreen'
     | 'overCurrentContext'
     | 'currentContext'
-    | 'popOver'
+    | 'popover'
     | 'fullScreen'
     | 'none';
 
@@ -130,12 +130,15 @@ declare module 'react-native-navigation' {
     color?: Color,
     disabledColor?: Color,
     testID?: string,
+    // Android only
+    showAsAction?: 'always' | 'never' | 'withText' | 'ifRoom'
   |};
   declare export type OptionsTopBar = {|
     visible?: boolean,
     animate?: boolean,
     hideOnScroll?: boolean,
-    buttonColor?: Color,
+    leftButtonColor?: Color,
+    rightButtonColor?: Color,
     drawBehind?: boolean,
     testID?: string,
     title?: OptionsTopBarTitle,
@@ -214,6 +217,7 @@ declare module 'react-native-navigation' {
   |};
   declare export type OptionsOverlay = {|
     interceptTouchOutside?: boolean,
+    handleKeyboardEvents?: boolean,
   |};
   declare export type OptionsPreviewAction = {|
     id: string,

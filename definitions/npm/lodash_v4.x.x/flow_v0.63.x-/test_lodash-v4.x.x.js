@@ -25,6 +25,7 @@ import map from "lodash/map";
 import memoize from "lodash/memoize";
 import noop from "lodash/noop";
 import omitBy from "lodash/omitBy";
+import orderBy from 'lodash/orderBy';
 import pickBy from "lodash/pickBy";
 import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
@@ -32,6 +33,8 @@ import sortedIndexBy from "lodash/sortedIndexBy";
 import sortedLastIndexBy from "lodash/sortedLastIndexBy";
 import sortedUniq from "lodash/sortedUniq";
 import sortedUniqBy from "lodash/sortedUniqBy";
+import take from "lodash/take";
+import takeRight from "lodash/takeRight";
 import tap from "lodash/tap";
 import thru from "lodash/thru";
 import times from "lodash/times";
@@ -488,6 +491,13 @@ pairs = toPairs({ a: 12, b: 100 });
 pairs = toPairsIn({ a: 12, b: 100 });
 
 /**
+ * _.take / _.takeRight
+ */
+var taken: string[];
+taken = take((["abc", "123"]: $ReadOnlyArray<string>), 3);
+taken = takeRight((["abc", "123"]: $ReadOnlyArray<string>));
+
+/**
  * _.pickBy
  */
 (pickBy({ a: 2, b: 3, c: 4 }, num => num % 2): { [prop: string]: number });
@@ -502,3 +512,12 @@ pairs = toPairsIn({ a: 12, b: 100 });
 (omitBy(null, num => num % 2): {});
 (omitBy(undefined, num => num % 2): {});
 (omitBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number });
+
+/**
+ * _.orderBy
+ */
+(orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], ['a']): Array<{ a: number, b: number }>);
+(orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], [x => x.a]): Array<{ a: number, b: number }>);
+(orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, ['a']): Array<{ a: number, b: number }>);
+(orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, [x => x.a]): Array<{ a: number, b: number }>);
+

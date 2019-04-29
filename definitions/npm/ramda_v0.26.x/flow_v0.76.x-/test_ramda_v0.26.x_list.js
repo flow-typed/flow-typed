@@ -211,9 +211,41 @@ const str: string = "hello world";
   const groupedWith: Array<Array<number>> = _.groupWith(x => x > 1, ns);
   const groupedWith1: Array<Array<string>> = _.groupWith(x => x === "one")(ss);
 
-  const xOfXs: ?number = _.head(ns);
-  const xOfXs2: ?number = _.head(ns);
-  const xOfStr: string = _.head(str);
+  describe('head', () => {
+    describe('with array', () => {
+      it('should returns MaybeOf element type', () => {
+        const fn = (arr: number[]) => {
+          const xOfXs: ?number = _.head(arr);
+          //$ExpectError
+          const xOfXs: number = _.head(arr);
+        }
+      });
+      it('should works with refinement', () => {
+        const fn = (arr: number[]) => {
+          if (arr.length > 0) {
+            const xOfXs: number = _.head(arr);
+          }
+        }
+      });
+      it('should works with mixed-type arrays', () => {
+        const fn = (arr: Array<number|string>) => {
+          const xOfXs: ?(number|string) = _.head(arr);
+          //$ExpectError
+          const xOfXs: ?number = _.head(arr);
+          if (arr.length > 0) {
+            const xOfXs: number|string = _.head(arr);
+            //$ExpectError
+            const xOfXs: number = _.head(arr);
+          }
+        }
+      });
+    });
+    describe('with string', () => {
+      it('should works', () => {
+        const xOfStr: string = _.head(str);
+      });
+    })
+  });
 
   const transducer = _.compose(_.map(_.add(1)), _.take(2));
 
@@ -302,8 +334,32 @@ const str: string = "hello world";
     { [k: string]: string }
   ] = _.partition(_.contains("s"), { a: "sss", b: "ttt", foo: "bars" });
 
-  const pl: Array<number | string> = _.pluck("a")([{ a: "1" }, { a: 2 }]);
-  const pl1: Array<number> = _.pluck(0)([[1, 2], [3, 4]]);
+  describe('pluck', () => {
+    it('should works on array of objects as maps', () => {
+      const arr: Array<{ [string]: number | string }> = [{ a: "1" }, { a: 2 }];
+      const pl: Array<number | string> = _.pluck("a")(arr);
+      const p2: Array<number | string> = _.pluck("b")(arr);
+    });
+    it('should works on array of arrays', () => {
+      const pl: Array<number> = _.pluck(0)([[1, 2], [3, 4]]);
+    });
+    it('should works on array of objects', () => {
+      const arr: Array<{ key: number, other?: string }> = [{ key: 42 }, { key: 28, other: 'string' }];
+      const pl: number[] = _.pluck('key', arr);
+    });
+    it('should fails on non existing property', () => {
+      //$ExpectError
+      const pl = _.pluck('notExistingKey', [{ key: 42 }, { key: 28, other: 'string' }]);
+      //$ExpectError
+      const pl = _.pluck('other', [{ key: 42 }, { key: 28, other: 'string' }]);
+    });
+    it('should returns union type of selected property', () => {
+      const arr = [{ key: 42 }, { key: 'string', other: 'string' }];
+      const pl: Array<number | string> = _.pluck('key', arr);
+      //$ExpectError
+      const pl: number[] = _.pluck('key', arr);
+    });
+  });
 
   const rxs: Array<number> = _.range(1, 10);
 

@@ -103,7 +103,7 @@ declare module "react-intl" {
     componentName: string
   ): void;
   declare function addLocaleData(data: LocaleData | Array<LocaleData>): void;
-  declare function defineMessages<T: { [key: string]: MessageDescriptor }>(
+  declare function defineMessages<T: { [key: string]: $Exact<MessageDescriptor> }>(
     messageDescriptors: T
   ): T;
   declare function injectIntl(

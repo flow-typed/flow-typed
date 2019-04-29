@@ -5,7 +5,8 @@ import {
   Link,
   NavLink,
   matchPath,
-  type Match
+  type Match,
+  type RouterHistory
 } from "react-router-dom";
 
 // BrowserRouter
@@ -85,6 +86,18 @@ import {
 
 // $ExpectError
 <NavLink />;
+
+const IncorrectHistoryBlockUsage = (history: RouterHistory) => {
+  // Wrong arguments here
+  // $ExpectError
+  history.block(false);
+
+  // These are valid
+  history.block('Are you sure you want to leave this page?');
+  history.block((location, action) => {
+    return 'Are you sure you want to leave this page?';
+  });
+};
 
 // matchPath
 const match: null | Match = matchPath("/the/pathname", {
