@@ -586,6 +586,37 @@ declare module "antd" {
 
   declare export class TreeSelectTreeNode extends React$Component<{}> {}
 
+  declare export class Typography extends React$Component<{}> {
+    static Title: typeof Title;
+    static Text: typeof Text;
+    static Paragraph: typeof Paragraph;
+  }
+
+  // These props are shared by Paragraph, Title, and Text
+  declare type TypographySharedProps = {
+    code: boolean,
+    copyable: boolean | { text: string, onCopy: Function },
+    delete: boolean,
+    disabled: boolean,
+    editable: boolean | { editing: boolean, onStart: Function, onChange: (string) => void },
+    ellipsis: boolean,
+    mark: boolean,
+    underline: boolean,
+    onChange: (string) => void,
+    strong: boolean,
+    type: 'secondary' |' warning' | 'danger',
+  }
+
+  declare class Paragraph extends React$Component<TypographySharedProps> {}
+
+  declare export type TitleProps = {
+    level: 1 | 2 | 3 | 4,
+  } & TypographySharedProps
+
+  declare class Title extends React$Component<TitleProps> {}
+
+  declare class Text extends React$Component<TypographySharedProps> {}
+
   declare export class Upload extends React$Component<{}> {
     static Dragger: typeof UploadDragger;
   }
