@@ -156,8 +156,8 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   insert(val: Object | Object[]): this;
   del(): this;
   delete(): this;
-  update(column: string, value: any): this;
-  update(val: Object): this;
+  update(column: string, value: any, returning?: Array<string>): this;
+  update(val: Object, returning?: Array<string>): this;
   returning(columns: string[]): this;
   forUpdate(): this;
   forShare(): this;

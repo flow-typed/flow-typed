@@ -94,7 +94,6 @@ describe("pipe(...fn)", () => {
       (pipe(f2, unf1, unf2, unf3)(1, "2"): number);
       (pipe(f2, unf1, unf2)(1, "2"): boolean);
       (pipe(f2, unf1)(1, "2"): string);
-      (pipe(f2)(1, "2"): number);
     });
 
     it("raises an error when passed more arguments than it need", () => {
@@ -130,7 +129,6 @@ describe("pipe(...fn)", () => {
       (pipe(f3, unf1, unf2, unf3)(1, "2", true): number);
       (pipe(f3, unf1, unf2)(1, "2", true): boolean);
       (pipe(f3, unf1)(1, "2", true): string);
-      (pipe(f3)(1, "2", true): number);
     });
 
     it("raises an error when passed more arguments than it need", () => {
@@ -166,7 +164,6 @@ describe("pipe(...fn)", () => {
       (pipe(f4, unf1, unf2, unf3)(1, "2", true, 4): number);
       (pipe(f4, unf1, unf2)(1, "2", true, 4): boolean);
       (pipe(f4, unf1)(1, "2", true, 4): string);
-      (pipe(f4)(1, "2", true, 4): number);
     });
 
     it("raises an error when passed more arguments than it need", () => {
@@ -202,7 +199,6 @@ describe("pipe(...fn)", () => {
       (pipe(f5, unf1, unf2, unf3)(1, "2", true, 4, "5"): number);
       (pipe(f5, unf1, unf2)(1, "2", true, 4, "5"): boolean);
       (pipe(f5, unf1)(1, "2", true, 4, "5"): string);
-      (pipe(f5)(1, "2", true, 4, "5"): number);
     });
 
     it("raises an error when passed more arguments than it need", () => {
