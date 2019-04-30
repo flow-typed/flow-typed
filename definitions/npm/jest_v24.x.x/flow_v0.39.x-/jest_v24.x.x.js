@@ -124,8 +124,8 @@ type JestMatcherResult = {
 };
 
 type JestMatcher = (
-  actual: any,
-  expected: any
+  received: any,
+  ...actual: Array<any>
 ) => JestMatcherResult | Promise<JestMatcherResult>;
 
 type JestPromiseType = {
