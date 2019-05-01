@@ -198,6 +198,9 @@ declare module "mobile-detect" {
     version(key: VersionKey): number | null;
     versionStr(key: VersionKey): string | null;
     isPhoneSized(maxPhoneWidth?: number): boolean;
+    is(key: string): boolean;
+    match(pattern: string|RegExp): boolean;
+    mobileGrade(): string;
   }
 
   declare module.exports: Class<MobileDetect>;
