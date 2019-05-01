@@ -1,4 +1,4 @@
-import Archiver from "archiver";
+const Archiver = require("archiver");
 
 // $ExpectError (must pass in a format)
 Archiver();
