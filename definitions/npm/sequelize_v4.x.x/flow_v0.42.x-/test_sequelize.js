@@ -1,9 +1,9 @@
 // @flow
+const Sequelize = require("sequelize");
+const { Model, Transaction } = Sequelize;
 
-import Sequelize, {Model, Transaction} from "sequelize";
-import type {fn} from 'sequelize'
-import type { DefineAttributes } from "sequelize";
 import type {
+  DefineAttributes,
   HasOneGetOne,
   HasOneSetOne,
   HasOneCreateOne,

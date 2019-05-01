@@ -158,6 +158,7 @@ declare module 'react-native-navigation' {
     borderColor?: Color,
     borderHeight?: AndroidDensityNumber,
     elevation?: AndroidDensityNumber,
+    topMargin?: number,
   |};
   declare export type OptionsFab = {|
     id: string,
