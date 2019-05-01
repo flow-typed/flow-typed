@@ -133,6 +133,13 @@ describe('public class methods', () => {
   describe('should call presentFullscreenPlayer', () => {
     video.presentFullscreenPlayer();
   });
+
+  describe('should call restoreUserInterfaceForPictureInPictureStopCompleted', () => {
+    video.restoreUserInterfaceForPictureInPictureStopCompleted(true);
+
+    // $ExpectError: first argument must be boolean
+    video.restoreUserInterfaceForPictureInPictureStopCompleted('true');
+  });
 });
 
 describe('source prop', () => {
@@ -204,6 +211,7 @@ describe('boolean props', () => {
       fullscreen={false}
       fullscreenAutorotate={false}
       playWhenInactive={false}
+      pictureInPicture={false}
     />;
 
     <Video
@@ -219,6 +227,7 @@ describe('boolean props', () => {
       fullscreen
       fullscreenAutorotate
       playWhenInactive
+      pictureInPicture
     />;
   });
 });
@@ -500,8 +509,39 @@ describe('events', () => {
           (event.bitrate: number);
         }}
       />;
-      <Video source={0} onError={() => {}} />;
-      <Video source={0} onError={undefined} />;
+      <Video source={0} onBandwidthUpdate={() => {}} />;
+      <Video source={0} onBandwidthUpdate={undefined} />;
+    });
+  });
+
+  describe('onPictureInPictureStatusChanged', () => {
+    it('should passes when used properly', () => {
+      <Video
+        source={0}
+        onPictureInPictureStatusChanged={event => {
+          // $ExpectError - read-only event and exact
+          event.abc = 123;
+
+          (event.target: number);
+          (event.isActive: boolean);
+        }}
+      />;
+      <Video source={0} onPictureInPictureStatusChanged={() => {}} />;
+      <Video source={0} onPictureInPictureStatusChanged={undefined} />;
+    });
+  });
+
+  describe('onRestoreUserInterfaceForPictureInPictureStop', () => {
+    it('should passes when used properly', () => {
+      <Video
+        source={0}
+        onRestoreUserInterfaceForPictureInPictureStop={() => {}}
+      />;
+
+      <Video
+        source={0}
+        onRestoreUserInterfaceForPictureInPictureStop={undefined}
+      />;
     });
   });
 
