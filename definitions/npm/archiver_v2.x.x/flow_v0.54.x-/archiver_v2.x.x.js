@@ -1,9 +1,9 @@
 declare module "archiver" {
   import type { Stats } from "fs";
 
-  declare type Format = "zip" | "tar";
+  declare export type Format = "zip" | "tar";
 
-  declare type EntryData = {
+  declare export type EntryData = {
     name?: string,
     prefix?: string,
     stats?: Stats,
@@ -11,13 +11,13 @@ declare module "archiver" {
     mode?: number
   };
 
-  declare type EntryDataFunction = (entry: EntryData) => false | EntryData;
+  declare export type EntryDataFunction = (entry: EntryData) => false | EntryData;
 
-  declare type CoreOptions = {|
+  declare export type CoreOptions = {|
     statConcurrency?: number
   |};
 
-  declare type TransformOptions = {|
+  declare export type TransformOptions = {|
     allowHalfOpen?: boolean,
     readableObjectMode?: boolean,
     writeableObjectMode?: boolean,
@@ -27,7 +27,7 @@ declare module "archiver" {
     objectmode?: boolean
   |};
 
-  declare type ZipOptions = {|
+  declare export type ZipOptions = {|
     comment?: string,
     forceLocalTime?: boolean,
     forceZip64?: boolean,
@@ -35,12 +35,12 @@ declare module "archiver" {
     zlib?: zlib$options
   |};
 
-  declare type TarOptions = {|
+  declare export type TarOptions = {|
     gzip?: boolean,
     gzipOptions?: zlib$options
   |};
 
-  declare type GlobOptions = {|
+  declare export type GlobOptions = {|
     cwd?: string,
     root?: string,
     dot?: boolean,
@@ -71,7 +71,7 @@ declare module "archiver" {
     absolute?: boolean
   |};
 
-  declare type ArchiverOptions = {|
+  declare export type ArchiverOptions = {|
     ...CoreOptions,
     ...TransformOptions,
     ...ZipOptions,
@@ -90,17 +90,17 @@ declare module "archiver" {
     glob(pattern: string, options?: GlobOptions, data?: EntryData): this;
     finalize(): Promise<void>;
     setFormat(format: string): this;
-    setModule(module: Function): this;
+    setModule(module: (...a: any) => mixed): this;
     pointer(): number;
-    use(plugin: Function): this;
+    use(plugin: (...a: any) => mixed): this;
     symlink(filepath: string, target: string): this;
   }
 
-  declare type Vending = {
+  declare export type Vending = {
     (format: Format, options?: ArchiverOptions): Archiver,
     create(format: string, options?: ArchiverOptions): Archiver,
-    registerFormat(format: string, module: Function): void
+    registerFormat(format: string, module: (...a: any) => mixed): void
   };
 
-  declare export default Vending;
+  declare module.exports: Vending;
 }
