@@ -35,7 +35,8 @@ import {
   Tabs,
   Tag,
   Tooltip,
-  TreeSelect
+  TreeSelect,
+  Typography,
 } from "antd";
 
 describe("Alert", () => {
@@ -841,5 +842,23 @@ describe("TreeSelect", () => {
 describe("TreeSelect.TreeNode", () => {
   it("is a react component", () => {
     const treeNode = <TreeSelect.TreeNode />;
+  });
+});
+
+describe("Typography.Title", () => {
+  it("is a react component", () => {
+    const titleNode = <Typography.Title />;
+  });
+});
+
+describe("Typography.Text", () => {
+  it("is a react component", () => {
+    const textNode = <Typography.Text />;
+  });
+});
+
+describe("Typography.Paragraph", () => {
+  it("is a react component", () => {
+    const paragraphNode = <Typography.Paragraph />;
   });
 });
