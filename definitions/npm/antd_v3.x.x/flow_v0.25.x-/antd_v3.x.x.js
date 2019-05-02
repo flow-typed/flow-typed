@@ -594,23 +594,23 @@ declare module "antd" {
 
   // These props are shared by Paragraph, Title, and Text
   declare type TypographySharedProps = {
-    code: boolean,
-    copyable: boolean | { text: string, onCopy: () => void },
-    delete: boolean,
-    disabled: boolean,
-    editable: boolean | { editing: boolean, onStart: () => void, onChange: (string) => void },
-    ellipsis: boolean,
-    mark: boolean,
-    underline: boolean,
-    onChange: (string) => void,
-    strong: boolean,
-    type: 'secondary' |' warning' | 'danger',
+    code?: boolean,
+    copyable?: boolean | { text: string, onCopy: () => void },
+    delete?: boolean,
+    disabled?: boolean,
+    editable?: boolean | { editing: boolean, onStart: () => void, onChange: (string) => void },
+    ellipsis?: boolean,
+    mark?: boolean,
+    underline?: boolean,
+    onChange?: (string) => void,
+    strong?: boolean,
+    type?: 'secondary' |' warning' | 'danger',
   }
 
   declare class Paragraph extends React$Component<TypographySharedProps> {}
 
   declare export type TitleProps = {
-    level: 1 | 2 | 3 | 4,
+    level?: 1 | 2 | 3 | 4,
   } & TypographySharedProps
 
   declare class Title extends React$Component<TitleProps> {}
