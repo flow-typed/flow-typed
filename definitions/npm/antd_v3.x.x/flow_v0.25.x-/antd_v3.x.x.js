@@ -595,10 +595,10 @@ declare module "antd" {
   // These props are shared by Paragraph, Title, and Text
   declare type TypographySharedProps = {
     code: boolean,
-    copyable: boolean | { text: string, onCopy: Function },
+    copyable: boolean | { text: string, onCopy: () => void },
     delete: boolean,
     disabled: boolean,
-    editable: boolean | { editing: boolean, onStart: Function, onChange: (string) => void },
+    editable: boolean | { editing: boolean, onStart: () => void, onChange: (string) => void },
     ellipsis: boolean,
     mark: boolean,
     underline: boolean,
