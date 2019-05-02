@@ -182,6 +182,40 @@ describe('css generator', () => {
     `
   })
 
+  it('accepts styled-components in interpolations', () => {
+    const SComp1 = styled.div``
+
+    const SComp2 = styled.div`
+      ${SComp1} {
+        color: pink;
+      }
+    `
+  })
+
+  it('doen\'t accept any component in interpolations', () => {
+    class ClassComp extends React.Component<{}> {
+      render() {
+        return null
+      }
+    }
+
+    const FuncComp: React.ComponentType<*> = () => null
+
+    // $ExpectError - we don't know how to interpolate non-styled-components components
+    const SComp1 = styled.div`
+      ${ClassComp} {
+        color: pink;
+      }
+    `
+
+    // $ExpectError - we don't know how to interpolate non-styled-components components
+    const SComp2 = styled.div`
+      ${FuncComp} {
+        color: pink;
+      }
+    `
+  })
+
   it('doesn\'t accept objects', () => {
     const obj = {}
 
@@ -229,7 +263,7 @@ describe('refs', () => {
 
   // Commented this test, because it also generates an error on line 21
   // When the reference type is wrong.
-  // I think because Flow is trying to dome inference crazyness
+  // I think because Flow is trying to some inference crazyness
   // it('errors on wrong component type', () => {
   //   const ref1: {current: HTMLInputElement | null} = React.createRef()
   //   const Span = styled.span``

@@ -142,8 +142,13 @@ declare module 'styled-components' {
 
   declare type BuiltinElementType<ElementName: string> = $ElementType<BuiltinElementInstances, ElementName>
 
+  declare interface InterpolatableComponent {
+    +styledComponentId: string;
+  }
+
   declare export type Interpolation<P> =
                                        | ((executionContext: P) => Interpolation<any>)
+                                       | InterpolatableComponent
                                        | CSSRules
                                        | KeyFrames
                                        | string
@@ -233,7 +238,7 @@ declare module 'styled-components' {
 
   declare export function withTheme<Theme, Config: {}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance>
+  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & InterpolatableComponent
   declare interface StyledFactory<StyleProps, OwnProps, Theme, Instance> {
     [[call]]: TaggedTemplateLiteral<StyleProps & OwnProps & ThemeProps<Theme>, StyledComponent<StyleProps & OwnProps, Theme, Instance>>;
     +attrs: <A: {}>(A | (OwnProps & StyleProps) => A) => React$AbstractComponent<$Diff<OwnProps & StyleProps, A>, Instance>;
