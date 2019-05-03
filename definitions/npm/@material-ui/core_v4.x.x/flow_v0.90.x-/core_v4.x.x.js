@@ -1,5 +1,3 @@
-import { Mixins } from '@material-ui/core/styles/createMixins';
-
 declare module '@material-ui/core/@@dom' {
   declare export type HTMLDivAttributes = {};
 }
@@ -650,6 +648,40 @@ declare module '@material-ui/core/AppBar/AppBar' {
   declare export * from '@material-ui/core/AppBar'
 }
 
+declare module '@material-ui/core/Badge' {
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { StandardProps, PropTypes$Color } from '@material-ui/core';
+  import type { PaperProps } from '@material-ui/core/Paper';
+
+  declare export type BadgeClassKey =
+    | 'root'
+    | 'badge'
+    | 'colorPrimary'
+    | 'colorSecondary'
+    | 'invisible'
+    | 'dot';
+
+  declare export type BadgeProps = StandardProps<
+    PaperProps,
+    BadgeClassKey,
+    void
+  > & {
+    children: React$Node,
+    badgeContent?: React$Node,
+    color?: PropTypes$Color | 'error',
+    component?: React$ComponentType<HTMLDivAttributes>,
+    invisible?: boolean,
+    max?: number,
+    showZero?: boolean,
+    variant?: 'standard' | 'dot',
+  };
+
+  declare export default React$ComponentType<BadgeProps>;
+}
+declare module '@material-ui/core/Badge/Badge' {
+  declare export * from '@material-ui/core/Badge'
+}
+
 declare module '@material-ui/core' {
   import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
   // @TODO
@@ -688,4 +720,5 @@ declare module '@material-ui/core' {
 
   declare export { default as Paper } from '@material-ui/core/Paper';
   declare export { default as AppBar } from '@material-ui/core/AppBar';
+  declare export { default as Badge } from '@material-ui/core/Badge';
 }
