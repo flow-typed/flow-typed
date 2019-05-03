@@ -245,9 +245,9 @@ expect.extend({
 });
 
 expect.extend({
-  blah(actual, expected) {
+  blah(actual: string, one: string, two: string, three: string) {
     return Promise.resolve({
-      message: () => 'blah fail',
+      message: () => one + two + three,
       pass: false,
     });
   },
