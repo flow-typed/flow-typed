@@ -1,6 +1,271 @@
-import { HTMLDivAttributes } from '@material-ui/core/@@dom';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
+
+declare module '@material-ui/core/@@utils' {
+  declare export type $$Pick<NamesMap, Obj> = $Diff<Obj, $Diff<Obj, NamesMap>>;
+}
+
+// https://unpkg.com/csstype@2.6.4/index.js.flow
+declare module '@material-ui/core/@@csstype' {
+  declare type Globals = 'inherit' | 'initial' | 'revert' | 'unset';
+  declare type ContentPosition =
+    | 'center'
+    | 'end'
+    | 'flex-end'
+    | 'flex-start'
+    | 'start';
+  declare type SelfPosition =
+    | 'center'
+    | 'end'
+    | 'flex-end'
+    | 'flex-start'
+    | 'self-end'
+    | 'self-start'
+    | 'start';
+
+  declare type ContentDistribution =
+    | 'space-around'
+    | 'space-between'
+    | 'space-evenly'
+    | 'stretch';
+
+  declare type AlignContentProperty =
+    | Globals
+    | ContentDistribution
+    | ContentPosition
+    | 'baseline'
+    | 'normal'
+    | string;
+  declare type AlignItemsProperty =
+    | Globals
+    | SelfPosition
+    | 'baseline'
+    | 'normal'
+    | 'stretch'
+    | string;
+  declare type AlignSelfProperty =
+    | Globals
+    | SelfPosition
+    | 'auto'
+    | 'baseline'
+    | 'normal'
+    | 'stretch'
+    | string;
+
+  declare type Color = 'currentcolor' | string;
+  declare type LineStyle =
+    | 'dashed'
+    | 'dotted'
+    | 'double'
+    | 'groove'
+    | 'hidden'
+    | 'inset'
+    | 'none'
+    | 'outset'
+    | 'ridge'
+    | 'solid';
+  declare type LineWidth<TLength> = TLength | 'medium' | 'thick' | 'thin';
+  declare type BorderProperty<TLength> =
+    | Globals
+    | LineWidth<TLength>
+    | LineStyle
+    | Color
+    | string;
+
+  declare type BorderBottomProperty<TLength> =
+    | Globals
+    | LineWidth<TLength>
+    | LineStyle
+    | Color
+    | string;
+  declare type BorderColorProperty = Globals | Color | string;
+  declare type BorderLeftProperty<TLength> =
+    | Globals
+    | LineWidth<TLength>
+    | LineStyle
+    | Color
+    | string;
+
+  declare type BorderRadiusProperty<TLength> = Globals | TLength | string;
+  declare type BorderRightProperty<TLength> =
+    | Globals
+    | LineWidth<TLength>
+    | LineStyle
+    | Color
+    | string;
+
+  declare type BorderTopProperty<TLength> =
+    | Globals
+    | LineWidth<TLength>
+    | LineStyle
+    | Color
+    | string;
+  declare type BottomProperty<TLength> = Globals | TLength | 'auto' | string;
+  declare type BoxShadowProperty = Globals | 'none' | string;
+  declare type ColorProperty = Globals | Color;
+  declare type CursorProperty = Globals | string;
+
+  declare type DisplayInside =
+    | '-ms-flexbox'
+    | '-ms-grid'
+    | '-webkit-flex'
+    | 'flex'
+    | 'flow'
+    | 'flow-root'
+    | 'grid'
+    | 'ruby'
+    | 'table';
+  declare type DisplayOutside = 'block' | 'inline' | 'run-in';
+  declare type DisplayInternal =
+    | 'ruby-base'
+    | 'ruby-base-container'
+    | 'ruby-text'
+    | 'ruby-text-container'
+    | 'table-caption'
+    | 'table-cell'
+    | 'table-column'
+    | 'table-column-group'
+    | 'table-footer-group'
+    | 'table-header-group'
+    | 'table-row'
+    | 'table-row-group';
+  declare type DisplayProperty =
+    | Globals
+    | DisplayOutside
+    | DisplayInside
+    | DisplayInternal
+    | 'contents'
+    | 'list-item'
+    | 'none'
+    | string;
+  declare type FlexProperty<TLength> =
+    | Globals
+    | TLength
+    | 'auto'
+    | 'available'
+    | 'content'
+    | 'fit-content'
+    | 'max-content'
+    | 'min-content'
+    | 'none'
+    | string
+    | number;
+  declare type FlexDirectionProperty =
+    | Globals
+    | 'column'
+    | 'column-reverse'
+    | 'row'
+    | 'row-reverse';
+
+  declare type GlobalsNumber = Globals | number;
+  declare type FlexWrapProperty = Globals | 'nowrap' | 'wrap' | 'wrap-reverse';
+  declare type FontFamilyProperty = Globals | string;
+
+  declare type FontSizeProperty<TLength> =
+    | Globals
+    | TLength
+    | 'larger'
+    | 'smaller'
+    | string;
+  declare type FontWeightAbsolute = 'bold' | 'normal' | number;
+
+  declare type FontWeightProperty =
+    | Globals
+    | FontWeightAbsolute
+    | 'bolder'
+    | 'lighter';
+  declare type HeightProperty<TLength> = Globals | TLength | string;
+  declare type JustifyContentProperty =
+    | Globals
+    | ContentDistribution
+    | ContentPosition
+    | 'left'
+    | 'normal'
+    | 'right'
+    | string;
+  declare type LeftProperty<TLength> = Globals | TLength | 'auto' | string;
+
+  declare type MaxHeightProperty<TLength> = Globals | TLength | 'none' | string;
+  declare type WidthProperty<TLength> = Globals | TLength | string;
+  declare type TextAlignProperty =
+    | Globals
+    | 'center'
+    | 'end'
+    | 'justify'
+    | 'left'
+    | 'match-parent'
+    | 'right'
+    | 'start';
+
+  declare type ZIndexProperty = Globals | 'auto' | number;
+  declare type TopProperty<TLength> = Globals | TLength | 'auto' | string;
+
+  declare type RightProperty<TLength> = Globals | TLength | 'auto' | string;
+  declare type PositionProperty =
+    | Globals
+    | '-webkit-sticky'
+    | 'absolute'
+    | 'fixed'
+    | 'relative'
+    | 'static'
+    | 'sticky';
+  declare type MaxWidthProperty<TLength> = Globals | TLength | string;
+  declare type OverflowProperty =
+    | Globals
+    | 'auto'
+    | 'clip'
+    | 'hidden'
+    | 'scroll'
+    | 'visible';
+
+  declare type MinHeightProperty<TLength> = Globals | TLength | string;
+  declare type MinWidthProperty<TLength> = Globals | TLength | string;
+
+  declare export type Properties<TLength> = {
+    alignContent?: AlignContentProperty,
+    alignItems?: AlignItemsProperty,
+    alignSelf?: AlignSelfProperty,
+    border?: BorderProperty<TLength>,
+    borderBottom?: BorderBottomProperty<TLength>,
+    borderColor?: BorderColorProperty,
+    borderLeft?: BorderLeftProperty<TLength>,
+    borderRadius?: BorderRadiusProperty<TLength>,
+    borderRight?: BorderRightProperty<TLength>,
+    borderTop?: BorderTopProperty<TLength>,
+    bottom?: BottomProperty<TLength>,
+    boxShadow?: BoxShadowProperty | BoxShadowProperty[],
+    color?: ColorProperty | ColorProperty[],
+    cursor?: CursorProperty | CursorProperty[],
+    display?: DisplayProperty | DisplayProperty[],
+    flex?: FlexProperty<TLength> | FlexProperty<TLength>[],
+    flexDirection?: FlexDirectionProperty,
+    flexGrow?: GlobalsNumber,
+    flexShrink?: GlobalsNumber,
+    flexWrap?: FlexWrapProperty,
+    fontFamily?: FontFamilyProperty,
+    fontSize?: FontSizeProperty<TLength>,
+    fontWeight?: FontWeightProperty,
+    height?: HeightProperty<TLength> | HeightProperty<TLength>[],
+    justifyContent?: JustifyContentProperty | JustifyContentProperty[],
+    left?: LeftProperty<TLength> | LeftProperty<TLength>[],
+    maxHeight?: MaxHeightProperty<TLength>,
+    maxWidth?: MaxWidthProperty<TLength>,
+    minHeight?: MinHeightProperty<TLength>,
+    minWidth?: MinWidthProperty<TLength>,
+    overflowX?: OverflowProperty,
+    overflowY?: OverflowProperty,
+    position?: PositionProperty,
+    right?: RightProperty<TLength>,
+    textAlign?: TextAlignProperty | TextAlignProperty[],
+    top?: TopProperty<TLength> | TopProperty<TLength>[],
+    width?: WidthProperty<TLength> | WidthProperty<TLength>[],
+    zIndex?: ZIndexProperty | ZIndexProperty[],
+  };
+}
 
 declare module '@material-ui/core/@@dom' {
+  import type { Properties } from '@material-ui/core/@@csstype';
+
+  declare export type CSS$Properties = Properties<string | number>;
   declare export type HTMLDivAttributes = {};
 }
 
@@ -559,13 +824,15 @@ declare module '@material-ui/core/styles/shape' {
 declare module '@material-ui/core/styles/useTheme' {
 }
 declare module '@material-ui/core/styles/withStyles' {
+  import type { CSS$Properties } from '@material-ui/core/@@dom';
+
   declare export type ClassNameMap<Keys> = { [Keys]: string };
   declare export type StyledComponentProps<ClassesKeys> = {
     classes?: ClassNameMap<ClassesKeys>,
     innerRef?: React$Ref<any>,
   };
-  // TODO
-  declare type CSSProperties = {};
+
+  declare type CSSProperties = CSS$Properties;
 }
 declare module '@material-ui/core/styles/withTheme' {
 }
@@ -707,6 +974,88 @@ declare module '@material-ui/core/BottomNavigation/BottomNavigation' {
   declare export * from '@material-ui/core/BottomNavigation'
 }
 
+declare module '@material-ui/core/Box' {
+  import type { $$Pick } from '@material-ui/core/@@utils';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { CSSProperties } from '@material-ui/core/styles/withStyles';
+
+  declare type PropsByCSSProperties = {
+    ...$$Pick<
+      {
+        alignContent: any,
+        alignItems: any,
+        alignSelf: any,
+        border: any,
+        borderBottom: any,
+        borderColor: any,
+        borderLeft: any,
+        borderRadius: any,
+        borderRight: any,
+        borderTop: any,
+        bottom: any,
+        boxShadow: any,
+        color: any,
+        cursor: any,
+        display: any,
+        flex: any,
+        flexDirection: any,
+        flexGrow: any,
+        flexShrink: any,
+        flexWrap: any,
+        fontFamily: any,
+        fontSize: any,
+        fontWeight: any,
+        height: any,
+        justifyContent: any,
+        left: any,
+        maxHeight: any,
+        maxWidth: any,
+        minHeight: any,
+        minWidth: any,
+        overflowX: any,
+        overflowY: any,
+        position: any,
+        right: any,
+        textAlign: any,
+        top: any,
+        width: any,
+        zIndex: any,
+      },
+      CSSProperties
+    >,
+  };
+
+  declare export type BoxProps = PropsByCSSProperties &
+    HTMLDivAttributes & {
+      component?: React$ComponentType<any>,
+      // styled API
+      clone?: boolean,
+      // Box specific props
+      bgcolor?: string,
+      displayPrint?: string,
+      m?: string | number,
+      mb?: string | number,
+      ml?: string | number,
+      mr?: string | number,
+      mt?: string | number,
+      mx?: string | number,
+      my?: string | number,
+      order?: string | number,
+      p?: string | number,
+      pb?: string | number,
+      pl?: string | number,
+      pr?: string | number,
+      pt?: string | number,
+      px?: string | number,
+      py?: string | number,
+    };
+
+  declare export default React$ComponentType<BoxProps>;
+}
+declare module '@material-ui/core/Box/Box' {
+  declare export * from '@material-ui/core/Box'
+}
+
 declare module '@material-ui/core' {
   import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
   // @TODO
@@ -746,6 +1095,7 @@ declare module '@material-ui/core' {
   declare export { default as Paper } from '@material-ui/core/Paper';
   declare export { default as AppBar } from '@material-ui/core/AppBar';
   declare export { default as Badge } from '@material-ui/core/Badge';
+  declare export { default as Box } from '@material-ui/core/Box';
   declare export {
     default as BottomNavigation,
   } from '@material-ui/core/BottomNavigation';
