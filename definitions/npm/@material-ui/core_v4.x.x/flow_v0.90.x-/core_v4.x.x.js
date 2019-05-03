@@ -1,3 +1,5 @@
+import { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
 declare module '@material-ui/core/@@dom' {
   declare export type HTMLDivAttributes = {};
 }
@@ -651,7 +653,6 @@ declare module '@material-ui/core/AppBar/AppBar' {
 declare module '@material-ui/core/Badge' {
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   import type { StandardProps, PropTypes$Color } from '@material-ui/core';
-  import type { PaperProps } from '@material-ui/core/Paper';
 
   declare export type BadgeClassKey =
     | 'root'
@@ -662,7 +663,7 @@ declare module '@material-ui/core/Badge' {
     | 'dot';
 
   declare export type BadgeProps = StandardProps<
-    PaperProps,
+    HTMLDivAttributes,
     BadgeClassKey,
     void
   > & {
@@ -680,6 +681,30 @@ declare module '@material-ui/core/Badge' {
 }
 declare module '@material-ui/core/Badge/Badge' {
   declare export * from '@material-ui/core/Badge'
+}
+
+declare module '@material-ui/core/BottomNavigation' {
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { StandardProps } from '@material-ui/core';
+
+  declare export type BottomNavigationClassKey = 'root';
+
+  declare export type BottomNavigationProps = StandardProps<
+    HTMLDivAttributes,
+    BottomNavigationClassKey,
+    { onChange: any }
+  > & {
+    component?: React$ComponentType<HTMLDivAttributes>,
+    children: React$Node,
+    onChange?: (event: {}, value: any) => mixed,
+    showLabels?: boolean,
+    value?: any,
+  };
+
+  declare export default React$ComponentType<BottomNavigationProps>;
+}
+declare module '@material-ui/core/BottomNavigation/BottomNavigation' {
+  declare export * from '@material-ui/core/BottomNavigation'
 }
 
 declare module '@material-ui/core' {
@@ -721,4 +746,7 @@ declare module '@material-ui/core' {
   declare export { default as Paper } from '@material-ui/core/Paper';
   declare export { default as AppBar } from '@material-ui/core/AppBar';
   declare export { default as Badge } from '@material-ui/core/Badge';
+  declare export {
+    default as BottomNavigation,
+  } from '@material-ui/core/BottomNavigation';
 }

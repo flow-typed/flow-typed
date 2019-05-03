@@ -1,107 +1,96 @@
 //@flow
 import { it, describe } from 'flow-typed-test';
 import * as React from 'react';
-import { Badge } from '@material-ui/core';
+import { BottomNavigation } from '@material-ui/core';
 
 describe('imports', () => {
   it('should passes when used properly', () => {
-    const Badge1 = require('@material-ui/core/Badge').default;
-    const Badge0 = require('@material-ui/core/Badge/Badge').default;
+    const BottomNavigation1 = require('@material-ui/core/BottomNavigation')
+      .default;
+    const BottomNavigation0 = require('@material-ui/core/BottomNavigation/BottomNavigation')
+      .default;
 
-    <Badge1>
+    <BottomNavigation1>
       <i />
-    </Badge1>;
-    <Badge0>
+    </BottomNavigation1>;
+    <BottomNavigation0>
       <i />
-    </Badge0>;
+    </BottomNavigation0>;
   });
 });
 
 describe('classes', () => {
   it('should passes when used properly', () => {
-    <Badge
+    <BottomNavigation
       classes={{
         root: 'srt',
-        badge: 'srt',
-        colorPrimary: 'srt',
-        colorSecondary: 'srt',
-        invisible: 'srt',
-        dot: 'srt',
       }}
     >
       <i />
-    </Badge>;
+    </BottomNavigation>;
   });
 
   it('should raises an error when pass not implemented prop to the classes property', () => {
-    <Badge
+    <BottomNavigation
       // $ExpectError: the `classes` enum does not contain `murAmur` prop
       classes={{
         murAmur: 'custom-class-name',
       }}
     >
       <i />
-    </Badge>;
+    </BottomNavigation>;
   });
 
   it('should raises an error when pass incompatible with string value', () => {
-    <Badge
+    <BottomNavigation
       classes={{
         // $ExpectError: need string value
         root: true,
       }}
     >
       <i />
-    </Badge>;
+    </BottomNavigation>;
   });
 });
 
 describe('own props', () => {
   it('should passes when used properly', () => {
-    <Badge
-      color={'error'}
-      invisible={false}
-      max={9}
-      showZero={false}
-      variant={'dot'}
-      position={'sticky'}
-      badgeContent={<span />}
+    <BottomNavigation
+      showLabels={false}
+      value={123}
+      onChange={async (event: {}, value) => {}}
     >
       <i />
-    </Badge>;
+    </BottomNavigation>;
 
-    <Badge
-      color={undefined}
-      invisible={undefined}
-      max={undefined}
-      showZero={undefined}
-      variant={undefined}
-      position={undefined}
-      badgeContent={undefined}
+    <BottomNavigation
+      showLabels={undefined}
+      value={undefined}
+      onChange={undefined}
     >
       <i />
-    </Badge>;
+    </BottomNavigation>;
   });
 
   it('should raises an error when pass incompatible types', () => {
     // $ExpectError: children is required
-    <Badge />;
+    <BottomNavigation />;
 
-    // $ExpectError: invalid color
-    <Badge color={'colorDominator'}>
+    // $ExpectError: need function
+    <BottomNavigation onChange={'str'}>
       <i />
-    </Badge>;
-    // $ExpectError invalid variant type
-    <Badge variant={'hard'}>
+    </BottomNavigation>;
+    // $ExpectError
+    <BottomNavigation showLabels={'need boolean'}>
       <i />
-    </Badge>;
+    </BottomNavigation>;
   });
 });
 
 describe('dom props', () => {
   it('should passes when pass some DOM props', () => {
-    <Badge aria-hidden="true">
+    <BottomNavigation aria-hidden="true">
       <i />
-    </Badge>;
+    </BottomNavigation>;
   });
 });
