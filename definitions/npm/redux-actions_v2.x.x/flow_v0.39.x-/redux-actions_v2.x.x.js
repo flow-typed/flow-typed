@@ -100,7 +100,7 @@ declare module "redux-actions" {
       | ReducerMap<State, Action>
   };
 
-  declare function handleAction<State, Action: {type: mixed}>(
+  declare function handleAction<State, Action: { type: * }>(
     type: $ElementType<Action, 'type'>,
     reducer: ReducerDefinition<State, Action>,
     defaultState: State,
