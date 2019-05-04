@@ -2,6 +2,14 @@ declare module '@material-ui/core/@@utils' {
   declare export type $$Pick<NamesMap, Obj> = $Diff<Obj, $Diff<Obj, NamesMap>>;
 }
 
+declare module '@material-ui/core/@@dom' {
+  import type { Properties } from '@material-ui/core/@@csstype';
+
+  declare export type CSS$Properties = Properties<string | number>;
+  declare export type HTMLDivAttributes = {};
+  declare export type HTMLElementAttributes = {};
+}
+
 // https://unpkg.com/csstype@2.6.4/index.js.flow
 declare module '@material-ui/core/@@csstype' {
   declare type Globals = 'inherit' | 'initial' | 'revert' | 'unset';
@@ -258,13 +266,6 @@ declare module '@material-ui/core/@@csstype' {
     width?: WidthProperty<TLength> | WidthProperty<TLength>[],
     zIndex?: ZIndexProperty | ZIndexProperty[],
   };
-}
-
-declare module '@material-ui/core/@@dom' {
-  import type { Properties } from '@material-ui/core/@@csstype';
-
-  declare export type CSS$Properties = Properties<string | number>;
-  declare export type HTMLDivAttributes = {};
 }
 
 declare module '@material-ui/core/colors' {
@@ -1054,6 +1055,29 @@ declare module '@material-ui/core/Box/Box' {
   declare export * from '@material-ui/core/Box'
 }
 
+declare module '@material-ui/core/Breadcrumbs' {
+  import type { HTMLElementAttributes } from '@material-ui/core/@@dom';
+  import type { StandardProps } from '@material-ui/core';
+
+  declare export type BreadcrumbsClassKey = 'root' | 'ol' | 'separator';
+
+  declare export type BreadcrumbsProps = StandardProps<
+    HTMLElementAttributes,
+    BreadcrumbsClassKey,
+    void
+  > & {
+    itemsAfterCollapse?: boolean,
+    itemsBeforeCollapse?: boolean,
+    maxItems?: number,
+    separator?: React$Node,
+  };
+
+  declare export default React$ComponentType<BreadcrumbsProps>;
+}
+declare module '@material-ui/core/Breadcrumbs/Breadcrumbs' {
+  declare export * from '@material-ui/core/Breadcrumbs'
+}
+
 declare module '@material-ui/core' {
   import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
   // @TODO
@@ -1094,6 +1118,9 @@ declare module '@material-ui/core' {
   declare export { default as AppBar } from '@material-ui/core/AppBar';
   declare export { default as Badge } from '@material-ui/core/Badge';
   declare export { default as Box } from '@material-ui/core/Box';
+  declare export {
+    default as Breadcrumbs,
+  } from '@material-ui/core/Breadcrumbs';
   declare export {
     default as BottomNavigation,
   } from '@material-ui/core/BottomNavigation';
