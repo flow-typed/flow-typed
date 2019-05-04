@@ -1078,6 +1078,26 @@ declare module '@material-ui/core/Breadcrumbs/Breadcrumbs' {
   declare export * from '@material-ui/core/Breadcrumbs'
 }
 
+declare module '@material-ui/core/Card' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { PaperProps } from '@material-ui/core/Paper';
+
+  declare export type CardClassKey = 'root';
+
+  declare export type CardProps = StandardProps<
+    PaperProps,
+    CardClassKey,
+    void
+  > & {
+    raised?: boolean,
+  };
+
+  declare export default React$ComponentType<CardProps>;
+}
+declare module '@material-ui/core/Card/Card' {
+  declare export * from '@material-ui/core/Card'
+}
+
 declare module '@material-ui/core' {
   import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
   // @TODO
@@ -1118,6 +1138,7 @@ declare module '@material-ui/core' {
   declare export { default as AppBar } from '@material-ui/core/AppBar';
   declare export { default as Badge } from '@material-ui/core/Badge';
   declare export { default as Box } from '@material-ui/core/Box';
+  declare export { default as Card } from '@material-ui/core/Card';
   declare export {
     default as Breadcrumbs,
   } from '@material-ui/core/Breadcrumbs';
