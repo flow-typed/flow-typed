@@ -246,6 +246,7 @@ declare module "redis" {
       increment: number,
       callback: (error: ?Error, result: ?string) => void
     ) => void;
+    unref: () => void;
   }
 
   declare class RedisClientPromisified extends RedisClient {

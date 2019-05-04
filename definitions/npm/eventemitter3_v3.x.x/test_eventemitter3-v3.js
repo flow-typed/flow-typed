@@ -6,6 +6,7 @@ class A extends EventEmitter { }
 
 const a: EventEmitter = new A();
 
+a.on('test', async () => {});
 a.on('test', () => {});
 // $ExpectError
 a.on('test');

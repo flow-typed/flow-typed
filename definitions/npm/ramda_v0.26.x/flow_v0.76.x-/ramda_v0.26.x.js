@@ -1301,8 +1301,8 @@ declare module ramda {
       val: T,
       ...args: Array<void>
     ): (src: S) => ({ [k: string]: T } & S),
-    <T, S: {}, K: $Keys<S>> (key: K, val: T, src: S):      ({ [k: string]: T } & S),
-    <T, S: {}>                        (key: string, val: T, src: S): ({ [k: string]: T, ...$Exact<S> })
+    <T, S: Object, K: $Keys<S>> (key: K, val: T, src: S):      ({ [k: string]: T } & S),
+    <T, S: Object>              (key: string, val: T, src: S): ({ [k: string]: T, ...$Exact<S> })
   };
 
   declare function assocPath<T: string | number, S, V>(

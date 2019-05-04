@@ -173,6 +173,7 @@ declare module 'react-native-video' {
   declare export type VideoProps = $ReadOnly<{
     source: VideoSource, // Required prop
 
+    controls?: boolean,
     audioOnly?: boolean,
     id?: string, // for Web platform
     maxBitRate?: number,
@@ -192,7 +193,6 @@ declare module 'react-native-video' {
 
     // IOS only
     allowsExternalPlayback?: boolean,
-    controls?: boolean, // and Web platform
     filter?: $Values<FilterTypes>,
     filterEnabled?: boolean,
     fullscreen?: boolean,
@@ -200,8 +200,14 @@ declare module 'react-native-video' {
     fullscreenOrientation?: OrientationType,
     ignoreSilentSwitch?: SilentSwitchType,
     playWhenInactive?: boolean,
+    pictureInPicture?: boolean,
+    onPictureInPictureStatusChanged?: (
+      VideoEvent<{ isActive: boolean }>
+    ) => void,
+    onRestoreUserInterfaceForPictureInPictureStop?: () => void,
 
     // Android only
+    minLoadRetryCount?: number,
     bufferConfig?: BufferConfigDescriptor,
     hideShutterView?: boolean,
     reportBandwidth?: number,
@@ -252,5 +258,8 @@ declare module 'react-native-video' {
     // IOS only
     save(): Promise<{ uri: string }>;
     seek(seconds: number, toleranceIOS: number): void;
+    restoreUserInterfaceForPictureInPictureStopCompleted(
+      restored: boolean
+    ): void;
   }
 }
