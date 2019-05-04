@@ -1172,6 +1172,20 @@ declare module '@material-ui/core/CircularProgress/CircularProgress' {
   declare export * from '@material-ui/core/CircularProgress'
 }
 
+declare module '@material-ui/core/ClickAwayListener' {
+  declare export type ClickAwayListenerProps = {|
+    children: React$Node,
+    onClickAway: (event: {} /*SyntheticMouseEvent<Document>*/) => mixed,
+    mouseEvent?: 'onClick' | 'onMouseDown' | 'onMouseUp' | false,
+    touchEvent?: 'onTouchStart' | 'onTouchEnd' | false,
+  |};
+
+  declare export default React$ComponentType<ClickAwayListenerProps>;
+}
+declare module '@material-ui/core/ClickAwayListener/ClickAwayListener' {
+  declare export * from '@material-ui/core/ClickAwayListener'
+}
+
 declare module '@material-ui/core' {
   import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
   // @TODO
@@ -1213,6 +1227,10 @@ declare module '@material-ui/core' {
   declare export { default as Badge } from '@material-ui/core/Badge';
   declare export { default as Box } from '@material-ui/core/Box';
   declare export { default as Card } from '@material-ui/core/Card';
+  declare export {
+    default as ClickAwayListener,
+  } from '@material-ui/core/ClickAwayListener';
+
   declare export {
     default as CircularProgress,
   } from '@material-ui/core/CircularProgress';
