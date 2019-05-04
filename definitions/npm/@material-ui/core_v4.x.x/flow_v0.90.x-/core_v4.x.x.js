@@ -1,5 +1,3 @@
-import { CSSProperties } from '@material-ui/core/styles/withStyles';
-
 declare module '@material-ui/core/@@utils' {
   declare export type $$Pick<NamesMap, Obj> = $Diff<Obj, $Diff<Obj, NamesMap>>;
 }
