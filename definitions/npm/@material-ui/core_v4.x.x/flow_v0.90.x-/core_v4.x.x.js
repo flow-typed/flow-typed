@@ -1098,6 +1098,26 @@ declare module '@material-ui/core/Card/Card' {
   declare export * from '@material-ui/core/Card'
 }
 
+declare module '@material-ui/core/CardActions' {
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { StandardProps } from '@material-ui/core';
+
+  declare export type CardActionsClassKey = 'root' | 'spacing';
+
+  declare export type CardActionsProps = StandardProps<
+    HTMLDivAttributes,
+    CardActionsClassKey,
+    void
+  > & {
+    disableSpacing?: boolean,
+  };
+
+  declare export default React$ComponentType<CardActionsProps>;
+}
+declare module '@material-ui/core/CardActions/CardActions' {
+  declare export * from '@material-ui/core/CardActions'
+}
+
 declare module '@material-ui/core' {
   import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
   // @TODO
@@ -1139,6 +1159,9 @@ declare module '@material-ui/core' {
   declare export { default as Badge } from '@material-ui/core/Badge';
   declare export { default as Box } from '@material-ui/core/Box';
   declare export { default as Card } from '@material-ui/core/Card';
+  declare export {
+    default as CardActions,
+  } from '@material-ui/core/CardActions';
   declare export {
     default as Breadcrumbs,
   } from '@material-ui/core/Breadcrumbs';
