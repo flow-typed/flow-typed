@@ -1294,12 +1294,30 @@ declare module '@material-ui/core/ExpansionPanelActions' {
     HTMLDivAttributes,
     ExpansionPanelActionsClassKey,
     void
-  >;
+    >;
 
   declare export default React$ComponentType<ExpansionPanelActionsProps>;
 }
 declare module '@material-ui/core/ExpansionPanelActions/ExpansionPanelActions' {
-  declare export * from '@material-ui/core/ExpansionPanelActions'
+    declare export * from '@material-ui/core/ExpansionPanelActions'
+}
+
+declare module '@material-ui/core/ExpansionPanelDetails' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type ExpansionPanelDetailsClassKey = 'root' | 'spacing';
+
+  declare export type ExpansionPanelDetailsProps = StandardProps<
+    HTMLDivAttributes,
+    ExpansionPanelDetailsClassKey,
+    void
+    >;
+
+  declare export default React$ComponentType<ExpansionPanelDetailsProps>;
+}
+declare module '@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails' {
+    declare export * from '@material-ui/core/ExpansionPanelDetails'
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1348,6 +1366,9 @@ declare module '@material-ui/core' {
   declare export { default as Card } from '@material-ui/core/Card';
   declare export { default as Container } from '@material-ui/core/Container';
 
+    declare export {
+    default as ExpansionPanelDetails,
+  } from '@material-ui/core/ExpansionPanelDetails';
   declare export {
     default as ExpansionPanelActions,
   } from '@material-ui/core/ExpansionPanelActions';
