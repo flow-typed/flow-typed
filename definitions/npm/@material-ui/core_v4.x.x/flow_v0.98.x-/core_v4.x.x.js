@@ -1,17 +1,26 @@
+/*
+ * Created and maintained: https://github.com/retyui
+ * Some times you can find strange module declaration
+ * that looks like `<path_scope>/@@<name>`
+ *  This is a temporary abstraction for importing external dependencies.
+ */
+
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
+
 declare module '@material-ui/core/@@utils' {
+  // Utilities used in this definition:
+
+  // Currently the flow.js do not support `Pick` operator
   declare export type $$Pick<NamesMap, Obj> = $Diff<Obj, $Diff<Obj, NamesMap>>;
 }
-
-declare module '@material-ui/core/@@dom' {
-  import type { Properties } from '@material-ui/core/@@csstype';
-
-  declare export type CSS$Properties = Properties<string | number>;
-  declare export type HTMLDivAttributes = {};
-  declare export type HTMLElementAttributes = {};
-}
-
-// https://unpkg.com/csstype@2.6.4/index.js.flow
 declare module '@material-ui/core/@@csstype' {
+  // I don't use `CSSStyleDeclaration` https://github.com/facebook/flow/blob/fa89aadb55ae9bb37c71e14d7274935903d501ce/lib/cssom.js#L71
+  // Because all properties are described as `string`
+  // But `JSS`(material-ui based on this) also support number: `{width: 10}`
+
+  // Copied from https://unpkg.com/csstype@2.6.4/index.js.flow
+  // I copied not all the properties but only took those that are needed by the <Box/> component
+
   declare type Globals = 'inherit' | 'initial' | 'revert' | 'unset';
   declare type ContentPosition =
     | 'center'
@@ -267,6 +276,120 @@ declare module '@material-ui/core/@@csstype' {
     zIndex?: ZIndexProperty | ZIndexProperty[],
   };
 }
+declare module '@material-ui/core/@@dom' {
+  import type { Properties } from '@material-ui/core/@@csstype';
+
+  // Material-UI use `JSS` witch support number and string for values, example: `{width: 10, height: '100%'}`
+  declare export type CSS$Properties = Properties<string | number>;
+
+  // At the moment there is no possibility to withdraw the React types for Html Element.
+  // ... in the future will be replaced with exact types for a specific element (div, li, inout, ...)
+  declare export type HTMLDivAttributes = {};
+  declare export type HTMLElementAttributes = {};
+}
+declare module '@material-ui/core/transitions/transition/@@react-transition-group/Transition' {
+  // The version `2.9.1` based on this: //
+  // https://github.com/mui-org/material-ui/blob/d0c7b070156b30908cee2b9c657469a3d6f406b3/packages/material-ui/package.json#L44
+
+  // Types copied from: https://unpkg.com/@types/react-transition-group@2.9.1/Transition.d.ts
+
+  declare export type EndHandler = (
+    node: HTMLElement,
+    done: () => void
+  ) => mixed;
+  declare export type EnterHandler = (
+    node: HTMLElement,
+    isAppearing: boolean
+  ) => mixed;
+  declare export type ExitHandler = (node: HTMLElement) => mixed;
+
+  declare export var UNMOUNTED: 'unmounted';
+  declare export var EXITED: 'exited';
+  declare export var ENTERING: 'entering';
+  declare export var ENTERED: 'entered';
+  declare export var EXITING: 'exiting';
+
+  declare export type TransitionActions = {
+    appear?: boolean,
+    enter?: boolean,
+    exit?: boolean,
+  };
+
+  declare export type TransitionStatus =
+    | typeof ENTERING
+    | typeof ENTERED
+    | typeof EXITING
+    | typeof EXITED
+    | typeof UNMOUNTED;
+
+  declare export type TransitionChildren =
+    | React$Node
+    | ((status: TransitionStatus) => React$Node);
+
+  declare export type TransitionProps = TransitionActions & {
+    timeout: number | {| enter?: number, exit?: number |},
+    children?: TransitionChildren,
+    in?: boolean,
+    mountOnEnter?: boolean,
+    unmountOnExit?: boolean,
+    addEndListener?: EndHandler,
+    onEnter?: EnterHandler,
+    onEntering?: EnterHandler,
+    onEntered?: EnterHandler,
+    onExit?: ExitHandler,
+    onExiting?: ExitHandler,
+    onExited?: ExitHandler,
+  };
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+declare module '@material-ui/core/transitions' {
+  import type {
+    TransitionStatus as BaseTransitionStatus,
+    TransitionProps as BaseTransitionProps,
+    TransitionActions,
+  } from '@material-ui/core/transitions/transition/@@react-transition-group/Transition';
+  import type { CSSProperties } from '@material-ui/core/styles/withStyles';
+  import type { $$Pick } from '@material-ui/core/@@utils';
+
+  declare type _TransitionHandler = {
+    onEnter: any,
+    onEntering: any,
+    onEntered: any,
+    onExit: any,
+    onExiting: any,
+    onExited: any,
+  };
+
+  declare export type TransitionHandlerKeys = $Keys<_TransitionHandler>;
+  declare export type TransitionHandlerProps = $$Pick<
+    _TransitionHandler,
+    BaseTransitionProps
+  >;
+
+  declare type _Transition = {
+    in: any,
+    mountOnEnter: any,
+    unmountOnExit: any,
+    timeout: any,
+    addEndListener: any,
+    ...$Exact<_TransitionHandler>,
+  };
+
+  declare export type TransitionKeys = $Keys<_Transition>;
+  declare type $TransitionProps = $$Pick<_Transition, BaseTransitionProps>;
+
+  declare export type TransitionStatus = BaseTransitionStatus;
+  declare export type TransitionProps = TransitionActions & {
+    ...$TransitionProps,
+  } & {
+    style?: CSSProperties,
+  };
+}
+declare module '@material-ui/core/transitions/transition' {
+  declare export * from '@material-ui/core/transitions'
+}
 
 declare module '@material-ui/core/colors' {
   declare export { default as amber } from '@material-ui/core/colors/amber';
@@ -395,7 +518,6 @@ declare module '@material-ui/core/utils' {
     default as ownerWindow,
   } from '@material-ui/core/utils/ownerWindow';
 }
-
 declare module '@material-ui/core/utils/helpers' {
   declare export type ChainedFunction =
     | ((...args: Array<any>) => mixed)
@@ -408,9 +530,8 @@ declare module '@material-ui/core/utils/helpers' {
 
   declare export function createChainedFunction(
     ...args: Array<ChainedFunction>
-  ): (...args: any[]) => mixed;
+  ): (...args: Array<any>) => mixed;
 }
-
 declare module '@material-ui/core/utils/ownerWindow' {
   // https://github.com/facebook/flow/blob/e812492d9f642c0345e70407e77d16768a55be81/lib/bom.js#L36
   declare type $Window = any;
@@ -598,6 +719,21 @@ declare module '@material-ui/core/styles/createMixins' {
   ) => Mixins;
 }
 declare module '@material-ui/core/styles/createMuiTheme' {
+  // TODO: need type!!!
+  declare export type Theme = {|
+    shape?: any,
+    breakpoints?: any,
+    direction?: any,
+    mixins?: any,
+    overrides?: any,
+    palette?: any,
+    props?: any,
+    shadows?: any,
+    spacing?: any,
+    transitions?: any,
+    typography?: any,
+    zIndex?: any,
+  |};
 }
 declare module '@material-ui/core/styles/createPalette' {
   import type { Color, PaletteType } from '@material-ui/core';
@@ -831,12 +967,13 @@ declare module '@material-ui/core/styles/withStyles' {
     innerRef?: React$Ref<any>,
   };
 
-  declare type CSSProperties = CSS$Properties;
+  declare export type CSSProperties = CSS$Properties;
 }
 declare module '@material-ui/core/styles/withTheme' {
 }
 declare module '@material-ui/core/styles' {
 }
+
 declare module '@material-ui/core/Paper' {
   import type { StandardProps } from '@material-ui/core';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
@@ -1265,6 +1402,7 @@ declare module '@material-ui/core/DialogContent' {
 declare module '@material-ui/core/DialogContent/DialogContent' {
   declare export * from '@material-ui/core/DialogContent'
 }
+
 declare module '@material-ui/core/DialogTitle' {
   import type { StandardProps } from '@material-ui/core';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
@@ -1294,12 +1432,12 @@ declare module '@material-ui/core/ExpansionPanelActions' {
     HTMLDivAttributes,
     ExpansionPanelActionsClassKey,
     void
-    >;
+  >;
 
   declare export default React$ComponentType<ExpansionPanelActionsProps>;
 }
 declare module '@material-ui/core/ExpansionPanelActions/ExpansionPanelActions' {
-    declare export * from '@material-ui/core/ExpansionPanelActions'
+  declare export * from '@material-ui/core/ExpansionPanelActions'
 }
 
 declare module '@material-ui/core/ExpansionPanelDetails' {
@@ -1312,15 +1450,28 @@ declare module '@material-ui/core/ExpansionPanelDetails' {
     HTMLDivAttributes,
     ExpansionPanelDetailsClassKey,
     void
-    >;
+  >;
 
   declare export default React$ComponentType<ExpansionPanelDetailsProps>;
 }
 declare module '@material-ui/core/ExpansionPanelDetails/ExpansionPanelDetails' {
-    declare export * from '@material-ui/core/ExpansionPanelDetails'
+  declare export * from '@material-ui/core/ExpansionPanelDetails'
 }
 
-///////////////////////////////////////////////////////////////////////////////
+declare module '@material-ui/core/Fade' {
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+  import type { TransitionProps } from '@material-ui/core/transitions/transition';
+
+  declare export type FadeProps = TransitionProps & {
+    theme?: Theme,
+  };
+
+  declare export default React$ComponentType<FadeProps>;
+}
+declare module '@material-ui/core/Fade/Fade' {
+  declare export * from '@material-ui/core/Fade'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -1365,8 +1516,8 @@ declare module '@material-ui/core' {
   declare export { default as Box } from '@material-ui/core/Box';
   declare export { default as Card } from '@material-ui/core/Card';
   declare export { default as Container } from '@material-ui/core/Container';
-
-    declare export {
+  declare export { default as Fade } from '@material-ui/core/Fade';
+  declare export {
     default as ExpansionPanelDetails,
   } from '@material-ui/core/ExpansionPanelDetails';
   declare export {
