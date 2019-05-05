@@ -1228,6 +1228,28 @@ declare module '@material-ui/core/CssBaseline/CssBaseline' {
   declare export * from '@material-ui/core/CssBaseline'
 }
 
+declare module '@material-ui/core/DialogActions' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  declare export type DialogActionsClassKey = 'root' | 'spacing';
+
+  declare export type DialogActionsProps = StandardProps<
+    HTMLDivAttributes,
+    DialogActionsClassKey,
+    void
+  > & {
+    disableSpacing?: boolean,
+  };
+
+  declare export default React$ComponentType<DialogActionsProps>;
+}
+declare module '@material-ui/core/DialogActions/DialogActions' {
+  declare export * from '@material-ui/core/DialogActions'
+}
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
 declare module '@material-ui/core' {
   import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
   // @TODO
@@ -1270,6 +1292,10 @@ declare module '@material-ui/core' {
   declare export { default as Box } from '@material-ui/core/Box';
   declare export { default as Card } from '@material-ui/core/Card';
   declare export { default as Container } from '@material-ui/core/Container';
+
+  declare export {
+    default as DialogActions,
+  } from '@material-ui/core/DialogActions';
   declare export {
     default as CssBaseline,
   } from '@material-ui/core/CssBaseline';
