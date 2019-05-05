@@ -5,8 +5,6 @@
  *  This is a temporary abstraction for importing external dependencies.
  */
 
-import { CSSProperties } from '@material-ui/core/styles/withStyles';
-
 declare module '@material-ui/core/@@utils' {
   // Utilities used in this definition:
 
@@ -959,6 +957,7 @@ declare module '@material-ui/core/styles/shape' {
 declare module '@material-ui/core/styles/useTheme' {
 }
 declare module '@material-ui/core/styles/withStyles' {
+  // TODO add others types
   import type { CSS$Properties } from '@material-ui/core/@@dom';
 
   declare export type ClassNameMap<Keys> = { [Keys]: string };
@@ -1062,6 +1061,7 @@ declare module '@material-ui/core/Badge' {
     | 'badge'
     | 'colorPrimary'
     | 'colorSecondary'
+    | 'colorError'
     | 'invisible'
     | 'dot';
 
@@ -1192,6 +1192,7 @@ declare module '@material-ui/core/Box/Box' {
   declare export * from '@material-ui/core/Box'
 }
 
+// TODO: https://github.com/retyui/flowgen-material-ui-core/commit/5811a5093914ae42ccf6d58555c442e2018bf1eb#diff-e23ec36fe60111ae1675b670db258abf
 declare module '@material-ui/core/Breadcrumbs' {
   import type { HTMLElementAttributes } from '@material-ui/core/@@dom';
   import type { StandardProps } from '@material-ui/core';
@@ -1463,6 +1464,7 @@ declare module '@material-ui/core/Fade' {
   import type { TransitionProps } from '@material-ui/core/transitions/transition';
 
   declare export type FadeProps = TransitionProps & {
+    ref?: React$Ref<mixed>;
     theme?: Theme,
   };
 

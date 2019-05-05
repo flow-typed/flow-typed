@@ -25,6 +25,7 @@ describe('classes', () => {
         badge: 'srt',
         colorPrimary: 'srt',
         colorSecondary: 'srt',
+        colorError: 'str',
         invisible: 'srt',
         dot: 'srt',
       }}
