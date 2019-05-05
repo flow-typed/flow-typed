@@ -1215,6 +1215,19 @@ declare module '@material-ui/core/Container/Container' {
   declare export * from '@material-ui/core/Container'
 }
 
+declare module '@material-ui/core/CssBaseline' {
+  declare export type CssBaselineClassKey = '@global';
+
+  declare export type CssBaselineProps = {|
+    children?: React$Node,
+  |};
+
+  declare export default React$ComponentType<CssBaselineProps>;
+}
+declare module '@material-ui/core/CssBaseline/CssBaseline' {
+  declare export * from '@material-ui/core/CssBaseline'
+}
+
 declare module '@material-ui/core' {
   import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
   // @TODO
@@ -1257,7 +1270,9 @@ declare module '@material-ui/core' {
   declare export { default as Box } from '@material-ui/core/Box';
   declare export { default as Card } from '@material-ui/core/Card';
   declare export { default as Container } from '@material-ui/core/Container';
-
+  declare export {
+    default as CssBaseline,
+  } from '@material-ui/core/CssBaseline';
   declare export {
     default as ClickAwayListener,
   } from '@material-ui/core/ClickAwayListener';
