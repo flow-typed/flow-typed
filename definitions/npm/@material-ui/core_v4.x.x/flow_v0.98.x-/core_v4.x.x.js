@@ -1237,17 +1237,15 @@ declare module '@material-ui/core/DialogActions' {
     HTMLDivAttributes,
     DialogActionsClassKey,
     void
-    > & {
+  > & {
     disableSpacing?: boolean,
   };
 
   declare export default React$ComponentType<DialogActionsProps>;
 }
 declare module '@material-ui/core/DialogActions/DialogActions' {
-    declare export * from '@material-ui/core/DialogActions'
+  declare export * from '@material-ui/core/DialogActions'
 }
-
-
 
 declare module '@material-ui/core/DialogContent' {
   import type { StandardProps } from '@material-ui/core';
@@ -1258,14 +1256,32 @@ declare module '@material-ui/core/DialogContent' {
     HTMLDivAttributes,
     DialogContentClassKey,
     void
-    > & {
+  > & {
     dividers?: boolean,
   };
 
   declare export default React$ComponentType<DialogContentProps>;
 }
 declare module '@material-ui/core/DialogContent/DialogContent' {
-    declare export * from '@material-ui/core/DialogContent'
+  declare export * from '@material-ui/core/DialogContent'
+}
+declare module '@material-ui/core/DialogTitle' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  declare export type DialogTitleClassKey = 'root';
+
+  declare export type DialogTitleProps = StandardProps<
+    HTMLDivAttributes,
+    DialogTitleClassKey,
+    void
+  > & {
+    disableTypography?: boolean,
+  };
+
+  declare export default React$ComponentType<DialogTitleProps>;
+}
+declare module '@material-ui/core/DialogTitle/DialogTitle' {
+  declare export * from '@material-ui/core/DialogTitle'
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1314,7 +1330,10 @@ declare module '@material-ui/core' {
   declare export { default as Card } from '@material-ui/core/Card';
   declare export { default as Container } from '@material-ui/core/Container';
 
-    declare export {
+  declare export {
+    default as DialogTitle,
+  } from '@material-ui/core/DialogTitle';
+  declare export {
     default as DialogContent,
   } from '@material-ui/core/DialogContent';
   declare export {
