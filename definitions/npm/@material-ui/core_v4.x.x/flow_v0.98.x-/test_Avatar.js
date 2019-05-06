@@ -85,28 +85,3 @@ describe('dom props', () => {
     <Avatar aria-hidden="true" />;
   });
 });
-
-describe('overridable component logic', () => {
-  declare var CustomCom: React$StatelessFunctionalComponent<{ index: number }>;
-
-  const MyAvatar = props =>
-    Avatar<typeof CustomCom>({ ...props, component: CustomCom });
-
-  it('should exact props from <CustomCom/>', () => {
-    <MyAvatar index={1} />;
-
-    // $ExpectError: `index` must be number
-    <MyAvatar index={'1'} />;
-  });
-
-  it('should remove common props', () => {
-    <MyAvatar classes={'lol'} className={666} style={false} />;
-  });
-
-  it('should still have default props', () => {
-    <MyAvatar alt={'text'} />;
-
-    // $ExpectError: need string
-    <Avatar alt={69} />;
-  });
-});

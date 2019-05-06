@@ -5,6 +5,8 @@
  *  This is a temporary abstraction for importing external dependencies.
  */
 
+import { DefaultComponentProps } from '@material-ui/core/OverridableComponent';
+
 declare module '@material-ui/core/@@utils' {
   // Utilities used in this definition:
 
@@ -353,12 +355,12 @@ declare module '@material-ui/core/OverridableComponent' {
    *
    * Adjusts valid props based on the type of `component`
    */
-  declare type $OverridableComponent<
-    M: OverridableTypeMap<*, *, *>
-  > = React$StatelessFunctionalComponent<DefaultComponentProps<M>> & {
-    <Component: React$ElementType>(
-      props: { component: Component } & OverrideProps<M, Component>
-    ): React$Node,
+  declare type $OverridableComponent<M: OverridableTypeMap<*, *, *>> = {
+    (props: DefaultComponentProps<M>): React$Node,
+    // TODO: not supported https://github.com/facebook/flow/issues/7701
+    // <Component: React$ElementType>(
+    //   props: { component?: Component } & OverrideProps<M, Component>
+    // ): React$Node,
   };
 
   declare export type OverridableComponent<
@@ -1306,25 +1308,28 @@ declare module '@material-ui/core/Box/Box' {
   declare export * from '@material-ui/core/Box'
 }
 
-// TODO: https://github.com/retyui/flowgen-material-ui-core/commit/5811a5093914ae42ccf6d58555c442e2018bf1eb#diff-e23ec36fe60111ae1675b670db258abf
 declare module '@material-ui/core/Breadcrumbs' {
-  import type { HTMLElementAttributes } from '@material-ui/core/@@dom';
-  import type { StandardProps } from '@material-ui/core';
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
 
   declare export type BreadcrumbsClassKey = 'root' | 'ol' | 'separator';
 
-  declare export type BreadcrumbsProps = StandardProps<
-    HTMLElementAttributes,
-    BreadcrumbsClassKey,
-    void
-  > & {
-    itemsAfterCollapse?: boolean,
-    itemsBeforeCollapse?: boolean,
-    maxItems?: number,
-    separator?: React$Node,
-  };
+  declare type Breadcrumbs = OverridableComponent<
+    {
+      itemsAfterCollapse?: boolean,
+      itemsBeforeCollapse?: boolean,
+      maxItems?: number,
+      separator?: React$Node,
+    },
+    'nav',
+    BreadcrumbsClassKey
+  >;
 
-  declare export default React$ComponentType<BreadcrumbsProps>;
+  declare export type BreadcrumbsProps = SimplifiedPropsOf<Breadcrumbs>;
+
+  declare export default Breadcrumbs;
 }
 declare module '@material-ui/core/Breadcrumbs/Breadcrumbs' {
   declare export * from '@material-ui/core/Breadcrumbs'
