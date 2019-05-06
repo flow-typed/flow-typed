@@ -123,6 +123,7 @@ describe('install (command)', () => {
           overwrite: false,
           skip: false,
           ignoreDeps: [],
+          useCacheUntil: 1000 * 60,
         });
         expect(result).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([
@@ -156,6 +157,7 @@ describe('install (command)', () => {
             overwrite: false,
             skip: false,
             ignoreDeps: [],
+            useCacheUntil: 1000 * 60,
           });
           expect(result).toBe(1);
           expect(_mock(console.error).mock.calls).toEqual([
@@ -185,6 +187,7 @@ describe('install (command)', () => {
           overwrite: false,
           skip: false,
           ignoreDeps: [],
+          useCacheUntil: 1000 * 60,
         });
         expect(result).toBe(0);
         expect(_mock(console.error).mock.calls).toEqual([

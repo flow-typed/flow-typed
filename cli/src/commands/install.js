@@ -31,6 +31,7 @@ import {
 import {
   getCacheRepoDir,
   _setCustomCacheDir as setCustomCacheDir,
+  CACHE_REPO_EXPIRY,
 } from '../lib/cacheRepoUtils';
 
 import {getRangeLowerBound} from '../lib/semver';
@@ -55,7 +56,8 @@ export type Args = {
   cacheDir?: mixed, // string
   packageDir?: mixed, // string
   ignoreDeps?: mixed, // Array<string>
-  rootDir?: mixed, // string
+  rootDir?: mixed, // string,
+  useCacheUntil?: mixed, // seconds
 };
 export function setup(yargs: Yargs) {
   return yargs.usage(`$0 ${name} - ${description}`).options({
@@ -104,6 +106,11 @@ export function setup(yargs: Yargs) {
       describe: 'Directory of .flowconfig relative to node_modules',
       type: 'string',
     },
+    useCacheUntil: {
+      alias: 'u',
+      describe: 'Use cache until specified time in milliseconds',
+      type: 'number',
+    },
   });
 }
 export async function run(args: Args) {
@@ -147,6 +154,7 @@ export async function run(args: Args) {
     overwrite: Boolean(args.overwrite),
     skip: Boolean(args.skip),
     ignoreDeps: ignoreDeps,
+    useCacheUntil: Number(args.useCacheUntil) || CACHE_REPO_EXPIRY,
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
@@ -191,6 +199,7 @@ type installNpmLibDefsArgs = {|
   overwrite: boolean,
   skip: boolean,
   ignoreDeps: Array<string>,
+  useCacheUntil: number,
 |};
 async function installNpmLibDefs({
   cwd,
@@ -201,6 +210,7 @@ async function installNpmLibDefs({
   overwrite,
   skip,
   ignoreDeps,
+  useCacheUntil,
 }: installNpmLibDefsArgs): Promise<number> {
   const flowProjectRoot = await findFlowRoot(cwd);
   if (flowProjectRoot === null) {
@@ -280,7 +290,7 @@ async function installNpmLibDefs({
         return;
       }
 
-      const libDef = await findNpmLibDef(name, ver, flowVersion);
+      const libDef = await findNpmLibDef(name, ver, flowVersion, useCacheUntil);
       if (libDef === null) {
         unavailableLibDefs.push({name, ver});
       } else {
