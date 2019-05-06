@@ -341,7 +341,70 @@ declare module '@material-ui/core/transitions/transition/@@react-transition-grou
 }
 
 ///////////////////////////////////////////////////////////////////////////////
+declare module '@material-ui/core/OverridableComponent' {
+  import type {
+    StyledComponentProps,
+    CSSProperties,
+  } from '@material-ui/core/styles/withStyles';
 
+  /**
+   * a component whose root component can be controled via a `component` prop
+   *
+   * Adjusts valid props based on the type of `component`
+   */
+  declare export type OverridableComponent<M: OverridableTypeMap> = {
+    <Component: React$ElementType>(
+      props: { component: Component } & OverrideProps<M, Component>
+    ): React$Element<Component>,
+    (
+      props: DefaultComponentProps<M>
+    ): React$Element<$ElementType<OverridableTypeMap, 'defaultComponent'>>,
+  };
+
+  /**
+   * props of the component if `component={Component}` is used
+   */
+  declare export type OverrideProps<
+    M: OverridableTypeMap,
+    C: React$ElementType
+  > = BaseProps<M> & $Diff<React$ElementConfig<C>, CommonProps<M>>;
+
+  /**
+   * props if `component={Component}` is NOT used
+   */
+  declare export type DefaultComponentProps<
+    M: OverridableTypeMap
+  > = BaseProps<M> &
+    $Diff<
+      React$ElementConfig<$ElementType<M, 'defaultComponent'>>,
+      BaseProps<M>
+    >;
+
+  /**
+   * props defined on the component (+ common material-ui props)
+   */
+  declare export type BaseProps<M: OverridableTypeMap> = $ElementType<
+    M,
+    'props'
+  > &
+    CommonProps<M>;
+
+  /**
+   * props that are valid for material-ui components
+   */
+  declare export type CommonProps<M: OverridableTypeMap> = StyledComponentProps<
+    $ElementType<M, 'classKey'>
+  > & {
+    className?: string,
+    style?: CSSProperties,
+  };
+
+  declare export type OverridableTypeMap = {|
+    props: {},
+    defaultComponent: React$ElementType,
+    classKey: string,
+  |};
+}
 declare module '@material-ui/core/transitions' {
   import type {
     TransitionStatus as BaseTransitionStatus,
@@ -961,6 +1024,7 @@ declare module '@material-ui/core/styles/withStyles' {
   import type { CSS$Properties } from '@material-ui/core/@@dom';
 
   declare export type ClassNameMap<Keys> = { [Keys]: string };
+
   declare export type StyledComponentProps<ClassesKeys> = {
     classes?: ClassNameMap<ClassesKeys>,
     innerRef?: React$Ref<any>,
@@ -1011,7 +1075,7 @@ declare module '@material-ui/core/Paper' {
     PaperClassKey,
     void
   > & {
-    component?: React$Element<'div'>,
+    component?: React$ElementType,
     elevation?: number,
     square?: boolean,
   };
@@ -1073,7 +1137,7 @@ declare module '@material-ui/core/Badge' {
     children: React$Node,
     badgeContent?: React$Node,
     color?: PropTypes$Color | 'error',
-    component?: React$Element<'div'>,
+    component?: React$ElementType,
     invisible?: boolean,
     max?: number,
     showZero?: boolean,
@@ -1097,7 +1161,7 @@ declare module '@material-ui/core/BottomNavigation' {
     BottomNavigationClassKey,
     { onChange: any }
   > & {
-    component?: React$Element<'div'>,
+    component?: React$ElementType,
     children: React$Node,
     onChange?: (event: {}, value: any) => mixed,
     showLabels?: boolean,
@@ -1163,7 +1227,7 @@ declare module '@material-ui/core/Box' {
 
   declare export type BoxProps = PropsByCSSProperties &
     HTMLDivAttributes & {
-      component?: React$Element<'div'>,
+      component?: React$ElementType,
       // styled API
       clone?: boolean,
       // Box specific props
@@ -1267,7 +1331,7 @@ declare module '@material-ui/core/CardContent' {
     CardContentClassKey,
     void
   > & {
-    component?: React$Element<'div'>,
+    component?: React$ElementType,
   };
 
   declare export default React$ComponentType<CardContentProps>;
@@ -1342,7 +1406,7 @@ declare module '@material-ui/core/Container' {
     ContainerClassKey,
     void
   > & {
-    component?: React$Element<'div'>,
+    component?: React$ElementType,
     fixed?: boolean,
     maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
   };
@@ -1464,7 +1528,7 @@ declare module '@material-ui/core/Fade' {
   import type { TransitionProps } from '@material-ui/core/transitions/transition';
 
   declare export type FadeProps = TransitionProps & {
-    ref?: React$Ref<mixed>;
+    ref?: React$Ref<mixed>,
     theme?: Theme,
   };
 
