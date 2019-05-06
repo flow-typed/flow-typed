@@ -282,6 +282,7 @@ declare module '@material-ui/core/@@dom' {
 
   // At the moment there is no possibility to withdraw the React types for Html Element.
   // ... in the future will be replaced with exact types for a specific element (div, li, inout, ...)
+  declare export type HTMLImageAttributes = {};
   declare export type HTMLDivAttributes = {};
   declare export type HTMLElementAttributes = {};
 }
@@ -352,20 +353,25 @@ declare module '@material-ui/core/OverridableComponent' {
    *
    * Adjusts valid props based on the type of `component`
    */
-  declare export type OverridableComponent<M: OverridableTypeMap> = {
+  declare type $OverridableComponent<
+    M: OverridableTypeMap<*, *, *>
+  > = React$StatelessFunctionalComponent<DefaultComponentProps<M>> & {
     <Component: React$ElementType>(
       props: { component: Component } & OverrideProps<M, Component>
-    ): React$Element<Component>,
-    (
-      props: DefaultComponentProps<M>
-    ): React$Element<$ElementType<OverridableTypeMap, 'defaultComponent'>>,
+    ): React$Node,
   };
+
+  declare export type OverridableComponent<
+    Props,
+    DefaultComp,
+    ClassKey
+  > = $OverridableComponent<OverridableTypeMap<Props, DefaultComp, ClassKey>>;
 
   /**
    * props of the component if `component={Component}` is used
    */
   declare export type OverrideProps<
-    M: OverridableTypeMap,
+    M: OverridableTypeMap<*, *, *>,
     C: React$ElementType
   > = BaseProps<M> & $Diff<React$ElementConfig<C>, CommonProps<M>>;
 
@@ -373,7 +379,7 @@ declare module '@material-ui/core/OverridableComponent' {
    * props if `component={Component}` is NOT used
    */
   declare export type DefaultComponentProps<
-    M: OverridableTypeMap
+    M: OverridableTypeMap<*, *, *>
   > = BaseProps<M> &
     $Diff<
       React$ElementConfig<$ElementType<M, 'defaultComponent'>>,
@@ -383,7 +389,7 @@ declare module '@material-ui/core/OverridableComponent' {
   /**
    * props defined on the component (+ common material-ui props)
    */
-  declare export type BaseProps<M: OverridableTypeMap> = $ElementType<
+  declare export type BaseProps<M: OverridableTypeMap<*, *, *>> = $ElementType<
     M,
     'props'
   > &
@@ -392,18 +398,32 @@ declare module '@material-ui/core/OverridableComponent' {
   /**
    * props that are valid for material-ui components
    */
-  declare export type CommonProps<M: OverridableTypeMap> = StyledComponentProps<
-    $ElementType<M, 'classKey'>
-  > & {
+  declare export type CommonProps<
+    M: OverridableTypeMap<*, *, *>
+  > = StyledComponentProps<$ElementType<M, 'classKey'>> & {
     className?: string,
     style?: CSSProperties,
   };
 
-  declare export type OverridableTypeMap = {|
-    props: {},
+  declare export type OverridableTypeMap<
+    Props: {},
+    DefaultComponent: React$ElementType,
+    ClassKey: string
+  > = {
+    props: Props,
     defaultComponent: React$ElementType,
-    classKey: string,
-  |};
+    classKey: ClassKey,
+  };
+
+  declare type Simplify<
+    Map,
+    OC: OverridableComponent<Map>
+  > = DefaultComponentProps<Map>;
+
+  declare export type SimplifiedPropsOf<OC: OverridableComponent<*>> = Simplify<
+    *,
+    OC
+  >;
 }
 declare module '@material-ui/core/transitions' {
   import type {
@@ -1116,6 +1136,36 @@ declare module '@material-ui/core/AppBar/AppBar' {
   declare export * from '@material-ui/core/AppBar'
 }
 
+declare module '@material-ui/core/Avatar' {
+  import type { HTMLImageAttributes } from '@material-ui/core/@@dom';
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
+
+  declare export type AvatarClassKey = 'root' | 'colorDefault' | 'img';
+
+  declare type Avatar = OverridableComponent<
+    {
+      alt?: string,
+      childrenClassName?: string,
+      imgProps?: HTMLImageAttributes,
+      sizes?: string,
+      src?: string,
+      srcSet?: string,
+    },
+    'div',
+    AvatarClassKey
+  >;
+
+  declare export type AvatarProps = SimplifiedPropsOf<Avatar>;
+
+  declare export default Avatar;
+}
+declare module '@material-ui/core/Avatar/Avatar' {
+  declare export * from '@material-ui/core/Avatar'
+}
+
 declare module '@material-ui/core/Badge' {
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   import type { StandardProps, PropTypes$Color } from '@material-ui/core';
@@ -1578,6 +1628,7 @@ declare module '@material-ui/core' {
 
   declare export { default as Paper } from '@material-ui/core/Paper';
   declare export { default as AppBar } from '@material-ui/core/AppBar';
+  declare export { default as Avatar } from '@material-ui/core/Avatar';
   declare export { default as Badge } from '@material-ui/core/Badge';
   declare export { default as Box } from '@material-ui/core/Box';
   declare export { default as Card } from '@material-ui/core/Card';
