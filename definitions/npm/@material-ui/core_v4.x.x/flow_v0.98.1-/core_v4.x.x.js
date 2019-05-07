@@ -5,8 +5,6 @@
  *  This is a temporary abstraction for importing external dependencies.
  */
 
-import { DefaultComponentProps } from '@material-ui/core/OverridableComponent';
-
 declare module '@material-ui/core/@@utils' {
   // Utilities used in this definition:
 
@@ -1168,6 +1166,31 @@ declare module '@material-ui/core/Avatar/Avatar' {
   declare export * from '@material-ui/core/Avatar'
 }
 
+declare module '@material-ui/core/Backdrop' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { FadeProps } from '@material-ui/core/Fade';
+  import type { TransitionProps } from '@material-ui/core/transitions';
+
+  declare export type BackdropClassKey = 'root' | 'invisible';
+
+  declare export type BackdropProps = StandardProps<
+    HTMLDivAttributes & { ...FadeProps },
+    BackdropClassKey,
+    void
+  > & {
+    open: boolean,
+    invisible?: boolean,
+    onClick?: ({}) => mixed,
+    transitionDuration?: $ElementType<TransitionProps, 'timeout'>,
+  };
+
+  declare export default React$ComponentType<BackdropProps>;
+}
+declare module '@material-ui/core/Backdrop/Backdrop' {
+  declare export * from '@material-ui/core/Backdrop'
+}
+
 declare module '@material-ui/core/Badge' {
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   import type { StandardProps, PropTypes$Color } from '@material-ui/core';
@@ -1596,7 +1619,10 @@ declare module '@material-ui/core/Fade/Fade' {
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
-  import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
+  import type {
+    CSSProperties,
+    StyledComponentProps,
+  } from '@material-ui/core/styles/withStyles';
   // @TODO
   declare export type PaletteType = any;
 
@@ -1620,7 +1646,7 @@ declare module '@material-ui/core' {
   > = $Diff<$Diff<BaseProps, { classes: any }>, Removals> &
     StyledComponentProps<ClassesKeys> & {
       className?: string,
-      style?: { [string]: string | number },
+      style?: CSSProperties,
     };
 
   declare export type Color = {|
@@ -1634,6 +1660,7 @@ declare module '@material-ui/core' {
   declare export { default as Paper } from '@material-ui/core/Paper';
   declare export { default as AppBar } from '@material-ui/core/AppBar';
   declare export { default as Avatar } from '@material-ui/core/Avatar';
+  declare export { default as Backdrop } from '@material-ui/core/Backdrop';
   declare export { default as Badge } from '@material-ui/core/Badge';
   declare export { default as Box } from '@material-ui/core/Box';
   declare export { default as Card } from '@material-ui/core/Card';
