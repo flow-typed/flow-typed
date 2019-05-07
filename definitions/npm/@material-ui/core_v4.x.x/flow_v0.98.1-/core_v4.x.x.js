@@ -1172,22 +1172,39 @@ declare module '@material-ui/core/styles/withStyles' {
       options?: Options
     ): <Comp: React$ComponentType<*>>(
       Component: Comp
-    ) => React$ComponentType<{
-      ...$Exact<$Diff<React$ElementConfig<Comp>, { classes: any, theme: any }>>,
-      ...StyledComponentProps<ClassKey>,
-    }>,
+    ) => React$ComponentType<
+      $Diff<React$ElementConfig<Comp>, { classes: any, theme: any }> &
+        StyledComponentProps<ClassKey>
+    >,
     <ClassKey: string, Options: WithStylesOptions & { withTheme?: false }>(
       style: Styles<ClassKey>,
       options?: Options
     ): <Comp: React$ComponentType<*>>(
       Component: Comp
-    ) => React$ComponentType<{
-      ...$Exact<$Diff<React$ElementConfig<Comp>, { classes: any }>>,
-      ...StyledComponentProps<ClassKey>,
-    }>,
+    ) => React$ComponentType<
+      $Diff<React$ElementConfig<Comp>, { classes: any }> &
+        StyledComponentProps<ClassKey>
+    >,
   };
 }
 declare module '@material-ui/core/styles/withTheme' {
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+
+  declare export type WithTheme = {
+    theme: Theme,
+  };
+
+  declare export type ThemedComponentProps = { ...WithTheme } & {
+    innerRef?: React$Ref<any>,
+  };
+
+  declare export default {
+    <Comp: React$ComponentType<*>>(
+      Component: Comp
+    ): React$ComponentType<
+      $Diff<React$ElementConfig<Comp>, WithTheme> & ThemedComponentProps
+    >,
+  };
 }
 declare module '@material-ui/core/styles' {
 }
