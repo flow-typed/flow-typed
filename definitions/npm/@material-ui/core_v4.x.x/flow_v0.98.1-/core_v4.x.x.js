@@ -5,6 +5,8 @@
  * This is a temporary abstraction for importing external dependencies.
  */
 
+import { Theme } from '@material-ui/core/styles/createMuiTheme';
+
 declare module '@material-ui/core/@@utils' {
   // Utilities used in this definition:
 
@@ -1123,6 +1125,11 @@ declare module '@material-ui/core/styles/shape' {
   declare export default Shape;
 }
 declare module '@material-ui/core/styles/useTheme' {
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+
+  declare export default {
+    <T: Theme>(): T,
+  };
 }
 declare module '@material-ui/core/styles/withStyles' {
   import type { StyleSheetFactoryOptions } from '@material-ui/core/@@JSS';
