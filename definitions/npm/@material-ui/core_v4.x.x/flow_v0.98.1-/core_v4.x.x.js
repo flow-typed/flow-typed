@@ -1214,6 +1214,41 @@ declare module '@material-ui/core/styles/withTheme' {
   };
 }
 declare module '@material-ui/core/styles' {
+  declare export * from '@material-ui/core/styles/colorManipulator'
+  declare export {
+    default as createMuiTheme,
+    Theme,
+    Direction,
+  } from '@material-ui/core/styles/createMuiTheme';
+  declare export {
+    default as createPalette,
+    PaletteColorOptions,
+    SimplePaletteColorOptions,
+  } from '@material-ui/core/styles/createPalette';
+  declare export {
+    default as createStyles,
+  } from '@material-ui/core/styles/createStyles';
+  declare export {
+    TypographyStyle,
+  } from '@material-ui/core/styles/createTypography';
+  declare export {
+    default as makeStyles,
+  } from '@material-ui/core/styles/makeStyles';
+  declare export { ComponentsPropsList } from '@material-ui/core/styles/props';
+  declare export * from '@material-ui/core/styles/transitions'
+  declare export {
+    default as useTheme,
+  } from '@material-ui/core/styles/useTheme';
+  declare export {
+    default as withStyles,
+    StyleRules,
+    StyleRulesCallback,
+    StyledComponentProps,
+  } from '@material-ui/core/styles/withStyles';
+  declare export {
+    default as withTheme,
+    WithTheme,
+  } from '@material-ui/core/styles/withTheme';
 }
 
 declare module '@material-ui/core/Paper' {
