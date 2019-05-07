@@ -2,7 +2,7 @@
  * Created and maintained: https://github.com/retyui
  * Some times you can find strange module declaration
  * that looks like `<path_scope>/@@<name>`
- *  This is a temporary abstraction for importing external dependencies.
+ * This is a temporary abstraction for importing external dependencies.
  */
 
 declare module '@material-ui/core/@@utils' {
@@ -10,6 +10,16 @@ declare module '@material-ui/core/@@utils' {
 
   // Currently the flow.js do not support `Pick` operator
   declare export type $$Pick<NamesMap, Obj> = $Diff<Obj, $Diff<Obj, NamesMap>>;
+}
+declare module '@material-ui/core/@@JSS' {
+  declare export type GenerateId = (rule: {}, sheet?: mixed) => string;
+
+  declare export type StyleSheetFactoryOptions = {
+    media?: string,
+    meta?: string,
+    generateId?: GenerateId,
+    classNamePrefix?: string,
+  };
 }
 declare module '@material-ui/core/@@csstype' {
   // I don't use `CSSStyleDeclaration` https://github.com/facebook/flow/blob/fa89aadb55ae9bb37c71e14d7274935903d501ce/lib/cssom.js#L71
@@ -715,7 +725,7 @@ declare module '@material-ui/core/styles/createSpacing' {
   declare export default (spacing?: SpacingOptions) => Spacing;
 }
 declare module '@material-ui/core/styles/zIndex' {
-  declare type ZIndex = {
+  declare export type ZIndex = {
     mobileStepper: number,
     appBar: number,
     drawer: number,
@@ -800,21 +810,69 @@ declare module '@material-ui/core/styles/createMixins' {
   ) => Mixins;
 }
 declare module '@material-ui/core/styles/createMuiTheme' {
-  // TODO: need type!!!
-  declare export type Theme = {|
-    shape?: any,
-    breakpoints?: any,
-    direction?: any,
-    mixins?: any,
-    overrides?: any,
-    palette?: any,
-    props?: any,
-    shadows?: any,
-    spacing?: any,
-    transitions?: any,
-    typography?: any,
-    zIndex?: any,
+  import type {
+    Breakpoints,
+    BreakpointsOptions,
+  } from '@material-ui/core/styles/createBreakpoints';
+  import type {
+    Mixins,
+    MixinsOptions,
+  } from '@material-ui/core/styles/createMixins';
+  import type {
+    Palette,
+    PaletteOptions,
+  } from '@material-ui/core/styles/createPalette';
+  import type {
+    Typography,
+    TypographyOptions,
+  } from '@material-ui/core/styles/createTypography';
+  import type { Shadows } from '@material-ui/core/styles/shadows';
+  import type { Shape, ShapeOptions } from '@material-ui/core/styles/shape';
+  import type {
+    Spacing,
+    SpacingOptions,
+  } from '@material-ui/core/styles/createSpacing';
+  import type {
+    Transitions,
+    TransitionsOptions,
+  } from '@material-ui/core/styles/transitions';
+  import type { ZIndex, ZIndexOptions } from '@material-ui/core/styles/zIndex';
+  import type { Overrides } from '@material-ui/core/styles/overrides';
+  import type { ComponentsProps } from '@material-ui/core/styles/props';
+
+  declare export type Direction = 'ltr' | 'rtl';
+
+  declare export type ThemeOptions = {|
+    shape?: ShapeOptions,
+    breakpoints?: BreakpointsOptions,
+    direction?: Direction,
+    mixins?: MixinsOptions,
+    overrides?: Overrides,
+    palette?: PaletteOptions,
+    props?: ComponentsProps,
+    shadows?: Shadows,
+    spacing?: SpacingOptions,
+    transitions?: TransitionsOptions,
+    typography?: TypographyOptions | ((palette: Palette) => TypographyOptions),
+    zIndex?: ZIndexOptions,
   |};
+
+  declare export type Theme = {|
+    shape: Shape,
+    breakpoints: Breakpoints,
+    direction: Direction,
+    mixins: Mixins,
+    overrides?: Overrides,
+    palette: Palette,
+    props?: ComponentsProps,
+    shadows: Shadows,
+    spacing: Spacing,
+    transitions: Transitions,
+    typography: Typography,
+    zIndex: ZIndex,
+  |};
+
+  declare export default (options?: ThemeOptions) => Theme;
 }
 declare module '@material-ui/core/styles/createPalette' {
   import type { Color, PaletteType } from '@material-ui/core';
@@ -922,6 +980,11 @@ declare module '@material-ui/core/styles/createPalette' {
   declare export default (palette: PaletteOptions) => Palette;
 }
 declare module '@material-ui/core/styles/createStyles' {
+  import type { StyleRules } from '@material-ui/core/styles/withStyles';
+
+  declare export default {
+    <C: string>(styles: StyleRules<C>): StyleRules<C>,
+  };
 }
 declare module '@material-ui/core/styles/createTypography' {
   import type { Palette } from '@material-ui/core/styles/createPalette';
@@ -990,12 +1053,34 @@ declare module '@material-ui/core/styles/createTypography' {
   ) => Typography;
 }
 declare module '@material-ui/core/styles/makeStyles' {
+  import type {
+    ClassKeyOfStyles,
+    ClassNameMap,
+    PropsOfStyles,
+    Styles,
+    WithStylesOptions,
+  } from '@material-ui/core/styles/withStyles';
+
+  declare export type StylesHook<S: Styles<*, *>> = (
+    props: PropsOfStyles<S>
+  ) => ClassNameMap<ClassKeyOfStyles<S>>;
+
+  declare export default {
+    <Theme: mixed, Props: {}, ClassKey: string>(
+      styles: Styles<Theme, Props, ClassKey>,
+      options?: WithStylesOptions<Theme>
+    ): StylesHook<Styles<Theme, Props, ClassKey>>,
+  };
 }
 declare module '@material-ui/core/styles/overrides' {
   // TODO
+  declare export type Overrides = {};
+  declare export type ComponentNameToClassKey = {};
 }
 declare module '@material-ui/core/styles/props' {
   // TODO
+  declare export type ComponentsProps = {};
+  declare export type ComponentsPropsList = {};
 }
 declare module '@material-ui/core/styles/shadows' {
   declare export type Shadows = [
@@ -1040,17 +1125,67 @@ declare module '@material-ui/core/styles/shape' {
 declare module '@material-ui/core/styles/useTheme' {
 }
 declare module '@material-ui/core/styles/withStyles' {
-  // TODO add others types
+  import type { StyleSheetFactoryOptions } from '@material-ui/core/@@JSS';
   import type { CSS$Properties } from '@material-ui/core/@@dom';
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
 
-  declare export type ClassNameMap<Keys> = { [Keys]: string };
+  declare export type CSSProperties = CSS$Properties;
 
-  declare export type StyledComponentProps<ClassesKeys> = {
+  declare export type StyleRules<ClassKey: string> = {
+    [ClassKey]: CSSProperties,
+  };
+
+  declare export type StyleRulesCallback<ClassKey: string> = (
+    theme: Theme
+  ) => StyleRules<ClassKey>;
+
+  declare export type Styles<ClassKey: string> =
+    | StyleRules<ClassKey>
+    | StyleRulesCallback<ClassKey>;
+
+  declare type _PropsOfStyles<Props: {}, S: Styles<any, Props, any>> = Props;
+  declare type _ClassKeyOfStyles<
+    ClassKey: string,
+    S: Styles<any, any, ClassKey>
+  > = ClassKey;
+
+  declare export type PropsOfStyles<S: Styles<*, *, *>> = _PropsOfStyles<*, S>;
+  declare export type ClassKeyOfStyles<S: Styles<*, *, *>> = _ClassKeyOfStyles<
+    *
+  >;
+
+  declare export type WithStylesOptions = StyleSheetFactoryOptions & {
+    flip?: boolean,
+    name?: string,
+  };
+
+  declare export type ClassNameMap<Keys: string> = { [Keys]: string };
+
+  declare export type StyledComponentProps<ClassesKeys: string> = {
     classes?: ClassNameMap<ClassesKeys>,
     innerRef?: React$Ref<any>,
   };
 
-  declare export type CSSProperties = CSS$Properties;
+  declare export default {
+    <ClassKey: string, Options: WithStylesOptions & { withTheme: true }>(
+      style: Styles<ClassKey>,
+      options?: Options
+    ): <Comp: React$ComponentType<*>>(
+      Component: Comp
+    ) => React$ComponentType<{
+      ...$Exact<$Diff<React$ElementConfig<Comp>, { classes: any, theme: any }>>,
+      ...StyledComponentProps<ClassKey>,
+    }>,
+    <ClassKey: string, Options: WithStylesOptions & { withTheme?: false }>(
+      style: Styles<ClassKey>,
+      options?: Options
+    ): <Comp: React$ComponentType<*>>(
+      Component: Comp
+    ) => React$ComponentType<{
+      ...$Exact<$Diff<React$ElementConfig<Comp>, { classes: any }>>,
+      ...StyledComponentProps<ClassKey>,
+    }>,
+  };
 }
 declare module '@material-ui/core/styles/withTheme' {
 }

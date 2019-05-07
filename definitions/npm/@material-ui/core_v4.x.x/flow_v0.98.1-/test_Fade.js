@@ -75,7 +75,6 @@ describe('own props', () => {
         height: '100%',
         margin: 'auto',
       }}
-      theme={{}}
     >
       <div />
     </Fade>;
