@@ -3144,7 +3144,7 @@ declare module "sequelize" {
     */
     static addScope(
       name: string,
-      scope: AnyFindOptions | Function,
+      scope: AnyFindOptions | (...args: Array<any>) => AnyFindOptions,
       options?: AddScopeOptions): void,
 
     /**
@@ -5275,7 +5275,7 @@ declare module "sequelize" {
    * @see  DefineOptions
    */
   declare export type DefineScopeOptions = {
-    [scopeName: string]: AnyFindOptions | Function
+    [scopeName: string]: AnyFindOptions | (...args: Array<any>) => AnyFindOptions
   }
 
 
