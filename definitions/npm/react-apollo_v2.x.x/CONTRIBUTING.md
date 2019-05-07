@@ -11,3 +11,4 @@ Below is a list of common reviewers on Apollo related libraries:
 - bwlt
 - TLadd
 - budde377
+- jedwards1211
