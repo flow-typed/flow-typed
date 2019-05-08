@@ -1,7 +1,7 @@
 //@flow
 import { it, describe } from 'flow-typed-test';
 import * as React from 'react';
-import { Backdrop, Fade } from '@material-ui/core';
+import { Backdrop } from '@material-ui/core';
 
 const requiredProps = {
   open: true,

@@ -2113,6 +2113,34 @@ declare module '@material-ui/core/Chip/Chip' {
   declare export * from '@material-ui/core/Chip'
 }
 
+declare module '@material-ui/core/Collapse' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+  import type { TransitionProps } from '@material-ui/core/transitions/transition';
+
+  declare export type CollapseClassKey =
+    | 'container'
+    | 'entered'
+    | 'wrapper'
+    | 'wrapperInner';
+  declare export type CollapseProps = StandardProps<
+    TransitionProps,
+    CollapseClassKey,
+    { timeout: any }
+  > & {
+    children?: React$Node,
+    component?: React$ElementType,
+    collapsedHeight?: string,
+    theme?: Theme,
+    timeout?: $ElementType<TransitionProps, 'timeout'> | 'auto',
+  };
+
+  declare export default React$ComponentType<CollapseProps>;
+}
+declare module '@material-ui/core/Collapse/Collapse' {
+  declare export * from '@material-ui/core/Collapse'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2168,6 +2196,7 @@ declare module '@material-ui/core' {
   declare export { default as CardHeader } from '@material-ui/core/CardHeader';
   declare export { default as CardMedia } from '@material-ui/core/CardMedia';
   declare export { default as Chip } from '@material-ui/core/Chip';
+  declare export { default as Collapse } from '@material-ui/core/Collapse';
 
   declare export {
     default as CardActionArea,
