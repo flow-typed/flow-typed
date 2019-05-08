@@ -2032,7 +2032,10 @@ declare module '@material-ui/core/CardHeader/CardHeader' {
 }
 
 declare module '@material-ui/core/CardMedia' {
-  import type { OverridableComponent, SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
 
   declare export type CardMediaClassKey = 'root' | 'media';
 
@@ -2051,6 +2054,63 @@ declare module '@material-ui/core/CardMedia' {
 }
 declare module '@material-ui/core/CardMedia/CardMedia' {
   declare export * from '@material-ui/core/CardMedia'
+}
+
+declare module '@material-ui/core/Chip' {
+  import type { PropTypes$Color } from '@material-ui/core';
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
+
+  declare export type ChipClassKey =
+    | 'root'
+    | 'colorPrimary'
+    | 'colorSecondary'
+    | 'clickable'
+    | 'clickableColorPrimary'
+    | 'clickableColorSecondary'
+    | 'deletable'
+    | 'deletableColorPrimary'
+    | 'deletableColorSecondary'
+    | 'outlined'
+    | 'outlinedPrimary'
+    | 'outlinedSecondary'
+    | 'avatar'
+    | 'avatarColorPrimary'
+    | 'avatarColorSecondary'
+    | 'avatarChildren'
+    | 'icon'
+    | 'iconColorPrimary'
+    | 'iconColorSecondary'
+    | 'label'
+    | 'deleteIcon'
+    | 'deleteIconColorPrimary'
+    | 'deleteIconColorSecondary'
+    | 'deleteIconOutlinedColorPrimary'
+    | 'deleteIconOutlinedColorSecondary';
+
+  declare type Chip = OverridableComponent<
+    {
+      avatar?: React$Element<any>,
+      clickable?: boolean,
+      color?: PropTypes$Color,
+      deleteIcon?: React$Element<any>,
+      icon?: React$Element<any>,
+      label?: React$Node,
+      onDelete?: mixed => mixed,
+      variant?: 'default' | 'outlined',
+    },
+    'div',
+    ChipClassKey
+  >;
+
+  declare export type ChipProps = SimplifiedPropsOf<Chip>;
+
+  declare export default Chip;
+}
+declare module '@material-ui/core/Chip/Chip' {
+  declare export * from '@material-ui/core/Chip'
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2107,6 +2167,7 @@ declare module '@material-ui/core' {
   declare export { default as Typography } from '@material-ui/core/Typography';
   declare export { default as CardHeader } from '@material-ui/core/CardHeader';
   declare export { default as CardMedia } from '@material-ui/core/CardMedia';
+  declare export { default as Chip } from '@material-ui/core/Chip';
 
   declare export {
     default as CardActionArea,
