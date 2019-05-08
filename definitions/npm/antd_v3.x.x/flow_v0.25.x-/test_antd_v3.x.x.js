@@ -38,6 +38,8 @@ import {
   TreeSelect
 } from "antd";
 
+import type { WrappedFormUtils } from "antd";
+
 describe("Alert", () => {
   it("is a react component", () => {
     const alert = <Alert />;
@@ -306,6 +308,28 @@ describe("Dropdown", () => {
 describe("Form", () => {
   it("is a react component", () => {
     const form = <Form />;
+  });
+  it("have create method that wrap a component with a form", () => {
+
+    type PropsGoodTest = {a:string, form: WrappedFormUtils};
+    type PropsBadTest = {a:string};
+    class GoodTestComponent extends React.Component<PropsGoodTest> {}
+    class BadTestComponent extends React.Component<PropsBadTest> {}
+
+    // create is a function
+    const GoodWrappedTestForm: typeof GoodTestComponent =
+      Form.create<PropsGoodTest>({name: 'good_test_form'})(GoodTestComponent);
+
+    const BadWrappedTestForm: typeof BadTestComponent =
+      // $ExpectError PropsBadTest. it must contain form attribute
+      Form.create<PropsBadTest>({name: 'bad_test_form'})(BadTestComponent);
+
+    // $ExpectError returned component props {a: string}. It must contain form property
+    const ErrorGoodWrappedTestForm: React$ComponentType<{a: string}> =
+      Form.create<PropsGoodTest>({name: 'bad_test_form'})(GoodTestComponent);
+
+
+
   });
 });
 
