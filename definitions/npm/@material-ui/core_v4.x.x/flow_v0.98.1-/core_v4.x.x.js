@@ -1997,6 +1997,40 @@ declare module '@material-ui/core/Typography/Typography' {
   declare export * from '@material-ui/core/Typography'
 }
 
+declare module '@material-ui/core/CardHeader' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { TypographyProps } from '@material-ui/core/Typography';
+
+  declare export type CardHeaderClassKey =
+    | 'root'
+    | 'avatar'
+    | 'action'
+    | 'content'
+    | 'title'
+    | 'subheader';
+
+  declare export type CardHeaderProps = StandardProps<
+    HTMLDivAttributes,
+    CardHeaderClassKey,
+    { title: any }
+  > & {
+    action?: React$Node,
+    avatar?: React$Node,
+    component?: React$ElementType,
+    disableTypography?: boolean,
+    subheader?: React$Node,
+    subheaderTypographyProps?: $Shape<TypographyProps>,
+    title?: React$Node,
+    titleTypographyProps?: $Shape<TypographyProps>,
+  };
+
+  declare export default React$ComponentType<CardHeaderProps>;
+}
+declare module '@material-ui/core/CardHeader/CardHeader' {
+  declare export * from '@material-ui/core/CardHeader'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2049,6 +2083,8 @@ declare module '@material-ui/core' {
   declare export { default as Fade } from '@material-ui/core/Fade';
   declare export { default as ButtonBase } from '@material-ui/core/ButtonBase';
   declare export { default as Typography } from '@material-ui/core/Typography';
+  declare export { default as CardHeader } from '@material-ui/core/CardHeader';
+
   declare export {
     default as CardActionArea,
   } from '@material-ui/core/CardActionArea';
