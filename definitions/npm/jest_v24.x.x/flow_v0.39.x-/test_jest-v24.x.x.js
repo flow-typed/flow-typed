@@ -524,6 +524,7 @@ expect(wrapper).toHaveDisplayName(true);
   const element = document.createElement('div');
 
   expect(element).toBeDisabled();
+  expect(element).toBeEnabled();
   expect(element).toBeEmpty();
   expect(element).toBeInTheDocument();
   expect(element).toBeVisible();
