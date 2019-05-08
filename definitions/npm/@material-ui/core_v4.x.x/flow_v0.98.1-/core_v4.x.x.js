@@ -2031,6 +2031,28 @@ declare module '@material-ui/core/CardHeader/CardHeader' {
   declare export * from '@material-ui/core/CardHeader'
 }
 
+declare module '@material-ui/core/CardMedia' {
+  import type { OverridableComponent, SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
+
+  declare export type CardMediaClassKey = 'root' | 'media';
+
+  declare type CardMedia = OverridableComponent<
+    {
+      image?: string,
+      src?: string,
+    },
+    'div',
+    CardMediaClassKey
+  >;
+
+  declare export type CardMediaProps = SimplifiedPropsOf<CardMedia>;
+
+  declare export default CardMedia;
+}
+declare module '@material-ui/core/CardMedia/CardMedia' {
+  declare export * from '@material-ui/core/CardMedia'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2084,6 +2106,7 @@ declare module '@material-ui/core' {
   declare export { default as ButtonBase } from '@material-ui/core/ButtonBase';
   declare export { default as Typography } from '@material-ui/core/Typography';
   declare export { default as CardHeader } from '@material-ui/core/CardHeader';
+  declare export { default as CardMedia } from '@material-ui/core/CardMedia';
 
   declare export {
     default as CardActionArea,
