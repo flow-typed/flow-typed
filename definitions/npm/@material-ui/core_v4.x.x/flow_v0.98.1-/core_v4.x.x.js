@@ -1864,16 +1864,50 @@ declare module '@material-ui/core/ButtonBase' {
   ((props: { href: string } & OverrideProps<ExtendButtonBaseTypeMap<M>, 'a'>) => React$Node);
   */
   declare type ButtonBase = OverridableComponent<
-    ButtonBaseOwnProps, 'button', ButtonBaseClassKey
+    ButtonBaseOwnProps,
+    'button',
+    ButtonBaseClassKey
   >;
 
-  declare export type ButtonBaseProps = SimplifiedPropsOf<ButtonBase>;
+  declare export type ButtonBaseProps = ButtonBaseOwnProps;
 
   declare export default ButtonBase;
 }
 declare module '@material-ui/core/ButtonBase/ButtonBase' {
   declare export * from '@material-ui/core/ButtonBase'
 }
+
+declare module '@material-ui/core/BottomNavigationAction' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
+
+  declare export type BottomNavigationActionClassKey =
+    | 'root'
+    | 'selected'
+    | 'iconOnly'
+    | 'wrapper'
+    | 'label';
+
+  declare export type BottomNavigationActionProps = StandardProps<
+    ButtonBaseProps,
+    BottomNavigationActionClassKey,
+    { onChange: any }
+  > & {
+    icon?: string | React$Element<any>,
+    label?: React$Node,
+    onChange?: (event: {}, value: mixed) => mixed,
+    onClick?: ({}) => mixed,
+    selected?: boolean,
+    showLabel?: boolean,
+    value?: mixed,
+  };
+
+  declare export default React$ComponentType<BottomNavigationActionProps>;
+}
+declare module '@material-ui/core/BottomNavigationAction/BottomNavigationAction' {
+  declare export * from '@material-ui/core/BottomNavigationAction'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -1925,6 +1959,10 @@ declare module '@material-ui/core' {
   declare export { default as Container } from '@material-ui/core/Container';
   declare export { default as Fade } from '@material-ui/core/Fade';
   declare export { default as ButtonBase } from '@material-ui/core/ButtonBase';
+  declare export {
+    default as BottomNavigationAction,
+  } from '@material-ui/core/BottomNavigationAction';
+
   declare export {
     default as ExpansionPanelDetails,
   } from '@material-ui/core/ExpansionPanelDetails';
