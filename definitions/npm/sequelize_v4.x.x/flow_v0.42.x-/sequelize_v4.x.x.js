@@ -1397,13 +1397,13 @@ declare module "sequelize" {
       singular: string,
       plural: string
     };
-    associationType: $Subtype<AssociationType>;
+    +associationType: AssociationType;
   }
 
   declare type ArrayOrElement<T> = T | Array<T>;
 
   declare class BelongsTo<Source: Model<any>, TargetAttributes: Object, TargetInitAttributes: Object, Target: Model<TargetAttributes, TargetInitAttributes>> extends Association<Source, Target> {
-    associationType: 'BelongsTo';
+    +associationType: 'BelongsTo';
     foreignKey: string;
     foreignKeyField: string;
     foreignKeyAttribute: Attribute;
@@ -1421,7 +1421,7 @@ declare module "sequelize" {
   }
 
   declare class HasOne<Source: Model<any>, TargetAttributes: Object, TargetInitAttributes: Object, Target: Model<TargetAttributes, TargetInitAttributes>> extends Association<Source, Target> {
-    associationType: 'HasOne';
+    +associationType: 'HasOne';
     foreignKey: string;
     foreignKeyField: string;
     foreignKeyAttribute: Attribute;
@@ -1439,7 +1439,7 @@ declare module "sequelize" {
   }
 
   declare class HasMany<Source: Model<any>, TargetAttributes: Object, TargetInitAttributes: Object, Target: Model<TargetAttributes, TargetInitAttributes>> extends Association<Source, Target> {
-    associationType: 'HasMany';
+    +associationType: 'HasMany';
     foreignKey: string;
     foreignKeyField: string;
     foreignKeyAttribute: Attribute;
@@ -1467,7 +1467,7 @@ declare module "sequelize" {
     ThroughAttributes: Object,
     Through: Model<ThroughAttributes, any>
   > extends Association<Source, Target> {
-    associationType: 'BelongsToMany';
+    +associationType: 'BelongsToMany';
     foreignKey: string;
     foreignKeyField: string;
     foreignKeyAttribute: Attribute;
@@ -3144,7 +3144,7 @@ declare module "sequelize" {
     */
     static addScope(
       name: string,
-      scope: AnyFindOptions | Function,
+      scope: AnyFindOptions | (...args: Array<any>) => AnyFindOptions,
       options?: AddScopeOptions): void,
 
     /**
@@ -5275,7 +5275,7 @@ declare module "sequelize" {
    * @see  DefineOptions
    */
   declare export type DefineScopeOptions = {
-    [scopeName: string]: AnyFindOptions | Function
+    [scopeName: string]: AnyFindOptions | (...args: Array<any>) => AnyFindOptions
   }
 
 
