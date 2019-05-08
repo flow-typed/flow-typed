@@ -16,6 +16,7 @@
 
 /definitions/npm/react-apollo_*/**/* @jedwards1211 @thymikee @rasmusprentow @bwlt @budde377
 
+/definitions/npm/@react-navigation @Ashoat
 /definitions/npm/react-navigation_*/**/* @Ashoat
 
 /definitions/npm/redux-oidc_*/**/* @LoganBarnett
