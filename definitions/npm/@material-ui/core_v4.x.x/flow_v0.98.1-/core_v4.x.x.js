@@ -5,8 +5,6 @@
  * This is a temporary abstraction for importing external dependencies.
  */
 
-import { Theme } from '@material-ui/core/styles/createMuiTheme';
-
 declare module '@material-ui/core/@@utils' {
   // Utilities used in this definition:
 
@@ -1810,6 +1808,72 @@ declare module '@material-ui/core/Fade/Fade' {
   declare export * from '@material-ui/core/Fade'
 }
 
+declare module '@material-ui/core/ButtonBase/TouchRipple' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type TouchRippleClassKey =
+    | 'root'
+    | 'ripple'
+    | 'rippleVisible'
+    | 'ripplePulsate'
+    | 'child'
+    | 'childLeaving'
+    | 'childPulsate';
+
+  declare export type TouchRippleProps = StandardProps<
+    HTMLDivAttributes,
+    TouchRippleClassKey,
+    void
+  > & { center?: boolean };
+
+  declare export default React$ComponentType<TouchRippleProps>;
+}
+declare module '@material-ui/core/ButtonBase' {
+  import type { TouchRippleProps } from '@material-ui/core/ButtonBase/TouchRipple';
+  import type {
+    OverrideProps,
+    OverridableComponent,
+    SimplifiedPropsOf,
+    OverridableTypeMap,
+  } from '@material-ui/core/OverridableComponent';
+
+  declare export type ButtonBaseActions = {
+    focusVisible(): void,
+  };
+
+  declare export type ButtonBaseClassKey = 'root' | 'disabled' | 'focusVisible';
+
+  declare export type ButtonBaseOwnProps = {
+    action?: (actions: ButtonBaseActions) => mixed,
+    buttonRef?: React$Ref<any>,
+    centerRipple?: boolean,
+    disabled?: boolean,
+    disableRipple?: boolean,
+    disableTouchRipple?: boolean,
+    focusRipple?: boolean,
+    focusVisibleClassName?: string,
+    onFocusVisible?: ({}) => mixed,
+    TouchRippleProps?: $Shape<TouchRippleProps>,
+    // TODO: remove when fix `ExtendButtonBase`
+    href?: string,
+  };
+
+  /*
+   TODO: need union of components
+  ((props: { href: string } & OverrideProps<ExtendButtonBaseTypeMap<M>, 'a'>) => React$Node);
+  */
+  declare type ButtonBase = OverridableComponent<
+    ButtonBaseOwnProps, 'button', ButtonBaseClassKey
+  >;
+
+  declare export type ButtonBaseProps = SimplifiedPropsOf<ButtonBase>;
+
+  declare export default ButtonBase;
+}
+declare module '@material-ui/core/ButtonBase/ButtonBase' {
+  declare export * from '@material-ui/core/ButtonBase'
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -1860,6 +1924,7 @@ declare module '@material-ui/core' {
   declare export { default as Card } from '@material-ui/core/Card';
   declare export { default as Container } from '@material-ui/core/Container';
   declare export { default as Fade } from '@material-ui/core/Fade';
+  declare export { default as ButtonBase } from '@material-ui/core/ButtonBase';
   declare export {
     default as ExpansionPanelDetails,
   } from '@material-ui/core/ExpansionPanelDetails';
