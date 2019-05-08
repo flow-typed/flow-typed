@@ -1931,6 +1931,72 @@ declare module '@material-ui/core/CardActionArea/CardActionArea' {
   declare export * from '@material-ui/core/CardActionArea'
 }
 
+declare module '@material-ui/core/Typography' {
+  import type { StandardProps, PropTypes$Alignment } from '@material-ui/core';
+  import type { HTMLElementAttributes } from '@material-ui/core/@@dom';
+  import type { ThemeStyle } from '@material-ui/core/styles/createTypography';
+
+  declare export type TypographyClassKey =
+    | 'root'
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'subtitle1'
+    | 'subtitle2'
+    | 'body1'
+    | 'body2'
+    | 'caption'
+    | 'button'
+    | 'overline'
+    | 'srOnly'
+    | 'alignLeft'
+    | 'alignCenter'
+    | 'alignRight'
+    | 'alignJustify'
+    | 'noWrap'
+    | 'gutterBottom'
+    | 'paragraph'
+    | 'colorInherit'
+    | 'colorSecondary'
+    | 'colorTextSecondary'
+    | 'colorError'
+    | 'displayInline'
+    | 'displayBlock';
+
+  declare export type TypographyStyle = ThemeStyle | 'srOnly';
+
+  declare export type TypographyProps = StandardProps<
+    HTMLElementAttributes,
+    TypographyClassKey,
+    void
+  > & {
+    align?: PropTypes$Alignment,
+    color?:
+      | 'initial'
+      | 'inherit'
+      | 'primary'
+      | 'secondary'
+      | 'textPrimary'
+      | 'textSecondary'
+      | 'error',
+    component?: React$ElementType,
+    display?: 'initial' | 'block' | 'inline',
+    gutterBottom?: boolean,
+    noWrap?: boolean,
+    paragraph?: boolean,
+    variant?: TypographyStyle | 'inherit',
+    variantMapping?: { [TypographyStyle]: string },
+  };
+
+  declare export default React$ComponentType<TypographyProps>;
+}
+declare module '@material-ui/core/Typography/Typography' {
+  declare export * from '@material-ui/core/Typography'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -1982,6 +2048,7 @@ declare module '@material-ui/core' {
   declare export { default as Container } from '@material-ui/core/Container';
   declare export { default as Fade } from '@material-ui/core/Fade';
   declare export { default as ButtonBase } from '@material-ui/core/ButtonBase';
+  declare export { default as Typography } from '@material-ui/core/Typography';
   declare export {
     default as CardActionArea,
   } from '@material-ui/core/CardActionArea';
