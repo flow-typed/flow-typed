@@ -1908,6 +1908,29 @@ declare module '@material-ui/core/BottomNavigationAction/BottomNavigationAction'
   declare export * from '@material-ui/core/BottomNavigationAction'
 }
 
+declare module '@material-ui/core/CardActionArea' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
+
+  declare export type CardActionAreaClassKey =
+    | 'root'
+    | 'focusVisible'
+    | 'focusHighlight';
+
+  declare export type CardActionAreaProps = StandardProps<
+    ButtonBaseProps,
+    CardActionAreaClassKey,
+    void
+  > & {
+    focusVisibleClassName?: string,
+  };
+
+  declare export default React$ComponentType<CardActionAreaProps>;
+}
+declare module '@material-ui/core/CardActionArea/CardActionArea' {
+  declare export * from '@material-ui/core/CardActionArea'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -1959,6 +1982,10 @@ declare module '@material-ui/core' {
   declare export { default as Container } from '@material-ui/core/Container';
   declare export { default as Fade } from '@material-ui/core/Fade';
   declare export { default as ButtonBase } from '@material-ui/core/ButtonBase';
+  declare export {
+    default as CardActionArea,
+  } from '@material-ui/core/CardActionArea';
+
   declare export {
     default as BottomNavigationAction,
   } from '@material-ui/core/BottomNavigationAction';

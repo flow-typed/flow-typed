@@ -1,35 +1,32 @@
 //@flow
 import { it, describe } from 'flow-typed-test';
 import * as React from 'react';
-import { BottomNavigationAction, Breadcrumbs } from '@material-ui/core';
+import { CardActionArea } from '@material-ui/core';
 
 describe('imports', () => {
   it('should passes when used properly', () => {
-    const BottomNavigationAction1 = require('@material-ui/core/BottomNavigationAction')
-      .default;
-    const BottomNavigationAction0 = require('@material-ui/core/BottomNavigationAction/BottomNavigationAction')
+    const CardActionArea1 = require('@material-ui/core/CardActionArea').default;
+    const CardActionArea0 = require('@material-ui/core/CardActionArea/CardActionArea')
       .default;
 
-    <BottomNavigationAction1 />;
-    <BottomNavigationAction0 />;
+    <CardActionArea1 />;
+    <CardActionArea0 />;
   });
 });
 
 describe('classes', () => {
   it('should passes when used properly', () => {
-    <BottomNavigationAction
+    <CardActionArea
       classes={{
         root: 'str',
-        selected: 'str',
-        iconOnly: 'str',
-        wrapper: 'str',
-        label: 'str',
+        focusVisible: 'str',
+        focusHighlight: 'str',
       }}
     />;
   });
 
   it('should raises an error when pass not implemented prop to the classes property', () => {
-    <BottomNavigationAction
+    <CardActionArea
       // $ExpectError: the `classes` enum does not contain `murAmur` prop
       classes={{
         murAmur: 'custom-class-name',
@@ -38,7 +35,7 @@ describe('classes', () => {
   });
 
   it('should raises an error when pass incompatible with string value', () => {
-    <Breadcrumbs
+    <CardActionArea
       classes={{
         // $ExpectError: need string value
         root: true,
@@ -49,72 +46,28 @@ describe('classes', () => {
 
 describe('own props', () => {
   it('should passes when used properly', () => {
-    <BottomNavigationAction
-      onFocusVisible={() => {}}
-      action={actions => {
-        (actions.focusVisible: () => void);
+    <CardActionArea focusVisibleClassName={'string'} />;
 
-        // $ExpectError: check any
-        (actions.focusVisible: number);
-      }}
-      TouchRippleProps={{}}
-    />;
-
-    <BottomNavigationAction
-      icon={'string'}
-      onClick={() => {}}
-      onChange={() => {}}
-      value={'11'}
-    />;
-
-    <BottomNavigationAction
-      icon={<i />}
-      label={<label />}
-      onChange={async () => {}}
-      onClick={async () => {}}
-      selected={false}
-      showLabel={false}
-      value={11}
-    />;
-
-    <BottomNavigationAction
-      icon={undefined}
-      label={undefined}
-      onChange={undefined}
-      onClick={undefined}
-      selected={undefined}
-      showLabel={undefined}
-      value={undefined}
-    />;
+    <CardActionArea focusVisibleClassName={undefined} />;
   });
 
   it('should raises an error when pass incompatible types', () => {
-    <BottomNavigationAction
-      // $ExpectError: need string or one react element (not array)
-      icon={[<i />]}
-      // $ExpectError
-      label={{ need: 'react node' }}
-      // $ExpectError: children is required
-      onChange={'need function'}
-      // $ExpectError: children is required
-      onClick={'need function'}
-      // $ExpectError: children is required
-      selected={'need boolean'}
-      // $ExpectError: children is required
-      showLabel={'need boolean'}
+    <CardActionArea
+      // $ExpectError: need string
+      focusVisibleClassName={123}
     />;
   });
 });
 
 describe('dom props', () => {
   it('should passes when pass some DOM props', () => {
-    <BottomNavigationAction aria-hidden="true" />;
+    <CardActionArea aria-hidden="true" />;
   });
 });
 
-describe('BottomNavigationAction props', () => {
+describe('CardActionArea props', () => {
   it('should passes when used inherited props properly', () => {
-    <BottomNavigationAction
+    <CardActionArea
       action={async () => {}}
       centerRipple={false}
       disabled={false}
@@ -138,7 +91,7 @@ describe('BottomNavigationAction props', () => {
       href={'http://'}
     />;
 
-    <BottomNavigationAction
+    <CardActionArea
       onFocusVisible={() => {}}
       action={actions => {
         (actions.focusVisible: () => void);
@@ -149,7 +102,7 @@ describe('BottomNavigationAction props', () => {
       TouchRippleProps={{}}
     />;
 
-    <BottomNavigationAction
+    <CardActionArea
       action={undefined}
       centerRipple={undefined}
       disabled={undefined}
@@ -164,7 +117,7 @@ describe('BottomNavigationAction props', () => {
   });
 
   it('should fail with error when passing incompatible for inherited props', () => {
-    <BottomNavigationAction
+    <CardActionArea
       TouchRippleProps={{
         // $ExpectError
         center: 'need bool',
@@ -175,7 +128,7 @@ describe('BottomNavigationAction props', () => {
       }}
     />;
 
-    <BottomNavigationAction
+    <CardActionArea
       TouchRippleProps={{
         // $ExpectError: the `classes` enum does not contain `murAmur` prop
         classes: {
@@ -184,7 +137,7 @@ describe('BottomNavigationAction props', () => {
       }}
     />;
 
-    <BottomNavigationAction
+    <CardActionArea
       // $ExpectError
       action={'need function'}
       // $ExpectError
