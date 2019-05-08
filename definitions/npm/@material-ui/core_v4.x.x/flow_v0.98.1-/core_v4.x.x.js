@@ -2141,6 +2141,22 @@ declare module '@material-ui/core/Collapse/Collapse' {
   declare export * from '@material-ui/core/Collapse'
 }
 
+declare module '@material-ui/core/Portal' {
+  declare export type PortalProps<Container> = {|
+    children: React$Element<any>,
+    container?: React$ElementRef<Container> | null,
+    disablePortal?: boolean,
+    onRendered?: () => mixed,
+  |};
+
+  declare export default class Portal<
+    Container: React$ElementType
+  > extends React$Component<PortalProps<Container>> {}
+}
+declare module '@material-ui/core/Portal/Portal' {
+  declare export * from '@material-ui/core/Portal'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2197,7 +2213,7 @@ declare module '@material-ui/core' {
   declare export { default as CardMedia } from '@material-ui/core/CardMedia';
   declare export { default as Chip } from '@material-ui/core/Chip';
   declare export { default as Collapse } from '@material-ui/core/Collapse';
-
+  declare export { default as Portal } from '@material-ui/core/Portal';
   declare export {
     default as CardActionArea,
   } from '@material-ui/core/CardActionArea';
