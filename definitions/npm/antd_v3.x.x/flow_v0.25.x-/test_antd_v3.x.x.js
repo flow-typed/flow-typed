@@ -339,6 +339,17 @@ describe("Input.TextArea", () => {
   });
 });
 
+describe("Input.Password", () => {
+  it("is a react component", () => {
+    const inputPassword = <Input.Password />;
+  });
+  it("should accept boolean visibilityToggle", () => {
+    const good = <Input.Password visibilityToggle={false} />;
+    // $ExpectError string. visibilityToggle must be of type boolean
+    const bad = <Input.Password visibilityToggle={"false"} />
+  });
+});
+
 describe("Layout", () => {
   it("is a react component", () => {
     const layout = <Layout />;
