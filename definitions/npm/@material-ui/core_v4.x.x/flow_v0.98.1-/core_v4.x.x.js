@@ -2458,6 +2458,37 @@ declare module '@material-ui/core/Drawer/Drawer' {
   declare export * from '@material-ui/core/Drawer'
 }
 
+declare module '@material-ui/core/ExpansionPanel' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { PaperProps } from '@material-ui/core/Paper';
+  import type { TransitionProps } from '@material-ui/core/transitions/transition';
+
+  declare export type ExpansionPanelClassKey =
+    | 'root'
+    | 'rounded'
+    | 'expanded'
+    | 'disabled';
+
+  declare export type ExpansionPanelProps = StandardProps<
+    ExpansionPanelClassKey,
+    {
+      defaultExpanded?: boolean,
+      disabled?: boolean,
+      expanded?: boolean,
+      onChange?: (event: {}, expanded: boolean) => mixed,
+      TransitionComponent?: React$ElementType,
+      TransitionProps?: TransitionProps,
+    },
+    PaperProps,
+    { onChange: any }
+  >;
+
+  declare export default React$ComponentType<ExpansionPanelProps>;
+}
+declare module '@material-ui/core/ExpansionPanel/ExpansionPanel' {
+  declare export * from '@material-ui/core/ExpansionPanel'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2482,6 +2513,10 @@ declare module '@material-ui/core' {
   declare export { default as Divider } from '@material-ui/core/Divider';
   declare export { default as Slide } from '@material-ui/core/Slide';
   declare export { default as Drawer } from '@material-ui/core/Drawer';
+  declare export {
+    default as ExpansionPanel,
+  } from '@material-ui/core/ExpansionPanel';
+
   declare export {
     default as DialogContentText,
   } from '@material-ui/core/DialogContentText';
