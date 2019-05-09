@@ -155,7 +155,7 @@ describe('own props', () => {
     />;
   });
 
-  describe('container', () => {
+  describe('inherited container prop', () => {
     declare var someDiv: HTMLDivElement;
     declare var someAnchor: HTMLAnchorElement;
 

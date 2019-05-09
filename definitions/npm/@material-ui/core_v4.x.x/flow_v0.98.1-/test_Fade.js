@@ -143,7 +143,6 @@ describe('own props', () => {
       mountOnEnter={'need bool'}
       // $ExpectError: need boolean
       unmountOnExit={'need bool'}
-      timeout={250}
       // $ExpectError: need function
       addEndListener={69}
       // $ExpectError: need object

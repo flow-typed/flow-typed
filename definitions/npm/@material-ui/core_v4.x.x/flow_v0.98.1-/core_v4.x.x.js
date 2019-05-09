@@ -2201,6 +2201,57 @@ declare module '@material-ui/core/Modal/Modal' {
   declare export * from '@material-ui/core/Modal'
 }
 
+declare module '@material-ui/core/Dialog' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { ModalProps } from '@material-ui/core/Modal';
+  import type { PaperProps } from '@material-ui/core/Paper';
+  import type {
+    TransitionHandlerProps,
+    TransitionProps,
+  } from '@material-ui/core/transitions/transition';
+
+  declare export type DialogClassKey =
+    | 'root'
+    | 'scrollPaper'
+    | 'scrollBody'
+    | 'container'
+    | 'paper'
+    | 'paperScrollPaper'
+    | 'paperScrollBody'
+    | 'paperWidthFalse'
+    | 'paperWidthXs'
+    | 'paperWidthSm'
+    | 'paperWidthMd'
+    | 'paperWidthLg'
+    | 'paperWidthXl'
+    | 'paperFullWidth'
+    | 'paperFullScreen';
+
+  declare export type DialogProps<Container: React$ElementType> = StandardProps<
+    ModalProps<Container> & { ...TransitionHandlerProps },
+    DialogClassKey,
+    { children: any }
+  > & {
+    children?: React$Node,
+    fullScreen?: boolean,
+    fullWidth?: boolean,
+    maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
+    PaperComponent?: React$ElementType,
+    PaperProps?: $Shape<PaperProps>,
+    scroll?: 'body' | 'paper',
+    TransitionComponent?: React$ElementType,
+    transitionDuration?: $ElementType<TransitionProps, 'timeout'>,
+    TransitionProps?: TransitionProps,
+  };
+
+  declare export default class Dialog<
+    Container: React$ElementType
+  > extends React$Component<DialogProps<Container>> {}
+}
+declare module '@material-ui/core/Dialog/Dialog' {
+  declare export * from '@material-ui/core/Dialog'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2259,6 +2310,8 @@ declare module '@material-ui/core' {
   declare export { default as Collapse } from '@material-ui/core/Collapse';
   declare export { default as Portal } from '@material-ui/core/Portal';
   declare export { default as Modal } from '@material-ui/core/Modal';
+  declare export { default as Dialog } from '@material-ui/core/Dialog';
+
   declare export {
     default as CardActionArea,
   } from '@material-ui/core/CardActionArea';
