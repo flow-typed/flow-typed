@@ -21,7 +21,7 @@ declare interface PapaParse$Static {
 }
 
 declare interface PapaParse$ParseConfig {
-    delimiter?: string,
+    delimiter?: number,
     newline?: string,
     quoteChar?: string,
     header?: boolean,
