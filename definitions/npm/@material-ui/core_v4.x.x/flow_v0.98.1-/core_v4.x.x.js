@@ -2355,7 +2355,6 @@ declare module '@material-ui/core/DialogContentText' {
   >;
   declare export default React$ComponentType<DialogContentTextProps>;
 }
-
 declare module '@material-ui/core/DialogContentText/DialogContentText' {
   declare export * from '@material-ui/core/DialogContentText'
 }
@@ -2407,6 +2406,58 @@ declare module '@material-ui/core/Slide/Slide' {
   declare export * from '@material-ui/core/Slide'
 }
 
+declare module '@material-ui/core/Drawer' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { ModalProps } from '@material-ui/core/Modal';
+  import type { SlideProps } from '@material-ui/core/Slide';
+  import type { PaperProps } from '@material-ui/core/Paper';
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+  import type {
+    TransitionHandlerProps,
+    TransitionProps,
+  } from '@material-ui/core/transitions/transition';
+
+  declare export type DrawerClassKey =
+    | 'root'
+    | 'docked'
+    | 'paper'
+    | 'paperAnchorLeft'
+    | 'paperAnchorRight'
+    | 'paperAnchorTop'
+    | 'paperAnchorBottom'
+    | 'paperAnchorDockedLeft'
+    | 'paperAnchorDockedTop'
+    | 'paperAnchorDockedRight'
+    | 'paperAnchorDockedBottom'
+    | 'modal';
+  declare export type DrawerProps<Container: React$ElementType> = StandardProps<
+    DrawerClassKey,
+    {
+      anchor?: 'left' | 'top' | 'right' | 'bottom',
+      children?: React$Node,
+      elevation?: number,
+      ModalProps?: $Shape<ModalProps<Container>>,
+      open?: boolean,
+      PaperProps?: $Shape<PaperProps>,
+      SlideProps?: $Shape<SlideProps>,
+      theme?: Theme,
+      transitionDuration?: $ElementType<TransitionProps, 'timeout'>,
+      variant?: 'permanent' | 'persistent' | 'temporary',
+    },
+    ModalProps<Container> & $Shape<TransitionHandlerProps>,
+    {
+      open: any,
+      children: any,
+    }
+  >;
+  declare export default class Modal<
+    Container: React$ElementType
+  > extends React$Component<DrawerProps<Container>> {}
+}
+declare module '@material-ui/core/Drawer/Drawer' {
+  declare export * from '@material-ui/core/Drawer'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2430,6 +2481,7 @@ declare module '@material-ui/core' {
   declare export { default as Dialog } from '@material-ui/core/Dialog';
   declare export { default as Divider } from '@material-ui/core/Divider';
   declare export { default as Slide } from '@material-ui/core/Slide';
+  declare export { default as Drawer } from '@material-ui/core/Drawer';
   declare export {
     default as DialogContentText,
   } from '@material-ui/core/DialogContentText';
