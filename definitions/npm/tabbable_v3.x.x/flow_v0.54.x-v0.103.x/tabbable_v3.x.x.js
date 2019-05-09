@@ -4,13 +4,13 @@ declare module 'tabbable' {
   |};
 
   declare interface UntouchabilityChecker {
-    hasDisplayNone(node: Node, nodeComputedStyle: any): boolean;
-    isUntouchable(node: Node): boolean;
+    hasDisplayNone(node: HTMLElement, nodeComputedStyle: any): boolean;
+    isUntouchable(node: HTMLElement): boolean;
   }
 
   declare module.exports: {
-    (el: Node, options?: ?TabbableOptions): Array<Node>,
-    isTabbable(node: Node, untouchabilityChecker?: ?UntouchabilityChecker): boolean,
-    isFocusable(node: Node, untouchabilityChecker?: ?UntouchabilityChecker): boolean,
+    (el: HTMLElement, options?: ?TabbableOptions): Array<HTMLElement>,
+    isTabbable(node: HTMLElement, untouchabilityChecker?: ?UntouchabilityChecker): boolean,
+    isFocusable(node: HTMLElement, untouchabilityChecker?: ?UntouchabilityChecker): boolean,
   };
 }
