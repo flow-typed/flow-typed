@@ -2360,6 +2360,37 @@ declare module '@material-ui/core/DialogContentText/DialogContentText' {
   declare export * from '@material-ui/core/DialogContentText'
 }
 
+declare module '@material-ui/core/Divider' {
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
+
+  declare export type DividerClassKey =
+    | 'root'
+    | 'absolute'
+    | 'inset'
+    | 'light'
+    | 'middle';
+
+  declare type Divider = OverridableComponent<
+    {
+      absolute?: boolean,
+      light?: boolean,
+      variant?: 'fullWidth' | 'inset' | 'middle',
+    },
+    'hr',
+    DividerClassKey
+  >;
+
+  declare export type DividerProps = SimplifiedPropsOf<Divider>;
+
+  declare export default Divider;
+}
+declare module '@material-ui/core/Divider/Divider' {
+  declare export * from '@material-ui/core/Divider'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2381,6 +2412,7 @@ declare module '@material-ui/core' {
   declare export { default as Portal } from '@material-ui/core/Portal';
   declare export { default as Modal } from '@material-ui/core/Modal';
   declare export { default as Dialog } from '@material-ui/core/Dialog';
+  declare export { default as Divider } from '@material-ui/core/Divider';
   declare export {
     default as DialogContentText,
   } from '@material-ui/core/DialogContentText';
