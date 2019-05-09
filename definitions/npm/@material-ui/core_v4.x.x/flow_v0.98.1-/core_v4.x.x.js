@@ -2391,6 +2391,22 @@ declare module '@material-ui/core/Divider/Divider' {
   declare export * from '@material-ui/core/Divider'
 }
 
+declare module '@material-ui/core/Slide' {
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+  import type { TransitionProps } from '@material-ui/core/transitions/transition';
+
+  declare export type SlideProps = TransitionProps & {
+    direction: 'left' | 'right' | 'up' | 'down',
+    ref?: React$Ref<mixed>,
+    theme?: Theme,
+  };
+
+  declare export default React$ComponentType<SlideProps>;
+}
+declare module '@material-ui/core/Slide/Slide' {
+  declare export * from '@material-ui/core/Slide'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2413,6 +2429,7 @@ declare module '@material-ui/core' {
   declare export { default as Modal } from '@material-ui/core/Modal';
   declare export { default as Dialog } from '@material-ui/core/Dialog';
   declare export { default as Divider } from '@material-ui/core/Divider';
+  declare export { default as Slide } from '@material-ui/core/Slide';
   declare export {
     default as DialogContentText,
   } from '@material-ui/core/DialogContentText';

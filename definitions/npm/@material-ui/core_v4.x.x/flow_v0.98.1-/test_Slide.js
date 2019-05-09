@@ -1,23 +1,44 @@
 //@flow
 import { it, describe } from 'flow-typed-test';
 import * as React from 'react';
-import { Fade } from '@material-ui/core';
+import { Slide } from '@material-ui/core';
 import type { TransitionStatus } from '@material-ui/core/transitions';
+
+const requiredProps = {
+  direction: 'left',
+};
 
 describe('imports', () => {
   it('should passes when used properly', () => {
-    const Fade1 = require('@material-ui/core/Fade').default;
-    const Fade0 = require('@material-ui/core/Fade/Fade').default;
+    const Slide1 = require('@material-ui/core/Slide').default;
+    const Slide0 = require('@material-ui/core/Slide/Slide').default;
 
-    <Fade1 />;
-    <Fade0 />;
+    <Slide1 {...requiredProps} />;
+    <Slide0 {...requiredProps} />;
+  });
+});
+
+describe('own props', () => {
+  it('should passes when used properly', () => {
+    <Slide direction={'up'} />;
+  });
+
+  it('should raises an error when pass incompatible types', () => {
+    <Slide
+      // $ExpectError: `up__` missing in enum
+      direction={'up__'}
+    />;
+
+    // $ExpectError: `direction` is required prop
+    <Slide />;
   });
 });
 
 describe('inherited Transition props', () => {
   describe('events', () => {
     it('should passes when used properly', () => {
-      <Fade
+      <Slide
+        {...requiredProps}
         onEnter={async (node, isAppearing) => {
           (node: HTMLElement);
           (isAppearing: boolean);
@@ -51,12 +72,12 @@ describe('inherited Transition props', () => {
         addEndListener={() => {}}
       >
         <div />
-      </Fade>;
+      </Slide>;
     });
   });
-
   it('should passes when used properly', () => {
-    <Fade
+    <Slide
+      {...requiredProps}
       appear={false}
       enter={false}
       exit={false}
@@ -78,13 +99,13 @@ describe('inherited Transition props', () => {
       }}
     >
       <div />
-    </Fade>;
+    </Slide>;
 
-    <Fade timeout={{ exit: 69 }} />;
+    <Slide {...requiredProps} timeout={{ exit: 69 }} />;
 
-    <Fade timeout={{ enter: 69 }} />;
+    <Slide {...requiredProps} timeout={{ enter: 69 }} />;
 
-    <Fade timeout={{ enter: 69, exit: 69 }}>
+    <Slide {...requiredProps} timeout={{ enter: 69, exit: 69 }}>
       {status => {
         (status: TransitionStatus);
 
@@ -93,9 +114,10 @@ describe('inherited Transition props', () => {
 
         return <div />;
       }}
-    </Fade>;
+    </Slide>;
 
-    <Fade
+    <Slide
+      {...requiredProps}
       appear={undefined}
       enter={undefined}
       exit={undefined}
@@ -117,9 +139,10 @@ describe('inherited Transition props', () => {
 
   it('should raises an error when pass incompatible types', () => {
     // $ExpectError: invalid children
-    <Fade>{{ upps: 'sss...' }}</Fade>;
+    <Slide {...requiredProps}>{{ upps: 'sss...' }}</Slide>;
 
-    <Fade
+    <Slide
+      {...requiredProps}
       // $ExpectError: need boolean
       appear={'need bool'}
       // $ExpectError: need boolean
@@ -153,15 +176,15 @@ describe('inherited Transition props', () => {
     />;
 
     // $ExpectError: children function must return React Node
-    <Fade>{() => {}}</Fade>;
+    <Slide {...requiredProps}>{() => {}}</Slide>;
 
     // $ExpectError: `enter` must be number
-    <Fade timeout={{ enter: '69' }} />;
+    <Slide {...requiredProps} timeout={{ enter: '69' }} />;
 
     // $ExpectError: `exit` must be number
-    <Fade timeout={{ exit: '69' }} />;
+    <Slide {...requiredProps} timeout={{ exit: '69' }} />;
 
     // $ExpectError:  exact type test, `exit___` missing
-    <Fade timeout={{ exit___: 69 }} />;
+    <Slide {...requiredProps} timeout={{ exit___: 69 }} />;
   });
 });
