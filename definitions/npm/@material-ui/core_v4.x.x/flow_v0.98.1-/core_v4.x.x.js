@@ -352,11 +352,70 @@ declare module '@material-ui/core/transitions/transition/@@react-transition-grou
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-declare module '@material-ui/core/OverridableComponent' {
+declare module '@material-ui/core/flow-types' {
   import type {
-    StyledComponentProps,
     CSSProperties,
+    StyledComponentProps,
   } from '@material-ui/core/styles/withStyles';
+
+  // TODO
+  declare export type PaletteType = any;
+
+  declare export type PropTypes$Alignment =
+    | 'inherit'
+    | 'left'
+    | 'center'
+    | 'right'
+    | 'justify';
+  declare export type PropTypes$Color =
+    | 'inherit'
+    | 'primary'
+    | 'secondary'
+    | 'default';
+  declare export type PropTypes$Margin = 'none' | 'dense' | 'normal';
+
+  declare export type CommonComponentProps = {
+    className?: string,
+    style?: CSSProperties,
+  };
+
+  declare export type Color = {|
+    [50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900]: string,
+    A100: string,
+    A200: string,
+    A400: string,
+    A700: string,
+  |};
+
+  declare export type InheritStandardProps<
+    BaseProps: {},
+    Removals: ?{}
+  > = $Diff<
+    BaseProps,
+    {
+      ...$Exact<Removals>,
+      classes: any,
+      className: any,
+      style: any,
+    }
+  >;
+
+  declare export type StandardProps<
+    ClassesKeys: string,
+    AdditionalProps: {},
+    InheritedProps: {},
+    Removals: ?{}
+  > = $ReadOnly<
+    InheritStandardProps<InheritedProps, Removals> &
+      StyledComponentProps<ClassesKeys> &
+      CommonComponentProps &
+      AdditionalProps
+  >;
+}
+
+declare module '@material-ui/core/OverridableComponent' {
+  import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
+  import type { CommonComponentProps } from '@material-ui/core/flow-types';
 
   /**
    * a component whose root component can be controled via a `component` prop
@@ -372,9 +431,9 @@ declare module '@material-ui/core/OverridableComponent' {
   };
 
   declare export type OverridableComponent<
-    Props,
-    DefaultComp,
-    ClassKey
+    Props: {},
+    DefaultComp: React$ElementType,
+    ClassKey: string
   > = $OverridableComponent<OverridableTypeMap<Props, DefaultComp, ClassKey>>;
 
   /**
@@ -410,10 +469,7 @@ declare module '@material-ui/core/OverridableComponent' {
    */
   declare export type CommonProps<
     M: OverridableTypeMap<*, *, *>
-  > = StyledComponentProps<$ElementType<M, 'classKey'>> & {
-    className?: string,
-    style?: CSSProperties,
-  };
+  > = StyledComponentProps<$ElementType<M, 'classKey'>> & CommonComponentProps;
 
   declare export type OverridableTypeMap<
     Props: {},
@@ -454,6 +510,7 @@ declare module '@material-ui/core/transitions' {
   };
 
   declare export type TransitionHandlerKeys = $Keys<_TransitionHandler>;
+
   declare export type TransitionHandlerProps = $$Pick<
     _TransitionHandler,
     BaseTransitionProps
@@ -515,19 +572,19 @@ declare module '@material-ui/core/colors' {
   declare export { default as yellow } from '@material-ui/core/colors/yellow';
 }
 declare module '@material-ui/core/colors/amber' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/blue' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/blueGrey' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/brown' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/common' {
@@ -539,63 +596,63 @@ declare module '@material-ui/core/colors/common' {
   declare export default CommonColors;
 }
 declare module '@material-ui/core/colors/cyan' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/deepOrange' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/deepPurple' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/green' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/grey' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/indigo' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/lightBlue' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/lightGreen' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/lime' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/orange' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/pink' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/purple' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/red' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/teal' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 declare module '@material-ui/core/colors/yellow' {
-  import type { Color } from '@material-ui/core';
+  import type { Color } from '@material-ui/core/flow-types';
   declare export default Color;
 }
 
@@ -875,7 +932,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   declare export default (options?: ThemeOptions) => Theme;
 }
 declare module '@material-ui/core/styles/createPalette' {
-  import type { Color, PaletteType } from '@material-ui/core';
+  import type { Color, PaletteType } from '@material-ui/core/flow-types';
   import type { CommonColors } from '@material-ui/core/colors/common';
 
   declare export type ColorPartial = $Shape<Color>;
@@ -1250,7 +1307,7 @@ declare module '@material-ui/core/styles' {
 }
 
 declare module '@material-ui/core/Paper' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
 
   declare export type PaperClassKey =
@@ -1283,14 +1340,15 @@ declare module '@material-ui/core/Paper' {
     | 'elevation24';
 
   declare export type PaperProps = StandardProps<
-    HTMLDivAttributes,
     PaperClassKey,
+    {
+      component?: React$ElementType,
+      elevation?: number,
+      square?: boolean,
+    },
+    HTMLDivAttributes,
     void
-  > & {
-    component?: React$ElementType,
-    elevation?: number,
-    square?: boolean,
-  };
+  >;
 
   declare export default React$ComponentType<PaperProps>;
 }
@@ -1299,7 +1357,10 @@ declare module '@material-ui/core/Paper/Paper' {
 }
 
 declare module '@material-ui/core/AppBar' {
-  import type { StandardProps, PropTypes$Color } from '@material-ui/core';
+  import type {
+    StandardProps,
+    PropTypes$Color,
+  } from '@material-ui/core/flow-types';
   import type { PaperProps } from '@material-ui/core/Paper';
 
   declare export type AppBarClassKey =
@@ -1314,13 +1375,14 @@ declare module '@material-ui/core/AppBar' {
     | 'colorSecondary';
 
   declare export type AppBarProps = StandardProps<
-    PaperProps,
     AppBarClassKey,
+    {
+      color?: PropTypes$Color,
+      position?: 'fixed' | 'absolute' | 'sticky' | 'static' | 'relative',
+    },
+    PaperProps,
     void
-  > & {
-    color?: PropTypes$Color,
-    position?: 'fixed' | 'absolute' | 'sticky' | 'static' | 'relative',
-  };
+  >;
 
   declare export default React$ComponentType<AppBarProps>;
 }
@@ -1359,7 +1421,7 @@ declare module '@material-ui/core/Avatar/Avatar' {
 }
 
 declare module '@material-ui/core/Backdrop' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   import type { FadeProps } from '@material-ui/core/Fade';
   import type { TransitionProps } from '@material-ui/core/transitions';
@@ -1367,15 +1429,16 @@ declare module '@material-ui/core/Backdrop' {
   declare export type BackdropClassKey = 'root' | 'invisible';
 
   declare export type BackdropProps = StandardProps<
-    HTMLDivAttributes & { ...FadeProps },
     BackdropClassKey,
+    {
+      open: boolean,
+      invisible?: boolean,
+      onClick?: ({}) => mixed,
+      transitionDuration?: $ElementType<TransitionProps, 'timeout'>,
+    },
+    HTMLDivAttributes & { ...FadeProps },
     void
-  > & {
-    open: boolean,
-    invisible?: boolean,
-    onClick?: ({}) => mixed,
-    transitionDuration?: $ElementType<TransitionProps, 'timeout'>,
-  };
+  >;
 
   declare export default React$ComponentType<BackdropProps>;
 }
@@ -1385,7 +1448,10 @@ declare module '@material-ui/core/Backdrop/Backdrop' {
 
 declare module '@material-ui/core/Badge' {
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
-  import type { StandardProps, PropTypes$Color } from '@material-ui/core';
+  import type {
+    StandardProps,
+    PropTypes$Color,
+  } from '@material-ui/core/flow-types';
 
   declare export type BadgeClassKey =
     | 'root'
@@ -1397,19 +1463,20 @@ declare module '@material-ui/core/Badge' {
     | 'dot';
 
   declare export type BadgeProps = StandardProps<
-    HTMLDivAttributes,
     BadgeClassKey,
+    {
+      children: React$Node,
+      badgeContent?: React$Node,
+      color?: PropTypes$Color | 'error',
+      component?: React$ElementType,
+      invisible?: boolean,
+      max?: number,
+      showZero?: boolean,
+      variant?: 'standard' | 'dot',
+    },
+    HTMLDivAttributes,
     void
-  > & {
-    children: React$Node,
-    badgeContent?: React$Node,
-    color?: PropTypes$Color | 'error',
-    component?: React$ElementType,
-    invisible?: boolean,
-    max?: number,
-    showZero?: boolean,
-    variant?: 'standard' | 'dot',
-  };
+  >;
 
   declare export default React$ComponentType<BadgeProps>;
 }
@@ -1419,21 +1486,22 @@ declare module '@material-ui/core/Badge/Badge' {
 
 declare module '@material-ui/core/BottomNavigation' {
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
 
   declare export type BottomNavigationClassKey = 'root';
 
   declare export type BottomNavigationProps = StandardProps<
-    HTMLDivAttributes,
     BottomNavigationClassKey,
+    {
+      component?: React$ElementType,
+      children: React$Node,
+      onChange?: (event: {}, value: any) => mixed,
+      showLabels?: boolean,
+      value?: any,
+    },
+    HTMLDivAttributes,
     { onChange: any }
-  > & {
-    component?: React$ElementType,
-    children: React$Node,
-    onChange?: (event: {}, value: any) => mixed,
-    showLabels?: boolean,
-    value?: any,
-  };
+  >;
 
   declare export default React$ComponentType<BottomNavigationProps>;
 }
@@ -1551,18 +1619,19 @@ declare module '@material-ui/core/Breadcrumbs/Breadcrumbs' {
 }
 
 declare module '@material-ui/core/Card' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { PaperProps } from '@material-ui/core/Paper';
 
   declare export type CardClassKey = 'root';
 
   declare export type CardProps = StandardProps<
-    PaperProps,
     CardClassKey,
+    {
+      raised?: boolean,
+    },
+    PaperProps,
     void
-  > & {
-    raised?: boolean,
-  };
+  >;
 
   declare export default React$ComponentType<CardProps>;
 }
@@ -1572,17 +1641,18 @@ declare module '@material-ui/core/Card/Card' {
 
 declare module '@material-ui/core/CardActions' {
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
 
   declare export type CardActionsClassKey = 'root' | 'spacing';
 
   declare export type CardActionsProps = StandardProps<
-    HTMLDivAttributes,
     CardActionsClassKey,
+    {
+      disableSpacing?: boolean,
+    },
+    HTMLDivAttributes,
     void
-  > & {
-    disableSpacing?: boolean,
-  };
+  >;
 
   declare export default React$ComponentType<CardActionsProps>;
 }
@@ -1591,18 +1661,19 @@ declare module '@material-ui/core/CardActions/CardActions' {
 }
 
 declare module '@material-ui/core/CardContent' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { PaperProps } from '@material-ui/core/Paper';
 
   declare export type CardContentClassKey = 'root';
 
   declare export type CardContentProps = StandardProps<
-    PaperProps,
     CardContentClassKey,
+    {
+      component?: React$ElementType,
+    },
+    PaperProps,
     void
-  > & {
-    component?: React$ElementType,
-  };
+  >;
 
   declare export default React$ComponentType<CardContentProps>;
 }
@@ -1611,7 +1682,7 @@ declare module '@material-ui/core/CardContent/CardContent' {
 }
 
 declare module '@material-ui/core/CircularProgress' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   declare export type CircularProgressClassKey =
     | 'root'
@@ -1626,17 +1697,18 @@ declare module '@material-ui/core/CircularProgress' {
     | 'circleDisableShrink';
 
   declare export type CircularProgressProps = StandardProps<
-    HTMLDivAttributes,
     CircularProgressClassKey,
+    {
+      color?: 'primary' | 'secondary' | 'inherit',
+      disableShrink?: boolean,
+      size?: number | string,
+      thickness?: number,
+      value?: number,
+      variant?: 'determinate' | 'indeterminate' | 'static',
+    },
+    HTMLDivAttributes,
     void
-  > & {
-    color?: 'primary' | 'secondary' | 'inherit',
-    disableShrink?: boolean,
-    size?: number | string,
-    thickness?: number,
-    value?: number,
-    variant?: 'determinate' | 'indeterminate' | 'static',
-  };
+  >;
 
   declare export default React$ComponentType<CircularProgressProps>;
 }
@@ -1660,7 +1732,7 @@ declare module '@material-ui/core/ClickAwayListener/ClickAwayListener' {
 
 declare module '@material-ui/core/Container' {
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
 
   declare export type ContainerClassKey =
     | 'root'
@@ -1672,14 +1744,15 @@ declare module '@material-ui/core/Container' {
     | 'maxWidthXl';
 
   declare export type ContainerProps = StandardProps<
-    HTMLDivAttributes,
     ContainerClassKey,
+    {
+      component?: React$ElementType,
+      fixed?: boolean,
+      maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
+    },
+    HTMLDivAttributes,
     void
-  > & {
-    component?: React$ElementType,
-    fixed?: boolean,
-    maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
-  };
+  >;
 
   declare export default React$ComponentType<ContainerProps>;
 }
@@ -1701,17 +1774,18 @@ declare module '@material-ui/core/CssBaseline/CssBaseline' {
 }
 
 declare module '@material-ui/core/DialogActions' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   declare export type DialogActionsClassKey = 'root' | 'spacing';
 
   declare export type DialogActionsProps = StandardProps<
-    HTMLDivAttributes,
     DialogActionsClassKey,
+    {
+      disableSpacing?: boolean,
+    },
+    HTMLDivAttributes,
     void
-  > & {
-    disableSpacing?: boolean,
-  };
+  >;
 
   declare export default React$ComponentType<DialogActionsProps>;
 }
@@ -1720,17 +1794,18 @@ declare module '@material-ui/core/DialogActions/DialogActions' {
 }
 
 declare module '@material-ui/core/DialogContent' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   declare export type DialogContentClassKey = 'root';
 
   declare export type DialogContentProps = StandardProps<
-    HTMLDivAttributes,
     DialogContentClassKey,
+    {
+      dividers?: boolean,
+    },
+    HTMLDivAttributes,
     void
-  > & {
-    dividers?: boolean,
-  };
+  >;
 
   declare export default React$ComponentType<DialogContentProps>;
 }
@@ -1739,17 +1814,18 @@ declare module '@material-ui/core/DialogContent/DialogContent' {
 }
 
 declare module '@material-ui/core/DialogTitle' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   declare export type DialogTitleClassKey = 'root';
 
   declare export type DialogTitleProps = StandardProps<
-    HTMLDivAttributes,
     DialogTitleClassKey,
+    {
+      disableTypography?: boolean,
+    },
+    HTMLDivAttributes,
     void
-  > & {
-    disableTypography?: boolean,
-  };
+  >;
 
   declare export default React$ComponentType<DialogTitleProps>;
 }
@@ -1758,14 +1834,15 @@ declare module '@material-ui/core/DialogTitle/DialogTitle' {
 }
 
 declare module '@material-ui/core/ExpansionPanelActions' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
 
   declare export type ExpansionPanelActionsClassKey = 'root' | 'spacing';
 
   declare export type ExpansionPanelActionsProps = StandardProps<
-    HTMLDivAttributes,
     ExpansionPanelActionsClassKey,
+    {},
+    HTMLDivAttributes,
     void
   >;
 
@@ -1776,14 +1853,15 @@ declare module '@material-ui/core/ExpansionPanelActions/ExpansionPanelActions' {
 }
 
 declare module '@material-ui/core/ExpansionPanelDetails' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
 
   declare export type ExpansionPanelDetailsClassKey = 'root' | 'spacing';
 
   declare export type ExpansionPanelDetailsProps = StandardProps<
-    HTMLDivAttributes,
     ExpansionPanelDetailsClassKey,
+    {},
+    HTMLDivAttributes,
     void
   >;
 
@@ -1809,7 +1887,7 @@ declare module '@material-ui/core/Fade/Fade' {
 }
 
 declare module '@material-ui/core/ButtonBase/TouchRipple' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
 
   declare export type TouchRippleClassKey =
@@ -1822,10 +1900,11 @@ declare module '@material-ui/core/ButtonBase/TouchRipple' {
     | 'childPulsate';
 
   declare export type TouchRippleProps = StandardProps<
-    HTMLDivAttributes,
     TouchRippleClassKey,
+    { center?: boolean },
+    HTMLDivAttributes,
     void
-  > & { center?: boolean };
+  >;
 
   declare export default React$ComponentType<TouchRippleProps>;
 }
@@ -1878,7 +1957,7 @@ declare module '@material-ui/core/ButtonBase/ButtonBase' {
 }
 
 declare module '@material-ui/core/BottomNavigationAction' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
 
   declare export type BottomNavigationActionClassKey =
@@ -1889,18 +1968,19 @@ declare module '@material-ui/core/BottomNavigationAction' {
     | 'label';
 
   declare export type BottomNavigationActionProps = StandardProps<
-    ButtonBaseProps,
     BottomNavigationActionClassKey,
+    {
+      icon?: string | React$Element<any>,
+      label?: React$Node,
+      onChange?: (event: {}, value: mixed) => mixed,
+      onClick?: ({}) => mixed,
+      selected?: boolean,
+      showLabel?: boolean,
+      value?: mixed,
+    },
+    ButtonBaseProps,
     { onChange: any }
-  > & {
-    icon?: string | React$Element<any>,
-    label?: React$Node,
-    onChange?: (event: {}, value: mixed) => mixed,
-    onClick?: ({}) => mixed,
-    selected?: boolean,
-    showLabel?: boolean,
-    value?: mixed,
-  };
+  >;
 
   declare export default React$ComponentType<BottomNavigationActionProps>;
 }
@@ -1909,7 +1989,7 @@ declare module '@material-ui/core/BottomNavigationAction/BottomNavigationAction'
 }
 
 declare module '@material-ui/core/CardActionArea' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
 
   declare export type CardActionAreaClassKey =
@@ -1918,12 +1998,13 @@ declare module '@material-ui/core/CardActionArea' {
     | 'focusHighlight';
 
   declare export type CardActionAreaProps = StandardProps<
-    ButtonBaseProps,
     CardActionAreaClassKey,
+    {
+      focusVisibleClassName?: string,
+    },
+    ButtonBaseProps,
     void
-  > & {
-    focusVisibleClassName?: string,
-  };
+  >;
 
   declare export default React$ComponentType<CardActionAreaProps>;
 }
@@ -1932,7 +2013,10 @@ declare module '@material-ui/core/CardActionArea/CardActionArea' {
 }
 
 declare module '@material-ui/core/Typography' {
-  import type { StandardProps, PropTypes$Alignment } from '@material-ui/core';
+  import type {
+    StandardProps,
+    PropTypes$Alignment,
+  } from '@material-ui/core/flow-types';
   import type { HTMLElementAttributes } from '@material-ui/core/@@dom';
   import type { ThemeStyle } from '@material-ui/core/styles/createTypography';
 
@@ -1968,24 +2052,29 @@ declare module '@material-ui/core/Typography' {
 
   declare export type TypographyStyle = ThemeStyle | 'srOnly';
 
-  declare export type TypographyProps = {
-    align?: PropTypes$Alignment,
-    color?:
-      | 'initial'
-      | 'inherit'
-      | 'primary'
-      | 'secondary'
-      | 'textPrimary'
-      | 'textSecondary'
-      | 'error',
-    component?: React$ElementType,
-    display?: 'initial' | 'block' | 'inline',
-    gutterBottom?: boolean,
-    noWrap?: boolean,
-    paragraph?: boolean,
-    variant?: TypographyStyle | 'inherit',
-    variantMapping?: { [TypographyStyle]: string },
-  } & StandardProps<HTMLElementAttributes, TypographyClassKey, void>;
+  declare export type TypographyProps = StandardProps<
+    TypographyClassKey,
+    {
+      align?: PropTypes$Alignment,
+      color?:
+        | 'initial'
+        | 'inherit'
+        | 'primary'
+        | 'secondary'
+        | 'textPrimary'
+        | 'textSecondary'
+        | 'error',
+      component?: React$ElementType,
+      display?: 'initial' | 'block' | 'inline',
+      gutterBottom?: boolean,
+      noWrap?: boolean,
+      paragraph?: boolean,
+      variant?: TypographyStyle | 'inherit',
+      variantMapping?: { [TypographyStyle]: string },
+    },
+    HTMLElementAttributes,
+    void
+  >;
 
   declare export default React$ComponentType<TypographyProps>;
 }
@@ -1994,7 +2083,7 @@ declare module '@material-ui/core/Typography/Typography' {
 }
 
 declare module '@material-ui/core/CardHeader' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   import type { TypographyProps } from '@material-ui/core/Typography';
 
@@ -2007,19 +2096,20 @@ declare module '@material-ui/core/CardHeader' {
     | 'subheader';
 
   declare export type CardHeaderProps = StandardProps<
-    HTMLDivAttributes,
     CardHeaderClassKey,
+    {
+      action?: React$Node,
+      avatar?: React$Node,
+      component?: React$ElementType,
+      disableTypography?: boolean,
+      subheader?: React$Node,
+      subheaderTypographyProps?: $Shape<TypographyProps>,
+      title?: React$Node,
+      titleTypographyProps?: $Shape<TypographyProps>,
+    },
+    HTMLDivAttributes,
     { title: any }
-  > & {
-    action?: React$Node,
-    avatar?: React$Node,
-    component?: React$ElementType,
-    disableTypography?: boolean,
-    subheader?: React$Node,
-    subheaderTypographyProps?: $Shape<TypographyProps>,
-    title?: React$Node,
-    titleTypographyProps?: $Shape<TypographyProps>,
-  };
+  >;
 
   declare export default React$ComponentType<CardHeaderProps>;
 }
@@ -2053,7 +2143,7 @@ declare module '@material-ui/core/CardMedia/CardMedia' {
 }
 
 declare module '@material-ui/core/Chip' {
-  import type { PropTypes$Color } from '@material-ui/core';
+  import type { PropTypes$Color } from '@material-ui/core/flow-types';
   import type {
     OverridableComponent,
     SimplifiedPropsOf,
@@ -2110,7 +2200,7 @@ declare module '@material-ui/core/Chip/Chip' {
 }
 
 declare module '@material-ui/core/Collapse' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { Theme } from '@material-ui/core/styles/createMuiTheme';
   import type { TransitionProps } from '@material-ui/core/transitions/transition';
 
@@ -2119,17 +2209,19 @@ declare module '@material-ui/core/Collapse' {
     | 'entered'
     | 'wrapper'
     | 'wrapperInner';
+
   declare export type CollapseProps = StandardProps<
-    TransitionProps,
     CollapseClassKey,
+    {
+      children?: React$Node,
+      component?: React$ElementType,
+      collapsedHeight?: string,
+      theme?: Theme,
+      timeout?: $ElementType<TransitionProps, 'timeout'> | 'auto',
+    },
+    TransitionProps,
     { timeout: any }
-  > & {
-    children?: React$Node,
-    component?: React$ElementType,
-    collapsedHeight?: string,
-    theme?: Theme,
-    timeout?: $ElementType<TransitionProps, 'timeout'> | 'auto',
-  };
+  >;
 
   declare export default React$ComponentType<CollapseProps>;
 }
@@ -2154,7 +2246,7 @@ declare module '@material-ui/core/Portal/Portal' {
 }
 
 declare module '@material-ui/core/Modal' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
   import type { BackdropProps } from '@material-ui/core/Backdrop';
   import type { PortalProps } from '@material-ui/core/Portal';
@@ -2162,32 +2254,33 @@ declare module '@material-ui/core/Modal' {
   declare export type ModalClassKey = 'root' | 'hidden';
 
   declare export type ModalProps<Container: React$ElementType> = StandardProps<
-    HTMLDivAttributes,
     ModalClassKey,
+    {
+      children: React$Element<any>,
+      open: boolean,
+
+      BackdropComponent?: React$ElementType,
+      BackdropProps?: $Shape<BackdropProps>,
+      closeAfterTransition?: boolean,
+
+      // Copied from: container?: $ElementType<PortalProps<Container>, 'container'>,
+      container?: React$ElementRef<Container> | null,
+      disableAutoFocus?: boolean,
+      disableBackdropClick?: boolean,
+      disableEnforceFocus?: boolean,
+      disableEscapeKeyDown?: boolean,
+      disablePortal?: $ElementType<PortalProps<Container>, 'disablePortal'>,
+      disableRestoreFocus?: boolean,
+      hideBackdrop?: boolean,
+      keepMounted?: boolean,
+      onBackdropClick?: () => mixed,
+      onClose?: (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => mixed,
+      onEscapeKeyDown?: () => mixed,
+      onRendered?: $ElementType<PortalProps<Container>, 'onRendered'>,
+    },
+    HTMLDivAttributes,
     { children: any }
-  > & {
-    children: React$Element<any>,
-    open: boolean,
-
-    BackdropComponent?: React$ElementType,
-    BackdropProps?: $Shape<BackdropProps>,
-    closeAfterTransition?: boolean,
-
-    // Copied from: container?: $ElementType<PortalProps<Container>, 'container'>,
-    container?: React$ElementRef<Container> | null,
-    disableAutoFocus?: boolean,
-    disableBackdropClick?: boolean,
-    disableEnforceFocus?: boolean,
-    disableEscapeKeyDown?: boolean,
-    disablePortal?: $ElementType<PortalProps<Container>, 'disablePortal'>,
-    disableRestoreFocus?: boolean,
-    hideBackdrop?: boolean,
-    keepMounted?: boolean,
-    onBackdropClick?: () => mixed,
-    onClose?: (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => mixed,
-    onEscapeKeyDown?: () => mixed,
-    onRendered?: $ElementType<PortalProps<Container>, 'onRendered'>,
-  };
+  >;
 
   declare export default class Modal<
     Container: React$ElementType
@@ -2198,7 +2291,7 @@ declare module '@material-ui/core/Modal/Modal' {
 }
 
 declare module '@material-ui/core/Dialog' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { ModalProps } from '@material-ui/core/Modal';
   import type { PaperProps } from '@material-ui/core/Paper';
   import type {
@@ -2224,21 +2317,22 @@ declare module '@material-ui/core/Dialog' {
     | 'paperFullScreen';
 
   declare export type DialogProps<Container: React$ElementType> = StandardProps<
-    ModalProps<Container> & { ...TransitionHandlerProps },
     DialogClassKey,
+    {
+      children: React$Node,
+      fullScreen?: boolean,
+      fullWidth?: boolean,
+      maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
+      PaperComponent?: React$ElementType,
+      PaperProps?: $Shape<PaperProps>,
+      scroll?: 'body' | 'paper',
+      TransitionComponent?: React$ElementType,
+      transitionDuration?: $ElementType<TransitionProps, 'timeout'>,
+      TransitionProps?: TransitionProps,
+    },
+    ModalProps<Container> & $Shape<TransitionHandlerProps>,
     { children: any }
-  > & {
-    children?: React$Node,
-    fullScreen?: boolean,
-    fullWidth?: boolean,
-    maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false,
-    PaperComponent?: React$ElementType,
-    PaperProps?: $Shape<PaperProps>,
-    scroll?: 'body' | 'paper',
-    TransitionComponent?: React$ElementType,
-    transitionDuration?: $ElementType<TransitionProps, 'timeout'>,
-    TransitionProps?: TransitionProps,
-  };
+  >;
 
   declare export default class Dialog<
     Container: React$ElementType
@@ -2249,16 +2343,16 @@ declare module '@material-ui/core/Dialog/Dialog' {
 }
 
 declare module '@material-ui/core/DialogContentText' {
-  import type { StandardProps } from '@material-ui/core';
+  import type { StandardProps } from '@material-ui/core/flow-types';
   import type { TypographyProps } from '@material-ui/core/Typography';
 
   declare export type DialogContentTextClassKey = 'root';
   declare export type DialogContentTextProps = StandardProps<
-    {},
     DialogContentTextClassKey,
+    {},
+    TypographyProps,
     void
-  > &
-    TypographyProps;
+  >;
   declare export default React$ComponentType<DialogContentTextProps>;
 }
 
@@ -2269,57 +2363,6 @@ declare module '@material-ui/core/DialogContentText/DialogContentText' {
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
-  import type {
-    CSSProperties,
-    StyledComponentProps,
-  } from '@material-ui/core/styles/withStyles';
-  // TODO
-  declare export type PaletteType = any;
-
-  declare export type PropTypes$Alignment =
-    | 'inherit'
-    | 'left'
-    | 'center'
-    | 'right'
-    | 'justify';
-  declare export type PropTypes$Color =
-    | 'inherit'
-    | 'primary'
-    | 'secondary'
-    | 'default';
-  declare export type PropTypes$Margin = 'none' | 'dense' | 'normal';
-
-  declare export type InheritStandardProps<
-    BaseProps: {},
-    Removals: ?{}
-  > = $Diff<
-    BaseProps,
-    {
-      ...$Exact<Removals>,
-      classes: any,
-      className: any,
-      style: any,
-    }
-  >;
-
-  declare export type StandardProps<
-    BaseProps: {},
-    ClassesKeys: string,
-    Removals: ?{}
-  > = InheritStandardProps<BaseProps, Removals> &
-    StyledComponentProps<ClassesKeys> & {
-      className?: string,
-      style?: CSSProperties,
-    };
-
-  declare export type Color = {|
-    [50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900]: string,
-    A100: string,
-    A200: string,
-    A400: string,
-    A700: string,
-  |};
-
   declare export { default as Paper } from '@material-ui/core/Paper';
   declare export { default as AppBar } from '@material-ui/core/AppBar';
   declare export { default as Avatar } from '@material-ui/core/Avatar';

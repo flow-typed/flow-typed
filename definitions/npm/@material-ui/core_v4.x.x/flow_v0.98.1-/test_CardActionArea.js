@@ -132,7 +132,7 @@ describe('CardActionArea props', () => {
       TouchRippleProps={{
         // $ExpectError: the `classes` enum does not contain `murAmur` prop
         classes: {
-          murAmur: true,
+          murAmur: 'true',
         },
       }}
     />;
