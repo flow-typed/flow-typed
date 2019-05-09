@@ -1968,11 +1968,7 @@ declare module '@material-ui/core/Typography' {
 
   declare export type TypographyStyle = ThemeStyle | 'srOnly';
 
-  declare export type TypographyProps = StandardProps<
-    HTMLElementAttributes,
-    TypographyClassKey,
-    void
-  > & {
+  declare export type TypographyProps = {
     align?: PropTypes$Alignment,
     color?:
       | 'initial'
@@ -1989,7 +1985,7 @@ declare module '@material-ui/core/Typography' {
     paragraph?: boolean,
     variant?: TypographyStyle | 'inherit',
     variantMapping?: { [TypographyStyle]: string },
-  };
+  } & StandardProps<HTMLElementAttributes, TypographyClassKey, void>;
 
   declare export default React$ComponentType<TypographyProps>;
 }
@@ -2252,6 +2248,24 @@ declare module '@material-ui/core/Dialog/Dialog' {
   declare export * from '@material-ui/core/Dialog'
 }
 
+declare module '@material-ui/core/DialogContentText' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { TypographyProps } from '@material-ui/core/Typography';
+
+  declare export type DialogContentTextClassKey = 'root';
+  declare export type DialogContentTextProps = StandardProps<
+    {},
+    DialogContentTextClassKey,
+    void
+  > &
+    TypographyProps;
+  declare export default React$ComponentType<DialogContentTextProps>;
+}
+
+declare module '@material-ui/core/DialogContentText/DialogContentText' {
+  declare export * from '@material-ui/core/DialogContentText'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2259,7 +2273,7 @@ declare module '@material-ui/core' {
     CSSProperties,
     StyledComponentProps,
   } from '@material-ui/core/styles/withStyles';
-  // @TODO
+  // TODO
   declare export type PaletteType = any;
 
   declare export type PropTypes$Alignment =
@@ -2275,11 +2289,24 @@ declare module '@material-ui/core' {
     | 'default';
   declare export type PropTypes$Margin = 'none' | 'dense' | 'normal';
 
+  declare export type InheritStandardProps<
+    BaseProps: {},
+    Removals: ?{}
+  > = $Diff<
+    BaseProps,
+    {
+      ...$Exact<Removals>,
+      classes: any,
+      className: any,
+      style: any,
+    }
+  >;
+
   declare export type StandardProps<
     BaseProps: {},
-    ClassesKeys,
+    ClassesKeys: string,
     Removals: ?{}
-  > = $Diff<$Diff<BaseProps, { classes: any }>, Removals> &
+  > = InheritStandardProps<BaseProps, Removals> &
     StyledComponentProps<ClassesKeys> & {
       className?: string,
       style?: CSSProperties,
@@ -2311,6 +2338,9 @@ declare module '@material-ui/core' {
   declare export { default as Portal } from '@material-ui/core/Portal';
   declare export { default as Modal } from '@material-ui/core/Modal';
   declare export { default as Dialog } from '@material-ui/core/Dialog';
+  declare export {
+    default as DialogContentText,
+  } from '@material-ui/core/DialogContentText';
 
   declare export {
     default as CardActionArea,
