@@ -2142,7 +2142,7 @@ declare module '@material-ui/core/Collapse/Collapse' {
 }
 
 declare module '@material-ui/core/Portal' {
-  declare export type PortalProps<Container> = {|
+  declare export type PortalProps<Container: React$ElementType> = {|
     children: React$Element<any>,
     container?: React$ElementRef<Container> | null,
     disablePortal?: boolean,
@@ -2155,6 +2155,50 @@ declare module '@material-ui/core/Portal' {
 }
 declare module '@material-ui/core/Portal/Portal' {
   declare export * from '@material-ui/core/Portal'
+}
+
+declare module '@material-ui/core/Modal' {
+  import type { StandardProps } from '@material-ui/core';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { BackdropProps } from '@material-ui/core/Backdrop';
+  import type { PortalProps } from '@material-ui/core/Portal';
+
+  declare export type ModalClassKey = 'root' | 'hidden';
+
+  declare export type ModalProps<Container: React$ElementType> = StandardProps<
+    HTMLDivAttributes,
+    ModalClassKey,
+    { children: any }
+  > & {
+    children: React$Element<any>,
+    open: boolean,
+
+    BackdropComponent?: React$ElementType,
+    BackdropProps?: $Shape<BackdropProps>,
+    closeAfterTransition?: boolean,
+
+    // Copied from: container?: $ElementType<PortalProps<Container>, 'container'>,
+    container?: React$ElementRef<Container> | null,
+    disableAutoFocus?: boolean,
+    disableBackdropClick?: boolean,
+    disableEnforceFocus?: boolean,
+    disableEscapeKeyDown?: boolean,
+    disablePortal?: $ElementType<PortalProps<Container>, 'disablePortal'>,
+    disableRestoreFocus?: boolean,
+    hideBackdrop?: boolean,
+    keepMounted?: boolean,
+    onBackdropClick?: () => mixed,
+    onClose?: (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => mixed,
+    onEscapeKeyDown?: () => mixed,
+    onRendered?: $ElementType<PortalProps<Container>, 'onRendered'>,
+  };
+
+  declare export default class Modal<
+    Container: React$ElementType
+  > extends React$Component<ModalProps<Container>> {}
+}
+declare module '@material-ui/core/Modal/Modal' {
+  declare export * from '@material-ui/core/Modal'
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2214,6 +2258,7 @@ declare module '@material-ui/core' {
   declare export { default as Chip } from '@material-ui/core/Chip';
   declare export { default as Collapse } from '@material-ui/core/Collapse';
   declare export { default as Portal } from '@material-ui/core/Portal';
+  declare export { default as Modal } from '@material-ui/core/Modal';
   declare export {
     default as CardActionArea,
   } from '@material-ui/core/CardActionArea';
