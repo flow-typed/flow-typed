@@ -312,39 +312,39 @@ declare module ramda {
     ) => () => R);
 
   declare var pipe: {
-    <Args, Return, B, C, D, E, F, FN1: (...a: Args) => B, FN6: UnaryFn<F, Return>>(
-      ab: FN1,
+    <Args, Return, B, C, D, E, F>(
+      ab: (...a: Args) => B,
       bc: UnaryFn<B, C>,
       cd: UnaryFn<C, D>,
       de: UnaryFn<D, E>,
       ef: UnaryFn<E, F>,
-      fg: FN6,
+      fg: UnaryFn<F, Return>,
     ): (...a: Args) => Return,
 
-    <Args, Return, B, C, D, E, FN1: (...a: Args) => B, FN5: UnaryFn<E, Return>>(
-      ab: FN1,
+    <Args, Return, B, C, D, E,>(
+      ab: (...a: Args) => B,
       bc: UnaryFn<B, C>,
       cd: UnaryFn<C, D>,
       de: UnaryFn<D, E>,
-      ef: FN5,
+      ef: UnaryFn<E, Return>,
     ): (...a: Args) => Return,
 
-    <Args, Return, B, C, D, FN1: (...a: Args) => B, FN4: UnaryFn<D, Return>>(
-      ab: FN1,
+    <Args, Return, B, C, D,>(
+      ab: (...a: Args) => B,
       bc: UnaryFn<B, C>,
       cd: UnaryFn<C, D>,
-      de: FN4,
+      de: UnaryFn<D, Return>,
     ): (...a: Args) => Return,
 
-    <Args, Return, B, C, FN1: (...a: Args) => B, FN3: UnaryFn<C, Return>>(
-      ab: FN1,
+    <Args, Return, B, C,>(
+      ab: (...a: Args) => B,
       bc: UnaryFn<B, C>,
-      cd: FN3,
+      cd: UnaryFn<C, Return>,
     ): (...a: Args) => Return,
 
-    <Args, Return, B, FN1: (...a: Args) => B, FN2: UnaryFn<B, Return>>(
-      ab: FN1,
-      bc: FN2,
+    <Args, Return, B,>(
+      ab: (...a: Args) => B,
+      bc: UnaryFn<B, Return>,
     ): (...a: Args) => Return,
 
     <A, B>(ab: UnaryFn<A, B>): UnaryFn<A, B>,
