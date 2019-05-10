@@ -1,0 +1,25 @@
+/definitions/npm/angular_v1*/**/* @LoganBarnett
+
+/definitions/npm/antd_*/**/* @reyronald
+
+/definitions/npm/element-ready_*/**/* @reyronald
+
+/definitions/npm/fuzzaldrin-plus_*/**/* @reyronald
+
+/definitions/npm/ignore_*/**/* @reyronald
+
+/definitions/npm/p-cancelable_*/**/* @reyronald
+
+/definitions/npm/papaparse_*/**/* @GAntoine
+
+/definitions/npm/ramda_*/**/* @LoganBarnett
+
+/definitions/npm/react-apollo_*/**/* @jedwards1211 @thymikee @rasmusprentow @bwlt @budde377
+
+/definitions/npm/@react-navigation @Ashoat
+/definitions/npm/react-navigation_*/**/* @Ashoat
+
+/definitions/npm/redux-oidc_*/**/* @LoganBarnett
+
+/definitions/npm/sequelize_*/**/* @jedwards1211
+
