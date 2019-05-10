@@ -1,5 +1,4 @@
 // @flow
-
 import * as React from 'react';
 
 import {
@@ -15,6 +14,8 @@ import {
   createMemorySource,
   isRedirect,
   redirectTo,
+  type MatchProps,
+  type LinkProps,
 } from '@reach/router';
 
 import type { DefaultRouteProps, RouteProps } from '@reach/router';
@@ -126,6 +127,46 @@ describe('@reach/router', () => {
       <Match>
         <div />
       </Match>;
+    });
+
+    describe('generic magic', () => {
+      type Params = { articleId: string, commentId: string };
+
+      /*
+      In the future (https://github.com/facebook/flow/issues/7672) we can use this syntax:
+
+      <Match<Params>>
+        {props => {
+          if (props.match) {
+            (props.match.articleId: string);
+          }
+        }}
+      </Match>;
+
+      But now you need to create a wrapper with a type definition:
+
+      */
+      const MatchItem = (props: MatchProps<Params>) => Match<Params>(props);
+
+      it('should define more pure type for match prop', () => {
+        <MatchItem path="/:articleId/:commentId">
+          {props => {
+            if (props.match) {
+              (props.match.articleId: string);
+              (props.match.commentId: string);
+
+              // $ExpectError - `match` is exact type
+              (props.match.abc: number);
+              // $ExpectError - `articleId` prop must be string
+              (props.match.articleId: boolean);
+
+              return <div>Cool</div>;
+            }
+
+            return <div>Uncool</div>;
+          }}
+        </MatchItem>;
+      });
     });
   });
 
