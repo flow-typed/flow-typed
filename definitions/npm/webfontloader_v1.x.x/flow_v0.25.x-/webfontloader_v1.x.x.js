@@ -15,8 +15,8 @@ declare module "webfontloader" {
 
     custom?: {
       families: string[],
-      urls: string[],
-      testStrings: { [k: string]: string }
+      urls?: string[],
+      testStrings?: { [k: string]: string }
     },
 
     fontdeck?: {
