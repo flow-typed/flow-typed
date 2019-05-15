@@ -42,7 +42,7 @@ describe('primitive props', () => {
     />;
   });
 
-  it('should raises an error when pass not incompatible type', () => {
+  it('should raises an error when passed incompatible types', () => {
     <Camera
       // $ExpectError
       useCamera2Api={'need boolean'}
