@@ -451,6 +451,8 @@ declare module 'react-navigation' {
     headerTransitionPreset?: 'fade-in-place' | 'uikit',
     headerLayoutPreset?: 'left' | 'center',
     headerBackTitleVisible?: boolean,
+    cardShadowEnabled?: boolean,
+    cardOverlayEnabled?: boolean,
     cardStyle?: ViewStyleProp,
     transitionConfig?: (
       transitionProps: NavigationTransitionProps,
