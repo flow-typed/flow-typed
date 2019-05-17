@@ -317,18 +317,12 @@ describe("Form", () => {
     class BadTestComponent extends React.Component<PropsBadTest> {}
 
     // create is a function
-    const GoodWrappedTestForm: typeof GoodTestComponent =
+    const GoodWrappedTestForm: React$ComponentType<$Diff<PropsGoodTest, { form: * }>> =
       Form.create<PropsGoodTest>({name: 'good_test_form'})(GoodTestComponent);
 
-    const BadWrappedTestForm: typeof BadTestComponent =
+    const BadWrappedTestForm: React$ComponentType<$Diff<PropsBadTest, { form: * }>> =
       // $ExpectError PropsBadTest. it must contain form attribute
       Form.create<PropsBadTest>({name: 'bad_test_form'})(BadTestComponent);
-
-    // $ExpectError returned component props {a: string}. It must contain form property
-    const ErrorGoodWrappedTestForm: React$ComponentType<{a: string}> =
-      Form.create<PropsGoodTest>({name: 'bad_test_form'})(GoodTestComponent);
-
-
 
   });
 });

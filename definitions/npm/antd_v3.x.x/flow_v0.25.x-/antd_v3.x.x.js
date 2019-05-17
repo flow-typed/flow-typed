@@ -256,7 +256,7 @@ declare module "antd" {
   }
 
   declare type FormWrappedProps<T> = <C: React$ComponentType<T>>
-  (component: C) => C;
+  (component: C) => React$ComponentType<$Diff<T, { form: * }>>;
 
   declare export type FormProps = {
     className?: string,
