@@ -1,12 +1,19 @@
 {
   "private": true,
+  "name": "flow-typed",
   "scripts": {
     "sync-definitions": "./experimental/scripts/sync-definitions.js"
   },
   "devDependencies": {
+    "bolt": "git://github.com/goodmind/bolt.git#master",
     "glob": "^7.1.2",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.2",
     "semver": "^5.6.0"
+  },
+  "bolt": {
+    "workspaces": [
+      "experimental/definitions/**/*"
+    ]
   }
 }
