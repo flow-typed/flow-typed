@@ -77,9 +77,9 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-"bolt@git://github.com/goodmind/bolt.git#master":
+"bolt@git://github.com/flow-typed/bolt.git#master":
   version "0.23.2"
-  resolved "git://github.com/goodmind/bolt.git#b5d33eec29a1c962b91672c4d199af9fab234704"
+  resolved "git://github.com/flow-typed/bolt.git#e717a7540531e174f01cb9b606af34c7e20e1474"
   dependencies:
     array-includes "^3.0.3"
     babel-runtime "^6.25.0"
