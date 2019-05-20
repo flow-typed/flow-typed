@@ -2752,6 +2752,31 @@ declare module '@material-ui/core/Grow/Grow' {
   declare export * from '@material-ui/core/Grow'
 }
 
+declare module '@material-ui/core/Hidden' {
+  import type { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
+
+  declare export type HiddenProps = {|
+    implementation?: 'js' | 'css',
+    initialWidth?: Breakpoint,
+    only?: Breakpoint | Array<Breakpoint>,
+    lgDown?: boolean,
+    lgUp?: boolean,
+    mdDown?: boolean,
+    mdUp?: boolean,
+    smDown?: boolean,
+    smUp?: boolean,
+    xlDown?: boolean,
+    xlUp?: boolean,
+    xsDown?: boolean,
+    xsUp?: boolean,
+  |};
+
+  declare export default React$ComponentType<HiddenProps>;
+}
+declare module '@material-ui/core/Hidden/Hidden' {
+  declare export * from '@material-ui/core/Hidden'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2779,6 +2804,7 @@ declare module '@material-ui/core' {
   declare export { default as Grid } from '@material-ui/core/Grid';
   declare export { default as GridList } from '@material-ui/core/GridList';
   declare export { default as Grow } from '@material-ui/core/Grow';
+  declare export { default as Hidden } from '@material-ui/core/Hidden';
   declare export {
     default as GridListTile,
   } from '@material-ui/core/GridListTile';
