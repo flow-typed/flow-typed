@@ -1268,6 +1268,29 @@ declare module '@material-ui/core/styles/withTheme' {
     >,
   };
 }
+declare module '@material-ui/core/styles/responsiveFontSizes' {
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+  import type { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
+  import type { ThemeStyle } from '@material-ui/core/styles/createTypography';
+
+  declare export type ResponsiveFontSizesOptions = {|
+    breakpoints?: Breakpoint[],
+    disableAlign?: boolean,
+    factor?: number,
+    variants?: ThemeStyle,
+  |};
+
+  declare export default (
+    theme: Theme,
+    options?: ResponsiveFontSizesOptions
+  ) => Theme;
+}
+declare module '@material-ui/core/styles/MuiThemeProvider' {
+  // TODO: import type { ThemeProvider } from '@material-ui/styles';
+  declare type ThemeProvider = React$ComponentType<any>;
+
+  declare export default ThemeProvider;
+}
 declare module '@material-ui/core/styles' {
   declare export * from '@material-ui/core/styles/colorManipulator'
   declare export {
@@ -1304,6 +1327,12 @@ declare module '@material-ui/core/styles' {
     default as withTheme,
     WithTheme,
   } from '@material-ui/core/styles/withTheme';
+  declare export {
+    default as MuiThemeProvider,
+  } from '@material-ui/core/styles/MuiThemeProvider';
+  declare export {
+    default as responsiveFontSizes,
+  } from '@material-ui/core/styles/responsiveFontSizes';
 }
 
 declare module '@material-ui/core/Paper' {
