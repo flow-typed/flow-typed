@@ -294,6 +294,7 @@ declare module '@material-ui/core/@@dom' {
   // ... in the future will be replaced with exact types for a specific element (div, li, inout, ...)
   declare export type HTMLImageAttributes = {};
   declare export type HTMLDivAttributes = {};
+  declare export type HTMLUListAttributes = {};
   declare export type HTMLElementAttributes = {};
 }
 declare module '@material-ui/core/transitions/transition/@@react-transition-group/Transition' {
@@ -2648,6 +2649,30 @@ declare module '@material-ui/core/Grid/Grid' {
   declare export * from '@material-ui/core/Grid'
 }
 
+declare module '@material-ui/core/GridList' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLUListAttributes } from '@material-ui/core/@@dom';
+
+  declare export type GridListClassKey = 'root';
+
+  declare export type GridListProps = StandardProps<
+    GridListClassKey,
+    {
+      component?: React$ElementType,
+      cellHeight?: number | 'auto',
+      cols?: number,
+      spacing?: number,
+    },
+    HTMLUListAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<GridListProps>;
+}
+declare module '@material-ui/core/GridList/GridList' {
+  declare export * from '@material-ui/core/GridList'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2673,6 +2698,8 @@ declare module '@material-ui/core' {
   declare export { default as Slide } from '@material-ui/core/Slide';
   declare export { default as Drawer } from '@material-ui/core/Drawer';
   declare export { default as Grid } from '@material-ui/core/Grid';
+  declare export { default as GridList } from '@material-ui/core/GridList';
+
   declare export {
     default as ExpansionPanel,
   } from '@material-ui/core/ExpansionPanel';
