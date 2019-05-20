@@ -2777,6 +2777,19 @@ declare module '@material-ui/core/Hidden/Hidden' {
   declare export * from '@material-ui/core/Hidden'
 }
 
+declare module '@material-ui/core/NoSsr' {
+  declare export type NoSsrProps = {|
+    defer?: boolean,
+    fallback?: React$Node,
+    children: React$Node,
+  |};
+
+  declare export default React$ComponentType<NoSsrProps>;
+}
+declare module '@material-ui/core/NoSsr/NoSsr' {
+  declare export * from '@material-ui/core/NoSsr'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2804,6 +2817,7 @@ declare module '@material-ui/core' {
   declare export { default as Grid } from '@material-ui/core/Grid';
   declare export { default as GridList } from '@material-ui/core/GridList';
   declare export { default as Grow } from '@material-ui/core/Grow';
+  declare export { default as NoSsr } from '@material-ui/core/NoSsr';
   declare export { default as Hidden } from '@material-ui/core/Hidden';
   declare export {
     default as GridListTile,
