@@ -2790,6 +2790,148 @@ declare module '@material-ui/core/NoSsr/NoSsr' {
   declare export * from '@material-ui/core/NoSsr'
 }
 
+declare module '@material-ui/core/InputBase' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLUListAttributes } from '@material-ui/core/@@dom';
+
+  declare export type InputBaseClassKey =
+    | 'root'
+    | 'formControl'
+    | 'focused'
+    | 'disabled'
+    | 'adornedEnd'
+    | 'adornedStart'
+    | 'error'
+    | 'marginDense'
+    | 'multiline'
+    | 'fullWidth'
+    | 'input'
+    | 'inputMarginDense'
+    | 'inputMultiline'
+    | 'inputTypeSearch'
+    | 'inputAdornedStart'
+    | 'inputAdornedEnd';
+
+  declare export type InputBaseComponentProps = {};
+  declare export type InputBaseProps = StandardProps<
+    InputBaseClassKey,
+    {
+      autoComplete?: string,
+      autoFocus?: boolean,
+      defaultValue?: mixed,
+      disabled?: boolean,
+      endAdornment?: React$Node,
+      error?: boolean,
+      fullWidth?: boolean,
+      id?: string,
+      inputComponent?: React$ElementType,
+      inputProps?: InputBaseComponentProps,
+      inputRef?: React$Ref<any>,
+      margin?: 'dense' | 'none',
+      multiline?: boolean,
+      name?: string,
+      placeholder?: string,
+      readOnly?: boolean,
+      required?: boolean,
+      renderPrefix?: (state: {|
+        disabled?: boolean,
+        error?: boolean,
+        filled?: boolean,
+        focused?: boolean,
+        margin?: 'dense' | 'none' | 'normal',
+        required?: boolean,
+        startAdornment?: React$Node,
+      |}) => React$Node,
+      rows?: string | number,
+      rowsMax?: string | number,
+      startAdornment?: React$Node,
+      type?: string,
+      value?: mixed,
+      onFilled?: () => mixed,
+    },
+    HTMLUListAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<InputBaseProps>;
+}
+declare module '@material-ui/core/InputBase/InputBase' {
+  declare export * from '@material-ui/core/InputBase'
+}
+
+declare module '@material-ui/core/Input' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { InputBaseProps } from '@material-ui/core/InputBase';
+
+  declare export type InputClassKey =
+    | 'root'
+    | 'formControl'
+    | 'focused'
+    | 'disabled'
+    | 'underline'
+    | 'error'
+    | 'multiline'
+    | 'fullWidth'
+    | 'input'
+    | 'inputMarginDense'
+    | 'inputMultiline'
+    | 'inputTypeSearch';
+
+  declare export type InputProps = StandardProps<
+    InputClassKey,
+    {
+      disableUnderline?: boolean,
+    },
+    InputBaseProps,
+    void
+  >;
+
+  declare export default React$ComponentType<InputProps>;
+}
+declare module '@material-ui/core/Input/Input' {
+  declare export * from '@material-ui/core/Input'
+}
+
+declare module '@material-ui/core/NativeSelect' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { InputProps } from '@material-ui/core/Input';
+
+  declare export type NativeSelectClassKey =
+    | 'root'
+    | 'select'
+    | 'selectMenu'
+    | 'disabled'
+    | 'icon'
+    | 'filled'
+    | 'outlined';
+
+  declare type _InputProps = $Diff<
+    InputProps,
+    {
+      value: any,
+      onChange: any,
+    }
+  >;
+
+  declare export type NativeSelectProps = StandardProps<
+    NativeSelectClassKey,
+    {
+      variant?: 'standard' | 'outlined' | 'filled',
+      IconComponent?: React$ElementType,
+      input?: React$Node,
+      value?: mixed,
+      onChange?: (event: {}, child: React$Node) => mixed,
+    },
+    _InputProps,
+    void
+  >;
+
+  declare export default React$ComponentType<NativeSelectProps>;
+}
+declare module '@material-ui/core/NativeSelect/NativeSelect' {
+  declare export * from '@material-ui/core/NativeSelect'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2819,6 +2961,12 @@ declare module '@material-ui/core' {
   declare export { default as Grow } from '@material-ui/core/Grow';
   declare export { default as NoSsr } from '@material-ui/core/NoSsr';
   declare export { default as Hidden } from '@material-ui/core/Hidden';
+  declare export { default as InputBase } from '@material-ui/core/InputBase';
+  declare export { default as Input } from '@material-ui/core/Input';
+  declare export {
+    default as NativeSelect,
+  } from '@material-ui/core/NativeSelect';
+
   declare export {
     default as GridListTile,
   } from '@material-ui/core/GridListTile';
