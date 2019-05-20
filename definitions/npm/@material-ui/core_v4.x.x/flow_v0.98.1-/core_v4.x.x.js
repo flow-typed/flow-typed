@@ -2736,6 +2736,22 @@ declare module '@material-ui/core/GridListTileBar/GridListTileBar' {
   declare export * from '@material-ui/core/GridListTileBar'
 }
 
+declare module '@material-ui/core/Grow' {
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+  import type { TransitionProps } from '@material-ui/core/transitions/transition';
+
+  declare export type GrowProps = {
+    ref?: React$Ref<any>,
+    theme?: Theme,
+    timeout?: $ElementType<TransitionProps, 'timeout'> | 'auto',
+  } & $Diff<TransitionProps, { timeout: any }>;
+
+  declare export default React$ComponentType<GrowProps>;
+}
+declare module '@material-ui/core/Grow/Grow' {
+  declare export * from '@material-ui/core/Grow'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2762,6 +2778,7 @@ declare module '@material-ui/core' {
   declare export { default as Drawer } from '@material-ui/core/Drawer';
   declare export { default as Grid } from '@material-ui/core/Grid';
   declare export { default as GridList } from '@material-ui/core/GridList';
+  declare export { default as Grow } from '@material-ui/core/Grow';
   declare export {
     default as GridListTile,
   } from '@material-ui/core/GridListTile';
