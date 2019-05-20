@@ -295,6 +295,7 @@ declare module '@material-ui/core/@@dom' {
   declare export type HTMLImageAttributes = {};
   declare export type HTMLDivAttributes = {};
   declare export type HTMLUListAttributes = {};
+  declare export type HTMLLIAttributes = {};
   declare export type HTMLElementAttributes = {};
 }
 declare module '@material-ui/core/transitions/transition/@@react-transition-group/Transition' {
@@ -2673,6 +2674,68 @@ declare module '@material-ui/core/GridList/GridList' {
   declare export * from '@material-ui/core/GridList'
 }
 
+declare module '@material-ui/core/GridListTile' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLLIAttributes } from '@material-ui/core/@@dom';
+
+  declare export type GridListTileClassKey =
+    | 'root'
+    | 'tile'
+    | 'imgFullHeight'
+    | 'imgFullWidth';
+
+  declare export type GridListTileProps = StandardProps<
+    GridListTileClassKey,
+    {
+      component?: React$ElementType,
+      cols?: number,
+      rows?: number,
+    },
+    HTMLLIAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<GridListTileProps>;
+}
+declare module '@material-ui/core/GridListTile/GridListTile' {
+  declare export * from '@material-ui/core/GridListTile'
+}
+
+declare module '@material-ui/core/GridListTileBar' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+
+  declare export type GridListTileBarClassKey =
+    | 'root'
+    | 'titlePositionBottom'
+    | 'titlePositionTop'
+    | 'rootSubtitle'
+    | 'titleWrap'
+    | 'titleWrapActionPosLeft'
+    | 'titleWrapActionPosRight'
+    | 'title'
+    | 'subtitle'
+    | 'actionIcon'
+    | 'actionIconActionPosLeft';
+
+  declare export type GridListTileBarProps = StandardProps<
+    GridListTileBarClassKey,
+    {
+      actionIcon?: React$Node,
+      subtitle?: React$Node,
+      title?: React$Node,
+      actionPosition?: 'left' | 'right',
+      titlePosition?: 'top' | 'bottom',
+    },
+    {},
+    void
+  >;
+
+  declare export default React$ComponentType<GridListTileBarProps>;
+}
+declare module '@material-ui/core/GridListTileBar/GridListTileBar' {
+  declare export * from '@material-ui/core/GridListTileBar'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2699,6 +2762,12 @@ declare module '@material-ui/core' {
   declare export { default as Drawer } from '@material-ui/core/Drawer';
   declare export { default as Grid } from '@material-ui/core/Grid';
   declare export { default as GridList } from '@material-ui/core/GridList';
+  declare export {
+    default as GridListTile,
+  } from '@material-ui/core/GridListTile';
+  declare export {
+    default as GridListTileBar,
+  } from '@material-ui/core/GridListTileBar';
 
   declare export {
     default as ExpansionPanel,
