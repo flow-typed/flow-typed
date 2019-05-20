@@ -2518,6 +2518,136 @@ declare module '@material-ui/core/ExpansionPanel/ExpansionPanel' {
   declare export * from '@material-ui/core/ExpansionPanel'
 }
 
+declare module '@material-ui/core/Grid' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type GridItemsAlignment =
+    | 'flex-start'
+    | 'center'
+    | 'flex-end'
+    | 'stretch'
+    | 'baseline';
+
+  declare export type GridContentAlignment =
+    | 'stretch'
+    | 'center'
+    | 'flex-start'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around';
+
+  declare export type GridDirection =
+    | 'row'
+    | 'row-reverse'
+    | 'column'
+    | 'column-reverse';
+
+  declare export type GridSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+
+  declare export type GridJustification =
+    | 'flex-start'
+    | 'center'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
+
+  declare export type GridWrap = 'nowrap' | 'wrap' | 'wrap-reverse';
+
+  declare export type GridSize =
+    | 'auto'
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 12;
+
+  declare export type GridClassKey =
+    | 'container'
+    | 'item'
+    | 'direction-xs-column'
+    | 'direction-xs-column-reverse'
+    | 'direction-xs-row-reverse'
+    | 'wrap-xs-nowrap'
+    | 'wrap-xs-wrap-reverse'
+    | 'align-items-xs-center'
+    | 'align-items-xs-flex-start'
+    | 'align-items-xs-flex-end'
+    | 'align-items-xs-baseline'
+    | 'align-content-xs-center'
+    | 'align-content-xs-flex-start'
+    | 'align-content-xs-flex-end'
+    | 'align-content-xs-space-between'
+    | 'align-content-xs-space-around'
+    | 'justify-xs-center'
+    | 'justify-xs-flex-end'
+    | 'justify-xs-space-between'
+    | 'justify-xs-space-around'
+    | 'spacing-xs-1'
+    | 'spacing-xs-2'
+    | 'spacing-xs-3'
+    | 'spacing-xs-4'
+    | 'spacing-xs-5'
+    | 'spacing-xs-6'
+    | 'spacing-xs-7'
+    | 'spacing-xs-8'
+    | 'spacing-xs-9'
+    | 'spacing-xs-10'
+    | 'grid-xs-auto'
+    | 'grid-xs-true'
+    | 'grid-xs-1'
+    | 'grid-xs-2'
+    | 'grid-xs-3'
+    | 'grid-xs-4'
+    | 'grid-xs-5'
+    | 'grid-xs-6'
+    | 'grid-xs-7'
+    | 'grid-xs-8'
+    | 'grid-xs-9'
+    | 'grid-xs-10'
+    | 'grid-xs-11'
+    | 'grid-xs-12';
+
+  declare type BreakpointProps = {
+    xs?: boolean | GridSize,
+    sm?: boolean | GridSize,
+    md?: boolean | GridSize,
+    lg?: boolean | GridSize,
+    xl?: boolean | GridSize,
+  };
+
+  declare export type GridProps = StandardProps<
+    GridClassKey,
+    {
+      alignContent?: GridContentAlignment,
+      alignItems?: GridItemsAlignment,
+      component?: React$ElementType,
+      container?: boolean,
+      direction?: GridDirection,
+      item?: boolean,
+      justify?: GridJustification,
+      spacing?: GridSpacing,
+      wrap?: GridWrap,
+      zeroMinWidth?: boolean,
+    },
+    BreakpointProps & HTMLDivAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<GridProps>;
+}
+declare module '@material-ui/core/Grid/Grid' {
+  declare export * from '@material-ui/core/Grid'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2542,6 +2672,7 @@ declare module '@material-ui/core' {
   declare export { default as Divider } from '@material-ui/core/Divider';
   declare export { default as Slide } from '@material-ui/core/Slide';
   declare export { default as Drawer } from '@material-ui/core/Drawer';
+  declare export { default as Grid } from '@material-ui/core/Grid';
   declare export {
     default as ExpansionPanel,
   } from '@material-ui/core/ExpansionPanel';
