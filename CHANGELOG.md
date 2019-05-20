@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.5.2] - 2019-05-15
+
+### Added
+- Added `useCacheUntil` flag to `install` command (#3305)
+
 ## [2.5.1] - 2018-07-06
 
 ### Changed

@@ -60,6 +60,8 @@ createStackNavigator(
   {
     mode: "card",
     initialRouteName: "Test1",
+    cardShadowEnabled: false,
+    cardOverlayEnabled: false,
   },
 );
 

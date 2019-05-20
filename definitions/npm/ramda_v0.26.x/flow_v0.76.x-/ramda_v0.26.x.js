@@ -311,48 +311,41 @@ declare module ramda {
       args: [A, B, C, D, E, F, G, H, I]
     ) => () => R);
 
-  declare type $MakePipeFn = <Args,Return>(
-    (...args: Args) => any,
-    UnaryFn<any, Return>
-  ) => ((...args: Args) => Return);
-
-  declare type $PipeFn<FirstFn, LastFn> = $Call<$MakePipeFn, FirstFn, LastFn>;
-
   declare var pipe: {
-    <B, C, D, E, F, FN1: (...a: *) => B, FN6: UnaryFn<F, *>>(
-      ab: FN1,
+    <Args, Return, B, C, D, E, F>(
+      ab: (...a: Args) => B,
       bc: UnaryFn<B, C>,
       cd: UnaryFn<C, D>,
       de: UnaryFn<D, E>,
       ef: UnaryFn<E, F>,
-      fg: FN6,
-    ): $PipeFn<FN1, FN6>,
+      fg: UnaryFn<F, Return>,
+    ): (...a: Args) => Return,
 
-    <B, C, D, E, FN1: (...a: *) => B, FN5: UnaryFn<E, *>>(
-      ab: FN1,
+    <Args, Return, B, C, D, E,>(
+      ab: (...a: Args) => B,
       bc: UnaryFn<B, C>,
       cd: UnaryFn<C, D>,
       de: UnaryFn<D, E>,
-      ef: FN5,
-    ): $PipeFn<FN1, FN5>,
+      ef: UnaryFn<E, Return>,
+    ): (...a: Args) => Return,
 
-    <B, C, D, FN1: (...a: *) => B, FN4: UnaryFn<D, *>>(
-      ab: FN1,
+    <Args, Return, B, C, D,>(
+      ab: (...a: Args) => B,
       bc: UnaryFn<B, C>,
       cd: UnaryFn<C, D>,
-      de: FN4,
-    ): $PipeFn<FN1, FN4>,
+      de: UnaryFn<D, Return>,
+    ): (...a: Args) => Return,
 
-    <B, C, FN1: (...a: *) => B, FN3: UnaryFn<C, *>>(
-      ab: FN1,
+    <Args, Return, B, C,>(
+      ab: (...a: Args) => B,
       bc: UnaryFn<B, C>,
-      cd: FN3,
-    ): $PipeFn<FN1, FN3>,
+      cd: UnaryFn<C, Return>,
+    ): (...a: Args) => Return,
 
-    <B, FN1: (...a: *) => B, FN2: UnaryFn<B, *>>(
-      ab: FN1,
-      bc: FN2,
-    ): $PipeFn<FN1, FN2>,
+    <Args, Return, B,>(
+      ab: (...a: Args) => B,
+      bc: UnaryFn<B, Return>,
+    ): (...a: Args) => Return,
 
     <A, B>(ab: UnaryFn<A, B>): UnaryFn<A, B>,
   };
