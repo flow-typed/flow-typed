@@ -1,7 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import _, {
-  always,
   compose,
   curry,
   filter,
