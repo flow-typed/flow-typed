@@ -56,6 +56,7 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
 `{
   "name": "@flowtyped/${libraryName}",
   "version": "${lowerVersion}",
+  "flowVersion": "${flowVersionRange}",
   "dependencies": {},
   "publishConfig": {
     "tag": "${flowVersionRange.endsWith('-') ? 'latest' : flowVersionRange}"
