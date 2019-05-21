@@ -6,6 +6,7 @@ const mkdirp = require('mkdirp');
 const path = require('path');
 const rimraf = require('rimraf');
 const semver = require('semver');
+const flowVersion = require('../../cli/dist/lib/flowVersion');
 
 /**
  * Create a structure like the following in `experimental/definitions`. This is
@@ -38,50 +39,72 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
 
     const [libraryNameAndVersionRange, flowVersionRange] = parts;
     const [libraryName, versionRange] = libraryNameAndVersionRange.split('_v');
-    const libdefBase = path.join(srcDefinitionsRoot, libraryNameAndVersionRange)
-    const tests = glob.sync('**/test_*.js', { cwd: libdefBase })
-      .filter(test => test.includes('/') ? test.startsWith(flowVersionRange) : true);
+    const libdefBase = path.join(
+      srcDefinitionsRoot,
+      libraryNameAndVersionRange
+    );
+    const tests = glob
+      .sync('**/test_*.js', { cwd: libdefBase })
+      .filter(test =>
+        test.includes('/') ? test.startsWith(flowVersionRange) : true
+      );
 
     // Create a dir like `experimental/definitions/yargs/yargs_v10.x.x/flow_v0.54.x-`.
     const libDefDir = path.join(
       destDefinitionsRoot,
       libraryName,
       libraryNameAndVersionRange,
-      flowVersionRange,
+      flowVersionRange
     );
     const range = new semver.Range(versionRange);
     const lowerVersion = range.set[0][0].semver.version;
     mkdirp.sync(libDefDir);
-    const packageJson =
-`{
+    const packageJson = `{
   "name": "@flowtyped/${libraryName}",
   "version": "${lowerVersion}",
   "flowVersion": "${flowVersionRange}",
   "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "peerDependencies": {
+    "flow-bin": "${flowVersion.toSemverString(
+      flowVersion.parseDirString(flowVersionRange)
+    )}"
+  },
   "publishConfig": {
+    "access": "public",
     "tag": "${flowVersionRange.endsWith('-') ? 'latest' : flowVersionRange}"
   }
 }`;
     // Create a libdef like `yelp-flow-typed/definitions/yargs/yargs_v10.x.x/flow_v0.54.x-/index.js`.
     fs.writeFileSync(path.join(libDefDir, 'package.json'), packageJson);
-    fs.writeFileSync(path.join(libDefDir, 'index.js'),
-      fs.readFileSync(`${srcDefinitionsRoot}/${libdef}`).toString(),
+    fs.writeFileSync(
+      path.join(libDefDir, 'index.js'),
+      fs.readFileSync(`${srcDefinitionsRoot}/${libdef}`).toString()
     );
     mkdirp.sync(path.join(libDefDir, 'tests'));
     tests.forEach(test => {
       const testParts = test.split('/');
-      fs.writeFileSync(path.join(libDefDir, 'tests', testParts.pop()),
-        fs.readFileSync(`${libdefBase}/${test}`).toString(),
+      fs.writeFileSync(
+        path.join(libDefDir, 'tests', testParts.pop()),
+        fs.readFileSync(`${libdefBase}/${test}`).toString()
       );
-    })
+    });
   });
 }
 
 function main() {
   const projectRoot = path.dirname(require.resolve('../../package.json'));
-  const browserDefinitionsRoot = path.resolve(projectRoot, './definitions/browser');
+  const browserDefinitionsRoot = path.resolve(
+    projectRoot,
+    './definitions/browser'
+  );
   const npmDefinitionsRoot = path.resolve(projectRoot, './definitions/npm');
-  const destDefinitionsRoot = path.resolve(projectRoot, './experimental/definitions')
+  const destDefinitionsRoot = path.resolve(
+    projectRoot,
+    './experimental/definitions'
+  );
 
   // Blow away the `experiments/definitions` dir. This is mainly to account for
   // libdefs being deleted or moved in <ROOT>/definitions/npm. TODO: Figure out
