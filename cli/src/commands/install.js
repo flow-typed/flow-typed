@@ -26,6 +26,7 @@ import {
   findFlowSpecificVer,
   getPackageJsonData,
   getPackageJsonDependencies,
+  loadPnpResolver,
 } from '../lib/npm/npmProjectUtils';
 
 import {
@@ -396,13 +397,15 @@ async function installNpmLibDefs({
 
     return 1;
   } else {
+    const pnpResolver = await loadPnpResolver(await getPackageJsonData(cwd));
+
     // If a package that's missing a flow-typed libdef has any .flow files,
     // we'll skip generating a stub for it.
     const untypedMissingLibDefs = [];
     const typedMissingLibDefs = [];
     await Promise.all(
       unavailableLibDefs.map(async ({name: pkgName, ver: pkgVer}) => {
-        const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName);
+        const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName, pnpResolver);
         if (hasFlowFiles) {
           typedMissingLibDefs.push([pkgName, pkgVer]);
         } else {
@@ -420,6 +423,7 @@ async function installNpmLibDefs({
             pkgName,
             pkgVerStr,
             overwrite,
+            pnpResolver,
             libdefDir,
           );
         }),

@@ -17,6 +17,8 @@ type PkgJson = {|
     name: string,
     version: string,
 
+    installConfig?: {pnp?: boolean},
+
     bundledDependencies?: {[pkgName: string]: string},
     dependencies?: {[pkgName: string]: string},
     devDependencies?: {[pkgName: string]: string},
@@ -24,6 +26,10 @@ type PkgJson = {|
     peerDependencies?: {[pkgName: string]: string},
   },
 |};
+
+export type PnpResolver = {
+  resolveToUnqualified: (string, string) => string | null,
+};
 
 const PKG_JSON_DEP_FIELDS = [
   'dependencies',
@@ -130,6 +136,23 @@ export async function determineFlowVersion(
   }
 
   return null;
+}
+
+export async function loadPnpResolver(
+  pkgJson: PkgJson,
+): Promise<PnpResolver | null> {
+  if (!(pkgJson.content.installConfig && pkgJson.content.installConfig.pnp)) {
+    return null;
+  }
+  const pnpJsFile = path.resolve(pkgJson.pathStr, '..', '.pnp.js');
+  if (await fs.exists(pnpJsFile)) {
+    // $FlowFixMe
+    return require(pnpJsFile);
+  }
+  throw new Error(
+    'Unable to find Yarn PNP resolver lib: `.pnp.js`! ' +
+      'Did you forget to run `yarn install` before running `flow-typed install`?',
+  );
 }
 
 export async function findFlowSpecificVer(

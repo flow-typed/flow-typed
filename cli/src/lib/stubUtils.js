@@ -7,7 +7,10 @@ import {format} from 'util';
 import {fs} from './node';
 import globAsync from 'glob';
 import {getPackageJsonData} from './npm/npmProjectUtils';
-import {getPackageJsonDependencies} from './npm/npmProjectUtils';
+import {
+  getPackageJsonDependencies,
+  type PnpResolver,
+} from './npm/npmProjectUtils';
 import {mkdirp} from './fileUtils';
 import {path} from './node';
 import {signCode} from './codeSign';
@@ -29,7 +32,18 @@ export function glob(pattern: string, options: Object): Promise<Array<string>> {
 async function resolvePkgDirPath(
   pkgName: string,
   pkgJsonDirPath: string,
-): Promise<null | string> {
+  pnpjs: PnpResolver | null,
+): Promise<string> {
+  if (pnpjs != null) {
+    const pnpResolvedDirPath = pnpjs.resolveToUnqualified(
+      pkgName,
+      pkgJsonDirPath,
+    );
+    if (pnpResolvedDirPath != null) {
+      return pnpResolvedDirPath;
+    }
+  }
+
   let prevNodeModulesDirPath;
   let nodeModulesDirPath = path.resolve(pkgJsonDirPath, 'node_modules');
   while (true) {
@@ -50,7 +64,7 @@ async function resolvePkgDirPath(
     }
   }
   throw new Error(
-    'Unable to find `node_modules/' +
+    'Unable to find `' +
       pkgName +
       '/` install directory! ' +
       'Did you forget to run `npm install` before running `flow-typed install`?',
@@ -192,6 +206,7 @@ async function writeStub(
   projectRoot: string,
   packageName: string,
   packageVersion: string,
+  packageFolder: string | null,
   overwrite: boolean,
   files: Array<string>,
   libdefDir: string,
@@ -210,7 +225,6 @@ async function writeStub(
     ' * https://github.com/flowtype/flow-typed',
     ' */\n\n',
   ].join('\n');
-  let packageFolder = await resolvePkgDirPath(packageName, process.cwd());
   if (packageFolder !== null && false) {
     try {
       output += guessedStubFor(packageName, packageFolder, maxDepth);
@@ -286,15 +300,24 @@ async function writeStub(
 export async function pkgHasFlowFiles(
   projectRoot: string,
   packageName: string,
+  pnpjs: PnpResolver | null,
 ): Promise<boolean> {
-  let pathToPackage = await resolvePkgDirPath(packageName, projectRoot);
+  try {
+    let pathToPackage = await resolvePkgDirPath(
+      packageName,
+      projectRoot,
+      pnpjs,
+    );
 
-  const files = await glob('**/*.flow', {
-    cwd: pathToPackage,
-    ignore: 'node_modules/**',
-  });
+    const files = await glob('**/*.flow', {
+      cwd: pathToPackage,
+      ignore: 'node_modules/**',
+    });
 
-  return files.length > 0;
+    return files.length > 0;
+  } catch (e) {
+    return false;
+  }
 }
 
 /**
@@ -309,6 +332,7 @@ export async function createStub(
   packageName: string,
   explicitVersion: string | null,
   overwrite: boolean,
+  pnpjs: PnpResolver | null,
   libdefDir?: string,
   maxDepth?: number,
 ): Promise<boolean> {
@@ -320,7 +344,7 @@ export async function createStub(
   const typedefDir = libdefDir || 'flow-typed';
 
   try {
-    pathToPackage = await resolvePkgDirPath(packageName, process.cwd());
+    pathToPackage = await resolvePkgDirPath(packageName, projectRoot, pnpjs);
 
     files = await glob('**/*.{js,jsx}', {
       cwd: pathToPackage,
@@ -365,6 +389,7 @@ export async function createStub(
       projectRoot,
       packageName,
       version,
+      pathToPackage,
       overwrite,
       files,
       typedefDir,
