@@ -8,7 +8,7 @@ import {fs, os, path} from './node';
 
 import semver from 'semver';
 
-const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
+export const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
 const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
 
 async function cloneCacheRepo() {

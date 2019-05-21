@@ -124,8 +124,8 @@ type JestMatcherResult = {
 };
 
 type JestMatcher = (
-  actual: any,
-  expected: any
+  received: any,
+  ...actual: Array<any>
 ) => JestMatcherResult | Promise<JestMatcherResult>;
 
 type JestPromiseType = {
@@ -212,6 +212,7 @@ type EnzymeMatchersType = {
 // DOM testing library extensions https://github.com/kentcdodds/dom-testing-library#custom-jest-matchers
 type DomTestingLibraryType = {
   toBeDisabled(): void,
+  toBeEnabled(): void,
   toBeEmpty(): void,
   toBeInTheDocument(): void,
   toBeVisible(): void,

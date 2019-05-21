@@ -16,6 +16,34 @@ describe("apollo-client", () => {
       });
     });
 
+    it("query function passes", async () => {
+      const client = new ApolloClient({
+        link,
+        cache
+      });
+      const result = await client.query({
+        query: ``,
+        variables: {
+          hello: 'world'
+        }
+      });
+      result.data;
+    });
+
+    it("mutate function passes", async () => {
+      const client = new ApolloClient({
+        link,
+        cache
+      });
+      const result = await client.mutate({
+        mutation: ``,
+        variables: {
+          hello: 'world'
+        }
+      });
+      result.data;
+    });
+
     it("passes with default export", () => {
       new ApolloClientDefault({
         link,

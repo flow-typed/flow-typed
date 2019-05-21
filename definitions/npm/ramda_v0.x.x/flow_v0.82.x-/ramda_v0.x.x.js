@@ -1420,7 +1420,7 @@ declare module ramda {
       val: T,
       ...args: Array<void>
     ): (src: S) => { [k: string]: T } & S,
-    <T, S: Object, K: $Subtype<$Keys<S>>>(
+    <T, S: Object, K: $Keys<S>>(
       key: K,
       val: T,
       src: S

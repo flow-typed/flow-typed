@@ -230,6 +230,22 @@ describe("react-router-dom", () => {
         );
         const WrappedComp = withRouter(Comp);
       });
+
+      it("errors if using block() incorrectly", () => {
+        const Comp = ({history}: {history: RouterHistory}) => {
+          // $ExpectError - wrong param
+          history.block(false);
+
+          // These are valid
+          history.block('Are you sure you want to leave this page?');
+          history.block((location, action) => {
+            return 'Are you sure you want to leave this page?';
+          });
+
+          return <div />;
+        };
+        const WrappedComp = withRouter(Comp);
+      });
     });
 
     describe("Class Components", () => {

@@ -12,7 +12,7 @@ declare module 'react-transition-group' {
     exitDone?: string,
   };
 
-  declare export type TransitionStatus = 'entering' | 'entered' | 'exiting' | 'exited' | 'unmounted';
+  declare export type TransitionStatus = 'entering' | 'entered' | 'exiting' | 'exited';
 
   declare export type EndHandler = (node: HTMLElement, done: () => void) => void;
   declare export type EnterHandler = (node: HTMLElement, isAppearing: boolean) => void;

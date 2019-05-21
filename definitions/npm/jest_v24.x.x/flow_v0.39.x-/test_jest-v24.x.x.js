@@ -245,9 +245,9 @@ expect.extend({
 });
 
 expect.extend({
-  blah(actual, expected) {
+  blah(actual: string, one: string, two: string, three: string) {
     return Promise.resolve({
-      message: () => 'blah fail',
+      message: () => one + two + three,
       pass: false,
     });
   },
@@ -524,6 +524,7 @@ expect(wrapper).toHaveDisplayName(true);
   const element = document.createElement('div');
 
   expect(element).toBeDisabled();
+  expect(element).toBeEnabled();
   expect(element).toBeEmpty();
   expect(element).toBeInTheDocument();
   expect(element).toBeVisible();

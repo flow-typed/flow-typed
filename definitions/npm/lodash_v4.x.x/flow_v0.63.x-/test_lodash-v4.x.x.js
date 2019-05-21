@@ -33,6 +33,8 @@ import sortedIndexBy from "lodash/sortedIndexBy";
 import sortedLastIndexBy from "lodash/sortedLastIndexBy";
 import sortedUniq from "lodash/sortedUniq";
 import sortedUniqBy from "lodash/sortedUniqBy";
+import take from "lodash/take";
+import takeRight from "lodash/takeRight";
 import tap from "lodash/tap";
 import thru from "lodash/thru";
 import times from "lodash/times";
@@ -487,6 +489,13 @@ debounced = debounce(() => {});
 var pairs: [string, number][];
 pairs = toPairs({ a: 12, b: 100 });
 pairs = toPairsIn({ a: 12, b: 100 });
+
+/**
+ * _.take / _.takeRight
+ */
+var taken: string[];
+taken = take((["abc", "123"]: $ReadOnlyArray<string>), 3);
+taken = takeRight((["abc", "123"]: $ReadOnlyArray<string>));
 
 /**
  * _.pickBy

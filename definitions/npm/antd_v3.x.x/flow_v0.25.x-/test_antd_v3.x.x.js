@@ -38,6 +38,8 @@ import {
   TreeSelect
 } from "antd";
 
+import type { WrappedFormUtils } from "antd";
+
 describe("Alert", () => {
   it("is a react component", () => {
     const alert = <Alert />;
@@ -307,6 +309,22 @@ describe("Form", () => {
   it("is a react component", () => {
     const form = <Form />;
   });
+  it("have create method that wrap a component with a form", () => {
+
+    type PropsGoodTest = {a:string, form: WrappedFormUtils};
+    type PropsBadTest = {a:string};
+    class GoodTestComponent extends React.Component<PropsGoodTest> {}
+    class BadTestComponent extends React.Component<PropsBadTest> {}
+
+    // create is a function
+    const GoodWrappedTestForm: React$ComponentType<$Diff<PropsGoodTest, { form: * }>> =
+      Form.create<PropsGoodTest>({name: 'good_test_form'})(GoodTestComponent);
+
+    const BadWrappedTestForm: React$ComponentType<$Diff<PropsBadTest, { form: * }>> =
+      // $ExpectError PropsBadTest. it must contain form attribute
+      Form.create<PropsBadTest>({name: 'bad_test_form'})(BadTestComponent);
+
+  });
 });
 
 describe("Form.Item", () => {
@@ -336,6 +354,17 @@ describe("Input.Search", () => {
 describe("Input.TextArea", () => {
   it("is a react component", () => {
     const inputTextArea = <Input.TextArea />;
+  });
+});
+
+describe("Input.Password", () => {
+  it("is a react component", () => {
+    const inputPassword = <Input.Password />;
+  });
+  it("should accept boolean visibilityToggle", () => {
+    const good = <Input.Password visibilityToggle={false} />;
+    // $ExpectError string. visibilityToggle must be of type boolean
+    const bad = <Input.Password visibilityToggle={"false"} />
   });
 });
 

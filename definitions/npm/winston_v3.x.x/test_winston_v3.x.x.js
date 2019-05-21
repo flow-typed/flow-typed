@@ -1,4 +1,5 @@
 import winston from "winston";
+import type { Logger, Levels, Format, ConsoleTransport, Container } from "winston";
 
 winston.log({
   level: "info",
@@ -10,11 +11,15 @@ winston.nonExistantLevel("default logger nonExistantLevel message");
 
 // See example:
 // https://github.com/winstonjs/winston/blob/c868f0ccdc6ddc45e586c9808d99ebae8351113b/README.md#formats
-const customPrintf = winston.format.printf(info => {
+const customFormat = winston.format(info => info);
+
+const customPrintf: Format = winston.format.printf(info => {
   return `${info.level}: ${info.message}`;
 });
-let logger = winston.createLogger({
+
+let logger: Logger<Levels> = winston.createLogger({
   format: winston.format.combine(
+    customFormat(),
     winston.format.json(),
     winston.format.label({label: 'label'}),
     winston.format.colorize(),
@@ -42,7 +47,7 @@ logger.log({
 
 logger.clear();
 
-const consoleTransport = new winston.transports.Console();
+const consoleTransport: ConsoleTransport<Levels> = new winston.transports.Console();
 
 consoleTransport.level = 'debug';
 consoleTransport.silent = true;
@@ -75,16 +80,21 @@ logger = winston.loggers.add("categoryOneId", {
   level: "debug",
   transports: [new winston.transports.Console()]
 });
+const hasCategoryOneId: boolean = winston.loggers.has("categoryOneId");
 
 logger.debug("categoryOneId debug message");
 
-const container = new winston.Container({
+const container: Container<Levels> = new winston.Container({
   format: winston.format.json(),
   level: "debug",
   transports: [new winston.transports.File({ filename: "new-container.log" })]
 });
+
 container.add("categoryTwoId");
+const hasCategoryTwoId: boolean = container.has("categoryTwoId");
+
 container.add("categoryThreeId");
+const hasCategoryThreeId: boolean = container.has("categoryThreeId");
 
 logger = container.get("categoryTwoId");
 

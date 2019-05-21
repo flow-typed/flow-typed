@@ -62,7 +62,7 @@ declare module 'react-native-navigation' {
     | 'overFullScreen'
     | 'overCurrentContext'
     | 'currentContext'
-    | 'popOver'
+    | 'popover'
     | 'fullScreen'
     | 'none';
 
@@ -130,12 +130,17 @@ declare module 'react-native-navigation' {
     color?: Color,
     disabledColor?: Color,
     testID?: string,
+    // Android only
+    showAsAction?: 'always' | 'never' | 'withText' | 'ifRoom',
   |};
   declare export type OptionsTopBar = {|
     visible?: boolean,
     animate?: boolean,
     hideOnScroll?: boolean,
-    buttonColor?: Color,
+    leftButtonColor?: Color,
+    rightButtonColor?: Color,
+    leftButtonDisabledColor?: Color,
+    rightButtonDisabledColor?: Color,
     drawBehind?: boolean,
     testID?: string,
     title?: OptionsTopBarTitle,
@@ -155,6 +160,7 @@ declare module 'react-native-navigation' {
     borderColor?: Color,
     borderHeight?: AndroidDensityNumber,
     elevation?: AndroidDensityNumber,
+    topMargin?: number,
   |};
   declare export type OptionsFab = {|
     id: string,
@@ -214,6 +220,7 @@ declare module 'react-native-navigation' {
   |};
   declare export type OptionsOverlay = {|
     interceptTouchOutside?: boolean,
+    handleKeyboardEvents?: boolean,
   |};
   declare export type OptionsPreviewAction = {|
     id: string,
@@ -373,6 +380,50 @@ declare module 'react-native-navigation' {
   /* --- Events --- */
   declare export type Unsubscribe = { remove(): void };
 
+  declare export type ComponentDidDisappearEvent = {|
+    componentId: string,
+    componentName: string,
+  |};
+
+  declare export type ComponentDidAppearEvent = {|
+    componentId: string,
+    componentName: string,
+  |};
+
+  declare export type CommandEvent = {|
+    commandId?: string,
+    componentId?: string,
+    layout?: {},
+    options?: {},
+  |};
+
+  declare export type CommandCompletedEvent = {|
+    commandId: string,
+    completionTime: number,
+    params?: {},
+  |};
+
+  declare export type BottomTabSelectedEvent = {|
+    selectedTabIndex: number,
+    unselectedTabIndex: number,
+  |};
+
+  declare export type ModalDismissedEvent = {|
+    componentId: string,
+    modalsDismissed: number,
+  |};
+
+  declare export type NavigationButtonPressedEvent = {|
+    buttonId: string,
+    componentId: string,
+  |};
+
+  declare export type SearchBarUpdateEvent = {|
+    text: string,
+    isFocused: boolean,
+  |};
+  declare export type PreviewCompletedEvent = {| previewComponentId: string |};
+  declare export type ButtonPressedEvent = {| buttonId: string |};
   declare export type EventsRegistry = $ReadOnly<{|
     registerAppLaunchedListener(() => void): Unsubscribe,
 
@@ -380,64 +431,37 @@ declare module 'react-native-navigation' {
       +componentDidAppear?: () => void,
       +componentDidDisappear?: () => void,
       +searchBarCancelPressed?: () => void,
-      +navigationButtonPressed?: ({| buttonId: string |}) => void,
-      +searchBarUpdated?: ({| text: string, isFocused: boolean |}) => void,
-      +previewCompleted?: ({| previewComponentId: string |}) => void,
+      +navigationButtonPressed?: ButtonPressedEvent => void,
+      +searchBarUpdated?: SearchBarUpdateEvent => void,
+      +previewCompleted?: PreviewCompletedEvent => void,
     }): Unsubscribe,
 
     registerComponentDidDisappearListener(
-      (event: {|
-        componentId: string,
-        componentName: string,
-      |}) => void
+      (event: ComponentDidDisappearEvent) => void
     ): Unsubscribe,
 
     registerComponentDidAppearListener(
-      (event: {|
-        componentId: string,
-        componentName: string,
-      |}) => void
+      (event: ComponentDidAppearEvent) => void
     ): Unsubscribe,
 
     registerCommandListener(
-      (
-        name: string,
-        event: {|
-          commandId?: string,
-          componentId?: string,
-          layout?: {},
-          options?: {},
-        |}
-      ) => void
+      (name: string, event: CommandEvent) => void
     ): Unsubscribe,
 
     registerCommandCompletedListener(
-      (event: {|
-        commandId: string,
-        completionTime: number,
-        params?: {},
-      |}) => void
+      (event: CommandCompletedEvent) => void
     ): Unsubscribe,
 
     registerModalDismissedListener(
-      (event: {|
-        componentId: string,
-        modalsDismissed: number,
-      |}) => void
+      (event: ModalDismissedEvent) => void
     ): Unsubscribe,
 
     registerBottomTabSelectedListener(
-      (event: {|
-        selectedTabIndex: number,
-        unselectedTabIndex: number,
-      |}) => void
+      (event: BottomTabSelectedEvent) => void
     ): Unsubscribe,
 
     registerNavigationButtonPressedListener(
-      (event: {|
-        buttonId: string,
-        componentId: string,
-      |}) => void
+      (event: NavigationButtonPressedEvent) => void
     ): Unsubscribe,
   |}>;
 
@@ -453,6 +477,7 @@ declare module 'react-native-navigation' {
       getComponentClassFunc: GetComponentClassFunc
     ): void,
 
+    // Deprecated
     registerComponentWithRedux(
       screenID: string | number,
       getComponentClassFunc: GetComponentClassFunc,
@@ -465,7 +490,7 @@ declare module 'react-native-navigation' {
       layout: Layout | Array<Layout>
     ): Promise<string>,
 
-    setRoot<P: *>(LayoutRoot): string,
+    setRoot(LayoutRoot): string,
     setDefaultOptions(options: Options): void,
     mergeOptions(componentId: string, options: Options): void,
     showModal(layout: Layout): Promise<string>,

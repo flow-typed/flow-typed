@@ -1,5 +1,5 @@
 declare module 'eventemitter3' {
-  declare type ListenerFn = (...args: any[]) => void
+  declare type ListenerFn = (...args: any[]) => mixed
   declare class EventEmitter {
     static constructor(): EventEmitter,
     static prefixed: string | boolean,

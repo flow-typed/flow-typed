@@ -155,6 +155,18 @@ const IncorrectHistoryUsage = ({ history, name }: FooProps) => {
   );
 };
 
+const IncorrectHistoryBlockUsage = (history: RouterHistory) => {
+  // Wrong arguments here
+  // $ExpectError
+  history.block(false);
+
+  // These are valid
+  history.block('Are you sure you want to leave this page?');
+  history.block((location, action) => {
+    return 'Are you sure you want to leave this page?';
+  });
+};
+
 // matchPath
 const match: null | Match = matchPath("/the/pathname", {
   path: "/the/:dynamicId",

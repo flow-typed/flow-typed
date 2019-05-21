@@ -8,7 +8,11 @@ import {
   matchPath,
   withRouter
 } from "react-router-dom";
-import type { ContextRouter, Match } from "react-router-dom";
+import type {
+  ContextRouter,
+  Match,
+  RouterHistory
+} from "react-router-dom";
 
 // BrowserRouter
 <BrowserRouter>
@@ -87,6 +91,18 @@ import type { ContextRouter, Match } from "react-router-dom";
 
 // $ExpectError
 <NavLink />;
+
+const IncorrectHistoryBlockUsage = (history: RouterHistory) => {
+  // Wrong arguments here
+  // $ExpectError
+  history.block(false);
+
+  // These are valid
+  history.block('Are you sure you want to leave this page?');
+  history.block((location, action) => {
+    return 'Are you sure you want to leave this page?';
+  });
+};
 
 // matchPath
 const match: null | Match = matchPath("/the/pathname", {
