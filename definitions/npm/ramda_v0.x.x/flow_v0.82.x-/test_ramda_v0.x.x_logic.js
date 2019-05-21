@@ -87,15 +87,14 @@ describe('ifElse', () => {
 
   it('works with variadic arg inputs', () => {
     const ifElseFn = ifElse(
-      // The original motivation was to work with "test". Future changes could
-      // invalidate the nature of the test, so we need to mimic the form of test
-      // at time of writing. The error will be along the lines of this:
+      // Without this test, variadic argument input functions will produce an
+      // error like this:
       //
       // Cannot call `ifElse` because rest array [1] has an unknown number of
       // elements, so is incompatible with tuple type [2].
       (...args: [string]): boolean => true,
-      always(undefined),
-      always('some error'),
+      (s: string) => s.toUpperCase(),
+      (s: string) => s.toLowerCase(),
     );
     const result: void | string = ifElseFn('input')
   })
@@ -103,8 +102,8 @@ describe('ifElse', () => {
   it('preserves the types used with variadic argument condition functions', () => {
     const ifElseFn = ifElse(
       (...args: [string]): boolean => true,
-      always(undefined),
-      always('some error'),
+      (s: string) => s.toUpperCase(),
+      (s: string) => s.toLowerCase(),
     );
     // $ExpectError
     const result: void | string = ifElseFn(5)
