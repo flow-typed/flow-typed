@@ -1,8 +1,6 @@
 /*
  * The next module declaration need to show which types was copy from `react-native`
  */
-import { WebViewSharedProps } from 'react-native-webview';
-
 declare module 'react-native-webview/@@react-native' {
   declare export type NativeScrollRectangle = {
     left: number,
