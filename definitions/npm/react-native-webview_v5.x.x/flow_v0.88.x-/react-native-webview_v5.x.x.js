@@ -119,7 +119,7 @@ declare module 'react-native-webview' {
   |};
 
   declare export type WebViewNativeConfig = {|
-    component?: React$ElementType,
+    component?: React$ComponentType<WebViewSharedProps>,
     props?: {},
     viewManager?: {},
   |};
