@@ -5,6 +5,8 @@
  * This is a temporary abstraction for importing external dependencies.
  */
 
+import { CSSProperties } from "@material-ui/core/styles/withStyles";
+
 declare module '@material-ui/core/@@utils' {
   // Utilities used in this definition:
 
@@ -1079,11 +1081,11 @@ declare module '@material-ui/core/styles/createTypography' {
   |}>;
 
   declare export type TypographyStyle = {|
+    color: $ElementType<CSSProperties, 'color'>,
     fontFamily: $ElementType<CSSProperties, 'fontFamily'>,
     fontSize: $ElementType<CSSProperties, 'fontSize'>,
+    fontStyle: $ElementType<CSSProperties, 'fontStyle'>,
     fontWeight: $ElementType<CSSProperties, 'fontWeight'>,
-    color: $ElementType<CSSProperties, 'color'>,
-
     letterSpacing?: $ElementType<CSSProperties, 'letterSpacing'>,
     lineHeight?: $ElementType<CSSProperties, 'lineHeight'>,
     textTransform?: $ElementType<CSSProperties, 'textTransform'>,
