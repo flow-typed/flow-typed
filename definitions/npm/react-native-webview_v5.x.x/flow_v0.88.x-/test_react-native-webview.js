@@ -48,6 +48,12 @@ describe('WebView props', () => {
   describe('events', () => {
     it('should passes when use properly', () => {
       <WebView
+        onScroll={event => {
+          (event.zoomScale: number);
+
+          // $ExpectError: check any type
+          (event.zoomScale: boolean);
+        }}
         onLoad={event => {
           (event.nativeEvent.navigationType: NavigationType);
         }}
@@ -73,6 +79,19 @@ describe('WebView props', () => {
       />;
     });
 
+    it('should passes when use async event handler', () => {
+      <WebView
+        onScroll={async e => {}}
+        onLoad={async e => {}}
+        onLoadEnd={async e => {}}
+        onLoadStart={async e => {}}
+        onError={async e => {}}
+        onNavigationStateChange={async e => {}}
+        onMessage={async e => {}}
+        onLoadProgress={async e => {}}
+      />;
+    });
+
     it('should raises an error when you try write to event', () => {
       <WebView
         onLoad={event => {
@@ -81,6 +100,125 @@ describe('WebView props', () => {
           // $ExpectError: readonly
           event.nativeEvent = {};
         }}
+      />;
+    });
+  });
+
+  describe('Android props', () => {
+    it('should passes when use properly', () => {
+      <WebView
+        allowsFullscreenVideo={false}
+        overScrollMode={'content'}
+        geolocationEnabled={false}
+        allowUniversalAccessFromFileURLs={false}
+        allowFileAccess={false}
+        saveFormDataDisabled={false}
+        urlPrefixesForDefaultIntent={['str']}
+        javaScriptEnabled={false}
+        androidHardwareAccelerationDisabled={false}
+        thirdPartyCookiesEnabled={false}
+        domStorageEnabled={false}
+        textZoom={1}
+        mixedContentMode={'compatibility'}
+      />;
+    });
+
+    it('should raise an error when passing incompatible types', () => {
+      <WebView
+        // $ExpectError
+        allowsFullscreenVideo={'need boolean'}
+        // $ExpectError: `__content` missing in enum
+        overScrollMode={'__content'}
+        // $ExpectError
+        geolocationEnabled={'need boolean'}
+        // $ExpectError
+        allowUniversalAccessFromFileURLs={'need boolean'}
+        // $ExpectError
+        allowFileAccess={'need boolean'}
+        // $ExpectError
+        saveFormDataDisabled={'need boolean'}
+        // $ExpectError: need array of strings
+        urlPrefixesForDefaultIntent={[1]}
+        // $ExpectError
+        javaScriptEnabled={'need boolean'}
+        // $ExpectError
+        androidHardwareAccelerationDisabled={'need boolean'}
+        // $ExpectError
+        thirdPartyCookiesEnabled={'need boolean'}
+        // $ExpectError
+        domStorageEnabled={'need boolean'}
+        // $ExpectError
+        textZoom={'need number'}
+        // $ExpectError: `__compatibility` missing in enum
+        mixedContentMode={'__compatibility'}
+      />;
+    });
+  });
+
+  describe('iOS props', () => {
+    it('should passes when use properly', () => {
+      <WebView
+        useWebKit={false}
+        incognito={false}
+        bounces={false}
+        decelerationRate={1}
+        scrollEnabled={false}
+        pagingEnabled={false}
+        automaticallyAdjustContentInsets={false}
+        contentInset={{ top: 1 }}
+        dataDetectorTypes={'phoneNumber'}
+        allowsInlineMediaPlayback={false}
+        hideKeyboardAccessoryView={false}
+        allowsBackForwardNavigationGestures={false}
+        useSharedProcessPool={false}
+        allowsLinkPreview={false}
+        sharedCookiesEnabled={false}
+        directionalLockEnabled={false}
+        keyboardDisplayRequiresUserAction={false}
+      />;
+
+      <WebView
+        decelerationRate={'fast'}
+        dataDetectorTypes={['phoneNumber', 'calendarEvent']}
+      />;
+    });
+
+    it('should raise an error when passing incompatible types', () => {
+      <WebView
+        // $ExpectError
+        useWebKit={'need boolean'}
+        // $ExpectError
+        incognito={'need boolean'}
+        // $ExpectError
+        bounces={'need boolean'}
+        // $ExpectError: need number or value from enum
+        decelerationRate={false}
+        // $ExpectError
+        scrollEnabled={'need boolean'}
+        // $ExpectError
+        pagingEnabled={'need boolean'}
+        // $ExpectError
+        automaticallyAdjustContentInsets={'need boolean'}
+        // $ExpectError: need object
+        contentInset={false}
+        // $ExpectError: `__phoneNumber` missing in enum
+        dataDetectorTypes={'__phoneNumber'}
+        // $ExpectError
+        allowsInlineMediaPlayback={'need boolean'}
+        // $ExpectError
+        hideKeyboardAccessoryView={'need boolean'}
+        // $ExpectError
+        allowsBackForwardNavigationGestures={'need boolean'}
+        // $ExpectError
+        useSharedProcessPool={'need boolean'}
+        // $ExpectError
+        allowsLinkPreview={'need boolean'}
+        // $ExpectError
+        sharedCookiesEnabled={'need boolean'}
+        // $ExpectError
+        directionalLockEnabled={'need boolean'}
+        // $ExpectError
+        keyboardDisplayRequiresUserAction={'need boolean'}
       />;
     });
   });
