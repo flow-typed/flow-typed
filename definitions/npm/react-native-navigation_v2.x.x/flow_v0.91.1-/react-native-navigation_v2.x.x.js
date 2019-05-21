@@ -110,6 +110,7 @@ declare module 'react-native-navigation' {
     clipToBounds?: boolean,
     component?: {
       name?: string,
+      passProps?: {},
     },
     translucent?: boolean,
     blur?: boolean,
