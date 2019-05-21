@@ -1,4 +1,47 @@
+/*
+ * The next module declaration need to show which types was copy from `react-native`
+ */
+declare module 'react-native-webview/@@react-native' {
+  declare export type NativeScrollRectangle = {
+    left: number,
+    top: number,
+    bottom: number,
+    right: number,
+  };
+
+  declare export type NativeScrollPoint = {
+    x: number,
+    y: number,
+  };
+
+  declare export type NativeScrollVelocity = {
+    x: number,
+    y: number,
+  };
+
+  declare export type NativeScrollSize = {
+    height: number,
+    width: number,
+  };
+
+  declare export type NativeScrollEvent = {
+    contentInset: NativeScrollRectangle,
+    contentOffset: NativeScrollPoint,
+    contentSize: NativeScrollSize,
+    layoutMeasurement: NativeScrollSize,
+    velocity?: NativeScrollVelocity,
+    zoomScale: number,
+  };
+
+  declare export type NativeSyntheticEvent<T> = { +nativeEvent: T };
+}
+
 declare module 'react-native-webview' {
+  import type {
+    NativeScrollEvent,
+    NativeSyntheticEvent,
+  } from 'react-native-webview/@@react-native';
+
   declare export type MixedContentMode = 'never' | 'always' | 'compatibility';
   declare export type DecelerationRateConstant = 'normal' | 'fast';
   declare export type OverScrollModeType = 'always' | 'content' | 'never';
@@ -81,7 +124,6 @@ declare module 'react-native-webview' {
     viewManager?: {},
   |};
 
-  declare export type NativeSyntheticEvent<T> = { +nativeEvent: T };
   declare export type WebViewEvent = NativeSyntheticEvent<WebViewNativeEvent>;
   declare export type WebViewNavigationEvent = NativeSyntheticEvent<WebViewNavigation>;
   declare export type WebViewMessageEvent = NativeSyntheticEvent<WebViewMessage>;
@@ -91,71 +133,73 @@ declare module 'react-native-webview' {
     event: WebViewNavigation
   ) => boolean;
 
-  declare export interface IOSWebViewProps extends WebViewSharedProps {
-    useWebKit?: boolean;
-    incognito?: boolean;
-    bounces?: boolean;
-    decelerationRate?: DecelerationRateConstant | number;
-    scrollEnabled?: boolean;
-    pagingEnabled?: boolean;
-    automaticallyAdjustContentInsets?: boolean;
-    contentInset?: ContentInsetProp;
-    dataDetectorTypes?: DataDetectorTypes | Array<DataDetectorTypes>;
-    allowsInlineMediaPlayback?: boolean;
-    hideKeyboardAccessoryView?: boolean;
-    allowsBackForwardNavigationGestures?: boolean;
-    useSharedProcessPool?: boolean;
-    userAgent?: string;
-    allowsLinkPreview?: boolean;
-    sharedCookiesEnabled?: boolean;
-    directionalLockEnabled?: boolean;
-    keyboardDisplayRequiresUserAction?: boolean;
-  }
+  declare export type IOSWebViewProps = {
+    useWebKit?: boolean,
+    incognito?: boolean,
+    bounces?: boolean,
+    decelerationRate?: DecelerationRateConstant | number,
+    scrollEnabled?: boolean,
+    pagingEnabled?: boolean,
+    automaticallyAdjustContentInsets?: boolean,
+    contentInset?: ContentInsetProp,
+    dataDetectorTypes?: DataDetectorTypes | Array<DataDetectorTypes>,
+    allowsInlineMediaPlayback?: boolean,
+    hideKeyboardAccessoryView?: boolean,
+    allowsBackForwardNavigationGestures?: boolean,
+    useSharedProcessPool?: boolean,
 
-  declare export interface AndroidWebViewProps extends WebViewSharedProps {
-    onNavigationStateChange?: (event: WebViewNavigation) => void;
-    onContentSizeChange?: (event: WebViewEvent) => void;
-    overScrollMode?: OverScrollModeType;
-    geolocationEnabled?: boolean;
-    allowUniversalAccessFromFileURLs?: boolean;
-    allowFileAccess?: boolean;
-    saveFormDataDisabled?: boolean;
-    urlPrefixesForDefaultIntent?: Array<string>;
-    javaScriptEnabled?: boolean;
-    androidHardwareAccelerationDisabled?: boolean;
-    thirdPartyCookiesEnabled?: boolean;
-    domStorageEnabled?: boolean;
-    userAgent?: string;
-    textZoom?: number;
-    mixedContentMode?: MixedContentMode;
-  }
+    allowsLinkPreview?: boolean,
+    sharedCookiesEnabled?: boolean,
+    directionalLockEnabled?: boolean,
+    keyboardDisplayRequiresUserAction?: boolean,
+  } & WebViewSharedProps;
 
-  declare export interface WebViewSharedProps {
-    source?: WebViewSource;
+  declare export type AndroidWebViewProps = {
+    onContentSizeChange?: WebViewEvent => mixed,
+    overScrollMode?: OverScrollModeType,
+    geolocationEnabled?: boolean,
+    allowUniversalAccessFromFileURLs?: boolean,
+    allowsFullscreenVideo?: boolean,
+    allowFileAccess?: boolean,
+    saveFormDataDisabled?: boolean,
+    urlPrefixesForDefaultIntent?: Array<string>,
+    javaScriptEnabled?: boolean,
+    androidHardwareAccelerationDisabled?: boolean,
+    thirdPartyCookiesEnabled?: boolean,
+    domStorageEnabled?: boolean,
+
+    textZoom?: number,
+    mixedContentMode?: MixedContentMode,
+  } & WebViewSharedProps;
+
+  declare export type WebViewSharedProps = {
+    source?: WebViewSource,
     renderError?: (
       errorDomain: ?string,
       errorCode: number,
       errorDesc: string
-    ) => React$Element<any>;
-    renderLoading?: () => React$Element<any>;
-    onLoad?: (event: WebViewNavigationEvent) => void;
-    onLoadEnd?: (event: WebViewNavigationEvent | WebViewErrorEvent) => void;
-    onLoadStart?: (event: WebViewNavigationEvent) => void;
-    onError?: (event: WebViewErrorEvent) => void;
-    onNavigationStateChange?: (event: WebViewNavigation) => void;
-    onMessage?: (event: WebViewMessageEvent) => void;
-    onLoadProgress?: (event: WebViewProgressEvent) => void;
-    startInLoadingState?: boolean;
-    injectedJavaScript?: string;
-    showsHorizontalScrollIndicator?: boolean;
-    showsVerticalScrollIndicator?: boolean;
-    scalesPageToFit?: boolean;
-    mediaPlaybackRequiresUserAction?: boolean;
-    originWhitelist?: Array<string>;
-    onShouldStartLoadWithRequest?: OnShouldStartLoadWithRequest;
-    nativeConfig?: WebViewNativeConfig;
-    cacheEnabled?: boolean;
-  }
+    ) => React$Element<any>,
+    renderLoading?: () => React$Element<any>,
+    onScroll?: NativeScrollEvent => mixed,
+    onLoad?: WebViewNavigationEvent => mixed,
+    onLoadEnd?: (WebViewNavigationEvent | WebViewErrorEvent) => mixed,
+    onLoadStart?: WebViewNavigationEvent => mixed,
+    onError?: WebViewErrorEvent => mixed,
+    onNavigationStateChange?: WebViewNavigation => mixed,
+    onMessage?: WebViewMessageEvent => mixed,
+    onLoadProgress?: WebViewProgressEvent => mixed,
+    startInLoadingState?: boolean,
+    injectedJavaScript?: string,
+    showsHorizontalScrollIndicator?: boolean,
+    showsVerticalScrollIndicator?: boolean,
+    scalesPageToFit?: boolean,
+    mediaPlaybackRequiresUserAction?: boolean,
+    originWhitelist?: Array<string>,
+    onShouldStartLoadWithRequest?: OnShouldStartLoadWithRequest,
+    nativeConfig?: WebViewNativeConfig,
+    cacheEnabled?: boolean,
+    userAgent?: string,
+  };
 
   declare export type WebViewProps = IOSWebViewProps & AndroidWebViewProps;
 
@@ -166,7 +210,7 @@ declare module 'react-native-webview' {
     goForward(): void;
     reload(): void;
     stopLoading(): void;
-    injectJavaScript: (script: string) => void;
+    injectJavaScript(script: string): void;
   }
 
   declare export default typeof WebView;
