@@ -1,6 +1,8 @@
 {
   "private": true,
   "name": "flow-typed",
+  "version": "0.0.0",
+  "flowVersion": "flow_all",
   "scripts": {
     "sync-definitions": "./experimental/scripts/sync-definitions.js"
   },
@@ -13,7 +15,8 @@
   },
   "bolt": {
     "workspaces": [
-      "experimental/definitions/**/*"
+      "experimental/definitions/**/*",
+      "!experimental/definitions/**/node_modules/**"
     ]
   }
 }
