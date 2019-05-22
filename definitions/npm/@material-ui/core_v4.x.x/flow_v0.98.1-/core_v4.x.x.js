@@ -5,8 +5,6 @@
  * This is a temporary abstraction for importing external dependencies.
  */
 
-import { CSSProperties } from "@material-ui/core/styles/withStyles";
-
 declare module '@material-ui/core/@@utils' {
   // Utilities used in this definition:
 
@@ -296,6 +294,7 @@ declare module '@material-ui/core/@@dom' {
   // ... in the future will be replaced with exact types for a specific element (div, li, inout, ...)
   declare export type HTMLImageAttributes = {};
   declare export type HTMLDivAttributes = {};
+  declare export type HTMLSpanAttributes = {};
   declare export type HTMLUListAttributes = {};
   declare export type HTMLLIAttributes = {};
   declare export type HTMLElementAttributes = {};
@@ -2934,6 +2933,39 @@ declare module '@material-ui/core/NativeSelect/NativeSelect' {
   declare export * from '@material-ui/core/NativeSelect'
 }
 
+declare module '@material-ui/core/Icon' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { PropTypes$Color } from '@material-ui/core/flow-types';
+  import type { HTMLSpanAttributes } from '@material-ui/core/@@dom';
+
+  declare export type IconClassKey =
+    | 'root'
+    | 'colorSecondary'
+    | 'colorAction'
+    | 'colorDisabled'
+    | 'colorError'
+    | 'colorPrimary'
+    | 'fontSizeInherit'
+    | 'fontSizeSmall'
+    | 'fontSizeLarge';
+
+  declare export type IconProps = StandardProps<
+    IconClassKey,
+    {
+      component?: React$ElementType,
+      fontSize?: 'inherit' | 'default' | 'small' | 'large',
+      color?: PropTypes$Color | 'action' | 'disabled' | 'error',
+    },
+    HTMLSpanAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<IconProps>;
+}
+declare module '@material-ui/core/Icon/Icon' {
+  declare export * from '@material-ui/core/Icon'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2965,6 +2997,7 @@ declare module '@material-ui/core' {
   declare export { default as Hidden } from '@material-ui/core/Hidden';
   declare export { default as InputBase } from '@material-ui/core/InputBase';
   declare export { default as Input } from '@material-ui/core/Input';
+  declare export { default as Icon } from '@material-ui/core/Icon';
   declare export {
     default as NativeSelect,
   } from '@material-ui/core/NativeSelect';
