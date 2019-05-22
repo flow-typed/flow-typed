@@ -1971,8 +1971,16 @@ declare module '@material-ui/core/ButtonBase' {
    TODO: need union of components
   ((props: { href: string } & OverrideProps<ExtendButtonBaseTypeMap<M>, 'a'>) => React$Node);
   */
-  declare type ButtonBase = OverridableComponent<{
-    props: ButtonBaseOwnProps,
+  declare export type ExtendButtonBase<
+    M: OverridableTypeMap
+  > = OverridableComponent<{
+    props: ButtonBaseOwnProps & $ElementType<M, 'props'>,
+    defaultComponent: $ElementType<M, 'defaultComponent'>,
+    classKey: $ElementType<M, 'classKey'>,
+  }>;
+
+  declare type ButtonBase = ExtendButtonBase<{
+    props: {},
     defaultComponent: 'button',
     classKey: ButtonBaseClassKey,
   }>;
