@@ -52,11 +52,11 @@ describe('own props', () => {
 
   it('should raises an error when pass incompatible types', () => {
     <Hidden
-      // $ExpectError: `__ups` missing in enum
+      // $ExpectError: `__ups` is missing in enum
       implementation={'__ups'}
-      // $ExpectError: `__ups` missing in enum
+      // $ExpectError: `__ups` is missing in enum
       only={'__ups'}
-      // $ExpectError: `__ups` missing in enum
+      // $ExpectError: `__ups` is missing in enum
       initialWidth={'__ups'}
       // $ExpectError
       lgDown={'need boolean'}
@@ -80,7 +80,7 @@ describe('own props', () => {
       xsUp={'need boolean'}
     />;
 
-    // $ExpectError: `aria-hidden` missing prop
+    // $ExpectError: `aria-hidden` is missing prop
     <Hidden aria-hidden="true" />;
   });
 });

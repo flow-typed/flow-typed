@@ -58,7 +58,7 @@ describe('own props', () => {
       absolute={'need boolean'}
       // $ExpectError
       light={'need boolean'}
-      // $ExpectError: `fullWidth__` missing in enum
+      // $ExpectError: `fullWidth__` is missing in enum
       variant={'fullWidth__'}
     />;
   });

@@ -40,7 +40,7 @@ describe('own props', () => {
       {...requiredProps}
     />;
 
-    // $ExpectError: `aria-hidden` missing prop
+    // $ExpectError: `aria-hidden` is missing prop
     <NoSsr aria-hidden="true" {...requiredProps} />;
   });
 });

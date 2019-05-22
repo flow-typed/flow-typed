@@ -75,7 +75,7 @@ describe('own props', () => {
 
   it('should raises an error when pass incompatible types', () => {
     <NativeSelect
-      // $ExpectError: `__standard` missing in enum
+      // $ExpectError: `__standard` is missing in enum
       variant={'__standard'}
       // $ExpectError: invalid react component
       IconComponent={{}}
@@ -207,7 +207,7 @@ describe('inherited InputBase props', () => {
       inputComponent={{}}
       // $ExpectError: need object
       inputProps={0}
-      // $ExpectError: `__dense` missing in enum
+      // $ExpectError: `__dense` is missing in enum
       margin={'__dense'}
       // $ExpectError
       multiline={'need string'}

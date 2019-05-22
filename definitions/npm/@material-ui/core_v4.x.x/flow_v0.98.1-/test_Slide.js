@@ -25,7 +25,7 @@ describe('own props', () => {
 
   it('should raises an error when pass incompatible types', () => {
     <Slide
-      // $ExpectError: `up__` missing in enum
+      // $ExpectError: `up__` is missing in enum
       direction={'up__'}
     />;
 

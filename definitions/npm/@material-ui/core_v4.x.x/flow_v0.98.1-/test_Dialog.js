@@ -122,7 +122,7 @@ describe('own props', () => {
         // $ExpectError: elevation must be number
         elevation: '22',
       }}
-      // $ExpectError: `html` missing in enum
+      // $ExpectError: `html` is missing in enum
       scroll={'html'}
       // $ExpectError: need react element type
       TransitionComponent={{}}

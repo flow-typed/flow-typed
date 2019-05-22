@@ -82,7 +82,7 @@ describe('own props', () => {
 
   it('should raises an error when pass incompatible types', () => {
     <Drawer
-      // $ExpectError: `bottom__` missing in enum
+      // $ExpectError: `bottom__` is missing in enum
       anchor={'bottom__'}
       // $ExpectError
       elevation={'need number'}
@@ -95,10 +95,10 @@ describe('own props', () => {
         square: 'need boolean',
       }}
       SlideProps={{
-        // $ExpectError: `down__` missing in enum
+        // $ExpectError: `down__` is missing in enum
         direction: 'down__',
       }}
-      // $ExpectError: `permanent__` missing in enum
+      // $ExpectError: `permanent__` is missing in enum
       variant={'permanent__'}
     />;
 

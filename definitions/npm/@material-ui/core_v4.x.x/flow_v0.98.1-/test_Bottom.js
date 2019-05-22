@@ -1,35 +1,45 @@
 //@flow
 import { it, describe } from 'flow-typed-test';
 import * as React from 'react';
-import { BottomNavigationAction } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 describe('imports', () => {
   it('should passes when used properly', () => {
-    const BottomNavigationAction1 = require('@material-ui/core/BottomNavigationAction')
-      .default;
-    const BottomNavigationAction0 = require('@material-ui/core/BottomNavigationAction/BottomNavigationAction')
-      .default;
+    const Button1 = require('@material-ui/core/Button').default;
+    const Button0 = require('@material-ui/core/Button/Button').default;
 
-    <BottomNavigationAction1 />;
-    <BottomNavigationAction0 />;
+    <Button1 />;
+    <Button0 />;
   });
 });
 
 describe('classes', () => {
   it('should passes when used properly', () => {
-    <BottomNavigationAction
+    <Button
       classes={{
         root: 'str',
-        selected: 'str',
-        iconOnly: 'str',
-        wrapper: 'str',
         label: 'str',
+        text: 'str',
+        textPrimary: 'str',
+        textSecondary: 'str',
+        outlined: 'str',
+        outlinedPrimary: 'str',
+        outlinedSecondary: 'str',
+        contained: 'str',
+        containedPrimary: 'str',
+        containedSecondary: 'str',
+        focusVisible: 'str',
+        disabled: 'str',
+        colorInherit: 'str',
+        sizeSmall: 'str',
+        sizeLarge: 'str',
+        fullWidth: 'str',
       }}
     />;
   });
 
   it('should raises an error when pass not implemented prop to the classes property', () => {
-    <BottomNavigationAction
+    <Button
       // $ExpectError: the `classes` enum does not contain `murAmur` prop
       classes={{
         murAmur: 'custom-class-name',
@@ -38,7 +48,7 @@ describe('classes', () => {
   });
 
   it('should raises an error when pass incompatible with string value', () => {
-    <BottomNavigationAction
+    <Button
       classes={{
         // $ExpectError: need string value
         root: true,
@@ -49,72 +59,48 @@ describe('classes', () => {
 
 describe('own props', () => {
   it('should passes when used properly', () => {
-    <BottomNavigationAction
-      onFocusVisible={() => {}}
-      action={actions => {
-        (actions.focusVisible: () => void);
-
-        // $ExpectError: check any
-        (actions.focusVisible: number);
-      }}
-      TouchRippleProps={{}}
+    <Button
+      color={'primary'}
+      fullWidth={false}
+      href={'http://'}
+      size={'large'}
+      variant={'outlined'}
     />;
 
-    <BottomNavigationAction
-      icon={'string'}
-      onClick={() => {}}
-      onChange={() => {}}
-      value={'11'}
-    />;
-
-    <BottomNavigationAction
-      icon={<i />}
-      label={<label />}
-      onChange={async () => {}}
-      onClick={async () => {}}
-      selected={false}
-      showLabel={false}
-      value={11}
-    />;
-
-    <BottomNavigationAction
-      icon={undefined}
-      label={undefined}
-      onChange={undefined}
-      onClick={undefined}
-      selected={undefined}
-      showLabel={undefined}
-      value={undefined}
+    <Button
+      color={undefined}
+      fullWidth={undefined}
+      href={undefined}
+      size={undefined}
+      variant={undefined}
     />;
   });
 
   it('should raises an error when pass incompatible types', () => {
-    <BottomNavigationAction
-      // $ExpectError: need string or one react element (not array)
-      icon={[<i />]}
+    <Button
+      // $ExpectError: `__primary` is missing in enum
+      color={'__primary'}
       // $ExpectError
-      label={{ need: 'react node' }}
-      // $ExpectError: children is required
-      onChange={'need function'}
-      // $ExpectError: children is required
-      onClick={'need function'}
-      // $ExpectError: children is required
-      selected={'need boolean'}
-      // $ExpectError: children is required
-      showLabel={'need boolean'}
+      fullWidth={'need boolean'}
+      // $ExpectError: need string
+      href={123}
+      // $ExpectError: `__large` is missing in enum
+      size={'__large'}
+      // $ExpectError: `__outlined` is missing in enum
+      variant={'__outlined'}
     />;
   });
 });
 
 describe('dom props', () => {
   it('should passes when pass some DOM props', () => {
-    <BottomNavigationAction aria-hidden="true" />;
+    <Button aria-hidden="true" />;
   });
 });
 
 describe('inherited ButtonBase props', () => {
   it('should passes when used inherited props properly', () => {
-    <BottomNavigationAction
+    <Button
       action={async () => {}}
       centerRipple={false}
       disabled={false}
@@ -138,7 +124,7 @@ describe('inherited ButtonBase props', () => {
       href={'http://'}
     />;
 
-    <BottomNavigationAction
+    <Button
       onFocusVisible={() => {}}
       action={actions => {
         (actions.focusVisible: () => void);
@@ -149,7 +135,7 @@ describe('inherited ButtonBase props', () => {
       TouchRippleProps={{}}
     />;
 
-    <BottomNavigationAction
+    <Button
       action={undefined}
       centerRipple={undefined}
       disabled={undefined}
@@ -164,7 +150,7 @@ describe('inherited ButtonBase props', () => {
   });
 
   it('should fail with error when passing incompatible for inherited props', () => {
-    <BottomNavigationAction
+    <Button
       TouchRippleProps={{
         // $ExpectError
         center: 'need bool',
@@ -175,7 +161,7 @@ describe('inherited ButtonBase props', () => {
       }}
     />;
 
-    <BottomNavigationAction
+    <Button
       TouchRippleProps={{
         // $ExpectError: the `classes` enum does not contain `murAmur` prop
         classes: {
@@ -184,7 +170,7 @@ describe('inherited ButtonBase props', () => {
       }}
     />;
 
-    <BottomNavigationAction
+    <Button
       // $ExpectError
       action={'need function'}
       // $ExpectError

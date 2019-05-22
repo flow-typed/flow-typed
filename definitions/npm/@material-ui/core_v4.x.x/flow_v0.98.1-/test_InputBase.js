@@ -161,7 +161,7 @@ describe('own props', () => {
       inputComponent={{}}
       // $ExpectError: need object
       inputProps={0}
-      // $ExpectError: `__dense` missing in enum
+      // $ExpectError: `__dense` is missing in enum
       margin={'__dense'}
       // $ExpectError
       multiline={'need string'}

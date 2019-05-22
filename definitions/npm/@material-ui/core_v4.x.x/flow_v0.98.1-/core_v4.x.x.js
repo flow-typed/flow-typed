@@ -1,10 +1,3 @@
-/*
- * Created and maintained: https://github.com/retyui
- * Some times you can find strange module declaration
- * that looks like `<path_scope>/@@<name>`
- * This is a temporary abstraction for importing external dependencies.
- */
-
 declare module '@material-ui/core/@@utils' {
   // Utilities used in this definition:
 
@@ -398,6 +391,7 @@ declare module '@material-ui/core/flow-types' {
     BaseProps,
     {
       ...$Exact<Removals>,
+      innerRef: any,
       classes: any,
       className: any,
       style: any,
@@ -425,7 +419,7 @@ declare module '@material-ui/core/OverridableComponent' {
    *
    * Adjusts valid props based on the type of `component`
    */
-  declare interface OverridableTypeMap {
+  declare export interface OverridableTypeMap {
     props: *;
     defaultComponent: *;
     classKey: *;
@@ -433,7 +427,7 @@ declare module '@material-ui/core/OverridableComponent' {
 
   declare export type OverridableComponent<M: OverridableTypeMap> = {
     (props: DefaultComponentProps<M>): React$Node,
-    // TODO: not supported https://github.com/facebook/flow/issues/7701
+    // TODO: readme issue 1
     // <Component: React$ElementType>(
     //   props: { component?: Component } & OverrideProps<M, Component>
     // ): React$Node,
@@ -445,7 +439,17 @@ declare module '@material-ui/core/OverridableComponent' {
   declare export type OverrideProps<
     M: OverridableTypeMap,
     C: React$ElementType
-  > = BaseProps<M> & $Diff<React$ElementConfig<C>, CommonProps<M>>;
+  > = BaseProps<M> &
+    $Diff<
+      React$ElementConfig<C>,
+      // next props collected from CommonProps<M>
+      {
+        className: any,
+        style: any,
+        classes: any,
+        innerRef: any,
+      }
+    >;
 
   /**
    * props if `component={Component}` is NOT used
@@ -455,13 +459,7 @@ declare module '@material-ui/core/OverridableComponent' {
   > = BaseProps<M> &
     $Diff<
       React$ElementConfig<$ElementType<M, 'defaultComponent'>>,
-      // next props collected from BaseProps<M>
-      {
-        className: any,
-        style: any,
-        classes: any,
-        innerRef: any,
-      }
+      BaseProps<M>
     >;
 
   /**
@@ -1286,7 +1284,7 @@ declare module '@material-ui/core/styles/responsiveFontSizes' {
   ) => Theme;
 }
 declare module '@material-ui/core/styles/MuiThemeProvider' {
-  // TODO: import type { ThemeProvider } from '@material-ui/styles';
+  // TODO: export type { ThemeProvider } from '@material-ui/styles';
   declare type ThemeProvider = React$ComponentType<any>;
 
   declare export default ThemeProvider;
@@ -1940,9 +1938,7 @@ declare module '@material-ui/core/ButtonBase/TouchRipple' {
 declare module '@material-ui/core/ButtonBase' {
   import type { TouchRippleProps } from '@material-ui/core/ButtonBase/TouchRipple';
   import type {
-    OverrideProps,
     OverridableComponent,
-    SimplifiedPropsOf,
     OverridableTypeMap,
   } from '@material-ui/core/OverridableComponent';
 
@@ -1968,7 +1964,7 @@ declare module '@material-ui/core/ButtonBase' {
   };
 
   /*
-   TODO: need union of components
+   TODO: readme issue 1
   ((props: { href: string } & OverrideProps<ExtendButtonBaseTypeMap<M>, 'a'>) => React$Node);
   */
   declare export type ExtendButtonBase<
@@ -1979,8 +1975,8 @@ declare module '@material-ui/core/ButtonBase' {
     classKey: $ElementType<M, 'classKey'>,
   }>;
 
-  declare type ButtonBase = ExtendButtonBase<{
-    props: {},
+  declare type ButtonBase = OverridableComponent<{
+    props: ButtonBaseOwnProps,
     defaultComponent: 'button',
     classKey: ButtonBaseClassKey,
   }>;
@@ -1991,6 +1987,64 @@ declare module '@material-ui/core/ButtonBase' {
 }
 declare module '@material-ui/core/ButtonBase/ButtonBase' {
   declare export * from '@material-ui/core/ButtonBase'
+}
+
+declare module '@material-ui/core/Button' {
+  import type { OverrideProps } from '@material-ui/core/OverridableComponent';
+  import type {
+    ButtonBaseOwnProps,
+    ExtendButtonBase,
+  } from '@material-ui/core/ButtonBase';
+  import type { PropTypes$Color } from '@material-ui/core/flow-types';
+
+  declare export type ButtonClassKey =
+    | 'root'
+    | 'label'
+    | 'text'
+    | 'textPrimary'
+    | 'textSecondary'
+    | 'outlined'
+    | 'outlinedPrimary'
+    | 'outlinedSecondary'
+    | 'contained'
+    | 'containedPrimary'
+    | 'containedSecondary'
+    | 'focusVisible'
+    | 'disabled'
+    | 'colorInherit'
+    | 'sizeSmall'
+    | 'sizeLarge'
+    | 'fullWidth';
+
+  declare type OwnProps = {
+    color?: PropTypes$Color,
+    fullWidth?: boolean,
+    // TODO: `ButtonBaseOwnProps` already include `href` attribute, but as hack
+    // href?: string,
+    size?: 'small' | 'medium' | 'large',
+    variant?: 'text' | 'outlined' | 'contained',
+  };
+
+  declare export type ButtonProps<
+    DefaultComponent: React$ElementType,
+    Props: {}
+  > = OverrideProps<
+    {
+      props: Props & OwnProps & ButtonBaseOwnProps,
+      defaultComponent: DefaultComponent,
+      classKey: ButtonClassKey,
+    },
+    DefaultComponent
+  >;
+
+  declare export default ExtendButtonBase<{
+    props: OwnProps,
+    defaultComponent: 'button',
+    classKey: ButtonClassKey,
+  }>;
+}
+declare module '@material-ui/core/Button/Button' {
+  declare export * from '@material-ui/core/Button'
 }
 
 declare module '@material-ui/core/BottomNavigationAction' {
@@ -3106,6 +3160,7 @@ declare module '@material-ui/core' {
   declare export { default as Icon } from '@material-ui/core/Icon';
   declare export { default as FormLabel } from '@material-ui/core/FormLabel';
   declare export { default as InputLabel } from '@material-ui/core/InputLabel';
+  declare export { default as Button } from '@material-ui/core/Button';
   declare export {
     default as InputAdornment,
   } from '@material-ui/core/InputAdornment';
