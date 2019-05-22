@@ -2966,6 +2966,36 @@ declare module '@material-ui/core/Icon/Icon' {
   declare export * from '@material-ui/core/Icon'
 }
 
+declare module '@material-ui/core/InputAdornment' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type InputAdornmentClassKey =
+    | 'root'
+    | 'filled'
+    | 'positionStart'
+    | 'positionEnd'
+    | 'disablePointerEvents';
+
+  declare export type InputAdornmentProps = StandardProps<
+    InputAdornmentClassKey,
+    {
+      position: 'start' | 'end',
+      variant?: 'standard' | 'outlined' | 'filled',
+      disablePointerEvents?: boolean,
+      disableTypography?: boolean,
+      component?: React$ElementType,
+    },
+    HTMLDivAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<InputAdornmentProps>;
+}
+declare module '@material-ui/core/InputAdornment/InputAdornment' {
+  declare export * from '@material-ui/core/InputAdornment'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -2998,6 +3028,10 @@ declare module '@material-ui/core' {
   declare export { default as InputBase } from '@material-ui/core/InputBase';
   declare export { default as Input } from '@material-ui/core/Input';
   declare export { default as Icon } from '@material-ui/core/Icon';
+  declare export {
+    default as InputAdornment,
+  } from '@material-ui/core/InputAdornment';
+
   declare export {
     default as NativeSelect,
   } from '@material-ui/core/NativeSelect';
