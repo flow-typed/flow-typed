@@ -295,6 +295,7 @@ declare module '@material-ui/core/@@dom' {
   declare export type HTMLImageAttributes = {};
   declare export type HTMLDivAttributes = {};
   declare export type HTMLSpanAttributes = {};
+  declare export type HTMLLabelAttributes = {};
   declare export type HTMLUListAttributes = {};
   declare export type HTMLLIAttributes = {};
   declare export type HTMLElementAttributes = {};
@@ -2996,6 +2997,42 @@ declare module '@material-ui/core/InputAdornment/InputAdornment' {
   declare export * from '@material-ui/core/InputAdornment'
 }
 
+declare module '@material-ui/core/FormLabel' {
+  import type { HTMLLabelAttributes } from '@material-ui/core/@@dom';
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
+
+  declare export type FormLabelClassKey =
+    | 'root'
+    | 'focused'
+    | 'disabled'
+    | 'error'
+    | 'filled'
+    | 'required'
+    | 'asterisk';
+
+  declare type FormLabel = OverridableComponent<
+    {
+      disabled?: boolean,
+      error?: boolean,
+      filled?: boolean,
+      focused?: boolean,
+      required?: boolean,
+    } & HTMLLabelAttributes,
+    'label',
+    FormLabelClassKey
+  >;
+
+  declare export type FormLabelProps = SimplifiedPropsOf<FormLabel>;
+
+  declare export default FormLabel;
+}
+declare module '@material-ui/core/FormLabel/FormLabel' {
+  declare export * from '@material-ui/core/FormLabel'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3028,6 +3065,7 @@ declare module '@material-ui/core' {
   declare export { default as InputBase } from '@material-ui/core/InputBase';
   declare export { default as Input } from '@material-ui/core/Input';
   declare export { default as Icon } from '@material-ui/core/Icon';
+  declare export { default as FormLabel } from '@material-ui/core/FormLabel';
   declare export {
     default as InputAdornment,
   } from '@material-ui/core/InputAdornment';
