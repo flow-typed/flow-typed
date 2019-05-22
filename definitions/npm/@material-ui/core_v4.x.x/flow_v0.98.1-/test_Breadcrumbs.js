@@ -2,6 +2,7 @@
 import { it, describe } from 'flow-typed-test';
 import * as React from 'react';
 import { Breadcrumbs } from '@material-ui/core';
+import type { BreadcrumbsProps } from '@material-ui/core/Breadcrumbs';
 
 describe('imports', () => {
   it('should passes when used properly', () => {
@@ -72,5 +73,16 @@ describe('own props', () => {
 describe('dom props', () => {
   it('should passes when pass some DOM props', () => {
     <Breadcrumbs aria-hidden="true" />;
+  });
+});
+
+describe('exported props', () => {
+  it('should not be any', () => {
+    declare var testProps: BreadcrumbsProps;
+
+    (testProps.maxItems: ?number);
+
+    // $ExpectError: check any
+    (testProps.maxItems: ?string);
   });
 });

@@ -479,15 +479,9 @@ declare module '@material-ui/core/OverridableComponent' {
   > &
     CommonComponentProps;
 
-  declare type Simplify<
-    Map,
-    OC: OverridableComponent<Map>
-  > = DefaultComponentProps<Map>;
-
-  declare export type SimplifiedPropsOf<OC: OverridableComponent<*>> = Simplify<
-    *,
-    OC
-  >;
+  declare export type SimplifiedPropsOf<
+    OC: OverridableComponent<*>
+  > = React$ElementConfig<OC>;
 }
 declare module '@material-ui/core/transitions' {
   import type {

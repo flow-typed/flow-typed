@@ -2,6 +2,7 @@
 import { it, describe } from 'flow-typed-test';
 import * as React from 'react';
 import { Avatar } from '@material-ui/core';
+import type { AvatarProps } from '@material-ui/core/Avatar';
 
 describe('imports', () => {
   it('should passes when used properly', () => {
@@ -83,5 +84,16 @@ describe('own props', () => {
 describe('dom props', () => {
   it('should passes when pass some DOM props', () => {
     <Avatar aria-hidden="true" />;
+  });
+});
+
+describe('exported props', () => {
+  it('should not be any', () => {
+    declare var testProps: AvatarProps;
+
+    (testProps.alt: ?string);
+
+    // $ExpectError: check any
+    (testProps.alt: ?number);
   });
 });
