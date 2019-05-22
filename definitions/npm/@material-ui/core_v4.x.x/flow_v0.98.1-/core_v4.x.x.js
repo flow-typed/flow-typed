@@ -287,6 +287,7 @@ declare module '@material-ui/core/@@dom' {
   // ... in the future will be replaced with exact types for a specific element (div, li, inout, ...)
   declare export type HTMLImageAttributes = {};
   declare export type HTMLDivAttributes = {};
+  declare export type HTMLInputAttributes = {};
   declare export type HTMLSpanAttributes = {};
   declare export type HTMLLabelAttributes = {};
   declare export type HTMLUListAttributes = {};
@@ -3154,6 +3155,81 @@ declare module '@material-ui/core/IconButton/IconButton' {
   declare export * from '@material-ui/core/IconButton'
 }
 
+declare module '@material-ui/core/internal/SwitchBase' {
+  import type { HTMLInputAttributes } from '@material-ui/core/@@dom';
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { IconButtonProps } from '@material-ui/core/IconButton';
+
+  declare export type SwitchBaseClassKey =
+    | 'root'
+    | 'checked'
+    | 'disabled'
+    | 'input';
+
+  declare export type SwitchBaseProps = StandardProps<
+    SwitchBaseClassKey,
+    {
+      checkedIcon: React$Node,
+      icon: React$Node,
+      autoFocus?: boolean,
+      checked?: boolean,
+      defaultChecked?: boolean,
+      disabled?: boolean,
+      disableRipple?: boolean,
+      inputProps?: HTMLInputAttributes,
+      inputRef?: React$Ref<any>,
+      name?: string,
+      onChange?: (event: {}, checked: boolean) => mixed,
+      readOnly?: boolean,
+      required?: boolean,
+      tabIndex?: number,
+      value?: mixed,
+    },
+    IconButtonProps,
+    {
+      onChange: any,
+      value: any,
+    }
+  >;
+
+  declare export default React$ComponentType<SwitchBaseProps>;
+}
+
+declare module '@material-ui/core/Checkbox' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type {
+    SwitchBaseProps,
+    SwitchBaseClassKey,
+  } from '@material-ui/core/internal/SwitchBase';
+
+  declare export type CheckboxClassKey =
+    | SwitchBaseClassKey
+    | 'indeterminate'
+    | 'colorPrimary'
+    | 'colorSecondary';
+
+  declare export type CheckboxProps = StandardProps<
+    CheckboxClassKey,
+    {
+      color?: 'primary' | 'secondary' | 'default',
+      icon?: React$Node,
+      checkedIcon?: React$Node,
+      indeterminate?: boolean,
+      indeterminateIcon?: React$Node,
+    },
+    SwitchBaseProps,
+    {
+      checkedIcon: any,
+      color: any,
+      icon: any,
+    }
+  >;
+
+  declare export default React$ComponentType<CheckboxProps>;
+}
+declare module '@material-ui/core/Checkbox/Checkbox' {
+  declare export * from '@material-ui/core/Checkbox'
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3190,6 +3266,7 @@ declare module '@material-ui/core' {
   declare export { default as InputLabel } from '@material-ui/core/InputLabel';
   declare export { default as Button } from '@material-ui/core/Button';
   declare export { default as IconButton } from '@material-ui/core/IconButton';
+  declare export { default as Checkbox } from '@material-ui/core/Checkbox';
   declare export {
     default as InputAdornment,
   } from '@material-ui/core/InputAdornment';
