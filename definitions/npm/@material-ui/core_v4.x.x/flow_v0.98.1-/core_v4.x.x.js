@@ -420,13 +420,18 @@ declare module '@material-ui/core/flow-types' {
 declare module '@material-ui/core/OverridableComponent' {
   import type { StyledComponentProps } from '@material-ui/core/styles/withStyles';
   import type { CommonComponentProps } from '@material-ui/core/flow-types';
-
   /**
-   * a component whose root component can be controled via a `component` prop
+   * A component whose root component can be controlled via a `component` prop.
    *
    * Adjusts valid props based on the type of `component`
    */
-  declare type $OverridableComponent<M: OverridableTypeMap<*, *, *>> = {
+  declare interface OverridableTypeMap {
+    props: *;
+    defaultComponent: *;
+    classKey: *;
+  }
+
+  declare export type OverridableComponent<M: OverridableTypeMap> = {
     (props: DefaultComponentProps<M>): React$Node,
     // TODO: not supported https://github.com/facebook/flow/issues/7701
     // <Component: React$ElementType>(
@@ -434,17 +439,11 @@ declare module '@material-ui/core/OverridableComponent' {
     // ): React$Node,
   };
 
-  declare export type OverridableComponent<
-    Props: {},
-    DefaultComp: React$ElementType,
-    ClassKey: string
-  > = $OverridableComponent<OverridableTypeMap<Props, DefaultComp, ClassKey>>;
-
   /**
    * props of the component if `component={Component}` is used
    */
   declare export type OverrideProps<
-    M: OverridableTypeMap<*, *, *>,
+    M: OverridableTypeMap,
     C: React$ElementType
   > = BaseProps<M> & $Diff<React$ElementConfig<C>, CommonProps<M>>;
 
@@ -452,17 +451,23 @@ declare module '@material-ui/core/OverridableComponent' {
    * props if `component={Component}` is NOT used
    */
   declare export type DefaultComponentProps<
-    M: OverridableTypeMap<*, *, *>
+    M: OverridableTypeMap
   > = BaseProps<M> &
     $Diff<
       React$ElementConfig<$ElementType<M, 'defaultComponent'>>,
-      BaseProps<M>
+      // next props collected from BaseProps<M>
+      {
+        className: any,
+        style: any,
+        classes: any,
+        innerRef: any,
+      }
     >;
 
   /**
    * props defined on the component (+ common material-ui props)
    */
-  declare export type BaseProps<M: OverridableTypeMap<*, *, *>> = $ElementType<
+  declare export type BaseProps<M: OverridableTypeMap> = $ElementType<
     M,
     'props'
   > &
@@ -471,19 +476,10 @@ declare module '@material-ui/core/OverridableComponent' {
   /**
    * props that are valid for material-ui components
    */
-  declare export type CommonProps<
-    M: OverridableTypeMap<*, *, *>
-  > = StyledComponentProps<$ElementType<M, 'classKey'>> & CommonComponentProps;
-
-  declare export type OverridableTypeMap<
-    Props: {},
-    DefaultComponent: React$ElementType,
-    ClassKey: string
-  > = {
-    props: Props,
-    defaultComponent: React$ElementType,
-    classKey: ClassKey,
-  };
+  declare export type CommonProps<M: OverridableTypeMap> = StyledComponentProps<
+    $ElementType<M, 'classKey'>
+  > &
+    CommonComponentProps;
 
   declare type Simplify<
     Map,
@@ -1432,8 +1428,8 @@ declare module '@material-ui/core/Avatar' {
 
   declare export type AvatarClassKey = 'root' | 'colorDefault' | 'img';
 
-  declare type Avatar = OverridableComponent<
-    {
+  declare type Avatar = OverridableComponent<{
+    props: {
       alt?: string,
       childrenClassName?: string,
       imgProps?: HTMLImageAttributes,
@@ -1441,9 +1437,9 @@ declare module '@material-ui/core/Avatar' {
       src?: string,
       srcSet?: string,
     },
-    'div',
-    AvatarClassKey
-  >;
+    defaultComponent: 'div',
+    classKey: AvatarClassKey,
+  }>;
 
   declare export type AvatarProps = SimplifiedPropsOf<Avatar>;
 
@@ -1632,16 +1628,16 @@ declare module '@material-ui/core/Breadcrumbs' {
 
   declare export type BreadcrumbsClassKey = 'root' | 'ol' | 'separator';
 
-  declare type Breadcrumbs = OverridableComponent<
-    {
+  declare type Breadcrumbs = OverridableComponent<{
+    props: {
       itemsAfterCollapse?: boolean,
       itemsBeforeCollapse?: boolean,
       maxItems?: number,
       separator?: React$Node,
     },
-    'nav',
-    BreadcrumbsClassKey
-  >;
+    defaultComponent: 'nav',
+    classKey: BreadcrumbsClassKey,
+  }>;
 
   declare export type BreadcrumbsProps = SimplifiedPropsOf<Breadcrumbs>;
 
@@ -1975,11 +1971,11 @@ declare module '@material-ui/core/ButtonBase' {
    TODO: need union of components
   ((props: { href: string } & OverrideProps<ExtendButtonBaseTypeMap<M>, 'a'>) => React$Node);
   */
-  declare type ButtonBase = OverridableComponent<
-    ButtonBaseOwnProps,
-    'button',
-    ButtonBaseClassKey
-  >;
+  declare type ButtonBase = OverridableComponent<{
+    props: ButtonBaseOwnProps,
+    defaultComponent: 'button',
+    classKey: ButtonBaseClassKey,
+  }>;
 
   declare export type ButtonBaseProps = ButtonBaseOwnProps;
 
@@ -2158,14 +2154,14 @@ declare module '@material-ui/core/CardMedia' {
 
   declare export type CardMediaClassKey = 'root' | 'media';
 
-  declare type CardMedia = OverridableComponent<
-    {
+  declare type CardMedia = OverridableComponent<{
+    props: {
       image?: string,
       src?: string,
     },
-    'div',
-    CardMediaClassKey
-  >;
+    defaultComponent: 'div',
+    classKey: CardMediaClassKey,
+  }>;
 
   declare export type CardMediaProps = SimplifiedPropsOf<CardMedia>;
 
@@ -2209,8 +2205,8 @@ declare module '@material-ui/core/Chip' {
     | 'deleteIconOutlinedColorPrimary'
     | 'deleteIconOutlinedColorSecondary';
 
-  declare type Chip = OverridableComponent<
-    {
+  declare type Chip = OverridableComponent<{
+    props: {
       avatar?: React$Element<any>,
       clickable?: boolean,
       color?: PropTypes$Color,
@@ -2220,9 +2216,9 @@ declare module '@material-ui/core/Chip' {
       onDelete?: mixed => mixed,
       variant?: 'default' | 'outlined',
     },
-    'div',
-    ChipClassKey
-  >;
+    defaultComponent: 'div',
+    classKey: ChipClassKey,
+  }>;
 
   declare export type ChipProps = SimplifiedPropsOf<Chip>;
 
@@ -2405,15 +2401,15 @@ declare module '@material-ui/core/Divider' {
     | 'light'
     | 'middle';
 
-  declare type Divider = OverridableComponent<
-    {
+  declare type Divider = OverridableComponent<{
+    props: {
       absolute?: boolean,
       light?: boolean,
       variant?: 'fullWidth' | 'inset' | 'middle',
     },
-    'hr',
-    DividerClassKey
-  >;
+    defaultComponent: 'hr',
+    classKey: DividerClassKey,
+  }>;
 
   declare export type DividerProps = SimplifiedPropsOf<Divider>;
 
@@ -3013,17 +3009,17 @@ declare module '@material-ui/core/FormLabel' {
     | 'required'
     | 'asterisk';
 
-  declare type FormLabel = OverridableComponent<
-    {
+  declare type FormLabel = OverridableComponent<{
+    props: {
       disabled?: boolean,
       error?: boolean,
       filled?: boolean,
       focused?: boolean,
       required?: boolean,
     } & HTMLLabelAttributes,
-    'label',
-    FormLabelClassKey
-  >;
+    defaultComponent: 'label',
+    classKey: FormLabelClassKey,
+  }>;
 
   declare export type FormLabelProps = SimplifiedPropsOf<FormLabel>;
 
@@ -3031,6 +3027,41 @@ declare module '@material-ui/core/FormLabel' {
 }
 declare module '@material-ui/core/FormLabel/FormLabel' {
   declare export * from '@material-ui/core/FormLabel'
+}
+
+declare module '@material-ui/core/InputLabel' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { FormLabelProps } from '@material-ui/core/FormLabel';
+
+  declare export type InputLabelClassKey =
+    | 'root'
+    | 'focused'
+    | 'disabled'
+    | 'error'
+    | 'required'
+    | 'asterisk'
+    | 'formControl'
+    | 'marginDense'
+    | 'shrink'
+    | 'animated'
+    | 'filled'
+    | 'outlined';
+
+  declare export type InputLabelProps = StandardProps<
+    InputLabelClassKey,
+    {
+      disableAnimation?: boolean,
+      shrink?: boolean,
+      variant?: 'standard' | 'outlined' | 'filled',
+    },
+    FormLabelProps,
+    void
+  >;
+
+  declare export default React$ComponentType<InputLabelProps>;
+}
+declare module '@material-ui/core/InputLabel/InputLabel' {
+  declare export * from '@material-ui/core/InputLabel'
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -3066,6 +3097,7 @@ declare module '@material-ui/core' {
   declare export { default as Input } from '@material-ui/core/Input';
   declare export { default as Icon } from '@material-ui/core/Icon';
   declare export { default as FormLabel } from '@material-ui/core/FormLabel';
+  declare export { default as InputLabel } from '@material-ui/core/InputLabel';
   declare export {
     default as InputAdornment,
   } from '@material-ui/core/InputAdornment';
