@@ -119,7 +119,7 @@ describe('dom props', () => {
   });
 });
 
-describe('inherited <Modal/> props', () => {
+describe('inherited Modal props', () => {
   it('should passes when used properly', () => {
     <Drawer
       BackdropComponent={'div'}

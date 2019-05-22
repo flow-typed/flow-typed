@@ -3120,6 +3120,40 @@ declare module '@material-ui/core/InputLabel/InputLabel' {
   declare export * from '@material-ui/core/InputLabel'
 }
 
+declare module '@material-ui/core/IconButton' {
+  import type { SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
+  import type { ExtendButtonBase } from '@material-ui/core/ButtonBase';
+  import type { PropTypes$Color } from '@material-ui/core/flow-types';
+
+  declare export type IconButtonClassKey =
+    | 'root'
+    | 'edgeStart'
+    | 'edgeEnd'
+    | 'colorInherit'
+    | 'colorPrimary'
+    | 'colorSecondary'
+    | 'disabled'
+    | 'sizeSmall'
+    | 'label';
+
+  declare type IconButton = ExtendButtonBase<{
+    props: {
+      color?: PropTypes$Color,
+      edge?: 'start' | 'end' | false,
+      size?: 'small' | 'medium',
+    },
+    defaultComponent: 'button',
+    classKey: IconButtonClassKey,
+  }>;
+
+  declare export type IconButtonProps = SimplifiedPropsOf<IconButton>;
+
+  declare export default IconButton;
+}
+declare module '@material-ui/core/IconButton/IconButton' {
+  declare export * from '@material-ui/core/IconButton'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3155,6 +3189,7 @@ declare module '@material-ui/core' {
   declare export { default as FormLabel } from '@material-ui/core/FormLabel';
   declare export { default as InputLabel } from '@material-ui/core/InputLabel';
   declare export { default as Button } from '@material-ui/core/Button';
+  declare export { default as IconButton } from '@material-ui/core/IconButton';
   declare export {
     default as InputAdornment,
   } from '@material-ui/core/InputAdornment';

@@ -43,7 +43,7 @@ describe('classes', () => {
   });
 });
 
-describe('inherited <Typography/> props', () => {
+describe('inherited Typography props', () => {
   it('should passes when used properly', () => {
     <DialogContentText
       align={'justify'}
