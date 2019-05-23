@@ -346,7 +346,7 @@ declare module '@react-navigation/core' {
     State: NavigationState,
     Options: {},
     Props: {}
-  > = React$StatelessFunctionalComponent<{
+  > = React$ComponentType<{
     ...Props,
     ...NavigationNavigatorProps<Options, State>,
   }> &
