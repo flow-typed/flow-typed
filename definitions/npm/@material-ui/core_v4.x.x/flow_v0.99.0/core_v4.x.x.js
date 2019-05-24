@@ -3364,6 +3364,39 @@ declare module '@material-ui/core/FormControl/FormControl' {
   declare export * from '@material-ui/core/FormControl'
 }
 
+declare module '@material-ui/core/FormControlLabel' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLLabelAttributes } from '@material-ui/core/@@dom';
+
+  declare export type FormControlLabelClassKey =
+    | 'root'
+    | 'start'
+    | 'disabled'
+    | 'label';
+
+  declare export type FormControlLabelProps = StandardProps<
+    FormControlLabelClassKey,
+    {
+      label: React$Node,
+      control: React$Element<any>,
+      checked?: boolean,
+      disabled?: boolean,
+      inputRef?: React$Ref<any>,
+      labelPlacement?: 'end' | 'start' | 'top' | 'bottom',
+      name?: string,
+      onChange?: (event: {}, checked: boolean) => mixed,
+      value?: mixed,
+    },
+    HTMLLabelAttributes,
+    { onChange: any }
+  >;
+
+  declare export default React$ComponentType<FormControlLabelProps>;
+}
+declare module '@material-ui/core/FormControlLabel/FormControlLabel' {
+  declare export * from '@material-ui/core/FormControlLabel'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3402,6 +3435,9 @@ declare module '@material-ui/core' {
   declare export { default as IconButton } from '@material-ui/core/IconButton';
   declare export { default as Checkbox } from '@material-ui/core/Checkbox';
   declare export { default as Fab } from '@material-ui/core/Fab';
+  declare export {
+    default as FormControlLabel,
+  } from '@material-ui/core/FormControlLabel';
   declare export {
     default as FormControl,
   } from '@material-ui/core/FormControl';
