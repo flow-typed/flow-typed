@@ -480,9 +480,7 @@ declare module '@material-ui/core/OverridableComponent' {
   > &
     CommonComponentProps;
 
-  declare export type SimplifiedPropsOf<
-    OC: OverridableComponent<*>
-  > = React$ElementConfig<OC>;
+  declare export type SimplifiedPropsOf<OC> = React$ElementConfig<OC>;
 }
 declare module '@material-ui/core/transitions' {
   import type {
@@ -3230,6 +3228,38 @@ declare module '@material-ui/core/Checkbox' {
 declare module '@material-ui/core/Checkbox/Checkbox' {
   declare export * from '@material-ui/core/Checkbox'
 }
+
+declare module '@material-ui/core/ExpansionPanelSummary' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { IconButtonProps } from '@material-ui/core/IconButton';
+  import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
+
+  declare export type ExpansionPanelSummaryClassKey =
+    | 'root'
+    | 'expanded'
+    | 'focused'
+    | 'disabled'
+    | 'content'
+    | 'expandIcon';
+
+  declare export type ExpansionPanelSummaryProps = StandardProps<
+    ExpansionPanelSummaryClassKey,
+    {
+      expanded?: boolean,
+      expandIcon?: React$Node,
+      IconButtonProps?: { ...IconButtonProps },
+      onChange?: ({}) => mixed,
+    },
+    ButtonBaseProps,
+    void
+  >;
+
+  declare export default React$ComponentType<ExpansionPanelSummaryProps>;
+}
+declare module '@material-ui/core/ExpansionPanelSummary/ExpansionPanelSummary' {
+  declare export * from '@material-ui/core/ExpansionPanelSummary'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3267,6 +3297,10 @@ declare module '@material-ui/core' {
   declare export { default as Button } from '@material-ui/core/Button';
   declare export { default as IconButton } from '@material-ui/core/IconButton';
   declare export { default as Checkbox } from '@material-ui/core/Checkbox';
+  declare export {
+    default as ExpansionPanelSummary,
+  } from '@material-ui/core/ExpansionPanelSummary';
+
   declare export {
     default as InputAdornment,
   } from '@material-ui/core/InputAdornment';
