@@ -3397,6 +3397,27 @@ declare module '@material-ui/core/FormControlLabel/FormControlLabel' {
   declare export * from '@material-ui/core/FormControlLabel'
 }
 
+declare module '@material-ui/core/FormGroup' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type FormGroupClassKey = 'root' | 'row';
+
+  declare export type FormGroupProps = StandardProps<
+    FormGroupClassKey,
+    {
+      row?: boolean,
+    },
+    HTMLDivAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<FormGroupProps>;
+}
+declare module '@material-ui/core/FormGroup/FormGroup' {
+  declare export * from '@material-ui/core/FormGroup'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3435,6 +3456,7 @@ declare module '@material-ui/core' {
   declare export { default as IconButton } from '@material-ui/core/IconButton';
   declare export { default as Checkbox } from '@material-ui/core/Checkbox';
   declare export { default as Fab } from '@material-ui/core/Fab';
+  declare export { default as FormGroup } from '@material-ui/core/FormGroup';
   declare export {
     default as FormControlLabel,
   } from '@material-ui/core/FormControlLabel';
