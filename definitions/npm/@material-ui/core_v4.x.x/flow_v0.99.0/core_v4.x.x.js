@@ -3328,6 +3328,42 @@ declare module '@material-ui/core/FilledInput/FilledInput' {
   declare export * from '@material-ui/core/FilledInput'
 }
 
+declare module '@material-ui/core/FormControl' {
+  import type { PropTypes$Margin } from '@material-ui/core/flow-types';
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
+
+  declare export type FormControlClassKey =
+    | 'root'
+    | 'marginNormal'
+    | 'marginDense'
+    | 'fullWidth';
+
+  declare type FormControl = OverridableComponent<{
+    props: {
+      disabled?: boolean,
+      error?: boolean,
+      fullWidth?: boolean,
+      margin?: PropTypes$Margin,
+      onBlur?: ({}) => mixed,
+      onFocus?: ({}) => mixed,
+      required?: boolean,
+      variant?: 'standard' | 'outlined' | 'filled',
+    },
+    defaultComponent: 'div',
+    classKey: FormControlClassKey,
+  }>;
+
+  declare export type FormControlProps = SimplifiedPropsOf<FormControl>;
+
+  declare export default FormControl;
+}
+declare module '@material-ui/core/FormControl/FormControl' {
+  declare export * from '@material-ui/core/FormControl'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3366,6 +3402,10 @@ declare module '@material-ui/core' {
   declare export { default as IconButton } from '@material-ui/core/IconButton';
   declare export { default as Checkbox } from '@material-ui/core/Checkbox';
   declare export { default as Fab } from '@material-ui/core/Fab';
+  declare export {
+    default as FormControl,
+  } from '@material-ui/core/FormControl';
+
   declare export {
     default as FilledInput,
   } from '@material-ui/core/FilledInput';
