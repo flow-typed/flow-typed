@@ -34,10 +34,14 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
 
     // TODO: Figure out how to deal with scoped libdefs!
     if (!parts[0].startsWith('@')) {
-      parts.unshift(undefined)
+      parts.unshift(undefined);
     }
 
-    const [scopeName = '', libraryNameAndVersionRange, flowVersionRange] = parts;
+    const [
+      scopeName = '',
+      libraryNameAndVersionRange,
+      flowVersionRange
+    ] = parts;
     const [libraryName, versionRange] = libraryNameAndVersionRange.split('_v');
     const libdefBase = path.join(
       srcDefinitionsRoot,
@@ -61,8 +65,11 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
     const range = new semver.Range(versionRange);
     const lowerVersion = range.set[0][0].semver.version;
     mkdirp.sync(libDefDir);
+    const packageName = `@flowtyped/${
+      scopeName ? `${scopeName.substr(1)}__${libraryName}` : libraryName
+    }`;
     const packageJson = `{
-  "name": "@flowtyped/${scopeName ? `${scopeName.substr(1)}__${libraryName}` : libraryName}",
+  "name": "${packageName}",
   "version": "${lowerVersion}",
   "flowVersion": "${flowVersionRange}",
   "dependencies": {},
