@@ -293,6 +293,7 @@ declare module '@material-ui/core/@@dom' {
   declare export type HTMLUListAttributes = {};
   declare export type HTMLLIAttributes = {};
   declare export type HTMLElementAttributes = {};
+  declare export type HTMLParagraphAttributes = {};
 }
 declare module '@material-ui/core/transitions/transition/@@react-transition-group/Transition' {
   // The version `2.9.1` based on this: //
@@ -3418,6 +3419,42 @@ declare module '@material-ui/core/FormGroup/FormGroup' {
   declare export * from '@material-ui/core/FormGroup'
 }
 
+declare module '@material-ui/core/FormHelperText' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLParagraphAttributes } from '@material-ui/core/@@dom';
+
+  declare export type FormHelperTextClassKey =
+    | 'root'
+    | 'error'
+    | 'disabled'
+    | 'marginDense'
+    | 'focused'
+    | 'filled'
+    | 'contained'
+    | 'required';
+
+  declare export type FormHelperTextProps = StandardProps<
+    FormHelperTextClassKey,
+    {
+      disabled?: boolean,
+      error?: boolean,
+      filled?: boolean,
+      focused?: boolean,
+      required?: boolean,
+      component?: React$ElementType,
+      margin?: 'dense',
+      variant?: 'standard' | 'outlined' | 'filled',
+    },
+    HTMLParagraphAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<FormHelperTextProps>;
+}
+declare module '@material-ui/core/FormHelperText/FormHelperText' {
+  declare export * from '@material-ui/core/FormHelperText'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3457,6 +3494,9 @@ declare module '@material-ui/core' {
   declare export { default as Checkbox } from '@material-ui/core/Checkbox';
   declare export { default as Fab } from '@material-ui/core/Fab';
   declare export { default as FormGroup } from '@material-ui/core/FormGroup';
+  declare export {
+    default as FormHelperText,
+  } from '@material-ui/core/FormHelperText';
   declare export {
     default as FormControlLabel,
   } from '@material-ui/core/FormControlLabel';
