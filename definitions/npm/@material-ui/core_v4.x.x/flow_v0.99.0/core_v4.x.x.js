@@ -3260,6 +3260,40 @@ declare module '@material-ui/core/ExpansionPanelSummary/ExpansionPanelSummary' {
   declare export * from '@material-ui/core/ExpansionPanelSummary'
 }
 
+declare module '@material-ui/core/Fab' {
+  import type { SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
+  import type { ExtendButtonBase } from '@material-ui/core/ButtonBase';
+  import type { PropTypes$Color } from '@material-ui/core/flow-types';
+
+  declare export type FabClassKey =
+    | 'root'
+    | 'edgeStart'
+    | 'edgeEnd'
+    | 'colorInherit'
+    | 'colorPrimary'
+    | 'colorSecondary'
+    | 'disabled'
+    | 'sizeSmall'
+    | 'label';
+
+  declare type Fab = ExtendButtonBase<{
+    props: {
+      color?: PropTypes$Color,
+      size?: 'small' | 'medium' | 'large',
+      variant?: 'round' | 'extended',
+    },
+    defaultComponent: 'button',
+    classKey: FabClassKey,
+  }>;
+
+  declare export type FabProps = SimplifiedPropsOf<Fab>;
+
+  declare export default Fab;
+}
+declare module '@material-ui/core/Fab/Fab' {
+  declare export * from '@material-ui/core/Fab'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3297,6 +3331,7 @@ declare module '@material-ui/core' {
   declare export { default as Button } from '@material-ui/core/Button';
   declare export { default as IconButton } from '@material-ui/core/IconButton';
   declare export { default as Checkbox } from '@material-ui/core/Checkbox';
+  declare export { default as Fab } from '@material-ui/core/Fab';
   declare export {
     default as ExpansionPanelSummary,
   } from '@material-ui/core/ExpansionPanelSummary';
