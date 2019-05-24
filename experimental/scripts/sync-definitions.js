@@ -33,14 +33,15 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
     const parts = libdef.split('/');
 
     // TODO: Figure out how to deal with scoped libdefs!
-    if (parts[0].startsWith('@')) {
-      return;
+    if (!parts[0].startsWith('@')) {
+      parts.unshift(undefined)
     }
 
-    const [libraryNameAndVersionRange, flowVersionRange] = parts;
+    const [scopeName = '', libraryNameAndVersionRange, flowVersionRange] = parts;
     const [libraryName, versionRange] = libraryNameAndVersionRange.split('_v');
     const libdefBase = path.join(
       srcDefinitionsRoot,
+      scopeName,
       libraryNameAndVersionRange
     );
     const tests = glob
@@ -52,6 +53,7 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
     // Create a dir like `experimental/definitions/yargs/yargs_v10.x.x/flow_v0.54.x-`.
     const libDefDir = path.join(
       destDefinitionsRoot,
+      scopeName,
       libraryName,
       libraryNameAndVersionRange,
       flowVersionRange
@@ -60,7 +62,7 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
     const lowerVersion = range.set[0][0].semver.version;
     mkdirp.sync(libDefDir);
     const packageJson = `{
-  "name": "@flowtyped/${libraryName}",
+  "name": "@flowtyped/${scopeName ? `${scopeName.substr(1)}__${libraryName}` : libraryName}",
   "version": "${lowerVersion}",
   "flowVersion": "${flowVersionRange}",
   "dependencies": {},
