@@ -3294,6 +3294,40 @@ declare module '@material-ui/core/Fab/Fab' {
   declare export * from '@material-ui/core/Fab'
 }
 
+declare module '@material-ui/core/FilledInput' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { InputBaseProps } from '@material-ui/core/InputBase';
+
+  declare export type FilledInputClassKey =
+    | 'root'
+    | 'underline'
+    | 'focused'
+    | 'disabled'
+    | 'adornedStart'
+    | 'adornedEnd'
+    | 'error'
+    | 'multiline'
+    | 'input'
+    | 'inputMarginDense'
+    | 'inputMultiline'
+    | 'inputAdornedStart'
+    | 'inputAdornedEnd';
+
+  declare export type FilledInputProps = StandardProps<
+    FilledInputClassKey,
+    {
+      disableUnderline?: boolean,
+    },
+    InputBaseProps,
+    void
+  >;
+
+  declare export default React$ComponentType<FilledInputProps>;
+}
+declare module '@material-ui/core/FilledInput/FilledInput' {
+  declare export * from '@material-ui/core/FilledInput'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3332,6 +3366,10 @@ declare module '@material-ui/core' {
   declare export { default as IconButton } from '@material-ui/core/IconButton';
   declare export { default as Checkbox } from '@material-ui/core/Checkbox';
   declare export { default as Fab } from '@material-ui/core/Fab';
+  declare export {
+    default as FilledInput,
+  } from '@material-ui/core/FilledInput';
+
   declare export {
     default as ExpansionPanelSummary,
   } from '@material-ui/core/ExpansionPanelSummary';
