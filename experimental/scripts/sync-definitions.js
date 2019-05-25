@@ -68,6 +68,17 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
     const packageName = `@flowtyped/${
       scopeName ? `${scopeName.substr(1)}__${libraryName}` : libraryName
     }`;
+    const isLatest =
+      flowVersionRange.endsWith('-') || flowVersionRange === 'flow_all';
+    // "peerDependencies": {
+    //   "flow-bin": "${
+    //     flowVersionRange === 'flow_all'
+    //       ? 'latest'
+    //       : flowVersion.toSemverString(
+    //           flowVersion.parseDirString(flowVersionRange)
+    //         )
+    //   }"
+    // },
     const packageJson = `{
   "name": "${packageName}",
   "version": "${lowerVersion}",
@@ -76,14 +87,9 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
   "files": [
     "index.js"
   ],
-  "peerDependencies": {
-    "flow-bin": "${flowVersion.toSemverString(
-      flowVersion.parseDirString(flowVersionRange)
-    )}"
-  },
   "publishConfig": {
     "access": "public",
-    "tag": "${flowVersionRange.endsWith('-') ? 'latest' : flowVersionRange}"
+    "tag": "${isLatest ? 'latest' : flowVersionRange}"
   }
 }`;
     // Create a libdef like `yelp-flow-typed/definitions/yargs/yargs_v10.x.x/flow_v0.54.x-/index.js`.
