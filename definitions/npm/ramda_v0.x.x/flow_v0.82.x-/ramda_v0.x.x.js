@@ -650,7 +650,12 @@ declare module ramda {
   declare var multiply: CurriedFunction2<number, number, number>;
   declare var negate: UnaryFn<number, number>;
   declare var product: UnaryFn<Array<number>, number>;
-  declare var subtract: CurriedFunction2<number, number, number>;
+  declare var subtract:
+    & CurriedFunction2<number,  number, number>
+    & CurriedFunction2<Date, Date, number>
+    & CurriedFunction2<Date, number, number>
+    & CurriedFunction2<number, Date, number>
+
   declare var sum: UnaryFn<Array<number>, number>;
 
   // Filter
