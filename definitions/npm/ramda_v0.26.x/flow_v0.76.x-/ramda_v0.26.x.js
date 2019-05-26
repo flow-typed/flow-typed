@@ -1915,20 +1915,20 @@ declare module ramda {
     y: (...args: Array<any>) => *
   ): (...args: Array<any>) => *;
 
-  declare function ifElse<A, B, C>(
-    cond: (...args: Array<A>) => boolean,
+  declare function ifElse<Args, B, C>(
+    cond: (...args: Args) => boolean
   ): ((
-    f1: (...args: Array<A>) => B,
-  ) => (f2: (...args: Array<A>) => C) => (...args: Array<A>) => B | C) &
+    f1: (...args: Args) => B
+  ) => (f2: (...args: Args) => C) => (...args: Args) => B | C) &
     ((
-      f1: (...args: Array<A>) => B,
-      f2: (...args: Array<A>) => C
-    ) => (...args: Array<A>) => B | C);
-  declare function ifElse<A, B, C>(
-    cond: (...args: Array<any>) => boolean,
-    f1: (...args: Array<any>) => B,
-    f2: (...args: Array<any>) => C
-  ): (...args: Array<A>) => B | C;
+      f1: (...args: Args) => B,
+      f2: (...args: Args) => C
+    ) => (...args: Args) => B | C);
+  declare function ifElse<Args, B, C>(
+    cond: (...args: Args) => boolean,
+    f1: (...args: Args) => B,
+    f2: (...args: Args) => C
+  ): (...args: Args) => B | C;
 
   declare function isEmpty(x: ?Array<any> | Object | string): boolean;
 
