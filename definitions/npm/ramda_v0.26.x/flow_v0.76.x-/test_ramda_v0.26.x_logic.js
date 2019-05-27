@@ -1,7 +1,16 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import { describe, it } from 'flow-typed-test';
-import _, { compose, pipe, curry, filter, find, repeat, zipWith } from 'ramda';
+import _, {
+  compose,
+  curry,
+  filter,
+  find,
+  ifElse,
+  pipe,
+  repeat,
+  zipWith,
+} from 'ramda';
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ['one', 'two', 'three', 'four'];
@@ -62,9 +71,57 @@ const def1: number = defaultTo42(undefined);
 const feither = _.either(gt10, even);
 const feitherR: boolean = f(101);
 
-const incCount = _.ifElse(_.is(Number), _.inc, _.toString);
-const ie: number | string = incCount({});
-const ie2: number | string = incCount(1);
+describe('ifElse', () => {
+  it('uses a union of both branches as the return type', () => {
+    const incCount = ifElse(x => x % 2 == 0, x => x + 1, x => x.toString());
+    const ie: number | string = incCount(1);
+  })
+
+  it('checks the condition input matches the branch inputs', () => {
+    const incCount = ifElse(x => x % 2 == 0, x => x + 1, x => x.toString());
+    // Because the object literal ({}) isn't a number it
+    // $ExpectError
+    const ie: number | string = incCount({});
+  })
+
+  it('works with variadic arg inputs', () => {
+    const ifElseFn = ifElse(
+      // Without this test, variadic argument input functions will produce an
+      // error like this:
+      //
+      // Cannot call `ifElse` because rest array [1] has an unknown number of
+      // elements, so is incompatible with tuple type [2].
+      (...args: [string]): boolean => true,
+      (s: string) => s.toUpperCase(),
+      (s: string) => s.toLowerCase(),
+    );
+    const result: void | string = ifElseFn('input')
+  })
+
+  it('preserves the types used with variadic argument condition functions', () => {
+    const ifElseFn = ifElse(
+      (...args: [string]): boolean => true,
+      (s: string) => s.toUpperCase(),
+      (s: string) => s.toLowerCase(),
+    );
+    // $ExpectError
+    const result: void | string = ifElseFn(5)
+  })
+
+  // This was the original test for ifElse, which depends on the implementation
+  // of "is". "is" in its present form does not perform type refinement, so the
+  // stricter form of ifElse fails the check with this test. This test below
+  // captures the issue, and is left for reference and/or if some brave soul
+  // wishes to expand the definition of ifElse (and possibly also "is") to
+  // refine the predicate correctly. At time of writing, $Pred and $Refine are
+  // considered experimental/internal and abandoned:
+  // https://github.com/facebook/flow/issues/2464#issuecomment-471115953
+  //
+  // it('feeds a predicate-refined type to the branches', () => {
+  //   const incCount = ifElse(is(Number), x => x + 1, x => x.toString());
+  //   const ie: number | string = incCount(1);
+  // })
+})
 
 const em: boolean = _.isEmpty([1, 2, 3]);
 
