@@ -3565,6 +3565,92 @@ declare module '@material-ui/core/List/List' {
   declare export * from '@material-ui/core/List'
 }
 
+declare module '@material-ui/core/ListItemAvatar' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+
+  declare export type ListItemAvatarClassKey = 'root' | 'icon';
+
+  declare export type ListItemAvatarProps = StandardProps<
+    ListItemAvatarClassKey,
+    {},
+    {},
+    void
+  >;
+
+  declare export default React$ComponentType<ListItemAvatarProps>;
+}
+declare module '@material-ui/core/ListItemAvatar/ListItemAvatar' {
+  declare export * from '@material-ui/core/ListItemAvatar'
+}
+
+declare module '@material-ui/core/ListItemIcon' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  declare export type ListItemIconClassKey = 'root';
+
+  declare export type ListItemIconProps = StandardProps<
+    ListItemIconClassKey,
+    {},
+    HTMLDivAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<ListItemIconProps>;
+}
+declare module '@material-ui/core/ListItemIcon/ListItemIcon' {
+  declare export * from '@material-ui/core/ListItemIcon'
+}
+
+declare module '@material-ui/core/ListItemText' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { TypographyProps } from '@material-ui/core/Typography';
+
+  declare export type ListItemTextClassKey =
+    | 'root'
+    | 'multiline'
+    | 'dense'
+    | 'inset'
+    | 'primary'
+    | 'secondary';
+
+  declare export type ListItemTextProps = StandardProps<
+    ListItemTextClassKey,
+    {
+      disableTypography?: boolean,
+      inset?: boolean,
+      primary?: React$Node,
+      primaryTypographyProps?: { ...TypographyProps },
+      secondary?: React$Node,
+      secondaryTypographyProps?: { ...TypographyProps },
+    },
+    HTMLDivAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<ListItemTextProps>;
+}
+declare module '@material-ui/core/ListItemText/ListItemText' {
+  declare export * from '@material-ui/core/ListItemText'
+}
+
+declare module '@material-ui/core/ListItemSecondaryAction' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+
+  declare export type ListItemSecondaryActionClassKey = 'root';
+
+  declare export type ListItemSecondaryActionProps = StandardProps<
+    ListItemSecondaryActionClassKey,
+    {},
+    {},
+    void
+  >;
+
+  declare export default React$ComponentType<ListItemSecondaryActionProps>;
+}
+declare module '@material-ui/core/ListItemSecondaryAction/ListItemSecondaryAction' {
+  declare export * from '@material-ui/core/ListItemSecondaryAction'
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3604,6 +3690,23 @@ declare module '@material-ui/core' {
   declare export { default as Checkbox } from '@material-ui/core/Checkbox';
   declare export { default as Fab } from '@material-ui/core/Fab';
   declare export { default as FormGroup } from '@material-ui/core/FormGroup';
+  declare export { default as Link } from '@material-ui/core/Link';
+  declare export { default as List } from '@material-ui/core/List';
+  declare export {
+    default as ListItemAvatar,
+  } from '@material-ui/core/ListItemAvatar';
+  declare export {
+    default as ListItemIcon,
+  } from '@material-ui/core/ListItemIcon';
+  declare export {
+    default as ListItemText,
+  } from '@material-ui/core/ListItemText';
+  declare export {
+    default as ListItemSecondaryAction,
+  } from '@material-ui/core/ListItemSecondaryAction';
+  declare export {
+    default as LinearProgress,
+  } from '@material-ui/core/LinearProgress';
   declare export {
     default as FormHelperText,
   } from '@material-ui/core/FormHelperText';
