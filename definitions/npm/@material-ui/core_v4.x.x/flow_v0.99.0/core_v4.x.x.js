@@ -3651,6 +3651,74 @@ declare module '@material-ui/core/ListItemSecondaryAction' {
 declare module '@material-ui/core/ListItemSecondaryAction/ListItemSecondaryAction' {
   declare export * from '@material-ui/core/ListItemSecondaryAction'
 }
+
+declare module '@material-ui/core/ListSubheader' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type ListSubheaderClassKey =
+    | 'root'
+    | 'colorPrimary'
+    | 'colorInherit'
+    | 'inset'
+    | 'sticky'
+    | 'gutters';
+
+  declare export type ListSubheaderProps = StandardProps<
+    ListSubheaderClassKey,
+    {
+      color?: 'default' | 'primary' | 'inherit',
+      component?: React$ElementType,
+      disableGutters?: boolean,
+      disableSticky?: boolean,
+      inset?: boolean,
+    },
+    HTMLDivAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<ListSubheaderProps>;
+}
+declare module '@material-ui/core/ListSubheader/ListSubheader' {
+  declare export * from '@material-ui/core/ListSubheader'
+}
+
+declare module '@material-ui/core/MobileStepper' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { PaperProps } from '@material-ui/core/Paper';
+  import type { LinearProgressProps } from '@material-ui/core/LinearProgress';
+
+  declare export type MobileStepperClassKey =
+    | 'root'
+    | 'positionBottom'
+    | 'positionTop'
+    | 'positionStatic'
+    | 'dots'
+    | 'dot'
+    | 'dotActive'
+    | 'progress';
+
+  declare export type MobileStepperProps = StandardProps<
+    MobileStepperClassKey,
+    {
+      backButton: React$Element<any>,
+      nextButton: React$Element<any>,
+      steps: number,
+      activeStep?: number,
+      position?: 'bottom' | 'top' | 'static',
+      variant?: 'text' | 'dots' | 'progress',
+      LinearProgressProps?: { ...LinearProgressProps },
+    },
+    PaperProps,
+    void
+  >;
+
+  declare export default React$ComponentType<MobileStepperProps>;
+}
+declare module '@material-ui/core/MobileStepper/MobileStepper' {
+  declare export * from '@material-ui/core/MobileStepper'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3692,6 +3760,12 @@ declare module '@material-ui/core' {
   declare export { default as FormGroup } from '@material-ui/core/FormGroup';
   declare export { default as Link } from '@material-ui/core/Link';
   declare export { default as List } from '@material-ui/core/List';
+  declare export {
+    default as MobileStepper,
+  } from '@material-ui/core/MobileStepper';
+  declare export {
+    default as ListSubheader,
+  } from '@material-ui/core/ListSubheader';
   declare export {
     default as ListItemAvatar,
   } from '@material-ui/core/ListItemAvatar';
