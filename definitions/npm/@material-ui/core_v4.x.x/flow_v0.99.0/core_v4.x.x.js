@@ -284,7 +284,7 @@ declare module '@material-ui/core/@@dom' {
   declare export type CSS$Properties = Properties<string | number>;
 
   // At the moment there is no possibility to withdraw the React types for Html Element.
-  // ... in the future will be replaced with exact types for a specific element (div, li, inout, ...)
+  // ... in the future will be replaced with exact types for a specific element (div, li, inout, a, ...)
   declare export type HTMLImageAttributes = {};
   declare export type HTMLDivAttributes = {};
   declare export type HTMLInputAttributes = {};
@@ -294,6 +294,7 @@ declare module '@material-ui/core/@@dom' {
   declare export type HTMLLIAttributes = {};
   declare export type HTMLElementAttributes = {};
   declare export type HTMLParagraphAttributes = {};
+  declare export type HTMLAnchorAttributes = {};
 }
 declare module '@material-ui/core/transitions/transition/@@react-transition-group/Transition' {
   // The version `2.9.1` based on this: //
@@ -3456,6 +3457,112 @@ declare module '@material-ui/core/FormHelperText' {
 }
 declare module '@material-ui/core/FormHelperText/FormHelperText' {
   declare export * from '@material-ui/core/FormHelperText'
+}
+
+declare module '@material-ui/core/LinearProgress' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type LinearProgressClassKey =
+    | 'root'
+    | 'colorPrimary'
+    | 'colorSecondary'
+    | 'determinate'
+    | 'indeterminate'
+    | 'buffer'
+    | 'query'
+    | 'dashed'
+    | 'dashedColorPrimary'
+    | 'dashedColorSecondary'
+    | 'bar'
+    | 'barColorPrimary'
+    | 'barColorSecondary'
+    | 'bar1Indeterminate'
+    | 'bar2Indeterminate'
+    | 'bar1Determinate'
+    | 'bar1Buffer'
+    | 'bar2Buffer';
+
+  declare export type LinearProgressProps = StandardProps<
+    LinearProgressClassKey,
+    {
+      color?: 'primary' | 'secondary',
+      value?: number,
+      valueBuffer?: number,
+      variant?: 'determinate' | 'indeterminate' | 'buffer' | 'query',
+    },
+    HTMLDivAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<LinearProgressProps>;
+}
+declare module '@material-ui/core/LinearProgress/LinearProgress' {
+  declare export * from '@material-ui/core/LinearProgress'
+}
+
+declare module '@material-ui/core/Link' {
+  import type { HTMLAnchorAttributes } from '@material-ui/core/@@dom';
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
+  import type { TypographyProps } from '@material-ui/core/Typography';
+
+  declare export type LinkClassKey =
+    | 'root'
+    | 'underlineNone'
+    | 'underlineHover'
+    | 'underlineAlways'
+    | 'button';
+
+  declare type Link = OverridableComponent<{
+    props: LinkBaseProps & {
+      TypographyClasses?: $ElementType<TypographyProps, 'classes'>,
+      underline?: 'none' | 'hover' | 'always',
+    },
+    defaultComponent: 'a',
+    classKey: LinkClassKey,
+  }>;
+
+  declare export type LinkBaseProps = $Diff<
+    TypographyProps,
+    { component: any }
+  > &
+    HTMLAnchorAttributes;
+
+  declare export type LinkProps = SimplifiedPropsOf<Link>;
+
+  declare export default Link;
+}
+declare module '@material-ui/core/Link/Link' {
+  declare export * from '@material-ui/core/Link'
+}
+
+declare module '@material-ui/core/List' {
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
+
+  declare export type ListClassKey = 'root' | 'padding' | 'dense' | 'subheader';
+
+  declare type List = OverridableComponent<{
+    props: {
+      dense?: boolean,
+      disablePadding?: boolean,
+      subheader?: React$Element<any>,
+    },
+    defaultComponent: 'a',
+    classKey: ListClassKey,
+  }>;
+
+  declare export type ListProps = SimplifiedPropsOf<List>;
+
+  declare export default List;
+}
+declare module '@material-ui/core/List/List' {
+  declare export * from '@material-ui/core/List'
 }
 
 ///////////////////////////////////////////////////////////////////////////////
