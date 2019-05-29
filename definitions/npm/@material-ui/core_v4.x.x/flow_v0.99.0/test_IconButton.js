@@ -53,10 +53,20 @@ describe('classes', () => {
 
 describe('own props', () => {
   it('should passes when used properly', () => {
-    <IconButton color={'secondary'} edge={'start'} size={'medium'} />;
+    <IconButton
+      color={'secondary'}
+      edge={'start'}
+      size={'medium'}
+      disableFocusRipple={false}
+    />;
     <IconButton edge={false} />;
 
-    <IconButton color={undefined} edge={undefined} size={undefined} />;
+    <IconButton
+      color={undefined}
+      edge={undefined}
+      size={undefined}
+      disableFocusRipple={undefined}
+    />;
   });
 
   it('should raises an error when pass incompatible types', () => {
@@ -67,6 +77,8 @@ describe('own props', () => {
       edge={'__start'}
       // $ExpectError: `__medium` is missing in enum
       size={'__medium'}
+      // $ExpectError
+      disableFocusRipple={'need boolean'}
     />;
   });
 });

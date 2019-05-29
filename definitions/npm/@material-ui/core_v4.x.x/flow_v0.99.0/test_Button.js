@@ -65,6 +65,7 @@ describe('own props', () => {
       href={'http://'}
       size={'large'}
       variant={'outlined'}
+      disableFocusRipple={false}
     />;
 
     <Button
@@ -73,6 +74,7 @@ describe('own props', () => {
       href={undefined}
       size={undefined}
       variant={undefined}
+      disableFocusRipple={undefined}
     />;
   });
 
@@ -88,6 +90,8 @@ describe('own props', () => {
       size={'__large'}
       // $ExpectError: `__outlined` is missing in enum
       variant={'__outlined'}
+      // $ExpectError
+      disableFocusRipple={'need boolean'}
     />;
   });
 });

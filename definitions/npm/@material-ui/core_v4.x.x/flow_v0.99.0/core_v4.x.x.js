@@ -2012,6 +2012,7 @@ declare module '@material-ui/core/Button' {
 
   declare type OwnProps = {
     color?: PropTypes$Color,
+    disableFocusRipple?: boolean,
     fullWidth?: boolean,
     // TODO: `ButtonBaseOwnProps` already include `href` attribute, but as hack
     // href?: string,
@@ -3139,6 +3140,7 @@ declare module '@material-ui/core/IconButton' {
   declare type IconButton = ExtendButtonBase<{
     props: {
       color?: PropTypes$Color,
+      disableFocusRipple?: boolean,
       edge?: 'start' | 'end' | false,
       size?: 'small' | 'medium',
     },
@@ -3280,6 +3282,7 @@ declare module '@material-ui/core/Fab' {
   declare type Fab = ExtendButtonBase<{
     props: {
       color?: PropTypes$Color,
+      disableFocusRipple?: boolean,
       size?: 'small' | 'medium' | 'large',
       variant?: 'round' | 'extended',
     },

@@ -52,13 +52,25 @@ describe('classes', () => {
 
 describe('own props', () => {
   it('should passes when used properly', () => {
-    <Fab color={'secondary'} size={'small'} variant={'round'} />;
+    <Fab
+      disableFocusRipple={false}
+      color={'secondary'}
+      size={'small'}
+      variant={'round'}
+    />;
 
-    <Fab color={undefined} variant={undefined} size={undefined} />;
+    <Fab
+      disableFocusRipple={undefined}
+      color={undefined}
+      variant={undefined}
+      size={undefined}
+    />;
   });
 
   it('should raises an error when pass incompatible types', () => {
     <Fab
+      // $ExpectError
+      disableFocusRipple={'need boolean'}
       // $ExpectError: `__secondary` is missing in enum
       color={'__secondary'}
       // $ExpectError: `__round` is missing in enum
