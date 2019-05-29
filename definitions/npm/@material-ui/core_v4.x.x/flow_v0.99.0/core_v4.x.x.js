@@ -3719,6 +3719,100 @@ declare module '@material-ui/core/MobileStepper/MobileStepper' {
   declare export * from '@material-ui/core/MobileStepper'
 }
 
+declare module '@material-ui/core/OutlinedInput' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { InputBaseProps } from '@material-ui/core/InputBase';
+
+  declare export type OutlinedInputClassKey =
+    | 'root'
+    | 'focused'
+    | 'disabled'
+    | 'adornedStart'
+    | 'adornedEnd'
+    | 'error'
+    | 'multiline'
+    | 'notchedOutline'
+    | 'input'
+    | 'inputMarginDense'
+    | 'inputMultiline'
+    | 'inputAdornedStart'
+    | 'inputAdornedEnd';
+
+  declare export type OutlinedInputProps = StandardProps<
+    OutlinedInputClassKey,
+    {
+      notched?: boolean,
+      labelWidth: number,
+    },
+    InputBaseProps,
+    void
+  >;
+
+  declare export default React$ComponentType<OutlinedInputProps>;
+}
+declare module '@material-ui/core/OutlinedInput/OutlinedInput' {
+  declare export * from '@material-ui/core/OutlinedInput'
+}
+
+declare module '@material-ui/core/Radio' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type {
+    SwitchBaseProps,
+    SwitchBaseClassKey,
+  } from '@material-ui/core/internal/SwitchBase';
+
+  declare export type RadioClassKey =
+    | SwitchBaseClassKey
+    | 'colorPrimary'
+    | 'colorSecondary';
+
+  declare export type RadioProps = StandardProps<
+    RadioClassKey,
+    {
+      checkedIcon?: React$Node,
+      color?: 'primary' | 'secondary' | 'default',
+      icon?: React$Node,
+    },
+    SwitchBaseProps,
+    {
+      checkedIcon: any,
+      color: any,
+      icon: any,
+    }
+  >;
+
+  declare export default React$ComponentType<RadioProps>;
+}
+declare module '@material-ui/core/Radio/Radio' {
+  declare export * from '@material-ui/core/Radio'
+}
+
+declare module '@material-ui/core/RadioGroup' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type {
+    FormGroupProps,
+    FormGroupClassKey,
+  } from '@material-ui/core/FormGroup';
+
+  declare export type RadioGroupClassKey = FormGroupClassKey;
+
+  declare export type RadioGroupProps = StandardProps<
+    RadioGroupClassKey,
+    {
+      name?: string,
+      onChange?: (event: {}, value: string) => void,
+      value?: string,
+    },
+    FormGroupProps,
+    { onChange: any }
+  >;
+
+  declare export default React$ComponentType<RadioGroupProps>;
+}
+declare module '@material-ui/core/RadioGroup/RadioGroup' {
+  declare export * from '@material-ui/core/RadioGroup'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3760,6 +3854,11 @@ declare module '@material-ui/core' {
   declare export { default as FormGroup } from '@material-ui/core/FormGroup';
   declare export { default as Link } from '@material-ui/core/Link';
   declare export { default as List } from '@material-ui/core/List';
+  declare export { default as Radio } from '@material-ui/core/Radio';
+  declare export { default as RadioGroup } from '@material-ui/core/RadioGroup';
+  declare export {
+    default as OutlinedInput,
+  } from '@material-ui/core/OutlinedInput';
   declare export {
     default as MobileStepper,
   } from '@material-ui/core/MobileStepper';
