@@ -285,6 +285,8 @@ declare module '@material-ui/core/@@dom' {
 
   // At the moment there is no possibility to withdraw the React types for Html Element.
   // ... in the future will be replaced with exact types for a specific element (div, li, inout, a, ...)
+  declare export type SVGElementAttributes = {};
+  declare export type HTMLTableRowAttributes = {};
   declare export type HTMLImageAttributes = {};
   declare export type HTMLDivAttributes = {};
   declare export type HTMLInputAttributes = {};
@@ -3914,6 +3916,102 @@ declare module '@material-ui/core/Toolbar/Toolbar' {
   declare export * from '@material-ui/core/Toolbar'
 }
 
+declare module '@material-ui/core/SvgIcon' {
+  import type {
+    StandardProps,
+    PropTypes$Color,
+  } from '@material-ui/core/flow-types';
+  import type { SVGElementAttributes } from '@material-ui/core/@@dom';
+
+  declare export type SvgIconClassKey =
+    | 'root'
+    | 'colorSecondary'
+    | 'colorAction'
+    | 'colorDisabled'
+    | 'colorError'
+    | 'colorPrimary'
+    | 'fontSizeInherit'
+    | 'fontSizeSmall'
+    | 'fontSizeLarge';
+
+  declare export type SvgIconProps = StandardProps<
+    SvgIconClassKey,
+    {
+      color?: PropTypes$Color | 'action' | 'disabled' | 'error',
+      component?: React$ElementType,
+      fontSize?: 'inherit' | 'default' | 'small' | 'large',
+      htmlColor?: string,
+      shapeRendering?: string,
+      titleAccess?: string,
+      viewBox?: string,
+    },
+    SVGElementAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<SvgIconProps>;
+}
+declare module '@material-ui/core/SvgIcon/SvgIcon' {
+  declare export * from '@material-ui/core/SvgIcon'
+}
+
+declare module '@material-ui/core/TableSortLabel' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
+
+  declare export type TableSortLabelClassKey =
+    | 'root'
+    | 'active'
+    | 'icon'
+    | 'iconDirectionDesc'
+    | 'iconDirectionAsc';
+
+  declare export type TableSortLabelProps = StandardProps<
+    TableSortLabelClassKey,
+    {
+      active?: boolean,
+      direction?: 'asc' | 'desc',
+      hideSortIcon?: boolean,
+      IconComponent?: React$ComponentType<any>,
+    },
+    ButtonBaseProps,
+    void
+  >;
+
+  declare export default React$ComponentType<TableSortLabelProps>;
+}
+declare module '@material-ui/core/TableSortLabel/TableSortLabel' {
+  declare export * from '@material-ui/core/TableSortLabel'
+}
+
+declare module '@material-ui/core/TableRow' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLTableRowAttributes } from '@material-ui/core/@@dom';
+
+  declare export type TableRowClassKey =
+    | 'root'
+    | 'selected'
+    | 'hover'
+    | 'head'
+    | 'footer';
+
+  declare export type TableRowProps = StandardProps<
+    TableRowClassKey,
+    {
+      component?: React$ElementType,
+      hover?: boolean,
+      selected?: boolean,
+    },
+    HTMLTableRowAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<TableRowProps>;
+}
+declare module '@material-ui/core/TableRow/TableRow' {
+  declare export * from '@material-ui/core/TableRow'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3960,6 +4058,12 @@ declare module '@material-ui/core' {
   declare export { default as Zoom } from '@material-ui/core/Zoom';
   declare export { default as Tooltip } from '@material-ui/core/Tooltip';
   declare export { default as Toolbar } from '@material-ui/core/Toolbar';
+  declare export { default as SvgIcon } from '@material-ui/core/SvgIcon';
+  declare export { default as TableRow } from '@material-ui/core/TableRow';
+  declare export {
+    default as TableSortLabel,
+  } from '@material-ui/core/TableSortLabel';
+
   declare export {
     default as OutlinedInput,
   } from '@material-ui/core/OutlinedInput';
