@@ -3813,6 +3813,107 @@ declare module '@material-ui/core/RadioGroup/RadioGroup' {
   declare export * from '@material-ui/core/RadioGroup'
 }
 
+declare module '@material-ui/core/Zoom' {
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+  import type { TransitionProps } from '@material-ui/core/transitions/transition';
+
+  declare export type ZoomProps = TransitionProps & {
+    ref?: React$Ref<mixed>,
+    theme?: Theme,
+  };
+
+  declare export default React$ComponentType<ZoomProps>;
+}
+declare module '@material-ui/core/Zoom/Zoom' {
+  declare export * from '@material-ui/core/Zoom'
+}
+
+declare module '@material-ui/core/Tooltip' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { TransitionProps } from '@material-ui/core/transitions/transition';
+
+  declare export type TooltipClassKey =
+    | 'popper'
+    | 'popperInteractive'
+    | 'tooltip'
+    | 'touch'
+    | 'tooltipPlacementLeft'
+    | 'tooltipPlacementRight'
+    | 'tooltipPlacementTop'
+    | 'tooltipPlacementBottom';
+
+  declare export type TooltipProps = StandardProps<
+    TooltipClassKey,
+    {
+      children: React$ElementType,
+      disableFocusListener?: boolean,
+      disableHoverListener?: boolean,
+      disableTouchListener?: boolean,
+      enterDelay?: number,
+      enterTouchDelay?: number,
+      id?: string,
+      interactive?: boolean,
+      leaveDelay?: number,
+      leaveTouchDelay?: number,
+      onClose?: (event: {}) => void,
+      onOpen?: (event: {}) => void,
+      open?: boolean,
+      placement?:
+        | 'bottom-end'
+        | 'bottom-start'
+        | 'bottom'
+        | 'left-end'
+        | 'left-start'
+        | 'left'
+        | 'right-end'
+        | 'right-start'
+        | 'right'
+        | 'top-end'
+        | 'top-start'
+        | 'top',
+      PopperProps?: {},
+      title: React$Node,
+      TransitionComponent?: React$ComponentType<any>,
+      TransitionProps?: TransitionProps,
+    },
+    HTMLDivAttributes,
+    { title: any }
+  >;
+
+  declare export default React$ComponentType<TooltipProps>;
+}
+declare module '@material-ui/core/Tooltip/Tooltip' {
+  declare export * from '@material-ui/core/Tooltip'
+}
+
+declare module '@material-ui/core/Toolbar' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type ToolbarClassKey =
+    | 'root'
+    | 'gutters'
+    | 'regular'
+    | 'dense';
+
+  declare export type ToolbarProps = StandardProps<
+    ToolbarClassKey,
+    {
+      component?: React$ElementType,
+      disableGutters?: boolean,
+      variant?: 'regular' | 'dense',
+    },
+    HTMLDivAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<ToolbarProps>;
+}
+declare module '@material-ui/core/Toolbar/Toolbar' {
+  declare export * from '@material-ui/core/Toolbar'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -3856,6 +3957,9 @@ declare module '@material-ui/core' {
   declare export { default as List } from '@material-ui/core/List';
   declare export { default as Radio } from '@material-ui/core/Radio';
   declare export { default as RadioGroup } from '@material-ui/core/RadioGroup';
+  declare export { default as Zoom } from '@material-ui/core/Zoom';
+  declare export { default as Tooltip } from '@material-ui/core/Tooltip';
+  declare export { default as Toolbar } from '@material-ui/core/Toolbar';
   declare export {
     default as OutlinedInput,
   } from '@material-ui/core/OutlinedInput';
