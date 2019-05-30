@@ -286,6 +286,7 @@ declare module '@material-ui/core/@@dom' {
   // At the moment there is no possibility to withdraw the React types for Html Element.
   // ... in the future will be replaced with exact types for a specific element (div, li, inout, a, ...)
   declare export type SVGElementAttributes = {};
+  declare export type HTMLTableSectionAttributes = {};
   declare export type HTMLTableRowAttributes = {};
   declare export type HTMLImageAttributes = {};
   declare export type HTMLDivAttributes = {};
@@ -4012,6 +4013,69 @@ declare module '@material-ui/core/TableRow/TableRow' {
   declare export * from '@material-ui/core/TableRow'
 }
 
+declare module '@material-ui/core/TableHead' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLTableSectionAttributes } from '@material-ui/core/@@dom';
+
+  declare export type TableHeadClassKey = 'root';
+
+  declare export type TableHeadProps = StandardProps<
+    TableHeadClassKey,
+    {
+      component?: React$ElementType,
+    },
+    HTMLTableSectionAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<TableHeadProps>;
+}
+declare module '@material-ui/core/TableHead/TableHead' {
+  declare export * from '@material-ui/core/TableHead'
+}
+
+declare module '@material-ui/core/TableFooter' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLTableSectionAttributes } from '@material-ui/core/@@dom';
+
+  declare export type TableFooterClassKey = 'root';
+
+  declare export type TableFooterProps = StandardProps<
+    TableFooterClassKey,
+    {
+      component?: React$ElementType,
+    },
+    HTMLTableSectionAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<TableFooterProps>;
+}
+declare module '@material-ui/core/TableFooter/TableFooter' {
+  declare export * from '@material-ui/core/TableFooter'
+}
+
+declare module '@material-ui/core/TableBody' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { HTMLTableSectionAttributes } from '@material-ui/core/@@dom';
+
+  declare export type TableBodyClassKey = 'root';
+
+  declare export type TableBodyProps = StandardProps<
+    TableBodyClassKey,
+    {
+      component?: React$ElementType,
+    },
+    HTMLTableSectionAttributes,
+    void
+  >;
+
+  declare export default React$ComponentType<TableBodyProps>;
+}
+declare module '@material-ui/core/TableBody/TableBody' {
+  declare export * from '@material-ui/core/TableBody'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -4060,6 +4124,11 @@ declare module '@material-ui/core' {
   declare export { default as Toolbar } from '@material-ui/core/Toolbar';
   declare export { default as SvgIcon } from '@material-ui/core/SvgIcon';
   declare export { default as TableRow } from '@material-ui/core/TableRow';
+  declare export { default as TableHead } from '@material-ui/core/TableHead';
+  declare export { default as TableBody } from '@material-ui/core/TableBody';
+  declare export {
+    default as TableFooter,
+  } from '@material-ui/core/TableFooter';
   declare export {
     default as TableSortLabel,
   } from '@material-ui/core/TableSortLabel';
