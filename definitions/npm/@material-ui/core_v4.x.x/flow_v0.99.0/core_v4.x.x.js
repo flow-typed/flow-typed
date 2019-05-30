@@ -299,7 +299,7 @@ declare module '@material-ui/core/@@dom' {
   declare export type HTMLParagraphAttributes = {};
   declare export type HTMLAnchorAttributes = {};
 }
-declare module '@material-ui/core/transitions/transition/@@react-transition-group/Transition' {
+declare module '@material-ui/core/@@react-transition-group' {
   // The version `2.9.1` based on this: //
   // https://github.com/mui-org/material-ui/blob/d0c7b070156b30908cee2b9c657469a3d6f406b3/packages/material-ui/package.json#L44
 
@@ -492,7 +492,7 @@ declare module '@material-ui/core/transitions' {
     TransitionStatus as BaseTransitionStatus,
     TransitionProps as BaseTransitionProps,
     TransitionActions,
-  } from '@material-ui/core/transitions/transition/@@react-transition-group/Transition';
+  } from '@material-ui/core/@@react-transition-group';
   import type { CSSProperties } from '@material-ui/core/styles/withStyles';
   import type { $$Pick } from '@material-ui/core/@@utils';
 
