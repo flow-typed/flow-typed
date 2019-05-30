@@ -79,6 +79,8 @@ declare module 'expo-constants' {
     isDevice: boolean,
     isHeadless: boolean,
     linkingUri: string,
+    nativeAppVersion: string;
+    nativeBuildVersion: string;
     sessionId: string,
     statusBarHeight: number,
     systemVersion?: number,
