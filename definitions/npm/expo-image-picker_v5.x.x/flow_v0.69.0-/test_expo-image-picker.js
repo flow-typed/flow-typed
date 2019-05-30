@@ -28,6 +28,9 @@ describe('launchImageLibraryAsync', () => {
         (result.uri: string);
         (result.width: number);
         (result.height: number);
+        if (result.type) {
+          (result.type: 'image' | 'video');
+        }
       }
     });
   });

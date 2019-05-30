@@ -4,6 +4,7 @@ declare module 'expo-image-picker' {
     uri: string,
     width: number,
     height: number,
+    type?: 'image' | 'video',
   |};
 
   declare export type NegativeImagePickerResult = {| cancelled: true |};
