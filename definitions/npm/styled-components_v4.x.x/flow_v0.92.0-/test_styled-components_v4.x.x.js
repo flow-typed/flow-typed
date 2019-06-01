@@ -31,7 +31,7 @@ describe('styled builtins', () => {
     // $ExpectError - should be HTMLDivElement
     const Div1: StyledComponent<{}, {}, HTMLSpanElement> = styled.div``
 
-    // $ExpectError - Should be HTMLSpanElement 
+    // $ExpectError - Should be HTMLSpanElement
     const Span2: StyledComponent<{}, {}, HTMLDivElement> = styled('span')``
 
     // $ExpectError - should be HTMLDivElement
@@ -48,7 +48,7 @@ describe('styled builtins', () => {
     const div1: React.Element<React.AbstractComponent<{}, HTMLSpanElement>> = <Div />
   })
 
-  
+
   it('shouldn\'t style something impossible', () => {
     // $ExpectError
     const derp1 = styled(null)``
@@ -61,7 +61,7 @@ describe('styled builtins', () => {
 
     // $ExpectError
     const derp4 = styled.derp``
-    
+
     // $ExpectError
     const derp5 = styled('derp')``
   })
@@ -80,7 +80,7 @@ describe('styled builtins', () => {
     const div1 = <Div color="maroon" />
     const div2 = <Div color="maroon" background="salmon" />
   })
-  
+
   it('should respect strict props', () => {
     // {| ... |} breaks syntax highlighting in vs code
     // if all on one line, so put here instead of inlined
@@ -109,13 +109,13 @@ describe('styled builtins', () => {
       color: ${props => props.color};
     `
   })
-  
+
   it('should inject theme', () => {
     const Span: StyledComponent<{color?: string}, {accent: string}, *> = styled.span`
       color: ${props => props.color || props.theme.accent};
     `
   })
-  
+
   it('should validate theme', () => {
     // $ExpectError - oops, someone meant accent, not primary
     const Span: StyledComponent<{color?: string}, {accent: string}, *> = styled.span`
@@ -284,7 +284,9 @@ describe('withTheme', () => {
     theme : Theme
   }
 
-  const MyComp = (props: Props) =>
+  // Explicit annotation until we see what happens to https://github.com/facebook/flow/issues/7774
+  // This appears to be a regression in flow
+  const MyComp: React.ComponentType<Props> = (props: Props) =>
     <div>
       {props.ownProp}
     </div>
