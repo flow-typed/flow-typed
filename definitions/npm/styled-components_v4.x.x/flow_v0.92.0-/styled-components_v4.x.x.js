@@ -147,7 +147,7 @@ declare module 'styled-components' {
   }
 
   declare export type Interpolation<P> =
-                                       | ((executionContext: P) => Interpolation<any>)
+                                       | ((executionContext: P) => Interpolation<any>) // eslint-disable-line flowtype/no-weak-types
                                        | InterpolatableComponent
                                        | CSSRules
                                        | KeyFrames
@@ -156,14 +156,14 @@ declare module 'styled-components' {
 
 
   // Should this be `mixed` perhaps?
-  declare export type CSSRules = Interpolation<any>[]
+  declare export type CSSRules = Interpolation<any>[] // eslint-disable-line flowtype/no-weak-types
 
   // This is not exported on purpose, since it's an implementation detail
   declare type TaggedTemplateLiteral<I, R> = (strings: string[], ...interpolations: Interpolation<I>[]) => R
 
-  declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules>
-  declare export type KeyFramesConstructor = TaggedTemplateLiteral<any, KeyFrames>
-  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<*>>
+  declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules> // eslint-disable-line flowtype/no-weak-types
+  declare export type KeyFramesConstructor = TaggedTemplateLiteral<any, KeyFrames> // eslint-disable-line flowtype/no-weak-types
+  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<*>> // eslint-disable-line flowtype/no-weak-types
 
   declare interface Tag<T> {
     styleTag: HTMLStyleElement | null;
@@ -266,21 +266,21 @@ declare module 'styled-components' {
 declare module 'styled-components/native' {
 
   declare export type Interpolation<P> =
-                                       | ((executionContext: P) => Interpolation<any>)
+                                       | ((executionContext: P) => Interpolation<any>) // eslint-disable-line flowtype/no-weak-types
                                        | CSSRules
                                        | KeyFrames
                                        | string
                                        | number
 
   // Should this be `mixed` perhaps?
-  declare export type CSSRules = Interpolation<any>[]
+  declare export type CSSRules = Interpolation<any>[] // eslint-disable-line flowtype/no-weak-types
 
   // This is not exported on purpose, since it's an implementation detail
   declare type TaggedTemplateLiteral<I, R> = (strings: string[], ...interpolations: Interpolation<I>[]) => R
 
-  declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules>
-  declare export type KeyFramesConstructor = TaggedTemplateLiteral<any, KeyFrames>
-  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<*>>
+  declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules> // eslint-disable-line flowtype/no-weak-types
+  declare export type KeyFramesConstructor = TaggedTemplateLiteral<any, KeyFrames> // eslint-disable-line flowtype/no-weak-types
+  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<*>> // eslint-disable-line flowtype/no-weak-types
 
   declare interface Tag<T> {
     styleTag: HTMLStyleElement | null;
