@@ -231,7 +231,6 @@ declare module 'styled-components' {
   declare export var createGlobalStyle : CreateGlobalStyleConstructor
   declare export var ThemeProvider: React$ComponentType<{children?: ?React$Node, theme: mixed | (mixed) => mixed}>
 
-  // This is a bit hard to read. Not sure how to make it more readable. I think adding line-breaks makes it worse.
   declare type ThemeProps<T> = {
     theme: T
   }
@@ -250,12 +249,12 @@ declare module 'styled-components' {
     <V>(V) =>
       // TODO: Figure out how to add support for `attrs` API here
       // TODO: Would be nice if we could find a way to use `StyledFactory` here, but I am too dumb to figure it out.
-      <P, Th>(string[], ...Interpolation<P & ThemeProps<Th>>[]) => StyledComponent<P, Th, V>
+      <Props, Theme>(string[], ...Interpolation<Props & ThemeProps<Theme>>[]) => StyledComponent<Props, Theme, V>
    >
 
   declare interface Styled {
-    <P, Th, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<P, {}, Th, BuiltinElementType<ElementName>>;
-    <SP, Th, OP: {}, C: React$ComponentType<OP>>(C): StyledFactory<SP, OP, Th, React$ComponentType<C>>;
+    <Props, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<Props, {}, Theme, BuiltinElementType<ElementName>>;
+    <StyleProps, Theme, OwnProps: {}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
   }
 
   declare export default Styled & ConvenientShorthands
@@ -423,8 +422,8 @@ declare module 'styled-components/native' {
    >
 
   declare interface Styled {
-    <P, Th, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<P, {}, Th, BuiltinElementType<ElementName>>;
-    <SP, Th, OP: {}, C: React$ComponentType<OP>>(C): StyledFactory<SP, OP, Th, React$ComponentType<C>>;
+    <Props, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<Props, {}, Theme, BuiltinElementType<ElementName>>;
+    <StyleProps, Theme, OwnProps: {}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
   }
 
   declare export default Styled & ConvenientShorthands
