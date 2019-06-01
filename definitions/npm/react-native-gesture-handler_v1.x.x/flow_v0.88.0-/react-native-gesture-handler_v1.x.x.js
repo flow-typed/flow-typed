@@ -564,13 +564,14 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     default as Directions,
   } from 'react-native-gesture-handler/Directions';
 
-  declare export var FlatList: any;
-  declare export var ScrollView: any;
-  declare export var Switch: any;
-  declare export var TextInput: any;
-  declare export var ToolbarAndroid: any;
-  declare export var DrawerLayoutAndroid: any;
-  declare export var PureNativeButton: any;
+  declare export var FlatList: React$ComponentType<any>;
+  declare export var ScrollView: React$ComponentType<any>;
+  declare export var Switch: React$ComponentType<any>;
+  declare export var TextInput: React$ComponentType<any>;
+  declare export var ToolbarAndroid: React$ComponentType<any>;
+  declare export var DrawerLayoutAndroid: React$ComponentType<any>;
+  declare export var PureNativeButton: React$ComponentType<any>;
+
   declare export function createNativeWrapper<Config: {}>(
     Com: React$ComponentType<Config>,
     config?: {}
