@@ -97,9 +97,11 @@ describe('styled builtins', () => {
   })
 
   it('should validate template props', () => {
-    // $ExpectError - background is not in props
     const Span: StyledComponent<{color: string}, *, *> = styled.span`
-      color: ${props => props.background};
+      color: ${
+      // $ExpectError - background is not in props
+      props => props.background
+      };
     `
   })
 
@@ -321,13 +323,20 @@ describe('withTheme', () => {
 
 
 describe('wrapping components', () => {
-  type Props = {name : string}
-  type StyleProps = {color?: string}
+  type Props = {|
+    name : string
+  |}
+
+  type StyleProps = {|
+    ...Props,
+    color?: string
+  |}
+
   type Theme = {
     accent: string
   }
 
-  const Hello = (p: Props) =>
+  const Hello: React.ComponentType<Props> = (p: Props) =>
     <div>Hello {p.name}</div>
 
   const StyledHello = styled<StyleProps, Theme, Props, *>(Hello)`

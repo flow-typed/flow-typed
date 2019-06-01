@@ -231,16 +231,21 @@ declare module 'styled-components' {
   declare export var createGlobalStyle : CreateGlobalStyleConstructor
   declare export var ThemeProvider: React$ComponentType<{children?: ?React$Node, theme: mixed | (mixed) => mixed}>
 
-  declare type ThemeProps<T> = {
+  declare type ThemeProps<T> = {|
     theme: T
-  }
+  |}
+
+  declare type PropsWithTheme<Props, T> = {|
+    ...ThemeProps<T>,
+    ...$Exact<Props>
+  |}
 
   declare export function withTheme<Theme, Config: {}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
   declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & InterpolatableComponent<Props>
-  declare interface StyledFactory<StyleProps, OwnProps, Theme, Instance> {
-    [[call]]: TaggedTemplateLiteral<StyleProps & OwnProps & ThemeProps<Theme>, StyledComponent<StyleProps & OwnProps, Theme, Instance>>;
-    +attrs: <A: {}>(A | (OwnProps & StyleProps) => A) => React$AbstractComponent<$Diff<OwnProps & StyleProps, A>, Instance>;
+  declare interface StyledFactory<StyleProps, Props, Theme, Instance> {
+    [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
+    +attrs: <A: {}>(A | (StyleProps) => A) => React$AbstractComponent<$Diff<StyleProps, A>, Instance>;
   }
 
 
@@ -249,11 +254,11 @@ declare module 'styled-components' {
     <V>(V) =>
       // TODO: Figure out how to add support for `attrs` API here
       // TODO: Would be nice if we could find a way to use `StyledFactory` here, but I am too dumb to figure it out.
-      <Props, Theme>(string[], ...Interpolation<Props & ThemeProps<Theme>>[]) => StyledComponent<Props, Theme, V>
+      <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>
    >
 
   declare interface Styled {
-    <Props, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<Props, {}, Theme, BuiltinElementType<ElementName>>;
+    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, {}, Theme, BuiltinElementType<ElementName>>;
     <StyleProps, Theme, OwnProps: {}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
   }
 
@@ -264,13 +269,17 @@ declare module 'styled-components' {
 
 declare module 'styled-components/native' {
 
+  declare class InterpolatableComponent<P> extends React$Component<P> {
+    static +styledComponentId: string;
+  }
+
   declare export type Interpolation<P> =
                                        | ((executionContext: P) => Interpolation<any>) // eslint-disable-line flowtype/no-weak-types
+                                       | InterpolatableComponent<any> // eslint-disable-line flowtype/no-weak-types
                                        | CSSRules
                                        | KeyFrames
                                        | string
                                        | number
-
   // Should this be `mixed` perhaps?
   declare export type CSSRules = Interpolation<any>[] // eslint-disable-line flowtype/no-weak-types
 
@@ -347,17 +356,21 @@ declare module 'styled-components/native' {
   declare export var createGlobalStyle : CreateGlobalStyleConstructor
   declare export var ThemeProvider: React$ComponentType<{children?: ?React$Node, theme: mixed | (mixed) => mixed}>
 
-  // This is a bit hard to read. Not sure how to make it more readable. I think adding line-breaks makes it worse.
-  declare type ThemeProps<T> = {
+  declare type ThemeProps<T> = {|
     theme: T
-  }
+  |}
+
+  declare type PropsWithTheme<Props, T> = {|
+    ...ThemeProps<T>,
+    ...$Exact<Props>
+  |}
 
   declare export function withTheme<Theme, Config: {}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance>
-  declare interface StyledFactory<StyleProps, OwnProps, Theme, Instance> {
-    [[call]]: TaggedTemplateLiteral<StyleProps & OwnProps & ThemeProps<Theme>, StyledComponent<StyleProps & OwnProps, Theme, Instance>>;
-    +attrs: <A: {}>(A | (OwnProps & StyleProps) => A) => React$AbstractComponent<$Diff<OwnProps & StyleProps, A>, Instance>;
+  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & InterpolatableComponent<Props>
+  declare interface StyledFactory<StyleProps, Props, Theme, Instance> {
+    [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
+    +attrs: <A: {}>(A | (StyleProps) => A) => React$AbstractComponent<$Diff<StyleProps, A>, Instance>;
   }
 
   declare type BuiltinElementInstances = {
@@ -418,11 +431,11 @@ declare module 'styled-components/native' {
     <V>(V) =>
       // TODO: Figure out how to add support for `attrs` API here
       // TODO: Would be nice if we could find a way to use `StyledFactory` here, but I am too dumb to figure it out.
-      <P, Th>(string[], ...Interpolation<P & ThemeProps<Th>>[]) => StyledComponent<P, Th, V>
+      <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>
    >
 
   declare interface Styled {
-    <Props, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<Props, {}, Theme, BuiltinElementType<ElementName>>;
+    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, {}, Theme, BuiltinElementType<ElementName>>;
     <StyleProps, Theme, OwnProps: {}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
   }
 
