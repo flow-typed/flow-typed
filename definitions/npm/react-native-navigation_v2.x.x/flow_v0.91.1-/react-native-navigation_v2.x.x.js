@@ -389,6 +389,7 @@ declare module 'react-native-navigation' {
   declare export type ComponentDidAppearEvent = {|
     componentId: string,
     componentName: string,
+    passProps?: {},
   |};
 
   declare export type CommandEvent = {|
