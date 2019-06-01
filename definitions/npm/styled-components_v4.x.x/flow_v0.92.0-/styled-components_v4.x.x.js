@@ -142,13 +142,13 @@ declare module 'styled-components' {
 
   declare type BuiltinElementType<ElementName: string> = $ElementType<BuiltinElementInstances, ElementName>
 
-  declare interface InterpolatableComponent {
-    +styledComponentId: string;
+  declare class InterpolatableComponent<P> extends React$Component<P> {
+    static +styledComponentId: string;
   }
 
   declare export type Interpolation<P> =
                                        | ((executionContext: P) => Interpolation<any>) // eslint-disable-line flowtype/no-weak-types
-                                       | InterpolatableComponent
+                                       | InterpolatableComponent<any> // eslint-disable-line flowtype/no-weak-types
                                        | CSSRules
                                        | KeyFrames
                                        | string
@@ -238,7 +238,7 @@ declare module 'styled-components' {
 
   declare export function withTheme<Theme, Config: {}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & InterpolatableComponent
+  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & InterpolatableComponent<Props>
   declare interface StyledFactory<StyleProps, OwnProps, Theme, Instance> {
     [[call]]: TaggedTemplateLiteral<StyleProps & OwnProps & ThemeProps<Theme>, StyledComponent<StyleProps & OwnProps, Theme, Instance>>;
     +attrs: <A: {}>(A | (OwnProps & StyleProps) => A) => React$AbstractComponent<$Diff<OwnProps & StyleProps, A>, Instance>;
