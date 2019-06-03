@@ -96,10 +96,10 @@ function test_response() {
   const _etag: number = response.etag;
   const header: SimpleHeader = response.header;
   // $ExpectError
-  const _header: {[key: string]: string} = response.header;
+  const _header: { [key: string]: string, ... } = response.header;
   const headers: SimpleHeader = response.headers;
   // $ExpectError
-  const _headers: {[key: string]: string} = response.headers;
+  const _headers: { [key: string]: string, ... } = response.headers;
   const headerSent: boolean = response.headerSent;
   // $ExpectError
   const _headerSent: number = response.headerSent;
@@ -192,10 +192,10 @@ function test_request() {
   const _fresh: number = request.fresh;
   const header: SimpleHeader = request.header;
   // $ExpectError
-  const _header: {[key: string]: string}  = request.header;
+  const _header: { [key: string]: string, ... }  = request.header;
   const headers: SimpleHeader = request.headers;
   // $ExpectError
-  const _headers: {[key: string]: string} = request.headers;
+  const _headers: { [key: string]: string, ... } = request.headers;
   const host: string = request.host;
   // $ExpectError
   const _host: number = request.host;
@@ -229,9 +229,9 @@ function test_request() {
   const protocol: string = request.protocol;
   // $ExpectError
   const _protocol: number = request.protocol;
-  const query: {[key: string]: string} = request.query;
+  const query: { [key: string]: string, ... } = request.query;
   // $ExpectError
-  const _query: {[key: string]: string|number} = request.query;
+  const _query: { [key: string]: string|number, ... } = request.query;
   const querystring: string = request.querystring;
   // $ExpectError
   const _querystring: number = request.querystring;

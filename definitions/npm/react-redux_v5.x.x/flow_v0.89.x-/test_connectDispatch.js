@@ -14,9 +14,7 @@ function object_sameDispatchIsOK() {
     action1
   };
 
-  type Props = {
-    action1: typeof action1,
-  };
+  type Props = { action1: typeof action1, ... };
   class Com extends React.Component<Props> {}
 
   const Connected1 = connect<Props, {||}, _,_,_,Dispatch1>(null, mapDispatchToProps)(Com);
@@ -40,9 +38,7 @@ function object_differentDispatchesAreNotOK() {
   |};
   type Dispatch2 = Action2 => Action2;
 
-  type Props = {
-    action1: typeof action1,
-  };
+  type Props = { action1: typeof action1, ... };
   class Com extends React.Component<Props> {}
 
   const Connected1 = connect<Props, {||}, _,_,_,Dispatch1>(null, mapDispatchToProps)(Com);
@@ -68,9 +64,7 @@ function function_sameDispatchIsOK() {
     action1: (...args) => dispatch(action1(...args))
   });
 
-  type Props = {
-    action1: typeof action1,
-  };
+  type Props = { action1: typeof action1, ... };
   class Com extends React.Component<Props> {}
 
   const Connected1 = connect<Props, {||}, _,DispatchProps,_,Dispatch1>(null, mapDispatchToProps)(Com);
@@ -98,9 +92,7 @@ function function_differentDispatchesAreNotOK() {
   |};
   type Dispatch2 = Action2 => Action2;
 
-  type Props = {
-    action1: typeof action1,
-  };
+  type Props = { action1: typeof action1, ... };
   class Com extends React.Component<Props> {}
 
   const Connected1 = connect<Props, {||}, _,DispatchProps,_,Dispatch1>(null, mapDispatchToProps)(Com);

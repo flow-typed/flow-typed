@@ -54,7 +54,7 @@ declare module 'react-datepicker' {
     placeholderText?: string,
     popperClassName?: string,
     popperContainer?: () => Node,
-    popperModifiers?: {},
+    popperModifiers?: {...},
     popperPlacement?: 'auto' | 'top' | 'right' | 'bottom' | 'left',
     readOnly?: boolean,
     required?: boolean,

@@ -76,7 +76,7 @@ describe('Navigation.events', () => {
 
   describe('.bindComponent', () => {
     it('passes when used properly', () => {
-      class MyComponent extends React$Component<{}> {
+      class MyComponent extends React$Component<{...}> {
         componentDidMount() {
           Navigation.events().bindComponent(this);
         }
@@ -93,16 +93,16 @@ describe('Navigation.events', () => {
     });
 
     it('raises an error when types of methods wrong', () => {
-      class MyComponent1 extends React$Component<{}> {
+      class MyComponent1 extends React$Component<{...}> {
         componentDidMount() {
           // $ExpectError - `buttonId` must be string
           Navigation.events().bindComponent(this);
         }
 
-        navigationButtonPressed({ buttonId }: { buttonId: boolean }) {}
+        navigationButtonPressed({ buttonId }: { buttonId: boolean, ... }) {}
       }
 
-      class MyComponent2 extends React$Component<{}> {
+      class MyComponent2 extends React$Component<{...}> {
         componentDidMount() {
           // $ExpectError - `text` must be string, isFocused must be boolean
           Navigation.events().bindComponent(this);
@@ -114,10 +114,11 @@ describe('Navigation.events', () => {
         }: {
           text: boolean,
           isFocused: string,
+          ...
         }) {}
       }
 
-      class MyComponent3 extends React$Component<{}> {
+      class MyComponent3 extends React$Component<{...}> {
         componentDidMount() {
           // $ExpectError - `QWERTYUIO` is missing in event
           Navigation.events().bindComponent(this);
@@ -128,6 +129,7 @@ describe('Navigation.events', () => {
         }: {
           previewComponentId: string,
           QWERTYUIO: number,
+          ...
         }) {}
       }
 
@@ -139,9 +141,9 @@ describe('Navigation.events', () => {
 });
 
 describe('Navigation.registerComponent', () => {
-  class Comp extends React$Component<{}> {}
-  class CompWithProps extends React$Component<{ componentId: string }> {}
-  class CompWithWrongProps extends React$Component<{ componentId: boolean }> {}
+  class Comp extends React$Component<{...}> {}
+  class CompWithProps extends React$Component<{ componentId: string, ... }> {}
+  class CompWithWrongProps extends React$Component<{ componentId: boolean, ... }> {}
 
   it('should passed when call with id as string', () => {
     Navigation.registerComponent('home', () => Comp);

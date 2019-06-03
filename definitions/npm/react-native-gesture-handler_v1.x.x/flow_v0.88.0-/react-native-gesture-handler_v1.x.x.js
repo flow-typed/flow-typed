@@ -113,7 +113,6 @@ declare module 'react-native-gesture-handler/DrawerLayout' {
 
   declare export type DrawerLayoutProps = $ReadOnly<{
     renderNavigationView: (progressAnimatedValue: AnimatedValue) => React$Node,
-
     contentContainerStyle?: ViewStyle,
     drawerBackgroundColor?: string,
     drawerContainerStyle?: ViewStyle,
@@ -135,6 +134,7 @@ declare module 'react-native-gesture-handler/DrawerLayout' {
     overlayColor?: string,
     statusBarAnimation?: StatusBarAnimation,
     useNativeAnimations?: boolean,
+    ...
   }>;
 
   declare export type DrawerMovementOptionType = {|
@@ -175,7 +175,7 @@ declare module 'react-native-gesture-handler/Swipeable' {
   |};
 
   declare export type SwipeableProps = $ReadOnly<{
-    animationOptions?: {},
+    animationOptions?: {...},
     childrenContainerStyle?: ViewStyle,
     containerStyle?: ViewStyle,
     friction?: number,
@@ -201,6 +201,7 @@ declare module 'react-native-gesture-handler/Swipeable' {
     ) => React$Node,
     rightThreshold?: number,
     useNativeAnimations?: boolean,
+    ...
   }>;
 
   declare export default class Swipeable extends React$Component<
@@ -216,20 +217,16 @@ declare module 'react-native-gesture-handler/Swipeable' {
 declare module 'react-native-gesture-handler/gestureHandlerRootHOC' {
   import type { ViewStyle } from 'react-native-gesture-handler/@react-native';
 
-  declare export default {
-    <Config: {}>(
-      Component: React$ComponentType<Config>,
-      containerStyles: ?ViewStyle
-    ): React$ComponentType<Config>,
-  };
+  declare export default { <Config: {...}>(
+    Component: React$ComponentType<Config>,
+    containerStyles: ?ViewStyle
+  ): React$ComponentType<Config>, ... };
 }
 
 declare module 'react-native-gesture-handler/touchables/TouchableNativeFeedback' {
   import type { TouchableProps } from 'react-native-gesture-handler/@react-native';
 
-  declare type TouchableNativeFeedbackProps = $ReadOnly<{
-    ...TouchableProps,
-  }>;
+  declare type TouchableNativeFeedbackProps = $ReadOnly<{ ...TouchableProps, ... }>;
 
   declare export default class TouchableNativeFeedback extends React$Component<TouchableNativeFeedbackProps> {
     static SelectableBackground(): {| type: 'SelectableBackground' |};
@@ -250,9 +247,7 @@ declare module 'react-native-gesture-handler/touchables/TouchableNativeFeedback'
 declare module 'react-native-gesture-handler/touchables/TouchableWithoutFeedback' {
   import type { TouchableProps } from 'react-native-gesture-handler/@react-native';
 
-  declare type TouchableWithoutFeedbackProps = $ReadOnly<{
-    ...TouchableProps,
-  }>;
+  declare type TouchableWithoutFeedbackProps = $ReadOnly<{ ...TouchableProps, ... }>;
 
   declare export default class TouchableWithoutFeedback extends React$Component<TouchableWithoutFeedbackProps> {}
 }
@@ -266,6 +261,7 @@ declare module 'react-native-gesture-handler/touchables/TouchableOpacity' {
     ...TouchableProps,
     style?: ViewStyle,
     activeOpacity?: number,
+    ...
   }>;
 
   declare export default class TouchableOpacity extends React$Component<TouchableOpacityProps> {}
@@ -283,6 +279,7 @@ declare module 'react-native-gesture-handler/touchables/TouchableHighlight' {
     style?: ViewStyle,
     onShowUnderlay?: () => mixed,
     onHideUnderlay?: () => mixed,
+    ...
   }>;
 
   declare export default class TouchableHighlight extends React$Component<TouchableHighlightProps> {}
@@ -309,19 +306,18 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   /////////////////////////////////////////////////////////////////////////////
   // Utils for *GestureHandler
 
-  declare type $SyntheticEvent<T: {}> = {
-    +nativeEvent: $ReadOnly<$Exact<T>>,
-  };
+  declare type $SyntheticEvent<T: {...}> = { +nativeEvent: $ReadOnly<$Exact<T>>, ... };
 
-  declare type $Event<T: {}> = $SyntheticEvent<{
+  declare type $Event<T: {...}> = $SyntheticEvent<{
     handlerTag: number,
     numberOfPointers: number,
     state: State,
     oldState: State,
     ...$Exact<T>,
+    ...
   }>;
 
-  declare type $EventHandlers<ExtraProps: {}> = {|
+  declare type $EventHandlers<ExtraProps: {...}> = {|
     onGestureEvent?: ($Event<ExtraProps>) => mixed,
     onHandlerStateChange?: ($Event<ExtraProps>) => mixed,
     onBegan?: ($Event<ExtraProps>) => mixed,
@@ -332,8 +328,8 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   |};
 
   declare type $GestureHandlerProps<
-    AdditionalProps: {},
-    ExtraEventsProps: {}
+    AdditionalProps: {...},
+    ExtraEventsProps: {...}
   > = $ReadOnly<{|
     ...$Exact<AdditionalProps>,
     ...$EventHandlers<ExtraEventsProps>,
@@ -363,10 +359,9 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     {
       shouldActivateOnStart?: boolean,
       disallowInterruption?: boolean,
+      ...
     },
-    {
-      pointerInside: boolean,
-    }
+    { pointerInside: boolean, ... }
   >;
 
   declare export class NativeViewGestureHandler extends React$Component<NativeViewGestureHandlerProps> {}
@@ -383,12 +378,14 @@ declare module 'react-native-gesture-handler/GestureHandler' {
       maxDeltaY?: number,
       maxDist?: number,
       minPointers?: number,
+      ...
     },
     {
       x: number,
       y: number,
       absoluteX: number,
       absoluteY: number,
+      ...
     }
   >;
 
@@ -401,12 +398,14 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     {
       numberOfPointers?: number,
       direction?: number,
+      ...
     },
     {
       x: number,
       y: number,
       absoluteX: number,
       absoluteY: number,
+      ...
     }
   >;
 
@@ -420,10 +419,9 @@ declare module 'react-native-gesture-handler/GestureHandler' {
       minForce?: number,
       maxForce?: number,
       feedbackOnActivation?: boolean,
+      ...
     },
-    {
-      force: number,
-    }
+    { force: number, ... }
   >;
 
   declare export class ForceTouchGestureHandler extends React$Component<ForceTouchGestureHandlerProps> {
@@ -437,12 +435,14 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     {
       minDurationMs?: number,
       maxDist?: number,
+      ...
     },
     {
       x: number,
       y: number,
       absoluteX: number,
       absoluteY: number,
+      ...
     }
   >;
 
@@ -464,6 +464,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
       minPointers?: number,
       maxPointers?: number,
       avgTouches?: boolean,
+      ...
     },
     {
       x: number,
@@ -474,6 +475,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
       translationY: number,
       velocityX: number,
       velocityY: number,
+      ...
     }
   >;
 
@@ -483,12 +485,13 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   // Pinch
 
   declare export type PinchGestureHandlerProps = $GestureHandlerProps<
-    {},
+    {...},
     {
       scale: number,
       focalX: number,
       focalY: number,
       velocity: number,
+      ...
     }
   >;
 
@@ -498,12 +501,13 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   // Rotation
 
   declare export type RotationGestureHandlerProps = $GestureHandlerProps<
-    {},
+    {...},
     {
       rotation: number,
       anchorX: number,
       anchorY: number,
       velocity: number,
+      ...
     }
   >;
 
@@ -514,6 +518,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   declare export type RawButtonProps = {
     ...NativeViewGestureHandlerProps,
     testID?: string,
+    ...
   };
 
   declare export class RawButton extends React$Component<RawButtonProps> {}
@@ -529,6 +534,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     rippleColor?: string,
     // iOS only
     exclusive?: boolean,
+    ...
   };
 
   declare export class BaseButton extends React$Component<BaseButtonProps> {}
@@ -540,6 +546,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     underlayColor?: string,
     // iOS only
     activeOpacity?: number,
+    ...
   };
   declare export class RectButton extends React$Component<RectButtonProps> {}
 
@@ -550,6 +557,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     borderless?: boolean,
     // iOS only
     activeOpacity?: number,
+    ...
   };
   declare export class BorderlessButton extends React$Component<BorderlessButtonProps> {}
 
@@ -572,12 +580,13 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   declare export var DrawerLayoutAndroid: React$ComponentType<any>;
   declare export var PureNativeButton: React$ComponentType<any>;
 
-  declare export function createNativeWrapper<Config: {}>(
+  declare export function createNativeWrapper<Config: {...}>(
     Com: React$ComponentType<Config>,
-    config?: {}
+    config?: {...}
   ): React$ComponentType<{
     ...NativeViewGestureHandlerProps,
     ...$Exact<Config>,
+    ...
   }>;
 }
 

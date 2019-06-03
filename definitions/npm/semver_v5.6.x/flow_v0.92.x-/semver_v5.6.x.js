@@ -70,6 +70,7 @@ declare module "semver" {
   declare type Options = {
     options?: Options,
     includePrerelease?: boolean,
+    ...
   } | boolean;
 
   // Functions

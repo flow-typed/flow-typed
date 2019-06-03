@@ -2,8 +2,8 @@
 import type { Reducer } from 'redux'
 import { combineReducers } from 'redux'
 
-type Action = { type: 'A' } | { type: 'B' };
-type AState = { foo: number };
+type Action = { type: 'A', ... } | { type: 'B', ... };
+type AState = { foo: number, ... };
 const initialAState: AState = { foo: 1 }
 const reducerA: Reducer<AState, Action> = (state = initialAState, action) => {
   return state
@@ -11,7 +11,8 @@ const reducerA: Reducer<AState, Action> = (state = initialAState, action) => {
 type State = {
   a: AState,
   name: string,
-  age: number
+  age: number,
+  ...
 };
 
 //
