@@ -1195,11 +1195,16 @@ declare module ramda {
   declare function eqBy<T>(fn: (x: T) => T, x: T): (y: T) => boolean;
   declare function eqBy<T>(fn: (x: T) => T): (x: T) => (y: T) => boolean;
 
-  declare function gt<T>(x: T): (y: T) => boolean;
-  declare function gt<T>(x: T, y: T): boolean;
+  declare type RelationCompare =
+    & ((x: number) => (y: number) => bool)
+    & ((x: number, y: number) => bool)
+    & ((x: string) => (y: string) => bool)
+    & ((x: string, y: string) => bool)
 
-  declare function gte<T>(x: T): (y: T) => boolean;
-  declare function gte<T>(x: T, y: T): boolean;
+  declare var gt: RelationCompare
+  declare var gte: RelationCompare
+  declare var lt: RelationCompare
+  declare var lte: RelationCompare
 
   declare function identical<T>(x: T): (y: T) => boolean;
   declare function identical<T>(x: T, y: T): boolean;
@@ -1221,12 +1226,6 @@ declare module ramda {
 
   declare function intersection<T>(x: Array<T>, y: Array<T>): Array<T>;
   declare function intersection<T>(x: Array<T>): (y: Array<T>) => Array<T>;
-
-  declare function lt<T>(x: T): (y: T) => boolean;
-  declare function lt<T>(x: T, y: T): boolean;
-
-  declare function lte<T>(x: T): (y: T) => boolean;
-  declare function lte<T>(x: T, y: T): boolean;
 
   declare function max<T>(x: T): (y: T) => T;
   declare function max<T>(x: T, y: T): T;
