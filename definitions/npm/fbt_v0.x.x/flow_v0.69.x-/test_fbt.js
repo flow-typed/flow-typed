@@ -102,3 +102,73 @@ describe('fbt as function', () => {
     fbt('str', 'str', { abcd: 69 });
   });
 });
+
+describe('fbt.param()', () => {
+  it('should pass when used properly', () => {
+    fbt.param('age', 18);
+    fbt.param('age', 18, {});
+    fbt.param('age', 18, { number: true });
+    fbt.param('age', 18, { number: 1 });
+    fbt.param('age', 18, { gender: IntlVariations.GENDER_UNKNOWN });
+    fbt.param('age', 18, { gender: IntlVariations.GENDER_FEMALE });
+  });
+
+  it('should raise an error when call `.param()` with invalid argument', () => {
+    // $ExpectError: first argument must be a string
+    fbt.param(12, 18);
+    // $ExpectError: third argument must be an object
+    fbt.param('age', 18, 11);
+    // $ExpectError: `abcd` is missing
+    fbt.param('age', 18, { abcd: true });
+    // $ExpectError
+    fbt.param('age', 18, { number: 'need numeber' });
+
+    // $ExpectError: BITMASK_GENDER is missing in enum
+    fbt.param('age', 18, { gender: IntlVariations.BITMASK_GENDER });
+  });
+});
+
+describe('fbt.sameParam()', () => {
+  it('should pass when used properly', () => {
+    fbt.sameParam('mur');
+  });
+
+  it('should raise an error when call `.sameParam()` with invalid argument', () => {
+    // $ExpectError: first argument must be a string
+    fbt.sameParam(12);
+  });
+});
+
+describe('fbt.name()', () => {
+  it('should pass when used properly', () => {
+    fbt.name('test', IntlVariations.GENDER_FEMALE);
+  });
+
+  it('should raise an error when call `.name()` with invalid argument', () => {
+    // $ExpectError: first argument must be a string
+    fbt.name(1, IntlVariations.GENDER_FEMALE);
+
+    // $ExpectError: `BITMASK_GENDER` is missing in enum
+    fbt.name('test', IntlVariations.BITMASK_GENDER);
+  });
+});
+
+describe('fbt.enum()', () => {
+  it('should pass when used properly', () => {
+    fbt.enum(1, ['test', 'test2']);
+    fbt.enum('BOAT', {
+      CAR: 'car',
+      HOUSE: 'house',
+      BOAT: 'boat',
+      HOUSEBOAT: 'houseboat',
+    });
+  });
+
+  it('should raise an error when call `.sameParam()` with invalid argument', () => {
+    // $ExpectError: first argument must be a number
+    fbt.enum('1', ['test', 'test2']);
+
+    // $ExpectError: first argument must be one key from object
+    fbt.enum('MISSING_KEY', { CAR: 'car' });
+  });
+});
