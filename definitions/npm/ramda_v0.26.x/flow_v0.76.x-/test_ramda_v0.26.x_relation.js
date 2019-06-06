@@ -1,6 +1,19 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, curry, filter, find, repeat, zipWith } from "ramda";
+import { it, describe } from "flow-typed-test";
+import _, {
+  compose,
+  curry,
+  filter,
+  find,
+  gt,
+  gte,
+  lt,
+  lte,
+  pipe,
+  repeat,
+  zipWith,
+} from "ramda";
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -33,11 +46,125 @@ const eqb: boolean = _.eqBy(Math.abs, 5, -5);
 
 const es: boolean = _.equals([1, 2, 3], [1, 2, 3]);
 
-const _gt: boolean = _.gt(2, 1);
-const _lt: boolean = _.lt(2, 1);
+describe('gt', () => {
+  it('works with two numbers and produces a bool', () => {
+    const result: bool = gt(2, 1)
+  })
 
-const _gte: boolean = _.gte(2, 1);
-const _lte: boolean = _.lte(2, 1);
+  it('works with two curried numbers and produces a bool', () => {
+    const result: bool = gt(2)(1)
+  })
+
+  it('works with two strings and produces a bool', () => {
+    const result: bool = gt('a', 'b')
+  })
+
+  it('works with two curried strings and produces a bool', () => {
+    const result: bool = gt('a')('b')
+  })
+
+  it('does not work with mixed numbers and strings', () => {
+    // $ExpectError
+    gt('a', 1)
+    // $ExpectError
+    gt(1, 'a')
+  })
+
+  it('does not work with functions', () => {
+    // $ExpectError
+    gt(() => 1, () => 2)
+  })
+})
+
+describe('gte', () => {
+  it('works with two numbers and produces a bool', () => {
+    const result: bool = gte(2, 1)
+  })
+
+  it('works with two curried numbers and produces a bool', () => {
+    const result: bool = gte(2)(1)
+  })
+
+  it('works with two strings and produces a bool', () => {
+    const result: bool = gte('a', 'b')
+  })
+
+  it('works with two curried strings and produces a bool', () => {
+    const result: bool = gte('a')('b')
+  })
+
+  it('does not work with mixed numbers and strings', () => {
+    // $ExpectError
+    gte('a', 1)
+    // $ExpectError
+    gte(1, 'a')
+  })
+
+  it('does not work with functions', () => {
+    // $ExpectError
+    gte(() => 1, () => 2)
+  })
+})
+
+describe('lt', () => {
+  it('works with two numbers and produces a bool', () => {
+    const result: bool = lt(2, 1)
+  })
+
+  it('works with two curried numbers and produces a bool', () => {
+    const result: bool = lt(2)(1)
+  })
+
+  it('works with two strings and produces a bool', () => {
+    const result: bool = lt('a', 'b')
+  })
+
+  it('works with two curried strings and produces a bool', () => {
+    const result: bool = lt('a')('b')
+  })
+
+  it('does not work with mixed numbers and strings', () => {
+    // $ExpectError
+    lt('a', 1)
+    // $ExpectError
+    lt(1, 'a')
+  })
+
+  it('does not work with functions', () => {
+    // $ExpectError
+    lt(() => 1, () => 2)
+  })
+})
+
+describe('lte', () => {
+  it('works with two numbers and produces a bool', () => {
+    const resulte: bool = lte(2, 1)
+  })
+
+  it('works with two curried numbers and produces a bool', () => {
+    const resulte: bool = lte(2)(1)
+  })
+
+  it('works with two strings and produces a bool', () => {
+    const resulte: bool = lte('a', 'b')
+  })
+
+  it('works with two curried strings and produces a bool', () => {
+    const resulte: bool = lte('a')('b')
+  })
+
+  it('does not work with mixed numbers and strings', () => {
+    // $ExpectError
+    lte('a', 1)
+    // $ExpectError
+    lte(1, 'a')
+  })
+
+  it('does not work with functions', () => {
+    // $ExpectError
+    lte(() => 1, () => 2)
+  })
+})
 
 const _max: number = _.max(2, 1);
 const _min: number = _.min(2, 1);
