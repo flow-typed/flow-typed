@@ -2945,8 +2945,8 @@ declare module "lodash/fp" {
     omitBy<A, T: { [id: any]: A }>(predicate: OPredicate<A>, object: T): Object;
     pick(props: Array<string>): (object: Object) => Object;
     pick(props: Array<string>, object: Object): Object;
-    pickAll(props: Array<string>): (object: Object) => Object;
-    pickAll(props: Array<string>, object: Object): Object;
+    pickAll(props: string | $ReadOnlyArray<string>): (object: Object) => Object;
+    pickAll(props: string | $ReadOnlyArray<string>, object: Object): Object;
     pickBy<A, T: { [id: any]: A }>(
       predicate: OPredicate<A>
     ): (object: T) => Object;
