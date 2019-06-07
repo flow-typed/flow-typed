@@ -547,4 +547,11 @@ describe("The `colors` safe API", () => {
       (colors.zalgo(""): void);
     });
   });
+
+  describe("Colors", () => {
+    it("should allow nested style modifiers", () => {
+      colors.red.bold("");
+      colors.bold.red("");
+    });
+  });
 });
