@@ -433,7 +433,7 @@ declare module '@material-ui/core/OverridableComponent' {
 
   declare export type OverridableComponent<M: OverridableTypeMap> = {
     (props: DefaultComponentProps<M>): React$Node,
-    // TODO: readme issue 1
+    // TODO more info: README.md Issue 1
     // <Component: React$ElementType>(
     //   props: { component?: Component } & OverrideProps<M, Component>
     // ): React$Node,
@@ -475,7 +475,10 @@ declare module '@material-ui/core/OverridableComponent' {
     M,
     'props'
   > &
-    CommonProps<M>;
+    CommonProps<M> & {
+      // TODO more info: README.md Issue 1
+      component?: React$ElementType,
+    };
 
   /**
    * props that are valid for material-ui components
@@ -1962,7 +1965,7 @@ declare module '@material-ui/core/ButtonBase' {
   };
 
   /*
-   TODO: readme issue 1
+   TODO more info: README.md Issue 1
   ((props: { href: string } & OverrideProps<ExtendButtonBaseTypeMap<M>, 'a'>) => React$Node);
   */
   declare export type ExtendButtonBase<
@@ -2047,8 +2050,8 @@ declare module '@material-ui/core/Button/Button' {
 }
 
 declare module '@material-ui/core/BottomNavigationAction' {
-  import type { StandardProps } from '@material-ui/core/flow-types';
-  import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
+  import type { SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
+  import type { ExtendButtonBase } from '@material-ui/core/ButtonBase';
 
   declare export type BottomNavigationActionClassKey =
     | 'root'
@@ -2057,9 +2060,8 @@ declare module '@material-ui/core/BottomNavigationAction' {
     | 'wrapper'
     | 'label';
 
-  declare export type BottomNavigationActionProps = StandardProps<
-    BottomNavigationActionClassKey,
-    {
+  declare type BottomNavigationAction = ExtendButtonBase<{
+    props: {
       icon?: string | React$Element<any>,
       label?: React$Node,
       onChange?: (event: {}, value: mixed) => mixed,
@@ -2068,35 +2070,38 @@ declare module '@material-ui/core/BottomNavigationAction' {
       showLabel?: boolean,
       value?: mixed,
     },
-    ButtonBaseProps,
-    { onChange: any }
-  >;
+    defaultComponent: 'button',
+    classKey: BottomNavigationActionClassKey,
+  }>;
 
-  declare export default React$ComponentType<BottomNavigationActionProps>;
+  declare export type BottomNavigationActionProps = SimplifiedPropsOf<BottomNavigationAction>;
+
+  declare export default BottomNavigationAction;
 }
 declare module '@material-ui/core/BottomNavigationAction/BottomNavigationAction' {
   declare export * from '@material-ui/core/BottomNavigationAction'
 }
 
 declare module '@material-ui/core/CardActionArea' {
-  import type { StandardProps } from '@material-ui/core/flow-types';
-  import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
+  import type { SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
+  import type { ExtendButtonBase } from '@material-ui/core/ButtonBase';
 
   declare export type CardActionAreaClassKey =
     | 'root'
     | 'focusVisible'
     | 'focusHighlight';
 
-  declare export type CardActionAreaProps = StandardProps<
-    CardActionAreaClassKey,
-    {
+  declare type CardActionArea = ExtendButtonBase<{
+    props: {
       focusVisibleClassName?: string,
     },
-    ButtonBaseProps,
-    void
-  >;
+    defaultComponent: 'button',
+    classKey: CardActionAreaClassKey,
+  }>;
 
-  declare export default React$ComponentType<CardActionAreaProps>;
+  declare export type CardActionAreaProps = SimplifiedPropsOf<CardActionArea>;
+
+  declare export default CardActionArea;
 }
 declare module '@material-ui/core/CardActionArea/CardActionArea' {
   declare export * from '@material-ui/core/CardActionArea'
@@ -2241,6 +2246,7 @@ declare module '@material-ui/core/Chip' {
 
   declare export type ChipClassKey =
     | 'root'
+    | 'sizeSmall'
     | 'colorPrimary'
     | 'colorSecondary'
     | 'clickable'
@@ -2253,14 +2259,18 @@ declare module '@material-ui/core/Chip' {
     | 'outlinedPrimary'
     | 'outlinedSecondary'
     | 'avatar'
+    | 'avatarSmall'
     | 'avatarColorPrimary'
     | 'avatarColorSecondary'
     | 'avatarChildren'
     | 'icon'
+    | 'iconSmall'
     | 'iconColorPrimary'
     | 'iconColorSecondary'
     | 'label'
+    | 'labelSmall'
     | 'deleteIcon'
+    | 'deleteIconSmall'
     | 'deleteIconColorPrimary'
     | 'deleteIconColorSecondary'
     | 'deleteIconOutlinedColorPrimary'
@@ -2276,6 +2286,7 @@ declare module '@material-ui/core/Chip' {
       label?: React$Node,
       onDelete?: mixed => mixed,
       variant?: 'default' | 'outlined',
+      size?: 'small' | 'medium',
     },
     defaultComponent: 'div',
     classKey: ChipClassKey,
@@ -3237,9 +3248,9 @@ declare module '@material-ui/core/Checkbox/Checkbox' {
 }
 
 declare module '@material-ui/core/ExpansionPanelSummary' {
-  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
   import type { IconButtonProps } from '@material-ui/core/IconButton';
-  import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
+  import type { ExtendButtonBase } from '@material-ui/core/ButtonBase';
 
   declare export type ExpansionPanelSummaryClassKey =
     | 'root'
@@ -3249,19 +3260,20 @@ declare module '@material-ui/core/ExpansionPanelSummary' {
     | 'content'
     | 'expandIcon';
 
-  declare export type ExpansionPanelSummaryProps = StandardProps<
-    ExpansionPanelSummaryClassKey,
-    {
+  declare type ExpansionPanelSummary = ExtendButtonBase<{
+    props: {
       expanded?: boolean,
       expandIcon?: React$Node,
       IconButtonProps?: { ...IconButtonProps },
       onChange?: ({}) => mixed,
     },
-    ButtonBaseProps,
-    void
-  >;
+    defaultComponent: 'div',
+    classKey: ExpansionPanelSummaryClassKey,
+  }>;
 
-  declare export default React$ComponentType<ExpansionPanelSummaryProps>;
+  declare export type ExpansionPanelSummaryProps = SimplifiedPropsOf<ExpansionPanelSummary>;
+
+  declare export default ExpansionPanelSummary;
 }
 declare module '@material-ui/core/ExpansionPanelSummary/ExpansionPanelSummary' {
   declare export * from '@material-ui/core/ExpansionPanelSummary'
@@ -3514,10 +3526,11 @@ declare module '@material-ui/core/Link' {
 
   declare export type LinkClassKey =
     | 'root'
-    | 'underlineNone'
-    | 'underlineHover'
+    | 'button'
+    | 'focusVisible'
     | 'underlineAlways'
-    | 'button';
+    | 'underlineHover'
+    | 'underlineNone';
 
   declare type Link = OverridableComponent<{
     props: LinkBaseProps & {
@@ -3530,7 +3543,7 @@ declare module '@material-ui/core/Link' {
 
   declare export type LinkBaseProps = $Diff<
     TypographyProps,
-    { component: any }
+    { component: any, classes: any }
   > &
     HTMLAnchorAttributes;
 
@@ -3957,8 +3970,8 @@ declare module '@material-ui/core/SvgIcon/SvgIcon' {
 }
 
 declare module '@material-ui/core/TableSortLabel' {
-  import type { StandardProps } from '@material-ui/core/flow-types';
-  import type { ButtonBaseProps } from '@material-ui/core/ButtonBase';
+  import type { SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
+  import type { ExtendButtonBase } from '@material-ui/core/ButtonBase';
 
   declare export type TableSortLabelClassKey =
     | 'root'
@@ -3967,19 +3980,20 @@ declare module '@material-ui/core/TableSortLabel' {
     | 'iconDirectionDesc'
     | 'iconDirectionAsc';
 
-  declare export type TableSortLabelProps = StandardProps<
-    TableSortLabelClassKey,
-    {
+  declare type TableSortLabel = ExtendButtonBase<{
+    props: {
       active?: boolean,
       direction?: 'asc' | 'desc',
       hideSortIcon?: boolean,
       IconComponent?: React$ComponentType<any>,
     },
-    ButtonBaseProps,
-    void
-  >;
+    defaultComponent: 'span',
+    classKey: TableSortLabelClassKey,
+  }>;
 
-  declare export default React$ComponentType<TableSortLabelProps>;
+  declare export type TableSortLabelProps = SimplifiedPropsOf<TableSortLabel>;
+
+  declare export default TableSortLabel;
 }
 declare module '@material-ui/core/TableSortLabel/TableSortLabel' {
   declare export * from '@material-ui/core/TableSortLabel'

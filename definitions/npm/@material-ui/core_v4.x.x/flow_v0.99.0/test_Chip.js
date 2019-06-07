@@ -18,6 +18,7 @@ describe('classes', () => {
     <Chip
       classes={{
         root: 'str',
+        sizeSmall: 'str',
         colorPrimary: 'str',
         colorSecondary: 'str',
         clickable: 'str',
@@ -30,14 +31,18 @@ describe('classes', () => {
         outlinedPrimary: 'str',
         outlinedSecondary: 'str',
         avatar: 'str',
+        avatarSmall: 'str',
         avatarColorPrimary: 'str',
         avatarColorSecondary: 'str',
         avatarChildren: 'str',
         icon: 'str',
+        iconSmall: 'str',
         iconColorPrimary: 'str',
         iconColorSecondary: 'str',
         label: 'str',
+        labelSmall: 'str',
         deleteIcon: 'str',
+        deleteIconSmall: 'str',
         deleteIconColorPrimary: 'str',
         deleteIconColorSecondary: 'str',
         deleteIconOutlinedColorPrimary: 'str',
@@ -76,6 +81,7 @@ describe('own props', () => {
       label={[<i />, <i />]}
       onDelete={() => {}}
       variant={'default'}
+      size={'small'}
     />;
 
     <Chip onDelete={async () => {}} variant={'outlined'} />;
@@ -89,17 +95,18 @@ describe('own props', () => {
       label={undefined}
       onDelete={undefined}
       variant={undefined}
+      size={undefined}
     />;
   });
 
   it('should raises an error when pass incompatible types', () => {
     <Chip
+      // $ExpectError: invalid color
+      color={'__inherit'}
       // $ExpectError
       avatar={'need react element'}
       // $ExpectError
       clickable={'need boolean'}
-      // $ExpectError: invalid color
-      color={'primary__'}
       // $ExpectError
       deleteIcon={'need react element'}
       // $ExpectError
@@ -109,7 +116,9 @@ describe('own props', () => {
       // $ExpectError
       onDelete={'need function'}
       // $ExpectError: invalid variant
-      variant={'default__'}
+      variant={'__default'}
+      // $ExpectError: `__small` is missing in enum
+      size={'__small'}
     />;
   });
 });
