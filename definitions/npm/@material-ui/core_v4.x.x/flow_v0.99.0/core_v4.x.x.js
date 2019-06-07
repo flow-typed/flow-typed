@@ -4090,6 +4090,62 @@ declare module '@material-ui/core/TableBody/TableBody' {
   declare export * from '@material-ui/core/TableBody'
 }
 
+declare module '@material-ui/core/Popover' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { PaperProps } from '@material-ui/core/Paper';
+  import type { ModalProps } from '@material-ui/core/Modal';
+  import type {
+    TransitionHandlerProps,
+    TransitionProps,
+  } from '@material-ui/core/transitions/transition';
+
+  declare export type PopoverOrigin = {
+    horizontal: 'left' | 'center' | 'right' | number,
+    vertical: 'top' | 'center' | 'bottom' | number,
+  };
+
+  declare export type PopoverPosition = {
+    top: number,
+    left: number,
+  };
+  declare export type PopoverReference = 'anchorEl' | 'anchorPosition' | 'none';
+  declare export type PopoverActions = {
+    updatePosition(): void,
+  };
+
+  declare export type PopoverClassKey = 'paper';
+
+  declare export type PopoverProps = StandardProps<
+    PopoverClassKey,
+    {
+      action?: (actions: PopoverActions) => mixed,
+      anchorEl?: null | Element | ((element: Element) => Element),
+      anchorOrigin?: PopoverOrigin,
+      anchorPosition?: PopoverPosition,
+      anchorReference?: PopoverReference,
+      children?: React$Node,
+      elevation?: number,
+      getContentAnchorEl?: null | ((element: Element) => Element),
+      marginThreshold?: number,
+      modal?: boolean,
+      ModalClasses?: $ElementType<ModalProps<'div'>, 'classes'>,
+      PaperProps?: $Shape<PaperProps>,
+      role?: string,
+      transformOrigin?: PopoverOrigin,
+      TransitionComponent?: React$ElementType,
+      transitionDuration?: $ElementType<TransitionProps, 'timeout'> | 'auto',
+      TransitionProps?: TransitionProps,
+    },
+    ModalProps<'div'> & { ...TransitionHandlerProps },
+    { children: any }
+  >;
+
+  declare export default React$ComponentType<PopoverProps>;
+}
+declare module '@material-ui/core/Popover/Popover' {
+  declare export * from '@material-ui/core/Popover'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -4140,6 +4196,7 @@ declare module '@material-ui/core' {
   declare export { default as TableRow } from '@material-ui/core/TableRow';
   declare export { default as TableHead } from '@material-ui/core/TableHead';
   declare export { default as TableBody } from '@material-ui/core/TableBody';
+  declare export { default as Popover } from '@material-ui/core/Popover';
   declare export {
     default as TableFooter,
   } from '@material-ui/core/TableFooter';
