@@ -3,7 +3,7 @@
 import configureStore from 'redux-mock-store';
 
 // $ExpectError
-const mockStoreContainingInvalidMiddlware = configureStore(['middlewares']);
+const mockStoreContainingInvalidMiddleware = configureStore(['not a middleware']);
 
 const mockStore = configureStore();
 
