@@ -285,10 +285,22 @@ async function parseLibDefsFromPkgDir({
             testFilePaths.push(flowDirItemPath);
           }
         } else {
+          const isValidTestDir = path.basename(flowDirItemPath) === 'tests';
+          if (isValidTestDir) return;
           const error = 'Unexpected directory item: ' + flowDirItemPath;
           throw new ValidationError(error);
         }
       });
+
+      (await fs.readdir(path.join(flowDirPath, 'tests'))).forEach(
+        testFileItem => {
+          const flowDirItemPath = path.join(flowDirPath, 'tests', testFileItem);
+          const isValidTestFile = validateTestFile(flowDirItemPath);
+          if (isValidTestFile) {
+            testFilePaths.push(flowDirItemPath);
+          }
+        },
+      );
 
       if (libDefFilePath == null) {
         libDefFilePath = path.join(flowDirPath, libDefFileName);
