@@ -1241,7 +1241,7 @@ declare module "lodash" {
       predicate?: ?OPredicate<A, T>
     ): Object;
     omitBy<A, T>(object: void | null, predicate?: ?OPredicate<A, T>): {};
-    pick(object?: ?Object, ...props: string | $ReadOnlyArray<string>): Object;
+    pick(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
     pick(object?: ?Object, props: string | $ReadOnlyArray<string>): Object;
     pickBy<A, T: { [id: any]: A } | { [id: number]: A }>(
       object: T,
@@ -2943,7 +2943,7 @@ declare module "lodash/fp" {
       predicate: OPredicate<A>
     ): (object: T) => Object;
     omitBy<A, T: { [id: any]: A }>(predicate: OPredicate<A>, object: T): Object;
-    pick(...props: string | $ReadOnlyArray<string>): (object: Object) => Object;
+    pick(...props: $ReadOnlyArray<string>): (object: Object) => Object;
     pick(props: string | $ReadOnlyArray<string>, object: Object): Object;
     pickAll(props: Array<string>): (object: Object) => Object;
     pickAll(props: Array<string>, object: Object): Object;
