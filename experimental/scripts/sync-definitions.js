@@ -29,7 +29,8 @@ const flowVersion = require('../../cli/dist/lib/flowVersion');
  *            └── index.js
  */
 function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
-  glob.sync('**/!(test_)*.js', { cwd: srcDefinitionsRoot }).forEach(libdef => {
+  const versions = {};
+  glob.sync('**/!(test_)*.js', {cwd: srcDefinitionsRoot}).forEach(libdef => {
     const parts = libdef.split('/');
 
     // TODO: Figure out how to deal with scoped libdefs!
@@ -40,18 +41,18 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
     const [
       scopeName = '',
       libraryNameAndVersionRange,
-      flowVersionRange
+      flowVersionRange,
     ] = parts;
     const [libraryName, versionRange] = libraryNameAndVersionRange.split('_v');
     const libdefBase = path.join(
       srcDefinitionsRoot,
       scopeName,
-      libraryNameAndVersionRange
+      libraryNameAndVersionRange,
     );
     const tests = glob
-      .sync('**/test_*.js', { cwd: libdefBase })
+      .sync('**/test_*.js', {cwd: libdefBase})
       .filter(test =>
-        test.includes('/') ? test.startsWith(flowVersionRange) : true
+        test.includes('/') ? test.startsWith(flowVersionRange) : true,
       );
 
     // Create a dir like `experimental/definitions/yargs/yargs_v10.x.x/flow_v0.54.x-`.
@@ -60,25 +61,24 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
       scopeName,
       libraryName,
       libraryNameAndVersionRange,
-      flowVersionRange
+      flowVersionRange,
     );
-    const range = new semver.Range(versionRange);
-    const lowerVersion = range.set[0][0].semver.version;
-    mkdirp.sync(libDefDir);
     const packageName = `@flowtyped/${
       scopeName ? `${scopeName.substr(1)}__${libraryName}` : libraryName
     }`;
+    const range = new semver.Range(versionRange);
+    if (!versions[packageName + versionRange]) {
+      versions[packageName + versionRange] = range.set[0][0].semver.version;
+    } else {
+      versions[packageName + versionRange] = semver.inc(
+        versions[packageName + versionRange],
+        'patch',
+      );
+    }
+    const lowerVersion = versions[packageName + versionRange];
+    mkdirp.sync(libDefDir);
     const isLatest =
       flowVersionRange.endsWith('-') || flowVersionRange === 'flow_all';
-    // "peerDependencies": {
-    //   "flow-bin": "${
-    //     flowVersionRange === 'flow_all'
-    //       ? 'latest'
-    //       : flowVersion.toSemverString(
-    //           flowVersion.parseDirString(flowVersionRange)
-    //         )
-    //   }"
-    // },
     const packageJson = `{
   "name": "${packageName}",
   "version": "${lowerVersion}",
@@ -96,14 +96,14 @@ function copyLibdefs(srcDefinitionsRoot, destDefinitionsRoot) {
     fs.writeFileSync(path.join(libDefDir, 'package.json'), packageJson);
     fs.writeFileSync(
       path.join(libDefDir, 'index.js'),
-      fs.readFileSync(`${srcDefinitionsRoot}/${libdef}`).toString()
+      fs.readFileSync(`${srcDefinitionsRoot}/${libdef}`).toString(),
     );
     mkdirp.sync(path.join(libDefDir, 'tests'));
     tests.forEach(test => {
       const testParts = test.split('/');
       fs.writeFileSync(
         path.join(libDefDir, 'tests', testParts.pop()),
-        fs.readFileSync(`${libdefBase}/${test}`).toString()
+        fs.readFileSync(`${libdefBase}/${test}`).toString(),
       );
     });
   });
@@ -113,12 +113,12 @@ function main() {
   const projectRoot = path.dirname(require.resolve('../../package.json'));
   const browserDefinitionsRoot = path.resolve(
     projectRoot,
-    './definitions/browser'
+    './definitions/browser',
   );
   const npmDefinitionsRoot = path.resolve(projectRoot, './definitions/npm');
   const destDefinitionsRoot = path.resolve(
     projectRoot,
-    './experimental/definitions'
+    './experimental/definitions',
   );
 
   // Blow away the `experiments/definitions` dir. This is mainly to account for
