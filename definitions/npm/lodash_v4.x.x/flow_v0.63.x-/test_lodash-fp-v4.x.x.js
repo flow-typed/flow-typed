@@ -39,6 +39,7 @@ import noop from "lodash/fp/noop";
 import pipe from "lodash/fp/pipe";
 import compose from "lodash/fp/compose";
 import includes from "lodash/fp/includes";
+import pick from "lodash/fp/pick";
 
 filter("x", [{ x: 1 }, { x: 2 }]);
 filter("x")([{ x: 1 }, { x: 2 }]);
@@ -479,3 +480,12 @@ const composedResult: string[] = compose(
  * includes
  */
 includes("test")({ a: "test2", b: "test" });
+
+/**
+ * pick
+ */
+pick("a")({ a: 1, b: 2, c: 3});
+pick(["a", "b"])({ a: 1, b: 2, c: 3});
+
+// $ExpectError
+pick(1)({ a: 1});
