@@ -1125,7 +1125,7 @@ declare module '@material-ui/core/styles/makeStyles' {
   } from '@material-ui/core/styles/withStyles';
 
   declare export type StylesHook<S: Styles<*, *>> = (
-    props: PropsOfStyles<S>
+    props?: PropsOfStyles<S>
   ) => ClassNameMap<ClassKeyOfStyles<S>>;
 
   declare export default {
@@ -4292,6 +4292,19 @@ declare module '@material-ui/core/Popper' {
 }
 declare module '@material-ui/core/Popper/Popper' {
   declare export * from '@material-ui/core/Popper'
+}
+
+declare module '@material-ui/core/RootRef' {
+  declare export type RootRefProps<T> = {
+    rootRef?: React$Ref<T>,
+  };
+
+  declare export default class RootRef<T> extends React$Component<
+    RootRefProps<T>
+  > {}
+}
+declare module '@material-ui/core/RootRef/RootRef' {
+  declare export * from '@material-ui/core/RootRef'
 }
 
 ///////////////////////////////////////////////////////////////////////////////
