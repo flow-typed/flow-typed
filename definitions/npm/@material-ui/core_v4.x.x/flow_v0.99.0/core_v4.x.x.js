@@ -4307,6 +4307,116 @@ declare module '@material-ui/core/RootRef/RootRef' {
   declare export * from '@material-ui/core/RootRef'
 }
 
+declare module '@material-ui/core/Menu' {
+  import type { PopoverProps } from '@material-ui/core/Popover';
+  import type { MenuListProps } from '@material-ui/core/MenuList';
+  import type { PaperProps } from '@material-ui/core/Paper';
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type {
+    TransitionHandlerProps,
+    TransitionProps,
+  } from '@material-ui/core/transitions/transition';
+
+  declare export type MenuClassKey = 'paper';
+
+  declare export type MenuProps = StandardProps<
+    MenuClassKey,
+    {
+      disableAutoFocusItem?: boolean,
+      MenuListProps?: { ...MenuListProps },
+      PaperProps?: { ...PaperProps },
+      PopoverClasses?: $ElementType<PopoverProps, 'classes'>,
+      transitionDuration?: $ElementType<TransitionProps, 'timeout'> | 'auto',
+      variant?: 'menu' | 'selectedMenu',
+    },
+    PopoverProps & { ...TransitionHandlerProps },
+    void
+  >;
+
+  declare export default React$ComponentType<MenuProps>;
+}
+declare module '@material-ui/core/Menu/Menu' {
+  declare export * from '@material-ui/core/Menu'
+}
+
+declare module '@material-ui/core/Select/SelectInput' {
+  import type { MenuProps } from '@material-ui/core/Menu';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export interface SelectInputProps {
+    autoWidth: boolean;
+    value: mixed;
+
+    inputRef?: (
+      ref: HTMLSelectElement | { node: HTMLInputElement, value: mixed }
+    ) => void;
+    name?: string;
+    IconComponent?: React$ElementType;
+    MenuProps?: $Shape<MenuProps>;
+    onBlur?: ({}) => mixed;
+    onChange?: (event: {}, child: React$Node) => mixed;
+    onClose?: ({}) => mixed;
+    onFocus?: ({}) => mixed;
+    onOpen?: ({}) => mixed;
+    renderValue?: (value: mixed) => React$Node;
+    autoFocus?: boolean;
+    disabled?: boolean;
+    multiple: boolean;
+    native: boolean;
+    open?: boolean;
+    readOnly?: boolean;
+    tabIndex?: number;
+    variant?: 'standard' | 'outlined' | 'filled';
+    SelectDisplayProps?: HTMLDivAttributes;
+  }
+
+  declare export default React$ComponentType<SelectInputProps>;
+}
+declare module '@material-ui/core/Select' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { InputProps } from '@material-ui/core/Input';
+  import type { MenuProps } from '@material-ui/core/Menu';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type SelectClassKey =
+    | 'root'
+    | 'select'
+    | 'selectMenu'
+    | 'disabled'
+    | 'icon'
+    | 'filled'
+    | 'outlined';
+
+  declare export type SelectProps = StandardProps<
+    SelectClassKey,
+    {
+      value?: mixed,
+      variant?: 'standard' | 'outlined' | 'filled',
+
+      autoWidth?: boolean,
+      displayEmpty?: boolean,
+      multiple?: boolean,
+      native?: boolean,
+      open?: boolean,
+      input?: React$Node,
+      IconComponent?: React$ElementType,
+      MenuProps?: $Shape<MenuProps>,
+      SelectDisplayProps?: HTMLDivAttributes,
+      renderValue?: (value: mixed) => React$Node,
+      onClose?: (event: {}) => mixed,
+      onOpen?: (event: {}) => mixed,
+      onChange?: (event: {}, child: React$Node) => mixed,
+    },
+    InputProps,
+    { value: any, onChange: any }
+  >;
+
+  declare export default React$ComponentType<SelectProps>;
+}
+declare module '@material-ui/core/Select/Select' {
+  declare export * from '@material-ui/core/Select'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -4361,7 +4471,9 @@ declare module '@material-ui/core' {
   declare export { default as ListItem } from '@material-ui/core/ListItem';
   declare export { default as MenuList } from '@material-ui/core/MenuList';
   declare export { default as MenuItem } from '@material-ui/core/MenuItem';
+  declare export { default as Menu } from '@material-ui/core/Menu';
   declare export { default as Popper } from '@material-ui/core/Popper';
+  declare export { default as Select } from '@material-ui/core/Select';
   declare export {
     default as TableFooter,
   } from '@material-ui/core/TableFooter';
