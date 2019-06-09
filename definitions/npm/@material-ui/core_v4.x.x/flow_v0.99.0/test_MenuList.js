@@ -1,22 +1,21 @@
 //@flow
 import { it, describe } from 'flow-typed-test';
 import * as React from 'react';
-import { List } from '@material-ui/core';
-import type { ListProps } from '@material-ui/core/List';
+import { MenuList } from '@material-ui/core';
 
 describe('imports', () => {
   it('should passes when used properly', () => {
-    const List1 = require('@material-ui/core/List').default;
-    const List0 = require('@material-ui/core/List/List').default;
+    const MenuList1 = require('@material-ui/core/MenuList').default;
+    const MenuList0 = require('@material-ui/core/MenuList/MenuList').default;
 
-    <List1 />;
-    <List0 />;
+    <MenuList1 />;
+    <MenuList0 />;
   });
 });
 
 describe('classes', () => {
   it('should passes when used properly', () => {
-    <List
+    <MenuList
       classes={{
         root: 'str',
         padding: 'str',
@@ -27,7 +26,7 @@ describe('classes', () => {
   });
 
   it('should raises an error when pass not implemented prop to the classes property', () => {
-    <List
+    <MenuList
       // $ExpectError: the `classes` enum does not contain `murAmur` prop
       classes={{
         murAmur: 'custom-class-name',
@@ -36,7 +35,7 @@ describe('classes', () => {
   });
 
   it('should raises an error when pass incompatible with string value', () => {
-    <List
+    <MenuList
       classes={{
         // $ExpectError: need string value
         root: true,
@@ -47,15 +46,26 @@ describe('classes', () => {
 
 describe('own props', () => {
   it('should passes when used properly', () => {
-    <List
-      component={'a'}
-      dense={false}
-      disablePadding={false}
-      subheader={<i />}
-    />;
+    <MenuList disableListWrap={false} onKeyDown={async () => {}} />;
 
-    <List
-      component={undefined}
+    <MenuList disableListWrap={undefined} onKeyDown={undefined} />;
+  });
+
+  it('should raises an error when pass incompatible types', () => {
+    <MenuList
+      // $ExpectError
+      disableListWrap={'need boolean'}
+      // $ExpectError: need a function
+      onKeyDown={123}
+    />;
+  });
+});
+
+describe('inherited List props', () => {
+  it('should passes when used properly', () => {
+    <MenuList dense={false} disablePadding={false} subheader={<i />} />;
+
+    <MenuList
       dense={undefined}
       disablePadding={undefined}
       subheader={undefined}
@@ -63,9 +73,7 @@ describe('own props', () => {
   });
 
   it('should raises an error when pass incompatible types', () => {
-    <List
-      // $ExpectError: need a react component
-      component={123}
+    <MenuList
       // $ExpectError
       dense={'need boolean'}
       // $ExpectError
@@ -78,17 +86,6 @@ describe('own props', () => {
 
 describe('dom props', () => {
   it('should passes when pass some DOM props', () => {
-    <List aria-hidden="true" />;
-  });
-});
-
-describe('exported props', () => {
-  it('should not be any', () => {
-    declare var testProps: ListProps;
-
-    (testProps.dense: ?boolean);
-
-    // $ExpectError: check any
-    (testProps.dense: ?number);
+    <MenuList aria-hidden="true" />;
   });
 });

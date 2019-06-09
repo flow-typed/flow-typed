@@ -3569,7 +3569,7 @@ declare module '@material-ui/core/List' {
       disablePadding?: boolean,
       subheader?: React$Element<any>,
     },
-    defaultComponent: 'a',
+    defaultComponent: 'ul',
     classKey: ListClassKey,
   }>;
 
@@ -4147,7 +4147,10 @@ declare module '@material-ui/core/Popover/Popover' {
 }
 
 declare module '@material-ui/core/ListItem' {
-  import type { OverridableComponent, SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
 
   declare export type ListItemClassKey =
@@ -4186,6 +4189,31 @@ declare module '@material-ui/core/ListItem' {
 }
 declare module '@material-ui/core/ListItem/ListItem' {
   declare export * from '@material-ui/core/ListItem'
+}
+
+declare module '@material-ui/core/MenuList' {
+  import type { StandardProps } from '@material-ui/core/flow-types';
+  import type { ListClassKey, ListProps } from '@material-ui/core/List';
+
+  declare export type MenuListClassKey = ListClassKey;
+
+  declare export type MenuListProps = StandardProps<
+    MenuListClassKey,
+    {
+      disableListWrap?: boolean,
+      onKeyDown?: ({}) => mixed,
+    },
+    // TODO: hack to force inherit list props
+    { ...$Exact<ListProps> },
+    {
+      onKeyDown: any,
+    }
+  >;
+
+  declare export default React$ComponentType<MenuListProps>;
+}
+declare module '@material-ui/core/MenuList/MenuList' {
+  declare export * from '@material-ui/core/MenuList'
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -4240,6 +4268,7 @@ declare module '@material-ui/core' {
   declare export { default as TableBody } from '@material-ui/core/TableBody';
   declare export { default as Popover } from '@material-ui/core/Popover';
   declare export { default as ListItem } from '@material-ui/core/ListItem';
+  declare export { default as MenuList } from '@material-ui/core/MenuList';
   declare export {
     default as TableFooter,
   } from '@material-ui/core/TableFooter';
