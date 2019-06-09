@@ -4216,6 +4216,29 @@ declare module '@material-ui/core/MenuList/MenuList' {
   declare export * from '@material-ui/core/MenuList'
 }
 
+declare module '@material-ui/core/MenuItem' {
+  import type {
+    OverridableComponent,
+    SimplifiedPropsOf,
+  } from '@material-ui/core/OverridableComponent';
+  import type { ListItemProps } from '@material-ui/core/ListItem';
+
+  declare export type MenuItemClassKey = 'root' | 'gutters' | 'selected';
+
+  declare export type MenuItem = OverridableComponent<{
+    props: ListItemProps,
+    defaultComponent: 'li',
+    classKey: MenuItemClassKey,
+  }>;
+
+  declare export type MenuItemProps = SimplifiedPropsOf<MenuItem>;
+
+  declare export default MenuItem;
+}
+declare module '@material-ui/core/MenuItem/MenuItem' {
+  declare export * from '@material-ui/core/MenuItem'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -4269,6 +4292,7 @@ declare module '@material-ui/core' {
   declare export { default as Popover } from '@material-ui/core/Popover';
   declare export { default as ListItem } from '@material-ui/core/ListItem';
   declare export { default as MenuList } from '@material-ui/core/MenuList';
+  declare export { default as MenuItem } from '@material-ui/core/MenuItem';
   declare export {
     default as TableFooter,
   } from '@material-ui/core/TableFooter';
