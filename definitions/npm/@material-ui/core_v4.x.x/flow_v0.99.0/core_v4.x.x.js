@@ -4,6 +4,13 @@ declare module '@material-ui/core/@@utils' {
   // Currently the flow.js do not support `Pick` operator
   declare export type $$Pick<NamesMap, Obj> = $Diff<Obj, $Diff<Obj, NamesMap>>;
 }
+declare module '@material-ui/core/@@popper.js' {
+  declare export type ReferenceObject = {
+    clientHeight: number,
+    clientWidth: number,
+    getBoundingClientRect(): ClientRect,
+  };
+}
 declare module '@material-ui/core/@@JSS' {
   declare export type GenerateId = (rule: {}, sheet?: mixed) => string;
 
@@ -4239,6 +4246,54 @@ declare module '@material-ui/core/MenuItem/MenuItem' {
   declare export * from '@material-ui/core/MenuItem'
 }
 
+declare module '@material-ui/core/Popper' {
+  import type { ReferenceObject } from '@material-ui/core/@@popper.js';
+  import type { PortalProps } from '@material-ui/core/Portal';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+  import type { TransitionProps } from '@material-ui/core/transitions/transition';
+
+  declare export type PopperPlacementType =
+    | 'bottom-end'
+    | 'bottom-start'
+    | 'bottom'
+    | 'left-end'
+    | 'left-start'
+    | 'left'
+    | 'right-end'
+    | 'right-start'
+    | 'right'
+    | 'top-end'
+    | 'top-start'
+    | 'top';
+
+  declare export type PopperProps<Container> = {
+    open: boolean,
+    children:
+      | React$Node
+      | (({
+          placement: PopperPlacementType,
+          TransitionProps?: TransitionProps,
+        }) => React$Node),
+
+    transition?: boolean,
+    anchorEl?: null | Element | ReferenceObject | (() => Element),
+    // Copied from: container?: $ElementType<PortalProps<Container>, 'container'>,
+    container?: React$ElementRef<Container> | null,
+    disablePortal?: $ElementType<PortalProps<'div'>, 'disablePortal'>,
+    keepMounted?: boolean,
+    modifiers?: {},
+    placement?: PopperPlacementType,
+    popperOptions?: {},
+  } & HTMLDivAttributes;
+
+  declare export default class Popper<
+    Container: React$ElementType
+  > extends React$Component<PopperProps<Container>> {}
+}
+declare module '@material-ui/core/Popper/Popper' {
+  declare export * from '@material-ui/core/Popper'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -4293,6 +4348,7 @@ declare module '@material-ui/core' {
   declare export { default as ListItem } from '@material-ui/core/ListItem';
   declare export { default as MenuList } from '@material-ui/core/MenuList';
   declare export { default as MenuItem } from '@material-ui/core/MenuItem';
+  declare export { default as Popper } from '@material-ui/core/Popper';
   declare export {
     default as TableFooter,
   } from '@material-ui/core/TableFooter';
