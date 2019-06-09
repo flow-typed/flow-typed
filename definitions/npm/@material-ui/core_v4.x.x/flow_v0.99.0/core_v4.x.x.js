@@ -4146,6 +4146,48 @@ declare module '@material-ui/core/Popover/Popover' {
   declare export * from '@material-ui/core/Popover'
 }
 
+declare module '@material-ui/core/ListItem' {
+  import type { OverridableComponent, SimplifiedPropsOf } from '@material-ui/core/OverridableComponent';
+  import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
+
+  declare export type ListItemClassKey =
+    | 'root'
+    | 'container'
+    | 'focusVisible'
+    | 'default'
+    | 'dense'
+    | 'disabled'
+    | 'divider'
+    | 'gutters'
+    | 'button'
+    | 'secondaryAction'
+    | 'selected';
+
+  declare type ListItem = OverridableComponent<{
+    props: {
+      alignItems?: 'flex-start' | 'center',
+      button?: boolean,
+      ContainerComponent?: React$ElementType,
+      ContainerProps?: HTMLDivAttributes,
+      dense?: boolean,
+      disabled?: boolean,
+      disableGutters?: boolean,
+      divider?: boolean,
+      focusVisibleClassName?: string,
+      selected?: boolean,
+    },
+    defaultComponent: 'li',
+    classKey: ListItemClassKey,
+  }>;
+
+  declare export type ListItemProps = SimplifiedPropsOf<ListItem>;
+
+  declare export default ListItem;
+}
+declare module '@material-ui/core/ListItem/ListItem' {
+  declare export * from '@material-ui/core/ListItem'
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 declare module '@material-ui/core' {
@@ -4197,6 +4239,7 @@ declare module '@material-ui/core' {
   declare export { default as TableHead } from '@material-ui/core/TableHead';
   declare export { default as TableBody } from '@material-ui/core/TableBody';
   declare export { default as Popover } from '@material-ui/core/Popover';
+  declare export { default as ListItem } from '@material-ui/core/ListItem';
   declare export {
     default as TableFooter,
   } from '@material-ui/core/TableFooter';
