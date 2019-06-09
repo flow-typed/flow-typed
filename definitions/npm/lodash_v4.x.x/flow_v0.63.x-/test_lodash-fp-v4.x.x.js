@@ -484,8 +484,10 @@ includes("test")({ a: "test2", b: "test" });
 /**
  * pick
  */
-pick("a")({ a: 1, b: 2, c: 3});
-pick(["a", "b"])({ a: 1, b: 2, c: 3});
+pick({ a: 1, b, 2 }, 'a')
+pick({ a: 1, b, 2 }, 'a', 'b')
+pick({ a: 1, b, 2 }, ['a'])
+pick({ a: 1, b, 2 }, ['a', 'b'])
 
 // $ExpectError
 pick(1)({ a: 1});
