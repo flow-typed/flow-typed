@@ -484,10 +484,10 @@ includes("test")({ a: "test2", b: "test" });
 /**
  * pick
  */
-pick('a', { a: 1, b, 2 })
-pick('a', 'b', { a: 1, b, 2 })
-pick(['a'], { a: 1, b, 2 })
-pick(['a', 'b'], { a: 1, b, 2 })
+pick('a', { a: 1, b: 2 })
+pick('a', 'b', { a: 1, b: 2 })
+pick(['a'], { a: 1, b: 2 })
+pick(['a', 'b'], { a: 1, b: 2 })
 // Curried
 pick('a')
 pick('a', 'b')
