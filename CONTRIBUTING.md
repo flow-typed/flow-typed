@@ -249,7 +249,7 @@ Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the
 
 If the function does not mutate input values, always prefer immutable types.
 This is imporant since immutable types accepts mutable types in, but mutable types does not accept immutable types in, see [good example](https://flow.org/try/#0PTAEAEDMBsHsHcBQiAmBTAxtAhgJzaJAK4B2GALgJawmjloDO5AFJSQA5HkBcoAJACU02FAHkS0AJ4BBXLmySAPCSIBbAEZpcAPgCUvAG6xKKANzIMNJoVoBeUMzy5es+UpUate0Le2gA3oigoACQTgB0nAwAFswAjABMAMy6iCH0TI5yuuYAvohAA) and [bad example](https://flow.org/try/#0PTAEAEDMBsHsHcBQiAmBTAxtAhgJzaJAK4B2GALgJawmjloDO5AFJSQA5HkBcoAgrlzYAngB4SRALYAjNLgB8ASl4A3WJRQBuZBhpNCtALyhmeXLwAkAJTTYUAeRLRhAoWIky5S0IfmgA3ogAkPRMpoKK2gC+iEA)
-- Instead of `Array<string>` use `$readOnlyArray<string>`
+- Instead of `Array<string>` use `$ReadOnlyArray<string>`
 - Instead of `{ value: string }` prefer `{ +value: string }` [$ReadOnly<{ value: string }>](https://flow.org/en/docs/types/utilities/#toc-readonly)
 
 ### Prefer exactness
