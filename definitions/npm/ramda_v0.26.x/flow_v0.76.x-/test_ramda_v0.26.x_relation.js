@@ -2,8 +2,10 @@
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import { it, describe } from "flow-typed-test";
 import _, {
+  ascend,
   compose,
   curry,
+  descend,
   filter,
   find,
   gt,
@@ -11,7 +13,9 @@ import _, {
   lt,
   lte,
   pipe,
+  prop,
   repeat,
+  sort,
   zipWith,
 } from "ramda";
 
@@ -45,6 +49,50 @@ const diff2 = _.differenceWith(cmp, l1, l2);
 const eqb: boolean = _.eqBy(Math.abs, 5, -5);
 
 const es: boolean = _.equals([1, 2, 3], [1, 2, 3]);
+
+describe('ascend', () => {
+  /**
+   * In the examples for ascend, its result is plugged into sort. In order
+   * for this to function properly ascend needs to yield a function that can
+   * take two arguments.
+   */
+  it('works as an input to sort', () => {
+    const byAge = ascend(prop('age'));
+    const people = [
+      { name: 'Emma', age: 70 },
+      { name: 'Peter', age: 78 },
+      { name: 'Mikhail', age: 62 },
+    ];
+    const peopleByYoungestFirst = sort(byAge, people);
+  })
+
+  it('returns a curried function', () => {
+    const byAge = ascend(prop('age'))
+    byAge({ name: 'Emma', age: 70 })({ name: 'Peter', age: 78 })
+  })
+})
+
+describe('descend', () => {
+  /**
+   * In the examples for ascend, its result is plugged into sort. In order
+   * for this to function properly ascend needs to yield a function that can
+   * take two arguments.
+   */
+  it('works as an input to sort', () => {
+    const byAge = descend(prop('age'));
+    const people = [
+      { name: 'Emma', age: 70 },
+      { name: 'Peter', age: 78 },
+      { name: 'Mikhail', age: 62 },
+    ];
+    const peopleByYoungestFirst = sort(byAge, people);
+  })
+
+  it('returns a curried function', () => {
+    const byAge = descend(prop('age'))
+    byAge({ name: 'Emma', age: 70 })({ name: 'Peter', age: 78 })
+  })
+})
 
 describe('gt', () => {
   it('works with two numbers and produces a bool', () => {
@@ -240,7 +288,7 @@ const ascName = (l, r) => l.name < r.name ? -1 : 1;
 _.sortWith([descAge, ascName], sortWithData);
 _.sortWith([descAge, ascName])(sortWithData);
 
-const eqA = _.eqBy(_.prop("a"));
+const eqA = _.eqBy(prop("a"));
 const ls1: Array<{ [k: string]: number }> = [
   { a: 1 },
   { a: 2 },
