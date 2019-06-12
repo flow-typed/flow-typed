@@ -920,20 +920,21 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     zIndex?: ZIndexOptions,
   |};
 
-  declare export type Theme = {|
-    shape: Shape,
+  declare export type Theme = {
     breakpoints: Breakpoints,
     direction: Direction,
     mixins: Mixins,
-    overrides?: Overrides,
     palette: Palette,
-    props?: ComponentsProps,
     shadows: Shadows,
+    shape: Shape,
     spacing: Spacing,
     transitions: Transitions,
     typography: Typography,
     zIndex: ZIndex,
-  |};
+
+    overrides?: Overrides,
+    props?: ComponentsProps,
+  };
 
   declare export default (options?: ThemeOptions) => Theme;
 }
@@ -1116,23 +1117,41 @@ declare module '@material-ui/core/styles/createTypography' {
   ) => Typography;
 }
 declare module '@material-ui/core/styles/makeStyles' {
-  import type {
-    ClassKeyOfStyles,
-    ClassNameMap,
-    PropsOfStyles,
-    Styles,
-    WithStylesOptions,
-  } from '@material-ui/core/styles/withStyles';
+  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
+  import type { StyleRules } from '@material-ui/core/styles/withStyles';
 
-  declare export type StylesHook<S: Styles<*, *>> = (
-    props?: PropsOfStyles<S>
-  ) => ClassNameMap<ClassKeyOfStyles<S>>;
+  declare export type StylesHook<Props, Stl> = (
+    props?: { +classes?: { [$Keys<Stl>]: string } } & Props
+  ) => $ObjMap<Stl, () => string>;
+
+  declare export type MakeStylesOptions = {|
+    flip?: boolean,
+    name?: string,
+    defaultTheme?: Theme,
+  |};
 
   declare export default {
-    <Theme: mixed, Props: {}, ClassKey: string>(
-      styles: Styles<Theme, Props, ClassKey>,
-      options?: WithStylesOptions<Theme>
-    ): StylesHook<Styles<Theme, Props, ClassKey>>,
+    <Props: {}, Thm: Theme, Stl: StyleRules<Props, string>>(
+      callback: (theme: Thm) => Stl,
+      ...rest: Array<empty>
+    ): StylesHook<Props, Stl>,
+
+    <Props: {}, Thm: Theme, Stl: StyleRules<Props, string>>(
+      callback: (theme: Thm) => Stl,
+      options: MakeStylesOptions,
+      ...rest: Array<empty>
+    ): StylesHook<Props, Stl>,
+
+    <Props: {}, Stl: StyleRules<Props, string>>(
+      styles: Stl,
+      ...rest: Array<empty>
+    ): StylesHook<Props, Stl>,
+
+    <Props: {}, Stl: StyleRules<Props, string>>(
+      styles: Stl,
+      options: MakeStylesOptions,
+      ...rest: Array<empty>
+    ): StylesHook<Props, Stl>,
   };
 }
 declare module '@material-ui/core/styles/overrides' {
@@ -1171,7 +1190,7 @@ declare module '@material-ui/core/styles/shadows' {
     string,
     string,
     string,
-    string,
+    string
   ];
 
   declare export default Shadows;
@@ -1195,41 +1214,30 @@ declare module '@material-ui/core/styles/useTheme' {
 declare module '@material-ui/core/styles/withStyles' {
   import type { StyleSheetFactoryOptions } from '@material-ui/core/@@JSS';
   import type { CSS$Properties } from '@material-ui/core/@@dom';
-  import type { Theme } from '@material-ui/core/styles/createMuiTheme';
 
   declare export type CSSProperties = CSS$Properties;
 
-  declare export type StyleRules<ClassKey: string> = {
-    [ClassKey]: CSSProperties,
+  declare export type StyleRules<Props, ClassKey> = {
+    // TODO: remove `$Shape`, README.md Issue 3
+    +[ClassKey]: /*((props: Props) => {}) | */$Shape<CSSProperties>,
   };
 
-  declare export type StyleRulesCallback<ClassKey: string> = (
+  declare export type StyleRulesCallback<Theme, Props, ClassKey> = (
     theme: Theme
-  ) => StyleRules<ClassKey>;
+  ) => StyleRules<Props, ClassKey>;
 
-  declare export type Styles<ClassKey: string> =
-    | StyleRules<ClassKey>
-    | StyleRulesCallback<ClassKey>;
-
-  declare type _PropsOfStyles<Props: {}, S: Styles<any, Props, any>> = Props;
-  declare type _ClassKeyOfStyles<
-    ClassKey: string,
-    S: Styles<any, any, ClassKey>
-  > = ClassKey;
-
-  declare export type PropsOfStyles<S: Styles<*, *, *>> = _PropsOfStyles<*, S>;
-  declare export type ClassKeyOfStyles<S: Styles<*, *, *>> = _ClassKeyOfStyles<
-    *
-  >;
+  declare export type Styles<Theme, Props, ClassKey> =
+    | StyleRules<Props, ClassKey>
+    | StyleRulesCallback<Theme, Props, ClassKey>;
 
   declare export type WithStylesOptions = StyleSheetFactoryOptions & {
     flip?: boolean,
     name?: string,
   };
 
-  declare export type ClassNameMap<Keys: string> = { [Keys]: string };
+  declare export type ClassNameMap<Keys> = { [Keys]: string };
 
-  declare export type StyledComponentProps<ClassesKeys: string> = {
+  declare export type StyledComponentProps<ClassesKeys> = {
     classes?: ClassNameMap<ClassesKeys>,
     innerRef?: React$Ref<any>,
   };
@@ -1300,7 +1308,6 @@ declare module '@material-ui/core/styles/MuiThemeProvider' {
 declare module '@material-ui/core/styles' {
   declare export * from '@material-ui/core/styles/colorManipulator'
   declare export {
-    default as createMuiTheme,
     Theme,
     Direction,
   } from '@material-ui/core/styles/createMuiTheme';
@@ -1310,29 +1317,16 @@ declare module '@material-ui/core/styles' {
     SimplePaletteColorOptions,
   } from '@material-ui/core/styles/createPalette';
   declare export {
-    default as createStyles,
-  } from '@material-ui/core/styles/createStyles';
-  declare export {
     TypographyStyle,
   } from '@material-ui/core/styles/createTypography';
-  declare export {
-    default as makeStyles,
-  } from '@material-ui/core/styles/makeStyles';
   declare export { ComponentsPropsList } from '@material-ui/core/styles/props';
   declare export * from '@material-ui/core/styles/transitions'
   declare export {
-    default as useTheme,
-  } from '@material-ui/core/styles/useTheme';
-  declare export {
-    default as withStyles,
     StyleRules,
     StyleRulesCallback,
     StyledComponentProps,
   } from '@material-ui/core/styles/withStyles';
-  declare export {
-    default as withTheme,
-    WithTheme,
-  } from '@material-ui/core/styles/withTheme';
+  declare export { WithTheme } from '@material-ui/core/styles/withTheme';
   declare export {
     default as MuiThemeProvider,
   } from '@material-ui/core/styles/MuiThemeProvider';
@@ -4591,4 +4585,24 @@ declare module '@material-ui/core' {
   declare export {
     default as BottomNavigation,
   } from '@material-ui/core/BottomNavigation';
+
+  // TODO more info: README.md Issue 2
+  declare export {
+    default as createMuiTheme,
+  } from '@material-ui/core/styles/createMuiTheme';
+  declare export {
+    default as createStyles,
+  } from '@material-ui/core/styles/createStyles';
+  declare export {
+    default as makeStyles,
+  } from '@material-ui/core/styles/makeStyles';
+  declare export {
+    default as withStyles,
+  } from '@material-ui/core/styles/withStyles';
+  declare export {
+    default as useTheme,
+  } from '@material-ui/core/styles/useTheme';
+  declare export {
+    default as withTheme,
+  } from '@material-ui/core/styles/withTheme';
 }

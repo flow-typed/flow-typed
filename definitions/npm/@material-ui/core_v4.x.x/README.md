@@ -19,7 +19,7 @@ you can describe them in a `HTMLImageAttributes` type and all components inherit
 
 ### Third-party modules
 
-The following modules are used as an abstraction 
+The following modules are used as an abstraction
 to resolve a problem with [dependencies between library definitions](https://github.com/flow-typed/flow-typed/issues/1857).
 
 I copied only the necessary parts of the types.
@@ -53,3 +53,32 @@ const MyButton = (props: MyButtonProps) => <i />;
   abcd={1} // need error
 />;
 ```
+
+## №2 Duplicate export
+
+How we can see in example next flow.js [restricts the use of imports](https://github.com/facebook/flow/issues/7810)
+
+```js
+declare module 'module/scope/element'{
+	declare export default () => number;
+}
+
+declare module 'module/scope'{
+	declare export {default as element} from 'module/scope/element';
+}
+
+declare module 'module'{
+	declare export {element} from 'module/scope'; // Error: Duplicate export for `element`
+}
+```
+
+## №3 Function is Object
+
+The flow [cannot distinguish](https://github.com/facebook/flow/issues/7831) the function from the object
+
+```js
+type Obj = { [string]: {} };
+
+const test: Obj = () => {}; // no any error
+```
+
