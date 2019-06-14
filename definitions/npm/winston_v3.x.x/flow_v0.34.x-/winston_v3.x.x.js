@@ -63,11 +63,17 @@ declare type $winstonLogger<T: $winstonLevels> = {
 declare type $winstonConfigSubModule = {
   npm: () => $winstonNpmLogLevels
 };
+  
+declare type $winstonFormatJsonOptions = {
+  replacer?: (key: string, value: any) => any,
+  space?: number,
+  stable?: boolean
+};
 
 declare type $winstonFormatSubModule = {
   ((info: Object) => Object): () => $winstonFormat,
   combine: (...args: Array<$winstonFormat>) => $winstonFormat,
-  json: () => $winstonFormat,
+  json: (options?: $winstonFormatJsonOptions) => $winstonFormat,
   label: (config?: Object) => $winstonFormat,
   metadata: () => $winstonFormat,
   prettyPrint: () => $winstonFormat,
