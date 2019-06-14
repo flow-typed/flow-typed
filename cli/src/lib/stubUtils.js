@@ -1,6 +1,7 @@
 /* @flow */
 
 import colors from 'colors/safe';
+import got from 'got';
 import flowgen from 'flowgen';
 import prettier from 'prettier';
 import {determineFlowVersion} from './npm/npmProjectUtils';
@@ -199,14 +200,15 @@ async function writeStub(
   libdefDir: string,
   maxDepth?: number,
   typescriptTypingsPath?: string | null,
+  typescriptTypingsContent?: string | null,
 ): Promise<string> {
   let flowgenOutput = null;
-  if (typescriptTypingsPath) {
-    const flowgenTemplate = `
+  const flowgenTemplate = `
 declare module '%s' {
   %s
 }
 `.trim();
+  if (typescriptTypingsPath) {
     const code = flowgen.compiler.compileDefinitionFile(typescriptTypingsPath);
     try {
       flowgenOutput = prettier.format(
@@ -224,6 +226,32 @@ declare module '%s' {
           singleQuote: true,
           semi: true,
         });
+      } else {
+        flowgenOutput = format(flowgenTemplate, packageName, code);
+      }
+    }
+  } else if (typescriptTypingsContent) {
+    const code = flowgen.compiler.compileDefinitionString(
+      typescriptTypingsContent,
+    );
+    try {
+      flowgenOutput = prettier.format(
+        format(flowgenTemplate, packageName, code),
+        {parser: 'babel-flow', singleQuote: true, semi: true},
+      );
+    } catch (e) {
+      if (
+        e.message.includes(
+          '`declare module` cannot be used inside another `declare module`',
+        )
+      ) {
+        flowgenOutput = prettier.format(code, {
+          parser: 'babel-flow',
+          singleQuote: true,
+          semi: true,
+        });
+      } else {
+        flowgenOutput = format(flowgenTemplate, packageName, code);
       }
     }
   }
@@ -329,6 +357,19 @@ export async function pkgHasFlowFiles(
   return files.length > 0;
 }
 
+async function getDefinitelyTypedPackage(
+  packageName: string,
+  explicitVersion: string | null,
+) {
+  const parts = packageName.split('/');
+  const typesPackageName = packageName.startsWith('@')
+    ? parts[0].slice(1) + '__' + parts[1]
+    : packageName;
+  const version = explicitVersion ? `@${explicitVersion}` : '';
+  const typing = `https://unpkg.com/@types/${typesPackageName}${version}/index.d.ts`;
+  return got(typing, {method: 'GET'});
+}
+
 /**
  * createStub("/path/to/root", "foo") will create a file
  * /path/to/root/flow-typed/npm/foo.js that contains a stub for the module foo.
@@ -350,6 +391,7 @@ export async function createStub(
   let pathToPackage = null;
   let version = explicitVersion || null;
   let typescriptTypingsPath = null;
+  let typescriptTypingsContent = null;
 
   const typedefDir = libdefDir || 'flow-typed';
 
@@ -397,6 +439,14 @@ export async function createStub(
         }
       }
     }
+
+    if (typescriptTypingsPath == null) {
+      const response = await getDefinitelyTypedPackage(
+        packageName,
+        explicitVersion,
+      );
+      typescriptTypingsContent = response.body;
+    }
   }
 
   // If that failed, try looking for a package.json in the root
@@ -428,6 +478,7 @@ export async function createStub(
       typedefDir,
       maxDepth,
       typescriptTypingsPath,
+      typescriptTypingsContent,
     );
     const terseFilename = path.relative(projectRoot, filename);
     console.log(
