@@ -3,9 +3,9 @@
 export const name = 'create-stub';
 export const description = 'Create a libdef stub for an untyped npm package';
 
-import { createStub } from '../lib/stubUtils.js';
-import { findFlowRoot } from '../lib/flowProjectUtils.js';
-import { path } from '../lib/node';
+import {createStub} from '../lib/stubUtils.js';
+import {findFlowRoot} from '../lib/flowProjectUtils.js';
+import {path} from '../lib/node';
 
 export function setup(yargs: Object) {
   return yargs
@@ -69,7 +69,7 @@ function failWithMessage(message: string) {
 export async function run(args: Args): Promise<number> {
   if (!Array.isArray(args._) || args._.length < 2) {
     return failWithMessage(
-      'Please provide the names of one or more npm packages'
+      'Please provide the names of one or more npm packages',
     );
   }
   const packages = args._.slice(1);
@@ -83,7 +83,7 @@ export async function run(args: Args): Promise<number> {
   if (projectRoot == null) {
     return failWithMessage(
       `\nERROR: Unable to find a flow project in the current dir or any of ` +
-        `it's parents!\nPlease run this command from within a Flow project.`
+        `it's parents!\nPlease run this command from within a Flow project.`,
     );
   }
 
@@ -117,9 +117,9 @@ export async function run(args: Args): Promise<number> {
         Boolean(args.overwrite),
         Boolean(args.typescript),
         String(args.libdefDir),
-        Number(args.maxDepth)
+        Number(args.maxDepth),
       );
-    })
+    }),
   );
 
   return results.every(Boolean) ? 0 : 1;
