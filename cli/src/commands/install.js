@@ -430,6 +430,7 @@ async function installNpmLibDefs({
             pkgName,
             pkgVerStr,
             overwrite,
+            /* typescript */ false,
             libdefDir,
           );
         }),

@@ -3,9 +3,9 @@
 export const name = 'create-stub';
 export const description = 'Create a libdef stub for an untyped npm package';
 
-import {createStub} from '../lib/stubUtils.js';
-import {findFlowRoot} from '../lib/flowProjectUtils.js';
-import {path} from '../lib/node';
+import { createStub } from '../lib/stubUtils.js';
+import { findFlowRoot } from '../lib/flowProjectUtils.js';
+import { path } from '../lib/node';
 
 export function setup(yargs: Object) {
   return yargs
@@ -17,6 +17,13 @@ export function setup(yargs: Object) {
         describe:
           'Overwrite an existing stub if it is already present in the ' +
           '`flow-typed` directory and has been modified',
+        type: 'bool',
+        demand: false,
+      },
+      typescript: {
+        default: false,
+        alias: 't',
+        describe: 'Generate libdef from TypeScript definitions',
         type: 'bool',
         demand: false,
       },
@@ -41,11 +48,13 @@ export function setup(yargs: Object) {
     })
     .example('$0 create-stub foo@^1.2.0')
     .example('$0 create-stub foo bar baz')
-    .help('h');
+    .help('h')
+    .alias('h', 'help');
 }
 
 type Args = {
   overwrite: mixed, // boolean
+  typescript: mixed, // boolean
   maxDepth?: mixed, // number
   libdefDir?: mixed, // string
   _: Array<string>,
@@ -60,7 +69,7 @@ function failWithMessage(message: string) {
 export async function run(args: Args): Promise<number> {
   if (!Array.isArray(args._) || args._.length < 2) {
     return failWithMessage(
-      'Please provide the names of one or more npm packages',
+      'Please provide the names of one or more npm packages'
     );
   }
   const packages = args._.slice(1);
@@ -74,7 +83,7 @@ export async function run(args: Args): Promise<number> {
   if (projectRoot == null) {
     return failWithMessage(
       `\nERROR: Unable to find a flow project in the current dir or any of ` +
-        `it's parents!\nPlease run this command from within a Flow project.`,
+        `it's parents!\nPlease run this command from within a Flow project.`
     );
   }
 
@@ -106,10 +115,11 @@ export async function run(args: Args): Promise<number> {
         packageName,
         version,
         Boolean(args.overwrite),
+        Boolean(args.typescript),
         String(args.libdefDir),
-        Number(args.maxDepth),
+        Number(args.maxDepth)
       );
-    }),
+    })
   );
 
   return results.every(Boolean) ? 0 : 1;
