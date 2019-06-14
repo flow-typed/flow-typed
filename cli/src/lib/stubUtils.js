@@ -208,10 +208,24 @@ declare module '%s' {
 }
 `.trim();
     const code = flowgen.compiler.compileDefinitionFile(typescriptTypingsPath);
-    flowgenOutput = prettier.format(
-      format(flowgenTemplate, packageName, code),
-      {parser: 'babel-flow', singleQuote: true, semi: true},
-    );
+    try {
+      flowgenOutput = prettier.format(
+        format(flowgenTemplate, packageName, code),
+        {parser: 'babel-flow', singleQuote: true, semi: true},
+      );
+    } catch (e) {
+      if (
+        e.message.includes(
+          '`declare module` cannot be used inside another `declare module`',
+        )
+      ) {
+        flowgenOutput = prettier.format(code, {
+          parser: 'babel-flow',
+          singleQuote: true,
+          semi: true,
+        });
+      }
+    }
   }
   let output = [
     '/**',
