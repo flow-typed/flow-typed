@@ -152,7 +152,9 @@ declare module "react-router-dom" {
     location?: Location
   |}>
 
-  declare export function withRouter<Props : {}, Component: React$ComponentType<Props>>(WrappedComponent: Component) : React$ComponentType<$Diff<React$ElementConfig<$Supertype<Component>>, ContextRouterVoid>>;
+  declare export function withRouter<Props: {}, Component: React$ComponentType<Props>>(
+    WrappedComponent: Component
+  ): React$ComponentType<$Diff<React$ElementConfig<Component>, ContextRouterVoid>>;
 
   declare type MatchPathOptions = {
     path?: string,
