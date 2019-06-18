@@ -343,7 +343,7 @@ export function parseRepoDirItem(dirItemPath: string) {
   const item = path
     .dirname(dirItemPath)
     .split(path.sep)
-    .pop();
+    .splice(-2, 2)[0];
   if (item.charAt(0) === '@') {
     pkgName = `${item}${path.sep}${pkgName}`;
   }
