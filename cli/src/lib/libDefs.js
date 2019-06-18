@@ -343,7 +343,7 @@ export function parseRepoDirItem(dirItemPath: string) {
   const item = path
     .dirname(dirItemPath)
     .split(path.sep)
-    .pop();
+    .splice(-2, 2)[0];
   if (item.charAt(0) === '@') {
     pkgName = `${item}${path.sep}${pkgName}`;
   }
@@ -531,9 +531,8 @@ export function filterLibDefs(
 
         default:
           throw new Error(
-            `'${
-              filter.type
-            }' is an unexpected filter type! This should never ` + `happen!`,
+            `'${filter.type}' is an unexpected filter type! This should never ` +
+              `happen!`,
           );
       }
 
