@@ -187,15 +187,15 @@ declare module 'koa' {
   };
   // https://github.com/pillarjs/cookies
   declare type CookiesSetOptions = {
-    maxAge: number, // milliseconds from Date.now() for expiry
-    expires: Date, //cookie's expiration date (expires at the end of session by default).
-    path: string, //  the path of the cookie (/ by default).
-    domain: string, // domain of the cookie (no default).
-    secure: boolean, // false by default for HTTP, true by default for HTTPS
-    httpOnly: boolean, //  a boolean indicating whether the cookie is only to be sent over HTTP(S),
+    maxAge?: number, // milliseconds from Date.now() for expiry
+    expires?: Date, //cookie's expiration date (expires at the end of session by default).
+    path?: string, //  the path of the cookie (/ by default).
+    domain?: string, // domain of the cookie (no default).
+    secure?: boolean, // false by default for HTTP, true by default for HTTPS
+    httpOnly?: boolean, //  a boolean indicating whether the cookie is only to be sent over HTTP(S),
     // and not made available to client JavaScript (true by default).
-    signed: boolean, // whether the cookie is to be signed (false by default)
-    overwrite: boolean, //  whether to overwrite previously set cookies of the same name (false by default).
+    signed?: boolean, // whether the cookie is to be signed (false by default)
+    overwrite?: boolean, //  whether to overwrite previously set cookies of the same name (false by default).
   };
   declare type Cookies = {
     get: (name: string, options: {signed: boolean}) => string|void,
