@@ -53,6 +53,7 @@ type TestGroup = {
  * structs. Each TestGroup represents a Package/PackageVersion/FlowVersion
  * directory.
  */
+// TODO: use experimental directory
 const basePathRegex = new RegExp('definitions/npm/(@[^/]*/)?[^/]*/?');
 async function getTestGroups(
   repoDirPath,
@@ -75,9 +76,7 @@ async function getTestGroups(
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
   return libDefs.map(libDef => {
-    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${
-      libDef.flowVersionStr
-    }`;
+    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
     return {
       id: groupID,
       testFilePaths: libDef.testFilePaths,
@@ -522,9 +521,7 @@ async function runTestGroup(
     );
 
     if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
-      console.log(`Tests for ${
-        testGroup.id
-      } ran successfully on flow ${lowestCapableFlowVersion}.
+      console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
         Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
     }
 
