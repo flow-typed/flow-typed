@@ -8,7 +8,7 @@ describe('url-join_v4.x.x', () => {
     urlJoin("a", "b");
   });
 
-  it('should succeed fail with invalid values', () => {
+  it('should fail with invalid values', () => {
     // $ExpectError
     urlJoin({});
     // $ExpectError
