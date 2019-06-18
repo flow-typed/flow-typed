@@ -1,10 +1,17 @@
 /* @flow */
-import urlJoin from "url-join";
+import { describe, it } from 'flow-typed-test';
+import urlJoin from 'url-join';
 
-urlJoin("a");
-urlJoin("a", "b");
+describe('url-join_v4.x.x', () => {
+  it('should succeed with valid values', () => {
+    urlJoin("a");
+    urlJoin("a", "b");
+  });
 
-// $ExpectError
-urlJoin({});
-// $ExpectError
-urlJoin("a", {});
+  it('should succeed fail with invalid values', () => {
+    // $ExpectError
+    urlJoin({});
+    // $ExpectError
+    urlJoin("a", {});
+  });
+});
