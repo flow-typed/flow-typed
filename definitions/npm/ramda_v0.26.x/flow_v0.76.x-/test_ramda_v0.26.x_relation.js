@@ -74,8 +74,8 @@ describe('ascend', () => {
 
 describe('descend', () => {
   /**
-   * In the examples for ascend, its result is plugged into sort. In order
-   * for this to function properly ascend needs to yield a function that can
+   * In the examples for descend, its result is plugged into sort. In order
+   * for this to function properly descend needs to yield a function that can
    * take two arguments.
    */
   it('works as an input to sort', () => {
