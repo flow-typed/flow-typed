@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/expo-image-picker",
+  "version": "4.0.0",
+  "flowVersion": "flow_v0.69.0-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

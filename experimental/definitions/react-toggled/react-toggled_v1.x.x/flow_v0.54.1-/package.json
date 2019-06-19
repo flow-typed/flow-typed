@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-toggled",
+  "version": "1.0.0",
+  "flowVersion": "flow_v0.54.1-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/grommet",
+  "version": "1.1.1",
+  "flowVersion": "flow_v0.71.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

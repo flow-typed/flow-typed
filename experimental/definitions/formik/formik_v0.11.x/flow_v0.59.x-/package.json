@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/formik",
+  "version": "0.11.0",
+  "flowVersion": "flow_v0.59.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

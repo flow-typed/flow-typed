@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/awilix",
+  "version": "2.0.0",
+  "flowVersion": "flow_v0.56.x-v0.70.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.56.x-v0.70.x"
+  }
+}

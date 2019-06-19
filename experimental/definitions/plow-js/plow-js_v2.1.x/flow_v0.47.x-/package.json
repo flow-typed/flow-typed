@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/plow-js",
+  "version": "2.1.0",
+  "flowVersion": "flow_v0.47.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

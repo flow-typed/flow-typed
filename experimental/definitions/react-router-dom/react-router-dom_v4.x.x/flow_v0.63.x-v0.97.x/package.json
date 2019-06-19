@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-router-dom",
+  "version": "4.0.2",
+  "flowVersion": "flow_v0.63.x-v0.97.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.63.x-v0.97.x"
+  }
+}

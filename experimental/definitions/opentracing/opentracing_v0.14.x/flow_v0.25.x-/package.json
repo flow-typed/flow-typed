@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/opentracing",
+  "version": "0.14.0",
+  "flowVersion": "flow_v0.25.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

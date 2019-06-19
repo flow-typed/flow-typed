@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-i18next",
+  "version": "2.0.0",
+  "flowVersion": "flow_v0.30.x-v0.39.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.30.x-v0.39.x"
+  }
+}

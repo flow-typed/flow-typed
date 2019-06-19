@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/create-react-class",
+  "version": "15.0.0",
+  "flowVersion": "flow_v0.41.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

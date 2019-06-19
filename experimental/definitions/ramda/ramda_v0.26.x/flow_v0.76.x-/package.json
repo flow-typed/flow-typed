@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/ramda",
+  "version": "0.26.0",
+  "flowVersion": "flow_v0.76.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

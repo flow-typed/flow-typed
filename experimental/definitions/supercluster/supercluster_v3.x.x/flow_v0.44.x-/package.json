@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/supercluster",
+  "version": "3.0.0",
+  "flowVersion": "flow_v0.44.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

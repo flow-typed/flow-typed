@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/prosemirror-model",
+  "version": "1.0.0",
+  "flowVersion": "flow_v0.59.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

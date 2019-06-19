@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/is-plain-object",
+  "version": "2.0.0",
+  "flowVersion": "flow_v0.25.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

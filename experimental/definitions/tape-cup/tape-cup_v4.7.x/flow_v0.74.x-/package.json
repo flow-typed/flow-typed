@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/tape-cup",
+  "version": "4.7.0",
+  "flowVersion": "flow_v0.74.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

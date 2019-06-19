@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/koa",
+  "version": "2.0.4",
+  "flowVersion": "flow_v0.94.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

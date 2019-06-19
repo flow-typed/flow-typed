@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-native-auth0",
+  "version": "1.0.0",
+  "flowVersion": "flow_v0.69.0-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}
