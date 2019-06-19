@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/icepick",
+  "version": "1.0.0",
+  "flowVersion": "flow_v0.47.x-v0.71.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.47.x-v0.71.x"
+  }
+}

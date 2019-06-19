@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/re-reselect",
+  "version": "2.0.0",
+  "flowVersion": "flow_v0.67.1-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

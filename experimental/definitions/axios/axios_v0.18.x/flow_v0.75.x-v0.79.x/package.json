@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/axios",
+  "version": "0.18.1",
+  "flowVersion": "flow_v0.75.x-v0.79.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.75.x-v0.79.x"
+  }
+}

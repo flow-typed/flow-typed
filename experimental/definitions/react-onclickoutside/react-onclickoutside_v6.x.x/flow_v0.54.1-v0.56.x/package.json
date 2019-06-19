@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-onclickoutside",
+  "version": "6.0.0",
+  "flowVersion": "flow_v0.54.1-v0.56.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.54.1-v0.56.x"
+  }
+}

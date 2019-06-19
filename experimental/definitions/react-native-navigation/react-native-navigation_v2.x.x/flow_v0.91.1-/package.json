@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-native-navigation",
+  "version": "2.0.0",
+  "flowVersion": "flow_v0.91.1-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

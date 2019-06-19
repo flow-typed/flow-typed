@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/cb-fetch",
+  "version": "1.10.0",
+  "flowVersion": "flow_v0.42.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

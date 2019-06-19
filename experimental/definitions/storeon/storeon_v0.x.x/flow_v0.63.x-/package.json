@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/storeon",
+  "version": "0.0.0",
+  "flowVersion": "flow_v0.63.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

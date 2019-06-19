@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/recompose",
+  "version": "0.26.2",
+  "flowVersion": "flow_v0.55.x-v0.56.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.55.x-v0.56.x"
+  }
+}

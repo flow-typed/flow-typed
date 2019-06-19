@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/cookie-parser",
+  "version": "1.0.0",
+  "flowVersion": "flow_v0.25.x-v0.92.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.25.x-v0.92.x"
+  }
+}

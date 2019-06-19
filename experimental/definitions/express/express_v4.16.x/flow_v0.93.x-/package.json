@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/express",
+  "version": "4.16.1",
+  "flowVersion": "flow_v0.93.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

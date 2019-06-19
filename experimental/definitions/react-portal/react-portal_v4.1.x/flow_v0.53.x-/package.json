@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-portal",
+  "version": "4.1.1",
+  "flowVersion": "flow_v0.53.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

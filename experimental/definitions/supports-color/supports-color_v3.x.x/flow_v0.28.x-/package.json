@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/supports-color",
+  "version": "3.0.0",
+  "flowVersion": "flow_v0.28.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

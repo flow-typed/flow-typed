@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-jss",
+  "version": "7.0.0",
+  "flowVersion": "flow_v0.30.x-v0.52.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.30.x-v0.52.x"
+  }
+}

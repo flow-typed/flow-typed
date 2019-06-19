@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-native-video",
+  "version": "3.0.0",
+  "flowVersion": "flow_v0.68.0-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

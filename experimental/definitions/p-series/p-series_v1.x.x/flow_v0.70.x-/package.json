@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/p-series",
+  "version": "1.0.0",
+  "flowVersion": "flow_v0.70.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

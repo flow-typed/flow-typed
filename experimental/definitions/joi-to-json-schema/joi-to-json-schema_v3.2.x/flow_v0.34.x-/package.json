@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/joi-to-json-schema",
+  "version": "3.2.0",
+  "flowVersion": "flow_v0.34.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

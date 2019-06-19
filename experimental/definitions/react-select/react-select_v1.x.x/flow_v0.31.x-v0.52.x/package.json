@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-select",
+  "version": "1.0.0",
+  "flowVersion": "flow_v0.31.x-v0.52.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.31.x-v0.52.x"
+  }
+}

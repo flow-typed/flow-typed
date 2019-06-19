@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/archiver",
+  "version": "3.0.0",
+  "flowVersion": "flow_v0.88.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

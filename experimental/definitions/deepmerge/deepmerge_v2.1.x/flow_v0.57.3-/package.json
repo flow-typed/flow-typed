@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/deepmerge",
+  "version": "2.1.0",
+  "flowVersion": "flow_v0.57.3-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

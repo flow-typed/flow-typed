@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/storybook__react",
+  "version": "4.0.1",
+  "flowVersion": "flow_v0.72.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

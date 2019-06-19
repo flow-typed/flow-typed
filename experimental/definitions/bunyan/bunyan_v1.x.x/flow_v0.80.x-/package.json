@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/bunyan",
+  "version": "1.0.1",
+  "flowVersion": "flow_v0.80.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

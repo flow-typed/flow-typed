@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/underscore",
+  "version": "1.0.3",
+  "flowVersion": "flow_v0.75.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}
