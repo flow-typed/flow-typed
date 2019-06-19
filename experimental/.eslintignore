@@ -1,0 +1,3 @@
+dist/
+flow-typed/
+**/__*-fixtures__/**
