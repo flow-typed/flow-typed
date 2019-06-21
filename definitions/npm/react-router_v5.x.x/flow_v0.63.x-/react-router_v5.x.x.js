@@ -128,4 +128,6 @@ declare module "react-router" {
     pathname: string,
     options?: MatchPathOptions | string
   ): null | Match;
+  
+  declare export function generatePath(pattern?: string, params?: Object): string;
 }
