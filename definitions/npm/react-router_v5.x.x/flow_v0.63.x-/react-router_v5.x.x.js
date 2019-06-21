@@ -129,5 +129,5 @@ declare module "react-router" {
     options?: MatchPathOptions | string
   ): null | Match;
   
-  declare export function generatePath(pattern?: string, params?: Object): string;
+  declare export function generatePath(pattern?: string, params?: {}): string;
 }
