@@ -1,5 +1,3 @@
-import { FieldConfig } from 'formik/@@Field';
-
 declare module 'formik/@@@@yup' {
   declare export type Schema = any;
 }
@@ -243,8 +241,20 @@ declare module 'formik/@@utils' {
   ): T;
 }
 
+declare module 'formik/@@FormikContext' {
+  import type { FormikContext } from 'formik/@@flow-typed';
+
+  declare type _Context = React$Context<FormikContext<{}>>;
+
+  declare export var FormikProvider: $ElementType<_Context, 'Provider'>;
+  declare export var FormikConsumer: $ElementType<_Context, 'Consumer'>;
+
+  declare export function useFormikContext<Values>(): FormikContext<Values>;
+}
+
 declare module 'formik' {
-  declare export * from 'formik/@@withFormik'
   declare export * from 'formik/@@Field'
+  declare export * from 'formik/@@FormikContext'
   declare export * from 'formik/@@utils'
+  declare export * from 'formik/@@withFormik'
 }

@@ -2,6 +2,9 @@
 import React from 'react';
 import { it, describe } from 'flow-typed-test';
 import {
+  FormikProvider,
+  FormikConsumer,
+  useFormikContext,
   Field,
   FastField,
   isFunction,
@@ -162,6 +165,7 @@ describe('useField hook', () => {
 describe('Field and FastField', () => {
   it('should render Field component', () => {
     <Field name={'email'} />;
+    <FastField name={'email'} />;
   });
 
   it('should raise an error when pass incompatible name prop', () => {
@@ -170,6 +174,8 @@ describe('Field and FastField', () => {
 
     // $ExpectError: `name` is required prop
     <Field />;
+    // $ExpectError: `name` is required prop
+    <FastField />;
   });
 
   it('should validate value', () => {
@@ -199,5 +205,36 @@ describe('utils', () => {
     (isEmptyChildren([]): boolean);
     (isPromise(Promise.resolve(1)): boolean);
     (isInputEvent({}): boolean);
+  });
+});
+
+describe('FormikContext', () => {
+  it('should work properly', () => {
+    <FormikConsumer>
+      {value => {
+        (value.validateOnBlur: ?boolean);
+
+        // $ExpectError: check any
+        (value.validateOnBlur: ?string);
+
+        (value.submitForm: () => Promise<void>);
+
+        // $ExpectError: check any
+        (value.submitForm: number);
+
+        return null;
+      }}
+    </FormikConsumer>;
+
+    // $ExpectError: need valid formik context value
+    <FormikProvider value={123} />;
+  });
+
+  it('should return context with passed values', () => {
+    const context = useFormikContext<{ age: number }>();
+
+    (context.values.age: number);
+    // $ExpectError: check any
+    (context.values.age: string);
   });
 });
