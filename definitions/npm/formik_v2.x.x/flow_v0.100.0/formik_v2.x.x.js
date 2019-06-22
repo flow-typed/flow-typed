@@ -322,8 +322,21 @@ declare module 'formik/@@FieldArray' {
   };
 }
 
+declare module 'formik/@@Form' {
+  declare export type HTMLFormAttributes = {
+    // `onSubmit` and `onReset` are not overwritable props
+    // https://github.com/jaredpalmer/formik/blob/next/docs/api/form.md
+    onSubmit?: empty,
+    onReset?: empty,
+  };
+
+  declare export var Form: React$StatelessFunctionalComponent<HTMLFormAttributes>;
+}
+
 declare module 'formik' {
+  declare export * from 'formik/@@flow-typed'
   declare export * from 'formik/@@ErrorMessage'
+  declare export * from 'formik/@@Form'
   declare export * from 'formik/@@Field'
   declare export * from 'formik/@@FieldArray'
   declare export * from 'formik/@@flow-typed'

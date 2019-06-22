@@ -2,6 +2,7 @@
 import React from 'react';
 import { it, describe } from 'flow-typed-test';
 import {
+  Form,
   getActiveElement,
   getIn,
   setIn,
@@ -313,4 +314,16 @@ describe('FieldArray', () => {
       <FieldArray />;
     });
   });
+});
+
+it('should render Form', () => {
+  <Form />;
+
+  <Form aria-hidden={'true'} />;
+
+  // $ExpectError: `onSubmit` already provided to `form` yuo can't overwrite it
+  <Form onSubmit={() => {}} />;
+
+  // $ExpectError: `onReset` already provided to `form` yuo can't overwrite it
+  <Form onReset={() => {}} />;
 });
