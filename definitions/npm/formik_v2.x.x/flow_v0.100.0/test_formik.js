@@ -2,6 +2,7 @@
 import React from 'react';
 import { it, describe } from 'flow-typed-test';
 import {
+  ErrorMessage,
   FormikProvider,
   FormikConsumer,
   useFormikContext,
@@ -236,5 +237,42 @@ describe('FormikContext', () => {
     (context.values.age: number);
     // $ExpectError: check any
     (context.values.age: string);
+  });
+});
+
+describe('ErrorMessage', () => {
+  it('should work properly', () => {
+    <ErrorMessage name={'password'} />;
+
+    <ErrorMessage
+      name={'password'}
+      className={undefined}
+      component={undefined}
+      render={undefined}
+    >
+      {undefined}
+    </ErrorMessage>;
+
+    <ErrorMessage
+      name={'password'}
+      className={'c-error'}
+      component={'div'}
+      render={val => {
+        (val: string);
+
+        return null;
+      }}
+    >
+      {val => {
+        (val: string);
+
+        return null;
+      }}
+    </ErrorMessage>;
+  });
+
+  it('should raise an error when do not pass required prop `name`', () => {
+    // $ExpectError
+    <ErrorMessage />;
   });
 });

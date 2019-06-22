@@ -252,7 +252,20 @@ declare module 'formik/@@FormikContext' {
   declare export function useFormikContext<Values>(): FormikContext<Values>;
 }
 
+declare module 'formik/@@ErrorMessage' {
+  declare export type ErrorMessageProps = {
+    name: string,
+    className?: string,
+    component?: React$ElementType,
+    render?: (errorMessage: string) => React$Node,
+    children?: (errorMessage: string) => React$Node,
+  };
+
+  declare export var ErrorMessage: React$ComponentType<ErrorMessageProps>;
+}
+
 declare module 'formik' {
+  declare export * from 'formik/@@ErrorMessage'
   declare export * from 'formik/@@Field'
   declare export * from 'formik/@@FormikContext'
   declare export * from 'formik/@@utils'
