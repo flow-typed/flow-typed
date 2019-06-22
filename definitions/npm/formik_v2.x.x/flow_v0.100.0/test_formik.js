@@ -1,7 +1,19 @@
 // @flow
 import React from 'react';
 import { it, describe } from 'flow-typed-test';
-import { useField, withFormik, type InjectedFormikProps } from 'formik';
+import {
+  isFunction,
+  isObject,
+  isInteger,
+  isString,
+  isNaN,
+  isEmptyChildren,
+  isPromise,
+  isInputEvent,
+  useField,
+  withFormik,
+  type InjectedFormikProps,
+} from 'formik';
 
 describe('withFormik HOC', () => {
   type FormValues = {| age: number, name: string, birthday: Date |};
@@ -142,5 +154,18 @@ describe('useField hook', () => {
     (meta.error: ?string);
     // $ExpectError: check any
     (meta.error: number);
+  });
+});
+
+describe('utils', () => {
+  it('should work properly', () => {
+    (isFunction(() => {}): boolean);
+    (isObject({}): boolean);
+    (isInteger(1): boolean);
+    (isString(''): boolean);
+    (isNaN(1 / 0): boolean);
+    (isEmptyChildren([]): boolean);
+    (isPromise(Promise.resolve(1)): boolean);
+    (isInputEvent({}): boolean);
   });
 });

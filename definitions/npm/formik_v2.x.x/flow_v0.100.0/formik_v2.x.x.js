@@ -1,8 +1,8 @@
-declare module 'formik/@@yup' {
+declare module 'formik/@@@@yup' {
   declare export type Schema = any;
 }
 
-declare module 'formik/flow-typed' {
+declare module 'formik/@@flow-typed' {
   declare export type FormikValues = { [field: string]: any };
   declare export type FormikErrors<Values> = $ObjMap<Values, () => ?string>;
   declare export type FormikTouched<Values> = $ObjMap<Values, () => ?boolean>;
@@ -126,15 +126,15 @@ declare module 'formik/flow-typed' {
   |}>;
 }
 
-declare module 'formik/withFormik' {
-  import type { Schema } from 'formik/@@yup';
+declare module 'formik/@@withFormik' {
+  import type { Schema } from 'formik/@@@@yup';
   import type {
     FormikHelpers,
     FormikProps,
     FormikSharedConfig,
     FormikTouched,
     FormikErrors,
-  } from 'formik/flow-typed';
+  } from 'formik/@@flow-typed';
 
   declare export type InjectedFormikProps<Props, Values> = $ReadOnly<{|
     ...FormikProps<Values>,
@@ -168,12 +168,12 @@ declare module 'formik/withFormik' {
   ) => React$ComponentType<Props>;
 }
 
-declare module 'formik/Field' {
+declare module 'formik/@@Field' {
   import type {
     FormikProps,
     FieldMetaProps,
     FieldInputProps,
-  } from 'formik/flow-typed';
+  } from 'formik/@@flow-typed';
 
   declare export type FieldProps<Value> = {|
     field: FieldInputProps<Value>,
@@ -217,7 +217,33 @@ declare module 'formik/Field' {
   declare export var FastField: typeof Field;
 }
 
+declare module 'formik/@@utils' {
+  declare export function isFunction(value: any): boolean;
+  declare export function isObject(value: any): boolean;
+  declare export function isInteger(value: any): boolean;
+  declare export function isString(value: any): boolean;
+  declare export function isNaN(value: any): boolean;
+  declare export function isEmptyChildren(value: any): boolean;
+  declare export function isPromise(value: any): boolean;
+  declare export function isInputEvent(value: any): boolean;
+  declare export function getActiveElement(doc?: Document): Element | null;
+  declare export function getIn(
+    obj: any,
+    key: string | Array<string>,
+    def?: any,
+    p?: number
+  ): any;
+  declare export function setIn(obj: any, path: string, value: any): any;
+  declare export function setNestedObjectValues<T>(
+    object: any,
+    value: any,
+    visited?: any,
+    response?: any
+  ): T;
+}
+
 declare module 'formik' {
-  declare export * from 'formik/withFormik'
-  declare export * from 'formik/Field'
+  declare export * from 'formik/@@withFormik'
+  declare export * from 'formik/@@Field'
+  declare export * from 'formik/@@utils'
 }

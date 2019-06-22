@@ -1,4 +1,4 @@
-## Example how to use `withFormik(config)(FormComponent)`
+## Example how to use HOC `withFormik(config)(FormComponent)`
 
 ```js
 import React from 'react';
