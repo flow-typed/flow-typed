@@ -1,9 +1,13 @@
-declare module 'formik/@@@@yup' {
+import { FormikConfig } from 'formik/@flow-typed';
+
+declare module 'formik/@@yup' {
   declare export type Schema = any;
+  declare export type YupError = any;
 }
 
-declare module 'formik/@@flow-typed' {
-  declare export type FormikValues = { [field: string]: any };
+declare module 'formik/@flow-typed' {
+  import type { Schema } from 'formik/@@yup';
+
   declare export type FormikErrors<Values> = $ObjMap<Values, () => ?string>;
   declare export type FormikTouched<Values> = $ObjMap<Values, () => ?boolean>;
 
@@ -32,10 +36,10 @@ declare module 'formik/@@flow-typed' {
     setSubmitting(isSubmitting: boolean): void,
     setTouched(touched: FormikTouched<Values>): void,
     setValues(values: Values): void,
-    setFieldValue(field: $Keys<Values>, value: any): void,
-    setFieldError(field: $Keys<Values>, message: string): void,
-    setFieldTouched(field: $Keys<Values>, isTouched?: boolean): void,
-    validateForm(values?: any): Promise<FormikErrors<Values>>,
+    setFieldValue(fieldName: string, value: any): void,
+    setFieldError(fieldName: $Keys<Values>, message: string): void,
+    setFieldTouched(fieldName: $Keys<Values>, isTouched?: boolean): void,
+    validateForm(values?: $Shape<Values>): Promise<FormikErrors<Values>>,
     validateField(field: string): void,
     resetForm(nextState?: $Shape<FormikState<Values>>): void,
     setFormikState(
@@ -67,12 +71,12 @@ declare module 'formik/@@flow-typed' {
     component?: React$ComponentType<FormikProps<Values>> | React$Node,
     render?: (props: FormikProps<Values>) => React$Node,
     children?: ((props: FormikProps<Values>) => React$Node) | React$Node,
-    initialValues: Values,
+    initialValues?: $Shape<Values>,
     initialStatus?: any,
     initialErrors?: FormikErrors<Values>,
     initialTouched?: FormikTouched<Values>,
     onReset?: (values: Values, formikHelpers: FormikHelpers<Values>) => void,
-    validationSchema?: any | (() => any),
+    validationSchema?: (() => Schema) | Schema,
     validate?: (values: Values) => void | {} | Promise<FormikErrors<Values>>,
   |};
 
@@ -82,18 +86,17 @@ declare module 'formik/@@flow-typed' {
     ...FormikHelpers<Values>,
     ...FormikHandlers,
     ...FormikComputedProps<Values>,
-    ...FormikRegistration,
+    ...FormikRegistration<Values>,
     submitForm: () => Promise<void>,
   |}>;
 
-  declare export type FormikRegistration = {|
-    unregisterField(name: string): void,
-    registerField(
-      name: string,
-      fns: {
-        validate?: (value: any) => string | Promise<void> | void,
-      }
-    ): void,
+  declare export type FnsOptions = {|
+    validate: (value: any) => string | Promise<void> | void,
+  |};
+
+  declare export type FormikRegistration<Values> = {|
+    unregisterField(fieldName: $Keys<Values>): void,
+    registerField(fieldName: $Keys<Values>, fns: FnsOptions): void,
   |};
 
   declare export type FormikContext<Values> = FormikProps<Values> & {
@@ -126,15 +129,15 @@ declare module 'formik/@@flow-typed' {
   |}>;
 }
 
-declare module 'formik/@@withFormik' {
-  import type { Schema } from 'formik/@@@@yup';
+declare module 'formik/@withFormik' {
+  import type { Schema } from 'formik/@@yup';
   import type {
     FormikHelpers,
     FormikProps,
     FormikSharedConfig,
     FormikTouched,
     FormikErrors,
-  } from 'formik/@@flow-typed';
+  } from 'formik/@flow-typed';
 
   declare export type InjectedFormikProps<Props, Values> = $ReadOnly<{|
     ...FormikProps<Values>,
@@ -162,18 +165,18 @@ declare module 'formik/@@withFormik' {
   |};
 
   declare export function withFormik<Values: {}, Props: {}>(
-    config: WithFormikConfig<Props, Values>
+    options: WithFormikConfig<Props, Values>
   ): (
     component: React$ComponentType<InjectedFormikProps<Props, Values>>
   ) => React$ComponentType<Props>;
 }
 
-declare module 'formik/@@Field' {
+declare module 'formik/@Field' {
   import type {
     FormikProps,
     FieldMetaProps,
     FieldInputProps,
-  } from 'formik/@@flow-typed';
+  } from 'formik/@flow-typed';
 
   declare export type FieldProps<Value> = {|
     field: FieldInputProps<Value>,
@@ -216,7 +219,7 @@ declare module 'formik/@@Field' {
   declare export var FastField: typeof Field;
 }
 
-declare module 'formik/@@utils' {
+declare module 'formik/@utils' {
   declare export function isFunction(value: any): boolean;
   declare export function isObject(value: any): boolean;
   declare export function isInteger(value: any): boolean;
@@ -241,8 +244,8 @@ declare module 'formik/@@utils' {
   ): T;
 }
 
-declare module 'formik/@@FormikContext' {
-  import type { FormikContext } from 'formik/@@flow-typed';
+declare module 'formik/@FormikContext' {
+  import type { FormikContext } from 'formik/@flow-typed';
 
   declare type _Context = React$Context<FormikContext<{}>>;
 
@@ -252,7 +255,7 @@ declare module 'formik/@@FormikContext' {
   declare export function useFormikContext<Values>(): FormikContext<Values>;
 }
 
-declare module 'formik/@@ErrorMessage' {
+declare module 'formik/@ErrorMessage' {
   declare export type ErrorMessageProps = {
     name: string,
     className?: string,
@@ -264,8 +267,8 @@ declare module 'formik/@@ErrorMessage' {
   declare export var ErrorMessage: React$ComponentType<ErrorMessageProps>;
 }
 
-declare module 'formik/@@FieldArray' {
-  import type { SharedRenderProps, FormikProps } from 'formik/@@flow-typed';
+declare module 'formik/@FieldArray' {
+  import type { SharedRenderProps, FormikProps } from 'formik/@flow-typed';
 
   declare export type FieldArrayRenderProps<Values> = ArrayHelpers & {
     form: FormikProps<Values>,
@@ -322,7 +325,7 @@ declare module 'formik/@@FieldArray' {
   };
 }
 
-declare module 'formik/@@Form' {
+declare module 'formik/@Form' {
   declare export type HTMLFormAttributes = {
     // `onSubmit` and `onReset` are not overwritable props
     // https://github.com/jaredpalmer/formik/blob/next/docs/api/form.md
@@ -333,14 +336,114 @@ declare module 'formik/@@Form' {
   declare export var Form: React$StatelessFunctionalComponent<HTMLFormAttributes>;
 }
 
+declare module 'formik/@Formik' {
+  import type { UseFieldConfig } from 'formik/@Field';
+  import type { YupError, Schema } from 'formik/@@yup';
+  import type {
+    FormikConfig,
+    FormikErrors,
+    FormikState,
+    FormikTouched,
+    FieldMetaProps,
+    FieldInputProps,
+  } from 'formik/@flow-typed';
+
+  declare export function useFormik<Values>(
+    options: FormikConfig<Values>
+  ): {
+    initialValues: $Shape<Values>,
+    initialErrors: FormikErrors<Values>,
+    initialTouched: FormikTouched<Values>,
+    initialStatus: any,
+
+    handleBlur(fieldName: $Keys<Values>): (event: {}) => void,
+    handleBlur(event: {}): void,
+
+    handleChange(fieldName: $Keys<Values>): (event: {}) => void,
+    handleChange(event: {}): void,
+
+    handleReset: () => void,
+    handleSubmit: (e?: {}) => void,
+
+    resetForm: (nextState?: $Shape<FormikState<Values>>) => void,
+
+    setErrors: (errors: FormikErrors<Values>) => void,
+    setFormikState: (
+      stateOrCb:
+        | FormikState<Values>
+        | ((state: FormikState<Values>) => FormikState<Values>)
+    ) => void,
+    setFieldTouched: (
+      fieldName: $Keys<Values>,
+      touched?: boolean,
+      shouldValidate?: boolean
+    ) => void,
+    setFieldValue: <Name: $Keys<Values>>(
+      fieldName: Name,
+      value: $ElementType<Values, Name>,
+      shouldValidate?: boolean
+    ) => void,
+    setFieldError: (fieldName: $Keys<Values>, value: ?string) => void,
+    setStatus: (status: any) => void,
+    setSubmitting: (isSubmitting: boolean) => void,
+    setTouched: (touched: FormikTouched<Values>) => void,
+    setValues: (values: $Shape<Values>) => void,
+    submitForm: () => Promise<void>,
+    validateForm: (values?: Values) => Promise<FormikErrors<Values>>,
+    validateField: (name: $Keys<Values>) => Promise<?string>,
+    isValid: boolean,
+    dirty: boolean,
+    unregisterField: (name: string) => void,
+    registerField: (name: string, options: {| validate: any |}) => void,
+    getFieldProps<Name>(
+      name: Name | UseFieldConfig<Name>
+    ): [
+      FieldInputProps<$ElementType<Values, Name>>,
+      FieldMetaProps<$ElementType<Values, Name>>
+    ],
+    validateOnBlur: boolean,
+    validateOnChange: boolean,
+    values: Values,
+    errors: FormikErrors<Values>,
+    touched: FormikTouched<Values>,
+    isSubmitting: boolean,
+    isValidating: boolean,
+    status?: any,
+    submitCount: number,
+  };
+
+  declare export var Formik: {
+    <Values>(props: FormikConfig<Values>): React$Node,
+  };
+
+  declare export function yupToFormErrors<Values>(
+    yupError: YupError
+  ): FormikErrors<Values>;
+
+  declare export function validateYupSchema<Values>(
+    values: Values,
+    schema: Schema,
+    sync?: boolean,
+    context?: any
+  ): Promise<$Shape<Values>>;
+}
+
+declare module 'formik/@connect' {
+  declare export function connect<Config, Comp: React$ComponentType<Config>>(
+    c: Comp
+  ): React$ComponentType<$Diff<React$ElementConfig<Comp>, { formik: any }>>;
+}
+
 declare module 'formik' {
-  declare export * from 'formik/@@flow-typed'
-  declare export * from 'formik/@@ErrorMessage'
-  declare export * from 'formik/@@Form'
-  declare export * from 'formik/@@Field'
-  declare export * from 'formik/@@FieldArray'
-  declare export * from 'formik/@@flow-typed'
-  declare export * from 'formik/@@FormikContext'
-  declare export * from 'formik/@@utils'
-  declare export * from 'formik/@@withFormik'
+  declare export * from 'formik/@connect'
+  declare export * from 'formik/@ErrorMessage'
+  declare export * from 'formik/@Field'
+  declare export * from 'formik/@FieldArray'
+  declare export * from 'formik/@flow-typed'
+  declare export * from 'formik/@flow-typed'
+  declare export * from 'formik/@Form'
+  declare export * from 'formik/@Formik'
+  declare export * from 'formik/@FormikContext'
+  declare export * from 'formik/@utils'
+  declare export * from 'formik/@withFormik'
 }

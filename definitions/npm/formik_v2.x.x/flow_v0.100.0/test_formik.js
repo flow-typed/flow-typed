@@ -28,6 +28,8 @@ import {
   insert,
   replace,
   FieldArray,
+  useFormik,
+  Formik,
   type InjectedFormikProps,
 } from 'formik';
 
@@ -326,4 +328,39 @@ it('should render Form', () => {
 
   // $ExpectError: `onReset` already provided to `form` yuo can't overwrite it
   <Form onReset={() => {}} />;
+});
+
+describe('Formik', () => {
+  describe('Component', () => {
+    it('should work properly', () => {
+      <Formik onSubmit={() => {}} />;
+    });
+  });
+
+  describe('hook', () => {
+    it('should work properly', () => {
+      type Vals = {|
+        name: string,
+        age: number,
+      |};
+
+      const formik = useFormik<Vals>({ onSubmit: () => {} });
+
+      formik.setFieldValue('name', '1', true);
+
+      // $ExpectError: `name` is missing in `Values`
+      formik.setFieldValue('__name', '1');
+
+      // $ExpectError: `name` expect string value, not `123`
+      formik.setFieldValue('name', 123);
+
+      (formik.values.name: string);
+      (formik.values.age: number);
+
+      // $ExpectError: check any
+      (formik.values.name: boolean);
+      // $ExpectError: check any
+      (formik.values.age: boolean);
+    });
+  });
 });
