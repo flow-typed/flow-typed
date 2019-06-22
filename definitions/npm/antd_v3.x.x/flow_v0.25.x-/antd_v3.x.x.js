@@ -612,4 +612,46 @@ declare module "antd" {
   }
 
   declare export class UploadDragger extends React$Component<{}> {}
+
+
+  declare export type NotificationPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+
+  declare export type NotificationConfigProps = {
+    top?: number;
+    bottom?: number;
+    duration?: number;
+    placement?: NotificationPlacement;
+    getContainer?: () => HTMLElement;
+  }
+
+  declare export type NotificationProps = {
+    message: React$Node;
+    description?: React$Node;
+    btn?: React$Node;
+    key?: string;
+    onClose?: () => void;
+    duration?: number | null;
+    icon?: React$Node;
+    placement?: NotificationPlacement;
+    style?: $Shape<CSSStyleDeclaration>;
+    prefixCls?: string;
+    className?: string;
+    +type?: 'success' | 'info' | 'error' | 'warning';
+    onClick?: () => void;
+    top?: number;
+    bottom?: number;
+    getContainer?: () => HTMLElement;
+  }
+
+  declare export class notification {
+    static success: NotificationProps => void;
+    static error:  NotificationProps => void;
+    static info:  NotificationProps => void;
+    static warn:  NotificationProps => void;
+    static warning: NotificationProps => void;
+    static open: NotificationProps => void;
+    static close: string => void;
+    static config: NotificationConfigProps => void;
+    static destroy: () => void;
+  }
 }
