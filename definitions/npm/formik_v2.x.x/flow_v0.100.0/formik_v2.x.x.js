@@ -102,7 +102,7 @@ declare module 'formik/@@flow-typed' {
   };
 
   declare export interface SharedRenderProps<T> {
-    component?: string | React$ComponentType<T | void>;
+    component?: React$ElementType;
     render?: (props: T) => React$Node;
     children?: (props: T) => React$Node;
   }
@@ -264,9 +264,69 @@ declare module 'formik/@@ErrorMessage' {
   declare export var ErrorMessage: React$ComponentType<ErrorMessageProps>;
 }
 
+declare module 'formik/@@FieldArray' {
+  import type { SharedRenderProps, FormikProps } from 'formik/@@flow-typed';
+
+  declare export type FieldArrayRenderProps<Values> = ArrayHelpers & {
+    form: FormikProps<Values>,
+    name: string,
+  };
+
+  declare export type FieldArrayConfig<Values> = {
+    name: string,
+    validateOnChange?: boolean,
+  } & SharedRenderProps<FieldArrayRenderProps<Values>>;
+
+  declare export type ArrayHelpers = {
+    push: (obj: any) => void,
+    handlePush: (obj: any) => () => void,
+    swap: (indexA: number, indexB: number) => void,
+    handleSwap: (indexA: number, indexB: number) => () => void,
+    move: (from: number, to: number) => void,
+    handleMove: (from: number, to: number) => () => void,
+    insert: (index: number, value: any) => void,
+    handleInsert: (index: number, value: any) => () => void,
+    replace: (index: number, value: any) => void,
+    handleReplace: (index: number, value: any) => () => void,
+    unshift: (value: any) => number,
+    handleUnshift: (value: any) => () => void,
+    handleRemove: (index: number) => () => void,
+    handlePop: () => () => void,
+    remove<T>(index: number): ?T,
+    pop<T>(): ?T,
+  };
+
+  declare export function move<T>(
+    array: Array<T>,
+    from: number,
+    to: number
+  ): Array<T>;
+  declare export function swap<T>(
+    array: Array<T>,
+    indexA: number,
+    indexB: number
+  ): Array<T>;
+  declare export function insert<T>(
+    array: Array<T>,
+    index: number,
+    value: T
+  ): Array<T>;
+  declare export function replace<T>(
+    array: Array<T>,
+    index: number,
+    value: T
+  ): Array<T>;
+
+  declare export var FieldArray: {
+    <Values>(props: FieldArrayConfig<Values>): React$Node,
+  };
+}
+
 declare module 'formik' {
   declare export * from 'formik/@@ErrorMessage'
   declare export * from 'formik/@@Field'
+  declare export * from 'formik/@@FieldArray'
+  declare export * from 'formik/@@flow-typed'
   declare export * from 'formik/@@FormikContext'
   declare export * from 'formik/@@utils'
   declare export * from 'formik/@@withFormik'

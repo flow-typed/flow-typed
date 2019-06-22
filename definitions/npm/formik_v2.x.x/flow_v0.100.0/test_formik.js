@@ -2,6 +2,10 @@
 import React from 'react';
 import { it, describe } from 'flow-typed-test';
 import {
+  getActiveElement,
+  getIn,
+  setIn,
+  setNestedObjectValues,
   ErrorMessage,
   FormikProvider,
   FormikConsumer,
@@ -18,6 +22,11 @@ import {
   isInputEvent,
   useField,
   withFormik,
+  move,
+  swap,
+  insert,
+  replace,
+  FieldArray,
   type InjectedFormikProps,
 } from 'formik';
 
@@ -74,7 +83,7 @@ describe('withFormik HOC', () => {
       initialAge: number,
       initialBirthday: Date,
     |};
-    const requredOptions = { handleSubmit: () => {} };
+    const requiredOptions = { handleSubmit: () => {} };
 
     describe('handleSubmit', () => {
       it('should pass when use properly', () => {
@@ -95,14 +104,14 @@ describe('withFormik HOC', () => {
     describe('handleSubmit', () => {
       it('should pass when use properly', () => {
         withFormik<FormValues, Props>({
-          ...requredOptions,
+          ...requiredOptions,
           mapPropsToValues: ({ initialAge }) => ({ age: initialAge }),
         });
       });
 
       it('should raise an error when `mapPropsToValues` return invalid values', () => {
         withFormik<FormValues, Props>({
-          ...requredOptions,
+          ...requiredOptions,
           // $ExpectError: `initialAge` is a number but `name` need a string
           mapPropsToValues: ({ initialAge }) => ({
             name: initialAge,
@@ -112,7 +121,7 @@ describe('withFormik HOC', () => {
 
       it('should raise an error when `mapPropsToValues` return not missing  value', () => {
         withFormik<FormValues, Props>({
-          ...requredOptions,
+          ...requiredOptions,
           // $ExpectError: `abc` is missing in values
           mapPropsToValues: ({ initialAge }) => ({
             abc: initialAge,
@@ -122,7 +131,7 @@ describe('withFormik HOC', () => {
 
       it('should return partial of values', () => {
         withFormik<{ name: string, age: number }, Props>({
-          ...requredOptions,
+          ...requiredOptions,
           mapPropsToValues: ({ initialAge }) => ({
             age: initialAge,
           }),
@@ -206,6 +215,12 @@ describe('utils', () => {
     (isEmptyChildren([]): boolean);
     (isPromise(Promise.resolve(1)): boolean);
     (isInputEvent({}): boolean);
+
+    (getActiveElement(document): Element | null);
+
+    getIn({ a: { b: 2 } }, ['a', 'b']);
+    setIn({ a: { b: 2 } }, 'a', 3);
+    setNestedObjectValues({}, 1);
   });
 });
 
@@ -274,5 +289,28 @@ describe('ErrorMessage', () => {
   it('should raise an error when do not pass required prop `name`', () => {
     // $ExpectError
     <ErrorMessage />;
+  });
+});
+
+describe('FieldArray', () => {
+  describe('methods', () => {
+    (move([1], 1, 1): Array<number>);
+    (swap(['str'], 1, 1): Array<string>);
+    (insert([true], 1, false): Array<boolean>);
+    (replace(['1'], 1, '2'): Array<string>);
+  });
+
+  describe('Component', () => {
+    it('should render FieldArray component', () => {
+      <FieldArray name={'email'} />;
+    });
+
+    it('should raise an error when pass incompatible name prop', () => {
+      // $ExpectError: `name` must be a string
+      <FieldArray name={111} />;
+
+      // $ExpectError: `name` is required prop
+      <FieldArray />;
+    });
   });
 });
