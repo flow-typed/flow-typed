@@ -1,3 +1,5 @@
+import { FieldConfig } from 'formik/@@Field';
+
 declare module 'formik/@@@@yup' {
   declare export type Schema = any;
 }
@@ -193,10 +195,9 @@ declare module 'formik/@@Field' {
     innerRef?: React$Ref<any>,
   |};
 
-  declare export type FieldAttributes<Props, Value> = {|
+  declare export type FieldAttributes<Props, Value> = {
     ...FieldConfig<Value>,
-    ...$Exact<Props>,
-  |};
+  } & Props;
 
   declare export type UseFieldConfig<Value> = {
     name: string,

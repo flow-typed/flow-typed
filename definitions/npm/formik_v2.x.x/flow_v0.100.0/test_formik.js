@@ -2,6 +2,8 @@
 import React from 'react';
 import { it, describe } from 'flow-typed-test';
 import {
+  Field,
+  FastField,
   isFunction,
   isObject,
   isInteger,
@@ -154,6 +156,36 @@ describe('useField hook', () => {
     (meta.error: ?string);
     // $ExpectError: check any
     (meta.error: number);
+  });
+});
+
+describe('Field and FastField', () => {
+  it('should render Field component', () => {
+    <Field name={'email'} />;
+  });
+
+  it('should raise an error when pass incompatible name prop', () => {
+    // $ExpectError: `name` must be a string
+    <Field name={111} />;
+
+    // $ExpectError: `name` is required prop
+    <Field />;
+  });
+
+  it('should validate value', () => {
+    Field<{ disabled: boolean }, '1' | '2'>({
+      name: 'count',
+      disabled: true,
+      value: '1',
+    });
+
+    Field<{ disabled: boolean }, '1' | '2'>({
+      name: 'count',
+      // $ExpectError: need a boolean
+      disabled: 123,
+      // $ExpectError: `12` is missing in enum
+      value: '12',
+    });
   });
 });
 
