@@ -234,13 +234,13 @@ describe('install (command)', () => {
           }),
         ]);
         await gitInit(FAKE_CACHE_REPO_DIR),
-          await gitAdd(FAKE_CACHE_REPO_DIR, 'definitions');
+          await gitAdd(FAKE_CACHE_REPO_DIR, 'experimental');
         await gitCommit(FAKE_CACHE_REPO_DIR, 'FIRST');
 
         setCustomCacheDir(FAKE_CACHE_DIR);
 
         const availableLibDefs = await getNpmLibDefs(
-          path.join(FAKE_CACHE_REPO_DIR, 'definitions'),
+          path.join(FAKE_CACHE_REPO_DIR, 'experimental'),
         );
 
         await installNpmLibDef(availableLibDefs[0], FLOWTYPED_DIR, false);
@@ -283,7 +283,7 @@ describe('install (command)', () => {
             gitConfig(FAKE_CACHE_REPO_DIR, 'user.name', 'Test Author'),
             gitConfig(FAKE_CACHE_REPO_DIR, 'user.email', 'test@flow-typed.org'),
           ]);
-        await gitAdd(FAKE_CACHE_REPO_DIR, 'definitions');
+        await gitAdd(FAKE_CACHE_REPO_DIR, 'experimental');
         await gitCommit(FAKE_CACHE_REPO_DIR, 'FIRST');
 
         setCustomCacheDir(FAKE_CACHE_DIR);
