@@ -1,5 +1,3 @@
-import { FormikConfig } from 'formik/@flow-typed';
-
 declare module 'formik/@@yup' {
   declare export type Schema = any;
   declare export type YupError = any;
