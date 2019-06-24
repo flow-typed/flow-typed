@@ -41,7 +41,7 @@ const config = {
   }),
 };
 
-const WithFormikForm = withFormik(config)(Form);
+const WithFormikForm = withFormik<FormProps, FormValues>(config)(Form);
 
 export const App = () => (
   <WithFormikForm

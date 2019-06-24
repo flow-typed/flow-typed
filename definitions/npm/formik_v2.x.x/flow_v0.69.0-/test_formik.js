@@ -45,7 +45,7 @@ describe('withFormik HOC', () => {
     const MyForm = (props: InjectedFormikProps<FormOwnProps, FormValues>) =>
       null;
 
-    const WithFormikForm = withFormik<FormValues, FormOwnProps>({
+    const WithFormikForm = withFormik<FormOwnProps, FormValues>({
       handleSubmit(values, { props: { onSubmit }, setSubmitting }) {
         onSubmit(values);
         setSubmitting(false);
@@ -90,7 +90,7 @@ describe('withFormik HOC', () => {
 
     describe('handleSubmit', () => {
       it('should pass when use properly', () => {
-        withFormik<FormValues, Props>({
+        withFormik<Props, FormValues>({
           handleSubmit(values, { props }) {
             (values.age: number);
             (props.initialName: string);
@@ -106,14 +106,14 @@ describe('withFormik HOC', () => {
 
     describe('handleSubmit', () => {
       it('should pass when use properly', () => {
-        withFormik<FormValues, Props>({
+        withFormik<Props, FormValues>({
           ...requiredOptions,
           mapPropsToValues: ({ initialAge }) => ({ age: initialAge }),
         });
       });
 
       it('should raise an error when `mapPropsToValues` return invalid values', () => {
-        withFormik<FormValues, Props>({
+        withFormik<Props, FormValues>({
           ...requiredOptions,
           // $ExpectError: `initialAge` is a number but `name` need a string
           mapPropsToValues: ({ initialAge }) => ({
@@ -123,7 +123,7 @@ describe('withFormik HOC', () => {
       });
 
       it('should raise an error when `mapPropsToValues` return not missing  value', () => {
-        withFormik<FormValues, Props>({
+        withFormik<Props, FormValues>({
           ...requiredOptions,
           // $ExpectError: `abc` is missing in values
           mapPropsToValues: ({ initialAge }) => ({
@@ -133,7 +133,7 @@ describe('withFormik HOC', () => {
       });
 
       it('should return partial of values', () => {
-        withFormik<{ name: string, age: number }, Props>({
+        withFormik<Props, { name: string, age: number }>({
           ...requiredOptions,
           mapPropsToValues: ({ initialAge }) => ({
             age: initialAge,

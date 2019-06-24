@@ -162,7 +162,7 @@ declare module 'formik/@withFormik' {
     validationSchema?: ((props: Props) => Schema) | Schema,
   |};
 
-  declare export function withFormik<Values: {}, Props: {}>(
+  declare export function withFormik<Props: {}, Values: {}>(
     options: WithFormikConfig<Props, Values>
   ): (
     component: React$ComponentType<InjectedFormikProps<Props, Values>>
