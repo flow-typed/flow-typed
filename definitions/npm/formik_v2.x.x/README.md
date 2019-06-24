@@ -1,24 +1,23 @@
 ## Example how to use HOC `withFormik(config)(FormComponent)`
 
 ```js
+// @flow
 import React from 'react';
 import { withFormik, type InjectedFormikProps } from 'formik';
 
-type FormValues = {
+type Values = {
   name: string,
   age: number,
 };
 
-type FormProps = {
-  createUser: FormValues => Promise<mixed>,
+type Props = {
+  createUser: Values => Promise<void>,
   initialName: string,
   initialAge: number,
   submitButtonText: string,
 };
 
-type Props = InjectedFormikProps<FormProps, FormValues>;
-
-const Form = (props: Props) => {
+const Form = (props: InjectedFormikProps<Props, Values>) => {
   const { handleSubmit, submitButtonText, values } = props;
 
   return (
@@ -31,7 +30,7 @@ const Form = (props: Props) => {
   );
 };
 
-const config = {
+const WithFormikForm = withFormik<Props, Values>({
   handleSubmit(values, { props, setSubmitting }) {
     props.createUser(values).finally(() => setSubmitting(false));
   },
@@ -39,16 +38,15 @@ const config = {
     age: initialAge,
     name: initialName,
   }),
-};
-
-const WithFormikForm = withFormik<FormProps, FormValues>(config)(Form);
+})(Form);
 
 export const App = () => (
   <WithFormikForm
-    createUser={(val: FormValues) => Promise.resolve(true)}
+    createUser={(val: Values) => Promise.resolve()}
     initialName={''}
     initialAge={16}
     submitButtonText={'Edit user'}
   />
 );
+
 ```
