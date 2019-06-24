@@ -153,224 +153,383 @@ describe('render', () => {
     rerender(<Component />);
   });
 
-  it('getByAltText should return HTML element', () => {
-    const a: HTMLElement = getByAltText('1');
+  it('getByAltText should return HTML element by default', () => {
+    const a: HTMLElement = getByAltText<HTMLElement>('1');
   });
 
-  it('getAllByAltText should return array of HTML element', () => {
+  it('getByAltText should return passed element', () => {
+    const a: HTMLButtonElement = getByAltText<HTMLButtonElement>('1');
+  });
+
+  it('getAllByAltText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllByAltText('1');
-    const b: Array<HTMLElement> = getAllByAltText('2');
+    const a: HTMLElement = getAllByAltText<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllByAltText<HTMLElement>('2');
   });
 
-  it('queryByAltText should return maybe HTML element', () => {
+  it('getAllByAltText should return passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllByAltText<HTMLButtonElement>('2');
+  });
+
+  it('queryByAltText should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryByAltText('1');
-    const b: ?HTMLElement = queryByAltText('2');
+    const a: HTMLElement = queryByAltText<HTMLElement>('1');
+    const b: ?HTMLElement = queryByAltText<HTMLElement>('2');
   });
 
-  it('queryAllByAltText should return array of HTML element', () => {
+  it('queryByAltText should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryByAltText<HTMLButtonElement>('2');
+  });
+
+  it('queryAllByAltText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllByAltText('1');
-    const b: Array<HTMLElement> = queryAllByAltText('2');
+    const a: HTMLElement = queryAllByAltText<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllByAltText<HTMLElement>('2');
   });
 
-  it('getByDisplayValue should return HTML element', () => {
-    const a: HTMLElement = getByDisplayValue('1');
+  it('queryAllByAltText should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllByAltText<HTMLButtonElement>('2');
   });
 
-  it('getAllByDisplayValue should return array of HTML element', () => {
+  it('getByDisplayValue should return HTML element by default', () => {
+    const a: HTMLElement = getByDisplayValue<HTMLElement>('1');
+  });
+
+  it('getByDisplayValue should return passed element', () => {
+    const a: HTMLButtonElement = getByDisplayValue<HTMLButtonElement>('1');
+  });
+
+  it('getAllByDisplayValue should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllByDisplayValue('1');
-    const b: Array<HTMLElement> = getAllByDisplayValue('2');
+    const a: HTMLElement = getAllByDisplayValue<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllByDisplayValue<HTMLElement>('2');
   });
 
-  it('queryByDisplayValue should return maybe HTML element', () => {
+  it('getAllByDisplayValue should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllByDisplayValue<HTMLButtonElement>('2');
+  });
+
+  it('queryByDisplayValue should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryByDisplayValue('1');
-    const b: ?HTMLElement = queryByDisplayValue('2');
+    const a: HTMLElement = queryByDisplayValue<HTMLElement>('1');
+    const b: ?HTMLElement = queryByDisplayValue<HTMLElement>('2');
   });
 
-  it('queryAllByDisplayValue should return array of HTML element', () => {
+  it('queryByDisplayValue should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryByDisplayValue<HTMLButtonElement>('2');
+  });
+
+  it('queryAllByDisplayValue should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllByDisplayValue('1');
-    const b: Array<HTMLElement> = queryAllByDisplayValue('2');
+    const a: HTMLElement = queryAllByDisplayValue<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllByDisplayValue<HTMLElement>('2');
   });
 
-  it('getByLabelText should return HTML element', () => {
-    const a: HTMLElement = getByLabelText('1');
+  it('queryAllByDisplayValue should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllByDisplayValue<HTMLButtonElement>('2');
   });
 
-  it('getAllByLabelText should return array of HTML element', () => {
+  it('getByLabelText should return HTML element by default', () => {
+    const a: HTMLElement = getByLabelText<HTMLElement>('1');
+  });
+
+  it('getByLabelText should return passed element', () => {
+    const a: HTMLButtonElement = getByLabelText<HTMLButtonElement>('1');
+  });
+
+  it('getAllByLabelText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllByLabelText('1');
-    const b: Array<HTMLElement> = getAllByLabelText('2');
+    const a: HTMLElement = getAllByLabelText<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllByLabelText<HTMLElement>('2');
   });
 
-  it('queryByLabelText should return maybe HTML element', () => {
+  it('getAllByLabelText should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllByLabelText<HTMLButtonElement>('2');
+  });
+
+  it('queryByLabelText should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryByLabelText('1');
-    const b: ?HTMLElement = queryByLabelText('2');
+    const a: HTMLElement = queryByLabelText<HTMLElement>('1');
+    const b: ?HTMLElement = queryByLabelText<HTMLElement>('2');
   });
 
-  it('queryAllByLabelText should return array of HTML element', () => {
+  it('queryByLabelText should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryByLabelText<HTMLButtonElement>('2');
+  });
+
+  it('queryAllByLabelText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllByLabelText('1');
-    const b: Array<HTMLElement> = queryAllByLabelText('2');
+    const a: HTMLElement = queryAllByLabelText<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllByLabelText<HTMLElement>('2');
   });
 
-  it('getByPlaceholderText should return HTML element', () => {
-    const a: HTMLElement = getByPlaceholderText('1');
+  it('queryAllByLabelText should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllByLabelText<HTMLButtonElement>('2');
   });
 
-  it('getAllByPlaceholderText should return array of HTML element', () => {
+  it('getByPlaceholderText should return HTML element by default', () => {
+    const a: HTMLElement = getByPlaceholderText<HTMLElement>('1');
+  });
+
+  it('getByPlaceholderText should return passed element', () => {
+    const a: HTMLButtonElement = getByPlaceholderText<HTMLButtonElement>('1');
+  });
+
+  it('getAllByPlaceholderText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllByPlaceholderText('1');
-    const b: Array<HTMLElement> = getAllByPlaceholderText('2');
+    const a: HTMLElement = getAllByPlaceholderText<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllByPlaceholderText<HTMLElement>('2');
   });
 
-  it('queryByPlaceholderText should return maybe HTML element', () => {
+  it('getAllByPlaceholderText should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllByPlaceholderText<HTMLButtonElement>('2');
+  });
+
+  it('queryByPlaceholderText should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryByPlaceholderText('1');
-    const b: ?HTMLElement = queryByPlaceholderText('2');
+    const a: HTMLElement = queryByPlaceholderText<HTMLElement>('1');
+    const b: ?HTMLElement = queryByPlaceholderText<HTMLElement>('2');
   });
 
-  it('queryAllByPlaceholderText should return array of HTML element', () => {
+  it('queryByPlaceholderText should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryByPlaceholderText<HTMLButtonElement>('2');
+  });
+
+  it('queryAllByPlaceholderText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllByPlaceholderText('1');
-    const b: Array<HTMLElement> = queryAllByPlaceholderText('2');
+    const a: HTMLElement = queryAllByPlaceholderText<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllByPlaceholderText<HTMLElement>('2');
   });
 
-  it('getByRole should return HTML element', () => {
-    const a: HTMLElement = getByRole('1');
+  it('queryAllByPlaceholderText should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllByPlaceholderText<HTMLButtonElement>('2');
   });
 
-  it('getAllByRole should return array of HTML element', () => {
+  it('getByRole should return HTML element by default', () => {
+    const a: HTMLElement = getByRole<HTMLElement>('1');
+  });
+
+  it('getByRole should return passed element', () => {
+    const a: HTMLButtonElement = getByRole<HTMLButtonElement>('1');
+  });
+
+  it('getAllByRole should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllByRole('1');
-    const b: Array<HTMLElement> = getAllByRole('2');
+    const a: HTMLElement = getAllByRole<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllByRole<HTMLElement>('2');
   });
 
-  it('queryByRole should return maybe HTML element', () => {
+  it('getAllByRole should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllByRole<HTMLButtonElement>('2');
+  });
+
+  it('queryByRole should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryByRole('1');
-    const b: ?HTMLElement = queryByRole('2');
+    const a: HTMLElement = queryByRole<HTMLElement>('1');
+    const b: ?HTMLElement = queryByRole<HTMLElement>('2');
   });
 
-  it('queryAllByRole should return array of HTML element', () => {
+  it('queryByRole should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryByRole<HTMLButtonElement>('2');
+  });
+
+  it('queryAllByRole should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllByRole('1');
-    const b: Array<HTMLElement> = queryAllByRole('2');
+    const a: HTMLElement = queryAllByRole<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllByRole<HTMLElement>('2');
   });
 
-  it('getBySelectText should return HTML element', () => {
-    const a: HTMLElement = getBySelectText('1');
+  it('queryAllByRole should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllByRole<HTMLButtonElement>('2');
   });
 
-  it('getAllBySelectText should return array of HTML element', () => {
+  it('getBySelectText should return HTML element by default', () => {
+    const a: HTMLElement = getBySelectText<HTMLElement>('1');
+  });
+
+  it('getBySelectText should return passed element', () => {
+    const a: HTMLButtonElement = getBySelectText<HTMLButtonElement>('1');
+  });
+
+  it('getAllBySelectText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllBySelectText('1');
-    const b: Array<HTMLElement> = getAllBySelectText('2');
+    const a: HTMLElement = getAllBySelectText<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllBySelectText<HTMLElement>('2');
   });
 
-  it('queryBySelectText should return maybe HTML element', () => {
+  it('getAllBySelectText should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllBySelectText<HTMLButtonElement>('2');
+  });
+
+  it('queryBySelectText should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryBySelectText('1');
-    const b: ?HTMLElement = queryBySelectText('2');
+    const a: HTMLElement = queryBySelectText<HTMLElement>('1');
+    const b: ?HTMLElement = queryBySelectText<HTMLElement>('2');
   });
 
-  it('queryAllBySelectText should return array of HTML element', () => {
+  it('queryBySelectText should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryBySelectText<HTMLButtonElement>('2');
+  });
+
+  it('queryAllBySelectText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllBySelectText('1');
-    const b: Array<HTMLElement> = queryAllBySelectText('2');
+    const a: HTMLElement = queryAllBySelectText<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllBySelectText<HTMLElement>('2');
   });
 
-  it('getByTestId should return HTML element', () => {
-    const a: HTMLElement = getByTestId('1');
+  it('queryAllBySelectText should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllBySelectText<HTMLButtonElement>('2');
   });
 
-  it('getAllByTestId should return array of HTML element', () => {
+  it('getByTestId should return HTML element by default', () => {
+    const a: HTMLElement = getByTestId<HTMLElement>('1');
+  });
+
+  it('getByTestId should return passed element', () => {
+    const a: HTMLButtonElement = getByTestId<HTMLButtonElement>('1');
+  });
+
+  it('getAllByTestId should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllByTestId('1');
-    const b: Array<HTMLElement> = getAllByTestId('2');
+    const a: HTMLElement = getAllByTestId<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllByTestId<HTMLElement>('2');
   });
 
-  it('queryByTestId should return maybe HTML element', () => {
+  it('getAllByTestId should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllByTestId<HTMLButtonElement>('2');
+  });
+
+  it('queryByTestId should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryByTestId('1');
-    const b: ?HTMLElement = queryByTestId('2');
+    const a: HTMLElement = queryByTestId<HTMLElement>('1');
+    const b: ?HTMLElement = queryByTestId<HTMLElement>('2');
   });
 
-  it('queryAllByTestId should return array of HTML element', () => {
+  it('queryByTestId should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryByTestId<HTMLButtonElement>('2');
+  });
+
+  it('queryAllByTestId should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllByTestId('1');
-    const b: Array<HTMLElement> = queryAllByTestId('2');
+    const a: HTMLElement = queryAllByTestId<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllByTestId<HTMLElement>('2');
   });
 
-  it('getByText should return HTML element', () => {
-    const a: HTMLElement = getByText('1');
+  it('queryAllByTestId should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllByTestId<HTMLButtonElement>('2');
   });
 
-  it('getAllByText should return array of HTML element', () => {
+  it('getByText should return HTML element by default', () => {
+    const a: HTMLElement = getByText<HTMLElement>('1');
+  });
+
+  it('getByText should return passed element', () => {
+    const a: HTMLButtonElement = getByText<HTMLButtonElement>('1');
+  });
+
+  it('getAllByText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllByText('1');
-    const b: Array<HTMLElement> = getAllByText('2');
+    const a: HTMLElement = getAllByText<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllByText<HTMLElement>('2');
   });
 
-  it('queryByText should return maybe HTML element', () => {
+  it('getAllByText should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllByText<HTMLButtonElement>('2');
+  });
+
+  it('queryByText should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryByText('1');
-    const b: ?HTMLElement = queryByText('2');
+    const a: HTMLElement = queryByText<HTMLElement>('1');
+    const b: ?HTMLElement = queryByText<HTMLElement>('2');
   });
 
-  it('queryAllByText should return array of HTML element', () => {
+  it('queryByText should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryByText<HTMLButtonElement>('2');
+  });
+
+  it('queryAllByText should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllByText('1');
-    const b: Array<HTMLElement> = queryAllByText('2');
+    const a: HTMLElement = queryAllByText<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllByText<HTMLElement>('2');
   });
 
-  it('getByTitle should return HTML element', () => {
-    const a: HTMLElement = getByTitle('1');
+  it('queryAllByText should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllByText<HTMLButtonElement>('2');
   });
 
-  it('getAllByTitle should return array of HTML element', () => {
+  it('getByTitle should return HTML element by default', () => {
+    const a: HTMLElement = getByTitle<HTMLElement>('1');
+  });
+
+  it('getByTitle should return passed element', () => {
+    const a: HTMLButtonElement = getByTitle<HTMLButtonElement>('1');
+  });
+
+  it('getAllByTitle should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllByTitle('1');
-    const b: Array<HTMLElement> = getAllByTitle('2');
+    const a: HTMLElement = getAllByTitle<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllByTitle<HTMLElement>('2');
   });
 
-  it('queryByTitle should return maybe HTML element', () => {
+  it('getAllByTitle should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllByTitle<HTMLButtonElement>('2');
+  });
+
+  it('queryByTitle should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryByTitle('1');
-    const b: ?HTMLElement = queryByTitle('2');
+    const a: HTMLElement = queryByTitle<HTMLElement>('1');
+    const b: ?HTMLElement = queryByTitle<HTMLElement>('2');
   });
 
-  it('queryAllByTitle should return array of HTML element', () => {
+  it('queryByTitle should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryByTitle<HTMLButtonElement>('2');
+  });
+
+  it('queryAllByTitle should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllByTitle('1');
-    const b: Array<HTMLElement> = queryAllByTitle('2');
+    const a: HTMLElement = queryAllByTitle<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllByTitle<HTMLElement>('2');
   });
 
-  it('getByValue should return HTML element', () => {
-    const a: HTMLElement = getByValue('1');
+  it('queryAllByTitle should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllByTitle<HTMLButtonElement>('2');
   });
 
-  it('getAllByValue should return array of HTML element', () => {
+  it('getByValue should return HTML element by default', () => {
+    const a: HTMLElement = getByValue<HTMLElement>('1');
+  });
+
+  it('getByValue should return passed element', () => {
+    const a: HTMLButtonElement = getByValue<HTMLButtonElement>('1');
+  });
+
+  it('getAllByValue should return array of HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = getAllByValue('1');
-    const b: Array<HTMLElement> = getAllByValue('2');
+    const a: HTMLElement = getAllByValue<HTMLElement>('1');
+    const b: Array<HTMLElement> = getAllByValue<HTMLElement>('2');
   });
 
-  it('queryByValue should return maybe HTML element', () => {
-    // $ExpectError
-    const a: HTMLElement = queryByValue('1');
-    const b: ?HTMLElement = queryByValue('2');
+  it('getAllByValue should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = getAllByValue<HTMLButtonElement>('2');
   });
 
-  it('queryAllByValue should return array of HTML element', () => {
+  it('queryByValue should return maybe HTML element by default', () => {
     // $ExpectError
-    const a: HTMLElement = queryAllByValue('1');
-    const b: Array<HTMLElement> = queryAllByValue('2');
+    const a: HTMLElement = queryByValue<HTMLElement>('1');
+    const b: ?HTMLElement = queryByValue<HTMLElement>('2');
+  });
+
+  it('queryByValue should return maybe passed element', () => {
+    const b: ?HTMLButtonElement = queryByValue<HTMLButtonElement>('2');
+  });
+
+  it('queryAllByValue should return array of HTML element by default', () => {
+    // $ExpectError
+    const a: HTMLElement = queryAllByValue<HTMLElement>('1');
+    const b: Array<HTMLElement> = queryAllByValue<HTMLElement>('2');
+  });
+  it('queryAllByValue should return array of passed element', () => {
+    const b: Array<HTMLButtonElement> = queryAllByValue<HTMLButtonElement>('2');
   });
 });
 
@@ -393,163 +552,163 @@ describe('within', () => {
   });
 
   it('should have getByAltText', () => {
-    within(container).getByAltText('1');
+    within(container).getByAltText<HTMLElement>('1');
   });
 
   it('should have getAllByAltText', () => {
-    within(container).getAllByAltText('1');
+    within(container).getAllByAltText<HTMLElement>('1');
   });
 
   it('should have queryByAltText', () => {
-    within(container).queryByAltText('1');
+    within(container).queryByAltText<HTMLElement>('1');
   });
 
   it('should have queryAllByAltText', () => {
-    within(container).queryAllByAltText('1');
+    within(container).queryAllByAltText<HTMLElement>('1');
   });
 
   it('should have getByDisplayValue', () => {
-    within(container).getByDisplayValue('1');
+    within(container).getByDisplayValue<HTMLElement>('1');
   });
 
   it('should have getAllByDisplayValue', () => {
-    within(container).getAllByDisplayValue('1');
+    within(container).getAllByDisplayValue<HTMLElement>('1');
   });
 
   it('should have queryByDisplayValue', () => {
-    within(container).queryByDisplayValue('1');
+    within(container).queryByDisplayValue<HTMLElement>('1');
   });
 
   it('should have queryAllByDisplayValue', () => {
-    within(container).queryAllByDisplayValue('1');
+    within(container).queryAllByDisplayValue<HTMLElement>('1');
   });
 
   it('should have getByLabelText', () => {
-    within(container).getByLabelText('1');
+    within(container).getByLabelText<HTMLElement>('1');
   });
 
   it('should have getAllByLabelText', () => {
-    within(container).getAllByLabelText('1');
+    within(container).getAllByLabelText<HTMLElement>('1');
   });
 
   it('should have queryByLabelText', () => {
-    within(container).queryByLabelText('1');
+    within(container).queryByLabelText<HTMLElement>('1');
   });
 
   it('should have queryAllByLabelText', () => {
-    within(container).queryAllByLabelText('1');
+    within(container).queryAllByLabelText<HTMLElement>('1');
   });
 
   it('should have getByPlaceholderText', () => {
-    within(container).getByPlaceholderText('1');
+    within(container).getByPlaceholderText<HTMLElement>('1');
   });
 
   it('should have getAllByPlaceholderText', () => {
-    within(container).getAllByPlaceholderText('1');
+    within(container).getAllByPlaceholderText<HTMLElement>('1');
   });
 
   it('should have queryByPlaceholderText', () => {
-    within(container).queryByPlaceholderText('1');
+    within(container).queryByPlaceholderText<HTMLElement>('1');
   });
 
   it('should have queryAllByPlaceholderText', () => {
-    within(container).queryAllByPlaceholderText('1');
+    within(container).queryAllByPlaceholderText<HTMLElement>('1');
   });
 
   it('should have getByRole', () => {
-    within(container).getByRole('1');
+    within(container).getByRole<HTMLElement>('1');
   });
 
   it('should have getAllByRole', () => {
-    within(container).getAllByRole('1');
+    within(container).getAllByRole<HTMLElement>('1');
   });
 
   it('should have queryByRole', () => {
-    within(container).queryByRole('1');
+    within(container).queryByRole<HTMLElement>('1');
   });
 
   it('should have queryAllByRole', () => {
-    within(container).queryAllByRole('1');
+    within(container).queryAllByRole<HTMLElement>('1');
   });
 
   it('should have getBySelectText', () => {
-    within(container).getBySelectText('1');
+    within(container).getBySelectText<HTMLElement>('1');
   });
 
   it('should have getAllBySelectText', () => {
-    within(container).getAllBySelectText('1');
+    within(container).getAllBySelectText<HTMLElement>('1');
   });
 
   it('should have queryBySelectText', () => {
-    within(container).queryBySelectText('1');
+    within(container).queryBySelectText<HTMLElement>('1');
   });
 
   it('should have queryAllBySelectText', () => {
-    within(container).queryAllBySelectText('1');
+    within(container).queryAllBySelectText<HTMLElement>('1');
   });
 
   it('should have getByTestId', () => {
-    within(container).getByTestId('1');
+    within(container).getByTestId<HTMLElement>('1');
   });
 
   it('should have getAllByTestId', () => {
-    within(container).getAllByTestId('1');
+    within(container).getAllByTestId<HTMLElement>('1');
   });
 
   it('should have queryByTestId', () => {
-    within(container).queryByTestId('1');
+    within(container).queryByTestId<HTMLElement>('1');
   });
 
   it('should have queryAllByTestId', () => {
-    within(container).queryAllByTestId('1');
+    within(container).queryAllByTestId<HTMLElement>('1');
   });
 
   it('should have getByText', () => {
-    within(container).getByText('1');
+    within(container).getByText<HTMLElement>('1');
   });
 
   it('should have getAllByText', () => {
-    within(container).getAllByText('1');
+    within(container).getAllByText<HTMLElement>('1');
   });
 
   it('should have queryByText', () => {
-    within(container).queryByText('1');
+    within(container).queryByText<HTMLElement>('1');
   });
 
   it('should have queryAllByText', () => {
-    within(container).queryAllByText('1');
+    within(container).queryAllByText<HTMLElement>('1');
   });
 
   it('should have getByTitle', () => {
-    within(container).getByTitle('1');
+    within(container).getByTitle<HTMLElement>('1');
   });
 
   it('should have getAllByTitle', () => {
-    within(container).getAllByTitle('1');
+    within(container).getAllByTitle<HTMLElement>('1');
   });
 
   it('should have queryByTitle', () => {
-    within(container).queryByTitle('1');
+    within(container).queryByTitle<HTMLElement>('1');
   });
 
   it('should have queryAllByTitle', () => {
-    within(container).queryAllByTitle('1');
+    within(container).queryAllByTitle<HTMLElement>('1');
   });
 
   it('should have getByValue', () => {
-    within(container).getByValue('1');
+    within(container).getByValue<HTMLElement>('1');
   });
 
   it('should have getAllByValue', () => {
-    within(container).getAllByValue('1');
+    within(container).getAllByValue<HTMLElement>('1');
   });
 
   it('should have queryByValue', () => {
-    within(container).queryByValue('1');
+    within(container).queryByValue<HTMLElement>('1');
   });
 
   it('should have queryAllByValue', () => {
-    within(container).queryAllByValue('1');
+    within(container).queryAllByValue<HTMLElement>('1');
   });
 });
 
@@ -692,12 +851,12 @@ describe('text matching API', () => {
   } = render(<Component />);
 
   it('getByAltText should accept text match arguments', () => {
-    getByAltText('1');
-    getByAltText('1', { trim: true, collapseWhitespace: true, exact: true });
-    getByAltText(/1/);
-    getByAltText(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    getByAltText((content: string, element) => true);
-    getByAltText((content: string, element) => true, {
+    getByAltText<HTMLElement>('1');
+    getByAltText<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    getByAltText<HTMLElement>(/1/);
+    getByAltText<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    getByAltText<HTMLElement>((content: string, element) => true);
+    getByAltText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -705,16 +864,16 @@ describe('text matching API', () => {
   });
 
   it('getAllByAltText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByAltText('1');
+    const result: Array<HTMLElement> = getAllByAltText<HTMLElement>('1');
   });
 
   it('queryByAltText should accept text match arguments', () => {
-    queryByAltText('1');
-    queryByAltText('1', { trim: true, collapseWhitespace: true, exact: true });
-    queryByAltText(/1/);
-    queryByAltText(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    queryByAltText((content: string, element) => true);
-    queryByAltText((content: string, element) => true, {
+    queryByAltText<HTMLElement>('1');
+    queryByAltText<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    queryByAltText<HTMLElement>(/1/);
+    queryByAltText<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    queryByAltText<HTMLElement>((content: string, element) => true);
+    queryByAltText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -722,7 +881,7 @@ describe('text matching API', () => {
   });
 
   it('queryAllByAltText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByAltText('1');
+    const result: Array<HTMLElement> = queryAllByAltText<HTMLElement>('1');
   });
 
   it('getByDisplayValue should accept text match arguments', () => {
@@ -751,20 +910,20 @@ describe('text matching API', () => {
   });
 
   it('queryByDisplayValue should accept text match arguments', () => {
-    queryByDisplayValue('1');
-    queryByDisplayValue('1', {
+    queryByDisplayValue<HTMLElement>('1');
+    queryByDisplayValue<HTMLElement>('1', {
       trim: true,
       collapseWhitespace: true,
       exact: true,
     });
-    queryByDisplayValue(/1/);
-    queryByDisplayValue(/1/, {
+    queryByDisplayValue<HTMLElement>(/1/);
+    queryByDisplayValue<HTMLElement>(/1/, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
     });
-    queryByDisplayValue((content: string, element) => true);
-    queryByDisplayValue((content: string, element) => true, {
+    queryByDisplayValue<HTMLElement>((content: string, element) => true);
+    queryByDisplayValue<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -772,16 +931,16 @@ describe('text matching API', () => {
   });
 
   it('queryAllByDisplayValue should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByDisplayValue('1');
+    const result: Array<HTMLElement> = queryAllByDisplayValue<HTMLElement>('1');
   });
 
   it('getByLabelText should accept text match arguments', () => {
-    getByLabelText('1');
-    getByLabelText('1', { trim: true, collapseWhitespace: true, exact: true });
-    getByLabelText(/1/);
-    getByLabelText(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    getByLabelText((content: string, element) => true);
-    getByLabelText((content: string, element) => true, {
+    getByLabelText<HTMLElement>('1');
+    getByLabelText<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    getByLabelText<HTMLElement>(/1/);
+    getByLabelText<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    getByLabelText<HTMLElement>((content: string, element) => true);
+    getByLabelText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -790,25 +949,25 @@ describe('text matching API', () => {
   });
 
   it('getAllByLabelText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByLabelText('1');
+    const result: Array<HTMLElement> = getAllByLabelText<HTMLElement>('1');
   });
 
   it('queryByLabelText should accept text match arguments', () => {
-    queryByLabelText('1');
-    queryByLabelText('1', {
+    queryByLabelText<HTMLElement>('1');
+    queryByLabelText<HTMLElement>('1', {
       trim: true,
       collapseWhitespace: true,
       exact: true,
     });
-    queryByLabelText(/1/);
-    queryByLabelText(/1/, {
+    queryByLabelText<HTMLElement>(/1/);
+    queryByLabelText<HTMLElement>(/1/, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
       selector: 'A',
     });
-    queryByLabelText((content: string, element) => true);
-    queryByLabelText((content: string, element) => true, {
+    queryByLabelText<HTMLElement>((content: string, element) => true);
+    queryByLabelText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -817,24 +976,24 @@ describe('text matching API', () => {
   });
 
   it('queryAllByLabelText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByLabelText('1');
+    const result: Array<HTMLElement> = queryAllByLabelText<HTMLElement>('1');
   });
 
   it('getByPlaceholderText should accept text match arguments', () => {
-    getByPlaceholderText('1');
-    getByPlaceholderText('1', {
+    getByPlaceholderText<HTMLElement>('1');
+    getByPlaceholderText<HTMLElement>('1', {
       trim: true,
       collapseWhitespace: true,
       exact: true,
     });
-    getByPlaceholderText(/1/);
-    getByPlaceholderText(/1/, {
+    getByPlaceholderText<HTMLElement>(/1/);
+    getByPlaceholderText<HTMLElement>(/1/, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
     });
-    getByPlaceholderText((content: string, element) => true);
-    getByPlaceholderText((content: string, element) => true, {
+    getByPlaceholderText<HTMLElement>((content: string, element) => true);
+    getByPlaceholderText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -842,24 +1001,24 @@ describe('text matching API', () => {
   });
 
   it('getAllByPlaceholderText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByPlaceholderText('1');
+    const result: Array<HTMLElement> = getAllByPlaceholderText<HTMLElement>('1');
   });
 
   it('queryByPlaceholderText should accept text match arguments', () => {
-    queryByPlaceholderText('1');
-    queryByPlaceholderText('1', {
+    queryByPlaceholderText<HTMLElement>('1');
+    queryByPlaceholderText<HTMLElement>('1', {
       trim: true,
       collapseWhitespace: true,
       exact: true,
     });
-    queryByPlaceholderText(/1/);
-    queryByPlaceholderText(/1/, {
+    queryByPlaceholderText<HTMLElement>(/1/);
+    queryByPlaceholderText<HTMLElement>(/1/, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
     });
-    queryByPlaceholderText((content: string, element) => true);
-    queryByPlaceholderText((content: string, element) => true, {
+    queryByPlaceholderText<HTMLElement>((content: string, element) => true);
+    queryByPlaceholderText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -867,16 +1026,16 @@ describe('text matching API', () => {
   });
 
   it('queryAllByPlaceholderText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByPlaceholderText('1');
+    const result: Array<HTMLElement> = queryAllByPlaceholderText<HTMLElement>('1');
   });
 
   it('getByRole should accept text match arguments', () => {
-    getByRole('1');
-    getByRole('1', { trim: true, collapseWhitespace: true, exact: true });
-    getByRole(/1/);
-    getByRole(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    getByRole((content: string, element) => true);
-    getByRole((content: string, element) => true, {
+    getByRole<HTMLElement>('1');
+    getByRole<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    getByRole<HTMLElement>(/1/);
+    getByRole<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    getByRole<HTMLElement>((content: string, element) => true);
+    getByRole<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -884,16 +1043,16 @@ describe('text matching API', () => {
   });
 
   it('getAllByRole should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByRole('1');
+    const result: Array<HTMLElement> = getAllByRole<HTMLElement>('1');
   });
 
   it('queryByRole should accept text match arguments', () => {
-    queryByRole('1');
-    queryByRole('1', { trim: true, collapseWhitespace: true, exact: true });
-    queryByRole(/1/);
-    queryByRole(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    queryByRole((content: string, element) => true);
-    queryByRole((content: string, element) => true, {
+    queryByRole<HTMLElement>('1');
+    queryByRole<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    queryByRole<HTMLElement>(/1/);
+    queryByRole<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    queryByRole<HTMLElement>((content: string, element) => true);
+    queryByRole<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -901,16 +1060,16 @@ describe('text matching API', () => {
   });
 
   it('queryAllByRole should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByRole('1');
+    const result: Array<HTMLElement> = queryAllByRole<HTMLElement>('1');
   });
 
   it('getBySelectText should accept text match arguments', () => {
-    getBySelectText('1');
-    getBySelectText('1', { trim: true, collapseWhitespace: true, exact: true });
-    getBySelectText(/1/);
-    getBySelectText(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    getBySelectText((content: string, element) => true);
-    getBySelectText((content: string, element) => true, {
+    getBySelectText<HTMLElement>('1');
+    getBySelectText<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    getBySelectText<HTMLElement>(/1/);
+    getBySelectText<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    getBySelectText<HTMLElement>((content: string, element) => true);
+    getBySelectText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -918,24 +1077,24 @@ describe('text matching API', () => {
   });
 
   it('getAllBySelectText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllBySelectText('1');
+    const result: Array<HTMLElement> = getAllBySelectText<HTMLElement>('1');
   });
 
   it('queryBySelectText should accept text match arguments', () => {
-    queryBySelectText('1');
-    queryBySelectText('1', {
+    queryBySelectText<HTMLElement>('1');
+    queryBySelectText<HTMLElement>('1', {
       trim: true,
       collapseWhitespace: true,
       exact: true,
     });
-    queryBySelectText(/1/);
-    queryBySelectText(/1/, {
+    queryBySelectText<HTMLElement>(/1/);
+    queryBySelectText<HTMLElement>(/1/, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
     });
-    queryBySelectText((content: string, element) => true);
-    queryBySelectText((content: string, element) => true, {
+    queryBySelectText<HTMLElement>((content: string, element) => true);
+    queryBySelectText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -943,16 +1102,16 @@ describe('text matching API', () => {
   });
 
   it('queryAllBySelectText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllBySelectText('1');
+    const result: Array<HTMLElement> = queryAllBySelectText<HTMLElement>('1');
   });
 
   it('getByTestId should accept text match arguments', () => {
-    getByTestId('1');
-    getByTestId('1', { trim: true, collapseWhitespace: true, exact: true });
-    getByTestId(/1/);
-    getByTestId(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    getByTestId((content: string, element) => true);
-    getByTestId((content: string, element) => true, {
+    getByTestId<HTMLElement>('1');
+    getByTestId<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    getByTestId<HTMLElement>(/1/);
+    getByTestId<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    getByTestId<HTMLElement>((content: string, element) => true);
+    getByTestId<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -960,16 +1119,16 @@ describe('text matching API', () => {
   });
 
   it('getAllByTestId should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByTestId('1');
+    const result: Array<HTMLElement> = getAllByTestId<HTMLElement>('1');
   });
 
   it('queryByTestId should accept text match arguments', () => {
-    queryByTestId('1');
-    queryByTestId('1', { trim: true, collapseWhitespace: true, exact: true });
-    queryByTestId(/1/);
-    queryByTestId(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    queryByTestId((content: string, element) => true);
-    queryByTestId((content: string, element) => true, {
+    queryByTestId<HTMLElement>('1');
+    queryByTestId<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    queryByTestId<HTMLElement>(/1/);
+    queryByTestId<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    queryByTestId<HTMLElement>((content: string, element) => true);
+    queryByTestId<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -977,16 +1136,16 @@ describe('text matching API', () => {
   });
 
   it('queryAllByTestId should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByTestId('1');
+    const result: Array<HTMLElement> = queryAllByTestId<HTMLElement>('1');
   });
 
   it('getByText should accept text match arguments', () => {
-    getByText('1');
-    getByText('1', { trim: true, collapseWhitespace: true, exact: true });
-    getByText(/1/);
-    getByText(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    getByText((content: string, element) => true);
-    getByText((content: string, element) => true, {
+    getByText<HTMLElement>('1');
+    getByText<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    getByText<HTMLElement>(/1/);
+    getByText<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    getByText<HTMLElement>((content: string, element) => true);
+    getByText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -995,16 +1154,16 @@ describe('text matching API', () => {
   });
 
   it('getAllByText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByText('1');
+    const result: Array<HTMLElement> = getAllByText<HTMLElement>('1');
   });
 
   it('queryByText should accept text match arguments', () => {
-    queryByText('1');
-    queryByText('1', { trim: true, collapseWhitespace: true, exact: true });
-    queryByText(/1/);
-    queryByText(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    queryByText((content: string, element) => true);
-    queryByText((content: string, element) => true, {
+    queryByText<HTMLElement>('1');
+    queryByText<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    queryByText<HTMLElement>(/1/);
+    queryByText<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    queryByText<HTMLElement>((content: string, element) => true);
+    queryByText<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -1013,16 +1172,16 @@ describe('text matching API', () => {
   });
 
   it('queryAllByText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByText('1');
+    const result: Array<HTMLElement> = queryAllByText<HTMLElement>('1');
   });
 
   it('getByTitle should accept text match arguments', () => {
-    getByTitle('1');
-    getByTitle('1', { trim: true, collapseWhitespace: true, exact: true });
-    getByTitle(/1/);
-    getByTitle(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    getByTitle((content: string, element) => true);
-    getByTitle((content: string, element) => true, {
+    getByTitle<HTMLElement>('1');
+    getByTitle<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    getByTitle<HTMLElement>(/1/);
+    getByTitle<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    getByTitle<HTMLElement>((content: string, element) => true);
+    getByTitle<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -1030,16 +1189,16 @@ describe('text matching API', () => {
   });
 
   it('getAllByTitle should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByTitle('1');
+    const result: Array<HTMLElement> = getAllByTitle<HTMLElement>('1');
   });
 
+    queryByTitle<HTMLElement>('1');
+    queryByTitle<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    queryByTitle<HTMLElement>(/1/);
+    queryByTitle<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
   it('queryByTitle should accept text match arguments', () => {
-    queryByTitle('1');
-    queryByTitle('1', { trim: true, collapseWhitespace: true, exact: true });
-    queryByTitle(/1/);
-    queryByTitle(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    queryByTitle((content: string, element) => true);
-    queryByTitle((content: string, element) => true, {
+    queryByTitle<HTMLElement>((content: string, element) => true);
+    queryByTitle<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -1047,16 +1206,16 @@ describe('text matching API', () => {
   });
 
   it('queryAllByTitle should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByTitle('1');
+    const result: Array<HTMLElement> = queryAllByTitle<HTMLElement>('1');
   });
 
   it('getByValue should accept text match arguments', () => {
-    getByValue('1');
-    getByValue('1', { trim: true, collapseWhitespace: true, exact: true });
-    getByValue(/1/);
-    getByValue(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    getByValue((content: string, element) => true);
-    getByValue((content: string, element) => true, {
+    getByValue<HTMLElement>('1');
+    getByValue<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    getByValue<HTMLElement>(/1/);
+    getByValue<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    getByValue<HTMLElement>((content: string, element) => true);
+    getByValue<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -1064,16 +1223,16 @@ describe('text matching API', () => {
   });
 
   it('getAllByValue should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByValue('1');
+    const result: Array<HTMLElement> = getAllByValue<HTMLElement>('1');
   });
 
   it('queryByValue should accept text match arguments', () => {
-    queryByValue('1');
-    queryByValue('1', { trim: true, collapseWhitespace: true, exact: true });
-    queryByValue(/1/);
-    queryByValue(/1/, { trim: true, collapseWhitespace: true, exact: true });
-    queryByValue((content: string, element) => true);
-    queryByValue((content: string, element) => true, {
+    queryByValue<HTMLElement>('1');
+    queryByValue<HTMLElement>('1', { trim: true, collapseWhitespace: true, exact: true });
+    queryByValue<HTMLElement>(/1/);
+    queryByValue<HTMLElement>(/1/, { trim: true, collapseWhitespace: true, exact: true });
+    queryByValue<HTMLElement>((content: string, element) => true);
+    queryByValue<HTMLElement>((content: string, element) => true, {
       trim: true,
       collapseWhitespace: true,
       exact: true,
@@ -1081,6 +1240,6 @@ describe('text matching API', () => {
   });
 
   it('queryAllByValue should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByValue('1');
+    const result: Array<HTMLElement> = queryAllByValue<HTMLElement>('1');
   });
 });

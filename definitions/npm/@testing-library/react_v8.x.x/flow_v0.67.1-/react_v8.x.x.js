@@ -12,86 +12,181 @@ declare module '@testing-library/react' {
 
   declare type SelectorMatchOptions = { selector?: string } & TextMatchOptions;
 
-  declare type GetByText = (
-    text: TextMatch,
-    options?: SelectorMatchOptions
-  ) => HTMLElement;
-
-  declare type QueryByText = (
-    text: TextMatch,
-    options?: SelectorMatchOptions
-  ) => ?HTMLElement;
-
-  declare type AllByText = (
-    text: TextMatch,
-    options?: SelectorMatchOptions
-  ) => Array<HTMLElement>;
-
-  declare type GetByBoundAttribute = (
-    text: TextMatch,
-    options?: TextMatchOptions
-  ) => HTMLElement;
-
-  declare type QueryByBoundAttribute = (
-    text: TextMatch,
-    options?: TextMatchOptions
-  ) => ?HTMLElement;
-
-  declare type AllByBoundAttribute = (
-    text: TextMatch,
-    options?: TextMatchOptions
-  ) => Array<HTMLElement>;
+  declare type GetByText<T> = T;
+  declare type QueryByText<T> = ?T;
+  declare type AllByText<T> = Array<T>;
+  declare type GetByBoundAttribute<T> = T;
+  declare type QueryByBoundAttribute<T> = ?T;
+  declare type AllByBoundAttribute<T> = Array<T>;
 
   declare type GetsAndQueries = {|
-    getByAltText: GetByBoundAttribute,
-    getAllByAltText: AllByBoundAttribute,
-    queryByAltText: QueryByBoundAttribute,
-    queryAllByAltText: AllByBoundAttribute,
+    getByAltText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByBoundAttribute<T>,
+    getAllByAltText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    queryByAltText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByBoundAttribute<T>,
+    queryAllByAltText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
 
-    getByDisplayValue: GetByBoundAttribute,
-    getAllByDisplayValue: AllByBoundAttribute,
-    queryByDisplayValue: QueryByBoundAttribute,
-    queryAllByDisplayValue: AllByBoundAttribute,
+    getByDisplayValue: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByBoundAttribute<T>,
+    getAllByDisplayValue: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    queryByDisplayValue: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByBoundAttribute<T>,
+    queryAllByDisplayValue: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    getByLabelText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByText<T>,
+    getAllByLabelText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByText<T>,
+    queryByLabelText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByText<T>,
+    queryAllByLabelText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByText<T>,
 
-    getByLabelText: GetByText,
-    getAllByLabelText: AllByText,
-    queryByLabelText: QueryByText,
-    queryAllByLabelText: AllByText,
+    getByPlaceholderText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByBoundAttribute<T>,
+    getAllByPlaceholderText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    queryByPlaceholderText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByBoundAttribute<T>,
+    queryAllByPlaceholderText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
 
-    getByPlaceholderText: GetByBoundAttribute,
-    getAllByPlaceholderText: AllByBoundAttribute,
-    queryByPlaceholderText: QueryByBoundAttribute,
-    queryAllByPlaceholderText: AllByBoundAttribute,
+    getByRole: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByBoundAttribute<T>,
+    getAllByRole: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    queryByRole: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByBoundAttribute<T>,
+    queryAllByRole: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
 
-    getByRole: GetByBoundAttribute,
-    getAllByRole: AllByBoundAttribute,
-    queryByRole: QueryByBoundAttribute,
-    queryAllByRole: AllByBoundAttribute,
+    getBySelectText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByBoundAttribute<T>,
+    getAllBySelectText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    queryBySelectText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByBoundAttribute<T>,
+    queryAllBySelectText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
 
-    getBySelectText: GetByBoundAttribute,
-    getAllBySelectText: AllByBoundAttribute,
-    queryBySelectText: QueryByBoundAttribute,
-    queryAllBySelectText: AllByBoundAttribute,
+    getByTestId: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByBoundAttribute<T>,
+    getAllByTestId: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    queryByTestId: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByBoundAttribute<T>,
+    queryAllByTestId: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    getByText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByText<T>,
+    getAllByText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByText<T>,
+    queryByText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByText<T>,
+    queryAllByText: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByText<T>,
 
-    getByTestId: GetByBoundAttribute,
-    getAllByTestId: AllByBoundAttribute,
-    queryByTestId: QueryByBoundAttribute,
-    queryAllByTestId: AllByBoundAttribute,
+    getByTitle: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByBoundAttribute<T>,
+    getAllByTitle: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    queryByTitle: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByBoundAttribute<T>,
+    queryAllByTitle: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
 
-    getByText: GetByText,
-    getAllByText: AllByText,
-    queryByText: QueryByText,
-    queryAllByText: AllByText,
-
-    getByTitle: GetByBoundAttribute,
-    getAllByTitle: AllByBoundAttribute,
-    queryByTitle: QueryByBoundAttribute,
-    queryAllByTitle: AllByBoundAttribute,
-
-    getByValue: GetByBoundAttribute,
-    getAllByValue: AllByBoundAttribute,
-    queryByValue: QueryByBoundAttribute,
-    queryAllByValue: AllByBoundAttribute,
+    getByValue: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => GetByBoundAttribute<T>,
+    getAllByValue: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
+    queryByValue: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => QueryByBoundAttribute<T>,
+    queryAllByValue: <T>(
+      text: TextMatch,
+      options?: SelectorMatchOptions
+    ) => AllByBoundAttribute<T>,
   |};
 
   declare type RenderResult = {|

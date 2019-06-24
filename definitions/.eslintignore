@@ -1,3 +1,4 @@
 dist/
 flow-typed/
 **/__*-fixtures__/**
+**/@testing-library/react_v8.x.x/**
