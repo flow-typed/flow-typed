@@ -1875,7 +1875,7 @@ declare module ramda {
 
   declare function invoker<A, B, C, D, O: { [k: string]: Function }>(
     arity: number,
-    name: $Enum<O>
+    name: $Keys<O>
   ): CurriedFunction2<A, O, D> &
     CurriedFunction3<A, B, O, D> &
     CurriedFunction4<A, B, C, O, D>;
