@@ -113,12 +113,10 @@ declare module 'yup' {
     notRequired(): StringSchema<?T>;
   }
 
-  declare export type NumberSchemaConstructor = Class<NumberSchema<?number>> &
-    (() => NumberSchema<?number>);
+  declare export type NumberSchemaConstructor = Class<NumberSchema<number>> &
+    (() => NumberSchema<number>);
 
-  declare export interface NumberSchema<T: ?number> extends Schema<T> {
-    min(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
-    max(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
+  declare export interface NumberSchema<T> extends Schema<T> {
     lessThan(
       limit: number | Ref,
       message?: TestOptionsMessage
@@ -127,11 +125,14 @@ declare module 'yup' {
       limit: number | Ref,
       message?: TestOptionsMessage
     ): NumberSchema<T>;
+    min(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
+    max(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
     positive(message?: TestOptionsMessage): NumberSchema<T>;
     negative(message?: TestOptionsMessage): NumberSchema<T>;
     integer(message?: TestOptionsMessage): NumberSchema<T>;
-    truncate(): NumberSchema<T>;
     round(type: 'floor' | 'ceil' | 'trunc' | 'round'): NumberSchema<T>;
+    truncate(): NumberSchema<T>;
+
     nullable(isNullable?: true): NumberSchema<?T>;
     nullable(isNullable: false): NumberSchema<$NonMaybeType<T>>;
     required(message?: TestOptionsMessage): NumberSchema<$NonMaybeType<T>>;
