@@ -1,5 +1,3 @@
-import { TestOptionsMessage } from 'yup';
-
 declare module 'yup' {
   declare export type TestOptionsMessage =
     | string
@@ -150,10 +148,10 @@ declare module 'yup' {
     notRequired(): BooleanSchema<?T>;
   }
 
-  declare export type DateSchemaConstructor = Class<DateSchema<?Date>> &
-    (() => DateSchema<?Date>);
+  declare export type DateSchemaConstructor = Class<DateSchema<Date>> &
+    (() => DateSchema<Date>);
 
-  declare export interface DateSchema<T: ?Date> extends Schema<T> {
+  declare export interface DateSchema<T> extends Schema<T> {
     min(
       limit: Date | string | Ref,
       message?: TestOptionsMessage
@@ -168,16 +166,17 @@ declare module 'yup' {
     notRequired(): DateSchema<?T>;
   }
 
-  declare export type ArraySchemaConstructor = Class<ArraySchema<mixed>> &
-    (() => ArraySchema<mixed>);
+  declare export type ArraySchemaConstructor = Class<ArraySchema<Array<any>>> &
+    (<T>() => ArraySchema<Array<T>>) &
+    (<U>(type: Schema<U>) => ArraySchema<Array<U>>);
 
-  declare export interface ArraySchema<T> extends Schema<Array<T>> {
-    of<U>(type: Schema<U>): ArraySchema<U>;
+  declare export interface ArraySchema<T> extends Schema<T> {
+    of<U>(type: Schema<U>): ArraySchema<Array<U>>;
     min(limit: number | Ref, message?: TestOptionsMessage): ArraySchema<T>;
     max(limit: number | Ref, message?: TestOptionsMessage): ArraySchema<T>;
     ensure(): ArraySchema<T>;
     compact(
-      rejector?: (value: T, index: number, array: Array<T>) => boolean
+      rejector?: (value: any, index: number, array: Array<T>) => boolean
     ): ArraySchema<T>;
     nullable(isNullable?: true): ArraySchema<?T>;
     nullable(isNullable: false): ArraySchema<$NonMaybeType<T>>;
@@ -196,7 +195,7 @@ declare module 'yup' {
   declare export type ObjectSchemaConstructor = Class<ObjectSchema<{}>> &
     (() => ObjectSchema<{}>);
 
-  declare export interface ObjectSchema<T: {}> extends Schema<T> {
+  declare export interface ObjectSchema<T> extends Schema<T> {
     shape<U: {}>(
       fields: ObjectSchemaDefinition<U>,
       noSortEdges?: Array<[string, string]>

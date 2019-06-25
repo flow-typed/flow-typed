@@ -436,3 +436,136 @@ describe('string', () => {
     });
   });
 });
+
+describe('array', () => {
+  const instance = new array();
+  const instance2 = array<number>();
+
+  describe('own methods', () => {
+    it('should work properly', () => {
+      [instance, instance2].map(schema => {
+        schema
+          .nullable()
+          .nullable(true)
+          .nullable(false)
+          .required()
+          .required('message')
+          .required(() => 'message')
+          .notRequired()
+          .min(1)
+          .min(1, 'message')
+          .max(1)
+          .max(1, 'message')
+          .ensure()
+          .compact(() => true)
+          .of(number());
+      });
+    });
+
+    it('should raise an error when passing incompatible arguments', () => {
+      [instance, instance2].map(schema => {
+        // $ExpectError
+        schema.nullable('need string');
+        // $ExpectError
+        schema.required({ need: 'function or string' });
+        // $ExpectError
+        schema.min('need a number');
+        // $ExpectError
+        schema.min(1, { need: 'func or string' });
+        // $ExpectError
+        schema.max('need a number');
+        // $ExpectError
+        schema.max(1, { need: 'func or string' });
+        // $ExpectError
+        schema.compact('need function');
+        // $ExpectError need yup schema
+        schema.of(123);
+      });
+    });
+  });
+
+  describe('common schema methods', () => {
+    it('should modify type by `nullable` and `required*` methods', () => {
+      const val1 = array<number>()
+        .nullable(false)
+        .validateSync(null);
+
+      (val1: Array<number>);
+      // $ExpectError: check any
+      (val1: number);
+
+      const val2 = array<number>()
+        .nullable()
+        .validateSync(null);
+
+      (val2: ?Array<number>);
+      // $ExpectError: check any
+      (val2: number);
+
+      const val3 = array<number>()
+        .required()
+        .validateSync(null);
+
+      (val3: Array<number>);
+      // $ExpectError: check any
+      (val3: number);
+
+      const val4 = array<number>()
+        .notRequired()
+        .validateSync(null);
+
+      (val4: ?Array<number>);
+      // $ExpectError: check any
+      (val4: number);
+    });
+
+    it('should work properly', () => {
+      [instance, instance2].map(schema => {
+        schema
+          .clone()
+          .label('str')
+          .meta({ meta: 'data' })
+          .concat(array<number>())
+          .strict(false)
+          .strip(true)
+          .default('any value')
+          .typeError()
+          .typeError('message')
+          .typeError(() => 'message')
+          .when('key', { is: true, then: number(), otherwise: string() })
+          .when(['key'], (other, schema) =>
+            other === 4 ? schema.clone() : schema
+          )
+          .test('name', 'message', () => true)
+          .test({
+            test: () => Promise.resolve(true),
+            name: 'name',
+            message: 'message',
+            params: {},
+            exclusive: true,
+          })
+          .test({
+            test: () => Promise.resolve(true),
+          })
+          .transform((a, b) => a + b)
+          .clone();
+
+        schema.validate(null).then(val => {
+          (val: Array<number>);
+
+          // $ExpectError: check any
+          (val: number);
+        });
+
+        schema.validate(null, {
+          path: 'foo.baz',
+          strict: true,
+          abortEarly: true,
+          stripUnknown: true,
+          recursive: true,
+          context: {},
+        });
+      });
+    });
+  });
+});
