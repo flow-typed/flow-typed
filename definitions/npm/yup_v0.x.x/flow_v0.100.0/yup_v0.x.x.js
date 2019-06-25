@@ -1,4 +1,8 @@
 declare module 'yup' {
+  import type Ref from 'yup/lib/Reference';
+  import type Lazy from 'yup/lib/Lazy';
+  import type ValidationError from 'yup/lib/ValidationError';
+
   declare export type TestOptionsMessage =
     | string
     | ((params: $Shape<TestMessageParams>) => string);
@@ -16,13 +20,9 @@ declare module 'yup' {
     context?: {},
   |};
 
-  declare export interface Schema<T> {
-    clone(): Schema<T>;
-    label(label: string): Schema<T>;
-    meta(metadata: SchemaMeta): Schema<T>;
-    meta(): SchemaMeta;
-    describe(): SchemaDescription;
-    concat(schema: Schema<T>): Schema<T>;
+  declare export interface BaseSchema<T> {
+    cast(value: any, options?: { context: {} }): T;
+    resolve(options?: any): BaseSchema<T>;
     validate(value: any, options?: ValidateOptions): Promise<T>;
     validateSync(
       value: any,
@@ -38,12 +38,21 @@ declare module 'yup' {
       value: T,
       options?: $Diff<ValidateOptions, { sync: any, path: any }>
     ): T;
+  }
+
+  declare export interface Schema<T> extends BaseSchema<T> {
+    clone(): Schema<T>;
+    label(label: string): Schema<T>;
+    meta(metadata: SchemaMeta): Schema<T>;
+    meta(): SchemaMeta;
+    describe(): SchemaDescription;
+    concat(schema: Schema<T>): Schema<T>;
     isValid(value: any, options?: ValidateOptions): Promise<boolean>;
     isValidSync(
       value: any,
       options?: $Diff<ValidateOptions, { sync: any }>
     ): boolean;
-    cast(value: any, options?: any): T;
+
     isType(value: any): boolean;
     strict(isStrict: boolean): Schema<T>;
     strip(strip: boolean): Schema<T>;
@@ -72,147 +81,6 @@ declare module 'yup' {
     ): Schema<T>;
     test(options: TestOptions): Schema<T>;
     transform(fn: TransformFunction): Schema<T>;
-  }
-
-  declare export type MixedSchemaConstructor = Class<MixedSchema<mixed>> &
-    (() => MixedSchema<mixed>);
-
-  declare export interface MixedSchema<T> extends Schema<T> {
-    nullable(isNullable?: true): MixedSchema<?T>;
-    nullable(isNullable: false): MixedSchema<$NonMaybeType<T>>;
-    required(message?: TestOptionsMessage): MixedSchema<$NonMaybeType<T>>;
-    notRequired(): MixedSchema<?T>;
-  }
-
-  declare export type StringSchemaConstructor = Class<StringSchema<string>> &
-    (() => StringSchema<string>);
-
-  declare export interface StringSchema<T> extends Schema<T> {
-    length(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
-    min(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
-    max(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
-
-    email(message?: TestOptionsMessage): StringSchema<T>;
-    url(message?: TestOptionsMessage): StringSchema<T>;
-    trim(message?: TestOptionsMessage): StringSchema<T>;
-    lowercase(message?: TestOptionsMessage): StringSchema<T>;
-    uppercase(message?: TestOptionsMessage): StringSchema<T>;
-
-    ensure(): StringSchema<T>;
-    matches(
-      regex: RegExp,
-      messageOrOptions?:
-        | TestOptionsMessage
-        | { message?: TestOptionsMessage, excludeEmptyString?: boolean }
-    ): StringSchema<T>;
-
-    nullable(isNullable?: true): StringSchema<?T>;
-    nullable(isNullable: false): StringSchema<$NonMaybeType<T>>;
-    required(message?: TestOptionsMessage): StringSchema<$NonMaybeType<T>>;
-    notRequired(): StringSchema<?T>;
-  }
-
-  declare export type NumberSchemaConstructor = Class<NumberSchema<number>> &
-    (() => NumberSchema<number>);
-
-  declare export interface NumberSchema<T> extends Schema<T> {
-    lessThan(
-      limit: number | Ref,
-      message?: TestOptionsMessage
-    ): NumberSchema<T>;
-    moreThan(
-      limit: number | Ref,
-      message?: TestOptionsMessage
-    ): NumberSchema<T>;
-    min(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
-    max(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
-    positive(message?: TestOptionsMessage): NumberSchema<T>;
-    negative(message?: TestOptionsMessage): NumberSchema<T>;
-    integer(message?: TestOptionsMessage): NumberSchema<T>;
-    round(type: 'floor' | 'ceil' | 'trunc' | 'round'): NumberSchema<T>;
-    truncate(): NumberSchema<T>;
-
-    nullable(isNullable?: true): NumberSchema<?T>;
-    nullable(isNullable: false): NumberSchema<$NonMaybeType<T>>;
-    required(message?: TestOptionsMessage): NumberSchema<$NonMaybeType<T>>;
-    notRequired(): NumberSchema<?T>;
-  }
-
-  declare export type BooleanSchemaConstructor = Class<BooleanSchema<boolean>> &
-    (() => BooleanSchema<boolean>);
-
-  declare export interface BooleanSchema<T> extends Schema<T> {
-    nullable(isNullable?: true): BooleanSchema<?T>;
-    nullable(isNullable: false): BooleanSchema<$NonMaybeType<T>>;
-    required(message?: TestOptionsMessage): BooleanSchema<$NonMaybeType<T>>;
-    notRequired(): BooleanSchema<?T>;
-  }
-
-  declare export type DateSchemaConstructor = Class<DateSchema<Date>> &
-    (() => DateSchema<Date>);
-
-  declare export interface DateSchema<T> extends Schema<T> {
-    min(
-      limit: Date | string | Ref,
-      message?: TestOptionsMessage
-    ): DateSchema<T>;
-    max(
-      limit: Date | string | Ref,
-      message?: TestOptionsMessage
-    ): DateSchema<T>;
-
-    nullable(isNullable?: true): DateSchema<?T>;
-    nullable(isNullable: false): DateSchema<$NonMaybeType<T>>;
-    required(message?: TestOptionsMessage): DateSchema<$NonMaybeType<T>>;
-    notRequired(): DateSchema<?T>;
-  }
-
-  declare export type ArraySchemaConstructor = Class<ArraySchema<Array<any>>> &
-    (<T>() => ArraySchema<Array<T>>) &
-    (<U>(type: Schema<U>) => ArraySchema<Array<U>>);
-
-  declare export interface ArraySchema<T> extends Schema<T> {
-    of<U>(type: Schema<U>): ArraySchema<Array<U>>;
-    min(limit: number | Ref, message?: TestOptionsMessage): ArraySchema<T>;
-    max(limit: number | Ref, message?: TestOptionsMessage): ArraySchema<T>;
-    ensure(): ArraySchema<T>;
-    compact(
-      rejector?: (value: any, index: number, array: Array<T>) => boolean
-    ): ArraySchema<T>;
-    nullable(isNullable?: true): ArraySchema<?T>;
-    nullable(isNullable: false): ArraySchema<$NonMaybeType<T>>;
-    required(message?: TestOptionsMessage): ArraySchema<$NonMaybeType<T>>;
-    notRequired(): ArraySchema<?T>;
-  }
-
-  declare export type ObjectSchemaDefinition<T: {}> = {
-    //[field in keyof T]: Schema<T[field]> | Ref
-  };
-
-  declare export type Shape<T: {}, U: {}> = {
-    //[P in keyof T]: P extends keyof U ? U[P] : T[P]
-  } & U;
-
-  declare export type ObjectSchemaConstructor = Class<ObjectSchema<{}>> &
-    (() => ObjectSchema<{}>);
-
-  declare export interface ObjectSchema<T> extends Schema<T> {
-    shape<U: {}>(
-      fields: ObjectSchemaDefinition<U>,
-      noSortEdges?: Array<[string, string]>
-    ): ObjectSchema<Shape<T, U>>;
-    from(fromKey: string, toKey: string, alias?: boolean): ObjectSchema<T>;
-    noUnknown(
-      onlyKnownKeys?: boolean,
-      message?: TestOptionsMessage
-    ): ObjectSchema<T>;
-    transformKeys(callback: (key: any) => any): void;
-    camelCase(): ObjectSchema<T>;
-    constantCase(): ObjectSchema<T>;
-    nullable(isNullable?: true): ObjectSchema<?T>;
-    nullable(isNullable: false): ObjectSchema<$NonMaybeType<T>>;
-    required(message?: TestOptionsMessage): ObjectSchema<$NonMaybeType<T>>;
-    notRequired(): ObjectSchema<?T>;
   }
 
   declare export type TransformFunction = (
@@ -271,20 +139,80 @@ declare module 'yup' {
     fields: {};
   }
 
-  declare export type Lazy = Schema<any>;
+  declare export function ref(
+    path: string,
+    options?: {| contextPrefix: string |}
+  ): Ref;
+
+  declare export function lazy<T>(fn: (value: T) => Schema<T>): Lazy;
+
+  declare export { default as setLocale } from 'yup/lib/setLocale';
+  declare export { default as isSchema } from 'yup/lib/util/isSchema';
+  declare export { default as reach } from 'yup/lib/util/reach';
+
+  declare export { default as array } from 'yup/lib/array';
+  declare export { default as bool } from 'yup/lib/bool';
+  declare export { default as boolean } from 'yup/lib/boolean';
+  declare export { default as date } from 'yup/lib/date';
+  declare export { default as mixed } from 'yup/lib/mixed';
+  declare export { default as number } from 'yup/lib/number';
+  declare export { default as object } from 'yup/lib/object';
+  declare export { default as string } from 'yup/lib/string';
+
+  declare export function addMethod(
+    schemaType: any,
+    name: string,
+    method: (...args: any) => mixed
+  ): void;
+}
+
+declare module 'yup/lib/setLocale' {
+  declare export type LocaleDescriptor<Keys> = {
+    [Keys]: string,
+  };
 
   declare export type LocaleObject = {|
-    mixed?: {},
-    string?: {},
-    number?: {},
+    mixed?: {
+      notType: ({|
+        path: string,
+        type: any,
+        value: any,
+        originalValue: any,
+      |}) => string,
+    } & LocaleDescriptor<'default' | 'required' | 'oneOf' | 'notOneOf'>,
+    string?: LocaleDescriptor<
+      | 'length'
+      | 'min'
+      | 'max'
+      | 'matches'
+      | 'email'
+      | 'url'
+      | 'trim'
+      | 'lowercase'
+      | 'uppercase'
+    >,
+    number?: LocaleDescriptor<
+      | 'min '
+      | 'max'
+      | 'lessThan'
+      | 'moreThan'
+      | 'notEqual'
+      | 'positive'
+      | 'negative'
+      | 'integer'
+    >,
     boolean?: {},
     bool?: {},
-    date?: {},
-    array?: {},
-    object?: {},
+    date?: LocaleDescriptor<'min' | 'max'>,
+    array?: LocaleDescriptor<'min' | 'max'>,
+    object?: LocaleDescriptor<'noUnknown'>,
   |};
 
-  declare export class ValidationError extends Error {
+  declare export default (customLocale: LocaleObject) => void;
+}
+
+declare module 'yup/lib/ValidationError' {
+  declare export default class ValidationError extends Error {
     name: string;
     message: string;
     value: any;
@@ -307,38 +235,220 @@ declare module 'yup' {
       type?: any
     ): ValidationError;
   }
+}
+declare module 'yup/lib/Lazy' {
+  import type { BaseSchema } from 'yup';
 
-  declare export class Ref {
-    constructor(): Ref;
+  declare export default Class<BaseSchema<any>>;
+}
+declare module 'yup/lib/Reference' {
+  declare export type RefOptions = {| contextPrefix: string |};
+
+  declare export default class Reference {
     +__isYupRef: true;
+
+    constructor(key: string, options: RefOptions): Reference;
+    getValue(options: {}): any;
+    cast(value: any, options: {}): any;
+    resolve(): Reference;
+    describe(): {| type: 'ref', key: string |};
+
+    static isRef(value: any): boolean;
   }
-  declare export function reach<T>(
-    schema: Schema<T>,
-    path: string,
-    value?: any,
-    context?: any
-  ): Schema<T>;
+}
 
-  declare export function addMethod<T>(
-    schemaCtor: any,
-    name: string,
-    method: (...args: any) => T
-  ): void;
+declare module 'yup/lib/util/reach' {
+  import type { Schema } from 'yup';
 
-  declare export function ref(
-    path: string,
-    options?: {| contextPrefix: string |}
-  ): Ref;
-  declare export function lazy<T>(fn: (value: T) => Schema<T>): Lazy<T>;
-  declare export function setLocale(customLocale: LocaleObject): void;
-  declare export function isSchema(obj: any): boolean;
+  declare export default {
+    <T>(schema: Schema<T>, path: string, value?: any, context?: any): Schema<T>,
+  };
+}
+declare module 'yup/lib/util/isSchema' {
+  declare export default (obj: any) => boolean;
+}
 
-  declare export var mixed: MixedSchemaConstructor;
-  declare export var string: StringSchemaConstructor;
-  declare export var number: NumberSchemaConstructor;
-  declare export var boolean: BooleanSchemaConstructor;
-  declare export var bool: BooleanSchemaConstructor;
-  declare export var date: DateSchemaConstructor;
-  declare export var array: ArraySchemaConstructor;
-  declare export var object: ObjectSchemaConstructor;
+declare module 'yup/lib/mixed' {
+  import type { Schema, TestOptionsMessage } from 'yup';
+
+  declare export type MixedSchemaConstructor = Class<MixedSchema<mixed>> &
+    (() => MixedSchema<mixed>);
+
+  declare export interface MixedSchema<T> extends Schema<T> {
+    nullable(isNullable?: true): MixedSchema<?T>;
+    nullable(isNullable: false): MixedSchema<$NonMaybeType<T>>;
+    required(message?: TestOptionsMessage): MixedSchema<$NonMaybeType<T>>;
+    notRequired(): MixedSchema<?T>;
+  }
+
+  declare export default MixedSchemaConstructor;
+}
+declare module 'yup/lib/string' {
+  import type Ref from 'yup/lib/Reference';
+  import type { Schema, TestOptionsMessage } from 'yup';
+
+  declare export type StringSchemaConstructor = Class<StringSchema<string>> &
+    (() => StringSchema<string>);
+
+  declare export interface StringSchema<T> extends Schema<T> {
+    length(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
+    min(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
+    max(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
+
+    email(message?: TestOptionsMessage): StringSchema<T>;
+    url(message?: TestOptionsMessage): StringSchema<T>;
+    trim(message?: TestOptionsMessage): StringSchema<T>;
+    lowercase(message?: TestOptionsMessage): StringSchema<T>;
+    uppercase(message?: TestOptionsMessage): StringSchema<T>;
+
+    ensure(): StringSchema<T>;
+    matches(
+      regex: RegExp,
+      messageOrOptions?:
+        | TestOptionsMessage
+        | { message?: TestOptionsMessage, excludeEmptyString?: boolean }
+    ): StringSchema<T>;
+
+    nullable(isNullable?: true): StringSchema<?T>;
+    nullable(isNullable: false): StringSchema<$NonMaybeType<T>>;
+    required(message?: TestOptionsMessage): StringSchema<$NonMaybeType<T>>;
+    notRequired(): StringSchema<?T>;
+  }
+
+  declare export default StringSchemaConstructor;
+}
+declare module 'yup/lib/number' {
+  import type Ref from 'yup/lib/Reference';
+  import type { Schema, TestOptionsMessage } from 'yup';
+
+  declare export type NumberSchemaConstructor = Class<NumberSchema<number>> &
+    (() => NumberSchema<number>);
+
+  declare export interface NumberSchema<T> extends Schema<T> {
+    lessThan(
+      limit: number | Ref,
+      message?: TestOptionsMessage
+    ): NumberSchema<T>;
+    moreThan(
+      limit: number | Ref,
+      message?: TestOptionsMessage
+    ): NumberSchema<T>;
+    min(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
+    max(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
+    positive(message?: TestOptionsMessage): NumberSchema<T>;
+    negative(message?: TestOptionsMessage): NumberSchema<T>;
+    integer(message?: TestOptionsMessage): NumberSchema<T>;
+    round(type: 'floor' | 'ceil' | 'trunc' | 'round'): NumberSchema<T>;
+    truncate(): NumberSchema<T>;
+
+    nullable(isNullable?: true): NumberSchema<?T>;
+    nullable(isNullable: false): NumberSchema<$NonMaybeType<T>>;
+    required(message?: TestOptionsMessage): NumberSchema<$NonMaybeType<T>>;
+    notRequired(): NumberSchema<?T>;
+  }
+
+  declare export default NumberSchemaConstructor;
+}
+declare module 'yup/lib/boolean' {
+  import type { BooleanSchemaConstructor } from 'yup/lib/bool';
+  declare export default BooleanSchemaConstructor;
+}
+declare module 'yup/lib/bool' {
+  import type { Schema, TestOptionsMessage } from 'yup';
+
+  declare export type BooleanSchemaConstructor = Class<BooleanSchema<boolean>> &
+    (() => BooleanSchema<boolean>);
+
+  declare export interface BooleanSchema<T> extends Schema<T> {
+    nullable(isNullable?: true): BooleanSchema<?T>;
+    nullable(isNullable: false): BooleanSchema<$NonMaybeType<T>>;
+    required(message?: TestOptionsMessage): BooleanSchema<$NonMaybeType<T>>;
+    notRequired(): BooleanSchema<?T>;
+  }
+
+  declare export default BooleanSchemaConstructor;
+}
+declare module 'yup/lib/date' {
+  import type Ref from 'yup/lib/Reference';
+  import type { Schema, TestOptionsMessage } from 'yup';
+
+  declare export type DateSchemaConstructor = Class<DateSchema<Date>> &
+    (() => DateSchema<Date>);
+
+  declare export interface DateSchema<T> extends Schema<T> {
+    min(
+      limit: Date | string | Ref,
+      message?: TestOptionsMessage
+    ): DateSchema<T>;
+    max(
+      limit: Date | string | Ref,
+      message?: TestOptionsMessage
+    ): DateSchema<T>;
+
+    nullable(isNullable?: true): DateSchema<?T>;
+    nullable(isNullable: false): DateSchema<$NonMaybeType<T>>;
+    required(message?: TestOptionsMessage): DateSchema<$NonMaybeType<T>>;
+    notRequired(): DateSchema<?T>;
+  }
+
+  declare export default DateSchemaConstructor;
+}
+declare module 'yup/lib/array' {
+  import type Ref from 'yup/lib/Reference';
+  import type { Schema, TestOptionsMessage } from 'yup';
+
+  declare export type ArraySchemaConstructor = Class<ArraySchema<Array<any>>> &
+    (<T>() => ArraySchema<Array<T>>) &
+    (<U>(type: Schema<U>) => ArraySchema<Array<U>>);
+
+  declare export interface ArraySchema<T> extends Schema<T> {
+    of<U>(type: Schema<U>): ArraySchema<Array<U>>;
+    min(limit: number | Ref, message?: TestOptionsMessage): ArraySchema<T>;
+    max(limit: number | Ref, message?: TestOptionsMessage): ArraySchema<T>;
+    ensure(): ArraySchema<T>;
+    compact(
+      rejector?: (value: any, index: number, array: Array<T>) => boolean
+    ): ArraySchema<T>;
+    nullable(isNullable?: true): ArraySchema<?T>;
+    nullable(isNullable: false): ArraySchema<$NonMaybeType<T>>;
+    required(message?: TestOptionsMessage): ArraySchema<$NonMaybeType<T>>;
+    notRequired(): ArraySchema<?T>;
+  }
+
+  declare export default ArraySchemaConstructor;
+}
+declare module 'yup/lib/object' {
+  import type { Schema, TestOptionsMessage } from 'yup';
+
+  declare export type ObjectSchemaDefinition<T: {}> = {
+    //[field in keyof T]: Schema<T[field]> | Ref
+  };
+
+  declare export type Shape<T: {}, U: {}> = {
+    //[P in keyof T]: P extends keyof U ? U[P] : T[P]
+  } & U;
+
+  declare export type ObjectSchemaConstructor = Class<ObjectSchema<{}>> &
+    (() => ObjectSchema<{}>);
+
+  declare export interface ObjectSchema<T> extends Schema<T> {
+    shape<U: {}>(
+      fields: ObjectSchemaDefinition<U>,
+      noSortEdges?: Array<[string, string]>
+    ): ObjectSchema<Shape<T, U>>;
+    from(fromKey: string, toKey: string, alias?: boolean): ObjectSchema<T>;
+    noUnknown(
+      onlyKnownKeys?: boolean,
+      message?: TestOptionsMessage
+    ): ObjectSchema<T>;
+    transformKeys(callback: (key: any) => any): void;
+    camelCase(): ObjectSchema<T>;
+    constantCase(): ObjectSchema<T>;
+    nullable(isNullable?: true): ObjectSchema<?T>;
+    nullable(isNullable: false): ObjectSchema<$NonMaybeType<T>>;
+    required(message?: TestOptionsMessage): ObjectSchema<$NonMaybeType<T>>;
+    notRequired(): ObjectSchema<?T>;
+  }
+
+  declare export default ObjectSchemaConstructor;
 }
