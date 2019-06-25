@@ -1,4 +1,4 @@
-import { ValidateOptions } from 'yup';
+import { TestOptionsMessage } from 'yup';
 
 declare module 'yup' {
   declare export type TestOptionsMessage =
@@ -86,27 +86,28 @@ declare module 'yup' {
     notRequired(): MixedSchema<?T>;
   }
 
-  declare export type StringSchemaConstructor = Class<StringSchema<?string>> &
-    (() => StringSchema<?string>);
+  declare export type StringSchemaConstructor = Class<StringSchema<string>> &
+    (() => StringSchema<string>);
 
-  declare export interface StringSchema<T: ?string> extends Schema<T> {
-    constructor(): StringSchema<T>;
-
+  declare export interface StringSchema<T> extends Schema<T> {
     length(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
     min(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
     max(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
+
+    email(message?: TestOptionsMessage): StringSchema<T>;
+    url(message?: TestOptionsMessage): StringSchema<T>;
+    trim(message?: TestOptionsMessage): StringSchema<T>;
+    lowercase(message?: TestOptionsMessage): StringSchema<T>;
+    uppercase(message?: TestOptionsMessage): StringSchema<T>;
+
+    ensure(): StringSchema<T>;
     matches(
       regex: RegExp,
       messageOrOptions?:
         | TestOptionsMessage
         | { message?: TestOptionsMessage, excludeEmptyString?: boolean }
     ): StringSchema<T>;
-    email(message?: TestOptionsMessage): StringSchema<T>;
-    url(message?: TestOptionsMessage): StringSchema<T>;
-    ensure(): StringSchema<T>;
-    trim(message?: TestOptionsMessage): StringSchema<T>;
-    lowercase(message?: TestOptionsMessage): StringSchema<T>;
-    uppercase(message?: TestOptionsMessage): StringSchema<T>;
+
     nullable(isNullable?: true): StringSchema<?T>;
     nullable(isNullable: false): StringSchema<$NonMaybeType<T>>;
     required(message?: TestOptionsMessage): StringSchema<$NonMaybeType<T>>;
@@ -176,7 +177,7 @@ declare module 'yup' {
     max(limit: number | Ref, message?: TestOptionsMessage): ArraySchema<T>;
     ensure(): ArraySchema<T>;
     compact(
-      rejector?: (value: T, index: number, array: T[]) => boolean
+      rejector?: (value: T, index: number, array: Array<T>) => boolean
     ): ArraySchema<T>;
     nullable(isNullable?: true): ArraySchema<?T>;
     nullable(isNullable: false): ArraySchema<$NonMaybeType<T>>;
@@ -289,8 +290,8 @@ declare module 'yup' {
     value: any;
     path: string;
     type: any;
-    errors: string[];
-    inner: ValidationError[];
+    errors: Array<string>;
+    inner: Array<ValidationError>;
     params?: {};
 
     static isError(err: any): boolean;
@@ -300,7 +301,7 @@ declare module 'yup' {
     ): string | ((params?: any) => string);
 
     constructor(
-      errors: string | string[],
+      errors: string | Array<string>,
       value: any,
       path: string,
       type?: any
