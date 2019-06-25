@@ -131,13 +131,12 @@ declare module 'yup' {
     exclusive?: boolean,
   |};
 
-  declare export interface SchemaDescription {
-    type: string;
-    label: string;
-    meta: {};
-    tests: Array<{ name: string, params: {} }>;
-    fields: {};
-  }
+  declare export type SchemaDescription = {
+    type: string,
+    label: string,
+    meta: {},
+    tests: Array<{ name: string, params: {} }>,
+  };
 
   declare export function ref(
     path: string,
