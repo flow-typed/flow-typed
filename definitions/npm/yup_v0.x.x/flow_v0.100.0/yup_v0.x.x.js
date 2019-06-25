@@ -178,7 +178,8 @@ declare module 'yup/lib/setLocale' {
         value: any,
         originalValue: any,
       |}) => string,
-    } & LocaleDescriptor<'default' | 'required' | 'oneOf' | 'notOneOf'>,
+      ['default' | 'required' | 'oneOf' | 'notOneOf']: string,
+    },
     string?: LocaleDescriptor<
       | 'length'
       | 'min'
@@ -260,7 +261,12 @@ declare module 'yup/lib/util/reach' {
   import type { Schema } from 'yup';
 
   declare export default {
-    <T>(schema: Schema<T>, path: string, value?: any, context?: any): Schema<T>,
+    <T, R>(
+      schema: Schema<T>,
+      path: string,
+      value?: any,
+      context?: any
+    ): Schema<R>,
   };
 }
 declare module 'yup/lib/util/isSchema' {

@@ -1,8 +1,46 @@
 // @flow
-import { array, bool, date, mixed, string, number, object } from 'yup';
+import {
+  isSchema,
+  setLocale,
+  array,
+  bool,
+  date,
+  mixed,
+  string,
+  number,
+  object,
+} from 'yup';
 import { it, describe } from 'flow-typed-test';
 
-describe('bool and boolean', () => {
+it('should return boolean when calling isSchema', () => {
+  (isSchema(null): boolean);
+});
+
+describe('setLocale', () => {
+  it('should work properly', () => {
+    (setLocale({
+      mixed: {
+        notType: () => 'ой',
+        required: 'Заполни',
+      },
+      string: {
+        email: 'Введи нормальный э-майл адрес ганчар',
+      },
+    }): void);
+  });
+
+  it('should raise an error when passing object with missing key', () => {
+    // $ExpectError: `abc` is missing
+    setLocale({ abc: { test: 'test' } });
+  });
+
+  it('should raise an error when passing invalid locale object', () => {
+    // $ExpectError: `min__` is missing
+    setLocale({ number: { min__: 'test' } });
+  });
+});
+
+describe('bool & boolean', () => {
   const instance = new bool();
   const instance2 = bool();
 
