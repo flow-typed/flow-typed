@@ -160,6 +160,7 @@ declare module 'yup' {
       limit: Date | string | Ref,
       message?: TestOptionsMessage
     ): DateSchema<T>;
+
     nullable(isNullable?: true): DateSchema<?T>;
     nullable(isNullable: false): DateSchema<$NonMaybeType<T>>;
     required(message?: TestOptionsMessage): DateSchema<$NonMaybeType<T>>;

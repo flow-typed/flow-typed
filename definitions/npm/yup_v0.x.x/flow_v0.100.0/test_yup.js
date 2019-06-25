@@ -569,3 +569,132 @@ describe('array', () => {
     });
   });
 });
+
+describe('date', () => {
+  const instance = new date();
+  const instance2 = date();
+
+  describe('own methods', () => {
+    it('should work properly', () => {
+      [instance, instance2].map(schema => {
+        schema
+          .nullable()
+          .nullable(true)
+          .nullable(false)
+          .required()
+          .required('message')
+          .required(() => 'message')
+          .notRequired()
+          .min(new Date())
+          .min(new Date(), 'message')
+          .max(new Date())
+          .max(new Date(), 'message');
+      });
+    });
+
+    it('should raise an error when passing incompatible arguments', () => {
+      [instance, instance2].map(schema => {
+        // $ExpectError
+        schema.nullable('need Date');
+        // $ExpectError
+        schema.required({ need: 'function or string' });
+
+        // $ExpectError: need Date or string or Ref
+        schema.min(123);
+        // $ExpectError
+        schema.min(new Date(), { need: 'func or string' });
+        // $ExpectError: need Date or string or Ref
+        schema.max(123);
+        // $ExpectError
+        schema.max(new Date(), { need: 'func or string' });
+      });
+    });
+  });
+
+  describe('common schema methods', () => {
+    it('should modify type by `nullable` and `required*` methods', () => {
+      const val1 = date()
+        .nullable(false)
+        .validateSync(null);
+
+      (val1: Date);
+      // $ExpectError: check any
+      (val1: string);
+
+      const val2 = date()
+        .nullable()
+        .validateSync(null);
+
+      (val2: ?Date);
+      // $ExpectError: check any
+      (val2: string);
+
+      const val3 = date()
+        .required()
+        .validateSync(null);
+
+      (val3: Date);
+      // $ExpectError: check any
+      (val3: string);
+
+      const val4 = date()
+        .notRequired()
+        .validateSync(null);
+
+      (val4: ?Date);
+      // $ExpectError: check any
+      (val4: string);
+    });
+
+    it('should work properly', () => {
+      [instance, instance2].map(schema => {
+        schema
+          .clone()
+          .label('str')
+          .meta({ meta: 'data' })
+          .concat(date())
+          .strict(true)
+          .strip(false)
+          .default('any value')
+          .typeError()
+          .typeError('message')
+          .typeError(() => 'message')
+          .oneOf([new Date(), new Date()])
+          .notOneOf([new Date(), new Date()])
+          .when('key', { is: '12', then: number(), otherwise: string() })
+          .when(['key'], (other, schema) =>
+            other === 4 ? schema.clone() : schema
+          )
+          .test('name', 'message', () => true)
+          .test({
+            test: () => Promise.resolve(true),
+            name: 'name',
+            message: 'message',
+            params: {},
+            exclusive: true,
+          })
+          .test({
+            test: () => Promise.resolve(true),
+          })
+          .transform((a, b) => a + b)
+          .clone();
+
+        schema.validate(null).then(val => {
+          (val: Date);
+
+          // $ExpectError: check any
+          (val: string);
+        });
+
+        schema.validate(null, {
+          path: 'foo.baz',
+          strict: true,
+          abortEarly: true,
+          stripUnknown: true,
+          recursive: true,
+          context: {},
+        });
+      });
+    });
+  });
+});
