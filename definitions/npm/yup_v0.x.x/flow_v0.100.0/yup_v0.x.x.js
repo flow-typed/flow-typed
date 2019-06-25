@@ -1,4 +1,4 @@
-import { BooleanSchema } from 'yup';
+import { ValidateOptions } from 'yup';
 
 declare module 'yup' {
   declare export type TestOptionsMessage =
@@ -8,7 +8,8 @@ declare module 'yup' {
   declare export type SchemaMeta = any;
 
   declare export type ValidateOptions = {|
-    sync?: boolean,
+    // When call `validate(value, {sync: true})` result will be not passed `value`
+    // sync?: boolean,
     path?: string,
     strict?: boolean,
     abortEarly?: boolean,
@@ -53,15 +54,15 @@ declare module 'yup' {
     default(): T;
     typeError(message?: TestOptionsMessage): Schema<T>;
     oneOf(
-      arrayOfValues: $ReadOnlyArray<any>,
+      arrayOfValues: $ReadOnlyArray<T>,
       message?: TestOptionsMessage
     ): Schema<T>;
     notOneOf(
-      arrayOfValues: $ReadOnlyArray<any>,
+      arrayOfValues: $ReadOnlyArray<T>,
       message?: TestOptionsMessage
     ): Schema<T>;
     when(
-      keys: string | $ReadOnlyArray<any>,
+      keys: string | $ReadOnlyArray<string>,
       builder: WhenOptions<Schema<T>>
     ): Schema<T>;
     test(
@@ -69,8 +70,7 @@ declare module 'yup' {
       message: TestOptionsMessage,
       test: (
         value?: any
-      ) => boolean | ValidationError | Promise<boolean | ValidationError>,
-      callbackStyleAsync?: boolean
+      ) => boolean | ValidationError | Promise<boolean | ValidationError>
     ): Schema<T>;
     test(options: TestOptions): Schema<T>;
     transform(fn: TransformFunction): Schema<T>;
@@ -90,6 +90,8 @@ declare module 'yup' {
     (() => StringSchema<?string>);
 
   declare export interface StringSchema<T: ?string> extends Schema<T> {
+    constructor(): StringSchema<T>;
+
     length(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
     min(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
     max(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
@@ -136,15 +138,10 @@ declare module 'yup' {
     notRequired(): NumberSchema<?T>;
   }
 
-  declare export type BooleanSchemaConstructor = Class<
-    BooleanSchema<?boolean>
-  > &
-    (() => BooleanSchema<?boolean>);
+  declare export type BooleanSchemaConstructor = Class<BooleanSchema<boolean>> &
+    (() => BooleanSchema<boolean>);
 
-  declare export interface BooleanSchema<T: ?boolean> extends Schema<T> {
-    static(): BooleanSchema<T>;
-    constructor(): BooleanSchema<T>;
-
+  declare export interface BooleanSchema<T> extends Schema<T> {
     nullable(isNullable?: true): BooleanSchema<?T>;
     nullable(isNullable: false): BooleanSchema<$NonMaybeType<T>>;
     required(message?: TestOptionsMessage): BooleanSchema<$NonMaybeType<T>>;
@@ -222,25 +219,26 @@ declare module 'yup' {
   ) => any;
 
   declare export interface WhenOptionsBuilderFunction<T> {
-    (value: any, schema: T): T;
-    (v1: any, v2: any, schema: T): T;
-    (v1: any, v2: any, v3: any, schema: T): T;
-    (v1: any, v2: any, v3: any, v4: any, schema: T): T;
+    (value: any, schema: T, ...rest: Array<empty>): T;
+    (v1: any, v2: any, schema: T, ...rest: Array<empty>): T;
+    (v1: any, v2: any, v3: any, schema: T, ...rest: Array<empty>): T;
+    (v1: any, v2: any, v3: any, v4: any, schema: T, ...rest: Array<empty>): T;
   }
 
   declare export type WhenOptionsBuilderObjectIs =
     | ((...values: any) => boolean)
     | boolean
     | number
+    | string
     | null
-    | {}
-    | string;
+    | void
+    | {};
 
-  declare export type WhenOptionsBuilderObject = {
+  declare export type WhenOptionsBuilderObject = {|
     is: WhenOptionsBuilderObjectIs,
-    then: any,
-    otherwise: any,
-  };
+    then: Schema<any>,
+    otherwise: Schema<any>,
+  |};
 
   declare export type WhenOptions<T> =
     | WhenOptionsBuilderFunction<T>
@@ -253,15 +251,15 @@ declare module 'yup' {
     label: string,
   |};
 
-  declare export interface TestOptions {
-    name?: string;
+  declare export type TestOptions = {|
+    name?: string,
     test: (
       value: any
-    ) => boolean | ValidationError | Promise<boolean | ValidationError>;
-    message?: TestOptionsMessage;
-    params?: {};
-    exclusive?: boolean;
-  }
+    ) => boolean | ValidationError | Promise<boolean | ValidationError>,
+    message?: TestOptionsMessage,
+    params?: {},
+    exclusive?: boolean,
+  |};
 
   declare export interface SchemaDescription {
     type: string;
