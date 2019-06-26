@@ -8,7 +8,9 @@ import {
   mixed,
   string,
   number,
+  ref,
   object,
+  type Schema,
 } from 'yup';
 import { it, describe } from 'flow-typed-test';
 
@@ -849,6 +851,158 @@ describe('mixed', () => {
           recursive: true,
           context: {},
         });
+      });
+    });
+  });
+});
+
+describe('object', () => {
+  it('should make valid schema type', () => {
+    (object({
+      a: number(),
+      b: object({
+        c: string(),
+      }),
+      d: ref('b.c'),
+    }): Schema<{ a: number, b: { c: string }, d: any }>);
+  });
+
+  it('should extend schema type by .shape()', () => {
+    const schema = object().shape({
+      a: number(),
+      b: bool(),
+    });
+
+    (schema: Schema<{ a: number, b: boolean }>);
+
+    (schema: Schema<{
+      // $ExpectError: check any
+      a: string,
+      b: boolean,
+    }>);
+
+    (schema: Schema<{
+      a: number,
+      // $ExpectError: check any
+      b: string,
+    }>);
+  });
+
+  describe('object().from(...)', () => {
+    it('should extend current object type when alias is true', () => {
+      const schema = object({ a: string() }).from('a', 'a2', true);
+
+      (schema: Schema<{
+        a: string,
+        a2: string,
+      }>);
+
+      (schema: Schema<{
+        a: string,
+        // $ExpectError: check any
+        a2: number,
+      }>);
+    });
+
+    it('should return passed type when alias false', () => {
+      const schema = object({ a: string() }).from<{ a2: string }>(
+        'a',
+        'a2',
+        false
+      );
+
+      (schema: Schema<{ a2: string }>);
+
+      // $ExpectError: check any
+      (schema: Schema<{ a2: number }>);
+
+      // $ExpectError: a missing in new shema
+      (schema: Schema<{ a: number }>);
+    });
+  });
+
+  describe('common schema methods', () => {
+    it('should modify type by `nullable` and `required*` methods', () => {
+      const val1 = object({ a: number() })
+        .nullable(false)
+        .validateSync(null);
+
+      (val1: { a: number });
+      // $ExpectError: check any
+      (val1: number);
+
+      const val2 = object({ a: number() })
+        .nullable()
+        .validateSync(null);
+
+      (val2: ?{ a: number });
+      // $ExpectError: check any
+      (val2: number);
+
+      const val3 = object({ a: number() })
+        .required()
+        .validateSync(null);
+
+      (val3: { a: number });
+      // $ExpectError: check any
+      (val3: number);
+
+      const val4 = object({ a: number() })
+        .notRequired()
+        .validateSync(null);
+
+      (val4: ?{ a: number });
+      // $ExpectError: check any
+      (val4: number);
+    });
+
+    it('should work properly', () => {
+      const schema = object({ a: string() });
+
+      schema
+        .clone()
+        .label('str')
+        .meta({ meta: 'data' })
+        .strict(true)
+        .strip(false)
+        .default('any value')
+        .typeError()
+        .typeError('message')
+        .typeError(() => 'message')
+        .oneOf([{ a: '1' }, { a: '2' }])
+        .notOneOf([{ a: '1' }, { a: '2' }])
+        .when('key', { is: true, then: number(), otherwise: string() })
+        .when(['key'], (other, schema) =>
+          other === 4 ? schema.clone() : schema
+        )
+        .test('name', 'message', () => true)
+        .test({
+          test: () => Promise.resolve(true),
+          name: 'name',
+          message: 'message',
+          params: {},
+          exclusive: true,
+        })
+        .test({
+          test: () => Promise.resolve(true),
+        })
+        .transform((a, b) => a + b)
+        .clone();
+
+      schema.validate(null).then(val => {
+        (val: { a: string });
+
+        // $ExpectError: check any
+        (val: number);
+      });
+
+      schema.validate(null, {
+        path: 'foo.baz',
+        strict: true,
+        abortEarly: true,
+        stripUnknown: true,
+        recursive: true,
+        context: {},
       });
     });
   });

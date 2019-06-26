@@ -242,9 +242,10 @@ declare module 'yup/lib/Lazy' {
   declare export default Class<BaseSchema<any>>;
 }
 declare module 'yup/lib/Reference' {
+  import type { BaseSchema } from 'yup';
   declare export type RefOptions = {| contextPrefix: string |};
 
-  declare export default class Reference {
+  declare export default class Reference implements BaseSchema<any> {
     +__isYupRef: true;
 
     constructor(key: string, options: RefOptions): Reference;
@@ -254,6 +255,24 @@ declare module 'yup/lib/Reference' {
     describe(): {| type: 'ref', key: string |};
 
     static isRef(value: any): boolean;
+
+    /*
+    `implements BaseSchema<any>` - This is dirty hack witch using for next case:
+
+     const schema = object({
+       a: object({
+         b: string()
+       })
+       refB: ref('a.b')
+     });
+
+     // Result Type => { a { b: string }, refB: any };
+    */
+    cast: empty;
+    validate: empty;
+    validateAt: empty;
+    validateSync: empty;
+    validateSyncAt: empty;
   }
 }
 
@@ -423,32 +442,52 @@ declare module 'yup/lib/array' {
   declare export default ArraySchemaConstructor;
 }
 declare module 'yup/lib/object' {
-  import type { Schema, TestOptionsMessage } from 'yup';
+  import type { BaseSchema, Schema, TestOptionsMessage } from 'yup';
 
-  declare export type ObjectSchemaDefinition<T: {}> = {
-    //[field in keyof T]: Schema<T[field]> | Ref
-  };
-
-  declare export type Shape<T: {}, U: {}> = {
-    //[P in keyof T]: P extends keyof U ? U[P] : T[P]
-  } & U;
+  declare export type ExtractSchemaType = <V>(v: BaseSchema<V>) => V;
 
   declare export type ObjectSchemaConstructor = Class<ObjectSchema<{}>> &
-    (() => ObjectSchema<{}>);
+    (() => ObjectSchema<{}>) &
+    (<U>(U) => ObjectSchema<$ObjMap<U, ExtractSchemaType>>);
 
   declare export interface ObjectSchema<T> extends Schema<T> {
     shape<U: {}>(
-      fields: ObjectSchemaDefinition<U>,
+      fields: U,
       noSortEdges?: Array<[string, string]>
-    ): ObjectSchema<Shape<T, U>>;
-    from(fromKey: string, toKey: string, alias?: boolean): ObjectSchema<T>;
+    ): ObjectSchema<$ObjMap<U, ExtractSchemaType> & T>;
+
+    from<From, To>(
+      fromKey: From,
+      toKey: To,
+      alias: true
+    ): ObjectSchema<T & { [To]: $ElementType<T, From> }>;
+
+    /*
+     * No ability to describe returned Schema type in this case
+     *
+     * Use own type `R` for describe `ObjectSchema<R>`, Example:
+     *
+     * object({a: string()}).from<{a2: string}>('a','a2')
+     */
+    from<R>(fromKey: string, toKey: string, alias?: false): ObjectSchema<R>;
+
     noUnknown(
       onlyKnownKeys?: boolean,
       message?: TestOptionsMessage
     ): ObjectSchema<T>;
-    transformKeys(callback: (key: any) => any): void;
-    camelCase(): ObjectSchema<T>;
-    constantCase(): ObjectSchema<T>;
+
+    /*
+     * No ability to describe type for `camelCase()` and `constantCase()`
+     *
+     * Use own type `R` for describe `ObjectSchema<R>`, Example:
+     *
+     * object({a_aa_a: string()}).camelCase<{aAaA: string}>()
+     *
+     * object({a_aa_a: string()}).constantCase<{A_AA_A: string}>()
+     * */
+    camelCase<R>(): ObjectSchema<R>;
+    constantCase<R>(): ObjectSchema<R>;
+
     nullable(isNullable?: true): ObjectSchema<?T>;
     nullable(isNullable: false): ObjectSchema<$NonMaybeType<T>>;
     required(message?: TestOptionsMessage): ObjectSchema<$NonMaybeType<T>>;
