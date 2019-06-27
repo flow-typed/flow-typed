@@ -26,12 +26,8 @@ describe('css props', () => {
 
   it('should raises an error when pass incompatible css values', () => {
     <Box
-      // $ExpectError
-      flexDirection="ups"
-      // $ExpectError: need string
-      color={123}
-      // $ExpectError
-      textAlign="startstartstartstart"
+      // $ExpectError: need boolean
+      clone={123}
     />;
   });
 });

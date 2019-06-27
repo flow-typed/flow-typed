@@ -1541,80 +1541,31 @@ declare module '@material-ui/core/BottomNavigation/BottomNavigation' {
 }
 
 declare module '@material-ui/core/Box' {
-  import type { $$Pick } from '@material-ui/core/@@utils';
   import type { HTMLDivAttributes } from '@material-ui/core/@@dom';
-  import type { CSSProperties } from '@material-ui/core/styles/withStyles';
 
-  declare type PropsByCSSProperties = {
-    ...$$Pick<
-      {
-        alignContent: any,
-        alignItems: any,
-        alignSelf: any,
-        border: any,
-        borderBottom: any,
-        borderColor: any,
-        borderLeft: any,
-        borderRadius: any,
-        borderRight: any,
-        borderTop: any,
-        bottom: any,
-        boxShadow: any,
-        color: any,
-        cursor: any,
-        display: any,
-        flex: any,
-        flexDirection: any,
-        flexGrow: any,
-        flexShrink: any,
-        flexWrap: any,
-        fontFamily: any,
-        fontSize: any,
-        fontWeight: any,
-        height: any,
-        justifyContent: any,
-        left: any,
-        maxHeight: any,
-        maxWidth: any,
-        minHeight: any,
-        minWidth: any,
-        overflowX: any,
-        overflowY: any,
-        position: any,
-        right: any,
-        textAlign: any,
-        top: any,
-        width: any,
-        zIndex: any,
-      },
-      CSSProperties
-    >,
+  declare export type BoxProps = HTMLDivAttributes & {
+    component?: React$ElementType,
+    // styled API
+    clone?: boolean,
+    // Box specific props
+    bgcolor?: string,
+    displayPrint?: string,
+    m?: string | number,
+    mb?: string | number,
+    ml?: string | number,
+    mr?: string | number,
+    mt?: string | number,
+    mx?: string | number,
+    my?: string | number,
+    order?: string | number,
+    p?: string | number,
+    pb?: string | number,
+    pl?: string | number,
+    pr?: string | number,
+    pt?: string | number,
+    px?: string | number,
+    py?: string | number,
   };
-
-  declare export type BoxProps = PropsByCSSProperties &
-    HTMLDivAttributes & {
-      component?: React$ElementType,
-      // styled API
-      clone?: boolean,
-      // Box specific props
-      bgcolor?: string,
-      displayPrint?: string,
-      m?: string | number,
-      mb?: string | number,
-      ml?: string | number,
-      mr?: string | number,
-      mt?: string | number,
-      mx?: string | number,
-      my?: string | number,
-      order?: string | number,
-      p?: string | number,
-      pb?: string | number,
-      pl?: string | number,
-      pr?: string | number,
-      pt?: string | number,
-      px?: string | number,
-      py?: string | number,
-    };
 
   declare export default React$ComponentType<BoxProps>;
 }
