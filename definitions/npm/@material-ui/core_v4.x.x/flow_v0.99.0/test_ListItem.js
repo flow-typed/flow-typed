@@ -57,6 +57,7 @@ describe('own props', () => {
     <ListItem
       alignItems={'flex-start'}
       button={false}
+      autoFocus={false}
       ContainerComponent={'div'}
       ContainerProps={{ 'aria-hidden': true }}
       dense={false}
@@ -69,6 +70,7 @@ describe('own props', () => {
     />;
 
     <ListItem
+      autoFocus={undefined}
       alignItems={undefined}
       button={undefined}
       ContainerComponent={undefined}
@@ -87,6 +89,8 @@ describe('own props', () => {
     <ListItem
       // $ExpectError: `__flex-start` is missing in enum
       alignItems={'__flex-start'}
+      // $ExpectError
+      autoFocus={'need boolean'}
       // $ExpectError
       button={'need boolean'}
       // $ExpectError: need a react component

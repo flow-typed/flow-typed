@@ -765,7 +765,7 @@ declare module '@material-ui/core/styles/createBreakpoints' {
   declare export default (options: BreakpointsOptions) => Breakpoints;
 }
 declare module '@material-ui/core/styles/createSpacing' {
-  declare export type SpacingArgument = number | string;
+  declare export type SpacingArgument = number;
 
   declare export type Spacing = {
     (value1: SpacingArgument): number,
@@ -1219,7 +1219,7 @@ declare module '@material-ui/core/styles/withStyles' {
 
   declare export type StyleRules<Props, ClassKey> = {
     // TODO: remove `$Shape`, README.md Issue 3
-    +[ClassKey]: /*((props: Props) => {}) | */$Shape<CSSProperties>,
+    +[ClassKey]: /*((props: Props) => {}) | */ $Shape<CSSProperties>,
   };
 
   declare export type StyleRulesCallback<Theme, Props, ClassKey> = (
@@ -4170,6 +4170,7 @@ declare module '@material-ui/core/ListItem' {
   declare type ListItem = OverridableComponent<{
     props: {
       alignItems?: 'flex-start' | 'center',
+      autoFocus?: boolean,
       button?: boolean,
       ContainerComponent?: React$ElementType,
       ContainerProps?: HTMLDivAttributes,
@@ -4201,6 +4202,7 @@ declare module '@material-ui/core/MenuList' {
   declare export type MenuListProps = StandardProps<
     MenuListClassKey,
     {
+      autoFocus?: boolean,
       disableListWrap?: boolean,
       onKeyDown?: ({}) => mixed,
     },
@@ -4316,6 +4318,7 @@ declare module '@material-ui/core/Menu' {
   declare export type MenuProps = StandardProps<
     MenuClassKey,
     {
+      autoFocus?: boolean,
       disableAutoFocusItem?: boolean,
       MenuListProps?: { ...MenuListProps },
       PaperProps?: { ...PaperProps },

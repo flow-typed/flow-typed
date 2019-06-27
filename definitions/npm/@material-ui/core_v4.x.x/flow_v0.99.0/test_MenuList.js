@@ -46,13 +46,23 @@ describe('classes', () => {
 
 describe('own props', () => {
   it('should passes when used properly', () => {
-    <MenuList disableListWrap={false} onKeyDown={async () => {}} />;
+    <MenuList
+      autoFocus={false}
+      disableListWrap={false}
+      onKeyDown={async () => {}}
+    />;
 
-    <MenuList disableListWrap={undefined} onKeyDown={undefined} />;
+    <MenuList
+      autoFocus={undefined}
+      disableListWrap={undefined}
+      onKeyDown={undefined}
+    />;
   });
 
   it('should raises an error when pass incompatible types', () => {
     <MenuList
+      // $ExpectError
+      autoFocus={'need boolean'}
       // $ExpectError
       disableListWrap={'need boolean'}
       // $ExpectError: need a function
