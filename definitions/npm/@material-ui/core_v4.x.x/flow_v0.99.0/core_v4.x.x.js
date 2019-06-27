@@ -1131,23 +1131,23 @@ declare module '@material-ui/core/styles/makeStyles' {
   |};
 
   declare export default {
-    <Props: {}, Thm: Theme, Stl: StyleRules<Props, string>>(
+    <Props, Thm: Theme, Stl: StyleRules<Props, string>>(
       callback: (theme: Thm) => Stl,
       ...rest: Array<empty>
     ): StylesHook<Props, Stl>,
 
-    <Props: {}, Thm: Theme, Stl: StyleRules<Props, string>>(
+    <Props, Thm: Theme, Stl: StyleRules<Props, string>>(
       callback: (theme: Thm) => Stl,
       options: MakeStylesOptions,
       ...rest: Array<empty>
     ): StylesHook<Props, Stl>,
 
-    <Props: {}, Stl: StyleRules<Props, string>>(
+    <Props, Stl: StyleRules<Props, string>>(
       styles: Stl,
       ...rest: Array<empty>
     ): StylesHook<Props, Stl>,
 
-    <Props: {}, Stl: StyleRules<Props, string>>(
+    <Props, Stl: StyleRules<Props, string>>(
       styles: Stl,
       options: MakeStylesOptions,
       ...rest: Array<empty>
@@ -1219,7 +1219,9 @@ declare module '@material-ui/core/styles/withStyles' {
 
   declare export type StyleRules<Props, ClassKey> = {
     // TODO: remove `$Shape`, README.md Issue 3
-    +[ClassKey]: /*((props: Props) => {}) | */ $Shape<CSSProperties>,
+    +[ClassKey]:
+      | $Shape<CSSProperties>
+      | ((props: Props) => $Shape<CSSProperties>),
   };
 
   declare export type StyleRulesCallback<Theme, Props, ClassKey> = (
