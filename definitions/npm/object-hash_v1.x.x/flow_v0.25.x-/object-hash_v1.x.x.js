@@ -6,7 +6,7 @@
 
 declare module "object-hash" {
   declare type Options = {|
-    algorithm?: "sha1" | "sha256" | "md5",
+    algorithm?: "sha1" | "sha256" | "md5" | "passthrough",
     excludeValues?: boolean,
     encoding?: "buffer" | "hex" | "binary" | "base64",
     ignoreUnknown?: boolean,
