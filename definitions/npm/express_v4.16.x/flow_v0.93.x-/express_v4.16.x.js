@@ -1,6 +1,3 @@
-import * as http from "http";
-import type { Socket } from "net";
-
 declare type express$RouterOptions = {
   caseSensitive?: boolean,
   mergeParams?: boolean,
@@ -20,7 +17,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   baseUrl: string;
   body: mixed;
   cookies: { [cookie: string]: string };
-  connection: Socket;
+  connection: net$Socket;
   fresh: boolean;
   hostname: string;
   ip: string;
@@ -216,15 +213,15 @@ declare class express$Application extends express$Router mixins events$EventEmit
     hostname?: string,
     backlog?: number,
     callback?: (err?: ?Error) => mixed
-  ): ?http.Server;
+  ): ?http$Server;
   listen(
     port: number,
     hostname?: string,
     callback?: (err?: ?Error) => mixed
-  ): ?http.Server;
-  listen(port: number, callback?: (err?: ?Error) => mixed): ?http.Server;
-  listen(path: string, callback?: (err?: ?Error) => mixed): ?http.Server;
-  listen(handle: Object, callback?: (err?: ?Error) => mixed): ?http.Server;
+  ): ?http$Server;
+  listen(port: number, callback?: (err?: ?Error) => mixed): ?http$Server;
+  listen(path: string, callback?: (err?: ?Error) => mixed): ?http$Server;
+  listen(handle: Object, callback?: (err?: ?Error) => mixed): ?http$Server;
   disable(name: string): void;
   disabled(name: string): boolean;
   enable(name: string): express$Application;
