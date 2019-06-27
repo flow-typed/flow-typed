@@ -138,10 +138,10 @@ declare module 'yup' {
     tests: Array<{ name: string, params: {} }>,
   };
 
-  declare export function ref(
+  declare export function ref<T>(
     path: string,
     options?: {| contextPrefix: string |}
-  ): Ref;
+  ): Ref<T>;
 
   declare export function lazy<T>(fn: (value: T) => Schema<T>): Lazy;
 
@@ -245,13 +245,13 @@ declare module 'yup/lib/Reference' {
   import type { BaseSchema } from 'yup';
   declare export type RefOptions = {| contextPrefix: string |};
 
-  declare export default class Reference implements BaseSchema<any> {
+  declare export default class Reference<T> implements BaseSchema<T> {
     +__isYupRef: true;
 
-    constructor(key: string, options: RefOptions): Reference;
+    constructor(key: string, options: RefOptions): Reference<T>;
     getValue(options: {}): any;
     cast(value: any, options: {}): any;
-    resolve(): Reference;
+    resolve(): Reference<T>;
     describe(): {| type: 'ref', key: string |};
 
     static isRef(value: any): boolean;
@@ -263,10 +263,10 @@ declare module 'yup/lib/Reference' {
        a: object({
          b: string()
        })
-       refB: ref('a.b')
+       refB: ref<string>('a.b')
      });
 
-     // Result Type => { a { b: string }, refB: any };
+     // Result Type => { a { b: string }, refB: string };
     */
     cast: empty;
     validate: empty;
@@ -315,9 +315,18 @@ declare module 'yup/lib/string' {
     (() => StringSchema<string>);
 
   declare export interface StringSchema<T> extends Schema<T> {
-    length(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
-    min(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
-    max(limit: number | Ref, message?: TestOptionsMessage): StringSchema<T>;
+    length(
+      limit: number | Ref<any>,
+      message?: TestOptionsMessage
+    ): StringSchema<T>;
+    min(
+      limit: number | Ref<any>,
+      message?: TestOptionsMessage
+    ): StringSchema<T>;
+    max(
+      limit: number | Ref<any>,
+      message?: TestOptionsMessage
+    ): StringSchema<T>;
 
     email(message?: TestOptionsMessage): StringSchema<T>;
     url(message?: TestOptionsMessage): StringSchema<T>;
@@ -350,15 +359,21 @@ declare module 'yup/lib/number' {
 
   declare export interface NumberSchema<T> extends Schema<T> {
     lessThan(
-      limit: number | Ref,
+      limit: number | Ref<any>,
       message?: TestOptionsMessage
     ): NumberSchema<T>;
     moreThan(
-      limit: number | Ref,
+      limit: number | Ref<any>,
       message?: TestOptionsMessage
     ): NumberSchema<T>;
-    min(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
-    max(limit: number | Ref, message?: TestOptionsMessage): NumberSchema<T>;
+    min(
+      limit: number | Ref<any>,
+      message?: TestOptionsMessage
+    ): NumberSchema<T>;
+    max(
+      limit: number | Ref<any>,
+      message?: TestOptionsMessage
+    ): NumberSchema<T>;
     positive(message?: TestOptionsMessage): NumberSchema<T>;
     negative(message?: TestOptionsMessage): NumberSchema<T>;
     integer(message?: TestOptionsMessage): NumberSchema<T>;
@@ -401,11 +416,11 @@ declare module 'yup/lib/date' {
 
   declare export interface DateSchema<T> extends Schema<T> {
     min(
-      limit: Date | string | Ref,
+      limit: Date | string | Ref<any>,
       message?: TestOptionsMessage
     ): DateSchema<T>;
     max(
-      limit: Date | string | Ref,
+      limit: Date | string | Ref<any>,
       message?: TestOptionsMessage
     ): DateSchema<T>;
 
@@ -427,8 +442,8 @@ declare module 'yup/lib/array' {
 
   declare export interface ArraySchema<T> extends Schema<T> {
     of<U>(type: Schema<U>): ArraySchema<Array<U>>;
-    min(limit: number | Ref, message?: TestOptionsMessage): ArraySchema<T>;
-    max(limit: number | Ref, message?: TestOptionsMessage): ArraySchema<T>;
+    min(limit: number | Ref<any>, message?: TestOptionsMessage): ArraySchema<T>;
+    max(limit: number | Ref<any>, message?: TestOptionsMessage): ArraySchema<T>;
     ensure(): ArraySchema<T>;
     compact(
       rejector?: (value: any, index: number, array: Array<T>) => boolean
@@ -448,10 +463,10 @@ declare module 'yup/lib/object' {
 
   declare export type ObjectSchemaConstructor = Class<ObjectSchema<{}>> &
     (() => ObjectSchema<{}>) &
-    (<U>(U) => ObjectSchema<$ObjMap<U, ExtractSchemaType>>);
+    (<U>(obj: U) => ObjectSchema<$ObjMap<U, ExtractSchemaType>>);
 
   declare export interface ObjectSchema<T> extends Schema<T> {
-    shape<U: {}>(
+    shape<U>(
       fields: U,
       noSortEdges?: Array<[string, string]>
     ): ObjectSchema<$ObjMap<U, ExtractSchemaType> & T>;

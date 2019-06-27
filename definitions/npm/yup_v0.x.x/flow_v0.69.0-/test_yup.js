@@ -863,8 +863,8 @@ describe('object', () => {
       b: object({
         c: string(),
       }),
-      d: ref('b.c'),
-    }): Schema<{ a: number, b: { c: string }, d: any }>);
+      d: ref<string>('b.c'),
+    }): Schema<{ a: number, b: { c: string }, d: string }>);
   });
 
   it('should extend schema type by .shape()', () => {

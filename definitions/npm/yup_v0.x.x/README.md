@@ -26,15 +26,23 @@ object({ a_aa_a: string() }).constantCase<{ A_AA_A: string }>()
 object({ a: string() }).from<{ a2: string }>('a', 'a2');
 ```
 
-## 3) `ref('key')` is `any` in object
+## 3) `ref<T>('key')` not throw error
+
+Example with mistake:
 
 ```js
 const schema = object({
   a: object({
     b: number(),
   }),
-  refB: ref('a.b'),
+  refB: ref<boolean>('a.b'), // here must be `number`
 });
 
-(schema: Schema<{ a: { b: number }, refB: any }>);
+(schema: Schema<{ a: { b: number }, refB: boolean }>);
 ```
+
+In example above I called `ref` with `boolean` type, 
+but it is wrong, because `a.b` declared as `number`
+
+!! You should be very carefully when you change something 
+
