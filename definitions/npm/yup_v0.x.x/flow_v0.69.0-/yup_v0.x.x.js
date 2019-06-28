@@ -20,9 +20,9 @@ declare module 'yup' {
     context?: {},
   |};
 
-  declare export interface BaseSchema<T> {
+  declare export interface BaseSchema<T, GetHighType> {
     cast(value: any, options?: { context: {} }): T;
-    resolve(options?: any): BaseSchema<T>;
+    resolve(options?: any): $Call<GetHighType, T>;
     validate(value: any, options?: ValidateOptions): Promise<T>;
     validateSync(
       value: any,
@@ -40,13 +40,14 @@ declare module 'yup' {
     ): T;
   }
 
-  declare export interface Schema<T> extends BaseSchema<T> {
-    clone(): Schema<T>;
-    label(label: string): Schema<T>;
-    meta(metadata: SchemaMeta): Schema<T>;
+  declare export interface Schema<T, GetHighType>
+    extends BaseSchema<T, GetHighType> {
+    clone(): $Call<GetHighType, T>;
+    label(label: string): $Call<GetHighType, T>;
+    meta(metadata: SchemaMeta): $Call<GetHighType, T>;
     meta(): SchemaMeta;
     describe(): SchemaDescription;
-    concat(schema: Schema<T>): Schema<T>;
+    concat(schema: $Call<GetHighType, T>): $Call<GetHighType, T>;
     isValid(value: any, options?: ValidateOptions): Promise<boolean>;
     isValidSync(
       value: any,
@@ -54,33 +55,33 @@ declare module 'yup' {
     ): boolean;
 
     isType(value: any): boolean;
-    strict(isStrict: boolean): Schema<T>;
-    strip(strip: boolean): Schema<T>;
-    withMutation(fn: (current: Schema<T>) => mixed): void;
-    default(value: any): Schema<T>;
+    strict(isStrict: boolean): $Call<GetHighType, T>;
+    strip(strip: boolean): $Call<GetHighType, T>;
+    withMutation(fn: (current: $Call<GetHighType, T>) => mixed): void;
+    default(value: any): $Call<GetHighType, T>;
     default(): T;
-    typeError(message?: TestOptionsMessage): Schema<T>;
+    typeError(message?: TestOptionsMessage): $Call<GetHighType, T>;
     oneOf(
       arrayOfValues: $ReadOnlyArray<T>,
       message?: TestOptionsMessage
-    ): Schema<T>;
+    ): $Call<GetHighType, T>;
     notOneOf(
       arrayOfValues: $ReadOnlyArray<T>,
       message?: TestOptionsMessage
-    ): Schema<T>;
+    ): $Call<GetHighType, T>;
     when(
       keys: string | $ReadOnlyArray<string>,
-      builder: WhenOptions<Schema<T>>
-    ): Schema<T>;
+      builder: WhenOptions<Schema<T, GetHighType>>
+    ): $Call<GetHighType, T>;
     test(
       name: string,
       message: TestOptionsMessage,
       test: (
         value?: any
       ) => boolean | ValidationError | Promise<boolean | ValidationError>
-    ): Schema<T>;
-    test(options: TestOptions): Schema<T>;
-    transform(fn: TransformFunction): Schema<T>;
+    ): $Call<GetHighType, T>;
+    test(options: TestOptions): $Call<GetHighType, T>;
+    transform(fn: TransformFunction): $Call<GetHighType, T>;
   }
 
   declare export type TransformFunction = (
@@ -106,8 +107,8 @@ declare module 'yup' {
 
   declare export type WhenOptionsBuilderObject = {|
     is: WhenOptionsBuilderObjectIs,
-    then: Schema<any>,
-    otherwise: Schema<any>,
+    then: Schema<any, any>,
+    otherwise: Schema<any, any>,
   |};
 
   declare export type WhenOptions<T> =
@@ -143,7 +144,7 @@ declare module 'yup' {
     options?: {| contextPrefix: string |}
   ): Ref<T>;
 
-  declare export function lazy<T>(fn: (value: T) => Schema<T>): Lazy;
+  declare export function lazy<T>(fn: (value: T) => Schema<T, any>): Lazy;
 
   declare export { default as setLocale } from 'yup/lib/setLocale';
   declare export { default as isSchema } from 'yup/lib/util/isSchema';
@@ -239,13 +240,13 @@ declare module 'yup/lib/ValidationError' {
 declare module 'yup/lib/Lazy' {
   import type { BaseSchema } from 'yup';
 
-  declare export default Class<BaseSchema<any>>;
+  declare export default Class<BaseSchema<any, any>>;
 }
 declare module 'yup/lib/Reference' {
   import type { BaseSchema } from 'yup';
   declare export type RefOptions = {| contextPrefix: string |};
 
-  declare export default class Reference<T> implements BaseSchema<T> {
+  declare export default class Reference<T> implements BaseSchema<T, any> {
     +__isYupRef: true;
 
     constructor(key: string, options: RefOptions): Reference<T>;
@@ -257,7 +258,7 @@ declare module 'yup/lib/Reference' {
     static isRef(value: any): boolean;
 
     /*
-    `implements BaseSchema<any>` - This is dirty hack witch using for next case:
+    `implements BaseSchema<T,any>` - This is dirty hack witch using for next case:
 
      const schema = object({
        a: object({
@@ -280,12 +281,12 @@ declare module 'yup/lib/util/reach' {
   import type { Schema } from 'yup';
 
   declare export default {
-    <T, R>(
-      schema: Schema<T>,
+    <T, GetterFn, R, ReturnGetterFn>(
+      schema: Schema<T, GetterFn>,
       path: string,
       value?: any,
       context?: any
-    ): Schema<R>,
+    ): Schema<R, ReturnGetterFn>,
   };
 }
 declare module 'yup/lib/util/isSchema' {
@@ -295,10 +296,12 @@ declare module 'yup/lib/util/isSchema' {
 declare module 'yup/lib/mixed' {
   import type { Schema, TestOptionsMessage } from 'yup';
 
+  declare export type GetterMixedSchema = <T>(T) => MixedSchema<T>;
+
   declare export type MixedSchemaConstructor = Class<MixedSchema<mixed>> &
     (() => MixedSchema<mixed>);
 
-  declare export interface MixedSchema<T> extends Schema<T> {
+  declare export interface MixedSchema<T> extends Schema<T, GetterMixedSchema> {
     nullable(isNullable?: true): MixedSchema<?T>;
     nullable(isNullable: false): MixedSchema<$NonMaybeType<T>>;
     required(message?: TestOptionsMessage): MixedSchema<$NonMaybeType<T>>;
@@ -314,7 +317,10 @@ declare module 'yup/lib/string' {
   declare export type StringSchemaConstructor = Class<StringSchema<string>> &
     (() => StringSchema<string>);
 
-  declare export interface StringSchema<T> extends Schema<T> {
+  declare export type GetterStringSchema = <T>(T) => StringSchema<T>;
+
+  declare export interface StringSchema<T>
+    extends Schema<T, GetterStringSchema> {
     length(
       limit: number | Ref<any>,
       message?: TestOptionsMessage
@@ -357,7 +363,10 @@ declare module 'yup/lib/number' {
   declare export type NumberSchemaConstructor = Class<NumberSchema<number>> &
     (() => NumberSchema<number>);
 
-  declare export interface NumberSchema<T> extends Schema<T> {
+  declare export type GetterNumberSchema = <T>(T) => NumberSchema<T>;
+
+  declare export interface NumberSchema<T>
+    extends Schema<T, GetterNumberSchema> {
     lessThan(
       limit: number | Ref<any>,
       message?: TestOptionsMessage
@@ -398,7 +407,10 @@ declare module 'yup/lib/bool' {
   declare export type BooleanSchemaConstructor = Class<BooleanSchema<boolean>> &
     (() => BooleanSchema<boolean>);
 
-  declare export interface BooleanSchema<T> extends Schema<T> {
+  declare export type GetterBooleanSchema = <T>(T) => BooleanSchema<T>;
+
+  declare export interface BooleanSchema<T>
+    extends Schema<T, GetterBooleanSchema> {
     nullable(isNullable?: true): BooleanSchema<?T>;
     nullable(isNullable: false): BooleanSchema<$NonMaybeType<T>>;
     required(message?: TestOptionsMessage): BooleanSchema<$NonMaybeType<T>>;
@@ -414,7 +426,9 @@ declare module 'yup/lib/date' {
   declare export type DateSchemaConstructor = Class<DateSchema<Date>> &
     (() => DateSchema<Date>);
 
-  declare export interface DateSchema<T> extends Schema<T> {
+  declare export type GetterDateSchema = <T>(T) => DateSchema<T>;
+
+  declare export interface DateSchema<T> extends Schema<T, GetterDateSchema> {
     min(
       limit: Date | string | Ref<any>,
       message?: TestOptionsMessage
@@ -440,8 +454,10 @@ declare module 'yup/lib/array' {
     (<T>() => ArraySchema<Array<T>>) &
     (<U>(type: Schema<U>) => ArraySchema<Array<U>>);
 
-  declare export interface ArraySchema<T> extends Schema<T> {
-    of<U>(type: Schema<U>): ArraySchema<Array<U>>;
+  declare export type GetterArraySchema = <T>(T) => ArraySchema<T>;
+
+  declare export interface ArraySchema<T> extends Schema<T, GetterArraySchema> {
+    of<U>(type: Schema<U, any>): ArraySchema<Array<U>>;
     min(limit: number | Ref<any>, message?: TestOptionsMessage): ArraySchema<T>;
     max(limit: number | Ref<any>, message?: TestOptionsMessage): ArraySchema<T>;
     ensure(): ArraySchema<T>;
@@ -459,13 +475,16 @@ declare module 'yup/lib/array' {
 declare module 'yup/lib/object' {
   import type { BaseSchema, Schema, TestOptionsMessage } from 'yup';
 
-  declare export type ExtractSchemaType = <V>(v: BaseSchema<V>) => V;
+  declare export type ExtractSchemaType = <V>(v: BaseSchema<V, any>) => V;
 
   declare export type ObjectSchemaConstructor = Class<ObjectSchema<{}>> &
     (() => ObjectSchema<{}>) &
     (<U>(obj: U) => ObjectSchema<$ObjMap<U, ExtractSchemaType>>);
 
-  declare export interface ObjectSchema<T> extends Schema<T> {
+  declare export type GetterObjectSchema = <T>(T) => ObjectSchema<T>;
+
+  declare export interface ObjectSchema<T>
+    extends Schema<T, GetterObjectSchema> {
     shape<U>(
       fields: U,
       noSortEdges?: Array<[string, string]>

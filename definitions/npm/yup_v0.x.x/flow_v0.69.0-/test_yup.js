@@ -864,7 +864,7 @@ describe('object', () => {
         c: string(),
       }),
       d: ref<string>('b.c'),
-    }): Schema<{ a: number, b: { c: string }, d: string }>);
+    }): Schema<{ a: number, b: { c: string }, d: string }, any>);
   });
 
   it('should extend schema type by .shape()', () => {
@@ -873,35 +873,47 @@ describe('object', () => {
       b: bool(),
     });
 
-    (schema: Schema<{ a: number, b: boolean }>);
+    (schema: Schema<{ a: number, b: boolean }, any>);
 
-    (schema: Schema<{
-      // $ExpectError: check any
-      a: string,
-      b: boolean,
-    }>);
+    (schema: Schema<
+      {
+        // $ExpectError: check any
+        a: string,
+        b: boolean,
+      },
+      any
+    >);
 
-    (schema: Schema<{
-      a: number,
-      // $ExpectError: check any
-      b: string,
-    }>);
+    (schema: Schema<
+      {
+        a: number,
+        // $ExpectError: check any
+        b: string,
+      },
+      any
+    >);
   });
 
   describe('object().from(...)', () => {
     it('should extend current object type when alias is true', () => {
       const schema = object({ a: string() }).from('a', 'a2', true);
 
-      (schema: Schema<{
-        a: string,
-        a2: string,
-      }>);
+      (schema: Schema<
+        {
+          a: string,
+          a2: string,
+        },
+        any
+      >);
 
-      (schema: Schema<{
-        a: string,
-        // $ExpectError: check any
-        a2: number,
-      }>);
+      (schema: Schema<
+        {
+          a: string,
+          // $ExpectError: check any
+          a2: number,
+        },
+        any
+      >);
     });
 
     it('should return passed type when alias false', () => {
@@ -911,13 +923,13 @@ describe('object', () => {
         false
       );
 
-      (schema: Schema<{ a2: string }>);
+      (schema: Schema<{ a2: string }, any>);
 
       // $ExpectError: check any
-      (schema: Schema<{ a2: number }>);
+      (schema: Schema<{ a2: number }, any>);
 
       // $ExpectError: a missing in new shema
-      (schema: Schema<{ a: number }>);
+      (schema: Schema<{ a: number }, any>);
     });
   });
 
@@ -1006,4 +1018,11 @@ describe('object', () => {
       });
     });
   });
+});
+
+it('should work properly when use inherited interface methods', () => {
+  string()
+    .resolve() // method from `BaseSchema` interface
+    .clone() // method from `Schema` interface
+    .required(); // method from `StringSchema` interface
 });
