@@ -37,6 +37,13 @@ const options: WebpackOptions = {
       },
     ],
   },
+  plugins: [
+    new webpack.EnvironmentPlugin(['NODE_ENV', 'DEBUG']),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+      DEBUG: false
+    }),
+  ],
 };
 
 webpack(options, function(err, stats: Stats) {});

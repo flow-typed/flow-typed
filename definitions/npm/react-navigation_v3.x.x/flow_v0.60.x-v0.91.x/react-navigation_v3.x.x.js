@@ -457,6 +457,8 @@ declare module 'react-navigation' {
     headerTransitionPreset?: 'fade-in-place' | 'uikit',
     headerLayoutPreset?: 'left' | 'center',
     headerBackTitleVisible?: boolean,
+    cardShadowEnabled?: boolean,
+    cardOverlayEnabled?: boolean,
     cardStyle?: ViewStyleProp,
     transitionConfig?: (
       transitionProps: NavigationTransitionProps,
@@ -595,7 +597,7 @@ declare module 'react-navigation' {
       fallback?: $ElementType<
         $PropertyType<
           {|
-            ...{| params: {| [ParamName]: void |} |},
+            ...{| params: { } |},
             ...$Exact<S>,
           |},
           'params'
@@ -605,7 +607,7 @@ declare module 'react-navigation' {
     ) => $ElementType<
       $PropertyType<
         {|
-          ...{| params: {| [ParamName]: void |} |},
+          ...{| params: { } |},
           ...$Exact<S>,
         |},
         'params'

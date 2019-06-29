@@ -8,17 +8,19 @@ declare module "redux-mock-store" {
     <S, A>(state: S): mockStoreWithoutMiddleware<S, A>
   };
   declare type DispatchAPI<A> = (action: A) => A;
-  declare type Dispatch<A: { type: $Subtype<string> }> = DispatchAPI<A>;
+  declare type Dispatch<A: { type: string }> = DispatchAPI<A>;
   declare type mockStoreWithoutMiddleware<S, A> = {
     getState(): S,
     getActions(): Array<A>,
     dispatch: Dispatch<A>,
     clearActions(): void,
-    subscribe(callback: Function): () => void,
+    subscribe(callback: () => void): () => void,
     replaceReducer(nextReducer: Function): void
   };
 
-  declare module.exports: (middlewares: ?Array<Function>) => mockStore;
+  declare type Middleware = any => any => any;
+
+  declare module.exports: (middlewares: ?Array<Middleware>) => mockStore;
 }
 
 // Filename aliases

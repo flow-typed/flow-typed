@@ -127,6 +127,10 @@ async function getOrderedFlowBinVersions(
 
     const flowBins = apiPayload.data
       .filter(rel => {
+        if (rel.tag_name.endsWith('-rc')) {
+          return false;
+        }
+
         if (rel.tag_name === 'v0.67.0') {
           printSkipMessage(
             rel.tag_name,

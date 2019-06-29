@@ -578,6 +578,13 @@ declare module 'webpack' {
     watchOptions?: WatchOptions,
   };
 
+  declare class EnvironmentPlugin {
+    constructor(env: { [string]: mixed } | string[]): $ElementType<
+      $NonMaybeType<$PropertyType<ResolveOptions, 'plugins'>>,
+      number
+    >;
+  }
+
   declare function builder(
     options: WebpackOptions,
     callback?: Callback
@@ -587,5 +594,7 @@ declare module 'webpack' {
     callback?: Callback
   ): WebpackMultiCompiler;
 
-  declare module.exports: typeof builder;
+  declare module.exports: typeof builder & {
+    EnvironmentPlugin: typeof EnvironmentPlugin,
+  };
 }

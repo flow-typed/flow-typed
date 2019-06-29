@@ -170,10 +170,10 @@ declare module "backbone" {
     countBy: Function;
     indexBy: Function;
     // end underscore methods
-    add(models: Array<TModel>, options?: Object): void;
-    remove(models: Array<TModel>, options?: Object): void;
-    reset(models?: Array<TModel>, options?: Object): void;
-    set(models: Array<TModel>, options?: Object): void;
+    add(models: Array<TModel>, options?: Object): ?TModel | TModel[];
+    remove(models: Array<TModel>, options?: Object): ?TModel | TModel[];
+    reset(models?: Array<TModel>, options?: Object): ?TModel | TModel[];
+    set(models: Array<TModel>, options?: Object): ?TModel | TModel[];
     get(id: string): ?TModel;
     at(index: number): ?TModel;
     push(model: TModel, options?: Object): void;

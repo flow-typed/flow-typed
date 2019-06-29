@@ -26,6 +26,7 @@ import memoize from "lodash/memoize";
 import noop from "lodash/noop";
 import omitBy from "lodash/omitBy";
 import orderBy from 'lodash/orderBy';
+import pick from 'lodash/pick';
 import pickBy from "lodash/pickBy";
 import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
@@ -496,6 +497,17 @@ pairs = toPairsIn({ a: 12, b: 100 });
 var taken: string[];
 taken = take((["abc", "123"]: $ReadOnlyArray<string>), 3);
 taken = takeRight((["abc", "123"]: $ReadOnlyArray<string>));
+
+/**
+ * _.pick
+ */
+(pick({ a: 2, b: 3, c: 4 }, 'a'): { [prop: string]: number });
+(pick(null, 'a'): {});
+(pick(undefined, 'a'): {});
+(pick({ [1]: 1, [2]: 2 }, 'a'): { [prop: number]: number });
+
+// $ExpectError
+pick({ a: 2 }, 1);
 
 /**
  * _.pickBy

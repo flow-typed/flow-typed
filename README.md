@@ -5,6 +5,7 @@
 />
 
 [![Travis](https://img.shields.io/travis/flow-typed/flow-typed.svg)](https://travis-ci.org/flow-typed/flow-typed) [![npm](https://img.shields.io/npm/dm/flow-typed.svg)](https://www.npmjs.com/package/flow-typed)
+[![Join the chat at https://discordapp.com/invite/8ezwRUK](https://img.shields.io/discord/539606376339734558.svg?label=discord&logo=discord&logoColor=white)](https://discordapp.com/invite/8ezwRUK)
 
 `flow-typed` is a [repository](https://github.com/flow-typed/flow-typed/tree/master/definitions) of third-party
 [library interface definitions](https://flow.org/en/docs/libdefs)

@@ -110,6 +110,7 @@ declare module 'react-native-navigation' {
     clipToBounds?: boolean,
     component?: {
       name?: string,
+      passProps?: {},
     },
     translucent?: boolean,
     blur?: boolean,
@@ -388,6 +389,7 @@ declare module 'react-native-navigation' {
   declare export type ComponentDidAppearEvent = {|
     componentId: string,
     componentName: string,
+    passProps?: {},
   |};
 
   declare export type CommandEvent = {|
