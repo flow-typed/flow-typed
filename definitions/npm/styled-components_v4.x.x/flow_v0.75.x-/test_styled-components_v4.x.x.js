@@ -109,7 +109,7 @@ describe('css generator', () => {
     // $ExpectError - object is not a valid inerpolation
     const styles = css(['color: ', ';'], {})
 
-    // @NOTE This should error too, but I guess flow doesn't yet understand how template literals expand
+    // $ExpectError
     const styles2 = css`
       color: ${{}};
     `
@@ -150,7 +150,7 @@ describe('withTheme', () => {
       {props.ownProp}
     </div>
 
-  const MyCompWT = withTheme(MyComp)
+  const MyCompWT = withTheme<Props>(MyComp)
 
   it('doesn\'t interfere with component\'s own props', () => {
     // $ExpectError - wrong prop
