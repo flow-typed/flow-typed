@@ -874,8 +874,16 @@ declare module ramda {
     fns: Array<(a: V, b: V) => number>,
   ): (xs: T) => T;
 
-  declare function descend<A, B>(A => B): (A => A) => number
-  declare function ascend<A, B>(A => B): (A => A) => number
+  /**
+   * In the examples for ascend and descend, its result is plugged into sort.
+   * In order for this to function properly ascend and descend need to yield a
+   * function that can take two arguments. In our case we'll declare the result
+   * function as curried, which matches the ramda behavior.
+   */
+  declare type MakeComparator = <A, B>(A => B) => CurriedFunction2<A, A, number>
+
+  declare var descend: MakeComparator
+  declare var ascend: MakeComparator
 
   declare function times<T>(fn: (i: number) => T, n: number): Array<T>;
   declare function times<T>(
