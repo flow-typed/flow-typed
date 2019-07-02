@@ -5,14 +5,14 @@ declare module "prettier" {
     ...
   };
   declare export type FastPath<T = any> = {
-    stack: any[];
-    getName(): null | string | number | Symbol;
-    getValue(): T;
-    getNode(count?: number): null | T;
-    getParentNode(count?: number): null | T;
-    call<U>(callback: (path: FastPath<T>) => U, ...names: Array<string | number | Symbol>): U;
-    each(callback: (path: FastPath<T>) => void, ...names: Array<string | number | Symbol>): void;
-    map<U>(callback: (path: FastPath<T>, index: number) => U, ...names: Array<string | number | Symbol>): U[];
+    stack: any[],
+    getName(): null | string | number | Symbol,
+    getValue(): T,
+    getNode(count?: number): null | T,
+    getParentNode(count?: number): null | T,
+    call<U>(callback: (path: FastPath<T>) => U, ...names: Array<string | number | Symbol>): U,
+    each(callback: (path: FastPath<T>) => void, ...names: Array<string | number | Symbol>): void,
+    map<U>(callback: (path: FastPath<T>, index: number) => U, ...names: Array<string | number | Symbol>): U[],
     ...
   };
 
@@ -83,10 +83,10 @@ declare module "prettier" {
       options: { [key: string]: any, ... }
     ) => AST,
     astFormat: string,
-    hasPragma?: (text: string) => boolean;
-    locStart: (node: any) => number;
-    locEnd: (node: any) => number;
-    preprocess?: (text: string, options: { [key: string]: any, ... }) => string;
+    hasPragma?: (text: string) => boolean,
+    locStart: (node: any) => number,
+    locEnd: (node: any) => number,
+    preprocess?: (text: string, options: { [key: string]: any, ... }) => string,
     ...
   };
 
