@@ -107,7 +107,7 @@ declare module "prettier" {
     hasPrettierIgnore?: (path: FastPath<>) => boolean,
     canAttachComment?: (node: any) => boolean,
     willPrintOwnComments?: (path: FastPath<>) => boolean,
-    printComments?: (path: FastPath<>, print: (path: FastPath) => Doc, options: { [key: string]: any, ... }, needsSemi: boolean) => Doc,
+    printComments?: (path: FastPath<>, print: (path: FastPath<>) => Doc, options: { [key: string]: any, ... }, needsSemi: boolean) => Doc,
     handleComments?: {
       ownLine?: (commentNode: any, text: string, options: { [key: string]: any, ... }, ast: any, isLastComment: boolean) => boolean,
       endOfLine?: (commentNode: any, text: string, options: { [key: string]: any, ... }, ast: any, isLastComment: boolean) => boolean,
