@@ -5,6 +5,7 @@ declare module "prettier" {
 
   declare export type PrettierParserName =
     | "babylon"
+    | "babel-flow"
     | "flow"
     | "typescript"
     | "postcss"
