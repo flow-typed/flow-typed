@@ -2154,11 +2154,13 @@ flow-bin@^0.81.0:
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.81.0.tgz#7f0a733dce1dad3cb1447c692639292dc3d60bf5"
   integrity sha512-5e8oL3/5rm3G0Eet3yDCne2R/TLo5Fkn+Z5MtHd4wtz+1miLC35Sgo8XvnbTmiZ9epdTZ1q6GLmJWYh7tUlfGg==
 
-flowgen@^1.8.3:
-  version "1.8.3"
-  resolved "https://registry.yarnpkg.com/flowgen/-/flowgen-1.8.3.tgz#1c3bea04455552b99483422ec21d7ae477d17881"
-  integrity sha512-AUOXBA/o9jfvMzmYJTeoWHGEenC/rOMZNJjCQQEjSNu7Am7hP2VtiXDiBrE0JMGaqx4jPLd3iGXM3NbAQ2aZYA==
+flowgen@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/flowgen/-/flowgen-1.9.0.tgz#a67dcd300574036cca9b0c42de142ae9885f8ff6"
+  integrity sha512-dDH1Degcdg+c/qKMgRAnXEg4Tdek/p4Ymn/JzJMG+A/olZ6o9V/F74Ygr4lX8ZS/x/QE/N8wwfRNWrh05jdX0A==
   dependencies:
+    "@babel/code-frame" "^7.0.0"
+    "@babel/highlight" "^7.0.0"
     commander "^2.11.0"
     lodash "^4.17.4"
     paralleljs "^0.2.1"
@@ -4387,6 +4389,11 @@ query-string@^5.0.1:
     decode-uri-component "^0.2.0"
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
+
+ramda@^0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
+  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
 
 randomatic@^3.0.0:
   version "3.1.0"
