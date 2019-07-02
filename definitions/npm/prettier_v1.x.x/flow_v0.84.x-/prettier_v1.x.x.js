@@ -1,5 +1,5 @@
 declare module "prettier" {
-  declare export type AST = any;
+  declare export type AST = { [key: string]: any, ... };
   declare export type Doc = {
     [key: string]: any,
     ...
