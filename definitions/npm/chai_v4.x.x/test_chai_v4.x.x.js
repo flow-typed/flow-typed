@@ -58,6 +58,7 @@ expect(1).to.be.at.most(7);
 expect(1).to.be.within(5, 6);
 
 expect(new Date()).to.be.an.instanceof(Date);
+expect(new Date()).to.be.an.instanceOf(Date);
 expect({ a: 1 }).to.have.property("a");
 expect({ a: 1 })
   .to.have.property("a")
@@ -117,6 +118,8 @@ assert("1" === "1", 2);
 
 // test standard assert function with overloaded message
 assert.fail(1, 2, "numbers are not the same");
+assert.fail("aa", "a");
+expect.fail(1, 2, "numbers are not the same");
 assert.fail("aa", "a");
 
 // test constructor / function checking
