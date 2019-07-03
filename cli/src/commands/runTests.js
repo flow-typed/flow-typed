@@ -463,8 +463,8 @@ async function runTestGroup(
   const testDirPath = path.join(TEST_DIR, testDirName);
   if (await fs.exists(testDirPath)) {
     throw new Error(
-      `Trying to run ${testGroup.id}, but test dir already exists! I'm` +
-        `confused... Bailing out!`,
+      `Trying to run ${testGroup.id}, but test dir already exists! ` +
+        `Bailing out!`,
     );
   }
 
