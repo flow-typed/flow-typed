@@ -99,6 +99,7 @@ export function setup(yargs: Yargs) {
     ignoreDeps: {
       alias: 'i',
       describe: 'Dependency categories to ignore when installing definitions',
+      choices: ['dev', 'bundled', 'peer'],
       type: 'array',
     },
     rootDir: {
