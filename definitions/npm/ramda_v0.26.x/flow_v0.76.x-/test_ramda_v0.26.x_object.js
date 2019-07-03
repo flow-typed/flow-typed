@@ -6,9 +6,15 @@ import _, {
   curry,
   filter,
   find,
+  lens,
+  lensProp,
+  lensIndex,
   pipe,
+  over,
   repeat,
+  set,
   values,
+  view,
   zipWith,
 } from "ramda";
 
@@ -41,6 +47,192 @@ describe("Object", () => {
       });
     });
   });
+
+  /**
+   * Normally we don't want to mix our tests with multiple functions (dependent
+   * tests can be difficult to reason about). Ramda's over works specifically
+   * with the various lens types, however.
+   *
+   * lensPath is not covered as cooperating with over because lensPath may not
+   * be expressible in Flow.
+   */
+  describe('over', () => {
+    it('works with lens', () => {
+      const data = {
+        a: 'foo',
+        b: 4,
+        c: true,
+      }
+
+      const l = lens(x => x.b, (v, d) => ({
+        a: d.a,
+        b: v,
+        c: d.c,
+      }))
+      const result: typeof data = over(l, x => -x, data)
+    })
+
+    it('works with lensIndex', () => {
+      const xs: Array<number> = [1, 2, 3]
+      const result: Array<number> = over(lensIndex(0), x => x + 1, xs)
+    })
+
+    it('works with lensProp', () => {
+      const data = {
+        a: 'foo',
+        b: 4,
+        c: true,
+      }
+
+      const result: typeof data = over(lensProp('c'), () => true, data)
+    })
+
+    it('produces an output type that results from the mapping function and input (object)', () => {
+      type TransformedData = {
+        a: number,
+      }
+      const data = {
+        a: 'foo',
+      }
+
+      const result: TransformedData = over(lensProp('a'), s => 0, data)
+    })
+
+    it('requires the lens works with the functor provided (object)', () => {
+      type Data = { a: string }
+      const data: Data = {
+        a: 'foo',
+      }
+
+      // $ExpectError
+      const result = over(lensProp('b'), s => s.toUpperCase(), data)
+    })
+
+    it('requires the mapping function provides the correct type (object)', () => {
+      const data = {
+        a: 'foo',
+      }
+
+      // $ExpectError
+      const result = over(lensProp('a'), (s: number) => s + 1, data)
+    })
+
+
+    it('requires the mapping function provides the correct type (non-object)', () => {
+      const xs: Array<number> = [1, 2, 3]
+      // $ExpectError
+      const result: Array<number> = over(lensIndex(0), (x: string) => x.toUpperCase(), xs)
+    })
+  })
+
+  /**
+   * Normally we don't want to mix our tests with multiple functions (dependent
+   * tests can be difficult to reason about). Ramda's set works specifically
+   * with the various lens types, however.
+   *
+   * lensPath is not covered as cooperating with set because lensPath may not
+   * be expressible in Flow.
+   */
+  describe('set', () => {
+    it('works with lens', () => {
+      const data = {
+        a: 'foo',
+        b: 4,
+        c: true,
+      }
+
+      const l = lens(x => x.b, (v, d) => ({
+        a: d.a,
+        b: v,
+        c: d.c,
+      }))
+      const result: typeof data = set(l, 3, data)
+    })
+
+    it('works with lensIndex', () => {
+      const xs: Array<string> = ['a', 'b', 'c']
+      const result: Array<string> = set(lensIndex(0), 'd', xs)
+    })
+
+    it('works with lensProp', () => {
+      const data = {
+        a: 'foo',
+        b: 4,
+        c: true,
+      }
+
+      const result: typeof data = set(lensProp('c'), true, data)
+    })
+
+    // This scenario doesn't work in the present form.
+    it('produces an output type that results from the mapping function and input (functor)', () => {
+      const data: [number] = [0]
+      // $ExpectError
+      const result: [string] = over(lensIndex(0), 'foo', data)
+    })
+
+    it('requires the lens works with the functor provided (object)', () => {
+      type Data = { a: string }
+      const data: Data = {
+        a: 'foo',
+      }
+
+      // $ExpectError
+      const result: Data = set(lensProp('b'), 'FOO', data)
+    })
+  })
+
+  /**
+   * Normally we don't want to mix our tests with multiple functions (dependent
+   * tests can be difficult to reason about). Ramda's view works specifically
+   * with the various lens types, however.
+   *
+   * lensPath is not covered as cooperating with view because lensPath may not
+   * be expressible in Flow.
+   */
+  describe('view', () => {
+    it('works with lens', () => {
+      type Data = { a: string, b: number, c: boolean }
+      const data = {
+        a: 'foo',
+        b: 4,
+        c: true,
+      }
+
+      const l = lens(x => x.b, (v, d) => ({
+        a: d.a,
+        b: v,
+        c: d.c,
+      }))
+      const result: Data = set(l, 3, data)
+    })
+
+    it('works with lensIndex', () => {
+      type Data = { a: string }
+      const xs: Array<number> = [1, 2, 3]
+      const result: number = view(lensIndex(0), xs)
+    })
+
+    it('works with lensProp', () => {
+      type Data = { a: string }
+      const data = { a: 'foo' }
+      const result: string = view(lensProp('a'), data)
+    })
+
+    it('fails when the lensProp refers to a non-existent field', () => {
+      type Data = { a: string }
+      const data = { a: 'foo' }
+      // $ExpectError
+      const result: string = view(lensProp('b'), data)
+    })
+
+    it('produces the correct result type', () => {
+      type Data = { a: string }
+      const data = { a: 'foo' }
+      // $ExpectError
+      const result: number = view(lensProp('a'), data)
+    })
+  })
 });
 
 const apath: { [k: string]: number | string | Object } = _.assocPath(
@@ -391,32 +583,3 @@ const w: boolean = pred({ a: "foo", b: "xxx", c: {}, x: 11, y: 19 });
 const pred1 = _.whereEq({ a: 1, b: 2 });
 
 const win: boolean = pred1({ a: 1, d: 1 });
-
-const xLens = _.lens(_.prop('x'), _.assoc('x'));
-const xLensPath = _.lensPath(['y', 0, 'y']);
-const xLensIndex = _.lensIndex(0);
-const xLensProp = _.lensProp('x');
-
-const dataObj = {x: 5, y: [{y: 2, z: 3}, {y: 4, z: 5}]};
-const dataArr = ['a', 'b', 'c'];
-
-const xLensView: number = _.view(xLens, dataObj);
-const xLensSet: Array<{ [k: string]: * }> = _.set(xLens, 4, dataObj);
-const xLensOver: Array<{ [k: string]: * }> = _.over(xLens, _.negate, dataObj);
-
-const xLensPathView: number = _.view(xLensPath, dataObj);
-const xLensPathSet: Array<{ [k: string]: * }> = _.set(xLensPath, 4, dataObj);
-const xLensPathSetCurr: Array<{ [k: string]: * }> = _.set(xLensPath, 4)(dataObj);
-const xLensPathOver: Array<{ [k: string]: * }> = _.over(xLensPath, _.negate, dataObj);
-const xLensPathOverCurr: Array<{ [k: string]: * }> = _.over(xLensPath)(_.negate)(dataObj);
-
-const xLensIndexView: number = _.view(xLensIndex, dataArr);
-const xLensIndexSet: Array<string> = _.set(xLensIndex, "test", dataArr);
-const xLensIndexSetCurr: Array<string> = _.set(xLensIndex)("test", dataArr);
-const xLensIndexOver: Array<string> = _.over(xLensIndex, _.concat("test"), dataArr);
-const xLensIndexOverCurr: Array<string> = _.over(xLensIndex, _.concat("test"))(dataArr);
-
-const xLensPropView: number = _.view(xLensProp, dataObj);
-const xLensPropSet: Array<{ [k: string]: * }> = _.set(xLensProp, 4, dataObj);
-const xLensPropOver: Array<{ [k: string]: * }> = _.over(xLensProp, _.negate, dataObj);
-const xLensPropOverCurr: Array<{ [k: string]: * }> = _.over(xLensProp)(_.negate, dataObj);
