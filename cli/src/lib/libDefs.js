@@ -510,9 +510,8 @@ export function filterLibDefs(
 
         default:
           throw new Error(
-            `'${
-              filter.type
-            }' is an unexpected filter type! This should never ` + `happen!`,
+            `'${filter.type}' is an unexpected filter type! This should never ` +
+              `happen!`,
           );
       }
 
