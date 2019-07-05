@@ -2908,11 +2908,13 @@ declare module "rxjs/operators" {
   ): rxjs$MonoTypeOperatorFunction<T>;
 
   declare export function takeWhile<T, S: T>(
-    predicate: (value: T, index: number) => S
+    predicate: (value: T, index: number) => S,
+    inclusive?: boolean
   ): rxjs$OperatorFunction<T, S>;
 
   declare export function takeWhile<T>(
-    predicate: (value: T, index: number) => boolean
+    predicate: (value: T, index: number) => boolean,
+    inclusive?: boolean
   ): rxjs$MonoTypeOperatorFunction<T>;
 
   declare export function tap<T>(
