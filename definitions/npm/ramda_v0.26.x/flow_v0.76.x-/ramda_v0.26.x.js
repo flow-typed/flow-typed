@@ -11,6 +11,12 @@ declare type $npm$ramda$Placeholder = { "@@functional/placeholder": true };
 declare opaque type $npm$ramda$Reduced<T>;
 
 declare module ramda {
+  declare type FunctorObj<A> = {
+    map: (<B>(A => B) => FunctorObj<B>),
+  }
+  declare type FunctorFantasyLand<A> = {
+    'fantasy-land/map': (<B>(A => B) => FunctorFantasyLand<B>),
+  }
   declare type UnaryFn<A, R> = (a: A) => R;
   declare type UnaryPromiseFn<A, R> = UnaryFn<A, Promise<R>>;
   declare type BinaryFn<A, B, R> = ((a: A, b: B) => R) &
@@ -1381,21 +1387,43 @@ declare module ramda {
 
   declare function keys(o: ?Object): Array<string>;
 
-  declare type Lens = <T, V>(x: T) => V;
+  declare type Lens<A, B, Fa: Functor<A>, Fb: Functor<B>> = (A => Fb) => Fb;
+  /**
+   * Because it is difficult to treat objects as if they are Functors, let's
+   * just have a lens type that works with objects, since Ramda supports objects
+   * as Functors in this context.
+   */
+  declare type LensObj<F, A, O> = (A => O) => O;
 
-  declare function lens<T, U, V>(
-    getter: (s: T) => U,
-    setter: (a: U, s: T) => V
-  ): Lens;
-  declare function lens<T, U, V>(
-    getter: (s: T) => U
-  ): (setter: (a: U, s: T) => V) => Lens;
+  declare var lens:
+    & (<A, B, Fa, Fb>(
+      getter: (f: Fa) => A) => (
+      setter: (b: B, f: Fa) => Fb
+    ) => LensObj<Fa, A, Fb>)
+    & (<A, B, Fa, Fb>(
+      getter: (f: Fa) => A,
+      setter: (b: B, f: Fa) => Fb
+    ) => LensObj<Fa, A, Fb>)
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(
+      getter: (f: Fa) => A) => (
+      setter: (b: B, f: Fa) => Fb
+    ) => Lens<A, B, Fa, Fb>)
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(
+      getter: (f: Fa) => A,
+      setter: (b: B, f: Fa) => Fb
+    ) => Lens<A, B, Fa, Fb>)
 
-  declare function lensIndex(n: number): Lens;
+  declare function lensIndex<A, B, Fa: Functor<A>, Fb: Functor<B>, N: number, V: $ElementType<Fa, N>>(N): Lens<V, B, Fa, Fb>;
 
-  declare function lensPath(a: Array<string | number>): Lens;
+  /**
+   * lensPath requires a tuple rather than an Array for its parameter. This
+   * allows us to make rested $ElementType uses in order to walk down the object
+   * hierarchy. This remains something TODO.
+   */
+  declare function lensPath(a: Array<string | number>): Lens<mixed, mixed, mixed, mixed>;
 
-  declare function lensProp(str: string): Lens;
+  // declare function lensProp(str: string): Lens;
+  declare function lensProp<O, F, K: $Keys<F>>(K): LensObj<F, $ElementType<F, K>, O>;
 
   declare function mapObjIndexed<A, B>(
     fn: (val: A, key: string, o: Object) => B,
@@ -1477,10 +1505,24 @@ declare module ramda {
   ): (val: T) => Object;
   declare function omit<T: Object>(keys: Array<string>, val: T): Object;
 
-  declare function over<T, V, U>(lens: Lens, x: (any) => mixed, val: V): U;
-  declare function over<T, V, U>(
-    lens: Lens,
-  ): ((x: (any) => mixed) => (val: V) => U) & ((x: (any) => mixed, val: V) => U);
+  declare type Functor<A> =
+    | { @@iterator(): Iterator<A> }
+    | FunctorObj<A>
+    | FunctorFantasyLand<A>
+    | Array<A>
+    | $ReadOnlyArray<A>
+
+  declare var over:
+    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>) => (
+      & ((A => B, Oa) => Ob)
+      & ((A => B) => Oa => Ob)
+    ))
+    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>, A => B, Oa) => Ob)
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>) => (
+      & ((A => B, Fa) => Fb)
+      & ((A => B) => Fa => Fb)
+    ))
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>, A => B, Fa) => Fb)
 
   declare function path<T: string | number, V>(
     p: Array<T>,
@@ -1587,10 +1629,23 @@ declare module ramda {
     o: O
   ): Array<$ElementType<O, T>>;
 
-  declare function set<T, V, U>(lens: Lens, x: T, val: V): U;
-  declare function set<T, V, U>(
-    lens: Lens,
-  ): ((x: (any) => mixed) => (val: V) => U) & ((x: (any) => mixed, val: V) => U);
+  declare var set:
+    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>) => (
+      & (B => Oa => Ob)
+      & ((B, Oa) => Ob)
+    ))
+    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>, B, Oa) => Ob)
+    // NOTE: Other functor types might need to be directly supported here.
+    & (<A, B, Fa: Array<A>>(lens: Lens<A, B, Fa, Array<B>>) => (
+      & (B => Fa => Array<B>)
+      & ((B, Fa) => Array<B>)
+    ))
+    & (<A, B, Fa: Array<A>>(lens: Lens<A, B, Fa, Array<B>>, B, Fa) => Array<B>)
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>) => (
+      & (B => Fa => Fb)
+      & ((B, Fa) => Fb)
+    ))
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>, B, Fa) => Fb)
 
   declare function toPairs<T, O: { [k: string]: T }>(
     o: O
@@ -1620,8 +1675,11 @@ declare module ramda {
     o: $Shape<O & Q>
   ): boolean;
 
-  declare function view<T, V>(lens: Lens, val: T): V;
-  declare function view<T, V>(lens: Lens): (val: T) => V;
+  declare var view:
+    & (<A, B, Oa, Ob>(LensObj<Oa, A, B>) => Oa => A)
+    & (<A, B, Oa, Ob>(LensObj<Oa, A, B>, Oa) => A)
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(Lens<A, B, Fa, Fb>) => Fa => A)
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(Lens<A, B, Fa, Fb>, Fa) => A)
 
   // *Function
   declare var __: $npm$ramda$Placeholder;
