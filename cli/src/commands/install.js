@@ -99,6 +99,7 @@ export function setup(yargs: Yargs) {
     ignoreDeps: {
       alias: 'i',
       describe: 'Dependency categories to ignore when installing definitions',
+      choices: ['dev', 'bundled', 'peer'],
       type: 'array',
     },
     rootDir: {
@@ -450,7 +451,7 @@ async function installNpmLibDefs({
           : ['a libdef', 'this package', 'it'];
       console.log(
         `\n` +
-          `I've generated ${'`'}any${'`'}-typed stubs for ${plural[1]}, but ` +
+          `We've generated ${'`'}any${'`'}-typed stubs for ${plural[1]}, but ` +
           `consider submitting \n` +
           `${plural[0]} for ${plural[2]} to ` +
           `${colors.bold('https://github.com/flowtype/flow-typed/')}\n`,

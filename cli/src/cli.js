@@ -16,7 +16,6 @@ import * as Search from './commands/search.js';
 import * as Update from './commands/update.js';
 import * as UpdateCache from './commands/update-cache';
 import * as ValidateDefs from './commands/validateDefs.js';
-import * as Version from './commands/version.js';
 import * as Info from './commands/info.js';
 
 import type {Argv} from 'yargs';
@@ -40,7 +39,6 @@ export function runCLI() {
     Update,
     UpdateCache,
     ValidateDefs,
-    Version,
     Info
   ];
 

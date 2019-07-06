@@ -1,7 +1,7 @@
 // @flow
 
 declare module "apollo-link-http" {
-  declare type $Record<T, U> = {[key: $Enum<T>]: U};
+  declare type $Record<T, U> = {[key: $Keys<T>]: U};
 
   declare type NextLink = (operation: Operation) => any;
 
