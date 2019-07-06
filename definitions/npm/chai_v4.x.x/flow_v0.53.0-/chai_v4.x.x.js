@@ -44,6 +44,7 @@ declare module "chai" {
     within: (start: T & number, finish: T & number, message?: string) => ExpectChain<T>,
 
     instanceof: (constructor: mixed, message?: string) => ExpectChain<T>,
+    instanceOf: (constructor: mixed, message?: string) => ExpectChain<T>,
     nested: ExpectChain<T>,
     property: <P>(
       name: string,
@@ -51,7 +52,7 @@ declare module "chai" {
       message?: string
     ) => ExpectChain<P> & ((name: string) => ExpectChain<mixed>),
 
-    length: (value: number, message?: string) => ExpectChain<T> | ExpectChain<number>,
+    length: ExpectChain<number> & ((value: number, message?: string) => ExpectChain<T>),
     lengthOf: (value: number, message?: string) => ExpectChain<T>,
 
     match: (regex: RegExp, message?: string) => ExpectChain<T>,
@@ -158,7 +159,11 @@ declare module "chai" {
     matchSnapshot: (lang?: any, update?: boolean, msg?: any) => ExpectChain<T>
   };
 
-  declare function expect<T>(actual: T, message?: string): ExpectChain<T>;
+
+  declare var expect: {
+    <T>(actual: T, message?: string): ExpectChain<T>,
+    fail: ((message?: string) => void) & ((actual: any, expected: any, message?: string, operator?: string) => void)
+  };
 
   declare function use(plugin: (chai: Object, utils: Object) => void): void;
 
