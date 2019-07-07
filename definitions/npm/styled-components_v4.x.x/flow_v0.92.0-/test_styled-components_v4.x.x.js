@@ -350,4 +350,10 @@ describe('wrapping components', () => {
     // $ExpectError - Invalid prop type
     const hello3 = <StyledHello name={3} />
   })
+
+  it('allows default props to be defined', () => {
+    StyledHello.defaultProps = {
+      name: "me"
+    }
+  })
 })
