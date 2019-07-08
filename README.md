@@ -113,13 +113,12 @@ recent definitions into the cache for yourself.
 
 Creates `any`-typed libdef that you can fill in.
 
-If the `--typescript` flag was specified, the libdef would be converted to flow-typed libdef format.
+If the `--typescript` flag was specified, TypeScript definition would be converted to flow-typed libdef format if possible.
+Сheck out supported syntax constructs in flowgen's [&ldquo;The state of converter&rdquo; section](https://github.com/joarwilk/flowgen#the-state-of-the-converter).
+Complex TypeScript definitions might need manual changes before using them.
+Please report any issues that you have encountered to [flowgen](https://github.com/joarwilk/flowgen/issues) repository.
 
-Note that this option can produce unpredictable output because TypeScript-to-Flow converter is not perfect.
-You can report issues to [flowgen](https://github.com/joarwilk/flowgen) repository.
-
-You would need to edit and carefully review generated files.
-After you have done this, consider submitting libdefs to flow-typed.
+Сonsider [contributing](CONTRIBUTING.md) these libdefs back to flow-typed.
 
 ## Active Maintenance Team
 
