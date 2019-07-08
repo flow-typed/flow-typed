@@ -113,10 +113,13 @@ recent definitions into the cache for yourself.
 
 Creates `any`-typed libdef that you can fill in.
 
-If the `--typescript` flag is specified, the libdef would be converted from `typings` field in package.json, `index.d.ts` file or `@types/package-name` package to flow-typed libdef format.
+If the `--typescript` flag was specified, the libdef would be converted to flow-typed libdef format.
 
 Note that this option can produce unpredictable output because TypeScript-to-Flow converter is not perfect.
 You can report issues to [flowgen](https://github.com/joarwilk/flowgen) repository.
+
+You would need to edit and carefully review generated files.
+After you have done this, consider submitting libdefs to flow-typed.
 
 ## Active Maintenance Team
 
