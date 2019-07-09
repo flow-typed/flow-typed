@@ -1,4 +1,3 @@
-// @flow
 declare module 'history' {
   declare function Unblock(): void;
 
@@ -125,15 +124,9 @@ declare module 'history' {
 
   declare function createHashHistory(opts?: HashHistoryOpts): HashHistory;
 
-  declare type LocationType = {
-    pathname?: string,
-    search?: string,
-    hash?: string,
-  };
-
-  declare function parsePath(path: string): LocationType;
+  declare function parsePath(path: string): BrowserLocation | MemoryLocation | HashLocation;
 
   declare function createPath(
-    path: LocationType
+    path: BrowserLocation | MemoryLocation | HashLocation
   ): string;
 }

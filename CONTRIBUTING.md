@@ -62,7 +62,7 @@ library-definition test runner.
 ***We call this the "flow version directory".***
 
 This specifies that the definition you are contributing is compatible with the
-version range of the directory. You MUST specify a version range with names like
+version range of the directiry. You MUST specify a version range with names like
 `flow_v0.25.x-` ("any version at or after v0.25.x") or
 `flow_-v0.25.x` ("any version at or before v0.25.x") or
 `flow_v0.25.x-v0.28.x` ("any version inclusively between v0.25.x and

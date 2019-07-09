@@ -269,12 +269,6 @@ describe('create path', () => {
     const state: {} = path
   });
 
-  it('should allow to use empty Location argument', () => {
-    const path = createPath({})
-
-    const key: string = path
-  });
-
   it('should not allow to accept void', () => {
     // $ExpectError
     const path = createPath()
