@@ -156,7 +156,7 @@ declare module 'example' {
 
 **So why don't I do that for importing other libdefs?**
 
-Because it just don't work, sorry. You might think this is possible, but it isn't:
+Because it just doesn't work, sorry. You might think this is possible, but it isn't:
 
 ```js
 declare module 'koa-router' {
