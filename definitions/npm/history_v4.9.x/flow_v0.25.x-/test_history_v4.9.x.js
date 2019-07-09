@@ -5,6 +5,8 @@ import { describe, it } from 'flow-typed-test';
 import {createBrowserHistory} from 'history';
 import {createMemoryHistory} from 'history';
 import {createHashHistory} from 'history';
+import {createPath} from 'history';
+import {parsePath} from 'history';
 
 // browser history
 
@@ -251,5 +253,49 @@ describe('hash history', () => {
         search: "?a=1",
       })
     });
+  });
+});
+
+describe('create path', () => {
+  it('should allow to use Location argument', () => {
+    const path = createPath({
+      pathname: '/test',
+      search: '?a=1',
+      hash: 'slug',
+    })
+
+    const key: string = path
+    // $ExpectError
+    const state: {} = path
+  });
+
+  it('should allow to use empty Location argument', () => {
+    const path = createPath({})
+
+    const key: string = path
+  });
+
+  it('should not allow to accept void', () => {
+    // $ExpectError
+    const path = createPath()
+
+    const key: string = path
+  });
+});
+
+describe('parse path', () => {
+  it('should allow to use string argument', () => {
+    const location = parsePath('/test?query#hash')
+
+    const state: {} = location
+    // $ExpectError
+    const key: string = location
+  });
+
+  it('should not allow to accept void', () => {
+    // $ExpectError
+    const location = parsePath()
+
+    const state: {} = location
   });
 });
