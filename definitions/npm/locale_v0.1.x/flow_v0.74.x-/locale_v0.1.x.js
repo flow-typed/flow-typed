@@ -27,7 +27,7 @@ declare module 'locale' {
     length: number;
     index: () => ObjectMap<string, number>;
 
-    best: () => Locale;
+    best: (supported?: Locales) => Locale;
 
     sort: Function;
     push: Function;
