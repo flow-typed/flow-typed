@@ -408,8 +408,8 @@ export async function getInstalledNpmLibDefs(
               flowVerMatches == null
                 ? matches[3]
                 : flowVerMatches[3] == null
-                  ? flowVerMatches[2]
-                  : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
+                ? flowVerMatches[2]
+                : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
             const flowDirStr = `flow_${flowVerStr}`;
             const flowVer =
               flowVerMatches == null

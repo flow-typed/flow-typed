@@ -20,6 +20,13 @@ export function setup(yargs: Object) {
         type: 'bool',
         demand: false,
       },
+      typescript: {
+        default: false,
+        alias: 't',
+        describe: 'Generate libdef from TypeScript definitions',
+        type: 'bool',
+        demand: false,
+      },
       maxDepth: {
         alias: 'd',
         describe: 'Allow to generate deeper template',
@@ -41,11 +48,13 @@ export function setup(yargs: Object) {
     })
     .example('$0 create-stub foo@^1.2.0')
     .example('$0 create-stub foo bar baz')
-    .help('h');
+    .help('h')
+    .alias('h', 'help');
 }
 
 type Args = {
   overwrite: mixed, // boolean
+  typescript: mixed, // boolean
   maxDepth?: mixed, // number
   libdefDir?: mixed, // string
   _: Array<string>,
@@ -106,6 +115,7 @@ export async function run(args: Args): Promise<number> {
         packageName,
         version,
         Boolean(args.overwrite),
+        Boolean(args.typescript),
         String(args.libdefDir),
         Number(args.maxDepth),
       );

@@ -209,25 +209,34 @@ type EnzymeMatchersType = {
   toHaveDisplayName(name: string): void,
 };
 
-// DOM testing library extensions https://github.com/kentcdodds/dom-testing-library#custom-jest-matchers
+// DOM testing library extensions (jest-dom)
+// https://github.com/testing-library/jest-dom
 type DomTestingLibraryType = {
-  toBeDisabled(): void,
-  toBeEnabled(): void,
-  toBeEmpty(): void,
+  /**
+   * @deprecated
+   */
+  toBeInTheDOM(container?: HTMLElement): void,
+
   toBeInTheDocument(): void,
   toBeVisible(): void,
+  toBeEmpty(): void,
+  toBeDisabled(): void,
+  toBeEnabled(): void,
+  toBeInvalid(): void,
+  toBeRequired(): void,
+  toBeValid(): void,
   toContainElement(element: HTMLElement | null): void,
   toContainHTML(htmlText: string): void,
-  toHaveAttribute(name: string, expectedValue?: string): void,
+  toHaveAttribute(attr: string, value?: any): void,
   toHaveClass(...classNames: string[]): void,
   toHaveFocus(): void,
   toHaveFormValues(expectedValues: { [name: string]: any }): void,
   toHaveStyle(css: string): void,
   toHaveTextContent(
-    content: string | RegExp,
+    text: string | RegExp,
     options?: { normalizeWhitespace: boolean }
   ): void,
-  toBeInTheDOM(): void,
+  toHaveValue(value?: string | string[] | number): void,
 };
 
 // Jest JQuery Matchers: https://github.com/unindented/custom-jquery-matchers
