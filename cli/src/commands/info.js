@@ -16,7 +16,6 @@ export async function run(argv: Argv) { // eslint-disable-line
   const data = await envinfo.run({
     System: ['OS', 'CPU'],
     Binaries: ['Node', 'Yarn', 'npm'],
-    Browsers: ['Chrome', 'Edge', 'Firefox', 'Safari'],
     npmGlobalPackages: ['flow-typed'],
   });
   console.log(data);
