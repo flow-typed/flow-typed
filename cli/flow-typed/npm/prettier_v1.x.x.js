@@ -1,13 +1,14 @@
-// flow-typed signature: 4eed8da2dc730dc33e7710b465eaa44b
-// flow-typed version: cc7a557b34/prettier_v1.x.x/flow_>=v0.56.x
+// flow-typed signature: 776ea3eddbfbd955ba69a2b42f244eda
+// flow-typed version: a3dbb68519/prettier_v1.x.x/flow_>=v0.56.x <=v0.83.x
 
 declare module "prettier" {
-  declare type AST = Object;
-  declare type Doc = Object;
-  declare type FastPath = Object;
+  declare export type AST = Object;
+  declare export type Doc = Object;
+  declare export type FastPath = Object;
 
-  declare type PrettierParserName =
+  declare export type PrettierParserName =
     | "babylon"
+    | "babel-flow"
     | "flow"
     | "typescript"
     | "postcss"
@@ -19,17 +20,17 @@ declare module "prettier" {
     | "markdown"
     | "vue";
 
-  declare type PrettierParser = {
+  declare export type PrettierParser = {
     [name: PrettierParserName]: (text: string, options?: Object) => AST
   };
 
-  declare type CustomParser = (
+  declare export type CustomParser = (
     text: string,
     parsers: PrettierParser,
     options: Options
   ) => AST;
 
-  declare type Options = {|
+  declare export type Options = {|
     printWidth?: number,
     tabWidth?: number,
     useTabs?: boolean,
@@ -49,13 +50,13 @@ declare module "prettier" {
     plugins?: Array<string | Plugin>
   |};
 
-  declare type Plugin = {
+  declare export type Plugin = {
     languages: SupportLanguage,
     parsers: { [parserName: string]: Parser },
     printers: { [astFormat: string]: Printer }
   };
 
-  declare type Parser = {
+  declare export type Parser = {
     parse: (
       text: string,
       parsers: { [parserName: string]: Parser },
@@ -64,7 +65,7 @@ declare module "prettier" {
     astFormat: string
   };
 
-  declare type Printer = {
+  declare export type Printer = {
     print: (
       path: FastPath,
       options: Object,
@@ -78,7 +79,7 @@ declare module "prettier" {
     ) => ?Doc
   };
 
-  declare type CursorOptions = {|
+  declare export type CursorOptions = {|
     cursorOffset: number,
     printWidth?: $PropertyType<Options, "printWidth">,
     tabWidth?: $PropertyType<Options, "tabWidth">,
@@ -97,18 +98,18 @@ declare module "prettier" {
     plugins?: $PropertyType<Options, "plugins">
   |};
 
-  declare type CursorResult = {|
+  declare export type CursorResult = {|
     formatted: string,
     cursorOffset: number
   |};
 
-  declare type ResolveConfigOptions = {|
+  declare export type ResolveConfigOptions = {|
     useCache?: boolean,
     config?: string,
     editorconfig?: boolean
   |};
 
-  declare type SupportLanguage = {
+  declare export type SupportLanguage = {
     name: string,
     since: string,
     parsers: Array<string>,
@@ -124,7 +125,7 @@ declare module "prettier" {
     vscodeLanguageIds: Array<string>
   };
 
-  declare type SupportOption = {|
+  declare export type SupportOption = {|
     since: string,
     type: "int" | "boolean" | "choice" | "path",
     deprecated?: string,
@@ -136,18 +137,18 @@ declare module "prettier" {
     choices?: SupportOptionChoice
   |};
 
-  declare type SupportOptionRedirect = {|
+  declare export type SupportOptionRedirect = {|
     options: string,
     value: SupportOptionValue
   |};
 
-  declare type SupportOptionRange = {|
+  declare export type SupportOptionRange = {|
     start: number,
     end: number,
     step: number
   |};
 
-  declare type SupportOptionChoice = {|
+  declare export type SupportOptionChoice = {|
     value: boolean | string,
     description?: string,
     since?: string,
@@ -155,20 +156,20 @@ declare module "prettier" {
     redirect?: SupportOptionValue
   |};
 
-  declare type SupportOptionValue = number | boolean | string;
+  declare export type SupportOptionValue = number | boolean | string;
 
-  declare type SupportInfo = {|
+  declare export type SupportInfo = {|
     languages: Array<SupportLanguage>,
     options: Array<SupportOption>
   |};
 
-  declare type Prettier = {|
+  declare export type Prettier = {|
     format: (source: string, options?: Options) => string,
     check: (source: string, options?: Options) => boolean,
     formatWithCursor: (source: string, options: CursorOptions) => CursorResult,
     resolveConfig: {
       (filePath: string, options?: ResolveConfigOptions): Promise<?Options>,
-      sync(filePath: string, options?: ResolveConfigOptions): Promise<?Options>
+      sync(filePath: string, options?: ResolveConfigOptions): ?Options
     },
     clearConfigCache: () => void,
     getSupportInfo: (version?: string) => SupportInfo

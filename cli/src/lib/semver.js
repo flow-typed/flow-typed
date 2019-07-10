@@ -126,9 +126,7 @@ export function versionToString(ver: Version): string {
   const rangeStr = ver.range ? ver.range : '';
   const upperStr = ver.upperBound ? `_${versionToString(ver.upperBound)}` : '';
   const prerel = ver.prerel == null ? '' : `-${ver.prerel}`;
-  return `${rangeStr}v${ver.major}.${ver.minor}.${
-    ver.patch
-  }${prerel}${upperStr}`;
+  return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${prerel}${upperStr}`;
 }
 
 function _validateVersionNumberPart(context, partName, part) {

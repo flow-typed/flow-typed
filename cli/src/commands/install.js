@@ -379,9 +379,7 @@ async function installNpmLibDefs({
             : ['a versioned update', 'this package'];
         console.log(
           `\n` +
-            `  Consider submitting ${libDefPlural[0]} for ${
-              libDefPlural[1]
-            } to \n` +
+            `  Consider submitting ${libDefPlural[0]} for ${libDefPlural[1]} to \n` +
             `  https://github.com/flowtype/flow-typed/\n`,
         );
       },
@@ -431,6 +429,7 @@ async function installNpmLibDefs({
             pkgName,
             pkgVerStr,
             overwrite,
+            /* typescript */ false,
             libdefDir,
           );
         }),
