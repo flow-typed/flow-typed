@@ -574,10 +574,8 @@ declare module ramda {
     n: number,
   ): (xs: Array<T>) => Array<Array<T>>;
 
-  declare function append<E>(x: E, xs: Array<E>): Array<E>;
-  declare function append<E>(
-    x: E,
-  ): (xs: Array<E>) => Array<E>;
+  declare function append<A, E>(A, $ReadOnlyArray<E>): Array<E|A>;
+  declare function append<A, E>(A): CurriedFunction1<$ReadOnlyArray<E>, Array<E|A>>;
 
   declare function prepend<E>(x: E, xs: Array<E>): Array<E>;
   declare function prepend<E>(

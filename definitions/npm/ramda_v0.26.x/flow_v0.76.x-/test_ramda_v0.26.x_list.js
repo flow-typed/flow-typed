@@ -318,7 +318,27 @@ const str: string = "hello world";
   //$ExpectError
   const nthxs2: string = _.nth(2, [1, 2, 3]);
 
-  const xxs: Array<number> = _.append(1, [1, 2, 3]);
+  describe('append', () => {
+    it('should supports arrays', () => {
+      const appendResult1: Array<number> = _.append(1, [1, 2, 3]);
+      const appendResult2: Array<number> = _.append(1)([1, 2, 3]);
+    });
+    it('should works with read-only array', (readOnly: $ReadOnlyArray<number>) => {
+      const appendResult1: $ReadOnlyArray<number> = _.append(1, readOnly);
+      const appendResult2: $ReadOnlyArray<number> = _.append(1)(readOnly);
+    });
+    it('should result array element should be correct', () => {
+      const readOnly: $ReadOnlyArray<number> = [1, 2, 3];
+      const appendResult1: $ReadOnlyArray<number|string> = _.append('s', readOnly);
+      const appendResult2: $ReadOnlyArray<number|string> = _.append('s')(readOnly);
+      
+      //$ExpectError
+      const appendResult3: $ReadOnlyArray<number|null> = _.append('s', readOnly);
+      //$ExpectError
+      const appendResult4: $ReadOnlyArray<number> = _.append('s')(readOnly);
+    });
+  });
+  
   const xxxs: Array<number> = _.intersperse(1, [1, 2, 3]);
 
   const pairxs: [number, string] = _.pair(2, "str");
