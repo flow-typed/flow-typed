@@ -12,6 +12,7 @@ import _, {
   reduce,
   repeat,
   subtract,
+  without,
   zipWith
 } from "ramda";
 import { describe, it } from 'flow-typed-test';
@@ -545,8 +546,31 @@ const str: string = "hello world";
   //$ExpectError
   const ys6: { [key: string]: string } = _.fromPairs([["h", 2]]);
 
-  const withoutxs: Array<number> = _.without([1, 2], ns);
-  const withoutxs1: Array<string> = _.without(["a"], ss);
+  describe('without', () => {
+    it('should work with basic array', () => {
+      const arr1: Array<number> = without([1, 2], [1, 2, 3, 4, 5]);
+      const arr2: Array<string> = without(['a'])(['a', 'b', 'c']);
+    });
+    it('should fail when first list does not match second list type', () => {
+      // $ExpectError
+      const arr1: Array<number> = without(['1', '2'], [1, 2, 3, 4, 5]);
+      // $ExpectError
+      const arr2: Array<string> = without([1])(['a', 'b', 'c']);
+    });
+    it('should work with readonly array', () => {
+      const list1: $ReadOnlyArray<number|string> =  [1, 'four', 5];
+      const list2: $ReadOnlyArray<number|string> =  [1, 'two', 3, 'four', 5];
+      const arr1: Array<number|string> = without(list1, list2);
+      const arr2: Array<number|string> = without(list1)(list2);
+    });
+    it('should list1 be a subset of list2', () => {
+      const list1: $ReadOnlyArray<number> =  [1, 3, 5];
+      const list2: $ReadOnlyArray<number|string> =  [1, 'four', 5];
+      const arr1: Array<number|string> = without(list1, list2);
+      // $ExpectError
+      const arr2: Array<number> = without(list2, list1);
+    });
+  });
 
   const xprodxs: Array<[number, string]> = _.xprod([1, 2], ["a", "b", "c"]);
   const xprodxs1: Array<[boolean, string]> = _.xprod([true, false])(["a", "b"]);
