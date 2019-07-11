@@ -2,6 +2,7 @@
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import _, {
   type RefineFilter,
+  append,
   compose,
   pipe,
   curry,
@@ -39,7 +40,6 @@ const str: string = "hello world";
   const aps: Array<Array<number>> = _.aperture(2, ns);
   const aps2: Array<Array<string>> = _.aperture(2)(ss);
 
-  const newXs: Array<string> = _.append("one", ss);
   const newXs1: Array<number> = _.prepend(1)(ns);
 
   const concatxs1: Array<number> = _.concat([4, 5, 6], [1, 2, 3]);
@@ -320,22 +320,22 @@ const str: string = "hello world";
 
   describe('append', () => {
     it('should supports arrays', () => {
-      const appendResult1: Array<number> = _.append(1, [1, 2, 3]);
-      const appendResult2: Array<number> = _.append(1)([1, 2, 3]);
+      const appendResult1: Array<number> = append(1, [1, 2, 3]);
+      const appendResult2: Array<string> = append('four')(['one', 'two', 'three']);
     });
     it('should works with read-only array', (readOnly: $ReadOnlyArray<number>) => {
-      const appendResult1: $ReadOnlyArray<number> = _.append(1, readOnly);
-      const appendResult2: $ReadOnlyArray<number> = _.append(1)(readOnly);
+      const appendResult1: $ReadOnlyArray<number> = append(1, readOnly);
+      const appendResult2: $ReadOnlyArray<number> = append(1)(readOnly);
     });
     it('should result array element should be correct', () => {
       const readOnly: $ReadOnlyArray<number> = [1, 2, 3];
-      const appendResult1: $ReadOnlyArray<number|string> = _.append('s', readOnly);
-      const appendResult2: $ReadOnlyArray<number|string> = _.append('s')(readOnly);
+      const appendResult1: $ReadOnlyArray<number|string> = append('s', readOnly);
+      const appendResult2: $ReadOnlyArray<number|string> = append('s')(readOnly);
       
       //$ExpectError
-      const appendResult3: $ReadOnlyArray<number|null> = _.append('s', readOnly);
+      const appendResult3: $ReadOnlyArray<number|null> = append('s', readOnly);
       //$ExpectError
-      const appendResult4: $ReadOnlyArray<number> = _.append('s')(readOnly);
+      const appendResult4: $ReadOnlyArray<number> = append('s')(readOnly);
     });
   });
   
