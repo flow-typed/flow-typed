@@ -3,6 +3,7 @@
 import _, {
   type RefineFilter,
   compose,
+  groupBy,
   pipe,
   curry,
   filter,
@@ -199,14 +200,42 @@ const str: string = "hello world";
 
   const forEachObj = _.forEachObjIndexed((value, key) => {}, { x: 1, y: 2 });
 
-  const groupedBy: { [k: string]: Array<number> } = _.groupBy(
-    x => (x > 1 ? "more" : "less"),
-    ns
-  );
-  //$ExpectError
-  const groupedBy1: { [k: string]: Array<string> } = _.groupBy(
-    x => (x > 1 ? "more" : "less")
-  )(ns);
+  describe('groupBy', () => {
+    it('should work with basic array', () => {
+      const fn = x => `${x}`;
+      const groupedBy: { [k: string]: Array<number> } = groupBy(fn, [1, 2, 3]);
+      const groupedBy1: { [k: string]: Array<string> } = groupBy(fn)(['one', 'two', 'three']);
+    });
+    it('group function should return string', () => {
+      const fn: number => number = x => x;
+
+      // $ExpectError
+      groupBy(fn, [1,2,3]);
+      // $ExpectError
+      groupBy(fn)([1,2,3]);
+    });
+    it('group function param should match array element', () => {
+      const fn: string => string = x => x;
+
+      // $ExpectError
+      groupBy(fn, [1,2,3]);
+      // $ExpectError
+      groupBy(fn)([1,2,3]);
+    });
+    it('should support readonly array', () => {
+      const fn: (number | string) => string = x => `${x}`;
+      const arr: $ReadOnlyArray<number> = [1, 2, 3];
+      const groupedBy: { [k: string]: Array<number> } = groupBy(fn, arr);
+      const arr1: $ReadOnlyArray<number|string> = [1, 'two', 3];
+      const groupedBy1: { [k: string]: Array<number|string> } = groupBy(fn)(arr1);
+
+      const fn1: number => string = x => `${x}`;
+      // $ExpectError
+      groupBy(fn1, arr1);
+      // $ExpectError
+      const groupedBy2: { [k: string]: Array<number> } = groupBy(fn)(arr1);
+    });
+  });
 
   const groupedWith: Array<Array<number>> = _.groupWith(x => x > 1, ns);
   const groupedWith1: Array<Array<string>> = _.groupWith(x => x === "one")(ss);

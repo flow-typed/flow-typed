@@ -633,13 +633,8 @@ declare module ramda {
     xs: T
   ): T;
 
-  declare function groupBy<T>(
-    fn: (x: T) => string,
-    xs: Array<T>
-  ): { [key: string]: Array<T> };
-  declare function groupBy<T>(
-    fn: (x: T) => string,
-  ): (xs: Array<T>) => { [key: string]: Array<T> };
+  declare function groupBy<T>(fn: (x: T) => string, xs: $ReadOnlyArray<T>): { [key: string]: Array<T> };
+  declare function groupBy<T>(fn: (x: T) => string): CurriedFunction1<$ReadOnlyArray<T>, { [string]: Array<T> }>;
 
   declare function groupWith<T, V: Array<T> | string>(
     fn: BinaryPredicateFn<T>,
