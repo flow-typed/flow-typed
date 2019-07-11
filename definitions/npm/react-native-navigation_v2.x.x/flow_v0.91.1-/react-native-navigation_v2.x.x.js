@@ -213,6 +213,8 @@ declare module 'react-native-navigation' {
   declare export type SideMenuSide = {|
     visible?: boolean,
     enabled?: boolean,
+    width?: number,
+    height?: number,
   |};
   declare export type OptionsSideMenu = {|
     left?: SideMenuSide,
