@@ -75,7 +75,9 @@ async function getTestGroups(
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
   return libDefs.map(libDef => {
-    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
+    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${
+      libDef.flowVersionStr
+    }`;
     return {
       id: groupID,
       testFilePaths: libDef.testFilePaths,
@@ -314,9 +316,10 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath) {
 
 function testTypeDefinition(flowVer, testDirPath) {
   return new Promise(res => {
+    const IS_WINDOWS = os.type() === 'Windows_NT';
     const child = child_process.exec(
       [
-        path.join(BIN_DIR, 'flow-' + flowVer),
+        path.join(BIN_DIR, 'flow-' + flowVer + (IS_WINDOWS ? '.exe' : '')),
         'check',
         '--strip-root',
         '--all',
@@ -524,7 +527,9 @@ async function runTestGroup(
     );
 
     if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
-      console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
+      console.log(`Tests for ${
+        testGroup.id
+      } ran successfully on flow ${lowestCapableFlowVersion}.
         Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
     }
 
