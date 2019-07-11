@@ -6,6 +6,9 @@ declare module 'formik/@@yup' {
 declare module 'formik/@flow-typed' {
   import type { Schema } from 'formik/@@yup';
 
+  declare export type FieldValidator = (
+    value: any
+  ) => string | Promise<string | void>;
   declare export type FormikErrors<Values> = $ObjMap<Values, () => ?string>;
   declare export type FormikTouched<Values> = $ObjMap<Values, () => ?boolean>;
 
@@ -34,9 +37,9 @@ declare module 'formik/@flow-typed' {
     setSubmitting(isSubmitting: boolean): void,
     setTouched(touched: FormikTouched<Values>): void,
     setValues(values: Values): void,
-    setFieldValue(fieldName: string, value: any): void,
+    setFieldValue(fieldName: string, value: any, shouldValidate?: boolean): void,
     setFieldError(fieldName: $Keys<Values>, message: string): void,
-    setFieldTouched(fieldName: $Keys<Values>, isTouched?: boolean): void,
+    setFieldTouched(fieldName: $Keys<Values>, isTouched?: boolean, shouldValidate?: boolean): void,
     validateForm(values?: $Shape<Values>): Promise<FormikErrors<Values>>,
     validateField(field: string): void,
     resetForm(nextState?: $Shape<FormikState<Values>>): void,
@@ -50,7 +53,7 @@ declare module 'formik/@flow-typed' {
 
   declare export type FormikHandlers = {|
     handleSubmit(e?: {}): void,
-    handleReset(): void,
+    handleReset(e?: {}): void,
     handleBlur(e: {}): void,
     handleChange(e: {}): void,
   |};
@@ -89,7 +92,7 @@ declare module 'formik/@flow-typed' {
   |}>;
 
   declare export type FnsOptions = {|
-    validate: (value: any) => string | Promise<void> | void,
+    validate: FieldValidator,
   |};
 
   declare export type FormikRegistration<Values> = {|
@@ -174,6 +177,7 @@ declare module 'formik/@Field' {
     FormikProps,
     FieldMetaProps,
     FieldInputProps,
+    FieldValidator
   } from 'formik/@flow-typed';
 
   declare export type FieldProps<Value> = {|
@@ -188,7 +192,7 @@ declare module 'formik/@Field' {
     as?: React$ElementType,
     render?: (props: FieldProps<Value>) => React$Node,
     children?: ((props: FieldProps<Value>) => React$Node) | React$Node,
-    validate?: (value: Value) => string | Promise<string | void> | void,
+    validate?: FieldValidator,
     type?: string,
     value?: Value,
     innerRef?: React$Ref<any>,
@@ -360,7 +364,7 @@ declare module 'formik/@Formik' {
     handleChange(fieldName: $Keys<Values>): (event: {}) => void,
     handleChange(event: {}): void,
 
-    handleReset: () => void,
+    handleReset: (e?: {}) => void,
     handleSubmit: (e?: {}) => void,
 
     resetForm: (nextState?: $Shape<FormikState<Values>>) => void,
