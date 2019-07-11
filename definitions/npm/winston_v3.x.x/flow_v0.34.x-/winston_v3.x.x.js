@@ -111,7 +111,8 @@ declare module "winston" {
   declare export type DefaultLogger = $winstonDefaultLogger;
   declare export type Container<T: Levels> = $winstonContainer<T>;
 
-  declare module.exports: $winstonDefaultLogger & {
+  declare module.exports: {
+    ...$Exact<$winstonDefaultLogger>,
     format: $winstonFormatSubModule,
     transports: {
       Console: typeof $winstonConsoleTransport,

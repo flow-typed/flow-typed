@@ -1,5 +1,5 @@
-import winston from "winston";
-import type { Logger, Levels, Format, ConsoleTransport, Container } from "winston";
+import winston, {format} from "winston";
+import type { Logger, Levels, Format, ConsoleTransport, Container, FormatSubModule } from "winston";
 
 winston.log({
   level: "info",
@@ -99,3 +99,5 @@ const hasCategoryThreeId: boolean = container.has("categoryThreeId");
 logger = container.get("categoryTwoId");
 
 logger.error("categoryTwoId error message");
+
+(format: FormatSubModule);
