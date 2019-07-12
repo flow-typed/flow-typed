@@ -18,6 +18,7 @@ declare module 'expo-constants' {
   declare export type WebManifest = {};
 
   declare export type AppManifest = {
+    releaseChannel?: string,
     name?: string,
     description?: string,
     slug?: string,
