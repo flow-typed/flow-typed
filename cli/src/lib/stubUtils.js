@@ -299,6 +299,11 @@ declare module '%s' {
         if (name === 'index') {
           aliases.push(format(aliasTemplate, moduleName, '', packageName));
           aliases.push(format(aliasTemplate, moduleName, ext, packageName));
+        } else if (path.basename(name) === 'index') {
+          const dirModuleName = packageName + '/' + path.dirname(file);
+          fileDecls.push(format(moduleStubTemplate, dirModuleName));
+          aliases.push(format(aliasTemplate, moduleName, '', dirModuleName));
+          aliases.push(format(aliasTemplate, moduleName, ext, dirModuleName));
         } else {
           fileDecls.push(format(moduleStubTemplate, moduleName));
           aliases.push(format(aliasTemplate, moduleName, ext, moduleName));
