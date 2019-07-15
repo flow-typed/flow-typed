@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Generate stub declarations for subdirectory modules such as `core-js/stable` and `core-js/es/symbol` in core-js (#3426)
+
 ## [2.5.2] - 2019-05-15
 
 ### Added
