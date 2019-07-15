@@ -8,7 +8,7 @@
  * breaking: ctx.throw([status], [msg], [properties]) (caused by http-errors (#957) )
 **/
 declare module 'koa' {
-  declare type JSON = | string | number | boolean | null | JSONObject | JSONArray;
+  declare type JSON = | string | number | boolean | null | typeof undefined | JSONObject | JSONArray;
   declare type JSONObject = { [key: string]: JSON };
   declare type JSONArray = Array<JSON>;
 
@@ -209,7 +209,7 @@ declare module 'koa' {
     res: http$ServerResponse,
     respond?: boolean, // should not be used, allow bypassing koa application.js#L193
     response: Response,
-    state: {},
+    state: {[string]: any},
 
     // context.js#L55
     assert: (test: mixed, status: number, message?: string, opts?: mixed) => void,
