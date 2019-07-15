@@ -146,6 +146,11 @@ declare module "lodash" {
     separator?: RegExp | string
   };
 
+  declare type Cancelable = {
+    cancel: () => void,
+    flush: () => mixed
+  };
+
   declare type DebounceOptions = {
     leading?: boolean,
     maxWait?: number,
@@ -782,7 +787,11 @@ declare module "lodash" {
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce<F: (...any[]) => any>(func: F, wait?: number, options?: DebounceOptions): F;
+    debounce<F: (...any[]) => any>(
+      func: F,
+      wait?: number,
+      options?: DebounceOptions
+    ): F & Cancelable;
     defer(func: (...any[]) => any, ...args?: Array<any>): TimeoutID;
     delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
     flip<R>(func: (...any[]) => R): (...any[]) => R;
@@ -802,7 +811,7 @@ declare module "lodash" {
       func: F,
       wait?: number,
       options?: ThrottleOptions
-    ): F;
+    ): F & Cancelable;
     unary<F: (...any[]) => any>(func: F): F;
     wrap(value?: any, wrapper?: ?Function): Function;
 
