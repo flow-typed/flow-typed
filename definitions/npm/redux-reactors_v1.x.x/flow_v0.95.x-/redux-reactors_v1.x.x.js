@@ -1,8 +1,12 @@
 /* Helper types from 'redux'
  *
+ * NOTE THAT THE BELOW TYPES ARE COPIED DIRECTLY FROM THE LIBDEF
+ * FOR 'redux'.  CHANGES SHOULD BE MIRRORED BACK HERE TO ENSURE
+ * CONSISTENCY ACROSS VERSIONS.
+ *
  * Equivalent to:
- *    import type {StoreCreator, Action} from 'redux';
- */    
+ *    import type { StoreCreator, Action } from 'redux';
+ */
 type Action<T> = {
   type: T
 };
@@ -33,6 +37,7 @@ type StoreCreator<S, A, D = Dispatch<A>> = {
     enhancer?: StoreEnhancer<S, A, D>
   ): Store<S, A, D>,
 };
+/* END OF COPIED 'redux' TYPES */
 
 declare module 'redux-reactors' {
   declare export type ReactorAction<S, T> = {|
