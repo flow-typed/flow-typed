@@ -480,9 +480,12 @@ memoized = memoize(() => {});
 /**
  * _.debounce
  */
-var debounced: (a: number) => string = debounce((a: number) => "foo");
-// $ExpectError debounce retains type information
-debounced = debounce(() => {});
+var debounced = debounce((a: number) => "foo");
+debounced(1);
+debounced.cancel();
+debounced.flush();
+// $ExpectError string is incompatible with number
+debounced("a");
 
 /**
  * _.toPairs / _.toPairsIn
