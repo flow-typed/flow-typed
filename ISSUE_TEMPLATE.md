@@ -10,5 +10,4 @@
 **If this is a feature request, what is motivation or use case for changing the behavior?**
 
 **Local Environment Information**
-Is this issue specific to the CLI you may provide the results of `npx envinfo`
-<!-- GitHub gist is the intended medium  -->
+If this issue is specific to the CLI, provide the results of running `npx envinfo` from the command line in a GitHub gist.
