@@ -8,7 +8,7 @@
  * breaking: ctx.throw([status], [msg], [properties]) (caused by http-errors (#957) )
 **/
 declare module 'koa' {
-  declare type JSON = | string | number | boolean | null | typeof undefined | JSONObject | JSONArray;
+  declare type JSON = | string | number | boolean | null | void | JSONObject | JSONArray;
   declare type JSONObject = { [key: string]: JSON };
   declare type JSONArray = Array<JSON>;
 
