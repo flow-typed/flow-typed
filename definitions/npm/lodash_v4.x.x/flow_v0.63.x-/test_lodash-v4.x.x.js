@@ -14,6 +14,8 @@ import extend from "lodash/extend";
 import find from "lodash/find";
 import first from "lodash/first";
 import flatMap from "lodash/flatMap";
+import flow from "lodash/flow";
+import flowRight from "lodash/flowRight";
 import forEach from "lodash/forEach";
 import get from "lodash/get";
 import groupBy from "lodash/groupBy";
@@ -536,3 +538,14 @@ pick({ a: 2 }, 1);
 (orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, ['a']): Array<{ a: number, b: number }>);
 (orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, [x => x.a]): Array<{ a: number, b: number }>);
 
+/**
+ * _.flow
+ */
+const f1: number => string = a => `${a}`;
+const f2: string => string[] = b => [b];
+(flow(f1, f2)(1): string[]);
+
+/**
+ * _.flowRight
+ */
+(flowRight(f2, f1)(1): string[]);
