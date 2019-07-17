@@ -21,7 +21,7 @@ describe('#phoenix', () => {
     channel.join();
   });
 
-  it('infers correct return type', () => {
+  it('sets up presence correctly', () => {
     const socket = new Socket('/socket', { params: { userToken: '456' } });
     socket.connect();
     const channel = socket.channel('room:123', { token: 'xyz' });
