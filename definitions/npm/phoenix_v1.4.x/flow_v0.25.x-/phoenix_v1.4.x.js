@@ -1,6 +1,3 @@
-// flow-typed signature: c03f8288d97b86dd25783ed76a0f1e28
-// flow-typed version: <<STUB>>/phoenix_v1.4.9/flow_v0.102.0
-
 declare module 'phoenix' {
   declare export class Push {
     constructor(channel: Channel, event: string, payload: { [key: string]: any }, timeout: number): this;
