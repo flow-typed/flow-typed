@@ -156,6 +156,7 @@ app.use(
     // test req
     req.accepts("accepted/type");
     req.accepts(["json", "text"]);
+    req.is("json");
     if (typeof req.query.foo === "string") console.log((req.query.foo: string));
     else console.log((req.query.foo: Array<string>));
     // test response
