@@ -351,9 +351,12 @@ describe('wrapping components', () => {
     const hello3 = <StyledHello name={3} />
   })
 
-  it('allows default props to be defined', () => {
-    StyledHello.defaultProps = {
-      name: "me"
-    }
-  })
+  // defaultProps doesn't work with React.AbstractComponent "by design"
+  // see https://github.com/flow-typed/flow-typed/pull/3228#issuecomment-509016680
+  // and the linked issue for a slightly longer explanation
+  // it('allows default props to be defined', () => {
+  //   StyledHello.defaultProps = {
+  //     name: "me"
+  //   }
+  // })
 })
