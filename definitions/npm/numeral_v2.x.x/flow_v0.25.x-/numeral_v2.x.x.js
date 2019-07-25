@@ -69,3 +69,144 @@ declare var numeral: Numeral;
 declare module 'numeral' {
     declare module.exports: typeof numeral
 }
+
+
+declare module 'numeral/locales' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/bg' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/chs' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/cs' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/da-dk' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/de-ch' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/de' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/en-au' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/en-gb' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/en-za' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/es-es' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/es' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/et' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/fi' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/fr-ca' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/fr-ch' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/fr' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/hu' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/it' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/ja' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/lv' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/nl-be' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/nl-nl' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/no' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/pl' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/pt-br' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/pt-pt' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/ru-ua' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/ru' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/sk' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/sl' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/th' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/tr' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/uk-ua' {
+  declare module.exports: void
+}
+
+declare module 'numeral/locales/vi' {
+  declare module.exports: void
+}
