@@ -462,21 +462,14 @@ noop("a", 2, [], null);
 // $ExpectError functions are contravariant in return types
 (noop: string => string);
 
-/**
- * pipe
- */
-const ab: number => string = a => `${a}`;
-const bc: string => { b: string } = b => ({ b });
-const cd: { b: string } => string[] = c => [c.b];
+const ab = (a: number) => `${a}`;
+const bc = (b: string) => ({ b });
+const cd = (c: { b: string }) => [c.b];
 const pipedResult: string[] = pipe(
   ab,
   bc,
   cd
 )(1);
-
-/**
- * compose
- */
 const composedResult: string[] = compose(
   cd,
   bc,
