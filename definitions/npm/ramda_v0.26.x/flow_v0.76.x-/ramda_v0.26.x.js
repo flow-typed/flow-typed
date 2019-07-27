@@ -506,6 +506,8 @@ declare module ramda {
   declare var compose: Compose;
   declare var pipeK: PipeK;
   declare var pipeP: PipeP;
+  declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>): CurriedFunction1<Promise<A>, Promise<R>>
+  declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>, p: Promise<A>): Promise<R>;
   declare var curry: Curry;
   declare function curryN(
     length: number,
@@ -545,12 +547,10 @@ declare module ramda {
 
   // *String
   declare var match: CurriedFunction2<RegExp, string, Array<string | void>>;
-  declare var replace: CurriedFunction3<
-    RegExp | string,
-    string | ((substring: string, ...args: Array<string>) => string),
-    string,
-    string
-  >;
+  declare type ReplacementFn = (substring: string, ...args: Array<string>) => string;
+  declare function replace<A: RegExp | string, B: string | ReplacementFn>(A): CurriedFunction2<B, string, string>;
+  declare function replace<A: RegExp | string, B: string | ReplacementFn>(A, B): CurriedFunction1<string, string>;
+  declare function replace<A: RegExp | string, B: string | ReplacementFn>(A, B, string): string;
   declare var split: CurriedFunction2<RegExp | string, string, Array<string>>;
   declare var test: CurriedFunction2<RegExp, string, boolean>;
   // startsWith and endsWith use the same signature:
@@ -622,11 +622,11 @@ declare module ramda {
   declare function chain<A, B>(f: (x: A) => B[], xs: A[]): B[]
   declare function chain<A, B>(f: (x: A) => B[]): (xs: A[]) => B[]
 
-  declare function concat<V, T: Array<V>>(x: T, y: T): T;
-  declare function concat<V, T: Array<V>>(x: T): (y: T) => T;
+  declare function concat<A, B>(x: $ReadOnlyArray<A>, y: $ReadOnlyArray<B>): Array<A | B>;
+  declare function concat<A, B>(x: $ReadOnlyArray<A>): CurriedFunction1<$ReadOnlyArray<B>, Array<A | B>>;
 
   declare function concat(x: string, y: string): string;
-  declare function concat(x: string): (y: string) => string;
+  declare function concat(x: string): CurriedFunction1<string, string>;
 
   declare type Includes =
   (<A, T: Array<A> | string>(a: A) => (b: T) => boolean) &
@@ -1448,7 +1448,33 @@ declare module ramda {
    * allows us to make rested $ElementType uses in order to walk down the object
    * hierarchy. This remains something TODO.
    */
-  declare function lensPath(a: Array<string | number>): Lens<mixed, mixed, mixed, mixed>;
+  declare function lensPath<O, F, K: $Keys<F>>(p: [K]): LensObj<F, $ElementType<F, K>, O>;
+  declare function lensPath<
+    O, F,
+    K0: $Keys<F>, E0: $ElementType<F, K0>,
+    K1: $Keys<E0>
+  >(p: [K0, K1]): LensObj<F, $ElementType<E0, K1>, O>;
+  declare function lensPath<
+    O, F,
+    K0: $Keys<F>, E0: $ElementType<F, K0>,
+    K1: $Keys<E0>, E1: $ElementType<E0, K1>,
+    K2: $Keys<E1>
+  >(p: [K0, K1, K2]): LensObj<F, $ElementType<E1, K2>, O>;
+  declare function lensPath<
+    O, F,
+    K0: $Keys<F>, E0: $ElementType<F, K0>,
+    K1: $Keys<E0>, E1: $ElementType<E0, K1>,
+    K2: $Keys<E1>, E2: $ElementType<E1, K2>,
+    K3: $Keys<E2>
+  >(p: [K0, K1, K2, K3]): LensObj<F, $ElementType<E2, K3>, O>;
+  declare function lensPath<
+    O, F,
+    K0: $Keys<F>, E0: $ElementType<F, K0>,
+    K1: $Keys<E0>, E1: $ElementType<E0, K1>,
+    K2: $Keys<E1>, E2: $ElementType<E1, K2>,
+    K3: $Keys<E2>, E3: $ElementType<E2, K3>,
+    K4: $Keys<E3>
+  >(p: [K0, K1, K2, K3, K4]): LensObj<F, $ElementType<E3, K4>, O>;
 
   // declare function lensProp(str: string): Lens;
   declare function lensProp<O, F, K: $Keys<F>>(K): LensObj<F, $ElementType<F, K>, O>;
@@ -1541,15 +1567,11 @@ declare module ramda {
     | $ReadOnlyArray<A>
 
   declare var over:
-    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>) => (
-      & ((A => B, Oa) => Ob)
-      & ((A => B) => Oa => Ob)
-    ))
+    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>) => CurriedFunction2<A => B, Oa, Ob>)
+    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>, A => B) => CurriedFunction1<Oa, Ob>)
     & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>, A => B, Oa) => Ob)
-    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>) => (
-      & ((A => B, Fa) => Fb)
-      & ((A => B) => Fa => Fb)
-    ))
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>) => CurriedFunction2<A => B, Fa, Fb>)
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>, A => B) => CurriedFunction1<Fa, Fb>)
     & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>, A => B, Fa) => Fb)
 
   declare function path<T: string | number, V>(

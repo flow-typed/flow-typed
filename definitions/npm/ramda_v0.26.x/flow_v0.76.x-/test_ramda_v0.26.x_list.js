@@ -7,6 +7,7 @@ import _, {
   pipe,
   curry,
   filter,
+  concat,
   find,
   length,
   reduce,
@@ -44,8 +45,31 @@ const str: string = "hello world";
   const newXs: Array<string> = _.append("one", ss);
   const newXs1: Array<number> = _.prepend(1)(ns);
 
-  const concatxs1: Array<number> = _.concat([4, 5, 6], [1, 2, 3]);
-  const concatxs2: string = _.concat("ABC", "DEF");
+  describe('concat', () => {
+    it('should support array', () => {
+      const r1: Array<number> = concat([4, 5, 6], [1, 2, 3]);
+      const r2: Array<number> = concat([4, 5, 6])([1, 2, 3]);
+    });
+    it('should supports strings', () => {
+      const r1: string = concat("ABC", "DEF");
+      const r2: string = concat("ABC")("DEF");
+    });
+    it('should support readonly arrays', () => {
+      const arr1: $ReadOnlyArray<number> = [4, 5, 6];
+      const arr2: $ReadOnlyArray<string> = ['1', '2', '3'];
+      const r1: Array<number|string> = concat(arr1, arr2);
+      const r2: Array<number|string> = concat(arr1)(arr2);
+
+      // $ExpectError
+      const r3: Array<number> = concat(arr1)(arr2);
+      // $ExpectError
+      const r4: Array<string> = concat(arr1)(arr2);
+    });
+    it('should error when concat array with string', () => {
+      // $ExpectError
+      concat("ABC", ["DEF"]);
+    });
+  });
 
   const cont1: boolean = _.contains("s", ss);
   const cont2: boolean = _.contains("s")(ss);
@@ -403,8 +427,8 @@ const str: string = "hello world";
 
   // reduce
   const redxs: number = reduce(_.add, 10, ns);
-  const redxs1: string = reduce(_.concat, "", ss);
-  const redxs2: Array<string> = reduce(_.concat, [])(_.map(x => [x], ss));
+  const redxs1: string = reduce(concat, "", ss);
+  const redxs2: Array<string> = reduce<string[], string[]>(concat, [])(_.map(x => [x], ss));
   // Example used in docs: http://ramdajs.com/docs/#reduce
   const redxs4: number = reduce(subtract, 0, [1, 2, 3, 4]);
   // Using accumulator type that differs from the element type (A and B).
@@ -434,7 +458,7 @@ const str: string = "hello world";
   // $ReadOnlyArray with curried permutations:
   const redxsReadOnly3: number = reduce(subtract, 0, readOnlyArray);
   const redxsReadOnly2_1: number = reduce(subtract, 0)(readOnlyArray);
-  const redxsReadOnly1_2: number = reduce(subtract)(0, readOnlyArray);
+  const redxsReadOnly1_2: number = reduce<number, number>(subtract)(0, readOnlyArray);
   const redxsReadOnly1_1_1: number = reduce(subtract)(0)(readOnlyArray);
 
   // $ExpectError reduce will not work with an object.
@@ -442,8 +466,8 @@ const str: string = "hello world";
 
   // reduceRight
   const redrxs1: number = _.reduceRight(_.add, 10, ns);
-  const redrxs2: string = _.reduceRight(_.concat, "", ss);
-  const redrxs3: Array<string> = _.reduceRight(_.concat, [])(
+  const redrxs2: string = _.reduceRight(concat, "", ss);
+  const redrxs3: Array<string> = _.reduceRight(concat, [])(
     _.map(x => [x], ss)
   );
   const redrxs3a: string = _.reduceRight(
@@ -470,10 +494,10 @@ const str: string = "hello world";
   const scanxs7: Array<number> = _.scan(_.add, 10)(ns);
   const scanxs8: Array<number> = _.scan(_.add)(10, ns);
   const scanxs9: Array<number> = _.scan(_.add, 10, ns);
-  const scanxs10: Array<string> = _.scan(_.concat)("")(ss);
-  const scanxs11: Array<string> = _.scan(_.concat, "")(ss);
-  const scanxs12: Array<string> = _.scan(_.concat)("", ss);
-  const scanxs13: Array<string> = _.scan(_.concat, "", ss);
+  const scanxs10: Array<string> = _.scan(concat)("")(ss);
+  const scanxs11: Array<string> = _.scan(concat, "")(ss);
+  const scanxs12: Array<string> = _.scan(concat)("", ss);
+  const scanxs13: Array<string> = _.scan(concat, "", ss);
 
   const reduceToNamesBy = _.reduceBy(
     (acc, student) => acc.concat(student.name),

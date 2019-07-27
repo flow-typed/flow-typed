@@ -8,6 +8,7 @@ import _, {
   find,
   lens,
   lensProp,
+  lensPath,
   lensIndex,
   pipe,
   over,
@@ -87,6 +88,19 @@ describe("Object", () => {
       const result: typeof data = over(lensProp('c'), () => true, data)
     })
 
+    it('works with lensPath', () => {
+      const data = {
+        a: 'foo',
+        b: {
+          d: 4,
+          e: ['h'],
+        },
+        c: true,
+      }
+
+      const result: typeof data = over(lensPath(['b', 'd']), () => 56, data)
+    })
+
     it('produces an output type that results from the mapping function and input (object)', () => {
       type TransformedData = {
         a: number,
@@ -100,8 +114,20 @@ describe("Object", () => {
 
     it('requires the lens works with the functor provided (object)', () => {
       type Data = { a: string }
+      type NestedData = { a: { b: { c: { d: { e: string } } } } };
       const data: Data = {
         a: 'foo',
+      }
+      const nestedData: NestedData = {
+        a: {
+          b: {
+            c: {
+              d: {
+                e: 'bar',
+              }
+            }
+          }
+        }
       }
 
       // $ExpectError
@@ -117,12 +143,24 @@ describe("Object", () => {
       const result = over(lensProp('a'), (s: number) => s + 1, data)
     })
 
-
     it('requires the mapping function provides the correct type (non-object)', () => {
       const xs: Array<number> = [1, 2, 3]
       // $ExpectError
       const result: Array<number> = over(lensIndex(0), (x: string) => x.toUpperCase(), xs)
     })
+
+    it('should be curried', () => {
+      const data = {
+        a: 'foo',
+        b: 4,
+        c: true,
+      }
+
+      const result: typeof data = over(lensProp('c'), () => true, data)
+      const result1: typeof data = over(lensProp('c'))(() => true, data)
+      const result2: typeof data = over(lensProp('c'))(() => true)(data)
+      const result3: typeof data = over(lensProp('c'))(() => true, data)
+    });
   })
 
   /**
