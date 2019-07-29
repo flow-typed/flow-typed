@@ -935,24 +935,29 @@ type JestSpyType = {
   calls: JestCallsType,
 };
 
+type JestDoneFn = {
+  (): void,
+  fail: (error: Error) => void,
+};
+
 /** Runs this function after every test inside this context */
 declare function afterEach(
-  fn: (done: () => void) => ?Promise<mixed>,
+  fn: (done: JestDoneFn) => ?Promise<mixed>,
   timeout?: number
 ): void;
 /** Runs this function before every test inside this context */
 declare function beforeEach(
-  fn: (done: () => void) => ?Promise<mixed>,
+  fn: (done: JestDoneFn) => ?Promise<mixed>,
   timeout?: number
 ): void;
 /** Runs this function after all tests have finished inside this context */
 declare function afterAll(
-  fn: (done: () => void) => ?Promise<mixed>,
+  fn: (done: JestDoneFn) => ?Promise<mixed>,
   timeout?: number
 ): void;
 /** Runs this function before any tests have started inside this context */
 declare function beforeAll(
-  fn: (done: () => void) => ?Promise<mixed>,
+  fn: (done: JestDoneFn) => ?Promise<mixed>,
   timeout?: number
 ): void;
 
@@ -998,7 +1003,7 @@ declare var it: {
    */
   (
     name: JestTestName,
-    fn?: (done: () => void) => ?Promise<mixed>,
+    fn?: (done: JestDoneFn) => ?Promise<mixed>,
     timeout?: number
   ): void,
 
@@ -1011,7 +1016,7 @@ declare var it: {
    */
   only(
     name: JestTestName,
-    fn?: (done: () => void) => ?Promise<mixed>,
+    fn?: (done: JestDoneFn) => ?Promise<mixed>,
     timeout?: number
   ): {
     each(
@@ -1032,7 +1037,7 @@ declare var it: {
    */
   skip(
     name: JestTestName,
-    fn?: (done: () => void) => ?Promise<mixed>,
+    fn?: (done: JestDoneFn) => ?Promise<mixed>,
     timeout?: number
   ): void,
 
@@ -1052,7 +1057,7 @@ declare var it: {
    */
   concurrent(
     name: JestTestName,
-    fn?: (done: () => void) => ?Promise<mixed>,
+    fn?: (done: JestDoneFn) => ?Promise<mixed>,
     timeout?: number
   ): void,
 
@@ -1072,7 +1077,7 @@ declare var it: {
 
 declare function fit(
   name: JestTestName,
-  fn: (done: () => void) => ?Promise<mixed>,
+  fn: (done: JestDoneFn) => ?Promise<mixed>,
   timeout?: number
 ): void;
 /** An individual test unit */

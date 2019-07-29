@@ -192,6 +192,9 @@ test.only('name', done => {
 test.skip('name', done => {
   done();
 });
+test('name', done => {
+  done.fail();
+});
 
 test.todo('');
 // $ExpectError
