@@ -101,6 +101,23 @@ describe("Object", () => {
       const result: typeof data = over(lensPath(['b', 'd']), () => 56, data)
     })
 
+    it('works with lensPath down to level 5', () => {
+      type NestedData = { a: { b: { c: { d: { e: string } } } } };
+      const nestedData: NestedData = {
+        a: {
+          b: {
+            c: {
+              d: {
+                e: 'bar',
+              }
+            }
+          }
+        }
+      }
+
+      const result: NestedData = over(lensPath(['a', 'b', 'c', 'd', 'e']), () => 56, nestedData)
+    })
+
     it('produces an output type that results from the mapping function and input (object)', () => {
       type TransformedData = {
         a: number,
@@ -114,20 +131,8 @@ describe("Object", () => {
 
     it('requires the lens works with the functor provided (object)', () => {
       type Data = { a: string }
-      type NestedData = { a: { b: { c: { d: { e: string } } } } };
       const data: Data = {
         a: 'foo',
-      }
-      const nestedData: NestedData = {
-        a: {
-          b: {
-            c: {
-              d: {
-                e: 'bar',
-              }
-            }
-          }
-        }
       }
 
       // $ExpectError
