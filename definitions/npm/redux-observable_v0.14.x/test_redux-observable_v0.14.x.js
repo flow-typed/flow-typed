@@ -4,7 +4,7 @@ import { ActionsObservable, combineEpics, createEpicMiddleware } from 'redux-obs
 
 // Redux misc
 type State = Array<number>;
-type Action = { type: 'A' | 'B' };
+type Action = { type: 'A' | 'B', ... };
 
 /*
  * Epic type

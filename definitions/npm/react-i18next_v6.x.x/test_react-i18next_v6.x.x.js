@@ -37,8 +37,8 @@ loadNamespaces("");
 // $ExpectError - wrong component type
 loadNamespaces({ components: [{}], i18n });
 
-type OwnProps = { s: string };
-type Props = OwnProps & { t: TFunction };
+type OwnProps = { s: string, ... };
+type Props = OwnProps & { t: TFunction, ... };
 
 const Comp = ({ s, t }: Props) => <div prop1={t("")} prop2={" " + s} />;
 
@@ -94,7 +94,7 @@ const WrappedClassComp = translator(ClassComp);
     </span>}
 </I18n>;
 <I18n ns="translations">
-  {(t: TFunction, { i18n }: { i18n: Object }) =>
+  {(t: TFunction, { i18n }: { i18n: Object, ... }) =>
     <div>
       <span>
         {t("title")}

@@ -6,7 +6,8 @@ import createCachedSelector from "re-reselect";
 // TEST: Should pass for 2 selectors given as arguments
 type State = {
   x: number,
-  y: number
+  y: number,
+  ...
 };
 
 const test1Selector = createCachedSelector(
@@ -37,7 +38,8 @@ test2Selector({ x: 100 });
 
 // TEST: Should pass when selectors have additional Props argument
 type TestProps = {
-  x: number
+  x: number,
+  ...
 };
 
 const test3Selector = createCachedSelector(

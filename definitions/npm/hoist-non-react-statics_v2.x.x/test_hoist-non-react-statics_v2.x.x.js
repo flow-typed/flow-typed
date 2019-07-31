@@ -12,7 +12,8 @@ hoistNonReactStatics(1, 2, 3);
 
 let C1 = (props: {
   a: number,
-  b: string
+  b: string,
+  ...
 }) =>
   <div>
     {props.a} {props.b}
@@ -21,7 +22,8 @@ let C1 = (props: {
 const C2 = (props: {
   a: number,
   b: string,
-  c: boolean
+  c: boolean,
+  ...
 }) =>
   <div>
     {props.a} {props.b} {props.c}
@@ -32,11 +34,11 @@ C2.bar = 2;
 C1 = hoistNonReactStatics(C1, C2, { foo: true });
 C1.bar;
 
-class A extends React.Component<{a: number}> {
+class A extends React.Component<{a: number, ...}> {
   static foo() { return 123; }
 }
 
-class B extends React.Component<{b: string}> {
+class B extends React.Component<{b: string, ...}> {
   render() { return <A a={1} />; }
 }
 

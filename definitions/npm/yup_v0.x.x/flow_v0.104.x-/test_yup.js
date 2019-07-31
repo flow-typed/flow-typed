@@ -930,7 +930,7 @@ describe('object', () => {
     });
 
     it('should return passed type when alias false', () => {
-      const schema = object({ a: string() }).from<{ a2: string }>(
+      const schema = object({ a: string() }).from<{ a2: string, ... }>(
         'a',
         'a2',
         false

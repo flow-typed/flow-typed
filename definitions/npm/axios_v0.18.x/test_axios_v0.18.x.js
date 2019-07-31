@@ -46,7 +46,8 @@ source.cancel(42);
 client.post(232);
 
 type Data = {
-    items: Array<string>
+    items: Array<string>,
+    ...
 };
 
 axios.get('/user', {
@@ -89,14 +90,14 @@ axios.all([
     (a: string);
 })
 
-const promise1: AxiosPromise<{ foo: string }, { bar: string }> = axios({ url: '/', method: 'post', data: { foo: 'bar' }})
+const promise1: AxiosPromise<{ foo: string, ... }, { bar: string, ... }> = axios({ url: '/', method: 'post', data: { foo: 'bar' }})
 promise1.then(({ data }) => {
   (data.bar: string);
   // $ExpectError
   data.foo;
 });
 
-const promise2: AxiosPromise<{ foo: number }> = axios({ url: '/', method: 'post', data: { foo: 1 }})
+const promise2: AxiosPromise<{ foo: number, ... }> = axios({ url: '/', method: 'post', data: { foo: 1 }})
 promise2.then(({ data }) => {
   data.foo + 1;
 });

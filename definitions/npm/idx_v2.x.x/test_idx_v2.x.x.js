@@ -4,7 +4,9 @@ type User = {
   user: ?{
     name: string,
     friends: ?Array<User>,
-  }
+    ...
+  },
+  ...
 };
 
 const props: User = (null: any);

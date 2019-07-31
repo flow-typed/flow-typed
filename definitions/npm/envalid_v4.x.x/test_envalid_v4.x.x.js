@@ -20,12 +20,12 @@ const emailValidatorSpec: ValidatorSpec<string> = email()
 const hostValidatorSpec: ValidatorSpec<string> = host()
 const portValidatorSpec: ValidatorSpec<number> = port()
 
-const env1: { NODE_ENV: string } = cleanEnv({ NODE_ENV: 'TEST' }, {
+const env1: { NODE_ENV: string, ... } = cleanEnv({ NODE_ENV: 'TEST' }, {
   NODE_ENV: str()
 })
 
 // $ExpectError
-const env2: { NODE_ENV: number } = cleanEnv({ NODE_ENV: 'TEST' }, {
+const env2: { NODE_ENV: number, ... } = cleanEnv({ NODE_ENV: 'TEST' }, {
   NODE_ENV: str()
 })
 

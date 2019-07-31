@@ -71,7 +71,7 @@ describe('The `useOnClickOutside` hook', () => {
   });
 
   it('should play game with forwardRef', () => {
-    const Fwd = React.forwardRef<{}, HTMLDivElement>((props, ref) => (
+    const Fwd = React.forwardRef<{ ... }, HTMLDivElement>((props, ref) => (
       <div ref={ref} />
     ));
 

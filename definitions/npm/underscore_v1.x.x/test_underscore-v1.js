@@ -126,7 +126,7 @@ _.find([1, 2, 3], {val: 1});
 // $ExpectError This type is incompatible with string
 (_.map({hello: 1, world: 2}, function(v, k) { return k * 2 }): Array<number>);
 
-(_.mapObject({foo: 1, bar: 2}, function (v, k) {return (k.length + v).toString()}): {[key: string]: string});
+(_.mapObject({foo: 1, bar: 2}, function (v, k) {return (k.length + v).toString()}): {[key: string]: string, ...});
 // $ExpectError This type is incompatible with number
 (_.mapObject({foo: 1, bar: 2}, function (v, k) {return (k.length + v).toString()}): number);
 
@@ -153,8 +153,8 @@ _.find([1, 2, 3], {val: 1});
 (_.has({a: 1, b: 2}, 'b'): boolean);
 (_.isArray([1, 2]): boolean);
 (_.isArray(1): boolean);
-(_.pick({a: 1, b: 2}, 'a'): {[key: string]: number});
-(_.omit({a: 1, b: 2}, 'a'): {[key: string]: number});
+(_.pick({a: 1, b: 2}, 'a'): {[key: string]: number, ...});
+(_.omit({a: 1, b: 2}, 'a'): {[key: string]: number, ...});
 
 _.throttle(function(a) {a.length}, 10)('hello');
 _.debounce(function(a) {a.length}, 10)('hello');

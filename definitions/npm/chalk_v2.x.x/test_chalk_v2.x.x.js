@@ -10,11 +10,13 @@ const supportsColor: {
     None: 0,
     Basic: 1,
     Ansi256: 2,
-    TrueColor: 3
+    TrueColor: 3,
+    ...
   }>,
   hasBasic: boolean,
   has256: boolean,
   has16m: boolean,
+  ...
 } = chalk.supportsColor;
 
 const colorfulString: string = chalk.red.bgGreen("a soon to be colorful string");

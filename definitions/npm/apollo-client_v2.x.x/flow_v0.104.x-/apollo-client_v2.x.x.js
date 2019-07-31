@@ -300,7 +300,7 @@ declare module "apollo-client" {
 
   declare type RefetchQueryDescription = Array<string | PureQueryOptions>;
 
-  declare interface MutationBaseOptions<T = { [key: string]: any }> {
+  declare interface MutationBaseOptions<T = { [key: string]: any, ... }> {
     optimisticResponse?: Object | Function;
     updateQueries?: MutationQueryReducersMap<T>;
     optimisticResponse?: Object;
@@ -314,7 +314,7 @@ declare module "apollo-client" {
 
   declare export type MutationOperation<T = Object> = (options: MutationBaseOptions<T>) => Promise<FetchResult<T>>
 
-  declare export interface MutationOptions<T = { [key: string]: any }>
+  declare export interface MutationOptions<T = { [key: string]: any, ... }>
     extends MutationBaseOptions<T> {
     mutation: DocumentNode;
     context?: any;
@@ -410,7 +410,7 @@ declare module "apollo-client" {
     }
   ) => { [key: string]: any, ... };
 
-  declare export type MutationQueryReducersMap<T = { [key: string]: any }> = { [queryName: string]: MutationQueryReducer<T>, ... };
+  declare export type MutationQueryReducersMap<T = { [key: string]: any, ... }> = { [queryName: string]: MutationQueryReducer<T>, ... };
 
   declare export class ApolloError extends Error {
     message: string;
@@ -531,8 +531,8 @@ declare module "apollo-client" {
   }
 
   declare export type FetchResult<
-    C = { [key: string]: any },
-    E = { [key: string]: any }
+    C = { [key: string]: any, ... },
+    E = { [key: string]: any, ... }
   > = ExecutionResult<C> & {
     extension?: E,
     context?: C,

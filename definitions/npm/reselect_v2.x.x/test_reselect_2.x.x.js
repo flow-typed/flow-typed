@@ -9,7 +9,8 @@ import {
 // TEST: Should pass for 2 selectors given as arguments
 type State = {
   x: number,
-  y: number
+  y: number,
+  ...
 };
 
 const test1Selector = createSelector(
@@ -35,7 +36,8 @@ createSelector(
 
 // TEST: Should pass when selectors have additional Props argument
 type TestProps = {
-  x: number
+  x: number,
+  ...
 };
 
 createSelector(
@@ -89,11 +91,13 @@ createStructuredSelector({
 
 type TestState1 = {
   x: number,
-  y: number
+  y: number,
+  ...
 };
 
 type TestState2 = {
-  d: number
+  d: number,
+  ...
 };
 
 createSelector(

@@ -105,7 +105,7 @@ Router.beforePopState(({ url, as, options }) => true);
 
 const r: string = Router.route;
 const p: string = Router.pathname;
-const q: {} = Router.query;
+const q: { ... } = Router.query;
 
 export default class TestDocument extends Document {
   static async getInitialProps(ctx: Context) {

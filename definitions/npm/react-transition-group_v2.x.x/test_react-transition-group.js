@@ -102,7 +102,8 @@ describe('CSS/Transition', () => {
 
         // custom props
         children: React$Node,
-        getClassName(state: string): string
+        getClassName(state: string): string,
+        ...
       };
 
       class WrapperComponent extends React.PureComponent<WithTransitionProps> {

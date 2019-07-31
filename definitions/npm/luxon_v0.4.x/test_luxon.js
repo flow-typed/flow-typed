@@ -7,7 +7,8 @@ class CustomZone extends Zone {
     ts: number,
     opts?: {
       format?: ?string,
-      localeCode?: ?string
+      localeCode?: ?string,
+      ...
     }
   ): string {
     return "date";
@@ -520,14 +521,16 @@ if (date.equals(new Date())) {
 (date.toJSDate(): Date);
 (date.toLocal(): DateTime);
 
-(date.toLocaleParts(): Array<{ type: string, value: number }>);
+(date.toLocaleParts(): Array<{ type: string, value: number, ... }>);
 (date.toLocaleParts({ month: "numeric" }): Array<{
   type: string,
-  value: number
+  value: number,
+  ...
 }>);
 (date.toLocaleParts({ year: "numeric" }): Array<{
   type: string,
-  value: number
+  value: number,
+  ...
 }>);
 // $ExpectError
 (date.toLocaleParts({ foo: "bar" }): Array<{ type: string, value: number }>);

@@ -7,7 +7,8 @@ type Operation = {
   insert?: string | Object,
   retain?: number,
   delete?: number,
-  attributes?: Object
+  attributes?: Object,
+  ...
 };
 
 (new Delta(): Delta);

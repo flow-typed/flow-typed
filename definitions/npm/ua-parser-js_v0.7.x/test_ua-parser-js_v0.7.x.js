@@ -12,10 +12,12 @@ parser.setUA(123);
 (parser.getBrowser(): {
   name: string,
   version: string,
+  ...
 });
 
 (parser.getCPU(): {
   architecture: string,
+  ...
 });
 
 const device = parser.getDevice();
@@ -26,6 +28,7 @@ const device = parser.getDevice();
 (parser.getEngine(): {
   name: string,
   version: string,
+  ...
 });
 
 const parserResult = parser.getResult();
@@ -45,6 +48,7 @@ const parserResult = parser.getResult();
 (parser.getOS(): {
   name: string,
   version: string,
+  ...
 });
 
 (parser.getUA(): string);

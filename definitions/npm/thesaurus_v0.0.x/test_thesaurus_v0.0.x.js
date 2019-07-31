@@ -9,7 +9,7 @@ thesaurus.load("dummyDatFilePath");
 // $ExpectError
 thesaurus.load(2);
 
-const thesaurusData: { [string]: Array<string> } = thesaurus.get();
+const thesaurusData: { [string]: Array<string>, ... } = thesaurus.get();
 // $ExpectError
 thesaurus.get(2);
 

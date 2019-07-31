@@ -8,6 +8,7 @@ type dirTreeType = {
   size: number,
   type: 'directory' | 'file',
   extension?: string,
+  ...
 };
 
 describe('# directory-tree', () => {

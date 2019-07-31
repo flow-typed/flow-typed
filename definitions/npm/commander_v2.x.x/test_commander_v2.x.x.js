@@ -7,6 +7,7 @@ const parseResult: {
   rawArgs: Array<string>,
   foo?: string,
   bar?: boolean,
+  ...
 } = program
   .version('1.0.0')
   .arguments('<cmd> [env]')
@@ -33,6 +34,7 @@ program.command('foo').alias().description('bar');
 const parseOptionsResult: {
   args: Array<string>,
   unknown: Array<string>,
+  ...
 } = program.parseOptions(process.argv);
 
 const description: string = program.description();
@@ -40,7 +42,7 @@ const alias: string = program.alias();
 const usage: string = program.usage();
 const programName: string = program.name();
 
-const opts: { [key: string]: any } = program.opts();
+const opts: { [key: string]: any, ... } = program.opts();
 
 program.outputHelp((defaultHelp: string) => `output: ${defaultHelp}`);
 program.outputHelp();

@@ -17,7 +17,7 @@ const str: string = Either.Left('fail').toString();
 const value: number = b.get();
 const x: number = Either.Left('fail').getOrElse(10);
 const y: string = Either.Left('fail').merge();
-const z: {a: string} = Either.of({a: 'alpha'}).merge();
+const z: {a: string, ...} = Either.of({a: 'alpha'}).merge();
 
 const concatC = a => b => a.concat(b);
 

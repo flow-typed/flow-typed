@@ -36,7 +36,7 @@ describe('Sanity - generic, primitive access', () => {
 
     (get<number>(obj, "aNum"): number);
     (get<string>(obj, "aStr"): string);
-    type ObjType = {[string]: mixed};
+    type ObjType = {[string]: mixed, ...};
     (get<ObjType>(obj, "anObj"): ObjType);
   });
 });

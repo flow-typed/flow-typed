@@ -4,7 +4,7 @@ import cookie from 'cookie';
 describe('cookie library', () => {
   describe('parse method', () => {
     it('parse string', () => {
-      const parsedData: {[string]: string} = cookie.parse('some-string');
+      const parsedData: {[string]: string, ...} = cookie.parse('some-string');
     });
 
     it('parse string with custom decode method', () => {

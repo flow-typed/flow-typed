@@ -16,7 +16,7 @@ import React from 'react';
  */
 
 const FunctionalScreenComponent = (
-  { navigation }: { navigation: NavigationScreenProp<*> },
+  { navigation }: { navigation: NavigationScreenProp<*>, ... },
 ) => {
   return "Test";
 };
@@ -137,7 +137,7 @@ StackNavigator({
 
 class ComponentWithFunctionalNavOptions extends React.Component<*> {
   static navigationOptions = (
-    { navigation }: { navigation: NavigationScreenProp<*> },
+    { navigation }: { navigation: NavigationScreenProp<*>, ... },
   ) => ({
     headerTitle: navigation.state.routeName,
   });

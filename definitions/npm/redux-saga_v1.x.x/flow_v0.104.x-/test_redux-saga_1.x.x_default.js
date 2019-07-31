@@ -106,7 +106,7 @@ describe("sagaMiddlewareFactory", () => {
       sagaMiddlewareFactory({ logger });
       sagaMiddlewareFactory({ onError: error });
       sagaMiddlewareFactory({ onError: error2 });
-      sagaMiddlewareFactory<{ someContext: string }>({
+      sagaMiddlewareFactory<{ someContext: string, ... }>({
         context: { someContext: "data" }
       });
 

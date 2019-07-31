@@ -62,7 +62,7 @@ import Value from "grommet/components/Value";
 import Video from "grommet/components/Video";
 import WorldMap from "grommet/components/WorldMap";
 
-class FailingApp extends Component<{}> {
+class FailingApp extends Component<{ ... }> {
   render() {
     return (
       // $ExpectError This type is incompatible with boolean
@@ -74,7 +74,7 @@ class FailingApp extends Component<{}> {
   }
 }
 
-class ExampleApp extends Component<{}> {
+class ExampleApp extends Component<{ ... }> {
   handleClick() {
     return "foo";
   }

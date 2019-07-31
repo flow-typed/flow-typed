@@ -288,7 +288,7 @@ declare module "react-apollo" {
     string | PureQueryOptions
   >;
 
-  declare interface MutationBaseOptions<T = { [key: string]: any }> {
+  declare interface MutationBaseOptions<T = { [key: string]: any, ... }> {
     optimisticResponse?: Object | Function;
     updateQueries?: MutationQueryReducersMap<T>;
     optimisticResponse?: Object;
@@ -300,7 +300,7 @@ declare module "react-apollo" {
     variables?: any;
   }
 
-  declare export interface MutationOptions<T = { [key: string]: any }>
+  declare export interface MutationOptions<T = { [key: string]: any, ... }>
     extends MutationBaseOptions<T> {
     mutation: DocumentNode;
     context?: any;
@@ -395,7 +395,7 @@ declare module "react-apollo" {
     }
   ) => { [key: string]: any, ... };
 
-  declare export type MutationQueryReducersMap<T = { [key: string]: any }> = { [queryName: string]: MutationQueryReducer<T>, ... };
+  declare export type MutationQueryReducersMap<T = { [key: string]: any, ... }> = { [queryName: string]: MutationQueryReducer<T>, ... };
 
   declare export class ApolloError extends Error {
     message: string;
@@ -515,8 +515,8 @@ declare module "react-apollo" {
   }
 
   declare export type FetchResult<
-    C = { [key: string]: any },
-    E = { [key: string]: any }
+    C = { [key: string]: any, ... },
+    E = { [key: string]: any, ... }
   > = ExecutionResult<C> & {
     extension?: E,
     context?: C,
@@ -790,7 +790,7 @@ declare module "react-apollo" {
   declare export type ChildProps<
     TOwnProps,
     TResult,
-    TVariables: Object = {}
+    TVariables: Object = { ... }
   > = {
     data: GraphqlData<TResult, TVariables>,
     mutate: MutationFunc<TResult, TVariables>,
@@ -873,9 +873,9 @@ declare module "react-apollo" {
   }
 
   declare export interface OperationComponent<
-    TResult: Object = {},
-    TOwnProps: Object = {},
-    TVariables: Object = {},
+    TResult: Object = { ... },
+    TOwnProps: Object = { ... },
+    TVariables: Object = { ... },
     TMergedProps: Object = ChildProps<TOwnProps, TResult, TVariables>
   > {
     (component: ComponentType<TMergedProps>): ComponentType<TOwnProps>;
@@ -1033,7 +1033,7 @@ declare module "react-apollo" {
     ...
   }) => Promise<void | FetchResult<TData>>;
 
-  declare export type MutationResult<TData = { [string]: any }> = {
+  declare export type MutationResult<TData = { [string]: any, ... }> = {
     loading: boolean,
     error?: ApolloError,
     data?: TData,

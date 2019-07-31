@@ -104,7 +104,7 @@ declare module 'zipkin' {
 
     declare class option$Some<T> implements option$OptionMethods<T> {
         constructor(value: T): this;
-        type: 'Some'; 
+        type: 'Some';
         present: true;
 
         map<V>(fn: (value: T) => V): option$Option<V>;
@@ -168,7 +168,7 @@ declare module 'zipkin' {
     declare export interface JsonEncoder {
         encode(span: model$Span): string;
     }
-    
+
     declare export class InetAddress {
         constructor(addr: string): this;
         static getLocalAddress(): this;
@@ -310,7 +310,7 @@ declare module 'zipkin' {
     }
 
     declare type $GenericHeaders = { [string]: string, ... }
-    declare export type RequestZipkinHeaders<T = {}, H = $GenericHeaders> = T & { headers: H & ZipkinHeaders, ... };
+    declare export type RequestZipkinHeaders<T = { ... }, H = $GenericHeaders> = T & { headers: H & ZipkinHeaders, ... };
 
     declare class Instrumentation$HttpServer {
       constructor({
@@ -412,7 +412,7 @@ declare module 'zipkin' {
         Span: Class<model$Span>,
         ...
     }
-    
+
     declare export var jsonEncoder: {
         JSON_V1: JsonEncoder,
         JSON_V2: JsonEncoder,

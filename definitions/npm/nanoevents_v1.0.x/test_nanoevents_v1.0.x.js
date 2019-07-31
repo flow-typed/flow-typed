@@ -35,7 +35,7 @@ describe("default", () => {
   });
 
   it('should throw error on emit wrong type', () => {
-    const emitter = new NanoEvents<{ message: 'message-1' | 'message-2', error: Error }>();
+    const emitter = new NanoEvents<{ message: 'message-1' | 'message-2', error: Error, ... }>();
 
     // $ExpectError: allow only message-1 or message-2 strings
     emitter.emit('message', 1);
@@ -51,7 +51,7 @@ describe("default", () => {
   });
 
   it('should throw error on handle wrong event type or wrong handler type', () => {
-    const emitter = new NanoEvents<{ message: 'message-1' | 'message-2', error: Error }>();
+    const emitter = new NanoEvents<{ message: 'message-1' | 'message-2', error: Error, ... }>();
 
     emitter.on('message', message => {
       // $ExpectError: allow only message-1 or message-2 strings

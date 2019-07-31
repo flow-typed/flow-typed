@@ -13,7 +13,7 @@ initGlobalTracer(tracer);
 
 const gTracer: Tracer = globalTracer();
 
-declare var headers: { [key: string]: string | string[] };
+declare var headers: { [key: string]: string | string[], ... };
 const context = tracer.extract(FORMAT_HTTP_HEADERS, headers);
 // $ExpectError extract's result is nullable
 tracer.inject(context, FORMAT_HTTP_HEADERS, headers);

@@ -292,7 +292,7 @@ describe("Auth0 constructor", () => {
         it("passes when used properly", () => {
           user.getUser({ id: "userId" });
 
-          user.patchUser<{ firstName: string, lastName: string }>({
+          user.patchUser<{ firstName: string, lastName: string, ... }>({
             id: "userId",
             metadata: { firstName: "John", lastName: "Dow" }
           });

@@ -27,9 +27,9 @@ describe("tests", () => {
     (decamelize("foo", { separator: "-" }): string);
     (depascalize("foo", { split: /(?=[A-Z0-9])/ }): string);
 
-    (camelizeKeys({ foo: 1 }): { [string]: mixed });
-    (pascalizeKeys({ foo: 1 }): { [string]: mixed });
-    (decamelizeKeys({ foo: 1 }): { [string]: mixed });
-    (depascalizeKeys({ foo: 1 }): { [string]: mixed });
+    (camelizeKeys({ foo: 1 }): { [string]: mixed, ... });
+    (pascalizeKeys({ foo: 1 }): { [string]: mixed, ... });
+    (decamelizeKeys({ foo: 1 }): { [string]: mixed, ... });
+    (depascalizeKeys({ foo: 1 }): { [string]: mixed, ... });
   });
 });

@@ -8,7 +8,8 @@ import { describe, it } from "flow-typed-test";
 const i18n = { loadNamespaces: () => {} };
 
 type Values = {
-  text: string
+  text: string,
+  ...
 };
 
 describe("formik", () => {
@@ -128,6 +129,7 @@ describe("formik", () => {
   it("respects the user specifying more specific initialValues", () => {
       type FormValues = {
         requestState: "loading" | "ready",
+        ...
       }
       const initialValues: FormValues = {requestState: "loading"}
       const rendered = <Formik

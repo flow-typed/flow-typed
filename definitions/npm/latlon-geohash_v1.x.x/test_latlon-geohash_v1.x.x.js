@@ -10,7 +10,7 @@ const {
   ne: { lat: neLat, lon: neLon },
   sw: { lat: swLat, lon: swLon }
 } = Geohash.bounds(validGeohash);
-const point: { lat: number, lon: number } = Geohash.decode(validGeohash);
+const point: { lat: number, lon: number, ... } = Geohash.decode(validGeohash);
 const resGeohash: string = Geohash.encode(0, 0, 12);
 const resGeohashOptional: string = Geohash.encode(0, 0);
 const {
@@ -30,11 +30,12 @@ const {
   s: string,
   sw: string,
   w: string,
-  nw: string
+  nw: string,
+  ...
 } = Geohash.neighbours(validGeohash);
 
 let dummyString: string = "dummy";
-let dummyPoint: { lat: number, lon: number } = { lat: 0, lon: 0 };
+let dummyPoint: { lat: number, lon: number, ... } = { lat: 0, lon: 0 };
 
 // $ExpectError
 Geohash.adjacent(validGeohash, "a");

@@ -3,7 +3,8 @@ import React from "react";
 import ImmutablePureComponent from "react-immutable-pure-component";
 
 type MyProps = {
-  id: string
+  id: string,
+  ...
 };
 
 class Foo extends ImmutablePureComponent<MyProps> {
@@ -25,7 +26,8 @@ const a = <Foo id={"1"} />;
 <Foo id={1} />;
 
 type MyState = {
-  visible: boolean
+  visible: boolean,
+  ...
 };
 
 class Bar extends ImmutablePureComponent<MyProps, MyState> {

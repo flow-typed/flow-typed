@@ -54,6 +54,7 @@ const _conn: Connector = new Connector(p1, p2);
 type Country = {
   name: string,
   population: number,
+  ...
 };
 
 const data: Array<Array<Country>> =[

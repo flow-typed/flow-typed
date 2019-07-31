@@ -133,7 +133,7 @@ describe('withFormik HOC', () => {
       });
 
       it('should return partial of values', () => {
-        withFormik<Props, { name: string, age: number }>({
+        withFormik<Props, { name: string, age: number, ... }>({
           ...requiredOptions,
           mapPropsToValues: ({ initialAge }) => ({
             age: initialAge,
@@ -192,13 +192,13 @@ describe('Field and FastField', () => {
   });
 
   it('should validate value', () => {
-    Field<{ disabled: boolean }, '1' | '2'>({
+    Field<{ disabled: boolean, ... }, '1' | '2'>({
       name: 'count',
       disabled: true,
       value: '1',
     });
 
-    Field<{ disabled: boolean }, '1' | '2'>({
+    Field<{ disabled: boolean, ... }, '1' | '2'>({
       name: 'count',
       // $ExpectError: need a boolean
       disabled: 123,
@@ -250,7 +250,7 @@ describe('FormikContext', () => {
   });
 
   it('should return context with passed values', () => {
-    const context = useFormikContext<{ age: number }>();
+    const context = useFormikContext<{ age: number, ... }>();
 
     (context.values.age: number);
     // $ExpectError: check any

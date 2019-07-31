@@ -69,7 +69,7 @@ import Dropzone, { type ChildrenProps, type DropzoneFile } from "react-dropzone"
   {
     ({
       isDragActive,
-    }: { isDragActive: boolean }) => (
+    }: { isDragActive: boolean, ... }) => (
       <div />
     )
   }

@@ -2,7 +2,7 @@
 
 import objectAssign from "object-assign";
 
-const extendsExistingFields: { a: number, b: string } = objectAssign(
+const extendsExistingFields: { a: number, b: string, ... } = objectAssign(
   {},
   { a: 1 },
   { b: "hi" }

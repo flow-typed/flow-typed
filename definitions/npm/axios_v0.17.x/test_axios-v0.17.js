@@ -44,7 +44,8 @@ source.cancel(42);
 client.post(232);
 
 type Data = {
-    items: Array<string>
+    items: Array<string>,
+    ...
 };
 
 axios.get('/user', {
